@@ -1,4 +1,4 @@
-# John Doe - Project Portfolio Page
+# Lok Qi Jun - Project Portfolio Page
 
 ## Overview
 
