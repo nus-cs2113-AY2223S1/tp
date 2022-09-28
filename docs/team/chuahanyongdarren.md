@@ -1,4 +1,4 @@
-# John Doe - Project Portfolio Page
+# Chua Han Yong Darren - Project Portfolio Page
 
 ## Overview
 
