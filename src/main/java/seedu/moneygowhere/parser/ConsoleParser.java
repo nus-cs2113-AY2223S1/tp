@@ -2,6 +2,7 @@ package seedu.moneygowhere.parser;
 
 import seedu.moneygowhere.commands.ConsoleCommand;
 import seedu.moneygowhere.commands.ConsoleCommandBye;
+import seedu.moneygowhere.common.Messages;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandNotFoundException;
 
 /**
@@ -35,7 +36,7 @@ public class ConsoleParser {
         if (command.equalsIgnoreCase(CONSOLE_COMMAND_BYE)) {
             return parseCommandBye();
         } else {
-            throw new ConsoleParserCommandNotFoundException();
+            throw new ConsoleParserCommandNotFoundException(Messages.CONSOLE_ERROR_COMMAND_NOT_FOUND);
         }
     }
 }
