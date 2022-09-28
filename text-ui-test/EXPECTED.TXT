@@ -10,4 +10,7 @@
 Your MoneyGoWhere? Let me help you find it.
 
 
+ERROR: The command entered is invalid.
+
+
 Bye. Hope to see you again soon!
