@@ -1,8 +1,8 @@
-package seedu.duke;
+package seedu.moneygowhere;
 
 import java.util.Scanner;
 
-public class Duke {
+public class MoneyGoWhere {
     /**
      * Main entry-point for the java.duke.Duke application.
      */
