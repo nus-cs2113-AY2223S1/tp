@@ -1,4 +1,4 @@
-# Duke
+# MoneyGoWhere
 
 {Give product intro here}
 
