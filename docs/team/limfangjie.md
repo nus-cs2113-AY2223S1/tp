@@ -1,4 +1,4 @@
-# John Doe - Project Portfolio Page
+# Lim Fang Jie - Project Portfolio Page
 
 ## Overview
 
