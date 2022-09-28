@@ -1,9 +1,7 @@
 # About us
 
-Display | Name | Github Profile | Portfolio 
---------|:----:|:--------------:|:---------:
-![](https://via.placeholder.com/100.png?text=Photo) | John Doe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) | Don Joe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) | Ron John | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) | John Roe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) | Don Roe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
+Display |    Name    |            Github Profile             | Portfolio 
+--------|:----------:|:-------------------------------------:|:---------:
+![](https://via.placeholder.com/100.png?text=Photo) | Lok Qi Jun | [Github](https://github.com/LokQiJun) | [Portfolio](docs/team/lokqijun.md)
+![](https://via.placeholder.com/100.png?text=Photo) | Lim Fang Jie | [Github](https://github.com/xzynos) | [Portfolio](docs/team/limfangjie.md)
+![](https://via.placeholder.com/100.png?text=Photo) | Javier Ong Ding Quan | [Github](https://github.com/jeyvia) | [Portfolio](docs/team/javierongdingquan.md)
