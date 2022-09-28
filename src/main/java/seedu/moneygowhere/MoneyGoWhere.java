@@ -2,9 +2,12 @@ package seedu.moneygowhere;
 
 import seedu.moneygowhere.userinterface.ConsoleInterface;
 
+/**
+ * Entrypoint of the MoneyGoWhere application.
+ */
 public class MoneyGoWhere {
     /**
-     * Main entry-point for the java.duke.Duke application.
+     * Initializes application and starts interaction with user.
      */
     public static void main(String[] args) {
         ConsoleInterface consoleInterface = new ConsoleInterface();
