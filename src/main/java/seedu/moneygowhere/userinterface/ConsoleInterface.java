@@ -1,14 +1,29 @@
 package seedu.moneygowhere.userinterface;
 
+import seedu.moneygowhere.commands.ConsoleCommand;
+import seedu.moneygowhere.commands.ConsoleCommandBye;
 import seedu.moneygowhere.common.Messages;
+import seedu.moneygowhere.exceptions.ConsoleParserCommandNotFoundException;
+import seedu.moneygowhere.parser.ConsoleParser;
+
+import java.util.Scanner;
 
 /**
- * Provides functions to interface with the user via standard input and standard output.
+ * Provide functions to interface with the user via standard input and standard output.
  */
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "FieldMayBeFinal"})
 public class ConsoleInterface {
+    private Scanner scanner;
+
     /**
-     * Prints toe logo to standard out.
+     * Initializes the console interface.
+     */
+    public ConsoleInterface() {
+        scanner = new Scanner(System.in);
+    }
+
+    /**
+     * Prints the logo to standard out.
      */
     public static void printLogo() {
         String logo = "";
@@ -74,9 +89,46 @@ public class ConsoleInterface {
     }
 
     /**
+     * Reads an input from standard input.
+     *
+     * @return Input read from standard input.
+     */
+    public String getConsoleInput() {
+        return scanner.nextLine();
+    }
+
+    /**
      * Runs the command line interface which the user interacts with.
      */
+    @SuppressWarnings("StatementWithEmptyBody")
     public void run() {
         printBlankLine();
+
+        while (true) {
+            String consoleInput = getConsoleInput();
+
+            printBlankLine();
+
+            ConsoleCommand consoleCommand = null;
+            boolean hasParseError = true;
+
+            try {
+                consoleCommand = ConsoleParser.parse(consoleInput);
+                hasParseError = false;
+            } catch (ConsoleParserCommandNotFoundException e) {
+                printErrorMessage(e.getMessage());
+            }
+
+            if (hasParseError) {
+                // Do nothing if there is a parse error
+            } else if (consoleCommand instanceof ConsoleCommandBye) {
+                // Terminate the program
+                return;
+            } else {
+                // Do nothing if the command is not found
+            }
+
+            printBlankLine();
+        }
     }
 }
