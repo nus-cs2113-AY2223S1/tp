@@ -4,6 +4,9 @@ import seedu.moneygowhere.commands.ConsoleCommand;
 import seedu.moneygowhere.commands.ConsoleCommandBye;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandNotFoundException;
 
+/**
+ * Provide functions to parse inputs read from standard input.
+ */
 public class ConsoleParser {
     public static final String CONSOLE_COMMAND_BYE = "bye";
 
@@ -11,7 +14,14 @@ public class ConsoleParser {
         return new ConsoleCommandBye();
     }
 
-    public static ConsoleCommand parseConsoleInput(String consoleInput) throws
+    /**
+     * Parses an input read from standard input.
+     *
+     * @param consoleInput String read from standard input.
+     * @return Parsed command and arguments
+     * @throws ConsoleParserCommandNotFoundException If the command is not found.
+     */
+    public static ConsoleCommand parse(String consoleInput) throws
             ConsoleParserCommandNotFoundException {
         String[] consoleInputArr = consoleInput.split(" ", 2);
 

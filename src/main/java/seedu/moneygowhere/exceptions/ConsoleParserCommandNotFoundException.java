@@ -1,5 +1,8 @@
 package seedu.moneygowhere.exceptions;
 
+/**
+ * Thrown when the command is not found.
+ */
 @SuppressWarnings("unused")
 public class ConsoleParserCommandNotFoundException extends MoneyGoWhereException {
     public ConsoleParserCommandNotFoundException() {
