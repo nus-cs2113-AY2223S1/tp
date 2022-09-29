@@ -1,15 +1,28 @@
 package seedu.moneygowhere.parser;
 
+import org.apache.commons.text.StringTokenizer;
+import org.apache.commons.text.matcher.StringMatcherFactory;
 import seedu.moneygowhere.commands.ConsoleCommand;
 import seedu.moneygowhere.commands.ConsoleCommandBye;
 import seedu.moneygowhere.common.Messages;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandNotFoundException;
+
+import java.util.List;
 
 /**
  * Provide functions to parse inputs read from standard input.
  */
 public class ConsoleParser {
     public static final String CONSOLE_COMMAND_BYE = "bye";
+
+    private static String[] tokenizeCommandArguments(String arguments) {
+        StringTokenizer stringTokenizer = new StringTokenizer(arguments);
+        stringTokenizer.setQuoteMatcher(StringMatcherFactory.INSTANCE.quoteMatcher());
+
+        List<String> tokenList = stringTokenizer.getTokenList();
+
+        return tokenList.toArray(new String[0]);
+    }
 
     private static ConsoleCommandBye parseCommandBye() {
         return new ConsoleCommandBye();
