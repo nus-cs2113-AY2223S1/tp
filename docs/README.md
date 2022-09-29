@@ -1,6 +1,5 @@
-# Duke
-
-{Give product intro here}
+# Timetabler
+This application helps you organise timetable
 
 Useful links:
 * [User Guide](UserGuide.md)
