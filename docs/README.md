@@ -1,6 +1,6 @@
-# Duke
+# ParKING
 
-{Give product intro here}
+hello world
 
 Useful links:
 * [User Guide](UserGuide.md)
