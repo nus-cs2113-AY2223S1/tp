@@ -2,7 +2,7 @@ package seedu.duke.command;
 
 import seedu.duke.Ui;
 
-public class GreetCommand extends Command{
+public class GreetCommand extends Command {
 
     String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"

@@ -30,11 +30,11 @@ public class Duke {
         startDuke();
 
         while (!isProgramFinished) {
-                String input = ui.input();
-                ui.line();
-                Command command = Parser.parse(input);
-                command.execute(ui);
-                ui.line();
+            String input = ui.input();
+            ui.line();
+            Command command = Parser.parse(input);
+            command.execute(ui);
+            ui.line();
         }
     }
 }
