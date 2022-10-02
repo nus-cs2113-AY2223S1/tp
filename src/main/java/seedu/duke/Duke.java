@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import seedu.duke.command.Command;
+import seedu.duke.command.ExitCommand;
 import java.util.Scanner;
 
 public class Duke {
@@ -7,6 +9,8 @@ public class Duke {
      * Main entry-point for the java.duke.Duke application.
      */
     private static Ui ui;
+    public static boolean isProgramFinished = false;
+
     public Duke() {
         ui = new Ui();
     }
@@ -26,5 +30,13 @@ public class Duke {
         Scanner in = new Scanner(System.in);
         System.out.println("Hello " + in.nextLine());
         startDuke();
+
+        while (!isProgramFinished) {
+                String input = ui.input();
+                ui.line();
+                Command command = Parser.parse(input);
+                command.execute(ui);
+                ui.line();
+        }
     }
 }
