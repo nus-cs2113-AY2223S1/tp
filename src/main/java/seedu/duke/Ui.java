@@ -17,7 +17,7 @@ public class Ui {
     }
 
     /**
-     * Prints output to terminal
+     * Prints output to terminal.
      *
      * @param output Varargs output for printing
      */
