@@ -1,21 +1,27 @@
 package seedu.duke;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Duke {
-    /**
-     * Main entry-point for the java.duke.Duke application.
-     */
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("What is your name?");
 
-        Scanner in = new Scanner(System.in);
-        System.out.println("Hello " + in.nextLine());
+public class Duke {
+    static final boolean EXIT = false;
+
+
+    public static void main(String[] args) {
+        ArrayList<Transaction> transactions = new ArrayList<Transaction>();
+        String inData;
+        Scanner scan = new Scanner(System.in);
+        Ui.showGreeting();
+        while (true) {
+            // continuously receive user input
+            inData = scan.nextLine();
+            inData = inData.trim();
+
+            if (Parser.processInput(inData, transactions) == EXIT) {
+                break;
+            }
+        }
+
     }
 }
