@@ -36,13 +36,24 @@ public class Parser {
             switch (command) {
 
             case "delete":
-                // Checks if userInput is in the correct format by further parsing(e.g. such as correct entry numbers), before deleting the entry
+                /*
+                Checks if userInput is in the correct format by further parsing(e.g. such as correct entry numbers)
+                before deleting the entry
+                */
                 break;
+
             case "add":
-                // Checks if userInput is in the correct input format by further parsing, before adding entry to arraylist
+                /*
+                Checks if userInput is in the correct input format by further parsing,
+                before adding entry to arraylist
+                */
+
                 break;
             case "edit":
-                // Checks if userInput is in the correct input format by further parsing, before the entry in the arraylist
+                /*
+                Checks if userInput is in the correct input format by further parsing,
+                before the entry in the arraylist
+                */
                 break;
             default:
                 // for invalid commands
