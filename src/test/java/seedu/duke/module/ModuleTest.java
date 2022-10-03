@@ -2,7 +2,7 @@ package seedu.duke.module;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ModuleTest {
     Module module = new Module("SE & OOP", "CS2113");
