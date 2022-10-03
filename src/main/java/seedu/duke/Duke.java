@@ -1,21 +1,32 @@
 package seedu.duke;
 
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Duke {
-    /**
-     * Main entry-point for the java.duke.Duke application.
-     */
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("What is your name?");
+    private static final String EXIT_FLAG = "quit";
 
+    public static void main(String[] args) {
+
+        System.out.println("Hello from Timetabler!");
+
+        Timetable timetable = new Timetable();
         Scanner in = new Scanner(System.in);
-        System.out.println("Hello " + in.nextLine());
+        String response;
+        String input;
+
+        System.out.println("Here is a list of things I can do, enter the appropriate command to continue!\n" +
+                "1. add\n" + "2. list\n" + "3. quit\n");
+
+        while (true) {
+            input = in.nextLine();
+            response = Parser.parseCommand(timetable, input);
+            if (Objects.equals(response, EXIT_FLAG)) {
+                break;
+            }
+            System.out.println(response);
+        }
+
+        System.out.println("See you again!");
     }
 }
