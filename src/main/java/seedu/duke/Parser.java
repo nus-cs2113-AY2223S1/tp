@@ -1,6 +1,6 @@
 package seedu.duke;
 
-import seedu.duke.Commands.CommandAddModule;
+import seedu.duke.commands.CommandAddModule;
 
 public class Parser {
     private static final String COMMAND_ADD = "add";
