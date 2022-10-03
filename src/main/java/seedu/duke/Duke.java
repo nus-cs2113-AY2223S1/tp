@@ -15,8 +15,8 @@ public class Duke {
         String response;
         String input;
 
-        System.out.println("Here is a list of things I can do, enter the appropriate command to continue!\n" +
-                "1. add\n" + "2. list\n" + "3. quit\n");
+        System.out.println("Here is a list of things I can do, enter the appropriate command to continue!\n"
+                + "1. add\n2. list\n3. quit\n");
 
         while (true) {
             input = in.nextLine();

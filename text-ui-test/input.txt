@@ -1,1 +1,5 @@
-James Gosling
+add
+se and oop
+cs2113
+list
+quit
