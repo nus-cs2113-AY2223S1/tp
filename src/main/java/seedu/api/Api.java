@@ -1,30 +1,74 @@
 package seedu.api;
 
+import seedu.api.exception.EmptyResponseException;
+
+import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
+
+import static seedu.common.CommonFiles.LTA_BASE_URL;
+import static seedu.common.CommonFiles.API_JSON_DIRECTORY;
+import static seedu.common.CommonFiles.LTA_JSON_FILE;
+
 
 public class Api {
-    private final String LTA_BASE_URL = "http://datamall2.mytransport.sg/ltaodataservice/CarParkAvailabilityv2";
-    private final String URA_BASE_URL = "";
-    private final String LTA_API_KEY = "1B+7tBxzRNOtFbTxGcCiYA==";
-    private final String URA_API_KEY = "";
+    private final String API_KEY = "1B+7tBxzRNOtFbTxGcCiYA==";
 
-    public void asyncGetRequest() throws ExecutionException, InterruptedException {
-        HttpClient client = HttpClient.newHttpClient();
+    private String authHeaderName = "AccountKey";
+    private HttpClient client;
+    private HttpRequest request;
+    private CompletableFuture<HttpResponse<String>> responseFuture;
+    private Storage storage;
 
-        HttpRequest request = HttpRequest.newBuilder(
+    public Api() {
+        client = HttpClient.newHttpClient();
+        generateHttpRequestCarpark();
+        storage = new Storage(API_JSON_DIRECTORY, LTA_JSON_FILE);
+    }
+
+    private void generateHttpRequestCarpark() {
+        request = HttpRequest.newBuilder(
                 URI.create(LTA_BASE_URL))
-                .header("AccountKey", LTA_API_KEY)
+                .header(authHeaderName, API_KEY)
                 .build();
+    }
 
-        CompletableFuture<HttpResponse<String>> responseFuture = client.sendAsync(request, HttpResponse.BodyHandlers.ofString());
+    public void asyncExecuteRequest() {
+        responseFuture = client.sendAsync(request, HttpResponse.BodyHandlers.ofString());
+    }
 
-        HttpResponse<String> response = responseFuture.get();
+    public String asyncGetResponse() {
+        String result = "";
+        try {
+            HttpResponse<String> response = responseFuture.get(1000, TimeUnit.MILLISECONDS);
+            if (!response.body().trim().isEmpty()) {
+                result = response.body();
+            }
+        } catch (ExecutionException | InterruptedException e) {
+            System.out.println("Something wrong happened during fetching data.");
+        } catch (TimeoutException e) {
+            System.out.println("Fetch Timeout, try again!");
+        }
+        return result;
+    }
 
-        System.out.println(response.body());
+    public void fetchData() throws EmptyResponseException, IOException {
+        String result = asyncGetResponse();
+        int fetchTries = 5;
+        while (result.isEmpty() && fetchTries > 0) {
+            asyncExecuteRequest();
+            result = asyncGetResponse();
+            fetchTries--;
+        }
+        if (fetchTries == 0 && result.isEmpty()) {
+            throw new EmptyResponseException();
+        }
+        storage.writeDataToFile(result);
     }
 }
