@@ -3,15 +3,18 @@ package seedu.moneygowhere.userinterface;
 import seedu.moneygowhere.commands.ConsoleCommand;
 import seedu.moneygowhere.commands.ConsoleCommandAddExpense;
 import seedu.moneygowhere.commands.ConsoleCommandBye;
+import seedu.moneygowhere.commands.ConsoleCommandViewExpense;
 import seedu.moneygowhere.common.Configurations;
 import seedu.moneygowhere.common.Messages;
 import seedu.moneygowhere.data.expense.Expense;
 import seedu.moneygowhere.data.expense.ExpenseManager;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandAddExpenseInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandNotFoundException;
+import seedu.moneygowhere.exceptions.ConsoleParserCommandViewExpenseInvalidException;
 import seedu.moneygowhere.parser.ConsoleParser;
 
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -128,6 +131,52 @@ public class ConsoleInterface {
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_ADD_EXPENSE_SUCCESS);
     }
 
+    private void viewExpense() {
+        ArrayList<Expense> expenses = expenseManager.getExpenses();
+
+        for (int index = 0; index < expenses.size(); index++) {
+            Expense expense = expenses.get(index);
+
+            DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern(
+                    Configurations.CONSOLE_INTERFACE_DATE_TIME_OUTPUT_FORMAT
+            );
+            String expenseStr = "";
+            expenseStr += "---- EXPENSE INDEX " + index + " ----\n";
+            expenseStr += "Name          : " + expense.getName() + "\n";
+            expenseStr += "Date and Time : " + expense.getDateTime().format(dateTimeFormat) + "\n";
+            expenseStr += "Description   : " + expense.getDescription() + "\n";
+            expenseStr += "Amount        : " + expense.getAmount() + "\n";
+            expenseStr += "Category      : " + expense.getCategory();
+            System.out.println(expenseStr);
+        }
+    }
+
+    private void viewExpenseByExpenseIndex(int expenseIndex) {
+        Expense expense = expenseManager.getExpense(expenseIndex);
+
+        DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern(
+                Configurations.CONSOLE_INTERFACE_DATE_TIME_OUTPUT_FORMAT
+        );
+        String expenseStr = "";
+        expenseStr += "---- EXPENSE INDEX " + expenseIndex + " ----\n";
+        expenseStr += "Name          : " + expense.getName() + "\n";
+        expenseStr += "Date and Time : " + expense.getDateTime().format(dateTimeFormat) + "\n";
+        expenseStr += "Description   : " + expense.getDescription() + "\n";
+        expenseStr += "Amount        : " + expense.getAmount() + "\n";
+        expenseStr += "Category      : " + expense.getCategory();
+        System.out.println(expenseStr);
+    }
+
+    private void runCommandViewExpense(ConsoleCommandViewExpense consoleCommandViewExpense) {
+        int expenseIndex = consoleCommandViewExpense.getExpenseIndex();
+
+        if (expenseIndex >= 0) {
+            viewExpenseByExpenseIndex(expenseIndex);
+        } else {
+            viewExpense();
+        }
+    }
+
     /**
      * Runs the command line interface which the user interacts with.
      */
@@ -146,7 +195,8 @@ public class ConsoleInterface {
                 consoleCommand = ConsoleParser.parse(consoleInput);
                 hasParseError = false;
             } catch (ConsoleParserCommandNotFoundException
-                     | ConsoleParserCommandAddExpenseInvalidException e) {
+                     | ConsoleParserCommandAddExpenseInvalidException
+                     | ConsoleParserCommandViewExpenseInvalidException e) {
                 printErrorMessage(e.getMessage());
             }
 
@@ -157,6 +207,8 @@ public class ConsoleInterface {
                 return;
             } else if (consoleCommand instanceof ConsoleCommandAddExpense) {
                 runCommandAddExpense((ConsoleCommandAddExpense) consoleCommand);
+            } else if (consoleCommand instanceof ConsoleCommandViewExpense) {
+                runCommandViewExpense((ConsoleCommandViewExpense) consoleCommand);
             } else {
                 // Do nothing if the command is not found
             }
