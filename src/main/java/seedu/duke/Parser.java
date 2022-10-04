@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import seedu.duke.data.TransactionList;
 import seedu.duke.data.transaction.Transaction;
 
 import java.util.ArrayList;
@@ -11,11 +12,11 @@ public class Parser {
     /**
      * Parses the user input and processes it with the transactions arraylist.
      *
-     * @param inData The user input.
+     * @param inData       The user input.
      * @param transactions The array which would be operated on.
      * @return IS_EXIT If input equals "bye", else return IS_CONTINUE.
      */
-    public static boolean processInput(String inData, ArrayList<Transaction> transactions) {
+    public static boolean processInput(String inData, TransactionList transactions) {
         if (inData.equals("help")) {
             Ui.showHelpList();
         } else if (inData.equals("list")) {

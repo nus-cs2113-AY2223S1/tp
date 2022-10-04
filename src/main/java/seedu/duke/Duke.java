@@ -1,13 +1,12 @@
 package seedu.duke;
 
-import seedu.duke.data.transaction.Transaction;
+import seedu.duke.data.TransactionList;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
-        ArrayList<Transaction> transactions = new ArrayList<Transaction>();
+        TransactionList transactions = new TransactionList();
         String inData;
         Scanner scan = new Scanner(System.in);
         Ui.showGreeting();
