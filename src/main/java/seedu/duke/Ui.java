@@ -1,38 +1,50 @@
 package seedu.duke;
 
-public class Ui {
+import seedu.duke.common.ErrorMessages;
+import seedu.duke.common.InfoMessages;
 
-    public static void showGreeting() {
-        System.out.println("____________________________________________________________");
-        System.out.println("Hello! I'm your Moolah Manager!");
-        System.out.println("Enter <help> if you need the list of commands");
-        System.out.println("____________________________________________________________");
+public class Ui {
+    /**
+     * Prints each message from a variable messages string line by line into the output stream.
+     *
+     * @param messages A string of variable arguments.
+     */
+    public static void printMessages(String... messages) {
+        //@@author chydarren-reused
+        // Reused from https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/ui/TextUi.java
+        // with minor modifications
+        System.out.println(InfoMessages.MESSAGE_INFO_DIVIDER.toString());
+        // Prints the string of arguments line by line in a loop
+        for (String message : messages) {
+            System.out.println(message);
+        }
+        System.out.println(InfoMessages.MESSAGE_INFO_DIVIDER.toString());
     }
 
-    public static void showHelpList() { // To be updated.
-        System.out.println("____________________________________________________________");
-        System.out.println("Hello! I'm here to help");
-        System.out.println("Here are the possible commands! ");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("____________________________________________________________");
+    public static void showGreeting() {
+        printMessages(
+                InfoMessages.MESSAGE_INFO_GREET.toString(),
+                InfoMessages.MESSAGE_INFO_HELP_PROMPT.toString()
+        );
+    }
+
+    public static void showHelpList() {
+        // To include the other messages for commands
+        printMessages(
+                InfoMessages.MESSAGE_INFO_HELP_GREET.toString()
+        );
     }
 
     public static void showExitMessage() {
-        System.out.println("____________________________________________________________");
-        System.out.println("Good bye! See you soon!!");
-        System.out.println("____________________________________________________________");
+        printMessages(
+                InfoMessages.MESSAGE_INFO_EXIT.toString()
+        );
     }
 
-    public static void showWrongCommand() {
-        System.out.println("____________________________________________________________");
-        System.out.println("You have entered the wrong command. ");
-        System.out.println("Please enter <help> for the list of available commands");
-        System.out.println("____________________________________________________________");
+    public static void showInvalidCommand() {
+        printMessages(
+                ErrorMessages.MESSAGE_ERROR_INVALID_COMMAND.toString(),
+                InfoMessages.MESSAGE_INFO_HELP_PROMPT.toString()
+        );
     }
-
-
 }
