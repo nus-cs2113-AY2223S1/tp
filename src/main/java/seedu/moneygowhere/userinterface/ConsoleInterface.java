@@ -1,11 +1,17 @@
 package seedu.moneygowhere.userinterface;
 
 import seedu.moneygowhere.commands.ConsoleCommand;
+import seedu.moneygowhere.commands.ConsoleCommandAddExpense;
 import seedu.moneygowhere.commands.ConsoleCommandBye;
+import seedu.moneygowhere.common.Configurations;
 import seedu.moneygowhere.common.Messages;
+import seedu.moneygowhere.data.expense.Expense;
+import seedu.moneygowhere.data.expense.ExpenseManager;
+import seedu.moneygowhere.exceptions.ConsoleParserCommandAddExpenseInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandNotFoundException;
 import seedu.moneygowhere.parser.ConsoleParser;
 
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 /**
@@ -14,12 +20,14 @@ import java.util.Scanner;
 @SuppressWarnings({"unused", "FieldMayBeFinal"})
 public class ConsoleInterface {
     private Scanner scanner;
+    private ExpenseManager expenseManager;
 
     /**
      * Initializes the console interface.
      */
     public ConsoleInterface() {
         scanner = new Scanner(System.in);
+        expenseManager = new ExpenseManager();
     }
 
     /**
@@ -97,6 +105,29 @@ public class ConsoleInterface {
         return scanner.nextLine();
     }
 
+    private void runCommandAddExpense(ConsoleCommandAddExpense consoleCommandAddExpense) {
+        Expense expense = new Expense(
+                consoleCommandAddExpense.getName(),
+                consoleCommandAddExpense.getDateTime(),
+                consoleCommandAddExpense.getDescription(),
+                consoleCommandAddExpense.getAmount(),
+                consoleCommandAddExpense.getCategory());
+        expenseManager.addExpense(expense);
+
+        DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern(
+                Configurations.CONSOLE_INTERFACE_DATE_TIME_OUTPUT_FORMAT
+        );
+        String expenseStr = "";
+        expenseStr += "Name          : " + expense.getName() + "\n";
+        expenseStr += "Date and Time : " + expense.getDateTime().format(dateTimeFormat) + "\n";
+        expenseStr += "Description   : " + expense.getDescription() + "\n";
+        expenseStr += "Amount        : " + expense.getAmount() + "\n";
+        expenseStr += "Category      : " + expense.getCategory();
+        printInformationalMessage(expenseStr);
+
+        printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_ADD_EXPENSE_SUCCESS);
+    }
+
     /**
      * Runs the command line interface which the user interacts with.
      */
@@ -106,7 +137,6 @@ public class ConsoleInterface {
 
         while (true) {
             String consoleInput = getConsoleInput();
-
             printBlankLine();
 
             ConsoleCommand consoleCommand = null;
@@ -115,7 +145,8 @@ public class ConsoleInterface {
             try {
                 consoleCommand = ConsoleParser.parse(consoleInput);
                 hasParseError = false;
-            } catch (ConsoleParserCommandNotFoundException e) {
+            } catch (ConsoleParserCommandNotFoundException
+                     | ConsoleParserCommandAddExpenseInvalidException e) {
                 printErrorMessage(e.getMessage());
             }
 
@@ -124,6 +155,8 @@ public class ConsoleInterface {
             } else if (consoleCommand instanceof ConsoleCommandBye) {
                 // Terminate the program
                 return;
+            } else if (consoleCommand instanceof ConsoleCommandAddExpense) {
+                runCommandAddExpense((ConsoleCommandAddExpense) consoleCommand);
             } else {
                 // Do nothing if the command is not found
             }
