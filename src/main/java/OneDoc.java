@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -8,3 +9,4 @@ public class OneDoc {
         Parser.mainMenuParser();
     }
 }
+
