@@ -3,45 +3,41 @@ package seedu.duke;
 import java.util.ArrayList;
 
 public class Parser {
-    static final boolean EXIT = false;
-    static final boolean CONTINUE = true;
-
+    static final boolean IS_EXIT = false;
+    static final boolean IS_CONTINUE = true;
 
     /**
-     * parses the user input and processes it with the transactions arraylist.
+     * Parses the user input and processes it with the transactions arraylist.
      *
-     * @param inData       the user input .
-     * @param transactions the array which would be operated on.
-     * @return EXIT if input equals "bye", else return CONTINUE.
+     * @param inData The user input.
+     * @param transactions The array which would be operated on.
+     * @return IS_EXIT If input equals "bye", else return IS_CONTINUE.
      */
-
     public static boolean processInput(String inData, ArrayList<Transaction> transactions) {
-
         if (inData.equals("help")) {
             Ui.showHelpList();
         } else if (inData.equals("list")) {
-            //prints all transactions if input is equal to "list"
+            // Prints all transactions if input is equal to "list"
 
         } else if (inData.equals("purge")) {
-            // show confirmation prompt before deleting all transactions
+            // Shows confirmation prompt before deleting all transactions
         } else if (inData.equals(("bye"))) {
             Ui.showExitMessage();
-            return EXIT; //exit loop
+            // Exits loop
+            return IS_EXIT;
         } else if (inData.isBlank() || inData.isEmpty()) {
-            Ui.showWrongCommand();
+            Ui.showInvalidCommand();
         } else if (inData.contains(" ")) {
-            //further parse the user input for user transaction commands
+            // Further parses the user input for user transaction commands
             String[] userInput = inData.split(" ");
             String command = userInput[0];
             switch (command) {
-
             case "delete":
                 /*
                 Checks if userInput is in the correct format by further parsing(e.g. such as correct entry numbers)
                 before deleting the entry
                 */
                 break;
-
             case "add":
                 /*
                 Checks if userInput is in the correct input format by further parsing,
@@ -56,13 +52,13 @@ public class Parser {
                 */
                 break;
             default:
-                // for invalid commands
-                Ui.showWrongCommand();
+                // For invalid commands
+                Ui.showInvalidCommand();
             }
         } else {
-            //for any single-word inData , which are not valid commands.
-            Ui.showWrongCommand();
+            // For any single-word inData , which are not valid commands
+            Ui.showInvalidCommand();
         }
-        return CONTINUE;
+        return IS_CONTINUE;
     }
 }
