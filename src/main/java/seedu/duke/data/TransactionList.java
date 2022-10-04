@@ -1,5 +1,6 @@
 package seedu.duke.data;
 
+import seedu.duke.common.InfoMessages;
 import seedu.duke.data.transaction.Transaction;
 
 import java.util.ArrayList;
@@ -14,5 +15,18 @@ public class TransactionList {
 
     public TransactionList() {
         this.transactions = new ArrayList<>();
+    }
+
+    public Transaction getEntry(int index) { return transactions.get(index - 1);}
+
+    public void removeEntry(int index) {transactions.remove(index - 1);}
+
+    public static void deleteEntry(TransactionList input, int index) {
+        System.out.println(InfoMessages.MESSAGE_INFO_DIVIDER);
+        Transaction deleted = input.getEntry(index);
+        String information = deleted.getDescription();
+        input.removeEntry(index);
+        System.out.println("MOOOOOO.... I HAVE DELETED THE FOLLOWING TRANSACTION:" + information);
+        System.out.println(InfoMessages.MESSAGE_INFO_DIVIDER);
     }
 }

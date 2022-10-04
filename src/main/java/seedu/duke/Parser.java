@@ -40,13 +40,14 @@ public class Parser {
                 Checks if userInput is in the correct format by further parsing(e.g. such as correct entry numbers)
                 before deleting the entry
                 */
+                int index = Integer.parseInt(userInput[1]);
+                TransactionList.deleteEntry(transactions, index);
                 break;
             case "add":
                 /*
                 Checks if userInput is in the correct input format by further parsing,
                 before adding entry to arraylist
                 */
-
                 break;
             case "edit":
                 /*
