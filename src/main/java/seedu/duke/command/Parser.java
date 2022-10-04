@@ -18,9 +18,9 @@ public class Parser {
         String nusModuleTitle = parts[9];
         String nusModuleCredit = parts[10];
 
-        String[] lineData = {partnerUniversity, parterUniversityModuleCode,
-                partnerUnviersityModuleTitle, partnerUniversityModuleCredit, nusModuleCode,
-                nusModuleTitle, nusModuleCredit};
+        String[] lineData = { partnerUniversity, parterUniversityModuleCode, partnerUnviersityModuleTitle,
+            partnerUniversityModuleCredit, nusModuleCode,
+            nusModuleTitle, nusModuleCredit };
 
         return lineData;
     }

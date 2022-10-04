@@ -21,14 +21,11 @@ public class Storage {
     }
 
     private static void readFile(String filePath) throws FileNotFoundException {
-        final String READING_FILE_START = "Reading file inputs...";
-        final String READING_FILE_END = "Done reading file inputs!";
-
         File file = new File(filePath);
 
         Scanner scanner = new Scanner(file);
 
-        System.out.println(READING_FILE_START);
+        System.out.println("Reading file inputs...");
 
         // ignore the first line of csv
         String line = scanner.nextLine();
@@ -49,7 +46,7 @@ public class Storage {
             }
         }
 
-        System.out.println(READING_FILE_END);
+        System.out.println("Done reading file inputs!");
 
         scanner.close();
     }
@@ -76,7 +73,7 @@ public class Storage {
         String nusModuleCredit = lineData[6];
 
         updateUniversityDatabase(partnerUniversity);
-        updateNUSModuleDatabase(nusModuleCode, nusModuleTitle, nusModuleCredit);
+        updateNusModuleDatabase(nusModuleCode, nusModuleTitle, nusModuleCredit);
         updatePartnerUniversityDatabase(parterUniversityModuleCode, partnerUnviersityModuleTitle,
                 partnerUniversityModuleCredit);
 
@@ -95,9 +92,9 @@ public class Storage {
         Database.addPartnerUniversityModule(newModule);
     }
 
-    private static void updateNUSModuleDatabase(String nusModuleCode, String nusModuleTitle,
+    private static void updateNusModuleDatabase(String nusModuleCode, String nusModuleTitle,
             String nusModuleCredit) {
         Module newModule = new Module(nusModuleCode, nusModuleTitle, nusModuleCredit);
-        Database.addNUSModules(newModule);
+        Database.addNusModules(newModule);
     }
 }

@@ -31,7 +31,7 @@ public class Database {
         partnerUniversityModules.add(newModule);
     }
 
-    public static void addNUSModules(Module newModule) {
+    public static void addNusModules(Module newModule) {
         nusModules.add(newModule);
     }
 
