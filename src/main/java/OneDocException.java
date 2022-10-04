@@ -1,2 +1,2 @@
-public class OneDocException extends Exception{
+public class OneDocException extends Exception {
 }

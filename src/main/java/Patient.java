@@ -9,7 +9,7 @@ public class Patient {
     public ArrayList<Prescription> prescriptions;
 
 
-    public Patient(String name, String birthDate,String gender) {
+    public Patient(String name, String birthDate, String gender) {
         this.id = Utils.generateId();
         this.name = name;
         this.gender = gender;

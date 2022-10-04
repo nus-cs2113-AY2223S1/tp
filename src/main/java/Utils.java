@@ -5,7 +5,7 @@ public class Utils{
 
     //todo add: regex things
 
-    public static int generateId(){
+    public static int generateId() {
         return idCounter++;
     }
 

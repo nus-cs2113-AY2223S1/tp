@@ -41,9 +41,8 @@ public class Parser {
 //    public static void visitsParser();
 //    public static void medicineParser();
 
-    public static void addPatientParser(String input){
+    public static void addPatientParser(String input) {
         // add regex check
-
     }
 
 
