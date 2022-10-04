@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import seedu.duke.transaction.Transaction;
+
 import java.util.ArrayList;
 
 public class Parser {

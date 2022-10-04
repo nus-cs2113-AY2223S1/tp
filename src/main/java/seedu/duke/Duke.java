@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import seedu.duke.transaction.Transaction;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
