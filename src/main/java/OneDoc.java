@@ -4,10 +4,17 @@ import java.util.Scanner;
 
 public class OneDoc {
 
-    protected PatientList patientsList = new PatientList();
+    protected PatientList patientsList;
+    protected static Parser parser;
+
+    public OneDoc(){
+        patientsList = new PatientList();
+        parser = new Parser();
+
+    }
     public static void main(String[] args) {
         Messages.welcomeMessage();
-        Parser.mainMenuParser();
+        parser.mainMenuParser();
     }
 }
 

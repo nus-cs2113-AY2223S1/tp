@@ -7,29 +7,32 @@ public class Parser {
     private final static String visits = "2";
     private final static String prescription = "3";
 
-    public static void mainMenuParser() {
+    public void mainMenuParser() {
         String line;
         Scanner in = new Scanner(System.in);
         line = in.nextLine();
-        if (!line.equals(exitMessage)){
+        if (!line.equals(exitMessage)) {
             // todo change
 //            String line = checkInputForMainMenu(line);
-            switch (line){
+            switch (line) {
                 case patients: {
+                    // todo add
                     Messages.printPatientMenuMessage();
-//                    patientParser();
                     break;
                 }
                 case visits: {
+                    // todo add
                     Messages.printVisitsMenuMessage();
-//                    visitsParser();
                     break;
                 }
                 case prescription: {
+                    // todo add
                     Messages.PrintMedicineMenuMessage();
-//                    prescriptionParser();
                     break;
                 }
+                default:
+                    // todo add
+                    break;
 
             }
         }
@@ -40,11 +43,6 @@ public class Parser {
 //    public static void patientParser();
 //    public static void visitsParser();
 //    public static void medicineParser();
-
-    public static void addPatientParser(String input) {
-        // add regex check
-    }
-
-
+//    public void addPatientParser(String input) {}
 
 }
