@@ -2,6 +2,3 @@ Hello from
 LOGO for parKING
 What is your name?
 Hello James Gosling
-Trying to fetch data
-Complete fetch data
-Fetching and save data sequence terminated
