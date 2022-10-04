@@ -10,7 +10,7 @@ import seedu.duke.university.University;
 import seedu.duke.command.Database;
 
 public class Storage {
-    private static final String DATABASE_FILE_PATH = "./tp/data/data.csv";
+    private static final String DATABASE_FILE_PATH = "./data/data.csv";
 
     public static void loadDatabase() {
         try {

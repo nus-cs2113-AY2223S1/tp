@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import java.util.Scanner;
+
 import seedu.duke.command.Database;
 import seedu.duke.command.Parser;
 import seedu.duke.command.Storage;
@@ -17,12 +19,12 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         System.out.println("What is your name?");
 
-        Storage.loadDatabase();
+        // Storage.loadDatabase();
+        // System.out.println(Database.getUniversities());
+        // System.out.println(Database.getpartnerUniversityModules());
+        // System.out.println(Database.getnusModules());
 
-        System.out.println(Database.getUniversities());
-        System.out.println(Database.getpartnerUniversityModules());
-        System.out.println(Database.getnusModules());
-        // Scanner in = new Scanner(System.in);
-        // System.out.println("Hello " + in.nextLine());
+        Scanner in = new Scanner(System.in);
+        System.out.println("Hello " + in.nextLine());
     }
 }
