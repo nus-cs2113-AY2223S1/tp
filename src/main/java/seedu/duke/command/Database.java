@@ -22,16 +22,25 @@ public class Database {
     }
 
     public static void addUniversity(University newUniversity) {
-        if (!universities.contains(newUniversity)) {
+        if (isNewUniversity(newUniversity)) {
             universities.add(newUniversity);
         }
     }
 
-    public static void addPUModule(Module newModule) {
+    public static void addPartnerUniversityModule(Module newModule) {
         partnerUniversityModules.add(newModule);
     }
 
-    public static void addNUSModule(Module newModule) {
+    public static void addNUSModules(Module newModule) {
         nusModules.add(newModule);
+    }
+
+    private static boolean isNewUniversity(University newUniversity) {
+        for (University university : universities) {
+            if (university.getName().equals(newUniversity.getName())) {
+                return false;
+            }
+        }
+        return true;
     }
 }
