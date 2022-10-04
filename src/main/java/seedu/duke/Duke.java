@@ -2,6 +2,9 @@ package seedu.duke;
 
 import java.util.Scanner;
 
+import seedu.duke.module.Module;
+import seedu.duke.university.University;
+
 public class Duke {
     /**
      * Main entry-point for the java.duke.Duke application.
