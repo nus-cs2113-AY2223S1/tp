@@ -13,4 +13,8 @@ public class Messages {
             + "SYNTAX: Add-Expense -n NAME -a AMOUNT [-d "
             + Configurations.CONSOLE_INTERFACE_DATE_TIME_INPUT_FORMAT
             + "] [-t DESCRIPTION] [-c CATEGORY]";
+
+    public static final String CONSOLE_ERROR_COMMAND_VIEW_EXPENSE_INVALID = ""
+            + "The arguments entered are invalid. "
+            + "SYNTAX: View-Expense [-i EXPENSE_NUMBER]";
 }
