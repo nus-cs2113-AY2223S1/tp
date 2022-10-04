@@ -16,7 +16,7 @@ public class Duke {
             inData = scan.nextLine();
             inData = inData.trim();
 
-            if (!Parser.processInput(inData, transactions)) {
+            if (!Parser.parse(inData, transactions)) {
                 break;
             }
         }

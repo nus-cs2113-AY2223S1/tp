@@ -5,7 +5,7 @@ package seedu.duke.data.transaction;
  * Records the amount, category and date of the income.
  */
 public class Income extends Transaction {
-    public Income(String description, int amount, String category, int day, int month, int year) {
-        super(description, amount, category, day, month, year);
+    public Income(String description, int amount, String category, String date) {
+        super(description, amount, category, date);
     }
 }

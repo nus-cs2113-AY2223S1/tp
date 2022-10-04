@@ -41,6 +41,12 @@ public class Ui {
         );
     }
 
+    public static void showErrorMessage(String errorMessage) {
+        printMessages(
+                errorMessage
+        );
+    }
+
     public static void showInvalidCommand() {
         printMessages(
                 ErrorMessages.MESSAGE_ERROR_INVALID_COMMAND.toString(),
