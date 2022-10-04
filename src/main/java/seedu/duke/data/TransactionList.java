@@ -1,5 +1,7 @@
 package seedu.duke.data;
 
+import seedu.duke.data.transaction.Expense;
+import seedu.duke.data.transaction.Income;
 import seedu.duke.data.transaction.Transaction;
 
 import java.util.ArrayList;
@@ -15,4 +17,20 @@ public class TransactionList {
     public TransactionList() {
         this.transactions = new ArrayList<>();
     }
+
+    public void addExpense(String description, int amount, String category, String date) {
+        transactions.add(new Expense(description, amount, category, date));
+    }
+
+    public void addIncome(String description, int amount, String category, String date) {
+        transactions.add(new Income(description, amount, category, date));
+    }
+
+    public void list () {
+        for (Transaction t : transactions) {
+            System.out.println(t.toString());
+        }
+    }
+
+
 }
