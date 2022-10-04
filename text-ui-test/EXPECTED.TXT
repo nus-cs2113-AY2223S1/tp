@@ -8,11 +8,11 @@ Howdy!
 ------------------------------
 ------------------------------
 Biometrics
-Age:0
-Gender:-
-Height:0 cm
-Weight:0 kg
-Fat percentage:0 %
+Age: 0
+Gender: -
+Height: 0cm
+Weight: 0kg
+Fat percentage: 0%
 ------------------------------
 ------------------------------
 biometrics set
@@ -28,22 +28,22 @@ biometrics set
 ------------------------------
 ------------------------------
 Biometrics
-Age:29
-Gender:male
-Height:295 cm
-Weight:25 kg
-Fat percentage:25 %
+Age: 29
+Gender: male
+Height: 295cm
+Weight: 25kg
+Fat percentage: 25%
 ------------------------------
 ------------------------------
 Invalid biometrics
 ------------------------------
 ------------------------------
 Biometrics
-Age:29
-Gender:male
-Height:295 cm
-Weight:25 kg
-Fat percentage:25 %
+Age: 29
+Gender: male
+Height: 295cm
+Weight: 25kg
+Fat percentage: 25%
 ------------------------------
 ------------------------------
 Invalid biometrics
