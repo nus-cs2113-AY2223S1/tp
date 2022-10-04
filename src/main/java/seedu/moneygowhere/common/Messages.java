@@ -17,4 +17,9 @@ public class Messages {
     public static final String CONSOLE_ERROR_COMMAND_VIEW_EXPENSE_INVALID = ""
             + "The arguments entered are invalid. "
             + "SYNTAX: View-Expense [-i EXPENSE_NUMBER]";
+    public static final String CONSOLE_ERROR_COMMAND_SORT_EXPENSE_INVALID = ""
+            + "The arguments entered are invalid. "
+            + "SYNTAX: Sort-Expense [-t TYPE]";
+    public static final String CONSOLE_MESSAGE_COMMAND_SORTED_EXPENSE_SUCCESS = "Your expenses have been sorted successfully";
+
 }
