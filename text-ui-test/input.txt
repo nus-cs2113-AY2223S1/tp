@@ -1,2 +1,9 @@
-huh
+Add-Expense -n "Test Expense 1" -a 1337.37 -d "01/01/2022 1200"
+Add-Expense -n "Test Expense 2" -a 10.80 -d "01/01/2022 1201"
+Add-Expense -n "Test Expense 3" -a 20.80 -d "02/01/2022 1202" -t "This is a test expense 3"
+Add-Expense -n "Test Expense 4" -a 30.90 -d "03/01/2022 1203" -t "This is a test expense 4" -c "Category Alpha"
+Add-Expense -n "Test Expense Error 1"
+Add-Expense -n "Test Expense Error 2" -a 30.90ti
+Add-Expense -n "Test Expense Error 3" -a 1337 -d "ThisIsAnInvalidDate"
+ThisCommandDoesNotExist
 bye
