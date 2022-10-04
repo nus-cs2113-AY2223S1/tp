@@ -18,6 +18,8 @@ public class Patient {
         this.prescriptions = new ArrayList<>();
     }
 
+    // todo add public void addVisit(); public void addMedicine();
+
     public String getName() {
         return name;
     }
@@ -45,7 +47,5 @@ public class Patient {
     public void setGender(String gender) {
         this.gender = gender;
     }
-    // todo add
-    //    public void addVisit();
-    //    public void addMedicine();
+
 }

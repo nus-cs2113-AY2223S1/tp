@@ -12,24 +12,19 @@ public class Parser {
         Scanner in = new Scanner(System.in);
         line = in.nextLine();
         if (!line.equals(exitMessage)) {
-            // todo change
+            // todo change add to each case accordingly
             // String line = checkInputForMainMenu(line);
             switch (line) {
             case patients:
-                // todo add
                 Messages.printPatientMenuMessage();
                 break;
             case visits:
-                // todo add
                 Messages.printVisitsMenuMessage();
                 break;
             case prescription:
-                // todo add
                 Messages.printMedicineMenuMessage();
                 break;
-
             default:
-                // todo add
                 break;
             }
         }
