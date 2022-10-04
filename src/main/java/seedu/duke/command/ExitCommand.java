@@ -6,6 +6,7 @@ import seedu.duke.Ui;
 
 public class ExitCommand extends Command {
     private Ui ui;
+
     @Override
     public void execute() {
         ui.output("Farewell!");
@@ -16,5 +17,4 @@ public class ExitCommand extends Command {
     public void setData(Ui ui, Biometrics biometrics) {
         this.ui = ui;
     }
-
 }

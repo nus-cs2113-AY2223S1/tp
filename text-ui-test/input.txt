@@ -7,7 +7,7 @@ view biometrics
 set biometrics 12female 200 85 25
 view biometrics
 set biometrics 0 male 170 85 17
-set biometrics 23 sc 170 85 17
+set biometrics 0 male 170 85 17
 setbiometrics 23 female 0 85 17
 set biometrics 23 sc sk 85 17
 set biometrics 12 female 200 85 0

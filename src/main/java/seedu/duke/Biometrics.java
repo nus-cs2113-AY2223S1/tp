@@ -45,11 +45,11 @@ public class Biometrics {
 
     @Override
     public String toString() {
-        return "Biometrics" + System.lineSeparator() +
-                "Age: " + age + System.lineSeparator() +
-                "Gender: " + gender + System.lineSeparator() +
-                "Height: " + height + "cm" + System.lineSeparator() +
-                "Weight: " + weight + "kg" + System.lineSeparator() +
-                "Fat percentage: " + fatPercentage + "%";
+        return "Biometrics" + System.lineSeparator()
+                + "Age: " + age + System.lineSeparator()
+                + "Gender: " + gender + System.lineSeparator()
+                + "Height: " + height + "cm" + System.lineSeparator()
+                + "Weight: " + weight + "kg" + System.lineSeparator()
+                + "Fat percentage: " + fatPercentage + "%";
     }
 }

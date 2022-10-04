@@ -25,7 +25,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-//Solution below adapted from  https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/Main.java
+        //Solution below adapted from  https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/Main.java
         startDuke();
 
         while (!isProgramFinished) {

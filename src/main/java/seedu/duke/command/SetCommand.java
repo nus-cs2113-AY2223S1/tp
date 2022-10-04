@@ -1,7 +1,7 @@
 package seedu.duke.command;
 
 import seedu.duke.Biometrics;
-import seedu.duke.Exception.IllegalValueException;
+import seedu.duke.exception.IllegalValueException;
 import seedu.duke.Parser;
 import seedu.duke.Ui;
 

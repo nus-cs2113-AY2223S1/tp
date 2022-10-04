@@ -37,7 +37,7 @@ public class ViewCommand extends Command {
 
     @Override
     public void setData(Ui ui, Biometrics biometrics) {
-       this.ui = ui;
-       this.biometrics = biometrics;
+        this.ui = ui;
+        this.biometrics = biometrics;
     }
 }

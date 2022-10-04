@@ -27,9 +27,9 @@ public class Parser {
             return new HelpCommand();
         }
     }
+
     public static String[] getArgumentList(String arguments) {
-        String[] argumentList = arguments.trim().split(" ");
-        return argumentList;
+        return arguments.trim().split(" ");
     }
 
 }
