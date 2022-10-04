@@ -26,7 +26,7 @@ public class TransactionList {
         transactions.add(new Income(description, amount, category, date));
     }
 
-    public void list () {
+    public void list() {
         for (Transaction t : transactions) {
             System.out.println(t.toString());
         }

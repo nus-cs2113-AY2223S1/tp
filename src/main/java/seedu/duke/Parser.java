@@ -13,7 +13,7 @@ public class Parser {
     static final boolean IS_CONTINUE = true;
 
     /**
-     * Parses the user input and deal with any input error returned
+     * Parses the user input and deal with any input error returned.
      *
      * @param inData       The user input.
      * @param transactions The array which would be operated on.
@@ -107,8 +107,8 @@ public class Parser {
         String type = "";
 
         for (String split : splits) {
-            String tag =  split.substring(0, 2);
-            String parameter =  split.substring(2);
+            String tag = split.substring(0, 2);
+            String parameter = split.substring(2);
             switch (tag) {
             case "t/":
                 type = parameter;
@@ -147,12 +147,11 @@ public class Parser {
      */
     private static void checkTagsExist(String[] splits) throws AddTransactionMissingTagException {
         // TODO: To add the tags into Command class instead
-        String[] tags = new String[]{
-                "t/",
-                "c/",
-                "a/",
-                "d/",
-                "i/"
+        String[] tags = new String[]{"t/",
+                                     "c/",
+                                     "a/",
+                                     "d/",
+                                     "i/"
         };
         for (String tag : tags) {
             boolean found = findMatchingTagFromInputs(tag, splits);
