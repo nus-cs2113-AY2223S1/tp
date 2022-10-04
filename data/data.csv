@@ -79,9 +79,9 @@ School of Computing,Bilkent University,CTIS496,Computer and Network Security,3,-
 School of Computing,Bilkent University,CS550,Machine Learning,3,-1,-1,-1,CS3244,Machine Learning,4,-1,-1,-1,-1
 School of Computing,Bilkent University,CTIS487,Mobile Application Development,3,-1,-1,-1,IS3261,Mobile Apps Development for En,4,-1,-1,-1,-1
 School of Computing,Bilkent University,CS429,Dynamic and Social Network Analysis,3,-1,-1,-1,CS4242,Social Media Computing,4,-1,-1,-1,-1
-School of Computing,"Bogazici University, Turkey",CMPE300,Analysis of Algorithms,6,-1,-1,-1,CS3230,Design & Analysis of Algorithm,4,-1,-1,-1,-1
-School of Computing,"Bogazici University, Turkey",CMPE322,Operating Systems,6,-1,-1,-1,CS2106,Intro to Operating Systems,4,-1,-1,-1,-1
-School of Computing,"Boston College, Massachusetts",ISYS2157,Programming for Management and Analytics,3,-1,-1,-1,CS1010S,Programming Methodology,4,-1,-1,-1,-1
+School of Computing,Bogazici University Turkey,CMPE300,Analysis of Algorithms,6,-1,-1,-1,CS3230,Design & Analysis of Algorithm,4,-1,-1,-1,-1
+School of Computing,Bogazici University Turkey,CMPE322,Operating Systems,6,-1,-1,-1,CS2106,Intro to Operating Systems,4,-1,-1,-1,-1
+School of Computing,Boston College Massachusetts,ISYS2157,Programming for Management and Analytics,3,-1,-1,-1,CS1010S,Programming Methodology,4,-1,-1,-1,-1
 School of Computing,Boston University,CAS MA 589,Computational Statistics,4,-1,-1,-1,BT3102,Computational Methods for Busi,4,-1,-1,-1,N
 School of Computing,Boston University,MET CS 535,Computer Networks,3,-1,-1,-1,CS3103,Computer Networks Practice,4,-1,-1,-1,N
 School of Computing,Boston University,CS472,Computer Architecture,4,-1,-1,-1,CS2100,Computer Organisation,4,-1,-1,-1,N
@@ -109,7 +109,7 @@ School of Computing,Boston University,CS469,Introduction to Database Design and 
 School of Computing,Boston University,CS412,Full Stack Application Design and Development,4,-1,-1,-1,BT3103,Application Systems Developmen,4,-1,-1,-1,-1
 School of Computing,Boston University,CAS CS 504,Data Mechanics,4,-1,-1,-1,CS4225,Big Data Systems for Data Scie,4,-1,-1,-1,-1
 School of Computing,Boston University,MET CS 777,Big Data Analytics,4,-1,-1,-1,BT4221,Big Data Techniques & Technolo,4,-1,-1,-1,-1
-School of Computing,Boston University,QSIT815,"FinTech Revolution: Disruptive Technologies, Blockchain and Future of Finance",4,-1,-1,-1,IS4302,Blockchain and Distributed Led,4,-1,-1,-1,-1
+School of Computing,Boston University,QSIT815,FinTech Revolution: Disruptive Technologies Blockchain and Future of Finance,4,-1,-1,-1,IS4302,Blockchain and Distributed Led,4,-1,-1,-1,-1
 School of Computing,Boston University,CAS CS525,Compiler Design Theory,4,-1,-1,-1,CS4212,Compiler Design,4,-1,-1,-1,-1
 School of Computing,Boston University,CAS CS538,Fundamentals of Cryptography,4,-1,-1,-1,CS4236,Cryptography Theory & Practice,4,-1,-1,-1,-1
 School of Computing,Boston University,CAS CS451,Distributed Systems,4,-1,-1,-1,CS5223,Distributed Systems,4,-1,-1,-1,-1
@@ -120,7 +120,7 @@ School of Computing,Boston University,ENG EC 517,Introduction to Information The
 School of Computing,Boston University,AD571,Business Analytics Foundations,4,-1,-1,-1,BT4240,Machine Learning for Predictiv,4,-1,-1,-1,-1
 School of Computing,Boston University,CAS CS 505,Introduction to Natural Language Processing,4,-1,-1,-1,CS4248,Natural Language Processing,4,-1,-1,-1,-1
 School of Computing,Boston University,CAS CS 320,Concepts of Programming Languages,4,-1,-1,-1,CS2104,Programming Language Concepts,4,-1,-1,-1,-1
-School of Computing,Boston University,MET CS 633,"Software Quality, Testing and Security Management",4,-1,-1,-1,CS4218,Software Testing,4,-1,-1,-1,-1
+School of Computing,Boston University,MET CS 633,Software Quality Testing and Security Management,4,-1,-1,-1,CS4218,Software Testing,4,-1,-1,-1,-1
 School of Computing,Budapest University of Technology and Economics,BMEVIHIA`01,Basics of Programming I,7,-1,-1,-1,CS1010S,Programming Methodology,4,-1,-1,-1,Y
 School of Computing,Carnegie Mellon University,CS15112,Fundamentals of Programming and Computer Science,3,-1,-1,-1,CS1010S,Programming Methodology,4,-1,-1,-1,Y
 School of Computing,Case Western Reserve University,CSDS281,Logic Design and Computer Organization,3,-1,-1,-1,CS2100,Computer Organisation,4,-1,-1,-1,-1
@@ -210,7 +210,7 @@ School of Computing,Concordia University,SOEN363,Data Systems for Software Engin
 School of Computing,Concordia University,MARK452,e-Marketing,3,-1,-1,-1,IS3150,Digital Media Marketing,4,-1,-1,-1,-1
 School of Computing,Concordia University,SOEN344,Advanced Software Architecture and Design,3,-1,-1,-1,IS3240,Digital Platform Strategy and,4,-1,-1,-1,-1
 School of Computing,Concordia University,SOEN343,Software Architecture and Design,3,-1,-1,-1,IS3240,Digital Platform Strategy and,4,-1,-1,-1,-1
-School of Computing,Concordia University,SOEN384,"Management, Measurement and Quality Control",3,-1,-1,-1,IS4262,Digital Product Management,4,-1,-1,-1,-1
+School of Computing,Concordia University,SOEN384,Management Measurement and Quality Control,3,-1,-1,-1,IS4262,Digital Product Management,4,-1,-1,-1,-1
 School of Computing,Concordia University,SOEN387,Web-Based Enterprise Application Design,3,-1,-1,-1,IS3106,Enterprise Systems Interface D,4,-1,-1,-1,-1
 School of Computing,Concordia University,BTM430,Enterprise Resource Planning and Information Technology Integration,3,-1,-1,-1,IS3221,ERP Systems with Analytics Sol,4,-1,-1,-1,-1
 School of Computing,Concordia University,SOEN331,Formal Methods for Software Engineering,3,-1,-1,-1,CS4211,Formal Methods for Software En,4,-1,-1,-1,-1
@@ -229,10 +229,10 @@ School of Computing,Concordia University,COMP348,Principles of Programming Langu
 School of Computing,Concordia University,MACF301,Introduction to Quantitative Finance,3,-1,-1,-1,BT4016,Risk Analytics for Financial S,4,-1,-1,-1,-1
 School of Computing,Concordia University,MACF402,Mathematical & Computational Finance II,3,-1,-1,-1,BT4016,Risk Analytics for Financial S,4,-1,-1,-1,-1
 School of Computing,Concordia University,SOEN343,Software Architecture and Design,3,-1,-1,-1,CS3219,Software Engineering Principle,4,-1,-1,-1,-1
-School of Computing,Concordia University,SOEN345,"Software Testing, Verification and Quality Assurance",3,-1,-1,-1,CS4218,Software Testing,4,-1,-1,-1,-1
+School of Computing,Concordia University,SOEN345,Software Testing Verification and Quality Assurance,3,-1,-1,-1,CS4218,Software Testing,4,-1,-1,-1,-1
 School of Computing,Concordia University,SOEN287,Web Programming,3,-1,-1,-1,CS3226,Web Programming and Applicatio,4,-1,-1,-1,-1
-School of Computing,Cornell Univ Coll of Agriculture & Life Sciences,INFO4301,"Ethics in New Media, Technology, and Communication",3,-1,-1,-1,IS1103,Ethics in Computing,4,-1,-1,-1,N
-School of Computing,Cornell Univ Coll of Agriculture & Life Sciences,INFO1200,"Information Ethics, Law, and Policy",3,-1,-1,-1,IS1103,Ethics in Computing,4,-1,-1,-1,N
+School of Computing,Cornell Univ Coll of Agriculture & Life Sciences,INFO4301,Ethics in New Media Technology and Communication,3,-1,-1,-1,IS1103,Ethics in Computing,4,-1,-1,-1,N
+School of Computing,Cornell Univ Coll of Agriculture & Life Sciences,INFO1200,Information Ethics Law and Policy,3,-1,-1,-1,IS1103,Ethics in Computing,4,-1,-1,-1,N
 School of Computing,Cornell Univ Coll of Human Ecology,CS2110,Object-Oriented Programming and Data Structures,3,-1,-1,-1,CS2040,Data Structures and Algorithms,4,-1,-1,-1,N
 School of Computing,Dalhousie University,CSCI2110,DATA STRUCTURES AND ALGORITHMS,3,-1,-1,-1,CS2040,Data Structures and Algorithms,4,-1,-1,-1,N
 School of Computing,Dalhousie University,CSCI3110,Design and Analysis of Algorithms I,3,-1,-1,-1,CS3230,Design & Analysis of Algorithm,4,-1,-1,-1,N
@@ -263,8 +263,8 @@ School of Computing,Delft University of Technology,CS4240,Deep Learning,5,-1,-1,
 School of Computing,Delft University of Technology,TW2020,Optimization,5,-1,-1,-1,CS4234,Optimisation Algorithms,4,-1,-1,-1,N
 School of Computing,Delft University of Technology,TW3740TU,Parallel Computing,5,-1,-1,-1,CS3210,Parallel Computing,4,-1,-1,-1,N
 School of Computing,Delft University of Technology,IN4315,Software Architecture,7.5,-1,-1,-1,CS3219,Software Engineering Principle,4,-1,-1,-1,N
-School of Computing,Delft University of Technology,CSE2315,"Automata, Computability and Complexity",5,-1,-1,-1,CS3231,Theory of Computation,4,-1,-1,-1,N
-School of Computing,Delft University of Technology,TI2316,"Automata, Languages and Computability",5,-1,-1,-1,CS3231,Theory of Computation,4,-1,-1,-1,N
+School of Computing,Delft University of Technology,CSE2315,Automata Computability and Complexity,5,-1,-1,-1,CS3231,Theory of Computation,4,-1,-1,-1,N
+School of Computing,Delft University of Technology,TI2316,Automata Languages and Computability,5,-1,-1,-1,CS3231,Theory of Computation,4,-1,-1,-1,N
 School of Computing,Delft University of Technology,WI4505,Quantitative Risk Management,6,-1,-1,-1,BT4013,Analytics for Capital Market T,4,-1,-1,-1,-1
 School of Computing,Delft University of Technology,CSE2520,Big Data Processing,5,-1,-1,-1,BT4221,Big Data Techniques & Technolo,4,-1,-1,-1,-1
 School of Computing,Delft University of Technology,IN4325,Information Retrieval,5,-1,-1,-1,BT4221,Big Data Techniques & Technolo,4,-1,-1,-1,-1
@@ -274,7 +274,7 @@ School of Computing,Delft University of Technology,CSE1505,Information and Data 
 School of Computing,Delft University of Technology,CSE1305,Algorithms and Data Structures,5,-1,-1,-1,CS2040,Data Structures and Algorithms,4,-1,-1,-1,-1
 School of Computing,Delft University of Technology,TI1520AM,Algorithms and Data Structures,6,-1,-1,-1,CS2040,Data Structures and Algorithms,4,-1,-1,-1,-1
 School of Computing,Delft University of Technology,SEN1641,Digital Platform Design,5,-1,-1,-1,IS3240,Digital Platform Strategy and,4,-1,-1,-1,-1
-School of Computing,Delft University of Technology,TBM009A,"Technology, Innovation and Ethics for Companies",3,-1,-1,-1,IS1103,Ethics in Computing,4,-1,-1,-1,-1
+School of Computing,Delft University of Technology,TBM009A,Technology Innovation and Ethics for Companies,3,-1,-1,-1,IS1103,Ethics in Computing,4,-1,-1,-1,-1
 School of Computing,Delft University of Technology,CS4035,Cyber Data Analytics,5,-1,-1,-1,BT4012,Fraud Analytics,4,-1,-1,-1,-1
 School of Computing,Delft University of Technology,GEO1006,Geo Database Management Systems,5,-1,-1,-1,BT4015,Geospatial Analytics,4,-1,-1,-1,-1
 School of Computing,Delft University of Technology,SPM5441,Cyber Risk Management,5,-1,-1,-1,IS4231,Information Security Mgmt,4,-1,-1,-1,-1
@@ -396,7 +396,7 @@ School of Computing,ETH Zurich,252-0220-00L,Learning and Intelligent Systems,8,-
 School of Computing,ETH Zurich,2523005-00L,Natural Language Understanding,4,-1,-1,-1,CS4248,Natural Language Processing,4,-1,-1,-1,-1
 School of Computing,ETH Zurich,263-5000-00L,Computational Semantics for Natural Language Processing,6,-1,-1,-1,CS4248,Natural Language Processing,4,-1,-1,-1,-1
 School of Computing,ETH Zurich,263-3710-00L,Machine Perception,8,-1,-1,-1,CS5242,Neural Networks &Deep Learning,4,-1,-1,-1,-1
-School of Computing,ETH Zurich,2520209-00L,"Algorithms, Probability, and Computing",8,-1,-1,-1,CS4234,Optimisation Algorithms,4,-1,-1,-1,-1
+School of Computing,ETH Zurich,2520209-00L,Algorithms Probability and Computing,8,-1,-1,-1,CS4234,Optimisation Algorithms,4,-1,-1,-1,-1
 School of Computing,ETH Zurich,227-0558-00L,Principles of Distributed Computing,6,-1,-1,-1,CS4231,Parallel & Distr Algorithms,4,-1,-1,-1,-1
 School of Computing,ETH Zurich,151011610L,High Performance Computing for Science and Engineering (HPCSE) for Engineers II,4,-1,-1,-1,CS3210,Parallel Computing,4,-1,-1,-1,-1
 School of Computing,ETH Zurich,151-0116-10L,High Performance Computing for Science and Engineering (HPCSE) for Engineers II,4,-1,-1,-1,CS3210,Parallel Computing,4,-1,-1,-1,-1
@@ -408,33 +408,33 @@ School of Computing,ETH Zurich,252505100L,Advanced Topics in Machine Learning,8,
 School of Computing,ETH Zurich,263-5300-0,Guarantees for Machine Learning,9,-1,-1,-1,CS5339,Theory and Algorithms for Mach,4,-1,-1,-1,-1
 School of Computing,ETH Zurich,2520293-00L,Wireless and Mobile Computing for Entertainment Applications,4,-1,-1,-1,CS4222,Wireless Networking,4,-1,-1,-1,-1
 School of Computing,ETH Zurich,252029300L,Wireless Networking and Mobile Computing,4,-1,-1,-1,CS4222,Wireless Networking,4,-1,-1,-1,-1
-School of Computing,"Ewha Women's University,Seoul",36339,Computer Programming and Lab,3,-1,-1,-1,CS1010,Programming Methodology,4,-1,-1,-1,N
-School of Computing,"Ewha Women's University,Seoul",COM SCI 38403,Python Programming & Lab,3,-1,-1,-1,CS1010S,Programming Methodology,4,-1,-1,-1,N
+School of Computing,Ewha Women's UniversitySeoul,36339,Computer Programming and Lab,3,-1,-1,-1,CS1010,Programming Methodology,4,-1,-1,-1,N
+School of Computing,Ewha Women's UniversitySeoul,COM SCI 38403,Python Programming & Lab,3,-1,-1,-1,CS1010S,Programming Methodology,4,-1,-1,-1,N
 School of Computing,Fudan University,COMP130125,Techniques of big data analysis,2,-1,-1,-1,BT4221,Big Data Techniques & Technolo,4,-1,-1,-1,N
 School of Computing,Fudan University,COMP130413,Introduction to Computer Systems,3,-1,-1,-1,CS2100,Computer Organisation,4,-1,-1,-1,N
 School of Computing,Fudan University,COMP130095,Electronic Business Architecture and Security,3,-1,-1,-1,IS3240,Digital Platform Strategy and,4,-1,-1,-1,N
 School of Computing,Fudan University,COMP130030,Pattern Recognition,3,-1,-1,-1,CS3244,Machine Learning,4,-1,-1,-1,N
 School of Computing,Fudan University,MANA130029.01,Statistical Financial Markets,2,-1,-1,-1,BT4016,Risk Analytics for Financial S,4,-1,-1,-1,N
 School of Computing,Fudan University,MANA130349,Investment Fund Management,3,-1,-1,-1,BT4013,Analytics for Capital Market T,4,-1,-1,-1,-1
-School of Computing,"Georgetown University, Washington D.C.",FINC211,Business Financial Management,3,-1,-1,-1,BT4013,Analytics for Capital Market T,4,-1,-1,-1,N
-School of Computing,"Georgetown University, Washington D.C.",COSC 282,Big Data Analytics,3,-1,-1,-1,BT4221,Big Data Techniques & Technolo,4,-1,-1,-1,N
-School of Computing,"Georgetown University, Washington D.C.",MATH504,Numerical Methods,3,-1,-1,-1,BT3102,Computational Methods for Busi,4,-1,-1,-1,N
-School of Computing,"Georgetown University, Washington D.C.",COSC121,Computer Systems Fundamentals,3,-1,-1,-1,CS2100,Computer Organisation,4,-1,-1,-1,N
-School of Computing,"Georgetown University, Washington D.C.",COSC435,Intro to Network Security,3,-1,-1,-1,CS3235,Computer Security,4,-1,-1,-1,N
-School of Computing,"Georgetown University, Washington D.C.",HESY271,Strategic Planning & Marketing,3,-1,-1,-1,BT4211,Data-Driven Marketing,4,-1,-1,-1,N
-School of Computing,"Georgetown University, Washington D.C.",COSC255,Operating Systems,3,-1,-1,-1,CS2106,Intro to Operating Systems,4,-1,-1,-1,N
-School of Computing,"Georgetown University, Washington D.C.",COSC430,Information Assurance,3,-1,-1,-1,CS2107,Introduction to Information Se,4,-1,-1,-1,N
-School of Computing,"Georgetown University, Washington D.C.",COSC592,Health Search and Mining,3,-1,-1,-1,IS4250,IT-enabled Healthcare Solution,4,-1,-1,-1,N
-School of Computing,"Georgetown University, Washington D.C.",COSC288,Introduction to Machine Learning,3,-1,-1,-1,CS3244,Machine Learning,4,-1,-1,-1,N
-School of Computing,"Georgetown University, Washington D.C.",COSC 586,Text Mining and Analysis,3,-1,-1,-1,BT4222,Mining Web Data for Business I,4,-1,-1,-1,N
-School of Computing,"Georgetown University, Washington D.C.",OPIM244,Mgmt Bus App Dvlpmt in Python,3,-1,-1,-1,IS3261,Mobile Apps Development for En,4,-1,-1,-1,N
-School of Computing,"Georgetown University, Washington D.C.",FINC150,Fundamentals of Finance,3,-1,-1,-1,BT4016,Risk Analytics for Financial S,4,-1,-1,-1,N
-School of Computing,"Georgetown University, Washington D.C.",COSC488,Information Retrieval,3,-1,-1,-1,BT4212,Search Engine Optimization & A,4,-1,-1,-1,N
-School of Computing,"Georgetown University, Washington D.C.",COSC010-01,Intro to Information Technology,3,-1,-1,-1,IS1103,Ethics in Computing,4,-1,-1,-1,Y
-School of Computing,"Georgetown University, Washington D.C.",COSC010-02,Intro to Information Technology,3,-1,-1,-1,IS1103,Ethics in Computing,4,-1,-1,-1,Y
-School of Computing,"Georgetown University, Washington D.C.",MARK235,Social & Digital Media Marketing,3,-1,-1,-1,IS3150,Digital Media Marketing,4,-1,-1,-1,-1
-School of Computing,"Georgetown University, Washington D.C.",COSC253,Handheld Device Programming,3,-1,-1,-1,IS3261,Mobile Apps Development for En,4,-1,-1,-1,-1
-School of Computing,"Georgetown University, Washington D.C.",COSC160,Data Structures,3,-1,-1,-1,CS2040,Data Structures and Algorithms,4,-1,-1,-1,-1
+School of Computing,Georgetown University Washington D.C.,FINC211,Business Financial Management,3,-1,-1,-1,BT4013,Analytics for Capital Market T,4,-1,-1,-1,N
+School of Computing,Georgetown University Washington D.C.,COSC 282,Big Data Analytics,3,-1,-1,-1,BT4221,Big Data Techniques & Technolo,4,-1,-1,-1,N
+School of Computing,Georgetown University Washington D.C.,MATH504,Numerical Methods,3,-1,-1,-1,BT3102,Computational Methods for Busi,4,-1,-1,-1,N
+School of Computing,Georgetown University Washington D.C.,COSC121,Computer Systems Fundamentals,3,-1,-1,-1,CS2100,Computer Organisation,4,-1,-1,-1,N
+School of Computing,Georgetown University Washington D.C.,COSC435,Intro to Network Security,3,-1,-1,-1,CS3235,Computer Security,4,-1,-1,-1,N
+School of Computing,Georgetown University Washington D.C.,HESY271,Strategic Planning & Marketing,3,-1,-1,-1,BT4211,Data-Driven Marketing,4,-1,-1,-1,N
+School of Computing,Georgetown University Washington D.C.,COSC255,Operating Systems,3,-1,-1,-1,CS2106,Intro to Operating Systems,4,-1,-1,-1,N
+School of Computing,Georgetown University Washington D.C.,COSC430,Information Assurance,3,-1,-1,-1,CS2107,Introduction to Information Se,4,-1,-1,-1,N
+School of Computing,Georgetown University Washington D.C.,COSC592,Health Search and Mining,3,-1,-1,-1,IS4250,IT-enabled Healthcare Solution,4,-1,-1,-1,N
+School of Computing,Georgetown University Washington D.C.,COSC288,Introduction to Machine Learning,3,-1,-1,-1,CS3244,Machine Learning,4,-1,-1,-1,N
+School of Computing,Georgetown University Washington D.C.,COSC 586,Text Mining and Analysis,3,-1,-1,-1,BT4222,Mining Web Data for Business I,4,-1,-1,-1,N
+School of Computing,Georgetown University Washington D.C.,OPIM244,Mgmt Bus App Dvlpmt in Python,3,-1,-1,-1,IS3261,Mobile Apps Development for En,4,-1,-1,-1,N
+School of Computing,Georgetown University Washington D.C.,FINC150,Fundamentals of Finance,3,-1,-1,-1,BT4016,Risk Analytics for Financial S,4,-1,-1,-1,N
+School of Computing,Georgetown University Washington D.C.,COSC488,Information Retrieval,3,-1,-1,-1,BT4212,Search Engine Optimization & A,4,-1,-1,-1,N
+School of Computing,Georgetown University Washington D.C.,COSC010-01,Intro to Information Technology,3,-1,-1,-1,IS1103,Ethics in Computing,4,-1,-1,-1,Y
+School of Computing,Georgetown University Washington D.C.,COSC010-02,Intro to Information Technology,3,-1,-1,-1,IS1103,Ethics in Computing,4,-1,-1,-1,Y
+School of Computing,Georgetown University Washington D.C.,MARK235,Social & Digital Media Marketing,3,-1,-1,-1,IS3150,Digital Media Marketing,4,-1,-1,-1,-1
+School of Computing,Georgetown University Washington D.C.,COSC253,Handheld Device Programming,3,-1,-1,-1,IS3261,Mobile Apps Development for En,4,-1,-1,-1,-1
+School of Computing,Georgetown University Washington D.C.,COSC160,Data Structures,3,-1,-1,-1,CS2040,Data Structures and Algorithms,4,-1,-1,-1,-1
 School of Computing,Georgia Institute of Technology,CS7642,Reinforcement Learning and Decision Making,3,-1,-1,-1,CS4246,AI Planning and Decision Makin,4,-1,-1,-1,N
 School of Computing,Georgia Institute of Technology,CS4649,Robot Intelligence - Planning,3,-1,-1,-1,CS4246,AI Planning and Decision Makin,4,-1,-1,-1,N
 School of Computing,Georgia Institute of Technology,CS4540,Advanced Algorithms,3,-1,-1,-1,CS5234,Algorithms at Scale,4,-1,-1,-1,N
@@ -464,7 +464,7 @@ School of Computing,Georgia Institute of Technology,CS4530,Randomized Algorithms
 School of Computing,Georgia Institute of Technology,CS6474,SOCIAL COMPUTING,3,-1,-1,-1,IS4241,Social Media Network Analysis,4,-1,-1,-1,N
 School of Computing,Georgia Institute of Technology,CS6300,Software Development Process,3,-1,-1,-1,CS3219,Software Engineering Principle,4,-1,-1,-1,N
 School of Computing,Georgia Institute of Technology,CS4001,Computing and Society,3,-1,-1,-1,IS1103,Ethics in Computing,4,-1,-1,-1,Y
-School of Computing,Georgia Institute of Technology,CS3001,"Computing, Society, and Professionalism",3,-1,-1,-1,IS1103,Ethics in Computing,4,-1,-1,-1,Y
+School of Computing,Georgia Institute of Technology,CS3001,Computing Society and Professionalism,3,-1,-1,-1,IS1103,Ethics in Computing,4,-1,-1,-1,Y
 School of Computing,Georgia Institute of Technology,CS1301,Intro to Computing,3,-1,-1,-1,CS1010S,Programming Methodology,4,-1,-1,-1,Y
 School of Computing,Georgia Institute of Technology,CSE6040,Computing for Data Analysis|,3,-1,-1,-1,BT4221,Big Data Techniques & Technolo,4,-1,-1,-1,-1
 School of Computing,Georgia Institute of Technology,ECE4150,Cloud Computing,3,-1,-1,-1,CS5224,Cloud Computing,4,-1,-1,-1,-1
@@ -476,7 +476,7 @@ School of Computing,Georgia Institute of Technology,MGT4058,Database Management,
 School of Computing,Georgia Institute of Technology,CS4400,Intro to Database Systems,3,-1,-1,-1,CS2102,Database Systems,4,-1,-1,-1,-1
 School of Computing,Georgia Institute of Technology,MGT4367,Revenue Analytics,3,-1,-1,-1,BT4211,Data-Driven Marketing,4,-1,-1,-1,-1
 School of Computing,Georgia Institute of Technology,CS3510,Design and Analysis of Algorithms,3,-1,-1,-1,CS3230,Design & Analysis of Algorithm,4,-1,-1,-1,-1
-School of Computing,Georgia Institute of Technology,CS3511,"Design and Analysis of Algorithms, Honors",3,-1,-1,-1,CS3230,Design & Analysis of Algorithm,4,-1,-1,-1,-1
+School of Computing,Georgia Institute of Technology,CS3511,Design and Analysis of Algorithms Honors,3,-1,-1,-1,CS3230,Design & Analysis of Algorithm,4,-1,-1,-1,-1
 School of Computing,Georgia Institute of Technology,CS6365,Introduction to Enterprise Computing,3,-1,-1,-1,IS2102,Enterprise Systems Architectur,4,-1,-1,-1,-1
 School of Computing,Georgia Institute of Technology,MGT3103,Leadership in Changing Business Environments,3,-1,-1,-1,IS3103,Information Systems Leadership,4,-1,-1,-1,-1
 School of Computing,Georgia Institute of Technology,CS7638,Artificial Intelligence for Robotics,3,-1,-1,-1,CS4278,Intelligent Robots: Algorithms,4,-1,-1,-1,-1
@@ -522,7 +522,7 @@ School of Computing,Hong Kong University of Science & Technology,COMP3311,Databa
 School of Computing,Hong Kong University of Science & Technology,DSAA5012,Advanced Database Management for Data Science,3,-1,-1,-1,CS3223,Database Systems Implementatio,4,-1,-1,-1,-1
 School of Computing,Hong Kong University of Science & Technology,COMP3311,Database Management Systems,3,-1,-1,-1,IT2002,Database Technology & Mgt,4,-1,-1,-1,-1
 School of Computing,Hong Kong University of Science & Technology,COMP4911,IT Entrepreneurship,3,-1,-1,-1,CS4880,Digital Entrepreneurship,4,-1,-1,-1,-1
-School of Computing,Hong Kong University of Science & Technology,ISOM2310,"Fundamentals of E-Commerce: Business, Technology, and the Society",3,-1,-1,-1,IS3240,Digital Platform Strategy and,4,-1,-1,-1,-1
+School of Computing,Hong Kong University of Science & Technology,ISOM2310,Fundamentals of E-Commerce: Business Technology and the Society,3,-1,-1,-1,IS3240,Digital Platform Strategy and,4,-1,-1,-1,-1
 School of Computing,Hong Kong University of Science & Technology,ISOM4740,Enterprise Resource Management,3,-1,-1,-1,IS3221,ERP Systems with Analytics Sol,4,-1,-1,-1,-1
 School of Computing,Hong Kong University of Science & Technology,ISOM4840,Financial Service Operations Management,3,-1,-1,-1,IS4228,Information Technologies in Fi,4,-1,-1,-1,-1
 School of Computing,Hong Kong University of Science & Technology,ISOM3350,FinTech and Cryptoventures,3,-1,-1,-1,IS4228,Information Technologies in Fi,4,-1,-1,-1,-1
@@ -549,7 +549,7 @@ School of Computing,Imperial College London,COMP60006,Computer Vision,5,-1,-1,-1
 School of Computing,Imperial College London,COMP50001,Algorithm Design and Analysis,5,-1,-1,-1,CS3230,Design & Analysis of Algorithm,4,-1,-1,-1,-1
 School of Computing,Imperial College London,COMP50009,Introduction to Model-Based Artificial Intelligence,5,-1,-1,-1,CS3243,Introduction to Artificial Int,4,-1,-1,-1,-1
 School of Computing,Imperial College London,COMP70050,Introduction to Machine Learning,5,-1,-1,-1,CS3244,Machine Learning,4,-1,-1,-1,-1
-School of Computing,"Indiana University, Bloomington",S400,Integration of systems and business,3,-1,-1,-1,IS3221,ERP Systems with Analytics Sol,4,-1,-1,-1,N
+School of Computing,Indiana University Bloomington,S400,Integration of systems and business,3,-1,-1,-1,IS3221,ERP Systems with Analytics Sol,4,-1,-1,-1,N
 School of Computing,Inst Tech y de Estudios Superiores de Monterrey,TC2017,Analysis and Design of Algorithms,8,-1,-1,-1,CS3230,Design & Analysis of Algorithm,4,-1,-1,-1,-1
 School of Computing,Inst Tech y de Estudios Superiores de Monterrey,TC2018,Introduction to Networks,8,-1,-1,-1,CS2105,Intro to Computer Networks,4,-1,-1,-1,-1
 School of Computing,Johns Hopkins University,EN.553.171,Discrete Mathematics,4,-1,-1,-1,CS1231,Discrete Structures,3,-1,-1,-1,Y
@@ -591,7 +591,7 @@ School of Computing,King's College London,7CCSMASE,Software Measurement and Test
 School of Computing,King's College London,6CCS3SIA,Software Engineering of Internet Applications,15,-1,-1,-1,CS3226,Web Programming and Applicatio,4,-1,-1,-1,-1
 School of Computing,Korea Advanced Inst of Sci & Tech,IE566,Human-Computer Interaction : Theory and Design,3,-1,-1,-1,CS3240,Interaction Design,4,-1,-1,-1,N
 School of Computing,Korea Advanced Inst of Sci & Tech,CS376,Machine Learning,3,-1,-1,-1,CS3244,Machine Learning,4,-1,-1,-1,N
-School of Computing,Korea Advanced Inst of Sci & Tech,CS442,"Mobile Computing, Networking & Applications",3,-1,-1,-1,IS4151,Pervasive Technology Solutions,4,-1,-1,-1,N
+School of Computing,Korea Advanced Inst of Sci & Tech,CS442,Mobile Computing Networking & Applications,3,-1,-1,-1,IS4151,Pervasive Technology Solutions,4,-1,-1,-1,N
 School of Computing,Korea Advanced Inst of Sci & Tech,COE207,Introduction to Entrepreneurship and Startup companies,3,-1,-1,-1,IS3251,Principles of Technology Entre,4,-1,-1,-1,N
 School of Computing,Korea Advanced Inst of Sci & Tech,CS473,Introduction to Social Computing,3,-1,-1,-1,IS4241,Social Media Network Analysis,4,-1,-1,-1,N
 School of Computing,Korea Advanced Inst of Sci & Tech,CS350,Introduction to software engineering,3,-1,-1,-1,CS2103,Software Engineering,4,-1,-1,-1,N
@@ -658,7 +658,7 @@ School of Computing,KTH Royal Institute of Technology,DH2642,Interaction Program
 School of Computing,KTH Royal Institute of Technology,EP2120,Internetworking,7.5,-1,-1,-1,CS2105,Intro to Computer Networks,4,-1,-1,-1,N
 School of Computing,KTH Royal Institute of Technology,ID2225,Learning Machines,7.5,-1,-1,-1,BT4240,Machine Learning for Predictiv,4,-1,-1,-1,N
 School of Computing,KTH Royal Institute of Technology,DD2421,Machine Learning,7.5,-1,-1,-1,BT4240,Machine Learning for Predictiv,4,-1,-1,-1,N
-School of Computing,KTH Royal Institute of Technology,DD2434,"Machine Learning, Advanced Course",7.5,-1,-1,-1,BT4240,Machine Learning for Predictiv,4,-1,-1,-1,N
+School of Computing,KTH Royal Institute of Technology,DD2434,Machine Learning Advanced Course,7.5,-1,-1,-1,BT4240,Machine Learning for Predictiv,4,-1,-1,-1,N
 School of Computing,KTH Royal Institute of Technology,DD2443,Parallel and Distributed Computing,7.5,-1,-1,-1,CS4231,Parallel & Distr Algorithms,4,-1,-1,-1,N
 School of Computing,KTH Royal Institute of Technology,MJ2496,Innovation and Entrepreneurship in Sustainable Energy Technology,7.5,-1,-1,-1,IS3251,Principles of Technology Entre,4,-1,-1,-1,N
 School of Computing,KTH Royal Institute of Technology,DD1332,Object Oriented Programming,7.5,-1,-1,-1,CS2030,Programming Methodology II,4,-1,-1,-1,N
@@ -690,7 +690,7 @@ School of Computing,KTH Royal Institute of Technology,ID2206,Operating Systems,7
 School of Computing,KTH Royal Institute of Technology,IS1350,Operating Systems,7.5,-1,-1,-1,CS2106,Intro to Operating Systems,4,-1,-1,-1,-1
 School of Computing,KTH Royal Institute of Technology,DD2395,Computer Security,6,-1,-1,-1,CS2107,Introduction to Information Se,4,-1,-1,-1,-1
 School of Computing,KTH Royal Institute of Technology,DD3295,Computer Security,7.5,-1,-1,-1,CS2107,Introduction to Information Se,4,-1,-1,-1,-1
-School of Computing,KTH Royal Institute of Technology,EQ2840,"Information Theory and Channel Coding, Accelerated Program",7.5,-1,-1,-1,CS3236,Introduction to Information Th,4,-1,-1,-1,-1
+School of Computing,KTH Royal Institute of Technology,EQ2840,Information Theory and Channel Coding Accelerated Program,7.5,-1,-1,-1,CS3236,Introduction to Information Th,4,-1,-1,-1,-1
 School of Computing,KTH Royal Institute of Technology,EQ2845,Information Theory and Source Coding,7.5,-1,-1,-1,CS3236,Introduction to Information Th,4,-1,-1,-1,-1
 School of Computing,KTH Royal Institute of Technology,ME2015,Project Management: Leadership and Control,7.5,-1,-1,-1,IS4100,IT Project Management,4,-1,-1,-1,-1
 School of Computing,KTH Royal Institute of Technology,DD1420,Foundations of Machine Learning,7.5,-1,-1,-1,CS3244,Machine Learning,4,-1,-1,-1,-1
@@ -719,7 +719,7 @@ School of Computing,London School of Economics & Political Science,ME318,Theoret
 School of Computing,Ludwig-Maximilians-University of Munich,17025,Programmiertechniken,6,-1,-1,-1,CS1010S,Programming Methodology,4,-1,-1,-1,N
 School of Computing,Lund University,FMAN85,Computer Vision,6,-1,-1,-1,CS4243,Comp Vision & Pattern Recogntn,4,-1,-1,-1,N
 School of Computing,Lund University,FMSN50,Monte Carlo and Empirical Methods for Stochastic Inference,7.5,-1,-1,-1,BT3102,Computational Methods for Busi,4,-1,-1,-1,N
-School of Computing,Lund University,EDAF05,"Algorithms, Data Structures and Complexity",5,-1,-1,-1,CS3230,Design & Analysis of Algorithm,4,-1,-1,-1,N
+School of Computing,Lund University,EDAF05,Algorithms Data Structures and Complexity,5,-1,-1,-1,CS3230,Design & Analysis of Algorithm,4,-1,-1,-1,N
 School of Computing,Lund University,EXTN75,Spatial Analysis,7.5,-1,-1,-1,BT4015,Geospatial Analytics,4,-1,-1,-1,N
 School of Computing,Lund University,EDAF70,Applied Artificial Intelligence,7.5,-1,-1,-1,CS3243,Introduction to Artificial Int,4,-1,-1,-1,N
 School of Computing,Lund University,FMAA25,Discrete Mathematics,7.5,-1,-1,-1,CS1231,Discrete Structures,4,-1,-1,-1,Y
@@ -974,7 +974,7 @@ School of Computing,Norwegian University of Science & Technology,TDT4200,Paralle
 School of Computing,Norwegian University of Science & Technology,TDT4165,Programming Languages,7.5,-1,-1,-1,CS2104,Programming Language Concepts,4,-1,-1,-1,-1
 School of Computing,Norwegian University of Science & Technology,TDT4250,Advanced Software Design,7.5,-1,-1,-1,CS3219,Software Engineering Principle,4,-1,-1,-1,-1
 School of Computing,Norwegian University of Science & Technology,TDT4242,Advanced Software Engineering,7.5,-1,-1,-1,CS3219,Software Engineering Principle,4,-1,-1,-1,-1
-School of Computing,Osaka University,082354 08ELIE3H7,"Machine Learning, and Data Processing with Exercises",2,-1,-1,-1,CS3244,Machine Learning,4,-1,-1,-1,-1
+School of Computing,Osaka University,082354 08ELIE3H7,Machine Learning and Data Processing with Exercises,2,-1,-1,-1,CS3244,Machine Learning,4,-1,-1,-1,-1
 School of Computing,Peking University,F00022,The Social Implications of Computing,3,-1,-1,-1,IS1103,Ethics in Computing,4,-1,-1,-1,N
 School of Computing,Peking University,4831210,Information Theory,3,-1,-1,-1,CS3236,Introduction to Information Th,4,-1,-1,-1,N
 School of Computing,Peking University,SECS04833520,Big Data Management Technology,3,-1,-1,-1,BT4221,Big Data Techniques & Technolo,4,-1,-1,-1,-1
@@ -1050,13 +1050,13 @@ School of Computing,Queen's University at Kingston,CISC124,Introduction to Compu
 School of Computing,Reichman University,IS10342,Technology and Law (Lecture),2,-1,-1,-1,IS1103,Ethics in Computing,4,-1,-1,-1,N
 School of Computing,Reichman University,3.15E+12,Virtual Reality Development(Elective),3,-1,-1,-1,CS4240,Interaction Design for Virtual,4,-1,-1,-1,N
 School of Computing,Reichman University,CS3141,Machine Learning from Data (Lecture),4,-1,-1,-1,CS3244,Machine Learning,4,-1,-1,-1,N
-School of Computing,Reichman University,201361501,"Blockchain, Consensus and Cryptography",3,-1,-1,-1,IS4302,Blockchain and Distributed Led,4,-1,-1,-1,-1
+School of Computing,Reichman University,201361501,Blockchain Consensus and Cryptography,3,-1,-1,-1,IS4302,Blockchain and Distributed Led,4,-1,-1,-1,-1
 School of Computing,Reichman University,202360001,Deep Learning (Elective),3,-1,-1,-1,CS5242,Neural Networks &Deep Learning,4,-1,-1,-1,-1
 School of Computing,Renmin University of China,SE1922,Marketing Data Analysis,3,-1,-1,-1,BT4211,Data-Driven Marketing,4,-1,-1,-1,N
 School of Computing,Renmin University of China,SE1906,Financial Risk Analysis,3,-1,-1,-1,BT4016,Risk Analytics for Financial S,4,-1,-1,-1,N
 School of Computing,Renmin University of China,SS1927,Social Media Analysis and Application,3,-1,-1,-1,IS4241,Social Media Network Analysis,4,-1,-1,-1,N
 School of Computing,Renmin University of China,SS1914,Social Network Analysis,3,-1,-1,-1,IS4241,Social Media Network Analysis,4,-1,-1,-1,N
-School of Computing,"Richard Ivey Sch of Biz, Univ of Western Ontario",BUSINESS4600,Data Management for Decision Making,0.5,-1,-1,-1,IT3010,Data Management for Business,4,-1,-1,-1,-1
+School of Computing,Richard Ivey Sch of Biz Univ of Western Ontario,BUSINESS4600,Data Management for Decision Making,0.5,-1,-1,-1,IT3010,Data Management for Business,4,-1,-1,-1,-1
 School of Computing,RWTH Aachen University,1215692,Implementation of Databases,6,-1,-1,-1,CS2102,Database Systems,4,-1,-1,-1,-1
 School of Computing,RWTH Aachen University,1211900,IT-Security 2 - Computer Security,6,-1,-1,-1,CS2107,Introduction to Information Se,4,-1,-1,-1,-1
 School of Computing,Seoul National University,M1522.001000,Computer Vision,3,-1,-1,-1,CS4243,Comp Vision & Pattern Recogntn,4,-1,-1,-1,N
@@ -1266,7 +1266,7 @@ School of Computing,Technical University of Munich,IN2297,Geometric Modelling an
 School of Computing,Technical University of Munich,IN0012,Cloud Systems Engineering,10,-1,-1,-1,CS5224,Cloud Computing,4,-1,-1,-1,-1
 School of Computing,Technical University of Munich,IN2128,Praktikum: Cloud Systems,10,-1,-1,-1,CS5224,Cloud Computing,4,-1,-1,-1,-1
 School of Computing,Technical University of Munich,IN2057,3D Computer Vision,5,-1,-1,-1,CS4243,Comp Vision & Pattern Recogntn,4,-1,-1,-1,-1
-School of Computing,Technical University of Munich,IN2375,"Computer Vision III: Detection, Segmentation and Tracking",6,-1,-1,-1,CS4243,Comp Vision & Pattern Recogntn,4,-1,-1,-1,-1
+School of Computing,Technical University of Munich,IN2375,Computer Vision III: Detection Segmentation and Tracking,6,-1,-1,-1,CS4243,Comp Vision & Pattern Recogntn,4,-1,-1,-1,-1
 School of Computing,Technical University of Munich,IN2210,Tracking and Detection in Computer Vision,7,-1,-1,-1,CS4243,Comp Vision & Pattern Recogntn,4,-1,-1,-1,-1
 School of Computing,Technical University of Munich,IN2228,Computer Vision II: Multiple View Geometry,8,-1,-1,-1,CS4243,Comp Vision & Pattern Recogntn,4,-1,-1,-1,-1
 School of Computing,Technical University of Munich,IN4205,Practical Course - Algorithms for Programming Contests,10,-1,-1,-1,CS3233,Competitive Programming,4,-1,-1,-1,-1
@@ -1277,7 +1277,7 @@ School of Computing,Technical University of Munich,IN2117,Application and Implem
 School of Computing,Technical University of Munich,IN2003,Efficient Algorithm and Data Structures,8,-1,-1,-1,CS3230,Design & Analysis of Algorithm,4,-1,-1,-1,-1
 School of Computing,Technical University of Munich,IN2087,Software Engineering for Business Applications,5,-1,-1,-1,IS3106,Enterprise Systems Interface D,4,-1,-1,-1,-1
 School of Computing,Technical University of Munich,IN4102,Advanced Practical Course - GPU Programming in Computer Vision,6,-1,-1,-1,CS4345,General-Purpose Computation on,4,-1,-1,-1,-1
-School of Computing,Technical University of Munich,IN2380,"Internet Operations: Protocols, Applications, and Users",5,-1,-1,-1,CS2105,Intro to Computer Networks,4,-1,-1,-1,-1
+School of Computing,Technical University of Munich,IN2380,Internet Operations: Protocols Applications and Users,5,-1,-1,-1,CS2105,Intro to Computer Networks,4,-1,-1,-1,-1
 School of Computing,Technical University of Munich,IN0010,Introduction to Computer Networking and Distributed Systems,6,-1,-1,-1,CS2105,Intro to Computer Networks,4,-1,-1,-1,-1
 School of Computing,Technical University of Munich,INHN0007,Operating Systems and System Software,6,-1,-1,-1,CS2106,Intro to Operating Systems,4,-1,-1,-1,-1
 School of Computing,Technical University of Munich,IN2062,Techniques in Artificial Intelligence,5,-1,-1,-1,CS3243,Introduction to Artificial Int,4,-1,-1,-1,-1
@@ -1289,7 +1289,7 @@ School of Computing,Technical University of Munich,EI70380,Signal Processing and
 School of Computing,Technical University of Munich,IN2064,Machine Learning,8,-1,-1,-1,CS3244,Machine Learning,4,-1,-1,-1,-1
 School of Computing,Technical University of Munich,IN2332,Statistical Modeling and Machine Learning,8,-1,-1,-1,CS3244,Machine Learning,4,-1,-1,-1,-1
 School of Computing,Technical University of Munich,IN2098,Mobile Distributed Systems,5,-1,-1,-1,IS3261,Mobile Apps Development for En,4,-1,-1,-1,-1
-School of Computing,Technical University of Munich,IN0012,"Practical Course - iOS Praktikum (IN0012, IN2106, IN2175, IN2128)",10,-1,-1,-1,IS3261,Mobile Apps Development for En,4,-1,-1,-1,-1
+School of Computing,Technical University of Munich,IN0012,Practical Course - iOS Praktikum (IN0012 IN2106 IN2175 IN2128),10,-1,-1,-1,IS3261,Mobile Apps Development for En,4,-1,-1,-1,-1
 School of Computing,Technical University of Munich,IN2076,Advanced Computer Architecture,6,-1,-1,-1,CS4223,Multi-core Architectures,4,-1,-1,-1,-1
 School of Computing,Technical University of Munich,IN2107,Natural Language Processing - Methods and Applications,5,-1,-1,-1,CS4248,Natural Language Processing,4,-1,-1,-1,-1
 School of Computing,Technical University of Munich,IN2004,Efficient Algorithms and Data Structures II,8,-1,-1,-1,CS4234,Optimisation Algorithms,4,-1,-1,-1,-1
@@ -1299,7 +1299,7 @@ School of Computing,Technical University of Munich,IN2040,Virtual Machines,6,-1,
 School of Computing,Technical University of Munich,IN0006,Introduction to Software Engineering,6,-1,-1,-1,CS2103,Software Engineering,4,-1,-1,-1,-1
 School of Computing,Technical University of Munich,IN2309,Advanced Topics of Software Engineering,8,-1,-1,-1,CS3219,Software Engineering Principle,4,-1,-1,-1,-1
 School of Computing,Technical University of Munich,IN2084,Software testing: Processes and Methods,4,-1,-1,-1,CS4218,Software Testing,4,-1,-1,-1,-1
-School of Computing,Technical University of Munich,IN0012,"Practical Course - iPraktikum, iOS Praktikum",10,-1,-1,-1,CS3217,SW Engg on Modern Appln Platfm,4,-1,-1,-1,-1
+School of Computing,Technical University of Munich,IN0012,Practical Course - iPraktikum iOS Praktikum,10,-1,-1,-1,CS3217,SW Engg on Modern Appln Platfm,4,-1,-1,-1,-1
 School of Computing,Technical University of Munich,IN2378,Statistical Foundations of Learning,5,-1,-1,-1,CS5339,Theory and Algorithms for Mach,4,-1,-1,-1,-1
 School of Computing,Technical University of Munich,IN2112,2D graphical User Interfaces for Desktop-based and Mobile Computer Applications,6,-1,-1,-1,CS3249,User Interface Development,4,-1,-1,-1,-1
 School of Computing,Technical University of Munich,IN2111,3D User Interfaces,6,-1,-1,-1,CS3249,User Interface Development,4,-1,-1,-1,-1
@@ -1349,8 +1349,8 @@ School of Computing,The Chinese University of Hong Kong,MGNT4090B,Technology and
 School of Computing,The Chinese University of Hong Kong,MKTG4080,Digital Marketing,3,-1,-1,-1,IS3150,Digital Media Marketing,4,-1,-1,-1,-1
 School of Computing,The Chinese University of Hong Kong,DSME4240,Supply Chain and Logistics,3,-1,-1,-1,IS3221,ERP Systems with Analytics Sol,4,-1,-1,-1,-1
 School of Computing,The Chinese University of Hong Kong,DSME4280,Networks and Security,3,-1,-1,-1,IS4231,Information Security Mgmt,4,-1,-1,-1,-1
-School of Computing,The Chinese University of Hong Kong,SEEM3680,"Technology, Consulting and Analytics in Practice",3,-1,-1,-1,IS4243,Information Systems Consulting,4,-1,-1,-1,-1
-School of Computing,The Chinese University of Hong Kong,SEEM4680,"Technology, Consulting and Analytics in Practice",3,-1,-1,-1,IS4243,Information Systems Consulting,4,-1,-1,-1,-1
+School of Computing,The Chinese University of Hong Kong,SEEM3680,Technology Consulting and Analytics in Practice,3,-1,-1,-1,IS4243,Information Systems Consulting,4,-1,-1,-1,-1
+School of Computing,The Chinese University of Hong Kong,SEEM4680,Technology Consulting and Analytics in Practice,3,-1,-1,-1,IS4243,Information Systems Consulting,4,-1,-1,-1,-1
 School of Computing,The Chinese University of Hong Kong,SEEM3490,Information Systems Management,3,-1,-1,-1,IS3103,Information Systems Leadership,4,-1,-1,-1,-1
 School of Computing,The Chinese University of Hong Kong,FETC5580,Data Analytics for Financial Technology,3,-1,-1,-1,IS4242,Intelligent Systems and Techni,4,-1,-1,-1,-1
 School of Computing,The Chinese University of Hong Kong,IERG3310,Computer networks,3,-1,-1,-1,CS2105,Intro to Computer Networks,4,-1,-1,-1,-1
@@ -1401,10 +1401,10 @@ School of Computing,The George Washington University,CSCI4223,Principles of Prog
 School of Computing,The Hong Kong Polytechnic University,AMA358,Applied probability models for investment,3,-1,-1,-1,BT4013,Analytics for Capital Market T,4,-1,-1,-1,N
 School of Computing,The Hong Kong Polytechnic University,COMP3011,Design and Analysis of Algorithms,3,-1,-1,-1,CS3230,Design & Analysis of Algorithm,4,-1,-1,-1,N
 School of Computing,The Hong Kong Polytechnic University,MM3841,Internet Marketing,3,-1,-1,-1,IS3240,Digital Platform Strategy and,4,-1,-1,-1,N
-School of Computing,The Hong Kong Polytechnic University,COMP3921,"FinTech Seminars and Case Studies (I, II and III)",3,-1,-1,-1,IS4228,Information Technologies in Fi,4,-1,-1,-1,N
+School of Computing,The Hong Kong Polytechnic University,COMP3921,FinTech Seminars and Case Studies (I II and III),3,-1,-1,-1,IS4228,Information Technologies in Fi,4,-1,-1,-1,N
 School of Computing,The Hong Kong Polytechnic University,COMP4133,Information Retrieval,3,-1,-1,-1,BT4222,Mining Web Data for Business I,4,-1,-1,-1,N
-School of Computing,The Hong Kong Polytechnic University,COMP3512,"Legal Aspects, Professionalism and Ethics of Computing",3,-1,-1,-1,IS1103,Ethics in Computing,4,-1,-1,-1,Y
-School of Computing,The Hong Kong Polytechnic University,HTM4350,"Big Data Analytics in Hospitality, Tourism and Events",3,-1,-1,-1,BT4221,Big Data Techniques & Technolo,4,-1,-1,-1,-1
+School of Computing,The Hong Kong Polytechnic University,COMP3512,Legal Aspects Professionalism and Ethics of Computing,3,-1,-1,-1,IS1103,Ethics in Computing,4,-1,-1,-1,Y
+School of Computing,The Hong Kong Polytechnic University,HTM4350,Big Data Analytics in Hospitality Tourism and Events,3,-1,-1,-1,BT4221,Big Data Techniques & Technolo,4,-1,-1,-1,-1
 School of Computing,The Hong Kong Polytechnic University,COMP4134,Biometrics And Security,3,-1,-1,-1,CS5332,Biometric Authentication,4,-1,-1,-1,-1
 School of Computing,The Hong Kong Polytechnic University,COMP4142,E-Payment and Cryptocurrency,3,-1,-1,-1,IS4302,Blockchain and Distributed Led,4,-1,-1,-1,-1
 School of Computing,The Hong Kong Polytechnic University,COMP4123,Business Process and Workflow Management,3,-1,-1,-1,BT4301,Business Analytics Solutions D,4,-1,-1,-1,-1
@@ -1417,7 +1417,7 @@ School of Computing,The Hong Kong Polytechnic University,COMP3241,Web Applicatio
 School of Computing,The Hong Kong Polytechnic University,MM4772,Product Management,3,-1,-1,-1,IS4262,Digital Product Management,4,-1,-1,-1,-1
 School of Computing,The Hong Kong Polytechnic University,COMP4133,Information Retrieval,3,-1,-1,-1,CS3245,Information Retrieval,4,-1,-1,-1,-1
 School of Computing,The Hong Kong Polytechnic University,COMP4433,Data Mining and Data Warehousing,3,-1,-1,-1,IS4242,Intelligent Systems and Techni,4,-1,-1,-1,-1
-School of Computing,The Hong Kong Polytechnic University,COMP4322,"Internetworking Protocols, Software and Management",3,-1,-1,-1,CS4226,Internet Architecture,4,-1,-1,-1,-1
+School of Computing,The Hong Kong Polytechnic University,COMP4322,Internetworking Protocols Software and Management,3,-1,-1,-1,CS4226,Internet Architecture,4,-1,-1,-1,-1
 School of Computing,The Hong Kong Polytechnic University,COMP3422,Creative Digital Media Design,3,-1,-1,-1,CS2108,Introduction to Media Computin,4,-1,-1,-1,-1
 School of Computing,The Hong Kong Polytechnic University,COMP4433,Data Mining and Data Warehousing,3,-1,-1,-1,CS5228,Knowledge Discovery and Data M,4,-1,-1,-1,-1
 School of Computing,The Hong Kong Polytechnic University,COMP3021,Programming Language Paradigms,3,-1,-1,-1,CS4215,Programming Language Implement,4,-1,-1,-1,-1
@@ -1500,7 +1500,7 @@ School of Computing,The University of Edinburgh,INFR11125,Accelerated Natural La
 School of Computing,The University of Edinburgh,BUST08015,Innovation and Entrepreneurship,10,-1,-1,-1,IS3251,Principles of Technology Entre,4,-1,-1,-1,N
 School of Computing,The University of Edinburgh,INFR11089,Randomness and Computation,10,-1,-1,-1,CS5330,Randomized Algorithms,4,-1,-1,-1,N
 School of Computing,The University of Edinburgh,INFR11124,Social and Technological Networks,10,-1,-1,-1,IS4241,Social Media Network Analysis,4,-1,-1,-1,N
-School of Computing,The University of Edinburgh,INFR11038,"Software Architecture, Process, and Management",10,-1,-1,-1,CS3219,Software Engineering Principle,4,-1,-1,-1,N
+School of Computing,The University of Edinburgh,INFR11038,Software Architecture Process and Management,10,-1,-1,-1,CS3219,Software Engineering Principle,4,-1,-1,-1,N
 School of Computing,The University of Edinburgh,INFR10057,Software Testing,10,-1,-1,-1,CS4218,Software Testing,4,-1,-1,-1,N
 School of Computing,The University of Edinburgh,INFR08023,Discrete Mathematics and Mathematical Reasoning,20,-1,-1,-1,CS1231,Discrete Structures,4,-1,-1,-1,Y
 School of Computing,The University of Edinburgh,INFR11140,Image and Vision Computing,10,-1,-1,-1,CS4243,Comp Vision & Pattern Recogntn,4,-1,-1,-1,-1
@@ -1554,11 +1554,11 @@ School of Computing,The University of Hong Kong,COMP3358,Distributed and Paralle
 School of Computing,The University of Hong Kong,COMP2396,object-oriented Programming and Java,6,-1,-1,-1,CS2030,Programming Methodology II,4,-1,-1,-1,-1
 School of Computing,The University of Hong Kong,MKTG3529,Social Media Marketing,6,-1,-1,-1,IS4241,Social Media Network Analysis,4,-1,-1,-1,-1
 School of Computing,The University of Manchester,COMP33312,Agile Software Pipelines,10,-1,-1,-1,IS4301,Agile IT with DevOps,4,-1,-1,-1,-1
-School of Computing,The University of Manchester,BMAN24582,"FinTech, Blockchain and Cryptocurrencies",20,-1,-1,-1,IS4302,Blockchain and Distributed Led,4,-1,-1,-1,-1
+School of Computing,The University of Manchester,BMAN24582,FinTech Blockchain and Cryptocurrencies,20,-1,-1,-1,IS4302,Blockchain and Distributed Led,4,-1,-1,-1,-1
 School of Computing,The University of Manchester,BMAN32141,Business IT Architecture,10,-1,-1,-1,IS3240,Digital Platform Strategy and,4,-1,-1,-1,-1
 School of Computing,The University of Manchester,BMAN32051,Case Studies in Digital Transformation,10,-1,-1,-1,IS3240,Digital Platform Strategy and,4,-1,-1,-1,-1
 School of Computing,The University of Manchester,BMAN20821,New Product Development and Innovation,10,-1,-1,-1,IS4262,Digital Product Management,4,-1,-1,-1,-1
-School of Computing,The University of Manchester,BMAN20792,"Technology, Strategy and Innovation",10,-1,-1,-1,IS4228,Information Technologies in Fi,4,-1,-1,-1,-1
+School of Computing,The University of Manchester,BMAN20792,Technology Strategy and Innovation,10,-1,-1,-1,IS4228,Information Technologies in Fi,4,-1,-1,-1,-1
 School of Computing,The University of Manchester,COMP24112,Machine Learning,10,-1,-1,-1,IS4242,Intelligent Systems and Techni,4,-1,-1,-1,-1
 School of Computing,The University of Manchester,MATH38161,Multivariate Statistics and Machine Learning,10,-1,-1,-1,IS4242,Intelligent Systems and Techni,4,-1,-1,-1,-1
 School of Computing,The University of Manchester,COMP33511,User Experience,10,-1,-1,-1,CS3240,Interaction Design,4,-1,-1,-1,-1
@@ -1694,7 +1694,7 @@ School of Computing,The University of Tokyo,CS 35616-2057,Programing for Paralle
 School of Computing,The University of Tokyo,0510105FSC-IS4105,Special Lectures in Information Science XI,3,-1,-1,-1,CS3210,Parallel Computing,4,-1,-1,-1,-1
 School of Computing,The University of Tokyo,0510062FSC-IS4062,Special Lectures in Information Science II,3,-1,-1,-1,CS4268,Quantum Computing,4,-1,-1,-1,-1
 School of Computing,The University of Tokyo,0510106FSC-IS4106,Special Lectures in Information Science XII,3,-1,-1,-1,CS5330,Randomized Algorithms,4,-1,-1,-1,-1
-School of Computing,The University of Western Australia,CITS3001,"Algorithms, Agents and Artificial Intelligence",6,-1,-1,-1,BT4014,Analytics Driven Design of Ada,4,-1,-1,-1,-1
+School of Computing,The University of Western Australia,CITS3001,Algorithms Agents and Artificial Intelligence,6,-1,-1,-1,BT4014,Analytics Driven Design of Ada,4,-1,-1,-1,-1
 School of Computing,The University of Western Australia,CITS4404,Artificial Intelligence and Adaptive Systems,6,-1,-1,-1,BT4014,Analytics Driven Design of Ada,4,-1,-1,-1,-1
 School of Computing,The University of Western Australia,CITS4009,Computational Data Analysis,6,-1,-1,-1,BT4014,Analytics Driven Design of Ada,4,-1,-1,-1,-1
 School of Computing,The University of Western Australia,FINA4491,Capital Markets Research,6,-1,-1,-1,BT4013,Analytics for Capital Market T,4,-1,-1,-1,-1
@@ -1708,7 +1708,7 @@ School of Computing,The University of Western Australia,MKTG3307,Digital Marketi
 School of Computing,The University of Western Australia,ENVT5566,Advanced Spatial and Environmental Modelling,6,-1,-1,-1,BT4015,Geospatial Analytics,4,-1,-1,-1,-1
 School of Computing,The University of Western Australia,ENVT4411,Geographic Information Systems Applications,6,-1,-1,-1,BT4015,Geospatial Analytics,4,-1,-1,-1,-1
 School of Computing,The University of Western Australia,STAT3063,Spatial Statistics and Modeling,6,-1,-1,-1,BT4015,Geospatial Analytics,4,-1,-1,-1,-1
-School of Computing,The University of Western Australia,CITS3001,"Algorithms, Agents and Artificial Intelligence",6,-1,-1,-1,CS3243,Introduction to Artificial Int,4,-1,-1,-1,-1
+School of Computing,The University of Western Australia,CITS3001,Algorithms Agents and Artificial Intelligence,6,-1,-1,-1,CS3243,Introduction to Artificial Int,4,-1,-1,-1,-1
 School of Computing,The University of Western Australia,CITS5506,The Internet of Things,6,-1,-1,-1,CS3237,Introduction to Internet of Th,4,-1,-1,-1,-1
 School of Computing,The University of Western Australia,STAT4064,Applied Predictive Modeling,6,-1,-1,-1,BT4240,Machine Learning for Predictiv,4,-1,-1,-1,-1
 School of Computing,The University of Western Australia,CITS3403,Agile Web Development,6,-1,-1,-1,IS3261,Mobile Apps Development for En,4,-1,-1,-1,-1
@@ -1771,36 +1771,36 @@ School of Computing,Tulane University,CMPS3660,Computer Vision,3,-1,-1,-1,CS4243
 School of Computing,Tulane University,CMPS3350,Intro to Computer Graphics,3,-1,-1,-1,CS3241,Computer Graphics,4,-1,-1,-1,-1
 School of Computing,Tulane University,CMPS4610,Algorithms,3,-1,-1,-1,CS3230,Design & Analysis of Algorithm,4,-1,-1,-1,-1
 School of Computing,Universitat Autonoma de Barcelona,215887,Computer Networks,6,-1,-1,-1,CS2105,Intro to Computer Networks,4,-1,-1,-1,N
-School of Computing,Universitat Autonoma de Barcelona,,"Leadership, Negotiation Techniques",6,-1,-1,-1,IS3103,Information Systems Leadership,4,-1,-1,-1,-1
+School of Computing,Universitat Autonoma de Barcelona,,Leadership Negotiation Techniques,6,-1,-1,-1,IS3103,Information Systems Leadership,4,-1,-1,-1,-1
 School of Computing,Universitat Autonoma de Barcelona,,Advanced Programming,6,-1,-1,-1,CS2030,Programming Methodology II,4,-1,-1,-1,-1
-School of Computing,"University College Cork, Ireland",CS4150,Principles of Compilation,5,-1,-1,-1,CS4212,Compiler Design,4,-1,-1,-1,N
-School of Computing,"University College Cork, Ireland",CS4614,Introductory Network Security,5,-1,-1,-1,CS4236,Cryptography Theory & Practice,4,-1,-1,-1,N
-School of Computing,"University College Cork, Ireland",MG3013,Marketing Communications,5,-1,-1,-1,IS3150,Digital Media Marketing,4,-1,-1,-1,N
-School of Computing,"University College Cork, Ireland",CS4611,Information Retrieval,5,-1,-1,-1,CS3245,Information Retrieval,4,-1,-1,-1,N
-School of Computing,"University College Cork, Ireland",IS4445,Principles of Interaction Design,5,-1,-1,-1,CS3240,Interaction Design,4,-1,-1,-1,N
-School of Computing,"University College Cork, Ireland",IS4408,Information Systems Strategy,5,-1,-1,-1,IS4204,IT Governance,4,-1,-1,-1,N
-School of Computing,"University College Cork, Ireland",MG4004,Project Management,5,-1,-1,-1,IS4100,IT Project Management,4,-1,-1,-1,N
-School of Computing,"University College Cork, Ireland",IS 4447,Principles of Mobile Systems Development,5,-1,-1,-1,IS3261,Mobile Apps Development for En,4,-1,-1,-1,N
-School of Computing,"University College Cork, Ireland",CS4616,Distributed Algorithms,5,-1,-1,-1,CS4231,Parallel & Distr Algorithms,4,-1,-1,-1,N
-School of Computing,"University College Cork, Ireland",CS4402,Parallel and Grid Computing,5,-1,-1,-1,CS3210,Parallel Computing,4,-1,-1,-1,N
-School of Computing,"University College Cork, Ireland",IS4441,Advanced Tools and Methods for IS Development,5,-1,-1,-1,IS4301,Agile IT with DevOps,4,-1,-1,-1,-1
-School of Computing,"University College Cork, Ireland",IS4416,Innovation and Information Technology Industry Trends,5,-1,-1,-1,IS4301,Agile IT with DevOps,4,-1,-1,-1,-1
-School of Computing,"University College Cork, Ireland",MF4052,Computational Finance,5,-1,-1,-1,BT4013,Analytics for Capital Market T,4,-1,-1,-1,-1
-School of Computing,"University College Cork, Ireland",MF3052,"Derivatives, Securities and Option Pricing",5,-1,-1,-1,BT4013,Analytics for Capital Market T,4,-1,-1,-1,-1
-School of Computing,"University College Cork, Ireland",IS4443,Principles of Web Design for Business,5,-1,-1,-1,BT3103,Application Systems Developmen,4,-1,-1,-1,-1
-School of Computing,"University College Cork, Ireland",IS4439,Web Application Development,5,-1,-1,-1,BT3103,Application Systems Developmen,4,-1,-1,-1,-1
-School of Computing,"University College Cork, Ireland",IS4444,Web Application Development,5,-1,-1,-1,BT3103,Application Systems Developmen,4,-1,-1,-1,-1
-School of Computing,"University College Cork, Ireland",CS1115,Web Development 1,5,-1,-1,-1,BT3103,Application Systems Developmen,4,-1,-1,-1,-1
-School of Computing,"University College Cork, Ireland",CS3204,Cloud Infrastructure and Services,5,-1,-1,-1,IS4236,Cloud Svcs and Infra Mgmt,4,-1,-1,-1,-1
-School of Computing,"University College Cork, Ireland",CS1111,Systems Organisation,5,-1,-1,-1,CS2100,Computer Organisation,4,-1,-1,-1,-1
-School of Computing,"University College Cork, Ireland",CSE414,Introduction to Database Systems,4,-1,-1,-1,IS3107,Data Engineering,4,-1,-1,-1,-1
-School of Computing,"University College Cork, Ireland",CS3509,Theory of Computation,5,-1,-1,-1,CS3230,Design & Analysis of Algorithm,4,-1,-1,-1,-1
-School of Computing,"University College Cork, Ireland",CS3031,Interaction Design,5,-1,-1,-1,CS3240,Interaction Design,4,-1,-1,-1,-1
-School of Computing,"University College Cork, Ireland",ST4060,Statistical Methods for Machine Learning I,5,-1,-1,-1,BT4240,Machine Learning for Predictiv,4,-1,-1,-1,-1
-School of Computing,"University College Cork, Ireland",IS4447,Principles of Mobile Systems Development,5,-1,-1,-1,IS3261,Mobile Apps Development for En,4,-1,-1,-1,-1
-School of Computing,"University College Cork, Ireland",MF2053,Financial Modelling for Actuarial Science 1,5,-1,-1,-1,BT4016,Risk Analytics for Financial S,4,-1,-1,-1,-1
-School of Computing,"University College Cork, Ireland",AM4065,Network Science: Theory and Applications,5,-1,-1,-1,IS4241,Social Media Network Analysis,4,-1,-1,-1,-1
-School of Computing,"University College Cork, Ireland",CS1106,Introduction to Relational Databases,5,-1,-1,-1,CS2102,Database Systems,4,-1,-1,-1,-1
+School of Computing,University College Cork Ireland,CS4150,Principles of Compilation,5,-1,-1,-1,CS4212,Compiler Design,4,-1,-1,-1,N
+School of Computing,University College Cork Ireland,CS4614,Introductory Network Security,5,-1,-1,-1,CS4236,Cryptography Theory & Practice,4,-1,-1,-1,N
+School of Computing,University College Cork Ireland,MG3013,Marketing Communications,5,-1,-1,-1,IS3150,Digital Media Marketing,4,-1,-1,-1,N
+School of Computing,University College Cork Ireland,CS4611,Information Retrieval,5,-1,-1,-1,CS3245,Information Retrieval,4,-1,-1,-1,N
+School of Computing,University College Cork Ireland,IS4445,Principles of Interaction Design,5,-1,-1,-1,CS3240,Interaction Design,4,-1,-1,-1,N
+School of Computing,University College Cork Ireland,IS4408,Information Systems Strategy,5,-1,-1,-1,IS4204,IT Governance,4,-1,-1,-1,N
+School of Computing,University College Cork Ireland,MG4004,Project Management,5,-1,-1,-1,IS4100,IT Project Management,4,-1,-1,-1,N
+School of Computing,University College Cork Ireland,IS 4447,Principles of Mobile Systems Development,5,-1,-1,-1,IS3261,Mobile Apps Development for En,4,-1,-1,-1,N
+School of Computing,University College Cork Ireland,CS4616,Distributed Algorithms,5,-1,-1,-1,CS4231,Parallel & Distr Algorithms,4,-1,-1,-1,N
+School of Computing,University College Cork Ireland,CS4402,Parallel and Grid Computing,5,-1,-1,-1,CS3210,Parallel Computing,4,-1,-1,-1,N
+School of Computing,University College Cork Ireland,IS4441,Advanced Tools and Methods for IS Development,5,-1,-1,-1,IS4301,Agile IT with DevOps,4,-1,-1,-1,-1
+School of Computing,University College Cork Ireland,IS4416,Innovation and Information Technology Industry Trends,5,-1,-1,-1,IS4301,Agile IT with DevOps,4,-1,-1,-1,-1
+School of Computing,University College Cork Ireland,MF4052,Computational Finance,5,-1,-1,-1,BT4013,Analytics for Capital Market T,4,-1,-1,-1,-1
+School of Computing,University College Cork Ireland,MF3052,Derivatives Securities and Option Pricing,5,-1,-1,-1,BT4013,Analytics for Capital Market T,4,-1,-1,-1,-1
+School of Computing,University College Cork Ireland,IS4443,Principles of Web Design for Business,5,-1,-1,-1,BT3103,Application Systems Developmen,4,-1,-1,-1,-1
+School of Computing,University College Cork Ireland,IS4439,Web Application Development,5,-1,-1,-1,BT3103,Application Systems Developmen,4,-1,-1,-1,-1
+School of Computing,University College Cork Ireland,IS4444,Web Application Development,5,-1,-1,-1,BT3103,Application Systems Developmen,4,-1,-1,-1,-1
+School of Computing,University College Cork Ireland,CS1115,Web Development 1,5,-1,-1,-1,BT3103,Application Systems Developmen,4,-1,-1,-1,-1
+School of Computing,University College Cork Ireland,CS3204,Cloud Infrastructure and Services,5,-1,-1,-1,IS4236,Cloud Svcs and Infra Mgmt,4,-1,-1,-1,-1
+School of Computing,University College Cork Ireland,CS1111,Systems Organisation,5,-1,-1,-1,CS2100,Computer Organisation,4,-1,-1,-1,-1
+School of Computing,University College Cork Ireland,CSE414,Introduction to Database Systems,4,-1,-1,-1,IS3107,Data Engineering,4,-1,-1,-1,-1
+School of Computing,University College Cork Ireland,CS3509,Theory of Computation,5,-1,-1,-1,CS3230,Design & Analysis of Algorithm,4,-1,-1,-1,-1
+School of Computing,University College Cork Ireland,CS3031,Interaction Design,5,-1,-1,-1,CS3240,Interaction Design,4,-1,-1,-1,-1
+School of Computing,University College Cork Ireland,ST4060,Statistical Methods for Machine Learning I,5,-1,-1,-1,BT4240,Machine Learning for Predictiv,4,-1,-1,-1,-1
+School of Computing,University College Cork Ireland,IS4447,Principles of Mobile Systems Development,5,-1,-1,-1,IS3261,Mobile Apps Development for En,4,-1,-1,-1,-1
+School of Computing,University College Cork Ireland,MF2053,Financial Modelling for Actuarial Science 1,5,-1,-1,-1,BT4016,Risk Analytics for Financial S,4,-1,-1,-1,-1
+School of Computing,University College Cork Ireland,AM4065,Network Science: Theory and Applications,5,-1,-1,-1,IS4241,Social Media Network Analysis,4,-1,-1,-1,-1
+School of Computing,University College Cork Ireland,CS1106,Introduction to Relational Databases,5,-1,-1,-1,CS2102,Database Systems,4,-1,-1,-1,-1
 School of Computing,University College Dublin,COMP3010J,Machine Learning,5,-1,-1,-1,CS3244,Machine Learning,4,-1,-1,-1,-1
 School of Computing,University College London,COMP3007,Computer Systems,0.5,-1,-1,-1,CS2100,Computer Organisation,4,-1,-1,-1,N
 School of Computing,University College London,COMP3012,Interaction Design,0.5,-1,-1,-1,CS3240,Interaction Design,4,-1,-1,-1,N
@@ -1810,10 +1810,10 @@ School of Computing,University College London,COMPM063,Introduction to Cryptogra
 School of Computing,University College London,COMP0004,Object-Oriented Programming,15,-1,-1,-1,CS2030,Programming Methodology II,4,-1,-1,-1,N
 School of Computing,University College London,COMP203P,Software Engineering,0.5,-1,-1,-1,CS2103,Software Engineering,4,-1,-1,-1,N
 School of Computing,University College London,COMP0015,INTRODUCTION TO PROGRAMMING,15,-1,-1,-1,CS1010S,Programming Methodology,4,-1,-1,-1,Y
-School of Computing,"University College London, University of London",COMP202PA,Logic and Database Theory,0.5,-1,-1,-1,CS3234,Logic for Proofs and Programs,4,-1,-1,-1,N
-School of Computing,"University College London, University of London",COMP211P,Introduction to Programming,0.5,-1,-1,-1,CS1010J,Programming Methodology,4,-1,-1,-1,Y
-School of Computing,"University College London, University of London",PHAS3459,Scientific Programming using Object Orientated Languages,0.5,-1,-1,-1,CS1010J,Programming Methodology,4,-1,-1,-1,Y
-School of Computing,"University College London, University of London",COMP0024,Artificial Intelligence and Neural Computing,0.5,-1,-1,-1,CS3243,Introduction to Artificial Int,4,-1,-1,-1,-1
+School of Computing,University College London University of London,COMP202PA,Logic and Database Theory,0.5,-1,-1,-1,CS3234,Logic for Proofs and Programs,4,-1,-1,-1,N
+School of Computing,University College London University of London,COMP211P,Introduction to Programming,0.5,-1,-1,-1,CS1010J,Programming Methodology,4,-1,-1,-1,Y
+School of Computing,University College London University of London,PHAS3459,Scientific Programming using Object Orientated Languages,0.5,-1,-1,-1,CS1010J,Programming Methodology,4,-1,-1,-1,Y
+School of Computing,University College London University of London,COMP0024,Artificial Intelligence and Neural Computing,0.5,-1,-1,-1,CS3243,Introduction to Artificial Int,4,-1,-1,-1,-1
 School of Computing,University of Alberta,CMPUT 174,Introduction to the Foundations of Computation I,3,-1,-1,-1,CS1010S,Programming Methodology,4,-1,-1,-1,Y
 School of Computing,University of Amsterdam,6314M0359Y,Quantitative Finance and Algorithmic Trading,5,-1,-1,-1,BT4013,Analytics for Capital Market T,4,-1,-1,-1,-1
 School of Computing,University of Amsterdam,6013B0356Y,Data Preprocessing,4,-1,-1,-1,BT4221,Big Data Techniques & Technolo,4,-1,-1,-1,-1
@@ -1844,13 +1844,13 @@ School of Computing,University of Birmingham,CE19504,Dig Systems & Embedded Comp
 School of Computing,University of Birmingham,CS06-27111,ICY Introduction to Human Computer Interaction,15,-1,-1,-1,CS3240,Interaction Design,4,-1,-1,-1,N
 School of Computing,University of Birmingham,06-26428,Machine Learning,10,-1,-1,-1,CS3244,Machine Learning,4,-1,-1,-1,N
 School of Computing,University of Birmingham,06-02495,Natural Language Processing 1,15,-1,-1,-1,CS4248,Natural Language Processing,4,-1,-1,-1,N
-School of Computing,University of Birmingham,CS30435,"Programming Language Principles, Design, and Implementation",20,-1,-1,-1,CS4215,Programming Language Implement,4,-1,-1,-1,N
+School of Computing,University of Birmingham,CS30435,Programming Language Principles Design and Implementation,20,-1,-1,-1,CS4215,Programming Language Implement,4,-1,-1,-1,N
 School of Computing,University of Birmingham,CS 06-32248,Programming in Python,15,-1,-1,-1,CS1010S,Programming Methodology,4,-1,-1,-1,Y
 School of Computing,University of Birmingham,06-34252,LC Full Stack Application Development,20,-1,-1,-1,BT3103,Application Systems Developmen,4,-1,-1,-1,-1
 School of Computing,University of Birmingham,06-32572,LH Computer Graphics,20,-1,-1,-1,CS3241,Computer Graphics,4,-1,-1,-1,-1
 School of Computing,University of Birmingham,06-30209,LH Advanced Networking,20,-1,-1,-1,CS3103,Computer Networks Practice,4,-1,-1,-1,-1
 School of Computing,University of Birmingham,06-30231,LH Security of Real-World Systems,20,-1,-1,-1,CS3235,Computer Security,4,-1,-1,-1,-1
-School of Computing,University of Birmingham,06-34239,"LM Research Skills, Evaluation Methods, and Statistics",20,-1,-1,-1,CS2309,CS Research Methodology,4,-1,-1,-1,-1
+School of Computing,University of Birmingham,06-34239,LM Research Skills Evaluation Methods and Statistics,20,-1,-1,-1,CS2309,CS Research Methodology,4,-1,-1,-1,-1
 School of Computing,University of Birmingham,06-32245,LM Storing and Managing Data,20,-1,-1,-1,IS3107,Data Engineering,4,-1,-1,-1,-1
 School of Computing,University of Birmingham,06-30175,LC Data Structure & Algorithms,20,-1,-1,-1,CS2040,Data Structures and Algorithms,4,-1,-1,-1,-1
 School of Computing,University of Birmingham,06-31294,LH Design and Analysis of Algorithms,10,-1,-1,-1,CS3230,Design & Analysis of Algorithm,4,-1,-1,-1,-1
@@ -1895,146 +1895,146 @@ School of Computing,University of Calgary,ENSF480,Principles of Software Design,
 School of Computing,University of Calgary,SENG471,Software Requirements Engineering,3,-1,-1,-1,CS3219,Software Engineering Principle,4,-1,-1,-1,-1
 School of Computing,University of Calgary,CPSC313,Introduction to Computability,3,-1,-1,-1,CS3231,Theory of Computation,4,-1,-1,-1,-1
 School of Computing,University of California,MATH61,Introduction to Discrete Structures,3,-1,-1,-1,CS1231,Discrete Structures,4,-1,-1,-1,Y
-School of Computing,"University of California, Davis",CSE158,Web Mining and Recommender Systems,3,-1,-1,-1,CS4225,Big Data Systems for Data Scie,4,-1,-1,-1,N
-School of Computing,"University of California, Davis",ECS174,Introduction to Computer Vision,3,-1,-1,-1,CS4243,Comp Vision & Pattern Recogntn,4,-1,-1,-1,N
-School of Computing,"University of California, Davis",ECS175,Computer Graphics,3,-1,-1,-1,CS3241,Computer Graphics,4,-1,-1,-1,N
-School of Computing,"University of California, Davis",ECS152B,Computer Networks,3,-1,-1,-1,CS3103,Computer Networks Practice,4,-1,-1,-1,N
-School of Computing,"University of California, Davis",ECS127,Cryptography,3,-1,-1,-1,CS4236,Cryptography Theory & Practice,4,-1,-1,-1,N
-School of Computing,"University of California, Davis",ECS122A,Algorithm Design and Analysis,3,-1,-1,-1,CS3230,Design & Analysis of Algorithm,4,-1,-1,-1,N
-School of Computing,"University of California, Davis",ECS122B,Algorithm Design and Analysis,3,-1,-1,-1,CS3230,Design & Analysis of Algorithm,4,-1,-1,-1,N
-School of Computing,"University of California, Davis",ECS170,Artificial Intelligence,3,-1,-1,-1,CS3243,Introduction to Artificial Int,4,-1,-1,-1,N
-School of Computing,"University of California, Davis",ECS 235A,COMPUTER AND INFORMATION SECURITY,3,-1,-1,-1,CS2107,Introduction to Information Se,4,-1,-1,-1,N
-School of Computing,"University of California, Davis",CSE153,Computer Security,3,-1,-1,-1,CS2107,Introduction to Information Se,4,-1,-1,-1,N
-School of Computing,"University of California, Davis",CSE151,Introduction to Artificial Intelligence: Statistical Approaches,3,-1,-1,-1,CS3244,Machine Learning,4,-1,-1,-1,N
-School of Computing,"University of California, Davis",ECS171,Machine Learning,3,-1,-1,-1,CS3244,Machine Learning,4,-1,-1,-1,N
-School of Computing,"University of California, Davis",STAT141B,Data & Web Technologies for Data Analysis,3,-1,-1,-1,BT4222,Mining Web Data for Business I,4,-1,-1,-1,N
-School of Computing,"University of California, Davis",ECS140A,Programming Languages,3,-1,-1,-1,CS2104,Programming Language Concepts,4,-1,-1,-1,N
-School of Computing,"University of California, Davis",ECS163,Information Interfaces,3,-1,-1,-1,CS3249,User Interface Development,4,-1,-1,-1,N
-School of Computing,"University of California, Davis",ECN122,Game Theory,3,-1,-1,-1,CS4261,Algorithmic Mechanism Design,4,-1,-1,-1,-1
-School of Computing,"University of California, Davis",ECON163,Economics of Investments,3,-1,-1,-1,BT4013,Analytics for Capital Market T,4,-1,-1,-1,-1
-School of Computing,"University of California, Davis",STA141C,Big Data & High Performance Statistical Computing,3,-1,-1,-1,CS4225,Big Data Systems for Data Scie,4,-1,-1,-1,-1
-School of Computing,"University of California, Davis",STAT141A,Statistical Data Science,3,-1,-1,-1,BT3102,Computational Methods for Busi,4,-1,-1,-1,-1
-School of Computing,"University of California, Davis",ECS235A,Computer & Information Security,4,-1,-1,-1,CS3235,Computer Security,4,-1,-1,-1,-1
-School of Computing,"University of California, Davis",CSE030,Data Structures,3,-1,-1,-1,CS2040,Data Structures and Algorithms,4,-1,-1,-1,-1
-School of Computing,"University of California, Davis",MGT120,Managing and Using Information Technology,3,-1,-1,-1,IS3103,Information Systems Leadership,4,-1,-1,-1,-1
-School of Computing,"University of California, Davis",MGT150,Technology Management,3,-1,-1,-1,IS3103,Information Systems Leadership,4,-1,-1,-1,-1
-School of Computing,"University of California, Davis",ECS152A,Computer Networks,3,-1,-1,-1,CS2105,Intro to Computer Networks,4,-1,-1,-1,-1
-School of Computing,"University of California, Davis",COGS118A,Intro to Machine Learning I,3,-1,-1,-1,CS3244,Machine Learning,4,-1,-1,-1,-1
-School of Computing,"University of California, Davis",ECS171,Machine Learning,3,-1,-1,-1,BT4240,Machine Learning for Predictiv,4,-1,-1,-1,-1
-School of Computing,"University of California, Davis",ECS172,Methods Data Net Sci,3,-1,-1,-1,BT4222,Mining Web Data for Business I,4,-1,-1,-1,-1
-School of Computing,"University of California, Davis",MGT151,Management of Innovation and Entrepreneurship,4,-1,-1,-1,IS3251,Principles of Technology Entre,4,-1,-1,-1,-1
-School of Computing,"University of California, Davis",ECS172,Recommender Systems,3,-1,-1,-1,BT4212,Search Engine Optimization & A,4,-1,-1,-1,-1
-School of Computing,"University of California, Davis",ECS160,Software Engineering,4,-1,-1,-1,CS2103,Software Engineering,4,-1,-1,-1,-1
-School of Computing,"University of California, Irvine",COMPSCI260,Fundamentals of the Design and Analysis of Algorithms,3,-1,-1,-1,CS3230,Design & Analysis of Algorithm,4,-1,-1,-1,N
-School of Computing,"University of California, Irvine",Mgmt178,Introduction to Management Information Systems,3,-1,-1,-1,IS3103,Information Systems Leadership,4,-1,-1,-1,N
-School of Computing,"University of California, Irvine",IN4MATX131,Human Computer Interaction,3,-1,-1,-1,CS3240,Interaction Design,4,-1,-1,-1,N
-School of Computing,"University of California, Irvine",COMPSCI134,Computer and Network Security,3,-1,-1,-1,CS2107,Introduction to Information Se,4,-1,-1,-1,N
-School of Computing,"University of California, Irvine",IN4MATX151,Project Management,3,-1,-1,-1,IS4100,IT Project Management,4,-1,-1,-1,N
-School of Computing,"University of California, Irvine",COMPSC178,Machine Learning and Data-Mining,3,-1,-1,-1,CS3244,Machine Learning,4,-1,-1,-1,N
-School of Computing,"University of California, Irvine",CSEB B 41,INTRO TO PROGRMMING,3,-1,-1,-1,CS1010,Programming Methodology,4,-1,-1,-1,N
-School of Computing,"University of California, Irvine",BANA227,Web and Social Analytics,3,-1,-1,-1,IS4241,Social Media Network Analysis,4,-1,-1,-1,N
-School of Computing,"University of California, Los Angeles",STA141C,Big Data & High Performance Statistical Computing,3,-1,-1,-1,BT4221,Big Data Techniques & Technolo,4,-1,-1,-1,N
-School of Computing,"University of California, Los Angeles",ECS050,Machine Dependent Prog,3,-1,-1,-1,CS2100,Computer Organisation,4,-1,-1,-1,N
-School of Computing,"University of California, Los Angeles",CSE127,Introduction to Computer Security,3,-1,-1,-1,CS3235,Computer Security,4,-1,-1,-1,N
-School of Computing,"University of California, Los Angeles",CS180,Introduction to Algorithms and Complexity,3,-1,-1,-1,CS2040,Data Structures and Algorithms,4,-1,-1,-1,N
-School of Computing,"University of California, Los Angeles",CS141,Intermediate Data Structures and Algorithms,3,-1,-1,-1,CS3230,Design & Analysis of Algorithm,4,-1,-1,-1,N
-School of Computing,"University of California, Los Angeles",ECS020,Discrete Mathematics For Computer Science,3,-1,-1,-1,CS1231,Discrete Structures,4,-1,-1,-1,N
-School of Computing,"University of California, Los Angeles",ECS050,Ethics in an Age of Tech,3,-1,-1,-1,IS1103,Ethics in Computing,4,-1,-1,-1,N
-School of Computing,"University of California, Los Angeles",ECS189L,Introduction to Gameplay Programming,3,-1,-1,-1,CS3247,Game Development,4,-1,-1,-1,N
-School of Computing,"University of California, Los Angeles",MGT127,Innovation and Technology Strategy,3,-1,-1,-1,IS3103,Information Systems Leadership,4,-1,-1,-1,N
-School of Computing,"University of California, Los Angeles",TMP127,Understanding and Managing Technology Organizations,3,-1,-1,-1,IS3103,Information Systems Leadership,4,-1,-1,-1,N
-School of Computing,"University of California, Los Angeles",COGS 120,Computer Interaction Design,3,-1,-1,-1,CS3240,Interaction Design,4,-1,-1,-1,N
-School of Computing,"University of California, Los Angeles",CMPSC185,Human-Computer Interaction,3,-1,-1,-1,CS3240,Interaction Design,4,-1,-1,-1,N
-School of Computing,"University of California, Los Angeles",CSE170,Interaction Design,3,-1,-1,-1,CS3240,Interaction Design,4,-1,-1,-1,N
-School of Computing,"University of California, Los Angeles",CS135,Virtual Reality,3,-1,-1,-1,CS4240,Interaction Design for Virtual,4,-1,-1,-1,N
-School of Computing,"University of California, Los Angeles",MGT3,Quantitative Methods in Business,3,-1,-1,-1,BT1101,Introduction to Business Analy,4,-1,-1,-1,N
-School of Computing,"University of California, Los Angeles",CMPSC177,Computer Security,3,-1,-1,-1,CS2107,Introduction to Information Se,4,-1,-1,-1,N
-School of Computing,"University of California, Los Angeles",COMPSCI 31,INTRO TO PROGRMMING,3,-1,-1,-1,CS1010E,Programming Methodology,4,-1,-1,-1,N
-School of Computing,"University of California, Los Angeles",CMPSC 8,Introduction to Computer Science,3,-1,-1,-1,CS1010S,Programming Methodology,4,-1,-1,-1,N
-School of Computing,"University of California, Los Angeles",COM SCI 32,Introduction to Computer Science II,3,-1,-1,-1,CS2030,Programming Methodology II,4,-1,-1,-1,N
-School of Computing,"University of California, Los Angeles",BANA277,Customer and Social Analytics,3,-1,-1,-1,IS4241,Social Media Network Analysis,4,-1,-1,-1,N
-School of Computing,"University of California, Los Angeles",CSE 5A,Introduction to Programming I (C),3,-1,-1,-1,CS1010,Programming Methodology,4,-1,-1,-1,Y
-School of Computing,"University of California, Los Angeles",CSE169,Computer Animation,4,-1,-1,-1,CS3242,3D Modeling and Animation,4,-1,-1,-1,-1
-School of Computing,"University of California, Los Angeles",CSE185,INTRO TO COMPUTER VISION,4,-1,-1,-1,CS4243,Comp Vision & Pattern Recogntn,4,-1,-1,-1,-1
-School of Computing,"University of California, Los Angeles",CMPE 12,Computer Systems and Assembly Language and La,4,-1,-1,-1,CS2100,Computer Organisation,4,-1,-1,-1,-1
-School of Computing,"University of California, Los Angeles",COMPSCI161,Computer Security,4,-1,-1,-1,CS3235,Computer Security,4,-1,-1,-1,-1
-School of Computing,"University of California, Los Angeles",DCS100,Introduction to Data Management,4,-1,-1,-1,IT3010,Data Management for Business,4,-1,-1,-1,-1
-School of Computing,"University of California, Los Angeles",ECS032B,Introduction to Data Structures,3,-1,-1,-1,CS2040,Data Structures and Algorithms,4,-1,-1,-1,-1
-School of Computing,"University of California, Los Angeles",ECS036C,"Data Structures, Algorithms, & Programming",3,-1,-1,-1,CS2040C,Data Structures and Algorithms,4,-1,-1,-1,-1
-School of Computing,"University of California, Los Angeles",ECS165A,Database Systems,3,-1,-1,-1,CS2102,Database Systems,4,-1,-1,-1,-1
-School of Computing,"University of California, Los Angeles",CMPM178,Human-Centered Design Research,4,-1,-1,-1,CS3240,Interaction Design,4,-1,-1,-1,-1
-School of Computing,"University of California, Los Angeles",CS153,DESIGN OF OPERATING SYSTEMS,4,-1,-1,-1,CS2106,Intro to Operating Systems,4,-1,-1,-1,-1
-School of Computing,"University of California, Los Angeles",CS179F,OPERATING SYSTEMS,4,-1,-1,-1,CS2106,Intro to Operating Systems,4,-1,-1,-1,-1
-School of Computing,"University of California, Los Angeles",COMPSCI188,Introduction to Artificial Intelligence,4,-1,-1,-1,CS3243,Introduction to Artificial Int,4,-1,-1,-1,-1
-School of Computing,"University of California, Los Angeles",CSE151,Introduction to Artificial Intelligence: Statistical,4,-1,-1,-1,CS3243,Introduction to Artificial Int,4,-1,-1,-1,-1
-School of Computing,"University of California, Los Angeles",COM SCIM146,Introduction to Machine Learning,4,-1,-1,-1,CS3244,Machine Learning,4,-1,-1,-1,-1
-School of Computing,"University of California, Los Angeles",COMPSCI189,Introduction to Machine Learning,4,-1,-1,-1,CS3244,Machine Learning,4,-1,-1,-1,-1
-School of Computing,"University of California, Los Angeles",COMPSCI273,Foundations of Parallel Computation,3,-1,-1,-1,CS3211,Parallel & Concurrent Programg,4,-1,-1,-1,-1
-School of Computing,"University of California, Los Angeles",CSE160,Introduction to Parallel Computing,4,-1,-1,-1,CS3210,Parallel Computing,4,-1,-1,-1,-1
-School of Computing,"University of California, Los Angeles",COMPSCI160,User Interface Design and Development,4,-1,-1,-1,CS3249,User Interface Development,4,-1,-1,-1,-1
-School of Computing,"University of California, Merced",CSE170,Computer Graphics,3,-1,-1,-1,CS3241,Computer Graphics,4,-1,-1,-1,N
-School of Computing,"University of California, Merced",CSE100,Algorithm Design and Analysis,3,-1,-1,-1,CS3230,Design & Analysis of Algorithm,4,-1,-1,-1,N
-School of Computing,"University of California, Merced",CSE160,Computer Networks,3,-1,-1,-1,CS2105,Intro to Computer Networks,4,-1,-1,-1,N
-School of Computing,"University of California, Merced",CSE120,Software Engineering,3,-1,-1,-1,CS2103,Software Engineering,4,-1,-1,-1,N
-School of Computing,"University of California, Merced",EECS274,Computer Vision,4,-1,-1,-1,CS4243,Comp Vision & Pattern Recogntn,4,-1,-1,-1,-1
-School of Computing,"University of California, Merced",CSE185,INTRO TO COMPUTER VISION,4,-1,-1,-1,CS4243,Comp Vision & Pattern Recogntn,4,-1,-1,-1,-1
-School of Computing,"University of California, Merced",CSE177,Database Systems Implementation,4,-1,-1,-1,CS3223,Database Systems Implementatio,4,-1,-1,-1,-1
-School of Computing,"University of California, Merced",CSE171,Game Programming,4,-1,-1,-1,CS3247,Game Development,4,-1,-1,-1,-1
-School of Computing,"University of California, Merced",CSE168,Computer Graphics II: Rendering,4,-1,-1,-1,CS4247,Graphics Rendering Techniques,4,-1,-1,-1,-1
-School of Computing,"University of California, Merced",CSE175,Introduction to Artificial Intelligence,4,-1,-1,-1,CS3243,Introduction to Artificial Int,4,-1,-1,-1,-1
-School of Computing,"University of California, Merced",CSE176,Introduction to Machine Learning,4,-1,-1,-1,CS3244,Machine Learning,4,-1,-1,-1,-1
-School of Computing,"University of California, Riverside",CS061,Machine Organization and Assembly Language Programming,3,-1,-1,-1,CS2100,Computer Organisation,4,-1,-1,-1,N
-School of Computing,"University of California, Riverside",CS171,Introduction to Machine Learning and Data Mining,3,-1,-1,-1,CS3244,Machine Learning,4,-1,-1,-1,N
-School of Computing,"University of California, Riverside",MATH121,Game Theory,4,-1,-1,-1,CS4261,Algorithmic Mechanism Design,4,-1,-1,-1,-1
-School of Computing,"University of California, Riverside",CS130,Computer Graphics,3,-1,-1,-1,CS3241,Computer Graphics,4,-1,-1,-1,-1
-School of Computing,"University of California, Riverside",CS166,Database Management Systems,3,-1,-1,-1,CS2102,Database Systems,4,-1,-1,-1,-1
-School of Computing,"University of California, Riverside",CS236,Database Management Systems,4,-1,-1,-1,CS3223,Database Systems Implementatio,4,-1,-1,-1,-1
-School of Computing,"University of California, Riverside",CS153,Design of Operating System,4,-1,-1,-1,CS2106,Intro to Operating Systems,4,-1,-1,-1,-1
-School of Computing,"University of California, Riverside",CS205,Artificial Intelligence,3,-1,-1,-1,CS3243,Introduction to Artificial Int,4,-1,-1,-1,-1
-School of Computing,"University of California, Riverside",CS170,Introduction to Artificial Intelligence,3,-1,-1,-1,CS3243,Introduction to Artificial Int,4,-1,-1,-1,-1
-School of Computing,"University of California, Riverside",CS173,INTRODUCTION TO NATURAL LANGUAGE PROCESSING,4,-1,-1,-1,CS4248,Natural Language Processing,4,-1,-1,-1,-1
-School of Computing,"University of California, Riverside",MATH120,Optimisation,4,-1,-1,-1,CS4234,Optimisation Algorithms,4,-1,-1,-1,-1
-School of Computing,"University of California, Riverside",CS160,Concurrent Programming and Parallel Systems,3,-1,-1,-1,CS3211,Parallel & Concurrent Programg,4,-1,-1,-1,-1
-School of Computing,"University of California, Riverside",CS100,Software Construction,3,-1,-1,-1,CS3219,Software Engineering Principle,4,-1,-1,-1,-1
-School of Computing,"University of California, Riverside",CS182,Software Testing and Verification,3,-1,-1,-1,CS4218,Software Testing,4,-1,-1,-1,-1
-School of Computing,"University of California, Riverside",CS169,Mobile Wireless Network,4,-1,-1,-1,CS4222,Wireless Networking,4,-1,-1,-1,-1
-School of Computing,"University of California, San Diego",CSE132B,Database System Appplications,3,-1,-1,-1,CS2102,Database Systems,4,-1,-1,-1,N
-School of Computing,"University of California, San Diego",CSE11,Introduction to Computer Science and Object-Oriented Programming: Java,3,-1,-1,-1,CS1010J,Programming Methodology,4,-1,-1,-1,N
-School of Computing,"University of California, San Diego",CSE8A,Intro/Computer Science: Java (I),3,-1,-1,-1,CS1010J,Programming Methodology,4,-1,-1,-1,Y
-School of Computing,"University of California, San Diego",CSE 134B,Web Client Languages,3,-1,-1,-1,BT3103,Application Systems Developmen,4,-1,-1,-1,-1
-School of Computing,"University of California, San Diego",DSC102,Systems for Scalable Analytics,4,-1,-1,-1,CS4225,Big Data Systems for Data Scie,4,-1,-1,-1,-1
-School of Computing,"University of California, San Diego",CSE101,Design and Analysis of Algorithms,3,-1,-1,-1,CS3230,Design & Analysis of Algorithm,4,-1,-1,-1,-1
-School of Computing,"University of California, San Diego",CSE250,Principles of Artificial Intelligence,3,-1,-1,-1,CS3243,Introduction to Artificial Int,4,-1,-1,-1,-1
-School of Computing,"University of California, San Diego",CSE151A,Introduction to Machine Learning,3,-1,-1,-1,CS3244,Machine Learning,4,-1,-1,-1,-1
-School of Computing,"University of California, San Diego",CSE251A,Principles of Machine Learning: Learning Algorithms,4,-1,-1,-1,CS3244,Machine Learning,4,-1,-1,-1,-1
-School of Computing,"University of California, San Diego",CSE253,Neural Networks for Pattern Recognition,3,-1,-1,-1,CS5242,Neural Networks &Deep Learning,4,-1,-1,-1,-1
-School of Computing,"University of California, San Diego",CSE175,Entrepreneurship for Engineers,3,-1,-1,-1,IS3251,Principles of Technology Entre,4,-1,-1,-1,-1
-School of Computing,"University of California, San Diego",CSE105,Theory of Computability,4,-1,-1,-1,CS3231,Theory of Computation,4,-1,-1,-1,-1
-School of Computing,"University of California, Santa Barbara",PSTAT 173,Risk Theory,3,-1,-1,-1,BT4016,Risk Analytics for Financial S,4,-1,-1,-1,N
-School of Computing,"University of California, Santa Barbara",COMP169,Social Network,3,-1,-1,-1,IS4241,Social Media Network Analysis,4,-1,-1,-1,N
-School of Computing,"University of California, Santa Barbara",PSTAT170,Introduction to Mathematical Finance,4,-1,-1,-1,BT4013,Analytics for Capital Market T,4,-1,-1,-1,-1
-School of Computing,"University of California, Santa Barbara",PSTAT174,Time Series,4,-1,-1,-1,BT4013,Analytics for Capital Market T,4,-1,-1,-1,-1
-School of Computing,"University of California, Santa Barbara",PSTAT1735,Big Data Analytics,4,-1,-1,-1,BT4221,Big Data Techniques & Technolo,4,-1,-1,-1,-1
-School of Computing,"University of California, Santa Barbara",ECE181,Introduction to Computer Vision,4,-1,-1,-1,CS4243,Comp Vision & Pattern Recogntn,4,-1,-1,-1,-1
-School of Computing,"University of California, Santa Barbara",CMPSC230,"Approximations, NP-Completeness and Algorithms",4,-1,-1,-1,CS3230,Design & Analysis of Algorithm,4,-1,-1,-1,-1
-School of Computing,"University of California, Santa Barbara",EDS223,Spatial Analysis for Environmental Data Science,4,-1,-1,-1,BT4015,Geospatial Analytics,4,-1,-1,-1,-1
-School of Computing,"University of California, Santa Barbara",CMPSC165B,Machine Learning,4,-1,-1,-1,CS3244,Machine Learning,4,-1,-1,-1,-1
-School of Computing,"University of California, Santa Barbara",CMPSC165B,Machine Learning,4,-1,-1,-1,BT4240,Machine Learning for Predictiv,4,-1,-1,-1,-1
-School of Computing,"University of California, Santa Barbara",PSTAT134,Statistical Data Science,4,-1,-1,-1,BT4240,Machine Learning for Predictiv,4,-1,-1,-1,-1
-School of Computing,"University of California, Santa Cruz",CMPSC 102,Introduction to Analysis of Algorithms,3,-1,-1,-1,CS3230,Design & Analysis of Algorithm,4,-1,-1,-1,N
-School of Computing,"University of California, Santa Cruz",CMPSC 140,Artificial Intelligence,3,-1,-1,-1,CS3243,Introduction to Artificial Int,4,-1,-1,-1,N
-School of Computing,"University of California, Santa Cruz",CSE164-01,Computer Vision,5,-1,-1,-1,CS4243,Comp Vision & Pattern Recogntn,4,-1,-1,-1,-1
-School of Computing,"University of California, Santa Cruz",CSE160,Introduction to Computer Graphics,5,-1,-1,-1,CS3241,Computer Graphics,4,-1,-1,-1,-1
-School of Computing,"University of California, Santa Cruz",CS180,Database Systems I,5,-1,-1,-1,CS2102,Database Systems,4,-1,-1,-1,-1
-School of Computing,"University of California, Santa Cruz",CSE180,Database Systems I,5,-1,-1,-1,CS2102,Database Systems,4,-1,-1,-1,-1
-School of Computing,"University of California, Santa Cruz",CSE102,Introduction to Analysis of Algorithms,3,-1,-1,-1,CS3230,Design & Analysis of Algorithm,4,-1,-1,-1,-1
-School of Computing,"University of California, Santa Cruz",CSE130-01,Principles of Computer Systems Design,5,-1,-1,-1,IS2102,Enterprise Systems Architectur,4,-1,-1,-1,-1
-School of Computing,"University of California, Santa Cruz",CSE80N,Introduction to Networking and the Internet,5,-1,-1,-1,CS2105,Intro to Computer Networks,4,-1,-1,-1,-1
-School of Computing,"University of California, Santa Cruz",CSE140,Artificial Intelligence,5,-1,-1,-1,CS3243,Introduction to Artificial Int,4,-1,-1,-1,-1
-School of Computing,"University of California, Santa Cruz",CSE132-01,Computer Security,5,-1,-1,-1,CS2107,Introduction to Information Se,4,-1,-1,-1,-1
-School of Computing,"University of California, Santa Cruz",CSE148,Machine Learning,5,-1,-1,-1,CS3244,Machine Learning,4,-1,-1,-1,-1
-School of Computing,"University of California, Santa Cruz",CSE143,Introduction to Natural Language Processing,5,-1,-1,-1,CS4248,Natural Language Processing,4,-1,-1,-1,-1
-School of Computing,"University of California, Santa Cruz",CSE109,Quantum Computing,5,-1,-1,-1,CS4268,Quantum Computing,4,-1,-1,-1,-1
+School of Computing,University of California Davis,CSE158,Web Mining and Recommender Systems,3,-1,-1,-1,CS4225,Big Data Systems for Data Scie,4,-1,-1,-1,N
+School of Computing,University of California Davis,ECS174,Introduction to Computer Vision,3,-1,-1,-1,CS4243,Comp Vision & Pattern Recogntn,4,-1,-1,-1,N
+School of Computing,University of California Davis,ECS175,Computer Graphics,3,-1,-1,-1,CS3241,Computer Graphics,4,-1,-1,-1,N
+School of Computing,University of California Davis,ECS152B,Computer Networks,3,-1,-1,-1,CS3103,Computer Networks Practice,4,-1,-1,-1,N
+School of Computing,University of California Davis,ECS127,Cryptography,3,-1,-1,-1,CS4236,Cryptography Theory & Practice,4,-1,-1,-1,N
+School of Computing,University of California Davis,ECS122A,Algorithm Design and Analysis,3,-1,-1,-1,CS3230,Design & Analysis of Algorithm,4,-1,-1,-1,N
+School of Computing,University of California Davis,ECS122B,Algorithm Design and Analysis,3,-1,-1,-1,CS3230,Design & Analysis of Algorithm,4,-1,-1,-1,N
+School of Computing,University of California Davis,ECS170,Artificial Intelligence,3,-1,-1,-1,CS3243,Introduction to Artificial Int,4,-1,-1,-1,N
+School of Computing,University of California Davis,ECS 235A,COMPUTER AND INFORMATION SECURITY,3,-1,-1,-1,CS2107,Introduction to Information Se,4,-1,-1,-1,N
+School of Computing,University of California Davis,CSE153,Computer Security,3,-1,-1,-1,CS2107,Introduction to Information Se,4,-1,-1,-1,N
+School of Computing,University of California Davis,CSE151,Introduction to Artificial Intelligence: Statistical Approaches,3,-1,-1,-1,CS3244,Machine Learning,4,-1,-1,-1,N
+School of Computing,University of California Davis,ECS171,Machine Learning,3,-1,-1,-1,CS3244,Machine Learning,4,-1,-1,-1,N
+School of Computing,University of California Davis,STAT141B,Data & Web Technologies for Data Analysis,3,-1,-1,-1,BT4222,Mining Web Data for Business I,4,-1,-1,-1,N
+School of Computing,University of California Davis,ECS140A,Programming Languages,3,-1,-1,-1,CS2104,Programming Language Concepts,4,-1,-1,-1,N
+School of Computing,University of California Davis,ECS163,Information Interfaces,3,-1,-1,-1,CS3249,User Interface Development,4,-1,-1,-1,N
+School of Computing,University of California Davis,ECN122,Game Theory,3,-1,-1,-1,CS4261,Algorithmic Mechanism Design,4,-1,-1,-1,-1
+School of Computing,University of California Davis,ECON163,Economics of Investments,3,-1,-1,-1,BT4013,Analytics for Capital Market T,4,-1,-1,-1,-1
+School of Computing,University of California Davis,STA141C,Big Data & High Performance Statistical Computing,3,-1,-1,-1,CS4225,Big Data Systems for Data Scie,4,-1,-1,-1,-1
+School of Computing,University of California Davis,STAT141A,Statistical Data Science,3,-1,-1,-1,BT3102,Computational Methods for Busi,4,-1,-1,-1,-1
+School of Computing,University of California Davis,ECS235A,Computer & Information Security,4,-1,-1,-1,CS3235,Computer Security,4,-1,-1,-1,-1
+School of Computing,University of California Davis,CSE030,Data Structures,3,-1,-1,-1,CS2040,Data Structures and Algorithms,4,-1,-1,-1,-1
+School of Computing,University of California Davis,MGT120,Managing and Using Information Technology,3,-1,-1,-1,IS3103,Information Systems Leadership,4,-1,-1,-1,-1
+School of Computing,University of California Davis,MGT150,Technology Management,3,-1,-1,-1,IS3103,Information Systems Leadership,4,-1,-1,-1,-1
+School of Computing,University of California Davis,ECS152A,Computer Networks,3,-1,-1,-1,CS2105,Intro to Computer Networks,4,-1,-1,-1,-1
+School of Computing,University of California Davis,COGS118A,Intro to Machine Learning I,3,-1,-1,-1,CS3244,Machine Learning,4,-1,-1,-1,-1
+School of Computing,University of California Davis,ECS171,Machine Learning,3,-1,-1,-1,BT4240,Machine Learning for Predictiv,4,-1,-1,-1,-1
+School of Computing,University of California Davis,ECS172,Methods Data Net Sci,3,-1,-1,-1,BT4222,Mining Web Data for Business I,4,-1,-1,-1,-1
+School of Computing,University of California Davis,MGT151,Management of Innovation and Entrepreneurship,4,-1,-1,-1,IS3251,Principles of Technology Entre,4,-1,-1,-1,-1
+School of Computing,University of California Davis,ECS172,Recommender Systems,3,-1,-1,-1,BT4212,Search Engine Optimization & A,4,-1,-1,-1,-1
+School of Computing,University of California Davis,ECS160,Software Engineering,4,-1,-1,-1,CS2103,Software Engineering,4,-1,-1,-1,-1
+School of Computing,University of California Irvine,COMPSCI260,Fundamentals of the Design and Analysis of Algorithms,3,-1,-1,-1,CS3230,Design & Analysis of Algorithm,4,-1,-1,-1,N
+School of Computing,University of California Irvine,Mgmt178,Introduction to Management Information Systems,3,-1,-1,-1,IS3103,Information Systems Leadership,4,-1,-1,-1,N
+School of Computing,University of California Irvine,IN4MATX131,Human Computer Interaction,3,-1,-1,-1,CS3240,Interaction Design,4,-1,-1,-1,N
+School of Computing,University of California Irvine,COMPSCI134,Computer and Network Security,3,-1,-1,-1,CS2107,Introduction to Information Se,4,-1,-1,-1,N
+School of Computing,University of California Irvine,IN4MATX151,Project Management,3,-1,-1,-1,IS4100,IT Project Management,4,-1,-1,-1,N
+School of Computing,University of California Irvine,COMPSC178,Machine Learning and Data-Mining,3,-1,-1,-1,CS3244,Machine Learning,4,-1,-1,-1,N
+School of Computing,University of California Irvine,CSEB B 41,INTRO TO PROGRMMING,3,-1,-1,-1,CS1010,Programming Methodology,4,-1,-1,-1,N
+School of Computing,University of California Irvine,BANA227,Web and Social Analytics,3,-1,-1,-1,IS4241,Social Media Network Analysis,4,-1,-1,-1,N
+School of Computing,University of California Los Angeles,STA141C,Big Data & High Performance Statistical Computing,3,-1,-1,-1,BT4221,Big Data Techniques & Technolo,4,-1,-1,-1,N
+School of Computing,University of California Los Angeles,ECS050,Machine Dependent Prog,3,-1,-1,-1,CS2100,Computer Organisation,4,-1,-1,-1,N
+School of Computing,University of California Los Angeles,CSE127,Introduction to Computer Security,3,-1,-1,-1,CS3235,Computer Security,4,-1,-1,-1,N
+School of Computing,University of California Los Angeles,CS180,Introduction to Algorithms and Complexity,3,-1,-1,-1,CS2040,Data Structures and Algorithms,4,-1,-1,-1,N
+School of Computing,University of California Los Angeles,CS141,Intermediate Data Structures and Algorithms,3,-1,-1,-1,CS3230,Design & Analysis of Algorithm,4,-1,-1,-1,N
+School of Computing,University of California Los Angeles,ECS020,Discrete Mathematics For Computer Science,3,-1,-1,-1,CS1231,Discrete Structures,4,-1,-1,-1,N
+School of Computing,University of California Los Angeles,ECS050,Ethics in an Age of Tech,3,-1,-1,-1,IS1103,Ethics in Computing,4,-1,-1,-1,N
+School of Computing,University of California Los Angeles,ECS189L,Introduction to Gameplay Programming,3,-1,-1,-1,CS3247,Game Development,4,-1,-1,-1,N
+School of Computing,University of California Los Angeles,MGT127,Innovation and Technology Strategy,3,-1,-1,-1,IS3103,Information Systems Leadership,4,-1,-1,-1,N
+School of Computing,University of California Los Angeles,TMP127,Understanding and Managing Technology Organizations,3,-1,-1,-1,IS3103,Information Systems Leadership,4,-1,-1,-1,N
+School of Computing,University of California Los Angeles,COGS 120,Computer Interaction Design,3,-1,-1,-1,CS3240,Interaction Design,4,-1,-1,-1,N
+School of Computing,University of California Los Angeles,CMPSC185,Human-Computer Interaction,3,-1,-1,-1,CS3240,Interaction Design,4,-1,-1,-1,N
+School of Computing,University of California Los Angeles,CSE170,Interaction Design,3,-1,-1,-1,CS3240,Interaction Design,4,-1,-1,-1,N
+School of Computing,University of California Los Angeles,CS135,Virtual Reality,3,-1,-1,-1,CS4240,Interaction Design for Virtual,4,-1,-1,-1,N
+School of Computing,University of California Los Angeles,MGT3,Quantitative Methods in Business,3,-1,-1,-1,BT1101,Introduction to Business Analy,4,-1,-1,-1,N
+School of Computing,University of California Los Angeles,CMPSC177,Computer Security,3,-1,-1,-1,CS2107,Introduction to Information Se,4,-1,-1,-1,N
+School of Computing,University of California Los Angeles,COMPSCI 31,INTRO TO PROGRMMING,3,-1,-1,-1,CS1010E,Programming Methodology,4,-1,-1,-1,N
+School of Computing,University of California Los Angeles,CMPSC 8,Introduction to Computer Science,3,-1,-1,-1,CS1010S,Programming Methodology,4,-1,-1,-1,N
+School of Computing,University of California Los Angeles,COM SCI 32,Introduction to Computer Science II,3,-1,-1,-1,CS2030,Programming Methodology II,4,-1,-1,-1,N
+School of Computing,University of California Los Angeles,BANA277,Customer and Social Analytics,3,-1,-1,-1,IS4241,Social Media Network Analysis,4,-1,-1,-1,N
+School of Computing,University of California Los Angeles,CSE 5A,Introduction to Programming I (C),3,-1,-1,-1,CS1010,Programming Methodology,4,-1,-1,-1,Y
+School of Computing,University of California Los Angeles,CSE169,Computer Animation,4,-1,-1,-1,CS3242,3D Modeling and Animation,4,-1,-1,-1,-1
+School of Computing,University of California Los Angeles,CSE185,INTRO TO COMPUTER VISION,4,-1,-1,-1,CS4243,Comp Vision & Pattern Recogntn,4,-1,-1,-1,-1
+School of Computing,University of California Los Angeles,CMPE 12,Computer Systems and Assembly Language and La,4,-1,-1,-1,CS2100,Computer Organisation,4,-1,-1,-1,-1
+School of Computing,University of California Los Angeles,COMPSCI161,Computer Security,4,-1,-1,-1,CS3235,Computer Security,4,-1,-1,-1,-1
+School of Computing,University of California Los Angeles,DCS100,Introduction to Data Management,4,-1,-1,-1,IT3010,Data Management for Business,4,-1,-1,-1,-1
+School of Computing,University of California Los Angeles,ECS032B,Introduction to Data Structures,3,-1,-1,-1,CS2040,Data Structures and Algorithms,4,-1,-1,-1,-1
+School of Computing,University of California Los Angeles,ECS036C,Data Structures Algorithms & Programming,3,-1,-1,-1,CS2040C,Data Structures and Algorithms,4,-1,-1,-1,-1
+School of Computing,University of California Los Angeles,ECS165A,Database Systems,3,-1,-1,-1,CS2102,Database Systems,4,-1,-1,-1,-1
+School of Computing,University of California Los Angeles,CMPM178,Human-Centered Design Research,4,-1,-1,-1,CS3240,Interaction Design,4,-1,-1,-1,-1
+School of Computing,University of California Los Angeles,CS153,DESIGN OF OPERATING SYSTEMS,4,-1,-1,-1,CS2106,Intro to Operating Systems,4,-1,-1,-1,-1
+School of Computing,University of California Los Angeles,CS179F,OPERATING SYSTEMS,4,-1,-1,-1,CS2106,Intro to Operating Systems,4,-1,-1,-1,-1
+School of Computing,University of California Los Angeles,COMPSCI188,Introduction to Artificial Intelligence,4,-1,-1,-1,CS3243,Introduction to Artificial Int,4,-1,-1,-1,-1
+School of Computing,University of California Los Angeles,CSE151,Introduction to Artificial Intelligence: Statistical,4,-1,-1,-1,CS3243,Introduction to Artificial Int,4,-1,-1,-1,-1
+School of Computing,University of California Los Angeles,COM SCIM146,Introduction to Machine Learning,4,-1,-1,-1,CS3244,Machine Learning,4,-1,-1,-1,-1
+School of Computing,University of California Los Angeles,COMPSCI189,Introduction to Machine Learning,4,-1,-1,-1,CS3244,Machine Learning,4,-1,-1,-1,-1
+School of Computing,University of California Los Angeles,COMPSCI273,Foundations of Parallel Computation,3,-1,-1,-1,CS3211,Parallel & Concurrent Programg,4,-1,-1,-1,-1
+School of Computing,University of California Los Angeles,CSE160,Introduction to Parallel Computing,4,-1,-1,-1,CS3210,Parallel Computing,4,-1,-1,-1,-1
+School of Computing,University of California Los Angeles,COMPSCI160,User Interface Design and Development,4,-1,-1,-1,CS3249,User Interface Development,4,-1,-1,-1,-1
+School of Computing,University of California Merced,CSE170,Computer Graphics,3,-1,-1,-1,CS3241,Computer Graphics,4,-1,-1,-1,N
+School of Computing,University of California Merced,CSE100,Algorithm Design and Analysis,3,-1,-1,-1,CS3230,Design & Analysis of Algorithm,4,-1,-1,-1,N
+School of Computing,University of California Merced,CSE160,Computer Networks,3,-1,-1,-1,CS2105,Intro to Computer Networks,4,-1,-1,-1,N
+School of Computing,University of California Merced,CSE120,Software Engineering,3,-1,-1,-1,CS2103,Software Engineering,4,-1,-1,-1,N
+School of Computing,University of California Merced,EECS274,Computer Vision,4,-1,-1,-1,CS4243,Comp Vision & Pattern Recogntn,4,-1,-1,-1,-1
+School of Computing,University of California Merced,CSE185,INTRO TO COMPUTER VISION,4,-1,-1,-1,CS4243,Comp Vision & Pattern Recogntn,4,-1,-1,-1,-1
+School of Computing,University of California Merced,CSE177,Database Systems Implementation,4,-1,-1,-1,CS3223,Database Systems Implementatio,4,-1,-1,-1,-1
+School of Computing,University of California Merced,CSE171,Game Programming,4,-1,-1,-1,CS3247,Game Development,4,-1,-1,-1,-1
+School of Computing,University of California Merced,CSE168,Computer Graphics II: Rendering,4,-1,-1,-1,CS4247,Graphics Rendering Techniques,4,-1,-1,-1,-1
+School of Computing,University of California Merced,CSE175,Introduction to Artificial Intelligence,4,-1,-1,-1,CS3243,Introduction to Artificial Int,4,-1,-1,-1,-1
+School of Computing,University of California Merced,CSE176,Introduction to Machine Learning,4,-1,-1,-1,CS3244,Machine Learning,4,-1,-1,-1,-1
+School of Computing,University of California Riverside,CS061,Machine Organization and Assembly Language Programming,3,-1,-1,-1,CS2100,Computer Organisation,4,-1,-1,-1,N
+School of Computing,University of California Riverside,CS171,Introduction to Machine Learning and Data Mining,3,-1,-1,-1,CS3244,Machine Learning,4,-1,-1,-1,N
+School of Computing,University of California Riverside,MATH121,Game Theory,4,-1,-1,-1,CS4261,Algorithmic Mechanism Design,4,-1,-1,-1,-1
+School of Computing,University of California Riverside,CS130,Computer Graphics,3,-1,-1,-1,CS3241,Computer Graphics,4,-1,-1,-1,-1
+School of Computing,University of California Riverside,CS166,Database Management Systems,3,-1,-1,-1,CS2102,Database Systems,4,-1,-1,-1,-1
+School of Computing,University of California Riverside,CS236,Database Management Systems,4,-1,-1,-1,CS3223,Database Systems Implementatio,4,-1,-1,-1,-1
+School of Computing,University of California Riverside,CS153,Design of Operating System,4,-1,-1,-1,CS2106,Intro to Operating Systems,4,-1,-1,-1,-1
+School of Computing,University of California Riverside,CS205,Artificial Intelligence,3,-1,-1,-1,CS3243,Introduction to Artificial Int,4,-1,-1,-1,-1
+School of Computing,University of California Riverside,CS170,Introduction to Artificial Intelligence,3,-1,-1,-1,CS3243,Introduction to Artificial Int,4,-1,-1,-1,-1
+School of Computing,University of California Riverside,CS173,INTRODUCTION TO NATURAL LANGUAGE PROCESSING,4,-1,-1,-1,CS4248,Natural Language Processing,4,-1,-1,-1,-1
+School of Computing,University of California Riverside,MATH120,Optimisation,4,-1,-1,-1,CS4234,Optimisation Algorithms,4,-1,-1,-1,-1
+School of Computing,University of California Riverside,CS160,Concurrent Programming and Parallel Systems,3,-1,-1,-1,CS3211,Parallel & Concurrent Programg,4,-1,-1,-1,-1
+School of Computing,University of California Riverside,CS100,Software Construction,3,-1,-1,-1,CS3219,Software Engineering Principle,4,-1,-1,-1,-1
+School of Computing,University of California Riverside,CS182,Software Testing and Verification,3,-1,-1,-1,CS4218,Software Testing,4,-1,-1,-1,-1
+School of Computing,University of California Riverside,CS169,Mobile Wireless Network,4,-1,-1,-1,CS4222,Wireless Networking,4,-1,-1,-1,-1
+School of Computing,University of California San Diego,CSE132B,Database System Appplications,3,-1,-1,-1,CS2102,Database Systems,4,-1,-1,-1,N
+School of Computing,University of California San Diego,CSE11,Introduction to Computer Science and Object-Oriented Programming: Java,3,-1,-1,-1,CS1010J,Programming Methodology,4,-1,-1,-1,N
+School of Computing,University of California San Diego,CSE8A,Intro/Computer Science: Java (I),3,-1,-1,-1,CS1010J,Programming Methodology,4,-1,-1,-1,Y
+School of Computing,University of California San Diego,CSE 134B,Web Client Languages,3,-1,-1,-1,BT3103,Application Systems Developmen,4,-1,-1,-1,-1
+School of Computing,University of California San Diego,DSC102,Systems for Scalable Analytics,4,-1,-1,-1,CS4225,Big Data Systems for Data Scie,4,-1,-1,-1,-1
+School of Computing,University of California San Diego,CSE101,Design and Analysis of Algorithms,3,-1,-1,-1,CS3230,Design & Analysis of Algorithm,4,-1,-1,-1,-1
+School of Computing,University of California San Diego,CSE250,Principles of Artificial Intelligence,3,-1,-1,-1,CS3243,Introduction to Artificial Int,4,-1,-1,-1,-1
+School of Computing,University of California San Diego,CSE151A,Introduction to Machine Learning,3,-1,-1,-1,CS3244,Machine Learning,4,-1,-1,-1,-1
+School of Computing,University of California San Diego,CSE251A,Principles of Machine Learning: Learning Algorithms,4,-1,-1,-1,CS3244,Machine Learning,4,-1,-1,-1,-1
+School of Computing,University of California San Diego,CSE253,Neural Networks for Pattern Recognition,3,-1,-1,-1,CS5242,Neural Networks &Deep Learning,4,-1,-1,-1,-1
+School of Computing,University of California San Diego,CSE175,Entrepreneurship for Engineers,3,-1,-1,-1,IS3251,Principles of Technology Entre,4,-1,-1,-1,-1
+School of Computing,University of California San Diego,CSE105,Theory of Computability,4,-1,-1,-1,CS3231,Theory of Computation,4,-1,-1,-1,-1
+School of Computing,University of California Santa Barbara,PSTAT 173,Risk Theory,3,-1,-1,-1,BT4016,Risk Analytics for Financial S,4,-1,-1,-1,N
+School of Computing,University of California Santa Barbara,COMP169,Social Network,3,-1,-1,-1,IS4241,Social Media Network Analysis,4,-1,-1,-1,N
+School of Computing,University of California Santa Barbara,PSTAT170,Introduction to Mathematical Finance,4,-1,-1,-1,BT4013,Analytics for Capital Market T,4,-1,-1,-1,-1
+School of Computing,University of California Santa Barbara,PSTAT174,Time Series,4,-1,-1,-1,BT4013,Analytics for Capital Market T,4,-1,-1,-1,-1
+School of Computing,University of California Santa Barbara,PSTAT1735,Big Data Analytics,4,-1,-1,-1,BT4221,Big Data Techniques & Technolo,4,-1,-1,-1,-1
+School of Computing,University of California Santa Barbara,ECE181,Introduction to Computer Vision,4,-1,-1,-1,CS4243,Comp Vision & Pattern Recogntn,4,-1,-1,-1,-1
+School of Computing,University of California Santa Barbara,CMPSC230,Approximations NP-Completeness and Algorithms,4,-1,-1,-1,CS3230,Design & Analysis of Algorithm,4,-1,-1,-1,-1
+School of Computing,University of California Santa Barbara,EDS223,Spatial Analysis for Environmental Data Science,4,-1,-1,-1,BT4015,Geospatial Analytics,4,-1,-1,-1,-1
+School of Computing,University of California Santa Barbara,CMPSC165B,Machine Learning,4,-1,-1,-1,CS3244,Machine Learning,4,-1,-1,-1,-1
+School of Computing,University of California Santa Barbara,CMPSC165B,Machine Learning,4,-1,-1,-1,BT4240,Machine Learning for Predictiv,4,-1,-1,-1,-1
+School of Computing,University of California Santa Barbara,PSTAT134,Statistical Data Science,4,-1,-1,-1,BT4240,Machine Learning for Predictiv,4,-1,-1,-1,-1
+School of Computing,University of California Santa Cruz,CMPSC 102,Introduction to Analysis of Algorithms,3,-1,-1,-1,CS3230,Design & Analysis of Algorithm,4,-1,-1,-1,N
+School of Computing,University of California Santa Cruz,CMPSC 140,Artificial Intelligence,3,-1,-1,-1,CS3243,Introduction to Artificial Int,4,-1,-1,-1,N
+School of Computing,University of California Santa Cruz,CSE164-01,Computer Vision,5,-1,-1,-1,CS4243,Comp Vision & Pattern Recogntn,4,-1,-1,-1,-1
+School of Computing,University of California Santa Cruz,CSE160,Introduction to Computer Graphics,5,-1,-1,-1,CS3241,Computer Graphics,4,-1,-1,-1,-1
+School of Computing,University of California Santa Cruz,CS180,Database Systems I,5,-1,-1,-1,CS2102,Database Systems,4,-1,-1,-1,-1
+School of Computing,University of California Santa Cruz,CSE180,Database Systems I,5,-1,-1,-1,CS2102,Database Systems,4,-1,-1,-1,-1
+School of Computing,University of California Santa Cruz,CSE102,Introduction to Analysis of Algorithms,3,-1,-1,-1,CS3230,Design & Analysis of Algorithm,4,-1,-1,-1,-1
+School of Computing,University of California Santa Cruz,CSE130-01,Principles of Computer Systems Design,5,-1,-1,-1,IS2102,Enterprise Systems Architectur,4,-1,-1,-1,-1
+School of Computing,University of California Santa Cruz,CSE80N,Introduction to Networking and the Internet,5,-1,-1,-1,CS2105,Intro to Computer Networks,4,-1,-1,-1,-1
+School of Computing,University of California Santa Cruz,CSE140,Artificial Intelligence,5,-1,-1,-1,CS3243,Introduction to Artificial Int,4,-1,-1,-1,-1
+School of Computing,University of California Santa Cruz,CSE132-01,Computer Security,5,-1,-1,-1,CS2107,Introduction to Information Se,4,-1,-1,-1,-1
+School of Computing,University of California Santa Cruz,CSE148,Machine Learning,5,-1,-1,-1,CS3244,Machine Learning,4,-1,-1,-1,-1
+School of Computing,University of California Santa Cruz,CSE143,Introduction to Natural Language Processing,5,-1,-1,-1,CS4248,Natural Language Processing,4,-1,-1,-1,-1
+School of Computing,University of California Santa Cruz,CSE109,Quantum Computing,5,-1,-1,-1,CS4268,Quantum Computing,4,-1,-1,-1,-1
 School of Computing,University of Colorado Boulder,CSCI4273,Network Systems,3,-1,-1,-1,CS3103,Computer Networks Practice,4,-1,-1,-1,-1
 School of Computing,University of Colorado Boulder,CSCI4413,Computer Security and Ethical Hacking,3,-1,-1,-1,CS4238,Computer Security Practice,4,-1,-1,-1,-1
 School of Computing,University of Colorado Boulder,CSCI2270,Data Structures,3,-1,-1,-1,CS2040,Data Structures and Algorithms,4,-1,-1,-1,-1
@@ -2044,7 +2044,7 @@ School of Computing,University of Colorado Boulder,CSCI4502,Data Mining,3,-1,-1,
 School of Computing,University of Colorado Boulder,CSCI4622,Machine Learning,3,-1,-1,-1,CS3244,Machine Learning,4,-1,-1,-1,-1
 School of Computing,University of Colorado Boulder,BAIM4200,Advanced Business Analytics,3,-1,-1,-1,BT4240,Machine Learning for Predictiv,4,-1,-1,-1,-1
 School of Computing,University of Colorado Boulder,INFO5613,Network Science,3,-1,-1,-1,IS4241,Social Media Network Analysis,4,-1,-1,-1,-1
-School of Computing,University of Commerce 'Luigi Bocconi' Milan,DS30517,"PYTHON PROGRAMMING FOR ECONOMICS, MANAGEMENT AND FINANCE",6,-1,-1,-1,CS1010S,Programming Methodology,4,-1,-1,-1,Y
+School of Computing,University of Commerce 'Luigi Bocconi' Milan,DS30517,PYTHON PROGRAMMING FOR ECONOMICS MANAGEMENT AND FINANCE,6,-1,-1,-1,CS1010S,Programming Methodology,4,-1,-1,-1,Y
 School of Computing,University of Connecticut,CSE4502,Big Data Analytics,3,-1,-1,-1,CS4225,Big Data Systems for Data Scie,4,-1,-1,-1,-1
 School of Computing,University of Connecticut,CSE4502,Big Data Analytics,3,-1,-1,-1,BT4221,Big Data Techniques & Technolo,4,-1,-1,-1,-1
 School of Computing,University of Connecticut,CSE2100,Data Structures & Intro to Algorithms,3,-1,-1,-1,CS2040,Data Structures and Algorithms,4,-1,-1,-1,-1
@@ -2082,7 +2082,7 @@ School of Computing,University of Georgia,CSCI4795,Cloud Computing,4,-1,-1,-1,CS
 School of Computing,University of Georgia,CSCI4250,Computer Security,4,-1,-1,-1,CS2107,Introduction to Information Se,4,-1,-1,-1,-1
 School of Computing,University of Georgia,CSCI4300,Web Programming,4,-1,-1,-1,CS3226,Web Programming and Applicatio,4,-1,-1,-1,-1
 School of Computing,University of Goteborg,DIT051,Computer Architecture,7.5,-1,-1,-1,CS2100,Computer Organisation,4,-1,-1,-1,-1
-School of Computing,University of Goteborg,DIT885,"Product, Projects and People Management",4.5,-1,-1,-1,IS4100,IT Project Management,4,-1,-1,-1,-1
+School of Computing,University of Goteborg,DIT885,Product Projects and People Management,4.5,-1,-1,-1,IS4100,IT Project Management,4,-1,-1,-1,-1
 School of Computing,University of Gothenburg,DIT602,Algorithms,7.5,-1,-1,-1,CS3230,Design & Analysis of Algorithm,4,-1,-1,-1,N
 School of Computing,University of Gothenburg,DIT223,Computer Graphics,7.5,-1,-1,-1,CS4247,Graphics Rendering Techniques,4,-1,-1,-1,N
 School of Computing,University of Gothenburg,DIT401,Operating Systems,7.5,-1,-1,-1,CS2106,Intro to Operating Systems,4,-1,-1,-1,N
@@ -2111,7 +2111,7 @@ School of Computing,University of Gothenburg,DIT405,Introduction to Data Science
 School of Computing,University of Gothenburg,DIT406,Introduction to Data Science and AI,7.5,-1,-1,-1,CS3243,Introduction to Artificial Int,4,-1,-1,-1,-1
 School of Computing,University of Gothenburg,TIA014,Governance and Control for Digital Capabilitie,7.5,-1,-1,-1,IS4204,IT Governance,4,-1,-1,-1,-1
 School of Computing,University of Gothenburg,DIT844,Project Management,7.5,-1,-1,-1,IS4100,IT Project Management,4,-1,-1,-1,-1
-School of Computing,University of Gothenburg,DIT382,"Algorithms for Machine Learning and Inference,",7.5,-1,-1,-1,CS3244,Machine Learning,4,-1,-1,-1,-1
+School of Computing,University of Gothenburg,DIT382,Algorithms for Machine Learning and Inference,7.5,-1,-1,-1,CS3244,Machine Learning,4,-1,-1,-1,-1
 School of Computing,University of Gothenburg,MSA220,Statistical Learning for Big Data,7.5,-1,-1,-1,CS3244,Machine Learning,4,-1,-1,-1,-1
 School of Computing,University of Gothenburg,DIT071,Network Security,7.5,-1,-1,-1,CS5321,Network Security,4,-1,-1,-1,-1
 School of Computing,University of Gothenburg,DIT392,Principles of Concurrent Programming,7.5,-1,-1,-1,CS3211,Parallel & Concurrent Programg,4,-1,-1,-1,-1
@@ -2130,30 +2130,30 @@ School of Computing,University of Iceland,TOL607G,Competitive programming,6,-1,-
 School of Computing,University of Iceland,HBV602M,Computer System Security,6,-1,-1,-1,CS2107,Introduction to Information Se,4,-1,-1,-1,-1
 School of Computing,University of Iceland,TOV601G,The Internet of Things,6,-1,-1,-1,CS3237,Introduction to Internet of Th,4,-1,-1,-1,-1
 School of Computing,University of Iceland,HBV204M,Software Quality Management,6,-1,-1,-1,CS3219,Software Engineering Principle,4,-1,-1,-1,-1
-School of Computing,"University of Illinois, Urbana-Champaign",IE529,Stats of Big Data and Clustering,3,-1,-1,-1,BT4221,Big Data Techniques & Technolo,4,-1,-1,-1,N
-School of Computing,"University of Illinois, Urbana-Champaign",STAT428,Statistical Computing,3,-1,-1,-1,BT3102,Computational Methods for Busi,4,-1,-1,-1,N
-School of Computing,"University of Illinois, Urbana-Champaign",CS225,Data Structures,3,-1,-1,-1,CS2040,Data Structures and Algorithms,4,-1,-1,-1,N
-School of Computing,"University of Illinois, Urbana-Champaign",CS440,Artificial Intelligence,3,-1,-1,-1,CS3243,Introduction to Artificial Int,4,-1,-1,-1,N
-School of Computing,"University of Illinois, Urbana-Champaign",CHLH573,Biostatistics in Public Health,3,-1,-1,-1,IS4250,IT-enabled Healthcare Solution,4,-1,-1,-1,N
-School of Computing,"University of Illinois, Urbana-Champaign",CS421,Programming Languages and Compilers,3,-1,-1,-1,CS2104,Programming Language Concepts,4,-1,-1,-1,N
-School of Computing,"University of Illinois, Urbana-Champaign",CS467,Social Visualization,3,-1,-1,-1,IS4241,Social Media Network Analysis,4,-1,-1,-1,N
-School of Computing,"University of Illinois, Urbana-Champaign",CS4173,Discrete Structures,3,-1,-1,-1,CS1231,Discrete Structures,4,-1,-1,-1,Y
-School of Computing,"University of Illinois, Urbana-Champaign",INFO202,Social Aspects of Information Technology,3,-1,-1,-1,IS1103,Ethics in Computing,4,-1,-1,-1,Y
-School of Computing,"University of Illinois, Urbana-Champaign",ECE220,COMPUTER SYSTEMS & PROGRAMMING,3,-1,-1,-1,CS1010E,Programming Methodology,4,-1,-1,-1,Y
-School of Computing,"University of Illinois, Urbana-Champaign",CS101,Intro Computing: Engrg & Sci,3,-1,-1,-1,CS1010S,Programming Methodology,4,-1,-1,-1,Y
-School of Computing,"University of Illinois, Urbana-Champaign",CS125,Intro to Computer Science,3,-1,-1,-1,CS1010S,Programming Methodology,4,-1,-1,-1,Y
-School of Computing,"University of Illinois, Urbana-Champaign",STAT480,Data Science Foundations,3,-1,-1,-1,BT4221,Big Data Techniques & Technolo,4,-1,-1,-1,-1
-School of Computing,"University of Illinois, Urbana-Champaign",INFO490RB,Foundations of Data Science,3,-1,-1,-1,BT4221,Big Data Techniques & Technolo,4,-1,-1,-1,-1
-School of Computing,"University of Illinois, Urbana-Champaign",CS450,Numerical Analysis,3,-1,-1,-1,BT3102,Computational Methods for Busi,4,-1,-1,-1,-1
-School of Computing,"University of Illinois, Urbana-Champaign",CS357,Numerical Methods I,3,-1,-1,-1,BT3102,Computational Methods for Busi,4,-1,-1,-1,-1
-School of Computing,"University of Illinois, Urbana-Champaign",CHLH244,Health Statistics,3,-1,-1,-1,IS4250,IT-enabled Healthcare Solution,4,-1,-1,-1,-1
-School of Computing,"University of Illinois, Urbana-Champaign",CS446,Machine Learning,3,-1,-1,-1,CS3244,Machine Learning,4,-1,-1,-1,-1
-School of Computing,"University of Illinois, Urbana-Champaign",ECE449,Machine Learning,3,-1,-1,-1,CS3244,Machine Learning,4,-1,-1,-1,-1
-School of Computing,"University of Illinois, Urbana-Champaign",ECE449,Machine Learning,3,-1,-1,-1,BT4240,Machine Learning for Predictiv,4,-1,-1,-1,-1
-School of Computing,"University of Illinois, Urbana-Champaign",LIS590 SML,Social Media Analytics,4,-1,-1,-1,IS4241,Social Media Network Analysis,4,-1,-1,-1,-1
-School of Computing,"University of Illinois, Urbana-Champaign",ECE439,Wireless Network,3,-1,-1,-1,CS4222,Wireless Networking,4,-1,-1,-1,-1
-School of Computing,"University of Kaiserslautern, FRG",INF10-03-V-3,Computer Graphics,8,-1,-1,-1,CS3241,Computer Graphics,4,-1,-1,-1,-1
-School of Computing,"University of Kaiserslautern, FRG",75-50-V-4,Machine Learning I - Foundations,8,-1,-1,-1,CS3244,Machine Learning,4,-1,-1,-1,-1
+School of Computing,University of Illinois Urbana-Champaign,IE529,Stats of Big Data and Clustering,3,-1,-1,-1,BT4221,Big Data Techniques & Technolo,4,-1,-1,-1,N
+School of Computing,University of Illinois Urbana-Champaign,STAT428,Statistical Computing,3,-1,-1,-1,BT3102,Computational Methods for Busi,4,-1,-1,-1,N
+School of Computing,University of Illinois Urbana-Champaign,CS225,Data Structures,3,-1,-1,-1,CS2040,Data Structures and Algorithms,4,-1,-1,-1,N
+School of Computing,University of Illinois Urbana-Champaign,CS440,Artificial Intelligence,3,-1,-1,-1,CS3243,Introduction to Artificial Int,4,-1,-1,-1,N
+School of Computing,University of Illinois Urbana-Champaign,CHLH573,Biostatistics in Public Health,3,-1,-1,-1,IS4250,IT-enabled Healthcare Solution,4,-1,-1,-1,N
+School of Computing,University of Illinois Urbana-Champaign,CS421,Programming Languages and Compilers,3,-1,-1,-1,CS2104,Programming Language Concepts,4,-1,-1,-1,N
+School of Computing,University of Illinois Urbana-Champaign,CS467,Social Visualization,3,-1,-1,-1,IS4241,Social Media Network Analysis,4,-1,-1,-1,N
+School of Computing,University of Illinois Urbana-Champaign,CS4173,Discrete Structures,3,-1,-1,-1,CS1231,Discrete Structures,4,-1,-1,-1,Y
+School of Computing,University of Illinois Urbana-Champaign,INFO202,Social Aspects of Information Technology,3,-1,-1,-1,IS1103,Ethics in Computing,4,-1,-1,-1,Y
+School of Computing,University of Illinois Urbana-Champaign,ECE220,COMPUTER SYSTEMS & PROGRAMMING,3,-1,-1,-1,CS1010E,Programming Methodology,4,-1,-1,-1,Y
+School of Computing,University of Illinois Urbana-Champaign,CS101,Intro Computing: Engrg & Sci,3,-1,-1,-1,CS1010S,Programming Methodology,4,-1,-1,-1,Y
+School of Computing,University of Illinois Urbana-Champaign,CS125,Intro to Computer Science,3,-1,-1,-1,CS1010S,Programming Methodology,4,-1,-1,-1,Y
+School of Computing,University of Illinois Urbana-Champaign,STAT480,Data Science Foundations,3,-1,-1,-1,BT4221,Big Data Techniques & Technolo,4,-1,-1,-1,-1
+School of Computing,University of Illinois Urbana-Champaign,INFO490RB,Foundations of Data Science,3,-1,-1,-1,BT4221,Big Data Techniques & Technolo,4,-1,-1,-1,-1
+School of Computing,University of Illinois Urbana-Champaign,CS450,Numerical Analysis,3,-1,-1,-1,BT3102,Computational Methods for Busi,4,-1,-1,-1,-1
+School of Computing,University of Illinois Urbana-Champaign,CS357,Numerical Methods I,3,-1,-1,-1,BT3102,Computational Methods for Busi,4,-1,-1,-1,-1
+School of Computing,University of Illinois Urbana-Champaign,CHLH244,Health Statistics,3,-1,-1,-1,IS4250,IT-enabled Healthcare Solution,4,-1,-1,-1,-1
+School of Computing,University of Illinois Urbana-Champaign,CS446,Machine Learning,3,-1,-1,-1,CS3244,Machine Learning,4,-1,-1,-1,-1
+School of Computing,University of Illinois Urbana-Champaign,ECE449,Machine Learning,3,-1,-1,-1,CS3244,Machine Learning,4,-1,-1,-1,-1
+School of Computing,University of Illinois Urbana-Champaign,ECE449,Machine Learning,3,-1,-1,-1,BT4240,Machine Learning for Predictiv,4,-1,-1,-1,-1
+School of Computing,University of Illinois Urbana-Champaign,LIS590 SML,Social Media Analytics,4,-1,-1,-1,IS4241,Social Media Network Analysis,4,-1,-1,-1,-1
+School of Computing,University of Illinois Urbana-Champaign,ECE439,Wireless Network,3,-1,-1,-1,CS4222,Wireless Networking,4,-1,-1,-1,-1
+School of Computing,University of Kaiserslautern FRG,INF10-03-V-3,Computer Graphics,8,-1,-1,-1,CS3241,Computer Graphics,4,-1,-1,-1,-1
+School of Computing,University of Kaiserslautern FRG,75-50-V-4,Machine Learning I - Foundations,8,-1,-1,-1,CS3244,Machine Learning,4,-1,-1,-1,-1
 School of Computing,University of Konstanz,INF20780-2016,Algorithms in Bioinformatics,6,-1,-1,-1,CS2220,Intro to Computational Biology,6,-1,-1,-1,-1
 School of Computing,University of Leeds,COMP811,Computer Graphics,10,-1,-1,-1,CS3241,Computer Graphics,4,-1,-1,-1,N
 School of Computing,University of Leeds,COMP3223,Cryptography,10,-1,-1,-1,CS4236,Cryptography Theory & Practice,4,-1,-1,-1,N
@@ -2199,62 +2199,62 @@ School of Computing,University of Mannheim,CS500,Advanced Software Engineering,6
 School of Computing,University of Miami,BTE523,Big Data Development,3,-1,-1,-1,BT4221,Big Data Techniques & Technolo,4,-1,-1,-1,-1
 School of Computing,University of Miami,ECE548,Machine Learning,3,-1,-1,-1,CS3244,Machine Learning,4,-1,-1,-1,-1
 School of Computing,University of Miami,MKT387,Digital Marketing,3,-1,-1,-1,BT4212,Search Engine Optimization & A,4,-1,-1,-1,-1
-School of Computing,"University of Michigan, Ann Arbor",EECS442,Computer Vision,3,-1,-1,-1,CS4243,Comp Vision & Pattern Recogntn,4,-1,-1,-1,N
-School of Computing,"University of Michigan, Ann Arbor",EECS490,Programming Languages,3,-1,-1,-1,CS2104,Programming Language Concepts,4,-1,-1,-1,N
-School of Computing,"University of Michigan, Ann Arbor",EECS183,Elementary Programming Concepts,4,-1,-1,-1,CS1010,Programming Methodology,4,-1,-1,-1,Y
-School of Computing,"University of Michigan, Ann Arbor",EECS492,Introduction to Artificial Intelligence,4,-1,-1,-1,CS3243,Introduction to Artificial Int,4,-1,-1,-1,-1
-School of Computing,"University of Michigan, Ann Arbor",EECS388,Introduction to Computer Security,4,-1,-1,-1,CS2107,Introduction to Information Se,4,-1,-1,-1,-1
-School of Computing,"University of Michigan, Ann Arbor",EECS445,Introduction to Machine Learning,4,-1,-1,-1,CS3244,Machine Learning,4,-1,-1,-1,-1
-School of Computing,"University of Michigan, Ann Arbor",EECS481,Software Engineering,4,-1,-1,-1,CS2103,Software Engineering,4,-1,-1,-1,-1
+School of Computing,University of Michigan Ann Arbor,EECS442,Computer Vision,3,-1,-1,-1,CS4243,Comp Vision & Pattern Recogntn,4,-1,-1,-1,N
+School of Computing,University of Michigan Ann Arbor,EECS490,Programming Languages,3,-1,-1,-1,CS2104,Programming Language Concepts,4,-1,-1,-1,N
+School of Computing,University of Michigan Ann Arbor,EECS183,Elementary Programming Concepts,4,-1,-1,-1,CS1010,Programming Methodology,4,-1,-1,-1,Y
+School of Computing,University of Michigan Ann Arbor,EECS492,Introduction to Artificial Intelligence,4,-1,-1,-1,CS3243,Introduction to Artificial Int,4,-1,-1,-1,-1
+School of Computing,University of Michigan Ann Arbor,EECS388,Introduction to Computer Security,4,-1,-1,-1,CS2107,Introduction to Information Se,4,-1,-1,-1,-1
+School of Computing,University of Michigan Ann Arbor,EECS445,Introduction to Machine Learning,4,-1,-1,-1,CS3244,Machine Learning,4,-1,-1,-1,-1
+School of Computing,University of Michigan Ann Arbor,EECS481,Software Engineering,4,-1,-1,-1,CS2103,Software Engineering,4,-1,-1,-1,-1
 School of Computing,University of Minnesota,CSCI4707,Practice of Database Systems,3,-1,-1,-1,CS2102,Database Systems,4,-1,-1,-1,N
 School of Computing,University of Minnesota,CSCI4211,Introduction to Computer Networks,3,-1,-1,-1,CS2105,Intro to Computer Networks,4,-1,-1,-1,N
 School of Computing,University of Minnesota,CSCI4511W,Introduction to Artificial Intelligence,3,-1,-1,-1,CS3243,Introduction to Artificial Int,4,-1,-1,-1,N
 School of Computing,University of Minnesota,CSCI5271,Introduction to Computer Security,3,-1,-1,-1,CS2107,Introduction to Information Se,4,-1,-1,-1,N
 School of Computing,University of Minnesota,INET4007,Security II: Cyber Security,3,-1,-1,-1,CS2107,Introduction to Information Se,4,-1,-1,-1,N
 School of Computing,University of Minnesota,CSCI5521,Intro to Machine Learning,3,-1,-1,-1,CS3244,Machine Learning,4,-1,-1,-1,N
-School of Computing,University of Minnesota,CSCI5451,"Introduction to Parallel Computing: Architectures, Algorithms, and Programming",3,-1,-1,-1,CS3210,Parallel Computing,4,-1,-1,-1,N
+School of Computing,University of Minnesota,CSCI5451,Introduction to Parallel Computing: Architectures Algorithms and Programming,3,-1,-1,-1,CS3210,Parallel Computing,4,-1,-1,-1,N
 School of Computing,University of Minnesota,CS3081W,Program Design & Development,3,-1,-1,-1,CS2103,Software Engineering,4,-1,-1,-1,N
 School of Computing,University of Minnesota,CSCI5708,Architecture and Implementation of Database Management System,3,-1,-1,-1,CS3223,Database Systems Implementatio,4,-1,-1,-1,-1
-School of Computing,"University of North Carolina, Chapel Hill",COMP722,Data Mining,3,-1,-1,-1,CS4225,Big Data Systems for Data Scie,4,-1,-1,-1,N
-School of Computing,"University of North Carolina, Chapel Hill",INLS385,Information Use for Organizational Effectiveness,3,-1,-1,-1,IS3103,Information Systems Leadership,4,-1,-1,-1,N
-School of Computing,"University of North Carolina, Chapel Hill",COMP560,Artificial Intelligence,3,-1,-1,-1,CS3243,Introduction to Artificial Int,4,-1,-1,-1,N
-School of Computing,"University of North Carolina, Chapel Hill",COMP562,Introduction to Machine Learning,3,-1,-1,-1,CS3244,Machine Learning,4,-1,-1,-1,N
-School of Computing,"University of North Carolina, Chapel Hill",COMP486,Applications of Natural Language Processing,3,-1,-1,-1,CS4248,Natural Language Processing,4,-1,-1,-1,N
-School of Computing,"University of North Carolina, Chapel Hill",STOR415,Introduction to Optimization,3,-1,-1,-1,CS4234,Optimisation Algorithms,4,-1,-1,-1,N
-School of Computing,"University of North Carolina, Chapel Hill",COMP380,Computers and society,3,-1,-1,-1,IS1103,Ethics in Computing,4,-1,-1,-1,Y
-School of Computing,"University of North Carolina, Chapel Hill",INLS384,Information and Computer Ethics,3,-1,-1,-1,IS1103,Ethics in Computing,4,-1,-1,-1,Y
-School of Computing,"University of North Carolina, Chapel Hill",COMP630,Operating System Implementation,3,-1,-1,-1,CS5250,Advanced Operating Systems,4,-1,-1,-1,-1
-School of Computing,"University of North Carolina, Chapel Hill",COMP520,Compilers,3,-1,-1,-1,CS4212,Compiler Design,4,-1,-1,-1,-1
-School of Computing,"University of North Carolina, Chapel Hill",COMP411,Computer Organisation,3,-1,-1,-1,CS2100,Computer Organisation,4,-1,-1,-1,-1
-School of Computing,"University of North Carolina, Chapel Hill",COMP535,Introduction to Computer Security,3,-1,-1,-1,CS3235,Computer Security,4,-1,-1,-1,-1
-School of Computing,"University of North Carolina, Chapel Hill",COMP590,Special Topics: Introduction to Cryptography,3,-1,-1,-1,CS4236,Cryptography Theory & Practice,4,-1,-1,-1,-1
-School of Computing,"University of North Carolina, Chapel Hill",COMP210,Data Structures and Analysis,3,-1,-1,-1,CS2040,Data Structures and Algorithms,4,-1,-1,-1,-1
-School of Computing,"University of North Carolina, Chapel Hill",COMP421,Files and Databases,3,-1,-1,-1,CS2102,Database Systems,4,-1,-1,-1,-1
-School of Computing,"University of North Carolina, Chapel Hill",COMP521,Files and Databases,3,-1,-1,-1,CS2102,Database Systems,4,-1,-1,-1,-1
-School of Computing,"University of North Carolina, Chapel Hill",INLS523,Introduction to Database Concepts and Applications,3,-1,-1,-1,CS2102,Database Systems,4,-1,-1,-1,-1
-School of Computing,"University of North Carolina, Chapel Hill",INLS623,Database Systems II: Intermediate Databases,3,-1,-1,-1,CS3223,Database Systems Implementatio,4,-1,-1,-1,-1
-School of Computing,"University of North Carolina, Chapel Hill",INLS523,Database Systems I: Introduction to Databases,3,-1,-1,-1,IT2002,Database Technology & Mgt,4,-1,-1,-1,-1
-School of Computing,"University of North Carolina, Chapel Hill",COMP550,Algorithms and Analysis,3,-1,-1,-1,CS3230,Design & Analysis of Algorithm,4,-1,-1,-1,-1
-School of Computing,"University of North Carolina, Chapel Hill",BUSI558,Digital Marketing,3,-1,-1,-1,IS3150,Digital Media Marketing,4,-1,-1,-1,-1
-School of Computing,"University of North Carolina, Chapel Hill",INLS623,Database II,3,-1,-1,-1,CS4211,Formal Methods for Software En,4,-1,-1,-1,-1
-School of Computing,"University of North Carolina, Chapel Hill",GEOG491,Introduction to GIS,3,-1,-1,-1,BT4015,Geospatial Analytics,4,-1,-1,-1,-1
-School of Computing,"University of North Carolina, Chapel Hill",INLS585,Management for Information Professionals,3,-1,-1,-1,IS3103,Information Systems Leadership,4,-1,-1,-1,-1
-School of Computing,"University of North Carolina, Chapel Hill",INLS318,Human Computer Interaction,3,-1,-1,-1,CS3240,Interaction Design,4,-1,-1,-1,-1
-School of Computing,"University of North Carolina, Chapel Hill",COMP431,Internet Services and Protocols,3,-1,-1,-1,CS2105,Intro to Computer Networks,4,-1,-1,-1,-1
-School of Computing,"University of North Carolina, Chapel Hill",COMP530,Operating Systems,3,-1,-1,-1,CS2106,Intro to Operating Systems,4,-1,-1,-1,-1
-School of Computing,"University of North Carolina, Chapel Hill",COMP535,Introduction to Computer Security,3,-1,-1,-1,CS2107,Introduction to Information Se,4,-1,-1,-1,-1
-School of Computing,"University of North Carolina, Chapel Hill",COMP555,Bioalgorithms,3,-1,-1,-1,CS4220,Knowldg Discovery Mtds Bioinfo,4,-1,-1,-1,-1
-School of Computing,"University of North Carolina, Chapel Hill",INLS566,Information Assurance,3,-1,-1,-1,IFS4101,Legal Aspects of Information S,4,-1,-1,-1,-1
-School of Computing,"University of North Carolina, Chapel Hill",STOR565,Introduction to Machine Learning,3,-1,-1,-1,CS3244,Machine Learning,4,-1,-1,-1,-1
-School of Computing,"University of North Carolina, Chapel Hill",COMP562,Introduction to Machine Learning,3,-1,-1,-1,BT4240,Machine Learning for Predictiv,4,-1,-1,-1,-1
-School of Computing,"University of North Carolina, Chapel Hill",COMP590,Mobile Computing Systems,3,-1,-1,-1,IS3261,Mobile Apps Development for En,4,-1,-1,-1,-1
-School of Computing,"University of North Carolina, Chapel Hill",COMP786,Natural Language Processing,3,-1,-1,-1,CS4248,Natural Language Processing,4,-1,-1,-1,-1
-School of Computing,"University of North Carolina, Chapel Hill",COMP633,Parallel and Distributed Computing,3,-1,-1,-1,CS3211,Parallel & Concurrent Programg,4,-1,-1,-1,-1
-School of Computing,"University of North Carolina, Chapel Hill",COMP735,Distributed and Concurrent Algorithms,3,-1,-1,-1,CS4231,Parallel & Distr Algorithms,4,-1,-1,-1,-1
-School of Computing,"University of North Carolina, Chapel Hill",ECON125,Intro To Entrepreneurship,3,-1,-1,-1,IS3251,Principles of Technology Entre,4,-1,-1,-1,-1
-School of Computing,"University of North Carolina, Chapel Hill",COMP524,Programming Language Concepts,3,-1,-1,-1,CS2104,Programming Language Concepts,4,-1,-1,-1,-1
-School of Computing,"University of North Carolina, Chapel Hill",COMP523,Software engineering laboratory,4,-1,-1,-1,CS3216,Software Product Engineering,4,-1,-1,-1,-1
-School of Computing,"University of North Carolina, Chapel Hill",COMP635,Wireless and Mobile Communications,3,-1,-1,-1,CS4222,Wireless Networking,4,-1,-1,-1,-1
+School of Computing,University of North Carolina Chapel Hill,COMP722,Data Mining,3,-1,-1,-1,CS4225,Big Data Systems for Data Scie,4,-1,-1,-1,N
+School of Computing,University of North Carolina Chapel Hill,INLS385,Information Use for Organizational Effectiveness,3,-1,-1,-1,IS3103,Information Systems Leadership,4,-1,-1,-1,N
+School of Computing,University of North Carolina Chapel Hill,COMP560,Artificial Intelligence,3,-1,-1,-1,CS3243,Introduction to Artificial Int,4,-1,-1,-1,N
+School of Computing,University of North Carolina Chapel Hill,COMP562,Introduction to Machine Learning,3,-1,-1,-1,CS3244,Machine Learning,4,-1,-1,-1,N
+School of Computing,University of North Carolina Chapel Hill,COMP486,Applications of Natural Language Processing,3,-1,-1,-1,CS4248,Natural Language Processing,4,-1,-1,-1,N
+School of Computing,University of North Carolina Chapel Hill,STOR415,Introduction to Optimization,3,-1,-1,-1,CS4234,Optimisation Algorithms,4,-1,-1,-1,N
+School of Computing,University of North Carolina Chapel Hill,COMP380,Computers and society,3,-1,-1,-1,IS1103,Ethics in Computing,4,-1,-1,-1,Y
+School of Computing,University of North Carolina Chapel Hill,INLS384,Information and Computer Ethics,3,-1,-1,-1,IS1103,Ethics in Computing,4,-1,-1,-1,Y
+School of Computing,University of North Carolina Chapel Hill,COMP630,Operating System Implementation,3,-1,-1,-1,CS5250,Advanced Operating Systems,4,-1,-1,-1,-1
+School of Computing,University of North Carolina Chapel Hill,COMP520,Compilers,3,-1,-1,-1,CS4212,Compiler Design,4,-1,-1,-1,-1
+School of Computing,University of North Carolina Chapel Hill,COMP411,Computer Organisation,3,-1,-1,-1,CS2100,Computer Organisation,4,-1,-1,-1,-1
+School of Computing,University of North Carolina Chapel Hill,COMP535,Introduction to Computer Security,3,-1,-1,-1,CS3235,Computer Security,4,-1,-1,-1,-1
+School of Computing,University of North Carolina Chapel Hill,COMP590,Special Topics: Introduction to Cryptography,3,-1,-1,-1,CS4236,Cryptography Theory & Practice,4,-1,-1,-1,-1
+School of Computing,University of North Carolina Chapel Hill,COMP210,Data Structures and Analysis,3,-1,-1,-1,CS2040,Data Structures and Algorithms,4,-1,-1,-1,-1
+School of Computing,University of North Carolina Chapel Hill,COMP421,Files and Databases,3,-1,-1,-1,CS2102,Database Systems,4,-1,-1,-1,-1
+School of Computing,University of North Carolina Chapel Hill,COMP521,Files and Databases,3,-1,-1,-1,CS2102,Database Systems,4,-1,-1,-1,-1
+School of Computing,University of North Carolina Chapel Hill,INLS523,Introduction to Database Concepts and Applications,3,-1,-1,-1,CS2102,Database Systems,4,-1,-1,-1,-1
+School of Computing,University of North Carolina Chapel Hill,INLS623,Database Systems II: Intermediate Databases,3,-1,-1,-1,CS3223,Database Systems Implementatio,4,-1,-1,-1,-1
+School of Computing,University of North Carolina Chapel Hill,INLS523,Database Systems I: Introduction to Databases,3,-1,-1,-1,IT2002,Database Technology & Mgt,4,-1,-1,-1,-1
+School of Computing,University of North Carolina Chapel Hill,COMP550,Algorithms and Analysis,3,-1,-1,-1,CS3230,Design & Analysis of Algorithm,4,-1,-1,-1,-1
+School of Computing,University of North Carolina Chapel Hill,BUSI558,Digital Marketing,3,-1,-1,-1,IS3150,Digital Media Marketing,4,-1,-1,-1,-1
+School of Computing,University of North Carolina Chapel Hill,INLS623,Database II,3,-1,-1,-1,CS4211,Formal Methods for Software En,4,-1,-1,-1,-1
+School of Computing,University of North Carolina Chapel Hill,GEOG491,Introduction to GIS,3,-1,-1,-1,BT4015,Geospatial Analytics,4,-1,-1,-1,-1
+School of Computing,University of North Carolina Chapel Hill,INLS585,Management for Information Professionals,3,-1,-1,-1,IS3103,Information Systems Leadership,4,-1,-1,-1,-1
+School of Computing,University of North Carolina Chapel Hill,INLS318,Human Computer Interaction,3,-1,-1,-1,CS3240,Interaction Design,4,-1,-1,-1,-1
+School of Computing,University of North Carolina Chapel Hill,COMP431,Internet Services and Protocols,3,-1,-1,-1,CS2105,Intro to Computer Networks,4,-1,-1,-1,-1
+School of Computing,University of North Carolina Chapel Hill,COMP530,Operating Systems,3,-1,-1,-1,CS2106,Intro to Operating Systems,4,-1,-1,-1,-1
+School of Computing,University of North Carolina Chapel Hill,COMP535,Introduction to Computer Security,3,-1,-1,-1,CS2107,Introduction to Information Se,4,-1,-1,-1,-1
+School of Computing,University of North Carolina Chapel Hill,COMP555,Bioalgorithms,3,-1,-1,-1,CS4220,Knowldg Discovery Mtds Bioinfo,4,-1,-1,-1,-1
+School of Computing,University of North Carolina Chapel Hill,INLS566,Information Assurance,3,-1,-1,-1,IFS4101,Legal Aspects of Information S,4,-1,-1,-1,-1
+School of Computing,University of North Carolina Chapel Hill,STOR565,Introduction to Machine Learning,3,-1,-1,-1,CS3244,Machine Learning,4,-1,-1,-1,-1
+School of Computing,University of North Carolina Chapel Hill,COMP562,Introduction to Machine Learning,3,-1,-1,-1,BT4240,Machine Learning for Predictiv,4,-1,-1,-1,-1
+School of Computing,University of North Carolina Chapel Hill,COMP590,Mobile Computing Systems,3,-1,-1,-1,IS3261,Mobile Apps Development for En,4,-1,-1,-1,-1
+School of Computing,University of North Carolina Chapel Hill,COMP786,Natural Language Processing,3,-1,-1,-1,CS4248,Natural Language Processing,4,-1,-1,-1,-1
+School of Computing,University of North Carolina Chapel Hill,COMP633,Parallel and Distributed Computing,3,-1,-1,-1,CS3211,Parallel & Concurrent Programg,4,-1,-1,-1,-1
+School of Computing,University of North Carolina Chapel Hill,COMP735,Distributed and Concurrent Algorithms,3,-1,-1,-1,CS4231,Parallel & Distr Algorithms,4,-1,-1,-1,-1
+School of Computing,University of North Carolina Chapel Hill,ECON125,Intro To Entrepreneurship,3,-1,-1,-1,IS3251,Principles of Technology Entre,4,-1,-1,-1,-1
+School of Computing,University of North Carolina Chapel Hill,COMP524,Programming Language Concepts,3,-1,-1,-1,CS2104,Programming Language Concepts,4,-1,-1,-1,-1
+School of Computing,University of North Carolina Chapel Hill,COMP523,Software engineering laboratory,4,-1,-1,-1,CS3216,Software Product Engineering,4,-1,-1,-1,-1
+School of Computing,University of North Carolina Chapel Hill,COMP635,Wireless and Mobile Communications,3,-1,-1,-1,CS4222,Wireless Networking,4,-1,-1,-1,-1
 School of Computing,University of Oslo,IN3020,Database Systems,7.5,-1,-1,-1,CS2102,Database Systems,4,-1,-1,-1,N
 School of Computing,University of Oslo,IN5040,Advanced Database Systems for Big Data,40,-1,-1,-1,CS4225,Big Data Systems for Data Scie,4,-1,-1,-1,-1
 School of Computing,University of Oslo,IN3130,Algorithms: Design and Efficiency,10,-1,-1,-1,CS3230,Design & Analysis of Algorithm,4,-1,-1,-1,-1
@@ -2286,8 +2286,8 @@ School of Computing,University of Pennsylvania,CIS196,Ruby on Rails Web Developm
 School of Computing,University of Pennsylvania,MATH320,Computer Methods in Mathematical Science I,3,-1,-1,-1,BT3102,Computational Methods for Busi,4,-1,-1,-1,N
 School of Computing,University of Pennsylvania,ESE 204,Decision Models,3,-1,-1,-1,BT3102,Computational Methods for Busi,4,-1,-1,-1,N
 School of Computing,University of Pennsylvania,CIS240,Introduction to Computer Architecture,3,-1,-1,-1,CS2100,Computer Organisation,4,-1,-1,-1,N
-School of Computing,University of Pennsylvania,STAT 474,"Modern Regression for the Social, Behavioral and Biological Sciences",3,-1,-1,-1,BT4240,Machine Learning for Predictiv,4,-1,-1,-1,N
-School of Computing,University of Pennsylvania,PHYS360,"Statistics, Data Mining, and Machine Learning",3,-1,-1,-1,BT4240,Machine Learning for Predictiv,4,-1,-1,-1,N
+School of Computing,University of Pennsylvania,STAT 474,Modern Regression for the Social Behavioral and Biological Sciences,3,-1,-1,-1,BT4240,Machine Learning for Predictiv,4,-1,-1,-1,N
+School of Computing,University of Pennsylvania,PHYS360,Statistics Data Mining and Machine Learning,3,-1,-1,-1,BT4240,Machine Learning for Predictiv,4,-1,-1,-1,N
 School of Computing,University of Pennsylvania,CIS120,Programming Languages and Techniques I,3,-1,-1,-1,CS2030,Programming Methodology II,4,-1,-1,-1,N
 School of Computing,University of Pennsylvania,CIS121,Programming Languages and Techniques II,3,-1,-1,-1,CS2040,Data Structures and Algorithms,4,-1,-1,-1,-1
 School of Computing,University of Pittsburgh,CS1660,Introduction to Cloud Computing,3,-1,-1,-1,CS5224,Cloud Computing,4,-1,-1,-1,N
@@ -2326,8 +2326,8 @@ School of Computing,University of Southern California,ITP499/256,Blockchain,4,-1
 School of Computing,University of Southern California,MATH458,Numerical Methods,4,-1,-1,-1,BT3102,Computational Methods for Busi,4,-1,-1,-1,N
 School of Computing,University of Southern California,INF553,Foundations and Applications of Data Mining,4,-1,-1,-1,BT4222,Mining Web Data for Business I,4,-1,-1,-1,N
 School of Computing,University of Southern California,DSO428,Essentials and Digital Frontiers of Big Data,4,-1,-1,-1,IT3010,Data Management for Business,4,-1,-1,-1,-1
-School of Computing,University of Southern California,ISE382,"Database Systems: Concepts, Design and Implementation",4,-1,-1,-1,CS2102,Database Systems,4,-1,-1,-1,-1
-School of Computing,University of Southern California,ISE 382,"ISE 382 Database Systems: Concepts, Design and Implementation",4,-1,-1,-1,CS2102,Database Systems,4,-1,-1,-1,-1
+School of Computing,University of Southern California,ISE382,Database Systems: Concepts Design and Implementation,4,-1,-1,-1,CS2102,Database Systems,4,-1,-1,-1,-1
+School of Computing,University of Southern California,ISE 382,ISE 382 Database Systems: Concepts Design and Implementation,4,-1,-1,-1,CS2102,Database Systems,4,-1,-1,-1,-1
 School of Computing,University of Southern California,CSCI170,Discrete Methods in Computer Science,4,-1,-1,-1,CS1231,Discrete Structures,4,-1,-1,-1,-1
 School of Computing,University of Southern California,ITP310,Design for User Experience,4,-1,-1,-1,CS3240,Interaction Design,4,-1,-1,-1,-1
 School of Computing,University of Southern California,CSCI450,Introduction to Computer Networks,4,-1,-1,-1,CS2105,Intro to Computer Networks,4,-1,-1,-1,-1
@@ -2385,7 +2385,7 @@ School of Computing,University of Toronto,CSC420H1,Introduction to Image Underst
 School of Computing,University of Toronto,ECE243H1,Computer Organization,0.5,-1,-1,-1,CS2100,Computer Organisation,4,-1,-1,-1,-1
 School of Computing,University of Toronto,CSC343H1,Introduction to Databases,0.5,-1,-1,-1,CS2102,Database Systems,4,-1,-1,-1,-1
 School of Computing,University of Toronto,CSC343H1,Introduction to Databases,0.5,-1,-1,-1,IT2002,Database Technology & Mgt,4,-1,-1,-1,-1
-School of Computing,University of Toronto,CSC373H1,"Algorithm Design, Analysis & Complexity",0.5,-1,-1,-1,CS3230,Design & Analysis of Algorithm,4,-1,-1,-1,-1
+School of Computing,University of Toronto,CSC373H1,Algorithm Design Analysis & Complexity,0.5,-1,-1,-1,CS3230,Design & Analysis of Algorithm,4,-1,-1,-1,-1
 School of Computing,University of Toronto,CSC404H1,Introduction to Video Game Design,0.5,-1,-1,-1,CS3247,Game Development,4,-1,-1,-1,-1
 School of Computing,University of Toronto,ROB311H1,Artificial Intellgence,0.5,-1,-1,-1,CS3243,Introduction to Artificial Int,4,-1,-1,-1,-1
 School of Computing,University of Toronto,CSC384H1,Introduction to Artificial Intelligence,0.5,-1,-1,-1,CS3243,Introduction to Artificial Int,4,-1,-1,-1,-1
@@ -2423,32 +2423,32 @@ School of Computing,University of Warwick,CS126,Design of Information Structures
 School of Computing,University of Warwick,CS261,Software Engineering,15,-1,-1,-1,CS2103,Software Engineering,4,-1,-1,-1,N
 School of Computing,University of Warwick,CS137,Discrete Mathematics and its Applications,15,-1,-1,-1,CS1231,Discrete Structures,4,-1,-1,-1,Y
 School of Computing,University of Warwick,IB261,Enterprise information systems,12,-1,-1,-1,IS3221,ERP Systems with Analytics Sol,4,-1,-1,-1,-1
-School of Computing,"University of Washington, Seattle",CSE431,Introduction to Theory of Computation,3,-1,-1,-1,CS3242,3D Modeling and Animation,4,-1,-1,-1,N
-School of Computing,"University of Washington, Seattle",CS547,Machine Learning for Big Data,4,-1,-1,-1,BT4221,Big Data Techniques & Technolo,4,-1,-1,-1,N
-School of Computing,"University of Washington, Seattle",SCM530,Managing and Mining Big Data,4,-1,-1,-1,BT4221,Big Data Techniques & Technolo,4,-1,-1,-1,N
-School of Computing,"University of Washington, Seattle",CFRM525,"Fintech, Blockchain and Cryptocurrency",3,-1,-1,-1,IS4302,Blockchain and Distributed Led,4,-1,-1,-1,N
-School of Computing,"University of Washington, Seattle",CSE455,Computer Vision,3,-1,-1,-1,CS4243,Comp Vision & Pattern Recogntn,4,-1,-1,-1,N
-School of Computing,"University of Washington, Seattle",CSE521,Design and Analysis of Algorithms I,3,-1,-1,-1,CS3230,Design & Analysis of Algorithm,4,-1,-1,-1,N
-School of Computing,"University of Washington, Seattle",CSE461,Introduction to Computer-Communication Networks (4),4,-1,-1,-1,CS2105,Intro to Computer Networks,4,-1,-1,-1,N
-School of Computing,"University of Washington, Seattle",CSE415,Introduction to Artificial Intelligence,3,-1,-1,-1,CS3243,Introduction to Artificial Int,4,-1,-1,-1,N
-School of Computing,"University of Washington, Seattle",CSE473,Introduction to Artificial Intelligence,3,-1,-1,-1,CS3243,Introduction to Artificial Int,4,-1,-1,-1,N
-School of Computing,"University of Washington, Seattle",CSE484,Computer Security,4,-1,-1,-1,CS2107,Introduction to Information Se,4,-1,-1,-1,N
-School of Computing,"University of Washington, Seattle",CSE440,"Intro To HCI: User Interface Design, Prototype, Evaluation",3,-1,-1,-1,CS4244,Knowledge Representation and R,4,-1,-1,-1,N
-School of Computing,"University of Washington, Seattle",CSE546,Machine Learning,4,-1,-1,-1,CS3244,Machine Learning,4,-1,-1,-1,N
-School of Computing,"University of Washington, Seattle",CSE446,Machine Learning (4),4,-1,-1,-1,CS3244,Machine Learning,4,-1,-1,-1,N
-School of Computing,"University of Washington, Seattle",CSE142,Computer Programming I,4,-1,-1,-1,CS1010,Programming Methodology,4,-1,-1,-1,Y
-School of Computing,"University of Washington, Seattle",CSE160,Data Programming,4,-1,-1,-1,CS1010S,Programming Methodology,4,-1,-1,-1,Y
-School of Computing,"University of Washington, Seattle",CFRM526,"Fintech, Blockchain and Cryptocurrency",3,-1,-1,-1,IS4302,Blockchain and Distributed Led,4,-1,-1,-1,-1
-School of Computing,"University of Washington, Seattle",CSE414,Introduction to Database Systems,3,-1,-1,-1,IS3107,Data Engineering,4,-1,-1,-1,-1
-School of Computing,"University of Washington, Seattle",CSE373,Data Structure and Algorithms,4,-1,-1,-1,CS2040,Data Structures and Algorithms,4,-1,-1,-1,-1
-School of Computing,"University of Washington, Seattle",CSE444,Database Internals,4,-1,-1,-1,CS3223,Database Systems Implementatio,4,-1,-1,-1,-1
-School of Computing,"University of Washington, Seattle",CSE417,Algorithms And Computational Complexity,3,-1,-1,-1,CS3230,Design & Analysis of Algorithm,4,-1,-1,-1,-1
-School of Computing,"University of Washington, Seattle",CSE311,Foundations of Computing,3,-1,-1,-1,CS1231,Discrete Structures,4,-1,-1,-1,-1
-School of Computing,"University of Washington, Seattle",MATH300,Introduction to Mathematical Reasoning,3,-1,-1,-1,CS1231,Discrete Structures,4,-1,-1,-1,-1
-School of Computing,"University of Washington, Seattle",IFO386,Professionalism in Informatics,3,-1,-1,-1,IS3103,Information Systems Leadership,4,-1,-1,-1,-1
-School of Computing,"University of Washington, Seattle",CSE573,Artificial Intelligence I,4,-1,-1,-1,CS3243,Introduction to Artificial Int,4,-1,-1,-1,-1
-School of Computing,"University of Washington, Seattle",CSE446,Machine Learning,3,-1,-1,-1,BT4240,Machine Learning for Predictiv,4,-1,-1,-1,-1
-School of Computing,"University of Washington, Seattle",CSE447,Natural Language Processing,4,-1,-1,-1,CS4248,Natural Language Processing,4,-1,-1,-1,-1
+School of Computing,University of Washington Seattle,CSE431,Introduction to Theory of Computation,3,-1,-1,-1,CS3242,3D Modeling and Animation,4,-1,-1,-1,N
+School of Computing,University of Washington Seattle,CS547,Machine Learning for Big Data,4,-1,-1,-1,BT4221,Big Data Techniques & Technolo,4,-1,-1,-1,N
+School of Computing,University of Washington Seattle,SCM530,Managing and Mining Big Data,4,-1,-1,-1,BT4221,Big Data Techniques & Technolo,4,-1,-1,-1,N
+School of Computing,University of Washington Seattle,CFRM525,Fintech Blockchain and Cryptocurrency,3,-1,-1,-1,IS4302,Blockchain and Distributed Led,4,-1,-1,-1,N
+School of Computing,University of Washington Seattle,CSE455,Computer Vision,3,-1,-1,-1,CS4243,Comp Vision & Pattern Recogntn,4,-1,-1,-1,N
+School of Computing,University of Washington Seattle,CSE521,Design and Analysis of Algorithms I,3,-1,-1,-1,CS3230,Design & Analysis of Algorithm,4,-1,-1,-1,N
+School of Computing,University of Washington Seattle,CSE461,Introduction to Computer-Communication Networks (4),4,-1,-1,-1,CS2105,Intro to Computer Networks,4,-1,-1,-1,N
+School of Computing,University of Washington Seattle,CSE415,Introduction to Artificial Intelligence,3,-1,-1,-1,CS3243,Introduction to Artificial Int,4,-1,-1,-1,N
+School of Computing,University of Washington Seattle,CSE473,Introduction to Artificial Intelligence,3,-1,-1,-1,CS3243,Introduction to Artificial Int,4,-1,-1,-1,N
+School of Computing,University of Washington Seattle,CSE484,Computer Security,4,-1,-1,-1,CS2107,Introduction to Information Se,4,-1,-1,-1,N
+School of Computing,University of Washington Seattle,CSE440,Intro To HCI: User Interface Design Prototype Evaluation,3,-1,-1,-1,CS4244,Knowledge Representation and R,4,-1,-1,-1,N
+School of Computing,University of Washington Seattle,CSE546,Machine Learning,4,-1,-1,-1,CS3244,Machine Learning,4,-1,-1,-1,N
+School of Computing,University of Washington Seattle,CSE446,Machine Learning (4),4,-1,-1,-1,CS3244,Machine Learning,4,-1,-1,-1,N
+School of Computing,University of Washington Seattle,CSE142,Computer Programming I,4,-1,-1,-1,CS1010,Programming Methodology,4,-1,-1,-1,Y
+School of Computing,University of Washington Seattle,CSE160,Data Programming,4,-1,-1,-1,CS1010S,Programming Methodology,4,-1,-1,-1,Y
+School of Computing,University of Washington Seattle,CFRM526,Fintech Blockchain and Cryptocurrency,3,-1,-1,-1,IS4302,Blockchain and Distributed Led,4,-1,-1,-1,-1
+School of Computing,University of Washington Seattle,CSE414,Introduction to Database Systems,3,-1,-1,-1,IS3107,Data Engineering,4,-1,-1,-1,-1
+School of Computing,University of Washington Seattle,CSE373,Data Structure and Algorithms,4,-1,-1,-1,CS2040,Data Structures and Algorithms,4,-1,-1,-1,-1
+School of Computing,University of Washington Seattle,CSE444,Database Internals,4,-1,-1,-1,CS3223,Database Systems Implementatio,4,-1,-1,-1,-1
+School of Computing,University of Washington Seattle,CSE417,Algorithms And Computational Complexity,3,-1,-1,-1,CS3230,Design & Analysis of Algorithm,4,-1,-1,-1,-1
+School of Computing,University of Washington Seattle,CSE311,Foundations of Computing,3,-1,-1,-1,CS1231,Discrete Structures,4,-1,-1,-1,-1
+School of Computing,University of Washington Seattle,MATH300,Introduction to Mathematical Reasoning,3,-1,-1,-1,CS1231,Discrete Structures,4,-1,-1,-1,-1
+School of Computing,University of Washington Seattle,IFO386,Professionalism in Informatics,3,-1,-1,-1,IS3103,Information Systems Leadership,4,-1,-1,-1,-1
+School of Computing,University of Washington Seattle,CSE573,Artificial Intelligence I,4,-1,-1,-1,CS3243,Introduction to Artificial Int,4,-1,-1,-1,-1
+School of Computing,University of Washington Seattle,CSE446,Machine Learning,3,-1,-1,-1,BT4240,Machine Learning for Predictiv,4,-1,-1,-1,-1
+School of Computing,University of Washington Seattle,CSE447,Natural Language Processing,4,-1,-1,-1,CS4248,Natural Language Processing,4,-1,-1,-1,-1
 School of Computing,University of Waterloo,CS444,Compiler Construction,0.5,-1,-1,-1,CS4212,Compiler Design,4,-1,-1,-1,N
 School of Computing,University of Waterloo,CS488,Introduction to Computer Graphics,0.5,-1,-1,-1,CS3241,Computer Graphics,4,-1,-1,-1,N
 School of Computing,University of Waterloo,ECE250,Algorithms and Data Structures,0.5,-1,-1,-1,CS2040,Data Structures and Algorithms,4,-1,-1,-1,N
@@ -2487,7 +2487,7 @@ School of Computing,University of Waterloo,CS446,Software Design and Architectur
 School of Computing,University of Waterloo,ECE452,Software Design and Architectures,0.5,-1,-1,-1,CS3219,Software Engineering Principle,4,-1,-1,-1,-1
 School of Computing,University of Waterloo,SE464,Software Design and Architectures,0.5,-1,-1,-1,CS3219,Software Engineering Principle,4,-1,-1,-1,-1
 School of Computing,University of Waterloo,CS247,Software Engineering Principles,0.5,-1,-1,-1,CS3219,Software Engineering Principle,4,-1,-1,-1,-1
-School of Computing,University of Waterloo,ECE453,"Software Testing, Quality Assurance, & Maintenance",0.5,-1,-1,-1,CS4218,Software Testing,4,-1,-1,-1,-1
+School of Computing,University of Waterloo,ECE453,Software Testing Quality Assurance & Maintenance,0.5,-1,-1,-1,CS4218,Software Testing,4,-1,-1,-1,-1
 School of Computing,University of Waterloo,CS349,User Interfaces,0.5,-1,-1,-1,CS3249,User Interface Development,4,-1,-1,-1,-1
 School of Computing,University of Wisconsin-Madison,COMP SCI 435,Introduction to Cryptography,3,-1,-1,-1,CS4236,Cryptography Theory & Practice,4,-1,-1,-1,N
 School of Computing,University of Wisconsin-Madison,MATH435,Introduction to Cryptography,3,-1,-1,-1,CS4236,Cryptography Theory & Practice,4,-1,-1,-1,N
@@ -2580,7 +2580,7 @@ School of Computing,Western University,SE3309A,DATABASE MANAGEMENT SYSTEMS,3,-1,
 School of Computing,Western University,SE3353A,HUMAN-COMPUTER INTERFACE DESIGN,3,-1,-1,-1,CS3240,Interaction Design,4,-1,-1,-1,N
 School of Computing,Western University,COMPSCI3305A/B,Operating Systems,0.5,-1,-1,-1,CS2106,Intro to Operating Systems,4,-1,-1,-1,N
 School of Computing,Western University,SE3352 A/B,Software Requirements and Analysis,0.5,-1,-1,-1,CS3219,Software Engineering Principle,4,-1,-1,-1,N
-School of Computing,Western University,SE4455,"CLOUD COMPUTING: CONCEPTS, TECHNOLOGIES AND APPLICATIONS",3,-1,-1,-1,CS5224,Cloud Computing,4,-1,-1,-1,-1
+School of Computing,Western University,SE4455,CLOUD COMPUTING: CONCEPTS TECHNOLOGIES AND APPLICATIONS,3,-1,-1,-1,CS5224,Cloud Computing,4,-1,-1,-1,-1
 School of Computing,Western University,CS4487,Algorithms for Image Analysis,4,-1,-1,-1,CS4243,Comp Vision & Pattern Recogntn,4,-1,-1,-1,-1
 School of Computing,Western University,MATH3159A,Introduction to Cryptography,0.5,-1,-1,-1,CS4236,Cryptography Theory & Practice,4,-1,-1,-1,-1
 School of Computing,Western University,CS3319,Databases I,4,-1,-1,-1,CS2102,Database Systems,4,-1,-1,-1,-1
@@ -2595,7 +2595,7 @@ School of Computing,Western University,CS4458A,Network Security,0.5,-1,-1,-1,CS5
 School of Computing,Western University,COMPSCI402A/B,DISTRIBUTED AND PARALLEL SYSTEMS,0.5,-1,-1,-1,CS3210,Parallel Computing,4,-1,-1,-1,-1
 School of Computing,Western University,COMPSCI402A/B,DISTRIBUTED AND PARALLEL SYSTEMS,4,-1,-1,-1,CS3210,Parallel Computing,4,-1,-1,-1,-1
 School of Computing,Western University,SE3350B,SOFTWARE ENGINEERING DESIGN I,3,-1,-1,-1,CS3219,Software Engineering Principle,4,-1,-1,-1,-1
-School of Computing,Western University,CS4472,"Software Specification, Testing and Quality Assurance",0.5,-1,-1,-1,CS4218,Software Testing,4,-1,-1,-1,-1
+School of Computing,Western University,CS4472,Software Specification Testing and Quality Assurance,0.5,-1,-1,-1,CS4218,Software Testing,4,-1,-1,-1,-1
 School of Computing,Western University,SE4452,Software Testing & Maintenance,0.5,-1,-1,-1,CS4218,Software Testing,4,-1,-1,-1,-1
 School of Computing,Western University,SE3316,Web Technologies,0.5,-1,-1,-1,CS3226,Web Programming and Applicatio,4,-1,-1,-1,-1
 School of Computing,WHU - Otto Beisheim School of Management,MGMT422,Business Information Systems (II),6,-1,-1,-1,IT3010,Data Management for Business,4,-1,-1,-1,N
