@@ -15,25 +15,22 @@ public class Parser {
             // todo change
             // String line = checkInputForMainMenu(line);
             switch (line) {
-            case patients: {
+            case patients:
                 // todo add
                 Messages.printPatientMenuMessage();
                 break;
-                }
-            case visits: {
+            case visits:
                 // todo add
                 Messages.printVisitsMenuMessage();
                 break;
-                }
-            case prescription: {
+            case prescription:
                 // todo add
                 Messages.printMedicineMenuMessage();
                 break;
-                }
-            default: {
+
+            default:
                 // todo add
                 break;
-            }
             }
         }
     }

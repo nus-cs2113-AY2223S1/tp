@@ -46,6 +46,6 @@ public class Patient {
         this.gender = gender;
     }
     // todo add
-//    public void addVisit();
-//    public void addMedicine();
+    //    public void addVisit();
+    //    public void addMedicine();
 }
