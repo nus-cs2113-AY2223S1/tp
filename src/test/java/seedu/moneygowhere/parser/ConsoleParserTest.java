@@ -2,6 +2,7 @@ package seedu.moneygowhere.parser;
 
 import org.junit.jupiter.api.Test;
 import seedu.moneygowhere.commands.ConsoleCommandAddExpense;
+import seedu.moneygowhere.commands.ConsoleCommandViewExpense;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandAddExpenseInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandNotFoundException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandViewExpenseInvalidException;
@@ -38,11 +39,12 @@ class ConsoleParserTest {
                 .getCategory()
                 == null;
 
-        assertTrue(isNameEqual
-                && isDateTimeEqual
-                && isDescriptionEqual
-                && isAmountEqual
-                && isCategoryEqual);
+        assertTrue(
+                isNameEqual
+                        && isDateTimeEqual
+                        && isDescriptionEqual
+                        && isAmountEqual
+                        && isCategoryEqual);
     }
 
     @Test
@@ -73,11 +75,12 @@ class ConsoleParserTest {
                 .getCategory()
                 == null;
 
-        assertTrue(isNameEqual
-                && isDateTimeEqual
-                && isDescriptionEqual
-                && isAmountEqual
-                && isCategoryEqual);
+        assertTrue(
+                isNameEqual
+                        && isDateTimeEqual
+                        && isDescriptionEqual
+                        && isAmountEqual
+                        && isCategoryEqual);
     }
 
     @Test
@@ -108,11 +111,12 @@ class ConsoleParserTest {
                 .getCategory()
                 == null;
 
-        assertTrue(isNameEqual
-                && isDateTimeEqual
-                && isDescriptionEqual
-                && isAmountEqual
-                && isCategoryEqual);
+        assertTrue(
+                isNameEqual
+                        && isDateTimeEqual
+                        && isDescriptionEqual
+                        && isAmountEqual
+                        && isCategoryEqual);
     }
 
     @Test
@@ -143,11 +147,12 @@ class ConsoleParserTest {
                 .getCategory()
                 .equals("Test Cat");
 
-        assertTrue(isNameEqual
-                && isDateTimeEqual
-                && isDescriptionEqual
-                && isAmountEqual
-                && isCategoryEqual);
+        assertTrue(
+                isNameEqual
+                        && isDateTimeEqual
+                        && isDescriptionEqual
+                        && isAmountEqual
+                        && isCategoryEqual);
     }
 
     @Test
@@ -155,6 +160,46 @@ class ConsoleParserTest {
         String input = "Add-Expense -n Exp";
 
         assertThrows(ConsoleParserCommandAddExpenseInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    @Test
+    void parseCommand_ve_ccve() throws
+            ConsoleParserCommandNotFoundException,
+            ConsoleParserCommandAddExpenseInvalidException,
+            ConsoleParserCommandViewExpenseInvalidException {
+        String input = "View-Expense";
+
+        ConsoleCommandViewExpense consoleCommandViewExpense = (ConsoleCommandViewExpense) ConsoleParser.parse(input);
+
+        boolean isExpenseIndexEqual = consoleCommandViewExpense
+                .getExpenseIndex()
+                == -1;
+
+        assertTrue(isExpenseIndexEqual);
+    }
+
+    @Test
+    void parseCommand_veIndex_ccveIndex() throws
+            ConsoleParserCommandNotFoundException,
+            ConsoleParserCommandAddExpenseInvalidException,
+            ConsoleParserCommandViewExpenseInvalidException {
+        String input = "View-Expense -e 0";
+
+        ConsoleCommandViewExpense consoleCommandViewExpense = (ConsoleCommandViewExpense) ConsoleParser.parse(input);
+
+        boolean isExpenseIndexEqual = consoleCommandViewExpense
+                .getExpenseIndex()
+                == 0;
+
+        assertTrue(isExpenseIndexEqual);
+    }
+
+    @Test
+    void parseCommand_veIndex_ccveInvalidException() {
+        String input = "View-Expense -e \"ThisIsAnInvalidExpenseIndex\"";
+
+        assertThrows(ConsoleParserCommandViewExpenseInvalidException.class, () ->
                 ConsoleParser.parse(input));
     }
 }
