@@ -1,11 +1,12 @@
 public class Messages {
     protected static final String logo = "ıllıllı OneDoc ıllıllı";
-    private static final String welcomeMessage = "Hello welcome to\n" +
-            logo;
-    private static final String mainMenuMessage = "Please choose one of the following options:\n " +
-            "1 - Patients\n" +
-            "2 - Visits\n" +
-            "3 - Prescription";
+    private static final String welcomeMessage = "Hello welcome to\n"
+            + logo;
+    private static final String mainMenuMessage = "Please choose one+ "
+            + " of the following options:\n "
+            + "1 - Patients\n"
+            + "2 - Visits\n"
+            + "3 - Prescription";
 
     public static void welcomeMessage() {
         System.out.println(welcomeMessage);
@@ -20,7 +21,7 @@ public class Messages {
 
     }
 
-    public static void PrintMedicineMenuMessage() {
+    public static void printMedicineMenuMessage() {
 
     }
 }
