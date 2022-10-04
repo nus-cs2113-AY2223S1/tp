@@ -29,9 +29,9 @@ public class Ui {
     }
 
     public static void showHelpList() {
+        // To include the other messages for commands
         printMessages(
                 InfoMessages.MESSAGE_INFO_HELP_GREET.toString()
-                // To include the other messages for commands
         );
     }
 
