@@ -1,28 +1,40 @@
 package seedu.duke;
 
-import java.util.Scanner;
+import seedu.duke.command.Command;
+import seedu.duke.command.GreetCommand;
 
 public class Duke {
     /**
      * Main entry-point for the java.duke.Duke application.
      */
+
+    private static Ui ui;
+    private static Biometrics biometrics;
+    public static boolean isProgramFinished = false;
+
+    public Duke() {
+        ui = new Ui();
+        biometrics = new Biometrics();
+    }
+
+    private static void startDuke() {
+        new Duke();
+        Command greetCommand = new GreetCommand();
+        greetCommand.execute();
+        ui.line();
+    }
+
     public static void main(String[] args) {
-        Parser parser = new Parser();
-        Biometrics biometrics = new Biometrics();
-        Ui ui = new Ui();
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+//Solution below adapted from  https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/Main.java
+        startDuke();
 
-        System.out.println("What can I do for you?");
-
-        while (true) {
-            String fullCommand = ui.readNextLine();
-            String output = parser.parse(fullCommand, biometrics);
-            ui.printOutput(output);
+        while (!isProgramFinished) {
+            String input = ui.input();
+            ui.line();
+            Command command = Parser.parse(input);
+            command.setData(ui, biometrics);
+            command.execute();
+            ui.line();
         }
     }
 }

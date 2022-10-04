@@ -3,16 +3,28 @@ package seedu.duke;
 import java.util.Scanner;
 
 public class Ui {
-    private Scanner in;
-    public Ui() {
-        in =  new Scanner(System.in);
+
+
+    private static Scanner in = new Scanner(System.in);
+
+
+    public void line() {
+        System.out.println("------------------------------");
     }
 
-    public void printOutput(String output) {
-        System.out.println(output);
-    }
 
-    public String readNextLine() {
+    public String input() {
         return in.nextLine();
+    }
+
+    /**
+     * Prints output to terminal.
+     *
+     * @param output Varargs output for printing
+     */
+    public void output(String... output) {
+        for (String line : output) {
+            System.out.println(line);
+        }
     }
 }

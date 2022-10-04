@@ -1,15 +1,17 @@
-package seedu.duke;
+package seedu.duke.command;
 
 import org.junit.jupiter.api.Test;
+import seedu.duke.Biometrics;
+import seedu.duke.Parser;
+import seedu.duke.Ui;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ParserTest {
-
+class SetCommandTest {
     @Test
-    void parse_setBiometricsWithValidParameters_biometricsSet() {
-        Parser parser = new Parser();
+    void execute_ValidSetArguments_UpdatedBiometrics() {
         Biometrics biometrics = new Biometrics();
+        Ui ui = new Ui();
         String command = "set biometrics";
         int age = 22;
         String gender = "male";
@@ -17,8 +19,11 @@ class ParserTest {
         int weight = 70;
         int fatPercentage = 22;
         String fullCommand = String.format("%s %d %s %d %d %d", command, age, gender, height, weight, fatPercentage);
-        assertAll("biometrics", () -> assertEquals("biometrics set", parser.parse(fullCommand, biometrics)),
-                () -> assertEquals(age, biometrics.getAge()),
+
+        Command c = Parser.parse(fullCommand);
+        c.setData(ui, biometrics);
+        c.execute();
+        assertAll("biometrics", () -> assertEquals(age, biometrics.getAge()),
                 () -> assertEquals(gender, biometrics.getGender()),
                 () -> assertEquals(height, biometrics.getHeight()),
                 () -> assertEquals(weight, biometrics.getWeight()),
@@ -26,16 +31,24 @@ class ParserTest {
     }
 
     @Test
-    void parse_setBiometricsWithInvalidParameters_expectException() {
-        Parser parser = new Parser();
+    void execute_InvalidSetArguments_UnchangedBiometrics() {
         Biometrics biometrics = new Biometrics();
+        Ui ui = new Ui();
         String command = "set biometrics";
         int age = 22;
-        String gender = "ale";
+        String gender = "male";
         int height = 172;
-        int weight = 0;
+        int weight = 70;
         int fatPercentage = 22;
         String fullCommand = String.format("%s %d %s %d %d %d", command, age, gender, height, weight, fatPercentage);
-        assertEquals("Invalid biometrics", parser.parse(fullCommand, biometrics));
+
+        Command c = Parser.parse(fullCommand);
+        c.setData(ui, biometrics);
+        c.execute();
+        assertAll("biometrics", () -> assertEquals(0, biometrics.getAge()),
+                () -> assertEquals("-", biometrics.getGender()),
+                () -> assertEquals(0, biometrics.getHeight()),
+                () -> assertEquals(0, biometrics.getWeight()),
+                () -> assertEquals(0, biometrics.getFatPercentage()));
     }
 }
