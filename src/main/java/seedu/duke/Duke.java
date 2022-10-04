@@ -2,6 +2,7 @@ package seedu.duke;
 
 import java.util.Scanner;
 
+import seedu.duke.command.Parser;
 import seedu.duke.module.Module;
 import seedu.duke.university.University;
 
@@ -18,7 +19,8 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         System.out.println("What is your name?");
 
-        Scanner in = new Scanner(System.in);
-        System.out.println("Hello " + in.nextLine());
+        Storage.loadDatabase();
+        // Scanner in = new Scanner(System.in);
+        // System.out.println("Hello " + in.nextLine());
     }
 }
