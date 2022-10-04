@@ -1,13 +1,21 @@
-package seedu.duke;
+package seedu.duke.data.transaction;
 
 public class Transaction {
     private String description;
     private int amount;
-    private String type; // income or expense
     private String category; //category of income or expense
     private int day;
     private int month;
     private int year;
+
+    public Transaction(String description, int amount, String category, int day, int month, int year) {
+        this.description = description;
+        this.amount = amount;
+        this.category = category;
+        this.day = day;
+        this.month = month;
+        this.year = year;
+    }
 
     public String getDescription() {
         return description;
@@ -23,14 +31,6 @@ public class Transaction {
 
     public void setAmount(int amount) {
         this.amount = amount;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public String getCategory() {
