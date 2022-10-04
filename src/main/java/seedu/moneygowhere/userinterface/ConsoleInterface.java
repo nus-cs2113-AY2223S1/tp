@@ -1,6 +1,10 @@
 package seedu.moneygowhere.userinterface;
 
-import seedu.moneygowhere.commands.*;
+import seedu.moneygowhere.commands.ConsoleCommand;
+import seedu.moneygowhere.commands.ConsoleCommandAddExpense;
+import seedu.moneygowhere.commands.ConsoleCommandSortExpense;
+import seedu.moneygowhere.commands.ConsoleCommandViewExpense;
+import seedu.moneygowhere.commands.ConsoleCommandBye;
 import seedu.moneygowhere.common.Configurations;
 import seedu.moneygowhere.common.Messages;
 import seedu.moneygowhere.data.expense.Expense;
@@ -179,7 +183,7 @@ public class ConsoleInterface {
         }
     }
 
-    private void runCommandSortExpense (ConsoleCommandSortExpense commandSortExpense) {
+    private void runCommandSortExpense(ConsoleCommandSortExpense commandSortExpense) {
         String type = commandSortExpense.getType();
         ArrayList<Expense> expenses = expenseManager.getExpenses();
         if (type.equalsIgnoreCase(DATE)) {

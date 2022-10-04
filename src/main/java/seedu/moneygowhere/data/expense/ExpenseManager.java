@@ -25,7 +25,7 @@ public class ExpenseManager {
         return new ArrayList<>(expenses);
     }
 
-    public void updateExpenses (ArrayList<Expense> expenses) {
+    public void updateExpenses(ArrayList<Expense> expenses) {
         this.expenses = expenses;
     }
 }

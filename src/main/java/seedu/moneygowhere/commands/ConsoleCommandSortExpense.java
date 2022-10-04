@@ -5,13 +5,14 @@ import seedu.moneygowhere.data.expense.Expense;
 import java.math.BigDecimal;
 import java.util.Comparator;
 
-public class ConsoleCommandSortExpense extends ConsoleCommand{
+public class ConsoleCommandSortExpense extends ConsoleCommand {
     private String type;
+
     public ConsoleCommandSortExpense(String type) {
         this.type = type;
     }
 
-    public String getType () {
+    public String getType() {
         return type;
     }
 
@@ -25,8 +26,9 @@ public class ConsoleCommandSortExpense extends ConsoleCommand{
             return expenseName1.compareTo(expenseName2);
         }
     };
+
     /**
-     * Comparator sorts from A to Z
+     * Comparator sorts from A to Z.
      */
     public Comparator<Expense> sortByAlphabet = new Comparator<Expense>() {
         @Override
@@ -37,8 +39,9 @@ public class ConsoleCommandSortExpense extends ConsoleCommand{
             return expenseName1.compareTo(expenseName2);
         }
     };
+
     /**
-     * Comparator sorts by amount, in ascending order
+     * Comparator sorts by amount, in ascending order.
      */
     public Comparator<Expense> sortByAmount = new Comparator<Expense>() {
         @Override
