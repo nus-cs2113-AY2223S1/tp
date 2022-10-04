@@ -1,4 +1,4 @@
 ____________________________________________________________
 Hello! I'm your Moolah Manager!
-Enter <help> if you need the list of commands
+Enter <help> if you need the list of commands.
 ____________________________________________________________
