@@ -1,4 +1,4 @@
-package seedu.duke.transaction;
+package seedu.duke.data.transaction;
 
 /**
  * Represents the income of the user added to the application.

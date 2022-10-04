@@ -1,6 +1,6 @@
 package seedu.duke;
 
-import seedu.duke.transaction.Transaction;
+import seedu.duke.data.transaction.Transaction;
 
 import java.util.ArrayList;
 import java.util.Scanner;

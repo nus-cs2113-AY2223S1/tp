@@ -1,4 +1,4 @@
-package seedu.duke.transaction;
+package seedu.duke.data.transaction;
 
 public class Transaction {
     private String description;
