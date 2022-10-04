@@ -1,4 +1,4 @@
-package ComputerComponentChooser;
+package computerComponentChooser;
 
 public class Parser {
     static boolean checkBye(String line) {

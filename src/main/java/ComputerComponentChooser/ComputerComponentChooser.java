@@ -1,8 +1,8 @@
-package ComputerComponentChooser;
+package computerComponentChooser;
 
 import java.util.Scanner;
 
-public class ComputerComponentChooser {
+public class computerComponentChooser {
     public static void main(String[] args) {
         Ui.startSession();
 

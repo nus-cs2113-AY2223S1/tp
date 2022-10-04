@@ -1,8 +1,8 @@
-package ComputerComponentChooser;
+package computerComponentChooser;
 
 public class Ui {
     /**
-     * A concatenation of strings that visually represents the word ComputerComponentChooser
+     * A concatenation of strings that visually represents the word ComputerComponentChooser.
      */
     private static final String LOGO = "  _____                     __         \n"
             + " / ___/__  __ _  ___  __ __/ /____ ____\n"
@@ -19,19 +19,19 @@ public class Ui {
             + "/ /__/ _ \\/ _ \\/ _ \\(_-</ -_) __/\n"
             + "\\___/_//_/\\___/\\___/___/\\__/_/   \n";
     /**
-     * A string visually repressing a line
+     * A string visually repressing a line.
      */
     private static final String LINEBREAK = "____________________________________________________________";
 
     /**
-     * prints the LINEBREAK String
+     * prints the LINEBREAK String.
      */
     static void printLine() {
         System.out.println(LINEBREAK);
     }
 
     /**
-     * prints the LOGO string preceded by a Hello from greeting
+     * prints the LOGO string preceded by a Hello from greeting.
      */
     static void printLogo() {
         System.out.println("Hello from\n" + LOGO);
@@ -46,7 +46,7 @@ public class Ui {
     }
 
     /**
-     * Prints the User Interface associated with the end of the program
+     * Prints the User Interface associated with the end of the program.
      */
     static void endSession() {
         Ui.printLine();
