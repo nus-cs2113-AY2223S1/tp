@@ -13,21 +13,21 @@ public class Parser {
         line = in.nextLine();
         if (!line.equals(exitMessage)){
             // todo change
-            String line = checkInputForMainMenu(line);
+//            String line = checkInputForMainMenu(line);
             switch (line){
                 case patients: {
                     Messages.printPatientMenuMessage();
-                    patientParser();
+//                    patientParser();
                     break;
                 }
                 case visits: {
                     Messages.printVisitsMenuMessage();
-                    visitsParser();
+//                    visitsParser();
                     break;
                 }
                 case prescription: {
                     Messages.PrintMedicineMenuMessage();
-                    prescriptionParser();
+//                    prescriptionParser();
                     break;
                 }
 
@@ -35,16 +35,17 @@ public class Parser {
         }
     }
 
+    //todo add:
+//    private static String  checkInputForMainMenu(String input);
+//    public static void patientParser();
+//    public static void visitsParser();
+//    public static void medicineParser();
+
     public static void addPatientParser(String input){
         // add regex check
 
     }
 
 
-    //todo add:
-//    private static String  checkInputForMainMenu(String input);
-//    public static void patientParser();
-//    public static void visitsParser();
-//    public static void medicineParser();
 
 }
