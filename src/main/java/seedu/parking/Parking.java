@@ -1,6 +1,9 @@
 package seedu.parking;
 
+import seedu.api.Api;
+
 import java.util.Scanner;
+import java.util.concurrent.ExecutionException;
 
 public class Parking {
     /**
@@ -13,5 +16,12 @@ public class Parking {
 
         Scanner in = new Scanner(System.in);
         System.out.println("Hello " + in.nextLine());
+
+        Api api = new Api();
+        try {
+            api.asyncGetRequest();
+        } catch (ExecutionException | InterruptedException e) {
+            System.out.println("Something goes wrong.");
+        }
     }
 }
