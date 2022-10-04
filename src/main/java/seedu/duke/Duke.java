@@ -2,6 +2,7 @@ package seedu.duke;
 
 import java.util.Scanner;
 
+import seedu.duke.command.Database;
 import seedu.duke.command.Parser;
 import seedu.duke.module.Module;
 import seedu.duke.university.University;
