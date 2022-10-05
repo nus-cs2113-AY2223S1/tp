@@ -14,6 +14,8 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
+import static seedu.duke.common.DateFormats.DATE_INPUT_PATTERN;
+
 public class Parser {
     static final boolean IS_EXIT = false;
     static final boolean IS_CONTINUE = true;
@@ -154,7 +156,7 @@ public class Parser {
                 }
                 break;
             case "d/":
-                date = parseDateTag(userInput);
+                date = parseDateTag(parameter);
                 break;
             case "i/":
                 description = parameter;
@@ -209,13 +211,14 @@ public class Parser {
 
     /**
      * Parse the user parameter input for date into a LocalDate object and returns it.
+     *
      * @param parameter The user input after the user tag.
      * @return The LocalDate object parsed from user input given.
      * @throws AddTransactionInvalidDateException Invalid date format exception.
      */
     private static LocalDate parseDateTag(String parameter) throws AddTransactionInvalidDateException {
         try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyyyy");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_INPUT_PATTERN.toString());
             LocalDate date = LocalDate.parse(parameter, formatter);
             return date;
         } catch (DateTimeParseException exception) {

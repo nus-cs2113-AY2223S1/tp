@@ -1,6 +1,9 @@
 package seedu.duke.data.transaction;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+import static seedu.duke.common.DateFormats.DATE_OUTPUT_PATTERN;
 
 public class Transaction {
     private String description;
@@ -39,9 +42,18 @@ public class Transaction {
         this.category = category;
     }
 
+    public String printFormattedDate() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_OUTPUT_PATTERN.toString());
+        return date.format(formatter);
+    }
+
+    public String printFormattedCategory() {
+        return "[" + category + "]";
+    }
+
     @Override
     public String toString() {
-        return "Date: " + date + " Category: " + category + " Description: " + description
-                + " Amount: " + amount;
+        return printFormattedCategory() + " $" + amount + " at " + printFormattedDate() +
+                " | Description: " + description;
     }
 }
