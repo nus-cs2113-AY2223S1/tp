@@ -5,6 +5,7 @@ import seedu.duke.data.transaction.Expense;
 import seedu.duke.data.transaction.Income;
 import seedu.duke.data.transaction.Transaction;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
@@ -50,14 +51,14 @@ public class TransactionList {
         System.out.println(InfoMessages.MESSAGE_INFO_DIVIDER);
     }
 
-    public void addExpense(String description, int amount, String category, String date) {
+    public void addExpense(String description, int amount, String category, LocalDate date) {
         transactions.add(new Expense(description, amount, category, date));
         System.out.println(InfoMessages.MESSAGE_INFO_DIVIDER);
         System.out.println("MOOOOOO... I have added an Expense Transaction.");
         System.out.println(InfoMessages.MESSAGE_INFO_DIVIDER);
     }
 
-    public void addIncome(String description, int amount, String category, String date) {
+    public void addIncome(String description, int amount, String category, LocalDate date) {
         transactions.add(new Income(description, amount, category, date));
         System.out.println(InfoMessages.MESSAGE_INFO_DIVIDER);
         System.out.println("MOOOOOO... I have added an Income Transaction.");
@@ -78,6 +79,5 @@ public class TransactionList {
 
         return transactionsList;
     }
-
 
 }

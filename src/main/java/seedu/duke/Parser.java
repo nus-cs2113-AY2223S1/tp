@@ -9,6 +9,8 @@ import seedu.duke.exception.AddTransactionMissingTagException;
 import seedu.duke.exception.AddTransactionUnknownTypeException;
 import seedu.duke.exception.MoolahException;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -122,7 +124,7 @@ public class Parser {
         String description = "";
         int amount = 0;
         String category = "";
-        String date = "";
+        LocalDate date = null;
         String type = "";
         boolean inputIsValid = true;
 
@@ -152,7 +154,8 @@ public class Parser {
                 }
                 break;
             case "d/":
-                date = parameter;
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                date = LocalDate.parse(userInput, formatter);
                 break;
             case "i/":
                 description = parameter;
