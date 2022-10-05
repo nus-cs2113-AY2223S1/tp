@@ -34,9 +34,9 @@ public class ConsoleParser {
     public static final String CONSOLE_COMMAND_ADD_EXPENSE = "add-expense";
     public static final String CONSOLE_COMMAND_VIEW_EXPENSE = "view-expense";
     private static final String CONSOLE_COMMAND_SORT_EXPENSE = "sort-expense";
-    private static final String ALPHABETICAL = "alphabetical";
-    private static final String AMOUNT = "amount";
-    private static final String DATE = "date";
+    public static final String CONSOLE_COMMAND_SORT_EXPENSE_TYPE_ALPHABETICAL = "alphabetical";
+    public static final String CONSOLE_COMMAND_SORT_EXPENSE_TYPE_AMOUNT = "amount";
+    public static final String CONSOLE_COMMAND_SORT_EXPENSE_TYPE_DATE = "date";
 
     private static String[] tokenizeCommandArguments(String arguments) {
         StringTokenizer stringTokenizer = new StringTokenizer(arguments);
@@ -190,9 +190,9 @@ public class ConsoleParser {
             CommandLine commandline = parseSortTypeCommandLineArguments(arguments);
             String type = commandline.getOptionValue("type");
             if (type == null
-                    || !(type.equalsIgnoreCase(ALPHABETICAL)
-                    || type.equalsIgnoreCase(DATE)
-                    || type.equalsIgnoreCase(AMOUNT))) {
+                    || !(type.equalsIgnoreCase(CONSOLE_COMMAND_SORT_EXPENSE_TYPE_ALPHABETICAL)
+                    || type.equalsIgnoreCase(CONSOLE_COMMAND_SORT_EXPENSE_TYPE_DATE)
+                    || type.equalsIgnoreCase(CONSOLE_COMMAND_SORT_EXPENSE_TYPE_AMOUNT))) {
                 throw new ConsoleParserCommandSortExpenseInvalidTypeException(
                         Messages.CONSOLE_ERROR_COMMAND_SORT_EXPENSE_INVALID);
             }

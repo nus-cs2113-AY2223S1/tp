@@ -27,9 +27,6 @@ import java.util.Scanner;
 public class ConsoleInterface {
     private Scanner scanner;
     private ExpenseManager expenseManager;
-    private static final String ALPHABETICAL = "alphabetical";
-    private static final String AMOUNT = "amount";
-    private static final String DATE = "date";
 
     /**
      * Initializes the console interface.
@@ -186,11 +183,11 @@ public class ConsoleInterface {
     private void runCommandSortExpense(ConsoleCommandSortExpense commandSortExpense) {
         String type = commandSortExpense.getType();
         ArrayList<Expense> expenses = expenseManager.getExpenses();
-        if (type.equalsIgnoreCase(DATE)) {
+        if (type.equalsIgnoreCase(ConsoleParser.CONSOLE_COMMAND_SORT_EXPENSE_TYPE_DATE)) {
             Collections.sort(expenses,commandSortExpense.sortByDate);
-        } else if (type.equalsIgnoreCase(ALPHABETICAL)) {
+        } else if (type.equalsIgnoreCase(ConsoleParser.CONSOLE_COMMAND_SORT_EXPENSE_TYPE_ALPHABETICAL)) {
             Collections.sort(expenses,commandSortExpense.sortByAlphabet);
-        } else if (type.equalsIgnoreCase(AMOUNT)) {
+        } else if (type.equalsIgnoreCase(ConsoleParser.CONSOLE_COMMAND_SORT_EXPENSE_TYPE_AMOUNT)) {
             Collections.sort(expenses,commandSortExpense.sortByAmount);
         }
         expenseManager.updateExpenses(expenses);
