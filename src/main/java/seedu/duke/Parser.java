@@ -57,7 +57,7 @@ public class Parser {
             Ui.showInfoMessage(InfoMessages.MESSAGE_INFO_WARNING.toString());
             Scanner confirmation = new Scanner(System.in);
             String input = confirmation.nextLine();
-            if (input.equals("Yes")) {
+            if (input.equals("Y")) {
                 TransactionList.purgeEntries(transactions);
             } else {
                 System.out.println(InfoMessages.MESSAGE_INFO_DIVIDER);

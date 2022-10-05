@@ -13,7 +13,7 @@ public enum InfoMessages {
     MESSAGE_INFO_TRANSACTION_COUNT("You have %d transactions in your transaction history."),
     MESSAGE_INFO_EXIT("Goodbye and see you soon."),
 
-    MESSAGE_INFO_WARNING("MOOOOOO.... Are you sure you want to proceed with this command? Please enter Yes to confirm.");
+    MESSAGE_INFO_WARNING("MOOOOOO.... Are you sure you want to proceed with this command? Please enter Y to confirm.");
     public final String message;
 
     /**
