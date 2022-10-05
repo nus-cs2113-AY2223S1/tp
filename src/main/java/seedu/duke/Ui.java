@@ -9,10 +9,11 @@ public class Ui {
      *
      * @param messages A string of variable arguments.
      */
+
+    //@@author chydarren-reused
+    // Reused from https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/ui/TextUi.java
+    // with minor modifications
     public static void printMessages(String... messages) {
-        //@@author chydarren-reused
-        // Reused from https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/ui/TextUi.java
-        // with minor modifications
         System.out.println(InfoMessages.MESSAGE_INFO_DIVIDER.toString());
         // Prints the string of arguments line by line in a loop
         for (String message : messages) {
@@ -20,6 +21,7 @@ public class Ui {
         }
         System.out.println(InfoMessages.MESSAGE_INFO_DIVIDER.toString());
     }
+    //@@author
 
     public static void showGreeting() {
         printMessages(
@@ -35,6 +37,13 @@ public class Ui {
         );
     }
 
+    public static void showTransactionsList(String transactionsList, String message) {
+        printMessages(
+                message,
+                transactionsList
+        );
+    }
+
     public static void showExitMessage() {
         printMessages(
                 InfoMessages.MESSAGE_INFO_EXIT.toString()
@@ -44,6 +53,12 @@ public class Ui {
     public static void showErrorMessage(String errorMessage) {
         printMessages(
                 errorMessage
+        );
+    }
+
+    public static void showInfoMessage(String infoMessage) {
+        printMessages(
+                infoMessage
         );
     }
 

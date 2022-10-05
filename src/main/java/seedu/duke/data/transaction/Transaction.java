@@ -3,7 +3,7 @@ package seedu.duke.data.transaction;
 public class Transaction {
     private String description;
     private int amount;
-    private String category; //category of income or expense
+    private String category; // category of income or expense
     private String date;
 
     public Transaction(String description, int amount, String category, String date) {
@@ -39,6 +39,7 @@ public class Transaction {
 
     @Override
     public String toString() {
-        return "Description: " + description + " Amount: " + amount + " Category: " + category + " Date: " + date;
+        return "Date: " + date + " Category: " + category + " Description: " + description
+                + " Amount: " + amount;
     }
 }

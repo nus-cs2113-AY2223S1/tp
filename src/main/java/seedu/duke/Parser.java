@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import seedu.duke.common.InfoMessages;
 import seedu.duke.data.TransactionList;
 import seedu.duke.data.transaction.Transaction;
 import seedu.duke.exception.AddTransactionMissingTagException;
@@ -42,8 +43,12 @@ public class Parser {
             Ui.showHelpList();
         } else if (inData.equals("list")) {
             // Prints all transactions if input is equal to "list"
-            transactions.list();
-
+            String transactionsList = transactions.listTransactions();
+            if (transactionsList.isEmpty()) {
+                Ui.showInfoMessage(InfoMessages.MESSAGE_INFO_LIST_EMPTY.toString());
+                return IS_CONTINUE;
+            }
+            Ui.showTransactionsList(transactionsList, InfoMessages.MESSAGE_INFO_LIST.toString());
         } else if (inData.equals("purge")) {
             // Shows confirmation prompt before deleting all transactions
         } else if (inData.equals(("bye"))) {
