@@ -1,8 +1,10 @@
 package seedu.duke;
 
+import seedu.duke.common.ErrorMessages;
 import seedu.duke.common.InfoMessages;
 import seedu.duke.data.TransactionList;
 import seedu.duke.data.transaction.Transaction;
+import seedu.duke.exception.AddTransactionInvalidCategoryException;
 import seedu.duke.exception.AddTransactionMissingTagException;
 import seedu.duke.exception.AddTransactionUnknownTypeException;
 import seedu.duke.exception.MoolahException;
@@ -110,6 +112,7 @@ public class Parser {
         String category = "";
         String date = "";
         String type = "";
+        boolean inputIsValid = true;
 
         for (String split : splits) {
             String tag = split.substring(0, 2);
@@ -119,10 +122,22 @@ public class Parser {
                 type = parameter;
                 break;
             case "c/":
-                category = parameter;
+                try {
+                    parseCategoryTag(parameter);
+                    category = parameter;
+                } catch (AddTransactionInvalidCategoryException e) {
+                    Ui.printMessages(String.valueOf(ErrorMessages.MESSAGE_ERROR_ADD_COMMAND_INVALID_CATEGORY));
+                    inputIsValid = false;
+                }
+
                 break;
             case "a/":
-                amount = Integer.parseInt(parameter);
+                try {
+                    amount = Integer.parseInt(parameter);
+                } catch (NumberFormatException e) {
+                    Ui.showNonNumericError();
+                    inputIsValid = false;
+                }
                 break;
             case "d/":
                 date = parameter;
@@ -134,30 +149,59 @@ public class Parser {
                 break;
             }
         }
-
-        if (type.equals("expense")) {
-            transactions.addExpense(description, amount, category, date);
-        } else if (type.equals("income")) {
-            transactions.addIncome(description, amount, category, date);
-        } else {
-            throw new AddTransactionUnknownTypeException();
+        if (inputIsValid) {
+            switch (type) {
+            case "expense":
+                transactions.addExpense(description, amount, category, date);
+                break;
+            case "income":
+                transactions.addIncome(description, amount, category, date);
+                break;
+            default:
+                throw new AddTransactionUnknownTypeException();
+            }
         }
     }
+
+    /**
+     * Processes the parameter. If it is an invalid parameter an exception error would be thrown.
+     *
+     * @param parameter The user input after the user tag.
+     * @throws AddTransactionInvalidCategoryException Invalid category parameter exception.
+     */
+    private static void parseCategoryTag(String parameter) throws AddTransactionInvalidCategoryException {
+        if (isNumeric(parameter)) {
+            throw new AddTransactionInvalidCategoryException();
+        }
+
+    }
+
+    /**
+     * Check if the parameter contains numeric characters.
+     *
+     * @param parameter The user input after the user tag.
+     * @return true if there are numeric characters within the parameter.
+     */
+    public static boolean isNumeric(String parameter) {
+        char[] characters = parameter.toCharArray();
+        for (char character : characters) {
+            if (Character.isDigit(character)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     /**
      * Check if the targeted tags exists in the split user inputs.
      *
      * @param splits The user input after the command word, split into a list for every space found.
-     * @throws AddTransactionMissingTagException Missing tag exception
+     * @throws AddTransactionMissingTagException Missing tag exception.
      */
     private static void checkTagsExist(String[] splits) throws AddTransactionMissingTagException {
         // TODO: To add the tags into Command class instead
-        String[] tags = new String[]{"t/",
-                                     "c/",
-                                     "a/",
-                                     "d/",
-                                     "i/"
-        };
+        String[] tags = new String[]{"t/", "c/", "a/", "d/", "i/"};
         for (String tag : tags) {
             boolean found = findMatchingTagFromInputs(tag, splits);
             if (!found) {
