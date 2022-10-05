@@ -22,12 +22,42 @@ public class TransactionList {
         this.transactions = new ArrayList<>();
     }
 
+    public static void purgeEntries(TransactionList input) {
+        System.out.println(InfoMessages.MESSAGE_INFO_DIVIDER);
+        input.empty();
+        System.out.println("MOOOOOO.... All of your transactions have been purged.");
+        System.out.println(InfoMessages.MESSAGE_INFO_DIVIDER);
+    }
+
+    private void empty() {
+        transactions.clear();
+    }
+
+    private Transaction getEntry(int index) { return transactions.get(index - 1); }
+
+    private void removeEntry(int index) { transactions.remove(index - 1); }
+
+    public static void deleteEntry(TransactionList input, int index) {
+        System.out.println(InfoMessages.MESSAGE_INFO_DIVIDER);
+        Transaction deleted = input.getEntry(index);
+        String information = deleted.getDescription();
+        input.removeEntry(index);
+        System.out.println("MOOOOOO.... I HAVE DELETED THE FOLLOWING TRANSACTION: " + information);
+        System.out.println(InfoMessages.MESSAGE_INFO_DIVIDER);
+    }
+
     public void addExpense(String description, int amount, String category, String date) {
         transactions.add(new Expense(description, amount, category, date));
+        System.out.println(InfoMessages.MESSAGE_INFO_DIVIDER);
+        System.out.println("MOOOOOO... I have added an Expense Transaction.");
+        System.out.println(InfoMessages.MESSAGE_INFO_DIVIDER);
     }
 
     public void addIncome(String description, int amount, String category, String date) {
         transactions.add(new Income(description, amount, category, date));
+        System.out.println(InfoMessages.MESSAGE_INFO_DIVIDER);
+        System.out.println("MOOOOOO... I have added an Income Transaction.");
+        System.out.println(InfoMessages.MESSAGE_INFO_DIVIDER);
     }
 
     public String listTransactions() {
