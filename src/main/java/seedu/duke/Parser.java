@@ -3,15 +3,15 @@ package seedu.duke;
 import seedu.duke.common.ErrorMessages;
 import seedu.duke.common.InfoMessages;
 import seedu.duke.data.TransactionList;
-import seedu.duke.data.transaction.Transaction;
 import seedu.duke.exception.AddTransactionInvalidCategoryException;
 import seedu.duke.exception.AddTransactionMissingTagException;
 import seedu.duke.exception.AddTransactionUnknownTypeException;
+import seedu.duke.exception.AddTransactionInvalidDateException;
 import seedu.duke.exception.MoolahException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class Parser {
@@ -154,8 +154,7 @@ public class Parser {
                 }
                 break;
             case "d/":
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                date = LocalDate.parse(userInput, formatter);
+                date = parseDateTag(userInput);
                 break;
             case "i/":
                 description = parameter;
@@ -192,7 +191,7 @@ public class Parser {
     }
 
     /**
-     * Check if the parameter contains numeric characters.
+     * Checks if the parameter contains numeric characters.
      *
      * @param parameter The user input after the user tag.
      * @return true if there are numeric characters within the parameter.
@@ -209,7 +208,23 @@ public class Parser {
 
 
     /**
-     * Check if the targeted tags exists in the split user inputs.
+     * Parse the user parameter input for date into a LocalDate object and returns it.
+     * @param parameter The user input after the user tag.
+     * @return The LocalDate object parsed from user input given.
+     * @throws AddTransactionInvalidDateException Invalid date format exception.
+     */
+    private static LocalDate parseDateTag(String parameter) throws AddTransactionInvalidDateException {
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyyyy");
+            LocalDate date = LocalDate.parse(parameter, formatter);
+            return date;
+        } catch (DateTimeParseException exception) {
+            throw new AddTransactionInvalidDateException();
+        }
+    }
+
+    /**
+     * Checks if the targeted tags exists in the split user inputs.
      *
      * @param splits The user input after the command word, split into a list for every space found.
      * @throws AddTransactionMissingTagException Missing tag exception.
