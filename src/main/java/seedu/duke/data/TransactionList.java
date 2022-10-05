@@ -33,9 +33,13 @@ public class TransactionList {
         transactions.clear();
     }
 
-    private Transaction getEntry(int index) { return transactions.get(index - 1); }
+    private Transaction getEntry(int index) {
+        return transactions.get(index - 1);
+    }
 
-    private void removeEntry(int index) { transactions.remove(index - 1); }
+    private void removeEntry(int index) {
+        transactions.remove(index - 1);
+    }
 
     public static void deleteEntry(TransactionList input, int index) {
         System.out.println(InfoMessages.MESSAGE_INFO_DIVIDER);
