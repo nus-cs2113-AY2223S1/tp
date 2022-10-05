@@ -12,7 +12,7 @@ public class Duke {
         Ui.showGreeting();
 
         while (scan.hasNextLine() && true) {
-            // continuously receive user input
+            // Receives user input continuously
             inData = scan.nextLine();
             inData = inData.trim();
 
