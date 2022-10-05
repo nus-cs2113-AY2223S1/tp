@@ -38,7 +38,8 @@ public class TransactionList {
         }
         if (!transactionsList.equals(EMPTY_STRING)) {
             // Includes the count of the transactions with the transaction list
-            transactionsList += String.format(InfoMessages.MESSAGE_INFO_TRANSACTION_COUNT.toString(), transactions.size());
+            transactionsList += String.format(InfoMessages.MESSAGE_INFO_TRANSACTION_COUNT.toString(),
+                    transactions.size());
         }
 
         return transactionsList;
