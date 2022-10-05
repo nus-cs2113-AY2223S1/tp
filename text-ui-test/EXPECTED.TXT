@@ -6,4 +6,4 @@ Hello from
 |____/ \__,_|_|\_\___|
 
 What is your name?
-Hello James Gosling
+Hello jorelle
