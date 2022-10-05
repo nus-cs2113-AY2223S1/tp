@@ -5,7 +5,9 @@ Add-Expense -n "Test Expense 4" -a 30.90 -d "03/01/2022 1203" -t "This is a test
 Add-Expense -n "Test Expense Error 1"
 Add-Expense -n "Test Expense Error 2" -a 30.90ti
 Add-Expense -n "Test Expense Error 3" -a 1337 -d "ThisIsAnInvalidDate"
-View-Expense
 View-Expense -e 0
+View-Expense
+Delete-Expense -e 3
+View-Expense
 ThisCommandDoesNotExist
 bye

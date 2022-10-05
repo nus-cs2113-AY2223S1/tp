@@ -57,6 +57,14 @@ Date and Time : 01 Jan 2022 12:00
 Description   : null
 Amount        : 1337.37
 Category      : null
+
+
+---- EXPENSE INDEX 0 ----
+Name          : Test Expense 1
+Date and Time : 01 Jan 2022 12:00
+Description   : null
+Amount        : 1337.37
+Category      : null
 ---- EXPENSE INDEX 1 ----
 Name          : Test Expense 2
 Date and Time : 01 Jan 2022 12:01
@@ -77,11 +85,26 @@ Amount        : 30.90
 Category      : Category Alpha
 
 
+The expense was deleted successfully.
+
+
 ---- EXPENSE INDEX 0 ----
 Name          : Test Expense 1
 Date and Time : 01 Jan 2022 12:00
 Description   : null
 Amount        : 1337.37
+Category      : null
+---- EXPENSE INDEX 1 ----
+Name          : Test Expense 2
+Date and Time : 01 Jan 2022 12:01
+Description   : null
+Amount        : 10.80
+Category      : null
+---- EXPENSE INDEX 2 ----
+Name          : Test Expense 3
+Date and Time : 02 Jan 2022 12:02
+Description   : This is a test expense 3
+Amount        : 20.80
 Category      : null
 
 

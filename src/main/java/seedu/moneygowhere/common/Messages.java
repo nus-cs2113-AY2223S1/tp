@@ -16,5 +16,9 @@ public class Messages {
 
     public static final String CONSOLE_ERROR_COMMAND_VIEW_EXPENSE_INVALID = ""
             + "The arguments entered are invalid. "
-            + "SYNTAX: View-Expense [-i EXPENSE_NUMBER]";
+            + "SYNTAX: View-Expense [-e EXPENSE_NUMBER]";
+    public static final String CONSOLE_MESSAGE_COMMAND_DELETE_EXPENSE_SUCCESS = "The expense was deleted successfully.";
+    public static final String CONSOLE_ERROR_COMMAND_DELETE_EXPENSE_INVALID = ""
+            + "The arguments entered are invalid. "
+            + "SYNTAX: Delete-Expense [-e EXPENSE_NUMBER]";
 }
