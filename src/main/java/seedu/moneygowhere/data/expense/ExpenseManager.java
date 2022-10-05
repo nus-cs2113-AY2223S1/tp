@@ -28,7 +28,11 @@ public class ExpenseManager {
     public void deleteExpense(int expenseIndex) {
         expenses.remove(expenseIndex);
     }
-    
+
+    public void editExpense(int expenseIndex, Expense expense) {
+        expenses.set(expenseIndex, expense);
+    }
+
     public void updateExpenses(ArrayList<Expense> expenses) {
         this.expenses = expenses;
     }
