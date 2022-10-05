@@ -5,7 +5,7 @@ package seedu.duke.data.transaction;
  * Records the amount, category and the date of spending.
  */
 public class Expense extends Transaction {
-    public Expense(String description, int amount, String category, int day, int month, int year) {
-        super(description, amount, category, day, month, year);
+    public Expense(String description, int amount, String category, String date) {
+        super(description, amount, category, date);
     }
 }

@@ -2,6 +2,9 @@ package seedu.duke;
 
 import seedu.duke.data.TransactionList;
 import seedu.duke.data.transaction.Transaction;
+import seedu.duke.exception.AddTransactionMissingTagException;
+import seedu.duke.exception.AddTransactionUnknownTypeException;
+import seedu.duke.exception.MoolahException;
 
 import java.util.ArrayList;
 
@@ -10,17 +13,36 @@ public class Parser {
     static final boolean IS_CONTINUE = true;
 
     /**
-     * Parses the user input and processes it with the transactions arraylist.
+     * Parses the user input and deal with any input error returned.
      *
      * @param inData       The user input.
      * @param transactions The array which would be operated on.
      * @return IS_EXIT If input equals "bye", else return IS_CONTINUE.
      */
-    public static boolean processInput(String inData, TransactionList transactions) {
+    public static boolean parse(String inData, TransactionList transactions) {
+        boolean isContinue = IS_CONTINUE;
+        try {
+            isContinue = processInput(inData, transactions);
+        } catch (MoolahException exception) {
+            Ui.showErrorMessage(exception.getMessage());
+        }
+        return isContinue;
+    }
+
+    /**
+     * Parses the user input and processes it with the transactions arraylist.
+     *
+     * @param inData       The user input.
+     * @param transactions The array which would be operated on.
+     * @return IS_EXIT If input equals "bye", else return IS_CONTINUE.
+     * @throws MoolahException Any command input exceptions captured by Moolah Manager.
+     */
+    private static boolean processInput(String inData, TransactionList transactions) throws MoolahException {
         if (inData.equals("help")) {
             Ui.showHelpList();
         } else if (inData.equals("list")) {
             // Prints all transactions if input is equal to "list"
+            transactions.list();
 
         } else if (inData.equals("purge")) {
             // Shows confirmation prompt before deleting all transactions
@@ -32,7 +54,7 @@ public class Parser {
             Ui.showInvalidCommand();
         } else if (inData.contains(" ")) {
             // Further parses the user input for user transaction commands
-            String[] userInput = inData.split(" ");
+            String[] userInput = inData.split(" ", 2);
             String command = userInput[0];
             switch (command) {
             case "delete":
@@ -48,6 +70,11 @@ public class Parser {
                 Checks if userInput is in the correct input format by further parsing,
                 before adding entry to arraylist
                 */
+<<<<<<< HEAD
+=======
+                parseAddCommand(userInput[1], transactions);
+
+>>>>>>> dcc2af74f889027e26bf612505d944dff4c144e3
                 break;
             case "edit":
                 /*
@@ -64,5 +91,96 @@ public class Parser {
             Ui.showInvalidCommand();
         }
         return IS_CONTINUE;
+    }
+
+    /**
+     * Parses the add transaction command by checking if the compulsory tags exist followed by adding the transaction.
+     * Then executes the command to add the transaction into the list.
+     *
+     * @param userInput The user input after the "add" command word.
+     * @throws AddTransactionMissingTagException Exceptions related to "add" command.
+     */
+    private static void parseAddCommand(String userInput, TransactionList transactions) throws MoolahException {
+        String[] splits = userInput.split(" ");
+        checkTagsExist(splits);
+        // TODO: To check that each parameter is in correct format, e.g. amount should be valid integer/double
+        // TODO: To move the add transaction logic below to Command class in Command.execute()
+        String description = "";
+        int amount = 0;
+        String category = "";
+        String date = "";
+        String type = "";
+
+        for (String split : splits) {
+            String tag = split.substring(0, 2);
+            String parameter = split.substring(2);
+            switch (tag) {
+            case "t/":
+                type = parameter;
+                break;
+            case "c/":
+                category = parameter;
+                break;
+            case "a/":
+                amount = Integer.parseInt(parameter);
+                break;
+            case "d/":
+                date = parameter;
+                break;
+            case "i/":
+                description = parameter;
+                break;
+            default:
+                break;
+            }
+        }
+
+        if (type.equals("expense")) {
+            transactions.addExpense(description, amount, category, date);
+        } else if (type.equals("income")) {
+            transactions.addIncome(description, amount, category, date);
+        } else {
+            throw new AddTransactionUnknownTypeException();
+        }
+    }
+
+    /**
+     * Check if the targeted tags exists in the split user inputs.
+     *
+     * @param splits The user input after the command word, split into a list for every space found.
+     * @throws AddTransactionMissingTagException Missing tag exception
+     */
+    private static void checkTagsExist(String[] splits) throws AddTransactionMissingTagException {
+        // TODO: To add the tags into Command class instead
+        String[] tags = new String[]{"t/",
+                                     "c/",
+                                     "a/",
+                                     "d/",
+                                     "i/"
+        };
+        for (String tag : tags) {
+            boolean found = findMatchingTagFromInputs(tag, splits);
+            if (!found) {
+                throw new AddTransactionMissingTagException();
+            }
+        }
+    }
+
+    /**
+     * Returns a boolean value on whether a tag can be found among the split user inputs.
+     *
+     * @param tag    A specific tag used to locate the command parameter.
+     * @param splits The user input after the command word, split into a list for every space found.
+     * @return Whether the tag is found within the split inputs.
+     */
+    private static boolean findMatchingTagFromInputs(String tag, String[] splits) {
+        boolean found = false;
+        for (String split : splits) {
+            if (split.startsWith(tag)) {
+                found = true;
+                break;
+            }
+        }
+        return found;
     }
 }

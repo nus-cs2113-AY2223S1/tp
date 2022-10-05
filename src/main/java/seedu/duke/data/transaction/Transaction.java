@@ -4,17 +4,13 @@ public class Transaction {
     private String description;
     private int amount;
     private String category; //category of income or expense
-    private int day;
-    private int month;
-    private int year;
+    private String date;
 
-    public Transaction(String description, int amount, String category, int day, int month, int year) {
+    public Transaction(String description, int amount, String category, String date) {
         this.description = description;
         this.amount = amount;
         this.category = category;
-        this.day = day;
-        this.month = month;
-        this.year = year;
+        this.date = date;
     }
 
     public String getDescription() {
@@ -41,27 +37,8 @@ public class Transaction {
         this.category = category;
     }
 
-    public int getDay() {
-        return day;
-    }
-
-    public void setDay(int day) {
-        this.day = day;
-    }
-
-    public int getMonth() {
-        return month;
-    }
-
-    public void setMonth(int month) {
-        this.month = month;
-    }
-
-    public int getYear() {
-        return year;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
+    @Override
+    public String toString() {
+        return "Description: " + description + " Amount: " + amount + " Category: " + category + " Date: " + date;
     }
 }
