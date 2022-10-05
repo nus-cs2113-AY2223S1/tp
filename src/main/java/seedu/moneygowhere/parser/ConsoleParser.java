@@ -40,6 +40,8 @@ public class ConsoleParser {
     public static final String CONSOLE_COMMAND_SORT_EXPENSE_TYPE_ALPHABETICAL = "alphabetical";
     public static final String CONSOLE_COMMAND_SORT_EXPENSE_TYPE_AMOUNT = "amount";
     public static final String CONSOLE_COMMAND_SORT_EXPENSE_TYPE_DATE = "date";
+    public static final String CONSOLE_COMMAND_SORT_EXPENSE_ORDER_ASCENDING = "ascending";
+    public static final String CONSOLE_COMMAND_SORT_EXPENSE_ORDER_DESCENDING = "descending";
 
     private static String[] tokenizeCommandArguments(String arguments) {
         StringTokenizer stringTokenizer = new StringTokenizer(arguments);
@@ -210,9 +212,11 @@ public class ConsoleParser {
     private static CommandLine parseSortTypeCommandLineArguments(String arguments) throws ParseException {
         String[] argumentsArr = tokenizeCommandArguments(arguments);
 
-        Option optionIndex = new Option("t", "type", true, "type");
+        Option optionType = new Option("t", "type", true, "type");
+        Option optionOrder = new Option("o", "order", true, "Ascending/Descending");
         Options options = new Options();
-        options.addOption(optionIndex);
+        options.addOption(optionType);
+        options.addOption(optionOrder);
         CommandLineParser commandLineParser = new DefaultParser();
         CommandLine commandLine = commandLineParser.parse(options, argumentsArr);
 
@@ -224,6 +228,7 @@ public class ConsoleParser {
         try {
             CommandLine commandline = parseSortTypeCommandLineArguments(arguments);
             String type = commandline.getOptionValue("type");
+            String order = commandline.getOptionValue("order");
             if (type == null
                     || !(type.equalsIgnoreCase(CONSOLE_COMMAND_SORT_EXPENSE_TYPE_ALPHABETICAL)
                     || type.equalsIgnoreCase(CONSOLE_COMMAND_SORT_EXPENSE_TYPE_DATE)
@@ -231,7 +236,13 @@ public class ConsoleParser {
                 throw new ConsoleParserCommandSortExpenseInvalidTypeException(
                         Messages.CONSOLE_ERROR_COMMAND_SORT_EXPENSE_INVALID);
             }
-            return new ConsoleCommandSortExpense(type);
+            if (order == null
+                    || !(order.equalsIgnoreCase(CONSOLE_COMMAND_SORT_EXPENSE_ORDER_ASCENDING)
+                    || order.equalsIgnoreCase(CONSOLE_COMMAND_SORT_EXPENSE_ORDER_DESCENDING))) {
+                throw new ConsoleParserCommandSortExpenseInvalidTypeException(
+                        Messages.CONSOLE_ERROR_COMMAND_SORT_EXPENSE_INVALID);
+            }
+            return new ConsoleCommandSortExpense(type, order);
         } catch (ParseException
                  | ConsoleParserCommandSortExpenseInvalidTypeException e) {
             throw new ConsoleParserCommandSortExpenseInvalidTypeException(
