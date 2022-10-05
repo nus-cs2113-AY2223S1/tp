@@ -7,6 +7,7 @@ import seedu.moneygowhere.exceptions.ConsoleParserCommandAddExpenseInvalidExcept
 import seedu.moneygowhere.exceptions.ConsoleParserCommandNotFoundException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandSortExpenseInvalidTypeException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandViewExpenseInvalidException;
+import seedu.moneygowhere.exceptions.MoneyGoWhereException;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -19,10 +20,7 @@ class ConsoleParserTest {
     @SuppressWarnings("ConstantConditions")
     @Test
     void parseCommand_aeNameAmount_ccaeNameAmountDate() throws
-            ConsoleParserCommandNotFoundException,
-            ConsoleParserCommandAddExpenseInvalidException,
-            ConsoleParserCommandViewExpenseInvalidException,
-            ConsoleParserCommandSortExpenseInvalidTypeException {
+            MoneyGoWhereException {
         String input = "Add-Expense -n Exp -a 7.80";
 
         ConsoleCommandAddExpense consoleCommandAddExpense = (ConsoleCommandAddExpense) ConsoleParser.parse(input);
@@ -51,10 +49,7 @@ class ConsoleParserTest {
 
     @Test
     void parseCommand_aeNameAmountDate_ccaeNameAmountDate() throws
-            ConsoleParserCommandNotFoundException,
-            ConsoleParserCommandAddExpenseInvalidException,
-            ConsoleParserCommandViewExpenseInvalidException,
-            ConsoleParserCommandSortExpenseInvalidTypeException {
+            MoneyGoWhereException {
         String input = "Add-Expense -n Exp -a 7.80 -d \"01/01/2022 2359\"";
 
         ConsoleCommandAddExpense consoleCommandAddExpense = (ConsoleCommandAddExpense) ConsoleParser.parse(input);
@@ -88,10 +83,7 @@ class ConsoleParserTest {
 
     @Test
     void parseCommand_aeNameAmountDateDescription_ccaeNameAmountDateDescription() throws
-            ConsoleParserCommandNotFoundException,
-            ConsoleParserCommandAddExpenseInvalidException,
-            ConsoleParserCommandViewExpenseInvalidException,
-            ConsoleParserCommandSortExpenseInvalidTypeException {
+            MoneyGoWhereException {
         String input = "Add-Expense -n Exp -a 7.80 -d \"01/01/2022 2359\" -t \"Test Desc\"";
 
         ConsoleCommandAddExpense consoleCommandAddExpense = (ConsoleCommandAddExpense) ConsoleParser.parse(input);
@@ -125,10 +117,7 @@ class ConsoleParserTest {
 
     @Test
     void parseCommand_aeNameAmountDateDescriptionCategory_ccaeNameAmountDateDescriptionCategory() throws
-            ConsoleParserCommandNotFoundException,
-            ConsoleParserCommandAddExpenseInvalidException,
-            ConsoleParserCommandViewExpenseInvalidException,
-            ConsoleParserCommandSortExpenseInvalidTypeException {
+            MoneyGoWhereException {
         String input = "Add-Expense -n Exp -a 7.80 -d \"01/01/2022 2359\" -t \"Test Desc\" -c \"Test Cat\"";
 
         ConsoleCommandAddExpense consoleCommandAddExpense = (ConsoleCommandAddExpense) ConsoleParser.parse(input);
@@ -170,10 +159,7 @@ class ConsoleParserTest {
 
     @Test
     void parseCommand_ve_ccve() throws
-            ConsoleParserCommandNotFoundException,
-            ConsoleParserCommandAddExpenseInvalidException,
-            ConsoleParserCommandViewExpenseInvalidException,
-            ConsoleParserCommandSortExpenseInvalidTypeException {
+            MoneyGoWhereException {    
         String input = "View-Expense";
 
         ConsoleCommandViewExpense consoleCommandViewExpense = (ConsoleCommandViewExpense) ConsoleParser.parse(input);
@@ -187,10 +173,7 @@ class ConsoleParserTest {
 
     @Test
     void parseCommand_veIndex_ccveIndex() throws
-            ConsoleParserCommandNotFoundException,
-            ConsoleParserCommandAddExpenseInvalidException,
-            ConsoleParserCommandViewExpenseInvalidException,
-            ConsoleParserCommandSortExpenseInvalidTypeException {
+            MoneyGoWhereException {    
         String input = "View-Expense -e 0";
 
         ConsoleCommandViewExpense consoleCommandViewExpense = (ConsoleCommandViewExpense) ConsoleParser.parse(input);

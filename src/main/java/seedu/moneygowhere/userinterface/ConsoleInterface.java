@@ -2,14 +2,16 @@ package seedu.moneygowhere.userinterface;
 
 import seedu.moneygowhere.commands.ConsoleCommand;
 import seedu.moneygowhere.commands.ConsoleCommandAddExpense;
+import seedu.moneygowhere.commands.ConsoleCommandBye;
+import seedu.moneygowhere.commands.ConsoleCommandDeleteExpense;
 import seedu.moneygowhere.commands.ConsoleCommandSortExpense;
 import seedu.moneygowhere.commands.ConsoleCommandViewExpense;
-import seedu.moneygowhere.commands.ConsoleCommandBye;
 import seedu.moneygowhere.common.Configurations;
 import seedu.moneygowhere.common.Messages;
 import seedu.moneygowhere.data.expense.Expense;
 import seedu.moneygowhere.data.expense.ExpenseManager;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandAddExpenseInvalidException;
+import seedu.moneygowhere.exceptions.ConsoleParserCommandDeleteExpenseInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandNotFoundException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandSortExpenseInvalidTypeException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandViewExpenseInvalidException;
@@ -179,7 +181,14 @@ public class ConsoleInterface {
             viewExpense();
         }
     }
+    
+    private void runCommandDeleteExpense(ConsoleCommandDeleteExpense consoleCommandDeleteExpense) {
+        int expenseIndex = consoleCommandDeleteExpense.getExpenseIndex();
+        expenseManager.deleteExpense(expenseIndex);
 
+        printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_DELETE_EXPENSE_SUCCESS);
+    }
+    
     private void runCommandSortExpense(ConsoleCommandSortExpense commandSortExpense) {
         String type = commandSortExpense.getType();
         ArrayList<Expense> expenses = expenseManager.getExpenses();
@@ -208,17 +217,20 @@ public class ConsoleInterface {
             ConsoleCommand consoleCommand = null;
             boolean hasParseError = true;
 
+            // Parse input command and arguments into a ConsoleCommand object
             try {
                 consoleCommand = ConsoleParser.parse(consoleInput);
                 hasParseError = false;
             } catch (ConsoleParserCommandNotFoundException
                      | ConsoleParserCommandAddExpenseInvalidException
-                     | ConsoleParserCommandViewExpenseInvalidException e) {
-                printErrorMessage(e.getMessage());
+                     | ConsoleParserCommandViewExpenseInvalidException
+                     | ConsoleParserCommandDeleteExpenseInvalidException exception) {
+                printErrorMessage(exception.getMessage());
             } catch (ConsoleParserCommandSortExpenseInvalidTypeException e) {
                 throw new RuntimeException(e);
             }
 
+            // Execute function according to the ConsoleCommand object returned by the parser
             if (hasParseError) {
                 // Do nothing if there is a parse error
             } else if (consoleCommand instanceof ConsoleCommandBye) {
@@ -228,6 +240,8 @@ public class ConsoleInterface {
                 runCommandAddExpense((ConsoleCommandAddExpense) consoleCommand);
             } else if (consoleCommand instanceof ConsoleCommandViewExpense) {
                 runCommandViewExpense((ConsoleCommandViewExpense) consoleCommand);
+            } else if (consoleCommand instanceof ConsoleCommandDeleteExpense) {
+                runCommandDeleteExpense((ConsoleCommandDeleteExpense) consoleCommand);
             } else if (consoleCommand instanceof ConsoleCommandSortExpense) {
                 runCommandSortExpense((ConsoleCommandSortExpense) consoleCommand);
             } else {
