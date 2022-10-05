@@ -24,54 +24,36 @@ public class Ui {
     //@@author
 
     public static void showGreeting() {
-        printMessages(
-                InfoMessages.MESSAGE_INFO_GREET.toString(),
-                InfoMessages.MESSAGE_INFO_HELP_PROMPT.toString()
-        );
+        printMessages(InfoMessages.MESSAGE_INFO_GREET.toString(), InfoMessages.MESSAGE_INFO_HELP_PROMPT.toString());
     }
 
     public static void showHelpList() {
         // To include the other messages for commands
-        printMessages(
-                InfoMessages.MESSAGE_INFO_HELP_GREET.toString()
-        );
+        printMessages(InfoMessages.MESSAGE_INFO_HELP_GREET.toString());
     }
 
     public static void showTransactionsList(String transactionsList, String message) {
-        printMessages(
-                message,
-                transactionsList
-        );
+        printMessages(message, transactionsList);
     }
 
     public static void showExitMessage() {
-        printMessages(
-                InfoMessages.MESSAGE_INFO_EXIT.toString()
-        );
+        printMessages(InfoMessages.MESSAGE_INFO_EXIT.toString());
     }
 
     public static void showErrorMessage(String errorMessage) {
-        printMessages(
-                errorMessage
-        );
+        printMessages(errorMessage);
     }
 
 
     public static void showNonNumericError() {
-        printMessages(
-                "Non-Numeric input detected! Please enter a numerical amount!"
-        );
+        printMessages("Non-Numeric input detected! Please enter a numerical amount!");
     }
+
     public static void showInfoMessage(String infoMessage) {
-        printMessages(
-                infoMessage
-        );
+        printMessages(infoMessage);
     }
 
     public static void showInvalidCommand() {
-        printMessages(
-                ErrorMessages.MESSAGE_ERROR_INVALID_COMMAND.toString(),
-                InfoMessages.MESSAGE_INFO_HELP_PROMPT.toString()
-        );
+        printMessages(ErrorMessages.MESSAGE_ERROR_INVALID_COMMAND.toString(), InfoMessages.MESSAGE_INFO_HELP_PROMPT.toString());
     }
 }
