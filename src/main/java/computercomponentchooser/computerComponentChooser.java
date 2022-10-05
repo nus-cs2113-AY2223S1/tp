@@ -2,7 +2,7 @@ package computercomponentchooser;
 
 import java.util.Scanner;
 
-public class computerComponentChooser {
+public class ComputerComponentChooser {
     public static void main(String[] args) {
         Ui.startSession();
 
