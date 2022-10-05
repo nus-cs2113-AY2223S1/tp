@@ -3,9 +3,9 @@ package seedu.duke.module;
 public class Module {
     private String code;
     private String title;
-    private int credit;
+    private String credit;
 
-    public Module(String code, String title, int credit) {
+    public Module(String code, String title, String credit) {
         setCode(code);
         setTitle(title);
         setCredit(credit);
@@ -32,11 +32,11 @@ public class Module {
         this.title = title;
     }
 
-    public int getCredit() {
+    public String getCredit() {
         return credit;
     }
 
-    public void setCredit(int credit) {
+    public void setCredit(String credit) {
         this.credit = credit;
     }
 }
