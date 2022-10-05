@@ -1,4 +1,4 @@
-package computerComponentChooser;
+package computercomponentchooser;
 
 import java.util.Scanner;
 

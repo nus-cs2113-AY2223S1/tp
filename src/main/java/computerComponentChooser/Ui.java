@@ -1,4 +1,4 @@
-package computerComponentChooser;
+package computercomponentchooser;
 
 public class Ui {
     /**
