@@ -53,7 +53,7 @@ public class Transaction {
 
     @Override
     public String toString() {
-        return printFormattedCategory() + " $" + amount + " at " + printFormattedDate() +
-                " | Description: " + description;
+        return printFormattedCategory() + " $" + amount + " at " + printFormattedDate()
+                + " | Description: " + description;
     }
 }
