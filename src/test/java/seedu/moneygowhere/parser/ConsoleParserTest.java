@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 import seedu.moneygowhere.commands.ConsoleCommandAddExpense;
 import seedu.moneygowhere.commands.ConsoleCommandViewExpense;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandAddExpenseInvalidException;
+import seedu.moneygowhere.exceptions.ConsoleParserCommandNotFoundException;
+import seedu.moneygowhere.exceptions.ConsoleParserCommandSortExpenseInvalidTypeException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandViewExpenseInvalidException;
 import seedu.moneygowhere.exceptions.MoneyGoWhereException;
 
@@ -156,7 +158,8 @@ class ConsoleParserTest {
     }
 
     @Test
-    void parseCommand_ve_ccve() throws MoneyGoWhereException {
+    void parseCommand_ve_ccve() throws
+            MoneyGoWhereException {    
         String input = "View-Expense";
 
         ConsoleCommandViewExpense consoleCommandViewExpense = (ConsoleCommandViewExpense) ConsoleParser.parse(input);
@@ -169,7 +172,8 @@ class ConsoleParserTest {
     }
 
     @Test
-    void parseCommand_veIndex_ccveIndex() throws MoneyGoWhereException {
+    void parseCommand_veIndex_ccveIndex() throws
+            MoneyGoWhereException {    
         String input = "View-Expense -e 0";
 
         ConsoleCommandViewExpense consoleCommandViewExpense = (ConsoleCommandViewExpense) ConsoleParser.parse(input);
