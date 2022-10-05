@@ -12,12 +12,14 @@ import seedu.moneygowhere.commands.ConsoleCommand;
 import seedu.moneygowhere.commands.ConsoleCommandAddExpense;
 import seedu.moneygowhere.commands.ConsoleCommandBye;
 import seedu.moneygowhere.commands.ConsoleCommandDeleteExpense;
+import seedu.moneygowhere.commands.ConsoleCommandSortExpense;
 import seedu.moneygowhere.commands.ConsoleCommandViewExpense;
 import seedu.moneygowhere.common.Configurations;
 import seedu.moneygowhere.common.Messages;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandAddExpenseInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandDeleteExpenseInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandNotFoundException;
+import seedu.moneygowhere.exceptions.ConsoleParserCommandSortExpenseInvalidTypeException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandViewExpenseInvalidException;
 
 import java.math.BigDecimal;
@@ -34,6 +36,10 @@ public class ConsoleParser {
     public static final String CONSOLE_COMMAND_ADD_EXPENSE = "add-expense";
     public static final String CONSOLE_COMMAND_VIEW_EXPENSE = "view-expense";
     public static final String CONSOLE_COMMAND_DELETE_EXPENSE = "delete-expense";
+    public static final String CONSOLE_COMMAND_SORT_EXPENSE = "sort-expense";
+    public static final String CONSOLE_COMMAND_SORT_EXPENSE_TYPE_ALPHABETICAL = "alphabetical";
+    public static final String CONSOLE_COMMAND_SORT_EXPENSE_TYPE_AMOUNT = "amount";
+    public static final String CONSOLE_COMMAND_SORT_EXPENSE_TYPE_DATE = "date";
 
     private static String[] tokenizeCommandArguments(String arguments) {
         StringTokenizer stringTokenizer = new StringTokenizer(arguments);
@@ -201,6 +207,38 @@ public class ConsoleParser {
         }
     }
 
+    private static CommandLine parseSortTypeCommandLineArguments(String arguments) throws ParseException {
+        String[] argumentsArr = tokenizeCommandArguments(arguments);
+
+        Option optionIndex = new Option("t", "type", true, "type");
+        Options options = new Options();
+        options.addOption(optionIndex);
+        CommandLineParser commandLineParser = new DefaultParser();
+        CommandLine commandLine = commandLineParser.parse(options, argumentsArr);
+
+        return commandLine;
+    }
+
+    private static ConsoleCommandSortExpense parseCommandSortExpense(String arguments)
+            throws ConsoleParserCommandSortExpenseInvalidTypeException {
+        try {
+            CommandLine commandline = parseSortTypeCommandLineArguments(arguments);
+            String type = commandline.getOptionValue("type");
+            if (type == null
+                    || !(type.equalsIgnoreCase(CONSOLE_COMMAND_SORT_EXPENSE_TYPE_ALPHABETICAL)
+                    || type.equalsIgnoreCase(CONSOLE_COMMAND_SORT_EXPENSE_TYPE_DATE)
+                    || type.equalsIgnoreCase(CONSOLE_COMMAND_SORT_EXPENSE_TYPE_AMOUNT))) {
+                throw new ConsoleParserCommandSortExpenseInvalidTypeException(
+                        Messages.CONSOLE_ERROR_COMMAND_SORT_EXPENSE_INVALID);
+            }
+            return new ConsoleCommandSortExpense(type);
+        } catch (ParseException
+                 | ConsoleParserCommandSortExpenseInvalidTypeException e) {
+            throw new ConsoleParserCommandSortExpenseInvalidTypeException(
+                    Messages.CONSOLE_ERROR_COMMAND_SORT_EXPENSE_INVALID);
+        }
+    }
+
     /**
      * Parses an input read from standard input.
      *
@@ -214,7 +252,8 @@ public class ConsoleParser {
             ConsoleParserCommandNotFoundException,
             ConsoleParserCommandAddExpenseInvalidException,
             ConsoleParserCommandViewExpenseInvalidException,
-            ConsoleParserCommandDeleteExpenseInvalidException {
+            ConsoleParserCommandDeleteExpenseInvalidException,
+            ConsoleParserCommandSortExpenseInvalidTypeException {
         String[] consoleInputArr = consoleInput.split(" ", 2);
 
         String command = consoleInputArr[0];
@@ -232,6 +271,8 @@ public class ConsoleParser {
             return parseCommandViewExpense(arguments);
         } else if (command.equalsIgnoreCase(CONSOLE_COMMAND_DELETE_EXPENSE)) {
             return parseCommandDeleteExpense(arguments);
+        } else if (command.equalsIgnoreCase(CONSOLE_COMMAND_SORT_EXPENSE)) {
+            return parseCommandSortExpense(arguments);
         } else {
             throw new ConsoleParserCommandNotFoundException(Messages.CONSOLE_ERROR_COMMAND_NOT_FOUND);
         }
