@@ -70,11 +70,7 @@ public class Parser {
                 Checks if userInput is in the correct input format by further parsing,
                 before adding entry to arraylist
                 */
-<<<<<<< HEAD
-=======
                 parseAddCommand(userInput[1], transactions);
-
->>>>>>> dcc2af74f889027e26bf612505d944dff4c144e3
                 break;
             case "edit":
                 /*

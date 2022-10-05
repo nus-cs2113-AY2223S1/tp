@@ -1,11 +1,8 @@
 package seedu.duke.data;
 
-<<<<<<< HEAD
 import seedu.duke.common.InfoMessages;
-=======
 import seedu.duke.data.transaction.Expense;
 import seedu.duke.data.transaction.Income;
->>>>>>> dcc2af74f889027e26bf612505d944dff4c144e3
 import seedu.duke.data.transaction.Transaction;
 
 import java.util.ArrayList;
@@ -22,7 +19,6 @@ public class TransactionList {
         this.transactions = new ArrayList<>();
     }
 
-<<<<<<< HEAD
     public Transaction getEntry(int index) { return transactions.get(index - 1);}
 
     public void removeEntry(int index) {transactions.remove(index - 1);}
@@ -35,7 +31,7 @@ public class TransactionList {
         System.out.println("MOOOOOO.... I HAVE DELETED THE FOLLOWING TRANSACTION:" + information);
         System.out.println(InfoMessages.MESSAGE_INFO_DIVIDER);
     }
-=======
+
     public void addExpense(String description, int amount, String category, String date) {
         transactions.add(new Expense(description, amount, category, date));
     }
@@ -51,5 +47,4 @@ public class TransactionList {
     }
 
 
->>>>>>> dcc2af74f889027e26bf612505d944dff4c144e3
 }
