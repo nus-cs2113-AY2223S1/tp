@@ -1,3 +1,4 @@
+list
 add t/expense c/food a/20 d/13092022 i/NIL
 add t/income c/salary a/2000 d/jan i/jan_salary
 add t/expense c/transport a/1 d/monday i/bus_fare

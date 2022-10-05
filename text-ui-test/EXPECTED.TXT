@@ -2,19 +2,30 @@ ____________________________________________________________
 Hello! I'm your Moolah Manager!
 Enter <help> if you need the list of commands.
 ____________________________________________________________
-Description: NIL Amount: 20 Category: food Date: 13092022
-Description: jan_salary Amount: 2000 Category: salary Date: jan
-Description: bus_fare Amount: 1 Category: transport Date: monday
+____________________________________________________________
+There are no records of your transactions found.
+____________________________________________________________
+____________________________________________________________
+Below are the records of your transactions:
+Date: 13092022 Category: food Description: NIL Amount: 20
+Date: jan Category: salary Description: jan_salary Amount: 2000
+Date: monday Category: transport Description: bus_fare Amount: 1
+You have 3 transactions in your transaction history.
+____________________________________________________________
 ____________________________________________________________
 Type of transaction given is invalid, please check your input!
 ____________________________________________________________
 ____________________________________________________________
 Mandatory tag(s) missing, please check your input!
 ____________________________________________________________
-Description: NIL Amount: 20 Category: food Date: 13092022
-Description: jan_salary Amount: 2000 Category: salary Date: jan
-Description: bus_fare Amount: 1 Category: transport Date: monday
-Description: thank_you_boss Amount: 1000000 Category: bonus Date: everyday
+____________________________________________________________
+Below are the records of your transactions:
+Date: 13092022 Category: food Description: NIL Amount: 20
+Date: jan Category: salary Description: jan_salary Amount: 2000
+Date: monday Category: transport Description: bus_fare Amount: 1
+Date: everyday Category: bonus Description: thank_you_boss Amount: 1000000
+You have 4 transactions in your transaction history.
+____________________________________________________________
 ____________________________________________________________
 Goodbye and see you soon.
 ____________________________________________________________
