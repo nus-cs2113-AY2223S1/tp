@@ -22,16 +22,27 @@ public class TransactionList {
         this.transactions = new ArrayList<>();
     }
 
-    public Transaction getEntry(int index) { return transactions.get(index - 1);}
+    public static void purgeEntries(TransactionList input) {
+        System.out.println(InfoMessages.MESSAGE_INFO_DIVIDER);
+        input.empty();
+        System.out.println("MOOOOOO.... All of your transactions have been purged.");
+        System.out.println(InfoMessages.MESSAGE_INFO_DIVIDER);
+    }
 
-    public void removeEntry(int index) {transactions.remove(index - 1);}
+    private void empty() {
+        transactions.clear();
+    }
+
+    private Transaction getEntry(int index) { return transactions.get(index - 1);}
+
+    private void removeEntry(int index) {transactions.remove(index - 1);}
 
     public static void deleteEntry(TransactionList input, int index) {
         System.out.println(InfoMessages.MESSAGE_INFO_DIVIDER);
         Transaction deleted = input.getEntry(index);
         String information = deleted.getDescription();
         input.removeEntry(index);
-        System.out.println("MOOOOOO.... I HAVE DELETED THE FOLLOWING TRANSACTION:" + information);
+        System.out.println("MOOOOOO.... I HAVE DELETED THE FOLLOWING TRANSACTION: " + information);
         System.out.println(InfoMessages.MESSAGE_INFO_DIVIDER);
     }
 

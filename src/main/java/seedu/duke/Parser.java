@@ -8,6 +8,7 @@ import seedu.duke.exception.AddTransactionUnknownTypeException;
 import seedu.duke.exception.MoolahException;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Parser {
     static final boolean IS_EXIT = false;
@@ -51,6 +52,14 @@ public class Parser {
             Ui.showTransactionsList(transactionsList, InfoMessages.MESSAGE_INFO_LIST.toString());
         } else if (inData.equals("purge")) {
             // Shows confirmation prompt before deleting all transactions
+            Ui.showInfoMessage(InfoMessages.MESSAGE_INFO_WARNING.toString());
+            Scanner confirmation = new Scanner(System.in);
+            String input = confirmation.nextLine();
+            if (input.equals("Yes")) {
+                TransactionList.purgeEntries(transactions);
+            } else {
+                System.out.println("MOOOOOO.... Aborting Command, returning to Home.");
+            }
         } else if (inData.equals(("bye"))) {
             Ui.showExitMessage();
             // Exits loop

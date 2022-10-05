@@ -3,13 +3,8 @@ package seedu.duke.data.transaction;
 public class Transaction {
     private String description;
     private int amount;
-<<<<<<< HEAD
-    private String category; //category of income or expense
-    private final String date;
-=======
     private String category; // category of income or expense
     private String date;
->>>>>>> 5e7989d03357ce54e45d43032825b2dfac52f35f
 
     public Transaction(String description, int amount, String category, String date) {
         this.description = description;
