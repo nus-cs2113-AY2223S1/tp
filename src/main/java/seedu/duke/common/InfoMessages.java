@@ -8,7 +8,12 @@ public enum InfoMessages {
     MESSAGE_INFO_GREET("Hello! I'm your Moolah Manager!"),
     MESSAGE_INFO_HELP_PROMPT("Enter <help> if you need the list of commands."),
     MESSAGE_INFO_HELP_GREET("I'm here to help. Here are the possible commands!"),
-    MESSAGE_INFO_EXIT("Goodbye and see you soon.");
+    MESSAGE_INFO_LIST_EMPTY("There are no records of your transactions found."),
+    MESSAGE_INFO_LIST("Below are the records of your transactions:"),
+    MESSAGE_INFO_TRANSACTION_COUNT("You have %d transactions in your transaction history."),
+    MESSAGE_INFO_EXIT("Goodbye and see you soon."),
+
+    MESSAGE_INFO_WARNING("MOOOOOO.... Are you sure you want to proceed with this command? Please enter Y to confirm.");
     public final String message;
 
     /**

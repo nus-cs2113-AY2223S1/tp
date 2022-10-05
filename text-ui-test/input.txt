@@ -1,9 +1,15 @@
-add t/expense c/food a/20 d/13092022 i/NIL
-add t/income c/salary a/2000 d/jan i/jan_salary
-add t/expense c/transport a/1 d/monday i/bus_fare
 list
-add t/income c/bonus a/1000000 d/everyday i/thank_you_boss
-add t/heheheh c/bonus a/1000000 d/everyday i/thank_you_boss
-add t/income c/bonus a/1000000 d/everyday
+add t/expense c/food a/20 d/13092022 i/NIL
+add t/income c/salary a/2000 d/30092022 i/jan_salary
+add t/expense c/transport a/1 d/02102022 i/bus_fare
+list
+add t/income c/bonus a/10000000 d/03102022 i/thank_you_boss
+add t/heheheh c/bonus a/1000000 d/03102022 i/thank_you_boss
+add t/income c/123 a/10000000 d/03102022 i/thank_you_boss
+add t/income c/bonus a/abc d/03102022 i/thank_you_boss
+add t/income c/bonus a/-1 d/03102022 i/thank_you_boss
+add t/income c/bonus a/10000000 d/20220101 i/thank_you_boss
+add t/income c/bonus a/10000000 d/obviouslyFalseDate i/thank_you_boss
+add t/income c/bonus a/10000000 d/ i/thank_you_boss
 list
 bye
