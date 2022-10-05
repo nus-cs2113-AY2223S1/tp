@@ -68,7 +68,7 @@ public class UserModuleList {
     }
 
     /**
-     * Method to find current modules user stored by keyword
+     * Method to find current modules user stored by keyword.
      * @param keyword input keyword
      * @return true if any module containing keyword is found, false otherwise
      */
