@@ -56,6 +56,12 @@ public class Ui {
         );
     }
 
+
+    public static void showNonNumericError() {
+        printMessages(
+                "Non-Numeric input detected! Please enter a numerical amount!"
+        );
+    }
     public static void showInfoMessage(String infoMessage) {
         printMessages(
                 infoMessage
