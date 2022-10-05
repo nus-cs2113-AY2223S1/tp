@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import seedu.duke.module.Module;
 
 /**
- * Class of module list that manages the modules that the user is interested in
+ * Class of module list that manages the modules that the user is interested in.
  * This is based on NUS Modules that user wishes to map overseas in the future
  */
 
@@ -21,7 +21,7 @@ public class UserModuleList {
     }
 
     /**
-     * Method to find current modules user stored by code
+     * Method to find current modules user stored by code.
      * @param input input code of module
      * @return true if module is found, false otherwise
      */
@@ -47,7 +47,7 @@ public class UserModuleList {
             System.out.println("No current modules saved");
         } else {
             for (int i = 0; i < modules.size(); i++) {
-                System.out.print(i+1);
+                System.out.print(i + 1);
                 System.out.print(" : ");
                 System.out.println(modules.get(i).toString());
             }
@@ -62,7 +62,7 @@ public class UserModuleList {
             modules.remove(index);
             System.out.println("Modules left are: ");
             displayAll();
-        } catch (IndexOutOfBoundsException e){
+        } catch (IndexOutOfBoundsException e) {
             System.out.println("index not within range");
         }
     }

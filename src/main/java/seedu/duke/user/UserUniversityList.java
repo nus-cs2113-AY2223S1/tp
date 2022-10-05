@@ -6,7 +6,7 @@ import seedu.duke.university.University;
 import java.util.ArrayList;
 
 /**
- * Class to keep track of a list of partner universities user is interested in
+ * Class to keep track of a list of partner universities user is interested in.
  */
 
 public class UserUniversityList {
@@ -21,7 +21,7 @@ public class UserUniversityList {
     }
 
     /**
-     * Method to find matching university user stored by name to prevent duplicates
+     * Method to find matching university user stored by name to prevent duplicates.
      * @param input input code of module
      * @return true if module is found, false otherwise
      */
@@ -35,7 +35,7 @@ public class UserUniversityList {
     }
 
     /**
-     * Method to add multiple universities at once
+     * Method to add multiple universities at once.
      * @param input ArrayList of universities user wants to add
      */
     public void addUniversities(ArrayList<University> input) {
@@ -57,7 +57,7 @@ public class UserUniversityList {
             System.out.println("No current modules saved");
         } else {
             for (int i = 0; i < universities.size(); i++) {
-                System.out.print(i+1);
+                System.out.print(i + 1);
                 System.out.print(" : ");
                 System.out.println(universities.get(i).toString());
             }
@@ -72,7 +72,7 @@ public class UserUniversityList {
             universities.remove(index);
             System.out.println("Universities left are: ");
             displayAll();
-        } catch (IndexOutOfBoundsException e){
+        } catch (IndexOutOfBoundsException e) {
             System.out.println("index not within range");
             System.out.println("use displayAll function to list all universities & indexes");
         }
