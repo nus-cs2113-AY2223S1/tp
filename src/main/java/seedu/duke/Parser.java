@@ -60,7 +60,9 @@ public class Parser {
             if (input.equals("Yes")) {
                 TransactionList.purgeEntries(transactions);
             } else {
+                System.out.println(InfoMessages.MESSAGE_INFO_DIVIDER);
                 System.out.println("MOOOOOO.... Aborting Command, returning to Home.");
+                System.out.println(InfoMessages.MESSAGE_INFO_DIVIDER);
             }
         } else if (inData.equals(("bye"))) {
             Ui.showExitMessage();
