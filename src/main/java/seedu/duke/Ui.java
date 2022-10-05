@@ -54,6 +54,7 @@ public class Ui {
     }
 
     public static void showInvalidCommand() {
-        printMessages(ErrorMessages.MESSAGE_ERROR_INVALID_COMMAND.toString(), InfoMessages.MESSAGE_INFO_HELP_PROMPT.toString());
+        printMessages(ErrorMessages.MESSAGE_ERROR_INVALID_COMMAND.toString(),
+                InfoMessages.MESSAGE_INFO_HELP_PROMPT.toString());
     }
 }
