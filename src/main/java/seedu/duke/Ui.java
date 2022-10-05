@@ -37,6 +37,13 @@ public class Ui {
         );
     }
 
+    public static void showTransactionsList(String transactionsList, String message) {
+        printMessages(
+                message,
+                transactionsList
+        );
+    }
+
     public static void showExitMessage() {
         printMessages(
                 InfoMessages.MESSAGE_INFO_EXIT.toString()
@@ -46,6 +53,12 @@ public class Ui {
     public static void showErrorMessage(String errorMessage) {
         printMessages(
                 errorMessage
+        );
+    }
+
+    public static void showInfoMessage(String infoMessage) {
+        printMessages(
+                infoMessage
         );
     }
 
