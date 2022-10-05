@@ -7,7 +7,18 @@ import java.time.LocalDate;
  * Records the amount, category and date of the income.
  */
 public class Income extends Transaction {
+    private static String ICON = "[+]";
+
     public Income(String description, int amount, String category, LocalDate date) {
         super(description, amount, category, date);
+    }
+
+    public String getIcon() {
+        return ICON;
+    }
+
+    @Override
+    public String toString() {
+        return getIcon() + super.toString();
     }
 }

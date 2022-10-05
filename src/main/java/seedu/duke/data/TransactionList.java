@@ -52,16 +52,20 @@ public class TransactionList {
     }
 
     public void addExpense(String description, int amount, String category, LocalDate date) {
-        transactions.add(new Expense(description, amount, category, date));
+        Expense expense = new Expense(description, amount, category, date);
+        transactions.add(expense);
         System.out.println(InfoMessages.MESSAGE_INFO_DIVIDER);
-        System.out.println("MOOOOOO... I have added an Expense Transaction.");
+        System.out.println("MOOOOOO... I have added the following Expense Transaction: ");
+        System.out.println(expense);
         System.out.println(InfoMessages.MESSAGE_INFO_DIVIDER);
     }
 
     public void addIncome(String description, int amount, String category, LocalDate date) {
-        transactions.add(new Income(description, amount, category, date));
+        Income income = new Income(description, amount, category, date);
+        transactions.add(income);
         System.out.println(InfoMessages.MESSAGE_INFO_DIVIDER);
-        System.out.println("MOOOOOO... I have added an Income Transaction.");
+        System.out.println("MOOOOOO... I have added the following Income Transaction: ");
+        System.out.println(income);
         System.out.println(InfoMessages.MESSAGE_INFO_DIVIDER);
     }
 
