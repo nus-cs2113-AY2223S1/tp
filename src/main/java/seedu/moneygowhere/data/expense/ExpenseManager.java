@@ -24,4 +24,12 @@ public class ExpenseManager {
     public ArrayList<Expense> getExpenses() {
         return new ArrayList<>(expenses);
     }
+
+    public void deleteExpense(int expenseIndex) {
+        expenses.remove(expenseIndex);
+    }
+    
+    public void updateExpenses(ArrayList<Expense> expenses) {
+        this.expenses = expenses;
+    }
 }
