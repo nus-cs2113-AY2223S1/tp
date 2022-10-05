@@ -20,9 +20,15 @@ public class Messages {
     public static final String CONSOLE_ERROR_COMMAND_DELETE_EXPENSE_INVALID = ""
             + "The arguments entered are invalid. "
             + "SYNTAX: Delete-Expense [-e EXPENSE_NUMBER]";
+    public static final String CONSOLE_MESSAGE_COMMAND_EDIT_EXPENSE_SUCCESS = "The expense was edited successfully.";
+    public static final String CONSOLE_ERROR_COMMAND_EDIT_EXPENSE_INVALID = ""
+            + "The arguments entered are invalid. "
+            + "SYNTAX: Edit-Expense -e EXPENSE_NUMBER [-n NAME] [-a AMOUNT] [-d "
+            + Configurations.CONSOLE_INTERFACE_DATE_TIME_INPUT_FORMAT
+            + "] [-t DESCRIPTION] [-c CATEGORY]";
+    public static final String CONSOLE_MESSAGE_COMMAND_SORTED_EXPENSE_SUCCESS =
+            "Your expenses have been sorted successfully";
     public static final String CONSOLE_ERROR_COMMAND_SORT_EXPENSE_INVALID = ""
             + "The arguments entered are invalid. "
             + "SYNTAX: Sort-Expense [-t TYPE]";
-    public static final String CONSOLE_MESSAGE_COMMAND_SORTED_EXPENSE_SUCCESS =
-            "Your expenses have been sorted successfully";
 }
