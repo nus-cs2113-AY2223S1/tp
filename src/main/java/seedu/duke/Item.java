@@ -12,7 +12,7 @@ public abstract class Item {
         SPORTS_EQUIPMENT,
         TEXTBOOKS_AND_NOTES,
         ELECTRICAL_APPLIANCES,
-        OTHERS
+        //OTHERS
     }
 
     public Item(String name, int price, boolean status, String owner) {

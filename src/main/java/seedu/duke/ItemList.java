@@ -13,7 +13,7 @@ public class ItemList {
     }
 
     /**
-     * Adds the newly created task to the task list
+     * Adds the newly created task to the task list.
      * @param item is the new task the user has created
      */
     public void addItem(Item item) {
@@ -34,20 +34,12 @@ public class ItemList {
     public Item getItem(int index) {
         return items.get(index - 1);
     }
+
     public List<Item> getItemList() {
         return this.items;
     }
 
     public void showList() {
         ui.showList(items);
-    }
-
-    /**
-     * Adds the newly created item to the item list
-     * @param item is the new item the user has created
-     */
-    public void addTask(Item item) {
-        tasks.add(task);
-        ui.addTaskMessage(task, tasks);
     }
 }
