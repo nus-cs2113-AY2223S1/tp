@@ -16,7 +16,7 @@ public class ConsoleCommandSortExpense extends ConsoleCommand {
     }
 
     /**
-     * Reads in type & order of sorting to run sorting command later
+     * Reads in type & order of sorting to run sorting command later.
      * @param type defines the type of sorting to be done later, be it by date, amount or alphabetical
      * @param order if true, sort by ascending. If false, sort by descending
      */
