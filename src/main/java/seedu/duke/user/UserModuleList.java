@@ -2,15 +2,13 @@ package seedu.duke.user;
 
 import java.util.ArrayList;
 
-import seedu.duke.module.Module;
-
 /**
  * Class of module list that manages the modules that the user is interested in.
  * This is based on NUS Modules that user wishes to map overseas in the future
  */
 
 public class UserModuleList {
-    private ArrayList<Module> modules;
+    private ArrayList<UserModule> modules;
 
     public UserModuleList() {
         this.modules = new ArrayList<>();
@@ -25,17 +23,18 @@ public class UserModuleList {
      * @param input input code of module
      * @return true if module is found, false otherwise
      */
-    public boolean findModuleByCode(String input) {
-        for (Module module : modules) {
-            if (module.getCode().equals(input)) {
+    public boolean findModuleByCode(UserModule input) {
+        for (UserModule module : modules) {
+            if (module.getNusCode().equals(input.getNusCode())
+                && module.getPuCode().equals(input.getPuCode())) {
                 return true;
             }
         }
         return false;
     }
 
-    public void addModule(Module input) {
-        if (findModuleByCode(input.getCode())) {
+    public void addModule(UserModule input) {
+        if (findModuleByCode(input)) {
             System.out.println("Error module already added");
         } else {
             modules.add(input);
@@ -49,7 +48,7 @@ public class UserModuleList {
             for (int i = 0; i < modules.size(); i++) {
                 System.out.print(i + 1);
                 System.out.print(" : ");
-                System.out.println(modules.get(i).toString());
+                modules.get(i).printModule();
             }
         }
     }
@@ -74,8 +73,8 @@ public class UserModuleList {
      */
     public boolean findModuleByTitle(String keyword) {
         int counter = 0;
-        for (Module module : modules) {
-            if (module.getTitle().contains(keyword)) {
+        for (UserModule module : modules) {
+            if (module.getPuTitle().contains(keyword) || module.getNusTitle().contains(keyword)) {
                 counter++;
                 System.out.println(module);
             }
