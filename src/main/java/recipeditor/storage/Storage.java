@@ -1,6 +1,8 @@
-package seedu.duke;
+package recipeditor.storage;
 
 import java.io.File;
+
+import recipeditor.ui.Ui;
 
 public class Storage {
     private static final String DATA_FILE_PATH = "data/data.txt";

@@ -1,4 +1,4 @@
-package seedu.duke.command;
+package recipeditor.command;
 
 public class DeleteCommand extends Command {
     private final int index;

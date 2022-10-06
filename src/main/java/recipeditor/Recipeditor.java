@@ -1,9 +1,13 @@
-package seedu.duke;
+package recipeditor;
 
-public class Duke {
+import recipeditor.ui.Ui;
+
+public class Recipeditor {
     /**
-     * Main entry-point for the java.duke.Duke application.
+     * Main entry point.
      */
+
+
     public static void main(String[] args) {
         Ui.printGreeting();
         while (true) {
