@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
+import seedu.duke.Biometrics;
 import seedu.duke.Ui;
 
 public class GreetCommand extends Command {
@@ -11,9 +12,14 @@ public class GreetCommand extends Command {
             + "|____/ \\__,_|_|\\_\\___|";
 
     @Override
-    public void execute(Ui ui) {
+    public void execute() {
         System.out.println("Hello from\n" + logo);
         System.out.println("Howdy!");
+    }
+
+    @Override
+    public void setData(Ui ui, Biometrics biometrics) {
+
     }
 
 }

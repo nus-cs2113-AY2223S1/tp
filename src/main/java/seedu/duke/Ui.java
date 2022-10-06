@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class Ui {
 
+
     private static Scanner in = new Scanner(System.in);
 
 

@@ -1,1 +1,13 @@
-James Gosling
+view biometrics
+set biometrics 10 male 149 89 25
+set biometrics 12 female 200 85 25
+set biometrics 58 other 2105 23 43
+set bio 29 male 295 25 25
+view biometrics
+set biometrics 12female 200 85 25
+view biometrics
+set biometrics 0 male 170 85 17
+set biometrics 0 male 170 85 17
+setbiometrics 23 female 0 85 17
+set biometrics 23 sc sk 85 17
+set biometrics 12 female 200 85 0
