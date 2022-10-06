@@ -48,4 +48,16 @@ public class Patient {
         this.gender = gender;
     }
 
+    @Override
+    public String toString() {
+        String message = "\t";
+        message += getName();
+        message += "\n\t";
+        message += gender.equals("M") ? "Male\n\t" : "Female\n\t";
+        message += "Born on " + getBirthDate();
+        message += "\n\t";
+        message += getId();
+        return message;
+    }
+
 }
