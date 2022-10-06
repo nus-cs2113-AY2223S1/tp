@@ -7,8 +7,8 @@ public class PatientList {
         patients = new ArrayList<>();
     }
 
-    public void addPatient(String name, String birthDate, String gender) {
-        patients.add(new Patient(name, birthDate, gender));
+    public void addPatient(String name, String birthDate, String gender, String id) {
+        patients.add(new Patient(name, birthDate, gender, id));
     }
 
 }
