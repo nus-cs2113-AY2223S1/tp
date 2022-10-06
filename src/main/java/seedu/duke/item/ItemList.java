@@ -1,4 +1,7 @@
-package seedu.duke;
+package seedu.duke.item;
+
+import seedu.duke.Ui;
+import seedu.duke.item.Item;
 
 import java.util.ArrayList;
 

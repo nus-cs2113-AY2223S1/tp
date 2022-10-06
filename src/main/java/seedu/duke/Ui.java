@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import seedu.duke.item.Item;
+
 import java.util.List;
 import java.util.Scanner;
 
