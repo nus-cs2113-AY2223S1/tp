@@ -2,6 +2,11 @@ package seedu.moneygowhere.storage;
 
 import seedu.moneygowhere.data.expense.Expense;
 
+import static seedu.moneygowhere.common.Configurations.DIRECTORY_PATH;
+import static seedu.moneygowhere.common.Configurations.FILE_PATH_EXPENSES;
+import static seedu.moneygowhere.common.Messages.CONSOLE_ERROR_NO_LOAD_FILE;
+import static seedu.moneygowhere.common.Messages.CONSOLE_ERROR_SAVE_DATA;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -9,17 +14,23 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import static seedu.moneygowhere.common.Configurations.FILE_PATH;
-import static seedu.moneygowhere.common.Messages.CONSOLE_ERROR_NO_LOAD_FILE;
-import static seedu.moneygowhere.common.Messages.CONSOLE_ERROR_SAVE_DATA;
-
 public class LocalStorage {
+    private final static String DIVIDER = " // ";
+    public static void initialiseFile() {
+        File directory = new File(DIRECTORY_PATH);
+        directory.mkdir();
+        String newFilePath = new File(FILE_PATH_EXPENSES).getAbsolutePath();
+        new File(newFilePath);
+    }
+
     /**
      * This method loads all tasks in text file
      */
     public static void loadFromFile() {
         try {
-            String newFilePath = new File(FILE_PATH).getAbsolutePath();
+            File directory = new File(DIRECTORY_PATH);
+            directory.mkdir();
+            String newFilePath = new File(FILE_PATH_EXPENSES).getAbsolutePath();
             File f = new File(newFilePath);
             Scanner s = new Scanner(f);
             String textFromFile;
@@ -35,7 +46,9 @@ public class LocalStorage {
      * This method saves all current expenses into a text file
      */
     public static void saveToFile(ArrayList<Expense> savedExpenses) {
+
         try {
+            initialiseFile();
             ArrayList<String> compiledData = taskToStringArray(savedExpenses);
             writeToFile(compiledData);
         } catch (IOException e) {
@@ -49,14 +62,14 @@ public class LocalStorage {
      *
      * @return list of string containing information of all expenses
      */
-    public static ArrayList<String> taskToStringArray(ArrayList<Expense> savedExpenses) {
+    private static ArrayList<String> taskToStringArray(ArrayList<Expense> savedExpenses) {
         ArrayList<String> textData = new ArrayList<>();
         for(Expense expense : savedExpenses){
             textData.add(
-                    expense.getName() + " // "
-                    + expense.getDateTime().toString() + "// "
-                    + expense.getDescription() + " // "
-                    + expense.getAmount() + " // "
+                    expense.getName() + DIVIDER
+                    + expense.getDateTime().toString() + DIVIDER
+                    + expense.getDescription() + DIVIDER
+                    + expense.getAmount() + DIVIDER
                     + expense.getCategory()
             );
         }
@@ -70,7 +83,7 @@ public class LocalStorage {
      * @throws IOException when trying to access a file through a wrong path or when file has issues
      */
     private static void writeToFile(ArrayList<String> textToWrite) throws IOException {
-        FileWriter fw = new FileWriter(new File(FILE_PATH).getAbsolutePath(), false);
+        FileWriter fw = new FileWriter(new File(FILE_PATH_EXPENSES).getAbsolutePath(), false);
         for(String task : textToWrite) {
             fw.write(task + "\n");
         }
