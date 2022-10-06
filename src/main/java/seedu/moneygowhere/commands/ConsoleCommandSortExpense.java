@@ -4,29 +4,39 @@ import seedu.moneygowhere.data.expense.Expense;
 import seedu.moneygowhere.parser.ConsoleParser;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Comparator;
 
 public class ConsoleCommandSortExpense extends ConsoleCommand {
     private String type;
-    private String order;
+    private boolean order;
 
+    /**
+     *
+     * @param type defines the type of sorting to be done later, be it by date, amount or alphabetical
+     * @param order if true, sort by ascending. If false, sort by descending
+     */
     public ConsoleCommandSortExpense(String type, String order) {
         this.type = type;
-        this.order = order;
+        if (order.equalsIgnoreCase(ConsoleParser.CONSOLE_COMMAND_SORT_EXPENSE_ORDER_ASCENDING)) {
+            this.order = true;
+        } else if (order.equalsIgnoreCase(ConsoleParser.CONSOLE_COMMAND_SORT_EXPENSE_ORDER_DESCENDING)) {
+            this.order = false;
+        }
     }
 
     public String getType() {
         return type;
     }
-
+    /**
+     * Comparator sorts by date in ascending or descending order.
+     */
     public Comparator<Expense> sortByDate = new Comparator<Expense>() {
         @Override
         public int compare(Expense expense1, Expense expense2) {
             LocalDateTime expenseName1 = expense1.getDateTime();
             LocalDateTime expenseName2 = expense2.getDateTime();
-            if (order.equalsIgnoreCase(ConsoleParser.CONSOLE_COMMAND_SORT_EXPENSE_ORDER_ASCENDING)) {
+            if (order) {
                 return expenseName1.compareTo(expenseName2);
             }
             return expenseName2.compareTo(expenseName1);
@@ -41,7 +51,7 @@ public class ConsoleCommandSortExpense extends ConsoleCommand {
         public int compare(Expense expense1, Expense expense2) {
             String expenseName1 = expense1.getName();
             String expenseName2 = expense2.getName();
-            if (order.equalsIgnoreCase(ConsoleParser.CONSOLE_COMMAND_SORT_EXPENSE_ORDER_ASCENDING)) {
+            if (order) {
                 return expenseName1.compareTo(expenseName2);
             }
             return expenseName2.compareTo(expenseName1);
@@ -56,7 +66,7 @@ public class ConsoleCommandSortExpense extends ConsoleCommand {
         public int compare(Expense expense1, Expense expense2) {
             BigDecimal expenseName1 = expense1.getAmount();
             BigDecimal expenseName2 = expense2.getAmount();
-            if (order.equalsIgnoreCase(ConsoleParser.CONSOLE_COMMAND_SORT_EXPENSE_ORDER_ASCENDING)) {
+            if (order) {
                 return expenseName1.compareTo(expenseName2);
             }
             return expenseName2.compareTo(expenseName1);
