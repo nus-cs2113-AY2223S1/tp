@@ -5,5 +5,8 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
-What is your name?
+I am Duke, your Recipe Notetaker!
+____________________________________________________________
+Please write your command below
 Hello James Gosling
+Please write your command below
