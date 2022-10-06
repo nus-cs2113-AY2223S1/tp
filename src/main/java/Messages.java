@@ -28,7 +28,7 @@ public class Messages {
     public static void printLine() {
         System.out.print("\t");
         for (int i = 0; i < 60; i++) {
-            System.out.print("\u2500");
+            System.out.print("_");
         }
         System.out.println();
     }
