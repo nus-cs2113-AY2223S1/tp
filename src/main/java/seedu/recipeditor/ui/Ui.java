@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.recipeditor.ui;
 
 import java.io.File;
 import java.io.IOException;
@@ -6,19 +6,12 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Ui {
-    private static final String logo =
-            " ____        _        \n"
-                    + "|  _ \\ _   _| | _____ \n"
-                    + "| | | | | | | |/ / _ \\\n"
-                    + "| |_| | |_| |   <  __/\n"
-                    + "|____/ \\__,_|_|\\_\\___|\n";
 
     public static void printHorizontalLine() {
         System.out.println("____________________________________________________________");
     }
 
     public static void printGreeting() {
-        System.out.println("Hello from\n" + logo);
         System.out.println("I am Duke, your Recipe Notetaker!");
         printHorizontalLine();
     }

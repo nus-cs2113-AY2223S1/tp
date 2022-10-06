@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.recipeditor.parser;
 
 public class Parser {
 
