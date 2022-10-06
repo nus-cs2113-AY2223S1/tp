@@ -1,4 +1,4 @@
-package seedu.recipeditor.command;
+package recipeditor.command;
 
 public abstract class Command {
     public String commandType = new String();

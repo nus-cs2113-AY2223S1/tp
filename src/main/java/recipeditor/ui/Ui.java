@@ -1,4 +1,4 @@
-package seedu.recipeditor.ui;
+package recipeditor.ui;
 
 import java.io.File;
 import java.io.IOException;

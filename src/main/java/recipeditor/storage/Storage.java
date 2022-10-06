@@ -1,8 +1,8 @@
-package seedu.recipeditor.storage;
+package recipeditor.storage;
 
 import java.io.File;
 
-import seedu.recipeditor.ui.Ui;
+import recipeditor.ui.Ui;
 
 public class Storage {
     private static final String DATA_FILE_PATH = "data/data.txt";

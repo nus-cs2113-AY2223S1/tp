@@ -1,4 +1,4 @@
-package seedu.recipeditor.recipe;
+package recipeditor.recipe;
 
 public class Ingredient {
     

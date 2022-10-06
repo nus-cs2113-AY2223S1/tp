@@ -1,4 +1,4 @@
-package seedu.recipeditor.parser;
+package recipeditor.parser;
 
 public class Parser {
 

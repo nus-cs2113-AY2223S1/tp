@@ -1,10 +1,10 @@
-package seedu.recipeditor;
+package recipeditor;
 
-import seedu.recipeditor.ui.Ui;
+import recipeditor.ui.Ui;
 
 public class Recipeditor {
     /**
-     * Main entry point
+     * Main entry point.
      */
 
 
