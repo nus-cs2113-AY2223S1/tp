@@ -11,8 +11,12 @@ public class ConsoleCommandSortExpense extends ConsoleCommand {
     private String type;
     private boolean order;
 
+    public String getType() {
+        return type;
+    }
+
     /**
-     *
+     * Reads in type & order of sorting to run sorting command later
      * @param type defines the type of sorting to be done later, be it by date, amount or alphabetical
      * @param order if true, sort by ascending. If false, sort by descending
      */
@@ -25,9 +29,6 @@ public class ConsoleCommandSortExpense extends ConsoleCommand {
         }
     }
 
-    public String getType() {
-        return type;
-    }
     /**
      * Comparator sorts by date in ascending or descending order.
      */
