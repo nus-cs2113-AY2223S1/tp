@@ -18,9 +18,7 @@ public class UserList {
     }
 
     public void deleteUser(int indexToDelete) {
-        if (indexToDelete != -1) {
-            userList.remove(indexToDelete);
-        }
+        userList.remove(indexToDelete);
     }
 
     public int getSize() {
