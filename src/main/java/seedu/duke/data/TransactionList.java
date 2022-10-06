@@ -84,4 +84,7 @@ public class TransactionList {
         return transactionsList;
     }
 
+    public int size() {
+        return transactions.size();
+    }
 }
