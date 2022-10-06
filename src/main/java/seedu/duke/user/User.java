@@ -5,12 +5,12 @@ import seedu.duke.id.IdGenerator;
 public class User {
     protected String name;
     protected int age;
-    protected int contactNumber;
+    protected String contactNumber;
     protected String userId;
 
     // add list of items after item class created
 
-    public User(String name, int age, int contactNumber) {
+    public User(String name, int age, String contactNumber) {
         this.userId = IdGenerator.generateId();
         this.name = name;
         this.age = age;
@@ -29,11 +29,11 @@ public class User {
         return age;
     }
 
-    public int getContactNumber() {
+    public String getContactNumber() {
         return contactNumber;
     }
 
     public String toString() {
-        return getUserId() + ' ' + getName() + ' ' + getAge() + ' ' + getContactNumber();
+        return getUserId() + " | " + getName() + " | " + getAge() + " | " + getContactNumber();
     }
 }

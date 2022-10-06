@@ -27,6 +27,10 @@ public class UserList {
         return userList.size();
     }
 
+    public User getUser(int index) {
+        return userList.get(index);
+    }
+
     public int findUser(String userId) {
         for (int i = 0; i < userList.size(); i += 1) {
             if (userList.get(i).getUserId().equals(userId)) {
