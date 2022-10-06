@@ -43,7 +43,6 @@ class TransactionListTest {
     }
 
 
-
     @Test
     void unmarkFinished_unmarkTheFirstTransaction_expectFalse() throws DukeException {
         TransactionList transactionList = new TransactionList();
