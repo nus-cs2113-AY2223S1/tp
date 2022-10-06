@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.duke.item;
 
 public class Category {
     enum Categories {

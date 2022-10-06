@@ -1,4 +1,6 @@
-package seedu.duke;
+package seedu.duke.item;
+
+import seedu.duke.item.Category;
 
 public abstract class Item {
     public String name;
