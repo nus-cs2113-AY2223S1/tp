@@ -1,17 +1,8 @@
 public class Prescription {
-    private String name;
+    private String medicine;
     private int timeInterval;
     private int id;
     private int dosage;
-
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public int getId() {
         return id;
@@ -31,5 +22,13 @@ public class Prescription {
 
     public void setDosage(int dosage) {
         this.dosage = dosage;
+    }
+
+    public String getMedicine() {
+        return medicine;
+    }
+
+    public void setMedicine(String medicine) {
+        this.medicine = medicine;
     }
 }

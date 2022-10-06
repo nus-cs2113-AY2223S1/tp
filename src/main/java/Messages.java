@@ -21,7 +21,7 @@ public class Messages {
 
     }
 
-    public static void printMedicineMenuMessage() {
+    public static void printPrescriptionMenuMessage() {
 
     }
 }

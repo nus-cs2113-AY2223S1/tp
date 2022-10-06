@@ -22,7 +22,7 @@ public class Parser {
                 Messages.printVisitsMenuMessage();
                 break;
             case prescription:
-                Messages.printMedicineMenuMessage();
+                Messages.printPrescriptionMenuMessage();
                 break;
             default:
                 break;
