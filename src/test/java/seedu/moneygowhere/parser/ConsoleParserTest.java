@@ -3,6 +3,7 @@ package seedu.moneygowhere.parser;
 import org.junit.jupiter.api.Test;
 import seedu.moneygowhere.commands.ConsoleCommandAddExpense;
 import seedu.moneygowhere.commands.ConsoleCommandDeleteExpense;
+import seedu.moneygowhere.commands.ConsoleCommandEditExpense;
 import seedu.moneygowhere.commands.ConsoleCommandViewExpense;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandAddExpenseInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandDeleteExpenseInvalidException;
@@ -222,5 +223,189 @@ class ConsoleParserTest {
 
         assertThrows(ConsoleParserCommandDeleteExpenseInvalidException.class, () ->
                 ConsoleParser.parse(input));
+    }
+
+    @Test
+    void parseCommand_eeIndexName_cceeIndexName() throws
+            MoneyGoWhereException {
+        String input = "Edit-Expense -e 0 -n Exp";
+
+        ConsoleCommandEditExpense consoleCommandEditExpense = (ConsoleCommandEditExpense) ConsoleParser.parse(input);
+
+        boolean isIndexEqual = consoleCommandEditExpense
+                .getExpenseIndex()
+                == 0;
+        boolean isNameEqual = consoleCommandEditExpense
+                .getName()
+                .equals("Exp");
+        boolean isDateTimeEqual = consoleCommandEditExpense
+                .getDateTime()
+                == null;
+        boolean isDescriptionEqual = consoleCommandEditExpense
+                .getDescription()
+                == null;
+        boolean isAmountEqual = consoleCommandEditExpense
+                .getAmount()
+                == null;
+        boolean isCategoryEqual = consoleCommandEditExpense
+                .getCategory()
+                == null;
+
+        assertTrue(
+                isIndexEqual
+                        && isNameEqual
+                        && isDateTimeEqual
+                        && isDescriptionEqual
+                        && isAmountEqual
+                        && isCategoryEqual);
+    }
+
+    @Test
+    void parseCommand_eeIndexNameAmount_cceeIndexNameAmount() throws
+            MoneyGoWhereException {
+        String input = "Edit-Expense -e 0 -n Exp -a 7.80";
+
+        ConsoleCommandEditExpense consoleCommandEditExpense = (ConsoleCommandEditExpense) ConsoleParser.parse(input);
+
+        boolean isIndexEqual = consoleCommandEditExpense
+                .getExpenseIndex()
+                == 0;
+        boolean isNameEqual = consoleCommandEditExpense
+                .getName()
+                .equals("Exp");
+        boolean isDateTimeEqual = consoleCommandEditExpense
+                .getDateTime()
+                == null;
+        boolean isDescriptionEqual = consoleCommandEditExpense
+                .getDescription()
+                == null;
+        boolean isAmountEqual = consoleCommandEditExpense
+                .getAmount()
+                .equals(new BigDecimal("7.80"));
+        boolean isCategoryEqual = consoleCommandEditExpense
+                .getCategory()
+                == null;
+
+        assertTrue(
+                isIndexEqual
+                        && isNameEqual
+                        && isDateTimeEqual
+                        && isDescriptionEqual
+                        && isAmountEqual
+                        && isCategoryEqual);
+    }
+
+    @Test
+    void parseCommand_eeIndexNameAmountDate_cceeIndexNameAmountDate() throws
+            MoneyGoWhereException {
+        String input = "Edit-Expense -e 0 -n Exp -a 7.80 -d \"01/01/2022 2359\"";
+
+        ConsoleCommandEditExpense consoleCommandEditExpense = (ConsoleCommandEditExpense) ConsoleParser.parse(input);
+
+        boolean isIndexEqual = consoleCommandEditExpense
+                .getExpenseIndex()
+                == 0;
+        boolean isNameEqual = consoleCommandEditExpense
+                .getName()
+                .equals("Exp");
+        boolean isDateTimeEqual = consoleCommandEditExpense
+                .getDateTime()
+                .equals(LocalDateTime.parse(
+                        "01/01/2022 2359",
+                        DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm")
+                ));
+        boolean isDescriptionEqual = consoleCommandEditExpense
+                .getDescription()
+                == null;
+        boolean isAmountEqual = consoleCommandEditExpense
+                .getAmount()
+                .equals(new BigDecimal("7.80"));
+        boolean isCategoryEqual = consoleCommandEditExpense
+                .getCategory()
+                == null;
+
+        assertTrue(
+                isIndexEqual
+                        && isNameEqual
+                        && isDateTimeEqual
+                        && isDescriptionEqual
+                        && isAmountEqual
+                        && isCategoryEqual);
+    }
+
+    @Test
+    void parseCommand_eeIndexNameAmountDateDescription_cceeIndexNameAmountDateDescription() throws
+            MoneyGoWhereException {
+        String input = "Edit-Expense -e 0 -n Exp -a 7.80 -d \"01/01/2022 2359\" -t \"Test Desc\"";
+
+        ConsoleCommandEditExpense consoleCommandEditExpense = (ConsoleCommandEditExpense) ConsoleParser.parse(input);
+
+        boolean isIndexEqual = consoleCommandEditExpense
+                .getExpenseIndex()
+                == 0;
+        boolean isNameEqual = consoleCommandEditExpense
+                .getName()
+                .equals("Exp");
+        boolean isDateTimeEqual = consoleCommandEditExpense
+                .getDateTime()
+                .equals(LocalDateTime.parse(
+                        "01/01/2022 2359",
+                        DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm")
+                ));
+        boolean isDescriptionEqual = consoleCommandEditExpense
+                .getDescription()
+                .equals("Test Desc");
+        boolean isAmountEqual = consoleCommandEditExpense
+                .getAmount()
+                .equals(new BigDecimal("7.80"));
+        boolean isCategoryEqual = consoleCommandEditExpense
+                .getCategory()
+                == null;
+
+        assertTrue(
+                isIndexEqual
+                        && isNameEqual
+                        && isDateTimeEqual
+                        && isDescriptionEqual
+                        && isAmountEqual
+                        && isCategoryEqual);
+    }
+
+    @Test
+    void parseCommand_eeIndexNameAmountDateDescriptionCategory_cceeIndexNameAmountDateDescriptionCategory() throws
+            MoneyGoWhereException {
+        String input = "Edit-Expense -e 0 -n Exp -a 7.80 -d \"01/01/2022 2359\" -t \"Test Desc\" -c \"Test Cat\"";
+
+        ConsoleCommandEditExpense consoleCommandEditExpense = (ConsoleCommandEditExpense) ConsoleParser.parse(input);
+
+        boolean isIndexEqual = consoleCommandEditExpense
+                .getExpenseIndex()
+                == 0;
+        boolean isNameEqual = consoleCommandEditExpense
+                .getName()
+                .equals("Exp");
+        boolean isDateTimeEqual = consoleCommandEditExpense
+                .getDateTime()
+                .equals(LocalDateTime.parse(
+                        "01/01/2022 2359",
+                        DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm")
+                ));
+        boolean isDescriptionEqual = consoleCommandEditExpense
+                .getDescription()
+                .equals("Test Desc");
+        boolean isAmountEqual = consoleCommandEditExpense
+                .getAmount()
+                .equals(new BigDecimal("7.80"));
+        boolean isCategoryEqual = consoleCommandEditExpense
+                .getCategory()
+                .equals("Test Cat");
+
+        assertTrue(
+                isIndexEqual
+                        && isNameEqual
+                        && isDateTimeEqual
+                        && isDescriptionEqual
+                        && isAmountEqual
+                        && isCategoryEqual);
     }
 }
