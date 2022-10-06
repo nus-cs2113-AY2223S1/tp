@@ -4,9 +4,11 @@ import java.util.Scanner;
 
 public class Ui {
     private final Scanner input;
+
     public Ui() {
         input = new Scanner(System.in);
     }
+
     String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
@@ -31,6 +33,4 @@ public class Ui {
     public String readCommand() {
         return input.nextLine();
     }
-
-
 }
