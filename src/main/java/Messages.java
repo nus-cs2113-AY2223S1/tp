@@ -3,7 +3,7 @@ public class Messages {
     private static final String welcomeMessage = "Hello welcome to\n"
             + logo;
     private static final String mainMenuMessage = "Please choose one+ "
-            + " of the following options:\n "
+            + " of the following options:\n"
             + "1 - Patients\n"
             + "2 - Visits\n"
             + "3 - Prescription";
