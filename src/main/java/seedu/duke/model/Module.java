@@ -25,7 +25,6 @@ public class Module {
     public static List<Module> getAll() {
         if (moduleList == null) {
             moduleList = ModuleLoader.loadModules();
-            moduleList.sort((a, b) -> a.moduleCode.compareTo(b.moduleCode));
             modulesByCode = new HashMap<>();
             for (Module m : moduleList) {
                 modulesByCode.put(m.moduleCode, m);
@@ -65,5 +64,14 @@ public class Module {
         this.prerequisite = prerequisite;
         this.corequisite = corequisite;
         this.preclusion = preclusion;
+    }
+
+    public SemesterData getSemesterData(int semester) {
+        for (SemesterData s : semesterData) {
+            if (s.semester == semester) {
+                return s;
+            }
+        }
+        return null;
     }
 }
