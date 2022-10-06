@@ -18,9 +18,6 @@ public class Ui {
      *
      * @param messages A string of variable arguments.
      */
-    //@@author chydarren-reused
-    // Reused from https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/ui/TextUi.java
-    // with minor modifications
     public static void printMessages(String... messages) {
         System.out.println(INFO_DIVIDER);
         // Prints the string of arguments line by line in a loop
@@ -29,7 +26,6 @@ public class Ui {
         }
         System.out.println(INFO_DIVIDER);
     }
-    //@@author
 
     public Ui() {
         in = new Scanner(System.in);

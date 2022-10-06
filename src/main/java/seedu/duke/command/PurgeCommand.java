@@ -16,7 +16,7 @@ public class PurgeCommand extends Command {
         String input = ui.readCommand();
 
         if (input.equals("Y")) {
-            TransactionList.purgeEntries(transactions);
+            TransactionList.purgeTransactions();
             Ui.showInfoMessage(INFO_PURGE.toString());
             return;
         }

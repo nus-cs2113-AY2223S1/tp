@@ -16,8 +16,7 @@ public enum InfoMessages {
     INFO_LIST_EMPTY("There are no records of your transactions found."),
     INFO_PURGE("All your transactions have been purged."),
     INFO_PURGE_ABORT("Purging has been aborted. All transactions records are retained."),
-    INFO_PURGE_WARNING("Are you sure you want to proceed with this command? Please enter 'Y' to confirm."),
-    INFO_TRANSACTION_COUNT("You have %d transactions in your transaction history.");
+    INFO_PURGE_WARNING("Are you sure you want to proceed with this command? Please enter 'Y' to confirm.");
 
     public final String message;
 

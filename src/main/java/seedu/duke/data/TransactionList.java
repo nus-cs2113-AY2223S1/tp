@@ -1,6 +1,5 @@
 package seedu.duke.data;
 
-import seedu.duke.common.InfoMessages;
 import seedu.duke.data.transaction.Expense;
 import seedu.duke.data.transaction.Income;
 import seedu.duke.data.transaction.Transaction;
@@ -17,32 +16,20 @@ public class TransactionList {
     private static final String EMPTY_STRING = "";
     private static final String LINE_SEPARATOR = System.lineSeparator();
 
-    private ArrayList<Transaction> transactions;
+    private static ArrayList<Transaction> transactions;
 
     public TransactionList() {
         this.transactions = new ArrayList<>();
-    }
-
-    public static void purgeEntries(TransactionList input) {
-        input.empty();
-    }
-
-    private void empty() {
-        transactions.clear();
     }
 
     private Transaction getEntry(int index) {
         return transactions.get(index - 1);
     }
 
-    private void removeEntry(int index) {
-        transactions.remove(index - 1);
-    }
-
     public static String deleteTransaction(TransactionList input, int index) {
         Transaction transaction = input.getEntry(index);
-        input.removeEntry(index);
-        return transaction.getDescription();
+        transactions.remove(index);
+        return transaction.toString();
     }
 
     public String addExpense(String description, int amount, String category, LocalDate date) {
@@ -63,13 +50,11 @@ public class TransactionList {
         for (Transaction transaction : transactions) {
             transactionsList += transaction.toString() + LINE_SEPARATOR;
         }
-        if (!transactionsList.isEmpty()) {
-            // Includes the count of the transactions with the transaction list
-            transactionsList += String.format(InfoMessages.INFO_TRANSACTION_COUNT.toString(),
-                    transactions.size());
-        }
-
         return transactionsList;
+    }
+
+    public static void purgeTransactions() {
+        transactions.clear();
     }
 
     public int size() {
