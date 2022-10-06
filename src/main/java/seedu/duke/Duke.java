@@ -6,7 +6,7 @@ public class Duke {
      */
     public static void main(String[] args) {
         Ui.printGreeting();
-        while(true) {
+        while (true) {
             System.out.println("Please write your command below");
             String name = Ui.readInput();
             System.out.println("Hello " + name);
