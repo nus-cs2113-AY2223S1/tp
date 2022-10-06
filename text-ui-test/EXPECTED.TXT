@@ -4,4 +4,3 @@ Please choose one+  of the following options:
 1 - Patients
 2 - Visits
 3 - Prescription
-1
