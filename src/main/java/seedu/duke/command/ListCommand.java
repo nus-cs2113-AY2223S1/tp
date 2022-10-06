@@ -2,19 +2,20 @@ package seedu.duke.command;
 
 import seedu.duke.Storage;
 import seedu.duke.Ui;
-import seedu.duke.common.InfoMessages;
 import seedu.duke.data.TransactionList;
+
+import static seedu.duke.common.InfoMessages.INFO_LIST;
+import static seedu.duke.common.InfoMessages.INFO_LIST_EMPTY;
 
 public class ListCommand extends Command {
     @Override
     public void execute(TransactionList transactions, Ui ui, Storage storage) {
-        // Prints all transactions if input is equal to "list"
         String transactionsList = transactions.listTransactions();
         if (transactionsList.isEmpty()) {
-            Ui.showInfoMessage(InfoMessages.INFO_LIST_EMPTY.toString());
+            Ui.showInfoMessage(INFO_LIST_EMPTY.toString());
             return;
         }
-        Ui.showTransactionsList(transactionsList, InfoMessages.INFO_LIST.toString());
+        Ui.showTransactionsList(transactionsList, INFO_LIST.toString());
     }
 
     @Override

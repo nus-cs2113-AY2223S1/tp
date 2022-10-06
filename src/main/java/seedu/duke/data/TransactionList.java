@@ -24,10 +24,7 @@ public class TransactionList {
     }
 
     public static void purgeEntries(TransactionList input) {
-        System.out.println(InfoMessages.INFO_DIVIDER);
         input.empty();
-        System.out.println("MOOOOOO.... All of your transactions have been purged.");
-        System.out.println(InfoMessages.INFO_DIVIDER);
     }
 
     private void empty() {
@@ -42,31 +39,22 @@ public class TransactionList {
         transactions.remove(index - 1);
     }
 
-    public static void deleteEntry(TransactionList input, int index) {
-        System.out.println(InfoMessages.INFO_DIVIDER);
-        Transaction deleted = input.getEntry(index);
-        String information = deleted.getDescription();
+    public static String deleteTransaction(TransactionList input, int index) {
+        Transaction transaction = input.getEntry(index);
         input.removeEntry(index);
-        System.out.println("MOOOOOO.... I HAVE DELETED THE FOLLOWING TRANSACTION: " + information);
-        System.out.println(InfoMessages.INFO_DIVIDER);
+        return transaction.getDescription();
     }
 
-    public void addExpense(String description, int amount, String category, LocalDate date) {
+    public String addExpense(String description, int amount, String category, LocalDate date) {
         Expense expense = new Expense(description, amount, category, date);
         transactions.add(expense);
-        System.out.println(InfoMessages.INFO_DIVIDER);
-        System.out.println("MOOOOOO... I have added the following Expense Transaction: ");
-        System.out.println(expense);
-        System.out.println(InfoMessages.INFO_DIVIDER);
+        return expense.toString();
     }
 
-    public void addIncome(String description, int amount, String category, LocalDate date) {
+    public String addIncome(String description, int amount, String category, LocalDate date) {
         Income income = new Income(description, amount, category, date);
         transactions.add(income);
-        System.out.println(InfoMessages.INFO_DIVIDER);
-        System.out.println("MOOOOOO... I have added the following Income Transaction: ");
-        System.out.println(income);
-        System.out.println(InfoMessages.INFO_DIVIDER);
+        return income.toString();
     }
 
     public String listTransactions() {
