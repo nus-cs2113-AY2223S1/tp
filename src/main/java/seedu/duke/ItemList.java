@@ -41,4 +41,13 @@ public class ItemList {
     public void showList() {
         ui.showList(items);
     }
+
+    /**
+     * Adds the newly created item to the item list
+     * @param item is the new item the user has created
+     */
+    public void addTask(Item item) {
+        tasks.add(task);
+        ui.addTaskMessage(task, tasks);
+    }
 }
