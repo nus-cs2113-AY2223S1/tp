@@ -4,8 +4,6 @@ import seedu.duke.command.Command;
 import seedu.duke.data.TransactionList;
 import seedu.duke.exception.MoolahException;
 
-import java.util.Scanner;
-
 public class Duke {
     private Storage storage;
     private TransactionList transactions;
@@ -29,10 +27,9 @@ public class Duke {
         ui.showGreeting();
         boolean isExit = false;
         String inData; // temp
-        Scanner scan = new Scanner(System.in);
         while (!isExit) {
             try {
-                inData = scan.nextLine();
+                inData = ui.readCommand();
                 inData = inData.trim();
 
                 Command c = Parser.parse(inData);
