@@ -12,4 +12,8 @@ add t/income c/bonus a/10000000 d/20220101 i/thank_you_boss
 add t/income c/bonus a/10000000 d/obviouslyFalseDate i/thank_you_boss
 add t/income c/bonus a/10000000 d/ i/thank_you_boss
 list
+delete 1
+purge
+Y
+list
 bye
