@@ -13,11 +13,11 @@ public class UserUniversityListManager {
     private HashMap<String, UserUniversityList> myManager;
 
     public UserUniversityListManager() {
-        myManager = new HashMap <String, UserUniversityList>();
+        myManager = new HashMap<String, UserUniversityList>();
     }
 
     /**
-     * Function to create a new list for PU
+     * Function to create a new list for PU.
      * @param input PU name from user input
      */
     public void createList(String input) {
@@ -30,7 +30,7 @@ public class UserUniversityListManager {
     }
 
     /**
-     * Function to return the UserUniversityList search by user
+     * Function to return the UserUniversityList search by user.
      * @param input PU name
      * @return the UserUniversityList corresponding to the input PU name
      */

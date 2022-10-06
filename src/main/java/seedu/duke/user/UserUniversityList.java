@@ -6,7 +6,7 @@ import seedu.duke.university.University;
 import java.util.ArrayList;
 
 /**
- * Class to store the interested modules that a user is for a particular university
+ * Class to store the interested modules that a user is for a particular university.
  */
 
 public class UserUniversityList {
