@@ -272,12 +272,10 @@ public class ConsoleInterface {
                      | ConsoleParserCommandAddExpenseInvalidException
                      | ConsoleParserCommandViewExpenseInvalidException
                      | ConsoleParserCommandDeleteExpenseInvalidException
-                     | ConsoleParserCommandEditExpenseInvalidException exception) {
+                     | ConsoleParserCommandEditExpenseInvalidException
+                     | ConsoleParserCommandSortExpenseInvalidTypeException exception) {
                 printErrorMessage(exception.getMessage());
-            } catch (ConsoleParserCommandSortExpenseInvalidTypeException e) {
-                throw new RuntimeException(e);
             }
-
             // Execute function according to the ConsoleCommand object returned by the parser
             if (hasParseError) {
                 // Do nothing if there is a parse error
