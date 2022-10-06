@@ -12,6 +12,10 @@ public class OneDoc {
     }
 
     public static void main(String[] args) {
+        new OneDoc().run();
+    }
+
+    public static void run() {
         Messages.welcomeMessage();
         parser.mainMenuParser();
     }
