@@ -3,9 +3,10 @@ package seedu.duke;
 import seedu.duke.common.ErrorMessages;
 import seedu.duke.common.InfoMessages;
 import seedu.duke.data.TransactionList;
-import seedu.duke.exception.AddTransactionInvalidCategoryException;
 import seedu.duke.exception.AddTransactionMissingTagException;
+import seedu.duke.exception.AddDeleteInvalidIndexException;
 import seedu.duke.exception.AddTransactionUnknownTypeException;
+import seedu.duke.exception.AddTransactionInvalidCategoryException;
 import seedu.duke.exception.AddTransactionInvalidDateException;
 import seedu.duke.exception.MoolahException;
 
@@ -81,11 +82,10 @@ public class Parser {
             switch (command) {
             case "delete":
                 /*
-                Checks if userInput is in the correct format by further parsing(e.g. such as correct entry numbers)
-                before deleting the entry
+                Checks if userInput is in the correct input format by further parsing,
+                before adding entry to arraylist
                 */
-                int index = Integer.parseInt(userInput[1]);
-                TransactionList.deleteEntry(transactions, index);
+                parseDeleteIndex(userInput[1], transactions);
                 break;
             case "add":
                 /*
@@ -259,5 +259,26 @@ public class Parser {
             }
         }
         return found;
+    }
+
+    private static void parseDeleteIndex(String parameter, TransactionList transactions) throws MoolahException {
+        boolean isInputValid = true;
+        int index;
+        int numberOfTransactions;
+        numberOfTransactions = transactions.size();
+        try {
+            index = Integer.parseInt(parameter);
+        } catch (NumberFormatException e) {
+            Ui.showNonNumericError();
+            return;
+        }
+        if ((index > numberOfTransactions) || (index <= 0)) {
+            isInputValid = false;
+        }
+        if (isInputValid) {
+            TransactionList.deleteEntry(transactions, index);
+        } else {
+            throw new AddDeleteInvalidIndexException();
+        }
     }
 }

@@ -60,5 +60,8 @@ Below are the records of your transactions:
 You have 5 transactions in your transaction history.
 ____________________________________________________________
 ____________________________________________________________
-Goodbye and see you soon.
+MOOOOOO.... I HAVE DELETED THE FOLLOWING TRANSACTION: NIL
+____________________________________________________________
+____________________________________________________________
+MOOOOOO.... Are you sure you want to proceed with this command? Please enter Y to confirm.
 ____________________________________________________________
