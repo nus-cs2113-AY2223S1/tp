@@ -51,4 +51,16 @@ public class Transaction {
     public boolean isOverdue() {
         return getReturnDate().isBefore(LocalDate.now());
     }
+
+    @Override
+    public String toString() {
+        String transactionIcon = "[" + (isFinished ? "X" : " ") + "] ";
+        String transactionId = "TransactionID: " + this.transactionId + " ";
+        String itemId = "ItemID: " + this.itemId + " ";
+        String usersId = "LenderID: " + lenderId + " BorrowerID: " + borrowerId + " ";
+        String returnDate = "ReturnDate: " + getReturnDate()
+                + (isOverdue() ? " (" + ChronoUnit.DAYS.between(getReturnDate(), LocalDate.now()) + "day(s) overdue"
+                : " (" + ChronoUnit.DAYS.between(LocalDate.now(), getReturnDate()) + "day(s) remaining)");
+        return transactionIcon + transactionId + itemId + usersId + returnDate;
+    }
 }
