@@ -2,10 +2,10 @@ package seedu.moneygowhere.parser;
 
 import org.junit.jupiter.api.Test;
 import seedu.moneygowhere.commands.ConsoleCommandAddExpense;
+import seedu.moneygowhere.commands.ConsoleCommandDeleteExpense;
 import seedu.moneygowhere.commands.ConsoleCommandViewExpense;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandAddExpenseInvalidException;
-import seedu.moneygowhere.exceptions.ConsoleParserCommandNotFoundException;
-import seedu.moneygowhere.exceptions.ConsoleParserCommandSortExpenseInvalidTypeException;
+import seedu.moneygowhere.exceptions.ConsoleParserCommandDeleteExpenseInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandViewExpenseInvalidException;
 import seedu.moneygowhere.exceptions.MoneyGoWhereException;
 
@@ -159,7 +159,7 @@ class ConsoleParserTest {
 
     @Test
     void parseCommand_ve_ccve() throws
-            MoneyGoWhereException {    
+            MoneyGoWhereException {
         String input = "View-Expense";
 
         ConsoleCommandViewExpense consoleCommandViewExpense = (ConsoleCommandViewExpense) ConsoleParser.parse(input);
@@ -173,7 +173,7 @@ class ConsoleParserTest {
 
     @Test
     void parseCommand_veIndex_ccveIndex() throws
-            MoneyGoWhereException {    
+            MoneyGoWhereException {
         String input = "View-Expense -e 0";
 
         ConsoleCommandViewExpense consoleCommandViewExpense = (ConsoleCommandViewExpense) ConsoleParser.parse(input);
@@ -190,6 +190,37 @@ class ConsoleParserTest {
         String input = "View-Expense -e \"ThisIsAnInvalidExpenseIndex\"";
 
         assertThrows(ConsoleParserCommandViewExpenseInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    @Test
+    void parseCommand_deIndex_ccdeIndex() throws
+            MoneyGoWhereException {
+        String input = "Delete-Expense -e 0";
+
+        ConsoleCommandDeleteExpense consoleCommandDeleteExpense =
+                (ConsoleCommandDeleteExpense) ConsoleParser.parse(input);
+
+        boolean isExpenseIndexEqual = consoleCommandDeleteExpense
+                .getExpenseIndex()
+                == 0;
+
+        assertTrue(isExpenseIndexEqual);
+    }
+
+    @Test
+    void parseCommand_de_ccdeInvalidException() {
+        String input = "Delete-Expense";
+
+        assertThrows(ConsoleParserCommandDeleteExpenseInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    @Test
+    void parseCommand_deIndex_ccdeInvalidException() {
+        String input = "Delete-Expense -e \"ThisIsAnInvalidExpenseIndex\"";
+
+        assertThrows(ConsoleParserCommandDeleteExpenseInvalidException.class, () ->
                 ConsoleParser.parse(input));
     }
 }
