@@ -3,7 +3,12 @@ package seedu.duke;
 import seedu.duke.common.ErrorMessages;
 import seedu.duke.common.InfoMessages;
 
+import java.util.Scanner;
+
 public class Ui {
+
+    private String input;
+    private Scanner in;
     /**
      * Prints each message from a variable messages string line by line into the output stream.
      *
@@ -22,6 +27,15 @@ public class Ui {
         System.out.println(InfoMessages.MESSAGE_INFO_DIVIDER.toString());
     }
     //@@author
+
+    public Ui() {
+        in = new Scanner(System.in);
+    }
+
+    public String readCommand() {
+        input = in.nextLine();
+        return input.trim();
+    }
 
     public static void showGreeting() {
         printMessages(InfoMessages.MESSAGE_INFO_GREET.toString(), InfoMessages.MESSAGE_INFO_HELP_PROMPT.toString());
