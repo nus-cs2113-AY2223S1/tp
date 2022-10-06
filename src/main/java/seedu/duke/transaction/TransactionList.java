@@ -23,6 +23,14 @@ public class TransactionList {
     public int getSize() {
         return transactionList.size();
     }
+    
+    public void markFinished(int index) throws DukeException {
+        getTransaction(index).setAsFinished();
+    }
+
+    public void unmarkFinished(int index) throws DukeException {
+        getTransaction(index).setAsNotFinished();
+    }
 
     public void add(Transaction transaction) {
         transactionList.add(transaction);
