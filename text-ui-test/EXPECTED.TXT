@@ -10,15 +10,15 @@ Below are the records of your transactions:
 
 ____________________________________________________________
 ____________________________________________________________
-MOOOOOO... I have added the following Expense Transaction:
+MOOOOOO... I have added the following Expense Transaction: 
 [-][food] $20 at Sep 13 2022 | Description: NIL
 ____________________________________________________________
 ____________________________________________________________
-MOOOOOO... I have added the following Income Transaction:
+MOOOOOO... I have added the following Income Transaction: 
 [+][salary] $2000 at Sep 30 2022 | Description: jan_salary
 ____________________________________________________________
 ____________________________________________________________
-MOOOOOO... I have added the following Expense Transaction:
+MOOOOOO... I have added the following Expense Transaction: 
 [-][transport] $1 at Oct 02 2022 | Description: bus_fare
 ____________________________________________________________
 ____________________________________________________________
@@ -29,7 +29,7 @@ Below are the records of your transactions:
 You have 3 transactions in your transaction history.
 ____________________________________________________________
 ____________________________________________________________
-MOOOOOO... I have added the following Income Transaction:
+MOOOOOO... I have added the following Income Transaction: 
 [+][bonus] $10000000 at Oct 03 2022 | Description: thank_you_boss
 ____________________________________________________________
 ____________________________________________________________
@@ -42,7 +42,7 @@ ____________________________________________________________
 Non-Numeric input detected! Please enter a numerical amount!
 ____________________________________________________________
 ____________________________________________________________
-MOOOOOO... I have added the following Income Transaction:
+MOOOOOO... I have added the following Income Transaction: 
 [+][bonus] $-1 at Oct 03 2022 | Description: thank_you_boss
 ____________________________________________________________
 ____________________________________________________________
