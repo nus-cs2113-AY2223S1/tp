@@ -4,13 +4,20 @@ public abstract class Item {
     public String name;
     public String id;
     public String owner;
-    public int price;
+    public int pricePerDay;
     //    public enum category;
     public boolean isAvailable;
 
+    enum Category {
+        SPORTS_EQUIPMENT,
+        TEXTBOOKS_AND_NOTES,
+        ELECTRICAL_APPLIANCES,
+        OTHERS
+    }
+
     public Item(String name, int price, boolean status, String owner) {
         this.name = name;
-        this.price = price;
+        this.pricePerDay = price;
         this.isAvailable = status;
         this.owner = owner;
     }
@@ -31,15 +38,26 @@ public abstract class Item {
         return id;
     }
 
+    public int setCategory(Category category) {
+        switch (category) {
+        case SPORTS_EQUIPMENT:
+            return 0;
+        case TEXTBOOKS_AND_NOTES:
+            return 1;
+        case ELECTRICAL_APPLIANCES:
+            return 2;
+        default:
+            return 3;
+        }
+    }
+
     public String getStatus() {
         return (this.isAvailable ? "YES" : "NO");
     }
 
     public void updatePrice(int newPrice) {
-        this.price = newPrice;
+        this.pricePerDay = newPrice;
     }
-
-
 
     public abstract String fileFormat();
 
