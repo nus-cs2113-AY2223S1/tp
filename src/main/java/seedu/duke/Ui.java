@@ -27,30 +27,29 @@ public class Ui {
         return s.nextLine();
     }
 
-//    public static void printAddRecipeText(Recipe recipe) {
-//        System.out.println("Duke has added this task to your list:");
-//        System.out.println(recipe.name);
-//        System.out.println("Now you have " + recipe.getRecipeSize() + " tasks in the list. You can do it!!");
-//        Ui.printHorizontalLine();
-//    }
-//
-//    public static void printRecipeList() {
-//
-//    }
+    //public static void printAddRecipeText(Recipe recipe) {
+    //    System.out.println("Duke has added this task to your list:");
+    //    System.out.println(recipe.name);
+    //    System.out.println("Now you have " + recipe.getRecipeSize() + " tasks in the list. You can do it!!");
+    //    Ui.printHorizontalLine();
+    //}
+    //
+    //public static void printRecipeList() {
+    //}
 
     public static void printCreateParentFolderErrorText() {
         System.out.println("Error creating parent folder(s)");
     }
 
-    public static void printFilePath(File file, String file_path) {
+    public static void printFilePath(File file, String filePath) {
         try {
             if (file.createNewFile()) {
-                System.out.printf("Bob has created the file at %s\n", file_path);
+                System.out.printf("Bob has created the file at %s\n", filePath);
             } else {
-                System.out.printf("File already exists at %s\n", file_path);
+                System.out.printf("File already exists at %s\n", filePath);
             }
         } catch (IOException e) {
-            System.out.println("Error creating file: Could not create file at %s" + file_path);
+            System.out.println("Error creating file: Could not create file at %s" + filePath);
         }
     }
 }
