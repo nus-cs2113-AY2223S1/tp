@@ -51,6 +51,10 @@ public abstract class Item {
         }
     }
 
+    public String getDescription() {
+        return this.name + " loaned for: " + pricePerDay;
+    }
+
     public String getStatus() {
         return (this.isAvailable ? "YES" : "NO");
     }

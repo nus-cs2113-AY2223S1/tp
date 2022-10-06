@@ -1,9 +1,11 @@
 package seedu.duke;
 
 import java.util.List;
+import java.util.Scanner;
 
 public class Ui {
     public static final String LINE = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
+    private final Scanner input;
 
     /**
      * display the entire list of items to the user
@@ -17,5 +19,55 @@ public class Ui {
             itemNumber++;
         }
         System.out.println(LINE);
+    }
+
+    public Ui() {
+        input = new Scanner(System.in);
+    }
+
+    String logo = " ____        _        \n"
+            + "|  _ \\ _   _| | _____ \n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|\n";
+
+    public String greeting = "Hello from\n" + logo;
+
+    public void printGreeting() {
+        System.out.print(greeting);
+    }
+
+    public static void showLine() {
+        System.out.println("____________________________________________________________");
+    }
+
+    public void addItemMessage(Item item, List<Item> items) {
+        System.out.println(
+                LINE
+                + "Noted. Following task has been added: " + '\n'
+                + item.getDescription() + "\n"
+                + "Total tasks in list: " + items.size() + '\n'
+                + LINE
+        );
+    }
+
+    public void deleteItemMessage(Item item, List<Item> items) {
+        System.out.println(
+                LINE
+                + "OK! I will remove the following item:\n"
+                + item.getDescription() + "\n"
+                + "Total items in list: " + items.size() + '\n'
+                + LINE
+        );
+    }
+
+    public static void printExitMessage() {
+        showLine();
+        System.out.println("Bye!");
+        showLine();
+    }
+
+    public String readCommand() {
+        return input.nextLine();
     }
 }
