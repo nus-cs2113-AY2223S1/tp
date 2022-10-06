@@ -1,9 +1,27 @@
 package seedu.duke;
 
+import seedu.duke.item.Item;
+
+import java.util.List;
 import java.util.Scanner;
 
 public class Ui {
+    public static final String LINE = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
     private final Scanner input;
+
+    /**
+     * display the entire list of items to the user.
+     * @param items list of all the items the user has added
+     */
+    public void showList(List<Item> items) {
+        int itemNumber = 1;
+        System.out.println(LINE + "Here are your list of tasks:");
+        for (Item item : items) {
+            System.out.println(itemNumber + "." + item.name);
+            itemNumber++;
+        }
+        System.out.println(LINE);
+    }
 
     public Ui() {
         input = new Scanner(System.in);
@@ -14,6 +32,7 @@ public class Ui {
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
+
     public String greeting = "Hello from\n" + logo;
 
     public void printGreeting() {
@@ -22,6 +41,26 @@ public class Ui {
 
     public static void showLine() {
         System.out.println("____________________________________________________________");
+    }
+
+    public void addItemMessage(Item item, List<Item> items) {
+        System.out.println(
+                LINE
+                + "Noted. Following task has been added: " + '\n'
+                + item.getDescription() + "\n"
+                + "Total tasks in list: " + items.size() + '\n'
+                + LINE
+        );
+    }
+
+    public void deleteItemMessage(Item item, List<Item> items) {
+        System.out.println(
+                LINE
+                + "OK! I will remove the following item:\n"
+                + item.getDescription() + "\n"
+                + "Total items in list: " + items.size() + '\n'
+                + LINE
+        );
     }
 
     public static void printExitMessage() {
