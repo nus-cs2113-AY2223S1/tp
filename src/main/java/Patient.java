@@ -4,13 +4,13 @@ public class Patient {
     private String name;
     private String birthDate;
     private String gender;
-    private final int id;
+    private final String id;
     public ArrayList<Visit> visits;
     public ArrayList<Prescription> prescriptions;
 
 
-    public Patient(String name, String birthDate, String gender) {
-        this.id = Utils.generateId();
+    public Patient(String name, String birthDate, String gender, String id) {
+        this.id = id;
         this.name = name;
         this.gender = gender;
         this.birthDate = birthDate;
@@ -32,7 +32,7 @@ public class Patient {
         this.birthDate = birthDate;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
