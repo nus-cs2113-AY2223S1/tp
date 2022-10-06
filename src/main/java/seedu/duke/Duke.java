@@ -9,6 +9,9 @@ public class Duke {
         while (true) {
             System.out.println("Please write your command below");
             String name = Ui.readInput();
+            if (name.equals("")) {
+                break;
+            }
             System.out.println("Hello " + name);
         }
     }
