@@ -15,7 +15,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class LocalStorage {
-    private final static String DIVIDER = " // ";
+    private static final String DIVIDER = " // ";
+
     public static void initialiseFile() {
         File directory = new File(DIRECTORY_PATH);
         directory.mkdir();
@@ -24,7 +25,7 @@ public class LocalStorage {
     }
 
     /**
-     * This method loads all tasks in text file
+     * This method loads all tasks in text file.
      */
     public static void loadFromFile() {
         try {
@@ -37,13 +38,13 @@ public class LocalStorage {
             while (s.hasNext()) {
                 textFromFile = s.nextLine();
             }
-        } catch(FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             System.out.println(CONSOLE_ERROR_NO_LOAD_FILE);
         }
     }
 
     /**
-     * This method saves all current expenses into a text file
+     * This method saves all current expenses into a text file.
      */
     public static void saveToFile(ArrayList<Expense> savedExpenses) {
 
@@ -58,13 +59,13 @@ public class LocalStorage {
 
     /**
      * This method converts all current expenses stored in expenses manager into a string
-     * containing all information of each expense and store them into a collection
+     * containing all information of each expense and store them into a collection.
      *
      * @return list of string containing information of all expenses
      */
     private static ArrayList<String> taskToStringArray(ArrayList<Expense> savedExpenses) {
         ArrayList<String> textData = new ArrayList<>();
-        for(Expense expense : savedExpenses){
+        for (Expense expense : savedExpenses) {
             textData.add(
                     expense.getName() + DIVIDER
                     + expense.getDateTime().toString() + DIVIDER
@@ -77,14 +78,14 @@ public class LocalStorage {
     }
 
     /**
-     * This method saves information of all expense into a file in the form of string
+     * This method saves information of all expense into a file in the form of string.
      *
-     * @param textToWrite list of string containing information of all expenses
+     * @param textToWrite list of string containing information of all expenses.
      * @throws IOException when trying to access a file through a wrong path or when file has issues
      */
     private static void writeToFile(ArrayList<String> textToWrite) throws IOException {
         FileWriter fw = new FileWriter(new File(FILE_PATH_EXPENSES).getAbsolutePath(), false);
-        for(String task : textToWrite) {
+        for (String task : textToWrite) {
             fw.write(task + "\n");
         }
         fw.close();
