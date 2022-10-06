@@ -42,7 +42,6 @@ class TransactionListTest {
         assertTrue(transactionList.getTransaction(1).isFinished());
     }
 
-
     @Test
     void unmarkFinished_unmarkTheFirstTransaction_expectFalse() throws DukeException {
         TransactionList transactionList = new TransactionList();
