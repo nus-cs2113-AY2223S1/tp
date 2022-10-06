@@ -1,46 +1,67 @@
 package seedu.moneygowhere.storage;
 
 import seedu.moneygowhere.data.expense.Expense;
+import seedu.moneygowhere.data.expense.ExpenseManager;
+import seedu.moneygowhere.exceptions.LocalStorageLoadDataInputError;
 
 import static seedu.moneygowhere.common.Configurations.DIRECTORY_PATH;
 import static seedu.moneygowhere.common.Configurations.FILE_PATH_EXPENSES;
-import static seedu.moneygowhere.common.Messages.CONSOLE_ERROR_NO_LOAD_FILE;
-import static seedu.moneygowhere.common.Messages.CONSOLE_ERROR_SAVE_DATA;
+import static seedu.moneygowhere.common.Messages.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class LocalStorage {
     private static final String DIVIDER = " // ";
 
-    public static void initialiseFile() {
+    public static File initialiseFile() {
         File directory = new File(DIRECTORY_PATH);
         directory.mkdir();
         String newFilePath = new File(FILE_PATH_EXPENSES).getAbsolutePath();
-        new File(newFilePath);
+        return new File(newFilePath);
     }
 
     /**
      * This method loads all tasks in text file.
      */
-    public static void loadFromFile() {
+    public static void loadFromFile(ExpenseManager expenseManager) {
+        Expense loadExpense;
+        int fileIndex = 1;
         try {
-            File directory = new File(DIRECTORY_PATH);
-            directory.mkdir();
-            String newFilePath = new File(FILE_PATH_EXPENSES).getAbsolutePath();
-            File f = new File(newFilePath);
+            File f = initialiseFile();
             Scanner s = new Scanner(f);
             String textFromFile;
             while (s.hasNext()) {
                 textFromFile = s.nextLine();
+                loadExpense = createExpense(textFromFile);
+                expenseManager.addExpense(loadExpense);
+                ++fileIndex;
             }
+            System.out.println(LOCAL_STORAGE_LOAD_SUCCESS);
         } catch (FileNotFoundException e) {
-            System.out.println(CONSOLE_ERROR_NO_LOAD_FILE);
+            System.out.println(LOCAL_STORAGE_ERROR_NO_LOAD_FILE);
+        } catch (LocalStorageLoadDataInputError | NumberFormatException e) {
+            System.out.println(LOCAL_STORAGE_ERROR_IN_LOAD_FILE + fileIndex);
         }
+    }
+
+    private static Expense createExpense (String textFromFile) throws LocalStorageLoadDataInputError {
+        String[] splitInputs = textFromFile.split(DIVIDER);
+        if(splitInputs.length != 5) {
+            throw new LocalStorageLoadDataInputError();
+        }
+        String name = splitInputs[0];
+        LocalDateTime dateTime = LocalDateTime.parse(splitInputs[1]);
+        String description = splitInputs[2];
+        BigDecimal amount = new BigDecimal(splitInputs[3]);
+        String category = splitInputs[4];
+        return new Expense(name, dateTime, description, amount, category);
     }
 
     /**
@@ -53,7 +74,7 @@ public class LocalStorage {
             ArrayList<String> compiledData = taskToStringArray(savedExpenses);
             writeToFile(compiledData);
         } catch (IOException e) {
-            System.out.println(CONSOLE_ERROR_SAVE_DATA);
+            System.out.println(LOCAL_STORAGE_ERROR_SAVE_DATA);
         }
     }
 
