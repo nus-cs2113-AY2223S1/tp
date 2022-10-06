@@ -8,9 +8,8 @@ public class AddDeleteInvalidIndexException extends MoolahException {
      *
      * @return A string containing the error message
      */
-
     @Override
     public String getMessage() {
-        return ErrorMessages.MESSAGE_ERROR_ADD_COMMAND_INVALID_INDEX.toString();
+        return ErrorMessages.ERROR_ADD_COMMAND_INVALID_INDEX.toString();
     }
 }

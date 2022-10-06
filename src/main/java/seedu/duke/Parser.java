@@ -21,9 +21,8 @@ public class Parser {
      * @throws MoolahException Any command input exceptions captured by Moolah Manager.
      */
     public static Command parse(String inData) throws MoolahException {
-        Command command;
-        command = null;
-        String[] splitInput = inData.split(" ", 2);;
+        Command command = null;
+        String[] splitInput = inData.split(" ", 2);
 
         // list commands duke to list all the tasks stored and their completion status
         // try at the start cos of the errors possibly

@@ -11,6 +11,6 @@ public class AddTransactionInvalidDateException extends MoolahException {
      */
     @Override
     public String getMessage() {
-        return ErrorMessages.MESSAGE_ERROR_ADD_COMMAND_INVALID_DATE.toString();
+        return ErrorMessages.ERROR_ADD_COMMAND_INVALID_DATE.toString();
     }
 }
