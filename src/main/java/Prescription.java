@@ -49,11 +49,11 @@ public class Prescription {
         this.medicine = medicine;
     }
 
-    private void setActive() {
+    public void setActive() {
         isActive = true;
     }
 
-    private void setInactive() {
+    public void setInactive() {
         isActive = false;
     }
 }
