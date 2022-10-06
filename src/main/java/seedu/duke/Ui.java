@@ -2,15 +2,16 @@ package seedu.duke;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Ui {
     private static final String logo =
             " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
+                    + "|  _ \\ _   _| | _____ \n"
+                    + "| | | | | | | |/ / _ \\\n"
+                    + "| |_| | |_| |   <  __/\n"
+                    + "|____/ \\__,_|_|\\_\\___|\n";
 
     public static void printHorizontalLine() {
         System.out.println("____________________________________________________________");
@@ -24,7 +25,11 @@ public class Ui {
 
     public static String readInput() {
         Scanner s = new Scanner(System.in);
-        return s.nextLine();
+        try {
+            return s.nextLine();
+        } catch (NoSuchElementException e) {
+            return "";
+        }
     }
 
     //public static void printAddRecipeText(Recipe recipe) {
