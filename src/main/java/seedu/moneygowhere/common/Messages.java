@@ -30,5 +30,5 @@ public class Messages {
             "Your expenses have been sorted successfully";
     public static final String CONSOLE_ERROR_COMMAND_SORT_EXPENSE_INVALID = ""
             + "The arguments entered are invalid. "
-            + "SYNTAX: Sort-Expense [-t TYPE]";
+            + "SYNTAX: Sort-Expense -t TYPE -o ORDER";
 }

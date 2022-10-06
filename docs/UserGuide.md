@@ -69,6 +69,20 @@ Example of usage:
 * `Edit-Expense -e 1 -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359" -t "Monthly payment"`
 * `Edit-Expense -e 1 -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359" -t "Monthly payment" -c "Work expenses"`
 
+### Sorting expenses: `Sort-Expense`
+Sorts the list of expenses according to an alphabetical, amount or date order. It can be sorted in both ascending and
+descending order.
+
+Syntax: `Sort-Expense -t TYPE -o ORDER`
+
+* `TYPE` is a text string. It can be either `alphabetical`, `amount` or `date`.
+* `ORDER` is a text string. It can be either `ascending` or `descending`.
+
+Example of usage:
+* `Sort-Expense -t date -o ascending`
+* `Sort-Expense -t amount -o descending`
+* `Sort-Expense -t alphabetical -o ascending`
+
 ## FAQ
 
 **Q**: How do I transfer my data to another computer?
@@ -83,3 +97,4 @@ Example of usage:
 * View expense: `View-Expense`
 * Delete expense: `Delete-Expense -e 1`
 * Edit expense: `Edit-Expense -e 1 -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359" -t "Monthly payment" -c "Work expenses"`
+* Sort expense: `Sort-Expense -t alphabetical -o ascending"`
