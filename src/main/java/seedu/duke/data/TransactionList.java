@@ -5,6 +5,7 @@ import seedu.duke.data.transaction.Expense;
 import seedu.duke.data.transaction.Income;
 import seedu.duke.data.transaction.Transaction;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
@@ -50,17 +51,21 @@ public class TransactionList {
         System.out.println(InfoMessages.MESSAGE_INFO_DIVIDER);
     }
 
-    public void addExpense(String description, int amount, String category, String date) {
-        transactions.add(new Expense(description, amount, category, date));
+    public void addExpense(String description, int amount, String category, LocalDate date) {
+        Expense expense = new Expense(description, amount, category, date);
+        transactions.add(expense);
         System.out.println(InfoMessages.MESSAGE_INFO_DIVIDER);
-        System.out.println("MOOOOOO... I have added an Expense Transaction.");
+        System.out.println("MOOOOOO... I have added the following Expense Transaction: ");
+        System.out.println(expense);
         System.out.println(InfoMessages.MESSAGE_INFO_DIVIDER);
     }
 
-    public void addIncome(String description, int amount, String category, String date) {
-        transactions.add(new Income(description, amount, category, date));
+    public void addIncome(String description, int amount, String category, LocalDate date) {
+        Income income = new Income(description, amount, category, date);
+        transactions.add(income);
         System.out.println(InfoMessages.MESSAGE_INFO_DIVIDER);
-        System.out.println("MOOOOOO... I have added an Income Transaction.");
+        System.out.println("MOOOOOO... I have added the following Income Transaction: ");
+        System.out.println(income);
         System.out.println(InfoMessages.MESSAGE_INFO_DIVIDER);
     }
 
@@ -78,6 +83,5 @@ public class TransactionList {
 
         return transactionsList;
     }
-
 
 }
