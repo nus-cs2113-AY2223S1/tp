@@ -8,7 +8,7 @@ public class Ui {
     private final Scanner input;
 
     /**
-     * display the entire list of items to the user
+     * display the entire list of items to the user.
      * @param items list of all the items the user has added
      */
     public void showList(List<Item> items) {

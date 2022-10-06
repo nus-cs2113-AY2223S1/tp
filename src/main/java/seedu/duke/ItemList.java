@@ -1,15 +1,13 @@
 package seedu.duke;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class ItemList {
     private final Ui ui = new Ui();
-    private final List<Item> items;
-    //    private final Ui ui = new Ui();
+    private final ArrayList<Item> items;
 
-    public ItemList(List<Item> fileItems, List<Item> items) {
-        this.items = items;
-        items = fileItems;
+    public ItemList(ArrayList<Item> fileItems) { //store files from data.txt
+        this.items = fileItems;
     }
 
     /**
@@ -21,7 +19,7 @@ public class ItemList {
         ui.addItemMessage(item, items);
     }
 
-    public void delete(int index) {
+    public void deleteItem(int index) {
         Item item = items.get(index - 1);
         items.remove(index - 1);
         ui.deleteItemMessage(item, items);
@@ -35,7 +33,7 @@ public class ItemList {
         return items.get(index - 1);
     }
 
-    public List<Item> getItemList() {
+    public ArrayList<Item> getItemList() {
         return this.items;
     }
 

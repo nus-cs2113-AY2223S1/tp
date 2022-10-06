@@ -4,22 +4,18 @@ public abstract class Item {
     public String name;
     public String id;
     public String owner;
-    public int pricePerDay;
-    //    public enum category;
+    public String createdAt;
+    public float pricePerDay;
     public boolean isAvailable;
+    public Category category;
 
-    enum Category {
-        SPORTS_EQUIPMENT,
-        TEXTBOOKS_AND_NOTES,
-        ELECTRICAL_APPLIANCES,
-        //OTHERS
-    }
-
-    public Item(String name, int price, boolean status, String owner) {
+    public Item(Category category, String name, float price, boolean status, String owner, String createdAt) {
         this.name = name;
         this.pricePerDay = price;
         this.isAvailable = status;
         this.owner = owner;
+        this.createdAt = createdAt;
+        this.category = category;
     }
 
     public void setLoanStatus(boolean status) {
@@ -36,19 +32,6 @@ public abstract class Item {
 
     public String getId() {
         return id;
-    }
-
-    public int setCategory(Category category) {
-        switch (category) {
-        case SPORTS_EQUIPMENT:
-            return 0;
-        case TEXTBOOKS_AND_NOTES:
-            return 1;
-        case ELECTRICAL_APPLIANCES:
-            return 2;
-        default:
-            return 3;
-        }
     }
 
     public String getDescription() {
