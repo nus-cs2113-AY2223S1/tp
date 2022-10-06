@@ -4,7 +4,11 @@ import seedu.duke.Storage;
 import seedu.duke.Ui;
 import seedu.duke.common.ErrorMessages;
 import seedu.duke.data.TransactionList;
-import seedu.duke.exception.*;
+import seedu.duke.exception.AddTransactionInvalidCategoryException;
+import seedu.duke.exception.AddTransactionInvalidDateException;
+import seedu.duke.exception.AddTransactionMissingTagException;
+import seedu.duke.exception.AddTransactionUnknownTypeException;
+import seedu.duke.exception.MoolahException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -27,7 +31,8 @@ public class AddCommand extends Command {
         before adding entry to arraylist
         */
         /**
-         * Parses the add transaction command by checking if the compulsory tags exist followed by adding the transaction.
+         * Parses the add transaction command by checking if the compulsory tags exist followed by
+         * adding the transaction.
          * Then executes the command to add the transaction into the list.
          *
          * @param userInput The user input after the "add" command word.
@@ -48,47 +53,47 @@ public class AddCommand extends Command {
             String tag = split.substring(0, 2);
             String parameter = split.substring(2);
             switch (tag) {
-                case "t/":
-                    type = parameter;
-                    break;
-                case "c/":
-                    try {
-                        parseCategoryTag(parameter);
-                        category = parameter;
-                    } catch (AddTransactionInvalidCategoryException e) {
-                        Ui.printMessages(String.valueOf(ErrorMessages.MESSAGE_ERROR_ADD_COMMAND_INVALID_CATEGORY));
-                        inputIsValid = false;
-                    }
+            case "t/":
+                type = parameter;
+                break;
+            case "c/":
+                try {
+                    parseCategoryTag(parameter);
+                    category = parameter;
+                } catch (AddTransactionInvalidCategoryException e) {
+                    Ui.printMessages(String.valueOf(ErrorMessages.MESSAGE_ERROR_ADD_COMMAND_INVALID_CATEGORY));
+                    inputIsValid = false;
+                }
 
-                    break;
-                case "a/":
-                    try {
-                        amount = Integer.parseInt(parameter);
-                    } catch (NumberFormatException e) {
-                        Ui.showNonNumericError();
-                        inputIsValid = false;
-                    }
-                    break;
-                case "d/":
-                    date = parseDateTag(parameter);
-                    break;
-                case "i/":
-                    description = parameter;
-                    break;
-                default:
-                    break;
+                break;
+            case "a/":
+                try {
+                    amount = Integer.parseInt(parameter);
+                } catch (NumberFormatException e) {
+                    Ui.showNonNumericError();
+                    inputIsValid = false;
+                }
+                break;
+            case "d/":
+                date = parseDateTag(parameter);
+                break;
+            case "i/":
+                description = parameter;
+                break;
+            default:
+                break;
             }
         }
         if (inputIsValid) {
             switch (type) {
-                case "expense":
-                    transactions.addExpense(description, amount, category, date);
-                    break;
-                case "income":
-                    transactions.addIncome(description, amount, category, date);
-                    break;
-                default:
-                    throw new AddTransactionUnknownTypeException();
+            case "expense":
+                transactions.addExpense(description, amount, category, date);
+                break;
+            case "income":
+                transactions.addIncome(description, amount, category, date);
+                break;
+            default:
+                throw new AddTransactionUnknownTypeException();
             }
         }
     }
