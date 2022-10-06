@@ -1,11 +1,11 @@
 public class Prescription {
     private String medicine;
     private int timeInterval;
-    private final int patientId;
+    private final String patientId;
     private String dosage;
     private boolean isActive;
 
-    public Prescription(int patientId, String medicine, int timeInterval, String dosage) {
+    public Prescription(String patientId, String medicine, int timeInterval, String dosage) {
         this.patientId = patientId;
         this.medicine = medicine;
         this.timeInterval = timeInterval;
@@ -13,7 +13,7 @@ public class Prescription {
         this.isActive = true;
     }
 
-    public Prescription(int patientId, String medicine, int timeInterval, String dosage, boolean isActive) {
+    public Prescription(String patientId, String medicine, int timeInterval, String dosage, boolean isActive) {
         this.patientId = patientId;
         this.medicine = medicine;
         this.timeInterval = timeInterval;
@@ -21,7 +21,7 @@ public class Prescription {
         this.isActive = isActive;
     }
 
-    public int getPatientId() {
+    public String getPatientId() {
         return patientId;
     }
 

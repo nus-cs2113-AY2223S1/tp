@@ -7,7 +7,7 @@ public class PrescriptionList {
         prescriptionList = new ArrayList<>();
     }
 
-    public void add(int patientId, String medicine, int timeInterval, String dosage) {
+    public void add(String patientId, String medicine, int timeInterval, String dosage) {
         Prescription prescription = new Prescription(patientId, medicine, timeInterval, dosage);
         prescriptionList.add(prescription);
     }
