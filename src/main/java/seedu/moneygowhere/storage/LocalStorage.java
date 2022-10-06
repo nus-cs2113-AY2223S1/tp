@@ -1,12 +1,12 @@
 package seedu.moneygowhere.storage;
 
+import seedu.moneygowhere.common.Messages;
 import seedu.moneygowhere.data.expense.Expense;
 import seedu.moneygowhere.data.expense.ExpenseManager;
 import seedu.moneygowhere.exceptions.LocalStorageLoadDataInputError;
 
 import static seedu.moneygowhere.common.Configurations.DIRECTORY_PATH;
 import static seedu.moneygowhere.common.Configurations.FILE_PATH_EXPENSES;
-import static seedu.moneygowhere.common.Messages.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -43,17 +43,17 @@ public class LocalStorage {
                 expenseManager.addExpense(loadExpense);
                 ++fileIndex;
             }
-            System.out.println(LOCAL_STORAGE_LOAD_SUCCESS);
+            System.out.println(Messages.LOCAL_STORAGE_LOAD_SUCCESS);
         } catch (FileNotFoundException e) {
-            System.out.println(LOCAL_STORAGE_ERROR_NO_LOAD_FILE);
+            System.out.println(Messages.LOCAL_STORAGE_ERROR_NO_LOAD_FILE);
         } catch (LocalStorageLoadDataInputError | NumberFormatException e) {
-            System.out.println(LOCAL_STORAGE_ERROR_IN_LOAD_FILE + fileIndex);
+            System.out.println(Messages.LOCAL_STORAGE_ERROR_IN_LOAD_FILE + fileIndex);
         }
     }
 
-    private static Expense createExpense (String textFromFile) throws LocalStorageLoadDataInputError {
+    private static Expense createExpense(String textFromFile) throws LocalStorageLoadDataInputError {
         String[] splitInputs = textFromFile.split(DIVIDER);
-        if(splitInputs.length != 5) {
+        if (splitInputs.length != 5) {
             throw new LocalStorageLoadDataInputError();
         }
         String name = splitInputs[0];
@@ -74,7 +74,7 @@ public class LocalStorage {
             ArrayList<String> compiledData = taskToStringArray(savedExpenses);
             writeToFile(compiledData);
         } catch (IOException e) {
-            System.out.println(LOCAL_STORAGE_ERROR_SAVE_DATA);
+            System.out.println(Messages.LOCAL_STORAGE_ERROR_SAVE_DATA);
         }
     }
 
