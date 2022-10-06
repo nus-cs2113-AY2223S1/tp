@@ -29,9 +29,9 @@ public class Duke {
         ui.showGreeting();
         boolean isExit = false;
         String inData; // temp
+        Scanner scan = new Scanner(System.in);
         while (!isExit) {
             try {
-                Scanner scan = new Scanner(System.in);
                 inData = scan.nextLine();
                 inData = inData.trim();
 
