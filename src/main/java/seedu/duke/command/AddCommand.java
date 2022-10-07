@@ -4,7 +4,13 @@ import seedu.duke.Storage;
 import seedu.duke.Ui;
 
 import seedu.duke.data.TransactionList;
-import seedu.duke.exception.*;
+import seedu.duke.exception.MoolahException;
+import seedu.duke.exception.AddTransactionInvalidAmountException;
+import seedu.duke.exception.AddTransactionInvalidCategoryException;
+import seedu.duke.exception.AddTransactionUnknownTypeException;
+import seedu.duke.exception.AddTransactionInvalidDateException;
+import seedu.duke.exception.AddTransactionMissingTagException;
+
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -68,9 +74,6 @@ public class AddCommand extends Command {
                 type = parameter;
                 break;
             case "c/":
-//                if (containNumeric(parameter)) {
-//                    throw new AddTransactionInvalidCategoryException();
-//                }
                 category = parseCategoryTag(parameter);
                 break;
             case "a/":
