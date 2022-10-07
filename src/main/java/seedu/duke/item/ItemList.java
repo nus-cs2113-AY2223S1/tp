@@ -1,16 +1,16 @@
 package seedu.duke.item;
 
 import seedu.duke.Ui;
-import seedu.duke.item.Item;
+import seedu.duke.exception.DukeException;
 
 import java.util.ArrayList;
 
 public class ItemList {
     private final Ui ui = new Ui();
-    private final ArrayList<Item> items;
+    private final ArrayList<Item> itemList;
 
     public ItemList(ArrayList<Item> fileItems) { //store files from data.txt
-        this.items = fileItems;
+        this.itemList = fileItems;
     }
 
     /**
@@ -18,29 +18,39 @@ public class ItemList {
      * @param item is the new task the user has created
      */
     public void addItem(Item item) {
-        items.add(item);
-        ui.addItemMessage(item, items);
+        itemList.add(item);
+        ui.addItemMessage(item, itemList);
     }
 
     public void deleteItem(int index) {
-        Item item = items.get(index - 1);
-        items.remove(index - 1);
-        ui.deleteItemMessage(item, items);
+        Item item = itemList.get(index - 1);
+        itemList.remove(index - 1);
+        ui.deleteItemMessage(item, itemList);
+    }
+
+    public void markAvailable(Item item) {
+        int index = itemList.indexOf(item);
+        getItem(index).setAsAvailable();
+    }
+
+    public void markUnavailable(Item item) {
+        int index = itemList.indexOf(item);
+        getItem(index).setAsNotAvailable();
     }
 
     public int getListSize() {
-        return items.size();
+        return itemList.size();
     }
 
     public Item getItem(int index) {
-        return items.get(index - 1);
+        return itemList.get(index - 1);
     }
 
     public ArrayList<Item> getItemList() {
-        return this.items;
+        return this.itemList;
     }
 
     public void showList() {
-        ui.showList(items);
+        ui.showList(itemList);
     }
 }
