@@ -45,7 +45,6 @@ public class ConsoleInterface {
     public ConsoleInterface() {
         scanner = new Scanner(System.in);
         expenseManager = new ExpenseManager();
-        loadFromFile(expenseManager);
     }
 
     /**
@@ -267,6 +266,7 @@ public class ConsoleInterface {
      */
     @SuppressWarnings("StatementWithEmptyBody")
     public void run() {
+        loadFromFile(expenseManager);
         printBlankLine();
 
         while (true) {
