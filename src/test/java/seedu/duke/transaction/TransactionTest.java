@@ -2,11 +2,9 @@ package seedu.duke.transaction;
 
 import org.junit.jupiter.api.Test;
 import seedu.duke.item.Item;
-import seedu.duke.parser.DateParser;
 import seedu.duke.user.User;
 
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
