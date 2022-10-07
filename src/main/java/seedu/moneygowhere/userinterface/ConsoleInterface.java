@@ -18,6 +18,8 @@ import seedu.moneygowhere.exceptions.ConsoleParserCommandNotFoundException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandSortExpenseInvalidTypeException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandViewExpenseInvalidException;
 import seedu.moneygowhere.parser.ConsoleParser;
+
+import static seedu.moneygowhere.storage.LocalStorage.loadFromFile;
 import static seedu.moneygowhere.storage.LocalStorage.saveToFile;
 
 import java.math.BigDecimal;
@@ -264,6 +266,7 @@ public class ConsoleInterface {
      */
     @SuppressWarnings("StatementWithEmptyBody")
     public void run() {
+        loadFromFile(expenseManager);
         printBlankLine();
 
         while (true) {
