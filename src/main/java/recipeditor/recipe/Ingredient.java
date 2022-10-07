@@ -5,7 +5,7 @@ public class Ingredient {
     public String name;
     public String unit;
 
-    public Ingredient(String name, String amount, String unit){
+    public Ingredient(String name, String amount, String unit) {
         this.name = name;
         this.amount = Integer.parseInt(amount);
         this.unit = unit;

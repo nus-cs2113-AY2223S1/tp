@@ -25,8 +25,8 @@ public class Ui {
         }
     }
 
-    public static void showMessage(String... messages){
-        for(String m : messages){
+    public static void showMessage(String... messages) {
+        for (String m : messages) {
             System.out.println(m);
         }
     }
