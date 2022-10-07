@@ -7,14 +7,14 @@ import java.time.LocalDate;
  * Records the amount, category and the date of spending.
  */
 public class Expense extends Transaction {
-    private static String ICON = "[-]";
+    private static String ICON_EXPENSE = "[-]";
 
     public Expense(String description, int amount, String category, LocalDate date) {
         super(description, amount, category, date);
     }
 
     public String getIcon() {
-        return ICON;
+        return ICON_EXPENSE;
     }
 
     @Override

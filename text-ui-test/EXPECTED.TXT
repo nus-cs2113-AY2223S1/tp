@@ -1,35 +1,31 @@
 ____________________________________________________________
-Hello! I'm your Moolah Manager!
+Hello! I'm Moo and I will help you to manage your finances.
 Enter <help> if you need the list of commands.
 ____________________________________________________________
 ____________________________________________________________
 There are no records of your transactions found.
 ____________________________________________________________
 ____________________________________________________________
+I have added the following Expense transaction:
+[-][food] $20 at Sep 13 2022 | Description: NIL
+____________________________________________________________
+____________________________________________________________
+I have added the following Income transaction:
+[+][salary] $2000 at Sep 30 2022 | Description: jan_salary
+____________________________________________________________
+____________________________________________________________
+I have added the following Expense transaction:
+[-][transport] $1 at Oct 02 2022 | Description: bus_fare
+____________________________________________________________
+____________________________________________________________
 Below are the records of your transactions:
+[-][food] $20 at Sep 13 2022 | Description: NIL
+[+][salary] $2000 at Sep 30 2022 | Description: jan_salary
+[-][transport] $1 at Oct 02 2022 | Description: bus_fare
 
 ____________________________________________________________
 ____________________________________________________________
-MOOOOOO... I have added the following Expense Transaction: 
-[-][food] $20 at Sep 13 2022 | Description: NIL
-____________________________________________________________
-____________________________________________________________
-MOOOOOO... I have added the following Income Transaction: 
-[+][salary] $2000 at Sep 30 2022 | Description: jan_salary
-____________________________________________________________
-____________________________________________________________
-MOOOOOO... I have added the following Expense Transaction: 
-[-][transport] $1 at Oct 02 2022 | Description: bus_fare
-____________________________________________________________
-____________________________________________________________
-Below are the records of your transactions:
-[-][food] $20 at Sep 13 2022 | Description: NIL
-[+][salary] $2000 at Sep 30 2022 | Description: jan_salary
-[-][transport] $1 at Oct 02 2022 | Description: bus_fare
-You have 3 transactions in your transaction history.
-____________________________________________________________
-____________________________________________________________
-MOOOOOO... I have added the following Income Transaction: 
+I have added the following Income transaction:
 [+][bonus] $10000000 at Oct 03 2022 | Description: thank_you_boss
 ____________________________________________________________
 ____________________________________________________________
@@ -39,10 +35,10 @@ ____________________________________________________________
 Invalid category, please ensure your category is correct!
 ____________________________________________________________
 ____________________________________________________________
-Non-Numeric input detected! Please enter a numerical amount!
+Non-Numeric input detected, please enter a numerical amount!
 ____________________________________________________________
 ____________________________________________________________
-MOOOOOO... I have added the following Income Transaction: 
+I have added the following Income transaction:
 [+][bonus] $-1 at Oct 03 2022 | Description: thank_you_boss
 ____________________________________________________________
 ____________________________________________________________
@@ -61,23 +57,20 @@ Below are the records of your transactions:
 [-][transport] $1 at Oct 02 2022 | Description: bus_fare
 [+][bonus] $10000000 at Oct 03 2022 | Description: thank_you_boss
 [+][bonus] $-1 at Oct 03 2022 | Description: thank_you_boss
-You have 5 transactions in your transaction history.
+
 ____________________________________________________________
 ____________________________________________________________
-MOOOOOO.... I HAVE DELETED THE FOLLOWING TRANSACTION: NIL
+I have deleted the following transaction:
+[-][food] $20 at Sep 13 2022 | Description: NIL
 ____________________________________________________________
 ____________________________________________________________
-MOOOOOO.... Are you sure you want to proceed with this command? Please enter Y to confirm.
+Are you sure you want to proceed with this command? Please enter 'Y' to confirm.
 ____________________________________________________________
 ____________________________________________________________
-MOOOOOO.... All of your transactions have been purged.
+All your transactions have been purged.
 ____________________________________________________________
 ____________________________________________________________
 There are no records of your transactions found.
-____________________________________________________________
-____________________________________________________________
-Below are the records of your transactions:
-
 ____________________________________________________________
 ____________________________________________________________
 Goodbye and see you soon.
