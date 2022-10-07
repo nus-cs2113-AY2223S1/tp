@@ -3,6 +3,7 @@ package seedu.duke.command;
 import seedu.duke.Storage;
 import seedu.duke.Ui;
 import seedu.duke.common.ErrorMessages;
+import seedu.duke.common.InfoMessages;
 import seedu.duke.data.TransactionList;
 import seedu.duke.exception.AddTransactionInvalidCategoryException;
 import seedu.duke.exception.AddTransactionInvalidDateException;
@@ -61,16 +62,15 @@ public class AddCommand extends Command {
                     parseCategoryTag(parameter);
                     category = parameter;
                 } catch (AddTransactionInvalidCategoryException e) {
-                    Ui.printMessages(String.valueOf(ErrorMessages.MESSAGE_ERROR_ADD_COMMAND_INVALID_CATEGORY));
+                    Ui.printMessages(ErrorMessages.ERROR_ADD_COMMAND_INVALID_CATEGORY.toString());
                     inputIsValid = false;
                 }
-
                 break;
             case "a/":
                 try {
                     amount = Integer.parseInt(parameter);
                 } catch (NumberFormatException e) {
-                    Ui.showNonNumericError();
+                    Ui.showErrorMessage(ErrorMessages.ERROR_ADD_COMMAND_AMOUNT_NOT_NUMERIC.toString());
                     inputIsValid = false;
                 }
                 break;
@@ -87,10 +87,12 @@ public class AddCommand extends Command {
         if (inputIsValid) {
             switch (type) {
             case "expense":
-                transactions.addExpense(description, amount, category, date);
+                String expense = transactions.addExpense(description, amount, category, date);
+                Ui.showTransactionAction(InfoMessages.INFO_ADD_EXPENSE.toString(), expense);
                 break;
             case "income":
-                transactions.addIncome(description, amount, category, date);
+                String income = transactions.addIncome(description, amount, category, date);
+                Ui.showTransactionAction(InfoMessages.INFO_ADD_INCOME.toString(), income);
                 break;
             default:
                 throw new AddTransactionUnknownTypeException();

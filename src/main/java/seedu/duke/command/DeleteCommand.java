@@ -6,8 +6,10 @@ import seedu.duke.data.TransactionList;
 import seedu.duke.exception.AddDeleteInvalidIndexException;
 import seedu.duke.exception.MoolahException;
 
-public class DeleteCommand extends Command {
+import static seedu.duke.common.ErrorMessages.ERROR_ADD_COMMAND_AMOUNT_NOT_NUMERIC;
+import static seedu.duke.common.InfoMessages.INFO_DELETE;
 
+public class DeleteCommand extends Command {
     private String input;
 
     public DeleteCommand(String input) {
@@ -27,14 +29,15 @@ public class DeleteCommand extends Command {
         try {
             index = Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            Ui.showNonNumericError();
+            Ui.showErrorMessage(ERROR_ADD_COMMAND_AMOUNT_NOT_NUMERIC.toString());
             return;
         }
         if ((index > numberOfTransactions) || (index <= 0)) {
             isInputValid = false;
         }
         if (isInputValid) {
-            TransactionList.deleteEntry(transactions, index);
+            String transaction = TransactionList.deleteTransaction(transactions, index);
+            Ui.showTransactionAction(INFO_DELETE.toString(), transaction);
         } else {
             throw new AddDeleteInvalidIndexException();
         }

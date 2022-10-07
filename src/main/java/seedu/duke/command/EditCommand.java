@@ -5,7 +5,6 @@ import seedu.duke.Ui;
 import seedu.duke.data.TransactionList;
 
 public class EditCommand extends Command {
-
     private String input;
 
     public EditCommand(String input) {
