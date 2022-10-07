@@ -7,7 +7,7 @@ import static seedu.duke.common.DateFormats.DATE_OUTPUT_PATTERN;
 
 public class Transaction {
     private static final String PREFIX_CATEGORY = "[";
-    private static final String SUFFIX_CATEGORY = "]";
+    private static final String POSTFIX_CATEGORY = "]";
     private static final String SYMBOL_DOLLAR = "$";
     private static final String SYMBOL_PIPE = "|";
     private static final String TEXT_AT = "at";
@@ -55,7 +55,7 @@ public class Transaction {
     }
 
     public String printFormattedCategory() {
-        return PREFIX_CATEGORY + category + SUFFIX_CATEGORY;
+        return PREFIX_CATEGORY + category + POSTFIX_CATEGORY;
     }
 
     @Override
