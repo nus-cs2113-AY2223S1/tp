@@ -12,5 +12,4 @@ public class InvalidCommandException extends MoolahException {
     public String getMessage() {
         return ERROR_INVALID_COMMAND.toString();
     }
-
 }
