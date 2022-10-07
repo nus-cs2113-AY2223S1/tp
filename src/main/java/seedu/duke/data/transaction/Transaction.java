@@ -6,9 +6,16 @@ import java.time.format.DateTimeFormatter;
 import static seedu.duke.common.DateFormats.DATE_OUTPUT_PATTERN;
 
 public class Transaction {
+    private static final String PREFIX_CATEGORY = "[";
+    private static final String SUFFIX_CATEGORY = "]";
+    private static final String SYMBOL_DOLLAR = "$";
+    private static final String SYMBOL_PIPE = "|";
+    private static final String TEXT_AT = "at";
+    private static final String TEXT_DESCRIPTION = "Description:";
+
+    private String category;
     private String description;
     private int amount;
-    private String category; // category of income or expense
     private LocalDate date;
 
     public Transaction(String description, int amount, String category, LocalDate date) {
@@ -48,12 +55,12 @@ public class Transaction {
     }
 
     public String printFormattedCategory() {
-        return "[" + category + "]";
+        return PREFIX_CATEGORY + category + SUFFIX_CATEGORY;
     }
 
     @Override
     public String toString() {
-        return printFormattedCategory() + " $" + amount + " at " + printFormattedDate()
-                + " | Description: " + description;
+        return String.format("%s %s%d %s %s %s %s %s", printFormattedCategory(), SYMBOL_DOLLAR,
+                amount, TEXT_AT, printFormattedDate(), SYMBOL_PIPE, TEXT_DESCRIPTION, description);
     }
 }
