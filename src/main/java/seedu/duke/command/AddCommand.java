@@ -4,15 +4,19 @@ import seedu.duke.Storage;
 import seedu.duke.Ui;
 
 import seedu.duke.data.TransactionList;
+import seedu.duke.exception.MoolahException;
+import seedu.duke.exception.AddTransactionInvalidAmountException;
 import seedu.duke.exception.AddTransactionInvalidCategoryException;
+import seedu.duke.exception.AddTransactionUnknownTypeException;
 import seedu.duke.exception.AddTransactionInvalidDateException;
 import seedu.duke.exception.AddTransactionMissingTagException;
-import seedu.duke.exception.AddTransactionUnknownTypeException;
-import seedu.duke.exception.MoolahException;
+
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static seedu.duke.common.DateFormats.DATE_INPUT_PATTERN;
 import static seedu.duke.common.ErrorMessages.ERROR_ADD_COMMAND_AMOUNT_NOT_NUMERIC;
@@ -33,9 +37,9 @@ public class AddCommand extends Command {
     /**
      * Executes the operations related to the command.
      *
-     * @param ui An instance of the Ui class.
+     * @param ui           An instance of the Ui class.
      * @param transactions An instance of the TransactionList class.
-     * @param storage An instance of the Storage class.
+     * @param storage      An instance of the Storage class.
      */
     @Override
     public void execute(TransactionList transactions, Ui ui, Storage storage) throws MoolahException {
@@ -70,21 +74,10 @@ public class AddCommand extends Command {
                 type = parameter;
                 break;
             case "c/":
-                try {
-                    parseCategoryTag(parameter);
-                    category = parameter;
-                } catch (AddTransactionInvalidCategoryException e) {
-                    Ui.printMessages(e.getMessage());
-                    inputIsValid = false;
-                }
+                category = parseCategoryTag(parameter);
                 break;
             case "a/":
-                try {
-                    amount = Integer.parseInt(parameter);
-                } catch (NumberFormatException e) {
-                    Ui.showErrorMessage(ERROR_ADD_COMMAND_AMOUNT_NOT_NUMERIC.toString());
-                    inputIsValid = false;
-                }
+                amount = parseAmountTag(parameter);
                 break;
             case "d/":
                 date = parseDateTag(parameter);
@@ -121,18 +114,6 @@ public class AddCommand extends Command {
 
     // the other add functions
 
-    /**
-     * Processes the parameter. If it is an invalid parameter an exception error would be thrown.
-     *
-     * @param parameter The user input after the user tag.
-     * @throws AddTransactionInvalidCategoryException Invalid category parameter exception.
-     */
-    private static void parseCategoryTag(String parameter) throws AddTransactionInvalidCategoryException {
-        if (containNumeric(parameter)) {
-            throw new AddTransactionInvalidCategoryException();
-        }
-
-    }
 
     /**
      * Checks if the parameter contains numeric characters.
@@ -150,6 +131,57 @@ public class AddCommand extends Command {
         return false;
     }
 
+    /**
+     * Checks if the parameter contains alphabetical characters.
+     *
+     * @param parameter The user input after the user tag.
+     * @return true if there are alphabetical characters within the parameter.
+     */
+    public static boolean containAlphabet(String parameter) {
+        char[] characters = parameter.toCharArray();
+        for (char character : characters) {
+            if (Character.isAlphabetic(character)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    /**
+     * Parse the user parameter input for the description and returns it.
+     *
+     * @param parameter The user input after the user tag.
+     * @return The category parameter if no exceptions are thrown.
+     * @throws AddTransactionInvalidCategoryException Invalid category format exception.
+     */
+
+    private static String parseCategoryTag(String parameter) throws AddTransactionInvalidCategoryException {
+        Pattern specialSymbols = Pattern.compile("[!@#$%&*()_+=|<>?{}\\[\\]~-]");
+        Matcher hasSpecialSymbols = specialSymbols.matcher(parameter);
+        if (containNumeric(parameter) || hasSpecialSymbols.find()) {
+            throw new AddTransactionInvalidCategoryException();
+        }
+        return parameter;
+
+    }
+
+    /**
+     * Parse the user parameter input for the amount and returns it.
+     *
+     * @param parameter The user input after the user tag.
+     * @return The amount integer if no exceptions are thrown.
+     * @throws AddTransactionInvalidAmountException Invalid amount format exception.
+     */
+    private static int parseAmountTag(String parameter) throws AddTransactionInvalidAmountException {
+        Pattern specialSymbols = Pattern.compile("[!@#$%&*()_+=|<>?{}\\[\\]~-]");
+        Matcher hasSpecialSymbols = specialSymbols.matcher(parameter);
+        if (containAlphabet(parameter) || hasSpecialSymbols.find()) {
+            throw new AddTransactionInvalidAmountException();
+        } else {
+            return Integer.parseInt(parameter);
+        }
+    }
 
     /**
      * Parse the user parameter input for date into a LocalDate object and returns it.

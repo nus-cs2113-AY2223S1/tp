@@ -50,11 +50,10 @@ ____________________________________________________________
 Invalid category, please ensure your category is correct!
 ____________________________________________________________
 ____________________________________________________________
-Non-Numeric input detected, please enter a numerical amount!
+Invalid amount, please ensure your amount is in positive numerals only!
 ____________________________________________________________
 ____________________________________________________________
-I have added the following Income transaction:
-[+][bonus] $-1 at Oct 03 2022 | Description: thank_you_boss
+Invalid amount, please ensure your amount is in positive numerals only!
 ____________________________________________________________
 ____________________________________________________________
 Invalid date, please ensure your date format is correct!
@@ -71,7 +70,6 @@ Here are your transaction records:
 [+][salary] $2000 at Sep 30 2022 | Description: jan_salary
 [-][transport] $1 at Oct 02 2022 | Description: bus_fare
 [+][bonus] $10000000 at Oct 03 2022 | Description: thank_you_boss
-[+][bonus] $-1 at Oct 03 2022 | Description: thank_you_boss
 
 ____________________________________________________________
 ____________________________________________________________

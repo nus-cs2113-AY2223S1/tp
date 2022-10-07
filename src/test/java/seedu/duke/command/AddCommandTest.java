@@ -17,7 +17,7 @@ public class AddCommandTest {
         TransactionList transactions = new TransactionList();
         Ui ui = new Ui();
         Storage storage = new Storage();
-        AddCommand addCommand = new AddCommand("t/income c/bonus a/-1 d/ i/thank_you_boss");
+        AddCommand addCommand = new AddCommand("t/income c/bonus a/1 d/ i/thank_you_boss");
 
         assertThrows(
             AddTransactionInvalidDateException.class,
@@ -30,7 +30,7 @@ public class AddCommandTest {
         TransactionList transactions = new TransactionList();
         Ui ui = new Ui();
         Storage storage = new Storage();
-        AddCommand addCommand = new AddCommand("t/income c/bonus a/-1 d/2020-01-01 i/thank_you_boss");
+        AddCommand addCommand = new AddCommand("t/income c/bonus a/1 d/2020-01-01 i/thank_you_boss");
 
         assertThrows(
             AddTransactionInvalidDateException.class,
