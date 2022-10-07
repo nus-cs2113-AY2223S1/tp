@@ -25,6 +25,13 @@ public class Ui {
         }
     }
 
+    public static void showMessage(String... messages){
+        for(String m : messages){
+            System.out.println(m);
+        }
+    }
+
+
     //public static void printAddRecipeText(Recipe recipe) {
     //    System.out.println("Duke has added this task to your list:");
     //    System.out.println(recipe.name);

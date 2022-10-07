@@ -1,6 +1,26 @@
 package recipeditor.parser;
 
+import recipeditor.command.AddCommand;
+import recipeditor.command.InvalidCommand;
+import recipeditor.command.Command;
+import recipeditor.ui.AddMode;
+
+
 public class Parser {
+
+
+    public Command parseCommand(String input){
+        String[] parsed = input.split(" ");
+        String commandWord = parsed[0].toLowerCase();
+        String argument = input.replace(commandWord, "");
+        switch(commandWord){
+        case AddCommand.TYPE:
+            return parseAddCommand();
+        default:
+            return new InvalidCommand();
+        }
+
+    }
 
 //    public static Command parseCommand(String input) {
 //        String[] commandAndParams = input.split(" ", 2);
@@ -16,4 +36,12 @@ public class Parser {
 //            return new InvalidCommand();
 //        }
 //    }
+
+
+    private Command parseAddCommand() {
+        AddMode add = new AddMode(); // Switch to Edit mode in here
+        add.enterAddMode();
+        return new AddCommand();
+    }
+
 }
