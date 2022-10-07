@@ -9,13 +9,28 @@ import seedu.duke.exception.MoolahException;
 import static seedu.duke.common.ErrorMessages.ERROR_ADD_COMMAND_AMOUNT_NOT_NUMERIC;
 import static seedu.duke.common.InfoMessages.INFO_DELETE;
 
+/**
+ * Represents a delete command object that will execute the operations for Delete command.
+ */
 public class DeleteCommand extends Command {
     private String input;
 
+    /**
+     * Initialises the variables of the DeleteCommand class.
+     *
+     * @param input A string that represents the index of the task.
+     */
     public DeleteCommand(String input) {
         this.input = input;
     }
 
+    /**
+     * Executes the operations related to the command.
+     *
+     * @param ui An instance of the Ui class.
+     * @param transactions An instance of the TransactionList class.
+     * @param storage An instance of the Storage class.
+     */
     @Override
     public void execute(TransactionList transactions, Ui ui, Storage storage) throws MoolahException {
         /*
