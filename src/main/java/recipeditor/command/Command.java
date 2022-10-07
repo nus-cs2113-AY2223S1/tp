@@ -1,6 +1,6 @@
 package recipeditor.command;
 
 public abstract class Command {
-    public static String commandType;
+    public static String COMMAND_TYPE;
     
 }
