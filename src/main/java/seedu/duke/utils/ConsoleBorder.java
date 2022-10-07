@@ -1,28 +1,17 @@
 package seedu.duke.utils;
 
 public class ConsoleBorder {
-    // private static final char TOP_LEFT = '╓';
-    // private static final char TOP_RIGHT = '╖';
-    // private static final char TOP_MID = '╥';
-    // private static final char SIDE = '║';
-    // private static final char CROSS = '╫';
-    // private static final char MID_LEFT = '╟';
-    // private static final char MID_RIGHT = '╢';
-    // private static final char ACROSS = '─';
-    // private static final char BOTTOM_LEFT = '╙';
-    // private static final char BOTTOM_RIGHT = '╜';
-    // private static final char BOTTOM_MID = '╨';
-    public static final char TOP_LEFT = '┌';
-    public static final char TOP_RIGHT = '┐';
-    public static final char TOP_MID = '┬';
-    public static final char SIDE = '│';
-    public static final char CROSS = '┼';
-    public static final char MID_LEFT = '├';
-    public static final char MID_RIGHT = '┤';
-    public static final char ACROSS = '─';
-    public static final char BOTTOM_LEFT = '└';
-    public static final char BOTTOM_RIGHT = '┘';
-    public static final char BOTTOM_MID = '┴';
+    public static final char TOP_LEFT = '\u250C';
+    public static final char TOP_RIGHT = '\u2510';
+    public static final char TOP_MID = '\u252C';
+    public static final char SIDE = '\u2502';
+    public static final char CROSS = '\u253C';
+    public static final char MID_LEFT = '\u251C';
+    public static final char MID_RIGHT = '\u2524';
+    public static final char ACROSS = '\u2500';
+    public static final char BOTTOM_LEFT = '\u2514';
+    public static final char BOTTOM_RIGHT = '\u2518';
+    public static final char BOTTOM_MID = '\u2534';
 
     public static boolean isBorderLeft(char c) {
         return (c == TOP_LEFT || c == MID_LEFT || c == BOTTOM_LEFT);
