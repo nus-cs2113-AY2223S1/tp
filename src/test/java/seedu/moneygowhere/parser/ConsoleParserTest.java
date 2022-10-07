@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class ConsoleParserTest {
     @SuppressWarnings("ConstantConditions")
     @Test
-    void parseCommand_aeNameAmount_ccaeNameAmountDate() throws
+    void parseCommand_aeNameAmount_ccaeNameAmountDateTime() throws
             MoneyGoWhereException {
         String input = "Add-Expense -n Exp -a 7.80";
 
@@ -49,7 +49,7 @@ class ConsoleParserTest {
     }
 
     @Test
-    void parseCommand_aeNameAmountDate_ccaeNameAmountDate() throws
+    void parseCommand_aeNameAmountDateTime_ccaeNameAmountDateTime() throws
             MoneyGoWhereException {
         String input = "Add-Expense -n Exp -a 7.80 -d \"01/01/2022 2359\"";
 
@@ -83,7 +83,7 @@ class ConsoleParserTest {
     }
 
     @Test
-    void parseCommand_aeNameAmountDateDescription_ccaeNameAmountDateDescription() throws
+    void parseCommand_aeNameAmountDateTimeDescription_ccaeNameAmountDateTimeDescription() throws
             MoneyGoWhereException {
         String input = "Add-Expense -n Exp -a 7.80 -d \"01/01/2022 2359\" -t \"Test Desc\"";
 
@@ -117,7 +117,7 @@ class ConsoleParserTest {
     }
 
     @Test
-    void parseCommand_aeNameAmountDateDescriptionCategory_ccaeNameAmountDateDescriptionCategory() throws
+    void parseCommand_aeNameAmountDateTimeDescriptionCategory_ccaeNameAmountDateTimeDescriptionCategory() throws
             MoneyGoWhereException {
         String input = "Add-Expense -n Exp -a 7.80 -d \"01/01/2022 2359\" -t \"Test Desc\" -c \"Test Cat\"";
 
@@ -151,8 +151,24 @@ class ConsoleParserTest {
     }
 
     @Test
-    void parseCommand_aeNameAmountDateDescriptionCategory_ccaeInvalidException() {
+    void parseCommand_aeName_ccaeInvalidException() {
         String input = "Add-Expense -n Exp";
+
+        assertThrows(ConsoleParserCommandAddExpenseInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    @Test
+    void parseCommand_aeNameAmount_ccaeInvalidException() {
+        String input = "Add-Expense -n Exp -a \"ThisIsAnInvalidAmount\"";
+
+        assertThrows(ConsoleParserCommandAddExpenseInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    @Test
+    void parseCommand_aeNameAmountDateTime_ccaeInvalidException() {
+        String input = "Add-Expense -n Exp -a 7.80 -d \"ThisIsAnInvalidDateTime\"";
 
         assertThrows(ConsoleParserCommandAddExpenseInvalidException.class, () ->
                 ConsoleParser.parse(input));
