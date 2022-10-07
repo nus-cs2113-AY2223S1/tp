@@ -1,38 +1,38 @@
 package seedu.duke.item;
 
-import seedu.duke.item.Category;
+import seedu.duke.id.IdGenerator;
+import seedu.duke.user.User;
 
 public abstract class Item {
     public String name;
     public String id;
-    public String owner;
-    public String createdAt;
+    public User owner;
     public float pricePerDay;
     public boolean isAvailable;
-    public Category category;
+    public Category.Categories category;
 
-    public Item(Category category, String name, float price, boolean status, String owner, String createdAt) {
+    public Item(String name, int categoryNumber, float price, User owner) {
+        this.id = IdGenerator.generateId();
         this.name = name;
         this.pricePerDay = price;
-        this.isAvailable = status;
+        this.isAvailable = true;
         this.owner = owner;
-        this.createdAt = createdAt;
-        this.category = category;
+        this.category = Category.mapCategory(categoryNumber);
     }
 
-    public void setLoanStatus(boolean status) {
-        isAvailable = status;
+    public void setAsAvailable() {
+        isAvailable = true;
+    }
+
+    public void setAsNotAvailable() {
+        isAvailable = false;
     }
 
     public boolean isAvailable() {
         return isAvailable;
     }
 
-    public void setId(String putId) {
-        this.id = putId;
-    }
-
-    public String getId() {
+    public String getItemId() {
         return id;
     }
 
@@ -49,5 +49,15 @@ public abstract class Item {
     }
 
     public abstract String fileFormat();
+
+    @Override
+    public String toString() {
+        String itemIcon = "[" + (isAvailable ? "Y" : "N") + "] ";
+        String itemName = "Item: " + name + "(ID: " + id + ") ";
+        String itemCategory = "Category: " + category.toString() + " ";
+        String itemOwner = "Owner: " + owner.getUserId() + " ";
+        String itemPrice = "PricePerDay: " + pricePerDay;
+        return itemIcon + itemName + itemCategory + itemOwner + itemPrice;
+    }
 
 }

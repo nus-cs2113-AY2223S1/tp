@@ -5,10 +5,10 @@ public class Category {
         SPORTS_EQUIPMENT,
         TEXTBOOKS_AND_NOTES,
         ELECTRICAL_APPLIANCES,
-        //OTHERS
+        OTHERS //TO BE ADDED LATER
     }
 
-    public int setCategory(Categories category) {
+    public static int setCategory(Categories category) {
         switch (category) {
         case SPORTS_EQUIPMENT:
             return 0;
@@ -19,5 +19,27 @@ public class Category {
         default: //others
             return 3;
         }
+    }
+
+    public static Categories mapCategory(int categoryNumber) {
+        switch (categoryNumber) {
+        case 1:
+            return Categories.SPORTS_EQUIPMENT;
+        case 2:
+            return Categories.TEXTBOOKS_AND_NOTES;
+        case 3:
+            return Categories.ELECTRICAL_APPLIANCES;
+        default: //others
+            return Categories.OTHERS;
+        }
+    }
+
+    public static String listCategories() {
+        StringBuilder list = new StringBuilder("Here are available categories: \n");
+        int index = 1;
+        for (Categories category : Categories.values()) {
+            list.append(index).append(". ").append(category).append('\n');
+        }
+        return list.toString();
     }
 }
