@@ -10,7 +10,7 @@ public class AddTransactionInvalidCategoryException extends MoolahException {
      */
     @Override
     public String getMessage() {
-        return ErrorMessages.MESSAGE_ERROR_ADD_COMMAND_INVALID_CATEGORY.toString();
+        return ErrorMessages.ERROR_ADD_COMMAND_INVALID_CATEGORY.toString();
     }
 
 }
