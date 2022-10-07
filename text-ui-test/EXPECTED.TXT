@@ -3,7 +3,7 @@ Hello! I'm Moo and I will help you to manage your finances.
 Enter <help> if you need the list of commands.
 ____________________________________________________________
 ____________________________________________________________
-There are no records of your transactions found.
+There are no transaction records found.
 ____________________________________________________________
 ____________________________________________________________
 I have added the following Expense transaction:
@@ -18,7 +18,15 @@ I have added the following Expense transaction:
 [-][transport] $1 at Oct 02 2022 | Description: bus_fare
 ____________________________________________________________
 ____________________________________________________________
-Below are the records of your transactions:
+Keyword(s) for your search expression missing, please check your input!
+____________________________________________________________
+____________________________________________________________
+Here are the transaction records that match your search expression:
+[-][transport] $1 at Oct 02 2022 | Description: bus_fare
+
+____________________________________________________________
+____________________________________________________________
+Here are your transaction records:
 [-][food] $20 at Sep 13 2022 | Description: NIL
 [+][salary] $2000 at Sep 30 2022 | Description: jan_salary
 [-][transport] $1 at Oct 02 2022 | Description: bus_fare
@@ -51,7 +59,7 @@ ____________________________________________________________
 Invalid date, please ensure your date format is correct!
 ____________________________________________________________
 ____________________________________________________________
-Below are the records of your transactions:
+Here are your transaction records:
 [-][food] $20 at Sep 13 2022 | Description: NIL
 [+][salary] $2000 at Sep 30 2022 | Description: jan_salary
 [-][transport] $1 at Oct 02 2022 | Description: bus_fare
@@ -70,7 +78,7 @@ ____________________________________________________________
 All your transactions have been purged.
 ____________________________________________________________
 ____________________________________________________________
-There are no records of your transactions found.
+There are no transaction records found.
 ____________________________________________________________
 ____________________________________________________________
 Goodbye and see you soon.

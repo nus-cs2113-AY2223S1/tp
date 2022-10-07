@@ -12,8 +12,10 @@ public enum InfoMessages {
     INFO_GREET("Hello! I'm Moo and I will help you to manage your finances."),
     INFO_HELP_GREET("Gotcha! Here are the commands that you may use:"),
     INFO_HELP_PROMPT("Enter <help> if you need the list of commands."),
-    INFO_LIST("Below are the records of your transactions:"),
-    INFO_LIST_EMPTY("There are no records of your transactions found."),
+    INFO_LIST("Here are your transaction records:"),
+    INFO_LIST_EMPTY("There are no transaction records found."),
+    INFO_LIST_FILTERED("Here are the transaction records that match your search expression:"),
+    INFO_LIST_UNFILTERED("There are no transaction records that match your search expression."),
     INFO_PURGE("All your transactions have been purged."),
     INFO_PURGE_ABORT("Purging has been aborted. All transactions records are retained."),
     INFO_PURGE_WARNING("Are you sure you want to proceed with this command? Please enter 'Y' to confirm.");
