@@ -4,7 +4,10 @@ import seedu.duke.Storage;
 import seedu.duke.Ui;
 import seedu.duke.data.TransactionList;
 
-import static seedu.duke.common.InfoMessages.*;
+import static seedu.duke.common.InfoMessages.INFO_PURGE;
+import static seedu.duke.common.InfoMessages.INFO_PURGE_ABORT;
+import static seedu.duke.common.InfoMessages.INFO_PURGE_EMPTY;
+import static seedu.duke.common.InfoMessages.INFO_PURGE_WARNING;
 
 /**
  * Represents a purge command object that will execute the operations for Purge command.
