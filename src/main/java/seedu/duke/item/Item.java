@@ -3,15 +3,15 @@ package seedu.duke.item;
 import seedu.duke.id.IdGenerator;
 import seedu.duke.user.User;
 
-public abstract class Item {
+public class Item {
     public String name;
     public String id;
     public User owner;
-    public float pricePerDay;
+    public double pricePerDay;
     public boolean isAvailable;
     public Category.Categories category;
 
-    public Item(String name, int categoryNumber, float price, User owner) {
+    public Item(String name, int categoryNumber, double price, User owner) {
         this.id = IdGenerator.generateId();
         this.name = name;
         this.pricePerDay = price;
@@ -48,7 +48,9 @@ public abstract class Item {
         this.pricePerDay = newPrice;
     }
 
-    public abstract String fileFormat();
+    public String fileFormat() {
+        return null; //add later
+    }
 
     @Override
     public String toString() {
