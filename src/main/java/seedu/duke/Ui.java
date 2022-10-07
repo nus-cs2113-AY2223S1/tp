@@ -7,6 +7,7 @@ public class Ui {
     private static boolean inputIsEmpty(String rawInput) {
         return rawInput.trim().isEmpty();
     }
+
     public static String readCommand() {
         Scanner input = new Scanner(System.in);
 

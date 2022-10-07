@@ -1,7 +1,11 @@
 package seedu.duke.command;
 
-import seedu.duke.*;
+import seedu.duke.Ui;
+import seedu.duke.ClientList;
+import seedu.duke.PropertyList;
+import seedu.duke.Storage;
 
-abstract public class Command {
+
+public abstract class Command {
     public abstract void execute(Ui ui, Storage storage, PropertyList propertyList, ClientList clientList);
 }
