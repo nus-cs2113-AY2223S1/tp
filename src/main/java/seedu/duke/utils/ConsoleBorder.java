@@ -18,6 +18,8 @@ public class ConsoleBorder {
 
     private static ConsoleBorder singleton;
 
+    public static final char DOTTED_CHAR = ':';
+
     public static ConsoleBorder getInstance() {
         if (singleton == null) {
             singleton = new ConsoleBorder();
@@ -108,7 +110,7 @@ public class ConsoleBorder {
 
     public char mergeBorder(char current, char next) {
         // next is always TOP/BOTTOM_LEFT/RIGHT
-        if (current == '·') {
+        if (current == DOTTED_CHAR) {
             return next;
         }
         if (current == ' ') {

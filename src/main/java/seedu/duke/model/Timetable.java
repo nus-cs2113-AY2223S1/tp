@@ -86,12 +86,13 @@ public class Timetable {
         }
         // write day headers
         for (int i = 0; i < days.size(); i++) {
-            write(": " + dayToShortString(days.get(i)), TOP_PADDING, getColumnOfDay(days.get(i)) - 1);
+            write(ConsoleBorder.DOTTED_CHAR + " " + dayToShortString(days.get(i)), TOP_PADDING,
+                    getColumnOfDay(days.get(i)) - 1);
         }
         // draw border between day columns
         for (int i = 0; i < days.size(); i++) {
             for (int j = 0; j < timeslots * ROWS_PER_TIME; j++) {
-                write("·", j + HEADER_ROWS, getColumnOfDay(days.get(i)) - 1);
+                write("" + ConsoleBorder.DOTTED_CHAR, j + HEADER_ROWS, getColumnOfDay(days.get(i)) - 1);
             }
         }
     }
