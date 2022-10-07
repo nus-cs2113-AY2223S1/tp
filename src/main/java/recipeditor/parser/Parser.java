@@ -1,6 +1,9 @@
 package recipeditor.parser;
 
-import recipeditor.command.*;
+import recipeditor.command.ByeCommand;
+import recipeditor.command.AddCommand;
+import recipeditor.command.DeleteCommand;
+import recipeditor.command.ListCommand;
 
 public class Parser {
 
@@ -10,6 +13,7 @@ public class Parser {
         switch (command) {
         case ByeCommand.commandType:
             new ByeCommand();
+            return "end of bye command";
         case AddCommand.commandType:
             return "add command";
         case DeleteCommand.commandType:
