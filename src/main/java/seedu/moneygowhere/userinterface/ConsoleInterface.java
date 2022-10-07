@@ -18,6 +18,7 @@ import seedu.moneygowhere.exceptions.ConsoleParserCommandNotFoundException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandSortExpenseInvalidTypeException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandViewExpenseInvalidException;
 import seedu.moneygowhere.parser.ConsoleParser;
+import static seedu.moneygowhere.storage.LocalStorage.saveToFile;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -25,6 +26,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
+
+
 
 /**
  * Provide functions to interface with the user via standard input and standard output.
@@ -138,6 +141,8 @@ public class ConsoleInterface {
         printInformationalMessage(expenseStr);
 
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_ADD_EXPENSE_SUCCESS);
+
+        saveToFile(expenseManager.getExpenses());
     }
 
     private void viewExpense() {
@@ -191,6 +196,8 @@ public class ConsoleInterface {
         expenseManager.deleteExpense(expenseIndex);
 
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_DELETE_EXPENSE_SUCCESS);
+
+        saveToFile(expenseManager.getExpenses());
     }
 
     private void runCommandEditExpense(ConsoleCommandEditExpense consoleCommandEditExpense) {
@@ -234,6 +241,8 @@ public class ConsoleInterface {
         expenseStr += "Category      : " + newExpense.getCategory() + "\n";
         printInformationalMessage(expenseStr);
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_EDIT_EXPENSE_SUCCESS);
+
+        saveToFile(expenseManager.getExpenses());
     }
 
     private void runCommandSortExpense(ConsoleCommandSortExpense commandSortExpense) {
@@ -272,12 +281,10 @@ public class ConsoleInterface {
                      | ConsoleParserCommandAddExpenseInvalidException
                      | ConsoleParserCommandViewExpenseInvalidException
                      | ConsoleParserCommandDeleteExpenseInvalidException
-                     | ConsoleParserCommandEditExpenseInvalidException exception) {
+                     | ConsoleParserCommandEditExpenseInvalidException
+                     | ConsoleParserCommandSortExpenseInvalidTypeException exception) {
                 printErrorMessage(exception.getMessage());
-            } catch (ConsoleParserCommandSortExpenseInvalidTypeException e) {
-                throw new RuntimeException(e);
             }
-
             // Execute function according to the ConsoleCommand object returned by the parser
             if (hasParseError) {
                 // Do nothing if there is a parse error
