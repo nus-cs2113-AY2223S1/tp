@@ -6,6 +6,7 @@ import seedu.duke.command.ByeCommand;
 import seedu.duke.command.DeleteCommand;
 import seedu.duke.command.EditCommand;
 import seedu.duke.command.FindCommand;
+import seedu.duke.command.GetCommand;
 import seedu.duke.command.HelpCommand;
 import seedu.duke.command.ListCommand;
 import seedu.duke.command.PurgeCommand;
@@ -54,6 +55,10 @@ public class Parser {
             break;
         case "find":
             command = new FindCommand(inputTokens[1]);
+            break;
+        case "get":
+            // Additional tokens will be allowed for get
+            command = new GetCommand();
             break;
         case "purge":
             command = new PurgeCommand();

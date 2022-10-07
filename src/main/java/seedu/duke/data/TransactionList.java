@@ -22,8 +22,8 @@ public class TransactionList {
         this.transactions = new ArrayList<>();
     }
 
-    private Transaction getEntry(int index) {
-        return transactions.get(index - 1);
+    public Transaction getEntry(int index) {
+        return transactions.get(index);
     }
 
     public static String deleteTransaction(TransactionList input, int index) {

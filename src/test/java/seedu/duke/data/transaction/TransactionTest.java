@@ -1,8 +1,6 @@
 package seedu.duke.data.transaction;
 
 import org.junit.jupiter.api.Test;
-import seedu.duke.data.transaction.Income;
-import seedu.duke.data.transaction.Transaction;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
