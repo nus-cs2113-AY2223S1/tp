@@ -22,12 +22,12 @@ public class TransactionList {
         this.transactions = new ArrayList<>();
     }
 
-    private Transaction getEntry(int index) {
-        return transactions.get(index - 1);
+    public Transaction getEntry(int index) {
+        return transactions.get(index);
     }
 
     public static String deleteTransaction(TransactionList input, int index) {
-        Transaction transaction = input.getEntry(index);
+        Transaction transaction = input.getEntry(index - 1);
         transactions.remove(index);
         return transaction.toString();
     }

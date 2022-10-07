@@ -1,14 +1,16 @@
 package seedu.duke.data.transaction;
 
 import org.junit.jupiter.api.Test;
-import seedu.duke.data.transaction.Income;
-import seedu.duke.data.transaction.Transaction;
+
+import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TransactionTest {
+
+    LocalDate date = LocalDate.of(2022, 1, 1);
     Transaction transaction = new Income("Milked cows in the farm", 50,
-            "Salary", null);
+            "Salary", date);
 
     @Test
     public void testGetDescription() {

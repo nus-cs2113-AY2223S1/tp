@@ -18,6 +18,13 @@ I have added the following Expense transaction:
 [-][transport] $1 at Oct 02 2022 | Description: bus_fare
 ____________________________________________________________
 ____________________________________________________________
+Here are the total savings for each category:
+[food] $20
+[salary] $2000
+[transport] $1
+
+____________________________________________________________
+____________________________________________________________
 Keyword(s) for your search expression missing, please check your input!
 ____________________________________________________________
 ____________________________________________________________
