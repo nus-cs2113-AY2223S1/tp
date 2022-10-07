@@ -15,7 +15,7 @@ public class AddCommandTest {
     }
 
     @Test
-    public void containNumeric_IfDoesNotContainNumeric_ReturnFalse(){
+    public void containNumeric_IfDoesNotContainNumeric_ReturnFalse() {
         boolean testOutputWithoutNumber = AddCommand.containNumeric("Food");
         assertFalse(testOutputWithoutNumber);
     }
