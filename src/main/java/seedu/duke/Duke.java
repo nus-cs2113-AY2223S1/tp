@@ -23,12 +23,6 @@ public class Duke {
         }**/
     }
 
-<<<<<<< HEAD
-        while (scan.hasNextLine()) {
-            // Receives user input continuously
-            inData = scan.nextLine();
-            inData = inData.trim();
-=======
     public void run() {
         ui.showGreeting();
         boolean isExit = false;
@@ -37,8 +31,6 @@ public class Duke {
             try {
                 inData = ui.readCommand();
                 inData = inData.trim();
->>>>>>> 9f27496827dc51384187748e96daf45d2b37a005
-
                 Command c = Parser.parse(inData);
                 c.execute(transactions, ui, storage);
                 isExit = c.isExit();
