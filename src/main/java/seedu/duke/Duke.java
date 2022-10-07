@@ -31,7 +31,6 @@ public class Duke {
             try {
                 inData = ui.readCommand();
                 inData = inData.trim();
-
                 Command c = Parser.parse(inData);
                 c.execute(transactions, ui, storage);
                 isExit = c.isExit();
