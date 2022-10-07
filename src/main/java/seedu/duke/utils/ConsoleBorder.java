@@ -1,35 +1,112 @@
 package seedu.duke.utils;
 
+import java.io.InputStream;
+import java.util.Scanner;
+
 public class ConsoleBorder {
-    public static final char TOP_LEFT = '\u250C';
-    public static final char TOP_RIGHT = '\u2510';
-    public static final char TOP_MID = '\u252C';
-    public static final char SIDE = '\u2502';
-    public static final char CROSS = '\u253C';
-    public static final char MID_LEFT = '\u251C';
-    public static final char MID_RIGHT = '\u2524';
-    public static final char ACROSS = '\u2500';
-    public static final char BOTTOM_LEFT = '\u2514';
-    public static final char BOTTOM_RIGHT = '\u2518';
-    public static final char BOTTOM_MID = '\u2534';
+    private final char topLeft;
+    private final char topMid;
+    private final char topRight;
+    private final char side;
+    private final char cross;
+    private final char midLeft;
+    private final char midRight;
+    private final char across;
+    private final char bottomLeft;
+    private final char bottomRight;
+    private final char bottomMid;
 
-    public static boolean isBorderLeft(char c) {
-        return (c == TOP_LEFT || c == MID_LEFT || c == BOTTOM_LEFT);
+    private static ConsoleBorder singleton;
+
+    public static ConsoleBorder getInstance() {
+        if (singleton == null) {
+            singleton = new ConsoleBorder();
+        }
+        return singleton;
     }
 
-    public static boolean isBorderRight(char c) {
-        return (c == TOP_RIGHT || c == MID_RIGHT || c == BOTTOM_RIGHT);
+    public char getSide() {
+        return side;
     }
 
-    public static boolean isBorderTop(char c) {
-        return (c == TOP_LEFT || c == TOP_MID || c == TOP_RIGHT);
+    public char getAcross() {
+        return across;
     }
 
-    public static boolean isBorderBottom(char c) {
-        return (c == BOTTOM_LEFT || c == BOTTOM_MID || c == BOTTOM_RIGHT);
+    public char get(int top, int left) {
+        if (top == 1) {
+            if (left == 1) {
+                return topLeft;
+            }
+            if (left == 0) {
+                return topMid;
+            }
+            if (left == -1) {
+                return topRight;
+            }
+        }
+        if (top == -1) {
+            if (left == 1) {
+                return bottomLeft;
+            }
+            if (left == 0) {
+                return bottomMid;
+            }
+            if (left == -1) {
+                return bottomRight;
+            }
+        }
+        if (top == 0) {
+            if (left == 1) {
+                return midLeft;
+            }
+            if (left == 0) {
+                return cross;
+            }
+            if (left == -1) {
+                return midRight;
+            }
+        }
+        return side;
     }
 
-    public static char mergeBorder(char current, char next) {
+    private ConsoleBorder() {
+        InputStream stream = ConsoleBorder.class.getClassLoader()
+                .getResourceAsStream("border.txt");
+        Scanner scanner = new Scanner(stream);
+        String s = scanner.nextLine();
+        int counter = 0;
+        topLeft = s.charAt(counter++);
+        topMid = s.charAt(counter++);
+        topRight = s.charAt(counter++);
+        side = s.charAt(counter++);
+        midLeft = s.charAt(counter++);
+        cross = s.charAt(counter++);
+        midRight = s.charAt(counter++);
+        across = s.charAt(counter++);
+        bottomLeft = s.charAt(counter++);
+        bottomMid = s.charAt(counter++);
+        bottomRight = s.charAt(counter++);
+        scanner.close();
+    }
+
+    public boolean isBorderLeft(char c) {
+        return (c == topLeft || c == midLeft || c == bottomLeft);
+    }
+
+    public boolean isBorderRight(char c) {
+        return (c == topRight || c == midRight || c == bottomRight);
+    }
+
+    public boolean isBorderTop(char c) {
+        return (c == topLeft || c == topMid || c == topRight);
+    }
+
+    public boolean isBorderBottom(char c) {
+        return (c == bottomLeft || c == bottomMid || c == bottomRight);
+    }
+
+    public char mergeBorder(char current, char next) {
         // next is always TOP/BOTTOM_LEFT/RIGHT
         if (current == '·') {
             return next;
@@ -37,50 +114,50 @@ public class ConsoleBorder {
         if (current == ' ') {
             return next;
         }
-        if (current == CROSS || next == CROSS) {
-            return CROSS;
+        if (current == cross || next == cross) {
+            return cross;
         }
-        if (next == SIDE) {
+        if (next == side) {
             char tmp = next;
             next = current;
             current = tmp;
         }
-        if (current == SIDE) {
-            if (next == TOP_LEFT || next == BOTTOM_LEFT || next == MID_LEFT) {
-                return MID_LEFT;
+        if (current == side) {
+            if (next == topLeft || next == bottomLeft || next == midLeft) {
+                return midLeft;
             }
-            if (next == TOP_RIGHT || next == BOTTOM_RIGHT || next == MID_RIGHT) {
-                return MID_RIGHT;
+            if (next == topRight || next == bottomRight || next == midRight) {
+                return midRight;
             }
-            return SIDE;
+            return side;
         }
         // none are sides or crosses
-        if (current == TOP_MID) {
-            return isBorderBottom(next) ? CROSS : current;
+        if (current == topMid) {
+            return isBorderBottom(next) ? cross : current;
         }
-        if (current == BOTTOM_MID) {
-            return isBorderTop(next) ? CROSS : current;
+        if (current == bottomMid) {
+            return isBorderTop(next) ? cross : current;
         }
-        if (current == MID_LEFT) {
-            return isBorderRight(next) ? CROSS : current;
+        if (current == midLeft) {
+            return isBorderRight(next) ? cross : current;
         }
-        if (current == MID_RIGHT) {
-            return isBorderLeft(next) ? CROSS : current;
+        if (current == midRight) {
+            return isBorderLeft(next) ? cross : current;
         }
         if (isBorderLeft(current) != isBorderLeft(next)) {
             if (isBorderTop(current) != isBorderTop(next)) {
-                return CROSS;
+                return cross;
             }
             if (isBorderTop(current)) {
-                return TOP_MID;
+                return topMid;
             }
-            return BOTTOM_MID;
+            return bottomMid;
         }
         if (isBorderLeft(current)) {
-            return MID_LEFT;
+            return midLeft;
         }
         if (isBorderRight(current)) {
-            return MID_RIGHT;
+            return midRight;
         }
         return next;
     }

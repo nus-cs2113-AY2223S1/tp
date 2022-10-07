@@ -35,6 +35,7 @@ public class Timetable {
     private List<Integer> indents;
     private List<Module> modules;
     private List<Pair<Module, RawLesson>> sortedLessons;
+    private ConsoleBorder consoleBorder;
 
     public Timetable(List<Pair<Module, RawLesson>> lessons) {
         this(lessons, false);
@@ -42,6 +43,7 @@ public class Timetable {
 
     public Timetable(List<Pair<Module, RawLesson>> lessons, boolean withColor) {
         this.withColor = withColor;
+        this.consoleBorder = ConsoleBorder.getInstance();
         this.sortedLessons = sortLessons(lessons);
         String earliest = lessons.stream().map(s -> s.getRight().startTime).min(String::compareTo).orElseThrow();
         String latest = lessons.stream().map(s -> s.getRight().endTime).max(String::compareTo).orElseThrow();
@@ -184,24 +186,25 @@ public class Timetable {
         int startRow = timeToIndex(lesson.startTime) * ROWS_PER_TIME + HEADER_ROWS;
         int endRow = timeToIndex(lesson.endTime) * ROWS_PER_TIME + HEADER_ROWS;
         buffer[startRow][startColumn] = ""
-                + ConsoleBorder.mergeBorder(buffer[startRow][startColumn].charAt(0), ConsoleBorder.TOP_LEFT);
+                + consoleBorder.mergeBorder(buffer[startRow][startColumn].charAt(0), consoleBorder.get(1, 1));
         buffer[startRow][endColumn] = ""
-                + ConsoleBorder.mergeBorder(buffer[startRow][endColumn].charAt(0), ConsoleBorder.TOP_RIGHT);
+                + consoleBorder.mergeBorder(buffer[startRow][endColumn].charAt(0), consoleBorder.get(1, -1));
         buffer[endRow][startColumn] = ""
-                + ConsoleBorder.mergeBorder(buffer[endRow][startColumn].charAt(0), ConsoleBorder.BOTTOM_LEFT);
+                + consoleBorder.mergeBorder(buffer[endRow][startColumn].charAt(0), consoleBorder.get(-1, 1));
         buffer[endRow][endColumn] = ""
-                + ConsoleBorder.mergeBorder(buffer[endRow][endColumn].charAt(0), ConsoleBorder.BOTTOM_RIGHT);
+                + consoleBorder.mergeBorder(buffer[endRow][endColumn].charAt(0), consoleBorder.get(-1, -1));
         for (int i = startRow + 1; i < endRow; i++) {
             buffer[i][startColumn] = ""
-                    + ConsoleBorder.mergeBorder(buffer[i][startColumn].charAt(0), ConsoleBorder.SIDE);
-            buffer[i][endColumn] = "" + ConsoleBorder.mergeBorder(buffer[i][endColumn].charAt(0), ConsoleBorder.SIDE);
+                    + consoleBorder.mergeBorder(buffer[i][startColumn].charAt(0), consoleBorder.getSide());
+            buffer[i][endColumn] = ""
+                    + consoleBorder.mergeBorder(buffer[i][endColumn].charAt(0), consoleBorder.getSide());
         }
         for (int i = 0; i < COLUMN_WIDTH; i++) {
             if (buffer[startRow][startColumn + i + 1].equals(" ")) {
-                buffer[startRow][startColumn + i + 1] = "" + ConsoleBorder.ACROSS;
+                buffer[startRow][startColumn + i + 1] = "" + consoleBorder.getAcross();
             }
             if (buffer[endRow][startColumn + i + 1].equals(" ")) {
-                buffer[endRow][startColumn + i + 1] = "" + ConsoleBorder.ACROSS;
+                buffer[endRow][startColumn + i + 1] = "" + consoleBorder.getAcross();
             }
         }
         write(module.moduleCode, startRow + 1, startColumn + 1, ColorScheme.get(modules.indexOf(module)));
