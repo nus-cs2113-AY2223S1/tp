@@ -46,9 +46,21 @@ public class TransactionList {
 
     public String listTransactions() {
         String transactionsList = EMPTY_STRING;
-        // Loops each task from the transactions list
+        // Loops each transaction from the transactions list
         for (Transaction transaction : transactions) {
             transactionsList += transaction.toString() + LINE_SEPARATOR;
+        }
+        return transactionsList;
+    }
+
+    public String findTransactions(String keywords) {
+        String transactionsList = EMPTY_STRING;
+        // Loops each transaction from the transactions list
+        for (Transaction transaction : transactions) {
+            // Includes only transactions that contain the keywords used in the search expression
+            if (transaction.toString().contains(keywords)) {
+                transactionsList += transaction.toString() + LINE_SEPARATOR;
+            }
         }
         return transactionsList;
     }
