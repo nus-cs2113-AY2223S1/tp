@@ -1,4 +1,4 @@
-package seedu.duke.data.transaction;
+package seedu.duke.command;
 
 import org.junit.jupiter.api.Test;
 import seedu.duke.command.AddCommand;
