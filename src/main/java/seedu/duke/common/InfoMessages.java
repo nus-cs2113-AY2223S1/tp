@@ -9,6 +9,7 @@ public enum InfoMessages {
     INFO_ADD_INCOME("I have added the following Income transaction:"),
     INFO_DELETE("I have deleted the following transaction:"),
     INFO_EXIT("Goodbye and see you soon."),
+    INFO_GET_CATEGORIES("Here are the total savings for each category:"),
     INFO_GREET("Hello! I'm Moo and I will help you to manage your finances."),
     INFO_HELP_GREET("Gotcha! Here are the commands that you may use:"),
     INFO_HELP_PROMPT("Enter <help> if you need the list of commands."),
