@@ -28,6 +28,9 @@ public class EditCommand extends Command {
             + "(Optional) DESCRIPTION: More information regarding the transaction, written without any space.";
     private String input;
 
+    public EditCommand() {
+    }
+
     public EditCommand(String input) {
         this.input = input;
     }

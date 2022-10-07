@@ -22,6 +22,9 @@ public class GetCommand extends Command {
     public static final String COMMAND_PARAMETERS_INFO = "Parameters information: \n"
             + "PARAMETERNAME: ... ";
 
+    public GetCommand() {
+    }
+
     CategoryList categories = new CategoryList();
 
     /**

@@ -27,6 +27,9 @@ public class DeleteCommand extends Command {
 
     private String input;
 
+    public DeleteCommand() {
+    }
+
     /**
      * Initialises the variables of the DeleteCommand class.
      *

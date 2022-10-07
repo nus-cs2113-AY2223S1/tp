@@ -23,6 +23,9 @@ public class PurgeCommand extends Command {
     // The formatting information for the parameters used by the command.
     public static final String COMMAND_PARAMETERS_INFO = "Parameters information:  -NIL-";
 
+    public PurgeCommand() {
+    }
+
     /**
      * Executes the operations related to the command.
      *

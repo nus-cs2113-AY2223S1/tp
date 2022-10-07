@@ -18,6 +18,9 @@ public class ByeCommand extends Command {
     // The formatting information for the parameters used by the command.
     public static final String COMMAND_PARAMETERS_INFO = "Parameters information: -NIL-";
 
+    public ByeCommand() {
+    }
+
     /**
      * Executes the operations related to the command.
      *
@@ -28,7 +31,6 @@ public class ByeCommand extends Command {
     @Override
     public void execute(TransactionList transactions, Ui ui, Storage storage) {
         Ui.showExit();
-        //storage.writeToFile(transactions);
     }
 
     @Override

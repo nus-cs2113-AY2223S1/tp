@@ -44,6 +44,9 @@ public class AddCommand extends Command {
 
     private String input;
 
+    public AddCommand() {
+    }
+
     public AddCommand(String input) {
         this.input = input;
     }

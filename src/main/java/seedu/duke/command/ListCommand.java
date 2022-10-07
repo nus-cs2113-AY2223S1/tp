@@ -24,6 +24,9 @@ public class ListCommand extends Command {
             + "(Optional) CATEGORY: A category for the transaction. Only string containing alphabets is accepted.\n"
             + "(Optional) DATE: Date of the transaction. The format must be in \"yyyyMMdd\".";
 
+    public ListCommand() {
+    }
+
     /**
      * Executes the operations related to the command.
      *

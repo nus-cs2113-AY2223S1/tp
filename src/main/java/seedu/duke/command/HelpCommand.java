@@ -21,6 +21,8 @@ public class HelpCommand extends Command {
     public static final String COMMAND_PARAMETERS_INFO = "Parameters information: \n"
             + "(Optional) o/detailed - Detailed version of guide.";
 
+    public HelpCommand() {
+    }
     /**
      * Executes the operations related to the command.
      *
