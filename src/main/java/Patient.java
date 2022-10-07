@@ -6,7 +6,7 @@ public class Patient {
     private String gender;
     private final String id;
     public ArrayList<Visit> visits;
-    public ArrayList<Prescription> prescriptions;
+    public PrescriptionList activePrescriptions;
 
 
     public Patient(String name, String birthDate, String gender, String id) {
@@ -15,7 +15,7 @@ public class Patient {
         this.gender = gender;
         this.birthDate = birthDate;
         this.visits = new ArrayList<>();
-        this.prescriptions = new ArrayList<>();
+        this.activePrescriptions = new PrescriptionList();
     }
 
     // todo add public void addVisit(); public void addMedicine();
