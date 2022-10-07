@@ -3,11 +3,10 @@ package seedu.duke;
 import seedu.duke.command.CommandAdd;
 
 public class Parser {
-    final int LIMIT = 2;
-    
+
     public CommandAdd parseCommand(String input) {
 
-        String[] commands = input.trim().split(" ", LIMIT);
+        String[] commands = input.trim().split(" ", 2);
 
         // This is the type of command that will be executed
         String commandType = commands[0];
