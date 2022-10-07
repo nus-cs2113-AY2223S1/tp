@@ -49,7 +49,7 @@ public class Parser {
         // try at the start cos of the errors possibly
         switch (inputTokens[0].toUpperCase()) {
         case HelpCommand.COMMAND_WORD:
-            command = new HelpCommand();
+            command = new HelpCommand(inputTokens[1]);
             break;
         case ListCommand.COMMAND_WORD:
             command = new ListCommand();

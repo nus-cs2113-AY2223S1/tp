@@ -18,6 +18,13 @@ public class ByeCommand extends Command {
     // The formatting information for the parameters used by the command.
     public static final String COMMAND_PARAMETERS_INFO = "Parameters information: -NIL-";
 
+    // Basic help description
+    public static final String COMMAND_HELP = "Command Word: " + COMMAND_WORD + "\n"
+            + COMMAND_DESCRIPTION + "\n"
+            + COMMAND_USAGE + "\n";
+    // Detailed help description
+    public static final String COMMAND_DETAILED_HELP = COMMAND_HELP + COMMAND_PARAMETERS_INFO + "\n";
+
     public ByeCommand() {
     }
 

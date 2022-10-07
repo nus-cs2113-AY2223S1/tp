@@ -25,6 +25,13 @@ public class DeleteCommand extends Command {
             + "ENTRY: The entry number of the transaction. "
             + "Type \"list\" to list all the entry numbers of transaction.\n";
 
+    // Basic help description
+    public static final String COMMAND_HELP = "Command Word: " + COMMAND_WORD + "\n"
+            + COMMAND_DESCRIPTION + "\n"
+            + COMMAND_USAGE + "\n";
+    // Detailed help description
+    public static final String COMMAND_DETAILED_HELP = COMMAND_HELP + COMMAND_PARAMETERS_INFO + "\n";
+
     private String input;
 
     public DeleteCommand() {

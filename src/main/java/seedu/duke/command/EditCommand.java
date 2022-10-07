@@ -26,6 +26,14 @@ public class EditCommand extends Command {
             + "Only integer within 0 and 10000000 is accepted.\n"
             + "(Optional) DATE: Date of the transaction. The format must be in \"yyyyMMdd\".\n"
             + "(Optional) DESCRIPTION: More information regarding the transaction, written without any space.";
+
+    // Basic help description
+    public static final String COMMAND_HELP = "Command Word: " + COMMAND_WORD + "\n"
+            + COMMAND_DESCRIPTION + "\n"
+            + COMMAND_USAGE + "\n";
+    // Detailed help description
+    public static final String COMMAND_DETAILED_HELP = COMMAND_HELP + COMMAND_PARAMETERS_INFO + "\n";
+
     private String input;
 
     public EditCommand() {
