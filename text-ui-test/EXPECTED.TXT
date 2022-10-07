@@ -1,30 +1,91 @@
 ____________________________________________________________
-Hello! I'm your Moolah Manager!
+Hello! I'm Moo and I will help you to manage your finances.
 Enter <help> if you need the list of commands.
 ____________________________________________________________
 ____________________________________________________________
-There are no records of your transactions found.
+There are no transaction records found.
 ____________________________________________________________
 ____________________________________________________________
-Below are the records of your transactions:
-Date: 13092022 Category: food Description: NIL Amount: 20
-Date: jan Category: salary Description: jan_salary Amount: 2000
-Date: monday Category: transport Description: bus_fare Amount: 1
-You have 3 transactions in your transaction history.
+I have added the following Expense transaction:
+[-][food] $20 at Sep 13 2022 | Description: NIL
+____________________________________________________________
+____________________________________________________________
+I have added the following Income transaction:
+[+][salary] $2000 at Sep 30 2022 | Description: jan_salary
+____________________________________________________________
+____________________________________________________________
+I have added the following Expense transaction:
+[-][transport] $1 at Oct 02 2022 | Description: bus_fare
+____________________________________________________________
+____________________________________________________________
+Here are the total savings for each category:
+[food] $20
+[salary] $2000
+[transport] $1
+
+____________________________________________________________
+____________________________________________________________
+Keyword(s) for your search expression missing, please check your input!
+____________________________________________________________
+____________________________________________________________
+Here are the transaction records that match your search expression:
+[-][transport] $1 at Oct 02 2022 | Description: bus_fare
+
+____________________________________________________________
+____________________________________________________________
+Here are your transaction records:
+[-][food] $20 at Sep 13 2022 | Description: NIL
+[+][salary] $2000 at Sep 30 2022 | Description: jan_salary
+[-][transport] $1 at Oct 02 2022 | Description: bus_fare
+
+____________________________________________________________
+____________________________________________________________
+I have added the following Income transaction:
+[+][bonus] $10000000 at Oct 03 2022 | Description: thank_you_boss
 ____________________________________________________________
 ____________________________________________________________
 Type of transaction given is invalid, please check your input!
 ____________________________________________________________
 ____________________________________________________________
-Mandatory tag(s) missing, please check your input!
+Invalid category, please ensure your category is correct!
 ____________________________________________________________
 ____________________________________________________________
-Below are the records of your transactions:
-Date: 13092022 Category: food Description: NIL Amount: 20
-Date: jan Category: salary Description: jan_salary Amount: 2000
-Date: monday Category: transport Description: bus_fare Amount: 1
-Date: everyday Category: bonus Description: thank_you_boss Amount: 1000000
-You have 4 transactions in your transaction history.
+Non-Numeric input detected, please enter a numerical amount!
+____________________________________________________________
+____________________________________________________________
+I have added the following Income transaction:
+[+][bonus] $-1 at Oct 03 2022 | Description: thank_you_boss
+____________________________________________________________
+____________________________________________________________
+Invalid date, please ensure your date format is correct!
+____________________________________________________________
+____________________________________________________________
+Invalid date, please ensure your date format is correct!
+____________________________________________________________
+____________________________________________________________
+Invalid date, please ensure your date format is correct!
+____________________________________________________________
+____________________________________________________________
+Here are your transaction records:
+[-][food] $20 at Sep 13 2022 | Description: NIL
+[+][salary] $2000 at Sep 30 2022 | Description: jan_salary
+[-][transport] $1 at Oct 02 2022 | Description: bus_fare
+[+][bonus] $10000000 at Oct 03 2022 | Description: thank_you_boss
+[+][bonus] $-1 at Oct 03 2022 | Description: thank_you_boss
+
+____________________________________________________________
+____________________________________________________________
+I have deleted the following transaction:
+[-][food] $20 at Sep 13 2022 | Description: NIL
+____________________________________________________________
+____________________________________________________________
+Are you sure you want to proceed with this command? Please enter 'Y' to confirm.
+____________________________________________________________
+____________________________________________________________
+All your transactions have been purged.
+____________________________________________________________
+____________________________________________________________
+There are no transaction records found.
 ____________________________________________________________
 ____________________________________________________________
 Goodbye and see you soon.

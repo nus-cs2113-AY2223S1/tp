@@ -2,7 +2,7 @@ package seedu.duke.exception;
 
 import seedu.duke.common.ErrorMessages;
 
-public class AddTransactionUnknownTypeException extends MoolahException {
+public class AddDeleteInvalidIndexException extends MoolahException {
     /**
      * Returns the error message of the exception to alert user of the exception.
      *
@@ -10,6 +10,6 @@ public class AddTransactionUnknownTypeException extends MoolahException {
      */
     @Override
     public String getMessage() {
-        return ErrorMessages.ERROR_ADD_COMMAND_INVALID_TYPE.toString();
+        return ErrorMessages.ERROR_ADD_COMMAND_INVALID_INDEX.toString();
     }
 }

@@ -1,8 +1,8 @@
 package seedu.duke.exception;
 
-import seedu.duke.common.ErrorMessages;
+import static seedu.duke.common.ErrorMessages.ERROR_INVALID_COMMAND;
 
-public class AddTransactionUnknownTypeException extends MoolahException {
+public class InvalidCommandException extends MoolahException {
     /**
      * Returns the error message of the exception to alert user of the exception.
      *
@@ -10,6 +10,6 @@ public class AddTransactionUnknownTypeException extends MoolahException {
      */
     @Override
     public String getMessage() {
-        return ErrorMessages.ERROR_ADD_COMMAND_INVALID_TYPE.toString();
+        return ERROR_INVALID_COMMAND.toString();
     }
 }

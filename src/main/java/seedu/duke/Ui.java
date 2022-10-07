@@ -1,60 +1,71 @@
 package seedu.duke;
 
-import seedu.duke.common.ErrorMessages;
-import seedu.duke.common.InfoMessages;
+import static seedu.duke.common.ErrorMessages.ERROR_INVALID_COMMAND;
+import static seedu.duke.common.InfoMessages.INFO_DIVIDER;
+import static seedu.duke.common.InfoMessages.INFO_EXIT;
+import static seedu.duke.common.InfoMessages.INFO_GREET;
+import static seedu.duke.common.InfoMessages.INFO_HELP_GREET;
+import static seedu.duke.common.InfoMessages.INFO_HELP_PROMPT;
+
+import java.util.Scanner;
 
 public class Ui {
+    private String input;
+    private Scanner in;
+
     /**
      * Prints each message from a variable messages string line by line into the output stream.
      *
      * @param messages A string of variable arguments.
      */
-
-    //@@author chydarren-reused
-    // Reused from https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/ui/TextUi.java
-    // with minor modifications
     public static void printMessages(String... messages) {
-        System.out.println(InfoMessages.MESSAGE_INFO_DIVIDER.toString());
+        System.out.println(INFO_DIVIDER);
         // Prints the string of arguments line by line in a loop
         for (String message : messages) {
             System.out.println(message);
         }
-        System.out.println(InfoMessages.MESSAGE_INFO_DIVIDER.toString());
-    }
-    //@@author
-
-    public static void showGreeting() {
-        printMessages(InfoMessages.MESSAGE_INFO_GREET.toString(), InfoMessages.MESSAGE_INFO_HELP_PROMPT.toString());
+        System.out.println(INFO_DIVIDER);
     }
 
-    public static void showHelpList() {
-        // To include the other messages for commands
-        printMessages(InfoMessages.MESSAGE_INFO_HELP_GREET.toString());
+    public Ui() {
+        in = new Scanner(System.in);
     }
 
-    public static void showTransactionsList(String transactionsList, String message) {
-        printMessages(message, transactionsList);
-    }
-
-    public static void showExitMessage() {
-        printMessages(InfoMessages.MESSAGE_INFO_EXIT.toString());
+    public String readCommand() {
+        input = in.nextLine();
+        return input.trim();
     }
 
     public static void showErrorMessage(String errorMessage) {
         printMessages(errorMessage);
     }
 
-
-    public static void showNonNumericError() {
-        printMessages("Non-Numeric input detected! Please enter a numerical amount!");
-    }
-
     public static void showInfoMessage(String infoMessage) {
         printMessages(infoMessage);
     }
 
+    public static void showGreeting() {
+        printMessages(INFO_GREET.toString(), INFO_HELP_PROMPT.toString());
+    }
+
+    public static void showHelp() {
+        // To include the other messages for commands
+        printMessages(INFO_HELP_GREET.toString());
+    }
+
+    public static void showExit() {
+        printMessages(INFO_EXIT.toString());
+    }
+
     public static void showInvalidCommand() {
-        printMessages(ErrorMessages.MESSAGE_ERROR_INVALID_COMMAND.toString(),
-                InfoMessages.MESSAGE_INFO_HELP_PROMPT.toString());
+        printMessages(ERROR_INVALID_COMMAND.toString(), INFO_HELP_PROMPT.toString());
+    }
+
+    public static void showTransactionAction(String infoMessage, String transactionDetails) {
+        printMessages(infoMessage, transactionDetails);
+    }
+
+    public static void showTransactionsList(String transactionsList, String message) {
+        printMessages(message, transactionsList);
     }
 }
