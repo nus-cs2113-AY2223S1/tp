@@ -2,6 +2,7 @@ list
 add t/expense c/food a/20 d/13092022 i/NIL
 add t/income c/salary a/2000 d/30092022 i/jan_salary
 add t/expense c/transport a/1 d/02102022 i/bus_fare
+get
 find
 find bus_fare
 list
