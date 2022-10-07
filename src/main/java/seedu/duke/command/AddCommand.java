@@ -19,7 +19,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static seedu.duke.common.DateFormats.DATE_INPUT_PATTERN;
-import static seedu.duke.common.ErrorMessages.ERROR_ADD_COMMAND_AMOUNT_NOT_NUMERIC;
 import static seedu.duke.common.InfoMessages.INFO_ADD_EXPENSE;
 import static seedu.duke.common.InfoMessages.INFO_ADD_INCOME;
 
@@ -28,14 +27,39 @@ import static seedu.duke.common.InfoMessages.INFO_ADD_INCOME;
  */
 public class AddCommand extends Command {
 
+    // The command word used to trigger the execution of Moolah Manager's operations.
+    public static final String COMMAND_WORD = "ADD";
+    // The description for the usage of command.
+    public static final String COMMAND_DESCRIPTION = "To add a new transaction entry, which could be "
+            + "either an \"income\" or an \"expense\" into the transaction list.";
+    // The guiding information for the usage of command.
+    public static final String COMMAND_USAGE = "Usage: add t/TYPE c/CATEGORY a/AMOUNT d/DATE i/DESCRIPTION";
+    // The formatting information for the parameters used by the command.
+    public static final String COMMAND_PARAMETERS_INFO = "Parameters information: \n"
+            + "TYPE: The type of transaction. Only \"income\" or \"expense\" is accepted.\n"
+            + "CATEGORY: A category for the transaction. Only string containing alphabets is accepted.\n"
+            + "AMOUNT: Value of the transaction in numerical form. Only integer within 0 and 10000000 is accepted.\n"
+            + "DATE: Date of the transaction. The format must be in \"yyyyMMdd\".\n"
+            + "DESCRIPTION: More information regarding the transaction, written without any space.";
+
+    // Basic help description
+    public static final String COMMAND_HELP = "Command Word: " + COMMAND_WORD + "\n"
+            + COMMAND_DESCRIPTION + "\n"
+            + COMMAND_USAGE + "\n";
+    // Detailed help description
+    public static final String COMMAND_DETAILED_HELP = COMMAND_HELP + COMMAND_PARAMETERS_INFO + "\n";
+
     private String input;
+
+    public AddCommand() {
+    }
 
     public AddCommand(String input) {
         this.input = input;
     }
 
     /**
-     * Executes the operations related to the command.
+     * Executes the "add" command. Check and parse the necessary parameters before adding transaction.
      *
      * @param ui           An instance of the Ui class.
      * @param transactions An instance of the TransactionList class.
@@ -47,24 +71,15 @@ public class AddCommand extends Command {
         Checks if userInput is in the correct input format by further parsing,
         before adding entry to arraylist
         */
-        /**
-         * Parses the add transaction command by checking if the compulsory tags exist followed by
-         * adding the transaction.
-         * Then executes the command to add the transaction into the list.
-         *
-         * @param userInput The user input after the "add" command word.
-         * @throws AddTransactionMissingTagException Exceptions related to "add" command.
-         */
+
         String[] splits = input.split(" ");
         checkTagsExist(splits);
-        // TODO: To check that each parameter is in correct format, e.g. amount should be valid integer/double
-        // TODO: To move the add transaction logic below to Command class in Command.execute()
+
         String description = "";
         int amount = 0;
         String category = "";
         LocalDate date = null;
         String type = "";
-        boolean inputIsValid = true;
 
         for (String split : splits) {
             String tag = split.substring(0, 2);
@@ -89,31 +104,48 @@ public class AddCommand extends Command {
                 break;
             }
         }
-        if (inputIsValid) {
-            switch (type) {
-            case "expense":
-                String expense = transactions.addExpense(description, amount, category, date);
-                Ui.showTransactionAction(INFO_ADD_EXPENSE.toString(), expense);
-                break;
-            case "income":
-                String income = transactions.addIncome(description, amount, category, date);
-                Ui.showTransactionAction(INFO_ADD_INCOME.toString(), income);
-                break;
-            default:
-                throw new AddTransactionUnknownTypeException();
-            }
-        }
+        assert date != null;
+        addTransactionByType(transactions, type, description, amount, category, date);
     }
-
 
     @Override
     public boolean isExit() {
         return false;
     }
 
+    private static void addTransactionByType(TransactionList transactions, String type, String description,
+            int amount, String category, LocalDate date) throws AddTransactionUnknownTypeException {
 
-    // the other add functions
+        switch (type) {
+        case "expense":
+            String expense = transactions.addExpense(description, amount, category, date);
+            Ui.showTransactionAction(INFO_ADD_EXPENSE.toString(), expense);
+            break;
+        case "income":
+            String income = transactions.addIncome(description, amount, category, date);
+            Ui.showTransactionAction(INFO_ADD_INCOME.toString(), income);
+            break;
+        default:
+            throw new AddTransactionUnknownTypeException();
+        }
+    }
 
+    /**
+     * Checks if the targeted tags exists in the split user inputs.
+     *
+     * @param splits The user input after the command word, split into a list for every space found.
+     * @throws AddTransactionMissingTagException Missing tag exception.
+     */
+    private static void checkTagsExist(String[] splits) throws AddTransactionMissingTagException {
+        // TODO: To add the tags into Command class instead
+        String[] tags = new String[]{"t/", "c/", "a/", "d/", "i/"};
+        for (String tag : tags) {
+            boolean found = findMatchingTagFromInputs(tag, splits);
+            if (!found) {
+                throw new AddTransactionMissingTagException();
+            }
+        }
+    }
 
     /**
      * Checks if the parameter contains numeric characters.
@@ -197,23 +229,6 @@ public class AddCommand extends Command {
             return date;
         } catch (DateTimeParseException exception) {
             throw new AddTransactionInvalidDateException();
-        }
-    }
-
-    /**
-     * Checks if the targeted tags exists in the split user inputs.
-     *
-     * @param splits The user input after the command word, split into a list for every space found.
-     * @throws AddTransactionMissingTagException Missing tag exception.
-     */
-    private static void checkTagsExist(String[] splits) throws AddTransactionMissingTagException {
-        // TODO: To add the tags into Command class instead
-        String[] tags = new String[]{"t/", "c/", "a/", "d/", "i/"};
-        for (String tag : tags) {
-            boolean found = findMatchingTagFromInputs(tag, splits);
-            if (!found) {
-                throw new AddTransactionMissingTagException();
-            }
         }
     }
 

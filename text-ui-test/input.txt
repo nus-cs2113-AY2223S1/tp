@@ -1,3 +1,7 @@
+help
+help o/detailed
+help blablabla
+help o/detailed blablabla
 list
 add t/expense c/food a/20 d/13092022 i/NIL
 add t/income c/salary a/2000 d/30092022 i/jan_salary
