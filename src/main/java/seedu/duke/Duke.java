@@ -11,7 +11,7 @@ public class Duke {
         Scanner scan = new Scanner(System.in);
         Ui.showGreeting();
 
-        while (scan.hasNextLine() && true) {
+        while (scan.hasNextLine()) {
             // Receives user input continuously
             inData = scan.nextLine();
             inData = inData.trim();
