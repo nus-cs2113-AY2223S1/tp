@@ -8,16 +8,15 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class AddCommandTest {
 
-    boolean testOutputContainsNumber = AddCommand.containNumeric("Food1");
-    boolean testOutputWithoutNumber = AddCommand.containNumeric("Food");
-
     @Test
-    public void testCheckIfInputContainsNumeric() {
+    public void containNumeric_IfContainsNumeric_ReturnTrue() {
+        boolean testOutputContainsNumber = AddCommand.containNumeric("Food1");
         assertTrue(testOutputContainsNumber);
     }
 
     @Test
-    public void testCheckIfInputContainsOnlyAlphabets() {
+    public void containNumeric_IfDoesNotContainNumeric_ReturnFalse(){
+        boolean testOutputWithoutNumber = AddCommand.containNumeric("Food");
         assertFalse(testOutputWithoutNumber);
     }
 }
