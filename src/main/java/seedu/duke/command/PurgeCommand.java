@@ -6,6 +6,7 @@ import seedu.duke.data.TransactionList;
 
 import static seedu.duke.common.InfoMessages.INFO_PURGE;
 import static seedu.duke.common.InfoMessages.INFO_PURGE_ABORT;
+import static seedu.duke.common.InfoMessages.INFO_PURGE_EMPTY;
 import static seedu.duke.common.InfoMessages.INFO_PURGE_WARNING;
 
 /**
@@ -22,6 +23,11 @@ public class PurgeCommand extends Command {
     @Override
     public void execute(TransactionList transactions, Ui ui, Storage storage) {
         // Shows confirmation prompt before deleting all transactions
+        boolean check = isEmpty(transactions);
+        if (check) {
+            Ui.showInfoMessage(INFO_PURGE_EMPTY.toString());
+            return;
+        }
         ui.showInfoMessage(INFO_PURGE_WARNING.toString());
         String input = ui.readCommand();
 
@@ -32,6 +38,14 @@ public class PurgeCommand extends Command {
         }
 
         Ui.showInfoMessage(INFO_PURGE_ABORT.toString());
+    }
+
+    public static boolean isEmpty(TransactionList transactions) {
+        int size = transactions.size();
+        if (size == 0) {
+            return true;
+        }
+        return false;
     }
 
     @Override
