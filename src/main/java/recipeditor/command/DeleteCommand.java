@@ -1,6 +1,8 @@
 package recipeditor.command;
 
 public class DeleteCommand extends Command {
+    public static final String COMMANDTYPE = "delete";
+
     private final int index;
 
     /**

@@ -1,5 +1,6 @@
 package recipeditor;
 
+import recipeditor.parser.Parser;
 import recipeditor.ui.Ui;
 
 public class Recipeditor {
@@ -12,11 +13,9 @@ public class Recipeditor {
         Ui.printGreeting();
         while (true) {
             System.out.println("Please write your command below");
-            String name = Ui.readInput();
-            if (name.equals("")) {
-                break;
-            }
-            System.out.println("Hello " + name);
+            String input = Ui.readInput();
+            String output = Parser.parseCommand(input);
+            System.out.println(output);
         }
     }
 }
