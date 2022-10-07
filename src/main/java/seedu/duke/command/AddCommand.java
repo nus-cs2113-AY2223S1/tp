@@ -88,7 +88,9 @@ public class AddCommand extends Command {
         return false;
     }
 
-    private static void addTransactionByType(TransactionList transactions, String type, String description, int amount, String category, LocalDate date) throws AddTransactionUnknownTypeException {
+    private static void addTransactionByType(TransactionList transactions, String type, String description,
+            int amount, String category, LocalDate date) throws AddTransactionUnknownTypeException {
+
         switch (type) {
         case "expense":
             String expense = transactions.addExpense(description, amount, category, date);
