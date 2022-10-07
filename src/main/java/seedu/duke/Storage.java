@@ -17,9 +17,7 @@ public class Storage {
     private static final String CLOSE_BRACKET = "]";
     private static final String COLON = " : ";
 
-    /**
-     * Constructor
-     */
+    
     public Storage() {
         checkFile();
     }
@@ -126,8 +124,8 @@ public class Storage {
         try {
             FileWriter fw = new FileWriter(PROPERTY_PATH, true);
             String rentalPrice = DOLLAR_SIGN + price;
-            String newText = landlord + SEPARATOR + address + SEPARATOR + rentalPrice +
-                    SEPARATOR + unitType + System.lineSeparator();
+            String newText = landlord + SEPARATOR + address + SEPARATOR + rentalPrice
+                    + SEPARATOR + unitType + System.lineSeparator();
 
             fw.write(newText);
             fw.close();
@@ -175,8 +173,8 @@ public class Storage {
             FileWriter fw = new FileWriter(PAIR_PATH, true);
             String monthlyPrice = DOLLAR_SIGN + price;
             String clientPortion = OPEN_BRACKET + client + SEPARATOR + contact + CLOSE_BRACKET;
-            String propertyPortion = OPEN_BRACKET + landlord + SEPARATOR + address +
-                    SEPARATOR + monthlyPrice + SEPARATOR + type + CLOSE_BRACKET;
+            String propertyPortion = OPEN_BRACKET + landlord + SEPARATOR + address
+                    + SEPARATOR + monthlyPrice + SEPARATOR + type + CLOSE_BRACKET;
             String finalString = clientPortion + COLON + propertyPortion;
             fw.write(finalString);
             fw.close();
