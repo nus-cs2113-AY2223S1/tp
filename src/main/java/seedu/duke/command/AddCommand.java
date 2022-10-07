@@ -2,8 +2,7 @@ package seedu.duke.command;
 
 import seedu.duke.Storage;
 import seedu.duke.Ui;
-import seedu.duke.common.ErrorMessages;
-import seedu.duke.common.InfoMessages;
+
 import seedu.duke.data.TransactionList;
 import seedu.duke.exception.AddTransactionInvalidCategoryException;
 import seedu.duke.exception.AddTransactionInvalidDateException;
@@ -16,6 +15,9 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 import static seedu.duke.common.DateFormats.DATE_INPUT_PATTERN;
+import static seedu.duke.common.ErrorMessages.ERROR_ADD_COMMAND_AMOUNT_NOT_NUMERIC;
+import static seedu.duke.common.InfoMessages.INFO_ADD_EXPENSE;
+import static seedu.duke.common.InfoMessages.INFO_ADD_INCOME;
 
 public class AddCommand extends Command {
 
@@ -62,7 +64,7 @@ public class AddCommand extends Command {
                     parseCategoryTag(parameter);
                     category = parameter;
                 } catch (AddTransactionInvalidCategoryException e) {
-                    Ui.printMessages(ErrorMessages.ERROR_ADD_COMMAND_INVALID_CATEGORY.toString());
+                    Ui.printMessages(e.getMessage());
                     inputIsValid = false;
                 }
                 break;
@@ -70,7 +72,7 @@ public class AddCommand extends Command {
                 try {
                     amount = Integer.parseInt(parameter);
                 } catch (NumberFormatException e) {
-                    Ui.showErrorMessage(ErrorMessages.ERROR_ADD_COMMAND_AMOUNT_NOT_NUMERIC.toString());
+                    Ui.showErrorMessage(ERROR_ADD_COMMAND_AMOUNT_NOT_NUMERIC.toString());
                     inputIsValid = false;
                 }
                 break;
@@ -88,11 +90,11 @@ public class AddCommand extends Command {
             switch (type) {
             case "expense":
                 String expense = transactions.addExpense(description, amount, category, date);
-                Ui.showTransactionAction(InfoMessages.INFO_ADD_EXPENSE.toString(), expense);
+                Ui.showTransactionAction(INFO_ADD_EXPENSE.toString(), expense);
                 break;
             case "income":
                 String income = transactions.addIncome(description, amount, category, date);
-                Ui.showTransactionAction(InfoMessages.INFO_ADD_INCOME.toString(), income);
+                Ui.showTransactionAction(INFO_ADD_INCOME.toString(), income);
                 break;
             default:
                 throw new AddTransactionUnknownTypeException();
