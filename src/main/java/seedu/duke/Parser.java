@@ -11,7 +11,7 @@ import seedu.duke.command.ListCommand;
 import seedu.duke.command.PurgeCommand;
 
 import seedu.duke.exception.MoolahException;
-import seedu.duke.exception.UnknownInputException;
+import seedu.duke.exception.InvalidCommandException;
 
 public class Parser {
     private static final String EMPTY_STRING = "";
@@ -71,8 +71,7 @@ public class Parser {
             command = new ByeCommand();
             break;
         default:
-            Ui.showInvalidCommand(); // if u still want this
-            throw new UnknownInputException();
+            throw new InvalidCommandException();
         }
         return command;
     }
