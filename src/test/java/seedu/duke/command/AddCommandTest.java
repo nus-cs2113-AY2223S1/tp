@@ -13,26 +13,28 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class AddCommandTest {
     @Test
-    public void execute_EmptyDate_ExpectedException () {
+    public void execute_EmptyDate_ExpectedException() {
         TransactionList transactions = new TransactionList();
         Ui ui = new Ui();
         Storage storage = new Storage();
         AddCommand addCommand = new AddCommand("t/income c/bonus a/-1 d/ i/thank_you_boss");
 
-        assertThrows(AddTransactionInvalidDateException.class,
-                () -> addCommand.execute(transactions, ui, storage)
+        assertThrows(
+            AddTransactionInvalidDateException.class,
+            () -> addCommand.execute(transactions, ui, storage)
         );
     }
 
     @Test
-    public void execute_InvalidDateFormat_ExpectedException () {
+    public void execute_InvalidDateFormat_ExpectedException() {
         TransactionList transactions = new TransactionList();
         Ui ui = new Ui();
         Storage storage = new Storage();
         AddCommand addCommand = new AddCommand("t/income c/bonus a/-1 d/2020-01-01 i/thank_you_boss");
 
-        assertThrows(AddTransactionInvalidDateException.class,
-                () -> addCommand.execute(transactions, ui, storage)
+        assertThrows(
+            AddTransactionInvalidDateException.class,
+            () -> addCommand.execute(transactions, ui, storage)
         );
     }
 
