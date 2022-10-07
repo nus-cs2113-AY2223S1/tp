@@ -27,7 +27,32 @@ import static seedu.duke.common.InfoMessages.INFO_ADD_INCOME;
  */
 public class AddCommand extends Command {
 
+    // The command word used to trigger the execution of Moolah Manager's operations.
+    public static final String COMMAND_WORD = "ADD";
+    // The description for the usage of command.
+    public static final String COMMAND_DESCRIPTION = "To add a new transaction entry, which could be "
+            + "either an \"income\" or an \"expense\" into the transaction list.";
+    // The guiding information for the usage of command.
+    public static final String COMMAND_USAGE = "Usage: add t/TYPE c/CATEGORY a/AMOUNT d/DATE i/DESCRIPTION";
+    // The formatting information for the parameters used by the command.
+    public static final String COMMAND_PARAMETERS_INFO = "Parameters information: \n"
+            + "TYPE: The type of transaction. Only \"income\" or \"expense\" is accepted.\n"
+            + "CATEGORY: A category for the transaction. Only string containing alphabets is accepted.\n"
+            + "AMOUNT: Value of the transaction in numerical form. Only integer within 0 and 10000000 is accepted.\n"
+            + "DATE: Date of the transaction. The format must be in \"yyyyMMdd\".\n"
+            + "DESCRIPTION: More information regarding the transaction, written without any space.";
+
+    // Basic help description
+    public static final String COMMAND_HELP = "Command Word: " + COMMAND_WORD + "\n"
+            + COMMAND_DESCRIPTION + "\n"
+            + COMMAND_USAGE + "\n";
+    // Detailed help description
+    public static final String COMMAND_DETAILED_HELP = COMMAND_HELP + COMMAND_PARAMETERS_INFO + "\n";
+
     private String input;
+
+    public AddCommand() {
+    }
 
     public AddCommand(String input) {
         this.input = input;
