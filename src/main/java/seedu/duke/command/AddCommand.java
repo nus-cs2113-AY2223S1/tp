@@ -128,7 +128,7 @@ public class AddCommand extends Command {
      * @throws AddTransactionInvalidCategoryException Invalid category parameter exception.
      */
     private static void parseCategoryTag(String parameter) throws AddTransactionInvalidCategoryException {
-        if (isNumeric(parameter)) {
+        if (containNumeric(parameter)) {
             throw new AddTransactionInvalidCategoryException();
         }
 
@@ -140,7 +140,7 @@ public class AddCommand extends Command {
      * @param parameter The user input after the user tag.
      * @return true if there are numeric characters within the parameter.
      */
-    public static boolean isNumeric(String parameter) {
+    public static boolean containNumeric(String parameter) {
         char[] characters = parameter.toCharArray();
         for (char character : characters) {
             if (Character.isDigit(character)) {
