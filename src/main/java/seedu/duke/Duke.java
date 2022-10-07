@@ -2,7 +2,7 @@ package seedu.duke;
 
 import seedu.duke.command.Command;
 
-import java.util.Scanner;
+import java.io.IOException;
 
 
 public class Duke {
@@ -13,7 +13,7 @@ public class Duke {
     private ClientList clientList;
 
 
-    public void run() {
+    public void run() throws IOException {
         this.parser = new Parser();
         this.ui = new Ui();
         this.storage = new Storage();
@@ -21,19 +21,22 @@ public class Duke {
         this.clientList = new ClientList();
 
         Command command;
+        String userInputText = "";
 
         do {
-            String userInputText = ui.readCommand();
+            userInputText = ui.readCommand();
             command = parser.parseCommand(userInputText);
             command.execute(ui, storage, propertyList, clientList);
 
-        } while (!command.equals("bye"));
+
+        } while (!userInputText.equals("quit"));
+
     }
 
     /**
      * Main entry-point for the java.duke.Duke application.
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         new Duke().run();
     }
 }
