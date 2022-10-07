@@ -13,6 +13,18 @@ import static seedu.duke.common.InfoMessages.INFO_DELETE;
  * Represents a delete command object that will execute the operations for Delete command.
  */
 public class DeleteCommand extends Command {
+
+    // The command word used to trigger the execution of Moolah Manager's operations.
+    public static final String COMMAND_WORD = "DELETE";
+    // The description for the usage of command.
+    public static final String COMMAND_DESCRIPTION = "To delete a specific entry in the list of transactions.";
+    // The guiding information for the usage of command.
+    public static final String COMMAND_USAGE = "Usage: delete e/ENTRY";
+    // The formatting information for the parameters used by the command.
+    public static final String COMMAND_PARAMETERS_INFO = "Parameters information: \n"
+            + "ENTRY: The entry number of the transaction. "
+            + "Type \"list\" to list all the entry numbers of transaction.\n";
+
     private String input;
 
     /**
@@ -27,9 +39,9 @@ public class DeleteCommand extends Command {
     /**
      * Executes the operations related to the command.
      *
-     * @param ui An instance of the Ui class.
+     * @param ui           An instance of the Ui class.
      * @param transactions An instance of the TransactionList class.
-     * @param storage An instance of the Storage class.
+     * @param storage      An instance of the Storage class.
      */
     @Override
     public void execute(TransactionList transactions, Ui ui, Storage storage) throws MoolahException {
