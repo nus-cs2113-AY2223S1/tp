@@ -1,12 +1,25 @@
 package recipeditor.command;
 
+import recipeditor.recipe.Recipe;
+import recipeditor.recipe.RecipeList;
+
 public class AddCommand extends Command {
     public static final String TYPE = "add";
+    private Recipe addedRecipe = new Recipe();
+    private boolean isValid;
 
+    public AddCommand(boolean isValid, Recipe addedRecipe) {
+        this.isValid = isValid;
+        this.addedRecipe = addedRecipe;
+    }
 
     public CommandResult execute() {
-        //TODO: Execution of command
-        // This is only the dummy code for testing
-        return new CommandResult(TYPE);
+        // TODO: Execution of command
+        if (isValid) {
+            // RecipeList.getRecipes().add(addedRecipe); HERE SEEM TO THROW ERROR
+            return new CommandResult(TYPE + " Added");
+        } else {
+            return new CommandResult(TYPE + " Invalid");
+        }
     }
 }

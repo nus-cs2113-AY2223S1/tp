@@ -65,7 +65,7 @@ public class Recipeditor {
         try {
             CommandResult result = command.execute();
             //TODO: Save the recipe?
-            return command.execute();
+            return result;
         } catch (Exception e) {
             Ui.showMessage(e.getMessage());
             throw new RuntimeException(e);

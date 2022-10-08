@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+import javax.swing.ProgressMonitor;
+
 import recipeditor.command.CommandResult;
 
 public class Ui {
@@ -37,8 +39,15 @@ public class Ui {
         }
     }
 
-    public static void showPrompt() {
+    public static void showPrompt(){
         System.out.print(PROMPT);
+    }
+
+    public static void showMessageInline(String ... messages) {
+        for (String m : messages){
+            System.out.print(m + " ");
+        }
+        System.out.println();
     }
 
     public static void showMessage(String... messages) {

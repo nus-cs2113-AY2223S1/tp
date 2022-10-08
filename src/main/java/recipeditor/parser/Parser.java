@@ -7,6 +7,7 @@ import recipeditor.command.Command;
 import recipeditor.command.DeleteCommand;
 import recipeditor.command.ExitCommand;
 import recipeditor.ui.AddMode;
+import recipeditor.ui.Ui;
 
 
 public class Parser {
@@ -52,7 +53,8 @@ public class Parser {
         AddMode add = new AddMode(); // Switch to Add Mode in here
         add.enterAddMode();
         add.exitAddMode();
-        return new AddCommand(); // At the moment, Add Command is like a Dummy Middle Man,
+        Ui.showMessage(String.valueOf(add.isValid));
+        return new AddCommand(add.isValid, add.addedRecipe); // Pass validty and potential recipe to AddCommand
     }
 
 }
