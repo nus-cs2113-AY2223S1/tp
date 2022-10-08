@@ -11,9 +11,16 @@ public class ComputerComponentChooser {
         line = in.nextLine();
 
         while (!Parser.checkBye(line)) {
+            if (Parser.checkEdit(line)) {
+                while (!EditParser.checkBack(line)) {
+                    //EditParser.parse(line);
+                    line = in.nextLine();
+                }
+            }
             //Parser.parse(Manager, line); To be added
             //Parser.parse(line);
             line = in.nextLine();
+
         }
 
         Ui.endSession();
