@@ -7,7 +7,7 @@ public class UserModule {
     private String nusCredit;
     private String puTitle;
 
-    public UserModule(String nusCode, String puCode, String nusTitle, String nusCredit, String puTitle) {
+    public UserModule(String puCode, String puTitle, String nusCode, String nusTitle, String nusCredit) {
         this.nusCode = nusCode;
         this.puCode = puCode;
         this.nusTitle = nusTitle;
