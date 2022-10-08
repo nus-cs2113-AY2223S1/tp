@@ -4,7 +4,8 @@ public class Ui {
     /**
      * A concatenation of strings that visually represents the word ComputerComponentChooser.
      */
-    private static final String LOGO = "  _____                     __         \n"
+    private static final String LOGO =
+              "  _____                     __         \n"
             + " / ___/__  __ _  ___  __ __/ /____ ____\n"
             + "/ /__/ _ \\/  ' \\/ _ \\/ // / __/ -_) __/\n"
             + "\\___/\\___/_/_/_/ .__/\\_,_/\\__/\\__/_/   \n"
@@ -38,7 +39,7 @@ public class Ui {
     }
 
     static void startSession() {
-        Ui.printLogo();
+        //Ui.printLogo();
         Ui.printLine();
         System.out.println("Hello! ComputerComponentChooser at your service!");
         System.out.println("What can I do for you today?");
