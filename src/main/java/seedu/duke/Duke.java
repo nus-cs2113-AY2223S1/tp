@@ -5,31 +5,34 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import seedu.duke.FinanceException.exceptionCollection;
+
 public class Duke {
     /**
      * Main entry-point for the java.duke.Duke application.
      */
     public static void main(String[] args) throws IOException {
         Scanner in = new Scanner(System.in);
-        System.out.println("Hello and welcome to Currency Manager.\n "
-                +
-                "Would you like to login or register?");
+        Ui.showWelcomeMessage();
 
         List<String> existingUserNames;
 
         existingUserNames = UserNameFileWorkings.userNameFile();
 
-        boolean bye = false;
+        boolean isProgramEnd = false;
 
-        while (!bye) {
+        while (!isProgramEnd) {
             try {
-                System.out.println("Would you like to register or login?");
-                Commands commandType = Commands.valueOf(in.nextLine().toUpperCase());
+                Ui.showPromptInfo();
+                Commands commandType;
+                try {
+                    commandType = Commands.valueOf(in.nextLine().toUpperCase());
+                } catch (IllegalArgumentException e) {
+                    throw new FinanceException(exceptionCollection.COMMAND_TYPE_EXCEPTION);
+                }
                 switch (commandType) {
                 case REGISTER:
-                    System.out.println("Nice, we will be creating you a new wallet right away, but first of all, \n "
-                            +
-                            "please first add your username and then a password for your wallet");
+                    Ui.showRegisterInfo();
 
                     String userName = " ";
 
@@ -55,20 +58,19 @@ public class Duke {
 
                     Wallet newWallet = new Wallet(userName, passWord);
                     WalletFile.createNewWallet(newWallet);
-                    System.out.println("Nice, a new wallet has been created for you, \nyou can now login to it");
+                    Ui.showRegisterSuccessInfo();
                     break;
-
                 case BYE:
-                    bye = true;
+                    isProgramEnd = true;
                     break;
                 case LOGIN:
                     System.out.println("login will be implemented soon");
                     break;
                 default:
-                    System.out.println("We aren't sure what you are trying to say.");
+                    throw new FinanceException(exceptionCollection.COMMAND_TYPE_EXCEPTION);
                 }
-            } catch (Exception e) {
-                System.out.println("We aren't sure what you are trying to say.");
+            } catch (FinanceException e) {
+                e.handleException();
             }
         }
 
