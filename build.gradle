@@ -1,8 +1,8 @@
 plugins {
     id 'java'
     id 'application'
-    id 'checkstyle'
     id 'com.github.johnrengelman.shadow' version '5.1.0'
+    id 'checkstyle'
 }
 
 repositories {
@@ -38,7 +38,7 @@ shadowJar {
 }
 
 checkstyle {
-    toolVersion = '8.23'
+    toolVersion = '10.3.2'
 }
 
 run{
