@@ -1,2 +1,0 @@
-password:hihi
-balance:0
