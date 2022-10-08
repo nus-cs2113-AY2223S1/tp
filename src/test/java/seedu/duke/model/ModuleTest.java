@@ -12,7 +12,7 @@ public class ModuleTest {
 
     @Test
     public void moduleLoading_loadModules_numberLoaded() {
-        assertEquals(5313, Module.getAll().size());
+        assertEquals(7732, Module.getAll().size());
     }
 
     @Test
@@ -33,16 +33,16 @@ public class ModuleTest {
         assertNotNull(mod.getSemesterData(2));
         SemesterData s1 = mod.getSemesterData(1);
         List<RawLesson> timetable = s1.timetable;
-        List<RawLesson> lectures = timetable.stream().filter(s -> s.lessonType.equals("Lecture"))
+        List<RawLesson> lectures = timetable.stream().filter(s -> s.lessonType == LessonType.Lecture)
                 .collect(Collectors.toList());
         assertEquals(2, lectures.size());
         assertEquals(Day.Wednesday, lectures.get(0).day);
         assertEquals("1000", lectures.get(0).startTime);
         assertEquals("1200", lectures.get(0).endTime);
-        List<RawLesson> tutorials = timetable.stream().filter(s -> s.lessonType.equals("Tutorial"))
+        List<RawLesson> tutorials = timetable.stream().filter(s -> s.lessonType == LessonType.Tutorial)
                 .collect(Collectors.toList());
         assertEquals(60, tutorials.size());
-        List<RawLesson> recitations = timetable.stream().filter(s -> s.lessonType.equals("Recitation"))
+        List<RawLesson> recitations = timetable.stream().filter(s -> s.lessonType == LessonType.Recitation)
                 .collect(Collectors.toList());
         assertEquals(12, recitations.size());
     }

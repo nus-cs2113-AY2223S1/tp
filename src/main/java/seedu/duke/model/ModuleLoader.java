@@ -43,7 +43,7 @@ public class ModuleLoader {
                 Day.valueOf(node.get("day").asText()),
                 node.get("endTime").asText(),
                 node.get("startTime").asText(),
-                node.get("lessonType").asText(),
+                LessonType.valueOf(node.get("lessonType").asText().replaceAll("[- ]", "")),
                 node.get("venue").asText(),
                 jsonNodeAsIntList(node.get("weeks")),
                 node.get("size").asInt());

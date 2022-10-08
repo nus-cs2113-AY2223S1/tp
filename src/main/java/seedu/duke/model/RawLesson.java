@@ -7,12 +7,12 @@ public class RawLesson {
     public final Day day;
     public final String endTime;
     public final String startTime;
-    public final String lessonType;
+    public final LessonType lessonType;
     public final String venue;
     public final List<Integer> weeks;
     public final int size;
 
-    RawLesson(String classNo, Day day, String endTime, String startTime, String lessonType, String venue,
+    RawLesson(String classNo, Day day, String endTime, String startTime, LessonType lessonType, String venue,
             List<Integer> weeks, int size) {
         this.classNo = classNo;
         this.day = day;
@@ -22,7 +22,6 @@ public class RawLesson {
         this.venue = venue;
         this.weeks = weeks;
         this.size = size;
-
     }
 
 }
