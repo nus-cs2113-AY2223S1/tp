@@ -8,12 +8,17 @@ public class Parser {
     static final int NAME_PARAMETER = 1;
 
     private static String getParameters(String line, int mode) {
-        String[] lineSplit = line.split(" ");
+        String[] lineSplit = line.split(" ", 2);
         return lineSplit[mode];
     }
 
     static boolean checkBye(String line) {
         return line.equals("bye");
+    }
+
+    static boolean checkEdit(String line) {
+        String edit = getParameters(line, COMMAND_PARAMETER).toLowerCase();
+        return edit.equals("edit");
     }
 
     public static void parse(String line) {
