@@ -1,7 +1,6 @@
 package recipeditor.parser;
 
 import recipeditor.command.AddCommand;
-
 import recipeditor.command.Command;
 import recipeditor.command.ListCommand;
 import recipeditor.command.ExitCommand;
@@ -11,14 +10,12 @@ import recipeditor.command.DeleteCommand;
 import recipeditor.ui.AddMode;
 import recipeditor.ui.Ui;
 
-
 public class Parser {
-
 
     public Command parseCommand(String input) {
         String[] parsed = input.split(" ");
         String commandWord = parsed[0].toLowerCase();
-        String argument = input.replace(commandWord, ""); //TODO: what is this
+        String argument = input.replace(commandWord, ""); // TODO: what is this
 
         switch (commandWord) {
         case AddCommand.COMMAND_TYPE:
