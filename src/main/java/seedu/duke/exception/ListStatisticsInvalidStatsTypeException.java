@@ -2,7 +2,8 @@ package seedu.duke.exception;
 
 import seedu.duke.common.ErrorMessages;
 
-public class AddTransactionMissingTagException extends MoolahException {
+public class ListStatisticsInvalidStatsTypeException extends MoolahException {
+
     /**
      * Returns the error message of the exception to alert user of the exception.
      *
@@ -10,6 +11,6 @@ public class AddTransactionMissingTagException extends MoolahException {
      */
     @Override
     public String getMessage() {
-        return ErrorMessages.ERROR_COMMAND_MISSING_TAG.toString();
+        return ErrorMessages.ERROR_STATS_COMMAND_INVALID_STATSTYPE.toString();
     }
 }
