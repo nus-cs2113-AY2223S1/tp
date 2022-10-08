@@ -1,14 +1,7 @@
 package recipeditor.parser;
 
 import recipeditor.command.AddCommand;
-<<<<<<< HEAD
-=======
-import recipeditor.command.ByeCommand;
-import recipeditor.command.DeleteCommand;
-import recipeditor.command.ListCommand;
-import recipeditor.command.InvalidCommand;
-import recipeditor.command.ListCommand;
->>>>>>> bbbfdf5c4bb2f9628c7630c7b6e3d11bd6e09189
+
 import recipeditor.command.Command;
 import recipeditor.command.ListCommand;
 import recipeditor.command.ExitCommand;
@@ -36,13 +29,8 @@ public class Parser {
             return new ExitCommand();
         case DeleteCommand.COMMAND_TYPE:
             return new DeleteCommand(0); // TODO: This is dummy variable only
-<<<<<<< HEAD
-        case ViewCommand.TYPE:
+        case ViewCommand.COMMAND_TYPE:
             return new ViewCommand();
-=======
-        case ByeCommand.COMMAND_TYPE:
-            return new ByeCommand();   
->>>>>>> bbbfdf5c4bb2f9628c7630c7b6e3d11bd6e09189
         default:
             return new InvalidCommand();
         }
