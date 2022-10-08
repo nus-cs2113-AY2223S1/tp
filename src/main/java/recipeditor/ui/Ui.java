@@ -5,8 +5,6 @@ import java.io.IOException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-import javax.swing.ProgressMonitor;
-
 import recipeditor.command.CommandResult;
 
 public class Ui {
