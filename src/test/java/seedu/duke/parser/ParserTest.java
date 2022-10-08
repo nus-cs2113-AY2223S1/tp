@@ -4,9 +4,11 @@ import org.junit.jupiter.api.Test;
 import seedu.duke.command.AddModuleCommand;
 import seedu.duke.command.DeleteModuleCommand;
 import seedu.duke.command.HelpCommand;
+import seedu.duke.command.IncompleteCommand;
+import seedu.duke.command.InvalidModuleCommand;
 import seedu.duke.command.SearchModuleCommand;
-import seedu.duke.command.ViewTimetableCommand;
 import seedu.duke.command.UnknownCommand;
+import seedu.duke.command.ViewTimetableCommand;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -19,9 +21,9 @@ public class ParserTest {
 
     @Test
     public void parse_wrongSearchInput_returnNewUnknownCommand() {
-        assertTrue(Parser.parse("search") instanceof UnknownCommand);
-        assertTrue(Parser.parse("search csss2113") instanceof UnknownCommand);
-        assertTrue(Parser.parse("search Cs20401c") instanceof UnknownCommand);
+        assertTrue(Parser.parse("search") instanceof IncompleteCommand);
+        assertTrue(Parser.parse("search csss2113") instanceof InvalidModuleCommand);
+        assertTrue(Parser.parse("search Cs20401c") instanceof InvalidModuleCommand);
     }
 
     @Test

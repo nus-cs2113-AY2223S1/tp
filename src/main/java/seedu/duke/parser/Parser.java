@@ -1,12 +1,14 @@
 package seedu.duke.parser;
 
-import seedu.duke.command.Command;
 import seedu.duke.command.AddModuleCommand;
+import seedu.duke.command.Command;
 import seedu.duke.command.DeleteModuleCommand;
 import seedu.duke.command.HelpCommand;
+import seedu.duke.command.IncompleteCommand;
+import seedu.duke.command.InvalidModuleCommand;
 import seedu.duke.command.SearchModuleCommand;
-import seedu.duke.command.ViewTimetableCommand;
 import seedu.duke.command.UnknownCommand;
+import seedu.duke.command.ViewTimetableCommand;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -48,6 +50,16 @@ public class Parser {
         boolean isValidCommand = isTwoWordsCommand(keywords) && isModuleCode(keywords[1]);
         if (isValidCommand) {
             return command;
+        } else {
+            return determineWrongCommand(keywords);
+        }
+    }
+
+    private static Command determineWrongCommand(String[] keywords) {
+        if (!isTwoWordsCommand(keywords)) {
+            return new IncompleteCommand();
+        } else if (!isModuleCode(keywords[1])) {
+            return new InvalidModuleCommand();
         } else {
             return new UnknownCommand();
         }
