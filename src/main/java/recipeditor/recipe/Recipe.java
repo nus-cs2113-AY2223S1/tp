@@ -8,23 +8,19 @@ public class Recipe {
     private ArrayList<Ingredient> ingredients;
     private String[] steps;
 
-    public Recipe(String title, String description, ArrayList<Ingredient> ingredients, String[] steps) {
-        this.title = title;
-        this.description = description;
-        this.ingredients = ingredients;
-        this.steps = steps;
-    }
-
     public Recipe(String title, String description) {
         this.title = title;
         this.description = description;
+        ingredients = new ArrayList<>();
     }
 
     public Recipe(String title) {
         this.title = title;
+        ingredients = new ArrayList<>();
     }
 
     public Recipe() {
+        ingredients = new ArrayList<>();
     }
 
 

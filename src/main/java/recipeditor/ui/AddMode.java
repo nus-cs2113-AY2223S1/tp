@@ -23,13 +23,13 @@ public class AddMode {
     private void askTitle() {
         Ui.showMessage(TITLE);
         String input = Ui.readInput();
-        addedRecipe.title = input;
+        addedRecipe.setTitle(input);
     }
 
     private void askDescription() {
         Ui.showMessage(DESCRIPTION);
         String input = Ui.readInput();
-        addedRecipe.description = input;
+        addedRecipe.setDescription(input);
     }
 
     private void askIngredients() {
@@ -44,7 +44,7 @@ public class AddMode {
     //TODO: Check for Exception
     private void parsedIngredients(String input) {
         String[] parsed = input.split("/");
-        addedRecipe.ingredients.add(new Ingredient(parsed[0],parsed[1],parsed[2]));
+        addedRecipe.getIngredients().add(new Ingredient(parsed[0],Integer.parseInt(parsed[1]),parsed[2]));
     }
 
     private void addRecipe() {
