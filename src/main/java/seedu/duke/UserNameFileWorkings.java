@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 /**
  * With this class, we can quickly get all the existing usernames
- * to check whether user can create a wallet with such a new username
+ * to check whether user can create a wallet with such a new username.
  */
 public class UserNameFileWorkings {
 
@@ -23,16 +23,17 @@ public class UserNameFileWorkings {
         Path path = Paths.get("src","main","data");
 
 
-        try{
+        try {
             Files.createDirectories(path);
-        } catch (
-                IOException ignored){}
+        } catch (Exception e) {
+            System.out.println(e);
+        }
 
-        try{
+        try {
             existingUserNames = getUserNames(path);
             System.out.println("I found some usernames saved");
 
-        }catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             System.out.println("File not found, creating one");
             createUserNames(path);
             existingUserNames = new ArrayList<>();
