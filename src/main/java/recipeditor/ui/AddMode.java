@@ -44,7 +44,7 @@ public class AddMode {
     //TODO: Check for Exception
     private void parsedIngredients(String input) {
         String[] parsed = input.split("/");
-        addedRecipe.getIngredients().add(new Ingredient(parsed[0],Integer.parseInt(parsed[1]),parsed[2]));
+        RecipeList.getRecipes().add(new Ingredient(parsed[0],Integer.parseInt(parsed[1]),parsed[2]));
     }
 
     private void addRecipe() {
