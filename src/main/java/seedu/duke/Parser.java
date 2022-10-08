@@ -11,6 +11,7 @@ import seedu.duke.command.HelpCommand;
 import seedu.duke.command.ListCommand;
 import seedu.duke.command.PurgeCommand;
 
+
 import seedu.duke.exception.MoolahException;
 import seedu.duke.exception.InvalidCommandException;
 
@@ -46,33 +47,33 @@ public class Parser {
 
         // list commands duke to list all the tasks stored and their completion status
         // try at the start cos of the errors possibly
-        switch (inputTokens[0]) {
-        case "help":
-            command = new HelpCommand();
+        switch (inputTokens[0].toUpperCase()) {
+        case HelpCommand.COMMAND_WORD:
+            command = new HelpCommand(inputTokens[1]);
             break;
-        case "list":
+        case ListCommand.COMMAND_WORD:
             command = new ListCommand();
             break;
-        case "find":
+        case FindCommand.COMMAND_WORD:
             command = new FindCommand(inputTokens[1]);
             break;
-        case "get":
+        case GetCommand.COMMAND_WORD:
             // Additional tokens will be allowed for get
             command = new GetCommand();
             break;
-        case "purge":
+        case PurgeCommand.COMMAND_WORD:
             command = new PurgeCommand();
             break;
-        case "delete":
+        case DeleteCommand.COMMAND_WORD:
             command = new DeleteCommand(inputTokens[1]);
             break;
-        case "add":
+        case AddCommand.COMMAND_WORD:
             command = new AddCommand(inputTokens[1]);
             break;
-        case "edit":
+        case EditCommand.COMMAND_WORD:
             command = new EditCommand(inputTokens[1]);
             break;
-        case "bye":
+        case ByeCommand.COMMAND_WORD:
             command = new ByeCommand();
             break;
         default:

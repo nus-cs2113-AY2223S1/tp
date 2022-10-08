@@ -48,9 +48,9 @@ public class Ui {
         printMessages(INFO_GREET.toString(), INFO_HELP_PROMPT.toString());
     }
 
-    public static void showHelp() {
+    public static void showHelp(String helpMessage) {
         // To include the other messages for commands
-        printMessages(INFO_HELP_GREET.toString());
+        printMessages(INFO_HELP_GREET.toString(), helpMessage);
     }
 
     public static void showExit() {
