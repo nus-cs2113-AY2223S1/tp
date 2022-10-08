@@ -14,7 +14,7 @@ public class UserModuleList {
         this.modules = new ArrayList<>();
     }
 
-    public ArrayList getModules() {
+    public ArrayList<UserModule> getModules() {
         return modules;
     }
 
