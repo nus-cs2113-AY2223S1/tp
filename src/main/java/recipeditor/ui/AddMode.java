@@ -2,7 +2,6 @@ package recipeditor.ui;
 
 import recipeditor.recipe.Ingredient;
 import recipeditor.recipe.Recipe;
-import recipeditor.recipe.RecipeList;
 
 public class AddMode {
     private static final String TITLE = "Recipe Title";

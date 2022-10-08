@@ -5,7 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+public class ExitCommandTest {
 
-class CommandTest {
-
+    @Test
+    public void isExitShouldWork() {
+        Command command = new ViewCommand();
+        assertFalse(ExitCommand.isExit(command));
+    }
 }

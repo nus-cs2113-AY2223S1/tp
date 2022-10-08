@@ -1,25 +1,21 @@
 package recipeditor.parser;
 
 import recipeditor.command.AddCommand;
-import recipeditor.command.ByeCommand;
-import recipeditor.command.DeleteCommand;
-import recipeditor.command.ListCommand;
-import recipeditor.command.InvalidCommand;
-import recipeditor.command.ListCommand;
 import recipeditor.command.Command;
-import recipeditor.command.DeleteCommand;
+import recipeditor.command.ListCommand;
 import recipeditor.command.ExitCommand;
+import recipeditor.command.InvalidCommand;
+import recipeditor.command.ViewCommand;
+import recipeditor.command.DeleteCommand;
 import recipeditor.ui.AddMode;
 import recipeditor.ui.Ui;
 
-
 public class Parser {
-
 
     public Command parseCommand(String input) {
         String[] parsed = input.split(" ");
         String commandWord = parsed[0].toLowerCase();
-        String argument = input.replace(commandWord, ""); //TODO: what is this
+        String argument = input.replace(commandWord, ""); // TODO: what is this
 
         switch (commandWord) {
         case AddCommand.COMMAND_TYPE:
@@ -30,8 +26,8 @@ public class Parser {
             return new ExitCommand();
         case DeleteCommand.COMMAND_TYPE:
             return new DeleteCommand(0); // TODO: This is dummy variable only
-        case ByeCommand.COMMAND_TYPE:
-            return new ByeCommand();   
+        case ViewCommand.COMMAND_TYPE:
+            return new ViewCommand();
         default:
             return new InvalidCommand();
         }
