@@ -13,6 +13,9 @@ import seedu.duke.utils.Color;
 import seedu.duke.utils.ColorScheme;
 import seedu.duke.utils.ConsoleBorder;
 
+/**
+ * Formats a timetable nicely.
+ */
 public class Timetable {
 
     private static final int COLUMN_WIDTH = 10;
@@ -24,8 +27,8 @@ public class Timetable {
     private static final int RIGHT_PADDING = 2;
 
     private boolean withColor;
-    private int firstTime;
-    private int lastTime;
+    private int firstHour;
+    private int lastHour;
     private int timeslots;
     private String[][] buffer;
     private int height;
@@ -45,13 +48,13 @@ public class Timetable {
         this.withColor = withColor;
         this.consoleBorder = ConsoleBorder.getInstance();
         this.sortedLessons = sortLessons(lessons);
-        String earliest = lessons.stream().map(s -> s.getRight().startTime).min(String::compareTo).orElseThrow();
-        String latest = lessons.stream().map(s -> s.getRight().endTime).max(String::compareTo).orElseThrow();
         this.modules = new ArrayList<>(lessons.stream().map(s -> s.getLeft()).collect(Collectors.toSet()));
         this.modules.sort((a, b) -> a.moduleCode.compareTo(b.moduleCode));
-        this.firstTime = Integer.parseInt(earliest.substring(0, 2)); // round down to the hour
-        this.lastTime = Integer.parseInt(latest.substring(0, 2)) + 1; // round up to next hour
-        this.timeslots = (this.lastTime - this.firstTime) * 2 + 1; // every half an hour
+        String earliest = lessons.stream().map(s -> s.getRight().startTime).min(String::compareTo).orElseThrow();
+        this.firstHour = Integer.parseInt(earliest.substring(0, 2)); // round down to the hour
+        String latest = lessons.stream().map(s -> s.getRight().endTime).max(String::compareTo).orElseThrow();
+        this.lastHour = Integer.parseInt(latest.substring(0, 2)) + 1; // round up to next hour
+        this.timeslots = (this.lastHour - this.firstHour) * 2 + 1; // every half an hour
         this.days = List.of(Day.values()).subList(0, 5);
         Pair<List<Integer>, List<Integer>> res = computeIndentation(days, sortedLessons);
         this.columns = res.getLeft();
@@ -214,6 +217,18 @@ public class Timetable {
                 ColorScheme.get(modules.indexOf(module)));
     }
 
+    private int timeToIndex(String time) {
+        int hour = Integer.parseInt(time.substring(0, 2));
+        int mins = Integer.parseInt(time.substring(2));
+        return (hour - firstHour) * 2 + (mins == 30 ? 1 : 0);
+    }
+
+    private String indexToTime(int index) {
+        boolean half = index % 2 == 1;
+        int hours = index / 2 + firstHour;
+        return String.format("%02d", hours) + (half ? "30" : "00");
+    }
+
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
@@ -228,18 +243,6 @@ public class Timetable {
             builder.append("\n");
         }
         return builder.toString();
-    }
-
-    private int timeToIndex(String time) {
-        int hour = Integer.parseInt(time.substring(0, 2));
-        int mins = Integer.parseInt(time.substring(2));
-        return (hour - firstTime) * 2 + (mins == 30 ? 1 : 0);
-    }
-
-    private String indexToTime(int index) {
-        boolean half = index % 2 == 1;
-        int hours = index / 2 + firstTime;
-        return String.format("%02d", hours) + (half ? "30" : "00");
     }
 
     public static String lessonTypeToShortString(LessonType lessonType) {
