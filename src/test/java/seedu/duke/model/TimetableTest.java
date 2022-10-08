@@ -97,8 +97,13 @@ public class TimetableTest {
                 Pair.of(ee2211, ee2211.getSemesterData(1).getLessonByNo("19").get(0)),
                 Pair.of(cs2113, cs2113.getSemesterData(1).getLessonByTypeAndNo(LessonType.Lecture, "1").get(0)),
                 Pair.of(cs2113, cs2113.getSemesterData(1).getLessonByNo("4").get(0))));
+        String newlineRegex = "(\\r\\n|\\r|\\n)";
         InputStream stream = TimetableTest.class.getClassLoader().getResourceAsStream("timetableWindows.txt");
-        String expected = new String(stream.readAllBytes(), StandardCharsets.UTF_8);
-        assertEquals(expected, t.toString());
+        String[] expected = new String(stream.readAllBytes(), StandardCharsets.UTF_8).split(newlineRegex);
+        String[] actual = t.toString().split(newlineRegex);
+        assertEquals(expected.length, actual.length);
+        for (int i = 0; i < expected.length; i++) {
+            assertEquals(expected[i], actual[i]);
+        }
     }
 }
