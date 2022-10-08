@@ -1,5 +1,6 @@
 package recipeditor;
 
+import recipeditor.parser.Parser;
 import recipeditor.ui.Ui;
 
 import recipeditor.command.Command;
@@ -19,6 +20,15 @@ public class Recipeditor {
 
 
     public static void main(String[] args) {
+// <<<<<<< Parser-Commands
+//         Ui.printGreeting();
+//         while (true) {
+//             System.out.println("Please write your command below");
+//             String input = Ui.readInput();
+//             String output = Parser.parseCommand(input);
+//             System.out.println(output);
+// =======
+//TODO: i believe this is deprecated, with the addition of current code, possibly need to update runtest.sh
         run(args); // I am following the address book
     }
 

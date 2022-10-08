@@ -4,7 +4,9 @@ import recipeditor.recipe.Recipe;
 import recipeditor.recipe.RecipeList;
 
 public class DeleteCommand extends Command {
-    public static final String TYPE = "delete";
+
+    public static final String COMMAND_TYPE = "delete";
+  
     private final int index;
 
     /**
