@@ -31,4 +31,15 @@ public class Messages {
     public static final String CONSOLE_ERROR_COMMAND_SORT_EXPENSE_INVALID = ""
             + "The arguments entered are invalid. "
             + "SYNTAX: Sort-Expense -t TYPE -o ORDER";
+    public static final String LOCAL_STORAGE_ERROR_NO_LOAD_FILE = ""
+            + "There is no load file found...\n"
+            + "Please ensure the file is named correctly and is in the right directory if you have a load file.";
+    public static final String LOCAL_STORAGE_ERROR_IN_LOAD_FILE = ""
+            + "There is an error in load file found...\n"
+            + "Please ensure the file is the correct load file without modifications to it.\n"
+            + "Error is found in line: ";
+    public static final String LOCAL_STORAGE_LOAD_SUCCESS = "File loaded successfully :)";
+    public static final String LOCAL_STORAGE_ERROR_SAVE_DATA = ""
+            + "There is an error in saving file...\n"
+            + "File does not exist or Path is wrong :(";
 }
