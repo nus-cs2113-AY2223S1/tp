@@ -3,6 +3,8 @@ package seedu.duke.utils;
 import java.io.InputStream;
 import java.util.Scanner;
 
+import org.apache.commons.lang3.SystemUtils;
+
 public class ConsoleBorder {
     private final char topLeft;
     private final char topMid;
@@ -73,8 +75,9 @@ public class ConsoleBorder {
     }
 
     private ConsoleBorder() {
+        String borderFileName = (SystemUtils.IS_OS_WINDOWS) ? "borderWindows.txt" : "border.txt";
         InputStream stream = ConsoleBorder.class.getClassLoader()
-                .getResourceAsStream("border.txt");
+                .getResourceAsStream(borderFileName);
         Scanner scanner = new Scanner(stream);
         String s = scanner.nextLine();
         int counter = 0;

@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.apache.commons.lang3.SystemUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
 import seedu.duke.utils.Color;
@@ -45,7 +46,7 @@ public class Timetable {
     }
 
     public Timetable(List<Pair<Module, RawLesson>> lessons, boolean withColor) {
-        this.withColor = withColor;
+        this.withColor = SystemUtils.IS_OS_WINDOWS ? false : withColor;
         this.consoleBorder = ConsoleBorder.getInstance();
         this.sortedLessons = sortLessons(lessons);
         this.modules = new ArrayList<>(lessons.stream().map(s -> s.getLeft()).collect(Collectors.toSet()));
