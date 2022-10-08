@@ -7,7 +7,7 @@ public class UserModule {
     private String nusCredit;
     private String puTitle;
 
-    public UserModule(String nusCode, String puCode, String nusTitle, String nusCredit, String puTitle) {
+    public UserModule(String puCode, String puTitle, String nusCode, String nusTitle, String nusCredit) {
         this.nusCode = nusCode;
         this.puCode = puCode;
         this.nusTitle = nusTitle;
@@ -57,8 +57,9 @@ public class UserModule {
 
     public void printModule() {
         System.out.print("NUS: ");
-        System.out.print(toString());
+        System.out.print(getNusCode() + " " + getNusTitle());
         System.out.print(" | Partner University: ");
-        System.out.println(getPuCode() + " " + getPuTitle());
+        System.out.print(getPuCode() + " " + getPuTitle());
+        System.out.println(" | Equivalent NUS Credits: " + getNusCredit());
     }
 }

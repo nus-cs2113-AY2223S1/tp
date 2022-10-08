@@ -1,5 +1,7 @@
 package seedu.duke.user;
 
+import seedu.duke.userstorage.UserStorage;
+
 import java.util.HashMap;
 import java.util.NoSuchElementException;
 
@@ -14,6 +16,10 @@ public class UserUniversityListManager {
 
     public UserUniversityListManager() {
         myManager = new HashMap<String, UserUniversityList>();
+    }
+
+    public UserUniversityListManager(String fileContent) {
+        myManager = UserStorage.convertFileContentIntoUniversityList(fileContent);
     }
 
     /**
