@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import seedu.duke.command.AddModuleCommand;
 import seedu.duke.command.DeleteModuleCommand;
 import seedu.duke.command.HelpCommand;
-import seedu.duke.command.SearchModulesCommand;
+import seedu.duke.command.SearchModuleCommand;
 import seedu.duke.command.ViewTimetableCommand;
 import seedu.duke.command.UnknownCommand;
 
@@ -13,7 +13,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class ParserTest {
     @Test
     public void parse_searchInput_returnNewSearchCommand() {
-        assertTrue(Parser.parse("search cs2113") instanceof SearchModulesCommand);
+        assertTrue(Parser.parse("search cs2113") instanceof SearchModuleCommand);
+        assertTrue(Parser.parse("search Cs2040c") instanceof SearchModuleCommand);
+    }
+
+    @Test
+    public void parse_wrongSearchInput_returnNewUnknownCommand() {
+        assertTrue(Parser.parse("search") instanceof UnknownCommand);
+        assertTrue(Parser.parse("search csss2113") instanceof UnknownCommand);
+        assertTrue(Parser.parse("search Cs20401c") instanceof UnknownCommand);
     }
 
     @Test
