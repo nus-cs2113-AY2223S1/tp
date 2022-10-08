@@ -1,5 +1,5 @@
 package seedu.duke.userstorage;
-import seedu.duke.university.University;
+
 import seedu.duke.user.UserModule;
 import seedu.duke.user.UserModuleList;
 import seedu.duke.user.UserUniversityList;
@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-/**
+/**.
  * Deals with loading tasks from the specified file and saving tasks in the specified file
  * File name should be specified in Duke.java: "data/duke.txt"
  */
@@ -28,7 +28,7 @@ public class UserStorage {
         return filePath;
     }
 
-    /**
+    /**.
      * Clears content in the file and writes new text into the file.
      * @param filePath Specified file path.
      * @param textToAdd Text to write into the file.
@@ -40,7 +40,7 @@ public class UserStorage {
         fw.close();
     }
 
-    /**
+    /**.
      * Loads file that holds universities and modules information which
      * the user saves after exiting the app most recently
      * @return fileContent Content of the file
@@ -59,18 +59,15 @@ public class UserStorage {
         }
         Scanner s = new Scanner(f);
         String fileContent = "";
-        while(s.hasNext()) {
+        while (s.hasNext()) {
             fileContent += s.nextLine();    //dollar sign to represent end of line
         }
         return fileContent;
     }
 
-    /**
+    /**.
      * Function to convert UserUniversityListManager to a String
      * to be stored in a text file
-     * Format:
-     * /u <UniversityName>
-     *
      * @param uniList user's list of interested universities
      * @return a String that contains all universities and modules information
      */
