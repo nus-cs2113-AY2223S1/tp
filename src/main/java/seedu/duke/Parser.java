@@ -6,6 +6,7 @@ import seedu.duke.command.GreetCommand;
 import seedu.duke.command.HelpCommand;
 import seedu.duke.command.ViewCommand;
 import seedu.duke.command.SetCommand;
+import seedu.duke.command.AddCommand;
 
 public class Parser {
 
@@ -21,6 +22,8 @@ public class Parser {
             return new ExitCommand();
         case "set":
             return new SetCommand(arguments);
+        case "add":
+            return new AddCommand(arguments);
         case "view":
             return new ViewCommand(arguments);
         default:

@@ -1,8 +1,11 @@
 package seedu.duke.command;
 
 import seedu.duke.Biometrics;
+import seedu.duke.Food;
 import seedu.duke.Parser;
 import seedu.duke.Ui;
+
+import static seedu.duke.command.AddCommand.foodList;
 
 public class ViewCommand extends Command {
 
@@ -22,6 +25,9 @@ public class ViewCommand extends Command {
         case ("biometrics"):
             viewBiometrics();
             break;
+        case ("food"):
+            viewFood();
+            break;
         default:
             handleInvalidViewType();
         }
@@ -33,6 +39,12 @@ public class ViewCommand extends Command {
 
     private void viewBiometrics() {
         ui.output(biometrics.toString());
+    }
+
+    private void viewFood() {
+        for (int i = 0; i < foodList.size(); i++) {
+            ui.output((i + 1) + " " + (foodList.get(i)).toString());
+        }
     }
 
     @Override
