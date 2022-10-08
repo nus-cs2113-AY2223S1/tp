@@ -4,7 +4,8 @@ import recipeditor.recipe.Recipe;
 import recipeditor.recipe.RecipeList;
 
 public class ListCommand extends Command {
-    public static final String TYPE = "list";
+
+    public static final String COMMAND_TYPE = "list";
 
     /**
      * execute list command, store all recipes in a string in the
@@ -20,5 +21,6 @@ public class ListCommand extends Command {
         }
         return new CommandResult(result.toString());
     }
+
 }
 

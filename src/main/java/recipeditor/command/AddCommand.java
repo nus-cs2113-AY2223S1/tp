@@ -4,7 +4,7 @@ import recipeditor.recipe.Recipe;
 import recipeditor.recipe.RecipeList;
 
 public class AddCommand extends Command {
-    public static final String TYPE = "add";
+    public static final String COMMAND_TYPE = "add";
     private Recipe addedRecipe = new Recipe();
     private boolean isValid;
 
@@ -22,4 +22,5 @@ public class AddCommand extends Command {
             return new CommandResult(TYPE + " Invalid");
         }
     }
+
 }
