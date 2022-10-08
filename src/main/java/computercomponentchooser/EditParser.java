@@ -12,20 +12,21 @@ public class EditParser {
     }
 
     public static boolean checkBack(String line) {
-        String back = getParameter(line, COMMAND_PARAMETER).toLowerCase(); //handled cases such as "Back to main mode" being inputted
+        String back = getParameter(line, COMMAND_PARAMETER).toLowerCase(); 
         return back.equals("back");
     }
 
     public static void parse(String line) {
         String command = getParameter(line, COMMAND_PARAMETER).toLowerCase();
         switch (command) {
-            case "add":
-            case "delete":
-            case "list":
-            case "check":
-            case "back":
-            default:
-                break;
+        case "add":
+        case "delete":
+        case "list":
+        case "check":
+        case "back":
+        default:
+            break;
         }
     }
 }
+
