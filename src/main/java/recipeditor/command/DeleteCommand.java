@@ -1,6 +1,7 @@
 package recipeditor.command;
 
 public class DeleteCommand extends Command {
+    public static final String TYPE = "delete";
     private final int index;
 
     /**
@@ -21,6 +22,12 @@ public class DeleteCommand extends Command {
         return this.index;
     }
 
+
+    public CommandResult execute() {
+        //TODO: Execution of command
+        // This is only the dummy code for testing
+        return new CommandResult(TYPE);
+    }
 
 }
 

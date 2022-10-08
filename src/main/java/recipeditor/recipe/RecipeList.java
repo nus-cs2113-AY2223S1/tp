@@ -14,7 +14,7 @@ public class RecipeList {
         this(null);
     }
 
-    public ArrayList<Recipe> getRecipes() {
+    public static ArrayList<Recipe> getRecipes() {
         return recipes;
     }
 

@@ -1,21 +1,21 @@
 package recipeditor.recipe;
 
 public class Ingredient {
-    private int amount;
+    private double amount;
     private String name;
     private String unit;
 
-    public Ingredient(String name, int amount, String unit) {
+    public Ingredient(String name, double amount, String unit) {
         this.name = name;
         this.amount = amount;
         this.unit = unit;
     }
 
-    public int getAmount() {
+    public double getAmount() {
         return amount;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 
