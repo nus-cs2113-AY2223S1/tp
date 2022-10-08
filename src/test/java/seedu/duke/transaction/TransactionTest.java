@@ -17,7 +17,7 @@ class TransactionTest {
         User lender = new User("John Doe", 45, "93746378");
         User borrower = new User("Doe John", 23, "12312378");
         Item item = new Item("Broom", 1, 0.5, lender);
-        Transaction transaction = new Transaction(item, lender, borrower, 5, "2022-01-03");
+        Transaction transaction = new Transaction(item, borrower, 5, "2022-01-03");
         transaction.setAsFinished();
         assertTrue(transaction.isFinished());
     }
@@ -27,7 +27,7 @@ class TransactionTest {
         User lender = new User("John Doe", 45, "93746378");
         User borrower = new User("Doe John", 23, "12312378");
         Item item = new Item("Broom", 1, 0.5, lender);
-        Transaction transaction = new Transaction(item, lender, borrower, 5, "2022-01-03");
+        Transaction transaction = new Transaction(item, borrower, 5, "2022-01-03");
         transaction.setAsNotFinished();
         assertFalse(transaction.isFinished());
     }
@@ -37,7 +37,7 @@ class TransactionTest {
         User lender = new User("John Doe", 45, "93746378");
         User borrower = new User("Doe John", 23, "12312378");
         Item item = new Item("Broom", 1, 0.5, lender);
-        Transaction transaction = new Transaction(item, lender, borrower, 5, "2022-01-03");
+        Transaction transaction = new Transaction(item, borrower, 5, "2022-01-03");
         assertEquals(LocalDate.parse("2022-01-08"), transaction.getReturnDate());
     }
 
@@ -46,7 +46,7 @@ class TransactionTest {
         User lender = new User("John Doe", 45, "93746378");
         User borrower = new User("Doe John", 23, "12312378");
         Item item = new Item("Broom", 1, 0.5, lender);
-        Transaction transaction = new Transaction(item, lender, borrower, 5, "2022-01-03");
+        Transaction transaction = new Transaction(item, borrower, 5, "2022-01-03");
         assertTrue(transaction.isOverdue());
     }
 
@@ -55,7 +55,7 @@ class TransactionTest {
         User lender = new User("John Doe", 45, "93746378");
         User borrower = new User("Doe John", 23, "12312378");
         Item item = new Item("Broom", 1, 0.5, lender);
-        Transaction transaction = new Transaction(item, lender, borrower, 5, "2022-01-03");
+        Transaction transaction = new Transaction(item, borrower, 5, "2022-01-03");
         transaction.setAsFinished();
         assertFalse(transaction.isOverdue());
     }

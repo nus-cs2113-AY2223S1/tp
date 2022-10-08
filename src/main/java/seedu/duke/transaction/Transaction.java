@@ -18,11 +18,11 @@ public class Transaction {
     private LocalDate returnedAt;
     private boolean isFinished;
 
-    public Transaction(Item item, User lender, User borrower, int duration, String createdAt) {
+    public Transaction(Item item, User borrower, int duration, String createdAt) {
         this.transactionId = IdGenerator.generateId();
         //these three id will be changed to Item + User + User when having Item and User class
         this.item = item;
-        this.lender = lender;
+        this.lender = item.getOwner();
         this.borrower = borrower;
         this.duration = duration;
         this.isFinished = false;

@@ -17,7 +17,7 @@ class TransactionListTest {
         User lender = new User("John Doe", 45, "93746378");
         User borrower = new User("Doe John", 23, "12312378");
         Item item = new Item("Broom", 1, 0.5, lender);
-        Transaction transaction = new Transaction(item, lender, borrower, 5, "2022-01-03");
+        Transaction transaction = new Transaction(item, borrower, 5, "2022-01-03");
         transactionList.add(transaction);
         assertEquals(1, transactionList.getSize());
     }
@@ -28,7 +28,7 @@ class TransactionListTest {
         User lender = new User("John Doe", 45, "93746378");
         User borrower = new User("Doe John", 23, "12312378");
         Item item = new Item("Broom", 1, 0.5, lender);
-        Transaction transaction = new Transaction(item, lender, borrower, 5, "2022-01-03");
+        Transaction transaction = new Transaction(item, borrower, 5, "2022-01-03");
         transactionList.add(transaction);
         assertEquals(transaction, transactionList.getTransaction(1));
     }
@@ -39,7 +39,7 @@ class TransactionListTest {
         User lender = new User("John Doe", 45, "93746378");
         User borrower = new User("Doe John", 23, "12312378");
         Item item = new Item("Broom", 1, 0.5, lender);
-        Transaction transaction = new Transaction(item, lender, borrower, 5, "2022-01-03");
+        Transaction transaction = new Transaction(item, borrower, 5, "2022-01-03");
         transactionList.add(transaction);
         assertThrows(DukeException.class, () -> transactionList.getTransaction(2));
     }
@@ -50,7 +50,7 @@ class TransactionListTest {
         User lender = new User("John Doe", 45, "93746378");
         User borrower = new User("Doe John", 23, "12312378");
         Item item = new Item("Broom", 1, 0.5, lender);
-        Transaction transaction = new Transaction(item, lender, borrower, 5, "2022-01-03");
+        Transaction transaction = new Transaction(item, borrower, 5, "2022-01-03");
         transactionList.add(transaction);
         transactionList.markFinished(1);
         assertTrue(transactionList.getTransaction(1).isFinished());
@@ -62,7 +62,7 @@ class TransactionListTest {
         User lender = new User("John Doe", 45, "93746378");
         User borrower = new User("Doe John", 23, "12312378");
         Item item = new Item("Broom", 1, 0.5, lender);
-        Transaction transaction = new Transaction(item, lender, borrower, 5, "2022-01-03");
+        Transaction transaction = new Transaction(item, borrower, 5, "2022-01-03");
         transactionList.add(transaction);
         transactionList.unmarkFinished(1);
         assertFalse(transactionList.getTransaction(1).isFinished());
@@ -74,7 +74,7 @@ class TransactionListTest {
         User lender = new User("John Doe", 45, "93746378");
         User borrower = new User("Doe John", 23, "12312378");
         Item item = new Item("Broom", 1, 0.5, lender);
-        Transaction transaction = new Transaction(item, lender, borrower, 5, "2022-01-03");
+        Transaction transaction = new Transaction(item, borrower, 5, "2022-01-03");
         transactionList.add(transaction);
         transactionList.delete(1);
         assertEquals(0, transactionList.getSize());
