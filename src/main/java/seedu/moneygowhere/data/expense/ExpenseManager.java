@@ -1,5 +1,8 @@
 package seedu.moneygowhere.data.expense;
 
+import seedu.moneygowhere.common.Messages;
+import seedu.moneygowhere.exceptions.ExpenseManagerExpenseNotFoundException;
+
 import java.util.ArrayList;
 
 /**
@@ -17,20 +20,32 @@ public class ExpenseManager {
         expenses.add(expense);
     }
 
-    public Expense getExpense(int expenseIndex) {
-        return expenses.get(expenseIndex);
+    public Expense getExpense(int expenseIndex) throws ExpenseManagerExpenseNotFoundException {
+        try {
+            return expenses.get(expenseIndex);
+        } catch (IndexOutOfBoundsException exception) {
+            throw new ExpenseManagerExpenseNotFoundException(Messages.EXPENSE_MANAGER_ERROR_EXPENSE_NOT_FOUND);
+        }
     }
 
     public ArrayList<Expense> getExpenses() {
         return new ArrayList<>(expenses);
     }
 
-    public void deleteExpense(int expenseIndex) {
-        expenses.remove(expenseIndex);
+    public void deleteExpense(int expenseIndex) throws ExpenseManagerExpenseNotFoundException {
+        try {
+            expenses.remove(expenseIndex);
+        } catch (IndexOutOfBoundsException exception) {
+            throw new ExpenseManagerExpenseNotFoundException(Messages.EXPENSE_MANAGER_ERROR_EXPENSE_NOT_FOUND);
+        }
     }
 
-    public void editExpense(int expenseIndex, Expense expense) {
-        expenses.set(expenseIndex, expense);
+    public void editExpense(int expenseIndex, Expense expense) throws ExpenseManagerExpenseNotFoundException {
+        try {
+            expenses.set(expenseIndex, expense);
+        } catch (IndexOutOfBoundsException exception) {
+            throw new ExpenseManagerExpenseNotFoundException(Messages.EXPENSE_MANAGER_ERROR_EXPENSE_NOT_FOUND);
+        }
     }
 
     public void updateExpenses(ArrayList<Expense> expenses) {
