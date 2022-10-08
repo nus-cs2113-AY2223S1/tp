@@ -48,6 +48,7 @@ public class Timetable {
         String earliest = lessons.stream().map(s -> s.getRight().startTime).min(String::compareTo).orElseThrow();
         String latest = lessons.stream().map(s -> s.getRight().endTime).max(String::compareTo).orElseThrow();
         this.modules = new ArrayList<>(lessons.stream().map(s -> s.getLeft()).collect(Collectors.toSet()));
+        this.modules.sort((a, b) -> a.moduleCode.compareTo(b.moduleCode));
         this.firstTime = Integer.parseInt(earliest.substring(0, 2)); // round down to the hour
         this.lastTime = Integer.parseInt(latest.substring(0, 2)) + 1; // round up to next hour
         this.timeslots = (this.lastTime - this.firstTime) * 2 + 1; // every half an hour
