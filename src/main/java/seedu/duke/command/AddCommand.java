@@ -28,25 +28,27 @@ import static seedu.duke.common.InfoMessages.INFO_ADD_INCOME;
  * Represents an add command object that will execute the operations for Add command.
  */
 public class AddCommand extends Command {
-
-    // The command word used to trigger the execution of Moolah Manager's operations.
+    private static final String LINE_SEPARATOR = System.lineSeparator();
+    // The command word used to trigger the execution of Moolah Manager's operations
     public static final String COMMAND_WORD = "ADD";
-    // The description for the usage of command.
+
+    // The description for the usage of command
     public static final String COMMAND_DESCRIPTION = "To add a new transaction entry, which could be " +
             "either an \"income\" or an \"expense\" into the transaction list.";
-    // The guiding information for the usage of command.
+    // The guiding information for the usage of command
     public static final String COMMAND_USAGE = "Usage: add t/TYPE c/CATEGORY a/AMOUNT d/DATE i/DESCRIPTION";
-    // The formatting information for the parameters used by the command.
-    public static final String COMMAND_PARAMETERS_INFO = "Parameters information: \n" +
-            "TYPE: The type of transaction. Only \"income\" or \"expense\" is accepted.\n" +
-            "CATEGORY: A category for the transaction. Only string containing alphabets is accepted.\n" +
-            "AMOUNT: Value of the transaction in numerical form. Only integer within 0 and 10000000 is accepted.\n" +
-            "DATE: Date of the transaction. The format must be in \"yyyyMMdd\".\n" +
+    // The formatting information for the parameters used by the command
+    public static final String COMMAND_PARAMETERS_INFO = "Parameters information:" + LINE_SEPARATOR +
+            "TYPE: The type of transaction. Only \"income\" or \"expense\" is accepted." + LINE_SEPARATOR +
+            "CATEGORY: A category for the transaction. Only string containing alphabets is accepted." + LINE_SEPARATOR +
+            "AMOUNT: Value of the transaction in numerical form. Only integer within 0 and 10000000 is accepted." +
+            LINE_SEPARATOR + "DATE: Date of the transaction. The format must be in \"yyyyMMdd\"." + LINE_SEPARATOR +
             "DESCRIPTION: More information regarding the transaction, written without any space.";
 
+
     // Basic help description
-    public static final String COMMAND_HELP = "Command Word: " + COMMAND_WORD + "\n" +
-            COMMAND_DESCRIPTION + "\n" + COMMAND_USAGE + "\n";
+    public static final String COMMAND_HELP = "Command Word: " + COMMAND_WORD + "\n" + COMMAND_DESCRIPTION + "\n" +
+            COMMAND_USAGE + "\n";
     // Detailed help description
     public static final String COMMAND_DETAILED_HELP = COMMAND_HELP + COMMAND_PARAMETERS_INFO + "\n";
 
@@ -70,12 +72,11 @@ public class AddCommand extends Command {
         Checks if userInput is in the correct input format by further parsing,
         before adding entry to arraylist
         */
-
         String[] splits = input.split(" ");
 
         checkExtraTagExist(splits); // if more than 5 tags exist in input, throw exception
         checkTagsExist(splits); // if the mandatory tags does not exist, throw exception
-        checkTagStringExist(splits); // if the tag string (parameter) does not exist, throw exception.
+        checkParameterExist(splits); // if the parameter does not exist, throw exception.
 
         String description = "";
         int amount = 0;
@@ -115,8 +116,8 @@ public class AddCommand extends Command {
         return false;
     }
 
-    private static void addTransactionByType(TransactionList transactions, String type, String description,
-                                             int amount, String category, LocalDate date)
+    private static void addTransactionByType(TransactionList transactions, String type, String description, int amount,
+                                             String category, LocalDate date)
             throws AddTransactionUnknownTypeException {
 
         switch (type) {
@@ -159,7 +160,7 @@ public class AddCommand extends Command {
      * @param splits The user input after the command word, split into a list for every space found.
      * @throws AddTransactionMissingParameterException Extra tag exception.
      */
-    private static void checkTagStringExist(String[] splits) throws AddTransactionMissingParameterException {
+    private static void checkParameterExist(String[] splits) throws AddTransactionMissingParameterException {
         for (String split : splits) {
             if (split.length() <= 2) {
                 throw new AddTransactionMissingParameterException();

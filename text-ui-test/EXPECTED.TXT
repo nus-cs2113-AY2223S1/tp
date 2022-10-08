@@ -15,15 +15,15 @@ Usage: add t/TYPE c/CATEGORY a/AMOUNT d/DATE i/DESCRIPTION
 
 Command Word: LIST
 To list all or some transactions based on selection.
-Usage: list [t/TYPE] [c/CATEGORY] [d/DATE] 
+Usage: list [t/TYPE] [c/CATEGORY] [d/DATE]
 
 Command Word: FIND
-To find ...
-Usage: find ...
+To find specific transaction(s) based on any keywords inputted by the user.
+Usage: find KEYWORDS
 
-Command Word: GET
-To get ...
-Usage: get ...
+Command Word: STATS
+To get statistics of the transactions such as the total savings for each category, summary of expenditure, etc.
+Usage: stats s/STATISTICS_TYPE
 
 Command Word: EDIT
 To edit a specific entry in the list of transactions.
@@ -48,13 +48,13 @@ Command Word: HELP
 To display a list of available commands with their respective expected parameters.
 Type "help o/detailed" for a detailed version of all parameters used.
 Usage: help [o/detailed]
-Parameters information: 
+Parameters information:
 (Optional) o/detailed - Detailed version of guide.
 
 Command Word: ADD
 To add a new transaction entry, which could be either an "income" or an "expense" into the transaction list.
 Usage: add t/TYPE c/CATEGORY a/AMOUNT d/DATE i/DESCRIPTION
-Parameters information: 
+Parameters information:
 TYPE: The type of transaction. Only "income" or "expense" is accepted.
 CATEGORY: A category for the transaction. Only string containing alphabets is accepted.
 AMOUNT: Value of the transaction in numerical form. Only integer within 0 and 10000000 is accepted.
@@ -63,28 +63,28 @@ DESCRIPTION: More information regarding the transaction, written without any spa
 
 Command Word: LIST
 To list all or some transactions based on selection.
-Usage: list [t/TYPE] [c/CATEGORY] [d/DATE] 
-Parameters information: 
+Usage: list [t/TYPE] [c/CATEGORY] [d/DATE]
+Parameters information:
 (Optional) TYPE - The type of transaction. Only "income" or "expense" is accepted.
 (Optional) CATEGORY: A category for the transaction. Only string containing alphabets is accepted.
 (Optional) DATE: Date of the transaction. The format must be in "yyyyMMdd".
 
 Command Word: FIND
-To find ...
-Usage: find ...
-Parameters information: 
-PARAMETERNAME: ... 
+To find specific transaction(s) based on any keywords inputted by the user.
+Usage: find KEYWORDS
+Parameters information:
+KEYWORDS: Any partial or full keyword(s) that matches the details of the transaction, such as type, category, amount, date or description.
 
-Command Word: GET
-To get ...
-Usage: get ...
-Parameters information: 
-PARAMETERNAME: ... 
+Command Word: STATS
+To get statistics of the transactions such as the total savings for each category, summary of expenditure, etc.
+Usage: stats s/STATISTICS_TYPE
+Parameters information:
+STATISTICS_TYPE: The type of statistics to be generated. Only "categories" is accepted.
 
 Command Word: EDIT
 To edit a specific entry in the list of transactions.
 Usage: edit e/ENTRY [t/TYPE] [c/CATEGORY] [a/AMOUNT] [d/DATE] [i/DESCRIPTION]
-Parameters information: 
+Parameters information:
 ENTRY: The entry number of the transaction. Type "list" to list all the entry numbers of transaction.
 (Optional) TYPE: The type of transaction. Only "income" or "expense" is accepted.
 (Optional) CATEGORY: A category for the transaction. Only string containing alphabets is accepted.
@@ -95,9 +95,8 @@ ENTRY: The entry number of the transaction. Type "list" to list all the entry nu
 Command Word: DELETE
 To delete a specific entry in the list of transactions.
 Usage: delete e/ENTRY
-Parameters information: 
+Parameters information:
 ENTRY: The entry number of the transaction. Type "list" to list all the entry numbers of transaction.
-
 
 Command Word: PURGE
 To purge a all entries in the list of transactions.
@@ -123,15 +122,15 @@ Usage: add t/TYPE c/CATEGORY a/AMOUNT d/DATE i/DESCRIPTION
 
 Command Word: LIST
 To list all or some transactions based on selection.
-Usage: list [t/TYPE] [c/CATEGORY] [d/DATE] 
+Usage: list [t/TYPE] [c/CATEGORY] [d/DATE]
 
 Command Word: FIND
-To find ...
-Usage: find ...
+To find specific transaction(s) based on any keywords inputted by the user.
+Usage: find KEYWORDS
 
-Command Word: GET
-To get ...
-Usage: get ...
+Command Word: STATS
+To get statistics of the transactions such as the total savings for each category, summary of expenditure, etc.
+Usage: stats s/STATISTICS_TYPE
 
 Command Word: EDIT
 To edit a specific entry in the list of transactions.
@@ -156,13 +155,13 @@ Command Word: HELP
 To display a list of available commands with their respective expected parameters.
 Type "help o/detailed" for a detailed version of all parameters used.
 Usage: help [o/detailed]
-Parameters information: 
+Parameters information:
 (Optional) o/detailed - Detailed version of guide.
 
 Command Word: ADD
 To add a new transaction entry, which could be either an "income" or an "expense" into the transaction list.
 Usage: add t/TYPE c/CATEGORY a/AMOUNT d/DATE i/DESCRIPTION
-Parameters information: 
+Parameters information:
 TYPE: The type of transaction. Only "income" or "expense" is accepted.
 CATEGORY: A category for the transaction. Only string containing alphabets is accepted.
 AMOUNT: Value of the transaction in numerical form. Only integer within 0 and 10000000 is accepted.
@@ -171,28 +170,28 @@ DESCRIPTION: More information regarding the transaction, written without any spa
 
 Command Word: LIST
 To list all or some transactions based on selection.
-Usage: list [t/TYPE] [c/CATEGORY] [d/DATE] 
-Parameters information: 
+Usage: list [t/TYPE] [c/CATEGORY] [d/DATE]
+Parameters information:
 (Optional) TYPE - The type of transaction. Only "income" or "expense" is accepted.
 (Optional) CATEGORY: A category for the transaction. Only string containing alphabets is accepted.
 (Optional) DATE: Date of the transaction. The format must be in "yyyyMMdd".
 
 Command Word: FIND
-To find ...
-Usage: find ...
-Parameters information: 
-PARAMETERNAME: ... 
+To find specific transaction(s) based on any keywords inputted by the user.
+Usage: find KEYWORDS
+Parameters information:
+KEYWORDS: Any partial or full keyword(s) that matches the details of the transaction, such as type, category, amount, date or description.
 
-Command Word: GET
-To get ...
-Usage: get ...
-Parameters information: 
-PARAMETERNAME: ... 
+Command Word: STATS
+To get statistics of the transactions such as the total savings for each category, summary of expenditure, etc.
+Usage: stats s/STATISTICS_TYPE
+Parameters information:
+STATISTICS_TYPE: The type of statistics to be generated. Only "categories" is accepted.
 
 Command Word: EDIT
 To edit a specific entry in the list of transactions.
 Usage: edit e/ENTRY [t/TYPE] [c/CATEGORY] [a/AMOUNT] [d/DATE] [i/DESCRIPTION]
-Parameters information: 
+Parameters information:
 ENTRY: The entry number of the transaction. Type "list" to list all the entry numbers of transaction.
 (Optional) TYPE: The type of transaction. Only "income" or "expense" is accepted.
 (Optional) CATEGORY: A category for the transaction. Only string containing alphabets is accepted.
@@ -203,9 +202,8 @@ ENTRY: The entry number of the transaction. Type "list" to list all the entry nu
 Command Word: DELETE
 To delete a specific entry in the list of transactions.
 Usage: delete e/ENTRY
-Parameters information: 
+Parameters information:
 ENTRY: The entry number of the transaction. Type "list" to list all the entry numbers of transaction.
-
 
 Command Word: PURGE
 To purge a all entries in the list of transactions.
@@ -232,13 +230,6 @@ ____________________________________________________________
 ____________________________________________________________
 I have added the following Expense transaction:
 [-][transport] $1 at Oct 02 2022 | Description: bus_fare
-____________________________________________________________
-____________________________________________________________
-Here are the total savings for each category:
-[food] $20
-[salary] $2000
-[transport] $1
-
 ____________________________________________________________
 ____________________________________________________________
 Keyword(s) for your search expression missing, please check your input!
