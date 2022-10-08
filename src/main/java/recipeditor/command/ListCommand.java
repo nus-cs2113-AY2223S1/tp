@@ -8,16 +8,17 @@ public class ListCommand extends Command {
 
     /**
      * execute list command, store all recipes in a string in the
-     * format of <index> <recipe descreption>
+     * format of index followed by recipe description.
+     *
      * @return a compiled list of all recipes
      */
     public CommandResult execute() {
-        String result = "";
+        StringBuilder result = new StringBuilder();
         int i = 1;
-        for(Recipe recipe : RecipeList.getRecipes()) {
-            result += String.format("%n%d. %s", i++, recipe.toString());
+        for (Recipe recipe : RecipeList.getRecipes()) {
+            result.append(String.format("%n%d. %s", i++, recipe.toString()));
         }
-        return new CommandResult(result);
+        return new CommandResult(result.toString());
     }
 }
 
