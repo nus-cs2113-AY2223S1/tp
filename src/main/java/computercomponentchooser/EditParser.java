@@ -18,7 +18,6 @@ public class EditParser {
 
     public static void parse(String line) {
         String command = getParameter(line, COMMAND_PARAMETER).toLowerCase();
-
         switch (command) {
             case "add":
                 //method to add computer parts to the build
@@ -32,6 +31,7 @@ public class EditParser {
                 //go back to main mode
             default:
                 //handle exception cases
+                break;
         }
     }
 }

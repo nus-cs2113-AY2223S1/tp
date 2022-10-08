@@ -12,7 +12,7 @@ public class ComputerComponentChooser {
 
         while (!Parser.checkBye(line)) {
             if (Parser.checkEdit(line)) {
-                while(!EditParser.checkBack(line)) {
+                while (!EditParser.checkBack(line)) {
                     //EditParser.parse(line);
                     line = in.nextLine();
                 }
