@@ -46,6 +46,13 @@ public class Parser {
         return keywords.length == 1;
     }
 
+    /**
+     * Checks if the user entered a valid search or add or delete command in the format
+     * "search|add|delete MODULE_CODE".
+     * @param keywords contains the user input split by spaces
+     * @param command  the command that the user wants to execute
+     * @return type of command
+     */
     public static Command searchAddDeleteCommand(String[] keywords, Command command) {
         boolean isValidCommand = isTwoWordsCommand(keywords) && isModuleCode(keywords[1]);
         if (isValidCommand) {
@@ -56,7 +63,7 @@ public class Parser {
     }
 
     private static Command determineWrongCommand(String[] keywords) {
-        if (!isTwoWordsCommand(keywords)) {
+        if (isOneWordCommand(keywords)) {
             return new IncompleteCommand();
         } else if (!isModuleCode(keywords[1])) {
             return new InvalidModuleCommand();

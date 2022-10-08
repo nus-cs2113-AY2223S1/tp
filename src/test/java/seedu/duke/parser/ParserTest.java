@@ -20,10 +20,11 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_wrongSearchInput_returnNewUnknownCommand() {
+    public void parse_wrongSearchInput_returnNewErrorCommand() {
         assertTrue(Parser.parse("search") instanceof IncompleteCommand);
         assertTrue(Parser.parse("search csss2113") instanceof InvalidModuleCommand);
         assertTrue(Parser.parse("search Cs20401c") instanceof InvalidModuleCommand);
+        assertTrue(Parser.parse("search Cs2040c my love") instanceof UnknownCommand);
     }
 
     @Test
@@ -39,6 +40,11 @@ public class ParserTest {
     @Test
     public void parse_helpInput_returnNewHelpCommand() {
         assertTrue(Parser.parse("help") instanceof HelpCommand);
+    }
+
+    @Test
+    public void parse_wrongHelpInput_returnNewUnknownCommand() {
+        assertTrue(Parser.parse("help me") instanceof UnknownCommand);
     }
 
     @Test
