@@ -4,6 +4,8 @@ import seedu.api.Api;
 import seedu.api.exception.EmptyResponseException;
 import seedu.data.CarparkList;
 
+import seedu.ui.Ui;
+
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -13,12 +15,8 @@ public class Parking {
      * Main entry-point for the java.duke.Duke application.
      */
     public static void main(String[] args) {
-        String logo = "LOGO for parKING";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("What is your name?");
-
-        Scanner in = new Scanner(System.in);
-        System.out.println("Hello " + in.nextLine());
+        Ui ui = new Ui();
+        ui.greetUser();
 
         Api api = new Api();
         api.asyncExecuteRequest(); // Send request to API and wait asynchronously
@@ -32,9 +30,9 @@ public class Parking {
             api.fetchData();
             System.out.println("Completed fetch data!"); // Debug line
         } catch (EmptyResponseException e) {
-            System.out.println("Failed to fetch data!");
+            ui.showFetchError();
         } catch (IOException e) {
-            System.out.println("Failed to save data!");
+            ui.showSaveError();
         } finally {
             System.out.println("Fetching and save data sequence terminated"); // Debug line
         }

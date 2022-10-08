@@ -1,6 +1,7 @@
 package seedu.api;
 
 import seedu.api.exception.EmptyResponseException;
+import seedu.ui.Ui;
 
 import java.io.IOException;
 import java.net.URI;
@@ -24,11 +25,13 @@ public class Api {
     private HttpRequest request;
     private CompletableFuture<HttpResponse<String>> responseFuture;
     private Storage storage;
+    private final Ui ui;
 
     public Api() {
-        client = HttpClient.newHttpClient();
+        this.client = HttpClient.newHttpClient();
         generateHttpRequestCarpark();
-        storage = new Storage(API_JSON_DIRECTORY, LTA_JSON_FILE);
+        this.storage = new Storage(API_JSON_DIRECTORY, LTA_JSON_FILE);
+        this.ui = new Ui();
     }
 
     private void generateHttpRequestCarpark() {
@@ -50,9 +53,9 @@ public class Api {
                 result = response.body();
             }
         } catch (ExecutionException | InterruptedException e) {
-            System.out.println("Something wrong happened during fetching data.");
+            ui.showFetchError();
         } catch (TimeoutException e) {
-            System.out.println("Fetch Timeout, try again!");
+            ui.showFetchTimeout();
         }
         return result;
     }

@@ -1,5 +1,7 @@
 package seedu.api;
 
+import seedu.ui.Ui;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -9,12 +11,14 @@ public class Storage {
     private final String DIRECTORY_PATH;
     private final String FILE_PATH;
     private final File FILE;
+    private final Ui ui;
 
     public Storage(String directory, String file) {
         DIRECTORY_PATH = directory;
         FILE_PATH = Paths.get(directory, file).toString();
         FILE = new File(FILE_PATH);
         checkFileExist();
+        this.ui = new Ui();
     }
 
     private void checkFileExist() {
@@ -26,7 +30,7 @@ public class Storage {
         try {
             FILE.createNewFile();
         } catch (IOException e) {
-            System.out.println("Something wrong happened in file creation.");
+            ui.showCreateFileError();
         }
     }
 
