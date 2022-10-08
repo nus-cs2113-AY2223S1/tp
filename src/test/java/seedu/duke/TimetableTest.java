@@ -9,8 +9,8 @@ class TimetableTest {
 
     @Test
     void listModules() {
-        timetable.addNewModule("SE and OOP", "CS2113");
-        timetable.addNewModule("DSA", "CS2040");
+        timetable.addNewModule("SE and OOP", "CS2113", "Sample Description");
+        timetable.addNewModule("DSA", "CS2040", "Sample Description");
         assertEquals("Here are your modules:\n"
                 + "1. CS2113: SE and OOP\n2. CS2040: DSA\n", timetable.listModules());
     }
