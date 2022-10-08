@@ -278,7 +278,10 @@ ____________________________________________________________
 Invalid date, please ensure your date format is correct!
 ____________________________________________________________
 ____________________________________________________________
-Invalid date, please ensure your date format is correct!
+Mandatory parameter(s) missing, please check your input!
+____________________________________________________________
+____________________________________________________________
+Mandatory tag(s) missing, please check your input!
 ____________________________________________________________
 ____________________________________________________________
 Here are your transaction records:

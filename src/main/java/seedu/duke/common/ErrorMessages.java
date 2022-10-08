@@ -12,6 +12,9 @@ public enum ErrorMessages {
     ERROR_ADD_COMMAND_INVALID_INDEX("Invalid index, please ensure your index is correct!"),
     ERROR_ADD_COMMAND_INVALID_TYPE("Type of transaction given is invalid, please check your input!"),
     ERROR_ADD_COMMAND_MISSING_TAG("Mandatory tag(s) missing, please check your input!"),
+    ERROR_ADD_COMMAND_EXTRA_TAG("Additional tag(s) detected, please check your input!"),
+    ERROR_ADD_COMMAND_MISSING_PARAMETER("Mandatory parameter(s) missing, please check your input!"),
+
     ERROR_FIND_COMMAND_MISSING_KEYWORDS("Keyword(s) for your search expression missing, please check your input!");
 
     public final String message;
