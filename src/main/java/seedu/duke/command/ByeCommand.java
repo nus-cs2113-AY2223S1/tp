@@ -8,7 +8,7 @@ import seedu.duke.data.TransactionList;
  * Represents a bye command object that will execute the operations for Bye command.
  */
 public class ByeCommand extends Command {
-
+    private static final String LINE_SEPARATOR = System.lineSeparator();
     // The command word used to trigger the execution of Moolah Manager's operations.
     public static final String COMMAND_WORD = "BYE";
     // The description for the usage of command.
@@ -19,11 +19,15 @@ public class ByeCommand extends Command {
     public static final String COMMAND_PARAMETERS_INFO = "Parameters information: -NIL-";
 
     // Basic help description
-    public static final String COMMAND_HELP = "Command Word: " + COMMAND_WORD + "\n"
-            + COMMAND_DESCRIPTION + "\n"
-            + COMMAND_USAGE + "\n";
+    public static final String COMMAND_HELP = "Command Word: " + COMMAND_WORD
+            + LINE_SEPARATOR
+            + COMMAND_DESCRIPTION
+            + LINE_SEPARATOR
+            + COMMAND_USAGE
+            + LINE_SEPARATOR;
     // Detailed help description
-    public static final String COMMAND_DETAILED_HELP = COMMAND_HELP + COMMAND_PARAMETERS_INFO + "\n";
+    public static final String COMMAND_DETAILED_HELP = COMMAND_HELP + COMMAND_PARAMETERS_INFO
+            + LINE_SEPARATOR;
 
     public ByeCommand() {
     }

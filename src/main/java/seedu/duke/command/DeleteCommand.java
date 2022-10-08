@@ -13,24 +13,29 @@ import static seedu.duke.common.InfoMessages.INFO_DELETE;
  * Represents a delete command object that will execute the operations for Delete command.
  */
 public class DeleteCommand extends Command {
-
-    // The command word used to trigger the execution of Moolah Manager's operations.
+    private static final String LINE_SEPARATOR = System.lineSeparator();
+    // The command word used to trigger the execution of Moolah Manager's operations
     public static final String COMMAND_WORD = "DELETE";
-    // The description for the usage of command.
+    // The description for the usage of command
     public static final String COMMAND_DESCRIPTION = "To delete a specific entry in the list of transactions.";
-    // The guiding information for the usage of command.
+    // The guiding information for the usage of command
     public static final String COMMAND_USAGE = "Usage: delete e/ENTRY";
-    // The formatting information for the parameters used by the command.
-    public static final String COMMAND_PARAMETERS_INFO = "Parameters information: \n"
+    // The formatting information for the parameters used by the command
+    public static final String COMMAND_PARAMETERS_INFO = "Parameters information:"
+            + LINE_SEPARATOR
             + "ENTRY: The entry number of the transaction. "
-            + "Type \"list\" to list all the entry numbers of transaction.\n";
+            + "Type \"list\" to list all the entry numbers of transaction.";
 
     // Basic help description
-    public static final String COMMAND_HELP = "Command Word: " + COMMAND_WORD + "\n"
-            + COMMAND_DESCRIPTION + "\n"
-            + COMMAND_USAGE + "\n";
+    public static final String COMMAND_HELP = "Command Word: " + COMMAND_WORD
+            + LINE_SEPARATOR
+            + COMMAND_DESCRIPTION
+            + LINE_SEPARATOR
+            + COMMAND_USAGE
+            + LINE_SEPARATOR;
     // Detailed help description
-    public static final String COMMAND_DETAILED_HELP = COMMAND_HELP + COMMAND_PARAMETERS_INFO + "\n";
+    public static final String COMMAND_DETAILED_HELP = COMMAND_HELP + COMMAND_PARAMETERS_INFO
+            + LINE_SEPARATOR;
 
     private String input;
 
