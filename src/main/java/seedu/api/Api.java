@@ -19,7 +19,6 @@ import static seedu.common.CommonFiles.LTA_JSON_FILE;
 
 public class Api {
     private final String API_KEY = "1B+7tBxzRNOtFbTxGcCiYA==";
-
     private String authHeaderName = "AccountKey";
     private HttpClient client;
     private HttpRequest request;
