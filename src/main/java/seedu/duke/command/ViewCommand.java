@@ -22,17 +22,17 @@ public class ViewCommand extends Command {
         String[] argumentList = Parser.getArgumentList(arguments);
         String viewType = argumentList[0];
         switch (viewType) {
-            case ("biometrics"):
-                viewBiometrics();
-                break;
-            case ("food"):
-                viewFood();
-                break;
-            case ("exercise"):
-                viewExercise();
-                break;
-            default:
-                handleInvalidViewType();
+        case ("biometrics"):
+            viewBiometrics();
+            break;
+        case ("food"):
+            viewFood();
+            break;
+        case ("exercise"):
+            viewExercise();
+            break;
+        default:
+            handleInvalidViewType();
         }
     }
 
@@ -50,7 +50,7 @@ public class ViewCommand extends Command {
         }
     }
 
-    private void viewExercise(){
+    private void viewExercise() {
         for (int i = 0; i < exerciseList.size(); i++) {
             ui.output((i + 1) + " " + (exerciseList.get(i)).toString());
         }

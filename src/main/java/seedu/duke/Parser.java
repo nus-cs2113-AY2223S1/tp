@@ -27,7 +27,7 @@ public class Parser {
             if (arguments.split(" ")[0] == "food") {
                 return new AddFoodCommand(arguments);
             }
-            if(arguments.split(" ")[0] == "exercise") {
+            else if (arguments.split(" ")[0] == "exercise") {
                 return new AddExerciseCommand(arguments);
             }
         case "view":

@@ -7,6 +7,7 @@ import seedu.duke.Ui;
 import seedu.duke.exception.IllegalValueException;
 
 import java.util.ArrayList;
+
 public class AddExerciseCommand extends Command {
     private Ui ui;
     private String arguments;
@@ -32,7 +33,6 @@ public class AddExerciseCommand extends Command {
             String description = argumentList[1];
             int repetitions = Integer.parseInt(argumentList[2]);
             int calories = Integer.parseInt(argumentList[3]);
-
             exercise = new Exercise(description, repetitions ,calories);
             exerciseList.add(exercise);
             ui.output(exercise.toString());
