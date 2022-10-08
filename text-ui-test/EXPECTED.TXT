@@ -1,5 +1,4 @@
-I am Duke, your Recipe Notetaker!
-____________________________________________________________
-Please write your command below
-Hello test
-Please write your command below
+Program starting!
+Parseable command at the momemt: add, delete, list, view, exit
+>>> Echo CommandResult message: exit
+Program exiting

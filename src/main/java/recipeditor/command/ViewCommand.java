@@ -1,8 +1,7 @@
 package recipeditor.command;
 
-public class ListCommand extends Command {
-    public static final String TYPE = "list";
-
+public class ViewCommand extends Command {
+    public static final String TYPE = "view";
 
 
     public CommandResult execute() {
@@ -11,4 +10,3 @@ public class ListCommand extends Command {
         return new CommandResult(TYPE);
     }
 }
-
