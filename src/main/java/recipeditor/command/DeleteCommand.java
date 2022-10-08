@@ -1,8 +1,12 @@
 package recipeditor.command;
 
-public class DeleteCommand extends Command {
-    public static final String COMMAND_TYPE = "delete";
+import recipeditor.recipe.Recipe;
+import recipeditor.recipe.RecipeList;
 
+public class DeleteCommand extends Command {
+
+    public static final String COMMAND_TYPE = "delete";
+  
     private final int index;
 
     /**
@@ -23,6 +27,11 @@ public class DeleteCommand extends Command {
         return this.index;
     }
 
+    public CommandResult execute() {
+        Recipe deletedRecipe = RecipeList.getRecipes().get(index);
+        RecipeList.getRecipes().remove(index);
+        return new CommandResult(deletedRecipe + " is deleted.%n");
+    }
 
 }
 
