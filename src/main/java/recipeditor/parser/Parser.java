@@ -1,11 +1,12 @@
 package recipeditor.parser;
 
 import recipeditor.command.AddCommand;
-import recipeditor.command.InvalidCommand;
-import recipeditor.command.ListCommand;
 import recipeditor.command.Command;
-import recipeditor.command.DeleteCommand;
+import recipeditor.command.ListCommand;
 import recipeditor.command.ExitCommand;
+import recipeditor.command.InvalidCommand;
+import recipeditor.command.ViewCommand;
+import recipeditor.command.DeleteCommand;
 import recipeditor.ui.AddMode;
 import recipeditor.ui.Ui;
 
@@ -27,6 +28,8 @@ public class Parser {
             return new ExitCommand();
         case DeleteCommand.TYPE:
             return new DeleteCommand(0); // TODO: This is dummy variable only
+        case ViewCommand.TYPE:
+            return new ViewCommand();
         default:
             return new InvalidCommand();
         }
