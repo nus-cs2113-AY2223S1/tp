@@ -16,7 +16,7 @@ public class AddCommand extends Command {
     public CommandResult execute() {
         // TODO: Execution of command
         if (isValid) {
-            // RecipeList.getRecipes().add(addedRecipe); HERE SEEM TO THROW ERROR
+            RecipeList.getRecipes().add(addedRecipe); //HERE SEEM TO THROW ERROR
             return new CommandResult(TYPE + " Added");
         } else {
             return new CommandResult(TYPE + " Invalid");

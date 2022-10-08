@@ -3,7 +3,8 @@ package recipeditor.recipe;
 import java.util.ArrayList;
 
 public class RecipeList {
-    private static ArrayList<Recipe> recipes;
+    private static final int MAX_RECIPE = 100;
+    private static ArrayList<Recipe> recipes = new ArrayList<Recipe>(MAX_RECIPE);
 
     public RecipeList(ArrayList<Recipe> load) {
         recipes = new ArrayList<>();

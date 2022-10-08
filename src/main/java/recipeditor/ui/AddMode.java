@@ -7,13 +7,13 @@ import recipeditor.recipe.RecipeList;
 public class AddMode {
     private static final String TITLE = "Recipe Title";
     private static final String DESCRIPTION = "Recipe Description";
-    private static final String INGREDIENTS = "Add at least 1 ingredients in this format";
-    private static final String FORMAT = "\t <ingredient name> / <amount> / <unit>";
-    private static final String DONE_REMINDER = "\t Type \"done\" to finish adding";
+    private static final String INGREDIENTS = "Add at least 1 ingredients in this format:  ";
+    private static final String FORMAT = "<ingredient name> / <amount_in_float> / <unit>  ";
+    private static final String DONE_REMINDER = "Type \"done\" to finish adding";
     private static final String DONE = "done";
     private static final String ENTER = "ENTERING ADD MODE";
     private static final String EXIT = "EXITING ADD MODE";
-    private static final String ERROR_PARSING = "Ingredient format: ";
+    private static final String ERROR_PARSING = "Error Parsing Ingredients";
 
     public Recipe addedRecipe = new Recipe();
     public boolean isValid = false;
@@ -50,7 +50,7 @@ public class AddMode {
         Ui.showMessage(TITLE);
         input = Ui.readInput();
         addedRecipe.setTitle(input);
-        Ui.showMessageInline("Title ", addedRecipe.getTitle());
+        Ui.showMessageInline("Title: ", addedRecipe.getTitle());
         stage++; // Advance to next stage
         return input;
 
@@ -60,7 +60,7 @@ public class AddMode {
         Ui.showMessage(DESCRIPTION);
         input = Ui.readInput();
         addedRecipe.setDescription(input);
-        Ui.showMessageInline("Description ", addedRecipe.getDescription());
+        Ui.showMessageInline("Description: ", addedRecipe.getDescription());
         stage++; // Advance to next stage
         return input;
 
@@ -81,9 +81,11 @@ public class AddMode {
         try {
             double amount = convertToDouble(parsed[1]);
             addedRecipe.getIngredients().add(new Ingredient(parsed[0], amount, parsed[2]));
+            Ui.showMessageInline("Ingredient registered: " + addedRecipe.getIngredients().toString()
+                    + "\t To Implement Ingredients toString()"); //TODO:
             stage++;
         } catch (Exception e) {
-            Ui.showMessage(ERROR_PARSING, FORMAT);
+            Ui.showMessage(ERROR_PARSING);
         }
     }
 
