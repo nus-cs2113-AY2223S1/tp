@@ -4,12 +4,12 @@ import seedu.duke.id.IdGenerator;
 import seedu.duke.user.User;
 
 public class Item {
-    public String name;
-    public String id;
-    public User owner;
-    public double pricePerDay;
-    public boolean isAvailable;
-    public Category.Categories category;
+    private String name;
+    private final String id;
+    private User owner;
+    private double pricePerDay;
+    private boolean isAvailable;
+    private final Category.Categories category;
 
     public Item(String name, int categoryNumber, double price, User owner) {
         this.id = IdGenerator.generateId();
@@ -18,6 +18,14 @@ public class Item {
         this.isAvailable = true;
         this.owner = owner;
         this.category = Category.mapCategory(categoryNumber);
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public void setAsAvailable() {
