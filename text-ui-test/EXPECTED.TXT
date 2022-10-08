@@ -1,4 +1,10 @@
-Hello from
-LOGO for parKING
+    ____
+ __/  |_\_
+|  _     _``-.
+'-(_)---(_)--'   _  _____ _  _  ___
+  _ __  __ _ _ _| |/ /_ _| \| |/ __|
+ | '_ \/ _` | '_| ' < | || .` | (_ |
+ | .__/\__,_|_| |_|\_\___|_|\_|\___|
+ |_|
 What is your name?
-Hello James Gosling
+Welcome to parKING, James Gosling!
