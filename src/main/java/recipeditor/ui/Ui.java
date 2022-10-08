@@ -39,12 +39,12 @@ public class Ui {
         }
     }
 
-    public static void showPrompt(){
+    public static void showPrompt() {
         System.out.print(PROMPT);
     }
 
-    public static void showMessageInline(String ... messages) {
-        for (String m : messages){
+    public static void showMessageInline(String... messages) {
+        for (String m : messages) {
             System.out.print(m + " ");
         }
         System.out.println();
