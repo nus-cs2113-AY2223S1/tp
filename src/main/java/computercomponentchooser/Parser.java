@@ -1,5 +1,7 @@
 package computercomponentchooser;
 
+import computercomponentchooser.exceptions.UnknownCommandException;
+
 import java.util.ArrayList;
 
 public class Parser {
@@ -25,20 +27,23 @@ public class Parser {
         // buildList is a temporary parameter for testing purposes
         String command = getParameters(line, COMMAND_PARAMETER);
         String name;
-        switch (command) {
-        case "bye":
-        case "list":
-            // no parsing needed
-            break;
-        case "add":
-        case "edit":
-        case "view":
-        case "delete":
-            name = getParameters(line, NAME_PARAMETER);
-            break;
-        default:
-            // insert unrecognised command exception
-            break;
+        try {
+            switch (command) {
+            case "bye":
+            case "list":
+                // no parsing needed
+                break;
+            case "add":
+            case "edit":
+            case "view":
+            case "delete":
+                name = getParameters(line, NAME_PARAMETER);
+                break;
+            default:
+                throw new UnknownCommandException();
+            }
+        } catch (UnknownCommandException e) {
+            System.out.println(e.getMessage());
         }
     }
 }
