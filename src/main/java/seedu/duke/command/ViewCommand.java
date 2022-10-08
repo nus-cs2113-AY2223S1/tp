@@ -1,11 +1,11 @@
 package seedu.duke.command;
 
 import seedu.duke.Biometrics;
-import seedu.duke.Food;
 import seedu.duke.Parser;
 import seedu.duke.Ui;
 
-import static seedu.duke.command.AddCommand.foodList;
+import static seedu.duke.command.AddFoodCommand.foodList;
+import static seedu.duke.command.AddExerciseCommand.exerciseList;
 
 public class ViewCommand extends Command {
 
@@ -22,14 +22,17 @@ public class ViewCommand extends Command {
         String[] argumentList = Parser.getArgumentList(arguments);
         String viewType = argumentList[0];
         switch (viewType) {
-        case ("biometrics"):
-            viewBiometrics();
-            break;
-        case ("food"):
-            viewFood();
-            break;
-        default:
-            handleInvalidViewType();
+            case ("biometrics"):
+                viewBiometrics();
+                break;
+            case ("food"):
+                viewFood();
+                break;
+            case ("exercise"):
+                viewExercise();
+                break;
+            default:
+                handleInvalidViewType();
         }
     }
 
@@ -44,6 +47,12 @@ public class ViewCommand extends Command {
     private void viewFood() {
         for (int i = 0; i < foodList.size(); i++) {
             ui.output((i + 1) + " " + (foodList.get(i)).toString());
+        }
+    }
+
+    private void viewExercise(){
+        for (int i = 0; i < exerciseList.size(); i++) {
+            ui.output((i + 1) + " " + (exerciseList.get(i)).toString());
         }
     }
 

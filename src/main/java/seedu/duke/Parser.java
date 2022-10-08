@@ -6,7 +6,8 @@ import seedu.duke.command.GreetCommand;
 import seedu.duke.command.HelpCommand;
 import seedu.duke.command.ViewCommand;
 import seedu.duke.command.SetCommand;
-import seedu.duke.command.AddCommand;
+import seedu.duke.command.AddFoodCommand;
+import seedu.duke.command.AddExerciseCommand;
 
 public class Parser {
 
@@ -23,7 +24,12 @@ public class Parser {
         case "set":
             return new SetCommand(arguments);
         case "add":
-            return new AddCommand(arguments);
+            if (arguments.split(" ")[0] == "food") {
+                return new AddFoodCommand(arguments);
+            }
+            if(arguments.split(" ")[0] == "exercise") {
+                return new AddExerciseCommand(arguments);
+            }
         case "view":
             return new ViewCommand(arguments);
         default:
