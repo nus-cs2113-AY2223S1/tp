@@ -8,6 +8,8 @@
                           |___/                                            
 
 Your MoneyGoWhere? Let me help you find it.
+There is no load file found...
+Please ensure the file is named correctly and is in the right directory if you have a load file.
 
 
 Name          : Test Expense 1
@@ -15,6 +17,7 @@ Date and Time : 01 Jan 2022 12:00
 Description   : null
 Amount        : 1337.37
 Category      : null
+
 The expense was added successfully.
 
 
@@ -23,6 +26,7 @@ Date and Time : 01 Jan 2022 12:01
 Description   : null
 Amount        : 10.80
 Category      : null
+
 The expense was added successfully.
 
 
@@ -31,6 +35,7 @@ Date and Time : 02 Jan 2022 12:02
 Description   : This is a test expense 3
 Amount        : 20.80
 Category      : null
+
 The expense was added successfully.
 
 
@@ -39,6 +44,7 @@ Date and Time : 03 Jan 2022 12:03
 Description   : This is a test expense 4
 Amount        : 30.90
 Category      : Category Alpha
+
 The expense was added successfully.
 
 
@@ -102,6 +108,56 @@ Amount        : 10.80
 Category      : null
 ---- EXPENSE INDEX 2 ----
 Name          : Test Expense 3
+Date and Time : 02 Jan 2022 12:02
+Description   : This is a test expense 3
+Amount        : 20.80
+Category      : null
+
+
+---- EXPENSE INDEX 2 ----
+Name          : Exp3
+Date and Time : 02 Jan 2022 12:02
+Description   : This is a test expense 3
+Amount        : 20.80
+Category      : null
+
+The expense was edited successfully.
+
+
+---- EXPENSE INDEX 1 ----
+Name          : Exp2
+Date and Time : 01 Jan 2022 12:01
+Description   : null
+Amount        : 10.70
+Category      : null
+
+The expense was edited successfully.
+
+
+---- EXPENSE INDEX 0 ----
+Name          : Exp1
+Date and Time : 01 Jan 2021 12:00
+Description   : This is a test expense 1
+Amount        : 13.37
+Category      : Category Alpha
+
+The expense was edited successfully.
+
+
+---- EXPENSE INDEX 0 ----
+Name          : Exp1
+Date and Time : 01 Jan 2021 12:00
+Description   : This is a test expense 1
+Amount        : 13.37
+Category      : Category Alpha
+---- EXPENSE INDEX 1 ----
+Name          : Exp2
+Date and Time : 01 Jan 2022 12:01
+Description   : null
+Amount        : 10.70
+Category      : null
+---- EXPENSE INDEX 2 ----
+Name          : Exp3
 Date and Time : 02 Jan 2022 12:02
 Description   : This is a test expense 3
 Amount        : 20.80
