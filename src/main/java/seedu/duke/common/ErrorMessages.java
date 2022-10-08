@@ -7,7 +7,8 @@ public enum ErrorMessages {
     ERROR_INVALID_COMMAND("Invalid command, please enter <help> if you need the list of commands."),
     ERROR_ADD_COMMAND_AMOUNT_NOT_NUMERIC("Non-Numeric input detected, please enter a numerical amount!"),
     ERROR_ADD_COMMAND_INVALID_CATEGORY("Invalid category, please ensure your category is correct!"),
-    ERROR_ADD_COMMAND_INVALID_AMOUNT("Invalid amount, please ensure your amount is in positive numerals only!"),
+    ERROR_ADD_COMMAND_INVALID_AMOUNT("Invalid amount, " +
+            "please ensure your amount is in positive numerals ($10000000 or less) only!"),
     ERROR_ADD_COMMAND_INVALID_DATE("Invalid date, please ensure your date format is correct!"),
     ERROR_ADD_COMMAND_INVALID_INDEX("Invalid index, please ensure your index is correct!"),
     ERROR_ADD_COMMAND_INVALID_TYPE("Type of transaction given is invalid, please check your input!"),

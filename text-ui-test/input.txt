@@ -18,6 +18,7 @@ add t/heheheh c/bonus a/1000000 d/03102022 i/thank_you_boss
 add t/income c/123 a/10000000 d/03102022 i/thank_you_boss
 add t/income c/bonus a/abc d/03102022 i/thank_you_boss
 add t/income c/bonus a/-1 d/03102022 i/thank_you_boss
+add t/income c/bonus a/9999999999999 d/03102022 i/thank_you_boss
 add t/income c/bonus a/10000000 d/20220101 i/thank_you_boss
 add t/income c/bonus a/10000000 d/obviouslyFalseDate i/thank_you_boss
 add t/income c/bonus a/10000000 d/ i/thank_you_boss

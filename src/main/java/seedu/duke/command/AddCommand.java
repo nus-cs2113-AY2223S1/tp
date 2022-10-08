@@ -33,22 +33,25 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "ADD";
 
     // The description for the usage of command
-    public static final String COMMAND_DESCRIPTION = "To add a new transaction entry, which could be " +
+    public static final String COMMAND_DESCRIPTION = "To add a new transaction entry, which could be "
+            +
             "either an \"income\" or an \"expense\" into the transaction list.";
     // The guiding information for the usage of command
     public static final String COMMAND_USAGE = "Usage: add t/TYPE c/CATEGORY a/AMOUNT d/DATE i/DESCRIPTION";
     // The formatting information for the parameters used by the command
-    public static final String COMMAND_PARAMETERS_INFO = "Parameters information:" + LINE_SEPARATOR +
-            "TYPE: The type of transaction. Only \"income\" or \"expense\" is accepted." + LINE_SEPARATOR +
-            "CATEGORY: A category for the transaction. Only string containing alphabets is accepted." + LINE_SEPARATOR +
-            "AMOUNT: Value of the transaction in numerical form. Only integer within 0 and 10000000 is accepted." +
-            LINE_SEPARATOR + "DATE: Date of the transaction. The format must be in \"yyyyMMdd\"." + LINE_SEPARATOR +
-            "DESCRIPTION: More information regarding the transaction, written without any space.";
+    public static final String COMMAND_PARAMETERS_INFO = "Parameters information:"
+            + LINE_SEPARATOR
+            + "TYPE: The type of transaction. Only \"income\" or \"expense\" is accepted." + LINE_SEPARATOR
+            + "CATEGORY: A category for the transaction. Only string containing alphabets is accepted."
+            + LINE_SEPARATOR
+            + "AMOUNT: Value of the transaction in numerical form. Only integer within 0 and 10000000 is accepted."
+            + LINE_SEPARATOR + "DATE: Date of the transaction. The format must be in \"yyyyMMdd\"." + LINE_SEPARATOR
+            + "DESCRIPTION: More information regarding the transaction, written without any space.";
 
 
     // Basic help description
-    public static final String COMMAND_HELP = "Command Word: " + COMMAND_WORD + "\n" + COMMAND_DESCRIPTION + "\n" +
-            COMMAND_USAGE + "\n";
+    public static final String COMMAND_HELP = "Command Word: " + COMMAND_WORD + "\n" + COMMAND_DESCRIPTION + "\n"
+            + COMMAND_USAGE + "\n";
     // Detailed help description
     public static final String COMMAND_DETAILED_HELP = COMMAND_HELP + COMMAND_PARAMETERS_INFO + "\n";
 
@@ -244,13 +247,21 @@ public class AddCommand extends Command {
      * @return The amount integer if no exceptions are thrown.
      * @throws AddTransactionInvalidAmountException Invalid amount format exception.
      */
-    private static int parseAmountTag(String parameter) throws AddTransactionInvalidAmountException {
+    private static int parseAmountTag(String parameter) throws MoolahException {
         Pattern specialSymbols = Pattern.compile("[!@#$%&*()_+=|<>?{}\\[\\]~-]");
         Matcher hasSpecialSymbols = specialSymbols.matcher(parameter);
-        if (containAlphabet(parameter) || hasSpecialSymbols.find()) {
+        try {
+            if (containAlphabet(parameter) || hasSpecialSymbols.find()) {
+                throw new AddTransactionInvalidAmountException();
+            }
+            int amount = Integer.parseInt(parameter);
+            if (amount < 0 || amount > 10000000) {
+                throw new AddTransactionInvalidAmountException();
+            }
+            return amount;
+
+        } catch (NumberFormatException e) {
             throw new AddTransactionInvalidAmountException();
-        } else {
-            return Integer.parseInt(parameter);
         }
     }
 

@@ -273,10 +273,13 @@ ____________________________________________________________
 Invalid category, please ensure your category is correct!
 ____________________________________________________________
 ____________________________________________________________
-Invalid amount, please ensure your amount is in positive numerals only!
+Invalid amount, please ensure your amount is in positive numerals ($10000000 or less) only!
 ____________________________________________________________
 ____________________________________________________________
-Invalid amount, please ensure your amount is in positive numerals only!
+Invalid amount, please ensure your amount is in positive numerals ($10000000 or less) only!
+____________________________________________________________
+____________________________________________________________
+Invalid amount, please ensure your amount is in positive numerals ($10000000 or less) only!
 ____________________________________________________________
 ____________________________________________________________
 Invalid date, please ensure your date format is correct!
