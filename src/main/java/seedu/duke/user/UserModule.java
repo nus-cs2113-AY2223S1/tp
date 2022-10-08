@@ -57,8 +57,9 @@ public class UserModule {
 
     public void printModule() {
         System.out.print("NUS: ");
-        System.out.print(toString());
+        System.out.print(getNusCode() + " " + getNusTitle());
         System.out.print(" | Partner University: ");
-        System.out.println(getPuCode() + " " + getPuTitle());
+        System.out.print(getPuCode() + " " + getPuTitle());
+        System.out.println(" | Equivalent NUS Credits: " + getNusCredit());
     }
 }
