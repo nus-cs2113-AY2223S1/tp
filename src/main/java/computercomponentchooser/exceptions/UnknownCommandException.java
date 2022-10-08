@@ -5,9 +5,10 @@ package computercomponentchooser.exceptions;
  * not part of any acceptable command.
  */
 
-public class UnknownCommandException extends Exception{
-    protected final String error_message = "Please input a valid command";
+public class UnknownCommandException extends Exception {
+    protected final String errorMessage = "Please input a valid command";
+
     public String getMessage() {
-        return error_message;
+        return errorMessage;
     }
 }
