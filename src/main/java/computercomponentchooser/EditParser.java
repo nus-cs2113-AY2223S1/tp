@@ -20,17 +20,11 @@ public class EditParser {
         String command = getParameter(line, COMMAND_PARAMETER).toLowerCase();
         switch (command) {
             case "add":
-                //method to add computer parts to the build
             case "delete":
-                //method to delete computer parts to the build
             case "list":
-                //list all the computer parts in the build
             case "check":
-                //check the compatibility of components in the build
             case "back":
-                //go back to main mode
             default:
-                //handle exception cases
                 break;
         }
     }
