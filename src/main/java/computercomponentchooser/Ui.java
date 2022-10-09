@@ -59,10 +59,9 @@ public class Ui {
 
     /**
      * Reads in user/stored input line by line.
-     *
-     * @param in the scanner that reads in the input
      */
-    public static void readLine(Scanner in) {
+    public static void readLine() {
+        Scanner in = new Scanner(System.in);
         String line;
         do {
             line = in.nextLine();
