@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.duke.biometrics;
 
 public class Biometrics {
     private int age;
