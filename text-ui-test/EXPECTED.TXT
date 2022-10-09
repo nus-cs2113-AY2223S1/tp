@@ -1,14 +1,18 @@
 Hello from Timetabler!
+Before we begin, enter which Semester it is, 1 or 2. Alternatively, enter 0 to quit.
 Here is a list of things I can do, enter the appropriate command to continue!
-1. add
-2. list
-3. quit
-4. info
+1. add     2. list     3. quit     4. info
 
 What is the module code?
 Successfully added new module: CS2113 : Software Engineering & Object-Oriented Programming
+Here is a list of things I can do, enter the appropriate command to continue!
+1. add     2. list     3. quit     4. info
+
 Here are your modules:
 1. CS2113: Software Engineering & Object-Oriented Programming
+
+Here is a list of things I can do, enter the appropriate command to continue!
+1. add     2. list     3. quit     4. info
 
 Please the module code you wish to get information about
 Here are some information about the module:
@@ -16,5 +20,11 @@ Module Code: CS3230
 Module Name: Design and Analysis of Algorithms
 Module Description: This module introduces different techniques of designing and analysing algorithms. Students will learn about the framework for algorithm analysis, for example, lower bound arguments, average case analysis, and the theory of NP-completeness. In addition, students are exposed to various algorithm design paradigms. The module serves two purposes: to improve the students' ability to design algorithms in different areas, and to prepare students for the study of more advanced algorithms. The module covers lower and upper bounds, recurrences, basic algorithm paradigms (such as prune-and-search, dynamic programming, branch-and-bound, graph traversal, and randomised approaches), amortized analysis, NP-completeness, and some selected advanced topics.
 
+Here is a list of things I can do, enter the appropriate command to continue!
+1. add     2. list     3. quit     4. info
+
 Invalid Command!
+Here is a list of things I can do, enter the appropriate command to continue!
+1. add     2. list     3. quit     4. info
+
 See you again!
