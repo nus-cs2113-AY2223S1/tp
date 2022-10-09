@@ -3,6 +3,7 @@ package seedu.duke;
 import seedu.duke.command.Command;
 import seedu.duke.command.CommandAddClient;
 import seedu.duke.command.CommandUndefined;
+import seedu.duke.exception.*;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;

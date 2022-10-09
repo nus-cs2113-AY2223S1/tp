@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.duke.exception;
 
 /**
  * Represents exceptions local to Duke.

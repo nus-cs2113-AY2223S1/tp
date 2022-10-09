@@ -2,6 +2,7 @@ package seedu.duke;
 
 import seedu.duke.command.Command;
 import seedu.duke.command.CommandBye;
+import seedu.duke.exception.*;
 
 import java.io.IOException;
 

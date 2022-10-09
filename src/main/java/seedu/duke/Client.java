@@ -28,4 +28,5 @@ public class Client {
         clientDetails.append("  Budget: SGD" + clientBudgetPerMonth + "/month").append(System.lineSeparator());
         return clientDetails.toString().trim();
     }
+
 }
