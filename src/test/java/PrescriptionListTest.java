@@ -55,10 +55,10 @@ class PrescriptionListTest {
         prescriptionsList.add("S123456G", "Ventolin", 6, "4 mg");
         prescriptionsList.viewAll();
 
-        String expectedOutput = "ID: S123456G\n"
-                + "Medicine: Ventolin\n"
-                + "Time Interval: once every 6 hours\n"
-                + "Dosage: 4 mg\n"
+        String expectedOutput = "ID: S123456G" + System.lineSeparator()
+                + "Medicine: Ventolin" + System.lineSeparator()
+                + "Time Interval: once every 6 hours" + System.lineSeparator()
+                + "Dosage: 4 mg" + System.lineSeparator()
                 + "Status: Active";
 
         assertEquals(expectedOutput, OUTPUT_STREAM.toString().trim());
@@ -72,22 +72,22 @@ class PrescriptionListTest {
         prescriptionsList.add("K323232J", "Hydrocodone-Acetaminophen", 6, "1 capsule");
         prescriptionsList.viewAll();
 
-        String expectedOutput = "ID: S123456G\n"
-                + "Medicine: Ventolin\n"
-                + "Time Interval: once every 6 hours\n"
-                + "Dosage: 4 mg\n"
-                + "Status: Active\n"
-                + "\n"
-                + "ID: S987655G\n"
-                + "Medicine: Losartan Potassium\n"
-                + "Time Interval: once every 24 hours\n"
-                + "Dosage: 50 mg\n"
-                + "Status: Inactive\n"
-                + "\n"
-                + "ID: K323232J\n"
-                + "Medicine: Hydrocodone-Acetaminophen\n"
-                + "Time Interval: once every 6 hours\n"
-                + "Dosage: 1 capsule\n"
+        String expectedOutput = "ID: S123456G" + System.lineSeparator()
+                + "Medicine: Ventolin" + System.lineSeparator()
+                + "Time Interval: once every 6 hours" + System.lineSeparator()
+                + "Dosage: 4 mg" + System.lineSeparator()
+                + "Status: Active" + System.lineSeparator()
+                + System.lineSeparator()
+                + "ID: S987655G" + System.lineSeparator()
+                + "Medicine: Losartan Potassium" + System.lineSeparator()
+                + "Time Interval: once every 24 hours" + System.lineSeparator()
+                + "Dosage: 50 mg" + System.lineSeparator()
+                + "Status: Inactive" + System.lineSeparator()
+                + System.lineSeparator()
+                + "ID: K323232J" + System.lineSeparator()
+                + "Medicine: Hydrocodone-Acetaminophen" + System.lineSeparator()
+                + "Time Interval: once every 6 hours" + System.lineSeparator()
+                + "Dosage: 1 capsule" + System.lineSeparator()
                 + "Status: Active"
                 ;
 
