@@ -12,7 +12,8 @@ public class Ui {
     private static final Scanner input = new Scanner(System.in);
 
     public static final String logo =
-            "                             _      \n" + " /\\ /\\ _ __   ___ _   _  ___| | ___ \n"
+                    "                             _      " +
+                    "\n" + " /\\ /\\ _ __   ___ _   _  ___| | ___ \n"
                     + "/ / \\ \\ '_ \\ / __| | | |/ __| |/ _ \\\n"
                     + "\\ \\_/ / |_) | (__| |_| | (__| |  __/\n"
                     + " \\___/| .__/ \\___|\\__, |\\___|_|\\___|\n"
