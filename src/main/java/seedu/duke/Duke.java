@@ -1,9 +1,9 @@
 package seedu.duke;
 
 import seedu.duke.command.Command;
+import seedu.duke.command.CommandBye;
 
 import java.io.IOException;
-
 
 public class Duke {
     private Parser parser;
@@ -21,16 +21,31 @@ public class Duke {
         this.clientList = new ClientList();
 
         Command command;
-        String userInputText = "";
+        boolean isCommandBye = false;
 
         do {
-            userInputText = ui.readCommand();
-            command = parser.parseCommand(userInputText);
-            command.execute(ui, storage, propertyList, clientList);
-
-
-        } while (!userInputText.equals("quit"));
-
+            try {
+                String userInputText = ui.readCommand();
+                command = parser.parseCommand(userInputText);
+                command.execute(ui, storage, propertyList, clientList);
+                isCommandBye = (command instanceof CommandBye);
+            } catch (EmptyCommandAddDetailException e) {
+                ui.showMissingCommandAddDetailMessage();
+            } catch (UndefinedSubCommandAddTypeException e) {
+                ui.showUndefinedSubCommandAddTypeMessage();
+            } catch (EmptyClientDetailException e) {
+                ui.showEmptyClientDetailMessage();
+            } catch (MissingClientFlagException | IncorrectAddClientFlagOrderException
+                     | MissingClientDetailException e) {
+                ui.showAddClientWrongFormatMessage();
+            } catch (InvalidContactNumberException e) {
+                ui.showInvalidContactNumberMessage();
+            } catch (InvalidEmailException e) {
+                ui.showInvalidEmailMessage();
+            } catch (InvalidBudgetFormatException e) {
+                ui.showInvalidBudgetFormatMessage();
+            }
+        } while (!isCommandBye);
     }
 
     /**
