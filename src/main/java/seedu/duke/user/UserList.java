@@ -18,10 +18,15 @@ public class UserList {
     }
 
     public void deleteUser(String userName) {
+        boolean isFound = false;
         for (User user : userList) {
             if (user.getName().equals(userName)) {
+                isFound = true;
                 userList.remove(user);
             }
+        }
+        if (!isFound) {
+            System.out.println("cannot find user");
         }
     }
 
