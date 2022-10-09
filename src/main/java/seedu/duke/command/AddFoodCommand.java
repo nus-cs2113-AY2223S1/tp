@@ -18,7 +18,8 @@ public class AddFoodCommand extends Command {
 
     @Override
     public void execute() {
-        String[] argumentList = Parser.getArgumentList(arguments);
+        //String[] argumentList = Parser.getArgumentList(arguments);
+        String[] argumentList = arguments.split(" ");
         addFood(argumentList);
     }
 
