@@ -11,8 +11,22 @@ public class PatientList {
         patients.add(new Patient(name, birthDate, gender, id));
     }
 
+    public void retrievePatient(String id) {
+        for (Patient patient : patients) {
+            if (patient.getId().equals(id)) {
+                Messages.printLine();
+                System.out.println("The patient with the supplied ID was found! Here are the details of the patient: ");
+                System.out.println(patient);
+                Messages.printLine();
+                return;
+            }
+        }
+        Messages.printLine();
+        System.out.println("Sorry, no patient exists with the supplied ID!");
+    }
+
     public Patient findPatient(String id) {
-        for (Patient patient: patients) {
+        for (Patient patient : patients) {
             if (patient.getId().equals(id)) {
                 return patient;
             }
@@ -41,6 +55,7 @@ public class PatientList {
         System.out.println("The patient's details has been modified! Here are the new patient details!");
         System.out.println(patientToBeModified);
         Messages.printLine();
+
     }
 
     public boolean isEmpty() {
@@ -66,6 +81,7 @@ public class PatientList {
             System.out.println((i + 1) + ")");
             System.out.println(getPatient(i));
         }
+
         Messages.printLine();
 
     }
