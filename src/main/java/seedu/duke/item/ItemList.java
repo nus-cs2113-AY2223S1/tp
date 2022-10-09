@@ -20,6 +20,7 @@ public class ItemList {
      */
     public void addItem(Item item) {
         itemList.add(item);
+        assert itemList.size() != 0  : "item not added!";
         ui.addItemMessage(item, itemList);
     }
 
@@ -30,6 +31,7 @@ public class ItemList {
     public Item getItem(String id) throws NullPointerException {
         for (Item item : itemList) {
             if (id.equals(item.getItemId())) {
+                assert id.equals(item.getItemId()) : "equals function not working";
                 return item;
             }
         }
