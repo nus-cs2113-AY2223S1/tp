@@ -30,7 +30,9 @@ public class FileLoader {
         } catch (IOException e) {
             System.out.println("No file was found, or invalid format at " + filepath + ". Trying the backup:");
             try {
-                return getCarparks(filepathBackup);
+                List<Carpark> carparks = getCarparks(filepathBackup);
+                System.out.println("Backup load successful!");
+                return carparks;
             } catch (IOException backupException) {
                 throw new NoFileFoundException("Both the main file and backup file did not load correctly."
                         + "Please check your directory at " + filepath + " and try again, or"
