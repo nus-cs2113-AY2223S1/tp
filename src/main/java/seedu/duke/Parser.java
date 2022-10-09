@@ -39,7 +39,6 @@ public class Parser {
     }
 
     public static String[] getArgumentList(String arguments) {
-        return arguments.trim().split(" ");
+        return arguments.trim().split("/");
     }
-
 }
