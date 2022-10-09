@@ -32,6 +32,9 @@ public class Parser {
             return new HelpCommand();
         case "view":
             return new ViewCommand(arguments);
+        case "mark":
+            return new MarkCommand(arguments);
+        case "help":
         default:
             return new HelpCommand();
         }
