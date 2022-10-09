@@ -17,6 +17,7 @@ import seedu.moneygowhere.exceptions.ConsoleParserCommandEditExpenseInvalidExcep
 import seedu.moneygowhere.exceptions.ConsoleParserCommandNotFoundException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandSortExpenseInvalidTypeException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandViewExpenseInvalidException;
+import seedu.moneygowhere.exceptions.ExpenseManagerExpenseNotFoundException;
 import seedu.moneygowhere.parser.ConsoleParser;
 
 import static seedu.moneygowhere.storage.LocalStorage.loadFromFile;
@@ -168,7 +169,13 @@ public class ConsoleInterface {
     }
 
     private void viewExpenseByExpenseIndex(int expenseIndex) {
-        Expense expense = expenseManager.getExpense(expenseIndex);
+        Expense expense;
+        try {
+            expense = expenseManager.getExpense(expenseIndex);
+        } catch (ExpenseManagerExpenseNotFoundException exception) {
+            printErrorMessage(exception.getMessage());
+            return;
+        }
 
         DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern(
                 Configurations.CONSOLE_INTERFACE_DATE_TIME_OUTPUT_FORMAT
@@ -195,7 +202,13 @@ public class ConsoleInterface {
 
     private void runCommandDeleteExpense(ConsoleCommandDeleteExpense consoleCommandDeleteExpense) {
         int expenseIndex = consoleCommandDeleteExpense.getExpenseIndex();
-        expenseManager.deleteExpense(expenseIndex);
+
+        try {
+            expenseManager.deleteExpense(expenseIndex);
+        } catch (ExpenseManagerExpenseNotFoundException exception) {
+            printErrorMessage(exception.getMessage());
+            return;
+        }
 
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_DELETE_EXPENSE_SUCCESS);
 
@@ -205,7 +218,13 @@ public class ConsoleInterface {
     private void runCommandEditExpense(ConsoleCommandEditExpense consoleCommandEditExpense) {
         int expenseIndex = consoleCommandEditExpense.getExpenseIndex();
 
-        Expense oldExpense = expenseManager.getExpense(expenseIndex);
+        Expense oldExpense;
+        try {
+            oldExpense = expenseManager.getExpense(expenseIndex);
+        } catch (ExpenseManagerExpenseNotFoundException exception) {
+            printErrorMessage(exception.getMessage());
+            return;
+        }
 
         String name = consoleCommandEditExpense.getName();
         if (name == null) {
@@ -229,7 +248,12 @@ public class ConsoleInterface {
         }
 
         Expense newExpense = new Expense(name, dateTime, description, amount, category);
-        expenseManager.editExpense(expenseIndex, newExpense);
+        try {
+            expenseManager.editExpense(expenseIndex, newExpense);
+        } catch (ExpenseManagerExpenseNotFoundException exception) {
+            printErrorMessage(exception.getMessage());
+            return;
+        }
 
         DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern(
                 Configurations.CONSOLE_INTERFACE_DATE_TIME_OUTPUT_FORMAT
@@ -247,6 +271,7 @@ public class ConsoleInterface {
         saveToFile(expenseManager.getExpenses());
     }
 
+    @SuppressWarnings("Java8ListSort")
     private void runCommandSortExpense(ConsoleCommandSortExpense commandSortExpense) {
         String type = commandSortExpense.getType();
         ArrayList<Expense> expenses = expenseManager.getExpenses();
