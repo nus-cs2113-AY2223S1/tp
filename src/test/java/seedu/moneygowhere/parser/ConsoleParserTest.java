@@ -7,6 +7,7 @@ import seedu.moneygowhere.commands.ConsoleCommandEditExpense;
 import seedu.moneygowhere.commands.ConsoleCommandViewExpense;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandAddExpenseInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandDeleteExpenseInvalidException;
+import seedu.moneygowhere.exceptions.ConsoleParserCommandEditExpenseInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandViewExpenseInvalidException;
 import seedu.moneygowhere.exceptions.MoneyGoWhereException;
 
@@ -20,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class ConsoleParserTest {
     @SuppressWarnings("ConstantConditions")
     @Test
-    void parseCommand_aeNameAmount_ccaeNameAmountDate() throws
+    void parseCommand_aeNameAmount_ccaeNameAmountDateTime() throws
             MoneyGoWhereException {
         String input = "Add-Expense -n Exp -a 7.80";
 
@@ -49,7 +50,7 @@ class ConsoleParserTest {
     }
 
     @Test
-    void parseCommand_aeNameAmountDate_ccaeNameAmountDate() throws
+    void parseCommand_aeNameAmountDateTime_ccaeNameAmountDateTime() throws
             MoneyGoWhereException {
         String input = "Add-Expense -n Exp -a 7.80 -d \"01/01/2022 2359\"";
 
@@ -83,7 +84,7 @@ class ConsoleParserTest {
     }
 
     @Test
-    void parseCommand_aeNameAmountDateDescription_ccaeNameAmountDateDescription() throws
+    void parseCommand_aeNameAmountDateTimeDescription_ccaeNameAmountDateTimeDescription() throws
             MoneyGoWhereException {
         String input = "Add-Expense -n Exp -a 7.80 -d \"01/01/2022 2359\" -t \"Test Desc\"";
 
@@ -117,7 +118,7 @@ class ConsoleParserTest {
     }
 
     @Test
-    void parseCommand_aeNameAmountDateDescriptionCategory_ccaeNameAmountDateDescriptionCategory() throws
+    void parseCommand_aeNameAmountDateTimeDescriptionCategory_ccaeNameAmountDateTimeDescriptionCategory() throws
             MoneyGoWhereException {
         String input = "Add-Expense -n Exp -a 7.80 -d \"01/01/2022 2359\" -t \"Test Desc\" -c \"Test Cat\"";
 
@@ -151,8 +152,24 @@ class ConsoleParserTest {
     }
 
     @Test
-    void parseCommand_aeNameAmountDateDescriptionCategory_ccaeInvalidException() {
+    void parseCommand_aeName_ccaeInvalidException() {
         String input = "Add-Expense -n Exp";
+
+        assertThrows(ConsoleParserCommandAddExpenseInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    @Test
+    void parseCommand_aeNameAmount_ccaeInvalidException() {
+        String input = "Add-Expense -n Exp -a \"ThisIsAnInvalidAmount\"";
+
+        assertThrows(ConsoleParserCommandAddExpenseInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    @Test
+    void parseCommand_aeNameAmountDateTime_ccaeInvalidException() {
+        String input = "Add-Expense -n Exp -a 7.80 -d \"ThisIsAnInvalidDateTime\"";
 
         assertThrows(ConsoleParserCommandAddExpenseInvalidException.class, () ->
                 ConsoleParser.parse(input));
@@ -296,7 +313,7 @@ class ConsoleParserTest {
     }
 
     @Test
-    void parseCommand_eeIndexNameAmountDate_cceeIndexNameAmountDate() throws
+    void parseCommand_eeIndexNameAmountDateTime_cceeIndexNameAmountDateTime() throws
             MoneyGoWhereException {
         String input = "Edit-Expense -e 0 -n Exp -a 7.80 -d \"01/01/2022 2359\"";
 
@@ -334,7 +351,7 @@ class ConsoleParserTest {
     }
 
     @Test
-    void parseCommand_eeIndexNameAmountDateDescription_cceeIndexNameAmountDateDescription() throws
+    void parseCommand_eeIndexNameAmountDateTimeDescription_cceeIndexNameAmountDateTimeDescription() throws
             MoneyGoWhereException {
         String input = "Edit-Expense -e 0 -n Exp -a 7.80 -d \"01/01/2022 2359\" -t \"Test Desc\"";
 
@@ -372,7 +389,8 @@ class ConsoleParserTest {
     }
 
     @Test
-    void parseCommand_eeIndexNameAmountDateDescriptionCategory_cceeIndexNameAmountDateDescriptionCategory() throws
+    void parseCommand_eeIndexNameAmountDateTimeDescriptionCategory_cceeIndexNameAmountDateTimeDescriptionCategory()
+            throws
             MoneyGoWhereException {
         String input = "Edit-Expense -e 0 -n Exp -a 7.80 -d \"01/01/2022 2359\" -t \"Test Desc\" -c \"Test Cat\"";
 
@@ -407,5 +425,37 @@ class ConsoleParserTest {
                         && isDescriptionEqual
                         && isAmountEqual
                         && isCategoryEqual);
+    }
+
+    @Test
+    void parseCommand_ee_cceeInvalidException() {
+        String input = "Edit-Expense";
+
+        assertThrows(ConsoleParserCommandEditExpenseInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    @Test
+    void parseCommand_eeIndex_cceeInvalidException() {
+        String input = "Edit-Expense -e \"ThisIsAnInvalidExpenseIndex\"";
+
+        assertThrows(ConsoleParserCommandEditExpenseInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    @Test
+    void parseCommand_eeIndexAmount_cceeInvalidException() {
+        String input = "Edit-Expense -e 0 -a \"ThisIsAnInvalidAmount\"";
+
+        assertThrows(ConsoleParserCommandEditExpenseInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    @Test
+    void parseCommand_eeIndexAmountDateTime_cceeInvalidException() {
+        String input = "Edit-Expense -e 0 -a 7.80 -d \"ThisIsAnInvalidDateTime\"";
+
+        assertThrows(ConsoleParserCommandEditExpenseInvalidException.class, () ->
+                ConsoleParser.parse(input));
     }
 }
