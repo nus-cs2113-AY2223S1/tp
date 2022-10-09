@@ -1,5 +1,7 @@
 package computercomponentchooser;
 
+import java.util.Scanner;
+
 public class Ui {
     /**
      * A concatenation of strings that visually represents the word ComputerComponentChooser.
@@ -53,5 +55,22 @@ public class Ui {
         Ui.printLine();
         System.out.println("Bye. Hope to see you again soon!");
         Ui.printLine();
+    }
+
+    /**
+     * Reads in user/stored input line by line.
+     *
+     * @param in the scanner that reads in the input
+     */
+    public static void readLine(Scanner in) {
+        String line;
+        do {
+            line = in.nextLine();
+            if (Parser.checkEdit(line)) {
+                while (!EditParser.checkBack(line)) {
+                    line = in.nextLine();
+                }
+            }
+        } while (!Parser.checkBye(line));
     }
 }
