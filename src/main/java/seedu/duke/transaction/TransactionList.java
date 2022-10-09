@@ -5,7 +5,7 @@ import seedu.duke.exception.DukeException;
 import java.util.ArrayList;
 
 public class TransactionList {
-    private final ArrayList<Transaction> transactionList;
+    private ArrayList<Transaction> transactionList;
 
     public TransactionList() {
         this.transactionList = new ArrayList<>();

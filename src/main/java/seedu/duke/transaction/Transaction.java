@@ -1,29 +1,24 @@
 package seedu.duke.transaction;
 
 import seedu.duke.id.IdGenerator;
-import seedu.duke.item.Item;
 import seedu.duke.parser.DateParser;
-import seedu.duke.user.User;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
 public class Transaction {
     private final String transactionId;
-    private final Item item;
-    private final User lender;
-    private final User borrower;
+    private final String itemId;
+    private final String borrowerId;
     private final int duration;
     private final LocalDate createdAt;
     private LocalDate returnedAt;
     private boolean isFinished;
 
-    public Transaction(Item item, User borrower, int duration, String createdAt) {
+    public Transaction(String itemId, String borrowerId, int duration, String createdAt) {
         this.transactionId = IdGenerator.generateId();
-        //these three id will be changed to Item + User + User when having Item and User class
-        this.item = item;
-        this.lender = item.getOwner();
-        this.borrower = borrower;
+        this.itemId = itemId;
+        this.borrowerId = borrowerId;
         this.duration = duration;
         this.isFinished = false;
         this.createdAt = LocalDate.parse(createdAt);
@@ -67,8 +62,8 @@ public class Transaction {
     public String toString() {
         String transactionIcon = "[" + (isFinished ? "X" : " ") + "] ";
         String transactionId = "TransactionID: " + this.transactionId + " ";
-        String itemId = "ItemID: " + item.getItemId() + " ";
-        String usersId = "LenderID: " + lender.getUserId() + " BorrowerID: " + borrower.getUserId() + " ";
+        String itemId = "ItemID: " + this.itemId + " ";
+        String usersId = "BorrowerID: " + this.borrowerId + " ";
 
         if (!isFinished) {
             String overdueDays = " (" + ChronoUnit.DAYS.between(getReturnDate(), LocalDate.now()) + "day(s) overdue";
