@@ -30,6 +30,16 @@ public class ItemList {
                 .forEach(System.out::println);
     }
 
+    public Item getItem(String id) {
+        for (Item item : itemList) {
+            if (id.equals(item.getItemId())) {
+                return item;
+            }
+        }
+        //exception if item not found
+        return null;
+    }
+
     public void getItemOfSpecificCategory(int categoryNumber) {
         itemList.stream()
                 .filter(t -> (Category.setCategory(t.getCategory()) == categoryNumber))
@@ -52,19 +62,19 @@ public class ItemList {
 
     public void markAvailable(Item item) {
         int index = itemList.indexOf(item);
-        getItem(index).setAsAvailable();
+        getItemIndex(index).setAsAvailable();
     }
 
     public void markUnavailable(Item item) {
         int index = itemList.indexOf(item);
-        getItem(index).setAsNotAvailable();
+        getItemIndex(index).setAsNotAvailable();
     }
 
     public int getListSize() {
         return itemList.size();
     }
 
-    public Item getItem(int index) {
+    public Item getItemIndex(int index) {
         return itemList.get(index - 1);
     }
 

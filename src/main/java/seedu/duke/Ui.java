@@ -77,7 +77,7 @@ public class Ui {
      *
      * @param items list of all the items the user has added
      */
-    public void showItemsList(List<Item> items) {
+    public void showItemList(List<Item> items) {
         int itemNumber = 1;
         showLine();
         System.out.println("Here are your list of item(s):");
