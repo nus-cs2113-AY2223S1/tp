@@ -4,10 +4,12 @@ import java.util.Scanner;
 public class OneDoc {
 
     protected PatientList patientsList;
+    protected VisitList visitsList;
     protected static Parser parser;
 
     public OneDoc() {
         patientsList = new PatientList();
+        visitsList = new VisitList();
         parser = new Parser();
     }
 
