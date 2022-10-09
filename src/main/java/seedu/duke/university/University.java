@@ -10,6 +10,9 @@ public class University {
     private ArrayList<Module> modules;
 
     public University(String name, String country) {
+        assert name.length() > 0 : "Name cannot be empty";
+        assert country.length() > 0 : "Country cannot be empty";
+        
         setName(name);
         setCountry(country);
         setModules(new ArrayList<>());
