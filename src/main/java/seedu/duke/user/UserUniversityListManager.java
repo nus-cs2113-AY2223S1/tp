@@ -5,6 +5,8 @@ import seedu.duke.userstorage.UserStorage;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Class to keep track of all the lists of PU user is interested in.
@@ -14,6 +16,8 @@ public class UserUniversityListManager {
 
     // we store the key as the PU name
     private HashMap<String, UserUniversityList> myManager;
+
+    private static Logger logger = Logger.getLogger("UniversityListManagerLogger");
 
     public UserUniversityListManager() {
         myManager = new HashMap<String, UserUniversityList>();
@@ -34,6 +38,7 @@ public class UserUniversityListManager {
         } else {
             UserUniversityList newList = new UserUniversityList(input);
             myManager.put(input, newList);
+            logger.log(Level.FINER, "create new list for " + input);
         }
     }
 
@@ -93,6 +98,7 @@ public class UserUniversityListManager {
         }
         else {
             myManager.remove(inputSchool);
+            logger.log(Level.FINER, "delete list for " + inputSchool);
         }
     }
 
