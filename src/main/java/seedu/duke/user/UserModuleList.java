@@ -80,6 +80,20 @@ public class UserModuleList {
         }
     }
 
+    public void updateModule(String puCode, String nusCode, String updates) {
+        boolean isUpdated = false;
+        for (UserModule module : modules) {
+            if (module.getNusCode().equals(nusCode)
+                    && module.getPuCode().equals(puCode)) {
+                isUpdated = true;
+                module.setComment(updates);
+            }
+        }
+        if (!isUpdated) {
+            System.out.println("No such modules found");
+        }
+    }
+
     /**
      * Method to find current modules user stored by keyword.
      * @param keyword input keyword

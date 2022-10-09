@@ -1,13 +1,18 @@
 package seedu.duke.user;
 
-public class UserModule {
+import seedu.duke.module.Module;
+
+public class UserModule extends Module {
     private String nusCode;
     private String puCode;
     private String nusTitle;
     private String nusCredit;
     private String puTitle;
 
+    private String comment;
+
     public UserModule(String puCode, String puTitle, String nusCode, String nusTitle, String nusCredit) {
+        super(nusCode, nusTitle, nusCredit);
         this.nusCode = nusCode;
         this.puCode = puCode;
         this.nusTitle = nusTitle;
@@ -35,6 +40,14 @@ public class UserModule {
         return puTitle;
     }
 
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
     public void setNusCode(String nusCode) {
         this.nusCode = nusCode;
     }
@@ -53,6 +66,11 @@ public class UserModule {
 
     public void setPuTitle(String puTitle) {
         this.puTitle = puTitle;
+    }
+
+    public String toString() {
+        return getNusCode() + " " + getNusTitle() + " "
+                + getPuCode() + " " + getPuTitle() + " " + getNusCredit() + " MCs";
     }
 
     public void printModule() {
