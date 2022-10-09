@@ -53,6 +53,8 @@ public class Messages {
             + "File does not exist or Path is wrong :("
             + "SYNTAX: View-Expense [-i EXPENSE_NUMBER]";
     public static final String CONSOLE_MESSAGE_COMMAND_ADD_INCOME_SUCCESS = "The income was added successfully.";
+    public static final String INCOME_MANAGER_ERROR_INCOME_NOT_FOUND = ""
+            + "The income is not found.";
     public static final String CONSOLE_ERROR_COMMAND_ADD_INCOME_INVALID = ""
             + "The arguments entered are invalid. "
             +  "SYNTAX: Add-Income -n NAME -a AMOUNT [-d "
