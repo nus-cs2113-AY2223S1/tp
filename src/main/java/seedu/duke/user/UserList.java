@@ -5,7 +5,12 @@ import seedu.duke.item.Item;
 
 import java.util.ArrayList;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class UserList {
+
+    private static final Logger logger = Logger.getLogger("Foo");
     protected ArrayList<User> userList;
 
     public UserList(ArrayList<User> userList) {
@@ -41,18 +46,22 @@ public class UserList {
         return userList.get(index - 1);
     }
 
-    // find user using name
     public User getUserById(String userName) throws UserNotFoundException {
+        logger.log(Level.INFO, "getting user from user list");
         for (User user : userList) {
             if (user.getName().equals(userName)) {
+                assert userName.equals(user.getName()) : "equals function not working";
+                logger.log(Level.INFO, "user found");
                 return user;
             }
         }
+        logger.log(Level.WARNING, "user not found error", new UserNotFoundException("This user cannot be found in the list"));
         throw new UserNotFoundException("This user cannot be found in the list");
     }
 
     public String listUser() {
         StringBuilder listOfUsers = new StringBuilder();
+        listOfUsers.append("Here are your list of users:").append(System.lineSeparator());
         for (User user : userList) {
             listOfUsers.append(user.toString()).append(System.lineSeparator());
         }
