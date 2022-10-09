@@ -17,7 +17,7 @@ public class FlightManager {
 
     public static String extractDetail(String command, String start, String end) {
         String extractedDetail;
-        if (end.equals("empty")){
+        if (end.equals("empty")) {
             extractedDetail = command.substring(command.indexOf(start) + start.length());
         } else {
             extractedDetail = command.substring(command.indexOf(start) + start.length(), command.indexOf(end) - 1);
@@ -41,6 +41,16 @@ public class FlightManager {
             flightList.add(flightIndex,flight);
             flightIndex++;
             System.out.println("Flight added!");
+
+        } catch (SkyControlException e) {
+            System.out.println("oops! The description is empty :(");
+        }
+    }
+
+    //not done
+    public static void deleteFlight(String input) {
+        try {
+            checkCommandLength(input.substring("flight_delete".length()));
 
         } catch (SkyControlException e) {
             System.out.println("oops! The description is empty :(");

@@ -28,19 +28,26 @@ public class Duke {
     public static boolean readInput(String command) {
 
         String[] splitCommand = command.split(" ");
-        switch (splitCommand[0]) {
-        case "bye":
+        if(splitCommand[0].equals("bye")) {
             isFinished = false;
             return isFinished;
-        case "flight_add":
-            FlightManager.addFlight(command);
-            break;
-        case "flight_list":
-            FlightManager.printFlights();
-            break;
-        default:
-            // temporary sout, change to exception handling
-            System.out.println("Unknown command, please re-enter.");
+        } else if (splitCommand[0].equals("passenger")) {
+
+        } else if (splitCommand[0].equals("flight")) {
+            switch (splitCommand[1]) {
+            case "add":
+                FlightManager.addFlight(command);
+                break;
+            case "list":
+                FlightManager.printFlights();
+                break;
+            case "delete":
+                FlightManager.deleteFlight(command);
+                break;
+            default:
+                // temporary sout, change to exception handling
+                System.out.println("Unknown command, please re-enter.");
+            }
         }
 
         return isFinished;
