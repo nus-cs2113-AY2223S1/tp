@@ -1,6 +1,6 @@
 package seedu.duke.command;
 
-import seedu.duke.Biometrics;
+import seedu.duke.biometrics.Biometrics;
 import seedu.duke.Ui;
 
 public class HelpCommand extends Command {

@@ -1,8 +1,7 @@
 package seedu.duke.command;
 
-import seedu.duke.Biometrics;
+import seedu.duke.biometrics.Biometrics;
 import seedu.duke.Food;
-import seedu.duke.Parser;
 import seedu.duke.Ui;
 import seedu.duke.exception.IllegalValueException;
 

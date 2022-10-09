@@ -1,6 +1,6 @@
 package seedu.duke.command;
 
-import seedu.duke.Biometrics;
+import seedu.duke.biometrics.Biometrics;
 import seedu.duke.Duke;
 import seedu.duke.Ui;
 

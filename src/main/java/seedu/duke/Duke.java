@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import seedu.duke.biometrics.Biometrics;
 import seedu.duke.command.Command;
 import seedu.duke.command.GreetCommand;
 
