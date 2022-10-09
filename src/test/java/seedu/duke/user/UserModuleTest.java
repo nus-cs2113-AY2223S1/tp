@@ -35,12 +35,12 @@ public class UserModuleTest {
 
     @Test
     void deleteModule_IndexOutOfBoundEntry_expectException() {
-        assertThrows(IndexOutOfBoundsException.class, ()->myModules.deleteModule(myModules.getModules().size()+1));
-        assertThrows(IndexOutOfBoundsException.class,()->myModules.deleteModule(-1));
+        assertThrows(IndexOutOfBoundsException.class, () -> myModules.deleteModule(myModules.getModules().size() + 1));
+        assertThrows(IndexOutOfBoundsException.class,() -> myModules.deleteModule(-1));
     }
 
     @Test
     void deleteModuleByPUCode_NoSuchEntry_expectException() {
-        assertThrows(NoSuchElementException.class, ()->myModules.deleteModuleByPuCode("ABIDE"));
+        assertThrows(NoSuchElementException.class, () -> myModules.deleteModuleByPuCode("ABIDE"));
     }
 }

@@ -19,29 +19,31 @@ public class UserUniversityListTest {
 
 
     @Test
-    void createList_UCLA_correctDetails() {
+    void createList_Ucla_correctDetails() {
         testManager.createList("UCLA");
         testManager.createList("UCB");
         assertEquals(2, testManager.getMyManager().size());
     }
 
     @Test
-    void addModule_UCLAModule_correctDetails() {
+    void addModule_UclaModule_correctDetails() {
         testManager.createList("UCLA");
         UserModule mod = new UserModule("CS101", "Programming Intro",
                 "CS1010", "Programming Methodology", "4");
         testManager.addModule("UCLA", mod);
         assertEquals(1, testManager.getMyManager().get("UCLA").getMyModules().getModules().size());
         assertEquals("CS101", testManager.getMyManager().get("UCLA").getMyModules().getModules().get(0).getPuCode());
-        assertEquals("Programming Intro", testManager.getMyManager().get("UCLA").getMyModules().getModules().get(0).getPuTitle());
-        assertEquals("CS1010", testManager.getMyManager().get("UCLA").getMyModules().getModules().get(0).getNusCode());
+        assertEquals("Programming Intro", testManager.getMyManager().get("UCLA").getMyModules()
+                .getModules().get(0).getPuTitle());
+        assertEquals("CS1010", testManager.getMyManager().get("UCLA").getMyModules()
+                .getModules().get(0).getNusCode());
         assertEquals("Programming Methodology", testManager.getMyManager().get("UCLA").getMyModules().getModules().get(0).getNusTitle());
         assertEquals("4", testManager.getMyManager().get("UCLA").getMyModules().getModules().get(0).getNusCredit());
     }
 
 
     @Test
-    void deleteModule_UCLA_correctDetails() {
+    void deleteModule_Ucla_correctDetails() {
         testManager.createList("UCLA");
         UserModule mod = new UserModule("CS101", "Programming Intro",
                 "CS1010", "Programming Methodology", "4");
@@ -51,12 +53,12 @@ public class UserUniversityListTest {
     }
 
     @Test
-    void deleteModule_UCLAWrongDetail_throwException() {
+    void deleteModule_UclaWrongDetail_throwException() {
         testManager.createList("UCLA");
         UserModule mod = new UserModule("CS101", "Programming Intro",
                 "CS1010", "Programming Methodology", "4");
         testManager.addModule("UCLA", mod);
-        assertThrows(NoSuchElementException.class,()->testManager.deleteModule("UCLA", "CS00"));
+        assertThrows(NoSuchElementException.class,() -> testManager.deleteModule("UCLA", "CS00"));
         assertEquals(1, testManager.getMyManager().get("UCLA").getMyModules().getModules().size());
     }
 
@@ -79,12 +81,12 @@ public class UserUniversityListTest {
 
     @Test
     void getList_NonexistentList_throwException() {
-        assertThrows(NoSuchElementException.class,()->testManager.getList("NUS"));
+        assertThrows(NoSuchElementException.class,() -> testManager.getList("NUS"));
     }
 
     @Test
     void deleteList_NonexistentList_throwException() {
-        assertThrows(NoSuchElementException.class,()->testManager.deleteList("NTU"));
+        assertThrows(NoSuchElementException.class,() -> testManager.deleteList("NTU"));
     }
 
 
