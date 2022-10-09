@@ -53,7 +53,8 @@ public class UserUniversityListManager {
             UserUniversityList universityList = set.getValue();
             System.out.println(universityName);
             universityList.displayModules();
-            System.out.println("-------------------------------------------------------");
+            System.out.println("-------------------------------------------------------------------------------------" +
+                    "------------------------------------------------------------------------------------");
         }
     }
 
@@ -66,12 +67,21 @@ public class UserUniversityListManager {
         System.out.println(input);
         UserUniversityList myUniversityList = getList(input);
         myUniversityList.displayModules();
-        System.out.println("-------------------------------------------------------");
+        System.out.println("-------------------------------------------------------------------------------------" +
+                "------------------------------------------------------------------------------------");
+    }
+
+    public boolean foundKey(String inputSchool) {
+        return myManager.containsKey(inputSchool);
     }
 
     public void addModule(String inputSchool, UserModule inputModule) {
-        UserUniversityList myUniversityList = getList(inputSchool);
-        myUniversityList.addModule(inputModule);
+        if (myManager.containsKey(inputSchool)) {
+            myManager.get(inputSchool).addModule(inputModule);
+        } else {
+            System.out.println("No such school found");
+            throw new NoSuchElementException();
+        }
     }
 
     /**
@@ -82,8 +92,12 @@ public class UserUniversityListManager {
     public void deleteModule(String inputSchool, String puCode) {
         assert inputSchool.length() > 0 : "Input school cannot be empty";
         assert puCode.length() > 0 : "Deleting PU code cannot be empty";
-        UserUniversityList myUniversityList = getList(inputSchool);
-        myUniversityList.deleteModule(puCode);
+        if (foundKey(inputSchool)) {
+            myManager.get(inputSchool).deleteModuleByPUCode(puCode);
+        } else {
+            System.out.println("No such school found");
+            throw new NoSuchElementException();
+        }
     }
 
     /**
@@ -92,7 +106,7 @@ public class UserUniversityListManager {
      */
     public void deleteList(String inputSchool) {
         assert inputSchool.length() > 0 : "Input school cannot be empty";
-        if (!myManager.containsKey(inputSchool)) {
+        if (!foundKey(inputSchool)) {
             System.out.println("No such university found");
             throw new NoSuchElementException();
         }
@@ -110,7 +124,7 @@ public class UserUniversityListManager {
     public UserUniversityList getList(String input) {
         assert input.length() > 0 : "Input school cannot be empty";
         if (!myManager.containsKey(input)) {
-            System.out.println("No such universities found");
+            System.out.println("HELP!! :: No such universities found");
             throw new NoSuchElementException();
         }
         return myManager.get(input);

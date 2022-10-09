@@ -11,17 +11,18 @@ public class UserUniversityList {
 
     public UserUniversityList(String universityName) {
         this.universityName = universityName;
+        this.myModules = new UserModuleList();
     }
 
     public void addModule(UserModule input) {
-        myModules.addModule((input));
+        myModules.addModule(input);
     }
 
     /**
      * Method to delete module based on puCode.
      * @param puCode input puCode
      */
-    public void deleteModule(String puCode) {
+    public void deleteModuleByPUCode(String puCode) {
         assert puCode.length() > 0 : "Deleting PU code cannot be empty";
         myModules.deleteModuleByPUCode(puCode);
     }
