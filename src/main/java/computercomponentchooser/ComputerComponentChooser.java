@@ -8,20 +8,17 @@ public class ComputerComponentChooser {
 
         String line;
         Scanner in = new Scanner(System.in);
-        line = in.nextLine();
 
-        while (!Parser.checkBye(line)) {
+        BuildManager buildManager = new BuildManager();
+
+        do {
+            line = in.nextLine();
             if (Parser.checkEdit(line)) {
                 while (!EditParser.checkBack(line)) {
-                    //EditParser.parse(line);
                     line = in.nextLine();
                 }
             }
-            //Parser.parse(Manager, line); To be added
-            //Parser.parse(line);
-            line = in.nextLine();
-
-        }
+        } while (!Parser.checkBye(line));
 
         Ui.endSession();
     }
