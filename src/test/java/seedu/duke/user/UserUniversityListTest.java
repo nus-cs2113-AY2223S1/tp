@@ -32,13 +32,16 @@ public class UserUniversityListTest {
                 "CS1010", "Programming Methodology", "4");
         testManager.addModule("UCLA", mod);
         assertEquals(1, testManager.getMyManager().get("UCLA").getMyModules().getModules().size());
-        assertEquals("CS101", testManager.getMyManager().get("UCLA").getMyModules().getModules().get(0).getPuCode());
+        assertEquals("CS101", testManager.getMyManager().get("UCLA").getMyModules()
+                .getModules().get(0).getPuCode());
         assertEquals("Programming Intro", testManager.getMyManager().get("UCLA").getMyModules()
                 .getModules().get(0).getPuTitle());
         assertEquals("CS1010", testManager.getMyManager().get("UCLA").getMyModules()
                 .getModules().get(0).getNusCode());
-        assertEquals("Programming Methodology", testManager.getMyManager().get("UCLA").getMyModules().getModules().get(0).getNusTitle());
-        assertEquals("4", testManager.getMyManager().get("UCLA").getMyModules().getModules().get(0).getNusCredit());
+        assertEquals("Programming Methodology", testManager.getMyManager()
+                .get("UCLA").getMyModules().getModules().get(0).getNusTitle());
+        assertEquals("4", testManager.getMyManager().get("UCLA").getMyModules()
+                .getModules().get(0).getNusCredit());
     }
 
 
@@ -63,7 +66,7 @@ public class UserUniversityListTest {
     }
 
     @Test
-    void deleteList_UCLA_correctDetails() {
+    void deleteList_Ucla_correctDetails() {
         testManager.createList("UCLA");
         assertEquals(1, testManager.getMyManager().size());
         testManager.deleteList("UCLA");
@@ -77,8 +80,7 @@ public class UserUniversityListTest {
         testManager.createList("UCB");
         assertEquals(2, testManager.getMyManager().size());
     }
-
-
+    
     @Test
     void getList_NonexistentList_throwException() {
         assertThrows(NoSuchElementException.class,() -> testManager.getList("NUS"));
@@ -88,7 +90,6 @@ public class UserUniversityListTest {
     void deleteList_NonexistentList_throwException() {
         assertThrows(NoSuchElementException.class,() -> testManager.deleteList("NTU"));
     }
-
 
     @Test
     void displayAll_NoInput_ProperOutput() {

@@ -40,7 +40,7 @@ public class UserModuleTest {
     }
 
     @Test
-    void deleteModuleByPUCode_NoSuchEntry_expectException() {
+    void deleteModuleByPuCode_NoSuchEntry_expectException() {
         assertThrows(NoSuchElementException.class, () -> myModules.deleteModuleByPuCode("ABIDE"));
     }
 }
