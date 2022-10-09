@@ -8,6 +8,6 @@ public class UserTest {
     @Test
     void testStatus() {
         User user = new User("John Doe", 45, "93746378");
-        assertEquals((user.getUserId() + " | John Doe | 45 | 93746378"), user.toString());
+        assertEquals("Username: John Doe Age: 45 Contact: 93746378 ", user.toString());
     }
 }
