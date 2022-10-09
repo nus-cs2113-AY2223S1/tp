@@ -22,9 +22,9 @@ public class UserUniversityList {
      * Method to delete module based on puCode.
      * @param puCode input puCode
      */
-    public void deleteModuleByPUCode(String puCode) {
+    public void deleteModuleByPuCode(String puCode) {
         assert puCode.length() > 0 : "Deleting PU code cannot be empty";
-        myModules.deleteModuleByPUCode(puCode);
+        myModules.deleteModuleByPuCode(puCode);
     }
 
     public void deleteModule(int index) {

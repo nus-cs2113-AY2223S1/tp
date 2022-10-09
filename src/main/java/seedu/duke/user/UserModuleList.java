@@ -58,13 +58,13 @@ public class UserModuleList {
         }
     }
 
-    public void deleteModuleByPUCode(String input) {
+    public void deleteModuleByPuCode(String input) {
         assert input.length() > 0 : "Deleting PU code cannot be empty";
         boolean isFound = false;
         for (int i = 0; i < modules.size(); ++i) {
             if (modules.get(i).getPuCode().equals(input)) {
                 isFound = true;
-                deleteModule(i+1);
+                deleteModule(i + 1);
             }
         }
         if (!isFound) {

@@ -53,8 +53,8 @@ public class UserUniversityListManager {
             UserUniversityList universityList = set.getValue();
             System.out.println(universityName);
             universityList.displayModules();
-            System.out.println("-------------------------------------------------------------------------------------" +
-                    "------------------------------------------------------------------------------------");
+            System.out.println("-------------------------------------------------------------------------------------"
+                    + "------------------------------------------------------------------------------------");
         }
     }
 
@@ -67,8 +67,8 @@ public class UserUniversityListManager {
         System.out.println(input);
         UserUniversityList myUniversityList = getList(input);
         myUniversityList.displayModules();
-        System.out.println("-------------------------------------------------------------------------------------" +
-                "------------------------------------------------------------------------------------");
+        System.out.println("-------------------------------------------------------------------------------------"
+                + "------------------------------------------------------------------------------------");
     }
 
     public boolean foundKey(String inputSchool) {
@@ -93,7 +93,7 @@ public class UserUniversityListManager {
         assert inputSchool.length() > 0 : "Input school cannot be empty";
         assert puCode.length() > 0 : "Deleting PU code cannot be empty";
         if (foundKey(inputSchool)) {
-            myManager.get(inputSchool).deleteModuleByPUCode(puCode);
+            myManager.get(inputSchool).deleteModuleByPuCode(puCode);
         } else {
             System.out.println("No such school found");
             throw new NoSuchElementException();
@@ -101,7 +101,7 @@ public class UserUniversityListManager {
     }
 
     /**
-     * Method to delete an entire university list
+     * Method to delete an entire university list.
      * @param inputSchool the PU school name that we will be deleting from.
      */
     public void deleteList(String inputSchool) {
@@ -109,8 +109,7 @@ public class UserUniversityListManager {
         if (!foundKey(inputSchool)) {
             System.out.println("No such university found");
             throw new NoSuchElementException();
-        }
-        else {
+        } else {
             myManager.remove(inputSchool);
             logger.log(Level.FINER, "delete list for " + inputSchool);
         }
