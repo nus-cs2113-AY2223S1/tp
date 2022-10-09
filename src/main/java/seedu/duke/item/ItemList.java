@@ -41,6 +41,6 @@ public class ItemList {
     }
 
     public void showList() {
-        ui.showList(items);
+        ui.showItemsList(items);
     }
 }
