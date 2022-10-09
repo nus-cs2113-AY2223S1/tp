@@ -3,15 +3,19 @@ package seedu.duke.command;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import seedu.duke.exceptions.InvalidDatabaseLineException;
+
 public class Parser {
     private static Logger logger = Logger.getLogger("Parser");
 
-    public static String[] parseDatabaseLine(String line) {
+    public static String[] parseDatabaseLine(String line) throws InvalidDatabaseLineException {
         logger.log(Level.FINE, "Start parsing database line");
 
         String[] parts = line.split(",");
 
-        assert parts.length == 15 : "Database line should have 15 segments";
+        if (parts.length != 15) {
+            throw new InvalidDatabaseLineException();
+        }
 
         String partnerUniversity = parts[1];
         assert partnerUniversity.length() > 0 : "Partner University should not be empty";

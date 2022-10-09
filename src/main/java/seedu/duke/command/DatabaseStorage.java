@@ -54,7 +54,11 @@ public class DatabaseStorage {
     private static String[] readDatabaseLine(String line) {
         String[] lineData = new String[7];
 
-        lineData = Parser.parseDatabaseLine(line);
+        try {
+            lineData = Parser.parseDatabaseLine(line);
+        } catch (InvalidDatabaseLineException e) {
+            logger.log(Level.WARNING, "Invalid database line: " + line);
+        }
 
         return lineData;
     }
