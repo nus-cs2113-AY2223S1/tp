@@ -5,6 +5,9 @@ public class Prescription {
     private String dosage;
     private boolean isActive;
 
+    private static final String ACTIVE = "Active";
+    private static final String INACTIVE = "Inactive";
+
     public Prescription(String patientId, String medicine, int timeInterval, String dosage) {
         this.patientId = patientId;
         this.medicine = medicine;
@@ -55,5 +58,18 @@ public class Prescription {
 
     public void setInactive() {
         isActive = false;
+    }
+
+    private String getStatusString() {
+        return isActive ? ACTIVE : INACTIVE;
+    }
+
+    @Override
+    public String toString() {
+        return "ID: " + patientId + System.lineSeparator()
+                + "Medicine: " + medicine + System.lineSeparator()
+                + "Time Interval: once every " + timeInterval + " hours" + System.lineSeparator()
+                + "Dosage: " + dosage + System.lineSeparator()
+                + "Status: " + getStatusString();
     }
 }
