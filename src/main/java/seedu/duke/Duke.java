@@ -3,6 +3,8 @@ package seedu.duke;
 import seedu.duke.command.Command;
 import seedu.duke.command.CommandBye;
 
+import java.io.IOException;
+
 public class Duke {
     private Parser parser;
     private Ui ui;
@@ -11,7 +13,7 @@ public class Duke {
     private ClientList clientList;
 
 
-    public void run() {
+    public void run() throws IOException {
         this.parser = new Parser();
         this.ui = new Ui();
         this.storage = new Storage();
@@ -49,7 +51,7 @@ public class Duke {
     /**
      * Main entry-point for the java.duke.Duke application.
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         new Duke().run();
     }
 }
