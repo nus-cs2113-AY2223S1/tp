@@ -9,7 +9,7 @@ public class Ui {
 
 
     public void line() {
-        System.out.println("------------------------------");
+        System.out.println("------------------------------------------");
     }
 
 
@@ -26,5 +26,24 @@ public class Ui {
         for (String line : output) {
             System.out.println(line);
         }
+    }
+
+    public void printInSameLine(String... output) {
+        for (String line : output) {
+            System.out.print(line);
+        }
+        System.out.println();
+    }
+
+    public void showCurrentExerciseCaption(int size) {
+        output("Exercises to be done: " + size);
+    }
+
+    public void showCompletedExerciseCaption(int size) {
+        output("Exercises completed: " + size);
+    }
+
+    public void printEmptyLine() {
+        output("");
     }
 }

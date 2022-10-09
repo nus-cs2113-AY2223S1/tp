@@ -1,11 +1,12 @@
 package seedu.duke.command;
 
 import seedu.duke.Biometrics;
+import seedu.duke.ExerciseList;
 import seedu.duke.Ui;
 
 public class HelpCommand extends Command {
 
-    private  Ui ui;
+    private Ui ui;
 
     public HelpCommand() {
     }
@@ -19,7 +20,7 @@ public class HelpCommand extends Command {
     }
 
     @Override
-    public void setData(Ui ui, Biometrics biometrics) {
+    public void setData(Ui ui, Biometrics biometrics, ExerciseList exerciseList) {
         this.ui = ui;
     }
 }

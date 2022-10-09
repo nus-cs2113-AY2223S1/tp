@@ -1,15 +1,16 @@
 package seedu.duke.command;
 
 import seedu.duke.Biometrics;
-import seedu.duke.exception.IllegalValueException;
+import seedu.duke.ExerciseList;
 import seedu.duke.Parser;
 import seedu.duke.Ui;
+import seedu.duke.exception.IllegalValueException;
 
 import java.util.Arrays;
 
 public class SetCommand extends Command {
 
-    public static final String[] GENDER_OPTIONS = new String[] {"male", "female", "other"};
+    public static final String[] GENDER_OPTIONS = new String[]{"male", "female", "other"};
     public static final String INVALID_BIOMETRICS = "Invalid biometrics";
     public static final String BIOMETRICS_SET = "biometrics set";
 
@@ -30,8 +31,8 @@ public class SetCommand extends Command {
 
     private void setBiometrics(String[] argumentList) {
         try {
-            if (argumentList.length < 6) {
-                throw  new IllegalValueException(INVALID_BIOMETRICS);
+            if (argumentList.length != 6) {
+                throw new IllegalValueException(INVALID_BIOMETRICS);
             }
             int age = Integer.parseInt(argumentList[1]);
             int height = Integer.parseInt(argumentList[3]);
@@ -52,7 +53,7 @@ public class SetCommand extends Command {
 
 
     @Override
-    public void setData(Ui ui, Biometrics biometrics) {
+    public void setData(Ui ui, Biometrics biometrics, ExerciseList exerciseList) {
         this.ui = ui;
         this.biometrics = biometrics;
     }

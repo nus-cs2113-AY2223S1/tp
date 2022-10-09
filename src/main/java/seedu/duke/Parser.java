@@ -1,13 +1,6 @@
 package seedu.duke;
 
-import seedu.duke.command.Command;
-import seedu.duke.command.ExitCommand;
-import seedu.duke.command.GreetCommand;
-import seedu.duke.command.HelpCommand;
-import seedu.duke.command.ViewCommand;
-import seedu.duke.command.SetCommand;
-import seedu.duke.command.AddFoodCommand;
-import seedu.duke.command.AddExerciseCommand;
+import seedu.duke.command.*;
 
 public class Parser {
 
@@ -17,19 +10,12 @@ public class Parser {
         switch (userCommand) {
         case "greet":
             return new GreetCommand();
-        case "help":
-            return new HelpCommand();
         case "exit":
             return new ExitCommand();
         case "set":
             return new SetCommand(arguments);
         case "add":
-            if (arguments.split(" ")[0].equals("food")) {
-                return new AddFoodCommand(arguments);
-            } else if (arguments.split(" ")[0].equals("exercise")) {
-                return new AddExerciseCommand(arguments);
-            }
-            return new HelpCommand();
+            return new AddExerciseCommand(arguments);
         case "view":
             return new ViewCommand(arguments);
         case "mark":

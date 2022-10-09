@@ -22,7 +22,7 @@ class SetCommandTest {
         String fullCommand = String.format("%s %d %s %d %d %d", command, age, gender, height, weight, fatPercentage);
 
         Command c = Parser.parse(fullCommand);
-        c.setData(ui, biometrics);
+        c.setData(ui, biometrics, exerciseList);
         c.execute();
         assertEquals(age, biometrics.getAge());
         assertEquals(gender, biometrics.getGender());
@@ -44,7 +44,7 @@ class SetCommandTest {
         String fullCommand = String.format("%s %d %s %d %d %d", command, age, gender, height, weight, fatPercentage);
 
         Command c = Parser.parse(fullCommand);
-        c.setData(ui, biometrics);
+        c.setData(ui, biometrics, exerciseList);
         c.execute();
         assertEquals(0, biometrics.getAge());
         assertEquals("-", biometrics.getGender());
@@ -66,7 +66,7 @@ class SetCommandTest {
         String fullCommand = String.format("%s %d %s %d %d %d", command, age, gender, height, weight, fatPercentage);
 
         Command c = Parser.parse(fullCommand);
-        c.setData(ui, biometrics);
+        c.setData(ui, biometrics, exerciseList);
         c.execute();
         assertEquals(0, biometrics.getAge());
         assertEquals("-", biometrics.getGender());
