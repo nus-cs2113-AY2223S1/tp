@@ -1,13 +1,13 @@
 package seedu.parking;
 
 import seedu.api.Api;
-import seedu.api.exception.EmptyResponseException;
+import seedu.exception.EmptyResponseException;
+import seedu.exception.ParkingException;
 import seedu.data.CarparkList;
 
 import seedu.ui.Ui;
 
 import java.io.IOException;
-import java.util.Scanner;
 
 public class Parking {
     private static CarparkList carparkList;
@@ -41,7 +41,7 @@ public class Parking {
         System.out.println("Trying to load data");
         try {
             carparkList = new CarparkList();
-        } catch (IOException e) {
+        } catch (ParkingException e) {
             System.out.println(e.getMessage());
         } finally {
             System.out.println("Load data sequence terminated"); // Debug line

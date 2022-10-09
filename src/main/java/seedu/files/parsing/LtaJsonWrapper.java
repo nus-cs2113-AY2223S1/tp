@@ -5,6 +5,10 @@ import seedu.data.Carpark;
 
 import java.util.List;
 
+/**
+ * Blueprint class for the {@link org.codehaus.jackson.map.ObjectMapper} class
+ * to build
+ */
 public class LtaJsonWrapper {
     private String metadata;
     private List<Carpark> value;

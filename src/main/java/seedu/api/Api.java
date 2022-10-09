@@ -1,6 +1,6 @@
 package seedu.api;
 
-import seedu.api.exception.EmptyResponseException;
+import seedu.exception.EmptyResponseException;
 import seedu.ui.Ui;
 
 import java.io.IOException;
@@ -69,7 +69,7 @@ public class Api {
             fetchTries--;
         }
         if (fetchTries == 0 && result.isEmpty()) {
-            throw new EmptyResponseException();
+            throw new EmptyResponseException("No response was received.");
         }
         storage.writeDataToFile(result);
     }
