@@ -3,6 +3,7 @@ package seedu.duke.commands.nusmodsapi;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import seedu.duke.Duke;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -16,26 +17,27 @@ import java.util.Scanner;
 
 public class Nusmods {
 
-    private final String BASE_URI = "https://api.nusmods.com/v2/2021-2022/modules/";
-    private final int MODULE_CODE = 0;
-    private final int MODULE_NAME = 1;
-    private final int MODULE_DESCRIPTION = 2;
+    private final String baseUri = "https://api.nusmods.com/v2/2021-2022/modules/";
+    private final int moduleCode = 0;
+    private final int moduleName = 1;
+    private final int moduleDescription = 2;
 
-    private String setURI() {
-        boolean validURI = false;
-        Scanner sc = new Scanner(System.in);
+    private String setUri() {
+        boolean validUri = false;
         String mod = new String();
-        while (!validURI) {
+        while (!validUri) {
             try {
-                mod = sc.nextLine().toUpperCase().trim();
-                new URL(BASE_URI + mod + ".json").toURI();
-                validURI = true;
+                if (Duke.sc.hasNextLine()) {
+                    mod = Duke.sc.nextLine().toUpperCase().trim();
+                }
+                new URL(baseUri + mod + ".json").toURI();
+                validUri = true;
             } catch (MalformedURLException | URISyntaxException e) {
                 System.out.println("Module not found, please try again.");;
             }
         }
 
-        return BASE_URI + mod + ".json";
+        return baseUri + mod + ".json";
     }
 
     public String[] getModuleInfo() throws IOException, InterruptedException {
@@ -44,7 +46,7 @@ public class Nusmods {
             HttpRequest request = HttpRequest.newBuilder()
                     .GET()
                     .header("accept", "application/json")
-                    .uri(URI.create(setURI()))
+                    .uri(URI.create(setUri()))
                     .build();
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
             if (response.statusCode() != 200) {
@@ -60,9 +62,9 @@ public class Nusmods {
         String[] info = new String[3];
         ObjectMapper mapper = new ObjectMapper();
         JsonNode node = mapper.readTree(response);
-        info[MODULE_CODE] = node.get("moduleCode").asText();
-        info[MODULE_NAME] = node.get("title").asText();
-        info[MODULE_DESCRIPTION] = node.get("description").asText();
+        info[moduleCode] = node.get("moduleCode").asText();
+        info[moduleName] = node.get("title").asText();
+        info[moduleDescription] = node.get("description").asText();
         return info;
     }
 }

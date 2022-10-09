@@ -5,13 +5,13 @@ import java.util.Scanner;
 
 public class Duke {
     private static final String EXIT_FLAG = "quit";
+    public static final Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
 
         System.out.println("Hello from Timetabler!");
 
         Timetable timetable = new Timetable();
-        Scanner in = new Scanner(System.in);
         String response;
         String input;
 
@@ -19,7 +19,7 @@ public class Duke {
                 + "1. add\n2. list\n3. quit\n4. info\n");
 
         while (true) {
-            input = in.nextLine();
+            input = sc.nextLine();
             response = Parser.parseCommand(timetable, input);
             if (Objects.equals(response, EXIT_FLAG)) {
                 break;
