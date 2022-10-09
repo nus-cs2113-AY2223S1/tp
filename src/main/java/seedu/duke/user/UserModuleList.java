@@ -55,6 +55,7 @@ public class UserModuleList {
     }
 
     public void deleteModuleByPUCode(String input) {
+        assert input.length() > 0 : "Deleting PU code cannot be empty";
         boolean isFound = false;
         for (int i = 0; i < modules.size(); ++i) {
             if (modules.get(i).getPuCode().equals(input)) {
@@ -81,6 +82,8 @@ public class UserModuleList {
     }
 
     public void updateModule(String puCode, String nusCode, String updates) {
+        assert puCode.length() > 0 : "PU module code length cannot be null";
+        assert nusCode.length() > 0 : "NUS module code length cannot be null";
         boolean isUpdated = false;
         for (UserModule module : modules) {
             if (module.getNusCode().equals(nusCode)

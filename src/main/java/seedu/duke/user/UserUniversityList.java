@@ -22,6 +22,7 @@ public class UserUniversityList {
      * @param puCode input puCode
      */
     public void deleteModule(String puCode) {
+        assert puCode.length() > 0 : "Deleting PU code cannot be empty";
         myModules.deleteModuleByPUCode(puCode);
     }
 

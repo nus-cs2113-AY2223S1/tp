@@ -13,11 +13,17 @@ public class UserModule extends Module {
 
     public UserModule(String puCode, String puTitle, String nusCode, String nusTitle, String nusCredit) {
         super(nusCode, nusTitle, nusCredit);
+        assert puCode.length() > 0 : "PU module code length cannot be null";
+        assert puTitle.length() > 0 : "PU module title length cannot be null";
+        assert nusCode.length() > 0 : "NUS module code length cannot be null";
+        assert nusTitle.length() > 0 : "NUS module title length cannot be null";
+        assert nusCredit.length() > 0 : "NUS module credits length cannot be null";
         this.nusCode = nusCode;
         this.puCode = puCode;
         this.nusTitle = nusTitle;
         this.nusCredit = nusCredit;
         this.puTitle = puTitle;
+
     }
 
     public String getNusCode() {
