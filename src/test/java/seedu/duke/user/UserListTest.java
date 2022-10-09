@@ -30,4 +30,5 @@ public class UserListTest {
         userList.addUser(user);
         assertEquals(0, userList.findUser(user.getUserId()));
     }
+
 }
