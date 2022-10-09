@@ -31,13 +31,14 @@ public class VisitList {
     public int getTotalVisits() {
         return visitList.size();
     }
+
     public void viewAll() {
-        if(isEmpty()){
+        if (isEmpty()) {
             System.out.println("There are no visits in the system right now!");
             return;
         }
         System.out.println("Here are the list of visits in the system");
-        for(int i = 0; i < getTotalVisits(); i++) {
+        for (int i = 0; i < getTotalVisits(); i++) {
             Messages.printLine();
             System.out.println((i + 1) + ")");
             System.out.println(visitList.get(i));

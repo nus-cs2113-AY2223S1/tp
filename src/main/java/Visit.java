@@ -42,6 +42,7 @@ public class Visit {
     public void setReason(String reason) {
         this.reason = reason;
     }
+
     @Override
     public String toString() {
         String message = "";
