@@ -51,7 +51,7 @@ public class UserUniversityListTest {
     }
 
     @Test
-    void deleteModule_UCLAWrongDetail_throwExecption() {
+    void deleteModule_UCLAWrongDetail_throwException() {
         testManager.createList("UCLA");
         UserModule mod = new UserModule("CS101", "Programming Intro",
                 "CS1010", "Programming Methodology", "4");
