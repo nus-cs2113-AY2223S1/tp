@@ -1,10 +1,12 @@
 package seedu.duke.item;
+import java.util.logging.*;
 
 import seedu.duke.Ui;
 
 import java.util.ArrayList;
 
 public class ItemList {
+    private static final Logger logger = Logger.getLogger("Foo");
     private final Ui ui = new Ui();
     private final ArrayList<Item> itemList;
 
@@ -29,13 +31,16 @@ public class ItemList {
     }
 
     public Item getItem(String id) throws NullPointerException {
+        logger.log(Level.INFO, "getting item from item list");
         for (Item item : itemList) {
             if (id.equals(item.getItemId())) {
                 assert id.equals(item.getItemId()) : "equals function not working";
+                logger.log(Level.INFO, "Item found");
                 return item;
             }
         }
         // exception if item not found
+        logger.log(Level.WARNING, "Item not found error", new NullPointerException());
         return null;
     }
 
