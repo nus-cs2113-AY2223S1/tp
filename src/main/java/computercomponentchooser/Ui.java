@@ -39,7 +39,7 @@ public class Ui {
     }
 
     static void startSession() {
-        //Ui.printLogo();
+        Ui.printLogo();
         Ui.printLine();
         System.out.println("Hello! ComputerComponentChooser at your service!");
         System.out.println("What can I do for you today?");
