@@ -22,7 +22,7 @@ class TransactionListTest {
         TransactionList transactionList = new TransactionList();
         Transaction transaction = new Transaction("6650266082", "6650266082", 5, "2022-10-03");
         transactionList.add(transaction);
-        assertEquals(transaction, transactionList.getTransaction(1));
+        assertEquals(transaction, transactionList.getTransactionById(transaction.getTxId()));
     }
 
     @Test
@@ -30,7 +30,7 @@ class TransactionListTest {
         TransactionList transactionList = new TransactionList();
         Transaction transaction = new Transaction("6650266082", "6650266082", 5, "2022-10-03");
         transactionList.add(transaction);
-        assertThrows(DukeException.class, () -> transactionList.getTransaction(2));
+        assertThrows(DukeException.class, () -> transactionList.getTransactionById(transaction.getTxId()));
     }
 
     @Test
@@ -38,8 +38,8 @@ class TransactionListTest {
         TransactionList transactionList = new TransactionList();
         Transaction transaction = new Transaction("6650266082", "6650266082", 5, "2022-10-03");
         transactionList.add(transaction);
-        transactionList.markFinished(1);
-        assertTrue(transactionList.getTransaction(1).isFinished());
+        transactionList.markFinished(transaction.getTxId());
+        assertTrue(transactionList.getTransactionById(transaction.getTxId()).isFinished());
     }
 
     @Test
@@ -47,8 +47,8 @@ class TransactionListTest {
         TransactionList transactionList = new TransactionList();
         Transaction transaction = new Transaction("6650266082", "6650266082", 5, "2022-10-03");
         transactionList.add(transaction);
-        transactionList.unmarkFinished(1);
-        assertFalse(transactionList.getTransaction(1).isFinished());
+        transactionList.unmarkFinished(transaction.getTxId());
+        assertFalse(transactionList.getTransactionById(transaction.getTxId()).isFinished());
     }
 
     @Test
@@ -56,7 +56,7 @@ class TransactionListTest {
         TransactionList transactionList = new TransactionList();
         Transaction transaction = new Transaction("6650266082", "6650266082", 5, "2022-10-03");
         transactionList.add(transaction);
-        transactionList.delete(1);
+        transactionList.deleteTransaction(transaction.getTxId());
         assertEquals(0, transactionList.getSize());
     }
 }

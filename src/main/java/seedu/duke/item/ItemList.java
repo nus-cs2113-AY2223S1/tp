@@ -1,22 +1,21 @@
 package seedu.duke.item;
 
 import seedu.duke.Ui;
-import seedu.duke.exception.DukeException;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
-public class ItemList{
+public class ItemList {
     private final Ui ui = new Ui();
     private final ArrayList<Item> itemList;
 
-    public ItemList() { //store files from data.txt
-        //        this.itemList = fileItems;
+    public ItemList() { // store files from data.txt
+        // this.itemList = fileItems;
         this.itemList = new ArrayList<Item>();
     }
 
     /**
      * Adds the newly created task to the task list.
+     * 
      * @param item is the new task the user has created
      */
     public void addItem(Item item) {
@@ -25,9 +24,7 @@ public class ItemList{
     }
 
     public void getItemOfAnUser(String userId) {
-        itemList.stream()
-                .filter(t -> (t.getOwnerId().equals(userId)))
-                .forEach(System.out::println);
+        itemList.stream().filter(t -> (t.getOwnerId().equals(userId))).forEach(System.out::println);
     }
 
     public Item getItem(String id) throws NullPointerException {
@@ -36,14 +33,12 @@ public class ItemList{
                 return item;
             }
         }
-        //exception if item not found
-        //return null;
-        throw new NullPointerException("");
+        // exception if item not found
+        return null;
     }
 
     public void getItemOfSpecificCategory(int categoryNumber) {
-        itemList.stream()
-                .filter(t -> (Category.setCategory(t.getCategory()) == categoryNumber))
+        itemList.stream().filter(t -> (Category.setCategory(t.getCategory()) == categoryNumber))
                 .forEach(System.out::println);
     }
 
@@ -59,6 +54,15 @@ public class ItemList{
         if (!found) {
             System.out.println("There is no such item! Nothing to delete, aborting...\n");
         }
+    }
+
+    public Item getItemById(String id) {
+        for (Item item : this.itemList) {
+            if (id.equals(item.getItemId())) {
+                return item;
+            }
+        }
+        return null;
     }
 
     public void markAvailable(String id) {
@@ -77,7 +81,11 @@ public class ItemList{
         return this.itemList;
     }
 
-    public void showList() {
-        ui.showItemsList(itemList);
+    public String showList() {
+        StringBuilder listOfUsers = new StringBuilder();
+        for (Item item : this.itemList) {
+            listOfUsers.append(item.toString()).append(System.lineSeparator());
+        }
+        return listOfUsers.toString();
     }
 }
