@@ -1,8 +1,6 @@
-package seedu.duke.ItemTest;
+package seedu.duke.item;
 
 import org.junit.jupiter.api.Test;
-import seedu.duke.item.Item;
-import seedu.duke.item.ItemList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

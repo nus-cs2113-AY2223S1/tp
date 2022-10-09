@@ -20,7 +20,7 @@ public class Duke {
         String input = Ui.readInput();
         Command command;
         boolean isLastCommand = false;
-//         maintain conversation
+        //         maintain conversation
         while (true) {
             try {
                 command = CommandParser.createCommand(input, userList, itemList, txList);
