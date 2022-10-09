@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Visit{
+public class Visit {
     private String id;
 
     private String dateOfVisit;
@@ -9,13 +9,14 @@ public class Visit{
 
     private String reason;
 
-    public Visit(String id, String dateOfVisit, String timeOfVisit, String reason){
+    public Visit(String id, String dateOfVisit, String timeOfVisit, String reason) {
         this.id = id;
         this.dateOfVisit = dateOfVisit;
         this.timeOfVisit = timeOfVisit;
         this.reason = reason;
     }
-    public Visit(String id, String dateOfVisit, String timeOfVisit){
+
+    public Visit(String id, String dateOfVisit, String timeOfVisit) {
         this.id = id;
         this.dateOfVisit = dateOfVisit;
         this.timeOfVisit = timeOfVisit;
@@ -37,6 +38,7 @@ public class Visit{
     public String getReason() {
         return reason;
     }
+
     public void setReason(String reason) {
         this.reason = reason;
     }

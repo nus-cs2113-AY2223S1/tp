@@ -22,6 +22,7 @@ public class Patient {
     public void addVisit(String id, String dateOfVisit, String timeOfVisit, String reason) {
         this.visits.add(new Visit(id,dateOfVisit,timeOfVisit,reason));
     }
+
     public void addVisit(String id, String dateOfVisit, String timeOfVisit) {
         this.visits.add(new Visit(id,dateOfVisit,timeOfVisit));
     }
