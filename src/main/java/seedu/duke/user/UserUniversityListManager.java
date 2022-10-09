@@ -3,6 +3,7 @@ package seedu.duke.user;
 import seedu.duke.userstorage.UserStorage;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.NoSuchElementException;
 
 /**
@@ -23,7 +24,7 @@ public class UserUniversityListManager {
     }
 
     /**
-     * Function to create a new list for PU.
+     * Method to create a new list for PU.
      * @param input PU name from user input
      */
     public void createList(String input) {
@@ -36,7 +37,62 @@ public class UserUniversityListManager {
     }
 
     /**
-     * Function to return the UserUniversityList search by user.
+     * Method to print all the existing university lists that have been created by user.
+     * For each university, method first prints the university name
+     * Method then prints all the modules user has saved for that particular university
+     */
+    public void displayAll() {
+        for (Map.Entry<String, UserUniversityList> set : myManager.entrySet()) {
+            String universityName = set.getKey();
+            UserUniversityList universityList = set.getValue();
+            System.out.println(universityName);
+            universityList.displayModules();
+            System.out.println("-------------------------------------------------------");
+        }
+    }
+
+    /**
+     * Method to print exactly the modules saved by user for a given university name.
+     * @param input The partner university name
+     */
+    public void displayUniversity(String input) {
+        System.out.println(input);
+        UserUniversityList myUniversityList = getList(input);
+        myUniversityList.displayModules();
+        System.out.println("-------------------------------------------------------");
+    }
+
+    public void addModule(String inputSchool, UserModule inputModule) {
+        UserUniversityList myUniversityList = getList(inputSchool);
+        myUniversityList.addModule(inputModule);
+    }
+
+    /**
+     * Method to delete the module based on inputs.
+     * @param inputSchool the PU to delete the module from
+     * @param puCode the exact PUCode to delete the module from
+     */
+    public void deleteModule(String inputSchool, String puCode) {
+        UserUniversityList myUniversityList = getList(inputSchool);
+        myUniversityList.deleteModule(puCode);
+    }
+
+    /**
+     * Method to delete an entire university list
+     * @param inputSchool the PU school name that we will be deleting from.
+     */
+    public void deleteList(String inputSchool) {
+        if (!myManager.containsKey(inputSchool)) {
+            System.out.println("No such university found");
+            throw new NoSuchElementException();
+        }
+        else {
+            myManager.remove(inputSchool);
+        }
+    }
+
+    /**
+     * Method to return the UserUniversityList search by user.
      * @param input PU name
      * @return the UserUniversityList corresponding to the input PU name
      */

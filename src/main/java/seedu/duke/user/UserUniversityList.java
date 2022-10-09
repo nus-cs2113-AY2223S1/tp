@@ -1,9 +1,5 @@
 package seedu.duke.user;
 
-import seedu.duke.module.Module;
-import seedu.duke.university.University;
-
-import java.util.ArrayList;
 
 /**
  * Class to store the interested modules that a user is for a particular university.
@@ -19,6 +15,14 @@ public class UserUniversityList {
 
     public void addModule(UserModule input) {
         myModules.addModule((input));
+    }
+
+    /**
+     * Method to delete module based on puCode.
+     * @param puCode input puCode
+     */
+    public void deleteModule(String puCode) {
+        myModules.deleteModuleByPUCode(puCode);
     }
 
     public void deleteModule(int index) {

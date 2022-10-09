@@ -1,5 +1,6 @@
 package seedu.duke.user;
 
+import java.util.HashMap;
 import java.util.ArrayList;
 
 /**
@@ -53,13 +54,26 @@ public class UserModuleList {
         }
     }
 
+    public void deleteModuleByPUCode(String input) {
+        boolean isFound = false;
+        for (int i = 0; i < modules.size(); ++i) {
+            if (modules.get(i).getPuCode().equals(input)) {
+                isFound = true;
+                deleteModule(i);
+            }
+        }
+        if (!isFound) {
+            System.out.println("No such modules found");
+        }
+    }
+
     public void deleteModule(int index) {
         index--;
         try {
             System.out.println("Deleting module:");
             System.out.println(modules.get(index).toString());
             modules.remove(index);
-            System.out.println("Modules left are: ");
+            System.out.println("Modules left for current school are: ");
             displayAll();
         } catch (IndexOutOfBoundsException e) {
             System.out.println("index not within range");
