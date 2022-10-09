@@ -56,7 +56,7 @@ class TransactionListTest {
         TransactionList transactionList = new TransactionList();
         Transaction transaction = new Transaction("6650266082", "6650266082", 5, "2022-10-03");
         transactionList.add(transaction);
-        transactionList.delete(1);
+        transactionList.deleteTransaction(transaction.getTxId());
         assertEquals(0, transactionList.getSize());
     }
 }
