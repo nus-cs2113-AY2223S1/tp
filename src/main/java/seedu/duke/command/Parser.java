@@ -45,8 +45,8 @@ public class Parser {
                 : "NUS Module Credit should not be empty";
 
         String[] lineData = { partnerUniversity, parterUniversityModuleCode,
-                partnerUnviersityModuleTitle, partnerUniversityModuleCredit, nusModuleCode,
-                nusModuleTitle, nusModuleCredit };
+            partnerUnviersityModuleTitle, partnerUniversityModuleCredit, nusModuleCode,
+            nusModuleTitle, nusModuleCredit };
 
         logger.log(Level.FINE, "End parsing database line");
 

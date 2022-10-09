@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 import seedu.duke.command.Database;
 import seedu.duke.command.Parser;
-import seedu.duke.command.Storage;
+import seedu.duke.command.DatabaseStorage;
 import seedu.duke.module.Module;
 import seedu.duke.ui.Ui;
 import seedu.duke.university.University;
