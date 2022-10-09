@@ -4,9 +4,9 @@ import seedu.duke.id.IdGenerator;
 import seedu.duke.user.User;
 
 public class Item {
-    private String name;
+    private final String name;
     private final String id;
-    private User owner;
+    private final User owner;
     private double pricePerDay;
     private boolean isAvailable;
     private final Category.Categories category;
@@ -26,6 +26,10 @@ public class Item {
 
     public String getName() {
         return name;
+    }
+
+    public Category.Categories getCategory() {
+        return category;
     }
 
     public void setAsAvailable() {

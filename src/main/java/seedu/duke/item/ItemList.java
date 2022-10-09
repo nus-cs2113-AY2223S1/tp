@@ -4,6 +4,7 @@ import seedu.duke.Ui;
 import seedu.duke.exception.DukeException;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class ItemList {
     private final Ui ui = new Ui();
@@ -20,6 +21,18 @@ public class ItemList {
     public void addItem(Item item) {
         itemList.add(item);
         ui.addItemMessage(item, itemList);
+    }
+
+    public void getItemOfAnUser(String userId) {
+        itemList.stream()
+                .filter(t -> (t.getOwner().getUserId().equals(userId)))
+                .forEach(System.out::println);
+    }
+
+    public void getItemOfSpecificCategory(int categoryNumber) {
+        itemList.stream()
+                .filter(t -> (Category.setCategory(t.getCategory()) == categoryNumber))
+                .forEach(System.out::println);
     }
 
     public void deleteItem(int index) {
