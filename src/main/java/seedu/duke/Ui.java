@@ -6,7 +6,8 @@ import seedu.duke.transaction.Transaction;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.logging.*;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 public class Ui {
 
@@ -15,8 +16,8 @@ public class Ui {
 
 
     public static final String logo =
-                    "                             _      " +
-                    "\n" + " /\\ /\\ _ __   ___ _   _  ___| | ___ \n"
+            "                             _      "
+                    + "\n" + " /\\ /\\ _ __   ___ _   _  ___| | ___ \n"
                     + "/ / \\ \\ '_ \\ / __| | | |/ __| |/ _ \\\n"
                     + "\\ \\_/ / |_) | (__| |_| | (__| |  __/\n"
                     + " \\___/| .__/ \\___|\\__, |\\___|_|\\___|\n"
@@ -69,7 +70,7 @@ public class Ui {
     }
 
     public void deleteTransactionMessage(Transaction transaction,
-            ArrayList<Transaction> transactionList) {
+                                         ArrayList<Transaction> transactionList) {
         showLine();
         assert transactionList.size() >= 0;
         System.out.println("OK! I will remove the following item:\n" + transaction.getTxId() + "\n"
