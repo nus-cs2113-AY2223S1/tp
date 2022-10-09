@@ -6,7 +6,7 @@ public class Parser {
 
     public static Command parse(String input) {
         String userCommand = input.split(" ")[0];
-        String arguments = input.substring(userCommand.length() + 1);
+        String arguments = input.substring(userCommand.length()).trim();
         switch (userCommand) {
         case "greet":
             return new GreetCommand();
