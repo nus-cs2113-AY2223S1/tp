@@ -18,7 +18,6 @@ public class ComputerComponentChooser {
                     line = in.nextLine();
                 }
             }
-            line = in.nextLine();
         } while (!Parser.checkBye(line));
 
         Ui.endSession();
