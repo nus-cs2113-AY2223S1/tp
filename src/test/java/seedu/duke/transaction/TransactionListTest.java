@@ -30,7 +30,7 @@ class TransactionListTest {
         TransactionList transactionList = new TransactionList();
         Transaction transaction = new Transaction("6650266082", "6650266082", 5, "2022-10-03");
         transactionList.add(transaction);
-        assertThrows(DukeException.class, () -> transactionList.getTransactionById(transaction.getTxId()));
+        assertThrows(DukeException.class, () -> transactionList.getTransactionById("6650266w82"));
     }
 
     @Test
