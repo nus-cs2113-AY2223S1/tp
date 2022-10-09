@@ -24,4 +24,25 @@ public class VisitList {
         }
     }
 
+    public boolean isEmpty() {
+        return visitList.size() == 0;
+    }
+
+    public int getTotalVisits() {
+        return visitList.size();
+    }
+    public void viewAll() {
+        if(isEmpty()){
+            System.out.println("There are no visits in the system right now!");
+            return;
+        }
+        System.out.println("Here are the list of visits in the system");
+        for(int i = 0; i < getTotalVisits(); i++) {
+            Messages.printLine();
+            System.out.println((i + 1) + ")");
+            System.out.println(visitList.get(i));
+        }
+        Messages.printLine();
+    }
+
 }
