@@ -35,4 +35,17 @@ public class ClientList {
         clientList.add(new Client(clientName, clientContactNumber, clientEmail, clientBudgetPerMonth));
         currentListSize++;
     }
+
+    /**
+     * Deletes a client from the client list and updates client list size.
+     *
+     * @param clientIndex Index of client to be deleted.
+     * @return Client deleted.
+     */
+    public Client deleteClient(int clientIndex) {
+        Client deletedClient = clientList.get(clientIndex);
+        clientList.remove(clientIndex);
+        currentListSize--;
+        return deletedClient;
+    }
 }

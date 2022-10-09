@@ -72,4 +72,6 @@ public class Ui {
     public void showInvalidBudgetFormatMessage() {
         showToUser(MESSAGE_INVALID_BUDGET_FORMAT);
     }
+
+    /* Delete Client Related Exceptions */
 }

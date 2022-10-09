@@ -31,7 +31,7 @@ public class Parser {
             } else {
                 throw new UndefinedSubCommandAddTypeException();
             }
-
+        case ("delete"):
         default:
             return new CommandUndefined();
         }
