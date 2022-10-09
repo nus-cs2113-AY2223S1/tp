@@ -7,6 +7,7 @@ public class Duke {
     private UI ui;
     private ReviewList reviewList;
     private String filepath = "data/reviews.txt";
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
