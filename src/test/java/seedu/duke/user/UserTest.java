@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class UserTest {
     @Test
-    void testToString() {
+    void testStatus() {
         User user = new User("John Doe", 45, "93746378");
         assertEquals((user.getUserId() + " | John Doe | 45 | 93746378"), user.toString());
     }

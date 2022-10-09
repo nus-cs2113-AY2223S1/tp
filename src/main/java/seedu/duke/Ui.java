@@ -6,14 +6,18 @@ import seedu.duke.transaction.Transaction;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 public class Ui {
 
     private static final Scanner input = new Scanner(System.in);
+    private static Logger logger = Logger.getLogger("Foo");
+
 
     public static final String logo =
-                    "                             _      " +
-                    "\n" + " /\\ /\\ _ __   ___ _   _  ___| | ___ \n"
+            "                             _      "
+                    + "\n" + " /\\ /\\ _ __   ___ _   _  ___| | ___ \n"
                     + "/ / \\ \\ '_ \\ / __| | | |/ __| |/ _ \\\n"
                     + "\\ \\_/ / |_) | (__| |_| | (__| |  __/\n"
                     + " \\___/| .__/ \\___|\\__, |\\___|_|\\___|\n"
@@ -22,6 +26,7 @@ public class Ui {
     public static final String greeting = "Hello from\n" + logo;
 
     public static void printGreeting() {
+        assert logo != null;
         System.out.print(logo);
         System.out.print(greeting);
     }
@@ -29,6 +34,7 @@ public class Ui {
     public final String question = "What would you like to do?\n";
 
     public void printQuestion() {
+        assert question != null;
         System.out.print(question);
     }
 
@@ -49,6 +55,7 @@ public class Ui {
 
     public void addItemMessage(Item item, List<Item> items) {
         showLine();
+        assert items.size() >= 0;
         System.out.println("Noted. Following item has been added: " + '\n' + item.getDescription()
                 + "\n" + "Total item(s) in list: " + items.size() + '\n');
         showLine();
@@ -56,14 +63,16 @@ public class Ui {
 
     public void deleteItemMessage(Item item, List<Item> items) {
         showLine();
+        assert items.size() >= 0;
         System.out.println("OK! I will remove the following item:\n" + item.getDescription() + "\n"
                 + "Total item(s) in list: " + items.size() + '\n');
         showLine();
     }
 
     public void deleteTransactionMessage(Transaction transaction,
-            ArrayList<Transaction> transactionList) {
+                                         ArrayList<Transaction> transactionList) {
         showLine();
+        assert transactionList.size() >= 0;
         System.out.println("OK! I will remove the following item:\n" + transaction.getTxId() + "\n"
                 + "Total item(s) in list: " + transactionList.size() + '\n');
         showLine();

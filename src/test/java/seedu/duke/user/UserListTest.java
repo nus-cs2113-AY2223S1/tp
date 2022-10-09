@@ -25,11 +25,22 @@ public class UserListTest {
     }
 
     @Test
-    void findUser_findUserUsingId_expectTheUserIndex() {
+    void findUser_findUserUsingId_expectTheUserObject() {
         UserList userList = new UserList();
         User user = new User("John Doe", 45, "93746378");
         userList.addUser(user);
         assertEquals(user, userList.findUser("John Doe"));
+    }
+
+    @Test
+    void deleteUser_deleteUserUsingId_expectNoUser() {
+        UserList userList = new UserList();
+        User user = new User("John Doe", 45, "93746378");
+        User user2 = new User("Jane Doe", 40, "92744873");
+        userList.addUser(user);
+        userList.addUser(user2);
+        userList.deleteUser("John Doe");
+        assertEquals(1, userList.getSize());
     }
 
 }
