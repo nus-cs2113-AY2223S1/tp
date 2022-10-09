@@ -23,6 +23,7 @@ class PrescriptionListTest {
     void tearDown() {
         // Switch the byte array output stream back to system output
         System.setOut(SYSTEM_OUT);
+        OUTPUT_STREAM.reset();
     }
 
     @Test
