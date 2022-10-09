@@ -19,7 +19,7 @@ public class ViewTransactionCommand extends Command {
     }
 
     public boolean executeCommand() throws DukeException {
-        Transaction tx = this.txList.findTransaction(args[DEFAULT_FIRST_INDEX]);
+        Transaction tx = this.txList.getTransactionById(args[DEFAULT_FIRST_INDEX]);
         System.out.println(tx);
         return false;
     }

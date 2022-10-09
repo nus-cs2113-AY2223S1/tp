@@ -27,7 +27,7 @@ public class ItemList {
         itemList.stream().filter(t -> (t.getOwnerId().equals(userId))).forEach(System.out::println);
     }
 
-    public Item getItem(String id) {
+    public Item getItem(String id) throws NullPointerException {
         for (Item item : itemList) {
             if (id.equals(item.getItemId())) {
                 return item;
@@ -56,22 +56,25 @@ public class ItemList {
         }
     }
 
-    public void markAvailable(Item item) {
-        int index = itemList.indexOf(item);
-        getItemIndex(index).setAsAvailable();
+    public Item getItemById(String id) {
+        for (Item item : this.itemList) {
+            if (id.equals(item.getItemId())) {
+                return item;
+            }
+        }
+        return null;
     }
 
-    public void markUnavailable(Item item) {
-        int index = itemList.indexOf(item);
-        getItemIndex(index).setAsNotAvailable();
+    public void markAvailable(String id) {
+        getItemById(id).setAsAvailable();
+    }
+
+    public void markUnavailable(String id) {
+        getItemById(id).setAsNotAvailable();
     }
 
     public int getListSize() {
         return itemList.size();
-    }
-
-    public Item getItemIndex(int index) {
-        return itemList.get(index - 1);
     }
 
     public ArrayList<Item> getItemList() {

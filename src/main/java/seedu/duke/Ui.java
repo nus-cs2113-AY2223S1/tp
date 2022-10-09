@@ -1,15 +1,11 @@
 package seedu.duke;
 
-import seedu.duke.exception.DukeException;
 import seedu.duke.item.Item;
 import seedu.duke.transaction.Transaction;
-import seedu.duke.user.User;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Queue;
 import java.util.Scanner;
-import javax.swing.InputMap;
 
 public class Ui {
 
@@ -92,8 +88,8 @@ public class Ui {
         System.out.println(string);
     }
 
-    public static void printErrorMessage(DukeException e) {
-        System.out.println(e.getMessage());
+    public static void printErrorMessage(String message) {
+        System.out.println(message);
     }
 
     public static final void exit() {
