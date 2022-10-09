@@ -41,8 +41,8 @@ public class ItemList {
         for (Item item : itemList) {
             if (itemId.equals(item.getItemId())) {
                 found = true;
-                ui.deleteItemMessage(item, itemList);
                 itemList.remove(item);
+                ui.deleteItemMessage(item, itemList);
             }
         }
         if (!found) {
@@ -73,6 +73,6 @@ public class ItemList {
     }
 
     public void showList() {
-        ui.showItemList(itemList);
+        ui.showItemsList(itemList);
     }
 }
