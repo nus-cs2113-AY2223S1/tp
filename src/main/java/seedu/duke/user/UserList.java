@@ -39,13 +39,14 @@ public class UserList {
     }
 
     // find user using name
-    public User findUser(String userName) {
+    public User findUser(String userName) throws NullPointerException {
         for (User user : userList) {
             if (user.getName().equals(userName)) {
                 return user;
             }
         }
-        return null;
+//        return null;
+        throw NullPointerException;
     }
 
     public String listUser() {
