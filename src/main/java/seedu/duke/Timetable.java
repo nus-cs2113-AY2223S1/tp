@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import seedu.duke.module.Module;
+import seedu.duke.module.lessons.Lesson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,8 +9,8 @@ import java.util.List;
 public class Timetable {
     public static List<Module> listOfModules = new ArrayList<>();
 
-    public void addNewModule(String code, String name, String description) {
-        listOfModules.add(new Module(code, name, description));
+    public void addNewModule(String code, String name, String description, List<Lesson> lessons) {
+        listOfModules.add(new Module(code, name, description, lessons));
     }
 
     public String listModules() {

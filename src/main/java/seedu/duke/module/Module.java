@@ -1,9 +1,15 @@
 package seedu.duke.module;
 
+import seedu.duke.module.lessons.Lesson;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Module {
     private String moduleName;
     private String moduleCode;
     private String moduleDescription;
+    private List<Lesson> lessons;
 
     public String getModuleName() {
         return moduleName;
@@ -13,14 +19,11 @@ public class Module {
         return moduleCode;
     }
 
-    public String getModuleDescription() {
-        return moduleDescription;
-    }
-
-    public Module(String moduleCode, String moduleName, String moduleDescription) {
+    public Module(String moduleCode, String moduleName, String moduleDescription, List<Lesson> lessons) {
         this.moduleCode = moduleCode;
         this.moduleName = moduleName;
         this.moduleDescription = moduleDescription;
+        this.lessons = lessons;
     }
 
     public String getModuleDetails() {
