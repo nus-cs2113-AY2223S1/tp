@@ -1,8 +1,24 @@
 package seedu.duke;
 
+import seedu.duke.item.ItemList;
+import seedu.duke.transaction.TransactionList;
+
 import java.util.Scanner;
 
 public class Duke {
+    private final Ui ui;
+    private final ItemList itemList;
+    private final TransactionList transactionList;
+    public static final String BYE = "bye";
+    public static final int TASK = 0;
+
+    private Duke(ItemList itemList, TransactionList transactionList) {
+        this.itemList = itemList;
+        this.transactionList = transactionList;
+        ui = new Ui();
+        ui.printGreeting();
+    }
+
     /**
      * Main entry-point for the java.duke.Duke application.
      */
