@@ -10,8 +10,9 @@ public class ItemList {
     private final Ui ui = new Ui();
     private final ArrayList<Item> itemList;
 
-    public ItemList(ArrayList<Item> fileItems) { //store files from data.txt
-        this.itemList = fileItems;
+    public ItemList() { //store files from data.txt
+        //        this.itemList = fileItems;
+        this.itemList = new ArrayList<Item>();
     }
 
     /**
@@ -25,7 +26,7 @@ public class ItemList {
 
     public void getItemOfAnUser(String userId) {
         itemList.stream()
-                .filter(t -> (t.getOwner().getUserId().equals(userId)))
+                .filter(t -> (t.getOwnerId().equals(userId)))
                 .forEach(System.out::println);
     }
 
@@ -35,10 +36,18 @@ public class ItemList {
                 .forEach(System.out::println);
     }
 
-    public void deleteItem(int index) {
-        Item item = itemList.get(index - 1);
-        itemList.remove(index - 1);
-        ui.deleteItemMessage(item, itemList);
+    public void deleteItem(String itemId) {
+        boolean found = false;
+        for (Item item : itemList) {
+            if (itemId.equals(item.getItemId())) {
+                found = true;
+                ui.deleteItemMessage(item, itemList);
+                itemList.remove(item);
+            }
+        }
+        if (!found) {
+            System.out.println("There is no such item! Nothing to delete, aborting...\n");
+        }
     }
 
     public void markAvailable(Item item) {
@@ -64,6 +73,6 @@ public class ItemList {
     }
 
     public void showList() {
-        ui.showList(itemList);
+        ui.showItemList(itemList);
     }
 }
