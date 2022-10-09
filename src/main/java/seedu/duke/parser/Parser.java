@@ -54,10 +54,12 @@ public class Parser {
      * @return type of command
      */
     public static Command searchAddDeleteCommand(String[] keywords, Command command) {
-        boolean isValidCommand = isTwoWordsCommand(keywords) && isModuleCode(keywords[1]);
+        // boolean isValidCommand = isTwoWordsCommand(keywords) && isModuleCode(keywords[1]);
+        boolean isValidCommand = isModuleCode(keywords[1]);
         if (isValidCommand) {
             return command;
         } else {
+            System.out.println("Invalid module code");
             return determineWrongCommand(keywords);
         }
     }

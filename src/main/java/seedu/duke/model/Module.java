@@ -21,6 +21,7 @@ public class Module {
 
     private static List<Module> moduleList;
     private static Map<String, Module> modulesByCode;
+    private static Map<String, Module> modulesByTitle;
 
     public static List<Module> getAll() {
         if (moduleList == null) {
@@ -28,6 +29,10 @@ public class Module {
             modulesByCode = new HashMap<>();
             for (Module m : moduleList) {
                 modulesByCode.put(m.moduleCode, m);
+            }
+            modulesByTitle = new HashMap<>();
+            for (Module m : moduleList) {
+                modulesByTitle.put(m.title, m);
             }
         }
         return moduleList;
