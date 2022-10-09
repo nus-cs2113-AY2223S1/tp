@@ -7,6 +7,7 @@ import seedu.duke.user.UserList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class UserListTest {
+
     @Test
     void add_addOneUser_expectSizeOne() {
         UserList userList = new UserList();
@@ -30,4 +31,5 @@ public class UserListTest {
         userList.addUser(user);
         assertEquals(0, userList.findUser(user.getUserId()));
     }
+
 }
