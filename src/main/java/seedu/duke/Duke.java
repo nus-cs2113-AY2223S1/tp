@@ -33,7 +33,6 @@ public class Duke {
                 switch (commandType) {
                 case REGISTER:
                     Ui.showRegisterInfo();
-
                     String userName = " ";
 
                     //checks if the username already exists
@@ -52,7 +51,6 @@ public class Duke {
                         passWordLength = passWord.length();
                     } while (passWordLength > 8);
 
-
                     existingUserNames.add(userName);
                     UserNameFileWorkings.writeToUserNames(userName);
 
@@ -62,6 +60,7 @@ public class Duke {
                     break;
                 case BYE:
                     isProgramEnd = true;
+                    Ui.showExitMessage();
                     break;
                 case LOGIN:
                     System.out.println("login will be implemented soon");
@@ -73,7 +72,6 @@ public class Duke {
                 e.handleException();
             }
         }
-
 
     }
 }
