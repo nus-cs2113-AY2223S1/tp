@@ -1,6 +1,7 @@
 package seedu.duke.user;
 
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 
 /**
  * Class of module list that manages the modules that the user is interested in.
@@ -9,6 +10,10 @@ import java.util.ArrayList;
 
 public class UserModuleList {
     private ArrayList<UserModule> modules;
+
+    public void setModules(ArrayList<UserModule> modules) {
+        this.modules = modules;
+    }
 
     public UserModuleList() {
         this.modules = new ArrayList<>();
@@ -53,16 +58,48 @@ public class UserModuleList {
         }
     }
 
+    public void deleteModuleByPuCode(String input) {
+        assert input.length() > 0 : "Deleting PU code cannot be empty";
+        boolean isFound = false;
+        for (int i = 0; i < modules.size(); ++i) {
+            if (modules.get(i).getPuCode().equals(input)) {
+                isFound = true;
+                deleteModule(i + 1);
+            }
+        }
+        if (!isFound) {
+            System.out.println("No such modules found");
+            throw new NoSuchElementException();
+        }
+    }
+
     public void deleteModule(int index) {
         index--;
-        try {
+        if (index < 0 || index >= modules.size()) {
+            System.out.println("index not within range");
+            throw new IndexOutOfBoundsException();
+        } else {
             System.out.println("Deleting module:");
             System.out.println(modules.get(index).toString());
             modules.remove(index);
-            System.out.println("Modules left are: ");
+            System.out.println("Modules left for current school are: ");
             displayAll();
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println("index not within range");
+        }
+    }
+
+    public void updateModule(String puCode, String nusCode, String updates) {
+        assert puCode.length() > 0 : "PU module code length cannot be null";
+        assert nusCode.length() > 0 : "NUS module code length cannot be null";
+        boolean isUpdated = false;
+        for (UserModule module : modules) {
+            if (module.getNusCode().equals(nusCode)
+                    && module.getPuCode().equals(puCode)) {
+                isUpdated = true;
+                module.setComment(updates);
+            }
+        }
+        if (!isUpdated) {
+            System.out.println("No such modules found");
         }
     }
 
