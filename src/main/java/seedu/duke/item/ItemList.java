@@ -73,6 +73,6 @@ public class ItemList {
     }
 
     public void showList() {
-        ui.showItemList(itemList);
+        ui.showItemsList(itemList);
     }
 }
