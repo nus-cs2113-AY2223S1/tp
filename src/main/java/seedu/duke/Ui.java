@@ -6,10 +6,12 @@ import seedu.duke.transaction.Transaction;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.logging.*;
 
 public class Ui {
 
     private static final Scanner input = new Scanner(System.in);
+    private static Logger logger = Logger.getLogger("Foo");
 
 
     public static final String logo =
