@@ -6,6 +6,10 @@ public class Module {
     private String credit;
 
     public Module(String code, String title, String credit) {
+        assert code.length() > 0 : "Code cannot be empty";
+        assert title.length() > 0 : "Title cannot be empty";
+        assert credit.length() > 0 : "Credit cannot be empty";
+
         setCode(code);
         setTitle(title);
         setCredit(credit);
