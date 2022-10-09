@@ -3,6 +3,7 @@ package seedu.duke;
 import seedu.duke.exception.DukeException;
 import seedu.duke.item.Item;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 

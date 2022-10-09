@@ -1,38 +1,50 @@
 package seedu.duke.item;
 
-import seedu.duke.item.Category;
+import seedu.duke.id.IdGenerator;
+import seedu.duke.user.User;
 
-public abstract class Item {
-    public String name;
-    public String id;
-    public String owner;
-    public String createdAt;
-    public float pricePerDay;
-    public boolean isAvailable;
-    public Category category;
+public class Item {
+    private final String name;
+    private final String id;
+    private final User owner;
+    private double pricePerDay;
+    private boolean isAvailable;
+    private final Category.Categories category;
 
-    public Item(Category category, String name, float price, boolean status, String owner, String createdAt) {
+    public Item(String name, int categoryNumber, double price, User owner) {
+        this.id = IdGenerator.generateId();
         this.name = name;
         this.pricePerDay = price;
-        this.isAvailable = status;
+        this.isAvailable = true;
         this.owner = owner;
-        this.createdAt = createdAt;
-        this.category = category;
+        this.category = Category.mapCategory(categoryNumber);
     }
 
-    public void setLoanStatus(boolean status) {
-        isAvailable = status;
+    public User getOwner() {
+        return owner;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Category.Categories getCategory() {
+        return category;
+    }
+
+    public void setAsAvailable() {
+        isAvailable = true;
+    }
+
+    public void setAsNotAvailable() {
+        isAvailable = false;
     }
 
     public boolean isAvailable() {
         return isAvailable;
     }
 
-    public void setId(String putId) {
-        this.id = putId;
-    }
-
-    public String getId() {
+    public String getItemId() {
         return id;
     }
 
@@ -48,6 +60,18 @@ public abstract class Item {
         this.pricePerDay = newPrice;
     }
 
-    public abstract String fileFormat();
+    public String fileFormat() {
+        return null; //add later
+    }
+
+    @Override
+    public String toString() {
+        String itemIcon = "[" + (isAvailable ? "Y" : "N") + "] ";
+        String itemName = "Item: " + name + "(ID: " + id + ") ";
+        String itemCategory = "Category: " + category.toString() + " ";
+        String itemOwner = "Owner: " + owner.getUserId() + " ";
+        String itemPrice = "PricePerDay: " + pricePerDay;
+        return itemIcon + itemName + itemCategory + itemOwner + itemPrice;
+    }
 
 }
