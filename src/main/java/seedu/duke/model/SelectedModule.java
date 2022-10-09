@@ -22,7 +22,9 @@ public class SelectedModule {
 
     public boolean isFullySelected() {
         for (LessonType lessonType : module.semesterData.get(semester).getLessonTypes()) {
-            if(!selectedSlots.containsKey(lessonType)) return false;
+            if(!selectedSlots.containsKey(lessonType)) {
+                return false;
+            }
         }
         return true;
     }

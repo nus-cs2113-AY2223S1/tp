@@ -30,7 +30,7 @@ public class SemesterData {
 
     public Map<LessonType, List<RawLesson>> getAvailableSlots(){
         Map<LessonType, List<RawLesson>> map = new HashMap<>();
-        for(LessonType lessonType: lessonTypes){
+        for(LessonType lessonType: lessonTypes) {
             map.put(lessonType, getLessonsByType(lessonType));
         }
         return map;
