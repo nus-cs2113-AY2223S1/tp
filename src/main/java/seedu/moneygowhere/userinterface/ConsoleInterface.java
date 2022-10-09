@@ -14,6 +14,7 @@ import seedu.moneygowhere.data.expense.ExpenseManager;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandAddExpenseInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandDeleteExpenseInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandEditExpenseInvalidException;
+import seedu.moneygowhere.exceptions.ConsoleParserCommandAddIncomeInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandNotFoundException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandSortExpenseInvalidTypeException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandViewExpenseInvalidException;
@@ -282,7 +283,8 @@ public class ConsoleInterface {
                      | ConsoleParserCommandViewExpenseInvalidException
                      | ConsoleParserCommandDeleteExpenseInvalidException
                      | ConsoleParserCommandEditExpenseInvalidException
-                     | ConsoleParserCommandSortExpenseInvalidTypeException exception) {
+                     | ConsoleParserCommandSortExpenseInvalidTypeException
+                     | ConsoleParserCommandAddIncomeInvalidException exception) {
                 printErrorMessage(exception.getMessage());
             }
             // Execute function according to the ConsoleCommand object returned by the parser

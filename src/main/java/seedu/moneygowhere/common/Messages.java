@@ -36,5 +36,12 @@ public class Messages {
             + "Please ensure the file is named correctly and is in the right directory if you have a load file.";
     public static final String CONSOLE_ERROR_SAVE_DATA = ""
             + "There is an error in saving file...\n"
-            + "File does not exist or Path is wrong :(";
+            + "File does not exist or Path is wrong :("
+            + "SYNTAX: View-Expense [-i EXPENSE_NUMBER]";
+    public static final String CONSOLE_MESSAGE_COMMAND_ADD_INCOME_SUCCESS = "The income was added successfully.";
+    public static final String CONSOLE_ERROR_COMMAND_ADD_INCOME_INVALID = ""
+            + "The arguments entered are invalid. "
+            +  "SYNTAX: Add-Income -n NAME -a AMOUNT [-d "
+            + Configurations.CONSOLE_INTERFACE_DATE_TIME_INPUT_FORMAT
+            + "] [-t DESCRIPTION]";
 }

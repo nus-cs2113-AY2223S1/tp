@@ -10,6 +10,7 @@ import org.apache.commons.text.StringTokenizer;
 import org.apache.commons.text.matcher.StringMatcherFactory;
 import seedu.moneygowhere.commands.ConsoleCommand;
 import seedu.moneygowhere.commands.ConsoleCommandAddExpense;
+import seedu.moneygowhere.commands.ConsoleCommandAddIncome;
 import seedu.moneygowhere.commands.ConsoleCommandBye;
 import seedu.moneygowhere.commands.ConsoleCommandDeleteExpense;
 import seedu.moneygowhere.commands.ConsoleCommandEditExpense;
@@ -20,6 +21,7 @@ import seedu.moneygowhere.common.Messages;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandAddExpenseInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandDeleteExpenseInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandEditExpenseInvalidException;
+import seedu.moneygowhere.exceptions.ConsoleParserCommandAddIncomeInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandNotFoundException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandSortExpenseInvalidTypeException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandViewExpenseInvalidException;
@@ -68,6 +70,7 @@ public class ConsoleParser {
     public static final String CONSOLE_COMMAND_SORT_EXPENSE_TYPE_DATE = "date";
     public static final String CONSOLE_COMMAND_SORT_EXPENSE_ORDER_ASCENDING = "ascending";
     public static final String CONSOLE_COMMAND_SORT_EXPENSE_ORDER_DESCENDING = "descending";
+    public static final String CONSOLE_COMMAND_ADD_INCOME = "add-income";
 
     private static String[] tokenizeCommandArguments(String arguments) {
         StringTokenizer stringTokenizer = new StringTokenizer(arguments);
@@ -379,6 +382,82 @@ public class ConsoleParser {
                     exception);
         }
     }
+    private static ConsoleCommandAddIncome parseCommandAddIncome(String arguments)
+            throws ConsoleParserCommandAddIncomeInvalidException {
+        try {
+            String[] argumentsArr = tokenizeCommandArguments(arguments);
+
+            Option optionName = new Option(
+                    "n",
+                    "name",
+                    true,
+                    "name"
+            );
+            Option optionDateTime = new Option(
+                    "d",
+                    "datetime",
+                    true,
+                    "date and time"
+            );
+            Option optionDescription = new Option(
+                    "t",
+                    "description",
+                    true,
+                    "description"
+            );
+            Option optionAmount = new Option(
+                    "a",
+                    "amount",
+                    true,
+                    "amount"
+            );
+            Options options = new Options();
+            options.addOption(optionName);
+            options.addOption(optionDateTime);
+            options.addOption(optionDescription);
+            options.addOption(optionAmount);
+            CommandLineParser commandLineParser = new DefaultParser();
+            CommandLine commandLine = commandLineParser.parse(options, argumentsArr);
+
+            String name = commandLine.getOptionValue("name");
+            String dateTimeStr = commandLine.getOptionValue("datetime");
+            String description = commandLine.getOptionValue("description");
+            String amountStr = commandLine.getOptionValue("amount");
+
+            // Guard clause for mandatory arguments
+            if (name == null || amountStr == null) {
+                throw new ConsoleParserCommandAddIncomeInvalidException(
+                        Messages.CONSOLE_ERROR_COMMAND_ADD_INCOME_INVALID
+                );
+            }
+
+            LocalDateTime dateTime;
+            if (dateTimeStr == null) {
+                dateTime = LocalDateTime.now();
+            } else {
+                dateTime = LocalDateTime.parse(
+                        dateTimeStr,
+                        DateTimeFormatter.ofPattern(Configurations.CONSOLE_INTERFACE_DATE_TIME_INPUT_FORMAT)
+                );
+            }
+
+            BigDecimal amount = new BigDecimal(amountStr);
+
+            return new ConsoleCommandAddIncome(
+                    name,
+                    dateTime,
+                    description,
+                    amount);
+        } catch (ParseException
+                 | DateTimeParseException
+                 | NumberFormatException
+                 | ConsoleParserCommandAddIncomeInvalidException e) {
+            throw new ConsoleParserCommandAddIncomeInvalidException(
+                    Messages.CONSOLE_ERROR_COMMAND_ADD_INCOME_INVALID,
+                    e
+            );
+        }
+    }
 
     /**
      * Parses an input read from standard input.
@@ -398,7 +477,8 @@ public class ConsoleParser {
             ConsoleParserCommandViewExpenseInvalidException,
             ConsoleParserCommandDeleteExpenseInvalidException,
             ConsoleParserCommandEditExpenseInvalidException,
-            ConsoleParserCommandSortExpenseInvalidTypeException {
+            ConsoleParserCommandSortExpenseInvalidTypeException,
+            ConsoleParserCommandAddIncomeInvalidException {
         String[] consoleInputArr = consoleInput.split(" ", 2);
 
         String command = consoleInputArr[0];
@@ -420,6 +500,8 @@ public class ConsoleParser {
             return parseCommandEditExpense(arguments);
         } else if (command.equalsIgnoreCase(CONSOLE_COMMAND_SORT_EXPENSE)) {
             return parseCommandSortExpense(arguments);
+        } else if (command.equalsIgnoreCase(CONSOLE_COMMAND_ADD_INCOME)) {
+            return parseCommandAddIncome(arguments);
         } else {
             throw new ConsoleParserCommandNotFoundException(Messages.CONSOLE_ERROR_COMMAND_NOT_FOUND);
         }
