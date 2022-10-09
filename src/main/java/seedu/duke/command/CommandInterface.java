@@ -1,8 +1,10 @@
 package seedu.duke.command;
 
-import seedu.duke.exception.DukeException;
-import seedu.duke.exception.InsufficientArgumentsException;
+import seedu.duke.exception.*;
 
 interface CommandInterface {
-    boolean executeCommand() throws InsufficientArgumentsException, DukeException;
+    boolean executeCommand()
+            throws InsufficientArgumentsException, DukeException, InvalidArgumentException,
+            DateFormatInvalidException, InvalidBorrowerException, InvalidItemException, ItemNotFoundException,
+            UserNotFoundException, ContactNumberInvalidException, DuplicateException;
 }

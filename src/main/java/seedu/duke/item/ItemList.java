@@ -1,6 +1,7 @@
 package seedu.duke.item;
 
 import seedu.duke.Ui;
+import seedu.duke.exception.ItemNotFoundException;
 
 import java.util.ArrayList;
 
@@ -15,7 +16,7 @@ public class ItemList {
 
     /**
      * Adds the newly created task to the task list.
-     * 
+     *
      * @param item is the new task the user has created
      */
     public void addItem(Item item) {
@@ -56,20 +57,20 @@ public class ItemList {
         }
     }
 
-    public Item getItemById(String id) {
+    public Item getItemById(String id) throws ItemNotFoundException {
         for (Item item : this.itemList) {
             if (id.equals(item.getItemId())) {
                 return item;
             }
         }
-        return null;
+        throw new ItemNotFoundException("This item cannot be find in the list");
     }
 
-    public void markAvailable(String id) {
+    public void markAvailable(String id) throws ItemNotFoundException {
         getItemById(id).setAsAvailable();
     }
 
-    public void markUnavailable(String id) {
+    public void markUnavailable(String id) throws ItemNotFoundException {
         getItemById(id).setAsNotAvailable();
     }
 

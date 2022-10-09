@@ -21,7 +21,6 @@ public class Ui {
     public static final String greeting = "Hello from\n" + logo;
 
     public static void printGreeting() {
-        System.out.print(logo);
         System.out.print(greeting);
     }
 
@@ -41,7 +40,7 @@ public class Ui {
         showLine();
     }
 
-    public static final String readInput() {
+    public static String readInput() {
         return input.nextLine();
     }
 
@@ -61,7 +60,7 @@ public class Ui {
     }
 
     public void deleteTransactionMessage(Transaction transaction,
-            ArrayList<Transaction> transactionList) {
+                                         ArrayList<Transaction> transactionList) {
         showLine();
         System.out.println("OK! I will remove the following item:\n" + transaction.getTxId() + "\n"
                 + "Total item(s) in list: " + transactionList.size() + '\n');

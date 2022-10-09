@@ -15,13 +15,13 @@ public class Transaction {
     private LocalDate returnedAt;
     private boolean isFinished;
 
-    public Transaction(String itemId, String borrowerId, int duration, String createdAt) {
+    public Transaction(String itemId, String borrowerId, int duration, LocalDate createdAt) {
         this.transactionId = IdGenerator.generateId();
         this.itemId = itemId;
         this.borrowerId = borrowerId;
         this.duration = duration;
         this.isFinished = false;
-        this.createdAt = LocalDate.parse(createdAt);
+        this.createdAt = createdAt;
         this.returnedAt = null;
     }
 

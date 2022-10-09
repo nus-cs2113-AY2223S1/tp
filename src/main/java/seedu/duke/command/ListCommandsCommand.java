@@ -1,5 +1,7 @@
 package seedu.duke.command;
 
+import seedu.duke.command.Command;
+
 import java.util.Map;
 
 public class ListCommandsCommand extends Command {

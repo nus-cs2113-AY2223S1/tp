@@ -1,5 +1,8 @@
 package seedu.duke.user;
 
+import seedu.duke.exception.UserNotFoundException;
+import seedu.duke.item.Item;
+
 import java.util.ArrayList;
 
 public class UserList {
@@ -39,13 +42,13 @@ public class UserList {
     }
 
     // find user using name
-    public User findUser(String userName) {
+    public User getUserById(String userName) throws UserNotFoundException {
         for (User user : userList) {
             if (user.getName().equals(userName)) {
                 return user;
             }
         }
-        return null;
+        throw new UserNotFoundException("This user cannot be found in the list");
     }
 
     public String listUser() {

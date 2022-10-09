@@ -40,7 +40,7 @@ public class TransactionList {
     }
 
     public Transaction getTransactionById(String transactionId) throws DukeException {
-        for (Transaction transaction: transactionList) {
+        for (Transaction transaction : transactionList) {
             if (transaction.getTxId().equals(transactionId)) {
                 return transaction;
             }
