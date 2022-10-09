@@ -59,6 +59,7 @@ public class UserList {
 
     public String listUser() {
         StringBuilder listOfUsers = new StringBuilder();
+        listOfUsers.append("Here are your list of users:").append(System.lineSeparator());
         for (User user : userList) {
             listOfUsers.append(user.toString()).append(System.lineSeparator());
         }
