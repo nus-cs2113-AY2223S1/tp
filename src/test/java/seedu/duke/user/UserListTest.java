@@ -26,7 +26,7 @@ public class UserListTest {
     }
 
     @Test
-    void findUser_findUserUsingId_expectTheUserObject() {
+    void findUser_findUserUsingId_expectTheUserObject() throws UserNotFoundException {
         UserList userList = new UserList();
         User user = new User("John Doe", 45, "93746378");
         userList.addUser(user);
