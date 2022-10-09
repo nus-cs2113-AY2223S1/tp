@@ -1,5 +1,7 @@
 package computercomponentchooser;
 
+import computercomponentchooser.exceptions.UnknownCommandException;
+
 public class EditParser {
 
     static final int COMMAND_PARAMETER = 0;
@@ -18,14 +20,18 @@ public class EditParser {
 
     public static void parse(String line) {
         String command = getParameter(line, COMMAND_PARAMETER).toLowerCase();
-        switch (command) {
-        case "add":
-        case "delete":
-        case "list":
-        case "check":
-        case "back":
-        default:
-            break;
+        try {
+            switch (command) {
+            case "add":
+            case "delete":
+            case "list":
+            case "check":
+            case "back":
+            default:
+                throw new UnknownCommandException();
+            }
+        } catch (UnknownCommandException e) {
+            System.out.println(e.getMessage());
         }
     }
 }
