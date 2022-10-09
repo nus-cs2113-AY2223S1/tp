@@ -55,7 +55,8 @@ public class UserList {
                 return user;
             }
         }
-        logger.log(Level.WARNING, "user not found error", new UserNotFoundException("This user cannot be found in the list"));
+        logger.log(Level.WARNING, "user not found error", 
+                new UserNotFoundException("This user cannot be found in the list"));
         throw new UserNotFoundException("This user cannot be found in the list");
     }
 
