@@ -8,8 +8,8 @@ import java.util.List;
 public class Timetable {
     public static List<Module> listOfModules = new ArrayList<>();
 
-    public void addNewModule(String name, String code) {
-        listOfModules.add(new Module(name, code));
+    public void addNewModule(String code, String name, String description) {
+        listOfModules.add(new Module(code, name, description));
     }
 
     public String listModules() {
@@ -27,4 +27,5 @@ public class Timetable {
         }
         return list.toString();
     }
+
 }

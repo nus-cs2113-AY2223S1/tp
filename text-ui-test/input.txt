@@ -1,5 +1,7 @@
 add
-se and oop
 cs2113
 list
+info
+cs3230
+invalidcommand
 quit

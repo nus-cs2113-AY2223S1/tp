@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ModuleTest {
-    Module module = new Module("SE & OOP", "CS2113");
+    Module module = new Module("CS2113", "SE & OOP", "Sample Description");
 
     @Test
     void getModuleName_noInputs_correctName() {
