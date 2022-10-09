@@ -1,5 +1,8 @@
 package seedu.duke;
 
+/**
+ * Container for user visible messages.
+ */
 public class Messages {
     public static final String MESSAGE_CLIENT_ADDED = "Adding a client with the following information:";
 

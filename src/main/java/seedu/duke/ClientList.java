@@ -2,6 +2,9 @@ package seedu.duke;
 
 import java.util.ArrayList;
 
+/**
+ * Stores the list of clients.
+ */
 public class ClientList {
     private static int currentListSize;
     private static ArrayList<Client> clientList;
@@ -19,6 +22,14 @@ public class ClientList {
         return clientList;
     }
 
+    /**
+     * Adds a client to client list and updates client list size.
+     *
+     * @param clientName Name of client.
+     * @param clientContactNumber Contact Number of client.
+     * @param clientEmail Email of client.
+     * @param clientBudgetPerMonth Budget Per Month for client.
+     */
     public void addClient(String clientName, String clientContactNumber, String clientEmail,
                           String clientBudgetPerMonth) {
         clientList.add(new Client(clientName, clientContactNumber, clientEmail, clientBudgetPerMonth));

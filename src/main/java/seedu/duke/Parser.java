@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 public class Parser {
     public static final int ADD_CLIENT_FLAG_SIZE = 4;
 
-    public Command parseCommand(String input) throws MissingCommandAddDetailException,
+    public Command parseCommand(String input) throws EmptyCommandAddDetailException,
             UndefinedSubCommandAddTypeException, EmptyClientDetailException, MissingClientFlagException,
             IncorrectAddClientFlagOrderException, MissingClientDetailException, InvalidContactNumberException,
             InvalidEmailException, InvalidBudgetFormatException {
@@ -48,10 +48,10 @@ public class Parser {
         return processedCommandDetails;
     }
 
-    private void checkForEmptyCommandAddDetails(String commandAddDetails) throws MissingCommandAddDetailException {
+    private void checkForEmptyCommandAddDetails(String commandAddDetails) throws EmptyCommandAddDetailException {
         boolean isEmptyCommandAddDetail = checkForEmptyDetail(commandAddDetails);
         if (isEmptyCommandAddDetail) {
-            throw new MissingCommandAddDetailException();
+            throw new EmptyCommandAddDetailException();
         }
     }
 

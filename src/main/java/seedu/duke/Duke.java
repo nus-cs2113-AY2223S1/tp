@@ -27,7 +27,7 @@ public class Duke {
                 command = parser.parseCommand(userInputText);
                 command.execute(ui, storage, propertyList, clientList);
                 isCommandBye = (command instanceof CommandBye);
-            } catch (MissingCommandAddDetailException e) {
+            } catch (EmptyCommandAddDetailException e) {
                 ui.showMissingCommandAddDetailMessage();
             } catch (UndefinedSubCommandAddTypeException e) {
                 ui.showUndefinedSubCommandAddTypeMessage();

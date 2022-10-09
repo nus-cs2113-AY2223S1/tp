@@ -1,9 +1,7 @@
 package seedu.duke.command;
 
-import seedu.duke.ClientList;
-import seedu.duke.PropertyList;
-import seedu.duke.Storage;
-import seedu.duke.Ui;
-
+/**
+ * Represents an add-type command.
+ */
 public abstract class CommandAdd extends Command {
 }

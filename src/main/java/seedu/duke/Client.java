@@ -1,5 +1,8 @@
 package seedu.duke;
 
+/**
+ * Represents a client.
+ */
 public class Client {
     private String clientName;
     private String clientContactNumber;
