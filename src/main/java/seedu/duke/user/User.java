@@ -34,6 +34,9 @@ public class User {
     }
 
     public String toString() {
-        return getUserId() + " | " + getName() + " | " + getAge() + " | " + getContactNumber();
+        String username = "Username: " + name + " ";
+        String age = "Age: " + this.age + " ";
+        String contactNumber = "Contact: " + this.contactNumber + " ";
+        return username + age + contactNumber;
     }
 }
