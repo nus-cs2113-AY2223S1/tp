@@ -4,13 +4,15 @@ import seedu.duke.model.SelectedModule;
 
 import java.util.List;
 public class State {
-    List<SelectedModule> selectedModulesList;
+
+    public int semester = 0;
+    List<List<SelectedModule>> selectedModulesList;
 
     public List<SelectedModule> getSelectedModulesList() {
-        return selectedModulesList;
+        return selectedModulesList.get(semester);
     }
 
     public void setSelectedModulesList(List<SelectedModule> selectedModulesList) {
-        this.selectedModulesList = selectedModulesList;
+        this.selectedModulesList.set(semester, selectedModulesList);
     }
 }
