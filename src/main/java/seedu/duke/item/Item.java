@@ -6,22 +6,22 @@ import seedu.duke.user.User;
 public class Item {
     private final String name;
     private final String id;
-    private final User owner;
+    private final String ownerId;
     private double pricePerDay;
     private boolean isAvailable;
     private final Category.Categories category;
 
-    public Item(String name, int categoryNumber, double price, User owner) {
+    public Item(String name, int categoryNumber, double price, String ownerId) {
         this.id = IdGenerator.generateId();
         this.name = name;
         this.pricePerDay = price;
         this.isAvailable = true;
-        this.owner = owner;
+        this.ownerId = ownerId;
         this.category = Category.mapCategory(categoryNumber);
     }
 
-    public User getOwner() {
-        return owner;
+    public String getOwnerId() {
+        return ownerId;
     }
 
     public String getName() {
@@ -69,7 +69,7 @@ public class Item {
         String itemIcon = "[" + (isAvailable ? "Y" : "N") + "] ";
         String itemName = "Item: " + name + "(ID: " + id + ") ";
         String itemCategory = "Category: " + category.toString() + " ";
-        String itemOwner = "Owner: " + owner.getUserId() + " ";
+        String itemOwner = "Owner: " + getOwnerId() + " ";
         String itemPrice = "PricePerDay: " + pricePerDay;
         return itemIcon + itemName + itemCategory + itemOwner + itemPrice;
     }

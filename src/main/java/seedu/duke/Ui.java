@@ -14,11 +14,11 @@ public class Ui {
      * display the entire list of items to the user.
      * @param items list of all the items the user has added
      */
-    public void showList(ArrayList<Item> items) {
+    public void showItemList(ArrayList<Item> items) {
         int itemNumber = 1;
         System.out.println(LINE + "Here are your list of tasks:");
         for (Item item : items) {
-            System.out.println(itemNumber + "." + item.getName());
+            System.out.println(itemNumber + "." + item.toString());
             itemNumber++;
         }
         System.out.println(LINE);
