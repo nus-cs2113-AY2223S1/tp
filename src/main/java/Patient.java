@@ -5,7 +5,7 @@ public class Patient {
     private String birthDate;
     private String gender;
     private final String id;
-    public ArrayList<Visit> visits;
+    public VisitList visits;
     public PrescriptionList activePrescriptions;
 
 
@@ -14,17 +14,17 @@ public class Patient {
         this.name = name;
         this.gender = gender;
         this.birthDate = birthDate;
-        this.visits = new ArrayList<Visit>();
+        this.visits = new VisitList();
         this.activePrescriptions = new PrescriptionList();
     }
 
     // todo public void addMedicine();
     public void addVisit(String id, String dateOfVisit, String timeOfVisit, String reason) {
-        this.visits.add(new Visit(id,dateOfVisit,timeOfVisit,reason));
+        this.visits.addVisit(id,dateOfVisit,timeOfVisit,reason);
     }
 
     public void addVisit(String id, String dateOfVisit, String timeOfVisit) {
-        this.visits.add(new Visit(id,dateOfVisit,timeOfVisit));
+        this.visits.addVisit(id,dateOfVisit,timeOfVisit);
     }
 
     public String getName() {
