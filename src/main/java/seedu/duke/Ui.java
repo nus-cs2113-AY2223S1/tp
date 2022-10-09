@@ -103,8 +103,8 @@ public class Ui {
         System.out.println(string);
     }
 
-    public void printErrorMessage(DukeException e) {
-        System.out.println(e.getMessage());
+    public static void printErrorMessage(String message) {
+        System.out.println(message);
     }
 
 }

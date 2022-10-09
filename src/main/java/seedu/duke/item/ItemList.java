@@ -6,7 +6,7 @@ import seedu.duke.exception.DukeException;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class ItemList {
+public class ItemList{
     private final Ui ui = new Ui();
     private final ArrayList<Item> itemList;
 
@@ -30,14 +30,15 @@ public class ItemList {
                 .forEach(System.out::println);
     }
 
-    public Item getItemById(String id) {
+    public Item getItem(String id) throws NullPointerException {
         for (Item item : itemList) {
             if (id.equals(item.getItemId())) {
                 return item;
             }
         }
         //exception if item not found
-        return null;
+        //return null;
+        throw new NullPointerException("");
     }
 
     public void getItemOfSpecificCategory(int categoryNumber) {
