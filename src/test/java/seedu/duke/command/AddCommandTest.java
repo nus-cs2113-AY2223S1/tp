@@ -5,6 +5,7 @@ import seedu.duke.Storage;
 import seedu.duke.Ui;
 import seedu.duke.data.TransactionList;
 import seedu.duke.exception.AddTransactionInvalidDateException;
+import seedu.duke.exception.AddTransactionMissingParameterException;
 
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -20,7 +21,7 @@ public class AddCommandTest {
         AddCommand addCommand = new AddCommand("t/income c/bonus a/1 d/ i/thank_you_boss");
 
         assertThrows(
-            AddTransactionInvalidDateException.class,
+            AddTransactionMissingParameterException.class,
             () -> addCommand.execute(transactions, ui, storage)
         );
     }

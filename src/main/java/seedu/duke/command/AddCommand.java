@@ -5,11 +5,13 @@ import seedu.duke.Ui;
 
 import seedu.duke.data.TransactionList;
 import seedu.duke.exception.MoolahException;
-import seedu.duke.exception.AddTransactionInvalidAmountException;
-import seedu.duke.exception.AddTransactionInvalidCategoryException;
-import seedu.duke.exception.AddTransactionUnknownTypeException;
-import seedu.duke.exception.AddTransactionInvalidDateException;
 import seedu.duke.exception.AddTransactionMissingTagException;
+import seedu.duke.exception.AddTransactionMissingParameterException;
+import seedu.duke.exception.AddTransactionExtraTagException;
+import seedu.duke.exception.AddTransactionInvalidDateException;
+import seedu.duke.exception.AddTransactionInvalidCategoryException;
+import seedu.duke.exception.AddTransactionInvalidAmountException;
+import seedu.duke.exception.AddTransactionUnknownTypeException;
 
 
 import java.time.LocalDate;
@@ -29,32 +31,32 @@ public class AddCommand extends Command {
     private static final String LINE_SEPARATOR = System.lineSeparator();
     // The command word used to trigger the execution of Moolah Manager's operations
     public static final String COMMAND_WORD = "ADD";
+
     // The description for the usage of command
     public static final String COMMAND_DESCRIPTION = "To add a new transaction entry, which could be "
-            + "either an \"income\" or an \"expense\" into the transaction list.";
+            +
+            "either an \"income\" or an \"expense\" into the transaction list.";
     // The guiding information for the usage of command
     public static final String COMMAND_USAGE = "Usage: add t/TYPE c/CATEGORY a/AMOUNT d/DATE i/DESCRIPTION";
     // The formatting information for the parameters used by the command
     public static final String COMMAND_PARAMETERS_INFO = "Parameters information:"
             + LINE_SEPARATOR
-            + "TYPE: The type of transaction. Only \"income\" or \"expense\" is accepted."
-            + LINE_SEPARATOR
+            + "TYPE: The type of transaction. Only \"income\" or \"expense\" is accepted." + LINE_SEPARATOR
             + "CATEGORY: A category for the transaction. Only string containing alphabets is accepted."
             + LINE_SEPARATOR
             + "AMOUNT: Value of the transaction in numerical form. Only integer within 0 and 10000000 is accepted."
-            + LINE_SEPARATOR
-            + "DATE: Date of the transaction. The format must be in \"yyyyMMdd\"."
-            + LINE_SEPARATOR
+            + LINE_SEPARATOR + "DATE: Date of the transaction. The format must be in \"yyyyMMdd\"." + LINE_SEPARATOR
             + "DESCRIPTION: More information regarding the transaction, written without any space.";
 
+
     // Basic help description
-    public static final String COMMAND_HELP = "Command Word: " + COMMAND_WORD + "\n"
-            + COMMAND_DESCRIPTION + "\n"
+    public static final String COMMAND_HELP = "Command Word: " + COMMAND_WORD + "\n" + COMMAND_DESCRIPTION + "\n"
             + COMMAND_USAGE + "\n";
     // Detailed help description
     public static final String COMMAND_DETAILED_HELP = COMMAND_HELP + COMMAND_PARAMETERS_INFO + "\n";
 
     private String input;
+
 
     public AddCommand(String input) {
         this.input = input;
@@ -74,7 +76,10 @@ public class AddCommand extends Command {
         before adding entry to arraylist
         */
         String[] splits = input.split(" ");
-        checkTagsExist(splits);
+
+        checkExtraTagExist(splits); // if more than 5 tags exist in input, throw exception
+        checkTagsExist(splits); // if the mandatory tags does not exist, throw exception
+        checkParameterExist(splits); // if the parameter does not exist, throw exception.
 
         String description = "";
         int amount = 0;
@@ -114,8 +119,9 @@ public class AddCommand extends Command {
         return false;
     }
 
-    private static void addTransactionByType(TransactionList transactions, String type, String description,
-            int amount, String category, LocalDate date) throws AddTransactionUnknownTypeException {
+    private static void addTransactionByType(TransactionList transactions, String type, String description, int amount,
+                                             String category, LocalDate date)
+            throws AddTransactionUnknownTypeException {
 
         switch (type) {
         case "expense":
@@ -130,6 +136,41 @@ public class AddCommand extends Command {
             throw new AddTransactionUnknownTypeException();
         }
     }
+
+
+    /**
+     * Checks if there are extra tag(s) within the user input.
+     *
+     * @param splits The user input after the command word, split into a list for every space found.
+     * @throws AddTransactionExtraTagException Extra tag exception.
+     */
+
+    private static void checkExtraTagExist(String[] splits) throws AddTransactionExtraTagException {
+        int countNumberOfTags = 0;
+        for (String split : splits) {
+            countNumberOfTags += 1;
+        }
+        if (countNumberOfTags > 5) {
+            throw new AddTransactionExtraTagException();
+        }
+    }
+
+
+    /**
+     * Checks if there are missing parameter within the user input.
+     * If the split.length() is <= 2, it means that only the tag exists , and there is no parameter after the tag.
+     *
+     * @param splits The user input after the command word, split into a list for every space found.
+     * @throws AddTransactionMissingParameterException Extra tag exception.
+     */
+    private static void checkParameterExist(String[] splits) throws AddTransactionMissingParameterException {
+        for (String split : splits) {
+            if (split.length() <= 2) {
+                throw new AddTransactionMissingParameterException();
+            }
+        }
+    }
+
 
     /**
      * Checks if the targeted tags exists in the split user inputs.
@@ -206,13 +247,21 @@ public class AddCommand extends Command {
      * @return The amount integer if no exceptions are thrown.
      * @throws AddTransactionInvalidAmountException Invalid amount format exception.
      */
-    private static int parseAmountTag(String parameter) throws AddTransactionInvalidAmountException {
+    private static int parseAmountTag(String parameter) throws MoolahException {
         Pattern specialSymbols = Pattern.compile("[!@#$%&*()_+=|<>?{}\\[\\]~-]");
         Matcher hasSpecialSymbols = specialSymbols.matcher(parameter);
-        if (containAlphabet(parameter) || hasSpecialSymbols.find()) {
+        try {
+            if (containAlphabet(parameter) || hasSpecialSymbols.find()) {
+                throw new AddTransactionInvalidAmountException();
+            }
+            int amount = Integer.parseInt(parameter);
+            if (amount < 0 || amount > 10000000) {
+                throw new AddTransactionInvalidAmountException();
+            }
+            return amount;
+
+        } catch (NumberFormatException e) {
             throw new AddTransactionInvalidAmountException();
-        } else {
-            return Integer.parseInt(parameter);
         }
     }
 

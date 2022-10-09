@@ -2,10 +2,14 @@ help
 help o/detailed
 help blablabla
 help o/detailed blablabla
+stats
+stats s/invalid
+stats s/categories
 list
 add t/expense c/food a/20 d/13092022 i/NIL
 add t/income c/salary a/2000 d/30092022 i/jan_salary
 add t/expense c/transport a/1 d/02102022 i/bus_fare
+stats s/categories
 find
 find bus_fare
 list
@@ -14,9 +18,11 @@ add t/heheheh c/bonus a/1000000 d/03102022 i/thank_you_boss
 add t/income c/123 a/10000000 d/03102022 i/thank_you_boss
 add t/income c/bonus a/abc d/03102022 i/thank_you_boss
 add t/income c/bonus a/-1 d/03102022 i/thank_you_boss
+add t/income c/bonus a/9999999999999 d/03102022 i/thank_you_boss
 add t/income c/bonus a/10000000 d/20220101 i/thank_you_boss
 add t/income c/bonus a/10000000 d/obviouslyFalseDate i/thank_you_boss
 add t/income c/bonus a/10000000 d/ i/thank_you_boss
+add t/income c/bonus a/10000000
 list
 delete 1
 purge
