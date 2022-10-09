@@ -13,7 +13,7 @@ public class Parser {
 
     public static Command parse(String input) {
         String userCommand = input.split(" ")[0];
-        String arguments = input.substring(userCommand.length());
+        String arguments = input.substring(userCommand.length() + 1);
         switch (userCommand) {
         case "greet":
             return new GreetCommand();
@@ -24,12 +24,12 @@ public class Parser {
         case "set":
             return new SetCommand(arguments);
         case "add":
-            if (arguments.split(" ")[0] == "food") {
+            if (arguments.split(" ")[0].equals("food")) {
                 return new AddFoodCommand(arguments);
-            }
-            else if (arguments.split(" ")[0] == "exercise") {
+            } else if (arguments.split(" ")[0].equals("exercise")) {
                 return new AddExerciseCommand(arguments);
             }
+            return new HelpCommand();
         case "view":
             return new ViewCommand(arguments);
         default:

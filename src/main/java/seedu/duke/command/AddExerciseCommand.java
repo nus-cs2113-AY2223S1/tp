@@ -33,7 +33,7 @@ public class AddExerciseCommand extends Command {
             String description = argumentList[1];
             int repetitions = Integer.parseInt(argumentList[2]);
             int calories = Integer.parseInt(argumentList[3]);
-            exercise = new Exercise(description, repetitions ,calories);
+            exercise = new Exercise(description, repetitions, calories);
             exerciseList.add(exercise);
             ui.output(exercise.toString());
             ui.output(" This exercise is added to the exercise list successfully");
