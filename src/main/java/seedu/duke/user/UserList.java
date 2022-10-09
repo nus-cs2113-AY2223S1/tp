@@ -17,8 +17,12 @@ public class UserList {
         userList.add(toAdd);
     }
 
-    public void deleteUser(int indexToDelete) {
-        userList.remove(indexToDelete);
+    public void deleteUser(String userName) {
+        for (User user : userList) {
+            if (user.getName().equals(userName)) {
+                userList.remove(user);
+            }
+        }
     }
 
     public int getSize() {
@@ -26,16 +30,17 @@ public class UserList {
     }
 
     public User getUser(int index) {
-        return userList.get(index);
+        return userList.get(index - 1);
     }
 
-    public int findUser(String userId) {
-        for (int i = 0; i < userList.size(); i += 1) {
-            if (userList.get(i).getUserId().equals(userId)) {
-                return i;
+    // find user using name
+    public User findUser(String userName) {
+        for (User user : userList) {
+            if (user.getName().equals(userName)) {
+                return user;
             }
         }
-        return -1;
+        return null;
     }
 
     public String listUser() {

@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import seedu.duke.item.Item;
+import seedu.duke.user.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,16 @@ public class Ui {
         for (Item item : items) {
             System.out.println(itemNumber + "." + item.getName());
             itemNumber++;
+        }
+        System.out.println(LINE);
+    }
+
+    public void showUserList(ArrayList<User> users) {
+        int userNumber = 1;
+        System.out.println(LINE + "Here are your list of users:");
+        for (User user : users) {
+            System.out.println(userNumber + " " + user.toString());
+            userNumber++;
         }
         System.out.println(LINE);
     }
