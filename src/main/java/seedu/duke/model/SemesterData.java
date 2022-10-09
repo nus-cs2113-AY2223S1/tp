@@ -18,7 +18,7 @@ public class SemesterData {
         this.examDuration = examDuration;
     }
 
-    public Set<LessonType> lessonTypes() {
+    public Set<LessonType> getLessonTypes() {
         Set<LessonType> set = new TreeSet<>();
         for (RawLesson lesson : timetable) {
             set.add(lesson.lessonType);
@@ -26,16 +26,21 @@ public class SemesterData {
         return set;
     }
 
-    public List<RawLesson> getLessonByTypeAndNo(LessonType type, String no) {
+    public List<RawLesson> getLessonsByTypeAndNo(LessonType type, String no) {
         return timetable.stream().filter(lesson -> lesson.lessonType == type && lesson.classNo.equals(no))
                 .collect(Collectors.toList());
     }
 
-    public List<RawLesson> getLessonByNo(String no) {
+    public List<RawLesson> getLessonsByNo(String no) {
         return timetable.stream().filter(lesson -> lesson.classNo.equals(no)).collect(Collectors.toList());
     }
 
+    public Set<String> getClassNosByType(LessonType type) {
+        return timetable.stream().filter(lesson -> lesson.lessonType == type).map(s -> s.classNo)
+                .collect(Collectors.toCollection(TreeSet::new));
+    }
+
     public List<RawLesson> getLessonsByType(LessonType type) {
-        return timetable.stream().filter(lesson -> lesson.lessonType.equals(type)).collect(Collectors.toList());
+        return timetable.stream().filter(lesson -> lesson.lessonType == type).collect(Collectors.toList());
     }
 }
