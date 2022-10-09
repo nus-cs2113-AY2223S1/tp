@@ -42,4 +42,17 @@ public class Visit {
     public void setReason(String reason) {
         this.reason = reason;
     }
+
+    @Override
+    public String toString() {
+        String message = "";
+        message += "ID: " + getId();
+        message += "\n";
+        message += "Date: " + getDateOfVisit();
+        message += "\n";
+        message += "Time: " + getTimeOfVisit();
+        message += "\n";
+        message += getReason() == "" ? "NIL" : getReason();
+        return message;
+    }
 }
