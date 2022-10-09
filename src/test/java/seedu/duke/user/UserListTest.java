@@ -30,7 +30,7 @@ public class UserListTest {
         UserList userList = new UserList();
         User user = new User("John Doe", 45, "93746378");
         userList.addUser(user);
-        assertEquals(user, userList.findUser("John Doe"));
+        assertEquals(user, userList.getUserById("John Doe"));
     }
 
     @Test
