@@ -7,9 +7,8 @@ import seedu.duke.Ui;
 import seedu.duke.exception.IllegalValueException;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
-public class AddCommand extends Command {
+public class AddFoodCommand extends Command {
     private Ui ui;
     private String arguments;
 
@@ -24,7 +23,7 @@ public class AddCommand extends Command {
     }
 
 
-    public AddCommand(String arguments) {
+    public AddFoodCommand(String arguments) {
         this.arguments = arguments;
     }
 
@@ -50,6 +49,7 @@ public class AddCommand extends Command {
             ui.output(e.getMessage());
         }
     }
+
 
     @Override
     public void setData(Ui ui, Biometrics biometrics) {

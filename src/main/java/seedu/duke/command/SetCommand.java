@@ -7,7 +7,7 @@ import seedu.duke.Ui;
 
 import java.util.Arrays;
 
-public class SetCommand extends  Command {
+public class SetCommand extends Command {
 
     public static final String[] GENDER_OPTIONS = new String[] {"male", "female", "other"};
     public static final String INVALID_BIOMETRICS = "Invalid biometrics";
