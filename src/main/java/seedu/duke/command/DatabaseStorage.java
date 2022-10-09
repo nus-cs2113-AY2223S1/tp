@@ -9,7 +9,7 @@ import seedu.duke.module.Module;
 import seedu.duke.university.University;
 import seedu.duke.command.Database;
 
-public class Storage {
+public class DatabaseStorage {
     private static final String DATABASE_FILE_PATH = "./data/data.csv";
 
     public static void loadDatabase() {
@@ -54,11 +54,7 @@ public class Storage {
     private static String[] readDatabaseLine(String line) {
         String[] lineData = new String[7];
 
-        try {
-            lineData = Parser.parseDatabaseLine(line);
-        } catch (InvalidDatabaseLineException e) {
-            System.out.println("Invalid Database Line");
-        }
+        lineData = Parser.parseDatabaseLine(line);
 
         return lineData;
     }
