@@ -382,6 +382,7 @@ public class ConsoleParser {
                     exception);
         }
     }
+
     private static ConsoleCommandAddIncome parseCommandAddIncome(String arguments)
             throws ConsoleParserCommandAddIncomeInvalidException {
         try {
