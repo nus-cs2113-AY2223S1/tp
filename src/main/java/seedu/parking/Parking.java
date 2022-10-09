@@ -1,15 +1,16 @@
 package seedu.parking;
 
 import seedu.api.Api;
-import seedu.api.exception.EmptyResponseException;
+import seedu.exception.EmptyResponseException;
+import seedu.exception.ParkingException;
+import seedu.data.CarparkList;
 
 import seedu.ui.Ui;
 
 import java.io.IOException;
-import java.util.Scanner;
-import java.util.concurrent.ExecutionException;
 
 public class Parking {
+    private static CarparkList carparkList;
     /**
      * Main entry-point for the java.duke.Duke application.
      */
@@ -27,7 +28,7 @@ public class Parking {
         try {
             System.out.println("Trying to fetch data"); // Debug line
             api.fetchData();
-            System.out.println("Complete fetch data"); // Debug line
+            System.out.println("Completed fetch data!"); // Debug line
         } catch (EmptyResponseException e) {
             ui.showFetchError();
         } catch (IOException e) {
@@ -35,5 +36,16 @@ public class Parking {
         } finally {
             System.out.println("Fetching and save data sequence terminated"); // Debug line
         }
+
+        // Load file from json
+        System.out.println("Trying to load data");
+        try {
+            carparkList = new CarparkList();
+        } catch (ParkingException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            System.out.println("Load data sequence terminated"); // Debug line
+        }
+
     }
 }
