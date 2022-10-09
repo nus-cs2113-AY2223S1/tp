@@ -5,11 +5,13 @@ public class OneDoc {
 
     protected PatientList patientsList;
     protected VisitList visitsList;
+    protected PrescriptionList prescriptionsList;
     protected static Parser parser;
 
     public OneDoc() {
         patientsList = new PatientList();
         visitsList = new VisitList();
+        prescriptionsList = new PrescriptionList();
         parser = new Parser();
     }
 

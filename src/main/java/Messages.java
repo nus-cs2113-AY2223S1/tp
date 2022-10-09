@@ -8,6 +8,9 @@ public class Messages {
             + "2 - Visits\n"
             + "3 - Prescription";
 
+    // Prescription
+    public static final String noPrescriptionMessage = "There are currently no prescriptions in the record.";
+
     public static void welcomeMessage() {
         System.out.println(welcomeMessage);
         System.out.println(mainMenuMessage);
