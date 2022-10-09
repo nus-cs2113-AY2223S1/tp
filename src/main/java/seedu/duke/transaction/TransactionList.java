@@ -13,25 +13,20 @@ public class TransactionList {
         this.transactionList = new ArrayList<>();
     }
 
-    public Transaction getTransaction(int index) throws DukeException {
-        try {
-            return transactionList.get(index - 1);
-        } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("OOPS!!! The transaction number is out of bound"
-                    + "\nThere are only " + transactionList.size() + " transaction(s) in your list");
-        }
-    }
-
     public int getSize() {
         return transactionList.size();
     }
 
-    public void markFinished(int index) throws DukeException {
-        getTransaction(index).setAsFinished();
+    public void markFinished(String transactionId) throws DukeException {
+        Transaction transaction = getTransactionById(transactionId);
+        int index = transactionList.indexOf(transaction);
+        transactionList.get(index).setAsFinished();
     }
 
-    public void unmarkFinished(int index) throws DukeException {
-        getTransaction(index).setAsNotFinished();
+    public void unmarkFinished(String transactionId) throws DukeException {
+        Transaction transaction = getTransactionById(transactionId);
+        int index = transactionList.indexOf(transaction);
+        transactionList.get(index).setAsNotFinished();
     }
 
     public void add(Transaction transaction) {
@@ -39,12 +34,12 @@ public class TransactionList {
     }
 
     public void deleteTransaction(String transactionId) throws DukeException {
-        Transaction transaction = findTransaction(transactionId);
+        Transaction transaction = getTransactionById(transactionId);
         transactionList.remove(transaction);
         ui.deleteTransactionMessage(transaction, transactionList);
     }
 
-    public Transaction findTransaction(String transactionId) throws DukeException {
+    public Transaction getTransactionById(String transactionId) throws DukeException {
         for (Transaction transaction: transactionList) {
             if (transaction.getTxId().equals(transactionId)) {
                 return transaction;
