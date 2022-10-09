@@ -1,11 +1,13 @@
 package seedu.duke.transaction;
 
+import seedu.duke.Ui;
 import seedu.duke.exception.DukeException;
 
 import java.util.ArrayList;
 
 public class TransactionList {
     private ArrayList<Transaction> transactionList;
+    private Ui ui = new Ui();
 
     public TransactionList() {
         this.transactionList = new ArrayList<>();
@@ -36,9 +38,21 @@ public class TransactionList {
         transactionList.add(transaction);
     }
 
-    public void delete(int index) throws DukeException {
-        transactionList.remove(getTransaction(index));
+    public void deleteTransaction(String transactionId) throws DukeException {
+        Transaction transaction = findTransaction(transactionId);
+        transactionList.remove(transaction);
+        ui.deleteTransactionMessage(transaction, transactionList);
     }
+
+    public Transaction findTransaction(String transactionId) throws DukeException {
+        for (Transaction transaction: transactionList) {
+            if (transaction.getTxId().equals(transactionId)) {
+                return transaction;
+            }
+        }
+        throw new DukeException("Cannot find this transaction");
+    }
+
 
     @Override
     public String toString() {

@@ -30,6 +30,16 @@ public class ItemList {
                 .forEach(System.out::println);
     }
 
+    public Item getItemById(String id) {
+        for (Item item : itemList) {
+            if (id.equals(item.getItemId())) {
+                return item;
+            }
+        }
+        //exception if item not found
+        return null;
+    }
+
     public void getItemOfSpecificCategory(int categoryNumber) {
         itemList.stream()
                 .filter(t -> (Category.setCategory(t.getCategory()) == categoryNumber))
@@ -41,8 +51,8 @@ public class ItemList {
         for (Item item : itemList) {
             if (itemId.equals(item.getItemId())) {
                 found = true;
-                ui.deleteItemMessage(item, itemList);
                 itemList.remove(item);
+                ui.deleteItemMessage(item, itemList);
             }
         }
         if (!found) {
@@ -50,22 +60,16 @@ public class ItemList {
         }
     }
 
-    public void markAvailable(Item item) {
-        int index = itemList.indexOf(item);
-        getItem(index).setAsAvailable();
+    public void markAvailable(String id) {
+        getItemById(id).setAsAvailable();
     }
 
-    public void markUnavailable(Item item) {
-        int index = itemList.indexOf(item);
-        getItem(index).setAsNotAvailable();
+    public void markUnavailable(String id) {
+        getItemById(id).setAsNotAvailable();
     }
 
     public int getListSize() {
         return itemList.size();
-    }
-
-    public Item getItem(int index) {
-        return itemList.get(index - 1);
     }
 
     public ArrayList<Item> getItemList() {
