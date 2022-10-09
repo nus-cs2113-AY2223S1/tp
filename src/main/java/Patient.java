@@ -14,11 +14,17 @@ public class Patient {
         this.name = name;
         this.gender = gender;
         this.birthDate = birthDate;
-        this.visits = new ArrayList<>();
+        this.visits = new ArrayList<Visit>();
         this.activePrescriptions = new PrescriptionList();
     }
 
-    // todo add public void addVisit(); public void addMedicine();
+    // todo public void addMedicine();
+    public void addVisit(String id, String dateOfVisit, String timeOfVisit, String reason) {
+        this.visits.add(new Visit(id,dateOfVisit,timeOfVisit,reason));
+    }
+    public void addVisit(String id, String dateOfVisit, String timeOfVisit) {
+        this.visits.add(new Visit(id,dateOfVisit,timeOfVisit));
+    }
 
     public String getName() {
         return name;
