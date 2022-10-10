@@ -30,4 +30,8 @@ public class Ui {
                 + passenger.getFlightNumber() + " " + passenger.getSeatNumber() + " has been added.\n"
         );
     }
+
+    public void goodbyeMessage() {
+        System.out.println("Thank you, come again! :)\n");
+    }
 }

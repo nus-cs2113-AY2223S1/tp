@@ -10,6 +10,8 @@ public class Parser {
         String entity = inputWords[0];
         if (entity.equalsIgnoreCase(PASSENGER_ENTITY)) {
             PassengerParser.parse(inputWords);
+        } else if (entity.equalsIgnoreCase(FLIGHT_ENTITY)) {
+            FlightParser.parse(inputWords);
         }
 
     }

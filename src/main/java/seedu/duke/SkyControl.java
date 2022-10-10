@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import seedu.duke.FlightManager;
+
 public class SkyControl {
     private Ui ui;
     private PassengerList passengers;
@@ -19,6 +21,7 @@ public class SkyControl {
             Parser.parse(lineInput);
             lineInput = ui.nextLineInput();
         }
+        ui.goodbyeMessage();
     }
 
     public static void main(String[] args) {
