@@ -7,12 +7,12 @@ public class PrescriptionList {
         prescriptionsList = new ArrayList<>();
     }
 
-    public void add(String patientId, String medicine, String dosage, int timeInterval) {
+    public void add(String patientId, String medicine, String dosage, String timeInterval) {
         Prescription prescription = new Prescription(patientId, medicine, dosage, timeInterval);
         prescriptionsList.add(prescription);
     }
 
-    public void add(String patientId, String medicine, String dosage, int timeInterval, boolean isActive) {
+    public void add(String patientId, String medicine, String dosage, String timeInterval, boolean isActive) {
         Prescription prescription = new Prescription(patientId, medicine, dosage, timeInterval, isActive);
         prescriptionsList.add(prescription);
     }
@@ -34,7 +34,10 @@ public class PrescriptionList {
         }
     }
 
-    public void edit(int prescriptionNumber, String medicine, String dosage, int timeInterval) {
+    // TODO one potential improvement is to make this three different methods
+    //  edit(String id, String medicine), edit(String id, String dosage)
+    //  and edit(String id, String timeInterval)
+    public void edit(int prescriptionNumber, String medicine, String dosage, String timeInterval) {
         if (prescriptionNumber < 1 || prescriptionNumber > prescriptionsList.size()) {
             System.out.println(Messages.INDEX_OUT_OF_RANGE_MESSAGE);
             return;
@@ -52,7 +55,7 @@ public class PrescriptionList {
             prescriptionEdited.setDosage(dosage);
         }
 
-        if (timeInterval != Utils.NULL_INT) {
+        if (timeInterval.isEmpty()) {
             prescriptionEdited.setTimeInterval(timeInterval);
         }
 
