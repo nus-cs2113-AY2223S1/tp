@@ -313,7 +313,10 @@ public class ConsoleInterface {
 
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_ADD_TARGET_SUCCESS);
 
-        //saveToFile(targetManager.getTargets());
+        /*
+         TODO Add saveToFile for Target
+         saveToFile(targetManager.getTargets());
+        */
     }
 
     /**
