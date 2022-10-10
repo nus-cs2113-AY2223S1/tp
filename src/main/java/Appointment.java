@@ -30,5 +30,25 @@ public class Appointment {
         this.appointmentStatus = appointmentStatus;
     }
 
+    public String getAppointmentStatus() {
+        if (appointmentStatus == AppointmentStatus.PENDING) {
+            return "PENDING";
+        }
+        if (appointmentStatus == AppointmentStatus.PROCESSING) {
+            return "PROCESSING";
+        }
+        // control should never reach here
+        return "";
+    }
+
+    public static void listAppointment() {
+        for (Appointment appointment : appointments) {
+            System.out.print(appointment.appointmentId + " ");
+            System.out.print(appointment.petName + " ");
+            // System.out.print(appointment.service.name + " ");
+            System.out.print(appointment.appointmentDate.format(dataTimeFormatter) + " ");
+            System.out.println(appointment.getAppointmentStatus());
+        }
+    }
 
 }
