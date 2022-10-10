@@ -2,7 +2,7 @@ package seedu.duke.exception;
 
 import seedu.duke.common.ErrorMessages;
 
-public class AddTransactionMissingParameterException extends MoolahException {
+public class InputDuplicateTagException extends MoolahException {
     /**
      * Returns the error message of the exception to alert user of the exception.
      *
@@ -10,6 +10,6 @@ public class AddTransactionMissingParameterException extends MoolahException {
      */
     @Override
     public String getMessage() {
-        return ErrorMessages.ERROR_ADD_COMMAND_MISSING_PARAMETER.toString();
+        return ErrorMessages.ERROR_INPUT_DUPLICATE_TAG.toString();
     }
 }
