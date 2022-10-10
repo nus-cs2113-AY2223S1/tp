@@ -2,7 +2,20 @@ package seedu.duke;
 
 import seedu.duke.command.Command;
 import seedu.duke.command.CommandBye;
-import seedu.duke.exception.*;
+import seedu.duke.exception.EmptyClientDetailException;
+import seedu.duke.exception.EmptyCommandAddDetailException;
+import seedu.duke.exception.EmptyCommandPairUnpairDetailsException;
+import seedu.duke.exception.IncorrectAddClientFlagOrderException;
+import seedu.duke.exception.IncorrectPairUnpairFlagOrderException;
+import seedu.duke.exception.InvalidBudgetFormatException;
+import seedu.duke.exception.InvalidContactNumberException;
+import seedu.duke.exception.InvalidEmailException;
+import seedu.duke.exception.MissingClientDetailException;
+import seedu.duke.exception.MissingClientFlagException;
+import seedu.duke.exception.MissingPairUnpairFlagException;
+import seedu.duke.exception.NotIntegerException;
+import seedu.duke.exception.NotValidIndexException;
+import seedu.duke.exception.UndefinedSubCommandAddTypeException;
 
 import java.io.IOException;
 
