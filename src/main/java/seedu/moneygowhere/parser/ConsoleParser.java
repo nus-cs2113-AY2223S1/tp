@@ -471,6 +471,7 @@ public class ConsoleParser {
      * @throws ConsoleParserCommandDeleteExpenseInvalidException   If the command delete-expense is invalid.
      * @throws ConsoleParserCommandEditExpenseInvalidException     If the command edit-expense is invalid.
      * @throws ConsoleParserCommandSortExpenseInvalidTypeException If the command sort-expense is invalid.
+     * @throws ConsoleParserCommandAddIncomeInvalidException       If the command add-income is invalid.
      */
     public static ConsoleCommand parse(String consoleInput) throws
             ConsoleParserCommandNotFoundException,

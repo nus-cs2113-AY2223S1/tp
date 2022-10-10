@@ -7,17 +7,20 @@ import seedu.moneygowhere.commands.ConsoleCommandDeleteExpense;
 import seedu.moneygowhere.commands.ConsoleCommandEditExpense;
 import seedu.moneygowhere.commands.ConsoleCommandSortExpense;
 import seedu.moneygowhere.commands.ConsoleCommandViewExpense;
+import seedu.moneygowhere.commands.ConsoleCommandAddIncome;
 import seedu.moneygowhere.common.Configurations;
 import seedu.moneygowhere.common.Messages;
 import seedu.moneygowhere.data.expense.Expense;
 import seedu.moneygowhere.data.expense.ExpenseManager;
+import seedu.moneygowhere.data.income.Income;
+import seedu.moneygowhere.data.income.IncomeManager;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandAddExpenseInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandDeleteExpenseInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandEditExpenseInvalidException;
-import seedu.moneygowhere.exceptions.ConsoleParserCommandAddIncomeInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandNotFoundException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandSortExpenseInvalidTypeException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandViewExpenseInvalidException;
+import seedu.moneygowhere.exceptions.ConsoleParserCommandAddIncomeInvalidException;
 import seedu.moneygowhere.exceptions.ExpenseManagerExpenseNotFoundException;
 import seedu.moneygowhere.parser.ConsoleParser;
 
@@ -32,7 +35,6 @@ import java.util.Collections;
 import java.util.Scanner;
 
 
-
 /**
  * Provide functions to interface with the user via standard input and standard output.
  */
@@ -40,6 +42,7 @@ import java.util.Scanner;
 public class ConsoleInterface {
     private Scanner scanner;
     private ExpenseManager expenseManager;
+    private IncomeManager incomeManager;
 
     /**
      * Initializes the console interface.
@@ -47,6 +50,7 @@ public class ConsoleInterface {
     public ConsoleInterface() {
         scanner = new Scanner(System.in);
         expenseManager = new ExpenseManager();
+        incomeManager = new IncomeManager();
     }
 
     /**
@@ -287,6 +291,29 @@ public class ConsoleInterface {
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_SORTED_EXPENSE_SUCCESS);
     }
 
+    private void runCommandAddIncome(ConsoleCommandAddIncome consoleCommandAddIncome) {
+        Income income = new Income(
+                consoleCommandAddIncome.getName(),
+                consoleCommandAddIncome.getDateTime(),
+                consoleCommandAddIncome.getDescription(),
+                consoleCommandAddIncome.getAmount());
+        incomeManager.addIncome(income);
+
+        DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern(
+                Configurations.CONSOLE_INTERFACE_DATE_TIME_OUTPUT_FORMAT
+        );
+        String incomeStr = "";
+        incomeStr += "Name          : " + income.getName() + "\n";
+        incomeStr += "Date and Time : " + income.getDateTime().format(dateTimeFormat) + "\n";
+        incomeStr += "Description   : " + income.getDescription() + "\n";
+        incomeStr += "Amount        : " + income.getAmount() + "\n";
+        printInformationalMessage(incomeStr);
+
+        printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_ADD_INCOME_SUCCESS);
+
+        //saveToFile(incomeManager.getIncomes());
+    }
+
     /**
      * Runs the command line interface which the user interacts with.
      */
@@ -331,6 +358,8 @@ public class ConsoleInterface {
                 runCommandEditExpense((ConsoleCommandEditExpense) consoleCommand);
             } else if (consoleCommand instanceof ConsoleCommandSortExpense) {
                 runCommandSortExpense((ConsoleCommandSortExpense) consoleCommand);
+            } else if (consoleCommand instanceof ConsoleCommandAddIncome) {
+                runCommandAddIncome((ConsoleCommandAddIncome) consoleCommand);
             } else {
                 // Do nothing if the command is not found
             }
