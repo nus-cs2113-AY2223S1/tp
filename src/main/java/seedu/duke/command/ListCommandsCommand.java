@@ -1,5 +1,7 @@
 package seedu.duke.command;
 
+import seedu.duke.Ui;
+
 import java.util.Map;
 
 public class ListCommandsCommand extends Command {
@@ -11,7 +13,7 @@ public class ListCommandsCommand extends Command {
     private static final String COMMAND_VIEW_ITEM = "view-item /i <name>";
     private static final String COMMAND_VIEW_TX = "view-tx /t <transactionId>";
     private static final String COMMAND_ADD_USER = "add-user /n <name> /a <age> /c <contactNumber>";
-    private static final String COMMAND_ADD_ITEM = "add-item /n <name> /c <categoryNumber> /p <price>";
+    private static final String COMMAND_ADD_ITEM = "add-item /n <name> /c <categoryNumber> /p <price> /o <ownerName>";
     private static final String COMMAND_ADD_TX = "add-tx /i <itemName> /b <borrowerName> /d <duration> /c <createdAt>";
     private static final String COMMAND_REMOVE_USER = "remove-user /u <name>";
     private static final String COMMAND_REMOVE_ITEM = "remove-item /i <name>";
@@ -32,9 +34,11 @@ public class ListCommandsCommand extends Command {
             Map.entry("Remove a transaction", COMMAND_REMOVE_TX));
 
     public boolean executeCommand() {
+        Ui.showLine();
         for (Map.Entry<String, String> entry : commandToDetailMap.entrySet()) {
             System.out.println(entry.getKey() + ": " + entry.getValue());
         }
+        Ui.showLine();
         return false;
     }
 }

@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
+import seedu.duke.Ui;
 import seedu.duke.user.UserList;
 
 public class ListUsersCommand extends Command {
@@ -10,7 +11,7 @@ public class ListUsersCommand extends Command {
     }
 
     public boolean executeCommand() {
-        System.out.println(this.userList.listUser());
+        Ui.printResponse(userList.toString());
         return false;
     }
 }

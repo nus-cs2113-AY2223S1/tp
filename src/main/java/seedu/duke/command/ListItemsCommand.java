@@ -11,7 +11,7 @@ public class ListItemsCommand extends Command {
     }
 
     public boolean executeCommand() {
-        Ui.printResponse(this.itemList.showList());
+        Ui.printResponse(itemList.toString());
         return false;
     }
 }

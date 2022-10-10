@@ -1,16 +1,10 @@
 package seedu.duke.user;
 
-
-import seedu.duke.item.Item;
 import seedu.duke.exception.UserNotFoundException;
 
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class UserList {
-
-    private static final Logger logger = Logger.getLogger("Foo");
     protected ArrayList<User> userList;
 
     public UserList(ArrayList<User> userList) {
@@ -39,16 +33,12 @@ public class UserList {
     }
 
     public User getUserById(String userName) throws UserNotFoundException {
-        logger.log(Level.INFO, "getting user from user list");
         for (User user : userList) {
             if (user.getName().equals(userName)) {
                 assert userName.equals(user.getName()) : "equals function not working";
-                logger.log(Level.INFO, "user found");
                 return user;
             }
         }
-        logger.log(Level.WARNING, "user not found error", 
-                new UserNotFoundException("This user cannot be found in the list"));
         throw new UserNotFoundException("This user cannot be found in the list");
     }
 
@@ -59,5 +49,20 @@ public class UserList {
             listOfUsers.append(user.toString()).append(System.lineSeparator());
         }
         return listOfUsers.toString();
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder listString = new StringBuilder();
+        if (userList.size() == 0) {
+            listString.append("There is no user in your list right now");
+        } else {
+            listString.append("Here are ").append(userList.size()).append(" user(s) in your list:");
+        }
+        int index = 1;
+        for (User user : userList) {
+            listString.append('\n').append("   ").append(index++).append(". ").append(user);
+        }
+        return String.valueOf(listString);
     }
 }

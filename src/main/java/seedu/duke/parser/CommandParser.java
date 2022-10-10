@@ -129,7 +129,8 @@ public class CommandParser {
         case COMMAND_REMOVE_TX:
             return new RemoveTransactionCommand(parts, itemList, txList);
         default:
-            throw new CommandNotFoundException();
+            throw new CommandNotFoundException("This command is unrecognizable!!!\n"
+                    + "Please use list-commands command to check");
         }
     }
 }

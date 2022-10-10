@@ -1,18 +1,12 @@
 package seedu.duke.item;
 
-import java.util.logging.Logger;
-
-import java.util.logging.Level;
-
 import seedu.duke.Ui;
 import seedu.duke.exception.InvalidItemException;
 import seedu.duke.exception.ItemNotFoundException;
-import seedu.duke.transaction.Transaction;
 
 import java.util.ArrayList;
 
 public class ItemList {
-    private static final Logger logger = Logger.getLogger("Foo");
     private final Ui ui = new Ui();
     private final ArrayList<Item> itemList;
 
@@ -36,16 +30,12 @@ public class ItemList {
     }
 
     public Item getItem(String id) throws NullPointerException {
-        logger.log(Level.INFO, "getting item from item list");
         for (Item item : itemList) {
             if (id.equals(item.getItemId())) {
                 assert id.equals(item.getItemId()) : "equals function not working";
-                logger.log(Level.INFO, "Item found");
                 return item;
             }
         }
-        // exception if item not found
-        logger.log(Level.WARNING, "Item not found error", new NullPointerException());
         return null;
     }
 
@@ -107,5 +97,20 @@ public class ItemList {
             listOfUsers.append(item.toString()).append(System.lineSeparator());
         }
         return listOfUsers.toString();
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder listString = new StringBuilder();
+        if (itemList.size() == 0) {
+            listString.append("There is no item in your list right now");
+        } else {
+            listString.append("Here are ").append(itemList.size()).append(" item(s) in your list:");
+        }
+        int index = 1;
+        for (Item item : itemList) {
+            listString.append('\n').append("   ").append(index++).append(". ").append(item);
+        }
+        return String.valueOf(listString);
     }
 }
