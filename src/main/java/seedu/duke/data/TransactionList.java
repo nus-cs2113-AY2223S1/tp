@@ -29,7 +29,7 @@ public class TransactionList {
 
     public static String deleteTransaction(TransactionList input, int index) {
         Transaction transaction = input.getEntry(index - 1);
-        transactions.remove(index);
+        transactions.remove(index - 1);
         return transaction.toString();
     }
 

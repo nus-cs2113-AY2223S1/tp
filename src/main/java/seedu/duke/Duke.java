@@ -3,6 +3,7 @@ package seedu.duke;
 import seedu.duke.command.Command;
 import seedu.duke.data.TransactionList;
 import seedu.duke.exception.MoolahException;
+import seedu.duke.parser.CommandParser;
 
 public class Duke {
     private Storage storage;
@@ -31,7 +32,7 @@ public class Duke {
             try {
                 inData = ui.readCommand();
                 inData = inData.trim();
-                Command c = Parser.parse(inData);
+                Command c = CommandParser.parse(inData);
                 c.execute(transactions, ui, storage);
                 isExit = c.isExit();
             } catch (MoolahException e) {
