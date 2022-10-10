@@ -2,7 +2,21 @@ package seedu.duke;
 
 import java.util.Scanner;
 
-import static seedu.duke.Messages.*;
+import static seedu.duke.Messages.MESSAGE_ADD_CLIENT_WRONG_FORMAT;
+import static seedu.duke.Messages.MESSAGE_CLIENT_ADDED;
+import static seedu.duke.Messages.MESSAGE_CLIENT_DELETED;
+import static seedu.duke.Messages.MESSAGE_CLIENT_INPUT_EXAMPLE;
+import static seedu.duke.Messages.MESSAGE_EMPTY_ADD_DESCRIPTION;
+import static seedu.duke.Messages.MESSAGE_EMPTY_CLIENT_DESCRIPTION;
+import static seedu.duke.Messages.MESSAGE_EMPTY_CLIENT_INDEX;
+import static seedu.duke.Messages.MESSAGE_EMPTY_DELETE_DESCRIPTION;
+import static seedu.duke.Messages.MESSAGE_INVALID_BUDGET_FORMAT;
+import static seedu.duke.Messages.MESSAGE_INVALID_CLIENT_INDEX;
+import static seedu.duke.Messages.MESSAGE_INVALID_CONTACT_NUMBER;
+import static seedu.duke.Messages.MESSAGE_INVALID_EMAIL;
+import static seedu.duke.Messages.MESSAGE_MISSING_SUB_COMMAND_TYPE_FOR_ADD;
+import static seedu.duke.Messages.MESSAGE_MISSING_SUB_COMMAND_TYPE_FOR_DELETE;
+import static seedu.duke.Messages.MESSAGE_TRY_AGAIN;
 
 public class Ui {
 
