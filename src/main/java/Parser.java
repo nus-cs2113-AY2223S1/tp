@@ -13,9 +13,12 @@ public class Parser {
     private PatientList patientList;
     private VisitList visitList;
 
-    public Parser(PatientList patientList, VisitList visitList) {
+    private PrescriptionList prescriptionList;
+
+    public Parser(PatientList patientList, VisitList visitList, PrescriptionList prescriptionList) {
         this.patientList = patientList;
         this.visitList = visitList;
+        this.prescriptionList = prescriptionList;
     }
 
     public void mainMenuParser() {
@@ -32,9 +35,11 @@ public class Parser {
                 break;
             case visits:
                 Messages.printVisitsMenuMessage();
+                visitParser();
                 break;
             case prescription:
                 Messages.printPrescriptionMenuMessage();
+//                prescriptionParser();
                 break;
             default:
                 break;
@@ -62,7 +67,7 @@ public class Parser {
                 } else if (matcherRetrieve.find()) {
                     patientList.retrievePatient(matcherRetrieve.group(1));
                 } else if (matcherEdit.find()) {
-                    parseEditInput(matcherEdit.group(1), matcherEdit.group(2), matcherEdit.group(3));
+                    parseEditPatient(matcherEdit.group(1), matcherEdit.group(2), matcherEdit.group(3));
                 } else {
                     throw new OneDocException("Your input is incorrect! Please format it as such:"
                             + "\nTo add a patient: add i/[ID] n/[name] g/[M/F] d/[DOB]"
@@ -106,6 +111,35 @@ public class Parser {
         }
     }
 
+//    public void prescriptionParser() {
+//        while (scanner.hasNext()) {
+//            try {
+//                String input = scanner.nextLine();
+//                Matcher matcherAdd = addPrescriptionMatcher(input);
+//                Matcher matcherEdit = editPrescriptionMatcher(input);
+//                if (matcherAdd.find()) {
+//                    String reason = matcherAdd.group(4);
+//                    if (reason.isEmpty()) {
+//                        visitList.addVisit(matcherAdd.group(1), matcherAdd.group(2), matcherAdd.group(3));
+//                    } else {
+//                        visitList.addVisit(matcherAdd.group(1), matcherAdd.group(2),
+//                                matcherAdd.group(3), matcherAdd.group(4));
+//                    }
+//                } else if (matcherEdit.find()) {
+//                    visitList.editReason(matcherEdit.group(1), matcherEdit.group(2));
+//                } else {
+//                    throw new OneDocException("Your input is incorrect! Please format it as such:"
+//                            + "\nTo add a prescription: add i/[ID] d/[date] t/[time] r/[reason]"
+//                            + "\nTo edit a visit's reason: edit i/[ID] r/[reason]");
+//                }
+//            } catch (OneDocException e) {
+//                System.out.println("Incorrect format: " + e.getMessage());
+//            } catch (Exception e) {
+//                System.out.println("Unexpected issue: " + e.getMessage());
+//            }
+//        }
+//    }
+
 
     /* REGEX PATTERNS */
     private static Matcher patientAddMatcher(String input) {
@@ -127,7 +161,7 @@ public class Parser {
         return patientEditPattern.matcher(input);
     }
 
-    private void parseEditInput(String id, String type, String input) throws OneDocException {
+    private void parseEditPatient(String id, String type, String input) throws OneDocException {
         switch (type) {
         case "n/":
             Pattern matchName = Pattern.compile("^(\\w+\\s*\\w+|\\w+)$", Pattern.CASE_INSENSITIVE);
@@ -172,6 +206,52 @@ public class Parser {
                 "^edit\\s*i/(\\w+)\\s*r/((?:\\w+\\s+\\w+)+|\\w+)\\s*$", Pattern.CASE_INSENSITIVE);
         return editVisitPattern.matcher(input);
     }
+
+//    private static Matcher addPrescriptionMatcher(String input) {
+//        Pattern addPrescriptionPattern = Pattern.compile(
+//                "^add\\s*i/(\\w+)\\s*d/(\\d\\d-\\d\\d-\\d\\d\\d\\d)\\s*t/(\\d\\d:\\d\\d)\\s*"
+//                        + "(?:r/((?:\\w+\\s+\\w+)+|\\w+)\\s*)*$", Pattern.CASE_INSENSITIVE);
+//        return addPrescriptionPattern.matcher(input);
+//    }
+//
+//    private static Matcher editPrescriptionMatcher(String input) {
+//        Pattern editPrescriptionPattern = Pattern.compile(
+//                "^edit\\s*i/(\\w+)\\s*([n|d|t])/([\\w-]+)$", Pattern.CASE_INSENSITIVE);
+//        return editPrescriptionPattern.matcher(input);
+//    }
+//
+//    private void parseEditPrescription(String id, String type, String input) throws OneDocException {
+//        switch (type) {
+//        case "n/":
+//            Pattern matchName = Pattern.compile("^(\\w+\\s*\\w+|\\w+)$", Pattern.CASE_INSENSITIVE);
+//            if (matchName.matcher(input).find()) {
+//                patientList.modifyPatientDetails(id, input, null, null);
+//            } else {
+//                throw new OneDocException("Name is incorrectly formatted! "
+//                        + "Please use First and Last name or just one name");
+//            }
+//            break;
+//        case "d/":
+//            Pattern matchDob = Pattern.compile("^(\\d\\d-\\d\\d-\\d\\d\\d\\d)$", Pattern.CASE_INSENSITIVE);
+//            if (matchDob.matcher(input).find()) {
+//                patientList.modifyPatientDetails(id, null, input, null);
+//            } else {
+//                throw new OneDocException("DOC is incorrectly formatted! Please use DD-MM-YYYY format");
+//            }
+//            break;
+//        case "g/":
+//            Pattern matchGender = Pattern.compile("^(M|F)$", Pattern.CASE_INSENSITIVE);
+//            if (matchGender.matcher(input).find()) {
+//                patientList.modifyPatientDetails(id, null, null, input);
+//            } else {
+//                throw new OneDocException("Gender is incorrectly formatted! Please use only one letter, M or F");
+//            }
+//            break;
+//        default:
+//            throw new OneDocException("Type is incorrectly formatted!"
+//                    + "Please use n/ for name, g/ for gender, and d/ for DOB");
+//        }
+//    }
 
 
 }
