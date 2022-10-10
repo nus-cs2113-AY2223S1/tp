@@ -21,7 +21,7 @@ public class SkyControl {
             Parser.parse(lineInput);
             lineInput = ui.nextLineInput();
         }
-        ui.goodbyeMessage();
+        ui.showGoodByeMessage();
     }
 
     public static void main(String[] args) {
