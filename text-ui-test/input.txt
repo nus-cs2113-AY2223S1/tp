@@ -9,6 +9,14 @@ list
 add t/expense c/food a/20 d/13092022 i/NIL
 add t/income c/salary a/2000 d/30092022 i/jan_salary
 add t/expense c/transport a/1 d/02102022 i/bus_fare
+list /
+list t/Expense
+list t/expense
+list c/food
+list c/food d/30092022
+list c/food d/13092022
+list t/income d/
+list t/income d/30092022
 stats s/categories
 find
 find bus_fare

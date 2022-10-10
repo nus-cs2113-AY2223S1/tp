@@ -7,7 +7,6 @@ import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TransactionTest {
-
     LocalDate date = LocalDate.of(2022, 1, 1);
     Transaction transaction = new Income("Milked cows in the farm", 50,
             "Salary", date);

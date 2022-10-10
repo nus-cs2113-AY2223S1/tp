@@ -49,6 +49,10 @@ public class Transaction {
         this.category = category;
     }
 
+    public LocalDate getDate() {
+        return date;
+    }
+
     public String printFormattedDate() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_OUTPUT_PATTERN.toString());
         return date.format(formatter);
