@@ -12,14 +12,14 @@ public class Target {
     private LocalDateTime dateTime;
     private String description;
     private BigDecimal amount;
-    private BigDecimal current_amount;
+    private BigDecimal currentAmount;
 
-    public Target(String name, LocalDateTime dateTime, String description, BigDecimal amount, BigDecimal current_amount) {
+    public Target(String name, LocalDateTime dateTime, String description, BigDecimal amount, BigDecimal currentAmount) {
         this.name = name;
         this.dateTime = dateTime;
         this.description = description;
         this.amount = amount;
-        this.current_amount = current_amount;
+        this.currentAmount = currentAmount;
     }
 
     public String getName() {
@@ -55,11 +55,11 @@ public class Target {
     }
 
     public BigDecimal getCurrentAmount() {
-        return current_amount;
+        return currentAmount;
     }
 
-    public void setCurrentAmount(BigDecimal current_amount) {
-        this.current_amount = current_amount;
+    public void setCurrentAmount(BigDecimal currentAmount) {
+        this.currentAmount = currentAmount;
     }
 }
 

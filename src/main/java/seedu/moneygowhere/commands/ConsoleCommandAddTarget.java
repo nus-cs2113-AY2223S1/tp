@@ -12,20 +12,20 @@ public class ConsoleCommandAddTarget extends ConsoleCommand {
     private LocalDateTime dateTime;
     private String description;
     private BigDecimal amount;
-    private BigDecimal current_amount;
+    private BigDecimal currentAmount;
 
     public ConsoleCommandAddTarget(
             String name,
             LocalDateTime dateTime,
             String description,
             BigDecimal amount,
-            BigDecimal current_amount
+            BigDecimal currentAmount
     ) {
         this.name = name;
         this.dateTime = dateTime;
         this.description = description;
         this.amount = amount;
-        this.current_amount = current_amount;
+        this.currentAmount = currentAmount;
     }
 
     public String getName() {
@@ -44,5 +44,7 @@ public class ConsoleCommandAddTarget extends ConsoleCommand {
         return amount;
     }
 
-    public BigDecimal getCurrentAmount() { return current_amount; }
+    public BigDecimal getCurrentAmount() {
+        return currentAmount;
+    }
 }
