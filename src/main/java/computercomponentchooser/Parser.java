@@ -44,7 +44,7 @@ public class Parser {
                 Build newBuild = new Build(name);
                 buildManager.addBuild(newBuild);
                 break;
-//            case "view":
+            //case "view":
             case "delete":
                 name = getParameter(line, NAME_PARAMETER);
                 buildManager.deleteBuild(name);
@@ -54,8 +54,7 @@ public class Parser {
             }
         } catch (UnknownCommandException e) {
             System.out.println(e.getMessage());
-        }
-        catch (DuplicateBuildException e) {
+        } catch (DuplicateBuildException e) {
             System.out.println(e.getMessage());
         }
     }
