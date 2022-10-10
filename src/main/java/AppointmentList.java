@@ -16,4 +16,13 @@ public class AppointmentList {
     public static void addAppointment(Appointment appointment) {
         appointments.add(appointment);
     }
+
+    public static void removeAppointment(int appointmentId) {
+        for (Appointment appointment : appointments) {
+            if (appointment.appointmentId == appointmentId) {
+                appointments.remove(appointment);
+                break;
+            }
+        }
+    }
 }
