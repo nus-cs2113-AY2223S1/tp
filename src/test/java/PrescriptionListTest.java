@@ -36,7 +36,7 @@ class PrescriptionListTest {
     @Test
     void isEmpty_nonEmptyList_returnFalse() {
         PrescriptionList prescriptionsList = new PrescriptionList();
-        prescriptionsList.add("S123456G", "Ventolin", "4 mg", 6);
+        prescriptionsList.add("S123456G", "Ventolin", "4 mg", "6");
 
         assertFalse(prescriptionsList.isEmpty());
     }
@@ -52,7 +52,7 @@ class PrescriptionListTest {
     @Test
     void viewAll_onePrescription_printOnePrescription() {
         PrescriptionList prescriptionsList = new PrescriptionList();
-        prescriptionsList.add("S123456G", "Ventolin", "4 mg", 6);
+        prescriptionsList.add("S123456G", "Ventolin", "4 mg", "6");
         prescriptionsList.viewAll();
 
         String expectedOutput = "Prescription 1" + System.lineSeparator()
@@ -68,9 +68,9 @@ class PrescriptionListTest {
     @Test
     void viewAll_threePrescriptions_printThreePrescriptions() {
         PrescriptionList prescriptionsList = new PrescriptionList();
-        prescriptionsList.add("S123456G", "Ventolin", "4 mg", 6);
-        prescriptionsList.add("S987655G", "Losartan Potassium", "50 mg", 24, false);
-        prescriptionsList.add("K323232J", "Hydrocodone-Acetaminophen", "1 capsule", 6);
+        prescriptionsList.add("S123456G", "Ventolin", "4 mg", "6");
+        prescriptionsList.add("S987655G", "Losartan Potassium", "50 mg", "24", false);
+        prescriptionsList.add("K323232J", "Hydrocodone-Acetaminophen", "1 capsule", "6");
         prescriptionsList.viewAll();
 
         String expectedOutput = "Prescription 1" + System.lineSeparator()
@@ -101,8 +101,8 @@ class PrescriptionListTest {
     @Test
     void edit_editAllDetails_allDetailsUpdated() {
         PrescriptionList prescriptionsList = new PrescriptionList();
-        prescriptionsList.add("S123456G", "Ventolin", "4 mg", 6);
-        prescriptionsList.edit(1, "Losartan Potassium", "50 mg", 4);
+        prescriptionsList.add("S123456G", "Ventolin", "4 mg", "6");
+        prescriptionsList.edit(1, "Losartan Potassium", "50 mg", "4");
 
         String expectedOutput = "The prescription's details has been modified! Here are the new prescription details!"
                 + System.lineSeparator()
@@ -118,8 +118,8 @@ class PrescriptionListTest {
     @Test
     void edit_editSomeDetails_someDetailsUpdated() {
         PrescriptionList prescriptionsList = new PrescriptionList();
-        prescriptionsList.add("S123456G", "Ventolin", "4 mg", 6);
-        prescriptionsList.edit(1, "", "50 mg", Utils.NULL_INT);
+        prescriptionsList.add("S123456G", "Ventolin", "4 mg", "6");
+        prescriptionsList.edit(1, "", "50 mg", null);
 
         String expectedOutput = "The prescription's details has been modified! Here are the new prescription details!"
                 + System.lineSeparator()
@@ -135,8 +135,8 @@ class PrescriptionListTest {
     @Test
     void edit_indexOutOfRange_printErrorMessage() {
         PrescriptionList prescriptionsList = new PrescriptionList();
-        prescriptionsList.add("S123456G", "Ventolin", "4 mg", 6);
-        prescriptionsList.edit(3, "", "50 mg", Utils.NULL_INT);
+        prescriptionsList.add("S123456G", "Ventolin", "4 mg", "6");
+        prescriptionsList.edit(3, "", "50 mg", null);
 
         String expectedOutput = "The index number is out of range. Try again.";
 
