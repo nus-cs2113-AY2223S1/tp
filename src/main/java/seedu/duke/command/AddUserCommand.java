@@ -78,7 +78,7 @@ public class AddUserCommand extends Command {
             ContactNumberInvalidException, DuplicateException {
         String[] args = getArgsAddUserCmd();
         if (areValidArgs(args)) {
-            User user = new (new User(args[0], Integer.parseInt(args[1]), args[2]);
+            User user = new User(args[0], Integer.parseInt(args[1]), args[2]);
             this.userList.addUser(user);
             Ui.addUserMessage(user, userList.getSize());
         }
