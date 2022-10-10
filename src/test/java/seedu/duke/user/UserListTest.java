@@ -1,6 +1,7 @@
 package seedu.duke.user;
 
 import org.junit.jupiter.api.Test;
+import seedu.duke.exception.UserNotFoundException;
 import seedu.duke.user.User;
 import seedu.duke.user.UserList;
 
@@ -25,15 +26,15 @@ public class UserListTest {
     }
 
     @Test
-    void findUser_findUserUsingId_expectTheUserObject() {
+    void findUser_findUserUsingId_expectTheUserObject() throws UserNotFoundException {
         UserList userList = new UserList();
         User user = new User("John Doe", 45, "93746378");
         userList.addUser(user);
-        assertEquals(user, userList.findUser("John Doe"));
+        assertEquals(user, userList.getUserById("John Doe"));
     }
 
     @Test
-    void deleteUser_deleteUserUsingId_expectNoUser() {
+    void deleteUser_deleteUserUsingId_expectNoUser() throws UserNotFoundException {
         UserList userList = new UserList();
         User user = new User("John Doe", 45, "93746378");
         User user2 = new User("Jane Doe", 40, "92744873");

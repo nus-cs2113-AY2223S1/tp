@@ -3,26 +3,54 @@ package seedu.duke.command;
 import seedu.duke.Ui;
 import seedu.duke.exception.DukeException;
 import seedu.duke.exception.InsufficientArgumentsException;
+import seedu.duke.exception.InvalidArgumentException;
+import seedu.duke.exception.ItemNotFoundException;
+import seedu.duke.exception.TransactionNotFoundException;
+import seedu.duke.item.ItemList;
+import seedu.duke.parser.CommandParser;
 import seedu.duke.transaction.Transaction;
 import seedu.duke.transaction.TransactionList;
 
 public class RemoveTransactionCommand extends Command {
-    private final String[] args;
+    private final String[] parts;
     private final TransactionList txList;
+    private final ItemList itemList;
 
-    public RemoveTransactionCommand(String[] args, TransactionList txList)
+    public RemoveTransactionCommand(String[] parts, ItemList itemList, TransactionList txList)
             throws InsufficientArgumentsException {
-        this.args = args;
+        this.parts = parts;
+        this.itemList = itemList;
         this.txList = txList;
-        if (args.length != 1) {
+        if (parts.length != 1) {
             throw new InsufficientArgumentsException();
         }
     }
 
-    public boolean executeCommand() throws DukeException {
-        String txId = args[0];
-        this.txList.deleteTransaction(txId);
-        Ui.deleteTransactionMessage(txList.getTransactionById(txId), txList.getSize());
+    public String[] getArgsRemoveTxCmd() throws InvalidArgumentException {
+        String[] args = new String[1];
+        for (String part : parts) {
+            if (part.startsWith("t")) {
+                args[0] = CommandParser.getArgValue(part);
+            } else {
+                throw new InvalidArgumentException("One of the parts is in incorrect format");
+            }
+        }
+        return args;
+    }
+
+    private void markAvailableForItem(String transactionId) throws ItemNotFoundException, TransactionNotFoundException {
+        String itemId = txList.getTransactionById(transactionId).getItem();
+        itemList.markAvailable(itemId);
+    }
+
+    public boolean executeCommand()
+            throws TransactionNotFoundException, ItemNotFoundException, InvalidArgumentException {
+        String[] args = getArgsRemoveTxCmd();
+        String txId = args[0].trim();
+        markAvailableForItem(txId);
+        Transaction transaction = txList.getTransactionById(txId);
+        txList.deleteTransaction(txId);
+        Ui.deleteTransactionMessage(transaction, txList.getSize());
         return false;
     }
 }

@@ -8,25 +8,33 @@ import java.time.temporal.ChronoUnit;
 
 public class Transaction {
     private final String transactionId;
-    private final String itemId;
-    private final String borrowerId;
+    private final String item;
+    private final String borrower;
     private final int duration;
     private final LocalDate createdAt;
     private LocalDate returnedAt;
     private boolean isFinished;
 
-    public Transaction(String itemId, String borrowerId, int duration, String createdAt) {
+    public Transaction(String itemId, String borrowerId, int duration, LocalDate createdAt) {
         this.transactionId = IdGenerator.generateId();
-        this.itemId = itemId;
-        this.borrowerId = borrowerId;
+        this.item = itemId;
+        this.borrower = borrowerId;
         this.duration = duration;
         this.isFinished = false;
-        this.createdAt = LocalDate.parse(createdAt);
+        this.createdAt = createdAt;
         this.returnedAt = null;
     }
 
     public String getTxId() {
         return transactionId;
+    }
+
+    public String getItem() {
+        return item;
+    }
+
+    public String getBorrower() {
+        return borrower;
     }
 
     public Integer getDuration() {
@@ -62,8 +70,8 @@ public class Transaction {
     public String toString() {
         String transactionIcon = "[" + (isFinished ? "X" : " ") + "] ";
         String transactionId = "TransactionID: " + this.transactionId + " ";
-        String itemId = "ItemID: " + this.itemId + " ";
-        String usersId = "BorrowerID: " + this.borrowerId + " ";
+        String itemId = "ItemID: " + this.item + " ";
+        String usersId = "BorrowerID: " + this.borrower + " ";
 
         if (!isFinished) {
             String overdueDays = " (" + ChronoUnit.DAYS.between(getReturnDate(), LocalDate.now()) + "day(s) overdue";

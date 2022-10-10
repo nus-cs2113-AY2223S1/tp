@@ -49,7 +49,7 @@ public class Ui {
         showLine();
     }
 
-    public static final String readInput() {
+    public static String readInput() {
         return input.nextLine();
     }
 

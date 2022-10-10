@@ -1,9 +1,10 @@
 package seedu.duke.user;
 
+
 import seedu.duke.item.Item;
+import seedu.duke.exception.UserNotFoundException;
 
 import java.util.ArrayList;
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -24,17 +25,9 @@ public class UserList {
         userList.add(toAdd);
     }
 
-    public void deleteUser(String userName) {
-        boolean isFound = false;
-        for (User user : userList) {
-            if (user.getName().equals(userName)) {
-                isFound = true;
-                userList.remove(user);
-            }
-        }
-        if (!isFound) {
-            System.out.println("cannot find user");
-        }
+    public void deleteUser(String userName) throws UserNotFoundException {
+        User user = getUserById(userName);
+        userList.remove(user);
     }
 
     public int getSize() {
@@ -44,16 +37,8 @@ public class UserList {
     public User getUser(int index) {
         return userList.get(index - 1);
     }
-    public User getUserById(String id) {
-        for (User user : this.userList) {
-            if (id.equals(user.getUserId())) {
-                return user;
-            }
-        }
-        return null;
-    }
-    // find user using name
-    public User findUser(String userName) throws NullPointerException {
+
+    public User getUserById(String userName) throws UserNotFoundException {
         logger.log(Level.INFO, "getting user from user list");
         for (User user : userList) {
             if (user.getName().equals(userName)) {
@@ -62,8 +47,9 @@ public class UserList {
                 return user;
             }
         }
-        logger.log(Level.WARNING, "user not found error", new NullPointerException());
-        return null;
+        logger.log(Level.WARNING, "user not found error", 
+                new UserNotFoundException("This user cannot be found in the list"));
+        throw new UserNotFoundException("This user cannot be found in the list");
     }
 
     public String listUser() {
