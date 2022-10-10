@@ -1,9 +1,9 @@
 package seedu.duke.exercise;
 
 import org.junit.jupiter.api.Test;
-import seedu.duke.Biometrics;
 import seedu.duke.Parser;
 import seedu.duke.Ui;
+import seedu.duke.biometrics.Biometrics;
 import seedu.duke.command.Command;
 import seedu.duke.exception.IllegalValueException;
 

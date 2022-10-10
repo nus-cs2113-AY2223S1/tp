@@ -1,4 +1,8 @@
-package seedu.duke;
+package seedu.duke.biometrics;
+
+import seedu.duke.exception.IllegalValueException;
+
+import java.util.Arrays;
 
 public class Biometrics {
     private int age;
@@ -13,14 +17,6 @@ public class Biometrics {
         height = 0;
         weight = 0;
         fatPercentage = 0;
-    }
-
-    public void setBiometrics(int age, String gender, int height, int weight, int fatPercentage) {
-        this.age = age;
-        this.gender = gender;
-        this.height = height;
-        this.weight = weight;
-        this.fatPercentage = fatPercentage;
     }
 
     public int getAge() {
@@ -41,6 +37,14 @@ public class Biometrics {
 
     public int getFatPercentage() {
         return fatPercentage;
+    }
+
+    public void setBiometrics(int age, String gender, int height, int weight, int fatPercentage) {
+        this.age = age;
+        this.gender = gender;
+        this.height = height;
+        this.weight = weight;
+        this.fatPercentage = fatPercentage;
     }
 
     @Override

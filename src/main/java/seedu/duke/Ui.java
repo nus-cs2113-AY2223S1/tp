@@ -23,6 +23,7 @@ public class Ui {
      * @param output Varargs output for printing
      */
     public void output(String... output) {
+        assert (output != null);
         for (String line : output) {
             System.out.println(line);
         }

@@ -1,7 +1,7 @@
 package seedu.duke.command;
 
 import org.junit.jupiter.api.Test;
-import seedu.duke.Biometrics;
+import seedu.duke.biometrics.Biometrics;
 import seedu.duke.Parser;
 import seedu.duke.Ui;
 import seedu.duke.exception.IllegalValueException;
@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 class SetCommandTest {
 
     @Test
-    void execute_ValidSetArguments_UpdatedBiometrics() throws IllegalValueException {
+    void execute_validSetArguments_updatedBiometrics() throws IllegalValueException {
         Biometrics biometrics = new Biometrics();
         Ui ui = new Ui();
         ExerciseList exerciseList = new ExerciseList();
@@ -23,7 +23,8 @@ class SetCommandTest {
         int height = 172;
         int weight = 70;
         int fatPercentage = 22;
-        String fullCommand = String.format("%s %d %s %d %d %d", command, age, gender, height, weight, fatPercentage);
+        String fullCommand = String.format("%s /%d /%s /%d /%d /%d",
+                command, age, gender, height, weight, fatPercentage);
 
         Command c = Parser.parse(fullCommand);
         c.setData(ui, biometrics, exerciseList);
@@ -36,7 +37,7 @@ class SetCommandTest {
     }
 
     @Test
-    void execute_NegativeInt_exceptionThrown() {
+    void execute_negativeInt_exceptionThrown() {
         Biometrics biometrics = new Biometrics();
         Ui ui = new Ui();
         ExerciseList exerciseList = new ExerciseList();
@@ -46,7 +47,8 @@ class SetCommandTest {
         int height = 172;
         int weight = 70;
         int fatPercentage = 22;
-        String fullCommand = String.format("%s %d %s %d %d %d", command, age, gender, height, weight, fatPercentage);
+        String fullCommand = String.format("%s /%d /%s /%d /%d /%d",
+                command, age, gender, height, weight, fatPercentage);
 
         Command c = Parser.parse(fullCommand);
         c.setData(ui, biometrics, exerciseList);
@@ -54,13 +56,13 @@ class SetCommandTest {
             c.execute();
             fail();
         } catch (IllegalValueException e) {
-            assertEquals("Invalid biometrics", e.getMessage());
+            assertEquals("That age ain't possible", e.getMessage());
         }
 
     }
 
     @Test
-    void execute_InvalidGender_UnchangedBiometrics() {
+    void execute_invalidGender_unchangedBiometrics() {
         Biometrics biometrics = new Biometrics();
         Ui ui = new Ui();
         ExerciseList exerciseList = new ExerciseList();
@@ -70,7 +72,8 @@ class SetCommandTest {
         int height = 172;
         int weight = 70;
         int fatPercentage = 22;
-        String fullCommand = String.format("%s %d %s %d %d %d", command, age, gender, height, weight, fatPercentage);
+        String fullCommand = String.format("%s /%d /%s /%d /%d /%d",
+                command, age, gender, height, weight, fatPercentage);
 
         Command c = Parser.parse(fullCommand);
         c.setData(ui, biometrics, exerciseList);
@@ -78,7 +81,7 @@ class SetCommandTest {
             c.execute();
             fail();
         } catch (IllegalValueException e) {
-            assertEquals("Invalid biometrics", e.getMessage());
+            assertEquals("Hi, I only recognise other, female and male genders", e.getMessage());
         }
     }
 }

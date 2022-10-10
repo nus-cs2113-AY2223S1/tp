@@ -7,6 +7,19 @@ Hello from
 Howdy!
 ------------------------------------------
 ------------------------------------------
+Invalid command, enter help to view available commands
+------------------------------------------
+------------------------------------------
+Help will always be given at Hogwarts to those who ask for it
+Available commands:
+help - to display the help message
+exit - to exit the program
+set biometrics /{age} /{gender} /height /{weight} /{fat percentage}
+add exercise /{description} /{repetitions} /{calories}
+mark {done/undone} /{exercise index}
+view {biometrics/exercise}
+------------------------------------------
+------------------------------------------
 Biometrics
 Age: 0
 Gender: -
@@ -21,47 +34,23 @@ biometrics set
 biometrics set
 ------------------------------------------
 ------------------------------------------
-biometrics set
-------------------------------------------
-------------------------------------------
-biometrics set
-------------------------------------------
-------------------------------------------
 Biometrics
 Age: 29
-Gender: male
+Gender: other
 Height: 295cm
 Weight: 25kg
 Fat percentage: 25%
 ------------------------------------------
 ------------------------------------------
-Invalid biometrics
+Invalid fat percentage
 ------------------------------------------
 ------------------------------------------
 Biometrics
 Age: 29
-Gender: male
+Gender: other
 Height: 295cm
 Weight: 25kg
 Fat percentage: 25%
-------------------------------------------
-------------------------------------------
-Invalid biometrics
-------------------------------------------
-------------------------------------------
-Invalid biometrics
-------------------------------------------
-------------------------------------------
-Help will always be given at Hogwarts to those who ask for it
-Available commands:
-help - to display the help message
-exit - to exit the program
-------------------------------------------
-------------------------------------------
-Invalid biometrics
-------------------------------------------
-------------------------------------------
-Invalid biometrics
 ------------------------------------------
 ------------------------------------------
 Exercise: squat
