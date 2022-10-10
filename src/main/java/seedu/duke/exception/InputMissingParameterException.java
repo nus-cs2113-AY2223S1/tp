@@ -2,7 +2,7 @@ package seedu.duke.exception;
 
 import seedu.duke.common.ErrorMessages;
 
-public class AddTransactionMissingParameterException extends MoolahException {
+public class InputMissingParameterException extends MoolahException {
     /**
      * Returns the error message of the exception to alert user of the exception.
      *
