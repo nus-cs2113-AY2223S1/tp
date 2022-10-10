@@ -22,12 +22,14 @@ import seedu.ui.Ui;
  * Class to fetch .json data from APIs and save that locally.
  */
 public class Api {
-    private final String API_KEY = "1B+7tBxzRNOtFbTxGcCiYA==";
-    private final String AUTH_HEADER_NAME = "AccountKey";
-    private final int MAX_FETCH_TRIES = 5;
+    private final String apiKey = "1B+7tBxzRNOtFbTxGcCiYA==";
+    private final String authHeaderName = "AccountKey";
+    private final int maxFetchTries = 5;
     private HttpClient client;
     private HttpRequest request;
     private CompletableFuture<HttpResponse<String>> responseFuture;
+    private FileStorage storage;
+    private final Ui ui;
 
     /**
      * Constructor to create a new client and the correct HTTP request.
@@ -47,7 +49,7 @@ public class Api {
     private void generateHttpRequestCarpark() {
         request = HttpRequest.newBuilder(
                 URI.create(LTA_BASE_URL))
-            .header(authHeaderName, API_KEY)
+            .header(authHeaderName, apiKey)
             .build();
     }
 
@@ -88,7 +90,7 @@ public class Api {
      */
     public void fetchData() throws EmptyResponseException, IOException {
         String result = asyncGetResponse();
-        int fetchTries = MAX_FETCH_TRIES;
+        int fetchTries = maxFetchTries;
         while (result.isEmpty() && fetchTries > 0) {
             asyncExecuteRequest();
             result = asyncGetResponse();
