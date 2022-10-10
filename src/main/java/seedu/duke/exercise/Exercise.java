@@ -30,7 +30,10 @@ public class Exercise {
     }
 
     public String getTaskStatus() {
-        return String.format("%s", isDone ? "\u2713" : "X");
+        if (isDone) {
+            return "[X]";
+        }
+        return "[ ]";
     }
 
     public void setDone(boolean isDone) {
@@ -42,6 +45,6 @@ public class Exercise {
         return "Exercise: " + exerciseName + System.lineSeparator()
                 + "Repetitions: " + repetitions + System.lineSeparator()
                 + "Calories Burnt: " + caloriesBurnt + System.lineSeparator()
-                + String.format("Status: %s", isDone ? "\u2713" : "X");
+                + String.format("Status: %s", getTaskStatus());
     }
 }
