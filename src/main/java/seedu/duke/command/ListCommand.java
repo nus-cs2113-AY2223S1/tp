@@ -3,9 +3,18 @@ package seedu.duke.command;
 import seedu.duke.Storage;
 import seedu.duke.Ui;
 import seedu.duke.data.TransactionList;
+import seedu.duke.exception.InputTransactionInvalidTagException;
+import seedu.duke.exception.InputTransactionUnknownTypeException;
+import seedu.duke.exception.MoolahException;
+
+import java.time.LocalDate;
 
 import static seedu.duke.common.InfoMessages.INFO_LIST;
 import static seedu.duke.common.InfoMessages.INFO_LIST_EMPTY;
+import static seedu.duke.common.Utilities.checkExtraTagExist;
+import static seedu.duke.common.Utilities.parseCategoryTag;
+import static seedu.duke.common.Utilities.parseDateTag;
+import static seedu.duke.common.Utilities.parseTypeTag;
 
 /**
  * Represents a list command object that will execute the operations for List command.
@@ -27,19 +36,20 @@ public class ListCommand extends Command {
             + LINE_SEPARATOR
             + "(Optional) DATE: Date of the transaction. The format must be in \"yyyyMMdd\".";
 
-
     // Basic help description
-    public static final String COMMAND_HELP = "Command Word: " + COMMAND_WORD
-            + LINE_SEPARATOR
-            + COMMAND_DESCRIPTION
-            + LINE_SEPARATOR
-            + COMMAND_USAGE
-            + LINE_SEPARATOR;
+    public static final String COMMAND_HELP = "Command Word: " + COMMAND_WORD + LINE_SEPARATOR
+            + COMMAND_DESCRIPTION + LINE_SEPARATOR
+            + COMMAND_USAGE + LINE_SEPARATOR;
     // Detailed help description
     public static final String COMMAND_DETAILED_HELP = COMMAND_HELP + COMMAND_PARAMETERS_INFO
             + LINE_SEPARATOR;
-    
-    public ListCommand() {
+
+    private static final int TAG_LIMIT = 3;
+
+    private String input;
+
+    public ListCommand(String input) {
+        this.input = input;
     }
 
     /**
@@ -50,8 +60,62 @@ public class ListCommand extends Command {
      * @param storage      An instance of the Storage class.
      */
     @Override
-    public void execute(TransactionList transactions, Ui ui, Storage storage) {
-        String transactionsList = transactions.listTransactions();
+    public void execute(TransactionList transactions, Ui ui, Storage storage) throws MoolahException {
+        /*
+        Checks if userInput is in the correct input format by further parsing,
+        before passing any tags to the filter for transaction list.
+        */
+        String[] splits = {};
+        if (!input.isEmpty()) {
+            splits = input.split(" ");
+        }
+
+        // Throws exception if there are more than three tags
+        checkExtraTagExist(splits, TAG_LIMIT);
+
+        String category = "";
+        LocalDate date = null;
+        String type = "";
+
+        for (String split : splits) {
+            // Throws exception if the tag cannot split
+            if (split.length() < 2) {
+                throw new InputTransactionInvalidTagException();
+            }
+            String tag = split.substring(0, 2);
+            String parameter = split.substring(2);
+            switch (tag) {
+            case "t/":
+                type = parseTypeTag(parameter);
+                break;
+            case "c/":
+                category = parseCategoryTag(parameter);
+                break;
+            case "d/":
+                date = parseDateTag(parameter);
+                assert date != null;
+                break;
+            default:
+                // Throws exception if the tag is invalid
+                throw new InputTransactionInvalidTagException();
+            }
+        }
+        listTransactions(transactions, type, category, date);
+    }
+
+    /**
+     * List all or some transactions based on selection.
+     *
+     * @param transactions An instance of the TransactionList class.
+     * @param type The type of transaction.
+     * @param category A category for the transaction.
+     * @param date Date of the transaction with format in "yyyyMMdd".
+     * @throws InputTransactionUnknownTypeException If class type cannot be found in the packages.
+     */
+    private static void listTransactions(TransactionList transactions, String type,
+                                         String category, LocalDate date)
+            throws InputTransactionUnknownTypeException {
+        String transactionsList = transactions.listTransactions(type, category, date);
         if (transactionsList.isEmpty()) {
             Ui.showInfoMessage(INFO_LIST_EMPTY.toString());
             return;
