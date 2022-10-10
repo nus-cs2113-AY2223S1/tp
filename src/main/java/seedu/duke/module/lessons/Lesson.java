@@ -1,18 +1,10 @@
 package seedu.duke.module.lessons;
 
-public class Lesson {
+public abstract class Lesson {
     private String day;
     private String startTime;
     private String endTime;
-    private Boolean isAttending = false;
-
-    public Boolean getAttending() {
-        return isAttending;
-    }
-
-    public void setAttending(Boolean attending) {
-        isAttending = attending;
-    }
+    private String lessonType;
 
     public String getDay() {
         return day;
@@ -26,9 +18,14 @@ public class Lesson {
         return endTime;
     }
 
-    public Lesson(String day, String startTime, String endTime) {
+    public String getLessonType() {
+        return lessonType;
+    }
+
+    public Lesson(String day, String startTime, String endTime, String lessonType) {
         this.day = day;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.lessonType = lessonType;
     }
 }
