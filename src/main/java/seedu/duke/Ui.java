@@ -69,7 +69,7 @@ public class Ui {
                 + "Total item(s) in list: " + listSize + '\n');
         showLine();
     }
-    
+
     public static void addTransactionMessage(Transaction transaction, int listSize) {
         showLine();
         assert listSize >= 0;
@@ -77,15 +77,15 @@ public class Ui {
                 + "Total transaction(s) in list: " + listSize + '\n');
         showLine();
     }
-    
-    public static void deleteTransactionMessage(Transaction transaction,int listSize) {
+
+    public static void deleteTransactionMessage(Transaction transaction, int listSize) {
         showLine();
         assert listSize >= 0;
         System.out.print("OK! I will remove the following item:\n" + transaction.toString() + "\n"
                 + "Total item(s) in list: " + listSize + '\n');
         showLine();
     }
-    
+
     public static void addUserMessage(User user, int listSize) {
         showLine();
         assert listSize >= 0;
