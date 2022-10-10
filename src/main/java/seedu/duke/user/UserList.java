@@ -1,8 +1,6 @@
 package seedu.duke.user;
 
-import seedu.duke.exception.InvalidItemException;
 import seedu.duke.exception.UserNotFoundException;
-import seedu.duke.item.Item;
 
 import java.util.ArrayList;
 

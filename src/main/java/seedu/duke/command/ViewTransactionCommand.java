@@ -1,7 +1,5 @@
 package seedu.duke.command;
 
-import seedu.duke.command.Command;
-import seedu.duke.exception.DukeException;
 import seedu.duke.exception.InsufficientArgumentsException;
 import seedu.duke.exception.TransactionNotFoundException;
 import seedu.duke.transaction.Transaction;

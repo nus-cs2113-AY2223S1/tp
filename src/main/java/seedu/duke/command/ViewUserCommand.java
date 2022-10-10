@@ -1,6 +1,5 @@
 package seedu.duke.command;
 
-import seedu.duke.command.Command;
 import seedu.duke.exception.InsufficientArgumentsException;
 import seedu.duke.exception.UserNotFoundException;
 import seedu.duke.user.User;

@@ -1,6 +1,5 @@
 package seedu.duke.command;
 
-import seedu.duke.command.Command;
 import seedu.duke.exception.InsufficientArgumentsException;
 import seedu.duke.item.Item;
 import seedu.duke.item.ItemList;

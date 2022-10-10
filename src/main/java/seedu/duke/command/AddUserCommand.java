@@ -1,6 +1,5 @@
 package seedu.duke.command;
 
-import seedu.duke.command.Command;
 import seedu.duke.exception.ContactNumberInvalidException;
 import seedu.duke.exception.DuplicateException;
 import seedu.duke.exception.InsufficientArgumentsException;

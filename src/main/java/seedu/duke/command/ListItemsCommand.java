@@ -1,7 +1,6 @@
 package seedu.duke.command;
 
 import seedu.duke.Ui;
-import seedu.duke.command.Command;
 import seedu.duke.item.ItemList;
 
 public class ListItemsCommand extends Command {
