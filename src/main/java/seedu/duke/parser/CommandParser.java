@@ -14,6 +14,14 @@ import seedu.duke.command.PurgeCommand;
 import seedu.duke.exception.MoolahException;
 import seedu.duke.exception.InvalidCommandException;
 
+/**
+ * Represents a parser that parses the user input into a Command object ready for execution
+ *
+ * <p>The CommandParser will check that the user input calls a valid command,
+ * then create the corresponding command object and call ParameterParser to further parse the parameter portion
+ * of the user input and set the parameters inside the command object,
+ * such that the command object will be ready for an execution.
+ */
 public class CommandParser {
     private static final String EMPTY_STRING = "";
     private static final String DELIMITER = " ";
@@ -30,12 +38,18 @@ public class CommandParser {
         Command command = null;
         String[] inputTokens = splitInput(fullCommandInput);
 
-        assert  inputTokens.length == 2;
+        assert inputTokens.length == 2;
         String commandWordInput = inputTokens[0];
         String parametersInput = inputTokens[1];
 
         // Parse the command word from user input
-        command = getCommand(commandWordInput);
+        command = getCommand(commandWordInput, parametersInput);
+
+
+        // TODO: To remove this if statement once a solution is found for managing parameter that allows space
+        if (command instanceof FindCommand) {
+            return command;
+        }
 
         // Parse the parameters from user input to set up the parameters for the command
         assert command != null;
@@ -68,7 +82,8 @@ public class CommandParser {
      * @return Command object created
      * @throws InvalidCommandException Exception when the command word is not supported by the application.
      */
-    private static Command getCommand(String commandWordInput) throws InvalidCommandException{
+    private static Command getCommand(String commandWordInput, String parameterInput) throws InvalidCommandException {
+        // TODO: Remove parameter input once a solution is found for managing parameter that allows space
         Command command = null;
         switch (commandWordInput.toUpperCase()) {
         case HelpCommand.COMMAND_WORD:
@@ -84,7 +99,7 @@ public class CommandParser {
             command = new ListCommand();
             break;
         case FindCommand.COMMAND_WORD:
-            command = new FindCommand();
+            command = new FindCommand(parameterInput);
             break;
         case StatsCommand.COMMAND_WORD:
             command = new StatsCommand();

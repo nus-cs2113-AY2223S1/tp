@@ -39,9 +39,6 @@ public class FindCommand extends Command {
 
     protected String keywords;
 
-    public FindCommand() {
-    }
-
     /**
      * Initialises the variables of the FindCommand class.
      *
