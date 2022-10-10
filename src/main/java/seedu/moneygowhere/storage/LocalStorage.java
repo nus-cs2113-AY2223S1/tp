@@ -68,7 +68,6 @@ public class LocalStorage {
      * This method saves all current expenses into a text file.
      */
     public static void saveToFile(ArrayList<Expense> savedExpenses) {
-
         try {
             initialiseFile();
             ArrayList<String> compiledData = taskToStringArray(savedExpenses);
@@ -89,10 +88,10 @@ public class LocalStorage {
         for (Expense expense : savedExpenses) {
             textData.add(
                     expense.getName() + DIVIDER
-                    + expense.getDateTime().toString() + DIVIDER
-                    + expense.getDescription() + DIVIDER
-                    + expense.getAmount() + DIVIDER
-                    + expense.getCategory()
+                            + expense.getDateTime().toString() + DIVIDER
+                            + expense.getDescription() + DIVIDER
+                            + expense.getAmount() + DIVIDER
+                            + expense.getCategory()
             );
         }
         return textData;
