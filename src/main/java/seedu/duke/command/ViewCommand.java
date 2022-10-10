@@ -9,7 +9,7 @@ import seedu.duke.exercise.ExerciseList;
 
 import java.util.ArrayList;
 
-import static seedu.duke.command.AddFoodCommand.foodList;
+import static seedu.duke.command.AddCommand.foodList;
 
 public class ViewCommand extends Command {
 
