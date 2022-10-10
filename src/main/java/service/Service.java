@@ -1,3 +1,5 @@
+package service;
+
 public class Service {
     private int serviceId;
     private String serviceDescription;
