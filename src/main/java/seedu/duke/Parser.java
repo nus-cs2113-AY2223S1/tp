@@ -2,16 +2,24 @@ package seedu.duke;
 
 import seedu.duke.command.Command;
 import seedu.duke.command.CommandAddClient;
+import seedu.duke.command.CommandDeleteClient;
 import seedu.duke.command.CommandPair;
 import seedu.duke.command.CommandUnpair;
+
+import seedu.duke.command.CommandPair;
+import seedu.duke.command.CommandUnpair;
+
 import seedu.duke.command.CommandUndefined;
 import seedu.duke.exception.EmptyClientDetailException;
+import seedu.duke.exception.EmptyClientIndexDeleteException;
 import seedu.duke.exception.EmptyCommandAddDetailException;
+import seedu.duke.exception.EmptyCommandDeleteDetailException;
 import seedu.duke.exception.EmptyCommandPairUnpairDetailsException;
 import seedu.duke.exception.IncorrectAddClientFlagOrderException;
 import seedu.duke.exception.IncorrectFlagOrderException;
 import seedu.duke.exception.IncorrectPairUnpairFlagOrderException;
 import seedu.duke.exception.InvalidBudgetFormatException;
+import seedu.duke.exception.InvalidClientIndexDeleteException;
 import seedu.duke.exception.InvalidContactNumberException;
 import seedu.duke.exception.InvalidEmailException;
 import seedu.duke.exception.MissingClientDetailException;
@@ -21,6 +29,7 @@ import seedu.duke.exception.MissingPairUnpairFlagException;
 import seedu.duke.exception.NotIntegerException;
 import seedu.duke.exception.NotValidIndexException;
 import seedu.duke.exception.UndefinedSubCommandAddTypeException;
+import seedu.duke.exception.UndefinedSubCommandDeleteTypeException;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -42,9 +51,10 @@ public class Parser {
     public Command parseCommand(String input) throws EmptyCommandAddDetailException,
             UndefinedSubCommandAddTypeException, EmptyClientDetailException, MissingClientFlagException,
             IncorrectAddClientFlagOrderException, MissingClientDetailException, InvalidContactNumberException,
-            InvalidEmailException, InvalidBudgetFormatException, EmptyCommandPairUnpairDetailsException,
-            MissingPairUnpairFlagException, IncorrectPairUnpairFlagOrderException, NotValidIndexException,
-            NotIntegerException {
+            InvalidEmailException, InvalidBudgetFormatException, UndefinedSubCommandDeleteTypeException,
+            EmptyCommandDeleteDetailException, InvalidClientIndexDeleteException, EmptyClientIndexDeleteException,
+            EmptyCommandPairUnpairDetailsException, MissingPairUnpairFlagException,
+            IncorrectPairUnpairFlagOrderException, NotValidIndexException, NotIntegerException {
         ArrayList<String> processedCommandDetails = partitionCommandTypeAndDetails(input);
         String commandType    = processedCommandDetails.get(0);
         String commandDetails = processedCommandDetails.get(1);
@@ -60,13 +70,22 @@ public class Parser {
             } else {
                 throw new UndefinedSubCommandAddTypeException();
             }
+        case "delete":
+            checkForEmptyCommandDeleteDetails(commandDetails);
+            ArrayList<String> processedDeleteCommandDetails = partitionCommandTypeAndDetails(commandDetails);
+            String subDeleteCommandType = processedDeleteCommandDetails.get(0);
+            int clientIndexToDelete = getClientIndex(processedDeleteCommandDetails.get(1)) - 1;
+            if (subDeleteCommandType.equals("-client")) {
+                return prepareForCommandDeleteClient(clientIndexToDelete, clientList);
+            } else {
+                throw new UndefinedSubCommandDeleteTypeException();
+            }
         case "pair":
             checkForEmptyCommandPairUnpairDetails(commandDetails);
             return prepareForCommandPair(commandDetails);
         case "unpair":
             checkForEmptyCommandPairUnpairDetails(commandDetails);
             return prepareForCommandUnpair(commandDetails);
-
         default:
             return new CommandUndefined();
         }
@@ -87,6 +106,13 @@ public class Parser {
         boolean isEmptyCommandAddDetail = checkForEmptyDetail(commandAddDetails);
         if (isEmptyCommandAddDetail) {
             throw new EmptyCommandAddDetailException();
+        }
+    }
+
+    private void checkForEmptyCommandDeleteDetails(String commandAddDetails) throws EmptyCommandDeleteDetailException {
+        boolean isEmptyCommandAddDetail = checkForEmptyDetail(commandAddDetails);
+        if (isEmptyCommandAddDetail) {
+            throw new EmptyCommandDeleteDetailException();
         }
     }
 
@@ -251,6 +277,27 @@ public class Parser {
         return commandDetails.trim().isEmpty();
     }
 
+    private int getClientIndex(String commandDetails) throws EmptyClientIndexDeleteException {
+        if (commandDetails.isEmpty()) {
+            throw new EmptyClientIndexDeleteException();
+        }
+        return Integer.parseInt(commandDetails.trim());
+    }
+
+    private Command prepareForCommandDeleteClient(int clientIndex, ClientList clientList)
+            throws InvalidClientIndexDeleteException {
+        checkForInvalidClientIndexDelete(clientIndex, clientList);
+        return new CommandDeleteClient(clientIndex);
+    }
+
+    private void checkForInvalidClientIndexDelete(int clientIndex, ClientList clientList)
+            throws InvalidClientIndexDeleteException {
+        int currentListSize = clientList.getCurrentListSize();
+        if (clientIndex < 0 || clientIndex >= currentListSize) {
+            throw new InvalidClientIndexDeleteException();
+        }
+    }
+
     private void checkForEmptyCommandPairUnpairDetails(String commandPairUnpairDetails)
             throws EmptyCommandPairUnpairDetailsException {
         boolean isEmptyCommandPairUnpairDetail = checkForEmptyDetail(commandPairUnpairDetails);
@@ -287,7 +334,6 @@ public class Parser {
         checkForPairUnpairFlagsOrder(pairUnpairFlagIndexPositions);
         return extractPairUnpairDetails(rawPairUnpairDetails, pairUnpairFlagIndexPositions, pairUnpairFlags);
     }
-
 
     private void checkForMissingPairUnpairFlags(int[] pairUnpairFlagIndexPosition)
             throws MissingPairUnpairFlagException {
