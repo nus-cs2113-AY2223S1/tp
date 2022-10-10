@@ -55,16 +55,17 @@ public class Parser {
                 Matcher matcherRetrieve = patientRetrieveMatcher(input);
                 Matcher matcherEdit = patientEditMatcher(input);
                 if (matcherAdd.find()) {
-                    patientList.addPatient(matcherAdd.group(1), matcherAdd.group(3), matcherAdd.group(2), matcherAdd.group(4));
+                    patientList.addPatient(matcherAdd.group(1), matcherAdd.group(3),
+                            matcherAdd.group(2), matcherAdd.group(4));
                 } else if (matcherRetrieve.find()) {
                     patientList.retrievePatient(matcherRetrieve.group(1));
                 } else if (matcherEdit.find()) {
                     parseEditInput(matcherEdit.group(1), matcherEdit.group(2), matcherEdit.group(3));
                 } else {
-                    throw new OneDocException("Your input is incorrect! Please format it as such:" +
-                            "\nTo add a patient: add i/[ID] n/[name] g/[M/F] d/[DOB]" +
-                            "\nTo edit a patient's info: edit i/[ID] (n/[name] or g/[M/F] or d/[DOB]" +
-                            "\nTo retrieve a patient's info: retrieve i/[ID]");
+                    throw new OneDocException("Your input is incorrect! Please format it as such:"
+                            + "\nTo add a patient: add i/[ID] n/[name] g/[M/F] d/[DOB]"
+                            + "\nTo edit a patient's info: edit i/[ID] (n/[name] or g/[M/F] or d/[DOB]"
+                            + "\nTo retrieve a patient's info: retrieve i/[ID]");
                 }
             } catch (OneDocException e) {
                 System.out.println("Incorrect format: " + e.getMessage());
@@ -77,22 +78,22 @@ public class Parser {
 
 
     /** REGEX PATTERNS */
-
-
-    /** Pattern for a patient add command, which is structured as
-     * add i/ID n/name g/M/F d/DOB */
     private static Matcher patientAddMatcher(String input) {
-        Pattern patientAddPattern = Pattern.compile("^add\\s*n/(\\w+\\s*\\w+|\\w+)\\s*g/(M|F)\\s*d/(\\d\\d-\\d\\d-\\d\\d\\d\\d)\\s*i/(\\w+)\\s*$", Pattern.CASE_INSENSITIVE);
+        Pattern patientAddPattern = Pattern.compile(
+                "^add\\s*n/(\\w+\\s*\\w+|\\w+)\\s*g/(M|F)\\s*d/(\\d\\d-\\d\\d-\\d\\d\\d\\d)\\s*i/(\\w+)\\s*$",
+                Pattern.CASE_INSENSITIVE);
         return patientAddPattern.matcher(input);
     }
 
     private static Matcher patientRetrieveMatcher(String input) {
-        Pattern patientRetrievePattern = Pattern.compile("^retrieve\\s*i/(\\w+)\\s*$", Pattern.CASE_INSENSITIVE);
+        Pattern patientRetrievePattern = Pattern.compile(
+                "^retrieve\\s*i/(\\w+)\\s*$", Pattern.CASE_INSENSITIVE);
         return patientRetrievePattern.matcher(input);
     }
 
     private static Matcher patientEditMatcher(String input) {
-        Pattern patientEditPattern = Pattern.compile("^edit\\s*i/(\\w+)\\s*([n|g|d])/([\\w-]+)$", Pattern.CASE_INSENSITIVE);
+        Pattern patientEditPattern = Pattern.compile(
+                "^edit\\s*i/(\\w+)\\s*([n|g|d])/([\\w-]+)$", Pattern.CASE_INSENSITIVE);
         return patientEditPattern.matcher(input);
     }
 
@@ -103,12 +104,13 @@ public class Parser {
             if (matchName.matcher(input).find()) {
                 patientList.modifyPatientDetails(id, input, null, null);
             } else {
-                throw new OneDocException("Name is incorrectly formatted! Please use First and Last name or just one name");
+                throw new OneDocException("Name is incorrectly formatted! "
+                        + "Please use First and Last name or just one name");
             }
             break;
         case "d/":
-            Pattern matchDOB = Pattern.compile("^(\\d\\d-\\d\\d-\\d\\d\\d\\d)$", Pattern.CASE_INSENSITIVE);
-            if (matchDOB.matcher(input).find()) {
+            Pattern matchDob = Pattern.compile("^(\\d\\d-\\d\\d-\\d\\d\\d\\d)$", Pattern.CASE_INSENSITIVE);
+            if (matchDob.matcher(input).find()) {
                 patientList.modifyPatientDetails(id, null, input, null);
             } else {
                 throw new OneDocException("DOC is incorrectly formatted! Please use DD-MM-YYYY format");
@@ -123,7 +125,8 @@ public class Parser {
             }
             break;
         default:
-            throw new OneDocException("Type is incorrectly formatted! Please use n/ for name, g/ for gender, and d/ for DOB");
+            throw new OneDocException("Type is incorrectly formatted!" +
+                    + "Please use n/ for name, g/ for gender, and d/ for DOB");
         }
     }
 
