@@ -84,7 +84,7 @@ public class AddCommand extends Command {
 
         assert (splits.length == TAG_LIMIT) : "Number of split inputs must equal 5.";
         // At this stage, the number of split inputs will be == 5 as all the 5 tags must exist
-        // Any additional tags would throw an exception before this assertion.
+        // Any additional tags would throw an exception before this assertion
 
 
         String description = "";
