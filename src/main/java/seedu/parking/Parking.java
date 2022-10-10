@@ -1,16 +1,20 @@
 package seedu.parking;
 
-import seedu.api.Api;
-import seedu.exception.EmptyResponseException;
-import seedu.exception.ParkingException;
-import seedu.data.CarparkList;
-
-import seedu.ui.Ui;
-
 import java.io.IOException;
 
+import seedu.api.Api;
+import seedu.common.CommonFiles;
+import seedu.data.CarparkList;
+import seedu.exception.EmptyResponseException;
+import seedu.exception.ParkingException;
+import seedu.ui.Ui;
+
+/**
+ * Main class of the program.
+ */
 public class Parking {
     private static CarparkList carparkList;
+
     /**
      * Main entry-point for the java.duke.Duke application.
      */
@@ -40,7 +44,7 @@ public class Parking {
         // Load file from json
         System.out.println("Trying to load data");
         try {
-            carparkList = new CarparkList();
+            carparkList = new CarparkList(CommonFiles.LTA_FILE_PATH, CommonFiles.LTA_BACKUP_FILE_PATH);
             System.out.println("Load data sequence successful!");
         } catch (ParkingException e) {
             System.out.println(e.getMessage());

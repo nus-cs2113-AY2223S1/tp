@@ -1,7 +1,8 @@
 package seedu.api;
 
-import seedu.exception.EmptyResponseException;
-import seedu.ui.Ui;
+import static seedu.common.CommonFiles.API_JSON_DIRECTORY;
+import static seedu.common.CommonFiles.LTA_BASE_URL;
+import static seedu.common.CommonFiles.LTA_JSON_FILE;
 
 import java.io.IOException;
 import java.net.URI;
@@ -13,38 +14,50 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-import static seedu.common.CommonFiles.LTA_BASE_URL;
-import static seedu.common.CommonFiles.API_JSON_DIRECTORY;
-import static seedu.common.CommonFiles.LTA_JSON_FILE;
+import seedu.exception.EmptyResponseException;
+import seedu.files.FileStorage;
+import seedu.ui.Ui;
 
-
+/**
+ * Class to fetch .json data from APIs and save that locally.
+ */
 public class Api {
-    private final String API_KEY = "1B+7tBxzRNOtFbTxGcCiYA==";
-    private String authHeaderName = "AccountKey";
-    private HttpClient client;
+    private static final String API_KEY = "1B+7tBxzRNOtFbTxGcCiYA==";
+    private final Ui ui;
+    private final String authHeaderName = "AccountKey";
+    private final HttpClient client;
+    private final FileStorage storage;
     private HttpRequest request;
     private CompletableFuture<HttpResponse<String>> responseFuture;
-    private Storage storage;
-    private final Ui ui;
 
+    /**
+     * Constructor for the {@link Api} class.
+     */
     public Api() {
         this.client = HttpClient.newHttpClient();
         generateHttpRequestCarpark();
-        this.storage = new Storage(API_JSON_DIRECTORY, LTA_JSON_FILE);
+        this.storage = new FileStorage(API_JSON_DIRECTORY, LTA_JSON_FILE);
         this.ui = new Ui();
     }
 
     private void generateHttpRequestCarpark() {
         request = HttpRequest.newBuilder(
                 URI.create(LTA_BASE_URL))
-                .header(authHeaderName, API_KEY)
-                .build();
+            .header(authHeaderName, API_KEY)
+            .build();
     }
 
+    /**
+     * TODO: Javadoc comment.
+     */
     public void asyncExecuteRequest() {
         responseFuture = client.sendAsync(request, HttpResponse.BodyHandlers.ofString());
     }
 
+    /**
+     * TODO: Javadoc comment.
+     * @return
+     */
     public String asyncGetResponse() {
         String result = "";
         try {
@@ -60,6 +73,11 @@ public class Api {
         return result;
     }
 
+    /**
+     * TODO: Javadoc comment.
+     * @throws EmptyResponseException
+     * @throws IOException
+     */
     public void fetchData() throws EmptyResponseException, IOException {
         String result = asyncGetResponse();
         int fetchTries = 5;
