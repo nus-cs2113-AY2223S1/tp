@@ -3,18 +3,16 @@ package seedu.duke.command;
 import seedu.duke.Storage;
 import seedu.duke.Ui;
 import seedu.duke.data.TransactionList;
-import seedu.duke.exception.InputTransactionInvalidTagException;
 import seedu.duke.exception.InputTransactionUnknownTypeException;
 import seedu.duke.exception.MoolahException;
 
 import java.time.LocalDate;
 
+import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_TYPE;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_CATEGORY;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_DATE;
 import static seedu.duke.common.InfoMessages.INFO_LIST;
 import static seedu.duke.common.InfoMessages.INFO_LIST_EMPTY;
-import static seedu.duke.parser.ParameterParser.checkExtraTagExist;
-import static seedu.duke.parser.ParameterParser.parseCategoryTag;
-import static seedu.duke.parser.ParameterParser.parseDateTag;
-import static seedu.duke.parser.ParameterParser.parseTypeTag;
 
 /**
  * Represents a list command object that will execute the operations for List command.
@@ -49,10 +47,44 @@ public class ListCommand extends Command {
     private static final String CLASS_TYPE_EXPENSE = "seedu.duke.data.transaction.Expense";
     private static final String CLASS_TYPE_INCOME = "seedu.duke.data.transaction.Income";
 
-    private String input;
+    private String category;
+    private LocalDate date;
+    private String type;
 
-    public ListCommand(String input) {
-        this.input = input;
+    public ListCommand() {
+        category = "";
+        date = null;
+        type = "";
+    }
+
+    /**
+     * Gets the optional tags of the command.
+     *
+     * @return A string array containing all optional tags
+     */
+    @Override
+    public String[] getOptionalTags() {
+        String[] optionalTags = new String[]{
+            COMMAND_TAG_TRANSACTION_TYPE,
+            COMMAND_TAG_TRANSACTION_CATEGORY,
+            COMMAND_TAG_TRANSACTION_DATE
+        };
+        return optionalTags;
+    }
+
+    @Override
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    @Override
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    @Override
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
     /**
@@ -64,48 +96,7 @@ public class ListCommand extends Command {
      */
     @Override
     public void execute(TransactionList transactions, Ui ui, Storage storage) throws MoolahException {
-        /*
-        Checks if userInput is in the correct input format by further parsing,
-        before passing any tags to the filter for transaction list.
-        */
-        String[] splits = {};
-        if (!input.isEmpty()) {
-            splits = input.split(" ");
-        }
-
-        // Throws exception if there are more than three tags
-        checkExtraTagExist(splits, TAG_LIMIT);
-
-        String category = "";
-        LocalDate date = null;
-        String type = "";
-
-        for (String split : splits) {
-            // Throws exception if the tag cannot split
-            if (split.length() < MINIMUM_TAG_LENGTH) {
-                throw new InputTransactionInvalidTagException();
-            }
-            assert split.length() >= MINIMUM_TAG_LENGTH;
-
-            String tag = split.substring(0, 2);
-            String parameter = split.substring(2);
-            switch (tag) {
-            case "t/":
-                type = parseTypeTag(parameter);
-                assert type.equals(CLASS_TYPE_EXPENSE) || type.equals(CLASS_TYPE_INCOME);
-                break;
-            case "c/":
-                category = parseCategoryTag(parameter);
-                break;
-            case "d/":
-                date = parseDateTag(parameter);
-                assert date != null;
-                break;
-            default:
-                // Throws exception if the tag is invalid
-                throw new InputTransactionInvalidTagException();
-            }
-        }
+        // Pass the tags to the filter for transaction list.
         listTransactions(transactions, type, category, date);
     }
 
@@ -113,13 +104,13 @@ public class ListCommand extends Command {
      * List all or some transactions based on selection.
      *
      * @param transactions An instance of the TransactionList class.
-     * @param type The type of transaction.
-     * @param category A category for the transaction.
-     * @param date Date of the transaction with format in "yyyyMMdd".
+     * @param type         The type of transaction.
+     * @param category     A category for the transaction.
+     * @param date         Date of the transaction with format in "yyyyMMdd".
      * @throws InputTransactionUnknownTypeException If class type cannot be found in the packages.
      */
     private static void listTransactions(TransactionList transactions, String type,
-                                         String category, LocalDate date)
+            String category, LocalDate date)
             throws InputTransactionUnknownTypeException {
         String transactionsList = transactions.listTransactions(type, category, date);
         if (transactionsList.isEmpty()) {

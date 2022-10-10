@@ -3,10 +3,10 @@ package seedu.duke.command;
 import seedu.duke.Storage;
 import seedu.duke.Ui;
 import seedu.duke.data.TransactionList;
-import seedu.duke.exception.AddDeleteInvalidIndexException;
+import seedu.duke.exception.InvalidIndexException;
 import seedu.duke.exception.MoolahException;
 
-import static seedu.duke.common.ErrorMessages.ERROR_ADD_COMMAND_AMOUNT_NOT_NUMERIC;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_LIST_ENTRY_NUMBER;
 import static seedu.duke.common.InfoMessages.INFO_DELETE;
 
 /**
@@ -37,18 +37,34 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_DETAILED_HELP = COMMAND_HELP + COMMAND_PARAMETERS_INFO
             + LINE_SEPARATOR;
 
-    private String input;
 
+    // The optional tags that may exist in the user input
+
+
+    private int entryNumber;
+
+    /**
+     * Initialises the variables of the DeleteCommand class.
+     */
     public DeleteCommand() {
     }
 
     /**
-     * Initialises the variables of the DeleteCommand class.
+     * Gets the mandatory tags of the command.
      *
-     * @param input A string that represents the index of the task.
+     * @return A string array containing all mandatory tags
      */
-    public DeleteCommand(String input) {
-        this.input = input;
+    @Override
+    public String[] getMandatoryTags() {
+        // The mandatory tags that must exist in the user input
+        String[] mandatoryTags = new String[]{COMMAND_TAG_LIST_ENTRY_NUMBER};
+
+        return mandatoryTags;
+    }
+
+    @Override
+    public void setEntryNumber(int entryNumber) {
+        this.entryNumber = entryNumber;
     }
 
     /**
@@ -65,15 +81,9 @@ public class DeleteCommand extends Command {
         before adding entry to arraylist
         */
         boolean isInputValid = true;
-        int index;
+        int index = entryNumber;
         int numberOfTransactions;
         numberOfTransactions = transactions.size();
-        try {
-            index = Integer.parseInt(input);
-        } catch (NumberFormatException e) {
-            Ui.showErrorMessage(ERROR_ADD_COMMAND_AMOUNT_NOT_NUMERIC.toString());
-            return;
-        }
         if ((index > numberOfTransactions) || (index <= 0)) {
             isInputValid = false;
         }
@@ -81,7 +91,7 @@ public class DeleteCommand extends Command {
             String transaction = TransactionList.deleteTransaction(transactions, index);
             Ui.showTransactionAction(INFO_DELETE.toString(), transaction);
         } else {
-            throw new AddDeleteInvalidIndexException();
+            throw new InvalidIndexException();
         }
     }
 

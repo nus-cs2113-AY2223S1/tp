@@ -5,9 +5,9 @@ import seedu.duke.Ui;
 import seedu.duke.data.CategoryList;
 import seedu.duke.data.TransactionList;
 import seedu.duke.exception.ListStatisticsInvalidStatsTypeException;
-import seedu.duke.exception.ListStatisticsMissingTagException;
 import seedu.duke.exception.MoolahException;
 
+import static seedu.duke.command.CommandTag.COMMAND_TAG_STATISTICS_TYPE;
 import static seedu.duke.common.InfoMessages.INFO_STATS_CATEGORIES;
 import static seedu.duke.common.InfoMessages.INFO_STATS_EMPTY;
 
@@ -36,10 +36,20 @@ public class StatsCommand extends Command {
     public static final String COMMAND_DETAILED_HELP = COMMAND_HELP + COMMAND_PARAMETERS_INFO
             + LINE_SEPARATOR;
 
-    private String input;
+    private String statsType;
 
-    public StatsCommand(String input) {
-        this.input = input;
+    public StatsCommand() {
+    }
+
+    /**
+     * Gets the mandatory tags of the command.
+     *
+     * @return A string array containing all mandatory tags
+     */
+    @Override
+    public String[] getMandatoryTags() {
+        String[] mandatoryTags = new String[]{COMMAND_TAG_STATISTICS_TYPE};
+        return mandatoryTags;
     }
 
     /**
@@ -51,30 +61,12 @@ public class StatsCommand extends Command {
      */
     @Override
     public void execute(TransactionList transactions, Ui ui, Storage storage) throws MoolahException {
-        /*
-        Checks if userInput is in the correct input format by further parsing,
-        before adding entry to arraylist
-        */
-        String[] splits = input.split(" ");
-        checkTagsExist(splits);
+        listStatisticsByStatsType(statsType, transactions);
+    }
 
-        String statsType = "";
-
-        for (String split : splits) {
-            String tag = split.substring(0, 2);
-            String parameter = split.substring(2);
-            switch (tag) {
-            case "s/":
-                listStatisticsByStatsType(parameter, transactions);
-                break;
-            /*case "t/":
-                break;
-            case "n/":
-                break;*/
-            default:
-                break;
-            }
-        }
+    @Override
+    public void setStatsType(String statsType) {
+        this.statsType = statsType;
     }
 
     private static void listStatisticsByStatsType(String statsType, TransactionList transactions)
@@ -98,41 +90,6 @@ public class StatsCommand extends Command {
         default:
             throw new ListStatisticsInvalidStatsTypeException();
         }
-    }
-
-    /**
-     * Checks if the targeted tags exists in the split user inputs.
-     *
-     * @param splits The user input after the command word, split into a list for every space found.
-     * @throws ListStatisticsMissingTagException Missing tag exception.
-     */
-    private static void checkTagsExist(String[] splits) throws ListStatisticsMissingTagException {
-        // TODO: To add the tags into Command class instead
-        String[] tags = new String[]{"s/"};
-        for (String tag : tags) {
-            boolean found = findMatchingTagFromInputs(tag, splits);
-            if (!found) {
-                throw new ListStatisticsMissingTagException();
-            }
-        }
-    }
-
-    /**
-     * Returns a boolean value on whether a tag can be found among the split user inputs.
-     *
-     * @param tag    A specific tag used to locate the command parameter.
-     * @param splits The user input after the command word, split into a list for every space found.
-     * @return Whether the tag is found within the split inputs.
-     */
-    private static boolean findMatchingTagFromInputs(String tag, String[] splits) {
-        boolean found = false;
-        for (String split : splits) {
-            if (split.startsWith(tag)) {
-                found = true;
-                break;
-            }
-        }
-        return found;
     }
 
     @Override
