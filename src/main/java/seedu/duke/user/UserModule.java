@@ -78,12 +78,4 @@ public class UserModule extends Module {
         return getNusCode() + " " + getNusTitle() + " "
                 + getPuCode() + " " + getPuTitle() + " " + getNusCredit() + " MCs";
     }
-
-    public void printModule() {
-        System.out.print("NUS: ");
-        System.out.print(getNusCode() + " " + getNusTitle());
-        System.out.print(" | Partner University: ");
-        System.out.print(getPuCode() + " " + getPuTitle());
-        System.out.println(" | Equivalent NUS Credits: " + getNusCredit());
-    }
 }
