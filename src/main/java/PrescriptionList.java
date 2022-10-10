@@ -7,13 +7,13 @@ public class PrescriptionList {
         prescriptionsList = new ArrayList<>();
     }
 
-    public void add(String patientId, String medicine, int timeInterval, String dosage) {
-        Prescription prescription = new Prescription(patientId, medicine, timeInterval, dosage);
+    public void add(String patientId, String medicine, String dosage, int timeInterval) {
+        Prescription prescription = new Prescription(patientId, medicine, dosage, timeInterval);
         prescriptionsList.add(prescription);
     }
 
-    public void add(String patientId, String medicine, int timeInterval, String dosage, boolean isActive) {
-        Prescription prescription = new Prescription(patientId, medicine, timeInterval, dosage, isActive);
+    public void add(String patientId, String medicine, String dosage, int timeInterval, boolean isActive) {
+        Prescription prescription = new Prescription(patientId, medicine, dosage, timeInterval, isActive);
         prescriptionsList.add(prescription);
     }
 
