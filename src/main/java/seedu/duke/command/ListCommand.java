@@ -3,20 +3,16 @@ package seedu.duke.command;
 import seedu.duke.Storage;
 import seedu.duke.Ui;
 import seedu.duke.data.TransactionList;
-import seedu.duke.exception.InputTransactionInvalidTagException;
 import seedu.duke.exception.InputTransactionUnknownTypeException;
 import seedu.duke.exception.MoolahException;
 
 import java.time.LocalDate;
 
+import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_TYPE;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_CATEGORY;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_DATE;
 import static seedu.duke.common.InfoMessages.INFO_LIST;
 import static seedu.duke.common.InfoMessages.INFO_LIST_EMPTY;
-import static seedu.duke.common.Utilities.checkParameterExist;
-import static seedu.duke.common.Utilities.checkExtraTagExist;
-import static seedu.duke.common.Utilities.parseCategoryTag;
-import static seedu.duke.common.Utilities.parseDateTag;
-import static seedu.duke.common.Utilities.parseTypeTag;
-
 
 /**
  * Represents a list command object that will execute the operations for List command.
@@ -48,10 +44,44 @@ public class ListCommand extends Command {
     private static final String CLASS_TYPE_EXPENSE = "seedu.duke.data.transaction.Expense";
     private static final String CLASS_TYPE_INCOME = "seedu.duke.data.transaction.Income";
 
-    private String input;
+    private String category;
+    private LocalDate date;
+    private String type;
 
-    public ListCommand(String input) {
-        this.input = input;
+    public ListCommand() {
+        category = "";
+        date = null;
+        type = "";
+    }
+
+    /**
+     * Gets the optional tags of the command.
+     *
+     * @return A string array containing all optional tags
+     */
+    @Override
+    public String[] getOptionalTags() {
+        String[] optionalTags = new String[]{
+            COMMAND_TAG_TRANSACTION_TYPE,
+            COMMAND_TAG_TRANSACTION_CATEGORY,
+            COMMAND_TAG_TRANSACTION_DATE
+        };
+        return optionalTags;
+    }
+
+    @Override
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    @Override
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    @Override
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
     /**
@@ -63,51 +93,7 @@ public class ListCommand extends Command {
      */
     @Override
     public void execute(TransactionList transactions, Ui ui, Storage storage) throws MoolahException {
-        /*
-        Checks if userInput is in the correct input format by further parsing,
-        before passing any tags to the filter for transaction list.
-        */
-        String[] splits = {};
-        if (!input.isEmpty()) {
-            splits = input.split(" ");
-        }
-
-
-        checkExtraTagExist(splits, TAG_LIMIT);
-        // Throws exception if there are more than three tags
-        checkForInvalidTags(splits);
-        // Throws exception if there are any invalid tags
-        checkParameterExist(splits);
-        // Throws exception if there are tags with empty parameters
-
-
-        String category = "";
-        LocalDate date = null;
-        String type = "";
-
-        for (String split : splits) {
-
-            assert split.length() >= MINIMUM_TAG_LENGTH;
-
-            String tag = split.substring(0, 2);
-            String parameter = split.substring(2);
-            switch (tag) {
-            case "t/":
-                type = parseTypeTag(parameter);
-                assert type.equals(CLASS_TYPE_EXPENSE) || type.equals(CLASS_TYPE_INCOME);
-                break;
-            case "c/":
-                category = parseCategoryTag(parameter);
-                break;
-            case "d/":
-                date = parseDateTag(parameter);
-                assert date != null;
-                break;
-            default:
-                // Throws exception if the tag is invalid
-                throw new InputTransactionInvalidTagException();
-            }
-        }
+        // Pass the tags to the filter for transaction list.
         listTransactions(transactions, type, category, date);
     }
 
@@ -130,56 +116,6 @@ public class ListCommand extends Command {
         assert !transactionsList.isEmpty();
         Ui.showTransactionsList(transactionsList, INFO_LIST.toString());
     }
-
-    /**
-     * Checks if the tag inputs are valid.
-     * If the tags are invalid or if there are duplicated tags, exception would be thrown.
-     *
-     * @param splits The user input after the command word, split into a list for every space found.
-     * @throws InputTransactionInvalidTagException Invalid Tag exception
-     */
-    private static void checkForInvalidTags(String[] splits) throws InputTransactionInvalidTagException {
-        // TODO: To add the tags into Command class instead
-        String[] tags = new String[]{"t/", "c/", "d/"};
-        boolean isDuplicatedTypeTag = false;
-        boolean isDuplicatedCategoryTag = false;
-        boolean isDuplicatedDateTag = false;
-
-
-        for (String split : splits) {
-            if (split.length() < MINIMUM_TAG_LENGTH) {
-                throw new InputTransactionInvalidTagException();
-            }
-            String tag = split.substring(0, 2);
-            switch (tag) {
-            case "t/":
-                if (isDuplicatedTypeTag) {
-                    throw new InputTransactionInvalidTagException();
-                }
-                isDuplicatedTypeTag = true;
-                break;
-
-            case "c/":
-                if (isDuplicatedCategoryTag) {
-                    throw new InputTransactionInvalidTagException();
-                }
-                isDuplicatedCategoryTag = true;
-                break;
-
-            case "d/":
-                if (isDuplicatedDateTag) {
-                    throw new InputTransactionInvalidTagException();
-                }
-                isDuplicatedDateTag = true;
-                break;
-
-            default:
-                throw new InputTransactionInvalidTagException();
-
-            }
-        }
-    }
-
 
     @Override
     public boolean isExit() {

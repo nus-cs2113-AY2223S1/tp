@@ -4,6 +4,8 @@ import seedu.duke.Storage;
 import seedu.duke.Ui;
 import seedu.duke.data.TransactionList;
 
+import static seedu.duke.command.CommandTag.COMMAND_TAG_HELP_OPTION;
+
 /**
  * Represents a help command object that will execute the operations for Help command.
  */
@@ -33,13 +35,28 @@ public class HelpCommand extends Command {
     // Detailed help description
     public static final String COMMAND_DETAILED_HELP = COMMAND_HELP + COMMAND_PARAMETERS_INFO + "\n";
 
-    private String input;
+    private boolean isDetailed;
 
     public HelpCommand() {
+        this.isDetailed = false;
     }
 
-    public HelpCommand(String input) {
-        this.input = input;
+    @Override
+    public void setIsDetailedOption(boolean isDetailed) {
+        this.isDetailed = isDetailed;
+    }
+
+    /**
+     * Gets the optional tags of the command.
+     *
+     * @return A string array containing all optional tags
+     */
+    @Override
+    public String[] getOptionalTags() {
+        String[] optionalTags = new String[]{
+            COMMAND_TAG_HELP_OPTION
+        };
+        return optionalTags;
     }
 
     /**
@@ -52,7 +69,7 @@ public class HelpCommand extends Command {
     @Override
     public void execute(TransactionList transactions, Ui ui, Storage storage) {
         String helpMessage = "";
-        if (input.contains("o/detailed")) {
+        if (isDetailed) {
             helpMessage = generateDetailedHelp();
         } else {
             helpMessage = generateBasicHelp();

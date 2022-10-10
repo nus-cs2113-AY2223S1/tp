@@ -2,7 +2,7 @@ package seedu.duke.exception;
 
 import seedu.duke.common.ErrorMessages;
 
-public class AddTransactionMissingTagException extends MoolahException {
+public class InputUnsupportedTagException extends MoolahException {
     /**
      * Returns the error message of the exception to alert user of the exception.
      *
@@ -10,6 +10,6 @@ public class AddTransactionMissingTagException extends MoolahException {
      */
     @Override
     public String getMessage() {
-        return ErrorMessages.ERROR_ADD_COMMAND_MISSING_TAG.toString();
+        return ErrorMessages.ERROR_INPUT_UNSUPPORTED_TAG.toString();
     }
 }
