@@ -25,8 +25,8 @@ public class FileStorage {
         directoryPath = directory;
         filePath = Paths.get(directory, file).toString();
         this.file = new File(filePath);
-        checkFileExist();
         this.ui = new Ui();
+        checkFileExist();
     }
 
     private void checkFileExist() {
@@ -34,7 +34,7 @@ public class FileStorage {
             return;
         }
         File directory = new File(directoryPath);
-        directory.mkdir();
+        directory.mkdirs();
         try {
             file.createNewFile();
         } catch (IOException e) {
