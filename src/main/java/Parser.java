@@ -88,7 +88,8 @@ public class Parser {
                     if (reason.isEmpty()) {
                         visitList.addVisit(matcherAdd.group(1), matcherAdd.group(2), matcherAdd.group(3));
                     } else {
-                        visitList.addVisit(matcherAdd.group(1), matcherAdd.group(2), matcherAdd.group(3), matcherAdd.group(4));
+                        visitList.addVisit(matcherAdd.group(1), matcherAdd.group(2),
+                                matcherAdd.group(3), matcherAdd.group(4));
                     }
                 } else if (matcherEdit.find()) {
                     visitList.editReason(matcherEdit.group(1), matcherEdit.group(2));
