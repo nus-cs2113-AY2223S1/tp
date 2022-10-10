@@ -10,6 +10,7 @@ import org.apache.commons.text.StringTokenizer;
 import org.apache.commons.text.matcher.StringMatcherFactory;
 import seedu.moneygowhere.commands.ConsoleCommand;
 import seedu.moneygowhere.commands.ConsoleCommandAddExpense;
+import seedu.moneygowhere.commands.ConsoleCommandAddIncome;
 import seedu.moneygowhere.commands.ConsoleCommandBye;
 import seedu.moneygowhere.commands.ConsoleCommandDeleteExpense;
 import seedu.moneygowhere.commands.ConsoleCommandEditExpense;
@@ -21,6 +22,7 @@ import seedu.moneygowhere.common.Messages;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandAddExpenseInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandDeleteExpenseInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandEditExpenseInvalidException;
+import seedu.moneygowhere.exceptions.ConsoleParserCommandAddIncomeInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandNotFoundException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandSortExpenseInvalidTypeException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandViewExpenseInvalidException;
@@ -76,6 +78,11 @@ public class ConsoleParser {
     public static final String CONSOLE_COMMAND_ADD_TARGET_ARGUMENT_DESCRIPTION = "description";
     public static final String CONSOLE_COMMAND_ADD_TARGET_ARGUMENT_AMOUNT = "amount";
     public static final String CONSOLE_COMMAND_ADD_TARGET_ARGUMENT_CURRENT_AMOUNT = "current amount";
+    public static final String CONSOLE_COMMAND_ADD_INCOME = "add-income";
+    public static final String CONSOLE_COMMAND_ADD_INCOME_ARGUMENT_NAME = "name";
+    public static final String CONSOLE_COMMAND_ADD_INCOME_ARGUMENT_DATE_TIME = "datetime";
+    public static final String CONSOLE_COMMAND_ADD_INCOME_ARGUMENT_DESCRIPTION = "description";
+    public static final String CONSOLE_COMMAND_ADD_INCOME_ARGUMENT_AMOUNT = "amount";
 
     private static String[] tokenizeCommandArguments(String arguments) {
         StringTokenizer stringTokenizer = new StringTokenizer(arguments);
@@ -387,7 +394,7 @@ public class ConsoleParser {
                     exception);
         }
     }
-
+              
     private static ConsoleCommandAddTarget parseCommandAddTarget(String arguments) throws
             ConsoleParserCommandAddTargetInvalidException {
         try {
@@ -471,8 +478,86 @@ public class ConsoleParser {
                     exception
             );
         }
-    }
+    }              
+              
+    private static ConsoleCommandAddIncome parseCommandAddIncome(String arguments)
+            throws ConsoleParserCommandAddIncomeInvalidException {
+        try {
+            String[] argumentsArr = tokenizeCommandArguments(arguments);
 
+            Option optionName = new Option(
+                    "n",
+                    CONSOLE_COMMAND_ADD_INCOME_ARGUMENT_NAME,
+                    true,
+                    "name"
+            );
+            Option optionDateTime = new Option(
+                    "d",
+                    CONSOLE_COMMAND_ADD_INCOME_ARGUMENT_DATE_TIME,
+                    true,
+                    "date and time"
+            );
+            Option optionDescription = new Option(
+                    "t",
+                    CONSOLE_COMMAND_ADD_INCOME_ARGUMENT_DESCRIPTION,
+                    true,
+                    "description"
+            );
+            Option optionAmount = new Option(
+                    "a",
+                    CONSOLE_COMMAND_ADD_INCOME_ARGUMENT_AMOUNT,
+                    true,
+                    "amount"
+            );
+            Options options = new Options();
+            options.addOption(optionName);
+            options.addOption(optionDateTime);
+            options.addOption(optionDescription);
+            options.addOption(optionAmount);
+            CommandLineParser commandLineParser = new DefaultParser();
+            CommandLine commandLine = commandLineParser.parse(options, argumentsArr);
+
+            String name = commandLine.getOptionValue(CONSOLE_COMMAND_ADD_INCOME_ARGUMENT_NAME);
+            String amountStr = commandLine.getOptionValue(CONSOLE_COMMAND_ADD_INCOME_ARGUMENT_AMOUNT);
+
+            // Guard clause for mandatory arguments
+            if (name == null || amountStr == null) {
+                throw new ConsoleParserCommandAddIncomeInvalidException(
+                        Messages.CONSOLE_ERROR_COMMAND_ADD_INCOME_INVALID
+                );
+            }
+          
+            String dateTimeStr = commandLine.getOptionValue(CONSOLE_COMMAND_ADD_INCOME_ARGUMENT_DATE_TIME);
+            String description = commandLine.getOptionValue(CONSOLE_COMMAND_ADD_INCOME_ARGUMENT_DESCRIPTION);
+
+            LocalDateTime dateTime;
+            if (dateTimeStr == null) {
+                dateTime = LocalDateTime.now();
+            } else {
+                dateTime = LocalDateTime.parse(
+                        dateTimeStr,
+                        DateTimeFormatter.ofPattern(Configurations.CONSOLE_INTERFACE_DATE_TIME_INPUT_FORMAT)
+                );
+            }
+
+            BigDecimal amount = new BigDecimal(amountStr);
+
+            return new ConsoleCommandAddIncome(
+                    name,
+                    dateTime,
+                    description,
+                    amount);
+        } catch (ParseException
+                 | DateTimeParseException
+                 | NumberFormatException
+                 | ConsoleParserCommandAddIncomeInvalidException exception) {
+            throw new ConsoleParserCommandAddIncomeInvalidException(
+                    Messages.CONSOLE_ERROR_COMMAND_ADD_INCOME_INVALID,
+                    exception
+            );
+        }
+    }
+              
     /**
      * Parses an input read from standard input.
      *
@@ -485,6 +570,7 @@ public class ConsoleParser {
      * @throws ConsoleParserCommandEditExpenseInvalidException     If the command edit-expense is invalid.
      * @throws ConsoleParserCommandSortExpenseInvalidTypeException If the command sort-expense is invalid.
      * @throws ConsoleParserCommandAddTargetInvalidException       If the command add-target is invalid.
+     * @throws ConsoleParserCommandAddIncomeInvalidException       If the command add-income is invalid.
      */
     public static ConsoleCommand parse(String consoleInput) throws
             ConsoleParserCommandNotFoundException,
@@ -493,7 +579,8 @@ public class ConsoleParser {
             ConsoleParserCommandDeleteExpenseInvalidException,
             ConsoleParserCommandEditExpenseInvalidException,
             ConsoleParserCommandSortExpenseInvalidTypeException,
-            ConsoleParserCommandAddTargetInvalidException {
+            ConsoleParserCommandAddTargetInvalidException,
+            ConsoleParserCommandAddIncomeInvalidException {
         String[] consoleInputArr = consoleInput.split(" ", 2);
 
         String command = consoleInputArr[0];
@@ -517,6 +604,8 @@ public class ConsoleParser {
             return parseCommandSortExpense(arguments);
         } else if (command.equalsIgnoreCase(CONSOLE_COMMAND_ADD_TARGET)) {
             return parseCommandAddTarget(arguments);
+        } else if (command.equalsIgnoreCase(CONSOLE_COMMAND_ADD_INCOME)) {
+            return parseCommandAddIncome(arguments);
         } else {
             throw new ConsoleParserCommandNotFoundException(Messages.CONSOLE_ERROR_COMMAND_NOT_FOUND);
         }

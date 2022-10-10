@@ -60,4 +60,12 @@ public class Messages {
             + "] [-t DESCRIPTION] [-c CURRENT AMOUNT]";
     public static final String TARGET_MANAGER_ERROR_TARGET_NOT_FOUND = ""
             + "The target is not found.";
+    public static final String CONSOLE_MESSAGE_COMMAND_ADD_INCOME_SUCCESS = "The income was added successfully.";
+    public static final String INCOME_MANAGER_ERROR_INCOME_NOT_FOUND = ""
+            + "The income is not found.";
+    public static final String CONSOLE_ERROR_COMMAND_ADD_INCOME_INVALID = ""
+            + "The arguments entered are invalid. "
+            +  "SYNTAX: Add-Income -n NAME -a AMOUNT [-d "
+            + Configurations.CONSOLE_INTERFACE_DATE_TIME_INPUT_FORMAT
+            + "] [-t DESCRIPTION]";
 }

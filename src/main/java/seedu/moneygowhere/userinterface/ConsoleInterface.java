@@ -8,17 +8,21 @@ import seedu.moneygowhere.commands.ConsoleCommandEditExpense;
 import seedu.moneygowhere.commands.ConsoleCommandSortExpense;
 import seedu.moneygowhere.commands.ConsoleCommandViewExpense;
 import seedu.moneygowhere.commands.ConsoleCommandAddTarget;
+import seedu.moneygowhere.commands.ConsoleCommandAddIncome;
 import seedu.moneygowhere.common.Configurations;
 import seedu.moneygowhere.common.Messages;
 import seedu.moneygowhere.data.expense.Expense;
 import seedu.moneygowhere.data.expense.ExpenseManager;
 import seedu.moneygowhere.data.target.Target;
 import seedu.moneygowhere.data.target.TargetManager;
+import seedu.moneygowhere.data.income.Income;
+import seedu.moneygowhere.data.income.IncomeManager;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandAddExpenseInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandDeleteExpenseInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandEditExpenseInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandSortExpenseInvalidTypeException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandViewExpenseInvalidException;
+import seedu.moneygowhere.exceptions.ConsoleParserCommandAddIncomeInvalidException;
 import seedu.moneygowhere.exceptions.ExpenseManagerExpenseNotFoundException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandAddTargetInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandNotFoundException;
@@ -43,6 +47,7 @@ public class ConsoleInterface {
     private Scanner scanner;
     private ExpenseManager expenseManager;
     private TargetManager targetManager;
+    private IncomeManager incomeManager;
 
     /**
      * Initializes the console interface.
@@ -51,6 +56,7 @@ public class ConsoleInterface {
         scanner = new Scanner(System.in);
         expenseManager = new ExpenseManager();
         targetManager = new TargetManager();
+        incomeManager = new IncomeManager();
     }
 
     /**
@@ -290,7 +296,7 @@ public class ConsoleInterface {
         expenseManager.updateExpenses(expenses);
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_SORTED_EXPENSE_SUCCESS);
     }
-
+  
     private void runCommandAddTarget(ConsoleCommandAddTarget consoleCommandAddTarget) {
         Target target = new Target(
                 consoleCommandAddTarget.getName(),
@@ -317,6 +323,32 @@ public class ConsoleInterface {
          TODO Add saveToFile for Target
          saveToFile(targetManager.getTargets());
         */
+    }  
+
+    private void runCommandAddIncome(ConsoleCommandAddIncome consoleCommandAddIncome) {
+        Income income = new Income(
+                consoleCommandAddIncome.getName(),
+                consoleCommandAddIncome.getDateTime(),
+                consoleCommandAddIncome.getDescription(),
+                consoleCommandAddIncome.getAmount());
+        incomeManager.addIncome(income);
+
+        DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern(
+                Configurations.CONSOLE_INTERFACE_DATE_TIME_OUTPUT_FORMAT
+        );
+        String incomeStr = "";
+        incomeStr += "Name          : " + income.getName() + "\n";
+        incomeStr += "Date and Time : " + income.getDateTime().format(dateTimeFormat) + "\n";
+        incomeStr += "Description   : " + income.getDescription() + "\n";
+        incomeStr += "Amount        : " + income.getAmount() + "\n";
+        printInformationalMessage(incomeStr);
+
+        printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_ADD_INCOME_SUCCESS);
+
+        /*
+        TODO Add saveToFile for Income
+        saveToFile(incomeManager.getIncomes());
+         */
     }
 
     /**
@@ -344,7 +376,8 @@ public class ConsoleInterface {
                      | ConsoleParserCommandDeleteExpenseInvalidException
                      | ConsoleParserCommandEditExpenseInvalidException
                      | ConsoleParserCommandSortExpenseInvalidTypeException
-                     | ConsoleParserCommandAddTargetInvalidException exception) {
+                     | ConsoleParserCommandAddTargetInvalidException exception
+                     | ConsoleParserCommandAddIncomeInvalidException exception) {
                 printErrorMessage(exception.getMessage());
             }
             // Execute function according to the ConsoleCommand object returned by the parser
@@ -363,6 +396,8 @@ public class ConsoleInterface {
                 runCommandEditExpense((ConsoleCommandEditExpense) consoleCommand);
             } else if (consoleCommand instanceof ConsoleCommandSortExpense) {
                 runCommandSortExpense((ConsoleCommandSortExpense) consoleCommand);
+            } else if (consoleCommand instanceof ConsoleCommandAddIncome) {
+                runCommandAddIncome((ConsoleCommandAddIncome) consoleCommand);
             } else {
                 // Do nothing if the command is not found
             }
