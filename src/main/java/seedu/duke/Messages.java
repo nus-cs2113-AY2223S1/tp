@@ -1,4 +1,5 @@
 package seedu.duke;
+
 /**
  * Container for user visible messages.
  */
@@ -53,6 +54,4 @@ public class Messages {
             + "Examples:\n"
             + "  pair ip/1 ic/5\n"
             + "  unpair ip/2 ic/1";
-
-
 }

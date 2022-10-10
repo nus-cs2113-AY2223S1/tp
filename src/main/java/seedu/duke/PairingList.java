@@ -23,7 +23,7 @@ public class PairingList {
         String clientPairingData = convertToPairingData(client);
         String propertyPairingData = convertToPairingData(property);
 
-       clientPropertyPairs.remove(clientPairingData, propertyPairingData);
+        clientPropertyPairs.remove(clientPairingData, propertyPairingData);
     }
 
     private String convertToPairingData(Client client) {

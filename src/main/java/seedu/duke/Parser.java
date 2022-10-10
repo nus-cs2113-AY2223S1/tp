@@ -261,10 +261,9 @@ public class Parser {
 
     private Command prepareForCommandPair(String rawPairDescriptions) throws NotIntegerException,
             NotValidIndexException, MissingPairUnpairFlagException, IncorrectPairUnpairFlagOrderException {
-
-            ArrayList<Integer> pairDetails = processPairUnpairDetails(rawPairDescriptions);
-            validatePairUnpairDetails(pairDetails);
-            return new CommandPair(pairDetails);
+        ArrayList<Integer> pairDetails = processPairUnpairDetails(rawPairDescriptions);
+        validatePairUnpairDetails(pairDetails);
+        return new CommandPair(pairDetails);
     }
 
     private Command prepareForCommandUnpair(String rawUnpairDescriptions) throws NotIntegerException,
@@ -301,10 +300,10 @@ public class Parser {
         }
     }
 
-    private void checkForPairUnpairFlagsOrder(int[] PairUnpairFlagIndexPosition)
+    private void checkForPairUnpairFlagsOrder(int[] pairUnpairFlagIndexPosition)
             throws IncorrectPairUnpairFlagOrderException {
         try {
-            checkForCorrectFlagOrder(PairUnpairFlagIndexPosition[0], PairUnpairFlagIndexPosition[1]);
+            checkForCorrectFlagOrder(pairUnpairFlagIndexPosition[0], pairUnpairFlagIndexPosition[1]);
         } catch (IncorrectFlagOrderException e) {
             throw new IncorrectPairUnpairFlagOrderException();
         }
@@ -339,8 +338,8 @@ public class Parser {
         int clientIndex = pairUnpairDetails.get(0);
         int propertyIndex = pairUnpairDetails.get(1);
 
-        if (clientIndex < 0 || clientIndex > clientList.getCurrentListSize() - 1 ||
-                propertyIndex < 0 || propertyIndex > propertyList.getCurrentListSize() - 1) {
+        if (clientIndex < 0 || clientIndex > clientList.getCurrentListSize() - 1
+                || propertyIndex < 0 || propertyIndex > propertyList.getCurrentListSize() - 1) {
             throw new NotValidIndexException();
         }
     }
