@@ -7,17 +7,14 @@ import seedu.moneygowhere.commands.ConsoleCommandDeleteExpense;
 import seedu.moneygowhere.commands.ConsoleCommandEditExpense;
 import seedu.moneygowhere.commands.ConsoleCommandSortExpense;
 import seedu.moneygowhere.commands.ConsoleCommandViewExpense;
+import seedu.moneygowhere.commands.ConsoleCommandAddTarget;
 import seedu.moneygowhere.common.Configurations;
 import seedu.moneygowhere.common.Messages;
 import seedu.moneygowhere.data.expense.Expense;
 import seedu.moneygowhere.data.expense.ExpenseManager;
-import seedu.moneygowhere.exceptions.ConsoleParserCommandAddExpenseInvalidException;
-import seedu.moneygowhere.exceptions.ConsoleParserCommandDeleteExpenseInvalidException;
-import seedu.moneygowhere.exceptions.ConsoleParserCommandEditExpenseInvalidException;
-import seedu.moneygowhere.exceptions.ConsoleParserCommandNotFoundException;
-import seedu.moneygowhere.exceptions.ConsoleParserCommandSortExpenseInvalidTypeException;
-import seedu.moneygowhere.exceptions.ConsoleParserCommandViewExpenseInvalidException;
-import seedu.moneygowhere.exceptions.ExpenseManagerExpenseNotFoundException;
+import seedu.moneygowhere.data.target.Target;
+import seedu.moneygowhere.data.target.TargetManager;
+import seedu.moneygowhere.exceptions.*;
 import seedu.moneygowhere.parser.ConsoleParser;
 
 import static seedu.moneygowhere.storage.LocalStorage.loadFromFile;
@@ -39,6 +36,7 @@ import java.util.Scanner;
 public class ConsoleInterface {
     private Scanner scanner;
     private ExpenseManager expenseManager;
+    private TargetManager targetManager;
 
     /**
      * Initializes the console interface.
@@ -46,6 +44,7 @@ public class ConsoleInterface {
     public ConsoleInterface() {
         scanner = new Scanner(System.in);
         expenseManager = new ExpenseManager();
+        targetManager = new TargetManager();
     }
 
     /**
@@ -286,6 +285,31 @@ public class ConsoleInterface {
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_SORTED_EXPENSE_SUCCESS);
     }
 
+    private void runCommandAddTarget(ConsoleCommandAddTarget consoleCommandAddTarget) {
+        Target target = new Target(
+                consoleCommandAddTarget.getName(),
+                consoleCommandAddTarget.getDateTime(),
+                consoleCommandAddTarget.getDescription(),
+                consoleCommandAddTarget.getAmount(),
+                consoleCommandAddTarget.getCurrentAmount());
+        targetManager.addTarget(target);
+
+        DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern(
+                Configurations.CONSOLE_INTERFACE_DATE_TIME_OUTPUT_FORMAT
+        );
+        String targetStr = "";
+        targetStr += "Name          : " + target.getName() + "\n";
+        targetStr += "Date and Time : " + target.getDateTime().format(dateTimeFormat) + "\n";
+        targetStr += "Description   : " + target.getDescription() + "\n";
+        targetStr += "Amount        : " + target.getAmount() + "\n";
+        targetStr += "Current Amount: " + target.getCurrentAmount() + "\n";
+        printInformationalMessage(targetStr);
+
+        printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_ADD_TARGET_SUCCESS);
+
+//        saveToFile(targetManager.getTargets());
+    }
+
     /**
      * Runs the command line interface which the user interacts with.
      */
@@ -310,7 +334,8 @@ public class ConsoleInterface {
                      | ConsoleParserCommandViewExpenseInvalidException
                      | ConsoleParserCommandDeleteExpenseInvalidException
                      | ConsoleParserCommandEditExpenseInvalidException
-                     | ConsoleParserCommandSortExpenseInvalidTypeException exception) {
+                     | ConsoleParserCommandSortExpenseInvalidTypeException
+                     | ConsoleParserCommandAddTargetInvalidException exception) {
                 printErrorMessage(exception.getMessage());
             }
             // Execute function according to the ConsoleCommand object returned by the parser

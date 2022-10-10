@@ -51,4 +51,13 @@ public class Messages {
     public static final String LOCAL_STORAGE_ERROR_SAVE_DATA = ""
             + "There is an error in saving file...\n"
             + "File does not exist or Path is wrong :(";
+    public static final String CONSOLE_MESSAGE_COMMAND_ADD_TARGET_SUCCESS = ""
+            + "The target was added successfully.";
+    public static final String CONSOLE_ERROR_COMMAND_ADD_TARGET_INVALID = ""
+            + "The arguments entered are invalid. "
+            + "SYNTAX: Add-Target -n NAME -a AMOUNT [-d "
+            + Configurations.CONSOLE_INTERFACE_DATE_TIME_INPUT_FORMAT
+            + "] [-t DESCRIPTION] [-c CURRENT AMOUNT]";
+    public static final String TARGET_MANAGER_ERROR_TARGET_NOT_FOUND = ""
+            + "The target is not found.";
 }
