@@ -53,8 +53,31 @@ public class TransactionList {
      * @return A boolean value indicating whether transaction record belongs to the given class type.
      * @throws InputTransactionUnknownTypeException If class type cannot be found in the packages.
      */
-    public boolean checkTransactionInstance(Object transaction, String classType) throws ClassNotFoundException {
+    public boolean isTransactionInstance(Object transaction, String classType) throws ClassNotFoundException {
         return Class.forName(classType).isInstance(transaction);
+    }
+
+    /**
+     * Checks whether a transaction fulfills the given filter criteria.
+     *
+     * @param transaction The transaction record from the transactions list.
+     * @param type The type of transaction.
+     * @param category A category for the transaction.
+     * @param date Date of the transaction with format in "yyyyMMdd".
+     * @return A string containing the formatted transaction list.
+     * @throws InputTransactionUnknownTypeException If class type cannot be found in the packages.
+     */
+    public boolean isMatchListFilters(Transaction transaction, String type, String category,
+                                       LocalDate date) throws InputTransactionUnknownTypeException {
+        boolean isMatch;
+        try {
+            isMatch = ((type.isEmpty() || isTransactionInstance(transaction, type))
+                    && (category.isEmpty() || transaction.getCategory().equals(category))
+                    && (date == null || transaction.getDate().equals(date)));
+        } catch (ClassNotFoundException e) {
+            throw new InputTransactionUnknownTypeException();
+        }
+        return isMatch;
     }
 
     /**
@@ -70,16 +93,10 @@ public class TransactionList {
             throws InputTransactionUnknownTypeException {
         String transactionsList = EMPTY_STRING;
         // Loops each transaction from the transactions list
-        try {
-            for (Transaction transaction : transactions) {
-                if (((type.isEmpty() || checkTransactionInstance(transaction, type)))
-                        && (category.isEmpty() || transaction.getCategory().equals(category))
-                        && (date == null || transaction.getDate().equals(date))) {
-                    transactionsList += transaction.toString() + LINE_SEPARATOR;
-                }
+        for (Transaction transaction : transactions) {
+            if (isMatchListFilters(transaction, type, category, date)) {
+                transactionsList += transaction.toString() + LINE_SEPARATOR;
             }
-        } catch (ClassNotFoundException e) {
-            throw new InputTransactionUnknownTypeException();
         }
         return transactionsList;
     }
