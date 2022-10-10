@@ -1,25 +1,69 @@
 package seedu.duke.command;
 
-import seedu.duke.command.Command;
 import seedu.duke.exception.InsufficientArgumentsException;
+import seedu.duke.exception.InvalidArgumentException;
+import seedu.duke.exception.InvalidUserException;
+import seedu.duke.exception.UserNotFoundException;
+import seedu.duke.item.ItemList;
+import seedu.duke.parser.CommandParser;
+import seedu.duke.transaction.TransactionList;
 import seedu.duke.user.UserList;
 
 public class RemoveUserCommand extends Command {
-    private final String[] args;
+    private final String[] parts;
     private final UserList userList;
+    private final ItemList itemList;
+    private final TransactionList transactionList;
 
-    public RemoveUserCommand(String[] args, UserList userList)
+    public RemoveUserCommand(String[] parts, UserList userList, ItemList itemList, TransactionList transactionList)
             throws InsufficientArgumentsException {
-        this.args = args;
+        this.parts = parts;
         this.userList = userList;
-        if (args.length != 1) {
+        this.itemList = itemList;
+        this.transactionList = transactionList;
+        if (parts.length != 1) {
             throw new InsufficientArgumentsException();
         }
     }
 
-    public boolean executeCommand() {
-        String userId = args[0];
-        this.userList.deleteUser(userId);
+    public String[] getArgsRemoveUserCmd() throws InvalidArgumentException {
+        String[] args = new String[1];
+        for (String part : parts) {
+            if (part.startsWith("u")) {
+                args[0] = CommandParser.getArgValue(part);
+            } else {
+                throw new InvalidArgumentException("One of the parts is in incorrect format");
+            }
+        }
+        return args;
+    }
+
+    public boolean isBorrowing(String username) throws InvalidUserException {
+        if (transactionList.hasThisBorrower(username)) {
+            throw new InvalidUserException("This user is currently borrowing something");
+        }
+        return false;
+    }
+
+    public boolean isLending(String username) throws InvalidUserException {
+        if (itemList.hasThisLender(username)) {
+            throw new InvalidUserException("This user is currently lending something");
+        }
+        return false;
+    }
+
+    public boolean canDeleteUser(String username) throws InvalidUserException {
+        return !isBorrowing(username) && !isLending(username);
+    }
+
+    public boolean executeCommand()
+            throws InvalidArgumentException, InvalidUserException, UserNotFoundException {
+        String[] args = getArgsRemoveUserCmd();
+        String username = args[0];
+        if (canDeleteUser(username)) {
+            userList.deleteUser(username);
+            itemList.deleteAllItemOfAnUser(username);
+        }
         return false;
     }
 }

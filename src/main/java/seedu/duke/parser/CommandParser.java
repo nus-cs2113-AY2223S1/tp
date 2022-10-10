@@ -86,7 +86,7 @@ public class CommandParser {
     }
 
     public static String getArgValue(String part) throws InvalidArgumentException {
-        String[] splitPart = part.split(DEFAULT_DELIMITER);
+        String[] splitPart = part.split(DEFAULT_DELIMITER, 2);
         if (splitPart.length == 1) {
             throw new InvalidArgumentException("The value cannot be empty");
         }
@@ -123,11 +123,11 @@ public class CommandParser {
         case COMMAND_ADD_TX:
             return new AddTransactionCommand(parts, userList, itemList, txList);
         case COMMAND_REMOVE_USER:
-            return new RemoveUserCommand(parts, userList);
+            return new RemoveUserCommand(parts, userList, itemList, txList);
         case COMMAND_REMOVE_ITEM:
             return new RemoveItemCommand(parts, itemList);
         case COMMAND_REMOVE_TX:
-            return new RemoveTransactionCommand(parts, txList);
+            return new RemoveTransactionCommand(parts, itemList, txList);
         default:
             throw new CommandNotFoundException();
         }

@@ -5,7 +5,9 @@ import java.util.logging.Logger;
 import java.util.logging.Level;
 
 import seedu.duke.Ui;
+import seedu.duke.exception.InvalidItemException;
 import seedu.duke.exception.ItemNotFoundException;
+import seedu.duke.transaction.Transaction;
 
 import java.util.ArrayList;
 
@@ -53,23 +55,18 @@ public class ItemList {
                 .forEach(System.out::println);
     }
 
-    public void deleteItem(String itemId) {
-        boolean found = false;
-        for (Item item : itemList) {
-            if (itemId.equals(item.getItemId())) {
-                found = true;
-                itemList.remove(item);
-                ui.deleteItemMessage(item, itemList);
-            }
-        }
-        if (!found) {
-            System.out.println("There is no such item! Nothing to delete, aborting...\n");
+    public void deleteItem(String itemId) throws ItemNotFoundException, InvalidItemException {
+        Item item = getItemById(itemId);
+        if (item.isAvailable()) {
+            itemList.remove(item);
+        } else {
+            throw new InvalidItemException("This item is currently unavailable");
         }
     }
 
     public Item getItemById(String id) throws ItemNotFoundException {
         for (Item item : this.itemList) {
-            if (id.equals(item.getItemId())) {
+            if (id.equals(item.getName())) {
                 return item;
             }
         }
@@ -90,6 +87,19 @@ public class ItemList {
 
     public ArrayList<Item> getItemList() {
         return this.itemList;
+    }
+
+    public boolean hasThisLender(String username) {
+        for (Item item : itemList) {
+            if (item.getOwnerId().equals(username) && !item.isAvailable()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void deleteAllItemOfAnUser(String username) {
+        itemList.removeIf(item -> item.getOwnerId().equals(username) && !item.isAvailable());
     }
 
     public String showList() {

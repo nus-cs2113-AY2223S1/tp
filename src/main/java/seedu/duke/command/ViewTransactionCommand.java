@@ -3,6 +3,7 @@ package seedu.duke.command;
 import seedu.duke.command.Command;
 import seedu.duke.exception.DukeException;
 import seedu.duke.exception.InsufficientArgumentsException;
+import seedu.duke.exception.TransactionNotFoundException;
 import seedu.duke.transaction.Transaction;
 import seedu.duke.transaction.TransactionList;
 
@@ -19,7 +20,7 @@ public class ViewTransactionCommand extends Command {
         }
     }
 
-    public boolean executeCommand() throws DukeException {
+    public boolean executeCommand() throws TransactionNotFoundException {
         Transaction tx = this.txList.getTransactionById(args[DEFAULT_FIRST_INDEX]);
         System.out.println(tx);
         return false;

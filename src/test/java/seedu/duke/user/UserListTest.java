@@ -34,7 +34,7 @@ public class UserListTest {
     }
 
     @Test
-    void deleteUser_deleteUserUsingId_expectNoUser() {
+    void deleteUser_deleteUserUsingId_expectNoUser() throws UserNotFoundException {
         UserList userList = new UserList();
         User user = new User("John Doe", 45, "93746378");
         User user2 = new User("Jane Doe", 40, "92744873");

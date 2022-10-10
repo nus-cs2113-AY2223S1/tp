@@ -9,15 +9,15 @@ public class ListCommandsCommand extends Command {
     private static final String COMMAND_LIST_USERS = "list-users";
     private static final String COMMAND_LIST_ITEMS = "list-items";
     private static final String COMMAND_LIST_TX = "list-tx";
-    private static final String COMMAND_VIEW_USER = "view-user";
-    private static final String COMMAND_VIEW_ITEM = "view-item";
-    private static final String COMMAND_VIEW_TX = "view-tx";
+    private static final String COMMAND_VIEW_USER = "view-user /u <name>";
+    private static final String COMMAND_VIEW_ITEM = "view-item /i <name>";
+    private static final String COMMAND_VIEW_TX = "view-tx /t <transactionId>";
     private static final String COMMAND_ADD_USER = "add-user /n <name> /a <age> /c <contactNumber>";
     private static final String COMMAND_ADD_ITEM = "add-item /n <name> /c <categoryNumber> /p <price>";
     private static final String COMMAND_ADD_TX = "add-tx /i <itemName> /b <borrowerName> /d <duration> /c <createdAt>";
-    private static final String COMMAND_REMOVE_USER = "remove-user";
-    private static final String COMMAND_REMOVE_ITEM = "remove-item";
-    private static final String COMMAND_REMOVE_TX = "remove-tx";
+    private static final String COMMAND_REMOVE_USER = "remove-user /u <name>";
+    private static final String COMMAND_REMOVE_ITEM = "remove-item /i <name>";
+    private static final String COMMAND_REMOVE_TX = "remove-tx /t <transactionId>";
     private static final Map<String, String> commandToDetailMap = Map.ofEntries(
             Map.entry("List all commands", COMMAND_LIST_COMMANDS),
             Map.entry("List all users", COMMAND_LIST_USERS),

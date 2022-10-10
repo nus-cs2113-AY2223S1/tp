@@ -1,13 +1,11 @@
 package seedu.duke.transaction;
 
-import seedu.duke.Ui;
-import seedu.duke.exception.DukeException;
+import seedu.duke.exception.TransactionNotFoundException;
 
 import java.util.ArrayList;
 
 public class TransactionList {
     private ArrayList<Transaction> transactionList;
-    private Ui ui = new Ui();
 
     public TransactionList() {
         this.transactionList = new ArrayList<>();
@@ -17,13 +15,13 @@ public class TransactionList {
         return transactionList.size();
     }
 
-    public void markFinished(String transactionId) throws DukeException {
+    public void markFinished(String transactionId) throws TransactionNotFoundException {
         Transaction transaction = getTransactionById(transactionId);
         int index = transactionList.indexOf(transaction);
         transactionList.get(index).setAsFinished();
     }
 
-    public void unmarkFinished(String transactionId) throws DukeException {
+    public void unmarkFinished(String transactionId) throws TransactionNotFoundException {
         Transaction transaction = getTransactionById(transactionId);
         int index = transactionList.indexOf(transaction);
         transactionList.get(index).setAsNotFinished();
@@ -33,21 +31,28 @@ public class TransactionList {
         transactionList.add(transaction);
     }
 
-    public void deleteTransaction(String transactionId) throws DukeException {
+    public void deleteTransaction(String transactionId) throws TransactionNotFoundException {
         Transaction transaction = getTransactionById(transactionId);
         transactionList.remove(transaction);
-        ui.deleteTransactionMessage(transaction, transactionList);
     }
 
-    public Transaction getTransactionById(String transactionId) throws DukeException {
+    public Transaction getTransactionById(String transactionId) throws TransactionNotFoundException {
         for (Transaction transaction : transactionList) {
             if (transaction.getTxId().equals(transactionId)) {
                 return transaction;
             }
         }
-        throw new DukeException("Cannot find this transaction");
+        throw new TransactionNotFoundException("Cannot find this transaction");
     }
 
+    public boolean hasThisBorrower(String username) {
+        for (Transaction transaction : transactionList) {
+            if (transaction.getBorrower().equals(username)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     @Override
     public String toString() {

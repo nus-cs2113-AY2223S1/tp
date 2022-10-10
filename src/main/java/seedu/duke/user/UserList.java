@@ -1,5 +1,6 @@
 package seedu.duke.user;
 
+import seedu.duke.exception.InvalidItemException;
 import seedu.duke.exception.UserNotFoundException;
 import seedu.duke.item.Item;
 
@@ -25,17 +26,9 @@ public class UserList {
         userList.add(toAdd);
     }
 
-    public void deleteUser(String userName) {
-        boolean isFound = false;
-        for (User user : userList) {
-            if (user.getName().equals(userName)) {
-                isFound = true;
-                userList.remove(user);
-            }
-        }
-        if (!isFound) {
-            System.out.println("cannot find user");
-        }
+    public void deleteUser(String userName) throws UserNotFoundException {
+        User user = getUserById(userName);
+        userList.remove(user);
     }
 
     public int getSize() {
