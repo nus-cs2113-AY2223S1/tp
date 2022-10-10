@@ -11,29 +11,12 @@ import seedu.duke.command.HelpCommand;
 import seedu.duke.command.ListCommand;
 import seedu.duke.command.PurgeCommand;
 
-
 import seedu.duke.exception.MoolahException;
 import seedu.duke.exception.InvalidCommandException;
 
+import static seedu.duke.common.Utilities.splitInput;
+
 public class Parser {
-    private static final String EMPTY_STRING = "";
-    private static final String DELIMITER = " ";
-    private static final int SPLIT_POSITION = 2;
-
-    /**
-     * Splits the user input into two parts, i.e. the command and the description.
-     *
-     * @param inData A line of input entered by the user.
-     * @return A string array of input tokens.
-     */
-    public static String[] splitInput(String inData) {
-        String[] inputTokens = inData.split(DELIMITER, SPLIT_POSITION);
-        if (!inData.contains(DELIMITER)) {
-            inputTokens = new String[]{inData, EMPTY_STRING};
-        }
-        return inputTokens;
-    }
-
     /**
      * Parses the user input and deal with any input error returned.
      *
@@ -44,34 +27,32 @@ public class Parser {
     public static Command parse(String inData) throws MoolahException {
         Command command = null;
         String[] inputTokens = splitInput(inData);
+        String input = inputTokens[1];
 
-        // list commands duke to list all the tasks stored and their completion status
-        // try at the start cos of the errors possibly
         switch (inputTokens[0].toUpperCase()) {
         case HelpCommand.COMMAND_WORD:
-            command = new HelpCommand(inputTokens[1]);
+            command = new HelpCommand(input);
+            break;
+        case AddCommand.COMMAND_WORD:
+            command = new AddCommand(input);
+            break;
+        case EditCommand.COMMAND_WORD:
+            command = new EditCommand(input);
             break;
         case ListCommand.COMMAND_WORD:
-            command = new ListCommand();
+            command = new ListCommand(input);
             break;
         case FindCommand.COMMAND_WORD:
-            command = new FindCommand(inputTokens[1]);
+            command = new FindCommand(input);
             break;
         case StatsCommand.COMMAND_WORD:
-            // Additional tokens will be allowed for liststats
-            command = new StatsCommand(inputTokens[1]);
+            command = new StatsCommand(input);
             break;
         case PurgeCommand.COMMAND_WORD:
             command = new PurgeCommand();
             break;
         case DeleteCommand.COMMAND_WORD:
-            command = new DeleteCommand(inputTokens[1]);
-            break;
-        case AddCommand.COMMAND_WORD:
-            command = new AddCommand(inputTokens[1]);
-            break;
-        case EditCommand.COMMAND_WORD:
-            command = new EditCommand(inputTokens[1]);
+            command = new DeleteCommand(input);
             break;
         case ByeCommand.COMMAND_WORD:
             command = new ByeCommand();
