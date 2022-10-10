@@ -18,15 +18,23 @@ import static seedu.common.CommonFiles.API_JSON_DIRECTORY;
 import static seedu.common.CommonFiles.LTA_JSON_FILE;
 
 
+/**
+ * Class to fetch data from LTA API.
+ */
 public class Api {
     private final String API_KEY = "1B+7tBxzRNOtFbTxGcCiYA==";
-    private String authHeaderName = "AccountKey";
+    private final String AUTH_HEADER_NAME = "AccountKey";
+    private final int MAX_FETCH_TRIES = 5;
     private HttpClient client;
     private HttpRequest request;
     private CompletableFuture<HttpResponse<String>> responseFuture;
     private Storage storage;
     private final Ui ui;
 
+    /**
+     * Constructor to create a new client and the correct HTTP request.
+     * Initializes the storage class for file writing purposes.
+     */
     public Api() {
         this.client = HttpClient.newHttpClient();
         generateHttpRequestCarpark();
@@ -34,17 +42,30 @@ public class Api {
         this.ui = new Ui();
     }
 
+
+    /**
+     * Builds the API HTTP GET request header and body.
+     */
     private void generateHttpRequestCarpark() {
         request = HttpRequest.newBuilder(
                 URI.create(LTA_BASE_URL))
-                .header(authHeaderName, API_KEY)
+                .header(AUTH_HEADER_NAME, API_KEY)
                 .build();
     }
 
+    /**
+     * Sends the HTTP GET request to the API endpoint asynchronously.
+     */
     public void asyncExecuteRequest() {
         responseFuture = client.sendAsync(request, HttpResponse.BodyHandlers.ofString());
     }
 
+    /**
+     * Wait for the response from the API endpoint. It is a blocking code.
+     * Timeout set at 1000ms and will return timeout exception.
+     *
+     * @return JSON string response from the API.
+     */
     public String asyncGetResponse() {
         String result = "";
         try {
@@ -60,9 +81,16 @@ public class Api {
         return result;
     }
 
+    /**
+     * Execute the data fetching subroutine. Subroutine will repeat for a certain number of time
+     * and throws an exception if no response is received.
+     *
+     * @throws EmptyResponseException if empty/invalid response received.
+     * @throws IOException if data writing fails.
+     */
     public void fetchData() throws EmptyResponseException, IOException {
         String result = asyncGetResponse();
-        int fetchTries = 5;
+        int fetchTries = MAX_FETCH_TRIES;
         while (result.isEmpty() && fetchTries > 0) {
             asyncExecuteRequest();
             result = asyncGetResponse();
