@@ -1,8 +1,10 @@
 1
 add
 cs2113
+set
+1
+1
+err
+2
 list
-info
-cs3230
-invalidcommand
 quit
