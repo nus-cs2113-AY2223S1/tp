@@ -1,6 +1,6 @@
 public class Prescription {
     private String medicine;
-    private int timeInterval;
+    private String timeInterval;
     private final String patientId;
     private String dosage;
     private boolean isActive;
@@ -8,7 +8,7 @@ public class Prescription {
     private static final String ACTIVE = "Active";
     private static final String INACTIVE = "Inactive";
 
-    public Prescription(String patientId, String medicine, String dosage, int timeInterval) {
+    public Prescription(String patientId, String medicine, String dosage, String timeInterval) {
         this.patientId = patientId;
         this.medicine = medicine;
         this.dosage = dosage;
@@ -16,7 +16,7 @@ public class Prescription {
         this.isActive = true;
     }
 
-    public Prescription(String patientId, String medicine, String dosage, int timeInterval, boolean isActive) {
+    public Prescription(String patientId, String medicine, String dosage, String timeInterval, boolean isActive) {
         this.patientId = patientId;
         this.medicine = medicine;
         this.dosage = dosage;
@@ -28,11 +28,11 @@ public class Prescription {
         return patientId;
     }
 
-    public int getTimeInterval() {
+    public String getTimeInterval() {
         return timeInterval;
     }
 
-    public void setTimeInterval(int timeInterval) {
+    public void setTimeInterval(String timeInterval) {
         this.timeInterval = timeInterval;
     }
 
@@ -69,7 +69,7 @@ public class Prescription {
         return "ID: " + patientId + System.lineSeparator()
                 + "Medicine: " + medicine + System.lineSeparator()
                 + "Dosage: " + dosage + System.lineSeparator()
-                + "Time Interval: once every " + timeInterval + " hours" + System.lineSeparator()
+                + "Time Interval: " + timeInterval + System.lineSeparator()
                 + "Status: " + getStatusString();
     }
 }
