@@ -5,24 +5,21 @@ import seedu.duke.Ui;
 
 import seedu.duke.data.TransactionList;
 import seedu.duke.exception.MoolahException;
-import seedu.duke.exception.AddTransactionMissingTagException;
-import seedu.duke.exception.AddTransactionMissingParameterException;
-import seedu.duke.exception.AddTransactionExtraTagException;
-import seedu.duke.exception.AddTransactionInvalidDateException;
-import seedu.duke.exception.AddTransactionInvalidCategoryException;
 import seedu.duke.exception.AddTransactionInvalidAmountException;
-import seedu.duke.exception.AddTransactionUnknownTypeException;
-
+import seedu.duke.exception.AddTransactionMissingParameterException;
+import seedu.duke.exception.AddTransactionMissingTagException;
+import seedu.duke.exception.InputTransactionInvalidTagException;
+import seedu.duke.exception.InputTransactionUnknownTypeException;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static seedu.duke.common.DateFormats.DATE_INPUT_PATTERN;
 import static seedu.duke.common.InfoMessages.INFO_ADD_EXPENSE;
 import static seedu.duke.common.InfoMessages.INFO_ADD_INCOME;
+import static seedu.duke.common.Utilities.checkExtraTagExist;
+import static seedu.duke.common.Utilities.parseCategoryTag;
+import static seedu.duke.common.Utilities.parseDateTag;
 
 /**
  * Represents an add command object that will execute the operations for Add command.
@@ -34,8 +31,7 @@ public class AddCommand extends Command {
 
     // The description for the usage of command
     public static final String COMMAND_DESCRIPTION = "To add a new transaction entry, which could be "
-            +
-            "either an \"income\" or an \"expense\" into the transaction list.";
+            + "either an \"income\" or an \"expense\" into the transaction list.";
     // The guiding information for the usage of command
     public static final String COMMAND_USAGE = "Usage: add t/TYPE c/CATEGORY a/AMOUNT d/DATE i/DESCRIPTION";
     // The formatting information for the parameters used by the command
@@ -55,8 +51,9 @@ public class AddCommand extends Command {
     // Detailed help description
     public static final String COMMAND_DETAILED_HELP = COMMAND_HELP + COMMAND_PARAMETERS_INFO + "\n";
 
-    private String input;
+    private static final int TAG_LIMIT = 5;
 
+    private String input;
 
     public AddCommand(String input) {
         this.input = input;
@@ -77,9 +74,12 @@ public class AddCommand extends Command {
         */
         String[] splits = input.split(" ");
 
-        checkExtraTagExist(splits); // if more than 5 tags exist in input, throw exception
-        checkTagsExist(splits); // if the mandatory tags does not exist, throw exception
-        checkParameterExist(splits); // if the parameter does not exist, throw exception.
+        // Throws exception if there are more than five tags
+        checkExtraTagExist(splits, TAG_LIMIT);
+        // Throws exception if there are no mandatory tags
+        checkTagsExist(splits);
+        // Throws exception if there are no parameters
+        checkParameterExist(splits);
 
         String description = "";
         int amount = 0;
@@ -107,7 +107,7 @@ public class AddCommand extends Command {
                 description = parameter;
                 break;
             default:
-                break;
+                throw new InputTransactionInvalidTagException();
             }
         }
         assert date != null;
@@ -121,7 +121,7 @@ public class AddCommand extends Command {
 
     private static void addTransactionByType(TransactionList transactions, String type, String description, int amount,
                                              String category, LocalDate date)
-            throws AddTransactionUnknownTypeException {
+            throws InputTransactionUnknownTypeException {
 
         switch (type) {
         case "expense":
@@ -133,28 +133,9 @@ public class AddCommand extends Command {
             Ui.showTransactionAction(INFO_ADD_INCOME.toString(), income);
             break;
         default:
-            throw new AddTransactionUnknownTypeException();
+            throw new InputTransactionUnknownTypeException();
         }
     }
-
-
-    /**
-     * Checks if there are extra tag(s) within the user input.
-     *
-     * @param splits The user input after the command word, split into a list for every space found.
-     * @throws AddTransactionExtraTagException Extra tag exception.
-     */
-
-    private static void checkExtraTagExist(String[] splits) throws AddTransactionExtraTagException {
-        int countNumberOfTags = 0;
-        for (String split : splits) {
-            countNumberOfTags += 1;
-        }
-        if (countNumberOfTags > 5) {
-            throw new AddTransactionExtraTagException();
-        }
-    }
-
 
     /**
      * Checks if there are missing parameter within the user input.
@@ -170,7 +151,6 @@ public class AddCommand extends Command {
             }
         }
     }
-
 
     /**
      * Checks if the targeted tags exists in the split user inputs.
@@ -190,22 +170,6 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Checks if the parameter contains numeric characters.
-     *
-     * @param parameter The user input after the user tag.
-     * @return true if there are numeric characters within the parameter.
-     */
-    public static boolean containNumeric(String parameter) {
-        char[] characters = parameter.toCharArray();
-        for (char character : characters) {
-            if (Character.isDigit(character)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
      * Checks if the parameter contains alphabetical characters.
      *
      * @param parameter The user input after the user tag.
@@ -221,27 +185,8 @@ public class AddCommand extends Command {
         return false;
     }
 
-
     /**
-     * Parse the user parameter input for the description and returns it.
-     *
-     * @param parameter The user input after the user tag.
-     * @return The category parameter if no exceptions are thrown.
-     * @throws AddTransactionInvalidCategoryException Invalid category format exception.
-     */
-
-    private static String parseCategoryTag(String parameter) throws AddTransactionInvalidCategoryException {
-        Pattern specialSymbols = Pattern.compile("[!@#$%&*()_+=|<>?{}\\[\\]~-]");
-        Matcher hasSpecialSymbols = specialSymbols.matcher(parameter);
-        if (containNumeric(parameter) || hasSpecialSymbols.find()) {
-            throw new AddTransactionInvalidCategoryException();
-        }
-        return parameter;
-
-    }
-
-    /**
-     * Parse the user parameter input for the amount and returns it.
+     * Parses the user parameter input for the amount and returns it.
      *
      * @param parameter The user input after the user tag.
      * @return The amount integer if no exceptions are thrown.
@@ -262,23 +207,6 @@ public class AddCommand extends Command {
 
         } catch (NumberFormatException e) {
             throw new AddTransactionInvalidAmountException();
-        }
-    }
-
-    /**
-     * Parse the user parameter input for date into a LocalDate object and returns it.
-     *
-     * @param parameter The user input after the user tag.
-     * @return The LocalDate object parsed from user input given.
-     * @throws AddTransactionInvalidDateException Invalid date format exception.
-     */
-    private static LocalDate parseDateTag(String parameter) throws AddTransactionInvalidDateException {
-        try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_INPUT_PATTERN.toString());
-            LocalDate date = LocalDate.parse(parameter, formatter);
-            return date;
-        } catch (DateTimeParseException exception) {
-            throw new AddTransactionInvalidDateException();
         }
     }
 
