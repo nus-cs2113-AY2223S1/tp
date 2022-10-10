@@ -12,4 +12,8 @@ public class AppointmentList {
             System.out.println(appointment.getAppointmentStatus());
         }
     }
+
+    public static void addAppointment(Appointment appointment) {
+        appointments.add(appointment);
+    }
 }
