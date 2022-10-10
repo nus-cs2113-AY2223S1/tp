@@ -8,19 +8,19 @@ public class Prescription {
     private static final String ACTIVE = "Active";
     private static final String INACTIVE = "Inactive";
 
-    public Prescription(String patientId, String medicine, int timeInterval, String dosage) {
+    public Prescription(String patientId, String medicine, String dosage, int timeInterval) {
         this.patientId = patientId;
         this.medicine = medicine;
-        this.timeInterval = timeInterval;
         this.dosage = dosage;
+        this.timeInterval = timeInterval;
         this.isActive = true;
     }
 
-    public Prescription(String patientId, String medicine, int timeInterval, String dosage, boolean isActive) {
+    public Prescription(String patientId, String medicine, String dosage, int timeInterval, boolean isActive) {
         this.patientId = patientId;
         this.medicine = medicine;
-        this.timeInterval = timeInterval;
         this.dosage = dosage;
+        this.timeInterval = timeInterval;
         this.isActive = isActive;
     }
 
@@ -68,8 +68,8 @@ public class Prescription {
     public String toString() {
         return "ID: " + patientId + System.lineSeparator()
                 + "Medicine: " + medicine + System.lineSeparator()
-                + "Time Interval: once every " + timeInterval + " hours" + System.lineSeparator()
                 + "Dosage: " + dosage + System.lineSeparator()
+                + "Time Interval: once every " + timeInterval + " hours" + System.lineSeparator()
                 + "Status: " + getStatusString();
     }
 }
