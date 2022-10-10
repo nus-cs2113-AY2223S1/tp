@@ -1,10 +1,11 @@
 package computercomponentchooser;
 
 public class ComputerComponentChooser {
+
+    static BuildManager buildManager = new BuildManager();
+
     public static void main(String[] args) {
         Ui.startSession();
-
-        BuildManager buildManager = new BuildManager();
 
         Ui.readLine();
 

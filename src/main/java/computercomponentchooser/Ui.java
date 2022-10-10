@@ -70,6 +70,7 @@ public class Ui {
                     line = in.nextLine();
                 }
             }
+            Parser.parse(line);
         } while (!Parser.checkBye(line));
     }
 }
