@@ -19,7 +19,8 @@ class SetCommandTest {
         int height = 172;
         int weight = 70;
         int fatPercentage = 22;
-        String fullCommand = String.format("%s %d %s %d %d %d", command, age, gender, height, weight, fatPercentage);
+        String fullCommand = String.format("%s /%d /%s /%d /%d /%d",
+                command, age, gender, height, weight, fatPercentage);
 
         Command c = Parser.parse(fullCommand);
         c.setData(ui, biometrics);
@@ -41,7 +42,8 @@ class SetCommandTest {
         int height = 172;
         int weight = 70;
         int fatPercentage = 22;
-        String fullCommand = String.format("%s %d %s %d %d %d", command, age, gender, height, weight, fatPercentage);
+        String fullCommand = String.format("%s /%d /%s /%d /%d /%d",
+                command, age, gender, height, weight, fatPercentage);
 
         Command c = Parser.parse(fullCommand);
         c.setData(ui, biometrics);
@@ -63,7 +65,8 @@ class SetCommandTest {
         int height = 172;
         int weight = 70;
         int fatPercentage = 22;
-        String fullCommand = String.format("%s %d %s %d %d %d", command, age, gender, height, weight, fatPercentage);
+        String fullCommand = String.format("%s /%d /%s /%d /%d /%d",
+                command, age, gender, height, weight, fatPercentage);
 
         Command c = Parser.parse(fullCommand);
         c.setData(ui, biometrics);
