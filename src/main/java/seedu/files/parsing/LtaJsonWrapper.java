@@ -12,8 +12,6 @@ import java.util.List;
 public class LtaJsonWrapper {
     private String metadata;
     private List<Carpark> value;
-
-
     public String getMetadata() {
         return metadata;
     }

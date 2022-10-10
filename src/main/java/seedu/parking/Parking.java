@@ -41,6 +41,7 @@ public class Parking {
         System.out.println("Trying to load data");
         try {
             carparkList = new CarparkList();
+            System.out.println("Load data sequence successful!");
         } catch (ParkingException e) {
             System.out.println(e.getMessage());
         } finally {

@@ -1,6 +1,10 @@
 package seedu.data;
 
 import org.codehaus.jackson.annotate.JsonProperty;
+
+/**
+ * Carpark class that represents a carpark and all the information stored in it.
+ */
 public class Carpark {
     private String carparkId;
     private String area;

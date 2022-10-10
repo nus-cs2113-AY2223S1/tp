@@ -13,6 +13,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Optional;
 
 public class FileLoader {
 
@@ -22,9 +23,7 @@ public class FileLoader {
      * @return list of all Carparks found
      * @throws NoFileFoundException if a file was not found
      */
-    public static List<Carpark> loadLtaJson() throws NoFileFoundException {
-        Path filepath = Paths.get(CommonFiles.API_JSON_DIRECTORY, CommonFiles.LTA_JSON_FILE);
-        Path filepathBackup = Paths.get(CommonFiles.API_JSON_DIRECTORY, "ltaResponseSample.json");
+    public static List<Carpark> loadLtaJson(Path filepath, Path filepathBackup) throws NoFileFoundException {
         try {
             return getCarparks(filepath);
         } catch (IOException e) {
