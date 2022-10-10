@@ -1,7 +1,16 @@
 package seedu.duke;
 
 
-import seedu.duke.command.*;
+import seedu.duke.command.SetCommand;
+import seedu.duke.command.Command;
+import seedu.duke.command.GreetCommand;
+import seedu.duke.command.ExitCommand;
+import seedu.duke.command.InvalidCommand;
+import seedu.duke.command.AddCommand;
+import seedu.duke.command.HelpCommand;
+import seedu.duke.command.ViewCommand;
+import seedu.duke.command.RemoveCommand;
+import seedu.duke.command.MarkCommand;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;

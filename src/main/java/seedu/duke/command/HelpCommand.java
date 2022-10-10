@@ -19,6 +19,8 @@ public class HelpCommand extends Command {
                 + "exit - to exit the program\n"
                 + "set biometrics /{age} /{gender} /height /{weight} /{fat percentage}\n"
                 + "add exercise /{description} /{repetitions} /{calories}\n"
+                + "add food /{description} /{calories}\n"
+                + "remove food /{food index}\n"
                 + "mark {done/undone} /{exercise index}\n"
                 + "view {biometrics/exercise}");
     }
