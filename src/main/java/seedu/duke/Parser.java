@@ -15,40 +15,41 @@ public class Parser {
     }
 
     public void processUserInput(String userInput) {
-        final String LIST_TRIGGER = "list";
-        final String ADD_TRIGGER = "add";
-        final String DELETE_TRIGGER = "delete"; 
-        final String CLEAR_TRIGGER = "clear";
-        final String EXIT_TRIGGER = "bye";
-        final String DO_NOTHING = "";
+        final String L = "list";
+        final String A = "add";
+        final String D = "delete";
+        final String C = "clear";
+        final String E = "bye";
+        final String NT = "";
         
         String[] words = userInput.split(" ");
 
         switch (words[0]) {
-        case EXIT_TRIGGER:
+        case E:
             break;
             
-        case LIST_TRIGGER:
+        case L:
             executeList();
             break;
     
-        case ADD_TRIGGER:  
+        case A:
             executeAdd(userInput);
             break;
     
-        case DELETE_TRIGGER:
+        case D:
             executeDelete(words);
             break;
         
-        case CLEAR_TRIGGER:
+        case C:
             executeClear();
             break;
         
-        case DO_NOTHING:
+        case NT:
             break;
         
         default:
             // unrecognised command
+            System.out.println("Unrecognised command");
             break;
         }
     }
@@ -58,28 +59,27 @@ public class Parser {
     }
 
     public void executeAdd(String userInput) {
-        final String MOVIE_KEYWORD = "/movie";
-        final int MOVIE_SPACING = 5;
-        final String RATING_KEYWORD = "/rating";
-        final int RATING_SPACING = 6;
-        final String DATE_KEYWORD = "/date";
-        final int DATE_SPACING = 4;
+        final String movieKeyword = "/movie";
+        final int movieSpacing = 5;
+        final String ratingKeyword = "/rating";
+        final int ratingSpacing = 6;
+        final String dateKeyword = "/date";
+        final int dateSpacing = 4;
 
         String[] fields = userInput.split("/");
 
         try {
-            if (!userInput.contains(MOVIE_KEYWORD) ||
-                !userInput.contains(RATING_KEYWORD) ||
-                !userInput.contains(DATE_KEYWORD)
+            if (!userInput.contains(movieKeyword)
+                    || !userInput.contains(ratingKeyword)
+                    || !userInput.contains(dateKeyword)
             ) {
                 throw new Exception();
             } else {
-                String name = fields[1].substring(MOVIE_SPACING);
-                double rating = Double.parseDouble(fields[2].substring(RATING_SPACING));
-                String date = fields[3].substring(DATE_SPACING);
+                String name = fields[1].substring(movieSpacing);
+                double rating = Double.parseDouble(fields[2].substring(ratingSpacing));
+                String date = fields[3].substring(dateSpacing);
                 
                 Movie toAdd = new Movie(name, rating, date);
-                System.out.println(toAdd.toString());
                 executor.add(toAdd);   
             }
         } catch (Exception e) {
