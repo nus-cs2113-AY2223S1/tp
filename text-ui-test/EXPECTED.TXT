@@ -116,10 +116,34 @@ ____________________________________________________________
 Not supported tag(s) detected, please check your input!
 ____________________________________________________________
 ____________________________________________________________
+Not supported tag(s) detected, please check your input!
+____________________________________________________________
+____________________________________________________________
+Parameter behind tag(s) is found to be empty, please check your input!
+____________________________________________________________
+____________________________________________________________
+Duplicate tag(s) detected, please check your input!
+____________________________________________________________
+____________________________________________________________
 Mandatory tag(s) missing, please check your input!
 ____________________________________________________________
 ____________________________________________________________
+Mandatory tag(s) missing, please check your input!
+____________________________________________________________
+____________________________________________________________
+Mandatory tag(s) missing, please check your input!
+____________________________________________________________
+____________________________________________________________
+Parameter behind tag(s) is found to be empty, please check your input!
+____________________________________________________________
+____________________________________________________________
 Type of statistics given is invalid, please check your input!
+____________________________________________________________
+____________________________________________________________
+Not supported tag(s) detected, please check your input!
+____________________________________________________________
+____________________________________________________________
+Duplicate tag(s) detected, please check your input!
 ____________________________________________________________
 ____________________________________________________________
 There are no statistics available yet for the given statistics type.
@@ -140,10 +164,28 @@ I have added the following Expense transaction:
 [-][transport] $1 at Oct 02 2022 | Description: bus_fare
 ____________________________________________________________
 ____________________________________________________________
+Parameter behind tag(s) is found to be empty, please check your input!
+____________________________________________________________
+____________________________________________________________
+Parameter behind tag(s) is found to be empty, please check your input!
+____________________________________________________________
+____________________________________________________________
+Parameter behind tag(s) is found to be empty, please check your input!
+____________________________________________________________
+____________________________________________________________
+Parameter behind tag(s) is found to be empty, please check your input!
+____________________________________________________________
+____________________________________________________________
+Parameter behind tag(s) is found to be empty, please check your input!
+____________________________________________________________
+____________________________________________________________
+Duplicate tag(s) detected, please check your input!
+____________________________________________________________
+____________________________________________________________
 Not supported tag(s) detected, please check your input!
 ____________________________________________________________
 ____________________________________________________________
-Mandatory parameter(s) is empty, please check your input!
+Parameter behind tag(s) is found to be empty, please check your input!
 ____________________________________________________________
 ____________________________________________________________
 Not supported tag(s) detected, please check your input!
@@ -171,7 +213,7 @@ Here are your transaction records:
 
 ____________________________________________________________
 ____________________________________________________________
-Mandatory parameter(s) is empty, please check your input!
+Parameter behind tag(s) is found to be empty, please check your input!
 ____________________________________________________________
 ____________________________________________________________
 Here are your transaction records:
@@ -192,6 +234,9 @@ ____________________________________________________________
 Here are the transaction records that match your search expression:
 [-][transport] $1 at Oct 02 2022 | Description: bus_fare
 
+____________________________________________________________
+____________________________________________________________
+There are no transaction records that match your search expression.
 ____________________________________________________________
 ____________________________________________________________
 Here are your transaction records:
@@ -229,9 +274,6 @@ ____________________________________________________________
 Invalid date, please ensure your date format is correct!
 ____________________________________________________________
 ____________________________________________________________
-Mandatory parameter(s) is empty, please check your input!
-____________________________________________________________
-____________________________________________________________
 Mandatory tag(s) missing, please check your input!
 ____________________________________________________________
 ____________________________________________________________
@@ -250,13 +292,85 @@ I have deleted the following transaction:
 [-][food] $20 at Sep 13 2022 | Description: NIL
 ____________________________________________________________
 ____________________________________________________________
+Here are your transaction records:
+[+][salary] $2000 at Sep 30 2022 | Description: jan_salary
+[-][transport] $1 at Oct 02 2022 | Description: bus_fare
+[+][bonus] $10000000 at Oct 03 2022 | Description: thank_you_boss
+
+____________________________________________________________
+____________________________________________________________
+Invalid index, please ensure your index is correct!
+____________________________________________________________
+____________________________________________________________
+Invalid index, please ensure your index is correct!
+____________________________________________________________
+____________________________________________________________
+Invalid index, please ensure your index is correct!
+____________________________________________________________
+____________________________________________________________
+I have deleted the following transaction:
+[+][bonus] $10000000 at Oct 03 2022 | Description: thank_you_boss
+____________________________________________________________
+____________________________________________________________
+Here are your transaction records:
+[+][salary] $2000 at Sep 30 2022 | Description: jan_salary
+[-][transport] $1 at Oct 02 2022 | Description: bus_fare
+
+____________________________________________________________
+____________________________________________________________
+Not supported tag(s) detected, please check your input!
+____________________________________________________________
+____________________________________________________________
+Not supported tag(s) detected, please check your input!
+____________________________________________________________
+____________________________________________________________
+Not supported tag(s) detected, please check your input!
+____________________________________________________________
+____________________________________________________________
+Are you sure you want to proceed with this command? Please enter 'Y' to confirm.
+____________________________________________________________
+____________________________________________________________
+Purging has been aborted. All transactions records are retained.
+____________________________________________________________
+____________________________________________________________
+Are you sure you want to proceed with this command? Please enter 'Y' to confirm.
+____________________________________________________________
+____________________________________________________________
+Purging has been aborted. All transactions records are retained.
+____________________________________________________________
+____________________________________________________________
+Are you sure you want to proceed with this command? Please enter 'Y' to confirm.
+____________________________________________________________
+____________________________________________________________
+Purging has been aborted. All transactions records are retained.
+____________________________________________________________
+____________________________________________________________
+Are you sure you want to proceed with this command? Please enter 'Y' to confirm.
+____________________________________________________________
+____________________________________________________________
+Purging has been aborted. All transactions records are retained.
+____________________________________________________________
+____________________________________________________________
 Are you sure you want to proceed with this command? Please enter 'Y' to confirm.
 ____________________________________________________________
 ____________________________________________________________
 All your transactions have been purged.
 ____________________________________________________________
 ____________________________________________________________
+The command is aborted as the transactions list is empty.
+____________________________________________________________
+____________________________________________________________
 There are no transaction records found.
+____________________________________________________________
+____________________________________________________________
+I have added the following Expense transaction:
+[-][transport] $1 at Oct 02 2022 | Description: i/i/i/i/
+____________________________________________________________
+____________________________________________________________
+Not supported tag(s) detected, please check your input!
+____________________________________________________________
+____________________________________________________________
+Not supported tag(s) detected, please check your input!
 ____________________________________________________________
 ____________________________________________________________
 Goodbye and see you soon.
