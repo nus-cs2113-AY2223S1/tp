@@ -21,7 +21,7 @@ public class Carpark {
      */
     @Override
     public String toString() {
-        return String.format("CarparkID %s at %s", carparkId, development);
+        return String.format("CarparkID %s at %s\nAvailable lots: %s", carparkId, development, availableLots);
     }
 
     public String getCarparkId() {
