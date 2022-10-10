@@ -295,7 +295,7 @@ public class Parser {
             throw new InvalidClientIndexDeleteException();
         }
     }
-}
+
 
     private void checkForEmptyCommandPairUnpairDetails(String commandPairUnpairDetails)
             throws EmptyCommandPairUnpairDetailsException {
