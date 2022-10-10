@@ -311,7 +311,10 @@ public class ConsoleInterface {
 
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_ADD_INCOME_SUCCESS);
 
-        //saveToFile(incomeManager.getIncomes());
+        /*
+        TODO Add saveToFile for Income
+        saveToFile(incomeManager.getIncomes());
+         */
     }
 
     /**
