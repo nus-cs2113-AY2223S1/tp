@@ -5,6 +5,10 @@ import seedu.duke.utils.Storage;
 import seedu.duke.utils.Ui;
 
 public class HelpCommand extends Command {
+    public HelpCommand(String[] input) {
+        super(input);
+    }
+
     @Override
     public void execute(State state, Ui ui, Storage storage) {
 

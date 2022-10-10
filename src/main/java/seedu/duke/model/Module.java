@@ -21,7 +21,6 @@ public class Module {
 
     private static List<Module> moduleList;
     private static Map<String, Module> modulesByCode;
-    private static Map<String, Module> modulesByTitle;
 
     public static List<Module> getAll() {
         if (moduleList == null) {
@@ -29,10 +28,6 @@ public class Module {
             modulesByCode = new HashMap<>();
             for (Module m : moduleList) {
                 modulesByCode.put(m.moduleCode, m);
-            }
-            modulesByTitle = new HashMap<>();
-            for (Module m : moduleList) {
-                modulesByTitle.put(m.title, m);
             }
         }
         return moduleList;
@@ -46,17 +41,17 @@ public class Module {
     }
 
     Module(String acadYear,
-            String moduleCode,
-            String title,
-            String description,
-            int moduleCredit,
-            String department,
-            String faculty,
-            List<Integer> workload,
-            List<SemesterData> semesterData,
-            String prerequisite,
-            String corequisite,
-            String preclusion) {
+           String moduleCode,
+           String title,
+           String description,
+           int moduleCredit,
+           String department,
+           String faculty,
+           List<Integer> workload,
+           List<SemesterData> semesterData,
+           String prerequisite,
+           String corequisite,
+           String preclusion) {
         this.acadYear = acadYear;
         this.moduleCode = moduleCode;
         this.title = title;
