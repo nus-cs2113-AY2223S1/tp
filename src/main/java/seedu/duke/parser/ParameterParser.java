@@ -47,6 +47,8 @@ public class ParameterParser {
     private static final String EMPTY_STRING = "";
     private static final String DELIMITER = " ";
     private static final int SPLIT_POSITION = 2;
+    private static final int MINIMUM_TAG_LENGTH = 2;
+
     private static final String CLASS_TYPE_EXPENSE = "seedu.duke.data.transaction.Expense";
     private static final String CLASS_TYPE_INCOME = "seedu.duke.data.transaction.Income";
 
@@ -122,7 +124,7 @@ public class ParameterParser {
         String[] optionalTags = command.getOptionalTags();
 
         for (String split : splits) {
-            if (split.length() < 2) {
+            if (split.length() < MINIMUM_TAG_LENGTH) {
                 // None of the tag is shorter than two characters
                 throw new InputUnsupportedTagException();
             }
@@ -146,6 +148,7 @@ public class ParameterParser {
     private static void checkDuplicateTagsNotExist(String[] splits) throws InputDuplicateTagException {
         HashMap<String, Integer> tagOccurenceMap = new HashMap<>();
         for (String split : splits) {
+            assert split.length() >= MINIMUM_TAG_LENGTH;
             String tag = split.substring(0, SPLIT_POSITION);
 
             // The duplicated tag can be found in the hash map
@@ -166,7 +169,7 @@ public class ParameterParser {
      */
     private static void checkParameterNotEmpty(String[] splits) throws EmptyParameterException {
         for (String split : splits) {
-            if (split.length() <= 2) {
+            if (split.length() == 2) {
                 throw new EmptyParameterException();
             }
         }
@@ -198,6 +201,7 @@ public class ParameterParser {
      * @return Whether the tag is found within the split inputs.
      */
     private static boolean findIfParameterTagAmongTags(String parameter, String[] tags) {
+        assert parameter.length() >= MINIMUM_TAG_LENGTH;
         boolean hasFound = false;
 
         String parameterTag = parameter.substring(0, SPLIT_POSITION);

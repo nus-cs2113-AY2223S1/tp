@@ -85,6 +85,7 @@ public class StatsCommand extends Command {
                 Ui.showInfoMessage(INFO_STATS_EMPTY.toString());
                 return;
             }
+            assert !categoriesList.isEmpty();
             Ui.showTransactionsList(categoriesList, INFO_STATS_CATEGORIES.toString());
             break;
         default:

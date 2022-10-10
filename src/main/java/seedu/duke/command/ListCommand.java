@@ -31,16 +31,13 @@ public class ListCommand extends Command {
             + "(Optional) TYPE - The type of transaction. Only \"income\" or \"expense\" is accepted."
             + LINE_SEPARATOR
             + "(Optional) CATEGORY: A category for the transaction. Only string containing alphabets is accepted."
-            + LINE_SEPARATOR
-            + "(Optional) DATE: Date of the transaction. The format must be in \"yyyyMMdd\".";
+            + LINE_SEPARATOR + "(Optional) DATE: Date of the transaction. The format must be in \"yyyyMMdd\".";
 
     // Basic help description
-    public static final String COMMAND_HELP = "Command Word: " + COMMAND_WORD + LINE_SEPARATOR
-            + COMMAND_DESCRIPTION + LINE_SEPARATOR
-            + COMMAND_USAGE + LINE_SEPARATOR;
+    public static final String COMMAND_HELP = "Command Word: " + COMMAND_WORD + LINE_SEPARATOR + COMMAND_DESCRIPTION
+            + LINE_SEPARATOR + COMMAND_USAGE + LINE_SEPARATOR;
     // Detailed help description
-    public static final String COMMAND_DETAILED_HELP = COMMAND_HELP + COMMAND_PARAMETERS_INFO
-            + LINE_SEPARATOR;
+    public static final String COMMAND_DETAILED_HELP = COMMAND_HELP + COMMAND_PARAMETERS_INFO + LINE_SEPARATOR;
 
     private static final int TAG_LIMIT = 3;
     private static final int MINIMUM_TAG_LENGTH = 2;
@@ -109,8 +106,7 @@ public class ListCommand extends Command {
      * @param date         Date of the transaction with format in "yyyyMMdd".
      * @throws InputTransactionUnknownTypeException If class type cannot be found in the packages.
      */
-    private static void listTransactions(TransactionList transactions, String type,
-            String category, LocalDate date)
+    private static void listTransactions(TransactionList transactions, String type, String category, LocalDate date)
             throws InputTransactionUnknownTypeException {
         String transactionsList = transactions.listTransactions(type, category, date);
         if (transactionsList.isEmpty()) {

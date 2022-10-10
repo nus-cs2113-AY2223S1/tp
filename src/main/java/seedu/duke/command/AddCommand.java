@@ -115,6 +115,7 @@ public class AddCommand extends Command {
      */
     @Override
     public void execute(TransactionList transactions, Ui ui, Storage storage) throws MoolahException {
+
         assert date != null;
         switch (type) {
         case Expense.TRANSACTION_NAME:
