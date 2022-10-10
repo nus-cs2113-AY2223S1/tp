@@ -8,7 +8,13 @@ import seedu.duke.exception.IllegalValueException;
 import seedu.duke.exercise.Exercise;
 import seedu.duke.exercise.ExerciseList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.ArrayList;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
 
 class MarkCommandTest {
 
@@ -88,8 +94,11 @@ class MarkCommandTest {
         }
         int currentExerciseListSize = exerciseList.getCurrentExerciseListSize();
         int completedExerciseListSize = exerciseList.getCompletedExerciseListSize();
-        String[] testInputList = {"mark done -1", "mark done " + currentExerciseListSize + 1
-                , "mark undone -1", "mark undone " + completedExerciseListSize + 1};
+        ArrayList<String> testInputList = new ArrayList<>();
+        testInputList.add("mark done -1");
+        testInputList.add("mark done " + currentExerciseListSize + 1);
+        testInputList.add("mark undone -1");
+        testInputList.add("mark undone " + completedExerciseListSize + 1);
         for (String input : testInputList) {
             assertInvalidMarkCommand(input, "Exercise not found", exerciseList);
         }
@@ -104,8 +113,11 @@ class MarkCommandTest {
         } catch (IllegalValueException e) {
             fail();
         }
-        String[] testInputList = {"mark done 0 xx ", "mark done 2 2"
-                , "mark undone 0 xx", "mark undone 2 2"};
+        ArrayList<String> testInputList = new ArrayList<>();
+        testInputList.add("mark done 0 xx ");
+        testInputList.add("mark done 2 2");
+        testInputList.add("mark undone 0 xx");
+        testInputList.add("mark undone 2 2");
         for (String input : testInputList) {
             assertInvalidMarkCommand(input, "Invalid mark command", exerciseList);
         }
@@ -151,13 +163,15 @@ class MarkCommandTest {
         return exercise;
     }
 
-    private static void assertValidMarkAsUnDone(ExerciseList exerciseList, Exercise exercise, int currentExerciseListSize, int completedExerciseListSize) {
+    private static void assertValidMarkAsUnDone(ExerciseList exerciseList, Exercise exercise,
+                                                int currentExerciseListSize, int completedExerciseListSize) {
         assertFalse(exercise.getDone());
         assertEquals(currentExerciseListSize + 1, exerciseList.getCurrentExerciseListSize());
         assertEquals(completedExerciseListSize - 1, exerciseList.getCompletedExerciseListSize());
     }
 
-    private static void assertValidMarkAsDone(ExerciseList exerciseList, Exercise exercise, int currentExerciseListSize, int completedExerciseListSize) {
+    private static void assertValidMarkAsDone(ExerciseList exerciseList, Exercise exercise,
+                                              int currentExerciseListSize, int completedExerciseListSize) {
         assertTrue(exercise.getDone());
         assertEquals(currentExerciseListSize - 1, exerciseList.getCurrentExerciseListSize());
         assertEquals(completedExerciseListSize + 1, exerciseList.getCompletedExerciseListSize());
@@ -172,9 +186,10 @@ class MarkCommandTest {
     }
 
     private void addExercise(ExerciseList exerciseList) throws IllegalValueException {
-        String[] commandList = {"add exercise bench 10 180"
-                , "add exercise press 8 58"
-                , "add exercise deadlift 6 120"};
+        ArrayList<String> commandList = new ArrayList<>();
+        commandList.add("add exercise bench 10 180");
+        commandList.add("add exercise press 8 58");
+        commandList.add("add exercise deadlift 6 120");
 
         for (String input : commandList) {
             Command c = Parser.parse(input);

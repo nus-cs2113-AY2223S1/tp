@@ -102,8 +102,10 @@ public class ViewCommand extends Command {
             Exercise exercise = exerciseArrayListList.get(i);
             String index = addRightPadding(Integer.toString(i + 1), columnSpacingArray[0]) + " | ";
             String exerciseName = addRightPadding(exercise.getExerciseName(), columnSpacingArray[1]) + " | ";
-            String repetitions = addRightPadding(Integer.toString(exercise.getRepetitions()), columnSpacingArray[2]) + " | ";
-            String calories = addRightPadding(Integer.toString(exercise.getCaloriesBurnt()), columnSpacingArray[3]) + " | ";
+            String repetitions = addRightPadding(Integer.toString(exercise.getRepetitions()),
+                    columnSpacingArray[2]) + " | ";
+            String calories = addRightPadding(Integer.toString(exercise.getCaloriesBurnt()),
+                    columnSpacingArray[3]) + " | ";
             String status = exercise.getTaskStatus();
             ui.printInSameLine(index, exerciseName, repetitions, calories, status);
         }

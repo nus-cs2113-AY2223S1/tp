@@ -7,6 +7,8 @@ import seedu.duke.Ui;
 import seedu.duke.command.Command;
 import seedu.duke.exception.IllegalValueException;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -61,9 +63,10 @@ class ExerciseListTest {
     }
 
     private void addExercise(ExerciseList exerciseList) throws IllegalValueException {
-        String[] commandList = {"add exercise bench 10 180"
-                , "add exercise press 8 58"
-                , "add exercise deadlift 6 120"};
+        ArrayList<String> commandList = new ArrayList<>();
+        commandList.add("add exercise bench 10 180");
+        commandList.add("add exercise press 8 58");
+        commandList.add("add exercise deadlift 6 120");
 
         for (String input : commandList) {
             Command c = Parser.parse(input);
