@@ -3,8 +3,21 @@ package seedu.duke.parser;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.duke.command.*;
+import seedu.duke.command.AddItemCommand;
+import seedu.duke.command.AddTransactionCommand;
+import seedu.duke.command.AddUserCommand;
 import seedu.duke.command.Command;
+import seedu.duke.command.ExitCommand;
+import seedu.duke.command.ListCommandsCommand;
+import seedu.duke.command.ListItemsCommand;
+import seedu.duke.command.ListTransactionsCommand;
+import seedu.duke.command.ListUsersCommand;
+import seedu.duke.command.RemoveItemCommand;
+import seedu.duke.command.RemoveTransactionCommand;
+import seedu.duke.command.RemoveUserCommand;
+import seedu.duke.command.ViewItemCommand;
+import seedu.duke.command.ViewTransactionCommand;
+import seedu.duke.command.ViewUserCommand;
 import seedu.duke.exception.CommandNotFoundException;
 import seedu.duke.exception.InsufficientArgumentsException;
 import seedu.duke.exception.InvalidArgumentException;
@@ -58,7 +71,7 @@ public class CommandParser {
      * @param input a single line of user input
      * @return String
      */
-    public static final String getCommand(String input) {
+    public static String getCommand(String input) {
         return parseUserInput(input).get(COMMAND_INDEX)[COMMAND_INDEX].trim();
     }
 

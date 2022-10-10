@@ -102,7 +102,7 @@ public class Ui {
         System.out.println(message);
     }
 
-    public static final void exit() {
+    public static void exit() {
         input.close();
     }
 }
