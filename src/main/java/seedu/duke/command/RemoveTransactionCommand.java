@@ -6,6 +6,7 @@ import seedu.duke.exception.ItemNotFoundException;
 import seedu.duke.exception.TransactionNotFoundException;
 import seedu.duke.item.ItemList;
 import seedu.duke.parser.CommandParser;
+import seedu.duke.transaction.Transaction;
 import seedu.duke.transaction.TransactionList;
 
 public class RemoveTransactionCommand extends Command {
@@ -45,7 +46,9 @@ public class RemoveTransactionCommand extends Command {
         String[] args = getArgsRemoveTxCmd();
         String txId = args[0].trim();
         markAvailableForItem(txId);
+        //Transaction transaction = txList.getTransactionById(txId);
         txList.deleteTransaction(txId);
+        //ui.confirmDeleteTransaction(transaction, txList);
         return false;
     }
 }

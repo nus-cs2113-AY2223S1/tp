@@ -4,6 +4,7 @@ import seedu.duke.exception.InsufficientArgumentsException;
 import seedu.duke.exception.InvalidArgumentException;
 import seedu.duke.exception.InvalidItemException;
 import seedu.duke.exception.ItemNotFoundException;
+import seedu.duke.item.Item;
 import seedu.duke.item.ItemList;
 import seedu.duke.parser.CommandParser;
 
@@ -37,7 +38,9 @@ public class RemoveItemCommand extends Command {
             throws InvalidArgumentException, ItemNotFoundException, InvalidItemException {
         String[] args = getArgsRemoveItemCmd();
         String itemId = args[0];
+        //Item item = itemList.getItemById(itemId);
         itemList.deleteItem(itemId);
+        //Ui.confirmRemoveItem(item, itemList)
         return false;
     }
 }

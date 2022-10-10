@@ -7,6 +7,7 @@ import seedu.duke.exception.UserNotFoundException;
 import seedu.duke.item.ItemList;
 import seedu.duke.parser.CommandParser;
 import seedu.duke.transaction.TransactionList;
+import seedu.duke.user.User;
 import seedu.duke.user.UserList;
 
 public class RemoveUserCommand extends Command {
@@ -60,10 +61,12 @@ public class RemoveUserCommand extends Command {
             throws InvalidArgumentException, InvalidUserException, UserNotFoundException {
         String[] args = getArgsRemoveUserCmd();
         String username = args[0];
+        User user = userList.getUserById(username);
         if (canDeleteUser(username)) {
             userList.deleteUser(username);
             itemList.deleteAllItemOfAnUser(username);
         }
+        //ui.confirmDeleteUser(user, userList);
         return false;
     }
 }
