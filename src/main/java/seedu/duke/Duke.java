@@ -26,7 +26,7 @@ public class Duke {
         do {
             try {
                 String userInputText = ui.readCommand();
-                command = parser.parseCommand(userInputText);
+                command = parser.parseCommand(userInputText, clientList);
                 command.execute(ui, storage, propertyList, clientList);
                 isCommandBye = (command instanceof CommandBye);
             } catch (EmptyCommandAddDetailException e) {
@@ -44,8 +44,12 @@ public class Duke {
                 ui.showInvalidEmailMessage();
             } catch (InvalidBudgetFormatException e) {
                 ui.showInvalidBudgetFormatMessage();
+            } catch (EmptyCommandDeleteDetailException e) {
+                ui.showMissingCommandDeleteDetailMessage();
             } catch (UndefinedSubCommandDeleteTypeException e) {
                 ui.showUndefinedSubCommandDeleteTypeMessage();
+            } catch (InvalidClientIndexDeleteException e) {
+                ui.showInvalidClientIndexDeleteMessage();
             }
         } while (!isCommandBye);
     }

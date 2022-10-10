@@ -13,10 +13,11 @@ import java.util.regex.Pattern;
 public class Parser {
     public static final int ADD_CLIENT_FLAG_SIZE = 4;
 
-    public Command parseCommand(String input) throws EmptyCommandAddDetailException,
+    public Command parseCommand(String input, ClientList clientList) throws EmptyCommandAddDetailException,
             UndefinedSubCommandAddTypeException, EmptyClientDetailException, MissingClientFlagException,
             IncorrectAddClientFlagOrderException, MissingClientDetailException, InvalidContactNumberException,
-            InvalidEmailException, InvalidBudgetFormatException, UndefinedSubCommandDeleteTypeException {
+            InvalidEmailException, InvalidBudgetFormatException, UndefinedSubCommandDeleteTypeException,
+            EmptyCommandDeleteDetailException, InvalidClientIndexDeleteException {
         ArrayList<String> processedCommandDetails = partitionCommandTypeAndDetails(input);
         String commandType    = processedCommandDetails.get(0);
         String commandDetails = processedCommandDetails.get(1);
@@ -33,13 +34,13 @@ public class Parser {
                 throw new UndefinedSubCommandAddTypeException();
             }
         case ("delete"):
-            checkForEmptyCommandAddDetails(commandDetails);
+            checkForEmptyCommandDeleteDetails(commandDetails);
             ArrayList<String> processedDeleteCommandDetails = partitionCommandTypeAndDetails(commandDetails);
             String subDeleteCommandType = processedDeleteCommandDetails.get(0);
-            int clientIndexToDelete = getClientIndex(processedDeleteCommandDetails.get(1));
+            int clientIndexToDelete = getClientIndex(processedDeleteCommandDetails.get(1)) - 1;
 
             if (subDeleteCommandType.equals("-client")) {
-                return prepareForCommandDeleteClient(clientIndexToDelete);
+                return prepareForCommandDeleteClient(clientIndexToDelete, clientList);
             } else {
                 throw new UndefinedSubCommandDeleteTypeException();
             }
@@ -63,6 +64,13 @@ public class Parser {
         boolean isEmptyCommandAddDetail = checkForEmptyDetail(commandAddDetails);
         if (isEmptyCommandAddDetail) {
             throw new EmptyCommandAddDetailException();
+        }
+    }
+
+    private void checkForEmptyCommandDeleteDetails(String commandAddDetails) throws EmptyCommandDeleteDetailException {
+        boolean isEmptyCommandAddDetail = checkForEmptyDetail(commandAddDetails);
+        if (isEmptyCommandAddDetail) {
+            throw new EmptyCommandDeleteDetailException();
         }
     }
 
@@ -231,7 +239,17 @@ public class Parser {
         return Integer.parseInt(commandDetails.trim());
     }
 
-    private Command prepareForCommandDeleteClient(int clientIndex) {
+    private Command prepareForCommandDeleteClient(int clientIndex, ClientList clientList)
+            throws InvalidClientIndexDeleteException {
+        checkForInvalidClientIndexDelete(clientIndex, clientList);
         return new CommandDeleteClient(clientIndex);
+    }
+
+    private void checkForInvalidClientIndexDelete(int clientIndex, ClientList clientList)
+            throws InvalidClientIndexDeleteException {
+        int currentListSize = clientList.getCurrentListSize();
+        if (clientIndex < 0 || clientIndex >= currentListSize) {
+            throw new InvalidClientIndexDeleteException();
+        }
     }
 }

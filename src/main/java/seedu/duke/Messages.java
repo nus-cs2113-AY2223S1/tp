@@ -39,4 +39,8 @@ public class Messages {
             + "please specify sub-command type.\n"
             + "For client: add -client\n"
             + "For property: add -property";
+
+    public static final String MESSAGE_EMPTY_DELETE_DESCRIPTION = "OOPS!!! The index for delete cannot be empty.";
+
+    public static final String MESSAGE_INVALID_CLIENT_INDEX = "OOPS!!! Please enter a valid client index.";
 }

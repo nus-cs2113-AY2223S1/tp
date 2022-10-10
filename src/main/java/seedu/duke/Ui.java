@@ -73,4 +73,12 @@ public class Ui {
     public void showUndefinedSubCommandDeleteTypeMessage() {
         showToUser(MESSAGE_MISSING_SUB_COMMAND_TYPE_FOR_DELETE);
     }
+
+    public void showMissingCommandDeleteDetailMessage() {
+        showToUser(MESSAGE_EMPTY_DELETE_DESCRIPTION);
+    }
+
+    public void showInvalidClientIndexDeleteMessage() {
+        showToUser(MESSAGE_INVALID_CLIENT_INDEX);
+    }
 }
