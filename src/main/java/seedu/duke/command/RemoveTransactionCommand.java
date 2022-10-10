@@ -1,5 +1,7 @@
 package seedu.duke.command;
 
+import seedu.duke.Ui;
+import seedu.duke.exception.DukeException;
 import seedu.duke.exception.InsufficientArgumentsException;
 import seedu.duke.exception.InvalidArgumentException;
 import seedu.duke.exception.ItemNotFoundException;
@@ -46,9 +48,9 @@ public class RemoveTransactionCommand extends Command {
         String[] args = getArgsRemoveTxCmd();
         String txId = args[0].trim();
         markAvailableForItem(txId);
-        //Transaction transaction = txList.getTransactionById(txId);
+        Transaction transaction = txList.getTransactionById(txId);
         txList.deleteTransaction(txId);
-        //ui.confirmDeleteTransaction(transaction, txList);
+        Ui.deleteTransactionMessage(transaction, txList.getSize());
         return false;
     }
 }

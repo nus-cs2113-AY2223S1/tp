@@ -2,6 +2,7 @@ package seedu.duke;
 
 import seedu.duke.item.Item;
 import seedu.duke.transaction.Transaction;
+import seedu.duke.user.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,10 +11,8 @@ import java.util.logging.Logger;
 import java.util.logging.Level;
 
 public class Ui {
-
     private static final Scanner input = new Scanner(System.in);
     private static Logger logger = Logger.getLogger("Foo");
-
 
     public static final String logo =
             "                             _      "
@@ -31,9 +30,9 @@ public class Ui {
         System.out.print(greeting);
     }
 
-    public final String question = "What would you like to do?\n";
+    public static final String question = "What would you like to do?\n";
 
-    public void printQuestion() {
+    public static void printQuestion() {
         assert question != null;
         System.out.print(question);
     }
@@ -53,28 +52,51 @@ public class Ui {
     }
 
 
-    public void addItemMessage(Item item, List<Item> items) {
+    public static void addItemMessage(Item item, int listSize) {
         showLine();
-        assert items.size() >= 0;
+        assert listSize >= 0;
         System.out.println("Noted. Following item has been added: " + '\n' + item.getDescription()
-                + "\n" + "Total item(s) in list: " + items.size() + '\n');
+                + "\n" + "Total item(s) in list: " + listSize + '\n');
         showLine();
     }
 
-    public void deleteItemMessage(Item item, List<Item> items) {
+    public static void deleteItemMessage(Item item, int listSize) {
         showLine();
-        assert items.size() >= 0;
+        assert listSize >= 0;
         System.out.println("OK! I will remove the following item:\n" + item.getDescription() + "\n"
-                + "Total item(s) in list: " + items.size() + '\n');
+                + "Total item(s) in list: " + listSize + '\n');
+        showLine();
+    }
+    
+    public static void addTransactionMessage(Transaction transaction, int listSize) {
+        showLine();
+        assert listSize >= 0;
+        System.out.println("OK! I will add the following transaction:\n" + transaction.toString() + "\n"
+                + "Total transaction(s) in list: " + listSize + '\n');
+        showLine();
+    }
+    
+    public static void deleteTransactionMessage(Transaction transaction,int listSize) {
+        showLine();
+        assert listSize >= 0;
+        System.out.println("OK! I will remove the following item:\n" + transaction.getTxId() + "\n"
+                + "Total item(s) in list: " + listSize + '\n');
+        showLine();
+    }
+    
+    public static void addUserMessage(User user, int listSize) {
+        showLine();
+        assert listSize >= 0;
+        System.out.println("Noted. Following user has been added: " + '\n' + user.toString()
+                + "\n" + "Total user(s) in list: " + listSize + '\n');
         showLine();
     }
 
-    public void deleteTransactionMessage(Transaction transaction,
-                                         ArrayList<Transaction> transactionList) {
+    public static void deleteUserMessage(User user, int listSize) {
         showLine();
-        assert transactionList.size() >= 0;
-        System.out.println("OK! I will remove the following item:\n" + transaction.getTxId() + "\n"
-                + "Total item(s) in list: " + transactionList.size() + '\n');
+        assert listSize >= 0;
+        System.out.println("Noted. Following user has been deleted: " + '\n' + user.toString()
+                + "\n" + "Total user(s) in list: " + listSize + '\n');
         showLine();
     }
 

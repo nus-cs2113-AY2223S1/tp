@@ -8,6 +8,7 @@ import seedu.duke.exception.UserNotFoundException;
 import seedu.duke.parser.CommandParser;
 import seedu.duke.user.User;
 import seedu.duke.user.UserList;
+import seedu.duke.Ui;
 
 public class AddUserCommand extends Command {
     private final String[] parts;
@@ -77,8 +78,9 @@ public class AddUserCommand extends Command {
             ContactNumberInvalidException, DuplicateException {
         String[] args = getArgsAddUserCmd();
         if (areValidArgs(args)) {
-            this.userList.addUser(new User(args[0], Integer.parseInt(args[1]), args[2]));
-            //Ui.confirmAddUser(...)
+            User user = new User(args[0], Integer.parseInt(args[1]), args[2]);
+            this.userList.addUser(user);
+            Ui.addUserMessage(user, userList.getSize());
         }
         return false;
     }
