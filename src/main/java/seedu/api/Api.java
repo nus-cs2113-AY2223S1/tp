@@ -22,16 +22,16 @@ import seedu.ui.Ui;
  * Class to fetch .json data from APIs and save that locally.
  */
 public class Api {
-    private static final String API_KEY = "1B+7tBxzRNOtFbTxGcCiYA==";
-    private final Ui ui;
-    private final String authHeaderName = "AccountKey";
-    private final HttpClient client;
-    private final FileStorage storage;
+    private final String API_KEY = "1B+7tBxzRNOtFbTxGcCiYA==";
+    private final String AUTH_HEADER_NAME = "AccountKey";
+    private final int MAX_FETCH_TRIES = 5;
+    private HttpClient client;
     private HttpRequest request;
     private CompletableFuture<HttpResponse<String>> responseFuture;
 
     /**
-     * Constructor for the {@link Api} class.
+     * Constructor to create a new client and the correct HTTP request.
+     * Initializes the storage class for file writing purposes.
      */
     public Api() {
         this.client = HttpClient.newHttpClient();
@@ -40,6 +40,10 @@ public class Api {
         this.ui = new Ui();
     }
 
+
+    /**
+     * Builds the API HTTP GET request header and body.
+     */
     private void generateHttpRequestCarpark() {
         request = HttpRequest.newBuilder(
                 URI.create(LTA_BASE_URL))
@@ -48,15 +52,17 @@ public class Api {
     }
 
     /**
-     * TODO: Javadoc comment.
+     * Sends the HTTP GET request to the API endpoint asynchronously.
      */
     public void asyncExecuteRequest() {
         responseFuture = client.sendAsync(request, HttpResponse.BodyHandlers.ofString());
     }
 
     /**
-     * TODO: Javadoc comment.
-     * @return
+     * Wait for the response from the API endpoint. It is a blocking code.
+     * Timeout set at 1000ms and will return timeout exception.
+     *
+     * @return JSON string response from the API.
      */
     public String asyncGetResponse() {
         String result = "";
@@ -74,13 +80,15 @@ public class Api {
     }
 
     /**
-     * TODO: Javadoc comment.
-     * @throws EmptyResponseException
-     * @throws IOException
+     * Execute the data fetching subroutine. Subroutine will repeat for a certain number of time
+     * and throws an exception if no response is received.
+     *
+     * @throws EmptyResponseException if empty/invalid response received.
+     * @throws IOException if data writing fails.
      */
     public void fetchData() throws EmptyResponseException, IOException {
         String result = asyncGetResponse();
-        int fetchTries = 5;
+        int fetchTries = MAX_FETCH_TRIES;
         while (result.isEmpty() && fetchTries > 0) {
             asyncExecuteRequest();
             result = asyncGetResponse();
