@@ -5,7 +5,7 @@ public abstract class Command {
     String moduleCode = null;
     String[] parameters;
 
-    public Command(String[] parameters, CommandType commandType){
+    public Command(String[] parameters, CommandType commandType) {
         this.parameters = parameters;
         this.commandType = commandType;
     }
