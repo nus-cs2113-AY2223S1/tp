@@ -3,7 +3,7 @@ package seedu.duke;
 import java.util.Scanner;
 
 public class UI {
-    final String EXIT_TRIGGER = "bye";
+    final String exitTrigger = "bye";
     protected boolean isExit;
     
     public void greetUser() {
@@ -22,7 +22,7 @@ public class UI {
             userInput = userInputScanner.nextLine();
         }
 
-        if (userInput.equals(EXIT_TRIGGER)) {
+        if (userInput.equals(exitTrigger)) {
             isExit = true;
         }
         
