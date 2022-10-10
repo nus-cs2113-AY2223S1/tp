@@ -1,1 +1,2 @@
-James Gosling
+add /movie inception /rating 99.5 /date 2 sep 22
+bye
