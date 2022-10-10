@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
@@ -31,7 +32,36 @@ public class Ui {
         );
     }
 
-    public void goodbyeMessage() {
+    public void showGoodByeMessage() {
         System.out.println("Thank you, come again! :)\n");
+    }
+
+    public void showFlightAddedMessage() {
+        System.out.println("Flight added!");
+    }
+
+    public void showListOfFlights(ArrayList<Flight> flightList) {
+        System.out.println("---------------------------------------------------------"
+                + "-----------------------------------------------------------------------");
+        System.out.printf("%5s %10s %27s %20s %20s %12s %22s", "FLIGHT NUM", "AIRLINE",
+                "DESTINATION", "DEPARTURE TIME", "BOARDING GATE", "TERMINAL", "CHECK-IN ROW/DOOR");
+        System.out.println("\n-------------------------------------------------------"
+                + "-------------------------------------------------------------------------");
+
+        for (Flight flight : flightList) {
+            System.out.println(flight);
+        }
+    }
+
+    public void showEmptyDescriptionMessage() {
+        System.out.println("oops! The description is empty :(");
+    }
+
+    public void showFlightRemovedMessage(String flightNum) {
+        System.out.println("FLIGHT " + flightNum + " HAS BEEN DELETED.");
+    }
+
+    public void showFlightNotFoundMessage(String flightNum) {
+        System.out.println("FLIGHT " + flightNum + " NOT FOUND.");
     }
 }

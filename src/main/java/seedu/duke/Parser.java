@@ -11,7 +11,7 @@ public class Parser {
         if (entity.equalsIgnoreCase(PASSENGER_ENTITY)) {
             PassengerParser.parse(inputWords);
         } else if (entity.equalsIgnoreCase(FLIGHT_ENTITY)) {
-            FlightParser.parse(inputWords);
+            FlightParser.parse(lineInput);
         }
 
     }
