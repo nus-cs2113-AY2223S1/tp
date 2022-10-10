@@ -53,12 +53,10 @@ public class StatsCommand extends Command {
     public void execute(TransactionList transactions, Ui ui, Storage storage) throws MoolahException {
         /*
         Checks if userInput is in the correct input format by further parsing,
-        before adding entry to arraylist
+        before passing any tags to the filter for statistics.
         */
         String[] splits = input.split(" ");
         checkTagsExist(splits);
-
-        String statsType = "";
 
         for (String split : splits) {
             String tag = split.substring(0, 2);
@@ -67,10 +65,6 @@ public class StatsCommand extends Command {
             case "s/":
                 listStatisticsByStatsType(parameter, transactions);
                 break;
-            /*case "t/":
-                break;
-            case "n/":
-                break;*/
             default:
                 break;
             }
@@ -93,6 +87,7 @@ public class StatsCommand extends Command {
                 Ui.showInfoMessage(INFO_STATS_EMPTY.toString());
                 return;
             }
+            assert !categoriesList.isEmpty();
             Ui.showTransactionsList(categoriesList, INFO_STATS_CATEGORIES.toString());
             break;
         default:
