@@ -44,6 +44,8 @@ public class Duke {
                 ui.showInvalidEmailMessage();
             } catch (InvalidBudgetFormatException e) {
                 ui.showInvalidBudgetFormatMessage();
+            } catch (UndefinedSubCommandDeleteTypeException e) {
+                ui.showUndefinedSubCommandDeleteTypeMessage();
             }
         } while (!isCommandBye);
     }

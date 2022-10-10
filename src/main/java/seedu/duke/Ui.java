@@ -2,16 +2,7 @@ package seedu.duke;
 
 import java.util.Scanner;
 
-import static seedu.duke.Messages.MESSAGE_CLIENT_ADDED;
-import static seedu.duke.Messages.MESSAGE_EMPTY_ADD_DESCRIPTION;
-import static seedu.duke.Messages.MESSAGE_MISSING_SUB_COMMAND_TYPE_FOR_ADD;
-import static seedu.duke.Messages.MESSAGE_EMPTY_CLIENT_DESCRIPTION;
-import static seedu.duke.Messages.MESSAGE_ADD_CLIENT_WRONG_FORMAT;
-import static seedu.duke.Messages.MESSAGE_CLIENT_INPUT_EXAMPLE;
-import static seedu.duke.Messages.MESSAGE_TRY_AGAIN;
-import static seedu.duke.Messages.MESSAGE_INVALID_CONTACT_NUMBER;
-import static seedu.duke.Messages.MESSAGE_INVALID_EMAIL;
-import static seedu.duke.Messages.MESSAGE_INVALID_BUDGET_FORMAT;
+import static seedu.duke.Messages.*;
 
 public class Ui {
 
@@ -40,6 +31,11 @@ public class Ui {
         int currentListSize = clientList.getCurrentListSize();
         showToUser(MESSAGE_CLIENT_ADDED);
         showToUser("  " + clientList.getClientList().get(currentListSize - 1));
+    }
+
+    public void showClientDeletedConfirmationMessage(Client deletedClient) {
+        showToUser(MESSAGE_CLIENT_DELETED);
+        showToUser("  " + deletedClient);
     }
 
     /* Add Client Related Exceptions */
@@ -74,4 +70,7 @@ public class Ui {
     }
 
     /* Delete Client Related Exceptions */
+    public void showUndefinedSubCommandDeleteTypeMessage() {
+        showToUser(MESSAGE_MISSING_SUB_COMMAND_TYPE_FOR_DELETE);
+    }
 }

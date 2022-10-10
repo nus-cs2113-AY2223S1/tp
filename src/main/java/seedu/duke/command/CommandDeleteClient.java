@@ -15,7 +15,7 @@ public class CommandDeleteClient extends CommandDelete {
     }
 
     @Override
-    public void execute(Ui ui, Storage storage, PropertyList propertyList, ClientList clientList) {
+    public void execute(Ui ui, Storage storage, PropertyList propertyList, ClientList clientList){
         Client deletedClient = clientList.deleteClient(clientIndex);
         ui.showClientDeletedConfirmationMessage(deletedClient);
         //Update Storage

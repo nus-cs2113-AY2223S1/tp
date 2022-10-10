@@ -2,6 +2,7 @@ package seedu.duke;
 
 import seedu.duke.command.Command;
 import seedu.duke.command.CommandAddClient;
+import seedu.duke.command.CommandDeleteClient;
 import seedu.duke.command.CommandUndefined;
 
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ public class Parser {
     public Command parseCommand(String input) throws EmptyCommandAddDetailException,
             UndefinedSubCommandAddTypeException, EmptyClientDetailException, MissingClientFlagException,
             IncorrectAddClientFlagOrderException, MissingClientDetailException, InvalidContactNumberException,
-            InvalidEmailException, InvalidBudgetFormatException {
+            InvalidEmailException, InvalidBudgetFormatException, UndefinedSubCommandDeleteTypeException {
         ArrayList<String> processedCommandDetails = partitionCommandTypeAndDetails(input);
         String commandType    = processedCommandDetails.get(0);
         String commandDetails = processedCommandDetails.get(1);
@@ -32,6 +33,16 @@ public class Parser {
                 throw new UndefinedSubCommandAddTypeException();
             }
         case ("delete"):
+            checkForEmptyCommandAddDetails(commandDetails);
+            ArrayList<String> processedDeleteCommandDetails = partitionCommandTypeAndDetails(commandDetails);
+            String subDeleteCommandType = processedDeleteCommandDetails.get(0);
+            int clientIndexToDelete = getClientIndex(processedDeleteCommandDetails.get(1));
+
+            if (subDeleteCommandType.equals("-client")) {
+                return prepareForCommandDeleteClient(clientIndexToDelete);
+            } else {
+                throw new UndefinedSubCommandDeleteTypeException();
+            }
         default:
             return new CommandUndefined();
         }
@@ -214,5 +225,13 @@ public class Parser {
 
     private boolean checkForEmptyDetail(String commandDetails) {
         return commandDetails.trim().isEmpty();
+    }
+
+    private int getClientIndex(String commandDetails) {
+        return Integer.parseInt(commandDetails.trim());
+    }
+
+    private Command prepareForCommandDeleteClient(int clientIndex) {
+        return new CommandDeleteClient(clientIndex);
     }
 }

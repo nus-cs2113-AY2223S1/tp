@@ -42,7 +42,7 @@ public class ClientList {
      * @param clientIndex Index of client to be deleted.
      * @return Client deleted.
      */
-    public Client deleteClient(int clientIndex) {
+    public Client deleteClient(int clientIndex){
         Client deletedClient = clientList.get(clientIndex);
         clientList.remove(clientIndex);
         currentListSize--;

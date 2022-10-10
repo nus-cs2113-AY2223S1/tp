@@ -32,4 +32,11 @@ public class Messages {
 
     public static final String MESSAGE_INVALID_BUDGET_FORMAT = "OOPS!!! Please enter positive number "
             + "(No letter/symbols, etc) for budget";
+
+    public static final String MESSAGE_CLIENT_DELETED = "Deleting a client with the following information:";
+
+    public static final String MESSAGE_MISSING_SUB_COMMAND_TYPE_FOR_DELETE = "OOPS!!! To delete, "
+            + "please specify sub-command type.\n"
+            + "For client: add -client\n"
+            + "For property: add -property";
 }
