@@ -1,3 +1,7 @@
+package command;
+
+import appointment.AppointmentList;
+
 public abstract class Command {
 
     Command() {

@@ -1,3 +1,5 @@
+package appointment;
+
 import java.util.ArrayList;
 
 public class AppointmentList {

@@ -35,7 +35,7 @@ Example of usage:
 
 **A**: {your answer here}
 
-## Command Summary
+## command.command Summary
 
 {Give a 'cheat sheet' of commands here}
 
