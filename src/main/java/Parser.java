@@ -125,7 +125,7 @@ public class Parser {
             }
             break;
         default:
-            throw new OneDocException("Type is incorrectly formatted!" +
+            throw new OneDocException("Type is incorrectly formatted!"
                     + "Please use n/ for name, g/ for gender, and d/ for DOB");
         }
     }
