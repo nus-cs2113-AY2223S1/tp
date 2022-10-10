@@ -14,7 +14,12 @@ public class Target {
     private BigDecimal amount;
     private BigDecimal currentAmount;
 
-    public Target(String name, LocalDateTime dateTime, String description, BigDecimal amount, BigDecimal currentAmount) {
+    public Target(
+            String name,
+            LocalDateTime dateTime,
+            String description,
+            BigDecimal amount,
+            BigDecimal currentAmount) {
         this.name = name;
         this.dateTime = dateTime;
         this.description = description;

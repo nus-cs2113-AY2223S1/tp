@@ -454,14 +454,14 @@ public class ConsoleParser {
                 );
             }
             BigDecimal amount = new BigDecimal(amountStr);
-            BigDecimal current_amount = new BigDecimal(currentAmountStr);
+            BigDecimal currentAmount = new BigDecimal(currentAmountStr);
 
             return new ConsoleCommandAddTarget(
                     name,
                     dateTime,
                     description,
                     amount,
-                    current_amount);
+                    currentAmount);
         } catch (ParseException
                  | DateTimeParseException
                  | NumberFormatException
