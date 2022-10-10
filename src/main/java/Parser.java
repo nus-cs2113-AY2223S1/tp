@@ -11,9 +11,11 @@ public class Parser {
 
     private Scanner scanner;
     private PatientList patientList;
+    private VisitList visitList;
 
-    public Parser(PatientList patientList) {
+    public Parser(PatientList patientList, VisitList visitList) {
         this.patientList = patientList;
+        this.visitList = visitList;
     }
 
     public void mainMenuParser() {
@@ -64,7 +66,7 @@ public class Parser {
                 } else {
                     throw new OneDocException("Your input is incorrect! Please format it as such:"
                             + "\nTo add a patient: add i/[ID] n/[name] g/[M/F] d/[DOB]"
-                            + "\nTo edit a patient's info: edit i/[ID] (n/[name] or g/[M/F] or d/[DOB]"
+                            + "\nTo edit a patient's info: edit i/[ID] (n/[name] or g/[M/F] or d/[DOB])"
                             + "\nTo retrieve a patient's info: retrieve i/[ID]");
                 }
             } catch (OneDocException e) {
@@ -73,7 +75,34 @@ public class Parser {
                 System.out.println("Unexpected issue: " + e.getMessage());
             }
         }
+    }
 
+    public void visitParser() {
+        while (scanner.hasNext()) {
+            try {
+                String input = scanner.nextLine();
+                Matcher matcherAdd = addVisitMatcher(input);
+                Matcher matcherEdit = editVisitMatcher(input);
+                if (matcherAdd.find()) {
+                    String reason = matcherAdd.group(4);
+                    if (reason.isEmpty()) {
+                        visitList.addVisit(matcherAdd.group(1), matcherAdd.group(2), matcherAdd.group(3));
+                    } else {
+                        visitList.addVisit(matcherAdd.group(1), matcherAdd.group(2), matcherAdd.group(3), matcherAdd.group(4));
+                    }
+                } else if (matcherEdit.find()) {
+                    visitList.editReason(matcherEdit.group(1), matcherEdit.group(2));
+                } else {
+                    throw new OneDocException("Your input is incorrect! Please format it as such:"
+                            + "\nTo add a visit: add i/[ID] d/[date] t/[time] r/[reason]"
+                            + "\nTo edit a visit's reason: edit i/[ID] r/[reason]");
+                }
+            } catch (OneDocException e) {
+                System.out.println("Incorrect format: " + e.getMessage());
+            } catch (Exception e) {
+                System.out.println("Unexpected issue: " + e.getMessage());
+            }
+        }
     }
 
 
@@ -128,6 +157,19 @@ public class Parser {
             throw new OneDocException("Type is incorrectly formatted!"
                     + "Please use n/ for name, g/ for gender, and d/ for DOB");
         }
+    }
+
+    private static Matcher addVisitMatcher(String input) {
+        Pattern addVisitPattern = Pattern.compile(
+                "^add\\s*i/(\\w+)\\s*d/(\\d\\d-\\d\\d-\\d\\d\\d\\d)\\s*t/(\\d\\d:\\d\\d)\\s*"
+                        + "(?:r/((?:\\w+\\s+\\w+)+|\\w+)\\s*)*$", Pattern.CASE_INSENSITIVE);
+        return addVisitPattern.matcher(input);
+    }
+
+    private static Matcher editVisitMatcher(String input) {
+        Pattern editVisitPattern = Pattern.compile(
+                "^edit\\s*i/(\\w+)\\s*r/((?:\\w+\\s+\\w+)+|\\w+)\\s*$", Pattern.CASE_INSENSITIVE);
+        return editVisitPattern.matcher(input);
     }
 
 

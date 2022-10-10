@@ -12,7 +12,7 @@ public class OneDoc {
         patientsList = new PatientList();
         visitsList = new VisitList();
         prescriptionsList = new PrescriptionList();
-        parser = new Parser(patientsList);
+        parser = new Parser(patientsList, visitsList);
     }
 
     public static void main(String[] args) {
