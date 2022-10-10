@@ -48,7 +48,7 @@ public class Ui {
         showLine();
     }
 
-    public static final String readInput() {
+    public static String readInput() {
         return input.nextLine();
     }
 
@@ -102,7 +102,7 @@ public class Ui {
         System.out.println(message);
     }
 
-    public static final void exit() {
+    public static void exit() {
         input.close();
     }
 }

@@ -1,5 +1,7 @@
 package seedu.duke.user;
 
+import seedu.duke.exception.UserNotFoundException;
+
 import java.util.ArrayList;
 
 import java.util.logging.Level;
@@ -22,17 +24,9 @@ public class UserList {
         userList.add(toAdd);
     }
 
-    public void deleteUser(String userName) {
-        boolean isFound = false;
-        for (User user : userList) {
-            if (user.getName().equals(userName)) {
-                isFound = true;
-                userList.remove(user);
-            }
-        }
-        if (!isFound) {
-            System.out.println("cannot find user");
-        }
+    public void deleteUser(String userName) throws UserNotFoundException {
+        User user = getUserById(userName);
+        userList.remove(user);
     }
 
     public int getSize() {
@@ -43,8 +37,7 @@ public class UserList {
         return userList.get(index - 1);
     }
 
-    // find user using name
-    public User findUser(String userName) throws NullPointerException {
+    public User getUserById(String userName) throws UserNotFoundException {
         logger.log(Level.INFO, "getting user from user list");
         for (User user : userList) {
             if (user.getName().equals(userName)) {
@@ -53,8 +46,9 @@ public class UserList {
                 return user;
             }
         }
-        logger.log(Level.WARNING, "user not found error", new NullPointerException());
-        return null;
+        logger.log(Level.WARNING, "user not found error", 
+                new UserNotFoundException("This user cannot be found in the list"));
+        throw new UserNotFoundException("This user cannot be found in the list");
     }
 
     public String listUser() {
