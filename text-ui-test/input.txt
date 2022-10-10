@@ -33,6 +33,7 @@ add t/income c/bonus a/10000000 d/ i/thank_you_boss
 add t/income c/bonus a/10000000
 list
 delete 1
+delete e/1
 purge
 Y
 list

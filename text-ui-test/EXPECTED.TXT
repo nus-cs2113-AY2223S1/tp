@@ -110,111 +110,10 @@ Parameters information: -NIL-
 
 ____________________________________________________________
 ____________________________________________________________
-Gotcha! Here are the commands that you may use:
-Command Word: HELP
-To display a list of available commands with their respective expected parameters.
-Type "help o/detailed" for a detailed version of all parameters used.
-Usage: help [o/detailed]
-
-Command Word: ADD
-To add a new transaction entry, which could be either an "income" or an "expense" into the transaction list.
-Usage: add t/TYPE c/CATEGORY a/AMOUNT d/DATE i/DESCRIPTION
-
-Command Word: LIST
-To list all or some transactions based on selection.
-Usage: list [t/TYPE] [c/CATEGORY] [d/DATE]
-
-Command Word: FIND
-To find specific transaction(s) based on any keywords inputted by the user.
-Usage: find KEYWORDS
-
-Command Word: STATS
-To get statistics of the transactions such as the total savings for each category, summary of expenditure, etc.
-Usage: stats s/STATISTICS_TYPE
-
-Command Word: EDIT
-To edit a specific entry in the list of transactions.
-Usage: edit e/ENTRY [t/TYPE] [c/CATEGORY] [a/AMOUNT] [d/DATE] [i/DESCRIPTION]
-
-Command Word: DELETE
-To delete a specific entry in the list of transactions.
-Usage: delete e/ENTRY
-
-Command Word: PURGE
-To purge a all entries in the list of transactions.
-Usage: purge
-
-Command Word: BYE
-To exit the application.
-Usage: bye
-
+Not supported tag(s) detected, please check your input!
 ____________________________________________________________
 ____________________________________________________________
-Gotcha! Here are the commands that you may use:
-Command Word: HELP
-To display a list of available commands with their respective expected parameters.
-Type "help o/detailed" for a detailed version of all parameters used.
-Usage: help [o/detailed]
-Parameters information:
-(Optional) o/detailed - Detailed version of guide.
-
-Command Word: ADD
-To add a new transaction entry, which could be either an "income" or an "expense" into the transaction list.
-Usage: add t/TYPE c/CATEGORY a/AMOUNT d/DATE i/DESCRIPTION
-Parameters information:
-TYPE: The type of transaction. Only "income" or "expense" is accepted.
-CATEGORY: A category for the transaction. Only string containing alphabets is accepted.
-AMOUNT: Value of the transaction in numerical form. Only integer within 0 and 10000000 is accepted.
-DATE: Date of the transaction. The format must be in "yyyyMMdd".
-DESCRIPTION: More information regarding the transaction, written without any space.
-
-Command Word: LIST
-To list all or some transactions based on selection.
-Usage: list [t/TYPE] [c/CATEGORY] [d/DATE]
-Parameters information:
-(Optional) TYPE - The type of transaction. Only "income" or "expense" is accepted.
-(Optional) CATEGORY: A category for the transaction. Only string containing alphabets is accepted.
-(Optional) DATE: Date of the transaction. The format must be in "yyyyMMdd".
-
-Command Word: FIND
-To find specific transaction(s) based on any keywords inputted by the user.
-Usage: find KEYWORDS
-Parameters information:
-KEYWORDS: Any partial or full keyword(s) that matches the details of the transaction, such as type, category, amount, date or description.
-
-Command Word: STATS
-To get statistics of the transactions such as the total savings for each category, summary of expenditure, etc.
-Usage: stats s/STATISTICS_TYPE
-Parameters information:
-STATISTICS_TYPE: The type of statistics to be generated. Only "categories" is accepted.
-
-Command Word: EDIT
-To edit a specific entry in the list of transactions.
-Usage: edit e/ENTRY [t/TYPE] [c/CATEGORY] [a/AMOUNT] [d/DATE] [i/DESCRIPTION]
-Parameters information:
-ENTRY: The entry number of the transaction. Type "list" to list all the entry numbers of transaction.
-(Optional) TYPE: The type of transaction. Only "income" or "expense" is accepted.
-(Optional) CATEGORY: A category for the transaction. Only string containing alphabets is accepted.
-(Optional) AMOUNT: Value of the transaction in numerical form. Only integer within 0 and 10000000 is accepted.
-(Optional) DATE: Date of the transaction. The format must be in "yyyyMMdd".
-(Optional) DESCRIPTION: More information regarding the transaction, written without any space.
-
-Command Word: DELETE
-To delete a specific entry in the list of transactions.
-Usage: delete e/ENTRY
-Parameters information:
-ENTRY: The entry number of the transaction. Type "list" to list all the entry numbers of transaction.
-
-Command Word: PURGE
-To purge a all entries in the list of transactions.
-Usage: purge
-Parameters information:  -NIL-
-
-Command Word: BYE
-To exit the application.
-Usage: bye
-Parameters information: -NIL-
-
+Not supported tag(s) detected, please check your input!
 ____________________________________________________________
 ____________________________________________________________
 Mandatory tag(s) missing, please check your input!
@@ -241,7 +140,7 @@ I have added the following Expense transaction:
 [-][transport] $1 at Oct 02 2022 | Description: bus_fare
 ____________________________________________________________
 ____________________________________________________________
-Invalid tag(s) detected, please check your input!
+Not supported tag(s) detected, please check your input!
 ____________________________________________________________
 ____________________________________________________________
 Type of transaction given is invalid, please check your input!
@@ -266,7 +165,7 @@ Here are your transaction records:
 
 ____________________________________________________________
 ____________________________________________________________
-Invalid date, please ensure your date format is correct!
+Mandatory parameter(s) is empty, please check your input!
 ____________________________________________________________
 ____________________________________________________________
 Here are your transaction records:
@@ -321,7 +220,7 @@ ____________________________________________________________
 Invalid date, please ensure your date format is correct!
 ____________________________________________________________
 ____________________________________________________________
-Mandatory parameter(s) missing, please check your input!
+Mandatory parameter(s) is empty, please check your input!
 ____________________________________________________________
 ____________________________________________________________
 Mandatory tag(s) missing, please check your input!
@@ -333,6 +232,9 @@ Here are your transaction records:
 [-][transport] $1 at Oct 02 2022 | Description: bus_fare
 [+][bonus] $10000000 at Oct 03 2022 | Description: thank_you_boss
 
+____________________________________________________________
+____________________________________________________________
+Mandatory tag(s) missing, please check your input!
 ____________________________________________________________
 ____________________________________________________________
 I have deleted the following transaction:
