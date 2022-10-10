@@ -1,6 +1,5 @@
 package seedu.duke;
 
-
 import java.util.ArrayList;
 
 public class Commands {
@@ -39,5 +38,11 @@ public class Commands {
     public void clear(ArrayList<Media> reviewList) {
         reviewList.clear();
         System.out.println("Your list is now cleared.");
+    }
+
+    public void add(Media newItem) {
+        reviewList.add(newItem);
+        System.out.println("\tGot it. I've added the following item to the list:\n\t" + newItem.toString());
+        System.out.println("\n\tNow you have " + reviewList.inputs.size() + " reviews in the list.");
     }
 }
