@@ -1,1 +1,2 @@
-James Gosling
+passenger add n/Ivan Theng dod/08011998 dt/2145 fn/sq832 gn/05 bg/01 sn/17d bt/2100
+bye
