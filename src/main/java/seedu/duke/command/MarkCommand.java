@@ -29,14 +29,20 @@ public class MarkCommand extends Command {
         }
 
         String exerciseStatus = argumentList[0];
-        int exerciseIndex = Integer.parseInt(argumentList[1]) - 1;
+        int exerciseIndex;
+        try {
+            exerciseIndex = Integer.parseInt(argumentList[1]) - 1;
+
+        } catch (NumberFormatException e) {
+            throw new IllegalValueException("Index must be an integer");
+        }
 
         switch (exerciseStatus) {
         case "done":
-            if (exerciseIndex >= exerciseList.getExerciseListSize() || exerciseIndex < 0) {
+            if (exerciseIndex >= exerciseList.getCurrentExerciseListSize() || exerciseIndex < 0) {
                 throw new IllegalValueException("Exercise not found");
             }
-            Exercise exercise = exerciseList.getExercise(exerciseIndex);
+            Exercise exercise = exerciseList.getCurrentExercise(exerciseIndex);
             exerciseList.markDone(exerciseIndex);
             ui.output(String.format("%s is marked as done successfully", exercise.getExerciseName()));
             break;

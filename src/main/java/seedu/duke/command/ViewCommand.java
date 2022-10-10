@@ -57,7 +57,7 @@ public class ViewCommand extends Command {
     }
 
     private void viewExercise(String[] argumentList) throws IllegalValueException {
-        if (argumentList.length == 2 && !argumentList[1].equals("past") || argumentList.length > 2) {
+        if (argumentList.length == 2 && !argumentList[1].equals("done") || argumentList.length > 2) {
             throw new IllegalValueException("Invalid view command");
         }
         if (argumentList.length == 1) {
@@ -80,7 +80,7 @@ public class ViewCommand extends Command {
 
     private void viewCurrentExercise() {
         ui.printEmptyLine();
-        ArrayList<Exercise> exerciseArrayList = exerciseList.getExerciseList();
+        ArrayList<Exercise> exerciseArrayList = exerciseList.getCurrentExerciseList();
         Integer[] columnSpacingArray = {5, 8, 3, 8};
         ui.showCurrentExerciseCaption(exerciseArrayList.size());
         getColumnsSpacing(exerciseArrayList, columnSpacingArray);

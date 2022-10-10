@@ -47,15 +47,15 @@ public class ExerciseList {
         return completedExerciseList.size();
     }
 
-    public void markDone(int index) {
-        Exercise exercise = currentExerciseList.get(index);
+    public void markDone(int index) throws IllegalValueException {
+        Exercise exercise = getCurrentExercise(index);
         exercise.setDone(true);
         currentExerciseList.remove(index);
         completedExerciseList.add(exercise);
     }
 
-    public void markUndone(int index) {
-        Exercise exercise = completedExerciseList.get(index);
+    public void markUndone(int index) throws IllegalValueException {
+        Exercise exercise = getCompletedExercise(index);
         exercise.setDone(false);
         completedExerciseList.remove(index);
         currentExerciseList.add(exercise);

@@ -24,12 +24,12 @@ public class SetCommand extends Command {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws IllegalValueException {
         String[] argumentList = Parser.getArgumentList(arguments);
         setBiometrics(argumentList);
     }
 
-    private void setBiometrics(String[] argumentList) {
+    private void setBiometrics(String[] argumentList) throws IllegalValueException {
         try {
             if (argumentList.length != 6) {
                 throw new IllegalValueException(INVALID_BIOMETRICS);
@@ -45,9 +45,7 @@ public class SetCommand extends Command {
             biometrics.setBiometrics(age, argumentList[2], height, weight, fatPercentage);
             ui.output(BIOMETRICS_SET);
         } catch (NumberFormatException e) {
-            ui.output(INVALID_BIOMETRICS);
-        } catch (IllegalValueException e) {
-            ui.output(e.getMessage());
+            throw new IllegalValueException(INVALID_BIOMETRICS);
         }
     }
 
