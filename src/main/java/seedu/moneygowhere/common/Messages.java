@@ -50,8 +50,7 @@ public class Messages {
             + "File loaded successfully :)";
     public static final String LOCAL_STORAGE_ERROR_SAVE_DATA = ""
             + "There is an error in saving file...\n"
-            + "File does not exist or Path is wrong :("
-            + "SYNTAX: View-Expense [-i EXPENSE_NUMBER]";
+            + "File does not exist or Path is wrong :(";
     public static final String CONSOLE_MESSAGE_COMMAND_ADD_INCOME_SUCCESS = "The income was added successfully.";
     public static final String INCOME_MANAGER_ERROR_INCOME_NOT_FOUND = ""
             + "The income is not found.";
