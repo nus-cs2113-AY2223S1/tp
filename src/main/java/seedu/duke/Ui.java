@@ -17,19 +17,11 @@ import static seedu.duke.Messages.MESSAGE_INVALID_EMAIL;
 import static seedu.duke.Messages.MESSAGE_MISSING_SUB_COMMAND_TYPE_FOR_ADD;
 import static seedu.duke.Messages.MESSAGE_MISSING_SUB_COMMAND_TYPE_FOR_DELETE;
 import static seedu.duke.Messages.MESSAGE_TRY_AGAIN;
-import static seedu.duke.Messages.MESSAGE_CLIENT_INPUT_EXAMPLE;
-import static seedu.duke.Messages.MESSAGE_EMPTY_ADD_DESCRIPTION;
-import static seedu.duke.Messages.MESSAGE_EMPTY_CLIENT_DESCRIPTION;
 import static seedu.duke.Messages.MESSAGE_EMPTY_COMMAND_PAIR_UNPAIR;
-import static seedu.duke.Messages.MESSAGE_INVALID_BUDGET_FORMAT;
-import static seedu.duke.Messages.MESSAGE_INVALID_CONTACT_NUMBER;
-import static seedu.duke.Messages.MESSAGE_INVALID_EMAIL;
-import static seedu.duke.Messages.MESSAGE_MISSING_SUB_COMMAND_TYPE_FOR_ADD;
 import static seedu.duke.Messages.MESSAGE_NOT_INTEGER;
 import static seedu.duke.Messages.MESSAGE_NOT_VALID_INDEX;
 import static seedu.duke.Messages.MESSAGE_PAIR_UNPAIR_INPUT_EXAMPLE;
 import static seedu.duke.Messages.MESSAGE_PAIR_UNPAIR_WRONG_FORMAT;
-import static seedu.duke.Messages.MESSAGE_TRY_AGAIN;
 import static seedu.duke.Messages.MESSAGE_WELCOME;
 
 public class Ui {

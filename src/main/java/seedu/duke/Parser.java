@@ -5,6 +5,10 @@ import seedu.duke.command.CommandAddClient;
 import seedu.duke.command.CommandDeleteClient;
 import seedu.duke.command.CommandPair;
 import seedu.duke.command.CommandUnpair;
+
+import seedu.duke.command.CommandPair;
+import seedu.duke.command.CommandUnpair;
+
 import seedu.duke.command.CommandUndefined;
 import seedu.duke.exception.EmptyClientDetailException;
 import seedu.duke.exception.EmptyClientIndexDeleteException;
