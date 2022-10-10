@@ -5,34 +5,10 @@ import seedu.duke.Storage;
 import seedu.duke.Ui;
 import seedu.duke.data.TransactionList;
 import seedu.duke.exception.InputTransactionInvalidDateException;
-import seedu.duke.exception.AddTransactionMissingParameterException;
+import seedu.duke.exception.EmptyParameterException;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class AddCommandTest {
-    @Test
-    public void execute_EmptyDate_ExpectedException() {
-        TransactionList transactions = new TransactionList();
-        Ui ui = new Ui();
-        Storage storage = new Storage();
-        AddCommand addCommand = new AddCommand("t/income c/bonus a/1 d/ i/thank_you_boss");
 
-        assertThrows(
-            AddTransactionMissingParameterException.class,
-            () -> addCommand.execute(transactions, ui, storage)
-        );
-    }
-
-    @Test
-    public void execute_InvalidDateFormat_ExpectedException() {
-        TransactionList transactions = new TransactionList();
-        Ui ui = new Ui();
-        Storage storage = new Storage();
-        AddCommand addCommand = new AddCommand("t/income c/bonus a/1 d/2020-01-01 i/thank_you_boss");
-
-        assertThrows(
-            InputTransactionInvalidDateException.class,
-            () -> addCommand.execute(transactions, ui, storage)
-        );
-    }
 }
