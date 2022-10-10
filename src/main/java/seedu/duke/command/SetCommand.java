@@ -5,9 +5,14 @@ import seedu.duke.exception.IllegalValueException;
 import seedu.duke.Parser;
 import seedu.duke.Ui;
 
+import java.security.Key;
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class SetCommand extends Command {
+
+    private static Logger logger = Logger.getLogger("SetCommand");
 
     private final String[] genderOptions = new String[]{"male", "female", "other"};
 
@@ -27,6 +32,7 @@ public class SetCommand extends Command {
             setBiometrics(argumentList);
         } catch (IllegalValueException e) {
             ui.output(e.getMessage());
+            logger.log(Level.WARNING, e.getMessage());
         }
     }
 
@@ -41,6 +47,7 @@ public class SetCommand extends Command {
             int weight = extractWeight(argumentList[4].trim());
             int fatPercentage = extractFatPercentage(argumentList[5].trim());
             biometrics.setBiometrics(age, gender, height, weight, fatPercentage);
+            logger.log(Level.INFO, String.format("%d %s %d %d %d", age, gender, height, weight, fatPercentage));
             ui.output("biometrics set");
         } catch (NumberFormatException e) {
             throw new IllegalValueException("Biometrics, except for gender, should be numerical");
