@@ -2,7 +2,7 @@ package seedu.duke.exception;
 
 import seedu.duke.common.ErrorMessages;
 
-public class AddTransactionInvalidDateException extends MoolahException {
+public class InputTransactionInvalidDateException extends MoolahException {
 
     /**
      * Returns the error message of the exception to alert user of the exception.
@@ -11,6 +11,6 @@ public class AddTransactionInvalidDateException extends MoolahException {
      */
     @Override
     public String getMessage() {
-        return ErrorMessages.ERROR_ADD_COMMAND_INVALID_DATE.toString();
+        return ErrorMessages.ERROR_INPUT_INVALID_DATE.toString();
     }
 }
