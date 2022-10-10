@@ -17,9 +17,9 @@ import java.util.regex.Pattern;
 
 import static seedu.duke.common.InfoMessages.INFO_ADD_EXPENSE;
 import static seedu.duke.common.InfoMessages.INFO_ADD_INCOME;
-import static seedu.duke.common.Utilities.checkExtraTagExist;
-import static seedu.duke.common.Utilities.parseCategoryTag;
-import static seedu.duke.common.Utilities.parseDateTag;
+import static seedu.duke.parser.ParameterParser.checkExtraTagExist;
+import static seedu.duke.parser.ParameterParser.parseCategoryTag;
+import static seedu.duke.parser.ParameterParser.parseDateTag;
 
 /**
  * Represents an add command object that will execute the operations for Add command.

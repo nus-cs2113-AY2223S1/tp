@@ -11,10 +11,10 @@ import java.time.LocalDate;
 
 import static seedu.duke.common.InfoMessages.INFO_LIST;
 import static seedu.duke.common.InfoMessages.INFO_LIST_EMPTY;
-import static seedu.duke.common.Utilities.checkExtraTagExist;
-import static seedu.duke.common.Utilities.parseCategoryTag;
-import static seedu.duke.common.Utilities.parseDateTag;
-import static seedu.duke.common.Utilities.parseTypeTag;
+import static seedu.duke.parser.ParameterParser.checkExtraTagExist;
+import static seedu.duke.parser.ParameterParser.parseCategoryTag;
+import static seedu.duke.parser.ParameterParser.parseDateTag;
+import static seedu.duke.parser.ParameterParser.parseTypeTag;
 
 /**
  * Represents a list command object that will execute the operations for List command.

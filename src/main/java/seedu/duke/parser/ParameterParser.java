@@ -1,9 +1,7 @@
-package seedu.duke.common;
+package seedu.duke.parser;
 
-import seedu.duke.exception.InputTransactionUnknownTypeException;
-import seedu.duke.exception.InputTransactionExtraTagException;
-import seedu.duke.exception.InputTransactionInvalidCategoryException;
-import seedu.duke.exception.InputTransactionInvalidDateException;
+import seedu.duke.command.Command;
+import seedu.duke.exception.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -16,26 +14,22 @@ import static seedu.duke.common.DateFormats.DATE_INPUT_PATTERN;
 /**
  * Provides a set of extra utilities for processing of different inputs in various commands.
  */
-public class Utilities {
-    private static final String EMPTY_STRING = "";
-    private static final String DELIMITER = " ";
+public class ParameterParser {
     private static final String CLASS_TYPE_EXPENSE = "seedu.duke.data.transaction.Expense";
     private static final String CLASS_TYPE_INCOME = "seedu.duke.data.transaction.Income";
-    private static final int SPLIT_POSITION = 2;
 
     /**
-     * Splits the user input into two parts, i.e. the command and the description.
+     * To parse the parameters input into proper parameters of the command object
      *
-     * @param inData A line of input entered by the user.
-     * @return A string array of input tokens.
+     * @param command A command object created based on the command word given by user.
+     * @throws MoolahException Any command input exceptions captured by Moolah Manager.
      */
-    public static String[] splitInput(String inData) {
-        String[] inputTokens = inData.split(DELIMITER, SPLIT_POSITION);
-        if (!inData.contains(DELIMITER)) {
-            inputTokens = new String[]{inData, EMPTY_STRING};
-        }
-        return inputTokens;
+    public static void parse(Command command, String parametersInput) throws MoolahException {
+        assert command != null;
+
+
     }
+
 
     /**
      * Checks if there are extra tag(s) within the user input.
