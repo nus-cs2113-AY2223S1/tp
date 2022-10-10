@@ -46,7 +46,8 @@ public class FlightManager {
             String terminal = extractDetail(input, TERMINAL_DELIMITER, CHECK_IN_ROW_DELIMITER);
             String checkInRowAndDoor = extractDetail(input, CHECK_IN_ROW_DELIMITER, END_OF_INPUT);
 
-            Flight flight = new Flight(flightNum, airline, destination, departureTime, gateNum, terminal, checkInRowAndDoor);
+            Flight flight = new Flight(flightNum, airline, destination,
+                    departureTime, gateNum, terminal, checkInRowAndDoor);
             flightList.add(flightIndex, flight);
             flightIndex++;
             ui.showFlightAddedMessage();
