@@ -296,7 +296,7 @@ public class ConsoleInterface {
         expenseManager.updateExpenses(expenses);
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_SORTED_EXPENSE_SUCCESS);
     }
-  
+
     private void runCommandAddTarget(ConsoleCommandAddTarget consoleCommandAddTarget) {
         Target target = new Target(
                 consoleCommandAddTarget.getName(),
@@ -323,7 +323,7 @@ public class ConsoleInterface {
          TODO Add saveToFile for Target
          saveToFile(targetManager.getTargets());
         */
-    }  
+    }
 
     private void runCommandAddIncome(ConsoleCommandAddIncome consoleCommandAddIncome) {
         Income income = new Income(
@@ -376,7 +376,7 @@ public class ConsoleInterface {
                      | ConsoleParserCommandDeleteExpenseInvalidException
                      | ConsoleParserCommandEditExpenseInvalidException
                      | ConsoleParserCommandSortExpenseInvalidTypeException
-                     | ConsoleParserCommandAddTargetInvalidException exception
+                     | ConsoleParserCommandAddTargetInvalidException
                      | ConsoleParserCommandAddIncomeInvalidException exception) {
                 printErrorMessage(exception.getMessage());
             }
