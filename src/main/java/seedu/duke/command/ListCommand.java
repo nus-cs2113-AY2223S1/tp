@@ -45,6 +45,9 @@ public class ListCommand extends Command {
             + LINE_SEPARATOR;
 
     private static final int TAG_LIMIT = 3;
+    private static final int MINIMUM_TAG_LENGTH = 2;
+    private static final String CLASS_TYPE_EXPENSE = "seedu.duke.data.transaction.Expense";
+    private static final String CLASS_TYPE_INCOME = "seedu.duke.data.transaction.Income";
 
     private String input;
 
@@ -79,14 +82,17 @@ public class ListCommand extends Command {
 
         for (String split : splits) {
             // Throws exception if the tag cannot split
-            if (split.length() < 2) {
+            if (split.length() < MINIMUM_TAG_LENGTH) {
                 throw new InputTransactionInvalidTagException();
             }
+            assert split.length() >= MINIMUM_TAG_LENGTH;
+
             String tag = split.substring(0, 2);
             String parameter = split.substring(2);
             switch (tag) {
             case "t/":
                 type = parseTypeTag(parameter);
+                assert type.equals(CLASS_TYPE_EXPENSE) || type.equals(CLASS_TYPE_INCOME);
                 break;
             case "c/":
                 category = parseCategoryTag(parameter);
@@ -120,6 +126,7 @@ public class ListCommand extends Command {
             Ui.showInfoMessage(INFO_LIST_EMPTY.toString());
             return;
         }
+        assert !transactionsList.isEmpty();
         Ui.showTransactionsList(transactionsList, INFO_LIST.toString());
     }
 
