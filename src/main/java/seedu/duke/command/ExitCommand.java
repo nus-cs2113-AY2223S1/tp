@@ -2,8 +2,8 @@ package seedu.duke.command;
 
 import seedu.duke.Biometrics;
 import seedu.duke.Duke;
-import seedu.duke.ExerciseList;
 import seedu.duke.Ui;
+import seedu.duke.exercise.ExerciseList;
 
 public class ExitCommand extends Command {
     private Ui ui;

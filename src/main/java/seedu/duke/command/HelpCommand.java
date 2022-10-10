@@ -1,8 +1,8 @@
 package seedu.duke.command;
 
 import seedu.duke.Biometrics;
-import seedu.duke.ExerciseList;
 import seedu.duke.Ui;
+import seedu.duke.exercise.ExerciseList;
 
 public class HelpCommand extends Command {
 

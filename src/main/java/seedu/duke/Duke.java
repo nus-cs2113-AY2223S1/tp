@@ -3,6 +3,7 @@ package seedu.duke;
 import seedu.duke.command.Command;
 import seedu.duke.command.GreetCommand;
 import seedu.duke.exception.IllegalValueException;
+import seedu.duke.exercise.ExerciseList;
 
 public class Duke {
     /**

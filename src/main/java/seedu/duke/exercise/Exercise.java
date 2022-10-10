@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.duke.exercise;
 
 public class Exercise {
     private String exerciseName;

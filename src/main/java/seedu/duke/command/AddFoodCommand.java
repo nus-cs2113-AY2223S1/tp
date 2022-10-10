@@ -1,10 +1,10 @@
 package seedu.duke.command;
 
 import seedu.duke.Biometrics;
-import seedu.duke.ExerciseList;
 import seedu.duke.Food;
 import seedu.duke.Ui;
 import seedu.duke.exception.IllegalValueException;
+import seedu.duke.exercise.ExerciseList;
 
 import java.util.ArrayList;
 
