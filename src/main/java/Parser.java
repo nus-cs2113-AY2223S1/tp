@@ -77,7 +77,7 @@ public class Parser {
     }
 
 
-    /** REGEX PATTERNS */
+    /* REGEX PATTERNS */
     private static Matcher patientAddMatcher(String input) {
         Pattern patientAddPattern = Pattern.compile(
                 "^add\\s*n/(\\w+\\s*\\w+|\\w+)\\s*g/(M|F)\\s*d/(\\d\\d-\\d\\d-\\d\\d\\d\\d)\\s*i/(\\w+)\\s*$",
