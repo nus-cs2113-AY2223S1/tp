@@ -1,6 +1,8 @@
 package seedu.duke.command;
 
 import java.time.LocalDate;
+
+import seedu.duke.Ui;
 import seedu.duke.exception.InsufficientArgumentsException;
 import seedu.duke.transaction.Transaction;
 import seedu.duke.transaction.TransactionList;
@@ -22,7 +24,9 @@ public class AddTransactionCommand extends Command {
         String itemId = this.args[0];
         String borrowId = this.args[1];
         int duration = Integer.parseInt(this.args[2]);
-        this.txList.add(new Transaction(itemId, borrowId, duration, LocalDate.now().toString()));
+        Transaction transaction = new Transaction(itemId, borrowId, duration, LocalDate.now().toString());
+        this.txList.add(transaction);
+        Ui.addTransactionMessage(transaction, txList.getSize());
         return false;
     }
 }

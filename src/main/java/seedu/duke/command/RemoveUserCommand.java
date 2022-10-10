@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
+import seedu.duke.Ui;
 import seedu.duke.exception.InsufficientArgumentsException;
 import seedu.duke.user.UserList;
 
@@ -19,6 +20,7 @@ public class RemoveUserCommand extends Command {
     public boolean executeCommand() {
         String userId = args[0];
         this.userList.deleteUser(userId);
+        Ui.deleteUserMessage(userList.getUserById(userId), userList.getSize());
         return false;
     }
 }

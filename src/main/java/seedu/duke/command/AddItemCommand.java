@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
+import seedu.duke.Ui;
 import seedu.duke.exception.InsufficientArgumentsException;
 import seedu.duke.item.Item;
 import seedu.duke.item.ItemList;
@@ -22,8 +23,9 @@ public class AddItemCommand extends Command {
         int categoryNumber = Integer.parseInt(this.args[1]);
         double price = Double.parseDouble(this.args[2]);
         String ownerId = this.args[3];
-        this.itemList.addItem(new Item(name, categoryNumber, price, ownerId));
-        System.out.println(this.itemList.getListSize());
+        Item item = new Item(name, categoryNumber, price, ownerId);
+        this.itemList.addItem(item);
+        Ui.addItemMessage(item, itemList.getListSize());
         return false;
     }
 }

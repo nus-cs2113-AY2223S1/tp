@@ -26,7 +26,6 @@ public class ItemList {
     public void addItem(Item item) {
         itemList.add(item);
         assert itemList.size() != 0  : "item not added!";
-        ui.addItemMessage(item, itemList);
     }
 
     public void getItemOfAnUser(String userId) {
@@ -58,7 +57,6 @@ public class ItemList {
             if (itemId.equals(item.getItemId())) {
                 found = true;
                 itemList.remove(item);
-                ui.deleteItemMessage(item, itemList);
             }
         }
         if (!found) {

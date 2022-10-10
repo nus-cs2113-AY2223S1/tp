@@ -36,7 +36,6 @@ public class TransactionList {
     public void deleteTransaction(String transactionId) throws DukeException {
         Transaction transaction = getTransactionById(transactionId);
         transactionList.remove(transaction);
-        ui.deleteTransactionMessage(transaction, transactionList);
     }
 
     public Transaction getTransactionById(String transactionId) throws DukeException {

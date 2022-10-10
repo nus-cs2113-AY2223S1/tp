@@ -1,5 +1,7 @@
 package seedu.duke.user;
 
+import seedu.duke.item.Item;
+
 import java.util.ArrayList;
 
 import java.util.logging.Level;
@@ -42,7 +44,14 @@ public class UserList {
     public User getUser(int index) {
         return userList.get(index - 1);
     }
-
+    public User getUserById(String id) {
+        for (User user : this.userList) {
+            if (id.equals(user.getUserId())) {
+                return user;
+            }
+        }
+        return null;
+    }
     // find user using name
     public User findUser(String userName) throws NullPointerException {
         logger.log(Level.INFO, "getting user from user list");

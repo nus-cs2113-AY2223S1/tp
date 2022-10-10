@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
+import seedu.duke.Ui;
 import seedu.duke.exception.DukeException;
 import seedu.duke.exception.InsufficientArgumentsException;
 import seedu.duke.transaction.Transaction;
@@ -21,6 +22,7 @@ public class RemoveTransactionCommand extends Command {
     public boolean executeCommand() throws DukeException {
         String txId = args[0];
         this.txList.deleteTransaction(txId);
+        Ui.deleteTransactionMessage(txList.getTransactionById(txId), txList.getSize());
         return false;
     }
 }

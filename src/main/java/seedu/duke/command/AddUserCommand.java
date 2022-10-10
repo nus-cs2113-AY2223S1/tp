@@ -3,6 +3,7 @@ package seedu.duke.command;
 import seedu.duke.exception.InsufficientArgumentsException;
 import seedu.duke.user.User;
 import seedu.duke.user.UserList;
+import seedu.duke.Ui;
 
 public class AddUserCommand extends Command {
     private final String[] args;
@@ -21,6 +22,7 @@ public class AddUserCommand extends Command {
         int age = Integer.parseInt(this.args[1]);
         String contactNumber = this.args[2];
         this.userList.addUser(new User(name, age, contactNumber));
+        Ui.addUserMessage(new User(name, age, contactNumber), userList.getSize());
         return false;
     }
 }
