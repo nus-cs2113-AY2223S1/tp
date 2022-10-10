@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 class SetCommandTest {
 
     @Test
-    void execute_ValidSetArguments_UpdatedBiometrics() throws IllegalValueException {
+    void execute_validSetArguments_updatedBiometrics() throws IllegalValueException {
         Biometrics biometrics = new Biometrics();
         Ui ui = new Ui();
         ExerciseList exerciseList = new ExerciseList();
@@ -37,7 +37,7 @@ class SetCommandTest {
     }
 
     @Test
-    void execute_NegativeInt_exceptionThrown() {
+    void execute_negativeInt_exceptionThrown() {
         Biometrics biometrics = new Biometrics();
         Ui ui = new Ui();
         ExerciseList exerciseList = new ExerciseList();
@@ -62,7 +62,7 @@ class SetCommandTest {
     }
 
     @Test
-    void execute_InvalidGender_UnchangedBiometrics() {
+    void execute_invalidGender_unchangedBiometrics() {
         Biometrics biometrics = new Biometrics();
         Ui ui = new Ui();
         ExerciseList exerciseList = new ExerciseList();

@@ -42,7 +42,7 @@ public class SetCommand extends Command {
 
     private void setBiometrics(String[] argumentList) throws IllegalValueException {
         try {
-            if (argumentList.length < 5) {
+            if (argumentList.length < 6) {
                 throw new IllegalValueException("Insufficient parameters");
             }
             int age = extractAge(argumentList[1]);
