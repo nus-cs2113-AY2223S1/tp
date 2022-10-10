@@ -5,6 +5,7 @@ import seedu.duke.command.CommandBye;
 import seedu.duke.exception.EmptyClientDetailException;
 import seedu.duke.exception.EmptyCommandAddDetailException;
 import seedu.duke.exception.EmptyCommandPairUnpairDetailsException;
+import seedu.duke.exception.ExistingPairException;
 import seedu.duke.exception.IncorrectAddClientFlagOrderException;
 import seedu.duke.exception.IncorrectPairUnpairFlagOrderException;
 import seedu.duke.exception.InvalidBudgetFormatException;
@@ -13,6 +14,7 @@ import seedu.duke.exception.InvalidEmailException;
 import seedu.duke.exception.MissingClientDetailException;
 import seedu.duke.exception.MissingClientFlagException;
 import seedu.duke.exception.MissingPairUnpairFlagException;
+import seedu.duke.exception.NoExistingPairException;
 import seedu.duke.exception.NotIntegerException;
 import seedu.duke.exception.NotValidIndexException;
 import seedu.duke.exception.UndefinedSubCommandAddTypeException;
@@ -33,7 +35,7 @@ public class Duke {
         this.storage = new Storage();
         this.propertyList = new PropertyList();
         this.clientList = new ClientList();
-        this.parser = new Parser(clientList, propertyList);
+        this.parser = new Parser(clientList, propertyList, pairingList);
         this.pairingList = new PairingList();
 
         Command command;
@@ -71,6 +73,10 @@ public class Duke {
                 ui.showNotValidIndexMessage();
             } catch (NotIntegerException e) {
                 ui.showNotIntegerMessage();
+            } catch (ExistingPairException e) {
+                ui.showExistingPairMessage();
+            } catch (NoExistingPairException e) {
+                ui.showNoExistingPairMessage();
             }
         } while (!isCommandBye);
     }
