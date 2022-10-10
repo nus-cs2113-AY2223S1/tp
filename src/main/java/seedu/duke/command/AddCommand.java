@@ -6,7 +6,6 @@ import seedu.duke.Ui;
 import seedu.duke.data.TransactionList;
 import seedu.duke.exception.MoolahException;
 import seedu.duke.exception.AddTransactionInvalidAmountException;
-import seedu.duke.exception.AddTransactionMissingParameterException;
 import seedu.duke.exception.AddTransactionMissingTagException;
 import seedu.duke.exception.InputTransactionInvalidTagException;
 import seedu.duke.exception.InputTransactionUnknownTypeException;
@@ -18,8 +17,10 @@ import java.util.regex.Pattern;
 import static seedu.duke.common.InfoMessages.INFO_ADD_EXPENSE;
 import static seedu.duke.common.InfoMessages.INFO_ADD_INCOME;
 import static seedu.duke.common.Utilities.checkExtraTagExist;
-import static seedu.duke.common.Utilities.parseCategoryTag;
+import static seedu.duke.common.Utilities.checkParameterExist;
 import static seedu.duke.common.Utilities.parseDateTag;
+import static seedu.duke.common.Utilities.parseCategoryTag;
+
 
 /**
  * Represents an add command object that will execute the operations for Add command.
@@ -81,6 +82,11 @@ public class AddCommand extends Command {
         // Throws exception if there are no parameters
         checkParameterExist(splits);
 
+        assert (splits.length == TAG_LIMIT) : "Number of split inputs must equal 5.";
+        // At this stage, the number of split inputs will be == 5 as all the 5 tags must exist
+        // Any additional tags would throw an exception before this assertion
+
+
         String description = "";
         int amount = 0;
         String category = "";
@@ -137,20 +143,7 @@ public class AddCommand extends Command {
         }
     }
 
-    /**
-     * Checks if there are missing parameter within the user input.
-     * If the split.length() is <= 2, it means that only the tag exists , and there is no parameter after the tag.
-     *
-     * @param splits The user input after the command word, split into a list for every space found.
-     * @throws AddTransactionMissingParameterException Extra tag exception.
-     */
-    private static void checkParameterExist(String[] splits) throws AddTransactionMissingParameterException {
-        for (String split : splits) {
-            if (split.length() <= 2) {
-                throw new AddTransactionMissingParameterException();
-            }
-        }
-    }
+
 
     /**
      * Checks if the targeted tags exists in the split user inputs.

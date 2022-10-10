@@ -1,9 +1,10 @@
 package seedu.duke.common;
 
-import seedu.duke.exception.InputTransactionUnknownTypeException;
 import seedu.duke.exception.InputTransactionExtraTagException;
-import seedu.duke.exception.InputTransactionInvalidCategoryException;
 import seedu.duke.exception.InputTransactionInvalidDateException;
+import seedu.duke.exception.InputTransactionInvalidCategoryException;
+import seedu.duke.exception.InputTransactionUnknownTypeException;
+import seedu.duke.exception.InputMissingParameterException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -50,6 +51,22 @@ public class Utilities {
         }
         if (countNumberOfTags > tagLimit) {
             throw new InputTransactionExtraTagException();
+        }
+    }
+
+
+    /**
+     * Checks if there are missing parameter within the user input.
+     * If the split.length() is <= 2, it means that only the tag exists , and there is no parameter after the tag.
+     *
+     * @param splits The user input after the command word, split into a list for every space found.
+     * @throws InputMissingParameterException Extra tag exception.
+     */
+    public static void checkParameterExist(String[] splits) throws InputMissingParameterException {
+        for (String split : splits) {
+            if (split.length() <= 2) {
+                throw new InputMissingParameterException();
+            }
         }
     }
 
