@@ -10,5 +10,8 @@ Hello from
 
 Passenger IVAN THENG of SQ832 17D has been added.
 
+Flight added!
+FLIGHT SQ324 NOT FOUND.
+FLIGHT SQ712 HAS BEEN DELETED.
 Thank you, come again! :)
 
