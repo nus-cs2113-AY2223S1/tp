@@ -55,7 +55,8 @@ class PrescriptionListTest {
         prescriptionsList.add("S123456G", "Ventolin", "4 mg", 6);
         prescriptionsList.viewAll();
 
-        String expectedOutput = "ID: S123456G" + System.lineSeparator()
+        String expectedOutput = "Prescription 1" + System.lineSeparator()
+                + "ID: S123456G" + System.lineSeparator()
                 + "Medicine: Ventolin" + System.lineSeparator()
                 + "Dosage: 4 mg" + System.lineSeparator()
                 + "Time Interval: once every 6 hours" + System.lineSeparator()
@@ -72,24 +73,72 @@ class PrescriptionListTest {
         prescriptionsList.add("K323232J", "Hydrocodone-Acetaminophen", "1 capsule", 6);
         prescriptionsList.viewAll();
 
-        String expectedOutput = "ID: S123456G" + System.lineSeparator()
+        String expectedOutput = "Prescription 1" + System.lineSeparator()
+                + "ID: S123456G" + System.lineSeparator()
                 + "Medicine: Ventolin" + System.lineSeparator()
                 + "Dosage: 4 mg" + System.lineSeparator()
                 + "Time Interval: once every 6 hours" + System.lineSeparator()
                 + "Status: Active" + System.lineSeparator()
                 + System.lineSeparator()
+                + "Prescription 2" + System.lineSeparator()
                 + "ID: S987655G" + System.lineSeparator()
                 + "Medicine: Losartan Potassium" + System.lineSeparator()
                 + "Dosage: 50 mg" + System.lineSeparator()
                 + "Time Interval: once every 24 hours" + System.lineSeparator()
                 + "Status: Inactive" + System.lineSeparator()
                 + System.lineSeparator()
+                + "Prescription 3" + System.lineSeparator()
                 + "ID: K323232J" + System.lineSeparator()
                 + "Medicine: Hydrocodone-Acetaminophen" + System.lineSeparator()
                 + "Dosage: 1 capsule" + System.lineSeparator()
                 + "Time Interval: once every 6 hours" + System.lineSeparator()
                 + "Status: Active"
                 ;
+
+        assertEquals(expectedOutput, OUTPUT_STREAM.toString().trim());
+    }
+
+    @Test
+    void edit_editAllDetails_allDetailsUpdated() {
+        PrescriptionList prescriptionsList = new PrescriptionList();
+        prescriptionsList.add("S123456G", "Ventolin", "4 mg", 6);
+        prescriptionsList.edit(1, "Losartan Potassium", "50 mg", 4);
+
+        String expectedOutput = "The prescription's details has been modified! Here are the new prescription details!"
+                + System.lineSeparator()
+                + "ID: S123456G" + System.lineSeparator()
+                + "Medicine: Losartan Potassium" + System.lineSeparator()
+                + "Dosage: 50 mg" + System.lineSeparator()
+                + "Time Interval: once every 4 hours" + System.lineSeparator()
+                + "Status: Active";
+
+        assertEquals(expectedOutput, OUTPUT_STREAM.toString().trim());
+    }
+
+    @Test
+    void edit_editSomeDetails_someDetailsUpdated() {
+        PrescriptionList prescriptionsList = new PrescriptionList();
+        prescriptionsList.add("S123456G", "Ventolin", "4 mg", 6);
+        prescriptionsList.edit(1, "", "50 mg", Utils.NULL_INT);
+
+        String expectedOutput = "The prescription's details has been modified! Here are the new prescription details!"
+                + System.lineSeparator()
+                + "ID: S123456G" + System.lineSeparator()
+                + "Medicine: Ventolin" + System.lineSeparator()
+                + "Dosage: 50 mg" + System.lineSeparator()
+                + "Time Interval: once every 6 hours" + System.lineSeparator()
+                + "Status: Active";
+
+        assertEquals(expectedOutput, OUTPUT_STREAM.toString().trim());
+    }
+
+    @Test
+    void edit_indexOutOfRange_printErrorMessage() {
+        PrescriptionList prescriptionsList = new PrescriptionList();
+        prescriptionsList.add("S123456G", "Ventolin", "4 mg", 6);
+        prescriptionsList.edit(3, "", "50 mg", Utils.NULL_INT);
+
+        String expectedOutput = "The index number is out of range. Try again.";
 
         assertEquals(expectedOutput, OUTPUT_STREAM.toString().trim());
     }

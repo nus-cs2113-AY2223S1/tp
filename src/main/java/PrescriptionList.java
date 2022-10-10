@@ -23,13 +23,40 @@ public class PrescriptionList {
 
     public void viewAll() {
         if (isEmpty()) {
-            System.out.println(Messages.noPrescriptionMessage);
+            System.out.println(Messages.NO_PRESCRIPTION_MESSAGE);
             return;
         }
 
-        for (Prescription prescription : prescriptionsList) {
-            System.out.println(prescription);
+        for (int i = 0; i < prescriptionsList.size(); i++) {
+            System.out.println("Prescription " + (i + 1));
+            System.out.println(prescriptionsList.get(i));
             System.out.println();
         }
+    }
+
+    public void edit(int prescriptionNumber, String medicine, String dosage, int timeInterval) {
+        if (prescriptionNumber < 1 || prescriptionNumber > prescriptionsList.size()) {
+            System.out.println(Messages.INDEX_OUT_OF_RANGE_MESSAGE);
+            return;
+        }
+
+        int index = prescriptionNumber - 1;
+
+        Prescription prescriptionEdited = prescriptionsList.get(index);
+
+        if (!medicine.isEmpty()) {
+            prescriptionEdited.setMedicine(medicine);
+        }
+
+        if (!dosage.isEmpty()) {
+            prescriptionEdited.setDosage(dosage);
+        }
+
+        if (timeInterval != Utils.NULL_INT) {
+            prescriptionEdited.setTimeInterval(timeInterval);
+        }
+
+        System.out.println(Messages.PRESCRIPTION_MODIFIED_MESSAGE);
+        System.out.println(prescriptionEdited);
     }
 }
