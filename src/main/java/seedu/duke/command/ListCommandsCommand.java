@@ -12,9 +12,9 @@ public class ListCommandsCommand extends Command {
     private static final String COMMAND_VIEW_USER = "view-user";
     private static final String COMMAND_VIEW_ITEM = "view-item";
     private static final String COMMAND_VIEW_TX = "view-tx";
-    private static final String COMMAND_ADD_USER = "add-user";
-    private static final String COMMAND_ADD_ITEM = "add-item";
-    private static final String COMMAND_ADD_TX = "add-tx";
+    private static final String COMMAND_ADD_USER = "add-user /n <name> /a <age> /c <contactNumber>";
+    private static final String COMMAND_ADD_ITEM = "add-item /n <name> /c <categoryNumber> /p <price>";
+    private static final String COMMAND_ADD_TX = "add-tx /i <itemName> /b <borrowerName> /d <duration> /c <createdAt>";
     private static final String COMMAND_REMOVE_USER = "remove-user";
     private static final String COMMAND_REMOVE_ITEM = "remove-item";
     private static final String COMMAND_REMOVE_TX = "remove-tx";
@@ -26,7 +26,8 @@ public class ListCommandsCommand extends Command {
             Map.entry("View a user", COMMAND_VIEW_USER),
             Map.entry("View a item", COMMAND_VIEW_ITEM),
             Map.entry("View a transaction", COMMAND_VIEW_TX),
-            Map.entry("Add a user", COMMAND_ADD_USER), Map.entry("Add a item", COMMAND_ADD_ITEM),
+            Map.entry("Add a user", COMMAND_ADD_USER),
+            Map.entry("Add a item", COMMAND_ADD_ITEM),
             Map.entry("Add a transaction", COMMAND_ADD_TX),
             Map.entry("Remove a user", COMMAND_REMOVE_USER),
             Map.entry("Remove a item", COMMAND_REMOVE_ITEM),
