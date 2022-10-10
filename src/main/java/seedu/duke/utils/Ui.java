@@ -6,6 +6,11 @@ import java.util.Scanner;
 //@author CheahHaoYi-reused
 //Reused from CheahHaoYi/ip Ui class with slight modification
 
+/**
+ * The User Interface class that deals with interaction with user.
+ * To read input from the terminal and to display responses to the user
+ * Serves as the intermediaries between the user and the internal working of the programme (View in MVC model)
+ */
 public class Ui {
 
     private static final String LOGO = "                      \n"
@@ -16,7 +21,7 @@ public class Ui {
 
 
     private static final String MESSAGE_GREET = "Hello from" + System.lineSeparator()
-            + LOGO + System.lineSeparator() + "What is your name?";
+            + LOGO + System.lineSeparator() + "How can I help you today?";
     private static final String MESSAGE_BYE = "Bye bye, See you again";
     private static final String LINE_DIVIDER = "--------------------------------------";
 
