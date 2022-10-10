@@ -6,7 +6,7 @@ public class ReviewList {
     protected ArrayList<Media> inputs;
 
     public ReviewList() {
-        this.inputs = new ArrayList<>();
+        this.inputs = new ArrayList<Media>();
     }
 
     public ReviewList(ArrayList<Media> inputs) {
