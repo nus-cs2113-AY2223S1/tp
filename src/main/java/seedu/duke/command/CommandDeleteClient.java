@@ -1,7 +1,9 @@
 package seedu.duke.command;
 
+
 import seedu.duke.Client;
 import seedu.duke.ClientList;
+import seedu.duke.PairingList;
 import seedu.duke.PropertyList;
 import seedu.duke.Storage;
 import seedu.duke.Ui;
@@ -17,7 +19,8 @@ public class CommandDeleteClient extends CommandDelete {
     }
 
     @Override
-    public void execute(Ui ui, Storage storage, PropertyList propertyList, ClientList clientList) {
+    public void execute(Ui ui, Storage storage, PropertyList propertyList,
+                        ClientList clientList, PairingList pairingList) {
         Client deletedClient = clientList.deleteClient(clientIndex);
         ui.showClientDeletedConfirmationMessage(deletedClient);
         //Update Storage
