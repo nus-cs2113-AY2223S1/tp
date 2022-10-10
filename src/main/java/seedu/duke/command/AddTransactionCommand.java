@@ -3,6 +3,7 @@ package seedu.duke.command;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+import seedu.duke.Ui;
 import seedu.duke.exception.DateFormatInvalidException;
 import seedu.duke.exception.InsufficientArgumentsException;
 import seedu.duke.exception.InvalidArgumentException;

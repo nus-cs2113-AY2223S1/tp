@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
+import seedu.duke.Ui;
 import seedu.duke.exception.InsufficientArgumentsException;
 import seedu.duke.exception.InvalidArgumentException;
 import seedu.duke.exception.InvalidUserException;
@@ -66,7 +67,7 @@ public class RemoveUserCommand extends Command {
             userList.deleteUser(username);
             itemList.deleteAllItemOfAnUser(username);
         }
-        //ui.confirmDeleteUser(user, userList);
+        Ui.deleteUserMessage(user, userList.getSize());
         return false;
     }
 }

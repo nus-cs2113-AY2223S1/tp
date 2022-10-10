@@ -1,5 +1,7 @@
 package seedu.duke.command;
 
+
+import seedu.duke.Ui;
 import seedu.duke.exception.DuplicateException;
 import seedu.duke.exception.InsufficientArgumentsException;
 import seedu.duke.exception.InvalidArgumentException;
@@ -85,7 +87,6 @@ public class AddItemCommand extends Command {
     }
 
     public boolean executeCommand() throws InvalidArgumentException, UserNotFoundException, DuplicateException {
-        // String name, int categoryNumber, double price, String ownerId
         String[] args = getArgsAddItemCmd();
         if (areValidArgs(args)) {
             String name = args[0];
@@ -94,7 +95,7 @@ public class AddItemCommand extends Command {
             String ownerId = args[3];
             Item item = new Item(name, categoryNumber, price, ownerId);
             this.itemList.addItem(item);
-            //ui.confirmAddItem(item);
+            Ui.addItemMessage(item, itemList.getListSize());
         }
         return false;
     }

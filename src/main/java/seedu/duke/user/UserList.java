@@ -1,9 +1,10 @@
 package seedu.duke.user;
 
+
+import seedu.duke.item.Item;
 import seedu.duke.exception.UserNotFoundException;
 
 import java.util.ArrayList;
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
