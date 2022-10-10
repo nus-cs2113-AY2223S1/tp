@@ -7,7 +7,6 @@ import seedu.duke.exception.InvalidItemException;
 import seedu.duke.exception.ItemNotFoundException;
 import seedu.duke.item.Item;
 import seedu.duke.item.ItemList;
-import seedu.duke.item.Item;
 import seedu.duke.parser.CommandParser;
 
 public class RemoveItemCommand extends Command {

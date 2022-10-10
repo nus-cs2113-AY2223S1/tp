@@ -94,7 +94,7 @@ public class CommandParser {
     }
 
     public static Command createCommand(String input, UserList userList, ItemList itemList,
-                                        TransactionList txList)
+                                        TransactionList transactionList)
             throws CommandNotFoundException, InsufficientArgumentsException {
         String command = getCommand(input);
         String[] parts = getParts(input);
@@ -109,25 +109,25 @@ public class CommandParser {
         case COMMAND_LIST_ITEMS:
             return new ListItemsCommand(itemList);
         case COMMAND_LIST_TX:
-            return new ListTransactionsCommand(txList);
+            return new ListTransactionsCommand(transactionList);
         case COMMAND_VIEW_USER:
             return new ViewUserCommand(parts, userList);
         case COMMAND_VIEW_ITEM:
             return new ViewItemCommand(parts, itemList);
         case COMMAND_VIEW_TX:
-            return new ViewTransactionCommand(parts, txList);
+            return new ViewTransactionCommand(parts, transactionList);
         case COMMAND_ADD_USER:
             return new AddUserCommand(parts, userList);
         case COMMAND_ADD_ITEM:
             return new AddItemCommand(parts, userList, itemList);
         case COMMAND_ADD_TX:
-            return new AddTransactionCommand(parts, userList, itemList, txList);
+            return new AddTransactionCommand(parts, userList, itemList, transactionList);
         case COMMAND_REMOVE_USER:
-            return new RemoveUserCommand(parts, userList, itemList, txList);
+            return new RemoveUserCommand(parts, userList, itemList, transactionList);
         case COMMAND_REMOVE_ITEM:
             return new RemoveItemCommand(parts, itemList);
         case COMMAND_REMOVE_TX:
-            return new RemoveTransactionCommand(parts, itemList, txList);
+            return new RemoveTransactionCommand(parts, itemList, transactionList);
         default:
             throw new CommandNotFoundException("This command is unrecognizable!!!\n"
                     + "Please use list-commands command to check");

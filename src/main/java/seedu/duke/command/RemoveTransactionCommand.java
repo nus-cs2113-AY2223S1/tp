@@ -1,7 +1,6 @@
 package seedu.duke.command;
 
 import seedu.duke.Ui;
-import seedu.duke.exception.DukeException;
 import seedu.duke.exception.InsufficientArgumentsException;
 import seedu.duke.exception.InvalidArgumentException;
 import seedu.duke.exception.ItemNotFoundException;
@@ -13,14 +12,14 @@ import seedu.duke.transaction.TransactionList;
 
 public class RemoveTransactionCommand extends Command {
     private final String[] parts;
-    private final TransactionList txList;
+    private final TransactionList transactionList;
     private final ItemList itemList;
 
     public RemoveTransactionCommand(String[] parts, ItemList itemList, TransactionList txList)
             throws InsufficientArgumentsException {
         this.parts = parts;
         this.itemList = itemList;
-        this.txList = txList;
+        this.transactionList = txList;
         if (parts.length != 1) {
             throw new InsufficientArgumentsException();
         }
@@ -39,7 +38,7 @@ public class RemoveTransactionCommand extends Command {
     }
 
     private void markAvailableForItem(String transactionId) throws ItemNotFoundException, TransactionNotFoundException {
-        String itemId = txList.getTransactionById(transactionId).getItem();
+        String itemId = transactionList.getTransactionById(transactionId).getItem();
         itemList.markAvailable(itemId);
     }
 
@@ -48,9 +47,9 @@ public class RemoveTransactionCommand extends Command {
         String[] args = getArgsRemoveTxCmd();
         String txId = args[0].trim();
         markAvailableForItem(txId);
-        Transaction transaction = txList.getTransactionById(txId);
-        txList.deleteTransaction(txId);
-        Ui.deleteTransactionMessage(transaction, txList.getSize());
+        Transaction transaction = transactionList.getTransactionById(txId);
+        transactionList.deleteTransaction(txId);
+        Ui.deleteTransactionMessage(transaction, transactionList.getSize());
         return false;
     }
 }

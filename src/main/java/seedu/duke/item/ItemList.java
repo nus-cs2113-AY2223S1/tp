@@ -12,7 +12,7 @@ public class ItemList {
 
     public ItemList() { // store files from data.txt
         // this.itemList = fileItems;
-        this.itemList = new ArrayList<Item>();
+        this.itemList = new ArrayList<>();
     }
 
     /**

@@ -9,15 +9,12 @@ import seedu.duke.parser.CommandParser;
 import seedu.duke.user.UserList;
 
 public class Duke {
-    private final Ui ui;
     private final UserList userList;
     private final ItemList itemList;
     private final TransactionList transactionList;
-    private static final String COMMAND_EXIT = "bye";
     private boolean isLastCommand = false;
 
     public Duke() {
-        ui = new Ui();
         userList = new UserList();
         itemList = new ItemList();
         transactionList = new TransactionList();
