@@ -44,7 +44,9 @@ public class Income {
         this.description = description;
     }
 
-    public BigDecimal getAmount() { return amount; }
+    public BigDecimal getAmount() {
+        return amount;
+    }
 
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
