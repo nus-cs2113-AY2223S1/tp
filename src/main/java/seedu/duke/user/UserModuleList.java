@@ -1,5 +1,7 @@
 package seedu.duke.user;
 
+import seedu.duke.ui.Ui;
+
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
@@ -43,6 +45,7 @@ public class UserModuleList {
             System.out.println("Error module already added");
         } else {
             modules.add(input);
+            Ui.printModuleAddedAcknowledgement(input);
         }
     }
 
@@ -50,11 +53,7 @@ public class UserModuleList {
         if (modules.size() == 0) {
             System.out.println("No current modules saved");
         } else {
-            for (int i = 0; i < modules.size(); i++) {
-                System.out.print(i + 1);
-                System.out.print(" : ");
-                modules.get(i).printModule();
-            }
+            Ui.printModulesInList(modules);
         }
     }
 
@@ -79,8 +78,7 @@ public class UserModuleList {
             System.out.println("index not within range");
             throw new IndexOutOfBoundsException();
         } else {
-            System.out.println("Deleting module:");
-            System.out.println(modules.get(index).toString());
+            Ui.printModuleDeletedAcknowledgement(modules.get(index));
             modules.remove(index);
             System.out.println("Modules left for current school are: ");
             displayAll();
@@ -96,6 +94,7 @@ public class UserModuleList {
                     && module.getPuCode().equals(puCode)) {
                 isUpdated = true;
                 module.setComment(updates);
+                Ui.printModuleUpdatedAcknowledgement(module);
             }
         }
         if (!isUpdated) {

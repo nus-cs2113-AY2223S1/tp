@@ -1,5 +1,6 @@
 package seedu.duke.user;
 
+import seedu.duke.ui.Ui;
 import seedu.duke.userstorage.UserStorage;
 
 import java.util.HashMap;
@@ -39,6 +40,7 @@ public class UserUniversityListManager {
             UserUniversityList newList = new UserUniversityList(input);
             myManager.put(input, newList);
             logger.log(Level.FINER, "create new list for " + input);
+            Ui.printPuListCreatedAcknowledgement(input);
         }
     }
 
@@ -53,8 +55,6 @@ public class UserUniversityListManager {
             UserUniversityList universityList = set.getValue();
             System.out.println(universityName);
             universityList.displayModules();
-            System.out.println("-------------------------------------------------------------------------------------"
-                    + "------------------------------------------------------------------------------------");
         }
     }
 
@@ -67,8 +67,6 @@ public class UserUniversityListManager {
         System.out.println(input);
         UserUniversityList myUniversityList = getList(input);
         myUniversityList.displayModules();
-        System.out.println("-------------------------------------------------------------------------------------"
-                + "------------------------------------------------------------------------------------");
     }
 
     public boolean foundKey(String inputSchool) {
@@ -112,6 +110,7 @@ public class UserUniversityListManager {
         } else {
             myManager.remove(inputSchool);
             logger.log(Level.FINER, "delete list for " + inputSchool);
+            Ui.printPuListDeletedAcknowledgement(inputSchool);
         }
     }
 
