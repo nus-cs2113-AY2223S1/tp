@@ -2,16 +2,23 @@ package seedu.duke;
 
 import java.util.Scanner;
 
-import static seedu.duke.Messages.MESSAGE_CLIENT_ADDED;
-import static seedu.duke.Messages.MESSAGE_EMPTY_ADD_DESCRIPTION;
-import static seedu.duke.Messages.MESSAGE_MISSING_SUB_COMMAND_TYPE_FOR_ADD;
-import static seedu.duke.Messages.MESSAGE_EMPTY_CLIENT_DESCRIPTION;
 import static seedu.duke.Messages.MESSAGE_ADD_CLIENT_WRONG_FORMAT;
+import static seedu.duke.Messages.MESSAGE_CLIENT_ADDED;
 import static seedu.duke.Messages.MESSAGE_CLIENT_INPUT_EXAMPLE;
-import static seedu.duke.Messages.MESSAGE_TRY_AGAIN;
+import static seedu.duke.Messages.MESSAGE_EMPTY_ADD_DESCRIPTION;
+import static seedu.duke.Messages.MESSAGE_EMPTY_CLIENT_DESCRIPTION;
+import static seedu.duke.Messages.MESSAGE_EMPTY_COMMAND_PAIR_UNPAIR;
+import static seedu.duke.Messages.MESSAGE_INVALID_BUDGET_FORMAT;
 import static seedu.duke.Messages.MESSAGE_INVALID_CONTACT_NUMBER;
 import static seedu.duke.Messages.MESSAGE_INVALID_EMAIL;
-import static seedu.duke.Messages.MESSAGE_INVALID_BUDGET_FORMAT;
+import static seedu.duke.Messages.MESSAGE_MISSING_SUB_COMMAND_TYPE_FOR_ADD;
+import static seedu.duke.Messages.MESSAGE_NOT_INTEGER;
+import static seedu.duke.Messages.MESSAGE_NOT_VALID_INDEX;
+import static seedu.duke.Messages.MESSAGE_PAIR_UNPAIR_INPUT_EXAMPLE;
+import static seedu.duke.Messages.MESSAGE_PAIR_UNPAIR_WRONG_FORMAT;
+import static seedu.duke.Messages.MESSAGE_TRY_AGAIN;
+import static seedu.duke.Messages.MESSAGE_WELCOME;
+
 
 public class Ui {
 
@@ -34,6 +41,10 @@ public class Ui {
 
     public void showToUser(String message) {
         System.out.println(message);
+    }
+
+    public void showWelcomeMessage() {
+        showToUser(MESSAGE_WELCOME);
     }
 
     public void showClientAddedConfirmationMessage(ClientList clientList) {
@@ -71,5 +82,28 @@ public class Ui {
 
     public void showInvalidBudgetFormatMessage() {
         showToUser(MESSAGE_INVALID_BUDGET_FORMAT);
+    }
+
+    public void showPairedConfirmationMessage(Client client, Property property) {
+        showToUser(Messages.MESSAGE_PAIRED);
+        showToUser("  " + client.getClientName() + " and " + property.getPropertyAddress());
+    }
+
+    public void showEmptyCommandPairUnpairDetailsMessage() {
+        showToUser(MESSAGE_EMPTY_COMMAND_PAIR_UNPAIR);
+    }
+
+    public void showNotValidIndexMessage() {
+        showToUser(MESSAGE_NOT_VALID_INDEX);
+    }
+
+    public void showNotIntegerMessage() {
+        showToUser(MESSAGE_NOT_INTEGER);
+    }
+
+    public void showPairUnpairWrongFormatMessage() {
+        showToUser(MESSAGE_PAIR_UNPAIR_WRONG_FORMAT);
+        showToUser(MESSAGE_PAIR_UNPAIR_INPUT_EXAMPLE);
+        showToUser(MESSAGE_TRY_AGAIN);
     }
 }

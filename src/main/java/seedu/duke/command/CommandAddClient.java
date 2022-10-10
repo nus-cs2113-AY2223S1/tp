@@ -1,6 +1,8 @@
 package seedu.duke.command;
 
+
 import seedu.duke.ClientList;
+import seedu.duke.PairingList;
 import seedu.duke.PropertyList;
 import seedu.duke.Storage;
 import seedu.duke.Ui;
@@ -29,7 +31,8 @@ public class CommandAddClient extends CommandAdd {
     }
 
     @Override
-    public void execute(Ui ui, Storage storage, PropertyList propertyList, ClientList clientList) {
+    public void execute(Ui ui, Storage storage, PropertyList propertyList, ClientList clientList,
+                        PairingList pairingList) {
         clientList.addClient(clientName, clientContactNumber, clientEmail, clientBudgetPerMonth);
         ui.showClientAddedConfirmationMessage(clientList);
         //Update Storage
