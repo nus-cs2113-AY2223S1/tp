@@ -23,21 +23,21 @@ public class Ui {
     }
 
     /**
-     * Prints ASCII art of a car and parKING logo
+     * Prints ASCII art of a car and parKING logo.
      */
     //@@author eehongchan-reused
     //Reused from https://www.asciiart.eu/vehicles/cars and http://patorjk.com/software/taag/
     // with minor modifications
     private void showLogo() {
         System.out.println(
-                "    ____\n" +
-                " __/  |_\\_\n" +
-                "|  _     _``-.\n" +
-                "'-(_)---(_)--'   _  _____ _  _  ___ \n" +
-                "  _ __  __ _ _ _| |/ /_ _| \\| |/ __|\n" +
-                " | '_ \\/ _` | '_| ' < | || .` | (_ |\n" +
-                " | .__/\\__,_|_| |_|\\_\\___|_|\\_|\\___|\n" +
-                " |_|                                ");
+            "    ____\n"
+                + " __/  |_\\_\n"
+                + "|  _     _``-.\n"
+                + "'-(_)---(_)--'   _  _____ _  _  ___ \n"
+                + "  _ __  __ _ _ _| |/ /_ _| \\| |/ __|\n"
+                + " | '_ \\/ _` | '_| ' < | || .` | (_ |\n"
+                + " | .__/\\__,_|_| |_|\\_\\___|_|\\_|\\___|\n"
+                + " |_|                                ");
     }
     //@@author
 

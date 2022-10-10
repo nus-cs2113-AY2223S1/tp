@@ -15,11 +15,12 @@ public class Carpark {
     private String agency;
 
     /**
-     * Used to print the identifier for a carpark
+     * Used to print the identifier for a carpark.
+     *
      * @return formatted string
      */
     @Override
-    public String toString(){
+    public String toString() {
         return String.format("CarparkID %s at %s", carparkId, development);
     }
 
