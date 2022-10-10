@@ -1,5 +1,6 @@
 package seedu.duke;
 
+
 import seedu.duke.command.SetCommand;
 import seedu.duke.command.Command;
 import seedu.duke.command.GreetCommand;
@@ -10,8 +11,12 @@ import seedu.duke.command.AddFoodCommand;
 import seedu.duke.command.HelpCommand;
 import seedu.duke.command.ViewCommand;
 
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
+
+import seedu.duke.command.MarkCommand;
 
 public class Parser {
 
@@ -19,27 +24,24 @@ public class Parser {
 
     public static Command parse(String input) {
         String userCommand = input.split(" ")[0];
-        logger.log(Level.INFO, userCommand);
+        logger.log(Level.FINE, "command: " + userCommand);
         String arguments = input.substring(userCommand.length()).trim();
-        logger.log(Level.INFO, arguments);
+        logger.log(Level.FINE, "arguments:" + arguments);
         switch (userCommand) {
         case "greet":
             return new GreetCommand();
-        case "help":
-            return new HelpCommand();
         case "exit":
             return new ExitCommand();
         case "set":
             return new SetCommand(arguments);
         case "add":
-            if (arguments.split(" ")[0].equals("food")) {
-                return new AddFoodCommand(arguments);
-            } else if (arguments.split(" ")[0].equals("exercise")) {
-                return new AddExerciseCommand(arguments);
-            }
-            return new InvalidCommand();
+            return new AddExerciseCommand(arguments);
         case "view":
             return new ViewCommand(arguments);
+        case "mark":
+            return new MarkCommand(arguments);
+        case "help":
+            return new HelpCommand();
         default:
             return new InvalidCommand();
         }
@@ -47,6 +49,7 @@ public class Parser {
 
     public static String[] getArgumentList(String arguments) {
         assert (arguments != null);
-        return arguments.trim().split("/");
+        String[] argumentList = arguments.split("\\s*/\\s*");
+        return argumentList;
     }
 }

@@ -1,18 +1,18 @@
 package seedu.duke.command;
 
+
 import seedu.duke.biometrics.Biometrics;
-import seedu.duke.Exercise;
 import seedu.duke.Parser;
 import seedu.duke.Ui;
 import seedu.duke.exception.IllegalValueException;
-
-import java.util.ArrayList;
+import seedu.duke.exercise.Exercise;
+import seedu.duke.exercise.ExerciseList;
 
 public class AddExerciseCommand extends Command {
     private Ui ui;
     private String arguments;
     private Exercise exercise;
-    public static ArrayList<Exercise> exerciseList = new ArrayList<>();
+    private ExerciseList exerciseList;
 
     @Override
     public void execute() {
@@ -34,7 +34,7 @@ public class AddExerciseCommand extends Command {
             int repetitions = Integer.parseInt(argumentList[2]);
             int calories = Integer.parseInt(argumentList[3]);
             exercise = new Exercise(description, repetitions, calories);
-            exerciseList.add(exercise);
+            exerciseList.addExercise(exercise);
             ui.output(exercise.toString());
             ui.output(" This exercise is added to the exercise list successfully");
         } catch (IllegalValueException e) {
@@ -44,8 +44,9 @@ public class AddExerciseCommand extends Command {
 
 
     @Override
-    public void setData(Ui ui, Biometrics biometrics) {
+    public void setData(Ui ui, Biometrics biometrics, ExerciseList exerciseList) {
         this.ui = ui;
+        this.exerciseList = exerciseList;
     }
 }
 

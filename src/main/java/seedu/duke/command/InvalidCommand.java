@@ -2,6 +2,7 @@ package seedu.duke.command;
 
 import seedu.duke.Ui;
 import seedu.duke.biometrics.Biometrics;
+import seedu.duke.exercise.ExerciseList;
 
 public class InvalidCommand extends Command {
 
@@ -13,7 +14,7 @@ public class InvalidCommand extends Command {
     }
 
     @Override
-    public void setData(Ui ui, Biometrics biometrics) {
+    public void setData(Ui ui, Biometrics biometrics, ExerciseList exerciseList) {
         this.ui = ui;
     }
 }

@@ -1,9 +1,12 @@
 package seedu.duke.command;
 
+
 import seedu.duke.biometrics.Biometrics;
 import seedu.duke.exception.IllegalValueException;
 import seedu.duke.Parser;
 import seedu.duke.Ui;
+import seedu.duke.exception.IllegalValueException;
+import seedu.duke.exercise.ExerciseList;
 
 import java.security.Key;
 import java.util.Arrays;
@@ -11,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class SetCommand extends Command {
+
 
     private static Logger logger = Logger.getLogger("SetCommand");
 
@@ -26,13 +30,13 @@ public class SetCommand extends Command {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws IllegalValueException {
         String[] argumentList = Parser.getArgumentList(arguments);
         try {
             setBiometrics(argumentList);
         } catch (IllegalValueException e) {
             ui.output(e.getMessage());
-            logger.log(Level.WARNING, e.getMessage());
+            logger.log(Level.WARNING, "exception: " + e.getMessage());
         }
     }
 
@@ -41,13 +45,14 @@ public class SetCommand extends Command {
             if (argumentList.length < 5) {
                 throw new IllegalValueException("Insufficient parameters");
             }
-            int age = extractAge(argumentList[1].trim());
-            String gender = extractGender(argumentList[2].trim());
-            int height = extractHeight(argumentList[3].trim());
-            int weight = extractWeight(argumentList[4].trim());
-            int fatPercentage = extractFatPercentage(argumentList[5].trim());
+            int age = extractAge(argumentList[1]);
+            String gender = extractGender(argumentList[2]);
+            int height = extractHeight(argumentList[3]);
+            int weight = extractWeight(argumentList[4]);
+            int fatPercentage = extractFatPercentage(argumentList[5]);
             biometrics.setBiometrics(age, gender, height, weight, fatPercentage);
-            logger.log(Level.INFO, String.format("%d %s %d %d %d", age, gender, height, weight, fatPercentage));
+            logger.log(Level.FINE, "paramters: "
+                    + String.format("%d %s %d %d %d", age, gender, height, weight, fatPercentage));
             ui.output("biometrics set");
         } catch (NumberFormatException e) {
             throw new IllegalValueException("Biometrics, except for gender, should be numerical");
@@ -94,7 +99,7 @@ public class SetCommand extends Command {
     }
 
     @Override
-    public void setData(Ui ui, Biometrics biometrics) {
+    public void setData(Ui ui, Biometrics biometrics, ExerciseList exerciseList) {
         this.ui = ui;
         this.biometrics = biometrics;
     }
