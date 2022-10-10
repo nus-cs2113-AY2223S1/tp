@@ -50,6 +50,8 @@ public class Duke {
                 ui.showUndefinedSubCommandDeleteTypeMessage();
             } catch (InvalidClientIndexDeleteException e) {
                 ui.showInvalidClientIndexDeleteMessage();
+            } catch (EmptyClientIndexDeleteException e) {
+                ui.showEmptyClientIndexDeleteMessage();
             }
         } while (!isCommandBye);
     }

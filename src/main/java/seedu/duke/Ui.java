@@ -81,4 +81,8 @@ public class Ui {
     public void showInvalidClientIndexDeleteMessage() {
         showToUser(MESSAGE_INVALID_CLIENT_INDEX);
     }
+
+    public void showEmptyClientIndexDeleteMessage() {
+        showToUser(MESSAGE_EMPTY_CLIENT_INDEX);
+    }
 }

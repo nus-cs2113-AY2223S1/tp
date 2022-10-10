@@ -43,4 +43,6 @@ public class Messages {
     public static final String MESSAGE_EMPTY_DELETE_DESCRIPTION = "OOPS!!! The index for delete cannot be empty.";
 
     public static final String MESSAGE_INVALID_CLIENT_INDEX = "OOPS!!! Please enter a valid client index.";
+
+    public static final String MESSAGE_EMPTY_CLIENT_INDEX = "OOPS!!! The client index to delete cannot be empty.";
 }

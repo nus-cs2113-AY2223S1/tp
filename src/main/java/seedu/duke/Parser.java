@@ -17,7 +17,7 @@ public class Parser {
             UndefinedSubCommandAddTypeException, EmptyClientDetailException, MissingClientFlagException,
             IncorrectAddClientFlagOrderException, MissingClientDetailException, InvalidContactNumberException,
             InvalidEmailException, InvalidBudgetFormatException, UndefinedSubCommandDeleteTypeException,
-            EmptyCommandDeleteDetailException, InvalidClientIndexDeleteException {
+            EmptyCommandDeleteDetailException, InvalidClientIndexDeleteException, EmptyClientIndexDeleteException {
         ArrayList<String> processedCommandDetails = partitionCommandTypeAndDetails(input);
         String commandType    = processedCommandDetails.get(0);
         String commandDetails = processedCommandDetails.get(1);
@@ -235,7 +235,10 @@ public class Parser {
         return commandDetails.trim().isEmpty();
     }
 
-    private int getClientIndex(String commandDetails) {
+    private int getClientIndex(String commandDetails) throws EmptyClientIndexDeleteException {
+        if (commandDetails.isEmpty()) {
+            throw new EmptyClientIndexDeleteException();
+        }
         return Integer.parseInt(commandDetails.trim());
     }
 
