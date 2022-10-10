@@ -69,7 +69,7 @@ public class Prescription {
         return "ID: " + patientId + System.lineSeparator()
                 + "Medicine: " + medicine + System.lineSeparator()
                 + "Dosage: " + dosage + System.lineSeparator()
-                + "Time Interval: once every " + timeInterval + " hours" + System.lineSeparator()
+                + "Time Interval: " + timeInterval + System.lineSeparator()
                 + "Status: " + getStatusString();
     }
 }

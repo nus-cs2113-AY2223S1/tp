@@ -55,7 +55,7 @@ public class PrescriptionList {
             prescriptionEdited.setDosage(dosage);
         }
 
-        if (timeInterval.isEmpty()) {
+        if (!timeInterval.isEmpty()) {
             prescriptionEdited.setTimeInterval(timeInterval);
         }
 
