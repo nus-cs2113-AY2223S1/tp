@@ -1,4 +1,5 @@
 package seedu.duke.command;
+
 public abstract class Command {
     CommandType commandType;
     String universityName = null;
@@ -14,11 +15,11 @@ public abstract class Command {
         return commandType;
     }
 
-    public String getUniversityName(){
+    public String getUniversityName() {
         return universityName;
     }
 
-    public String getModuleCode(){
+    public String getModuleCode() {
         return moduleCode;
     }
 }
