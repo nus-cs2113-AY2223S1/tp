@@ -1,11 +1,10 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Appointment {
     static int id = 0;
-    static ArrayList<Appointment> appointments = new ArrayList<>();
+
     static DateTimeFormatter dataTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     public final int appointmentId;
@@ -41,14 +40,7 @@ public class Appointment {
         return "";
     }
 
-    public static void listAppointment() {
-        for (Appointment appointment : appointments) {
-            System.out.print(appointment.appointmentId + " ");
-            System.out.print(appointment.petName + " ");
-            // System.out.print(appointment.service.name + " ");
-            System.out.print(appointment.appointmentDate.format(dataTimeFormatter) + " ");
-            System.out.println(appointment.getAppointmentStatus());
-        }
+    public String getAppointmentDate() {
+        return appointmentDate.format(dataTimeFormatter);
     }
-
 }
