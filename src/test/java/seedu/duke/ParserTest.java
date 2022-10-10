@@ -28,11 +28,11 @@ public class ParserTest {
     void getArgumentList_fiveSeparators_sixArguments() {
         String userInput = "arg 1 /arg 2 /arg3 / arg4/  arg 5/arg6";
         String[] argumentList = Parser.getArgumentList(userInput);
-        assertEquals("arg 1 ", argumentList[0]);
-        assertEquals("arg 2 ", argumentList[1]);
-        assertEquals("arg3 ", argumentList[2]);
-        assertEquals(" arg4", argumentList[3]);
-        assertEquals("  arg 5", argumentList[4]);
+        assertEquals("arg 1", argumentList[0]);
+        assertEquals("arg 2", argumentList[1]);
+        assertEquals("arg3", argumentList[2]);
+        assertEquals("arg4", argumentList[3]);
+        assertEquals("arg 5", argumentList[4]);
         assertEquals("arg6", argumentList[5]);
     }
 }

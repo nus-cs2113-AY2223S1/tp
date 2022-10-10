@@ -77,7 +77,7 @@ class MarkCommandTest {
         } catch (IllegalValueException e) {
             fail();
         }
-        String[] testInputList = {"mark done 0x", "mark undone 0a"};
+        String[] testInputList = {"mark done /0x", "mark undone /0a"};
         for (String input : testInputList) {
             assertInvalidMarkCommand(input, "Index must be an integer", exerciseList);
         }
@@ -95,10 +95,10 @@ class MarkCommandTest {
         int currentExerciseListSize = exerciseList.getCurrentExerciseListSize();
         int completedExerciseListSize = exerciseList.getCompletedExerciseListSize();
         ArrayList<String> testInputList = new ArrayList<>();
-        testInputList.add("mark done -1");
-        testInputList.add("mark done " + currentExerciseListSize + 1);
-        testInputList.add("mark undone -1");
-        testInputList.add("mark undone " + completedExerciseListSize + 1);
+        testInputList.add("mark done /-1");
+        testInputList.add("mark done /" + currentExerciseListSize + 1);
+        testInputList.add("mark undone /-1");
+        testInputList.add("mark undone /" + completedExerciseListSize + 1);
         for (String input : testInputList) {
             assertInvalidMarkCommand(input, "Exercise not found", exerciseList);
         }
@@ -114,10 +114,10 @@ class MarkCommandTest {
             fail();
         }
         ArrayList<String> testInputList = new ArrayList<>();
-        testInputList.add("mark done 0 xx ");
-        testInputList.add("mark done 2 2");
-        testInputList.add("mark undone 0 xx");
-        testInputList.add("mark undone 2 2");
+        testInputList.add("mark done /0 /xx ");
+        testInputList.add("mark done /2 /2");
+        testInputList.add("mark undone /0 /xx");
+        testInputList.add("mark undone /2 /2");
         for (String input : testInputList) {
             assertInvalidMarkCommand(input, "Invalid mark command", exerciseList);
         }
@@ -142,7 +142,7 @@ class MarkCommandTest {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        String validMarkAsUndoneInput = "mark undone " + index;
+        String validMarkAsUndoneInput = "mark undone /" + index;
         Command command = Parser.parse(validMarkAsUndoneInput);
         command.setData(ui, biometrics, exerciseList);
         command.execute();
@@ -156,7 +156,7 @@ class MarkCommandTest {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        String input = "mark done " + index;
+        String input = "mark done /" + index;
         Command command = Parser.parse(input);
         command.setData(ui, biometrics, exerciseList);
         command.execute();
@@ -187,9 +187,9 @@ class MarkCommandTest {
 
     private void addExercise(ExerciseList exerciseList) throws IllegalValueException {
         ArrayList<String> commandList = new ArrayList<>();
-        commandList.add("add exercise bench 10 180");
-        commandList.add("add exercise press 8 58");
-        commandList.add("add exercise deadlift 6 120");
+        commandList.add("add exercise /bench /10 /180");
+        commandList.add("add exercise /press /8 /58");
+        commandList.add("add exercise /deadlift /6 /120");
 
         for (String input : commandList) {
             Command c = Parser.parse(input);

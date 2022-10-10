@@ -56,7 +56,7 @@ class SetCommandTest {
             c.execute();
             fail();
         } catch (IllegalValueException e) {
-            assertEquals("Invalid biometrics", e.getMessage());
+            assertEquals("That age ain't possible", e.getMessage());
         }
 
     }
@@ -81,7 +81,7 @@ class SetCommandTest {
             c.execute();
             fail();
         } catch (IllegalValueException e) {
-            assertEquals("Invalid biometrics", e.getMessage());
+            assertEquals("Hi, I only recognise other, female and male genders", e.getMessage());
         }
     }
 }

@@ -35,8 +35,8 @@ public class SetCommand extends Command {
         try {
             setBiometrics(argumentList);
         } catch (IllegalValueException e) {
-            ui.output(e.getMessage());
             logger.log(Level.WARNING, "exception: " + e.getMessage());
+            throw e;
         }
     }
 
