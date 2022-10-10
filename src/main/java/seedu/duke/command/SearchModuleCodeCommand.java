@@ -28,7 +28,6 @@ public class SearchModuleCodeCommand extends Command {
     /**
      * Filter module by module code and return a list of modules that match the search query.
      *
-     * @param toSearchModuleCode
      * @return searchResult
      */
     public static List<Module> filterModuleByCode(String toSearchModuleCode) {

@@ -128,7 +128,8 @@ public class Timetable {
         return sortedLessons;
     }
 
-    private Pair<List<Integer>, List<Integer>> computeIndentation(List<Day> days, List<Pair<Module, RawLesson>> sortedLessons) {
+    private Pair<List<Integer>, List<Integer>> computeIndentation(List<Day> days, List<Pair<Module, RawLesson>>
+            sortedLessons) {
         List<List<List<Pair<Module, RawLesson>>>> lessonStack = new ArrayList<>();
         for (int i = 0; i < days.size(); i++) {
             lessonStack.add(new ArrayList<>());

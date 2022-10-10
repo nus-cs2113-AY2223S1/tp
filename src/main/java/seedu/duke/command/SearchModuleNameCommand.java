@@ -29,7 +29,6 @@ public class SearchModuleNameCommand extends Command {
     /**
      * Filter module by module name and return a list of modules that match the search query.
      *
-     * @param searchModuleName
      * @return searchResult
      */
     public static List<Module> filterModuleByName(String searchModuleName) {
