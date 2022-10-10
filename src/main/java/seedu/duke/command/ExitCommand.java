@@ -3,6 +3,7 @@ package seedu.duke.command;
 import seedu.duke.Biometrics;
 import seedu.duke.Duke;
 import seedu.duke.Ui;
+import seedu.duke.exercise.ExerciseList;
 
 public class ExitCommand extends Command {
     private Ui ui;
@@ -14,7 +15,7 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    public void setData(Ui ui, Biometrics biometrics) {
+    public void setData(Ui ui, Biometrics biometrics, ExerciseList exerciseList) {
         this.ui = ui;
     }
 }

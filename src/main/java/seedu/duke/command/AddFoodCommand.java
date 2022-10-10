@@ -2,9 +2,9 @@ package seedu.duke.command;
 
 import seedu.duke.Biometrics;
 import seedu.duke.Food;
-import seedu.duke.Parser;
 import seedu.duke.Ui;
 import seedu.duke.exception.IllegalValueException;
+import seedu.duke.exercise.ExerciseList;
 
 import java.util.ArrayList;
 
@@ -32,7 +32,7 @@ public class AddFoodCommand extends Command {
     private void addFood(String[] argumentList) {
         try {
             if (argumentList.length < 3) {
-                throw  new IllegalValueException(INVALID_FOOD_INPUT);
+                throw new IllegalValueException(INVALID_FOOD_INPUT);
             }
             String description = argumentList[1];
             int calories = Integer.parseInt(argumentList[2]);
@@ -53,7 +53,7 @@ public class AddFoodCommand extends Command {
 
 
     @Override
-    public void setData(Ui ui, Biometrics biometrics) {
+    public void setData(Ui ui, Biometrics biometrics, ExerciseList exerciseList) {
         this.ui = ui;
     }
 }

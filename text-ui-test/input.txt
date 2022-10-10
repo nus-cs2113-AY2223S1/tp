@@ -11,3 +11,22 @@ set biometrics 0 male 170 85 17
 setbiometrics 23 female 0 85 17
 set biometrics 23 sc sk 85 17
 set biometrics 12 female 200 85 0
+add exercise squat 10 100
+add exercise bench 10 120
+add exercise deadlift 12 150
+view exercise
+view exercise done
+view exer
+view exercise do
+view exercise donea
+add exercise press 10 200
+mark done 2
+mark done 5
+view exercise
+mark done 1
+view exercise done
+mark undone 3
+mark undone 2
+mark done 1
+view exercise
+exit
