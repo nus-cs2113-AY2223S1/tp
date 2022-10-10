@@ -10,12 +10,12 @@ public class Parser {
     private static final String COMMAND_INFO = "info";
 
 
-    public static String parseCommand(Timetable timetable, String command) {
+    public static String parseCommand(Timetable timetable, String command, String currentSemester) {
         String response;
 
         switch (command) {
         case COMMAND_ADD:
-            response = CommandAddModule.addModule(timetable);
+            response = CommandAddModule.addModule(timetable,currentSemester);
             break;
         case COMMAND_LIST:
             response = timetable.listModules();
