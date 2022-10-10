@@ -1,0 +1,1 @@
+{"odata.metadata":"http://datamall2.mytransport.sg/ltaodataservice/$metadata#CarParkAvailability","value":[{"CarParkID":"1","Area":"Marina","Development":"Suntec City","Location":"1.29375 103.85718","AvailableLots":1882,"LotType":"C","Agency":"LTA"}]}

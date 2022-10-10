@@ -1,9 +1,12 @@
 package seedu.data;
 
+import seedu.common.CommonFiles;
 import seedu.exception.NoCarparkFoundException;
 import seedu.exception.NoFileFoundException;
 import seedu.files.FileLoader;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 /**
@@ -12,7 +15,9 @@ import java.util.List;
 public class CarparkList {
     private final List<Carpark> CARPARKS;
     public CarparkList() throws NoFileFoundException {
-        CARPARKS = FileLoader.loadLtaJson();
+        Path filepath = Paths.get(CommonFiles.API_JSON_DIRECTORY, CommonFiles.LTA_JSON_FILE);
+        Path filepathBackup = Paths.get(CommonFiles.API_JSON_DIRECTORY, "ltaResponseSample.json");
+        CARPARKS = FileLoader.loadLtaJson(filepath, filepathBackup);
     }
 
     /**
