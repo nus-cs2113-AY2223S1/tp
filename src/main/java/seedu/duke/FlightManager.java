@@ -2,7 +2,7 @@ package seedu.duke;
 
 import java.util.ArrayList;
 
-import seedu.duke.Exceptions.SkyControlException;
+import seedu.duke.exceptions.SkyControlException;
 
 public class FlightManager {
     public static ArrayList<Flight> flightList = new ArrayList<>();
@@ -59,11 +59,14 @@ public class FlightManager {
 
     // change print output to table form
     public static void printFlights() {
-        System.out.println("--------------------------------------------------------------------------------------------------------------------------------");
-        System.out.printf("%5s %10s %27s %20s %20s %12s %22s", "FLIGHT NUM", "AIRLINE", "DESTINATION", "DEPARTURE TIME", "BOARDING GATE", "TERMINAL", "CHECK-IN ROW/DOOR");
-        System.out.println("\n--------------------------------------------------------------------------------------------------------------------------------");
+        System.out.println("---------------------------------------------------------"
+                + "-----------------------------------------------------------------------");
+        System.out.printf("%5s %10s %27s %20s %20s %12s %22s", "FLIGHT NUM", "AIRLINE",
+                "DESTINATION", "DEPARTURE TIME", "BOARDING GATE", "TERMINAL", "CHECK-IN ROW/DOOR");
+        System.out.println("\n-------------------------------------------------------"
+                + "-------------------------------------------------------------------------");
 
-        for(int i = 0; i < flightList.size(); i++) {
+        for (int i = 0; i < flightList.size(); i++) {
             System.out.println(
                     flightList.get(i)
             );

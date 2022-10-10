@@ -11,7 +11,8 @@ public class Flight {
     protected String terminal;
     protected String seat;
 
-    public Flight (String flightNum, String airline, String destination, String departureTime, String gateNum, String terminal, String seat) {
+    public Flight(String flightNum, String airline, String destination, String departureTime,
+                   String gateNum, String terminal, String seat) {
         this.flightNum = flightNum;
         this.airline = airline;
         this.destination = destination;
@@ -23,7 +24,8 @@ public class Flight {
 
     @Override
     public String toString() {
-        System.out.format("%5s %25s %15s %15s %20s %15s %15s",this.flightNum,this.airline,this.destination,this.departureTime,this.gateNum, this.terminal, this.seat);
+        System.out.format("%5s %25s %15s %15s %20s %15s %15s", this.flightNum,
+                this.airline, this.destination, this.departureTime, this.gateNum, this.terminal, this.seat);
         return "";
     }
 
