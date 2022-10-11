@@ -9,7 +9,7 @@ import recipeditor.command.CommandResult;
 
 public class Ui {
 
-    private static final String DIVIDER = "____________________________________________________________";
+    public static final String DIVIDER = "____________________________________________________________";
     private static final String START = "Program starting!";
     public static final String COMMAND = "Parseable command at the momemt: add, delete, list, view, exit";
     private static final String EXIT = "Program exiting";
@@ -81,7 +81,7 @@ public class Ui {
     public static void printFilePath(File file, String filePath) {
         try {
             if (file.createNewFile()) {
-                System.out.printf("Bob has created the file at %s\n", filePath);
+                System.out.printf("File has been created at %s\n", filePath);
             } else {
                 System.out.printf("File already exists at %s\n", filePath);
             }

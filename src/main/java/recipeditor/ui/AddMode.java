@@ -1,5 +1,6 @@
 package recipeditor.ui;
 
+import recipeditor.Recipeditor;
 import recipeditor.recipe.Ingredient;
 import recipeditor.recipe.Recipe;
 
@@ -48,6 +49,13 @@ public class AddMode {
     public void exitAddMode() {
         Ui.showMessage(EXIT);
         Ui.showDivider();
+    }
+
+    public Recipe getRecipe() {
+        if (isValid) {
+            return addedRecipe;
+        }
+        return null;
     }
 
     private String askTitle(String input) {

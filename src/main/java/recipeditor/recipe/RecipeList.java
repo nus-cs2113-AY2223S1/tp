@@ -30,9 +30,9 @@ public class RecipeList {
         recipes.remove(index);
     }
 
-    public Recipe getRecipeFromTitle(String title) {
+    public Recipe getRecipeFromTitle(String recipleTitle) {
         for (Recipe r : recipes) {
-            if (r.getTitle().equals(title)) {
+            if (r.getTitle().equals(recipleTitle)) {
                 return r;
             }
         }

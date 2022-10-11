@@ -9,6 +9,8 @@ import recipeditor.command.ExitCommand;
 import recipeditor.command.InvalidCommand;
 import recipeditor.command.ViewCommand;
 
+import recipeditor.recipe.Recipe;
+import recipeditor.storage.Storage;
 import recipeditor.ui.AddMode;
 import recipeditor.ui.Ui;
 
@@ -17,7 +19,6 @@ public class Parser {
     public Command parseCommand(String input) {
         String[] parsed = input.split(" ");
         String commandWord = parsed[0].toLowerCase();
-        //String argument = input.replace(commandWord, ""); TODO: what is this
 
         switch (commandWord) {
         case AddCommand.COMMAND_TYPE:
@@ -57,6 +58,8 @@ public class Parser {
         AddMode add = new AddMode(); // Switch to Add Mode in here
         add.enterAddMode();
         add.exitAddMode();
+        Recipe addedRecipe = add.getRecipe();
+        Storage.loadRecipeToDataFile(addedRecipe);
         Ui.showMessage("Is the recipe valid? " + String.valueOf(add.isValid));
         return new AddCommand(add.isValid, add.addedRecipe); // Pass validty and potential recipe to AddCommand
     }

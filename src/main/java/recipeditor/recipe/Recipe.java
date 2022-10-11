@@ -103,7 +103,7 @@ public class Recipe {
         StringBuilder recipeAttributesStringFormatted = new StringBuilder();
         recipeAttributesStringFormatted.append("Recipe Name: " + title + "\n");
         recipeAttributesStringFormatted.append("Recipe Description: " + description + "\n");
-        recipeAttributesStringFormatted.append("Ingredients: " + getIngredientAttributesFormatted());
+        recipeAttributesStringFormatted.append("Recipe Ingredients: " + getIngredientAttributesFormatted());
         return recipeAttributesStringFormatted.toString();
     }
 }
