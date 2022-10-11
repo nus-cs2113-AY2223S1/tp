@@ -59,8 +59,8 @@ public class UserStorageParser {
                 if (details.length != 5) {
                     throw new InvalidUserStorageFileException("Invalid file format");
                 }
-                UserModuleMapping userModule = new UserModuleMapping
-                        (details[0], details[1], details[2], details[3], details[4], details[2], uniName, "test");
+                UserModuleMapping userModule = new UserModuleMapping(details[0], details[1], details[2],
+                        details[3], details[4], details[2], uniName, "test");
                 moduleList.addModule(userModule);
             }
             uniList.setMyModules(moduleList);
