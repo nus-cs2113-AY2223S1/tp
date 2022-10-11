@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 
 public class UserStorageParser {
     private static Logger logger = Logger.getLogger("UserStorageParser");
+
     /**.
      * Function to convert UserUniversityListManager to a String
      * to be stored in a text file
@@ -43,7 +44,8 @@ public class UserStorageParser {
         return output;
     }
 
-    public static HashMap<String, UserUniversityList> convertFileContentIntoUniversityList(String fileContent) throws InvalidUserStorageFileException {
+    public static HashMap<String, UserUniversityList> convertFileContentIntoUniversityList(String fileContent)
+            throws InvalidUserStorageFileException {
         logger.log(Level.INFO, "Start converting String to UserUniversityListManager");
         HashMap<String, UserUniversityList> myManager = new HashMap<String, UserUniversityList>();
         String[] unis = fileContent.split("/");
