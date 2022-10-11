@@ -23,7 +23,7 @@ public class HelpCommand extends Command {
                 + "add food /{description} /{calories}\n"
                 + "remove food /{food index}\n"
                 + "mark {done/undone} /{exercise index}\n"
-                + "remove exercise /{index}\n"
+                + "e_remove exercise /{index}\n"
                 + "view {biometrics/exercise/food}");
     }
 
