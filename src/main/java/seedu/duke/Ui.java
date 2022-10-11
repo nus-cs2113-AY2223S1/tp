@@ -14,8 +14,10 @@ import static seedu.duke.Messages.MESSAGE_EMPTY_CLIENT_INDEX;
 import static seedu.duke.Messages.MESSAGE_EMPTY_DELETE_DESCRIPTION;
 import static seedu.duke.Messages.MESSAGE_INVALID_BUDGET_FORMAT;
 import static seedu.duke.Messages.MESSAGE_INVALID_CLIENT_INDEX;
+import static seedu.duke.Messages.MESSAGE_INVALID_CLIENT_INDEX_FLAG_FORMAT;
 import static seedu.duke.Messages.MESSAGE_INVALID_CONTACT_NUMBER;
 import static seedu.duke.Messages.MESSAGE_INVALID_EMAIL;
+import static seedu.duke.Messages.MESSAGE_MISSING_CLIENT_INDEX_FLAG;
 import static seedu.duke.Messages.MESSAGE_MISSING_SUB_COMMAND_TYPE_FOR_ADD;
 import static seedu.duke.Messages.MESSAGE_MISSING_SUB_COMMAND_TYPE_FOR_DELETE;
 import static seedu.duke.Messages.MESSAGE_TRY_AGAIN;
@@ -69,6 +71,16 @@ public class Ui {
         showToUser("  " + deletedClient);
     }
 
+    public void showPairedConfirmationMessage(Client client, Property property) {
+        showToUser(MESSAGE_PAIRED);
+        showToUser("  " + client.getClientName() + " and " + property.getPropertyAddress());
+    }
+
+    public void showUnpairedConfirmationMessage(Client client, Property property) {
+        showToUser(MESSAGE_UNPAIRED);
+        showToUser("  " + client.getClientName() + " and " + property.getPropertyAddress());
+    }
+
     /* Add Client Related Exceptions */
     public void showMissingCommandAddDetailMessage() {
         showToUser(MESSAGE_EMPTY_ADD_DESCRIPTION);
@@ -117,16 +129,15 @@ public class Ui {
         showToUser(MESSAGE_EMPTY_CLIENT_INDEX);
     }
 
-    public void showPairedConfirmationMessage(Client client, Property property) {
-        showToUser(MESSAGE_PAIRED);
-        showToUser("  " + client.getClientName() + " and " + property.getPropertyAddress());
+    public void showMissingClientIndexFlagMessage() {
+        showToUser(MESSAGE_MISSING_CLIENT_INDEX_FLAG);
     }
 
-    public void showUnpairedConfirmationMessage(Client client, Property property) {
-        showToUser(MESSAGE_UNPAIRED);
-        showToUser("  " + client.getClientName() + " and " + property.getPropertyAddress());
+    public void showInvalidClientIndexFlagFormatMessage() {
+        showToUser(MESSAGE_INVALID_CLIENT_INDEX_FLAG_FORMAT);
     }
 
+    /* Pair Unpair Related Exceptions */
     public void showEmptyCommandPairUnpairDetailsMessage() {
         showToUser(MESSAGE_EMPTY_COMMAND_PAIR_UNPAIR);
     }

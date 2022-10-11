@@ -17,10 +17,12 @@ import seedu.duke.exception.IncorrectFlagOrderException;
 import seedu.duke.exception.IncorrectPairUnpairFlagOrderException;
 import seedu.duke.exception.InvalidBudgetFormatException;
 import seedu.duke.exception.InvalidClientIndexDeleteException;
+import seedu.duke.exception.InvalidClientIndexFlagFormatException;
 import seedu.duke.exception.InvalidContactNumberException;
 import seedu.duke.exception.InvalidEmailException;
 import seedu.duke.exception.MissingClientDetailException;
 import seedu.duke.exception.MissingClientFlagException;
+import seedu.duke.exception.MissingClientIndexFlagException;
 import seedu.duke.exception.MissingFlagException;
 import seedu.duke.exception.MissingPairUnpairFlagException;
 import seedu.duke.exception.NoExistingPairException;
@@ -53,6 +55,7 @@ public class Parser {
             IncorrectAddClientFlagOrderException, MissingClientDetailException, InvalidContactNumberException,
             InvalidEmailException, InvalidBudgetFormatException, UndefinedSubCommandDeleteTypeException,
             EmptyCommandDeleteDetailException, InvalidClientIndexDeleteException, EmptyClientIndexDeleteException,
+            MissingClientIndexFlagException, InvalidClientIndexFlagFormatException,
             EmptyCommandPairUnpairDetailsException, MissingPairUnpairFlagException,
             IncorrectPairUnpairFlagOrderException, NotValidIndexException, NotIntegerException, ExistingPairException,
             NoExistingPairException {
@@ -75,8 +78,11 @@ public class Parser {
             checkForEmptyCommandDeleteDetails(commandDetails);
             ArrayList<String> processedDeleteCommandDetails = partitionCommandTypeAndDetails(commandDetails);
             String subDeleteCommandType = processedDeleteCommandDetails.get(0);
-            int clientIndexToDelete = getClientIndex(processedDeleteCommandDetails.get(1)) - 1;
+            String indexDescription = processedDeleteCommandDetails.get(1).trim();
+
             if (subDeleteCommandType.equals("-client")) {
+                checkForClientIndexFlag(indexDescription);
+                int clientIndexToDelete = getClientIndexToDelete(indexDescription.substring(3));
                 return prepareForCommandDeleteClient(clientIndexToDelete, clientList);
             } else {
                 throw new UndefinedSubCommandDeleteTypeException();
@@ -278,11 +284,22 @@ public class Parser {
         return commandDetails.trim().isEmpty();
     }
 
-    private int getClientIndex(String commandDetails) throws EmptyClientIndexDeleteException {
+    private int getClientIndexToDelete(String commandDetails) throws EmptyClientIndexDeleteException {
         if (commandDetails.isEmpty()) {
             throw new EmptyClientIndexDeleteException();
         }
-        return Integer.parseInt(commandDetails.trim());
+        return Integer.parseInt(commandDetails.trim()) - 1;
+    }
+
+    private void checkForClientIndexFlag(String commandDetails) throws MissingClientIndexFlagException, InvalidClientIndexFlagFormatException {
+        if (!commandDetails.contains("ic/")) {
+            throw new MissingClientIndexFlagException();
+        } else {
+            String clientIndexFlag = commandDetails.substring(0, 3);
+            if (!clientIndexFlag.equals("ic/")) {
+                throw new InvalidClientIndexFlagFormatException();
+            }
+        }
     }
 
     private Command prepareForCommandDeleteClient(int clientIndex, ClientList clientList)
