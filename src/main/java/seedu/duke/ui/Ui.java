@@ -1,11 +1,14 @@
 package seedu.duke.ui;
 
 import java.util.ArrayList;
+<<<<<<< Updated upstream
 import seedu.duke.user.UserModule;
 import seedu.duke.user.UserModuleList;
 import seedu.duke.user.UserUniversityList;
 
 import java.util.Scanner;
+=======
+>>>>>>> Stashed changes
 
 public class Ui {
     public static final String LINE = "_____________________________________________________________________________\n";
@@ -58,7 +61,11 @@ public class Ui {
         System.out.println(SPACING + "--------  " + "--------------------------------------  " + "-------");
         System.out.println(SPACING + "create    " + "/create u/UNIVERSITY                    "
                 + "Creates an empty module list for the input university");
-        System.out.println(SPACING + "view      " + "/view ALL                               "
+        System.out.println(SPACING + "view      " + "/view MODULES                               "
+                + "Displays all existing university modules mappings that are approved in the format\n"
+                + "[NUS Module Code] [NUS Module Title] [NUS Module Credits] -> [Partner University Name] "
+                + "[Partner University Module Code] [Partner University Title]");
+        System.out.println(SPACING + "view      " + "/view LISTS                               "
                 + "Displays all existing university lists that have been created by the user");
         System.out.println(SPACING + "view      " + "/view u/UNIVERSITY                      "
                 + "Displays all modules that have been added to the input university’s list in the format\n"
@@ -71,6 +78,7 @@ public class Ui {
                 + "Delete input university list                        ");
         System.out.println();
         System.out.println(SPACING + "Note: Words in UPPER_CASE are parameters that you should input as a user");
+        System.out.println(SPACING + "Note: There should not be spaces in parameters, replace with underscore instead");
         System.out.print(LINE);
     }
 
