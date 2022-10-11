@@ -1,8 +1,6 @@
 package seedu.duke.user;
 
 import seedu.duke.ui.Ui;
-import seedu.duke.userstorage.UserStorage;
-import seedu.duke.exceptions.InvalidUserCommandException;
 import seedu.duke.exceptions.InvalidUserStorageFileException;
 import seedu.duke.userstorage.UserStorageParser;
 
@@ -44,7 +42,7 @@ public class UserUniversityListManager {
     public void createList(String input) {
         assert input.length() > 0 : "Input school cannot be empty";
         if (myManager.containsKey(input)) {
-            System.out.println("Error: PU list already exists");;
+            System.out.println("Error: PU list already exists");
         } else {
             UserUniversityList newList = new UserUniversityList(input);
             myManager.put(input, newList);
