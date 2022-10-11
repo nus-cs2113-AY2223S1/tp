@@ -6,6 +6,7 @@ import seedu.duke.Ui;
 import seedu.duke.exception.IllegalValueException;
 import seedu.duke.exercise.Exercise;
 import seedu.duke.exercise.ExerciseList;
+import seedu.duke.food.FoodList;
 
 public class RemoveExerciseCommand extends Command{
 
@@ -36,7 +37,7 @@ public class RemoveExerciseCommand extends Command{
         removeExercise(argumentList);
     }
     @Override
-    public void setData(Ui ui, Biometrics biometrics, ExerciseList exerciseList) {
+    public void setData(Ui ui, Biometrics biometrics, ExerciseList exerciseList, FoodList foodlist) {
         this.ui = ui;
         this.exerciseList = exerciseList;
     }
