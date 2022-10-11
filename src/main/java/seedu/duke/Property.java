@@ -1,5 +1,8 @@
 package seedu.duke;
 
+/**
+ * Represents a property.
+ */
 public class Property {
     private String landlordName;
     private String propertyAddress;
@@ -11,14 +14,6 @@ public class Property {
         this.propertyAddress = propertyAddress;
         this.rentingPrice = rentingPrice;
         this.unitType = unitType;
-    }
-
-    public String toString() {
-        String propertyDetails = "  Landlord: " + landlordName + System.lineSeparator()
-                + "  Address: " + propertyAddress + System.lineSeparator()
-                + "  Renting Price: SGD" + rentingPrice + "/month" + System.lineSeparator()
-                + "  Unit Type: " + unitType + System.lineSeparator();
-        return propertyDetails.trim();
     }
 
     public String getLandlordName() {
@@ -35,5 +30,13 @@ public class Property {
 
     public String getUnitType() {
         return unitType;
+    }
+
+    public String toString() {
+        String propertyDetails = "  Landlord: " + landlordName + System.lineSeparator()
+                + "  Address: " + propertyAddress + System.lineSeparator()
+                + "  Renting Price: SGD" + rentingPrice + "/month" + System.lineSeparator()
+                + "  Unit Type: " + unitType + System.lineSeparator();
+        return propertyDetails.trim();
     }
 }

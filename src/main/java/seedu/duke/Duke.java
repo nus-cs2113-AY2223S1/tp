@@ -2,21 +2,28 @@ package seedu.duke;
 
 import seedu.duke.command.Command;
 import seedu.duke.command.CommandBye;
+
 import seedu.duke.exception.EmptyClientDetailException;
 import seedu.duke.exception.EmptyClientIndexDeleteException;
 import seedu.duke.exception.EmptyCommandAddDetailException;
 import seedu.duke.exception.EmptyCommandDeleteDetailException;
 import seedu.duke.exception.EmptyCommandPairUnpairDetailsException;
+import seedu.duke.exception.EmptyPropertyDetailException;
 import seedu.duke.exception.ExistingPairException;
 import seedu.duke.exception.IncorrectAddClientFlagOrderException;
+import seedu.duke.exception.IncorrectAddPropertyFlagOrderException;
 import seedu.duke.exception.IncorrectPairUnpairFlagOrderException;
 import seedu.duke.exception.InvalidBudgetFormatException;
 import seedu.duke.exception.InvalidClientIndexDeleteException;
 import seedu.duke.exception.InvalidContactNumberException;
 import seedu.duke.exception.InvalidEmailException;
+import seedu.duke.exception.InvalidPriceFormatException;
+import seedu.duke.exception.InvalidSingaporeAddressException;
 import seedu.duke.exception.MissingClientDetailException;
 import seedu.duke.exception.MissingClientFlagException;
 import seedu.duke.exception.MissingPairUnpairFlagException;
+import seedu.duke.exception.MissingPropertyDetailException;
+import seedu.duke.exception.MissingPropertyFlagException;
 import seedu.duke.exception.NoExistingPairException;
 import seedu.duke.exception.NotIntegerException;
 import seedu.duke.exception.NotValidIndexException;
@@ -58,6 +65,15 @@ public class Duke {
                 ui.showMissingCommandAddDetailMessage();
             } catch (UndefinedSubCommandAddTypeException e) {
                 ui.showUndefinedSubCommandAddTypeMessage();
+            } catch (EmptyPropertyDetailException e) {
+                ui.showEmptyPropertyDetailMessage();
+            } catch (MissingPropertyFlagException | IncorrectAddPropertyFlagOrderException
+                    | MissingPropertyDetailException e) {
+                ui.showAddPropertyWrongFormatMessage();
+            } catch (InvalidSingaporeAddressException e) {
+                ui.showInvalidSingaporeAddressMessage();
+            } catch (InvalidPriceFormatException e) {
+                ui.showInvalidPriceFormatMessage();
             } catch (EmptyClientDetailException e) {
                 ui.showEmptyClientDetailMessage();
             } catch (MissingClientFlagException | IncorrectAddClientFlagOrderException
