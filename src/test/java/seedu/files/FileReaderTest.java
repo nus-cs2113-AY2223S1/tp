@@ -1,6 +1,5 @@
 package seedu.files;
 
-import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
@@ -42,22 +41,5 @@ public class FileReaderTest {
     void invalidJsonFormatTest() {
         Assertions.assertThrows(NoFileFoundException.class, () -> FileReader.loadLtaJson(faultyJsonPath,
             faultyJsonPath));
-    }
-
-    @Test
-    void invalidReadStringFromTextTest() {
-        Assertions.assertThrows(NoFileFoundException.class, () -> FileReader.readStringFromTxt("invalidPath",
-                testFileDirectory, false));
-    }
-    @Test
-    void validReadStringFromTextTest() throws IOException, NoFileFoundException {
-        Assertions.assertEquals(FileReader.readStringFromTxt("verification.txt",
-                testFileDirectory, false), "This is a valid read.");
-    }
-
-    @Test
-    void emptyReadStringFromTextTest() throws IOException, NoFileFoundException {
-        Assertions.assertEquals(FileReader.readStringFromTxt("empty.txt",
-                testFileDirectory, false), "");
     }
 }
