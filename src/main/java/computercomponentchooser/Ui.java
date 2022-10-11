@@ -1,6 +1,7 @@
 package computercomponentchooser;
 
 import java.util.Scanner;
+import computercomponentchooser.Build;
 
 public class Ui {
     /**
@@ -67,6 +68,7 @@ public class Ui {
             line = in.nextLine();
             if (Parser.checkEdit(line)) {
                 while (!EditParser.checkBack(line)) {
+                    EditParser.parse(line);
                     line = in.nextLine();
                 }
             }

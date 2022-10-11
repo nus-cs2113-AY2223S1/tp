@@ -2,11 +2,14 @@ package computercomponentchooser;
 
 import computercomponentchooser.exceptions.UnknownCommandException;
 
+
 public class EditParser {
 
     static final int COMMAND_PARAMETER = 0;
 
     static final int NAME_PARAMETER = 1;
+
+    public static String buildName;
 
     private static String getParameter(String line, int mode) {
         String[] lineSplit = line.split(" ", 2);
@@ -20,13 +23,36 @@ public class EditParser {
 
     public static void parse(String line) {
         String command = getParameter(line, COMMAND_PARAMETER).toLowerCase();
+
+        String content;
+        Build editBuild;
         try {
             switch (command) {
             case "add":
+                content = getParameter(line, NAME_PARAMETER);
+                editBuild = BuildManager.getBuild(buildName);
+                editBuild.addContents(content);
+                System.out.println("You have added " + content);
+                break;
             case "delete":
+                content = getParameter(line, NAME_PARAMETER);
+                editBuild = BuildManager.getBuild(buildName);
+                editBuild.deleteContents(content);
+                System.out.println("You have removed " + content);
+                break;
+
             case "list":
+                editBuild = BuildManager.getBuild(buildName);
+                System.out.println("Computer parts for " + buildName + ":");
+                System.out.println(editBuild.toString());
+                break;
+            case "edit":
+                buildName = getParameter(line, NAME_PARAMETER);
+                System.out.println("You are now editing " + buildName);
+                break;
             case "check":
             case "back":
+                break;
             default:
                 throw new UnknownCommandException();
             }
