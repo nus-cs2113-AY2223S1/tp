@@ -26,7 +26,7 @@ public class WalletFile {
         File f = new File(filePath + "/" + userName + ".txt");
         Scanner scan = new Scanner(f);
         String password = scan.nextLine().split(":")[1];
-        int balance = scan.nextInt();
+        int balance = Integer.parseInt(scan.nextLine().split(":")[1]);
         return new Wallet(userName, password, balance);
     }
 }
