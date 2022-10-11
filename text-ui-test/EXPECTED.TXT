@@ -1,4 +1,377 @@
 ____________________________________________________________
-Hello! I'm your Moolah Manager!
-Enter <help> if you need the list of commands
+Hello! I'm Moo and I will help you to manage your finances.
+Enter <help> if you need the list of commands.
+____________________________________________________________
+____________________________________________________________
+Gotcha! Here are the commands that you may use:
+Command Word: HELP
+To display a list of available commands with their respective expected parameters.
+Type "help o/detailed" for a detailed version of all parameters used.
+Usage: help [o/detailed]
+
+Command Word: ADD
+To add a new transaction entry, which could be either an "income" or an "expense" into the transaction list.
+Usage: add t/TYPE c/CATEGORY a/AMOUNT d/DATE i/DESCRIPTION
+
+Command Word: LIST
+To list all or some transactions based on selection.
+Usage: list [t/TYPE] [c/CATEGORY] [d/DATE]
+
+Command Word: FIND
+To find specific transaction(s) based on any keywords inputted by the user.
+Usage: find KEYWORDS
+
+Command Word: STATS
+To get statistics of the transactions such as the total savings for each category, summary of expenditure, etc.
+Usage: stats s/STATISTICS_TYPE
+
+Command Word: EDIT
+To edit a specific entry in the list of transactions.
+Usage: edit e/ENTRY [t/TYPE] [c/CATEGORY] [a/AMOUNT] [d/DATE] [i/DESCRIPTION]
+
+Command Word: DELETE
+To delete a specific entry in the list of transactions.
+Usage: delete e/ENTRY
+
+Command Word: PURGE
+To purge a all entries in the list of transactions.
+Usage: purge
+
+Command Word: BYE
+To exit the application.
+Usage: bye
+
+____________________________________________________________
+____________________________________________________________
+Gotcha! Here are the commands that you may use:
+Command Word: HELP
+To display a list of available commands with their respective expected parameters.
+Type "help o/detailed" for a detailed version of all parameters used.
+Usage: help [o/detailed]
+Parameters information:
+(Optional) o/detailed - Detailed version of guide.
+
+Command Word: ADD
+To add a new transaction entry, which could be either an "income" or an "expense" into the transaction list.
+Usage: add t/TYPE c/CATEGORY a/AMOUNT d/DATE i/DESCRIPTION
+Parameters information:
+TYPE: The type of transaction. Only "income" or "expense" is accepted.
+CATEGORY: A category for the transaction. Only string containing alphabets is accepted.
+AMOUNT: Value of the transaction in numerical form. Only integer within 0 and 10000000 is accepted.
+DATE: Date of the transaction. The format must be in "yyyyMMdd".
+DESCRIPTION: More information regarding the transaction, written without any space.
+
+Command Word: LIST
+To list all or some transactions based on selection.
+Usage: list [t/TYPE] [c/CATEGORY] [d/DATE]
+Parameters information:
+(Optional) TYPE - The type of transaction. Only "income" or "expense" is accepted.
+(Optional) CATEGORY: A category for the transaction. Only string containing alphabets is accepted.
+(Optional) DATE: Date of the transaction. The format must be in "yyyyMMdd".
+
+Command Word: FIND
+To find specific transaction(s) based on any keywords inputted by the user.
+Usage: find KEYWORDS
+Parameters information:
+KEYWORDS: Any partial or full keyword(s) that matches the details of the transaction, such as type, category, amount, date or description.
+
+Command Word: STATS
+To get statistics of the transactions such as the total savings for each category, summary of expenditure, etc.
+Usage: stats s/STATISTICS_TYPE
+Parameters information:
+STATISTICS_TYPE: The type of statistics to be generated. Only "categories" is accepted.
+
+Command Word: EDIT
+To edit a specific entry in the list of transactions.
+Usage: edit e/ENTRY [t/TYPE] [c/CATEGORY] [a/AMOUNT] [d/DATE] [i/DESCRIPTION]
+Parameters information:
+ENTRY: The entry number of the transaction. Type "list" to list all the entry numbers of transaction.
+(Optional) TYPE: The type of transaction. Only "income" or "expense" is accepted.
+(Optional) CATEGORY: A category for the transaction. Only string containing alphabets is accepted.
+(Optional) AMOUNT: Value of the transaction in numerical form. Only integer within 0 and 10000000 is accepted.
+(Optional) DATE: Date of the transaction. The format must be in "yyyyMMdd".
+(Optional) DESCRIPTION: More information regarding the transaction, written without any space.
+
+Command Word: DELETE
+To delete a specific entry in the list of transactions.
+Usage: delete e/ENTRY
+Parameters information:
+ENTRY: The entry number of the transaction. Type "list" to list all the entry numbers of transaction.
+
+Command Word: PURGE
+To purge a all entries in the list of transactions.
+Usage: purge
+Parameters information:  -NIL-
+
+Command Word: BYE
+To exit the application.
+Usage: bye
+Parameters information: -NIL-
+
+____________________________________________________________
+____________________________________________________________
+Not supported tag(s) detected, please check your input!
+____________________________________________________________
+____________________________________________________________
+Not supported tag(s) detected, please check your input!
+____________________________________________________________
+____________________________________________________________
+Not supported tag(s) detected, please check your input!
+____________________________________________________________
+____________________________________________________________
+Parameter behind tag(s) is found to be empty, please check your input!
+____________________________________________________________
+____________________________________________________________
+Duplicate tag(s) detected, please check your input!
+____________________________________________________________
+____________________________________________________________
+Mandatory tag(s) missing, please check your input!
+____________________________________________________________
+____________________________________________________________
+Mandatory tag(s) missing, please check your input!
+____________________________________________________________
+____________________________________________________________
+Mandatory tag(s) missing, please check your input!
+____________________________________________________________
+____________________________________________________________
+Parameter behind tag(s) is found to be empty, please check your input!
+____________________________________________________________
+____________________________________________________________
+Type of statistics given is invalid, please check your input!
+____________________________________________________________
+____________________________________________________________
+Not supported tag(s) detected, please check your input!
+____________________________________________________________
+____________________________________________________________
+Duplicate tag(s) detected, please check your input!
+____________________________________________________________
+____________________________________________________________
+There are no statistics available yet for the given statistics type.
+____________________________________________________________
+____________________________________________________________
+There are no transaction records found.
+____________________________________________________________
+____________________________________________________________
+I have added the following Expense transaction:
+[-][food] $20 at Sep 13 2022 | Description: NIL
+____________________________________________________________
+____________________________________________________________
+I have added the following Income transaction:
+[+][salary] $2000 at Sep 30 2022 | Description: jan_salary
+____________________________________________________________
+____________________________________________________________
+I have added the following Expense transaction:
+[-][transport] $1 at Oct 02 2022 | Description: bus_fare
+____________________________________________________________
+____________________________________________________________
+Parameter behind tag(s) is found to be empty, please check your input!
+____________________________________________________________
+____________________________________________________________
+Parameter behind tag(s) is found to be empty, please check your input!
+____________________________________________________________
+____________________________________________________________
+Parameter behind tag(s) is found to be empty, please check your input!
+____________________________________________________________
+____________________________________________________________
+Parameter behind tag(s) is found to be empty, please check your input!
+____________________________________________________________
+____________________________________________________________
+Parameter behind tag(s) is found to be empty, please check your input!
+____________________________________________________________
+____________________________________________________________
+Duplicate tag(s) detected, please check your input!
+____________________________________________________________
+____________________________________________________________
+Not supported tag(s) detected, please check your input!
+____________________________________________________________
+____________________________________________________________
+Parameter behind tag(s) is found to be empty, please check your input!
+____________________________________________________________
+____________________________________________________________
+Not supported tag(s) detected, please check your input!
+____________________________________________________________
+____________________________________________________________
+Type of transaction given is invalid, please check your input!
+____________________________________________________________
+____________________________________________________________
+Here are your transaction records:
+[-][food] $20 at Sep 13 2022 | Description: NIL
+[-][transport] $1 at Oct 02 2022 | Description: bus_fare
+
+____________________________________________________________
+____________________________________________________________
+Here are your transaction records:
+[-][food] $20 at Sep 13 2022 | Description: NIL
+
+____________________________________________________________
+____________________________________________________________
+There are no transaction records found.
+____________________________________________________________
+____________________________________________________________
+Here are your transaction records:
+[-][food] $20 at Sep 13 2022 | Description: NIL
+
+____________________________________________________________
+____________________________________________________________
+Parameter behind tag(s) is found to be empty, please check your input!
+____________________________________________________________
+____________________________________________________________
+Here are your transaction records:
+[+][salary] $2000 at Sep 30 2022 | Description: jan_salary
+
+____________________________________________________________
+____________________________________________________________
+Here are the total savings for each category:
+[food] $20
+[salary] $2000
+[transport] $1
+
+____________________________________________________________
+____________________________________________________________
+Keyword(s) for your search expression missing, please check your input!
+____________________________________________________________
+____________________________________________________________
+Here are the transaction records that match your search expression:
+[-][transport] $1 at Oct 02 2022 | Description: bus_fare
+
+____________________________________________________________
+____________________________________________________________
+There are no transaction records that match your search expression.
+____________________________________________________________
+____________________________________________________________
+Here are your transaction records:
+[-][food] $20 at Sep 13 2022 | Description: NIL
+[+][salary] $2000 at Sep 30 2022 | Description: jan_salary
+[-][transport] $1 at Oct 02 2022 | Description: bus_fare
+
+____________________________________________________________
+____________________________________________________________
+Mandatory tag(s) missing, please check your input!
+____________________________________________________________
+____________________________________________________________
+I have added the following Income transaction:
+[+][bonus] $10000000 at Oct 03 2022 | Description: thank_you_boss
+____________________________________________________________
+____________________________________________________________
+Type of transaction given is invalid, please check your input!
+____________________________________________________________
+____________________________________________________________
+Invalid category, please ensure your category is correct!
+____________________________________________________________
+____________________________________________________________
+Invalid amount, please ensure your amount is in positive numerals ($10000000 or less) only!
+____________________________________________________________
+____________________________________________________________
+Invalid amount, please ensure your amount is in positive numerals ($10000000 or less) only!
+____________________________________________________________
+____________________________________________________________
+Invalid amount, please ensure your amount is in positive numerals ($10000000 or less) only!
+____________________________________________________________
+____________________________________________________________
+Invalid date, please ensure your date format is correct!
+____________________________________________________________
+____________________________________________________________
+Invalid date, please ensure your date format is correct!
+____________________________________________________________
+____________________________________________________________
+Mandatory tag(s) missing, please check your input!
+____________________________________________________________
+____________________________________________________________
+Here are your transaction records:
+[-][food] $20 at Sep 13 2022 | Description: NIL
+[+][salary] $2000 at Sep 30 2022 | Description: jan_salary
+[-][transport] $1 at Oct 02 2022 | Description: bus_fare
+[+][bonus] $10000000 at Oct 03 2022 | Description: thank_you_boss
+
+____________________________________________________________
+____________________________________________________________
+Mandatory tag(s) missing, please check your input!
+____________________________________________________________
+____________________________________________________________
+I have deleted the following transaction:
+[-][food] $20 at Sep 13 2022 | Description: NIL
+____________________________________________________________
+____________________________________________________________
+Here are your transaction records:
+[+][salary] $2000 at Sep 30 2022 | Description: jan_salary
+[-][transport] $1 at Oct 02 2022 | Description: bus_fare
+[+][bonus] $10000000 at Oct 03 2022 | Description: thank_you_boss
+
+____________________________________________________________
+____________________________________________________________
+Invalid index, please ensure your index is correct!
+____________________________________________________________
+____________________________________________________________
+Invalid index, please ensure your index is correct!
+____________________________________________________________
+____________________________________________________________
+Invalid index, please ensure your index is correct!
+____________________________________________________________
+____________________________________________________________
+I have deleted the following transaction:
+[+][bonus] $10000000 at Oct 03 2022 | Description: thank_you_boss
+____________________________________________________________
+____________________________________________________________
+Here are your transaction records:
+[+][salary] $2000 at Sep 30 2022 | Description: jan_salary
+[-][transport] $1 at Oct 02 2022 | Description: bus_fare
+
+____________________________________________________________
+____________________________________________________________
+Not supported tag(s) detected, please check your input!
+____________________________________________________________
+____________________________________________________________
+Not supported tag(s) detected, please check your input!
+____________________________________________________________
+____________________________________________________________
+Not supported tag(s) detected, please check your input!
+____________________________________________________________
+____________________________________________________________
+Are you sure you want to proceed with this command? Please enter 'Y' to confirm.
+____________________________________________________________
+____________________________________________________________
+Purging has been aborted. All transactions records are retained.
+____________________________________________________________
+____________________________________________________________
+Are you sure you want to proceed with this command? Please enter 'Y' to confirm.
+____________________________________________________________
+____________________________________________________________
+Purging has been aborted. All transactions records are retained.
+____________________________________________________________
+____________________________________________________________
+Are you sure you want to proceed with this command? Please enter 'Y' to confirm.
+____________________________________________________________
+____________________________________________________________
+Purging has been aborted. All transactions records are retained.
+____________________________________________________________
+____________________________________________________________
+Are you sure you want to proceed with this command? Please enter 'Y' to confirm.
+____________________________________________________________
+____________________________________________________________
+Purging has been aborted. All transactions records are retained.
+____________________________________________________________
+____________________________________________________________
+Are you sure you want to proceed with this command? Please enter 'Y' to confirm.
+____________________________________________________________
+____________________________________________________________
+All your transactions have been purged.
+____________________________________________________________
+____________________________________________________________
+The command is aborted as the transactions list is empty.
+____________________________________________________________
+____________________________________________________________
+There are no transaction records found.
+____________________________________________________________
+____________________________________________________________
+I have added the following Expense transaction:
+[-][transport] $1 at Oct 02 2022 | Description: i/i/i/i/
+____________________________________________________________
+____________________________________________________________
+Not supported tag(s) detected, please check your input!
+____________________________________________________________
+____________________________________________________________
+Not supported tag(s) detected, please check your input!
+____________________________________________________________
+____________________________________________________________
+Goodbye and see you soon.
 ____________________________________________________________

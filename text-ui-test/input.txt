@@ -1,0 +1,78 @@
+help
+help o/detailed
+help blablabla
+help o/detailed blablabla
+help /
+help o/
+help o/detailed o/detailed
+stats
+stats blablabla
+stats /
+stats s/
+stats s/invalid
+stats s/categories blablabla
+stats s/categories s/categories
+stats s/categories
+list
+add t/expense c/food a/20 d/13092022 i/NIL
+add t/income c/salary a/2000 d/30092022 i/jan_salary
+add t/expense c/transport a/1 d/02102022 i/bus_fare
+add t/ c/transport a/1 d/02102022 i/bus_fare
+add t/expense c/ a/1 d/02102022 i/bus_fare
+add t/expense c/transport a/ d/02102022 i/bus_fare
+add t/expense c/transport a/1 d/ i/bus_fare
+add t/expense c/transport a/1 d/02102022 i/
+add t/expense c/transport a/1 d/02102022 i/bus_fare i/mrt_fare
+list /
+list t/
+list T/
+list t/Expense
+list t/expense
+list c/food
+list c/food d/30092022
+list c/food d/13092022
+list t/income d/
+list t/income d/30092022
+stats s/categories
+find
+find bus_fare
+find TOTALLY_NON_EXISTING_STRING
+list
+add / c/bonus a/10000000 d/03102022 i/thank_you_boss
+add t/income c/bonus a/10000000 d/03102022 i/thank_you_boss
+add t/heheheh c/bonus a/1000000 d/03102022 i/thank_you_boss
+add t/income c/123 a/10000000 d/03102022 i/thank_you_boss
+add t/income c/bonus a/abc d/03102022 i/thank_you_boss
+add t/income c/bonus a/-1 d/03102022 i/thank_you_boss
+add t/income c/bonus a/9999999999999 d/03102022 i/thank_you_boss
+add t/income c/bonus a/10000000 d/20220101 i/thank_you_boss
+add t/income c/bonus a/10000000 d/obviouslyFalseDate i/thank_you_boss
+add t/income c/bonus a/10000000
+list
+delete 1
+delete e/1
+list
+delete e/-1
+delete e/0
+delete e/4
+delete e/3
+list
+purge 123123
+purge o/
+purge o/detailed
+purge
+N
+purge
+NoNONONOONOno
+purge
+YouJokingWithMe?
+purge
+y
+purge
+Y
+purge
+list
+add t/expense c/transport a/1 d/02102022 i/i/i/i/i/
+bye world
+bye c/transport
+bye
