@@ -23,8 +23,15 @@ public class SearchModuleCodeCommand extends Command {
         List<Module> searchResult = filterModuleByCode(toSearchModuleCode);
 
         ui.addMessage("Module search list");
-        for (var m : searchResult) {
-            ui.addMessage(m.moduleCode);
+
+        // if searchResult only contain one module, it means the module code is unique, display the module details
+        if (searchResult.size() == 1) {
+            ui.addMessage(searchResult.get(0).moduleCode + " " + searchResult.get(0).title + "\n"
+                    + searchResult.get(0).description);
+        } else {
+            for (Module module : searchResult) {
+                ui.addMessage(module.moduleCode + " " + module.title);
+            }
         }
 
         ui.displayUi();

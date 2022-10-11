@@ -21,7 +21,7 @@ public class SearchTest {
         int expectedNumberOfFilteredModules = 2;
         assertEquals(expectedNumberOfFilteredModules, numberOfFilteredModulesInSearchResult);
     }
-
+    
     @Test
     void filterModuleByName_validInput_expectCorrectNumberOfFilteredModule() {
         // String inpuString = "quantitative reasoning";
