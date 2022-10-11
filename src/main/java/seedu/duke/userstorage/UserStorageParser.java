@@ -1,8 +1,8 @@
 package seedu.duke.userstorage;
 
 import seedu.duke.exceptions.InvalidUserStorageFileException;
-import seedu.duke.user.UserModule;
-import seedu.duke.user.UserModuleList;
+import seedu.duke.user.UserModuleMapping;
+import seedu.duke.user.UserModuleMappingList;
 import seedu.duke.user.UserUniversityList;
 import seedu.duke.user.UserUniversityListManager;
 
@@ -32,8 +32,8 @@ public class UserStorageParser {
         for (Map.Entry<String, UserUniversityList> pair : uniList.getMyManager().entrySet()) {
             UserUniversityList uni = pair.getValue();
             output += "/" + uni.getUniversityName() + "%" + "\n";
-            ArrayList<UserModule> modules = uni.getMyModules().getModules();
-            for (UserModule module : modules) {
+            ArrayList<UserModuleMapping> modules = uni.getMyModules().getModules();
+            for (UserModuleMapping module : modules) {
                 output += module.getPuCode() + ";";
                 output += module.getPuTitle() + ";";
                 output += module.getNusCode() + ";";
@@ -55,13 +55,14 @@ public class UserStorageParser {
             String[] items = uni.split("%");
             String uniName = items[0];
             UserUniversityList uniList = new UserUniversityList(uniName);
-            UserModuleList moduleList = new UserModuleList();
+            UserModuleMappingList moduleList = new UserModuleMappingList();
             for (int i = 1; i < items.length; ++i) {
                 String[] details = items[i].split(";");
                 if (details.length != 5) {
                     throw new InvalidUserStorageFileException("Invalid file format");
                 }
-                UserModule userModule = new UserModule(details[0], details[1], details[2], details[3], details[4]);
+                UserModuleMapping userModule = new UserModuleMapping(details[0], details[1], details[2],
+                        details[3], details[4], details[2], uniName, "test");
                 moduleList.addModule(userModule);
             }
             uniList.setMyModules(moduleList);

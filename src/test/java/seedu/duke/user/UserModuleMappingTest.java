@@ -7,14 +7,14 @@ import org.junit.jupiter.api.Test;
 
 import java.util.NoSuchElementException;
 
-public class UserModuleTest {
+public class UserModuleMappingTest {
 
-    UserModuleList myModules = new UserModuleList();
+    UserModuleMappingList myModules = new UserModuleMappingList();
 
     @Test
     void addModule_cs2040_correctDetails() {
-        UserModule mod = new UserModule("CS24", "Data Structures",
-                "CS2040", "Data Structures & Algorithms", "4");
+        UserModuleMapping mod = new UserModuleMapping("CS24", "Data Structures", "CS2040",
+                "Data Structures & Algorithms", "4", "4", "UCB", "USA");
         myModules.addModule(mod);
         assertEquals(1, myModules.getModules().size());
         assertEquals(true, myModules.findModuleByCode(mod));
@@ -27,8 +27,8 @@ public class UserModuleTest {
 
     @Test
     void addModule_duplicateEntry_notAdded() {
-        UserModule mod = new UserModule("CS24", "Data Structures",
-                "CS2040", "Data Structures & Algorithms", "4");
+        UserModuleMapping mod = new UserModuleMapping("CS24", "Data Structures", "CS2040",
+                "Data Structures & Algorithms", "4", "4", "LSA","Africa");
         myModules.addModule(mod);
         assertEquals(1, myModules.getModules().size());
     }

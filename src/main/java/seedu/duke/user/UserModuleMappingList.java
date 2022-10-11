@@ -10,18 +10,18 @@ import java.util.NoSuchElementException;
  * This is based on NUS Modules that user wishes to map overseas in the future
  */
 
-public class UserModuleList {
-    private ArrayList<UserModule> modules;
+public class UserModuleMappingList {
+    private ArrayList<UserModuleMapping> modules;
 
-    public void setModules(ArrayList<UserModule> modules) {
+    public void setModules(ArrayList<UserModuleMapping> modules) {
         this.modules = modules;
     }
 
-    public UserModuleList() {
+    public UserModuleMappingList() {
         this.modules = new ArrayList<>();
     }
 
-    public ArrayList<UserModule> getModules() {
+    public ArrayList<UserModuleMapping> getModules() {
         return modules;
     }
 
@@ -30,8 +30,8 @@ public class UserModuleList {
      * @param input input code of module
      * @return true if module is found, false otherwise
      */
-    public boolean findModuleByCode(UserModule input) {
-        for (UserModule module : modules) {
+    public boolean findModuleByCode(UserModuleMapping input) {
+        for (UserModuleMapping module : modules) {
             if (module.getNusCode().equals(input.getNusCode())
                 && module.getPuCode().equals(input.getPuCode())) {
                 return true;
@@ -40,12 +40,12 @@ public class UserModuleList {
         return false;
     }
 
-    public void addModule(UserModule input) {
+    public void addModule(UserModuleMapping input) {
         if (findModuleByCode(input)) {
             System.out.println("Error module already added");
         } else {
             modules.add(input);
-            Ui.printModuleAddedAcknowledgement(input);
+            System.out.print(Ui.printModuleAddedAcknowledgement(input));
         }
     }
 
@@ -53,7 +53,7 @@ public class UserModuleList {
         if (modules.size() == 0) {
             System.out.println("No current modules saved");
         } else {
-            Ui.printModulesInList(modules);
+            System.out.print(Ui.printModulesInList(modules));
         }
     }
 
@@ -78,7 +78,7 @@ public class UserModuleList {
             System.out.println("index not within range");
             throw new IndexOutOfBoundsException();
         } else {
-            Ui.printModuleDeletedAcknowledgement(modules.get(index));
+            System.out.print(Ui.printModuleDeletedAcknowledgement(modules.get(index)));
             modules.remove(index);
             System.out.println("Modules left for current school are: ");
             displayAll();
@@ -89,12 +89,12 @@ public class UserModuleList {
         assert puCode.length() > 0 : "PU module code length cannot be null";
         assert nusCode.length() > 0 : "NUS module code length cannot be null";
         boolean isUpdated = false;
-        for (UserModule module : modules) {
+        for (UserModuleMapping module : modules) {
             if (module.getNusCode().equals(nusCode)
                     && module.getPuCode().equals(puCode)) {
                 isUpdated = true;
                 module.setComment(updates);
-                Ui.printModuleUpdatedAcknowledgement(module);
+                System.out.print(Ui.printModuleUpdatedAcknowledgement(module));;
             }
         }
         if (!isUpdated) {
@@ -109,7 +109,7 @@ public class UserModuleList {
      */
     public boolean findModuleByTitle(String keyword) {
         int counter = 0;
-        for (UserModule module : modules) {
+        for (UserModuleMapping module : modules) {
             if (module.getPuTitle().contains(keyword) || module.getNusTitle().contains(keyword)) {
                 counter++;
                 System.out.println(module);

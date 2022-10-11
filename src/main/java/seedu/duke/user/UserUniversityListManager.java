@@ -4,7 +4,6 @@ import seedu.duke.ui.Ui;
 import seedu.duke.userstorage.UserStorage;
 import seedu.duke.exceptions.InvalidUserCommandException;
 import seedu.duke.exceptions.InvalidUserStorageFileException;
-import seedu.duke.ui.Ui;
 import seedu.duke.userstorage.UserStorageParser;
 
 import java.util.HashMap;
@@ -50,7 +49,7 @@ public class UserUniversityListManager {
             UserUniversityList newList = new UserUniversityList(input);
             myManager.put(input, newList);
             logger.log(Level.FINER, "create new list for " + input);
-            Ui.printPuListCreatedAcknowledgement(input);
+            System.out.print(Ui.printPuListCreatedAcknowledgement(input));
         }
     }
 
@@ -83,7 +82,7 @@ public class UserUniversityListManager {
         return myManager.containsKey(inputSchool);
     }
 
-    public void addModule(String inputSchool, UserModule inputModule) {
+    public void addModule(String inputSchool, UserModuleMapping inputModule) {
         if (myManager.containsKey(inputSchool)) {
             myManager.get(inputSchool).addModule(inputModule);
         } else {
@@ -120,7 +119,7 @@ public class UserUniversityListManager {
         } else {
             myManager.remove(inputSchool);
             logger.log(Level.FINER, "delete list for " + inputSchool);
-            Ui.printPuListDeletedAcknowledgement(inputSchool);
+            System.out.print(Ui.printPuListDeletedAcknowledgement(inputSchool));
         }
     }
 
