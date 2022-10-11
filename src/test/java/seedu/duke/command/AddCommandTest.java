@@ -15,9 +15,9 @@ class AddCommandTest {
         int calories = 100;
         String fullCommand;
         final String[] invalidFoodNames = { "", " ", "[]\\[;]" };
-        for (String food_name : invalidFoodNames) {
+        for (String foodName : invalidFoodNames) {
             fullCommand = String.format("%s /%s /%d",
-                    command, food_name, calories);
+                    command, foodName, calories);
             Command c = Parser.parse(fullCommand);
             try {
                 c.execute();
@@ -32,10 +32,10 @@ class AddCommandTest {
     @Test
     void execute_negativeCalories_exceptionThrown() {
         String command = "add food";
-        String food_name = "chicken rice";
+        String foodName = "chicken rice";
         int calories = -112;
         String fullCommand = String.format("%s /%s /%d",
-                command, food_name, calories);
+                command, foodName, calories);
         Command c = Parser.parse(fullCommand);
         try {
             c.execute();

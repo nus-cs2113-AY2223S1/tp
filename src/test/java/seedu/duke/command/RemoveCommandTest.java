@@ -20,6 +20,7 @@ class RemoveCommandTest {
     private Biometrics biometrics = new Biometrics();
     private Ui ui = new Ui();
     private ExerciseList exerciseList = new ExerciseList();
+
     @BeforeEach
     public void setUp() throws Exception {
         ArrayList<String> commandList = new ArrayList<>();
