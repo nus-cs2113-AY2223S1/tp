@@ -99,8 +99,6 @@ public class Messages {
     public static final String MESSAGE_INVALID_CLIENT_INDEX_FLAG_FORMAT = "OOPS!!! Please use this flag format:\n"
             + "ic/CLIENT_INDEX";
 
-    public static final String MESSAGE_PAIRED = "Pairing the following client and property: ";
-
     /* Pair/Unpair Related Error Messages */
 
     public static final String MESSAGE_EMPTY_COMMAND_PAIR_UNPAIR = "OOPS!!! The description of a pair/unpair message "
