@@ -106,7 +106,7 @@ public class Recipe {
         StringBuilder recipeStepStringFormatted = new StringBuilder();
         for (int i = 0; i < steps.size(); i++) {
             String textShown = String.format("%n%d) %s",
-                    i+1, getStep(i));
+                    i + 1, getStep(i));
             recipeStepStringFormatted.append(textShown);
         }
         return recipeStepStringFormatted.toString();

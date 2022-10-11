@@ -15,7 +15,7 @@ public class ListCommand extends Command {
     public CommandResult execute() {
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < RecipeList.getSize(); i++) {
-            result.append(String.format("%n%d. %s", i+1, RecipeList.getRecipe(i).getTitle()));
+            result.append(String.format("%n%d. %s", i + 1, RecipeList.getRecipe(i).getTitle()));
         }
         return new CommandResult(result.toString());
     }

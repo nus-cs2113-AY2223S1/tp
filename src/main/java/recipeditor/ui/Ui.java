@@ -15,12 +15,12 @@ public class Ui {
     private static final String EXIT = "Program exiting";
     private static final String PROMPT = ">>> ";
 
-    private static final String LOGO = "                                               \n" +
-            ",---.          o     ,---.    |o|              \n" +
-            "|---',---.,---..,---.|--- ,---|.|--- ,---.,---.\n" +
-            "|  \\ |---'|    ||   ||    |   |||    |   ||    \n" +
-            "`   ``---'`---'`|---'`---'`---'``---'`---'`    \n" +
-            "                |                              \n";
+    private static final String LOGO = "                                               \n"
+            + ",---.          o     ,---.    |o|              \n"
+            + "|---',---.,---..,---.|--- ,---|.|--- ,---.,---.\n"
+            + "|  \\ |---'|    ||   ||    |   |||    |   ||    \n"
+            + "`   ``---'`---'`|---'`---'`---'``---'`---'`    \n"
+            + "                |                              \n";
 
     public static void showDivider() {
         showMessage(DIVIDER);
