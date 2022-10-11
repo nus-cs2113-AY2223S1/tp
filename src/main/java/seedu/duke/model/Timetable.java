@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.SystemUtils;
@@ -27,6 +29,8 @@ public class Timetable {
     private static final int BOTTOM_PADDING = 1;
     private static final int RIGHT_PADDING = 2;
 
+    public static final String SUBSYSTEM_NAME = "timetable";
+
     private boolean withColor;
     private int firstHour;
     private int lastHour;
@@ -40,12 +44,16 @@ public class Timetable {
     private List<Module> modules;
     private List<Pair<Module, RawLesson>> sortedLessons;
     private ConsoleBorder consoleBorder;
+    private Logger logger;
 
     public Timetable(List<Pair<Module, RawLesson>> lessons) {
         this(lessons, false);
     }
 
     public Timetable(List<Pair<Module, RawLesson>> lessons, boolean withColor) {
+        assert (lessons != null);
+        this.logger = Logger.getLogger(SUBSYSTEM_NAME);
+        this.logger.log(Level.INFO, "Creating a timetable with " + lessons.size() + " lessons");
         this.withColor = SystemUtils.IS_OS_WINDOWS ? false : withColor;
         this.consoleBorder = ConsoleBorder.getInstance();
         this.sortedLessons = sortLessons(lessons);
