@@ -1,6 +1,7 @@
 package seedu.duke.ui;
 
 import java.util.ArrayList;
+
 import seedu.duke.user.UserModuleMapping;
 import seedu.duke.user.UserModuleMappingList;
 import seedu.duke.user.UserUniversityList;
@@ -152,7 +153,7 @@ public class Ui {
      * @param modules The list of modules to be printed.
      * @return Formatted string for the modules in the list.
      */
-    public static String printModulesInList(ArrayList<UserModuleMapping> modules) {
+    public static String printModulesInUserList(ArrayList<UserModuleMapping> modules) {
         String message = LINE;
         for (int i = 0; i < modules.size(); i++) {
             message += Integer.toString(i + 1);
@@ -167,6 +168,6 @@ public class Ui {
     public static String printPuList(UserUniversityList puList) {
         UserModuleMappingList puModulesList = puList.getMyModules();
         ArrayList<UserModuleMapping> puModules = puModulesList.getModules();
-        return printModulesInList(puModules);
+        return printModulesInUserList(puModules);
     }
 }

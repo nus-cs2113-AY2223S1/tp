@@ -1,7 +1,6 @@
 package seedu.duke.ui;
 
 import org.junit.jupiter.api.Test;
-import seedu.duke.Duke;
 import seedu.duke.user.UserModuleMapping;
 //import seedu.duke.DukeException;
 import java.io.ByteArrayInputStream;
@@ -160,6 +159,6 @@ public class UiTest {
                 + "\n" + "2. " + "NUS: " + "CS3244" + " " + "Machine Learning"
                 + " | Partner University: " + "CPSC456" + " " + "ML" + " | Equivalent NUS Credits: " +  "4 MCs" + "\n"
                 + "_____________________________________________________________________________\n";
-        assertEquals(expected, Ui.printModulesInList(modules));
+        assertEquals(expected, Ui.printModulesInUserList(modules));
     }
 }
