@@ -34,11 +34,11 @@ public class Duke {
 
     public void run() throws IOException {
         this.ui = new Ui();
-        this.storage = new Storage();
         this.propertyList = new PropertyList();
         this.clientList = new ClientList();
         this.parser = new Parser(clientList, propertyList);
         this.pairingList = new PairingList();
+        this.storage = new Storage(clientList, propertyList, pairingList);
 
         Command command;
         boolean isCommandBye = false;
@@ -47,7 +47,7 @@ public class Duke {
 
         do {
             try {
-                System.exit(0); //to pass CI
+//                System.exit(0); //to pass CI
                 String userInputText = ui.readCommand();
                 command = parser.parseCommand(userInputText);
                 command.execute(ui, storage, propertyList, clientList, pairingList);

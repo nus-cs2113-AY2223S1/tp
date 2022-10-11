@@ -1,8 +1,10 @@
 package seedu.duke;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Scanner;
 
 public class Storage {
     private static final String DIRECTORY = "./data/";
@@ -14,20 +16,21 @@ public class Storage {
     private static final String OPEN_BRACKET = "[";
     private static final String CLOSE_BRACKET = "]";
     private static final String COLON = " : ";
+    private static final String EMPTY_STRING = "";
 
     
-    public Storage() {
-        checkFile();
+    public Storage(ClientList clientList, PropertyList propertyList, PairingList pairingList) {
+        checkFile(clientList, propertyList, pairingList);
     }
 
     /**
      * Checks if all the file exist.
      */
-    public void checkFile() {
+    public void checkFile(ClientList clientList, PropertyList propertyList, PairingList pairingList) {
         checkDirectory();
-        checkPropertyFile();
-        checkClientFile();
-        checkPair();
+        checkPropertyFile(propertyList);
+        checkClientFile(clientList);
+        checkPair(pairingList);
     }
 
     /**
@@ -46,66 +49,86 @@ public class Storage {
     /**
      * Checks if the property file exist.
      */
-    public void checkPropertyFile() {
+    public void checkPropertyFile(PropertyList propertyList) {
         File propertyFile = new File(PROPERTY_PATH);
         boolean hasPropertyFile = propertyFile.exists();
 
         if (hasPropertyFile) {
             // Load property into the array list
-            loadProperty(propertyFile);
+            loadProperty(propertyList, propertyFile);
         }
     }
 
     /**
      * Checks if the client file exist.
      */
-    public void checkClientFile() {
+    public void checkClientFile(ClientList clientList) {
         File clientFile = new File(CLIENT_PATH);
         boolean hasClientFile = clientFile.exists();
 
-        if (!hasClientFile) {
+        if (hasClientFile) {
             // Load client into the array list
-            loadClient(clientFile);
+            loadClient(clientList, clientFile);
         }
     }
 
     /**
      * Checks if the pair file exit.
+     *
+     * @param pairingList Paring List object that contains the hash map of pair
      */
-    public void checkPair() {
+    public void checkPair(PairingList pairingList) {
         File pairFile = new File(PAIR_PATH);
         boolean hasPairFile = pairFile.exists();
 
         if (!hasPairFile) {
             // Load pair into the hash map
-            loadPair(pairFile);
+            loadPair(pairingList, pairFile);
         }
     }
 
     /**
      * Adds the client list in the text file to the array list.
      *
+     * @param clientList Client List object that contains client's array list
      * @param clientFile The file that stores the list of client.
      */
-    public void loadClient(File clientFile) {
+    public void loadClient(ClientList clientList, File clientFile) {
+
+        try {
+            Scanner scanner = new Scanner(clientFile);
+            while (scanner.hasNext()) {
+                String[] clientParameters = scanner.nextLine().split("\\s\\|\\s");
+                String clientName = clientParameters[0];
+                String clientContact = clientParameters[1];
+                String clientEmail = clientParameters[2];
+                String clientBudget = clientParameters[3].replace(CURRENCY, EMPTY_STRING).trim();
+                clientList.addClient(clientName, clientContact, clientEmail, clientBudget);
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("File is not found...");
+        }
+
 
     }
 
     /**
      * Loads the stored property file into the property array list.
      *
+     * @param propertyList Property List object that contains property's array list.
      * @param propertyFile The file that stores the list of property.
      */
-    public void loadProperty(File propertyFile) {
+    public void loadProperty(PropertyList propertyList, File propertyFile) {
 
     }
 
     /**
      * Loads the stored pair file into the pair hash map.
      *
-     * @param pairFile The file that stores all the pairs.
+     * @param pairingList Paring List object that contains the hash map for pairings.
+     * @param pairFile The file that contains the pairing file.
      */
-    public void loadPair(File pairFile) {
+    public void loadPair(PairingList pairingList, File pairFile) {
 
     }
 
