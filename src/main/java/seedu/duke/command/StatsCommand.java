@@ -7,6 +7,9 @@ import seedu.duke.data.TransactionList;
 import seedu.duke.exception.ListStatisticsInvalidStatsTypeException;
 import seedu.duke.exception.MoolahException;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import static seedu.duke.command.CommandTag.COMMAND_TAG_STATISTICS_TYPE;
 import static seedu.duke.common.InfoMessages.INFO_STATS_CATEGORIES;
 import static seedu.duke.common.InfoMessages.INFO_STATS_EMPTY;
@@ -35,6 +38,8 @@ public class StatsCommand extends Command {
     public static final String COMMAND_DETAILED_HELP = COMMAND_HELP + COMMAND_PARAMETERS_INFO
             + LINE_SEPARATOR;
 
+    private static final Logger statsLogger = Logger.getLogger(StatsCommand.class.getName());
+
     private String statsType;
 
     public StatsCommand() {
@@ -60,6 +65,10 @@ public class StatsCommand extends Command {
      */
     @Override
     public void execute(TransactionList transactions, Ui ui, Storage storage) throws MoolahException {
+        statsLogger.setLevel(Level.WARNING);
+        statsLogger.log(Level.INFO, "Stats command starts passing the type of statistics"
+                + " and transactions list into the listStatisticsByStatsType method.");
+
         listStatisticsByStatsType(statsType, transactions);
     }
 
@@ -77,23 +86,34 @@ public class StatsCommand extends Command {
      */
     private static void listStatisticsByStatsType(String statsType, TransactionList transactions)
             throws ListStatisticsInvalidStatsTypeException {
+        statsLogger.log(Level.INFO, "A new instance of CategoryList is created.");
         CategoryList categories = new CategoryList();
 
         switch (statsType) {
         case "categories":
+            statsLogger.log(Level.INFO, "The categories and amount for each category are "
+                    + " being tallied and computed.");
             categories.calculateTotalAmount(transactions);
             String categoriesList = categories.listCategories();
 
             if (categoriesList.isEmpty()) {
+                statsLogger.log(Level.INFO, "Categories list is empty, so UI should display that"
+                        + " there are no statistics available.");
                 Ui.showInfoMessage(INFO_STATS_EMPTY.toString());
+                statsLogger.log(Level.INFO, "End of Stats command.");
                 return;
             }
             assert !categoriesList.isEmpty();
+            statsLogger.log(Level.INFO, "Categories list is available, so UI should display the"
+                    + " categories and amount of savings per category.");
             Ui.showTransactionsList(categoriesList, INFO_STATS_CATEGORIES.toString());
             break;
         default:
+            statsLogger.log(Level.WARNING, "An exception has been caught due to an invalid statistics type.");
             throw new ListStatisticsInvalidStatsTypeException();
         }
+
+        statsLogger.log(Level.INFO, "End of Stats command.");
     }
 
     /**
