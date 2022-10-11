@@ -11,6 +11,10 @@ import seedu.duke.exception.InputTransactionUnknownTypeException;
 
 import java.time.LocalDate;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+
 import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_TYPE;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_CATEGORY;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_DATE;
@@ -47,6 +51,8 @@ public class AddCommand extends Command {
     // Detailed help description
     public static final String COMMAND_DETAILED_HELP = COMMAND_HELP + COMMAND_PARAMETERS_INFO + "\n";
 
+    private static final Logger statsLogger = Logger.getLogger(AddCommand.class.getName());
+
     private String type;
     private String description;
     private int amount;
@@ -74,12 +80,10 @@ public class AddCommand extends Command {
      */
     @Override
     public String[] getMandatoryTags() {
+
         String[] mandatoryTags = new String[]{
-            COMMAND_TAG_TRANSACTION_TYPE,
-            COMMAND_TAG_TRANSACTION_CATEGORY,
-            COMMAND_TAG_TRANSACTION_AMOUNT,
-            COMMAND_TAG_TRANSACTION_DATE,
-            COMMAND_TAG_TRANSACTION_DESCRIPTION
+            COMMAND_TAG_TRANSACTION_TYPE, COMMAND_TAG_TRANSACTION_CATEGORY, COMMAND_TAG_TRANSACTION_AMOUNT,
+            COMMAND_TAG_TRANSACTION_DATE, COMMAND_TAG_TRANSACTION_DESCRIPTION
         };
         return mandatoryTags;
     }
@@ -119,19 +123,27 @@ public class AddCommand extends Command {
      */
     @Override
     public void execute(TransactionList transactions, Ui ui, Storage storage) throws MoolahException {
-
+        statsLogger.setLevel(Level.WARNING);
+        statsLogger.log(Level.INFO, "Add Command checks the type of the transaction "
+                + "before adding into the transaction class.");
         assert date != null;
         switch (type) {
         case Expense.TRANSACTION_NAME:
             String expense = transactions.addExpense(description, amount, category, date);
             Ui.showTransactionAction(INFO_ADD_EXPENSE.toString(), expense);
+            statsLogger.log(Level.INFO, "New expense transaction has been added "
+                    + "and the UI should display respectively ");
             break;
         case Income.TRANSACTION_NAME:
             String income = transactions.addIncome(description, amount, category, date);
             Ui.showTransactionAction(INFO_ADD_INCOME.toString(), income);
+            statsLogger.log(Level.INFO, "New income transaction has been added "
+                    + "and the UI should display respectively ");
             break;
         default:
+            statsLogger.log(Level.INFO, "Exception thrown when the ransaction type is unknown");
             throw new InputTransactionUnknownTypeException();
+
         }
     }
 
