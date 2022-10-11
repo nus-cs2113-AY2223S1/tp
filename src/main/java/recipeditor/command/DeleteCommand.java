@@ -39,7 +39,7 @@ public class DeleteCommand extends Command {
                     deletedRecipe.getDescription() + " is deleted.%n"));
         } catch (IndexOutOfBoundsException e) {
             return new CommandResult(String.format(
-                    "There are only %d recipes now.%n", index));
+                    "There are only %d recipes now.%n", RecipeList.getSize()));
         }
 
     }
