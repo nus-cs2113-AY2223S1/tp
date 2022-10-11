@@ -130,7 +130,7 @@ public class CommandParser {
             return new RemoveTransactionCommand(parts, itemList, transactionList);
         default:
             throw new CommandNotFoundException("This command is unrecognizable!!!\n"
-                    + "Please use list-commands command to check");
+                    + "Please use help command to check");
         }
     }
 }
