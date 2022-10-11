@@ -30,8 +30,7 @@ public class StatsCommand extends Command {
 
     // Basic help description
     public static final String COMMAND_HELP = "Command Word: " + COMMAND_WORD + LINE_SEPARATOR
-            + COMMAND_DESCRIPTION + LINE_SEPARATOR
-            + COMMAND_USAGE + LINE_SEPARATOR;
+            + COMMAND_DESCRIPTION + LINE_SEPARATOR + COMMAND_USAGE + LINE_SEPARATOR;
     // Detailed help description
     public static final String COMMAND_DETAILED_HELP = COMMAND_HELP + COMMAND_PARAMETERS_INFO
             + LINE_SEPARATOR;
@@ -44,7 +43,7 @@ public class StatsCommand extends Command {
     /**
      * Gets the mandatory tags of the command.
      *
-     * @return A string array containing all mandatory tags
+     * @return A string array containing all mandatory tags.
      */
     @Override
     public String[] getMandatoryTags() {
@@ -69,18 +68,22 @@ public class StatsCommand extends Command {
         this.statsType = statsType;
     }
 
+    /**
+     * Lists the statistics depending on the type of statistics requested.
+     *
+     * @param statsType     The type of statistics that is needed, e.g. categories.
+     * @param transactions  An instance of the TransactionList class.
+     * @throws ListStatisticsInvalidStatsTypeException If the type of statistics is not recognised.
+     */
     private static void listStatisticsByStatsType(String statsType, TransactionList transactions)
             throws ListStatisticsInvalidStatsTypeException {
-        /*
-        Known issue; currently each repeat use of command will generate more classes, need
-        to probably add into constructor and pass in categories
-        */
         CategoryList categories = new CategoryList();
 
         switch (statsType) {
         case "categories":
             categories.calculateTotalAmount(transactions);
             String categoriesList = categories.listCategories();
+
             if (categoriesList.isEmpty()) {
                 Ui.showInfoMessage(INFO_STATS_EMPTY.toString());
                 return;
@@ -93,6 +96,11 @@ public class StatsCommand extends Command {
         }
     }
 
+    /**
+     * Enables the program to exit when the Bye command is issued.
+     *
+     * @return A boolean value that indicates whether the program shall exit.
+     */
     @Override
     public boolean isExit() {
         return false;

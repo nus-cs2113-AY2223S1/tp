@@ -26,17 +26,16 @@ public class HelpCommand extends Command {
             + "(Optional) o/detailed - Detailed version of guide.";
 
     // Basic help description
-    public static final String COMMAND_HELP = "Command Word: " + COMMAND_WORD
-            + LINE_SEPARATOR
-            + COMMAND_DESCRIPTION
-            + LINE_SEPARATOR
-            + COMMAND_USAGE
-            + LINE_SEPARATOR;
+    public static final String COMMAND_HELP = "Command Word: " + COMMAND_WORD + LINE_SEPARATOR
+            + COMMAND_DESCRIPTION + LINE_SEPARATOR + COMMAND_USAGE + LINE_SEPARATOR;
     // Detailed help description
     public static final String COMMAND_DETAILED_HELP = COMMAND_HELP + COMMAND_PARAMETERS_INFO + "\n";
 
     private boolean isDetailed;
 
+    /**
+     * Instantiates the ListCommand class with required variables.
+     */
     public HelpCommand() {
         this.isDetailed = false;
     }
@@ -49,7 +48,7 @@ public class HelpCommand extends Command {
     /**
      * Gets the optional tags of the command.
      *
-     * @return A string array containing all optional tags
+     * @return A string array containing all optional tags.
      */
     @Override
     public String[] getOptionalTags() {
@@ -106,6 +105,11 @@ public class HelpCommand extends Command {
         return helpMessage;
     }
 
+    /**
+     * Enables the program to exit when the Bye command is issued.
+     *
+     * @return A boolean value that indicates whether the program shall exit.
+     */
     @Override
     public boolean isExit() {
         return false;

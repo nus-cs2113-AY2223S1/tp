@@ -10,11 +10,11 @@ public class Duke {
     private TransactionList transactions;
     private Ui ui;
 
-    public Duke() {    // NEED TO ADD FILE PATH
+    public Duke() { // TODO: Add a file path when implementing storage feature
         ui = new Ui();
         transactions = new TransactionList();
 
-        // ideal code after u add all the storage stuff
+        // TODO: Ideal code after adding the storage feature
         /**storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
@@ -27,33 +27,19 @@ public class Duke {
     public void run() {
         ui.showGreeting();
         boolean isExit = false;
-        String inData; // temp
         while (!isExit) {
             try {
-                inData = ui.readCommand();
-                inData = inData.trim();
-                Command c = CommandParser.parse(inData);
-                c.execute(transactions, ui, storage);
-                isExit = c.isExit();
+                String fullCommand = ui.readCommand();
+                Command command = CommandParser.parse(fullCommand);
+                command.execute(transactions, ui, storage);
+                isExit = command.isExit();
             } catch (MoolahException e) {
                 Ui.showErrorMessage(e.getMessage());
             }
-            //ideal code
-            /***try {
-                String fullCommand = ui.readCommand();
-                ui.showLine(); // divider line
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getErrorMessage());
-            } finally {
-                ui.showLine();
-            }**/
         }
     }
 
     public static void main(String[] args) {
-        new Duke().run();  // NEED TO ADD FILE PATH
+        new Duke().run(); // TODO: Add a file path when implementing storage feature
     }
 }
