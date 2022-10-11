@@ -95,7 +95,7 @@ public class Recipe {
     public String getIngredientAttributesFormatted() {
         StringBuilder recipeIngredientStringFormatted = new StringBuilder();
         for (Ingredient i : ingredients) {
-            String textShown = String.format("%nName - %s%nAmount - %s%nUnit - %s%n",
+            String textShown = String.format("%s | %s | %s %n",
                     i.getName(), String.valueOf(i.getAmount()), i.getUnit());
             recipeIngredientStringFormatted.append(textShown);
         }
@@ -116,8 +116,8 @@ public class Recipe {
         StringBuilder recipeAttributesStringFormatted = new StringBuilder();
         recipeAttributesStringFormatted.append("Recipe Name: " + title + "\n");
         recipeAttributesStringFormatted.append("Recipe Description: " + description + "\n");
-        recipeAttributesStringFormatted.append("Recipe Ingredients: " + getIngredientAttributesFormatted());
-        recipeAttributesStringFormatted.append("Steps: " + getStepAttributesFormatted() + "\n");
+        recipeAttributesStringFormatted.append("Recipe Ingredients: " + "\n" + getIngredientAttributesFormatted());
+        recipeAttributesStringFormatted.append("Recipe Steps: " + getStepAttributesFormatted() + "\n");
         return recipeAttributesStringFormatted.toString();
     }
 }

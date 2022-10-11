@@ -17,9 +17,11 @@ public class Storage {
     private static final String RECIPE_NAME_FIELD_TYPE = "Recipe Name";
     private static final String RECIPE_DESCRIPTION_FIELD_TYPE = "Recipe Description";
     private static final String RECIPE_INGREDIENTS_FIELD_TYPE = "Recipe Ingredients";
+    private static final String RECIPE_STEPS_FIELD_TYPE = "Recipe Steps";
     private static final int INGREDIENT_NAME = 1;
     private static final int INGREDIENT_AMOUNT = 2;
     private static final int INGREDIENT_UNIT = 3;
+
 
     public static void createDataFile() {
         File file = new File(DATA_FILE_PATH);
@@ -61,6 +63,11 @@ public class Storage {
                     RecipeList.addRecipe(newRecipe);
                     newRecipe = new Recipe();
                     break;
+                case RECIPE_STEPS_FIELD_TYPE:
+                    String stepInput = s.nextLine();
+                    System.out.println("STEP IN");
+//                    do {
+//                    } while (!stepInput.equals(Ui.DIVIDER));
                 default:
                     Ui.showMessage("Error loading recipes from data file");
                     break;
@@ -75,33 +82,17 @@ public class Storage {
     public static ArrayList<Ingredient> setIngredientsDetails(Scanner s) {
         ArrayList<Ingredient> ingredients = new ArrayList<>();
         Ingredient newIngredient = new Ingredient();
-        int parameter = 1;
         String ingredientInput = s.nextLine();
-        do {
-            String[] ingredientDetails = ingredientInput.split(" - ");
-            if (ingredientDetails.length == 2) {
-                switch (parameter) {
-                case INGREDIENT_NAME:
-                    newIngredient.setName(ingredientDetails[ 1 ]);
-                    parameter++;
-                    break;
-                case INGREDIENT_AMOUNT:
-                    newIngredient.setAmount(Double.parseDouble(ingredientDetails[ 1 ]));
-                    parameter++;
-                    break;
-                case INGREDIENT_UNIT:
-                    newIngredient.setUnit(ingredientDetails[ 1 ]);
-                    ingredients.add(newIngredient);
-                    newIngredient = new Ingredient();
-                    parameter = 1;
-                    break;
-                default:
-                    Ui.showMessage("Error setting ingredients from data file");
-                    break;
-                }
-            }
+        String[] ingredientDetails = ingredientInput.split(" \\| ");
+        while (ingredientDetails.length == 3){
+            newIngredient.setName(ingredientDetails[ 0 ]);
+            newIngredient.setAmount(Double.parseDouble(ingredientDetails[ 1 ]));
+            newIngredient.setUnit(ingredientDetails[ 2 ]);
+            ingredients.add(newIngredient);
+            newIngredient = new Ingredient();
             ingredientInput = s.nextLine();
-        } while (!ingredientInput.equals(Ui.DIVIDER));
+            ingredientDetails = ingredientInput.split(" \\| ");
+        }
         return ingredients;
     }
 }

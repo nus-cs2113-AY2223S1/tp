@@ -1,18 +1,8 @@
-Recipe Name: dsa
-Recipe Description: gd
+Recipe Name: afsfsd
+Recipe Description: hgfhf
 Recipe Ingredients: 
-Name - d
-Amount - 3.0
-Unit - 3
-Steps: 
-1) dfsf
-____________________________________________________________
-Recipe Name: dada
-Recipe Description: gdf
-Recipe Ingredients: 
-Name - da
-Amount - 2.0
-Unit - 2
-Steps: 
-1) dada
+d | 4.0 | 4 
+fs | 3.0 | 2 
+Recipe Steps: 
+1) fasda
 ____________________________________________________________
