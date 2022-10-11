@@ -1,6 +1,6 @@
-package seedu.duke;
+package seedu.duke.terminalinfo;
 
-public class Passenger {
+public class PassengerInfo {
     private String name;
     private String departureDate;
     private String departureTime;
@@ -10,8 +10,8 @@ public class Passenger {
     private String seatNumber;
     private String boardingTime;
 
-    public Passenger(String name, String departureDate, String departureTime, String flightNumber,
-                     String gateNumber, int boardingGroup, String seatNumber, String boardingTime) {
+    public PassengerInfo(String name, String departureDate, String departureTime, String flightNumber,
+                         String gateNumber, int boardingGroup, String seatNumber, String boardingTime) {
         this.name = name;
         this.departureDate = departureDate;
         this.departureTime = departureTime;
