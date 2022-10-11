@@ -1,7 +1,6 @@
 package seedu.files;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -13,7 +12,6 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.ObjectReader;
 
 import seedu.data.Carpark;
-import seedu.exception.EmptySecretFileException;
 import seedu.exception.NoFileFoundException;
 import seedu.files.parsing.LtaJsonWrapper;
 
@@ -46,10 +44,10 @@ public class FileReader {
     }
 
     /**
-     * TODO: Javadoc
-     * @param filepath
-     * @return
-     * @throws IOException
+     * todo: Javadoc
+     * @param filepath [fill this up]
+     * @return [fill this up]
+     * @throws IOException [fill this up]
      */
     private static List<Carpark> getCarparks(Path filepath) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();

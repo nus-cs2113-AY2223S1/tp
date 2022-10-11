@@ -17,8 +17,8 @@ public class ApiTest {
     @Test
     public void loadApiKeyFileEmpty() {
         Api api = new Api(testJsonFile, testJsonFileDirectory);
-        Assertions.assertThrows(EmptySecretFileException.class,
-                () -> api.loadApiKey(testEmptyApiKeyFile, testJsonFileDirectory));
+        Assertions.assertThrows(EmptySecretFileException.class, () -> api.loadApiKey(testEmptyApiKeyFile,
+                testJsonFileDirectory));
     }
 
     @Test

@@ -1,14 +1,13 @@
 package seedu.files;
 
-import org.codehaus.jackson.annotate.JsonTypeInfo;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.Scanner;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class FileStorageTest {
     private final String testFileDirectoryCreate = "./src/test/java/seedu/testfiles_create";
@@ -29,7 +28,7 @@ public class FileStorageTest {
 
     @Test
     public void validDataWrite() throws IOException {
-        FileStorage storage =  new FileStorage(testFileDirectory, testFileWriteDest);
+        FileStorage storage = new FileStorage(testFileDirectory, testFileWriteDest);
         storage.writeDataToFile("I am currently writing this data to the file.");
         File file = new File(Paths.get(testFileDirectory, testFileWriteDest).toString());
         Scanner scanner = new Scanner(file);
