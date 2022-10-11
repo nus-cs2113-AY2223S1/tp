@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Scanner;
 
@@ -59,13 +60,38 @@ public class FileReader {
 
     /**
      * Returns data in string from file.
+
      * @param filepath File path.
      * @return Data string in file.
      * @throws IOException if file not found.
      */
-    public static String readStringFromTxt(Path filepath) throws IOException{
-            File file = new File(filepath.toString());
-            Scanner scanner = new Scanner(file);
-            return scanner.nextLine().trim();
+    public static String readStringFromTxt(Path filepath) throws IOException {
+        File file = new File(filepath.toString());
+        Scanner scanner = new Scanner(file);
+        return scanner.nextLine().trim();
+    }
+    /**
+     * @param filePath File path.
+     * @param directoryPath Directory path.
+     * @param createDirectory if true and file does not exist, it will create.
+     * @return Data string in file.
+     * @throws IOException if file not found.
+     */
+    public static String readStringFromTxt(String filePath, String directoryPath, boolean createDirectory)
+            throws IOException {
+        String filepath = Paths.get(directoryPath, filePath).toString();
+        File file = new File(filepath);
+        if (!file.exists() && createDirectory) {
+            System.out.println("File does not exist. Creating one at ./resources/api/secret.txt.");
+            File directory = new File(directoryPath);
+            directory.mkdirs();
+            file.createNewFile();
+        }
+        String content = "";
+        Scanner scanner = new Scanner(file);
+        while (scanner.hasNext()) {
+            content = scanner.nextLine().trim();
+        }
+        return content;
     }
 }

@@ -7,4 +7,6 @@ public class InvalidFindCommandException extends ParkingException {
     public InvalidFindCommandException(String message) {
         super(message);
     }
+
 }
+

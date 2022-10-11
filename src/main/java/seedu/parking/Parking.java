@@ -4,6 +4,9 @@ import java.io.IOException;
 
 import seedu.api.Api;
 import seedu.common.CommonFiles;
+import seedu.commands.Find;
+import seedu.common.CommonFiles;
+import seedu.data.Carpark;
 import seedu.data.CarparkList;
 import seedu.exception.InvalidFindCommandException;
 import seedu.exception.NoCarparkFoundException;
@@ -13,6 +16,10 @@ import seedu.parser.Parser;
 import seedu.parser.Command;
 import seedu.commands.Find;
 import seedu.data.Carpark;
+import seedu.parser.Command;
+import seedu.parser.Parser;
+import seedu.ui.Ui;
+
 
 /**
  * Main class of the program.
