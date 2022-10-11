@@ -1,14 +1,12 @@
 package seedu.duke.ui;
 
 import java.util.ArrayList;
-<<<<<<< Updated upstream
 import seedu.duke.user.UserModule;
 import seedu.duke.user.UserModuleList;
 import seedu.duke.user.UserUniversityList;
 
 import java.util.Scanner;
-=======
->>>>>>> Stashed changes
+
 
 public class Ui {
     public static final String LINE = "_____________________________________________________________________________\n";
