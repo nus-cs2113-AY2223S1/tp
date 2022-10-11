@@ -1,16 +1,10 @@
 package seedu.duke;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-
 class DukeTest {
-    Duke duke = new Duke();
     Wallet emptyWallet = new Wallet("EmptyWalletUser" , "EmptyWalletPass");
     Wallet filledWallet = new Wallet("FilledWalletUser" , "FilledWalletPass", 1000);
 
@@ -56,6 +50,4 @@ class DukeTest {
         emptyWallet.setPassWord("ChangedPassWord");
         assertEquals("ChangedPassWord", emptyWallet.getPassWord());
     }
-
-
 }
