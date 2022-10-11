@@ -13,12 +13,14 @@ public class UserStorageTest {
     @Test
     public void testFileContentStringConversion() {
         testManager.createList("Boston University");
-        UserModule testModule = new UserModule("MET CS 248", "Discrete Mathematics", "CS1231", "Discrete Structures", "4");
+        UserModule testModule = new UserModule("MET CS 248", "Discrete Mathematics", "CS1231",
+                "Discrete Structures", "4");
         testManager.addModule("Boston University", testModule);
-        assertEquals("Boston University%\n" +
-                        "MET CS 248;Discrete Mathematics;CS1231;Discrete Structures;4%\n",
+        assertEquals("Boston University%\n"
+                        + "MET CS 248;Discrete Mathematics;CS1231;Discrete Structures;4%\n",
                 UserStorageParser.convertUniversityListIntoFileContent(testManager));
     }
+    
     @Test
     public void testUserUniversityListManagerConversion() {
         String fileContent = "Boston University%" + "MET CS 248;Discrete Mathematics;CS1231;Discrete Structures;4%";
