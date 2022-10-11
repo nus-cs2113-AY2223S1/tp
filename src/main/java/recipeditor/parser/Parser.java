@@ -25,7 +25,7 @@ public class Parser {
         case ExitCommand.COMMAND_TYPE:
             return new ExitCommand();
         case DeleteCommand.COMMAND_TYPE:
-            return new DeleteCommand(0); // TODO: This is dummy variable only
+            return parseDeleteCommand(parsed); // TODO: This is dummy variable only
         case ViewCommand.COMMAND_TYPE:
             return new ViewCommand();
         default:
@@ -42,5 +42,12 @@ public class Parser {
         return new AddCommand(add.isValid, add.addedRecipe); // Pass validty and potential recipe to AddCommand
     }
 
+    private Command parseDeleteCommand(String[] parsed) {
+        if (parsed.length == 2) {
+            Integer index = Integer.valueOf(parsed[1]) - 1; // to account for 0-based indexing in recipelist
+            return new DeleteCommand(index);
+        }
+        return new InvalidCommand();
+    }
 
 }

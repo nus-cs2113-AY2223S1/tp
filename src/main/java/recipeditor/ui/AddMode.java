@@ -42,7 +42,7 @@ public class AddMode {
                 break;
             }
         }
-        isValid = (stage >= 3) ? true : false; // Check if all the components are filled
+        isValid = (stage >= 2) ? true : false; // Check if all the components are filled
     }
 
     public void exitAddMode() {
@@ -87,7 +87,6 @@ public class AddMode {
             Ui.showMessageInline("Name: " + parsed[0]);
             Ui.showMessageInline("Amount: " + amount);
             Ui.showMessageInline("Unit: " + parsed[2]);
-            stage++;
         } catch (Exception e) {
             Ui.showMessage(ERROR_PARSING);
         }

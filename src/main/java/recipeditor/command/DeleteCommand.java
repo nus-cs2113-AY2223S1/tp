@@ -2,6 +2,7 @@ package recipeditor.command;
 
 import recipeditor.recipe.Recipe;
 import recipeditor.recipe.RecipeList;
+import recipeditor.ui.Ui;
 
 public class DeleteCommand extends Command {
     public static final String COMMAND_TYPE = "delete";
@@ -31,15 +32,14 @@ public class DeleteCommand extends Command {
      * @return the result message from execute
      */
     public CommandResult execute() {
-
         try {
             Recipe deletedRecipe = RecipeList.getRecipes().get(index);
             RecipeList.getRecipes().remove(index);
             return new CommandResult(String.format(
-                    deletedRecipe.getDescription() + " is deleted.%n"));
+                    deletedRecipe.getTitle() + " is deleted.%n"));
         } catch (IndexOutOfBoundsException e) {
-            return new CommandResult(String.format(
-                    "There are only %d recipes now.%n", index));
+            Ui.showMessageInline("Current number of saved recipes:", Integer.toString(RecipeList.getRecipes().size()));
+            return new CommandResult("Delete recipe index out of bound.");
         }
 
     }
