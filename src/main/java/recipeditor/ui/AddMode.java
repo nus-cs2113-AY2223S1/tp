@@ -118,7 +118,6 @@ public class AddMode {
         } else {
             stage++;
         }
-
         return input;
     }
 

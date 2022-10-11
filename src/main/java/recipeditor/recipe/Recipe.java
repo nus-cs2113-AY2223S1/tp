@@ -117,7 +117,7 @@ public class Recipe {
         recipeAttributesStringFormatted.append("Recipe Name: " + title + "\n");
         recipeAttributesStringFormatted.append("Recipe Description: " + description + "\n");
         recipeAttributesStringFormatted.append("Recipe Ingredients: " + getIngredientAttributesFormatted());
-        recipeAttributesStringFormatted.append("Steps: " + getStepAttributesFormatted());
+        recipeAttributesStringFormatted.append("Steps: " + getStepAttributesFormatted() + "\n");
         return recipeAttributesStringFormatted.toString();
     }
 }

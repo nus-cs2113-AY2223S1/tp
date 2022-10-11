@@ -33,7 +33,7 @@ public class Storage {
         try {
             FileWriter fw = new FileWriter(DATA_FILE_PATH, true);
             fw.write(recipe.getRecipeAttributesFormatted());
-            fw.write(Ui.DIVIDER);
+            fw.write(Ui.DIVIDER + "\n");
             fw.close();
         } catch (IOException ioException) {
             Ui.showMessage("Error in loading recipes to data file");

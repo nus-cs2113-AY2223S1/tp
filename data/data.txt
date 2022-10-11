@@ -1,22 +1,18 @@
-Recipe Name: fds
-Recipe Description: fgd
+Recipe Name: dsa
+Recipe Description: gd
 Recipe Ingredients: 
-Name - s
-Amount - 2.0
-Unit - 2
-
-Name - gf
+Name - d
 Amount - 3.0
 Unit - 3
+Steps: 
+1) dfsf
 ____________________________________________________________
-Recipe Name: fds
-Recipe Description: fgd
-Recipe Ingredients:
-Name - s
+Recipe Name: dada
+Recipe Description: gdf
+Recipe Ingredients: 
+Name - da
 Amount - 2.0
 Unit - 2
-
-Name - gf
-Amount - 3.0
-Unit - 3
+Steps: 
+1) dada
 ____________________________________________________________
