@@ -23,7 +23,7 @@ public class Module {
 
     @Override
     public String toString() {
-        return getCode() + " " + getTitle() + " " + getCredit() + "MCs";
+        return getCode() + " " + getTitle() + " " + getCredit() + "MCs in " + getUniversity();
     }
 
     public String getCode() {
