@@ -82,8 +82,11 @@ public class AddCommand extends Command {
     public String[] getMandatoryTags() {
 
         String[] mandatoryTags = new String[]{
-            COMMAND_TAG_TRANSACTION_TYPE, COMMAND_TAG_TRANSACTION_CATEGORY, COMMAND_TAG_TRANSACTION_AMOUNT,
-            COMMAND_TAG_TRANSACTION_DATE, COMMAND_TAG_TRANSACTION_DESCRIPTION
+            COMMAND_TAG_TRANSACTION_TYPE,
+            COMMAND_TAG_TRANSACTION_CATEGORY,
+            COMMAND_TAG_TRANSACTION_AMOUNT,
+            COMMAND_TAG_TRANSACTION_DATE,
+            COMMAND_TAG_TRANSACTION_DESCRIPTION
         };
         return mandatoryTags;
     }
@@ -132,19 +135,20 @@ public class AddCommand extends Command {
             String expense = transactions.addExpense(description, amount, category, date);
             Ui.showTransactionAction(INFO_ADD_EXPENSE.toString(), expense);
             statsLogger.log(Level.INFO, "New expense transaction has been added "
-                    + "and the UI should display respectively ");
+                    + "and the UI should display acknowledgment message respectively.");
             break;
         case Income.TRANSACTION_NAME:
             String income = transactions.addIncome(description, amount, category, date);
             Ui.showTransactionAction(INFO_ADD_INCOME.toString(), income);
             statsLogger.log(Level.INFO, "New income transaction has been added "
-                    + "and the UI should display respectively ");
+                    + "and the UI should display acknowledgment message respectively.");
             break;
         default:
-            statsLogger.log(Level.INFO, "Exception thrown when the ransaction type is unknown");
+            statsLogger.log(Level.INFO, "Exception thrown when the transaction type is unknown.");
             throw new InputTransactionUnknownTypeException();
 
         }
+        statsLogger.log(Level.INFO, "End of Add command.");
     }
 
     /**
