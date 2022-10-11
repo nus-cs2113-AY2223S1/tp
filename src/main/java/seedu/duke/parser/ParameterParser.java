@@ -161,7 +161,7 @@ public class ParameterParser {
      * If the split.length() is <= 2, it means that only the tag exists , and there is no parameter after the tag.
      *
      * @param splits The user input after the command word, split into a list for every space found.
-     * @throws EmptyParameterException Extra tag exception.
+     * @throws EmptyParameterException If there exists a tag without parameter.
      * @author chinhan99
      */
     private static void checkParameterNotEmpty(String[] splits) throws EmptyParameterException {
@@ -267,7 +267,7 @@ public class ParameterParser {
      *
      * @param parameter The user input after the user tag.
      * @return The class type if no exceptions are thrown.
-     * @throws InputTransactionUnknownTypeException Invalid type format exception.
+     * @throws InputTransactionUnknownTypeException If the transaction type provided is not supported.
      * @author chydarren
      */
     public static String parseTypeTagForListing(String parameter) throws InputTransactionUnknownTypeException {
@@ -286,7 +286,7 @@ public class ParameterParser {
      *
      * @param parameter The user input after the user tag.
      * @return The user input after the user tag.
-     * @throws InputTransactionUnknownTypeException Invalid type format exception.
+     * @throws InputTransactionUnknownTypeException If the transaction type provided is not supported.
      * @author wcwy
      */
     public static String parseTypeTagForAdding(String parameter) throws InputTransactionUnknownTypeException {
@@ -305,7 +305,7 @@ public class ParameterParser {
      *
      * @param parameter The user input after the user tag.
      * @return The category parameter if no exceptions are thrown.
-     * @throws InputTransactionInvalidCategoryException Invalid category format exception.
+     * @throws InputTransactionInvalidCategoryException If the category provided contains numeric or symbols.
      * @author chinhan99
      */
     public static String parseCategoryTag(String parameter) throws InputTransactionInvalidCategoryException {
@@ -322,7 +322,7 @@ public class ParameterParser {
      *
      * @param parameter The user input after the user tag.
      * @return The amount integer if no exceptions are thrown.
-     * @throws AddTransactionInvalidAmountException Invalid amount format exception.
+     * @throws AddTransactionInvalidAmountException If the transaction amount provided is not a valid accepted integer.
      * @author chinhan99
      */
     private static int parseAmountTag(String parameter) throws AddTransactionInvalidAmountException {
@@ -348,7 +348,7 @@ public class ParameterParser {
      *
      * @param parameter The user input after the user tag.
      * @return The LocalDate object parsed from user input given.
-     * @throws InputTransactionInvalidDateException Invalid date format exception.
+     * @throws InputTransactionInvalidDateException If the format of the transaction date provided is incorrect.
      * @author wcwy
      */
     public static LocalDate parseDateTag(String parameter) throws InputTransactionInvalidDateException {
@@ -366,7 +366,7 @@ public class ParameterParser {
      *
      * @param parameter The user input after the user tag.
      * @return The valid integer for list index parsed from user input given.
-     * @throws MoolahException Either invalid index exception or amount not numeric exception.
+     * @throws MoolahException If the entry number provided is not parsable into integer.
      * @author brian-vb
      */
     public static int parseEntryTag(String parameter) throws MoolahException {
@@ -385,7 +385,7 @@ public class ParameterParser {
      *
      * @param parameter The user input after the user tag.
      * @return A boolean value indicating if the option selected by user is "detailed"
-     * @throws UnknownHelpOptionException An unknown help option exception.
+     * @throws UnknownHelpOptionException If the help option parameter selected is not 'detailed'.
      * @author wcwy
      */
     public static boolean parseHelpOptionTag(String parameter) throws UnknownHelpOptionException {
@@ -402,7 +402,7 @@ public class ParameterParser {
      *
      * @param parameter The user input after the user tag.
      * @return The statistic type.
-     * @throws ListStatisticsInvalidStatsTypeException Invalid statistic type exception.
+     * @throws ListStatisticsInvalidStatsTypeException If the statistic type given is not supported.
      * @author chydarren
      */
     public static String parseStatsTypeTag(String parameter) throws ListStatisticsInvalidStatsTypeException {
