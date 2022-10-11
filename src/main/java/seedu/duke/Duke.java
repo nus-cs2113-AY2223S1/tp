@@ -24,7 +24,7 @@ public class Duke {
 
     /**
      * Running the YAMOM programme.
-     * Main programme flow of YAMOM
+     * Main programme flow of YAMOM.
      */
     public void run() {
         startSequence();

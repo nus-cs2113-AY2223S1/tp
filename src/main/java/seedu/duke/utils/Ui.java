@@ -8,8 +8,8 @@ import java.util.Scanner;
 
 /**
  * The User Interface class that deals with interaction with user.
- * To read input from the terminal and to display responses to the user
- * Serves as the intermediaries between the user and the internal working of the programme (View in MVC model)
+ * To read input from the terminal and to display responses to the user.
+ * Serves as the intermediaries between the user and the internal working of the programme (View in MVC model).
  */
 public class Ui {
 
@@ -43,8 +43,8 @@ public class Ui {
     }
 
     /**
-     * Print out the content in the uiBuffer
-     * @param hasLineDivider
+     * Print out the content in the uiBuffer.
+     * @param hasLineDivider if to print out a line divider.
      */
     public void displayUi(boolean hasLineDivider) {
         if (hasLineDivider) {
@@ -68,8 +68,8 @@ public class Ui {
     }
 
     /**
-     * To store String messages into a buffer
-     * @param message the message to add into the buffer
+     * To store String messages into a buffer.
+     * @param message the message to add into the buffer.
      */
     public void addMessage(String message) {
         uiBuffer.add(message);
@@ -82,9 +82,9 @@ public class Ui {
     }
 
     /**
-     * Display just one line of message
-     * Generally for the case of displaying just a single line of message
-     * @param message the message to be displayed
+     * Display just one line of message.
+     * Generally for the case of displaying just a single line of message.
+     * @param message the message to be displayed.
      */
     public void displayMessage(String message) {
         System.out.println(message);
