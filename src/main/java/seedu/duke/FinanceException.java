@@ -1,12 +1,14 @@
 package seedu.duke;
 
 public class FinanceException extends Throwable {
-    public enum exceptionCollection {
-        COMMAND_TYPE_EXCEPTION,
-        UNKNOWN_EXCEPTION
+    public enum ExceptionCollection {
+        COMMAND_TYPE_EXCEPTION
+        //UNKNOWN_EXCEPTION
     }
-    private exceptionCollection exceptionType;
-    public FinanceException(exceptionCollection exception) {
+
+    private final ExceptionCollection exceptionType;
+
+    public FinanceException (ExceptionCollection exception) {
         super();
         this.exceptionType = exception;
     }
