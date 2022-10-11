@@ -21,9 +21,6 @@ public class Storage {
 
     public static void createDataFile() {
         File file = new File(DATA_FILE_PATH);
-        if (!file.getParentFile().mkdirs()) {
-            Ui.printCreateParentFolderErrorText();
-        }
         Ui.printFilePath(file, DATA_FILE_PATH);
     }
 
