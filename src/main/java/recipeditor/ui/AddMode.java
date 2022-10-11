@@ -4,9 +4,9 @@ import recipeditor.recipe.Ingredient;
 import recipeditor.recipe.Recipe;
 
 public class AddMode {
-    private final int TITLE_STAGE = 0;
-    private final int DESCRIPTION_STAGE = 1;
-    private final int INGREDIENTS_STAGE = 2;
+    private static final int TITLE_STAGE = 0;
+    private static final int DESCRIPTION_STAGE = 1;
+    private static final int INGREDIENTS_STAGE = 2;
     private int stage = 0;
     private static final String TITLE = "Recipe Title";
     private static final String DESCRIPTION = "Recipe Description";
