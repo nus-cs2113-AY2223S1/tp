@@ -7,7 +7,6 @@ import seedu.duke.module.Module;
 public class University {
     private String name;
     private String country;
-    private ArrayList<Module> modules;
 
     public University(String name, String country) {
         assert name.length() > 0 : "Name cannot be empty";
@@ -15,7 +14,6 @@ public class University {
         
         setName(name);
         setCountry(country);
-        setModules(new ArrayList<>());
     }
 
     @Override
@@ -37,13 +35,5 @@ public class University {
 
     public void setCountry(String country) {
         this.country = country;
-    }
-
-    public ArrayList<Module> getModules() {
-        return modules;
-    }
-
-    public void setModules(ArrayList<Module> modules) {
-        this.modules = modules;
     }
 }

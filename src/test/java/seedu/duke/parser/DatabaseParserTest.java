@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
 
 import seedu.duke.exceptions.InvalidDatabaseLineException;
-import seedu.duke.parser.DatabaseParser;
 
 public class DatabaseParserTest {
     @Test
