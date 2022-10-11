@@ -33,8 +33,8 @@ public class Parser {
                 checkForExcessArgument(parsed, 2);
                 return new DeleteCommand(index);
             } catch (NumberFormatException | ExcessArgumentException e) {
-                System.out.format("Exception: Wrong command Format%n" +
-                        "Try the command in correct format: mark <index of task>%n");
+                System.out.format("Exception: Wrong command Format%n"
+                        + "Try the command in correct format: mark <index of task>%n");
                 return new InvalidCommand();
             }
         case ViewCommand.COMMAND_TYPE:
@@ -43,8 +43,8 @@ public class Parser {
                 checkForExcessArgument(parsed, 2);
                 return new ViewCommand(index);
             } catch (NumberFormatException | ExcessArgumentException e) {
-                System.out.format("Exception: Wrong command Format%n" +
-                        "Try the command in correct format: view <index of task>%n");
+                System.out.format("Exception: Wrong command Format%n"
+                        + "Try the command in correct format: view <index of task>%n");
                 return new InvalidCommand();
             }
         default:
@@ -63,7 +63,7 @@ public class Parser {
 
     private void checkForExcessArgument(String[] args, int length)
             throws ExcessArgumentException {
-        if(args.length > length) {
+        if (args.length > length) {
             throw new ExcessArgumentException();
         }
     }
