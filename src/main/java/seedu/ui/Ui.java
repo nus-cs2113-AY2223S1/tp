@@ -7,7 +7,7 @@ import java.util.Scanner;
  */
 public class Ui {
 
-    private final Scanner in;
+    private Scanner in;
 
     public Ui() {
         this.in = new Scanner(System.in);
@@ -131,5 +131,14 @@ public class Ui {
      */
     public void showLoadingDataSuccess() {
         print("Load data sequence successful!");
+    }
+
+    /**
+     * Changes the scanner for the Ui object. To be used for JUnit testing.
+     *
+     * @param in New Scanner object to be used.
+     */
+    public void changeScanner(Scanner in) {
+        this.in = in;
     }
 }
