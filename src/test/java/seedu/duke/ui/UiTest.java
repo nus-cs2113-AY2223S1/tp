@@ -51,6 +51,7 @@ public class UiTest {
                 + "     " + "--------  " + "--------------------------------------  " + "-------\n"
                 + "     " + "create    " + "/create u/UNIVERSITY                    "
                 + "Creates an empty module list for the input university\n"
+                + "     " + "exit      " + "/exit\n"
                 + "     " + "view      " + "/view MODULES                           "
                 + "Displays all existing university modules mappings that are approved in the format\n"
                 + "                                                       "

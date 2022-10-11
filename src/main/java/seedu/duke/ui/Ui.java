@@ -65,6 +65,7 @@ public class Ui {
                 + SPACING + "--------  " + "--------------------------------------  " + "-------\n"
                 + SPACING + "create    " + "/create u/UNIVERSITY                    "
                 + "Creates an empty module list for the input university\n"
+                + SPACING + "exit      " + "/exit\n"
                 + SPACING + "view      " + "/view MODULES                           "
                 + "Displays all existing university modules mappings that are approved in the format\n"
                 + "                                                       "
