@@ -17,8 +17,8 @@ public class ReviewList {
         this.inputs.add(media);
     }
 
-    public void remove(Media media) {
-        this.inputs.remove(media);
+    public void remove(int index) {
+        this.inputs.remove(index);
     }
 
     @Override
