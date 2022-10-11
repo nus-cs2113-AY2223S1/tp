@@ -81,6 +81,13 @@ public class Ui {
         showLine();
     }
 
+    public static void viewTransactionMessage(Transaction transaction) {
+        showLine();
+        System.out.print("Here is the transaction you requested to view: " + '\n'
+                + transaction + "\n");
+        showLine();
+    }
+
     public static void deleteTransactionMessage(Transaction transaction, int transactionListSize) {
         showLine();
         assert transactionListSize >= 0;
@@ -89,6 +96,13 @@ public class Ui {
         showLine();
     }
 
+    public static void viewUserMessage(User user) {
+        showLine();
+        System.out.print("Here is the user you have requested to view: " + '\n'
+                + user + "\n");
+        showLine();
+    }
+    
     public static void addUserMessage(User user, int userListSize) {
         showLine();
         assert userListSize >= 0;
