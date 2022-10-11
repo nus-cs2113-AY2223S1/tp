@@ -1,11 +1,9 @@
-package seedu.duke;
+package seedu.duke.operationlist;
 
-import java.util.ArrayList;
-
+import seedu.duke.terminalinfo.FlightInfo;
 import seedu.duke.exceptions.SkyControlException;
 
-public class FlightManager {
-    public static ArrayList<Flight> flightList = new ArrayList<>();
+public class FlightList extends OperationList {
     public static int flightIndex = 0;
     private static final String FLIGHT_NUMBER_DELIMITER = "fn/";
     private static final String AIRLINE_DELIMITER = "a/";
@@ -33,22 +31,21 @@ public class FlightManager {
         return extractedDetail;
     }
 
-    //    flight_add fn/SQ712 a/Singapore Airlines d/Bangkok t/1600 gn/B1 tl/T1 c/03-3
-    public static void addFlight(String input) {
-        Ui ui = new Ui();
+    @Override
+    public void addOperation(String detail) {
         try {
-            checkCommandLength(input.substring("flight add".length()));
-            String flightNum = extractDetail(input, FLIGHT_NUMBER_DELIMITER, AIRLINE_DELIMITER);
-            String airline = extractDetail(input, AIRLINE_DELIMITER, DESTINATION_DELIMITER);
-            String destination = extractDetail(input, DESTINATION_DELIMITER, DEPARTURE_TIME_DELIMITER);
-            String departureTime = extractDetail(input, DEPARTURE_TIME_DELIMITER, GATE_NUMBER_DELIMITER);
-            String gateNum = extractDetail(input, GATE_NUMBER_DELIMITER, TERMINAL_DELIMITER);
-            String terminal = extractDetail(input, TERMINAL_DELIMITER, CHECK_IN_ROW_DELIMITER);
-            String checkInRowAndDoor = extractDetail(input, CHECK_IN_ROW_DELIMITER, END_OF_INPUT);
+            checkCommandLength(detail.substring("flight add".length()));
+            String flightNum = extractDetail(detail, FLIGHT_NUMBER_DELIMITER, AIRLINE_DELIMITER);
+            String airline = extractDetail(detail, AIRLINE_DELIMITER, DESTINATION_DELIMITER);
+            String destination = extractDetail(detail, DESTINATION_DELIMITER, DEPARTURE_TIME_DELIMITER);
+            String departureTime = extractDetail(detail, DEPARTURE_TIME_DELIMITER, GATE_NUMBER_DELIMITER);
+            String gateNum = extractDetail(detail, GATE_NUMBER_DELIMITER, TERMINAL_DELIMITER);
+            String terminal = extractDetail(detail, TERMINAL_DELIMITER, CHECK_IN_ROW_DELIMITER);
+            String checkInRowAndDoor = extractDetail(detail, CHECK_IN_ROW_DELIMITER, END_OF_INPUT);
 
-            Flight flight = new Flight(flightNum, airline, destination,
+            FlightInfo flight = new FlightInfo(flightNum, airline, destination,
                     departureTime, gateNum, terminal, checkInRowAndDoor);
-            flightList.add(flightIndex, flight);
+            flights.add(flightIndex, flight);
             flightIndex++;
             ui.showFlightAddedMessage();
 
@@ -58,12 +55,12 @@ public class FlightManager {
     }
 
     //not done
-    public static void deleteFlight(String input) {
-        Ui ui = new Ui();
+    @Override
+    public void deleteOperation(String detail) {
         boolean isFlightFound;
         try {
-            checkCommandLength(input.substring("flight delete".length()));
-            String flightNum = input.substring("flight delete ".length());
+            checkCommandLength(detail.substring("flight delete".length()));
+            String flightNum = detail.substring("flight delete ".length());
             isFlightFound = findAndRemoveFlight(flightNum);
             if (!isFlightFound) {
                 ui.showFlightNotFoundMessage(flightNum);
@@ -73,23 +70,22 @@ public class FlightManager {
         }
     }
 
+    @Override
+    public void listOperation() {
+        ui.showListOfFlights(flights);
+    }
+
     private static boolean findAndRemoveFlight(String flightNumber) {
-        Ui ui = new Ui();
         boolean isFlightFound = false;
-        for (Flight flight : flightList) {
-            if (flight.flightNum.equals(flightNumber)) {
+        for (FlightInfo flight : flights) {
+            if (flight.getFlightNum().equals(flightNumber)) {
                 isFlightFound = true;
-                flightList.remove(flight);
+                flights.remove(flight);
                 flightIndex--;
                 ui.showFlightRemovedMessage(flightNumber.toUpperCase());
                 break;
             }
         }
         return isFlightFound;
-    }
-
-    public static void printFlights() {
-        Ui ui = new Ui();
-        ui.showListOfFlights(flightList);
     }
 }
