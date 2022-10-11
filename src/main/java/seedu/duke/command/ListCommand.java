@@ -7,6 +7,8 @@ import seedu.duke.exception.InputTransactionUnknownTypeException;
 import seedu.duke.exception.MoolahException;
 
 import java.time.LocalDate;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_TYPE;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_CATEGORY;
@@ -34,20 +36,20 @@ public class ListCommand extends Command {
             + LINE_SEPARATOR + "(Optional) DATE: Date of the transaction. The format must be in \"yyyyMMdd\".";
 
     // Basic help description
-    public static final String COMMAND_HELP = "Command Word: " + COMMAND_WORD + LINE_SEPARATOR + COMMAND_DESCRIPTION
-            + LINE_SEPARATOR + COMMAND_USAGE + LINE_SEPARATOR;
+    public static final String COMMAND_HELP = "Command Word: " + COMMAND_WORD + LINE_SEPARATOR
+            + COMMAND_DESCRIPTION + LINE_SEPARATOR + COMMAND_USAGE + LINE_SEPARATOR;
     // Detailed help description
     public static final String COMMAND_DETAILED_HELP = COMMAND_HELP + COMMAND_PARAMETERS_INFO + LINE_SEPARATOR;
 
-    private static final int TAG_LIMIT = 3;
-    private static final int MINIMUM_TAG_LENGTH = 2;
-    private static final String CLASS_TYPE_EXPENSE = "seedu.duke.data.transaction.Expense";
-    private static final String CLASS_TYPE_INCOME = "seedu.duke.data.transaction.Income";
+    private static final Logger listLogger = Logger.getLogger(ListCommand.class.getName());
 
     private String category;
     private LocalDate date;
     private String type;
 
+    /**
+     * Initialises the variables of the ListCommand class.
+     */
     public ListCommand() {
         category = "";
         date = null;
@@ -57,7 +59,7 @@ public class ListCommand extends Command {
     /**
      * Gets the optional tags of the command.
      *
-     * @return A string array containing all optional tags
+     * @return A string array containing all optional tags.
      */
     @Override
     public String[] getOptionalTags() {
@@ -93,30 +95,47 @@ public class ListCommand extends Command {
      */
     @Override
     public void execute(TransactionList transactions, Ui ui, Storage storage) throws MoolahException {
-        // Pass the tags to the filter for transaction list.
+        listLogger.setLevel(Level.WARNING);
+        listLogger.log(Level.INFO, "List command starts passing the tags for filter, if any,"
+                + " into the listTransactions method.");
+
+        // Passes the tags to the filter for transaction list
         listTransactions(transactions, type, category, date);
     }
 
     /**
      * List all or some transactions based on selection.
      *
-     * @param transactions An instance of the TransactionList class.
-     * @param type         The type of transaction.
-     * @param category     A category for the transaction.
-     * @param date         Date of the transaction with format in "yyyyMMdd".
+     * @param transactions  An instance of the TransactionList class.
+     * @param type          The type of transaction.
+     * @param category      A category for the transaction.
+     * @param date          Date of the transaction with format in "yyyyMMdd".
      * @throws InputTransactionUnknownTypeException If class type cannot be found in the packages.
      */
     private static void listTransactions(TransactionList transactions, String type, String category, LocalDate date)
             throws InputTransactionUnknownTypeException {
+        listLogger.log(Level.INFO, "Listing of transactions is being processed into a"
+                + " transaction list variable.");
         String transactionsList = transactions.listTransactions(type, category, date);
         if (transactionsList.isEmpty()) {
+            listLogger.log(Level.INFO, "Transactions list is empty, so UI should display that"
+                    + " there are no transaction records available.");
             Ui.showInfoMessage(INFO_LIST_EMPTY.toString());
+            listLogger.log(Level.INFO, "End of List command.");
             return;
         }
         assert !transactionsList.isEmpty();
+        listLogger.log(Level.INFO, "Transactions list is available, so UI should display the"
+                + " transaction records.");
         Ui.showTransactionsList(transactionsList, INFO_LIST.toString());
+        listLogger.log(Level.INFO, "End of List command.");
     }
 
+    /**
+     * Enables the program to exit when the Bye command is issued.
+     *
+     * @return A boolean value that indicates whether the program shall exit.
+     */
     @Override
     public boolean isExit() {
         return false;

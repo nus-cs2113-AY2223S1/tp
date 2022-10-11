@@ -15,7 +15,7 @@ import seedu.duke.exception.MoolahException;
 import seedu.duke.exception.InvalidCommandException;
 
 /**
- * Represents a parser that parses the user input into a Command object ready for execution
+ * Represents a parser that parses the user input into a Command object ready for execution.
  *
  * <p>The CommandParser will check that the user input calls a valid command,
  * then create the corresponding command object and call ParameterParser to further parse the parameter portion
@@ -42,16 +42,15 @@ public class CommandParser {
         String commandWordInput = inputTokens[0];
         String parametersInput = inputTokens[1];
 
-        // Parse the command word from user input
+        // Parses the command word from user input
         command = getCommand(commandWordInput, parametersInput);
-
 
         // TODO: To remove this if statement once a solution is found for managing parameter that allows space
         if (command instanceof FindCommand) {
             return command;
         }
 
-        // Parse the parameters from user input to set up the parameters for the command
+        // Parses the parameters from user input to set up the parameters for the command
         assert command != null;
         ParameterParser.parse(command, parametersInput);
 
@@ -66,7 +65,7 @@ public class CommandParser {
      */
     public static String[] splitInput(String fullCommandInput) {
         String[] inputTokens;
-        // Separate the command word and the parameters into an array of size two
+        // Separates the command word and the parameters into an array of size two
         if (fullCommandInput.contains(DELIMITER)) {
             inputTokens = fullCommandInput.split(DELIMITER, SPLIT_POSITION);
         } else {
@@ -79,8 +78,8 @@ public class CommandParser {
      * Creates a Command object based on the command word entered by user.
      *
      * @param commandWordInput The command word entered by user.
-     * @return Command object created
-     * @throws InvalidCommandException Exception when the command word is not supported by the application.
+     * @return Command object created.
+     * @throws InvalidCommandException If the command word is not supported by the application.
      */
     private static Command getCommand(String commandWordInput, String parameterInput) throws InvalidCommandException {
         // TODO: Remove parameter input once a solution is found for managing parameter that allows space
@@ -117,6 +116,5 @@ public class CommandParser {
             throw new InvalidCommandException();
         }
         return command;
-
     }
 }

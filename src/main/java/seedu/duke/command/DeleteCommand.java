@@ -27,12 +27,8 @@ public class DeleteCommand extends Command {
             + "Type \"list\" to list all the entry numbers of transaction.";
 
     // Basic help description
-    public static final String COMMAND_HELP = "Command Word: " + COMMAND_WORD
-            + LINE_SEPARATOR
-            + COMMAND_DESCRIPTION
-            + LINE_SEPARATOR
-            + COMMAND_USAGE
-            + LINE_SEPARATOR;
+    public static final String COMMAND_HELP = "Command Word: " + COMMAND_WORD + LINE_SEPARATOR
+            + COMMAND_DESCRIPTION + LINE_SEPARATOR + COMMAND_USAGE + LINE_SEPARATOR;
     // Detailed help description
     public static final String COMMAND_DETAILED_HELP = COMMAND_HELP + COMMAND_PARAMETERS_INFO
             + LINE_SEPARATOR;
@@ -43,16 +39,13 @@ public class DeleteCommand extends Command {
 
     private int entryNumber;
 
-    /**
-     * Initialises the variables of the DeleteCommand class.
-     */
     public DeleteCommand() {
     }
 
     /**
      * Gets the mandatory tags of the command.
      *
-     * @return A string array containing all mandatory tags
+     * @return A string array containing all mandatory tags.
      */
     @Override
     public String[] getMandatoryTags() {
@@ -68,7 +61,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Executes the operations related to the command.
+     * Executes the "delete" command. Checks and parses the necessary parameters before deleting transaction.
      *
      * @param ui           An instance of the Ui class.
      * @param transactions An instance of the TransactionList class.
@@ -88,13 +81,18 @@ public class DeleteCommand extends Command {
             isInputValid = false;
         }
         if (isInputValid) {
-            String transaction = TransactionList.deleteTransaction(transactions, index);
+            String transaction = TransactionList.deleteTransaction(index);
             Ui.showTransactionAction(INFO_DELETE.toString(), transaction);
         } else {
             throw new InvalidIndexException();
         }
     }
 
+    /**
+     * Enables the program to exit when the Bye command is issued.
+     *
+     * @return A boolean value that indicates whether the program shall exit.
+     */
     @Override
     public boolean isExit() {
         return false;
