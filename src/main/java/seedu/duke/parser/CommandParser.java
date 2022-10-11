@@ -14,6 +14,7 @@ public class CommandParser {
     private static final int FIRST_PARAMETER = 1;
     private static final int SECOND_PARAMETER = 2;
     private static final int MAX_PARAMETERS = 3;
+
     public static Command getUserCommand(String userInput) throws InvalidUserCommandException {
         String[] userInputTokenized = userInput.split(" +");
         if (userInputTokenized.length < 1) {
@@ -61,6 +62,7 @@ public class CommandParser {
                     + "Please follow the command format provided!");
         }
     }
+    
     private static boolean isValidViewCommand(String[] parameters) {
         if (!parameters[1].startsWith("u/") && !parameters[1].startsWith("ALL") && !parameters[1].startsWith("MODULES")
                 || parameters.length > 2) {
