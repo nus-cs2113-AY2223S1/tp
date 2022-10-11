@@ -37,7 +37,6 @@ import java.util.List;
 /**
  * Provide functions to parse inputs read from standard input.
  */
-@SuppressWarnings("UnnecessaryLocalVariable")
 public class ConsoleParser {
     public static final String CONSOLE_COMMAND_BYE = "bye";
     public static final String CONSOLE_COMMAND_ADD_EXPENSE = "add-expense";
@@ -192,12 +191,20 @@ public class ConsoleParser {
                     true,
                     "expense index"
             );
+            Option optionExpenseCategory = new Option(
+                    "c",
+                    "expense-category",
+                    true,
+                    "expense category"
+            );
             Options options = new Options();
             options.addOption(optionExpenseIndex);
+            options.addOption(optionExpenseCategory);
             CommandLineParser commandLineParser = new DefaultParser();
             CommandLine commandLine = commandLineParser.parse(options, argumentsArr);
 
             String expenseIndexStr = commandLine.getOptionValue("expense-index");
+            String expenseCategory = commandLine.getOptionValue("expense-category");
 
             int expenseIndex;
             if (expenseIndexStr == null) {
@@ -206,7 +213,7 @@ public class ConsoleParser {
                 expenseIndex = Integer.parseInt(expenseIndexStr);
             }
 
-            return new ConsoleCommandViewExpense(expenseIndex);
+            return new ConsoleCommandViewExpense(expenseIndex, expenseCategory);
         } catch (ParseException
                  | NumberFormatException exception) {
             throw new ConsoleParserCommandViewExpenseInvalidException(
