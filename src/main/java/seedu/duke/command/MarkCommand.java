@@ -28,7 +28,7 @@ public class MarkCommand extends Command {
         if (argumentList.length != 2) {
             throw new IllegalValueException("Invalid mark command");
         }
-
+        assert argumentList.length == 2 : "Invalid mark command";
         String exerciseStatus = argumentList[0];
         int exerciseIndex;
         try {
@@ -45,6 +45,7 @@ public class MarkCommand extends Command {
             }
             Exercise exercise = exerciseList.getCurrentExercise(exerciseIndex);
             exerciseList.markDone(exerciseIndex);
+            assert exercise.getDone() == true : "exercise should be done";
             ui.output(String.format("%s is marked as done successfully", exercise.getExerciseName()));
             break;
         case "undone":
@@ -53,6 +54,7 @@ public class MarkCommand extends Command {
             }
             exercise = exerciseList.getCompletedExercise(exerciseIndex);
             exerciseList.markUndone(exerciseIndex);
+            assert exercise.getDone() == false : "exercise should be undone";
             ui.output(String.format("%s is marked as undone successfully", exercise.getExerciseName()));
             break;
         default:
