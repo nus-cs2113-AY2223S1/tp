@@ -152,7 +152,6 @@ public class Api {
             if (key.isEmpty()) {
                 throw new EmptySecretFileException();
             }
-            ui.print("Read Key from file successful: " + key); // Debug line
             apiKey = key;
         } catch (IOException e) {
             throw new NoFileFoundException("API key file is missing!");

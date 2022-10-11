@@ -8,9 +8,11 @@
  |_|                                
 What is your name?
 Welcome to parKING, James Gosling!
-Trying to fetch data
-Completed fetch data!
+API key is not entered. Load it first!
 Fetching and save data sequence terminated
-Trying to load data
-Load data sequence successful!
+Trying to load data...
+No file was found, or invalid format at ./resources/api/ltaResponse.json. Trying the backup:
+Both the main file and backup file did not load correctly.Please check your directory at ./resources/api/ltaResponse.json and try again, ordownload a sample .json file and place it in ./resources/api/ltaResponseSample.json.
 Load data sequence terminated
+Enter a command:
+Goodbye.

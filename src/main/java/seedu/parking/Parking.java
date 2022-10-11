@@ -41,9 +41,9 @@ public class Parking {
             // More code here while waiting for data to come back
 
             // This should be the last code block of the initialising phase
-            System.out.println("Trying to fetch data"); // Debug line
+//            System.out.println("Trying to fetch data"); // Debug line
             api.fetchData();
-            System.out.println("Completed fetch data!"); // Debug line
+//            System.out.println("Completed fetch data!"); // Debug line
         } catch (ParkingException e) {
             System.out.println(e.getMessage());
         } catch (IOException e) {
