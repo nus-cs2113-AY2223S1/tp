@@ -50,8 +50,8 @@ public class Duke {
                                     newUserCommand.getModuleCode());
                         }
                         UserStorageParser.storeCreatedLists(userUniversityListManager);
-                    } catch (NoSuchElementException ignored) {
-
+                    } catch (NoSuchElementException e) {
+                        System.out.println(e.getMessage());
                     }
                     break;
                 case CREATE:
@@ -78,8 +78,8 @@ public class Duke {
                             Ui.printUniversityName(viewCommand.getUniversityName());
                             Ui.printModulesInDatabase(moduleMappings);
                         }
-                    } catch (Exception ignored) {
-
+                    } catch (InvalidUserCommandException e) {
+                        System.out.println(e.getMessage());
                     }
                     break;
                 case ADD:

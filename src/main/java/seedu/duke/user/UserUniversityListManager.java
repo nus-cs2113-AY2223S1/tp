@@ -1,12 +1,12 @@
 package seedu.duke.user;
 
+import seedu.duke.exceptions.InvalidUserCommandException;
 import seedu.duke.ui.Ui;
 import seedu.duke.exceptions.InvalidUserStorageFileException;
 import seedu.duke.userstorage.UserStorageParser;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.NoSuchElementException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -68,8 +68,9 @@ public class UserUniversityListManager {
     /**
      * Method to print exactly the modules saved by user for a given university name.
      * @param input The partner university name
+     * @throws InvalidUserCommandException If input is not a valid university name
      */
-    public void displayUniversity(String input) {
+    public void displayUniversity(String input) throws InvalidUserCommandException {
         assert input.length() > 0 : "Input school cannot be empty";
         System.out.println(input);
         UserUniversityList myUniversityList = getList(input);
@@ -80,12 +81,11 @@ public class UserUniversityListManager {
         return myManager.containsKey(inputSchool);
     }
 
-    public void addModule(String inputSchool, UserModuleMapping inputModule) {
+    public void addModule(String inputSchool, UserModuleMapping inputModule) throws InvalidUserCommandException {
         if (myManager.containsKey(inputSchool)) {
             myManager.get(inputSchool).addModule(inputModule);
         } else {
-            System.out.println("No such school found");
-            throw new NoSuchElementException();
+            throw new InvalidUserCommandException("No such university found");
         }
     }
 
@@ -94,14 +94,13 @@ public class UserUniversityListManager {
      * @param inputSchool the PU to delete the module from
      * @param puCode the exact PUCode to delete the module from
      */
-    public void deleteModule(String inputSchool, String puCode) {
+    public void deleteModule(String inputSchool, String puCode) throws InvalidUserCommandException {
         assert inputSchool.length() > 0 : "Input school cannot be empty";
         assert puCode.length() > 0 : "Deleting PU code cannot be empty";
         if (foundKey(inputSchool)) {
             myManager.get(inputSchool).deleteModuleByPuCode(puCode);
         } else {
-            System.out.println("No such school found");
-            throw new NoSuchElementException();
+            throw new InvalidUserCommandException("No such university found");
         }
     }
 
@@ -109,11 +108,10 @@ public class UserUniversityListManager {
      * Method to delete an entire university list.
      * @param inputSchool the PU school name that we will be deleting from.
      */
-    public void deleteList(String inputSchool) {
+    public void deleteList(String inputSchool) throws InvalidUserCommandException {
         assert inputSchool.length() > 0 : "Input school cannot be empty";
         if (!foundKey(inputSchool)) {
-            System.out.println("No such university found");
-            throw new NoSuchElementException();
+            throw new InvalidUserCommandException("No such university found");
         } else {
             myManager.remove(inputSchool);
             logger.log(Level.FINER, "delete list for " + inputSchool);
@@ -126,11 +124,10 @@ public class UserUniversityListManager {
      * @param input PU name
      * @return the UserUniversityList corresponding to the input PU name
      */
-    public UserUniversityList getList(String input) {
+    public UserUniversityList getList(String input) throws InvalidUserCommandException {
         assert input.length() > 0 : "Input school cannot be empty";
         if (!myManager.containsKey(input)) {
-            System.out.println("HELP!! :: No such universities found");
-            throw new NoSuchElementException();
+            throw new InvalidUserCommandException("HELP!! :: No such universities found");
         }
         return myManager.get(input);
     }

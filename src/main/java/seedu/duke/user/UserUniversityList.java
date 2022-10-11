@@ -1,6 +1,8 @@
 package seedu.duke.user;
 
 
+import seedu.duke.exceptions.InvalidUserCommandException;
+
 /**
  * Class to store the interested modules that a user is for a particular university.
  */
@@ -21,8 +23,9 @@ public class UserUniversityList {
     /**
      * Method to delete module based on puCode.
      * @param puCode input puCode
+     * @throws InvalidUserCommandException If puCode does not exist in the list
      */
-    public void deleteModuleByPuCode(String puCode) {
+    public void deleteModuleByPuCode(String puCode) throws InvalidUserCommandException {
         assert puCode.length() > 0 : "Deleting PU code cannot be empty";
         myModules.deleteModuleByPuCode(puCode);
     }
