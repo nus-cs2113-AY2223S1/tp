@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
@@ -244,5 +245,40 @@ public class Storage {
         } catch (IOException e) {
             System.out.println("Pairing file does not exist.");
         }
+    }
+
+    /**
+     * Updates the client list when entry in client list is deleted.
+     * @param clientList The array list containing all the clients.
+     */
+    public void updateClient(ClientList clientList) {
+        try {
+            FileWriter clientFile = new FileWriter(CLIENT_PATH);
+            ArrayList<Client> clientLists = clientList.getClientList();
+
+            // clientText will initially be empty and will be appended in subsequent iterations of the client list.
+            String clientText = "";
+            for (int i = 0; i < clientLists.size(); i += 1) {
+                // Concatenate the string variables into clientText
+                String budgetPrice = CURRENCY + clientLists.get(i).getClientBudgetPerMonth();
+                String name = clientLists.get(i).getClientName();
+                String contact = clientLists.get(i).getClientContactNumber();
+                String email = clientLists.get(i).getClientEmail();
+                String finalText = name + SEPARATOR + contact + SEPARATOR + email + SEPARATOR
+                        + budgetPrice + System.lineSeparator();
+                clientText = clientText.concat(finalText);
+            }
+
+            // Write the client list into a file.
+            clientFile.write(clientText);
+            clientFile.close();
+
+        } catch (IOException e) {
+            System.out.println("Client file does not exist.");
+        }
+
+
+
+
     }
 }
