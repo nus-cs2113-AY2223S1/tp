@@ -62,13 +62,13 @@ public class CommandParser {
                     + "Please follow the command format provided!");
         }
     }
-    
+
     private static boolean isValidViewCommand(String[] parameters) {
-        if (!parameters[1].startsWith("u/") && !parameters[1].startsWith("ALL") && !parameters[1].startsWith("MODULES")
-                || parameters.length > 2) {
-            return false;
-        } else {
+        if (parameters.length == 2 && (parameters[1].startsWith("u/") || !parameters[1].startsWith("ALL")
+                || !parameters[1].startsWith("MODULES"))) {
             return true;
+        } else {
+            return false;
         }
     }
 
@@ -81,20 +81,19 @@ public class CommandParser {
     }
 
     private static boolean isValidDeleteCommand(String[] parameters) {
-        if (!parameters[1].startsWith("u/") || parameters.length > 3) {
-            return false;
-        } else if (parameters.length == 3 && !parameters[2].startsWith("m/")) {
-            return false;
-        } else {
+        if (parameters.length == 2 && parameters[1].startsWith("u/") || (parameters.length == 3
+                && parameters[1].startsWith("u/") && parameters[2].startsWith("m/"))) {
             return true;
+        } else {
+            return false;
         }
     }
 
     private static boolean isValidCreateCommand(String[] parameters) {
-        if (parameters.length > 2 || !parameters[1].startsWith("u/")) {
-            return false;
-        } else {
+        if (parameters.length == 2 && parameters[1].startsWith("u/")) {
             return true;
+        } else {
+            return false;
         }
     }
 }
