@@ -1,7 +1,6 @@
 package seedu.api;
 
-import seedu.exception.*;
-import seedu.ui.Ui;
+
 import static seedu.common.CommonFiles.API_JSON_DIRECTORY;
 import static seedu.common.CommonFiles.LTA_BASE_URL;
 import static seedu.common.CommonFiles.LTA_JSON_FILE;
@@ -17,7 +16,11 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 import seedu.exception.EmptyResponseException;
+import seedu.exception.ServerNotReadyApiException;
+import seedu.exception.UnauthorisedAccessApiException;
+import seedu.exception.UnknownResponseApiException;
 import seedu.files.FileStorage;
+import seedu.ui.Ui;
 
 /**
  * Class to fetch .json data from APIs and save that locally.
