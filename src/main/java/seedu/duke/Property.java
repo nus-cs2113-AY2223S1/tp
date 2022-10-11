@@ -16,6 +16,22 @@ public class Property {
         this.unitType = unitType;
     }
 
+    public String getLandlordName() {
+        return landlordName;
+    }
+
+    public String getPropertyAddress() {
+        return propertyAddress;
+    }
+
+    public String getRentingPrice() {
+        return rentingPrice;
+    }
+
+    public String getUnitType() {
+        return unitType;
+    }
+
     public String toString() {
         String propertyDetails = "  Landlord: " + landlordName + System.lineSeparator()
                 + "  Address: " + propertyAddress + System.lineSeparator()

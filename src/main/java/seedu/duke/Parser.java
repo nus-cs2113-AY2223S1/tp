@@ -3,33 +3,78 @@ package seedu.duke;
 import seedu.duke.command.Command;
 import seedu.duke.command.CommandAddProperty;
 import seedu.duke.command.CommandAddClient;
+import seedu.duke.command.CommandDeleteClient;
+import seedu.duke.command.CommandPair;
+import seedu.duke.command.CommandUnpair;
 import seedu.duke.command.CommandUndefined;
+
+import seedu.duke.exception.EmptyClientDetailException;
+import seedu.duke.exception.EmptyClientIndexDeleteException;
+import seedu.duke.exception.EmptyCommandAddDetailException;
+import seedu.duke.exception.EmptyCommandDeleteDetailException;
+import seedu.duke.exception.EmptyCommandPairUnpairDetailsException;
+import seedu.duke.exception.EmptyPropertyDetailException;
+import seedu.duke.exception.ExistingPairException;
+import seedu.duke.exception.IncorrectAddClientFlagOrderException;
+import seedu.duke.exception.IncorrectAddPropertyFlagOrderException;
+import seedu.duke.exception.IncorrectFlagOrderException;
+import seedu.duke.exception.IncorrectPairUnpairFlagOrderException;
+import seedu.duke.exception.InvalidBudgetFormatException;
+import seedu.duke.exception.InvalidClientIndexDeleteException;
+import seedu.duke.exception.InvalidContactNumberException;
+import seedu.duke.exception.InvalidEmailException;
+import seedu.duke.exception.InvalidPriceFormatException;
+import seedu.duke.exception.InvalidSingaporeAddressException;
+import seedu.duke.exception.MissingClientDetailException;
+import seedu.duke.exception.MissingClientFlagException;
+import seedu.duke.exception.MissingFlagException;
+import seedu.duke.exception.MissingPairUnpairFlagException;
+import seedu.duke.exception.MissingPropertyDetailException;
+import seedu.duke.exception.MissingPropertyFlagException;
+import seedu.duke.exception.NoExistingPairException;
+import seedu.duke.exception.NotIntegerException;
+import seedu.duke.exception.NotValidIndexException;
+import seedu.duke.exception.UndefinedSubCommandAddTypeException;
+import seedu.duke.exception.UndefinedSubCommandDeleteTypeException;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Parser {
-    public static final int ADD_CLIENT_FLAG_SIZE = 4;
-    public static final int ADD_PROPERTY_FLAG_SIZE = 4;
+    private static ClientList clientList;
+    private static PropertyList propertyList;
+    private static PairingList pairingList;
 
+    public static final int ADD_PROPERTY_FLAG_SIZE = 4;
+    public static final int ADD_CLIENT_FLAG_SIZE = 4;
+    public static final int PAIR_UNPAIR_FLAG_SIZE = 2;
+
+    public Parser(ClientList clientL, PropertyList propertyL, PairingList pairingL) {
+        clientList = clientL;
+        propertyList = propertyL;
+        pairingList = pairingL;
+    }
 
     public Command parseCommand(String input) throws EmptyCommandAddDetailException,
             UndefinedSubCommandAddTypeException, EmptyPropertyDetailException, MissingPropertyFlagException,
             IncorrectAddPropertyFlagOrderException, MissingPropertyDetailException, InvalidSingaporeAddressException,
             InvalidPriceFormatException, EmptyClientDetailException, MissingClientFlagException,
             IncorrectAddClientFlagOrderException, MissingClientDetailException, InvalidContactNumberException,
-            InvalidEmailException, InvalidBudgetFormatException {
+            InvalidEmailException, InvalidBudgetFormatException, UndefinedSubCommandDeleteTypeException,
+            EmptyCommandDeleteDetailException, InvalidClientIndexDeleteException, EmptyClientIndexDeleteException,
+            EmptyCommandPairUnpairDetailsException, MissingPairUnpairFlagException,
+            IncorrectPairUnpairFlagOrderException, NotValidIndexException, NotIntegerException, ExistingPairException,
+            NoExistingPairException {
         ArrayList<String> processedCommandDetails = partitionCommandTypeAndDetails(input);
-        String commandType    = processedCommandDetails.get(0);
+        String commandType = processedCommandDetails.get(0);
         String commandDetails = processedCommandDetails.get(1);
         switch (commandType) {
-        case ("add"):
+        case "add":
             checkForEmptyCommandAddDetails(commandDetails);
             ArrayList<String> processedAddCommandDetails = partitionCommandTypeAndDetails(commandDetails);
             String subCommandType = processedAddCommandDetails.get(0);
             String clientOrPropertyDescriptions = processedAddCommandDetails.get(1);
-
             if (subCommandType.equals("-property")) {
                 return prepareForCommandAddProperty(clientOrPropertyDescriptions);
             } else if (subCommandType.equals("-client")) {
@@ -37,7 +82,22 @@ public class Parser {
             } else {
                 throw new UndefinedSubCommandAddTypeException();
             }
-
+        case "delete":
+            checkForEmptyCommandDeleteDetails(commandDetails);
+            ArrayList<String> processedDeleteCommandDetails = partitionCommandTypeAndDetails(commandDetails);
+            String subDeleteCommandType = processedDeleteCommandDetails.get(0);
+            int clientIndexToDelete = getClientIndex(processedDeleteCommandDetails.get(1)) - 1;
+            if (subDeleteCommandType.equals("-client")) {
+                return prepareForCommandDeleteClient(clientIndexToDelete, clientList);
+            } else {
+                throw new UndefinedSubCommandDeleteTypeException();
+            }
+        case "pair":
+            checkForEmptyCommandPairUnpairDetails(commandDetails);
+            return prepareForCommandPair(commandDetails);
+        case "unpair":
+            checkForEmptyCommandPairUnpairDetails(commandDetails);
+            return prepareForCommandUnpair(commandDetails);
         default:
             return new CommandUndefined();
         }
@@ -46,13 +106,16 @@ public class Parser {
     private ArrayList<String> partitionCommandTypeAndDetails(String fullCommandDetails) {
         String[] inputDetails = fullCommandDetails.trim().split(" ", 2);
         // This is the type of command/sub-command that will be executed
-        String commandType    = inputDetails[0];
+        String commandType = inputDetails[0];
         String commandDetails = fullCommandDetails.replaceFirst(commandType, "").trim();
         ArrayList<String> processedCommandDetails = new ArrayList<>();
         processedCommandDetails.add(commandType);
         processedCommandDetails.add(commandDetails);
         return processedCommandDetails;
     }
+
+
+    /* Add Property/Client Parse Section */
 
     private void checkForEmptyCommandAddDetails(String commandAddDetails) throws EmptyCommandAddDetailException {
         boolean isEmptyCommandAddDetail = checkForEmptyDetail(commandAddDetails);
@@ -61,9 +124,9 @@ public class Parser {
         }
     }
 
-    private Command prepareForCommandAddProperty(String rawPropertyDescriptions) throws  EmptyPropertyDetailException,
-            MissingPropertyFlagException, IncorrectAddPropertyFlagOrderException, MissingPropertyDetailException,
-            InvalidSingaporeAddressException, InvalidPriceFormatException {
+    private Command prepareForCommandAddProperty(String rawPropertyDescriptions) throws
+            EmptyPropertyDetailException, MissingPropertyFlagException, IncorrectAddPropertyFlagOrderException,
+            MissingPropertyDetailException, InvalidSingaporeAddressException, InvalidPriceFormatException {
         checkForEmptyAddPropertyDetails(rawPropertyDescriptions);
         try {
             ArrayList<String> propertyDetails = processPropertyDetails(rawPropertyDescriptions);
@@ -372,5 +435,151 @@ public class Parser {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(detail);
         return matcher.matches();
+    }
+
+
+    /* Delete Client Parse Section */
+
+    private void checkForEmptyCommandDeleteDetails(String commandAddDetails) throws EmptyCommandDeleteDetailException {
+        boolean isEmptyCommandAddDetail = checkForEmptyDetail(commandAddDetails);
+        if (isEmptyCommandAddDetail) {
+            throw new EmptyCommandDeleteDetailException();
+        }
+    }
+
+    private int getClientIndex(String commandDetails) throws EmptyClientIndexDeleteException {
+        if (commandDetails.isEmpty()) {
+            throw new EmptyClientIndexDeleteException();
+        }
+        return Integer.parseInt(commandDetails.trim());
+    }
+
+    private Command prepareForCommandDeleteClient(int clientIndex, ClientList clientList)
+            throws InvalidClientIndexDeleteException {
+        checkForInvalidClientIndexDelete(clientIndex, clientList);
+        return new CommandDeleteClient(clientIndex);
+    }
+
+    private void checkForInvalidClientIndexDelete(int clientIndex, ClientList clientList)
+            throws InvalidClientIndexDeleteException {
+        int currentListSize = clientList.getCurrentListSize();
+        if (clientIndex < 0 || clientIndex >= currentListSize) {
+            throw new InvalidClientIndexDeleteException();
+        }
+    }
+
+
+    /* Pair/Unpair Parse Section */
+
+    private void checkForEmptyCommandPairUnpairDetails(String commandPairUnpairDetails)
+            throws EmptyCommandPairUnpairDetailsException {
+        boolean isEmptyCommandPairUnpairDetail = checkForEmptyDetail(commandPairUnpairDetails);
+        if (isEmptyCommandPairUnpairDetail) {
+            throw new EmptyCommandPairUnpairDetailsException();
+        }
+    }
+
+    private Command prepareForCommandPair(String rawPairDescriptions) throws NotIntegerException,
+            NotValidIndexException, MissingPairUnpairFlagException, IncorrectPairUnpairFlagOrderException,
+            ExistingPairException {
+        ArrayList<Integer> pairDetails = processPairUnpairDetails(rawPairDescriptions);
+        validatePairDetails(pairDetails);
+        return new CommandPair(pairDetails);
+    }
+
+    private Command prepareForCommandUnpair(String rawUnpairDescriptions) throws NotIntegerException,
+            NotValidIndexException, MissingPairUnpairFlagException, IncorrectPairUnpairFlagOrderException,
+            NoExistingPairException {
+        ArrayList<Integer> unpairDetails = processPairUnpairDetails(rawUnpairDescriptions);
+        validateUnpairDetails(unpairDetails);
+        return new CommandUnpair(unpairDetails);
+    }
+
+    private ArrayList<Integer> processPairUnpairDetails(String rawPairUnpairDetails)
+            throws MissingPairUnpairFlagException, IncorrectPairUnpairFlagOrderException, NotIntegerException {
+        String[] pairUnpairFlags = {"ip/", "ic/"};
+        int[] pairUnpairFlagIndexPositions = new int[PAIR_UNPAIR_FLAG_SIZE];
+
+        for (int i = 0; i < pairUnpairFlags.length; i++) {
+            pairUnpairFlagIndexPositions[i] = rawPairUnpairDetails.indexOf(pairUnpairFlags[i]);
+        }
+
+        checkForMissingPairUnpairFlags(pairUnpairFlagIndexPositions);
+        checkForPairUnpairFlagsOrder(pairUnpairFlagIndexPositions);
+        return extractPairUnpairDetails(rawPairUnpairDetails, pairUnpairFlagIndexPositions, pairUnpairFlags);
+    }
+
+    private void checkForMissingPairUnpairFlags(int[] pairUnpairFlagIndexPosition)
+            throws MissingPairUnpairFlagException {
+        try {
+            for (int flagIndex : pairUnpairFlagIndexPosition) {
+                checkForEssentialAddFlag(flagIndex);
+            }
+        } catch (MissingFlagException e) {
+            throw new MissingPairUnpairFlagException();
+        }
+    }
+
+    private void checkForPairUnpairFlagsOrder(int[] pairUnpairFlagIndexPosition)
+            throws IncorrectPairUnpairFlagOrderException {
+        try {
+            checkForCorrectFlagOrder(pairUnpairFlagIndexPosition[0], pairUnpairFlagIndexPosition[1]);
+        } catch (IncorrectFlagOrderException e) {
+            throw new IncorrectPairUnpairFlagOrderException();
+        }
+    }
+
+    private ArrayList<Integer> extractPairUnpairDetails(String rawPairUnpairDetails, int[] pairFlagIndexPositions,
+            String[] pairUnpairFlags) throws NotIntegerException {
+        String propertyIndexString = extractDetail(rawPairUnpairDetails,
+                pairFlagIndexPositions[0] + pairUnpairFlags[0].length(),
+                pairFlagIndexPositions[1]);
+
+        String clientIndexString = extractDetail(rawPairUnpairDetails,
+                pairFlagIndexPositions[1] + pairUnpairFlags[1].length());
+
+        int propertyIndex;
+        int clientIndex;
+
+        try {
+            propertyIndex = Integer.parseInt(propertyIndexString);
+            clientIndex = Integer.parseInt(clientIndexString);
+        } catch (NumberFormatException e) {
+            throw new NotIntegerException();
+        }
+
+        ArrayList<Integer> processedPairUnpairDetails = new ArrayList<>();
+        processedPairUnpairDetails.add(clientIndex - 1); // convert to 0-index
+        processedPairUnpairDetails.add(propertyIndex - 1);
+        return processedPairUnpairDetails;
+    }
+
+    private void validatePairDetails(ArrayList<Integer> pairUnpairDetails) throws NotValidIndexException,
+            ExistingPairException {
+        int clientIndex = pairUnpairDetails.get(0);
+        int propertyIndex = pairUnpairDetails.get(1);
+        checkForListIndexOutOfBounds(clientIndex, propertyIndex);
+        Client client = clientList.getClientList().get(clientIndex);
+        if (pairingList.isClientPairedWithProperty(client)) {
+            throw new ExistingPairException();
+        }
+    }
+
+    private void validateUnpairDetails(ArrayList<Integer> pairUnpairDetails) throws NotValidIndexException,
+            NoExistingPairException {
+        int clientIndex = pairUnpairDetails.get(0);
+        int propertyIndex = pairUnpairDetails.get(1);
+        checkForListIndexOutOfBounds(clientIndex, propertyIndex);
+        Client client = clientList.getClientList().get(clientIndex);
+        if (!pairingList.isClientPairedWithProperty(client)) {
+            throw new NoExistingPairException();
+        }
+    }
+
+    private void checkForListIndexOutOfBounds(int clientIndex, int propertyIndex) throws NotValidIndexException {
+        if (clientIndex < 0 || clientIndex > clientList.getCurrentListSize() - 1
+                || propertyIndex < 0 || propertyIndex > propertyList.getCurrentListSize() - 1) {
+            throw new NotValidIndexException();
+        }
     }
 }
