@@ -4,6 +4,7 @@ import seedu.duke.command.Command;
 import seedu.duke.command.ListCommand;
 import seedu.duke.data.transaction.Expense;
 import seedu.duke.data.transaction.Income;
+
 import seedu.duke.exception.InputDuplicateTagException;
 import seedu.duke.exception.InputMissingTagException;
 import seedu.duke.exception.InputUnsupportedTagException;
@@ -16,7 +17,6 @@ import seedu.duke.exception.InputTransactionInvalidCategoryException;
 import seedu.duke.exception.EntryNumberNotNumericException;
 import seedu.duke.exception.InputTransactionUnknownTypeException;
 import seedu.duke.exception.ListStatisticsInvalidStatsTypeException;
-
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -37,7 +37,7 @@ import static seedu.duke.command.CommandTag.COMMAND_TAG_HELP_OPTION;
 import static seedu.duke.common.DateFormats.DATE_INPUT_PATTERN;
 
 /**
- * Parses the parameter portion of the user input and set the parameters into the Command object
+ * Parses the parameter portion of the user input and set the parameters into the Command object.
  *
  * <p>The ParameterParser will check that the parameter input portion contains only the supported tags,
  * for each of the supported tag, parses the parameter into the valid form required by the Command object
@@ -53,17 +53,17 @@ public class ParameterParser {
     private static final String CLASS_TYPE_INCOME = "seedu.duke.data.transaction.Income";
 
     /**
-     * To parse the parameters input into proper parameters of the command object.
+     * Parses the parameters input into proper parameters of the command object.
      *
      * <p>The parameters will go through the following checks during the parsing:
-     * 1. Check that the user input contains all mandatory tags of the command
-     * 2. Check that the user input does not contain tags not supported by the command
-     * 3. Check that the user input does not contain a same tag more than once
-     * 4. Check that the user input does not contain a tag without parameter
-     * 5. For each parameter, check that the format of the parameter is correct
+     * 1. Check that the user input contains all mandatory tags of the command.
+     * 2. Check that the user input does not contain tags not supported by the command.
+     * 3. Check that the user input does not contain a same tag more than once.
+     * 4. Check that the user input does not contain a tag without parameter.
+     * 5. For each parameter, check that the format of the parameter is correct.
      *
      * @param command A command object created based on the command word given by user.
-     * @throws MoolahException Any command input exceptions captured by Moolah Manager.
+     * @throws MoolahException If Moolah Manager captures any command input exceptions.
      */
     public static void parse(Command command, String parametersInput) throws MoolahException {
         assert command != null;
@@ -78,7 +78,6 @@ public class ParameterParser {
         there is no more need to further check and set the parameters for empty parameters input.
         */
         if (!parametersInput.isEmpty()) {
-
             // Might throw InputUnsupportedTagException
             checkUnsupportedTagsNotExist(command, splits);
             // Might throw InputDuplicateTagException
@@ -90,8 +89,6 @@ public class ParameterParser {
             // For each tag, check that the parameter is correct and set it inside the command.
             setCommand(command, splits);
         }
-
-
     }
 
     /**
@@ -99,7 +96,7 @@ public class ParameterParser {
      *
      * @param command A command object created based on the command word given by user.
      * @param splits  The user input after the command word, split into a list for every space found.
-     * @throws InputMissingTagException Missing mandatory tag exception.
+     * @throws InputMissingTagException If there is a missing mandatory tag.
      */
     private static void checkMandatoryTagsExist(Command command, String[] splits) throws InputMissingTagException {
         String[] tags = command.getMandatoryTags();
@@ -116,7 +113,7 @@ public class ParameterParser {
      *
      * @param command A command object created based on the command word given by user.
      * @param splits  The user input after the command word, split into a list for every space found.
-     * @throws InputUnsupportedTagException Extra tag exception.
+     * @throws InputUnsupportedTagException If there is an extra tag that is not recognised.
      */
     private static void checkUnsupportedTagsNotExist(Command command, String[] splits)
             throws InputUnsupportedTagException {
@@ -125,7 +122,7 @@ public class ParameterParser {
 
         for (String split : splits) {
             if (split.length() < MINIMUM_TAG_LENGTH) {
-                // None of the tag is shorter than two characters
+                // None of the tags is shorter than two characters
                 throw new InputUnsupportedTagException();
             }
             boolean hasFoundAmongMandatoryTag = findIfParameterTagAmongTags(split, mandatoryTags);
@@ -143,7 +140,7 @@ public class ParameterParser {
      * Checks if the split user inputs contains a tag multiple times.
      *
      * @param splits The user input after the command word, split into a list for every space found.
-     * @throws InputDuplicateTagException Extra tag exception.
+     * @throws InputDuplicateTagException If there is an extra of the same tag.
      */
     private static void checkDuplicateTagsNotExist(String[] splits) throws InputDuplicateTagException {
         HashMap<String, Integer> tagOccurenceMap = new HashMap<>();
@@ -219,7 +216,7 @@ public class ParameterParser {
      *
      * @param command A command object created based on the command word given by user.
      * @param splits  The user input after the command word, split into a list for every space found.
-     * @throws MoolahException Any command input exceptions captured by Moolah Manager.
+     * @throws MoolahException If Moolah Manager captures any command input exceptions.
      */
     private static void setCommand(Command command, String[] splits) throws MoolahException {
         for (String split : splits) {
@@ -406,10 +403,10 @@ public class ParameterParser {
      * @param parameter The user input after the user tag.
      * @return The statistic type.
      * @throws ListStatisticsInvalidStatsTypeException Invalid statistic type exception.
-     * @author brian-vb
+     * @author chydarren
      */
     public static String parseStatsTypeTag(String parameter) throws ListStatisticsInvalidStatsTypeException {
-        String statsType = EMPTY_STRING;
+        String statsType;
         switch (parameter) {
         case "categories":
             statsType = "categories";

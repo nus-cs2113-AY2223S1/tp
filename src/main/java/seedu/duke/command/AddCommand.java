@@ -56,6 +56,9 @@ public class AddCommand extends Command {
     public AddCommand() {
     }
 
+    /**
+     * Initialises the variables of the AddCommand class.
+     */
     public AddCommand(String type, String description, int amount, String category, LocalDate date) {
         this.type = type;
         this.description = description;
@@ -67,7 +70,7 @@ public class AddCommand extends Command {
     /**
      * Gets the mandatory tags of the command.
      *
-     * @return A string array containing all mandatory tags
+     * @return A string array containing all mandatory tags.
      */
     @Override
     public String[] getMandatoryTags() {
@@ -107,11 +110,12 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Executes the "add" command. Check and parse the necessary parameters before adding transaction.
+     * Executes the "add" command. Checks and parses the necessary parameters before adding transaction.
      *
      * @param ui           An instance of the Ui class.
      * @param transactions An instance of the TransactionList class.
      * @param storage      An instance of the Storage class.
+     * @throws InputTransactionUnknownTypeException If the type of transaction is not recognised.
      */
     @Override
     public void execute(TransactionList transactions, Ui ui, Storage storage) throws MoolahException {
@@ -131,6 +135,11 @@ public class AddCommand extends Command {
         }
     }
 
+    /**
+     * Enables the program to exit when the Bye command is issued.
+     *
+     * @return A boolean value that indicates whether the program shall exit.
+     */
     @Override
     public boolean isExit() {
         return false;

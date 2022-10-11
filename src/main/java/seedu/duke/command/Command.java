@@ -11,13 +11,6 @@ import java.time.LocalDate;
  * Represents an object that can be inherited by other command objects.
  */
 public abstract class Command {
-    /**
-     * Executes the operations related to the command.
-     *
-     * @param ui An instance of the Ui class.
-     * @param transactions An instance of the TransactionList class.
-     * @param storage An instance of the Storage class.
-     */
 
     // The command word used to trigger the execution of Moolah Manager's operations
     public static String COMMAND_WORD;
@@ -30,9 +23,9 @@ public abstract class Command {
 
     /**
      * Get the default mandatory tags of the command (no mandatory tag).
-     * To be overridden by subclasses which the command requires mandatory tag
+     * To be overridden by subclasses which the command requires mandatory tag.
      *
-     * @return A string array containing all mandatory tags
+     * @return A string array containing all mandatory tags.
      */
     public String[] getMandatoryTags() {
         String[] mandatoryTags = new String[0];
@@ -40,18 +33,30 @@ public abstract class Command {
     }
 
     /**
-     * Get the default optional tags of the command (no optional tag).
-     * To be overridden by subclasses which the command requires optional tag
+     * Gets the default optional tags of the command (no optional tag).
+     * To be overridden by subclasses which the command requires optional tag.
      *
-     * @return A string array containing all optional tags
+     * @return A string array containing all optional tags.
      */
     public String[] getOptionalTags() {
         String[] optionalTags = new String[0];
         return optionalTags;
     }
 
+    /**
+     * Executes the operations related to the command.
+     *
+     * @param ui An instance of the Ui class.
+     * @param transactions An instance of the TransactionList class.
+     * @param storage An instance of the Storage class.
+     */
     public abstract void execute(TransactionList transactions, Ui ui, Storage storage) throws MoolahException;
 
+    /**
+     * Enables the program to exit when the Bye command is issued.
+     *
+     * @return A boolean value that indicates whether the program shall exit.
+     */
     public abstract boolean isExit();
 
     // Methods below are to be overridden by the subclass whenever applicable
