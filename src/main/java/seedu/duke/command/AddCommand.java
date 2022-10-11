@@ -7,19 +7,23 @@ import seedu.duke.Ui;
 import seedu.duke.exception.IllegalValueException;
 import seedu.duke.exercise.Exercise;
 import seedu.duke.exercise.ExerciseList;
+import seedu.duke.food.FoodList;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class AddCommand extends Command {
     private Ui ui;
     private String arguments;
 
     private Food food;
-    public static ArrayList<Food> foodList = new ArrayList<>();
     public static final String INVALID_FOOD_INPUT = "Invalid food input";
+    final String[] invalidFoodNames = { "", " ", "[]\\[;]" };
 
     private Exercise exercise;
     private ExerciseList exerciseList;
+
+    private FoodList foodList;
 
     public AddCommand(String arguments) {
         this.arguments = arguments;
@@ -46,25 +50,20 @@ public class AddCommand extends Command {
     }
 
 
-    private void addFood(String[] argumentList) {
+    private void addFood(String[] argumentList) throws IllegalValueException{
         try {
             if (argumentList.length < 3) {
                 throw new IllegalValueException(INVALID_FOOD_INPUT);
             }
-            String description = argumentList[1];
-            int calories = Integer.parseInt(argumentList[2]);
+            String description = extractFoodName(argumentList[1]);
+            int calories = extractCalories(argumentList[2]);
 
-            if (description.equals("") || calories <= 0) {
-                throw new IllegalValueException(INVALID_FOOD_INPUT);
-            }
             food = new Food(description, calories);
-            foodList.add(food);
+            foodList.addFood(food);
             ui.output(food.toString());
             ui.output(" This food is added to the food list successfully");
         } catch (NumberFormatException e) {
-            ui.output(INVALID_FOOD_INPUT);
-        } catch (IllegalValueException e) {
-            ui.output(e.getMessage());
+            throw new IllegalValueException(INVALID_FOOD_INPUT);
         }
     }
 
@@ -85,9 +84,26 @@ public class AddCommand extends Command {
         }
     }
 
+    private String extractFoodName(String input) throws IllegalValueException {
+        String food_name = input;
+        if (Arrays.asList(invalidFoodNames).contains(input)) {
+            throw new IllegalValueException("Please provide valid food description inputs!");
+        }
+        return food_name;
+    }
+
+    private int extractCalories(String input) throws IllegalValueException {
+        int calories = Integer.parseInt(input);
+        if (calories <= 0) {
+            throw new IllegalValueException("Calories inputs need to be positive integer values!");
+        }
+        return calories;
+    }
+
     @Override
-    public void setData(Ui ui, Biometrics biometrics, ExerciseList exerciseList) {
+    public void setData(Ui ui, Biometrics biometrics, ExerciseList exerciseList, FoodList foodList) {
         this.ui = ui;
         this.exerciseList = exerciseList;
+        this.foodList = foodList;
     }
 }

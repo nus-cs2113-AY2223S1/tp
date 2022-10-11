@@ -6,8 +6,7 @@ import seedu.duke.Parser;
 import seedu.duke.Ui;
 import seedu.duke.exception.IllegalValueException;
 import seedu.duke.exercise.ExerciseList;
-
-import java.util.ArrayList;
+import seedu.duke.food.FoodList;
 
 
 public class RemoveCommand extends Command{
@@ -16,7 +15,7 @@ public class RemoveCommand extends Command{
     private String arguments;
 
     private Food food;
-    public static ArrayList<Food> foodList = AddCommand.foodList;
+    private FoodList foodList;
     public static final String INVALID_REMOVE_FOOD_INPUT = "Invalid remove food input";
     public static final String INVALID_INDEX = "Please provide a valid index to delete";
 
@@ -47,12 +46,12 @@ public class RemoveCommand extends Command{
                 throw new IllegalValueException(INVALID_REMOVE_FOOD_INPUT);
             }
             int index = Integer.parseInt(argumentList[1]);
-            if (index <= 0 || index > foodList.size()) {
+            if (index <= 0 || index > foodList.getFoodListSize()) {
                 throw new IllegalValueException(INVALID_REMOVE_FOOD_INPUT);
             }
             ui.output(" This food has been deleted from the food list successfully");
-            ui.output(foodList.get(index -1).toString());
-            foodList.remove(index-1);
+            ui.output(foodList.getFood(index -1).toString());
+            foodList.removeFood(index-1);
         } catch (NumberFormatException e) {
             ui.output(INVALID_REMOVE_FOOD_INPUT);
         } catch (IllegalValueException e) {
@@ -62,7 +61,7 @@ public class RemoveCommand extends Command{
 
 
     @Override
-    public void setData(Ui ui, Biometrics biometrics, ExerciseList exerciseList) {
+    public void setData(Ui ui, Biometrics biometrics, ExerciseList exerciseList, FoodList foodList) {
         this.ui = ui;
     }
 }

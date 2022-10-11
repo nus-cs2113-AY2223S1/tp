@@ -5,6 +5,7 @@ import seedu.duke.command.Command;
 import seedu.duke.command.GreetCommand;
 import seedu.duke.exception.IllegalValueException;
 import seedu.duke.exercise.ExerciseList;
+import seedu.duke.food.FoodList;
 
 public class Duke {
     /**
@@ -15,12 +16,15 @@ public class Duke {
     private static Biometrics biometrics;
 
     private static ExerciseList exerciseList;
+
+    private static FoodList foodList;
     public static boolean isProgramFinished = false;
 
     public Duke() {
         ui = new Ui();
         biometrics = new Biometrics();
         exerciseList = new ExerciseList();
+        foodList = new FoodList();
     }
 
     private static void startDuke() {
@@ -43,7 +47,7 @@ public class Duke {
                 String input = ui.input();
                 ui.line();
                 Command command = Parser.parse(input);
-                command.setData(ui, biometrics, exerciseList);
+                command.setData(ui, biometrics, exerciseList, foodList);
                 command.execute();
             } catch (IllegalValueException e) {
                 ui.output(e.getMessage());
