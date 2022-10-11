@@ -58,6 +58,13 @@ public class Ui {
         showLine();
     }
 
+    public static void viewItemMessage(Item item, TransactionList transactionList) {
+        showLine();
+        System.out.print("Here is the item you requested: " + '\n'
+                + item.toString(transactionList) + "\n");
+        showLine();
+    }
+
     public static void deleteItemMessage(Item item, int itemListSize) {
         showLine();
         assert itemListSize >= 0;

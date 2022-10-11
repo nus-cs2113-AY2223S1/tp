@@ -113,7 +113,7 @@ public class CommandParser {
         case COMMAND_VIEW_USER:
             return new ViewUserCommand(parts, userList);
         case COMMAND_VIEW_ITEM:
-            return new ViewItemCommand(parts, itemList);
+            return new ViewItemCommand(parts, itemList, transactionList);
         case COMMAND_VIEW_TX:
             return new ViewTransactionCommand(parts, transactionList);
         case COMMAND_ADD_USER:
