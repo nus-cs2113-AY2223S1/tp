@@ -6,6 +6,7 @@ import seedu.duke.biometrics.Biometrics;
 import seedu.duke.exception.IllegalValueException;
 import seedu.duke.exercise.Exercise;
 import seedu.duke.exercise.ExerciseList;
+import seedu.duke.food.FoodList;
 
 public class MarkCommand extends Command {
     private Ui ui;
@@ -62,7 +63,7 @@ public class MarkCommand extends Command {
     }
 
     @Override
-    public void setData(Ui ui, Biometrics biometrics, ExerciseList exerciseList) {
+    public void setData(Ui ui, Biometrics biometrics, ExerciseList exerciseList, FoodList foodList) {
         this.ui = ui;
         this.exerciseList = exerciseList;
     }
