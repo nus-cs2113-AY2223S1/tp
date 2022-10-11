@@ -2,6 +2,11 @@ package seedu.duke;
 
 import java.util.Scanner;
 
+import static seedu.duke.Messages.MESSAGE_EMPTY_PROPERTY_INDEX;
+import static seedu.duke.Messages.MESSAGE_INVALID_PROPERTY_INDEX;
+import static seedu.duke.Messages.MESSAGE_INVALID_PROPERTY_INDEX_FLAG_FORMAT;
+import static seedu.duke.Messages.MESSAGE_MISSING_PROPERTY_INDEX_FLAG;
+import static seedu.duke.Messages.MESSAGE_PROPERTY_DELETED;
 import static seedu.duke.Messages.MESSAGE_WELCOME;
 
 import static seedu.duke.Messages.MESSAGE_PROPERTY_ADDED;
@@ -93,6 +98,11 @@ public class Ui {
         showToUser("  " + clientList.getClientList().get(currentListSize - 1));
     }
 
+    public void showPropertyDeletedConfirmationMessage(Property deletedProperty) {
+        showToUser(MESSAGE_PROPERTY_DELETED);
+        showToUser("  " + deletedProperty);
+    }
+
     public void showClientDeletedConfirmationMessage(Client deletedClient) {
         showToUser(MESSAGE_CLIENT_DELETED);
         showToUser("  " + deletedClient);
@@ -107,8 +117,6 @@ public class Ui {
         showToUser(MESSAGE_UNPAIRED);
         showToUser("  " + client.getClientName() + " and " + property.getPropertyAddress());
     }
-
-    /* Add Client Related Exceptions */
     
     public void showExistingPairMessage() {
         showToUser(MESSAGE_EXISTING_PAIR);
@@ -172,7 +180,7 @@ public class Ui {
     }
 
 
-    /* Delete Client Related Exceptions */
+    /* Delete Property/Client Related Exceptions */
 
     public void showUndefinedSubCommandDeleteTypeMessage() {
         showToUser(MESSAGE_MISSING_SUB_COMMAND_TYPE_FOR_DELETE);
@@ -180,6 +188,22 @@ public class Ui {
 
     public void showMissingCommandDeleteDetailMessage() {
         showToUser(MESSAGE_EMPTY_DELETE_DESCRIPTION);
+    }
+
+    public void showInvalidPropertyIndexDeleteMessage() {
+        showToUser(MESSAGE_INVALID_PROPERTY_INDEX);
+    }
+
+    public void showEmptyPropertyIndexDeleteMessage() {
+        showToUser(MESSAGE_EMPTY_PROPERTY_INDEX);
+    }
+
+    public void showMissingPropertyIndexFlagMessage() {
+        showToUser(MESSAGE_MISSING_PROPERTY_INDEX_FLAG);
+    }
+
+    public void showInvalidPropertyIndexFlagFormatMessage() {
+        showToUser(MESSAGE_INVALID_PROPERTY_INDEX_FLAG_FORMAT);
     }
 
     public void showInvalidClientIndexDeleteMessage() {
@@ -197,6 +221,7 @@ public class Ui {
     public void showInvalidClientIndexFlagFormatMessage() {
         showToUser(MESSAGE_INVALID_CLIENT_INDEX_FLAG_FORMAT);
     }
+
 
     /* Pair/Unpair Related Exceptions */
 

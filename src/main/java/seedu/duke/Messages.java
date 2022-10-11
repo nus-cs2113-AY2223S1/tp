@@ -8,6 +8,8 @@ public class Messages {
 
     public static final String MESSAGE_PROPERTY_ADDED = "Adding a property with the following information:";
 
+    public static final String MESSAGE_PROPERTY_DELETED = "Deleting a property with the following information:";
+
     public static final String MESSAGE_CLIENT_ADDED = "Adding a client with the following information:";
 
     public static final String MESSAGE_CLIENT_DELETED = "Deleting a client with the following information:";
@@ -79,7 +81,7 @@ public class Messages {
             + "(No letter/symbols, etc) for budget";
 
 
-    /* Delete Client Related Error Messages */
+    /* Delete Property/Client Related Error Messages */
 
     public static final String MESSAGE_MISSING_SUB_COMMAND_TYPE_FOR_DELETE = "OOPS!!! To delete, "
             + "please specify sub-command type.\n"
@@ -98,6 +100,15 @@ public class Messages {
 
     public static final String MESSAGE_INVALID_CLIENT_INDEX_FLAG_FORMAT = "OOPS!!! Please use this flag format:\n"
             + "ic/CLIENT_INDEX";
+
+    public static final String MESSAGE_INVALID_PROPERTY_INDEX = "OOPS!!! Please enter a valid property index.";
+
+    public static final String MESSAGE_EMPTY_PROPERTY_INDEX = "OOPS!!! The property index to delete cannot be empty.";
+
+    public static final String MESSAGE_MISSING_PROPERTY_INDEX_FLAG = "OOPS!!! Please provide the property index flag.";
+
+    public static final String MESSAGE_INVALID_PROPERTY_INDEX_FLAG_FORMAT = "OOPS!!! Please use this flag format:\n"
+            + "ip/PROPERTY_INDEX";
 
     /* Pair/Unpair Related Error Messages */
 
