@@ -6,7 +6,7 @@ import java.util.List;
 
 public class State {
 
-    public int semester = 0;
+    private int semester = 0;
     List<List<SelectedModule>> selectedModulesList;
 
     public List<SelectedModule> getSelectedModulesList() {
@@ -16,4 +16,13 @@ public class State {
     public void setSelectedModulesList(List<SelectedModule> selectedModulesList) {
         this.selectedModulesList.set(semester, selectedModulesList);
     }
+
+    public int getSemester() {
+        return semester;
+    }
+
+    public void setSemester(int semester) {
+        this.semester = semester;
+    }
+
 }
