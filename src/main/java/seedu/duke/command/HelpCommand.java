@@ -20,6 +20,7 @@ public class HelpCommand extends Command {
                 + "set biometrics /{age} /{gender} /height /{weight} /{fat percentage}\n"
                 + "add exercise /{description} /{repetitions} /{calories}\n"
                 + "mark {done/undone} /{exercise index}\n"
+                + "remove exercise /{index}\n"
                 + "view {biometrics/exercise}");
     }
 

@@ -1,22 +1,12 @@
 package seedu.duke;
 
 
-import seedu.duke.command.SetCommand;
-import seedu.duke.command.Command;
-import seedu.duke.command.GreetCommand;
-import seedu.duke.command.ExitCommand;
-import seedu.duke.command.InvalidCommand;
-import seedu.duke.command.AddExerciseCommand;
-import seedu.duke.command.AddFoodCommand;
-import seedu.duke.command.HelpCommand;
-import seedu.duke.command.ViewCommand;
+import seedu.duke.command.*;
 
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
-
-import seedu.duke.command.MarkCommand;
 
 public class Parser {
 
@@ -42,6 +32,8 @@ public class Parser {
             return new MarkCommand(arguments);
         case "help":
             return new HelpCommand();
+        case "remove":
+            return new RemoveExerciseCommand(arguments);
         default:
             return new InvalidCommand();
         }
