@@ -20,70 +20,110 @@ public class Storage {
 
     
     public Storage(ClientList clientList, PropertyList propertyList, PairingList pairingList) {
-        checkFile(clientList, propertyList, pairingList);
-    }
+        boolean hasDirectory = checkDirectory();
+        boolean hasPropertyFile = checkPropertyFile();
+        boolean hasClientFile = checkClientFile();
+        boolean hasPairingFile = checkPair();
 
-    /**
-     * Checks if all the file exist.
-     */
-    public void checkFile(ClientList clientList, PropertyList propertyList, PairingList pairingList) {
-        checkDirectory();
-        checkPropertyFile(propertyList);
-        checkClientFile(clientList);
-        checkPair(pairingList);
+        loadFiles(hasDirectory, hasPropertyFile, hasClientFile, hasPairingFile, clientList, propertyList, pairingList);
+
     }
 
     /**
      * Checks if the data directory exist.
+     *
+     * @return true if data directory exist and false if it does not
      */
-    public void checkDirectory() {
+    public boolean checkDirectory() {
         File dir = new File(DIRECTORY);
         boolean hasDirectory = dir.exists();
 
-        // Create a directory if the directory does not exist.
-        if (!hasDirectory) {
-            dir.mkdir();
-        }
+        return hasDirectory;
+    }
+
+    /**
+     * Creates a data directory.
+     */
+    public void makeDirectory() {
+        File dir = new File(DIRECTORY);
+
+        // Creates a directory
+        dir.mkdir();
     }
 
     /**
      * Checks if the property file exist.
+     *
+     * @return true if the property text file exist and false if it does not
      */
-    public void checkPropertyFile(PropertyList propertyList) {
+    public boolean checkPropertyFile() {
         File propertyFile = new File(PROPERTY_PATH);
         boolean hasPropertyFile = propertyFile.exists();
 
-        if (hasPropertyFile) {
-            // Load property into the array list
-            loadProperty(propertyList, propertyFile);
-        }
+
+        return hasPropertyFile;
     }
+
+
 
     /**
      * Checks if the client file exist.
+     *
+     * @return true if the client text file exist and false if it does not
      */
-    public void checkClientFile(ClientList clientList) {
+    public boolean checkClientFile() {
         File clientFile = new File(CLIENT_PATH);
         boolean hasClientFile = clientFile.exists();
 
-        if (hasClientFile) {
-            // Load client into the array list
-            loadClient(clientList, clientFile);
-        }
+
+        return hasClientFile;
     }
 
     /**
      * Checks if the pair file exit.
      *
-     * @param pairingList Paring List object that contains the hash map of pair
+     * @return true if pairing file exist and false if it does not
      */
-    public void checkPair(PairingList pairingList) {
+    public boolean checkPair() {
         File pairFile = new File(PAIR_PATH);
         boolean hasPairFile = pairFile.exists();
 
-        if (!hasPairFile) {
-            // Load pair into the hash map
-            loadPair(pairingList, pairFile);
+
+        return hasPairFile;
+    }
+
+    /**
+     * Creates a directory if it does not already exist then load the file into the relevant array list and
+     * hash table if the text file exist.
+     *
+     * @param hasDirectory boolean value on whether directory exist
+     * @param hasPropertyFile boolean value on whether property text file exist
+     * @param hasClientFile boolean value on whether client text file exist
+     * @param hasPairingFile boolean value on whether pairing text file exist
+     * @param clientList the array list containing the list of client
+     * @param propertyList the array list containing the list of property
+     * @param pairingList the hash map containing the pairing between client and property
+     */
+    public void loadFiles(boolean hasDirectory, boolean hasPropertyFile, boolean hasClientFile,
+                          boolean hasPairingFile, ClientList clientList, PropertyList propertyList,
+                          PairingList pairingList) {
+        if (!hasDirectory) {
+            makeDirectory();
+        }
+
+        if (hasClientFile) {
+            File clientFile = new File(CLIENT_PATH);
+            loadClient(clientList, clientFile);
+        }
+
+        if (hasPropertyFile) {
+            File propertyFile = new File(PROPERTY_PATH);
+            loadProperty(propertyList, propertyFile);
+        }
+
+        if (hasPairingFile) {
+            File pairingFile = new File(PAIR_PATH);
+            loadPair(pairingList, pairingFile);
         }
     }
 
