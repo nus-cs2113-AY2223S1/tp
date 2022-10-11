@@ -8,7 +8,6 @@ public class CommandResult {
         this.message = message;
     }
 
-
     public String getMessage() {
         return "Echo CommandResult message: " + message;
     }

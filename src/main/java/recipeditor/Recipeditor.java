@@ -36,7 +36,6 @@ public class Recipeditor {
     private static void start(String[] args) {
         Ui.showGreeting();
         //TODO: Load from storage
-
     }
 
     /**
@@ -72,6 +71,4 @@ public class Recipeditor {
             throw new RuntimeException(e);
         }
     }
-
-
 }

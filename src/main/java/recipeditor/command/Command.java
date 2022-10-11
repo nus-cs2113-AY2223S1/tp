@@ -5,7 +5,6 @@ public abstract class Command {
 
     public abstract CommandResult execute();
 
-
     /**
      * Check Exit to exit program.
      */
