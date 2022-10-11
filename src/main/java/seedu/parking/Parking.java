@@ -5,7 +5,6 @@ import java.io.IOException;
 import seedu.api.Api;
 import seedu.common.CommonFiles;
 import seedu.data.CarparkList;
-import seedu.exception.EmptyResponseException;
 import seedu.exception.InvalidFindCommandException;
 import seedu.exception.NoCarparkFoundException;
 import seedu.exception.ParkingException;
@@ -41,13 +40,14 @@ public class Parking {
             System.out.println("Trying to fetch data"); // Debug line
             api.fetchData();
             System.out.println("Completed fetch data!"); // Debug line
-        } catch (EmptyResponseException e) {
-            ui.showFetchError();
+        } catch (ParkingException e) {
+            System.out.println(e.getMessage());
         } catch (IOException e) {
             ui.showSaveError();
         } finally {
             System.out.println("Fetching and save data sequence terminated"); // Debug line
         }
+
 
         // Load file from json
         ui.showLoadingDataMessage();

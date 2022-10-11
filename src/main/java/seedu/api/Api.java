@@ -1,5 +1,6 @@
 package seedu.api;
 
+
 import static seedu.common.CommonFiles.API_JSON_DIRECTORY;
 import static seedu.common.CommonFiles.LTA_BASE_URL;
 import static seedu.common.CommonFiles.LTA_JSON_FILE;
@@ -15,6 +16,9 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 import seedu.exception.EmptyResponseException;
+import seedu.exception.ServerNotReadyApiException;
+import seedu.exception.UnauthorisedAccessApiException;
+import seedu.exception.UnknownResponseApiException;
 import seedu.files.FileStorage;
 import seedu.ui.Ui;
 
@@ -22,13 +26,10 @@ import seedu.ui.Ui;
  * Class to fetch .json data from APIs and save that locally.
  */
 public class Api {
-    private final String apiKey = "1B+7tBxzRNOtFbTxGcCiYA==";
-    private final String authHeaderName = "AccountKey";
-    private final int maxFetchTries = 5;
-    private HttpClient client;
+    private final HttpClient client;
     private HttpRequest request;
     private CompletableFuture<HttpResponse<String>> responseFuture;
-    private FileStorage storage;
+    private final FileStorage storage;
     private final Ui ui;
 
     /**
@@ -47,6 +48,8 @@ public class Api {
      * Builds the API HTTP GET request header and body.
      */
     private void generateHttpRequestCarpark() {
+        String apiKey = "1B+7tBxzRNOtFbTxGcCiYA==";
+        String authHeaderName = "AccountKey";
         request = HttpRequest.newBuilder(
                 URI.create(LTA_BASE_URL))
             .header(authHeaderName, apiKey)
@@ -66,11 +69,12 @@ public class Api {
      *
      * @return JSON string response from the API.
      */
-    public String asyncGetResponse() {
+    private String asyncGetResponse()
+            throws UnauthorisedAccessApiException, ServerNotReadyApiException, UnknownResponseApiException {
         String result = "";
         try {
             HttpResponse<String> response = responseFuture.get(1000, TimeUnit.MILLISECONDS);
-            if (!response.body().trim().isEmpty()) {
+            if (isValidResponse(response.statusCode())) {
                 result = response.body();
             }
         } catch (ExecutionException | InterruptedException e) {
@@ -81,6 +85,21 @@ public class Api {
         return result;
     }
 
+    private boolean isValidResponse(int responseCode)
+            throws UnauthorisedAccessApiException, ServerNotReadyApiException, UnknownResponseApiException {
+        switch (responseCode) {
+        case 200:
+            return true;
+        case 401:
+            throw new UnauthorisedAccessApiException();
+        case 503:
+            throw new ServerNotReadyApiException("Too many request. Trying again...");
+        default:
+            throw new UnknownResponseApiException("Response Code: " + responseCode
+                    + "\nIf problem persist contact developer. Trying again...");
+        }
+    }
+
     /**
      * Execute the data fetching subroutine. Subroutine will repeat for a certain number of time
      * and throws an exception if no response is received.
@@ -88,16 +107,24 @@ public class Api {
      * @throws EmptyResponseException if empty/invalid response received.
      * @throws IOException if data writing fails.
      */
-    public void fetchData() throws EmptyResponseException, IOException {
-        String result = asyncGetResponse();
-        int fetchTries = maxFetchTries;
-        while (result.isEmpty() && fetchTries > 0) {
-            asyncExecuteRequest();
-            result = asyncGetResponse();
-            fetchTries--;
-        }
+    public void fetchData() throws EmptyResponseException, IOException, UnauthorisedAccessApiException {
+        String result = "";
+        int fetchTries = 5;
+        do {
+            try {
+                result = asyncGetResponse().trim();
+            } catch (ServerNotReadyApiException | UnknownResponseApiException e) {
+                System.out.println(e.getMessage());
+            } finally {
+                fetchTries--;
+            }
+            if (fetchTries > 0 && result.isEmpty()) {
+                asyncExecuteRequest();
+            }
+        } while (fetchTries > 0 && result.isEmpty());
+
         if (fetchTries == 0 && result.isEmpty()) {
-            throw new EmptyResponseException("No response was received.");
+            throw new EmptyResponseException("No response was received. Check your internet connection.");
         }
         storage.writeDataToFile(result);
     }

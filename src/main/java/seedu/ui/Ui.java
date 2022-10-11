@@ -81,14 +81,14 @@ public class Ui {
      * Show error message when fetching data is unsuccessful.
      */
     public void showFetchError() {
-        print("Something went wrong when fetching data.");
+        print("Something went wrong when fetching data, trying again...");
     }
 
     /**
      * Show error message when fetching data took too long.
      */
     public void showFetchTimeout() {
-        print("Fetch Timeout, try again!");
+        print("Fetch Timeout, trying again...");
     }
 
     /**
