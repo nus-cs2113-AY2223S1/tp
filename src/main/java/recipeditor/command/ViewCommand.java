@@ -6,7 +6,6 @@ import recipeditor.ui.Ui;
 
 public class ViewCommand extends Command {
     public static final String COMMAND_TYPE = "view";
-    public static final String VIEW_MESSAGE = "Which recipe to view?";
 
     private final int index;
 
@@ -28,10 +27,8 @@ public class ViewCommand extends Command {
     public CommandResult execute() {
         try {
             Recipe recipe = RecipeList.getRecipes().get(index);
-            String result = String.format("%nName: %s%nDescription: %s%n",
-                    recipe.getTitle(), recipe.getDescription());
-            //TODO: have a display all details function from recipe
-            return new CommandResult(result);
+            String commandResultOutput = recipe.getRecipeAttributesFormatted();
+            return new CommandResult(commandResultOutput);
         } catch (IndexOutOfBoundsException e) {
             Ui.showMessageInline("Current number of saved recipes:", Integer.toString(RecipeList.getRecipes().size()));
             return new CommandResult("View recipe index out of bound.");

@@ -1,8 +1,10 @@
 package recipeditor.recipe;
 
+import java.util.ArrayList;
+
 public class Ingredient {
-    private double amount;
     private String name;
+    private double amount;
     private String unit;
 
     public Ingredient(String name, double amount, String unit) {

@@ -56,9 +56,9 @@ public class Recipe {
         return this.ingredients.get(index);
     }
 
-    public Ingredient getIngredientByName(String name) {
+    public Ingredient getIngredientByName(String ingredientName) {
         for (Ingredient i : ingredients) {
-            if (i.getName().equals(name)) {
+            if (i.getName().equals(ingredientName)) {
                 return i;
             }
         }
@@ -87,5 +87,22 @@ public class Recipe {
 
     public void deleteStep(int index) {
         this.steps.remove(index);
+    }
+
+    public String getIngredientAttributesFormatted() {
+        StringBuilder recipeIngredientStringFormatted = new StringBuilder();
+        for (Ingredient i : ingredients) {
+            String textShown = String.format("%nName - %s%nAmount - %s%nUnit - %s%n", i.getName(), String.valueOf(i.getAmount()), i.getUnit());
+            recipeIngredientStringFormatted.append(textShown);
+        }
+        return recipeIngredientStringFormatted.toString();
+    }
+
+    public String getRecipeAttributesFormatted() {
+        StringBuilder recipeAttributesStringFormatted = new StringBuilder();
+        recipeAttributesStringFormatted.append("Recipe Name: " + title + "\n");
+        recipeAttributesStringFormatted.append("Recipe Description: " + description + "\n");
+        recipeAttributesStringFormatted.append("Ingredients: " + getIngredientAttributesFormatted());
+        return recipeAttributesStringFormatted.toString();
     }
 }
