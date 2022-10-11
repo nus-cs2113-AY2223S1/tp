@@ -15,7 +15,7 @@ public class PairingList {
     private static final HashMap<String, String> clientPropertyPairs = new HashMap<>();
 
     /**
-     * Default Constructor.
+     * Constructs the PairingList object.
      */
     public PairingList() {
 
@@ -66,6 +66,11 @@ public class PairingList {
         return clientPropertyPairs.containsKey(clientPairingData);
     }
 
+    /**
+     * Fetches a list of tenants that is renting the property.
+     * @param property Property being queried.
+     * @return List of tenants occupying the property, along with their data.
+     */
     public ArrayList<String> getPropertyTenants(Property property) {
         String propertyPairingData = convertToPairingData(property);
         ArrayList<String> tenants = new ArrayList<>();

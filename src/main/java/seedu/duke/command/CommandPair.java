@@ -11,16 +11,27 @@ import seedu.duke.Ui;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a pair-type command.
+ */
 public class CommandPair extends Command {
 
     private int clientIndex;
     private int propertyIndex;
 
+
+    /**
+     * Constructs CommandPair object.
+     * @param commandPairDetails Parsed client and property indexes from the user's input.
+     */
     public CommandPair(ArrayList<Integer> commandPairDetails) {
         this.clientIndex = commandPairDetails.get(0);
         this.propertyIndex = commandPairDetails.get(1);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void execute(Ui ui, Storage storage, PropertyList propertyList, ClientList clientList,
                         PairingList pairingList) {
