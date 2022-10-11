@@ -1,6 +1,10 @@
 package seedu.duke.model;
 
-import java.util.*;
+import java.util.Set;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeSet;
+import java.util.HashMap;
 import java.util.stream.Collectors;
 
 public class SemesterData {
@@ -28,9 +32,9 @@ public class SemesterData {
         return set;
     }
 
-    public Map<LessonType, List<RawLesson>> getAvailableSlots(){
+    public Map<LessonType, List<RawLesson>> getAvailableSlots() {
         Map<LessonType, List<RawLesson>> map = new HashMap<>();
-        for(LessonType lessonType: lessonTypes) {
+        for (LessonType lessonType: lessonTypes) {
             map.put(lessonType, getLessonsByType(lessonType));
         }
         return map;
