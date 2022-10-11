@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2022-10-10T18:22:41.627063Z</date>
+  <millis>1665426161627</millis>
+  <nanos>63000</nanos>
+  <sequence>0</sequence>
+  <logger>global</logger>
+  <level>INFO</level>
+  <class>seedu.duke.Duke</class>
+  <method>main</method>
+  <thread>1</thread>
+  <message>starting Timetabler program...</message>
+</record>
+<record>
+  <date>2022-10-10T18:22:45.542133Z</date>
+  <millis>1665426165542</millis>
+  <nanos>133000</nanos>
+  <sequence>1</sequence>
+  <logger>global</logger>
+  <level>INFO</level>
+  <class>seedu.duke.Duke</class>
+  <method>main</method>
+  <thread>1</thread>
+  <message>exiting Timetabler program...</message>
+</record>
+</log>

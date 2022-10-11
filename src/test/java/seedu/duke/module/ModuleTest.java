@@ -1,11 +1,16 @@
 package seedu.duke.module;
 
 import org.junit.jupiter.api.Test;
+import seedu.duke.module.lessons.Lesson;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ModuleTest {
-    Module module = new Module("SE & OOP", "CS2113");
+    List<Lesson> list = new ArrayList<>();
+    Module module = new Module("CS2113", "SE & OOP", "Sample Description", list);
 
     @Test
     void getModuleName_noInputs_correctName() {
@@ -19,6 +24,6 @@ class ModuleTest {
 
     @Test
     void getModuleDetails_noInputs_correctDetails() {
-        assertEquals("CS2113: SE & OOP", module.getModuleDetails());
+        assertEquals("CS2113: SE & OOP\n", module.getModuleDetails());
     }
 }
