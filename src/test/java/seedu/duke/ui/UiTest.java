@@ -65,9 +65,10 @@ public class UiTest {
                 + "                                                       "
                 + "[Home University Module Code] [Home University Module Title] | "
                 + "[Partner University Module Code] [Partner University Module Title] | [Equivalent NUS Credits]\n"
-                + "     " + "view      " + "/view UNIVERSITIES\n"
-                + "Displays all universities with module mappings available in database"
-                + "     " + "view      " + "/view DATABASE u/UNIVERSITY"
+                + "     " + "view      " + "/view UNIVERSITIES                      "
+                + "Displays all universities with module mappings available in database\n"
+                + "     " + "view      " + "/view DATABASE u/UNIVERSITY             "
+                + "Displays all modules mappings offered by UNIVERSITY in database\n"
                 + "     " + "add       " + "/add u/UNIVERSITY m/MODULECODE          "
                 + "Add input Partner University module code to input university list                       \n"
                 + "     " + "delete    " + "/delete u/UNIVERSITY m/MODULECODE       "
@@ -77,7 +78,6 @@ public class UiTest {
                 + "     " + "Note: Words in UPPER_CASE are parameters that you should input as a user\n"
                 + "     " + "Note: There should not be spaces in parameters, replace with underscore instead\n"
                 + "_____________________________________________________________________________\n";
-
         assertEquals(expected, Ui.printCommands());
     }
 
