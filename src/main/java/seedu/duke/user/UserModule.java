@@ -1,6 +1,7 @@
 package seedu.duke.user;
 
 import seedu.duke.module.Module;
+import seedu.duke.university.University;
 
 public class UserModule extends Module {
     private String nusCode;
@@ -12,7 +13,9 @@ public class UserModule extends Module {
     private String comment;
 
     public UserModule(String puCode, String puTitle, String nusCode, String nusTitle, String nusCredit) {
-        super(nusCode, nusTitle, nusCredit);
+        // TODO
+        super(nusCode, nusTitle, nusCredit, new University(nusTitle, "null"));
+
         assert puCode.length() > 0 : "PU module code length cannot be null";
         assert puTitle.length() > 0 : "PU module title length cannot be null";
         assert nusCode.length() > 0 : "NUS module code length cannot be null";
