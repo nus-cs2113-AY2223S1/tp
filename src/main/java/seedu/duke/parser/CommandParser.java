@@ -1,19 +1,9 @@
 package seedu.duke.parser;
 
-import seedu.duke.command.AddCommand;
-import seedu.duke.command.Command;
-import seedu.duke.command.CommandType;
-import seedu.duke.command.CreateCommand;
-import seedu.duke.command.DeleteCommand;
-import seedu.duke.command.ViewCommand;
+import seedu.duke.command.*;
 import seedu.duke.exceptions.InvalidUserCommandException;
 
 public class CommandParser {
-
-    private static final int COMMAND = 0;
-    private static final int FIRST_PARAMETER = 1;
-    private static final int SECOND_PARAMETER = 2;
-    private static final int MAX_PARAMETERS = 3;
 
     public static Command getUserCommand(String userInput) throws InvalidUserCommandException {
         String[] userInputTokenized = userInput.split(" +");
@@ -24,6 +14,9 @@ public class CommandParser {
 
         String userInputCommand = userInputTokenized[0];
         switch (userInputCommand) {
+        case "/exit":
+            ExitCommand newExitCommand = new ExitCommand(userInputTokenized, CommandType.EXIT);
+            return newExitCommand;
         case "/create":
             if (!isValidCreateCommand(userInputTokenized)) {
                 throw new InvalidUserCommandException("Error! Invalid create command. "
