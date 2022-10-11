@@ -57,8 +57,11 @@ public class CommandParser {
     }
 
     private static boolean isValidViewCommand(String[] parameters) {
-        if (parameters.length == 2 && (parameters[1].startsWith("u/") || !parameters[1].startsWith("ALL")
-                || !parameters[1].startsWith("MODULES"))) {
+        if (parameters.length == 2 && (parameters[1].startsWith("u/") || parameters[1].trim().equals("LISTS")
+                || parameters[1].trim().equals("UNIVERSITIES") || parameters[1].trim().equals("MODULES"))) {
+            return true;
+        } else if (parameters.length == 3 && parameters[1].trim().equals("DATABASE") &&
+                parameters[2].startsWith("u/")){
             return true;
         } else {
             return false;

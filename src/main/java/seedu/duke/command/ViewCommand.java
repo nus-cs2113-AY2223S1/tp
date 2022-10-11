@@ -10,6 +10,9 @@ public class ViewCommand extends Command {
             this.viewOption = "UNIVERSITY";
         } else {
             this.viewOption = parameters[1];
+            if (parameters[1].equals("DATABASE")) {
+                this.universityName = parameters[2].substring(2).replace("_"," ");
+            }
         }
     }
 
