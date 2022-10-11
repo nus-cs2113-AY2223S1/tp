@@ -9,12 +9,19 @@ import seedu.duke.command.ViewCommand;
 import seedu.duke.exceptions.InvalidUserCommandException;
 
 public class CommandParser {
+
+    private static final int COMMAND = 0;
+    private static final int FIRST_PARAMETER = 1;
+    private static final int SECOND_PARAMETER = 2;
+    private static final int MAX_PARAMETERS = 3;
+
     public static Command getUserCommand(String userInput) throws InvalidUserCommandException {
         String[] userInputTokenized = userInput.split(" +");
         if (userInputTokenized.length < 1) {
             throw new InvalidUserCommandException("Error! Missing command. "
                     + "Please follow the command format provided!");
         }
+
         String userInputCommand = userInputTokenized[0];
         switch (userInputCommand) {
         case "/create":
@@ -22,6 +29,7 @@ public class CommandParser {
                 throw new InvalidUserCommandException("Error! Invalid create command. "
                         + "Please follow the command format provided");
             }
+            userInputTokenized[1] = userInputTokenized[1].replace('_', ' ');
             CreateCommand newCreateCommand = new CreateCommand(userInputTokenized, CommandType.CREATE);
             return newCreateCommand;
         case "/add":
@@ -29,6 +37,7 @@ public class CommandParser {
                 throw new InvalidUserCommandException("Error! Invalid add command. "
                         + "Please follow the command format provided");
             }
+            userInputTokenized[1] = userInputTokenized[1].replace('_', ' ');
             AddCommand newAddCommand = new AddCommand(userInputTokenized, CommandType.ADD);
             return newAddCommand;
         case "/view":
@@ -36,6 +45,7 @@ public class CommandParser {
                 throw new InvalidUserCommandException("Error! Invalid view command. "
                         + "Please follow the command format provided");
             }
+            userInputTokenized[1] = userInputTokenized[1].replace('_', ' ');
             ViewCommand newViewCommand = new ViewCommand(userInputTokenized, CommandType.VIEW);
             return newViewCommand;
         case "/delete":
@@ -43,6 +53,7 @@ public class CommandParser {
                 throw new InvalidUserCommandException("Error! Invalid delete command. "
                         + "Please follow the command format provided");
             }
+            userInputTokenized[1] = userInputTokenized[1].replace('_', ' ');
             boolean isDeleteModule = userInputTokenized.length == 3;
             DeleteCommand newDeleteCommand = new DeleteCommand(userInputTokenized, CommandType.DELETE, isDeleteModule);
             return newDeleteCommand;
@@ -53,11 +64,11 @@ public class CommandParser {
     }
 
     private static boolean isValidViewCommand(String[] parameters) {
-        if (!parameters[1].startsWith("u/") && !parameters[1].startsWith("ALL") && !parameters[1].startsWith("MODULES")
-                || parameters.length > 2) {
-            return false;
-        } else {
+        if (parameters.length == 2 && (parameters[1].startsWith("u/") || !parameters[1].startsWith("ALL")
+                || !parameters[1].startsWith("MODULES"))) {
             return true;
+        } else {
+            return false;
         }
     }
 
@@ -70,20 +81,19 @@ public class CommandParser {
     }
 
     private static boolean isValidDeleteCommand(String[] parameters) {
-        if (!parameters[1].startsWith("u/") || parameters.length > 3) {
-            return false;
-        } else if (parameters.length == 3 && !parameters[2].startsWith("m/")) {
-            return false;
-        } else {
+        if (parameters.length == 2 && parameters[1].startsWith("u/") || (parameters.length == 3
+                && parameters[1].startsWith("u/") && parameters[2].startsWith("m/"))) {
             return true;
+        } else {
+            return false;
         }
     }
 
     private static boolean isValidCreateCommand(String[] parameters) {
-        if (parameters.length > 2 || !parameters[1].startsWith("u/")) {
-            return false;
-        } else {
+        if (parameters.length == 2 && parameters[1].startsWith("u/")) {
             return true;
+        } else {
+            return false;
         }
     }
 }
