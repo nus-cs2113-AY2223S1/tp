@@ -4,8 +4,8 @@ import org.junit.jupiter.api.Test;
 import seedu.duke.command.Command;
 import seedu.duke.command.passengercommand.AddPassengerCommand;
 import seedu.duke.exceptions.SkyControlException;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ParserTest {
     protected static String lineInput =
@@ -35,7 +35,7 @@ class ParserTest {
     @Test
     void checkMainParser() throws SkyControlException {
         assertThrows(SkyControlException.class,
-                () -> Parser.parse("Hi"));
+            () -> Parser.parse("Hi"));
         AddPassengerCommand ans = new AddPassengerCommand();
         Command result = Parser.parse(lineInput);
         assertEquals(ans.getClass(), result.getClass());
