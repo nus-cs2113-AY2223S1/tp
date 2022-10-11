@@ -3,12 +3,15 @@ package seedu.duke;
 import seedu.duke.command.Command;
 import seedu.duke.command.CommandBye;
 import seedu.duke.exception.EmptyClientDetailException;
+import seedu.duke.exception.EmptyClientIndexDeleteException;
 import seedu.duke.exception.EmptyCommandAddDetailException;
+import seedu.duke.exception.EmptyCommandDeleteDetailException;
 import seedu.duke.exception.EmptyCommandPairUnpairDetailsException;
 import seedu.duke.exception.ExistingPairException;
 import seedu.duke.exception.IncorrectAddClientFlagOrderException;
 import seedu.duke.exception.IncorrectPairUnpairFlagOrderException;
 import seedu.duke.exception.InvalidBudgetFormatException;
+import seedu.duke.exception.InvalidClientIndexDeleteException;
 import seedu.duke.exception.InvalidContactNumberException;
 import seedu.duke.exception.InvalidEmailException;
 import seedu.duke.exception.MissingClientDetailException;
@@ -18,6 +21,7 @@ import seedu.duke.exception.NoExistingPairException;
 import seedu.duke.exception.NotIntegerException;
 import seedu.duke.exception.NotValidIndexException;
 import seedu.duke.exception.UndefinedSubCommandAddTypeException;
+import seedu.duke.exception.UndefinedSubCommandDeleteTypeException;
 
 import java.io.IOException;
 
@@ -32,11 +36,11 @@ public class Duke {
 
     public void run() throws IOException {
         this.ui = new Ui();
-        this.storage = new Storage();
         this.propertyList = new PropertyList();
         this.clientList = new ClientList();
         this.parser = new Parser(clientList, propertyList, pairingList);
         this.pairingList = new PairingList();
+        this.storage = new Storage(clientList, propertyList, pairingList);
 
         Command command;
         boolean isCommandBye = false;
@@ -45,7 +49,7 @@ public class Duke {
 
         do {
             try {
-                System.exit(0); //to pass CI
+//                System.exit(0); //to pass CI
                 String userInputText = ui.readCommand();
                 command = parser.parseCommand(userInputText);
                 command.execute(ui, storage, propertyList, clientList, pairingList);
@@ -65,6 +69,14 @@ public class Duke {
                 ui.showInvalidEmailMessage();
             } catch (InvalidBudgetFormatException e) {
                 ui.showInvalidBudgetFormatMessage();
+            } catch (EmptyCommandDeleteDetailException e) {
+                ui.showMissingCommandDeleteDetailMessage();
+            } catch (UndefinedSubCommandDeleteTypeException e) {
+                ui.showUndefinedSubCommandDeleteTypeMessage();
+            } catch (InvalidClientIndexDeleteException e) {
+                ui.showInvalidClientIndexDeleteMessage();
+            } catch (EmptyClientIndexDeleteException e) {
+                ui.showEmptyClientIndexDeleteMessage();
             } catch (EmptyCommandPairUnpairDetailsException e) {
                 ui.showEmptyCommandPairUnpairDetailsMessage();
             } catch (MissingPairUnpairFlagException | IncorrectPairUnpairFlagOrderException e) {
