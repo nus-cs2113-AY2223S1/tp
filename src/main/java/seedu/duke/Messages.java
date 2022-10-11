@@ -86,12 +86,18 @@ public class Messages {
             + "For client: add -client\n"
             + "For property: add -property";
 
-    public static final String MESSAGE_EMPTY_DELETE_DESCRIPTION = "OOPS!!! The index for delete cannot be empty.";
+    public static final String MESSAGE_EMPTY_DELETE_DESCRIPTION = "OOPS!!! Please use this format to delete:\n"
+            + "Client: delete -client ic/CLIENT_INDEX\n"
+            + "Property: delete -property ip/PROPERTY_INDEX";
 
     public static final String MESSAGE_INVALID_CLIENT_INDEX = "OOPS!!! Please enter a valid client index.";
 
     public static final String MESSAGE_EMPTY_CLIENT_INDEX = "OOPS!!! The client index to delete cannot be empty.";
 
+    public static final String MESSAGE_MISSING_CLIENT_INDEX_FLAG = "OOPS!!! Please provide the client index flag.";
+
+    public static final String MESSAGE_INVALID_CLIENT_INDEX_FLAG_FORMAT = "OOPS!!! Please use this flag format:\n"
+            + "ic/CLIENT_INDEX";
 
     /* Pair/Unpair Related Error Messages */
 

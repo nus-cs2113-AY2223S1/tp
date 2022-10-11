@@ -16,6 +16,17 @@ import static seedu.duke.Messages.MESSAGE_EMPTY_ADD_DESCRIPTION;
 import static seedu.duke.Messages.MESSAGE_MISSING_SUB_COMMAND_TYPE_FOR_ADD;
 import static seedu.duke.Messages.MESSAGE_EMPTY_PROPERTY_DESCRIPTION;
 import static seedu.duke.Messages.MESSAGE_EMPTY_CLIENT_DESCRIPTION;
+import static seedu.duke.Messages.MESSAGE_EMPTY_COMMAND_PAIR_UNPAIR;
+import static seedu.duke.Messages.MESSAGE_EXISTING_PAIR;
+import static seedu.duke.Messages.MESSAGE_EMPTY_CLIENT_INDEX;
+import static seedu.duke.Messages.MESSAGE_EMPTY_DELETE_DESCRIPTION;
+import static seedu.duke.Messages.MESSAGE_INVALID_BUDGET_FORMAT;
+import static seedu.duke.Messages.MESSAGE_INVALID_CLIENT_INDEX;
+import static seedu.duke.Messages.MESSAGE_INVALID_CLIENT_INDEX_FLAG_FORMAT;
+import static seedu.duke.Messages.MESSAGE_INVALID_CONTACT_NUMBER;
+import static seedu.duke.Messages.MESSAGE_INVALID_EMAIL;
+import static seedu.duke.Messages.MESSAGE_MISSING_CLIENT_INDEX_FLAG;
+import static seedu.duke.Messages.MESSAGE_MISSING_SUB_COMMAND_TYPE_FOR_ADD;
 import static seedu.duke.Messages.MESSAGE_ADD_PROPERTY_WRONG_FORMAT;
 import static seedu.duke.Messages.MESSAGE_PROPERTY_INPUT_EXAMPLE;
 import static seedu.duke.Messages.MESSAGE_ADD_CLIENT_WRONG_FORMAT;
@@ -97,6 +108,8 @@ public class Ui {
         showToUser("  " + client.getClientName() + " and " + property.getPropertyAddress());
     }
 
+    /* Add Client Related Exceptions */
+    
     public void showExistingPairMessage() {
         showToUser(MESSAGE_EXISTING_PAIR);
     }
@@ -177,6 +190,13 @@ public class Ui {
         showToUser(MESSAGE_EMPTY_CLIENT_INDEX);
     }
 
+    public void showMissingClientIndexFlagMessage() {
+        showToUser(MESSAGE_MISSING_CLIENT_INDEX_FLAG);
+    }
+
+    public void showInvalidClientIndexFlagFormatMessage() {
+        showToUser(MESSAGE_INVALID_CLIENT_INDEX_FLAG_FORMAT);
+    }
 
     /* Pair/Unpair Related Exceptions */
 

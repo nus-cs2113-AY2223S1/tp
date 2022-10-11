@@ -15,12 +15,14 @@ import seedu.duke.exception.IncorrectAddPropertyFlagOrderException;
 import seedu.duke.exception.IncorrectPairUnpairFlagOrderException;
 import seedu.duke.exception.InvalidBudgetFormatException;
 import seedu.duke.exception.InvalidClientIndexDeleteException;
+import seedu.duke.exception.InvalidClientIndexFlagFormatException;
 import seedu.duke.exception.InvalidContactNumberException;
 import seedu.duke.exception.InvalidEmailException;
 import seedu.duke.exception.InvalidPriceFormatException;
 import seedu.duke.exception.InvalidSingaporeAddressException;
 import seedu.duke.exception.MissingClientDetailException;
 import seedu.duke.exception.MissingClientFlagException;
+import seedu.duke.exception.MissingClientIndexFlagException;
 import seedu.duke.exception.MissingPairUnpairFlagException;
 import seedu.duke.exception.MissingPropertyDetailException;
 import seedu.duke.exception.MissingPropertyFlagException;
@@ -93,6 +95,10 @@ public class Duke {
                 ui.showInvalidClientIndexDeleteMessage();
             } catch (EmptyClientIndexDeleteException e) {
                 ui.showEmptyClientIndexDeleteMessage();
+            } catch (MissingClientIndexFlagException e) {
+                ui.showMissingClientIndexFlagMessage();
+            } catch (InvalidClientIndexFlagFormatException e) {
+                ui.showInvalidClientIndexFlagFormatMessage();
             } catch (EmptyCommandPairUnpairDetailsException e) {
                 ui.showEmptyCommandPairUnpairDetailsMessage();
             } catch (MissingPairUnpairFlagException | IncorrectPairUnpairFlagOrderException e) {
