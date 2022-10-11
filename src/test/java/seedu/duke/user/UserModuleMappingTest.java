@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
+import seedu.duke.exceptions.InvalidUserCommandException;
 
 import java.util.NoSuchElementException;
 
@@ -41,6 +42,6 @@ public class UserModuleMappingTest {
 
     @Test
     void deleteModuleByPuCode_NoSuchEntry_expectException() {
-        assertThrows(NoSuchElementException.class, () -> myModules.deleteModuleByPuCode("ABIDE"));
+        assertThrows(InvalidUserCommandException.class, () -> myModules.deleteModuleByPuCode("ABIDE"));
     }
 }

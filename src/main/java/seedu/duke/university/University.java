@@ -18,7 +18,7 @@ public class University {
 
     @Override
     public String toString() {
-        return getName() + "(" + getCountry() + ")";
+        return getName();
     }
 
     public String getName() {

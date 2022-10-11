@@ -4,16 +4,12 @@ import seedu.duke.command.AddCommand;
 import seedu.duke.command.Command;
 import seedu.duke.command.CommandType;
 import seedu.duke.command.CreateCommand;
+import seedu.duke.command.ExitCommand;
 import seedu.duke.command.DeleteCommand;
 import seedu.duke.command.ViewCommand;
 import seedu.duke.exceptions.InvalidUserCommandException;
 
 public class CommandParser {
-
-    private static final int COMMAND = 0;
-    private static final int FIRST_PARAMETER = 1;
-    private static final int SECOND_PARAMETER = 2;
-    private static final int MAX_PARAMETERS = 3;
 
     public static Command getUserCommand(String userInput) throws InvalidUserCommandException {
         String[] userInputTokenized = userInput.split(" +");
@@ -24,6 +20,9 @@ public class CommandParser {
 
         String userInputCommand = userInputTokenized[0];
         switch (userInputCommand) {
+        case "/exit":
+            ExitCommand newExitCommand = new ExitCommand(userInputTokenized, CommandType.EXIT);
+            return newExitCommand;
         case "/create":
             if (!isValidCreateCommand(userInputTokenized)) {
                 throw new InvalidUserCommandException("Error! Invalid create command. "
@@ -64,8 +63,11 @@ public class CommandParser {
     }
 
     private static boolean isValidViewCommand(String[] parameters) {
-        if (parameters.length == 2 && (parameters[1].startsWith("u/") || !parameters[1].startsWith("ALL")
-                || !parameters[1].startsWith("MODULES"))) {
+        if (parameters.length == 2 && (parameters[1].startsWith("u/") || parameters[1].trim().equals("LISTS")
+                || parameters[1].trim().equals("UNIVERSITIES") || parameters[1].trim().equals("MODULES"))) {
+            return true;
+        } else if (parameters.length == 3 && parameters[1].trim().equals("DATABASE")
+                && parameters[2].startsWith("u/")) {
             return true;
         } else {
             return false;

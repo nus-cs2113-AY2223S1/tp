@@ -1,5 +1,6 @@
 package seedu.duke.user;
 
+import seedu.duke.exceptions.InvalidUserCommandException;
 import seedu.duke.ui.Ui;
 
 import java.util.ArrayList;
@@ -49,15 +50,19 @@ public class UserModuleMappingList {
         }
     }
 
+    public void addModule(UserModuleMapping input, boolean fromDatabase) {
+        modules.add(input);
+    }
+
     public void displayAll() {
         if (modules.size() == 0) {
             System.out.println("No current modules saved");
         } else {
-            System.out.print(Ui.printModulesInList(modules));
+            System.out.print(Ui.printModulesInUserList(modules));
         }
     }
 
-    public void deleteModuleByPuCode(String input) {
+    public void deleteModuleByPuCode(String input) throws InvalidUserCommandException {
         assert input.length() > 0 : "Deleting PU code cannot be empty";
         boolean isFound = false;
         for (int i = 0; i < modules.size(); ++i) {
@@ -67,8 +72,7 @@ public class UserModuleMappingList {
             }
         }
         if (!isFound) {
-            System.out.println("No such modules found");
-            throw new NoSuchElementException();
+            throw new InvalidUserCommandException("No such modules found");
         }
     }
 

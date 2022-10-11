@@ -1,6 +1,7 @@
 package seedu.duke.userstorage;
 
 import org.junit.jupiter.api.Test;
+import seedu.duke.exceptions.InvalidUserCommandException;
 import seedu.duke.user.UserModuleMapping;
 import seedu.duke.user.UserUniversityList;
 import seedu.duke.user.UserUniversityListManager;
@@ -11,7 +12,7 @@ public class UserStorageTest {
     UserUniversityListManager testManager = new UserUniversityListManager();
 
     @Test
-    public void testFileContentStringConversion() {
+    public void testFileContentStringConversion() throws InvalidUserCommandException {
         testManager.createList("Boston University");
         UserModuleMapping testModule = new UserModuleMapping("MET CS 248", "Discrete Mathematics", "CS1231",
                 "Discrete Structures", "4", "4", "BU", "USA");

@@ -1,7 +1,6 @@
 package seedu.duke.ui;
 
 import org.junit.jupiter.api.Test;
-import seedu.duke.Duke;
 import seedu.duke.user.UserModuleMapping;
 //import seedu.duke.DukeException;
 import java.io.ByteArrayInputStream;
@@ -52,17 +51,24 @@ public class UiTest {
                 + "     " + "--------  " + "--------------------------------------  " + "-------\n"
                 + "     " + "create    " + "/create u/UNIVERSITY                    "
                 + "Creates an empty module list for the input university\n"
+                + "     " + "exit      " + "/exit\n"
                 + "     " + "view      " + "/view MODULES                           "
                 + "Displays all existing university modules mappings that are approved in the format\n"
                 + "                                                       "
-                + "[NUS Module Code] [NUS Module Title] [NUS Module Credits] -> [Partner University Name] "
-                + "[Partner University Module Code] [Partner University Title]\n"
+                + "[Partner University Module Code] [Partner University Module Title] "
+                +  "[Partner University Module Credits] | [NUS Module Code] [NUS Module Title] "
+                + "[NUS Module Credits] in NUS\n"
                 + "     " + "view      " + "/view LISTS                             "
                 + "Displays all existing university lists that have been created by the user\n"
                 + "     " + "view      " + "/view u/UNIVERSITY                      "
-                + "Displays all modules that have been added to the input university’s list in the format\n"
+                + "Displays all modules that have been added to the user's input university’s list in the format\n"
                 + "                                                       "
-                + "[Home University Module Code] → [Partner University Module Code]\n"
+                + "[Home University Module Code] [Home University Module Title] | "
+                + "[Partner University Module Code] [Partner University Module Title] | [Equivalent NUS Credits]\n"
+                + "     " + "view      " + "/view UNIVERSITIES                      "
+                + "Displays all universities with module mappings available in database\n"
+                + "     " + "view      " + "/view DATABASE u/UNIVERSITY             "
+                + "Displays all modules mappings offered by UNIVERSITY in database\n"
                 + "     " + "add       " + "/add u/UNIVERSITY m/MODULECODE          "
                 + "Add input Partner University module code to input university list                       \n"
                 + "     " + "delete    " + "/delete u/UNIVERSITY m/MODULECODE       "
@@ -130,7 +136,7 @@ public class UiTest {
     @Test
     public void testPrintPuListCreatedAcknowledgement() {
         String expected = "_____________________________________________________________________________\n"
-                + "Success! You have created a new list for" + "Stanford University" + "\n"
+                + "Success! You have created a new list for " + "Stanford University" + "\n"
                 + "_____________________________________________________________________________\n";
         assertEquals(expected, Ui.printPuListCreatedAcknowledgement("Stanford University"));
     }
@@ -138,7 +144,7 @@ public class UiTest {
     @Test
     public void testPrintPuListDeletedAcknowledgement() {
         String expected = "_____________________________________________________________________________\n"
-                + "Success! You deleted the list for" + "Stanford University" + "\n"
+                + "Success! You deleted the list for " + "Stanford University" + "\n"
                 + "_____________________________________________________________________________\n";
         assertEquals(expected, Ui.printPuListDeletedAcknowledgement("Stanford University"));
     }
@@ -160,6 +166,6 @@ public class UiTest {
                 + "\n" + "2. " + "NUS: " + "CS3244" + " " + "Machine Learning"
                 + " | Partner University: " + "CPSC456" + " " + "ML" + " | Equivalent NUS Credits: " +  "4 MCs" + "\n"
                 + "_____________________________________________________________________________\n";
-        assertEquals(expected, Ui.printModulesInList(modules));
+        assertEquals(expected, Ui.printModulesInUserList(modules));
     }
 }

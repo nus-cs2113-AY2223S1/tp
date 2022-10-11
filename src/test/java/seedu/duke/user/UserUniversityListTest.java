@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
+import seedu.duke.exceptions.InvalidUserCommandException;
 
 import java.util.NoSuchElementException;
 
@@ -26,7 +27,7 @@ public class UserUniversityListTest {
     }
 
     @Test
-    void addModule_UclaModule_correctDetails() {
+    void addModule_UclaModule_correctDetails() throws InvalidUserCommandException {
         testManager.createList("UCLA");
         UserModuleMapping mod = new UserModuleMapping("CS101", "Programming Intro", "CS1010",
                 "Programming Methodology", "4", "4", "UCLA", "USA");
@@ -46,7 +47,7 @@ public class UserUniversityListTest {
 
 
     @Test
-    void deleteModule_Ucla_correctDetails() {
+    void deleteModule_Ucla_correctDetails() throws InvalidUserCommandException {
         testManager.createList("UCLA");
         UserModuleMapping mod = new UserModuleMapping("CS101", "Programming Intro", "CS1010",
                 "Programming Methodology", "4", "4", "UCLA", "USA");
@@ -56,17 +57,17 @@ public class UserUniversityListTest {
     }
 
     @Test
-    void deleteModule_UclaWrongDetail_throwException() {
+    void deleteModule_UclaWrongDetail_throwException() throws InvalidUserCommandException {
         testManager.createList("UCLA");
         UserModuleMapping mod = new UserModuleMapping("CS101", "Programming Intro", "CS1010",
                 "Programming Methodology", "4", "4", "UCLA", "USA");
         testManager.addModule("UCLA", mod);
-        assertThrows(NoSuchElementException.class,() -> testManager.deleteModule("UCLA", "CS00"));
+        assertThrows(InvalidUserCommandException.class,() -> testManager.deleteModule("UCLA", "CS00"));
         assertEquals(1, testManager.getMyManager().get("UCLA").getMyModules().getModules().size());
     }
 
     @Test
-    void deleteList_Ucla_correctDetails() {
+    void deleteList_Ucla_correctDetails() throws InvalidUserCommandException {
         testManager.createList("UCLA");
         assertEquals(1, testManager.getMyManager().size());
         testManager.deleteList("UCLA");
@@ -83,16 +84,16 @@ public class UserUniversityListTest {
     
     @Test
     void getList_NonexistentList_throwException() {
-        assertThrows(NoSuchElementException.class,() -> testManager.getList("NUS"));
+        assertThrows(InvalidUserCommandException.class,() -> testManager.getList("NUS"));
     }
 
     @Test
     void deleteList_NonexistentList_throwException() {
-        assertThrows(NoSuchElementException.class,() -> testManager.deleteList("NTU"));
+        assertThrows(InvalidUserCommandException.class,() -> testManager.deleteList("NTU"));
     }
 
     @Test
-    void displayAll_NoInput_ProperOutput() {
+    void displayAll_NoInput_ProperOutput() throws InvalidUserCommandException {
         testManager.createList("UCLA");
         testManager.createList("UCB");
         UserModuleMapping mod = new UserModuleMapping("CS101", "Programming Intro", "CS1010",

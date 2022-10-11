@@ -1,9 +1,11 @@
 package seedu.duke.command;
 
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import seedu.duke.exceptions.ModuleNotFoundException;
 import seedu.duke.module.Module;
 import seedu.duke.module.ModuleMapping;
 import seedu.duke.university.University;
@@ -60,5 +62,14 @@ public class Database {
             }
         }
         return true;
+    }
+
+    public static ModuleMapping findModuleMapping(String moduleCode) throws ModuleNotFoundException {
+        for (ModuleMapping moduleMapping : moduleMappings) {
+            if (moduleMapping.getPartnerUniversityModule().getCode().equals(moduleCode)) {
+                return moduleMapping;
+            }
+        }
+        throw new ModuleNotFoundException("Error! " + moduleCode + " not found in database");
     }
 }

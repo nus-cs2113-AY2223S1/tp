@@ -13,7 +13,7 @@ public class ModuleMapping {
 
     @Override
     public String toString() {
-        return getPartnerUniversityModule() + " " + getNusModule();
+        return getPartnerUniversityModule() + " | " + getNusModule();
     }
 
     public Module getPartnerUniversityModule() {
