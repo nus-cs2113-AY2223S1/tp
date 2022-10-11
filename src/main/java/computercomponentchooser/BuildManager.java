@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import computercomponentchooser.exceptions.DuplicateBuildException;
+import computercomponentchooser.exceptions.UnlistedBuildException;
 
 public class BuildManager {
     private static Map<String, Build> builds;
@@ -19,7 +20,10 @@ public class BuildManager {
         builds.put(build.getName(), build);
     }
 
-    public void deleteBuild(String name) {
+    public void deleteBuild(String name, Build build) throws UnlistedBuildException {
+        if (!builds.containsKey(build.getName())) {
+            throw new UnlistedBuildException();
+        }
         builds.remove(name);
     }
 
