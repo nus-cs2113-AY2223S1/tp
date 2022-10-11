@@ -78,6 +78,7 @@ public class Parking {
                     String carparkID = find.getCarparkID(input);
                     Carpark carpark = carparkList.findCarpark(carparkID);
                     ui.print(carpark.toString());
+                    ui.print(String.format("Available lots: %s", carpark.getAvailableLots()));
                 } catch (InvalidFindCommandException | NoCarparkFoundException exception) {
                     System.out.println(exception.getMessage());
                 }
