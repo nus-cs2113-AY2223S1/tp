@@ -70,8 +70,11 @@ public class DatabaseStorage {
 
         logger.log(Level.FINE, "Start updating database");
 
-        String partnerUniversity = lineData[0];
-        assert partnerUniversity.length() > 0 : "Partner University should not be empty";
+        String partnerUniversityName = lineData[0];
+        assert partnerUniversityName.length() > 0 : "Partner University should not be empty";
+
+        // TODO: v2.0 add country for partner university
+        String partnerUniversityCountry = "null";
 
         String parterUniversityModuleCode = lineData[1];
         assert parterUniversityModuleCode.length() > 0
@@ -94,26 +97,27 @@ public class DatabaseStorage {
         String nusModuleCredit = lineData[6];
         assert nusModuleCredit.length() > 0 : "NUS Module Credit should not be empty";
 
-        updateUniversityDatabase(partnerUniversity);
-        updateModuleMappingDatabase(parterUniversityModuleCode, partnerUnviersityModuleTitle,
+        updateUniversityDatabase(partnerUniversityName, partnerUniversityCountry);
+        updateModuleMappingDatabase(partnerUniversityName, partnerUniversityCountry, parterUniversityModuleCode,
+                partnerUnviersityModuleTitle,
                 partnerUniversityModuleCredit, nusModuleCode, nusModuleTitle, nusModuleCredit);
 
         logger.log(Level.FINE, "Finish updating database");
     }
 
-    private static void updateUniversityDatabase(String partnerUniversity) {
-        assert partnerUniversity.length() > 0 : "Partner University should not be empty";
+    private static void updateUniversityDatabase(String partnerUniversityName, String partnerUniversityCountry) {
+        assert partnerUniversityName.length() > 0 : "Partner University should not be empty";
 
         logger.log(Level.FINER, "Start updating university database");
 
-        // TODO: v2.0 add country for partner university
-        University newUniversity = new University(partnerUniversity, "null");
+        University newUniversity = new University(partnerUniversityName, partnerUniversityCountry);
         Database.addUniversity(newUniversity);
 
         logger.log(Level.FINER, "Finish updating university database");
     }
 
-    private static void updateModuleMappingDatabase(String parterUniversityModuleCode,
+    private static void updateModuleMappingDatabase(String partnerUniversityName, String partnerUniversityCountry,
+            String parterUniversityModuleCode,
             String partnerUnviersityModuleTitle, String partnerUniversityModuleCredit,
             String nusModuleCode, String nusModuleTitle, String nusModuleCredit) {
         assert parterUniversityModuleCode.length() > 0
@@ -128,9 +132,11 @@ public class DatabaseStorage {
 
         logger.log(Level.FINER, "Start updating module mapping database");
 
+        University partnerUniversity = new University(partnerUniversityName, partnerUniversityCountry);
         Module partnerUniversityModule = new Module(parterUniversityModuleCode,
-                partnerUnviersityModuleTitle, partnerUniversityModuleCredit);
-        Module nusModule = new Module(nusModuleCode, nusModuleTitle, nusModuleCredit);
+                partnerUnviersityModuleTitle, partnerUniversityModuleCredit, partnerUniversity);
+        University nusUniversity = new University("NUS", "Singapore");
+        Module nusModule = new Module(nusModuleCode, nusModuleTitle, nusModuleCredit, nusUniversity);
         ModuleMapping newModuleMapping = new ModuleMapping(partnerUniversityModule, nusModule);
 
         Database.addModuleMapping(newModuleMapping);
