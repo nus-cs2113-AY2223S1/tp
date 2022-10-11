@@ -14,10 +14,6 @@ public class RecipeList {
         this(null);
     }
 
-    public static ArrayList<Recipe> getRecipes() {
-        return recipes;
-    }
-
     public static Recipe getRecipe(int index) {
         return recipes.get(index);
     }
@@ -38,7 +34,7 @@ public class RecipeList {
         }
         return null;
     }
-    
+
     public static int getSize() {
         return recipes.size();
     }

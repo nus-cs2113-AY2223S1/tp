@@ -12,15 +12,18 @@ public class Recipe {
         this.title = title;
         this.description = description;
         ingredients = new ArrayList<>();
+        steps = new ArrayList<>();
     }
 
     public Recipe(String title) {
         this.title = title;
         ingredients = new ArrayList<>();
+        steps = new ArrayList<>();
     }
 
     public Recipe() {
         ingredients = new ArrayList<>();
+        steps = new ArrayList<>();
     }
 
 
@@ -99,11 +102,22 @@ public class Recipe {
         return recipeIngredientStringFormatted.toString();
     }
 
+    public String getStepAttributesFormatted() {
+        StringBuilder recipeStepStringFormatted = new StringBuilder();
+        for (int i = 0; i < steps.size(); i++) {
+            String textShown = String.format("%n%d) %s",
+                    i+1, getStep(i));
+            recipeStepStringFormatted.append(textShown);
+        }
+        return recipeStepStringFormatted.toString();
+    }
+
     public String getRecipeAttributesFormatted() {
         StringBuilder recipeAttributesStringFormatted = new StringBuilder();
         recipeAttributesStringFormatted.append("Recipe Name: " + title + "\n");
         recipeAttributesStringFormatted.append("Recipe Description: " + description + "\n");
         recipeAttributesStringFormatted.append("Ingredients: " + getIngredientAttributesFormatted());
+        recipeAttributesStringFormatted.append("Steps: " + getStepAttributesFormatted());
         return recipeAttributesStringFormatted.toString();
     }
 }
