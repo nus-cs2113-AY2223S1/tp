@@ -2,11 +2,14 @@ package recipeditor.parser;
 
 import recipeditor.command.AddCommand;
 import recipeditor.command.Command;
+import recipeditor.command.DeleteCommand;
+import recipeditor.exception.ExcessArgumentException;
 import recipeditor.command.ListCommand;
 import recipeditor.command.ExitCommand;
 import recipeditor.command.InvalidCommand;
 import recipeditor.command.ViewCommand;
 import recipeditor.command.DeleteCommand;
+
 import recipeditor.ui.AddMode;
 import recipeditor.ui.Ui;
 
@@ -15,7 +18,7 @@ public class Parser {
     public Command parseCommand(String input) {
         String[] parsed = input.split(" ");
         String commandWord = parsed[0].toLowerCase();
-        String argument = input.replace(commandWord, ""); // TODO: what is this
+        //String argument = input.replace(commandWord, ""); TODO: what is this
 
         switch (commandWord) {
         case AddCommand.COMMAND_TYPE:
@@ -58,8 +61,6 @@ public class Parser {
         return new AddCommand(add.isValid, add.addedRecipe); // Pass validty and potential recipe to AddCommand
     }
 
-<<<<<<< Updated upstream
-=======
     private void checkForExcessArgument(String[] args, int length)
             throws ExcessArgumentException {
         if (args.length > length) {
@@ -67,5 +68,4 @@ public class Parser {
         }
     }
 
->>>>>>> Stashed changes
 }
