@@ -7,10 +7,10 @@ import seedu.duke.command.ExitCommand;
 import seedu.duke.command.HelpCommand;
 import seedu.duke.command.IncompleteCommand;
 import seedu.duke.command.InvalidModuleCommand;
-import seedu.duke.command.SearchModuleCommand;
-import seedu.duke.command.SearchStringCommand;
 import seedu.duke.command.UnknownCommand;
 import seedu.duke.command.ViewTimetableCommand;
+import seedu.duke.command.SearchModuleCodeCommand;
+import seedu.duke.command.SearchModuleNameCommand;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -22,17 +22,17 @@ public class Parser {
         case ("search"):
             return searchCommand(keywords);
         case ("add"):
-            return addDeleteCommand(keywords, new AddModuleCommand());
+            return addDeleteCommand(keywords, new AddModuleCommand(keywords));
         case ("delete"):
-            return addDeleteCommand(keywords, new DeleteModuleCommand());
+            return addDeleteCommand(keywords, new DeleteModuleCommand(keywords));
         case ("view"):
-            return viewHelpExitCommand(keywords, new ViewTimetableCommand());
+            return viewHelpExitCommand(keywords, new ViewTimetableCommand(keywords));
         case ("help"):
-            return viewHelpExitCommand(keywords, new HelpCommand());
+            return viewHelpExitCommand(keywords, new HelpCommand(keywords));
         case ("bye"):
-            return viewHelpExitCommand(keywords, new ExitCommand());
+            return viewHelpExitCommand(keywords, new ExitCommand(keywords));
         default:
-            return new UnknownCommand();
+            return new UnknownCommand(keywords);
         }
     }
 
@@ -79,9 +79,9 @@ public class Parser {
 
     public static Command searchCommand(String[] keywords) {
         if (isMultiWordsCommand(keywords) && !containsValidModuleCode(keywords)) {
-            return new SearchStringCommand();
+            return new SearchModuleNameCommand(keywords);
         } else if (isValidTwoWordCommand(keywords)) {
-            return new SearchModuleCommand();
+            return new SearchModuleCodeCommand(keywords);
         } else {
             return determineWrongCommand(keywords);
         }
@@ -98,17 +98,18 @@ public class Parser {
         if (isValidTwoWordCommand(keywords)) {
             return command;
         } else {
+            // System.out.println("Invalid module code");
             return determineWrongCommand(keywords);
         }
     }
 
     private static Command determineWrongCommand(String[] keywords) {
         if (isOneWordCommand(keywords)) {
-            return new IncompleteCommand();
+            return new IncompleteCommand(keywords);
         } else if (isTwoWordsCommand(keywords) && !isValidModuleCode(keywords[1])) {
-            return new InvalidModuleCommand();
+            return new InvalidModuleCommand(keywords);
         } else {
-            return new UnknownCommand();
+            return new UnknownCommand(keywords);
         }
     }
 
@@ -116,7 +117,7 @@ public class Parser {
         if (isOneWordCommand(keywords)) {
             return command;
         } else {
-            return new UnknownCommand();
+            return new UnknownCommand(keywords);
         }
     }
 }
