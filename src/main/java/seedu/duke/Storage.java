@@ -1,10 +1,8 @@
 package seedu.duke;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Scanner;
 
 public class Storage {
     private static final String DIRECTORY = "./data/";
@@ -12,7 +10,7 @@ public class Storage {
     private static final String CLIENT_PATH = "./data/client.txt";
     private static final String PAIR_PATH = "./data/pair.txt";
     private static final String SEPARATOR = " | ";
-    private static final String DOLLAR_SIGN = "$";
+    private static final String CURRENCY = "SGD";
     private static final String OPEN_BRACKET = "[";
     private static final String CLOSE_BRACKET = "]";
     private static final String COLON = " : ";
@@ -123,7 +121,7 @@ public class Storage {
     public void addToPropertyFile(String landlord, String address, int price, String unitType) {
         try {
             FileWriter fw = new FileWriter(PROPERTY_PATH, true);
-            String rentalPrice = DOLLAR_SIGN + price;
+            String rentalPrice = CURRENCY + price;
             String newText = landlord + SEPARATOR + address + SEPARATOR + rentalPrice
                     + SEPARATOR + unitType + System.lineSeparator();
 
@@ -146,8 +144,9 @@ public class Storage {
     public void addToClientFile(String name, String contact, String email, int budget) {
         try {
             FileWriter fw = new FileWriter(CLIENT_PATH, true);
-            String budgetPrice = DOLLAR_SIGN + budget;
-            String newText = name + SEPARATOR + contact + SEPARATOR + email + SEPARATOR + budgetPrice;
+            String budgetPrice = CURRENCY + budget;
+            String newText = name + SEPARATOR + contact + SEPARATOR + email + SEPARATOR
+                    + budgetPrice + System.lineSeparator();
 
             fw.write(newText);
             fw.close();
@@ -171,7 +170,7 @@ public class Storage {
                               String address, int price, String type) {
         try {
             FileWriter fw = new FileWriter(PAIR_PATH, true);
-            String monthlyPrice = DOLLAR_SIGN + price;
+            String monthlyPrice = CURRENCY + price;
             String clientPortion = OPEN_BRACKET + client + SEPARATOR + contact + CLOSE_BRACKET;
             String propertyPortion = OPEN_BRACKET + landlord + SEPARATOR + address
                     + SEPARATOR + monthlyPrice + SEPARATOR + type + CLOSE_BRACKET;
