@@ -1,8 +1,8 @@
 package seedu.duke.ui;
 
 import java.util.ArrayList;
-import seedu.duke.user.UserModule;
-import seedu.duke.user.UserModuleList;
+import seedu.duke.user.UserModuleMapping;
+import seedu.duke.user.UserModuleMappingList;
 import seedu.duke.user.UserUniversityList;
 
 import java.util.Scanner;
@@ -89,7 +89,7 @@ public class Ui {
      * Displays to the user information regarding a module.
      * @return Formatted string for each module and its associated code, title, credit and PU information.
      */
-    public static String printModule(UserModule module) {
+    public static String printModule(UserModuleMapping module) {
         String message = "NUS: " + module.getNusCode() + " " + module.getNusTitle() + " | Partner University: "
             + module.getPuCode() + " " + module.getPuTitle() + " | Equivalent NUS Credits: " + module.getNusCredit()
                 + " MCs";
@@ -101,7 +101,7 @@ public class Ui {
      * @param module The module added into the module list
      * @return Formatted string for the module added.
      */
-    public static String printModuleAddedAcknowledgement(UserModule module) {
+    public static String printModuleAddedAcknowledgement(UserModuleMapping module) {
         String message = LINE + "Success! You added:\n" + printModule(module) + "\n" + LINE;
         return message;
     }
@@ -111,7 +111,7 @@ public class Ui {
      * @param module The module updated in the module list
      * @return Formatted string for the module updated.
      */
-    public static String printModuleUpdatedAcknowledgement(UserModule module) {
+    public static String printModuleUpdatedAcknowledgement(UserModuleMapping module) {
         String message = LINE + "Success! You updated:\n" + printModule(module) + "\n" + "With the following comment: "
                 + module.getComment() + "\n" + LINE;
         return message;
@@ -122,7 +122,7 @@ public class Ui {
      * @param module The module deleted from the module list
      * @return Formatted string for the module deleted.
      */
-    public static String printModuleDeletedAcknowledgement(UserModule module) {
+    public static String printModuleDeletedAcknowledgement(UserModuleMapping module) {
         String message = LINE + "Success! You deleted:\n" + printModule(module) + "\n" + LINE;
         return message;
     }
@@ -152,7 +152,7 @@ public class Ui {
      * @param modules The list of modules to be printed.
      * @return Formatted string for the modules in the list.
      */
-    public static String printModulesInList(ArrayList<UserModule> modules) {
+    public static String printModulesInList(ArrayList<UserModuleMapping> modules) {
         String message = LINE;
         for (int i = 0; i < modules.size(); i++) {
             message += Integer.toString(i + 1);
@@ -165,8 +165,8 @@ public class Ui {
     }
 
     public static String printPuList(UserUniversityList puList) {
-        UserModuleList puModulesList = puList.getMyModules();
-        ArrayList<UserModule> puModules = puModulesList.getModules();
+        UserModuleMappingList puModulesList = puList.getMyModules();
+        ArrayList<UserModuleMapping> puModules = puModulesList.getModules();
         return printModulesInList(puModules);
     }
 }

@@ -1,7 +1,7 @@
 package seedu.duke.userstorage;
 
 import org.junit.jupiter.api.Test;
-import seedu.duke.user.UserModule;
+import seedu.duke.user.UserModuleMapping;
 import seedu.duke.user.UserUniversityList;
 import seedu.duke.user.UserUniversityListManager;
 
@@ -13,8 +13,8 @@ public class UserStorageTest {
     @Test
     public void testFileContentStringConversion() {
         testManager.createList("Boston University");
-        UserModule testModule = new UserModule("MET CS 248", "Discrete Mathematics", "CS1231",
-                "Discrete Structures", "4");
+        UserModuleMapping testModule = new UserModuleMapping("MET CS 248", "Discrete Mathematics", "CS1231",
+                "Discrete Structures", "4", "4", "BU", "USA");
         testManager.addModule("Boston University", testModule);
         assertEquals("Boston University%\n"
                         + "MET CS 248;Discrete Mathematics;CS1231;Discrete Structures;4%\n",

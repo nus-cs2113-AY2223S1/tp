@@ -6,15 +6,15 @@ package seedu.duke.user;
  */
 
 public class UserUniversityList {
-    private UserModuleList myModules;
+    private UserModuleMappingList myModules;
     private String universityName;
 
     public UserUniversityList(String universityName) {
         this.universityName = universityName;
-        this.myModules = new UserModuleList();
+        this.myModules = new UserModuleMappingList();
     }
 
-    public void addModule(UserModule input) {
+    public void addModule(UserModuleMapping input) {
         myModules.addModule(input);
     }
 
@@ -35,11 +35,11 @@ public class UserUniversityList {
         myModules.displayAll();
     }
 
-    public UserModuleList getMyModules() {
+    public UserModuleMappingList getMyModules() {
         return myModules;
     }
 
-    public void setMyModules(UserModuleList myModules) {
+    public void setMyModules(UserModuleMappingList myModules) {
         this.myModules = myModules;
     }
 

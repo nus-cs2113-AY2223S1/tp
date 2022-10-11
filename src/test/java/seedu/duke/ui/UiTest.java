@@ -2,7 +2,7 @@ package seedu.duke.ui;
 
 import org.junit.jupiter.api.Test;
 import seedu.duke.Duke;
-import seedu.duke.user.UserModule;
+import seedu.duke.user.UserModuleMapping;
 //import seedu.duke.DukeException;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -77,8 +77,9 @@ public class UiTest {
 
     @Test
     public void testPrintModule() {
-        UserModule dummy = new UserModule("CPSC123", "Intro to AI",
-                "CS3243", "Introduction to Artificial Intelligence", "4");
+        UserModuleMapping dummy = new UserModuleMapping("CPSC123", "Intro to AI",
+                "CS3243", "Introduction to Artificial Intelligence", "4",
+                "test", "test", "test");
         String expected = "NUS: " + "CS3243" + " " + "Introduction to Artificial Intelligence"
             + " | Partner University: " + "CPSC123" + " " + "Intro to AI" + " | Equivalent NUS Credits: " +  "4 MCs";
         assertEquals(expected, Ui.printModule(dummy));
@@ -86,8 +87,9 @@ public class UiTest {
 
     @Test
     public void testPrintModuleAddedAcknowledgement() {
-        UserModule dummy = new UserModule("CPSC123", "Intro to AI",
-                "CS3243", "Introduction to Artificial Intelligence", "4");
+        UserModuleMapping dummy = new UserModuleMapping("CPSC123", "Intro to AI",
+                "CS3243", "Introduction to Artificial Intelligence", "4",
+                "test", "test", "test");
         String expected = "_____________________________________________________________________________\n"
                 + "Success! You added:\n" + "NUS: " + "CS3243" + " "
                 + "Introduction to Artificial Intelligence" + " | Partner University: " + "CPSC123" + " "
@@ -98,8 +100,9 @@ public class UiTest {
 
     @Test
     public void testPrintModuleUpdatedAcknowledgement() {
-        UserModule dummy = new UserModule("CPSC123", "Intro to AI",
-                "CS3243", "Introduction to Artificial Intelligence", "4");
+        UserModuleMapping dummy = new UserModuleMapping("CPSC123", "Intro to AI",
+                "CS3243", "Introduction to Artificial Intelligence", "4",
+                "test", "test", "test");
         dummy.setComment("A+ or nothing");
         String expected = "_____________________________________________________________________________\n"
                 + "Success! You updated:\n" + "NUS: " + "CS3243" + " "
@@ -113,8 +116,9 @@ public class UiTest {
 
     @Test
     public void testPrintModuleDeletedAcknowledgement() {
-        UserModule dummy = new UserModule("CPSC123", "Intro to AI",
-                "CS3243", "Introduction to Artificial Intelligence", "4");
+        UserModuleMapping dummy = new UserModuleMapping("CPSC123", "Intro to AI",
+                "CS3243", "Introduction to Artificial Intelligence", "4",
+                "test", "test", "test");
         String expected = "_____________________________________________________________________________\n"
                 + "Success! You deleted:\n" + "NUS: " + "CS3243" + " "
                 + "Introduction to Artificial Intelligence" + " | Partner University: "
@@ -141,11 +145,13 @@ public class UiTest {
 
     @Test
     public void testPrintModulesInList() {
-        ArrayList<UserModule> modules = new ArrayList<UserModule>();
-        UserModule dummy1 = new UserModule("CPSC123", "Intro to AI",
-                "CS3243", "Introduction to Artificial Intelligence", "4");
-        UserModule dummy2 = new UserModule("CPSC456", "ML",
-                "CS3244", "Machine Learning", "4");
+        ArrayList<UserModuleMapping> modules = new ArrayList<UserModuleMapping>();
+        UserModuleMapping dummy1 = new UserModuleMapping("CPSC123", "Intro to AI",
+                "CS3243", "Introduction to Artificial Intelligence", "4",
+                "test", "test", "test");
+        UserModuleMapping dummy2 = new UserModuleMapping("CPSC456", "ML",
+                "CS3244", "Machine Learning", "4",
+                "test", "test", "test");
         modules.add(dummy1);
         modules.add(dummy2);
         String expected = "_____________________________________________________________________________\n" + "1. "
