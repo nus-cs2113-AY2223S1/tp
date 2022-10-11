@@ -56,7 +56,7 @@ public class Parser {
     public void executeList() {
         executor = new ListCommand(mediaList);
         String output = executor.execute();
-        System.out.println(output);//i think UI should handle the print statement
+        UI.print(output);
 
     }
 
@@ -84,7 +84,7 @@ public class Parser {
                 Movie toAdd = new Movie(name, rating, date);
                 executor = new AddCommand(mediaList, toAdd);
                 String output = executor.execute();
-                System.out.println(output);//i think UI should handle the print statement
+                UI.print(output);
             }
         } catch (Exception e) {
             System.out.println("\nIncomplete or wrongly formatted command, try again.\n");
@@ -94,7 +94,7 @@ public class Parser {
     public void executeClear() {
         executor = new ClearCommand(mediaList);
         String output = executor.execute();
-        System.out.println(output);//i think UI should handle the print statement
+        UI.print(output);
     }
 
     public void executeDelete(String[] words) {
@@ -106,7 +106,7 @@ public class Parser {
                 int deleteIndex = Integer.parseInt(index) - 1;
                 executor = new RemoveCommand(mediaList, deleteIndex);
                 String output = executor.execute();
-                System.out.println(output); //i think UI should handle the print statement
+                UI.print(output);
             }
         } catch (Exception e) {
             System.out.println("Wrong Command\n");
