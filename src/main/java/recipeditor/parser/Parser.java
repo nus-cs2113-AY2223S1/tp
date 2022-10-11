@@ -5,7 +5,11 @@ import recipeditor.command.InvalidCommand;
 import recipeditor.command.ListCommand;
 import recipeditor.command.Command;
 import recipeditor.command.DeleteCommand;
+<<<<<<< Updated upstream
 import recipeditor.command.ExitCommand;
+=======
+import recipeditor.exception.ExcessArgumentException;
+>>>>>>> Stashed changes
 import recipeditor.ui.AddMode;
 import recipeditor.ui.Ui;
 
@@ -16,7 +20,7 @@ public class Parser {
     public Command parseCommand(String input) {
         String[] parsed = input.split(" ");
         String commandWord = parsed[0].toLowerCase();
-        String argument = input.replace(commandWord, "");
+        //String argument = input.replace(commandWord, ""); TODO: what is this
 
         switch (commandWord) {
         case AddCommand.TYPE:
@@ -25,8 +29,26 @@ public class Parser {
             return new ListCommand();
         case ExitCommand.TYPE:
             return new ExitCommand();
-        case DeleteCommand.TYPE:
-            return new DeleteCommand(0); // TODO: This is dummy variable only
+        case DeleteCommand.COMMAND_TYPE:
+            try {
+                int index = Integer.parseInt(parsed[1]) - 1;
+                checkForExcessArgument(parsed, 2);
+                return new DeleteCommand(index);
+            } catch (NumberFormatException | ExcessArgumentException e) {
+                System.out.format("Exception: Wrong command Format%n" +
+                        "Try the command in correct format: mark <index of task>%n");
+                return new InvalidCommand();
+            }
+        case ViewCommand.COMMAND_TYPE:
+            try {
+                int index = Integer.parseInt(parsed[1]) - 1;
+                checkForExcessArgument(parsed, 2);
+                return new ViewCommand(index);
+            } catch (NumberFormatException | ExcessArgumentException e) {
+                System.out.format("Exception: Wrong command Format%n" +
+                        "Try the command in correct format: view <index of task>%n");
+                return new InvalidCommand();
+            }
         default:
             return new InvalidCommand();
         }
@@ -55,6 +77,13 @@ public class Parser {
         add.exitAddMode();
         Ui.showMessage("Is the recipe valid?" + String.valueOf(add.isValid));
         return new AddCommand(add.isValid, add.addedRecipe); // Pass validty and potential recipe to AddCommand
+    }
+
+    private void checkForExcessArgument(String[] args, int length)
+            throws ExcessArgumentException {
+        if(args.length > length) {
+            throw new ExcessArgumentException();
+        }
     }
 
 }
