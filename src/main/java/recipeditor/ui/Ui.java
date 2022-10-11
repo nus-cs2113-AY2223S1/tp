@@ -15,7 +15,7 @@ public class Ui {
     private static final String EXIT = "Program exiting";
     private static final String PROMPT = ">>> ";
 
-    private static final String LOGO =",---.          o     ,---.    |o|\n"
+    private static final String LOGO = ",---.          o     ,---.    |o|\n"
             + "|---',---.,---..,---.|--- ,---|.|--- ,---.,---.\n"
             + "|  \\ |---'|    ||   ||    |   |||    |   ||\n"
             + "`   ``---'`---'`|---'`---'`---'``---'`---'`\n"
