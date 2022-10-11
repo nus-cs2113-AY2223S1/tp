@@ -49,11 +49,15 @@ public class UserModuleMappingList {
         }
     }
 
+    public void addModule(UserModuleMapping input, boolean fromDatabase) {
+        modules.add(input);
+    }
+
     public void displayAll() {
         if (modules.size() == 0) {
             System.out.println("No current modules saved");
         } else {
-            System.out.print(Ui.printModulesInList(modules));
+            System.out.print(Ui.printModulesInUserList(modules));
         }
     }
 
