@@ -201,11 +201,34 @@ public class ConsoleInterface {
         System.out.println(expenseStr);
     }
 
+    private void viewExpenseByExpenseCategory(String expenseCategory) {
+        ArrayList<Expense> expenses = expenseManager.getExpensesByCategory(expenseCategory);
+
+        for (int index = 0; index < expenses.size(); index++) {
+            Expense expense = expenses.get(index);
+
+            DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern(
+                    Configurations.CONSOLE_INTERFACE_DATE_TIME_OUTPUT_FORMAT
+            );
+            String expenseStr = "";
+            expenseStr += "---- EXPENSE INDEX " + index + " ----\n";
+            expenseStr += "Name          : " + expense.getName() + "\n";
+            expenseStr += "Date and Time : " + expense.getDateTime().format(dateTimeFormat) + "\n";
+            expenseStr += "Description   : " + expense.getDescription() + "\n";
+            expenseStr += "Amount        : " + expense.getAmount() + "\n";
+            expenseStr += "Category      : " + expense.getCategory();
+            printInformationalMessage(expenseStr);
+        }
+    }
+
     private void runCommandViewExpense(ConsoleCommandViewExpense consoleCommandViewExpense) {
         int expenseIndex = consoleCommandViewExpense.getExpenseIndex();
+        String expenseCategory = consoleCommandViewExpense.getExpenseCategory();
 
         if (expenseIndex >= 0) {
             viewExpenseByExpenseIndex(expenseIndex);
+        } else if (expenseCategory != null && !expenseCategory.isEmpty()) {
+            viewExpenseByExpenseCategory(expenseCategory);
         } else {
             viewExpense();
         }

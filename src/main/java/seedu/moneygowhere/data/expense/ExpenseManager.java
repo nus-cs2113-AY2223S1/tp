@@ -32,6 +32,18 @@ public class ExpenseManager {
         return new ArrayList<>(expenses);
     }
 
+    public ArrayList<Expense> getExpensesByCategory(String categoryName) {
+        ArrayList<Expense> expensesByCategory = new ArrayList<>();
+
+        for (Expense expense: expenses) {
+            if (expense.getCategory().equals(categoryName)) {
+                expensesByCategory.add(expense);
+            }
+        }
+
+        return expensesByCategory;
+    }
+
     public void deleteExpense(int expenseIndex) throws ExpenseManagerExpenseNotFoundException {
         try {
             expenses.remove(expenseIndex);
