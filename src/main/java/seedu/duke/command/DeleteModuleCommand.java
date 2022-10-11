@@ -8,7 +8,7 @@ import seedu.duke.utils.Ui;
 
 public class DeleteModuleCommand extends Command {
     Module module;
-    
+
     public DeleteModuleCommand(String[] input) {
         super(input);
         String moduleCode = input[1];
