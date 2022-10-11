@@ -50,7 +50,7 @@ public class AddCommand extends Command {
     }
 
 
-    private void addFood(String[] argumentList) throws IllegalValueException{
+    private void addFood(String[] argumentList) throws IllegalValueException {
         try {
             if (argumentList.length < 3) {
                 throw new IllegalValueException(INVALID_FOOD_INPUT);
@@ -85,11 +85,10 @@ public class AddCommand extends Command {
     }
 
     private String extractFoodName(String input) throws IllegalValueException {
-        String food_name = input;
         if (Arrays.asList(invalidFoodNames).contains(input)) {
             throw new IllegalValueException("Please provide valid food description inputs!");
         }
-        return food_name;
+        return input;
     }
 
     private int extractCalories(String input) throws IllegalValueException {

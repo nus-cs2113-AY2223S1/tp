@@ -51,7 +51,7 @@ public class ViewCommand extends Command {
         ui.output(biometrics.toString());
     }
 
-    private void viewFood() throws IllegalValueException{
+    private void viewFood() throws IllegalValueException {
         for (int i = 0; i < foodList.getFoodListSize(); i++) {
             ui.output((i + 1) + " " + (foodList.getFood(i)));
         }

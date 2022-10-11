@@ -45,8 +45,8 @@ public class RemoveCommand extends Command {
                 throw new IllegalValueException(INVALID_REMOVE_FOOD_INPUT);
             }
             ui.output(" This food has been deleted from the food list successfully");
-            ui.output(foodList.getFood(index -1).toString());
-            foodList.removeFood(index-1);
+            ui.output(foodList.getFood(index - 1).toString());
+            foodList.removeFood(index - 1);
         } catch (NumberFormatException e) {
             throw new IllegalValueException(INVALID_REMOVE_FOOD_INPUT);
         }

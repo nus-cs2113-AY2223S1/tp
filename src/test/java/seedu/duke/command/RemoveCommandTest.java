@@ -33,7 +33,7 @@ class RemoveCommandTest {
             c.execute();
         }
     }
-    
+
     @Test
     void execute_RemoveWithNoParameter_exceptionThrown() {
         String command = "remove food";
