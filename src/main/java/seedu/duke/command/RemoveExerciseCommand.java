@@ -26,7 +26,7 @@ public class RemoveExerciseCommand extends Command {
                 throw new IllegalValueException("INVALID_NUMBER_INPUT");
             }
             int index = Integer.parseInt(argumentList[1]);
-            exerciseList.getCurrentExerciseList().remove(index-1);
+            exerciseList.getCurrentExerciseList().remove(index - 1);
             ui.output("Exercise has been removed successfully!");
         } catch (IllegalValueException e) {
             ui.output(e.getMessage());
