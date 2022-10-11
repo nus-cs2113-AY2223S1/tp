@@ -12,29 +12,29 @@ public class Wallet {
         balance = 0;
     }
 
-    public Wallet(String userName, String passWord, Integer balance){
+    public Wallet(String userName, String passWord, Integer balance) {
         this.userName = userName;
         this.passWord = passWord;
         this.balance = balance;
     }
 
-    public String getUserName(){
+    public String getUserName() {
         return userName;
     }
 
-    public String getPassWord(){
+    public String getPassWord() {
         return passWord;
     }
 
-    public Integer getBalance(){
+    public Integer getBalance() {
         return balance;
     }
 
-    public void setUserName(String userName){
+    public void setUserName(String userName) {
         this.userName = userName;
     }
 
-    public void setPassWord(String passWord){
+    public void setPassWord(String passWord) {
         this.passWord = passWord;
     }
 }
