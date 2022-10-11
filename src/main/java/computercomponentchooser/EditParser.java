@@ -32,23 +32,31 @@ public class EditParser {
                 content = getParameter(line, NAME_PARAMETER);
                 editBuild = BuildManager.getBuild(buildName);
                 editBuild.addContents(content);
+                Ui.printLine();
                 System.out.println("You have added " + content);
+                Ui.printLine();
                 break;
             case "delete":
                 content = getParameter(line, NAME_PARAMETER);
                 editBuild = BuildManager.getBuild(buildName);
                 editBuild.deleteContents(content);
+                Ui.printLine();
                 System.out.println("You have removed " + content);
+                Ui.printLine();
                 break;
 
             case "list":
                 editBuild = BuildManager.getBuild(buildName);
+                Ui.printLine();
                 System.out.println("Computer parts for " + buildName + ":");
                 System.out.println(editBuild.toString());
+                Ui.printLine();
                 break;
             case "edit":
                 buildName = getParameter(line, NAME_PARAMETER);
+                Ui.printLine();
                 System.out.println("You are now editing " + buildName);
+                Ui.printLine();
                 break;
             case "check":
             case "back":

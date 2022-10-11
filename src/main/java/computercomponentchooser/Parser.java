@@ -38,20 +38,31 @@ public class Parser {
             case "edit":
                 break;
             case "list":
+                Ui.printLine();
+                System.out.println("Your current builds:");
                 System.out.println(buildManager.toString());
+                Ui.printLine();
                 break;
             case "add":
                 name = getParameter(line, NAME_PARAMETER);
                 Build newBuild = new Build(name);
                 buildManager.addBuild(newBuild);
+                Ui.printLine();
+                System.out.println("You have added " + name);
+                Ui.printLine();
                 break;
             //case "view":
             case "delete":
                 name = getParameter(line, NAME_PARAMETER);
                 buildManager.deleteBuild(name);
+                Ui.printLine();
+                System.out.println("You have removed " + name);
+                Ui.printLine();
                 break;
             case "back":
+                Ui.printLine();
                 System.out.println("Back to main mode.");
+                Ui.printLine();
                 break;
             default:
                 throw new UnknownCommandException();
