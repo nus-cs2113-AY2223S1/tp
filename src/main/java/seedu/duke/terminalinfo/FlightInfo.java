@@ -1,8 +1,6 @@
-package seedu.duke;
+package seedu.duke.terminalinfo;
 
-public class Flight {
-    private static final String SPACER = "          ";
-    private static final String LARGE_SPACER = "                    ";
+public class FlightInfo {
     protected String flightNum;
     protected String airline;
     protected String destination;
@@ -11,8 +9,8 @@ public class Flight {
     protected String terminal;
     protected String seat;
 
-    public Flight(String flightNum, String airline, String destination, String departureTime,
-                   String gateNum, String terminal, String seat) {
+    public FlightInfo(String flightNum, String airline, String destination, String departureTime,
+                      String gateNum, String terminal, String seat) {
         this.flightNum = flightNum;
         this.airline = airline;
         this.destination = destination;

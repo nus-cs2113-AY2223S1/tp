@@ -1,11 +1,9 @@
-package seedu.duke;
+package seedu.duke.operationlist;
 
-import java.util.ArrayList;
-
+import seedu.duke.terminalinfo.FlightInfo;
 import seedu.duke.exceptions.SkyControlException;
 
-public class FlightManager {
-    public static ArrayList<Flight> flightList = new ArrayList<>();
+public class FlightList extends OperationList {
     public static int flightIndex = 0;
 
     public static String checkCommandLength(String description) throws SkyControlException {
@@ -26,19 +24,20 @@ public class FlightManager {
     }
 
     //    flight_add fn/SQ712 a/Singapore Airlines d/Bangkok t/1600 gn/B1 tl/T1 c/03-3
-    public static void addFlight(String input) {
+    @Override
+    public void addOperation(String detail) {
         try {
-            checkCommandLength(input.substring("flight_add".length()));
-            String flightNum = extractDetail(input, "fn/", "a/");
-            String airline = extractDetail(input, "a/", "d/");
-            String destination = extractDetail(input, "d/", "t/");
-            String departureTime = extractDetail(input, "t/", "gn/");
-            String gateNum = extractDetail(input, "gn/", "tl/");
-            String terminal = extractDetail(input, "tl/", "c/");
-            String seat = extractDetail(input, "c/", "empty");
+            checkCommandLength(detail.substring("flight add".length()));
+            String flightNum = extractDetail(detail, "fn/", "a/");
+            String airline = extractDetail(detail, "a/", "d/");
+            String destination = extractDetail(detail, "d/", "t/");
+            String departureTime = extractDetail(detail, "t/", "gn/");
+            String gateNum = extractDetail(detail, "gn/", "tl/");
+            String terminal = extractDetail(detail, "tl/", "c/");
+            String seat = extractDetail(detail, "c/", "empty");
 
-            Flight flight = new Flight(flightNum,airline,destination,departureTime,gateNum,terminal,seat);
-            flightList.add(flightIndex,flight);
+            FlightInfo flight = new FlightInfo(flightNum, airline, destination, departureTime, gateNum, terminal, seat);
+            flights.add(flightIndex, flight);
             flightIndex++;
             System.out.println("Flight added!");
 
@@ -48,17 +47,18 @@ public class FlightManager {
     }
 
     //not done
-    public static void deleteFlight(String input) {
+    @Override
+    public void deleteOperation(String detail) {
         try {
-            checkCommandLength(input.substring("flight_delete".length()));
+            checkCommandLength(detail.substring("flight_delete".length()));
 
         } catch (SkyControlException e) {
             System.out.println("oops! The description is empty :(");
         }
     }
 
-    // change print output to table form
-    public static void printFlights() {
+    @Override
+    public void listOperation() {
         System.out.println("---------------------------------------------------------"
                 + "-----------------------------------------------------------------------");
         System.out.printf("%5s %10s %27s %20s %20s %12s %22s", "FLIGHT NUM", "AIRLINE",
@@ -66,11 +66,10 @@ public class FlightManager {
         System.out.println("\n-------------------------------------------------------"
                 + "-------------------------------------------------------------------------");
 
-        for (int i = 0; i < flightList.size(); i++) {
+        for (FlightInfo flightInfo : flights) {
             System.out.println(
-                    flightList.get(i)
+                    flightInfo
             );
         }
     }
-
 }
