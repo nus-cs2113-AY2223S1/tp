@@ -10,6 +10,7 @@ import seedu.duke.ui.Ui;
 
 public class SkyControl {
     private Ui ui;
+    private static Parser parser;
     private OperationList passengers;
     private OperationList flights;
     private static boolean isPassenger = false;
@@ -52,10 +53,7 @@ public class SkyControl {
                 isExit = command.isExit();
             } catch (SkyControlException e) {
                 ui.showError(e.getMessage());
-            } finally {
-                ui.showLineSeparator();
             }
-
         }
     }
 

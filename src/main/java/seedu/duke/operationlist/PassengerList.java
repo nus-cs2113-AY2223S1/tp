@@ -76,6 +76,7 @@ public class PassengerList extends OperationList {
             ui.showPassengerListBody(name, departureDate, departureTime,
                     flightNumber, gateNumber, boardingGroup, seatNumber, boardingTime);
         }
+        System.out.print("\n");
     }
 
     private static void validatePassenger(int index) {

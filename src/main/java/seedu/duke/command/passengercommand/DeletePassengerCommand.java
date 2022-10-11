@@ -7,8 +7,8 @@ import seedu.duke.operationlist.OperationList;
 public class DeletePassengerCommand extends Command {
     @Override
     public void execute(OperationList passengers, String lineInput) {
-        getPassengerDetail(lineInput);
         try {
+            getPassengerDetail(lineInput);
             passengers.deleteOperation(passengerDetail);
         } catch (SkyControlException e) {
             ui.showError(e.getMessage());

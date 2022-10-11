@@ -18,11 +18,13 @@ public class Parser {
     protected static boolean isAdd = false;
     protected static boolean isDelete = false;
     protected static boolean isList = false;
-
     protected static boolean isExit = false;
     protected static String[] inputWords;
     protected static String entity;
     protected static String operation;
+
+    public Parser() {
+    }
 
     public static Command parse(String lineInput) throws SkyControlException {
         Command command;

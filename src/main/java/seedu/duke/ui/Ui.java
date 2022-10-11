@@ -33,7 +33,7 @@ public class Ui {
             + "              |___/\n";
 
     public Ui() {
-        this.lineSeparator = "____________________________________________________________";
+        this.lineSeparator = "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++";
     }
 
     public void showLineSeparator() {
@@ -59,7 +59,7 @@ public class Ui {
     public static void showDeleteMessage(String name, String flightNumber, String seatNumber, int numOfPassenger) {
         System.out.println("Passenger " + name + " from "
                 + flightNumber + " of seat number " + seatNumber
-                + " have been \ndeleted from the passenger list.");
+                + " have been\ndeleted from the passenger list.");
         System.out.println(numOfPassenger + " passenger(s) left on the passenger list.\n");
     }
 
@@ -67,6 +67,15 @@ public class Ui {
         return "The system is unable to delete the specified passenger "
                 + "\nas he/she is not found in the passenger list "
                 + "or his/her \ndetail have been input incorrectly.";
+    }
+
+    public String showOperationError() {
+        return "Input a valid operation, please try again.";
+    }
+
+    public String showBlankOpsError() {
+        return "Detail of the operation is blank,\n"
+                + "please try again and input all necessary details.";
     }
 
     public String showErrorMessage() {
