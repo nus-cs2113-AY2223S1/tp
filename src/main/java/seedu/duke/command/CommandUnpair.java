@@ -28,5 +28,6 @@ public class CommandUnpair extends Command {
         Property property = propertyList.getPropertyList().get(propertyIndex);
 
         pairingList.deletePairing(client, property);
+        ui.showUnpairedConfirmationMessage(client, property);
     }
 }

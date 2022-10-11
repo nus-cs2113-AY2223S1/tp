@@ -50,6 +50,8 @@ public class Messages {
 
     public static final String MESSAGE_PAIRED = "Pairing the following client and property: ";
 
+    public static final String MESSAGE_UNPAIRED = "Unpairing the following client and property: ";
+
     public static final String MESSAGE_EMPTY_COMMAND_PAIR_UNPAIR = "OOPS!!! The description of a pair/unpair message "
             + "cannot be empty";
 
@@ -67,4 +69,12 @@ public class Messages {
             + "Examples:\n"
             + "  pair ip/1 ic/5\n"
             + "  unpair ip/2 ic/1";
+
+    public static final String MESSAGE_EXISTING_PAIR = "OOPS!! This property is currently rented by a tenant, "
+            + "try pairing with another property";
+
+    public static final String MESSAGE_NO_EXISTING_PAIR = "OOPS!! This property is not being rented by a tenant. "
+            + "Unpair unsuccessful";
+
+
 }
