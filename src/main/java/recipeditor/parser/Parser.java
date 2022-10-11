@@ -2,11 +2,13 @@ package recipeditor.parser;
 
 import recipeditor.command.AddCommand;
 import recipeditor.command.Command;
+import recipeditor.command.DeleteCommand;
+import recipeditor.exception.ExcessArgumentException;
 import recipeditor.command.ListCommand;
 import recipeditor.command.ExitCommand;
 import recipeditor.command.InvalidCommand;
 import recipeditor.command.ViewCommand;
-import recipeditor.command.DeleteCommand;
+
 import recipeditor.ui.AddMode;
 import recipeditor.ui.Ui;
 
@@ -15,7 +17,7 @@ public class Parser {
     public Command parseCommand(String input) {
         String[] parsed = input.split(" ");
         String commandWord = parsed[0].toLowerCase();
-        String argument = input.replace(commandWord, ""); // TODO: what is this
+        //String argument = input.replace(commandWord, ""); TODO: what is this
 
         switch (commandWord) {
         case AddCommand.COMMAND_TYPE:
@@ -25,13 +27,30 @@ public class Parser {
         case ExitCommand.COMMAND_TYPE:
             return new ExitCommand();
         case DeleteCommand.COMMAND_TYPE:
-            return parseDeleteCommand(parsed); // TODO: This is dummy variable only
+            try {
+                int index = Integer.parseInt(parsed[1]) - 1;
+                checkForExcessArgument(parsed, 2);
+                return new DeleteCommand(index);
+            } catch (Exception e) {
+                System.out.format("Exception: Wrong command Format%n"
+                        + "Try the command in correct format: mark <index of task>%n");
+                return new InvalidCommand();
+            }
+
         case ViewCommand.COMMAND_TYPE:
-            return new ViewCommand();
+            try {
+                int index = Integer.parseInt(parsed[1]) - 1;
+                checkForExcessArgument(parsed, 2);
+                return new ViewCommand(index);
+            } catch (Exception e) {
+                System.out.format("Exception: Wrong command Format%n"
+                        + "Try the command in correct format: view <index of task>%n");
+                return new InvalidCommand();
+            }
+
         default:
             return new InvalidCommand();
         }
-
     }
 
     private Command parseAddCommand() {
@@ -44,10 +63,16 @@ public class Parser {
 
     private Command parseDeleteCommand(String[] parsed) {
         if (parsed.length == 2) {
-            Integer index = Integer.valueOf(parsed[1]) - 1; // to account for 0-based indexing in recipelist
+            Integer index = Integer.valueOf(parsed[ 1 ]) - 1; // to account for 0-based indexing in recipelist
             return new DeleteCommand(index);
         }
         return new InvalidCommand();
     }
 
+    private void checkForExcessArgument(String[] args, int length)
+            throws ExcessArgumentException {
+        if (args.length > length) {
+            throw new ExcessArgumentException();
+        }
+    }
 }

@@ -6,7 +6,7 @@ public class Recipe {
     private String title;
     private String description;
     private ArrayList<Ingredient> ingredients;
-    private String[] steps;
+    private ArrayList<String> steps;
 
     public Recipe(String title, String description) {
         this.title = title;
@@ -48,12 +48,44 @@ public class Recipe {
         this.ingredients = ingredients;
     }
 
-    public String[] getSteps() {
+    public void addIngredient(Ingredient ingredient) {
+        this.ingredients.add(ingredient);
+    }
+
+    public Ingredient getIngredient(int index) {
+        return this.ingredients.get(index);
+    }
+
+    public Ingredient getIngredientByName(String name) {
+        for (Ingredient i : ingredients) {
+            if (i.getName().equals(name)) {
+                return i;
+            }
+        }
+        return null;
+    }
+
+    public void deleteIngredient(int index) {
+        this.ingredients.remove(index);
+    }
+
+    public ArrayList<String> getSteps() {
         return steps;
     }
 
-    public void setSteps(String[] steps) {
+    public void setSteps(ArrayList<String> steps) {
         this.steps = steps;
     }
 
+    public void addStep(String step) {
+        steps.add(step);
+    }
+
+    public String getStep(int index) {
+        return this.steps.get(index);
+    }
+
+    public void deleteStep(int index) {
+        this.steps.remove(index);
+    }
 }

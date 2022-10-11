@@ -18,7 +18,7 @@ public class ParserTest {
     @Test
     void parserShouldReturnView() {
         Parser parse = new Parser();
-        assertTrue(parse.parseCommand("VIEw") instanceof ViewCommand);
+        assertTrue(parse.parseCommand("VIEw 1") instanceof ViewCommand);
     }
 
     @Test
