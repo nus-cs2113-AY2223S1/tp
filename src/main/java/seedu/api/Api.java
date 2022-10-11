@@ -1,6 +1,6 @@
 package seedu.api;
 
-import seedu.exception.EmptyResponseException;
+import seedu.exception.*;
 import seedu.ui.Ui;
 
 import java.io.IOException;
@@ -22,7 +22,7 @@ import static seedu.common.CommonFiles.LTA_JSON_FILE;
  * Class to fetch data from LTA API.
  */
 public class Api {
-    private final String API_KEY = "1B+7tBxzRNOtFbTxGcCiYA==";
+    private final String API_KEY = "1B+7tBxzRNOtFbTxGcCiYA=";
     private final String AUTH_HEADER_NAME = "AccountKey";
     private final int MAX_FETCH_TRIES = 5;
     private HttpClient client;
@@ -66,11 +66,12 @@ public class Api {
      *
      * @return JSON string response from the API.
      */
-    public String asyncGetResponse() {
+    private String asyncGetResponse()
+            throws UnauthorisedAccessAPIException, ServerNotReadyAPIException, UnknownResponseAPIException {
         String result = "";
         try {
             HttpResponse<String> response = responseFuture.get(1000, TimeUnit.MILLISECONDS);
-            if (!response.body().trim().isEmpty()) {
+            if (isValidResponse(response.statusCode())) {
                 result = response.body();
             }
         } catch (ExecutionException | InterruptedException e) {
@@ -81,6 +82,21 @@ public class Api {
         return result;
     }
 
+    private boolean isValidResponse(int responseCode)
+            throws UnauthorisedAccessAPIException, ServerNotReadyAPIException, UnknownResponseAPIException {
+        switch (responseCode) {
+        case 200:
+            return true;
+        case 401:
+            throw new UnauthorisedAccessAPIException();
+        case 503:
+            throw new ServerNotReadyAPIException("Too many request. Trying again...");
+        default:
+            throw new UnknownResponseAPIException("Response Code: " + Integer.toString(responseCode)
+                    + "\nIf problem persist contact developer. Trying again...");
+        }
+    }
+
     /**
      * Execute the data fetching subroutine. Subroutine will repeat for a certain number of time
      * and throws an exception if no response is received.
@@ -88,16 +104,24 @@ public class Api {
      * @throws EmptyResponseException if empty/invalid response received.
      * @throws IOException if data writing fails.
      */
-    public void fetchData() throws EmptyResponseException, IOException {
-        String result = asyncGetResponse();
+    public void fetchData() throws EmptyResponseException, IOException, UnauthorisedAccessAPIException {
+        String result = "";
         int fetchTries = MAX_FETCH_TRIES;
-        while (result.isEmpty() && fetchTries > 0) {
-            asyncExecuteRequest();
-            result = asyncGetResponse();
-            fetchTries--;
-        }
+        do {
+            try {
+                result = asyncGetResponse().trim();
+            } catch (ServerNotReadyAPIException | UnknownResponseAPIException e) {
+                System.out.println(e.getMessage());
+            } finally {
+                fetchTries--;
+            }
+            if (fetchTries > 0 && result.isEmpty()) {
+                asyncExecuteRequest();
+            }
+        } while (fetchTries > 0 && result.isEmpty());
+
         if (fetchTries == 0 && result.isEmpty()) {
-            throw new EmptyResponseException("No response was received.");
+            throw new EmptyResponseException("No response was received. Check your internet connection.");
         }
         storage.writeDataToFile(result);
     }

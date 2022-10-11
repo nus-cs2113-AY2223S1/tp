@@ -5,6 +5,7 @@ import seedu.exception.EmptyResponseException;
 import seedu.exception.ParkingException;
 import seedu.data.CarparkList;
 
+import seedu.exception.UnauthorisedAccessAPIException;
 import seedu.ui.Ui;
 
 import java.io.IOException;
@@ -29,13 +30,14 @@ public class Parking {
             System.out.println("Trying to fetch data"); // Debug line
             api.fetchData();
             System.out.println("Completed fetch data!"); // Debug line
-        } catch (EmptyResponseException e) {
-            ui.showFetchError();
+        } catch (ParkingException e) {
+            System.out.println(e.getMessage());
         } catch (IOException e) {
             ui.showSaveError();
         } finally {
             System.out.println("Fetching and save data sequence terminated"); // Debug line
         }
+
 
         // Load file from json
         System.out.println("Trying to load data");

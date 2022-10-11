@@ -62,14 +62,14 @@ public class Ui {
      * Show error message when fetching data is unsuccessful.
      */
     public void showFetchError() {
-        System.out.println("Something went wrong when fetching data.");
+        System.out.println("Something went wrong when fetching data, trying again...");
     }
 
     /**
      * Show error message when fetching data took too long.
      */
     public void showFetchTimeout() {
-        System.out.println("Fetch Timeout, try again!");
+        System.out.println("Fetch Timeout, trying again...");
     }
 
     /**
