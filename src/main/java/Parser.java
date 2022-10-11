@@ -1,15 +1,5 @@
 public class Parser {
     private final int lengthOfSignature = 3;
-
-    public static final Pattern PERSON_DATA_ARGS_FORMAT = // '/' forward slashes are reserved for delimiter prefixes
-            Pattern.compile("(?<name>[^/]+)"
-                    + " (?<isPhonePrivate>p?)p/(?<phone>[^/]+)"
-                    + " (?<isEmailPrivate>p?)e/(?<email>[^/]+)"
-                    + " (?<isAddressPrivate>p?)a/(?<address>[^/]+)"
-                    + "(?<tagArguments>(?: t/[^/]+)*)"); // variable number of tags
-
-
-
     public command parseCommand(String input){
         input = input.trim();
 
@@ -18,7 +8,7 @@ public class Parser {
                 return new ExitCommand();
             }
             System.out.println("input invalid");
-            return ExitCommand();
+            return new ExitCommand();
         }
 
         int indexOfSpace = input.indexOf(" ");
@@ -40,7 +30,7 @@ public class Parser {
             break;
         default:
             System.out.println("input invalid");
-            return ExitCommand();
+            return new ExitCommand();
         }
     }
 
@@ -93,7 +83,7 @@ public class Parser {
         int index = indexOfRemove(input);
         if(index == -1){
             System.out.println("input invalid");
-            return ExitCommand();
+            return new ExitCommand();
         }
 
         return new RemoveAppointmentCommand(index);
@@ -103,7 +93,7 @@ public class Parser {
         int index = indexOfRemove(input);
         if(index == -1){
             System.out.println("input invalid");
-            return ExitCommand();
+            return new ExitCommand();
         }
 
         return new RemovePetCommand(index);
@@ -159,7 +149,7 @@ public class Parser {
 
         if(startOfN > startOfS || startOfN == -1|| startOfS == -1){
             System.out.println("input invalid");
-            return ExitCommand();
+            return new ExitCommand();
         }
 
         String name = input.substring(startOfN + lengthOfSignature, startOfS);
@@ -174,7 +164,7 @@ public class Parser {
                 return new AppointmentViewCommand();
             }
             System.out.println("input invalid");
-            return ExitCommand();
+            return new ExitCommand();
         }
 
         String type = input.substring(0,input.indexOf(" "));
@@ -191,7 +181,7 @@ public class Parser {
             break;
         default:
             System.out.println("input invalid");
-            return ExitCommand();
+            return new ExitCommand();
         }
     }
 
