@@ -29,6 +29,10 @@ public class UI {
         return userInput;
     }
 
+    public static void print(String toPrint) {
+        System.out.println(toPrint);
+    }
+
     public void printExitGreeting() {
         System.out.println("\n---------------\nSee you again!");
     }
