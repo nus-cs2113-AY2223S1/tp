@@ -58,10 +58,10 @@ public class FileReader {
     }
 
     /**
-     * TODO: Javadoc
-     * @param filepath
-     * @return
-     * @throws IOException
+     * Returns data in string from file.
+     * @param filepath File path.
+     * @return Data string in file.
+     * @throws IOException if file not found.
      */
     public static String readStringFromTxt(Path filepath) throws IOException{
             File file = new File(filepath.toString());

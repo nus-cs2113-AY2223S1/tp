@@ -10,14 +10,17 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.nio.file.Path;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-import seedu.common.CommonFiles;
-import seedu.exception.*;
+import seedu.exception.EmptyResponseException;
+import seedu.exception.EmptySecretFileException;
+import seedu.exception.NoFileFoundException;
+import seedu.exception.ServerNotReadyApiException;
+import seedu.exception.UnauthorisedAccessApiException;
+import seedu.exception.UnknownResponseApiException;
 import seedu.files.FileReader;
 import seedu.files.FileStorage;
 import seedu.ui.Ui;
@@ -87,12 +90,12 @@ public class Api {
     }
 
     /**
-     * TODO JavaDoc
-     * @param responseCode
-     * @return
-     * @throws UnauthorisedAccessApiException
-     * @throws ServerNotReadyApiException
-     * @throws UnknownResponseApiException
+     * Check whether response code from API response is 200 OK, otherwise handle it gracefully.
+     * @param responseCode Response code from API HTTP response header.
+     * @return true if response code is 200.
+     * @throws UnauthorisedAccessApiException API key is wrong.
+     * @throws ServerNotReadyApiException Too many request.
+     * @throws UnknownResponseApiException Response code besides 200, 401 or 503.
      */
     private boolean isValidResponse(int responseCode)
             throws UnauthorisedAccessApiException, ServerNotReadyApiException, UnknownResponseApiException {
@@ -139,9 +142,10 @@ public class Api {
     }
 
     /**
-     * TODO: JavaDoc
-     * @throws NoFileFoundException
-     * @throws EmptySecretFileException
+     * Reads API key from secret.txt file and loads it to the object.
+     *
+     * @throws NoFileFoundException If directory / file is not found.
+     * @throws EmptySecretFileException If the file is empty.
      */
     public void loadApiKey() throws NoFileFoundException, EmptySecretFileException {
         try {
