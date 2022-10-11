@@ -5,7 +5,7 @@ import seedu.duke.transaction.TransactionList;
 public class Item {
     private final String name;
     private final String ownerId;
-    private double pricePerDay;
+    private final double pricePerDay;
     private final Category.Categories category;
 
     public Item(String name, int categoryNumber, double price, String ownerId) {

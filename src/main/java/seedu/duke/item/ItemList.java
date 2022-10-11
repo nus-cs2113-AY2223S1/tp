@@ -45,7 +45,7 @@ public class ItemList {
                 return item;
             }
         }
-        throw new ItemNotFoundException("This item cannot be find in the list");
+        throw new ItemNotFoundException("This item cannot be found in the list");
     }
 
     public int getListSize() {
