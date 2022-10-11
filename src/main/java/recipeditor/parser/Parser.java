@@ -38,7 +38,7 @@ public class Parser {
         AddMode add = new AddMode(); // Switch to Add Mode in here
         add.enterAddMode();
         add.exitAddMode();
-        Ui.showMessage("Is the recipe valid?" + String.valueOf(add.isValid));
+        Ui.showMessage("Is the recipe valid? " + String.valueOf(add.isValid));
         return new AddCommand(add.isValid, add.addedRecipe); // Pass validty and potential recipe to AddCommand
     }
 

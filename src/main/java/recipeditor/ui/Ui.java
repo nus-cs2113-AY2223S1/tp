@@ -59,7 +59,8 @@ public class Ui {
     }
 
     public static void clear() {
-        System.out.print("\033\143"); // This will clear the terminal, I don't know why...
+        System.out.print("\033[H\033[2J"); // This will clear the terminal, I don't know why...
+        System.out.flush();
     }
 
 
