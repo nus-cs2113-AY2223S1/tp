@@ -63,7 +63,7 @@ public class UserStorageParser {
                 }
                 UserModuleMapping userModule = new UserModuleMapping(details[0], details[1], details[2],
                         details[3], details[4], details[2], uniName, "test");
-                moduleList.addModule(userModule);
+                moduleList.addModule(userModule, true);
             }
             uniList.setMyModules(moduleList);
             myManager.put(uniName, uniList);
@@ -80,5 +80,14 @@ public class UserStorageParser {
             System.out.println("Error, IOException has occurred");
         }
         return new UserUniversityListManager();
+    }
+
+    public static void storeCreatedLists(UserUniversityListManager userUniversityListManager) {
+        try {
+            String fileContent = convertUniversityListIntoFileContent(userUniversityListManager);
+            UserStorage.saveFile(fileContent);
+        } catch (IOException e) {
+            System.out.println("IOException has occurred");
+        }
     }
 }
