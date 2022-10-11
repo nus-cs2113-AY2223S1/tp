@@ -52,14 +52,15 @@ public class AddCommand extends Command {
 
     private void addFood(String[] argumentList) throws IllegalValueException {
         try {
-            if (argumentList.length < 3) {
+            if (argumentList.length != 3) {
                 throw new IllegalValueException(INVALID_FOOD_INPUT);
             }
+            assert argumentList.length == 3 : "Invalid add food command";
             String description = extractFoodName(argumentList[1]);
             int calories = extractCalories(argumentList[2]);
-
             food = new Food(description, calories);
             foodList.addFood(food);
+            assert foodList.getFood(foodList.getFoodListSize() - 1).equals(food) : "Food not added properly";
             ui.output(food.toString());
             ui.output(" This food is added to the food list successfully");
         } catch (NumberFormatException e) {
