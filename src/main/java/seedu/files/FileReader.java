@@ -66,20 +66,20 @@ public class FileReader {
      * @throws IOException if file not found.
      */
     public static String readStringFromTxt(String filePath, String directoryPath, boolean createDirectory)
-            throws IOException{
+            throws IOException {
         String filepath = Paths.get(directoryPath, filePath).toString();
         File file = new File(filepath);
-            if (!file.exists() && createDirectory) {
-                System.out.println("File does not exist. Creating one at ./resources/api/secret.txt.");
-                File directory = new File(directoryPath);
-                directory.mkdirs();
-                file.createNewFile();
-            }
-            String content = "";
-            Scanner scanner = new Scanner(file);
-            while (scanner.hasNext()) {
-                content = scanner.nextLine().trim();
-            }
-            return content;
+        if (!file.exists() && createDirectory) {
+            System.out.println("File does not exist. Creating one at ./resources/api/secret.txt.");
+            File directory = new File(directoryPath);
+            directory.mkdirs();
+            file.createNewFile();
+        }
+        String content = "";
+        Scanner scanner = new Scanner(file);
+        while (scanner.hasNext()) {
+            content = scanner.nextLine().trim();
+        }
+        return content;
     }
 }

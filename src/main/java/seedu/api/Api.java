@@ -1,7 +1,6 @@
 package seedu.api;
 
 import static seedu.common.CommonFiles.API_JSON_DIRECTORY;
-import static seedu.common.CommonFiles.API_KEY_FILE_PATH;
 import static seedu.common.CommonFiles.API_KEY_FILE;
 import static seedu.common.CommonFiles.LTA_BASE_URL;
 import static seedu.common.CommonFiles.LTA_JSON_FILE;
