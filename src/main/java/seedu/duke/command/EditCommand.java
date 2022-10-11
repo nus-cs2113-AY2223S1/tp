@@ -43,12 +43,8 @@ public class EditCommand extends Command {
             + "(Optional) DESCRIPTION: More information regarding the transaction, written without any space.";
 
     // Basic help description
-    public static final String COMMAND_HELP = "Command Word: " + COMMAND_WORD
-            + LINE_SEPARATOR
-            + COMMAND_DESCRIPTION
-            + LINE_SEPARATOR
-            + COMMAND_USAGE
-            + LINE_SEPARATOR;
+    public static final String COMMAND_HELP = "Command Word: " + COMMAND_WORD + LINE_SEPARATOR
+            + COMMAND_DESCRIPTION + LINE_SEPARATOR + COMMAND_USAGE + LINE_SEPARATOR;
     // Detailed help description
     public static final String COMMAND_DETAILED_HELP = COMMAND_HELP + COMMAND_PARAMETERS_INFO
             + LINE_SEPARATOR;
@@ -66,7 +62,7 @@ public class EditCommand extends Command {
     /**
      * Gets the mandatory tags of the command.
      *
-     * @return A string array containing all mandatory tags
+     * @return A string array containing all mandatory tags.
      */
     @Override
     public String[] getMandatoryTags() {
@@ -77,7 +73,7 @@ public class EditCommand extends Command {
     /**
      * Gets the optional tags of the command.
      *
-     * @return A string array containing all optional tags
+     * @return A string array containing all optional tags.
      */
     @Override
     public String[] getOptionalTags() {
@@ -122,7 +118,7 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Executes the operations related to the command.
+     * Executes the "edit" command.
      *
      * @param ui           An instance of the Ui class.
      * @param transactions An instance of the TransactionList class.
@@ -140,6 +136,11 @@ public class EditCommand extends Command {
                 date.toString()));
     }
 
+    /**
+     * Enables the program to exit when the Bye command is issued.
+     *
+     * @return A boolean value that indicates whether the program shall exit.
+     */
     @Override
     public boolean isExit() {
         return false;
