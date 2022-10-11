@@ -51,6 +51,9 @@ public class UserStorageParser {
         logger.log(Level.INFO, "Start converting String to UserUniversityListManager");
         HashMap<String, UserUniversityList> myManager = new HashMap<String, UserUniversityList>();
         String[] unis = fileContent.split("/");
+        if (unis.length == 1 && unis[0].equals("")) {   //empty text file
+            return myManager;
+        }
         for (String uni: unis) {
             String[] items = uni.split("%");
             String uniName = items[0];
