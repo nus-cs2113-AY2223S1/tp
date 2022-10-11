@@ -49,7 +49,7 @@ public class RemoveCommand extends Command {
             ui.output(foodList.getFood(index - 1).toString());
             int initialFoodListSize = foodList.getFoodListSize();
             foodList.removeFood(index - 1);
-            assert foodList.getFoodListSize() == initialFoodListSize -1 : "Food not removed properly";
+            assert foodList.getFoodListSize() == initialFoodListSize - 1 : "Food not removed properly";
         } catch (NumberFormatException e) {
             throw new IllegalValueException(INVALID_REMOVE_FOOD_INPUT);
         }
