@@ -3,11 +3,11 @@ package seedu.duke;
 import java.util.Scanner;
 
 import seedu.duke.command.Database;
-import seedu.duke.command.Parser;
 import seedu.duke.command.DatabaseStorage;
 import seedu.duke.module.Module;
 import seedu.duke.ui.Ui;
 import seedu.duke.university.University;
+import seedu.duke.module.ModuleMapping;
 
 public class Duke {
     //private static Ui ui;
@@ -26,10 +26,9 @@ public class Duke {
         
         //ui.greetUser();
         //ui.printCommands();
-        // Storage.loadDatabase();
+        // DatabaseStorage.loadDatabase();
         // System.out.println(Database.getUniversities());
-        // System.out.println(Database.getpartnerUniversityModules());
-        // System.out.println(Database.getnusModules());
+        // System.out.println(Database.getModuleMappings());
 
         Scanner in = new Scanner(System.in);
         System.out.println("Hello " + in.nextLine());
