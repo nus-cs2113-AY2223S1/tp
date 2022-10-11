@@ -9,6 +9,7 @@ import static seedu.duke.Messages.MESSAGE_CHECK_PROPERTY_WRONG_FORMAT;
 import static seedu.duke.Messages.MESSAGE_CLIENT_ADDED;
 import static seedu.duke.Messages.MESSAGE_CLIENT_DELETED;
 import static seedu.duke.Messages.MESSAGE_CLIENT_INPUT_EXAMPLE;
+import static seedu.duke.Messages.MESSAGE_COMMAND_UNDEFINED;
 import static seedu.duke.Messages.MESSAGE_EMPTY_ADD_DESCRIPTION;
 import static seedu.duke.Messages.MESSAGE_EMPTY_CHECK_DESCRIPTION;
 import static seedu.duke.Messages.MESSAGE_EMPTY_CLIENT_DESCRIPTION;
@@ -62,6 +63,10 @@ public class Ui {
 
     public void showWelcomeMessage() {
         showToUser(MESSAGE_WELCOME);
+    }
+
+    public void showCommandUndefinedMessage() {
+        showToUser(MESSAGE_COMMAND_UNDEFINED);
     }
 
     public void showClientAddedConfirmationMessage(ClientList clientList) {

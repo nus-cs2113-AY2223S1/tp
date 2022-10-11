@@ -11,6 +11,6 @@ public class CommandUndefined extends Command {
     @Override
     public void execute(Ui ui, Storage storage, PropertyList propertyList, ClientList clientList,
                         PairingList pairingList) {
-        //showCommandUndefinedMessage
+        ui.showCommandUndefinedMessage();
     }
 }

@@ -6,6 +6,8 @@ package seedu.duke;
 public class Messages {
     public static final String MESSAGE_WELCOME = "Welcome to Property Manager! How may I help you?";
 
+    public static final String MESSAGE_COMMAND_UNDEFINED = "OOPS!!! Command not recognised. Try again.";
+
     public static final String MESSAGE_NUMBER_OF_LIST_RESULTS = "Number of entries in the list: ";
 
     public static final String MESSAGE_CLIENT_ADDED = "Adding a client with the following information:";
