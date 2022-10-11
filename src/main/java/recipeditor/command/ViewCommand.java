@@ -26,11 +26,11 @@ public class ViewCommand extends Command {
      */
     public CommandResult execute() {
         try {
-            Recipe recipe = RecipeList.getRecipes().get(index);
+            Recipe recipe = RecipeList.getRecipe(index);
             String commandResultOutput = recipe.getRecipeAttributesFormatted();
             return new CommandResult(commandResultOutput);
         } catch (IndexOutOfBoundsException e) {
-            Ui.showMessageInline("Current number of saved recipes:", Integer.toString(RecipeList.getRecipes().size()));
+            Ui.showMessageInline("Current number of saved recipes:", Integer.toString(RecipeList.getSize()));
             return new CommandResult("View recipe index out of bound.");
         }
     }
