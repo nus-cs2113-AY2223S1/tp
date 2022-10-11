@@ -8,8 +8,10 @@ import java.util.logging.Logger;
 
 import seedu.duke.exceptions.InvalidDatabaseLineException;
 import seedu.duke.module.Module;
+import seedu.duke.module.ModuleMapping;
 import seedu.duke.university.University;
 import seedu.duke.command.Database;
+import seedu.duke.parser.DatabaseParser;
 
 public class DatabaseStorage {
     private static Logger logger = Logger.getLogger("DatabaseStorage");
@@ -55,7 +57,7 @@ public class DatabaseStorage {
         String[] lineData = new String[7];
 
         try {
-            lineData = Parser.parseDatabaseLine(line);
+            lineData = DatabaseParser.parseDatabaseLine(line);
         } catch (InvalidDatabaseLineException e) {
             logger.log(Level.WARNING, "Invalid database line: " + line);
         }
@@ -84,21 +86,17 @@ public class DatabaseStorage {
                 : "Partner University Module Credit should not be empty";
 
         String nusModuleCode = lineData[4];
-        assert nusModuleCode.length() > 0
-                : "NUS Module Code should not be empty";
+        assert nusModuleCode.length() > 0 : "NUS Module Code should not be empty";
 
         String nusModuleTitle = lineData[5];
-        assert nusModuleTitle.length() > 0
-                : "NUS Module Title should not be empty";
+        assert nusModuleTitle.length() > 0 : "NUS Module Title should not be empty";
 
         String nusModuleCredit = lineData[6];
-        assert nusModuleCredit.length() > 0
-                : "NUS Module Credit should not be empty";
+        assert nusModuleCredit.length() > 0 : "NUS Module Credit should not be empty";
 
         updateUniversityDatabase(partnerUniversity);
-        updateNusModuleDatabase(nusModuleCode, nusModuleTitle, nusModuleCredit);
-        updatePartnerUniversityDatabase(parterUniversityModuleCode, partnerUnviersityModuleTitle,
-                partnerUniversityModuleCredit);
+        updateModuleMappingDatabase(parterUniversityModuleCode, partnerUnviersityModuleTitle,
+                partnerUniversityModuleCredit, nusModuleCode, nusModuleTitle, nusModuleCredit);
 
         logger.log(Level.FINE, "Finish updating database");
     }
@@ -115,38 +113,28 @@ public class DatabaseStorage {
         logger.log(Level.FINER, "Finish updating university database");
     }
 
-    private static void updatePartnerUniversityDatabase(String parterUniversityModuleCode,
-            String partnerUnviersityModuleTitle, String partnerUniversityModuleCredit) {
+    private static void updateModuleMappingDatabase(String parterUniversityModuleCode,
+            String partnerUnviersityModuleTitle, String partnerUniversityModuleCredit,
+            String nusModuleCode, String nusModuleTitle, String nusModuleCredit) {
         assert parterUniversityModuleCode.length() > 0
                 : "Partner University Module Code should not be empty";
         assert partnerUnviersityModuleTitle.length() > 0
                 : "Partner University Module Title should not be empty";
         assert partnerUniversityModuleCredit.length() > 0
                 : "Partner University Module Credit should not be empty";
+        assert nusModuleCode.length() > 0 : "NUS Module Code should not be empty";
+        assert nusModuleTitle.length() > 0 : "NUS Module Title should not be empty";
+        assert nusModuleCredit.length() > 0 : "NUS Module Credit should not be empty";
 
-        logger.log(Level.FINER, "Start updating partner university module database");
+        logger.log(Level.FINER, "Start updating module mapping database");
 
-        Module newModule = new Module(parterUniversityModuleCode, partnerUnviersityModuleTitle,
-                partnerUniversityModuleCredit);
-        Database.addPartnerUniversityModule(newModule);
+        Module partnerUniversityModule = new Module(parterUniversityModuleCode,
+                partnerUnviersityModuleTitle, partnerUniversityModuleCredit);
+        Module nusModule = new Module(nusModuleCode, nusModuleTitle, nusModuleCredit);
+        ModuleMapping newModuleMapping = new ModuleMapping(partnerUniversityModule, nusModule);
 
-        logger.log(Level.FINER, "Finish updating partner university module database");
-    }
+        Database.addModuleMapping(newModuleMapping);
 
-    private static void updateNusModuleDatabase(String nusModuleCode, String nusModuleTitle,
-            String nusModuleCredit) {
-        assert nusModuleCode.length() > 0
-                : "NUS Module Code should not be empty";
-        assert nusModuleTitle.length() > 0
-                : "NUS Module Title should not be empty";
-        assert nusModuleCredit.length() > 0
-                : "NUS Module Credit should not be empty";
-
-        logger.log(Level.FINER, "Start updating nus module database");
-
-        Module newModule = new Module(nusModuleCode, nusModuleTitle, nusModuleCredit);
-        Database.addNusModules(newModule);
-
-        logger.log(Level.FINER, "Finish updating nus module database");
+        logger.log(Level.FINER, "Finish updating module mapping database");
     }
 }
