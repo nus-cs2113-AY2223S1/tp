@@ -1,23 +1,18 @@
 package seedu.duke.command;
 
-import seedu.duke.biometrics.Biometrics;
-import seedu.duke.food.Food;
 import seedu.duke.Parser;
 import seedu.duke.Ui;
+import seedu.duke.biometrics.Biometrics;
 import seedu.duke.exception.IllegalValueException;
+import seedu.duke.exercise.Exercise;
 import seedu.duke.exercise.ExerciseList;
 import seedu.duke.food.FoodList;
 
-
-public class RemoveCommand extends Command{
-
+public class RemoveCommand extends Command {
     private Ui ui;
-    private String arguments;
-
-    private Food food;
     private FoodList foodList;
+    private String arguments;
     public static final String INVALID_REMOVE_FOOD_INPUT = "Invalid remove food input";
-    public static final String INVALID_INDEX = "Please provide a valid index to delete";
 
     public RemoveCommand(String arguments) {
         this.arguments = arguments;
@@ -40,7 +35,7 @@ public class RemoveCommand extends Command{
         throw new IllegalValueException("Invalid remove command");
     }
 
-    private void removeFood(String[] argumentList) {
+    private void removeFood(String[] argumentList) throws IllegalValueException {
         try {
             if (argumentList.length < 2) {
                 throw new IllegalValueException(INVALID_REMOVE_FOOD_INPUT);
@@ -53,15 +48,13 @@ public class RemoveCommand extends Command{
             ui.output(foodList.getFood(index -1).toString());
             foodList.removeFood(index-1);
         } catch (NumberFormatException e) {
-            ui.output(INVALID_REMOVE_FOOD_INPUT);
-        } catch (IllegalValueException e) {
-            ui.output(e.getMessage());
+            throw new IllegalValueException(INVALID_REMOVE_FOOD_INPUT);
         }
     }
-
 
     @Override
     public void setData(Ui ui, Biometrics biometrics, ExerciseList exerciseList, FoodList foodList) {
         this.ui = ui;
+        this.foodList = foodList;
     }
 }
