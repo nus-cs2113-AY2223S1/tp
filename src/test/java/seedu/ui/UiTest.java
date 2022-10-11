@@ -10,7 +10,7 @@ import java.io.FileOutputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 
-public class UiTest {
+public class   UiTest {
 
     //@@author eehongchan-reused
     //Reused from https://stackoverflow.com/questions/3228427/redirect-system-out-println
