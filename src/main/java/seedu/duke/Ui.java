@@ -65,7 +65,7 @@ public class Ui {
     }
 
     public static void accountEntry(){
-        final String MESSAGE = "Welcome to your account: \n please enter any commands ;";
+        final String MESSAGE = "Welcome to your account\nPlease enter any commands";
         showStandardOutput(MESSAGE);
 
     }
