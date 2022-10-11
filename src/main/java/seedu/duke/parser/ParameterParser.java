@@ -22,6 +22,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -52,6 +54,9 @@ public class ParameterParser {
     private static final String CLASS_TYPE_EXPENSE = "seedu.duke.data.transaction.Expense";
     private static final String CLASS_TYPE_INCOME = "seedu.duke.data.transaction.Income";
 
+    private static final Logger parserLogger = Logger.getLogger(ParameterParser.class.getName());
+
+
     /**
      * Parses the parameters input into proper parameters of the command object.
      *
@@ -66,6 +71,7 @@ public class ParameterParser {
      * @throws MoolahException If Moolah Manager captures any command input exceptions.
      */
     public static void parse(Command command, String parametersInput) throws MoolahException {
+        parserLogger.setLevel(Level.WARNING);
         assert command != null;
         String[] splits = parametersInput.split(DELIMITER);
 
@@ -89,6 +95,7 @@ public class ParameterParser {
             // For each tag, check that the parameter is correct and set it inside the command.
             setCommand(command, splits);
         }
+        parserLogger.log(Level.INFO, "Parameter parsed successfully: " + command + parametersInput);
     }
 
     /**
@@ -103,6 +110,7 @@ public class ParameterParser {
         for (String tag : tags) {
             boolean found = findMatchingTagAmongInputs(tag, splits);
             if (!found) {
+                parserLogger.log(Level.WARNING, "A missing tag error is caught for the given tag: " + tag);
                 throw new InputMissingTagException();
             }
         }
@@ -123,6 +131,7 @@ public class ParameterParser {
         for (String split : splits) {
             if (split.length() < MINIMUM_TAG_LENGTH) {
                 // None of the tags is shorter than two characters
+                parserLogger.log(Level.WARNING, "An unsupported tag error is caught for the given tag: " + split);
                 throw new InputUnsupportedTagException();
             }
             boolean hasFoundAmongMandatoryTag = findIfParameterTagAmongTags(split, mandatoryTags);
@@ -132,6 +141,7 @@ public class ParameterParser {
             }
 
             // Found a tag entered by the user but does not exist in the supported tag for the command
+            parserLogger.log(Level.WARNING, "An unsupported tag error is caught for the given tag: " + split);
             throw new InputUnsupportedTagException();
         }
     }
@@ -150,6 +160,7 @@ public class ParameterParser {
 
             // The duplicated tag can be found in the hash map
             if (tagOccurenceMap.containsKey(tag)) {
+                parserLogger.log(Level.WARNING, "An duplicate tag error is caught for the given tag: " + tag);
                 throw new InputDuplicateTagException();
             }
             tagOccurenceMap.put(tag, 1);
@@ -161,12 +172,13 @@ public class ParameterParser {
      * If the split.length() is <= 2, it means that only the tag exists , and there is no parameter after the tag.
      *
      * @param splits The user input after the command word, split into a list for every space found.
-     * @throws EmptyParameterException Extra tag exception.
+     * @throws EmptyParameterException If there exists a tag without parameter.
      * @author chinhan99
      */
     private static void checkParameterNotEmpty(String[] splits) throws EmptyParameterException {
         for (String split : splits) {
             if (split.length() == 2) {
+                parserLogger.log(Level.WARNING, "An empty parameter error is caught for the given tag input: " + split);
                 throw new EmptyParameterException();
             }
         }
@@ -258,7 +270,8 @@ public class ParameterParser {
             command.setStatsType(parseStatsTypeTag(parameter));
             break;
         default:
-            throw new InputMissingTagException();
+            parserLogger.log(Level.WARNING, "An unsupported tag exception is caught: " + tag);
+            throw new InputUnsupportedTagException();
         }
     }
 
@@ -267,7 +280,7 @@ public class ParameterParser {
      *
      * @param parameter The user input after the user tag.
      * @return The class type if no exceptions are thrown.
-     * @throws InputTransactionUnknownTypeException Invalid type format exception.
+     * @throws InputTransactionUnknownTypeException If the transaction type provided is not supported.
      * @author chydarren
      */
     public static String parseTypeTagForListing(String parameter) throws InputTransactionUnknownTypeException {
@@ -277,6 +290,7 @@ public class ParameterParser {
         case "income":
             return CLASS_TYPE_INCOME;
         default:
+            parserLogger.log(Level.WARNING, "An invalid type error is caught for the given parameter: " + parameter);
             throw new InputTransactionUnknownTypeException();
         }
     }
@@ -286,7 +300,7 @@ public class ParameterParser {
      *
      * @param parameter The user input after the user tag.
      * @return The user input after the user tag.
-     * @throws InputTransactionUnknownTypeException Invalid type format exception.
+     * @throws InputTransactionUnknownTypeException If the transaction type provided is not supported.
      * @author wcwy
      */
     public static String parseTypeTagForAdding(String parameter) throws InputTransactionUnknownTypeException {
@@ -294,6 +308,7 @@ public class ParameterParser {
         boolean isIncome = parameter.equals(Income.TRANSACTION_NAME);
 
         if (!isExpense && !isIncome) {
+            parserLogger.log(Level.WARNING, "An invalid type error is caught for the given parameter: " + parameter);
             throw new InputTransactionUnknownTypeException();
         }
 
@@ -305,13 +320,15 @@ public class ParameterParser {
      *
      * @param parameter The user input after the user tag.
      * @return The category parameter if no exceptions are thrown.
-     * @throws InputTransactionInvalidCategoryException Invalid category format exception.
+     * @throws InputTransactionInvalidCategoryException If the category provided contains numeric or symbols.
      * @author chinhan99
      */
     public static String parseCategoryTag(String parameter) throws InputTransactionInvalidCategoryException {
         Pattern specialSymbols = Pattern.compile("[!@#$%&*()_+=|<>?{}\\[\\]~-]");
         Matcher hasSpecialSymbols = specialSymbols.matcher(parameter);
         if (containNumeric(parameter) || hasSpecialSymbols.find()) {
+            parserLogger.log(Level.WARNING, "An invalid category error is caught for the given parameter: "
+                    + parameter);
             throw new InputTransactionInvalidCategoryException();
         }
         return parameter;
@@ -322,7 +339,7 @@ public class ParameterParser {
      *
      * @param parameter The user input after the user tag.
      * @return The amount integer if no exceptions are thrown.
-     * @throws AddTransactionInvalidAmountException Invalid amount format exception.
+     * @throws AddTransactionInvalidAmountException If the transaction amount provided is not a valid accepted integer.
      * @author chinhan99
      */
     private static int parseAmountTag(String parameter) throws AddTransactionInvalidAmountException {
@@ -330,15 +347,20 @@ public class ParameterParser {
         Matcher hasSpecialSymbols = specialSymbols.matcher(parameter);
         try {
             if (containAlphabet(parameter) || hasSpecialSymbols.find()) {
+                parserLogger.log(Level.WARNING, "An invalid amount error is caught for the given parameter: "
+                        + parameter);
                 throw new AddTransactionInvalidAmountException();
             }
             int amount = Integer.parseInt(parameter);
             if (amount < 0 || amount > 10000000) {
+                parserLogger.log(Level.WARNING, "An invalid amount error is caught for the given parameter: "
+                        + parameter);
                 throw new AddTransactionInvalidAmountException();
             }
             return amount;
 
         } catch (NumberFormatException e) {
+            parserLogger.log(Level.WARNING, "An invalid amount error is caught for the given parameter: " + parameter);
             throw new AddTransactionInvalidAmountException();
         }
     }
@@ -348,7 +370,7 @@ public class ParameterParser {
      *
      * @param parameter The user input after the user tag.
      * @return The LocalDate object parsed from user input given.
-     * @throws InputTransactionInvalidDateException Invalid date format exception.
+     * @throws InputTransactionInvalidDateException If the format of the transaction date provided is incorrect.
      * @author wcwy
      */
     public static LocalDate parseDateTag(String parameter) throws InputTransactionInvalidDateException {
@@ -357,6 +379,7 @@ public class ParameterParser {
             LocalDate date = LocalDate.parse(parameter, formatter);
             return date;
         } catch (DateTimeParseException exception) {
+            parserLogger.log(Level.WARNING, "An invalid date error is caught for the given parameter: " + parameter);
             throw new InputTransactionInvalidDateException();
         }
     }
@@ -366,7 +389,7 @@ public class ParameterParser {
      *
      * @param parameter The user input after the user tag.
      * @return The valid integer for list index parsed from user input given.
-     * @throws MoolahException Either invalid index exception or amount not numeric exception.
+     * @throws MoolahException If the entry number provided is not parsable into integer.
      * @author brian-vb
      */
     public static int parseEntryTag(String parameter) throws MoolahException {
@@ -374,6 +397,9 @@ public class ParameterParser {
         try {
             index = Integer.parseInt(parameter);
         } catch (NumberFormatException e) {
+
+            parserLogger.log(Level.WARNING, "An invalid entry number error is caught for the given parameter: "
+                    + parameter);
             throw new EntryNumberNotNumericException();
         }
 
@@ -385,7 +411,7 @@ public class ParameterParser {
      *
      * @param parameter The user input after the user tag.
      * @return A boolean value indicating if the option selected by user is "detailed"
-     * @throws UnknownHelpOptionException An unknown help option exception.
+     * @throws UnknownHelpOptionException If the help option parameter selected is not 'detailed'.
      * @author wcwy
      */
     public static boolean parseHelpOptionTag(String parameter) throws UnknownHelpOptionException {
@@ -393,6 +419,8 @@ public class ParameterParser {
         if (isValidHelpOption) {
             return true;
         } else {
+            parserLogger.log(Level.WARNING, "An invalid help option error is caught for the given parameter: "
+                    + parameter);
             throw new UnknownHelpOptionException();
         }
     }
@@ -402,7 +430,7 @@ public class ParameterParser {
      *
      * @param parameter The user input after the user tag.
      * @return The statistic type.
-     * @throws ListStatisticsInvalidStatsTypeException Invalid statistic type exception.
+     * @throws ListStatisticsInvalidStatsTypeException If the statistic type given is not supported.
      * @author chydarren
      */
     public static String parseStatsTypeTag(String parameter) throws ListStatisticsInvalidStatsTypeException {
@@ -412,6 +440,8 @@ public class ParameterParser {
             statsType = "categories";
             break;
         default:
+            parserLogger.log(Level.WARNING, "An invalid statstic type error is caught for the given parameter: "
+                    + parameter);
             throw new ListStatisticsInvalidStatsTypeException();
         }
         return statsType;
