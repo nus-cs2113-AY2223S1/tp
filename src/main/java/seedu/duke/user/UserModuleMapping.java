@@ -2,19 +2,24 @@ package seedu.duke.user;
 
 import seedu.duke.module.Module;
 
-public class UserModule extends Module {
+public class UserModuleMapping {
+
+    Module nusModule;
+
+    Module puModule;
     private String nusCode;
     private String puCode;
     private String nusTitle;
     private String nusCredit;
     private String puTitle;
 
+    private String puCredit;
     private String comment;
 
-    public UserModule(String puCode, String puTitle, String nusCode, String nusTitle, String nusCredit) {
-        super(nusCode, nusTitle, nusCredit);
+    public UserModuleMapping(String puCode, String puTitle, String nusCode, String nusTitle, String nusCredit, String puCredit) {
         assert puCode.length() > 0 : "PU module code length cannot be null";
         assert puTitle.length() > 0 : "PU module title length cannot be null";
+        assert puCredit.length() > 0 : "PU module credits length cannot be null";
         assert nusCode.length() > 0 : "NUS module code length cannot be null";
         assert nusTitle.length() > 0 : "NUS module title length cannot be null";
         assert nusCredit.length() > 0 : "NUS module credits length cannot be null";
@@ -23,11 +28,13 @@ public class UserModule extends Module {
         this.nusTitle = nusTitle;
         this.nusCredit = nusCredit;
         this.puTitle = puTitle;
-
+        this.puCredit = puCredit;
+        nusModule = new Module(nusCode, nusTitle, nusCredit);
+        puModule = new Module(puCode, puTitle, puCredit);
     }
 
     public String getNusCode() {
-        return nusCode;
+        return nusModule.getCode();
     }
 
     public String getPuCode() {

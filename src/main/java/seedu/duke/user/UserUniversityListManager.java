@@ -73,7 +73,7 @@ public class UserUniversityListManager {
         return myManager.containsKey(inputSchool);
     }
 
-    public void addModule(String inputSchool, UserModule inputModule) {
+    public void addModule(String inputSchool, UserModuleMapping inputModule) {
         if (myManager.containsKey(inputSchool)) {
             myManager.get(inputSchool).addModule(inputModule);
         } else {
