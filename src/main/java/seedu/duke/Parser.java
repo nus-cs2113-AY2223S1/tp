@@ -291,7 +291,8 @@ public class Parser {
         return Integer.parseInt(commandDetails.trim()) - 1;
     }
 
-    private void checkForClientIndexFlag(String commandDetails) throws MissingClientIndexFlagException, InvalidClientIndexFlagFormatException {
+    private void checkForClientIndexFlag(String commandDetails)
+            throws MissingClientIndexFlagException, InvalidClientIndexFlagFormatException {
         if (!commandDetails.contains("ic/")) {
             throw new MissingClientIndexFlagException();
         } else {
