@@ -33,5 +33,6 @@ public class CommandAddClient extends CommandAdd {
         clientList.addClient(clientName, clientContactNumber, clientEmail, clientBudgetPerMonth);
         ui.showClientAddedConfirmationMessage(clientList);
         //Update Storage
+        //storage.updateFile(parameter if any);
     }
 }

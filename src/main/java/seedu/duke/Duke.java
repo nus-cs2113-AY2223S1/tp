@@ -33,6 +33,15 @@ public class Duke {
                 ui.showMissingCommandAddDetailMessage();
             } catch (UndefinedSubCommandAddTypeException e) {
                 ui.showUndefinedSubCommandAddTypeMessage();
+            } catch (EmptyPropertyDetailException e) {
+                ui.showEmptyPropertyDetailMessage();
+            } catch (MissingPropertyFlagException | IncorrectAddPropertyFlagOrderException
+                    | MissingPropertyDetailException e) {
+                ui.showAddPropertyWrongFormatMessage();
+            } catch (InvalidSingaporeAddressException e) {
+                ui.showInvalidSingaporeAddressMessage();
+            } catch (InvalidPriceFormatException e) {
+                ui.showInvalidPriceFormatMessage();
             } catch (EmptyClientDetailException e) {
                 ui.showEmptyClientDetailMessage();
             } catch (MissingClientFlagException | IncorrectAddClientFlagOrderException

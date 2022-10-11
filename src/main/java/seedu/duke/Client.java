@@ -19,13 +19,14 @@ public class Client {
     @Override
     public String toString() {
         StringBuilder clientDetails = new StringBuilder();
-        clientDetails.append("  Client: " + clientName).append(System.lineSeparator());
-        clientDetails.append("  Contact Number: " + clientContactNumber).append(System.lineSeparator());
+        clientDetails.append("  Client: ").append(clientName).append(System.lineSeparator());
+        clientDetails.append("  Contact Number: ").append(clientContactNumber).append(System.lineSeparator());
         boolean hasEmail = (!clientEmail.isEmpty());
         if (hasEmail) {
-            clientDetails.append("  Email: " + clientEmail).append(System.lineSeparator());
+            clientDetails.append("  Email: ").append(clientEmail).append(System.lineSeparator());
         }
-        clientDetails.append("  Budget: SGD" + clientBudgetPerMonth + "/month").append(System.lineSeparator());
+        clientDetails.append("  Budget: SGD").append(clientBudgetPerMonth).append("/month")
+                .append(System.lineSeparator());
         return clientDetails.toString().trim();
     }
 }
