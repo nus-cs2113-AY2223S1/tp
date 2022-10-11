@@ -23,7 +23,7 @@ public class SearchModuleCodeCommand extends Command {
         List<Module> searchResult = filterModuleByCode(toSearchModuleCode);
 
         ui.addMessage("Module search list");
-        for (var m : searchResult){
+        for (var m : searchResult) {
             ui.addMessage(m.moduleCode);
         }
 

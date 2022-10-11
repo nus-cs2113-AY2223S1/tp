@@ -24,7 +24,7 @@ public class SearchModuleNameCommand extends Command {
         List<Module> searchResult = filterModuleByName(searchModuleName);
 
         ui.addMessage("Module search list");
-        for (var m : searchResult){
+        for (var m : searchResult) {
             ui.addMessage(m.title);
         }
 
