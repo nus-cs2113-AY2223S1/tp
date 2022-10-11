@@ -28,15 +28,15 @@ public class Parking {
         Find find = new Find();
         Ui ui = new Ui();
         ui.greetUser();
-
         Api api = new Api();
-        api.asyncExecuteRequest(); // Send request to API and wait asynchronously
 
-        // More code here while waiting for data to come back
-
-
-        // This should be the last code block of the initialising phase
         try {
+            api.loadApiKey(); // Will give exception when file is missing or empty key
+            api.asyncExecuteRequest(); // Send request to API and wait asynchronously
+
+            // More code here while waiting for data to come back
+
+            // This should be the last code block of the initialising phase
             System.out.println("Trying to fetch data"); // Debug line
             api.fetchData();
             System.out.println("Completed fetch data!"); // Debug line
@@ -85,6 +85,5 @@ public class Parking {
                 break;
             }
         }
-
     }
 }

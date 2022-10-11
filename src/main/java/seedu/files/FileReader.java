@@ -1,14 +1,17 @@
 package seedu.files;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Scanner;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.ObjectReader;
 
 import seedu.data.Carpark;
+import seedu.exception.EmptySecretFileException;
 import seedu.exception.NoFileFoundException;
 import seedu.files.parsing.LtaJsonWrapper;
 
@@ -40,6 +43,12 @@ public class FileReader {
         }
     }
 
+    /**
+     * TODO: Javadoc
+     * @param filepath
+     * @return
+     * @throws IOException
+     */
     private static List<Carpark> getCarparks(Path filepath) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         ObjectReader objectReader = objectMapper.reader(LtaJsonWrapper.class);
@@ -48,4 +57,15 @@ public class FileReader {
         return wrapperObject.getValue();
     }
 
+    /**
+     * TODO: Javadoc
+     * @param filepath
+     * @return
+     * @throws IOException
+     */
+    public static String readStringFromTxt(Path filepath) throws IOException{
+            File file = new File(filepath.toString());
+            Scanner scanner = new Scanner(file);
+            return scanner.nextLine().trim();
+    }
 }

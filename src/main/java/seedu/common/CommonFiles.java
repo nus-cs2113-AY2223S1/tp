@@ -15,4 +15,5 @@ public class CommonFiles {
     public static final Path LTA_FILE_PATH = Paths.get(CommonFiles.API_JSON_DIRECTORY, CommonFiles.LTA_JSON_FILE);
     public static final Path LTA_BACKUP_FILE_PATH = Paths.get(CommonFiles.API_JSON_DIRECTORY,
         "ltaResponseSample.json");
+    public static final Path API_KEY_FILE_PATH = Paths.get(CommonFiles.API_JSON_DIRECTORY, "secret.txt");
 }
