@@ -12,9 +12,9 @@ import seedu.duke.model.Module;
 public class SearchTest {
     @Test
     void filterModuleByCode_validInput_expectCorrectNumberOfFilteredModule() {
-        // String inpuString = "cs1010";
-        String inpuString = "GEA1000";
-        List<Module> searchResult = SearchModuleCodeCommand.filterModuleByCode(inpuString);
+        // String inputString = "cs1010";
+        String inputString = "GEA1000";
+        List<Module> searchResult = SearchModuleCodeCommand.filterModuleByCode(inputString);
         // int numberOfFilteredModulesInSearchResult = SearchModuleCodeCommand.getNumberOfModulesFound(searchResult);
         int numberOfFilteredModulesInSearchResult = searchResult.size();
         // int expectedNumberOfFilteredModules = 7;
