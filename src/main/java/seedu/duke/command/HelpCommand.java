@@ -5,7 +5,7 @@ import seedu.duke.Ui;
 import java.util.Map;
 
 public class HelpCommand extends Command {
-    private static final String COMMAND_LIST_COMMANDS = "list-commands";
+    private static final String COMMAND_HELP = "help";
     private static final String COMMAND_LIST_USERS = "list-users";
     private static final String COMMAND_LIST_ITEMS = "list-items";
     private static final String COMMAND_LIST_TX = "list-tx";
@@ -19,7 +19,7 @@ public class HelpCommand extends Command {
     private static final String COMMAND_REMOVE_ITEM = "remove-item /i <name>";
     private static final String COMMAND_REMOVE_TX = "remove-tx /t <transactionId>";
     private static final Map<String, String> commandToDetailMap = Map.ofEntries(
-            Map.entry("List all commands", COMMAND_LIST_COMMANDS),
+            Map.entry("List all commands", COMMAND_HELP),
             Map.entry("List all users", COMMAND_LIST_USERS),
             Map.entry("List all items", COMMAND_LIST_ITEMS),
             Map.entry("List all transactions", COMMAND_LIST_TX),
