@@ -53,6 +53,22 @@ public class Ui {
         printSplitLine();
         System.out.println();
     }
+
+    public static void usernameLogin(){
+        final String MESSAGE =  "Please enter your username: ";
+        showStandardOutput(MESSAGE);
+    }
+
+    public static void passwordLogin(){
+        final String MESSAGE = "Please enter your password: ";
+        showStandardOutput(MESSAGE);
+    }
+
+    public static void accountEntry(){
+        final String MESSAGE = "Welcome to your account: \n please enter any commands ;";
+        showStandardOutput(MESSAGE);
+
+    }
     
     private static void printSplitLine() {
         System.out.println(indentation + "____________________________________________________________");
