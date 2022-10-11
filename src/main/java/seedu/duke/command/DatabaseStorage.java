@@ -74,7 +74,7 @@ public class DatabaseStorage {
         assert partnerUniversityName.length() > 0 : "Partner University should not be empty";
 
         // TODO: v2.0 add country for partner university
-        String partnerUniversityCountry = "null";
+        final String partnerUniversityCountry = "null";
 
         String parterUniversityModuleCode = lineData[1];
         assert parterUniversityModuleCode.length() > 0
@@ -99,8 +99,8 @@ public class DatabaseStorage {
 
         updateUniversityDatabase(partnerUniversityName, partnerUniversityCountry);
         updateModuleMappingDatabase(partnerUniversityName, partnerUniversityCountry, parterUniversityModuleCode,
-                partnerUnviersityModuleTitle,
-                partnerUniversityModuleCredit, nusModuleCode, nusModuleTitle, nusModuleCredit);
+                partnerUnviersityModuleTitle, partnerUniversityModuleCredit, nusModuleCode, nusModuleTitle,
+                nusModuleCredit);
 
         logger.log(Level.FINE, "Finish updating database");
     }
