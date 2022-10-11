@@ -6,6 +6,8 @@ import seedu.duke.user.UserModuleList;
 import seedu.duke.user.UserUniversityList;
 import seedu.duke.user.UserUniversityListManager;
 
+import java.io.IOException;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -67,5 +69,15 @@ public class UserStorageParser {
         }
         logger.log(Level.INFO, "End of conversion to UserUniversityListManager from String");
         return myManager;
+    }
+
+    public static UserUniversityListManager getSavedLists() {
+        try {
+            String fileContent = UserStorage.loadFile();
+            return new UserUniversityListManager(fileContent);
+        } catch (IOException e) {
+            System.out.println("Error, IOException has occurred");
+        }
+        return new UserUniversityListManager();
     }
 }
