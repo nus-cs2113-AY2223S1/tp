@@ -91,7 +91,7 @@ public class Ui {
     }
 
     /**
-     * Display the line divider
+     * Display the line divider.
      */
     public void displayDivider() {
         System.out.println(LINE_DIVIDER);
