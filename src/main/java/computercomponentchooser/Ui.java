@@ -67,6 +67,7 @@ public class Ui {
             line = in.nextLine();
             if (Parser.checkEdit(line)) {
                 while (!EditParser.checkBack(line)) {
+                    EditParser.parse(line);
                     line = in.nextLine();
                 }
             }

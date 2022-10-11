@@ -12,6 +12,7 @@ public class Parser {
     static final int COMMAND_PARAMETER = 0;
     static final int NAME_PARAMETER = 1;
 
+
     private static String getParameter(String line, int mode) {
         String[] lineSplit = line.split(" ", 2);
         return lineSplit[mode];
@@ -48,6 +49,9 @@ public class Parser {
             case "delete":
                 name = getParameter(line, NAME_PARAMETER);
                 buildManager.deleteBuild(name);
+                break;
+            case "back":
+                System.out.println("Back to main mode.");
                 break;
             default:
                 throw new UnknownCommandException();

@@ -1,11 +1,15 @@
 package computercomponentchooser;
 
+import java.util.ArrayList;
+
+
 public class Build {
     String name;
-    String contents;
+    ArrayList<String> contents;
 
     public Build(String name) {
         this.name = name;
+        this.contents = new ArrayList<>();
     }
 
     public String getName() {
@@ -16,11 +20,25 @@ public class Build {
         this.name = name;
     }
 
-    public String getContents() {
+    public ArrayList<String> getContents() {
         return contents;
     }
 
-    public void setContents(String contents) {
-        this.contents = contents;
+    public void addContents(String content) {
+        contents.add(content);
+    }
+
+    public void deleteContents(String content) {
+        contents.remove(content);
+    }
+
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        int i = 1;
+        for (String name : contents) {
+            sb.append(i).append(". ").append(name).append(System.lineSeparator());
+            i++;
+        }
+        return sb.toString();
     }
 }

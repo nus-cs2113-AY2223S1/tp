@@ -6,7 +6,7 @@ import java.util.Map;
 import computercomponentchooser.exceptions.DuplicateBuildException;
 
 public class BuildManager {
-    private final Map<String, Build> builds;
+    private static Map<String, Build> builds;
 
     public BuildManager() {
         builds = new HashMap<>();
@@ -23,7 +23,7 @@ public class BuildManager {
         builds.remove(name);
     }
 
-    public Build getBuild(String name) {
+    public static Build getBuild(String name) {
         return builds.get(name);
     }
 
