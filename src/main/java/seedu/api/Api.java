@@ -2,6 +2,7 @@ package seedu.api;
 
 import static seedu.common.CommonFiles.API_JSON_DIRECTORY;
 import static seedu.common.CommonFiles.API_KEY_FILE_PATH;
+import static seedu.common.CommonFiles.API_KEY_FILE;
 import static seedu.common.CommonFiles.LTA_BASE_URL;
 import static seedu.common.CommonFiles.LTA_JSON_FILE;
 
@@ -143,13 +144,14 @@ public class Api {
 
     /**
      * Reads API key from secret.txt file and loads it to the object.
+     * If secret.txt does not exist, create it.
      *
      * @throws NoFileFoundException If directory / file is not found.
      * @throws EmptySecretFileException If the file is empty.
      */
     public void loadApiKey() throws NoFileFoundException, EmptySecretFileException {
         try {
-            String key = FileReader.readStringFromTxt(API_KEY_FILE_PATH);
+            String key = FileReader.readStringFromTxt(API_KEY_FILE, API_JSON_DIRECTORY, true);
             if (key.isEmpty()) {
                 throw new EmptySecretFileException();
             }
