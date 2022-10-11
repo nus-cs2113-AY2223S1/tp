@@ -23,7 +23,12 @@ public class SearchModuleNameCommand extends Command {
     public void execute(State state, Ui ui, Storage storage) {
         List<Module> searchResult = filterModuleByName(searchModuleName);
 
-        // ui print search result
+        ui.addMessage("Module search list");
+        for (var m : searchResult){
+            ui.addMessage(m.title);
+        }
+
+        ui.displayUi();
     }
 
     /**
@@ -40,5 +45,10 @@ public class SearchModuleNameCommand extends Command {
             }
         }
         return searchResult;
+    }
+
+    @Override
+    public boolean isExit() {
+        return false;
     }
 }

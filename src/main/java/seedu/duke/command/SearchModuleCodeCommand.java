@@ -22,7 +22,12 @@ public class SearchModuleCodeCommand extends Command {
     public void execute(State state, Ui ui, Storage storage) {
         List<Module> searchResult = filterModuleByCode(toSearchModuleCode);
 
-        // ui print search result
+        ui.addMessage("Module search list");
+        for (var m : searchResult){
+            ui.addMessage(m.moduleCode);
+        }
+
+        ui.displayUi();
     }
 
     /**
@@ -39,5 +44,10 @@ public class SearchModuleCodeCommand extends Command {
             }
         }
         return searchResult;
+    }
+
+    @Override
+    public boolean isExit() {
+        return false;
     }
 }
