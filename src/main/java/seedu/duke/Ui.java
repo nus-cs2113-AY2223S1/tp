@@ -95,12 +95,14 @@ public class Ui {
                 + "Total item(s) in list: " + transactionListSize + '\n');
         showLine();
     }
+
     public static void viewUserMessage(User user) {
         showLine();
         System.out.print("Here is the user you have requested to view: " + '\n'
                 + user + "\n");
         showLine();
     }
+    
     public static void addUserMessage(User user, int userListSize) {
         showLine();
         assert userListSize >= 0;
