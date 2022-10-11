@@ -45,7 +45,7 @@ public class UserModuleList {
             System.out.println("Error module already added");
         } else {
             modules.add(input);
-            Ui.printModuleAddedAcknowledgement(input);
+            System.out.print(Ui.printModuleAddedAcknowledgement(input));
         }
     }
 
@@ -53,7 +53,7 @@ public class UserModuleList {
         if (modules.size() == 0) {
             System.out.println("No current modules saved");
         } else {
-            Ui.printModulesInList(modules);
+            System.out.print(Ui.printModulesInList(modules));
         }
     }
 
@@ -78,7 +78,7 @@ public class UserModuleList {
             System.out.println("index not within range");
             throw new IndexOutOfBoundsException();
         } else {
-            Ui.printModuleDeletedAcknowledgement(modules.get(index));
+            System.out.print(Ui.printModuleDeletedAcknowledgement(modules.get(index)));
             modules.remove(index);
             System.out.println("Modules left for current school are: ");
             displayAll();
@@ -94,7 +94,7 @@ public class UserModuleList {
                     && module.getPuCode().equals(puCode)) {
                 isUpdated = true;
                 module.setComment(updates);
-                Ui.printModuleUpdatedAcknowledgement(module);
+                System.out.print(Ui.printModuleUpdatedAcknowledgement(module));;
             }
         }
         if (!isUpdated) {
