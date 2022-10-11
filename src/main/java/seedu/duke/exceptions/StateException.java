@@ -1,8 +1,8 @@
 package seedu.duke.exceptions;
 
-public class StateException extends Exception{
+public class StateException extends Exception {
     @Override
-    public String getMessage(){
+    public String getMessage() {
         return "State dummy exception";
     }
 }

@@ -25,11 +25,12 @@ public class State {
     public void setSemester(int semester) {
         this.semester = semester;
     }
-    public void addSelectedModule(SelectedModule selectedModule){
+
+    public void addSelectedModule(SelectedModule selectedModule) {
         selectedModulesList.get(semester).add(selectedModule);
     }
 
-    public void removeSelectedModule(SelectedModule selectedModule){
+    public void removeSelectedModule(SelectedModule selectedModule) {
         selectedModulesList.get(semester).remove(selectedModule);
     }
 
