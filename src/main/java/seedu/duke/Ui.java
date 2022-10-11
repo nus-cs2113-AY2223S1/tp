@@ -2,6 +2,7 @@ package seedu.duke;
 
 public class Ui {
     final private static String INDENTATION = "    ";
+
     public static void showWelcomeMessage() {
         final String LOGO = "\n" +
                 "    _____                                              __  __                                         \n"
@@ -32,22 +33,38 @@ public class Ui {
     }
 
     // Maybe be improved
-    public static void showPromptInfo(){
+    public static void showPromptInfo() {
         String promptInfo = "Would you like to register or login?";
         System.out.println(INDENTATION + promptInfo);
         System.out.println();
     }
 
-    public static void showRegisterInfo(){
+    public static void showRegisterInfo() {
         final String MESSAGE = "Nice, we will be creating you a new wallet right away, but first of all, \n"
-        + INDENTATION +
-        "please first add your username and then a password for your wallet.";
+                + INDENTATION +
+                "please first add your username and then a password for your wallet.";
         showStandardOutput(INDENTATION + MESSAGE);
     }
 
-    public static void showRegisterSuccessInfo(){
+    public static void showRegisterSuccessInfo() {
         final String MESSAGE = "Nice, a new wallet has been created for you, \n"
-        + INDENTATION + "You can now login to it";
+                + INDENTATION + "You can now login to it";
+        showStandardOutput(INDENTATION + MESSAGE);
+    }
+
+    public static void showEnterUsernamePrompt() {
+        final String MESSAGE = "Username:";
+        System.out.print(INDENTATION + MESSAGE);
+    }
+
+    public static void showEnterPasswordPrompt() {
+        final String MESSAGE = "Password:";
+        System.out.print(INDENTATION + MESSAGE);
+    }
+
+    public static void showLoginResults(Boolean isLoginSuccess) {
+        final String MESSAGE = isLoginSuccess ? "Login successfully."
+                : "Username or Password not correct. Please try again.";
         showStandardOutput(INDENTATION + MESSAGE);
     }
 
@@ -56,6 +73,10 @@ public class Ui {
         System.out.println();
         System.out.println(output);
         printSplitLine();
+        System.out.println();
+    }
+
+    public static void showEmptyLine() {
         System.out.println();
     }
 
