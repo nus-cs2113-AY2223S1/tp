@@ -33,12 +33,12 @@ public class DeleteCommand extends Command {
      */
     public CommandResult execute() {
         try {
-            Recipe deletedRecipe = RecipeList.getRecipes().get(index);
-            RecipeList.getRecipes().remove(index);
+            Recipe deletedRecipe = RecipeList.getRecipe(index);
+            RecipeList.deleteRecipe(index);
             return new CommandResult(String.format(
                     deletedRecipe.getTitle() + " is deleted.%n"));
         } catch (IndexOutOfBoundsException e) {
-            Ui.showMessageInline("Current number of saved recipes:", Integer.toString(RecipeList.getRecipes().size()));
+            Ui.showMessageInline("Current number of saved recipes:", Integer.toString(RecipeList.getSize()));
             return new CommandResult("Delete recipe index out of bound.");
         }
 

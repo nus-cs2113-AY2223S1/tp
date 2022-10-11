@@ -8,12 +8,17 @@ public class AddMode {
     private static final int TITLE_STAGE = 0;
     private static final int DESCRIPTION_STAGE = 1;
     private static final int INGREDIENTS_STAGE = 2;
+    private static final int STEPS_STAGE = 3;
     private int stage = 0;
     private static final String TITLE = "Recipe Title";
     private static final String DESCRIPTION = "Recipe Description";
     private static final String INGREDIENTS = "Add at least 1 ingredients in this format:  ";
     private static final String FORMAT = "<ingredient name> / <amount_in_float> / <unit>  ";
     private static final String DONE_REMINDER = "Type \"done\" to finish adding the section";
+    private static final String STEPS = "Enter your steps one by one  ";
+
+    private static final String NEXT = "next";
+
     private static final String DONE = "done";
     private static final String ENTER = "ENTERING ADD MODE";
     private static final String EXIT = "EXITING ADD MODE";
@@ -27,7 +32,7 @@ public class AddMode {
         Ui.showDivider();
         Ui.showMessage(ENTER, DONE_REMINDER);
         String input = "";
-        while (!input.equalsIgnoreCase(DONE) && stage < 3) {
+        while (!(input.equalsIgnoreCase(DONE) && stage == 4) && stage < 4) {
             switch (stage) {
             case TITLE_STAGE:
                 input = askTitle(input);
@@ -38,12 +43,15 @@ public class AddMode {
             case INGREDIENTS_STAGE:
                 input  = askIngredients(input);
                 break;
+            case STEPS_STAGE:
+                input = askSteps(input);
+                break;
             default:
                 System.out.println("Invalid section! Please type done to exit");
                 break;
             }
         }
-        isValid = (stage >= 2) ? true : false; // Check if all the components are filled
+        isValid = (stage >= 3) ? true : false; // Check if all the components are filled
     }
 
     public void exitAddMode() {
@@ -81,6 +89,8 @@ public class AddMode {
         input = Ui.readInput();
         if (!input.equalsIgnoreCase(DONE)) {
             parsedIngredients(input);
+        } else {
+            stage++;
         }
         return input;
     }
@@ -90,7 +100,7 @@ public class AddMode {
         String[] parsed = input.split("/", 3);
         try {
             double amount = convertToDouble(parsed[1]);
-            addedRecipe.getIngredients().add(new Ingredient(parsed[0], amount, parsed[2]));
+            addedRecipe.addIngredient(new Ingredient(parsed[0], amount, parsed[2]));
             Ui.showMessageInline("Ingredient registered! ");
             Ui.showMessageInline("Name: " + parsed[0]);
             Ui.showMessageInline("Amount: " + amount);
@@ -98,6 +108,18 @@ public class AddMode {
         } catch (Exception e) {
             Ui.showMessage(ERROR_PARSING);
         }
+    }
+
+    private String askSteps(String input) {
+        Ui.showMessage(STEPS, DONE_REMINDER);
+        input = Ui.readInput();
+        if (!input.equalsIgnoreCase(DONE)) {
+            addedRecipe.addStep(input);
+        } else {
+            stage++;
+        }
+
+        return input;
     }
 
     private double convertToDouble(String amount) {
