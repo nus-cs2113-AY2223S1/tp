@@ -1,6 +1,8 @@
 package seedu.parser;
 
-
+/**
+ * Class to deal with parsing commands.
+ */
 public class Parser {
     private static final String COMMAND_FIND = "find";
     private static final String COMMAND_EXIT = "bye";

@@ -7,10 +7,19 @@ import java.util.Scanner;
  */
 public class Ui {
 
-    private final Scanner in;
+    private Scanner in;
 
     public Ui() {
         this.in = new Scanner(System.in);
+    }
+
+    /**
+     * Print string to command line.
+     *
+     * @param line String to print.
+     */
+    public void print(String line) {
+        System.out.println(line);
     }
 
     /**
@@ -23,21 +32,31 @@ public class Ui {
     }
 
     /**
-     * Prints ASCII art of a car and parKING logo
+     * Asks user to enter a command and returns user input.
+     *
+     * @return User input.
+     */
+    public String getCommand() {
+        print("Enter a command:");
+        return getLine();
+    }
+
+    /**
+     * Prints ASCII art of a car and parKING logo.
      */
     //@@author eehongchan-reused
     //Reused from https://www.asciiart.eu/vehicles/cars and http://patorjk.com/software/taag/
     // with minor modifications
     private void showLogo() {
-        System.out.println(
-                "    ____\n" +
-                " __/  |_\\_\n" +
-                "|  _     _``-.\n" +
-                "'-(_)---(_)--'   _  _____ _  _  ___ \n" +
-                "  _ __  __ _ _ _| |/ /_ _| \\| |/ __|\n" +
-                " | '_ \\/ _` | '_| ' < | || .` | (_ |\n" +
-                " | .__/\\__,_|_| |_|\\_\\___|_|\\_|\\___|\n" +
-                " |_|                                ");
+        print(
+            "    ____\n"
+                + " __/  |_\\_\n"
+                + "|  _     _``-.\n"
+                + "'-(_)---(_)--'   _  _____ _  _  ___ \n"
+                + "  _ __  __ _ _ _| |/ /_ _| \\| |/ __|\n"
+                + " | '_ \\/ _` | '_| ' < | || .` | (_ |\n"
+                + " | .__/\\__,_|_| |_|\\_\\___|_|\\_|\\___|\n"
+                + " |_|                                ");
     }
     //@@author
 
@@ -45,9 +64,9 @@ public class Ui {
      * Prompts user to enter name and prints welcome message.
      */
     private void askName() {
-        System.out.println("What is your name?");
+        print("What is your name?");
         String name = getLine();
-        System.out.printf("Welcome to parKING, %s!\n", name);
+        print(String.format("Welcome to parKING, %s!", name));
     }
 
     /**
@@ -62,27 +81,64 @@ public class Ui {
      * Show error message when fetching data is unsuccessful.
      */
     public void showFetchError() {
-        System.out.println("Something went wrong when fetching data, trying again...");
+        print("Something went wrong when fetching data, trying again...");
     }
 
     /**
      * Show error message when fetching data took too long.
      */
     public void showFetchTimeout() {
-        System.out.println("Fetch Timeout, trying again...");
+        print("Fetch Timeout, trying again...");
     }
 
     /**
      * Show error message when saving data to file.
      */
     public void showSaveError() {
-        System.out.println("Something went wrong when saving data.");
+        print("Something went wrong when saving data.");
     }
 
     /**
      * Show error message when creating file is unsuccessful.
      */
     public void showCreateFileError() {
-        System.out.println("Something wrong happened in file creation.");
+        print("Something wrong happened in file creation.");
+    }
+
+    /**
+     * Show error message when invalid command is entered.
+     */
+    public void showInvalidCommandError() {
+        print("Invalid command. Try again.");
+    }
+
+    /**
+     * Show goodbye message before user quits program.
+     */
+    public void showByeMessage() {
+        print("Goodbye.");
+    }
+
+    /**
+     * Show message when loading data.
+     */
+    public void showLoadingDataMessage() {
+        print("Trying to load data...");
+    }
+
+    /**
+     * Show message when data is successfully loaded.
+     */
+    public void showLoadingDataSuccess() {
+        print("Load data sequence successful!");
+    }
+
+    /**
+     * Changes the scanner for the Ui object. To be used for JUnit testing.
+     *
+     * @param in New Scanner object to be used.
+     */
+    public void changeScanner(Scanner in) {
+        this.in = in;
     }
 }

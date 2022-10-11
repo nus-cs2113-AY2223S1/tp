@@ -1,13 +1,13 @@
 package seedu.files.parsing;
 
-import org.codehaus.jackson.annotate.JsonProperty;
-import seedu.data.Carpark;
-
 import java.util.List;
 
+import org.codehaus.jackson.annotate.JsonProperty;
+
+import seedu.data.Carpark;
+
 /**
- * Blueprint class for the {@link org.codehaus.jackson.map.ObjectMapper} class
- * to build
+ * Blueprint class for the {@link org.codehaus.jackson.map.ObjectMapper} class to build.
  */
 public class LtaJsonWrapper {
     private String metadata;

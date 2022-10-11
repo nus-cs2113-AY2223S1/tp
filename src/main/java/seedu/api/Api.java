@@ -2,6 +2,9 @@ package seedu.api;
 
 import seedu.exception.*;
 import seedu.ui.Ui;
+import static seedu.common.CommonFiles.API_JSON_DIRECTORY;
+import static seedu.common.CommonFiles.LTA_BASE_URL;
+import static seedu.common.CommonFiles.LTA_JSON_FILE;
 
 import java.io.IOException;
 import java.net.URI;
@@ -13,22 +16,17 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-import static seedu.common.CommonFiles.LTA_BASE_URL;
-import static seedu.common.CommonFiles.API_JSON_DIRECTORY;
-import static seedu.common.CommonFiles.LTA_JSON_FILE;
-
+import seedu.exception.EmptyResponseException;
+import seedu.files.FileStorage;
 
 /**
- * Class to fetch data from LTA API.
+ * Class to fetch .json data from APIs and save that locally.
  */
 public class Api {
-    private final String API_KEY = "1B+7tBxzRNOtFbTxGcCiYA=";
-    private final String AUTH_HEADER_NAME = "AccountKey";
-    private final int MAX_FETCH_TRIES = 5;
-    private HttpClient client;
+    private final HttpClient client;
     private HttpRequest request;
     private CompletableFuture<HttpResponse<String>> responseFuture;
-    private Storage storage;
+    private final FileStorage storage;
     private final Ui ui;
 
     /**
@@ -38,7 +36,7 @@ public class Api {
     public Api() {
         this.client = HttpClient.newHttpClient();
         generateHttpRequestCarpark();
-        this.storage = new Storage(API_JSON_DIRECTORY, LTA_JSON_FILE);
+        this.storage = new FileStorage(API_JSON_DIRECTORY, LTA_JSON_FILE);
         this.ui = new Ui();
     }
 
@@ -47,10 +45,12 @@ public class Api {
      * Builds the API HTTP GET request header and body.
      */
     private void generateHttpRequestCarpark() {
+        String apiKey = "1B+7tBxzRNOtFbTxGcCiYA==";
+        String authHeaderName = "AccountKey";
         request = HttpRequest.newBuilder(
                 URI.create(LTA_BASE_URL))
-                .header(AUTH_HEADER_NAME, API_KEY)
-                .build();
+            .header(authHeaderName, apiKey)
+            .build();
     }
 
     /**
@@ -92,7 +92,7 @@ public class Api {
         case 503:
             throw new ServerNotReadyAPIException("Too many request. Trying again...");
         default:
-            throw new UnknownResponseAPIException("Response Code: " + Integer.toString(responseCode)
+            throw new UnknownResponseAPIException("Response Code: " + responseCode
                     + "\nIf problem persist contact developer. Trying again...");
         }
     }
@@ -106,7 +106,7 @@ public class Api {
      */
     public void fetchData() throws EmptyResponseException, IOException, UnauthorisedAccessAPIException {
         String result = "";
-        int fetchTries = MAX_FETCH_TRIES;
+        int fetchTries = 5;
         do {
             try {
                 result = asyncGetResponse().trim();

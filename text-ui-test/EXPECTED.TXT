@@ -1,10 +1,16 @@
     ____
  __/  |_\_
 |  _     _``-.
-'-(_)---(_)--'   _  _____ _  _  ___
+'-(_)---(_)--'   _  _____ _  _  ___ 
   _ __  __ _ _ _| |/ /_ _| \| |/ __|
  | '_ \/ _` | '_| ' < | || .` | (_ |
  | .__/\__,_|_| |_|\_\___|_|\_|\___|
- |_|
+ |_|                                
 What is your name?
 Welcome to parKING, James Gosling!
+Trying to fetch data
+Completed fetch data!
+Fetching and save data sequence terminated
+Trying to load data
+Load data sequence successful!
+Load data sequence terminated

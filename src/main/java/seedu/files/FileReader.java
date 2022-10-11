@@ -1,21 +1,21 @@
 package seedu.files;
 
-import org.codehaus.jackson.map.JsonMappingException;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.ObjectReader;
-import seedu.exception.NoFileFoundException;
-import seedu.common.CommonFiles;
-import seedu.data.Carpark;
-import seedu.files.parsing.LtaJsonWrapper;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
-import java.util.Optional;
 
-public class FileLoader {
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.ObjectReader;
+
+import seedu.data.Carpark;
+import seedu.exception.NoFileFoundException;
+import seedu.files.parsing.LtaJsonWrapper;
+
+/**
+ * Deals with reading from files
+ */
+public class FileReader {
 
     /**
      * Loads .json file as an ArrayList of {@link Carpark} class
@@ -34,8 +34,8 @@ public class FileLoader {
                 return carparks;
             } catch (IOException backupException) {
                 throw new NoFileFoundException("Both the main file and backup file did not load correctly."
-                        + "Please check your directory at " + filepath + " and try again, or"
-                        + "download a sample .json file and place it in " + filepathBackup + ".");
+                    + "Please check your directory at " + filepath + " and try again, or"
+                    + "download a sample .json file and place it in " + filepathBackup + ".");
             }
         }
     }
