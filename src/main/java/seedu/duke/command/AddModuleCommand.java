@@ -16,7 +16,6 @@ public class AddModuleCommand extends Command {
         super(input);
         String moduleCode = input[1];
         this.module = Module.get(moduleCode);
-        // create selectedModule based on input
     }
 
     @Override
