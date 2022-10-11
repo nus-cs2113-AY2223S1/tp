@@ -54,14 +54,19 @@ public class UiTest {
                 + "     " + "view      " + "/view MODULES                           "
                 + "Displays all existing university modules mappings that are approved in the format\n"
                 + "                                                       "
-                + "[NUS Module Code] [NUS Module Title] [NUS Module Credits] -> [Partner University Name] "
-                + "[Partner University Module Code] [Partner University Title]\n"
+                + "[Partner University Module Code] [Partner University Module Title] "
+                +  "[Partner University Module Credits] | [NUS Module Code] [NUS Module Title] "
+                + "[NUS Module Credits] in NUS\n"
                 + "     " + "view      " + "/view LISTS                             "
                 + "Displays all existing university lists that have been created by the user\n"
                 + "     " + "view      " + "/view u/UNIVERSITY                      "
-                + "Displays all modules that have been added to the input university’s list in the format\n"
+                + "Displays all modules that have been added to the user's input university’s list in the format\n"
                 + "                                                       "
-                + "[Home University Module Code] → [Partner University Module Code]\n"
+                + "[Home University Module Code] [Home University Module Title] | "
+                + "[Partner University Module Code] [Partner University Module Title] | [Equivalent NUS Credits]\n"
+                + "     " + "view      " + "/view UNIVERSITIES\n"
+                + "Displays all universities with module mappings available in database"
+                + "     " + "view      " + "/view DATABASE u/UNIVERSITY"
                 + "     " + "add       " + "/add u/UNIVERSITY m/MODULECODE          "
                 + "Add input Partner University module code to input university list                       \n"
                 + "     " + "delete    " + "/delete u/UNIVERSITY m/MODULECODE       "
@@ -71,6 +76,7 @@ public class UiTest {
                 + "     " + "Note: Words in UPPER_CASE are parameters that you should input as a user\n"
                 + "     " + "Note: There should not be spaces in parameters, replace with underscore instead\n"
                 + "_____________________________________________________________________________\n";
+
         assertEquals(expected, Ui.printCommands());
     }
 
@@ -129,7 +135,7 @@ public class UiTest {
     @Test
     public void testPrintPuListCreatedAcknowledgement() {
         String expected = "_____________________________________________________________________________\n"
-                + "Success! You have created a new list for" + "Stanford University" + "\n"
+                + "Success! You have created a new list for " + "Stanford University" + "\n"
                 + "_____________________________________________________________________________\n";
         assertEquals(expected, Ui.printPuListCreatedAcknowledgement("Stanford University"));
     }
@@ -137,7 +143,7 @@ public class UiTest {
     @Test
     public void testPrintPuListDeletedAcknowledgement() {
         String expected = "_____________________________________________________________________________\n"
-                + "Success! You deleted the list for" + "Stanford University" + "\n"
+                + "Success! You deleted the list for " + "Stanford University" + "\n"
                 + "_____________________________________________________________________________\n";
         assertEquals(expected, Ui.printPuListDeletedAcknowledgement("Stanford University"));
     }

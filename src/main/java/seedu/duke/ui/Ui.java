@@ -2,6 +2,8 @@ package seedu.duke.ui;
 
 import java.util.ArrayList;
 
+import seedu.duke.module.ModuleMapping;
+import seedu.duke.university.University;
 import seedu.duke.user.UserModuleMapping;
 import seedu.duke.user.UserModuleMappingList;
 import seedu.duke.user.UserUniversityList;
@@ -66,14 +68,19 @@ public class Ui {
                 + SPACING + "view      " + "/view MODULES                           "
                 + "Displays all existing university modules mappings that are approved in the format\n"
                 + "                                                       "
-                + "[NUS Module Code] [NUS Module Title] [NUS Module Credits] -> [Partner University Name] "
-                + "[Partner University Module Code] [Partner University Title]\n"
+                + "[Partner University Module Code] [Partner University Module Title] "
+                +  "[Partner University Module Credits] | [NUS Module Code] [NUS Module Title] "
+                + "[NUS Module Credits] in NUS\n"
                 + SPACING + "view      " + "/view LISTS                             "
                 + "Displays all existing university lists that have been created by the user\n"
                 + SPACING + "view      " + "/view u/UNIVERSITY                      "
-                + "Displays all modules that have been added to the input university’s list in the format\n"
+                + "Displays all modules that have been added to the user's input university’s list in the format\n"
                 + "                                                       "
-                + "[Home University Module Code] → [Partner University Module Code]\n"
+                + "[Home University Module Code] [Home University Module Title] | "
+                + "[Partner University Module Code] [Partner University Module Title] | [Equivalent NUS Credits]\n"
+                + SPACING + "view      " + "/view UNIVERSITIES\n"
+                + "Displays all universities with module mappings available in database"
+                + SPACING + "view      " + "/view DATABASE u/UNIVERSITY"
                 + SPACING + "add       " + "/add u/UNIVERSITY m/MODULECODE          "
                 + "Add input Partner University module code to input university list                       \n"
                 + SPACING + "delete    " + "/delete u/UNIVERSITY m/MODULECODE       "
@@ -134,7 +141,7 @@ public class Ui {
      * @return Formatted string for the PU list created.
      */
     public static String printPuListCreatedAcknowledgement(String uniName) {
-        String message = LINE + "Success! You have created a new list for" + uniName + "\n" + LINE;
+        String message = LINE + "Success! You have created a new list for " + uniName + "\n" + LINE;
         return message;
     }
 
@@ -144,7 +151,7 @@ public class Ui {
      * @return Formatted string for the PU list deleted.
      */
     public static String printPuListDeletedAcknowledgement(String uniName) {
-        String message = LINE + "Success! You deleted the list for" + uniName + "\n" + LINE;
+        String message = LINE + "Success! You deleted the list for " + uniName + "\n" + LINE;
         return message;
     }
 
@@ -169,5 +176,24 @@ public class Ui {
         UserModuleMappingList puModulesList = puList.getMyModules();
         ArrayList<UserModuleMapping> puModules = puModulesList.getModules();
         return printModulesInUserList(puModules);
+    }
+
+    public static void printModulesInDatabase(ArrayList<ModuleMapping> modulesInDatabase){
+        for (ModuleMapping moduleMapping : modulesInDatabase){
+            System.out.println(moduleMapping.toString());
+        }
+    }
+
+    public static void printUniversitiesInDatabase(ArrayList<University> universities){
+        int i = 1;
+        for (University university : universities){
+            System.out.println(i+". " + university.toString());
+            i+=1;
+        }
+    }
+
+    public static void printUniversityName(String universityName){
+        System.out.println(universityName);
+        System.out.println(LINE);
     }
 }
