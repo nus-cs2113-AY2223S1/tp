@@ -37,16 +37,19 @@ public class RemoveCommand extends Command {
 
     private void removeFood(String[] argumentList) throws IllegalValueException {
         try {
-            if (argumentList.length < 2) {
+            if (argumentList.length != 2) {
                 throw new IllegalValueException(INVALID_REMOVE_FOOD_INPUT);
             }
+            assert argumentList.length == 2 : "Invalid remove food command";
             int index = Integer.parseInt(argumentList[1]);
             if (index <= 0 || index > foodList.getFoodListSize()) {
                 throw new IllegalValueException(INVALID_REMOVE_FOOD_INPUT);
             }
             ui.output(" This food has been deleted from the food list successfully");
             ui.output(foodList.getFood(index - 1).toString());
+            int initialFoodListSize = foodList.getFoodListSize();
             foodList.removeFood(index - 1);
+            assert foodList.getFoodListSize() == initialFoodListSize -1 : "Food not removed properly";
         } catch (NumberFormatException e) {
             throw new IllegalValueException(INVALID_REMOVE_FOOD_INPUT);
         }
