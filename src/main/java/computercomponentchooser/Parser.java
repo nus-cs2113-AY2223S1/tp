@@ -2,15 +2,18 @@ package computercomponentchooser;
 
 import computercomponentchooser.exceptions.UnknownCommandException;
 import computercomponentchooser.exceptions.DuplicateBuildException;
-
-import java.util.ArrayList;
-
 import static computercomponentchooser.ComputerComponentChooser.buildManager;
 
 public class Parser {
 
     static final int COMMAND_PARAMETER = 0;
     static final int NAME_PARAMETER = 1;
+
+    private final BuildManager buildManager;
+
+    public Parser(BuildManager buildManager) {
+        this.buildManager = buildManager;
+    }
 
 
     private static String getParameter(String line, int mode) {
@@ -20,7 +23,7 @@ public class Parser {
 
     static boolean checkBye(String line) {
         String checkLine = line.toLowerCase();
-        return line.equals("bye");
+        return checkLine.equals("bye");
     }
 
     static boolean checkEdit(String line) {
@@ -28,7 +31,7 @@ public class Parser {
         return edit.equals("edit");
     }
 
-    public static void parse(String line) {
+    public void parse(String line) {
         String command = getParameter(line, COMMAND_PARAMETER);
 
         String name;
@@ -69,8 +72,10 @@ public class Parser {
             }
         } catch (UnknownCommandException e) {
             System.out.println(e.getMessage());
+            Ui.printLine();
         } catch (DuplicateBuildException e) {
             System.out.println(e.getMessage());
+            Ui.printLine();
         }
     }
 }

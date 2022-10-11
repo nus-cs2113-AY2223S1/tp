@@ -2,14 +2,30 @@ package computercomponentchooser;
 
 public class ComputerComponentChooser {
 
-    static BuildManager buildManager = new BuildManager();
+    static BuildManager buildManager;
+    static Parser parser;
+    static EditParser editParser;
 
-    public static void main(String[] args) {
-        Ui.startSession();
+    public ComputerComponentChooser() {
 
-        Ui.readLine();
+        buildManager = new BuildManager();
 
-        Ui.endSession();
+        parser = new Parser(buildManager);
+
+        editParser = new EditParser(buildManager);
+
+        Ui ui = new Ui(parser, editParser);
+
+        ui.startSession();
+
+        ui.readLine();
+
+        ui.endSession();
     }
 
+    public static void main(String[] args) {
+
+        new ComputerComponentChooser();
+
+    }
 }
