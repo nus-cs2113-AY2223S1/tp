@@ -24,5 +24,6 @@ public class CommandDeleteClient extends CommandDelete {
         Client deletedClient = clientList.deleteClient(clientIndex);
         ui.showClientDeletedConfirmationMessage(deletedClient);
         //Update Storage
+        storage.updateClient(clientList);
     }
 }
