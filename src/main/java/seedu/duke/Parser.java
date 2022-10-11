@@ -7,11 +7,10 @@ import java.util.ArrayList;
  */
 public class Parser {
     private Commands executor;
-    private ArrayList<Media> mediaList;
+    private ReviewList mediaList;
 
     public Parser(ReviewList reviewList) {
-        this.executor = new Commands(reviewList);
-        this.mediaList = reviewList.inputs;
+        this.mediaList = reviewList;
     }
 
     public void processUserInput(String userInput) {
@@ -55,7 +54,10 @@ public class Parser {
     }
 
     public void executeList() {
-        executor.list(mediaList);
+        executor = new ListCommand(mediaList);
+        String output = executor.execute();
+        System.out.println(output);//i think UI should handle the print statement
+
     }
 
     public void executeAdd(String userInput) {
@@ -80,7 +82,9 @@ public class Parser {
                 String date = fields[3].substring(dateSpacing);
                 
                 Movie toAdd = new Movie(name, rating, date);
-                executor.add(toAdd);   
+                executor = new AddCommand(mediaList, toAdd);
+                String output = executor.execute();
+                System.out.println(output);//i think UI should handle the print statement
             }
         } catch (Exception e) {
             System.out.println("\nIncomplete or wrongly formatted command, try again.\n");
@@ -88,7 +92,9 @@ public class Parser {
     }
 
     public void executeClear() {
-        executor.clear(mediaList);
+        executor = new ClearCommand(mediaList);
+        String output = executor.execute();
+        System.out.println(output);//i think UI should handle the print statement
     }
 
     public void executeDelete(String[] words) {
@@ -96,7 +102,11 @@ public class Parser {
             if (words.length <= 1) {
                 throw new Exception();
             } else {
-                executor.delete(mediaList, words[1]);   
+                String index = words[1];
+                int deleteIndex = Integer.parseInt(index) - 1;
+                executor = new RemoveCommand(mediaList, deleteIndex);
+                String output = executor.execute();
+                System.out.println(output); //i think UI should handle the print statement
             }
         } catch (Exception e) {
             System.out.println("Wrong Command\n");
