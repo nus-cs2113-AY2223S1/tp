@@ -43,8 +43,7 @@ public class Ui {
     }
 
     /**
-     * Print out the content in the uiBuffer
-     * @param hasLineDivider
+     * Print out the content in the uiBuffer.
      */
     public void displayUi(boolean hasLineDivider) {
         if (hasLineDivider) {
@@ -68,7 +67,7 @@ public class Ui {
     }
 
     /**
-     * To store String messages into a buffer
+     * To store String messages into a buffer.
      * @param message the message to add into the buffer
      */
     public void addMessage(String message) {
@@ -82,8 +81,8 @@ public class Ui {
     }
 
     /**
-     * Display just one line of message
-     * Generally for the case of displaying just a single line of message
+     * Display just one line of message.
+     * Generally for the case of displaying just a single line of message.
      * @param message the message to be displayed
      */
     public void displayMessage(String message) {
@@ -91,7 +90,7 @@ public class Ui {
     }
 
     /**
-     * Display the line divider
+     * Display the line divider.
      */
     public void displayDivider() {
         System.out.println(LINE_DIVIDER);
