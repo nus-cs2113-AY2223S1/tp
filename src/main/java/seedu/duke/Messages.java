@@ -6,6 +6,10 @@ package seedu.duke;
 public class Messages {
     public static final String MESSAGE_WELCOME = "Welcome to Property Manager! How may I help you?";
 
+    public static final String MESSAGE_COMMAND_UNDEFINED = "OOPS!!! Command not recognised. Try again.";
+
+    public static final String MESSAGE_NUMBER_OF_LIST_RESULTS = "Number of entries in the list: ";
+
     public static final String MESSAGE_PROPERTY_ADDED = "Adding a property with the following information:";
 
     public static final String MESSAGE_CLIENT_ADDED = "Adding a client with the following information:";
@@ -15,12 +19,6 @@ public class Messages {
     public static final String MESSAGE_PAIRED = "Pairing the following client and property: ";
 
     public static final String MESSAGE_UNPAIRED = "Unpairing the following client and property: ";
-
-    public static final String MESSAGE_EXISTING_PAIR = "OOPS!! This property is currently rented by a tenant, "
-            + "try pairing with another property";
-
-    public static final String MESSAGE_NO_EXISTING_PAIR = "OOPS!! This property is not being rented by a tenant. "
-            + "Unpair unsuccessful";
 
 
     /* Add Property/Client Related Error Messages */
@@ -119,6 +117,27 @@ public class Messages {
             + "  pair ip/1 ic/5\n"
             + "  unpair ip/2 ic/1";
 
+    public static final String MESSAGE_PROPERTY_ALREADY_PAIRED = "OOPS!! This property is currently rented by a tenant,"
+            + " try pairing with another property";
+
+    public static final String MESSAGE_CLIENT_ALREADY_PAIRED = "OOPS!! This client is currently renting a property, "
+            + "try pairing with another client ";
+
+    public static final String MESSAGE_NO_EXISTING_PAIR = "OOPS!! This property is not being rented by a tenant. "
+            + "Unpair unsuccessful";
+
+    public static final String MESSAGE_CHECK_PROPERTY_RESULT = "Here are the tenants renting this property:";
+
+    public static final String MESSAGE_CHECK_PROPERTY_WRONG_FORMAT = "Format:\n"
+            + "  check -property ip/INDEX\n"
+            + "Example:\n"
+            + "  check -property ip/5";
+
+    public static final String MESSAGE_MISSING_SUB_COMMAND_TYPE_FOR_CHECK = "OOPS!!! To check, "
+            + "please specify sub-command type.\n"
+            + "For property: check -property";
+
+    public static final String MESSAGE_EMPTY_CHECK_DESCRIPTION = "OOPS!!! The description for check cannot be empty.";
 
     public static final String MESSAGE_TRY_AGAIN = "Please try again.";
 }
