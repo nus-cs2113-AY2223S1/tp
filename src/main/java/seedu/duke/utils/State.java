@@ -1,5 +1,6 @@
 package seedu.duke.utils;
 
+import seedu.duke.model.Module;
 import seedu.duke.model.SelectedModule;
 
 import java.util.List;
@@ -24,5 +25,13 @@ public class State {
     public void setSemester(int semester) {
         this.semester = semester;
     }
+    public void addSelectedModule(SelectedModule selectedModule){
+        selectedModulesList.get(semester).add(selectedModule);
+    }
+
+    public void removeSelectedModule(SelectedModule selectedModule){
+        selectedModulesList.get(semester).remove(selectedModule);
+    }
+
 
 }
