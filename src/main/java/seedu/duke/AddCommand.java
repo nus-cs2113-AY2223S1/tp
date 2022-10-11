@@ -11,8 +11,8 @@ public class AddCommand extends Commands {
     @Override
     public String execute() {
         this.reviewList.add(this.media);
-        return "Noted. I've added the following media:" + '\n' + '\t' + media.toString()
-                + "\nNow you have " + reviewList.inputs.size() + " reviews in the list.";
+        return "\tGot it. I've added the following item to the list:\n\t" + media.toString()
+                + "\n\n\tNow you have " + reviewList.inputs.size() + " reviews in the list.";
     }
 
 }

@@ -14,32 +14,32 @@ public class Parser {
     }
 
     public void processUserInput(String userInput) {
-        final String L = "list";
-        final String A = "add";
-        final String D = "delete";
-        final String C = "clear";
-        final String E = "bye";
+        final String listCommand = "list";
+        final String addCommand = "add";
+        final String deleteCommand = "delete";
+        final String clearCommand = "clear";
+        final String endCommand = "bye";
         final String NT = "";
         
         String[] words = userInput.split(" ");
 
         switch (words[0]) {
-        case E:
+        case endCommand:
             break;
             
-        case L:
+        case listCommand:
             executeList();
             break;
     
-        case A:
+        case addCommand:
             executeAdd(userInput);
             break;
     
-        case D:
+        case deleteCommand:
             executeDelete(words);
             break;
         
-        case C:
+        case clearCommand:
             executeClear();
             break;
         
@@ -111,6 +111,6 @@ public class Parser {
         } catch (Exception e) {
             System.out.println("Wrong Command\n");
         }
-       
+
     }
 }
