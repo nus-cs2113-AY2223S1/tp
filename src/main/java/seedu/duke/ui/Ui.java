@@ -85,16 +85,6 @@ public class Ui {
         return message;
     }
 
-<<<<<<< HEAD
-    //to add in acknowledgement/response for user commands
-
-    public static void printModule(UserModuleMapping module) {
-        System.out.print("NUS: ");
-        System.out.print(module.getNusCode() + " " + module.getNusTitle());
-        System.out.print(" | Partner University: ");
-        System.out.print(module.getPuCode() + " " + module.getPuTitle());
-        System.out.println(" | Equivalent NUS Credits: " + module.getNusCredit() + " MCs");
-=======
     /**
      * Displays to the user information regarding a module.
      * @return Formatted string for each module and its associated code, title, credit and PU information.
@@ -104,7 +94,6 @@ public class Ui {
             + module.getPuCode() + " " + module.getPuTitle() + " | Equivalent NUS Credits: " + module.getNusCredit()
                 + " MCs";
         return message;
->>>>>>> 35aea1e241df9aa08fdbf42c8d40193942d28d33
     }
 
     /**
@@ -112,17 +101,9 @@ public class Ui {
      * @param module The module added into the module list
      * @return Formatted string for the module added.
      */
-<<<<<<< HEAD
-    public static void printModuleAddedAcknowledgement(UserModuleMapping module) {
-        System.out.print(LINE);
-        System.out.print("Success! You added:\n");
-        printModule(module);
-        System.out.print(LINE);
-=======
     public static String printModuleAddedAcknowledgement(UserModule module) {
         String message = LINE + "Success! You added:\n" + printModule(module) + "\n" + LINE;
         return message;
->>>>>>> 35aea1e241df9aa08fdbf42c8d40193942d28d33
     }
 
     /**
@@ -130,19 +111,10 @@ public class Ui {
      * @param module The module updated in the module list
      * @return Formatted string for the module updated.
      */
-<<<<<<< HEAD
-    public static void printModuleUpdatedAcknowledgement(UserModuleMapping module) {
-        System.out.print(LINE);
-        System.out.print("Success! You updated:\n");
-        printModule(module);
-        System.out.println("With the following comment: " + module.getComment());
-        System.out.print(LINE);
-=======
     public static String printModuleUpdatedAcknowledgement(UserModule module) {
         String message = LINE + "Success! You updated:\n" + printModule(module) + "\n" + "With the following comment: "
                 + module.getComment() + "\n" + LINE;
         return message;
->>>>>>> 35aea1e241df9aa08fdbf42c8d40193942d28d33
     }
 
     /**
@@ -150,17 +122,9 @@ public class Ui {
      * @param module The module deleted from the module list
      * @return Formatted string for the module deleted.
      */
-<<<<<<< HEAD
-    public static void printModuleDeletedAcknowledgement(UserModuleMapping module) {
-        System.out.print(LINE);
-        System.out.print("Success! You deleted:\n");
-        printModule(module);
-        System.out.print(LINE);
-=======
     public static String printModuleDeletedAcknowledgement(UserModule module) {
         String message = LINE + "Success! You deleted:\n" + printModule(module) + "\n" + LINE;
         return message;
->>>>>>> 35aea1e241df9aa08fdbf42c8d40193942d28d33
     }
 
     /**
@@ -183,10 +147,6 @@ public class Ui {
         return message;
     }
 
-<<<<<<< HEAD
-    public static void printModulesInList(ArrayList<UserModuleMapping> modules) {
-        System.out.print(LINE);
-=======
     /**
      * Sequentially prints each module stored in the list.
      * @param modules The list of modules to be printed.
@@ -194,7 +154,6 @@ public class Ui {
      */
     public static String printModulesInList(ArrayList<UserModule> modules) {
         String message = LINE;
->>>>>>> 35aea1e241df9aa08fdbf42c8d40193942d28d33
         for (int i = 0; i < modules.size(); i++) {
             message += Integer.toString(i + 1);
             message += ". ";
@@ -204,17 +163,10 @@ public class Ui {
         message += LINE;
         return message;
     }
-
-<<<<<<< HEAD
-    public static void printPuList(UserUniversityList puList) {
-        UserModuleMappingList puModulesList = puList.getMyModules();
-        ArrayList<UserModuleMapping> puModules = puModulesList.getModules();
-        printModulesInList(puModules);
-=======
+    
     public static String printPuList(UserUniversityList puList) {
         UserModuleList puModulesList = puList.getMyModules();
         ArrayList<UserModule> puModules = puModulesList.getModules();
         return printModulesInList(puModules);
->>>>>>> 35aea1e241df9aa08fdbf42c8d40193942d28d33
     }
 }
