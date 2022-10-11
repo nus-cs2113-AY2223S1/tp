@@ -4,7 +4,7 @@ import seedu.duke.Ui;
 
 import java.util.Map;
 
-public class ListCommandsCommand extends Command {
+public class HelpCommand extends Command {
     private static final String COMMAND_LIST_COMMANDS = "list-commands";
     private static final String COMMAND_LIST_USERS = "list-users";
     private static final String COMMAND_LIST_ITEMS = "list-items";

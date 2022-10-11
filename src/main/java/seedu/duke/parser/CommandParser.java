@@ -8,7 +8,7 @@ import seedu.duke.command.AddTransactionCommand;
 import seedu.duke.command.AddUserCommand;
 import seedu.duke.command.Command;
 import seedu.duke.command.ExitCommand;
-import seedu.duke.command.ListCommandsCommand;
+import seedu.duke.command.HelpCommand;
 import seedu.duke.command.ListItemsCommand;
 import seedu.duke.command.ListTransactionsCommand;
 import seedu.duke.command.ListUsersCommand;
@@ -37,7 +37,7 @@ public class CommandParser {
     private static final int ARGS_INDEX = 1;
 
     private static final String COMMAND_EXIT = "bye";
-    private static final String COMMAND_LIST_COMMANDS = "list-commands";
+    private static final String COMMAND_HELP = "help";
     private static final String COMMAND_LIST_USERS = "list-users";
     private static final String COMMAND_LIST_ITEMS = "list-items";
     private static final String COMMAND_LIST_TX = "list-tx";
@@ -102,8 +102,8 @@ public class CommandParser {
         switch (command) {
         case COMMAND_EXIT:
             return new ExitCommand();
-        case COMMAND_LIST_COMMANDS:
-            return new ListCommandsCommand();
+        case COMMAND_HELP:
+            return new HelpCommand();
         case COMMAND_LIST_USERS:
             return new ListUsersCommand(userList);
         case COMMAND_LIST_ITEMS:
