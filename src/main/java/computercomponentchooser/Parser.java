@@ -2,6 +2,8 @@ package computercomponentchooser;
 
 import computercomponentchooser.exceptions.UnknownCommandException;
 import computercomponentchooser.exceptions.DuplicateBuildException;
+import computercomponentchooser.exceptions.UnlistedBuildException;
+
 import static computercomponentchooser.ComputerComponentChooser.buildManager;
 
 public class Parser {
@@ -33,7 +35,7 @@ public class Parser {
 
     public void parse(String line) {
         String command = getParameter(line, COMMAND_PARAMETER);
-
+        Build newBuild;
         String name;
         try {
             switch (command) {
@@ -48,7 +50,7 @@ public class Parser {
                 break;
             case "add":
                 name = getParameter(line, NAME_PARAMETER);
-                Build newBuild = new Build(name);
+                newBuild = new Build(name);
                 buildManager.addBuild(newBuild);
                 Ui.printLine();
                 System.out.println("You have added " + name);
@@ -57,7 +59,8 @@ public class Parser {
             //case "view":
             case "delete":
                 name = getParameter(line, NAME_PARAMETER);
-                buildManager.deleteBuild(name);
+                newBuild = new Build(name);
+                buildManager.deleteBuild(name, newBuild);
                 Ui.printLine();
                 System.out.println("You have removed " + name);
                 Ui.printLine();
@@ -74,6 +77,9 @@ public class Parser {
             System.out.println(e.getMessage());
             Ui.printLine();
         } catch (DuplicateBuildException e) {
+            System.out.println(e.getMessage());
+            Ui.printLine();
+        } catch (UnlistedBuildException e) {
             System.out.println(e.getMessage());
             Ui.printLine();
         }
