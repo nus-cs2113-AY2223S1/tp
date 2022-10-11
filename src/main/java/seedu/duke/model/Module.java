@@ -41,17 +41,17 @@ public class Module {
     }
 
     Module(String acadYear,
-            String moduleCode,
-            String title,
-            String description,
-            int moduleCredit,
-            String department,
-            String faculty,
-            List<Integer> workload,
-            List<SemesterData> semesterData,
-            String prerequisite,
-            String corequisite,
-            String preclusion) {
+           String moduleCode,
+           String title,
+           String description,
+           int moduleCredit,
+           String department,
+           String faculty,
+           List<Integer> workload,
+           List<SemesterData> semesterData,
+           String prerequisite,
+           String corequisite,
+           String preclusion) {
         this.acadYear = acadYear;
         this.moduleCode = moduleCode;
         this.title = title;

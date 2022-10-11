@@ -7,20 +7,20 @@ import seedu.duke.command.ExitCommand;
 import seedu.duke.command.HelpCommand;
 import seedu.duke.command.IncompleteCommand;
 import seedu.duke.command.InvalidModuleCommand;
-import seedu.duke.command.SearchModuleCommand;
-import seedu.duke.command.SearchStringCommand;
 import seedu.duke.command.UnknownCommand;
 import seedu.duke.command.ViewTimetableCommand;
+import seedu.duke.command.SearchModuleCodeCommand;
+import seedu.duke.command.SearchModuleNameCommand;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ParserTest {
     @Test
     public void parse_searchInput_returnNewSearchCommand() {
-        assertTrue(Parser.parse("search cs2113") instanceof SearchModuleCommand);
-        assertTrue(Parser.parse("search Cs2040c") instanceof SearchModuleCommand);
-        assertTrue(Parser.parse("search Cs") instanceof SearchModuleCommand);
-        assertTrue(Parser.parse("search software engineering") instanceof SearchStringCommand);
+        assertTrue(Parser.parse("search cs2113") instanceof SearchModuleCodeCommand);
+        assertTrue(Parser.parse("search Cs2040c") instanceof SearchModuleCodeCommand);
+        assertTrue(Parser.parse("search Cs") instanceof SearchModuleCodeCommand);
+        assertTrue(Parser.parse("search software engineering") instanceof SearchModuleNameCommand);
     }
 
     @Test
