@@ -1,4 +1,4 @@
-package recipeditor.parser;
+package recipeditor.command.parser;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -7,6 +7,7 @@ import recipeditor.command.AddCommand;
 import recipeditor.command.ExitCommand;
 import recipeditor.command.ListCommand;
 import recipeditor.command.ViewCommand;
+import recipeditor.parser.Parser;
 
 public class ParserTest {
     @Test
