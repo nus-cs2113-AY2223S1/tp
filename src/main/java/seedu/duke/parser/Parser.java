@@ -17,6 +17,7 @@ import java.util.regex.Pattern;
 
 public class Parser {
     public static Command parse(String userInput) {
+
         String[] keywords = userInput.split("\\s+");
         switch (keywords[0]) {
         case ("search"):

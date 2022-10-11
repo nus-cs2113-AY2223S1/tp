@@ -15,4 +15,9 @@ class DukeTest {
     public void sampleTest2() {
         assertEquals(2,2);
     }
+
+    @Test
+    public void sampleTest3() {
+        assertEquals(3,3);
+    }
 }

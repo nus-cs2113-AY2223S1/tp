@@ -18,4 +18,9 @@ public class ExitCommand extends Command {
     public boolean isExit() {
         return true;
     }
+
+    @Override
+    public String getExecutionMessage() {
+        return null;
+    }
 }

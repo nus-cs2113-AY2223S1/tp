@@ -7,15 +7,15 @@ import java.util.List;
 
 public class State {
 
-    private int semester = 0;
+    private int semester = 1;
     List<List<SelectedModule>> selectedModulesList;
 
     public List<SelectedModule> getSelectedModulesList() {
         return selectedModulesList.get(semester);
     }
 
-    public void setSelectedModulesList(List<SelectedModule> selectedModulesList) {
-        this.selectedModulesList.set(semester, selectedModulesList);
+    public void setSelectedModulesList(List<SelectedModule> list) {
+        this.selectedModulesList.set(semester, list);
     }
 
     public int getSemester() {
