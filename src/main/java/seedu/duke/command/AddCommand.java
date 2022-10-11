@@ -144,7 +144,8 @@ public class AddCommand extends Command {
                     + "and the UI should display acknowledgment message respectively.");
             break;
         default:
-            statsLogger.log(Level.INFO, "Exception thrown when the transaction type is unknown.");
+            statsLogger.log(Level.WARNING, "InputTransactionUnknownTypeException thrown when the transaction type"
+                    + " is unknown.");
             throw new InputTransactionUnknownTypeException();
 
         }
