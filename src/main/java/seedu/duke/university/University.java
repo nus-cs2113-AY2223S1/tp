@@ -18,7 +18,7 @@ public class University {
 
     @Override
     public String toString() {
-        return getName() + " is in " + getCountry();
+        return getName() + "(" + getCountry() + ")";
     }
 
     public String getName() {

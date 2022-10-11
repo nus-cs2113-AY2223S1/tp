@@ -99,7 +99,8 @@ public class UserStorage {
             UserModuleMappingList moduleList = new UserModuleMappingList();
             for (int i = 1; i < items.length; ++i) {
                 String[] details = items[i].split(";");
-                UserModuleMapping userModuleMapping = new UserModuleMapping(details[0], details[1], details[2], details[3], details[4], details[2]);
+                UserModuleMapping userModuleMapping = new UserModuleMapping
+                        (details[0], details[1], details[2], details[3], details[4], details[2], uniName, "");
                 moduleList.addModule(userModuleMapping);
             }
             uniList.setMyModules(moduleList);

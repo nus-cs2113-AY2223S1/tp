@@ -28,8 +28,8 @@ public class UserUniversityListTest {
     @Test
     void addModule_UclaModule_correctDetails() {
         testManager.createList("UCLA");
-        UserModuleMapping mod = new UserModuleMapping("CS101", "Programming Intro",
-                "CS1010", "Programming Methodology", "4", "4");
+        UserModuleMapping mod = new UserModuleMapping("CS101", "Programming Intro", "CS1010",
+                "Programming Methodology", "4", "4", "UCLA", "USA");
         testManager.addModule("UCLA", mod);
         assertEquals(1, testManager.getMyManager().get("UCLA").getMyModules().getModules().size());
         assertEquals("CS101", testManager.getMyManager().get("UCLA").getMyModules()
@@ -48,8 +48,8 @@ public class UserUniversityListTest {
     @Test
     void deleteModule_Ucla_correctDetails() {
         testManager.createList("UCLA");
-        UserModuleMapping mod = new UserModuleMapping("CS101", "Programming Intro",
-                "CS1010", "Programming Methodology", "4", "8");
+        UserModuleMapping mod = new UserModuleMapping("CS101", "Programming Intro", "CS1010",
+                "Programming Methodology", "4", "4", "UCLA", "USA");
         testManager.addModule("UCLA", mod);
         testManager.deleteModule("UCLA", "CS101");
         assertEquals(0, testManager.getMyManager().get("UCLA").getMyModules().getModules().size());
@@ -58,8 +58,8 @@ public class UserUniversityListTest {
     @Test
     void deleteModule_UclaWrongDetail_throwException() {
         testManager.createList("UCLA");
-        UserModuleMapping mod = new UserModuleMapping("CS101", "Programming Intro",
-                "CS1010", "Programming Methodology", "4", "8");
+        UserModuleMapping mod = new UserModuleMapping("CS101", "Programming Intro", "CS1010",
+                "Programming Methodology", "4", "4", "UCLA", "USA");
         testManager.addModule("UCLA", mod);
         assertThrows(NoSuchElementException.class,() -> testManager.deleteModule("UCLA", "CS00"));
         assertEquals(1, testManager.getMyManager().get("UCLA").getMyModules().getModules().size());
@@ -95,11 +95,11 @@ public class UserUniversityListTest {
     void displayAll_NoInput_ProperOutput() {
         testManager.createList("UCLA");
         testManager.createList("UCB");
-        UserModuleMapping mod = new UserModuleMapping("CS101", "Programming Intro",
-                "CS1010", "Programming Methodology", "4", "8");
+        UserModuleMapping mod = new UserModuleMapping("CS101", "Programming Intro", "CS1010",
+                "Programming Methodology", "4", "4", "UCLA", "USA");
         testManager.addModule("UCLA", mod);
-        UserModuleMapping mod2 = new UserModuleMapping("CS201", "Programming Intro II",
-                "CS2030", "Programming Methodology II", "4", "8");
+        UserModuleMapping mod2 = new UserModuleMapping("CS201", "Programming II", "CS2030",
+                "Programming Methodology II", "4", "8", "UCB", "USA");
         testManager.addModule("UCB", mod2);
         testManager.displayAll();
     }
