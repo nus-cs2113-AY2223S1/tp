@@ -106,7 +106,7 @@ public class AddTransactionCommand extends Command {
             Transaction transaction = new Transaction(itemId, borrowId, duration, createdAt);
             this.transactionList.add(transaction);
             this.itemList.markUnavailable(itemId);
-            //ui.confirmAddItem(transaction);
+            Ui.addTransactionMessage(transaction, transactionList.getSize());
         }
         return false;
     }

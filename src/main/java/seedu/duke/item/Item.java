@@ -60,10 +60,6 @@ public class Item {
         this.pricePerDay = newPrice;
     }
 
-    public String fileFormat() {
-        return null; //add later
-    }
-
     @Override
     public String toString() {
         String itemIcon = "[" + (isAvailable ? "Y" : "N") + "] ";

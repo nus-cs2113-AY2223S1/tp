@@ -8,7 +8,7 @@ import seedu.duke.command.AddTransactionCommand;
 import seedu.duke.command.AddUserCommand;
 import seedu.duke.command.Command;
 import seedu.duke.command.ExitCommand;
-import seedu.duke.command.ListCommandsCommand;
+import seedu.duke.command.HelpCommand;
 import seedu.duke.command.ListItemsCommand;
 import seedu.duke.command.ListTransactionsCommand;
 import seedu.duke.command.ListUsersCommand;
@@ -37,7 +37,7 @@ public class CommandParser {
     private static final int ARGS_INDEX = 1;
 
     private static final String COMMAND_EXIT = "bye";
-    private static final String COMMAND_LIST_COMMANDS = "list-commands";
+    private static final String COMMAND_HELP = "help";
     private static final String COMMAND_LIST_USERS = "list-users";
     private static final String COMMAND_LIST_ITEMS = "list-items";
     private static final String COMMAND_LIST_TX = "list-tx";
@@ -94,7 +94,7 @@ public class CommandParser {
     }
 
     public static Command createCommand(String input, UserList userList, ItemList itemList,
-                                        TransactionList txList)
+                                        TransactionList transactionList)
             throws CommandNotFoundException, InsufficientArgumentsException {
         String command = getCommand(input);
         String[] parts = getParts(input);
@@ -102,34 +102,35 @@ public class CommandParser {
         switch (command) {
         case COMMAND_EXIT:
             return new ExitCommand();
-        case COMMAND_LIST_COMMANDS:
-            return new ListCommandsCommand();
+        case COMMAND_HELP:
+            return new HelpCommand();
         case COMMAND_LIST_USERS:
             return new ListUsersCommand(userList);
         case COMMAND_LIST_ITEMS:
             return new ListItemsCommand(itemList);
         case COMMAND_LIST_TX:
-            return new ListTransactionsCommand(txList);
+            return new ListTransactionsCommand(transactionList);
         case COMMAND_VIEW_USER:
             return new ViewUserCommand(parts, userList);
         case COMMAND_VIEW_ITEM:
             return new ViewItemCommand(parts, itemList);
         case COMMAND_VIEW_TX:
-            return new ViewTransactionCommand(parts, txList);
+            return new ViewTransactionCommand(parts, transactionList);
         case COMMAND_ADD_USER:
             return new AddUserCommand(parts, userList);
         case COMMAND_ADD_ITEM:
             return new AddItemCommand(parts, userList, itemList);
         case COMMAND_ADD_TX:
-            return new AddTransactionCommand(parts, userList, itemList, txList);
+            return new AddTransactionCommand(parts, userList, itemList, transactionList);
         case COMMAND_REMOVE_USER:
-            return new RemoveUserCommand(parts, userList, itemList, txList);
+            return new RemoveUserCommand(parts, userList, itemList, transactionList);
         case COMMAND_REMOVE_ITEM:
             return new RemoveItemCommand(parts, itemList);
         case COMMAND_REMOVE_TX:
-            return new RemoveTransactionCommand(parts, itemList, txList);
+            return new RemoveTransactionCommand(parts, itemList, transactionList);
         default:
-            throw new CommandNotFoundException();
+            throw new CommandNotFoundException("This command is unrecognizable!!!\n"
+                    + "Please use list-commands command to check");
         }
     }
 }
