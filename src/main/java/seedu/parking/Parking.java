@@ -2,6 +2,11 @@ package seedu.parking;
 
 import java.io.IOException;
 
+import static seedu.common.CommonFiles.API_JSON_DIRECTORY;
+import static seedu.common.CommonFiles.API_KEY_FILE;
+import static seedu.common.CommonFiles.LTA_JSON_FILE;
+
+
 import seedu.api.Api;
 import seedu.common.CommonFiles;
 import seedu.commands.Find;
@@ -14,6 +19,7 @@ import seedu.exception.ParkingException;
 import seedu.ui.Ui;
 import seedu.parser.Parser;
 import seedu.parser.Command;
+
 import seedu.commands.Find;
 import seedu.data.Carpark;
 import seedu.parser.Command;
@@ -35,10 +41,10 @@ public class Parking {
         Find find = new Find();
         Ui ui = new Ui();
         ui.greetUser();
-        Api api = new Api();
+        Api api = new Api(LTA_JSON_FILE, API_JSON_DIRECTORY);
 
         try {
-            api.loadApiKey(); // Will give exception when file is missing or empty key
+            api.loadApiKey(API_KEY_FILE, API_JSON_DIRECTORY); // Will give exception when file is missing or empty key
             api.asyncExecuteRequest(); // Send request to API and wait asynchronously
 
             // More code here while waiting for data to come back
