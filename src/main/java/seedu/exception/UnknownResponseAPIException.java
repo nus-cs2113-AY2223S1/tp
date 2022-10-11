@@ -1,7 +1,7 @@
 package seedu.exception;
 
-public class UnknownResponseAPIException extends ParkingException {
-    public UnknownResponseAPIException (String message) {
+public class UnknownResponseApiException extends ParkingException {
+    public UnknownResponseApiException(String message) {
         super(message);
     }
 }

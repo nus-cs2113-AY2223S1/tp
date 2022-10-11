@@ -1,7 +1,7 @@
 package seedu.exception;
 
-public class UnauthorisedAccessAPIException extends ParkingException {
-    public UnauthorisedAccessAPIException() {
+public class UnauthorisedAccessApiException extends ParkingException {
+    public UnauthorisedAccessApiException() {
         super("");
     }
 

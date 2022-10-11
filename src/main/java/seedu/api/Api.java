@@ -67,7 +67,7 @@ public class Api {
      * @return JSON string response from the API.
      */
     private String asyncGetResponse()
-            throws UnauthorisedAccessAPIException, ServerNotReadyAPIException, UnknownResponseAPIException {
+            throws UnauthorisedAccessApiException, ServerNotReadyApiException, UnknownResponseApiException {
         String result = "";
         try {
             HttpResponse<String> response = responseFuture.get(1000, TimeUnit.MILLISECONDS);
@@ -83,16 +83,16 @@ public class Api {
     }
 
     private boolean isValidResponse(int responseCode)
-            throws UnauthorisedAccessAPIException, ServerNotReadyAPIException, UnknownResponseAPIException {
+            throws UnauthorisedAccessApiException, ServerNotReadyApiException, UnknownResponseApiException {
         switch (responseCode) {
         case 200:
             return true;
         case 401:
-            throw new UnauthorisedAccessAPIException();
+            throw new UnauthorisedAccessApiException();
         case 503:
-            throw new ServerNotReadyAPIException("Too many request. Trying again...");
+            throw new ServerNotReadyApiException("Too many request. Trying again...");
         default:
-            throw new UnknownResponseAPIException("Response Code: " + responseCode
+            throw new UnknownResponseApiException("Response Code: " + responseCode
                     + "\nIf problem persist contact developer. Trying again...");
         }
     }
@@ -104,13 +104,13 @@ public class Api {
      * @throws EmptyResponseException if empty/invalid response received.
      * @throws IOException if data writing fails.
      */
-    public void fetchData() throws EmptyResponseException, IOException, UnauthorisedAccessAPIException {
+    public void fetchData() throws EmptyResponseException, IOException, UnauthorisedAccessApiException {
         String result = "";
         int fetchTries = 5;
         do {
             try {
                 result = asyncGetResponse().trim();
-            } catch (ServerNotReadyAPIException | UnknownResponseAPIException e) {
+            } catch (ServerNotReadyApiException | UnknownResponseApiException e) {
                 System.out.println(e.getMessage());
             } finally {
                 fetchTries--;

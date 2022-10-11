@@ -1,7 +1,7 @@
 package seedu.exception;
 
-public class ServerNotReadyAPIException extends ParkingException{
-    public ServerNotReadyAPIException(String message) {
+public class ServerNotReadyApiException extends ParkingException {
+    public ServerNotReadyApiException(String message) {
         super(message);
     }
 }
