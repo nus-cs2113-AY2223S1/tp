@@ -6,6 +6,7 @@ package seedu.parser;
 public class Parser {
     private static final String COMMAND_FIND = "find";
     private static final String COMMAND_EXIT = "bye";
+    private static final String COMMAND_UPDATE = "update";
 
     /**
      * To convert the user input into commands for the program.
@@ -18,11 +19,16 @@ public class Parser {
             command = Command.BYE;
         } else {
             String instruction = input.split("\\s+")[0];
-            //use switch format when there are more commands in future
-            if (instruction.equals(COMMAND_FIND)) {
+            switch (instruction) {
+            case COMMAND_FIND:
                 command = Command.FIND;
-            } else {
+                break;
+            case COMMAND_UPDATE:
+                command = Command.UPDATE;
+                break;
+            default:
                 command = Command.INVALID;
+                break;
             }
         }
         return command;

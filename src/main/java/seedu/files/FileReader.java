@@ -12,6 +12,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.ObjectReader;
 
 import seedu.data.Carpark;
+import seedu.exception.EmptySecretFileException;
 import seedu.exception.NoFileFoundException;
 import seedu.files.parsing.LtaJsonWrapper;
 
@@ -59,6 +60,17 @@ public class FileReader {
 
     /**
      * Returns data in string from file.
+
+     * @param filepath File path.
+     * @return Data string in file.
+     * @throws IOException if file not found.
+     */
+    public static String readStringFromTxt(Path filepath) throws IOException {
+        File file = new File(filepath.toString());
+        Scanner scanner = new Scanner(file);
+        return scanner.nextLine().trim();
+    }
+    /**
      * @param filePath File path.
      * @param directoryPath Directory path.
      * @param createDirectory if true and file does not exist, it will create.

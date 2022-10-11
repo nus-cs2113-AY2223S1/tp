@@ -134,6 +134,13 @@ public class Ui {
     }
 
     /**
+     * Show message when data is successfully updated
+     */
+    public void showUpdateDataSuccess() {
+        print("Updated data successfully!");
+    }
+
+    /**
      * Changes the scanner for the Ui object. To be used for JUnit testing.
      *
      * @param in New Scanner object to be used.

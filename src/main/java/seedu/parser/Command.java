@@ -6,5 +6,6 @@ package seedu.parser;
 public enum Command {
     FIND,
     BYE,
-    INVALID
+    INVALID,
+    UPDATE
 }

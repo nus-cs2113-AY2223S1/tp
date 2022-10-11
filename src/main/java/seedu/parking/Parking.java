@@ -3,6 +3,7 @@ package seedu.parking;
 import java.io.IOException;
 
 import seedu.api.Api;
+import seedu.common.CommonFiles;
 import seedu.commands.Find;
 import seedu.common.CommonFiles;
 import seedu.data.Carpark;
@@ -10,6 +11,11 @@ import seedu.data.CarparkList;
 import seedu.exception.InvalidFindCommandException;
 import seedu.exception.NoCarparkFoundException;
 import seedu.exception.ParkingException;
+import seedu.ui.Ui;
+import seedu.parser.Parser;
+import seedu.parser.Command;
+import seedu.commands.Find;
+import seedu.data.Carpark;
 import seedu.parser.Command;
 import seedu.parser.Parser;
 import seedu.ui.Ui;
@@ -83,6 +89,18 @@ public class Parking {
                 } catch (InvalidFindCommandException | NoCarparkFoundException exception) {
                     System.out.println(exception.getMessage());
                 }
+                break;
+            case UPDATE:
+                try {
+                    carparkList = new CarparkList(CommonFiles.LTA_FILE_PATH, CommonFiles.LTA_BACKUP_FILE_PATH);
+                    ui.showUpdateDataSuccess();
+                } catch (ParkingException e) {
+                    System.out.println(e.getMessage());
+                } finally {
+                    System.out.println("Update data terminated"); // Debug line
+                }
+                break;
+            default:
                 break;
             }
         }
