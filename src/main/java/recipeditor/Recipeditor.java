@@ -1,5 +1,6 @@
 package recipeditor;
 
+import recipeditor.parser.Parser;
 import recipeditor.ui.Ui;
 
 import recipeditor.command.Command;
@@ -17,9 +18,8 @@ public class Recipeditor {
      * Or do we want to have instances of them?
      */
 
-
     public static void main(String[] args) {
-        run(args); // I am following the address book
+        run(args);
     }
 
     private static void run(String[] args) {
@@ -30,6 +30,7 @@ public class Recipeditor {
 
     /**
      * Greetings and Load recipe titles to the RecipeList.
+     *
      * @param args arguments
      */
     private static void start(String[] args) {
