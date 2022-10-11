@@ -12,7 +12,6 @@ public class Parser {
     static final int COMMAND_PARAMETER = 0;
     static final int NAME_PARAMETER = 1;
 
-    public String editBuild;
 
     private static String getParameter(String line, int mode) {
         String[] lineSplit = line.split(" ", 2);

@@ -1,7 +1,6 @@
 package computercomponentchooser;
 
 import java.util.Scanner;
-import computercomponentchooser.Build;
 
 public class Ui {
     /**
