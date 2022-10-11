@@ -11,6 +11,12 @@ public class EditParser {
 
     public static String buildName;
 
+    private final BuildManager buildManager;
+
+    public EditParser(BuildManager buildManager) {
+        this.buildManager = buildManager;
+    }
+
     private static String getParameter(String line, int mode) {
         String[] lineSplit = line.split(" ", 2);
         return lineSplit[mode];
@@ -21,7 +27,7 @@ public class EditParser {
         return back.equals("back");
     }
 
-    public static void parse(String line) {
+    public void parse(String line) {
         String command = getParameter(line, COMMAND_PARAMETER).toLowerCase();
 
         String content;
@@ -30,7 +36,7 @@ public class EditParser {
             switch (command) {
             case "add":
                 content = getParameter(line, NAME_PARAMETER);
-                editBuild = BuildManager.getBuild(buildName);
+                editBuild = buildManager.getBuild(buildName);
                 editBuild.addContents(content);
                 Ui.printLine();
                 System.out.println("You have added " + content);
@@ -38,15 +44,14 @@ public class EditParser {
                 break;
             case "delete":
                 content = getParameter(line, NAME_PARAMETER);
-                editBuild = BuildManager.getBuild(buildName);
+                editBuild = buildManager.getBuild(buildName);
                 editBuild.deleteContents(content);
                 Ui.printLine();
                 System.out.println("You have removed " + content);
                 Ui.printLine();
                 break;
-
             case "list":
-                editBuild = BuildManager.getBuild(buildName);
+                editBuild = buildManager.getBuild(buildName);
                 Ui.printLine();
                 System.out.println("Computer parts for " + buildName + ":");
                 System.out.println(editBuild.toString());
@@ -66,6 +71,7 @@ public class EditParser {
             }
         } catch (UnknownCommandException e) {
             System.out.println(e.getMessage());
+            Ui.printLine();
         }
     }
 }

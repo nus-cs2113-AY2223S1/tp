@@ -26,6 +26,15 @@ public class Ui {
      */
     private static final String LINEBREAK = "____________________________________________________________";
 
+    private final Parser parser;
+
+    private final EditParser editParser;
+
+    public Ui(Parser parser, EditParser editParser) {
+        this.parser = parser;
+        this.editParser = editParser;
+    }
+
     /**
      * prints the LINEBREAK String.
      */
@@ -40,7 +49,7 @@ public class Ui {
         System.out.println("Hello from\n" + LOGO);
     }
 
-    static void startSession() {
+    void startSession() {
         Ui.printLogo();
         Ui.printLine();
         System.out.println("Hello! ComputerComponentChooser at your service!");
@@ -51,7 +60,7 @@ public class Ui {
     /**
      * Prints the User Interface associated with the end of the program.
      */
-    static void endSession() {
+    void endSession() {
         Ui.printLine();
         System.out.println("Bye. Hope to see you again soon!");
         Ui.printLine();
@@ -60,18 +69,18 @@ public class Ui {
     /**
      * Reads in user/stored input line by line.
      */
-    public static void readLine() {
+    public void readLine() {
         Scanner in = new Scanner(System.in);
         String line;
         do {
             line = in.nextLine();
             if (Parser.checkEdit(line)) {
                 while (!EditParser.checkBack(line)) {
-                    EditParser.parse(line);
+                    editParser.parse(line);
                     line = in.nextLine();
                 }
             }
-            Parser.parse(line);
+            parser.parse(line);
         } while (!Parser.checkBye(line));
     }
 }
