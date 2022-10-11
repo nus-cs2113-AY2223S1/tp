@@ -27,7 +27,7 @@ public class Parser {
         case DeleteCommand.COMMAND_TYPE:
             return new DeleteCommand(0); // TODO: This is dummy variable only
         case ViewCommand.COMMAND_TYPE:
-            return new ViewCommand();
+            return new ViewCommand(0); //TODO: this is dummy variable only
         default:
             return new InvalidCommand();
         }
