@@ -5,6 +5,7 @@ import seedu.duke.command.CommandBye;
 import seedu.duke.exception.EmptyClientDetailException;
 import seedu.duke.exception.EmptyClientIndexDeleteException;
 import seedu.duke.exception.EmptyCommandAddDetailException;
+import seedu.duke.exception.EmptyCommandCheckDetailException;
 import seedu.duke.exception.EmptyCommandDeleteDetailException;
 import seedu.duke.exception.EmptyCommandPairUnpairDetailsException;
 import seedu.duke.exception.ExistingPairException;
@@ -14,6 +15,7 @@ import seedu.duke.exception.InvalidBudgetFormatException;
 import seedu.duke.exception.InvalidClientIndexDeleteException;
 import seedu.duke.exception.InvalidContactNumberException;
 import seedu.duke.exception.InvalidEmailException;
+import seedu.duke.exception.MissingCheckPropertyFlagException;
 import seedu.duke.exception.MissingClientDetailException;
 import seedu.duke.exception.MissingClientFlagException;
 import seedu.duke.exception.MissingPairUnpairFlagException;
@@ -21,6 +23,7 @@ import seedu.duke.exception.NoExistingPairException;
 import seedu.duke.exception.NotIntegerException;
 import seedu.duke.exception.NotValidIndexException;
 import seedu.duke.exception.UndefinedSubCommandAddTypeException;
+import seedu.duke.exception.UndefinedSubCommandCheckTypeException;
 import seedu.duke.exception.UndefinedSubCommandDeleteTypeException;
 
 import java.io.IOException;
@@ -89,6 +92,12 @@ public class Duke {
                 ui.showExistingPairMessage();
             } catch (NoExistingPairException e) {
                 ui.showNoExistingPairMessage();
+            } catch (MissingCheckPropertyFlagException e) {
+                ui.showCheckPropertyWrongFormatMessage();
+            } catch (UndefinedSubCommandCheckTypeException e) {
+                ui.showUndefinedSubCommandCheckTypeMessage();
+            } catch (EmptyCommandCheckDetailException e) {
+                ui.showEmptyCommandCheckDetailException();
             }
         } while (!isCommandBye);
     }

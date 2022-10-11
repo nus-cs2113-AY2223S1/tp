@@ -1,12 +1,16 @@
 package seedu.duke;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import static seedu.duke.Messages.MESSAGE_ADD_CLIENT_WRONG_FORMAT;
+import static seedu.duke.Messages.MESSAGE_CHECK_PROPERTY_RESULT;
+import static seedu.duke.Messages.MESSAGE_CHECK_PROPERTY_WRONG_FORMAT;
 import static seedu.duke.Messages.MESSAGE_CLIENT_ADDED;
 import static seedu.duke.Messages.MESSAGE_CLIENT_DELETED;
 import static seedu.duke.Messages.MESSAGE_CLIENT_INPUT_EXAMPLE;
 import static seedu.duke.Messages.MESSAGE_EMPTY_ADD_DESCRIPTION;
+import static seedu.duke.Messages.MESSAGE_EMPTY_CHECK_DESCRIPTION;
 import static seedu.duke.Messages.MESSAGE_EMPTY_CLIENT_DESCRIPTION;
 import static seedu.duke.Messages.MESSAGE_EMPTY_COMMAND_PAIR_UNPAIR;
 import static seedu.duke.Messages.MESSAGE_EXISTING_PAIR;
@@ -17,7 +21,9 @@ import static seedu.duke.Messages.MESSAGE_INVALID_CLIENT_INDEX;
 import static seedu.duke.Messages.MESSAGE_INVALID_CONTACT_NUMBER;
 import static seedu.duke.Messages.MESSAGE_INVALID_EMAIL;
 import static seedu.duke.Messages.MESSAGE_MISSING_SUB_COMMAND_TYPE_FOR_ADD;
+import static seedu.duke.Messages.MESSAGE_MISSING_SUB_COMMAND_TYPE_FOR_CHECK;
 import static seedu.duke.Messages.MESSAGE_MISSING_SUB_COMMAND_TYPE_FOR_DELETE;
+import static seedu.duke.Messages.MESSAGE_NUMBER_OF_LIST_RESULTS;
 import static seedu.duke.Messages.MESSAGE_TRY_AGAIN;
 import static seedu.duke.Messages.MESSAGE_NOT_INTEGER;
 import static seedu.duke.Messages.MESSAGE_NOT_VALID_INDEX;
@@ -153,4 +159,26 @@ public class Ui {
         showToUser(MESSAGE_NO_EXISTING_PAIR);
     }
 
+    public void showCheckPropertyWrongFormatMessage() {
+        showToUser(MESSAGE_CHECK_PROPERTY_WRONG_FORMAT);
+    }
+
+    public void showUndefinedSubCommandCheckTypeMessage() {
+        showToUser(MESSAGE_MISSING_SUB_COMMAND_TYPE_FOR_CHECK);
+    }
+
+    public void showEmptyCommandCheckDetailException() {
+        showToUser(MESSAGE_EMPTY_CHECK_DESCRIPTION);
+    }
+
+    public void showCheckProperty(ArrayList<String> tenants) {
+        showToUser(MESSAGE_CHECK_PROPERTY_RESULT);
+        int count = 0;
+        for (String tenant : tenants) {
+            // Remove brackets at first and last indexes of tenant(client) string
+            String tenantInfo = tenant.substring(1, tenant.length() - 1);
+            showToUser(String.format("  %d. %s", count++, tenantInfo));
+        }
+        showToUser(MESSAGE_NUMBER_OF_LIST_RESULTS + count);
+    }
 }

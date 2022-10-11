@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -64,6 +65,19 @@ public class PairingList {
         String clientPairingData = convertToPairingData(client);
         return clientPropertyPairs.containsKey(clientPairingData);
     }
+
+    public ArrayList<String> getPropertyTenants(Property property) {
+        String propertyPairingData = convertToPairingData(property);
+        ArrayList<String> tenants = new ArrayList<>();
+
+        for (String clientPairingData : clientPropertyPairs.keySet()) {
+            if (clientPropertyPairs.get(clientPairingData).equals(propertyPairingData)) {
+                tenants.add(clientPairingData);
+            }
+        }
+        return tenants;
+    }
+
 
     /**
      * Converts client pairing data to a suitable string format.
