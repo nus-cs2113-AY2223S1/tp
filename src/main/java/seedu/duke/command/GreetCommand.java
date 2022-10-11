@@ -3,6 +3,7 @@ package seedu.duke.command;
 import seedu.duke.biometrics.Biometrics;
 import seedu.duke.Ui;
 import seedu.duke.exercise.ExerciseList;
+import seedu.duke.food.FoodList;
 
 public class GreetCommand extends Command {
 
@@ -19,7 +20,7 @@ public class GreetCommand extends Command {
     }
 
     @Override
-    public void setData(Ui ui, Biometrics biometrics, ExerciseList exerciseList) {
+    public void setData(Ui ui, Biometrics biometrics, ExerciseList exerciseList, FoodList foodList) {
 
     }
 

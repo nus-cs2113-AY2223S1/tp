@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.duke.food;
 
 public class Food {
     private String foodDescription;

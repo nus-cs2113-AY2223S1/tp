@@ -7,6 +7,7 @@ import seedu.duke.Parser;
 import seedu.duke.Ui;
 import seedu.duke.exception.IllegalValueException;
 import seedu.duke.exercise.ExerciseList;
+import seedu.duke.food.FoodList;
 
 import java.security.Key;
 import java.util.Arrays;
@@ -99,7 +100,7 @@ public class SetCommand extends Command {
     }
 
     @Override
-    public void setData(Ui ui, Biometrics biometrics, ExerciseList exerciseList) {
+    public void setData(Ui ui, Biometrics biometrics, ExerciseList exerciseList, FoodList foodList) {
         this.ui = ui;
         this.biometrics = biometrics;
     }
