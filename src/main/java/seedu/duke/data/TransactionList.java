@@ -19,26 +19,68 @@ public class TransactionList {
 
     private static ArrayList<Transaction> transactions;
 
+    /**
+     * Initialises the variables of the TransactionList class.
+     */
     public TransactionList() {
         this.transactions = new ArrayList<>();
     }
 
+    /**
+     * Gets a specific entry from the transactions list, to be used by other classes.
+     *
+     * @param index An index of the transaction that is to be retrieved.
+     * @return The transaction entry from the transactions list.
+     */
     public Transaction getEntry(int index) {
         return transactions.get(index);
     }
 
-    public static String deleteTransaction(TransactionList input, int index) {
-        Transaction transaction = input.getEntry(index - 1);
+    /**
+     * Gets the number of transactions in the transactions list.
+     *
+     * @return An integer value that indicates the number of transactions.
+     */
+    public int size() {
+        return transactions.size();
+    }
+
+    /**
+     * Deletes a transaction from the transactions list based on the specified index.
+     *
+     * @param index An index of the transaction that is to be retrieved.
+     * @return A string tht states the details of the deleted transaction.
+     */
+    public static String deleteTransaction(int index) {
+        Transaction transaction = transactions.get(index - 1);
         transactions.remove(index - 1);
         return transaction.toString();
     }
 
+    /**
+     * Adds a transaction of class type Expense into the transactions list.
+     *
+     * @param description   More information regarding the transaction, written without any space.
+     * @param amount        Value of the transaction in numerical form.
+     * @param category      A category for the transaction.
+     * @param date          Date of the transaction with format in "yyyyMMdd".
+     * @return A string that states the details of the added expense transaction.
+     */
     public String addExpense(String description, int amount, String category, LocalDate date) {
         Expense expense = new Expense(description, amount, category, date);
         transactions.add(expense);
         return expense.toString();
     }
 
+    /**
+     * Adds a transaction of class type Income into the transactions list.
+     *
+     * @param description   More information regarding the transaction, written without any space.
+     * @param amount        Value of the transaction in numerical form.
+     * @param category      A category for the transaction.
+     * @param date          Date of the transaction with format in "yyyyMMdd".
+     * @return A string that states the details of the added income transaction.
+     */
     public String addIncome(String description, int amount, String category, LocalDate date) {
         Income income = new Income(description, amount, category, date);
         transactions.add(income);
@@ -48,8 +90,8 @@ public class TransactionList {
     /**
      * Checks whether the transaction belongs to the Income or Expense class type.
      *
-     * @param transaction The transaction record from the transactions list.
-     * @param classType The transaction class type that is either Income or Expense.
+     * @param transaction   The transaction record from the transactions list.
+     * @param classType     The transaction class type that is either Income or Expense.
      * @return A boolean value indicating whether transaction record belongs to the given class type.
      * @throws InputTransactionUnknownTypeException If class type cannot be found in the packages.
      */
@@ -60,10 +102,10 @@ public class TransactionList {
     /**
      * Checks whether a transaction fulfills the given filter criteria.
      *
-     * @param transaction The transaction record from the transactions list.
-     * @param type The type of transaction.
-     * @param category A category for the transaction.
-     * @param date Date of the transaction with format in "yyyyMMdd".
+     * @param transaction   The transaction record from the transactions list.
+     * @param type          The type of transaction.
+     * @param category      A category for the transaction.
+     * @param date          Date of the transaction with format in "yyyyMMdd".
      * @return A string containing the formatted transaction list.
      * @throws InputTransactionUnknownTypeException If class type cannot be found in the packages.
      */
@@ -83,9 +125,9 @@ public class TransactionList {
     /**
      * List all or some transactions based on selection.
      *
-     * @param type The type of transaction.
-     * @param category A category for the transaction.
-     * @param date Date of the transaction with format in "yyyyMMdd".
+     * @param type      The type of transaction.
+     * @param category  A category for the transaction.
+     * @param date      Date of the transaction with format in "yyyyMMdd".
      * @return A string containing the formatted transaction list.
      * @throws InputTransactionUnknownTypeException If class type cannot be found in the packages.
      */
@@ -119,11 +161,10 @@ public class TransactionList {
         return transactionsList;
     }
 
+    /**
+     * Purges all records in the transactions list.
+     */
     public static void purgeTransactions() {
         transactions.clear();
-    }
-
-    public int size() {
-        return transactions.size();
     }
 }
