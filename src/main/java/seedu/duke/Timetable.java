@@ -27,4 +27,8 @@ public class Timetable {
         }
         return list.toString();
     }
+
+    public void deleteModule(int index){
+        listOfModules.remove(index - 1); // the nth module in list has index n-1
+    }
 }
