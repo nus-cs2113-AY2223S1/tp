@@ -1,21 +1,16 @@
 package seedu.duke.item;
 
-import seedu.duke.id.IdGenerator;
-import seedu.duke.user.User;
+import seedu.duke.transaction.TransactionList;
 
 public class Item {
     private final String name;
-    private final String id;
     private final String ownerId;
     private double pricePerDay;
-    private boolean isAvailable;
     private final Category.Categories category;
 
     public Item(String name, int categoryNumber, double price, String ownerId) {
-        this.id = IdGenerator.generateId();
         this.name = name;
         this.pricePerDay = price;
-        this.isAvailable = true;
         this.ownerId = ownerId;
         this.category = Category.mapCategory(categoryNumber);
     }
@@ -32,42 +27,20 @@ public class Item {
         return category;
     }
 
-    public void setAsAvailable() {
-        isAvailable = true;
+    public boolean isAvailable(TransactionList transactionList) {
+        return !transactionList.hasThisItemBeingBorrowed(name);
     }
 
-    public void setAsNotAvailable() {
-        isAvailable = false;
+    public String getStatus(TransactionList transactionList) {
+        return (this.isAvailable(transactionList) ? "YES" : "NO");
     }
 
-    public boolean isAvailable() {
-        return isAvailable;
-    }
-
-    public String getItemId() {
-        return id;
-    }
-
-    public String getDescription() {
-        return this.name + " loaned for: " + pricePerDay;
-    }
-
-    public String getStatus() {
-        return (this.isAvailable ? "YES" : "NO");
-    }
-
-    public void updatePrice(int newPrice) {
-        this.pricePerDay = newPrice;
-    }
-
-    @Override
-    public String toString() {
-        String itemIcon = "[" + (isAvailable ? "Y" : "N") + "] ";
-        String itemName = "Item: " + name + "(ID: " + id + ") ";
+    public String toString(TransactionList transactionList) {
+        String itemIcon = "[" + (isAvailable(transactionList) ? "Y" : "N") + "] ";
+        String itemName = "Item: " + name + " ";
         String itemCategory = "Category: " + category.toString() + " ";
         String itemOwner = "Owner: " + getOwnerId() + " ";
         String itemPrice = "PricePerDay: " + pricePerDay;
         return itemIcon + itemName + itemCategory + itemOwner + itemPrice;
     }
-
 }

@@ -12,24 +12,31 @@ public class Transaction {
     private final String borrower;
     private final int duration;
     private final LocalDate createdAt;
-    private LocalDate returnedAt;
-    private boolean isFinished;
+    private final LocalDate returnedAt;
 
     public Transaction(String itemId, String borrowerId, int duration, LocalDate createdAt) {
         this.transactionId = IdGenerator.generateId();
         this.item = itemId;
         this.borrower = borrowerId;
         this.duration = duration;
-        this.isFinished = false;
         this.createdAt = createdAt;
-        this.returnedAt = null;
+        this.returnedAt = createdAt.plusDays(duration);
+    }
+
+    public Transaction(String transactionId, String itemId, String borrowerId, int duration, LocalDate createdAt) {
+        this.transactionId = transactionId;
+        this.item = itemId;
+        this.borrower = borrowerId;
+        this.duration = duration;
+        this.createdAt = createdAt;
+        this.returnedAt = createdAt.plusDays(duration);
     }
 
     public String getTxId() {
         return transactionId;
     }
 
-    public String getItem() {
+    public String getItemId() {
         return item;
     }
 
@@ -37,49 +44,27 @@ public class Transaction {
         return borrower;
     }
 
-    public Integer getDuration() {
-        return duration;
+    public LocalDate getReturnDate() {
+        return returnedAt;
     }
 
     public boolean isFinished() {
-        return isFinished;
-    }
-
-    public void setAsFinished() {
-        this.isFinished = true;
-        this.returnedAt = LocalDate.now();
-    }
-
-    public void setAsNotFinished() {
-        this.isFinished = false;
-        this.returnedAt = null;
-    }
-
-    public LocalDate getReturnDate() {
-        return createdAt.plusDays(duration);
-    }
-
-    public boolean isOverdue() {
-        if (!isFinished) {
-            return getReturnDate().isBefore(LocalDate.now());
-        }
-        return false;
+        return returnedAt.isBefore(LocalDate.now());
     }
 
     @Override
     public String toString() {
-        String transactionIcon = "[" + (isFinished ? "X" : " ") + "] ";
+        String transactionIcon = "[" + (isFinished() ? "X" : " ") + "] ";
         String transactionId = "TransactionID: " + this.transactionId + " ";
         String itemId = "ItemID: " + this.item + " ";
         String usersId = "BorrowerID: " + this.borrower + " ";
 
-        if (!isFinished) {
-            String overdueDays = " (" + ChronoUnit.DAYS.between(getReturnDate(), LocalDate.now()) + "day(s) overdue";
+        if (!isFinished()) {
             String remainDays = " (" + ChronoUnit.DAYS.between(LocalDate.now(), getReturnDate()) + " day(s) remaining)";
-            String returnDate = "ReturnDate: " + getReturnDate() + (isOverdue() ? overdueDays : remainDays);
+            String returnDate = "ReturnDate: " + DateParser.formatDateToString(returnedAt) + remainDays;
             return transactionIcon + transactionId + itemId + usersId + returnDate;
         }
-        String returnedDate = "ReturnedOn: " + DateParser.formatDateToString(returnedAt);
+        String returnedDate = "ReturnedDate: " + DateParser.formatDateToString(returnedAt);
         return transactionIcon + transactionId + itemId + usersId + returnedDate;
     }
 }

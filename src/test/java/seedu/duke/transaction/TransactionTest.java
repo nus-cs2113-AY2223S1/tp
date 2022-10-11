@@ -11,21 +11,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class TransactionTest {
-
-    @Test
-    void setAsFinished_expectTrue() {
-        Transaction transaction = new Transaction("6650266082", "6650266082", 5, LocalDate.parse("2022-10-03"));
-        transaction.setAsFinished();
-        assertTrue(transaction.isFinished());
-    }
-
-    @Test
-    void setAsNotFinished_expectFalse() {
-        Transaction transaction = new Transaction("6650266082", "6650266082", 5, LocalDate.parse("2022-10-03"));
-        transaction.setAsNotFinished();
-        assertFalse(transaction.isFinished());
-    }
-
     @Test
     void getReturnDate_fiveDaysDuration_expectReturnDate5DaysFromCreatedDate() {
         Transaction transaction = new Transaction("6650266082", "6650266082", 5, LocalDate.parse("2022-01-03"));
@@ -33,16 +18,15 @@ class TransactionTest {
     }
 
     @Test
-    void isOverdue_isNotFinished_expectTrue() {
+    void isFinished_finishedTx_expectTrue() {
         Transaction transaction = new Transaction("6650266082", "6650266082", 5, LocalDate.parse("2022-10-03"));
-        assertTrue(transaction.isOverdue());
+        assertTrue(transaction.isFinished());
     }
 
     @Test
-    void isOverdue_isFinished_expectFalse() {
-        Transaction transaction = new Transaction("6650266082", "6650266082", 5, LocalDate.parse("2022-10-03"));
-        transaction.setAsFinished();
-        assertFalse(transaction.isOverdue());
+    void isFinished_notFinishedTx_expectFalse() {
+        Transaction transaction = new Transaction("6650266082", "6650266082", 100, LocalDate.parse("2022-10-03"));
+        assertFalse(transaction.isFinished());
     }
 
 }

@@ -37,16 +37,10 @@ public class RemoveTransactionCommand extends Command {
         return args;
     }
 
-    private void markAvailableForItem(String transactionId) throws ItemNotFoundException, TransactionNotFoundException {
-        String itemId = transactionList.getTransactionById(transactionId).getItem();
-        itemList.markAvailable(itemId);
-    }
-
     public boolean executeCommand()
             throws TransactionNotFoundException, ItemNotFoundException, InvalidArgumentException {
         String[] args = getArgsRemoveTxCmd();
         String txId = args[0].trim();
-        markAvailableForItem(txId);
         Transaction transaction = transactionList.getTransactionById(txId);
         transactionList.deleteTransaction(txId);
         Ui.deleteTransactionMessage(transaction, transactionList.getSize());

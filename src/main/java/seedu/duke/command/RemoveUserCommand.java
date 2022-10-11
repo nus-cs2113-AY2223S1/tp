@@ -47,15 +47,15 @@ public class RemoveUserCommand extends Command {
         return false;
     }
 
-    public boolean isLending(String username) throws InvalidUserException {
-        if (itemList.hasThisLender(username)) {
+    public boolean isLending(String username, TransactionList transactionList) throws InvalidUserException {
+        if (itemList.hasThisLender(username, transactionList)) {
             throw new InvalidUserException("This user is currently lending something");
         }
         return false;
     }
 
-    public boolean canDeleteUser(String username) throws InvalidUserException {
-        return !isBorrowing(username) && !isLending(username);
+    public boolean canDeleteUser(String username, TransactionList transactionList) throws InvalidUserException {
+        return !isBorrowing(username) && !isLending(username, transactionList);
     }
 
     public boolean executeCommand()
@@ -63,9 +63,9 @@ public class RemoveUserCommand extends Command {
         String[] args = getArgsRemoveUserCmd();
         String username = args[0];
         User user = userList.getUserById(username);
-        if (canDeleteUser(username)) {
+        if (canDeleteUser(username, transactionList)) {
             userList.deleteUser(username);
-            itemList.deleteAllItemOfAnUser(username);
+            itemList.deleteAllItemOfAnUser(username, transactionList);
         }
         Ui.deleteUserMessage(user, userList.getSize());
         return false;

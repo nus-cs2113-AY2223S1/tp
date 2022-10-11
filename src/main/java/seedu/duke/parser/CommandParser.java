@@ -107,7 +107,7 @@ public class CommandParser {
         case COMMAND_LIST_USERS:
             return new ListUsersCommand(userList);
         case COMMAND_LIST_ITEMS:
-            return new ListItemsCommand(itemList);
+            return new ListItemsCommand(itemList, transactionList);
         case COMMAND_LIST_TX:
             return new ListTransactionsCommand(transactionList);
         case COMMAND_VIEW_USER:
@@ -119,13 +119,13 @@ public class CommandParser {
         case COMMAND_ADD_USER:
             return new AddUserCommand(parts, userList);
         case COMMAND_ADD_ITEM:
-            return new AddItemCommand(parts, userList, itemList);
+            return new AddItemCommand(parts, userList, itemList, transactionList);
         case COMMAND_ADD_TX:
             return new AddTransactionCommand(parts, userList, itemList, transactionList);
         case COMMAND_REMOVE_USER:
             return new RemoveUserCommand(parts, userList, itemList, transactionList);
         case COMMAND_REMOVE_ITEM:
-            return new RemoveItemCommand(parts, itemList);
+            return new RemoveItemCommand(parts, itemList, transactionList);
         case COMMAND_REMOVE_TX:
             return new RemoveTransactionCommand(parts, itemList, transactionList);
         default:

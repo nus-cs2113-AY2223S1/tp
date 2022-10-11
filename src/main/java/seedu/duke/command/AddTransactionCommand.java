@@ -54,7 +54,7 @@ public class AddTransactionCommand extends Command {
     }
 
     private boolean isValidItem(String id) throws InvalidItemException, ItemNotFoundException {
-        if (itemList.getItemById(id).isAvailable()) {
+        if (itemList.getItemById(id).isAvailable(transactionList)) {
             return true;
         }
         throw new InvalidItemException("This item is currently unavailable");
@@ -105,7 +105,6 @@ public class AddTransactionCommand extends Command {
             LocalDate createdAt = LocalDate.parse(args[3]);
             Transaction transaction = new Transaction(itemId, borrowId, duration, createdAt);
             this.transactionList.add(transaction);
-            this.itemList.markUnavailable(itemId);
             Ui.addTransactionMessage(transaction, transactionList.getSize());
         }
         return false;

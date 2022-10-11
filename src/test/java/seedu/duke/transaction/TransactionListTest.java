@@ -38,20 +38,18 @@ class TransactionListTest {
     }
 
     @Test
-    void markFinished_markTheFirstTransaction_expectTrue() throws TransactionNotFoundException {
+    void markFinished_finishedTx_expectTrue() throws TransactionNotFoundException {
         TransactionList transactionList = new TransactionList();
         Transaction transaction = new Transaction("6650266082", "6650266082", 5, LocalDate.parse("2022-10-03"));
         transactionList.add(transaction);
-        transactionList.markFinished(transaction.getTxId());
         assertTrue(transactionList.getTransactionById(transaction.getTxId()).isFinished());
     }
 
     @Test
-    void unmarkFinished_unmarkTheFirstTransaction_expectFalse() throws TransactionNotFoundException {
+    void unmarkFinished_notFinishedTx_expectFalse() throws TransactionNotFoundException {
         TransactionList transactionList = new TransactionList();
-        Transaction transaction = new Transaction("6650266082", "6650266082", 5, LocalDate.parse("2022-10-03"));
+        Transaction transaction = new Transaction("6650266082", "6650266082", 100, LocalDate.parse("2022-10-03"));
         transactionList.add(transaction);
-        transactionList.unmarkFinished(transaction.getTxId());
         assertFalse(transactionList.getTransactionById(transaction.getTxId()).isFinished());
     }
 

@@ -8,15 +8,18 @@ import seedu.duke.exception.ItemNotFoundException;
 import seedu.duke.item.Item;
 import seedu.duke.item.ItemList;
 import seedu.duke.parser.CommandParser;
+import seedu.duke.transaction.TransactionList;
 
 public class RemoveItemCommand extends Command {
     private final String[] parts;
     private final ItemList itemList;
+    private final TransactionList transactionList;
 
-    public RemoveItemCommand(String[] parts, ItemList itemList)
+    public RemoveItemCommand(String[] parts, ItemList itemList, TransactionList transactionList)
             throws InsufficientArgumentsException {
         this.parts = parts;
         this.itemList = itemList;
+        this.transactionList = transactionList;
         if (parts.length != 1) {
             throw new InsufficientArgumentsException();
         }
@@ -40,7 +43,7 @@ public class RemoveItemCommand extends Command {
         String[] args = getArgsRemoveItemCmd();
         String itemId = args[0];
         Item item = itemList.getItemById(itemId);
-        itemList.deleteItem(itemId);
+        itemList.deleteItem(itemId, transactionList);
         Ui.deleteItemMessage(item, itemList.getListSize());
         return false;
     }
