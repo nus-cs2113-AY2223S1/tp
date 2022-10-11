@@ -7,6 +7,8 @@ import seedu.duke.exception.InputTransactionUnknownTypeException;
 import seedu.duke.exception.MoolahException;
 
 import java.time.LocalDate;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_TYPE;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_CATEGORY;
@@ -38,6 +40,8 @@ public class ListCommand extends Command {
             + COMMAND_DESCRIPTION + LINE_SEPARATOR + COMMAND_USAGE + LINE_SEPARATOR;
     // Detailed help description
     public static final String COMMAND_DETAILED_HELP = COMMAND_HELP + COMMAND_PARAMETERS_INFO + LINE_SEPARATOR;
+
+    private static final Logger listLogger = Logger.getLogger(ListCommand.class.getName());
 
     private String category;
     private LocalDate date;
@@ -91,6 +95,10 @@ public class ListCommand extends Command {
      */
     @Override
     public void execute(TransactionList transactions, Ui ui, Storage storage) throws MoolahException {
+        listLogger.setLevel(Level.WARNING);
+        listLogger.log(Level.INFO, "List command starts passing the tags for filter, if any,"
+                + " into the listTransactions method.");
+
         // Passes the tags to the filter for transaction list
         listTransactions(transactions, type, category, date);
     }
@@ -106,13 +114,21 @@ public class ListCommand extends Command {
      */
     private static void listTransactions(TransactionList transactions, String type, String category, LocalDate date)
             throws InputTransactionUnknownTypeException {
+        listLogger.log(Level.INFO, "Listing of transactions is being processed into a"
+                + " transaction list variable.");
         String transactionsList = transactions.listTransactions(type, category, date);
         if (transactionsList.isEmpty()) {
+            listLogger.log(Level.INFO, "Transactions list is empty, so UI should display that"
+                    + " there are no transaction records available.");
             Ui.showInfoMessage(INFO_LIST_EMPTY.toString());
+            listLogger.log(Level.INFO, "End of List command.");
             return;
         }
         assert !transactionsList.isEmpty();
+        listLogger.log(Level.INFO, "Transactions list is available, so UI should display the"
+                + " transaction records.");
         Ui.showTransactionsList(transactionsList, INFO_LIST.toString());
+        listLogger.log(Level.INFO, "End of List command.");
     }
 
     /**
