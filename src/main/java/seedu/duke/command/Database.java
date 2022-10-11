@@ -65,8 +65,8 @@ public class Database {
     }
 
     public static ModuleMapping findModuleMapping(String moduleCode) throws ModuleNotFoundException {
-        for (ModuleMapping moduleMapping : moduleMappings){
-            if (moduleMapping.getPartnerUniversityModule().getCode().equals(moduleCode)){
+        for (ModuleMapping moduleMapping : moduleMappings) {
+            if (moduleMapping.getPartnerUniversityModule().getCode().equals(moduleCode)) {
                 return moduleMapping;
             }
         }

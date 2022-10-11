@@ -1,6 +1,12 @@
 package seedu.duke.parser;
 
-import seedu.duke.command.*;
+import seedu.duke.command.AddCommand;
+import seedu.duke.command.Command;
+import seedu.duke.command.CommandType;
+import seedu.duke.command.CreateCommand;
+import seedu.duke.command.ExitCommand;
+import seedu.duke.command.DeleteCommand;
+import seedu.duke.command.ViewCommand;
 import seedu.duke.exceptions.InvalidUserCommandException;
 
 public class CommandParser {
@@ -60,8 +66,8 @@ public class CommandParser {
         if (parameters.length == 2 && (parameters[1].startsWith("u/") || parameters[1].trim().equals("LISTS")
                 || parameters[1].trim().equals("UNIVERSITIES") || parameters[1].trim().equals("MODULES"))) {
             return true;
-        } else if (parameters.length == 3 && parameters[1].trim().equals("DATABASE") &&
-                parameters[2].startsWith("u/")){
+        } else if (parameters.length == 3 && parameters[1].trim().equals("DATABASE")
+                && parameters[2].startsWith("u/")) {
             return true;
         } else {
             return false;

@@ -179,21 +179,21 @@ public class Ui {
         return printModulesInUserList(puModules);
     }
 
-    public static void printModulesInDatabase(ArrayList<ModuleMapping> modulesInDatabase){
-        for (ModuleMapping moduleMapping : modulesInDatabase){
+    public static void printModulesInDatabase(ArrayList<ModuleMapping> modulesInDatabase) {
+        for (ModuleMapping moduleMapping : modulesInDatabase) {
             System.out.println(moduleMapping.toString());
         }
     }
 
-    public static void printUniversitiesInDatabase(ArrayList<University> universities){
+    public static void printUniversitiesInDatabase(ArrayList<University> universities) {
         int i = 1;
-        for (University university : universities){
-            System.out.println(i+". " + university.toString());
-            i+=1;
+        for (University university : universities) {
+            System.out.println(i + ". " + university.toString());
+            i = i + 1;
         }
     }
 
-    public static void printUniversityName(String universityName){
+    public static void printUniversityName(String universityName) {
         System.out.println(universityName);
         System.out.println(LINE);
     }

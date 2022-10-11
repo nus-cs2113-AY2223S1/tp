@@ -59,11 +59,4 @@ public class UserStorage {
         return fileContent;
     }
 
-    /**.
-     * Function to convert UserUniversityListManager to a String
-     * to be stored in a text file
-     * @param uniList user's list of interested universities
-     * @return a String that contains all universities and modules information
-     */
-
 }
