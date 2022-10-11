@@ -59,12 +59,23 @@ public class PairingList {
     /**
      * Returns true if the client is paired with a property.
      * @param client Client whose pairing status is being checked.
-     * @return True if the client is currently paired with a property. False if not paired with a property
+     * @return True if the client is currently paired with a property. False if not paired with a property.
      */
     public boolean isClientPairedWithProperty(Client client) {
         String clientPairingData = convertToPairingData(client);
         return clientPropertyPairs.containsKey(clientPairingData);
     }
+
+    /**
+     * Returns true if the property is already paired with client.
+     * @param property Property whose pairing status is being checked.
+     * @return True if the property is currently paired with a client. False if not paired with a client.
+     */
+    public boolean isPropertyPairedWithClient(Property property) {
+        String propertyPairingData = convertToPairingData(property);
+        return clientPropertyPairs.containsValue(propertyPairingData);
+    }
+
 
     /**
      * Fetches a list of tenants that is renting the property.
