@@ -25,9 +25,25 @@ public class Parser {
         case ExitCommand.COMMAND_TYPE:
             return new ExitCommand();
         case DeleteCommand.COMMAND_TYPE:
-            return new DeleteCommand(0); // TODO: This is dummy variable only
+            try {
+                int index = Integer.parseInt(parsed[1]) - 1;
+                checkForExcessArgument(parsed, 2);
+                return new DeleteCommand(index);
+            } catch (NumberFormatException | ExcessArgumentException e) {
+                System.out.format("Exception: Wrong command Format%n"
+                        + "Try the command in correct format: mark <index of task>%n");
+                return new InvalidCommand();
+            }
         case ViewCommand.COMMAND_TYPE:
-            return new ViewCommand();
+            try {
+                int index = Integer.parseInt(parsed[1]) - 1;
+                checkForExcessArgument(parsed, 2);
+                return new ViewCommand(index);
+            } catch (NumberFormatException | ExcessArgumentException e) {
+                System.out.format("Exception: Wrong command Format%n"
+                        + "Try the command in correct format: view <index of task>%n");
+                return new InvalidCommand();
+            }
         default:
             return new InvalidCommand();
         }
@@ -42,4 +58,14 @@ public class Parser {
         return new AddCommand(add.isValid, add.addedRecipe); // Pass validty and potential recipe to AddCommand
     }
 
+<<<<<<< Updated upstream
+=======
+    private void checkForExcessArgument(String[] args, int length)
+            throws ExcessArgumentException {
+        if (args.length > length) {
+            throw new ExcessArgumentException();
+        }
+    }
+
+>>>>>>> Stashed changes
 }
