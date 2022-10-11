@@ -1,12 +1,12 @@
-package seedu.duke.command;
+package seedu.duke.parser;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import seedu.duke.exceptions.InvalidDatabaseLineException;
 
-public class Parser {
-    private static Logger logger = Logger.getLogger("Parser");
+public class DatabaseParser {
+    private static Logger logger = Logger.getLogger("DatabaseParser");
 
     public static String[] parseDatabaseLine(String line) throws InvalidDatabaseLineException {
         logger.log(Level.FINE, "Start parsing database line");
@@ -20,12 +20,12 @@ public class Parser {
         String partnerUniversity = parts[1];
         assert partnerUniversity.length() > 0 : "Partner University should not be empty";
 
-        String parterUniversityModuleCode = parts[2];
-        assert parterUniversityModuleCode.length() > 0
+        String partnerUniversityModuleCode = parts[2];
+        assert partnerUniversityModuleCode.length() > 0
                 : "Partner University Module Code should not be empty";
 
-        String partnerUnviersityModuleTitle = parts[3];
-        assert partnerUnviersityModuleTitle.length() > 0
+        String partnerUniversityModuleTitle = parts[3];
+        assert partnerUniversityModuleTitle.length() > 0
                 : "Partner University Module Title should not be empty";
 
         String partnerUniversityModuleCredit = parts[4];
@@ -44,8 +44,8 @@ public class Parser {
         assert nusModuleCredit.length() > 0
                 : "NUS Module Credit should not be empty";
 
-        String[] lineData = { partnerUniversity, parterUniversityModuleCode,
-            partnerUnviersityModuleTitle, partnerUniversityModuleCredit, nusModuleCode,
+        String[] lineData = { partnerUniversity, partnerUniversityModuleCode,
+            partnerUniversityModuleTitle, partnerUniversityModuleCredit, nusModuleCode,
             nusModuleTitle, nusModuleCredit };
 
         logger.log(Level.FINE, "End parsing database line");

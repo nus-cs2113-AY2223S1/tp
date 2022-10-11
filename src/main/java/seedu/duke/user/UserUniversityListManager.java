@@ -2,6 +2,10 @@ package seedu.duke.user;
 
 import seedu.duke.ui.Ui;
 import seedu.duke.userstorage.UserStorage;
+import seedu.duke.exceptions.InvalidUserCommandException;
+import seedu.duke.exceptions.InvalidUserStorageFileException;
+import seedu.duke.ui.Ui;
+import seedu.duke.userstorage.UserStorageParser;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,7 +29,13 @@ public class UserUniversityListManager {
     }
 
     public UserUniversityListManager(String fileContent) {
-        myManager = UserStorage.convertFileContentIntoUniversityList(fileContent);
+        try {
+            myManager = UserStorageParser.convertFileContentIntoUniversityList(fileContent);
+        } catch (InvalidUserStorageFileException e) {
+            System.out.println("Invalid file format in data/duke.txt");
+            System.out.println("Creating new University List Manager");
+            myManager = new HashMap<String, UserUniversityList>();
+        }
     }
 
     /**
@@ -73,7 +83,7 @@ public class UserUniversityListManager {
         return myManager.containsKey(inputSchool);
     }
 
-    public void addModule(String inputSchool, UserModule inputModule) {
+    public void addModule(String inputSchool, UserModuleMapping inputModule) {
         if (myManager.containsKey(inputSchool)) {
             myManager.get(inputSchool).addModule(inputModule);
         } else {

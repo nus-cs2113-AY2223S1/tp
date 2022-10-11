@@ -5,25 +5,21 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import seedu.duke.module.Module;
+import seedu.duke.module.ModuleMapping;
 import seedu.duke.university.University;
 
 public class Database {
     private static Logger logger = Logger.getLogger("Database");
 
     private static ArrayList<University> universities = new ArrayList<>();
-    private static ArrayList<Module> partnerUniversityModules = new ArrayList<>();
-    private static ArrayList<Module> nusModules = new ArrayList<>();
+    private static ArrayList<ModuleMapping> moduleMappings = new ArrayList<>();
 
     public static ArrayList<University> getUniversities() {
         return universities;
     }
 
-    public static ArrayList<Module> getpartnerUniversityModules() {
-        return partnerUniversityModules;
-    }
-
-    public static ArrayList<Module> getnusModules() {
-        return nusModules;
+    public static ArrayList<ModuleMapping> getModuleMappings() {
+        return moduleMappings;
     }
 
     public static void addUniversity(University newUniversity) {
@@ -37,16 +33,21 @@ public class Database {
         }
     }
 
-    public static void addPartnerUniversityModule(Module newModule) {
-        assert newModule.getCode().length() > 0 : "New module code cannot be empty";
-        assert newModule.getTitle().length() > 0 : "New module title cannot be empty";
-        assert newModule.getCredit().length() > 0 : "New module credit cannot be empty";
+    public static void addModuleMapping(ModuleMapping newModuleMapping) {
+        assert newModuleMapping.getPartnerUniversityModule().getCode().length() > 0
+                : "Partner University module code cannot be empty";
+        assert newModuleMapping.getPartnerUniversityModule().getTitle().length() > 0
+                : "Partner University module title cannot be empty";
+        assert newModuleMapping.getPartnerUniversityModule().getCredit().length() > 0
+                : "Partner University module credit cannot be empty";
+        assert newModuleMapping.getNusModule().getCode().length() > 0
+                : "NUS module code cannot be empty";
+        assert newModuleMapping.getNusModule().getTitle().length() > 0
+                : "NUS module title cannot be empty";
+        assert newModuleMapping.getNusModule().getCredit().length() > 0
+                : "NUS module credit cannot be empty";
 
-        partnerUniversityModules.add(newModule);
-    }
-
-    public static void addNusModules(Module newModule) {
-        nusModules.add(newModule);
+        moduleMappings.add(newModuleMapping);
     }
 
     private static boolean isNewUniversity(University newUniversity) {
