@@ -3,6 +3,7 @@ package seedu.duke.command;
 import seedu.duke.biometrics.Biometrics;
 import seedu.duke.Ui;
 import seedu.duke.exercise.ExerciseList;
+import seedu.duke.food.FoodList;
 
 public class HelpCommand extends Command {
 
@@ -19,13 +20,15 @@ public class HelpCommand extends Command {
                 + "exit - to exit the program\n"
                 + "set biometrics /{age} /{gender} /height /{weight} /{fat percentage}\n"
                 + "add exercise /{description} /{repetitions} /{calories}\n"
+                + "add food /{description} /{calories}\n"
+                + "remove food /{food index}\n"
                 + "mark {done/undone} /{exercise index}\n"
                 + "remove exercise /{index}\n"
-                + "view {biometrics/exercise}");
+                + "view {biometrics/exercise/food}");
     }
 
     @Override
-    public void setData(Ui ui, Biometrics biometrics, ExerciseList exerciseList) {
+    public void setData(Ui ui, Biometrics biometrics, ExerciseList exerciseList, FoodList foodList) {
         this.ui = ui;
     }
 }

@@ -6,18 +6,19 @@ import seedu.duke.Ui;
 import seedu.duke.exception.IllegalValueException;
 import seedu.duke.exercise.Exercise;
 import seedu.duke.exercise.ExerciseList;
+import seedu.duke.food.Food;
+import seedu.duke.food.FoodList;
 
 import java.util.ArrayList;
 
-import static seedu.duke.command.AddFoodCommand.foodList;
-
 public class ViewCommand extends Command {
-
 
     private Ui ui;
     private Biometrics biometrics;
     private String arguments;
     private ExerciseList exerciseList;
+
+    private FoodList foodList;
 
     public ViewCommand(String arguments) {
         this.arguments = arguments;
@@ -50,9 +51,9 @@ public class ViewCommand extends Command {
         ui.output(biometrics.toString());
     }
 
-    private void viewFood() {
-        for (int i = 0; i < foodList.size(); i++) {
-            ui.output((i + 1) + " " + (foodList.get(i)).toString());
+    private void viewFood() throws IllegalValueException {
+        for (int i = 0; i < foodList.getFoodListSize(); i++) {
+            ui.output((i + 1) + " " + (foodList.getFood(i)));
         }
     }
 
@@ -127,9 +128,10 @@ public class ViewCommand extends Command {
     }
 
     @Override
-    public void setData(Ui ui, Biometrics biometrics, ExerciseList exerciseList) {
+    public void setData(Ui ui, Biometrics biometrics, ExerciseList exerciseList, FoodList foodList) {
         this.ui = ui;
         this.biometrics = biometrics;
         this.exerciseList = exerciseList;
+        this.foodList = foodList;
     }
 }

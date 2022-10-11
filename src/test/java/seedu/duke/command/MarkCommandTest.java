@@ -7,6 +7,7 @@ import seedu.duke.biometrics.Biometrics;
 import seedu.duke.exception.IllegalValueException;
 import seedu.duke.exercise.Exercise;
 import seedu.duke.exercise.ExerciseList;
+import seedu.duke.food.FoodList;
 
 import java.util.ArrayList;
 
@@ -20,6 +21,7 @@ class MarkCommandTest {
 
     private final Ui ui = new Ui();
     private final Biometrics biometrics = new Biometrics();
+    private final FoodList foodList = new FoodList();
 
     @Test
     void execute_validMarkDoneCommand_markAsDone() throws IllegalValueException {
@@ -125,7 +127,7 @@ class MarkCommandTest {
 
     private void assertInvalidMarkCommand(String input, String expectedMessage, ExerciseList exerciseList) {
         Command command = Parser.parse(input);
-        command.setData(ui, biometrics, exerciseList);
+        command.setData(ui, biometrics, exerciseList, foodList);
         try {
             command.execute();
             fail();
@@ -144,7 +146,7 @@ class MarkCommandTest {
         }
         String validMarkAsUndoneInput = "mark undone /" + index;
         Command command = Parser.parse(validMarkAsUndoneInput);
-        command.setData(ui, biometrics, exerciseList);
+        command.setData(ui, biometrics, exerciseList, foodList);
         command.execute();
         return exercise;
     }
@@ -158,7 +160,7 @@ class MarkCommandTest {
         }
         String input = "mark done /" + index;
         Command command = Parser.parse(input);
-        command.setData(ui, biometrics, exerciseList);
+        command.setData(ui, biometrics, exerciseList, foodList);
         command.execute();
         return exercise;
     }
@@ -193,7 +195,7 @@ class MarkCommandTest {
 
         for (String input : commandList) {
             Command c = Parser.parse(input);
-            c.setData(ui, biometrics, exerciseList);
+            c.setData(ui, biometrics, exerciseList, foodList);
             c.execute();
         }
     }

@@ -16,8 +16,10 @@ help - to display the help message
 exit - to exit the program
 set biometrics /{age} /{gender} /height /{weight} /{fat percentage}
 add exercise /{description} /{repetitions} /{calories}
+add food /{description} /{calories}
+remove food /{food index}
 mark {done/undone} /{exercise index}
-view {biometrics/exercise}
+view {biometrics/exercise/food}
 ------------------------------------------
 ------------------------------------------
 Biometrics
