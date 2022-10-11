@@ -10,17 +10,21 @@ import seedu.duke.exception.UserNotFoundException;
 import seedu.duke.item.Item;
 import seedu.duke.item.ItemList;
 import seedu.duke.parser.CommandParser;
+import seedu.duke.transaction.TransactionList;
 import seedu.duke.user.UserList;
 
 public class AddItemCommand extends Command {
     private final String[] parts;
     private final ItemList itemList;
     private final UserList userList;
+    private final TransactionList transactionList;
 
-    public AddItemCommand(String[] parts, UserList userList, ItemList itemList) throws InsufficientArgumentsException {
+    public AddItemCommand(String[] parts, UserList userList, ItemList itemList, TransactionList transactionList)
+            throws InsufficientArgumentsException {
         this.parts = parts;
         this.itemList = itemList;
         this.userList = userList;
+        this.transactionList = transactionList;
         if (parts.length != 4) {
             throw new InsufficientArgumentsException();
         }
@@ -95,7 +99,7 @@ public class AddItemCommand extends Command {
             String ownerId = args[3];
             Item item = new Item(name, categoryNumber, price, ownerId);
             this.itemList.addItem(item);
-            Ui.addItemMessage(item, itemList.getListSize());
+            Ui.addItemMessage(item, itemList.getListSize(), transactionList);
         }
         return false;
     }

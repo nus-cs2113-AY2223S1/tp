@@ -2,6 +2,7 @@ package seedu.duke;
 
 import seedu.duke.item.Item;
 import seedu.duke.transaction.Transaction;
+import seedu.duke.transaction.TransactionList;
 import seedu.duke.user.User;
 
 import java.util.Scanner;
@@ -49,10 +50,10 @@ public class Ui {
     }
 
 
-    public static void addItemMessage(Item item, int itemListSize) {
+    public static void addItemMessage(Item item, int itemListSize, TransactionList transactionList) {
         showLine();
         assert itemListSize >= 0;
-        System.out.print("Noted. Following item has been added: " + '\n' + item
+        System.out.print("Noted. Following item has been added: " + '\n' + item.toString(transactionList)
                 + "\n" + "Total item(s) in list: " + itemListSize + '\n');
         showLine();
     }

@@ -1,6 +1,7 @@
 package seedu.duke.command;
 
 import seedu.duke.exception.InsufficientArgumentsException;
+import seedu.duke.exception.ItemNotFoundException;
 import seedu.duke.item.Item;
 import seedu.duke.item.ItemList;
 
@@ -16,8 +17,8 @@ public class ViewItemCommand extends Command {
         }
     }
 
-    public boolean executeCommand() {
-        Item item = this.itemList.getItem(args[DEFAULT_FIRST_INDEX]);
+    public boolean executeCommand() throws ItemNotFoundException {
+        Item item = this.itemList.getItemById(args[DEFAULT_FIRST_INDEX]);
         System.out.println(item);
         return false;
     }

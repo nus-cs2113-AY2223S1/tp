@@ -1,8 +1,6 @@
 package seedu.duke;
 
-import seedu.duke.item.Item;
 import seedu.duke.item.ItemList;
-import seedu.duke.transaction.Transaction;
 import seedu.duke.transaction.TransactionList;
 import seedu.duke.command.Command;
 import seedu.duke.parser.CommandParser;

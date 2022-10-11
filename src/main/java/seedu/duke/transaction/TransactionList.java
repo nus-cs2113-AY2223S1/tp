@@ -5,7 +5,7 @@ import seedu.duke.exception.TransactionNotFoundException;
 import java.util.ArrayList;
 
 public class TransactionList {
-    private ArrayList<Transaction> transactionList;
+    private final ArrayList<Transaction> transactionList;
 
     public TransactionList() {
         this.transactionList = new ArrayList<>();
@@ -13,18 +13,6 @@ public class TransactionList {
 
     public int getSize() {
         return transactionList.size();
-    }
-
-    public void markFinished(String transactionId) throws TransactionNotFoundException {
-        Transaction transaction = getTransactionById(transactionId);
-        int index = transactionList.indexOf(transaction);
-        transactionList.get(index).setAsFinished();
-    }
-
-    public void unmarkFinished(String transactionId) throws TransactionNotFoundException {
-        Transaction transaction = getTransactionById(transactionId);
-        int index = transactionList.indexOf(transaction);
-        transactionList.get(index).setAsNotFinished();
     }
 
     public void add(Transaction transaction) {
@@ -46,12 +34,19 @@ public class TransactionList {
     }
 
     public boolean hasThisBorrower(String username) {
-        for (Transaction transaction : transactionList) {
-            if (transaction.getBorrower().equals(username)) {
-                return true;
-            }
-        }
-        return false;
+        int count = (int) transactionList.stream()
+                .filter(t -> !t.isFinished())
+                .filter(t -> t.getBorrower().equals(username))
+                .count();
+        return count > 0;
+    }
+
+    public boolean hasThisItemBeingBorrowed(String itemId) {
+        int count = (int) transactionList.stream()
+                .filter(t -> !t.isFinished())
+                .filter(t -> t.getItemId().equals(itemId))
+                .count();
+        return count > 0;
     }
 
     @Override
