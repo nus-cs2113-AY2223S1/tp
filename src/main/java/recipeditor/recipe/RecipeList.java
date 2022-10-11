@@ -19,15 +19,19 @@ public class RecipeList {
         return recipes;
     }
 
-    public Recipe getRecipe(int index) {
+    public static Recipe getRecipe(int index) {
         return recipes.get(index);
     }
 
-    public void addRecipe(Recipe recipe) {
+    public static void addRecipe(Recipe recipe) {
         recipes.add(recipe);
     }
 
-    public void deleteRecipe(int index) {
+    public static void deleteRecipe(int index) {
         recipes.remove(index);
+    }
+
+    public static int getSize() {
+        return recipes.size();
     }
 }
