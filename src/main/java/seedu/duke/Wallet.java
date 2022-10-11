@@ -11,4 +11,30 @@ public class Wallet {
         this.passWord = passWord;
         balance = 0;
     }
+
+    public Wallet(String userName, String passWord, Integer balance){
+        this.userName = userName;
+        this.passWord = passWord;
+        this.balance = balance;
+    }
+
+    public String getUserName(){
+        return userName;
+    }
+
+    public String getPassWord(){
+        return passWord;
+    }
+
+    public Integer getBalance(){
+        return balance;
+    }
+
+    public void setUserName(String userName){
+        this.userName = userName;
+    }
+
+    public void setPassWord(String passWord){
+        this.passWord = passWord;
+    }
 }

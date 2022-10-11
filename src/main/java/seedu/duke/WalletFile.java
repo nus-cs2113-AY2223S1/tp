@@ -1,10 +1,12 @@
 package seedu.duke;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Scanner;
 
 public class WalletFile {
 
@@ -17,5 +19,14 @@ public class WalletFile {
         fw.write("balance:" + newWallet.balance);
         fw.write(System.lineSeparator());
         fw.close();
+    }
+
+    public static Wallet getWallet(String userName) throws FileNotFoundException {
+        Path filePath = Paths.get("src","main","data");
+        File f = new File(filePath + "/" + userName + ".txt");
+        Scanner scan = new Scanner(f);
+        String password = scan.nextLine().split(":")[1];
+        int balance = scan.nextInt();
+        return new Wallet(userName, password, balance);
     }
 }
