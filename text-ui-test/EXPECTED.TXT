@@ -8,6 +8,7 @@
  |_|                                
 What is your name?
 Welcome to parKING, James Gosling!
+File does not exist. Creating one at ./resources/api/secret.txt.
 API key is not entered. Load it first!
 Fetching and save data sequence terminated
 Trying to load data...
