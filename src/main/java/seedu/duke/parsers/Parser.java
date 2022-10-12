@@ -46,7 +46,7 @@ public class Parser {
 
     private static void createFileHandle() {
         try {
-            FileHandler fileHandler = new FileHandler("ListPassenger-logger.log");
+            FileHandler fileHandler = new FileHandler("ParserPassenger-logger.log");
             fileHandler.setLevel(Level.WARNING);
             Parser.LOGGER.addHandler(fileHandler);
         } catch (IOException e) {

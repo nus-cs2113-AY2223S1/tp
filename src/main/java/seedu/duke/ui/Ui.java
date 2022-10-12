@@ -182,10 +182,9 @@ public class Ui {
                 + "----------------------------------------------------------------------*\n"
                 + "| %5s %10s %27s %20s %20s %12s %22s |\n"
                 + "*-----------------------------------------------------------"
-                + "----------------------------------------------------------------------*",
+                + "----------------------------------------------------------------------*\n",
                 "FLIGHT NUM", "AIRLINE", "DESTINATION", "DEPARTURE TIME",
                 "BOARDING GATE", "TERMINAL", "CHECK-IN ROW/DOOR");
-        System.out.println();
         for (FlightInfo flight : flightList) {
             System.out.println(flight);
         }
