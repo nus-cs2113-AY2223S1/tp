@@ -39,6 +39,7 @@ import seedu.duke.exception.PropertyAlreadyPairedException;
 import seedu.duke.exception.UndefinedSubCommandAddTypeException;
 import seedu.duke.exception.UndefinedSubCommandCheckTypeException;
 import seedu.duke.exception.UndefinedSubCommandDeleteTypeException;
+import seedu.duke.exception.IncorrectListDetailsException;
 
 import java.io.IOException;
 
@@ -129,6 +130,8 @@ public class Duke {
                 ui.showPropertyAlreadyPairedMessage();
             } catch (NoExistingPairException e) {
                 ui.showNoExistingPairMessage();
+            } catch (IncorrectListDetailsException e) {
+                ui.showIncorrectListDetailsMessage();
             } catch (MissingCheckPropertyFlagException e) {
                 ui.showCheckPropertyWrongFormatMessage();
             } catch (UndefinedSubCommandCheckTypeException e) {

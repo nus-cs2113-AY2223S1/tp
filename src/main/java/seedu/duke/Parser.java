@@ -9,6 +9,8 @@ import seedu.duke.command.CommandDeleteProperty;
 import seedu.duke.command.CommandPair;
 import seedu.duke.command.CommandUnpair;
 import seedu.duke.command.CommandUndefined;
+import seedu.duke.command.CommandListClients;
+import seedu.duke.command.CommandListProperties;
 
 import seedu.duke.exception.ClientAlreadyPairedException;
 import seedu.duke.exception.EmptyClientDetailException;
@@ -49,6 +51,7 @@ import seedu.duke.exception.PropertyAlreadyPairedException;
 import seedu.duke.exception.UndefinedSubCommandAddTypeException;
 import seedu.duke.exception.UndefinedSubCommandCheckTypeException;
 import seedu.duke.exception.UndefinedSubCommandDeleteTypeException;
+import seedu.duke.exception.IncorrectListDetailsException;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -77,13 +80,18 @@ public class Parser {
             InvalidPriceFormatException, EmptyClientDetailException, MissingClientFlagException,
             IncorrectAddClientFlagOrderException, MissingClientDetailException, InvalidContactNumberException,
             InvalidEmailException, InvalidBudgetFormatException, UndefinedSubCommandDeleteTypeException,
+            EmptyCommandDeleteDetailException, InvalidClientIndexDeleteException, EmptyClientIndexDeleteException,
+            EmptyCommandPairUnpairDetailsException, MissingPairUnpairFlagException,
+            IncorrectPairUnpairFlagOrderException, NotValidIndexException, NotIntegerException, ExistingPairException,
+            NoExistingPairException,  {
             EmptyCommandDeleteDetailException, InvalidPropertyIndexFlagFormatException,
             MissingPropertyIndexFlagException, EmptyPropertyIndexDeleteException, InvalidPropertyIndexDeleteException,
             InvalidClientIndexDeleteException, EmptyClientIndexDeleteException, MissingClientIndexFlagException,
             InvalidClientIndexFlagFormatException, EmptyCommandPairUnpairDetailsException,
             MissingPairUnpairFlagException, IncorrectPairUnpairFlagOrderException, NotValidIndexException,
             NotIntegerException, NoExistingPairException, ClientAlreadyPairedException, PropertyAlreadyPairedException,
-            UndefinedSubCommandCheckTypeException, EmptyCommandCheckDetailException, MissingCheckPropertyFlagException {
+            UndefinedSubCommandCheckTypeException, EmptyCommandCheckDetailException, MissingCheckPropertyFlagException,
+            IncorrectListDetailsException {
         ArrayList<String> processedCommandDetails = partitionCommandTypeAndDetails(input);
         String commandType = processedCommandDetails.get(0);
         String commandDetails = processedCommandDetails.get(1);
@@ -125,7 +133,9 @@ public class Parser {
         case "unpair":
             checkForEmptyCommandPairUnpairDetails(commandDetails);
             return prepareForCommandUnpair(commandDetails);
-
+        case "list":
+            checkForEmptyCommandAddDetails(commandDetails);
+            return prepareForCommandList(commandDetails);
         case "check":
             checkForEmptyCommandCheckDetails(commandDetails);
             ArrayList<String> processedCheckCommandDetails = partitionCommandTypeAndDetails(commandDetails);
@@ -141,6 +151,7 @@ public class Parser {
             return new CommandUndefined();
         }
     }
+
 
     private ArrayList<String> partitionCommandTypeAndDetails(String fullCommandDetails) {
         String[] inputDetails = fullCommandDetails.trim().split(" ", 2);
@@ -175,6 +186,16 @@ public class Parser {
             throw new MissingPropertyFlagException();
         } catch (IncorrectFlagOrderException e) {
             throw new IncorrectAddPropertyFlagOrderException();
+        }
+    }
+
+    private Command prepareForCommandList(String commandDetails) throws IncorrectListDetailsException {
+        if (commandDetails.trim().equals("-client")) {
+            return new CommandListClients();
+        } else if (commandDetails.trim().equals("-property")) {
+            return new CommandListProperties();
+        } else {
+            throw new IncorrectListDetailsException();
         }
     }
 
@@ -613,7 +634,7 @@ public class Parser {
     }
 
     private ArrayList<Integer> extractPairUnpairDetails(String rawPairUnpairDetails, int[] pairFlagIndexPositions,
-            String[] pairUnpairFlags) throws NotIntegerException {
+                                                        String[] pairUnpairFlags) throws NotIntegerException {
         String propertyIndexString = extractDetail(rawPairUnpairDetails,
                 pairFlagIndexPositions[0] + pairUnpairFlags[0].length(),
                 pairFlagIndexPositions[1]);

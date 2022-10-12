@@ -127,6 +127,8 @@ public class Messages {
             + "Examples:\n"
             + "  pair ip/1 ic/5\n"
             + "  unpair ip/2 ic/1";
+    public static final String MESSAGE_INCORRECT_LIST_DETAILS = "OOPS!!! Please enter either -client or -property"
+            + "to list clients and properties respectively";
 
     public static final String MESSAGE_PROPERTY_ALREADY_PAIRED = "OOPS!! This property is currently rented by a tenant,"
             + " try pairing with another property";
