@@ -178,6 +178,7 @@ public class Ui {
     public void showEmptyClientIndexDeleteMessage() {
         showToUser(MESSAGE_EMPTY_CLIENT_INDEX);
     }
+
     public void showIncorrectListDetailsMessage() {
         showToUser(MESSAGE_INCORRECT_LIST_DETAILS);
     }

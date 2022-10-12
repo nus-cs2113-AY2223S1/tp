@@ -68,7 +68,7 @@ public class Parser {
             EmptyCommandDeleteDetailException, InvalidClientIndexDeleteException, EmptyClientIndexDeleteException,
             EmptyCommandPairUnpairDetailsException, MissingPairUnpairFlagException,
             IncorrectPairUnpairFlagOrderException, NotValidIndexException, NotIntegerException, ExistingPairException,
-            NoExistingPairException,  IncorrectListDetailsException{
+            NoExistingPairException, IncorrectListDetailsException {
         ArrayList<String> processedCommandDetails = partitionCommandTypeAndDetails(input);
         String commandType = processedCommandDetails.get(0);
         String commandDetails = processedCommandDetails.get(1);
@@ -146,16 +146,14 @@ public class Parser {
         }
     }
 
-    private Command prepareForCommandList(String commandDetails) throws IncorrectListDetailsException{
-            if(commandDetails.trim().equals("-client")) {
-                return new CommandListClients();
-            }
-            else if(commandDetails.trim().equals("-property")) {
-                return new CommandListProperties();
-            }
-            else {
-                throw new IncorrectListDetailsException();
-            }
+    private Command prepareForCommandList(String commandDetails) throws IncorrectListDetailsException {
+        if (commandDetails.trim().equals("-client")) {
+            return new CommandListClients();
+        } else if (commandDetails.trim().equals("-property")) {
+            return new CommandListProperties();
+        } else {
+            throw new IncorrectListDetailsException();
+        }
     }
 
     private Command prepareForCommandAddClient(String rawClientDescriptions) throws EmptyClientDetailException,
@@ -549,7 +547,7 @@ public class Parser {
     }
 
     private ArrayList<Integer> extractPairUnpairDetails(String rawPairUnpairDetails, int[] pairFlagIndexPositions,
-            String[] pairUnpairFlags) throws NotIntegerException {
+                                                        String[] pairUnpairFlags) throws NotIntegerException {
         String propertyIndexString = extractDetail(rawPairUnpairDetails,
                 pairFlagIndexPositions[0] + pairUnpairFlags[0].length(),
                 pairFlagIndexPositions[1]);

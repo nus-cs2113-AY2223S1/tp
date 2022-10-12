@@ -106,8 +106,9 @@ public class Duke {
                 ui.showExistingPairMessage();
             } catch (NoExistingPairException e) {
                 ui.showNoExistingPairMessage();
-            } catch(IncorrectListDetailsException e) {
-                ui.showIncorrectListDetailsMessage();}
+            } catch (IncorrectListDetailsException e) {
+                ui.showIncorrectListDetailsMessage();
+            }
         } while (!isCommandBye);
     }
 
