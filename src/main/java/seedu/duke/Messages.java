@@ -112,6 +112,8 @@ public class Messages {
             + "Examples:\n"
             + "  pair ip/1 ic/5\n"
             + "  unpair ip/2 ic/1";
+    public static final String MESSAGE_INCORRECT_LIST_DETAILS = "OOPS!!! Please enter either -client or -property to list clients and" +
+            " properties respectively";
 
 
     public static final String MESSAGE_TRY_AGAIN = "Please try again.";

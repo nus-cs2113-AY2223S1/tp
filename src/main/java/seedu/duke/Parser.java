@@ -7,6 +7,8 @@ import seedu.duke.command.CommandDeleteClient;
 import seedu.duke.command.CommandPair;
 import seedu.duke.command.CommandUnpair;
 import seedu.duke.command.CommandUndefined;
+import seedu.duke.command.CommandListClients;
+import seedu.duke.command.CommandListProperties;
 
 import seedu.duke.exception.EmptyClientDetailException;
 import seedu.duke.exception.EmptyClientIndexDeleteException;
@@ -36,6 +38,7 @@ import seedu.duke.exception.NotIntegerException;
 import seedu.duke.exception.NotValidIndexException;
 import seedu.duke.exception.UndefinedSubCommandAddTypeException;
 import seedu.duke.exception.UndefinedSubCommandDeleteTypeException;
+import seedu.duke.exception.IncorrectListDetailsException;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -65,7 +68,7 @@ public class Parser {
             EmptyCommandDeleteDetailException, InvalidClientIndexDeleteException, EmptyClientIndexDeleteException,
             EmptyCommandPairUnpairDetailsException, MissingPairUnpairFlagException,
             IncorrectPairUnpairFlagOrderException, NotValidIndexException, NotIntegerException, ExistingPairException,
-            NoExistingPairException {
+            NoExistingPairException,  IncorrectListDetailsException{
         ArrayList<String> processedCommandDetails = partitionCommandTypeAndDetails(input);
         String commandType = processedCommandDetails.get(0);
         String commandDetails = processedCommandDetails.get(1);
@@ -98,10 +101,14 @@ public class Parser {
         case "unpair":
             checkForEmptyCommandPairUnpairDetails(commandDetails);
             return prepareForCommandUnpair(commandDetails);
+        case "list":
+            checkForEmptyCommandAddDetails(commandDetails);
+            return prepareForCommandList(commandDetails);
         default:
             return new CommandUndefined();
         }
     }
+
 
     private ArrayList<String> partitionCommandTypeAndDetails(String fullCommandDetails) {
         String[] inputDetails = fullCommandDetails.trim().split(" ", 2);
@@ -137,6 +144,18 @@ public class Parser {
         } catch (IncorrectFlagOrderException e) {
             throw new IncorrectAddPropertyFlagOrderException();
         }
+    }
+
+    private Command prepareForCommandList(String commandDetails) throws IncorrectListDetailsException{
+            if(commandDetails.trim().equals("-client")) {
+                return new CommandListClients();
+            }
+            else if(commandDetails.trim().equals("-property")) {
+                return new CommandListProperties();
+            }
+            else {
+                throw new IncorrectListDetailsException();
+            }
     }
 
     private Command prepareForCommandAddClient(String rawClientDescriptions) throws EmptyClientDetailException,

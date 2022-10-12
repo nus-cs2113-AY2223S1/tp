@@ -29,6 +29,7 @@ import seedu.duke.exception.NotIntegerException;
 import seedu.duke.exception.NotValidIndexException;
 import seedu.duke.exception.UndefinedSubCommandAddTypeException;
 import seedu.duke.exception.UndefinedSubCommandDeleteTypeException;
+import seedu.duke.exception.IncorrectListDetailsException;
 
 import java.io.IOException;
 
@@ -105,7 +106,8 @@ public class Duke {
                 ui.showExistingPairMessage();
             } catch (NoExistingPairException e) {
                 ui.showNoExistingPairMessage();
-            }
+            } catch(IncorrectListDetailsException e) {
+                ui.showIncorrectListDetailsMessage();}
         } while (!isCommandBye);
     }
 
