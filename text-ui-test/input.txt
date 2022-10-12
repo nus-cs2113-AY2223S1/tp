@@ -7,4 +7,10 @@ set
 err
 2
 list
+delete
+3
+delete
+abcc
+delete
+1
 quit

@@ -1,18 +1,22 @@
 package seedu.duke;
 
 import seedu.duke.commands.CommandAddModule;
+import seedu.duke.commands.CommandDeleteModule;
 import seedu.duke.commands.CommandInfoModule;
 import seedu.duke.commands.CommandSetLesson;
+
 
 public class Parser {
     private static final String COMMAND_ADD = "add";
     private static final String COMMAND_LIST = "list";
+    private static final String COMMAND_DELETE = "delete";
     private static final String COMMAND_EXIT = "quit";
     private static final String COMMAND_INFO = "info";
     private static final String COMMAND_SET = "set";
 
 
     public static String parseCommand(Timetable timetable, String command, String currentSemester) {
+
         String response;
 
         switch (command) {
@@ -21,6 +25,9 @@ public class Parser {
             break;
         case COMMAND_LIST:
             response = timetable.listModules();
+            break;
+        case COMMAND_DELETE:
+            response = CommandDeleteModule.deleteModule(timetable);
             break;
         case COMMAND_EXIT:
             response = "quit";
