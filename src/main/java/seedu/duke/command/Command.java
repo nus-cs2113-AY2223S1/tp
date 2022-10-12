@@ -5,7 +5,7 @@ import seedu.duke.utils.Storage;
 import seedu.duke.utils.Ui;
 
 public abstract class Command {
-    private String[] input;
+    private final String[] input;
 
     public String[] getInput() {
         return input;

@@ -11,7 +11,8 @@ public class UnknownCommand extends Command {
 
     @Override
     public void execute(State state, Ui ui, Storage storage) {
-
+        ui.addMessage(getExecutionMessage());
+        ui.displayUi();
     }
 
     @Override
@@ -21,6 +22,6 @@ public class UnknownCommand extends Command {
 
     @Override
     public String getExecutionMessage() {
-        return null;
+        return "Sorry, I do not understand your command. Enter \"help\" for the available commands";
     }
 }

@@ -12,6 +12,8 @@ import java.util.Map;
 public class AddModuleCommand extends Command {
     Module module;
 
+    public static final String COMMAND_WORD = "add";
+
     public AddModuleCommand(String[] input) { //
         super(input);
         String moduleCode = input[1].toUpperCase();

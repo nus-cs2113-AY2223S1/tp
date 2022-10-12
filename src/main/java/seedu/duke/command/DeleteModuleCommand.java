@@ -9,6 +9,8 @@ import seedu.duke.utils.Ui;
 public class DeleteModuleCommand extends Command {
     Module module;
 
+    public static final String COMMAND_WORD = "delete";
+
     public DeleteModuleCommand(String[] input) {
         super(input);
         String moduleCode = input[1];
