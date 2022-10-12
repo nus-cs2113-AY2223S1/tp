@@ -9,7 +9,7 @@ public class Recipe {
     private String description;
     private ArrayList<Ingredient> ingredients;
     private ArrayList<String> steps;
-    private Logger logger;
+    private Logger logger = Logger.getLogger("LOGS");
 
     public Recipe(String title, String description) {
         this.title = title;
@@ -59,7 +59,7 @@ public class Recipe {
     }
 
     public Ingredient getIngredient(int index) {
-        assert index >= 0 && index < ingredients.size();
+        assert index >= 0 && index <= ingredients.size();
         return this.ingredients.get(index);
     }
 
@@ -73,7 +73,7 @@ public class Recipe {
     }
 
     public void deleteIngredient(int index) {
-        assert index >= 0 && index < ingredients.size();
+        assert index >= 0 && index <= ingredients.size();
         this.ingredients.remove(index);
     }
 
@@ -90,12 +90,12 @@ public class Recipe {
     }
 
     public String getStep(int index) {
-        assert index >= 0 && index < steps.size();
+        assert index >= 0 && index <= steps.size();
         return this.steps.get(index);
     }
 
     public void deleteStep(int index) {
-        assert index >= 0 && index < steps.size();
+        assert index >= 0 && index <= steps.size();
         this.steps.remove(index);
     }
 

@@ -15,7 +15,7 @@ public class RecipeList {
     }
 
     public static Recipe getRecipe(int index) {
-        assert index >= 0 && index < recipes.size();
+        assert index >= 0 && index <= recipes.size();
         return recipes.get(index);
     }
 
@@ -24,7 +24,7 @@ public class RecipeList {
     }
 
     public static void deleteRecipe(int index) {
-        assert index >= 0 && index < recipes.size();
+        assert index >= 0 && index <= recipes.size();
         recipes.remove(index);
     }
 
