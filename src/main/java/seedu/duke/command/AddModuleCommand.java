@@ -9,6 +9,10 @@ import seedu.duke.utils.Ui;
 
 import java.util.Map;
 
+/**
+ * Add module to state by module code, updates storage and displays execution through ui.
+ */
+
 public class AddModuleCommand extends Command {
     Module module;
 
