@@ -1,6 +1,7 @@
-package seedu.duke.command;
+package seedu.duke.command.help;
 
-import seedu.duke.Ui;
+import seedu.duke.command.Command;
+import seedu.duke.ui.Ui;
 
 import java.util.Map;
 

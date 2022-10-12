@@ -1,27 +1,28 @@
-package seedu.duke.command;
+package seedu.duke.command.transaction;
 
-import seedu.duke.Ui;
+import seedu.duke.command.Command;
+import seedu.duke.ui.Ui;
 import seedu.duke.exception.InsufficientArgumentsException;
 import seedu.duke.exception.InvalidArgumentException;
 import seedu.duke.exception.ItemNotFoundException;
 import seedu.duke.exception.TransactionNotFoundException;
-import seedu.duke.item.ItemList;
 import seedu.duke.parser.CommandParser;
 import seedu.duke.transaction.Transaction;
 import seedu.duke.transaction.TransactionList;
 
+import static seedu.duke.exception.ExceptionMessages.MESSAGE_INSUFFICIENT_ARGUMENTS;
+import static seedu.duke.exception.ExceptionMessages.MESSAGE_INVALID_PARTS;
+
 public class RemoveTransactionCommand extends Command {
     private final String[] parts;
     private final TransactionList transactionList;
-    private final ItemList itemList;
 
-    public RemoveTransactionCommand(String[] parts, ItemList itemList, TransactionList txList)
+    public RemoveTransactionCommand(String[] parts, TransactionList txList)
             throws InsufficientArgumentsException {
         this.parts = parts;
-        this.itemList = itemList;
         this.transactionList = txList;
         if (parts.length != 1) {
-            throw new InsufficientArgumentsException();
+            throw new InsufficientArgumentsException(MESSAGE_INSUFFICIENT_ARGUMENTS);
         }
     }
 
@@ -31,7 +32,7 @@ public class RemoveTransactionCommand extends Command {
             if (part.startsWith("t")) {
                 args[0] = CommandParser.getArgValue(part);
             } else {
-                throw new InvalidArgumentException("One of the parts is in incorrect format");
+                throw new InvalidArgumentException(MESSAGE_INVALID_PARTS);
             }
         }
         return args;

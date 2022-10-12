@@ -7,6 +7,7 @@ import seedu.duke.exception.DuplicateException;
 import seedu.duke.exception.InsufficientArgumentsException;
 import seedu.duke.exception.InvalidArgumentException;
 import seedu.duke.exception.InvalidItemException;
+import seedu.duke.exception.InvalidPriceException;
 import seedu.duke.exception.InvalidUserException;
 import seedu.duke.exception.ItemNotFoundException;
 import seedu.duke.exception.TransactionNotFoundException;
@@ -16,5 +17,6 @@ interface CommandInterface {
     boolean executeCommand()
             throws InsufficientArgumentsException, DukeException, InvalidArgumentException,
             DateFormatInvalidException, InvalidUserException, InvalidItemException, ItemNotFoundException,
-            UserNotFoundException, ContactNumberInvalidException, DuplicateException, TransactionNotFoundException;
+            UserNotFoundException, ContactNumberInvalidException, DuplicateException, TransactionNotFoundException,
+            InvalidPriceException;
 }

@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.duke.ui;
 
 import seedu.duke.item.Item;
 import seedu.duke.transaction.Transaction;

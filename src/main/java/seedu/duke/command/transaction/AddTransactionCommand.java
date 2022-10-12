@@ -1,9 +1,10 @@
-package seedu.duke.command;
+package seedu.duke.command.transaction;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
-import seedu.duke.Ui;
+import seedu.duke.command.Command;
+import seedu.duke.ui.Ui;
 import seedu.duke.exception.DateFormatInvalidException;
 import seedu.duke.exception.InsufficientArgumentsException;
 import seedu.duke.exception.InvalidArgumentException;
@@ -16,6 +17,13 @@ import seedu.duke.parser.CommandParser;
 import seedu.duke.transaction.Transaction;
 import seedu.duke.transaction.TransactionList;
 import seedu.duke.user.UserList;
+
+import static seedu.duke.exception.ExceptionMessages.MESSAGE_DATE_FORMAT_INVALID;
+import static seedu.duke.exception.ExceptionMessages.MESSAGE_INSUFFICIENT_ARGUMENTS;
+import static seedu.duke.exception.ExceptionMessages.MESSAGE_INVALID_PARTS;
+import static seedu.duke.exception.ExceptionMessages.MESSAGE_ITEM_UNAVAILABLE;
+import static seedu.duke.exception.ExceptionMessages.MESSAGE_NUMBER_FORMAT_INVALID;
+import static seedu.duke.exception.ExceptionMessages.MESSAGE_SELF_BORROWER;
 
 public class AddTransactionCommand extends Command {
     private final String[] parts;
@@ -30,7 +38,7 @@ public class AddTransactionCommand extends Command {
         this.itemList = itemList;
         this.userList = userList;
         if (parts.length != 4) {
-            throw new InsufficientArgumentsException();
+            throw new InsufficientArgumentsException(MESSAGE_INSUFFICIENT_ARGUMENTS);
         }
     }
 
@@ -46,7 +54,7 @@ public class AddTransactionCommand extends Command {
             } else if (part.startsWith("c")) {
                 args[3] = CommandParser.getArgValue(part);
             } else {
-                throw new InvalidArgumentException("One of the parts is in incorrect format");
+                throw new InvalidArgumentException(MESSAGE_INVALID_PARTS);
             }
 
         }
@@ -57,7 +65,7 @@ public class AddTransactionCommand extends Command {
         if (itemList.getItemById(id).isAvailable(transactionList)) {
             return true;
         }
-        throw new InvalidItemException("This item is currently unavailable");
+        throw new InvalidItemException(MESSAGE_ITEM_UNAVAILABLE);
     }
 
     private boolean isValidBorrower(String itemId, String userId)
@@ -66,7 +74,7 @@ public class AddTransactionCommand extends Command {
         if (!userList.getUserById(userId).getName().equals(itemOwnerName)) {
             return true;
         }
-        throw new InvalidUserException("Borrower cannot borrow items from his/herself");
+        throw new InvalidUserException(MESSAGE_SELF_BORROWER);
     }
 
     private boolean isValidDuration(String duration) {
@@ -74,7 +82,7 @@ public class AddTransactionCommand extends Command {
             Integer.parseInt(duration);
             return true;
         } catch (NumberFormatException e) {
-            throw new NumberFormatException("Number should only contain digit 0-9");
+            throw new NumberFormatException(MESSAGE_NUMBER_FORMAT_INVALID);
         }
     }
 
@@ -83,7 +91,7 @@ public class AddTransactionCommand extends Command {
             LocalDate.parse(createdAt);
             return true;
         } catch (DateTimeParseException e) {
-            throw new DateFormatInvalidException("The date format is incorrect(YYYY-MM-DD)");
+            throw new DateFormatInvalidException(MESSAGE_DATE_FORMAT_INVALID);
         }
     }
 

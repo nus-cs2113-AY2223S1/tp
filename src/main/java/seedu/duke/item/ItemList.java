@@ -6,6 +6,9 @@ import seedu.duke.transaction.TransactionList;
 
 import java.util.ArrayList;
 
+import static seedu.duke.exception.ExceptionMessages.MESSAGE_ITEM_NOT_FOUND;
+import static seedu.duke.exception.ExceptionMessages.MESSAGE_ITEM_UNAVAILABLE;
+
 public class ItemList {
     private final ArrayList<Item> itemList;
 
@@ -35,7 +38,7 @@ public class ItemList {
         if (item.isAvailable(transactionList)) {
             itemList.remove(item);
         } else {
-            throw new InvalidItemException("This item is currently unavailable");
+            throw new InvalidItemException(MESSAGE_ITEM_UNAVAILABLE);
         }
     }
 
@@ -45,7 +48,7 @@ public class ItemList {
                 return item;
             }
         }
-        throw new ItemNotFoundException("This item cannot be found in the list");
+        throw new ItemNotFoundException(MESSAGE_ITEM_NOT_FOUND);
     }
 
     public int getListSize() {

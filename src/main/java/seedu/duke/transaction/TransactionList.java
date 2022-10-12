@@ -4,6 +4,8 @@ import seedu.duke.exception.TransactionNotFoundException;
 
 import java.util.ArrayList;
 
+import static seedu.duke.exception.ExceptionMessages.MESSAGE_TX_NOT_FOUND;
+
 public class TransactionList {
     private final ArrayList<Transaction> transactionList;
 
@@ -30,7 +32,7 @@ public class TransactionList {
                 return transaction;
             }
         }
-        throw new TransactionNotFoundException("Cannot find this transaction");
+        throw new TransactionNotFoundException(MESSAGE_TX_NOT_FOUND);
     }
 
     public boolean hasThisBorrower(String username) {

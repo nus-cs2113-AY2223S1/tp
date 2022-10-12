@@ -4,6 +4,8 @@ import seedu.duke.exception.UserNotFoundException;
 
 import java.util.ArrayList;
 
+import static seedu.duke.exception.ExceptionMessages.MESSAGE_USER_NOT_FOUND;
+
 public class UserList {
     protected ArrayList<User> userList;
 
@@ -39,7 +41,7 @@ public class UserList {
                 return user;
             }
         }
-        throw new UserNotFoundException("This user cannot be found in the list");
+        throw new UserNotFoundException(MESSAGE_USER_NOT_FOUND);
     }
 
     public String listUser() {

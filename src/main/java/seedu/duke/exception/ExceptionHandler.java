@@ -1,6 +1,6 @@
 package seedu.duke.exception;
 
-import seedu.duke.Ui;
+import seedu.duke.ui.Ui;
 
 public class ExceptionHandler {
     static String errorMessage;
