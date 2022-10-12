@@ -58,8 +58,6 @@ public class PatientList {
         }
         System.out.println();
         Messages.printPatientEditedMessage(patientToBeModified);
-        Messages.printLine();
-
     }
 
     public boolean isEmpty() {

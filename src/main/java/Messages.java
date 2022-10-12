@@ -26,7 +26,7 @@ public class Messages {
         System.out.println("To add a patient: 'add n/[name] g/[M/F] d/[DOB] i/[ID]'");
         System.out.println("To list all patients: 'list'");
         System.out.println("To retrieve information about a specific patient: 'retrieve i/[ID]'");
-        System.out.println("To edit a patient's records: 'edit i/ID (n/[name] or g/[M/F] or d/[DOB])");
+        System.out.println("To edit a patient's records: 'edit i/ID (n/[name] or g/[M/F] or d/[DOB])'");
     }
 
 
