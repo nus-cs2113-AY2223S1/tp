@@ -1,11 +1,6 @@
 package seedu.api;
 
-import static seedu.common.CommonFiles.API_JSON_DIRECTORY;
-import static seedu.common.CommonFiles.API_KEY_FILE_PATH;
-
-import static seedu.common.CommonFiles.API_KEY_FILE;
 import static seedu.common.CommonFiles.LTA_BASE_URL;
-import static seedu.common.CommonFiles.LTA_JSON_FILE;
 
 import java.io.IOException;
 import java.net.URI;
@@ -43,9 +38,9 @@ public class Api {
      * Initializes the storage class for file writing purposes.
      * Loads the API key.
      */
-    public Api() {
+    public Api(String file, String directory) {
         this.client = HttpClient.newHttpClient();
-        this.storage = new FileStorage(API_JSON_DIRECTORY, LTA_JSON_FILE); //creates secret.txt
+        this.storage = new FileStorage(directory, file);
         this.ui = new Ui();
     }
 
@@ -117,6 +112,7 @@ public class Api {
     /**
      * Execute the data fetching subroutine. Subroutine will repeat for a certain number of time
      * and throws an exception if no response is received.
+     * todo: handle bad request
      *
      * @throws EmptyResponseException if empty/invalid response received.
      * @throws IOException if data writing fails.
@@ -145,24 +141,24 @@ public class Api {
 
     /**
      * Reads API key from secret.txt file and loads it to the object.
-<<<<<<< HEAD
-=======
      * If secret.txt does not exist, create it.
->>>>>>> 776be540ee76dc81a8097b036cb87f3ce7bddf83
      *
      * @throws NoFileFoundException If directory / file is not found.
      * @throws EmptySecretFileException If the file is empty.
      */
-    public void loadApiKey() throws NoFileFoundException, EmptySecretFileException {
+    public void loadApiKey(String file, String directory) throws NoFileFoundException, EmptySecretFileException {
         try {
-            String key = FileReader.readStringFromTxt(API_KEY_FILE, API_JSON_DIRECTORY, true);
+            String key = FileReader.readStringFromTxt(file, directory, true);
             if (key.isEmpty()) {
                 throw new EmptySecretFileException();
             }
-            ui.print("Read Key from file successful: " + key); // Debug line
             apiKey = key;
         } catch (IOException e) {
             throw new NoFileFoundException("API key file is missing!");
         }
+    }
+
+    public String getApiKey() {
+        return apiKey;
     }
 }

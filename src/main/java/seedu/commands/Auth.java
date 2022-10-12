@@ -1,6 +1,8 @@
 package seedu.commands;
 
+import static seedu.common.CommonFiles.API_JSON_DIRECTORY;
 import static seedu.common.CommonFiles.API_KEY_FILE_PATH;
+import static seedu.common.CommonFiles.LTA_JSON_FILE;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -13,12 +15,14 @@ import seedu.exception.NoFileFoundException;
 import seedu.exception.UnauthorisedAccessApiException;
 import seedu.ui.Ui;
 
+
 /**
  * Represents the 'auth' command to authenticate user API key
  */
 public class Auth {
-    private Api api = new Api();
-    private Ui ui = new Ui();
+
+    private final Api api = new Api(LTA_JSON_FILE, API_JSON_DIRECTORY);
+    private final Ui ui = new Ui();
 
     /**
      * Passes the API KEY into secret.txt
@@ -51,7 +55,7 @@ public class Auth {
     public void authenticate(String input) throws IOException, EmptySecretFileException, NoFileFoundException,
             EmptyResponseException, UnauthorisedAccessApiException, EmptyAuthException {
         sendApiKey(input);
-        api.loadApiKey();
+        api.loadApiKey(LTA_JSON_FILE, API_JSON_DIRECTORY);
         api.asyncExecuteRequest();
         api.fetchData();
     }

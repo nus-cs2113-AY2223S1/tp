@@ -1,12 +1,15 @@
 package seedu.parking;
 
+import static seedu.common.CommonFiles.API_JSON_DIRECTORY;
+import static seedu.common.CommonFiles.API_KEY_FILE;
+import static seedu.common.CommonFiles.LTA_JSON_FILE;
+
 import java.io.IOException;
 
 import seedu.api.Api;
 import seedu.commands.Auth;
 import seedu.commands.Find;
 import seedu.common.CommonFiles;
-
 import seedu.data.Carpark;
 import seedu.data.CarparkList;
 import seedu.exception.EmptyAuthException;
@@ -35,19 +38,19 @@ public class Parking {
         Find find = new Find();
         Ui ui = new Ui();
         ui.greetUser();
-        Api api = new Api();
         Auth auth = new Auth();
+        Api api = new Api(LTA_JSON_FILE, API_JSON_DIRECTORY);
 
         try {
-            api.loadApiKey(); // Will give exception when file is missing or empty key
+            api.loadApiKey(API_KEY_FILE, API_JSON_DIRECTORY); // Will give exception when file is missing or empty key
             api.asyncExecuteRequest(); // Send request to API and wait asynchronously
 
             // More code here while waiting for data to come back
 
             // This should be the last code block of the initialising phase
-            System.out.println("Trying to fetch data"); // Debug line
+            // System.out.println("Trying to fetch data"); // Debug line
             api.fetchData();
-            System.out.println("Completed fetch data!"); // Debug line
+            // System.out.println("Completed fetch data!"); // Debug line
         } catch (ParkingException e) {
             System.out.println(e.getMessage());
         } catch (IOException e) {
