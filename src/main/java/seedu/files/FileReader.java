@@ -11,7 +11,6 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.ObjectReader;
 
 import seedu.data.Carpark;
-import seedu.exception.EmptySecretFileException;
 import seedu.exception.NoFileFoundException;
 import seedu.files.parsing.LtaJsonWrapper;
 
@@ -45,9 +44,9 @@ public class FileReader {
 
     /**
      * TODO: Javadoc
-     * @param filepath
-     * @return
-     * @throws IOException
+     * @param filepath file path of Json file
+     * @return List of carparks
+     * @throws IOException if an I/O error occurs reading from the stream
      */
     private static List<Carpark> getCarparks(Path filepath) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
@@ -63,9 +62,9 @@ public class FileReader {
      * @return Data string in file.
      * @throws IOException if file not found.
      */
-    public static String readStringFromTxt(Path filepath) throws IOException{
-            File file = new File(filepath.toString());
-            Scanner scanner = new Scanner(file);
-            return scanner.nextLine().trim();
+    public static String readStringFromTxt(Path filepath) throws IOException {
+        File file = new File(filepath.toString());
+        Scanner scanner = new Scanner(file);
+        return scanner.nextLine().trim();
     }
 }

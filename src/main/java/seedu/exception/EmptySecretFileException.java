@@ -1,5 +1,9 @@
 package seedu.exception;
 
+
+/**
+ * Exception for when API key is not entered.
+ */
 public class EmptySecretFileException extends ParkingException {
     public EmptySecretFileException() {
         super("");

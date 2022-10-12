@@ -4,14 +4,21 @@ import java.io.IOException;
 
 import seedu.api.Api;
 import seedu.commands.Auth;
-import seedu.common.CommonFiles;
-import seedu.data.CarparkList;
-import seedu.exception.*;
-import seedu.ui.Ui;
-import seedu.parser.Parser;
-import seedu.parser.Command;
 import seedu.commands.Find;
+import seedu.common.CommonFiles;
 import seedu.data.Carpark;
+import seedu.data.CarparkList;
+import seedu.exception.EmptyAuthException;
+import seedu.exception.EmptyResponseException;
+import seedu.exception.EmptySecretFileException;
+import seedu.exception.InvalidFindCommandException;
+import seedu.exception.NoCarparkFoundException;
+import seedu.exception.NoFileFoundException;
+import seedu.exception.ParkingException;
+import seedu.exception.UnauthorisedAccessApiException;
+import seedu.parser.Command;
+import seedu.parser.Parser;
+import seedu.ui.Ui;
 
 /**
  * Main class of the program.
@@ -102,8 +109,8 @@ public class Parking {
                     ui.showAuthSuccess();
                 } catch (IOException e) {
                     ui.showAuthError();
-                } catch (EmptySecretFileException | NoFileFoundException | EmptyResponseException |
-                         UnauthorisedAccessApiException | EmptyAuthException f) {
+                } catch (EmptySecretFileException | NoFileFoundException | EmptyResponseException
+                         | UnauthorisedAccessApiException | EmptyAuthException f) {
                     ui.print(f.getMessage());
                 }
                 break;

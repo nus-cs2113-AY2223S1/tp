@@ -1,25 +1,31 @@
 package seedu.commands;
 
-import seedu.api.Api;
-import seedu.exception.*;
-import seedu.ui.Ui;
+import static seedu.common.CommonFiles.API_KEY_FILE_PATH;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import static seedu.common.CommonFiles.API_KEY_FILE_PATH;
+import seedu.api.Api;
+import seedu.exception.EmptyAuthException;
+import seedu.exception.EmptyResponseException;
+import seedu.exception.EmptySecretFileException;
+import seedu.exception.NoFileFoundException;
+import seedu.exception.UnauthorisedAccessApiException;
+import seedu.ui.Ui;
 
+/**
+ * Represents the 'auth' command to authenticate user API key
+ */
 public class Auth {
-    Api api = new Api();
-    Ui ui = new Ui();
+    private Api api = new Api();
+    private Ui ui = new Ui();
 
     /**
      * Passes the API KEY into secret.txt
      * @param input Input string of User
      * @throws IOException
      */
-    public void sendApiKey(String input) throws IOException, EmptyAuthException{
+    public void sendApiKey(String input) throws IOException, EmptyAuthException {
         String[] words = input.split("\\s+", 2);
         if (words.length < 2 || words[1].length() == 0) {
             throw new EmptyAuthException("No API Key entered! Try again.");
@@ -32,12 +38,15 @@ public class Auth {
             fw.close();
         }
     }
-
     /**
      * Check if API Key is valid.
      * @param input Input string of user
-     * @return Returns true if API Key is valid, else return false.
      * @throws IOException
+     * @throws EmptySecretFileException
+     * @throws NoFileFoundException
+     * @throws EmptyResponseException
+     * @throws UnauthorisedAccessApiException
+     * @throws EmptyAuthException
      */
     public void authenticate(String input) throws IOException, EmptySecretFileException, NoFileFoundException,
             EmptyResponseException, UnauthorisedAccessApiException, EmptyAuthException {
