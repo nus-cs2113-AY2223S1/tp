@@ -213,7 +213,7 @@ public class Parser {
         case "n/":
             Pattern matchName = Pattern.compile("^(\\w+\\s*\\w+|\\w+)$", Pattern.CASE_INSENSITIVE);
             if (matchName.matcher(input).find()) {
-                prescriptionList.edit(id, input, null, null);
+                prescriptionList.edit(id, input, "", "");
             } else {
                 throw new OneDocException("Prescription name is incorrectly formatted! "
                         + "Please use one or two names without dashes or special characters");
@@ -222,7 +222,7 @@ public class Parser {
         case "d/":
             Pattern matchDosage = Pattern.compile("^(\\d+\\s*\\w+)$", Pattern.CASE_INSENSITIVE);
             if (matchDosage.matcher(input).find()) {
-                prescriptionList.edit(id, null, input, null);
+                prescriptionList.edit(id, "", input, "");
             } else {
                 throw new OneDocException("Dosage is incorrectly formatted! "
                         + "Please use [amount] [portion] format, i.e. 10 mg");
@@ -231,7 +231,7 @@ public class Parser {
         case "t/":
             Pattern matchTimeInt = Pattern.compile("^(\\w+)$", Pattern.CASE_INSENSITIVE);
             if (matchTimeInt.matcher(input).find()) {
-                prescriptionList.edit(id, null, null, input);
+                prescriptionList.edit(id, "", "", input);
             } else {
                 throw new OneDocException("Time interval is incorrectly formatted! "
                         + "Please use words and numbers to describe the time interval");
