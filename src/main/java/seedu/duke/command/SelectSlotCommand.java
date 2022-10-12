@@ -6,6 +6,7 @@ import java.util.Map;
 import seedu.duke.model.LessonType;
 import seedu.duke.model.SelectedModule;
 import seedu.duke.parser.Parser;
+import seedu.duke.parser.LessonTypeParser;
 import seedu.duke.utils.State;
 import seedu.duke.utils.Storage;
 import seedu.duke.utils.Ui;
@@ -14,22 +15,24 @@ public class SelectSlotCommand extends Command {
     public static final String FORMAT = "select /module [MODULE_CODE] /type [LESSON_TYPE] /code [CLASS_NO]";
     public static final String COMMAND_WORD = "select";
 
-    private final String moduleCode;
-    private final LessonType lessonType;
-    private final String classNo;
+    private Map<String, String> params;
+    private String moduleCode;
+    private LessonType lessonType;
+    private String classNo;
     private boolean successful;
 
     public SelectSlotCommand(String input) {
         super(input.split("\\s"));
-        Map<String, String> params = Parser.parseParams(input);
-        moduleCode = params.get("module");
-        lessonType = LessonType.valueOf(params.get("type"));
-        classNo = params.get("code");
+        params = Parser.parseParams(input);
         successful = false;
     }
 
     @Override
     public void execute(State state, Ui ui, Storage storage) {
+        moduleCode = params.get("module").toUpperCase();
+        lessonType = LessonTypeParser.parse(params.get("type"));
+        classNo = params.get("code").toUpperCase();
+        // TODO validate params
         List<SelectedModule> modules = state.getSelectedModulesList();
         for (int i = 0; i < modules.size(); i++) {
             if (modules.get(i).getModule().moduleCode.equals(moduleCode)) {

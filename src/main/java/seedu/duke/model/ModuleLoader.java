@@ -15,6 +15,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 
+import seedu.duke.parser.LessonTypeParser;
+
 public class ModuleLoader {
 
     public static String getStringOrEmpty(JsonNode node, String key) {
@@ -43,7 +45,7 @@ public class ModuleLoader {
                 Day.valueOf(node.get("day").asText()),
                 node.get("endTime").asText(),
                 node.get("startTime").asText(),
-                LessonType.valueOf(node.get("lessonType").asText().replaceAll("[- ]", "")),
+                LessonTypeParser.parse(node.get("lessonType").asText()),
                 node.get("venue").asText(),
                 jsonNodeAsIntList(node.get("weeks")),
                 node.get("size").asInt());
