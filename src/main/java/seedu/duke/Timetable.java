@@ -30,8 +30,9 @@ public class Timetable {
     }
 
 
-    public void deleteModule(int index){
-        listOfModules.remove(index - 1); // the nth module in list has index n-1
+    public void deleteModule(int index) {
+        listOfModules.remove(index - 1);
+    }    // the nth module in list has index n-1
 
     public int getListLength() {
         return listOfModules.size();
