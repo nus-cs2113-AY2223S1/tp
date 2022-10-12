@@ -14,6 +14,8 @@ public class HelpCommand extends Command {
     public static final String VIEW_TIMETABLE_COMMAND_INSTRUCTION = "view - displays current timetable!";
     public static final String SELECT_SLOT_COMMAND_INSTRUCTION = "select /module [MODULE_CODE] /type [LESSON_TYPE] /code [CLASS_NO] - select slot for modules!";
 
+
+    public static final String HELP_DISPLAY_MESSAGE = "";
     public HelpCommand(String[] input) {
         super(input);
     }
