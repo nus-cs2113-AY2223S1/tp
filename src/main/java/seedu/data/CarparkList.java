@@ -32,4 +32,13 @@ public class CarparkList {
         }
         throw new NoCarparkFoundException("No carpark was found!");
     }
+
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+        for (Carpark carpark : carparks) {
+            result.append(carpark.toString()).append("\n");
+        }
+        return result.toString();
+    }
 }
