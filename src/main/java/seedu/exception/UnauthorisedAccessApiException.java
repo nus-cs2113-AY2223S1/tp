@@ -9,6 +9,6 @@ public class UnauthorisedAccessApiException extends ParkingException {
     }
 
     public String getMessage() {
-        return "Invalid API key";
+        return "Invalid API key.";
     }
 }

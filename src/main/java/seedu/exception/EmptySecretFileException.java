@@ -9,11 +9,11 @@ public class EmptySecretFileException extends ParkingException {
     }
 
     /**
-     * return predefined message.
-     * @return predefined message.
+     * return Predefined message.
+     * @return Predefined message.
      */
     @Override
     public String getMessage() {
-        return "API key is not entered. Load it first!";
+        return "API key in secretfile.txt is empty.";
     }
 }

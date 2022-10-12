@@ -34,7 +34,7 @@ public class UiTest {
         buffer.reset();
 
         // Assert
-        Assertions.assertEquals("Example string\n", content);
+        Assertions.assertEquals("Example string", content.trim());
     }
     //@@author
 

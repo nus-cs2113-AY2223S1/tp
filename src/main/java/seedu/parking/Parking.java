@@ -37,21 +37,17 @@ public class Parking {
         try {
             api.loadApiKey(API_KEY_FILE, API_JSON_DIRECTORY); // Will give exception when file is missing or empty key
             api.asyncExecuteRequest(); // Send request to API and wait asynchronously
-
             // More code here while waiting for data to come back
-
             // This should be the last code block of the initialising phase
-            // System.out.println("Trying to fetch data"); // Debug line
             api.fetchData();
-            // System.out.println("Completed fetch data!"); // Debug line
+            ui.print("Fetching data from API successful!");
         } catch (ParkingException e) {
-            System.out.println(e.getMessage());
+            ui.print(e.getMessage());
+            ui.print("Loading from local backup: ");
         } catch (IOException e) {
             ui.showSaveError();
-        } finally {
-            System.out.println("Fetching and save data sequence terminated"); // Debug line
+            ui.print("Loading from local backup: ");
         }
-
 
         // Load file from json
         ui.showLoadingDataMessage();
@@ -60,8 +56,6 @@ public class Parking {
             ui.showLoadingDataSuccess();
         } catch (ParkingException e) {
             System.out.println(e.getMessage());
-        } finally {
-            System.out.println("Load data sequence terminated"); // Debug line
         }
 
         // Main loop for user to use program
@@ -89,6 +83,7 @@ public class Parking {
                 break;
             case UPDATE:
                 try {
+                    api.fetchData();
                     carparkList = new CarparkList(CommonFiles.LTA_FILE_PATH, CommonFiles.LTA_BACKUP_FILE_PATH);
                     ui.showUpdateDataSuccess();
                 } catch (ParkingException e) {
