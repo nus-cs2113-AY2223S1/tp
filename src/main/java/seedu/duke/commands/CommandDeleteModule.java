@@ -9,8 +9,7 @@ import java.io.IOException;
 public class CommandDeleteModule {
     public static String deleteModule(Timetable timetable) {
 
-        System.out.println("Here are your modules: ");
-        timetable.listModules();  ///// module list not shown
+        System.out.println(timetable.listModules());
 
         System.out.println("Which module you would like to delete? " + 
                 "Please enter the index of that module. ");
