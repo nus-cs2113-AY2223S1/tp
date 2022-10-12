@@ -61,22 +61,30 @@ public class Module {
         case "Lecture":
             Lecture tempLecture = new Lecture(day, startTime, endTime, "Lecture");
             temp.add(tempLecture);
-            if (!DataManager.attendingExists(tempLecture, moduleCode)) DataManager.addAttending(tempLecture, moduleCode);
+            if (!DataManager.attendingExists(tempLecture, moduleCode)) {
+                DataManager.addAttending(tempLecture, moduleCode);
+            }
             break;
         case "Tutorial":
             Tutorial tempTutorial = new Tutorial(day, startTime, endTime, "Tutorial");
             temp.add(tempTutorial);
-            if (!DataManager.attendingExists(tempTutorial, moduleCode)) DataManager.addAttending(tempTutorial, moduleCode);
+            if (!DataManager.attendingExists(tempTutorial, moduleCode)) {
+                DataManager.addAttending(tempTutorial, moduleCode);
+            }
             break;
         case "Laboratory":
             Laboratory tempLaboratory = new Laboratory(day, startTime, endTime, "Laboratory");
             temp.add(tempLaboratory);
-            if (!DataManager.attendingExists(tempLaboratory, moduleCode)) DataManager.addAttending(tempLaboratory, moduleCode);
+            if (!DataManager.attendingExists(tempLaboratory, moduleCode)) {
+                DataManager.addAttending(tempLaboratory, moduleCode);
+            }
             break;
         default:
             Others tempOthers = new Others(day, startTime, endTime, "Others");
             temp.add(tempOthers);
-            if (!DataManager.attendingExists(tempOthers, moduleCode)) DataManager.addAttending(tempOthers, moduleCode);
+            if (!DataManager.attendingExists(tempOthers, moduleCode)) {
+                DataManager.addAttending(tempOthers, moduleCode);
+            }
             break;
         }
     }

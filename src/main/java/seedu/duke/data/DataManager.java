@@ -16,7 +16,6 @@ import seedu.duke.module.lessons.Tutorial;
 import seedu.duke.module.lessons.Laboratory;
 import seedu.duke.module.lessons.Others;
 
-
 public class DataManager {
     /*
      * ModuleLines:
@@ -36,21 +35,32 @@ public class DataManager {
     protected static String dataDirectoryPath;
 
     public static void initDataFile(String semester) {
-        if (!semester.equals("1") && !semester.equals("2")) return;
+        if (!semester.equals("1") && !semester.equals("2")) {
+            return;
+        }
         currentSemester = semester;
         dataDirectoryPath = "./Sem" + currentSemester + "DataDirectory";
 
         File dataDir = new File(dataDirectoryPath);
-        if (!dataDir.exists()) dataDir.mkdir();
-        try{
+        if (!dataDir.exists()) {
+            dataDir.mkdir();
+        }
+
+        try {
             File moduleDataFile = new File(dataDirectoryPath + "/ModuleData.txt");
-            if (!moduleDataFile.exists()) moduleDataFile.createNewFile();
+            if (!moduleDataFile.exists()) {
+                moduleDataFile.createNewFile();
+            }
 
             File lessonDataFile = new File(dataDirectoryPath + "/LessonData.txt");
-            if (!lessonDataFile.exists()) lessonDataFile.createNewFile();
+            if (!lessonDataFile.exists()) {
+                lessonDataFile.createNewFile();
+            }
 
             File attendingLessonDataFile = new File(dataDirectoryPath + "/AttendingLessonData.txt");
-            if (!attendingLessonDataFile.exists()) attendingLessonDataFile.createNewFile();
+            if (!attendingLessonDataFile.exists()) {
+                attendingLessonDataFile.createNewFile();
+            }
         } catch (IOException e) {
             System.out.println("Error creating data files");
         }
@@ -60,7 +70,9 @@ public class DataManager {
         for (int i = 0; i < attendingLessonLines.size(); i++) {
             String[] currAttendingLessonLineList = attendingLessonLines.get(i).split("\\|");
             if (currAttendingLessonLineList[0].equals(moduleCode)
-                && currAttendingLessonLineList[1].equals(lesson.getLessonType())) return true;
+                    && currAttendingLessonLineList[1].equals(lesson.getLessonType())) {
+                return true;
+            }
         }
         return false;
     }
@@ -70,7 +82,7 @@ public class DataManager {
          * Stores modules into ModuleData.txt in the following format:
          * <code>|<name>|<description>\n
          */
-        try{
+        try {
             FileWriter myWriter = new FileWriter(dataDirectoryPath + "/ModuleData.txt", true);
             String line = code + "|" + name + "|" + description;
             myWriter.write(line + "\n");
@@ -88,11 +100,12 @@ public class DataManager {
          */
         String code = module.getModuleCode();
         List<Lesson> lessons = module.getLessons();
-        try{
+        try {
             FileWriter myWriter = new FileWriter(dataDirectoryPath + "/LessonData.txt", true);
             for (Lesson lesson : lessons) {
-                String line = code + "|" + lesson.getLessonType() + "|" + lesson.getDay() + "|" + lesson.getStartTime() + "|" + lesson.getEndTime();
-                myWriter.write(line + "\n"); 
+                String line = code + "|" + lesson.getLessonType() + "|" + lesson.getDay()
+                        + "|" + lesson.getStartTime() + "|" + lesson.getEndTime();
+                myWriter.write(line + "\n");
                 LessonLines.add(line + "\n");
             }
             myWriter.close();
@@ -106,10 +119,11 @@ public class DataManager {
          * Stores lessons into Data.txt in the following format:
          * <ModuleCode>|<lessonType>|<day>|<start>|<end>\n
          */
-        try{
+        try {
             FileWriter myWriter = new FileWriter(dataDirectoryPath + "/AttendingLessonData.txt", true);
-            String line = code + "|" + lesson.getLessonType() + "|" + lesson.getDay() + "|" + lesson.getStartTime() + "|" + lesson.getEndTime();
-            myWriter.write(line + "\n"); 
+            String line = code + "|" + lesson.getLessonType() + "|" + lesson.getDay()
+                    + "|" + lesson.getStartTime() + "|" + lesson.getEndTime();
+            myWriter.write(line + "\n");
             attendingLessonLines.add(line + "\n");
             myWriter.close();
         } catch (IOException e) {
@@ -123,22 +137,23 @@ public class DataManager {
             currLine = attendingLessonLines.get(i);
             String[] currLineList = currLine.split("\\|");
             if (currLineList[0].equals(moduleCode) && currLineList[1].equals(lessonToSet.getLessonType())) {
-                String newLine = moduleCode + "|" + lessonToSet.getLessonType() + "|" + lessonToSet.getDay() + "|" + lessonToSet.getStartTime() + "|" + lessonToSet.getEndTime();
+                String newLine = moduleCode + "|" + lessonToSet.getLessonType() + "|" + lessonToSet.getDay()
+                        + "|" + lessonToSet.getStartTime() + "|" + lessonToSet.getEndTime();
                 attendingLessonLines.set(i, newLine + "\n");
                 break;
             }
         }
 
-        try{
-            //Erase Data
+        try {
+            // Erase Data
             FileWriter myWriter = new FileWriter(dataDirectoryPath + "/AttendingLessonData.txt");
             myWriter.write("");
             myWriter.close();
 
-            //Replace Data
+            // Replace Data
             myWriter = new FileWriter(dataDirectoryPath + "/AttendingLessonData.txt", true);
             for (int i = 0; i < attendingLessonLines.size(); i++) {
-                myWriter.write(attendingLessonLines.get(i)); 
+                myWriter.write(attendingLessonLines.get(i));
             }
 
             myWriter.close();
@@ -150,13 +165,13 @@ public class DataManager {
     private static void loadAttending() {
         List<Module> moduleList = Timetable.getListOfModules();
 
-        //load attendingLessonLines
+        // load attendingLessonLines
         String currLine;
         String[] currLineList;
 
         Module currModule;
         String moduleCode;
-        int moduleIndex=0;
+        int moduleIndex = 0;
 
         for (int i = 0; i < attendingLessonLines.size(); i++) {
             currLine = attendingLessonLines.get(i);
@@ -193,12 +208,12 @@ public class DataManager {
                     Others newOthers = new Others(lessonDay, lessonStart, lessonEnd, lessonType);
                     currModule.replaceAttending(newOthers);
                     break;
-            } 
+            }
         }
     }
 
     public static void loadTimetableFromDataFile() {
-        //Initiate readers
+        // Initiate readers
         FileReader moduleFileReader;
         BufferedReader moduleBufferedReader;
         FileReader lessonFileReader;
@@ -206,21 +221,21 @@ public class DataManager {
         FileReader attendingLessonFileReader;
         BufferedReader attendingLessonBufferedReader;
 
-        //Get dataFile
+        // Get dataFile
         File moduleDataFile = new File(dataDirectoryPath + "/ModuleData.txt");
         File lessonDataFile = new File(dataDirectoryPath + "/LessonData.txt");
         File attendingLessonDataFile = new File(dataDirectoryPath + "/AttendingLessonData.txt");
 
-        //Variables for iterating through data files
+        // Variables for iterating through data files
         String currModuleLine;
-        String[] moduleInfoList; //code, name, description
+        String[] moduleInfoList; // code, name, description
         String currLessonLine;
         String[] lessonInfoList;
         String currAttendingLine;
 
         List<Lesson> lessons = new ArrayList<Lesson>();
 
-        try{
+        try {
             moduleFileReader = new FileReader(moduleDataFile);
             moduleBufferedReader = new BufferedReader(moduleFileReader);
 
@@ -244,15 +259,17 @@ public class DataManager {
                 String name = moduleInfoList[1];
                 String description = moduleInfoList[2];
 
-                while((currLessonLine = lessonBufferedReader.readLine()) != null) {
-                    if (!currLessonLine.split("\\|")[0].equals(code)) break;
+                while ((currLessonLine = lessonBufferedReader.readLine()) != null) {
+                    if (!currLessonLine.split("\\|")[0].equals(code)) {
+                        break;
+                    }
+
                     lessonInfoList = currLessonLine.split("\\|");
 
                     String lessonType = lessonInfoList[1];
                     String lessonDay = lessonInfoList[2];
                     String lessonStart = lessonInfoList[3];
                     String lessonEnd = lessonInfoList[4];
-
 
                     switch (lessonType) {
                         case "Lecture":
@@ -267,7 +284,7 @@ public class DataManager {
                         default:
                             lessons.add(new Others(lessonDay, lessonStart, lessonEnd, lessonType));
                             break;
-                    }    
+                    }
                 }
                 Timetable.addNewModuleFromFile(code, name, description, lessons);
             }
