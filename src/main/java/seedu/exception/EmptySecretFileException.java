@@ -1,5 +1,8 @@
 package seedu.exception;
 
+
+
+
 /**
  * Exception for empty secret file.
  */

@@ -44,10 +44,10 @@ public class FileReader {
     }
 
     /**
-     * todo: Javadoc
-     * @param filepath [fill this up]
-     * @return [fill this up]
-     * @throws IOException [fill this up]
+     * get carparks from Json file
+     * @param filepath file path of Json file
+     * @return List of carparks
+     * @throws IOException if an I/O error occurs reading from the stream
      */
     private static List<Carpark> getCarparks(Path filepath) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
