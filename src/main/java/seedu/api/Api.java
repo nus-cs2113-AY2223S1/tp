@@ -32,6 +32,7 @@ public class Api {
     private final FileStorage storage;
     private final Ui ui;
     private String apiKey = "";
+    private static final int FETCH_TRIES = 5;
 
     /**
      * Constructor to create a new client and the correct HTTP request.
@@ -102,10 +103,10 @@ public class Api {
         case 401:
             throw new UnauthorisedAccessApiException();
         case 503:
-            throw new ServerNotReadyApiException("Too many request. Trying again...");
+            throw new ServerNotReadyApiException("Too many requests. Trying again...");
         default:
             throw new UnknownResponseApiException("Response Code: " + responseCode
-                    + "\nIf problem persist contact developer. Trying again...");
+                    + "\nIf the problem persists please contact the developer. Trying again...");
         }
     }
 
@@ -119,7 +120,7 @@ public class Api {
      */
     public void fetchData() throws EmptyResponseException, IOException, UnauthorisedAccessApiException {
         String result = "";
-        int fetchTries = 5;
+        int fetchTries = FETCH_TRIES;
         do {
             try {
                 result = asyncGetResponse().trim();

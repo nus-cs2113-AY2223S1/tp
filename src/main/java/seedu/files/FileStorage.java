@@ -48,9 +48,12 @@ public class FileStorage {
      * @throws IOException
      */
     public void writeDataToFile(String data) throws IOException {
-        checkFileExist();
-        FileWriter fileWriter = new FileWriter(filePath);
-        fileWriter.write(data);
-        fileWriter.close();
+        try {
+            checkFileExist();
+            FileWriter fileWriter = new FileWriter(filePath);
+            fileWriter.write(data);
+            fileWriter.close();
+        }
+
     }
 }
