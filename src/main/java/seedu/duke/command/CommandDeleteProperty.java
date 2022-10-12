@@ -24,6 +24,6 @@ public class CommandDeleteProperty extends CommandDelete {
         Property deletedProperty = propertyList.deleteProperty(propertyIndex);
         ui.showPropertyDeletedConfirmationMessage(deletedProperty);
         //Update Storage
-        //storage.updateProperty(propertyList);
+        storage.updateProperty(propertyList);
     }
 }

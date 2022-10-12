@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Storage {
     private static final String DIRECTORY = "./data/";
@@ -17,8 +19,20 @@ public class Storage {
     private static final String CURRENCY = "SGD";
     private static final String COLON = " : ";
     private static final String EMPTY_STRING = "";
+    private static final String LOG_ADD_CLIENT_LABEL = "Client has been added to text file as: ";
+    private static final String LOG_ADD_PROPERTY_LABEL = "Property has been added to text file as: ";
+    private static final String LOG_ADD_PAIRING_LABEL = "Pairings has been added to text file as: ";
+    private static final String LOG_CLIENT_UPDATE_LABEL = "Client file has been successfully updated";
+    private static final String LOG_PROPERTY_UPDATE_LABEL = "Property file has been successfully updated";
+    private static final String LOG_PAIRING_UPDATE_LABEL = "Pairing file has been successfully updated";
+    private static final String LOG_CLIENT_LOAD_LABEL = "Client has been successfully loaded into the array list.";
+    private static final String LOG_PROPERTY_LOAD_LABEL = "Property has been successfully loaded into the array list.";
+    private static final String LOG_PAIRING_LOAD_LABEL = "Pairing has been successfully loaded into the hashmap.";
 
-    
+    private static final Logger LOGGER = Logger.getLogger("Storage");
+
+
+
     public Storage(ClientList clientList, PropertyList propertyList, PairingList pairingList) {
         boolean hasDirectory = checkDirectory();
         boolean hasPropertyFile = checkPropertyFile();
@@ -113,16 +127,19 @@ public class Storage {
 
         if (hasClientFile) {
             File clientFile = new File(CLIENT_PATH);
+            assert clientFile.exists() : "Client text file does not exist";
             loadClient(clientList, clientFile);
         }
 
         if (hasPropertyFile) {
             File propertyFile = new File(PROPERTY_PATH);
+            assert propertyFile.exists() : "Property text file does not exist";
             loadProperty(propertyList, propertyFile);
         }
 
         if (hasPairingFile) {
             File pairingFile = new File(PAIR_PATH);
+            assert pairingFile.exists() : "Pairing text file does not exist";
             loadPair(pairingList, pairingFile);
         }
     }
@@ -145,6 +162,7 @@ public class Storage {
                 String clientBudget = clientParameters[3].replace(CURRENCY, EMPTY_STRING).trim();
                 clientList.addClient(clientName, clientContact, clientEmail, clientBudget);
             }
+            LOGGER.log(Level.INFO, LOG_CLIENT_LOAD_LABEL);
         } catch (FileNotFoundException e) {
             System.out.println("File is not found...");
         }
@@ -169,6 +187,7 @@ public class Storage {
                 String unitType = propertyParameters[3].replace(CURRENCY, EMPTY_STRING).trim();
                 propertyList.addProperty(landlordName, address, price, unitType);
             }
+            LOGGER.log(Level.INFO, LOG_PROPERTY_LOAD_LABEL);
         } catch (FileNotFoundException e) {
             System.out.println("File is not found...");
         }
@@ -190,7 +209,7 @@ public class Storage {
                 String property = pairingParameters[1];
                 pairingList.addPairing(client, property);
             }
-
+            LOGGER.log(Level.INFO, LOG_PAIRING_LOAD_LABEL);
         } catch (FileNotFoundException e) {
             System.out.println("File is not found...");
         }
@@ -215,6 +234,10 @@ public class Storage {
 
             fw.write(newText);
             fw.close();
+
+            String logMessage = LOG_ADD_PROPERTY_LABEL + newText;
+            LOGGER.log(Level.INFO, logMessage);
+
         } catch (IOException e) {
             System.out.println("Property file does not exist.");
         }
@@ -239,6 +262,9 @@ public class Storage {
             fw.write(newText);
             fw.close();
 
+            String logMessage = LOG_ADD_CLIENT_LABEL + newText;
+            LOGGER.log(Level.INFO, logMessage);
+
         } catch (IOException e) {
             System.out.println("Client file does not exist.");
         }
@@ -254,6 +280,9 @@ public class Storage {
             fw.write(finalFormat);
             fw.close();
 
+            String logMessage = LOG_ADD_PAIRING_LABEL + finalFormat;
+            LOGGER.log(Level.INFO, logMessage);
+
         } catch (IOException e) {
             System.out.println("Pairing file does not exist.");
         }
@@ -261,7 +290,8 @@ public class Storage {
 
     /**
      * Updates the client list when entry in client list is deleted.
-     * @param clientList The array list containing all the clients.
+     *
+     * @param clientList The object containing the array list of client.
      */
     public void updateClient(ClientList clientList) {
         try {
@@ -269,7 +299,7 @@ public class Storage {
             ArrayList<Client> clientLists = clientList.getClientList();
 
             // clientText will initially be empty and will be appended in subsequent iterations of the client list.
-            String clientText = "";
+            String clientText = EMPTY_STRING;
             for (int i = 0; i < clientLists.size(); i += 1) {
                 // Concatenate the string variables into clientText
                 String budgetPrice = CURRENCY + clientLists.get(i).getClientBudgetPerMonth();
@@ -284,9 +314,41 @@ public class Storage {
             // Write the client list into a file.
             clientFile.write(clientText);
             clientFile.close();
+            LOGGER.log(Level.INFO, LOG_CLIENT_UPDATE_LABEL);
 
         } catch (IOException e) {
             System.out.println("Client file does not exist.");
+        }
+    }
+
+    /**
+     * Updates the property list in the text file when entry is deleted.
+     *
+     * @param propertyList An object containing the array list of property.
+     */
+    public void updateProperty(PropertyList propertyList) {
+        try {
+            FileWriter propertyFile = new FileWriter(PROPERTY_PATH);
+            ArrayList<Property> propertyLists = propertyList.getPropertyList();
+            String propertyText = EMPTY_STRING;
+
+            for (int i = 0; i < propertyLists.size(); i += 1) {
+                String landlordName = propertyLists.get(i).getLandlordName();
+                String propertyAddress = propertyLists.get(i).getPropertyAddress();
+                String rentingPrice = propertyLists.get(i).getRentingPrice();
+                String unitType = propertyLists.get(i).getUnitType();
+                String finalText = landlordName + SEPARATOR + propertyAddress + SEPARATOR
+                        + CURRENCY + rentingPrice + SEPARATOR + unitType + System.lineSeparator();
+
+                propertyText = propertyText.concat(finalText);
+            }
+
+            propertyFile.write(propertyText);
+            propertyFile.close();
+            LOGGER.log(Level.INFO, LOG_PROPERTY_UPDATE_LABEL);
+
+        } catch (IOException e) {
+            System.out.println("Property file does not exist.");
         }
     }
 
@@ -310,6 +372,8 @@ public class Storage {
             // Write the pairing list into a file.
             pairFile.write(pairText);
             pairFile.close();
+            LOGGER.log(Level.INFO, LOG_PAIRING_UPDATE_LABEL);
+
         } catch (IOException e) {
             System.out.println("Pair File does not exist.");
         }
