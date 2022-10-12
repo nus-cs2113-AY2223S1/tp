@@ -53,8 +53,6 @@ import static seedu.duke.Messages.MESSAGE_PAIR_UNPAIR_WRONG_FORMAT;
 import static seedu.duke.Messages.MESSAGE_PAIR_UNPAIR_INPUT_EXAMPLE;
 import static seedu.duke.Messages.MESSAGE_TRY_AGAIN;
 
-import static seedu.duke.Messages.MESSAGE_INCORRECT_LIST_DETAILS;
-
 /**
  * Handler for all interactions between the user and the command line.
  */
@@ -198,11 +196,7 @@ public class Ui {
     public void showEmptyClientIndexDeleteMessage() {
         showToUser(MESSAGE_EMPTY_CLIENT_INDEX);
     }
-    
-    public void showIncorrectListDetailsMessage() {
-        showToUser(MESSAGE_INCORRECT_LIST_DETAILS);
-    }
-    
+
     public void showMissingClientIndexFlagMessage() {
         showToUser(MESSAGE_MISSING_CLIENT_INDEX_FLAG);
     }
@@ -210,7 +204,8 @@ public class Ui {
     public void showInvalidClientIndexFlagFormatMessage() {
         showToUser(MESSAGE_INVALID_CLIENT_INDEX_FLAG_FORMAT);
     }
-    
+
+
     /* Pair/Unpair-Command-related showMessage methods. */
 
     public void showPairedConfirmationMessage(Client client, Property property) {
@@ -241,14 +236,6 @@ public class Ui {
         showToUser(MESSAGE_TRY_AGAIN);
     }
 
-    public void displayOneClient(Client client) {
-        //client display interface
-    }
-
-    public void displayOneProperty(Property property) {
-        //property display interface
-    }
-
     public void showClientAlreadyPairedMessage() {
         showToUser(MESSAGE_CLIENT_ALREADY_PAIRED);
     }
@@ -260,6 +247,7 @@ public class Ui {
     public void showNoExistingPairMessage() {
         showToUser(MESSAGE_NO_EXISTING_PAIR);
     }
+
 
     /* Check-Command-related showMessage methods. */
 
@@ -286,4 +274,3 @@ public class Ui {
         showToUser(MESSAGE_NUMBER_OF_LIST_RESULTS + count);
     }
 }
-
