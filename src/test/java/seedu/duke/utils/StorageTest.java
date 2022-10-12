@@ -1,5 +1,6 @@
 package seedu.duke.utils;
 
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import seedu.duke.model.LessonType;
 import seedu.duke.model.Module;
@@ -14,19 +15,19 @@ import java.util.Scanner;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class StorageTest {
-    @Test
+    @RepeatedTest(5)
     public void saveState_state_outputFile() throws IOException {
         State state = new State();
         int semester = 1;
         state.setSemester(semester);
 
         SelectedModule selectedModule1 = new SelectedModule(Module.get("CS1010"), semester);
-        selectedModule1.selectSlot(LessonType.Tutorial, "01");
-        selectedModule1.selectSlot(LessonType.SectionalTeaching, "1");
+        selectedModule1.selectSlot(LessonType.TUTORIAL, "01");
+        selectedModule1.selectSlot(LessonType.SECTIONAL_TEACHING, "1");
         state.addSelectedModule(selectedModule1);
         SelectedModule selectedModule2 = new SelectedModule(Module.get("CS2113"), semester);
-        selectedModule2.selectSlot(LessonType.Lecture, "1");
-        selectedModule2.selectSlot(LessonType.Tutorial, "4");
+        selectedModule2.selectSlot(LessonType.LECTURE, "1");
+        selectedModule2.selectSlot(LessonType.TUTORIAL, "4");
         state.addSelectedModule(selectedModule2);
         Storage storage = new Storage();
         storage.saveState(state);
@@ -50,7 +51,7 @@ public class StorageTest {
         assertEquals(expectedString.toString(), actualString.toString());
     }
 
-    @Test
+    @RepeatedTest(5)
     public void openPreviousState_file_state() {
         Ui ui = new Ui();
         Storage storage = new Storage();
@@ -67,10 +68,10 @@ public class StorageTest {
 
         assertEquals(1, actualState.getSemester());
         assertEquals("CS1010", module1.moduleCode);
-        assertEquals("01", selectedSlots1.get(LessonType.Tutorial));
-        assertEquals("1", selectedSlots1.get(LessonType.SectionalTeaching));
+        assertEquals("01", selectedSlots1.get(LessonType.TUTORIAL));
+        assertEquals("1", selectedSlots1.get(LessonType.SECTIONAL_TEACHING));
         assertEquals("CS2113", module2.moduleCode);
-        assertEquals("4", selectedSlots2.get(LessonType.Tutorial));
-        assertEquals("1", selectedSlots2.get(LessonType.Lecture));
+        assertEquals("4", selectedSlots2.get(LessonType.TUTORIAL));
+        assertEquals("1", selectedSlots2.get(LessonType.LECTURE));
     }
 }
