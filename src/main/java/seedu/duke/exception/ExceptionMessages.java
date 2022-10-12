@@ -29,4 +29,6 @@ public class ExceptionMessages {
     public static final String MESSAGE_NUMBER_FORMAT_INVALID = "Number should only contain digit 0-9";
     public static final String MESSAGE_DATE_FORMAT_INVALID = "The date format is incorrect(YYYY-MM-DD)";
     public static final String MESSAGE_INSUFFICIENT_ARGUMENTS = "Not enough arguments for this commands to execute";
+    public static final String MESSAGE_COMMAND_UNRECOGNIZABLE = "This command is unrecognizable!!!\n"
+            + "Please use help command to check";
 }

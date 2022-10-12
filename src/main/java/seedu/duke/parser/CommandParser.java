@@ -25,6 +25,8 @@ import seedu.duke.item.ItemList;
 import seedu.duke.transaction.TransactionList;
 import seedu.duke.user.UserList;
 
+import static seedu.duke.exception.ExceptionMessages.MESSAGE_COMMAND_UNRECOGNIZABLE;
+
 public class CommandParser {
     /*
      * Constants line separated by utility
@@ -129,8 +131,7 @@ public class CommandParser {
         case COMMAND_REMOVE_TX:
             return new RemoveTransactionCommand(parts, transactionList);
         default:
-            throw new CommandNotFoundException("This command is unrecognizable!!!\n"
-                    + "Please use help command to check");
+            throw new CommandNotFoundException(MESSAGE_COMMAND_UNRECOGNIZABLE);
         }
     }
 }
