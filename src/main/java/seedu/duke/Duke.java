@@ -4,6 +4,7 @@ import seedu.duke.item.ItemList;
 import seedu.duke.transaction.TransactionList;
 import seedu.duke.command.Command;
 import seedu.duke.parser.CommandParser;
+import seedu.duke.ui.Ui;
 import seedu.duke.user.UserList;
 
 public class Duke {

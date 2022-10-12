@@ -1,6 +1,7 @@
-package seedu.duke.command;
+package seedu.duke.command.user;
 
-import seedu.duke.Ui;
+import seedu.duke.command.Command;
+import seedu.duke.ui.Ui;
 import seedu.duke.user.UserList;
 
 public class ListUsersCommand extends Command {

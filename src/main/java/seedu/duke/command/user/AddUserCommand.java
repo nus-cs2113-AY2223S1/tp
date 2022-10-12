@@ -1,5 +1,6 @@
-package seedu.duke.command;
+package seedu.duke.command.user;
 
+import seedu.duke.command.Command;
 import seedu.duke.exception.ContactNumberInvalidException;
 import seedu.duke.exception.DuplicateException;
 import seedu.duke.exception.InsufficientArgumentsException;
@@ -8,7 +9,14 @@ import seedu.duke.exception.UserNotFoundException;
 import seedu.duke.parser.CommandParser;
 import seedu.duke.user.User;
 import seedu.duke.user.UserList;
-import seedu.duke.Ui;
+import seedu.duke.ui.Ui;
+
+import static seedu.duke.exception.ExceptionMessages.MESSAGE_CONTACT_FORMAT_INVALID;
+import static seedu.duke.exception.ExceptionMessages.MESSAGE_CONTACT_LENGTH_INVALID;
+import static seedu.duke.exception.ExceptionMessages.MESSAGE_INSUFFICIENT_ARGUMENTS;
+import static seedu.duke.exception.ExceptionMessages.MESSAGE_INVALID_PARTS;
+import static seedu.duke.exception.ExceptionMessages.MESSAGE_USERNAME_TAKEN;
+import static seedu.duke.exception.ExceptionMessages.MESSAGE_USER_AGE_INVALID;
 
 public class AddUserCommand extends Command {
     private final String[] parts;
@@ -18,7 +26,7 @@ public class AddUserCommand extends Command {
         this.parts = parts;
         this.userList = userList;
         if (parts.length != 3) {
-            throw new InsufficientArgumentsException();
+            throw new InsufficientArgumentsException(MESSAGE_INSUFFICIENT_ARGUMENTS);
         }
     }
 
@@ -32,7 +40,7 @@ public class AddUserCommand extends Command {
             } else if (part.startsWith("c")) {
                 args[2] = CommandParser.getArgValue(part);
             } else {
-                throw new InvalidArgumentException("One of the parts is in incorrect format");
+                throw new InvalidArgumentException(MESSAGE_INVALID_PARTS);
             }
 
         }
@@ -42,7 +50,7 @@ public class AddUserCommand extends Command {
     private boolean isValidName(String userName) throws DuplicateException {
         try {
             userList.getUserById(userName);
-            throw new DuplicateException("This username has been taken");
+            throw new DuplicateException(MESSAGE_USERNAME_TAKEN);
         } catch (UserNotFoundException e) {
             return true;
         }
@@ -53,19 +61,19 @@ public class AddUserCommand extends Command {
             Integer.parseInt(age);
             return true;
         } catch (NumberFormatException e) {
-            throw new NumberFormatException("Age should only contain digit 0-9");
+            throw new NumberFormatException(MESSAGE_USER_AGE_INVALID);
         }
     }
 
     private boolean isValidContactNumber(String contactNumber) throws ContactNumberInvalidException {
         if (contactNumber.length() != 8) {
-            throw new ContactNumberInvalidException("Contact number length must have length of 8");
+            throw new ContactNumberInvalidException(MESSAGE_CONTACT_LENGTH_INVALID);
         }
         try {
             Integer.parseInt(contactNumber);
             return true;
         } catch (NumberFormatException e) {
-            throw new NumberFormatException("Contact number should only contain digit 0-9");
+            throw new NumberFormatException(MESSAGE_CONTACT_FORMAT_INVALID);
         }
     }
 
