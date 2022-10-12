@@ -9,6 +9,7 @@ import seedu.duke.command.IncompleteCommand;
 import seedu.duke.command.InvalidModuleCommand;
 import seedu.duke.command.UnknownCommand;
 import seedu.duke.command.ViewTimetableCommand;
+import seedu.duke.command.SelectSlotCommand;
 import seedu.duke.command.SearchModuleCodeCommand;
 import seedu.duke.command.SearchModuleNameCommand;
 
@@ -19,23 +20,24 @@ import java.util.regex.Pattern;
 
 public class Parser {
     public static Command parse(String userInput) {
-
         String[] keywords = userInput.split("\\s+");
         switch (keywords[0]) {
-            case ("search"):
-                return searchCommand(keywords);
-            case ("add"):
-                return addDeleteCommand(keywords, new AddModuleCommand(keywords));
-            case ("delete"):
-                return addDeleteCommand(keywords, new DeleteModuleCommand(keywords));
-            case ("view"):
-                return viewHelpExitCommand(keywords, new ViewTimetableCommand(keywords));
-            case ("help"):
-                return viewHelpExitCommand(keywords, new HelpCommand(keywords));
-            case ("bye"):
-                return viewHelpExitCommand(keywords, new ExitCommand(keywords));
-            default:
-                return new UnknownCommand(keywords);
+        case (SearchModuleNameCommand.COMMAND_WORD):
+            return searchCommand(keywords);
+        case (AddModuleCommand.COMMAND_WORD):
+            return addDeleteCommand(keywords, new AddModuleCommand(keywords));
+        case (DeleteModuleCommand.COMMAND_WORD):
+            return addDeleteCommand(keywords, new DeleteModuleCommand(keywords));
+        case (ViewTimetableCommand.COMMAND_WORD):
+            return viewHelpExitCommand(keywords, new ViewTimetableCommand(keywords));
+        case (HelpCommand.COMMAND_WORD):
+            return viewHelpExitCommand(keywords, new HelpCommand(keywords));
+        case (SelectSlotCommand.COMMAND_WORD):
+            return new SelectSlotCommand(userInput);
+        case (ExitCommand.COMMAND_WORD):
+            return viewHelpExitCommand(keywords, new ExitCommand(keywords));
+        default:
+            return new UnknownCommand(keywords);
         }
     }
 

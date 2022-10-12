@@ -12,7 +12,7 @@ import seedu.duke.utils.Ui;
 
 public class SelectSlotCommand extends Command {
     public static final String FORMAT = "select /module [MODULE_CODE] /type [LESSON_TYPE] /code [CLASS_NO]";
-    public static final String KEYWORD = "select";
+    public static final String COMMAND_WORD = "select";
 
     private final String moduleCode;
     private final LessonType lessonType;
