@@ -16,6 +16,8 @@ import java.util.List;
 import java.util.Map;
 
 public class ViewTimetableCommand extends Command {
+    public static final String COMMAND_WORD = "view";
+
     public ViewTimetableCommand(String[] input) {
         super(input);
     }
