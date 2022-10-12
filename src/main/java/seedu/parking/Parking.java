@@ -3,7 +3,6 @@ package seedu.parking;
 import java.io.IOException;
 
 import seedu.api.Api;
-import seedu.commands.Auth;
 import seedu.common.CommonFiles;
 import seedu.data.CarparkList;
 import seedu.exception.*;
@@ -28,7 +27,6 @@ public class Parking {
         Ui ui = new Ui();
         ui.greetUser();
         Api api = new Api();
-        Auth auth = new Auth();
 
         try {
             api.loadApiKey(); // Will give exception when file is missing or empty key
@@ -94,18 +92,6 @@ public class Parking {
                     ui.showUpdateError();
                 } finally {
                     System.out.println("Update data terminated"); // Debug line
-                }
-                break;
-            case AUTH:
-                try {
-                    auth.authenticate(input);
-                    ui.showAuthSuccess();
-                } catch (IOException e) {
-                    ui.showAuthError();
-                } catch (EmptyResponseException f) {
-                    ui.print(f.getMessage());
-                } catch (UnauthorisedAccessApiException g) {
-                    ui.print(g.getMessage());
                 }
                 break;
             default:
