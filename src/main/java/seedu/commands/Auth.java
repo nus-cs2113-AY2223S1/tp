@@ -26,9 +26,10 @@ public class Auth {
 
     /**
      * Passes the API KEY into secret.txt
+     *
      * @param input Input string of User
      * @throws NoCommandArgumentException If no command is found
-     * @throws FileWriteException If there is an error writing to file
+     * @throws FileWriteException         If there is an error writing to file
      */
     public void saveApiKey(String input) throws NoCommandArgumentException, FileWriteException {
         String[] words = input.trim().split("\\s+", 2);
@@ -42,8 +43,7 @@ public class Auth {
                 fw.write(apiKey);
                 ui.print("Successfully pushed api key into secret.txt");
                 fw.close();
-            }
-            catch (IOException e){
+            } catch (IOException e) {
                 throw new FileWriteException(API_KEY_FILE_PATH.toString());
             }
         }

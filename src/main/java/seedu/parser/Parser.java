@@ -55,6 +55,11 @@ public class Parser {
         return command;
     }
 
+    /**
+     * Check number of words in string and see if there are arguments.
+     * @param input input string to check
+     * @return If arguments are present, return true. If not, return false
+     */
     public boolean hasCommandArguments(String input) {
         String[] words = input.trim().split("\\s+");
         return words.length > 1;

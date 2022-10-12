@@ -4,7 +4,12 @@ package seedu.exception;
  * Exception for empty secret file.
  */
 public class EmptySecretFileException extends ParkingException {
-    String directory;
+    private String directory;
+
+    /**
+     * Constructor for the exception.
+     * @param directory String to be used for formatting purposes.
+     */
     public EmptySecretFileException(String directory) {
         super();
         this.directory = directory;
