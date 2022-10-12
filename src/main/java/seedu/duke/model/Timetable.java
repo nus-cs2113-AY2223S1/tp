@@ -267,7 +267,7 @@ public class Timetable {
         map.put(LessonType.LABORATORY, "LAB");
         map.put(LessonType.MINI_PROJECT, "PROJ");
         map.put(LessonType.SEMINAR_STYLE_MODULE_CLASS, "SEM");
-        map.put(LessonType.TUTORIAL_TYPE_2, "TUT");
+        map.put(LessonType.TUTORIAL_TYPE_2, "TUT2");
         return Optional.ofNullable(map.get(lessonType)).orElse("<INVALID>");
     }
 
