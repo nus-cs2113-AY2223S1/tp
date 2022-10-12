@@ -39,6 +39,9 @@ import seedu.duke.exception.PropertyAlreadyPairedException;
 import seedu.duke.exception.UndefinedSubCommandAddTypeException;
 import seedu.duke.exception.UndefinedSubCommandCheckTypeException;
 import seedu.duke.exception.UndefinedSubCommandDeleteTypeException;
+import seedu.duke.exception.ByeParametersPresentException;
+import seedu.duke.exception.IncorrectListDetailsException;
+import seedu.duke.exception.MissingListDetailException;
 
 import java.io.IOException;
 
@@ -66,7 +69,7 @@ public class Duke {
 
         do {
             try {
-                System.exit(0); //to pass CI
+                // System.exit(0); //to pass CI
                 String userInputText = ui.readCommand();
                 command = parser.parseCommand(userInputText);
                 command.execute(ui, storage, propertyList, clientList, pairingList);
@@ -135,6 +138,12 @@ public class Duke {
                 ui.showUndefinedSubCommandCheckTypeMessage();
             } catch (EmptyCommandCheckDetailException e) {
                 ui.showEmptyCommandCheckDetailException();
+            } catch (IncorrectListDetailsException e) {
+                ui.showIncorrectListDetailsMessage();
+            } catch (MissingListDetailException e) {
+                ui.showMissingListDetailsMessage();
+            } catch (ByeParametersPresentException e) {
+                ui.showByeParametersPresentMessage();
             }
         } while (!isCommandBye);
     }

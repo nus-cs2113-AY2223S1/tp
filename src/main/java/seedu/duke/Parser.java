@@ -9,6 +9,9 @@ import seedu.duke.command.CommandDeleteProperty;
 import seedu.duke.command.CommandPair;
 import seedu.duke.command.CommandUnpair;
 import seedu.duke.command.CommandUndefined;
+import seedu.duke.command.CommandListClients;
+import seedu.duke.command.CommandListProperties;
+import seedu.duke.command.CommandBye;
 
 import seedu.duke.exception.ClientAlreadyPairedException;
 import seedu.duke.exception.EmptyClientDetailException;
@@ -49,6 +52,9 @@ import seedu.duke.exception.PropertyAlreadyPairedException;
 import seedu.duke.exception.UndefinedSubCommandAddTypeException;
 import seedu.duke.exception.UndefinedSubCommandCheckTypeException;
 import seedu.duke.exception.UndefinedSubCommandDeleteTypeException;
+import seedu.duke.exception.IncorrectListDetailsException;
+import seedu.duke.exception.MissingListDetailException;
+import seedu.duke.exception.ByeParametersPresentException;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -83,7 +89,8 @@ public class Parser {
             InvalidClientIndexFlagFormatException, EmptyCommandPairUnpairDetailsException,
             MissingPairUnpairFlagException, IncorrectPairUnpairFlagOrderException, NotValidIndexException,
             NotIntegerException, NoExistingPairException, ClientAlreadyPairedException, PropertyAlreadyPairedException,
-            UndefinedSubCommandCheckTypeException, EmptyCommandCheckDetailException, MissingCheckPropertyFlagException {
+            UndefinedSubCommandCheckTypeException, EmptyCommandCheckDetailException, MissingCheckPropertyFlagException,
+            IncorrectListDetailsException, MissingListDetailException, ByeParametersPresentException {
         ArrayList<String> processedCommandDetails = partitionCommandTypeAndDetails(input);
         String commandType = processedCommandDetails.get(0);
         String commandDetails = processedCommandDetails.get(1);
@@ -137,6 +144,14 @@ public class Parser {
             } else {
                 throw new UndefinedSubCommandCheckTypeException();
             }
+
+        case "list":
+            checkForEmptyListParameters(commandDetails);
+            return prepareForCommandList(commandDetails);
+
+        case "bye":
+            checkForByeParameters(commandDetails);
+            return new CommandBye();
         default:
             return new CommandUndefined();
         }
@@ -151,6 +166,13 @@ public class Parser {
         processedCommandDetails.add(commandType);
         processedCommandDetails.add(commandDetails);
         return processedCommandDetails;
+    }
+
+    void checkForEmptyListParameters(String commandListDetails) throws MissingListDetailException {
+        boolean isEmptyListDetail = checkForEmptyDetail(commandListDetails);
+        if (isEmptyListDetail) {
+            throw new MissingListDetailException();
+        }
     }
 
 
@@ -493,6 +515,16 @@ public class Parser {
         return Integer.parseInt(commandDetails.trim()) - 1;
     }
 
+    private Command prepareForCommandList(String commandDetails) throws IncorrectListDetailsException {
+        if (commandDetails.trim().equals("-client")) {
+            return new CommandListClients();
+        } else if (commandDetails.trim().equals("-property")) {
+            return new CommandListProperties();
+        } else {
+            throw new IncorrectListDetailsException();
+        }
+    }
+
     private void checkForClientIndexFlag(String commandDetails)
             throws MissingClientIndexFlagException, InvalidClientIndexFlagFormatException {
         if (!commandDetails.contains("ic/")) {
@@ -613,7 +645,7 @@ public class Parser {
     }
 
     private ArrayList<Integer> extractPairUnpairDetails(String rawPairUnpairDetails, int[] pairFlagIndexPositions,
-            String[] pairUnpairFlags) throws NotIntegerException {
+                                                        String[] pairUnpairFlags) throws NotIntegerException {
         String propertyIndexString = extractDetail(rawPairUnpairDetails,
                 pairFlagIndexPositions[0] + pairUnpairFlags[0].length(),
                 pairFlagIndexPositions[1]);
@@ -726,7 +758,7 @@ public class Parser {
     }
 
     private ArrayList<Integer> extractCheckPropertyDetails(String rawPropertyDetails,
-            int[] checkPropertyFlagIndexPositions, String[] checkFlags) throws NotIntegerException {
+                                                           int[] checkPropertyFlagIndexPositions, String[] checkFlags) throws NotIntegerException {
         String propertyIndexString = extractDetail(rawPropertyDetails,
                 checkPropertyFlagIndexPositions[0] + checkFlags[0].length());
 
@@ -744,6 +776,12 @@ public class Parser {
     private void validateCheckPropertyDetails(ArrayList<Integer> checkPropertyDetails) throws NotValidIndexException {
         int propertyIndex = checkPropertyDetails.get(0);
         checkForPropertyListIndexOutOfBounds(propertyIndex);
+    }
+
+    private void checkForByeParameters(String commandDetails) throws ByeParametersPresentException {
+        if (!commandDetails.trim().isEmpty()) {
+            throw new ByeParametersPresentException();
+        }
     }
 
 }
