@@ -37,5 +37,4 @@ public class State {
         selectedModulesList.get(semester).remove(selectedModule);
     }
 
-
 }

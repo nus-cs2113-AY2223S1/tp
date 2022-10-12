@@ -11,7 +11,8 @@ public class IncompleteCommand extends Command {
 
     @Override
     public void execute(State state, Ui ui, Storage storage) {
-
+        ui.addMessage(getExecutionMessage());
+        ui.displayUi();
     }
 
     @Override
@@ -21,6 +22,6 @@ public class IncompleteCommand extends Command {
 
     @Override
     public String getExecutionMessage() {
-        return null;
+        return "Your command is incomplete.";
     }
 }
