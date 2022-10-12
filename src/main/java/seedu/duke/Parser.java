@@ -26,6 +26,8 @@ public class Parser {
         
         String[] words = userInput.split(" ");
 
+        assert words[0] != null : "words[0] is supposed to contain user command";
+
         switch (words[0]) {
         case endCommand:
             break;
@@ -60,7 +62,6 @@ public class Parser {
         executor = new ListCommand(mediaList);
         String output = executor.execute();
         Ui.print(output);
-
     }
 
     public void executeAdd(String userInput) {
