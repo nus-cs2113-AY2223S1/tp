@@ -1,6 +1,9 @@
 package seedu.duke;
 
 import seedu.duke.command.Command;
+import seedu.duke.command.passengercommand.AddPassengerCommand;
+import seedu.duke.command.passengercommand.DeletePassengerCommand;
+import seedu.duke.command.passengercommand.ListPassengerCommand;
 import seedu.duke.exceptions.SkyControlException;
 import seedu.duke.operationlist.FlightList;
 import seedu.duke.operationlist.OperationList;
@@ -25,6 +28,7 @@ public class SkyControl {
     }
 
     private void executeEntity(String lineInput, Command command) {
+        assert lineInput != null;
         checkEntity(lineInput);
         if (isPassenger) {
             command.execute(passengers, lineInput);
@@ -40,8 +44,16 @@ public class SkyControl {
         isFlight = Parser.isFlightEntity(lineInput);
     }
 
+    private void setUpAllLogger() {
+        Parser.setupLogger();
+        AddPassengerCommand.setupLogger();
+        DeletePassengerCommand.setupLogger();
+        ListPassengerCommand.setupLogger();
+    }
+
     public void run() {
         ui.showWelcomeMessage();
+        setUpAllLogger();
         boolean isExit = false;
         while (!isExit) {
             try {
@@ -52,6 +64,8 @@ public class SkyControl {
                 isExit = command.isExit();
             } catch (SkyControlException e) {
                 ui.showError(e.getMessage());
+            } finally {
+                System.out.println();
             }
         }
     }
