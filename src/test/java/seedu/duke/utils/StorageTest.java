@@ -19,9 +19,9 @@ public class StorageTest {
         State state = new State();
         int semester = 1;
         state.setSemester(semester);
-        SelectedModule selectedModule = new SelectedModule(Module.get("CS1010"),semester);
-        selectedModule.selectSlot(LessonType.Tutorial,"01");
-        selectedModule.selectSlot(LessonType.SectionalTeaching,"1");
+        SelectedModule selectedModule = new SelectedModule(Module.get("CS1010"), semester);
+        selectedModule.selectSlot(LessonType.Tutorial, "01");
+        selectedModule.selectSlot(LessonType.SectionalTeaching, "1");
         state.addSelectedModule(selectedModule);
         Storage storage = new Storage();
         storage.saveState(state);
@@ -59,6 +59,6 @@ public class StorageTest {
         assertEquals(1, actualState.getSemester());
         assertEquals("CS1010", module.moduleCode);
         assertEquals("01", selectedSlots.get(LessonType.Tutorial));
-        assertEquals("1",selectedSlots.get(LessonType.SectionalTeaching));
+        assertEquals("1", selectedSlots.get(LessonType.SectionalTeaching));
     }
 }
