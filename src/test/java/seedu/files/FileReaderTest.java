@@ -22,14 +22,16 @@ public class FileReaderTest {
     @Test
     void validLtaJsonFilepathTest() throws NoFileFoundException {
         List<Carpark> validCarparkList = FileReader.loadLtaJson(validPathAndFile, validBackupPathAndFile);
-        Assertions.assertEquals(validCarparkList.get(0).toString(), "CarparkID 1 at Haw Par Villa");
+        Assertions.assertEquals(validCarparkList.get(0).toString(), "CarparkID 1 at Suntec City: 1882 "
+                + "lots available");
     }
 
 
     @Test
     void validBackupLtaJsonFilepathTest() throws NoFileFoundException {
         List<Carpark> validBackupCarparkList = FileReader.loadLtaJson(invalidPath, validBackupPathAndFile);
-        Assertions.assertEquals(validBackupCarparkList.get(0).toString(), "CarparkID 4 at Haw Par Villa");
+        Assertions.assertEquals(validBackupCarparkList.get(0).toString(), "CarparkID 4 at Suntec City: "
+                + "1882 lots available");
     }
 
     @Test
