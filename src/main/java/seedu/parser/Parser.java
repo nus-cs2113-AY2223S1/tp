@@ -8,9 +8,10 @@ import seedu.exception.UnneededArgumentsException;
  */
 public class Parser {
     private static final String COMMAND_FIND = "find";
-    private static final String COMMAND_EXIT = "bye";
+    private static final String COMMAND_EXIT = "exit";
     private static final String COMMAND_UPDATE = "update";
     private static final String COMMAND_AUTH = "auth";
+    private static final String COMMAND_LIST = "list";
 
     /**
      * To convert the user input into commands for the program.
@@ -21,7 +22,7 @@ public class Parser {
         Command command;
         boolean hasCommandArgumentFlag = hasCommandArguments(input);
         if (input.equals(COMMAND_EXIT)) {
-            command = Command.BYE;
+            command = Command.EXIT;
         } else {
             String instruction = input.trim().split("\\s+")[0];
             switch (instruction) {
@@ -42,6 +43,9 @@ public class Parser {
                     throw new NoCommandArgumentException("auth");
                 }
                 command = Command.AUTH;
+                break;
+            case COMMAND_LIST:
+                command = Command.LIST;
                 break;
             default:
                 command = Command.INVALID;

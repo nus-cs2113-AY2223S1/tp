@@ -26,4 +26,12 @@ public class CarparkListTest {
         CarparkList carparkList = new CarparkList(validPathAndFile, validBackupPathAndFile);
         Assertions.assertThrows(NoCarparkFoundException.class, () -> carparkList.findCarpark("50"));
     }
+
+    @Test
+    void testToString() throws NoFileFoundException, NoCarparkFoundException {
+        CarparkList carparkList = new CarparkList(validPathAndFile, validBackupPathAndFile);
+        Assertions.assertEquals("CarparkID 1 at Suntec City\n"
+                + "CarparkID 2 at Marina Square\n"
+                + "CarparkID 3 at Raffles City\n", carparkList.toString());
+    }
 }

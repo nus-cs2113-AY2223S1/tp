@@ -79,7 +79,7 @@ public class Parking {
                 continue;
             }
             switch (Objects.requireNonNull(command)) {
-            case BYE:
+            case EXIT:
                 ui.showByeMessage();
                 isExit = true;
                 break;
@@ -119,6 +119,9 @@ public class Parking {
                          UnauthorisedAccessApiException | NoCommandArgumentException | FileWriteException f) {
                     ui.print(f.getMessage());
                 }
+                break;
+            case LIST:
+                ui.print(carparkList.toString());
                 break;
             default:
                 ui.showInvalidCommandError();
