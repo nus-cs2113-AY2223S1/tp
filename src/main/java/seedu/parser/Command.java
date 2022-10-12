@@ -7,5 +7,6 @@ public enum Command {
     FIND,
     BYE,
     INVALID,
-    UPDATE
+    UPDATE,
+    AUTH
 }

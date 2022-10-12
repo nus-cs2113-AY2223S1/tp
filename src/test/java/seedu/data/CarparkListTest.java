@@ -17,13 +17,13 @@ public class CarparkListTest {
     @Test
     void findCarparkValidString() throws NoFileFoundException, NoCarparkFoundException {
         CarparkList carparkList = new CarparkList(validPathAndFile, validBackupPathAndFile);
-        Assertions.assertEquals(carparkList.findCarpark("2").toString(),
-            "CarparkID 2 at Marina Square");
+        Assertions.assertEquals(carparkList.findCarpark("3").toString(),
+            "CarparkID 3 at Buona Vista");
     }
 
     @Test
     void findCarparkNoneFound() throws NoFileFoundException, NoCarparkFoundException {
         CarparkList carparkList = new CarparkList(validPathAndFile, validBackupPathAndFile);
-        Assertions.assertThrows(NoCarparkFoundException.class, () -> carparkList.findCarpark("10"));
+        Assertions.assertThrows(NoCarparkFoundException.class, () -> carparkList.findCarpark("50"));
     }
 }

@@ -7,6 +7,7 @@ public class Parser {
     private static final String COMMAND_FIND = "find";
     private static final String COMMAND_EXIT = "bye";
     private static final String COMMAND_UPDATE = "update";
+    private static final String COMMAND_AUTH = "auth";
 
     /**
      * To convert the user input into commands for the program.
@@ -25,6 +26,9 @@ public class Parser {
                 break;
             case COMMAND_UPDATE:
                 command = Command.UPDATE;
+                break;
+            case COMMAND_AUTH:
+                command = Command.AUTH;
                 break;
             default:
                 command = Command.INVALID;

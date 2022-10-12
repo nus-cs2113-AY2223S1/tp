@@ -7,13 +7,19 @@ import static seedu.common.CommonFiles.LTA_JSON_FILE;
 import java.io.IOException;
 
 import seedu.api.Api;
+import seedu.commands.Auth;
 import seedu.commands.Find;
 import seedu.common.CommonFiles;
 import seedu.data.Carpark;
 import seedu.data.CarparkList;
+import seedu.exception.EmptyAuthException;
+import seedu.exception.EmptyResponseException;
+import seedu.exception.EmptySecretFileException;
 import seedu.exception.InvalidFindCommandException;
 import seedu.exception.NoCarparkFoundException;
+import seedu.exception.NoFileFoundException;
 import seedu.exception.ParkingException;
+import seedu.exception.UnauthorisedAccessApiException;
 import seedu.parser.Command;
 import seedu.parser.Parser;
 import seedu.ui.Ui;
@@ -32,6 +38,7 @@ public class Parking {
         Find find = new Find();
         Ui ui = new Ui();
         ui.greetUser();
+        Auth auth = new Auth();
         Api api = new Api(LTA_JSON_FILE, API_JSON_DIRECTORY);
 
         try {
@@ -64,9 +71,6 @@ public class Parking {
             String input = ui.getCommand();
             Command command = parser.parseInputString(input);
             switch (command) {
-            case INVALID:
-                ui.showInvalidCommandError();
-                break;
             case BYE:
                 ui.showByeMessage();
                 isExit = true;
@@ -83,16 +87,33 @@ public class Parking {
                 break;
             case UPDATE:
                 try {
+                    //fetch api
                     api.fetchData();
+
+                    //update json
                     carparkList = new CarparkList(CommonFiles.LTA_FILE_PATH, CommonFiles.LTA_BACKUP_FILE_PATH);
                     ui.showUpdateDataSuccess();
                 } catch (ParkingException e) {
                     System.out.println(e.getMessage());
+                } catch (IOException e) {
+                    ui.showUpdateError();
                 } finally {
                     System.out.println("Update data terminated"); // Debug line
                 }
                 break;
+            case AUTH:
+                try {
+                    auth.authenticate(input);
+                    ui.showAuthSuccess();
+                } catch (IOException e) {
+                    ui.showAuthError();
+                } catch (EmptySecretFileException | NoFileFoundException | EmptyResponseException
+                         | UnauthorisedAccessApiException | EmptyAuthException f) {
+                    ui.print(f.getMessage());
+                }
+                break;
             default:
+                ui.showInvalidCommandError();
                 break;
             }
         }
