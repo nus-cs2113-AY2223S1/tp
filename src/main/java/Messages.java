@@ -21,8 +21,14 @@ public class Messages {
     }
 
     public static void printPatientMenuMessage() {
-
+        System.out.println("This is the Patient Main Menu!");
+        System.out.println("List of commands: ");
+        System.out.println("To add a patient: 'add n/[name] g/[M/F] d/[DOB] i/[ID]'");
+        System.out.println("To list all patients: 'list'");
+        System.out.println("To retrieve information about a specific patient: 'retrieve i/[ID]'");
+        System.out.println("To edit a patient's records: 'edit i/ID (n/[name] or g/[M/F] or d/[DOB])'");
     }
+
 
     public static void printVisitsMenuMessage() {
 
@@ -43,4 +49,20 @@ public class Messages {
         }
         System.out.println();
     }
+
+    public static void printPatientAddedMessage(Patient patient) {
+        System.out.println("Ok! I've added a patient! The patient's details are as follows:");
+        printLine();
+        System.out.println(patient);
+        printLine();
+    }
+
+    public static void printPatientEditedMessage(Patient patient) {
+        System.out.print("Alright, I've modified the details of the patient!");
+        System.out.println("Here are the new details of the patient: ");
+        printLine();
+        System.out.println(patient);
+        printLine();
+    }
+
 }
