@@ -28,6 +28,10 @@ public class CommandAddClient extends CommandAdd {
      * @param clientDetails Contains client's name, contact number, email and budget/month.
      */
     public CommandAddClient(ArrayList<String> clientDetails) {
+        for (String clientDetail : clientDetails) {
+            assert clientDetail != null;
+        }
+
         this.clientName           = clientDetails.get(0);
         this.clientContactNumber  = clientDetails.get(1);
         this.clientEmail          = clientDetails.get(2);
