@@ -102,7 +102,7 @@ public class Parser {
         case "n/":
             Pattern matchName = Pattern.compile("^(\\w+\\s*\\w+|\\w+)$", Pattern.CASE_INSENSITIVE);
             if (matchName.matcher(input).find()) {
-                patientList.modifyPatientDetails(id, input, null, null);
+                patientList.modifyPatientDetails(id, input, "", "");
             } else {
                 throw new OneDocException("Name is incorrectly formatted! "
                         + "Please use First and Last name or just one name");
@@ -111,7 +111,7 @@ public class Parser {
         case "d/":
             Pattern matchDob = Pattern.compile("^(\\d\\d-\\d\\d-\\d\\d\\d\\d)$", Pattern.CASE_INSENSITIVE);
             if (matchDob.matcher(input).find()) {
-                patientList.modifyPatientDetails(id, null, input, null);
+                patientList.modifyPatientDetails(id, "", input, "");
             } else {
                 throw new OneDocException("DOC is incorrectly formatted! Please use DD-MM-YYYY format");
             }
@@ -119,7 +119,7 @@ public class Parser {
         case "g/":
             Pattern matchGender = Pattern.compile("^(M|F)$", Pattern.CASE_INSENSITIVE);
             if (matchGender.matcher(input).find()) {
-                patientList.modifyPatientDetails(id, null, null, input);
+                patientList.modifyPatientDetails(id, "", "", input);
             } else {
                 throw new OneDocException("Gender is incorrectly formatted! Please use only one letter, M or F");
             }
