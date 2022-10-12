@@ -37,7 +37,8 @@ public class HelpCommand extends Command {
 
     @Override
     public void execute(State state, Ui ui, Storage storage) {
-
+        ui.addMessage(HELP_DISPLAY_MESSAGE);
+        ui.displayUi();
     }
 
     @Override
@@ -47,6 +48,6 @@ public class HelpCommand extends Command {
 
     @Override
     public String getExecutionMessage() {
-        return HELP_DISPLAY_MESSAGE;
+        return null;
     }
 }

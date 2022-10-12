@@ -46,22 +46,6 @@ public class SearchModuleCodeCommand extends Command {
         return searchResult;
     }
 
-    /**
-     * Filter module by module faculty and return a list of modules that match the search query.
-     *
-     * @return searchResult
-     */
-    public static List<Module> filterModuleByFaculty(String toSearchModuleFaculty) {
-        List<Module> moduleList = Module.getAll();
-        List<Module> searchResult = new ArrayList<>();
-        for (Module m : moduleList) {
-            if (m.moduleCode.contains(toSearchModuleFaculty.toUpperCase())) {
-                searchResult.add(m);
-            }
-        }
-        return searchResult;
-    }
-
     @Override
     public boolean isExit() {
         return false;
