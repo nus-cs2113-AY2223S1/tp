@@ -7,7 +7,7 @@ import seedu.duke.utils.Storage;
 import seedu.duke.utils.Ui;
 
 /**
- * Delete module to state by module code, updates storage and displays execution through ui
+ * Delete module to state by module code, updates storage and displays execution through ui.
  */
 
 public class DeleteModuleCommand extends Command {
