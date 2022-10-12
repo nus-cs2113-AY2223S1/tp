@@ -12,6 +12,8 @@ import seedu.duke.command.ViewTimetableCommand;
 import seedu.duke.command.SearchModuleCodeCommand;
 import seedu.duke.command.SearchModuleNameCommand;
 
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -20,20 +22,20 @@ public class Parser {
 
         String[] keywords = userInput.split("\\s+");
         switch (keywords[0]) {
-        case ("search"):
-            return searchCommand(keywords);
-        case ("add"):
-            return addDeleteCommand(keywords, new AddModuleCommand(keywords));
-        case ("delete"):
-            return addDeleteCommand(keywords, new DeleteModuleCommand(keywords));
-        case ("view"):
-            return viewHelpExitCommand(keywords, new ViewTimetableCommand(keywords));
-        case ("help"):
-            return viewHelpExitCommand(keywords, new HelpCommand(keywords));
-        case ("bye"):
-            return viewHelpExitCommand(keywords, new ExitCommand(keywords));
-        default:
-            return new UnknownCommand(keywords);
+            case ("search"):
+                return searchCommand(keywords);
+            case ("add"):
+                return addDeleteCommand(keywords, new AddModuleCommand(keywords));
+            case ("delete"):
+                return addDeleteCommand(keywords, new DeleteModuleCommand(keywords));
+            case ("view"):
+                return viewHelpExitCommand(keywords, new ViewTimetableCommand(keywords));
+            case ("help"):
+                return viewHelpExitCommand(keywords, new HelpCommand(keywords));
+            case ("bye"):
+                return viewHelpExitCommand(keywords, new ExitCommand(keywords));
+            default:
+                return new UnknownCommand(keywords);
         }
     }
 
@@ -89,8 +91,10 @@ public class Parser {
     }
 
     /**
-     * Checks if the user entered a valid search or add or delete command in the format
+     * Checks if the user entered a valid search or add or delete command in the
+     * format
      * "search|add|delete MODULE_CODE".
+     * 
      * @param keywords contains the user input split by spaces
      * @param command  the command that the user wants to execute
      * @return type of command
@@ -120,5 +124,21 @@ public class Parser {
         } else {
             return new UnknownCommand(keywords);
         }
+    }
+
+    public static Map<String, String> parseParams(String description) {
+        Map<String, String> paramsMap = new TreeMap<>();
+        int firstSlash = description.indexOf('/');
+        if (firstSlash == -1) {
+            return paramsMap;
+        }
+        String paramsString = description.substring(firstSlash + 1);
+        for (String param : paramsString.split(" /")) {
+            int firstSpace = param.indexOf(' ');
+            String key = param.substring(0, firstSpace).trim();
+            String value = param.substring(firstSpace + 1).trim();
+            paramsMap.put(key, value);
+        }
+        return paramsMap;
     }
 }

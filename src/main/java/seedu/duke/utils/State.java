@@ -1,6 +1,5 @@
 package seedu.duke.utils;
 
-import seedu.duke.model.Module;
 import seedu.duke.model.SelectedModule;
 
 import java.util.List;
@@ -33,6 +32,5 @@ public class State {
     public void removeSelectedModule(SelectedModule selectedModule) {
         selectedModulesList.get(semester).remove(selectedModule);
     }
-
 
 }
