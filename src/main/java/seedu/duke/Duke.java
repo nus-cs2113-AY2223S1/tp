@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import java.util.logging.LogManager;
 import java.util.logging.FileHandler;
 import java.util.logging.ConsoleHandler;
+import seedu.duke.data.DataManager;
 
 public class Duke {
     private static final String EXIT_FLAG = "quit";
@@ -24,7 +25,7 @@ public class Duke {
         ch.setLevel(Level.SEVERE);
         lgr.addHandler(ch);
 
-        try {
+        try { 
             FileHandler fh = new FileHandler("logger.log");
             fh.setLevel(Level.FINE);
             lgr.addHandler(fh);
@@ -40,13 +41,13 @@ public class Duke {
         lgr.info("starting Timetabler program...");
 
         System.out.println(" _____ _                _        _     _           \n"
-                + "|_   _(_)              | |      | |   | |          \n"
-                + "  | |  _ _ __ ___   ___| |_ __ _| |__ | | ___ _ __ \n"
-                + "  | | | | '_ ` _ \\ / _ \\ __/ _` | '_ \\| |/ _ \\ '__|\n"
-                + "  | | | | | | | | |  __/ || (_| | |_) | |  __/ |   \n"
-                + "  \\_/ |_|_| |_| |_|\\___|\\__\\__,_|_.__/|_|\\___|_|   \n"
-                + "                                                   \n"
-                + "                                                   ");
+                        + "|_   _(_)              | |      | |   | |          \n"
+                        + "  | |  _ _ __ ___   ___| |_ __ _| |__ | | ___ _ __ \n"
+                        + "  | | | | '_ ` _ \\ / _ \\ __/ _` | '_ \\| |/ _ \\ '__|\n"
+                        + "  | | | | | | | | |  __/ || (_| | |_) | |  __/ |   \n"
+                        + "  \\_/ |_|_| |_| |_|\\___|\\__\\__,_|_.__/|_|\\___|_|   \n"
+                        + "                                                   \n"
+                        + "                                                   ");
 
         Timetable timetable = new Timetable();
         String response;
@@ -61,6 +62,9 @@ public class Duke {
                 isRunning = false;
             }
         }
+
+        DataManager.initDataFile(currentSemester);
+        DataManager.loadTimetableFromDataFile();
 
         while (isRunning) {
             assert (currentSemester.equals("1") || currentSemester.equals("2"))  : "valid semester are only 1 or 2";
