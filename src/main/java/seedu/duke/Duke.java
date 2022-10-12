@@ -4,14 +4,14 @@ import java.util.Scanner;
 
 public class Duke {
     private Storage storage;
-    private UI ui;
+    private Ui ui;
     private Parser parser;
     private ReviewList reviewList;
     private String filepath = "data/reviews.txt";
     
     public Duke() {
         // Creating the helper objects that the Duke instance will need
-        ui = new UI();
+        ui = new Ui();
         reviewList = new ReviewList();
         parser = new Parser(reviewList);
     }

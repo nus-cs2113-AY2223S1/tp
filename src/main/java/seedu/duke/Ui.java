@@ -2,7 +2,7 @@ package seedu.duke;
 
 import java.util.Scanner;
 
-public class UI {
+public class Ui {
     final String exitTrigger = "bye";
     protected boolean isExit;
     
