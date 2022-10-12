@@ -19,12 +19,13 @@ public class StorageTest {
         State state = new State();
         int semester = 1;
         state.setSemester(semester);
-        Storage storage = new Storage();
         SelectedModule selectedModule = new SelectedModule(Module.get("CS1010"),semester);
         selectedModule.selectSlot(LessonType.Tutorial,"06");
         selectedModule.selectSlot(LessonType.SectionalTeaching,"1");
         state.addSelectedModule(selectedModule);
+        Storage storage = new Storage();
         storage.saveState(state);
+
         File actualFile = new File("data/duke.txt");
         Scanner actualScanner = new Scanner(actualFile);
         StringBuilder actualString = new StringBuilder();
@@ -55,10 +56,9 @@ public class StorageTest {
         SelectedModule selectedModule = selectedModules.get(0);
         Module module = selectedModule.getModule();
         Map<LessonType, String> selectedSlots = selectedModule.getSelectedSlots();
-
-        assertEquals(actualState.getSemester(),1);
-        assertEquals(module.moduleCode, "CS1010");
-        assertEquals(selectedSlots.get(LessonType.Tutorial),"06");
-        assertEquals(selectedSlots.get(LessonType.SectionalTeaching),"1");
+        assertEquals(1, actualState.getSemester());
+        assertEquals("CS1010", module.moduleCode);
+        assertEquals("06", selectedSlots.get(LessonType.Tutorial));
+        assertEquals("1",selectedSlots.get(LessonType.SectionalTeaching));
     }
 }
