@@ -70,7 +70,7 @@ public class TimetableTest {
                 Pair.of(ee4204, ee4204.getSemesterData(1).getLessonsByNo("01").get(1)),
                 Pair.of(ee2211, ee2211.getSemesterData(1).getLessonsByNo("01").get(0)),
                 Pair.of(ee2211, ee2211.getSemesterData(1).getLessonsByNo("19").get(0)),
-                Pair.of(cs2113, cs2113.getSemesterData(1).getLessonsByTypeAndNo(LessonType.Lecture, "1").get(0)),
+                Pair.of(cs2113, cs2113.getSemesterData(1).getLessonsByTypeAndNo(LessonType.LECTURE, "1").get(0)),
                 Pair.of(cs2113, cs2113.getSemesterData(1).getLessonsByNo("4").get(0))),
                 true);
         InputStream stream = TimetableTest.class.getClassLoader().getResourceAsStream("timetableColor.txt");
@@ -95,7 +95,7 @@ public class TimetableTest {
                 Pair.of(ee4204, ee4204.getSemesterData(1).getLessonsByNo("01").get(1)),
                 Pair.of(ee2211, ee2211.getSemesterData(1).getLessonsByNo("01").get(0)),
                 Pair.of(ee2211, ee2211.getSemesterData(1).getLessonsByNo("19").get(0)),
-                Pair.of(cs2113, cs2113.getSemesterData(1).getLessonsByTypeAndNo(LessonType.Lecture, "1").get(0)),
+                Pair.of(cs2113, cs2113.getSemesterData(1).getLessonsByTypeAndNo(LessonType.LECTURE, "1").get(0)),
                 Pair.of(cs2113, cs2113.getSemesterData(1).getLessonsByNo("4").get(0))));
         String newlineRegex = "(\\r\\n|\\r|\\n)";
         InputStream stream = TimetableTest.class.getClassLoader().getResourceAsStream("timetableWindows.txt");

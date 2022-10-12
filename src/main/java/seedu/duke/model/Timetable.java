@@ -256,18 +256,18 @@ public class Timetable {
 
     public static String lessonTypeToShortString(LessonType lessonType) {
         Map<LessonType, String> map = new HashMap<>();
-        map.put(LessonType.Tutorial, "TUT");
-        map.put(LessonType.Lecture, "LEC");
-        map.put(LessonType.Recitation, "REC");
-        map.put(LessonType.DesignLecture, "DLEC");
-        map.put(LessonType.PackagedLecture, "PLEC");
-        map.put(LessonType.PackagedTutorial, "PTUT");
-        map.put(LessonType.SectionalTeaching, "SEC");
-        map.put(LessonType.Workshop, "WKSH");
-        map.put(LessonType.Laboratory, "LAB");
-        map.put(LessonType.MiniProject, "PROJ");
-        map.put(LessonType.SeminarStyleModuleClass, "SEM");
-        map.put(LessonType.TutorialType2, "TUT");
+        map.put(LessonType.TUTORIAL, "TUT");
+        map.put(LessonType.LECTURE, "LEC");
+        map.put(LessonType.RECITATION, "REC");
+        map.put(LessonType.DESIGN_LECTURE, "DLEC");
+        map.put(LessonType.PACKAGED_LECTURE, "PLEC");
+        map.put(LessonType.PACKAGED_TUTORIAL, "PTUT");
+        map.put(LessonType.SECTIONAL_TEACHING, "SEC");
+        map.put(LessonType.WORKSHOP, "WKSH");
+        map.put(LessonType.LABORATORY, "LAB");
+        map.put(LessonType.MINI_PROJECT, "PROJ");
+        map.put(LessonType.SEMINAR_STYLE_MODULE_CLASS, "SEM");
+        map.put(LessonType.TUTORIAL_TYPE_2, "TUT2");
         return Optional.ofNullable(map.get(lessonType)).orElse("<INVALID>");
     }
 

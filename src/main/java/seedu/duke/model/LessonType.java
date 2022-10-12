@@ -1,16 +1,16 @@
 package seedu.duke.model;
 
 public enum LessonType {
-    Lecture,
-    Tutorial,
-    Recitation,
-    PackagedLecture,
-    PackagedTutorial,
-    SeminarStyleModuleClass,
-    Workshop,
-    Laboratory,
-    MiniProject,
-    SectionalTeaching,
-    DesignLecture,
-    TutorialType2
+    DESIGN_LECTURE,
+    LABORATORY,
+    LECTURE,
+    MINI_PROJECT,
+    PACKAGED_LECTURE,
+    PACKAGED_TUTORIAL,
+    RECITATION,
+    SECTIONAL_TEACHING,
+    SEMINAR_STYLE_MODULE_CLASS,
+    TUTORIAL,
+    TUTORIAL_TYPE_2,
+    WORKSHOP
 }
