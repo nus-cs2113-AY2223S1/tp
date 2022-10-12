@@ -14,6 +14,7 @@ import java.util.concurrent.TimeoutException;
 
 import seedu.exception.EmptyResponseException;
 import seedu.exception.EmptySecretFileException;
+import seedu.exception.FileWriteException;
 import seedu.exception.NoFileFoundException;
 import seedu.exception.ServerNotReadyApiException;
 import seedu.exception.UnauthorisedAccessApiException;
@@ -26,13 +27,13 @@ import seedu.ui.Ui;
  * Class to fetch .json data from APIs and save that locally.
  */
 public class Api {
+    private static final int FETCH_TRIES = 5;
     private final HttpClient client;
-    private HttpRequest request;
-    private CompletableFuture<HttpResponse<String>> responseFuture;
     private final FileStorage storage;
     private final Ui ui;
+    private HttpRequest request;
+    private CompletableFuture<HttpResponse<String>> responseFuture;
     private String apiKey = "";
-    private static final int FETCH_TRIES = 5;
 
     /**
      * Constructor to create a new client and the correct HTTP request.
@@ -89,11 +90,12 @@ public class Api {
 
     /**
      * Check whether response code from API response is 200 OK, otherwise handle it gracefully.
+     *
      * @param responseCode Response code from API HTTP response header.
      * @return true if response code is 200.
      * @throws UnauthorisedAccessApiException API key is wrong.
-     * @throws ServerNotReadyApiException Too many request.
-     * @throws UnknownResponseApiException Response code besides 200, 401 or 503.
+     * @throws ServerNotReadyApiException     Too many request.
+     * @throws UnknownResponseApiException    Response code besides 200, 401 or 503.
      */
     private boolean isValidResponse(int responseCode)
             throws UnauthorisedAccessApiException, ServerNotReadyApiException, UnknownResponseApiException {
@@ -106,7 +108,7 @@ public class Api {
             throw new ServerNotReadyApiException("Too many requests. Trying again...");
         default:
             throw new UnknownResponseApiException("Response Code: " + responseCode
-                    + "\nIf the problem persists please contact the developer. Trying again...");
+                + "\nIf the problem persists please contact the developer. Trying again...");
         }
     }
 
@@ -116,9 +118,10 @@ public class Api {
      * todo: handle bad request
      *
      * @throws EmptyResponseException if empty/invalid response received.
-     * @throws IOException if data writing fails.
+     * @throws IOException            if data writing fails.
      */
-    public void fetchData() throws EmptyResponseException, IOException, UnauthorisedAccessApiException {
+    public void fetchData() throws EmptyResponseException, IOException, UnauthorisedAccessApiException,
+            FileWriteException {
         String result = "";
         int fetchTries = FETCH_TRIES;
         do {
@@ -135,7 +138,7 @@ public class Api {
         } while (fetchTries > 0 && result.isEmpty());
 
         if (fetchTries == 0 && result.isEmpty()) {
-            throw new EmptyResponseException("No response was received. Check your internet connection.");
+            throw new EmptyResponseException();
         }
         storage.writeDataToFile(result);
     }
@@ -144,14 +147,14 @@ public class Api {
      * Reads API key from secret.txt file and loads it to the object.
      * If secret.txt does not exist, create it.
      *
-     * @throws NoFileFoundException If directory / file is not found.
+     * @throws NoFileFoundException     If directory / file is not found.
      * @throws EmptySecretFileException If the file is empty.
      */
     public void loadApiKey(String file, String directory) throws NoFileFoundException, EmptySecretFileException {
         try {
             String key = FileReader.readStringFromTxt(file, directory, true);
             if (key.isEmpty()) {
-                throw new EmptySecretFileException();
+                throw new EmptySecretFileException(directory);
             }
             apiKey = key;
         } catch (IOException e) {
