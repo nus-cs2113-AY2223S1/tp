@@ -34,6 +34,9 @@ public class PatientList {
         return null;
     }
 
+    // TODO one potential improvement is to make this three different methods
+    //  modifyPatientName(String id, String name), modifyPatientDOB(String id, String birthDate)
+    //  and modifyPatientGender(String id, String gender)
     public void modifyPatientDetails(String id, String name, String birthDate, String gender) {
         Patient patientToBeModified = findPatient(id);
         if (patientToBeModified == null) {
