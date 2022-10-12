@@ -8,11 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import seedu.api.Api;
-import seedu.exception.EmptyAuthException;
-import seedu.exception.EmptyResponseException;
-import seedu.exception.EmptySecretFileException;
-import seedu.exception.NoFileFoundException;
-import seedu.exception.UnauthorisedAccessApiException;
+import seedu.exception.*;
 import seedu.ui.Ui;
 
 
@@ -38,7 +34,7 @@ public class Auth {
             //follow the path of secret.txt -> rewrite the whole txt file with the API KEY / words[1];
             FileWriter fw = new FileWriter(API_KEY_FILE_PATH.toFile());
             fw.write(apiKey);
-            ui.print("successfully pushed api key into secret.txt");
+            ui.print("Successfully entered API Key.");
             fw.close();
         }
     }
@@ -53,7 +49,7 @@ public class Auth {
      * @throws EmptyAuthException
      */
     public void authenticate(String input) throws IOException, EmptySecretFileException, NoFileFoundException,
-            EmptyResponseException, UnauthorisedAccessApiException, EmptyAuthException {
+            EmptyResponseException, UnauthorisedAccessApiException, EmptyAuthException, FileWriteError {
         sendApiKey(input);
         api.loadApiKey(LTA_JSON_FILE, API_JSON_DIRECTORY);
         api.asyncExecuteRequest();

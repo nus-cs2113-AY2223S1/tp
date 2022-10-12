@@ -12,14 +12,7 @@ import seedu.commands.Find;
 import seedu.common.CommonFiles;
 import seedu.data.Carpark;
 import seedu.data.CarparkList;
-import seedu.exception.EmptyAuthException;
-import seedu.exception.EmptyResponseException;
-import seedu.exception.EmptySecretFileException;
-import seedu.exception.InvalidFindCommandException;
-import seedu.exception.NoCarparkFoundException;
-import seedu.exception.NoFileFoundException;
-import seedu.exception.ParkingException;
-import seedu.exception.UnauthorisedAccessApiException;
+import seedu.exception.*;
 import seedu.parser.Command;
 import seedu.parser.Parser;
 import seedu.ui.Ui;
@@ -89,7 +82,6 @@ public class Parking {
                 try {
                     //fetch api
                     api.fetchData();
-
                     //update json
                     carparkList = new CarparkList(CommonFiles.LTA_FILE_PATH, CommonFiles.LTA_BACKUP_FILE_PATH);
                     ui.showUpdateDataSuccess();
@@ -108,7 +100,7 @@ public class Parking {
                 } catch (IOException e) {
                     ui.showAuthError();
                 } catch (EmptySecretFileException | NoFileFoundException | EmptyResponseException
-                         | UnauthorisedAccessApiException | EmptyAuthException f) {
+                         | UnauthorisedAccessApiException | EmptyAuthException | FileWriteError f) {
                     ui.print(f.getMessage());
                 }
                 break;

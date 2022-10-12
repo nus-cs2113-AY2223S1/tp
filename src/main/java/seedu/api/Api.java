@@ -12,12 +12,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-import seedu.exception.EmptyResponseException;
-import seedu.exception.EmptySecretFileException;
-import seedu.exception.NoFileFoundException;
-import seedu.exception.ServerNotReadyApiException;
-import seedu.exception.UnauthorisedAccessApiException;
-import seedu.exception.UnknownResponseApiException;
+import seedu.exception.*;
 import seedu.files.FileReader;
 import seedu.files.FileStorage;
 import seedu.ui.Ui;
@@ -99,6 +94,7 @@ public class Api {
             throws UnauthorisedAccessApiException, ServerNotReadyApiException, UnknownResponseApiException {
         switch (responseCode) {
         case 200:
+            ui.print("You have been authenticated!");
             return true;
         case 401:
             throw new UnauthorisedAccessApiException();
@@ -118,12 +114,13 @@ public class Api {
      * @throws EmptyResponseException if empty/invalid response received.
      * @throws IOException if data writing fails.
      */
-    public void fetchData() throws EmptyResponseException, IOException, UnauthorisedAccessApiException {
+    public void fetchData() throws EmptyResponseException, IOException, UnauthorisedAccessApiException, FileWriteError {
         String result = "";
         int fetchTries = FETCH_TRIES;
         do {
             try {
                 result = asyncGetResponse().trim();
+                ui.print("You have been authenticated!");
             } catch (ServerNotReadyApiException | UnknownResponseApiException e) {
                 System.out.println(e.getMessage());
             } finally {

@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import seedu.exception.FileWriteError;
 
 public class FileStorageTest {
     private final String testFileDirectoryCreate = "./src/test/java/seedu/testfiles_create";
@@ -27,7 +28,7 @@ public class FileStorageTest {
     }
 
     @Test
-    public void validDataWrite() throws IOException {
+    public void validDataWrite() throws IOException, FileWriteError {
         FileStorage storage = new FileStorage(testFileDirectory, testFileWriteDest);
         storage.writeDataToFile("I am currently writing this data to the file.");
         File file = new File(Paths.get(testFileDirectory, testFileWriteDest).toString());
