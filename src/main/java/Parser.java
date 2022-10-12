@@ -126,14 +126,14 @@ public class Parser {
                 Matcher matcherEdit = editPrescriptionMatcher(input);
                 if (matcherAdd.find()) {
                     prescriptionList.add(matcherAdd.group(1), matcherAdd.group(2),
-                            matcherAdd.group(3), matcherAdd.group(4), true);
+                            matcherAdd.group(3), matcherAdd.group(4));
                 } else if (matcherEdit.find()) {
                     parseEditPrescription(Integer.valueOf(matcherEdit.group(1)),
                             matcherEdit.group(2), matcherEdit.group(3));
                 } else {
                     throw new OneDocException("Your input is incorrect! Please format it as such:"
                             + "\nTo add a prescription: add i/ID n/[name] d/[dosage] t/[time interval]"
-                            + "\nTo edit a prescription: edit i/[ID] (n/[name] or d/[dosage] or t/[time interval])");
+                            + "\nTo edit a prescription: edit i/[index] (n/[name] or d/[dosage] or t/[time interval])");
                 }
             } catch (OneDocException e) {
                 System.out.println("Incorrect format: " + e.getMessage());
@@ -165,7 +165,7 @@ public class Parser {
 
     private void parseEditPatient(String id, String type, String input) throws OneDocException {
         switch (type) {
-        case "n/":
+        case "n":
             Pattern matchName = Pattern.compile("^(\\w+\\s*\\w+|\\w+)$", Pattern.CASE_INSENSITIVE);
             if (matchName.matcher(input).find()) {
                 patientList.modifyPatientDetails(id, input, "", "");
@@ -224,7 +224,7 @@ public class Parser {
 
     private void parseEditPrescription(int id, String type, String input) throws OneDocException {
         switch (type) {
-        case "n/":
+        case "n":
             Pattern matchName = Pattern.compile("^(\\w+\\s*\\w+|\\w+)$", Pattern.CASE_INSENSITIVE);
             if (matchName.matcher(input).find()) {
                 prescriptionList.edit(id, input, "", "");
@@ -233,7 +233,7 @@ public class Parser {
                         + "Please use one or two names without dashes or special characters");
             }
             break;
-        case "d/":
+        case "d":
             Pattern matchDosage = Pattern.compile("^(\\d+\\s*\\w+)$", Pattern.CASE_INSENSITIVE);
             if (matchDosage.matcher(input).find()) {
                 prescriptionList.edit(id, "", input, "");
@@ -242,7 +242,7 @@ public class Parser {
                         + "Please use [amount] [portion] format, i.e. 10 mg");
             }
             break;
-        case "t/":
+        case "t":
             Pattern matchTimeInt = Pattern.compile("^(\\w+)$", Pattern.CASE_INSENSITIVE);
             if (matchTimeInt.matcher(input).find()) {
                 prescriptionList.edit(id, "", "", input);

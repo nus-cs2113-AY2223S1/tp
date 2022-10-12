@@ -10,8 +10,13 @@ public class Messages {
 
     // Prescription
     public static final String NO_PRESCRIPTION_MESSAGE = "There are currently no prescriptions in the record.";
-    public static final String PRESCRIPTION_MODIFIED_MESSAGE =
-            "The prescription's details has been modified! Here are the new prescription details!";
+    public static final String PRESCRIPTION_MAIN_MENU =
+            "This is the Prescription Main Menu!" + System.lineSeparator()
+            + "List of commands:" + System.lineSeparator()
+            + "To add a prescription: add i/ID n/[name] d/[dosage] t/[time interval]" + System.lineSeparator()
+            + "To edit a prescription: edit i/[index] (n/[name] or d/[dosage] or t/[time interval])"
+            + System.lineSeparator()
+            + "To view all prescription records: 'viewAll'";
 
     public static final String INDEX_OUT_OF_RANGE_MESSAGE = "The index number is out of range. Try again.";
 
@@ -29,7 +34,25 @@ public class Messages {
     }
 
     public static void printPrescriptionMenuMessage() {
+        System.out.println(PRESCRIPTION_MAIN_MENU);
+    }
 
+    public static void printAddPrescriptionMessage(String prescriptionString) {
+        System.out.println("You have added a prescription!");
+        printLine();
+        System.out.println(prescriptionString);
+        printLine();
+    }
+
+    public static void printEditPrescriptionMessage(String prescriptionString) {
+        System.out.println("You have edited the prescription!");
+        printLine();
+        System.out.println(prescriptionString);
+        printLine();
+    }
+
+    public static void printViewAllPrescriptionsMessage() {
+        System.out.println("Here are all the prescriptions:");
     }
 
     public static void printExitMessage() {

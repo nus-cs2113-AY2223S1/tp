@@ -10,11 +10,14 @@ public class PrescriptionList {
     public void add(String patientId, String medicine, String dosage, String timeInterval) {
         Prescription prescription = new Prescription(patientId, medicine, dosage, timeInterval);
         prescriptionsList.add(prescription);
+        Messages.printAddPrescriptionMessage(prescription.toString());
+
     }
 
     public void add(String patientId, String medicine, String dosage, String timeInterval, boolean isActive) {
         Prescription prescription = new Prescription(patientId, medicine, dosage, timeInterval, isActive);
         prescriptionsList.add(prescription);
+        Messages.printAddPrescriptionMessage(prescription.toString());
     }
 
     public boolean isEmpty() {
@@ -27,11 +30,16 @@ public class PrescriptionList {
             return;
         }
 
+        Messages.printViewAllPrescriptionsMessage();
+        Messages.printLine();
         for (int i = 0; i < prescriptionsList.size(); i++) {
             System.out.println("Prescription " + (i + 1));
             System.out.println(prescriptionsList.get(i));
-            System.out.println();
+            if (i != prescriptionsList.size() - 1) {
+                System.out.println();
+            }
         }
+        Messages.printLine();
     }
 
     // TODO one potential improvement is to make this three different methods
@@ -59,7 +67,6 @@ public class PrescriptionList {
             prescriptionEdited.setTimeInterval(timeInterval);
         }
 
-        System.out.println(Messages.PRESCRIPTION_MODIFIED_MESSAGE);
-        System.out.println(prescriptionEdited);
+        Messages.printEditPrescriptionMessage(prescriptionEdited.toString());
     }
 }

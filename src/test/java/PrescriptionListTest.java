@@ -55,12 +55,23 @@ class PrescriptionListTest {
         prescriptionsList.add("S123456G", "Ventolin", "4 mg", "Once every 6 hours");
         prescriptionsList.viewAll();
 
-        String expectedOutput = "Prescription 1" + System.lineSeparator()
+        String expectedOutput = "You have added a prescription!" + System.lineSeparator()
+                + "\t____________________________________________________________" + System.lineSeparator()
                 + "ID: S123456G" + System.lineSeparator()
                 + "Medicine: Ventolin" + System.lineSeparator()
                 + "Dosage: 4 mg" + System.lineSeparator()
                 + "Time Interval: Once every 6 hours" + System.lineSeparator()
-                + "Status: Active";
+                + "Status: Active" + System.lineSeparator()
+                + "\t____________________________________________________________" + System.lineSeparator()
+                + "Here are all the prescriptions:" + System.lineSeparator()
+                + "\t____________________________________________________________" + System.lineSeparator()
+                + "Prescription 1" + System.lineSeparator()
+                + "ID: S123456G" + System.lineSeparator()
+                + "Medicine: Ventolin" + System.lineSeparator()
+                + "Dosage: 4 mg" + System.lineSeparator()
+                + "Time Interval: Once every 6 hours" + System.lineSeparator()
+                + "Status: Active" + System.lineSeparator()
+                + "\t____________________________________________________________";
 
         assertEquals(expectedOutput, OUTPUT_STREAM.toString().trim());
     }
@@ -73,7 +84,34 @@ class PrescriptionListTest {
         prescriptionsList.add("K323232J", "Hydrocodone-Acetaminophen", "1 capsule", "3 times a day");
         prescriptionsList.viewAll();
 
-        String expectedOutput = "Prescription 1" + System.lineSeparator()
+        String expectedOutput =
+                "You have added a prescription!" + System.lineSeparator()
+                + "\t____________________________________________________________" + System.lineSeparator()
+                + "ID: S123456G" + System.lineSeparator()
+                + "Medicine: Ventolin" + System.lineSeparator()
+                + "Dosage: 4 mg" + System.lineSeparator()
+                + "Time Interval: Once every 6 hours" + System.lineSeparator()
+                + "Status: Active" + System.lineSeparator()
+                + "\t____________________________________________________________" + System.lineSeparator()
+                + "You have added a prescription!" + System.lineSeparator()
+                + "\t____________________________________________________________" + System.lineSeparator()
+                + "ID: S987655G" + System.lineSeparator()
+                + "Medicine: Losartan Potassium" + System.lineSeparator()
+                + "Dosage: 50 mg" + System.lineSeparator()
+                + "Time Interval: Once every day" + System.lineSeparator()
+                + "Status: Inactive" + System.lineSeparator()
+                + "\t____________________________________________________________" + System.lineSeparator()
+                + "You have added a prescription!" + System.lineSeparator()
+                + "\t____________________________________________________________" + System.lineSeparator()
+                + "ID: K323232J" + System.lineSeparator()
+                + "Medicine: Hydrocodone-Acetaminophen" + System.lineSeparator()
+                + "Dosage: 1 capsule" + System.lineSeparator()
+                + "Time Interval: 3 times a day" + System.lineSeparator()
+                + "Status: Active" + System.lineSeparator()
+                + "\t____________________________________________________________" + System.lineSeparator()
+                + "Here are all the prescriptions:" + System.lineSeparator()
+                + "\t____________________________________________________________" + System.lineSeparator()
+                + "Prescription 1" + System.lineSeparator()
                 + "ID: S123456G" + System.lineSeparator()
                 + "Medicine: Ventolin" + System.lineSeparator()
                 + "Dosage: 4 mg" + System.lineSeparator()
@@ -92,8 +130,8 @@ class PrescriptionListTest {
                 + "Medicine: Hydrocodone-Acetaminophen" + System.lineSeparator()
                 + "Dosage: 1 capsule" + System.lineSeparator()
                 + "Time Interval: 3 times a day" + System.lineSeparator()
-                + "Status: Active"
-                ;
+                + "Status: Active" + System.lineSeparator()
+                + "\t____________________________________________________________";
 
         assertEquals(expectedOutput, OUTPUT_STREAM.toString().trim());
     }
@@ -105,13 +143,23 @@ class PrescriptionListTest {
         prescriptionsList.edit(1, "Losartan Potassium", "50 mg",
                 "4 times a day");
 
-        String expectedOutput = "The prescription's details has been modified! Here are the new prescription details!"
-                + System.lineSeparator()
+        String expectedOutput =
+                "You have added a prescription!" + System.lineSeparator()
+                + "\t____________________________________________________________" + System.lineSeparator()
+                + "ID: S123456G" + System.lineSeparator()
+                + "Medicine: Ventolin" + System.lineSeparator()
+                + "Dosage: 4 mg" + System.lineSeparator()
+                + "Time Interval: Once every 6 hours" + System.lineSeparator()
+                + "Status: Active" + System.lineSeparator()
+                + "\t____________________________________________________________" + System.lineSeparator()
+                + "You have edited the prescription!" + System.lineSeparator()
+                + "\t____________________________________________________________" + System.lineSeparator()
                 + "ID: S123456G" + System.lineSeparator()
                 + "Medicine: Losartan Potassium" + System.lineSeparator()
                 + "Dosage: 50 mg" + System.lineSeparator()
                 + "Time Interval: 4 times a day" + System.lineSeparator()
-                + "Status: Active";
+                + "Status: Active" + System.lineSeparator()
+                + "\t____________________________________________________________";
 
         assertEquals(expectedOutput, OUTPUT_STREAM.toString().trim());
     }
@@ -122,13 +170,23 @@ class PrescriptionListTest {
         prescriptionsList.add("S123456G", "Ventolin", "4 mg", "Once every 6 hours");
         prescriptionsList.edit(1, "", "50 mg", "");
 
-        String expectedOutput = "The prescription's details has been modified! Here are the new prescription details!"
-                + System.lineSeparator()
+        String expectedOutput =
+                "You have added a prescription!" + System.lineSeparator()
+                + "\t____________________________________________________________" + System.lineSeparator()
+                + "ID: S123456G" + System.lineSeparator()
+                + "Medicine: Ventolin" + System.lineSeparator()
+                + "Dosage: 4 mg" + System.lineSeparator()
+                + "Time Interval: Once every 6 hours" + System.lineSeparator()
+                + "Status: Active" + System.lineSeparator()
+                + "\t____________________________________________________________" + System.lineSeparator()
+                + "You have edited the prescription!" + System.lineSeparator()
+                + "\t____________________________________________________________" + System.lineSeparator()
                 + "ID: S123456G" + System.lineSeparator()
                 + "Medicine: Ventolin" + System.lineSeparator()
                 + "Dosage: 50 mg" + System.lineSeparator()
                 + "Time Interval: Once every 6 hours" + System.lineSeparator()
-                + "Status: Active";
+                + "Status: Active" + System.lineSeparator()
+                + "\t____________________________________________________________";
 
         assertEquals(expectedOutput, OUTPUT_STREAM.toString().trim());
     }
@@ -139,7 +197,16 @@ class PrescriptionListTest {
         prescriptionsList.add("S123456G", "Ventolin", "4 mg", "Once every 6 hours");
         prescriptionsList.edit(3, "", "50 mg", "");
 
-        String expectedOutput = "The index number is out of range. Try again.";
+        String expectedOutput =
+                "You have added a prescription!" + System.lineSeparator()
+                + "\t____________________________________________________________" + System.lineSeparator()
+                + "ID: S123456G" + System.lineSeparator()
+                + "Medicine: Ventolin" + System.lineSeparator()
+                + "Dosage: 4 mg" + System.lineSeparator()
+                + "Time Interval: Once every 6 hours" + System.lineSeparator()
+                + "Status: Active" + System.lineSeparator()
+                + "\t____________________________________________________________" + System.lineSeparator()
+                + "The index number is out of range. Try again.";
 
         assertEquals(expectedOutput, OUTPUT_STREAM.toString().trim());
     }
