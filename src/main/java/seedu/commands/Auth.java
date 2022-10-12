@@ -1,19 +1,12 @@
 package seedu.commands;
 
-import static seedu.common.CommonFiles.API_JSON_DIRECTORY;
 import static seedu.common.CommonFiles.API_KEY_FILE_PATH;
-import static seedu.common.CommonFiles.LTA_JSON_FILE;
 
 import java.io.FileWriter;
 import java.io.IOException;
 
-import seedu.api.Api;
-import seedu.exception.EmptyResponseException;
-import seedu.exception.EmptySecretFileException;
 import seedu.exception.FileWriteException;
 import seedu.exception.NoCommandArgumentException;
-import seedu.exception.NoFileFoundException;
-import seedu.exception.UnauthorisedAccessApiException;
 import seedu.ui.Ui;
 
 
