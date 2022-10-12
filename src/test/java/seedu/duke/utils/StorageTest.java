@@ -42,7 +42,7 @@ public class StorageTest {
         }
         expectedScanner.close();
 
-        assertEquals( expectedString.toString(), actualString.toString());
+        assertEquals(expectedString.toString(), actualString.toString());
     }
 
     @Test
