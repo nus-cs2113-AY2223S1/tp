@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Storage {
     private static final String DOMAIN = "https://nusmods.com/timetable/";
@@ -44,7 +46,14 @@ public class Storage {
 
     public static final int MODULES_PARAM_INDEX = 5;
 
+    private Logger logger;
+
+    public static final String SUBSYSTEM_NAME = "storage";
+
     public void openPreviousState(State state, Ui ui) {
+        assert state != null : "List of lessons should not be null";
+        logger = Logger.getLogger(SUBSYSTEM_NAME);
+        logger.log(Level.INFO, "Opening previous saved file");
         try {
             String link = readPreviousState();
             loadPreviousState(link, state);
@@ -122,6 +131,10 @@ public class Storage {
      * @throws IOException failed or interrupted I/O operations
      */
     public void saveState(State state) throws IOException {
+        assert state != null : "State should not be null";
+        logger = Logger.getLogger(SUBSYSTEM_NAME);
+        logger.log(Level.INFO, "Saving current state with " + state.getSelectedModulesList().size()
+                + " modules into a file. The format will be NUSMods export link.");
         File file = new File(FILE_PATH);
         if (file.getParentFile().mkdirs()) {
             file.createNewFile();
