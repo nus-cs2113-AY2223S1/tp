@@ -5,8 +5,9 @@ package seedu.parser;
  */
 public enum Command {
     FIND,
-    BYE,
+    EXIT,
     INVALID,
     UPDATE,
-    AUTH
+    AUTH,
+    LIST
 }
