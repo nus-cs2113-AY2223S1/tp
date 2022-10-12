@@ -4,7 +4,11 @@ package seedu.exception;
  * Exception for when a file cannot be written to.
  */
 public class FileWriteException extends ParkingException {
-    String filePath;
+    private String filePath;
+
+    /**
+     * Constructor for the exception.
+     */
     public FileWriteException(String filePath) {
         super();
         this.filePath = filePath;
@@ -15,7 +19,7 @@ public class FileWriteException extends ParkingException {
      * @return Formatted string.
      */
     @Override
-    public String getMessage(){
+    public String getMessage() {
         return String.format("The file was not successfully written to. Please check your directory at %s.", filePath);
     }
 }
