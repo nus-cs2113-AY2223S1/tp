@@ -159,7 +159,19 @@ public class Storage {
      * @param propertyFile The file that stores the list of property.
      */
     public void loadProperty(PropertyList propertyList, File propertyFile) {
-
+        try {
+            Scanner scanner = new Scanner(propertyFile);
+            while (scanner.hasNext()) {
+                String[] propertyParameters = scanner.nextLine().split("\\s\\|\\s");
+                String landlordName = propertyParameters[0];
+                String address = propertyParameters[1];
+                String price = propertyParameters[2];
+                String unitType = propertyParameters[3].replace(CURRENCY, EMPTY_STRING).trim();
+                propertyList.addProperty(landlordName, address, price, unitType);
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("File is not found...");
+        }
     }
 
     /**
@@ -194,7 +206,7 @@ public class Storage {
      * @param price The monthly rental price.
      * @param unitType The type of the unit being leased.
      */
-    public void addToPropertyFile(String landlord, String address, int price, String unitType) {
+    public void addToPropertyFile(String landlord, String address, String price, String unitType) {
         try {
             FileWriter fw = new FileWriter(PROPERTY_PATH, true);
             String rentalPrice = CURRENCY + price;
