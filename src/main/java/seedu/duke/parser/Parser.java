@@ -17,20 +17,19 @@ import java.util.regex.Pattern;
 
 public class Parser {
     public static Command parse(String userInput) {
-
         String[] keywords = userInput.split("\\s+");
         switch (keywords[0]) {
-        case ("search"):
+        case (SearchModuleNameCommand.COMMAND_WORD):
             return searchCommand(keywords);
-        case ("add"):
+        case (AddModuleCommand.COMMAND_WORD):
             return addDeleteCommand(keywords, new AddModuleCommand(keywords));
-        case ("delete"):
+        case (DeleteModuleCommand.COMMAND_WORD):
             return addDeleteCommand(keywords, new DeleteModuleCommand(keywords));
-        case ("view"):
+        case (ViewTimetableCommand.COMMAND_WORD):
             return viewHelpExitCommand(keywords, new ViewTimetableCommand(keywords));
-        case ("help"):
+        case (HelpCommand.COMMAND_WORD):
             return viewHelpExitCommand(keywords, new HelpCommand(keywords));
-        case ("bye"):
+        case (ExitCommand.COMMAND_WORD):
             return viewHelpExitCommand(keywords, new ExitCommand(keywords));
         default:
             return new UnknownCommand(keywords);
