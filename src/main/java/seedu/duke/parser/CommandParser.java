@@ -14,6 +14,9 @@ import seedu.duke.command.PurgeCommand;
 import seedu.duke.exception.MoolahException;
 import seedu.duke.exception.InvalidCommandException;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * Represents a parser that parses the user input into a Command object ready for execution.
  *
@@ -26,6 +29,8 @@ public class CommandParser {
     private static final String EMPTY_STRING = "";
     private static final String DELIMITER = " ";
     private static final int SPLIT_POSITION = 2;
+
+    private static final Logger parserLogger = Logger.getLogger(ParameterParser.class.getName());
 
     /**
      * Parses the user input into Command class based on the command word.
@@ -113,6 +118,7 @@ public class CommandParser {
             command = new ByeCommand();
             break;
         default:
+            parserLogger.log(Level.WARNING, "An invalid command error is caught in this command");
             throw new InvalidCommandException();
         }
         return command;
