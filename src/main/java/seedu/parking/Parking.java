@@ -70,9 +70,6 @@ public class Parking {
             String input = ui.getCommand();
             Command command = parser.parseInputString(input);
             switch (command) {
-            case INVALID:
-                ui.showInvalidCommandError();
-                break;
             case BYE:
                 ui.showByeMessage();
                 isExit = true;
@@ -89,15 +86,22 @@ public class Parking {
                 break;
             case UPDATE:
                 try {
+                    //fetch api
+                    api.fetchData();
+
+                    //update json
                     carparkList = new CarparkList(CommonFiles.LTA_FILE_PATH, CommonFiles.LTA_BACKUP_FILE_PATH);
                     ui.showUpdateDataSuccess();
                 } catch (ParkingException e) {
                     System.out.println(e.getMessage());
+                } catch (IOException e) {
+                    ui.showUpdateError();
                 } finally {
                     System.out.println("Update data terminated"); // Debug line
                 }
                 break;
             default:
+                ui.showInvalidCommandError();
                 break;
             }
         }
