@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Paths;
 
+import seedu.exception.FileWriteException;
 import seedu.ui.Ui;
 
 /**
@@ -43,16 +44,18 @@ public class FileStorage {
     }
 
     /**
-     * TODO: Javadoc comment.
-     * @param data
-     * @throws IOException
+     * Writes data to a txt file in plain text.
+     * @param data data to be written.
+     * @throws FileWriteException If the file cannot be written to.
      */
-    public void writeDataToFile(String data) throws IOException {
+    public void writeDataToFile(String data) throws FileWriteException {
         try {
             checkFileExist();
             FileWriter fileWriter = new FileWriter(filePath);
             fileWriter.write(data);
             fileWriter.close();
+        } catch (IOException e){
+            throw new FileWriteException(filePath);
         }
 
     }
