@@ -20,7 +20,7 @@ public class StorageTest {
 //        int semester = 1;
 //        state.setSemester(semester);
 //        SelectedModule selectedModule = new SelectedModule(Module.get("CS1010"),semester);
-//        selectedModule.selectSlot(LessonType.Tutorial,"06");
+//        selectedModule.selectSlot(LessonType.Tutorial,"01");
 //        selectedModule.selectSlot(LessonType.SectionalTeaching,"1");
 //        state.addSelectedModule(selectedModule);
 //        Storage storage = new Storage();
@@ -42,7 +42,7 @@ public class StorageTest {
 //        }
 //        expectedScanner.close();
 //
-//        assertEquals(actualString.toString(), expectedString.toString());
+//        assertEquals( expectedString.toString(), actualString.toString());
 //    }
 //
 //    @Test
@@ -58,7 +58,7 @@ public class StorageTest {
 //        Map<LessonType, String> selectedSlots = selectedModule.getSelectedSlots();
 //        assertEquals(1, actualState.getSemester());
 //        assertEquals("CS1010", module.moduleCode);
-//        assertEquals("06", selectedSlots.get(LessonType.Tutorial));
+//        assertEquals("01", selectedSlots.get(LessonType.Tutorial));
 //        assertEquals("1",selectedSlots.get(LessonType.SectionalTeaching));
 //    }
 }
