@@ -9,9 +9,7 @@ public class Duke {
      * Main entry-point for the java.duke.Duke application.
      */
     public static void main(String[] args) {
-
         run();
-
     }
 
     public static void run() {
@@ -24,11 +22,6 @@ public class Duke {
                 c.execute(ui, modulelist);
                 isExit = c.checkExit();
             }
-
-
-
         }
-
-
     }
 }
