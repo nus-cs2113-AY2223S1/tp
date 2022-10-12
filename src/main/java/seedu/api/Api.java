@@ -32,7 +32,7 @@ public class Api {
     private CompletableFuture<HttpResponse<String>> responseFuture;
     private final FileStorage storage;
     private final Ui ui;
-    private String apiKey = "";
+    private String apiKey = "1B+7tBxzRNOtFbTxGcCiYA==";
     private static final int FETCH_TRIES = 5;
 
     /**
