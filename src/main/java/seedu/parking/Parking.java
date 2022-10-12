@@ -3,11 +3,10 @@ package seedu.parking;
 import java.io.IOException;
 
 import seedu.api.Api;
+import seedu.commands.Auth;
 import seedu.common.CommonFiles;
 import seedu.data.CarparkList;
-import seedu.exception.InvalidFindCommandException;
-import seedu.exception.NoCarparkFoundException;
-import seedu.exception.ParkingException;
+import seedu.exception.*;
 import seedu.ui.Ui;
 import seedu.parser.Parser;
 import seedu.parser.Command;
@@ -29,6 +28,7 @@ public class Parking {
         Ui ui = new Ui();
         ui.greetUser();
         Api api = new Api();
+        Auth auth = new Auth();
 
         try {
             api.loadApiKey(); // Will give exception when file is missing or empty key
@@ -66,9 +66,6 @@ public class Parking {
             String input = ui.getCommand();
             Command command = parser.parseInputString(input);
             switch (command) {
-            case INVALID:
-                ui.showInvalidCommandError();
-                break;
             case BYE:
                 ui.showByeMessage();
                 isExit = true;
@@ -85,15 +82,34 @@ public class Parking {
                 break;
             case UPDATE:
                 try {
+                    //fetch api
+                    api.fetchData();
+
+                    //update json
                     carparkList = new CarparkList(CommonFiles.LTA_FILE_PATH, CommonFiles.LTA_BACKUP_FILE_PATH);
                     ui.showUpdateDataSuccess();
                 } catch (ParkingException e) {
                     System.out.println(e.getMessage());
+                } catch (IOException e) {
+                    ui.showUpdateError();
                 } finally {
                     System.out.println("Update data terminated"); // Debug line
                 }
                 break;
+            case AUTH:
+                try {
+                    auth.authenticate(input);
+                    ui.showAuthSuccess();
+                } catch (IOException e) {
+                    ui.showAuthError();
+                } catch (EmptyResponseException f) {
+                    ui.print(f.getMessage());
+                } catch (UnauthorisedAccessApiException g) {
+                    ui.print(g.getMessage());
+                }
+                break;
             default:
+                ui.showInvalidCommandError();
                 break;
             }
         }

@@ -140,6 +140,16 @@ public class Ui {
         print("Updated data successfully!");
     }
 
+    public void showUpdateError() {
+        print("Unable to update data!");
+    }
+    public void showAuthSuccess() {
+        print("Authenticated successfully!");
+    }
+
+    public void showAuthError() {
+        print("Unable to authenticate API Key!");
+    }
     /**
      * Changes the scanner for the Ui object. To be used for JUnit testing.
      *
