@@ -1,30 +1,23 @@
-package seedu.moneygowhere.data.target;
+package seedu.moneygowhere.data.income;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 /**
- * Stores data associated with a target.
+ * Stores data associated with an income.
  */
 @SuppressWarnings("unused")
-public class Target {
+public class Income {
     private String name;
     private LocalDateTime dateTime;
     private String description;
     private BigDecimal amount;
-    private BigDecimal currentAmount;
 
-    public Target(
-            String name,
-            LocalDateTime dateTime,
-            String description,
-            BigDecimal amount,
-            BigDecimal currentAmount) {
+    public Income(String name, LocalDateTime dateTime, String description, BigDecimal amount) {
         this.name = name;
         this.dateTime = dateTime;
         this.description = description;
         this.amount = amount;
-        this.currentAmount = currentAmount;
     }
 
     public String getName() {
@@ -58,13 +51,4 @@ public class Target {
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
-
-    public BigDecimal getCurrentAmount() {
-        return currentAmount;
-    }
-
-    public void setCurrentAmount(BigDecimal currentAmount) {
-        this.currentAmount = currentAmount;
-    }
 }
-
