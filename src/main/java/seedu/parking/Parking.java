@@ -13,14 +13,10 @@ import seedu.commands.Find;
 import seedu.common.CommonFiles;
 import seedu.data.Carpark;
 import seedu.data.CarparkList;
-import seedu.exception.EmptyResponseException;
-import seedu.exception.EmptySecretFileException;
 import seedu.exception.FileWriteException;
 import seedu.exception.NoCarparkFoundException;
 import seedu.exception.NoCommandArgumentException;
-import seedu.exception.NoFileFoundException;
 import seedu.exception.ParkingException;
-import seedu.exception.UnauthorisedAccessApiException;
 import seedu.exception.UnneededArgumentsException;
 import seedu.parser.Command;
 import seedu.parser.Parser;
@@ -113,7 +109,7 @@ public class Parking {
             case AUTH:
                 try {
                     auth.saveApiKey(input);
-                    api.loadApiKey(API_KEY_FILE, API_JSON_DIRECTORY); // Will give exception when file is missing or empty key
+                    api.loadApiKey(API_KEY_FILE, API_JSON_DIRECTORY);
                     ui.showApiKeySaved();
                 } catch (ParkingException e) {
                     ui.print(e.getMessage());
