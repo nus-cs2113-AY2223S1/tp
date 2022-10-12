@@ -38,6 +38,10 @@ public class CommandUnpair extends Command {
         Property property = propertyList.getPropertyList().get(propertyIndex);
 
         pairingList.deletePairing(client, property);
+
+
+        storage.updatePair(pairingList);
         ui.showUnpairedConfirmationMessage(client, property);
+
     }
 }
