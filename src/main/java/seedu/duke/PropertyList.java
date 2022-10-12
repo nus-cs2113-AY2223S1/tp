@@ -34,6 +34,13 @@ public class PropertyList {
         propertyList.add(new Property(landlordName, propertyAddress, rentingPrice, unitType));
         currentListSize++;
     }
+
+    public Property deleteProperty(int propertyIndex) {
+        Property deletedProperty = propertyList.get(propertyIndex);
+        propertyList.remove(propertyIndex);
+        currentListSize--;
+        return deletedProperty;
+    }
 }
 
 

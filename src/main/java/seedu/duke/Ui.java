@@ -3,6 +3,13 @@ package seedu.duke;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import static seedu.duke.Messages.MESSAGE_EMPTY_PROPERTY_INDEX;
+import static seedu.duke.Messages.MESSAGE_INVALID_PROPERTY_INDEX;
+import static seedu.duke.Messages.MESSAGE_INVALID_PROPERTY_INDEX_FLAG_FORMAT;
+import static seedu.duke.Messages.MESSAGE_MISSING_PROPERTY_INDEX_FLAG;
+import static seedu.duke.Messages.MESSAGE_PROPERTY_DELETED;
+import static seedu.duke.Messages.MESSAGE_WELCOME;
+import static seedu.duke.Messages.MESSAGE_PROPERTY_ADDED;
 import static seedu.duke.Messages.MESSAGE_ADD_CLIENT_WRONG_FORMAT;
 import static seedu.duke.Messages.MESSAGE_CHECK_PROPERTY_RESULT;
 import static seedu.duke.Messages.MESSAGE_CHECK_PROPERTY_WRONG_FORMAT;
@@ -44,7 +51,6 @@ import static seedu.duke.Messages.MESSAGE_INVALID_PRICE_FORMAT;
 import static seedu.duke.Messages.MESSAGE_NOT_VALID_INDEX;
 import static seedu.duke.Messages.MESSAGE_PAIR_UNPAIR_WRONG_FORMAT;
 import static seedu.duke.Messages.MESSAGE_PAIR_UNPAIR_INPUT_EXAMPLE;
-
 import static seedu.duke.Messages.MESSAGE_TRY_AGAIN;
 
 /**
@@ -138,7 +144,6 @@ public class Ui {
         showToUser(MESSAGE_INVALID_BUDGET_FORMAT);
     }
 
-
     public void showEmptyPropertyDetailMessage() {
         showToUser(MESSAGE_EMPTY_PROPERTY_DESCRIPTION);
     }
@@ -149,6 +154,11 @@ public class Ui {
 
 
     /* Delete-Command-related showMessage methods. */
+
+    public void showPropertyDeletedConfirmationMessage(Property deletedProperty) {
+        showToUser(MESSAGE_PROPERTY_DELETED);
+        showToUser("  " + deletedProperty);
+    }
 
     public void showClientDeletedConfirmationMessage(Client deletedClient) {
         showToUser(MESSAGE_CLIENT_DELETED);
@@ -161,6 +171,22 @@ public class Ui {
 
     public void showMissingCommandDeleteDetailMessage() {
         showToUser(MESSAGE_EMPTY_DELETE_DESCRIPTION);
+    }
+
+    public void showInvalidPropertyIndexDeleteMessage() {
+        showToUser(MESSAGE_INVALID_PROPERTY_INDEX);
+    }
+
+    public void showEmptyPropertyIndexDeleteMessage() {
+        showToUser(MESSAGE_EMPTY_PROPERTY_INDEX);
+    }
+
+    public void showMissingPropertyIndexFlagMessage() {
+        showToUser(MESSAGE_MISSING_PROPERTY_INDEX_FLAG);
+    }
+
+    public void showInvalidPropertyIndexFlagFormatMessage() {
+        showToUser(MESSAGE_INVALID_PROPERTY_INDEX_FLAG_FORMAT);
     }
 
     public void showInvalidClientIndexDeleteMessage() {
