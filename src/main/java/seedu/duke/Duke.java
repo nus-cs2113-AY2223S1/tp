@@ -6,6 +6,8 @@ import seedu.duke.utils.State;
 import seedu.duke.utils.Storage;
 import seedu.duke.utils.Ui;
 
+import java.io.IOException;
+
 public class Duke {
 
     private static Storage storage;
@@ -13,6 +15,7 @@ public class Duke {
     private static State state;
     private static String filePath  = ""; //place holder for now, wait till implementation of storage
 
+    private static final String IO_ERROR_MESSAGE = "File not found sorry.";
 
     public Duke(String filePath) {
         ui = new Ui();
@@ -20,6 +23,7 @@ public class Duke {
 
         storage = new Storage();
         //TODO: the loading of module data and past user data here
+        storage.openPreviousState(state, ui);
     }
 
     /**
@@ -43,7 +47,12 @@ public class Duke {
                 ui.displayDivider();
             }
         }
-
+        try {
+            storage.saveState(state);
+        } catch (IOException e) {
+            ui.addMessage(IO_ERROR_MESSAGE);
+            ui.displayUi();
+        }
         endSequence();
     }
 
