@@ -26,13 +26,13 @@ public class Storage {
 
     private static final String SHARE_DELIMITER = "share?";
 
-    private static final String LESSON_DELIMITER = ",";
-
     private static final String LESSON_TYPE_DELIMITER = ":";
 
-    private static final String MODULE_DELIMITER = "&";
-
     private static final String MODULE_CODE_DELIMITER = "=";
+
+    private static String moduleDelimiter = "&";
+
+    private static String lessonDelimiter = ",";
 
     public static final String FILE_PATH = "data/duke.txt";
 
@@ -87,13 +87,13 @@ public class Storage {
 
         String modulesParam = infoParam[MODULES_PARAM_INDEX];
         String cleanModuleParam = modulesParam.replace(SHARE_DELIMITER,"");
-        String[] moduleAndLessonsArray = cleanModuleParam.split(MODULE_DELIMITER);
+        String[] moduleAndLessonsArray = cleanModuleParam.split(moduleDelimiter);
         for (String moduleAndLessons : moduleAndLessonsArray) {
             String[] splitModuleAndLesson = moduleAndLessons.split(MODULE_CODE_DELIMITER);
             String moduleCode = splitModuleAndLesson[0];
             Module module = Module.get(moduleCode);
             SelectedModule selectedModule = new SelectedModule(module,semester);
-            String[] lessonsInfo = splitModuleAndLesson[1].split(LESSON_DELIMITER);
+            String[] lessonsInfo = splitModuleAndLesson[1].split(lessonDelimiter);
             addLessons(lessonsInfo, selectedModule);
             state.addSelectedModule(selectedModule);
         }
@@ -158,23 +158,29 @@ public class Storage {
     }
 
     public void appendModules(List<SelectedModule> selectedModules, StringBuilder toSave) {
+        moduleDelimiter = "";
         for (SelectedModule selectedModule: selectedModules) {
+            toSave.append(moduleDelimiter);
+            moduleDelimiter = "&";
             Module module = selectedModule.getModule();
             toSave.append(module.moduleCode);
             toSave.append(MODULE_CODE_DELIMITER);
             Map<LessonType, String> selectedSlots = selectedModule.getSelectedSlots();
             appendLessons(selectedSlots, toSave);
+
         }
     }
 
     private void appendLessons(Map<LessonType, String> selectedSlots, StringBuilder toSave) {
+        lessonDelimiter = "";
         for (Map.Entry<LessonType, String> slot: selectedSlots.entrySet()) {
+            toSave.append(lessonDelimiter);
+            lessonDelimiter = ",";
             LessonType lessonType = slot.getKey();
             String shortLessonType = Timetable.lessonTypeToShortString(lessonType);
             toSave.append(shortLessonType);
             toSave.append(LESSON_TYPE_DELIMITER);
             toSave.append(slot.getValue());
-            toSave.append(LESSON_DELIMITER);
         }
     }
 }
