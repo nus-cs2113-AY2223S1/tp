@@ -2,6 +2,7 @@ package seedu.duke;
 
 import seedu.duke.module.Module;
 import seedu.duke.module.lessons.Lesson;
+import seedu.duke.data.DataManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,13 +10,36 @@ import java.util.List;
 public class Timetable {
     public static List<Module> listOfModules = new ArrayList<>();
 
-    public void addNewModule(String code, String name, String description, List<Lesson> lessons) {
-        listOfModules.add(new Module(code, name, description, lessons));
+    public static void addNewModule(String code, String name, String description, List<Lesson> lessons) {
+        Module newModule = new Module(code, name, description, lessons); 
+        DataManager.addLessons(newModule);
+        DataManager.addModule(code, name, description);
+        listOfModules.add(newModule);
+    }
+
+    public static void addNewModuleFromFile(String code, String name, String description, List<Lesson> lessons) {
+        Module newModule = new Module(code, name, description, lessons); 
+        listOfModules.add(newModule);
+    }
+
+    public static List<Module> getListOfModules(){
+        return listOfModules;
+    }
+
+    public static Module getModuleByCode(String code){
+        for (int i=0; i<listOfModules.size(); i++){
+            if (listOfModules.get(i).getModuleCode().equals(code)){
+                return listOfModules.get(i);
+            }
+        }
+        return null;
     }
 
     public String listModules() {
+        //list to print
         StringBuilder list;
         int counter = 1;
+
 
         if (listOfModules.size() == 0) {
             return "You have no modules at the moment!";

@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2022-10-10T18:22:41.627063Z</date>
-  <millis>1665426161627</millis>
-  <nanos>63000</nanos>
+  <date>2022-10-12T08:53:22.085131400Z</date>
+  <millis>1665564802085</millis>
+  <nanos>131400</nanos>
   <sequence>0</sequence>
   <logger>global</logger>
   <level>INFO</level>
@@ -14,10 +14,22 @@
   <message>starting Timetabler program...</message>
 </record>
 <record>
-  <date>2022-10-10T18:22:45.542133Z</date>
-  <millis>1665426165542</millis>
-  <nanos>133000</nanos>
+  <date>2022-10-12T08:53:35.859878700Z</date>
+  <millis>1665564815859</millis>
+  <nanos>878700</nanos>
   <sequence>1</sequence>
+  <logger>global</logger>
+  <level>INFO</level>
+  <class>seedu.duke.Duke</class>
+  <method>main</method>
+  <thread>1</thread>
+  <message>exit flag detected, attempting to exit</message>
+</record>
+<record>
+  <date>2022-10-12T08:53:35.861883400Z</date>
+  <millis>1665564815861</millis>
+  <nanos>883400</nanos>
+  <sequence>2</sequence>
   <logger>global</logger>
   <level>INFO</level>
   <class>seedu.duke.Duke</class>

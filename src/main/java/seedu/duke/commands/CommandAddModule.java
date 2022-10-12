@@ -4,6 +4,7 @@ import seedu.duke.Exceptions;
 import seedu.duke.Timetable;
 import seedu.duke.commands.nusmodsapi.Nusmods;
 import seedu.duke.module.lessons.Lesson;
+import seedu.duke.data.DataManager;
 
 import java.io.IOException;
 import java.util.List;
@@ -31,8 +32,7 @@ public class CommandAddModule {
         }
 
         lgr.info("api call successful, attempting to add module to timetable");
-        timetable.addNewModule(info[0], info[1], info[2], lessons);
-
+        Timetable.addNewModule(info[0], info[1], info[2], lessons);
         return "Successfully added new module: " + info[0] + " : " + info[1];
     }
 }
