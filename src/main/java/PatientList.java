@@ -8,14 +8,16 @@ public class PatientList {
     }
 
     public void addPatient(String name, String birthDate, String gender, String id) {
-        patients.add(new Patient(name, birthDate, gender, id));
+        Patient patient = new Patient(name, birthDate, gender, id);
+        patients.add(patient);
+        Messages.printPatientAddedMessage(patient);
     }
 
     public void retrievePatient(String id) {
         for (Patient patient : patients) {
             if (patient.getId().equals(id)) {
-                Messages.printLine();
                 System.out.println("The patient with the supplied ID was found! Here are the details of the patient: ");
+                Messages.printLine();
                 System.out.println(patient);
                 Messages.printLine();
                 return;
@@ -55,8 +57,7 @@ public class PatientList {
             patientToBeModified.setGender(gender);
         }
         System.out.println();
-        System.out.println("The patient's details has been modified! Here are the new patient details!");
-        System.out.println(patientToBeModified);
+        Messages.printPatientEditedMessage(patientToBeModified);
         Messages.printLine();
 
     }

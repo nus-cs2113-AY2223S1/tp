@@ -6,5 +6,7 @@ public class UI {
     public static String readline() {
         return sc.nextLine();
     }
+
+
 }
 
