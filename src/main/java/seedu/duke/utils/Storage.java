@@ -18,6 +18,8 @@ public class Storage {
 
     public static final String LESSONS_DELIMITER = "\\|";
 
+    public static final String LESSONS_DELIMITER_FOR_SAVING = "|";
+
     public static final String LESSON_TYPE_AND_CLASS_NO_DELIMITER = " ";
 
     public static final String NO_PREVIOUS_STATE_ERROR_MESSAGE = "There was no previously saved state.";
@@ -43,6 +45,7 @@ public class Storage {
             String line = s.nextLine();
             previousState.add(line);
         }
+        s.close();
         return previousState;
     }
 
@@ -51,6 +54,9 @@ public class Storage {
         state.setSemester(semester);
         previousState.remove(0);
         for (String moduleInfo: previousState) {
+            if (moduleInfo.isEmpty()) {
+                continue;
+            }
             String[] moduleLessonInfos = moduleInfo.split(LESSONS_DELIMITER);
             String moduleCode = moduleLessonInfos[0];
             Module module = Module.get(moduleCode);
@@ -60,9 +66,9 @@ public class Storage {
         }
     }
 
-    private static void addLessons(String[] moduleLessonInfos, SelectedModule selectedModule) {
+    private void addLessons(String[] moduleLessonInfos, SelectedModule selectedModule) {
         for (int i = 1; i < moduleLessonInfos.length; i++) {
-            String[] lessonInfos = moduleLessonInfos[i].split(" ",1);
+            String[] lessonInfos = moduleLessonInfos[i].split(LESSON_TYPE_AND_CLASS_NO_DELIMITER);
             LessonType lessonType = LessonType.valueOf(lessonInfos[0]);
             String classNo = lessonInfos[1];
             selectedModule.selectSlot(lessonType,classNo);
@@ -88,6 +94,7 @@ public class Storage {
         toSave.append(System.lineSeparator());
         List<SelectedModule> selectedModules = state.getSelectedModulesList();
         appendModules(selectedModules,toSave);
+
         FileWriter fw = new FileWriter(file);
         fw.write(String.valueOf(toSave));
         fw.close();
@@ -103,9 +110,9 @@ public class Storage {
         toSave.append(System.lineSeparator());
     }
 
-    private static void appendLessons(Map<LessonType, String> selectedSlots, StringBuilder toSave) {
+    private void appendLessons(Map<LessonType, String> selectedSlots, StringBuilder toSave) {
         for (Map.Entry<LessonType, String> slot: selectedSlots.entrySet()) {
-            toSave.append(LESSONS_DELIMITER);
+            toSave.append(LESSONS_DELIMITER_FOR_SAVING);
             toSave.append(slot.getKey().toString());
             toSave.append(LESSON_TYPE_AND_CLASS_NO_DELIMITER);
             toSave.append(slot.getValue());
