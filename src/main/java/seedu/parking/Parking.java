@@ -96,6 +96,7 @@ public class Parking {
             case UPDATE:
                 try {
                     //fetch api
+                    api.asyncExecuteRequest();
                     api.fetchData();
 
                     //update json
@@ -111,13 +112,11 @@ public class Parking {
                 break;
             case AUTH:
                 try {
-                    auth.authenticate(input);
-                    ui.showAuthSuccess();
-                } catch (IOException e) {
-                    ui.showAuthError();
-                } catch (EmptySecretFileException | NoFileFoundException | EmptyResponseException
-                         | UnauthorisedAccessApiException | NoCommandArgumentException | FileWriteException f) {
-                    ui.print(f.getMessage());
+                    auth.saveApiKey(input);
+                    api.loadApiKey(API_KEY_FILE, API_JSON_DIRECTORY); // Will give exception when file is missing or empty key
+                    ui.showApiKeySaved();
+                } catch (ParkingException e) {
+                    ui.print(e.getMessage());
                 }
                 break;
             case LIST:

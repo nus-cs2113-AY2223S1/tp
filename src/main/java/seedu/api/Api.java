@@ -33,7 +33,8 @@ public class Api {
     private final Ui ui;
     private HttpRequest request;
     private CompletableFuture<HttpResponse<String>> responseFuture;
-    private String apiKey = "";
+    private String apiKey = "1B+7tBxzRNOtFbTxGcCiYA==";
+    private static final int FETCH_TRIES = 5;>>>>>>> master
 
     /**
      * Constructor to create a new client and the correct HTTP request.

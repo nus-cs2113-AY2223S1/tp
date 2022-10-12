@@ -143,8 +143,8 @@ public class Ui {
     public void showUpdateError() {
         print("Unable to update data!");
     }
-    public void showAuthSuccess() {
-        print("Authenticated successfully!");
+    public void showApiKeySaved() {
+        print("API key saved successfully! use command `update` to get the latest data.");
     }
 
     public void showAuthError() {

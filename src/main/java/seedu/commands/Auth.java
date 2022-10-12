@@ -22,7 +22,6 @@ import seedu.ui.Ui;
  */
 public class Auth {
 
-    private final Api api = new Api(LTA_JSON_FILE, API_JSON_DIRECTORY);
     private final Ui ui = new Ui();
 
     /**
@@ -32,7 +31,7 @@ public class Auth {
      * @throws NoCommandArgumentException If no command is found
      * @throws FileWriteException         If there is an error writing to file
      */
-    public void sendApiKey(String input) throws NoCommandArgumentException, FileWriteException {
+    public void saveApiKey(String input) throws NoCommandArgumentException, FileWriteException {
         String[] words = input.trim().split("\\s+", 2);
         if (words.length < 2 || words[1].length() == 0) {
             throw new NoCommandArgumentException("auth");
@@ -48,23 +47,5 @@ public class Auth {
                 throw new FileWriteException(API_KEY_FILE_PATH.toString());
             }
         }
-    }
-
-    /**
-     * Check if API Key is valid.
-     *
-     * @param input Input string of user
-     * @throws IOException
-     * @throws EmptySecretFileException
-     * @throws NoFileFoundException
-     * @throws EmptyResponseException
-     * @throws UnauthorisedAccessApiException
-     */
-    public void authenticate(String input) throws IOException, EmptySecretFileException, NoFileFoundException,
-            EmptyResponseException, UnauthorisedAccessApiException, NoCommandArgumentException, FileWriteException {
-        sendApiKey(input);
-        api.loadApiKey(LTA_JSON_FILE, API_JSON_DIRECTORY);
-        api.asyncExecuteRequest();
-        api.fetchData();
     }
 }
