@@ -192,22 +192,22 @@ public class DataManager {
             }
 
             switch (lessonType) {
-                case "Lecture":
-                    Lecture newLecture = new Lecture(lessonDay, lessonStart, lessonEnd, lessonType);
-                    currModule.replaceAttending(newLecture);
-                    break;
-                case "Tutorial":
-                    Tutorial newTutorial = new Tutorial(lessonDay, lessonStart, lessonEnd, lessonType);
-                    currModule.replaceAttending(newTutorial);
-                    break;
-                case "Laboratory":
-                    Laboratory newLaboratory = new Laboratory(lessonDay, lessonStart, lessonEnd, lessonType);
-                    currModule.replaceAttending(newLaboratory);
-                    break;
-                default:
-                    Others newOthers = new Others(lessonDay, lessonStart, lessonEnd, lessonType);
-                    currModule.replaceAttending(newOthers);
-                    break;
+            case "Lecture":
+                Lecture newLecture = new Lecture(lessonDay, lessonStart, lessonEnd, lessonType);
+                currModule.replaceAttending(newLecture);
+                break;
+            case "Tutorial":
+                Tutorial newTutorial = new Tutorial(lessonDay, lessonStart, lessonEnd, lessonType);
+                currModule.replaceAttending(newTutorial);
+                break;
+            case "Laboratory":
+                Laboratory newLaboratory = new Laboratory(lessonDay, lessonStart, lessonEnd, lessonType);
+                currModule.replaceAttending(newLaboratory);
+                break;
+            default:
+                Others newOthers = new Others(lessonDay, lessonStart, lessonEnd, lessonType);
+                currModule.replaceAttending(newOthers);
+                break;
             }
         }
     }

@@ -27,11 +27,11 @@ public class Module {
         return moduleCode;
     }
 
-    public List<Lesson> getAttending(){
+    public List<Lesson> getAttending() {
         return attending;
     }
 
-    public List<Lesson> getLessons(){
+    public List<Lesson> getLessons() {
         return lessons;
     }
 
