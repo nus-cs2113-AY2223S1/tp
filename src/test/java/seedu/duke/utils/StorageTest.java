@@ -19,6 +19,7 @@ public class StorageTest {
         State state = new State();
         int semester = 1;
         state.setSemester(semester);
+        
         SelectedModule selectedModule1 = new SelectedModule(Module.get("CS1010"), semester);
         selectedModule1.selectSlot(LessonType.Tutorial, "01");
         selectedModule1.selectSlot(LessonType.SectionalTeaching, "1");
