@@ -1,1 +1,6 @@
+search cs2113
+add cs2113
+view
+select /module cs2113 /type tutorial /code 4
+view
 bye
