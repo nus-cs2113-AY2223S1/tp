@@ -77,7 +77,7 @@ public class Parking {
             String input = ui.getCommand();
             Command command = parser.parseInputString(input);
             switch (command) {
-            case BYE:
+            case EXIT:
                 ui.showByeMessage();
                 isExit = true;
                 break;
@@ -117,6 +117,9 @@ public class Parking {
                          | UnauthorisedAccessApiException | EmptyAuthException f) {
                     ui.print(f.getMessage());
                 }
+                break;
+            case LIST:
+                ui.print(carparkList.toString());
                 break;
             default:
                 ui.showInvalidCommandError();
