@@ -9,9 +9,12 @@ import seedu.duke.command.IncompleteCommand;
 import seedu.duke.command.InvalidModuleCommand;
 import seedu.duke.command.UnknownCommand;
 import seedu.duke.command.ViewTimetableCommand;
+import seedu.duke.command.SelectSlotCommand;
 import seedu.duke.command.SearchModuleCodeCommand;
 import seedu.duke.command.SearchModuleNameCommand;
 
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -29,6 +32,8 @@ public class Parser {
             return viewHelpExitCommand(keywords, new ViewTimetableCommand(keywords));
         case (HelpCommand.COMMAND_WORD):
             return viewHelpExitCommand(keywords, new HelpCommand(keywords));
+        case (SelectSlotCommand.COMMAND_WORD):
+            return new SelectSlotCommand(userInput);
         case (ExitCommand.COMMAND_WORD):
             return viewHelpExitCommand(keywords, new ExitCommand(keywords));
         default:
@@ -88,8 +93,10 @@ public class Parser {
     }
 
     /**
-     * Checks if the user entered a valid search or add or delete command in the format
+     * Checks if the user entered a valid search or add or delete command in the
+     * format
      * "search|add|delete MODULE_CODE".
+     * 
      * @param keywords contains the user input split by spaces
      * @param command  the command that the user wants to execute
      * @return type of command
@@ -119,5 +126,21 @@ public class Parser {
         } else {
             return new UnknownCommand(keywords);
         }
+    }
+
+    public static Map<String, String> parseParams(String description) {
+        Map<String, String> paramsMap = new TreeMap<>();
+        int firstSlash = description.indexOf('/');
+        if (firstSlash == -1) {
+            return paramsMap;
+        }
+        String paramsString = description.substring(firstSlash + 1);
+        for (String param : paramsString.split(" /")) {
+            int firstSpace = param.indexOf(' ');
+            String key = param.substring(0, firstSpace).trim();
+            String value = param.substring(firstSpace + 1).trim();
+            paramsMap.put(key, value);
+        }
+        return paramsMap;
     }
 }
