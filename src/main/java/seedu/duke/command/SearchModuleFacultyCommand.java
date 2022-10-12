@@ -9,18 +9,18 @@ import java.util.List;
 
 import seedu.duke.model.Module;
 
-public class SearchModuleCodeCommand extends Command {
+public class SearchModuleFacultyCommand extends Command {
     public static final String COMMAND_WORD = "search";
-    private String toSearchModuleCode;
+    private String toSearchModuleFaculty;
 
-    public SearchModuleCodeCommand(String[] input) {
+    public SearchModuleFacultyCommand(String[] input) {
         super(input);
-        toSearchModuleCode = input[1];
+        toSearchModuleFaculty = input[1];
     }
 
     @Override
     public void execute(State state, Ui ui, Storage storage) {
-        List<Module> searchResult = filterModuleByCode(toSearchModuleCode);
+        List<Module> searchResult = filterModuleByCode(toSearchModuleFaculty);
 
         ui.addMessage("Module search list");
         for (var m : searchResult) {
@@ -40,22 +40,6 @@ public class SearchModuleCodeCommand extends Command {
         List<Module> searchResult = new ArrayList<>();
         for (Module m : moduleList) {
             if (m.moduleCode.contains(toSearchModuleCode.toUpperCase())) {
-                searchResult.add(m);
-            }
-        }
-        return searchResult;
-    }
-
-    /**
-     * Filter module by module faculty and return a list of modules that match the search query.
-     *
-     * @return searchResult
-     */
-    public static List<Module> filterModuleByFaculty(String toSearchModuleFaculty) {
-        List<Module> moduleList = Module.getAll();
-        List<Module> searchResult = new ArrayList<>();
-        for (Module m : moduleList) {
-            if (m.moduleCode.contains(toSearchModuleFaculty.toUpperCase())) {
                 searchResult.add(m);
             }
         }
