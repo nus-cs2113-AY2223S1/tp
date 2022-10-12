@@ -645,7 +645,7 @@ public class Parser {
     }
 
     private ArrayList<Integer> extractPairUnpairDetails(String rawPairUnpairDetails, int[] pairFlagIndexPositions,
-                                                        String[] pairUnpairFlags) throws NotIntegerException {
+            String[] pairUnpairFlags) throws NotIntegerException {
         String propertyIndexString = extractDetail(rawPairUnpairDetails,
                 pairFlagIndexPositions[0] + pairUnpairFlags[0].length(),
                 pairFlagIndexPositions[1]);
@@ -758,7 +758,7 @@ public class Parser {
     }
 
     private ArrayList<Integer> extractCheckPropertyDetails(String rawPropertyDetails,
-                                                           int[] checkPropertyFlagIndexPositions, String[] checkFlags) throws NotIntegerException {
+            int[] checkPropertyFlagIndexPositions, String[] checkFlags) throws NotIntegerException {
         String propertyIndexString = extractDetail(rawPropertyDetails,
                 checkPropertyFlagIndexPositions[0] + checkFlags[0].length());
 
