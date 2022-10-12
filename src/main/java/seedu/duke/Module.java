@@ -18,8 +18,14 @@ public class Module {
     }
 
     public String toString() {
-        return "";
+        String moduleInformation = this.course + " " + this.semesterTaken + ' '
+                + this.grade + ' ' + this.mcs;
+        return moduleInformation;
     }
 
+    public String getCourse() { return this.course; }
+    public String getSemesterTaken() { return this.semesterTaken; }
+    public String getGrade() { return this.grade; }
+    public int getMcs() { return this.mcs; }
 
 }
