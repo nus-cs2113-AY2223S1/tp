@@ -9,4 +9,6 @@ flight add
 flight list
 Passenger delete n/Ivan Theng fn/sq832 sn/17d
 passenger list
+passenger
+flight
 bye

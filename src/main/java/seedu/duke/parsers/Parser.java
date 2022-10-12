@@ -5,25 +5,53 @@ import seedu.duke.command.ExitCommand;
 import seedu.duke.exceptions.SkyControlException;
 import seedu.duke.ui.Ui;
 
+import java.io.IOException;
+import java.util.logging.Logger;
+import java.util.logging.LogManager;
+import java.util.logging.Level;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.FileHandler;
+
 public class Parser {
+    protected static Command command;
     protected static Ui ui = new Ui();
     protected static final String EXIT_ENTITY = "bye";
     protected static final String PASSENGER_ENTITY = "passenger";
     protected static final String FLIGHT_ENTITY = "flight";
     protected static final int ENTITY_INDEX = 0;
     protected static final int OPERATION_INDEX = 1;
-    protected static Command command;
+    protected static final int ONE_WORD = 1;
     protected static boolean isPassengerEntity = false;
     protected static boolean isFlightEntity = false;
     protected static boolean isAdd = false;
     protected static boolean isDelete = false;
     protected static boolean isList = false;
     protected static boolean isExit = false;
+    protected static boolean isBlankOperation = false;
     protected static String[] inputWords;
     protected static String entity;
     protected static String operation;
 
-    public Parser() {
+    private static final Logger LOGGER = Logger.getLogger(Parser.class.getName());
+
+    public static void setupLogger() {
+        LogManager.getLogManager().reset();
+        Parser.LOGGER.setLevel(Level.ALL);
+        ConsoleHandler consoleHandler = new ConsoleHandler();
+        consoleHandler.setLevel(Level.SEVERE);
+        Parser.LOGGER.addHandler(consoleHandler);
+        createFileHandle();
+        Parser.LOGGER.log(Level.INFO, ui.getLoggerStartUpMessage());
+    }
+
+    private static void createFileHandle() {
+        try {
+            FileHandler fileHandler = new FileHandler("ParserPassenger-logger.log");
+            fileHandler.setLevel(Level.WARNING);
+            Parser.LOGGER.addHandler(fileHandler);
+        } catch (IOException e) {
+            Parser.LOGGER.log(Level.SEVERE, ui.getLoggerError(), e);
+        }
     }
 
     public static Command parse(String lineInput) throws SkyControlException {
@@ -36,7 +64,7 @@ public class Parser {
         } else if (isExit) {
             command = new ExitCommand();
         } else {
-            throw new SkyControlException(ui.showErrorMessage());
+            throw new SkyControlException(ui.getErrorMessage());
         }
         return command;
     }
@@ -55,29 +83,55 @@ public class Parser {
     }
 
     public static boolean isPassengerEntity(String lineInput) {
-        getEntity(lineInput);
+        try {
+            getEntity(lineInput);
+        } catch (SkyControlException e) {
+            ui.showError(e.getMessage());
+            return false;
+        }
         isPassengerEntity = entity.equalsIgnoreCase(PASSENGER_ENTITY);
         return isPassengerEntity;
     }
 
     public static boolean isFlightEntity(String lineInput) {
-        getEntity(lineInput);
+        try {
+            getEntity(lineInput);
+        } catch (SkyControlException e) {
+            return false;
+        }
         isFlightEntity = entity.equalsIgnoreCase(FLIGHT_ENTITY);
         return isFlightEntity;
     }
 
     public static boolean isExitEntity(String lineInput) {
-        getEntity(lineInput);
+        try {
+            getEntity(lineInput);
+        } catch (SkyControlException e) {
+            return isExit;
+        }
         isExit = entity.equalsIgnoreCase(EXIT_ENTITY);
         return isExit;
     }
 
-    public static void getEntity(String lineInput) {
+    public static void getEntity(String lineInput) throws SkyControlException {
         getInputWords(lineInput);
-        entity = inputWords[ENTITY_INDEX];
+        checkBlankOperation(lineInput);
+        if (isBlankOperation) {
+            isBlankOperation = false;
+            throw new SkyControlException(ui.getBlankOperationError());
+        } else {
+            entity = inputWords[ENTITY_INDEX];
+        }
     }
 
     public static void getInputWords(String lineInput) {
         inputWords = lineInput.split("\\s+");
+    }
+
+    private static void checkBlankOperation(String lineInput) {
+        boolean isNotBye = !lineInput.contains("bye");
+        if (inputWords.length == ONE_WORD && isNotBye) {
+            isBlankOperation = true;
+        }
     }
 }

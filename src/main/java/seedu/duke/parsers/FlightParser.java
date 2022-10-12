@@ -23,7 +23,7 @@ public class FlightParser extends Parser {
             //FlightList.deleteFlight(operation);
             break;
         default:
-            throw new SkyControlException(ui.showErrorMessage());
+            throw new SkyControlException(ui.getErrorMessage());
         }
         return command;
     }
