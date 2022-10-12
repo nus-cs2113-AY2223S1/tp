@@ -19,6 +19,7 @@ add exercise /{description} /{repetitions} /{calories}
 add food /{description} /{calories}
 remove food /{food index}
 mark {done/undone} /{exercise index}
+e_remove exercise /{index}
 view {biometrics/exercise/food}
 ------------------------------------------
 ------------------------------------------
