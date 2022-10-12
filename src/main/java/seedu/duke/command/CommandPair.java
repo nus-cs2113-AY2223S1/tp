@@ -38,7 +38,12 @@ public class CommandPair extends Command {
         Client client = clientList.getClientList().get(clientIndex);
         Property property = propertyList.getPropertyList().get(propertyIndex);
 
+        String clientFormat = pairingList.convertToPairingData(client);
+        String propertyFormat = pairingList.convertToPairingData(property);
+
         pairingList.addPairing(client, property);
+        storage.addToPairFile(clientFormat, propertyFormat);
+
         ui.showPairedConfirmationMessage(client, property);
     }
 }

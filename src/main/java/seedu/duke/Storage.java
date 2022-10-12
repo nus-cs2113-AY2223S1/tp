@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class Storage {
@@ -14,8 +15,6 @@ public class Storage {
     private static final String PAIR_PATH = "./data/pair.txt";
     private static final String SEPARATOR = " | ";
     private static final String CURRENCY = "SGD";
-    private static final String OPEN_BRACKET = "[";
-    private static final String CLOSE_BRACKET = "]";
     private static final String COLON = " : ";
     private static final String EMPTY_STRING = "";
 
@@ -170,6 +169,19 @@ public class Storage {
      * @param pairFile The file that contains the pairing file.
      */
     public void loadPair(PairingList pairingList, File pairFile) {
+        try {
+            Scanner scanner = new Scanner(pairFile);
+
+            while (scanner.hasNext()) {
+                String[] pairingParameters = scanner.nextLine().split("\\s\\:\\s");
+                String client = pairingParameters[0];
+                String property = pairingParameters[1];
+                pairingList.addPairing(client, property);
+            }
+
+        } catch (FileNotFoundException e) {
+            System.out.println("File is not found...");
+        }
 
     }
 
@@ -220,26 +232,14 @@ public class Storage {
         }
     }
 
-    /**
-     * Appends the latest pair into the pair text file.
-     *
-     * @param client The name of the client.
-     * @param contact The contact number of the client.
-     * @param landlord The name of the landlord.
-     * @param address The address of the rental unit.
-     * @param price The monthly rental price per month.
-     * @param type The type of the rental unit.
-     */
-    public void addToPairFile(String client, String contact, String landlord,
-                              String address, int price, String type) {
+
+
+    public void addToPairFile(String clientFormat, String propertyFormat) {
         try {
             FileWriter fw = new FileWriter(PAIR_PATH, true);
-            String monthlyPrice = CURRENCY + price;
-            String clientPortion = OPEN_BRACKET + client + SEPARATOR + contact + CLOSE_BRACKET;
-            String propertyPortion = OPEN_BRACKET + landlord + SEPARATOR + address
-                    + SEPARATOR + monthlyPrice + SEPARATOR + type + CLOSE_BRACKET;
-            String finalString = clientPortion + COLON + propertyPortion;
-            fw.write(finalString);
+
+            String finalFormat = clientFormat + COLON + propertyFormat + System.lineSeparator();
+            fw.write(finalFormat);
             fw.close();
 
         } catch (IOException e) {
@@ -276,9 +276,33 @@ public class Storage {
         } catch (IOException e) {
             System.out.println("Client file does not exist.");
         }
+    }
 
+    /**
+     * Updates the pairing text file when entries are unpaired.
+     *
+     * @param pairingList An object containing the hashmap of the pairs.
+     */
+    public void updatePair(PairingList pairingList) {
+        try {
+            HashMap<String, String> clientPropertyPair = pairingList.getClientPropertyPairs();
+            FileWriter pairFile = new FileWriter(PAIR_PATH);
 
+            String pairText = "";
+            for (String clientText : clientPropertyPair.keySet()) {
+                String propertyText = clientPropertyPair.get(clientText);
+                String finalText = clientText + COLON + propertyText + System.lineSeparator();
+                pairText = pairText.concat(finalText);
+            }
+
+            // Write the pairing list into a file.
+            pairFile.write(pairText);
+            pairFile.close();
+        } catch (IOException e) {
+            System.out.println("Pair File does not exist.");
+        }
 
 
     }
+
 }

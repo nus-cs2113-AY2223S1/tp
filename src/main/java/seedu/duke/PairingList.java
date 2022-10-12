@@ -119,4 +119,13 @@ public class PairingList {
                 + CLOSE_BRACKET;
     }
 
+    /**
+     * Fetches the hashmap containing the pair between client and property.
+     *
+     * @return a hashmap with client data as key and property data as value.
+     */
+    public HashMap<String, String> getClientPropertyPairs() {
+        return clientPropertyPairs;
+    }
+
 }
