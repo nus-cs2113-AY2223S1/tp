@@ -115,8 +115,8 @@ public class Parking {
                     ui.showAuthSuccess();
                 } catch (IOException e) {
                     ui.showAuthError();
-                } catch (EmptySecretFileException | NoFileFoundException | EmptyResponseException |
-                         UnauthorisedAccessApiException | NoCommandArgumentException | FileWriteException f) {
+                } catch (EmptySecretFileException | NoFileFoundException | EmptyResponseException
+                         | UnauthorisedAccessApiException | NoCommandArgumentException | FileWriteException f) {
                     ui.print(f.getMessage());
                 }
                 break;

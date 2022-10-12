@@ -19,6 +19,7 @@ public class FileStorage {
 
     /**
      * TODO: Javadoc comment.
+     *
      * @param directory
      * @param file
      */
@@ -45,6 +46,7 @@ public class FileStorage {
 
     /**
      * Writes data to a txt file in plain text.
+     *
      * @param data data to be written.
      * @throws FileWriteException If the file cannot be written to.
      */
@@ -54,7 +56,7 @@ public class FileStorage {
             FileWriter fileWriter = new FileWriter(filePath);
             fileWriter.write(data);
             fileWriter.close();
-        } catch (IOException e){
+        } catch (IOException e) {
             throw new FileWriteException(filePath);
         }
 

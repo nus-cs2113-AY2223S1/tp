@@ -27,9 +27,10 @@ public class Auth {
 
     /**
      * Passes the API KEY into secret.txt
+     *
      * @param input Input string of User
      * @throws NoCommandArgumentException If no command is found
-     * @throws FileWriteException If there is an error writing to file
+     * @throws FileWriteException         If there is an error writing to file
      */
     public void sendApiKey(String input) throws NoCommandArgumentException, FileWriteException {
         String[] words = input.trim().split("\\s+", 2);
@@ -43,14 +44,15 @@ public class Auth {
                 fw.write(apiKey);
                 ui.print("Successfully pushed api key into secret.txt");
                 fw.close();
-            }
-            catch (IOException e){
+            } catch (IOException e) {
                 throw new FileWriteException(API_KEY_FILE_PATH.toString());
             }
         }
     }
+
     /**
      * Check if API Key is valid.
+     *
      * @param input Input string of user
      * @throws IOException
      * @throws EmptySecretFileException
@@ -59,7 +61,7 @@ public class Auth {
      * @throws UnauthorisedAccessApiException
      */
     public void authenticate(String input) throws IOException, EmptySecretFileException, NoFileFoundException,
-        EmptyResponseException, UnauthorisedAccessApiException, NoCommandArgumentException, FileWriteException {
+            EmptyResponseException, UnauthorisedAccessApiException, NoCommandArgumentException, FileWriteException {
         sendApiKey(input);
         api.loadApiKey(LTA_JSON_FILE, API_JSON_DIRECTORY);
         api.asyncExecuteRequest();
