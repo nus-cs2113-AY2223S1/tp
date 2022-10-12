@@ -7,7 +7,7 @@ import seedu.duke.exception.IllegalValueException;
 import seedu.duke.exercise.Exercise;
 import seedu.duke.exercise.ExerciseList;
 import seedu.duke.food.FoodList;
-import java.util.Arrays;
+import java.lang.ArithmeticException;
 
 public class RemoveExerciseCommand extends Command {
 
@@ -32,7 +32,7 @@ public class RemoveExerciseCommand extends Command {
             }
             exerciseList.getCurrentExerciseList().remove(index - 1);
             ui.output("Exercise has been removed successfully!");
-        } catch (IllegalValueException e) {
+        } catch (IllegalValueException | NumberFormatException e) {
             ui.output(e.getMessage());
         }
     }
