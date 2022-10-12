@@ -22,18 +22,18 @@ Which lesson type do you want to set? Enter corresponding valid index
 1. Tutorial     2. Lecture     
 Which is your preferred timeslot? Enter corresponding valid index
 1. [Tutorial] Friday   11:00 - 12:00
-2. [Tutorial] Wednesday   13:00 - 14:00
-3. [Tutorial] Thursday   17:00 - 18:00
-4. [Tutorial] Wednesday   12:00 - 13:00
+2. [Tutorial] Wednesday   12:00 - 13:00
+3. [Tutorial] Wednesday   13:00 - 14:00
+4. [Tutorial] Thursday   17:00 - 18:00
 5. [Tutorial] Thursday   17:00 - 18:00
 
 Please try again!
 
 Which is your preferred timeslot? Enter corresponding valid index
 1. [Tutorial] Friday   11:00 - 12:00
-2. [Tutorial] Wednesday   13:00 - 14:00
-3. [Tutorial] Thursday   17:00 - 18:00
-4. [Tutorial] Wednesday   12:00 - 13:00
+2. [Tutorial] Wednesday   12:00 - 13:00
+3. [Tutorial] Wednesday   13:00 - 14:00
+4. [Tutorial] Thursday   17:00 - 18:00
 5. [Tutorial] Thursday   17:00 - 18:00
 
 Successfully set your lesson!
@@ -43,7 +43,7 @@ Here is a list of things I can do, enter the appropriate command to continue!
 Here are your modules:
 1. CS2113: Software Engineering & Object-Oriented Programming
      [Lecture] Undetermined Day   Undetermined Time - Undetermined Time
-     [Tutorial] Wednesday   13:00 - 14:00
+     [Tutorial] Wednesday   12:00 - 13:00
 
 
 Here is a list of things I can do, enter the appropriate command to continue!
@@ -52,7 +52,7 @@ Here is a list of things I can do, enter the appropriate command to continue!
 Here are your modules:
 1. CS2113: Software Engineering & Object-Oriented Programming
      [Lecture] Undetermined Day   Undetermined Time - Undetermined Time
-     [Tutorial] Wednesday   13:00 - 14:00
+     [Tutorial] Wednesday   12:00 - 13:00
 
 
 Which module you would like to delete? Please enter the index of that module. 
@@ -63,7 +63,7 @@ Here is a list of things I can do, enter the appropriate command to continue!
 Here are your modules:
 1. CS2113: Software Engineering & Object-Oriented Programming
      [Lecture] Undetermined Day   Undetermined Time - Undetermined Time
-     [Tutorial] Wednesday   13:00 - 14:00
+     [Tutorial] Wednesday   12:00 - 13:00
 
 
 Which module you would like to delete? Please enter the index of that module. 
@@ -74,7 +74,7 @@ Here is a list of things I can do, enter the appropriate command to continue!
 Here are your modules:
 1. CS2113: Software Engineering & Object-Oriented Programming
      [Lecture] Undetermined Day   Undetermined Time - Undetermined Time
-     [Tutorial] Wednesday   13:00 - 14:00
+     [Tutorial] Wednesday   12:00 - 13:00
 
 
 Which module you would like to delete? Please enter the index of that module. 
