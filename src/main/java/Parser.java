@@ -13,9 +13,12 @@ public class Parser {
     private PatientList patientList;
     private VisitList visitList;
 
-    public Parser(PatientList patientList, VisitList visitList) {
+    private PrescriptionList prescriptionList;
+
+    public Parser(PatientList patientList, VisitList visitList, PrescriptionList prescriptionList) {
         this.patientList = patientList;
         this.visitList = visitList;
+        this.prescriptionList = prescriptionList;
     }
 
     public void mainMenuParser() {
@@ -32,22 +35,17 @@ public class Parser {
                 break;
             case visits:
                 Messages.printVisitsMenuMessage();
+                visitParser();
                 break;
             case prescription:
                 Messages.printPrescriptionMenuMessage();
+                prescriptionParser();
                 break;
             default:
                 break;
             }
         }
     }
-
-    //todo add:
-    //    private static String  checkInputForMainMenu(String input);
-    //    public static void patientParser();
-    //    public static void visitsParser();
-    //    public static void medicineParser();
-    //    public void addPatientParser(String input) {}
 
     public void patientParser() {
         while (scanner.hasNext()) {
@@ -62,7 +60,7 @@ public class Parser {
                 } else if (matcherRetrieve.find()) {
                     patientList.retrievePatient(matcherRetrieve.group(1));
                 } else if (matcherEdit.find()) {
-                    parseEditInput(matcherEdit.group(1), matcherEdit.group(2), matcherEdit.group(3));
+                    parseEditPatient(matcherEdit.group(1), matcherEdit.group(2), matcherEdit.group(3));
                 } else {
                     throw new OneDocException("Your input is incorrect! Please format it as such:"
                             + "\nTo add a patient: add i/[ID] n/[name] g/[M/F] d/[DOB]"
@@ -106,8 +104,32 @@ public class Parser {
         }
     }
 
+    public void prescriptionParser() {
+        while (scanner.hasNext()) {
+            try {
+                String input = scanner.nextLine();
+                Matcher matcherAdd = addPrescriptionMatcher(input);
+                Matcher matcherEdit = editPrescriptionMatcher(input);
+                if (matcherAdd.find()) {
+                    prescriptionList.add(matcherAdd.group(1), matcherAdd.group(2),
+                            matcherAdd.group(3), matcherAdd.group(4), true);
+                } else if (matcherEdit.find()) {
+                    parseEditPrescription(Integer.valueOf(matcherEdit.group(1)),
+                            matcherEdit.group(2), matcherEdit.group(3));
+                } else {
+                    throw new OneDocException("Your input is incorrect! Please format it as such:"
+                            + "\nTo add a prescription: add i/ID n/[name] d/[dosage] t/[time interval]"
+                            + "\nTo edit a prescription: edit i/[ID] (n/[name] or d/[dosage] or t/[time interval])");
+                }
+            } catch (OneDocException e) {
+                System.out.println("Incorrect format: " + e.getMessage());
+            } catch (Exception e) {
+                System.out.println("Unexpected issue: " + e.getMessage());
+            }
+        }
+    }
 
-    /* REGEX PATTERNS */
+
     private static Matcher patientAddMatcher(String input) {
         Pattern patientAddPattern = Pattern.compile(
                 "^add\\s*n/(\\w+\\s*\\w+|\\w+)\\s*g/(M|F)\\s*d/(\\d\\d-\\d\\d-\\d\\d\\d\\d)\\s*i/(\\w+)\\s*$",
@@ -127,7 +149,7 @@ public class Parser {
         return patientEditPattern.matcher(input);
     }
 
-    private void parseEditInput(String id, String type, String input) throws OneDocException {
+    private void parseEditPatient(String id, String type, String input) throws OneDocException {
         switch (type) {
         case "n/":
             Pattern matchName = Pattern.compile("^(\\w+\\s*\\w+|\\w+)$", Pattern.CASE_INSENSITIVE);
@@ -171,6 +193,54 @@ public class Parser {
         Pattern editVisitPattern = Pattern.compile(
                 "^edit\\s*i/(\\w+)\\s*r/((?:\\w+\\s+\\w+)+|\\w+)\\s*$", Pattern.CASE_INSENSITIVE);
         return editVisitPattern.matcher(input);
+    }
+
+    private static Matcher addPrescriptionMatcher(String input) {
+        Pattern addPrescriptionPattern = Pattern.compile(
+                "^add\\s*i/(\\w+)\\s*n/(\\w+\\s*\\w+|\\w+)\\s*d/(\\d+\\s*\\w+)\\s*t/(\\w+)\\s*$",
+                Pattern.CASE_INSENSITIVE);
+        return addPrescriptionPattern.matcher(input);
+    }
+
+    private static Matcher editPrescriptionMatcher(String input) {
+        Pattern editPrescriptionPattern = Pattern.compile(
+                "^edit\\s*i/(\\d+)\\s*([n|d|t])/([\\w-]+)$", Pattern.CASE_INSENSITIVE);
+        return editPrescriptionPattern.matcher(input);
+    }
+
+    private void parseEditPrescription(int id, String type, String input) throws OneDocException {
+        switch (type) {
+        case "n/":
+            Pattern matchName = Pattern.compile("^(\\w+\\s*\\w+|\\w+)$", Pattern.CASE_INSENSITIVE);
+            if (matchName.matcher(input).find()) {
+                prescriptionList.edit(id, input, "", "");
+            } else {
+                throw new OneDocException("Prescription name is incorrectly formatted! "
+                        + "Please use one or two names without dashes or special characters");
+            }
+            break;
+        case "d/":
+            Pattern matchDosage = Pattern.compile("^(\\d+\\s*\\w+)$", Pattern.CASE_INSENSITIVE);
+            if (matchDosage.matcher(input).find()) {
+                prescriptionList.edit(id, "", input, "");
+            } else {
+                throw new OneDocException("Dosage is incorrectly formatted! "
+                        + "Please use [amount] [portion] format, i.e. 10 mg");
+            }
+            break;
+        case "t/":
+            Pattern matchTimeInt = Pattern.compile("^(\\w+)$", Pattern.CASE_INSENSITIVE);
+            if (matchTimeInt.matcher(input).find()) {
+                prescriptionList.edit(id, "", "", input);
+            } else {
+                throw new OneDocException("Time interval is incorrectly formatted! "
+                        + "Please use words and numbers to describe the time interval");
+            }
+            break;
+        default:
+            throw new OneDocException("Type is incorrectly formatted!"
+                    + "Please use n/ for name, d/ for dosage, and t/ for time interval");
+        }
     }
 
 

@@ -34,6 +34,9 @@ public class PrescriptionList {
         }
     }
 
+    // TODO one potential improvement is to make this three different methods
+    //  edit(String id, String medicine), edit(String id, String dosage)
+    //  and edit(String id, String timeInterval)
     public void edit(int prescriptionNumber, String medicine, String dosage, String timeInterval) {
         if (prescriptionNumber < 1 || prescriptionNumber > prescriptionsList.size()) {
             System.out.println(Messages.INDEX_OUT_OF_RANGE_MESSAGE);
