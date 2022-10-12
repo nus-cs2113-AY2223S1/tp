@@ -43,7 +43,7 @@ public class Api {
      */
     public Api() {
         this.client = HttpClient.newHttpClient();
-        this.storage = new FileStorage(API_JSON_DIRECTORY, LTA_JSON_FILE);
+        this.storage = new FileStorage(API_JSON_DIRECTORY, LTA_JSON_FILE); //creates secret.txt
         this.ui = new Ui();
     }
 

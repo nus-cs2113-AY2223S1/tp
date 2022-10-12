@@ -102,10 +102,9 @@ public class Parking {
                     ui.showAuthSuccess();
                 } catch (IOException e) {
                     ui.showAuthError();
-                } catch (EmptyResponseException f) {
+                } catch (EmptySecretFileException | NoFileFoundException | EmptyResponseException |
+                         UnauthorisedAccessApiException | EmptyAuthException f) {
                     ui.print(f.getMessage());
-                } catch (UnauthorisedAccessApiException g) {
-                    ui.print(g.getMessage());
                 }
                 break;
             default:
