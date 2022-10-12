@@ -5,6 +5,8 @@ import seedu.duke.PairingList;
 import seedu.duke.PropertyList;
 import seedu.duke.Storage;
 import seedu.duke.Ui;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import java.util.ArrayList;
 
@@ -16,6 +18,8 @@ public class CommandAddProperty extends CommandAdd {
     private final String propertyAddress;
     private final String rentingPrice;
     private final String unitType;
+
+    private static final Logger logger = Logger.getLogger("CommandAddProperty");
 
     /**
      * Constructs constructor for Command Add Property which stores property's Landlord's Name, Address, RentPrice/month
@@ -33,6 +37,7 @@ public class CommandAddProperty extends CommandAdd {
     @Override
     public void execute(Ui ui, Storage storage, PropertyList propertyList, ClientList clientList,
                         PairingList pairingList) {
+        logger.log(Level.INFO, "Adding new property now");
         propertyList.addProperty(landlordName, propertyAddress, rentingPrice, unitType);
         ui.showPropertyAddedConfirmationMessage(propertyList);
 

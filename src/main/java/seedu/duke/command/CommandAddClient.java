@@ -8,6 +8,8 @@ import seedu.duke.Storage;
 import seedu.duke.Ui;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Adds a client to the client list.
@@ -17,6 +19,8 @@ public class CommandAddClient extends CommandAdd {
     private final String clientContactNumber;
     private final String clientEmail;
     private final String clientBudgetPerMonth;
+
+    private static final Logger logger = Logger.getLogger("CommandAddClient");
 
     /**
      * Constructs constructor for Command Add Client which stores client's name, contact number, email and budget/month.
@@ -33,6 +37,7 @@ public class CommandAddClient extends CommandAdd {
     @Override
     public void execute(Ui ui, Storage storage, PropertyList propertyList, ClientList clientList,
                         PairingList pairingList) {
+        logger.log(Level.INFO, "Adding new client now");
         clientList.addClient(clientName, clientContactNumber, clientEmail, clientBudgetPerMonth);
         ui.showClientAddedConfirmationMessage(clientList);
 
