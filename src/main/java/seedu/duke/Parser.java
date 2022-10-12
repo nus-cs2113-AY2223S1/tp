@@ -3,19 +3,24 @@ package seedu.duke;
 import seedu.duke.command.Command;
 import seedu.duke.command.CommandAddProperty;
 import seedu.duke.command.CommandAddClient;
+import seedu.duke.command.CommandCheckProperty;
 import seedu.duke.command.CommandDeleteClient;
+import seedu.duke.command.CommandDeleteProperty;
 import seedu.duke.command.CommandPair;
 import seedu.duke.command.CommandUnpair;
 import seedu.duke.command.CommandUndefined;
 import seedu.duke.command.CommandListClients;
 import seedu.duke.command.CommandListProperties;
 
+import seedu.duke.exception.ClientAlreadyPairedException;
 import seedu.duke.exception.EmptyClientDetailException;
 import seedu.duke.exception.EmptyClientIndexDeleteException;
 import seedu.duke.exception.EmptyCommandAddDetailException;
+import seedu.duke.exception.EmptyCommandCheckDetailException;
 import seedu.duke.exception.EmptyCommandDeleteDetailException;
 import seedu.duke.exception.EmptyCommandPairUnpairDetailsException;
 import seedu.duke.exception.EmptyPropertyDetailException;
+import seedu.duke.exception.EmptyPropertyIndexDeleteException;
 import seedu.duke.exception.ExistingPairException;
 import seedu.duke.exception.IncorrectAddClientFlagOrderException;
 import seedu.duke.exception.IncorrectAddPropertyFlagOrderException;
@@ -23,20 +28,28 @@ import seedu.duke.exception.IncorrectFlagOrderException;
 import seedu.duke.exception.IncorrectPairUnpairFlagOrderException;
 import seedu.duke.exception.InvalidBudgetFormatException;
 import seedu.duke.exception.InvalidClientIndexDeleteException;
+import seedu.duke.exception.InvalidClientIndexFlagFormatException;
 import seedu.duke.exception.InvalidContactNumberException;
 import seedu.duke.exception.InvalidEmailException;
+import seedu.duke.exception.MissingCheckPropertyFlagException;
 import seedu.duke.exception.InvalidPriceFormatException;
+import seedu.duke.exception.InvalidPropertyIndexDeleteException;
+import seedu.duke.exception.InvalidPropertyIndexFlagFormatException;
 import seedu.duke.exception.InvalidSingaporeAddressException;
 import seedu.duke.exception.MissingClientDetailException;
 import seedu.duke.exception.MissingClientFlagException;
+import seedu.duke.exception.MissingClientIndexFlagException;
 import seedu.duke.exception.MissingFlagException;
 import seedu.duke.exception.MissingPairUnpairFlagException;
 import seedu.duke.exception.MissingPropertyDetailException;
 import seedu.duke.exception.MissingPropertyFlagException;
+import seedu.duke.exception.MissingPropertyIndexFlagException;
 import seedu.duke.exception.NoExistingPairException;
 import seedu.duke.exception.NotIntegerException;
 import seedu.duke.exception.NotValidIndexException;
+import seedu.duke.exception.PropertyAlreadyPairedException;
 import seedu.duke.exception.UndefinedSubCommandAddTypeException;
+import seedu.duke.exception.UndefinedSubCommandCheckTypeException;
 import seedu.duke.exception.UndefinedSubCommandDeleteTypeException;
 import seedu.duke.exception.IncorrectListDetailsException;
 
@@ -52,6 +65,8 @@ public class Parser {
     public static final int ADD_PROPERTY_FLAG_SIZE = 4;
     public static final int ADD_CLIENT_FLAG_SIZE = 4;
     public static final int PAIR_UNPAIR_FLAG_SIZE = 2;
+    public static final int CHECK_PROPERTY_FLAG_SIZE = 1;
+
 
     public Parser(ClientList clientL, PropertyList propertyL, PairingList pairingL) {
         clientList = clientL;
@@ -68,7 +83,15 @@ public class Parser {
             EmptyCommandDeleteDetailException, InvalidClientIndexDeleteException, EmptyClientIndexDeleteException,
             EmptyCommandPairUnpairDetailsException, MissingPairUnpairFlagException,
             IncorrectPairUnpairFlagOrderException, NotValidIndexException, NotIntegerException, ExistingPairException,
-            NoExistingPairException, IncorrectListDetailsException {
+            NoExistingPairException,  {
+            EmptyCommandDeleteDetailException, InvalidPropertyIndexFlagFormatException,
+            MissingPropertyIndexFlagException, EmptyPropertyIndexDeleteException, InvalidPropertyIndexDeleteException,
+            InvalidClientIndexDeleteException, EmptyClientIndexDeleteException, MissingClientIndexFlagException,
+            InvalidClientIndexFlagFormatException, EmptyCommandPairUnpairDetailsException,
+            MissingPairUnpairFlagException, IncorrectPairUnpairFlagOrderException, NotValidIndexException,
+            NotIntegerException, NoExistingPairException, ClientAlreadyPairedException, PropertyAlreadyPairedException,
+            UndefinedSubCommandCheckTypeException, EmptyCommandCheckDetailException, MissingCheckPropertyFlagException,
+            IncorrectListDetailsException {
         ArrayList<String> processedCommandDetails = partitionCommandTypeAndDetails(input);
         String commandType = processedCommandDetails.get(0);
         String commandDetails = processedCommandDetails.get(1);
@@ -85,25 +108,45 @@ public class Parser {
             } else {
                 throw new UndefinedSubCommandAddTypeException();
             }
+
         case "delete":
             checkForEmptyCommandDeleteDetails(commandDetails);
             ArrayList<String> processedDeleteCommandDetails = partitionCommandTypeAndDetails(commandDetails);
             String subDeleteCommandType = processedDeleteCommandDetails.get(0);
-            int clientIndexToDelete = getClientIndex(processedDeleteCommandDetails.get(1)) - 1;
-            if (subDeleteCommandType.equals("-client")) {
+            String indexDescription = processedDeleteCommandDetails.get(1).trim();
+            if (subDeleteCommandType.equals("-property")) {
+                checkForPropertyIndexFlag(indexDescription);
+                int propertyIndexToDelete = getPropertyIndexToDelete(indexDescription.substring(3));
+                return prepareForCommandDeleteProperty(propertyIndexToDelete, propertyList);
+            } else if (subDeleteCommandType.equals("-client")) {
+                checkForClientIndexFlag(indexDescription);
+                int clientIndexToDelete = getClientIndexToDelete(indexDescription.substring(3));
                 return prepareForCommandDeleteClient(clientIndexToDelete, clientList);
             } else {
                 throw new UndefinedSubCommandDeleteTypeException();
             }
+
         case "pair":
             checkForEmptyCommandPairUnpairDetails(commandDetails);
             return prepareForCommandPair(commandDetails);
+
         case "unpair":
             checkForEmptyCommandPairUnpairDetails(commandDetails);
             return prepareForCommandUnpair(commandDetails);
         case "list":
             checkForEmptyCommandAddDetails(commandDetails);
             return prepareForCommandList(commandDetails);
+        case "check":
+            checkForEmptyCommandCheckDetails(commandDetails);
+            ArrayList<String> processedCheckCommandDetails = partitionCommandTypeAndDetails(commandDetails);
+            String subCommandCheckType = processedCheckCommandDetails.get(0);
+            String commandCheckClientOrPropertyDescriptions = processedCheckCommandDetails.get(1);
+
+            if (subCommandCheckType.equals("-property")) {
+                return prepareForCommandCheckProperty(commandCheckClientOrPropertyDescriptions);
+            } else {
+                throw new UndefinedSubCommandCheckTypeException();
+            }
         default:
             return new CommandUndefined();
         }
@@ -455,7 +498,7 @@ public class Parser {
     }
 
 
-    /* Delete Client Parse Section */
+    /* Delete Property/Client Parse Section */
 
     private void checkForEmptyCommandDeleteDetails(String commandAddDetails) throws EmptyCommandDeleteDetailException {
         boolean isEmptyCommandAddDetail = checkForEmptyDetail(commandAddDetails);
@@ -464,11 +507,23 @@ public class Parser {
         }
     }
 
-    private int getClientIndex(String commandDetails) throws EmptyClientIndexDeleteException {
+    private int getClientIndexToDelete(String commandDetails) throws EmptyClientIndexDeleteException {
         if (commandDetails.isEmpty()) {
             throw new EmptyClientIndexDeleteException();
         }
-        return Integer.parseInt(commandDetails.trim());
+        return Integer.parseInt(commandDetails.trim()) - 1;
+    }
+
+    private void checkForClientIndexFlag(String commandDetails)
+            throws MissingClientIndexFlagException, InvalidClientIndexFlagFormatException {
+        if (!commandDetails.contains("ic/")) {
+            throw new MissingClientIndexFlagException();
+        } else {
+            String clientIndexFlag = commandDetails.substring(0, 3);
+            if (!clientIndexFlag.equals("ic/")) {
+                throw new InvalidClientIndexFlagFormatException();
+            }
+        }
     }
 
     private Command prepareForCommandDeleteClient(int clientIndex, ClientList clientList)
@@ -485,6 +540,38 @@ public class Parser {
         }
     }
 
+    private int getPropertyIndexToDelete(String commandDetails) throws EmptyPropertyIndexDeleteException {
+        if (commandDetails.isEmpty()) {
+            throw new EmptyPropertyIndexDeleteException();
+        }
+        return Integer.parseInt(commandDetails.trim()) - 1;
+    }
+
+    private void checkForPropertyIndexFlag(String commandDetails)
+            throws MissingPropertyIndexFlagException, InvalidPropertyIndexFlagFormatException {
+        if (!commandDetails.contains("ip/")) {
+            throw new MissingPropertyIndexFlagException();
+        } else {
+            String clientIndexFlag = commandDetails.substring(0, 3);
+            if (!clientIndexFlag.equals("ip/")) {
+                throw new InvalidPropertyIndexFlagFormatException();
+            }
+        }
+    }
+
+    private Command prepareForCommandDeleteProperty(int propertyIndex, PropertyList propertyList)
+            throws InvalidPropertyIndexDeleteException {
+        checkForInvalidPropertyIndexDelete(propertyIndex, propertyList);
+        return new CommandDeleteProperty(propertyIndex);
+    }
+
+    private void checkForInvalidPropertyIndexDelete(int propertyIndex, PropertyList propertyList)
+            throws InvalidPropertyIndexDeleteException {
+        int currentListSize = propertyList.getCurrentListSize();
+        if (propertyIndex < 0 || propertyIndex >= currentListSize) {
+            throw new InvalidPropertyIndexDeleteException();
+        }
+    }
 
     /* Pair/Unpair Parse Section */
 
@@ -498,7 +585,7 @@ public class Parser {
 
     private Command prepareForCommandPair(String rawPairDescriptions) throws NotIntegerException,
             NotValidIndexException, MissingPairUnpairFlagException, IncorrectPairUnpairFlagOrderException,
-            ExistingPairException {
+            ClientAlreadyPairedException, PropertyAlreadyPairedException {
         ArrayList<Integer> pairDetails = processPairUnpairDetails(rawPairDescriptions);
         validatePairDetails(pairDetails);
         return new CommandPair(pairDetails);
@@ -572,13 +659,20 @@ public class Parser {
     }
 
     private void validatePairDetails(ArrayList<Integer> pairUnpairDetails) throws NotValidIndexException,
-            ExistingPairException {
+            ClientAlreadyPairedException, PropertyAlreadyPairedException {
         int clientIndex = pairUnpairDetails.get(0);
         int propertyIndex = pairUnpairDetails.get(1);
-        checkForListIndexOutOfBounds(clientIndex, propertyIndex);
+        checkForPairingListIndexOutOfBounds(clientIndex, propertyIndex);
+
         Client client = clientList.getClientList().get(clientIndex);
+        Property property = propertyList.getPropertyList().get(propertyIndex);
+
         if (pairingList.isClientPairedWithProperty(client)) {
-            throw new ExistingPairException();
+            throw new ClientAlreadyPairedException();
+        }
+
+        if (pairingList.isPropertyPairedWithClient(property)) {
+            throw new PropertyAlreadyPairedException();
         }
     }
 
@@ -586,17 +680,91 @@ public class Parser {
             NoExistingPairException {
         int clientIndex = pairUnpairDetails.get(0);
         int propertyIndex = pairUnpairDetails.get(1);
-        checkForListIndexOutOfBounds(clientIndex, propertyIndex);
+        checkForPairingListIndexOutOfBounds(clientIndex, propertyIndex);
         Client client = clientList.getClientList().get(clientIndex);
         if (!pairingList.isClientPairedWithProperty(client)) {
             throw new NoExistingPairException();
         }
     }
 
-    private void checkForListIndexOutOfBounds(int clientIndex, int propertyIndex) throws NotValidIndexException {
-        if (clientIndex < 0 || clientIndex > clientList.getCurrentListSize() - 1
-                || propertyIndex < 0 || propertyIndex > propertyList.getCurrentListSize() - 1) {
+    private void checkForPairingListIndexOutOfBounds(int clientIndex, int propertyIndex) throws NotValidIndexException {
+        checkForClientListIndexOutOfBounds(clientIndex);
+        checkForPropertyListIndexOutOfBounds(propertyIndex);
+    }
+
+    private void checkForPropertyListIndexOutOfBounds(int propertyIndex) throws NotValidIndexException {
+        if (propertyIndex < 0 || propertyIndex > propertyList.getCurrentListSize() - 1) {
             throw new NotValidIndexException();
         }
     }
+
+    private void checkForClientListIndexOutOfBounds(int clientIndex) throws NotValidIndexException {
+        if (clientIndex < 0 || clientIndex > clientList.getCurrentListSize() - 1) {
+            throw new NotValidIndexException();
+        }
+    }
+
+    private Command prepareForCommandCheckProperty(String rawPropertyDescriptions) throws NotIntegerException,
+            NotValidIndexException, MissingCheckPropertyFlagException {
+        try {
+            ArrayList<Integer> checkPropertyDetails = processCheckPropertyDetails(rawPropertyDescriptions);
+            validateCheckPropertyDetails(checkPropertyDetails);
+            return new CommandCheckProperty(checkPropertyDetails);
+        } catch (MissingFlagException e) {
+            throw new MissingCheckPropertyFlagException();
+        }
+    }
+
+    private void checkForEmptyCommandCheckDetails(String commandCheckDetails) throws EmptyCommandCheckDetailException {
+        boolean isEmptyCommandCheckDetail = checkForEmptyDetail(commandCheckDetails);
+        if (isEmptyCommandCheckDetail) {
+            throw new EmptyCommandCheckDetailException();
+        }
+    }
+
+    private ArrayList<Integer> processCheckPropertyDetails(String rawPropertyDetails) throws MissingFlagException,
+            NotIntegerException {
+        String[] checkPropertyFlags = {"ip/"};
+        int[] checkPropertyFlagIndexPositions = new int[CHECK_PROPERTY_FLAG_SIZE];
+
+        for (int i = 0; i < checkPropertyFlags.length; i++) {
+            checkPropertyFlagIndexPositions[i] = rawPropertyDetails.indexOf(checkPropertyFlags[i]);
+        }
+
+        checkForMissingCheckPropertyFlags(checkPropertyFlagIndexPositions);
+        return extractCheckPropertyDetails(rawPropertyDetails, checkPropertyFlagIndexPositions, checkPropertyFlags);
+    }
+
+    private void checkForMissingCheckPropertyFlags(int[] checkPropertyFlagIndexPositions) throws MissingFlagException {
+        checkForEssentialCheckPropertyFlag(checkPropertyFlagIndexPositions[0]);
+    }
+
+    private void checkForEssentialCheckPropertyFlag(int checkPropertyFlagIndexPosition) throws MissingFlagException {
+        boolean hasFlag = (checkPropertyFlagIndexPosition != -1);
+        if (!hasFlag) {
+            throw new MissingFlagException();
+        }
+    }
+
+    private ArrayList<Integer> extractCheckPropertyDetails(String rawPropertyDetails,
+            int[] checkPropertyFlagIndexPositions, String[] checkFlags) throws NotIntegerException {
+        String propertyIndexString = extractDetail(rawPropertyDetails,
+                checkPropertyFlagIndexPositions[0] + checkFlags[0].length());
+
+        int propertyIndex;
+        try {
+            propertyIndex = Integer.parseInt(propertyIndexString);
+        } catch (NumberFormatException e) {
+            throw new NotIntegerException();
+        }
+        ArrayList<Integer> processedCheckPropertyDetails = new ArrayList<>();
+        processedCheckPropertyDetails.add(propertyIndex - 1);
+        return processedCheckPropertyDetails;
+    }
+
+    private void validateCheckPropertyDetails(ArrayList<Integer> checkPropertyDetails) throws NotValidIndexException {
+        int propertyIndex = checkPropertyDetails.get(0);
+        checkForPropertyListIndexOutOfBounds(propertyIndex);
+    }
+
 }

@@ -35,6 +35,9 @@ public class CommandAddProperty extends CommandAdd {
                         PairingList pairingList) {
         propertyList.addProperty(landlordName, propertyAddress, rentingPrice, unitType);
         ui.showPropertyAddedConfirmationMessage(propertyList);
+
         //Update Storage
+        storage.addToPropertyFile(this.landlordName,this.propertyAddress,
+                this.rentingPrice, this.unitType);
     }
 }
