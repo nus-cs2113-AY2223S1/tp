@@ -1,7 +1,8 @@
 package recipeditor.recipe;
 
 import java.util.ArrayList;
-import java.util.logging.*;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 public class Recipe {
     private String title;
