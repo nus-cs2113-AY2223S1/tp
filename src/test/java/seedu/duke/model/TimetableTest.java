@@ -25,7 +25,7 @@ public class TimetableTest {
         Module mod = Module.get("CS2113");
         Timetable t = new Timetable(mod.getSemesterData(1).timetable.stream()
                 .map(s -> Pair.of(mod, s))
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList()), false, false);
         InputStream stream = TimetableTest.class.getClassLoader().getResourceAsStream("timetableCS2113.txt");
         String expected = new String(stream.readAllBytes(), StandardCharsets.UTF_8);
         assertEquals(expected, t.toString());
@@ -37,7 +37,7 @@ public class TimetableTest {
         Module mod = Module.get("CS1010S");
         Timetable t = new Timetable(mod.getSemesterData(1).timetable.stream()
                 .map(s -> Pair.of(mod, s))
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList()), false, false);
         InputStream stream = TimetableTest.class.getClassLoader().getResourceAsStream("timetableCS1010S.txt");
         String expected = new String(stream.readAllBytes(), StandardCharsets.UTF_8);
         assertEquals(expected, t.toString());
@@ -47,7 +47,8 @@ public class TimetableTest {
     @DisabledOnOs(OS.WINDOWS)
     public void timetable_lessonStartingAtHalfHour_formattedCorrectly() throws IOException {
         Module mod = Module.get("CS3216");
-        Timetable t = new Timetable(List.of(Pair.of(mod, mod.getSemesterData(1).getLessonsByNo("1").get(0))));
+        Timetable t = new Timetable(List.of(Pair.of(mod, mod.getSemesterData(1).getLessonsByNo("1").get(0))),
+                false, false);
         InputStream stream = TimetableTest.class.getClassLoader().getResourceAsStream("timetableCS3216.txt");
         String expected = new String(stream.readAllBytes(), StandardCharsets.UTF_8);
         assertEquals(expected, t.toString());
@@ -72,7 +73,7 @@ public class TimetableTest {
                 Pair.of(ee2211, ee2211.getSemesterData(1).getLessonsByNo("19").get(0)),
                 Pair.of(cs2113, cs2113.getSemesterData(1).getLessonsByTypeAndNo(LessonType.Lecture, "1").get(0)),
                 Pair.of(cs2113, cs2113.getSemesterData(1).getLessonsByNo("4").get(0))),
-                true);
+                true, false);
         InputStream stream = TimetableTest.class.getClassLoader().getResourceAsStream("timetableColor.txt");
         String expected = new String(stream.readAllBytes(), StandardCharsets.UTF_8);
         assertEquals(expected, t.toString());
