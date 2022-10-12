@@ -14,6 +14,7 @@ import java.util.concurrent.TimeoutException;
 
 import seedu.exception.EmptyResponseException;
 import seedu.exception.EmptySecretFileException;
+import seedu.exception.FileWriteException;
 import seedu.exception.NoFileFoundException;
 import seedu.exception.ServerNotReadyApiException;
 import seedu.exception.UnauthorisedAccessApiException;
@@ -118,7 +119,8 @@ public class Api {
      * @throws EmptyResponseException if empty/invalid response received.
      * @throws IOException if data writing fails.
      */
-    public void fetchData() throws EmptyResponseException, IOException, UnauthorisedAccessApiException {
+    public void fetchData() throws EmptyResponseException, IOException, UnauthorisedAccessApiException,
+        FileWriteException {
         String result = "";
         int fetchTries = FETCH_TRIES;
         do {
@@ -135,7 +137,7 @@ public class Api {
         } while (fetchTries > 0 && result.isEmpty());
 
         if (fetchTries == 0 && result.isEmpty()) {
-            throw new EmptyResponseException("No response was received. Check your internet connection.");
+            throw new EmptyResponseException();
         }
         storage.writeDataToFile(result);
     }
@@ -151,7 +153,7 @@ public class Api {
         try {
             String key = FileReader.readStringFromTxt(file, directory, true);
             if (key.isEmpty()) {
-                throw new EmptySecretFileException();
+                throw new EmptySecretFileException(directory);
             }
             apiKey = key;
         } catch (IOException e) {

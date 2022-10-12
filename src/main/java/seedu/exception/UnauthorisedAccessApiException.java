@@ -5,7 +5,7 @@ package seedu.exception;
  */
 public class UnauthorisedAccessApiException extends ParkingException {
     public UnauthorisedAccessApiException() {
-        super("");
+        super();
     }
 
     public String getMessage() {
