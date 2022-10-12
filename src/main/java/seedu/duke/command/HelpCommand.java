@@ -6,6 +6,7 @@ import seedu.duke.utils.Ui;
 
 public class HelpCommand extends Command {
     public static final String COMMAND_WORD = "help";
+
     public HelpCommand(String[] input) {
         super(input);
     }
