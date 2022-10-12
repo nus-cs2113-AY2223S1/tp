@@ -51,9 +51,9 @@ public class Timetable {
     }
 
     public Timetable(List<Pair<Module, RawLesson>> lessons, boolean withColor) {
-        assert (lessons != null);
-        this.logger = Logger.getLogger(SUBSYSTEM_NAME);
-        this.logger.log(Level.INFO, "Creating a timetable with " + lessons.size() + " lessons");
+        assert lessons != null : "List of lessons should not be null";
+        logger = Logger.getLogger(SUBSYSTEM_NAME);
+        logger.log(Level.INFO, "Creating a timetable with " + lessons.size() + " lessons");
         this.withColor = SystemUtils.IS_OS_WINDOWS ? false : withColor;
         this.consoleBorder = ConsoleBorder.getInstance();
         this.sortedLessons = sortLessons(lessons);
@@ -136,8 +136,8 @@ public class Timetable {
         return sortedLessons;
     }
 
-    private Pair<List<Integer>, List<Integer>> computeIndentation(List<Day> days, List<Pair<Module, RawLesson>>
-            sortedLessons) {
+    private Pair<List<Integer>, List<Integer>> computeIndentation(List<Day> days,
+            List<Pair<Module, RawLesson>> sortedLessons) {
         List<List<List<Pair<Module, RawLesson>>>> lessonStack = new ArrayList<>();
         for (int i = 0; i < days.size(); i++) {
             lessonStack.add(new ArrayList<>());
