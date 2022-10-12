@@ -15,12 +15,18 @@ public class Ui {
     private static final String EXIT = "Program exiting";
     private static final String PROMPT = ">>> ";
 
+    private static final String LOGO = ",---.          o     ,---.    |o|\n"
+            + "|---',---.,---..,---.|--- ,---|.|--- ,---.,---.\n"
+            + "|  \\ |---'|    ||   ||    |   |||    |   ||\n"
+            + "`   ``---'`---'`|---'`---'`---'``---'`---'`\n"
+            + "                |";
+
     public static void showDivider() {
         showMessage(DIVIDER);
     }
 
     public static void showGreeting() {
-        showMessage(START, COMMAND);
+        showMessage(LOGO, START, COMMAND);
     }
 
     public static void showExit() {
@@ -59,7 +65,8 @@ public class Ui {
     }
 
     public static void clear() {
-        System.out.print("\033\143"); // This will clear the terminal, I don't know why...
+        System.out.print("\033[H\033[2J"); // This will clear the terminal, I don't know why...
+        System.out.flush();
     }
 
 

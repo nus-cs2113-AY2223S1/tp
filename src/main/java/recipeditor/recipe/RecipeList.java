@@ -14,11 +14,8 @@ public class RecipeList {
         this(null);
     }
 
-    public static ArrayList<Recipe> getRecipes() {
-        return recipes;
-    }
-
     public static Recipe getRecipe(int index) {
+        assert index >= 0 && index <= recipes.size();
         return recipes.get(index);
     }
 
@@ -27,6 +24,7 @@ public class RecipeList {
     }
 
     public static void deleteRecipe(int index) {
+        assert index >= 0 && index <= recipes.size();
         recipes.remove(index);
     }
 
@@ -38,7 +36,7 @@ public class RecipeList {
         }
         return null;
     }
-    
+
     public static int getSize() {
         return recipes.size();
     }

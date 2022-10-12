@@ -1,4 +1,9 @@
+,---.          o     ,---.    |o|
+|---',---.,---..,---.|--- ,---|.|--- ,---.,---.
+|  \ |---'|    ||   ||    |   |||    |   ||
+`   ``---'`---'`|---'`---'`---'``---'`---'`
+                |
 Program starting!
 Parseable command at the momemt: add, delete, list, view, exit
->>> Echo CommandResult message: exit
+>>> Echo CommandResult message: RecipEditor ends here...
 Program exiting

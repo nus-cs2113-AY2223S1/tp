@@ -2,6 +2,7 @@ package recipeditor.command;
 
 import recipeditor.recipe.Recipe;
 import recipeditor.recipe.RecipeList;
+import recipeditor.ui.Ui;
 
 public class ViewCommand extends Command {
     public static final String COMMAND_TYPE = "view";
@@ -24,17 +25,13 @@ public class ViewCommand extends Command {
      * @return the result message from execute
      */
     public CommandResult execute() {
-
         try {
-            Recipe recipe = RecipeList.getRecipes().get(index);
-            String result = String.format("%nName: %s%nDescription: %s%n",
-                    recipe.getTitle(), recipe.getDescription());
-            //TODO: have a display all details function from recipe
-            return new CommandResult(result);
+            Recipe recipe = RecipeList.getRecipe(index);
+            String commandResultOutput = recipe.getRecipeAttributesFormatted();
+            return new CommandResult(commandResultOutput);
         } catch (IndexOutOfBoundsException e) {
-            return new CommandResult(String.format(
-                    "There are only %d recipes now.%n", index));
+            Ui.showMessageInline("Current number of saved recipes:", Integer.toString(RecipeList.getSize()));
+            return new CommandResult("View recipe index out of bound.");
         }
-
     }
 }

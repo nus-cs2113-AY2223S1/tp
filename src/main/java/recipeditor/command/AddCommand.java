@@ -16,11 +16,10 @@ public class AddCommand extends Command {
     public CommandResult execute() {
         // TODO: Execution of command
         if (isValid) {
-            RecipeList.getRecipes().add(addedRecipe); //HERE SEEM TO THROW ERROR
-            return new CommandResult(COMMAND_TYPE + " Added");
+            RecipeList.addRecipe(addedRecipe); //HERE SEEM TO THROW ERROR
+            return new CommandResult(addedRecipe.getTitle() + " added to the recipe.");
         } else {
-            return new CommandResult(COMMAND_TYPE + " Invalid");
+            return new CommandResult("invalid " + COMMAND_TYPE);
         }
     }
-
 }
