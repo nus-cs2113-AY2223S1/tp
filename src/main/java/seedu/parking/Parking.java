@@ -5,6 +5,7 @@ import static seedu.common.CommonFiles.API_KEY_FILE;
 import static seedu.common.CommonFiles.LTA_JSON_FILE;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import seedu.api.Api;
 import seedu.commands.Auth;
@@ -12,7 +13,15 @@ import seedu.commands.Find;
 import seedu.common.CommonFiles;
 import seedu.data.Carpark;
 import seedu.data.CarparkList;
-import seedu.exception.*;
+import seedu.exception.EmptyResponseException;
+import seedu.exception.EmptySecretFileException;
+import seedu.exception.FileWriteException;
+import seedu.exception.NoCarparkFoundException;
+import seedu.exception.NoCommandArgumentException;
+import seedu.exception.NoFileFoundException;
+import seedu.exception.ParkingException;
+import seedu.exception.UnauthorisedAccessApiException;
+import seedu.exception.UnneededArgumentsException;
 import seedu.parser.Command;
 import seedu.parser.Parser;
 import seedu.ui.Ui;
@@ -26,7 +35,7 @@ public class Parking {
     /**
      * Main entry-point for the java.duke.Duke application.
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NoCommandArgumentException, UnneededArgumentsException {
         Parser parser = new Parser();
         Find find = new Find();
         Ui ui = new Ui();
@@ -45,7 +54,7 @@ public class Parking {
             ui.print(e.getMessage());
             ui.print("Loading from local backup: ");
         } catch (IOException e) {
-            ui.showSaveError();
+            ui.print(new FileWriteException(API_JSON_DIRECTORY).getMessage());
             ui.print("Loading from local backup: ");
         }
 
@@ -62,9 +71,15 @@ public class Parking {
         boolean isExit = false;
         while (!isExit) {
             String input = ui.getCommand();
-            Command command = parser.parseInputString(input);
-            switch (command) {
-            case BYE:
+            Command command = null;
+            try {
+                command = parser.parseInputString(input);
+            } catch (ParkingException e) {
+                ui.print(e.getMessage());
+                continue;
+            }
+            switch (Objects.requireNonNull(command)) {
+            case EXIT:
                 ui.showByeMessage();
                 isExit = true;
                 break;
@@ -74,7 +89,7 @@ public class Parking {
                     Carpark carpark = carparkList.findCarpark(carparkID);
                     ui.print(carpark.toString());
                     ui.print(String.format("Available lots: %s", carpark.getAvailableLots()));
-                } catch (InvalidFindCommandException | NoCarparkFoundException exception) {
+                } catch (NoCommandArgumentException | NoCarparkFoundException exception) {
                     System.out.println(exception.getMessage());
                 }
                 break;
@@ -82,11 +97,12 @@ public class Parking {
                 try {
                     //fetch api
                     api.fetchData();
+
                     //update json
                     carparkList = new CarparkList(CommonFiles.LTA_FILE_PATH, CommonFiles.LTA_BACKUP_FILE_PATH);
                     ui.showUpdateDataSuccess();
                 } catch (ParkingException e) {
-                    System.out.println(e.getMessage());
+                    ui.print(e.getMessage());
                 } catch (IOException e) {
                     ui.showUpdateError();
                 } finally {
@@ -100,9 +116,12 @@ public class Parking {
                 } catch (IOException e) {
                     ui.showAuthError();
                 } catch (EmptySecretFileException | NoFileFoundException | EmptyResponseException
-                         | UnauthorisedAccessApiException | EmptyAuthException | FileWriteError f) {
+                         | UnauthorisedAccessApiException | NoCommandArgumentException | FileWriteException f) {
                     ui.print(f.getMessage());
                 }
+                break;
+            case LIST:
+                ui.print(carparkList.toString());
                 break;
             default:
                 ui.showInvalidCommandError();
