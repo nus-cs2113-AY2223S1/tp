@@ -8,7 +8,6 @@ import java.util.HashMap;
  */
 public class PairingList {
     private static final String SEPARATOR = " | ";
-    private static final String CURRENCY = "SGD";
     private static final String OPEN_BRACKET = "[";
     private static final String CLOSE_BRACKET = "]";
 
@@ -23,6 +22,7 @@ public class PairingList {
 
     /**
      * Records which property a client is renting, with Client and Property objects as parameters.
+     *
      * @param client Client renting the property.
      * @param property Property being rented.
      */
@@ -35,6 +35,7 @@ public class PairingList {
     /**
      * Records which property a client is renting, with the client and property in the appropriate pairing formats as
      * parameters. This is used to load the pairings from the pairing data file into the class variable.
+     *
      * @param clientPairingData Pairing data of client that is renting the property.
      * @param propertyPairingData Pairing data of property that is being rented.
      */
@@ -45,6 +46,7 @@ public class PairingList {
 
     /**
      * Deletes client-property pair to indicate that the client is no longer renting that property.
+     *
      * @param client Client who is no longer renting the property.
      * @param property Property that is no longer being rented.
      */
@@ -57,7 +59,38 @@ public class PairingList {
     }
 
     /**
+     * Deletes client-property pair to indicate that the client is no longer renting that property, given the property.
+     *
+     * @param property Property that has been deleted.
+     */
+    public void deletePairing(Property property) {
+        String propertyPairingData = convertToPairingData(property);
+        assert clientPropertyPairs.containsValue(propertyPairingData) : "Property does not exist.";
+
+        // Iterate through the hash map to delete all the entires containing the properties
+        for (String clientPairingData : clientPropertyPairs.keySet()) {
+            if (clientPropertyPairs.get(clientPairingData).equals(propertyPairingData)) {
+                clientPropertyPairs.remove(clientPairingData, propertyPairingData);
+            }
+        }
+    }
+
+    /**
+     * Deletes client-property pair to indicate that the client is no longer renting that property, given the client.
+     *
+     * @param client Client that has been deleted.
+     */
+    public void deletePairing(Client client) {
+        String clientPairingData = convertToPairingData(client);
+
+        assert clientPropertyPairs.containsKey(clientPairingData) : "Client does not exist.";
+
+        clientPropertyPairs.remove(clientPairingData);
+    }
+
+    /**
      * Returns true if the client is paired with a property.
+     *
      * @param client Client whose pairing status is being checked.
      * @return True if the client is currently paired with a property. False if not paired with a property.
      */
@@ -68,6 +101,7 @@ public class PairingList {
 
     /**
      * Returns true if the property is already paired with client.
+     *
      * @param property Property whose pairing status is being checked.
      * @return True if the property is currently paired with a client. False if not paired with a client.
      */
@@ -79,6 +113,7 @@ public class PairingList {
 
     /**
      * Fetches a list of tenants that is renting the property.
+     *
      * @param property Property being queried.
      * @return List of tenants occupying the property, along with their data.
      */
@@ -97,6 +132,7 @@ public class PairingList {
 
     /**
      * Converts client pairing data to a suitable string format.
+     *
      * @param client Client whose data is to be converted.
      * @return Client pairing data in a suitable string format.
      */
@@ -108,13 +144,14 @@ public class PairingList {
 
     /**
      * Converts property pairing data to a suitable string format.
+     *
      * @param property Property whose data is to be converted.
      * @return Property pairing data in a suitable string format.
      */
     public String convertToPairingData(Property property) {
         return OPEN_BRACKET + property.getLandlordName()
                 + SEPARATOR + property.getPropertyAddress()
-                + SEPARATOR + CURRENCY + property.getRentingPrice()
+                + SEPARATOR + property.getRentingPrice()
                 + SEPARATOR + property.getUnitType()
                 + CLOSE_BRACKET;
     }
@@ -127,5 +164,9 @@ public class PairingList {
     public HashMap<String, String> getClientPropertyPairs() {
         return clientPropertyPairs;
     }
+
+
+
+
 
 }

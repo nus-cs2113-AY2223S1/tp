@@ -16,7 +16,6 @@ public class Storage {
     private static final String CLIENT_PATH = "./data/client.txt";
     private static final String PAIR_PATH = "./data/pair.txt";
     private static final String SEPARATOR = " | ";
-    private static final String CURRENCY = "SGD";
     private static final String COLON = " : ";
     private static final String EMPTY_STRING = "";
     private static final String LOG_ADD_CLIENT_LABEL = "Client has been added to text file as: ";
@@ -159,7 +158,7 @@ public class Storage {
                 String clientName = clientParameters[0];
                 String clientContact = clientParameters[1];
                 String clientEmail = clientParameters[2];
-                String clientBudget = clientParameters[3].replace(CURRENCY, EMPTY_STRING).trim();
+                String clientBudget = clientParameters[3].trim();
                 clientList.addClient(clientName, clientContact, clientEmail, clientBudget);
             }
             LOGGER.log(Level.INFO, LOG_CLIENT_LOAD_LABEL);
@@ -184,7 +183,7 @@ public class Storage {
                 String landlordName = propertyParameters[0];
                 String address = propertyParameters[1];
                 String price = propertyParameters[2];
-                String unitType = propertyParameters[3].replace(CURRENCY, EMPTY_STRING).trim();
+                String unitType = propertyParameters[3].trim();
                 propertyList.addProperty(landlordName, address, price, unitType);
             }
             LOGGER.log(Level.INFO, LOG_PROPERTY_LOAD_LABEL);
@@ -228,7 +227,7 @@ public class Storage {
     public void addToPropertyFile(String landlord, String address, String price, String unitType) {
         try {
             FileWriter fw = new FileWriter(PROPERTY_PATH, true);
-            String rentalPrice = CURRENCY + price;
+            String rentalPrice = price;
             String newText = landlord + SEPARATOR + address + SEPARATOR + rentalPrice
                     + SEPARATOR + unitType + System.lineSeparator();
 
@@ -252,10 +251,10 @@ public class Storage {
      * @param email The email of the client.
      * @param budget The budget the client is looking at.
      */
-    public void addToClientFile(String name, String contact, String email, int budget) {
+    public void addToClientFile(String name, String contact, String email, String budget) {
         try {
             FileWriter fw = new FileWriter(CLIENT_PATH, true);
-            String budgetPrice = CURRENCY + budget;
+            String budgetPrice = budget;
             String newText = name + SEPARATOR + contact + SEPARATOR + email + SEPARATOR
                     + budgetPrice + System.lineSeparator();
 
@@ -269,6 +268,7 @@ public class Storage {
             System.out.println("Client file does not exist.");
         }
     }
+
 
 
 
@@ -302,7 +302,7 @@ public class Storage {
             String clientText = EMPTY_STRING;
             for (int i = 0; i < clientLists.size(); i += 1) {
                 // Concatenate the string variables into clientText
-                String budgetPrice = CURRENCY + clientLists.get(i).getClientBudgetPerMonth();
+                String budgetPrice = clientLists.get(i).getClientBudgetPerMonth();
                 String name = clientLists.get(i).getClientName();
                 String contact = clientLists.get(i).getClientContactNumber();
                 String email = clientLists.get(i).getClientEmail();
@@ -338,7 +338,7 @@ public class Storage {
                 String rentingPrice = propertyLists.get(i).getRentingPrice();
                 String unitType = propertyLists.get(i).getUnitType();
                 String finalText = landlordName + SEPARATOR + propertyAddress + SEPARATOR
-                        + CURRENCY + rentingPrice + SEPARATOR + unitType + System.lineSeparator();
+                        + rentingPrice + SEPARATOR + unitType + System.lineSeparator();
 
                 propertyText = propertyText.concat(finalText);
             }
@@ -362,7 +362,7 @@ public class Storage {
             HashMap<String, String> clientPropertyPair = pairingList.getClientPropertyPairs();
             FileWriter pairFile = new FileWriter(PAIR_PATH);
 
-            String pairText = "";
+            String pairText = EMPTY_STRING;
             for (String clientText : clientPropertyPair.keySet()) {
                 String propertyText = clientPropertyPair.get(clientText);
                 String finalText = clientText + COLON + propertyText + System.lineSeparator();

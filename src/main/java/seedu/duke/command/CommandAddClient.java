@@ -38,6 +38,6 @@ public class CommandAddClient extends CommandAdd {
 
         //Update Storage
         storage.addToClientFile(this.clientName, this.clientContactNumber,
-                this.clientEmail, Integer.parseInt(this.clientBudgetPerMonth));
+                this.clientEmail, this.clientBudgetPerMonth);
     }
 }

@@ -23,7 +23,14 @@ public class CommandDeleteClient extends CommandDelete {
                         ClientList clientList, PairingList pairingList) {
         Client deletedClient = clientList.deleteClient(clientIndex);
         ui.showClientDeletedConfirmationMessage(deletedClient);
+        pairingList.deletePairing(deletedClient);
+
         //Update Storage
         storage.updateClient(clientList);
+
+        for (String i : pairingList.getClientPropertyPairs().keySet()) {
+            System.out.println("Key: " + i + "Value: " + pairingList.getClientPropertyPairs().get(i));
+        }
+        storage.updatePair(pairingList);
     }
 }
