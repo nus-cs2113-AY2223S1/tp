@@ -58,7 +58,8 @@ public class Messages {
     }
 
     public static void printPatientEditedMessage(Patient patient) {
-        System.out.println("Alright, I've modified the details of the patient! Here are the new details of the patient: ");
+        System.out.println("Alright, I've modified the details of the patient! "
+                + "Here are the new details of the patient: ");
         printLine();
         System.out.println(patient);
         printLine();
