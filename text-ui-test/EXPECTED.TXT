@@ -5,7 +5,7 @@ Please choose one+  of the following options:
 2 - Visits
 3 - Prescription
 This is the Patient Main Menu!
-List of commands: 
+List of commands:
 To add a patient: 'add n/[name] g/[M/F] d/[DOB] i/[ID]'
 To list all patients: 'list'
 To retrieve information about a specific patient: 'retrieve i/[ID]'
