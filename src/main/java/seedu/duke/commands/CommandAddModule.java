@@ -4,7 +4,6 @@ import seedu.duke.Exceptions;
 import seedu.duke.Timetable;
 import seedu.duke.commands.nusmodsapi.Nusmods;
 import seedu.duke.module.lessons.Lesson;
-import seedu.duke.data.DataManager;
 
 import java.io.IOException;
 import java.util.List;

@@ -22,13 +22,13 @@ public class Timetable {
         listOfModules.add(newModule);
     }
 
-    public static List<Module> getListOfModules(){
+    public static List<Module> getListOfModules() {
         return listOfModules;
     }
 
-    public static Module getModuleByCode(String code){
-        for (int i=0; i<listOfModules.size(); i++){
-            if (listOfModules.get(i).getModuleCode().equals(code)){
+    public static Module getModuleByCode(String code) {
+        for (int i = 0; i < listOfModules.size(); i++) {
+            if (listOfModules.get(i).getModuleCode().equals(code)) {
                 return listOfModules.get(i);
             }
         }
