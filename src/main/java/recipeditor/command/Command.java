@@ -12,4 +12,8 @@ public abstract class Command {
         return command instanceof ExitCommand;
     }
 
+    public static String getCommandType() {
+        return COMMAND_TYPE;
+    }
+
 }

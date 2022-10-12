@@ -41,7 +41,10 @@ public class DeleteCommand extends Command {
             Ui.showMessageInline("Current number of saved recipes:", Integer.toString(RecipeList.getSize()));
             return new CommandResult("Delete recipe index out of bound.");
         }
+    }
 
+    public static String getCommandType() {
+        return COMMAND_TYPE;
     }
 
 }
