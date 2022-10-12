@@ -8,3 +8,4 @@ public class InvalidFindCommandException extends ParkingException {
         super(message);
     }
 }
+
