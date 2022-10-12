@@ -12,7 +12,6 @@ import seedu.duke.module.lessons.Tutorial;
 import seedu.duke.module.lessons.Laboratory;
 import seedu.duke.module.lessons.Others;
 
-
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -67,7 +66,6 @@ public class Nusmods {
                 return retrieveBasicInfo(response.body());
             }
         }
-
     }
 
     private String[] retrieveBasicInfo(String response) throws JsonProcessingException {

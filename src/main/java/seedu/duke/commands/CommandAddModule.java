@@ -31,8 +31,7 @@ public class CommandAddModule {
         }
 
         lgr.info("api call successful, attempting to add module to timetable");
-        timetable.addNewModule(info[0], info[1], info[2], lessons);
-
+        Timetable.addNewModule(info[0], info[1], info[2], lessons);
         return "Successfully added new module: " + info[0] + " : " + info[1];
     }
 }
