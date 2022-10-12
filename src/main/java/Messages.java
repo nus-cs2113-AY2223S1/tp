@@ -32,6 +32,10 @@ public class Messages {
 
     }
 
+    public static void printExitMessage() {
+        System.out.println("Goodbye!");
+    }
+
     public static void printLine() {
         System.out.print("\t");
         for (int i = 0; i < 60; i++) {
