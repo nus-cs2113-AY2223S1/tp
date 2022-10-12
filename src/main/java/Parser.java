@@ -59,10 +59,13 @@ public class Parser {
                 if (shouldExit(input)) {
                     break;
                 }
+                boolean matchesView = input.equalsIgnoreCase("viewall");
                 Matcher matcherAdd = patientAddMatcher(input);
                 Matcher matcherRetrieve = patientRetrieveMatcher(input);
                 Matcher matcherEdit = patientEditMatcher(input);
-                if (matcherAdd.find()) {
+                if (matchesView) {
+                    patientList.listPatients();
+                } else if (matcherAdd.find()) {
                     patientList.addPatient(matcherAdd.group(1), matcherAdd.group(3),
                             matcherAdd.group(2), matcherAdd.group(4));
                 } else if (matcherRetrieve.find()) {
@@ -90,9 +93,12 @@ public class Parser {
                 if (shouldExit(input)) {
                     break;
                 }
+                boolean matchesView = input.equalsIgnoreCase("viewall");
                 Matcher matcherAdd = addVisitMatcher(input);
                 Matcher matcherEdit = editVisitMatcher(input);
-                if (matcherAdd.find()) {
+                if (matchesView) {
+                    visitList.viewAll();
+                } else if (matcherAdd.find()) {
                     String reason = matcherAdd.group(4);
                     if (reason.isEmpty()) {
                         visitList.addVisit(matcherAdd.group(1), matcherAdd.group(2), matcherAdd.group(3));
@@ -122,9 +128,12 @@ public class Parser {
                 if (shouldExit(input)) {
                     break;
                 }
+                boolean matchesView = input.equalsIgnoreCase("viewall");
                 Matcher matcherAdd = addPrescriptionMatcher(input);
                 Matcher matcherEdit = editPrescriptionMatcher(input);
-                if (matcherAdd.find()) {
+                if (matchesView) {
+                    prescriptionList.viewAll();
+                } else if (matcherAdd.find()) {
                     prescriptionList.add(matcherAdd.group(1), matcherAdd.group(2),
                             matcherAdd.group(3), matcherAdd.group(4), true);
                 } else if (matcherEdit.find()) {
