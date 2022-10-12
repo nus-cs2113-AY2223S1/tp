@@ -101,18 +101,19 @@ public class Storage {
 
     public static LessonType getLessonType(String shortString) {
         Map<String, LessonType> map = new HashMap<>();
-        map.put("TUT", LessonType.Tutorial);
-        map.put("LEC", LessonType.Lecture);
-        map.put("REC", LessonType.Recitation);
-        map.put("DLEC", LessonType.DesignLecture);
-        map.put("PLEC", LessonType.PackagedLecture);
-        map.put("PTUT", LessonType.PackagedTutorial);
-        map.put("SEC", LessonType.SectionalTeaching);
-        map.put("WKSH", LessonType.Workshop);
-        map.put("LAB", LessonType.Laboratory);
-        map.put("PROJ",LessonType.MiniProject);
-        map.put("SEM", LessonType.SeminarStyleModuleClass);
-        return Optional.ofNullable(map.get(shortString)).orElse(LessonType.TutorialType2);
+        map.put("TUT", LessonType.TUTORIAL);
+        map.put("TUT2", LessonType.TUTORIAL_TYPE_2);
+        map.put("LEC", LessonType.LECTURE);
+        map.put("REC", LessonType.RECITATION);
+        map.put("DLEC", LessonType.DESIGN_LECTURE);
+        map.put("PLEC", LessonType.PACKAGED_LECTURE);
+        map.put("PTUT", LessonType.PACKAGED_TUTORIAL);
+        map.put("SEC", LessonType.SECTIONAL_TEACHING);
+        map.put("WKSH", LessonType.WORKSHOP);
+        map.put("LAB", LessonType.LABORATORY);
+        map.put("PROJ",LessonType.MINI_PROJECT);
+        map.put("SEM", LessonType.SEMINAR_STYLE_MODULE_CLASS);
+        return Optional.ofNullable(map.get(shortString)).orElseThrow();
     }
 
     /**

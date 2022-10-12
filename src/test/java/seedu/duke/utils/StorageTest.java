@@ -20,8 +20,8 @@ public class StorageTest {
         int semester = 1;
         state.setSemester(semester);
         SelectedModule selectedModule = new SelectedModule(Module.get("CS1010"), semester);
-        selectedModule.selectSlot(LessonType.Tutorial, "01");
-        selectedModule.selectSlot(LessonType.SectionalTeaching, "1");
+        selectedModule.selectSlot(LessonType.TUTORIAL, "01");
+        selectedModule.selectSlot(LessonType.SECTIONAL_TEACHING, "1");
         state.addSelectedModule(selectedModule);
         Storage storage = new Storage();
         storage.saveState(state);
@@ -58,7 +58,7 @@ public class StorageTest {
         Map<LessonType, String> selectedSlots = selectedModule.getSelectedSlots();
         assertEquals(1, actualState.getSemester());
         assertEquals("CS1010", module.moduleCode);
-        assertEquals("01", selectedSlots.get(LessonType.Tutorial));
-        assertEquals("1", selectedSlots.get(LessonType.SectionalTeaching));
+        assertEquals("01", selectedSlots.get(LessonType.TUTORIAL));
+        assertEquals("1", selectedSlots.get(LessonType.SECTIONAL_TEACHING));
     }
 }
