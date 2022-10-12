@@ -151,4 +151,15 @@ public class Messages {
     public static final String MESSAGE_EMPTY_CHECK_DESCRIPTION = "OOPS!!! The description for check cannot be empty.";
 
     public static final String MESSAGE_TRY_AGAIN = "Please try again.";
+
+    public static final String MESSAGE_INCORRECT_LIST_DETAILS = "OOPS!!! Please enter either -client or -property to"
+            + " list clients and properties respectively";
+
+    public static final String MESSAGE_MISSING_LIST_DETAILS = "OOPS!!!"
+            + " The description for list cannot be empty";
+    public static final String LINE_BREAK = "----------------------------------------------------------------------"
+            + "----------";
+
+    public static final String MESSAGE_BYE_PARAMETERS_PRESENT = "Please type bye without any parameters"
+            + " if you would like to quit";
 }

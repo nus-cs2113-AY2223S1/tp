@@ -21,8 +21,6 @@ import static seedu.duke.Messages.MESSAGE_COMMAND_UNDEFINED;
 import static seedu.duke.Messages.MESSAGE_EMPTY_ADD_DESCRIPTION;
 import static seedu.duke.Messages.MESSAGE_EMPTY_CHECK_DESCRIPTION;
 import static seedu.duke.Messages.MESSAGE_PROPERTY_ALREADY_PAIRED;
-import static seedu.duke.Messages.MESSAGE_WELCOME;
-import static seedu.duke.Messages.MESSAGE_PROPERTY_ADDED;
 import static seedu.duke.Messages.MESSAGE_PAIRED;
 import static seedu.duke.Messages.MESSAGE_UNPAIRED;
 import static seedu.duke.Messages.MESSAGE_NO_EXISTING_PAIR;
@@ -51,7 +49,10 @@ import static seedu.duke.Messages.MESSAGE_INVALID_PRICE_FORMAT;
 import static seedu.duke.Messages.MESSAGE_NOT_VALID_INDEX;
 import static seedu.duke.Messages.MESSAGE_PAIR_UNPAIR_WRONG_FORMAT;
 import static seedu.duke.Messages.MESSAGE_PAIR_UNPAIR_INPUT_EXAMPLE;
-import static seedu.duke.Messages.MESSAGE_TRY_AGAIN;
+import static seedu.duke.Messages.MESSAGE_INCORRECT_LIST_DETAILS;
+import static seedu.duke.Messages.MESSAGE_MISSING_LIST_DETAILS;
+import static seedu.duke.Messages.LINE_BREAK;
+import static seedu.duke.Messages.MESSAGE_BYE_PARAMETERS_PRESENT;
 
 /**
  * Handler for all interactions between the user and the command line.
@@ -261,6 +262,30 @@ public class Ui {
 
     public void showEmptyCommandCheckDetailException() {
         showToUser(MESSAGE_EMPTY_CHECK_DESCRIPTION);
+    }
+
+    public void displayOneClient(Client client, int i) {
+        System.out.println(i + ".");
+        System.out.println(client.toString());
+        System.out.println(LINE_BREAK);
+    }
+
+    public void displayOneProperty(Property property, int i) {
+        System.out.println(i + ".");
+        System.out.println(property.toString());
+        System.out.println(LINE_BREAK);
+    }
+
+    public void showByeParametersPresentMessage() {
+        showToUser(MESSAGE_BYE_PARAMETERS_PRESENT);
+    }
+
+    public void showIncorrectListDetailsMessage() {
+        showToUser(MESSAGE_INCORRECT_LIST_DETAILS);
+    }
+
+    public void showMissingListDetailsMessage() {
+        showToUser(MESSAGE_MISSING_LIST_DETAILS);
     }
 
     public void showCheckProperty(ArrayList<String> tenants) {
