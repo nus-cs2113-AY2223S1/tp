@@ -24,6 +24,10 @@ public class CommandAddProperty extends CommandAdd {
      * @param propertyDetails Contains information relevant to property
      */
     public CommandAddProperty(ArrayList<String> propertyDetails) {
+        for (String propertyDetail : propertyDetails) {
+            assert propertyDetail != null;
+        }
+
         this.landlordName    = propertyDetails.get(0);
         this.propertyAddress = propertyDetails.get(1);
         this.rentingPrice    = propertyDetails.get(2);
