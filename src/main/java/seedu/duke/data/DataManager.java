@@ -272,18 +272,18 @@ public class DataManager {
                     String lessonEnd = lessonInfoList[4];
 
                     switch (lessonType) {
-                        case "Lecture":
-                            lessons.add(new Lecture(lessonDay, lessonStart, lessonEnd, lessonType));
-                            break;
-                        case "Tutorial":
-                            lessons.add(new Tutorial(lessonDay, lessonStart, lessonEnd, lessonType));
-                            break;
-                        case "Laboratory":
-                            lessons.add(new Laboratory(lessonDay, lessonStart, lessonEnd, lessonType));
-                            break;
-                        default:
-                            lessons.add(new Others(lessonDay, lessonStart, lessonEnd, lessonType));
-                            break;
+                    case "Lecture":
+                        lessons.add(new Lecture(lessonDay, lessonStart, lessonEnd, lessonType));
+                        break;
+                    case "Tutorial":
+                        lessons.add(new Tutorial(lessonDay, lessonStart, lessonEnd, lessonType));
+                        break;
+                    case "Laboratory":
+                        lessons.add(new Laboratory(lessonDay, lessonStart, lessonEnd, lessonType));
+                        break;
+                    default:
+                        lessons.add(new Others(lessonDay, lessonStart, lessonEnd, lessonType));
+                        break;
                     }
                 }
                 Timetable.addNewModuleFromFile(code, name, description, lessons);
