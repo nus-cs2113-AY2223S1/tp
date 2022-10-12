@@ -17,14 +17,26 @@ public class ConsoleBorder {
     private final char bottomLeft;
     private final char bottomRight;
     private final char bottomMid;
+    private final boolean isStyleSimple;
 
     private static ConsoleBorder singleton;
+    private static ConsoleBorder styleSimpleSingleton;
 
     public static final char DOTTED_CHAR = ':';
 
     public static ConsoleBorder getInstance() {
+        return getInstance(false);
+    }
+
+    public static ConsoleBorder getInstance(boolean isSimple) {
+        if (isSimple) {
+            if (styleSimpleSingleton == null) {
+                styleSimpleSingleton = new ConsoleBorder(true);
+            }
+            return styleSimpleSingleton;
+        }
         if (singleton == null) {
-            singleton = new ConsoleBorder();
+            singleton = new ConsoleBorder(false);
         }
         return singleton;
     }
@@ -74,8 +86,9 @@ public class ConsoleBorder {
         return side;
     }
 
-    private ConsoleBorder() {
-        String borderFileName = (SystemUtils.IS_OS_WINDOWS) ? "borderWindows.txt" : "border.txt";
+    private ConsoleBorder(boolean isStyleSimple) {
+        this.isStyleSimple = isStyleSimple;
+        String borderFileName = (isStyleSimple || SystemUtils.IS_OS_WINDOWS) ? "borderWindows.txt" : "border.txt";
         InputStream stream = ConsoleBorder.class.getClassLoader()
                 .getResourceAsStream(borderFileName);
         Scanner scanner = new Scanner(stream);
@@ -112,6 +125,9 @@ public class ConsoleBorder {
     }
 
     public char mergeBorder(char current, char next) {
+        assert next == topLeft || next == topRight || next == bottomLeft 
+                || next == bottomRight || next == side :
+                "mergeBorder called with invalid arguments";
         // next is always TOP/BOTTOM_LEFT/RIGHT
         if (current == DOTTED_CHAR) {
             return next;

@@ -31,6 +31,7 @@ public class Timetable {
 
     public static final String SUBSYSTEM_NAME = "timetable";
 
+    private boolean isStyleSimple;
     private boolean withColor;
     private int firstHour;
     private int lastHour;
@@ -47,15 +48,16 @@ public class Timetable {
     private Logger logger;
 
     public Timetable(List<Pair<Module, RawLesson>> lessons) {
-        this(lessons, false);
+        this(lessons, false, true);
     }
 
-    public Timetable(List<Pair<Module, RawLesson>> lessons, boolean withColor) {
-        assert (lessons != null);
-        this.logger = Logger.getLogger(SUBSYSTEM_NAME);
-        this.logger.log(Level.INFO, "Creating a timetable with " + lessons.size() + " lessons");
+    public Timetable(List<Pair<Module, RawLesson>> lessons, boolean withColor, boolean isStyleSimple) {
+        assert lessons != null : "List of lessons should not be null";
+        logger = Logger.getLogger(SUBSYSTEM_NAME);
+        logger.log(Level.FINE, "Creating a timetable with " + lessons.size() + " lessons");
+        this.isStyleSimple = isStyleSimple;
         this.withColor = SystemUtils.IS_OS_WINDOWS ? false : withColor;
-        this.consoleBorder = ConsoleBorder.getInstance();
+        this.consoleBorder = ConsoleBorder.getInstance(isStyleSimple);
         this.sortedLessons = sortLessons(lessons);
         this.modules = new ArrayList<>(lessons.stream().map(s -> s.getLeft()).collect(Collectors.toSet()));
         this.modules.sort((a, b) -> a.moduleCode.compareTo(b.moduleCode));
@@ -136,8 +138,8 @@ public class Timetable {
         return sortedLessons;
     }
 
-    private Pair<List<Integer>, List<Integer>> computeIndentation(List<Day> days, List<Pair<Module, RawLesson>>
-            sortedLessons) {
+    private Pair<List<Integer>, List<Integer>> computeIndentation(List<Day> days,
+            List<Pair<Module, RawLesson>> sortedLessons) {
         List<List<List<Pair<Module, RawLesson>>>> lessonStack = new ArrayList<>();
         for (int i = 0; i < days.size(); i++) {
             lessonStack.add(new ArrayList<>());
@@ -256,18 +258,18 @@ public class Timetable {
 
     public static String lessonTypeToShortString(LessonType lessonType) {
         Map<LessonType, String> map = new HashMap<>();
-        map.put(LessonType.Tutorial, "TUT");
-        map.put(LessonType.Lecture, "LEC");
-        map.put(LessonType.Recitation, "REC");
-        map.put(LessonType.DesignLecture, "DLEC");
-        map.put(LessonType.PackagedLecture, "PLEC");
-        map.put(LessonType.PackagedTutorial, "PTUT");
-        map.put(LessonType.SectionalTeaching, "SEC");
-        map.put(LessonType.Workshop, "WKSH");
-        map.put(LessonType.Laboratory, "LAB");
-        map.put(LessonType.MiniProject, "PROJ");
-        map.put(LessonType.SeminarStyleModuleClass, "SEM");
-        map.put(LessonType.TutorialType2, "TUT");
+        map.put(LessonType.TUTORIAL, "TUT");
+        map.put(LessonType.LECTURE, "LEC");
+        map.put(LessonType.RECITATION, "REC");
+        map.put(LessonType.DESIGN_LECTURE, "DLEC");
+        map.put(LessonType.PACKAGED_LECTURE, "PLEC");
+        map.put(LessonType.PACKAGED_TUTORIAL, "PTUT");
+        map.put(LessonType.SECTIONAL_TEACHING, "SEC");
+        map.put(LessonType.WORKSHOP, "WKSH");
+        map.put(LessonType.LABORATORY, "LAB");
+        map.put(LessonType.MINI_PROJECT, "PROJ");
+        map.put(LessonType.SEMINAR_STYLE_MODULE_CLASS, "SEM");
+        map.put(LessonType.TUTORIAL_TYPE_2, "TUT2");
         return Optional.ofNullable(map.get(lessonType)).orElse("<INVALID>");
     }
 

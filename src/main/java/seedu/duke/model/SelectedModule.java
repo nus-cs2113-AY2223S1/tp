@@ -1,7 +1,7 @@
 package seedu.duke.model;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class SelectedModule {
 
@@ -13,7 +13,11 @@ public class SelectedModule {
     public SelectedModule(Module module, int semester) {
         this.module = module;
         this.semester = semester;
-        this.selectedSlots = new HashMap<>();
+        this.selectedSlots = new TreeMap<>();
+        for (LessonType lessonType : module.getSemesterData(semester).getLessonTypes()) {
+            selectedSlots.put(lessonType,
+                    module.getSemesterData(semester).getClassNosByType(lessonType).iterator().next());
+        }
     }
 
     public Module getModule() {
@@ -29,7 +33,7 @@ public class SelectedModule {
         return true;
     }
 
-    public void selectSlot(LessonType lessonType,String classNo) {
+    public void selectSlot(LessonType lessonType, String classNo) {
         // overwrites currently selected slot if any
         selectedSlots.put(lessonType, classNo);
     }

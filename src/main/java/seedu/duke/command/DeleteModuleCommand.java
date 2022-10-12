@@ -6,8 +6,14 @@ import seedu.duke.utils.State;
 import seedu.duke.utils.Storage;
 import seedu.duke.utils.Ui;
 
+/**
+ * Delete module to state by module code, updates storage and displays execution through ui.
+ */
+
 public class DeleteModuleCommand extends Command {
     Module module;
+
+    public static final String COMMAND_WORD = "delete";
 
     public DeleteModuleCommand(String[] input) {
         super(input);

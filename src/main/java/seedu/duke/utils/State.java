@@ -1,14 +1,17 @@
 package seedu.duke.utils;
 
-import seedu.duke.model.Module;
 import seedu.duke.model.SelectedModule;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class State {
-
+    private static final int MODULES_LIST_SIZE = 3;
     private int semester = 1;
-    List<List<SelectedModule>> selectedModulesList;
+
+    private List<List<SelectedModule>> selectedModulesList = new ArrayList<>(Collections.nCopies(MODULES_LIST_SIZE,
+            new ArrayList<>()));
 
     public List<SelectedModule> getSelectedModulesList() {
         return selectedModulesList.get(semester);
@@ -33,6 +36,5 @@ public class State {
     public void removeSelectedModule(SelectedModule selectedModule) {
         selectedModulesList.get(semester).remove(selectedModule);
     }
-
 
 }
