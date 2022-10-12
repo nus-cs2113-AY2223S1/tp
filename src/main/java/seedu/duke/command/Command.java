@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
+import seedu.duke.command.passengercommand.AddPassengerCommand;
 import seedu.duke.exceptions.SkyControlException;
 import seedu.duke.operationlist.OperationList;
 import seedu.duke.parsers.Parser;
@@ -11,10 +12,6 @@ public abstract class Command extends Parser {
 
     protected static String passengerDetail;
     protected static String[] passengerDetailArray;
-
-    public Command() {
-
-    }
 
     public static void getPassengerDetail(String lineInput) throws SkyControlException {
         Parser.getInputWords(lineInput);
@@ -28,13 +25,13 @@ public abstract class Command extends Parser {
             checkBlankDetailInput();
             passengerDetail = passengerDetailArray[DETAIL_INDEX].trim();
         } else {
-            throw new SkyControlException(ui.showOperationError());
+            throw new SkyControlException(ui.getOperationError());
         }
     }
 
     public static void checkBlankDetailInput() throws SkyControlException {
         if (passengerDetailArray.length < 2) {
-            throw new SkyControlException(ui.showBlankOpsError());
+            throw new SkyControlException(ui.getBlankOpsError());
         }
     }
 

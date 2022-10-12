@@ -59,7 +59,7 @@ public class PassengerList extends OperationList {
             }
         }
         if (!isSuccess) {
-            throw new SkyControlException(ui.showDeleteError());
+            throw new SkyControlException(ui.getDeleteError());
         }
         isSuccess = false;
     }
@@ -167,6 +167,7 @@ public class PassengerList extends OperationList {
     private void getBoardingTime(String passengerDetail) {
         startIndex = passengerDetail.indexOf(BOARDING_TIME_DELIMITER)
                 + BOARDING_TIME_DELIMITER.length();
+        assert startIndex >= 0;
         boardingTime = passengerDetail.substring(startIndex);
     }
 

@@ -16,6 +16,7 @@ public class Ui {
     protected static final int FORMAT_BG_SPACE = 12;
     protected static final int FORMAT_SN_SPACE = 8;
     protected static final int FORMAT_BT_SPACE = 13;
+    protected static final int BOARDING_GROUP_LIMIT = 5;
     protected static String formattedName;
     protected static String formattedDepartureDate;
     protected static String formattedDepartureTime;
@@ -65,23 +66,27 @@ public class Ui {
         System.out.println(numOfPassenger + " passenger(s) left on the passenger list.\n");
     }
 
-    public String showDeleteError() {
+    public String getDeleteError() {
         return "The system is unable to delete the specified passenger "
                 + "\nas he/she is not found in the passenger list "
                 + "or his/her \ndetail have been input incorrectly.";
     }
 
-    public String showOperationError() {
+    public String getOperationError() {
         return "Input a valid operation, please try again.";
     }
 
-    public String showBlankOpsError() {
+    public String getBlankOpsError() {
         return "Detail of the operation is blank,\n"
                 + "please try again and input all necessary details.";
     }
 
-    public String showErrorMessage() {
+    public String getErrorMessage() {
         return "The system is unable to read your command, please try again.";
+    }
+
+    public String getBlankOperationError() {
+        return "You did not input an operation.";
     }
 
     public void showError(String error) {
@@ -124,6 +129,8 @@ public class Ui {
     private static void formatPassengerDetail(String name, String departureDate, String departureTime,
                                               String flightNumber, String gateNumber, int boardingGroup,
                                               String seatNumber, String boardingTime) {
+        checkAsserts(name, departureDate, departureTime, flightNumber,
+                gateNumber, boardingGroup, seatNumber, boardingTime);
         formattedName = String.format("%-" + FORMAT_NAME_SPACE + "s", name);
         formattedDepartureDate = String.format("%-" + FORMAT_DOD_SPACE + "s", departureDate);
         formattedDepartureTime = String.format("%-" + FORMAT_DT_SPACE + "s", departureTime);
@@ -132,6 +139,19 @@ public class Ui {
         formattedBoardingGroup = String.format("%-" + FORMAT_BG_SPACE + "s", boardingGroup);
         formattedSeatNumber = String.format("%-" + FORMAT_SN_SPACE + "s", seatNumber);
         formattedBoardingTime = String.format("%-" + FORMAT_BT_SPACE + "s", boardingTime);
+    }
+
+    private static void checkAsserts(String name, String departureDate, String departureTime,
+                                     String flightNumber, String gateNumber,
+                                     int boardingGroup, String seatNumber, String boardingTime) {
+        assert name.length() <= FORMAT_NAME_SPACE;
+        assert departureDate.length() <= FORMAT_DOD_SPACE;
+        assert departureTime.length() <= FORMAT_DT_SPACE;
+        assert flightNumber.length() <= FORMAT_FN_SPACE;
+        assert gateNumber.length() <= FORMAT_GN_SPACE;
+        assert boardingGroup <= BOARDING_GROUP_LIMIT;
+        assert seatNumber.length() <= FORMAT_SN_SPACE;
+        assert boardingTime.length() <= FORMAT_BT_SPACE;
     }
 
     public void showEmptyPassengerList() {
@@ -158,16 +178,26 @@ public class Ui {
     }
 
     public void showListOfFlights(ArrayList<FlightInfo> flightList) {
-        System.out.println("---------------------------------------------------------"
-                + "-----------------------------------------------------------------------");
-        System.out.printf("%5s %10s %27s %20s %20s %12s %22s", "FLIGHT NUM", "AIRLINE",
-                "DESTINATION", "DEPARTURE TIME", "BOARDING GATE", "TERMINAL", "CHECK-IN ROW/DOOR");
-        System.out.println("\n-------------------------------------------------------"
-                + "-------------------------------------------------------------------------");
-
+        System.out.printf("\n*-----------------------------------------------------------"
+                + "----------------------------------------------------------------------*\n"
+                + "| %5s %10s %27s %20s %20s %12s %22s |\n"
+                + "*-----------------------------------------------------------"
+                + "----------------------------------------------------------------------*",
+                "FLIGHT NUM", "AIRLINE", "DESTINATION", "DEPARTURE TIME",
+                "BOARDING GATE", "TERMINAL", "CHECK-IN ROW/DOOR");
+        System.out.println();
         for (FlightInfo flight : flightList) {
             System.out.println(flight);
         }
+        System.out.println();
+    }
+
+    public String getLoggerError() {
+        return "File logger failed to work.";
+    }
+
+    public String getLoggerStartUpMessage() {
+        return "Going to start processing";
     }
 }
 

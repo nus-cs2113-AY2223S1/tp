@@ -17,7 +17,7 @@ public class PassengerParser extends Parser {
         } else if (isList) {
             command = new ListPassengerCommand();
         } else {
-            throw new SkyControlException(ui.showErrorMessage());
+            throw new SkyControlException(ui.getErrorMessage());
         }
         return command;
     }
