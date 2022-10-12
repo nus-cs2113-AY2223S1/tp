@@ -1,6 +1,5 @@
 package seedu.duke.command;
 
-import seedu.duke.command.passengercommand.AddPassengerCommand;
 import seedu.duke.exceptions.SkyControlException;
 import seedu.duke.operationlist.OperationList;
 import seedu.duke.parsers.Parser;
