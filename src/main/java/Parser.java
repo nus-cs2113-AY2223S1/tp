@@ -45,12 +45,20 @@ public class Parser {
                 break;
             }
         }
+        Messages.printExitMessage();
     }
 
-    public void patientParser() {
+    private boolean shouldExit(String input) {
+        return input.equalsIgnoreCase("bye") || input.equalsIgnoreCase("exit");
+    }
+
+    private void patientParser() {
         while (scanner.hasNext()) {
             try {
                 String input = scanner.nextLine();
+                if (shouldExit(input)) {
+                    break;
+                }
                 Matcher matcherAdd = patientAddMatcher(input);
                 Matcher matcherRetrieve = patientRetrieveMatcher(input);
                 Matcher matcherEdit = patientEditMatcher(input);
@@ -63,7 +71,7 @@ public class Parser {
                     parseEditPatient(matcherEdit.group(1), matcherEdit.group(2), matcherEdit.group(3));
                 } else {
                     throw new OneDocException("Your input is incorrect! Please format it as such:"
-                            + "\nTo add a patient: add i/[ID] n/[name] g/[M/F] d/[DOB]"
+                            + "\nTo add a patient: add n/[name] g/[M/F] d/[DOB] i/[ID]"
                             + "\nTo edit a patient's info: edit i/[ID] (n/[name] or g/[M/F] or d/[DOB])"
                             + "\nTo retrieve a patient's info: retrieve i/[ID]");
                 }
@@ -79,6 +87,9 @@ public class Parser {
         while (scanner.hasNext()) {
             try {
                 String input = scanner.nextLine();
+                if (shouldExit(input)) {
+                    break;
+                }
                 Matcher matcherAdd = addVisitMatcher(input);
                 Matcher matcherEdit = editVisitMatcher(input);
                 if (matcherAdd.find()) {
@@ -108,6 +119,9 @@ public class Parser {
         while (scanner.hasNext()) {
             try {
                 String input = scanner.nextLine();
+                if (shouldExit(input)) {
+                    break;
+                }
                 Matcher matcherAdd = addPrescriptionMatcher(input);
                 Matcher matcherEdit = editPrescriptionMatcher(input);
                 if (matcherAdd.find()) {
