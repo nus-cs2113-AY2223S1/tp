@@ -130,14 +130,6 @@ public class Ui {
                 + "--------------------------------------------------------------+\n");
     }
 
-    private static void showFormattedFlightDetail() {
-        System.out.printf("| %s | %s | %s | %s | %s | %s | %s |\n"
-                        + "+-----------------------------------------------------------"
-                        + "--------------------------------------------------------------+\n",
-                formattedFlightNum, formattedAirline, formattedFlightDestination, formattedFlightDepartureTime,
-                formattedFlightGateNumber, formattedTerminal, formattedCheckin);
-    }
-
     public void showPassengerListBody(String name, String departureDate, String departureTime,
                                       String flightNumber, String gateNumber, int boardingGroup,
                                       String seatNumber, String boardingTime) {
