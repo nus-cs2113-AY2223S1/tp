@@ -28,6 +28,9 @@ public class Parser {
         case "employee":
             return parseEmployee(statement);
             break;
+        case "service":
+            return parseService(statement);
+            break;
         default:
             System.out.println("input invalid");
             return new ExitCommand();
@@ -37,7 +40,7 @@ public class Parser {
     public command parseAppointment(String input){
         if(!input.contains(" ")){
             if(input == "view"){
-                return new AppointmentViewCommand();
+                return new ViewAppointmentCommand();
             }
             System.out.println("input invalid");
             return new ExitCommand();
@@ -52,17 +55,49 @@ public class Parser {
         case DeleteAppointmentCommand.COMMAND_WORD:
             return prepareDeleteAppointment(statement);
         break;
-        case ViewAppointmentCommand.COMMAND_WORD:
-            return new ViewAppointmentCommand();
-        break;
         case AllocateAppointmentCommand.COMMAND_WORD:
             return prepareAllocateAppointment(statement);
         break;
         case SetAppointmentStatusCommand.COMMAND_WORD:
             return prepareSetAppointmentStatusCommand(statement);
+            break;
         default:
             return new ExitCommand();
         }
+    }
+
+
+    public command parseService(String input){
+        if(!input.contains(" ")){
+            if(input == "view"){
+                return new ViewServiceCommand();
+            }
+            System.out.println("input invalid");
+            return new ExitCommand();
+        }
+
+        String type = input.substring(0,input.indexOf(" "));
+        String statement = input.substring(input.indexOf(" ")).trim();
+        switch(type) {
+        case AddServiceCommand.COMMAND_WORD:
+            return prepareAddService(statement);
+        break;
+        case RemoveServiceCommand.COMMAND_WORD:
+            return prepareRemoveService(statement);
+        break;
+        default:
+            return new ExitCommand();
+        }
+    }
+
+    public command prepareRemoveService(String input){
+        int index = indexOfDelete(input);
+        if(index == -1){
+            System.out.println("input invalid");
+            return new ExitCommand();
+        }
+
+        return new RemoveServiceCommand(index);
     }
 
     public command prepareSetAppointmentStatusCommand(String input){
