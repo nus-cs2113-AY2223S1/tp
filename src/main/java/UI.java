@@ -14,24 +14,39 @@ public class UI {
     // General Invalid Error Message
     private static final String INVALID_MAIN_MENU_COMMAND_MESSAGE = "Incorrect input. Please type 1, 2, 3 or bye";
 
+    // Patient
+    private static final String PATIENT_MAIN_MENU =
+            "This is the Patient Main Menu!" + System.lineSeparator()
+            + "List of commands: " + System.lineSeparator()
+            + "* To add a patient: add n/[name] g/[M/F] d/[DOB] i/[ID]" + System.lineSeparator()
+            + "* To list all patients: viewall" + System.lineSeparator()
+            + "* To retrieve information about a specific patient: retrieve i/[ID]" + System.lineSeparator()
+            + "* To edit a patient's records: edit i/ID (n/[name] or g/[M/F] or d/[DOB])" + System.lineSeparator()
+            + "* To return to main menu: main" + System.lineSeparator()
+            + "* To quit OneDoc: bye";
+
     // Prescription
     private static final String NO_PRESCRIPTION_MESSAGE = "There are currently no prescriptions in the record.";
     private static final String PRESCRIPTION_MAIN_MENU =
             "This is the Prescription Main Menu!" + System.lineSeparator()
             + "List of commands:" + System.lineSeparator()
-            + "To add a prescription: add i/ID n/[name] d/[dosage] t/[time interval]" + System.lineSeparator()
-            + "To edit a prescription: edit i/[index] (n/[name] or d/[dosage] or t/[time interval])"
+            + "* To add a prescription: add i/ID n/[name] d/[dosage] t/[time interval]" + System.lineSeparator()
+            + "* To edit a prescription: edit i/[index] (n/[name] or d/[dosage] or t/[time interval])"
             + System.lineSeparator()
-            + "To view all prescription records: 'viewAll'";
+            + "* To view all prescription records: viewAll" + System.lineSeparator()
+            + "* To return to main menu: main" + System.lineSeparator()
+            + "* To quit OneDoc: bye";
 
     // Visit
     private static final String VISIT_MAIN_MENU =
             "This is the Visits Main Menu!" + System.lineSeparator()
             + "List of commands:" + System.lineSeparator()
-            + "To add a visit: add i/[ID] d/[date] t/[time] r/[reason]" + System.lineSeparator()
-            + "To edit a visit's reason: edit i/[ID] r/[reason]"
+            + "* To add a visit: add i/[ID] d/[date] t/[time] r/[reason]" + System.lineSeparator()
+            + "* To edit a visit's reason: edit i/[ID] r/[reason]"
             + System.lineSeparator()
-            + "To view all visit records: 'viewAll'";
+            + "* To view all visit records: 'viewAll'" + System.lineSeparator()
+            + "* To return to main menu: main" + System.lineSeparator()
+            + "* To quit OneDoc: bye";
 
     private static final String INDEX_OUT_OF_RANGE_MESSAGE = "The index number is out of range. Try again.";
 
@@ -76,12 +91,7 @@ public class UI {
     }
 
     public void printPatientMenuMessage() {
-        System.out.println("This is the Patient Main Menu!");
-        System.out.println("List of commands: ");
-        System.out.println("To add a patient: add n/[name] g/[M/F] d/[DOB] i/[ID]");
-        System.out.println("To list all patients: viewall");
-        System.out.println("To retrieve information about a specific patient: retrieve i/[ID]");
-        System.out.println("To edit a patient's records: edit i/ID (n/[name] or g/[M/F] or d/[DOB])");
+        System.out.println(PATIENT_MAIN_MENU);
     }
 
     public void printPatientAddedMessage(Patient patient) {
