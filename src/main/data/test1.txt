@@ -1,2 +1,0 @@
-password:12345678
-balance:0
