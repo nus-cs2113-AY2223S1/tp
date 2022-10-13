@@ -3,7 +3,6 @@ package seedu.moneygowhere.parser;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
-import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.apache.commons.text.StringTokenizer;
@@ -11,22 +10,22 @@ import org.apache.commons.text.matcher.StringMatcherFactory;
 import seedu.moneygowhere.commands.ConsoleCommand;
 import seedu.moneygowhere.commands.ConsoleCommandAddExpense;
 import seedu.moneygowhere.commands.ConsoleCommandAddIncome;
+import seedu.moneygowhere.commands.ConsoleCommandAddTarget;
 import seedu.moneygowhere.commands.ConsoleCommandBye;
 import seedu.moneygowhere.commands.ConsoleCommandDeleteExpense;
 import seedu.moneygowhere.commands.ConsoleCommandEditExpense;
 import seedu.moneygowhere.commands.ConsoleCommandSortExpense;
 import seedu.moneygowhere.commands.ConsoleCommandViewExpense;
-import seedu.moneygowhere.commands.ConsoleCommandAddTarget;
 import seedu.moneygowhere.common.Configurations;
 import seedu.moneygowhere.common.Messages;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandAddExpenseInvalidException;
+import seedu.moneygowhere.exceptions.ConsoleParserCommandAddIncomeInvalidException;
+import seedu.moneygowhere.exceptions.ConsoleParserCommandAddTargetInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandDeleteExpenseInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandEditExpenseInvalidException;
-import seedu.moneygowhere.exceptions.ConsoleParserCommandAddIncomeInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandNotFoundException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandSortExpenseInvalidTypeException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandViewExpenseInvalidException;
-import seedu.moneygowhere.exceptions.ConsoleParserCommandAddTargetInvalidException;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -38,51 +37,6 @@ import java.util.List;
  * Provide functions to parse inputs read from standard input.
  */
 public class ConsoleParser {
-    public static final String CONSOLE_COMMAND_BYE = "bye";
-    public static final String CONSOLE_COMMAND_ADD_EXPENSE = "add-expense";
-    public static final String CONSOLE_COMMAND_ADD_EXPENSE_ARGUMENT_NAME = "name";
-    public static final String CONSOLE_COMMAND_ADD_EXPENSE_ARGUMENT_DATE_TIME = "datetime";
-    public static final String CONSOLE_COMMAND_ADD_EXPENSE_ARGUMENT_DESCRIPTION = "description";
-    public static final String CONSOLE_COMMAND_ADD_EXPENSE_ARGUMENT_AMOUNT = "amount";
-    public static final String CONSOLE_COMMAND_ADD_EXPENSE_ARGUMENT_CATEGORY = "category";
-    public static final String CONSOLE_COMMAND_VIEW_EXPENSE = "view-expense";
-    public static final String CONSOLE_COMMAND_VIEW_EXPENSE_ARGUMENT_EXPENSE_INDEX = "expense-index";
-    public static final String CONSOLE_COMMAND_DELETE_EXPENSE = "delete-expense";
-    public static final String CONSOLE_COMMAND_DELETE_EXPENSE_ARGUMENT_EXPENSE_INDEX =
-            CONSOLE_COMMAND_VIEW_EXPENSE_ARGUMENT_EXPENSE_INDEX;
-    public static final String CONSOLE_COMMAND_EDIT_EXPENSE = "edit-expense";
-    public static final String CONSOLE_COMMAND_EDIT_EXPENSE_ARGUMENT_EXPENSE_INDEX =
-            CONSOLE_COMMAND_VIEW_EXPENSE_ARGUMENT_EXPENSE_INDEX;
-    public static final String CONSOLE_COMMAND_EDIT_EXPENSE_ARGUMENT_NAME =
-            CONSOLE_COMMAND_ADD_EXPENSE_ARGUMENT_NAME;
-    public static final String CONSOLE_COMMAND_EDIT_EXPENSE_ARGUMENT_DATE_TIME =
-            CONSOLE_COMMAND_ADD_EXPENSE_ARGUMENT_DATE_TIME;
-    public static final String CONSOLE_COMMAND_EDIT_EXPENSE_ARGUMENT_DESCRIPTION =
-            CONSOLE_COMMAND_ADD_EXPENSE_ARGUMENT_DESCRIPTION;
-    public static final String CONSOLE_COMMAND_EDIT_EXPENSE_ARGUMENT_AMOUNT =
-            CONSOLE_COMMAND_ADD_EXPENSE_ARGUMENT_AMOUNT;
-    public static final String CONSOLE_COMMAND_EDIT_EXPENSE_ARGUMENT_CATEGORY =
-            CONSOLE_COMMAND_ADD_EXPENSE_ARGUMENT_CATEGORY;
-    public static final String CONSOLE_COMMAND_SORT_EXPENSE = "sort-expense";
-    public static final String CONSOLE_COMMAND_SORT_EXPENSE_TYPE = "type";
-    public static final String CONSOLE_COMMAND_SORT_EXPENSE_ORDER = "order";
-    public static final String CONSOLE_COMMAND_SORT_EXPENSE_TYPE_ALPHABETICAL = "alphabetical";
-    public static final String CONSOLE_COMMAND_SORT_EXPENSE_TYPE_AMOUNT = "amount";
-    public static final String CONSOLE_COMMAND_SORT_EXPENSE_TYPE_DATE = "date";
-    public static final String CONSOLE_COMMAND_SORT_EXPENSE_ORDER_ASCENDING = "ascending";
-    public static final String CONSOLE_COMMAND_SORT_EXPENSE_ORDER_DESCENDING = "descending";
-    public static final String CONSOLE_COMMAND_ADD_TARGET = "add-target";
-    public static final String CONSOLE_COMMAND_ADD_TARGET_ARGUMENT_NAME = "name";
-    public static final String CONSOLE_COMMAND_ADD_TARGET_ARGUMENT_DATE_TIME = "datetime";
-    public static final String CONSOLE_COMMAND_ADD_TARGET_ARGUMENT_DESCRIPTION = "description";
-    public static final String CONSOLE_COMMAND_ADD_TARGET_ARGUMENT_AMOUNT = "amount";
-    public static final String CONSOLE_COMMAND_ADD_TARGET_ARGUMENT_CURRENT_AMOUNT = "current amount";
-    public static final String CONSOLE_COMMAND_ADD_INCOME = "add-income";
-    public static final String CONSOLE_COMMAND_ADD_INCOME_ARGUMENT_NAME = "name";
-    public static final String CONSOLE_COMMAND_ADD_INCOME_ARGUMENT_DATE_TIME = "datetime";
-    public static final String CONSOLE_COMMAND_ADD_INCOME_ARGUMENT_DESCRIPTION = "description";
-    public static final String CONSOLE_COMMAND_ADD_INCOME_ARGUMENT_AMOUNT = "amount";
-
     private static String[] tokenizeCommandArguments(String arguments) {
         StringTokenizer stringTokenizer = new StringTokenizer(arguments);
         stringTokenizer.setQuoteMatcher(StringMatcherFactory.INSTANCE.quoteMatcher());
@@ -101,56 +55,36 @@ public class ConsoleParser {
         try {
             String[] argumentsArr = tokenizeCommandArguments(arguments);
 
-            Option optionName = new Option(
-                    "n",
-                    CONSOLE_COMMAND_ADD_EXPENSE_ARGUMENT_NAME,
-                    true,
-                    "name"
-            );
-            Option optionDateTime = new Option(
-                    "d",
-                    CONSOLE_COMMAND_ADD_EXPENSE_ARGUMENT_DATE_TIME,
-                    true,
-                    "date and time"
-            );
-            Option optionDescription = new Option(
-                    "t",
-                    CONSOLE_COMMAND_ADD_EXPENSE_ARGUMENT_DESCRIPTION,
-                    true,
-                    "description"
-            );
-            Option optionAmount = new Option(
-                    "a",
-                    CONSOLE_COMMAND_ADD_EXPENSE_ARGUMENT_AMOUNT,
-                    true,
-                    "amount"
-            );
-            Option optionCategory = new Option(
-                    "c",
-                    CONSOLE_COMMAND_ADD_EXPENSE_ARGUMENT_CATEGORY,
-                    true,
-                    "category"
-            );
-            Options options = new Options();
-            options.addOption(optionName);
-            options.addOption(optionDateTime);
-            options.addOption(optionDescription);
-            options.addOption(optionAmount);
-            options.addOption(optionCategory);
-            CommandLineParser commandLineParser = new DefaultParser();
-            CommandLine commandLine = commandLineParser.parse(options, argumentsArr);
+            Options cliOptions = ConsoleParserConfigurations.getCommandAddExpenseOptions();
+            CommandLineParser cliParser = new DefaultParser();
+            CommandLine cli = cliParser.parse(cliOptions, argumentsArr);
 
-            String name = commandLine.getOptionValue(CONSOLE_COMMAND_ADD_EXPENSE_ARGUMENT_NAME);
-            String amountStr = commandLine.getOptionValue(CONSOLE_COMMAND_ADD_EXPENSE_ARGUMENT_AMOUNT);
+            String name = cli.getOptionValue(
+                    ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_NAME_LONG
+            );
+            String amountStr = cli.getOptionValue(
+                    ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_AMOUNT_LONG
+            );
 
-            // Guard clause for mandatory arguments
+            /* Checks if mandatory arguments are provided */
+
             if (name == null || amountStr == null) {
                 throw new ConsoleParserCommandAddExpenseInvalidException();
             }
 
-            String dateTimeStr = commandLine.getOptionValue(CONSOLE_COMMAND_ADD_EXPENSE_ARGUMENT_DATE_TIME);
-            String description = commandLine.getOptionValue(CONSOLE_COMMAND_ADD_EXPENSE_ARGUMENT_DESCRIPTION);
-            String category = commandLine.getOptionValue(CONSOLE_COMMAND_ADD_EXPENSE_ARGUMENT_CATEGORY);
+            String dateTimeStr = cli.getOptionValue(
+                    ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_DATE_TIME_LONG
+            );
+            String description = cli.getOptionValue(
+                    ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_DESCRIPTION_LONG
+            );
+            String category = cli.getOptionValue(
+                    ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_CATEGORY_LONG
+            );
+
+            /* Parses and normalizes arguments */
+
+            BigDecimal amount = new BigDecimal(amountStr);
 
             LocalDateTime dateTime;
             if (dateTimeStr == null) {
@@ -161,14 +95,16 @@ public class ConsoleParser {
                         DateTimeFormatter.ofPattern(Configurations.CONSOLE_INTERFACE_DATE_TIME_INPUT_FORMAT)
                 );
             }
-            BigDecimal amount = new BigDecimal(amountStr);
+
+            /* Returns parsed arguments */
 
             return new ConsoleCommandAddExpense(
                     name,
                     dateTime,
                     description,
                     amount,
-                    category);
+                    category
+            );
         } catch (ParseException
                  | DateTimeParseException
                  | NumberFormatException
@@ -185,26 +121,18 @@ public class ConsoleParser {
         try {
             String[] argumentsArr = tokenizeCommandArguments(arguments);
 
-            Option optionExpenseIndex = new Option(
-                    "e",
-                    CONSOLE_COMMAND_VIEW_EXPENSE_ARGUMENT_EXPENSE_INDEX,
-                    true,
-                    "expense index"
-            );
-            Option optionExpenseCategory = new Option(
-                    "c",
-                    "expense-category",
-                    true,
-                    "expense category"
-            );
-            Options options = new Options();
-            options.addOption(optionExpenseIndex);
-            options.addOption(optionExpenseCategory);
-            CommandLineParser commandLineParser = new DefaultParser();
-            CommandLine commandLine = commandLineParser.parse(options, argumentsArr);
+            Options cliOptions = ConsoleParserConfigurations.getCommandViewExpenseOptions();
+            CommandLineParser cliParser = new DefaultParser();
+            CommandLine cli = cliParser.parse(cliOptions, argumentsArr);
 
-            String expenseIndexStr = commandLine.getOptionValue("expense-index");
-            String expenseCategory = commandLine.getOptionValue("expense-category");
+            String expenseIndexStr = cli.getOptionValue(
+                    ConsoleParserConfigurations.COMMAND_VIEW_EXPENSE_ARG_EXPENSE_INDEX_LONG
+            );
+            String expenseCategory = cli.getOptionValue(
+                    ConsoleParserConfigurations.COMMAND_VIEW_EXPENSE_ARG_EXPENSE_CATEGORY_LONG
+            );
+
+            /* Parses and normalizes arguments */
 
             int expenseIndex;
             if (expenseIndexStr == null) {
@@ -213,9 +141,13 @@ public class ConsoleParser {
                 expenseIndex = Integer.parseInt(expenseIndexStr);
             }
 
-            return new ConsoleCommandViewExpense(expenseIndex, expenseCategory);
-        } catch (ParseException
-                 | NumberFormatException exception) {
+            /* Returns parsed arguments */
+
+            return new ConsoleCommandViewExpense(
+                    expenseIndex,
+                    expenseCategory
+            );
+        } catch (ParseException | NumberFormatException exception) {
             throw new ConsoleParserCommandViewExpenseInvalidException(
                     Messages.CONSOLE_ERROR_COMMAND_VIEW_EXPENSE_INVALID,
                     exception
@@ -228,29 +160,28 @@ public class ConsoleParser {
         try {
             String[] argumentsArr = tokenizeCommandArguments(arguments);
 
-            Option optionExpenseIndex = new Option(
-                    "e",
-                    CONSOLE_COMMAND_DELETE_EXPENSE_ARGUMENT_EXPENSE_INDEX,
-                    true,
-                    "expense index"
+            Options cliOptions = ConsoleParserConfigurations.getCommandDeleteExpenseOptions();
+            CommandLineParser cliParser = new DefaultParser();
+            CommandLine cli = cliParser.parse(cliOptions, argumentsArr);
+
+            String expenseIndexStr = cli.getOptionValue(
+                    ConsoleParserConfigurations.COMMAND_DELETE_EXPENSE_ARG_EXPENSE_INDEX_LONG
             );
-            Options options = new Options();
-            options.addOption(optionExpenseIndex);
-            CommandLineParser commandLineParser = new DefaultParser();
-            CommandLine commandLine = commandLineParser.parse(options, argumentsArr);
 
-            String expenseIndexStr = commandLine.getOptionValue("expense-index");
+            /* Checks if mandatory arguments are provided */
 
-            // Guard clause for mandatory arguments
             if (expenseIndexStr == null) {
                 throw new ConsoleParserCommandDeleteExpenseInvalidException();
             }
 
+            /* Parses and normalizes arguments */
+
             int expenseIndex = Integer.parseInt(expenseIndexStr);
 
+            /* Returns parsed arguments */
+
             return new ConsoleCommandDeleteExpense(expenseIndex);
-        } catch (ParseException
-                 | NumberFormatException exception) {
+        } catch (ParseException | NumberFormatException exception) {
             throw new ConsoleParserCommandDeleteExpenseInvalidException(
                     Messages.CONSOLE_ERROR_COMMAND_DELETE_EXPENSE_INVALID,
                     exception
@@ -263,66 +194,40 @@ public class ConsoleParser {
         try {
             String[] argumentsArr = tokenizeCommandArguments(arguments);
 
-            Option optionExpenseIndex = new Option(
-                    "e",
-                    CONSOLE_COMMAND_EDIT_EXPENSE_ARGUMENT_EXPENSE_INDEX,
-                    true,
-                    "expense index"
-            );
-            Option optionName = new Option(
-                    "n",
-                    CONSOLE_COMMAND_EDIT_EXPENSE_ARGUMENT_NAME,
-                    true,
-                    "name"
-            );
-            Option optionDateTime = new Option(
-                    "d",
-                    CONSOLE_COMMAND_EDIT_EXPENSE_ARGUMENT_DATE_TIME,
-                    true,
-                    "date and time"
-            );
-            Option optionDescription = new Option(
-                    "t",
-                    CONSOLE_COMMAND_EDIT_EXPENSE_ARGUMENT_DESCRIPTION,
-                    true,
-                    "description"
-            );
-            Option optionAmount = new Option(
-                    "a",
-                    CONSOLE_COMMAND_EDIT_EXPENSE_ARGUMENT_AMOUNT,
-                    true,
-                    "amount"
-            );
-            Option optionCategory = new Option(
-                    "c",
-                    CONSOLE_COMMAND_EDIT_EXPENSE_ARGUMENT_CATEGORY,
-                    true,
-                    "category"
-            );
-            Options options = new Options();
-            options.addOption(optionExpenseIndex);
-            options.addOption(optionName);
-            options.addOption(optionDateTime);
-            options.addOption(optionDescription);
-            options.addOption(optionAmount);
-            options.addOption(optionCategory);
-            CommandLineParser commandLineParser = new DefaultParser();
-            CommandLine commandLine = commandLineParser.parse(options, argumentsArr);
+            Options cliOptions = ConsoleParserConfigurations.getCommandEditExpenseOptions();
+            CommandLineParser cliParser = new DefaultParser();
+            CommandLine cli = cliParser.parse(cliOptions, argumentsArr);
 
-            String expenseIndexStr = commandLine.getOptionValue(CONSOLE_COMMAND_EDIT_EXPENSE_ARGUMENT_EXPENSE_INDEX);
+            String expenseIndexStr = cli.getOptionValue(
+                    ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_EXPENSE_INDEX_LONG
+            );
 
-            // Guard clause for mandatory arguments
+            /* Checks if mandatory arguments are provided */
+
             if (expenseIndexStr == null) {
                 throw new ConsoleParserCommandEditExpenseInvalidException();
             }
 
-            String name = commandLine.getOptionValue(CONSOLE_COMMAND_EDIT_EXPENSE_ARGUMENT_NAME);
-            String dateTimeStr = commandLine.getOptionValue(CONSOLE_COMMAND_EDIT_EXPENSE_ARGUMENT_DATE_TIME);
-            String description = commandLine.getOptionValue(CONSOLE_COMMAND_EDIT_EXPENSE_ARGUMENT_DESCRIPTION);
-            String amountStr = commandLine.getOptionValue(CONSOLE_COMMAND_EDIT_EXPENSE_ARGUMENT_AMOUNT);
-            String category = commandLine.getOptionValue(CONSOLE_COMMAND_EDIT_EXPENSE_ARGUMENT_CATEGORY);
+            String name = cli.getOptionValue(
+                    ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_NAME_LONG
+            );
+            String dateTimeStr = cli.getOptionValue(
+                    ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_DATE_TIME_LONG
+            );
+            String description = cli.getOptionValue(
+                    ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_DESCRIPTION_LONG
+            );
+            String amountStr = cli.getOptionValue(
+                    ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_AMOUNT_LONG
+            );
+            String category = cli.getOptionValue(
+                    ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_CATEGORY_LONG
+            );
+
+            /* Parses and normalizes arguments */
 
             int expenseIndex = Integer.parseInt(expenseIndexStr);
+
             LocalDateTime dateTime;
             if (dateTimeStr == null) {
                 dateTime = null;
@@ -332,12 +237,15 @@ public class ConsoleParser {
                         DateTimeFormatter.ofPattern(Configurations.CONSOLE_INTERFACE_DATE_TIME_INPUT_FORMAT)
                 );
             }
+
             BigDecimal amount;
             if (amountStr == null) {
                 amount = null;
             } else {
                 amount = new BigDecimal(amountStr);
             }
+
+            /* Returns parsed arguments */
 
             return new ConsoleCommandEditExpense(
                     expenseIndex,
@@ -357,106 +265,101 @@ public class ConsoleParser {
         }
     }
 
-    private static ConsoleCommandSortExpense parseCommandSortExpense(String arguments)
-            throws ConsoleParserCommandSortExpenseInvalidTypeException {
+    private static ConsoleCommandSortExpense parseCommandSortExpense(String arguments) throws
+            ConsoleParserCommandSortExpenseInvalidTypeException {
         try {
             String[] argumentsArr = tokenizeCommandArguments(arguments);
 
-            Option optionType = new Option(
-                    "t",
-                    "type",
-                    true,
-                    "type"
+            Options cliOptions = ConsoleParserConfigurations.getCommandSortExpenseOptions();
+            CommandLineParser cliParser = new DefaultParser();
+            CommandLine cli = cliParser.parse(cliOptions, argumentsArr);
+
+            String type = cli.getOptionValue(
+                    ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE_LONG
             );
-            Option optionOrder = new Option(
-                    "o",
-                    "order",
-                    true,
-                    "Ascending/Descending"
+            String order = cli.getOptionValue(
+                    ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_ORDER_LONG
             );
-            Options options = new Options();
-            options.addOption(optionType);
-            options.addOption(optionOrder);
-            CommandLineParser commandLineParser = new DefaultParser();
-            CommandLine commandline = commandLineParser.parse(options, argumentsArr);
-            String type = commandline.getOptionValue(CONSOLE_COMMAND_SORT_EXPENSE_TYPE);
-            String order = commandline.getOptionValue(CONSOLE_COMMAND_SORT_EXPENSE_ORDER);
-            if (type == null
-                    || !(type.equalsIgnoreCase(CONSOLE_COMMAND_SORT_EXPENSE_TYPE_ALPHABETICAL)
-                    || type.equalsIgnoreCase(CONSOLE_COMMAND_SORT_EXPENSE_TYPE_DATE)
-                    || type.equalsIgnoreCase(CONSOLE_COMMAND_SORT_EXPENSE_TYPE_AMOUNT))) {
+
+            /* Checks if mandatory arguments are provided */
+
+            if (type == null || order == null) {
                 throw new ConsoleParserCommandSortExpenseInvalidTypeException();
             }
-            if (order == null
-                    || !(order.equalsIgnoreCase(CONSOLE_COMMAND_SORT_EXPENSE_ORDER_ASCENDING)
-                    || order.equalsIgnoreCase(CONSOLE_COMMAND_SORT_EXPENSE_ORDER_DESCENDING))) {
+
+            /* Checks if arguments are valid */
+
+            if (type.equalsIgnoreCase(
+                    ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE_VAL_ALPHABETICAL)
+                    || type.equalsIgnoreCase(
+                    ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE_VAL_AMOUNT)
+                    || type.equalsIgnoreCase(
+                    ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE_VAL_DATE)
+            ) {
                 throw new ConsoleParserCommandSortExpenseInvalidTypeException();
             }
-            return new ConsoleCommandSortExpense(type, order);
+
+            if (order.equalsIgnoreCase(
+                    ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_ORDER_VAL_ASCENDING)
+                    || order.equalsIgnoreCase(
+                    ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_ORDER_VAL_DESCENDING)
+            ) {
+                throw new ConsoleParserCommandSortExpenseInvalidTypeException();
+            }
+
+            /* Returns parsed arguments */
+
+            return new ConsoleCommandSortExpense(
+                    type,
+                    order
+            );
         } catch (ParseException
                  | ConsoleParserCommandSortExpenseInvalidTypeException
                  | RuntimeException exception) {
             throw new ConsoleParserCommandSortExpenseInvalidTypeException(
                     Messages.CONSOLE_ERROR_COMMAND_SORT_EXPENSE_INVALID,
-                    exception);
+                    exception
+            );
         }
     }
-              
+
     private static ConsoleCommandAddTarget parseCommandAddTarget(String arguments) throws
             ConsoleParserCommandAddTargetInvalidException {
         try {
             String[] argumentsArr = tokenizeCommandArguments(arguments);
 
-            Option optionName = new Option(
-                    "n",
-                    CONSOLE_COMMAND_ADD_TARGET_ARGUMENT_NAME,
-                    true,
-                    "name"
-            );
-            Option optionDateTime = new Option(
-                    "d",
-                    CONSOLE_COMMAND_ADD_TARGET_ARGUMENT_DATE_TIME,
-                    true,
-                    "date and time"
-            );
-            Option optionDescription = new Option(
-                    "t",
-                    CONSOLE_COMMAND_ADD_TARGET_ARGUMENT_DESCRIPTION,
-                    true,
-                    "description"
-            );
-            Option optionAmount = new Option(
-                    "a",
-                    CONSOLE_COMMAND_ADD_TARGET_ARGUMENT_AMOUNT,
-                    true,
-                    "amount"
-            );
-            Option optionCurrentAmount = new Option(
-                    "c",
-                    CONSOLE_COMMAND_ADD_TARGET_ARGUMENT_CURRENT_AMOUNT,
-                    true,
-                    "current amount"
-            );
-            Options options = new Options();
-            options.addOption(optionName);
-            options.addOption(optionDateTime);
-            options.addOption(optionDescription);
-            options.addOption(optionAmount);
-            options.addOption(optionCurrentAmount);
-            CommandLineParser commandLineParser = new DefaultParser();
-            CommandLine commandLine = commandLineParser.parse(options, argumentsArr);
+            Options cliOptions = ConsoleParserConfigurations.getCommandAddTargetOptions();
+            CommandLineParser cliParser = new DefaultParser();
+            CommandLine cli = cliParser.parse(cliOptions, argumentsArr);
 
-            String name = commandLine.getOptionValue(CONSOLE_COMMAND_ADD_TARGET_ARGUMENT_NAME);
-            String amountStr = commandLine.getOptionValue(CONSOLE_COMMAND_ADD_TARGET_ARGUMENT_AMOUNT);
-            String currentAmountStr = commandLine.getOptionValue(CONSOLE_COMMAND_ADD_TARGET_ARGUMENT_CURRENT_AMOUNT);
+            String name = cli.getOptionValue(
+                    ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_NAME_LONG
+            );
+            String amountStr = cli.getOptionValue(
+                    ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_AMOUNT_LONG
+            );
+            String currentAmountStr = cli.getOptionValue(
+                    ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_CURRENT_AMOUNT_LONG
+            );
 
-            // Guard clause for mandatory arguments
+            /* Checks if mandatory arguments are provided */
+
             if (name == null || amountStr == null || currentAmountStr == null) {
                 throw new ConsoleParserCommandAddTargetInvalidException();
             }
 
-            String dateTimeStr = commandLine.getOptionValue(CONSOLE_COMMAND_ADD_TARGET_ARGUMENT_DATE_TIME);
-            String description = commandLine.getOptionValue(CONSOLE_COMMAND_ADD_TARGET_ARGUMENT_DESCRIPTION);
+            String dateTimeStr = cli.getOptionValue(
+                    ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_DATE_TIME_LONG
+            );
+            String description = cli.getOptionValue(
+                    ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_DESCRIPTION_LONG
+            );
+
+            /* Parses and normalizes arguments */
+
+            BigDecimal amount = new BigDecimal(amountStr);
+
+            BigDecimal currentAmount = new BigDecimal(currentAmountStr);
 
             LocalDateTime dateTime;
             if (dateTimeStr == null) {
@@ -467,15 +370,16 @@ public class ConsoleParser {
                         DateTimeFormatter.ofPattern(Configurations.CONSOLE_INTERFACE_DATE_TIME_INPUT_FORMAT)
                 );
             }
-            BigDecimal amount = new BigDecimal(amountStr);
-            BigDecimal currentAmount = new BigDecimal(currentAmountStr);
+
+            /* Returns parsed arguments */
 
             return new ConsoleCommandAddTarget(
                     name,
                     dateTime,
                     description,
                     amount,
-                    currentAmount);
+                    currentAmount
+            );
         } catch (ParseException
                  | DateTimeParseException
                  | NumberFormatException
@@ -485,57 +389,42 @@ public class ConsoleParser {
                     exception
             );
         }
-    }              
-              
-    private static ConsoleCommandAddIncome parseCommandAddIncome(String arguments)
-            throws ConsoleParserCommandAddIncomeInvalidException {
+    }
+
+    private static ConsoleCommandAddIncome parseCommandAddIncome(String arguments) throws
+            ConsoleParserCommandAddIncomeInvalidException {
         try {
             String[] argumentsArr = tokenizeCommandArguments(arguments);
 
-            Option optionName = new Option(
-                    "n",
-                    CONSOLE_COMMAND_ADD_INCOME_ARGUMENT_NAME,
-                    true,
-                    "name"
-            );
-            Option optionDateTime = new Option(
-                    "d",
-                    CONSOLE_COMMAND_ADD_INCOME_ARGUMENT_DATE_TIME,
-                    true,
-                    "date and time"
-            );
-            Option optionDescription = new Option(
-                    "t",
-                    CONSOLE_COMMAND_ADD_INCOME_ARGUMENT_DESCRIPTION,
-                    true,
-                    "description"
-            );
-            Option optionAmount = new Option(
-                    "a",
-                    CONSOLE_COMMAND_ADD_INCOME_ARGUMENT_AMOUNT,
-                    true,
-                    "amount"
-            );
-            Options options = new Options();
-            options.addOption(optionName);
-            options.addOption(optionDateTime);
-            options.addOption(optionDescription);
-            options.addOption(optionAmount);
-            CommandLineParser commandLineParser = new DefaultParser();
-            CommandLine commandLine = commandLineParser.parse(options, argumentsArr);
+            Options cliOptions = ConsoleParserConfigurations.getCommandAddIncomeOptions();
+            CommandLineParser cliParser = new DefaultParser();
+            CommandLine cli = cliParser.parse(cliOptions, argumentsArr);
 
-            String name = commandLine.getOptionValue(CONSOLE_COMMAND_ADD_INCOME_ARGUMENT_NAME);
-            String amountStr = commandLine.getOptionValue(CONSOLE_COMMAND_ADD_INCOME_ARGUMENT_AMOUNT);
+            String name = cli.getOptionValue(
+                    ConsoleParserConfigurations.COMMAND_ADD_INCOME_ARG_NAME_LONG
+            );
+            String amountStr = cli.getOptionValue(
+                    ConsoleParserConfigurations.COMMAND_ADD_INCOME_ARG_AMOUNT_LONG
+            );
 
-            // Guard clause for mandatory arguments
+            /* Checks if mandatory arguments are provided */
+
             if (name == null || amountStr == null) {
                 throw new ConsoleParserCommandAddIncomeInvalidException(
                         Messages.CONSOLE_ERROR_COMMAND_ADD_INCOME_INVALID
                 );
             }
-          
-            String dateTimeStr = commandLine.getOptionValue(CONSOLE_COMMAND_ADD_INCOME_ARGUMENT_DATE_TIME);
-            String description = commandLine.getOptionValue(CONSOLE_COMMAND_ADD_INCOME_ARGUMENT_DESCRIPTION);
+
+            String dateTimeStr = cli.getOptionValue(
+                    ConsoleParserConfigurations.COMMAND_ADD_INCOME_ARG_DATE_TIME_LONG
+            );
+            String description = cli.getOptionValue(
+                    ConsoleParserConfigurations.COMMAND_ADD_INCOME_ARG_DESCRIPTION_LONG
+            );
+
+            /* Parses and normalizes arguments */
+
+            BigDecimal amount = new BigDecimal(amountStr);
 
             LocalDateTime dateTime;
             if (dateTimeStr == null) {
@@ -547,13 +436,14 @@ public class ConsoleParser {
                 );
             }
 
-            BigDecimal amount = new BigDecimal(amountStr);
+            /* Returns parsed arguments */
 
             return new ConsoleCommandAddIncome(
                     name,
                     dateTime,
                     description,
-                    amount);
+                    amount
+            );
         } catch (ParseException
                  | DateTimeParseException
                  | NumberFormatException
@@ -564,7 +454,28 @@ public class ConsoleParser {
             );
         }
     }
-              
+
+    private static String getConsoleCommand(String consoleInput) {
+        int numOperands = 2;
+
+        String[] consoleInputArr = consoleInput.split(" ", numOperands);
+
+        return consoleInputArr[0];
+    }
+
+    private static String getConsoleCommandArguments(String consoleInput) {
+        int numOperands = 2;
+
+        String[] consoleInputArr = consoleInput.split(" ", numOperands);
+        String arguments = "";
+
+        if (consoleInputArr.length == numOperands) {
+            arguments = consoleInputArr[1];
+        }
+
+        return arguments;
+    }
+
     /**
      * Parses an input read from standard input.
      *
@@ -588,30 +499,24 @@ public class ConsoleParser {
             ConsoleParserCommandSortExpenseInvalidTypeException,
             ConsoleParserCommandAddTargetInvalidException,
             ConsoleParserCommandAddIncomeInvalidException {
-        String[] consoleInputArr = consoleInput.split(" ", 2);
+        String command = getConsoleCommand(consoleInput);
+        String arguments = getConsoleCommandArguments(consoleInput);
 
-        String command = consoleInputArr[0];
-        String arguments = "";
-        int numOperands = 2;
-        if (consoleInputArr.length == numOperands) {
-            arguments = consoleInputArr[1];
-        }
-
-        if (command.equalsIgnoreCase(CONSOLE_COMMAND_BYE)) {
+        if (command.equalsIgnoreCase(ConsoleParserConfigurations.COMMAND_BYE)) {
             return parseCommandBye();
-        } else if (command.equalsIgnoreCase(CONSOLE_COMMAND_ADD_EXPENSE)) {
+        } else if (command.equalsIgnoreCase(ConsoleParserConfigurations.COMMAND_ADD_EXPENSE)) {
             return parseCommandAddExpense(arguments);
-        } else if (command.equalsIgnoreCase(CONSOLE_COMMAND_VIEW_EXPENSE)) {
+        } else if (command.equalsIgnoreCase(ConsoleParserConfigurations.COMMAND_VIEW_EXPENSE)) {
             return parseCommandViewExpense(arguments);
-        } else if (command.equalsIgnoreCase(CONSOLE_COMMAND_DELETE_EXPENSE)) {
+        } else if (command.equalsIgnoreCase(ConsoleParserConfigurations.COMMAND_DELETE_EXPENSE)) {
             return parseCommandDeleteExpense(arguments);
-        } else if (command.equalsIgnoreCase(CONSOLE_COMMAND_EDIT_EXPENSE)) {
+        } else if (command.equalsIgnoreCase(ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE)) {
             return parseCommandEditExpense(arguments);
-        } else if (command.equalsIgnoreCase(CONSOLE_COMMAND_SORT_EXPENSE)) {
+        } else if (command.equalsIgnoreCase(ConsoleParserConfigurations.COMMAND_SORT_EXPENSE)) {
             return parseCommandSortExpense(arguments);
-        } else if (command.equalsIgnoreCase(CONSOLE_COMMAND_ADD_TARGET)) {
+        } else if (command.equalsIgnoreCase(ConsoleParserConfigurations.COMMAND_ADD_TARGET)) {
             return parseCommandAddTarget(arguments);
-        } else if (command.equalsIgnoreCase(CONSOLE_COMMAND_ADD_INCOME)) {
+        } else if (command.equalsIgnoreCase(ConsoleParserConfigurations.COMMAND_ADD_INCOME)) {
             return parseCommandAddIncome(arguments);
         } else {
             throw new ConsoleParserCommandNotFoundException(Messages.CONSOLE_ERROR_COMMAND_NOT_FOUND);
