@@ -100,6 +100,7 @@ public class UI {
         System.out.println(patient);
         printLine();
     }
+
     public void printPatientEditedMessage(Patient patient) {
         System.out.print("Alright, I've modified the details of the patient!");
         System.out.println("Here are the new details of the patient: ");
@@ -107,7 +108,6 @@ public class UI {
         System.out.println(patient);
         printLine();
     }
-
 
     public void printVisitsMenuMessage() {
         System.out.println(VISIT_MAIN_MENU);
