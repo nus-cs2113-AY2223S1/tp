@@ -1,6 +1,7 @@
 package command;
 
 import appointment.AppointmentList;
+import employee.EmployeeList;
 
 public class ViewAppointmentCommand extends Command{
 
@@ -9,7 +10,7 @@ public class ViewAppointmentCommand extends Command{
     public ViewAppointmentCommand(){
     }
     @Override
-    public void execute(AppointmentList appointmentList) {
+    public void execute(AppointmentList appointmentList, EmployeeList employeeList) {
         AppointmentList.listAppointment();
     }
 

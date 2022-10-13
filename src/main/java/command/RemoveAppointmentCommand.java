@@ -1,6 +1,7 @@
 package command;
 
 import appointment.AppointmentList;
+import employee.EmployeeList;
 
 public class RemoveAppointmentCommand extends Command{
 
@@ -12,7 +13,7 @@ public class RemoveAppointmentCommand extends Command{
     }
 
     @Override
-    public void execute(AppointmentList appointmentList) {
+    public void execute(AppointmentList appointmentList, EmployeeList employeeList) {
         AppointmentList.removeAppointment(appointmentId);
     }
 

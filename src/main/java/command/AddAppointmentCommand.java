@@ -2,6 +2,7 @@ package command;
 
 import appointment.Appointment;
 import appointment.AppointmentList;
+import employee.EmployeeList;
 import service.Service;
 
 import java.time.LocalDateTime;
@@ -17,7 +18,7 @@ public class AddAppointmentCommand extends Command {
     }
 
     @Override
-    public void execute(AppointmentList appointmentList) {
+    public void execute(AppointmentList appointmentList, EmployeeList employeeList) {
         AppointmentList.addAppointment(this.appointment);
     }
 

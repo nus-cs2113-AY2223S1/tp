@@ -1,7 +1,7 @@
 package seedu.duke;
 import appointment.AppointmentList;
 import command.Command;
-
+import employee.EmployeeList;
 import java.util.Scanner;
 
 public class Duke {
@@ -9,9 +9,11 @@ public class Duke {
      * Main entry-point for the java.duke.Duke application.
      */
     private AppointmentList appointmentList;
+    private EmployeeList employeeList;
 
     public Duke() {
-        AppointmentList appointmentList = new AppointmentList();
+        this.appointmentList = new AppointmentList();
+        this.employeeList = new EmployeeList();
     }
     public static void main(String[] args) {
         new Duke().run();
@@ -30,7 +32,7 @@ public class Duke {
                 String fullCommand = readCommand();
                 showLine();
                 Command c = Parser.parse(fullCommand);
-                c.execute(appointmentList);
+                c.execute(appointmentList, employeeList);
                 isExit = c.isExit();
 //            } catch (DukeException e) {
 //                ui.displayMessage(e.getErrorMessage());
