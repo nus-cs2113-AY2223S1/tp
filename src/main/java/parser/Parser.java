@@ -48,16 +48,16 @@ public class Parser {
         switch(type) {
         case AddAppointmentCommand.COMMAND_WORD:
             return prepareAddAppointment(statement);
-        break;
         case RemoveAppointmentCommand.COMMAND_WORD:
             return prepareRemoveAppointment(statement);
-        break;
+        /*
         case AllocateAppointmentCommand.COMMAND_WORD:
             return prepareAllocateAppointment(statement);
         break;
         case SetAppointmentStatusCommand.COMMAND_WORD:
             return prepareSetAppointmentStatusCommand(statement);
             break;
+         */
         default:
             return new EndCommand();
         }
@@ -78,10 +78,8 @@ public class Parser {
         switch(type) {
         case AddServiceCommand.COMMAND_WORD:
             return prepareAddService(statement);
-        break;
         case RemoveServiceCommand.COMMAND_WORD:
             return prepareRemoveService(statement);
-        break;
         default:
             return new EndCommand();
         }
@@ -112,6 +110,7 @@ public class Parser {
         return new RemoveServiceCommand(index);
     }
 
+    /*
     public Command prepareSetAppointmentStatusCommand(String input){
         int i = input.indexOf(" i/");
         int s = input.indexOf(" s/");
@@ -127,7 +126,6 @@ public class Parser {
         return new AllocateApointmentCommand(index, status);
     }
 
-
     public Command prepareAllocateAppointment(String input){
         int i = input.indexOf(" i/");
         int n = input.indexOf(" n/");
@@ -142,6 +140,8 @@ public class Parser {
 
         return new AllocateApointmentCommand(index, name);
     }
+
+     */
 
     private int numOfSpace(String input){
         int num = 0;
@@ -165,6 +165,7 @@ public class Parser {
         return new RemoveAppointmentCommand(index);
     }
 
+    /*
     public Command prepareRemovePet(String input){
         int index = indexOfRemove(input);
         if(index == -1){
@@ -174,6 +175,7 @@ public class Parser {
 
         return new RemovePetCommand(index);
     }
+     */
 
     public int indexOfRemove(String input){
         if(!input.contains(" i/")){
@@ -199,11 +201,11 @@ public class Parser {
             return new EndCommand();
         }
 
-        String service = input.substring(s + lengthOfSignature, p);
+        // String service = input.substring(s + lengthOfSignature, p);
         String petName = input.substring(p + lengthOfSignature, d);
         String appointmentDate = input.substring(d + lengthOfSignature);
 
-        return new AddApointmentCommand(petName, appointmentDate, service);
+        return new AddAppointmentCommand(petName, appointmentDate);
     }
 
     public boolean isInt(String val){
@@ -227,14 +229,14 @@ public class Parser {
 
         String name = input.substring(startOfN + lengthOfSignature, startOfS);
         String status = input.substring(startOfS + lengthOfSignature);
-        return new AddPetCommand(name, status);
+        return new AddPetCommand(name, status, true);
     }
 
 
     public Command parsePet(String input){
         if(!input.contains(" ")){
             if(input.equals("view")){
-                return new AppointmentViewCommand();
+                return new ViewPetCommand();
             }
             System.out.println("input invalid");
             return new EndCommand();
@@ -245,16 +247,14 @@ public class Parser {
         switch(type) {
         case AddPetCommand.COMMAND_WORD:
             return prepareAddPet(statement);
-            break;
-        case RemoveAppointmentCommand.COMMAND_WORD:
+        /*case RemoveAppointmentCommand.COMMAND_WORD:
             return prepareRemovePet(statement);
-            break;
-        case ListPetsCommand.COMMAND_WORD:
-            return new ListPetsCommand();
-            break;
+
+
         case AllocateAppointmentCommand.COMMAND_WORD:
             return prepareAllocateAppointment(statement);
-            break;
+
+         */
         default:
             System.out.println("input invalid");
             return new EndCommand();
@@ -275,10 +275,8 @@ public class Parser {
         switch(type) {
         case AddEmployeeCommand.COMMAND_WORD:
             return prepareAddEmployee(statement);
-            break;
         case RemoveEmployeeCommand.COMMAND_WORD:
             return prepareRemoveEmployee(statement);
-            break;
         default:
             System.out.println("input invalid");
             return new EndCommand();

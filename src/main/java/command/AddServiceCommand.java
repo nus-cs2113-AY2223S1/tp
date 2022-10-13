@@ -7,6 +7,7 @@ import service.ServiceList;
 
 public class AddServiceCommand extends Command{
 
+    public static final String COMMAND_WORD = "add";
     private final Service service;
 
     public AddServiceCommand(String serviceDescription) {
@@ -14,7 +15,7 @@ public class AddServiceCommand extends Command{
     }
 
     @Override
-    public void execute(AppointmentList appointmentList, EmployeeList employeeList, ServiceList serviceList) {
+    public void execute() {
         ServiceList.addService(service);
     }
 

@@ -5,14 +5,14 @@ import employee.EmployeeList;
 import service.ServiceList;
 
 public class RemoveEmployeeCommand extends Command{
-
+    public static final String COMMAND_WORD = "remove";
     private int employeeId;
 
     public RemoveEmployeeCommand(int employeeId){
         this.employeeId = employeeId;
     }
     @Override
-    public void execute(AppointmentList appointmentList, EmployeeList employeeList, ServiceList serviceList) {
+    public void execute() {
         EmployeeList.removeEmployee(employeeId);
     }
 

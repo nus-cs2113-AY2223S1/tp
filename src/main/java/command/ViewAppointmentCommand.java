@@ -11,7 +11,7 @@ public class ViewAppointmentCommand extends Command{
     public ViewAppointmentCommand(){
     }
     @Override
-    public void execute(AppointmentList appointmentList, EmployeeList employeeList, ServiceList serviceList) {
+    public void execute() {
         AppointmentList.listAppointment();
     }
 

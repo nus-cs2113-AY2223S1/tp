@@ -1,15 +1,13 @@
 package command;
 
+import appointment.AppointmentList;
 import pet.Pet;
 import pet.PetList;
 
-public class viewPetCommand {
+public class ViewPetCommand extends Command{
     private PetList Pets;
 
-    public viewPetCommand(PetList Pets){
-        this.Pets = Pets;
-    }
-
+    @Override
     public void execute() {
         int petIndex;
         for (int i = 0; i < Pet.numOfPets; i++) {
@@ -17,5 +15,9 @@ public class viewPetCommand {
             Pet currPet = Pets.petList.get(i);
             System.out.println(String.format("%d. %s", petIndex, currPet.toString()));
         }
+    }
+    @Override
+    public boolean isExit() {
+        return false;
     }
 }
