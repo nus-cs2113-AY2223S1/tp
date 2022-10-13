@@ -22,11 +22,9 @@ class FlightListTest {
         try {
             Command testCommand = parserTest.parse(deleteLineInputWithError);
             testCommand.execute(testFlightList, deleteLineInputWithError);
-            fail();
         } catch (Exception e) {
             assertEquals(e.getMessage(), e.getMessage());
         }
-
     }
 
     @Test
