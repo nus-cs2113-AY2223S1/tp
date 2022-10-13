@@ -25,8 +25,8 @@ public class Parser {
         case "pet":
             return parsePet(statement);
             break;
-        case "staff":
-            return parseStaff(statement);
+        case "employee":
+            return parseEmployee(statement);
             break;
         default:
             System.out.println("input invalid");
@@ -49,8 +49,8 @@ public class Parser {
         case AddAppointmentCommand.COMMAND_WORD:
             return prepareAddAppointment(statement);
         break;
-        case RemoveAppointmentCommand.COMMAND_WORD:
-            return prepareRemoveAppointment(statement);
+        case DeleteAppointmentCommand.COMMAND_WORD:
+            return prepareDeleteAppointment(statement);
         break;
         case ViewAppointmentCommand.COMMAND_WORD:
             return new ViewAppointmentCommand();
@@ -58,13 +58,42 @@ public class Parser {
         case AllocateAppointmentCommand.COMMAND_WORD:
             return prepareAllocateAppointment(statement);
         break;
+        case SetAppointmentStatusCommand.COMMAND_WORD:
+            return prepareSetAppointmentStatusCommand(statement);
         default:
             return new ExitCommand();
         }
     }
 
-    public command prepareAllocateAppointment(String input){
+    public command prepareSetAppointmentStatusCommand(String input){
+        int i = input.indexOf(" i/");
+        int s = input.indexOf(" s/");
 
+        if(i > s || i == -1 || s == -1){
+            System.out.println("invalid input");
+            return new ExitCommand();
+        }
+
+        String index = input.substring(i + lengthOfSignature, s);
+        String status = input.substring(s + lengthOfSignature);
+
+        return new AllocateApointmentCommand(index, status);
+    }
+
+
+    public command prepareAllocateAppointment(String input){
+        int i = input.indexOf(" i/");
+        int n = input.indexOf(" n/");
+
+        if(i > n || i == -1 || n == -1){
+            System.out.println("invalid input");
+            return new ExitCommand();
+        }
+
+        String index = input.substring(i + lengthOfSignature, n);
+        String name = input.substring(n + lengthOfSignature);
+
+        return new AllocateApointmentCommand(index, name);
     }
 
     private int numOfSpace(String input){
@@ -79,27 +108,27 @@ public class Parser {
     }
 
 
-    public command prepareRemoveAppointment(String input){
-        int index = indexOfRemove(input);
+    public command prepareDeleteAppointment(String input){
+        int index = indexOfDelete(input);
         if(index == -1){
             System.out.println("input invalid");
             return new ExitCommand();
         }
 
-        return new RemoveAppointmentCommand(index);
+        return new DeleteAppointmentCommand(index);
     }
 
-    public command prepareRemovePet(String input){
-        int index = indexOfRemove(input);
+    public command prepareDeletePet(String input){
+        int index = indexOfDelete(input);
         if(index == -1){
             System.out.println("input invalid");
             return new ExitCommand();
         }
 
-        return new RemovePetCommand(index);
+        return new DeletePetCommand(index);
     }
 
-    public int indexOfRemove(String input){
+    public int indexOfDelete(String input){
         if(!input.contains(" i/")){
             return -1;
         }
@@ -172,17 +201,67 @@ public class Parser {
         switch(type) {
         case AddPetCommand.COMMAND_WORD:
             return prepareAddPet(statement);
-        break;
-        case RemoveAppointmentCommand.COMMAND_WORD:
-            return prepareRemovePet(statement);
-        break;
+            break;
+        case DeleteAppointmentCommand.COMMAND_WORD:
+            return prepareDeletePet(statement);
+            break;
         case ListPetsCommand.COMMAND_WORD:
             return new ListPetsCommand();
+            break;
+        case AllocateAppointmentCommand.COMMAND_WORD:
+            return prepareAllocateAppointment(statement);
             break;
         default:
             System.out.println("input invalid");
             return new ExitCommand();
         }
+    }
+
+    public command parseEmployee(String input){
+        if(!input.contains(" ")){
+            if(input == "view"){
+                return new ViewEmployeeCommand();
+            }
+            System.out.println("input invalid");
+            return new ExitCommand();
+        }
+
+        String type = input.substring(0,input.indexOf(" "));
+        String statement = input.substring(input.indexOf(" ")).trim();
+        switch(type) {
+        case AddEmployeeCommand.COMMAND_WORD:
+            return prepareAddEmployee(statement);
+            break;
+        case DeleteEmployeeCommand.COMMAND_WORD:
+            return prepareDeleteEmployee(statement);
+            break;
+        default:
+            System.out.println("input invalid");
+            return new ExitCommand();
+        }
+    }
+
+    public command prepareAddEmployee(String statement){
+        int startOfN = input.indexOf(" n/");
+
+        if(startOfN == -1){
+            System.out.println("input invalid");
+            return new ExitCommand();
+        }
+
+        String name = input.substring(startOfN + lengthOfSignature);
+        return new AddEmployeeCommand(name);
+    }
+
+
+    public command prepareDeleteEmployee(String input){
+        int index = indexOfDelete(input);
+        if(index == -1){
+            System.out.println("input invalid");
+            return new ExitCommand();
+        }
+
+        return new DeleteEmployeeCommand(index);
     }
 
 
