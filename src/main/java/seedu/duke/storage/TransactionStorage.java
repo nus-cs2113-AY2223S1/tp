@@ -28,7 +28,7 @@ public class TransactionStorage extends Storage {
     }
 
     /**
-     * Read the tasks from a given file.
+     * Read the transactions from a given file.
      *
      * @return The list of transactions stored in the file.
      * @throws TransactionFileNotFoundException If the file cannot be found.
