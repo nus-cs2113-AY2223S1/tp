@@ -22,10 +22,13 @@ public class Storage {
     public static void createDataFile() {
         try {
             File file = new File(DATA_FILE_PATH);
+            if (!file.getParentFile().mkdirs()) {
+                Ui.showMessage("Error creating parent file");
+            }
             if (file.createNewFile()) {
-                Ui.printFilePath(file, DATA_FILE_PATH);
+                Ui.printFilePath(true, DATA_FILE_PATH);
             } else {
-                Ui.printFilePath(file, DATA_FILE_PATH);
+                Ui.printFilePath(false, DATA_FILE_PATH);
             }
         } catch (IOException ioException) {
             Ui.showMessage("Error creating data file");
