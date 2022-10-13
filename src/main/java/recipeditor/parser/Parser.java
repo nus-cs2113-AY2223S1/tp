@@ -9,15 +9,16 @@ import recipeditor.command.ExitCommand;
 import recipeditor.command.InvalidCommand;
 import recipeditor.command.ViewCommand;
 
+import recipeditor.recipe.Recipe;
+import recipeditor.storage.Storage;
 import recipeditor.ui.AddMode;
 import recipeditor.ui.Ui;
 
 public class Parser {
 
-    public Command parseCommand(String input) {
+    public static Command parseCommand(String input) {
         String[] parsed = input.split(" ");
         String commandWord = parsed[0].toLowerCase();
-        //String argument = input.replace(commandWord, ""); TODO: what is this
 
         switch (commandWord) {
         case AddCommand.COMMAND_TYPE:
@@ -33,7 +34,7 @@ public class Parser {
                 return new DeleteCommand(index);
             } catch (Exception e) {
                 System.out.format("Exception: Wrong command Format%n"
-                        + "Try the command in correct format: mark <index of task>%n");
+                        + "Try the command in correct format: delete <index of task>%n");
                 return new InvalidCommand();
             }
 
@@ -53,10 +54,12 @@ public class Parser {
         }
     }
 
-    private Command parseAddCommand() {
+    private static Command parseAddCommand() {
         AddMode add = new AddMode(); // Switch to Add Mode in here
         add.enterAddMode();
         add.exitAddMode();
+        Recipe addedRecipe = add.getRecipe();
+        Storage.loadRecipeToDataFile(addedRecipe);
         Ui.showMessage("Is the recipe valid? " + String.valueOf(add.isValid));
         return new AddCommand(add.isValid, add.addedRecipe); // Pass validty and potential recipe to AddCommand
     }
@@ -69,7 +72,7 @@ public class Parser {
         return new InvalidCommand();
     }
 
-    private void checkForExcessArgument(String[] args, int length)
+    private static void checkForExcessArgument(String[] args, int length)
             throws ExcessArgumentException {
         if (args.length > length) {
             throw new ExcessArgumentException();
