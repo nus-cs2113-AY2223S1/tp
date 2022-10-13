@@ -52,8 +52,8 @@ public class Parser {
         case AddAppointmentCommand.COMMAND_WORD:
             return prepareAddAppointment(statement);
         break;
-        case DeleteAppointmentCommand.COMMAND_WORD:
-            return prepareDeleteAppointment(statement);
+        case RemoveAppointmentCommand.COMMAND_WORD:
+            return prepareRemoveAppointment(statement);
         break;
         case AllocateAppointmentCommand.COMMAND_WORD:
             return prepareAllocateAppointment(statement);
@@ -91,7 +91,7 @@ public class Parser {
     }
 
     public command prepareRemoveService(String input){
-        int index = indexOfDelete(input);
+        int index = indexOfRemove(input);
         if(index == -1){
             System.out.println("input invalid");
             return new ExitCommand();
@@ -143,27 +143,27 @@ public class Parser {
     }
 
 
-    public command prepareDeleteAppointment(String input){
-        int index = indexOfDelete(input);
+    public command prepareRemoveAppointment(String input){
+        int index = indexOfRemove(input);
         if(index == -1){
             System.out.println("input invalid");
             return new ExitCommand();
         }
 
-        return new DeleteAppointmentCommand(index);
+        return new RemoveAppointmentCommand(index);
     }
 
-    public command prepareDeletePet(String input){
-        int index = indexOfDelete(input);
+    public command prepareRemovePet(String input){
+        int index = indexOfRemove(input);
         if(index == -1){
             System.out.println("input invalid");
             return new ExitCommand();
         }
 
-        return new DeletePetCommand(index);
+        return new RemovePetCommand(index);
     }
 
-    public int indexOfDelete(String input){
+    public int indexOfRemove(String input){
         if(!input.contains(" i/")){
             return -1;
         }
@@ -237,8 +237,8 @@ public class Parser {
         case AddPetCommand.COMMAND_WORD:
             return prepareAddPet(statement);
             break;
-        case DeleteAppointmentCommand.COMMAND_WORD:
-            return prepareDeletePet(statement);
+        case RemoveAppointmentCommand.COMMAND_WORD:
+            return prepareRemovePet(statement);
             break;
         case ListPetsCommand.COMMAND_WORD:
             return new ListPetsCommand();
@@ -267,8 +267,8 @@ public class Parser {
         case AddEmployeeCommand.COMMAND_WORD:
             return prepareAddEmployee(statement);
             break;
-        case DeleteEmployeeCommand.COMMAND_WORD:
-            return prepareDeleteEmployee(statement);
+        case RemoveEmployeeCommand.COMMAND_WORD:
+            return prepareRemoveEmployee(statement);
             break;
         default:
             System.out.println("input invalid");
@@ -289,14 +289,14 @@ public class Parser {
     }
 
 
-    public command prepareDeleteEmployee(String input){
-        int index = indexOfDelete(input);
+    public command prepareRemoveEmployee(String input){
+        int index = indexOfRemove(input);
         if(index == -1){
             System.out.println("input invalid");
             return new ExitCommand();
         }
 
-        return new DeleteEmployeeCommand(index);
+        return new RemoveEmployeeCommand(index);
     }
 
 
