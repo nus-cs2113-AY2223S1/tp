@@ -56,9 +56,11 @@ public class CommandAddClientTest {
 
     @Test
     public void execute() {
-        //Testing Case 1 (With Email)
         int clientListSizeByCounting = clientList.getCurrentListSize();
+
+        //Testing Case 1 (With Email)
         new CommandAddClient(CLIENT_ONE_DETAILS).execute(ui, storage, propertyList, clientList, pairingList);
+        assertEquals(clientList.getCurrentListSize(), ++clientListSizeByCounting);
         assertEquals(CLIENT_ONE_NAME, clientList.getClientList().get(clientList.getCurrentListSize() - 1)
                 .getClientName());
         assertEquals(CLIENT_ONE_CONTACT_NUMBER, clientList.getClientList().get(clientList.getCurrentListSize() - 1)
@@ -69,10 +71,10 @@ public class CommandAddClientTest {
                 .getClientBudgetPerMonth());
         assertEquals(CLIENT_ONE_SUMMARY, clientList.getClientList().get(clientList.getCurrentListSize() - 1)
                 .toString());
-        assertEquals(clientList.getCurrentListSize(), ++clientListSizeByCounting);
 
         //Testing Case 2 (Without Email)
         new CommandAddClient(CLIENT_TWO_DETAILS).execute(ui, storage, propertyList, clientList, pairingList);
+        assertEquals(clientList.getCurrentListSize(), ++clientListSizeByCounting);
         assertEquals(CLIENT_TWO_NAME, clientList.getClientList().get(clientList.getCurrentListSize() - 1)
                 .getClientName());
         assertEquals(CLIENT_TWO_CONTACT_NUMBER, clientList.getClientList().get(clientList.getCurrentListSize() - 1)
@@ -83,6 +85,5 @@ public class CommandAddClientTest {
                 .getClientBudgetPerMonth());
         assertEquals(CLIENT_TWO_SUMMARY, clientList.getClientList().get(clientList.getCurrentListSize() - 1)
                 .toString());
-        assertEquals(clientList.getCurrentListSize(), ++clientListSizeByCounting);
     }
 }
