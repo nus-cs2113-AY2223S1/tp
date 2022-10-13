@@ -14,9 +14,10 @@ public class AddAppointmentCommand extends Command {
 
     private final Appointment appointment;
 
-    public AddAppointmentCommand(String petName, String appointmentDate, String serviceName){
-        Service service = new Service(serviceName);
-        this.appointment = new Appointment(petName, appointmentDate, service);
+    // public AddAppointmentCommand(String petName, String appointmentDate, String serviceName){
+    public AddAppointmentCommand(String petName, String appointmentDate){
+        // Service service = new Service(serviceName);
+        this.appointment = new Appointment(petName, appointmentDate);
     }
 
     @Override

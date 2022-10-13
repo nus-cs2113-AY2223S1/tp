@@ -15,17 +15,18 @@ public class Appointment {
     //    private LocalDateTime appointmentDate;
     private String appointmentDate;
     private AppointmentStatus appointmentStatus;
-    private Service service;
+    // private Service service;
 
     // Service class not implemented yet
     // How to create a LocalDateTime:
     // LocalDateTime newDate = LocalDateTime.of(2021, Month.NOVEMBER, 19, 1, 1, 45);
-    public Appointment(String petName, String appointmentDate, Service service) {
+    // public Appointment(String petName, String appointmentDate, Service service) {
+    public Appointment(String petName, String appointmentDate) {
         this.appointmentId = ++id;
         this.petName = petName;
         this.appointmentStatus = AppointmentStatus.PENDING;
         this.appointmentDate = appointmentDate;
-        this.service = service;
+        // this.service = service;
     }
 
     public void setAppointmentStatus(AppointmentStatus appointmentStatus) {

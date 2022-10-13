@@ -6,6 +6,7 @@ import employee.EmployeeList;
 import service.ServiceList;
 
 public class AddEmployeeCommand extends Command{
+    public static final String COMMAND_WORD = "add";
 
     private final Employee employee;
 

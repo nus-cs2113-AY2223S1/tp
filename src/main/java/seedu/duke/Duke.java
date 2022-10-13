@@ -4,22 +4,15 @@ import command.Command;
 import employee.EmployeeList;
 import service.ServiceList;
 import parser.Parser;
+
 import java.util.Scanner;
 
 public class Duke {
     /**
      * Main entry-point for the java.duke.Duke application.
      */
-    private AppointmentList appointmentList;
-    private EmployeeList employeeList;
-    private ServiceList serviceList;
+    private Parser parser;
 
-
-    public Duke() {
-        this.appointmentList = new AppointmentList();
-        this.employeeList = new EmployeeList();
-        this.serviceList = new ServiceList();
-    }
     public static void main(String[] args) {
         new Duke().run();
     }
@@ -36,8 +29,8 @@ public class Duke {
             try {
                 String fullCommand = readCommand();
                 showLine();
-                Command c = Parser.parseCommand(fullCommand);
-                c.execute(appointmentList, employeeList, serviceList);
+                Command c = parser.parseCommand(fullCommand);
+                c.execute();
                 isExit = c.isExit();
 //            } catch (DukeException e) {
 //                ui.displayMessage(e.getErrorMessage());
