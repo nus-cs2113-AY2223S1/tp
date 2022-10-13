@@ -44,7 +44,6 @@ public class CommandAddPropertyTest {
 
     @Test
     public void execute() {
-        int propertyListSizeByCounting = propertyList.getCurrentListSize();
         new CommandAddProperty(PROPERTY_DETAILS).execute(ui, storage, propertyList, clientList, pairingList);
         assertEquals(LANDLORD_NAME, propertyList.getPropertyList().get(propertyList.getCurrentListSize() - 1)
                 .getLandlordName());
@@ -56,6 +55,7 @@ public class CommandAddPropertyTest {
                 .getUnitType());
         assertEquals(PROPERTY_SUMMARY, propertyList.getPropertyList().get(propertyList.getCurrentListSize() - 1)
                 .toString());
+        int propertyListSizeByCounting = propertyList.getCurrentListSize();
         assertEquals(propertyList.getCurrentListSize(), ++propertyListSizeByCounting);
     }
 }
