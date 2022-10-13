@@ -1,5 +1,7 @@
 package appointment;
 
+import service.Service;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
