@@ -1,30 +1,42 @@
-package seedu.moneygowhere.data.target;
+package seedu.moneygowhere.commands;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 /**
- * Stores data associated with a target.
+ * Stores the edit-expense command and its arguments.
  */
 @SuppressWarnings("unused")
-public class Target {
+public class ConsoleCommandEditExpense extends ConsoleCommand {
+    private int expenseIndex;
     private String name;
     private LocalDateTime dateTime;
     private String description;
     private BigDecimal amount;
-    private BigDecimal currentAmount;
+    private String category;
 
-    public Target(
+    public ConsoleCommandEditExpense(
+            int expenseIndex,
             String name,
             LocalDateTime dateTime,
             String description,
             BigDecimal amount,
-            BigDecimal currentAmount) {
+            String category
+    ) {
+        this.expenseIndex = expenseIndex;
         this.name = name;
         this.dateTime = dateTime;
         this.description = description;
         this.amount = amount;
-        this.currentAmount = currentAmount;
+        this.category = category;
+    }
+
+    public int getExpenseIndex() {
+        return expenseIndex;
+    }
+
+    public void setExpenseIndex(int expenseIndex) {
+        this.expenseIndex = expenseIndex;
     }
 
     public String getName() {
@@ -59,12 +71,11 @@ public class Target {
         this.amount = amount;
     }
 
-    public BigDecimal getCurrentAmount() {
-        return currentAmount;
+    public String getCategory() {
+        return category;
     }
 
-    public void setCurrentAmount(BigDecimal currentAmount) {
-        this.currentAmount = currentAmount;
+    public void setCategory(String category) {
+        this.category = category;
     }
 }
-
