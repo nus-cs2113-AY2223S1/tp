@@ -117,11 +117,7 @@ public class SearchTest {
         List<Module> searchResult = SearchModuleCommand.filterModuleSearch(toSearchModuleCode, toSearchLevel,
                 toSearchSemester, toSearchModuleTitle);
         int numberOfFilteredModulesInSearchResult = searchResult.size();
-        int expectedNumberOfFilteredModules = 8;
+        int expectedNumberOfFilteredModules = 5;
         assertEquals(expectedNumberOfFilteredModules, numberOfFilteredModulesInSearchResult);
     }
-
-
-
-
 }
