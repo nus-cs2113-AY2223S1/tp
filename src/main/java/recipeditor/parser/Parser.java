@@ -26,7 +26,6 @@ public class Parser {
         case ExitCommand.COMMAND_TYPE:
             return new ExitCommand();
         case DeleteCommand.COMMAND_TYPE:
-            return parseListAlterCommand(parsed, commandWord);
         case ViewCommand.COMMAND_TYPE:
             return parseListAlterCommand(parsed, commandWord);
         default:
@@ -45,7 +44,7 @@ public class Parser {
         return new AddCommand(add.isValid, add.addedRecipe); // Pass validty and potential recipe to AddCommand
     }
 
-    private Command parseListAlterCommand(String[] parsed, String commandWord) {
+    private static Command parseListAlterCommand(String[] parsed, String commandWord) {
         if (parsed.length == 2) {
             try {
                 int index = Integer.parseInt(parsed[1]) - 1; // to account for 0-based indexing in recipelist
