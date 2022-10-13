@@ -32,17 +32,18 @@ public class SearchModuleCommand extends Command {
         toSearchModuleTitle = params.getOrDefault("title", null);
         toSearchLevel = params.getOrDefault("level", null);
         toSearchSemester = params.getOrDefault("sem", null);
+
+        // assert that at least module code or module title is provided
+        assert toSearchModuleCode != null || toSearchModuleTitle != null : "At least module code or module title is required";
     
         List<Module> searchResult = filterModuleSearch(toSearchModuleCode, toSearchLevel, toSearchSemester, toSearchModuleTitle);
 
-        // size of searchResult
-        int resultSize = searchResult.size();
         ui.addMessage("Search Result:");
 
         if (searchResult.size() == 0) {
             ui.addMessage("No module found");
         } else {
-            ui.addMessage("Total " + resultSize + " module(s) found\n");
+            ui.addMessage("Total " + searchResult.size() + " module(s) found\n");
             for (int i = 0; i < searchResult.size(); i++) {
                 ui.addMessage(searchResult.get(i).moduleCode + " " + searchResult.get(i).title);
             }
