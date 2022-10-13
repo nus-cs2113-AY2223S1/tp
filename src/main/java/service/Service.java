@@ -4,8 +4,8 @@ public class Service {
     private int serviceId;
     private String serviceDescription;
 
-    public Service(String employeeName) {
-        this.serviceDescription = employeeName;
+    public Service(String serviceDescription) {
+        this.serviceDescription = serviceDescription;
     }
 
     public int getServiceId() {
