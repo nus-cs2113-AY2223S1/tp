@@ -10,8 +10,7 @@ import seedu.duke.command.InvalidModuleCommand;
 import seedu.duke.command.UnknownCommand;
 import seedu.duke.command.ViewTimetableCommand;
 import seedu.duke.command.SelectSlotCommand;
-import seedu.duke.command.SearchModuleCodeCommand;
-import seedu.duke.command.SearchModuleNameCommand;
+import seedu.duke.command.SearchModuleCommand;
 
 import java.util.Map;
 import java.util.TreeMap;
@@ -22,8 +21,8 @@ public class Parser {
     public static Command parse(String userInput) {
         String[] keywords = userInput.split("\\s+");
         switch (keywords[0]) {
-        case (SearchModuleNameCommand.COMMAND_WORD):
-            return searchCommand(keywords, userInput);
+        case (SearchModuleCommand.COMMAND_WORD):
+            return searchCommand(userInput);
         case (AddModuleCommand.COMMAND_WORD):
             return addDeleteCommand(keywords, new AddModuleCommand(keywords));
         case (DeleteModuleCommand.COMMAND_WORD):
@@ -82,14 +81,8 @@ public class Parser {
         return isTwoWordsCommand(keywords) && isValidModuleCode(keywords[1]);
     }
 
-    public static Command searchCommand(String[] keywords, String userInput) {
-        if (isMultiWordsCommand(keywords) && !containsValidModuleCode(keywords)) {
-            return new SearchModuleNameCommand(keywords);
-        } else if (isValidTwoWordCommand(keywords)) {
-            return new SearchModuleCodeCommand(userInput);
-        } else {
-            return determineWrongCommand(keywords);
-        }
+    public static Command searchCommand(String userInput) {
+        return new SearchModuleCommand(userInput);
     }
 
     /**
