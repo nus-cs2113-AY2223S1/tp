@@ -672,7 +672,7 @@ public class Parser {
             ClientAlreadyPairedException, AlreadyPairedException {
         int clientIndex = pairUnpairDetails.get(0);
         int propertyIndex = pairUnpairDetails.get(1);
-        checkForPairingListIndexOutOfBounds(clientIndex, propertyIndex);
+        checkForClientPropertyListIndexOutOfBounds(clientIndex, propertyIndex);
 
         Client client = clientList.getClientList().get(clientIndex);
         Property property = propertyList.getPropertyList().get(propertyIndex);
@@ -690,14 +690,17 @@ public class Parser {
             NoExistingPairException {
         int clientIndex = pairUnpairDetails.get(0);
         int propertyIndex = pairUnpairDetails.get(1);
-        checkForPairingListIndexOutOfBounds(clientIndex, propertyIndex);
+        checkForClientPropertyListIndexOutOfBounds(clientIndex, propertyIndex);
+
         Client client = clientList.getClientList().get(clientIndex);
-        if (!pairingList.isClientPairedWithProperty(client)) {
+        Property property = propertyList.getPropertyList().get(propertyIndex);
+
+        if (!pairingList.isAlreadyPaired(client, property)) {
             throw new NoExistingPairException();
         }
     }
 
-    private void checkForPairingListIndexOutOfBounds(int clientIndex, int propertyIndex) throws InvalidIndexException {
+    private void checkForClientPropertyListIndexOutOfBounds(int clientIndex, int propertyIndex) throws InvalidIndexException {
         checkForClientListIndexOutOfBounds(clientIndex);
         checkForPropertyListIndexOutOfBounds(propertyIndex);
     }
