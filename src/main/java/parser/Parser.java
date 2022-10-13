@@ -82,6 +82,9 @@ public class Parser {
         case RemoveServiceCommand.COMMAND_WORD:
             return prepareRemoveService(statement);
         break;
+        case ViewServiceCommand.COMMAND_WORD:
+            return new ViewServiceCommand();
+        break;
         default:
             return new EndCommand();
         }
@@ -98,7 +101,6 @@ public class Parser {
         String description = input.substring(d + lengthOfSignature);
 
         return new AddServiceCommand(description);
-
     }
 
 
@@ -203,7 +205,7 @@ public class Parser {
         String petName = input.substring(p + lengthOfSignature, d);
         String appointmentDate = input.substring(d + lengthOfSignature);
 
-        return new AddApointmentCommand(petName, appointmentDate, service);
+        return new AddAppointmentCommand(petName, appointmentDate, service);
     }
 
     public boolean isInt(String val){
@@ -234,7 +236,7 @@ public class Parser {
     public Command parsePet(String input){
         if(!input.contains(" ")){
             if(input.equals("view")){
-                return new AppointmentViewCommand();
+                return new ViewPetCommand();
             }
             System.out.println("input invalid");
             return new EndCommand();
@@ -246,14 +248,8 @@ public class Parser {
         case AddPetCommand.COMMAND_WORD:
             return prepareAddPet(statement);
             break;
-        case RemoveAppointmentCommand.COMMAND_WORD:
+        case RemovePetCommand.COMMAND_WORD:
             return prepareRemovePet(statement);
-            break;
-        case ListPetsCommand.COMMAND_WORD:
-            return new ListPetsCommand();
-            break;
-        case AllocateAppointmentCommand.COMMAND_WORD:
-            return prepareAllocateAppointment(statement);
             break;
         default:
             System.out.println("input invalid");
@@ -278,6 +274,9 @@ public class Parser {
             break;
         case RemoveEmployeeCommand.COMMAND_WORD:
             return prepareRemoveEmployee(statement);
+            break;
+        case ViewEmployeeCommand.COMMAND_WORD:
+            return new ViewEmployeeCommand();
             break;
         default:
             System.out.println("input invalid");
