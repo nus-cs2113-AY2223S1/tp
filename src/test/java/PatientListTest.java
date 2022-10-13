@@ -64,9 +64,14 @@ public class PatientListTest {
     }
 
     @Test
-    void findPatient_PatientDoesNotExist() {
+    void findPatient_emptyList() {
         PatientList patientList = new PatientList();
         assertNull(patientList.findPatient("Jack"));
+    }
+
+    @Test
+    void findPatient_PatientDoesNotExist() {
+        PatientList patientList = new PatientList();
         patientList.addPatient("Jack", "12-10-2001", "M", "T1234");
         patientList.addPatient("Jill", "10-10-2001", "F", "T1244");
         assertNull(patientList.findPatient("Michael"));
