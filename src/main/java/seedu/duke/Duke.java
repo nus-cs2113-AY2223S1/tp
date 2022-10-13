@@ -3,7 +3,7 @@ import appointment.AppointmentList;
 import command.Command;
 import employee.EmployeeList;
 import service.ServiceList;
-
+import parser.Parser;
 import java.util.Scanner;
 
 public class Duke {
@@ -35,7 +35,7 @@ public class Duke {
             try {
                 String fullCommand = readCommand();
                 showLine();
-                Command c = Parser.parse(fullCommand);
+                Command c = Parser.parseCommand(fullCommand);
                 c.execute(appointmentList, employeeList, serviceList);
                 isExit = c.isExit();
 //            } catch (DukeException e) {
