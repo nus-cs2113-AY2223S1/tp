@@ -3,12 +3,12 @@ package command;
 import pet.Pet;
 import pet.PetList;
 
-public class changePetStatusCommand {
+public class ChangePetStatusCommand {
     private PetList Pets;
     private boolean isHealthy;
     private int index;
 
-    public changePetStatusCommand(PetList Pets, boolean isHealthy, int index){
+    public ChangePetStatusCommand(PetList Pets, boolean isHealthy, int index){
         this.Pets = Pets;
         this.isHealthy = isHealthy;
         this.index = index;

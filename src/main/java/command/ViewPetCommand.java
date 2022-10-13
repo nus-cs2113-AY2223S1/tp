@@ -3,10 +3,10 @@ package command;
 import pet.Pet;
 import pet.PetList;
 
-public class viewPetCommand {
+public class ViewPetCommand {
     private PetList Pets;
 
-    public viewPetCommand(PetList Pets){
+    public ViewPetCommand(PetList Pets){
         this.Pets = Pets;
     }
 
