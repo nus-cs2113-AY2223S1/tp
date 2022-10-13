@@ -49,7 +49,6 @@ public class Parser {
             break;
         
         case NT:
-            break;
         
         default:
             logger.log(Level.WARNING, "An unrecognised command was given by the user.");

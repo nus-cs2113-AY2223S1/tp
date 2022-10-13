@@ -1,8 +1,11 @@
 package seedu.duke;
 
 import java.util.Scanner;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 public class Ui {
+    private final Logger logger = Logger.getLogger("UILog");
     final String exitTrigger = "bye";
     protected boolean isExit;
     
@@ -13,6 +16,7 @@ public class Ui {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Welcome to your Movie Reviews bot,\n" + logo);
+        logger.log(Level.INFO, "Greeted User");
     }
 
     public String getInput(Scanner userInputScanner) {
@@ -20,10 +24,12 @@ public class Ui {
         
         if (userInputScanner.hasNextLine()) {
             userInput = userInputScanner.nextLine();
+            logger.log(Level.INFO, "Added new command");
         }
 
         if (userInput.equals(exitTrigger)) {
             isExit = true;
+            logger.log(Level.INFO, "Exit command given");
         }
         
         return userInput;
