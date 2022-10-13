@@ -3,6 +3,7 @@ package seedu.duke.module;
 import seedu.duke.module.lessons.Lesson;
 import seedu.duke.module.lessons.Lecture;
 import seedu.duke.module.lessons.Tutorial;
+import seedu.duke.data.DataManager;
 import seedu.duke.module.lessons.Laboratory;
 import seedu.duke.module.lessons.Others;
 
@@ -24,6 +25,14 @@ public class Module {
 
     public String getModuleCode() {
         return moduleCode;
+    }
+
+    public List<Lesson> getAttending() {
+        return attending;
+    }
+
+    public List<Lesson> getLessons() {
+        return lessons;
     }
 
     public Module(String moduleCode, String moduleName, String moduleDescription, List<Lesson> lessons) {
@@ -50,16 +59,33 @@ public class Module {
         String endTime = "Undetermined";
         switch (lesson.getLessonType()) {
         case "Lecture":
-            temp.add(new Lecture(day, startTime, endTime, "Lecture"));
+            Lecture tempLecture = new Lecture(day, startTime, endTime, "Lecture");
+            temp.add(tempLecture);
+            if (!DataManager.attendingExists(tempLecture, moduleCode)) {
+                DataManager.addAttending(tempLecture, moduleCode);
+            }
             break;
         case "Tutorial":
-            temp.add(new Tutorial(day, startTime, endTime, "Tutorial"));
+            Tutorial tempTutorial = new Tutorial(day, startTime, endTime, "Tutorial");
+            temp.add(tempTutorial);
+            if (!DataManager.attendingExists(tempTutorial, moduleCode)) {
+                DataManager.addAttending(tempTutorial, moduleCode);
+            }
             break;
         case "Laboratory":
-            temp.add(new Laboratory(day, startTime, endTime, "Laboratory"));
+            Laboratory tempLaboratory = new Laboratory(day, startTime, endTime, "Laboratory");
+            temp.add(tempLaboratory);
+            if (!DataManager.attendingExists(tempLaboratory, moduleCode)) {
+                DataManager.addAttending(tempLaboratory, moduleCode);
+            }
             break;
         default:
-            temp.add(new Others(day, startTime, endTime, "Others"));
+            Others tempOthers = new Others(day, startTime, endTime, "Others");
+            temp.add(tempOthers);
+            if (!DataManager.attendingExists(tempOthers, moduleCode)) {
+                DataManager.addAttending(tempOthers, moduleCode);
+            }
+            break;
         }
     }
 
@@ -172,5 +198,6 @@ public class Module {
         }
         attending.remove(indexToRemove);
         attending.add(newLesson);
+        DataManager.setAttending(newLesson, moduleCode);
     }
 }
