@@ -1,4 +1,4 @@
-package seedu.duke;
+package pet;
 
 public class Pet {
     private String name;
