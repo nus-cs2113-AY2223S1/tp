@@ -15,9 +15,10 @@ public class Parser {
             return new EndCommand();
         }
 
-        int indexOfSpace = input.indexOf(" ");
-        String type = input.substring(0,indexOfSpace);
-        String statement = input.substring(indexOfSpace).trim();
+        String args[] = input.split(" ");
+
+        String type = args[0];
+        String statement = args[1].trim();
 
         switch(type) {
         case "appointment":
@@ -35,7 +36,7 @@ public class Parser {
     }
 
     public Command parseAppointment(String input){
-        if(!input.contains(" ")){
+        if(!"".equals(input)){
             if(input.equals("view")){
                 return new ViewAppointmentCommand();
             }
@@ -43,8 +44,9 @@ public class Parser {
             return new EndCommand();
         }
 
-        String type = input.substring(0,input.indexOf(" "));
-        String statement = input.substring(input.indexOf(" ")).trim();
+        String args[] = input.split(" ");
+        String type = args[0];
+        String statement = args[1];
         switch(type) {
         case AddAppointmentCommand.COMMAND_WORD:
             return prepareAddAppointment(statement);
@@ -192,18 +194,10 @@ public class Parser {
 
 
     public Command prepareAddAppointment(String input){
-        int s = input.indexOf(" s/");
-        int p = input.indexOf(" p/");
-        int d = input.indexOf(" d/");
 
-        if(s > p || p > d || s == -1 || p == -1 || d == -1){
-            System.out.println("invalid input");
-            return new EndCommand();
-        }
-
-        // String service = input.substring(s + lengthOfSignature, p);
-        String petName = input.substring(p + lengthOfSignature, d);
-        String appointmentDate = input.substring(d + lengthOfSignature);
+        String args[] = input.split(" ");
+        String petName = args[0].substring(2);
+        String appointmentDate = args[1].substring(2);
 
         return new AddAppointmentCommand(petName, appointmentDate);
     }
