@@ -35,7 +35,7 @@ public class Parking {
     /**
      * Main entry-point for the java.duke.Duke application.
      */
-    public static void main(String[] args) throws NoCommandArgumentException, UnneededArgumentsException {
+    public static void main(String[] args) {
         Parser parser = new Parser();
         Find find = new Find();
         Ui ui = new Ui();
