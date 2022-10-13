@@ -1,10 +1,11 @@
-package petCommand;
+package command;
 
 import pet.Pet;
 import pet.PetList;
 
 public class viewPetCommand {
     private PetList Pets;
+    public final String COMMAND_WORD = "add";
 
     public viewPetCommand(PetList Pets){
         this.Pets = Pets;

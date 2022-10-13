@@ -1,3 +1,6 @@
+import command.*;
+
+
 public class Parser {
     private final int lengthOfSignature = 3;
     public command parseCommand(String input){
@@ -161,7 +164,7 @@ public class Parser {
     public command parsePet(String input){
         if(!input.contains(" ")){
             if(input == "view"){
-                return new AppointmentViewCommand();
+                return new viewPetCommand();
             }
             System.out.println("input invalid");
             return new ExitCommand();
@@ -170,7 +173,7 @@ public class Parser {
         String type = input.substring(0,input.indexOf(" "));
         String statement = input.substring(input.indexOf(" ")).trim();
         switch(type) {
-        case AddPetCommand.COMMAND_WORD:
+        case add:
             return prepareAddPet(statement);
         break;
         case RemoveAppointmentCommand.COMMAND_WORD:
