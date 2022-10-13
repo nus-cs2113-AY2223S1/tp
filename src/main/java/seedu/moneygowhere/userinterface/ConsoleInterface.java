@@ -2,34 +2,33 @@ package seedu.moneygowhere.userinterface;
 
 import seedu.moneygowhere.commands.ConsoleCommand;
 import seedu.moneygowhere.commands.ConsoleCommandAddExpense;
+import seedu.moneygowhere.commands.ConsoleCommandAddIncome;
+import seedu.moneygowhere.commands.ConsoleCommandAddTarget;
 import seedu.moneygowhere.commands.ConsoleCommandBye;
 import seedu.moneygowhere.commands.ConsoleCommandDeleteExpense;
 import seedu.moneygowhere.commands.ConsoleCommandEditExpense;
 import seedu.moneygowhere.commands.ConsoleCommandSortExpense;
 import seedu.moneygowhere.commands.ConsoleCommandViewExpense;
-import seedu.moneygowhere.commands.ConsoleCommandAddTarget;
-import seedu.moneygowhere.commands.ConsoleCommandAddIncome;
 import seedu.moneygowhere.common.Configurations;
 import seedu.moneygowhere.common.Messages;
 import seedu.moneygowhere.data.expense.Expense;
 import seedu.moneygowhere.data.expense.ExpenseManager;
-import seedu.moneygowhere.data.target.Target;
-import seedu.moneygowhere.data.target.TargetManager;
 import seedu.moneygowhere.data.income.Income;
 import seedu.moneygowhere.data.income.IncomeManager;
+import seedu.moneygowhere.data.target.Target;
+import seedu.moneygowhere.data.target.TargetManager;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandAddExpenseInvalidException;
+import seedu.moneygowhere.exceptions.ConsoleParserCommandAddIncomeInvalidException;
+import seedu.moneygowhere.exceptions.ConsoleParserCommandAddTargetInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandDeleteExpenseInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandEditExpenseInvalidException;
+import seedu.moneygowhere.exceptions.ConsoleParserCommandNotFoundException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandSortExpenseInvalidTypeException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandViewExpenseInvalidException;
-import seedu.moneygowhere.exceptions.ConsoleParserCommandAddIncomeInvalidException;
 import seedu.moneygowhere.exceptions.ExpenseManagerExpenseNotFoundException;
-import seedu.moneygowhere.exceptions.ConsoleParserCommandAddTargetInvalidException;
-import seedu.moneygowhere.exceptions.ConsoleParserCommandNotFoundException;
 import seedu.moneygowhere.parser.ConsoleParser;
-
-import static seedu.moneygowhere.storage.LocalStorage.loadFromFile;
-import static seedu.moneygowhere.storage.LocalStorage.saveToFile;
+import seedu.moneygowhere.parser.ConsoleParserConfigurations;
+import seedu.moneygowhere.storage.LocalStorage;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -37,7 +36,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
-
 
 /**
  * Provide functions to interface with the user via standard input and standard output.
@@ -156,7 +154,7 @@ public class ConsoleInterface {
 
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_ADD_EXPENSE_SUCCESS);
 
-        saveToFile(expenseManager.getExpenses());
+        LocalStorage.saveToFile(expenseManager.getExpenses());
     }
 
     private void viewExpense() {
@@ -246,7 +244,7 @@ public class ConsoleInterface {
 
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_DELETE_EXPENSE_SUCCESS);
 
-        saveToFile(expenseManager.getExpenses());
+        LocalStorage.saveToFile(expenseManager.getExpenses());
     }
 
     private void runCommandEditExpense(ConsoleCommandEditExpense consoleCommandEditExpense) {
@@ -302,18 +300,18 @@ public class ConsoleInterface {
         printInformationalMessage(expenseStr);
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_EDIT_EXPENSE_SUCCESS);
 
-        saveToFile(expenseManager.getExpenses());
+        LocalStorage.saveToFile(expenseManager.getExpenses());
     }
 
     @SuppressWarnings("Java8ListSort")
     private void runCommandSortExpense(ConsoleCommandSortExpense commandSortExpense) {
         String type = commandSortExpense.getType();
         ArrayList<Expense> expenses = expenseManager.getExpenses();
-        if (type.equalsIgnoreCase(ConsoleParser.CONSOLE_COMMAND_SORT_EXPENSE_TYPE_DATE)) {
+        if (type.equalsIgnoreCase(ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE_VAL_DATE)) {
             Collections.sort(expenses, commandSortExpense.sortByDate);
-        } else if (type.equalsIgnoreCase(ConsoleParser.CONSOLE_COMMAND_SORT_EXPENSE_TYPE_ALPHABETICAL)) {
+        } else if (type.equalsIgnoreCase(ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE_VAL_ALPHABETICAL)) {
             Collections.sort(expenses, commandSortExpense.sortByAlphabet);
-        } else if (type.equalsIgnoreCase(ConsoleParser.CONSOLE_COMMAND_SORT_EXPENSE_TYPE_AMOUNT)) {
+        } else if (type.equalsIgnoreCase(ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE_VAL_AMOUNT)) {
             Collections.sort(expenses, commandSortExpense.sortByAmount);
         }
         expenseManager.updateExpenses(expenses);
@@ -379,7 +377,7 @@ public class ConsoleInterface {
      */
     @SuppressWarnings("StatementWithEmptyBody")
     public void run() {
-        loadFromFile(expenseManager);
+        LocalStorage.loadFromFile(expenseManager);
         printBlankLine();
 
         while (true) {
