@@ -1,5 +1,4 @@
 package recipeditor.recipe;
-
 public class Ingredient {
     private String name;
     private double amount;
