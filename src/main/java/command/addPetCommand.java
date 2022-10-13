@@ -1,13 +1,15 @@
-package petCommand;
+package command;
 
 import pet.Pet;
 import pet.PetList;
 
-public class addPetCommand {
+public class addPetCommand extends Command{
     private PetList Pets;
     private String name;
     private String species;
     private boolean ishealthy;
+
+    public static
 
     public addPetCommand(PetList Pets, String name, String species, boolean ishealthy){
         this.Pets = Pets;
