@@ -4,18 +4,16 @@ import appointment.AppointmentList;
 import employee.EmployeeList;
 import service.ServiceList;
 
-public class RemoveAppointmentCommand extends Command{
+public class RemoveEmployeeCommand extends Command{
 
-    public final String COMMAND_WORD = "remove";
-    private final int appointmentId;
+    private int employeeId;
 
-    public RemoveAppointmentCommand(int appointmentId) {
-        this.appointmentId = appointmentId;
+    public RemoveEmployeeCommand(int employeeId){
+        this.employeeId = employeeId;
     }
-
     @Override
     public void execute(AppointmentList appointmentList, EmployeeList employeeList, ServiceList serviceList) {
-        AppointmentList.removeAppointment(appointmentId);
+        EmployeeList.removeEmployee(employeeId);
     }
 
     @Override

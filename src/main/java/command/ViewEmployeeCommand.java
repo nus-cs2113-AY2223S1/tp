@@ -2,14 +2,15 @@ package command;
 
 import appointment.AppointmentList;
 import employee.EmployeeList;
+import service.ServiceList;
 
-public class ViewStaffCommand extends Command{
+public class ViewEmployeeCommand extends Command{
 
-    public ViewStaffCommand() {
+    public ViewEmployeeCommand() {
 
     }
     @Override
-    public void execute(AppointmentList appointmentList, EmployeeList employeeList) {
+    public void execute(AppointmentList appointmentList, EmployeeList employeeList, ServiceList serviceList) {
         employeeList.listEmployee();
     }
 

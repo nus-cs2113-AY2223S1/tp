@@ -1,12 +1,9 @@
 package command;
 
-import appointment.Appointment;
 import appointment.AppointmentList;
 import employee.Employee;
 import employee.EmployeeList;
-import service.Service;
-
-import java.time.LocalDateTime;
+import service.ServiceList;
 
 public class AddEmployeeCommand extends Command{
 
@@ -16,7 +13,7 @@ public class AddEmployeeCommand extends Command{
         this.employee = new Employee(employeeName);
     }
     @Override
-    public void execute(AppointmentList appointmentList, EmployeeList employeeList) {
+    public void execute(AppointmentList appointmentList, EmployeeList employeeList, ServiceList serviceList) {
         EmployeeList.addEmployee(employee);
     }
     @Override
