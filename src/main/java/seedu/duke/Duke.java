@@ -13,15 +13,26 @@ public class Duke {
     }
 
     public static void run() {
-        boolean isExit = false;
-        UI.helloMessage();
-        while (!isExit) {
-            String input = UI.getInput();
-            Command c = Parser.parse(input);
-            if (c != null) {
-                c.execute(ui, modulelist);
-                isExit = c.checkExit();
-            }
+
+            boolean isExit = false;
+            UI.helloMessage();
+            while (!isExit) {
+                String input = UI.getInput();
+                try {
+                    Command c = Parser.parse(input);
+                    if(c==null) {
+                        throw new RuntimeException();
+                    }
+                    if (c != null) {
+                        c.execute(ui, modulelist);
+                        isExit = c.checkExit();
+                    }
+                } catch(Exception e) {
+                    System.out.println("enter valid command");
+                }
+
+
         }
+
     }
 }
