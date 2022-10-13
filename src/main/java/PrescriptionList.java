@@ -8,6 +8,10 @@ public class PrescriptionList {
     }
 
     public void add(UI ui, String patientId, String medicine, String dosage, String timeInterval) {
+        assert patientId != null : "ID should not be null";
+        assert medicine != null : "medicine should not be null";
+        assert dosage != null : "dosage should not be null";
+        assert timeInterval != null : "time interval should not be null";
         Prescription prescription = new Prescription(patientId, medicine, dosage, timeInterval);
         prescriptionsList.add(prescription);
         ui.printAddPrescriptionMessage(prescription.toString());
@@ -15,6 +19,10 @@ public class PrescriptionList {
     }
 
     public void add(UI ui, String patientId, String medicine, String dosage, String timeInterval, boolean isActive) {
+        assert patientId != null : "ID should not be null";
+        assert medicine != null : "medicine should not be null";
+        assert dosage != null : "dosage should not be null";
+        assert timeInterval != null : "time interval should not be null";
         Prescription prescription = new Prescription(patientId, medicine, dosage, timeInterval, isActive);
         prescriptionsList.add(prescription);
         ui.printAddPrescriptionMessage(prescription.toString());
@@ -46,6 +54,10 @@ public class PrescriptionList {
     //  edit(String id, String medicine), edit(String id, String dosage)
     //  and edit(String id, String timeInterval)
     public void edit(UI ui, int prescriptionNumber, String medicine, String dosage, String timeInterval) {
+        assert medicine != null : "medicine should not be null";
+        assert dosage != null : "dosage should not be null";
+        assert timeInterval != null : "time interval should not be null";
+
         if (prescriptionNumber < 1 || prescriptionNumber > prescriptionsList.size()) {
             ui.printIndexOutOfRangeErrorMessage();
             return;
