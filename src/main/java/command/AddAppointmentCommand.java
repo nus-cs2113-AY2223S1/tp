@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 
 public class AddAppointmentCommand extends Command {
 
-    public final String COMMAND_WORD = "add";
+    public final static String COMMAND_WORD = "add";
 
     private final Appointment appointment;
 

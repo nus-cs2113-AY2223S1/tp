@@ -78,13 +78,8 @@ public class Parser {
         switch(type) {
         case AddServiceCommand.COMMAND_WORD:
             return prepareAddService(statement);
-        break;
         case RemoveServiceCommand.COMMAND_WORD:
             return prepareRemoveService(statement);
-        break;
-        case ViewServiceCommand.COMMAND_WORD:
-            return new ViewServiceCommand();
-        break;
         default:
             return new EndCommand();
         }
@@ -209,8 +204,7 @@ public class Parser {
     }
 
     public boolean isInt(String val){
-        Boolean strResult = val.matches("\\d?");
-        if(strResult) {
+        if(val.matches("\\d?")) {
             return true;
         }
         return false;
@@ -247,10 +241,8 @@ public class Parser {
         switch(type) {
         case AddPetCommand.COMMAND_WORD:
             return prepareAddPet(statement);
-            break;
         case RemovePetCommand.COMMAND_WORD:
             return prepareRemovePet(statement);
-            break;
         default:
             System.out.println("input invalid");
             return new EndCommand();
@@ -271,13 +263,8 @@ public class Parser {
         switch(type) {
         case AddEmployeeCommand.COMMAND_WORD:
             return prepareAddEmployee(statement);
-            break;
         case RemoveEmployeeCommand.COMMAND_WORD:
             return prepareRemoveEmployee(statement);
-            break;
-        case ViewEmployeeCommand.COMMAND_WORD:
-            return new ViewEmployeeCommand();
-            break;
         default:
             System.out.println("input invalid");
             return new EndCommand();

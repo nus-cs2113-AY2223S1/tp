@@ -6,7 +6,7 @@ import service.ServiceList;
 
 public class ViewAppointmentCommand extends Command{
 
-    public final String COMMAND_WORD = "view";
+    public final static String COMMAND_WORD = "view";
 
     public ViewAppointmentCommand(){
     }

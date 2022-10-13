@@ -6,7 +6,7 @@ import service.Service;
 import service.ServiceList;
 
 public class AddServiceCommand extends Command{
-
+    public final static String COMMAND_WORD = "add";
     private final Service service;
 
     public AddServiceCommand(String serviceDescription) {

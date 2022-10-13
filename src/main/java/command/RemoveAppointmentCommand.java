@@ -6,7 +6,7 @@ import service.ServiceList;
 
 public class RemoveAppointmentCommand extends Command{
 
-    public final String COMMAND_WORD = "remove";
+    public final static String COMMAND_WORD = "remove";
     private final int appointmentId;
 
     public RemoveAppointmentCommand(int appointmentId) {
