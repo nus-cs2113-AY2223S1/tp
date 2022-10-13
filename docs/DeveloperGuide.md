@@ -15,7 +15,6 @@
 &nbsp;&nbsp;[3.4. Controller Component](#34-controller-component) <br>
 [4. Implementation](#4-implementation) <br>
 [5. Documentation](#5-documentation) <br>
-&nbsp;&nbsp;[5.1. Setting up and maintaining the project website](#51-setting-up-and-maintaining-the-project-website) <br>
 [6. Testing](#6-testing) <br>
 &nbsp;&nbsp;[6.1. Running tests](#61-running-tests) <br>
 &nbsp;&nbsp;[6.2. Instructions for running manual tests](#62-instructions-for-manual-testing) <br>
