@@ -6,23 +6,29 @@ import seedu.duke.utils.Ui;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import seedu.duke.model.Module;
+import seedu.duke.parser.Parser;
 
 public class SearchModuleCodeCommand extends Command {
+    public static final String FORMAT = "search /module [MODULE_CODE] /module level [LEVEL] /semester [SEMESTER]";
     public static final String COMMAND_WORD = "search";
-    private String toSearchModuleCode;
 
-    public SearchModuleCodeCommand(String[] input) {
-        super(input);
-        toSearchModuleCode = input[1];
+    private String toSearchModuleCode;
+    private Map<String, String> params;
+
+    public SearchModuleCodeCommand(String input) {
+        super(input.split("\\s"));
+        params = Parser.parseParams(input);
+        toSearchModuleCode = params.get("module").toUpperCase();
     }
 
     @Override
     public void execute(State state, Ui ui, Storage storage) {
         List<Module> searchResult = filterModuleByCode(toSearchModuleCode);
 
-        ui.addMessage("Module search list");
+        ui.addMessage("Search Result:");
 
         // if searchResult only contain one module, it means the module code is unique, display the module details
         if (searchResult.size() == 1) {
@@ -34,6 +40,7 @@ public class SearchModuleCodeCommand extends Command {
             }
         }
 
+        ui.addMessage("To get full details of the module, type 'search full <module code>'");
         ui.displayUi();
     }
 

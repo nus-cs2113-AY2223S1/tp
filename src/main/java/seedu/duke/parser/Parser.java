@@ -23,7 +23,7 @@ public class Parser {
         String[] keywords = userInput.split("\\s+");
         switch (keywords[0]) {
         case (SearchModuleNameCommand.COMMAND_WORD):
-            return searchCommand(keywords);
+            return searchCommand(keywords, userInput);
         case (AddModuleCommand.COMMAND_WORD):
             return addDeleteCommand(keywords, new AddModuleCommand(keywords));
         case (DeleteModuleCommand.COMMAND_WORD):
@@ -82,11 +82,11 @@ public class Parser {
         return isTwoWordsCommand(keywords) && isValidModuleCode(keywords[1]);
     }
 
-    public static Command searchCommand(String[] keywords) {
+    public static Command searchCommand(String[] keywords, String userInput) {
         if (isMultiWordsCommand(keywords) && !containsValidModuleCode(keywords)) {
             return new SearchModuleNameCommand(keywords);
         } else if (isValidTwoWordCommand(keywords)) {
-            return new SearchModuleCodeCommand(keywords);
+            return new SearchModuleCodeCommand(userInput);
         } else {
             return determineWrongCommand(keywords);
         }
