@@ -39,12 +39,9 @@ public class ModuleList {
         mcsCount = 0;
         for (Module mod : modules) {
             if (mod.semesterTaken.matches(semester)) {
-                System.out.println("mcsCount from screeeen?? " + mcsCount);
-                System.out.println("mod.mcs from screeeen?? " + mod.mcs);
                 mcsCount =  mcsCount + mod.mcs;
             }
         }
-        System.out.println("mcsCount from screeeen " + mcsCount);
         UI.mcMessage(semester, mcsCount);
     }
 
