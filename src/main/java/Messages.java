@@ -1,8 +1,8 @@
 public class Messages {
-    protected static final String logo = "ıllıllı OneDoc ıllıllı";
-    private static final String welcomeMessage = "Hello welcome to\n"
-            + logo;
-    private static final String mainMenuMessage = "Please choose one+ "
+    protected static final String LOGO = "ıllıllı OneDoc ıllıllı";
+    private static final String WELCOME_MESSAGE = "Hello welcome to\n"
+            + LOGO;
+    private static final String MAIN_MENU = "Please choose one+ "
             + " of the following options:\n"
             + "1 - Patients\n"
             + "2 - Visits\n"
@@ -21,8 +21,8 @@ public class Messages {
     public static final String INDEX_OUT_OF_RANGE_MESSAGE = "The index number is out of range. Try again.";
 
     public static void welcomeMessage() {
-        System.out.println(welcomeMessage);
-        System.out.println(mainMenuMessage);
+        System.out.println(WELCOME_MESSAGE);
+        System.out.println(MAIN_MENU);
     }
 
     public static void printPatientMenuMessage() {
