@@ -12,6 +12,8 @@ repositories {
 dependencies {
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.0'
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.0'
+    implementation 'commons-cli:commons-cli:1.5.0'
+    implementation 'org.apache.commons:commons-text:1.9'
 }
 
 test {
@@ -29,11 +31,11 @@ test {
 }
 
 application {
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "seedu.moneygowhere.MoneyGoWhere"
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "MoneyGoWhere"
     archiveClassifier = null
 }
 
