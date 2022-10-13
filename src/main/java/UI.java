@@ -4,9 +4,8 @@ public class UI {
     private static Scanner sc = new Scanner(System.in);
 
     public static String readLine() {
-        return sc.nextLine();
+        return sc.nextLine().trim();
     }
-
 
     public static void printSubMenu(MainMenuState mainMenuState) {
         switch (mainMenuState) {

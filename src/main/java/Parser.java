@@ -1,19 +1,16 @@
-import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Parser {
     // todo add exit message
-    private final String exitMessage = "";
-    private final String patients = "1";
-    private final String visits = "2";
-    private final String prescription = "3";
+    private static final String EXIT_MESSAGE = "bye";
+    private static final String MAIN_PATIENT_COMMAND = "1";
+    private static final String MAIN_VISIT_COMMAND = "2";
+    private static final String MAIN_PRESCRIPTION_COMMAND = "3";
 
-    private Scanner scanner;
-    private PatientList patientList;
-    private VisitList visitList;
-
-    private PrescriptionList prescriptionList;
+    private final PatientList patientList;
+    private final VisitList visitList;
+    private final PrescriptionList prescriptionList;
 
     public Parser(PatientList patientList, VisitList visitList, PrescriptionList prescriptionList) {
         this.patientList = patientList;
@@ -21,135 +18,140 @@ public class Parser {
         this.prescriptionList = prescriptionList;
     }
 
-    public void mainMenuParser() {
-        String line;
-        scanner = new Scanner(System.in);
-        line = scanner.nextLine();
-        if (!line.equals(exitMessage)) {
-            // todo change add to each case accordingly
-            // String line = checkInputForMainMenu(line);
-            switch (line) {
-            case patients:
-                Messages.printPatientMenuMessage();
-                patientParser();
-                break;
-            case visits:
-                Messages.printVisitsMenuMessage();
-                visitParser();
-                break;
-            case prescription:
-                Messages.printPrescriptionMenuMessage();
-                prescriptionParser();
-                break;
-            default:
-                break;
-            }
+    public MainMenuState mainMenuParser(String input) {
+        switch (input) {
+        case MAIN_PATIENT_COMMAND:
+            return MainMenuState.PATIENT;
+        case MAIN_VISIT_COMMAND:
+            return MainMenuState.VISIT;
+        case MAIN_PRESCRIPTION_COMMAND:
+            return MainMenuState.PRESCRIPTION;
+        case EXIT_MESSAGE:
+            return MainMenuState.EXIT;
+        default:
+            return MainMenuState.INVALID;
         }
-        Messages.printExitMessage();
+
     }
 
     private boolean shouldExit(String input) {
         return input.equalsIgnoreCase("bye") || input.equalsIgnoreCase("exit");
     }
 
-    private void patientParser() {
-        while (scanner.hasNext()) {
-            try {
-                String input = scanner.nextLine();
-                if (shouldExit(input)) {
-                    break;
-                }
-                boolean matchesView = input.equalsIgnoreCase("viewall");
-                Matcher matcherAdd = patientAddMatcher(input);
-                Matcher matcherRetrieve = patientRetrieveMatcher(input);
-                Matcher matcherEdit = patientEditMatcher(input);
-                if (matchesView) {
-                    patientList.listPatients();
-                } else if (matcherAdd.find()) {
-                    patientList.addPatient(matcherAdd.group(1), matcherAdd.group(3),
-                            matcherAdd.group(2), matcherAdd.group(4));
-                } else if (matcherRetrieve.find()) {
-                    patientList.retrievePatient(matcherRetrieve.group(1));
-                } else if (matcherEdit.find()) {
-                    parseEditPatient(matcherEdit.group(1), matcherEdit.group(2), matcherEdit.group(3));
-                } else {
-                    throw new OneDocException("Your input is incorrect! Please format it as such:"
-                            + "\nTo add a patient: add n/[name] g/[M/F] d/[DOB] i/[ID]"
-                            + "\nTo edit a patient's info: edit i/[ID] (n/[name] or g/[M/F] or d/[DOB])"
-                            + "\nTo retrieve a patient's info: retrieve i/[ID]");
-                }
-            } catch (OneDocException e) {
-                System.out.println("Incorrect format: " + e.getMessage());
-            } catch (Exception e) {
-                System.out.println("Unexpected issue: " + e.getMessage());
-            }
-        }
+    private boolean shouldBackToMain(String input) {
+        return input.equalsIgnoreCase("main");
     }
 
-    public void visitParser() {
-        while (scanner.hasNext()) {
-            try {
-                String input = scanner.nextLine();
-                if (shouldExit(input)) {
-                    break;
-                }
-                boolean matchesView = input.equalsIgnoreCase("viewall");
-                Matcher matcherAdd = addVisitMatcher(input);
-                Matcher matcherEdit = editVisitMatcher(input);
-                if (matchesView) {
-                    visitList.viewAll();
-                } else if (matcherAdd.find()) {
-                    String reason = matcherAdd.group(4);
-                    if (reason.isEmpty()) {
-                        visitList.addVisit(matcherAdd.group(1), matcherAdd.group(2), matcherAdd.group(3));
-                    } else {
-                        visitList.addVisit(matcherAdd.group(1), matcherAdd.group(2),
-                                matcherAdd.group(3), matcherAdd.group(4));
-                    }
-                } else if (matcherEdit.find()) {
-                    visitList.editReason(matcherEdit.group(1), matcherEdit.group(2));
-                } else {
-                    throw new OneDocException("Your input is incorrect! Please format it as such:"
-                            + "\nTo add a visit: add i/[ID] d/[date] t/[time] r/[reason]"
-                            + "\nTo edit a visit's reason: edit i/[ID] r/[reason]");
-                }
-            } catch (OneDocException e) {
-                System.out.println("Incorrect format: " + e.getMessage());
-            } catch (Exception e) {
-                System.out.println("Unexpected issue: " + e.getMessage());
-            }
+    public SubMenuState patientParser(String input) {
+        if (shouldExit(input)) {
+           return SubMenuState.EXIT;
         }
+
+        if (shouldBackToMain(input)) {
+            return SubMenuState.BACK_TO_MAIN;
+        }
+
+        try {
+            boolean matchesView = input.equalsIgnoreCase("viewall");
+            Matcher matcherAdd = patientAddMatcher(input);
+            Matcher matcherRetrieve = patientRetrieveMatcher(input);
+            Matcher matcherEdit = patientEditMatcher(input);
+            if (matchesView) {
+                patientList.listPatients();
+            } else if (matcherAdd.find()) {
+                patientList.addPatient(matcherAdd.group(1), matcherAdd.group(3),
+                        matcherAdd.group(2), matcherAdd.group(4));
+            } else if (matcherRetrieve.find()) {
+                patientList.retrievePatient(matcherRetrieve.group(1));
+            } else if (matcherEdit.find()) {
+                parseEditPatient(matcherEdit.group(1), matcherEdit.group(2), matcherEdit.group(3));
+            } else {
+                throw new OneDocException("Your input is incorrect! Please format it as such:"
+                        + "\nTo add a patient: add n/[name] g/[M/F] d/[DOB] i/[ID]"
+                        + "\nTo edit a patient's info: edit i/[ID] (n/[name] or g/[M/F] or d/[DOB])"
+                        + "\nTo retrieve a patient's info: retrieve i/[ID]");
+            }
+        } catch (OneDocException e) {
+            System.out.println("Incorrect format: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Unexpected issue: " + e.getMessage());
+        }
+
+        return SubMenuState.IN_SUB_MENU;
     }
 
-    public void prescriptionParser() {
-        while (scanner.hasNext()) {
-            try {
-                String input = scanner.nextLine();
-                if (shouldExit(input)) {
-                    break;
-                }
-                boolean matchesView = input.equalsIgnoreCase("viewall");
-                Matcher matcherAdd = addPrescriptionMatcher(input);
-                Matcher matcherEdit = editPrescriptionMatcher(input);
-                if (matchesView) {
-                    prescriptionList.viewAll();
-                } else if (matcherAdd.find()) {
-                    prescriptionList.add(matcherAdd.group(1), matcherAdd.group(2),
+    public SubMenuState visitParser(String input) {
+        if (shouldExit(input)) {
+            return SubMenuState.EXIT;
+        }
+
+        if (shouldBackToMain(input)) {
+            return SubMenuState.BACK_TO_MAIN;
+        }
+
+        try {
+            boolean matchesView = input.equalsIgnoreCase("viewall");
+            Matcher matcherAdd = addVisitMatcher(input);
+            Matcher matcherEdit = editVisitMatcher(input);
+            if (matchesView) {
+                visitList.viewAll();
+            } else if (matcherAdd.find()) {
+                String reason = matcherAdd.group(4);
+                if (reason.isEmpty()) {
+                    visitList.addVisit(matcherAdd.group(1), matcherAdd.group(2), matcherAdd.group(3));
+                } else {
+                    visitList.addVisit(matcherAdd.group(1), matcherAdd.group(2),
                             matcherAdd.group(3), matcherAdd.group(4));
-                } else if (matcherEdit.find()) {
-                    parseEditPrescription(Integer.valueOf(matcherEdit.group(1)),
-                            matcherEdit.group(2), matcherEdit.group(3));
-                } else {
-                    throw new OneDocException("Your input is incorrect! Please format it as such:"
-                            + "\nTo add a prescription: add i/ID n/[name] d/[dosage] t/[time interval]"
-                            + "\nTo edit a prescription: edit i/[index] (n/[name] or d/[dosage] or t/[time interval])");
                 }
-            } catch (OneDocException e) {
-                System.out.println("Incorrect format: " + e.getMessage());
-            } catch (Exception e) {
-                System.out.println("Unexpected issue: " + e.getMessage());
+            } else if (matcherEdit.find()) {
+                visitList.editReason(matcherEdit.group(1), matcherEdit.group(2));
+            } else {
+                throw new OneDocException("Your input is incorrect! Please format it as such:"
+                        + "\nTo add a visit: add i/[ID] d/[date] t/[time] r/[reason]"
+                        + "\nTo edit a visit's reason: edit i/[ID] r/[reason]");
             }
+        } catch (OneDocException e) {
+            System.out.println("Incorrect format: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Unexpected issue: " + e.getMessage());
         }
+
+        return SubMenuState.IN_SUB_MENU;
+    }
+
+    public SubMenuState prescriptionParser(String input) {
+        if (shouldExit(input)) {
+            return SubMenuState.EXIT;
+        }
+
+        if (shouldBackToMain(input)) {
+            return SubMenuState.BACK_TO_MAIN;
+        }
+
+        try {
+            boolean matchesView = input.equalsIgnoreCase("viewall");
+            Matcher matcherAdd = addPrescriptionMatcher(input);
+            Matcher matcherEdit = editPrescriptionMatcher(input);
+            if (matchesView) {
+                prescriptionList.viewAll();
+            } else if (matcherAdd.find()) {
+                prescriptionList.add(matcherAdd.group(1), matcherAdd.group(2),
+                        matcherAdd.group(3), matcherAdd.group(4));
+            } else if (matcherEdit.find()) {
+                parseEditPrescription(Integer.valueOf(matcherEdit.group(1)),
+                        matcherEdit.group(2), matcherEdit.group(3));
+            } else {
+                throw new OneDocException("Your input is incorrect! Please format it as such:"
+                        + "\nTo add a prescription: add i/ID n/[name] d/[dosage] t/[time interval]"
+                        + "\nTo edit a prescription: edit i/[index] (n/[name] or d/[dosage] or t/[time interval])");
+            }
+        } catch (OneDocException e) {
+            System.out.println("Incorrect format: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Unexpected issue: " + e.getMessage());
+        }
+
+        return SubMenuState.IN_SUB_MENU;
     }
 
 

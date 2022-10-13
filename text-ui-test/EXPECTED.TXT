@@ -1,6 +1,6 @@
 Hello welcome to
 ıllıllı OneDoc ıllıllı
-Please choose one+  of the following options:
+Please choose one of the following options:
 1 - Patients
 2 - Visits
 3 - Prescription
