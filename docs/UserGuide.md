@@ -2,41 +2,52 @@
 
 ## Introduction
 
-{Give a product intro}
+Duke is a movie review allowing you to keep track of movies you have watched!
 
 ## Quick Start
 
-{Give steps to get started quickly}
-
 1. Ensure that you have Java 11 or above installed.
-1. Down the latest version of `Duke` from [here](http://link.to/duke).
+2. Down the latest version of `Duke` from [here](https://github.com/AY2223S1-CS2113-T18-1/tp/releases/tag/v1.0).
+3. Copy the jar file into the folder you want to store your reviews.
+4. Open terminal application and change directory to the above folder
+5. Run the jar file by entering java -jar tp.jar into the terminal.
 
 ## Features 
 
-{Give detailed description of each feature}
+The following features are supported by Duke.
 
-### Adding a todo: `todo`
-Adds a new item to the list of todo items.
+### Adding a movie: `add`
+Adds a new movie review to your list.
 
-Format: `todo n/TODO_NAME d/DEADLINE`
-
-* The `DEADLINE` can be in a natural language format.
-* The `TODO_NAME` cannot contain punctuation.  
+Format: `add /movie <title> /review <rating> /date <dateWatched>`
 
 Example of usage: 
 
-`todo n/Write the rest of the User Guide d/next week`
+`add /movie Harry Potter /review 5.0 /date 10 Oct 2022`
 
-`todo n/Refactor the User Guide to remove passive voice d/13/04/2020`
+### Display movie reviews: `list`
+Displays all movies you have reviewed.
 
-## FAQ
+Format: `list`
 
-**Q**: How do I transfer my data to another computer? 
+### Delete a movie: `delete`
+Removes a movie review from your list.
 
-**A**: {your answer here}
+Format: `delete <index>`
 
-## Command Summary
+Example of usage:
 
-{Give a 'cheat sheet' of commands here}
+`delete 1`
 
-* Add todo `todo n/TODO_NAME d/DEADLINE`
+### Clear all movie reviews: 'clear'
+Deletes all movie reviews in your list.
+
+Format: `clear`
+
+[//]: # (## Command Summary)
+
+[//]: # ()
+[//]: # ({Give a 'cheat sheet' of commands here})
+
+[//]: # ()
+[//]: # (* Add todo `todo n/TODO_NAME d/DEADLINE`)
