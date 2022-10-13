@@ -13,6 +13,7 @@ import seedu.duke.command.CommandListClients;
 import seedu.duke.command.CommandListProperties;
 import seedu.duke.command.CommandBye;
 
+import seedu.duke.exception.AlreadyPairedException;
 import seedu.duke.exception.ClientAlreadyPairedException;
 import seedu.duke.exception.EmptyClientDetailException;
 import seedu.duke.exception.EmptyClientIndexDeleteException;
@@ -22,7 +23,6 @@ import seedu.duke.exception.EmptyCommandDeleteDetailException;
 import seedu.duke.exception.EmptyCommandPairUnpairDetailsException;
 import seedu.duke.exception.EmptyPropertyDetailException;
 import seedu.duke.exception.EmptyPropertyIndexDeleteException;
-import seedu.duke.exception.ExistingPairException;
 import seedu.duke.exception.IncorrectAddClientFlagOrderException;
 import seedu.duke.exception.IncorrectAddPropertyFlagOrderException;
 import seedu.duke.exception.IncorrectFlagOrderException;
@@ -47,8 +47,7 @@ import seedu.duke.exception.MissingPropertyFlagException;
 import seedu.duke.exception.MissingPropertyIndexFlagException;
 import seedu.duke.exception.NoExistingPairException;
 import seedu.duke.exception.NotIntegerException;
-import seedu.duke.exception.NotValidIndexException;
-import seedu.duke.exception.PropertyAlreadyPairedException;
+import seedu.duke.exception.InvalidIndexException;
 import seedu.duke.exception.UndefinedSubCommandAddTypeException;
 import seedu.duke.exception.UndefinedSubCommandCheckTypeException;
 import seedu.duke.exception.UndefinedSubCommandDeleteTypeException;
@@ -87,8 +86,8 @@ public class Parser {
             MissingPropertyIndexFlagException, EmptyPropertyIndexDeleteException, InvalidPropertyIndexDeleteException,
             InvalidClientIndexDeleteException, EmptyClientIndexDeleteException, MissingClientIndexFlagException,
             InvalidClientIndexFlagFormatException, EmptyCommandPairUnpairDetailsException,
-            MissingPairUnpairFlagException, IncorrectPairUnpairFlagOrderException, NotValidIndexException,
-            NotIntegerException, NoExistingPairException, ClientAlreadyPairedException, PropertyAlreadyPairedException,
+            MissingPairUnpairFlagException, IncorrectPairUnpairFlagOrderException, InvalidIndexException,
+            NotIntegerException, NoExistingPairException, ClientAlreadyPairedException, AlreadyPairedException,
             UndefinedSubCommandCheckTypeException, EmptyCommandCheckDetailException, MissingCheckPropertyFlagException,
             IncorrectListDetailsException, MissingListDetailException, ByeParametersPresentException {
         ArrayList<String> processedCommandDetails = partitionCommandTypeAndDetails(input);
@@ -595,15 +594,15 @@ public class Parser {
     }
 
     private Command prepareForCommandPair(String rawPairDescriptions) throws NotIntegerException,
-            NotValidIndexException, MissingPairUnpairFlagException, IncorrectPairUnpairFlagOrderException,
-            ClientAlreadyPairedException, PropertyAlreadyPairedException {
+            InvalidIndexException, MissingPairUnpairFlagException, IncorrectPairUnpairFlagOrderException,
+            ClientAlreadyPairedException, AlreadyPairedException {
         ArrayList<Integer> pairDetails = processPairUnpairDetails(rawPairDescriptions);
         validatePairDetails(pairDetails);
         return new CommandPair(pairDetails);
     }
 
     private Command prepareForCommandUnpair(String rawUnpairDescriptions) throws NotIntegerException,
-            NotValidIndexException, MissingPairUnpairFlagException, IncorrectPairUnpairFlagOrderException,
+            InvalidIndexException, MissingPairUnpairFlagException, IncorrectPairUnpairFlagOrderException,
             NoExistingPairException {
         ArrayList<Integer> unpairDetails = processPairUnpairDetails(rawUnpairDescriptions);
         validateUnpairDetails(unpairDetails);
@@ -669,8 +668,8 @@ public class Parser {
         return processedPairUnpairDetails;
     }
 
-    private void validatePairDetails(ArrayList<Integer> pairUnpairDetails) throws NotValidIndexException,
-            ClientAlreadyPairedException, PropertyAlreadyPairedException {
+    private void validatePairDetails(ArrayList<Integer> pairUnpairDetails) throws InvalidIndexException,
+            ClientAlreadyPairedException, AlreadyPairedException {
         int clientIndex = pairUnpairDetails.get(0);
         int propertyIndex = pairUnpairDetails.get(1);
         checkForPairingListIndexOutOfBounds(clientIndex, propertyIndex);
@@ -678,16 +677,16 @@ public class Parser {
         Client client = clientList.getClientList().get(clientIndex);
         Property property = propertyList.getPropertyList().get(propertyIndex);
 
+        if (pairingList.isAlreadyPaired(client, property)) {
+            throw new AlreadyPairedException();
+        }
+
         if (pairingList.isClientPairedWithProperty(client)) {
             throw new ClientAlreadyPairedException();
         }
-
-        if (pairingList.isPropertyPairedWithClient(property)) {
-            throw new PropertyAlreadyPairedException();
-        }
     }
 
-    private void validateUnpairDetails(ArrayList<Integer> pairUnpairDetails) throws NotValidIndexException,
+    private void validateUnpairDetails(ArrayList<Integer> pairUnpairDetails) throws InvalidIndexException,
             NoExistingPairException {
         int clientIndex = pairUnpairDetails.get(0);
         int propertyIndex = pairUnpairDetails.get(1);
@@ -698,25 +697,25 @@ public class Parser {
         }
     }
 
-    private void checkForPairingListIndexOutOfBounds(int clientIndex, int propertyIndex) throws NotValidIndexException {
+    private void checkForPairingListIndexOutOfBounds(int clientIndex, int propertyIndex) throws InvalidIndexException {
         checkForClientListIndexOutOfBounds(clientIndex);
         checkForPropertyListIndexOutOfBounds(propertyIndex);
     }
 
-    private void checkForPropertyListIndexOutOfBounds(int propertyIndex) throws NotValidIndexException {
+    private void checkForPropertyListIndexOutOfBounds(int propertyIndex) throws InvalidIndexException {
         if (propertyIndex < 0 || propertyIndex > propertyList.getCurrentListSize() - 1) {
-            throw new NotValidIndexException();
+            throw new InvalidIndexException();
         }
     }
 
-    private void checkForClientListIndexOutOfBounds(int clientIndex) throws NotValidIndexException {
+    private void checkForClientListIndexOutOfBounds(int clientIndex) throws InvalidIndexException {
         if (clientIndex < 0 || clientIndex > clientList.getCurrentListSize() - 1) {
-            throw new NotValidIndexException();
+            throw new InvalidIndexException();
         }
     }
 
     private Command prepareForCommandCheckProperty(String rawPropertyDescriptions) throws NotIntegerException,
-            NotValidIndexException, MissingCheckPropertyFlagException {
+            InvalidIndexException, MissingCheckPropertyFlagException {
         try {
             ArrayList<Integer> checkPropertyDetails = processCheckPropertyDetails(rawPropertyDescriptions);
             validateCheckPropertyDetails(checkPropertyDetails);
@@ -773,7 +772,7 @@ public class Parser {
         return processedCheckPropertyDetails;
     }
 
-    private void validateCheckPropertyDetails(ArrayList<Integer> checkPropertyDetails) throws NotValidIndexException {
+    private void validateCheckPropertyDetails(ArrayList<Integer> checkPropertyDetails) throws InvalidIndexException {
         int propertyIndex = checkPropertyDetails.get(0);
         checkForPropertyListIndexOutOfBounds(propertyIndex);
     }

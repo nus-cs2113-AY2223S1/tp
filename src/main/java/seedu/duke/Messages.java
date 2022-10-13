@@ -128,14 +128,14 @@ public class Messages {
             + "  pair ip/1 ic/5\n"
             + "  unpair ip/2 ic/1";
 
-    public static final String MESSAGE_PROPERTY_ALREADY_PAIRED = "OOPS!! This property is currently rented by a tenant,"
-            + " try pairing with another property";
-
     public static final String MESSAGE_CLIENT_ALREADY_PAIRED = "OOPS!! This client is currently renting a property, "
             + "try pairing with another client ";
 
+    public static final String MESSAGE_ALREADY_PAIRED = "OOPS!! This client and this property are already paired "
+            + "together. You don't need to pair them again.";
+
     public static final String MESSAGE_NO_EXISTING_PAIR = "OOPS!! This property is not being rented by a tenant. "
-            + "Unpair unsuccessful";
+            + "Unpair unsuccessful.";
 
     public static final String MESSAGE_CHECK_PROPERTY_RESULT = "Here are the tenants renting this property:";
 

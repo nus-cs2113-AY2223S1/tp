@@ -3,6 +3,7 @@ package seedu.duke;
 import seedu.duke.command.Command;
 import seedu.duke.command.CommandBye;
 
+import seedu.duke.exception.AlreadyPairedException;
 import seedu.duke.exception.ClientAlreadyPairedException;
 import seedu.duke.exception.EmptyClientDetailException;
 import seedu.duke.exception.EmptyClientIndexDeleteException;
@@ -34,8 +35,7 @@ import seedu.duke.exception.MissingPropertyFlagException;
 import seedu.duke.exception.MissingPropertyIndexFlagException;
 import seedu.duke.exception.NoExistingPairException;
 import seedu.duke.exception.NotIntegerException;
-import seedu.duke.exception.NotValidIndexException;
-import seedu.duke.exception.PropertyAlreadyPairedException;
+import seedu.duke.exception.InvalidIndexException;
 import seedu.duke.exception.UndefinedSubCommandAddTypeException;
 import seedu.duke.exception.UndefinedSubCommandCheckTypeException;
 import seedu.duke.exception.UndefinedSubCommandDeleteTypeException;
@@ -122,16 +122,16 @@ public class Duke {
                 ui.showEmptyCommandPairUnpairDetailsMessage();
             } catch (MissingPairUnpairFlagException | IncorrectPairUnpairFlagOrderException e) {
                 ui.showPairUnpairWrongFormatMessage();
-            } catch (NotValidIndexException e) {
+            } catch (InvalidIndexException e) {
                 ui.showNotValidIndexMessage();
             } catch (NotIntegerException e) {
                 ui.showNotIntegerMessage();
             } catch (ClientAlreadyPairedException e) {
                 ui.showClientAlreadyPairedMessage();
-            } catch (PropertyAlreadyPairedException e) {
-                ui.showPropertyAlreadyPairedMessage();
             } catch (NoExistingPairException e) {
                 ui.showNoExistingPairMessage();
+            } catch (AlreadyPairedException e) {
+                ui.showAlreadyPairedMessage();
             } catch (MissingCheckPropertyFlagException e) {
                 ui.showCheckPropertyWrongFormatMessage();
             } catch (UndefinedSubCommandCheckTypeException e) {

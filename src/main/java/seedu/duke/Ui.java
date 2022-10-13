@@ -3,6 +3,7 @@ package seedu.duke;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import static seedu.duke.Messages.MESSAGE_ALREADY_PAIRED;
 import static seedu.duke.Messages.MESSAGE_EMPTY_PROPERTY_INDEX;
 import static seedu.duke.Messages.MESSAGE_INVALID_PROPERTY_INDEX;
 import static seedu.duke.Messages.MESSAGE_INVALID_PROPERTY_INDEX_FLAG_FORMAT;
@@ -20,7 +21,6 @@ import static seedu.duke.Messages.MESSAGE_CLIENT_INPUT_EXAMPLE;
 import static seedu.duke.Messages.MESSAGE_COMMAND_UNDEFINED;
 import static seedu.duke.Messages.MESSAGE_EMPTY_ADD_DESCRIPTION;
 import static seedu.duke.Messages.MESSAGE_EMPTY_CHECK_DESCRIPTION;
-import static seedu.duke.Messages.MESSAGE_PROPERTY_ALREADY_PAIRED;
 import static seedu.duke.Messages.MESSAGE_PAIRED;
 import static seedu.duke.Messages.MESSAGE_UNPAIRED;
 import static seedu.duke.Messages.MESSAGE_NO_EXISTING_PAIR;
@@ -241,8 +241,8 @@ public class Ui {
         showToUser(MESSAGE_CLIENT_ALREADY_PAIRED);
     }
 
-    public void showPropertyAlreadyPairedMessage() {
-        showToUser(MESSAGE_PROPERTY_ALREADY_PAIRED);
+    public void showAlreadyPairedMessage() {
+        showToUser(MESSAGE_ALREADY_PAIRED);
     }
 
     public void showNoExistingPairMessage() {

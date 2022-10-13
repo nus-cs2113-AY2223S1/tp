@@ -2,6 +2,8 @@ package seedu.duke;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Stores information on which the property each client is renting.
@@ -67,12 +69,8 @@ public class PairingList {
         String propertyPairingData = convertToPairingData(property);
         assert clientPropertyPairs.containsValue(propertyPairingData) : "Property does not exist.";
 
-        // Iterate through the hash map to delete all the entires containing the properties
-        for (String clientPairingData : clientPropertyPairs.keySet()) {
-            if (clientPropertyPairs.get(clientPairingData).equals(propertyPairingData)) {
-                clientPropertyPairs.remove(clientPairingData, propertyPairingData);
-            }
-        }
+        // Iterate through the hash map to delete all the entries containing the properties
+        clientPropertyPairs.entrySet().removeIf(e -> e.getValue().equals(propertyPairingData));
     }
 
     /**
@@ -100,14 +98,18 @@ public class PairingList {
     }
 
     /**
-     * Returns true if the property is already paired with client.
+     * Returns true if a pairing involving the specified property and client exists.
      *
-     * @param property Property whose pairing status is being checked.
-     * @return True if the property is currently paired with a client. False if not paired with a client.
+     * @param client Client that is part of the pairing to be queried.
+     * @param property Property that is part of the pairing to be queried.
+     * @return True if the pairing between the specified property and pairing exists. False if it does not exist.
      */
-    public boolean isPropertyPairedWithClient(Property property) {
+    public boolean isAlreadyPaired(Client client, Property property) {
         String propertyPairingData = convertToPairingData(property);
-        return clientPropertyPairs.containsValue(propertyPairingData);
+        String clientPairingData = convertToPairingData(client);
+
+        assert clientPropertyPairs.containsKey(clientPairingData) : "Client does not exist.";
+        return clientPropertyPairs.get(clientPairingData).equals(propertyPairingData);
     }
 
 
