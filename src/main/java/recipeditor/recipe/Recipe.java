@@ -1,12 +1,15 @@
 package recipeditor.recipe;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 public class Recipe {
     private String title;
     private String description;
     private ArrayList<Ingredient> ingredients;
     private ArrayList<String> steps;
+    private Logger logger = Logger.getLogger("LOGS");
 
     public Recipe(String title, String description) {
         this.title = title;
@@ -56,6 +59,7 @@ public class Recipe {
     }
 
     public Ingredient getIngredient(int index) {
+        assert index >= 0 && index <= ingredients.size();
         return this.ingredients.get(index);
     }
 
@@ -69,6 +73,7 @@ public class Recipe {
     }
 
     public void deleteIngredient(int index) {
+        assert index >= 0 && index <= ingredients.size();
         this.ingredients.remove(index);
     }
 
@@ -85,14 +90,17 @@ public class Recipe {
     }
 
     public String getStep(int index) {
+        assert index >= 0 && index <= steps.size();
         return this.steps.get(index);
     }
 
     public void deleteStep(int index) {
+        assert index >= 0 && index <= steps.size();
         this.steps.remove(index);
     }
 
     public String getIngredientAttributesFormatted() {
+        logger.log(Level.INFO, "Get ingredients");
         StringBuilder recipeIngredientStringFormatted = new StringBuilder();
         for (Ingredient i : ingredients) {
             String textShown = String.format("%s | %s | %s %n",
@@ -103,6 +111,7 @@ public class Recipe {
     }
 
     public String getStepAttributesFormatted() {
+        logger.log(Level.INFO, "Get steps");
         StringBuilder recipeStepStringFormatted = new StringBuilder();
         for (int i = 0; i < steps.size(); i++) {
             String textShown = String.format("%n%d) %s",
@@ -113,6 +122,7 @@ public class Recipe {
     }
 
     public String getRecipeAttributesFormatted() {
+        logger.log(Level.INFO, "Get recipes");
         StringBuilder recipeAttributesStringFormatted = new StringBuilder();
         recipeAttributesStringFormatted.append("Recipe Name: " + title + "\n");
         recipeAttributesStringFormatted.append("Recipe Description: " + description + "\n");

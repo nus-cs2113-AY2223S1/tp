@@ -14,7 +14,7 @@ import recipeditor.ui.Ui;
 
 public class Parser {
 
-    public Command parseCommand(String input) {
+    public static Command parseCommand(String input) {
         String[] parsed = input.split(" ");
         String commandWord = parsed[0].toLowerCase();
 
@@ -35,7 +35,7 @@ public class Parser {
 
     }
 
-    private Command parseAddCommand() {
+    private static Command parseAddCommand() {
         AddMode add = new AddMode(); // Switch to Add Mode in here
         add.enterAddMode();
         add.exitAddMode();
@@ -68,4 +68,5 @@ public class Parser {
     //            throw new ExcessArgumentException();
     //        }
     //    }
+    
 }
