@@ -54,12 +54,12 @@ class PairingListTest {
         String clientDataNoSeparator = "[Nicki Minaj 93437878]";
         String clientDataNoContactNumber = "[Nicki Minaj | ]";
 
-        String propertyDataNoSquareBrackets =
-                "Mary Tan Bee Bee | 107 North Bridge Rd, Singapore 179105 | 1000 | HDB 3 Room";
-
         assertFalse(pairingList.getClientPropertyPairs().containsKey(clientDataNoSquareBrackets));
         assertFalse(pairingList.getClientPropertyPairs().containsKey(clientDataNoSeparator));
         assertFalse(pairingList.getClientPropertyPairs().containsKey(clientDataNoContactNumber));
+
+        String propertyDataNoSquareBrackets =
+                "Mary Tan Bee Bee | 107 North Bridge Rd, Singapore 179105 | 1000 | HDB 3 Room";
         assertFalse(pairingList.getClientPropertyPairs().containsValue(propertyDataNoSquareBrackets));
     }
 
@@ -122,7 +122,7 @@ class PairingListTest {
     }
 
     @Test
-    void getPropertyTenants_propertyRentedByOnlyPRESENTCLIENT_success() {
+    void getPropertyTenants_propertyRentedByOnlyPresentClient_success() {
         PairingList pairingList = pairingListInit();
         ArrayList<String> expectedTenantList = new ArrayList<>(List.of(CORRECT_CLIENT_PAIRING_DATA));
         assertEquals(expectedTenantList, pairingList.getPropertyTenants(PRESENT_PROPERTY));
