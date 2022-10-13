@@ -73,8 +73,8 @@ public class FlightList extends OperationList {
 
     private void checkValidFlightNumber(String substring) throws NumberFormatException {
         String[] letters = substring.split("");
-        for(int i = 0; i < letters.length; i++) {
-            if(!Character.isLetterOrDigit(substring.charAt(i))){
+        for (int i = 0; i < letters.length; i++) {
+            if (!Character.isLetterOrDigit(substring.charAt(i))) {
                 throw new NumberFormatException(substring);
             }
         }
