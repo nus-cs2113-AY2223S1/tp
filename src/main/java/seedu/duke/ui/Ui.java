@@ -25,6 +25,14 @@ public class Ui {
     protected static String formattedBoardingGroup;
     protected static String formattedSeatNumber;
     protected static String formattedBoardingTime;
+    protected static String formattedFlightNum;
+    protected static String formattedAirline;
+    protected static String formattedFlightDestination;
+    protected static String formattedFlightDepartureTime;
+    protected static String formattedFlightGateNumber;
+    protected static String formattedTerminal;
+    protected static String formattedCheckin;
+
     protected String lineSeparator;
     protected static final String LOGO = "   _____ _             _____            _             _\n"
             + "  / ____| |           / ____|          | |           | |\n"
@@ -109,6 +117,26 @@ public class Ui {
                 + "+-----------------------------------------------------------"
                 + "--------------------------------------------------------------+\n");
     }
+    public void showFlightListHeader() {
+        System.out.print("\n+-----------------------------------------------------------"
+                + "--------------------------------------------------------------+\n"
+                + "|                                                 FLIGHT DETAILS LOGBOOK"
+                + "                                              |\n"
+                + "+-----------------------------------------------------------"
+                + "--------------------------------------------------------------+\n"
+                + "| FLIGHT NUM |           AIRLINE           |  DESTINATION | DEPARTURE TIME |"
+                + " GATE NUM | TERMINAL | CHECK-IN ROW/DOOR  |\n"
+                + "+-----------------------------------------------------------"
+                + "--------------------------------------------------------------+\n");
+    }
+
+    private static void showFormattedFlightDetail() {
+        System.out.printf("| %s | %s | %s | %s | %s | %s | %s |\n"
+                        + "+-----------------------------------------------------------"
+                        + "--------------------------------------------------------------+\n",
+                formattedFlightNum, formattedAirline, formattedFlightDestination, formattedFlightDepartureTime,
+                formattedFlightGateNumber, formattedTerminal, formattedCheckin);
+    }
 
     public void showPassengerListBody(String name, String departureDate, String departureTime,
                                       String flightNumber, String gateNumber, int boardingGroup,
@@ -178,15 +206,11 @@ public class Ui {
     }
 
     public void showListOfFlights(ArrayList<FlightInfo> flightList) {
-        System.out.printf("\n*-----------------------------------------------------------"
-                + "----------------------------------------------------------------------*\n"
-                + "| %5s %10s %27s %20s %20s %12s %22s |\n"
-                + "*-----------------------------------------------------------"
-                + "----------------------------------------------------------------------*\n",
-                "FLIGHT NUM", "AIRLINE", "DESTINATION", "DEPARTURE TIME",
-                "BOARDING GATE", "TERMINAL", "CHECK-IN ROW/DOOR");
+        showFlightListHeader();
         for (FlightInfo flight : flightList) {
-            System.out.println(flight);
+            System.out.println("\n+-----------------------------------------------------------"
+                    + "--------------------------------------------------------------+"
+                    + flight);
         }
         System.out.println();
     }

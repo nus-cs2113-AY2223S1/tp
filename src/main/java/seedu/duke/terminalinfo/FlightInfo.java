@@ -26,7 +26,7 @@ public class FlightInfo {
 
     @Override
     public String toString() {
-        System.out.format("%5s %25s %15s %15s %20s %15s %15s", this.flightNum,
+        System.out.format("| %10s | %27s |%13s | %14s | %8s | %8s | %18s |", this.flightNum,
                 this.airline, this.destination, this.departureTime, this.gateNum, this.terminal, this.seat);
         return "";
     }
