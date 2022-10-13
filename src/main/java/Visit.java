@@ -52,6 +52,7 @@ public class Visit {
         message += "\n";
         message += "Time: " + getTimeOfVisit();
         message += "\n";
+        message += "Reason: ";
         message += getReason() == "" ? "NIL" : getReason();
         return message;
     }
