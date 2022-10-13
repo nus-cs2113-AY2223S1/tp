@@ -13,7 +13,7 @@ public class AddEmployeeCommand extends Command{
         this.employee = new Employee(employeeName);
     }
     @Override
-    public void execute(AppointmentList appointmentList, EmployeeList employeeList, ServiceList serviceList) {
+    public void execute() {
         EmployeeList.addEmployee(employee);
     }
     @Override

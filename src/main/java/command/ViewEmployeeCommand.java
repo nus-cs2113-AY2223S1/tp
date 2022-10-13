@@ -10,8 +10,8 @@ public class ViewEmployeeCommand extends Command{
 
     }
     @Override
-    public void execute(AppointmentList appointmentList, EmployeeList employeeList, ServiceList serviceList) {
-        employeeList.listEmployee();
+    public void execute() {
+        EmployeeList.listEmployee();
     }
 
     @Override

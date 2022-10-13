@@ -11,7 +11,7 @@ public class EndCommand extends Command{
     }
 
     @Override
-    public void execute(AppointmentList appointmentList, EmployeeList employeeList, ServiceList serviceList) {
+    public void execute() {
         // end
     }
 

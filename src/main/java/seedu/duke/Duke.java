@@ -14,6 +14,7 @@ public class Duke {
     private EmployeeList employeeList;
     private ServiceList serviceList;
 
+
     public Duke() {
         this.appointmentList = new AppointmentList();
         this.employeeList = new EmployeeList();

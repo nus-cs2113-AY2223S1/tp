@@ -13,7 +13,7 @@ public class RemoveServiceCommand extends Command{
     }
 
     @Override
-    public void execute(AppointmentList appointmentList, EmployeeList employeeList, ServiceList serviceList) {
+    public void execute() {
         ServiceList.removeService(serviceId);
     }
 
