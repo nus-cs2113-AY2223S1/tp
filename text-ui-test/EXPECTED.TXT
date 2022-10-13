@@ -5,8 +5,8 @@
                 |
 Program starting!
 Parseable command at the momemt: add, delete, list, view, exit
-Error creating file: Could not create file at %sdata/data.txt
+Error creating data file
 File not found :< Creating your data file now...
-Error creating file: Could not create file at %sdata/data.txt
->>> Echo CommandResult message: RecipEditor ends here...
+Error creating data file
+>>> RecipEditor ends here...
 Program exiting

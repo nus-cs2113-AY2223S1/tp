@@ -9,6 +9,6 @@ public class CommandResult {
     }
 
     public String getMessage() {
-        return "Echo CommandResult message: " + message;
+        return message;
     }
 }

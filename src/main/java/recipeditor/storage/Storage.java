@@ -13,15 +13,23 @@ import recipeditor.recipe.RecipeList;
 import recipeditor.ui.Ui;
 
 public class Storage {
-    private static final String DATA_FILE_PATH = "data/data.txt";
+    private static final String DATA_FILE_PATH = "./data/data.txt";
     private static final String RECIPE_NAME_FIELD_TYPE = "Recipe Name";
     private static final String RECIPE_DESCRIPTION_FIELD_TYPE = "Recipe Description";
     private static final String RECIPE_INGREDIENTS_FIELD_TYPE = "Recipe Ingredients";
     private static final String RECIPE_STEPS_FIELD_TYPE = "Recipe Steps";
 
     public static void createDataFile() {
-        File file = new File(DATA_FILE_PATH);
-        Ui.printFilePath(file, DATA_FILE_PATH);
+        try {
+            File file = new File(DATA_FILE_PATH);
+            if (file.createNewFile()) {
+                Ui.printFilePath(file, DATA_FILE_PATH);
+            } else {
+                Ui.printFilePath(file, DATA_FILE_PATH);
+            }
+        } catch (IOException ioException) {
+            Ui.showMessage("Error creating data file");
+        }
     }
 
     public static void loadRecipeToDataFile(Recipe recipe) {
