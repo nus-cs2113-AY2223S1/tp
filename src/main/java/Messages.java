@@ -18,6 +18,13 @@ public class Messages {
             + System.lineSeparator()
             + "To view all prescription records: 'viewAll'";
 
+    public static final String VISITS_MAIN_MENU =
+            "This is the Visits Main Menu!" + System.lineSeparator()
+            + "List of commands:" + System.lineSeparator()
+            + "To add a visit: add i/[ID] d/[date] t/[time] r/[reason]" + System.lineSeparator()
+            + "To edit a visit's reason: edit i/[ID] r/[reason]"
+            + System.lineSeparator()
+            + "To view all visit records: 'viewAll";
     public static final String INDEX_OUT_OF_RANGE_MESSAGE = "The index number is out of range. Try again.";
 
     public static void welcomeMessage() {
@@ -36,7 +43,25 @@ public class Messages {
 
 
     public static void printVisitsMenuMessage() {
+        System.out.println(VISITS_MAIN_MENU);
+    }
 
+    public static void printAddVisitMessage(String visitString) {
+        System.out.println("You have added a visit!");
+        printLine();
+        System.out.println(visitString);
+        printLine();
+    }
+
+    public static void printEditVisitReasonMessage(String visitString) {
+        System.out.println("You have edited reason for the visit. Here's the updated visit!");
+        printLine();
+        System.out.println(visitString);
+        printLine();
+    }
+
+    public static void printViewAllVisitsMessage() {
+        System.out.println("Here are all the visits:");
     }
 
     public static void printPrescriptionMenuMessage() {
