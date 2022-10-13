@@ -20,6 +20,7 @@ public class VisitList {
         Messages.printAddVisitMessage(visit.toString());
     }
 
+    //TODO: in future version, should think about how to edit reason when we have 2 visit records of the same ID
     public void editReason(String id, String reason) {
         int i = 0;
         for (i = 0; i < visitList.size(); i++) {

@@ -24,7 +24,7 @@ public class Messages {
             + "To add a visit: add i/[ID] d/[date] t/[time] r/[reason]" + System.lineSeparator()
             + "To edit a visit's reason: edit i/[ID] r/[reason]"
             + System.lineSeparator()
-            + "To view all visit records: 'viewAll";
+            + "To view all visit records: 'viewAll'";
     public static final String INDEX_OUT_OF_RANGE_MESSAGE = "The index number is out of range. Try again.";
 
     public static void welcomeMessage() {
