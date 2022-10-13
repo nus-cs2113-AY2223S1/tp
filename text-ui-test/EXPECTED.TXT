@@ -5,8 +5,6 @@
                 |
 Program starting!
 Parseable command at the momemt: add, delete, list, view, exit
-Error creating data file
-File not found :< Creating your data file now...
-Error creating data file
+File has been created at ./data/data.txt
 >>> RecipEditor ends here...
 Program exiting
