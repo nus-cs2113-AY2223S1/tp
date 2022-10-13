@@ -66,7 +66,8 @@ public class ConsoleParser {
                     ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_AMOUNT_LONG
             );
 
-            // Guard clause for mandatory arguments
+            /* Checks if mandatory arguments are provided */
+
             if (name == null || amountStr == null) {
                 throw new ConsoleParserCommandAddExpenseInvalidException();
             }
@@ -81,8 +82,10 @@ public class ConsoleParser {
                     ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_CATEGORY_LONG
             );
 
-            // Parse and normalize input
+            /* Parses and normalizes arguments */
+
             BigDecimal amount = new BigDecimal(amountStr);
+
             LocalDateTime dateTime;
             if (dateTimeStr == null) {
                 dateTime = LocalDateTime.now();
@@ -92,6 +95,8 @@ public class ConsoleParser {
                         DateTimeFormatter.ofPattern(Configurations.CONSOLE_INTERFACE_DATE_TIME_INPUT_FORMAT)
                 );
             }
+
+            /* Returns parsed arguments */
 
             return new ConsoleCommandAddExpense(
                     name,
@@ -127,13 +132,16 @@ public class ConsoleParser {
                     ConsoleParserConfigurations.COMMAND_VIEW_EXPENSE_ARG_EXPENSE_CATEGORY_LONG
             );
 
-            // Parse and normalize input
+            /* Parses and normalizes arguments */
+
             int expenseIndex;
             if (expenseIndexStr == null) {
                 expenseIndex = -1;
             } else {
                 expenseIndex = Integer.parseInt(expenseIndexStr);
             }
+
+            /* Returns parsed arguments */
 
             return new ConsoleCommandViewExpense(
                     expenseIndex,
@@ -160,13 +168,17 @@ public class ConsoleParser {
                     ConsoleParserConfigurations.COMMAND_DELETE_EXPENSE_ARG_EXPENSE_INDEX_LONG
             );
 
-            // Guard clause for mandatory arguments
+            /* Checks if mandatory arguments are provided */
+
             if (expenseIndexStr == null) {
                 throw new ConsoleParserCommandDeleteExpenseInvalidException();
             }
 
-            // Parse and normalize input
+            /* Parses and normalizes arguments */
+
             int expenseIndex = Integer.parseInt(expenseIndexStr);
+
+            /* Returns parsed arguments */
 
             return new ConsoleCommandDeleteExpense(expenseIndex);
         } catch (ParseException | NumberFormatException exception) {
@@ -190,7 +202,8 @@ public class ConsoleParser {
                     ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_EXPENSE_INDEX_LONG
             );
 
-            // Guard clause for mandatory arguments
+            /* Checks if mandatory arguments are provided */
+
             if (expenseIndexStr == null) {
                 throw new ConsoleParserCommandEditExpenseInvalidException();
             }
@@ -211,8 +224,10 @@ public class ConsoleParser {
                     ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_CATEGORY_LONG
             );
 
-            // Parse and normalize input
+            /* Parses and normalizes arguments */
+
             int expenseIndex = Integer.parseInt(expenseIndexStr);
+
             LocalDateTime dateTime;
             if (dateTimeStr == null) {
                 dateTime = null;
@@ -222,12 +237,15 @@ public class ConsoleParser {
                         DateTimeFormatter.ofPattern(Configurations.CONSOLE_INTERFACE_DATE_TIME_INPUT_FORMAT)
                 );
             }
+
             BigDecimal amount;
             if (amountStr == null) {
                 amount = null;
             } else {
                 amount = new BigDecimal(amountStr);
             }
+
+            /* Returns parsed arguments */
 
             return new ConsoleCommandEditExpense(
                     expenseIndex,
@@ -263,28 +281,33 @@ public class ConsoleParser {
                     ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_ORDER_LONG
             );
 
-            // Guard clause for mandatory arguments
-            if (type == null
-                    || !(type.equalsIgnoreCase(
-                    ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE_VAL_ALPHABETICAL
-            )
-                    || type.equalsIgnoreCase(
-                    ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE_VAL_DATE
-            )
-                    || type.equalsIgnoreCase(
-                    ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE_VAL_AMOUNT
-            ))) {
+            /* Checks if mandatory arguments are provided */
+
+            if (type == null || order == null) {
                 throw new ConsoleParserCommandSortExpenseInvalidTypeException();
             }
-            if (order == null
-                    || !(order.equalsIgnoreCase(
-                    ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_ORDER_VAL_ASCENDING
-            )
+
+            /* Checks if arguments are valid */
+
+            if (type.equalsIgnoreCase(
+                    ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE_VAL_ALPHABETICAL)
+                    || type.equalsIgnoreCase(
+                    ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE_VAL_AMOUNT)
+                    || type.equalsIgnoreCase(
+                    ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE_VAL_DATE)
+            ) {
+                throw new ConsoleParserCommandSortExpenseInvalidTypeException();
+            }
+
+            if (order.equalsIgnoreCase(
+                    ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_ORDER_VAL_ASCENDING)
                     || order.equalsIgnoreCase(
-                    ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_ORDER_VAL_DESCENDING
-            ))) {
+                    ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_ORDER_VAL_DESCENDING)
+            ) {
                 throw new ConsoleParserCommandSortExpenseInvalidTypeException();
             }
+
+            /* Returns parsed arguments */
 
             return new ConsoleCommandSortExpense(
                     type,
@@ -319,7 +342,8 @@ public class ConsoleParser {
                     ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_CURRENT_AMOUNT_LONG
             );
 
-            // Guard clause for mandatory arguments
+            /* Checks if mandatory arguments are provided */
+
             if (name == null || amountStr == null || currentAmountStr == null) {
                 throw new ConsoleParserCommandAddTargetInvalidException();
             }
@@ -331,9 +355,12 @@ public class ConsoleParser {
                     ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_DESCRIPTION_LONG
             );
 
-            // Parse and normalize input
+            /* Parses and normalizes arguments */
+
             BigDecimal amount = new BigDecimal(amountStr);
+
             BigDecimal currentAmount = new BigDecimal(currentAmountStr);
+
             LocalDateTime dateTime;
             if (dateTimeStr == null) {
                 dateTime = LocalDateTime.now();
@@ -343,6 +370,8 @@ public class ConsoleParser {
                         DateTimeFormatter.ofPattern(Configurations.CONSOLE_INTERFACE_DATE_TIME_INPUT_FORMAT)
                 );
             }
+
+            /* Returns parsed arguments */
 
             return new ConsoleCommandAddTarget(
                     name,
@@ -378,7 +407,8 @@ public class ConsoleParser {
                     ConsoleParserConfigurations.COMMAND_ADD_INCOME_ARG_AMOUNT_LONG
             );
 
-            // Guard clause for mandatory arguments
+            /* Checks if mandatory arguments are provided */
+
             if (name == null || amountStr == null) {
                 throw new ConsoleParserCommandAddIncomeInvalidException(
                         Messages.CONSOLE_ERROR_COMMAND_ADD_INCOME_INVALID
@@ -392,8 +422,10 @@ public class ConsoleParser {
                     ConsoleParserConfigurations.COMMAND_ADD_INCOME_ARG_DESCRIPTION_LONG
             );
 
-            // Parse and normalize input
+            /* Parses and normalizes arguments */
+
             BigDecimal amount = new BigDecimal(amountStr);
+
             LocalDateTime dateTime;
             if (dateTimeStr == null) {
                 dateTime = LocalDateTime.now();
@@ -403,6 +435,8 @@ public class ConsoleParser {
                         DateTimeFormatter.ofPattern(Configurations.CONSOLE_INTERFACE_DATE_TIME_INPUT_FORMAT)
                 );
             }
+
+            /* Returns parsed arguments */
 
             return new ConsoleCommandAddIncome(
                     name,
