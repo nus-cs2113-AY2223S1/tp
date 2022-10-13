@@ -5,12 +5,6 @@
                 |
 Program starting!
 Parseable command at the momemt: add, delete, list, view, exit
-<<<<<<< HEAD
 File has been created at ./data/data.txt
-=======
-Error creating data file
-File not found :< Creating your data file now...
-Error creating data file
->>>>>>> 3b324c8531036561e78d3f7013ed75a946644dc2
 >>> RecipEditor ends here...
 Program exiting
