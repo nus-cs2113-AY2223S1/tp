@@ -15,7 +15,7 @@ public class Parser {
             return new EndCommand();
         }
 
-        String args[] = input.split(" ");
+        String args[] = input.split(" ",2);
 
         String type = args[0];
         String statement = args[1].trim();
@@ -36,15 +36,17 @@ public class Parser {
     }
 
     public Command parseAppointment(String input){
-        if(!"".equals(input)){
-            if(input.equals("view")){
-                return new ViewAppointmentCommand();
-            }
-            System.out.println("input invalid");
+        if("".equals(input)){
+
+            System.out.println("Appointment input invalid");
             return new EndCommand();
         }
+        if(input.equals("view")){
+            return new ViewAppointmentCommand();
+        }
 
-        String args[] = input.split(" ");
+        String args[] = input.split(" ", 2);
+        System.out.println(input);
         String type = args[0];
         String statement = args[1];
         switch(type) {
@@ -158,6 +160,7 @@ public class Parser {
 
 
     public Command prepareRemoveAppointment(String input){
+        input = " " + input;
         int index = indexOfRemove(input);
         if(index == -1){
             System.out.println("input invalid");
