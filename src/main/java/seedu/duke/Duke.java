@@ -11,7 +11,7 @@ public class Duke {
     /**
      * Main entry-point for the java.duke.Duke application.
      */
-    private Parser parser;
+    private Parser parser = new Parser();
 
     public static void main(String[] args) {
         new Duke().run();
