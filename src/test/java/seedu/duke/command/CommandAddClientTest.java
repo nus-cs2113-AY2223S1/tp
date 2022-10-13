@@ -27,10 +27,10 @@ public class CommandAddClientTest {
     private static final String CLIENT_ONE_CONTACT_NUMBER = "83625471";
     private static final String CLIENT_ONE_EMAIL = "jojofirst@jmail.com";
     private static final String CLIENT_ONE_BUDGET = "9000";
-    private static final ArrayList<String> clientOneDetails = new ArrayList<>(
+    private static final ArrayList<String> CLIENT_ONE_DETAILS = new ArrayList<>(
             List.of(CLIENT_ONE_NAME, CLIENT_ONE_CONTACT_NUMBER, CLIENT_ONE_EMAIL, CLIENT_ONE_BUDGET)
     );
-    private static final String clientOneSummary = CLIENT_NAME_LABEL + SPACE + CLIENT_ONE_NAME
+    private static final String CLIENT_ONE_SUMMARY = CLIENT_NAME_LABEL + SPACE + CLIENT_ONE_NAME
             + LINE_SEPARATOR + DOUBLE_SPACE + CLIENT_CONTACT_NUMBER_LABEL + SPACE + CLIENT_ONE_CONTACT_NUMBER
             + LINE_SEPARATOR + DOUBLE_SPACE + CLIENT_EMAIL_LABEL + SPACE + CLIENT_ONE_EMAIL
             + LINE_SEPARATOR + DOUBLE_SPACE + CLIENT_BUDGET_LABEL + CLIENT_ONE_BUDGET + CLIENT_PER_MONTH_LABEL;
@@ -40,10 +40,10 @@ public class CommandAddClientTest {
     private static final String CLIENT_TWO_CONTACT_NUMBER = "65329466";
     private static final String CLIENT_TWO_EMAIL = "";
     private static final String CLIENT_TWO_BUDGET = "10000";
-    private static final ArrayList<String> clientTwoDetails = new ArrayList<>(
+    private static final ArrayList<String> CLIENT_TWO_DETAILS = new ArrayList<>(
             List.of(CLIENT_TWO_NAME, CLIENT_TWO_CONTACT_NUMBER, CLIENT_TWO_EMAIL, CLIENT_TWO_BUDGET)
     );
-    private static final String clientTwoSummary = CLIENT_NAME_LABEL + SPACE + CLIENT_TWO_NAME
+    private static final String CLIENT_TWO_SUMMARY = CLIENT_NAME_LABEL + SPACE + CLIENT_TWO_NAME
             + LINE_SEPARATOR + DOUBLE_SPACE + CLIENT_CONTACT_NUMBER_LABEL + SPACE + CLIENT_TWO_CONTACT_NUMBER
             + LINE_SEPARATOR + DOUBLE_SPACE + CLIENT_BUDGET_LABEL + CLIENT_TWO_BUDGET + CLIENT_PER_MONTH_LABEL;
 
@@ -58,7 +58,7 @@ public class CommandAddClientTest {
     public void execute() {
         //Testing Case 1 (With Email)
         int clientListSizeByCounting = clientList.getCurrentListSize();
-        new CommandAddClient(clientOneDetails).execute(ui, storage, propertyList, clientList, pairingList);
+        new CommandAddClient(CLIENT_ONE_DETAILS).execute(ui, storage, propertyList, clientList, pairingList);
         assertEquals(CLIENT_ONE_NAME, clientList.getClientList().get(clientList.getCurrentListSize() - 1)
                 .getClientName());
         assertEquals(CLIENT_ONE_CONTACT_NUMBER, clientList.getClientList().get(clientList.getCurrentListSize() - 1)
@@ -67,11 +67,12 @@ public class CommandAddClientTest {
                 .getClientEmail());
         assertEquals(CLIENT_ONE_BUDGET, clientList.getClientList().get(clientList.getCurrentListSize() - 1)
                 .getClientBudgetPerMonth());
-        assertEquals(clientOneSummary, clientList.getClientList().get(clientList.getCurrentListSize() - 1).toString());
+        assertEquals(CLIENT_ONE_SUMMARY, clientList.getClientList().get(clientList.getCurrentListSize() - 1)
+                .toString());
         assertEquals(clientList.getCurrentListSize(), ++clientListSizeByCounting);
 
         //Testing Case 2 (Without Email)
-        new CommandAddClient(clientTwoDetails).execute(ui, storage, propertyList, clientList, pairingList);
+        new CommandAddClient(CLIENT_TWO_DETAILS).execute(ui, storage, propertyList, clientList, pairingList);
         assertEquals(CLIENT_TWO_NAME, clientList.getClientList().get(clientList.getCurrentListSize() - 1)
                 .getClientName());
         assertEquals(CLIENT_TWO_CONTACT_NUMBER, clientList.getClientList().get(clientList.getCurrentListSize() - 1)
@@ -80,7 +81,8 @@ public class CommandAddClientTest {
                 .getClientEmail());
         assertEquals(CLIENT_TWO_BUDGET, clientList.getClientList().get(clientList.getCurrentListSize() - 1)
                 .getClientBudgetPerMonth());
-        assertEquals(clientTwoSummary, clientList.getClientList().get(clientList.getCurrentListSize() - 1).toString());
+        assertEquals(CLIENT_TWO_SUMMARY, clientList.getClientList().get(clientList.getCurrentListSize() - 1)
+                .toString());
         assertEquals(clientList.getCurrentListSize(), ++clientListSizeByCounting);
     }
 }
