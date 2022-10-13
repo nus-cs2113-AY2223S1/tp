@@ -14,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class PatientListTest {
     private static final PrintStream SYSTEM_OUT = System.out;
     private static final ByteArrayOutputStream OUTPUT_STREAM = new ByteArrayOutputStream();
+    private static final UI ui = new UI();
 
     @BeforeEach
     void setUp() {
@@ -37,32 +38,32 @@ public class PatientListTest {
     @Test
     void isNotEmpty_nonEmptyList_returnFalse() {
         PatientList patientList = new PatientList();
-        patientList.addPatient("Jack", "12-10-2001", "M", "T1234");
+        patientList.addPatient(ui, "Jack", "12-10-2001", "M", "T1234");
         assertFalse(patientList.isEmpty());
     }
 
     @Test
     void listPatients_emptyList() {
         PatientList patientList = new PatientList();
-        patientList.listPatients();
+        patientList.listPatients(ui);
         assertEquals("There are no patients in the system right now!", OUTPUT_STREAM.toString().trim());
     }
 
     @Test
     void addPatient() {
         PatientList patientList = new PatientList();
-        patientList.addPatient("Jack", "12-10-2001", "M", "T1234");
+        patientList.addPatient(ui, "Jack", "12-10-2001", "M", "T1234");
         assertEquals(1, patientList.getTotalNumberofPatients());
-        patientList.addPatient("Jill", "10-10-2001", "F", "T1244");
-        patientList.addPatient("James", "11-10-2001", "M", "T1334");
+        patientList.addPatient(ui, "Jill", "10-10-2001", "F", "T1244");
+        patientList.addPatient(ui, "James", "11-10-2001", "M", "T1334");
         assertEquals(3, patientList.getTotalNumberofPatients());
     }
 
     @Test
     void findPatient_PatientExists() {
         PatientList patientList = new PatientList();
-        patientList.addPatient("Jack", "12-10-2001", "M", "T1234");
-        patientList.addPatient("Jill", "10-10-2001", "F", "T1244");
+        patientList.addPatient(ui, "Jack", "12-10-2001", "M", "T1234");
+        patientList.addPatient(ui, "Jill", "10-10-2001", "F", "T1244");
         Patient patient = patientList.findPatient("T1244");
         assertEquals("Jill", patient.getName());
     }
@@ -76,8 +77,8 @@ public class PatientListTest {
     @Test
     void findPatient_PatientDoesNotExist() {
         PatientList patientList = new PatientList();
-        patientList.addPatient("Jack", "12-10-2001", "M", "T1234");
-        patientList.addPatient("Jill", "10-10-2001", "F", "T1244");
+        patientList.addPatient(ui, "Jack", "12-10-2001", "M", "T1234");
+        patientList.addPatient(ui, "Jill", "10-10-2001", "F", "T1244");
         assertNull(patientList.findPatient("Michael"));
     }
 }
