@@ -1,4 +1,7 @@
-package seedu.duke;
+package petCommand;
+
+import pet.Pet;
+import pet.PetList;
 
 public class removePetCommand {
     private PetList Pets;

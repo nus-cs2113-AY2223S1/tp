@@ -1,4 +1,4 @@
-package seedu.duke;
+package pet;
 import java.util.ArrayList;
 
 public class PetList {
