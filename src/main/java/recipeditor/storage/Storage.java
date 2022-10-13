@@ -20,8 +20,19 @@ public class Storage {
     private static final String RECIPE_STEPS_FIELD_TYPE = "Recipe Steps";
 
     public static void createDataFile() {
-        File file = new File(DATA_FILE_PATH);
-        Ui.printFilePath(file, DATA_FILE_PATH);
+        try {
+            File file = new File(DATA_FILE_PATH);
+            if (!file.getParentFile().mkdirs()) {
+                Ui.showMessage("Error in creating parent file");
+            }
+            if (file.createNewFile()) {
+                Ui.printFilePath(file, DATA_FILE_PATH);
+            } else {
+                Ui.printFilePath(file, DATA_FILE_PATH);
+            }
+        } catch (IOException ioException) {
+            Ui.showMessage("Error creating data file");
+        }
     }
 
     public static void loadRecipeToDataFile(Recipe recipe) {
