@@ -22,14 +22,15 @@ public class ParserTest {
         assertTrue(Parser.parse("search /title software engineering") instanceof SearchModuleCommand);
     }
 
-    @Test
-    public void parse_wrongSearchInput_returnNewErrorCommand() {
-        assertTrue(Parser.parse("search") instanceof IncompleteCommand);
-        assertTrue(Parser.parse("search csss2113") instanceof InvalidModuleCommand);
-        assertTrue(Parser.parse("search Cs20401c") instanceof InvalidModuleCommand);
-        assertTrue(Parser.parse("search Cs2113 software engineering") instanceof UnknownCommand);
-        assertTrue(Parser.parse("search software engineering CS2113") instanceof UnknownCommand);
-    }
+    // no longer need this test for invalid module code inputs
+//    @Test
+//    public void parse_wrongSearchInput_returnNewErrorCommand() {
+//        assertTrue(Parser.parse("search") instanceof IncompleteCommand);
+//        assertTrue(Parser.parse("search csss2113") instanceof InvalidModuleCommand);
+//        assertTrue(Parser.parse("search Cs20401c") instanceof InvalidModuleCommand);
+//        assertTrue(Parser.parse("search Cs2113 software engineering") instanceof UnknownCommand);
+//        assertTrue(Parser.parse("search software engineering CS2113") instanceof UnknownCommand);
+//    }
 
     @Test
     public void parse_addInput_returnNewAddCommand() {
