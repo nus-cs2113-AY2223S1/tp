@@ -16,7 +16,7 @@ import recipeditor.ui.Ui;
 
 public class Parser {
 
-    public Command parseCommand(String input) {
+    public static Command parseCommand(String input) {
         String[] parsed = input.split(" ");
         String commandWord = parsed[0].toLowerCase();
 
@@ -34,7 +34,7 @@ public class Parser {
                 return new DeleteCommand(index);
             } catch (Exception e) {
                 System.out.format("Exception: Wrong command Format%n"
-                        + "Try the command in correct format: mark <index of task>%n");
+                        + "Try the command in correct format: delete <index of task>%n");
                 return new InvalidCommand();
             }
 
@@ -54,7 +54,7 @@ public class Parser {
         }
     }
 
-    private Command parseAddCommand() {
+    private static Command parseAddCommand() {
         AddMode add = new AddMode(); // Switch to Add Mode in here
         add.enterAddMode();
         add.exitAddMode();
@@ -72,7 +72,7 @@ public class Parser {
         return new InvalidCommand();
     }
 
-    private void checkForExcessArgument(String[] args, int length)
+    private static void checkForExcessArgument(String[] args, int length)
             throws ExcessArgumentException {
         if (args.length > length) {
             throw new ExcessArgumentException();
