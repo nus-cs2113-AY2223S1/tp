@@ -26,10 +26,12 @@ import seedu.moneygowhere.exceptions.ConsoleParserCommandNotFoundException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandSortExpenseInvalidTypeException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandViewExpenseInvalidException;
 import seedu.moneygowhere.exceptions.ExpenseManagerExpenseNotFoundException;
+import seedu.moneygowhere.logger.LocalLogger;
 import seedu.moneygowhere.parser.ConsoleParser;
 import seedu.moneygowhere.parser.ConsoleParserConfigurations;
 import seedu.moneygowhere.storage.LocalStorage;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -42,6 +44,7 @@ import java.util.Scanner;
  */
 @SuppressWarnings({"unused", "FieldMayBeFinal"})
 public class ConsoleInterface {
+    private LocalLogger localLogger;
     private Scanner scanner;
     private ExpenseManager expenseManager;
     private TargetManager targetManager;
@@ -51,6 +54,16 @@ public class ConsoleInterface {
      * Initializes the console interface.
      */
     public ConsoleInterface() {
+        try {
+            localLogger = new LocalLogger();
+        } catch (IOException e) {
+            printErrorMessage("An IO error occurred in the console logger. The logger will be disabled");
+        }
+
+        if (localLogger != null) {
+            localLogger.logInfo("Initializing MoneyGoWhere");
+        }
+
         scanner = new Scanner(System.in);
         expenseManager = new ExpenseManager();
         targetManager = new TargetManager();
@@ -130,6 +143,12 @@ public class ConsoleInterface {
      */
     public String getConsoleInput() {
         return scanner.nextLine();
+    }
+
+    private void runCommandBye(ConsoleCommandBye consoleCommandBye) {
+        if (localLogger != null) {
+            localLogger.logInfo("Terminating MoneyGoWhere");
+        }
     }
 
     private void runCommandAddExpense(ConsoleCommandAddExpense consoleCommandAddExpense) {
@@ -405,7 +424,7 @@ public class ConsoleInterface {
             if (hasParseError) {
                 // Do nothing if there is a parse error
             } else if (consoleCommand instanceof ConsoleCommandBye) {
-                // Terminate the program
+                runCommandBye((ConsoleCommandBye) consoleCommand);
                 return;
             } else if (consoleCommand instanceof ConsoleCommandAddExpense) {
                 runCommandAddExpense((ConsoleCommandAddExpense) consoleCommand);
