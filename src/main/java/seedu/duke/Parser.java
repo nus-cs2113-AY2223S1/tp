@@ -700,7 +700,8 @@ public class Parser {
         }
     }
 
-    private void checkForClientPropertyListIndexOutOfBounds(int clientIndex, int propertyIndex) throws InvalidIndexException {
+    private void checkForClientPropertyListIndexOutOfBounds(int clientIndex, int propertyIndex)
+            throws InvalidIndexException {
         checkForClientListIndexOutOfBounds(clientIndex);
         checkForPropertyListIndexOutOfBounds(propertyIndex);
     }
