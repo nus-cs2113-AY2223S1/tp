@@ -6,6 +6,7 @@ import service.ServiceList;
 
 public class RemoveServiceCommand extends Command{
     public final static String COMMAND_WORD = "remove";
+
     private int serviceId;
 
     public RemoveServiceCommand(int serviceId){
@@ -13,7 +14,7 @@ public class RemoveServiceCommand extends Command{
     }
 
     @Override
-    public void execute(AppointmentList appointmentList, EmployeeList employeeList, ServiceList serviceList) {
+    public void execute() {
         ServiceList.removeService(serviceId);
     }
 

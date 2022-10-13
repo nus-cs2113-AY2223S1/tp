@@ -15,9 +15,10 @@ public class Parser {
             return new EndCommand();
         }
 
-        int indexOfSpace = input.indexOf(" ");
-        String type = input.substring(0,indexOfSpace);
-        String statement = input.substring(indexOfSpace).trim();
+        String args[] = input.split(" ");
+
+        String type = args[0];
+        String statement = args[1].trim();
 
         switch(type) {
         case "appointment":
@@ -35,7 +36,7 @@ public class Parser {
     }
 
     public Command parseAppointment(String input){
-        if(!input.contains(" ")){
+        if(!"".equals(input)){
             if(input.equals("view")){
                 return new ViewAppointmentCommand();
             }
@@ -43,21 +44,22 @@ public class Parser {
             return new EndCommand();
         }
 
-        String type = input.substring(0,input.indexOf(" "));
-        String statement = input.substring(input.indexOf(" ")).trim();
+        String args[] = input.split(" ");
+        String type = args[0];
+        String statement = args[1];
         switch(type) {
         case AddAppointmentCommand.COMMAND_WORD:
             return prepareAddAppointment(statement);
-        break;
         case RemoveAppointmentCommand.COMMAND_WORD:
             return prepareRemoveAppointment(statement);
-        break;
+        /*
         case AllocateAppointmentCommand.COMMAND_WORD:
             return prepareAllocateAppointment(statement);
         break;
         case SetAppointmentStatusCommand.COMMAND_WORD:
             return prepareSetAppointmentStatusCommand(statement);
             break;
+         */
         default:
             return new EndCommand();
         }
@@ -109,6 +111,7 @@ public class Parser {
         return new RemoveServiceCommand(index);
     }
 
+    /*
     public Command prepareSetAppointmentStatusCommand(String input){
         int i = input.indexOf(" i/");
         int s = input.indexOf(" s/");
@@ -124,7 +127,6 @@ public class Parser {
         return new AllocateApointmentCommand(index, status);
     }
 
-
     public Command prepareAllocateAppointment(String input){
         int i = input.indexOf(" i/");
         int n = input.indexOf(" n/");
@@ -139,6 +141,8 @@ public class Parser {
 
         return new AllocateApointmentCommand(index, name);
     }
+
+     */
 
     private int numOfSpace(String input){
         int num = 0;
@@ -162,6 +166,7 @@ public class Parser {
         return new RemoveAppointmentCommand(index);
     }
 
+    /*
     public Command prepareRemovePet(String input){
         int index = indexOfRemove(input);
         if(index == -1){
@@ -171,6 +176,7 @@ public class Parser {
 
         return new RemovePetCommand(index);
     }
+     */
 
     public int indexOfRemove(String input){
         if(!input.contains(" i/")){
@@ -187,20 +193,20 @@ public class Parser {
 
 
     public Command prepareAddAppointment(String input){
-        int s = input.indexOf(" s/");
-        int p = input.indexOf(" p/");
-        int d = input.indexOf(" d/");
 
-        if(s > p || p > d || s == -1 || p == -1 || d == -1){
-            System.out.println("invalid input");
-            return new EndCommand();
-        }
+        String args[] = input.split(" ");
+        String petName = args[0].substring(2);
+        String appointmentDate = args[1].substring(2);
 
+/*
         String service = input.substring(s + lengthOfSignature, p);
         String petName = input.substring(p + lengthOfSignature, d);
         String appointmentDate = input.substring(d + lengthOfSignature);
 
         return new AddAppointmentCommand(petName, appointmentDate, service);
+*/
+        return new AddAppointmentCommand(petName, appointmentDate);
+
     }
 
     public boolean isInt(String val){
@@ -223,7 +229,7 @@ public class Parser {
 
         String name = input.substring(startOfN + lengthOfSignature, startOfS);
         String status = input.substring(startOfS + lengthOfSignature);
-        return new AddPetCommand(name, status);
+        return new AddPetCommand(name, status, true);
     }
 
 
@@ -241,8 +247,10 @@ public class Parser {
         switch(type) {
         case AddPetCommand.COMMAND_WORD:
             return prepareAddPet(statement);
+/*
         case RemovePetCommand.COMMAND_WORD:
             return prepareRemovePet(statement);
+*/
         default:
             System.out.println("input invalid");
             return new EndCommand();

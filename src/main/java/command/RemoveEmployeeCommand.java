@@ -12,7 +12,7 @@ public class RemoveEmployeeCommand extends Command{
         this.employeeId = employeeId;
     }
     @Override
-    public void execute(AppointmentList appointmentList, EmployeeList employeeList, ServiceList serviceList) {
+    public void execute() {
         EmployeeList.removeEmployee(employeeId);
     }
 

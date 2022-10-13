@@ -8,6 +8,6 @@ public abstract class Command {
 
     Command() {
     }
-    public abstract void execute(AppointmentList appointmentList, EmployeeList employeeList, ServiceList serviceList);
+    public abstract void execute();
     public abstract boolean isExit();
 }
