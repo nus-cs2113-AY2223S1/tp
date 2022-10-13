@@ -46,13 +46,13 @@ public class Visit {
     @Override
     public String toString() {
         String message = "";
-        message += "ID: " + getId();
+        message += "\tID: " + getId();
         message += "\n";
-        message += "Date: " + getDateOfVisit();
+        message += "\tDate: " + getDateOfVisit();
         message += "\n";
-        message += "Time: " + getTimeOfVisit();
+        message += "\tTime: " + getTimeOfVisit();
         message += "\n";
-        message += "Reason: ";
+        message += "\tReason: ";
         message += getReason() == "" ? "NIL" : getReason();
         return message;
     }

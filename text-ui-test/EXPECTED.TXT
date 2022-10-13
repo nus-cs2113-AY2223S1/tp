@@ -15,9 +15,9 @@ List of commands:
 * To quit OneDoc: bye
 Ok! I've added a patient! The patient's details are as follows:
 	____________________________________________________________
-	Michael
-	Male
-	Born on 22-12-2022
-	340994
+	Name: Michael
+	Gender: Male
+	Date of Birth: 22-12-2022
+	ID: 340994
 	____________________________________________________________
 Goodbye!

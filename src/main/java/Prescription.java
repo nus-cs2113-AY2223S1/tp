@@ -66,10 +66,10 @@ public class Prescription {
 
     @Override
     public String toString() {
-        return "ID: " + patientId + System.lineSeparator()
-                + "Medicine: " + medicine + System.lineSeparator()
-                + "Dosage: " + dosage + System.lineSeparator()
-                + "Time Interval: " + timeInterval + System.lineSeparator()
-                + "Status: " + getStatusString();
+        return "\tID: " + patientId + System.lineSeparator()
+                + "\tMedicine: " + medicine + System.lineSeparator()
+                + "\tDosage: " + dosage + System.lineSeparator()
+                + "\tTime Interval: " + timeInterval + System.lineSeparator()
+                + "\tStatus: " + getStatusString();
     }
 }

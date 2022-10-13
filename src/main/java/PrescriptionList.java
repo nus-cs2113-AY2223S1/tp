@@ -41,13 +41,10 @@ public class PrescriptionList {
         ui.printViewAllPrescriptionsMessage();
         ui.printLine();
         for (int i = 0; i < prescriptionsList.size(); i++) {
-            System.out.println("Prescription " + (i + 1));
+            System.out.println((i + 1) + ")");
             System.out.println(prescriptionsList.get(i));
-            if (i != prescriptionsList.size() - 1) {
-                System.out.println();
-            }
+            ui.printLine();
         }
-        ui.printLine();
     }
 
     // TODO one potential improvement is to make this three different methods
