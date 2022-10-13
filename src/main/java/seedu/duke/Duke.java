@@ -4,6 +4,7 @@ import command.Command;
 import employee.EmployeeList;
 import service.ServiceList;
 import parser.Parser;
+
 import java.util.Scanner;
 
 public class Duke {
@@ -13,6 +14,8 @@ public class Duke {
     private AppointmentList appointmentList;
     private EmployeeList employeeList;
     private ServiceList serviceList;
+
+    private Parser parser;
 
     public Duke() {
         this.appointmentList = new AppointmentList();
@@ -35,7 +38,7 @@ public class Duke {
             try {
                 String fullCommand = readCommand();
                 showLine();
-                Command c = Parser.parseCommand(fullCommand);
+                Command c = parser.parseCommand(fullCommand);
                 c.execute(appointmentList, employeeList, serviceList);
                 isExit = c.isExit();
 //            } catch (DukeException e) {
