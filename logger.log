@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2022-10-10T18:22:41.627063Z</date>
-  <millis>1665426161627</millis>
-  <nanos>63000</nanos>
+  <date>2022-10-11T07:57:46.581432200Z</date>
+  <millis>1665475066581</millis>
+  <nanos>432200</nanos>
   <sequence>0</sequence>
   <logger>global</logger>
   <level>INFO</level>
@@ -14,10 +14,34 @@
   <message>starting Timetabler program...</message>
 </record>
 <record>
-  <date>2022-10-10T18:22:45.542133Z</date>
-  <millis>1665426165542</millis>
-  <nanos>133000</nanos>
+  <date>2022-10-11T07:58:22.095444400Z</date>
+  <millis>1665475102095</millis>
+  <nanos>444400</nanos>
   <sequence>1</sequence>
+  <logger>global</logger>
+  <level>INFO</level>
+  <class>seedu.duke.commands.nusmodsapi.Nusmods</class>
+  <method>getModuleInfo</method>
+  <thread>1</thread>
+  <message>api call successful, module exists</message>
+</record>
+<record>
+  <date>2022-10-11T07:58:49.911143Z</date>
+  <millis>1665475129911</millis>
+  <nanos>143000</nanos>
+  <sequence>2</sequence>
+  <logger>global</logger>
+  <level>INFO</level>
+  <class>seedu.duke.Duke</class>
+  <method>main</method>
+  <thread>1</thread>
+  <message>exit flag detected, attempting to exit</message>
+</record>
+<record>
+  <date>2022-10-11T07:58:49.911143Z</date>
+  <millis>1665475129911</millis>
+  <nanos>143000</nanos>
+  <sequence>3</sequence>
   <logger>global</logger>
   <level>INFO</level>
   <class>seedu.duke.Duke</class>
