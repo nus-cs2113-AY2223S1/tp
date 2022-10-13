@@ -1,13 +1,14 @@
 package seedu.duke;
 
 public class FinanceException extends Throwable {
-    public enum exceptionCollection {
-        COMMAND_TYPE_EXCEPTION,
-        FILE_NOT_FOUND,
-        UNKNOWN_EXCEPTION
+    public enum ExceptionCollection {
+        COMMAND_TYPE_EXCEPTION
+        //UNKNOWN_EXCEPTION
     }
-    private exceptionCollection exceptionType;
-    public FinanceException(exceptionCollection exception) {
+
+    private final ExceptionCollection exceptionType;
+
+    public FinanceException (ExceptionCollection exception) {
         super();
         this.exceptionType = exception;
     }
@@ -17,9 +18,6 @@ public class FinanceException extends Throwable {
         switch (exceptionType) {
         case COMMAND_TYPE_EXCEPTION:
             errorMessage = "Command type not correct.";
-            break;
-        case FILE_NOT_FOUND:
-            errorMessage = "File not found.";
             break;
         default:
             errorMessage = "Unknown exception happens.";

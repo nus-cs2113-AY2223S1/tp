@@ -1,10 +1,11 @@
 package seedu.duke;
 
 public class Ui {
-    final private static String INDENTATION = "    ";
+    private static final String indentation = "    ";
 
     public static void showWelcomeMessage() {
-        final String LOGO = "\n" +
+        String logo = "\n"
+                +
                 "    _____                                              __  __                                         \n"
                 +
                 "   / ____|                                            |  \\/  |                                        \n"
@@ -20,52 +21,36 @@ public class Ui {
                 "                                                __/ |                                __/ |            \n"
                 +
                 "                                               |___/                                |___/             \n";
-        showStandardOutput(INDENTATION + "Welcome to " + LOGO);
-    }
-
-    public static void showExitMessage() {
-        final String EXIT_MESSAGE = "Bye. Thank you for your support!";
-        showStandardOutput(INDENTATION + EXIT_MESSAGE);
+        showStandardOutput(indentation + "Welcome to " + logo);
     }
 
     public static void showExceptionMessage(String exceptionMessage) {
-        showStandardOutput(INDENTATION + exceptionMessage);
+        showStandardOutput(indentation + exceptionMessage);
     }
 
     // Maybe be improved
     public static void showPromptInfo() {
         String promptInfo = "Would you like to register or login?";
-        System.out.println(INDENTATION + promptInfo);
+        System.out.println(indentation + promptInfo);
         System.out.println();
     }
 
     public static void showRegisterInfo() {
         final String MESSAGE = "Nice, we will be creating you a new wallet right away, but first of all, \n"
-                + INDENTATION +
+                +
+                indentation
+                +
                 "please first add your username and then a password for your wallet.";
-        showStandardOutput(INDENTATION + MESSAGE);
+        showStandardOutput(indentation + MESSAGE);
     }
 
     public static void showRegisterSuccessInfo() {
         final String MESSAGE = "Nice, a new wallet has been created for you, \n"
-                + INDENTATION + "You can now login to it";
-        showStandardOutput(INDENTATION + MESSAGE);
-    }
-
-    public static void showEnterUsernamePrompt() {
-        final String MESSAGE = "Username:";
-        System.out.print(INDENTATION + MESSAGE);
-    }
-
-    public static void showEnterPasswordPrompt() {
-        final String MESSAGE = "Password:";
-        System.out.print(INDENTATION + MESSAGE);
-    }
-
-    public static void showLoginResults(Boolean isLoginSuccess) {
-        final String MESSAGE = isLoginSuccess ? "Login successfully."
-                : "Username or Password not correct. Please try again.";
-        showStandardOutput(INDENTATION + MESSAGE);
+                +
+                indentation
+                +
+                "You can now login to it";
+        showStandardOutput(indentation + MESSAGE);
     }
 
     public static void showStandardOutput(String output) {
@@ -76,11 +61,22 @@ public class Ui {
         System.out.println();
     }
 
-    public static void showEmptyLine() {
-        System.out.println();
+    public static void usernameLogin() {
+        final String MESSAGE =  "Please enter your username: ";
+        showStandardOutput(MESSAGE);
     }
 
+    public static void passwordLogin() {
+        final String MESSAGE = "Please enter your password: ";
+        showStandardOutput(MESSAGE);
+    }
+
+    public static void accountEntry() {
+        final String MESSAGE = "Welcome to your account\nPlease enter any commands";
+        showStandardOutput(MESSAGE);
+    }
+    
     private static void printSplitLine() {
-        System.out.println(INDENTATION + "____________________________________________________________");
+        System.out.println(indentation + "____________________________________________________________");
     }
 }
