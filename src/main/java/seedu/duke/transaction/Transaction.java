@@ -52,6 +52,11 @@ public class Transaction {
         return returnedAt.isBefore(LocalDate.now());
     }
 
+    public String convertTransactionToFileFormat() {
+        String separator = " | ";
+        return transactionId + separator + item + separator + borrower + separator + duration + separator + createdAt;
+    }
+
     @Override
     public String toString() {
         String transactionIcon = "[" + (isFinished() ? "X" : " ") + "] ";

@@ -13,6 +13,10 @@ public class TransactionList {
         this.transactionList = new ArrayList<>();
     }
 
+    public TransactionList(ArrayList<Transaction> transactionList) {
+        this.transactionList = transactionList;
+    }
+
     public int getSize() {
         return transactionList.size();
     }
@@ -49,6 +53,14 @@ public class TransactionList {
                 .filter(t -> t.getItemId().equals(itemId))
                 .count();
         return count > 0;
+    }
+
+    public String convertTransactionListToFileFormat() {
+        StringBuilder formattedString = new StringBuilder();
+        for (Transaction transaction: transactionList) {
+            formattedString.append(transaction.convertTransactionToFileFormat());
+        }
+        return formattedString.toString();
     }
 
     @Override
