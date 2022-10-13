@@ -8,12 +8,12 @@ import org.apache.commons.cli.Options;
  */
 public class ConsoleParserConfigurations {
     /**
-     * Defines command parameters for console command Bye.
+     * Defines parameters for console command Bye.
      */
     public static final String COMMAND_BYE = "bye";
 
     /**
-     * Defines command parameters for console command Add-Expense.
+     * Defines parameters for console command Add-Expense.
      */
     public static final String COMMAND_ADD_EXPENSE = "add-expense";
     public static final String COMMAND_ADD_EXPENSE_ARG_NAME = "n";
@@ -36,10 +36,11 @@ public class ConsoleParserConfigurations {
     public static final String COMMAND_ADD_EXPENSE_ARG_CATEGORY_LONG = "category";
     public static final String COMMAND_ADD_EXPENSE_ARG_CATEGORY_DESC = "Category";
     public static final boolean COMMAND_ADD_EXPENSE_ARG_CATEGORY_HAS_VAL = true;
-
+    public static final String COMMAND_ADD_EXPENSE_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS = ""
+            + "Command Add-Expense does not have all of the required options.";
 
     /**
-     * Defines command parameters for console command View-Expense.
+     * Defines parameters for console command View-Expense.
      */
     public static final String COMMAND_VIEW_EXPENSE = "view-expense";
     public static final String COMMAND_VIEW_EXPENSE_ARG_EXPENSE_INDEX = "e";
@@ -50,19 +51,22 @@ public class ConsoleParserConfigurations {
     public static final String COMMAND_VIEW_EXPENSE_ARG_EXPENSE_CATEGORY_LONG = "expense-category";
     public static final String COMMAND_VIEW_EXPENSE_ARG_EXPENSE_CATEGORY_DESC = "Category";
     public static final boolean COMMAND_VIEW_EXPENSE_ARG_EXPENSE_CATEGORY_HAS_VAL = true;
+    public static final String COMMAND_VIEW_EXPENSE_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS = ""
+            + "Command View-Expense does not have all of the required options.";
 
     /**
-     * Defines command parameters for console command Delete-Expense.
+     * Defines parameters for console command Delete-Expense.
      */
     public static final String COMMAND_DELETE_EXPENSE = "delete-expense";
     public static final String COMMAND_DELETE_EXPENSE_ARG_EXPENSE_INDEX = "e";
     public static final String COMMAND_DELETE_EXPENSE_ARG_EXPENSE_INDEX_LONG = "expense-index";
     public static final String COMMAND_DELETE_EXPENSE_ARG_EXPENSE_INDEX_DESC = "Index";
     public static final boolean COMMAND_DELETE_EXPENSE_ARG_EXPENSE_INDEX_HAS_VAL = true;
-
+    public static final String COMMAND_DELETE_EXPENSE_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS = ""
+            + "Command Delete-Expense does not have all of the required options.";
 
     /**
-     * Defines command parameters for console command Edit-Expense.
+     * Defines parameters for console command Edit-Expense.
      */
     public static final String COMMAND_EDIT_EXPENSE = "edit-expense";
     public static final String COMMAND_EDIT_EXPENSE_ARG_EXPENSE_INDEX = "e";
@@ -89,10 +93,11 @@ public class ConsoleParserConfigurations {
     public static final String COMMAND_EDIT_EXPENSE_ARG_CATEGORY_LONG = "category";
     public static final String COMMAND_EDIT_EXPENSE_ARG_CATEGORY_DESC = "Category";
     public static final boolean COMMAND_EDIT_EXPENSE_ARG_CATEGORY_HAS_VAL = true;
-
+    public static final String COMMAND_EDIT_EXPENSE_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS = ""
+            + "Command Edit-Expense does not have all of the required options.";
 
     /**
-     * Defines command parameters for console command Sort-Expense.
+     * Defines parameters for console command Sort-Expense.
      */
     public static final String COMMAND_SORT_EXPENSE = "sort-expense";
     public static final String COMMAND_SORT_EXPENSE_ARG_TYPE = "t";
@@ -112,7 +117,7 @@ public class ConsoleParserConfigurations {
     public static final String COMMAND_SORT_EXPENSE_ARG_ORDER_VAL_DESCENDING = "descending";
 
     /**
-     * Defines command parameters for console command Add-Target.
+     * Defines parameters for console command Add-Target.
      */
     public static final String COMMAND_ADD_TARGET = "add-target";
     public static final String COMMAND_ADD_TARGET_ARG_NAME = "n";
@@ -137,7 +142,7 @@ public class ConsoleParserConfigurations {
     public static final boolean COMMAND_ADD_TARGET_ARG_DESCRIPTION_HAS_VAL = true;
 
     /**
-     * Defines command parameters for console command Add-Income.
+     * Defines parameters for console command Add-Income.
      */
     public static final String COMMAND_ADD_INCOME = "add-income";
     public static final String COMMAND_ADD_INCOME_ARG_NAME = "n";
