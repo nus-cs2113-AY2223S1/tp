@@ -135,14 +135,14 @@ public class Parser {
                     prescriptionList.viewAll();
                 } else if (matcherAdd.find()) {
                     prescriptionList.add(matcherAdd.group(1), matcherAdd.group(2),
-                            matcherAdd.group(3), matcherAdd.group(4), true);
+                            matcherAdd.group(3), matcherAdd.group(4));
                 } else if (matcherEdit.find()) {
                     parseEditPrescription(Integer.valueOf(matcherEdit.group(1)),
                             matcherEdit.group(2), matcherEdit.group(3));
                 } else {
                     throw new OneDocException("Your input is incorrect! Please format it as such:"
                             + "\nTo add a prescription: add i/ID n/[name] d/[dosage] t/[time interval]"
-                            + "\nTo edit a prescription: edit i/[ID] (n/[name] or d/[dosage] or t/[time interval])");
+                            + "\nTo edit a prescription: edit i/[index] (n/[name] or d/[dosage] or t/[time interval])");
                 }
             } catch (OneDocException e) {
                 System.out.println("Incorrect format: " + e.getMessage());
