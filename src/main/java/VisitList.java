@@ -17,7 +17,8 @@ public class VisitList {
     public void addVisit(String id, String dateOfVisit, String timeOfVisit) {
         Visit visit = new Visit(id,dateOfVisit,timeOfVisit);
         visitList.add(visit);
-        Messages.printAddVisitMessage(visit.toString());    }
+        Messages.printAddVisitMessage(visit.toString());
+    }
 
     public void editReason(String id, String reason) {
         int i = 0;
