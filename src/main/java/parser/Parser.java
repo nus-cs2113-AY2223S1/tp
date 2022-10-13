@@ -203,8 +203,7 @@ public class Parser {
     }
 
     public boolean isInt(String val){
-        Boolean strResult = val.matches("\\d?");
-        if(strResult) {
+        if(val.matches("\\d?")) {
             return true;
         }
         return false;
