@@ -11,7 +11,7 @@ public class Parser {
             if(input.equals("bye")){
                 return new EndCommand();
             }
-            System.out.println("input invalid");
+            System.out.println("input invalid1");
             return new EndCommand();
         }
 
@@ -30,17 +30,17 @@ public class Parser {
         case "service":
             return parseService(statement);
         default:
-            System.out.println("input invalid");
+            System.out.println("input invalid2");
             return new EndCommand();
         }
     }
 
     public Command parseAppointment(String input){
-        if(!"".equals(input)){
+        if(!input.contains(" ")){
             if(input.equals("view")){
                 return new ViewAppointmentCommand();
             }
-            System.out.println("input invalid");
+            System.out.println("input invalid3");
             return new EndCommand();
         }
 
@@ -71,7 +71,7 @@ public class Parser {
             if(input.equals("view")){
                 return new ViewServiceCommand();
             }
-            System.out.println("input invalid");
+            System.out.println("input invalid4");
             return new EndCommand();
         }
 
@@ -91,7 +91,7 @@ public class Parser {
         int d = input.indexOf(" d/");
 
         if(d == -1){
-            System.out.println("invalid input");
+            System.out.println("invalid input5");
             return new EndCommand();
         }
 
@@ -104,7 +104,7 @@ public class Parser {
     public Command prepareRemoveService(String input){
         int index = indexOfRemove(input);
         if(index == -1){
-            System.out.println("input invalid");
+            System.out.println("input invalid6");
             return new EndCommand();
         }
 
@@ -159,7 +159,7 @@ public class Parser {
     public Command prepareRemoveAppointment(String input){
         int index = indexOfRemove(input);
         if(index == -1){
-            System.out.println("input invalid");
+            System.out.println("input invalid7");
             return new EndCommand();
         }
 
@@ -223,7 +223,7 @@ public class Parser {
         int startOfS = input.indexOf(" s/");
 
         if(startOfN > startOfS || startOfN == -1|| startOfS == -1){
-            System.out.println("input invalid");
+            System.out.println("input invalid8");
             return new EndCommand();
         }
 
@@ -238,7 +238,7 @@ public class Parser {
             if(input.equals("view")){
                 return new ViewPetCommand();
             }
-            System.out.println("input invalid");
+            System.out.println("input invalid9");
             return new EndCommand();
         }
 
@@ -252,7 +252,7 @@ public class Parser {
             return prepareRemovePet(statement);
 */
         default:
-            System.out.println("input invalid");
+            System.out.println("input invalid10");
             return new EndCommand();
         }
     }
@@ -262,7 +262,7 @@ public class Parser {
             if(input.equals("view")){
                 return new ViewEmployeeCommand();
             }
-            System.out.println("input invalid");
+            System.out.println("input invalid11");
             return new EndCommand();
         }
 
@@ -274,7 +274,7 @@ public class Parser {
         case RemoveEmployeeCommand.COMMAND_WORD:
             return prepareRemoveEmployee(statement);
         default:
-            System.out.println("input invalid");
+            System.out.println("input invalid12");
             return new EndCommand();
         }
     }
@@ -283,7 +283,7 @@ public class Parser {
         int startOfN = input.indexOf(" n/");
 
         if(startOfN == -1){
-            System.out.println("input invalid");
+            System.out.println("input invalid13");
             return new EndCommand();
         }
 
@@ -295,7 +295,7 @@ public class Parser {
     public Command prepareRemoveEmployee(String input){
         int index = indexOfRemove(input);
         if(index == -1){
-            System.out.println("input invalid");
+            System.out.println("input invalid14");
             return new EndCommand();
         }
 
