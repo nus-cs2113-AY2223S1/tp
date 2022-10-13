@@ -1,5 +1,6 @@
 public class OneDoc {
 
+    private static UI ui;
     protected PatientList patientsList;
     protected VisitList visitsList;
     protected PrescriptionList prescriptionsList;
@@ -7,10 +8,11 @@ public class OneDoc {
     private static MainMenuState mainMenuState;
 
     public OneDoc() {
+        ui = new UI();
         patientsList = new PatientList();
         visitsList = new VisitList();
         prescriptionsList = new PrescriptionList();
-        parser = new Parser(patientsList, visitsList, prescriptionsList);
+        parser = new Parser(patientsList, visitsList, prescriptionsList, ui);
 
         mainMenuState = MainMenuState.INVALID;
     }
@@ -23,9 +25,9 @@ public class OneDoc {
     public static void subMenuRun() {
         SubMenuState subMenuState = SubMenuState.IN_SUB_MENU;
 
-        UI.printSubMenu(mainMenuState);
+        ui.printSubMenu(mainMenuState);
         while (true) {
-            String input = UI.readLine();
+            String input = ui.readLine();
             switch (mainMenuState) {
             case PATIENT:
                 subMenuState = parser.patientParser(input);
@@ -51,13 +53,14 @@ public class OneDoc {
 
     public static void mainMenuRun() {
         while (mainMenuState != MainMenuState.EXIT) {
-            Messages.printMainMenu();
-            String input = UI.readLine();
+            ui.printMainMenu();
+            String input = ui.readLine();
             mainMenuState = parser.mainMenuParser(input);
 
             if (mainMenuState == MainMenuState.EXIT) {
                 break;
             } else if (mainMenuState == MainMenuState.INVALID) {
+                ui.printInvalidMainMenuErrorMessage();
                 continue;
             }
 
@@ -66,9 +69,9 @@ public class OneDoc {
     }
 
     public static void run() {
-        Messages.welcomeMessage();
+        ui.printWelcomeMessage();
         mainMenuRun();
-        Messages.printExitMessage();
+        ui.printExitMessage();
     }
 }
 

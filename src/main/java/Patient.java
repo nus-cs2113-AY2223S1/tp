@@ -19,12 +19,12 @@ public class Patient {
     }
 
     // todo public void addMedicine();
-    public void addVisit(String id, String dateOfVisit, String timeOfVisit, String reason) {
-        this.visits.addVisit(id,dateOfVisit,timeOfVisit,reason);
+    public void addVisit(UI ui, String id, String dateOfVisit, String timeOfVisit, String reason) {
+        this.visits.addVisit(ui, id,dateOfVisit, timeOfVisit, reason);
     }
 
-    public void addVisit(String id, String dateOfVisit, String timeOfVisit) {
-        this.visits.addVisit(id,dateOfVisit,timeOfVisit);
+    public void addVisit(UI ui, String id, String dateOfVisit, String timeOfVisit) {
+        this.visits.addVisit(ui, id,dateOfVisit, timeOfVisit);
     }
 
     public String getName() {

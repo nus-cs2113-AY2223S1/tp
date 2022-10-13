@@ -12,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 class PrescriptionListTest {
     private static final PrintStream SYSTEM_OUT = System.out;
     private static final ByteArrayOutputStream OUTPUT_STREAM = new ByteArrayOutputStream();
+    private static final UI ui = new UI();
 
     @BeforeEach
     void setUp() {
@@ -36,7 +37,7 @@ class PrescriptionListTest {
     @Test
     void isEmpty_nonEmptyList_returnFalse() {
         PrescriptionList prescriptionsList = new PrescriptionList();
-        prescriptionsList.add("S123456G", "Ventolin", "4 mg", "Once every 6 hours");
+        prescriptionsList.add(ui, "S123456G", "Ventolin", "4 mg", "Once every 6 hours");
 
         assertFalse(prescriptionsList.isEmpty());
     }
@@ -44,7 +45,7 @@ class PrescriptionListTest {
     @Test
     void viewAll_emptyList_printNoPrescriptionsMessage() {
         PrescriptionList prescriptionsList = new PrescriptionList();
-        prescriptionsList.viewAll();
+        prescriptionsList.viewAll(ui);
 
         assertEquals("There are currently no prescriptions in the record.", OUTPUT_STREAM.toString().trim());
     }
@@ -52,8 +53,8 @@ class PrescriptionListTest {
     @Test
     void viewAll_onePrescription_printOnePrescription() {
         PrescriptionList prescriptionsList = new PrescriptionList();
-        prescriptionsList.add("S123456G", "Ventolin", "4 mg", "Once every 6 hours");
-        prescriptionsList.viewAll();
+        prescriptionsList.add(ui, "S123456G", "Ventolin", "4 mg", "Once every 6 hours");
+        prescriptionsList.viewAll(ui);
 
         String expectedOutput = "You have added a prescription!" + System.lineSeparator()
                 + "\t____________________________________________________________" + System.lineSeparator()
@@ -79,10 +80,10 @@ class PrescriptionListTest {
     @Test
     void viewAll_threePrescriptions_printThreePrescriptions() {
         PrescriptionList prescriptionsList = new PrescriptionList();
-        prescriptionsList.add("S123456G", "Ventolin", "4 mg", "Once every 6 hours");
-        prescriptionsList.add("S987655G", "Losartan Potassium", "50 mg", "Once every day", false);
-        prescriptionsList.add("K323232J", "Hydrocodone-Acetaminophen", "1 capsule", "3 times a day");
-        prescriptionsList.viewAll();
+        prescriptionsList.add(ui, "S123456G", "Ventolin", "4 mg", "Once every 6 hours");
+        prescriptionsList.add(ui, "S987655G", "Losartan Potassium", "50 mg", "Once every day", false);
+        prescriptionsList.add(ui, "K323232J", "Hydrocodone-Acetaminophen", "1 capsule", "3 times a day");
+        prescriptionsList.viewAll(ui);
 
         String expectedOutput =
                 "You have added a prescription!" + System.lineSeparator()
@@ -139,8 +140,8 @@ class PrescriptionListTest {
     @Test
     void edit_editAllDetails_allDetailsUpdated() {
         PrescriptionList prescriptionsList = new PrescriptionList();
-        prescriptionsList.add("S123456G", "Ventolin", "4 mg", "Once every 6 hours");
-        prescriptionsList.edit(1, "Losartan Potassium", "50 mg",
+        prescriptionsList.add(ui, "S123456G", "Ventolin", "4 mg", "Once every 6 hours");
+        prescriptionsList.edit(ui, 1, "Losartan Potassium", "50 mg",
                 "4 times a day");
 
         String expectedOutput =
@@ -167,8 +168,8 @@ class PrescriptionListTest {
     @Test
     void edit_editSomeDetails_someDetailsUpdated() {
         PrescriptionList prescriptionsList = new PrescriptionList();
-        prescriptionsList.add("S123456G", "Ventolin", "4 mg", "Once every 6 hours");
-        prescriptionsList.edit(1, "", "50 mg", "");
+        prescriptionsList.add(ui, "S123456G", "Ventolin", "4 mg", "Once every 6 hours");
+        prescriptionsList.edit(ui, 1, "", "50 mg", "");
 
         String expectedOutput =
                 "You have added a prescription!" + System.lineSeparator()
@@ -194,8 +195,8 @@ class PrescriptionListTest {
     @Test
     void edit_indexOutOfRange_printErrorMessage() {
         PrescriptionList prescriptionsList = new PrescriptionList();
-        prescriptionsList.add("S123456G", "Ventolin", "4 mg", "Once every 6 hours");
-        prescriptionsList.edit(3, "", "50 mg", "");
+        prescriptionsList.add(ui, "S123456G", "Ventolin", "4 mg", "Once every 6 hours");
+        prescriptionsList.edit(ui, 3, "", "50 mg", "");
 
         String expectedOutput =
                 "You have added a prescription!" + System.lineSeparator()

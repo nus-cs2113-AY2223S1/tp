@@ -2,31 +2,35 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Parser {
-    // todo add exit message
-    private static final String EXIT_MESSAGE = "bye";
     private static final String MAIN_PATIENT_COMMAND = "1";
     private static final String MAIN_VISIT_COMMAND = "2";
     private static final String MAIN_PRESCRIPTION_COMMAND = "3";
+    private static final String EXIT_COMMAND = "bye";
+
+    private static final String VIEW_ALL_COMMAND = "viewall";
+    private static final String BACK_TO_MAIN_COMMAND = "main";
 
     private final PatientList patientList;
     private final VisitList visitList;
     private final PrescriptionList prescriptionList;
+    private final UI ui;
 
-    public Parser(PatientList patientList, VisitList visitList, PrescriptionList prescriptionList) {
+    public Parser(PatientList patientList, VisitList visitList, PrescriptionList prescriptionList, UI ui) {
         this.patientList = patientList;
         this.visitList = visitList;
         this.prescriptionList = prescriptionList;
+        this.ui = ui;
     }
 
     public MainMenuState mainMenuParser(String input) {
-        switch (input) {
+        switch (input.toLowerCase()) {
         case MAIN_PATIENT_COMMAND:
             return MainMenuState.PATIENT;
         case MAIN_VISIT_COMMAND:
             return MainMenuState.VISIT;
         case MAIN_PRESCRIPTION_COMMAND:
             return MainMenuState.PRESCRIPTION;
-        case EXIT_MESSAGE:
+        case EXIT_COMMAND:
             return MainMenuState.EXIT;
         default:
             return MainMenuState.INVALID;
@@ -35,16 +39,16 @@ public class Parser {
     }
 
     private boolean shouldExit(String input) {
-        return input.equalsIgnoreCase("bye") || input.equalsIgnoreCase("exit");
+        return input.equalsIgnoreCase(EXIT_COMMAND);
     }
 
     private boolean shouldBackToMain(String input) {
-        return input.equalsIgnoreCase("main");
+        return input.equalsIgnoreCase(BACK_TO_MAIN_COMMAND);
     }
 
     public SubMenuState patientParser(String input) {
         if (shouldExit(input)) {
-           return SubMenuState.EXIT;
+            return SubMenuState.EXIT;
         }
 
         if (shouldBackToMain(input)) {
@@ -52,17 +56,17 @@ public class Parser {
         }
 
         try {
-            boolean matchesView = input.equalsIgnoreCase("viewall");
+            boolean matchesView = input.equalsIgnoreCase(VIEW_ALL_COMMAND);
             Matcher matcherAdd = patientAddMatcher(input);
             Matcher matcherRetrieve = patientRetrieveMatcher(input);
             Matcher matcherEdit = patientEditMatcher(input);
             if (matchesView) {
-                patientList.listPatients();
+                patientList.listPatients(ui);
             } else if (matcherAdd.find()) {
-                patientList.addPatient(matcherAdd.group(1), matcherAdd.group(3),
+                patientList.addPatient(ui, matcherAdd.group(1), matcherAdd.group(3),
                         matcherAdd.group(2), matcherAdd.group(4));
             } else if (matcherRetrieve.find()) {
-                patientList.retrievePatient(matcherRetrieve.group(1));
+                patientList.retrievePatient(ui, matcherRetrieve.group(1));
             } else if (matcherEdit.find()) {
                 parseEditPatient(matcherEdit.group(1), matcherEdit.group(2), matcherEdit.group(3));
             } else {
@@ -90,21 +94,21 @@ public class Parser {
         }
 
         try {
-            boolean matchesView = input.equalsIgnoreCase("viewall");
+            boolean matchesView = input.equalsIgnoreCase(VIEW_ALL_COMMAND);
             Matcher matcherAdd = addVisitMatcher(input);
             Matcher matcherEdit = editVisitMatcher(input);
             if (matchesView) {
-                visitList.viewAll();
+                visitList.viewAll(ui);
             } else if (matcherAdd.find()) {
                 String reason = matcherAdd.group(4);
                 if (reason.isEmpty()) {
-                    visitList.addVisit(matcherAdd.group(1), matcherAdd.group(2), matcherAdd.group(3));
+                    visitList.addVisit(ui, matcherAdd.group(1), matcherAdd.group(2), matcherAdd.group(3));
                 } else {
-                    visitList.addVisit(matcherAdd.group(1), matcherAdd.group(2),
+                    visitList.addVisit(ui, matcherAdd.group(1), matcherAdd.group(2),
                             matcherAdd.group(3), matcherAdd.group(4));
                 }
             } else if (matcherEdit.find()) {
-                visitList.editReason(matcherEdit.group(1), matcherEdit.group(2));
+                visitList.editReason(ui, matcherEdit.group(1), matcherEdit.group(2));
             } else {
                 throw new OneDocException("Your input is incorrect! Please format it as such:"
                         + "\nTo add a visit: add i/[ID] d/[date] t/[time] r/[reason]"
@@ -129,13 +133,13 @@ public class Parser {
         }
 
         try {
-            boolean matchesView = input.equalsIgnoreCase("viewall");
+            boolean matchesView = input.equalsIgnoreCase(VIEW_ALL_COMMAND);
             Matcher matcherAdd = addPrescriptionMatcher(input);
             Matcher matcherEdit = editPrescriptionMatcher(input);
             if (matchesView) {
-                prescriptionList.viewAll();
+                prescriptionList.viewAll(ui);
             } else if (matcherAdd.find()) {
-                prescriptionList.add(matcherAdd.group(1), matcherAdd.group(2),
+                prescriptionList.add(ui, matcherAdd.group(1), matcherAdd.group(2),
                         matcherAdd.group(3), matcherAdd.group(4));
             } else if (matcherEdit.find()) {
                 parseEditPrescription(Integer.valueOf(matcherEdit.group(1)),
@@ -179,7 +183,7 @@ public class Parser {
         case "n":
             Pattern matchName = Pattern.compile("^(\\w+\\s*\\w+|\\w+)$", Pattern.CASE_INSENSITIVE);
             if (matchName.matcher(input).find()) {
-                patientList.modifyPatientDetails(id, input, "", "");
+                patientList.modifyPatientDetails(ui, id, input, "", "");
             } else {
                 throw new OneDocException("Name is incorrectly formatted! "
                         + "Please use First and Last name or just one name");
@@ -188,7 +192,7 @@ public class Parser {
         case "d":
             Pattern matchDob = Pattern.compile("^(\\d\\d-\\d\\d-\\d\\d\\d\\d)$", Pattern.CASE_INSENSITIVE);
             if (matchDob.matcher(input).find()) {
-                patientList.modifyPatientDetails(id, "", input, "");
+                patientList.modifyPatientDetails(ui, id, "", input, "");
             } else {
                 throw new OneDocException("DOC is incorrectly formatted! Please use DD-MM-YYYY format");
             }
@@ -196,7 +200,7 @@ public class Parser {
         case "g":
             Pattern matchGender = Pattern.compile("^(M|F)$", Pattern.CASE_INSENSITIVE);
             if (matchGender.matcher(input).find()) {
-                patientList.modifyPatientDetails(id, "", "", input);
+                patientList.modifyPatientDetails(ui, id, "", "", input);
             } else {
                 throw new OneDocException("Gender is incorrectly formatted! Please use only one letter, M or F");
             }
@@ -238,7 +242,7 @@ public class Parser {
         case "n":
             Pattern matchName = Pattern.compile("^(\\w+\\s*\\w+|\\w+)$", Pattern.CASE_INSENSITIVE);
             if (matchName.matcher(input).find()) {
-                prescriptionList.edit(id, input, "", "");
+                prescriptionList.edit(ui, id, input, "", "");
             } else {
                 throw new OneDocException("Prescription name is incorrectly formatted! "
                         + "Please use one or two names without dashes or special characters");
@@ -247,7 +251,7 @@ public class Parser {
         case "d":
             Pattern matchDosage = Pattern.compile("^(\\d+\\s*\\w+)$", Pattern.CASE_INSENSITIVE);
             if (matchDosage.matcher(input).find()) {
-                prescriptionList.edit(id, "", input, "");
+                prescriptionList.edit(ui, id, "", input, "");
             } else {
                 throw new OneDocException("Dosage is incorrectly formatted! "
                         + "Please use [amount] [portion] format, i.e. 10 mg");
@@ -256,7 +260,7 @@ public class Parser {
         case "t":
             Pattern matchTimeInt = Pattern.compile("^(\\w+)$", Pattern.CASE_INSENSITIVE);
             if (matchTimeInt.matcher(input).find()) {
-                prescriptionList.edit(id, "", "", input);
+                prescriptionList.edit(ui, id, "", "", input);
             } else {
                 throw new OneDocException("Time interval is incorrectly formatted! "
                         + "Please use words and numbers to describe the time interval");
@@ -267,6 +271,5 @@ public class Parser {
                     + "Please use n/ for name, d/ for dosage, and t/ for time interval");
         }
     }
-
 
 }
