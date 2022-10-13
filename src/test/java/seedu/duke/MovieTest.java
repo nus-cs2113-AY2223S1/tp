@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class MovieTest {
     ReviewList storedReviews = new ReviewList();
+
     @Test
     void addMovie_HarryPotter() {
         Movie harryPotter = new Movie("Harry Potter",5.0,"5 Sep 2022");
@@ -16,6 +17,4 @@ class MovieTest {
         assertEquals("5.0",assertMovie.rating);
         assertEquals("5 Sep 2022",assertMovie.dateWatched);
     }
-
-
 }
