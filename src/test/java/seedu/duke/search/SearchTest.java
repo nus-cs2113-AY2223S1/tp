@@ -16,7 +16,8 @@ public class SearchTest {
         String toSearchLevel = null;
         String toSearchSemester = null;
 
-        List<Module> searchResult = SearchModuleCommand.filterModuleSearch(toSearchModuleCode, toSearchLevel, toSearchSemester, toSearchModuleTitle);
+        List<Module> searchResult = SearchModuleCommand.filterModuleSearch(toSearchModuleCode, toSearchLevel,
+                toSearchSemester, toSearchModuleTitle);
         int numberOfFilteredModulesInSearchResult = searchResult.size();
         int expectedNumberOfFilteredModules = 0;
         assertEquals(expectedNumberOfFilteredModules, numberOfFilteredModulesInSearchResult);
@@ -29,7 +30,8 @@ public class SearchTest {
         String toSearchLevel = "1";
         String toSearchSemester = "1";
 
-        List<Module> searchResult = SearchModuleCommand.filterModuleSearch(toSearchModuleCode, toSearchLevel, toSearchSemester, toSearchModuleTitle);
+        List<Module> searchResult = SearchModuleCommand.filterModuleSearch(toSearchModuleCode, toSearchLevel,
+                toSearchSemester, toSearchModuleTitle);
         int numberOfFilteredModulesInSearchResult = searchResult.size();
         int expectedNumberOfFilteredModules = 2;
         assertEquals(expectedNumberOfFilteredModules, numberOfFilteredModulesInSearchResult);
@@ -42,7 +44,8 @@ public class SearchTest {
         String toSearchLevel = null;
         String toSearchSemester = null;
 
-        List<Module> searchResult = SearchModuleCommand.filterModuleSearch(toSearchModuleCode, toSearchLevel, toSearchSemester, toSearchModuleTitle);
+        List<Module> searchResult = SearchModuleCommand.filterModuleSearch(toSearchModuleCode, toSearchLevel,
+                toSearchSemester, toSearchModuleTitle);
         int numberOfFilteredModulesInSearchResult = searchResult.size();
         int expectedNumberOfFilteredModules = 2;
         assertEquals(expectedNumberOfFilteredModules, numberOfFilteredModulesInSearchResult);
@@ -55,7 +58,8 @@ public class SearchTest {
         String toSearchLevel = null;
         String toSearchSemester = null;
 
-        List<Module> searchResult = SearchModuleCommand.filterModuleSearch(toSearchModuleCode, toSearchLevel, toSearchSemester, toSearchModuleTitle);
+        List<Module> searchResult = SearchModuleCommand.filterModuleSearch(toSearchModuleCode, toSearchLevel,
+                toSearchSemester, toSearchModuleTitle);
         int numberOfFilteredModulesInSearchResult = searchResult.size();
         int expectedNumberOfFilteredModules = 7;
         assertEquals(expectedNumberOfFilteredModules, numberOfFilteredModulesInSearchResult);
@@ -68,7 +72,8 @@ public class SearchTest {
         String toSearchLevel = null;
         String toSearchSemester = null;
 
-        List<Module> searchResult = SearchModuleCommand.filterModuleSearch(toSearchModuleCode, toSearchLevel, toSearchSemester, toSearchModuleTitle);
+        List<Module> searchResult = SearchModuleCommand.filterModuleSearch(toSearchModuleCode, toSearchLevel,
+                toSearchSemester, toSearchModuleTitle);
         int numberOfFilteredModulesInSearchResult = searchResult.size();
         int expectedNumberOfFilteredModules = 3;
         assertEquals(expectedNumberOfFilteredModules, numberOfFilteredModulesInSearchResult);
@@ -81,7 +86,8 @@ public class SearchTest {
         String toSearchLevel = null;
         String toSearchSemester = null;
 
-        List<Module> searchResult = SearchModuleCommand.filterModuleSearch(toSearchModuleCode, toSearchLevel, toSearchSemester, toSearchModuleTitle);
+        List<Module> searchResult = SearchModuleCommand.filterModuleSearch(toSearchModuleCode, toSearchLevel,
+                toSearchSemester, toSearchModuleTitle);
         int numberOfFilteredModulesInSearchResult = searchResult.size();
         int expectedNumberOfFilteredModules = 18;
         assertEquals(expectedNumberOfFilteredModules, numberOfFilteredModulesInSearchResult);
@@ -94,7 +100,8 @@ public class SearchTest {
         String toSearchLevel = "1";
         String toSearchSemester = null;
 
-        List<Module> searchResult = SearchModuleCommand.filterModuleSearch(toSearchModuleCode, toSearchLevel, toSearchSemester, toSearchModuleTitle);
+        List<Module> searchResult = SearchModuleCommand.filterModuleSearch(toSearchModuleCode, toSearchLevel,
+                toSearchSemester, toSearchModuleTitle);
         int numberOfFilteredModulesInSearchResult = searchResult.size();
         int expectedNumberOfFilteredModules = 8;
         assertEquals(expectedNumberOfFilteredModules, numberOfFilteredModulesInSearchResult);
@@ -107,7 +114,8 @@ public class SearchTest {
         String toSearchLevel = "1";
         String toSearchSemester = "2";
 
-        List<Module> searchResult = SearchModuleCommand.filterModuleSearch(toSearchModuleCode, toSearchLevel, toSearchSemester, toSearchModuleTitle);
+        List<Module> searchResult = SearchModuleCommand.filterModuleSearch(toSearchModuleCode, toSearchLevel,
+                toSearchSemester, toSearchModuleTitle);
         int numberOfFilteredModulesInSearchResult = searchResult.size();
         int expectedNumberOfFilteredModules = 8;
         assertEquals(expectedNumberOfFilteredModules, numberOfFilteredModulesInSearchResult);

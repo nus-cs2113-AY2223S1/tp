@@ -1,26 +1,25 @@
 package seedu.duke.parser;
 
 import org.junit.jupiter.api.Test;
-import seedu.duke.command.AddModuleCommand;
-import seedu.duke.command.DeleteModuleCommand;
 import seedu.duke.command.ExitCommand;
 import seedu.duke.command.HelpCommand;
-import seedu.duke.command.IncompleteCommand;
-import seedu.duke.command.InvalidModuleCommand;
+import seedu.duke.command.SearchModuleCommand;
 import seedu.duke.command.UnknownCommand;
+import seedu.duke.command.IncompleteCommand;
+import seedu.duke.command.AddModuleCommand;
+import seedu.duke.command.DeleteModuleCommand;
 import seedu.duke.command.ViewTimetableCommand;
-import seedu.duke.command.SearchModuleCodeCommand;
-import seedu.duke.command.SearchModuleNameCommand;
+import seedu.duke.command.InvalidModuleCommand;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ParserTest {
     @Test
     public void parse_searchInput_returnNewSearchCommand() {
-        assertTrue(Parser.parse("search cs2113") instanceof SearchModuleCodeCommand);
-        assertTrue(Parser.parse("search Cs2040c") instanceof SearchModuleCodeCommand);
-        assertTrue(Parser.parse("search Cs") instanceof SearchModuleCodeCommand);
-        assertTrue(Parser.parse("search software engineering") instanceof SearchModuleNameCommand);
+        assertTrue(Parser.parse("search /code cs2113") instanceof SearchModuleCommand);
+        assertTrue(Parser.parse("search /code Cs2040c") instanceof SearchModuleCommand);
+        assertTrue(Parser.parse("search /code Cs") instanceof SearchModuleCommand);
+        assertTrue(Parser.parse("search /title software engineering") instanceof SearchModuleCommand);
     }
 
     @Test

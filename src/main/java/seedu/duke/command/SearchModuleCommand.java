@@ -11,7 +11,8 @@ import java.util.List;
 import java.util.Map;
 
 public class SearchModuleCommand extends Command {
-    public static final String FORMAT = "search /code [MODULE_CODE] /title [MODULE_TITLE] /level [LEVEL] /sem [SEMESTER]";
+    public static final String FORMAT = "search /code [MODULE_CODE] /title [MODULE_TITLE] "
+            + "/level [LEVEL] /sem [SEMESTER]";
     public static final String COMMAND_WORD = "search";
 
     // private String toSearchModuleCode;
@@ -34,9 +35,11 @@ public class SearchModuleCommand extends Command {
         toSearchSemester = params.getOrDefault("sem", null);
 
         // assert that at least module code or module title is provided
-        assert toSearchModuleCode != null || toSearchModuleTitle != null : "At least module code or module title is required";
-    
-        List<Module> searchResult = filterModuleSearch(toSearchModuleCode, toSearchLevel, toSearchSemester, toSearchModuleTitle);
+        assert toSearchModuleCode != null || toSearchModuleTitle != null :
+                "At least module code or module title is required";
+
+        List<Module> searchResult = filterModuleSearch(toSearchModuleCode, toSearchLevel,
+                toSearchSemester, toSearchModuleTitle);
 
         ui.addMessage("Search Result:");
 
@@ -55,8 +58,9 @@ public class SearchModuleCommand extends Command {
 
     /**
      * Filter the module list based on input module level.
-     * @param module
-     * @param level
+     *
+     * @param module the module object
+     * @param level the level that user input
      * @return true if module level matches input level
      */
     static boolean isSameModuleLevel(Module module, String level) {
@@ -89,8 +93,9 @@ public class SearchModuleCommand extends Command {
 
     /**
      * Filters the module list based on the input semester.
-     * @param module
-     * @param toSearchSemester
+     *
+     * @param module the module object
+     * @param toSearchSemester the semester that user input
      * @return true if module is offered in the semester
      */
     static boolean isOfferedInSemester(Module module, String toSearchSemester) {
@@ -98,7 +103,7 @@ public class SearchModuleCommand extends Command {
         int toSearchSemesterInt = Integer.parseInt(toSearchSemester);
 
         // check module is offered in which semester
-        if(module.getSemesterData(toSearchSemesterInt) != null) {
+        if (module.getSemesterData(toSearchSemesterInt) != null) {
             return true;
         } else {
             return false;
@@ -112,14 +117,15 @@ public class SearchModuleCommand extends Command {
      * If both module code and module title are provided, results will be display based on similar module code
      * and module title but will not be repeated.
      * Arguments can be in any order.
-     * 
-     * @param toSearchModuleCode
-     * @param toSearchLevel
-     * @param toSearchSemester
-     * @param toSearchModuleTitle
+     *
+     * @param toSearchModuleCode the module code that user input
+     * @param toSearchLevel the level that user input
+     * @param toSearchSemester the semester that user input
+     * @param toSearchModuleTitle the module title that user input
      * @return list of modules that match the search query
      */
-    public static List<Module> filterModuleSearch(String toSearchModuleCode, String toSearchLevel, String toSearchSemester, String toSearchModuleTitle) {
+    public static List<Module> filterModuleSearch(String toSearchModuleCode, String toSearchLevel,
+                                                  String toSearchSemester, String toSearchModuleTitle) {
         List<Module> moduleList = Module.getAll();
         List<Module> searchResult = new ArrayList<>();
 
@@ -127,8 +133,8 @@ public class SearchModuleCommand extends Command {
         for (Module m : moduleList) {
             if (toSearchModuleCode != null && m.moduleCode.contains(toSearchModuleCode.toUpperCase())) {
                 searchResult.add(m);
-            } 
-            
+            }
+
             if (toSearchModuleTitle != null && m.title.toLowerCase().contains(toSearchModuleTitle.toLowerCase())) {
                 // add only if it is not already in the list
                 if (!searchResult.contains(m)) {
