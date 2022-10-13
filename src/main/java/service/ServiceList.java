@@ -16,9 +16,9 @@ public class ServiceList {
         services.add(service);
     }
 
-    public static void removeEmployee(int employeeId) {
+    public static void removeService(int serviceId) {
         for (Service service : services) {
-            if (service.getServiceId() == employeeId) {
+            if (service.getServiceId() == serviceId) {
                 services.remove(service);
                 break;
             }
