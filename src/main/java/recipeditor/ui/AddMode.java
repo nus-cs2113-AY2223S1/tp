@@ -41,7 +41,7 @@ public class AddMode {
                 input = askDescription(input);
                 break;
             case INGREDIENTS_STAGE:
-                input  = askIngredients(input);
+                input = askIngredients(input);
                 break;
             case STEPS_STAGE:
                 input = askSteps(input);

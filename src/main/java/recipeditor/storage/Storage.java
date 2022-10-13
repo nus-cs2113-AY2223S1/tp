@@ -54,12 +54,12 @@ public class Storage {
             while (s.hasNext()) {
                 String input = s.nextLine();
                 String[] fieldTypeAndData = input.split(":");
-                switch (fieldTypeAndData[ 0 ]) {
+                switch (fieldTypeAndData[0]) {
                 case RECIPE_NAME_FIELD_TYPE:
-                    newRecipe.setTitle(fieldTypeAndData[ 1 ]);
+                    newRecipe.setTitle(fieldTypeAndData[1]);
                     break;
                 case RECIPE_DESCRIPTION_FIELD_TYPE:
-                    newRecipe.setDescription(fieldTypeAndData[ 1 ]);
+                    newRecipe.setDescription(fieldTypeAndData[1]);
                     break;
                 case RECIPE_INGREDIENTS_FIELD_TYPE:
                 case RECIPE_STEPS_FIELD_TYPE:
@@ -91,9 +91,9 @@ public class Storage {
             if (ingredientDetails.length != 3) {
                 break;
             }
-            newIngredient.setName(ingredientDetails[ 0 ]);
-            newIngredient.setAmount(Double.parseDouble(ingredientDetails[ 1 ]));
-            newIngredient.setUnit(ingredientDetails[ 2 ]);
+            newIngredient.setName(ingredientDetails[0]);
+            newIngredient.setAmount(Double.parseDouble(ingredientDetails[1]));
+            newIngredient.setUnit(ingredientDetails[2]);
             ingredients.add(newIngredient);
             newIngredient = new Ingredient();
         }
@@ -113,4 +113,21 @@ public class Storage {
         }
         return steps;
     }
+
+    public static void writeRecipeListToFile() {
+        try {
+            FileWriter fw = new FileWriter(DATA_FILE_PATH, true);
+            StringBuilder formattedRecipeList = new StringBuilder();
+            for (int i = 0; i < RecipeList.getSize(); i++) {
+                formattedRecipeList.append(RecipeList.getRecipe(i).getRecipeAttributesFormatted());
+                formattedRecipeList.append(Ui.DIVIDER + "\n");
+            }
+            fw.write(formattedRecipeList.toString());
+            fw.close();
+        } catch (IOException ioException) {
+            Ui.showMessage("Error in loading recipes to data file");
+        }
+    }
+
+
 }
