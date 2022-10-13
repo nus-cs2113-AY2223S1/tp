@@ -2,6 +2,7 @@ package command;
 
 import appointment.Appointment;
 import appointment.AppointmentList;
+import service.Service;
 
 import java.time.LocalDateTime;
 

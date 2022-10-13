@@ -1,5 +1,7 @@
 package appointment;
 
+import service.Service;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -12,7 +14,7 @@ public class Appointment {
 
     private LocalDateTime appointmentDate;
     private AppointmentStatus appointmentStatus;
-    // private Service service;
+    private Service service;
 
     // Service class not implemented yet
     // How to create a LocalDateTime:
@@ -22,7 +24,7 @@ public class Appointment {
         this.petName = petName;
         this.appointmentStatus = AppointmentStatus.PENDING;
         this.appointmentDate = appointmentDate;
-        // this.service = service;
+        this.service = service;
     }
 
     public void setAppointmentStatus(AppointmentStatus appointmentStatus) {
