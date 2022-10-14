@@ -47,7 +47,7 @@ public class Item {
     }
 
     public String toString(TransactionList transactionList) {
-        String itemId = "itemId: " + this.itemId + " ";
+        String itemId = "ItemId: " + this.itemId + " ";
         String itemIcon = "Status: [" + (isAvailable(transactionList) ? "Available" : "On loan") + "] ";
         String itemName = "Item: " + name + " ";
         String itemCategory = "Category: " + category.toString() + " ";

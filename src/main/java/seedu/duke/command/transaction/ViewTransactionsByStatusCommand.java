@@ -47,23 +47,36 @@ public class ViewTransactionsByStatusCommand extends Command {
     }
 
 
-    void getTransactions(String arg, ArrayList<Transaction> transactions) {
-        ArrayList<Transaction> transactionsToView = new ArrayList<>();
+    void getTransactionsByStatus(String arg, ArrayList<Transaction> transactions) {
+        ArrayList<Transaction> transactionsToView;
         if (arg.equals("finished")) {
-            for (Transaction transaction : transactions) {
-                if (transaction.isFinished()) {
-                    transactionsToView.add(transaction);
-                }
-            }
+            transactionsToView = getFinishedTransactions(transactions);
             Ui.viewCompletedTransactionsMessage(transactionsToView);
         } else {
-            for (Transaction transaction : transactions) {
-                if (!transaction.isFinished()) {
-                    transactionsToView.add(transaction);
-                }
-            }
+            assert arg.equals("unfinished");
+            transactionsToView = getUnfinishedTransactions(transactions);
             Ui.viewUncompletedTransactionsMessage(transactionsToView);
         }
+    }
+
+    private ArrayList<Transaction> getFinishedTransactions(ArrayList<Transaction> transactions) {
+        ArrayList<Transaction> transactionsToView = new ArrayList<>();
+        for (Transaction transaction : transactions) {
+            if (transaction.isFinished()) {
+                transactionsToView.add(transaction);
+            }
+        }
+        return transactionsToView;
+    }
+
+    private ArrayList<Transaction> getUnfinishedTransactions(ArrayList<Transaction> transactions) {
+        ArrayList<Transaction> transactionsToView = new ArrayList<>();
+        for (Transaction transaction : transactions) {
+            if (!transaction.isFinished()) {
+                transactionsToView.add(transaction);
+            }
+        }
+        return transactionsToView;
     }
 
     @Override
@@ -71,12 +84,8 @@ public class ViewTransactionsByStatusCommand extends Command {
         String arg = getArgs();
         ArrayList<Transaction> transactions = transactionList.getTransactionList();
         if (isValidArgument(arg)) {
-            getTransactions(arg, transactions);
+            getTransactionsByStatus(arg, transactions);
         }
         return false;
     }
-
-
 }
-
-

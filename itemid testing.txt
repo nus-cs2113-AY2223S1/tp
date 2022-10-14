@@ -1,0 +1,7 @@
+add-user /n bui /a 19 /c 29384729 
+add-user /n jingwei /a 19 /c 22384729 
+add-item /n weight /c 1 /p 0.4 /o bui   
+add-item /n scale /c 1 /p 1 /o jingwei 
+add-tx /i  /b bui  /d 3 /c 2022-10-12 
+add-tx /i  /b jingwei  /d 3 /c 2022-10-05 
+remove-item /i scale

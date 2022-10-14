@@ -35,10 +35,10 @@ public class Category {
     }
 
     public static String listCategories() {
-        StringBuilder list = new StringBuilder("Here are available categories: \n");
+        StringBuilder list = new StringBuilder("Here are available categories: ");
         int index = 1;
         for (Categories category : Categories.values()) {
-            list.append(index).append(". ").append(category).append('\n');
+            list.append('\n').append(index++).append(". ").append(category);
         }
         return list.toString();
     }

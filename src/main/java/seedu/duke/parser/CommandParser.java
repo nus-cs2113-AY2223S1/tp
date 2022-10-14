@@ -3,11 +3,7 @@ package seedu.duke.parser;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.duke.command.item.SortItemCommand;
-import seedu.duke.command.item.ListItemsCommand;
-import seedu.duke.command.item.AddItemCommand;
-import seedu.duke.command.item.ViewItemCommand;
-import seedu.duke.command.item.RemoveItemCommand;
+import seedu.duke.command.item.*;
 import seedu.duke.command.transaction.AddTransactionCommand;
 import seedu.duke.command.transaction.ViewTransactionCommand;
 import seedu.duke.command.transaction.ListTransactionsCommand;
@@ -55,8 +51,8 @@ public class CommandParser {
     private static final String COMMAND_REMOVE_ITEM = "remove-item";
     private static final String COMMAND_REMOVE_TX = "remove-tx";
     private static final String COMMAND_FIND_TX = "find-tx";
-
     private static final String COMMAND_SORT_ITEMS = "sort-items";
+    private static final String COMMAND_LIST_CATEGORIES = "list-categories";
 
 
     /**
@@ -139,6 +135,8 @@ public class CommandParser {
             return new ViewTransactionsByStatusCommand(parts, transactionList);
         case COMMAND_SORT_ITEMS:
             return new SortItemCommand(parts, itemList, transactionList);
+        case COMMAND_LIST_CATEGORIES:
+            return new ListCategorysCommand();
         default:
             throw new CommandNotFoundException(MESSAGE_COMMAND_UNRECOGNIZABLE);
         }

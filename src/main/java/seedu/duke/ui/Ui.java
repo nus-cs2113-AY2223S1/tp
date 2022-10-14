@@ -66,10 +66,10 @@ public class Ui {
         showLine();
     }
 
-    public static void deleteItemMessage(Item item, int itemListSize) {
+    public static void deleteItemMessage(Item item, int itemListSize, TransactionList transactionList) {
         showLine();
         assert itemListSize >= 0;
-        System.out.print("OK! I will remove the following item:\n" + item.toString() + "\n"
+        System.out.print("OK! I will remove the following item:\n" + item.toString(transactionList) + "\n"
                 + "Total item(s) in database: " + itemListSize + '\n');
         showLine();
     }
