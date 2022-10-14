@@ -12,7 +12,7 @@ import java.util.logging.ConsoleHandler;
 import java.util.logging.FileHandler;
 
 public class DeleteFlightCommand extends Command {
-    private final static Logger LOGGER = Logger.getLogger(DeleteFlightCommand.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(DeleteFlightCommand.class.getName());
 
     public static void setUpLogger() {
         LogManager.getLogManager().reset();
