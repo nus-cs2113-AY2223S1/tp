@@ -1,11 +1,15 @@
 package seedu.duke.command;
 
-import seedu.duke.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
+import seedu.duke.ClientList;
+import seedu.duke.PairingList;
+import seedu.duke.PropertyList;
+import seedu.duke.Storage;
+import seedu.duke.Ui;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CommandAddClientTest {
