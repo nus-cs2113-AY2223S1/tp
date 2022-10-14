@@ -44,7 +44,16 @@ public class ItemList {
 
     public Item getItemById(String id) throws ItemNotFoundException {
         for (Item item : this.itemList) {
-            if (id.equals(item.getName())) {
+            if (id.equals(item.getItemId())) {
+                return item;
+            }
+        }
+        throw new ItemNotFoundException(MESSAGE_ITEM_NOT_FOUND);
+    }
+
+    public Item getItemByName(String name) throws ItemNotFoundException {
+        for (Item item : this.itemList) {
+            if (name.equals(item.getName())) {
                 return item;
             }
         }

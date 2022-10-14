@@ -82,10 +82,10 @@ public class TransactionStorage extends Storage {
      */
     public Transaction handleTransactionLine(String[] splitTransactionLine) {
         String transactionId = splitTransactionLine[0];
-        String itemId = splitTransactionLine[1];
+        String itemName = splitTransactionLine[1];
         String borrowerId = splitTransactionLine[2];
         int duration = Integer.parseInt(splitTransactionLine[3]);
         LocalDate createdAt = LocalDate.parse(splitTransactionLine[4]);
-        return new Transaction(transactionId, itemId, borrowerId, duration, createdAt);
+        return new Transaction(transactionId, itemName, borrowerId, duration, createdAt);
     }
 }

@@ -5,6 +5,7 @@ import seedu.duke.transaction.Transaction;
 import seedu.duke.transaction.TransactionList;
 import seedu.duke.user.User;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
@@ -54,7 +55,7 @@ public class Ui {
         showLine();
         assert itemListSize >= 0;
         System.out.print("Noted. Following item has been added: " + '\n' + item.toString(transactionList)
-                + "\n" + "Total item(s) in list: " + itemListSize + '\n');
+                + "\n" + "Total item(s) in database: " + itemListSize + '\n');
         showLine();
     }
 
@@ -68,8 +69,8 @@ public class Ui {
     public static void deleteItemMessage(Item item, int itemListSize) {
         showLine();
         assert itemListSize >= 0;
-        System.out.print("OK! I will remove the following item:\n" + item + "\n"
-                + "Total item(s) in list: " + itemListSize + '\n');
+        System.out.print("OK! I will remove the following item:\n" + item.toString() + "\n"
+                + "Total item(s) in database: " + itemListSize + '\n');
         showLine();
     }
 
@@ -77,7 +78,7 @@ public class Ui {
         showLine();
         assert transactionListSize >= 0;
         System.out.print("OK! I will add the following transaction:\n" + transaction.toString() + "\n"
-                + "Total transaction(s) in list: " + transactionListSize + '\n');
+                + "Total transaction(s) in database: " + transactionListSize + '\n');
         showLine();
     }
 
@@ -88,11 +89,29 @@ public class Ui {
         showLine();
     }
 
+    public static void viewCompletedTransactionsMessage(ArrayList<Transaction> transactions) {
+        showLine();
+        System.out.print("Here are the completed transactions: " + '\n');
+        for (Transaction transaction : transactions) {
+            System.out.print(transaction + "\n");
+        }
+        showLine();
+    }
+
+    public static  void viewUncompletedTransactionsMessage(ArrayList<Transaction> transactions) {
+        showLine();
+        System.out.print("Here are the uncompleted transactions: " + '\n');
+        for (Transaction transaction : transactions) {
+            System.out.print(transaction + "\n");
+        }
+        showLine();
+    }
+
     public static void deleteTransactionMessage(Transaction transaction, int transactionListSize) {
         showLine();
         assert transactionListSize >= 0;
         System.out.print("OK! I will remove the following item:\n" + transaction.toString() + "\n"
-                + "Total item(s) in list: " + transactionListSize + '\n');
+                + "Total transactions(s) in database: " + transactionListSize + '\n');
         showLine();
     }
 
@@ -107,7 +126,7 @@ public class Ui {
         showLine();
         assert userListSize >= 0;
         System.out.print("Noted. Following user has been added: " + '\n' + user.toString()
-                + "\n" + "Total user(s) in list: " + userListSize + '\n');
+                + "\n" + "Total user(s) in database: " + userListSize + '\n');
         showLine();
     }
 
@@ -115,7 +134,7 @@ public class Ui {
         showLine();
         assert userListSize >= 0;
         System.out.print("Noted. Following user has been deleted: " + '\n' + user.toString()
-                + "\n" + "Total user(s) in list: " + userListSize + '\n');
+                + "\n" + "Total user(s) in database: " + userListSize + '\n');
         showLine();
     }
 

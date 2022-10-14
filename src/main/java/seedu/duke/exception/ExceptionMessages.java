@@ -16,7 +16,7 @@ public class ExceptionMessages {
     //Item-related messages
     public static final String MESSAGE_ITEM_UNAVAILABLE = "This item is currently unavailable";
     public static final String MESSAGE_ITEM_NOT_FOUND = "This item cannot be found in the list";
-    public static final String MESSAGE_ITEM_NAME_TAKEN = "This itemName has been taken";
+    public static final String MESSAGE_SAME_OWNER = "User already has this item listed!";
     public static final String MESSAGE_PRICE_FORMAT_INVALID = "Price is a float, check your format";
     public static final String MESSAGE_PRICE_LESS_THAN_ZERO = "Price must be greater than 0";
     public static final String MESSAGE_SORT_MODE_INVALID = "Mode of sorting is invalid";

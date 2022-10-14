@@ -17,7 +17,7 @@ import seedu.duke.user.UserList;
 
 import static seedu.duke.exception.ExceptionMessages.MESSAGE_INSUFFICIENT_ARGUMENTS;
 import static seedu.duke.exception.ExceptionMessages.MESSAGE_INVALID_PARTS;
-import static seedu.duke.exception.ExceptionMessages.MESSAGE_ITEM_NAME_TAKEN;
+import static seedu.duke.exception.ExceptionMessages.MESSAGE_SAME_OWNER;
 import static seedu.duke.exception.ExceptionMessages.MESSAGE_NUMBER_FORMAT_INVALID;
 import static seedu.duke.exception.ExceptionMessages.MESSAGE_PRICE_FORMAT_INVALID;
 import static seedu.duke.exception.ExceptionMessages.MESSAGE_PRICE_LESS_THAN_ZERO;
@@ -57,10 +57,13 @@ public class AddItemCommand extends Command {
         return args;
     }
 
-    private boolean isValidName(String itemName) throws DuplicateException {
+    private boolean isValidName(String itemName, String owner) throws DuplicateException {
         try {
-            itemList.getItemById(itemName);
-            throw new DuplicateException(MESSAGE_ITEM_NAME_TAKEN);
+            Item item = itemList.getItemByName(itemName);
+            if (item.getOwnerId().equals(owner)) {
+                throw new DuplicateException(MESSAGE_SAME_OWNER);
+            }
+            return true;
         } catch (ItemNotFoundException e) {
             return true;
         }
@@ -98,7 +101,7 @@ public class AddItemCommand extends Command {
 
     private boolean areValidArgs(String[] args)
             throws UserNotFoundException, DuplicateException, InvalidPriceException {
-        return isValidName(args[0]) && isValidCategoryNumber(args[1])
+        return isValidName(args[0], args[3]) && isValidCategoryNumber(args[1])
                 && isValidPrice(args[2]) && isValidOwner(args[3]);
     }
 

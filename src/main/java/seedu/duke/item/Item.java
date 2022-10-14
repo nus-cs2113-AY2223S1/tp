@@ -1,14 +1,17 @@
 package seedu.duke.item;
 
+import seedu.duke.id.IdGenerator;
 import seedu.duke.transaction.TransactionList;
 
 public class Item {
+    private final String itemId;
     private final String name;
     private final String ownerId;
     private final double pricePerDay;
     private final Category.Categories category;
 
     public Item(String name, int categoryNumber, double price, String ownerId) {
+        this.itemId = IdGenerator.generateId();
         this.name = name;
         this.pricePerDay = price;
         this.ownerId = ownerId;
@@ -17,6 +20,10 @@ public class Item {
 
     public String getOwnerId() {
         return ownerId;
+    }
+
+    public String getItemId() {
+        return itemId;
     }
 
     public String getName() {
@@ -40,11 +47,12 @@ public class Item {
     }
 
     public String toString(TransactionList transactionList) {
-        String itemIcon = "[" + (isAvailable(transactionList) ? "Y" : "N") + "] ";
+        String itemId = "itemId: " + this.itemId + " ";
+        String itemIcon = "Status: [" + (isAvailable(transactionList) ? "Available" : "On loan") + "] ";
         String itemName = "Item: " + name + " ";
         String itemCategory = "Category: " + category.toString() + " ";
         String itemOwner = "Owner: " + getOwnerId() + " ";
-        String itemPrice = "PricePerDay: " + pricePerDay;
-        return itemIcon + itemName + itemCategory + itemOwner + itemPrice;
+        String itemPrice = "PricePerDay: $" + pricePerDay;
+        return itemIcon + itemId + itemName + itemCategory + itemOwner + itemPrice;
     }
 }

@@ -50,9 +50,9 @@ public class ViewItemCommand extends Command {
     }
 
     public boolean executeCommand() throws ItemNotFoundException, InvalidArgumentException {
-        String itemName = getArgsViewItemCmd();
-        if (isValidItem(itemName)) {
-            Item item = this.itemList.getItemById(itemName);
+        String itemId = getArgsViewItemCmd();
+        if (isValidItem(itemId)) {
+            Item item = this.itemList.getItemById(itemId);
             Ui.viewItemMessage(item, transactionList);
         }
         return false;

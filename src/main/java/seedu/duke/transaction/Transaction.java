@@ -14,18 +14,18 @@ public class Transaction {
     private final LocalDate createdAt;
     private final LocalDate returnedAt;
 
-    public Transaction(String itemId, String borrowerId, int duration, LocalDate createdAt) {
+    public Transaction(String itemName, String borrowerId, int duration, LocalDate createdAt) {
         this.transactionId = IdGenerator.generateId();
-        this.item = itemId;
+        this.item = itemName;
         this.borrower = borrowerId;
         this.duration = duration;
         this.createdAt = createdAt;
         this.returnedAt = createdAt.plusDays(duration);
     }
 
-    public Transaction(String transactionId, String itemId, String borrowerId, int duration, LocalDate createdAt) {
+    public Transaction(String transactionId, String itemName, String borrowerId, int duration, LocalDate createdAt) {
         this.transactionId = transactionId;
-        this.item = itemId;
+        this.item = itemName;
         this.borrower = borrowerId;
         this.duration = duration;
         this.createdAt = createdAt;
@@ -36,7 +36,7 @@ public class Transaction {
         return transactionId;
     }
 
-    public String getItemId() {
+    public String getItemName() {
         return item;
     }
 
@@ -59,17 +59,17 @@ public class Transaction {
 
     @Override
     public String toString() {
-        String transactionIcon = "[" + (isFinished() ? "X" : " ") + "] ";
+        String transactionIcon = "Status: [" + (isFinished() ? "Returned" : "On loan") + "] ";
         String transactionId = "TransactionID: " + this.transactionId + " ";
-        String itemId = "ItemID: " + this.item + " ";
+        String itemName = "itemName: " + this.item + " ";
         String usersId = "BorrowerID: " + this.borrower + " ";
 
         if (!isFinished()) {
             String remainDays = " (" + ChronoUnit.DAYS.between(LocalDate.now(), getReturnDate()) + " day(s) remaining)";
             String returnDate = "ReturnDate: " + DateParser.formatDateToString(returnedAt) + remainDays;
-            return transactionIcon + transactionId + itemId + usersId + returnDate;
+            return transactionIcon + transactionId + itemName + usersId + returnDate;
         }
         String returnedDate = "ReturnedDate: " + DateParser.formatDateToString(returnedAt);
-        return transactionIcon + transactionId + itemId + usersId + returnedDate;
+        return transactionIcon + transactionId + itemName + usersId + returnedDate;
     }
 }

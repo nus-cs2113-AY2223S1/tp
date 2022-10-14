@@ -21,6 +21,10 @@ public class TransactionList {
         return transactionList.size();
     }
 
+    public ArrayList<Transaction> getTransactionList() {
+        return this.transactionList;
+    }
+
     public void add(Transaction transaction) {
         transactionList.add(transaction);
     }
@@ -47,10 +51,10 @@ public class TransactionList {
         return count > 0;
     }
 
-    public boolean hasThisItemBeingBorrowed(String itemId) {
+    public boolean hasThisItemBeingBorrowed(String itemName) {
         int count = (int) transactionList.stream()
                 .filter(t -> !t.isFinished())
-                .filter(t -> t.getItemId().equals(itemId))
+                .filter(t -> t.getItemName().equals(itemName))
                 .count();
         return count > 0;
     }
