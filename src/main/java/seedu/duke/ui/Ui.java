@@ -117,6 +117,7 @@ public class Ui {
                 + "+-----------------------------------------------------------"
                 + "--------------------------------------------------------------+\n");
     }
+
     public void showFlightListHeader() {
         System.out.print("\n+-----------------------------------------------------------"
                 + "--------------------------------------------------------------+\n"
@@ -140,8 +141,8 @@ public class Ui {
 
     private static void showFormattedDetail() {
         System.out.printf("| %s | %s | %s | %s | %s | %s | %s | %s |\n"
-                + "+-----------------------------------------------------------"
-                + "--------------------------------------------------------------+\n",
+                        + "+-----------------------------------------------------------"
+                        + "--------------------------------------------------------------+\n",
                 formattedName, formattedDepartureDate, formattedDepartureTime, formattedFlightNumber,
                 formattedGateNumber, formattedBoardingGroup, formattedSeatNumber, formattedBoardingTime);
     }
@@ -176,8 +177,8 @@ public class Ui {
 
     public void showEmptyPassengerList() {
         System.out.printf("| %80s %-38s |\n"
-                + "+-----------------------------------------------------------"
-                + "--------------------------------------------------------------+\n",
+                        + "+-----------------------------------------------------------"
+                        + "--------------------------------------------------------------+\n",
                 "The passenger details logbook is empty.", " ");
     }
 
@@ -204,7 +205,6 @@ public class Ui {
                     + "--------------------------------------------------------------+"
                     + flight);
         }
-//        System.out.println();
     }
 
     public String getLoggerError() {

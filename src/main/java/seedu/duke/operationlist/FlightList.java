@@ -38,16 +38,16 @@ public class FlightList extends OperationList {
     public void addOperation(String detail) {
         try {
             checkCommandLength(detail.substring(FLIGHT_ADD_COMMAND.length()));
-            String flightNum = extractDetail(detail, FLIGHT_NUMBER_DELIMITER, AIRLINE_DELIMITER);
-            String airline = extractDetail(detail, AIRLINE_DELIMITER, DESTINATION_DELIMITER);
-            String destination = extractDetail(detail, DESTINATION_DELIMITER, DEPARTURE_TIME_DELIMITER);
-            String departureTime = extractDetail(detail, DEPARTURE_TIME_DELIMITER, GATE_NUMBER_DELIMITER);
-            String gateNum = extractDetail(detail, GATE_NUMBER_DELIMITER, TERMINAL_DELIMITER);
-            String terminal = extractDetail(detail, TERMINAL_DELIMITER, CHECK_IN_ROW_DELIMITER);
-            String checkInRowAndDoor = extractDetail(detail, CHECK_IN_ROW_DELIMITER, END_OF_INPUT);
+            String flightNum = extractDetail(detail, FLIGHT_NUMBER_DELIMITER, AIRLINE_DELIMITER).toUpperCase();
+            String airline = extractDetail(detail, AIRLINE_DELIMITER, DESTINATION_DELIMITER).toUpperCase();
+            String destination = extractDetail(detail, DESTINATION_DELIMITER, DEPARTURE_TIME_DELIMITER).toUpperCase();
+            String departureTime = extractDetail(detail, DEPARTURE_TIME_DELIMITER, GATE_NUMBER_DELIMITER).toUpperCase();
+            String gateNum = extractDetail(detail, GATE_NUMBER_DELIMITER, TERMINAL_DELIMITER).toUpperCase();
+            String terminal = extractDetail(detail, TERMINAL_DELIMITER, CHECK_IN_ROW_DELIMITER).toUpperCase();
+            String checkInRowAndDoor = extractDetail(detail, CHECK_IN_ROW_DELIMITER, END_OF_INPUT).toUpperCase();
 
-            FlightInfo flight = new FlightInfo(flightNum.toUpperCase(), airline.toUpperCase(), destination.toUpperCase(),
-                    departureTime.toUpperCase(), gateNum.toUpperCase(), terminal.toUpperCase(), checkInRowAndDoor.toUpperCase());
+            FlightInfo flight = new FlightInfo(flightNum, airline, destination,
+                    departureTime, gateNum, terminal, checkInRowAndDoor);
             flights.add(flightIndex, flight);
             flightIndex++;
             ui.showFlightAddedMessage();

@@ -5,7 +5,11 @@ import seedu.duke.exceptions.SkyControlException;
 import seedu.duke.operationlist.OperationList;
 
 import java.io.IOException;
-import java.util.logging.*;
+import java.util.logging.Logger;
+import java.util.logging.LogManager;
+import java.util.logging.Level;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.FileHandler;
 
 public class AddFlightCommand extends Command {
     private static final Logger LOGGER = Logger.getLogger(AddFlightCommand.class.getName());
