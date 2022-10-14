@@ -34,7 +34,6 @@ import seedu.moneygowhere.exceptions.ConsoleParserCommandViewRecurringPaymentInv
 import seedu.moneygowhere.exceptions.ExpenseManagerExpenseNotFoundException;
 import seedu.moneygowhere.logger.LocalLogger;
 import seedu.moneygowhere.parser.ConsoleParser;
-import seedu.moneygowhere.parser.ConsoleParserConfigurations;
 import seedu.moneygowhere.storage.LocalStorage;
 
 import java.io.IOException;
@@ -43,6 +42,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Scanner;
 
 /**
@@ -195,7 +195,7 @@ public class ConsoleInterface {
 
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_ADD_EXPENSE_SUCCESS);
 
-        LocalStorage.saveToFile(expenseManager.getExpenses());
+        LocalStorage.saveToFile(expenseManager);
     }
 
     private void viewExpense() {
@@ -285,7 +285,7 @@ public class ConsoleInterface {
 
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_DELETE_EXPENSE_SUCCESS);
 
-        LocalStorage.saveToFile(expenseManager.getExpenses());
+        LocalStorage.saveToFile(expenseManager);
     }
 
     private void runCommandEditExpense(ConsoleCommandEditExpense consoleCommandEditExpense) {
@@ -341,22 +341,19 @@ public class ConsoleInterface {
         printInformationalMessage(expenseStr);
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_EDIT_EXPENSE_SUCCESS);
 
-        LocalStorage.saveToFile(expenseManager.getExpenses());
+        LocalStorage.saveToFile(expenseManager);
     }
 
     @SuppressWarnings("Java8ListSort")
     private void runCommandSortExpense(ConsoleCommandSortExpense commandSortExpense) {
-        String type = commandSortExpense.getType();
         ArrayList<Expense> expenses = expenseManager.getExpenses();
-        if (type.equalsIgnoreCase(ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE_VAL_DATE)) {
-            Collections.sort(expenses, commandSortExpense.sortByDate);
-        } else if (type.equalsIgnoreCase(ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE_VAL_ALPHABETICAL)) {
-            Collections.sort(expenses, commandSortExpense.sortByAlphabet);
-        } else if (type.equalsIgnoreCase(ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE_VAL_AMOUNT)) {
-            Collections.sort(expenses, commandSortExpense.sortByAmount);
-        }
+        Comparator<Expense> comparator = commandSortExpense.getComparator();
+        Collections.sort(expenses,comparator);
         expenseManager.updateExpenses(expenses);
+        expenseManager.updateSortExpenses(commandSortExpense);
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_SORTED_EXPENSE_SUCCESS);
+
+        LocalStorage.saveToFile(expenseManager);
     }
 
     private void runCommandAddTarget(ConsoleCommandAddTarget consoleCommandAddTarget) {
