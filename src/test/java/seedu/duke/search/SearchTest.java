@@ -38,7 +38,6 @@ public class SearchTest {
     }
 
     @Test
-<<<<<<< HEAD
     void filterModuleSearch_onlyModuleCodeWithoutNumbers_expectCorrectNumberOfFilteredModule() {
         String toSearchModuleCode = "gea";
         String toSearchModuleTitle = null;
@@ -47,12 +46,6 @@ public class SearchTest {
 
         List<Module> searchResult = SearchModuleCommand.filterModuleSearch(toSearchModuleCode, toSearchLevel,
                 toSearchSemester, toSearchModuleTitle);
-=======
-    void filterModuleByName_validInput_expectCorrectNumberOfFilteredModule() {
-        // String inputString = "quantitative reasoning";
-        String inputString = "quantitative reasoning with data";
-        List<Module> searchResult = SearchModuleNameCommand.filterModuleByName(inputString);
->>>>>>> master
         int numberOfFilteredModulesInSearchResult = searchResult.size();
         int expectedNumberOfFilteredModules = 2;
         assertEquals(expectedNumberOfFilteredModules, numberOfFilteredModulesInSearchResult);
