@@ -12,11 +12,13 @@ import seedu.duke.exception.InvalidUserException;
 import seedu.duke.exception.ItemNotFoundException;
 import seedu.duke.exception.TransactionNotFoundException;
 import seedu.duke.exception.UserNotFoundException;
+import seedu.duke.exception.InvalidSortModeException;
+import seedu.duke.exception.InvalidPriceBoundariesException;
 
 interface CommandInterface {
     boolean executeCommand()
             throws InsufficientArgumentsException, DukeException, InvalidArgumentException,
             DateFormatInvalidException, InvalidUserException, InvalidItemException, ItemNotFoundException,
             UserNotFoundException, ContactNumberInvalidException, DuplicateException, TransactionNotFoundException,
-            InvalidPriceException;
+            InvalidPriceException, InvalidSortModeException, InvalidPriceBoundariesException;
 }

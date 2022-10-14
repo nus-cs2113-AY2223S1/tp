@@ -3,19 +3,20 @@ package seedu.duke.parser;
 import java.util.Arrays;
 import java.util.List;
 
+import seedu.duke.command.item.SortItemCommand;
+import seedu.duke.command.item.ListItemsCommand;
 import seedu.duke.command.item.AddItemCommand;
+import seedu.duke.command.item.ViewItemCommand;
+import seedu.duke.command.item.RemoveItemCommand;
 import seedu.duke.command.transaction.AddTransactionCommand;
 import seedu.duke.command.user.AddUserCommand;
 import seedu.duke.command.Command;
 import seedu.duke.command.exit.ExitCommand;
 import seedu.duke.command.help.HelpCommand;
-import seedu.duke.command.item.ListItemsCommand;
 import seedu.duke.command.transaction.ListTransactionsCommand;
 import seedu.duke.command.user.ListUsersCommand;
-import seedu.duke.command.item.RemoveItemCommand;
 import seedu.duke.command.transaction.RemoveTransactionCommand;
 import seedu.duke.command.user.RemoveUserCommand;
-import seedu.duke.command.item.ViewItemCommand;
 import seedu.duke.command.transaction.ViewTransactionCommand;
 import seedu.duke.command.user.ViewUserCommand;
 import seedu.duke.exception.CommandNotFoundException;
@@ -52,6 +53,8 @@ public class CommandParser {
     private static final String COMMAND_REMOVE_USER = "remove-user";
     private static final String COMMAND_REMOVE_ITEM = "remove-item";
     private static final String COMMAND_REMOVE_TX = "remove-tx";
+
+    private static final String COMMAND_SORT_ITEMS = "sort-items";
 
 
     /**
@@ -130,6 +133,8 @@ public class CommandParser {
             return new RemoveItemCommand(parts, itemList, transactionList);
         case COMMAND_REMOVE_TX:
             return new RemoveTransactionCommand(parts, transactionList);
+        case COMMAND_SORT_ITEMS:
+            return new SortItemCommand(parts, itemList, transactionList);
         default:
             throw new CommandNotFoundException(MESSAGE_COMMAND_UNRECOGNIZABLE);
         }
