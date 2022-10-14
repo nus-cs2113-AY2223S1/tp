@@ -12,15 +12,12 @@ public class FlightParser extends Parser {
         switch (operation) {
         case "add":
             command = new AddFlightCommand();
-            //FlightList.addFlight(operation);
             break;
         case "list":
             command = new ListFlightCommand();
-            //FlightList.printFlights();
             break;
         case "delete":
             command = new DeleteFlightCommand();
-            //FlightList.deleteFlight(operation);
             break;
         default:
             throw new SkyControlException(ui.getErrorMessage());
