@@ -1,1 +1,4 @@
 date // descending
+Test Expense 2 // 2022-01-01T12:01 // null // 10.80 // null
+Test Expense 2 // 2022-01-01T12:01 // null // 10.80 // null
+Test Expense 1 // 2022-01-01T12:00 // null // 1337.37 // null

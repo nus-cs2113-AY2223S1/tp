@@ -28,14 +28,6 @@ public class ExpenseManager {
                 expenses.sort(sortCommandSetting.getComparator());
                 return true;
             }
-
-            @Override
-            public Expense set(int expenseIndex, Expense newExpense) {
-                Expense oldValue = expenses.get(expenseIndex);
-                expenses.set(expenseIndex, newExpense);
-                expenses.sort(sortCommandSetting.getComparator());
-                return oldValue;
-            }
         };
     }
 
@@ -78,6 +70,7 @@ public class ExpenseManager {
     public void editExpense(int expenseIndex, Expense expense) throws ExpenseManagerExpenseNotFoundException {
         try {
             expenses.set(expenseIndex, expense);
+            expenses.sort(sortCommandSetting.getComparator());
         } catch (IndexOutOfBoundsException exception) {
             throw new ExpenseManagerExpenseNotFoundException(Messages.EXPENSE_MANAGER_ERROR_EXPENSE_NOT_FOUND);
         }
