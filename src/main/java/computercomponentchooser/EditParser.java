@@ -111,15 +111,5 @@ public class EditParser {
             Ui.printLine();
         }
     }
-
-//    public String parseCpu(String line, int mode) {
-//        String[] lineSplit = line.split(" ", 8);
-//        return lineSplit[mode];
-//    }
-//
-//    public String addCpu(String line, int mode) {
-//        String[] lineSplit = line.split(" ", 8);
-//        return lineSplit[mode];
-//    }
 }
 
