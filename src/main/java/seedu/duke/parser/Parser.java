@@ -53,6 +53,18 @@ public class Parser {
         return (matcher.find() && matcher.group().length() == moduleCode.length());
     }
 
+    public static boolean isPartialModuleFaculty(String moduleFaculty) {
+        Pattern pattern = Pattern.compile("[a-z]{2,3}\\d{4}[a-z]?", Pattern.CASE_INSENSITIVE); // logic update needed
+        Matcher matcher = pattern.matcher(moduleFaculty);
+        return (matcher.find() && matcher.group().length() == moduleFaculty.length());
+    }
+
+    public static boolean isModuleFaculty(String moduleFaculty) {
+        Pattern pattern = Pattern.compile("[a-z]{2,3}\\d{4}[a-z]?", Pattern.CASE_INSENSITIVE); // logic update needed
+        Matcher matcher = pattern.matcher(moduleFaculty);
+        return (matcher.find() && matcher.group().length() == moduleFaculty.length());
+    }
+
     public static boolean isMultiWordsCommand(String[] keywords) {
         return keywords.length > 2;
     }
@@ -67,6 +79,10 @@ public class Parser {
 
     public static boolean isValidModuleCode(String moduleCode) {
         return isModuleCode(moduleCode) || isPartialModuleCode(moduleCode);
+    }
+
+    public static boolean isValidModuleFaculty(String moduleFaculty) {
+        return isModuleFaculty(moduleFaculty) || isPartialModuleFaculty(moduleFaculty);
     }
 
     private static boolean containsValidModuleCode(String[] keywords) {
