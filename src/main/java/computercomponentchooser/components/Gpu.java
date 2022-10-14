@@ -5,7 +5,7 @@ public class Gpu extends Component {
     protected String memory;
     protected String clock;
 
-    public Gpu(String name, String price, String power,  String memory, String clock) {
+    public Gpu(String name, String price, String power, String memory, String clock) {
         this.name = name;
         this.price = price;
         this.memory = memory;
@@ -35,5 +35,15 @@ public class Gpu extends Component {
 
     public void setClock(String clock) {
         this.clock = clock;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + String.format(" [%s GB] [%s MHz]", memory, clock);
+    }
+
+    @Override
+    public String getDetails() {
+        return super.getDetails() + String.format("\nMemory: %s GB\nClock: %s MHz", memory, clock);
     }
 }

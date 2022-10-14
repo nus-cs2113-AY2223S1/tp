@@ -27,4 +27,13 @@ public class Drive extends Component {
     public void setType(String type) {
         this.type = type;
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + String.format(" [%s GB] [%s]", size, type);
+    }
+
+    public String getDetails() {
+        return super.getDetails() + String.format("\nSize: %s GB\nType: %s", size, type);
+    }
 }

@@ -47,5 +47,14 @@ public class Cpu extends Component {
     public void setPower(String power) {
         this.power = power;
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + String.format(" [%s] [%s GHz]", socket, clock);
+    }
+
+    public String getDetails() {
+        return super.getDetails() + String.format("\nSocket: %s\nClock: %s GHz", socket, clock);
+    }
 }
 

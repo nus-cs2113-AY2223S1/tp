@@ -4,8 +4,6 @@ import computercomponentchooser.exceptions.UnknownCommandException;
 import computercomponentchooser.exceptions.DuplicateBuildException;
 import computercomponentchooser.exceptions.UnlistedBuildException;
 
-import static computercomponentchooser.ComputerComponentChooser.buildManager;
-
 public class Parser {
 
     static final int COMMAND_PARAMETER = 0;
@@ -56,7 +54,12 @@ public class Parser {
                 System.out.println("You have added " + name);
                 Ui.printLine();
                 break;
-            //case "view":
+            case "view":
+                name = getParameter(line, NAME_PARAMETER);
+                Ui.printLine();
+                System.out.print(buildManager.getBuild(name).toString());
+                Ui.printLine();
+                break;
             case "delete":
                 name = getParameter(line, NAME_PARAMETER);
                 newBuild = new Build(name);
