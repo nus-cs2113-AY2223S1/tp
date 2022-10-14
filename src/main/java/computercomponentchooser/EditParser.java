@@ -1,6 +1,11 @@
 package computercomponentchooser;
 
-import computercomponentchooser.components.*;
+import computercomponentchooser.components.Cpu;
+import computercomponentchooser.components.Memory;
+import computercomponentchooser.components.Motherboard;
+import computercomponentchooser.components.PowerSupply;
+import computercomponentchooser.components.Gpu;
+import computercomponentchooser.components.Drive;
 import computercomponentchooser.exceptions.UnknownCommandException;
 
 
@@ -115,7 +120,7 @@ public class EditParser {
                 Ui.printLine();
                 break;
             case "view":
-                
+
             case "check":
             case "back":
                 break;
