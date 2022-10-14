@@ -16,10 +16,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class StorageTest {
     @RepeatedTest(value = 5, name = RepeatedTest.LONG_DISPLAY_NAME)
     public void saveState_state_outputFile() throws IOException {
+        //Save state into file
         State state = new State();
         int semester = 1;
         state.setSemester(semester);
-
         SelectedModule selectedModule1 = new SelectedModule(Module.get("CS1010"), semester);
         selectedModule1.selectSlot(LessonType.TUTORIAL, "01");
         selectedModule1.selectSlot(LessonType.SECTIONAL_TEACHING, "1");
@@ -31,6 +31,7 @@ public class StorageTest {
         Storage storage = new Storage();
         storage.saveState(state);
 
+        //Read saved state from saved file
         File actualFile = new File("data/duke.txt");
         Scanner actualScanner = new Scanner(actualFile);
         StringBuilder actualString = new StringBuilder();
@@ -39,6 +40,7 @@ public class StorageTest {
         }
         actualScanner.close();
 
+        //Read state from expected file
         File expectedFile = new File("src/test/resources/saveCs1010.txt");
         Scanner expectedScanner = new Scanner(expectedFile);
         StringBuilder expectedString = new StringBuilder();
