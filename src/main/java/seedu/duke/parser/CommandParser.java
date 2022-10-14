@@ -3,7 +3,11 @@ package seedu.duke.parser;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.duke.command.item.*;
+import seedu.duke.command.item.SortItemCommand;
+import seedu.duke.command.item.ListItemsCommand;
+import seedu.duke.command.item.AddItemCommand;
+import seedu.duke.command.item.ViewItemCommand;
+import seedu.duke.command.item.RemoveItemCommand;
 import seedu.duke.command.transaction.AddTransactionCommand;
 import seedu.duke.command.user.AddUserCommand;
 import seedu.duke.command.Command;
