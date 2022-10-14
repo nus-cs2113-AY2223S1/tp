@@ -8,7 +8,8 @@
                           |___/                                            
 
 Your MoneyGoWhere? Let me help you find it.
-File loaded successfully :)
+There is no load file found...
+Please ensure the file is named correctly and is in the right directory if you have a load file.
 
 
 ERROR: The command entered is invalid.
