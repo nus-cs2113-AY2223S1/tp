@@ -33,4 +33,6 @@ public class ExceptionMessages {
     public static final String MESSAGE_INSUFFICIENT_ARGUMENTS = "Not enough arguments for this commands to execute";
     public static final String MESSAGE_COMMAND_UNRECOGNIZABLE = "This command is unrecognizable!!!\n"
             + "Please use help command to check";
+    public static final String MESSAGE_FILE_NOT_FOUND = "OOPS!!! I cannot find your file";
+    public static final String MESSAGE_STORE_INVALID = "Something went wrong when storing your tasks";
 }
