@@ -341,21 +341,21 @@ public class ConsoleParser {
 
             /* Checks if arguments are valid */
 
-            if (type.equalsIgnoreCase(
+            if (
+                    !(type.equalsIgnoreCase(
                     ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE_VAL_ALPHABETICAL)
                     || type.equalsIgnoreCase(
                     ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE_VAL_AMOUNT)
                     || type.equalsIgnoreCase(
-                    ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE_VAL_DATE)
-            ) {
+                    ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE_VAL_DATE))) {
                 throw new ConsoleParserCommandSortExpenseInvalidTypeException();
             }
 
-            if (order.equalsIgnoreCase(
+            if (
+                    !(order.equalsIgnoreCase(
                     ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_ORDER_VAL_ASCENDING)
                     || order.equalsIgnoreCase(
-                    ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_ORDER_VAL_DESCENDING)
-            ) {
+                    ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_ORDER_VAL_DESCENDING))) {
                 throw new ConsoleParserCommandSortExpenseInvalidTypeException();
             }
 
