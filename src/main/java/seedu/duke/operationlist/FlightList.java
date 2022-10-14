@@ -5,6 +5,9 @@ import seedu.duke.exceptions.SkyControlException;
 
 public class FlightList extends OperationList {
     public static int flightIndex = 0;
+
+    private static final String FLIGHT_ADD_COMMAND = "flight add";
+    private static final String FLIGHT_DELETE_COMMAND = "flight delete";
     private static final String FLIGHT_NUMBER_DELIMITER = "fn/";
     private static final String AIRLINE_DELIMITER = "a/";
     private static final String DESTINATION_DELIMITER = "d/";
@@ -34,7 +37,7 @@ public class FlightList extends OperationList {
     @Override
     public void addOperation(String detail) {
         try {
-            checkCommandLength(detail.substring("flight add".length()));
+            checkCommandLength(detail.substring(FLIGHT_ADD_COMMAND.length()));
             String flightNum = extractDetail(detail, FLIGHT_NUMBER_DELIMITER, AIRLINE_DELIMITER);
             String airline = extractDetail(detail, AIRLINE_DELIMITER, DESTINATION_DELIMITER);
             String destination = extractDetail(detail, DESTINATION_DELIMITER, DEPARTURE_TIME_DELIMITER);
@@ -54,7 +57,6 @@ public class FlightList extends OperationList {
         }
     }
 
-    //not done
     @Override
     public void deleteOperation(String detail) {
         boolean isFlightFound;
