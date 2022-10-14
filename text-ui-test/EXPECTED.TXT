@@ -77,5 +77,8 @@ You did not input an operation.
 The system is unable to read your command, please try again.
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Error: Flight number should start with 2 letters and trail with 1-4 numbers.
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Thank you, come again! :)
 
