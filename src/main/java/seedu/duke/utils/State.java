@@ -33,10 +33,6 @@ public class State {
         selectedModulesList.get(semester).add(selectedModule);
     }
 
-    public void selectSemester(int semester) {
-        this.semester = semester;
-    }
-
     public void removeSelectedModule(SelectedModule selectedModule) {
         selectedModulesList.get(semester).remove(selectedModule);
     }
