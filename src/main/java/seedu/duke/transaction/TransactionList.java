@@ -51,10 +51,10 @@ public class TransactionList {
         return count > 0;
     }
 
-    public boolean hasThisItemBeingBorrowed(String itemId) {
+    public boolean hasThisItemBeingBorrowed(String itemName) {
         int count = (int) transactionList.stream()
                 .filter(t -> !t.isFinished())
-                .filter(t -> t.getItemId().equals(itemId))
+                .filter(t -> t.getItemName().equals(itemName))
                 .count();
         return count > 0;
     }

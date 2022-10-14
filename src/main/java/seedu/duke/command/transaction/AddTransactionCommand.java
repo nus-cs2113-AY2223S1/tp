@@ -61,16 +61,16 @@ public class AddTransactionCommand extends Command {
         return args;
     }
 
-    private boolean isValidItem(String id) throws InvalidItemException, ItemNotFoundException {
-        if (itemList.getItemById(id).isAvailable(transactionList)) {
+    private boolean isValidItem(String name) throws InvalidItemException, ItemNotFoundException {
+        if (itemList.getItemByName(name).isAvailable(transactionList)) {
             return true;
         }
         throw new InvalidItemException(MESSAGE_ITEM_UNAVAILABLE);
     }
 
-    private boolean isValidBorrower(String itemId, String userId)
+    private boolean isValidBorrower(String itemName, String userId)
             throws InvalidUserException, ItemNotFoundException, UserNotFoundException {
-        String itemOwnerName = itemList.getItemById(itemId).getOwnerId();
+        String itemOwnerName = itemList.getItemByName(itemName).getOwnerId();
         if (!userList.getUserById(userId).getName().equals(itemOwnerName)) {
             return true;
         }
@@ -107,11 +107,11 @@ public class AddTransactionCommand extends Command {
             InvalidUserException, InvalidItemException, ItemNotFoundException, UserNotFoundException {
         String[] args = getArgsAddTxCmd();
         if (areValidArgs(args)) {
-            String itemId = args[0];
+            String itemName = args[0];
             String borrowId = args[1];
             int duration = Integer.parseInt(args[2]);
             LocalDate createdAt = LocalDate.parse(args[3]);
-            Transaction transaction = new Transaction(itemId, borrowId, duration, createdAt);
+            Transaction transaction = new Transaction(itemName, borrowId, duration, createdAt);
             this.transactionList.add(transaction);
             Ui.addTransactionMessage(transaction, transactionList.getSize());
         }

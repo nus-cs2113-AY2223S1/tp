@@ -55,7 +55,7 @@ public class Ui {
         showLine();
         assert itemListSize >= 0;
         System.out.print("Noted. Following item has been added: " + '\n' + item.toString(transactionList)
-                + "\n" + "Total item(s) in list: " + itemListSize + '\n');
+                + "\n" + "Total item(s) in database: " + itemListSize + '\n');
         showLine();
     }
 
@@ -70,7 +70,7 @@ public class Ui {
         showLine();
         assert itemListSize >= 0;
         System.out.print("OK! I will remove the following item:\n" + item + "\n"
-                + "Total item(s) in list: " + itemListSize + '\n');
+                + "Total item(s) in database: " + itemListSize + '\n');
         showLine();
     }
 
@@ -78,7 +78,7 @@ public class Ui {
         showLine();
         assert transactionListSize >= 0;
         System.out.print("OK! I will add the following transaction:\n" + transaction.toString() + "\n"
-                + "Total transaction(s) in list: " + transactionListSize + '\n');
+                + "Total transaction(s) in database: " + transactionListSize + '\n');
         showLine();
     }
 
@@ -111,7 +111,7 @@ public class Ui {
         showLine();
         assert transactionListSize >= 0;
         System.out.print("OK! I will remove the following item:\n" + transaction.toString() + "\n"
-                + "Total item(s) in list: " + transactionListSize + '\n');
+                + "Total transactions(s) in database: " + transactionListSize + '\n');
         showLine();
     }
 
@@ -126,7 +126,7 @@ public class Ui {
         showLine();
         assert userListSize >= 0;
         System.out.print("Noted. Following user has been added: " + '\n' + user.toString()
-                + "\n" + "Total user(s) in list: " + userListSize + '\n');
+                + "\n" + "Total user(s) in database: " + userListSize + '\n');
         showLine();
     }
 
@@ -134,7 +134,7 @@ public class Ui {
         showLine();
         assert userListSize >= 0;
         System.out.print("Noted. Following user has been deleted: " + '\n' + user.toString()
-                + "\n" + "Total user(s) in list: " + userListSize + '\n');
+                + "\n" + "Total user(s) in database: " + userListSize + '\n');
         showLine();
     }
 

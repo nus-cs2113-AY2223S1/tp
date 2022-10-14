@@ -59,7 +59,7 @@ public class AddItemCommand extends Command {
 
     private boolean isValidName(String itemName) throws DuplicateException {
         try {
-            itemList.getItemById(itemName);
+            itemList.getItemByName(itemName);
             throw new DuplicateException(MESSAGE_ITEM_NAME_TAKEN);
         } catch (ItemNotFoundException e) {
             return true;
