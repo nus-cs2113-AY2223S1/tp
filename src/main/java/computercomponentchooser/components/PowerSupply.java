@@ -1,8 +1,6 @@
 package computercomponentchooser.components;
 
-public class PowerSupply {
-    protected String name;
-    protected float price;
+public class PowerSupply extends Component {
     protected int powerSupply;
 
     public PowerSupply(String name, float price, int powerSupply) {

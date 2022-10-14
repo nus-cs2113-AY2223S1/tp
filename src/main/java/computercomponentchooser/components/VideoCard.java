@@ -1,12 +1,9 @@
 package computercomponentchooser.components;
 
-public class VideoCard {
-    protected String name;
-    protected float price;
+public class VideoCard extends Component {
     protected String chipset;
     protected int memory;
     protected float clock;
-    protected int power;
 
     public VideoCard(String name, float price, String chipset, int memory, float clock, int power) {
         this.name = name;

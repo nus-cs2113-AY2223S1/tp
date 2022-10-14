@@ -1,11 +1,8 @@
 package computercomponentchooser.components;
 
-public class Storage {
-    protected String name;
-    protected float price;
+public class Storage extends Component {
     protected int size;
     protected String type;
-    protected int power;
 
     public Storage(String name, float price, int size, String type, int power) {
         this.name = name;

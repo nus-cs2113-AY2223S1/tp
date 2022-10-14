@@ -1,12 +1,9 @@
 package computercomponentchooser.components;
 
-public class Memory {
-    protected String name;
-    protected float price;
+public class Memory extends Component {
     protected String speed;
     protected float size;
     protected int modules;
-    protected int power;
 
     public Memory(String name, float price, String speed, float size, int modules, int power) {
         this.name = name;
