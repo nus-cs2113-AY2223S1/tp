@@ -83,6 +83,19 @@ Example of usage:
 * `Sort-Expense -t amount -o descending`
 * `Sort-Expense -t alphabetical -o ascending`
 
+### Adding recurring payments: `Add-RecurringPayment`
+Adds a recurring payment to the list of recurring payments
+
+Syntax: `Add-RecurringPayment -n NAME -i INTERVAL -a AMOUNT [-t DESCRIPTION]`
+
+* `NAME` and `DESCRIPTION` are text strings. You may use spaces within the text if you wrap the text with double quotes.
+* `INTERVAL` is an integer value. Set this value to the estimated number of days between your recurring payments.
+* `AMOUNT` is a decimal value.
+
+Example of usage:
+* `Add-RecurringPayment -n "Mobile Plan" -i 30 -a 20.00`
+* `Add-RecurringPayment -n "Mobile Plan" -i 30 -a 20.00 -t "Monthly payment for my mobile plan"`
+
 ## FAQ
 
 **Q**: How do I transfer my data to another computer?
