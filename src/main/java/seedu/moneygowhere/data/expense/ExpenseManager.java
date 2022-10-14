@@ -6,6 +6,7 @@ import seedu.moneygowhere.exceptions.ExpenseManagerExpenseNotFoundException;
 import seedu.moneygowhere.parser.ConsoleParserConfigurations;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * Stores and manages a list of expenses.
@@ -21,10 +22,19 @@ public class ExpenseManager {
                 ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_ORDER_VAL_DESCENDING
         );
         expenses = new ArrayList<>() {
+            @Override
             public boolean add(Expense newExpense) {
                 super.add(newExpense);
                 expenses.sort(sortCommandSetting.getComparator());
                 return true;
+            }
+            
+            @Override
+            public Expense set(int expenseIndex, Expense newExpense) {
+                Expense oldValue = expenses.get(expenseIndex);
+                expenses.set(expenseIndex, newExpense);
+                expenses.sort(sortCommandSetting.getComparator());
+                return oldValue;
             }
         };
     }
