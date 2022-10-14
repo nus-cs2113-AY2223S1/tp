@@ -57,6 +57,8 @@ public class Storage {
 
     public static final String LOADING_PREVIOUS_STATE_MESSAGE = "Loading previous state.";
 
+    public static final String EXPORT_MESSAGE = "This is your export link:";
+
     private Logger logger = Logger.getLogger(Storage.class.getName());
 
     public static final String SUBSYSTEM_NAME = "storage";
@@ -105,9 +107,10 @@ public class Storage {
     }
 
     /**
+     * Finds the saved semester and split the remaining parts into module code and lessons information.
      *
-     * @param link
-     * @param state
+     * @param link  for exporting to NUSMods
+     * @param state current state of the application to be saved
      */
     public void loadPreviousState(String link, State state) {
         String[] infoParam = link.split(DELIMITER);
@@ -117,6 +120,9 @@ public class Storage {
 
         String modulesParam = infoParam[MODULES_PARAM_INDEX];
         String cleanModuleParam = modulesParam.replace(SHARE_DELIMITER,"");
+        if (cleanModuleParam.isEmpty()) {
+            return;
+        }
         String[] moduleAndLessonsArray = cleanModuleParam.split(moduleDelimiter);
         for (String moduleAndLessons : moduleAndLessonsArray) {
             String[] splitModuleAndLesson = moduleAndLessons.split(MODULE_CODE_DELIMITER);
@@ -129,6 +135,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Splits the lessons information into <code>lessonType</code> and <code>classNo</code>.
+     *
+     * @param lessonsInfo    contains the lessons information in the form <code>MODULE_CODE=LESSON:LESSON_NUMBER,
+     *                       LESSON:LESSON_NUMBER</code>
+     * @param selectedModule current module to select classes
+     */
     private void addLessons(String[] lessonsInfo, SelectedModule selectedModule) {
         for (int i = 1; i < lessonsInfo.length; i++) {
             String[] lessonInfo = lessonsInfo[i].split(LESSON_TYPE_DELIMITER);
@@ -138,6 +151,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Translates the short string to its respective <code>LessonType</code>.
+     *
+     * @param shortString unique identifier for <code>LessonType</code>
+     * @return corresponding <code>LessonType</code>
+     */
     public static LessonType getLessonType(String shortString) {
         Map<String, LessonType> map = new HashMap<>();
         map.put("TUT", LessonType.TUTORIAL);
@@ -158,10 +177,11 @@ public class Storage {
     /**
      * Saves all current tasks by overriding the file.
      *
-     * @param state        the current state of the application
+     * @param state the current state of the application
+     * @param ui    to output to the user
      * @throws IOException failed or interrupted I/O operations
      */
-    public void saveState(State state) throws IOException {
+    public void saveState(State state, Ui ui) throws IOException {
         assert state != null : "State should not be null";
         logger = Logger.getLogger(SUBSYSTEM_NAME);
         logger.log(Level.INFO, "Saving current state with " + state.getSelectedModulesList().size()
@@ -183,6 +203,9 @@ public class Storage {
         if (link.endsWith(",")) {
             link = link.substring(0,link.length() - 1);
         }
+        ui.addMessage(EXPORT_MESSAGE);
+        ui.addMessage(link);
+        ui.displayUi();
         FileWriter fw = new FileWriter(file);
         fw.write(link);
         fw.close();
