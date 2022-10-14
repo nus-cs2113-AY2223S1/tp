@@ -9,6 +9,8 @@ import seedu.duke.parser.Parser;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class SearchModuleCommand extends Command {
     public static final String FORMAT = "search /code [MODULE_CODE] /title [MODULE_TITLE] "
@@ -22,6 +24,10 @@ public class SearchModuleCommand extends Command {
     private String toSearchLevel;
     private String toSearchSemester;
 
+    private Logger logger;
+
+    public static final String SUBSYSTEM_NAME = "SearchModuleCommand";
+
     public SearchModuleCommand(String input) {
         super(input.split("\\s"));
         params = Parser.parseParams(input);
@@ -29,14 +35,14 @@ public class SearchModuleCommand extends Command {
 
     @Override
     public void execute(State state, Ui ui, Storage storage) {
+        assert state != null : "List of lessons should not be null";
+        logger = Logger.getLogger(SUBSYSTEM_NAME);
+        logger.log(Level.INFO, "Loading search module command");
+
         toSearchModuleCode = params.getOrDefault("code", null);
         toSearchModuleTitle = params.getOrDefault("title", null);
         toSearchLevel = params.getOrDefault("level", null);
         toSearchSemester = params.getOrDefault("sem", null);
-
-        // assert that at least module code or module title is provided
-        assert toSearchModuleCode != null || toSearchModuleTitle != null :
-                "At least module code or module title is required";
 
         List<Module> searchResult = filterModuleSearch(toSearchModuleCode, toSearchLevel,
                 toSearchSemester, toSearchModuleTitle);
