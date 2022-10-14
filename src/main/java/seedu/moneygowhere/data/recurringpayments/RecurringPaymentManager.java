@@ -22,6 +22,6 @@ public class RecurringPaymentManager {
     }
 
     public ArrayList<RecurringPayment> getRecurringPayments() {
-        return new ArrayList<>(recurringPayments);
+        return recurringPayments;
     }
 }
