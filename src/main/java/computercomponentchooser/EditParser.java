@@ -1,8 +1,6 @@
 package computercomponentchooser;
 
-import computercomponentchooser.components.Cpu;
-import computercomponentchooser.components.Memory;
-import computercomponentchooser.components.Motherboard;
+import computercomponentchooser.components.*;
 import computercomponentchooser.exceptions.UnknownCommandException;
 
 
@@ -17,7 +15,6 @@ public class EditParser {
 
     static final int POWER_PARAMETER = 4;
 
-    static final int CONTENT_PARAMETER = 5;
     public static String buildName;
 
     private final BuildManager buildManager;
@@ -70,6 +67,23 @@ public class EditParser {
                     editBuild = buildManager.getBuild(buildName);
                     editBuild.addComponent(type, motherboard);
                     break;
+                case "powersupply":
+                    PowerSupply powersupply = new PowerSupply(name, price, power);
+                    editBuild = buildManager.getBuild(buildName);
+                    editBuild.addComponent(type, powersupply);
+                    break;
+                case "gpu":
+                    Gpu gpu = new Gpu(name, price, power, getParameter(line, 5),
+                            getParameter(line, 6));
+                    editBuild = buildManager.getBuild(buildName);
+                    editBuild.addComponent(type, gpu);
+                    break;
+                case "drive":
+                    Drive drive = new Drive(name, price, power, getParameter(line, 5),
+                            getParameter(line, 6));
+                    editBuild = buildManager.getBuild(buildName);
+                    editBuild.addComponent(type, drive);
+                    break;
                 default:
                     break;
                 }
@@ -100,6 +114,8 @@ public class EditParser {
                 System.out.println("You are now editing " + buildName);
                 Ui.printLine();
                 break;
+            case "view":
+                
             case "check":
             case "back":
                 break;
