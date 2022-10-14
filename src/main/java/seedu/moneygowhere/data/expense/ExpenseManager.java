@@ -28,7 +28,7 @@ public class ExpenseManager {
                 expenses.sort(sortCommandSetting.getComparator());
                 return true;
             }
-            
+
             @Override
             public Expense set(int expenseIndex, Expense newExpense) {
                 Expense oldValue = expenses.get(expenseIndex);
