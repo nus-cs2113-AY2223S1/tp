@@ -40,7 +40,7 @@ public class HelpCommand extends Command {
             Map.entry("Find all finished transactions", COMMAND_FIND_FINISHED_TX),
             Map.entry("Find all unfinished transactions", COMMAND_FIND_UNFINISHED_TX),
             Map.entry("Sort all items in a range", COMMAND_SORT_ITEM),
-            Map.entry("Sort all categories available", COMMAND_LIST_CATEGORIES)
+            Map.entry("List all categories available", COMMAND_LIST_CATEGORIES)
     );
 
     public boolean executeCommand() {
