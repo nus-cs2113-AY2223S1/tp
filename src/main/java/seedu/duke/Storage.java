@@ -208,8 +208,22 @@ public class Storage {
                 String[] clientParamters = pairingParameters[0].split("\\s\\|\\s");
                 String[] propertyParameters = pairingParameters[1].split("\\s\\|\\s");
 
-                Client pairingClient = new Client(clientParamters[0], clientParamters[1], clientParamters[2], clientParamters[3]);
-                Property pairingProperty = new Property(propertyParameters[0], propertyParameters[1], propertyParameters[2], propertyParameters[3]);
+                //Client Information
+                String clientName = clientParamters[0];
+                String clientContactNumber = clientParamters[1];
+                String clientEmail = clientParamters[2];
+                String clientBudget = clientParamters[3];
+
+                //Property Information
+                String landLordName = propertyParameters[0];
+                String propertyAddress = propertyParameters[1];
+                String rentalPrice = propertyParameters[2];
+                String unitType = propertyParameters[3];
+
+
+
+                Client pairingClient = new Client(clientName, clientContactNumber, clientEmail, clientBudget);
+                Property pairingProperty = new Property(landLordName, propertyAddress, rentalPrice, unitType);
 
                 pairingList2.addPairing(pairingClient, pairingProperty);
             }

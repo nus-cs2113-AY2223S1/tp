@@ -294,7 +294,7 @@ public class Ui {
         for (Client tenant : tenants) {
             // Remove brackets at first and last indexes of tenant(client) string
             String tenantInfo = tenant.toString().substring(1, tenant.toString().length() - 1);
-//            String tenantInfo = tenant.substring(1, tenant.length() - 1);
+
             showToUser(String.format("  %d. %s", ++count, tenantInfo));
         }
         showToUser(MESSAGE_NUMBER_OF_LIST_RESULTS + count);
