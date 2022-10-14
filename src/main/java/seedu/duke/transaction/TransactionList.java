@@ -21,6 +21,10 @@ public class TransactionList {
         return transactionList.size();
     }
 
+    public ArrayList<Transaction> getTransactionList() {
+        return this.transactionList;
+    }
+
     public void add(Transaction transaction) {
         transactionList.add(transaction);
     }

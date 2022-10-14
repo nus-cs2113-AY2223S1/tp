@@ -19,6 +19,8 @@ public class HelpCommand extends Command {
     private static final String COMMAND_REMOVE_USER = "remove-user /u <userName>";
     private static final String COMMAND_REMOVE_ITEM = "remove-item /i <itemName>";
     private static final String COMMAND_REMOVE_TX = "remove-tx /t <transactionId>";
+    private static final String COMMAND_FIND_FINISHED_TX = "find-tx /s finished";
+    private static final String COMMAND_FIND_UNFINISHED_TX = "find-tx /s unfinished";
     private static final Map<String, String> commandToDetailMap = Map.ofEntries(
             Map.entry("List all commands", COMMAND_HELP),
             Map.entry("List all users", COMMAND_LIST_USERS),
@@ -32,7 +34,9 @@ public class HelpCommand extends Command {
             Map.entry("Add a transaction", COMMAND_ADD_TX),
             Map.entry("Remove a user", COMMAND_REMOVE_USER),
             Map.entry("Remove a item", COMMAND_REMOVE_ITEM),
-            Map.entry("Remove a transaction", COMMAND_REMOVE_TX));
+            Map.entry("Remove a transaction", COMMAND_REMOVE_TX),
+            Map.entry("Find all finished transactions", COMMAND_FIND_FINISHED_TX),
+            Map.entry("Find all unfinished transactions", COMMAND_FIND_UNFINISHED_TX));
 
     public boolean executeCommand() {
         Ui.showLine();

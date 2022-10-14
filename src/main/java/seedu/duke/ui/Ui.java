@@ -5,6 +5,7 @@ import seedu.duke.transaction.Transaction;
 import seedu.duke.transaction.TransactionList;
 import seedu.duke.user.User;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
@@ -85,6 +86,24 @@ public class Ui {
         showLine();
         System.out.print("Here is the transaction you requested to view: " + '\n'
                 + transaction + "\n");
+        showLine();
+    }
+
+    public static void viewCompletedTransactionsMessage(ArrayList<Transaction> transactions) {
+        showLine();
+        System.out.print("Here are the completed transactions: " + '\n');
+        for (Transaction transaction : transactions) {
+            System.out.print(transaction + "\n");
+        }
+        showLine();
+    }
+
+    public static  void viewUncompletedTransactionsMessage(ArrayList<Transaction> transactions) {
+        showLine();
+        System.out.print("Here are the uncompleted transactions: " + '\n');
+        for (Transaction transaction : transactions) {
+            System.out.print(transaction + "\n");
+        }
         showLine();
     }
 

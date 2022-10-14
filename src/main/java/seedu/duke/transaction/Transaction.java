@@ -59,7 +59,7 @@ public class Transaction {
 
     @Override
     public String toString() {
-        String transactionIcon = "[" + (isFinished() ? "X" : " ") + "] ";
+        String transactionIcon = "Status: [" + (isFinished() ? "Returned" : "On loan") + "] ";
         String transactionId = "TransactionID: " + this.transactionId + " ";
         String itemId = "ItemID: " + this.item + " ";
         String usersId = "BorrowerID: " + this.borrower + " ";
