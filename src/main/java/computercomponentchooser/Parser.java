@@ -45,7 +45,7 @@ public class Parser {
             case "list":
                 Ui.printLine();
                 System.out.println("Your current builds:");
-                System.out.println(buildManager.toString());
+                System.out.print(buildManager.toString());
                 Ui.printLine();
                 break;
             case "add":

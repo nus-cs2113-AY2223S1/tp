@@ -1,11 +1,11 @@
 package computercomponentchooser.components;
 
-public class VideoCard extends Component {
+public class Gpu extends Component {
 //    protected String chipset;
-//    protected int memory;
+//    protected String memory;
 //    protected float clock;
 //
-//    public VideoCard(String name, float price, String chipset, int memory, float clock, int power) {
+//    public Gpu(String name, float price, String chipset, int memory, float clock, int power) {
 //        this.name = name;
 //        this.price = price;
 //        this.chipset = chipset;

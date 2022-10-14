@@ -1,6 +1,8 @@
 package computercomponentchooser;
 
 import computercomponentchooser.components.Cpu;
+import computercomponentchooser.components.Memory;
+import computercomponentchooser.components.Motherboard;
 import computercomponentchooser.exceptions.UnknownCommandException;
 
 
@@ -25,7 +27,7 @@ public class EditParser {
     }
 
     private static String getParameter(String line, int mode) {
-        String[] lineSplit = line.split(" ", 5);
+        String[] lineSplit = line.split(" ");
         return lineSplit[mode];
     }
 
@@ -39,18 +41,34 @@ public class EditParser {
 
         String name;
         String type;
+        String price;
+        String power;
         Build editBuild;
         try {
             switch (command) {
             case "add":
                 name = getParameter(line, NAME_PARAMETER);
                 type = getParameter(line, TYPE_PARAMETER);
+                price = getParameter(line, PRICE_PARAMETER);
+                power = getParameter(line, POWER_PARAMETER);
                 switch (type) {
                 case "cpu":
-                    Cpu cpu = new Cpu(name, parseCpu(line, PRICE_PARAMETER), parseCpu(line, 5),
-                            parseCpu(line, 6), parseCpu(line, POWER_PARAMETER));
+                    Cpu cpu = new Cpu(name, price, power,
+                            getParameter(line, 5), getParameter(line, 6));
                     editBuild = buildManager.getBuild(buildName);
                     editBuild.addComponent(type, cpu);
+                    break;
+                case "memory":
+                    Memory memory = new Memory(name, price, power, getParameter(line, 5),
+                            getParameter(line, 6));
+                    editBuild = buildManager.getBuild(buildName);
+                    editBuild.addComponent(type, memory);
+                    break;
+                case "motherboard":
+                    Motherboard motherboard = new Motherboard(name, price, power, getParameter(line, 5),
+                            getParameter(line, 6), getParameter(line, 7));
+                    editBuild = buildManager.getBuild(buildName);
+                    editBuild.addComponent(type, motherboard);
                     break;
                 default:
                     break;
@@ -73,7 +91,7 @@ public class EditParser {
                 editBuild = buildManager.getBuild(buildName);
                 Ui.printLine();
                 System.out.println("Computer parts for " + buildName + ":");
-                System.out.println(editBuild.toString());
+                System.out.print(editBuild.toString());
                 Ui.printLine();
                 break;
             case "edit":
@@ -94,14 +112,14 @@ public class EditParser {
         }
     }
 
-    public String parseCpu(String line, int mode) {
-        String[] lineSplit = line.split(" ", 8);
-        return lineSplit[mode];
-    }
-
-    public String addCpu(String line, int mode) {
-        String[] lineSplit = line.split(" ", 8);
-        return lineSplit[mode];
-    }
+//    public String parseCpu(String line, int mode) {
+//        String[] lineSplit = line.split(" ", 8);
+//        return lineSplit[mode];
+//    }
+//
+//    public String addCpu(String line, int mode) {
+//        String[] lineSplit = line.split(" ", 8);
+//        return lineSplit[mode];
+//    }
 }
 

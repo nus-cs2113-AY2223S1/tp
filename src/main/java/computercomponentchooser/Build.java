@@ -27,7 +27,23 @@ public class Build {
         case "cpu":
             components.addElement("cpu", component.getName(), component);
             break;
+        case "memory":
+            components.addElement("memory", component.getName(), component);
+            break;
+        case "motherboard":
+            components.addElement("motherboard", component.getName(), component);
+            break;
+        case "powersupply":
+            components.addElement("powersupply", component.getName(), component);
+            break;
+        case "gpu":
+            components.addElement("gpu", component.getName(), component);
+            break;
+        case "drive":
+            components.addElement("drive", component.getName(), component);
+            break;
         default:
+            // throw exception
             break;
         }
     }
