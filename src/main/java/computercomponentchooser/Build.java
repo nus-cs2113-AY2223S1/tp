@@ -127,7 +127,7 @@ public class Build {
         int slot = 0;
         for (Component component : getAllComponents()) {
             if (component.getType().equals("gpu")) {
-                slot +=1;
+                slot += 1;
             }
         }
         for (Component component : getAllComponents()) {
@@ -144,7 +144,7 @@ public class Build {
         int slot = 0;
         for (Component component : getAllComponents()) {
             if (component.getType().equals("memory")) {
-                slot +=1;
+                slot += 1;
             }
         }
         for (Component component : getAllComponents()) {
@@ -174,7 +174,7 @@ public class Build {
         return sb.toString();
     }
 
-    public String getCompatibilityInfo(){
+    public String getCompatibilityInfo() {
         StringBuilder sb = new StringBuilder();
         sb.append("Power supply: ").append(checkPowerSupply()).append(System.lineSeparator());
         sb.append("Socket: ").append(checkSocket()).append(System.lineSeparator());
