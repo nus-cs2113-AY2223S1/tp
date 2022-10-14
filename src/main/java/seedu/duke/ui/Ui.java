@@ -204,7 +204,7 @@ public class Ui {
                     + "--------------------------------------------------------------+"
                     + flight);
         }
-        System.out.println();
+//        System.out.println();
     }
 
     public String getLoggerError() {

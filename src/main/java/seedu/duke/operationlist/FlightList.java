@@ -46,8 +46,8 @@ public class FlightList extends OperationList {
             String terminal = extractDetail(detail, TERMINAL_DELIMITER, CHECK_IN_ROW_DELIMITER);
             String checkInRowAndDoor = extractDetail(detail, CHECK_IN_ROW_DELIMITER, END_OF_INPUT);
 
-            FlightInfo flight = new FlightInfo(flightNum, airline, destination,
-                    departureTime, gateNum, terminal, checkInRowAndDoor);
+            FlightInfo flight = new FlightInfo(flightNum.toUpperCase(), airline.toUpperCase(), destination.toUpperCase(),
+                    departureTime.toUpperCase(), gateNum.toUpperCase(), terminal.toUpperCase(), checkInRowAndDoor.toUpperCase());
             flights.add(flightIndex, flight);
             flightIndex++;
             ui.showFlightAddedMessage();
