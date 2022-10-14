@@ -107,11 +107,12 @@ public class AddTransactionCommand extends Command {
             InvalidUserException, InvalidItemException, ItemNotFoundException, UserNotFoundException {
         String[] args = getArgsAddTxCmd();
         if (areValidArgs(args)) {
+            String itemId = args[0];
             String itemName = itemList.getItemById(args[0]).getName();
             String borrowId = args[1];
             int duration = Integer.parseInt(args[2]);
             LocalDate createdAt = LocalDate.parse(args[3]);
-            Transaction transaction = new Transaction(itemName, borrowId, duration, createdAt);
+            Transaction transaction = new Transaction(itemName, itemId, borrowId, duration, createdAt);
             this.transactionList.add(transaction);
             Ui.addTransactionMessage(transaction, transactionList.getSize());
         }
