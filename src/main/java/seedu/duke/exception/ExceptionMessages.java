@@ -19,6 +19,8 @@ public class ExceptionMessages {
     public static final String MESSAGE_ITEM_NAME_TAKEN = "This itemName has been taken";
     public static final String MESSAGE_PRICE_FORMAT_INVALID = "Price is a float, check your format";
     public static final String MESSAGE_PRICE_LESS_THAN_ZERO = "Price must be greater than 0";
+    public static final String MESSAGE_SORT_MODE_INVALID = "Mode of sorting is invalid";
+    public static final String MESSAGE_PRICE_BOUNDARIES_INVALID = "Minimum price cannot be more than maximum price";
 
     //Tx-related messages
     public static final String MESSAGE_TX_NOT_FOUND = "This transaction cannot be found in the list";

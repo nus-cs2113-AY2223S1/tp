@@ -23,6 +23,10 @@ public class Item {
         return name;
     }
 
+    public double getPricePerDay() {
+        return pricePerDay;
+    }
+
     public Category.Categories getCategory() {
         return category;
     }
