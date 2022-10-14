@@ -12,4 +12,8 @@ public class RecurringPaymentManager {
     public RecurringPaymentManager() {
         recurringPayments = new ArrayList<>();
     }
+
+    public void addRecurringPayment(RecurringPayment recurringPayment) {
+        recurringPayments.add(recurringPayment);
+    }
 }
