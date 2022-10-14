@@ -4,11 +4,17 @@ import seedu.duke.exception.TransactionNotFoundException;
 
 import java.util.ArrayList;
 
+import static seedu.duke.exception.ExceptionMessages.MESSAGE_TX_NOT_FOUND;
+
 public class TransactionList {
     private final ArrayList<Transaction> transactionList;
 
     public TransactionList() {
         this.transactionList = new ArrayList<>();
+    }
+
+    public TransactionList(ArrayList<Transaction> transactionList) {
+        this.transactionList = transactionList;
     }
 
     public int getSize() {
@@ -30,7 +36,7 @@ public class TransactionList {
                 return transaction;
             }
         }
-        throw new TransactionNotFoundException("Cannot find this transaction");
+        throw new TransactionNotFoundException(MESSAGE_TX_NOT_FOUND);
     }
 
     public boolean hasThisBorrower(String username) {
@@ -47,6 +53,14 @@ public class TransactionList {
                 .filter(t -> t.getItemId().equals(itemId))
                 .count();
         return count > 0;
+    }
+
+    public String convertTransactionListToFileFormat() {
+        StringBuilder formattedString = new StringBuilder();
+        for (Transaction transaction: transactionList) {
+            formattedString.append(transaction.convertTransactionToFileFormat());
+        }
+        return formattedString.toString();
     }
 
     @Override

@@ -1,6 +1,7 @@
-package seedu.duke.command;
+package seedu.duke.command.help;
 
-import seedu.duke.Ui;
+import seedu.duke.command.Command;
+import seedu.duke.ui.Ui;
 
 import java.util.Map;
 
@@ -9,14 +10,14 @@ public class HelpCommand extends Command {
     private static final String COMMAND_LIST_USERS = "list-users";
     private static final String COMMAND_LIST_ITEMS = "list-items";
     private static final String COMMAND_LIST_TX = "list-tx";
-    private static final String COMMAND_VIEW_USER = "view-user /u <name>";
-    private static final String COMMAND_VIEW_ITEM = "view-item /i <name>";
+    private static final String COMMAND_VIEW_USER = "view-user /u <userName>";
+    private static final String COMMAND_VIEW_ITEM = "view-item /i <itemName>";
     private static final String COMMAND_VIEW_TX = "view-tx /t <transactionId>";
-    private static final String COMMAND_ADD_USER = "add-user /n <name> /a <age> /c <contactNumber>";
-    private static final String COMMAND_ADD_ITEM = "add-item /n <name> /c <categoryNumber> /p <price> /o <ownerName>";
+    private static final String COMMAND_ADD_USER = "add-user /n <userName> /a <age> /c <contactNumber>";
+    private static final String COMMAND_ADD_ITEM = "add-item /n <itemName> /c <categoryIndex> /p <price> /o <userName>";
     private static final String COMMAND_ADD_TX = "add-tx /i <itemName> /b <borrowerName> /d <duration> /c <createdAt>";
-    private static final String COMMAND_REMOVE_USER = "remove-user /u <name>";
-    private static final String COMMAND_REMOVE_ITEM = "remove-item /i <name>";
+    private static final String COMMAND_REMOVE_USER = "remove-user /u <userName>";
+    private static final String COMMAND_REMOVE_ITEM = "remove-item /i <itemName>";
     private static final String COMMAND_REMOVE_TX = "remove-tx /t <transactionId>";
     private static final Map<String, String> commandToDetailMap = Map.ofEntries(
             Map.entry("List all commands", COMMAND_HELP),

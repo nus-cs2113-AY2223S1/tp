@@ -3,27 +3,29 @@ package seedu.duke.parser;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.duke.command.AddItemCommand;
-import seedu.duke.command.AddTransactionCommand;
-import seedu.duke.command.AddUserCommand;
+import seedu.duke.command.item.AddItemCommand;
+import seedu.duke.command.transaction.AddTransactionCommand;
+import seedu.duke.command.user.AddUserCommand;
 import seedu.duke.command.Command;
-import seedu.duke.command.ExitCommand;
-import seedu.duke.command.HelpCommand;
-import seedu.duke.command.ListItemsCommand;
-import seedu.duke.command.ListTransactionsCommand;
-import seedu.duke.command.ListUsersCommand;
-import seedu.duke.command.RemoveItemCommand;
-import seedu.duke.command.RemoveTransactionCommand;
-import seedu.duke.command.RemoveUserCommand;
-import seedu.duke.command.ViewItemCommand;
-import seedu.duke.command.ViewTransactionCommand;
-import seedu.duke.command.ViewUserCommand;
+import seedu.duke.command.exit.ExitCommand;
+import seedu.duke.command.help.HelpCommand;
+import seedu.duke.command.item.ListItemsCommand;
+import seedu.duke.command.transaction.ListTransactionsCommand;
+import seedu.duke.command.user.ListUsersCommand;
+import seedu.duke.command.item.RemoveItemCommand;
+import seedu.duke.command.transaction.RemoveTransactionCommand;
+import seedu.duke.command.user.RemoveUserCommand;
+import seedu.duke.command.item.ViewItemCommand;
+import seedu.duke.command.transaction.ViewTransactionCommand;
+import seedu.duke.command.user.ViewUserCommand;
 import seedu.duke.exception.CommandNotFoundException;
 import seedu.duke.exception.InsufficientArgumentsException;
 import seedu.duke.exception.InvalidArgumentException;
 import seedu.duke.item.ItemList;
 import seedu.duke.transaction.TransactionList;
 import seedu.duke.user.UserList;
+
+import static seedu.duke.exception.ExceptionMessages.MESSAGE_COMMAND_UNRECOGNIZABLE;
 
 public class CommandParser {
     /*
@@ -127,10 +129,9 @@ public class CommandParser {
         case COMMAND_REMOVE_ITEM:
             return new RemoveItemCommand(parts, itemList, transactionList);
         case COMMAND_REMOVE_TX:
-            return new RemoveTransactionCommand(parts, itemList, transactionList);
+            return new RemoveTransactionCommand(parts, transactionList);
         default:
-            throw new CommandNotFoundException("This command is unrecognizable!!!\n"
-                    + "Please use help command to check");
+            throw new CommandNotFoundException(MESSAGE_COMMAND_UNRECOGNIZABLE);
         }
     }
 }

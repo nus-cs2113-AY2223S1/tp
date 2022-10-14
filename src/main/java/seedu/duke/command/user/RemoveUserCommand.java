@@ -1,6 +1,7 @@
-package seedu.duke.command;
+package seedu.duke.command.user;
 
-import seedu.duke.Ui;
+import seedu.duke.command.Command;
+import seedu.duke.ui.Ui;
 import seedu.duke.exception.InsufficientArgumentsException;
 import seedu.duke.exception.InvalidArgumentException;
 import seedu.duke.exception.InvalidUserException;
@@ -10,6 +11,11 @@ import seedu.duke.parser.CommandParser;
 import seedu.duke.transaction.TransactionList;
 import seedu.duke.user.User;
 import seedu.duke.user.UserList;
+
+import static seedu.duke.exception.ExceptionMessages.MESSAGE_INSUFFICIENT_ARGUMENTS;
+import static seedu.duke.exception.ExceptionMessages.MESSAGE_INVALID_PARTS;
+import static seedu.duke.exception.ExceptionMessages.MESSAGE_USER_BORROWING;
+import static seedu.duke.exception.ExceptionMessages.MESSAGE_USER_LENDING;
 
 public class RemoveUserCommand extends Command {
     private final String[] parts;
@@ -24,7 +30,7 @@ public class RemoveUserCommand extends Command {
         this.itemList = itemList;
         this.transactionList = transactionList;
         if (parts.length != 1) {
-            throw new InsufficientArgumentsException();
+            throw new InsufficientArgumentsException(MESSAGE_INSUFFICIENT_ARGUMENTS);
         }
     }
 
@@ -34,7 +40,7 @@ public class RemoveUserCommand extends Command {
             if (part.startsWith("u")) {
                 args[0] = CommandParser.getArgValue(part);
             } else {
-                throw new InvalidArgumentException("One of the parts is in incorrect format");
+                throw new InvalidArgumentException(MESSAGE_INVALID_PARTS);
             }
         }
         return args;
@@ -42,14 +48,14 @@ public class RemoveUserCommand extends Command {
 
     public boolean isBorrowing(String username) throws InvalidUserException {
         if (transactionList.hasThisBorrower(username)) {
-            throw new InvalidUserException("This user is currently borrowing something");
+            throw new InvalidUserException(MESSAGE_USER_BORROWING);
         }
         return false;
     }
 
     public boolean isLending(String username, TransactionList transactionList) throws InvalidUserException {
         if (itemList.hasThisLender(username, transactionList)) {
-            throw new InvalidUserException("This user is currently lending something");
+            throw new InvalidUserException(MESSAGE_USER_LENDING);
         }
         return false;
     }

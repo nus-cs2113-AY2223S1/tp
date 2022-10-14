@@ -1,6 +1,7 @@
-package seedu.duke.command;
+package seedu.duke.command.transaction;
 
-import seedu.duke.Ui;
+import seedu.duke.command.Command;
+import seedu.duke.ui.Ui;
 import seedu.duke.transaction.TransactionList;
 
 public class ListTransactionsCommand extends Command {

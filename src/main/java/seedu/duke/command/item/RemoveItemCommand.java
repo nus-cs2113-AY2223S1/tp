@@ -1,6 +1,7 @@
-package seedu.duke.command;
+package seedu.duke.command.item;
 
-import seedu.duke.Ui;
+import seedu.duke.command.Command;
+import seedu.duke.ui.Ui;
 import seedu.duke.exception.InsufficientArgumentsException;
 import seedu.duke.exception.InvalidArgumentException;
 import seedu.duke.exception.InvalidItemException;
@@ -9,6 +10,9 @@ import seedu.duke.item.Item;
 import seedu.duke.item.ItemList;
 import seedu.duke.parser.CommandParser;
 import seedu.duke.transaction.TransactionList;
+
+import static seedu.duke.exception.ExceptionMessages.MESSAGE_INSUFFICIENT_ARGUMENTS;
+import static seedu.duke.exception.ExceptionMessages.MESSAGE_INVALID_PARTS;
 
 public class RemoveItemCommand extends Command {
     private final String[] parts;
@@ -21,7 +25,7 @@ public class RemoveItemCommand extends Command {
         this.itemList = itemList;
         this.transactionList = transactionList;
         if (parts.length != 1) {
-            throw new InsufficientArgumentsException();
+            throw new InsufficientArgumentsException(MESSAGE_INSUFFICIENT_ARGUMENTS);
         }
     }
 
@@ -31,7 +35,7 @@ public class RemoveItemCommand extends Command {
             if (part.startsWith("i")) {
                 args[0] = CommandParser.getArgValue(part);
             } else {
-                throw new InvalidArgumentException("One of the parts is in incorrect format");
+                throw new InvalidArgumentException(MESSAGE_INVALID_PARTS);
             }
 
         }

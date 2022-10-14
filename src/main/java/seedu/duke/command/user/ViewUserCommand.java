@@ -1,12 +1,16 @@
-package seedu.duke.command;
+package seedu.duke.command.user;
 
-import seedu.duke.Ui;
+import seedu.duke.command.Command;
+import seedu.duke.ui.Ui;
 import seedu.duke.exception.InsufficientArgumentsException;
 import seedu.duke.exception.InvalidArgumentException;
 import seedu.duke.exception.UserNotFoundException;
 import seedu.duke.parser.CommandParser;
 import seedu.duke.user.User;
 import seedu.duke.user.UserList;
+
+import static seedu.duke.exception.ExceptionMessages.MESSAGE_INSUFFICIENT_ARGUMENTS;
+import static seedu.duke.exception.ExceptionMessages.MESSAGE_INVALID_PARTS;
 
 public class ViewUserCommand extends Command {
     private final String[] parts;
@@ -16,7 +20,7 @@ public class ViewUserCommand extends Command {
         this.parts = parts;
         this.userList = userList;
         if (parts.length != 1) {
-            throw new InsufficientArgumentsException();
+            throw new InsufficientArgumentsException(MESSAGE_INSUFFICIENT_ARGUMENTS);
         }
     }
 
@@ -25,7 +29,7 @@ public class ViewUserCommand extends Command {
         if (parts[0].startsWith("u")) {
             arg = CommandParser.getArgValue(parts[0]);
         } else {
-            throw new InvalidArgumentException("Please input user name in the correct format");
+            throw new InvalidArgumentException(MESSAGE_INVALID_PARTS);
         }
         return arg;
     }
