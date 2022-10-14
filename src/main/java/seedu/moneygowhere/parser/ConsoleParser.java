@@ -56,6 +56,22 @@ public class ConsoleParser {
             String[] argumentsArr = tokenizeCommandArguments(arguments);
 
             Options cliOptions = ConsoleParserConfigurations.getCommandAddExpenseOptions();
+
+            /* Checks if all options are added */
+
+            boolean hasAllCliOptions = cliOptions.hasLongOption(
+                    ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_NAME_LONG)
+                    && cliOptions.hasLongOption(
+                    ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_AMOUNT_LONG)
+                    && cliOptions.hasLongOption(
+                    ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_DATE_TIME_LONG)
+                    && cliOptions.hasLongOption(
+                    ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_DESCRIPTION_LONG)
+                    && cliOptions.hasLongOption(
+                    ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_CATEGORY_LONG);
+            assert hasAllCliOptions :
+                    ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS;
+
             CommandLineParser cliParser = new DefaultParser();
             CommandLine cli = cliParser.parse(cliOptions, argumentsArr);
 
@@ -122,6 +138,16 @@ public class ConsoleParser {
             String[] argumentsArr = tokenizeCommandArguments(arguments);
 
             Options cliOptions = ConsoleParserConfigurations.getCommandViewExpenseOptions();
+
+            /* Checks if all options are added */
+
+            boolean hasAllCliOptions = cliOptions.hasLongOption(
+                    ConsoleParserConfigurations.COMMAND_VIEW_EXPENSE_ARG_EXPENSE_INDEX_LONG)
+                    && cliOptions.hasLongOption(
+                    ConsoleParserConfigurations.COMMAND_VIEW_EXPENSE_ARG_EXPENSE_CATEGORY_LONG);
+            assert hasAllCliOptions :
+                    ConsoleParserConfigurations.COMMAND_VIEW_EXPENSE_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS;
+
             CommandLineParser cliParser = new DefaultParser();
             CommandLine cli = cliParser.parse(cliOptions, argumentsArr);
 
@@ -161,6 +187,14 @@ public class ConsoleParser {
             String[] argumentsArr = tokenizeCommandArguments(arguments);
 
             Options cliOptions = ConsoleParserConfigurations.getCommandDeleteExpenseOptions();
+
+            /* Checks if all options are added */
+
+            boolean hasAllCliOptions = cliOptions.hasLongOption(
+                    ConsoleParserConfigurations.COMMAND_DELETE_EXPENSE_ARG_EXPENSE_INDEX_LONG);
+            assert hasAllCliOptions :
+                    ConsoleParserConfigurations.COMMAND_DELETE_EXPENSE_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS;
+
             CommandLineParser cliParser = new DefaultParser();
             CommandLine cli = cliParser.parse(cliOptions, argumentsArr);
 
@@ -195,6 +229,24 @@ public class ConsoleParser {
             String[] argumentsArr = tokenizeCommandArguments(arguments);
 
             Options cliOptions = ConsoleParserConfigurations.getCommandEditExpenseOptions();
+
+            /* Checks if all options are added */
+
+            boolean hasAllCliOptions = cliOptions.hasLongOption(
+                    ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_EXPENSE_INDEX_LONG)
+                    && cliOptions.hasLongOption(
+                    ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_NAME_LONG)
+                    && cliOptions.hasLongOption(
+                    ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_DATE_TIME_LONG)
+                    && cliOptions.hasLongOption(
+                    ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_DESCRIPTION_LONG)
+                    && cliOptions.hasLongOption(
+                    ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_AMOUNT_LONG)
+                    && cliOptions.hasLongOption(
+                    ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_CATEGORY_LONG);
+            assert hasAllCliOptions :
+                    ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS;
+
             CommandLineParser cliParser = new DefaultParser();
             CommandLine cli = cliParser.parse(cliOptions, argumentsArr);
 
@@ -289,21 +341,21 @@ public class ConsoleParser {
 
             /* Checks if arguments are valid */
 
-            if (type.equalsIgnoreCase(
+            if (
+                    !(type.equalsIgnoreCase(
                     ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE_VAL_ALPHABETICAL)
                     || type.equalsIgnoreCase(
                     ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE_VAL_AMOUNT)
                     || type.equalsIgnoreCase(
-                    ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE_VAL_DATE)
-            ) {
+                    ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE_VAL_DATE))) {
                 throw new ConsoleParserCommandSortExpenseInvalidTypeException();
             }
 
-            if (order.equalsIgnoreCase(
+            if (
+                    !(order.equalsIgnoreCase(
                     ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_ORDER_VAL_ASCENDING)
                     || order.equalsIgnoreCase(
-                    ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_ORDER_VAL_DESCENDING)
-            ) {
+                    ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_ORDER_VAL_DESCENDING))) {
                 throw new ConsoleParserCommandSortExpenseInvalidTypeException();
             }
 
