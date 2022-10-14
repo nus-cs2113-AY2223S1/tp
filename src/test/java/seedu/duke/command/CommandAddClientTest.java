@@ -1,10 +1,6 @@
 package seedu.duke.command;
 
-import seedu.duke.ClientList;
-import seedu.duke.PairingList;
-import seedu.duke.PropertyList;
-import seedu.duke.Storage;
-import seedu.duke.Ui;
+import seedu.duke.*;
 
 import java.util.ArrayList;
 import java.util.List;

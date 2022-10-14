@@ -2,7 +2,7 @@ package seedu.duke.command;
 
 import seedu.duke.Client;
 import seedu.duke.ClientList;
-import seedu.duke.PairingList2;
+import seedu.duke.PairingList;
 import seedu.duke.Property;
 import seedu.duke.PropertyList;
 import seedu.duke.Storage;
@@ -20,22 +20,22 @@ public class CommandDeleteProperty extends CommandDelete {
 
     @Override
     public void execute(Ui ui, Storage storage, PropertyList propertyList,
-                        ClientList clientList, PairingList2 pairingList2) {
+                        ClientList clientList, PairingList pairingList) {
 
         Property deletedProperty = propertyList.deleteProperty(propertyIndex);
 
         ui.showPropertyDeletedConfirmationMessage(deletedProperty);
 
-        pairingList2.deletePairing(deletedProperty);
+        pairingList.deletePairing(deletedProperty);
         //Update Storage
         storage.updateProperty(propertyList);
 
 
-        for (Client i : pairingList2.getClientPropertyPairs().keySet()) {
-            System.out.println("Key: " + i + "Value: " + pairingList2.getClientPropertyPairs().get(i));
+        for (Client i : pairingList.getClientPropertyPairs().keySet()) {
+            System.out.println("Key: " + i + "Value: " + pairingList.getClientPropertyPairs().get(i));
         }
 
-        storage.updatePair(pairingList2);
+        storage.updatePair(pairingList);
 
     }
 }

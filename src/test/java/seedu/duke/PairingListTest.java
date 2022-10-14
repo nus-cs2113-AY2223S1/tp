@@ -12,11 +12,6 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 class PairingListTest {
 
-    private static final String CORRECT_CLIENT_PAIRING_DATA = "[Nicky Minaj | 93437878]";
-    private static final String CORRECT_PROPERTY_PAIRING_DATA =
-            "[Mary Tan Bee Bee | 107 North Bridge Rd, Singapore 179105 | 1000 | HDB 3 Room]";
-
-
     public static final Client PRESENT_CLIENT = new Client("Nicky Minaj", "93437878",
             "nicki88@example.com", "100000");
 
@@ -34,7 +29,7 @@ class PairingListTest {
 
         PairingList pairingList = new PairingList();
 
-        pairingList.addPairing(CORRECT_CLIENT_PAIRING_DATA, CORRECT_PROPERTY_PAIRING_DATA);
+        pairingList.addPairing(PRESENT_CLIENT, PRESENT_PROPERTY);
         return pairingList;
     }
 
@@ -42,8 +37,8 @@ class PairingListTest {
     void addPairing_correctClientPropertyStrings_success() {
         PairingList pairingList = pairingListInit();
 
-        assertTrue(pairingList.getClientPropertyPairs().containsKey(CORRECT_CLIENT_PAIRING_DATA));
-        assertTrue(pairingList.getClientPropertyPairs().containsValue(CORRECT_PROPERTY_PAIRING_DATA));
+        assertTrue(pairingList.getClientPropertyPairs().containsKey(PRESENT_CLIENT));
+        assertTrue(pairingList.getClientPropertyPairs().containsValue(PRESENT_PROPERTY));
     }
 
     @Test
@@ -69,8 +64,8 @@ class PairingListTest {
 
         pairingList.addPairing(PRESENT_CLIENT, PRESENT_PROPERTY);
 
-        assertTrue(pairingList.getClientPropertyPairs().containsKey(CORRECT_CLIENT_PAIRING_DATA));
-        assertTrue(pairingList.getClientPropertyPairs().containsValue(CORRECT_PROPERTY_PAIRING_DATA));
+        assertTrue(pairingList.getClientPropertyPairs().containsKey(PRESENT_CLIENT));
+        assertTrue(pairingList.getClientPropertyPairs().containsValue(PRESENT_PROPERTY));
     }
 
     @Test
@@ -78,7 +73,7 @@ class PairingListTest {
         PairingList pairingList = pairingListInit();
 
         pairingList.deletePairing(PRESENT_PROPERTY);
-        assertFalse(pairingList.getClientPropertyPairs().containsValue(CORRECT_PROPERTY_PAIRING_DATA));
+        assertFalse(pairingList.getClientPropertyPairs().containsValue(PRESENT_PROPERTY));
     }
 
     @Test
@@ -86,7 +81,7 @@ class PairingListTest {
         PairingList pairingList = pairingListInit();
 
         pairingList.deletePairing(PRESENT_CLIENT);
-        assertFalse(pairingList.getClientPropertyPairs().containsValue(CORRECT_PROPERTY_PAIRING_DATA));
+        assertFalse(pairingList.getClientPropertyPairs().containsValue(PRESENT_PROPERTY));
     }
 
     @Test
@@ -124,8 +119,9 @@ class PairingListTest {
     @Test
     void getPropertyTenants_propertyRentedByOnlyPresentClient_success() {
         PairingList pairingList = pairingListInit();
-        ArrayList<String> expectedTenantList = new ArrayList<>(List.of(CORRECT_CLIENT_PAIRING_DATA));
-        assertEquals(expectedTenantList, pairingList.getPropertyTenants(PRESENT_PROPERTY));
+        ArrayList<Client> expectedTenantList = new ArrayList<>(List.of(PRESENT_CLIENT));
+        ArrayList<Client> actualTenantList = pairingList.getPropertyTenants(PRESENT_PROPERTY);
+        assertEquals(expectedTenantList, actualTenantList);
     }
 
     @Test

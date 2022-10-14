@@ -33,13 +33,13 @@ public class Storage {
 
 
 
-    public Storage(ClientList clientList, PropertyList propertyList, PairingList2 pairingList2) {
+    public Storage(ClientList clientList, PropertyList propertyList, PairingList pairingList) {
         boolean hasDirectory = checkDirectory();
         boolean hasPropertyFile = checkPropertyFile();
         boolean hasClientFile = checkClientFile();
         boolean hasPairingFile = checkPair();
 
-        loadFiles(hasDirectory, hasPropertyFile, hasClientFile, hasPairingFile, clientList, propertyList, pairingList2);
+        loadFiles(hasDirectory, hasPropertyFile, hasClientFile, hasPairingFile, clientList, propertyList, pairingList);
 
     }
 
@@ -116,11 +116,11 @@ public class Storage {
      * @param hasPairingFile boolean value on whether pairing text file exist
      * @param clientList the array list containing the list of client
      * @param propertyList the array list containing the list of property
-     * @param pairingList2 the hash map containing the pairing between client and property
+     * @param pairingList the hash map containing the pairing between client and property
      */
     public void loadFiles(boolean hasDirectory, boolean hasPropertyFile, boolean hasClientFile,
                           boolean hasPairingFile, ClientList clientList, PropertyList propertyList,
-                          PairingList2 pairingList2) {
+                          PairingList pairingList) {
         if (!hasDirectory) {
             makeDirectory();
         }
@@ -140,7 +140,7 @@ public class Storage {
         if (hasPairingFile) {
             File pairingFile = new File(PAIR_PATH);
             assert pairingFile.exists() : "Pairing text file does not exist";
-            loadPair(pairingList2, pairingFile);
+            loadPair(pairingList, pairingFile);
         }
     }
 
@@ -196,10 +196,10 @@ public class Storage {
     /**
      * Loads the stored pair file into the pair hash map.
      *
-     * @param pairingList2 Paring List object that contains the hash map for pairings.
+     * @param pairingList Paring List object that contains the hash map for pairings.
      * @param pairFile The file that contains the pairing file.
      */
-    public void loadPair(PairingList2 pairingList2, File pairFile) {
+    public void loadPair(PairingList pairingList, File pairFile) {
         try {
             Scanner scanner = new Scanner(pairFile);
 
@@ -225,7 +225,7 @@ public class Storage {
                 Client pairingClient = new Client(clientName, clientContactNumber, clientEmail, clientBudget);
                 Property pairingProperty = new Property(landLordName, propertyAddress, rentalPrice, unitType);
 
-                pairingList2.addPairing(pairingClient, pairingProperty);
+                pairingList.addPairing(pairingClient, pairingProperty);
             }
 
             LOGGER.log(Level.INFO, LOG_PAIRING_LOAD_LABEL);
@@ -375,11 +375,11 @@ public class Storage {
     /**
      * Updates the pairing text file when entries are unpaired.
      *
-     * @param pairingList2 An object containing the hashmap of the pairs.
+     * @param pairingList An object containing the hashmap of the pairs.
      */
-    public void updatePair(PairingList2 pairingList2) {
+    public void updatePair(PairingList pairingList) {
         try {
-            HashMap<Client, Property> clientPropertyPair = pairingList2.getClientPropertyPairs();
+            HashMap<Client, Property> clientPropertyPair = pairingList.getClientPropertyPairs();
             FileWriter pairFile = new FileWriter(PAIR_PATH);
 
             String pairText = EMPTY_STRING;

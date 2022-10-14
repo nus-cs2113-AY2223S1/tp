@@ -3,7 +3,7 @@ package seedu.duke.command;
 
 import seedu.duke.Client;
 import seedu.duke.ClientList;
-import seedu.duke.PairingList2;
+import seedu.duke.PairingList;
 import seedu.duke.Property;
 import seedu.duke.PropertyList;
 import seedu.duke.Storage;
@@ -34,14 +34,15 @@ public class CommandPair extends Command {
      */
     @Override
     public void execute(Ui ui, Storage storage, PropertyList propertyList, ClientList clientList,
-                        PairingList2 pairingList2) {
+                        PairingList pairingList) {
         Client client = clientList.getClientList().get(clientIndex);
         Property property = propertyList.getPropertyList().get(propertyIndex);
 
-        String clientFormat = pairingList2.convertToPairingData(client);
-        String propertyFormat = pairingList2.convertToPairingData(property);
+        String clientFormat = pairingList.convertToPairingData(client);
+        String propertyFormat = pairingList.convertToPairingData(property);
 
-        pairingList2.addPairing(client, property);
+        pairingList.addPairing(client, property);
+
         storage.addToPairFile(clientFormat, propertyFormat);
 
         ui.showPairedConfirmationMessage(client, property);

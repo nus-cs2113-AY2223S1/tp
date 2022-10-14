@@ -3,7 +3,7 @@ package seedu.duke.command;
 
 import seedu.duke.Client;
 import seedu.duke.ClientList;
-import seedu.duke.PairingList2;
+import seedu.duke.PairingList;
 import seedu.duke.Property;
 import seedu.duke.PropertyList;
 import seedu.duke.Storage;
@@ -33,7 +33,7 @@ public class CommandUnpair extends Command {
      */
     @Override
     public void execute(Ui ui, Storage storage, PropertyList propertyList, ClientList clientList,
-                        PairingList2 pairingList) {
+                        PairingList pairingList) {
         Client client = clientList.getClientList().get(clientIndex);
         Property property = propertyList.getPropertyList().get(propertyIndex);
 

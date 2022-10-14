@@ -62,7 +62,7 @@ import java.util.regex.Pattern;
 public class Parser {
     private static ClientList clientList;
     private static PropertyList propertyList;
-    private static PairingList2 pairingList2;
+    private static PairingList pairingList;
 
     public static final int ADD_PROPERTY_FLAG_SIZE = 4;
     public static final int ADD_CLIENT_FLAG_SIZE = 4;
@@ -70,10 +70,10 @@ public class Parser {
     public static final int CHECK_PROPERTY_FLAG_SIZE = 1;
 
 
-    public Parser(ClientList clientL, PropertyList propertyL, PairingList2 pairingL) {
+    public Parser(ClientList clientL, PropertyList propertyL, PairingList pairingL) {
         clientList = clientL;
         propertyList = propertyL;
-        pairingList2 = pairingL;
+        pairingList = pairingL;
     }
 
     public Command parseCommand(String input) throws EmptyCommandAddDetailException,
@@ -677,11 +677,11 @@ public class Parser {
         Client client = clientList.getClientList().get(clientIndex);
         Property property = propertyList.getPropertyList().get(propertyIndex);
 
-        if (pairingList2.isAlreadyPaired(client, property)) {
+        if (pairingList.isAlreadyPaired(client, property)) {
             throw new AlreadyPairedException();
         }
 
-        if (pairingList2.isClientPairedWithProperty(client)) {
+        if (pairingList.isClientPairedWithProperty(client)) {
             throw new ClientAlreadyPairedException();
         }
     }
@@ -695,7 +695,7 @@ public class Parser {
         Client client = clientList.getClientList().get(clientIndex);
         Property property = propertyList.getPropertyList().get(propertyIndex);
 
-        if (!pairingList2.isAlreadyPaired(client, property)) {
+        if (!pairingList.isAlreadyPaired(client, property)) {
             throw new NoExistingPairException();
         }
     }
