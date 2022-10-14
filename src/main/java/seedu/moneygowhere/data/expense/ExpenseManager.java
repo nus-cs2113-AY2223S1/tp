@@ -6,7 +6,6 @@ import seedu.moneygowhere.exceptions.ExpenseManagerExpenseNotFoundException;
 import seedu.moneygowhere.parser.ConsoleParserConfigurations;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 /**
  * Stores and manages a list of expenses.
@@ -14,17 +13,17 @@ import java.util.Collections;
 @SuppressWarnings({"FieldMayBeFinal", "unused"})
 public class ExpenseManager {
     private ArrayList<Expense> expenses;
-    private ConsoleCommandSortExpense sortExpenses;
+    private ConsoleCommandSortExpense sortCommandSetting;
 
     public ExpenseManager() {
-        sortExpenses = new ConsoleCommandSortExpense(
+        sortCommandSetting = new ConsoleCommandSortExpense(
                 ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE_VAL_DATE,
                 ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_ORDER_VAL_DESCENDING
         );
         expenses = new ArrayList<>() {
             public boolean add(Expense newExpense) {
                 super.add(newExpense);
-                Collections.sort(expenses, sortExpenses.getComparator());
+                expenses.sort(sortCommandSetting.getComparator());
                 return true;
             }
         };
@@ -43,7 +42,7 @@ public class ExpenseManager {
     }
 
     public ArrayList<Expense> getExpenses() {
-        return new ArrayList<>(expenses);
+        return expenses;
     }
 
     public ArrayList<Expense> getExpensesByCategory(String categoryName) {
@@ -79,6 +78,12 @@ public class ExpenseManager {
     }
 
     public void updateSortExpenses(ConsoleCommandSortExpense commandSortExpense) {
-        this.sortExpenses = commandSortExpense;
+        String type = commandSortExpense.getType();
+        String order = commandSortExpense.getOrder();
+        sortCommandSetting = new ConsoleCommandSortExpense(type, order);
+    }
+
+    public ConsoleCommandSortExpense getSortCommandSetting() {
+        return sortCommandSetting;
     }
 }

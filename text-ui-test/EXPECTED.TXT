@@ -310,4 +310,25 @@ ERROR: The arguments entered are invalid. SYNTAX: Add-RecurringPayment -n NAME -
 ERROR: The command entered is invalid.
 
 
+Your expenses have been sorted successfully.
+
+
+Your expenses have been sorted successfully.
+
+
+Your expenses have been sorted successfully.
+
+
+ERROR: The arguments entered are invalid. SYNTAX: Sort-Expense -t TYPE -o ORDER
+
+
+ERROR: The arguments entered are invalid. SYNTAX: Sort-Expense -t TYPE -o ORDER
+
+
+ERROR: The arguments entered are invalid. SYNTAX: Sort-Expense -t TYPE -o ORDER
+
+
+ERROR: The arguments entered are invalid. SYNTAX: Sort-Expense -t TYPE -o ORDER
+
+
 Bye. Hope to see you again soon!

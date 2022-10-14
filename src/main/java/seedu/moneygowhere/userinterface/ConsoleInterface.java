@@ -32,7 +32,6 @@ import seedu.moneygowhere.exceptions.ConsoleParserCommandViewExpenseInvalidExcep
 import seedu.moneygowhere.exceptions.ExpenseManagerExpenseNotFoundException;
 import seedu.moneygowhere.logger.LocalLogger;
 import seedu.moneygowhere.parser.ConsoleParser;
-import seedu.moneygowhere.parser.ConsoleParserConfigurations;
 import seedu.moneygowhere.storage.LocalStorage;
 
 import java.io.IOException;
@@ -194,7 +193,7 @@ public class ConsoleInterface {
 
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_ADD_EXPENSE_SUCCESS);
 
-        LocalStorage.saveToFile(expenseManager.getExpenses());
+        LocalStorage.saveToFile(expenseManager);
     }
 
     private void viewExpense() {
@@ -284,7 +283,7 @@ public class ConsoleInterface {
 
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_DELETE_EXPENSE_SUCCESS);
 
-        LocalStorage.saveToFile(expenseManager.getExpenses());
+        LocalStorage.saveToFile(expenseManager);
     }
 
     private void runCommandEditExpense(ConsoleCommandEditExpense consoleCommandEditExpense) {
@@ -340,7 +339,7 @@ public class ConsoleInterface {
         printInformationalMessage(expenseStr);
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_EDIT_EXPENSE_SUCCESS);
 
-        LocalStorage.saveToFile(expenseManager.getExpenses());
+        LocalStorage.saveToFile(expenseManager);
     }
 
     @SuppressWarnings("Java8ListSort")
@@ -351,6 +350,8 @@ public class ConsoleInterface {
         expenseManager.updateExpenses(expenses);
         expenseManager.updateSortExpenses(commandSortExpense);
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_SORTED_EXPENSE_SUCCESS);
+
+        LocalStorage.saveToFile(expenseManager);
     }
 
     private void runCommandAddTarget(ConsoleCommandAddTarget consoleCommandAddTarget) {
