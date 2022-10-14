@@ -48,7 +48,7 @@ public class RemoveItemCommand extends Command {
         String itemId = args[0];
         Item item = itemList.getItemById(itemId);
         itemList.deleteItem(itemId, transactionList);
-        Ui.deleteItemMessage(item, itemList.getListSize()); //???
+        Ui.deleteItemMessage(item, itemList.getListSize(), transactionList);
         return false;
     }
 }
