@@ -163,6 +163,27 @@ public class ConsoleParserConfigurations {
     public static final boolean COMMAND_ADD_INCOME_ARG_DESCRIPTION_HAS_VAL = true;
 
     /**
+     * Defines parameters for console command Add-RecurringPayment.
+     */
+    public static final String COMMAND_ADD_RECURRING_PAYMENT = "add-recurringpayment";
+    public static final String COMMAND_ADD_RECURRING_PAYMENT_ARG_NAME = "n";
+    public static final String COMMAND_ADD_RECURRING_PAYMENT_ARG_NAME_LONG = "name";
+    public static final String COMMAND_ADD_RECURRING_PAYMENT_ARG_NAME_DESC = "Name";
+    public static final boolean COMMAND_ADD_RECURRING_PAYMENT_ARG_NAME_HAS_VAL = true;
+    public static final String COMMAND_ADD_RECURRING_PAYMENT_ARG_INTERVAL = "i";
+    public static final String COMMAND_ADD_RECURRING_PAYMENT_ARG_INTERVAL_LONG = "interval";
+    public static final String COMMAND_ADD_RECURRING_PAYMENT_ARG_INTERVAL_DESC = "Interval in days";
+    public static final boolean COMMAND_ADD_RECURRING_PAYMENT_ARG_INTERVAL_HAS_VAL = true;
+    public static final String COMMAND_ADD_RECURRING_PAYMENT_ARG_AMOUNT = "a";
+    public static final String COMMAND_ADD_RECURRING_PAYMENT_ARG_AMOUNT_LONG = "amount";
+    public static final String COMMAND_ADD_RECURRING_PAYMENT_ARG_AMOUNT_DESC = "Amount";
+    public static final boolean COMMAND_ADD_RECURRING_PAYMENT_ARG_AMOUNT_HAS_VAL = true;
+    public static final String COMMAND_ADD_RECURRING_PAYMENT_ARG_DESCRIPTION = "t";
+    public static final String COMMAND_ADD_RECURRING_PAYMENT_ARG_DESCRIPTION_LONG = "description";
+    public static final String COMMAND_ADD_RECURRING_PAYMENT_ARG_DESCRIPTION_DESC = "Description";
+    public static final boolean COMMAND_ADD_RECURRING_PAYMENT_ARG_DESCRIPTION_HAS_VAL = true;
+
+    /**
      * Generates an {@link Options} object with required arguments for command Add-Expense.
      *
      * @return {@link Options} object initialized with the required arguments.
@@ -192,7 +213,6 @@ public class ConsoleParserConfigurations {
                 COMMAND_ADD_EXPENSE_ARG_DESCRIPTION_HAS_VAL,
                 COMMAND_ADD_EXPENSE_ARG_DESCRIPTION_DESC
         );
-
         Option optionCategory = new Option(
                 COMMAND_ADD_EXPENSE_ARG_CATEGORY,
                 COMMAND_ADD_EXPENSE_ARG_CATEGORY_LONG,
@@ -400,7 +420,6 @@ public class ConsoleParserConfigurations {
                 COMMAND_ADD_INCOME_ARG_AMOUNT_HAS_VAL,
                 COMMAND_ADD_INCOME_ARG_AMOUNT_DESC
         );
-
         Option optionDateTime = new Option(
                 COMMAND_ADD_INCOME_ARG_DATE_TIME,
                 COMMAND_ADD_INCOME_ARG_DATE_TIME_LONG,
@@ -418,6 +437,46 @@ public class ConsoleParserConfigurations {
         options.addOption(optionName);
         options.addOption(optionAmount);
         options.addOption(optionDateTime);
+        options.addOption(optionDescription);
+
+        return options;
+    }
+
+    /**
+     * Generates an {@link Options} object with required arguments for command Add-RecurringPayment.
+     *
+     * @return {@link Options} object initialized with the required arguments.
+     */
+    public static Options getCommandAddRecurringPaymentOptions() {
+        Option optionName = new Option(
+                COMMAND_ADD_RECURRING_PAYMENT_ARG_NAME,
+                COMMAND_ADD_RECURRING_PAYMENT_ARG_NAME_LONG,
+                COMMAND_ADD_RECURRING_PAYMENT_ARG_NAME_HAS_VAL,
+                COMMAND_ADD_RECURRING_PAYMENT_ARG_NAME_DESC
+        );
+        Option optionInterval = new Option(
+                COMMAND_ADD_RECURRING_PAYMENT_ARG_INTERVAL,
+                COMMAND_ADD_RECURRING_PAYMENT_ARG_INTERVAL_LONG,
+                COMMAND_ADD_RECURRING_PAYMENT_ARG_INTERVAL_HAS_VAL,
+                COMMAND_ADD_RECURRING_PAYMENT_ARG_INTERVAL_DESC
+        );
+        Option optionAmount = new Option(
+                COMMAND_ADD_RECURRING_PAYMENT_ARG_AMOUNT,
+                COMMAND_ADD_RECURRING_PAYMENT_ARG_AMOUNT_LONG,
+                COMMAND_ADD_RECURRING_PAYMENT_ARG_AMOUNT_HAS_VAL,
+                COMMAND_ADD_RECURRING_PAYMENT_ARG_AMOUNT_DESC
+        );
+        Option optionDescription = new Option(
+                COMMAND_ADD_RECURRING_PAYMENT_ARG_DESCRIPTION,
+                COMMAND_ADD_RECURRING_PAYMENT_ARG_DESCRIPTION_LONG,
+                COMMAND_ADD_RECURRING_PAYMENT_ARG_DESCRIPTION_HAS_VAL,
+                COMMAND_ADD_RECURRING_PAYMENT_ARG_DESCRIPTION_DESC
+        );
+
+        Options options = new Options();
+        options.addOption(optionName);
+        options.addOption(optionInterval);
+        options.addOption(optionAmount);
         options.addOption(optionDescription);
 
         return options;
