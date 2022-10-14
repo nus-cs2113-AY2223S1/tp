@@ -11,8 +11,8 @@ import seedu.duke.item.ItemList;
 import seedu.duke.parser.CommandParser;
 import seedu.duke.transaction.TransactionList;
 
-import static seedu.duke.exception.ExceptionMessages.MESSAGE_INSUFFICIENT_ARGUMENTS;
-import static seedu.duke.exception.ExceptionMessages.MESSAGE_INVALID_PARTS;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INSUFFICIENT_ARGUMENTS;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PARTS;
 
 public class RemoveItemCommand extends Command {
     private final String[] parts;

@@ -27,7 +27,7 @@ import seedu.duke.item.ItemList;
 import seedu.duke.transaction.TransactionList;
 import seedu.duke.user.UserList;
 
-import static seedu.duke.exception.ExceptionMessages.MESSAGE_COMMAND_UNRECOGNIZABLE;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_COMMAND_UNRECOGNIZABLE;
 
 public class CommandParser {
     /*

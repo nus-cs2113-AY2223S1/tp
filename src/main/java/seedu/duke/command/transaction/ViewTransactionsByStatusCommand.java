@@ -10,9 +10,9 @@ import seedu.duke.ui.Ui;
 
 import java.util.ArrayList;
 
-import static seedu.duke.exception.ExceptionMessages.MESSAGE_COMMAND_UNRECOGNIZABLE;
-import static seedu.duke.exception.ExceptionMessages.MESSAGE_INSUFFICIENT_ARGUMENTS;
-import static seedu.duke.exception.ExceptionMessages.MESSAGE_INVALID_PARTS;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_COMMAND_UNRECOGNIZABLE;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INSUFFICIENT_ARGUMENTS;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PARTS;
 
 
 public class ViewTransactionsByStatusCommand extends Command {

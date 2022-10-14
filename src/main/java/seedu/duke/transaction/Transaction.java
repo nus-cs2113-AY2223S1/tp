@@ -8,24 +8,24 @@ import java.time.temporal.ChronoUnit;
 
 public class Transaction {
     private final String transactionId;
-    private final String item;
+    private final String itemId;
     private final String borrower;
     private final int duration;
     private final LocalDate createdAt;
     private final LocalDate returnedAt;
 
-    public Transaction(String itemName, String borrowerId, int duration, LocalDate createdAt) {
+    public Transaction(String itemId, String borrowerId, int duration, LocalDate createdAt) {
         this.transactionId = IdGenerator.generateId();
-        this.item = itemName;
+        this.itemId = itemId;
         this.borrower = borrowerId;
         this.duration = duration;
         this.createdAt = createdAt;
         this.returnedAt = createdAt.plusDays(duration);
     }
 
-    public Transaction(String transactionId, String itemName, String borrowerId, int duration, LocalDate createdAt) {
+    public Transaction(String transactionId, String itemId, String borrowerId, int duration, LocalDate createdAt) {
         this.transactionId = transactionId;
-        this.item = itemName;
+        this.itemId = itemId;
         this.borrower = borrowerId;
         this.duration = duration;
         this.createdAt = createdAt;
@@ -36,8 +36,8 @@ public class Transaction {
         return transactionId;
     }
 
-    public String getItemName() {
-        return item;
+    public String getItemId() {
+        return itemId;
     }
 
     public String getBorrower() {
@@ -54,22 +54,22 @@ public class Transaction {
 
     public String convertTransactionToFileFormat() {
         String separator = " | ";
-        return transactionId + separator + item + separator + borrower + separator + duration + separator + createdAt;
+        return transactionId + separator + itemId + separator + borrower + separator + duration + separator + createdAt;
     }
 
     @Override
     public String toString() {
         String transactionIcon = "Status: [" + (isFinished() ? "Returned" : "On loan") + "] ";
         String transactionId = "TransactionID: " + this.transactionId + " ";
-        String itemName = "itemName: " + this.item + " ";
+        String itemId = "ItemId: " + this.itemId + " ";
         String usersId = "BorrowerID: " + this.borrower + " ";
 
         if (!isFinished()) {
             String remainDays = " (" + ChronoUnit.DAYS.between(LocalDate.now(), getReturnDate()) + " day(s) remaining)";
             String returnDate = "ReturnDate: " + DateParser.formatDateToString(returnedAt) + remainDays;
-            return transactionIcon + transactionId + itemName + usersId + returnDate;
+            return transactionIcon + transactionId + itemId + usersId + returnDate;
         }
         String returnedDate = "ReturnedDate: " + DateParser.formatDateToString(returnedAt);
-        return transactionIcon + transactionId + itemName + usersId + returnedDate;
+        return transactionIcon + transactionId + itemId + usersId + returnedDate;
     }
 }

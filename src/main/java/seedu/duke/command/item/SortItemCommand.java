@@ -17,11 +17,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static java.util.Comparator.comparingDouble;
-import static seedu.duke.exception.ExceptionMessages.MESSAGE_PRICE_BOUNDARIES_INVALID;
-import static seedu.duke.exception.ExceptionMessages.MESSAGE_PRICE_LESS_THAN_ZERO;
-import static seedu.duke.exception.ExceptionMessages.MESSAGE_SORT_MODE_INVALID;
-import static seedu.duke.exception.ExceptionMessages.MESSAGE_INVALID_PARTS;
-import static seedu.duke.exception.ExceptionMessages.MESSAGE_PRICE_FORMAT_INVALID;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_PRICE_BOUNDARIES_INVALID;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_PRICE_LESS_THAN_ZERO;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_SORT_MODE_INVALID;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PARTS;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_PRICE_FORMAT_INVALID;
 
 public class SortItemCommand extends Command {
 

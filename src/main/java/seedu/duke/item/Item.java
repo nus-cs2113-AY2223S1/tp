@@ -39,7 +39,7 @@ public class Item {
     }
 
     public boolean isAvailable(TransactionList transactionList) {
-        return !transactionList.hasThisItemBeingBorrowed(name);
+        return !transactionList.hasThisItemBeingBorrowed(itemId);
     }
 
     public String getStatus(TransactionList transactionList) {

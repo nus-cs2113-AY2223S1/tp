@@ -6,8 +6,8 @@ import seedu.duke.transaction.TransactionList;
 
 import java.util.ArrayList;
 
-import static seedu.duke.exception.ExceptionMessages.MESSAGE_ITEM_NOT_FOUND;
-import static seedu.duke.exception.ExceptionMessages.MESSAGE_ITEM_UNAVAILABLE;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_ITEM_NOT_FOUND;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_ITEM_UNAVAILABLE;
 
 public class ItemList {
     private final ArrayList<Item> itemList;

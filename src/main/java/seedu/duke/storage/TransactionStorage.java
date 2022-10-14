@@ -13,8 +13,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import static seedu.duke.exception.ExceptionMessages.MESSAGE_FILE_NOT_FOUND;
-import static seedu.duke.exception.ExceptionMessages.MESSAGE_STORE_INVALID;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_FILE_NOT_FOUND;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_STORE_INVALID;
 
 public class TransactionStorage extends Storage {
     private static final String SEPARATOR = " \\| ";
@@ -82,10 +82,10 @@ public class TransactionStorage extends Storage {
      */
     public Transaction handleTransactionLine(String[] splitTransactionLine) {
         String transactionId = splitTransactionLine[0];
-        String itemName = splitTransactionLine[1];
+        String itemId = splitTransactionLine[1];
         String borrowerId = splitTransactionLine[2];
         int duration = Integer.parseInt(splitTransactionLine[3]);
         LocalDate createdAt = LocalDate.parse(splitTransactionLine[4]);
-        return new Transaction(transactionId, itemName, borrowerId, duration, createdAt);
+        return new Transaction(transactionId, itemId, borrowerId, duration, createdAt);
     }
 }

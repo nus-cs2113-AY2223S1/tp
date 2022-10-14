@@ -1,4 +1,4 @@
-package seedu.duke.exception;
+package seedu.duke.exception.message;
 
 public class ExceptionMessages {
     //Later, all messages for exceptions will be put in here then import to the file where they are used
@@ -25,6 +25,7 @@ public class ExceptionMessages {
     //Tx-related messages
     public static final String MESSAGE_TX_NOT_FOUND = "This transaction cannot be found in the list";
     public static final String MESSAGE_SELF_BORROWER = "Borrower cannot borrow items from his/herself";
+    public static final String MESSAGE_DURATION_INVALID = "Duration cannot less than 0";
 
     //Other messages
     public static final String MESSAGE_INVALID_PARTS = "One of the parts is in incorrect format";
