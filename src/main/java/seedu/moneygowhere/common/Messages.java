@@ -72,7 +72,7 @@ public class Messages {
             + "] [-t DESCRIPTION]";
 
     /**
-     * Defines messages for console command Add-RecurringPayment
+     * Defines messages for console command Add-RecurringPayment.
      */
     public static final String CONSOLE_MESSAGE_COMMAND_ADD_RECURRING_PAYMENT_SUCCESS = ""
             + "The recurring payment was added successfully.";
