@@ -42,7 +42,6 @@ public class FlightList extends OperationList {
             String gateNum = extractDetail(detail, GATE_NUMBER_DELIMITER, TERMINAL_DELIMITER);
             String terminal = extractDetail(detail, TERMINAL_DELIMITER, CHECK_IN_ROW_DELIMITER);
             String checkInRowAndDoor = extractDetail(detail, CHECK_IN_ROW_DELIMITER, END_OF_INPUT);
-
             FlightInfo flight = new FlightInfo(flightNum, airline, destination,
                     departureTime, gateNum, terminal, checkInRowAndDoor);
             flights.add(flightIndex, flight);
@@ -54,12 +53,12 @@ public class FlightList extends OperationList {
         }
     }
 
-    //not done
     @Override
     public void deleteOperation(String detail) {
         boolean isFlightFound;
         try {
             checkCommandLength(detail.substring("flight delete".length()));
+            checkValidFlightNumber(detail.substring("flight delete ".length()));
             String flightNum = detail.substring("flight delete ".length());
             isFlightFound = findAndRemoveFlight(flightNum);
             if (!isFlightFound) {
@@ -67,6 +66,17 @@ public class FlightList extends OperationList {
             }
         } catch (SkyControlException e) {
             ui.showEmptyDescriptionMessage();
+        } catch (NumberFormatException e) {
+            ui.showWrongFlightFormatMessage();
+        }
+    }
+
+    private void checkValidFlightNumber(String substring) throws NumberFormatException {
+        String[] letters = substring.split("");
+        for (int i = 0; i < letters.length; i++) {
+            if (!Character.isLetterOrDigit(substring.charAt(i))) {
+                throw new NumberFormatException(substring);
+            }
         }
     }
 
@@ -77,6 +87,7 @@ public class FlightList extends OperationList {
 
     private static boolean findAndRemoveFlight(String flightNumber) {
         boolean isFlightFound = false;
+        assert !flights.isEmpty();
         for (FlightInfo flight : flights) {
             if (flight.getFlightNum().equals(flightNumber)) {
                 isFlightFound = true;
