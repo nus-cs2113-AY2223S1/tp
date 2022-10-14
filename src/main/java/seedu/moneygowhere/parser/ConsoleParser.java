@@ -555,7 +555,6 @@ public class ConsoleParser {
         } catch (ParseException
                  | NumberFormatException
                  | ConsoleParserCommandAddRecurringPaymentInvalidException exception) {
-            exception.printStackTrace();
             throw new ConsoleParserCommandAddRecurringPaymentInvalidException(
                     Messages.CONSOLE_ERROR_COMMAND_ADD_RECURRING_PAYMENT_INVALID,
                     exception
