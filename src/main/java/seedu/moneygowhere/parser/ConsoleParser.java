@@ -17,6 +17,7 @@ import seedu.moneygowhere.commands.ConsoleCommandDeleteExpense;
 import seedu.moneygowhere.commands.ConsoleCommandEditExpense;
 import seedu.moneygowhere.commands.ConsoleCommandSortExpense;
 import seedu.moneygowhere.commands.ConsoleCommandViewExpense;
+import seedu.moneygowhere.commands.ConsoleCommandViewRecurringPayment;
 import seedu.moneygowhere.common.Configurations;
 import seedu.moneygowhere.common.Messages;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandAddExpenseInvalidException;
@@ -28,6 +29,7 @@ import seedu.moneygowhere.exceptions.ConsoleParserCommandEditExpenseInvalidExcep
 import seedu.moneygowhere.exceptions.ConsoleParserCommandNotFoundException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandSortExpenseInvalidTypeException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandViewExpenseInvalidException;
+import seedu.moneygowhere.exceptions.ConsoleParserCommandViewRecurringPaymentInvalidException;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -562,6 +564,39 @@ public class ConsoleParser {
         }
     }
 
+    private static ConsoleCommandViewRecurringPayment parseCommandViewRecurringPayment(String arguments) throws
+            ConsoleParserCommandViewRecurringPaymentInvalidException {
+        try {
+            String[] argumentsArr = tokenizeCommandArguments(arguments);
+
+            Options cliOptions = ConsoleParserConfigurations.getCommandViewRecurringPaymentOptions();
+            CommandLineParser cliParser = new DefaultParser();
+            CommandLine cli = cliParser.parse(cliOptions, argumentsArr);
+
+            String recurringPaymentIndexStr = cli.getOptionValue(
+                    ConsoleParserConfigurations.COMMAND_VIEW_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_LONG
+            );
+
+            /* Parses and normalizes arguments */
+
+            int recurringPaymentIndex;
+            if (recurringPaymentIndexStr == null) {
+                recurringPaymentIndex = -1;
+            } else {
+                recurringPaymentIndex = Integer.parseInt(recurringPaymentIndexStr);
+            }
+
+            /* Returns parsed arguments */
+
+            return new ConsoleCommandViewRecurringPayment(recurringPaymentIndex);
+        } catch (ParseException | NumberFormatException exception) {
+            throw new ConsoleParserCommandViewRecurringPaymentInvalidException(
+                    Messages.CONSOLE_ERROR_COMMAND_VIEW_RECURRING_PAYMENT_INVALID,
+                    exception
+            );
+        }
+    }
+
     private static String getConsoleCommand(String consoleInput) {
         int numOperands = 2;
 
@@ -606,7 +641,8 @@ public class ConsoleParser {
             ConsoleParserCommandSortExpenseInvalidTypeException,
             ConsoleParserCommandAddTargetInvalidException,
             ConsoleParserCommandAddIncomeInvalidException,
-            ConsoleParserCommandAddRecurringPaymentInvalidException {
+            ConsoleParserCommandAddRecurringPaymentInvalidException,
+            ConsoleParserCommandViewRecurringPaymentInvalidException {
         String command = getConsoleCommand(consoleInput);
         String arguments = getConsoleCommandArguments(consoleInput);
 
@@ -628,6 +664,8 @@ public class ConsoleParser {
             return parseCommandAddIncome(arguments);
         } else if (command.equalsIgnoreCase(ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT)) {
             return parseCommandAddRecurringPayment(arguments);
+        } else if (command.equalsIgnoreCase(ConsoleParserConfigurations.COMMAND_VIEW_RECURRING_PAYMENT)) {
+            return parseCommandViewRecurringPayment(arguments);
         } else {
             throw new ConsoleParserCommandNotFoundException(Messages.CONSOLE_ERROR_COMMAND_NOT_FOUND);
         }

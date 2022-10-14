@@ -78,13 +78,23 @@ public class Messages {
             + "The recurring payment was added successfully.";
     public static final String CONSOLE_ERROR_COMMAND_ADD_RECURRING_PAYMENT_INVALID = ""
             + "The arguments entered are invalid. "
-            + "SYNTAX: Add-RecurringPayment -n "
+            + "SYNTAX: Add-RecurringPayment"
+            + " -" + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_NAME + " "
             + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_NAME_LONG.toUpperCase()
-            + " -i "
+            + " -" + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_INTERVAL + " "
             + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_INTERVAL_LONG.toUpperCase()
-            + " -a "
+            + " -" + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_AMOUNT + " "
             + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_AMOUNT_LONG.toUpperCase()
-            + " [-t "
+            + " [-" + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_DESCRIPTION + " "
             + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_DESCRIPTION_LONG.toUpperCase()
             + "]";
+
+    /**
+     * Defines messages for console command View-RecurringPayment.
+     */
+    public static final String CONSOLE_ERROR_COMMAND_VIEW_RECURRING_PAYMENT_INVALID = ""
+            + "The arguments entered are invalid. "
+            + "SYNTAX: View-RecurringPayment"
+            + " -" + ConsoleParserConfigurations.COMMAND_VIEW_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX + " "
+            + ConsoleParserConfigurations.COMMAND_VIEW_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_LONG.toUpperCase();
 }

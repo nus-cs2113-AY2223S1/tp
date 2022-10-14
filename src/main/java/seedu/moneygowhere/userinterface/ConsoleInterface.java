@@ -10,6 +10,7 @@ import seedu.moneygowhere.commands.ConsoleCommandDeleteExpense;
 import seedu.moneygowhere.commands.ConsoleCommandEditExpense;
 import seedu.moneygowhere.commands.ConsoleCommandSortExpense;
 import seedu.moneygowhere.commands.ConsoleCommandViewExpense;
+import seedu.moneygowhere.commands.ConsoleCommandViewRecurringPayment;
 import seedu.moneygowhere.common.Configurations;
 import seedu.moneygowhere.common.Messages;
 import seedu.moneygowhere.data.expense.Expense;
@@ -29,6 +30,7 @@ import seedu.moneygowhere.exceptions.ConsoleParserCommandEditExpenseInvalidExcep
 import seedu.moneygowhere.exceptions.ConsoleParserCommandNotFoundException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandSortExpenseInvalidTypeException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandViewExpenseInvalidException;
+import seedu.moneygowhere.exceptions.ConsoleParserCommandViewRecurringPaymentInvalidException;
 import seedu.moneygowhere.exceptions.ExpenseManagerExpenseNotFoundException;
 import seedu.moneygowhere.logger.LocalLogger;
 import seedu.moneygowhere.parser.ConsoleParser;
@@ -160,7 +162,7 @@ public class ConsoleInterface {
         recurringPaymentStr += "Name            : " + recurringPayment.getName() + "\n";
         recurringPaymentStr += "Interval (Days) : " + recurringPayment.getInterval() + "\n";
         recurringPaymentStr += "Description     : " + recurringPayment.getDescription() + "\n";
-        recurringPaymentStr += "Amount          : " + recurringPayment.getAmount() + "\n";
+        recurringPaymentStr += "Amount          : " + recurringPayment.getAmount();
 
         printInformationalMessage(recurringPaymentStr);
     }
@@ -419,7 +421,36 @@ public class ConsoleInterface {
         recurringPaymentManager.addRecurringPayment(recurringPayment);
 
         printRecurringPayment(recurringPayment);
+        printBlankLine();
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_ADD_RECURRING_PAYMENT_SUCCESS);
+    }
+
+    private void viewRecurringPayment() {
+        ArrayList<RecurringPayment> recurringPayments = recurringPaymentManager.getRecurringPayments();
+
+        for (int index = 0; index < recurringPayments.size(); index++) {
+            RecurringPayment recurringPayment = recurringPayments.get(index);
+
+            printInformationalMessage("---- RECURRING PAYMENT INDEX " + index + " ----");
+            printRecurringPayment(recurringPayment);
+        }
+    }
+
+    private void viewRecurringPaymentByIndex(int recurringPaymentIndex) {
+        RecurringPayment recurringPayment = recurringPaymentManager.getRecurringPayment(recurringPaymentIndex);
+
+        printInformationalMessage("---- RECURRING PAYMENT INDEX " + recurringPaymentIndex + " ----");
+        printRecurringPayment(recurringPayment);
+    }
+
+    private void runCommandViewRecurringPayment(ConsoleCommandViewRecurringPayment consoleCommandViewRecurringPayment) {
+        int recurringExpenseIndex = consoleCommandViewRecurringPayment.getRecurringPaymentIndex();
+
+        if (recurringExpenseIndex >= 0) {
+            viewRecurringPaymentByIndex(recurringExpenseIndex);
+        } else {
+            viewRecurringPayment();
+        }
     }
 
     /**
@@ -449,7 +480,8 @@ public class ConsoleInterface {
                      | ConsoleParserCommandSortExpenseInvalidTypeException
                      | ConsoleParserCommandAddTargetInvalidException
                      | ConsoleParserCommandAddIncomeInvalidException
-                     | ConsoleParserCommandAddRecurringPaymentInvalidException exception) {
+                     | ConsoleParserCommandAddRecurringPaymentInvalidException
+                     | ConsoleParserCommandViewRecurringPaymentInvalidException exception) {
                 printErrorMessage(exception.getMessage());
             }
             // Execute function according to the ConsoleCommand object returned by the parser
@@ -472,6 +504,8 @@ public class ConsoleInterface {
                 runCommandAddIncome((ConsoleCommandAddIncome) consoleCommand);
             } else if (consoleCommand instanceof ConsoleCommandAddRecurringPayment) {
                 runCommandAddRecurringPayment((ConsoleCommandAddRecurringPayment) consoleCommand);
+            } else if (consoleCommand instanceof ConsoleCommandViewRecurringPayment) {
+                runCommandViewRecurringPayment((ConsoleCommandViewRecurringPayment) consoleCommand);
             } else {
                 // Do nothing if the command is not found
             }

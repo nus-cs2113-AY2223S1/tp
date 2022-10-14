@@ -292,7 +292,21 @@ Amount          : 10.80
 The recurring payment was added successfully.
 
 
-ERROR: The arguments entered are invalid. SYNTAX: Add-RecurringPayment -n NAME -i INTERVAL -a AMOUNT [-t DESCRIPTION]
+---- RECURRING PAYMENT INDEX 0 ----
+Name            : RecExp1
+Interval (Days) : 30
+Description     : null
+Amount          : 7.80
+---- RECURRING PAYMENT INDEX 1 ----
+Name            : Rec Exp 2
+Interval (Days) : 40
+Description     : null
+Amount          : 9.80
+---- RECURRING PAYMENT INDEX 2 ----
+Name            : Rec Exp 3
+Interval (Days) : 50
+Description     : This is a test recurring payment 3
+Amount          : 10.80
 
 
 ERROR: The arguments entered are invalid. SYNTAX: Add-RecurringPayment -n NAME -i INTERVAL -a AMOUNT [-t DESCRIPTION]
@@ -305,6 +319,26 @@ ERROR: The arguments entered are invalid. SYNTAX: Add-RecurringPayment -n NAME -
 
 
 ERROR: The arguments entered are invalid. SYNTAX: Add-RecurringPayment -n NAME -i INTERVAL -a AMOUNT [-t DESCRIPTION]
+
+
+ERROR: The arguments entered are invalid. SYNTAX: Add-RecurringPayment -n NAME -i INTERVAL -a AMOUNT [-t DESCRIPTION]
+
+
+---- RECURRING PAYMENT INDEX 0 ----
+Name            : RecExp1
+Interval (Days) : 30
+Description     : null
+Amount          : 7.80
+---- RECURRING PAYMENT INDEX 1 ----
+Name            : Rec Exp 2
+Interval (Days) : 40
+Description     : null
+Amount          : 9.80
+---- RECURRING PAYMENT INDEX 2 ----
+Name            : Rec Exp 3
+Interval (Days) : 50
+Description     : This is a test recurring payment 3
+Amount          : 10.80
 
 
 ERROR: The command entered is invalid.

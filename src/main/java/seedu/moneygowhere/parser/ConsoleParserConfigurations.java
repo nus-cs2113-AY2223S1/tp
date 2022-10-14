@@ -184,6 +184,20 @@ public class ConsoleParserConfigurations {
     public static final boolean COMMAND_ADD_RECURRING_PAYMENT_ARG_DESCRIPTION_HAS_VAL = true;
 
     /**
+     * Defines parameters for console command View-RecurringPayment.
+     */
+    public static final String COMMAND_VIEW_RECURRING_PAYMENT = ""
+            + "view-recurringpayment";
+    public static final String COMMAND_VIEW_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX = ""
+            + "r";
+    public static final String COMMAND_VIEW_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_LONG = ""
+            + "recurringpayment-index";
+    public static final String COMMAND_VIEW_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_DESC = ""
+            + "Index";
+    public static final boolean COMMAND_VIEW_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_HAS_VAL =
+            true;
+
+    /**
      * Generates an {@link Options} object with required arguments for command Add-Expense.
      *
      * @return {@link Options} object initialized with the required arguments.
@@ -478,6 +492,25 @@ public class ConsoleParserConfigurations {
         options.addOption(optionInterval);
         options.addOption(optionAmount);
         options.addOption(optionDescription);
+
+        return options;
+    }
+
+    /**
+     * Generates an {@link Options} object with required arguments for command View-RecurringPayment.
+     *
+     * @return {@link Options} object initialized with the required arguments.
+     */
+    public static Options getCommandViewRecurringPaymentOptions() {
+        Option optionRecurringPaymentIndex = new Option(
+                COMMAND_VIEW_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX,
+                COMMAND_VIEW_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_LONG,
+                COMMAND_VIEW_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_HAS_VAL,
+                COMMAND_VIEW_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_DESC
+        );
+
+        Options options = new Options();
+        options.addOption(optionRecurringPaymentIndex);
 
         return options;
     }

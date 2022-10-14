@@ -30,7 +30,7 @@ Example of usage:
 * `Add-Expense -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359" -t "Monthly payment" -c "Work expenses"`
 
 ### Viewing expense(s): `View-Expense`
-Display the past expenses you have added.
+Displays the past expenses you have added.
 
 Syntax: `View-Expense [-e EXPENSE_NUMBER]`
 
@@ -95,6 +95,18 @@ Syntax: `Add-RecurringPayment -n NAME -i INTERVAL -a AMOUNT [-t DESCRIPTION]`
 Example of usage:
 * `Add-RecurringPayment -n "Mobile Plan" -i 30 -a 20.00`
 * `Add-RecurringPayment -n "Mobile Plan" -i 30 -a 20.00 -t "Monthly payment for my mobile plan"`
+
+### Viewing recurring payments: `View-RecurringPayment`
+Displays the past recurring payments you have added.
+
+Syntax: `View-RecurringPayment [-r RECURRING_PAYMENT_INDEX]`
+
+* `RECURRING_PAYMENT_INDEX` is an integer value. If this argument is provided, MoneyGoWhere will only display the specified recurring payment.
+
+Example of usage:
+
+* `View-RecurringPayment`
+* `View-RecurringPayment -r 1`
 
 ## FAQ
 
