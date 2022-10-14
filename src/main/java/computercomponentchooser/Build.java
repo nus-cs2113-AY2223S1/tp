@@ -2,13 +2,9 @@ package computercomponentchooser;
 
 import computercomponentchooser.components.Component;
 
-import java.util.HashMap;
-import java.util.Map;
-
-
 public class Build {
     private String name;
-    private LinkedHashMap2D<Component> components = new LinkedHashMap2D<Component>();
+    private final LinkedHashMap2D<Component> components = new LinkedHashMap2D<>();
 
     public Build(String name) {
         this.name = name;
@@ -50,6 +46,10 @@ public class Build {
 
     public void deleteComponent(String type, String name) {
         components.removeElement(type, name);
+    }
+
+    public Component getComponent(String type, String name) {
+        return components.getElement(type, name);
     }
 
     public String toString() {

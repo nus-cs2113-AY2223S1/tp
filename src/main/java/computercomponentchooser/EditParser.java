@@ -120,14 +120,20 @@ public class EditParser {
                 Ui.printLine();
                 break;
             case "view":
-
+                name = getParameter(line, NAME_PARAMETER);
+                type = getParameter(line, TYPE_PARAMETER);
+                editBuild = buildManager.getBuild(buildName);
+                Ui.printLine();
+                System.out.println(editBuild.getComponent(type, name).getDetails());
+                Ui.printLine();
+                break;
             case "check":
             case "back":
                 break;
             default:
                 throw new UnknownCommandException();
             }
-        } catch (UnknownCommandException e) {
+        } catch (UnknownCommandException | ArrayIndexOutOfBoundsException | NullPointerException e) {
             System.out.println(e.getMessage());
             Ui.printLine();
         }

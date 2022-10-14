@@ -27,4 +27,13 @@ public class Memory extends Component {
     public void setSize(String size) {
         this.size = size;
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + String.format(" [%s GB] [%s MHz]", size, speed);
+    }
+
+    public String getDetails() {
+        return super.getDetails() + String.format("\nSize: %s GB\nSpeed: %s MHz", size, speed);
+    }
 }

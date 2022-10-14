@@ -27,7 +27,7 @@ public class BuildManager {
         builds.remove(name);
     }
 
-    public static Build getBuild(String name) {
+    public Build getBuild(String name) {
         return builds.get(name);
     }
 

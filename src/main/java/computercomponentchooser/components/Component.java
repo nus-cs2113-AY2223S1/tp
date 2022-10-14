@@ -29,4 +29,13 @@ public abstract class Component {
     public void setPower(String power) {
         this.power = power;
     }
+
+    @Override
+    public String toString() {
+        return String.format("%s [$%s] [%s W]", name, price, power);
+    }
+
+    public String getDetails() {
+        return String.format("Name: %s\nPrice: $%s\nPower: %s W", name, price, power);
+    }
 }
