@@ -24,9 +24,9 @@ public class SearchTest {
 
     @Test
     void filterModuleByName_validInput_expectCorrectNumberOfFilteredModule() {
-        // String inpuString = "quantitative reasoning";
-        String inpuString = "quantitative reasoning with data";
-        List<Module> searchResult = SearchModuleNameCommand.filterModuleByName(inpuString);
+        // String inputString = "quantitative reasoning";
+        String inputString = "quantitative reasoning with data";
+        List<Module> searchResult = SearchModuleNameCommand.filterModuleByName(inputString);
         int numberOfFilteredModulesInSearchResult = searchResult.size();
         // int expectedNumberOfFilteredModules = 21;
         int expectedNumberOfFilteredModules = 2;
