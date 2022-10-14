@@ -79,7 +79,9 @@ public class PassengerList extends OperationList {
         System.out.print("\n");
     }
 
-    private static void validatePassenger(int index) {
+    private void validatePassenger(int index) {
+        getNumberOfPassengers();
+        assert index < numOfPassengers;
         isNamePresent = passengers.get(index).getName().contains(name);
         isFlightNumberPresent = passengers.get(index).getFlightNumber().contains(flightNumber);
         isSeatNumberPresent = passengers.get(index).getSeatNumber().contains(seatNumber);
@@ -100,7 +102,9 @@ public class PassengerList extends OperationList {
         getBoardingTime(passengerDetail);
     }
 
-    private static void iteratePassengerDetail(int index) {
+    private void iteratePassengerDetail(int index) {
+        getNumberOfPassengers();
+        assert index < numOfPassengers;
         name = passengers.get(index).getName();
         departureDate = passengers.get(index).getDepartureDate();
         departureTime = passengers.get(index).getDepartureTime();
@@ -150,6 +154,7 @@ public class PassengerList extends OperationList {
         String boardingGroupDetail = getSubstringBetweenDelimiters(passengerDetail,
                 BOARDING_GROUP_DELIMITER, SEAT_NUMBER_DELIMITER);
         boardingGroup = Integer.parseInt(boardingGroupDetail);
+        assert boardingGroup >= 0;
     }
 
     private void getSeatNumber(String passengerDetail) {
@@ -159,6 +164,7 @@ public class PassengerList extends OperationList {
         } else if (isDelete) {
             startIndex = passengerDetail.indexOf(SEAT_NUMBER_DELIMITER)
                     + SEAT_NUMBER_DELIMITER.length();
+            assert startIndex >= 0;
             seatNumber = passengerDetail.substring(startIndex);
             seatNumber = seatNumber.toUpperCase();
         }
