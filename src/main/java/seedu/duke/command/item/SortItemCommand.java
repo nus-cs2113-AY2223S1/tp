@@ -28,6 +28,8 @@ public class SortItemCommand extends Command {
     private static final String LOW_HIGH = "lh";
 
     private static final String HIGH_LOW = "hl";
+    private static final String MIN_AMT = "0";
+    private static final String MAX_AMT = "999999999";
 
     private final String[] parts;
 
@@ -53,6 +55,16 @@ public class SortItemCommand extends Command {
             } else {
                 throw new InvalidArgumentException(MESSAGE_INVALID_PARTS);
             }
+        }
+        return args;
+    }
+
+    private String[] removeOptionalArgs(String[] args) {
+        if (args[1] == null) {
+            args[1] = MIN_AMT;
+        }
+        if (args[2] == null) {
+            args[2] = MAX_AMT;
         }
         return args;
     }
@@ -111,11 +123,12 @@ public class SortItemCommand extends Command {
             throws InvalidArgumentException, InvalidSortModeException,
             InvalidPriceException, InvalidPriceBoundariesException {
         String[] args = getArgsSortItemsCmd();
+        String[] mainArgs = removeOptionalArgs(args);
         List<Item> sortedItems = new ArrayList<>();
-        if (areValidArgs(args)) {
-            String mode = args[0];
-            double min = Double.parseDouble(args[1]);
-            double max = Double.parseDouble(args[2]);
+        if (areValidArgs(mainArgs)) {
+            String mode = mainArgs[0];
+            double min = Double.parseDouble(mainArgs[1]);
+            double max = Double.parseDouble(mainArgs[2]);
             if (mode.equals(LOW_HIGH)) {
                 sortedItems = itemList.getItemList().stream()
                         .sorted(comparingDouble(Item::getPricePerDay))
