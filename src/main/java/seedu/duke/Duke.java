@@ -51,16 +51,17 @@ public class Duke {
     private Storage storage;
     private PropertyList propertyList;
     private ClientList clientList;
-    private PairingList pairingList;
+    private PairingList2 pairingList2;
 
 
     public void run() throws IOException {
+
         this.ui = new Ui();
         this.propertyList = new PropertyList();
         this.clientList = new ClientList();
-        this.pairingList = new PairingList();
-        this.parser = new Parser(clientList, propertyList, pairingList);
-        this.storage = new Storage(clientList, propertyList, pairingList);
+        this.pairingList2 = new PairingList2();
+        this.parser = new Parser(clientList, propertyList, pairingList2);
+        this.storage = new Storage(clientList, propertyList, pairingList2);
 
         Command command;
         boolean isCommandBye = false;
@@ -69,10 +70,10 @@ public class Duke {
 
         do {
             try {
-                System.exit(0); //to pass CI
+                // System.exit(0); //to pass CI
                 String userInputText = ui.readCommand();
                 command = parser.parseCommand(userInputText);
-                command.execute(ui, storage, propertyList, clientList, pairingList);
+                command.execute(ui, storage, propertyList, clientList, pairingList2);
                 isCommandBye = (command instanceof CommandBye);
             } catch (EmptyCommandAddDetailException e) {
                 ui.showMissingCommandAddDetailMessage();

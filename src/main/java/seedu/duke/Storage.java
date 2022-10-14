@@ -10,6 +10,7 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
 public class Storage {
     private static final String DIRECTORY = "./data/";
     private static final String PROPERTY_PATH = "./data/property.txt";
@@ -32,13 +33,13 @@ public class Storage {
 
 
 
-    public Storage(ClientList clientList, PropertyList propertyList, PairingList pairingList) {
+    public Storage(ClientList clientList, PropertyList propertyList, PairingList2 pairingList2) {
         boolean hasDirectory = checkDirectory();
         boolean hasPropertyFile = checkPropertyFile();
         boolean hasClientFile = checkClientFile();
         boolean hasPairingFile = checkPair();
 
-        loadFiles(hasDirectory, hasPropertyFile, hasClientFile, hasPairingFile, clientList, propertyList, pairingList);
+        loadFiles(hasDirectory, hasPropertyFile, hasClientFile, hasPairingFile, clientList, propertyList, pairingList2);
 
     }
 
@@ -115,11 +116,11 @@ public class Storage {
      * @param hasPairingFile boolean value on whether pairing text file exist
      * @param clientList the array list containing the list of client
      * @param propertyList the array list containing the list of property
-     * @param pairingList the hash map containing the pairing between client and property
+     * @param pairingList2 the hash map containing the pairing between client and property
      */
     public void loadFiles(boolean hasDirectory, boolean hasPropertyFile, boolean hasClientFile,
                           boolean hasPairingFile, ClientList clientList, PropertyList propertyList,
-                          PairingList pairingList) {
+                          PairingList2 pairingList2) {
         if (!hasDirectory) {
             makeDirectory();
         }
@@ -139,7 +140,7 @@ public class Storage {
         if (hasPairingFile) {
             File pairingFile = new File(PAIR_PATH);
             assert pairingFile.exists() : "Pairing text file does not exist";
-            loadPair(pairingList, pairingFile);
+            loadPair(pairingList2, pairingFile);
         }
     }
 
@@ -195,19 +196,24 @@ public class Storage {
     /**
      * Loads the stored pair file into the pair hash map.
      *
-     * @param pairingList Paring List object that contains the hash map for pairings.
+     * @param pairingList2 Paring List object that contains the hash map for pairings.
      * @param pairFile The file that contains the pairing file.
      */
-    public void loadPair(PairingList pairingList, File pairFile) {
+    public void loadPair(PairingList2 pairingList2, File pairFile) {
         try {
             Scanner scanner = new Scanner(pairFile);
 
             while (scanner.hasNext()) {
                 String[] pairingParameters = scanner.nextLine().split("\\s\\:\\s");
-                String client = pairingParameters[0];
-                String property = pairingParameters[1];
-                pairingList.addPairing(client, property);
+                String[] clientParamters = pairingParameters[0].split("\\s\\|\\s");
+                String[] propertyParameters = pairingParameters[1].split("\\s\\|\\s");
+
+                Client pairingClient = new Client(clientParamters[0], clientParamters[1], clientParamters[2], clientParamters[3]);
+                Property pairingProperty = new Property(propertyParameters[0], propertyParameters[1], propertyParameters[2], propertyParameters[3]);
+
+                pairingList2.addPairing(pairingClient, pairingProperty);
             }
+
             LOGGER.log(Level.INFO, LOG_PAIRING_LOAD_LABEL);
         } catch (FileNotFoundException e) {
             System.out.println("File is not found...");
@@ -355,16 +361,16 @@ public class Storage {
     /**
      * Updates the pairing text file when entries are unpaired.
      *
-     * @param pairingList An object containing the hashmap of the pairs.
+     * @param pairingList2 An object containing the hashmap of the pairs.
      */
-    public void updatePair(PairingList pairingList) {
+    public void updatePair(PairingList2 pairingList2) {
         try {
-            HashMap<String, String> clientPropertyPair = pairingList.getClientPropertyPairs();
+            HashMap<Client, Property> clientPropertyPair = pairingList2.getClientPropertyPairs();
             FileWriter pairFile = new FileWriter(PAIR_PATH);
 
             String pairText = EMPTY_STRING;
-            for (String clientText : clientPropertyPair.keySet()) {
-                String propertyText = clientPropertyPair.get(clientText);
+            for (Client clientText : clientPropertyPair.keySet()) {
+                String propertyText = String.valueOf(clientPropertyPair.get(clientText));
                 String finalText = clientText + COLON + propertyText + System.lineSeparator();
                 pairText = pairText.concat(finalText);
             }

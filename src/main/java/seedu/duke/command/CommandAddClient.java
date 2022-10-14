@@ -1,7 +1,7 @@
 package seedu.duke.command;
 
 import seedu.duke.ClientList;
-import seedu.duke.PairingList;
+import seedu.duke.PairingList2;
 import seedu.duke.PropertyList;
 import seedu.duke.Storage;
 import seedu.duke.Ui;
@@ -39,7 +39,7 @@ public class CommandAddClient extends CommandAdd {
 
     @Override
     public void execute(Ui ui, Storage storage, PropertyList propertyList, ClientList clientList,
-                        PairingList pairingList) {
+                        PairingList2 pairingList2) {
         logger.log(Level.INFO, "Adding new client now");
         clientList.addClient(clientName, clientContactNumber, clientEmail, clientBudgetPerMonth);
         ui.showClientAddedConfirmationMessage(clientList);

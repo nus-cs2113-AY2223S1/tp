@@ -170,6 +170,8 @@ public class PairingList {
     public String convertToPairingData(Client client) {
         return OPEN_BRACKET + client.getClientName()
                 + SEPARATOR + client.getClientContactNumber()
+                + SEPARATOR + client.getClientEmail()
+                + SEPARATOR + client.getClientBudgetPerMonth()
                 + CLOSE_BRACKET;
     }
 
