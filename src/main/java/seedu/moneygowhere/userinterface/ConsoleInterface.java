@@ -3,6 +3,7 @@ package seedu.moneygowhere.userinterface;
 import seedu.moneygowhere.commands.ConsoleCommand;
 import seedu.moneygowhere.commands.ConsoleCommandAddExpense;
 import seedu.moneygowhere.commands.ConsoleCommandAddIncome;
+import seedu.moneygowhere.commands.ConsoleCommandAddRecurringPayment;
 import seedu.moneygowhere.commands.ConsoleCommandAddTarget;
 import seedu.moneygowhere.commands.ConsoleCommandBye;
 import seedu.moneygowhere.commands.ConsoleCommandDeleteExpense;
@@ -15,10 +16,13 @@ import seedu.moneygowhere.data.expense.Expense;
 import seedu.moneygowhere.data.expense.ExpenseManager;
 import seedu.moneygowhere.data.income.Income;
 import seedu.moneygowhere.data.income.IncomeManager;
+import seedu.moneygowhere.data.recurringpayments.RecurringPayment;
+import seedu.moneygowhere.data.recurringpayments.RecurringPaymentManager;
 import seedu.moneygowhere.data.target.Target;
 import seedu.moneygowhere.data.target.TargetManager;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandAddExpenseInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandAddIncomeInvalidException;
+import seedu.moneygowhere.exceptions.ConsoleParserCommandAddRecurringPaymentInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandAddTargetInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandDeleteExpenseInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandEditExpenseInvalidException;
@@ -49,6 +53,7 @@ public class ConsoleInterface {
     private ExpenseManager expenseManager;
     private TargetManager targetManager;
     private IncomeManager incomeManager;
+    private RecurringPaymentManager recurringPaymentManager;
 
     /**
      * Initializes the console interface.
@@ -68,6 +73,7 @@ public class ConsoleInterface {
         expenseManager = new ExpenseManager();
         targetManager = new TargetManager();
         incomeManager = new IncomeManager();
+        recurringPaymentManager = new RecurringPaymentManager();
     }
 
     /**
@@ -85,7 +91,6 @@ public class ConsoleInterface {
         logo += "                          |___/                                            \n";
 
         System.out.println(logo);
-
     }
 
     /**
@@ -143,6 +148,21 @@ public class ConsoleInterface {
      */
     public String getConsoleInput() {
         return scanner.nextLine();
+    }
+
+    /**
+     * Prints a recurring payment to standard output.
+     *
+     * @param recurringPayment Recurring payment to print.
+     */
+    public static void printRecurringPayment(RecurringPayment recurringPayment) {
+        String recurringPaymentStr = "";
+        recurringPaymentStr += "Name            : " + recurringPayment.getName() + "\n";
+        recurringPaymentStr += "Interval (Days) : " + recurringPayment.getInterval() + "\n";
+        recurringPaymentStr += "Description     : " + recurringPayment.getDescription() + "\n";
+        recurringPaymentStr += "Amount          : " + recurringPayment.getAmount() + "\n";
+
+        printInformationalMessage(recurringPaymentStr);
     }
 
     private void runCommandBye(ConsoleCommandBye consoleCommandBye) {
@@ -391,6 +411,20 @@ public class ConsoleInterface {
          */
     }
 
+    private void runCommandAddRecurringPayment(ConsoleCommandAddRecurringPayment consoleCommandAddRecurringPayment) {
+        RecurringPayment recurringPayment = new RecurringPayment(
+                consoleCommandAddRecurringPayment.getName(),
+                consoleCommandAddRecurringPayment.getInterval(),
+                consoleCommandAddRecurringPayment.getDescription(),
+                consoleCommandAddRecurringPayment.getAmount()
+        );
+
+        recurringPaymentManager.addRecurringPayment(recurringPayment);
+
+        printRecurringPayment(recurringPayment);
+        printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_ADD_RECURRING_PAYMENT_SUCCESS);
+    }
+
     /**
      * Runs the command line interface which the user interacts with.
      */
@@ -417,7 +451,8 @@ public class ConsoleInterface {
                      | ConsoleParserCommandEditExpenseInvalidException
                      | ConsoleParserCommandSortExpenseInvalidTypeException
                      | ConsoleParserCommandAddTargetInvalidException
-                     | ConsoleParserCommandAddIncomeInvalidException exception) {
+                     | ConsoleParserCommandAddIncomeInvalidException
+                     | ConsoleParserCommandAddRecurringPaymentInvalidException exception) {
                 printErrorMessage(exception.getMessage());
             }
             // Execute function according to the ConsoleCommand object returned by the parser
@@ -438,6 +473,8 @@ public class ConsoleInterface {
                 runCommandSortExpense((ConsoleCommandSortExpense) consoleCommand);
             } else if (consoleCommand instanceof ConsoleCommandAddIncome) {
                 runCommandAddIncome((ConsoleCommandAddIncome) consoleCommand);
+            } else if (consoleCommand instanceof ConsoleCommandAddRecurringPayment) {
+                runCommandAddRecurringPayment((ConsoleCommandAddRecurringPayment) consoleCommand);
             } else {
                 // Do nothing if the command is not found
             }
