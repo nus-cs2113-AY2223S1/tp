@@ -1,7 +1,9 @@
 package seedu.moneygowhere.data.expense;
 
+import seedu.moneygowhere.commands.ConsoleCommandSortExpense;
 import seedu.moneygowhere.common.Messages;
 import seedu.moneygowhere.exceptions.ExpenseManagerExpenseNotFoundException;
+import seedu.moneygowhere.parser.ConsoleParserConfigurations;
 
 import java.util.ArrayList;
 
@@ -11,9 +13,21 @@ import java.util.ArrayList;
 @SuppressWarnings({"FieldMayBeFinal", "unused"})
 public class ExpenseManager {
     private ArrayList<Expense> expenses;
+    private ConsoleCommandSortExpense sortCommandSetting;
 
     public ExpenseManager() {
-        expenses = new ArrayList<>();
+        sortCommandSetting = new ConsoleCommandSortExpense(
+                ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE_VAL_DATE,
+                ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_ORDER_VAL_DESCENDING
+        );
+        expenses = new ArrayList<>() {
+            @Override
+            public boolean add(Expense newExpense) {
+                super.add(newExpense);
+                expenses.sort(sortCommandSetting.getComparator());
+                return true;
+            }
+        };
     }
 
     public void addExpense(Expense expense) {
@@ -29,7 +43,7 @@ public class ExpenseManager {
     }
 
     public ArrayList<Expense> getExpenses() {
-        return new ArrayList<>(expenses);
+        return expenses;
     }
 
     public ArrayList<Expense> getExpensesByCategory(String categoryName) {
@@ -55,6 +69,7 @@ public class ExpenseManager {
     public void editExpense(int expenseIndex, Expense expense) throws ExpenseManagerExpenseNotFoundException {
         try {
             expenses.set(expenseIndex, expense);
+            expenses.sort(sortCommandSetting.getComparator());
         } catch (IndexOutOfBoundsException exception) {
             throw new ExpenseManagerExpenseNotFoundException(Messages.EXPENSE_MANAGER_ERROR_EXPENSE_NOT_FOUND);
         }
@@ -62,5 +77,15 @@ public class ExpenseManager {
 
     public void updateExpenses(ArrayList<Expense> expenses) {
         this.expenses = expenses;
+    }
+
+    public void updateSortExpenses(ConsoleCommandSortExpense commandSortExpense) {
+        String type = commandSortExpense.getType();
+        String order = commandSortExpense.getOrder();
+        sortCommandSetting = new ConsoleCommandSortExpense(type, order);
+    }
+
+    public ConsoleCommandSortExpense getSortCommandSetting() {
+        return sortCommandSetting;
     }
 }
