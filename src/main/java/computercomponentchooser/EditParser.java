@@ -27,10 +27,10 @@ public class EditParser {
     private static String getParameter(String line, int mode) {
         String[] lineSplit = line.split(" ", 5);
         return lineSplit[mode];
-}
+    }
 
     public static boolean checkBack(String line) {
-        String back = getParameter(line, COMMAND_PARAMETER).toLowerCase(); 
+        String back = getParameter(line, COMMAND_PARAMETER).toLowerCase();
         return back.equals("back");
     }
 
@@ -47,10 +47,15 @@ public class EditParser {
                 type = getParameter(line, TYPE_PARAMETER);
                 switch (type) {
                 case "cpu":
-                    Cpu cpu = new Cpu(name,parseCpu(line,PRICE_PARAMETER),parseCpu(line,5),parseCpu(line,6),parseCpu(line,POWER_PARAMETER));
+                    Cpu cpu = new Cpu(name, parseCpu(line, PRICE_PARAMETER), parseCpu(line, 5),
+                            parseCpu(line, 6), parseCpu(line, POWER_PARAMETER));
                     editBuild = buildManager.getBuild(buildName);
-                    editBuild.addComponent(type,cpu);
+                    editBuild.addComponent(type, cpu);
+                    break;
+                default:
+                    break;
                 }
+
                 Ui.printLine();
                 System.out.println("You have added " + name);
                 Ui.printLine();
