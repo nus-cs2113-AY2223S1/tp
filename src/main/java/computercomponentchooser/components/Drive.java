@@ -1,10 +1,10 @@
 package computercomponentchooser.components;
 
-public class Storage extends Component {
+public class Drive extends Component {
 //    protected int size;
 //    protected String type;
 //
-//    public Storage(String name, float price, int size, String type, int power) {
+//    public Drive(String name, float price, int size, String type, int power) {
 //        this.name = name;
 //        this.price = price;
 //        this.size = size;

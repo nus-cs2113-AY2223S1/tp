@@ -4,12 +4,12 @@ public class Cpu extends Component {
     protected String socket;
     protected String clock;
 
-    public Cpu(String name, String price, String socket, String clock, String power) {
+    public Cpu(String name, String price, String power, String socket, String clock) {
         this.name = name;
         this.price = price;
+        this.power = power;
         this.socket = socket;
         this.clock = clock;
-        this.power = power;
     }
 
     public String getName() {
@@ -30,10 +30,6 @@ public class Cpu extends Component {
 
     public String getSocket() {
         return socket;
-    }
-
-    public void setSocket(String socket) {
-        this.socket = socket;
     }
 
     public String getClock() {
