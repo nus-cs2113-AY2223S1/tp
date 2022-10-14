@@ -1,5 +1,4 @@
-Dexter // 2022-10-14T02:25:36.540229 // null // 22 // null
-Charlie // 2022-10-14T02:25:02.413139 // null // 72 // null
-Bob // 2022-10-14T02:24:51.362010 // null // 90 // null
-Adam // 2022-10-14T02:24:38.360723 // null // 100 // null
-Ellie // 2022-10-14T02:28:16.204623 // null // 69 // null
+Air subscription // 2022-01-21T23:59 // null // 10 // null
+Cloud subscription // 2022-01-01T23:59 // null // 13.37 // null
+Dead // 2022-10-14T15:25:05.165041 // null // 11 // null
+AA // 2022-10-14T15:45:31.412578 // null // 0 // null

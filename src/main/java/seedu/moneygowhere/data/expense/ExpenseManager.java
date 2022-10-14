@@ -1,9 +1,12 @@
 package seedu.moneygowhere.data.expense;
 
+import seedu.moneygowhere.commands.ConsoleCommandSortExpense;
 import seedu.moneygowhere.common.Messages;
 import seedu.moneygowhere.exceptions.ExpenseManagerExpenseNotFoundException;
+import seedu.moneygowhere.parser.ConsoleParserConfigurations;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Stores and manages a list of expenses.
@@ -11,9 +14,20 @@ import java.util.ArrayList;
 @SuppressWarnings({"FieldMayBeFinal", "unused"})
 public class ExpenseManager {
     private ArrayList<Expense> expenses;
+    private ConsoleCommandSortExpense sortExpenses;
 
     public ExpenseManager() {
-        expenses = new ArrayList<>();
+        sortExpenses = new ConsoleCommandSortExpense(
+                ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE_VAL_DATE,
+                ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_ORDER_VAL_DESCENDING
+        );
+        expenses = new ArrayList<>() {
+            public boolean add(Expense newExpense) {
+                super.add(newExpense);
+                Collections.sort(expenses, sortExpenses.getComparator());
+                return true;
+            }
+        };
     }
 
     public void addExpense(Expense expense) {
@@ -62,5 +76,9 @@ public class ExpenseManager {
 
     public void updateExpenses(ArrayList<Expense> expenses) {
         this.expenses = expenses;
+    }
+
+    public void updateSortExpenses(ConsoleCommandSortExpense commandSortExpense) {
+        this.sortExpenses = commandSortExpense;
     }
 }

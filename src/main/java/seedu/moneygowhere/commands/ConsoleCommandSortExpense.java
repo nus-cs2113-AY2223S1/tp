@@ -12,9 +12,6 @@ public class ConsoleCommandSortExpense extends ConsoleCommand {
     private String type;
     private boolean order;
 
-    public String getType() {
-        return type;
-    }
 
     /**
      * Reads in type & order of sorting to run sorting command later.
@@ -29,6 +26,18 @@ public class ConsoleCommandSortExpense extends ConsoleCommand {
         } else if (order.equalsIgnoreCase(ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_ORDER_VAL_DESCENDING)) {
             this.order = false;
         }
+    }
+
+    public Comparator<Expense> getComparator() {
+        Comparator<Expense> comparator = null;
+        if (type.equalsIgnoreCase(ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE_VAL_DATE)) {
+            comparator = sortByDate;
+        } else if (type.equalsIgnoreCase(ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE_VAL_ALPHABETICAL)) {
+            comparator = sortByAlphabet;
+        } else if (type.equalsIgnoreCase(ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE_VAL_AMOUNT)) {
+            comparator = sortByAmount;
+        }
+        return comparator;
     }
 
     /**
