@@ -180,7 +180,6 @@ public class PassengerList extends OperationList {
     private String getSubstringBetweenDelimiters(String inputString, String startDelimiter, String endDelimiter) {
         int startIndex = inputString.indexOf(startDelimiter) + startDelimiter.length();
         int endIndex = inputString.lastIndexOf(endDelimiter);
-        assert endIndex >= startIndex;
         String outputString = inputString.substring(startIndex, endIndex);
         return outputString.toUpperCase();
     }
