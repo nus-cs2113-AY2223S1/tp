@@ -18,7 +18,7 @@ public class AddModuleCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public AddModuleCommand(String[] input) { //
+    public AddModuleCommand(String[] input) {
         super(input);
         String moduleCode = input[1].toUpperCase();
         this.module = Module.get(moduleCode);
