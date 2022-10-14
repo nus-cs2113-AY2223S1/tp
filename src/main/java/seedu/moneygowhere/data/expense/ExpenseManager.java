@@ -6,7 +6,6 @@ import seedu.moneygowhere.exceptions.ExpenseManagerExpenseNotFoundException;
 import seedu.moneygowhere.parser.ConsoleParserConfigurations;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 /**
  * Stores and manages a list of expenses.

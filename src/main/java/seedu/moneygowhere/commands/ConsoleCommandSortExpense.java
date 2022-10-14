@@ -41,6 +41,7 @@ public class ConsoleCommandSortExpense extends ConsoleCommand {
 
     /**
      * Function to get the comparator based on type of sorting.
+     *
      * @return a comparator that corresponds to the type of sorting
      */
     public Comparator<Expense> getComparator() {
