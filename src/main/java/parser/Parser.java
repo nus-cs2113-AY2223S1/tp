@@ -6,6 +6,8 @@ public class Parser {
     private final int lengthOfSignature = 3;
     public Command parseCommand(String input){
         input = input.trim();
+        boolean is_tree = input.equals("tree");
+
 
         if(!input.contains(" ")){
             if(input.equals("bye")){
@@ -15,10 +17,9 @@ public class Parser {
             return new EndCommand();
         }
 
-        String args[] = input.split(" ");
-
-        String type = args[0];
-        String statement = args[1].trim();
+        int indexOfSpace = input.indexOf(" ");
+        String type = input.substring(0,indexOfSpace);
+        String statement = input.substring(indexOfSpace).trim();
 
         switch(type) {
         case "appointment":
@@ -44,9 +45,8 @@ public class Parser {
             return new EndCommand();
         }
 
-        String args[] = input.split(" ");
-        String type = args[0];
-        String statement = args[1];
+        String type = input.substring(0,input.indexOf(" "));
+        String statement = input.substring(input.indexOf(" ")).trim();
         switch(type) {
         case AddAppointmentCommand.COMMAND_WORD:
             return prepareAddAppointment(statement);
@@ -88,7 +88,7 @@ public class Parser {
     }
 
     public Command prepareAddService(String input){
-        int d = input.indexOf(" d/");
+        int d = input.indexOf("d/");
 
         if(d == -1){
             System.out.println("invalid input5");
@@ -98,6 +98,7 @@ public class Parser {
         String description = input.substring(d + lengthOfSignature);
 
         return new AddServiceCommand(description);
+
     }
 
 
@@ -179,7 +180,7 @@ public class Parser {
      */
 
     public int indexOfRemove(String input){
-        if(!input.contains(" i/")){
+        if(!input.contains("i/")){
             return -1;
         }
 
@@ -193,24 +194,25 @@ public class Parser {
 
 
     public Command prepareAddAppointment(String input){
+        int s = input.indexOf("s/");
+        int p = input.indexOf(" p/");
+        int d = input.indexOf(" d/");
 
-        String args[] = input.split(" ");
-        String petName = args[0].substring(2);
-        String appointmentDate = args[1].substring(2);
+        if(s > p || p > d || s == -1 || p == -1 || d == -1){
+            System.out.println("invalid input8");
+            return new EndCommand();
+        }
 
-/*
-        String service = input.substring(s + lengthOfSignature, p);
+        // String service = input.substring(s + lengthOfSignature, p);
         String petName = input.substring(p + lengthOfSignature, d);
         String appointmentDate = input.substring(d + lengthOfSignature);
 
-        return new AddAppointmentCommand(petName, appointmentDate, service);
-*/
         return new AddAppointmentCommand(petName, appointmentDate);
-
     }
 
     public boolean isInt(String val){
-        if(val.matches("\\d?")) {
+        Boolean strResult = val.matches("\\d?");
+        if(strResult) {
             return true;
         }
         return false;
@@ -219,15 +221,15 @@ public class Parser {
 
 
     public Command prepareAddPet(String input){
-        int startOfN = input.indexOf(" n/");
+        int startOfN = input.indexOf("n/");
         int startOfS = input.indexOf(" s/");
 
         if(startOfN > startOfS || startOfN == -1|| startOfS == -1){
-            System.out.println("input invalid8");
+            System.out.println("input invalid9");
             return new EndCommand();
         }
 
-        String name = input.substring(startOfN + lengthOfSignature, startOfS);
+        String name = input.substring(startOfN -1 + lengthOfSignature, startOfS);
         String status = input.substring(startOfS + lengthOfSignature);
         return new AddPetCommand(name, status, true);
     }
@@ -238,7 +240,7 @@ public class Parser {
             if(input.equals("view")){
                 return new ViewPetCommand();
             }
-            System.out.println("input invalid9");
+            System.out.println("input invalid10");
             return new EndCommand();
         }
 
@@ -247,12 +249,16 @@ public class Parser {
         switch(type) {
         case AddPetCommand.COMMAND_WORD:
             return prepareAddPet(statement);
-/*
-        case RemovePetCommand.COMMAND_WORD:
+        /*case RemoveAppointmentCommand.COMMAND_WORD:
             return prepareRemovePet(statement);
-*/
+
+
+        case AllocateAppointmentCommand.COMMAND_WORD:
+            return prepareAllocateAppointment(statement);
+
+         */
         default:
-            System.out.println("input invalid10");
+            System.out.println("input invalid11");
             return new EndCommand();
         }
     }
@@ -262,7 +268,7 @@ public class Parser {
             if(input.equals("view")){
                 return new ViewEmployeeCommand();
             }
-            System.out.println("input invalid11");
+            System.out.println("input invalid12");
             return new EndCommand();
         }
 
@@ -274,20 +280,20 @@ public class Parser {
         case RemoveEmployeeCommand.COMMAND_WORD:
             return prepareRemoveEmployee(statement);
         default:
-            System.out.println("input invalid12");
+            System.out.println("input invalid13");
             return new EndCommand();
         }
     }
 
     public Command prepareAddEmployee(String input){
-        int startOfN = input.indexOf(" n/");
+        int startOfN = input.indexOf("n/");
 
         if(startOfN == -1){
-            System.out.println("input invalid13");
+            System.out.println("input invalid14");
             return new EndCommand();
         }
 
-        String name = input.substring(startOfN + lengthOfSignature);
+        String name = input.substring(startOfN + lengthOfSignature - 1);
         return new AddEmployeeCommand(name);
     }
 
@@ -295,7 +301,7 @@ public class Parser {
     public Command prepareRemoveEmployee(String input){
         int index = indexOfRemove(input);
         if(index == -1){
-            System.out.println("input invalid14");
+            System.out.println("input invalid15");
             return new EndCommand();
         }
 
