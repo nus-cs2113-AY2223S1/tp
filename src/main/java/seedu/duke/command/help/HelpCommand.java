@@ -11,13 +11,13 @@ public class HelpCommand extends Command {
     private static final String COMMAND_LIST_ITEMS = "list-items";
     private static final String COMMAND_LIST_TX = "list-tx";
     private static final String COMMAND_VIEW_USER = "view-user /u <userName>";
-    private static final String COMMAND_VIEW_ITEM = "view-item /i <itemName>";
+    private static final String COMMAND_VIEW_ITEM = "view-item /i <itemId>";
     private static final String COMMAND_VIEW_TX = "view-tx /t <transactionId>";
     private static final String COMMAND_ADD_USER = "add-user /n <userName> /a <age> /c <contactNumber>";
     private static final String COMMAND_ADD_ITEM = "add-item /n <itemName> /c <categoryIndex> /p <price> /o <userName>";
-    private static final String COMMAND_ADD_TX = "add-tx /i <itemName> /b <borrowerName> /d <duration> /c <createdAt>";
+    private static final String COMMAND_ADD_TX = "add-tx /i <itemId> /b <borrowerName> /d <duration> /c <createdAt>";
     private static final String COMMAND_REMOVE_USER = "remove-user /u <userName>";
-    private static final String COMMAND_REMOVE_ITEM = "remove-item /i <itemName>";
+    private static final String COMMAND_REMOVE_ITEM = "remove-item /i <itemId>";
     private static final String COMMAND_REMOVE_TX = "remove-tx /t <transactionId>";
     private static final String COMMAND_FIND_FINISHED_TX = "find-tx /s finished";
     private static final String COMMAND_FIND_UNFINISHED_TX = "find-tx /s unfinished";

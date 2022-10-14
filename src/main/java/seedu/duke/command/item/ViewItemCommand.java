@@ -40,9 +40,9 @@ public class ViewItemCommand extends Command {
         return arg;
     }
 
-    private boolean isValidItem(String itemName) throws ItemNotFoundException {
+    private boolean isValidItem(String itemId) throws ItemNotFoundException {
         try {
-            itemList.getItemByName(itemName);
+            itemList.getItemById(itemId);
             return true;
         } catch (ItemNotFoundException e) {
             throw new ItemNotFoundException(e.getMessage());
@@ -50,9 +50,9 @@ public class ViewItemCommand extends Command {
     }
 
     public boolean executeCommand() throws ItemNotFoundException, InvalidArgumentException {
-        String itemName = getArgsViewItemCmd();
-        if (isValidItem(itemName)) {
-            Item item = this.itemList.getItemByName(itemName);
+        String itemId = getArgsViewItemCmd();
+        if (isValidItem(itemId)) {
+            Item item = this.itemList.getItemById(itemId);
             Ui.viewItemMessage(item, transactionList);
         }
         return false;

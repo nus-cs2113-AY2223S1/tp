@@ -32,9 +32,9 @@ public class ItemList {
                 .forEach(System.out::println);
     }
 
-    public void deleteItem(String itemName, TransactionList transactionList)
+    public void deleteItem(String itemId, TransactionList transactionList)
             throws ItemNotFoundException, InvalidItemException {
-        Item item = getItemByName(itemName);
+        Item item = getItemById(itemId);
         if (item.isAvailable(transactionList)) {
             itemList.remove(item);
         } else {

@@ -45,10 +45,10 @@ public class RemoveItemCommand extends Command {
     public boolean executeCommand()
             throws InvalidArgumentException, ItemNotFoundException, InvalidItemException {
         String[] args = getArgsRemoveItemCmd();
-        String itemName = args[0];
-        Item item = itemList.getItemByName(itemName);
-        itemList.deleteItem(itemName, transactionList);
-        Ui.deleteItemMessage(item, itemList.getListSize());
+        String itemId = args[0];
+        Item item = itemList.getItemById(itemId);
+        itemList.deleteItem(itemId, transactionList);
+        Ui.deleteItemMessage(item, itemList.getListSize()); //???
         return false;
     }
 }
