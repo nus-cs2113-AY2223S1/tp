@@ -2,9 +2,9 @@ package computercomponentchooser.components;
 
 public class Cpu extends Component {
     protected String socket;
-    protected float clock;
+    protected String clock;
 
-    public Cpu(String name, float price, String socket, float clock, int power) {
+    public Cpu(String name, String price, String socket, String clock, String power) {
         this.name = name;
         this.price = price;
         this.socket = socket;
@@ -20,11 +20,11 @@ public class Cpu extends Component {
         this.name = name;
     }
 
-    public float getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
@@ -36,19 +36,19 @@ public class Cpu extends Component {
         this.socket = socket;
     }
 
-    public float getClock() {
+    public String getClock() {
         return clock;
     }
 
-    public void setClock(float clock) {
+    public void setClock(String clock) {
         this.clock = clock;
     }
 
-    public int getPower() {
+    public String getPower() {
         return power;
     }
 
-    public void setPower(int power) {
+    public void setPower(String power) {
         this.power = power;
     }
 }

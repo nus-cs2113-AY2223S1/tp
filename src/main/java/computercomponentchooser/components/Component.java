@@ -3,8 +3,8 @@ package computercomponentchooser.components;
 public abstract class Component {
 
     protected String name;
-    protected float price;
-    protected int power;
+    protected String price;
+    protected String power;
 
     public String getName() {
         return name;
@@ -14,19 +14,19 @@ public abstract class Component {
         this.name = name;
     }
 
-    public float getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
-    public int getPower() {
+    public String getPower() {
         return power;
     }
 
-    public void setPower(int power) {
+    public void setPower(String power) {
         this.power = power;
     }
 }

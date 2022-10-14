@@ -1,15 +1,17 @@
 package computercomponentchooser;
 
-import java.util.ArrayList;
+import computercomponentchooser.components.Component;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class Build {
-    String name;
-    ArrayList<String> contents;
+    private String name;
+    private LinkedHashMap2D<Component> components = new LinkedHashMap2D<Component>();
 
     public Build(String name) {
         this.name = name;
-        this.contents = new ArrayList<>();
     }
 
     public String getName() {
@@ -20,25 +22,29 @@ public class Build {
         this.name = name;
     }
 
-    public ArrayList<String> getContents() {
-        return contents;
+    public void addComponent(String type, Component component) {
+        switch (type) {
+        case "cpu":
+            components.addElement("cpu", component.getName(), component);
+            break;
+        default:
+            break;
+        }
     }
 
-    public void addContents(String content) {
-        contents.add(content);
-    }
-
-    public void deleteContents(String content) {
-        contents.remove(content);
+    public void deleteComponent(String type, String name) {
+        components.removeElement(type, name);
     }
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
         int i = 1;
-        for (String name : contents) {
+        for (String name : components.getNameList()) {
             sb.append(i).append(". ").append(name).append(System.lineSeparator());
             i++;
         }
         return sb.toString();
     }
+
+
 }
