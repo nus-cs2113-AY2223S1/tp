@@ -1,11 +1,8 @@
 package computercomponentchooser.components;
 
-public class Motherboard {
-    protected String name;
-    protected float price;
+public class Motherboard extends Component {
     protected String socket;
     protected int memorySlots;
-    protected int power;
 
     public Motherboard(String name, float price, String socket, int memorySlots, int power) {
         this.name = name;

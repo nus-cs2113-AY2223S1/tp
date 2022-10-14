@@ -1,11 +1,8 @@
 package computercomponentchooser.components;
 
-public class Cpu {
-    protected String name;
-    protected float price;
+public class Cpu extends Component {
     protected String socket;
     protected float clock;
-    protected int power;
 
     public Cpu(String name, float price, String socket, float clock, int power) {
         this.name = name;
