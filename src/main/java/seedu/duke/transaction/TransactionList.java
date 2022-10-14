@@ -62,7 +62,7 @@ public class TransactionList {
     public String convertTransactionListToFileFormat() {
         StringBuilder formattedString = new StringBuilder();
         for (Transaction transaction: transactionList) {
-            formattedString.append(transaction.convertTransactionToFileFormat());
+            formattedString.append(transaction.convertTransactionToFileFormat()).append('\n');
         }
         return formattedString.toString();
     }
