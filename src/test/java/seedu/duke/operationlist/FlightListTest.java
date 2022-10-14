@@ -6,7 +6,6 @@ import seedu.duke.exceptions.SkyControlException;
 import seedu.duke.parsers.Parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 
 class FlightListTest {
     protected static String addLineInput = "flight add fn/sq712 a/SINGAPORE Airlines "
@@ -15,17 +14,6 @@ class FlightListTest {
     protected static String deleteLineInput = "flight delete fn/sq712";
     protected static Parser parserTest = new FlightList();
     protected static FlightList testFlightList = new FlightList();
-
-
-    @Test
-    public void deleteOperation_inputWithError_exceptionThrown() {
-        try {
-            Command testCommand = parserTest.parse(deleteLineInputWithError);
-            testCommand.execute(testFlightList, deleteLineInputWithError);
-        } catch (Exception e) {
-            assertEquals(e.getMessage(), e.getMessage());
-        }
-    }
 
     @Test
     public void checkDeleteOperation() throws SkyControlException {
