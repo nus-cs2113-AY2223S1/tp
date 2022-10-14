@@ -128,6 +128,19 @@ public class EditParser {
                 Ui.printLine();
                 break;
             case "check":
+                editBuild = buildManager.getBuild(buildName);
+                Ui.printLine();
+                System.out.println("Compatibility Info:");
+                System.out.print(editBuild.getCompatibilityInfo());
+                Ui.printLine();
+                break;
+            case "info":
+                editBuild = buildManager.getBuild(buildName);
+                Ui.printLine();
+                System.out.println("Build Info:");
+                System.out.print(editBuild.getBuildInfo());
+                Ui.printLine();
+                break;
             case "back":
                 break;
             default:

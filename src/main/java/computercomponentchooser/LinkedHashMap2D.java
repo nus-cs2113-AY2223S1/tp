@@ -43,4 +43,21 @@ public class LinkedHashMap2D<T> {
         }
         return list;
     }
+
+    public ArrayList<String> getTypeList() {
+        ArrayList<String> list = new ArrayList();
+        for (String key1 : outerMap.keySet()) {
+            list.add(key1);
+        }
+        return list;
+    }
+
+    public ArrayList<String> getNamesOfTypeList(String type) {
+        ArrayList<String> list = new ArrayList();
+        innerMap = outerMap.get(type);
+        for (String key2 : innerMap.keySet()) {
+            list.add(key2);
+        }
+        return list;
+    }
 }

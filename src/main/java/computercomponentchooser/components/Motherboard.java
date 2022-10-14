@@ -48,4 +48,8 @@ public class Motherboard extends Component {
         return super.getDetails() + String.format("\nSocket: %s\nRAM Slots: %s\nGPU Slots: %s", socket, memorySlots,
                 gpuSlots);
     }
+
+    public String getType() {
+        return "motherboard";
+    }
 }

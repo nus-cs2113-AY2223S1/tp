@@ -56,5 +56,9 @@ public class Cpu extends Component {
     public String getDetails() {
         return super.getDetails() + String.format("\nSocket: %s\nClock: %s GHz", socket, clock);
     }
+
+    public String getType() {
+        return "cpu";
+    }
 }
 

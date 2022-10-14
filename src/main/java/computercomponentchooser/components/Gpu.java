@@ -46,4 +46,8 @@ public class Gpu extends Component {
     public String getDetails() {
         return super.getDetails() + String.format("\nMemory: %s GB\nClock: %s MHz", memory, clock);
     }
+
+    public String getType() {
+        return "gpu";
+    }
 }
