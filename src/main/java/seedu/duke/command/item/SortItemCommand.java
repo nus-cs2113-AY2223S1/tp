@@ -70,14 +70,10 @@ public class SortItemCommand extends Command {
     }
 
     private boolean isValidMode(String mode) throws InvalidSortModeException {
-        try {
-            if (mode.equals(LOW_HIGH) || mode.equals(HIGH_LOW)) {
-                return true;
-            }
-            throw new InvalidSortModeException(MESSAGE_SORT_MODE_INVALID);
-        } catch (InvalidSortModeException e) {
-            throw new InvalidSortModeException(MESSAGE_SORT_MODE_INVALID);
+        if (mode.equals(LOW_HIGH) || mode.equals(HIGH_LOW)) {
+            return true;
         }
+        throw new InvalidSortModeException(MESSAGE_SORT_MODE_INVALID);
     }
 
     private boolean isValidMin(String minPrice) throws InvalidPriceException {
