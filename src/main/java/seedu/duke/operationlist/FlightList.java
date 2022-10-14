@@ -17,6 +17,8 @@ public class FlightList extends OperationList {
     private static final String CHECK_IN_ROW_DELIMITER = "c/";
     private static final String END_OF_INPUT = "empty";
 
+    protected static int numOfFlights = 0;
+
     public static String checkCommandLength(String description) throws SkyControlException {
         if (description.isEmpty()) {
             throw new SkyControlException(description);
@@ -57,13 +59,18 @@ public class FlightList extends OperationList {
         }
     }
 
+    public void getNumberOfFlights() {
+        assert numOfFlights >= 0;
+        numOfFlights = flights.size();
+    }
+
     @Override
     public void deleteOperation(String detail) {
         boolean isFlightFound;
         try {
-            checkCommandLength(detail.substring("flight delete".length()));
+            checkCommandLength(detail.substring(FLIGHT_DELETE_COMMAND.length()));
             checkValidFlightNumber(detail.substring("flight delete ".length()));
-            String flightNum = detail.substring("flight delete ".length());
+            String flightNum = detail.substring("flight delete ".length()).toUpperCase();
             isFlightFound = findAndRemoveFlight(flightNum);
             if (!isFlightFound) {
                 ui.showFlightNotFoundMessage(flightNum);

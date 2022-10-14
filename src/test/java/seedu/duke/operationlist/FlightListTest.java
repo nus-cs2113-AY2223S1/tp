@@ -12,13 +12,22 @@ class FlightListTest {
             + "d/bangkok t/1600 gn/b1 tl/T1 c/03-3";
     protected static String deleteLineInputWithError = "flight delete f/sq712";
     protected static String deleteLineInput = "flight delete fn/sq712";
-    protected static Parser parserTest = new FlightList();
     protected static FlightList testFlightList = new FlightList();
+
+
+
+    @Test
+    void checkAddOperation() throws SkyControlException {
+        Command testCommand = Parser.parse(addLineInput);
+        testCommand.execute(testFlightList, addLineInput);
+        testFlightList.getNumberOfFlights();
+        //assertEquals("SQ712",);
+    }
 
     @Test
     public void checkDeleteOperation() throws SkyControlException {
-        Command testCommand = parserTest.parse(deleteLineInput);
+        Command testCommand = Parser.parse(deleteLineInput);
         testCommand.execute(testFlightList, deleteLineInput);
-        assertEquals(0, testFlightList.flights.size());
+        assertEquals(1, testFlightList.flights.size());
     }
 }

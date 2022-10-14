@@ -18,15 +18,15 @@ public class PassengerList extends OperationList {
     protected static boolean isFlightNumberPresent = false;
     protected static boolean isSeatNumberPresent = false;
     protected static boolean isSuccess = false;
-    protected static String name;
-    protected static String departureDate;
-    protected static String departureTime;
-    protected static String flightNumber;
-    protected static String gateNumber;
-    protected static String seatNumber;
-    protected static String boardingTime;
-    protected static int numOfPassengers = 0;
-    protected static int boardingGroup;
+    protected String name;
+    protected String departureDate;
+    protected String departureTime;
+    protected String flightNumber;
+    protected String gateNumber;
+    protected String seatNumber;
+    protected String boardingTime;
+    protected int numOfPassengers = 0;
+    protected int boardingGroup;
     protected static int startIndex;
 
 
