@@ -15,14 +15,6 @@ public class User {
         return name;
     }
 
-    public int getAge() {
-        return age;
-    }
-
-    public String getContactNumber() {
-        return contactNumber;
-    }
-
     public String toString() {
         String username = "Username: " + name + " ";
         String age = "Age: " + this.age + " ";

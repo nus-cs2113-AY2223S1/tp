@@ -27,11 +27,6 @@ public class ItemList {
         assert itemList.size() != 0  : "item not added!";
     }
 
-    public void getItemOfSpecificCategory(int categoryNumber) {
-        itemList.stream().filter(t -> (Category.setCategory(t.getCategory()) == categoryNumber))
-                .forEach(System.out::println);
-    }
-
     public void deleteItem(String itemId, TransactionList transactionList)
             throws ItemNotFoundException, InvalidItemException {
         Item item = getItemById(itemId);
