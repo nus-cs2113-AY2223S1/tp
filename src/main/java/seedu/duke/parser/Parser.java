@@ -103,7 +103,7 @@ public class Parser {
 
     private static boolean isValidSemester(String[] keywords) {
         int semesterInput = Integer.parseInt(keywords[1]);
-        return semesterInput == 1 || semesterInput == 2;
+        return semesterInput > 0 && semesterInput <= 4;
     }
 
     public static Command searchCommand(String[] keywords) {
