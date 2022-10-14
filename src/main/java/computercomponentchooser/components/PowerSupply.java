@@ -7,4 +7,8 @@ public class PowerSupply extends Component {
         this.price = price;
         this.power = power;
     }
+
+    public String getType() {
+        return "powersupply";
+    }
 }

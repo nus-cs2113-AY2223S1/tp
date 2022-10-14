@@ -36,4 +36,8 @@ public class Memory extends Component {
     public String getDetails() {
         return super.getDetails() + String.format("\nSize: %s GB\nSpeed: %s MHz", size, speed);
     }
+
+    public String getType() {
+        return "memory";
+    }
 }
