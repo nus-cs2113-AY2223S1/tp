@@ -18,7 +18,7 @@ YAMOM is designed for users who are proficient in Command Line Interface (CLI).
     5. [Search for module: `search`](#search-for-modules-search)
     6. [View timetable: `view`](#viewing-user-timetable-view)
     7. [Select module slot: `select`](#select-a-timetable-slot-select)
-    8. [Feature X: `COMMAND`](#feature-x-command)
+    8. [Future Feature: `COMMAND`](#feature-x-command)
 3. [Application Data](#application-data)
    1. [Data Storage](#data-storage)
    2. [Transfer to Another Computer](#transfer-to-another-computer)
@@ -55,7 +55,17 @@ Example of usage:
 
 Sample Output:
 ```
+help
+--------------------------------------
+help: lists all functions!
+add: add a module into your planner!
+delete: delete MODULE - remove a module from your planner!
+bye: exit Yet Another Module Organiser / Manager (YAMOM)!
+search: [MODULE_CODE][MODULE_NAME] - returns modules that match the search terms!
+view: displays current timetable!
+select: select /module [MODULE_CODE] /type [LESSON_TYPE] /code [CLASS_NO] - select slot for modules!
 
+--------------------------------------
 ```
 
 ### Exiting YAMOM: `bye`
@@ -70,7 +80,11 @@ Example of usage:
 
 Sample Output:
 ```
-
+bye
+--------------------------------------
+--------------------------------------
+Bye bye, See you again
+--------------------------------------
 ```
 
 > Note: 
@@ -93,12 +107,29 @@ Example of usage:
 
 Sample Output:
 ```
-
+add CS1010
+--------------------------------------
+CS1010 has been added
+--------------------------------------
 ```
 
 Possible Error: 
 1. Wrong module format
+   - The module code must be an exact match (CS2030 instead of cs203) else nothing will be added
+   ```
+   add cs203
+   --------------------------------------
+   --------------------------------------
+   ```
+   
 2. More than one module
+   - Currently, YAMOM only support adding one module at a time
+   ```
+   add CS1231 CS2101
+   --------------------------------------
+   Sorry, I do not understand your command. Enter "help" for the available commands
+   --------------------------------------
+   ```
 
 ### Removing a module: `delete`
 
@@ -116,7 +147,10 @@ Example of usage:
 
 Sample Output:
 ```
-
+delete CS1010
+--------------------------------------
+CS1010 has been deleted
+--------------------------------------
 ```
 
 Possible Error:
@@ -143,12 +177,36 @@ Example of usage:
 
 Sample Output:
 ```
-
+search CG
+--------------------------------------
+Module search list
+CG1111
+CG1111A
+CG1112
+CG2023
+CG2027
+CG2028
+CG2111A
+CG2271
+CG3002
+CG3207
+CG4001
+CG4002
+CG4003
+--------------------------------------
 ```
 
 Possible Error:
-
+1. Module code does not have a match
+   * YAMOM will return an empty list of modules
+   ```
+   search XX
+   --------------------------------------
+   Module search list
+   --------------------------------------
+   ```
 > Note:
+> - The list of modules can get very long for a generic search
 
 ### Viewing user timetable: `view`
 
@@ -162,7 +220,35 @@ Example of usage:
 
 Sample Output:
 ```
+view
+--------------------------------------
+                                                                    
+          : Mon      : Tues     : Wed      : Thur     : Fri         
+====================================================================
+   0800   :          :          :          +----------+----------+  
+   0830   :          :          :          |CS2040    |CS2040    |  
+   0900   :          :          :          +-TUT[01]--+ LAB[1C]  |  
+   0930   :          :          :          :          |          |  
+   1000   :          :          +----------+          +----------+  
+   1030   :          :          |CS2040    |          :             
+   1100   :          :          | LEC[1]   |          :             
+   1130   :          :          |          |          :             
+   1200   :          :          +----------+          :             
+   1230   :          :          :          :          :             
+   1300   :          :          :          :          :             
+                                                                    
 
+--------------------------------------
+```
+
+Possible Error:
+
+- Empty timetable:
+```
+view
+--------------------------------------
+Your timetable is empty. Please select lessons first before viewing.
+--------------------------------------
 ```
 
 ### Select a timetable slot: `select`
@@ -183,13 +269,11 @@ Example of usage:
 
 Sample Output:
 ```
-
+select /module CS2040 /type lecture /code 2
+--------------------------------------
+Slot selected successfully
+--------------------------------------
 ```
-
-Possible Error:
-
-> Note:
-
 
 ### Feature X: `COMMAND`
 
@@ -217,11 +301,17 @@ Possible Error:
 
 ## Application Data
 
+> Warning:
+> Be careful when handling the data file, any unexpected changes in the file may lead to data loss and crash subsequent runs of YAMOM.
+
 ### Data Storage
+The user data is stored in `duke.txt` under the data folder in the home directory
 
 ### Transfer to another computer
+Copy the application file with the corresponding data file (remember to create the `data` folder under the home directory)
 
 ### Transfer to NUSMODs (for NUS students)
+The NUSMOD url is available in `duke.txt`, copy the content of the file and paste it in the browser to view the timetable on NUSMOD
 
 ## FAQ
 
