@@ -74,27 +74,29 @@ public class SearchModuleCommand extends Command {
         String moduleCode = module.moduleCode;
         int moduleLevel = (Integer.parseInt(moduleCode.replaceAll("[^0-9]", ""))) / 1000;
 
-        if (level.equals("1") && moduleLevel == 1) {
-            return true;
-        } else if (level.equals("2") && moduleLevel == 2) {
-            return true;
-        } else if (level.equals("3") && moduleLevel == 3) {
-            return true;
-        } else if (level.equals("4") && moduleLevel == 4) {
-            return true;
-        } else if (level.equals("5") && moduleLevel == 5) {
-            return true;
-        } else if (level.equals("6") && moduleLevel == 6) {
-            return true;
-        } else if (level.equals("7") && moduleLevel == 7) {
-            return true;
-        } else if (level.equals("8") && moduleLevel == 8) {
-            return true;
-        } else if (level.equals("9") && moduleLevel == 9) {
-            return true;
-        } else {
-            return false;
-        }
+        // if (level.equals("1") && moduleLevel == 1) {
+        //     return true;
+        // } else if (level.equals("2") && moduleLevel == 2) {
+        //     return true;
+        // } else if (level.equals("3") && moduleLevel == 3) {
+        //     return true;
+        // } else if (level.equals("4") && moduleLevel == 4) {
+        //     return true;
+        // } else if (level.equals("5") && moduleLevel == 5) {
+        //     return true;
+        // } else if (level.equals("6") && moduleLevel == 6) {
+        //     return true;
+        // } else if (level.equals("7") && moduleLevel == 7) {
+        //     return true;
+        // } else if (level.equals("8") && moduleLevel == 8) {
+        //     return true;
+        // } else if (level.equals("9") && moduleLevel == 9) {
+        //     return true;
+        // } else {
+        //     return false;
+        // }
+
+        return level.equals(Integer.toString(moduleLevel));
     }
 
     /**
