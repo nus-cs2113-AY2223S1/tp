@@ -6,8 +6,8 @@ import seedu.duke.transaction.TransactionList;
 
 import java.util.ArrayList;
 
-import static seedu.duke.exception.ExceptionMessages.MESSAGE_ITEM_NOT_FOUND;
-import static seedu.duke.exception.ExceptionMessages.MESSAGE_ITEM_UNAVAILABLE;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_ITEM_NOT_FOUND;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_ITEM_UNAVAILABLE;
 
 public class ItemList {
     private final ArrayList<Item> itemList;
@@ -25,11 +25,6 @@ public class ItemList {
     public void addItem(Item item) {
         itemList.add(item);
         assert itemList.size() != 0  : "item not added!";
-    }
-
-    public void getItemOfSpecificCategory(int categoryNumber) {
-        itemList.stream().filter(t -> (Category.setCategory(t.getCategory()) == categoryNumber))
-                .forEach(System.out::println);
     }
 
     public void deleteItem(String itemId, TransactionList transactionList)

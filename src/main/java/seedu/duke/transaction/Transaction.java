@@ -8,16 +8,16 @@ import java.time.temporal.ChronoUnit;
 
 public class Transaction {
     private final String transactionId;
-    private final String item;
+    private final String itemName;
+    private final String itemId;
     private final String borrower;
     private final int duration;
     private final LocalDate createdAt;
     private final LocalDate returnedAt;
-    private final String itemId;
 
     public Transaction(String itemName, String itemId, String borrowerId, int duration, LocalDate createdAt) {
         this.transactionId = IdGenerator.generateId();
-        this.item = itemName;
+        this.itemName = itemName;
         this.borrower = borrowerId;
         this.duration = duration;
         this.createdAt = createdAt;
@@ -25,10 +25,11 @@ public class Transaction {
         this.itemId = itemId;
     }
 
+
     public Transaction(String transactionId, String itemName, String itemId,
                        String borrowerId, int duration, LocalDate createdAt) {
         this.transactionId = transactionId;
-        this.item = itemName;
+        this.itemName = itemName;
         this.borrower = borrowerId;
         this.duration = duration;
         this.createdAt = createdAt;
@@ -40,8 +41,8 @@ public class Transaction {
         return transactionId;
     }
 
-    public String getItemName() {
-        return item;
+    public String getItemId() {
+        return itemId;
     }
 
     public String getBorrower() {
@@ -58,7 +59,7 @@ public class Transaction {
 
     public String convertTransactionToFileFormat() {
         String separator = " | ";
-        return transactionId + separator + item + separator + itemId + separator + borrower
+        return transactionId + separator + itemName + separator + itemId + separator + borrower
                 + separator + duration + separator + createdAt;
     }
 
@@ -67,7 +68,7 @@ public class Transaction {
         String itemId = "ItemID: " + this.itemId + " ";
         String transactionIcon = "Status: [" + (isFinished() ? "Returned" : "On loan") + "] ";
         String transactionId = "TransactionID: " + this.transactionId + " ";
-        String itemName = "itemName: " + this.item + " ";
+        String itemName = "ItemName: " + this.itemName + " ";
         String usersId = "BorrowerID: " + this.borrower + " ";
 
         if (!isFinished()) {

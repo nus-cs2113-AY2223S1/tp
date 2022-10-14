@@ -4,7 +4,7 @@ import seedu.duke.exception.TransactionNotFoundException;
 
 import java.util.ArrayList;
 
-import static seedu.duke.exception.ExceptionMessages.MESSAGE_TX_NOT_FOUND;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_TX_NOT_FOUND;
 
 public class TransactionList {
     private final ArrayList<Transaction> transactionList;
@@ -51,10 +51,10 @@ public class TransactionList {
         return count > 0;
     }
 
-    public boolean hasThisItemBeingBorrowed(String itemName) {
+    public boolean hasThisItemBeingBorrowed(String itemId) {
         int count = (int) transactionList.stream()
                 .filter(t -> !t.isFinished())
-                .filter(t -> t.getItemName().equals(itemName))
+                .filter(t -> t.getItemId().equals(itemId))
                 .count();
         return count > 0;
     }
@@ -62,7 +62,7 @@ public class TransactionList {
     public String convertTransactionListToFileFormat() {
         StringBuilder formattedString = new StringBuilder();
         for (Transaction transaction: transactionList) {
-            formattedString.append(transaction.convertTransactionToFileFormat());
+            formattedString.append(transaction.convertTransactionToFileFormat()).append('\n');
         }
         return formattedString.toString();
     }

@@ -4,7 +4,7 @@ import seedu.duke.exception.UserNotFoundException;
 
 import java.util.ArrayList;
 
-import static seedu.duke.exception.ExceptionMessages.MESSAGE_USER_NOT_FOUND;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_USER_NOT_FOUND;
 
 public class UserList {
     protected ArrayList<User> userList;

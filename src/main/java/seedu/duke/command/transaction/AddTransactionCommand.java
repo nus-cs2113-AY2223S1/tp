@@ -4,26 +4,28 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 import seedu.duke.command.Command;
-import seedu.duke.ui.Ui;
 import seedu.duke.exception.DateFormatInvalidException;
+import seedu.duke.exception.DurationInvalidException;
 import seedu.duke.exception.InsufficientArgumentsException;
 import seedu.duke.exception.InvalidArgumentException;
-import seedu.duke.exception.InvalidUserException;
 import seedu.duke.exception.InvalidItemException;
+import seedu.duke.exception.InvalidUserException;
 import seedu.duke.exception.ItemNotFoundException;
 import seedu.duke.exception.UserNotFoundException;
+import seedu.duke.ui.Ui;
 import seedu.duke.item.ItemList;
 import seedu.duke.parser.CommandParser;
 import seedu.duke.transaction.Transaction;
 import seedu.duke.transaction.TransactionList;
 import seedu.duke.user.UserList;
 
-import static seedu.duke.exception.ExceptionMessages.MESSAGE_DATE_FORMAT_INVALID;
-import static seedu.duke.exception.ExceptionMessages.MESSAGE_INSUFFICIENT_ARGUMENTS;
-import static seedu.duke.exception.ExceptionMessages.MESSAGE_INVALID_PARTS;
-import static seedu.duke.exception.ExceptionMessages.MESSAGE_ITEM_UNAVAILABLE;
-import static seedu.duke.exception.ExceptionMessages.MESSAGE_NUMBER_FORMAT_INVALID;
-import static seedu.duke.exception.ExceptionMessages.MESSAGE_SELF_BORROWER;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_DATE_FORMAT_INVALID;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_DURATION_INVALID;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INSUFFICIENT_ARGUMENTS;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PARTS;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_ITEM_UNAVAILABLE;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_NUMBER_FORMAT_INVALID;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_SELF_BORROWER;
 
 public class AddTransactionCommand extends Command {
     private final String[] parts;
@@ -77,9 +79,11 @@ public class AddTransactionCommand extends Command {
         throw new InvalidUserException(MESSAGE_SELF_BORROWER);
     }
 
-    private boolean isValidDuration(String duration) {
+    private boolean isValidDuration(String duration) throws DurationInvalidException {
         try {
-            Integer.parseInt(duration);
+            if (Integer.parseInt(duration) < 0) {
+                throw new DurationInvalidException(MESSAGE_DURATION_INVALID);
+            }
             return true;
         } catch (NumberFormatException e) {
             throw new NumberFormatException(MESSAGE_NUMBER_FORMAT_INVALID);
@@ -97,14 +101,14 @@ public class AddTransactionCommand extends Command {
 
     private boolean areValidArgs(String[] args)
             throws InvalidItemException, InvalidUserException, DateFormatInvalidException,
-            ItemNotFoundException, UserNotFoundException {
+            ItemNotFoundException, UserNotFoundException, DurationInvalidException {
         return isValidItem(args[0]) && isValidBorrower(args[0], args[1])
                 && isValidDuration(args[2]) && isValidCreatedDate(args[3]);
     }
 
     public boolean executeCommand()
-            throws InvalidArgumentException, DateFormatInvalidException,
-            InvalidUserException, InvalidItemException, ItemNotFoundException, UserNotFoundException {
+            throws InvalidArgumentException, DateFormatInvalidException, InvalidUserException,
+            InvalidItemException, ItemNotFoundException, UserNotFoundException, DurationInvalidException {
         String[] args = getArgsAddTxCmd();
         if (areValidArgs(args)) {
             String itemId = args[0];

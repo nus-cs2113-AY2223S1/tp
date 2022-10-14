@@ -5,18 +5,20 @@ import seedu.duke.exception.ContactNumberInvalidException;
 import seedu.duke.exception.DuplicateException;
 import seedu.duke.exception.InsufficientArgumentsException;
 import seedu.duke.exception.InvalidArgumentException;
+import seedu.duke.exception.InvalidUserException;
 import seedu.duke.exception.UserNotFoundException;
 import seedu.duke.parser.CommandParser;
 import seedu.duke.user.User;
 import seedu.duke.user.UserList;
 import seedu.duke.ui.Ui;
 
-import static seedu.duke.exception.ExceptionMessages.MESSAGE_CONTACT_FORMAT_INVALID;
-import static seedu.duke.exception.ExceptionMessages.MESSAGE_CONTACT_LENGTH_INVALID;
-import static seedu.duke.exception.ExceptionMessages.MESSAGE_INSUFFICIENT_ARGUMENTS;
-import static seedu.duke.exception.ExceptionMessages.MESSAGE_INVALID_PARTS;
-import static seedu.duke.exception.ExceptionMessages.MESSAGE_USERNAME_TAKEN;
-import static seedu.duke.exception.ExceptionMessages.MESSAGE_USER_AGE_INVALID;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_CONTACT_FORMAT_INVALID;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_CONTACT_LENGTH_INVALID;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INSUFFICIENT_ARGUMENTS;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PARTS;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_USERNAME_TAKEN;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_USER_AGE_INVALID;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_USER_AGE_OUT_OF_RANGE;
 
 public class AddUserCommand extends Command {
     private final String[] parts;
@@ -56,9 +58,11 @@ public class AddUserCommand extends Command {
         }
     }
 
-    private boolean isValidAge(String age) {
+    private boolean isValidAge(String age) throws InvalidUserException {
         try {
-            Integer.parseInt(age);
+            if (Integer.parseInt(age) < 10 || Integer.parseInt(age) > 100) {
+                throw new InvalidUserException(MESSAGE_USER_AGE_OUT_OF_RANGE);
+            }
             return true;
         } catch (NumberFormatException e) {
             throw new NumberFormatException(MESSAGE_USER_AGE_INVALID);
@@ -77,13 +81,14 @@ public class AddUserCommand extends Command {
         }
     }
 
-    private boolean areValidArgs(String[] args) throws ContactNumberInvalidException, DuplicateException {
+    private boolean areValidArgs(String[] args)
+            throws ContactNumberInvalidException, DuplicateException, InvalidUserException {
         return isValidName(args[0]) && isValidAge(args[1]) && isValidContactNumber(args[2]);
     }
 
     public boolean executeCommand()
             throws InsufficientArgumentsException, InvalidArgumentException,
-            ContactNumberInvalidException, DuplicateException {
+            ContactNumberInvalidException, DuplicateException, InvalidUserException {
         String[] args = getArgsAddUserCmd();
         if (areValidArgs(args)) {
             User user = new User(args[0], Integer.parseInt(args[1]), args[2]);
