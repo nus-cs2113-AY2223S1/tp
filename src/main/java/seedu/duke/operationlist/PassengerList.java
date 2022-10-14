@@ -18,15 +18,15 @@ public class PassengerList extends OperationList {
     protected static boolean isFlightNumberPresent = false;
     protected static boolean isSeatNumberPresent = false;
     protected static boolean isSuccess = false;
-    protected static String name;
-    protected static String departureDate;
-    protected static String departureTime;
-    protected static String flightNumber;
-    protected static String gateNumber;
-    protected static String seatNumber;
-    protected static String boardingTime;
-    protected static int numOfPassengers = 0;
-    protected static int boardingGroup;
+    protected String name;
+    protected String departureDate;
+    protected String departureTime;
+    protected String flightNumber;
+    protected String gateNumber;
+    protected String seatNumber;
+    protected String boardingTime;
+    protected int numOfPassengers = 0;
+    protected int boardingGroup;
     protected static int startIndex;
 
 
@@ -79,7 +79,7 @@ public class PassengerList extends OperationList {
         System.out.print("\n");
     }
 
-    private static void validatePassenger(int index) {
+    private void validatePassenger(int index) {
         isNamePresent = passengers.get(index).getName().contains(name);
         isFlightNumberPresent = passengers.get(index).getFlightNumber().contains(flightNumber);
         isSeatNumberPresent = passengers.get(index).getSeatNumber().contains(seatNumber);
@@ -100,7 +100,7 @@ public class PassengerList extends OperationList {
         getBoardingTime(passengerDetail);
     }
 
-    private static void iteratePassengerDetail(int index) {
+    private void iteratePassengerDetail(int index) {
         name = passengers.get(index).getName();
         departureDate = passengers.get(index).getDepartureDate();
         departureTime = passengers.get(index).getDepartureTime();
