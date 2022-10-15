@@ -1,5 +1,7 @@
 package seedu.moneygowhere.common;
 
+import seedu.moneygowhere.parser.ConsoleParserConfigurations;
+
 /**
  * Defines the messages used by program.
  */
@@ -35,7 +37,7 @@ public class Messages {
     public static final String EXPENSE_MANAGER_ERROR_EXPENSE_NOT_FOUND = ""
             + "The expense is not found.";
     public static final String CONSOLE_MESSAGE_COMMAND_SORTED_EXPENSE_SUCCESS = ""
-            + "Your expenses have been sorted successfully";
+            + "Your expenses have been sorted successfully.";
     public static final String CONSOLE_ERROR_COMMAND_SORT_EXPENSE_INVALID = ""
             + "The arguments entered are invalid. "
             + "SYNTAX: Sort-Expense -t TYPE -o ORDER";
@@ -65,7 +67,34 @@ public class Messages {
             + "The income is not found.";
     public static final String CONSOLE_ERROR_COMMAND_ADD_INCOME_INVALID = ""
             + "The arguments entered are invalid. "
-            +  "SYNTAX: Add-Income -n NAME -a AMOUNT [-d "
+            + "SYNTAX: Add-Income -n NAME -a AMOUNT [-d "
             + Configurations.CONSOLE_INTERFACE_DATE_TIME_INPUT_FORMAT
             + "] [-t DESCRIPTION]";
+
+    /**
+     * Defines messages for console command Add-RecurringPayment.
+     */
+    public static final String CONSOLE_MESSAGE_COMMAND_ADD_RECURRING_PAYMENT_SUCCESS = ""
+            + "The recurring payment was added successfully.";
+    public static final String CONSOLE_ERROR_COMMAND_ADD_RECURRING_PAYMENT_INVALID = ""
+            + "The arguments entered are invalid. "
+            + "SYNTAX: Add-RecurringPayment"
+            + " -" + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_NAME + " "
+            + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_NAME_LONG.toUpperCase()
+            + " -" + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_INTERVAL + " "
+            + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_INTERVAL_LONG.toUpperCase()
+            + " -" + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_AMOUNT + " "
+            + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_AMOUNT_LONG.toUpperCase()
+            + " [-" + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_DESCRIPTION + " "
+            + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_DESCRIPTION_LONG.toUpperCase()
+            + "]";
+
+    /**
+     * Defines messages for console command View-RecurringPayment.
+     */
+    public static final String CONSOLE_ERROR_COMMAND_VIEW_RECURRING_PAYMENT_INVALID = ""
+            + "The arguments entered are invalid. "
+            + "SYNTAX: View-RecurringPayment"
+            + " -" + ConsoleParserConfigurations.COMMAND_VIEW_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX + " "
+            + ConsoleParserConfigurations.COMMAND_VIEW_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_LONG.toUpperCase();
 }

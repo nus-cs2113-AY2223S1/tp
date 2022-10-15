@@ -1,5 +1,6 @@
 package seedu.moneygowhere.storage;
 
+import seedu.moneygowhere.commands.ConsoleCommandSortExpense;
 import seedu.moneygowhere.common.Messages;
 import seedu.moneygowhere.data.expense.Expense;
 import seedu.moneygowhere.data.expense.ExpenseManager;
@@ -36,6 +37,10 @@ public class LocalStorage {
         try {
             File f = initialiseFile();
             Scanner s = new Scanner(f);
+            if (s.hasNext()) {
+                ConsoleCommandSortExpense defaultSortCommandSetting = loadSortCommandSetting(s.nextLine());
+                expenseManager.updateSortExpenses(defaultSortCommandSetting);
+            }
             String textFromFile;
             while (s.hasNext()) {
                 textFromFile = s.nextLine();
@@ -49,6 +54,20 @@ public class LocalStorage {
         } catch (LocalStorageLoadDataInputError | NumberFormatException e) {
             System.out.println(Messages.LOCAL_STORAGE_ERROR_IN_LOAD_FILE + fileIndex);
         }
+    }
+
+    /**
+    * This method reads in the sortCommandSetting in text file.
+    */
+    private static ConsoleCommandSortExpense loadSortCommandSetting(String sortCommandSetting)
+            throws LocalStorageLoadDataInputError {
+        String[] splitInputs = sortCommandSetting.split(DIVIDER);
+        if (splitInputs.length != 2) {
+            throw new LocalStorageLoadDataInputError();
+        }
+        String type = splitInputs[0];
+        String order = splitInputs[1];
+        return new ConsoleCommandSortExpense(type,order);
     }
 
     private static Expense createExpense(String textFromFile) throws LocalStorageLoadDataInputError {
@@ -67,14 +86,27 @@ public class LocalStorage {
     /**
      * This method saves all current expenses into a text file.
      */
-    public static void saveToFile(ArrayList<Expense> savedExpenses) {
+    public static void saveToFile(ExpenseManager savedExpenses) {
         try {
             initialiseFile();
-            ArrayList<String> compiledData = taskToStringArray(savedExpenses);
-            writeToFile(compiledData);
+            String sortCommandSetting = sortCommandSettingToString(savedExpenses.getSortCommandSetting());
+            ArrayList<String> compiledData = taskToStringArray(savedExpenses.getExpenses());
+            writeToFile(compiledData, sortCommandSetting);
         } catch (IOException e) {
             System.out.println(Messages.LOCAL_STORAGE_ERROR_SAVE_DATA);
         }
+    }
+
+    /**
+     * This function converts the sortCommandSetting to a single string for storage.
+     *
+     * @param sortCommandSetting is the current sortCommandSetting in expenseManager
+     * @return sortCommandSetting in string format "type // order""
+     */
+    private static String sortCommandSettingToString(ConsoleCommandSortExpense sortCommandSetting) {
+        String type = sortCommandSetting.getType();
+        String order = sortCommandSetting.getOrder();
+        return (type + DIVIDER + order);
     }
 
     /**
@@ -103,8 +135,9 @@ public class LocalStorage {
      * @param textToWrite list of string containing information of all expenses.
      * @throws IOException when trying to access a file through a wrong path or when file has issues
      */
-    private static void writeToFile(ArrayList<String> textToWrite) throws IOException {
+    private static void writeToFile(ArrayList<String> textToWrite, String sortCommandSetting) throws IOException {
         FileWriter fw = new FileWriter(new File(FILE_PATH_EXPENSES).getAbsolutePath(), false);
+        fw.write(sortCommandSetting + "\n");
         for (String task : textToWrite) {
             fw.write(task + "\n");
         }
