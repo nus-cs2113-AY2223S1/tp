@@ -40,7 +40,7 @@ public class Parking {
         Api api = new Api(LTA_JSON_FILE, API_JSON_DIRECTORY);
 
         try {
-            api.loadApiKey(API_KEY_FILE, API_JSON_DIRECTORY, true);
+            api.loadApiKey(API_KEY_FILE, API_JSON_DIRECTORY, true); // todo: does not update the file with default key
             api.asyncExecuteRequest();
             api.fetchData();
             ui.print("Fetching data from API successful!");

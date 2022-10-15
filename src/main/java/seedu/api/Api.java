@@ -1,6 +1,7 @@
 package seedu.api;
 
 import static seedu.common.CommonData.API_KEY_DEFAULT;
+import static seedu.common.CommonFiles.API_KEY_FILE;
 import static seedu.common.CommonFiles.LTA_BASE_URL;
 
 import java.io.IOException;
@@ -168,7 +169,7 @@ public class Api {
 
     /**
      * Reads API key from secret.txt file and loads it to the object.
-     * If secret.txt does not exist, create it.
+     * If secret.txt does not exist, create it and use the default key for now.
      *
      * @param file file name of where the api key is stored.
      * @param directory directory where the file is stored.
@@ -180,13 +181,22 @@ public class Api {
         try {
             String key = FileReader.readStringFromTxt(file, directory, true);
             if (key.isEmpty()) {
-                apiKey =  toloadDefault ? API_KEY_DEFAULT : "";
+                if (toloadDefault) {
+                    loadDefaultApiKey();
+                }
                 throw new EmptySecretFileException(directory);
             }
             apiKey = key;
         } catch (IOException e) {
             throw new NoFileFoundException("API key file is missing!");
         }
+    }
+
+    /**
+     * Load default api key. todo: for authentication status so that they know that their own api key is not auth yet.
+     */
+    public void loadDefaultApiKey() {
+        apiKey = API_KEY_DEFAULT;
     }
 
     public String getApiKey() {
