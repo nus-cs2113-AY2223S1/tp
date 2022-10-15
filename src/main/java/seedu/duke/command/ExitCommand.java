@@ -5,6 +5,7 @@ import seedu.duke.Duke;
 import seedu.duke.Ui;
 import seedu.duke.exercise.ExerciseList;
 import seedu.duke.food.FoodList;
+import seedu.duke.storage.Storage;
 
 public class ExitCommand extends Command {
     private Ui ui;
@@ -16,7 +17,7 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    public void setData(Ui ui, Biometrics biometrics, ExerciseList exerciseList, FoodList foodList) {
+    public void setData(Ui ui, Storage storage, Biometrics biometrics, ExerciseList exerciseList, FoodList foodList) {
         this.ui = ui;
     }
 }

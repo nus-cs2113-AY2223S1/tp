@@ -13,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.BeforeEach;
 import seedu.duke.food.FoodList;
+import seedu.duke.storage.Storage;
 
 class RemoveCommandTest {
 
@@ -20,6 +21,7 @@ class RemoveCommandTest {
     private Biometrics biometrics = new Biometrics();
     private Ui ui = new Ui();
     private ExerciseList exerciseList = new ExerciseList();
+    private final Storage storage = new Storage();
 
     @BeforeEach
     public void setUp() throws Exception {
@@ -30,7 +32,7 @@ class RemoveCommandTest {
 
         for (String input : commandList) {
             Command c = Parser.parse(input);
-            c.setData(ui, biometrics, exerciseList, foodList);
+            c.setData(ui, storage, biometrics, exerciseList, foodList);
             c.execute();
         }
     }

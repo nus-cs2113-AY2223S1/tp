@@ -7,6 +7,7 @@ import seedu.duke.Ui;
 import seedu.duke.exception.IllegalValueException;
 import seedu.duke.exercise.ExerciseList;
 import seedu.duke.food.FoodList;
+import seedu.duke.storage.Storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -14,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 class SetCommandTest {
 
     private final FoodList foodList = new FoodList();
+    private final Storage storage = new Storage();
 
     @Test
     void execute_validSetArguments_updatedBiometrics() throws IllegalValueException {
@@ -30,7 +32,7 @@ class SetCommandTest {
                 command, age, gender, height, weight, fatPercentage);
 
         Command c = Parser.parse(fullCommand);
-        c.setData(ui, biometrics, exerciseList, foodList);
+        c.setData(ui, storage, biometrics, exerciseList, foodList);
         c.execute();
         assertEquals(age, biometrics.getAge());
         assertEquals(gender, biometrics.getGender());
@@ -54,7 +56,7 @@ class SetCommandTest {
                 command, age, gender, height, weight, fatPercentage);
 
         Command c = Parser.parse(fullCommand);
-        c.setData(ui, biometrics, exerciseList, foodList);
+        c.setData(ui, storage, biometrics, exerciseList, foodList);
         try {
             c.execute();
             fail();
@@ -79,7 +81,7 @@ class SetCommandTest {
                 command, age, gender, height, weight, fatPercentage);
 
         Command c = Parser.parse(fullCommand);
-        c.setData(ui, biometrics, exerciseList, foodList);
+        c.setData(ui, storage, biometrics, exerciseList, foodList);
         try {
             c.execute();
             fail();

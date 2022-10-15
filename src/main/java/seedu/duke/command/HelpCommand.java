@@ -4,6 +4,7 @@ import seedu.duke.biometrics.Biometrics;
 import seedu.duke.Ui;
 import seedu.duke.exercise.ExerciseList;
 import seedu.duke.food.FoodList;
+import seedu.duke.storage.Storage;
 
 public class HelpCommand extends Command {
 
@@ -28,7 +29,7 @@ public class HelpCommand extends Command {
     }
 
     @Override
-    public void setData(Ui ui, Biometrics biometrics, ExerciseList exerciseList, FoodList foodList) {
+    public void setData(Ui ui, Storage storage, Biometrics biometrics, ExerciseList exerciseList, FoodList foodList) {
         this.ui = ui;
     }
 }

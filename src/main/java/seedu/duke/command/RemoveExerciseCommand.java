@@ -7,6 +7,8 @@ import seedu.duke.exception.IllegalValueException;
 import seedu.duke.exercise.Exercise;
 import seedu.duke.exercise.ExerciseList;
 import seedu.duke.food.FoodList;
+import seedu.duke.storage.Storage;
+
 import java.lang.ArithmeticException;
 
 public class RemoveExerciseCommand extends Command {
@@ -44,7 +46,7 @@ public class RemoveExerciseCommand extends Command {
     }
 
     @Override
-    public void setData(Ui ui, Biometrics biometrics, ExerciseList exerciseList, FoodList foodlist) {
+    public void setData(Ui ui, Storage storage, Biometrics biometrics, ExerciseList exerciseList, FoodList foodlist) {
         this.ui = ui;
         this.exerciseList = exerciseList;
     }

@@ -10,6 +10,7 @@ public class Biometrics {
     private int height;
     private int weight;
     private int fatPercentage;
+    public boolean isSet;
 
     public Biometrics() {
         age = 0;
@@ -17,6 +18,7 @@ public class Biometrics {
         height = 0;
         weight = 0;
         fatPercentage = 0;
+        isSet = false;
     }
 
     public int getAge() {
@@ -45,6 +47,7 @@ public class Biometrics {
         this.height = height;
         this.weight = weight;
         this.fatPercentage = fatPercentage;
+        isSet = true;
     }
 
     @Override
@@ -55,5 +58,9 @@ public class Biometrics {
                 + "Height: " + height + "cm" + System.lineSeparator()
                 + "Weight: " + weight + "kg" + System.lineSeparator()
                 + "Fat percentage: " + fatPercentage + "%";
+    }
+
+    public String saveBiometrics() {
+        return String.format("/%d /%s /%d /%d /%d", age, gender, height, weight, fatPercentage);
     }
 }
