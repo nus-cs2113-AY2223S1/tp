@@ -1,9 +1,9 @@
 package seedu.duke.exception.message;
 
+/**
+ * A class to store the Exception Messages.
+ */
 public class ExceptionMessages {
-    //Later, all messages for exceptions will be put in here then import to the file where they are used
-    //--> avoid magic string
-
     //User-related messages
     public static final String MESSAGE_USER_NOT_FOUND = "This user cannot be found in the list";
     public static final String MESSAGE_USERNAME_TAKEN = "This username has been taken";
@@ -32,7 +32,8 @@ public class ExceptionMessages {
     public static final String MESSAGE_INVALID_PARTS = "One of the parts is in incorrect format";
     public static final String MESSAGE_NUMBER_FORMAT_INVALID = "Number should only contain digit 0-9";
     public static final String MESSAGE_DATE_FORMAT_INVALID = "The date format is incorrect(YYYY-MM-DD)";
-    public static final String MESSAGE_INSUFFICIENT_ARGUMENTS = "Not enough arguments for this commands to execute";
+    public static final String MESSAGE_CREATED_DATE_RANGE_INVALID = "The created date must be before today";
+    public static final String MESSAGE_INSUFFICIENT_ARGUMENTS = "The number of arguments for this command is incorrect";
     public static final String MESSAGE_COMMAND_UNRECOGNIZABLE = "This command is unrecognizable!!!\n"
             + "Please use help command to check";
     public static final String MESSAGE_FILE_NOT_FOUND = "OOPS!!! I cannot find your file";

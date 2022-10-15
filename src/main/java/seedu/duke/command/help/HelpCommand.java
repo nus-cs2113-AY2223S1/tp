@@ -5,6 +5,9 @@ import seedu.duke.ui.Ui;
 
 import java.util.Map;
 
+/**
+ * A representation of a command to print all commands.
+ */
 public class HelpCommand extends Command {
     private static final String COMMAND_HELP = "help";
     private static final String COMMAND_LIST_USERS = "list-users";
@@ -43,6 +46,11 @@ public class HelpCommand extends Command {
             Map.entry("List all categories available", COMMAND_LIST_CATEGORIES)
     );
 
+    /**
+     * Execute HelpCommand (print all available commands).
+     *
+     * @return false
+     */
     public boolean executeCommand() {
         Ui.showLine();
         for (Map.Entry<String, String> entry : commandToDetailMap.entrySet()) {

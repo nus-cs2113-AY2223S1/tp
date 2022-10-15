@@ -30,6 +30,9 @@ import seedu.duke.user.UserList;
 
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_COMMAND_UNRECOGNIZABLE;
 
+/**
+ * A class that parses and analyses the input string from the user.
+ */
 public class CommandParser {
     /*
      * Constants line separated by utility
@@ -37,8 +40,6 @@ public class CommandParser {
     private static final String DEFAULT_DELIMITER = " ";
     private static final String ARGS_DELIMITER = "/";
     private static final int COMMAND_INDEX = 0;
-    //    private static final int DEFAULT_FIRST_INDEX = 0;
-    //    private static final int DEFAULT_INDEX_INCREMENT = 1;
     private static final int ARGS_INDEX = 1;
 
     private static final String COMMAND_EXIT = "bye";
@@ -84,7 +85,7 @@ public class CommandParser {
     }
 
     /**
-     * Gets all subsequent words from user input, which are the arguments.
+     * Gets all subsequent parts from user input, which are the arguments.
      *
      * @param input a single line of user input
      * @return String[] the arguments for a command
@@ -93,6 +94,13 @@ public class CommandParser {
         return parseUserInput(input).get(ARGS_INDEX);
     }
 
+    /**
+     * Gets the argument value from the part given.
+     *
+     * @param part A String contains recognizer and the value
+     * @return The argument value
+     * @throws InvalidArgumentException If the value is empty
+     */
     public static String getArgValue(String part) throws InvalidArgumentException {
         String[] splitPart = part.split(DEFAULT_DELIMITER, 2);
         if (splitPart.length == 1) {
@@ -101,6 +109,17 @@ public class CommandParser {
         return splitPart[1].trim();
     }
 
+    /**
+     * Parses the command from user.
+     *
+     * @param input The input from user
+     * @param userList The list of users
+     * @param itemList The list of items
+     * @param transactionList The list of transactions
+     * @return Commands based on the command word
+     * @throws CommandNotFoundException If the command is unrecognizable
+     * @throws InsufficientArgumentsException If number of args in the commands is not enough.
+     */
     public static Command createCommand(String input, UserList userList, ItemList itemList,
                                         TransactionList transactionList)
             throws CommandNotFoundException, InsufficientArgumentsException {

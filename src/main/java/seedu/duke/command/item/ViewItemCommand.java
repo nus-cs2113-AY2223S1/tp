@@ -30,7 +30,7 @@ public class ViewItemCommand extends Command {
         }
     }
 
-    public String getArgsViewItemCmd() throws InvalidArgumentException {
+    private String getArgsViewItemCmd() throws InvalidArgumentException {
         String arg;
         if (parts[0].startsWith("i")) {
             arg = CommandParser.getArgValue(parts[0]);
