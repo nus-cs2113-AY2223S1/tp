@@ -28,7 +28,7 @@ public class CommandDeleteClient extends CommandDelete {
         //Update Storage
         storage.updateClient(clientList);
 
-        for (String i : pairingList.getClientPropertyPairs().keySet()) {
+        for (Client i : pairingList.getClientPropertyPairs().keySet()) {
             System.out.println("Key: " + i + "Value: " + pairingList.getClientPropertyPairs().get(i));
         }
         storage.updatePair(pairingList);

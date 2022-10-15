@@ -55,6 +55,7 @@ public class Duke {
 
 
     public void run() throws IOException {
+
         this.ui = new Ui();
         this.propertyList = new PropertyList();
         this.clientList = new ClientList();
@@ -69,7 +70,7 @@ public class Duke {
 
         do {
             try {
-                System.exit(0); //to pass CI
+                //System.exit(0); //to pass CI
                 String userInputText = ui.readCommand();
                 command = parser.parseCommand(userInputText);
                 command.execute(ui, storage, propertyList, clientList, pairingList);

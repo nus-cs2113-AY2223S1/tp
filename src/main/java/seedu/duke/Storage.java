@@ -10,6 +10,7 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
 public class Storage {
     private static final String DIRECTORY = "./data/";
     private static final String PROPERTY_PATH = "./data/property.txt";
@@ -204,10 +205,29 @@ public class Storage {
 
             while (scanner.hasNext()) {
                 String[] pairingParameters = scanner.nextLine().split("\\s\\:\\s");
-                String client = pairingParameters[0];
-                String property = pairingParameters[1];
-                pairingList.addPairing(client, property);
+                String[] clientParamters = pairingParameters[0].split("\\s\\|\\s");
+                String[] propertyParameters = pairingParameters[1].split("\\s\\|\\s");
+
+                //Client Information
+                String clientName = clientParamters[0];
+                String clientContactNumber = clientParamters[1];
+                String clientEmail = clientParamters[2];
+                String clientBudget = clientParamters[3];
+
+                //Property Information
+                String landLordName = propertyParameters[0];
+                String propertyAddress = propertyParameters[1];
+                String rentalPrice = propertyParameters[2];
+                String unitType = propertyParameters[3];
+
+
+
+                Client pairingClient = new Client(clientName, clientContactNumber, clientEmail, clientBudget);
+                Property pairingProperty = new Property(landLordName, propertyAddress, rentalPrice, unitType);
+
+                pairingList.addPairing(pairingClient, pairingProperty);
             }
+
             LOGGER.log(Level.INFO, LOG_PAIRING_LOAD_LABEL);
         } catch (FileNotFoundException e) {
             System.out.println("File is not found...");
@@ -359,12 +379,12 @@ public class Storage {
      */
     public void updatePair(PairingList pairingList) {
         try {
-            HashMap<String, String> clientPropertyPair = pairingList.getClientPropertyPairs();
+            HashMap<Client, Property> clientPropertyPair = pairingList.getClientPropertyPairs();
             FileWriter pairFile = new FileWriter(PAIR_PATH);
 
             String pairText = EMPTY_STRING;
-            for (String clientText : clientPropertyPair.keySet()) {
-                String propertyText = clientPropertyPair.get(clientText);
+            for (Client clientText : clientPropertyPair.keySet()) {
+                String propertyText = String.valueOf(clientPropertyPair.get(clientText));
                 String finalText = clientText + COLON + propertyText + System.lineSeparator();
                 pairText = pairText.concat(finalText);
             }

@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
+import seedu.duke.Client;
 import seedu.duke.ClientList;
 import seedu.duke.PairingList;
 import seedu.duke.Property;
@@ -29,9 +30,9 @@ public class CommandCheckProperty extends CommandCheck {
      */
     @Override
     public void execute(Ui ui, Storage storage, PropertyList propertyList, ClientList clientList,
-            PairingList pairingList) {
+                        PairingList pairingList) {
         Property property = propertyList.getPropertyList().get(propertyIndex);
-        ArrayList<String> tenants = pairingList.getPropertyTenants(property);
+        ArrayList<Client> tenants = pairingList.getPropertyTenants(property);
         ui.showCheckProperty(tenants);
     }
 }

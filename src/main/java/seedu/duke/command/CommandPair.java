@@ -42,6 +42,7 @@ public class CommandPair extends Command {
         String propertyFormat = pairingList.convertToPairingData(property);
 
         pairingList.addPairing(client, property);
+
         storage.addToPairFile(clientFormat, propertyFormat);
 
         ui.showPairedConfirmationMessage(client, property);

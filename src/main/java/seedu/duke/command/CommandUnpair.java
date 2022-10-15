@@ -40,6 +40,7 @@ public class CommandUnpair extends Command {
         pairingList.deletePairing(client, property);
 
 
+
         storage.updatePair(pairingList);
         ui.showUnpairedConfirmationMessage(client, property);
 

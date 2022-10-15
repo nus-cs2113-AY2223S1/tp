@@ -31,7 +31,7 @@ public class CommandDeleteProperty extends CommandDelete {
         storage.updateProperty(propertyList);
 
 
-        for (String i : pairingList.getClientPropertyPairs().keySet()) {
+        for (Client i : pairingList.getClientPropertyPairs().keySet()) {
             System.out.println("Key: " + i + "Value: " + pairingList.getClientPropertyPairs().get(i));
         }
 
