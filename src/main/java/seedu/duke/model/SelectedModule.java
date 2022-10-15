@@ -1,6 +1,7 @@
 package seedu.duke.model;
 
 import java.util.Map;
+import java.util.Objects;
 import java.util.TreeMap;
 
 public class SelectedModule {
@@ -44,6 +45,20 @@ public class SelectedModule {
 
     public Map<LessonType, String> getSelectedSlots() {
         return selectedSlots;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (object == this) {
+            return true;
+        }
+        if (!(object instanceof SelectedModule)) {
+            return false;
+        }
+        // typecast o to Complex so that we can compare data members
+        SelectedModule selectedModule = (SelectedModule) object;
+
+        return this.module.equals(selectedModule.module);
     }
 
 }
