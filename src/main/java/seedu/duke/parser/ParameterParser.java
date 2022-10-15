@@ -231,6 +231,7 @@ public class ParameterParser {
      * @throws MoolahException If Moolah Manager captures any command input exceptions.
      */
     private static void setCommand(Command command, String[] splits) throws MoolahException {
+        assert command != null;
         for (String split : splits) {
             String tag = split.substring(0, SPLIT_POSITION);
             String parameter = split.substring(SPLIT_POSITION);

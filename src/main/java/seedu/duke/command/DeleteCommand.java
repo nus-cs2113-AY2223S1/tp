@@ -6,6 +6,9 @@ import seedu.duke.data.TransactionList;
 import seedu.duke.exception.InvalidIndexException;
 import seedu.duke.exception.MoolahException;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import static seedu.duke.command.CommandTag.COMMAND_TAG_LIST_ENTRY_NUMBER;
 import static seedu.duke.common.InfoMessages.INFO_DELETE;
 
@@ -36,6 +39,7 @@ public class DeleteCommand extends Command {
 
     // The optional tags that may exist in the user input
 
+    private static final Logger logging = Logger.getLogger(DeleteCommand.class.getName());
 
     private int entryNumber;
 
@@ -66,6 +70,7 @@ public class DeleteCommand extends Command {
      * @param ui           An instance of the Ui class.
      * @param transactions An instance of the TransactionList class.
      * @param storage      An instance of the Storage class.
+     * @throws InvalidIndexException If the index inputted is invalid.
      */
     @Override
     public void execute(TransactionList transactions, Ui ui, Storage storage) throws MoolahException {
@@ -73,6 +78,9 @@ public class DeleteCommand extends Command {
         Checks if userInput is in the correct input format by further parsing,
         before adding entry to arraylist
         */
+        logging.setLevel(Level.WARNING);
+        logging.log(Level.INFO, "Delete Command checks whether the index is valid "
+                + "before executing the command.");
         boolean isInputValid = true;
         int index = entryNumber;
         int numberOfTransactions;
@@ -80,12 +88,18 @@ public class DeleteCommand extends Command {
         if ((index > numberOfTransactions) || (index <= 0)) {
             isInputValid = false;
         }
+        assert index > 0;
         if (isInputValid) {
             String transaction = TransactionList.deleteTransaction(index);
             Ui.showTransactionAction(INFO_DELETE.toString(), transaction);
+            logging.log(Level.INFO, "The requested transaction has been deleted "
+                    + "and the UI should display the confirmation message respectively.");
         } else {
+            logging.log(Level.WARNING, "InvalidIndexException thrown when the index "
+                    + "is invalid.");
             throw new InvalidIndexException();
         }
+        logging.log(Level.INFO, "This is the end of the delete command.");
     }
 
     /**
