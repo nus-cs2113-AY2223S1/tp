@@ -16,6 +16,8 @@ import java.util.Optional;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Handles the saving and loading of states into a format that can be exported to NUSMods
@@ -42,6 +44,8 @@ public class Storage {
     private static final String LESSON_TYPE_DELIMITER = ":";
 
     private static final String MODULE_CODE_DELIMITER = "=";
+
+    private static final String SUPPOSED_START = "https://nusmods.com/timetable/sem-1/share?";
 
     private static String moduleDelimiter = "&";
 
@@ -113,6 +117,9 @@ public class Storage {
      * @param state current state of the application to be saved
      */
     public void loadPreviousState(String link, State state) {
+        if (!isValidPreviousState(link)) {
+            return;
+        }
         String[] infoParam = link.split(DELIMITER);
         String semesterParam = infoParam[SEMESTER_PARAM_INDEX];
         int semester = Integer.parseInt(semesterParam.replace(SEMESTER_DELIMITER,""));
@@ -120,19 +127,30 @@ public class Storage {
 
         String modulesParam = infoParam[MODULES_PARAM_INDEX];
         String cleanModuleParam = modulesParam.replace(SHARE_DELIMITER,"");
-        if (cleanModuleParam.isEmpty()) {
-            return;
-        }
         String[] moduleAndLessonsArray = cleanModuleParam.split(moduleDelimiter);
         for (String moduleAndLessons : moduleAndLessonsArray) {
             String[] splitModuleAndLesson = moduleAndLessons.split(MODULE_CODE_DELIMITER);
             String moduleCode = splitModuleAndLesson[0];
             Module module = Module.get(moduleCode);
+            if (module == null) {
+                continue;
+            }
             SelectedModule selectedModule = new SelectedModule(module,semester);
             String[] lessonsInfo = splitModuleAndLesson[1].split(lessonDelimiter);
             addLessons(lessonsInfo, selectedModule);
             state.addSelectedModule(selectedModule);
         }
+    }
+
+    /**
+     * Checks for potentially empty <code>duke.txt</code> file that the user might have accidentally modified.
+     *
+     * @param link single string from the saved <code>duke.txt</code> file
+     * @return if the link is of a valid form
+     */
+    public boolean isValidPreviousState(String link) {
+        boolean hasLongerLength = link.length() > SUPPOSED_START.length();
+        return link.startsWith(SUPPOSED_START) && hasLongerLength;
     }
 
     /**
@@ -143,12 +161,30 @@ public class Storage {
      * @param selectedModule current module to select classes
      */
     private void addLessons(String[] lessonsInfo, SelectedModule selectedModule) {
-        for (int i = 1; i < lessonsInfo.length; i++) {
+        for (int i = 0; i < lessonsInfo.length && isLessonInfo(lessonsInfo[i]); i++) {
             String[] lessonInfo = lessonsInfo[i].split(LESSON_TYPE_DELIMITER);
             LessonType lessonType = getLessonType(lessonInfo[0]);
             String classNo = lessonInfo[1];
             selectedModule.selectSlot(lessonType,classNo);
         }
+    }
+
+    /**
+     * Checks if the lesson information is of a valid form. It should consist of 3 to 4 alphanumeric
+     * capital alphabets defined in the {@link #getLessonType(String)} function.
+     *
+     * @param lessonInfo single lesson information of a module
+     * @return if the lesson information is of a valid form
+     */
+    public boolean isLessonInfo(String lessonInfo) {
+        Pattern pattern = Pattern.compile("[A-Z]{3,4}\\d?:[A-Z]{0,2}\\d{1,2}");
+        Matcher matcher = pattern.matcher(lessonInfo);
+        boolean hasMatch = matcher.find();
+        boolean isSameLength = false;
+        if (hasMatch) {
+            isSameLength = matcher.group().length() == lessonInfo.length();
+        }
+        return (hasMatch && isSameLength);
     }
 
     /**
@@ -171,7 +207,7 @@ public class Storage {
         map.put("LAB", LessonType.LABORATORY);
         map.put("PROJ",LessonType.MINI_PROJECT);
         map.put("SEM", LessonType.SEMINAR_STYLE_MODULE_CLASS);
-        return Optional.ofNullable(map.get(shortString)).orElseThrow();
+        return map.get(shortString);
     }
 
     /**
@@ -211,6 +247,12 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * Goes through the selected modules from the state and appends it in the correct format to be saved.
+     *
+     * @param selectedModules list of selected modules from the state
+     * @param toSave          NUSMods formatted link
+     */
     public void appendModules(List<SelectedModule> selectedModules, StringBuilder toSave) {
         moduleDelimiter = "";
         for (SelectedModule selectedModule: selectedModules) {
@@ -225,6 +267,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Goes through all the selected lessons slots for the selected module and appends it in
+     * the correct format to be saved.
+     *
+     * @param selectedSlots the selected lessons slots
+     * @param toSave        NUSMods formatted link
+     */
     private void appendLessons(Map<LessonType, String> selectedSlots, StringBuilder toSave) {
         lessonDelimiter = "";
         for (Map.Entry<LessonType, String> slot: selectedSlots.entrySet()) {
