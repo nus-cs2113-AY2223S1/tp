@@ -15,7 +15,7 @@ public class ConsoleParserConfigurations {
     /**
      * Defines parameters for console command Add-Expense.
      */
-    public static final String COMMAND_ADD_EXPENSE = "add-expense";
+    public static final String COMMAND_ADD_EXPENSE = "Add-Expense";
     public static final String COMMAND_ADD_EXPENSE_ARG_NAME = "n";
     public static final String COMMAND_ADD_EXPENSE_ARG_NAME_LONG = "name";
     public static final String COMMAND_ADD_EXPENSE_ARG_NAME_DESC = "Name";
@@ -52,7 +52,7 @@ public class ConsoleParserConfigurations {
     /**
      * Defines parameters for console command View-Expense.
      */
-    public static final String COMMAND_VIEW_EXPENSE = "view-expense";
+    public static final String COMMAND_VIEW_EXPENSE = "View-Expense";
     public static final String COMMAND_VIEW_EXPENSE_ARG_EXPENSE_INDEX = "e";
     public static final String COMMAND_VIEW_EXPENSE_ARG_EXPENSE_INDEX_LONG = "expense-index";
     public static final String COMMAND_VIEW_EXPENSE_ARG_EXPENSE_INDEX_DESC = "Index";
@@ -69,7 +69,7 @@ public class ConsoleParserConfigurations {
     /**
      * Defines parameters for console command Delete-Expense.
      */
-    public static final String COMMAND_DELETE_EXPENSE = "delete-expense";
+    public static final String COMMAND_DELETE_EXPENSE = "Delete-Expense";
     public static final String COMMAND_DELETE_EXPENSE_ARG_EXPENSE_INDEX = "e";
     public static final String COMMAND_DELETE_EXPENSE_ARG_EXPENSE_INDEX_LONG = "expense-index";
     public static final String COMMAND_DELETE_EXPENSE_ARG_EXPENSE_INDEX_DESC = "Index";
@@ -81,7 +81,7 @@ public class ConsoleParserConfigurations {
     /**
      * Defines parameters for console command Edit-Expense.
      */
-    public static final String COMMAND_EDIT_EXPENSE = "edit-expense";
+    public static final String COMMAND_EDIT_EXPENSE = "Edit-Expense";
     public static final String COMMAND_EDIT_EXPENSE_ARG_EXPENSE_INDEX = "e";
     public static final String COMMAND_EDIT_EXPENSE_ARG_EXPENSE_INDEX_LONG = "expense-index";
     public static final boolean COMMAND_EDIT_EXPENSE_ARG_EXPENSE_INDEX_HAS_VAL = true;
@@ -114,7 +114,7 @@ public class ConsoleParserConfigurations {
     public static final boolean COMMAND_EDIT_EXPENSE_ARG_CATEGORY_IS_MAND = false;
     public static final String COMMAND_EDIT_EXPENSE_ARG_REMARKS = "r";
     public static final String COMMAND_EDIT_EXPENSE_ARG_REMARKS_LONG = "remarks";
-    public static final String COMMAND_EDIT_EXPENSE_ARG_REMARKS_DESC = "remarks";
+    public static final String COMMAND_EDIT_EXPENSE_ARG_REMARKS_DESC = "Remarks";
     public static final boolean COMMAND_EDIT_EXPENSE_ARG_REMARKS_HAS_VAL = true;
     public static final boolean COMMAND_EDIT_EXPENSE_ARG_REMARKS_IS_MAND = false;
     public static final String COMMAND_EDIT_EXPENSE_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS = ""
@@ -123,7 +123,7 @@ public class ConsoleParserConfigurations {
     /**
      * Defines parameters for console command Sort-Expense.
      */
-    public static final String COMMAND_SORT_EXPENSE = "sort-expense";
+    public static final String COMMAND_SORT_EXPENSE = "Sort-Expense";
     public static final String COMMAND_SORT_EXPENSE_ARG_TYPE = "t";
     public static final String COMMAND_SORT_EXPENSE_ARG_TYPE_LONG = "type";
     public static final String COMMAND_SORT_EXPENSE_ARG_TYPE_DESC = ""
@@ -145,7 +145,7 @@ public class ConsoleParserConfigurations {
     /**
      * Defines parameters for console command Add-Target.
      */
-    public static final String COMMAND_ADD_TARGET = "add-target";
+    public static final String COMMAND_ADD_TARGET = "Add-Target";
     public static final String COMMAND_ADD_TARGET_ARG_NAME = "n";
     public static final String COMMAND_ADD_TARGET_ARG_NAME_LONG = "name";
     public static final String COMMAND_ADD_TARGET_ARG_NAME_DESC = "Name";
@@ -175,7 +175,7 @@ public class ConsoleParserConfigurations {
     /**
      * Defines parameters for console command Add-Income.
      */
-    public static final String COMMAND_ADD_INCOME = "add-income";
+    public static final String COMMAND_ADD_INCOME = "Add-Income";
     public static final String COMMAND_ADD_INCOME_ARG_NAME = "n";
     public static final String COMMAND_ADD_INCOME_ARG_NAME_LONG = "name";
     public static final String COMMAND_ADD_INCOME_ARG_NAME_DESC = "Name";
@@ -200,7 +200,7 @@ public class ConsoleParserConfigurations {
     /**
      * Defines parameters for console command Add-RecurringPayment.
      */
-    public static final String COMMAND_ADD_RECURRING_PAYMENT = "add-recurringpayment";
+    public static final String COMMAND_ADD_RECURRING_PAYMENT = "Add-RecurringPayment";
     public static final String COMMAND_ADD_RECURRING_PAYMENT_ARG_NAME = "n";
     public static final String COMMAND_ADD_RECURRING_PAYMENT_ARG_NAME_LONG = "name";
     public static final String COMMAND_ADD_RECURRING_PAYMENT_ARG_NAME_DESC = "Name";
@@ -226,7 +226,7 @@ public class ConsoleParserConfigurations {
      * Defines parameters for console command View-RecurringPayment.
      */
     public static final String COMMAND_VIEW_RECURRING_PAYMENT = ""
-            + "view-recurringpayment";
+            + "View-RecurringPayment";
     public static final String COMMAND_VIEW_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX = ""
             + "r";
     public static final String COMMAND_VIEW_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_LONG = ""
