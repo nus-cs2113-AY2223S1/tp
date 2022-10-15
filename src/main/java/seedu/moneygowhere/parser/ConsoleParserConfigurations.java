@@ -105,17 +105,6 @@ public class ConsoleParserConfigurations {
             + "Command Edit-Expense does not have all of the required options.";
 
     /**
-     * Defines parameters for console command Delete-Remarks.
-     */
-    public static final String COMMAND_DELETE_REMARKS = "delete-remarks";
-    public static final String COMMAND_DELETE_REMARKS_ARG_EXPENSE_INDEX = "e";
-    public static final String COMMAND_DELETE_REMARKS_ARG_EXPENSE_INDEX_LONG = "expense-index";
-    public static final boolean COMMAND_DELETE_REMARKS_ARG_EXPENSE_INDEX_HAS_VAL = true;
-    public static final String COMMAND_DELETE_REMARKS_ARG_EXPENSE_INDEX_DESC = "Index";
-    public static final String COMMAND_DELETE_REMARKS_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS = ""
-            + "Command Delete-Remarks does not have all of the required options.";
-
-    /**
      * Defines parameters for console command Sort-Expense.
      */
     public static final String COMMAND_SORT_EXPENSE = "sort-expense";
@@ -372,25 +361,6 @@ public class ConsoleParserConfigurations {
         options.addOption(optionAmount);
         options.addOption(optionCategory);
         options.addOption(optionRemarks);
-
-        return options;
-    }
-
-    /**
-     * Generates an {@link Options} object with required arguments for command Delete-Remarks.
-     *
-     * @return {@link Options} object initialized with the required arguments.
-     */
-    public static Options getCommandDeleteRemarksOptions() {
-        Option optionExpenseIndex = new Option(
-                COMMAND_DELETE_REMARKS_ARG_EXPENSE_INDEX,
-                COMMAND_DELETE_REMARKS_ARG_EXPENSE_INDEX_LONG,
-                COMMAND_DELETE_REMARKS_ARG_EXPENSE_INDEX_HAS_VAL,
-                COMMAND_DELETE_REMARKS_ARG_EXPENSE_INDEX_DESC
-        );
-
-        Options options = new Options();
-        options.addOption(optionExpenseIndex);
 
         return options;
     }

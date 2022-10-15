@@ -71,17 +71,6 @@ Example of usage:
 * `Edit-Expense -e 1 -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359" -t "Monthly payment" -c "Work expenses"`
 * `Edit-Expense -e 1 -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359" -t "Monthly payment" -c "Work expenses" -r "Remarks here"`
 
-### Deleting remarks: `Delete-Remarks`
-Deletes the remarks of an expense from the list of expenses.
-
-Syntax: `Delete-Remarks -e EXPENSE_NUMBER`
-
-* `EXPENSE_NUMBER` is an integer value.
-
-Example of usage:
-
-* `Delete-Remarks -e 1`
-
 ### Sorting expenses: `Sort-Expense`
 Sorts the list of expenses according to an alphabetical, amount or date order. It can be sorted in both ascending and
 descending order.

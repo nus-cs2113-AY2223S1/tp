@@ -8,7 +8,6 @@ import seedu.moneygowhere.commands.ConsoleCommandAddTarget;
 import seedu.moneygowhere.commands.ConsoleCommandBye;
 import seedu.moneygowhere.commands.ConsoleCommandDeleteExpense;
 import seedu.moneygowhere.commands.ConsoleCommandEditExpense;
-import seedu.moneygowhere.commands.ConsoleCommandDeleteRemarks;
 import seedu.moneygowhere.commands.ConsoleCommandSortExpense;
 import seedu.moneygowhere.commands.ConsoleCommandViewExpense;
 import seedu.moneygowhere.commands.ConsoleCommandViewRecurringPayment;
@@ -29,7 +28,6 @@ import seedu.moneygowhere.exceptions.ConsoleParserCommandAddTargetInvalidExcepti
 import seedu.moneygowhere.exceptions.ConsoleParserCommandDeleteExpenseInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandEditExpenseInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandNotFoundException;
-import seedu.moneygowhere.exceptions.ConsoleParserCommandDeleteRemarksInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandSortExpenseInvalidTypeException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandViewExpenseInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandViewRecurringPaymentInvalidException;
@@ -356,21 +354,6 @@ public class ConsoleInterface {
         LocalStorage.saveToFile(expenseManager);
     }
 
-    private void runCommandDeleteRemarks(ConsoleCommandDeleteRemarks consoleCommandDeleteRemarks) {
-        int expenseIndex = consoleCommandDeleteRemarks.getExpenseIndex();
-
-        try {
-            expenseManager.deleteRemarks(expenseIndex);
-        } catch (ExpenseManagerExpenseNotFoundException exception) {
-            printErrorMessage(exception.getMessage());
-            return;
-        }
-
-        printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_DELETE_REMARKS_SUCCESS);
-
-        LocalStorage.saveToFile(expenseManager);
-    }
-
     @SuppressWarnings("Java8ListSort")
     private void runCommandSortExpense(ConsoleCommandSortExpense commandSortExpense) {
         ArrayList<Expense> expenses = expenseManager.getExpenses();
@@ -503,7 +486,6 @@ public class ConsoleInterface {
                      | ConsoleParserCommandViewExpenseInvalidException
                      | ConsoleParserCommandDeleteExpenseInvalidException
                      | ConsoleParserCommandEditExpenseInvalidException
-                     | ConsoleParserCommandDeleteRemarksInvalidException
                      | ConsoleParserCommandSortExpenseInvalidTypeException
                      | ConsoleParserCommandAddTargetInvalidException
                      | ConsoleParserCommandAddIncomeInvalidException
@@ -525,8 +507,6 @@ public class ConsoleInterface {
                 runCommandDeleteExpense((ConsoleCommandDeleteExpense) consoleCommand);
             } else if (consoleCommand instanceof ConsoleCommandEditExpense) {
                 runCommandEditExpense((ConsoleCommandEditExpense) consoleCommand);
-            } else if (consoleCommand instanceof ConsoleCommandDeleteRemarks) {
-                runCommandDeleteRemarks((ConsoleCommandDeleteRemarks) consoleCommand);
             } else if (consoleCommand instanceof ConsoleCommandSortExpense) {
                 runCommandSortExpense((ConsoleCommandSortExpense) consoleCommand);
             } else if (consoleCommand instanceof ConsoleCommandAddIncome) {

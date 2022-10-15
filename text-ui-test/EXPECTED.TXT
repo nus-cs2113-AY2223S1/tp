@@ -213,19 +213,6 @@ Remarks       : Remarks here
 
 
 
-The remarks was deleted successfully.
-
-
----- EXPENSE INDEX 3 ----
-Name          : Test Expense 2
-Date and Time : 01 Jan 2022 12:01
-Description   : null
-Amount        : 10.80
-Category      : null
-Remarks       : null
-
-
-
 The expense was deleted successfully.
 
 
@@ -393,9 +380,6 @@ Amount        : 13.37
 Category      : Category Alpha
 Remarks       : Remarks here
 
-
-
-The remarks was deleted successfully.
 
 
 ERROR: The command entered is invalid.
