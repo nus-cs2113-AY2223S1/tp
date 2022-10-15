@@ -100,16 +100,38 @@ public class Api {
     private boolean isValidResponse(int responseCode)
             throws UnauthorisedAccessApiException, ServerNotReadyApiException, UnknownResponseApiException {
         switch (responseCode) {
-        case 200:
-            return true;
-        case 401:
-            throw new UnauthorisedAccessApiException();
-        case 503:
-            throw new ServerNotReadyApiException("Too many requests. Trying again...");
-        default:
-            throw new UnknownResponseApiException("Response Code: " + responseCode
-                + "\nIf the problem persists please contact the developer. Trying again...");
+            case 200:
+                return true;
+            case 401:
+                throw new UnauthorisedAccessApiException();
+            case 503:
+                throw new ServerNotReadyApiException("Too many requests. Trying again...");
+            default:
+                throw new UnknownResponseApiException("Response Code: " + responseCode
+                        + "\nIf the problem persists please contact the developer. Trying again...");
         }
+    }
+
+    /**
+     * Authenticate API key and update data if it is valid. If it is invalid, the previous API key will be kept.
+     * No data loading required afterwards.
+     *
+     * @param apiKeyInput API key to validate.
+     * @return true if authentication is successful.
+     */
+    public boolean isApiAuthenticated(String apiKeyInput) {
+        String originalApiKey = apiKey;
+        apiKey = apiKeyInput;
+        boolean isSuccess = false;
+        asyncExecuteRequest();
+        try {
+            fetchData();
+            isSuccess = true;
+        } catch (EmptyResponseException | UnauthorisedAccessApiException | FileWriteException | IOException e) {
+            System.out.println(e.getMessage());
+            apiKey = originalApiKey;
+        }
+        return isSuccess;
     }
 
     /**
