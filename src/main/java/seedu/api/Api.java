@@ -1,7 +1,6 @@
 package seedu.api;
 
 import static seedu.common.CommonData.API_KEY_DEFAULT;
-import static seedu.common.CommonFiles.API_KEY_FILE;
 import static seedu.common.CommonFiles.LTA_BASE_URL;
 
 import java.io.IOException;
@@ -102,15 +101,15 @@ public class Api {
     private boolean isValidResponse(int responseCode)
             throws UnauthorisedAccessApiException, ServerNotReadyApiException, UnknownResponseApiException {
         switch (responseCode) {
-            case 200:
-                return true;
-            case 401:
-                throw new UnauthorisedAccessApiException();
-            case 503:
-                throw new ServerNotReadyApiException("Too many requests. Trying again...");
-            default:
-                throw new UnknownResponseApiException("Response Code: " + responseCode
-                        + "\nIf the problem persists please contact the developer. Trying again...");
+        case 200:
+            return true;
+        case 401:
+            throw new UnauthorisedAccessApiException();
+        case 503:
+            throw new ServerNotReadyApiException("Too many requests. Trying again...");
+        default:
+            throw new UnknownResponseApiException("Response Code: " + responseCode
+                    + "\nIf the problem persists please contact the developer. Trying again...");
         }
     }
 
@@ -177,7 +176,8 @@ public class Api {
      * @throws NoFileFoundException If directory / file is not found.
      * @throws EmptySecretFileException If the file is empty.
      */
-    public void loadApiKey(String file, String directory, boolean toloadDefault) throws NoFileFoundException, EmptySecretFileException {
+    public void loadApiKey(String file, String directory, boolean toloadDefault)
+            throws NoFileFoundException, EmptySecretFileException {
         try {
             String key = FileReader.readStringFromTxt(file, directory, true);
             if (key.isEmpty()) {

@@ -17,7 +17,6 @@ import seedu.exception.FileWriteException;
 import seedu.exception.NoCarparkFoundException;
 import seedu.exception.NoCommandArgumentException;
 import seedu.exception.ParkingException;
-import seedu.exception.UnneededArgumentsException;
 import seedu.parser.Command;
 import seedu.parser.Parser;
 import seedu.ui.Ui;
