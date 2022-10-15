@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.duke.parser.ParameterParser.containNumeric;
 
 public class UtilitiesTest {
+    //@@author chinhan99
     @Test
     public void containNumeric_IfContainsNumeric_ReturnTrue() {
         boolean testOutputContainsNumber = containNumeric("Food1");

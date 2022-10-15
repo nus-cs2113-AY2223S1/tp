@@ -34,6 +34,7 @@ public class FindCommand extends Command {
     public static final String COMMAND_DETAILED_HELP = COMMAND_HELP + COMMAND_PARAMETERS_INFO
             + LINE_SEPARATOR;
 
+    //@@author chydarren
     protected String keywords;
 
     /**
@@ -79,6 +80,7 @@ public class FindCommand extends Command {
         ui.showTransactionsList(transactionsList, INFO_LIST_FILTERED.toString());
     }
 
+    //@@author paullowse
     /**
      * Enables the program to exit when the Bye command is issued.
      *

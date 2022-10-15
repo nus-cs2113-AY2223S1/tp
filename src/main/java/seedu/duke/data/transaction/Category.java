@@ -1,6 +1,7 @@
 package seedu.duke.data.transaction;
 
 public class Category {
+    //@@author chydarren
     private static final String PREFIX_CATEGORY = "[";
     private static final String POSTFIX_CATEGORY = "]";
     private static final String SYMBOL_DOLLAR = "$";

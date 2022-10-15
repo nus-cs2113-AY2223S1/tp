@@ -34,11 +34,14 @@ public class PurgeCommand extends Command {
     public static final String COMMAND_DETAILED_HELP = COMMAND_HELP + COMMAND_PARAMETERS_INFO
             + LINE_SEPARATOR;
 
-    private static final Logger theLogger = Logger.getLogger(AddCommand.class.getName());
+    //@@author brian-vb
+    private static final Logger purgeLogger = Logger.getLogger(AddCommand.class.getName());
 
+    //@@author paullowse
     public PurgeCommand() {
     }
 
+    //@@author brian-vb
     /**
      * Executes the operations related to the command.
      *
@@ -49,18 +52,18 @@ public class PurgeCommand extends Command {
     @Override
     public void execute(TransactionList transactions, Ui ui, Storage storage) {
         // Shows confirmation prompt before deleting all transactions
-        theLogger.setLevel(Level.WARNING);
-        theLogger.log(Level.INFO, "Purge Command checks if there are no transactions"
+        purgeLogger.setLevel(Level.WARNING);
+        purgeLogger.log(Level.INFO, "Purge Command checks if there are no transactions"
                 + " to be purged. If so, the command is aborted.");
         boolean check = isEmpty(transactions);
         if (check) {
             Ui.showInfoMessage(INFO_PURGE_EMPTY.toString());
-            theLogger.log(Level.INFO, "The transactions list is found to be empty"
+            purgeLogger.log(Level.INFO, "The transactions list is found to be empty"
                     + " and the UI should display that information to the user respectively.");
             return;
         }
         Ui.showInfoMessage(INFO_PURGE_WARNING.toString());
-        theLogger.log(Level.INFO, "The UI should display a confirmation prompt"
+        purgeLogger.log(Level.INFO, "The UI should display a confirmation prompt"
                 + " for which the User would need to respond.");
         String input = ui.readCommand();
 
@@ -68,16 +71,16 @@ public class PurgeCommand extends Command {
             TransactionList.purgeTransactions();
             assert PurgeCommand.isEmpty(transactions);
             Ui.showInfoMessage(INFO_PURGE.toString());
-            theLogger.log(Level.INFO, "The transactions list is now empty"
+            purgeLogger.log(Level.INFO, "The transactions list is now empty"
                     + " and the UI should display that information to the user respectively.");
-            theLogger.log(Level.INFO, "The end of the Purge Command.");
+            purgeLogger.log(Level.INFO, "The end of the Purge Command.");
             return;
         }
 
         Ui.showInfoMessage(INFO_PURGE_ABORT.toString());
-        theLogger.log(Level.INFO, "The user would have responded to not proceed with the command"
+        purgeLogger.log(Level.INFO, "The user would have responded to not proceed with the command"
                 + " and the UI should display that information to abort the command respectively.");
-        theLogger.log(Level.INFO, "The end of the Purge Command.");
+        purgeLogger.log(Level.INFO, "The end of the Purge Command.");
     }
 
     public static boolean isEmpty(TransactionList transactions) {
@@ -88,6 +91,7 @@ public class PurgeCommand extends Command {
         return false;
     }
 
+    //@@author paullowse
     /**
      * Enables the program to exit when the Bye command is issued.
      *

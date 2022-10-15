@@ -6,10 +6,12 @@ import seedu.duke.exception.MoolahException;
 import seedu.duke.parser.CommandParser;
 
 public class Duke {
+    //@@author paullowse
     private Storage storage;
     private TransactionList transactions;
     private Ui ui;
 
+    //@@author chinhan99
     public Duke() { // TODO: Add a file path when implementing storage feature
         ui = new Ui();
         transactions = new TransactionList();
@@ -24,6 +26,7 @@ public class Duke {
         }**/
     }
 
+    //@@author paullowse
     public void run() {
         ui.showGreeting();
         boolean isExit = false;

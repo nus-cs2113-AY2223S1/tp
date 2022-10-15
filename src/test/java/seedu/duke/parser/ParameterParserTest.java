@@ -11,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ParameterParserTest {
 
+    //@@author chinhan99
     @Test
     public void execute_InvalidCategory_ExpectedException() {
         AddCommand addCommand = new AddCommand();
@@ -45,6 +46,7 @@ public class ParameterParserTest {
         );
     }
 
+    //@@author wcwy
     @Test
     public void parse_AddCommandEmptyDate_ExpectedException() {
         AddCommand addCommand = new AddCommand();
