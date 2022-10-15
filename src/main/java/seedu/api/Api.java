@@ -1,5 +1,6 @@
 package seedu.api;
 
+import static seedu.common.CommonData.API_KEY_DEFAULT;
 import static seedu.common.CommonFiles.LTA_BASE_URL;
 
 import java.io.IOException;
@@ -33,7 +34,7 @@ public class Api {
     private final Ui ui;
     private HttpRequest request;
     private CompletableFuture<HttpResponse<String>> responseFuture;
-    private String apiKey = "1B+7tBxzRNOtFbTxGcCiYA==";
+    private String apiKey = "";
 
     /**
      * Constructor to create a new client and the correct HTTP request.
@@ -169,13 +170,17 @@ public class Api {
      * Reads API key from secret.txt file and loads it to the object.
      * If secret.txt does not exist, create it.
      *
-     * @throws NoFileFoundException     If directory / file is not found.
+     * @param file file name of where the api key is stored.
+     * @param directory directory where the file is stored.
+     * @param toloadDefault to load default api key or not.
+     * @throws NoFileFoundException If directory / file is not found.
      * @throws EmptySecretFileException If the file is empty.
      */
-    public void loadApiKey(String file, String directory) throws NoFileFoundException, EmptySecretFileException {
+    public void loadApiKey(String file, String directory, boolean toloadDefault) throws NoFileFoundException, EmptySecretFileException {
         try {
             String key = FileReader.readStringFromTxt(file, directory, true);
             if (key.isEmpty()) {
+                apiKey =  toloadDefault ? API_KEY_DEFAULT : "";
                 throw new EmptySecretFileException(directory);
             }
             apiKey = key;
