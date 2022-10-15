@@ -75,8 +75,13 @@ public class ExpenseManager {
         }
     }
 
-    public void updateExpenses(ArrayList<Expense> expenses) {
-        this.expenses = expenses;
+    public void deleteRemarks(int expenseIndex) throws ExpenseManagerExpenseNotFoundException {
+        try {
+            Expense expense = expenses.get(expenseIndex);
+            expense.setRemarks(null);
+        } catch (IndexOutOfBoundsException exception) {
+            throw new ExpenseManagerExpenseNotFoundException(Messages.EXPENSE_MANAGER_ERROR_EXPENSE_NOT_FOUND);
+        }
     }
 
     public void updateSortExpenses(ConsoleCommandSortExpense commandSortExpense) {
@@ -88,4 +93,6 @@ public class ExpenseManager {
     public ConsoleCommandSortExpense getSortCommandSetting() {
         return sortCommandSetting;
     }
+
+
 }

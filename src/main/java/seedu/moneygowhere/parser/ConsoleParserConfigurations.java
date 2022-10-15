@@ -36,6 +36,10 @@ public class ConsoleParserConfigurations {
     public static final String COMMAND_ADD_EXPENSE_ARG_CATEGORY_LONG = "category";
     public static final String COMMAND_ADD_EXPENSE_ARG_CATEGORY_DESC = "Category";
     public static final boolean COMMAND_ADD_EXPENSE_ARG_CATEGORY_HAS_VAL = true;
+    public static final String COMMAND_ADD_EXPENSE_ARG_REMARKS = "r";
+    public static final String COMMAND_ADD_EXPENSE_ARG_REMARKS_LONG = "remarks";
+    public static final String COMMAND_ADD_EXPENSE_ARG_REMARKS_DESC = "remarks";
+    public static final boolean COMMAND_ADD_EXPENSE_ARG_REMARKS_HAS_VAL = true;
     public static final String COMMAND_ADD_EXPENSE_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS = ""
             + "Command Add-Expense does not have all of the required options.";
 
@@ -93,6 +97,10 @@ public class ConsoleParserConfigurations {
     public static final String COMMAND_EDIT_EXPENSE_ARG_CATEGORY_LONG = "category";
     public static final String COMMAND_EDIT_EXPENSE_ARG_CATEGORY_DESC = "Category";
     public static final boolean COMMAND_EDIT_EXPENSE_ARG_CATEGORY_HAS_VAL = true;
+    public static final String COMMAND_EDIT_EXPENSE_ARG_REMARKS = "r";
+    public static final String COMMAND_EDIT_EXPENSE_ARG_REMARKS_LONG = "remarks";
+    public static final String COMMAND_EDIT_EXPENSE_ARG_REMARKS_DESC = "remarks";
+    public static final boolean COMMAND_EDIT_EXPENSE_ARG_REMARKS_HAS_VAL = true;
     public static final String COMMAND_EDIT_EXPENSE_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS = ""
             + "Command Edit-Expense does not have all of the required options.";
 
@@ -233,6 +241,12 @@ public class ConsoleParserConfigurations {
                 COMMAND_ADD_EXPENSE_ARG_CATEGORY_HAS_VAL,
                 COMMAND_ADD_EXPENSE_ARG_CATEGORY_DESC
         );
+        Option optionRemarks = new Option(
+                COMMAND_ADD_EXPENSE_ARG_REMARKS,
+                COMMAND_ADD_EXPENSE_ARG_REMARKS_LONG,
+                COMMAND_ADD_EXPENSE_ARG_REMARKS_HAS_VAL,
+                COMMAND_ADD_EXPENSE_ARG_REMARKS_DESC
+        );
 
         Options options = new Options();
         options.addOption(optionName);
@@ -240,6 +254,7 @@ public class ConsoleParserConfigurations {
         options.addOption(optionDateTime);
         options.addOption(optionDescription);
         options.addOption(optionCategory);
+        options.addOption(optionRemarks);
 
         return options;
     }
@@ -331,6 +346,12 @@ public class ConsoleParserConfigurations {
                 COMMAND_EDIT_EXPENSE_ARG_CATEGORY_HAS_VAL,
                 COMMAND_EDIT_EXPENSE_ARG_CATEGORY_DESC
         );
+        Option optionRemarks = new Option(
+                COMMAND_EDIT_EXPENSE_ARG_REMARKS,
+                COMMAND_EDIT_EXPENSE_ARG_REMARKS_LONG,
+                COMMAND_EDIT_EXPENSE_ARG_REMARKS_HAS_VAL,
+                COMMAND_EDIT_EXPENSE_ARG_REMARKS_DESC
+        );
 
         Options options = new Options();
         options.addOption(optionExpenseIndex);
@@ -339,6 +360,7 @@ public class ConsoleParserConfigurations {
         options.addOption(optionDescription);
         options.addOption(optionAmount);
         options.addOption(optionCategory);
+        options.addOption(optionRemarks);
 
         return options;
     }
