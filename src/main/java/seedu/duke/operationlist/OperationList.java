@@ -13,7 +13,7 @@ public abstract class OperationList extends Parser {
     protected static ArrayList<PassengerInfo> passengers = new ArrayList<>();
     protected static Ui ui = new Ui();
 
-    public abstract void addOperation(String detail);
+    public abstract void addOperation(String detail) throws SkyControlException;
 
     public abstract void deleteOperation(String detail) throws SkyControlException;
 

@@ -17,6 +17,7 @@ public class PassengerList extends OperationList {
     protected static boolean isNamePresent = false;
     protected static boolean isFlightNumberPresent = false;
     protected static boolean isSeatNumberPresent = false;
+    protected static boolean isDepartureTimePresent = false;
     protected static boolean isSuccess = false;
     protected String name;
     protected String departureDate;
@@ -34,13 +35,21 @@ public class PassengerList extends OperationList {
     }
 
     @Override
-    public void addOperation(String passengerDetail) {
+    public void addOperation(String passengerDetail) throws SkyControlException {
+        getNumberOfPassengers();
+        for (int i = 0; i < numOfPassengers; i++) {
+            validatePassenger(i);
+            if (isFlightNumberPresent && isSeatNumberPresent && isDepartureTimePresent) {
+                throw new SkyControlException(ui.getDuplicatePassengerError());
+            }
+        }
         getPassengerDetails(passengerDetail);
         PassengerInfo passenger = new PassengerInfo(name, departureDate,
                 departureTime, flightNumber, gateNumber, boardingGroup, seatNumber, boardingTime);
         passengers.add(passenger);
         Ui.showAddedPassenger(passenger);
     }
+    //make sure all fields are present in the correct sequence
 
     @Override
     public void deleteOperation(String passengerDetail) throws SkyControlException {
@@ -50,7 +59,7 @@ public class PassengerList extends OperationList {
         getSeatNumber(passengerDetail);
         for (int i = 0; i < numOfPassengers; i++) {
             validatePassenger(i);
-            if (isNamePresent && isFlightNumberPresent && isSeatNumberPresent) {
+            if (isNamePresent && isFlightNumberPresent && isSeatNumberPresent && isDepartureTimePresent) {
                 passengers.remove(i);
                 getNumberOfPassengers();
                 Ui.showDeleteMessage(name, flightNumber, seatNumber, numOfPassengers);
@@ -85,6 +94,7 @@ public class PassengerList extends OperationList {
         isNamePresent = passengers.get(index).getName().contains(name);
         isFlightNumberPresent = passengers.get(index).getFlightNumber().contains(flightNumber);
         isSeatNumberPresent = passengers.get(index).getSeatNumber().contains(seatNumber);
+        isDepartureTimePresent = passengers.get(index).getDepartureTime().contains(departureTime);
     }
 
     public void getNumberOfPassengers() {
@@ -131,8 +141,16 @@ public class PassengerList extends OperationList {
     }
 
     private void getDepartureTime(String passengerDetail) {
-        departureTime = getSubstringBetweenDelimiters(passengerDetail,
-                DEPARTURE_TIME_DELIMITER, FLIGHT_NUMBER_DELIMITER);
+        if (isAdd) {
+            departureTime = getSubstringBetweenDelimiters(passengerDetail,
+                    DEPARTURE_TIME_DELIMITER, FLIGHT_NUMBER_DELIMITER);
+        } else if (isDelete) {
+            startIndex = passengerDetail.indexOf(DEPARTURE_TIME_DELIMITER)
+                    + DEPARTURE_TIME_DELIMITER.length();
+            assert startIndex >= 0;
+            departureTime = passengerDetail.substring(startIndex);
+            departureTime = departureTime.toUpperCase();
+        }
     }
 
     private void getFlightNumber(String passengerDetail) {
@@ -162,11 +180,8 @@ public class PassengerList extends OperationList {
             seatNumber = getSubstringBetweenDelimiters(passengerDetail,
                     SEAT_NUMBER_DELIMITER, BOARDING_TIME_DELIMITER);
         } else if (isDelete) {
-            startIndex = passengerDetail.indexOf(SEAT_NUMBER_DELIMITER)
-                    + SEAT_NUMBER_DELIMITER.length();
-            assert startIndex >= 0;
-            seatNumber = passengerDetail.substring(startIndex);
-            seatNumber = seatNumber.toUpperCase();
+            seatNumber = getSubstringBetweenDelimiters(passengerDetail,
+                    SEAT_NUMBER_DELIMITER, DEPARTURE_TIME_DELIMITER);
         }
     }
 
@@ -174,7 +189,7 @@ public class PassengerList extends OperationList {
         startIndex = passengerDetail.indexOf(BOARDING_TIME_DELIMITER)
                 + BOARDING_TIME_DELIMITER.length();
         assert startIndex >= 0;
-        boardingTime = passengerDetail.substring(startIndex);
+        boardingTime = passengerDetail.substring(startIndex).toUpperCase();
     }
 
     private String getSubstringBetweenDelimiters(String inputString, String startDelimiter, String endDelimiter) {

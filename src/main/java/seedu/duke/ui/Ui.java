@@ -80,6 +80,10 @@ public class Ui {
                 + "or his/her \ndetail have been input incorrectly.";
     }
 
+    public String getDuplicatePassengerError() {
+        return "Unable to add Passenger. Seat number is already occupied on the flight!";
+    }
+
     public String getOperationError() {
         return "Input a valid operation, please try again.";
     }

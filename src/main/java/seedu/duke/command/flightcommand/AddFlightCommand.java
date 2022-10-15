@@ -36,6 +36,10 @@ public class AddFlightCommand extends Command {
 
     @Override
     public void execute(OperationList flights, String lineInput) {
-        flights.addOperation(lineInput);
+        try {
+            flights.addOperation(lineInput);
+        } catch (SkyControlException e) {
+            ui.showError(e.getMessage());
+        }
     }
 }
