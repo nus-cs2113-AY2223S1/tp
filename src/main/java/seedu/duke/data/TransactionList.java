@@ -14,11 +14,14 @@ import java.util.ArrayList;
  * These operations include adding, listing, modifying, deleting and purging.
  */
 public class TransactionList {
+    //@@author chydarren
     private static final String EMPTY_STRING = "";
     private static final String LINE_SEPARATOR = System.lineSeparator();
 
+    //@@author chinhan99
     private static ArrayList<Transaction> transactions;
 
+    //@@author wcwy
     /**
      * Initialises the variables of the TransactionList class.
      */
@@ -26,6 +29,7 @@ public class TransactionList {
         this.transactions = new ArrayList<>();
     }
 
+    //@@author brian-vb
     /**
      * Gets a specific entry from the transactions list, to be used by other classes.
      *
@@ -57,6 +61,7 @@ public class TransactionList {
         return transaction.toString();
     }
 
+    //@@author wcwy
     /**
      * Adds a transaction of class type Expense into the transactions list.
      *
@@ -87,6 +92,7 @@ public class TransactionList {
         return income.toString();
     }
 
+    //@@author chydarren
     /**
      * Checks whether the transaction belongs to the Income or Expense class type.
      *
@@ -161,6 +167,7 @@ public class TransactionList {
         return transactionsList;
     }
 
+    //@@author brian-vb
     /**
      * Purges all records in the transactions list.
      */

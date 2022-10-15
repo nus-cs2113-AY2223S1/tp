@@ -31,6 +31,7 @@ public class HelpCommand extends Command {
     // Detailed help description
     public static final String COMMAND_DETAILED_HELP = COMMAND_HELP + COMMAND_PARAMETERS_INFO + "\n";
 
+    //@@author wcwy
     private boolean isDetailed;
 
     /**
@@ -105,6 +106,7 @@ public class HelpCommand extends Command {
         return helpMessage;
     }
 
+    //@@author paullowse
     /**
      * Enables the program to exit when the Bye command is issued.
      *

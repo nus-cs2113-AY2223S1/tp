@@ -11,7 +11,6 @@ import java.time.LocalDate;
  * Represents an object that can be inherited by other command objects.
  */
 public abstract class Command {
-
     // The command word used to trigger the execution of Moolah Manager's operations
     public static String COMMAND_WORD;
     // The description for the usage of command
@@ -21,6 +20,7 @@ public abstract class Command {
     // The formatting information for the parameters used by the command
     public static String COMMAND_PARAMETERS_INFO;
 
+    //@@author paullowse
     /**
      * Get the default mandatory tags of the command (no mandatory tag).
      * To be overridden by subclasses which the command requires mandatory tag.

@@ -21,6 +21,7 @@ public enum ErrorMessages {
     ERROR_STATS_COMMAND_INVALID_STATSTYPE("Type of statistics given is invalid, please check your input!"),
     ERROR_UNKNOWN_HELP_OPTION("The parameter used for help option is unknown, please check your input!");
 
+    //@@author chydarren
     public final String message;
 
     /**

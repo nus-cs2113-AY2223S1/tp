@@ -26,12 +26,14 @@ import java.util.logging.Logger;
  * such that the command object will be ready for an execution.
  */
 public class CommandParser {
+    //@@author chydarren
     private static final String EMPTY_STRING = "";
     private static final String DELIMITER = " ";
     private static final int SPLIT_POSITION = 2;
 
     private static final Logger parserLogger = Logger.getLogger(ParameterParser.class.getName());
 
+    //@@author wcwy
     /**
      * Parses the user input into Command class based on the command word.
      *
@@ -62,6 +64,7 @@ public class CommandParser {
         return command;
     }
 
+    //@@author chydarren
     /**
      * Splits the user input into two parts, i.e. the command word and the parameter(s).
      *
@@ -79,6 +82,7 @@ public class CommandParser {
         return inputTokens;
     }
 
+    //@@author paullowse
     /**
      * Creates a Command object based on the command word entered by user.
      *

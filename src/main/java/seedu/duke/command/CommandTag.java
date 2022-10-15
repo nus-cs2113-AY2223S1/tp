@@ -1,6 +1,7 @@
 package seedu.duke.command;
 
 public class CommandTag {
+    //@@author wcwy
     public static final String COMMAND_TAG_TRANSACTION_TYPE = "t/";
     public static final String COMMAND_TAG_TRANSACTION_CATEGORY = "c/";
     public static final String COMMAND_TAG_TRANSACTION_AMOUNT = "a/";

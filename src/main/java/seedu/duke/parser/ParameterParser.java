@@ -46,17 +46,17 @@ import static seedu.duke.common.DateFormats.DATE_INPUT_PATTERN;
  * and to store the parsed value inside the command object.
  */
 public class ParameterParser {
+    //@@author chydarren
     private static final String EMPTY_STRING = "";
     private static final String DELIMITER = " ";
     private static final int SPLIT_POSITION = 2;
     private static final int MINIMUM_TAG_LENGTH = 2;
-
     private static final String CLASS_TYPE_EXPENSE = "seedu.duke.data.transaction.Expense";
     private static final String CLASS_TYPE_INCOME = "seedu.duke.data.transaction.Income";
-
+    //@@author wcwy
     private static final Logger parserLogger = Logger.getLogger(ParameterParser.class.getName());
 
-
+    //@@author chinhan99
     /**
      * Parses the parameters input into proper parameters of the command object.
      *
@@ -98,6 +98,7 @@ public class ParameterParser {
         parserLogger.log(Level.INFO, "Parameter parsed successfully: " + command + parametersInput);
     }
 
+    //@@author wcwy
     /**
      * Checks if all the mandatory tags exists in the split user inputs.
      *
@@ -116,6 +117,7 @@ public class ParameterParser {
         }
     }
 
+    //@@author chinhan99
     /**
      * Checks if the split user inputs contains any unsupported tag.
      *
@@ -146,6 +148,7 @@ public class ParameterParser {
         }
     }
 
+    //@@author wcwy
     /**
      * Checks if the split user inputs contains a tag multiple times.
      *
@@ -167,13 +170,13 @@ public class ParameterParser {
         }
     }
 
+    //@@author chinhan99
     /**
      * Checks if there are missing parameter within the user input.
      * If the split.length() is <= 2, it means that only the tag exists , and there is no parameter after the tag.
      *
      * @param splits The user input after the command word, split into a list for every space found.
      * @throws EmptyParameterException If there exists a tag without parameter.
-     * @author chinhan99
      */
     private static void checkParameterNotEmpty(String[] splits) throws EmptyParameterException {
         for (String split : splits) {
@@ -184,6 +187,7 @@ public class ParameterParser {
         }
     }
 
+    //@@author wcwy
     /**
      * Returns a boolean value on whether a tag can be found among the split user inputs.
      *
@@ -202,6 +206,7 @@ public class ParameterParser {
         return hasFound;
     }
 
+    //@@author chinhan99
     /**
      * Returns a boolean value on whether a tag can be found among the split user inputs.
      *
@@ -223,6 +228,7 @@ public class ParameterParser {
         return hasFound;
     }
 
+    //@@author paullowse
     /**
      * For each split parameters, split it into tag and parameter, then check and set the parameters into the Command.
      *
@@ -239,6 +245,7 @@ public class ParameterParser {
         }
     }
 
+    //@@author wcwy
     private static void setParameter(Command command, String tag, String parameter) throws MoolahException {
         switch (tag) {
         case COMMAND_TAG_TRANSACTION_TYPE:
@@ -276,13 +283,13 @@ public class ParameterParser {
         }
     }
 
+    //@@author chydarren
     /**
      * Parses the user parameter input for the description and returns it.
      *
      * @param parameter The user input after the user tag.
      * @return The class type if no exceptions are thrown.
      * @throws InputTransactionUnknownTypeException If the transaction type provided is not supported.
-     * @author chydarren
      */
     public static String parseTypeTagForListing(String parameter) throws InputTransactionUnknownTypeException {
         switch (parameter) {
@@ -296,13 +303,13 @@ public class ParameterParser {
         }
     }
 
+    //@@author wcwy
     /**
      * Check if the type parameter is a valid transaction type and returns the parameter if it is valid.
      *
      * @param parameter The user input after the user tag.
      * @return The user input after the user tag.
      * @throws InputTransactionUnknownTypeException If the transaction type provided is not supported.
-     * @author wcwy
      */
     public static String parseTypeTagForAdding(String parameter) throws InputTransactionUnknownTypeException {
         boolean isExpense = parameter.equals(Expense.TRANSACTION_NAME);
@@ -316,13 +323,13 @@ public class ParameterParser {
         return parameter;
     }
 
+    //@@author chinhan99
     /**
      * Parses the user parameter input for the description and returns it.
      *
      * @param parameter The user input after the user tag.
      * @return The category parameter if no exceptions are thrown.
      * @throws InputTransactionInvalidCategoryException If the category provided contains numeric or symbols.
-     * @author chinhan99
      */
     public static String parseCategoryTag(String parameter) throws InputTransactionInvalidCategoryException {
         Pattern specialSymbols = Pattern.compile("[!@#$%&*()_+=|<>?{}\\[\\]~-]");
@@ -341,7 +348,6 @@ public class ParameterParser {
      * @param parameter The user input after the user tag.
      * @return The amount integer if no exceptions are thrown.
      * @throws AddTransactionInvalidAmountException If the transaction amount provided is not a valid accepted integer.
-     * @author chinhan99
      */
     private static int parseAmountTag(String parameter) throws AddTransactionInvalidAmountException {
         Pattern specialSymbols = Pattern.compile("[!@#$%&*()_+=|<>?{}\\[\\]~-]");
@@ -366,13 +372,13 @@ public class ParameterParser {
         }
     }
 
+    //@@author wcwy
     /**
      * Parses the user parameter input for date into a LocalDate object and returns it.
      *
      * @param parameter The user input after the user tag.
      * @return The LocalDate object parsed from user input given.
      * @throws InputTransactionInvalidDateException If the format of the transaction date provided is incorrect.
-     * @author wcwy
      */
     public static LocalDate parseDateTag(String parameter) throws InputTransactionInvalidDateException {
         try {
@@ -385,20 +391,19 @@ public class ParameterParser {
         }
     }
 
+    //@@author brian-vb
     /**
      * Parses the user parameter input for entry number into an integer and returns it.
      *
      * @param parameter The user input after the user tag.
      * @return The valid integer for list index parsed from user input given.
      * @throws MoolahException If the entry number provided is not parsable into integer.
-     * @author brian-vb
      */
     public static int parseEntryTag(String parameter) throws MoolahException {
         int index;
         try {
             index = Integer.parseInt(parameter);
         } catch (NumberFormatException e) {
-
             parserLogger.log(Level.WARNING, "An invalid entry number error is caught for the given parameter: "
                     + parameter);
             throw new EntryNumberNotNumericException();
@@ -407,13 +412,13 @@ public class ParameterParser {
         return index;
     }
 
+    //@@author wcwy
     /**
      * Return a boolean value indicating if the option selected by user is "detailed".
      *
      * @param parameter The user input after the user tag.
      * @return A boolean value indicating if the option selected by user is "detailed"
      * @throws UnknownHelpOptionException If the help option parameter selected is not 'detailed'.
-     * @author wcwy
      */
     public static boolean parseHelpOptionTag(String parameter) throws UnknownHelpOptionException {
         boolean isValidHelpOption = parameter.equals("detailed");
@@ -426,13 +431,13 @@ public class ParameterParser {
         }
     }
 
+    //@@author chydarren
     /**
      * Check if the type parameter is a valid statistic type and returns the parameter if it is valid.
      *
      * @param parameter The user input after the user tag.
      * @return The statistic type.
      * @throws ListStatisticsInvalidStatsTypeException If the statistic type given is not supported.
-     * @author chydarren
      */
     public static String parseStatsTypeTag(String parameter) throws ListStatisticsInvalidStatsTypeException {
         String statsType;
@@ -448,13 +453,12 @@ public class ParameterParser {
         return statsType;
     }
 
-
+    //@@author chinhan99
     /**
      * Checks if the parameter contains numeric characters.
      *
      * @param parameter The user input after the user tag.
      * @return A boolean value indicating whether there are numeric characters within the parameter.
-     * @author chinhan99
      */
     public static boolean containNumeric(String parameter) {
         char[] characters = parameter.toCharArray();
@@ -471,7 +475,6 @@ public class ParameterParser {
      *
      * @param parameter The user input after the user tag.
      * @return true if there are alphabetical characters within the parameter.
-     * @author chinhan99
      */
     public static boolean containAlphabet(String parameter) {
         char[] characters = parameter.toCharArray();

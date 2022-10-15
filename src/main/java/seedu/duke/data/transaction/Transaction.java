@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 import static seedu.duke.common.DateFormats.DATE_OUTPUT_PATTERN;
 
 public class Transaction {
+    //@@author chydarren
     private static final String PREFIX_CATEGORY = "[";
     private static final String POSTFIX_CATEGORY = "]";
     private static final String SYMBOL_DOLLAR = "$";
@@ -13,6 +14,7 @@ public class Transaction {
     private static final String TEXT_AT = "at";
     private static final String TEXT_DESCRIPTION = "Description:";
 
+    //@@author chinhan99
     private String category;
     private String description;
     private int amount;
@@ -53,6 +55,7 @@ public class Transaction {
         return date;
     }
 
+    //@@author wcwy
     public String printFormattedDate() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_OUTPUT_PATTERN.toString());
         return date.format(formatter);
