@@ -1,16 +1,17 @@
 package seedu.duke.operationlist;
 
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+
 import seedu.duke.parsers.Parser;
 import seedu.duke.command.Command;
 import seedu.duke.exceptions.SkyControlException;
 
 
-
-
 public class PassengerListTest {
+
     protected static String addLineInput = "passenger add n/Ivan dod/08011998 dt/2145 fn/sq832 "
             + "gn/05 bg/01 sn/17d bt/2100";
     protected static String lineInputWithError = "passenger delete n/Ivan";
@@ -24,7 +25,7 @@ public class PassengerListTest {
 
     @Test
     void checkAddOperation() throws SkyControlException {
-        Command testCommand = parserTest.parse(addLineInput);
+        Command testCommand = Parser.parse(addLineInput);
         testCommand.execute(testPassengerList, addLineInput);
         testPassengerList.getNumberOfPassengers();
         assertEquals(1, testPassengerList.numOfPassengers);
@@ -41,7 +42,7 @@ public class PassengerListTest {
     @Test
     void deletionWithout_relevantFields_exceptionThrown() {
         try {
-            Command testCommand = parserTest.parse(lineInputWithError);
+            Command testCommand = Parser.parse(lineInputWithError);
             testCommand.execute(testPassengerList, lineInputWithError);
             fail();
         } catch (Exception e) {
@@ -51,7 +52,7 @@ public class PassengerListTest {
 
     @Test
     void checkDeleteOperation() throws SkyControlException {
-        Command testCommand = parserTest.parse(deleteLineInput);
+        Command testCommand = Parser.parse(deleteLineInput);
         testCommand.execute(testPassengerList, deleteLineInput);
         testPassengerList.getNumberOfPassengers();
         assertEquals(0, testPassengerList.numOfPassengers);

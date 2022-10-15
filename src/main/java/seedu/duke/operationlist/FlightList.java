@@ -5,6 +5,9 @@ import seedu.duke.exceptions.SkyControlException;
 
 public class FlightList extends OperationList {
     public static int flightIndex = 0;
+
+    private static final String FLIGHT_ADD_COMMAND = "flight add";
+    private static final String FLIGHT_DELETE_COMMAND = "flight delete";
     private static final String FLIGHT_NUMBER_DELIMITER = "fn/";
     private static final String AIRLINE_DELIMITER = "a/";
     private static final String DESTINATION_DELIMITER = "d/";
@@ -13,6 +16,8 @@ public class FlightList extends OperationList {
     private static final String TERMINAL_DELIMITER = "tl/";
     private static final String CHECK_IN_ROW_DELIMITER = "c/";
     private static final String END_OF_INPUT = "empty";
+
+    protected static int numOfFlights = 0;
 
     public static String checkCommandLength(String description) throws SkyControlException {
         if (description.isEmpty()) {
@@ -34,14 +39,15 @@ public class FlightList extends OperationList {
     @Override
     public void addOperation(String detail) {
         try {
-            checkCommandLength(detail.substring("flight add".length()));
-            String flightNum = extractDetail(detail, FLIGHT_NUMBER_DELIMITER, AIRLINE_DELIMITER);
-            String airline = extractDetail(detail, AIRLINE_DELIMITER, DESTINATION_DELIMITER);
-            String destination = extractDetail(detail, DESTINATION_DELIMITER, DEPARTURE_TIME_DELIMITER);
-            String departureTime = extractDetail(detail, DEPARTURE_TIME_DELIMITER, GATE_NUMBER_DELIMITER);
-            String gateNum = extractDetail(detail, GATE_NUMBER_DELIMITER, TERMINAL_DELIMITER);
-            String terminal = extractDetail(detail, TERMINAL_DELIMITER, CHECK_IN_ROW_DELIMITER);
-            String checkInRowAndDoor = extractDetail(detail, CHECK_IN_ROW_DELIMITER, END_OF_INPUT);
+            checkCommandLength(detail.substring(FLIGHT_ADD_COMMAND.length()));
+            String flightNum = extractDetail(detail, FLIGHT_NUMBER_DELIMITER, AIRLINE_DELIMITER).toUpperCase();
+            String airline = extractDetail(detail, AIRLINE_DELIMITER, DESTINATION_DELIMITER).toUpperCase();
+            String destination = extractDetail(detail, DESTINATION_DELIMITER, DEPARTURE_TIME_DELIMITER).toUpperCase();
+            String departureTime = extractDetail(detail, DEPARTURE_TIME_DELIMITER, GATE_NUMBER_DELIMITER).toUpperCase();
+            String gateNum = extractDetail(detail, GATE_NUMBER_DELIMITER, TERMINAL_DELIMITER).toUpperCase();
+            String terminal = extractDetail(detail, TERMINAL_DELIMITER, CHECK_IN_ROW_DELIMITER).toUpperCase();
+            String checkInRowAndDoor = extractDetail(detail, CHECK_IN_ROW_DELIMITER, END_OF_INPUT).toUpperCase();
+
             FlightInfo flight = new FlightInfo(flightNum, airline, destination,
                     departureTime, gateNum, terminal, checkInRowAndDoor);
             flights.add(flightIndex, flight);
@@ -53,13 +59,18 @@ public class FlightList extends OperationList {
         }
     }
 
+    public void getNumberOfFlights() {
+        assert numOfFlights >= 0;
+        numOfFlights = flights.size();
+    }
+
     @Override
     public void deleteOperation(String detail) {
         boolean isFlightFound;
         try {
-            checkCommandLength(detail.substring("flight delete".length()));
+            checkCommandLength(detail.substring(FLIGHT_DELETE_COMMAND.length()));
             checkValidFlightNumber(detail.substring("flight delete ".length()));
-            String flightNum = detail.substring("flight delete ".length());
+            String flightNum = detail.substring("flight delete ".length()).toUpperCase();
             isFlightFound = findAndRemoveFlight(flightNum);
             if (!isFlightFound) {
                 ui.showFlightNotFoundMessage(flightNum);
