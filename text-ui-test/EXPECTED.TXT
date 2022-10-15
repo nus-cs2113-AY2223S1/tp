@@ -12,6 +12,16 @@ Welcome to
 Passenger IVAN THENG of SQ832 17D has been added.
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+The system is unable to read your command, please try again.
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+The system is unable to read your command, please try again.
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Please fill up passenger details for all fields.
+ Invalid input. Try again!
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Unable to add Passenger. Seat number is already occupied on the flight!
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

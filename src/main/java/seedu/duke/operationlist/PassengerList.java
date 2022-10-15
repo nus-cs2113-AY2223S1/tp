@@ -13,6 +13,7 @@ public class PassengerList extends OperationList {
     protected static final String BOARDING_GROUP_DELIMITER = " bg/";
     protected static final String SEAT_NUMBER_DELIMITER = " sn/";
     protected static final String BOARDING_TIME_DELIMITER = " bt/";
+    protected static final String EMPTY_STRING = "";
     public static final int NO_PASSENGER = 0;
     protected static boolean isNamePresent = false;
     protected static boolean isFlightNumberPresent = false;
@@ -37,19 +38,19 @@ public class PassengerList extends OperationList {
     @Override
     public void addOperation(String passengerDetail) throws SkyControlException {
         getNumberOfPassengers();
+        getPassengerDetails(passengerDetail);
         for (int i = 0; i < numOfPassengers; i++) {
             validatePassenger(i);
             if (isFlightNumberPresent && isSeatNumberPresent && isDepartureTimePresent) {
                 throw new SkyControlException(ui.getDuplicatePassengerError());
             }
         }
-        getPassengerDetails(passengerDetail);
         PassengerInfo passenger = new PassengerInfo(name, departureDate,
                 departureTime, flightNumber, gateNumber, boardingGroup, seatNumber, boardingTime);
         passengers.add(passenger);
         Ui.showAddedPassenger(passenger);
     }
-    //make sure all fields are present in the correct sequence
+
 
     @Override
     public void deleteOperation(String passengerDetail) throws SkyControlException {
@@ -101,7 +102,7 @@ public class PassengerList extends OperationList {
         numOfPassengers = passengers.size();
     }
 
-    public void getPassengerDetails(String passengerDetail) {
+    public void getPassengerDetails(String passengerDetail) throws SkyControlException {
         getPassengerName(passengerDetail);
         getDepartureDate(passengerDetail);
         getDepartureTime(passengerDetail);
@@ -125,7 +126,7 @@ public class PassengerList extends OperationList {
         boardingTime = passengers.get(index).getBoardingTime();
     }
 
-    private void getPassengerName(String passengerDetail) {
+    private void getPassengerName(String passengerDetail) throws SkyControlException {
         if (isAdd) {
             name = getSubstringBetweenDelimiters(passengerDetail,
                     NAME_DELIMITER, DEPARTURE_DATE_DELIMITER);
@@ -135,12 +136,12 @@ public class PassengerList extends OperationList {
         }
     }
 
-    private void getDepartureDate(String passengerDetail) {
+    private void getDepartureDate(String passengerDetail) throws SkyControlException {
         departureDate = getSubstringBetweenDelimiters(passengerDetail,
                 DEPARTURE_DATE_DELIMITER, DEPARTURE_TIME_DELIMITER);
     }
 
-    private void getDepartureTime(String passengerDetail) {
+    private void getDepartureTime(String passengerDetail) throws SkyControlException {
         if (isAdd) {
             departureTime = getSubstringBetweenDelimiters(passengerDetail,
                     DEPARTURE_TIME_DELIMITER, FLIGHT_NUMBER_DELIMITER);
@@ -153,7 +154,7 @@ public class PassengerList extends OperationList {
         }
     }
 
-    private void getFlightNumber(String passengerDetail) {
+    private void getFlightNumber(String passengerDetail) throws SkyControlException {
         if (isAdd) {
             flightNumber = getSubstringBetweenDelimiters(passengerDetail,
                     FLIGHT_NUMBER_DELIMITER, GATE_NUMBER_DELIMITER);
@@ -163,19 +164,23 @@ public class PassengerList extends OperationList {
         }
     }
 
-    private void getGateNumber(String passengerDetail) {
+    private void getGateNumber(String passengerDetail) throws SkyControlException {
         gateNumber = getSubstringBetweenDelimiters(passengerDetail,
                 GATE_NUMBER_DELIMITER, BOARDING_GROUP_DELIMITER);
     }
 
-    private void getBoardingGroup(String passengerDetail) {
+    private void getBoardingGroup(String passengerDetail) throws SkyControlException {
         String boardingGroupDetail = getSubstringBetweenDelimiters(passengerDetail,
                 BOARDING_GROUP_DELIMITER, SEAT_NUMBER_DELIMITER);
-        boardingGroup = Integer.parseInt(boardingGroupDetail);
-        assert boardingGroup >= 0;
+        try {
+            boardingGroup = Integer.parseInt(boardingGroupDetail);
+        } catch (Exception e) {
+            throw new SkyControlException(ui.getErrorMessage());
+        }
+        assert boardingGroup >= 0 : "Invalid boarding group";
     }
 
-    private void getSeatNumber(String passengerDetail) {
+    private void getSeatNumber(String passengerDetail) throws SkyControlException {
         if (isAdd) {
             seatNumber = getSubstringBetweenDelimiters(passengerDetail,
                     SEAT_NUMBER_DELIMITER, BOARDING_TIME_DELIMITER);
@@ -185,17 +190,30 @@ public class PassengerList extends OperationList {
         }
     }
 
-    private void getBoardingTime(String passengerDetail) {
-        startIndex = passengerDetail.indexOf(BOARDING_TIME_DELIMITER)
-                + BOARDING_TIME_DELIMITER.length();
-        assert startIndex >= 0;
+    private void getBoardingTime(String passengerDetail) throws SkyControlException {
+        int indexOfBoardingTime = passengerDetail.indexOf(BOARDING_TIME_DELIMITER);
+        int indexOfSeatNumber = passengerDetail.indexOf(SEAT_NUMBER_DELIMITER);
+        if (indexOfBoardingTime < 0 || indexOfBoardingTime < indexOfSeatNumber) {
+            throw new SkyControlException(ui.getErrorMessage());
+        }
+        startIndex = indexOfBoardingTime + BOARDING_TIME_DELIMITER.length();
         boardingTime = passengerDetail.substring(startIndex).toUpperCase();
+        if (boardingTime.equals(EMPTY_STRING)) {
+            throw new SkyControlException(ui.getMissingDetailsError());
+        }
     }
 
-    private String getSubstringBetweenDelimiters(String inputString, String startDelimiter, String endDelimiter) {
+    private String getSubstringBetweenDelimiters(String inputString, String startDelimiter, String endDelimiter)
+            throws SkyControlException {
         int startIndex = inputString.indexOf(startDelimiter) + startDelimiter.length();
         int endIndex = inputString.lastIndexOf(endDelimiter);
-        String outputString = inputString.substring(startIndex, endIndex);
+        if (endIndex <= startIndex || endIndex < 0 || startIndex < 0) {
+            throw new SkyControlException(ui.getErrorMessage());
+        }
+        String outputString = inputString.substring(startIndex, endIndex).trim();
+        if (outputString.equals(EMPTY_STRING)) {
+            throw new SkyControlException(ui.getMissingDetailsError());
+        }
         return outputString.toUpperCase();
     }
 }

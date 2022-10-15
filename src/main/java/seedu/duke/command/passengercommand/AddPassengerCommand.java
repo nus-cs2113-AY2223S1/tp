@@ -39,7 +39,7 @@ public class AddPassengerCommand extends Command {
         try {
             getPassengerDetail(lineInput);
             passengers.addOperation(passengerDetail);
-        } catch (SkyControlException e) {
+        } catch (Exception e) {
             ui.showError(e.getMessage());
         }
     }

@@ -22,7 +22,6 @@ public class PassengerListTest {
             + "\nas he/she is not found in the passenger list "
             + "or his/her \ndetail have been input incorrectly.";
 
-
     @Test
     void checkAddOperation() throws SkyControlException {
         Command testCommand = Parser.parse(addLineInput);
@@ -37,17 +36,6 @@ public class PassengerListTest {
         assertEquals(1, testPassengerList.boardingGroup);
         assertEquals("17D", testPassengerList.seatNumber);
         assertEquals("2100", testPassengerList.boardingTime);
-    }
-
-    @Test
-    void deletionWithout_relevantFields_exceptionThrown() {
-        try {
-            Command testCommand = Parser.parse(lineInputWithError);
-            testCommand.execute(testPassengerList, lineInputWithError);
-            fail();
-        } catch (Exception e) {
-            assertEquals(e.getMessage(), e.getMessage());
-        }
     }
 
     @Test

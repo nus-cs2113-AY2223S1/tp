@@ -222,6 +222,10 @@ public class Ui {
     public void showWrongFlightFormatMessage() {
         System.out.println("Error: Flight number should start with 2 letters and trail with 1-4 numbers.");
     }
+
+    public String getMissingDetailsError() {
+        return "Please fill up passenger details for all fields.\n Invalid input. Try again!";
+    }
 }
 
 
