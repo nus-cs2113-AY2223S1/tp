@@ -179,7 +179,8 @@ public class ConsoleInterface {
                 consoleCommandAddExpense.getDateTime(),
                 consoleCommandAddExpense.getDescription(),
                 consoleCommandAddExpense.getAmount(),
-                consoleCommandAddExpense.getCategory());
+                consoleCommandAddExpense.getCategory(),
+                consoleCommandAddExpense.getRemarks());
         expenseManager.addExpense(expense);
 
         DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern(
@@ -191,6 +192,7 @@ public class ConsoleInterface {
         expenseStr += "Description   : " + expense.getDescription() + "\n";
         expenseStr += "Amount        : " + expense.getAmount() + "\n";
         expenseStr += "Category      : " + expense.getCategory() + "\n";
+        expenseStr += "Remarks       : " + expense.getRemarks() + "\n";
         printInformationalMessage(expenseStr);
 
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_ADD_EXPENSE_SUCCESS);
@@ -213,7 +215,8 @@ public class ConsoleInterface {
             expenseStr += "Date and Time : " + expense.getDateTime().format(dateTimeFormat) + "\n";
             expenseStr += "Description   : " + expense.getDescription() + "\n";
             expenseStr += "Amount        : " + expense.getAmount() + "\n";
-            expenseStr += "Category      : " + expense.getCategory();
+            expenseStr += "Category      : " + expense.getCategory() + "\n";
+            expenseStr += "Remarks       : " + expense.getRemarks() + "\n";
             printInformationalMessage(expenseStr);
         }
     }
@@ -236,7 +239,8 @@ public class ConsoleInterface {
         expenseStr += "Date and Time : " + expense.getDateTime().format(dateTimeFormat) + "\n";
         expenseStr += "Description   : " + expense.getDescription() + "\n";
         expenseStr += "Amount        : " + expense.getAmount() + "\n";
-        expenseStr += "Category      : " + expense.getCategory();
+        expenseStr += "Category      : " + expense.getCategory() + "\n";
+        expenseStr += "Remarks       : " + expense.getRemarks() + "\n";
         System.out.println(expenseStr);
     }
 
@@ -256,6 +260,7 @@ public class ConsoleInterface {
             expenseStr += "Description   : " + expense.getDescription() + "\n";
             expenseStr += "Amount        : " + expense.getAmount() + "\n";
             expenseStr += "Category      : " + expense.getCategory();
+            expenseStr += "Remarks       : " + expense.getRemarks() + "\n";
             printInformationalMessage(expenseStr);
         }
     }
@@ -319,8 +324,12 @@ public class ConsoleInterface {
         if (category == null) {
             category = oldExpense.getCategory();
         }
+        String remarks = consoleCommandEditExpense.getRemarks();
+        if (remarks == null) {
+            remarks = oldExpense.getRemarks();
+        }
 
-        Expense newExpense = new Expense(name, dateTime, description, amount, category);
+        Expense newExpense = new Expense(name, dateTime, description, amount, category, remarks);
         try {
             expenseManager.editExpense(expenseIndex, newExpense);
         } catch (ExpenseManagerExpenseNotFoundException exception) {
@@ -338,6 +347,7 @@ public class ConsoleInterface {
         expenseStr += "Description   : " + newExpense.getDescription() + "\n";
         expenseStr += "Amount        : " + newExpense.getAmount() + "\n";
         expenseStr += "Category      : " + newExpense.getCategory() + "\n";
+        expenseStr += "Remarks       : " + newExpense.getRemarks() + "\n";
         printInformationalMessage(expenseStr);
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_EDIT_EXPENSE_SUCCESS);
 
@@ -349,7 +359,6 @@ public class ConsoleInterface {
         ArrayList<Expense> expenses = expenseManager.getExpenses();
         Comparator<Expense> comparator = commandSortExpense.getComparator();
         Collections.sort(expenses,comparator);
-        expenseManager.updateExpenses(expenses);
         expenseManager.updateSortExpenses(commandSortExpense);
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_SORTED_EXPENSE_SUCCESS);
 

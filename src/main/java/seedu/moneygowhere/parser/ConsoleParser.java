@@ -72,7 +72,10 @@ public class ConsoleParser {
                     && cliOptions.hasLongOption(
                     ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_DESCRIPTION_LONG)
                     && cliOptions.hasLongOption(
-                    ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_CATEGORY_LONG);
+                    ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_CATEGORY_LONG)
+                    && cliOptions.hasLongOption(
+                    ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_REMARKS_LONG);
+
             assert hasAllCliOptions :
                     ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS;
 
@@ -101,6 +104,9 @@ public class ConsoleParser {
             String category = cli.getOptionValue(
                     ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_CATEGORY_LONG
             );
+            String remarks = cli.getOptionValue(
+                    ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_REMARKS_LONG
+            );
 
             /* Parses and normalizes arguments */
 
@@ -123,7 +129,8 @@ public class ConsoleParser {
                     dateTime,
                     description,
                     amount,
-                    category
+                    category,
+                    remarks
             );
         } catch (ParseException
                  | DateTimeParseException
@@ -219,7 +226,9 @@ public class ConsoleParser {
             /* Returns parsed arguments */
 
             return new ConsoleCommandDeleteExpense(expenseIndex);
-        } catch (ParseException | NumberFormatException exception) {
+        } catch (ParseException
+                 | NumberFormatException
+                 | ConsoleParserCommandDeleteExpenseInvalidException exception) {
             throw new ConsoleParserCommandDeleteExpenseInvalidException(
                     Messages.CONSOLE_ERROR_COMMAND_DELETE_EXPENSE_INVALID,
                     exception
@@ -247,7 +256,9 @@ public class ConsoleParser {
                     && cliOptions.hasLongOption(
                     ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_AMOUNT_LONG)
                     && cliOptions.hasLongOption(
-                    ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_CATEGORY_LONG);
+                    ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_CATEGORY_LONG)
+                    && cliOptions.hasLongOption(
+                    ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_REMARKS_LONG);
             assert hasAllCliOptions :
                     ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS;
 
@@ -279,6 +290,9 @@ public class ConsoleParser {
             String category = cli.getOptionValue(
                     ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_CATEGORY_LONG
             );
+            String remarks = cli.getOptionValue(
+                    ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_REMARKS_LONG
+            );
 
             /* Parses and normalizes arguments */
 
@@ -309,7 +323,8 @@ public class ConsoleParser {
                     dateTime,
                     description,
                     amount,
-                    category);
+                    category,
+                    remarks);
         } catch (ParseException
                  | DateTimeParseException
                  | NumberFormatException

@@ -1,5 +1,2 @@
 date // descending
-Test Expense 4 // 2022-01-03T12:03 // This is a test expense 4 // 30.90 // Category Alpha
-Test Expense 3 // 2022-01-02T12:02 // This is a test expense 3 // 20.80 // null
-Test Expense 2 // 2022-01-01T12:01 // null // 10.80 // null
-Test Expense 1 // 2022-01-01T12:00 // null // 1337.37 // null
+ADAM // 2022-10-15T17:08:18.568243 // desc // 92 // null // remarks
