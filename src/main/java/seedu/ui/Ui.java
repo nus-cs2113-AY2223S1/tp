@@ -144,7 +144,7 @@ public class Ui {
         print("Unable to update data!");
     }
     public void showApiKeySaved() {
-        print("API key saved successfully! use command `update` to get the latest data.");
+        print("API key saved successfully and the latest data has been downloaded.");
     }
 
     public void showAuthError() {

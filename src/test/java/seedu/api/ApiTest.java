@@ -18,20 +18,20 @@ public class ApiTest {
     public void loadApiKeyFileEmpty() {
         Api api = new Api(testJsonFile, testJsonFileDirectory);
         Assertions.assertThrows(EmptySecretFileException.class, () -> api.loadApiKey(testEmptyApiKeyFile,
-                testJsonFileDirectory));
+                testJsonFileDirectory, true));
     }
 
     @Test
     public void getApiKeyValid() throws EmptySecretFileException, NoFileFoundException {
         Api api = new Api(testJsonFile, testJsonFileDirectory);
-        api.loadApiKey(testApiKeyFileInvalid, testJsonFileDirectory);
+        api.loadApiKey(testApiKeyFileInvalid, testJsonFileDirectory, true);
         Assertions.assertEquals(api.getApiKey(), "abc123f-exampleinvalid-54321");
     }
 
     @Test
     public void fetchDataUnauthorizedAccess() throws ParkingException {
         Api api = new Api(testJsonFile, testJsonFileDirectory);
-        api.loadApiKey(testApiKeyFileInvalid, testJsonFileDirectory);
+        api.loadApiKey(testApiKeyFileInvalid, testJsonFileDirectory, true);
         api.asyncExecuteRequest();
         Assertions.assertThrows(UnauthorisedAccessApiException.class, () -> api.fetchData());
     }
