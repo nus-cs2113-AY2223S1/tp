@@ -13,19 +13,22 @@ public class ConsoleCommandAddExpense extends ConsoleCommand {
     private String description;
     private BigDecimal amount;
     private String category;
+    private String remarks;
 
     public ConsoleCommandAddExpense(
             String name,
             LocalDateTime dateTime,
             String description,
             BigDecimal amount,
-            String category
+            String category,
+            String remarks
     ) {
         this.name = name;
         this.dateTime = dateTime;
         this.description = description;
         this.amount = amount;
         this.category = category;
+        this.remarks = remarks;
     }
 
     public String getName() {
@@ -46,5 +49,9 @@ public class ConsoleCommandAddExpense extends ConsoleCommand {
 
     public String getCategory() {
         return category;
+    }
+    
+    public String getRemarks() {
+        return remarks;
     }
 }

@@ -15,6 +15,7 @@ import seedu.moneygowhere.commands.ConsoleCommandAddTarget;
 import seedu.moneygowhere.commands.ConsoleCommandBye;
 import seedu.moneygowhere.commands.ConsoleCommandDeleteExpense;
 import seedu.moneygowhere.commands.ConsoleCommandEditExpense;
+import seedu.moneygowhere.commands.ConsoleCommandDeleteRemarks;
 import seedu.moneygowhere.commands.ConsoleCommandSortExpense;
 import seedu.moneygowhere.commands.ConsoleCommandViewExpense;
 import seedu.moneygowhere.commands.ConsoleCommandViewRecurringPayment;
@@ -27,6 +28,7 @@ import seedu.moneygowhere.exceptions.ConsoleParserCommandAddTargetInvalidExcepti
 import seedu.moneygowhere.exceptions.ConsoleParserCommandDeleteExpenseInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandEditExpenseInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandNotFoundException;
+import seedu.moneygowhere.exceptions.ConsoleParserCommandDeleteRemarksInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandSortExpenseInvalidTypeException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandViewExpenseInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandViewRecurringPaymentInvalidException;
@@ -72,7 +74,10 @@ public class ConsoleParser {
                     && cliOptions.hasLongOption(
                     ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_DESCRIPTION_LONG)
                     && cliOptions.hasLongOption(
-                    ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_CATEGORY_LONG);
+                    ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_CATEGORY_LONG)
+                    && cliOptions.hasLongOption(
+                    ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_REMARKS_LONG);
+
             assert hasAllCliOptions :
                     ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS;
 
@@ -101,6 +106,9 @@ public class ConsoleParser {
             String category = cli.getOptionValue(
                     ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_CATEGORY_LONG
             );
+            String remarks = cli.getOptionValue(
+                    ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_REMARKS_LONG
+            );
 
             /* Parses and normalizes arguments */
 
@@ -123,7 +131,8 @@ public class ConsoleParser {
                     dateTime,
                     description,
                     amount,
-                    category
+                    category,
+                    remarks
             );
         } catch (ParseException
                  | DateTimeParseException
@@ -219,7 +228,9 @@ public class ConsoleParser {
             /* Returns parsed arguments */
 
             return new ConsoleCommandDeleteExpense(expenseIndex);
-        } catch (ParseException | NumberFormatException exception) {
+        } catch (ParseException
+                 | NumberFormatException
+                 | ConsoleParserCommandDeleteExpenseInvalidException exception) {
             throw new ConsoleParserCommandDeleteExpenseInvalidException(
                     Messages.CONSOLE_ERROR_COMMAND_DELETE_EXPENSE_INVALID,
                     exception
@@ -247,7 +258,9 @@ public class ConsoleParser {
                     && cliOptions.hasLongOption(
                     ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_AMOUNT_LONG)
                     && cliOptions.hasLongOption(
-                    ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_CATEGORY_LONG);
+                    ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_CATEGORY_LONG)
+                    && cliOptions.hasLongOption(
+                    ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_REMARKS_LONG);
             assert hasAllCliOptions :
                     ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS;
 
@@ -279,6 +292,9 @@ public class ConsoleParser {
             String category = cli.getOptionValue(
                     ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_CATEGORY_LONG
             );
+            String remarks = cli.getOptionValue(
+                    ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_REMARKS_LONG
+            );
 
             /* Parses and normalizes arguments */
 
@@ -309,13 +325,58 @@ public class ConsoleParser {
                     dateTime,
                     description,
                     amount,
-                    category);
+                    category,
+                    remarks);
         } catch (ParseException
                  | DateTimeParseException
                  | NumberFormatException
                  | ConsoleParserCommandEditExpenseInvalidException exception) {
             throw new ConsoleParserCommandEditExpenseInvalidException(
                     Messages.CONSOLE_ERROR_COMMAND_EDIT_EXPENSE_INVALID,
+                    exception
+            );
+        }
+    }
+
+    private static ConsoleCommandDeleteRemarks parseCommandDeleteRemarks(String arguments) throws
+            ConsoleParserCommandDeleteRemarksInvalidException {
+        try {
+            String[] argumentsArr = tokenizeCommandArguments(arguments);
+
+            Options cliOptions = ConsoleParserConfigurations.getCommandDeleteRemarksOptions();
+
+            /* Checks if all options are added */
+
+            boolean hasAllCliOptions = cliOptions.hasLongOption(
+                    ConsoleParserConfigurations.COMMAND_DELETE_REMARKS_ARG_EXPENSE_INDEX_LONG);
+            assert hasAllCliOptions :
+                    ConsoleParserConfigurations.COMMAND_DELETE_REMARKS_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS;
+
+            CommandLineParser cliParser = new DefaultParser();
+            CommandLine cli = cliParser.parse(cliOptions, argumentsArr);
+
+            String expenseIndexStr = cli.getOptionValue(
+                    ConsoleParserConfigurations.COMMAND_DELETE_REMARKS_ARG_EXPENSE_INDEX_LONG
+            );
+
+            /* Checks if mandatory arguments are provided */
+
+            if (expenseIndexStr == null) {
+                throw new ConsoleParserCommandDeleteRemarksInvalidException();
+            }
+
+            /* Parses and normalizes arguments */
+
+            int expenseIndex = Integer.parseInt(expenseIndexStr);
+
+            /* Returns parsed arguments */
+
+            return new ConsoleCommandDeleteRemarks(expenseIndex);
+        } catch (ParseException
+                 | NumberFormatException
+                 | ConsoleParserCommandDeleteRemarksInvalidException exception) {
+            throw new ConsoleParserCommandDeleteRemarksInvalidException(
+                    Messages.CONSOLE_ERROR_COMMAND_DELETE_REMARKS_INVALID,
                     exception
             );
         }
@@ -628,6 +689,7 @@ public class ConsoleParser {
      * @throws ConsoleParserCommandViewExpenseInvalidException     If the command view-expense is invalid.
      * @throws ConsoleParserCommandDeleteExpenseInvalidException   If the command delete-expense is invalid.
      * @throws ConsoleParserCommandEditExpenseInvalidException     If the command edit-expense is invalid.
+     * @throws ConsoleParserCommandDeleteRemarksInvalidException   If the command delete-remarks is invalid.
      * @throws ConsoleParserCommandSortExpenseInvalidTypeException If the command sort-expense is invalid.
      * @throws ConsoleParserCommandAddTargetInvalidException       If the command add-target is invalid.
      * @throws ConsoleParserCommandAddIncomeInvalidException       If the command add-income is invalid.
@@ -638,6 +700,7 @@ public class ConsoleParser {
             ConsoleParserCommandViewExpenseInvalidException,
             ConsoleParserCommandDeleteExpenseInvalidException,
             ConsoleParserCommandEditExpenseInvalidException,
+            ConsoleParserCommandDeleteRemarksInvalidException,
             ConsoleParserCommandSortExpenseInvalidTypeException,
             ConsoleParserCommandAddTargetInvalidException,
             ConsoleParserCommandAddIncomeInvalidException,
@@ -656,6 +719,8 @@ public class ConsoleParser {
             return parseCommandDeleteExpense(arguments);
         } else if (command.equalsIgnoreCase(ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE)) {
             return parseCommandEditExpense(arguments);
+        } else if (command.equalsIgnoreCase(ConsoleParserConfigurations.COMMAND_DELETE_REMARKS)) {
+            return parseCommandDeleteRemarks(arguments);
         } else if (command.equalsIgnoreCase(ConsoleParserConfigurations.COMMAND_SORT_EXPENSE)) {
             return parseCommandSortExpense(arguments);
         } else if (command.equalsIgnoreCase(ConsoleParserConfigurations.COMMAND_ADD_TARGET)) {

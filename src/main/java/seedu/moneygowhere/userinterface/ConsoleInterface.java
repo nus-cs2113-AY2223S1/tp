@@ -8,6 +8,7 @@ import seedu.moneygowhere.commands.ConsoleCommandAddTarget;
 import seedu.moneygowhere.commands.ConsoleCommandBye;
 import seedu.moneygowhere.commands.ConsoleCommandDeleteExpense;
 import seedu.moneygowhere.commands.ConsoleCommandEditExpense;
+import seedu.moneygowhere.commands.ConsoleCommandDeleteRemarks;
 import seedu.moneygowhere.commands.ConsoleCommandSortExpense;
 import seedu.moneygowhere.commands.ConsoleCommandViewExpense;
 import seedu.moneygowhere.commands.ConsoleCommandViewRecurringPayment;
@@ -28,6 +29,7 @@ import seedu.moneygowhere.exceptions.ConsoleParserCommandAddTargetInvalidExcepti
 import seedu.moneygowhere.exceptions.ConsoleParserCommandDeleteExpenseInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandEditExpenseInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandNotFoundException;
+import seedu.moneygowhere.exceptions.ConsoleParserCommandDeleteRemarksInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandSortExpenseInvalidTypeException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandViewExpenseInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandViewRecurringPaymentInvalidException;
@@ -179,7 +181,8 @@ public class ConsoleInterface {
                 consoleCommandAddExpense.getDateTime(),
                 consoleCommandAddExpense.getDescription(),
                 consoleCommandAddExpense.getAmount(),
-                consoleCommandAddExpense.getCategory());
+                consoleCommandAddExpense.getCategory(),
+                consoleCommandAddExpense.getRemarks());
         expenseManager.addExpense(expense);
 
         DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern(
@@ -191,6 +194,7 @@ public class ConsoleInterface {
         expenseStr += "Description   : " + expense.getDescription() + "\n";
         expenseStr += "Amount        : " + expense.getAmount() + "\n";
         expenseStr += "Category      : " + expense.getCategory() + "\n";
+        expenseStr += "Remarks       : " + expense.getRemarks() + "\n";
         printInformationalMessage(expenseStr);
 
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_ADD_EXPENSE_SUCCESS);
@@ -213,7 +217,8 @@ public class ConsoleInterface {
             expenseStr += "Date and Time : " + expense.getDateTime().format(dateTimeFormat) + "\n";
             expenseStr += "Description   : " + expense.getDescription() + "\n";
             expenseStr += "Amount        : " + expense.getAmount() + "\n";
-            expenseStr += "Category      : " + expense.getCategory();
+            expenseStr += "Category      : " + expense.getCategory() + "\n";
+            expenseStr += "Remarks       : " + expense.getRemarks() + "\n";
             printInformationalMessage(expenseStr);
         }
     }
@@ -236,7 +241,8 @@ public class ConsoleInterface {
         expenseStr += "Date and Time : " + expense.getDateTime().format(dateTimeFormat) + "\n";
         expenseStr += "Description   : " + expense.getDescription() + "\n";
         expenseStr += "Amount        : " + expense.getAmount() + "\n";
-        expenseStr += "Category      : " + expense.getCategory();
+        expenseStr += "Category      : " + expense.getCategory() + "\n";
+        expenseStr += "Remarks       : " + expense.getRemarks() + "\n";
         System.out.println(expenseStr);
     }
 
@@ -256,6 +262,7 @@ public class ConsoleInterface {
             expenseStr += "Description   : " + expense.getDescription() + "\n";
             expenseStr += "Amount        : " + expense.getAmount() + "\n";
             expenseStr += "Category      : " + expense.getCategory();
+            expenseStr += "Remarks       : " + expense.getRemarks() + "\n";
             printInformationalMessage(expenseStr);
         }
     }
@@ -319,8 +326,12 @@ public class ConsoleInterface {
         if (category == null) {
             category = oldExpense.getCategory();
         }
+        String remarks = consoleCommandEditExpense.getRemarks();
+        if (remarks == null) {
+            remarks = oldExpense.getRemarks();
+        }
 
-        Expense newExpense = new Expense(name, dateTime, description, amount, category);
+        Expense newExpense = new Expense(name, dateTime, description, amount, category, remarks);
         try {
             expenseManager.editExpense(expenseIndex, newExpense);
         } catch (ExpenseManagerExpenseNotFoundException exception) {
@@ -338,8 +349,24 @@ public class ConsoleInterface {
         expenseStr += "Description   : " + newExpense.getDescription() + "\n";
         expenseStr += "Amount        : " + newExpense.getAmount() + "\n";
         expenseStr += "Category      : " + newExpense.getCategory() + "\n";
+        expenseStr += "Remarks       : " + newExpense.getRemarks() + "\n";
         printInformationalMessage(expenseStr);
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_EDIT_EXPENSE_SUCCESS);
+
+        LocalStorage.saveToFile(expenseManager);
+    }
+
+    private void runCommandDeleteRemarks(ConsoleCommandDeleteRemarks consoleCommandDeleteRemarks) {
+        int expenseIndex = consoleCommandDeleteRemarks.getExpenseIndex();
+
+        try {
+            expenseManager.deleteRemarks(expenseIndex);
+        } catch (ExpenseManagerExpenseNotFoundException exception) {
+            printErrorMessage(exception.getMessage());
+            return;
+        }
+
+        printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_DELETE_REMARKS_SUCCESS);
 
         LocalStorage.saveToFile(expenseManager);
     }
@@ -349,7 +376,6 @@ public class ConsoleInterface {
         ArrayList<Expense> expenses = expenseManager.getExpenses();
         Comparator<Expense> comparator = commandSortExpense.getComparator();
         Collections.sort(expenses,comparator);
-        expenseManager.updateExpenses(expenses);
         expenseManager.updateSortExpenses(commandSortExpense);
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_SORTED_EXPENSE_SUCCESS);
 
@@ -477,6 +503,7 @@ public class ConsoleInterface {
                      | ConsoleParserCommandViewExpenseInvalidException
                      | ConsoleParserCommandDeleteExpenseInvalidException
                      | ConsoleParserCommandEditExpenseInvalidException
+                     | ConsoleParserCommandDeleteRemarksInvalidException
                      | ConsoleParserCommandSortExpenseInvalidTypeException
                      | ConsoleParserCommandAddTargetInvalidException
                      | ConsoleParserCommandAddIncomeInvalidException
@@ -498,6 +525,8 @@ public class ConsoleInterface {
                 runCommandDeleteExpense((ConsoleCommandDeleteExpense) consoleCommand);
             } else if (consoleCommand instanceof ConsoleCommandEditExpense) {
                 runCommandEditExpense((ConsoleCommandEditExpense) consoleCommand);
+            } else if (consoleCommand instanceof ConsoleCommandDeleteRemarks) {
+                runCommandDeleteRemarks((ConsoleCommandDeleteRemarks) consoleCommand);
             } else if (consoleCommand instanceof ConsoleCommandSortExpense) {
                 runCommandSortExpense((ConsoleCommandSortExpense) consoleCommand);
             } else if (consoleCommand instanceof ConsoleCommandAddIncome) {

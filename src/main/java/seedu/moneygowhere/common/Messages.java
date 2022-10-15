@@ -18,7 +18,7 @@ public class Messages {
             + "The arguments entered are invalid. "
             + "SYNTAX: Add-Expense -n NAME -a AMOUNT [-d "
             + Configurations.CONSOLE_INTERFACE_DATE_TIME_INPUT_FORMAT
-            + "] [-t DESCRIPTION] [-c CATEGORY]";
+            + "] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS]";
     public static final String CONSOLE_ERROR_COMMAND_VIEW_EXPENSE_INVALID = ""
             + "The arguments entered are invalid. "
             + "SYNTAX: View-Expense [-e EXPENSE_NUMBER]";
@@ -33,9 +33,14 @@ public class Messages {
             + "The arguments entered are invalid. "
             + "SYNTAX: Edit-Expense -e EXPENSE_NUMBER [-n NAME] [-a AMOUNT] [-d "
             + Configurations.CONSOLE_INTERFACE_DATE_TIME_INPUT_FORMAT
-            + "] [-t DESCRIPTION] [-c CATEGORY]";
+            + "] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS]";
     public static final String EXPENSE_MANAGER_ERROR_EXPENSE_NOT_FOUND = ""
             + "The expense is not found.";
+    public static final String CONSOLE_MESSAGE_COMMAND_DELETE_REMARKS_SUCCESS = ""
+            + "The remarks was deleted successfully.";
+    public static final String CONSOLE_ERROR_COMMAND_DELETE_REMARKS_INVALID = ""
+            + "The arguments entered are invalid. "
+            + "SYNTAX: Delete-Remarks [-e EXPENSE_NUMBER]";
     public static final String CONSOLE_MESSAGE_COMMAND_SORTED_EXPENSE_SUCCESS = ""
             + "Your expenses have been sorted successfully.";
     public static final String CONSOLE_ERROR_COMMAND_SORT_EXPENSE_INVALID = ""
