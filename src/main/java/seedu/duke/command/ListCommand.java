@@ -3,18 +3,18 @@ package seedu.duke.command;
 import seedu.duke.Storage;
 import seedu.duke.Ui;
 import seedu.duke.data.TransactionList;
-import seedu.duke.exception.InputTransactionInvalidTagException;
 import seedu.duke.exception.InputTransactionUnknownTypeException;
 import seedu.duke.exception.MoolahException;
 
 import java.time.LocalDate;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
+import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_TYPE;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_CATEGORY;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_DATE;
 import static seedu.duke.common.InfoMessages.INFO_LIST;
 import static seedu.duke.common.InfoMessages.INFO_LIST_EMPTY;
-import static seedu.duke.common.Utilities.checkExtraTagExist;
-import static seedu.duke.common.Utilities.parseCategoryTag;
-import static seedu.duke.common.Utilities.parseDateTag;
-import static seedu.duke.common.Utilities.parseTypeTag;
 
 /**
  * Represents a list command object that will execute the operations for List command.
@@ -33,25 +33,62 @@ public class ListCommand extends Command {
             + "(Optional) TYPE - The type of transaction. Only \"income\" or \"expense\" is accepted."
             + LINE_SEPARATOR
             + "(Optional) CATEGORY: A category for the transaction. Only string containing alphabets is accepted."
-            + LINE_SEPARATOR
-            + "(Optional) DATE: Date of the transaction. The format must be in \"yyyyMMdd\".";
+            + LINE_SEPARATOR + "(Optional) DATE: Date of the transaction. The format must be in \"yyyyMMdd\".";
 
     // Basic help description
     public static final String COMMAND_HELP = "Command Word: " + COMMAND_WORD + LINE_SEPARATOR
-            + COMMAND_DESCRIPTION + LINE_SEPARATOR
-            + COMMAND_USAGE + LINE_SEPARATOR;
+            + COMMAND_DESCRIPTION + LINE_SEPARATOR + COMMAND_USAGE + LINE_SEPARATOR;
     // Detailed help description
-    public static final String COMMAND_DETAILED_HELP = COMMAND_HELP + COMMAND_PARAMETERS_INFO
-            + LINE_SEPARATOR;
+    public static final String COMMAND_DETAILED_HELP = COMMAND_HELP + COMMAND_PARAMETERS_INFO + LINE_SEPARATOR;
 
-    private static final int TAG_LIMIT = 3;
+    //@@author chydarren
+    private static final Logger listLogger = Logger.getLogger(ListCommand.class.getName());
 
-    private String input;
+    //@@author paullowse
+    private String category;
+    private LocalDate date;
+    private String type;
 
-    public ListCommand(String input) {
-        this.input = input;
+    /**
+     * Initialises the variables of the ListCommand class.
+     */
+    public ListCommand() {
+        category = "";
+        date = null;
+        type = "";
     }
 
+    /**
+     * Gets the optional tags of the command.
+     *
+     * @return A string array containing all optional tags.
+     */
+    @Override
+    public String[] getOptionalTags() {
+        String[] optionalTags = new String[]{
+            COMMAND_TAG_TRANSACTION_TYPE,
+            COMMAND_TAG_TRANSACTION_CATEGORY,
+            COMMAND_TAG_TRANSACTION_DATE
+        };
+        return optionalTags;
+    }
+
+    @Override
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    @Override
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    @Override
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    //@@author chydarren
     /**
      * Executes the operations related to the command.
      *
@@ -61,68 +98,48 @@ public class ListCommand extends Command {
      */
     @Override
     public void execute(TransactionList transactions, Ui ui, Storage storage) throws MoolahException {
-        /*
-        Checks if userInput is in the correct input format by further parsing,
-        before passing any tags to the filter for transaction list.
-        */
-        String[] splits = {};
-        if (!input.isEmpty()) {
-            splits = input.split(" ");
-        }
+        listLogger.setLevel(Level.WARNING);
+        listLogger.log(Level.INFO, "List command starts passing the tags for filter, if any,"
+                + " into the listTransactions method.");
 
-        // Throws exception if there are more than three tags
-        checkExtraTagExist(splits, TAG_LIMIT);
-
-        String category = "";
-        LocalDate date = null;
-        String type = "";
-
-        for (String split : splits) {
-            // Throws exception if the tag cannot split
-            if (split.length() < 2) {
-                throw new InputTransactionInvalidTagException();
-            }
-            String tag = split.substring(0, 2);
-            String parameter = split.substring(2);
-            switch (tag) {
-            case "t/":
-                type = parseTypeTag(parameter);
-                break;
-            case "c/":
-                category = parseCategoryTag(parameter);
-                break;
-            case "d/":
-                date = parseDateTag(parameter);
-                assert date != null;
-                break;
-            default:
-                // Throws exception if the tag is invalid
-                throw new InputTransactionInvalidTagException();
-            }
-        }
+        // Passes the tags to the filter for transaction list
         listTransactions(transactions, type, category, date);
     }
 
     /**
      * List all or some transactions based on selection.
      *
-     * @param transactions An instance of the TransactionList class.
-     * @param type The type of transaction.
-     * @param category A category for the transaction.
-     * @param date Date of the transaction with format in "yyyyMMdd".
+     * @param transactions  An instance of the TransactionList class.
+     * @param type          The type of transaction.
+     * @param category      A category for the transaction.
+     * @param date          Date of the transaction with format in "yyyyMMdd".
      * @throws InputTransactionUnknownTypeException If class type cannot be found in the packages.
      */
-    private static void listTransactions(TransactionList transactions, String type,
-                                         String category, LocalDate date)
+    private static void listTransactions(TransactionList transactions, String type, String category, LocalDate date)
             throws InputTransactionUnknownTypeException {
+        listLogger.log(Level.INFO, "Listing of transactions is being processed into a"
+                + " transaction list variable.");
         String transactionsList = transactions.listTransactions(type, category, date);
         if (transactionsList.isEmpty()) {
+            listLogger.log(Level.INFO, "Transactions list is empty, so UI should display that"
+                    + " there are no transaction records available.");
             Ui.showInfoMessage(INFO_LIST_EMPTY.toString());
+            listLogger.log(Level.INFO, "End of List command.");
             return;
         }
+        assert !transactionsList.isEmpty();
+        listLogger.log(Level.INFO, "Transactions list is available, so UI should display the"
+                + " transaction records.");
         Ui.showTransactionsList(transactionsList, INFO_LIST.toString());
+        listLogger.log(Level.INFO, "End of List command.");
     }
 
+    //@@author paullowse
+    /**
+     * Enables the program to exit when the Bye command is issued.
+     *
+     * @return A boolean value that indicates whether the program shall exit.
+     */
     @Override
     public boolean isExit() {
         return false;

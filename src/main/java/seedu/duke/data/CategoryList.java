@@ -5,11 +5,17 @@ import seedu.duke.data.transaction.Category;
 import java.util.ArrayList;
 
 public class CategoryList {
+    //@@author chydarren
     private static final String EMPTY_STRING = "";
     private static final String LINE_SEPARATOR = System.lineSeparator();
 
     private static ArrayList<Category> categories = new ArrayList<>();
 
+    /**
+     * Browses the list of transactions for unique categories and adds them into a category list.
+     *
+     * @param transactions An instance of the TransactionList class.
+     */
     public static void addCategories(TransactionList transactions) {
         for (int i = 0; i < transactions.size(); i++) {
             Category category = new Category(transactions.getEntry(i).getCategory());
@@ -21,6 +27,11 @@ public class CategoryList {
         }
     }
 
+    /**
+     * Calculates the total amount of transactions belonging to each category in the category list.
+     *
+     * @param transactions An instance of the TransactionList class.
+     */
     public static void calculateTotalAmount(TransactionList transactions) {
         addCategories(transactions);
         for (Category category : categories) {
@@ -37,12 +48,18 @@ public class CategoryList {
         }
     }
 
+    /**
+     * List the statistics for the total amount of savings in each category.
+     *
+     * @return A string containing the formatted categories list.
+     */
     public String listCategories() {
         String categoriesList = EMPTY_STRING;
         // Loops each category from the categories list
         for (Category category : categories) {
             categoriesList += category.toString() + LINE_SEPARATOR;
         }
+        categories.clear();
         return categoriesList;
     }
 }

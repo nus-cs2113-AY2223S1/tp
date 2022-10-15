@@ -2,7 +2,7 @@ package seedu.duke.exception;
 
 import seedu.duke.common.ErrorMessages;
 
-public class AddDeleteInvalidIndexException extends MoolahException {
+public class EmptyParameterException extends MoolahException {
     /**
      * Returns the error message of the exception to alert user of the exception.
      *
@@ -10,6 +10,6 @@ public class AddDeleteInvalidIndexException extends MoolahException {
      */
     @Override
     public String getMessage() {
-        return ErrorMessages.ERROR_ADD_COMMAND_INVALID_INDEX.toString();
+        return ErrorMessages.ERROR_INPUT_MISSING_PARAMETER.toString();
     }
 }

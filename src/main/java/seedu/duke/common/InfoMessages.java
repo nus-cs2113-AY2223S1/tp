@@ -20,10 +20,10 @@ public enum InfoMessages {
     INFO_STATS_CATEGORIES("Here are the total savings for each category:"),
     INFO_PURGE("All your transactions have been purged."),
     INFO_PURGE_ABORT("Purging has been aborted. All transactions records are retained."),
-
     INFO_PURGE_EMPTY("The command is aborted as the transactions list is empty."),
     INFO_PURGE_WARNING("Are you sure you want to proceed with this command? Please enter 'Y' to confirm.");
 
+    //@@author chydarren
     public final String message;
 
     /**
