@@ -25,7 +25,7 @@ public class Duke {
     private boolean isLastCommand = false;
 
     /**
-     * Constructor of Duke
+     * Constructor of Duke.
      *
      * @param userFilePath The file path that Duke stores its users.
      * @param itemFilePath The file path that Duke stores its items.

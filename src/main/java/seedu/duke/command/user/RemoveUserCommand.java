@@ -18,7 +18,7 @@ import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_USER_BORROW
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_USER_LENDING;
 
 /**
- * A representation of a command to remove an user.
+ * A representation of a command to remove a user.
  */
 public class RemoveUserCommand extends Command {
     private final String[] parts;
@@ -97,7 +97,7 @@ public class RemoveUserCommand extends Command {
     }
 
     /**
-     * Executes RemoveUserCommand
+     * Executes RemoveUserCommand.
      *
      * @return false
      * @throws InvalidArgumentException If there is a part that cannot be parsed
