@@ -7,6 +7,7 @@ import seedu.duke.command.CreateCommand;
 import seedu.duke.command.ExitCommand;
 import seedu.duke.command.DeleteCommand;
 import seedu.duke.command.ViewCommand;
+import seedu.duke.command.HelpCommand;
 import seedu.duke.exceptions.InvalidUserCommandException;
 
 public class CommandParser {
@@ -23,6 +24,9 @@ public class CommandParser {
         case "/exit":
             ExitCommand newExitCommand = new ExitCommand(userInputTokenized, CommandType.EXIT);
             return newExitCommand;
+        case "/help":
+            HelpCommand newHelpCommand = new HelpCommand(userInputTokenized, CommandType.HELP);
+            return newHelpCommand;
         case "/create":
             if (!isValidCreateCommand(userInputTokenized)) {
                 throw new InvalidUserCommandException("Error! Invalid create command. "

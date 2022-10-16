@@ -42,6 +42,9 @@ public class Duke {
                 case EXIT:
                     exit();
                     break;
+                case HELP:
+                    System.out.println(Ui.printCommands());
+                    break;
                 case DELETE:
                     try {
                         if (newUserCommand.getModuleCode() == null) {
