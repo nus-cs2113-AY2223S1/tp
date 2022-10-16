@@ -59,7 +59,7 @@ public class ItemList {
         ItemList returnList = new ItemList();
         for (Item item : this.itemList) {
             if ((item.getName()).contains(keyword)) {
-                returnList.addItem();
+                returnList.addItem(item);
             }
         }
         if(returnList.getListSize() == 0){
