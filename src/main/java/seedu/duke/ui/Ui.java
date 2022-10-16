@@ -85,8 +85,10 @@ public class Ui {
                 + "[Partner University Module Code] [Partner University Module Title] | [Equivalent NUS Credits]\n"
                 + SPACING + "view      " + "/view UNIVERSITIES                      "
                 + "Displays all universities with module mappings available in database\n"
-                + SPACING + "view      " + "/view DATABASE u/UNIVERSITY             "
-                + "Displays all modules mappings offered by UNIVERSITY in database\n"
+                + SPACING + "list      " + "/list m/MODULECODE                      "
+                + "List all module mappings for NUS MODULECODE in database\n"
+                + SPACING + "list      " + "/list u/UNIVERSITY                      "
+                + "List all module mappings offered by UNIVERSITY in database\n"
                 + SPACING + "add       " + "/add u/UNIVERSITY m/MODULECODE          "
                 + "Add input Partner University module code to input university list                       \n"
                 + SPACING + "delete    " + "/delete u/UNIVERSITY m/MODULECODE       "
@@ -209,11 +211,6 @@ public class Ui {
             System.out.println(i + ". " + university.toString());
             i = i + 1;
         }
-    }
-
-    public static void printUniversityName(String universityName) {
-        System.out.println(universityName);
-        System.out.println(LINE);
     }
 
     public static void printMappings(ArrayList<ModuleMapping> moduleMappings) {

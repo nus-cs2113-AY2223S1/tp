@@ -76,13 +76,6 @@ public class Duke {
                         } else if (viewCommand.getViewOption().equals("UNIVERSITIES")) {
                             ArrayList<University> universities = Database.getUniversities();
                             Ui.printUniversitiesInDatabase(universities);
-                        } else if (viewCommand.getViewOption().equals("DATABASE")) {
-                            ArrayList<ModuleMapping> moduleMappings = Database.getModuleMappings().stream()
-                                    .filter(moduleMapping -> moduleMapping.getPartnerUniversityModule()
-                                            .getUniversity().getName().equals(viewCommand.getUniversityName()))
-                                    .collect(Collectors.toCollection(ArrayList::new));
-                            Ui.printUniversityName(viewCommand.getUniversityName());
-                            Ui.printModulesInDatabase(moduleMappings);
                         }
                     } catch (InvalidUserCommandException e) {
                         System.out.println(e.getMessage());
