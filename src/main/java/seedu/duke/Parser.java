@@ -33,9 +33,9 @@ public class Parser {
         case "exit":
             return new ExitCommand();
         case "set":
-            return new SetCommand(arguments);
+            return new SetCommand(arguments, true);
         case "add":
-            return new AddCommand(arguments);
+            return new AddCommand(arguments, true);
         case "view":
             return new ViewCommand(arguments);
         case "mark":

@@ -3,11 +3,14 @@ package seedu.duke.command;
 import seedu.duke.biometrics.Biometrics;
 import seedu.duke.Parser;
 import seedu.duke.Ui;
+import seedu.duke.biometrics.WeightAndFat;
+import seedu.duke.biometrics.WeightAndFatList;
 import seedu.duke.exception.IllegalValueException;
 import seedu.duke.exercise.Exercise;
 import seedu.duke.exercise.ExerciseList;
 import seedu.duke.food.Food;
 import seedu.duke.food.FoodList;
+import seedu.duke.storage.Storage;
 
 import java.util.ArrayList;
 
@@ -38,6 +41,9 @@ public class ViewCommand extends Command {
         case ("exercise"):
             viewExercise(argumentList);
             break;
+        case ("weight"):
+            viewWeight();
+            break;
         default:
             handleInvalidViewType();
         }
@@ -48,7 +54,15 @@ public class ViewCommand extends Command {
     }
 
     private void viewBiometrics() {
-        ui.output(biometrics.toString());
+        ui.output("Biometrics:\n" + biometrics.toString());
+    }
+
+    private void viewWeight() {
+        ui.output(biometrics.weightAndFatList.getSize() + " records of weight and fat percentage:");
+        ArrayList<WeightAndFat> weightAndFatList = biometrics.weightAndFatList.getWeightAndFatList();
+        for (WeightAndFat weightAndFat : weightAndFatList) {
+            ui.output(weightAndFat.listWeightAndFat(weightAndFatList));
+        }
     }
 
     private void viewFood() throws IllegalValueException {
@@ -128,7 +142,7 @@ public class ViewCommand extends Command {
     }
 
     @Override
-    public void setData(Ui ui, Biometrics biometrics, ExerciseList exerciseList, FoodList foodList) {
+    public void setData(Ui ui, Storage storage, Biometrics biometrics, ExerciseList exerciseList, FoodList foodList) {
         this.ui = ui;
         this.biometrics = biometrics;
         this.exerciseList = exerciseList;

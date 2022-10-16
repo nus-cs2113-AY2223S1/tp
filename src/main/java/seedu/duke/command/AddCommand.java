@@ -1,6 +1,8 @@
 package seedu.duke.command;
 
 import seedu.duke.biometrics.Biometrics;
+import seedu.duke.biometrics.WeightAndFat;
+import seedu.duke.biometrics.WeightAndFatList;
 import seedu.duke.food.Food;
 import seedu.duke.Parser;
 import seedu.duke.Ui;
@@ -8,6 +10,7 @@ import seedu.duke.exception.IllegalValueException;
 import seedu.duke.exercise.Exercise;
 import seedu.duke.exercise.ExerciseList;
 import seedu.duke.food.FoodList;
+import seedu.duke.storage.Storage;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,18 +18,21 @@ import java.util.Arrays;
 public class AddCommand extends Command {
     private Ui ui;
     private String arguments;
-
+    private boolean toDisplay;
     private Food food;
     public static final String INVALID_FOOD_INPUT = "Invalid food input";
-    final String[] invalidFoodNames = { "", " ", "[]\\[;]" };
+    final String[] invalidFoodNames = {"", " ", "[]\\[;]"};
 
     private Exercise exercise;
     private ExerciseList exerciseList;
 
     private FoodList foodList;
 
-    public AddCommand(String arguments) {
+    private Biometrics biometrics;
+
+    public AddCommand(String arguments, boolean toDisplay) {
         this.arguments = arguments;
+        this.toDisplay = toDisplay;
     }
 
     @Override
@@ -37,8 +43,11 @@ public class AddCommand extends Command {
         case ("food"):
             addFood(argumentList);
             break;
-        case("exercise"):
+        case ("exercise"):
             addExercise(argumentList);
+            break;
+        case ("weight"):
+            addWeightAndFat(argumentList);
             break;
         default:
             handleInvalidAddType();
@@ -61,8 +70,10 @@ public class AddCommand extends Command {
             food = new Food(description, calories);
             foodList.addFood(food);
             assert foodList.getFood(foodList.getFoodListSize() - 1).equals(food) : "Food not added properly";
-            ui.output(food.toString());
-            ui.output(" This food is added to the food list successfully");
+            if (toDisplay) {
+                ui.output(food.toString());
+                ui.output(" This food is added to the food list successfully");
+            }
         } catch (NumberFormatException e) {
             throw new IllegalValueException(INVALID_FOOD_INPUT);
         }
@@ -78,10 +89,32 @@ public class AddCommand extends Command {
             int calories = Integer.parseInt(argumentList[3]);
             exercise = new Exercise(description, repetitions, calories);
             exerciseList.addExercise(exercise);
-            ui.output(exercise.toString());
-            ui.output(" This exercise is added to the exercise list successfully");
+            if (toDisplay) {
+                ui.output(exercise.toString());
+                ui.output(" This exercise is added to the exercise list successfully");
+            }
         } catch (IllegalValueException e) {
             ui.output(e.getMessage());
+        }
+    }
+
+    private void addWeightAndFat(String[] argumentList) throws IllegalValueException {
+        if (argumentList.length != 3) {
+            throw new IllegalValueException("INVALID_WEIGHT_INPUT");
+        }
+        try {
+            int weight = Integer.parseInt(argumentList[1]);
+            int fat = Integer.parseInt(argumentList[2]);
+            WeightAndFat weightAndFat = new WeightAndFat(weight, fat);
+            biometrics.weightAndFatList.addWeightAndFat(weightAndFat);
+            biometrics.setWeight(weight);
+            biometrics.setFat(fat);
+            if (toDisplay) {
+                ui.output(weightAndFat.toString());
+                ui.output(" Weight and fat percentage are recorded successfully");
+            }
+        } catch (NumberFormatException e) {
+            throw new IllegalValueException("Weight and fat percentage should be numerical");
         }
     }
 
@@ -101,9 +134,10 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void setData(Ui ui, Biometrics biometrics, ExerciseList exerciseList, FoodList foodList) {
+    public void setData(Ui ui, Storage storage, Biometrics biometrics, ExerciseList exerciseList, FoodList foodList) {
         this.ui = ui;
         this.exerciseList = exerciseList;
         this.foodList = foodList;
+        this.biometrics = biometrics;
     }
 }

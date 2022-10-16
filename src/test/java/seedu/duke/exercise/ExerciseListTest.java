@@ -7,6 +7,7 @@ import seedu.duke.biometrics.Biometrics;
 import seedu.duke.command.Command;
 import seedu.duke.exception.IllegalValueException;
 import seedu.duke.food.FoodList;
+import seedu.duke.storage.Storage;
 
 import java.util.ArrayList;
 
@@ -15,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 class ExerciseListTest {
     private final Ui ui = new Ui();
+    private final Storage storage = new Storage();
     private final Biometrics biometrics = new Biometrics();
 
     private FoodList foodList = new FoodList();
@@ -73,7 +75,7 @@ class ExerciseListTest {
 
         for (String input : commandList) {
             Command c = Parser.parse(input);
-            c.setData(ui, biometrics, exerciseList, foodList);
+            c.setData(ui, storage, biometrics, exerciseList, foodList);
             c.execute();
         }
     }

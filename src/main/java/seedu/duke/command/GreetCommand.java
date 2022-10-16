@@ -4,14 +4,16 @@ import seedu.duke.biometrics.Biometrics;
 import seedu.duke.Ui;
 import seedu.duke.exercise.ExerciseList;
 import seedu.duke.food.FoodList;
+import seedu.duke.storage.Storage;
 
 public class GreetCommand extends Command {
 
-    String logo = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|";
+    String logo
+            = " _____   ___     ___        _____  _   __            _____   _____   _____\n"
+            + "|_   _| | __ \\  | |\\ \\     /  __/ | | / /   _____   |  ___| |_   _| |_   _|\n"
+            + "  | |   | '' /  | |_\\ \\   /  /    | |/ /   / ___ \\  | |___    | |     | |\n"
+            + "  | |   | |\\ \\  |  __  \\  \\  \\__  | |\\ \\  | /   \\ | |  ___|  _| |_    | |\n"
+            + "  |_|   |_| \\_\\ |_|   \\_\\  \\____\\ |_| \\_\\ |_|   |_| |_|     |_____|   |_|";
 
     @Override
     public void execute() {
@@ -20,7 +22,7 @@ public class GreetCommand extends Command {
     }
 
     @Override
-    public void setData(Ui ui, Biometrics biometrics, ExerciseList exerciseList, FoodList foodList) {
+    public void setData(Ui ui, Storage storage, Biometrics biometrics, ExerciseList exerciseList, FoodList foodList) {
 
     }
 
