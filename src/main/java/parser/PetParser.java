@@ -1,12 +1,16 @@
 package parser;
 
-import command.AddPetCommand;
-import command.Command;
-import command.EndCommand;
-import command.ViewPetCommand;
+import command.*;
 
 public class PetParser {
-    private final int lengthOfSignature = 3;
+    private int lengthOfSignature;
+    private Parser parser;
+
+    public PetParser(Parser parser, int lengthOfSignature){
+        this.parser = parser;
+        this.lengthOfSignature = lengthOfSignature;
+    }
+
 
     public Command parsePet(String input){
         if(!input.contains(" ")){
@@ -43,7 +47,7 @@ public class PetParser {
     }
 
     public Command prepareRemovePet(String input){
-        int index = indexOfRemove(input);
+        int index = parser.indexOfRemove(input);
         if(index == -1){
             System.out.println("input invalid");
             return new EndCommand();

@@ -3,7 +3,13 @@ package parser;
 import command.*;
 
 public class AppointmentParser {
-    private final int lengthOfSignature = 3;
+    private int lengthOfSignature;
+    private Parser parser;
+
+    public AppointmentParser(Parser parser, int lengthOfSignature){
+        this.parser = parser;
+        this.lengthOfSignature = lengthOfSignature;
+    }
 
     public Command parseAppointment(String input){
         if(!input.contains(" ")){
@@ -42,7 +48,7 @@ public class AppointmentParser {
 
     public Command prepareRemoveAppointment(String input){
         input = " " + input;
-        int index = indexOfRemove(input);
+        int index = parser.indexOfRemove(input);
         if(index == -1){
             System.out.println("Error: index entered invalid for removing an appointment");
             return new EndCommand();

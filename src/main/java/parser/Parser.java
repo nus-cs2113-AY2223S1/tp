@@ -9,10 +9,10 @@ public class Parser {
     private AppointmentParser appointmentParser;
 
     public Parser(){
-        serviceParser = new ServiceParser();
-        employeeParser = new EmployeeParser();
-        petParser = new PetParser();
-        appointmentParser = new AppointmentParser();
+        serviceParser = new ServiceParser(this, lengthOfSignature);
+        employeeParser = new EmployeeParser(this, lengthOfSignature);
+        petParser = new PetParser(this, lengthOfSignature);
+        appointmentParser = new AppointmentParser(this, lengthOfSignature);
     }
 
 

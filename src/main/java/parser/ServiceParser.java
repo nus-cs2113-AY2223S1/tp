@@ -3,7 +3,13 @@ package parser;
 import command.*;
 
 public class ServiceParser {
-    private final int lengthOfSignature = 3;
+    private int lengthOfSignature;
+    private Parser parser;
+
+    public ServiceParser(Parser parser, int lengthOfSignature){
+        this.parser = parser;
+        this.lengthOfSignature = lengthOfSignature;
+    }
 
     public Command parseService(String input){
         if(!input.contains(" ")){
@@ -43,7 +49,7 @@ public class ServiceParser {
 
 
     public Command prepareRemoveService(String input){
-        int index = indexOfRemove(input);
+        int index = parser.indexOfRemove(input);
         if(index == -1){
             System.out.println("Error: index entered invalid for removing a service");
             return new EndCommand();

@@ -3,7 +3,13 @@ package parser;
 import command.*;
 
 public class EmployeeParser {
-    private final int lengthOfSignature = 3;
+    private int lengthOfSignature;
+    private Parser parser;
+    public EmployeeParser(Parser parser, int lengthOfSignature){
+        this.parser = parser;
+        this.lengthOfSignature = lengthOfSignature;
+    }
+
 
 
     public Command parseEmployee(String input){
@@ -42,7 +48,7 @@ public class EmployeeParser {
 
 
     public Command prepareRemoveEmployee(String input){
-        int index = indexOfRemove(input);
+        int index = parser.indexOfRemove(input);
 
         if(index == -1){
             System.out.println("Error: index entered invalid for removing an employee ");
