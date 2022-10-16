@@ -9,7 +9,7 @@ public class Ui {
 
 
     public void line() {
-        System.out.println("------------------------------------------");
+        System.out.println("--------------------------------------------------");
     }
 
 
@@ -36,8 +36,8 @@ public class Ui {
         System.out.println();
     }
 
-    public void showCurrentExerciseCaption(int size) {
-        output("Exercises to be done: " + size);
+    public void showExerciseCaption(int size) {
+        output("Exercises " + size);
     }
 
     public void showCompletedExerciseCaption(int size) {

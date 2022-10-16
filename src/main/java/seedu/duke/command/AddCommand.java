@@ -1,18 +1,17 @@
 package seedu.duke.command;
 
-import seedu.duke.biometrics.Biometrics;
-import seedu.duke.biometrics.WeightAndFat;
-import seedu.duke.biometrics.WeightAndFatList;
-import seedu.duke.food.Food;
 import seedu.duke.Parser;
 import seedu.duke.Ui;
+import seedu.duke.biometrics.Biometrics;
+import seedu.duke.biometrics.WeightAndFat;
 import seedu.duke.exception.IllegalValueException;
 import seedu.duke.exercise.Exercise;
 import seedu.duke.exercise.ExerciseList;
+import seedu.duke.exercise.StrengthExercise;
+import seedu.duke.food.Food;
 import seedu.duke.food.FoodList;
 import seedu.duke.storage.Storage;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 public class AddCommand extends Command {
@@ -38,19 +37,41 @@ public class AddCommand extends Command {
     @Override
     public void execute() throws IllegalValueException {
         String[] argumentList = Parser.getArgumentList(arguments);
-        String addType = argumentList[0];
+        String addType = Parser.getAddType(argumentList);
         switch (addType) {
         case ("food"):
             addFood(argumentList);
             break;
-        case ("exercise"):
-            addExercise(argumentList);
+        case ("strength"):
+            addStrengthExercise(argumentList);
             break;
         case ("weight"):
             addWeightAndFat(argumentList);
             break;
         default:
             handleInvalidAddType();
+        }
+    }
+
+    private void addStrengthExercise(String[] argumentList) throws IllegalValueException {
+        if (argumentList.length != 5) {
+            throw new IllegalValueException("Invalid add strength exercise command");
+        }
+        String description = argumentList[1];
+        try {
+            int set = Integer.parseInt(argumentList[2]);
+            int repetition = Integer.parseInt(argumentList[3]);
+            int calories = Integer.parseInt(argumentList[4]);
+            Exercise exercise = new StrengthExercise(description, set, repetition, calories);
+            exerciseList.addExercise(exercise);
+            assert (exerciseList.getCurrentExercise(exerciseList.getCurrentExerciseListSize() - 1)
+                    .equals(exercise)) : "Exercise not added properly";
+            if (toDisplay) {
+                ui.output(exercise.toString());
+                ui.output(" This strength exercise is added to the exercise list successfully");
+            }
+        } catch (NumberFormatException e) {
+            throw new IllegalValueException("Set, repetition and calories must be integer");
         }
     }
 
@@ -79,24 +100,6 @@ public class AddCommand extends Command {
         }
     }
 
-    private void addExercise(String[] argumentList) {
-        try {
-            if (argumentList.length != 4) {
-                throw new IllegalValueException("INVALID_EXERCISE_INPUT");
-            }
-            String description = argumentList[1];
-            int repetitions = Integer.parseInt(argumentList[2]);
-            int calories = Integer.parseInt(argumentList[3]);
-            exercise = new Exercise(description, repetitions, calories);
-            exerciseList.addExercise(exercise);
-            if (toDisplay) {
-                ui.output(exercise.toString());
-                ui.output(" This exercise is added to the exercise list successfully");
-            }
-        } catch (IllegalValueException e) {
-            ui.output(e.getMessage());
-        }
-    }
 
     private void addWeightAndFat(String[] argumentList) throws IllegalValueException {
         if (argumentList.length != 3) {

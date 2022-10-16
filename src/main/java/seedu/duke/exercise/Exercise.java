@@ -2,13 +2,14 @@ package seedu.duke.exercise;
 
 public class Exercise {
     private String exerciseName;
-    private int repetitions;
+    private int repetition;
     private int caloriesBurnt;
     private boolean isDone;
 
+
     public Exercise(String exerciseName, int repetitions, int caloriesBurnt) {
         this.exerciseName = exerciseName;
-        this.repetitions = repetitions;
+        this.repetition = repetitions;
         this.caloriesBurnt = caloriesBurnt;
         this.isDone = false;
     }
@@ -18,7 +19,7 @@ public class Exercise {
     }
 
     public int getRepetitions() {
-        return repetitions;
+        return repetition;
     }
 
     public int getCaloriesBurnt() {
@@ -27,6 +28,10 @@ public class Exercise {
 
     public boolean getDone() {
         return isDone;
+    }
+
+    public int getSet() {
+        return 1;
     }
 
     public String getTaskStatus() {
@@ -43,8 +48,9 @@ public class Exercise {
     @Override
     public String toString() {
         return "Exercise: " + exerciseName + System.lineSeparator()
-                + "Repetitions: " + repetitions + System.lineSeparator()
+                + "Repetitions: " + repetition + System.lineSeparator()
                 + "Calories Burnt: " + caloriesBurnt + System.lineSeparator()
                 + String.format("Status: %s", getTaskStatus());
     }
+
 }

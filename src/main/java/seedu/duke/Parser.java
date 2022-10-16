@@ -1,22 +1,21 @@
 package seedu.duke;
 
-import seedu.duke.command.GreetCommand;
-import seedu.duke.command.ExitCommand;
-import seedu.duke.command.InvalidCommand;
-import seedu.duke.command.Command;
 import seedu.duke.command.AddCommand;
+import seedu.duke.command.Command;
+import seedu.duke.command.ExitCommand;
+import seedu.duke.command.GreetCommand;
 import seedu.duke.command.HelpCommand;
-import seedu.duke.command.ViewCommand;
+import seedu.duke.command.InvalidCommand;
+import seedu.duke.command.MarkCommand;
 import seedu.duke.command.RemoveCommand;
 import seedu.duke.command.RemoveExerciseCommand;
-import seedu.duke.command.MarkCommand;
 import seedu.duke.command.SetCommand;
-
-;
+import seedu.duke.command.ViewCommand;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
+
+;
 
 public class Parser {
 
@@ -55,5 +54,9 @@ public class Parser {
         assert (arguments != null);
         String[] argumentList = arguments.split("\\s*/\\s*");
         return argumentList;
+    }
+
+    public static String getAddType(String[] argumentList) {
+        return argumentList[0];
     }
 }
