@@ -293,7 +293,7 @@ public class Parser {
     public Command prepareRemoveEmployee(String input){
         int index = indexOfRemove(input);
         if(index == -1){
-            System.out.println("Error: index entered invalid for removing an employee");
+            System.out.println("Error: index entered invalid for removing an employee ");
             return new EndCommand();
         }
 
