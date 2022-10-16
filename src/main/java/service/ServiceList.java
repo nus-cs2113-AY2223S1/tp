@@ -7,6 +7,8 @@ public class ServiceList {
 
     public static void listService() {
         for (Service service : services) {
+            assert service.getServiceId() > 0;
+            assert service.getServiceId() < services.size();
             System.out.print(service.getServiceId() + " ");
             System.out.print(service.getServiceDescription()+ " " + "\n");
         }
