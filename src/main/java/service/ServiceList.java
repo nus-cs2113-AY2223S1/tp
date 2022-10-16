@@ -8,7 +8,7 @@ public class ServiceList {
     public static void listService() {
         for (Service service : services) {
             System.out.print(service.getServiceId() + " ");
-            System.out.print(service.getServiceDescription()+ " ");
+            System.out.print(service.getServiceDescription()+ " " + "\n");
         }
     }
 
