@@ -9,12 +9,14 @@ import seedu.duke.command.item.ListItemsCommand;
 import seedu.duke.command.item.RemoveItemCommand;
 import seedu.duke.command.item.SortItemCommand;
 import seedu.duke.command.item.ViewItemCommand;
+import seedu.duke.command.item.FindItemCommand;
 import seedu.duke.command.transaction.AddTransactionCommand;
 import seedu.duke.command.transaction.ViewTransactionCommand;
 import seedu.duke.command.transaction.ListTransactionsCommand;
 import seedu.duke.command.transaction.RemoveTransactionCommand;
 import seedu.duke.command.transaction.ViewTransactionsByStatusCommand;
 import seedu.duke.command.user.AddUserCommand;
+import seedu.duke.command.user.FindUserCommand;
 import seedu.duke.command.Command;
 import seedu.duke.command.exit.ExitCommand;
 import seedu.duke.command.help.HelpCommand;
@@ -47,10 +49,14 @@ public class CommandParser {
     private static final String COMMAND_LIST_ITEMS = "list-items";
     private static final String COMMAND_LIST_TX = "list-tx";
     private static final String COMMAND_VIEW_USER = "view-user";
+    private static final String COMMAND_FIND_USER = "find-user";
+
     private static final String COMMAND_VIEW_ITEM = "view-item";
     private static final String COMMAND_VIEW_TX = "view-tx";
     private static final String COMMAND_ADD_USER = "add-user";
     private static final String COMMAND_ADD_ITEM = "add-item";
+    private static final String COMMAND_FIND_ITEM = "find-item";
+
     private static final String COMMAND_ADD_TX = "add-tx";
     private static final String COMMAND_REMOVE_USER = "remove-user";
     private static final String COMMAND_REMOVE_ITEM = "remove-item";
@@ -142,6 +148,10 @@ public class CommandParser {
             return new SortItemCommand(parts, itemList, transactionList);
         case COMMAND_LIST_CATEGORIES:
             return new ListCategoriesCommand();
+        case COMMAND_FIND_ITEM:
+            return new FindItemCommand(parts, itemList);
+        case COMMAND_FIND_USER:
+            return new FindUserCommand(parts,userList);
         default:
             throw new CommandNotFoundException(MESSAGE_COMMAND_UNRECOGNIZABLE);
         }

@@ -55,6 +55,19 @@ public class ItemList {
         throw new ItemNotFoundException(MESSAGE_ITEM_NOT_FOUND);
     }
 
+    public ItemList getItemsByKeyword(String keyword) throws ItemNotFoundException{
+        ItemList returnList = new ItemList();
+        for (Item item : this.itemList) {
+            if ((item.getName()).contains(keyword)) {
+                returnList.addItem();
+            }
+        }
+        if(returnList.getListSize() == 0){
+            throw new ItemNotFoundException(MESSAGE_ITEM_NOT_FOUND);
+        }
+        return returnList;
+    }
+
     public int getListSize() {
         return itemList.size();
     }

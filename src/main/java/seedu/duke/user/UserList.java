@@ -44,6 +44,20 @@ public class UserList {
         throw new UserNotFoundException(MESSAGE_USER_NOT_FOUND);
     }
 
+    public UserList getUsersByKeyword(String keyword) throws UserNotFoundException {
+        UserList returnList = new UserList();
+        for (User user : userList) {
+            if (user.getName().contains(keyword)) {
+                assert user.getName().contains(keyword) : "equals function not working";
+                returnList.addUser(user);
+            }
+        }
+        if(returnList.getSize() == 0){
+            throw new UserNotFoundException(MESSAGE_USER_NOT_FOUND);
+        }
+        return returnList;
+    }
+
     public String listUser() {
         StringBuilder listOfUsers = new StringBuilder();
         listOfUsers.append("Here are your list of users:").append(System.lineSeparator());
