@@ -12,7 +12,7 @@ public class PairingList {
     private static final String SEPARATOR = " | ";
     private static final String OPEN_BRACKET = "[";
     private static final String CLOSE_BRACKET = "]";
-    private static final String LOG_ADD_PAIR = "The following pairing has been added to PairingList: ";
+    private static final String LOG_ADD_PAIR = "The following pairing has been added to PairingList:";
     private static final String LOG_DELETE_PAIR = "The following pairing(s) has been deleted from PairingList: ";
     private static final String LOG_PAIRS_WITH = "Pairs with ";
     private static final String LOG_COLON = " : ";
@@ -38,6 +38,8 @@ public class PairingList {
         assert !clientPropertyPairs.containsKey(client) : "Add Pairing: client already paired with property."
                 + " Pairing addition unsuccessful.";
         clientPropertyPairs.put(client, property);
+        LOGGER.log(Level.INFO, LOG_ADD_PAIR + System.lineSeparator()
+                + client.toString() + System.lineSeparator() + property.toString());
     }
 
 
@@ -48,16 +50,14 @@ public class PairingList {
      * @param property Property that is no longer being rented.
      */
     public void deletePairing(Client client, Property property) {
-        String clientPairingData = convertToPairingData(client);
-        String propertyPairingData = convertToPairingData(property);
-        assert clientPropertyPairs.containsKey(clientPairingData) : "Delete Pairing: client is not paired. "
+        assert clientPropertyPairs.containsKey(client) : "Delete Pairing: client is not paired. "
                 + "Pairing does not exist. Pairing deletion unsuccessful.";
 
-        boolean isRemoved = clientPropertyPairs.remove(clientPairingData, propertyPairingData);
+        boolean isRemoved = clientPropertyPairs.remove(client, property);
         assert isRemoved : "Delete Pairing: pairing deletion unsuccessful.";
 
         LOGGER.log(Level.INFO, LOG_DELETE_PAIR + System.lineSeparator()
-                + clientPairingData + LOG_COLON + propertyPairingData);
+                + client.toString() + System.lineSeparator() + property.toString());
     }
 
     /**

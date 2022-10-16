@@ -34,31 +34,6 @@ class PairingListTest {
     }
 
     @Test
-    void addPairing_correctClientPropertyStrings_success() {
-        PairingList pairingList = pairingListInit();
-
-        assertTrue(pairingList.getClientPropertyPairs().containsKey(PRESENT_CLIENT));
-        assertTrue(pairingList.getClientPropertyPairs().containsValue(PRESENT_PROPERTY));
-    }
-
-    @Test
-    void addPairing_invalidClientPropertyStrings_success() {
-        PairingList pairingList = pairingListInit();
-
-        String clientDataNoSquareBrackets = "Nicky Minaj | 93437878";
-        String clientDataNoSeparator = "[Nicki Minaj 93437878]";
-        String clientDataNoContactNumber = "[Nicki Minaj | ]";
-
-        assertFalse(pairingList.getClientPropertyPairs().containsKey(clientDataNoSquareBrackets));
-        assertFalse(pairingList.getClientPropertyPairs().containsKey(clientDataNoSeparator));
-        assertFalse(pairingList.getClientPropertyPairs().containsKey(clientDataNoContactNumber));
-
-        String propertyDataNoSquareBrackets =
-                "Mary Tan Bee Bee | 107 North Bridge Rd, Singapore 179105 | 1000 | HDB 3 Room";
-        assertFalse(pairingList.getClientPropertyPairs().containsValue(propertyDataNoSquareBrackets));
-    }
-
-    @Test
     void addPairing_propertyClientObjects_success() {
         PairingList pairingList = new PairingList();
 
@@ -67,6 +42,15 @@ class PairingListTest {
         assertTrue(pairingList.getClientPropertyPairs().containsKey(PRESENT_CLIENT));
         assertTrue(pairingList.getClientPropertyPairs().containsValue(PRESENT_PROPERTY));
     }
+
+    @Test
+    void deletePairing_clientPropertyObject_success() {
+        PairingList pairingList = pairingListInit();
+
+        pairingList.deletePairing(PRESENT_CLIENT, PRESENT_PROPERTY);
+        assertFalse(pairingList.getClientPropertyPairs().containsKey(PRESENT_CLIENT));
+    }
+
 
     @Test
     void deletePairing_propertyObject_success() {
