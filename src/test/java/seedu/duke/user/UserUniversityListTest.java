@@ -6,8 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 import seedu.duke.exceptions.InvalidUserCommandException;
 
-import java.util.NoSuchElementException;
-
 public class UserUniversityListTest {
     UserUniversityListManager testManager = new UserUniversityListManager();
 

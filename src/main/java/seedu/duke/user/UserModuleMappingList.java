@@ -4,7 +4,6 @@ import seedu.duke.exceptions.InvalidUserCommandException;
 import seedu.duke.ui.Ui;
 
 import java.util.ArrayList;
-import java.util.NoSuchElementException;
 
 /**
  * Class of module list that manages the modules that the user is interested in.

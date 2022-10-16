@@ -2,8 +2,6 @@ package seedu.duke;
 
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
-import java.util.Scanner;
-import java.util.stream.Collectors;
 
 import seedu.duke.command.Command;
 import seedu.duke.command.Database;
