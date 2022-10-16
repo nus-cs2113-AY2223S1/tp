@@ -5,10 +5,12 @@ import seedu.moneygowhere.commands.ConsoleCommandAddExpense;
 import seedu.moneygowhere.commands.ConsoleCommandDeleteExpense;
 import seedu.moneygowhere.commands.ConsoleCommandEditExpense;
 import seedu.moneygowhere.commands.ConsoleCommandViewExpense;
+import seedu.moneygowhere.commands.ConsoleCommandViewRecurringPayment;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandAddExpenseInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandDeleteExpenseInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandEditExpenseInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandViewExpenseInvalidException;
+import seedu.moneygowhere.exceptions.ConsoleParserCommandViewRecurringPaymentInvalidException;
 import seedu.moneygowhere.exceptions.MoneyGoWhereException;
 
 import java.math.BigDecimal;
@@ -457,5 +459,59 @@ class ConsoleParserTest {
 
         assertThrows(ConsoleParserCommandEditExpenseInvalidException.class, () ->
                 ConsoleParser.parse(input));
+    }
+
+    @Test
+    void parseCommand_vrp_ccvrp() throws
+            MoneyGoWhereException {
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_VIEW_RECURRING_PAYMENT;
+
+        ConsoleCommandViewRecurringPayment consoleCommandViewRecurringPayment =
+                (ConsoleCommandViewRecurringPayment) ConsoleParser.parse(input);
+
+        boolean isRecurringPaymentIndexEqual = consoleCommandViewRecurringPayment
+                .getRecurringPaymentIndex()
+                == -1;
+
+        assertTrue(isRecurringPaymentIndexEqual);
+    }
+
+    @Test
+    void parseCommand_vrpIndex_ccvrpIndex() throws
+            MoneyGoWhereException {
+        int recurringPaymentIndex = 1337;
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_VIEW_RECURRING_PAYMENT
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_VIEW_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX
+                + " "
+                + recurringPaymentIndex;
+
+        ConsoleCommandViewRecurringPayment consoleCommandViewRecurringPayment =
+                (ConsoleCommandViewRecurringPayment) ConsoleParser.parse(input);
+
+        boolean isRecurringPaymentIndexEqual = consoleCommandViewRecurringPayment
+                .getRecurringPaymentIndex()
+                == recurringPaymentIndex;
+
+        assertTrue(isRecurringPaymentIndexEqual);
+    }
+
+    @Test
+    void parseCommand_vrpInvalidIndex_ccvrpInvalidException() {
+        String recurringPaymentIndex = "InvalidIndex";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_VIEW_RECURRING_PAYMENT
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_VIEW_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX
+                + " "
+                + recurringPaymentIndex;
+
+        assertThrows(ConsoleParserCommandViewRecurringPaymentInvalidException.class, () ->
+                ConsoleParser.parse(input)
+        );
     }
 }
