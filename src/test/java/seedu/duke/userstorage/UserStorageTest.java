@@ -113,12 +113,12 @@ public class UserStorageTest {
     @Test
     public void testUserUniversityListManagerConversion_TwoUnisWithTwoModulesEach() {
         String fileContent = "Boston University%" + "MET CS 248;Discrete Mathematics;3;CS1231;Discrete Structures;4%"
-                + "CS103;Introduction to Internet Technologies and Web Programming;3;IT1001;Introduction to Computing;4%"
+                + "CS103;Introduction to Internet Technologies and Web Programming;3;"
+                + "IT1001;Introduction to Computing;4%"
                 + "/Arizona State University%" + "CSE412;Database Management;3;CS2102;Database Systems;4%"
                 + "CSE450;Design and Analysis of Algorithms;3;CS3230;Design & Analysis of Algorithm;4%";
         testManager = new UserUniversityListManager(fileContent);
         UserUniversityList testUniversityListBoston = testManager.getMyManager().get("Boston University");
-        UserUniversityList testUniversityListArizona = testManager.getMyManager().get("Arizona State University");
         assertEquals(testUniversityListBoston.getMyModules().getModules().get(0).getPuCode(), "MET CS 248");
         assertEquals(testUniversityListBoston.getMyModules().getModules().get(0).getPuTitle(), "Discrete Mathematics");
         assertEquals(testUniversityListBoston.getMyModules().getModules().get(0).getPuCredit(), "3");
@@ -133,7 +133,7 @@ public class UserStorageTest {
         assertEquals(testUniversityListBoston.getMyModules().getModules().get(1).getNusTitle(),
                 "Introduction to Computing");
         assertEquals(testUniversityListBoston.getMyModules().getModules().get(1).getNusCredit(), "4");
-
+        UserUniversityList testUniversityListArizona = testManager.getMyManager().get("Arizona State University");
         assertEquals(testUniversityListArizona.getMyModules().getModules().get(0).getPuCode(), "CSE412");
         assertEquals(testUniversityListArizona.getMyModules().getModules().get(0).getPuTitle(), "Database Management");
         assertEquals(testUniversityListArizona.getMyModules().getModules().get(0).getPuCredit(), "3");
