@@ -41,6 +41,9 @@ public class UserStorageParser {
                 output += module.getNusCredit() + "%" + "\n";
             }
         }
+        if (output.equals("")) {
+            return output;
+        }
         output = output.substring(1);   //remove first backslash
         logger.log(Level.INFO, "End of conversion to String from UserUniversityListManager");
         return output;
