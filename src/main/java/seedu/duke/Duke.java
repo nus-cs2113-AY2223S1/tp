@@ -110,11 +110,6 @@ public class Duke {
      * Main entry-point for the java.duke.Duke application.
      */
     public static void main(String[] args) {
-<<<<<<< HEAD
         new Duke(USER_FILE_PATH, ITEM_FILE_PATH, TRANSACTION_FILE_PATH).run();
-=======
-        assert false : "dummy assertion set to fail";
-        new Duke().run();
->>>>>>> 2e20a09f44da64052d9d9c86615dc38bba01250a
     }
 }
