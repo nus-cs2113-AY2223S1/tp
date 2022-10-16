@@ -39,7 +39,7 @@ public class Parking {
         Api api = new Api(LTA_JSON_FILE, API_JSON_DIRECTORY);
 
         try {
-            api.loadApiKey(API_KEY_FILE, API_JSON_DIRECTORY, true); // todo: does not update the file with default key
+            api.loadApiKey(API_KEY_FILE, API_JSON_DIRECTORY, true);
             api.asyncExecuteRequest();
             api.fetchData();
             ui.print("Fetching data from API successful!");
@@ -106,7 +106,7 @@ public class Parking {
             case AUTH:
                 try {
                     String[] words = input.trim().split("\\s+", 2);
-                    if (api.isApiAuthenticated(words[1])) {
+                    if (api.isApiValid(words[1])) {
                         auth.saveApiKey(input);
                         ui.showApiKeySaved();
                     }
