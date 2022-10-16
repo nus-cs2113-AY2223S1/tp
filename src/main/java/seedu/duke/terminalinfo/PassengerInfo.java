@@ -1,8 +1,14 @@
 package seedu.duke.terminalinfo;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class PassengerInfo {
+    private static SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yy");
+    private static Date date = new Date();
+    private static String dateToday = formatter.format(date);
+    private static String departureDate = dateToday;
     private String name;
-    private String departureDate;
     private String departureTime;
     private String flightNumber;
     private String gateNumber;
@@ -10,10 +16,9 @@ public class PassengerInfo {
     private String seatNumber;
     private String boardingTime;
 
-    public PassengerInfo(String name, String departureDate, String departureTime, String flightNumber,
+    public PassengerInfo(String name, String departureTime, String flightNumber,
                          String gateNumber, int boardingGroup, String seatNumber, String boardingTime) {
         this.name = name;
-        this.departureDate = departureDate;
         this.departureTime = departureTime;
         this.flightNumber = flightNumber;
         this.gateNumber = gateNumber;
@@ -26,7 +31,7 @@ public class PassengerInfo {
         return name;
     }
 
-    public String getDepartureDate() {
+    public static String getDepartureDate() {
         return departureDate;
     }
 

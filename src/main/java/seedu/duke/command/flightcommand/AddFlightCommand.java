@@ -1,7 +1,6 @@
 package seedu.duke.command.flightcommand;
 
 import seedu.duke.command.Command;
-import seedu.duke.exceptions.SkyControlException;
 import seedu.duke.operationlist.OperationList;
 
 import java.io.IOException;

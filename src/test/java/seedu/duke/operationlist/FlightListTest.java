@@ -14,8 +14,6 @@ class FlightListTest {
     protected static String deleteLineInput = "flight delete fn/sq712";
     protected static FlightList testFlightList = new FlightList();
 
-
-
     @Test
     void checkAddOperation() throws SkyControlException {
         Command testCommand = Parser.parse(addLineInput);
