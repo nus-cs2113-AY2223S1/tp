@@ -8,6 +8,11 @@ public class Category {
         OTHERS //TO BE ADDED LATER
     }
 
+    /**
+     * Sets the category number based on the category name.
+     * @param category type of category for the item user has added
+     * @return corresponding category number
+     */
     public static int setCategory(Categories category) {
         switch (category) {
         case SPORTS_EQUIPMENT:
@@ -21,6 +26,11 @@ public class Category {
         }
     }
 
+    /**
+     * Maps the category number to the corresponding category.
+     * @param categoryNumber integer to be mapped
+     * @return corresponding category enum
+     */
     public static Categories mapCategory(int categoryNumber) {
         switch (categoryNumber) {
         case 1:
@@ -34,6 +44,10 @@ public class Category {
         }
     }
 
+    /**
+     * List all available categories for the user to place their item in.
+     * @return list of categories that are available
+     */
     public static String listCategories() {
         StringBuilder list = new StringBuilder("Here are available categories: ");
         int index = 1;
