@@ -80,6 +80,8 @@ public class PassengerList extends OperationList {
     }
 
     private void validatePassenger(int index) {
+        getNumberOfPassengers();
+        assert index < numOfPassengers;
         isNamePresent = passengers.get(index).getName().contains(name);
         isFlightNumberPresent = passengers.get(index).getFlightNumber().contains(flightNumber);
         isSeatNumberPresent = passengers.get(index).getSeatNumber().contains(seatNumber);
@@ -101,6 +103,8 @@ public class PassengerList extends OperationList {
     }
 
     private void iteratePassengerDetail(int index) {
+        getNumberOfPassengers();
+        assert index < numOfPassengers;
         name = passengers.get(index).getName();
         departureDate = passengers.get(index).getDepartureDate();
         departureTime = passengers.get(index).getDepartureTime();
