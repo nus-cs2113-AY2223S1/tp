@@ -14,6 +14,9 @@ import static seedu.duke.storage.FilePath.ITEM_FILE_PATH;
 import static seedu.duke.storage.FilePath.TRANSACTION_FILE_PATH;
 import static seedu.duke.storage.FilePath.USER_FILE_PATH;
 
+/**
+ * A chatbot named Duke.
+ */
 public class Duke {
     private final UserList userList;
     private final ItemList itemList;
@@ -21,6 +24,13 @@ public class Duke {
     private final TransactionStorage transactionStorage;
     private boolean isLastCommand = false;
 
+    /**
+     * Constructor of Duke.
+     *
+     * @param userFilePath The file path that Duke stores its users.
+     * @param itemFilePath The file path that Duke stores its items.
+     * @param transactionFilePath The file path that Duke stores its transactions.
+     */
     public Duke(String userFilePath, String itemFilePath, String transactionFilePath) {
         userList = new UserList();
         itemList = new ItemList();
@@ -32,6 +42,9 @@ public class Duke {
         initializeTransactionList();
     }
 
+    /**
+     * Initialize transaction list.
+     */
     private void initializeTransactionList() {
         try {
             this.transactionList = new TransactionList(transactionStorage.loadData());
@@ -40,6 +53,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Writes data in 3 list to files.
+     *
+     * @param isLastCommand A boolean true if the exit command is input
+     * @throws StoreFailureException If something went wrong when storing the data
+     */
     private void writeDataToFile(boolean isLastCommand) throws StoreFailureException {
         if (isLastCommand) {
             //userStorage.writeData(userList)
@@ -48,6 +67,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the program.
+     */
     public void run() {
         Ui.printGreeting();
         while (!isLastCommand) {

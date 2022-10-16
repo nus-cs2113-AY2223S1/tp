@@ -43,7 +43,7 @@ public class SortItemCommand extends Command {
         this.transactionList = transactionList;
     }
 
-    public String[] getArgsSortItemsCmd() throws InvalidArgumentException {
+    private String[] getArgsSortItemsCmd() throws InvalidArgumentException {
         String[] args = new String[3];
         for (String part : parts) {
             if (part.startsWith("mo")) {
