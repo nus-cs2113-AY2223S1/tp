@@ -19,6 +19,8 @@ public class UserUniversityListManager {
     // we store the key as the PU name
     private HashMap<String, UserUniversityList> myManager;
 
+    private UserDeletedModules deletedModulesList = new UserDeletedModules();
+
     private static Logger logger = Logger.getLogger("UniversityListManagerLogger");
 
     public UserUniversityListManager() {
@@ -33,6 +35,10 @@ public class UserUniversityListManager {
             System.out.println("Creating new University List Manager");
             myManager = new HashMap<String, UserUniversityList>();
         }
+    }
+
+    public UserDeletedModules getUserDeletedModules() {
+        return deletedModulesList;
     }
 
     /**
