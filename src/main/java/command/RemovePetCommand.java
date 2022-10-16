@@ -5,17 +5,20 @@ import pet.PetList;
 
 public class RemovePetCommand {
     public final static String COMMAND_WORD = "remove";
-    private PetList Pets;
     private int index;
 
-    public RemovePetCommand(PetList pets, int index){
-        this.Pets = pets;
+    public RemovePetCommand(int index){
         this.index = index;
     }
 
-    public void excecute(){
+    public void execute(){
         int deleteIndex = index - 1;
-        Pets.petList.remove(deleteIndex);
+        PetList.petList.remove(deleteIndex);
         Pet.numOfPets--;
+        printPetRemoveMessage();
+    }
+
+    public void printPetRemoveMessage(){
+        System.out.println("Pet is removed");
     }
 }
