@@ -112,6 +112,7 @@ public class Duke {
                     } catch (ModuleNotFoundException | UniversityNotFoundException e) {
                         System.out.println(e.getMessage());
                     }
+                    break;
                 default:
                     break;
                 }
