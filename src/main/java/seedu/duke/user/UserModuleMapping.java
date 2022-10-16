@@ -20,7 +20,6 @@ public class UserModuleMapping {
         assert nusCredit.length() > 0 : "NUS module credits length cannot be null";
         University nus = new University("NUS", "Singapore");
         University pu = new University(puName, puCountry);
-
         nusModule = new Module(nusCode, nusTitle, nusCredit, nus);
         puModule = new Module(puCode, puTitle, puCredit, pu);
     }
@@ -44,6 +43,7 @@ public class UserModuleMapping {
     public String getPuTitle() {
         return puModule.getTitle();
     }
+
     public String getPuCredit() {return puModule.getCredit();}
 
     public String getComment() {
