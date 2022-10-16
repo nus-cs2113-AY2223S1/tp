@@ -22,7 +22,7 @@ public class PetParser {
         }
 
         String type = input.substring(0,input.indexOf(" "));
-        String statement = input.substring(input.indexOf(" ")).trim();
+        String statement = input.substring(input.indexOf(" "));
         switch(type) {
         case AddPetCommand.COMMAND_WORD:
             return prepareAddPet(statement);
