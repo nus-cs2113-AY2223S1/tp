@@ -26,6 +26,8 @@ public class PetParser {
         switch(type) {
         case AddPetCommand.COMMAND_WORD:
             return prepareAddPet(statement);
+        case RemovePetCommand.COMMAND_WORD:
+            return prepareRemovePet(statement);
         default:
             System.out.println("Error: unrecognized pet operation");
             return new EndCommand();
@@ -45,7 +47,7 @@ public class PetParser {
         String species = input.substring(startOfS + lengthOfSignature);
         return new AddPetCommand(name, species, true);
     }
-    /*
+
 
     public Command prepareRemovePet(String input){
         int index = parser.indexOfRemove(input);
@@ -56,5 +58,5 @@ public class PetParser {
 
         return new RemovePetCommand(index);
     }
-     */
+
 }

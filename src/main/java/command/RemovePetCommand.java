@@ -3,7 +3,7 @@ package command;
 import pet.Pet;
 import pet.PetList;
 
-public class RemovePetCommand {
+public class RemovePetCommand extends Command{
     public final static String COMMAND_WORD = "remove";
     private int index;
 
@@ -20,5 +20,10 @@ public class RemovePetCommand {
 
     public void printPetRemoveMessage(){
         System.out.println("Pet is removed");
+    }
+
+    @Override
+    public boolean isExit() {
+        return false;
     }
 }
