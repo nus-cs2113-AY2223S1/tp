@@ -3,6 +3,8 @@ package seedu.duke;
 import seedu.duke.module.Module;
 import seedu.duke.module.lessons.Lesson;
 import seedu.duke.data.DataManager;
+import seedu.duke.data.LessonManager;
+import seedu.duke.data.ModuleManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,8 +14,8 @@ public class Timetable {
 
     public static void addNewModule(String code, String name, String description, List<Lesson> lessons) {
         Module newModule = new Module(code, name, description, lessons); 
-        DataManager.addLessons(newModule);
-        DataManager.addModule(code, name, description);
+        LessonManager.addLesson(newModule);
+        ModuleManager.addModule(code, name, description);
         listOfModules.add(newModule);
     }
 
@@ -53,8 +55,9 @@ public class Timetable {
         return list.toString();
     }
 
-
     public void deleteModule(int index) {
+        Module module = listOfModules.get(index - 1);
+        DataManager.deleteModule(module);
         listOfModules.remove(index - 1);
     }    // the nth module in list has index n-1
 

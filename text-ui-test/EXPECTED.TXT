@@ -42,8 +42,8 @@ Here is a list of things I can do, enter the appropriate command to continue!
 
 Here are your modules:
 1. CS2113: Software Engineering & Object-Oriented Programming
-     [Lecture] Undetermined Day   Undetermined Time - Undetermined Time
      [Tutorial] Wednesday   12:00 - 13:00
+     [Lecture] Undetermined Day   Undetermined Time - Undetermined Time
 
 
 Here is a list of things I can do, enter the appropriate command to continue!
@@ -51,8 +51,8 @@ Here is a list of things I can do, enter the appropriate command to continue!
 
 Here are your modules:
 1. CS2113: Software Engineering & Object-Oriented Programming
-     [Lecture] Undetermined Day   Undetermined Time - Undetermined Time
      [Tutorial] Wednesday   12:00 - 13:00
+     [Lecture] Undetermined Day   Undetermined Time - Undetermined Time
 
 
 Which module you would like to delete? Please enter the index of that module. 
@@ -62,8 +62,8 @@ Here is a list of things I can do, enter the appropriate command to continue!
 
 Here are your modules:
 1. CS2113: Software Engineering & Object-Oriented Programming
-     [Lecture] Undetermined Day   Undetermined Time - Undetermined Time
      [Tutorial] Wednesday   12:00 - 13:00
+     [Lecture] Undetermined Day   Undetermined Time - Undetermined Time
 
 
 Which module you would like to delete? Please enter the index of that module. 
@@ -73,8 +73,8 @@ Here is a list of things I can do, enter the appropriate command to continue!
 
 Here are your modules:
 1. CS2113: Software Engineering & Object-Oriented Programming
-     [Lecture] Undetermined Day   Undetermined Time - Undetermined Time
      [Tutorial] Wednesday   12:00 - 13:00
+     [Lecture] Undetermined Day   Undetermined Time - Undetermined Time
 
 
 Which module you would like to delete? Please enter the index of that module. 
