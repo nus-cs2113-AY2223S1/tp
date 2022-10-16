@@ -36,6 +36,7 @@ public class UserStorageParser {
             for (UserModuleMapping module : modules) {
                 output += module.getPuCode() + ";";
                 output += module.getPuTitle() + ";";
+                output += module.getPuCredit() + ";";
                 output += module.getNusCode() + ";";
                 output += module.getNusTitle() + ";";
                 output += module.getNusCredit() + "%" + "\n";
@@ -54,7 +55,7 @@ public class UserStorageParser {
         logger.log(Level.INFO, "Start converting String to UserUniversityListManager");
         HashMap<String, UserUniversityList> myManager = new HashMap<String, UserUniversityList>();
         String[] unis = fileContent.split("/");
-        if (unis.length == 1 && unis[0].equals("")) {   //empty text file
+        if (unis.length == 1 && unis[0].equals("")) {
             return myManager;
         }
         for (String uni: unis) {
@@ -64,11 +65,11 @@ public class UserStorageParser {
             UserModuleMappingList moduleList = new UserModuleMappingList();
             for (int i = 1; i < items.length; ++i) {
                 String[] details = items[i].split(";");
-                if (details.length != 5) {
+                if (details.length != 6) {
                     throw new InvalidUserStorageFileException("Invalid file format");
                 }
                 UserModuleMapping userModule = new UserModuleMapping(details[0], details[1], details[2],
-                        details[3], details[4], details[2], uniName, "test");
+                        details[3], details[4], details[5], uniName, "test");
                 moduleList.addModule(userModule, true);
             }
             uniList.setMyModules(moduleList);
