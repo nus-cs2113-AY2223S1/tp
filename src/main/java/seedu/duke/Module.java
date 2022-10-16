@@ -20,12 +20,20 @@ public class Module {
         return moduleInformation;
     }
 
-    public String getCourse() { return this.course; }
+    public String getCourse() {
+        return this.course;
+    }
 
-    public String getSemesterTaken() { return this.semesterTaken; }
+    public String getSemesterTaken() {
+        return this.semesterTaken;
+    }
 
-    public String getGrade() { return this.grade; }
+    public String getGrade() {
+        return this.grade;
+    }
 
-    public int getMcs() { return this.mcs; }
+    public int getMcs() {
+        return this.mcs;
+    }
 
 }
