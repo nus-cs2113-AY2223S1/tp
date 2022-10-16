@@ -49,7 +49,7 @@ public class ViewCommand extends Command {
     }
 
     private void viewBiometrics() {
-        ui.output(biometrics.toString());
+        ui.output("Biometrics:\n" + biometrics.toString());
     }
 
     private void viewFood() throws IllegalValueException {

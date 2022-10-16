@@ -5,6 +5,9 @@ import seedu.duke.exception.IllegalValueException;
 import java.util.Arrays;
 
 public class Biometrics {
+
+    private final String[] genderOptions = new String[]{"male", "female", "other"};
+
     private int age;
     private String gender;
     private int height;
@@ -41,19 +44,58 @@ public class Biometrics {
         return fatPercentage;
     }
 
-    public void setBiometrics(int age, String gender, int height, int weight, int fatPercentage) {
-        this.age = age;
-        this.gender = gender;
-        this.height = height;
-        this.weight = weight;
-        this.fatPercentage = fatPercentage;
+    public void setBiometrics(int age, String gender, int height, int weight, int fatPercentage)
+            throws IllegalValueException {
+        setAge(age);
+        setGender(gender);
+        setHeight(height);
+        setWeight(weight);
+        setFatPercentage(fatPercentage);
         isSet = true;
+    }
+
+    public void setAge(int age) throws IllegalValueException {
+        if (age <= 0 || age > 120) {
+            throw new IllegalValueException("That age ain't possible");
+        }
+        this.age = age;
+    }
+
+    public void setGender(String gender) throws IllegalValueException {
+        if (!Arrays.asList(genderOptions).contains(gender)) {
+            throw new IllegalValueException("Hi, I only recognise other, female and male genders");
+        }
+        this.gender = gender;
+    }
+
+    public void setHeight(int height) throws IllegalValueException {
+        if (height <= 0 || height > 300) {
+            throw new IllegalValueException("That's a strange height...");
+        }
+        this.height = height;
+    }
+
+    public void setWeight(int weight) throws IllegalValueException {
+        if (weight <= 0 || weight > 400) {
+            throw new IllegalValueException("That weight can't be real!");
+        }
+        this.weight = weight;
+    }
+
+    public void setFatPercentage(int fatPercentage) throws IllegalValueException {
+        if (fatPercentage <= 0 || fatPercentage >= 100) {
+            throw new IllegalValueException("Invalid fat percentage");
+        }
+        this.fatPercentage = fatPercentage;
     }
 
     @Override
     public String toString() {
-        return "Biometrics" + System.lineSeparator()
-                + "Age: " + age + System.lineSeparator()
+        if(!isSet){
+            return "Biometrics are not set";
+        }
+        assert (age != 0 && !gender.equals("-") && height != 0 && weight != 0 && fatPercentage != 0);
+        return "Age: " + age + System.lineSeparator()
                 + "Gender: " + gender + System.lineSeparator()
                 + "Height: " + height + "cm" + System.lineSeparator()
                 + "Weight: " + weight + "kg" + System.lineSeparator()
