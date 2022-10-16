@@ -45,7 +45,9 @@ public class UserModuleMapping {
         return puModule.getTitle();
     }
 
-    public String getPuCredit() {return puModule.getCredit();}
+    public String getPuCredit() {
+        return puModule.getCredit();
+    }
 
     public String getComment() {
         return comment;
