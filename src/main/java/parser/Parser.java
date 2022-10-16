@@ -235,8 +235,8 @@ public class Parser {
         }
 
         String name = input.substring(startOfN -1 + lengthOfSignature, startOfS);
-        String status = input.substring(startOfS + lengthOfSignature);
-        return new AddPetCommand(name, status, true);
+        String species = input.substring(startOfS + lengthOfSignature);
+        return new AddPetCommand(name, species, true);
     }
 
 

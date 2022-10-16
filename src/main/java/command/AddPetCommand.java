@@ -23,6 +23,11 @@ public class AddPetCommand extends Command {
         Pet petToAdd = new Pet(name, species, ishealthy);
         Pets.petList.add(petToAdd);
         Pet.numOfPets++;
+        printAddPetMessage();
+    }
+
+    public void printAddPetMessage(){
+        System.out.println(String.format("Pet has been registered: name: %s, species: %s", name, species));
     }
 
     @Override
