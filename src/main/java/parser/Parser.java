@@ -3,6 +3,19 @@ import command.*;
 
 public class Parser {
     private final int lengthOfSignature = 3;
+    private ServiceParser serviceParser;
+    private EmployeeParser employeeParser;
+    private PetParser petParser;
+    private AppointmentParser appointmentParser;
+
+    public Parser(){
+        serviceParser = new ServiceParser();
+        employeeParser = new EmployeeParser();
+        petParser = new PetParser();
+        appointmentParser = new AppointmentParser();
+    }
+
+
     public Command parseCommand(String input){
         input = input.trim();
 
@@ -21,13 +34,13 @@ public class Parser {
 
         switch(type) {
         case "appointment":
-            return parseAppointment(statement);
+            return appointmentParser.parseAppointment(statement);
         case "pet":
-            return parsePet(statement);
+            return petParser.parsePet(statement);
         case "employee":
-            return parseEmployee(statement);
+            return employeeParser.parseEmployee(statement);
         case "service":
-            return parseService(statement);
+            return serviceParser.parseService(statement);
         default:
             System.out.println("Error: unrecognized operation");
             return new EndCommand();
