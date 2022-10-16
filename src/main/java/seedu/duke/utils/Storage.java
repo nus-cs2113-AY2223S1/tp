@@ -46,9 +46,12 @@ public class Storage {
 
     private static final String MODULE_CODE_DELIMITER = "=";
 
-    private static final String SUPPOSED_START = "https://nusmods.com/timetable/sem-1/share?";
+    private static final String POSSIBLE_SEMESTER_NUMBER = "1";
 
-    private static final String SUPPOSED_START_REGEX = "https://nusmods.com/timetable/sem-\\d/share?";
+    private static final String SUPPOSED_PREFIX = DOMAIN + SEMESTER_DELIMITER + POSSIBLE_SEMESTER_NUMBER
+            + DELIMITER + SHARE_DELIMITER;
+
+    private static final String SUPPOSED_START_REGEX = DOMAIN + SEMESTER_DELIMITER + "\\d/share\\?";
 
     private static String moduleDelimiter = "&";
 
@@ -104,7 +107,7 @@ public class Storage {
         Scanner scanner = new Scanner(file);
         while (scanner.hasNext()) {
             String line = scanner.nextLine();
-            if (!line.isEmpty()) {
+            if (!line.isEmpty() && isValidPreviousState(line)) {
                 link = line;
                 break;
             }
@@ -120,28 +123,42 @@ public class Storage {
      * @param state current state of the application to be saved
      */
     public void loadPreviousState(String link, State state) {
-        if (!isValidPreviousState(link)) {
+        if (link.isEmpty()) {
             return;
         }
+        //Initial string :https://nusmods.com/timetable/sem-SEMESTER_NUMBER/share?MODULE_INFO&MODULE_INFO
         String[] infoParam = link.split(DELIMITER);
+        /*
+        infoParam[0] = "https:";
+        infoParam[1] = "";
+        infoParam[2] = "nusmods.com";
+        infoParam[3] = "timetable";
+        infoParam[4] = "sem-SEMESTER_NUMBER"; <- SEMESTER_PARAM_INDEX
+        infoParam[5] = "share?MODULE_INFO&MODULE_INFO"; <- MODULES_PARAM_INDEX
+         */
         String semesterParam = infoParam[SEMESTER_PARAM_INDEX];
-        int semester = Integer.parseInt(semesterParam.replace(SEMESTER_DELIMITER,""));
+        int semester;
+        try {
+            semester = getSemesterFromParam(semesterParam);
+        } catch (NumberFormatException e) {
+            semester = 0;
+        }
         if (Arrays.asList(1, 2, 3, 4).contains(semester)) {
             state.setSemester(semester);
         } else {
             return;
         }
         String modulesParam = infoParam[MODULES_PARAM_INDEX];
-        String cleanModuleParam = modulesParam.replace(SHARE_DELIMITER,"");
+        String cleanModuleParam = modulesParam.replace(SHARE_DELIMITER, "");
         String[] moduleAndLessonsArray = cleanModuleParam.split(moduleDelimiter);
         for (String moduleAndLessons : moduleAndLessonsArray) {
             String[] splitModuleAndLesson = moduleAndLessons.split(MODULE_CODE_DELIMITER);
-            String moduleCode = splitModuleAndLesson[0];
+            String moduleCode = splitModuleAndLesson[0].toUpperCase();
             Module module = Module.get(moduleCode);
             if (module == null || module.getSemesterData(semester) == null) {
                 continue;
             }
-            SelectedModule selectedModule = new SelectedModule(module,semester);
+            SelectedModule selectedModule = new SelectedModule(module, semester);
             String[] lessonsInfo = splitModuleAndLesson[1].split(lessonDelimiter);
             addLessons(lessonsInfo, selectedModule, semester);
             state.addSelectedModule(selectedModule);
@@ -149,7 +166,19 @@ public class Storage {
     }
 
     /**
-     * Checks for potentially empty <code>duke.txt</code> file that the user might have accidentally modified.
+     * Extracts the semester number from the semester parameter.
+     *
+     * @param semesterParam clean semester parameter which should contain of a single digit
+     * @return the semester number of the previous saved state
+     * @throws NumberFormatException the semester parameter has been modified incorrectly to include other characters
+     */
+    private static int getSemesterFromParam(String semesterParam) throws NumberFormatException {
+        return Integer.parseInt(semesterParam.replace(SEMESTER_DELIMITER, ""));
+    }
+
+    /**
+     * Checks if the saved state is of the correct form. Also checks for potentially wrongly modified
+     * <code>duke.txt</code> file.
      *
      * @param link single string from the saved <code>duke.txt</code> file
      * @return if the link is of a valid form
@@ -158,8 +187,8 @@ public class Storage {
         Pattern pattern = Pattern.compile(SUPPOSED_START_REGEX);
         Matcher matcher = pattern.matcher(link);
         boolean hasMatch = matcher.find();
-        boolean hasLongerLength = link.length() > SUPPOSED_START.length();
-        return hasMatch && hasLongerLength;
+        boolean hasRequiredLength = link.length() >= SUPPOSED_PREFIX.length();
+        return hasMatch && hasRequiredLength;
     }
 
     /**
@@ -231,7 +260,7 @@ public class Storage {
         map.put("SEC", LessonType.SECTIONAL_TEACHING);
         map.put("WKSH", LessonType.WORKSHOP);
         map.put("LAB", LessonType.LABORATORY);
-        map.put("PROJ",LessonType.MINI_PROJECT);
+        map.put("PROJ", LessonType.MINI_PROJECT);
         map.put("SEM", LessonType.SEMINAR_STYLE_MODULE_CLASS);
         return map.get(shortString);
     }
@@ -260,16 +289,12 @@ public class Storage {
         toSave.append(DELIMITER);
         toSave.append(SHARE_DELIMITER);
         List<SelectedModule> selectedModules = state.getSelectedModulesList();
-        appendModules(selectedModules,toSave);
-        String link = String.valueOf(toSave);
-        if (link.endsWith(",")) {
-            link = link.substring(0,link.length() - 1);
-        }
+        appendModules(selectedModules, toSave);
         ui.addMessage(EXPORT_MESSAGE);
-        ui.addMessage(link);
+        ui.addMessage(String.valueOf(toSave));
         ui.displayUi();
         FileWriter fw = new FileWriter(file);
-        fw.write(link);
+        fw.write(String.valueOf(toSave));
         fw.close();
     }
 
@@ -289,7 +314,6 @@ public class Storage {
             toSave.append(MODULE_CODE_DELIMITER);
             Map<LessonType, String> selectedSlots = selectedModule.getSelectedSlots();
             appendLessons(selectedSlots, toSave);
-
         }
     }
 
@@ -305,8 +329,7 @@ public class Storage {
         for (Map.Entry<LessonType, String> slot: selectedSlots.entrySet()) {
             toSave.append(lessonDelimiter);
             lessonDelimiter = ",";
-            LessonType lessonType = slot.getKey();
-            String shortLessonType = Timetable.lessonTypeToShortString(lessonType);
+            String shortLessonType = Timetable.lessonTypeToShortString(slot.getKey());
             toSave.append(shortLessonType);
             toSave.append(LESSON_TYPE_DELIMITER);
             toSave.append(slot.getValue());
