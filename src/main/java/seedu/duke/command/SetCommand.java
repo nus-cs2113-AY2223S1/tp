@@ -23,7 +23,7 @@ public class SetCommand extends Command {
     private Ui ui;
     private Biometrics biometrics;
 
-    private String arguments;
+    private final String arguments;
     private final boolean toDisplay;
 
     public SetCommand(String arguments, boolean toDisplay) {
@@ -51,10 +51,10 @@ public class SetCommand extends Command {
             String gender = argumentList[2];
             int height = Integer.parseInt(argumentList[3]);
             int weight = Integer.parseInt(argumentList[4]);
-            int fatPercentage = Integer.parseInt(argumentList[5]);
-            biometrics.setBiometrics(age, gender, height, weight, fatPercentage);
+            int fat = Integer.parseInt(argumentList[5]);
+            biometrics.setBiometrics(age, gender, height, weight, fat);
             logger.log(Level.FINE, "parameters: "
-                    + String.format("%d %s %d %d %d", age, gender, height, weight, fatPercentage));
+                    + String.format("%d %s %d %d %d", age, gender, height, weight, fat));
             if (toDisplay) {
                 ui.output("Biometrics set:\n" + biometrics.toString());
             }

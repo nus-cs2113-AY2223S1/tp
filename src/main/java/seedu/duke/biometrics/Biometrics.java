@@ -12,16 +12,18 @@ public class Biometrics {
     private String gender;
     private int height;
     private int weight;
-    private int fatPercentage;
+    private int fat;
     public boolean isSet;
+    public WeightAndFatList weightAndFatList;
 
     public Biometrics() {
         age = 0;
         gender = "-";
         height = 0;
         weight = 0;
-        fatPercentage = 0;
+        fat = 0;
         isSet = false;
+        weightAndFatList = new WeightAndFatList();
     }
 
     public int getAge() {
@@ -40,17 +42,16 @@ public class Biometrics {
         return weight;
     }
 
-    public int getFatPercentage() {
-        return fatPercentage;
+    public int getFat() {
+        return fat;
     }
 
-    public void setBiometrics(int age, String gender, int height, int weight, int fatPercentage)
-            throws IllegalValueException {
+    public void setBiometrics(int age, String gender, int height, int weight, int fat) throws IllegalValueException {
         setAge(age);
         setGender(gender);
         setHeight(height);
         setWeight(weight);
-        setFatPercentage(fatPercentage);
+        setFat(fat);
         isSet = true;
     }
 
@@ -76,33 +77,29 @@ public class Biometrics {
     }
 
     public void setWeight(int weight) throws IllegalValueException {
-        if (weight <= 0 || weight > 400) {
-            throw new IllegalValueException("That weight can't be real!");
-        }
+        WeightAndFat.checkWeight(weight);
         this.weight = weight;
     }
 
-    public void setFatPercentage(int fatPercentage) throws IllegalValueException {
-        if (fatPercentage <= 0 || fatPercentage >= 100) {
-            throw new IllegalValueException("Invalid fat percentage");
-        }
-        this.fatPercentage = fatPercentage;
+    public void setFat(int fat) throws IllegalValueException {
+        WeightAndFat.checkFat(fat);
+        this.fat = fat;
     }
 
     @Override
     public String toString() {
-        if(!isSet){
+        if (!isSet) {
             return "Biometrics are not set";
         }
-        assert (age != 0 && !gender.equals("-") && height != 0 && weight != 0 && fatPercentage != 0);
+        assert (age != 0 && !gender.equals("-") && height != 0 && weight != 0 && fat != 0);
         return "Age: " + age + System.lineSeparator()
                 + "Gender: " + gender + System.lineSeparator()
                 + "Height: " + height + "cm" + System.lineSeparator()
                 + "Weight: " + weight + "kg" + System.lineSeparator()
-                + "Fat percentage: " + fatPercentage + "%";
+                + "Fat percentage: " + fat + "%";
     }
 
     public String saveBiometrics() {
-        return String.format("/%d /%s /%d /%d /%d", age, gender, height, weight, fatPercentage);
+        return String.format("/%d /%s /%d /%d /%d", age, gender, height, weight, fat);
     }
 }

@@ -1,6 +1,8 @@
 package seedu.duke.command;
 
 import seedu.duke.biometrics.Biometrics;
+import seedu.duke.biometrics.WeightAndFat;
+import seedu.duke.biometrics.WeightAndFatList;
 import seedu.duke.food.Food;
 import seedu.duke.Parser;
 import seedu.duke.Ui;
@@ -19,14 +21,15 @@ public class AddCommand extends Command {
     private boolean toDisplay;
     private Food food;
     public static final String INVALID_FOOD_INPUT = "Invalid food input";
-    final String[] invalidFoodNames = { "", " ", "[]\\[;]" };
+    final String[] invalidFoodNames = {"", " ", "[]\\[;]"};
 
     private Exercise exercise;
     private ExerciseList exerciseList;
 
     private FoodList foodList;
 
-    public AddCommand(String arguments) {
+    private Biometrics biometrics;
+
     public AddCommand(String arguments, boolean toDisplay) {
         this.arguments = arguments;
         this.toDisplay = toDisplay;
@@ -40,8 +43,11 @@ public class AddCommand extends Command {
         case ("food"):
             addFood(argumentList);
             break;
-        case("exercise"):
+        case ("exercise"):
             addExercise(argumentList);
+            break;
+        case ("weight"):
+            addWeightAndFat(argumentList);
             break;
         default:
             handleInvalidAddType();
@@ -92,6 +98,26 @@ public class AddCommand extends Command {
         }
     }
 
+    private void addWeightAndFat(String[] argumentList) throws IllegalValueException {
+        if (argumentList.length != 3) {
+            throw new IllegalValueException("INVALID_WEIGHT_INPUT");
+        }
+        try {
+            int weight = Integer.parseInt(argumentList[1]);
+            int fat = Integer.parseInt(argumentList[2]);
+            WeightAndFat weightAndFat = new WeightAndFat(weight, fat);
+            biometrics.weightAndFatList.addWeightAndFat(weightAndFat);
+            biometrics.setWeight(weight);
+            biometrics.setFat(fat);
+            if (toDisplay) {
+                ui.output(weightAndFat.toString());
+                ui.output(" Weight and fat percentage are recorded successfully");
+            }
+        } catch (NumberFormatException e) {
+            throw new IllegalValueException("Weight and fat percentage should be numerical");
+        }
+    }
+
     private String extractFoodName(String input) throws IllegalValueException {
         if (Arrays.asList(invalidFoodNames).contains(input)) {
             throw new IllegalValueException("Please provide valid food description inputs!");
@@ -112,5 +138,6 @@ public class AddCommand extends Command {
         this.ui = ui;
         this.exerciseList = exerciseList;
         this.foodList = foodList;
+        this.biometrics = biometrics;
     }
 }

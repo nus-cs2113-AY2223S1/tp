@@ -38,7 +38,7 @@ class SetCommandTest {
         assertEquals(gender, biometrics.getGender());
         assertEquals(height, biometrics.getHeight());
         assertEquals(weight, biometrics.getWeight());
-        assertEquals(fatPercentage, biometrics.getFatPercentage());
+        assertEquals(fatPercentage, biometrics.getFat());
     }
 
     @Test

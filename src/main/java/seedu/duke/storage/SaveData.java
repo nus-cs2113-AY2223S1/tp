@@ -3,6 +3,7 @@ package seedu.duke.storage;
 
 import seedu.duke.Ui;
 import seedu.duke.biometrics.Biometrics;
+import seedu.duke.biometrics.WeightAndFat;
 import seedu.duke.exception.IllegalValueException;
 import seedu.duke.exercise.Exercise;
 import seedu.duke.exercise.ExerciseList;
@@ -30,16 +31,19 @@ public class SaveData {
         FileWriter output = new FileWriter(dataFile.toFile());
         String dataType;
         if (biometrics.isSet) {
-            dataType = "biometrics";
-            output.write(String.format("%s %s",
-                    dataType, biometrics.saveBiometrics()) + System.lineSeparator());
+            dataType = "biometrics ";
+            output.write(dataType + biometrics.saveBiometrics() + System.lineSeparator());
         }
-        //        dataType = "exercise";
+        dataType = "weight ";
+        for (WeightAndFat weightAndFat : biometrics.weightAndFatList.getWeightAndFatList()) {
+            output.write(dataType + weightAndFat.saveWeightAndFat() + System.lineSeparator());
+        }
+        //        dataType = "exercise ";
         //        for (Exercise exercise : exerciseList.getCompletedExerciseList()){
         //            output.write(String.format("%s %s",
         //                    dataType, exerciseList.saveExercise()) + System.lineSeparator());
         //        }
-        //        dataType = "food";
+        //        dataType = "food ";
         //        for (Food food : foodList.getFoodList()){
         //            output.write(String.format("%s %s",
         //                    dataType, foodList.saveFood()) + System.lineSeparator());
