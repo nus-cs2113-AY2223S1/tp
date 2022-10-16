@@ -59,8 +59,8 @@ public class TransactionStorage extends Storage {
     public void writeData(TransactionList transactionList) throws StoreFailureException {
         try {
             FileWriter fileWriter = new FileWriter(transactionFilePath);
-            String formattedTaskList = transactionList.convertTransactionListToFileFormat();
-            fileWriter.write(formattedTaskList);
+            String formattedTransactionList = transactionList.convertTransactionListToFileFormat();
+            fileWriter.write(formattedTransactionList);
             fileWriter.close();
         } catch (IOException e) {
             int startIndex = transactionFilePath.lastIndexOf("/");
@@ -76,7 +76,7 @@ public class TransactionStorage extends Storage {
     }
 
     /**
-     * Analyses the information the tasks stored in the file.
+     * Analyses the information the transactions stored in the file.
      *
      * @param splitTransactionLine The raw transaction information.
      * @return A Transaction with full information.
