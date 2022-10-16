@@ -15,13 +15,13 @@ The viewTransactionsByStatus feature is facilitated by the TransactionList class
 
 Given below is an example usage scenario and how the command mechanism behaves at each step.
 
-Step 1: The user types in the command in the command line. The CommandParser class checks if the command is valid and either sends an exception, or send the input to the ViewTransactionsByStatus command to be processed.
+Step 1: The user types in the command in the command line. The CommandParser class checks if the command is valid through the createCommand() method, and either sends an exception, or send the input to the ViewTransactionsByStatus command to be processed.
 
-Step 2: The ViewTransactionsByStatus command checks if the delimiter ('s') is present in the user input. If not present, an exception will be thrown. The command also checks whether the input's final argument is 'finished' or 'unfinish'. An exception will also be thrown if the final argument does not match the required words.
+Step 2: The ViewTransactionsByStatus command checks if the delimiter ('s') is present in the user input through the getArgs() method. If not present, an exception will be thrown. The command also checks whether the input's final argument is 'finished' or 'unfinish' through the isValidArgument() method. An exception will also be thrown if the final argument does not match the required words.
 
 Step 3: Assuming the final argument is 'finish', the entire transactionList will be iterated through, and an array will store the transaction if the transaction.isFinished() status is true. 
 
-Step 4: Once the transactionList has been completely iterated through, a message will be displayed to the user via Ui.viewcompletedTransactionsMessage which lists down all the transactions that have their isFinished() status set to true. 
+Step 4: Once the transactionList has been completely iterated through, a message will be displayed to the user via Ui.viewcompletedTransactionsMessage() which lists down all the transactions that have their isFinished() status set to true. 
 
 The following sequence diagram shows how the viewTransactionsByStatus operation works:
 
