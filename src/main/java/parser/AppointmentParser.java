@@ -67,11 +67,11 @@ public class AppointmentParser {
             return new EndCommand();
         }
 
-        // String service = input.substring(s + lengthOfSignature, p);
+        String service = input.substring(s + lengthOfSignature, p);
         String petName = input.substring(p + lengthOfSignature, d);
         String appointmentDate = input.substring(d + lengthOfSignature);
 
-        return new AddAppointmentCommand(petName, appointmentDate);
+        return new AddAppointmentCommand(petName, appointmentDate, service);
     }
 
     /*
