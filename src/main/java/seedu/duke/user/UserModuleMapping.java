@@ -9,8 +9,8 @@ public class UserModuleMapping {
     Module puModule;
     private String comment;
 
-    public UserModuleMapping(String puCode, String puTitle, String nusCode, String nusTitle,
-                             String nusCredit, String puCredit, String puName, String puCountry) {
+    public UserModuleMapping(String puCode, String puTitle, String puCredit, String nusCode, String nusTitle,
+                             String nusCredit, String puName, String puCountry) {
         assert puCode.length() > 0 : "PU module code length cannot be null";
         assert puTitle.length() > 0 : "PU module title length cannot be null";
         assert puCredit.length() > 0 : "PU module credits length cannot be null";

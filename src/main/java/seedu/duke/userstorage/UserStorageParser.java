@@ -67,8 +67,8 @@ public class UserStorageParser {
             String uniName = items[0];
             UserUniversityList uniList = new UserUniversityList(uniName);
             UserModuleMappingList moduleList = new UserModuleMappingList();
-            assert items.length > 1 : "This university has at least one module saved";
             for (int i = 1; i < items.length; ++i) {
+                assert items.length > 1 : "This university has at least one module saved";
                 String[] details = items[i].split(";");
                 if (details.length != 6) {
                     throw new InvalidUserStorageFileException("Invalid file format");
