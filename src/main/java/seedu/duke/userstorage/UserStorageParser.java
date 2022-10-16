@@ -34,6 +34,7 @@ public class UserStorageParser {
             output += "/" + uni.getUniversityName() + "%" + "\n";
             ArrayList<UserModuleMapping> modules = uni.getMyModules().getModules();
             for (UserModuleMapping module : modules) {
+                assert modules.size() > 0: "at least one module in this university";
                 output += module.getPuCode() + ";";
                 output += module.getPuTitle() + ";";
                 output += module.getPuCredit() + ";";
@@ -45,6 +46,7 @@ public class UserStorageParser {
         if (output.equals("")) {
             return output;
         }
+        assert output.length() > 0: "output must have at least one uni";
         output = output.substring(1);   //remove first backslash
         logger.log(Level.INFO, "End of conversion to String from UserUniversityListManager");
         return output;
@@ -58,11 +60,13 @@ public class UserStorageParser {
         if (unis.length == 1 && unis[0].equals("")) {
             return myManager;
         }
+        assert unis.length >= 1: "at least one university exists in the file content";
         for (String uni: unis) {
             String[] items = uni.split("%");
             String uniName = items[0];
             UserUniversityList uniList = new UserUniversityList(uniName);
             UserModuleMappingList moduleList = new UserModuleMappingList();
+            assert items.length > 1: "This university has at least one module saved";
             for (int i = 1; i < items.length; ++i) {
                 String[] details = items[i].split(";");
                 if (details.length != 6) {
