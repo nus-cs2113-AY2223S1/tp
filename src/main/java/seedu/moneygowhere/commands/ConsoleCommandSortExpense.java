@@ -12,9 +12,6 @@ public class ConsoleCommandSortExpense extends ConsoleCommand {
     private String type;
     private boolean order;
 
-    public String getType() {
-        return type;
-    }
 
     /**
      * Reads in type & order of sorting to run sorting command later.
@@ -31,10 +28,38 @@ public class ConsoleCommandSortExpense extends ConsoleCommand {
         }
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public String getOrder() {
+        if (order) {
+            return ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_ORDER_VAL_ASCENDING;
+        }
+        return ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_ORDER_VAL_DESCENDING;
+    }
+
+    /**
+     * Function to get the comparator based on type of sorting.
+     *
+     * @return a comparator that corresponds to the type of sorting
+     */
+    public Comparator<Expense> getComparator() {
+        Comparator<Expense> comparator = null;
+        if (type.equalsIgnoreCase(ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE_VAL_DATE)) {
+            comparator = sortByDate;
+        } else if (type.equalsIgnoreCase(ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE_VAL_ALPHABETICAL)) {
+            comparator = sortByAlphabet;
+        } else if (type.equalsIgnoreCase(ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE_VAL_AMOUNT)) {
+            comparator = sortByAmount;
+        }
+        return comparator;
+    }
+
     /**
      * Comparator sorts by date in ascending or descending order.
      */
-    public Comparator<Expense> sortByDate = new Comparator<Expense>() {
+    private Comparator<Expense> sortByDate = new Comparator<>() {
         @Override
         public int compare(Expense expense1, Expense expense2) {
             LocalDateTime expenseName1 = expense1.getDateTime();
@@ -49,7 +74,7 @@ public class ConsoleCommandSortExpense extends ConsoleCommand {
     /**
      * Comparator sorts from A to Z if ascending order, Z to A if descending order.
      */
-    public Comparator<Expense> sortByAlphabet = new Comparator<Expense>() {
+    private Comparator<Expense> sortByAlphabet = new Comparator<>() {
         @Override
         public int compare(Expense expense1, Expense expense2) {
             String expenseName1 = expense1.getName();
@@ -64,7 +89,7 @@ public class ConsoleCommandSortExpense extends ConsoleCommand {
     /**
      * Comparator sorts by amount, in ascending/descending order.
      */
-    public Comparator<Expense> sortByAmount = new Comparator<Expense>() {
+    private Comparator<Expense> sortByAmount = new Comparator<>() {
         @Override
         public int compare(Expense expense1, Expense expense2) {
             BigDecimal expenseName1 = expense1.getAmount();
