@@ -8,6 +8,7 @@ import seedu.duke.command.ExitCommand;
 import seedu.duke.command.DeleteCommand;
 import seedu.duke.command.ViewCommand;
 import seedu.duke.command.HelpCommand;
+import seedu.duke.command.ListCommand;
 import seedu.duke.exceptions.InvalidUserCommandException;
 
 public class CommandParser {
@@ -58,8 +59,17 @@ public class CommandParser {
             }
             userInputTokenized[1] = userInputTokenized[1].replace('_', ' ');
             boolean isDeleteModule = userInputTokenized.length == 3;
-            DeleteCommand newDeleteCommand = new DeleteCommand(userInputTokenized, CommandType.DELETE, isDeleteModule);
+            DeleteCommand newDeleteCommand = new DeleteCommand(userInputTokenized, CommandType.DELETE,
+                    isDeleteModule);
             return newDeleteCommand;
+        case "/list":
+            if (!isValidListCommand(userInputTokenized)) {
+                throw new InvalidUserCommandException("Error! Invalid list command. "
+                        + "Please follow the command format provided");
+            }
+            userInputTokenized[1] = userInputTokenized[1].replace('_', ' ');
+            ListCommand newListCommand = new ListCommand(userInputTokenized, CommandType.LIST);
+            return newListCommand;
         default:
             throw new InvalidUserCommandException("Error! Unidentified command. "
                     + "Please follow the command format provided!");
@@ -67,8 +77,7 @@ public class CommandParser {
     }
 
     private static boolean isValidViewCommand(String[] parameters) {
-        if (parameters.length == 2 && (parameters[1].startsWith("u/") || parameters[1].trim().equals("LISTS")
-                || parameters[1].trim().equals("UNIVERSITIES") || parameters[1].trim().equals("MODULES"))) {
+        if (parameters.length == 2 && (parameters[1].startsWith("u/") || parameters[1].trim().equals("LISTS"))) {
             return true;
         } else if (parameters.length == 3 && parameters[1].trim().equals("DATABASE")
                 && parameters[2].startsWith("u/")) {
@@ -100,6 +109,16 @@ public class CommandParser {
 
     private static boolean isValidCreateCommand(String[] parameters) {
         if (parameters.length == 2 && parameters[1].startsWith("u/")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private static boolean isValidListCommand(String[] parameters) {
+        if (parameters.length == 2
+                && (parameters[1].trim().equals("UNIVERSITIES") || parameters[1].trim().equals("MODULES")
+                || parameters[1].startsWith("m/") || parameters[1].startsWith("u/"))) {
             return true;
         } else {
             return false;

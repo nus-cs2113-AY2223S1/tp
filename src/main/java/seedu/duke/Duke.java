@@ -8,9 +8,11 @@ import java.util.stream.Collectors;
 import seedu.duke.command.Command;
 import seedu.duke.command.Database;
 import seedu.duke.command.DatabaseStorage;
+import seedu.duke.command.ListCommand;
 import seedu.duke.command.ViewCommand;
 import seedu.duke.exceptions.InvalidUserCommandException;
 import seedu.duke.exceptions.ModuleNotFoundException;
+import seedu.duke.exceptions.UniversityNotFoundException;
 import seedu.duke.module.Module;
 import seedu.duke.parser.CommandParser;
 import seedu.duke.ui.Ui;
@@ -68,21 +70,8 @@ public class Duke {
                             userUniversityListManager.displayAll();
                         } else if (viewCommand.getViewOption().equals("DELETE")) {
                             userUniversityListManager.getUserDeletedModules().displayAll();
-                        } else if (viewCommand.getViewOption().equals("MODULES")) {
-                            ArrayList<ModuleMapping> moduleMappings = Database.getModuleMappings();
-                            Ui.printModulesInDatabase(moduleMappings);
                         } else if (viewCommand.getViewOption().equals("UNIVERSITY")) {
                             userUniversityListManager.displayUniversity(viewCommand.getUniversityName());
-                        } else if (viewCommand.getViewOption().equals("UNIVERSITIES")) {
-                            ArrayList<University> universities = Database.getUniversities();
-                            Ui.printUniversitiesInDatabase(universities);
-                        } else if (viewCommand.getViewOption().equals("DATABASE")) {
-                            ArrayList<ModuleMapping> moduleMappings = Database.getModuleMappings().stream()
-                                    .filter(moduleMapping -> moduleMapping.getPartnerUniversityModule()
-                                            .getUniversity().getName().equals(viewCommand.getUniversityName()))
-                                    .collect(Collectors.toCollection(ArrayList::new));
-                            Ui.printUniversityName(viewCommand.getUniversityName());
-                            Ui.printModulesInDatabase(moduleMappings);
                         }
                     } catch (InvalidUserCommandException e) {
                         System.out.println(e.getMessage());
@@ -94,12 +83,35 @@ public class Duke {
                         Module puModule = moduleMapping.getPartnerUniversityModule();
                         Module nusModule = moduleMapping.getNusModule();
                         UserModuleMapping userModuleToAdd = new UserModuleMapping(puModule.getCode(),
-                                puModule.getTitle(), nusModule.getCode(), nusModule.getTitle(), nusModule.getCredit(),
-                                puModule.getCredit(), puModule.getUniversity().getName(),
+                                puModule.getTitle(), nusModule.getCode(), nusModule.getTitle(),
+                                nusModule.getCredit(), puModule.getCredit(), puModule.getUniversity().getName(),
                                 puModule.getUniversity().getCountry());
                         userUniversityListManager.addModule(newUserCommand.getUniversityName(), userModuleToAdd);
                         UserStorageParser.storeCreatedLists(userUniversityListManager);
                     } catch (ModuleNotFoundException | NoSuchElementException e) {
+                        System.out.println(e.getMessage());
+                    }
+                    break;
+                case LIST:
+                    try {
+                        ListCommand listCommand = (ListCommand) newUserCommand;
+
+                        if (listCommand.getListOption().equals("UNIVERSITIES")) {
+                            ArrayList<University> universities = Database.getUniversities();
+                            Ui.printUniversitiesInDatabase(universities);
+                        } else if (listCommand.getListOption().equals("MODULES")) {
+                            ArrayList<ModuleMapping> moduleMappings = Database.getModuleMappings();
+                            Ui.printMappings(moduleMappings);
+                        } else if (listCommand.getListOption().equals("module")) {
+                            ArrayList<ModuleMapping> moduleMappings = Database
+                                    .findNusMapping(newUserCommand.getModuleCode());
+                            Ui.printMappings(moduleMappings);
+                        } else if (listCommand.getListOption().equals("university")) {
+                            ArrayList<ModuleMapping> moduleMappings = Database
+                                    .findUniversityMapping(newUserCommand.getUniversityName());
+                            Ui.printMappings(moduleMappings);
+                        }
+                    } catch (ModuleNotFoundException | UniversityNotFoundException e) {
                         System.out.println(e.getMessage());
                     }
                     break;
@@ -111,6 +123,7 @@ public class Duke {
             }
 
         }
+
     }
 
     private static void exit() {

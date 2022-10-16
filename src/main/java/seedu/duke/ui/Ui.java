@@ -11,7 +11,6 @@ import seedu.duke.user.UserUniversityList;
 
 import java.util.Scanner;
 
-
 public class Ui {
     public static final String LINE = "_____________________________________________________________________________\n";
     public static final String LOGO = "                        _____ ______ _____  \n"
@@ -26,7 +25,8 @@ public class Ui {
     public static final String SPACING = "     ";
 
     /**
-     * Greets the user with an introductory message when the program is first started.
+     * Greets the user with an introductory message when the program is first
+     * started.
      */
     public static String greetUser() {
         String greeting = LOGO
@@ -39,7 +39,8 @@ public class Ui {
     /**
      * Reads the line of input that the user entered to the program.
      *
-     * @return The full user input to the program, with leading and trailing whitespaces removed.
+     * @return The full user input to the program, with leading and trailing
+     *         whitespaces removed.
      */
     public static String getUserInput() {
         Scanner sc = new Scanner(System.in);
@@ -57,8 +58,11 @@ public class Ui {
     }
 
     /**
-     * Informs the user on the valid commands that have to be passed into the program.
-     * @return Formatted string with instructions on the commands and their associated format and purpose.
+     * Informs the user on the valid commands that have to be passed into the
+     * program.
+     * 
+     * @return Formatted string with instructions on the commands and their
+     *         associated format and purpose.
      */
     public static String printCommands() {
         String message = LINE
@@ -67,12 +71,6 @@ public class Ui {
                 + SPACING + "create    " + "/create u/UNIVERSITY                    "
                 + "Creates an empty module list for the input university\n"
                 + SPACING + "exit      " + "/exit\n"
-                + SPACING + "view      " + "/view MODULES                           "
-                + "Displays all existing university modules mappings that are approved in the format\n"
-                + "                                                       "
-                + "[Partner University Module Code] [Partner University Module Title] "
-                +  "[Partner University Module Credits] | [NUS Module Code] [NUS Module Title] "
-                + "[NUS Module Credits] in NUS\n"
                 + SPACING + "view      " + "/view LISTS                             "
                 + "Displays all existing university lists that have been created by the user\n"
                 + SPACING + "view      " + "/view u/UNIVERSITY                      "
@@ -82,10 +80,18 @@ public class Ui {
                 + "[Partner University Module Code] [Partner University Module Title] | [Equivalent NUS Credits]\n"
                 + SPACING + "view      " + "/view DELETE HISTORY                    "
                 + "Displays up to 5 most recent modules that the user has deleted\n"
-                + SPACING + "view      " + "/view UNIVERSITIES                      "
+                + SPACING + "list      " + "/list MODULES                           "
+                + "Displays all existing university modules mappings that are approved in the format\n"
+                + "                                                       "
+                + "[Partner University Module Code] [Partner University Module Title] "
+                + "[Partner University Module Credits] | [NUS Module Code] [NUS Module Title] "
+                + "[NUS Module Credits] in NUS\n"
+                + SPACING + "list      " + "/list UNIVERSITIES                      "
                 + "Displays all universities with module mappings available in database\n"
-                + SPACING + "view      " + "/view DATABASE u/UNIVERSITY             "
-                + "Displays all modules mappings offered by UNIVERSITY in database\n"
+                + SPACING + "list      " + "/list m/MODULECODE                      "
+                + "List all module mappings for NUS MODULECODE in database\n"
+                + SPACING + "list      " + "/list u/UNIVERSITY                      "
+                + "List all module mappings offered by UNIVERSITY in database\n"
                 + SPACING + "add       " + "/add u/UNIVERSITY m/MODULECODE          "
                 + "Add input Partner University module code to input university list                       \n"
                 + SPACING + "delete    " + "/delete u/UNIVERSITY m/MODULECODE       "
@@ -100,11 +106,13 @@ public class Ui {
 
     /**
      * Displays to the user information regarding a module.
-     * @return Formatted string for each module and its associated code, title, credit and PU information.
+     * 
+     * @return Formatted string for each module and its associated code, title,
+     *         credit and PU information.
      */
     public static String printModule(UserModuleMapping module) {
         String message = "NUS: " + module.getNusCode() + " " + module.getNusTitle() + " | Partner University: "
-            + module.getPuCode() + " " + module.getPuTitle() + " | Equivalent NUS Credits: " + module.getNusCredit()
+                + module.getPuCode() + " " + module.getPuTitle() + " | Equivalent NUS Credits: " + module.getNusCredit()
                 + " MCs";
         return message;
     }
@@ -132,7 +140,9 @@ public class Ui {
     }
 
     /**
-     * Prints an acknowledgement message to inform the user that they successfully updated the module in their list.
+     * Prints an acknowledgement message to inform the user that they successfully
+     * updated the module in their list.
+     * 
      * @param module The module updated in the module list
      * @return Formatted string for the module updated.
      */
@@ -143,7 +153,9 @@ public class Ui {
     }
 
     /**
-     * Prints an acknowledgement message to inform the user that they successfully deleted the module from their list.
+     * Prints an acknowledgement message to inform the user that they successfully
+     * deleted the module from their list.
+     * 
      * @param module The module deleted from the module list
      * @return Formatted string for the module deleted.
      */
@@ -153,7 +165,9 @@ public class Ui {
     }
 
     /**
-     * Prints an acknowledgement message to inform the user that they have successfully created a list for the PU.
+     * Prints an acknowledgement message to inform the user that they have
+     * successfully created a list for the PU.
+     * 
      * @param uniName The name of the PU
      * @return Formatted string for the PU list created.
      */
@@ -163,7 +177,9 @@ public class Ui {
     }
 
     /**
-     * Prints an acknowledgement message to inform the user that they have successfully deleted the list for the PU.
+     * Prints an acknowledgement message to inform the user that they have
+     * successfully deleted the list for the PU.
+     * 
      * @param uniName The name of the PU
      * @return Formatted string for the PU list deleted.
      */
@@ -174,6 +190,7 @@ public class Ui {
 
     /**
      * Sequentially prints each module stored in the list.
+     * 
      * @param modules The list of modules to be printed.
      * @return Formatted string for the modules in the list.
      */
@@ -213,22 +230,17 @@ public class Ui {
         return printModulesInUserList(puModules);
     }
 
-    public static void printModulesInDatabase(ArrayList<ModuleMapping> modulesInDatabase) {
-        for (ModuleMapping moduleMapping : modulesInDatabase) {
-            System.out.println(moduleMapping.toString());
-        }
-    }
-
     public static void printUniversitiesInDatabase(ArrayList<University> universities) {
         int i = 1;
         for (University university : universities) {
             System.out.println(i + ". " + university.toString());
-            i = i + 1;
+            i += 1;
         }
     }
 
-    public static void printUniversityName(String universityName) {
-        System.out.println(universityName);
-        System.out.println(LINE);
+    public static void printMappings(ArrayList<ModuleMapping> moduleMappings) {
+        for (ModuleMapping moduleMapping : moduleMappings) {
+            System.out.println(moduleMapping.toString());
+        }
     }
 }
