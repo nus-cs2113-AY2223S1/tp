@@ -1,6 +1,5 @@
 package seedu.duke;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class ModuleList {
@@ -8,38 +7,67 @@ public class ModuleList {
     public static int viewCount;
     public static int mcsCount;
 
-    public static void add(Module mod) {
-        modules.add(mod);
-        UI.addMessage(mod.getCourse(), mod.getSemesterTaken(), mod.getGrade());
+    public void add(Module mod) {
+        boolean isRepeat = checkRepetition(mod);
+        if (isRepeat) {
+            UI.repetitionMessage(mod.getCourse());
+        } else {
+            modules.add(mod);
+            UI.addMessage(mod.getCourse(), mod.getSemesterTaken(), mod.getGrade());
+        }
     }
-    public static void delete(String modCode) {
+
+    public boolean checkRepetition(Module mod) {
+        for (Module m : modules) {
+            if (m.getCourse().matches(mod.getCourse())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void delete(String modCode) {
         int indexCounter = 0;
+        boolean isFound = false;
         for (Module mod : modules) {
-            if (mod.course.matches(modCode)) {
+            if (mod.getCourse().matches(modCode)) {
                 modules.remove(indexCounter);
                 UI.deleteMessage(modCode);
-                return;
+                isFound = true;
+                break;
             }
             indexCounter += 1;
         }
+        if (!isFound) {
+            UI.notFoundDeletionMessage(modCode);
+        }
     }
-    public static void view(String semester) {
-        ArrayList<Module> matchingModules = new ArrayList<Module>();
+
+    public void view(String semester) {
+        ArrayList<Module> matchingModules = new ArrayList<>();
         viewCount = 0;
         for (Module mod : modules) {
-            if (mod.semesterTaken.matches(semester)) {
+            if (mod.getSemesterTaken().matches(semester)) {
                 matchingModules.add(mod);
                 viewCount++;  // increments the count for this particular semester (For JUnit Purpose)
             }
         }
-        UI.listMessage(matchingModules, semester);
+        printResponse(semester, matchingModules);
     }
+
+    private static void printResponse(String semester, ArrayList<Module> matchingModules) {
+        if (matchingModules.isEmpty()) {
+            UI.emptyListMessage(semester);
+        } else {
+            UI.listMessage(matchingModules, semester);
+        }
+    }
+
     public static void mc(String semester) {
-        ArrayList<Module> matchingModules = new ArrayList<Module>();
         mcsCount = 0;
         for (Module mod : modules) {
-            if (mod.semesterTaken.matches(semester)) {
-                mcsCount =  mcsCount + mod.mcs;
+            if (mod.getSemesterTaken().matches(semester)) {
+                mcsCount += mod.getMcs();
             }
         }
         UI.mcMessage(semester, mcsCount);
@@ -59,6 +87,5 @@ public class ModuleList {
     public int getMcsCount() {
         return mcsCount;
     }
-
 
 }
