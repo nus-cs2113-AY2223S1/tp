@@ -70,12 +70,6 @@ public class Ui {
                 + SPACING + "create    " + "/create u/UNIVERSITY                    "
                 + "Creates an empty module list for the input university\n"
                 + SPACING + "exit      " + "/exit\n"
-                + SPACING + "view      " + "/view MODULES                           "
-                + "Displays all existing university modules mappings that are approved in the format\n"
-                + "                                                       "
-                + "[Partner University Module Code] [Partner University Module Title] "
-                + "[Partner University Module Credits] | [NUS Module Code] [NUS Module Title] "
-                + "[NUS Module Credits] in NUS\n"
                 + SPACING + "view      " + "/view LISTS                             "
                 + "Displays all existing university lists that have been created by the user\n"
                 + SPACING + "view      " + "/view u/UNIVERSITY                      "
@@ -83,6 +77,12 @@ public class Ui {
                 + "                                                       "
                 + "[Home University Module Code] [Home University Module Title] | "
                 + "[Partner University Module Code] [Partner University Module Title] | [Equivalent NUS Credits]\n"
+                + SPACING + "list      " + "/list MODULES                           "
+                + "Displays all existing university modules mappings that are approved in the format\n"
+                + "                                                       "
+                + "[Partner University Module Code] [Partner University Module Title] "
+                + "[Partner University Module Credits] | [NUS Module Code] [NUS Module Title] "
+                + "[NUS Module Credits] in NUS\n"
                 + SPACING + "list      " + "/list UNIVERSITIES                      "
                 + "Displays all universities with module mappings available in database\n"
                 + SPACING + "list      " + "/list m/MODULECODE                      "
@@ -197,12 +197,6 @@ public class Ui {
         UserModuleMappingList puModulesList = puList.getMyModules();
         ArrayList<UserModuleMapping> puModules = puModulesList.getModules();
         return printModulesInUserList(puModules);
-    }
-
-    public static void printModulesInDatabase(ArrayList<ModuleMapping> modulesInDatabase) {
-        for (ModuleMapping moduleMapping : modulesInDatabase) {
-            System.out.println(moduleMapping.toString());
-        }
     }
 
     public static void printUniversitiesInDatabase(ArrayList<University> universities) {

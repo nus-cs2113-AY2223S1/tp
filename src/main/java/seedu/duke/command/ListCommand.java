@@ -7,6 +7,8 @@ public class ListCommand extends Command {
         super(parameters, commandType);
         if (parameters[1].equals("UNIVERSITIES")) {
             this.listOption = "UNIVERSITIES";
+        } else if (parameters[1].equals("MODULES")) {
+            this.listOption = "MODULES";
         } else if (parameters[1].startsWith("m/")) {
             this.moduleCode = parameters[1].substring(2);
             this.listOption = "module";
