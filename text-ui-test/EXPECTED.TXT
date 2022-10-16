@@ -317,13 +317,13 @@ Remarks       : Remarks here
 
 
 
-ERROR: The arguments entered are invalid. SYNTAX: Edit-Expense -e EXPENSE_NUMBER [-n NAME] [-a AMOUNT] [-d dd/MM/yyyy HHmm] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS]
+ERROR: The arguments entered are invalid. SYNTAX: Edit-Expense -e EXPENSE-INDEX [-n NAME] [-d dd/MM/yyyy HHmm] [-t DESCRIPTION] [-a AMOUNT] [-c CATEGORY] [-r REMARKS]
 
 
-ERROR: The arguments entered are invalid. SYNTAX: Edit-Expense -e EXPENSE_NUMBER [-n NAME] [-a AMOUNT] [-d dd/MM/yyyy HHmm] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS]
+ERROR: The arguments entered are invalid. SYNTAX: Edit-Expense -e EXPENSE-INDEX [-n NAME] [-d dd/MM/yyyy HHmm] [-t DESCRIPTION] [-a AMOUNT] [-c CATEGORY] [-r REMARKS]
 
 
-ERROR: The arguments entered are invalid. SYNTAX: Edit-Expense -e EXPENSE_NUMBER [-n NAME] [-a AMOUNT] [-d dd/MM/yyyy HHmm] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS]
+ERROR: The arguments entered are invalid. SYNTAX: Edit-Expense -e EXPENSE-INDEX [-n NAME] [-d dd/MM/yyyy HHmm] [-t DESCRIPTION] [-a AMOUNT] [-c CATEGORY] [-r REMARKS]
 
 
 ERROR: The expense is not found.
@@ -470,16 +470,16 @@ Your expenses have been sorted successfully.
 Your expenses have been sorted successfully.
 
 
-ERROR: The arguments entered are invalid. SYNTAX: Sort-Expense -t TYPE -o ORDER
+ERROR: The arguments entered are invalid. SYNTAX: Sort-Expense -t alphabetical/amount/date -o ascending/descending
 
 
-ERROR: The arguments entered are invalid. SYNTAX: Sort-Expense -t TYPE -o ORDER
+ERROR: The arguments entered are invalid. SYNTAX: Sort-Expense -t alphabetical/amount/date -o ascending/descending
 
 
-ERROR: The arguments entered are invalid. SYNTAX: Sort-Expense -t TYPE -o ORDER
+ERROR: The arguments entered are invalid. SYNTAX: Sort-Expense -t alphabetical/amount/date -o ascending/descending
 
 
-ERROR: The arguments entered are invalid. SYNTAX: Sort-Expense -t TYPE -o ORDER
+ERROR: The arguments entered are invalid. SYNTAX: Sort-Expense -t alphabetical/amount/date -o ascending/descending
 
 
 ERROR: The command entered is invalid.
