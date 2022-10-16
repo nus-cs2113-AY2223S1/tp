@@ -74,4 +74,35 @@ public class AppointmentParser {
         return new AddAppointmentCommand(petName, appointmentDate);
     }
 
+    /*
+    public Command prepareSetAppointmentStatusCommand(String input){
+        int i = input.indexOf(" i/");
+        int s = input.indexOf(" s/");
+
+        if(i > s || i == -1 || s == -1){
+            System.out.println("invalid input");
+            return new EndCommand();
+        }
+
+        String index = input.substring(i + lengthOfSignature, s);
+        String status = input.substring(s + lengthOfSignature);
+
+        return new AllocateApointmentCommand(index, status);
+    }
+
+    public Command prepareAllocateAppointment(String input){
+        int i = input.indexOf(" i/");
+        int n = input.indexOf(" n/");
+
+        if(i > n || i == -1 || n == -1){
+            System.out.println("invalid input");
+            return new EndCommand();
+        }
+
+        String index = input.substring(i + lengthOfSignature, n);
+        String name = input.substring(n + lengthOfSignature);
+
+        return new AllocateApointmentCommand(index, name);
+    }
+*/
 }

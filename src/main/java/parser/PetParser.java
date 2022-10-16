@@ -45,6 +45,7 @@ public class PetParser {
         String status = input.substring(startOfS + lengthOfSignature);
         return new AddPetCommand(name, status, true);
     }
+    /*
 
     public Command prepareRemovePet(String input){
         int index = parser.indexOfRemove(input);
@@ -55,4 +56,5 @@ public class PetParser {
 
         return new RemovePetCommand(index);
     }
+     */
 }
