@@ -66,5 +66,7 @@ Slot selected successfully
 --------------------------------------
 --------------------------------------
 --------------------------------------
+This is your export link:
+https://nusmods.com/timetable/sem-1/share?CS2113=LEC:1,TUT:4
 Bye bye, See you again
 --------------------------------------
