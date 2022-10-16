@@ -15,6 +15,10 @@ public class Income extends Transaction {
         super(description, amount, category, date);
     }
 
+    public String getType() {
+        return TRANSACTION_NAME;
+    }
+
     public String getIcon() {
         return ICON_INCOME;
     }
