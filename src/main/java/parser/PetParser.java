@@ -22,7 +22,7 @@ public class PetParser {
         }
 
         String type = input.substring(0,input.indexOf(" "));
-        String statement = input.substring(input.indexOf(" ")).trim();
+        String statement = input.substring(input.indexOf(" "));
         switch(type) {
         case AddPetCommand.COMMAND_WORD:
             return prepareAddPet(statement);
@@ -33,7 +33,7 @@ public class PetParser {
     }
 
     public Command prepareAddPet(String input){
-        int startOfN = input.indexOf("n/");
+        int startOfN = input.indexOf(" n/");
         int startOfS = input.indexOf(" s/");
 
         if(startOfN > startOfS || startOfN == -1|| startOfS == -1){
@@ -41,7 +41,8 @@ public class PetParser {
             return new EndCommand();
         }
 
-        String name = input.substring(startOfN -1 + lengthOfSignature, startOfS);
+
+        String name = input.substring(startOfN + lengthOfSignature, startOfS);
         String species = input.substring(startOfS + lengthOfSignature);
         return new AddPetCommand(name, species, true);
     }

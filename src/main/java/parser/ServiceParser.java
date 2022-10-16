@@ -21,7 +21,7 @@ public class ServiceParser {
         }
 
         String type = input.substring(0,input.indexOf(" "));
-        String statement = input.substring(input.indexOf(" ")).trim();
+        String statement = input.substring(input.indexOf(" "));
         switch(type) {
         case AddServiceCommand.COMMAND_WORD:
             return prepareAddService(statement);
@@ -34,7 +34,7 @@ public class ServiceParser {
     }
 
     public Command prepareAddService(String input){
-        int d = input.indexOf("d/");
+        int d = input.indexOf(" d/");
 
         if(d == -1){
             System.out.println("Error: no description entered");
