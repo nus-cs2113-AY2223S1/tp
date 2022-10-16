@@ -52,6 +52,8 @@ public class ConsoleCommandSortExpense extends ConsoleCommand {
             comparator = sortByAlphabet;
         } else if (type.equalsIgnoreCase(ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE_VAL_AMOUNT)) {
             comparator = sortByAmount;
+        } else if (type.equalsIgnoreCase(ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE_VAL_CURRENCY)) {
+            comparator = sortByCurrency;
         }
         return comparator;
     }
@@ -98,6 +100,21 @@ public class ConsoleCommandSortExpense extends ConsoleCommand {
                 return expenseName1.compareTo(expenseName2);
             }
             return expenseName2.compareTo(expenseName1);
+        }
+    };
+
+    /**
+     * Comparator sorts from A to Z if ascending order, Z to A if descending order.
+     */
+    private Comparator<Expense> sortByCurrency = new Comparator<>() {
+        @Override
+        public int compare(Expense expense1, Expense expense2) {
+            String expenseCurrency1 = expense1.getCurrency();
+            String expenseCurrency2 = expense2.getCurrency();
+            if (order) {
+                return expenseCurrency1.compareTo(expenseCurrency2);
+            }
+            return expenseCurrency2.compareTo(expenseCurrency1);
         }
     };
 }

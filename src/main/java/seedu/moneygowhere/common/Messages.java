@@ -50,6 +50,28 @@ public class Messages {
             + "File does not exist or Path is wrong :(";
 
     /**
+     * Defines messages for {@link seedu.moneygowhere.currency.CurrencyApi }.
+     */
+    public static final String CURRENCY_API_CONNECTION_FAILURE = ""
+            + "Unable to connect to CurrencyAPI...\n"
+            + "Using last saved currencies instead.";
+    public static final String CURRENCY_STORAGE_ERROR_NO_LOAD_FILE = ""
+            + "There is no currencies file found...\n"
+            + "Please ensure the file is named correctly and is in the right directory if you have a currencies file.";
+    public static final String CURRENCY_STORAGE_ERROR_IN_LOAD_FILE = ""
+            + "There is an error in currencies file found...\n"
+            + "Please ensure the file is the correct currencies file without modifications to it.\n"
+            + "Error is found in line: ";
+    public static final String CURRENCY_API_LOAD_SUCCESS = ""
+            + "Currencies loaded successfully :)";
+
+    /**
+     * Defines messages for {@link seedu.moneygowhere.data.currency.CurrencyManager}.
+     */
+    public static final String CURRENCY_MANAGER_CURRENCY_NOT_FOUND = ""
+            + "Currency not found. Please try again.";
+
+    /**
      * Defines messages for console command Add-Expense.
      */
     public static final String CONSOLE_COMMAND_ADD_EXPENSE_SYNTAX = ""
@@ -79,7 +101,12 @@ public class Messages {
             + ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_REMARKS
             + " "
             + ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_REMARKS_LONG.toUpperCase()
+            + "] [-"
+            + ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_CURRENCY
+            + " "
+            + ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_CURRENCY_LONG.toUpperCase()
             + "]";
+
     public static final String CONSOLE_MESSAGE_COMMAND_ADD_EXPENSE_SUCCESS = ""
             + "The expense was added successfully.";
     public static final String CONSOLE_ERROR_COMMAND_ADD_EXPENSE_INVALID = ""
@@ -157,6 +184,10 @@ public class Messages {
             + ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_REMARKS
             + " "
             + ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_REMARKS_LONG.toUpperCase()
+            + "] [-"
+            + ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_CURRENCY
+            + " "
+            + ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_CURRENCY_LONG.toUpperCase()
             + "]";
     public static final String CONSOLE_MESSAGE_COMMAND_EDIT_EXPENSE_SUCCESS = ""
             + "The expense was edited successfully.";
@@ -178,6 +209,8 @@ public class Messages {
             + ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE_VAL_AMOUNT
             + "/"
             + ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE_VAL_DATE
+            + "/"
+            + ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE_VAL_CURRENCY
             + " -"
             + ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_ORDER
             + " "

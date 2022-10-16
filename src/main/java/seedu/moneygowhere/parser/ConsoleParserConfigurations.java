@@ -46,6 +46,11 @@ public class ConsoleParserConfigurations {
     public static final String COMMAND_ADD_EXPENSE_ARG_REMARKS_DESC = "remarks";
     public static final boolean COMMAND_ADD_EXPENSE_ARG_REMARKS_HAS_VAL = true;
     public static final boolean COMMAND_ADD_EXPENSE_ARG_REMARKS_IS_MAND = false;
+    public static final String COMMAND_ADD_EXPENSE_ARG_CURRENCY = "x";
+    public static final String COMMAND_ADD_EXPENSE_ARG_CURRENCY_LONG = "currency";
+    public static final String COMMAND_ADD_EXPENSE_ARG_CURRENCY_DESC = "currency";
+    public static final boolean COMMAND_ADD_EXPENSE_ARG_CURRENCY_HAS_VAL = true;
+    public static final boolean COMMAND_ADD_EXPENSE_ARG_CURRENCY_IS_MAND = false;
     public static final String COMMAND_ADD_EXPENSE_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS = ""
             + "Command Add-Expense does not have all of the required options.";
 
@@ -117,6 +122,11 @@ public class ConsoleParserConfigurations {
     public static final String COMMAND_EDIT_EXPENSE_ARG_REMARKS_DESC = "Remarks";
     public static final boolean COMMAND_EDIT_EXPENSE_ARG_REMARKS_HAS_VAL = true;
     public static final boolean COMMAND_EDIT_EXPENSE_ARG_REMARKS_IS_MAND = false;
+    public static final String COMMAND_EDIT_EXPENSE_ARG_CURRENCY = "x";
+    public static final String COMMAND_EDIT_EXPENSE_ARG_CURRENCY_LONG = "currency";
+    public static final String COMMAND_EDIT_EXPENSE_ARG_CURRENCY_DESC = "currency";
+    public static final boolean COMMAND_EDIT_EXPENSE_ARG_CURRENCY_HAS_VAL = true;
+    public static final boolean COMMAND_EDIT_EXPENSE_ARG_CURRENCY_IS_MAND = false;
     public static final String COMMAND_EDIT_EXPENSE_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS = ""
             + "Command Edit-Expense does not have all of the required options.";
 
@@ -133,6 +143,7 @@ public class ConsoleParserConfigurations {
     public static final String COMMAND_SORT_EXPENSE_ARG_TYPE_VAL_ALPHABETICAL = "alphabetical";
     public static final String COMMAND_SORT_EXPENSE_ARG_TYPE_VAL_AMOUNT = "amount";
     public static final String COMMAND_SORT_EXPENSE_ARG_TYPE_VAL_DATE = "date";
+    public static final String COMMAND_SORT_EXPENSE_ARG_TYPE_VAL_CURRENCY = "currency";
     public static final String COMMAND_SORT_EXPENSE_ARG_ORDER = "o";
     public static final String COMMAND_SORT_EXPENSE_ARG_ORDER_LONG = "order";
     public static final String COMMAND_SORT_EXPENSE_ARG_ORDER_DESC = ""
@@ -286,6 +297,13 @@ public class ConsoleParserConfigurations {
                 COMMAND_ADD_EXPENSE_ARG_REMARKS_DESC
         );
         optionRemarks.setRequired(COMMAND_ADD_EXPENSE_ARG_REMARKS_IS_MAND);
+        Option optionCurrency = new Option(
+                COMMAND_ADD_EXPENSE_ARG_CURRENCY,
+                COMMAND_ADD_EXPENSE_ARG_CURRENCY_LONG,
+                COMMAND_ADD_EXPENSE_ARG_CURRENCY_HAS_VAL,
+                COMMAND_ADD_EXPENSE_ARG_CURRENCY_DESC
+        );
+        optionCurrency.setRequired(COMMAND_ADD_EXPENSE_ARG_CURRENCY_IS_MAND);
 
         Options options = new Options();
         options.addOption(optionName);
@@ -294,6 +312,7 @@ public class ConsoleParserConfigurations {
         options.addOption(optionDescription);
         options.addOption(optionCategory);
         options.addOption(optionRemarks);
+        options.addOption(optionCurrency);
 
         return options;
     }
@@ -401,6 +420,13 @@ public class ConsoleParserConfigurations {
                 COMMAND_EDIT_EXPENSE_ARG_REMARKS_DESC
         );
         optionRemarks.setRequired(COMMAND_EDIT_EXPENSE_ARG_REMARKS_IS_MAND);
+        Option optionCurrency = new Option(
+                COMMAND_EDIT_EXPENSE_ARG_CURRENCY,
+                COMMAND_EDIT_EXPENSE_ARG_CURRENCY_LONG,
+                COMMAND_EDIT_EXPENSE_ARG_CURRENCY_HAS_VAL,
+                COMMAND_EDIT_EXPENSE_ARG_CURRENCY_DESC
+        );
+        optionCurrency.setRequired(COMMAND_EDIT_EXPENSE_ARG_CURRENCY_IS_MAND);
 
         Options options = new Options();
         options.addOption(optionExpenseIndex);
@@ -410,6 +436,7 @@ public class ConsoleParserConfigurations {
         options.addOption(optionAmount);
         options.addOption(optionCategory);
         options.addOption(optionRemarks);
+        options.addOption(optionCurrency);
 
         return options;
     }

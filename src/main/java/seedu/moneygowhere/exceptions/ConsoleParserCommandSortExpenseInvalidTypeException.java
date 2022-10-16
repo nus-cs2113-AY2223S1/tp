@@ -1,7 +1,7 @@
 package seedu.moneygowhere.exceptions;
 
 /**
- * Thrown when the command sort-expense is invalid.
+ * Thrown when the arguments for command sort-expense is invalid.
  */
 @SuppressWarnings("unused")
 public class ConsoleParserCommandSortExpenseInvalidTypeException extends MoneyGoWhereException {

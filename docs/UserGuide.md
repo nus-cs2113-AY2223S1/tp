@@ -16,9 +16,10 @@ MoneyGoWhere is a financial planner to help you manage your finances.
 ### Adding an expense: `Add-Expense`
 Adds a new expense to the list of expenses.
 
-Syntax: `Add-Expense -n NAME -a AMOUNT [-d DATE] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS]`
+Syntax: `Add-Expense -n NAME -a AMOUNT [-d DATE] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS] [-x CURRENCY]`
 
 * `NAME`, `DESCRIPTION`, `CATEGORY` and `REMARKS` are text strings. You may use spaces within the text if you wrap the text with double quotes.
+* `CURRENCY` is a text string. By default, it will be SGD. 
 * `AMOUNT` is a decimal value.
 * `DATE` is a text string in the format `"dd/MM/yyyy HHmm"`. If this value is not provided, MoneyGoWhere will save the current date and time for you.
 
@@ -29,6 +30,7 @@ Example of usage:
 * `Add-Expense -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359" -t "Monthly payment"`
 * `Add-Expense -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359" -t "Monthly payment" -c "Work expenses"`
 * `Add-Expense -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359" -t "Monthly payment" -c "Work expenses" -r "Remarks here"`
+* `Add-Expense -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359" -t "Monthly payment" -c "Work expenses" -r "Remarks here" -x USD`
 
 ### Viewing expense(s): `View-Expense`
 Displays the past expenses you have added.
@@ -56,10 +58,11 @@ Example of usage:
 ### Editing an expense: `Edit-Expense`
 Edits an existing expense in the list of expenses.
 
-Syntax: `Edit-Expense -e EXPENSE_NUMBER [-n NAME] [-a AMOUNT] [-d DATE] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS]`
+Syntax: `Edit-Expense -e EXPENSE_NUMBER [-n NAME] [-a AMOUNT] [-d DATE] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS] [-x CURRENCY]`
 
 * `EXPENSE_NUMBER` is an integer value.
 * `NAME`, `DESCRIPTION`, `CATEGORY` and `REMARKS` are text strings. You may use spaces within the text if you wrap the text with double quotes.
+* `CURRENCY` is a text string. By default, it will be SGD.
 * `AMOUNT` is a decimal value.
 * `DATE` is a text string in the format `"dd/MM/yyyy HHmm"`.
 
@@ -70,6 +73,7 @@ Example of usage:
 * `Edit-Expense -e 1 -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359" -t "Monthly payment"`
 * `Edit-Expense -e 1 -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359" -t "Monthly payment" -c "Work expenses"`
 * `Edit-Expense -e 1 -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359" -t "Monthly payment" -c "Work expenses" -r "Remarks here"`
+* `Edit-Expense -e 1 -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359" -t "Monthly payment" -c "Work expenses" -r "Remarks here" -x USD`
 
 ### Sorting expenses: `Sort-Expense`
 Sorts the list of expenses according to an alphabetical, amount or date order. It can be sorted in both ascending and
@@ -122,8 +126,8 @@ file in your other devices. Date will be saved automatically.
 
 {Give a 'cheat sheet' of commands here}
 
-* Add expense: `Add-Expense -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359" -t "Monthly payment" -c "Work expenses" -r "Remarks here"`
+* Add expense: `Add-Expense -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359" -t "Monthly payment" -c "Work expenses" -r "Remarks here" -x USD`
 * View expense: `View-Expense`
 * Delete expense: `Delete-Expense -e 1`
-* Edit expense: `Edit-Expense -e 1 -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359" -t "Monthly payment" -c "Work expenses" -r "Remarks here"`
+* Edit expense: `Edit-Expense -e 1 -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359" -t "Monthly payment" -c "Work expenses" -r "Remarks here" -x USD`
 * Sort expense: `Sort-Expense -t alphabetical -o ascending"`

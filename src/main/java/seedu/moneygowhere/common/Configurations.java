@@ -25,4 +25,14 @@ public class Configurations {
     public static final String LOCAL_LOGGER_LOGGING_FILE_PATH = ""
             + LOCAL_LOGGER_LOGGING_DIRECTORY + LOCAL_LOGGER_LOGGING_FILE;
     public static final boolean LOCAL_LOGGER_LOGGING_FILE_TO_APPEND = true;
+
+    /**
+     * Defines configuration parameters for {@link seedu.moneygowhere.storage.LocalStorage}.
+     */
+    public static final String CURRENCY_API_URL = ""
+            + "https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/sgd.json";
+    private static final String FILE_NAME_CURRENCIES = "exchangeRates.txt";
+    public static final String FILE_PATH_CURRENCIES = DIRECTORY_PATH + FILE_NAME_CURRENCIES;
+    public static final int NUMBER_OF_CURRENCIES = 267;
+    public static final int IGNORED_LINES = 3;
 }

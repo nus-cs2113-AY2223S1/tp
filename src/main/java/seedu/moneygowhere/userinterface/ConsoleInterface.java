@@ -13,6 +13,8 @@ import seedu.moneygowhere.commands.ConsoleCommandViewExpense;
 import seedu.moneygowhere.commands.ConsoleCommandViewRecurringPayment;
 import seedu.moneygowhere.common.Configurations;
 import seedu.moneygowhere.common.Messages;
+import seedu.moneygowhere.data.currency.CurrencyManager;
+import seedu.moneygowhere.currency.CurrencyApi;
 import seedu.moneygowhere.data.expense.Expense;
 import seedu.moneygowhere.data.expense.ExpenseManager;
 import seedu.moneygowhere.data.income.Income;
@@ -31,6 +33,7 @@ import seedu.moneygowhere.exceptions.ConsoleParserCommandNotFoundException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandSortExpenseInvalidTypeException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandViewExpenseInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandViewRecurringPaymentInvalidException;
+import seedu.moneygowhere.exceptions.CurrencyInvalidException;
 import seedu.moneygowhere.exceptions.ExpenseManagerExpenseNotFoundException;
 import seedu.moneygowhere.logger.LocalLogger;
 import seedu.moneygowhere.parser.ConsoleParser;
@@ -56,6 +59,7 @@ public class ConsoleInterface {
     private TargetManager targetManager;
     private IncomeManager incomeManager;
     private RecurringPaymentManager recurringPaymentManager;
+    private CurrencyManager currencyManager;
 
     /**
      * Initializes the console interface.
@@ -76,6 +80,7 @@ public class ConsoleInterface {
         targetManager = new TargetManager();
         incomeManager = new IncomeManager();
         recurringPaymentManager = new RecurringPaymentManager();
+        currencyManager = new CurrencyManager();
     }
 
     /**
@@ -174,23 +179,32 @@ public class ConsoleInterface {
     }
 
     private void runCommandAddExpense(ConsoleCommandAddExpense consoleCommandAddExpense) {
+        try {
+            currencyManager.hasCurrency(consoleCommandAddExpense.getCurrency());
+        } catch (CurrencyInvalidException exception) {
+            printErrorMessage(exception.getMessage());
+            return;
+        }
+
         Expense expense = new Expense(
                 consoleCommandAddExpense.getName(),
                 consoleCommandAddExpense.getDateTime(),
                 consoleCommandAddExpense.getDescription(),
                 consoleCommandAddExpense.getAmount(),
                 consoleCommandAddExpense.getCategory(),
-                consoleCommandAddExpense.getRemarks());
+                consoleCommandAddExpense.getRemarks(),
+                consoleCommandAddExpense.getCurrency());
         expenseManager.addExpense(expense);
 
         DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern(
                 Configurations.CONSOLE_INTERFACE_DATE_TIME_OUTPUT_FORMAT
         );
+
         String expenseStr = "";
         expenseStr += "Name          : " + expense.getName() + "\n";
         expenseStr += "Date and Time : " + expense.getDateTime().format(dateTimeFormat) + "\n";
         expenseStr += "Description   : " + expense.getDescription() + "\n";
-        expenseStr += "Amount        : " + expense.getAmount() + "\n";
+        expenseStr += "Amount        : " + expense.getAmount() + " " + expense.getCurrency() + "\n";
         expenseStr += "Category      : " + expense.getCategory() + "\n";
         expenseStr += "Remarks       : " + expense.getRemarks() + "\n";
         printInformationalMessage(expenseStr);
@@ -214,7 +228,7 @@ public class ConsoleInterface {
             expenseStr += "Name          : " + expense.getName() + "\n";
             expenseStr += "Date and Time : " + expense.getDateTime().format(dateTimeFormat) + "\n";
             expenseStr += "Description   : " + expense.getDescription() + "\n";
-            expenseStr += "Amount        : " + expense.getAmount() + "\n";
+            expenseStr += "Amount        : " + expense.getAmount() + " " + expense.getCurrency() + "\n";
             expenseStr += "Category      : " + expense.getCategory() + "\n";
             expenseStr += "Remarks       : " + expense.getRemarks() + "\n";
             printInformationalMessage(expenseStr);
@@ -238,7 +252,7 @@ public class ConsoleInterface {
         expenseStr += "Name          : " + expense.getName() + "\n";
         expenseStr += "Date and Time : " + expense.getDateTime().format(dateTimeFormat) + "\n";
         expenseStr += "Description   : " + expense.getDescription() + "\n";
-        expenseStr += "Amount        : " + expense.getAmount() + "\n";
+        expenseStr += "Amount        : " + expense.getAmount() + " " + expense.getCurrency() + "\n";
         expenseStr += "Category      : " + expense.getCategory() + "\n";
         expenseStr += "Remarks       : " + expense.getRemarks() + "\n";
         System.out.println(expenseStr);
@@ -258,7 +272,7 @@ public class ConsoleInterface {
             expenseStr += "Name          : " + expense.getName() + "\n";
             expenseStr += "Date and Time : " + expense.getDateTime().format(dateTimeFormat) + "\n";
             expenseStr += "Description   : " + expense.getDescription() + "\n";
-            expenseStr += "Amount        : " + expense.getAmount() + "\n";
+            expenseStr += "Amount        : " + expense.getAmount() + " " + expense.getCurrency() + "\n";
             expenseStr += "Category      : " + expense.getCategory();
             expenseStr += "Remarks       : " + expense.getRemarks() + "\n";
             printInformationalMessage(expenseStr);
@@ -304,6 +318,13 @@ public class ConsoleInterface {
             return;
         }
 
+        try {
+            currencyManager.hasCurrency(consoleCommandEditExpense.getCurrency());
+        } catch (CurrencyInvalidException exception) {
+            printErrorMessage(exception.getMessage());
+            return;
+        }
+
         String name = consoleCommandEditExpense.getName();
         if (name == null) {
             name = oldExpense.getName();
@@ -328,8 +349,12 @@ public class ConsoleInterface {
         if (remarks == null) {
             remarks = oldExpense.getRemarks();
         }
+        String currency = consoleCommandEditExpense.getCurrency();
+        if (currency == null) {
+            currency = oldExpense.getCurrency();
+        }
 
-        Expense newExpense = new Expense(name, dateTime, description, amount, category, remarks);
+        Expense newExpense = new Expense(name, dateTime, description, amount, category, remarks, currency);
         try {
             expenseManager.editExpense(expenseIndex, newExpense);
         } catch (ExpenseManagerExpenseNotFoundException exception) {
@@ -345,7 +370,7 @@ public class ConsoleInterface {
         expenseStr += "Name          : " + newExpense.getName() + "\n";
         expenseStr += "Date and Time : " + newExpense.getDateTime().format(dateTimeFormat) + "\n";
         expenseStr += "Description   : " + newExpense.getDescription() + "\n";
-        expenseStr += "Amount        : " + newExpense.getAmount() + "\n";
+        expenseStr += "Amount        : " + newExpense.getAmount() + " " + newExpense.getCurrency() + "\n";
         expenseStr += "Category      : " + newExpense.getCategory() + "\n";
         expenseStr += "Remarks       : " + newExpense.getRemarks() + "\n";
         printInformationalMessage(expenseStr);
@@ -468,6 +493,7 @@ public class ConsoleInterface {
     @SuppressWarnings("StatementWithEmptyBody")
     public void run() {
         LocalStorage.loadFromFile(expenseManager);
+        CurrencyApi.getCurrencyApi(currencyManager);
         printBlankLine();
 
         while (true) {
