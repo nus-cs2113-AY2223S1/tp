@@ -24,9 +24,11 @@ public class SetCommand extends Command {
     private Biometrics biometrics;
 
     private String arguments;
+    private final boolean toDisplay;
 
-    public SetCommand(String arguments) {
+    public SetCommand(String arguments, boolean toDisplay) {
         this.arguments = arguments;
+        this.toDisplay = toDisplay;
     }
 
     @Override
@@ -53,7 +55,9 @@ public class SetCommand extends Command {
             biometrics.setBiometrics(age, gender, height, weight, fatPercentage);
             logger.log(Level.FINE, "parameters: "
                     + String.format("%d %s %d %d %d", age, gender, height, weight, fatPercentage));
-            ui.output("Biometrics set:\n" + biometrics.toString());
+            if (toDisplay) {
+                ui.output("Biometrics set:\n" + biometrics.toString());
+            }
         } catch (NumberFormatException e) {
             throw new IllegalValueException("Biometrics, except for gender, should be numerical");
         }

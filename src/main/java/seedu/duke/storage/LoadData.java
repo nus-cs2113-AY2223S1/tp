@@ -31,11 +31,11 @@ public class LoadData {
             String line = input.nextLine();
             try {
                 if (line.split(" ")[0].equals("biometrics")) {
-                    SetCommand setCommand = new SetCommand(line);
+                    SetCommand setCommand = new SetCommand(line, false);
                     setCommand.setData(ui, storage, biometrics, exerciseList, foodList);
                     setCommand.execute();
                 } else {
-                    AddCommand addCommand = new AddCommand(line);
+                    AddCommand addCommand = new AddCommand(line, false);
                     addCommand.setData(ui, storage, biometrics, exerciseList, foodList);
                     addCommand.execute();
                 }

@@ -16,7 +16,7 @@ import java.util.Arrays;
 public class AddCommand extends Command {
     private Ui ui;
     private String arguments;
-
+    private boolean toDisplay;
     private Food food;
     public static final String INVALID_FOOD_INPUT = "Invalid food input";
     final String[] invalidFoodNames = { "", " ", "[]\\[;]" };
@@ -27,7 +27,9 @@ public class AddCommand extends Command {
     private FoodList foodList;
 
     public AddCommand(String arguments) {
+    public AddCommand(String arguments, boolean toDisplay) {
         this.arguments = arguments;
+        this.toDisplay = toDisplay;
     }
 
     @Override
@@ -62,8 +64,10 @@ public class AddCommand extends Command {
             food = new Food(description, calories);
             foodList.addFood(food);
             assert foodList.getFood(foodList.getFoodListSize() - 1).equals(food) : "Food not added properly";
-            ui.output(food.toString());
-            ui.output(" This food is added to the food list successfully");
+            if (toDisplay) {
+                ui.output(food.toString());
+                ui.output(" This food is added to the food list successfully");
+            }
         } catch (NumberFormatException e) {
             throw new IllegalValueException(INVALID_FOOD_INPUT);
         }
@@ -79,8 +83,10 @@ public class AddCommand extends Command {
             int calories = Integer.parseInt(argumentList[3]);
             exercise = new Exercise(description, repetitions, calories);
             exerciseList.addExercise(exercise);
-            ui.output(exercise.toString());
-            ui.output(" This exercise is added to the exercise list successfully");
+            if (toDisplay) {
+                ui.output(exercise.toString());
+                ui.output(" This exercise is added to the exercise list successfully");
+            }
         } catch (IllegalValueException e) {
             ui.output(e.getMessage());
         }
