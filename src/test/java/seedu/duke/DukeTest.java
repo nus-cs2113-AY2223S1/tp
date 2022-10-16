@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
+import seedu.duke.commands.Command;
 
 class DukeTest {
 
@@ -14,13 +15,12 @@ class DukeTest {
         // Add - Checks whether a module is being added
 
         String input = "add m/cs2113 s/y1s1 mc/4 g/A+";
-        UI ui = new UI();
         ModuleList modulelist = new ModuleList();
         int initialCount = modulelist.getCount();
 
         // Adds a new module
         Command c = Parser.parse(input);
-        c.execute(ui, modulelist);
+        c.execute(modulelist);
 
         // Gets updated count in module list
         int finalCount = modulelist.getCount();
@@ -31,7 +31,7 @@ class DukeTest {
         // Deletes the module
         String inputDelete = "delete m/cs2113";
         c = Parser.parse(inputDelete);
-        c.execute(ui, modulelist);
+        c.execute(modulelist);
 
     }
 
@@ -43,17 +43,16 @@ class DukeTest {
 
         String inputAdd = "add m/cs2113 s/y1s1 mc/4 g/A+";
         String inputDelete = "delete m/cs2113";
-        UI ui = new UI();
         ModuleList modulelist = new ModuleList();
         int initialCount = modulelist.getCount();
 
         // Adds a new module
         Command c = Parser.parse(inputAdd);
-        c.execute(ui, modulelist);
+        c.execute(modulelist);
 
         // Deletes a new module
         c = Parser.parse(inputDelete);
-        c.execute(ui, modulelist);
+        c.execute(modulelist);
 
         // Gets updated count in module list
         int finalCount = modulelist.getCount();
@@ -70,16 +69,15 @@ class DukeTest {
 
         String inputAdd = "add m/cs2113 s/y1s1 mc/4 g/A+";
         String inputView = "view s/y1s1";
-        UI ui = new UI();
         ModuleList modulelist = new ModuleList();
 
         // Adds a new module
         Command c = Parser.parse(inputAdd);
-        c.execute(ui, modulelist);
+        c.execute(modulelist);
 
         // View modules for semester
         c = Parser.parse(inputView);
-        c.execute(ui, modulelist);
+        c.execute(modulelist);
 
         // Gets updated count in module list
         int viewCount = modulelist.getViewCount();
@@ -90,7 +88,7 @@ class DukeTest {
         // Deletes the module
         String inputDelete = "delete m/cs2113";
         c = Parser.parse(inputDelete);
-        c.execute(ui, modulelist);
+        c.execute(modulelist);
 
     }
 
@@ -102,17 +100,16 @@ class DukeTest {
 
         String inputAdd = "add m/cs2030 s/y2s1 mc/4 g/A+";
         String inputMcs = "mcs s/y2s1";
-        UI ui = new UI();
         ModuleList modulelist = new ModuleList();
         int initialMcsCount = modulelist.getMcsCount();
 
         // Adds a new module
         Command c = Parser.parse(inputAdd);
-        c.execute(ui, modulelist);
+        c.execute(modulelist);
 
         // View mcs for the module
         c = Parser.parse(inputMcs);
-        c.execute(ui, modulelist);
+        c.execute(modulelist);
 
         // Gets updated MCs count in module list
         int finalMcsCount = modulelist.getMcsCount();
@@ -123,7 +120,7 @@ class DukeTest {
         // Deletes the module
         String inputDelete = "delete m/cs2030";
         c = Parser.parse(inputDelete);
-        c.execute(ui, modulelist);
+        c.execute(modulelist);
 
     }
 
