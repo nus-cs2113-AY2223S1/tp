@@ -6,6 +6,9 @@ import seedu.duke.parser.DateParser;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
+/**
+ * A representation of transaction.
+ */
 public class Transaction {
     private final String transactionId;
     private final String itemName;
@@ -15,6 +18,15 @@ public class Transaction {
     private final LocalDate createdAt;
     private final LocalDate returnedAt;
 
+    /**
+     * Constructor method for transaction.
+     *
+     * @param itemName The name of the item involved.
+     * @param itemId The id of the item involved.
+     * @param borrowerId The id(name) of the user who borrows.
+     * @param duration The length of transaction(days).
+     * @param createdAt The day when transaction created.
+     */
     public Transaction(String itemName, String itemId, String borrowerId, int duration, LocalDate createdAt) {
         this.transactionId = IdGenerator.generateId();
         this.itemName = itemName;
@@ -25,7 +37,16 @@ public class Transaction {
         this.itemId = itemId;
     }
 
-
+    /**
+     * Constructor method for transaction.
+     *
+     * @param transactionId The id of the transaction.
+     * @param itemName The name of the item involved.
+     * @param itemId The id of the item involved.
+     * @param borrowerId The id(name) of the user who borrows.
+     * @param duration The length of transaction(days).
+     * @param createdAt The day when transaction created.
+     */
     public Transaction(String transactionId, String itemName, String itemId,
                        String borrowerId, int duration, LocalDate createdAt) {
         this.transactionId = transactionId;
@@ -37,32 +58,67 @@ public class Transaction {
         this.itemId = itemId;
     }
 
+    /**
+     * Gets the transaction id.
+     *
+     * @return The transaction id
+     */
     public String getTxId() {
         return transactionId;
     }
 
+    /**
+     * Gets the item id.
+     *
+     * @return The item id
+     */
     public String getItemId() {
         return itemId;
     }
 
+    /**
+     * Gets the borrower id.
+     *
+     * @return The borrower id
+     */
     public String getBorrower() {
         return borrower;
     }
 
+    /**
+     * Gets the Return Date.
+     *
+     * @return The Return date
+     */
     public LocalDate getReturnDate() {
         return returnedAt;
     }
 
+    /**
+     * Checks if the transaction finished or not.
+     *
+     * @return true If the return date is before today
+     */
     public boolean isFinished() {
         return returnedAt.isBefore(LocalDate.now());
     }
 
+    /**
+     * Formats the transaction information to store in hard-drive.
+     *
+     * @return A formatted string of transaction information
+     */
     public String convertTransactionToFileFormat() {
         String separator = " | ";
         return transactionId + separator + itemName + separator + itemId + separator + borrower
                 + separator + duration + separator + createdAt;
     }
 
+    /**
+     * Overrides toString method of Object to get string representation of Transaction.
+     *
+     * @return A string representation of Transaction
+     */
     @Override
     public String toString() {
         String itemId = "ItemID: " + this.itemId + " ";

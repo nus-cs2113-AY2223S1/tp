@@ -1,7 +1,12 @@
 package seedu.duke.exception;
 
 public class DukeException extends Exception {
-    public DukeException(String error) {
-        super(error);
+    /**
+     * Constructor of DukeException.
+     *
+     * @param message An exception message
+     */
+    public DukeException(String message) {
+        super(message);
     }
 }

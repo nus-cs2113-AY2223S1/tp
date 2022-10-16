@@ -14,11 +14,22 @@ import seedu.duke.transaction.TransactionList;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INSUFFICIENT_ARGUMENTS;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PARTS;
 
+/**
+ * A representation of a command to remove an item.
+ */
 public class RemoveItemCommand extends Command {
     private final String[] parts;
     private final ItemList itemList;
     private final TransactionList transactionList;
 
+    /**
+     * Constructor for RemoveItemCommand.
+     *
+     * @param parts The parts from user input
+     * @param itemList The list of items to work with
+     * @param transactionList The list of transactions to work with
+     * @throws InsufficientArgumentsException If the number of args is incorrect
+     */
     public RemoveItemCommand(String[] parts, ItemList itemList, TransactionList transactionList)
             throws InsufficientArgumentsException {
         this.parts = parts;
@@ -29,7 +40,13 @@ public class RemoveItemCommand extends Command {
         }
     }
 
-    public String[] getArgsRemoveItemCmd() throws InvalidArgumentException {
+    /**
+     * Gets arg values from the given part.
+     *
+     * @return An array of arg values
+     * @throws InvalidArgumentException If there is a part that cannot be parsed
+     */
+    private String[] getArgsRemoveItemCmd() throws InvalidArgumentException {
         String[] args = new String[1];
         for (String part : parts) {
             if (part.startsWith("i")) {
@@ -42,6 +59,14 @@ public class RemoveItemCommand extends Command {
         return args;
     }
 
+    /**
+     * Executes RemoveItemCommand.
+     *
+     * @return false
+     * @throws InvalidArgumentException If there is a part that cannot be parsed
+     * @throws ItemNotFoundException If the item cannot be found in the list
+     * @throws InvalidItemException If the item is unavailable
+     */
     public boolean executeCommand()
             throws InvalidArgumentException, ItemNotFoundException, InvalidItemException {
         String[] args = getArgsRemoveItemCmd();

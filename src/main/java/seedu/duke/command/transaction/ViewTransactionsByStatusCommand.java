@@ -29,7 +29,7 @@ public class ViewTransactionsByStatusCommand extends Command {
         }
     }
 
-    public String getArgs() throws InvalidArgumentException {
+    private String getArgs() throws InvalidArgumentException {
         String args;
         if (parts[0].startsWith("s")) {
             args = CommandParser.getArgValue(parts[0]);

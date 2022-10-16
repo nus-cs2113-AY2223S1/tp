@@ -24,7 +24,7 @@ public class ViewUserCommand extends Command {
         }
     }
 
-    public String getArgsViewUserCmd() throws InvalidArgumentException {
+    private String getArgsViewUserCmd() throws InvalidArgumentException {
         String arg;
         if (parts[0].startsWith("u")) {
             arg = CommandParser.getArgValue(parts[0]);
