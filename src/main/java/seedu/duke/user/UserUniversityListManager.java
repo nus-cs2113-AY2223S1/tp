@@ -104,6 +104,8 @@ public class UserUniversityListManager {
         assert inputSchool.length() > 0 : "Input school cannot be empty";
         assert puCode.length() > 0 : "Deleting PU code cannot be empty";
         if (foundKey(inputSchool)) {
+            UserModuleMapping deletedModule = myManager.get(inputSchool).getMyModules().getModuleByPuCode(puCode);
+            deletedModulesList.addToDeletedModules(deletedModule);
             myManager.get(inputSchool).deleteModuleByPuCode(puCode);
         } else {
             throw new InvalidUserCommandException("No such university found");
