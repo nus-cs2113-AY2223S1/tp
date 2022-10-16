@@ -33,7 +33,7 @@ public class PetParser {
     }
 
     public Command prepareAddPet(String input){
-        int startOfN = input.indexOf("n/");
+        int startOfN = input.indexOf(" n/");
         int startOfS = input.indexOf(" s/");
 
         if(startOfN > startOfS || startOfN == -1|| startOfS == -1){
@@ -41,7 +41,7 @@ public class PetParser {
             return new EndCommand();
         }
 
-        String name = input.substring(startOfN -1 + lengthOfSignature, startOfS);
+        String name = input.substring(startOfN + lengthOfSignature, startOfS);
         String status = input.substring(startOfS + lengthOfSignature);
         return new AddPetCommand(name, status, true);
     }

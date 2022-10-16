@@ -25,7 +25,7 @@ public class AppointmentParser {
 
 
         String type = input.substring(0,input.indexOf(" "));
-        String statement = input.substring(input.indexOf(" ")).trim();
+        String statement = input.substring(input.indexOf(" "));
         switch(type) {
         case AddAppointmentCommand.COMMAND_WORD:
             return prepareAddAppointment(statement);
@@ -58,7 +58,7 @@ public class AppointmentParser {
     }
 
     public Command prepareAddAppointment(String input){
-        int s = input.indexOf("s/");
+        int s = input.indexOf(" s/");
         int p = input.indexOf(" p/");
         int d = input.indexOf(" d/");
 

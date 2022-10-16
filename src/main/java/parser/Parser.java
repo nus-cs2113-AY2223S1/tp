@@ -64,7 +64,7 @@ public class Parser {
 
 
     public int indexOfRemove(String input){
-        if(!input.contains("i/")){
+        if(!input.contains(" i/")){
             return -1;
         }
 

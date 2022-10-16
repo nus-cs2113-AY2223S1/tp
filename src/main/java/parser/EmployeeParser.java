@@ -22,7 +22,7 @@ public class EmployeeParser {
         }
 
         String type = input.substring(0,input.indexOf(" "));
-        String statement = input.substring(input.indexOf(" ")).trim();
+        String statement = input.substring(input.indexOf(" "));
         switch(type) {
         case AddEmployeeCommand.COMMAND_WORD:
             return prepareAddEmployee(statement);
@@ -35,14 +35,14 @@ public class EmployeeParser {
     }
 
     public Command prepareAddEmployee(String input){
-        int startOfN = input.indexOf("n/");
+        int startOfN = input.indexOf(" n/");
 
         if(startOfN == -1){
             System.out.println("Error: format of parameters entered for adding an employee is invalid");
             return new EndCommand();
         }
 
-        String name = input.substring(startOfN + lengthOfSignature - 1);
+        String name = input.substring(startOfN + lengthOfSignature);
         return new AddEmployeeCommand(name);
     }
 
