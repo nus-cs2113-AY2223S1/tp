@@ -1,0 +1,23 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+CommandParser -> Command: createCommand()
+Command -> Command: getArgs()
+Command -> Command: isValidArgument(arg)
+
+Command -> transactionList: getTransactions()
+loop n times
+transactionList -> transactionList: iterate through list
+note right
+Check isFinished() status
+end note
+end
+transactionList -> Command: getTransactions(),
+note right
+Return array of transactions
+end note
+
+Command -> Ui: viewCompletedTransactionsMessage()
+@enduml
