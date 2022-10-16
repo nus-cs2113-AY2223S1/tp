@@ -2,6 +2,8 @@ package seedu.ui;
 
 import java.util.Scanner;
 
+import seedu.exception.ParkingException;
+
 /**
  * Represents a user interface that handles input and output with the user.
  */
@@ -75,6 +77,14 @@ public class Ui {
     public void greetUser() {
         showLogo();
         askName();
+    }
+
+    /**
+     * Print exception message
+     * @param e {@link ParkingException} exception
+     */
+    public void printError(ParkingException e) {
+        print(e.getMessage());
     }
 
     /**

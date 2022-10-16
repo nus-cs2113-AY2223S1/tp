@@ -30,7 +30,7 @@ public class CarparkList {
                 return carpark;
             }
         }
-        throw new NoCarparkFoundException("No carpark was found!");
+        throw new NoCarparkFoundException();
     }
 
     @Override
