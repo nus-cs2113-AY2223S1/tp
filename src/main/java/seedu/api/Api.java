@@ -135,7 +135,7 @@ public class Api {
             fetchData();
             isSuccess = true;
             authStatus = (isDifferent) ? AuthenticationStatus.SUCCESS : authStatus;
-        } catch (EmptyResponseException | UnauthorisedAccessApiException | FileWriteException | IOException e) {
+        } catch (EmptyResponseException | UnauthorisedAccessApiException | FileWriteException e) {
             System.out.println(e.getMessage());
             apiKey = originalApiKey;
         }
