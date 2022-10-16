@@ -213,6 +213,11 @@ public class Api {
         return apiKey;
     }
 
+    /**
+     * Returns the message corresponding to the authentication status.
+     *
+     * @return formatted message for authentication status.
+     */
     public String getApiAuthStatus() {
         String message;
         switch(authStatus) {
