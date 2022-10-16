@@ -24,8 +24,8 @@ public class CommandUnpair extends Command {
      * @param commandUnpairDetails Parsed client and property indexes from the user's input.
      */
     public CommandUnpair(ArrayList<Integer> commandUnpairDetails) {
-        this.clientIndex = commandUnpairDetails.get(0);
-        this.propertyIndex = commandUnpairDetails.get(1);
+        this.propertyIndex = commandUnpairDetails.get(0);
+        this.clientIndex = commandUnpairDetails.get(1);
     }
 
     /**
