@@ -82,6 +82,9 @@ public class CommandParser {
         } else if (parameters.length == 3 && parameters[1].trim().equals("DATABASE")
                 && parameters[2].startsWith("u/")) {
             return true;
+        } else if (parameters.length == 3 && parameters[1].trim().equals("DELETE")
+                && parameters[2].trim().equals("HISTORY")) {
+            return true;
         } else {
             return false;
         }

@@ -1,5 +1,6 @@
 package seedu.duke.ui;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 
 import seedu.duke.module.ModuleMapping;
@@ -77,6 +78,8 @@ public class Ui {
                 + "                                                       "
                 + "[Home University Module Code] [Home University Module Title] | "
                 + "[Partner University Module Code] [Partner University Module Title] | [Equivalent NUS Credits]\n"
+                + SPACING + "view      " + "/view DELETE HISTORY                    "
+                + "Displays up to 5 most recent modules that the user has deleted\n"
                 + SPACING + "list      " + "/list MODULES                           "
                 + "Displays all existing university modules mappings that are approved in the format\n"
                 + "                                                       "
@@ -115,9 +118,19 @@ public class Ui {
     }
 
     /**
-     * Prints an acknowledgement message to inform the user that they have
-     * successfully added a module to their list.
-     * 
+     * Displays to the user information regarding a deleted module.
+     * @return Formatted string for each module and its associated code, title, credit and PU information, incl PU name.
+     */
+    public static String printDeletedModule(UserModuleMapping module) {
+        String puName = module.getPuName();
+        String message = "NUS: " + module.getNusCode() + " " + module.getNusTitle() + " | " + puName + ": "
+                + module.getPuCode() + " " + module.getPuTitle() + " | Equivalent NUS Credits: " + module.getNusCredit()
+                + " MCs";
+        return message;
+    }
+
+    /**
+     * Prints an acknowledgement message to inform the user that they have successfully added a module to their list.
      * @param module The module added into the module list
      * @return Formatted string for the module added.
      */
@@ -187,6 +200,24 @@ public class Ui {
             message += Integer.toString(i + 1);
             message += ". ";
             message += printModule(modules.get(i));
+            message += "\n";
+        }
+        message += LINE;
+        return message;
+    }
+
+    /**
+     * Sequentially prints each module stored in the deletedModules list.
+     * @param deletedModules The list of deleted modules to be printed.
+     * @return Formatted string for the deleted modules in the list.
+     */
+    public static String printDeletedModulesHistory(ArrayDeque<UserModuleMapping> deletedModules) {
+        String message = LINE;
+        int i = 1;
+        for (UserModuleMapping module : deletedModules) {
+            message += Integer.toString(i++);
+            message += ". ";
+            message += printDeletedModule(module);
             message += "\n";
         }
         message += LINE;

@@ -68,6 +68,8 @@ public class Duke {
                         ViewCommand viewCommand = (ViewCommand) newUserCommand;
                         if (viewCommand.getViewOption().equals("LISTS")) {
                             userUniversityListManager.displayAll();
+                        } else if (viewCommand.getViewOption().equals("DELETE")) {
+                            userUniversityListManager.getUserDeletedModules().displayAll();
                         } else if (viewCommand.getViewOption().equals("UNIVERSITY")) {
                             userUniversityListManager.displayUniversity(viewCommand.getUniversityName());
                         }

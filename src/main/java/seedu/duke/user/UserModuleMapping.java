@@ -49,6 +49,10 @@ public class UserModuleMapping {
         return puModule.getCredit();
     }
 
+    public String getPuName() {
+        return puModule.getUniversity().getName();
+    }
+
     public String getComment() {
         return comment;
     }
