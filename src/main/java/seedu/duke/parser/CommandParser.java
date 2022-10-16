@@ -51,13 +51,11 @@ public class CommandParser {
     private static final String COMMAND_LIST_TX = "list-tx";
     private static final String COMMAND_VIEW_USER = "view-user";
     private static final String COMMAND_FIND_USER = "find-user";
-
     private static final String COMMAND_VIEW_ITEM = "view-item";
     private static final String COMMAND_VIEW_TX = "view-tx";
     private static final String COMMAND_ADD_USER = "add-user";
     private static final String COMMAND_ADD_ITEM = "add-item";
     private static final String COMMAND_FIND_ITEM = "find-item";
-
     private static final String COMMAND_ADD_TX = "add-tx";
     private static final String COMMAND_REMOVE_USER = "remove-user";
     private static final String COMMAND_REMOVE_ITEM = "remove-item";
