@@ -5,7 +5,7 @@ import employee.EmployeeList;
 import service.ServiceList;
 
 public class RemoveEmployeeCommand extends Command{
-    public static final String COMMAND_WORD = "remove";
+    public final static String COMMAND_WORD = "remove";
     private int employeeId;
 
     public RemoveEmployeeCommand(int employeeId){

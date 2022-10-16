@@ -1,5 +1,4 @@
 package parser;
-
 import command.*;
 
 public class Parser {
@@ -11,7 +10,7 @@ public class Parser {
             if(input.equals("bye")){
                 return new EndCommand();
             }
-            System.out.println("input invalid");
+            System.out.println("input invalid ");
             return new EndCommand();
         }
 
@@ -100,7 +99,6 @@ public class Parser {
         String description = input.substring(d + lengthOfSignature);
 
         return new AddServiceCommand(description);
-
     }
 
 
@@ -202,12 +200,19 @@ public class Parser {
         String petName = args[0].substring(2);
         String appointmentDate = args[1].substring(2);
 
+/*
+        String service = input.substring(s + lengthOfSignature, p);
+        String petName = input.substring(p + lengthOfSignature, d);
+        String appointmentDate = input.substring(d + lengthOfSignature);
+
+        return new AddAppointmentCommand(petName, appointmentDate, service);
+*/
         return new AddAppointmentCommand(petName, appointmentDate);
+
     }
 
     public boolean isInt(String val){
-        Boolean strResult = val.matches("\\d?");
-        if(strResult) {
+        if(val.matches("\\d?")) {
             return true;
         }
         return false;
@@ -244,14 +249,10 @@ public class Parser {
         switch(type) {
         case AddPetCommand.COMMAND_WORD:
             return prepareAddPet(statement);
-        /*case RemoveAppointmentCommand.COMMAND_WORD:
+/*
+        case RemovePetCommand.COMMAND_WORD:
             return prepareRemovePet(statement);
-
-
-        case AllocateAppointmentCommand.COMMAND_WORD:
-            return prepareAllocateAppointment(statement);
-
-         */
+*/
         default:
             System.out.println("input invalid");
             return new EndCommand();
@@ -295,6 +296,7 @@ public class Parser {
 
     public Command prepareRemoveEmployee(String input){
         int index = indexOfRemove(input);
+
         if(index == -1){
             System.out.println("input invalid");
             return new EndCommand();
