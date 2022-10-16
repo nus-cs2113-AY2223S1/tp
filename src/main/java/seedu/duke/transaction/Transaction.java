@@ -27,7 +27,8 @@ public class Transaction {
      * @param duration The length of transaction(days).
      * @param createdAt The day when transaction created.
      */
-    public Transaction(String itemName, String itemId, String borrowerId, int duration, LocalDate createdAt) {
+    public Transaction(String itemName, String itemId, String borrowerId, int duration,
+            LocalDate createdAt) {
         this.transactionId = IdGenerator.generateId();
         this.itemName = itemName;
         this.borrower = borrowerId;
@@ -47,8 +48,8 @@ public class Transaction {
      * @param duration The length of transaction(days).
      * @param createdAt The day when transaction created.
      */
-    public Transaction(String transactionId, String itemName, String itemId,
-                       String borrowerId, int duration, LocalDate createdAt) {
+    public Transaction(String transactionId, String itemName, String itemId, String borrowerId,
+            int duration, LocalDate createdAt) {
         this.transactionId = transactionId;
         this.itemName = itemName;
         this.borrower = borrowerId;
@@ -115,6 +116,18 @@ public class Transaction {
     }
 
     /**
+     * Updates the duration of the transaction.
+     * 
+     * @param newDuration The new duration
+     * @return The updated transaction
+     */
+
+    public Transaction updateDuration(int newDuration) {
+        return new Transaction(this.itemName, this.itemId, this.borrower, newDuration,
+                this.createdAt);
+    }
+
+    /**
      * Overrides toString method of Object to get string representation of Transaction.
      *
      * @return A string representation of Transaction
@@ -128,8 +141,10 @@ public class Transaction {
         String usersId = "BorrowerID: " + this.borrower + " ";
 
         if (!isFinished()) {
-            String remainDays = " (" + ChronoUnit.DAYS.between(LocalDate.now(), getReturnDate()) + " day(s) remaining)";
-            String returnDate = "ReturnDate: " + DateParser.formatDateToString(returnedAt) + remainDays;
+            String remainDays = " (" + ChronoUnit.DAYS.between(LocalDate.now(), getReturnDate())
+                    + " day(s) remaining)";
+            String returnDate =
+                    "ReturnDate: " + DateParser.formatDateToString(returnedAt) + remainDays;
             return transactionIcon + transactionId + itemName + itemId + usersId + returnDate;
         }
         String returnedDate = "ReturnedDate: " + DateParser.formatDateToString(returnedAt);

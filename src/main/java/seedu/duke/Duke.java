@@ -34,11 +34,11 @@ public class Duke {
     public Duke(String userFilePath, String itemFilePath, String transactionFilePath) {
         userList = new UserList();
         itemList = new ItemList();
-        //userStorage = new UserStorage(userFilePath);
-        //itemStorage = new ItemStorage(itemFilePath);
+        // userStorage = new UserStorage(userFilePath);
+        // itemStorage = new ItemStorage(itemFilePath);
         transactionStorage = new TransactionStorage(transactionFilePath);
-        //initializeItemList();
-        //initializeUserList();
+        // initializeItemList();
+        // initializeUserList();
         initializeTransactionList();
     }
 
@@ -61,8 +61,8 @@ public class Duke {
      */
     private void writeDataToFile(boolean isLastCommand) throws StoreFailureException {
         if (isLastCommand) {
-            //userStorage.writeData(userList)
-            //itemStorage.writeData(itemList)
+            // userStorage.writeData(userList)
+            // itemStorage.writeData(itemList)
             transactionStorage.writeData(transactionList);
         }
     }
@@ -75,7 +75,8 @@ public class Duke {
         while (!isLastCommand) {
             try {
                 String input = Ui.readInput();
-                Command command = CommandParser.createCommand(input, userList, itemList, transactionList);
+                Command command =
+                        CommandParser.createCommand(input, userList, itemList, transactionList);
                 isLastCommand = command.executeCommand();
                 writeDataToFile(isLastCommand);
             } catch (Exception e) {

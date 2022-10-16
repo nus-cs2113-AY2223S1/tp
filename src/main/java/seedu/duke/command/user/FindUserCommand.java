@@ -11,7 +11,8 @@ public class FindUserCommand extends Command {
     private final String[] parts;
     private final UserList userList;
 
-    public FindUserCommand(String[] parts, UserList userList) throws InsufficientArgumentsException {
+    public FindUserCommand(String[] parts, UserList userList)
+            throws InsufficientArgumentsException {
         this.parts = parts;
         this.userList = userList;
         if (parts.length != 3) {
@@ -20,10 +21,10 @@ public class FindUserCommand extends Command {
     }
 
     @Override
-    public boolean executeCommand(){
+    public boolean executeCommand() {
         try {
             Ui.printResponse(userList.getUsersByKeyword(parts[3]).toString());
-        }catch(UserNotFoundException e){
+        } catch (UserNotFoundException e) {
             Ui.printResponse(e.getMessage());
         }
         return false;

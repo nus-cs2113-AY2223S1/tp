@@ -24,7 +24,19 @@ public class ItemList {
      */
     public void addItem(Item item) {
         itemList.add(item);
-        assert itemList.size() != 0  : "item not added!";
+        assert itemList.size() != 0 : "item not added!";
+    }
+
+    public Item updateItemPrice(String itemId, double price) throws ItemNotFoundException {
+        for (int i = 0; i < this.itemList.size(); ++i) {
+            Item item = this.itemList.get(i);
+            if (item.getItemId().equals(itemId)) {
+                Item updatedItem = item.updatePrice(price);
+                this.itemList.set(i, updatedItem);
+                return updatedItem;
+            }
+        }
+        throw new ItemNotFoundException(MESSAGE_ITEM_NOT_FOUND);
     }
 
     public void deleteItem(String itemId, TransactionList transactionList)
@@ -55,14 +67,14 @@ public class ItemList {
         throw new ItemNotFoundException(MESSAGE_ITEM_NOT_FOUND);
     }
 
-    public ItemList getItemsByKeyword(String keyword) throws ItemNotFoundException{
+    public ItemList getItemsByKeyword(String keyword) throws ItemNotFoundException {
         ItemList returnList = new ItemList();
         for (Item item : this.itemList) {
             if ((item.getName()).contains(keyword)) {
                 returnList.addItem(item);
             }
         }
-        if(returnList.getListSize() == 0){
+        if (returnList.getListSize() == 0) {
             throw new ItemNotFoundException(MESSAGE_ITEM_NOT_FOUND);
         }
         return returnList;
@@ -86,7 +98,8 @@ public class ItemList {
     }
 
     public void deleteAllItemOfAnUser(String username, TransactionList transactionList) {
-        itemList.removeIf(item -> item.getOwnerId().equals(username) && item.isAvailable(transactionList));
+        itemList.removeIf(
+                item -> item.getOwnerId().equals(username) && item.isAvailable(transactionList));
     }
 
     public String toString(TransactionList transactionList) {
@@ -98,7 +111,8 @@ public class ItemList {
         }
         int index = 1;
         for (Item item : itemList) {
-            listString.append('\n').append("   ").append(index++).append(". ").append(item.toString(transactionList));
+            listString.append('\n').append("   ").append(index++).append(". ")
+                    .append(item.toString(transactionList));
         }
         return String.valueOf(listString);
     }

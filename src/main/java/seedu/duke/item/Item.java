@@ -34,6 +34,11 @@ public class Item {
         return pricePerDay;
     }
 
+    public Item updatePrice(double newPricePerDay) {
+        return new Item(this.name, Category.setCategory(this.category), newPricePerDay,
+                this.ownerId);
+    }
+
     public Category.Categories getCategory() {
         return category;
     }
@@ -48,7 +53,8 @@ public class Item {
 
     public String toString(TransactionList transactionList) {
         String itemId = "ItemId: " + this.itemId + " ";
-        String itemIcon = "Status: [" + (isAvailable(transactionList) ? "Available" : "On loan") + "] ";
+        String itemIcon =
+                "Status: [" + (isAvailable(transactionList) ? "Available" : "On loan") + "] ";
         String itemName = "Item: " + name + " ";
         String itemCategory = "Category: " + category.toString() + " ";
         String itemOwner = "Owner: " + getOwnerId() + " ";
