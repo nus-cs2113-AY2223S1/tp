@@ -25,7 +25,7 @@ public class UnneededArgumentsException extends ParkingException {
     @Override
     public String getMessage() {
         return String.format("There were unrecognized arguments after "
-                + "the <%1$s> command. Please try the <%1$s> command"
+                + "the `%1$s` command. Please try the `%1$s` command"
                 + " again by itself.", command);
     }
 }

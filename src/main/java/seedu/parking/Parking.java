@@ -4,7 +4,6 @@ import static seedu.common.CommonFiles.API_JSON_DIRECTORY;
 import static seedu.common.CommonFiles.API_KEY_FILE;
 import static seedu.common.CommonFiles.LTA_JSON_FILE;
 
-import java.io.IOException;
 import java.util.Objects;
 
 import seedu.api.Api;
@@ -13,11 +12,9 @@ import seedu.commands.Find;
 import seedu.common.CommonFiles;
 import seedu.data.Carpark;
 import seedu.data.CarparkList;
-import seedu.exception.FileWriteException;
 import seedu.exception.NoCarparkFoundException;
 import seedu.exception.NoCommandArgumentException;
 import seedu.exception.ParkingException;
-import seedu.exception.UnneededArgumentsException;
 import seedu.parser.Command;
 import seedu.parser.Parser;
 import seedu.ui.Ui;
@@ -49,9 +46,6 @@ public class Parking {
         } catch (ParkingException e) {
             ui.print(e.getMessage());
             ui.print("Loading from local backup: ");
-        } catch (IOException e) {
-            ui.print(new FileWriteException(API_JSON_DIRECTORY).getMessage());
-            ui.print("Loading from local backup: ");
         }
 
         // Load file from json
@@ -60,18 +54,18 @@ public class Parking {
             carparkList = new CarparkList(CommonFiles.LTA_FILE_PATH, CommonFiles.LTA_BACKUP_FILE_PATH);
             ui.showLoadingDataSuccess();
         } catch (ParkingException e) {
-            System.out.println(e.getMessage());
+            ui.printError(e);
         }
 
         // Main loop for user to use program
         boolean isExit = false;
         while (!isExit) {
             String input = ui.getCommand();
-            Command command = null;
+            Command command;
             try {
                 command = parser.parseInputString(input);
             } catch (ParkingException e) {
-                ui.print(e.getMessage());
+                ui.printError(e);
                 continue;
             }
             switch (Objects.requireNonNull(command)) {
@@ -84,9 +78,8 @@ public class Parking {
                     String carparkID = find.getCarparkID(input);
                     Carpark carpark = carparkList.findCarpark(carparkID);
                     ui.print(carpark.toString());
-                    ui.print(String.format("Available lots: %s", carpark.getAvailableLots()));
                 } catch (NoCommandArgumentException | NoCarparkFoundException exception) {
-                    System.out.println(exception.getMessage());
+                    ui.printError(exception);;
                 }
                 break;
             case UPDATE:
@@ -99,9 +92,7 @@ public class Parking {
                     carparkList = new CarparkList(CommonFiles.LTA_FILE_PATH, CommonFiles.LTA_BACKUP_FILE_PATH);
                     ui.showUpdateDataSuccess();
                 } catch (ParkingException e) {
-                    ui.print(e.getMessage());
-                } catch (IOException e) {
-                    ui.showUpdateError();
+                    ui.printError(e);
                 } finally {
                     System.out.println("Update data terminated"); // Debug line
                 }
@@ -112,7 +103,7 @@ public class Parking {
                     api.loadApiKey(API_KEY_FILE, API_JSON_DIRECTORY);
                     ui.showApiKeySaved();
                 } catch (ParkingException e) {
-                    ui.print(e.getMessage());
+                    ui.printError(e);
                 }
                 break;
             case LIST:

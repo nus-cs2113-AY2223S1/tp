@@ -105,10 +105,9 @@ public class Api {
         case 401:
             throw new UnauthorisedAccessApiException();
         case 503:
-            throw new ServerNotReadyApiException("Too many requests. Trying again...");
+            throw new ServerNotReadyApiException();
         default:
-            throw new UnknownResponseApiException("Response Code: " + responseCode
-                + "\nIf the problem persists please contact the developer. Trying again...");
+            throw new UnknownResponseApiException(responseCode);
         }
     }
 
@@ -118,9 +117,9 @@ public class Api {
      * todo: handle bad request
      *
      * @throws EmptyResponseException if empty/invalid response received.
-     * @throws IOException            if data writing fails.
+     * @throws UnauthorisedAccessApiException if access not granted.
      */
-    public void fetchData() throws EmptyResponseException, IOException, UnauthorisedAccessApiException,
+    public void fetchData() throws EmptyResponseException, UnauthorisedAccessApiException,
             FileWriteException {
         String result = "";
         int fetchTries = FETCH_TRIES;
@@ -158,7 +157,7 @@ public class Api {
             }
             apiKey = key;
         } catch (IOException e) {
-            throw new NoFileFoundException("API key file is missing!");
+            throw new NoFileFoundException("API key file is missing! Please check " + file + ".");
         }
     }
 

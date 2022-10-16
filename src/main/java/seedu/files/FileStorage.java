@@ -28,10 +28,10 @@ public class FileStorage {
         filePath = Paths.get(directory, file).toString();
         this.file = new File(filePath);
         this.ui = new Ui();
-        checkFileExist();
+        checkFileExists();
     }
 
-    private void checkFileExist() {
+    private void checkFileExists() {
         if (file.exists()) {
             return;
         }
@@ -52,7 +52,7 @@ public class FileStorage {
      */
     public void writeDataToFile(String data) throws FileWriteException {
         try {
-            checkFileExist();
+            checkFileExists();
             FileWriter fileWriter = new FileWriter(filePath);
             fileWriter.write(data);
             fileWriter.close();

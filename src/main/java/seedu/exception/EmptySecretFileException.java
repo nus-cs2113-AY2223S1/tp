@@ -4,10 +4,11 @@ package seedu.exception;
  * Exception for empty secret file.
  */
 public class EmptySecretFileException extends ParkingException {
-    private String directory;
+    private final String directory;
 
     /**
      * Constructor for the exception.
+     *
      * @param directory String to be used for formatting purposes.
      */
     public EmptySecretFileException(String directory) {
@@ -17,6 +18,7 @@ public class EmptySecretFileException extends ParkingException {
 
     /**
      * Create formatted message when API token file is empty.
+     *
      * @return Predefined message with filepath.
      */
     @Override
