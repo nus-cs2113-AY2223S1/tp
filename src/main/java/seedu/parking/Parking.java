@@ -37,10 +37,8 @@ public class Parking {
         Api api = new Api(LTA_JSON_FILE, API_JSON_DIRECTORY);
 
         try {
-            api.loadApiKey(API_KEY_FILE, API_JSON_DIRECTORY); // Will give exception when file is missing or empty key
-            api.asyncExecuteRequest(); // Send request to API and wait asynchronously
-            // More code here while waiting for data to come back
-            // This should be the last code block of the initialising phase
+            api.loadApiKey(API_KEY_FILE, API_JSON_DIRECTORY, true);
+            api.asyncExecuteRequest();
             api.fetchData();
             ui.print("Fetching data from API successful!");
         } catch (ParkingException e) {
@@ -99,9 +97,11 @@ public class Parking {
                 break;
             case AUTH:
                 try {
-                    auth.saveApiKey(input);
-                    api.loadApiKey(API_KEY_FILE, API_JSON_DIRECTORY);
-                    ui.showApiKeySaved();
+                    String[] words = input.trim().split("\\s+", 2);
+                    if (api.isApiValid(words[1])) {
+                        auth.saveApiKey(input);
+                        ui.showApiKeySaved();
+                    }
                 } catch (ParkingException e) {
                     ui.printError(e);
                 }

@@ -1,5 +1,6 @@
 package seedu.api;
 
+import static seedu.common.CommonData.API_KEY_DEFAULT;
 import static seedu.common.CommonFiles.LTA_BASE_URL;
 
 import java.io.IOException;
@@ -33,7 +34,8 @@ public class Api {
     private final Ui ui;
     private HttpRequest request;
     private CompletableFuture<HttpResponse<String>> responseFuture;
-    private String apiKey = "1B+7tBxzRNOtFbTxGcCiYA==";
+    private String apiKey = "";
+    private AuthenticationStatus authStatus = AuthenticationStatus.FAIL;
 
     /**
      * Constructor to create a new client and the correct HTTP request.
@@ -101,14 +103,43 @@ public class Api {
             throws UnauthorisedAccessApiException, ServerNotReadyApiException, UnknownResponseApiException {
         switch (responseCode) {
         case 200:
+            authStatus = (authStatus == AuthenticationStatus.DEFAULT) ? authStatus : AuthenticationStatus.SUCCESS;
             return true;
         case 401:
+            authStatus = (authStatus == AuthenticationStatus.DEFAULT) ? authStatus : AuthenticationStatus.FAIL;
             throw new UnauthorisedAccessApiException();
         case 503:
             throw new ServerNotReadyApiException();
         default:
             throw new UnknownResponseApiException(responseCode);
         }
+    }
+
+    /**
+     * Authenticate API key and update data if it is valid. If it is invalid, the previous API key will be kept.
+     * No data loading required afterwards.
+     *
+     * @param apiKeyInput API key to validate.
+     * @return true if authentication is successful.
+     */
+    public boolean isApiValid(String apiKeyInput) {
+        String originalApiKey = apiKey;
+        apiKey = apiKeyInput;
+        boolean isDifferent = true;
+        if (originalApiKey.equals(apiKeyInput)) {
+            isDifferent = false;
+        }
+        boolean isSuccess = false;
+        asyncExecuteRequest();
+        try {
+            fetchData();
+            isSuccess = true;
+            authStatus = (isDifferent) ? AuthenticationStatus.SUCCESS : authStatus;
+        } catch (EmptyResponseException | UnauthorisedAccessApiException | FileWriteException | IOException e) {
+            System.out.println(e.getMessage());
+            apiKey = originalApiKey;
+        }
+        return isSuccess;
     }
 
     /**
@@ -144,24 +175,69 @@ public class Api {
 
     /**
      * Reads API key from secret.txt file and loads it to the object.
-     * If secret.txt does not exist, create it.
+     * If secret.txt does not exist, create it and use the default key for now.
      *
-     * @throws NoFileFoundException     If directory / file is not found.
+     * @param file file name of where the api key is stored.
+     * @param directory directory where the file is stored.
+     * @param toloadDefault to load default api key or not.
+     * @throws NoFileFoundException If directory / file is not found.
      * @throws EmptySecretFileException If the file is empty.
      */
-    public void loadApiKey(String file, String directory) throws NoFileFoundException, EmptySecretFileException {
+    public void loadApiKey(String file, String directory, boolean toloadDefault)
+            throws NoFileFoundException, EmptySecretFileException {
         try {
             String key = FileReader.readStringFromTxt(file, directory, true);
             if (key.isEmpty()) {
+                if (toloadDefault) {
+                    loadDefaultApiKey();
+                }
                 throw new EmptySecretFileException(directory);
             }
             apiKey = key;
+            authStatus = AuthenticationStatus.API_CHANGED;
         } catch (IOException e) {
             throw new NoFileFoundException("API key file is missing! Please check " + file + ".");
         }
     }
 
+    /**
+     * Load default api key. todo: for authentication status so that they know that their own api key is not auth yet.
+     */
+    public void loadDefaultApiKey() {
+        apiKey = API_KEY_DEFAULT;
+        authStatus = AuthenticationStatus.DEFAULT;
+    }
+
     public String getApiKey() {
         return apiKey;
+    }
+
+    /**
+     * Returns the message corresponding to the authentication status.
+     *
+     * @return formatted message for authentication status.
+     */
+    public String getApiAuthStatus() {
+        String message;
+        switch(authStatus) {
+        case FAIL:
+            message = "You have not authenticated your API key. Your API key is " + apiKey;
+            break;
+        case SUCCESS:
+            message = "You have authenticated your API key successfully. Your API key is " + apiKey;
+            break;
+        case API_CHANGED:
+            message = "You have loaded your API key (" + apiKey
+                    + ")but have not authenticated it! Use `update` command to authenticate.";
+            break;
+        case DEFAULT:
+            message = "You have not authenticated your personal API key. Currently you have access to the API"
+                    + " but you are using our default key!";
+            break;
+        default:
+            message = "";
+            break;
+        }
+        return message;
     }
 }
