@@ -109,6 +109,18 @@ public class Ui {
     }
 
     /**
+     * Displays to the user information regarding a deleted module.
+     * @return Formatted string for each module and its associated code, title, credit and PU information, incl PU name.
+     */
+    public static String printDeletedModule(UserModuleMapping module) {
+        String puName = module.getPuName();
+        String message = "NUS: " + module.getNusCode() + " " + module.getNusTitle() + " | " + puName + ": "
+                + module.getPuCode() + " " + module.getPuTitle() + " | Equivalent NUS Credits: " + module.getNusCredit()
+                + " MCs";
+        return message;
+    }
+
+    /**
      * Prints an acknowledgement message to inform the user that they have successfully added a module to their list.
      * @param module The module added into the module list
      * @return Formatted string for the module added.
