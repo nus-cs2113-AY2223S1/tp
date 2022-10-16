@@ -64,7 +64,8 @@ public class TransactionStorage extends Storage {
             fileWriter.close();
         } catch (IOException e) {
             int startIndex = transactionFilePath.lastIndexOf("/");
-            String fileDirectory = transactionFilePath.replace(transactionFilePath.substring(startIndex), "");
+            String fileDirectory =
+                    transactionFilePath.replace(transactionFilePath.substring(startIndex), "");
             File file = new File(fileDirectory);
             if (file.mkdir()) {
                 writeData(transactionList);

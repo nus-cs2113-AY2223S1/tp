@@ -53,6 +53,26 @@ public class TransactionList {
     }
 
     /**
+     * Updates a transaction duration in the list given its ID.
+     *
+     * @param transactionId The id of the transaction to be deleted
+     * @param duration The new duration
+     * @throws TransactionNotFoundException If the transaction cannot be found in the list
+     */
+    public Transaction updateTransactionDuration(String transactionId, int duration)
+            throws TransactionNotFoundException {
+        for (int i = 0; i < this.transactionList.size(); ++i) {
+            Transaction tx = this.transactionList.get(i);
+            if (tx.getTxId().equals(transactionId)) {
+                Transaction updatedTx = tx.updateDuration(duration);
+                this.transactionList.set(i, updatedTx);
+                return updatedTx;
+            }
+        }
+        throw new TransactionNotFoundException(MESSAGE_TX_NOT_FOUND);
+    }
+
+    /**
      * Deletes a transaction in the list given its ID.
      *
      * @param transactionId The id of the transaction to be deleted
@@ -70,7 +90,8 @@ public class TransactionList {
      * @return The transactions with that id
      * @throws TransactionNotFoundException If the transaction cannot be found in the list
      */
-    public Transaction getTransactionById(String transactionId) throws TransactionNotFoundException {
+    public Transaction getTransactionById(String transactionId)
+            throws TransactionNotFoundException {
         for (Transaction transaction : transactionList) {
             if (transaction.getTxId().equals(transactionId)) {
                 return transaction;
@@ -86,10 +107,8 @@ public class TransactionList {
      * @return true If the list contains that person
      */
     public boolean hasThisBorrower(String username) {
-        int count = (int) transactionList.stream()
-                .filter(t -> !t.isFinished())
-                .filter(t -> t.getBorrower().equals(username))
-                .count();
+        int count = (int) transactionList.stream().filter(t -> !t.isFinished())
+                .filter(t -> t.getBorrower().equals(username)).count();
         return count > 0;
     }
 
@@ -100,10 +119,8 @@ public class TransactionList {
      * @return true If the list contains that item
      */
     public boolean hasThisItemBeingBorrowed(String itemId) {
-        int count = (int) transactionList.stream()
-                .filter(t -> !t.isFinished())
-                .filter(t -> t.getItemId().equals(itemId))
-                .count();
+        int count = (int) transactionList.stream().filter(t -> !t.isFinished())
+                .filter(t -> t.getItemId().equals(itemId)).count();
         return count > 0;
     }
 
@@ -114,7 +131,7 @@ public class TransactionList {
      */
     public String convertTransactionListToFileFormat() {
         StringBuilder formattedString = new StringBuilder();
-        for (Transaction transaction: transactionList) {
+        for (Transaction transaction : transactionList) {
             formattedString.append(transaction.convertTransactionToFileFormat()).append('\n');
         }
         return formattedString.toString();
@@ -131,7 +148,8 @@ public class TransactionList {
         if (transactionList.size() == 0) {
             listString.append("There is no transaction in your list right now");
         } else {
-            listString.append("Here are ").append(transactionList.size()).append(" transaction(s) in your list:");
+            listString.append("Here are ").append(transactionList.size())
+                    .append(" transaction(s) in your list:");
         }
         int index = 1;
         for (Transaction transaction : transactionList) {

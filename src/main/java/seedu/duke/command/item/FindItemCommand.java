@@ -15,21 +15,26 @@ import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_SAME_OWNER;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_NUMBER_FORMAT_INVALID;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_PRICE_FORMAT_INVALID;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_PRICE_LESS_THAN_ZERO;
-public class FindItemCommand extends Command{
+
+public class FindItemCommand extends Command {
     private final String[] parts;
     private final ItemList itemList;
-    public FindItemCommand(String[] parts, ItemList itemList) throws InsufficientArgumentsException {
+
+    public FindItemCommand(String[] parts, ItemList itemList)
+            throws InsufficientArgumentsException {
         this.parts = parts;
         this.itemList = itemList;
-        if(parts.length != 3){
+        if (parts.length != 3) {
             throw new InsufficientArgumentsException("Too few arguments!");
         }
     }
+
     @Override
-    public boolean executeCommand(){
+    public boolean executeCommand() {
         try {
-            Ui.printResponse(itemList.getItemsByKeyword(parts[3]).toString());//may face problems if search term has more than one word
-        }catch(ItemNotFoundException e){
+            Ui.printResponse(itemList.getItemsByKeyword(parts[3]).toString());
+            // may face problems if search term has more than one word
+        } catch (ItemNotFoundException e) {
             Ui.printResponse(e.getMessage());
         }
         return false;

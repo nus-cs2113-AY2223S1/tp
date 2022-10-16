@@ -52,7 +52,7 @@ public class UserList {
                 returnList.addUser(user);
             }
         }
-        if(returnList.getSize() == 0){
+        if (returnList.getSize() == 0) {
             throw new UserNotFoundException(MESSAGE_USER_NOT_FOUND);
         }
         return returnList;
