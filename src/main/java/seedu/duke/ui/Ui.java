@@ -1,5 +1,6 @@
 package seedu.duke.ui;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 
 import seedu.duke.module.ModuleMapping;
@@ -182,6 +183,24 @@ public class Ui {
             message += Integer.toString(i + 1);
             message += ". ";
             message += printModule(modules.get(i));
+            message += "\n";
+        }
+        message += LINE;
+        return message;
+    }
+
+    /**
+     * Sequentially prints each module stored in the deletedModules list.
+     * @param deletedModules The list of deleted modules to be printed.
+     * @return Formatted string for the deleted modules in the list.
+     */
+    public static String printDeletedModulesHistory(ArrayDeque<UserModuleMapping> deletedModules) {
+        String message = LINE;
+        int i = 1;
+        for (UserModuleMapping module : deletedModules) {
+            message += Integer.toString(i++);
+            message += ". ";
+            message += printDeletedModule(module);
             message += "\n";
         }
         message += LINE;
