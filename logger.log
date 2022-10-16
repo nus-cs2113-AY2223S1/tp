@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2022-10-16T16:23:38.638843Z</date>
+  <millis>1665937418638</millis>
+  <nanos>843000</nanos>
+  <sequence>0</sequence>
+  <logger>global</logger>
+  <level>INFO</level>
+  <class>seedu.duke.Duke</class>
+  <method>main</method>
+  <thread>1</thread>
+  <message>starting Timetabler program...</message>
+</record>
+<record>
+  <date>2022-10-16T16:23:53.009230100Z</date>
+  <millis>1665937433009</millis>
+  <nanos>230100</nanos>
+  <sequence>1</sequence>
+  <logger>global</logger>
+  <level>INFO</level>
+  <class>seedu.duke.Duke</class>
+  <method>main</method>
+  <thread>1</thread>
+  <message>exit flag detected, attempting to exit</message>
+</record>
+<record>
+  <date>2022-10-16T16:23:53.012229600Z</date>
+  <millis>1665937433012</millis>
+  <nanos>229600</nanos>
+  <sequence>2</sequence>
+  <logger>global</logger>
+  <level>INFO</level>
+  <class>seedu.duke.Duke</class>
+  <method>main</method>
+  <thread>1</thread>
+  <message>exiting Timetabler program...</message>
+</record>
+</log>
