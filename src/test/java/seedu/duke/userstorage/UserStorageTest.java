@@ -11,15 +11,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class UserStorageTest {
     UserUniversityListManager testManager = new UserUniversityListManager();
-    UserModuleMapping testModule1 = new UserModuleMapping("MET CS 248", "Discrete Mathematics", "3", "CS1231",
-            "Discrete Structures", "4", "BU", "USA");
+    UserModuleMapping testModule1 = new UserModuleMapping("MET CS 248", "Discrete Mathematics", "CS1231",
+            "Discrete Structures", "4", "3", "BU", "USA");
     UserModuleMapping testModule2 = new UserModuleMapping("CS103",
-            "Introduction to Internet Technologies and Web Programming", "3",
-            "IT1001", "Introduction to Computing", "4", "BU", "USA");
+            "Introduction to Internet Technologies and Web Programming",
+            "IT1001", "Introduction to Computing", "4", "3", "BU", "USA");
     UserModuleMapping testModule3 = new UserModuleMapping("CSE412", "Database Management",
-            "3", "CS2102", "Database Systems", "4", "ASU", "USA");
+            "CS2102", "Database Systems", "4", "3","ASU", "USA");
     UserModuleMapping testModule4 = new UserModuleMapping("CSE450", "Design and Analysis of Algorithms",
-            "3", "CS3230", "Design & Analysis of Algorithm", "4", "ASU", "USA");
+            "CS3230", "Design & Analysis of Algorithm", "4", "3", "ASU", "USA");
 
     @Test
     public void testFileContentStringConversion_OneUniWithOneModule() throws InvalidUserCommandException {
