@@ -1,5 +1,4 @@
 package parser;
-
 import command.*;
 
 public class Parser {
@@ -11,7 +10,7 @@ public class Parser {
             if(input.equals("bye")){
                 return new EndCommand();
             }
-            System.out.println("input invalid");
+            System.out.println("input invalid ");
             return new EndCommand();
         }
 
@@ -294,6 +293,7 @@ public class Parser {
 
     public Command prepareRemoveEmployee(String input){
         int index = indexOfRemove(input);
+
         if(index == -1){
             System.out.println("input invalid");
             return new EndCommand();
