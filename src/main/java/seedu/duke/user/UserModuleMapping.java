@@ -18,6 +18,7 @@ public class UserModuleMapping {
         assert nusCode.length() > 0 : "NUS module code length cannot be null";
         assert nusTitle.length() > 0 : "NUS module title length cannot be null";
         assert nusCredit.length() > 0 : "NUS module credits length cannot be null";
+
         University nus = new University("NUS", "Singapore");
         University pu = new University(puName, puCountry);
         nusModule = new Module(nusCode, nusTitle, nusCredit, nus);

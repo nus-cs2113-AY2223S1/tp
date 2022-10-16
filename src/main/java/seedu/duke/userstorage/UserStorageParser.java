@@ -60,7 +60,8 @@ public class UserStorageParser {
         if (unis.length == 1 && unis[0].equals("")) {
             return myManager;
         }
-        assert unis.length >= 1: "at least one university exists in the file content";
+
+        assert unis.length >= 1 : "at least one university exists in the file content";
         for (String uni: unis) {
             String[] items = uni.split("%");
             String uniName = items[0];
