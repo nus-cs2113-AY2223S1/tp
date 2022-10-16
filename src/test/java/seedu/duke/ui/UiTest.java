@@ -65,6 +65,8 @@ public class UiTest {
                 + "                                                       "
                 + "[Home University Module Code] [Home University Module Title] | "
                 + "[Partner University Module Code] [Partner University Module Title] | [Equivalent NUS Credits]\n"
+                + "     " + "view      " + "/view DELETE HISTORY                    "
+                + "Displays up to 5 most recent modules that the user has deleted\n"
                 + "     " + "view      " + "/view UNIVERSITIES                      "
                 + "Displays all universities with module mappings available in database\n"
                 + "     " + "view      " + "/view DATABASE u/UNIVERSITY             "
