@@ -6,6 +6,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import seedu.duke.exceptions.ModuleNotFoundException;
+import seedu.duke.exceptions.UniversityNotFoundException;
 import seedu.duke.module.Module;
 import seedu.duke.module.ModuleMapping;
 import seedu.duke.university.University;
@@ -71,5 +72,38 @@ public class Database {
             }
         }
         throw new ModuleNotFoundException("Error! " + moduleCode + " not found in database");
+    }
+
+    public static ArrayList<ModuleMapping> findNusMapping(String moduleCode) throws ModuleNotFoundException {
+        ArrayList<ModuleMapping> nusMappings = new ArrayList<>();
+
+        for (ModuleMapping moduleMapping : moduleMappings) {
+            if (moduleMapping.getNusModule().getCode().equals(moduleCode)) {
+                nusMappings.add(moduleMapping);
+            }
+        }
+
+        if (nusMappings.size() > 0) {
+            return nusMappings;
+        }
+
+        throw new ModuleNotFoundException("Error! " + moduleCode + " not found in database");
+    }
+
+    public static ArrayList<ModuleMapping> findUniversityMapping(String universityName)
+            throws UniversityNotFoundException {
+        ArrayList<ModuleMapping> universityMappings = new ArrayList<>();
+
+        for (ModuleMapping moduleMapping : moduleMappings) {
+            if (moduleMapping.getPartnerUniversityModule().getUniversity().getName().equals(universityName)) {
+                universityMappings.add(moduleMapping);
+            }
+        }
+
+        if (universityMappings.size() > 0) {
+            return universityMappings;
+        }
+
+        throw new UniversityNotFoundException("Error! " + universityName + " not found in database");
     }
 }
