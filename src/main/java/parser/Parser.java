@@ -64,11 +64,15 @@ public class Parser {
 
 
     public int indexOfRemove(String input){
-        if(!input.contains(" i/")){
+        return numberInInput(input, " i/");
+    }
+
+    public int numberInInput(String input, String format){
+        if(!input.contains(format)){
             return -1;
         }
 
-        String id = input.substring(input.indexOf(" i/")+lengthOfSignature);
+        String id = input.substring(input.indexOf(format)+lengthOfSignature);
         if(!isInt(id)){
             return -1;
         }
@@ -77,12 +81,18 @@ public class Parser {
     }
 
 
-    public boolean isInt(String val){
-        Boolean strResult = val.matches("\\d?");
+    public boolean isInt(String input){
+        Boolean strResult = input.matches("\\d?");
         if(strResult) {
             return true;
         }
         return false;
     }
+
+    public int isStatus(String input){
+        return numberInInput(input, " s/");
+    }
+
+
 
 }

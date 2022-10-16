@@ -47,7 +47,6 @@ public class AppointmentParser {
 
 
     public Command prepareRemoveAppointment(String input){
-        input = " " + input;
         int index = parser.indexOfRemove(input);
         if(index == -1){
             System.out.println("Error: index entered invalid for removing an appointment");
@@ -67,12 +66,13 @@ public class AppointmentParser {
             return new EndCommand();
         }
 
-        // String service = input.substring(s + lengthOfSignature, p);
+        String service = input.substring(s + lengthOfSignature, p);
         String petName = input.substring(p + lengthOfSignature, d);
         String appointmentDate = input.substring(d + lengthOfSignature);
 
-        return new AddAppointmentCommand(petName, appointmentDate);
+        return new AddAppointmentCommand(petName, appointmentDate, service);
     }
+
 
     /*
     public Command prepareSetAppointmentStatusCommand(String input){
@@ -85,9 +85,22 @@ public class AppointmentParser {
         }
 
         String index = input.substring(i + lengthOfSignature, s);
-        String status = input.substring(s + lengthOfSignature);
+        int indexInt = parser.indexOfInput(index);
 
-        return new AllocateApointmentCommand(index, status);
+        if(indexInt == -1){
+            System.out.println("Error: index entered invalid for setting appointment status");
+            return new EndCommand();
+        }
+
+        String status = input.substring(s + lengthOfSignature);
+        int statusInt = parser.isStatus(status);
+
+        if(statusInt == -1 || (statusInt != 1 && statusInt != 0)){
+            System.out.println("Error: status entered invalid for setting appointment status");
+            return new EndCommand();
+        }
+
+        return new AllocateAppointmentCommand(indexInt, statusInt);
     }
 
     public Command prepareAllocateAppointment(String input){
