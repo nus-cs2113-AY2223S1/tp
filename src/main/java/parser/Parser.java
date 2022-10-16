@@ -10,14 +10,14 @@ public class Parser {
             if(input.equals("bye")){
                 return new EndCommand();
             }
-            System.out.println("input invalid ");
+            
+            System.out.println("Error: only one parameter received and it is not bye");
             return new EndCommand();
         }
 
-        String args[] = input.split(" ",2);
-
-        String type = args[0];
-        String statement = args[1].trim();
+        int indexOfSpace = input.indexOf(" ");
+        String type = input.substring(0,indexOfSpace);
+        String statement = input.substring(indexOfSpace).trim();
 
         switch(type) {
         case "appointment":
@@ -29,25 +29,26 @@ public class Parser {
         case "service":
             return parseService(statement);
         default:
-            System.out.println("input invalid");
+            System.out.println("Error: unrecognized operation");
             return new EndCommand();
         }
     }
 
     public Command parseAppointment(String input){
-        if("".equals(input)){
-
-            System.out.println("Appointment input invalid");
+        if(!input.contains(" ")){
+            if(input.equals("view")){
+                return new ViewAppointmentCommand();
+            }
+            System.out.println("Error: too little parameters entered for appointment operation");
             return new EndCommand();
         }
         if(input.equals("view")){
             return new ViewAppointmentCommand();
         }
 
-        String args[] = input.split(" ", 2);
-        System.out.println(input);
-        String type = args[0];
-        String statement = args[1];
+
+        String type = input.substring(0,input.indexOf(" "));
+        String statement = input.substring(input.indexOf(" ")).trim();
         switch(type) {
         case AddAppointmentCommand.COMMAND_WORD:
             return prepareAddAppointment(statement);
@@ -62,6 +63,7 @@ public class Parser {
             break;
          */
         default:
+            System.out.println("Error: unrecognized appointment operation");
             return new EndCommand();
         }
     }
@@ -72,7 +74,7 @@ public class Parser {
             if(input.equals("view")){
                 return new ViewServiceCommand();
             }
-            System.out.println("input invalid");
+            System.out.println("Error: too little parameters entered for service operation");
             return new EndCommand();
         }
 
@@ -84,28 +86,30 @@ public class Parser {
         case RemoveServiceCommand.COMMAND_WORD:
             return prepareRemoveService(statement);
         default:
+            System.out.println("Error: unrecognized service operation");
             return new EndCommand();
         }
     }
 
     public Command prepareAddService(String input){
-        int d = input.indexOf(" d/");
+        int d = input.indexOf("d/");
 
         if(d == -1){
-            System.out.println("invalid input");
+            System.out.println("Error: no description entered");
             return new EndCommand();
         }
 
         String description = input.substring(d + lengthOfSignature);
 
         return new AddServiceCommand(description);
+
     }
 
 
     public Command prepareRemoveService(String input){
         int index = indexOfRemove(input);
         if(index == -1){
-            System.out.println("input invalid");
+            System.out.println("Error: index entered invalid for removing a service");
             return new EndCommand();
         }
 
@@ -161,7 +165,7 @@ public class Parser {
         input = " " + input;
         int index = indexOfRemove(input);
         if(index == -1){
-            System.out.println("input invalid");
+            System.out.println("Error: index entered invalid for removing an appointment");
             return new EndCommand();
         }
 
@@ -181,7 +185,7 @@ public class Parser {
      */
 
     public int indexOfRemove(String input){
-        if(!input.contains(" i/")){
+        if(!input.contains("i/")){
             return -1;
         }
 
@@ -195,24 +199,25 @@ public class Parser {
 
 
     public Command prepareAddAppointment(String input){
+        int s = input.indexOf("s/");
+        int p = input.indexOf(" p/");
+        int d = input.indexOf(" d/");
 
-        String args[] = input.split(" ");
-        String petName = args[0].substring(2);
-        String appointmentDate = args[1].substring(2);
+        if(s > p || p > d || s == -1 || p == -1 || d == -1){
+            System.out.println("Error: format of parameters entered for adding an appointment is invalid");
+            return new EndCommand();
+        }
 
-/*
-        String service = input.substring(s + lengthOfSignature, p);
+        // String service = input.substring(s + lengthOfSignature, p);
         String petName = input.substring(p + lengthOfSignature, d);
         String appointmentDate = input.substring(d + lengthOfSignature);
 
-        return new AddAppointmentCommand(petName, appointmentDate, service);
-*/
         return new AddAppointmentCommand(petName, appointmentDate);
-
     }
 
     public boolean isInt(String val){
-        if(val.matches("\\d?")) {
+        Boolean strResult = val.matches("\\d?");
+        if(strResult) {
             return true;
         }
         return false;
@@ -221,15 +226,15 @@ public class Parser {
 
 
     public Command prepareAddPet(String input){
-        int startOfN = input.indexOf(" n/");
+        int startOfN = input.indexOf("n/");
         int startOfS = input.indexOf(" s/");
 
         if(startOfN > startOfS || startOfN == -1|| startOfS == -1){
-            System.out.println("input invalid");
+            System.out.println("Error: format of parameters entered for adding a pet is invalid");
             return new EndCommand();
         }
 
-        String name = input.substring(startOfN + lengthOfSignature, startOfS);
+        String name = input.substring(startOfN -1 + lengthOfSignature, startOfS);
         String status = input.substring(startOfS + lengthOfSignature);
         return new AddPetCommand(name, status, true);
     }
@@ -240,7 +245,7 @@ public class Parser {
             if(input.equals("view")){
                 return new ViewPetCommand();
             }
-            System.out.println("input invalid");
+            System.out.println("Error: too little parameters entered for pet operation");
             return new EndCommand();
         }
 
@@ -249,12 +254,8 @@ public class Parser {
         switch(type) {
         case AddPetCommand.COMMAND_WORD:
             return prepareAddPet(statement);
-/*
-        case RemovePetCommand.COMMAND_WORD:
-            return prepareRemovePet(statement);
-*/
         default:
-            System.out.println("input invalid");
+            System.out.println("Error: unrecognized pet operation");
             return new EndCommand();
         }
     }
@@ -264,7 +265,7 @@ public class Parser {
             if(input.equals("view")){
                 return new ViewEmployeeCommand();
             }
-            System.out.println("input invalid");
+            System.out.println("Error: too little parameters entered for employee operation");
             return new EndCommand();
         }
 
@@ -276,20 +277,20 @@ public class Parser {
         case RemoveEmployeeCommand.COMMAND_WORD:
             return prepareRemoveEmployee(statement);
         default:
-            System.out.println("input invalid");
+            System.out.println("Error: unrecognized employee operation");
             return new EndCommand();
         }
     }
 
     public Command prepareAddEmployee(String input){
-        int startOfN = input.indexOf(" n/");
+        int startOfN = input.indexOf("n/");
 
         if(startOfN == -1){
-            System.out.println("input invalid");
+            System.out.println("Error: format of parameters entered for adding an employee is invalid");
             return new EndCommand();
         }
 
-        String name = input.substring(startOfN + lengthOfSignature);
+        String name = input.substring(startOfN + lengthOfSignature - 1);
         return new AddEmployeeCommand(name);
     }
 
@@ -298,7 +299,7 @@ public class Parser {
         int index = indexOfRemove(input);
 
         if(index == -1){
-            System.out.println("input invalid");
+            System.out.println("Error: index entered invalid for removing an employee ");
             return new EndCommand();
         }
 

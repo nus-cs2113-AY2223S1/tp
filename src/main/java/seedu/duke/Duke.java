@@ -22,6 +22,7 @@ public class Duke {
      */
 
     public void run() {
+        assert false : "input should be a tree";
         greetUser();
         boolean isExit = false;
 
