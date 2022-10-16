@@ -21,4 +21,9 @@ public class User {
         String contactNumber = "Contact: " + this.contactNumber + " ";
         return username + age + contactNumber;
     }
+
+    public String convertItemToFileFormat() {
+        String separator = " | ";
+        return name + separator + age + separator + contactNumber;
+    }
 }
