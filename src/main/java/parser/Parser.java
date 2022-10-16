@@ -1,5 +1,4 @@
 package parser;
-
 import command.*;
 
 public class Parser {
@@ -11,6 +10,7 @@ public class Parser {
             if(input.equals("bye")){
                 return new EndCommand();
             }
+            
             System.out.println("Error: only one parameter received and it is not bye");
             return new EndCommand();
         }
@@ -42,6 +42,10 @@ public class Parser {
             System.out.println("Error: too little parameters entered for appointment operation");
             return new EndCommand();
         }
+        if(input.equals("view")){
+            return new ViewAppointmentCommand();
+        }
+
 
         String type = input.substring(0,input.indexOf(" "));
         String statement = input.substring(input.indexOf(" ")).trim();
@@ -158,6 +162,7 @@ public class Parser {
 
 
     public Command prepareRemoveAppointment(String input){
+        input = " " + input;
         int index = indexOfRemove(input);
         if(index == -1){
             System.out.println("Error: index entered invalid for removing an appointment");
@@ -292,6 +297,7 @@ public class Parser {
 
     public Command prepareRemoveEmployee(String input){
         int index = indexOfRemove(input);
+
         if(index == -1){
             System.out.println("Error: index entered invalid for removing an employee ");
             return new EndCommand();
