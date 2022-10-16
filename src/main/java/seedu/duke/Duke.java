@@ -8,9 +8,11 @@ import java.util.stream.Collectors;
 import seedu.duke.command.Command;
 import seedu.duke.command.Database;
 import seedu.duke.command.DatabaseStorage;
+import seedu.duke.command.ListCommand;
 import seedu.duke.command.ViewCommand;
 import seedu.duke.exceptions.InvalidUserCommandException;
 import seedu.duke.exceptions.ModuleNotFoundException;
+import seedu.duke.exceptions.UniversityNotFoundException;
 import seedu.duke.module.Module;
 import seedu.duke.parser.CommandParser;
 import seedu.duke.ui.Ui;
@@ -92,8 +94,8 @@ public class Duke {
                         Module puModule = moduleMapping.getPartnerUniversityModule();
                         Module nusModule = moduleMapping.getNusModule();
                         UserModuleMapping userModuleToAdd = new UserModuleMapping(puModule.getCode(),
-                                puModule.getTitle(), nusModule.getCode(), nusModule.getTitle(), nusModule.getCredit(),
-                                puModule.getCredit(), puModule.getUniversity().getName(),
+                                puModule.getTitle(), nusModule.getCode(), nusModule.getTitle(),
+                                nusModule.getCredit(), puModule.getCredit(), puModule.getUniversity().getName(),
                                 puModule.getUniversity().getCountry());
                         userUniversityListManager.addModule(newUserCommand.getUniversityName(), userModuleToAdd);
                         UserStorageParser.storeCreatedLists(userUniversityListManager);
@@ -101,6 +103,22 @@ public class Duke {
                         System.out.println(e.getMessage());
                     }
                     break;
+                case LIST:
+                    try {
+                        ListCommand listCommand = (ListCommand) newUserCommand;
+
+                        if (listCommand.getListOption().equals("module")) {
+                            ArrayList<ModuleMapping> moduleMappings = Database
+                                    .findNusMapping(newUserCommand.getModuleCode());
+                            Ui.printMappings(moduleMappings);
+                        } else if (listCommand.getListOption().equals("university")) {
+                            ArrayList<ModuleMapping> moduleMappings = Database
+                                    .findUniversityMapping(newUserCommand.getUniversityName());
+                            Ui.printMappings(moduleMappings);
+                        }
+                    } catch (ModuleNotFoundException | UniversityNotFoundException e) {
+                        System.out.println(e.getMessage());
+                    }
                 default:
                     break;
                 }
