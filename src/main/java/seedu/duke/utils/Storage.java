@@ -2,6 +2,7 @@ package seedu.duke.utils;
 
 import seedu.duke.model.LessonType;
 import seedu.duke.model.Module;
+import seedu.duke.model.RawLesson;
 import seedu.duke.model.SelectedModule;
 import seedu.duke.model.Timetable;
 
@@ -12,7 +13,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -46,6 +47,8 @@ public class Storage {
     private static final String MODULE_CODE_DELIMITER = "=";
 
     private static final String SUPPOSED_START = "https://nusmods.com/timetable/sem-1/share?";
+
+    private static final String SUPPOSED_START_REGEX = "https://nusmods.com/timetable/sem-\\d/share?";
 
     private static String moduleDelimiter = "&";
 
@@ -123,8 +126,11 @@ public class Storage {
         String[] infoParam = link.split(DELIMITER);
         String semesterParam = infoParam[SEMESTER_PARAM_INDEX];
         int semester = Integer.parseInt(semesterParam.replace(SEMESTER_DELIMITER,""));
-        state.setSemester(semester);
-
+        if (Arrays.asList(1, 2, 3, 4).contains(semester)) {
+            state.setSemester(semester);
+        } else {
+            return;
+        }
         String modulesParam = infoParam[MODULES_PARAM_INDEX];
         String cleanModuleParam = modulesParam.replace(SHARE_DELIMITER,"");
         String[] moduleAndLessonsArray = cleanModuleParam.split(moduleDelimiter);
@@ -132,12 +138,12 @@ public class Storage {
             String[] splitModuleAndLesson = moduleAndLessons.split(MODULE_CODE_DELIMITER);
             String moduleCode = splitModuleAndLesson[0];
             Module module = Module.get(moduleCode);
-            if (module == null) {
+            if (module == null || module.getSemesterData(semester) == null) {
                 continue;
             }
             SelectedModule selectedModule = new SelectedModule(module,semester);
             String[] lessonsInfo = splitModuleAndLesson[1].split(lessonDelimiter);
-            addLessons(lessonsInfo, selectedModule);
+            addLessons(lessonsInfo, selectedModule, semester);
             state.addSelectedModule(selectedModule);
         }
     }
@@ -149,8 +155,11 @@ public class Storage {
      * @return if the link is of a valid form
      */
     public boolean isValidPreviousState(String link) {
+        Pattern pattern = Pattern.compile(SUPPOSED_START_REGEX);
+        Matcher matcher = pattern.matcher(link);
+        boolean hasMatch = matcher.find();
         boolean hasLongerLength = link.length() > SUPPOSED_START.length();
-        return link.startsWith(SUPPOSED_START) && hasLongerLength;
+        return hasMatch && hasLongerLength;
     }
 
     /**
@@ -158,33 +167,50 @@ public class Storage {
      *
      * @param lessonsInfo    contains the lessons information in the form <code>MODULE_CODE=LESSON:LESSON_NUMBER,
      *                       LESSON:LESSON_NUMBER</code>
-     * @param selectedModule current module to select classes
+     * @param selectedModule current module to select lessons
+     * @param semester       semester in which lessons are being selected for
      */
-    private void addLessons(String[] lessonsInfo, SelectedModule selectedModule) {
-        for (int i = 0; i < lessonsInfo.length && isLessonInfo(lessonsInfo[i]); i++) {
+    private void addLessons(String[] lessonsInfo, SelectedModule selectedModule, int semester) {
+        for (int i = 0; i < lessonsInfo.length; i++) {
+            if (!isLessonInfo(lessonsInfo[i])) {
+                continue;
+            }
             String[] lessonInfo = lessonsInfo[i].split(LESSON_TYPE_DELIMITER);
             LessonType lessonType = getLessonType(lessonInfo[0]);
             String classNo = lessonInfo[1];
-            selectedModule.selectSlot(lessonType,classNo);
+            addValidLesson(selectedModule, semester, lessonType, classNo);
         }
     }
 
     /**
-     * Checks if the lesson information is of a valid form. It should consist of 3 to 4 alphanumeric
+     * Cross-checks if the selected lesson is being taught in the current semester.
+     *
+     * @param selectedModule current module to select lessons
+     * @param semester       semester in which lessons are being selected for
+     * @param lessonType     specified lesson type
+     * @param classNo        specified class number
+     */
+    private static void addValidLesson(SelectedModule selectedModule, int semester,
+                                       LessonType lessonType, String classNo) {
+        List<RawLesson> potentialLesson = selectedModule.getModule().getSemesterData(semester)
+                .getLessonsByTypeAndNo(lessonType, classNo);
+        if (!potentialLesson.isEmpty()) {
+            selectedModule.selectSlot(lessonType, classNo);
+        }
+    }
+
+    /**
+     * Checks if the lesson information is of a valid form. It should begin with 3 to 4 alphanumeric
      * capital alphabets defined in the {@link #getLessonType(String)} function.
      *
      * @param lessonInfo single lesson information of a module
      * @return if the lesson information is of a valid form
      */
     public boolean isLessonInfo(String lessonInfo) {
-        Pattern pattern = Pattern.compile("[A-Z]{3,4}\\d?:[A-Z]{0,2}\\d{1,2}");
+        //pattern for classNo is not definite.
+        Pattern pattern = Pattern.compile("[A-Z]{3,4}\\d?:");
         Matcher matcher = pattern.matcher(lessonInfo);
-        boolean hasMatch = matcher.find();
-        boolean isSameLength = false;
-        if (hasMatch) {
-            isSameLength = matcher.group().length() == lessonInfo.length();
-        }
-        return (hasMatch && isSameLength);
+        return matcher.find();
     }
 
     /**
