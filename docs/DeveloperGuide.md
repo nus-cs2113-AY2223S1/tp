@@ -25,6 +25,7 @@ Step 4: Once the transactionList has been completely iterated through, a message
 
 The following sequence diagram shows how the viewTransactionsByStatus operation works:
 
+![viewTransactionsByStatus](https://user-images.githubusercontent.com/47519031/196048142-2f99254e-143c-484b-888e-fde270330368.png)
 
 ## Product scope
 ### Target user profile
