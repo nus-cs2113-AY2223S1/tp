@@ -15,18 +15,15 @@ public class User {
         return name;
     }
 
-    public int getAge() {
-        return age;
-    }
-
-    public String getContactNumber() {
-        return contactNumber;
-    }
-
     public String toString() {
         String username = "Username: " + name + " ";
         String age = "Age: " + this.age + " ";
         String contactNumber = "Contact: " + this.contactNumber + " ";
         return username + age + contactNumber;
+    }
+
+    public String convertItemToFileFormat() {
+        String separator = " | ";
+        return name + separator + age + separator + contactNumber;
     }
 }

@@ -9,8 +9,8 @@ import seedu.duke.parser.CommandParser;
 import seedu.duke.user.User;
 import seedu.duke.user.UserList;
 
-import static seedu.duke.exception.ExceptionMessages.MESSAGE_INSUFFICIENT_ARGUMENTS;
-import static seedu.duke.exception.ExceptionMessages.MESSAGE_INVALID_PARTS;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INSUFFICIENT_ARGUMENTS;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PARTS;
 
 public class ViewUserCommand extends Command {
     private final String[] parts;
@@ -24,7 +24,7 @@ public class ViewUserCommand extends Command {
         }
     }
 
-    public String getArgsViewUserCmd() throws InvalidArgumentException {
+    private String getArgsViewUserCmd() throws InvalidArgumentException {
         String arg;
         if (parts[0].startsWith("u")) {
             arg = CommandParser.getArgValue(parts[0]);

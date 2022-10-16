@@ -15,19 +15,31 @@ import seedu.duke.parser.CommandParser;
 import seedu.duke.transaction.TransactionList;
 import seedu.duke.user.UserList;
 
-import static seedu.duke.exception.ExceptionMessages.MESSAGE_INSUFFICIENT_ARGUMENTS;
-import static seedu.duke.exception.ExceptionMessages.MESSAGE_INVALID_PARTS;
-import static seedu.duke.exception.ExceptionMessages.MESSAGE_SAME_OWNER;
-import static seedu.duke.exception.ExceptionMessages.MESSAGE_NUMBER_FORMAT_INVALID;
-import static seedu.duke.exception.ExceptionMessages.MESSAGE_PRICE_FORMAT_INVALID;
-import static seedu.duke.exception.ExceptionMessages.MESSAGE_PRICE_LESS_THAN_ZERO;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INSUFFICIENT_ARGUMENTS;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PARTS;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_SAME_OWNER;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_NUMBER_FORMAT_INVALID;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_PRICE_FORMAT_INVALID;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_PRICE_LESS_THAN_ZERO;
 
+/**
+ * A representation of a command to add a new item.
+ */
 public class AddItemCommand extends Command {
     private final String[] parts;
     private final ItemList itemList;
     private final UserList userList;
     private final TransactionList transactionList;
 
+    /**
+     * Constructor for AddItemCommand.
+     *
+     * @param parts The parts from user input
+     * @param userList The list of users to work with
+     * @param itemList The list of items to work with
+     * @param transactionList The list of transactions to work with
+     * @throws InsufficientArgumentsException If the number of args is incorrect
+     */
     public AddItemCommand(String[] parts, UserList userList, ItemList itemList, TransactionList transactionList)
             throws InsufficientArgumentsException {
         this.parts = parts;
@@ -39,7 +51,13 @@ public class AddItemCommand extends Command {
         }
     }
 
-    public String[] getArgsAddItemCmd() throws InvalidArgumentException {
+    /**
+     * Gets arg values from the given part.
+     *
+     * @return An array of arg values
+     * @throws InvalidArgumentException If there is a part that cannot be parsed
+     */
+    private String[] getArgsAddItemCmd() throws InvalidArgumentException {
         String[] args = new String[4];
         for (String part : parts) {
             if (part.startsWith("n")) {
@@ -57,6 +75,14 @@ public class AddItemCommand extends Command {
         return args;
     }
 
+    /**
+     * Checks if an item name is valid or not.
+     *
+     * @param itemName The input item name
+     * @param owner The input owner name
+     * @return true If that user do not have any item with the same name
+     * @throws DuplicateException If that user have item with the same name
+     */
     private boolean isValidName(String itemName, String owner) throws DuplicateException {
         try {
             Item item = itemList.getItemByName(itemName);
@@ -69,6 +95,12 @@ public class AddItemCommand extends Command {
         }
     }
 
+    /**
+     * Checks if a user is valid or not.
+     * @param userId The input name of owner
+     * @return true If that username can be found in user list
+     * @throws UserNotFoundException If that user cannot be found in the list
+     */
     private boolean isValidOwner(String userId) throws UserNotFoundException {
         try {
             userList.getUserById(userId);
@@ -78,6 +110,12 @@ public class AddItemCommand extends Command {
         }
     }
 
+    /**
+     * Checks if a categoryNumber is valid or not.
+     *
+     * @param categoryNumber The input category number
+     * @return true If that number can be parsed
+     */
     private boolean isValidCategoryNumber(String categoryNumber) {
         try {
             Integer.parseInt(categoryNumber);
@@ -87,6 +125,12 @@ public class AddItemCommand extends Command {
         }
     }
 
+    /**
+     * Checks if a price is valid or not.
+     * @param price The input price
+     * @return true If that number can be parsed and has correct format
+     * @throws InvalidPriceException If price value is less than 0
+     */
     private boolean isValidPrice(String price) throws InvalidPriceException {
         try {
             if (Double.parseDouble(price) < 0) {
@@ -98,13 +142,30 @@ public class AddItemCommand extends Command {
         }
     }
 
-
+    /**
+     * Check if all args is valid or not.
+     *
+     * @param args The array of input args
+     * @return true If they are all valid
+     * @throws UserNotFoundException If that user cannot be found in the list
+     * @throws DuplicateException If that user have item with the same name
+     * @throws InvalidPriceException If price value is less than 0
+     */
     private boolean areValidArgs(String[] args)
             throws UserNotFoundException, DuplicateException, InvalidPriceException {
         return isValidName(args[0], args[3]) && isValidCategoryNumber(args[1])
                 && isValidPrice(args[2]) && isValidOwner(args[3]);
     }
 
+    /**
+     * Executes AddItemCommand.
+     *
+     * @return false
+     * @throws InvalidArgumentException If there is a part that cannot be parsed
+     * @throws UserNotFoundException If that user cannot be found in the list
+     * @throws DuplicateException If that user have item with the same name
+     * @throws InvalidPriceException If price value is less than 0
+     */
     public boolean executeCommand()
             throws InvalidArgumentException, UserNotFoundException, DuplicateException, InvalidPriceException {
         String[] args = getArgsAddItemCmd();

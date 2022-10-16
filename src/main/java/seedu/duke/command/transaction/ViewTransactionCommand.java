@@ -9,8 +9,8 @@ import seedu.duke.parser.CommandParser;
 import seedu.duke.transaction.Transaction;
 import seedu.duke.transaction.TransactionList;
 
-import static seedu.duke.exception.ExceptionMessages.MESSAGE_INSUFFICIENT_ARGUMENTS;
-import static seedu.duke.exception.ExceptionMessages.MESSAGE_INVALID_PARTS;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INSUFFICIENT_ARGUMENTS;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PARTS;
 
 public class ViewTransactionCommand extends Command {
     private final String[] parts;
@@ -25,7 +25,7 @@ public class ViewTransactionCommand extends Command {
         }
     }
 
-    public String getArgsViewTransactionCmd() throws InvalidArgumentException {
+    private String getArgsViewTransactionCmd() throws InvalidArgumentException {
         String arg;
         if (parts[0].startsWith("t")) {
             arg = CommandParser.getArgValue(parts[0]);

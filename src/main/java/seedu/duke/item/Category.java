@@ -11,13 +11,13 @@ public class Category {
     public static int setCategory(Categories category) {
         switch (category) {
         case SPORTS_EQUIPMENT:
-            return 0;
-        case TEXTBOOKS_AND_NOTES:
             return 1;
-        case ELECTRICAL_APPLIANCES:
+        case TEXTBOOKS_AND_NOTES:
             return 2;
-        default: //others
+        case ELECTRICAL_APPLIANCES:
             return 3;
+        default: //others
+            return 4;
         }
     }
 
@@ -35,10 +35,10 @@ public class Category {
     }
 
     public static String listCategories() {
-        StringBuilder list = new StringBuilder("Here are available categories: \n");
+        StringBuilder list = new StringBuilder("Here are available categories: ");
         int index = 1;
         for (Categories category : Categories.values()) {
-            list.append(index).append(". ").append(category).append('\n');
+            list.append('\n').append(index++).append(". ").append(category);
         }
         return list.toString();
     }

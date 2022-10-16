@@ -12,17 +12,29 @@ import seedu.duke.transaction.TransactionList;
 import seedu.duke.user.User;
 import seedu.duke.user.UserList;
 
-import static seedu.duke.exception.ExceptionMessages.MESSAGE_INSUFFICIENT_ARGUMENTS;
-import static seedu.duke.exception.ExceptionMessages.MESSAGE_INVALID_PARTS;
-import static seedu.duke.exception.ExceptionMessages.MESSAGE_USER_BORROWING;
-import static seedu.duke.exception.ExceptionMessages.MESSAGE_USER_LENDING;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INSUFFICIENT_ARGUMENTS;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PARTS;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_USER_BORROWING;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_USER_LENDING;
 
+/**
+ * A representation of a command to remove a user.
+ */
 public class RemoveUserCommand extends Command {
     private final String[] parts;
     private final UserList userList;
     private final ItemList itemList;
     private final TransactionList transactionList;
 
+    /**
+     * Constructor for RemoveUserCommand.
+     *
+     * @param parts The parts from user input
+     * @param userList The list of users to work with
+     * @param itemList The list of items to work with
+     * @param transactionList The list of transactions to work with
+     * @throws InsufficientArgumentsException If the number of args is incorrect
+     */
     public RemoveUserCommand(String[] parts, UserList userList, ItemList itemList, TransactionList transactionList)
             throws InsufficientArgumentsException {
         this.parts = parts;
@@ -34,7 +46,13 @@ public class RemoveUserCommand extends Command {
         }
     }
 
-    public String[] getArgsRemoveUserCmd() throws InvalidArgumentException {
+    /**
+     * Gets arg values from the given part.
+     *
+     * @return An array of arg values
+     * @throws InvalidArgumentException If there is a part that cannot be parsed
+     */
+    private String[] getArgsRemoveUserCmd() throws InvalidArgumentException {
         String[] args = new String[1];
         for (String part : parts) {
             if (part.startsWith("u")) {
@@ -46,24 +64,46 @@ public class RemoveUserCommand extends Command {
         return args;
     }
 
-    public boolean isBorrowing(String username) throws InvalidUserException {
+    /**
+     * Check if that user is currently borrowing something.
+     *
+     * @param username The input username
+     * @return false If he/har is not currently borrowing
+     * @throws InvalidUserException If he/har is currently borrowing
+     */
+    private boolean isBorrowing(String username) throws InvalidUserException {
         if (transactionList.hasThisBorrower(username)) {
             throw new InvalidUserException(MESSAGE_USER_BORROWING);
         }
         return false;
     }
 
-    public boolean isLending(String username, TransactionList transactionList) throws InvalidUserException {
+    /**
+     * Check if that user is currently lending something.
+     *
+     * @param username The input username
+     * @return false If he/har is not currently lending
+     * @throws InvalidUserException If he/har is currently lending
+     */
+    private boolean isLending(String username, TransactionList transactionList) throws InvalidUserException {
         if (itemList.hasThisLender(username, transactionList)) {
             throw new InvalidUserException(MESSAGE_USER_LENDING);
         }
         return false;
     }
 
-    public boolean canDeleteUser(String username, TransactionList transactionList) throws InvalidUserException {
+    private boolean canDeleteUser(String username, TransactionList transactionList) throws InvalidUserException {
         return !isBorrowing(username) && !isLending(username, transactionList);
     }
 
+    /**
+     * Executes RemoveUserCommand.
+     *
+     * @return false
+     * @throws InvalidArgumentException If there is a part that cannot be parsed
+     * @throws InvalidUserException If he/har is currently lending or borrowing
+     * @throws UserNotFoundException If the user cannot be found in the list
+     */
     public boolean executeCommand()
             throws InvalidArgumentException, InvalidUserException, UserNotFoundException {
         String[] args = getArgsRemoveUserCmd();

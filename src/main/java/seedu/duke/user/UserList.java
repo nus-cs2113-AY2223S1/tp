@@ -4,7 +4,7 @@ import seedu.duke.exception.UserNotFoundException;
 
 import java.util.ArrayList;
 
-import static seedu.duke.exception.ExceptionMessages.MESSAGE_USER_NOT_FOUND;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_USER_NOT_FOUND;
 
 public class UserList {
     protected ArrayList<User> userList;
@@ -44,6 +44,20 @@ public class UserList {
         throw new UserNotFoundException(MESSAGE_USER_NOT_FOUND);
     }
 
+    public UserList getUsersByKeyword(String keyword) throws UserNotFoundException {
+        UserList returnList = new UserList();
+        for (User user : userList) {
+            if (user.getName().contains(keyword)) {
+                assert user.getName().contains(keyword) : "equals function not working";
+                returnList.addUser(user);
+            }
+        }
+        if (returnList.getSize() == 0) {
+            throw new UserNotFoundException(MESSAGE_USER_NOT_FOUND);
+        }
+        return returnList;
+    }
+
     public String listUser() {
         StringBuilder listOfUsers = new StringBuilder();
         listOfUsers.append("Here are your list of users:").append(System.lineSeparator());
@@ -66,5 +80,13 @@ public class UserList {
             listString.append('\n').append("   ").append(index++).append(". ").append(user);
         }
         return String.valueOf(listString);
+    }
+
+    public String convertUserListToFileFormat() {
+        StringBuilder formattedString = new StringBuilder();
+        for (User user : userList) {
+            formattedString.append(user.convertItemToFileFormat()).append('\n');
+        }
+        return formattedString.toString();
     }
 }

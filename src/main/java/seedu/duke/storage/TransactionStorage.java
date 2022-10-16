@@ -13,8 +13,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import static seedu.duke.exception.ExceptionMessages.MESSAGE_FILE_NOT_FOUND;
-import static seedu.duke.exception.ExceptionMessages.MESSAGE_STORE_INVALID;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_FILE_NOT_FOUND;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_STORE_INVALID;
 
 public class TransactionStorage extends Storage {
     private static final String SEPARATOR = " \\| ";
@@ -59,12 +59,13 @@ public class TransactionStorage extends Storage {
     public void writeData(TransactionList transactionList) throws StoreFailureException {
         try {
             FileWriter fileWriter = new FileWriter(transactionFilePath);
-            String formattedTaskList = transactionList.convertTransactionListToFileFormat();
-            fileWriter.write(formattedTaskList);
+            String formattedTransactionList = transactionList.convertTransactionListToFileFormat();
+            fileWriter.write(formattedTransactionList);
             fileWriter.close();
         } catch (IOException e) {
             int startIndex = transactionFilePath.lastIndexOf("/");
-            String fileDirectory = transactionFilePath.replace(transactionFilePath.substring(startIndex), "");
+            String fileDirectory =
+                    transactionFilePath.replace(transactionFilePath.substring(startIndex), "");
             File file = new File(fileDirectory);
             if (file.mkdir()) {
                 writeData(transactionList);
@@ -75,7 +76,7 @@ public class TransactionStorage extends Storage {
     }
 
     /**
-     * Analyses the information the tasks stored in the file.
+     * Analyses the information the transactions stored in the file.
      *
      * @param splitTransactionLine The raw transaction information.
      * @return A Transaction with full information.

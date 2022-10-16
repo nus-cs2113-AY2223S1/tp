@@ -18,6 +18,14 @@ public class Item {
         this.category = Category.mapCategory(categoryNumber);
     }
 
+    public Item(String itemId, String name, int categoryNumber, double price, String ownerId) {
+        this.itemId = itemId;
+        this.name = name;
+        this.pricePerDay = price;
+        this.ownerId = ownerId;
+        this.category = Category.mapCategory(categoryNumber);
+    }
+
     public String getOwnerId() {
         return ownerId;
     }
@@ -34,12 +42,13 @@ public class Item {
         return pricePerDay;
     }
 
-    public Category.Categories getCategory() {
-        return category;
+    public Item updatePrice(double newPricePerDay) {
+        return new Item(this.name, Category.setCategory(this.category), newPricePerDay,
+                this.ownerId);
     }
 
     public boolean isAvailable(TransactionList transactionList) {
-        return !transactionList.hasThisItemBeingBorrowed(name);
+        return !transactionList.hasThisItemBeingBorrowed(itemId);
     }
 
     public String getStatus(TransactionList transactionList) {
@@ -47,12 +56,19 @@ public class Item {
     }
 
     public String toString(TransactionList transactionList) {
-        String itemId = "itemId: " + this.itemId + " ";
-        String itemIcon = "Status: [" + (isAvailable(transactionList) ? "Available" : "On loan") + "] ";
+        String itemId = "ItemId: " + this.itemId + " ";
+        String itemIcon =
+                "Status: [" + (isAvailable(transactionList) ? "Available" : "On loan") + "] ";
         String itemName = "Item: " + name + " ";
         String itemCategory = "Category: " + category.toString() + " ";
         String itemOwner = "Owner: " + getOwnerId() + " ";
         String itemPrice = "PricePerDay: $" + pricePerDay;
         return itemIcon + itemId + itemName + itemCategory + itemOwner + itemPrice;
+    }
+
+    public String convertItemToFileFormat() {
+        String separator = " | ";
+        return itemId + separator + name + separator + pricePerDay + separator + ownerId
+                + separator + Category.setCategory(category);
     }
 }
