@@ -41,9 +41,10 @@ public class PetParser {
             return new EndCommand();
         }
 
+
         String name = input.substring(startOfN + lengthOfSignature, startOfS);
-        String status = input.substring(startOfS + lengthOfSignature);
-        return new AddPetCommand(name, status, true);
+        String species = input.substring(startOfS + lengthOfSignature);
+        return new AddPetCommand(name, species, true);
     }
     /*
 
