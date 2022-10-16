@@ -494,8 +494,10 @@ public class Parser {
         try {
             checkForEmptyDetails(rawCommandDescription);
 
-            ArrayList<String> deleteClientDetailsString = processCommandDetails(rawCommandDescription, DELETE_CLIENT_FLAGS);
-            ArrayList<Integer> deleteClientDetailsInt = convertProcessedCommandDetailsToInteger(deleteClientDetailsString);
+            ArrayList<String> deleteClientDetailsString = processCommandDetails(rawCommandDescription,
+                    DELETE_CLIENT_FLAGS);
+            ArrayList<Integer> deleteClientDetailsInt = convertProcessedCommandDetailsToInteger(
+                    deleteClientDetailsString);
 
             int clientIndex = deleteClientDetailsInt.get(0);
             checkForInvalidClientIndexDelete(clientIndex);
@@ -624,10 +626,10 @@ public class Parser {
         }
     }
 
-    private void validateUnpairDetails(ArrayList<Integer> UnpairDetails) throws InvalidIndexException,
+    private void validateUnpairDetails(ArrayList<Integer> unpairDetails) throws InvalidIndexException,
             NoExistingPairException {
-        int propertyIndex = UnpairDetails.get(0);
-        int clientIndex = UnpairDetails.get(1);
+        int propertyIndex = unpairDetails.get(0);
+        int clientIndex = unpairDetails.get(1);
 
         checkForClientListIndexOutOfBounds(clientIndex);
         checkForPropertyListIndexOutOfBounds(propertyIndex);
