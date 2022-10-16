@@ -4,7 +4,7 @@ import seedu.duke.ui.Ui;
 
 import java.util.ArrayDeque;
 
-/**
+/**.
  * Class to store up to 5 modules (in a queue) that the user has recently deleted
  */
 public class UserDeletedModules {
@@ -22,7 +22,7 @@ public class UserDeletedModules {
         if (deletedModules.size() == 5) {
             deletedModules.removeLast();
         }
-        assert deletedModules.size() < 5: "Number of deleted modules is less than 5";
+        assert deletedModules.size() < 5 : "Number of deleted modules is less than 5";
         deletedModules.addFirst(inputModule);
     }
 
