@@ -16,7 +16,7 @@ _____________________________________________________________________________
      create    /create u/UNIVERSITY                    Creates an empty module list for the input university
      exit      /exit
      view      /view LISTS                             Displays all existing university lists that have been created by the user
-     view      /view u/UNIVERSITY                      Displays all modules that have been added to the user's input university�s list in the format
+     view      /view u/UNIVERSITY                      Displays all modules that have been added to the user's input university's list in the format
                                                        [Home University Module Code] [Home University Module Title] | [Partner University Module Code] [Partner University Module Title] | [Equivalent NUS Credits]
      view      /view DELETE HISTORY                    Displays up to 5 most recent modules that the user has deleted
      list      /list MODULES                           Displays all existing university modules mappings that are approved in the format
