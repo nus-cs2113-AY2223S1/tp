@@ -79,6 +79,8 @@ public class Ui {
                 + "                                                       "
                 + "[Home University Module Code] [Home University Module Title] | "
                 + "[Partner University Module Code] [Partner University Module Title] | [Equivalent NUS Credits]\n"
+                + SPACING + "view      " + "/view DELETE HISTORY                    "
+                + "Displays up to 5 most recent modules that the user has deleted\n"
                 + SPACING + "view      " + "/view UNIVERSITIES                      "
                 + "Displays all universities with module mappings available in database\n"
                 + SPACING + "view      " + "/view DATABASE u/UNIVERSITY             "
