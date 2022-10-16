@@ -8,7 +8,7 @@ public class EmployeeList {
     public static void listEmployee() {
         for (Employee employee : employees) {
             System.out.print(employee.getEmployeeId() + " ");
-            System.out.print(employee.getEmployeeName()+ " ");
+            System.out.print(employee.getEmployeeName()+ " " + '\n');
         }
     }
 

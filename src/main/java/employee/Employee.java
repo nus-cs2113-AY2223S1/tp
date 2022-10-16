@@ -1,13 +1,12 @@
 package employee;
 
 public class Employee {
-//    private static int id = 0;
-//    private final int employeeId;
-    private int employeeId;
+    private static int id = 0;
+    private final int employeeId;
     private String employeeName;
 
     public Employee(String employeeName) {
-//        this.employeeId = ++id;
+        this.employeeId = ++id;
         this.employeeName = employeeName;
     }
 
