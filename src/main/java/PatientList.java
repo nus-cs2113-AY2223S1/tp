@@ -7,23 +7,23 @@ public class PatientList {
         patients = new ArrayList<>();
     }
 
-    public void addPatient(String name, String birthDate, String gender, String id) {
+    public void addPatient(UI ui, String name, String birthDate, String gender, String id) {
         Patient patient = new Patient(name, birthDate, gender, id);
         patients.add(patient);
-        Messages.printPatientAddedMessage(patient);
+        ui.printPatientAddedMessage(patient);
     }
 
-    public void retrievePatient(String id) {
+    public void retrievePatient(UI ui, String id) {
         for (Patient patient : patients) {
             if (patient.getId().equals(id)) {
                 System.out.println("The patient with the supplied ID was found! Here are the details of the patient: ");
-                Messages.printLine();
+                ui.printLine();
                 System.out.println(patient);
-                Messages.printLine();
+                ui.printLine();
                 return;
             }
         }
-        Messages.printLine();
+        ui.printLine();
         System.out.println("Sorry, no patient exists with the supplied ID!");
     }
 
@@ -39,14 +39,14 @@ public class PatientList {
     // TODO one potential improvement is to make this three different methods
     //  modifyPatientName(String id, String name), modifyPatientDOB(String id, String birthDate)
     //  and modifyPatientGender(String id, String gender)
-    public void modifyPatientDetails(String id, String name, String birthDate, String gender) {
+    public void modifyPatientDetails(UI ui, String id, String name, String birthDate, String gender) {
         Patient patientToBeModified = findPatient(id);
         if (patientToBeModified == null) {
-            Messages.printLine();
+            ui.printLine();
             System.out.println("Sorry! No patient exists in the system with the supplied ID!");
-            Messages.printLine();
+            ui.printLine();
         }
-        Messages.printLine();
+        ui.printLine();
         if (!name.isEmpty()) {
             patientToBeModified.setName(name);
         }
@@ -57,7 +57,7 @@ public class PatientList {
             patientToBeModified.setGender(gender);
         }
         System.out.println();
-        Messages.printPatientEditedMessage(patientToBeModified);
+        ui.printPatientEditedMessage(patientToBeModified);
     }
 
     public boolean isEmpty() {
@@ -72,19 +72,19 @@ public class PatientList {
         return patients.get(patientNumber);
     }
 
-    public void listPatients() {
+    public void listPatients(UI ui) {
         if (isEmpty()) {
             System.out.println("There are no patients in the system right now!");
             return;
         }
         System.out.println("Here are the list of patients in the system");
         for (int i = 0; i < getTotalNumberofPatients(); i++) {
-            Messages.printLine();
+            ui.printLine();
             System.out.println((i + 1) + ")");
             System.out.println(getPatient(i));
         }
 
-        Messages.printLine();
+        ui.printLine();
 
     }
 

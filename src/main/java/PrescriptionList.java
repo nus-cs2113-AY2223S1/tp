@@ -7,47 +7,56 @@ public class PrescriptionList {
         prescriptionsList = new ArrayList<>();
     }
 
-    public void add(String patientId, String medicine, String dosage, String timeInterval) {
+    public void add(UI ui, String patientId, String medicine, String dosage, String timeInterval) {
+        assert patientId != null : "ID should not be null";
+        assert medicine != null : "medicine should not be null";
+        assert dosage != null : "dosage should not be null";
+        assert timeInterval != null : "time interval should not be null";
         Prescription prescription = new Prescription(patientId, medicine, dosage, timeInterval);
         prescriptionsList.add(prescription);
-        Messages.printAddPrescriptionMessage(prescription.toString());
+        ui.printAddPrescriptionMessage(prescription.toString());
 
     }
 
-    public void add(String patientId, String medicine, String dosage, String timeInterval, boolean isActive) {
+    public void add(UI ui, String patientId, String medicine, String dosage, String timeInterval, boolean isActive) {
+        assert patientId != null : "ID should not be null";
+        assert medicine != null : "medicine should not be null";
+        assert dosage != null : "dosage should not be null";
+        assert timeInterval != null : "time interval should not be null";
         Prescription prescription = new Prescription(patientId, medicine, dosage, timeInterval, isActive);
         prescriptionsList.add(prescription);
-        Messages.printAddPrescriptionMessage(prescription.toString());
+        ui.printAddPrescriptionMessage(prescription.toString());
     }
 
     public boolean isEmpty() {
         return prescriptionsList.isEmpty();
     }
 
-    public void viewAll() {
+    public void viewAll(UI ui) {
         if (isEmpty()) {
-            System.out.println(Messages.NO_PRESCRIPTION_MESSAGE);
+            ui.printNoPrescriptionMessage();
             return;
         }
 
-        Messages.printViewAllPrescriptionsMessage();
-        Messages.printLine();
+        ui.printViewAllPrescriptionsMessage();
+        ui.printLine();
         for (int i = 0; i < prescriptionsList.size(); i++) {
-            System.out.println("Prescription " + (i + 1));
+            System.out.println((i + 1) + ")");
             System.out.println(prescriptionsList.get(i));
-            if (i != prescriptionsList.size() - 1) {
-                System.out.println();
-            }
+            ui.printLine();
         }
-        Messages.printLine();
     }
 
     // TODO one potential improvement is to make this three different methods
     //  edit(String id, String medicine), edit(String id, String dosage)
     //  and edit(String id, String timeInterval)
-    public void edit(int prescriptionNumber, String medicine, String dosage, String timeInterval) {
+    public void edit(UI ui, int prescriptionNumber, String medicine, String dosage, String timeInterval) {
+        assert medicine != null : "medicine should not be null";
+        assert dosage != null : "dosage should not be null";
+        assert timeInterval != null : "time interval should not be null";
+
         if (prescriptionNumber < 1 || prescriptionNumber > prescriptionsList.size()) {
-            System.out.println(Messages.INDEX_OUT_OF_RANGE_MESSAGE);
+            ui.printIndexOutOfRangeErrorMessage();
             return;
         }
 
@@ -67,6 +76,6 @@ public class PrescriptionList {
             prescriptionEdited.setTimeInterval(timeInterval);
         }
 
-        Messages.printEditPrescriptionMessage(prescriptionEdited.toString());
+        ui.printEditPrescriptionMessage(prescriptionEdited.toString());
     }
 }

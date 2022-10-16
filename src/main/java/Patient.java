@@ -19,12 +19,12 @@ public class Patient {
     }
 
     // todo public void addMedicine();
-    public void addVisit(String id, String dateOfVisit, String timeOfVisit, String reason) {
-        this.visits.addVisit(id,dateOfVisit,timeOfVisit,reason);
+    public void addVisit(UI ui, String id, String dateOfVisit, String timeOfVisit, String reason) {
+        this.visits.addVisit(ui, id,dateOfVisit, timeOfVisit, reason);
     }
 
-    public void addVisit(String id, String dateOfVisit, String timeOfVisit) {
-        this.visits.addVisit(id,dateOfVisit,timeOfVisit);
+    public void addVisit(UI ui, String id, String dateOfVisit, String timeOfVisit) {
+        this.visits.addVisit(ui, id,dateOfVisit, timeOfVisit);
     }
 
     public String getName() {
@@ -58,12 +58,12 @@ public class Patient {
     @Override
     public String toString() {
         String message = "\t";
-        message += getName();
+        message += "Name: " + getName();
         message += "\n\t";
-        message += gender.equals("M") ? "Male\n\t" : "Female\n\t";
-        message += "Born on " + getBirthDate();
+        message += "Gender: " + (gender.equals("M") ? "Male\n\t" : "Female\n\t");
+        message += "Date of Birth: " + getBirthDate();
         message += "\n\t";
-        message += getId();
+        message += "ID: " + getId();
         return message;
     }
 
