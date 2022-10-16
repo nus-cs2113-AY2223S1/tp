@@ -56,7 +56,7 @@ public class Timetable {
     }
 
     public void deleteModule(int index) {
-        Module module = listOfModules.get(index-1);
+        Module module = listOfModules.get(index - 1);
         DataManager.deleteModule(module);
         listOfModules.remove(index - 1);
     }    // the nth module in list has index n-1
