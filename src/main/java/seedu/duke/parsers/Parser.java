@@ -129,7 +129,7 @@ public class Parser {
     }
 
     private static void checkBlankOperation(String lineInput) {
-        boolean isNotBye = !lineInput.contains("bye");
+        boolean isNotBye = !lineInput.contains(EXIT_ENTITY);
         if (inputWords.length == ONE_WORD && isNotBye) {
             isBlankOperation = true;
         }

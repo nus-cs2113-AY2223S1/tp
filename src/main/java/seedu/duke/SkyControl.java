@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import seedu.duke.command.Command;
+import seedu.duke.command.flightcommand.DeleteFlightCommand;
 import seedu.duke.command.flightcommand.AddFlightCommand;
 import seedu.duke.command.flightcommand.ListFlightCommand;
 import seedu.duke.command.passengercommand.AddPassengerCommand;
@@ -51,6 +52,7 @@ public class SkyControl {
         AddPassengerCommand.setupLogger();
         DeletePassengerCommand.setupLogger();
         ListPassengerCommand.setupLogger();
+        DeleteFlightCommand.setUpLogger();
         AddFlightCommand.setupLogger();
         ListFlightCommand.setupLogger();
     }
