@@ -73,9 +73,6 @@ public class Duke {
                             Ui.printModulesInDatabase(moduleMappings);
                         } else if (viewCommand.getViewOption().equals("UNIVERSITY")) {
                             userUniversityListManager.displayUniversity(viewCommand.getUniversityName());
-                        } else if (viewCommand.getViewOption().equals("UNIVERSITIES")) {
-                            ArrayList<University> universities = Database.getUniversities();
-                            Ui.printUniversitiesInDatabase(universities);
                         }
                     } catch (InvalidUserCommandException e) {
                         System.out.println(e.getMessage());
@@ -100,7 +97,11 @@ public class Duke {
                     try {
                         ListCommand listCommand = (ListCommand) newUserCommand;
 
-                        if (listCommand.getListOption().equals("module")) {
+                        if (listCommand.getListOption().equals("UNIVERSITIES")) {
+                            ArrayList<University> universities = Database.getUniversities();
+                            Ui.printUniversitiesInDatabase(universities);
+                        }
+                        else if (listCommand.getListOption().equals("module")) {
                             ArrayList<ModuleMapping> moduleMappings = Database
                                     .findNusMapping(newUserCommand.getModuleCode());
                             Ui.printMappings(moduleMappings);

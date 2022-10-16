@@ -83,7 +83,7 @@ public class Ui {
                 + "                                                       "
                 + "[Home University Module Code] [Home University Module Title] | "
                 + "[Partner University Module Code] [Partner University Module Title] | [Equivalent NUS Credits]\n"
-                + SPACING + "view      " + "/view UNIVERSITIES                      "
+                + SPACING + "list      " + "/list UNIVERSITIES                      "
                 + "Displays all universities with module mappings available in database\n"
                 + SPACING + "list      " + "/list m/MODULECODE                      "
                 + "List all module mappings for NUS MODULECODE in database\n"
@@ -209,7 +209,7 @@ public class Ui {
         int i = 1;
         for (University university : universities) {
             System.out.println(i + ". " + university.toString());
-            i = i + 1;
+            i += 1;
         }
     }
 
