@@ -9,7 +9,7 @@ public class AppointmentList {
         for (Appointment appointment : appointments) {
             System.out.print(appointment.appointmentId + " ");
             System.out.print(appointment.petName + " ");
-            // System.out.print(appointment.service.name + " ");
+            System.out.print(appointment.service + " ");
             System.out.print(appointment.getAppointmentDate() + " ");
             System.out.println(appointment.getAppointmentStatus());
         }
@@ -24,6 +24,21 @@ public class AppointmentList {
             if (appointment.appointmentId == appointmentId) {
                 appointments.remove(appointment);
                 break;
+            }
+        }
+    }
+
+    public static void setAppointmentStatus(int appointmentId, int appointmentStatus) {
+        for (Appointment appointment : appointments) {
+            if (appointment.appointmentId == appointmentId) {
+                switch (appointmentStatus) {
+                case 0:
+                    appointment.setAppointmentStatus(AppointmentStatus.PENDING);
+                    break;
+                case 1:
+                    appointment.setAppointmentStatus(AppointmentStatus.PROCESSING);
+                    break;
+                }
             }
         }
     }

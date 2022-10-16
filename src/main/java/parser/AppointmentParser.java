@@ -35,10 +35,9 @@ public class AppointmentParser {
         case AllocateAppointmentCommand.COMMAND_WORD:
             return prepareAllocateAppointment(statement);
         break;
+        */
         case SetAppointmentStatusCommand.COMMAND_WORD:
             return prepareSetAppointmentStatusCommand(statement);
-            break;
-         */
         default:
             System.out.println("Error: unrecognized appointment operation");
             return new EndCommand();
@@ -74,7 +73,6 @@ public class AppointmentParser {
         return new AddAppointmentCommand(petName, appointmentDate, service);
     }
 
-    /*
     public Command prepareSetAppointmentStatusCommand(String input){
         int i = input.indexOf(" i/");
         int s = input.indexOf(" s/");
@@ -87,9 +85,11 @@ public class AppointmentParser {
         String index = input.substring(i + lengthOfSignature, s);
         String status = input.substring(s + lengthOfSignature);
 
-        return new AllocateApointmentCommand(index, status);
+        return new SetAppointmentStatusCommand(Integer.parseInt(index),
+                    Integer.parseInt(status));
     }
 
+    /*
     public Command prepareAllocateAppointment(String input){
         int i = input.indexOf(" i/");
         int n = input.indexOf(" n/");
