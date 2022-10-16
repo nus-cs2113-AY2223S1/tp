@@ -46,8 +46,8 @@ public class AddTransactionCommand extends Command {
      * @param transactionList The list of transactions to work with
      * @throws InsufficientArgumentsException If the number of args is incorrect
      */
-    public AddTransactionCommand(String[] parts, UserList userList, ItemList itemList, TransactionList transactionList)
-            throws InsufficientArgumentsException {
+    public AddTransactionCommand(String[] parts, UserList userList, ItemList itemList,
+            TransactionList transactionList) throws InsufficientArgumentsException {
         this.parts = parts;
         this.transactionList = transactionList;
         this.itemList = itemList;
@@ -155,8 +155,8 @@ public class AddTransactionCommand extends Command {
     private boolean areValidArgs(String[] args)
             throws InvalidItemException, InvalidUserException, DateFormatInvalidException,
             ItemNotFoundException, UserNotFoundException, DurationInvalidException {
-        return isValidItem(args[0]) && isValidBorrower(args[0], args[1])
-                && isValidDuration(args[2]) && isValidCreatedDate(args[3]);
+        return isValidItem(args[0]) && isValidBorrower(args[0], args[1]) && isValidDuration(args[2])
+                && isValidCreatedDate(args[3]);
     }
 
     /**
@@ -171,9 +171,9 @@ public class AddTransactionCommand extends Command {
      * @throws UserNotFoundException If the user cannot be found
      * @throws DurationInvalidException If the number is less than 0
      */
-    public boolean executeCommand()
-            throws InvalidArgumentException, DateFormatInvalidException, InvalidUserException,
-            InvalidItemException, ItemNotFoundException, UserNotFoundException, DurationInvalidException {
+    public boolean executeCommand() throws InvalidArgumentException, DateFormatInvalidException,
+            InvalidUserException, InvalidItemException, ItemNotFoundException,
+            UserNotFoundException, DurationInvalidException {
         String[] args = getArgsAddTxCmd();
         if (areValidArgs(args)) {
             String itemId = args[0];
@@ -181,7 +181,8 @@ public class AddTransactionCommand extends Command {
             String borrowId = args[1];
             int duration = Integer.parseInt(args[2]);
             LocalDate createdAt = LocalDate.parse(args[3]);
-            Transaction transaction = new Transaction(itemName, itemId, borrowId, duration, createdAt);
+            Transaction transaction =
+                    new Transaction(itemName, itemId, borrowId, duration, createdAt);
             this.transactionList.add(transaction);
             Ui.addTransactionMessage(transaction, transactionList.getSize());
         }

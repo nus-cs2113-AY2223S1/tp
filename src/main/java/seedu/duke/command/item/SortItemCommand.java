@@ -98,7 +98,8 @@ public class SortItemCommand extends Command {
         }
     }
 
-    private boolean isValidBoundaries(String minPrice, String maxPrice) throws InvalidPriceBoundariesException {
+    private boolean isValidBoundaries(String minPrice, String maxPrice)
+            throws InvalidPriceBoundariesException {
         try {
             if (Double.parseDouble(minPrice) > Double.parseDouble(maxPrice)) {
                 throw new InvalidPriceBoundariesException(MESSAGE_PRICE_BOUNDARIES_INVALID);
@@ -109,14 +110,13 @@ public class SortItemCommand extends Command {
         }
     }
 
-    private boolean areValidArgs(String[] args)
-            throws InvalidSortModeException, InvalidPriceException, InvalidPriceBoundariesException {
+    private boolean areValidArgs(String[] args) throws InvalidSortModeException,
+            InvalidPriceException, InvalidPriceBoundariesException {
         return isValidMode(args[0]) && isValidMin(args[1]) && isValidMax(args[2])
                 && isValidBoundaries(args[1], args[2]);
     }
 
-    private List<Item> sortAndFilter()
-            throws InvalidArgumentException, InvalidSortModeException,
+    private List<Item> sortAndFilter() throws InvalidArgumentException, InvalidSortModeException,
             InvalidPriceException, InvalidPriceBoundariesException {
         String[] args = getArgsSortItemsCmd();
         String[] mainArgs = removeOptionalArgs(args);
@@ -126,33 +126,38 @@ public class SortItemCommand extends Command {
             double min = Double.parseDouble(mainArgs[1]);
             double max = Double.parseDouble(mainArgs[2]);
             if (mode.equals(LOW_HIGH)) {
-                sortedItems = itemList.getItemList().stream()
-                        .sorted(comparingDouble(Item::getPricePerDay))
-                        .filter(item -> item.getPricePerDay() >= min && item.getPricePerDay() <= max)
-                        .collect(Collectors.toList());
+                sortedItems =
+                        itemList.getItemList().stream()
+                                .sorted(comparingDouble(Item::getPricePerDay))
+                                .filter(item -> item.getPricePerDay() >= min
+                                        && item.getPricePerDay() <= max)
+                                .collect(Collectors.toList());
             } else if (mode.equals(HIGH_LOW)) {
-                sortedItems = itemList.getItemList().stream()
-                        .sorted(Comparator.comparingDouble(Item::getPricePerDay).reversed())
-                        .filter(item -> item.getPricePerDay() >= min && item.getPricePerDay() <= max)
-                        .collect(Collectors.toList());
+                sortedItems =
+                        itemList.getItemList().stream()
+                                .sorted(Comparator.comparingDouble(Item::getPricePerDay).reversed())
+                                .filter(item -> item.getPricePerDay() >= min
+                                        && item.getPricePerDay() <= max)
+                                .collect(Collectors.toList());
             }
         }
         return sortedItems;
     }
 
-    public boolean executeCommand()
-            throws InvalidArgumentException, InvalidSortModeException,
+    public boolean executeCommand() throws InvalidArgumentException, InvalidSortModeException,
             InvalidPriceException, InvalidPriceBoundariesException {
         StringBuilder listString = new StringBuilder();
         List<Item> itemsList = sortAndFilter();
         if (itemsList.size() == 0) {
             listString.append("There is no items in your filtered list right now");
         } else {
-            listString.append("Here are ").append(itemsList.size()).append(" item(s) in your filtered list:");
+            listString.append("Here are ").append(itemsList.size())
+                    .append(" item(s) in your filtered list:");
         }
         int index = 1;
         for (Item item : itemsList) {
-            listString.append('\n').append("   ").append(index++).append(". ").append(item.toString(transactionList));
+            listString.append('\n').append("   ").append(index++).append(". ")
+                    .append(item.toString(transactionList));
         }
         Ui.printResponse(listString.toString());
         return false;

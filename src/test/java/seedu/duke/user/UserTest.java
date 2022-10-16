@@ -1,7 +1,7 @@
 package seedu.duke.user;
 
 import org.junit.jupiter.api.Test;
-import seedu.duke.user.User;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class UserTest {

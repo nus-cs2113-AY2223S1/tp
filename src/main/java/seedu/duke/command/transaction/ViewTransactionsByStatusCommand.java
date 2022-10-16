@@ -80,7 +80,8 @@ public class ViewTransactionsByStatusCommand extends Command {
     }
 
     @Override
-    public boolean executeCommand() throws InsufficientArgumentsException, InvalidArgumentException {
+    public boolean executeCommand()
+            throws InsufficientArgumentsException, InvalidArgumentException {
         String arg = getArgs();
         ArrayList<Transaction> transactions = transactionList.getTransactionList();
         if (isValidArgument(arg)) {
