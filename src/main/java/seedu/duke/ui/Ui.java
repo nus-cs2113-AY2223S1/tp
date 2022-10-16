@@ -80,6 +80,10 @@ public class Ui {
                 + "or his/her \ndetail have been input incorrectly.";
     }
 
+    public String getDuplicatePassengerError() {
+        return "Unable to add Passenger. Seat number is already occupied on the flight!";
+    }
+
     public String getOperationError() {
         return "Input a valid operation, please try again.";
     }
@@ -217,6 +221,10 @@ public class Ui {
 
     public void showWrongFlightFormatMessage() {
         System.out.println("Error: Flight number should start with 2 letters and trail with 1-4 numbers.");
+    }
+
+    public String getMissingDetailsError() {
+        return "Please fill up passenger details for all fields.\n Invalid input. Try again!";
     }
 }
 

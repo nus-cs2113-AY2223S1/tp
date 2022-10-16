@@ -15,13 +15,12 @@ public class PassengerListTest {
     protected static String addLineInput = "passenger add n/Ivan dod/08011998 dt/2145 fn/sq832 "
             + "gn/05 bg/01 sn/17d bt/2100";
     protected static String lineInputWithError = "passenger delete n/Ivan";
-    protected static String deleteLineInput = "passenger delete n/Ivan fn/sq832 sn/17d";
+    protected static String deleteLineInput = "passenger delete n/Ivan fn/sq832 sn/17d dt/2145";
     protected static PassengerList testPassengerList = new PassengerList();
     protected static Parser parserTest = new PassengerList();
     protected static String errorMessage = "The system is unable to delete the specified passenger "
             + "\nas he/she is not found in the passenger list "
             + "or his/her \ndetail have been input incorrectly.";
-
 
     @Test
     void checkAddOperation() throws SkyControlException {
@@ -37,17 +36,6 @@ public class PassengerListTest {
         assertEquals(1, testPassengerList.boardingGroup);
         assertEquals("17D", testPassengerList.seatNumber);
         assertEquals("2100", testPassengerList.boardingTime);
-    }
-
-    @Test
-    void deletionWithout_relevantFields_exceptionThrown() {
-        try {
-            Command testCommand = Parser.parse(lineInputWithError);
-            testCommand.execute(testPassengerList, lineInputWithError);
-            fail();
-        } catch (Exception e) {
-            assertEquals(e.getMessage(), e.getMessage());
-        }
     }
 
     @Test
