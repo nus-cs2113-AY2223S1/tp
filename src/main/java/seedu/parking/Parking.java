@@ -85,9 +85,7 @@ public class Parking {
             case UPDATE:
                 try {
                     //fetch api
-                    api.asyncExecuteRequest();
-                    api.fetchData();
-
+                    api.syncFetchData();
                     //update json
                     carparkList = new CarparkList(CommonFiles.LTA_FILE_PATH, CommonFiles.LTA_BACKUP_FILE_PATH);
                     ui.showUpdateDataSuccess();

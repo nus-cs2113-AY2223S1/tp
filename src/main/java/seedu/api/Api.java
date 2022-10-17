@@ -38,9 +38,8 @@ public class Api {
     private AuthenticationStatus authStatus = AuthenticationStatus.FAIL;
 
     /**
-     * Constructor to create a new client and the correct HTTP request.
+     * Constructor to create a new client.
      * Initializes the storage class for file writing purposes.
-     * Loads the API key.
      */
     public Api(String file, String directory) {
         this.client = HttpClient.newHttpClient();
@@ -49,7 +48,6 @@ public class Api {
     }
 
     /**
-     * TODO: Check API last authenticated successfully / empty
      * Builds the API HTTP GET request header and body.
      */
     private void generateHttpRequestCarpark() {
@@ -69,10 +67,12 @@ public class Api {
     }
 
     /**
-     * Wait for the response from the API endpoint. It is a blocking code.
-     * Timeout set at 1000ms and will return timeout exception.
+     * Waits (for at most 1s) and receive response from API endpoint. It breaks the asynchronous part of the code.
      *
      * @return JSON string response from the API.
+     * @throws UnauthorisedAccessApiException if API key is invalid.
+     * @throws ServerNotReadyApiException if Server request timeout.
+     * @throws UnknownResponseApiException if response code is not handled properly.
      */
     private String asyncGetResponse()
             throws UnauthorisedAccessApiException, ServerNotReadyApiException, UnknownResponseApiException {
@@ -91,13 +91,55 @@ public class Api {
     }
 
     /**
-     * Check whether response code from API response is 200 OK, otherwise handle it gracefully.
+     * Execute the data fetching subroutine. Subroutine will repeat for a certain number of time
+     * and throws an exception if no response is received.
+     *
+     * @throws FileWriteException if data fails to write.
+     * @throws EmptyResponseException if empty/invalid response received.
+     * @throws UnauthorisedAccessApiException if access not granted.
+     */
+    public void fetchData() throws EmptyResponseException, UnauthorisedAccessApiException, FileWriteException {
+        String result = "";
+        int fetchTries = FETCH_TRIES;
+        do {
+            try {
+                result = asyncGetResponse().trim();
+            } catch (ServerNotReadyApiException | UnknownResponseApiException e) {
+                System.out.println(e.getMessage());
+            } finally {
+                fetchTries--;
+            }
+            if (fetchTries > 0 && result.isEmpty()) {
+                asyncExecuteRequest();
+            }
+        } while (fetchTries > 0 && result.isEmpty());
+
+        if (fetchTries == 0 && result.isEmpty()) {
+            throw new EmptyResponseException();
+        }
+        storage.writeDataToFile(result);
+    }
+
+    /**
+     * Synchronous version of data fetching from the API.
+     *
+     * @throws FileWriteException if data fails to write.
+     * @throws EmptyResponseException if empty/invalid response received.
+     * @throws UnauthorisedAccessApiException if access not granted.
+     */
+    public void syncFetchData() throws FileWriteException, EmptyResponseException, UnauthorisedAccessApiException {
+        asyncExecuteRequest();
+        fetchData();
+    }
+
+    /**
+     * Check whether response code from API response is 200 OK, otherwise throw exception.
      *
      * @param responseCode Response code from API HTTP response header.
-     * @return true if response code is 200.
-     * @throws UnauthorisedAccessApiException API key is wrong.
-     * @throws ServerNotReadyApiException     Too many request.
-     * @throws UnknownResponseApiException    Response code besides 200, 401 or 503.
+     * @return true if response code is 200 OK.
+     * @throws UnauthorisedAccessApiException API key is invalid
+     * @throws ServerNotReadyApiException if server request timeout.
+     * @throws UnknownResponseApiException if received response code besides 200, 401 or 503.
      */
     private boolean isValidResponse(int responseCode)
             throws UnauthorisedAccessApiException, ServerNotReadyApiException, UnknownResponseApiException {
@@ -143,34 +185,11 @@ public class Api {
     }
 
     /**
-     * Execute the data fetching subroutine. Subroutine will repeat for a certain number of time
-     * and throws an exception if no response is received.
-     * todo: handle bad request
-     *
-     * @throws EmptyResponseException if empty/invalid response received.
-     * @throws UnauthorisedAccessApiException if access not granted.
+     * Load default api key.
      */
-    public void fetchData() throws EmptyResponseException, UnauthorisedAccessApiException,
-            FileWriteException {
-        String result = "";
-        int fetchTries = FETCH_TRIES;
-        do {
-            try {
-                result = asyncGetResponse().trim();
-            } catch (ServerNotReadyApiException | UnknownResponseApiException e) {
-                System.out.println(e.getMessage());
-            } finally {
-                fetchTries--;
-            }
-            if (fetchTries > 0 && result.isEmpty()) {
-                asyncExecuteRequest();
-            }
-        } while (fetchTries > 0 && result.isEmpty());
-
-        if (fetchTries == 0 && result.isEmpty()) {
-            throw new EmptyResponseException();
-        }
-        storage.writeDataToFile(result);
+    public void loadDefaultApiKey() {
+        apiKey = API_KEY_DEFAULT;
+        authStatus = AuthenticationStatus.DEFAULT;
     }
 
     /**
@@ -198,14 +217,6 @@ public class Api {
         } catch (IOException e) {
             throw new NoFileFoundException("API key file is missing! Please check " + file + ".");
         }
-    }
-
-    /**
-     * Load default api key. todo: for authentication status so that they know that their own api key is not auth yet.
-     */
-    public void loadDefaultApiKey() {
-        apiKey = API_KEY_DEFAULT;
-        authStatus = AuthenticationStatus.DEFAULT;
     }
 
     public String getApiKey() {
