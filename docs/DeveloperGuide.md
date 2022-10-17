@@ -49,8 +49,20 @@ _Written by: Author name_
 ## Setting Up the Project
 
 {Detail how to set up the project on one's computer, assuming the software is Intellij IDEA}
+Before setting up the project on your computer, kindly check that you have installed:
+* Java JDK 11
+* Intellij IDEA - highly recommended
 
-_Written by: Author name_
+Firstly, you should fork this repo, before cloning the fork to your computer.
+
+Next,
+
+1. **Ensure that Intellij JDK 11 is defined as an SDK**, as described in this [[Set up JDK guide]](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk) -- this step is not needed if you have used JDK 11 in a previous Intellij project.
+   * You _might need to set the Project language level_ section to the SDK default option.
+2. **Import the project _as a Gradle project_**, as described in [[se-edu's Import Gradle Project guide]](https://se-education.org/guides/tutorials/intellijImportGradleProject.html).
+3. **Running the project**: After finishing the import, locate the `src/main/java/seedu.duke/Duke.java` file in this project, right-click it, and choose `Run Duke.main()`. 
+
+_Written by: Paul Low_
 
 ## Design
 
@@ -120,7 +132,20 @@ _Written by: Author name_
 
 {Describe the implementation for the List Command}
 
-_Written by: Author name_
+The full command for list is `list [t/TYPE] [c/CATEGORY] [d/DATE]`
+For example, if `list' is called, all transactions that are present in Moolah Manager will be listed out
+Adding tags such as type, category and date will list all transactions to that category
+
+In a command like `list c/food`
+1. The `main()` method in Duke calls `run()` in Duke. The `ui` reads the command and parses it
+ through `CommandParser.parse()`. 
+2. Within `CommandParser.parse()`, `getCommand()` is called to obtain the command, before `ParameterParser.parse()`
+is called
+3. Various checks are done through functions within `parameter.parse()`
+4. The list command is undergoing execution in `command.execute()` which will call `listTransactions()` in ListCommand
+5. `ui.showTransactionsList()` is then executed since parameters are present
+
+_Written by: Paul Low_
 
 ### Find Command
 
@@ -158,8 +183,14 @@ _Written by: Author name_
 
 {Describe how logging is performed in the developer code}
 
-_Written by: Author name_
+Our team used `java.util.logging` package for the purposes of logging. We instantiated various objects
+for different classes such as `parserLogger` and `addLogger` to set the log messages.
 
+**Logging Levels**:
+* `WARNING`: An exception has been caught by the app
+* `INFO`: Information details what the app has done
+
+_Written by: Paul Low_
 ## Appendix A: Product scope
 
 ### Target user profile
