@@ -74,7 +74,7 @@ public class Ui {
                 + SPACING + "view      " + "/view LISTS                             "
                 + "Displays all existing university lists that have been created by the user\n"
                 + SPACING + "view      " + "/view u/UNIVERSITY                      "
-                + "Displays all modules that have been added to the user's input university’s list in the format\n"
+                + "Displays all modules that have been added to the user's input university's list in the format\n"
                 + "                                                       "
                 + "[Home University Module Code] [Home University Module Title] | "
                 + "[Partner University Module Code] [Partner University Module Title] | [Equivalent NUS Credits]\n"
@@ -119,7 +119,9 @@ public class Ui {
 
     /**
      * Displays to the user information regarding a deleted module.
-     * @return Formatted string for each module and its associated code, title, credit and PU information, incl PU name.
+     * 
+     * @return Formatted string for each module and its associated code, title,
+     *         credit and PU information, incl PU name.
      */
     public static String printDeletedModule(UserModuleMapping module) {
         String puName = module.getPuName();
@@ -130,7 +132,9 @@ public class Ui {
     }
 
     /**
-     * Prints an acknowledgement message to inform the user that they have successfully added a module to their list.
+     * Prints an acknowledgement message to inform the user that they have
+     * successfully added a module to their list.
+     * 
      * @param module The module added into the module list
      * @return Formatted string for the module added.
      */
@@ -208,6 +212,7 @@ public class Ui {
 
     /**
      * Sequentially prints each module stored in the deletedModules list.
+     * 
      * @param deletedModules The list of deleted modules to be printed.
      * @return Formatted string for the deleted modules in the list.
      */

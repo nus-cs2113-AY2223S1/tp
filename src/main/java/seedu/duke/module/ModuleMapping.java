@@ -1,7 +1,5 @@
 package seedu.duke.module;
 
-import seedu.duke.module.Module;
-
 public class ModuleMapping {
     private Module partnerUniversityModule;
     private Module nusModule;

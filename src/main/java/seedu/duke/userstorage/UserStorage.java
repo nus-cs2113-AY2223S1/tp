@@ -56,6 +56,7 @@ public class UserStorage {
             fileContent += s.nextLine();
         }
         logger.log(Level.INFO, "End of file loading");
+        s.close();
         return fileContent;
     }
 

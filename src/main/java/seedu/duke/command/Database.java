@@ -1,13 +1,11 @@
 package seedu.duke.command;
 
 import java.util.ArrayList;
-import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import seedu.duke.exceptions.ModuleNotFoundException;
 import seedu.duke.exceptions.UniversityNotFoundException;
-import seedu.duke.module.Module;
 import seedu.duke.module.ModuleMapping;
 import seedu.duke.university.University;
 

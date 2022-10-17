@@ -7,7 +7,6 @@ import seedu.duke.user.UserUniversityList;
 import seedu.duke.user.UserUniversityListManager;
 
 import java.io.IOException;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
