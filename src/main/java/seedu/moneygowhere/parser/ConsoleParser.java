@@ -1014,15 +1014,15 @@ public class ConsoleParser {
      *
      * @param consoleInput String read from standard input.
      * @return Parsed command and arguments
-     * @throws ConsoleParserCommandNotFoundException               If the command is not found.
-     * @throws ConsoleParserCommandAddExpenseInvalidException      If the command add-expense is invalid.
-     * @throws ConsoleParserCommandViewExpenseInvalidException     If the command view-expense is invalid.
-     * @throws ConsoleParserCommandDeleteExpenseInvalidException   If the command delete-expense is invalid.
-     * @throws ConsoleParserCommandEditExpenseInvalidException     If the command edit-expense is invalid.
-     * @throws ConsoleParserCommandSortExpenseInvalidTypeException If the command sort-expense is invalid.
-     * @throws ConsoleParserCommandConvertCurrencyInvalidException If the command convert-currency is invalid.
-     * @throws ConsoleParserCommandAddTargetInvalidException       If the command add-target is invalid.
-     * @throws ConsoleParserCommandAddIncomeInvalidException       If the command add-income is invalid.
+     * @throws ConsoleParserCommandNotFoundException                    If the command is not found.
+     * @throws ConsoleParserCommandAddExpenseInvalidException           If the command add-expense is invalid.
+     * @throws ConsoleParserCommandViewExpenseInvalidException          If the command view-expense is invalid.
+     * @throws ConsoleParserCommandDeleteExpenseInvalidException        If the command delete-expense is invalid.
+     * @throws ConsoleParserCommandEditExpenseInvalidException          If the command edit-expense is invalid.
+     * @throws ConsoleParserCommandSortExpenseInvalidTypeException      If the command sort-expense is invalid.
+     * @throws ConsoleParserCommandConvertCurrencyInvalidException      If the command convert-currency is invalid.
+     * @throws ConsoleParserCommandAddTargetInvalidException            If the command add-target is invalid.
+     * @throws ConsoleParserCommandAddIncomeInvalidException            If the command add-income is invalid.
      * @throws ConsoleParserCommandAddRecurringPaymentInvalidException  If the command Add-RecurringPayment is invalid.
      * @throws ConsoleParserCommandViewRecurringPaymentInvalidException If the command View-RecurringPayment is invalid.
      */

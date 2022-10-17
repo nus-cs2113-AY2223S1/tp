@@ -2,18 +2,17 @@ package seedu.moneygowhere.currency;
 
 import seedu.moneygowhere.common.Configurations;
 import seedu.moneygowhere.common.Messages;
-import seedu.moneygowhere.data.currency.CurrencyManager;
 import seedu.moneygowhere.data.currency.Currency;
+import seedu.moneygowhere.data.currency.CurrencyManager;
 import seedu.moneygowhere.exceptions.CurrencyLoadDataInputException;
 
 import javax.net.ssl.HttpsURLConnection;
-
 import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.FileNotFoundException;
+import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ArrayList;
@@ -89,7 +88,7 @@ public class CurrencyApi {
             for (int j = 0; j < Configurations.NUMBER_OF_CURRENCIES; j++) {
                 line = br.readLine();
                 line = line.replace(",", "");
-                line = line.replace('"',' ');
+                line = line.replace('"', ' ');
                 line = line.replace(" ", "");
                 sb.add(line.toUpperCase());
             }

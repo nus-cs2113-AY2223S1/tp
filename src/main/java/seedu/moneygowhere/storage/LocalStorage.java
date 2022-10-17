@@ -6,9 +6,6 @@ import seedu.moneygowhere.data.expense.Expense;
 import seedu.moneygowhere.data.expense.ExpenseManager;
 import seedu.moneygowhere.exceptions.LocalStorageLoadDataInputError;
 
-import static seedu.moneygowhere.common.Configurations.DIRECTORY_PATH;
-import static seedu.moneygowhere.common.Configurations.FILE_PATH_EXPENSES;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -17,6 +14,9 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import static seedu.moneygowhere.common.Configurations.DIRECTORY_PATH;
+import static seedu.moneygowhere.common.Configurations.FILE_PATH_EXPENSES;
 
 public class LocalStorage {
     private static final String DIVIDER = " // ";
@@ -57,8 +57,8 @@ public class LocalStorage {
     }
 
     /**
-    * This method reads in the sortCommandSetting in text file.
-    */
+     * This method reads in the sortCommandSetting in text file.
+     */
     private static ConsoleCommandSortExpense loadSortCommandSetting(String sortCommandSetting)
             throws LocalStorageLoadDataInputError {
         String[] splitInputs = sortCommandSetting.split(DIVIDER);
@@ -67,7 +67,7 @@ public class LocalStorage {
         }
         String type = splitInputs[0];
         String order = splitInputs[1];
-        return new ConsoleCommandSortExpense(type,order);
+        return new ConsoleCommandSortExpense(type, order);
     }
 
     private static Expense createExpense(String textFromFile) throws LocalStorageLoadDataInputError {
