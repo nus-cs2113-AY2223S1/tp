@@ -12,11 +12,14 @@
 ## Product scope
 ### Target user profile
 
-{Describe the target user profile}
+This product is targeted towards PC building enthusiasts and professional System builds who have a need and want to 
+keep track of their PC builds. It is optimized for users to work with a Command Line Interface (CLI).
 
 ### Value proposition
 
-{Describe the value proposition: what problem does it solve?}
+This products helps builders to keep track of their PC builds and their components. It also helps them to keep track of
+their total power consumption and the total cost of their builds. Compatibility of components is also checked to ensure
+that the build is able to function properly..
 
 ## User Stories
 
@@ -27,7 +30,7 @@
 
 ## Non-Functional Requirements
 
-{Give non-functional requirements}
+Product should work on any mainstream OS as long as it has Java 11 or above installed.
 
 ## Glossary
 
