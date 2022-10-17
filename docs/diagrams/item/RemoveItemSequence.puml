@@ -1,0 +1,37 @@
+@startuml
+hide footbox
+
+Actor User
+"User" -> ":Duke": "remove-item..."
+activate ":Duke"
+":Duke" -> ":CommandParser": createCommand()
+activate ":CommandParser"
+":CommandParser" -> ":RemoveItemCommand": new
+activate ":RemoveItemCommand"
+return :RemoveItemCommand
+":CommandParser" --> ":Duke": command
+deactivate
+
+":Duke" -> ":RemoveItemCommand" : executeCommand()
+activate ":RemoveItemCommand"
+":RemoveItemCommand" -> ":RemoveItemCommand": getArgsRemoveTxCmd()
+activate ":RemoveItemCommand"
+return args
+    ":RemoveItemCommand" -> ":ItemList": getItemById()
+    activate ":ItemList"
+opt item can be found
+    ":ItemList" --> ":RemoveItemCommand": :Item
+    deactivate ":ItemList"
+    ":RemoveItemCommand" -> ":ItemList": deleteItem()
+    activate ":ItemList"
+    return
+    ":RemoveItemCommand" -> "<<class>>\n:Ui": deleteItemMessage()
+    activate "<<class>>\n:Ui"
+    "<<class>>\n:Ui" --> ":Duke"
+    deactivate "<<class>>\n:Ui"
+    deactivate ":ItemList"
+
+end
+deactivate ":RemoveItemCommand"
+":Duke" --> "User"
+@enduml
