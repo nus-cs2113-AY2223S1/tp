@@ -106,7 +106,7 @@ public class ParameterParser {
      * @param splits  The user input after the command word, split into a list for every space found.
      * @throws InputMissingTagException If there is a missing mandatory tag.
      */
-    private static void checkMandatoryTagsExist(Command command, String[] splits) throws InputMissingTagException {
+    public static void checkMandatoryTagsExist(Command command, String[] splits) throws InputMissingTagException {
         String[] tags = command.getMandatoryTags();
         for (String tag : tags) {
             boolean found = findMatchingTagAmongInputs(tag, splits);
@@ -125,7 +125,7 @@ public class ParameterParser {
      * @param splits  The user input after the command word, split into a list for every space found.
      * @throws InputUnsupportedTagException If there is an extra tag that is not recognised.
      */
-    private static void checkUnsupportedTagsNotExist(Command command, String[] splits)
+    public static void checkUnsupportedTagsNotExist(Command command, String[] splits)
             throws InputUnsupportedTagException {
         String[] mandatoryTags = command.getMandatoryTags();
         String[] optionalTags = command.getOptionalTags();
@@ -155,7 +155,7 @@ public class ParameterParser {
      * @param splits The user input after the command word, split into a list for every space found.
      * @throws InputDuplicateTagException If there is an extra of the same tag.
      */
-    private static void checkDuplicateTagsNotExist(String[] splits) throws InputDuplicateTagException {
+    public static void checkDuplicateTagsNotExist(String[] splits) throws InputDuplicateTagException {
         HashMap<String, Integer> tagOccurenceMap = new HashMap<>();
         for (String split : splits) {
             assert split.length() >= MINIMUM_TAG_LENGTH;
@@ -178,7 +178,7 @@ public class ParameterParser {
      * @param splits The user input after the command word, split into a list for every space found.
      * @throws EmptyParameterException If there exists a tag without parameter.
      */
-    private static void checkParameterNotEmpty(String[] splits) throws EmptyParameterException {
+    public static void checkParameterNotEmpty(String[] splits) throws EmptyParameterException {
         for (String split : splits) {
             if (split.length() == 2) {
                 parserLogger.log(Level.WARNING, "An empty parameter error is caught for the given tag input: " + split);
@@ -236,7 +236,7 @@ public class ParameterParser {
      * @param splits  The user input after the command word, split into a list for every space found.
      * @throws MoolahException If Moolah Manager captures any command input exceptions.
      */
-    private static void setCommand(Command command, String[] splits) throws MoolahException {
+    public static void setCommand(Command command, String[] splits) throws MoolahException {
         assert command != null;
         for (String split : splits) {
             String tag = split.substring(0, SPLIT_POSITION);

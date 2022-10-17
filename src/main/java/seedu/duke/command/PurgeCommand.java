@@ -3,7 +3,10 @@ package seedu.duke.command;
 import seedu.duke.Storage;
 import seedu.duke.Ui;
 import seedu.duke.data.TransactionList;
+import seedu.duke.exception.MoolahException;
+import seedu.duke.exception.StorageWriteErrorException;
 
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -42,6 +45,7 @@ public class PurgeCommand extends Command {
     }
 
     //@@author brian-vb
+
     /**
      * Executes the operations related to the command.
      *
@@ -50,7 +54,7 @@ public class PurgeCommand extends Command {
      * @param storage      An instance of the Storage class.
      */
     @Override
-    public void execute(TransactionList transactions, Ui ui, Storage storage) {
+    public void execute(TransactionList transactions, Ui ui, Storage storage) throws MoolahException {
         // Shows confirmation prompt before deleting all transactions
         purgeLogger.setLevel(Level.WARNING);
         purgeLogger.log(Level.INFO, "Purge Command checks if there are no transactions"
@@ -68,12 +72,17 @@ public class PurgeCommand extends Command {
         String input = ui.readCommand();
 
         if (input.equals("Y")) {
-            TransactionList.purgeTransactions();
-            assert PurgeCommand.isEmpty(transactions);
-            Ui.showInfoMessage(INFO_PURGE.toString());
-            purgeLogger.log(Level.INFO, "The transactions list is now empty"
-                    + " and the UI should display that information to the user respectively.");
-            purgeLogger.log(Level.INFO, "The end of the Purge Command.");
+            try {
+                TransactionList.purgeTransactions();
+                assert PurgeCommand.isEmpty(transactions);
+                Ui.showInfoMessage(INFO_PURGE.toString());
+                purgeLogger.log(Level.INFO, "The transactions list is now empty"
+                        + " and the UI should display that information to the user respectively.");
+                storage.writeToFile(transactions.getTransactions());
+                purgeLogger.log(Level.INFO, "The end of the Purge Command.");
+            } catch (IOException e) {
+                throw new StorageWriteErrorException();
+            }
             return;
         }
 
@@ -92,6 +101,7 @@ public class PurgeCommand extends Command {
     }
 
     //@@author paullowse
+
     /**
      * Enables the program to exit when the Bye command is issued.
      *

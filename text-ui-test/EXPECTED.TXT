@@ -1,3 +1,6 @@
+* Created new directory *
+* Created new file for use *
+* duke.txt loaded successfully! *
 ____________________________________________________________
 Hello! I'm Moo and I will help you to manage your finances.
 Enter <help> if you need the list of commands.

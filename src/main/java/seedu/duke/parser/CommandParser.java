@@ -90,7 +90,7 @@ public class CommandParser {
      * @return Command object created.
      * @throws InvalidCommandException If the command word is not supported by the application.
      */
-    private static Command getCommand(String commandWordInput, String parameterInput) throws InvalidCommandException {
+    public static Command getCommand(String commandWordInput, String parameterInput) throws InvalidCommandException {
         // TODO: Remove parameter input once a solution is found for managing parameter that allows space
         Command command = null;
         switch (commandWordInput.toUpperCase()) {
