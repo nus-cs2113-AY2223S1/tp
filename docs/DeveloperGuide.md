@@ -98,12 +98,25 @@ such as getting, adding, editing, deleting and purging of transaction(s) from th
 The `Transaction` class is the abstract classes of an `Income` or an `Expense`. The `Category` represents a category of 
 a transaction. Within the transaction class and its subclasses, getters and setters are used to access the private 
 variables. These classes override the toString() method for a self-defined print format when the transactions are 
-displayed.
+displayed. 
+
+<!-- TODO: Complete category and categoryList in sequence diagram and write their explanation here -->
 
 A more detailed explaination on the implementation on the transactions can be viewed under Section
 [Implementation for Transaction](#implementation-for-transaction).
 
+#### How the data component works
+- When MoolahManager starts running, the Duke class will call the storage methods to initialize the transactionList. 
+A temporary transactionList will be returned by the storage if the exists stored transaction records. 
+Based on the whether the initialization is successful, corresponding constructor will be called to initialize a 
+transactionList object to be used throughout the application running time.
+  ![Sequence Diagram on Creation of TransactionList](images/TransactionListSequenceDiagram.png)
 
+- A transaction (either an income or expense) is created by an `add` command, can be modified by an `edit` command and 
+can be deleted by a `delete` or `purge` command. These interactions is described in further detail under each command 
+section below.
+
+<!-- TODO: Describe how category and categoryList work here -->
 
 _Written by: Chia Thin Hong_
 
