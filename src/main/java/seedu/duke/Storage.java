@@ -26,6 +26,10 @@ public class Storage {
     private static final String DIRECTORY_PATH = "data";
     private static final String FILE_PATH = "data/duke.txt";
     private static final String DELIMITER = " \\| ";
+    private static final int NUMBER_OF_STORED_PARAMETERS = 5;
+    private static final int TENS = 10;
+    private static final int HUNDREDS = 100;
+    private static final int THOUSANDS = 1000;
 
     private TransactionList storedTransactions;
 
@@ -48,13 +52,13 @@ public class Storage {
 
         if (!directory.exists()) {
             directory.mkdir();
-            System.out.println("* Created new directory *");
+            Ui.printMessages("* Created new directory *");
         }
         if (!file.exists()) {
             file.createNewFile();
-            System.out.println("* Created new file for use *");
+            Ui.printMessages("* Created new file for use *");
         } else {
-            System.out.println("* Existing file detected *");
+            Ui.printMessages("* Existing file detected *");
 
         }
         return file;
@@ -72,10 +76,10 @@ public class Storage {
             File file = checkIfFileExist();
             Scanner input = new Scanner(file);
             storeFileValuesLocally(storedTransactions, input);
-            System.out.println("* duke.txt loaded successfully! *");
+            Ui.printMessages("* duke.txt loaded successfully! *");
 
         } catch (MoolahException e) {
-            //Catch any parsing errors and throw the default StorageInputCorruptedException
+            // Catch any parsing errors and throw the default StorageInputCorruptedException
             throw new StorageInputCorruptedException();
         } catch (IOException e) {
             throw new StorageWriteErrorException();
@@ -98,14 +102,14 @@ public class Storage {
         while (input.hasNext()) {
             String line = input.nextLine();
             String[] splits = line.split(DELIMITER);
-            if (splits.length != 5) {
+            if (splits.length != NUMBER_OF_STORED_PARAMETERS) {
                 throw new StorageInputCorruptedException();
             }
 
             String type = splits[0];
             String category = splits[1];
             String amountString = splits[2];
-            //Date has been formatted in duke.txt and must be synthesized into the correct string format before parsing.
+            // Date has been formatted in duke.txt and must be synthesized into the correct string format before parsing
             try {
                 LocalDate date = LocalDate.parse(splits[3], formatter);
                 String dateString = synthesizeDateString(date);
@@ -154,18 +158,17 @@ public class Storage {
         String dateOfMonth = String.valueOf(date.getDayOfMonth());
         String month = String.valueOf(date.getMonthValue());
         String year = String.valueOf(date.getYear());
-        // 10, 100 , 1000 would be renamed to constant once an appropriate name is discussed.
-        if (date.getMonthValue() < 10) {
+        if (date.getMonthValue() < TENS) {
             month = "0" + month;
         }
-        if (date.getDayOfMonth() < 10) {
+        if (date.getDayOfMonth() < TENS) {
             dateOfMonth = "0" + dateOfMonth;
         }
-        if (date.getYear() < 10) {
+        if (date.getYear() < TENS) {
             year = "000" + year;
-        } else if (date.getYear() < 100) {
+        } else if (date.getYear() < HUNDREDS) {
             year = "00" + year;
-        } else if (date.getYear() < 1000) {
+        } else if (date.getYear() < THOUSANDS) {
             year = "0" + year;
         }
 
@@ -177,7 +180,7 @@ public class Storage {
      * The function called each time there are changes to the transactions Arraylist.
      *
      * @param transactions The updated Arraylist.
-     * @throws IOException If there are issues writing to the duke.txt file
+     * @throws IOException If there are issues writing to the duke.txt file.
      */
     public void writeToFile(ArrayList<Transaction> transactions) throws IOException {
         FileWriter fileWriter = new FileWriter(FILE_PATH);
@@ -188,7 +191,7 @@ public class Storage {
                     + transaction.getAmount() + " | " + transaction.getDate() + " | "
                     + transaction.getDescription();
 
-            fileWriter.write(transactionEntry + "\n");
+            fileWriter.write(transactionEntry + System.lineSeparator());
         }
         fileWriter.close();
     }
