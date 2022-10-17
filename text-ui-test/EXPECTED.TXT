@@ -8,12 +8,13 @@
                                                    
 Before we begin, enter which Semester it is, 1 or 2. Alternatively, enter 0 to quit.
 Here is a list of things I can do, enter the appropriate command to continue!
-1. add     2. list     3. info     4. set     5. delete     6. quit
+1. add     2. list     3. info     4. set     5. delete     6. print     7. quit
 
-What is the module code?
+Please enter module code
 Successfully added new module: CS2113 : Software Engineering & Object-Oriented Programming
+
 Here is a list of things I can do, enter the appropriate command to continue!
-1. add     2. list     3. info     4. set     5. delete     6. quit
+1. add     2. list     3. info     4. set     5. delete     6. print     7. quit
 
 Which module would you like to set lessons for? Enter corresponding valid index
 1. CS2113 : Software Engineering & Object-Oriented Programming
@@ -27,60 +28,55 @@ Which is your preferred timeslot? Enter corresponding valid index
 4. [Tutorial] Thursday   17:00 - 18:00
 5. [Tutorial] Thursday   17:00 - 18:00
 
-Please try again!
-
-Which is your preferred timeslot? Enter corresponding valid index
-1. [Tutorial] Friday   11:00 - 12:00
-2. [Tutorial] Wednesday   12:00 - 13:00
-3. [Tutorial] Wednesday   13:00 - 14:00
-4. [Tutorial] Thursday   17:00 - 18:00
-5. [Tutorial] Thursday   17:00 - 18:00
-
-Successfully set your lesson!
+Invalid Timeslot Index!
 Here is a list of things I can do, enter the appropriate command to continue!
-1. add     2. list     3. info     4. set     5. delete     6. quit
+1. add     2. list     3. info     4. set     5. delete     6. print     7. quit
+
+Invalid Command!
+Here is a list of things I can do, enter the appropriate command to continue!
+1. add     2. list     3. info     4. set     5. delete     6. print     7. quit
 
 Here are your modules:
 1. CS2113: Software Engineering & Object-Oriented Programming
+     [Tutorial] Undetermined Day   Undetermined Time - Undetermined Time
      [Lecture] Undetermined Day   Undetermined Time - Undetermined Time
-     [Tutorial] Wednesday   12:00 - 13:00
 
 
 Here is a list of things I can do, enter the appropriate command to continue!
-1. add     2. list     3. info     4. set     5. delete     6. quit
+1. add     2. list     3. info     4. set     5. delete     6. print     7. quit
 
 Here are your modules:
 1. CS2113: Software Engineering & Object-Oriented Programming
+     [Tutorial] Undetermined Day   Undetermined Time - Undetermined Time
      [Lecture] Undetermined Day   Undetermined Time - Undetermined Time
-     [Tutorial] Wednesday   12:00 - 13:00
 
 
 Which module you would like to delete? Please enter the index of that module. 
 Please input a valid index!
 Here is a list of things I can do, enter the appropriate command to continue!
-1. add     2. list     3. info     4. set     5. delete     6. quit
+1. add     2. list     3. info     4. set     5. delete     6. print     7. quit
 
 Here are your modules:
 1. CS2113: Software Engineering & Object-Oriented Programming
+     [Tutorial] Undetermined Day   Undetermined Time - Undetermined Time
      [Lecture] Undetermined Day   Undetermined Time - Undetermined Time
-     [Tutorial] Wednesday   12:00 - 13:00
 
 
 Which module you would like to delete? Please enter the index of that module. 
 Please input an integer!
 Here is a list of things I can do, enter the appropriate command to continue!
-1. add     2. list     3. info     4. set     5. delete     6. quit
+1. add     2. list     3. info     4. set     5. delete     6. print     7. quit
 
 Here are your modules:
 1. CS2113: Software Engineering & Object-Oriented Programming
+     [Tutorial] Undetermined Day   Undetermined Time - Undetermined Time
      [Lecture] Undetermined Day   Undetermined Time - Undetermined Time
-     [Tutorial] Wednesday   12:00 - 13:00
 
 
 Which module you would like to delete? Please enter the index of that module. 
 Successfully deleted module!
 Here is a list of things I can do, enter the appropriate command to continue!
-1. add     2. list     3. info     4. set     5. delete     6. quit
+1. add     2. list     3. info     4. set     5. delete     6. print     7. quit
 
  _____            __   __             ___              _       _ 
 /  ___|           \ \ / /            / _ \            (_)     | |
