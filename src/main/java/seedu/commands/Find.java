@@ -1,6 +1,7 @@
 package seedu.commands;
 
 import seedu.exception.NoCommandArgumentException;
+import seedu.parser.Parser;
 
 /**
  * Represents the 'find' command to search for available lots in carparks.
@@ -14,7 +15,7 @@ public class Find {
      * @return Carpark ID.
      */
     public String getCarparkID(String input) throws NoCommandArgumentException {
-        String[] words = input.split("\\s+", 2);
+        String[] words = Parser.splitCommandArgument(input);
         if (words.length == 2 && words[1].trim().length() > 0) {
             return words[1];
         } else {
