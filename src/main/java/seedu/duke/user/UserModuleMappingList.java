@@ -4,7 +4,6 @@ import seedu.duke.exceptions.InvalidUserCommandException;
 import seedu.duke.ui.Ui;
 
 import java.util.ArrayList;
-import java.util.NoSuchElementException;
 
 /**
  * Class of module list that manages the modules that the user is interested in.
@@ -74,6 +73,22 @@ public class UserModuleMappingList {
         if (!isFound) {
             throw new InvalidUserCommandException("No such modules found");
         }
+    }
+
+    public UserModuleMapping getModuleByPuCode(String input) throws InvalidUserCommandException {
+        assert input.length() > 0 : "Getting PU Code cannot be empty";
+        boolean isFound = false;
+        UserModuleMapping targetModule = null;
+        for (int i = 0; i < modules.size(); ++i) {
+            if (modules.get(i).getPuCode().equals(input)) {
+                isFound = true;
+                targetModule = modules.get(i);
+            }
+        }
+        if (!isFound) {
+            throw new InvalidUserCommandException("No such modules found");
+        }
+        return targetModule;
     }
 
     public void deleteModule(int index) {
