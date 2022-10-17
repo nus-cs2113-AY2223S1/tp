@@ -123,7 +123,7 @@ public class Transaction {
      */
 
     public Transaction updateDuration(int newDuration) {
-        return new Transaction(this.itemName, this.itemId, this.borrower, newDuration,
+        return new Transaction(this.transactionId, this.itemName, this.itemId, this.borrower, newDuration,
                 this.createdAt);
     }
 
