@@ -19,11 +19,10 @@ public class FlightList extends OperationList {
 
     protected static int numOfFlights = 0;
 
-    public static String checkCommandLength(String description) throws SkyControlException {
+    public static void checkCommandLength(String description) throws SkyControlException {
         if (description.isEmpty()) {
             throw new SkyControlException(description);
         }
-        return description;
     }
 
     public static String extractDetail(String command, String start, String end) {
