@@ -19,7 +19,7 @@ public class TransactionList {
     private static final String LINE_SEPARATOR = System.lineSeparator();
 
     //@@author chinhan99
-    private static ArrayList<Transaction> transactions;
+    private ArrayList<Transaction> transactions;
 
     public TransactionList(TransactionList transactionList) {
         transactions = transactionList.getTransactions();
@@ -61,7 +61,7 @@ public class TransactionList {
      * @param index An index of the transaction that is to be retrieved.
      * @return A string tht states the details of the deleted transaction.
      */
-    public static String deleteTransaction(int index) {
+    public String deleteTransaction(int index) {
         Transaction transaction = transactions.get(index - 1);
         transactions.remove(index - 1);
         return transaction.toString();
@@ -198,7 +198,7 @@ public class TransactionList {
     /**
      * Purges all records in the transactions list.
      */
-    public static void purgeTransactions() {
+    public void purgeTransactions() {
         transactions.clear();
     }
 }
