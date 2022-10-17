@@ -5,7 +5,9 @@ import seedu.duke.Ui;
 import seedu.duke.data.TransactionList;
 import seedu.duke.exception.InvalidIndexException;
 import seedu.duke.exception.MoolahException;
+import seedu.duke.exception.StorageWriteErrorException;
 
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -36,13 +38,13 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_DETAILED_HELP = COMMAND_HELP + COMMAND_PARAMETERS_INFO
             + LINE_SEPARATOR;
 
-
+    //@@author brian-vb
     // The optional tags that may exist in the user input
-
-    private static final Logger logging = Logger.getLogger(DeleteCommand.class.getName());
+    private static final Logger deleteLogger = Logger.getLogger(DeleteCommand.class.getName());
 
     private int entryNumber;
 
+    //@@author paullowse
     public DeleteCommand() {
     }
 
@@ -64,6 +66,8 @@ public class DeleteCommand extends Command {
         this.entryNumber = entryNumber;
     }
 
+    //@@author brian-vb
+
     /**
      * Executes the "delete" command. Checks and parses the necessary parameters before deleting transaction.
      *
@@ -78,29 +82,36 @@ public class DeleteCommand extends Command {
         Checks if userInput is in the correct input format by further parsing,
         before adding entry to arraylist
         */
-        logging.setLevel(Level.WARNING);
-        logging.log(Level.INFO, "Delete Command checks whether the index is valid "
-                + "before executing the command.");
-        boolean isInputValid = true;
-        int index = entryNumber;
-        int numberOfTransactions;
-        numberOfTransactions = transactions.size();
-        if ((index > numberOfTransactions) || (index <= 0)) {
-            isInputValid = false;
+        try {
+            deleteLogger.setLevel(Level.WARNING);
+            deleteLogger.log(Level.INFO, "Delete Command checks whether the index is valid "
+                    + "before executing the command.");
+            boolean isInputValid = true;
+            int index = entryNumber;
+            int numberOfTransactions;
+            numberOfTransactions = transactions.size();
+            if ((index > numberOfTransactions) || (index <= 0)) {
+                isInputValid = false;
+            }
+            assert index > 0;
+            if (isInputValid) {
+                String transaction = TransactionList.deleteTransaction(index);
+                Ui.showTransactionAction(INFO_DELETE.toString(), transaction);
+                deleteLogger.log(Level.INFO, "The requested transaction has been deleted "
+                        + "and the UI should display the confirmation message respectively.");
+                storage.writeToFile(transactions.getTransactions());
+            } else {
+                deleteLogger.log(Level.WARNING, "InvalidIndexException thrown when the index "
+                        + "is invalid.");
+                throw new InvalidIndexException();
+            }
+        } catch (IOException e) {
+            throw new StorageWriteErrorException();
         }
-        assert index > 0;
-        if (isInputValid) {
-            String transaction = TransactionList.deleteTransaction(index);
-            Ui.showTransactionAction(INFO_DELETE.toString(), transaction);
-            logging.log(Level.INFO, "The requested transaction has been deleted "
-                    + "and the UI should display the confirmation message respectively.");
-        } else {
-            logging.log(Level.WARNING, "InvalidIndexException thrown when the index "
-                    + "is invalid.");
-            throw new InvalidIndexException();
-        }
-        logging.log(Level.INFO, "This is the end of the delete command.");
+        deleteLogger.log(Level.INFO, "This is the end of the delete command.");
     }
+
+    //@@author paullowse
 
     /**
      * Enables the program to exit when the Bye command is issued.

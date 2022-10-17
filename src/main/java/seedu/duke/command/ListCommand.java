@@ -41,8 +41,10 @@ public class ListCommand extends Command {
     // Detailed help description
     public static final String COMMAND_DETAILED_HELP = COMMAND_HELP + COMMAND_PARAMETERS_INFO + LINE_SEPARATOR;
 
+    //@@author chydarren
     private static final Logger listLogger = Logger.getLogger(ListCommand.class.getName());
 
+    //@@author paullowse
     private String category;
     private LocalDate date;
     private String type;
@@ -86,6 +88,7 @@ public class ListCommand extends Command {
         this.date = date;
     }
 
+    //@@author chydarren
     /**
      * Executes the operations related to the command.
      *
@@ -131,6 +134,7 @@ public class ListCommand extends Command {
         listLogger.log(Level.INFO, "End of List command.");
     }
 
+    //@@author paullowse
     /**
      * Enables the program to exit when the Bye command is issued.
      *

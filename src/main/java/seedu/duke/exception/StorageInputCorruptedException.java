@@ -2,7 +2,8 @@ package seedu.duke.exception;
 
 import seedu.duke.common.ErrorMessages;
 
-public class EmptyParameterException extends MoolahException {
+public class StorageInputCorruptedException extends MoolahException {
+
     /**
      * Returns the error message of the exception to alert user of the exception.
      *
@@ -10,6 +11,7 @@ public class EmptyParameterException extends MoolahException {
      */
     @Override
     public String getMessage() {
-        return ErrorMessages.ERROR_INPUT_MISSING_PARAMETER.toString();
+        return ErrorMessages.ERROR_STORAGE_FILE_CORRUPTED.toString();
     }
+
 }

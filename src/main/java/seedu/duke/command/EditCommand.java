@@ -49,6 +49,7 @@ public class EditCommand extends Command {
     public static final String COMMAND_DETAILED_HELP = COMMAND_HELP + COMMAND_PARAMETERS_INFO
             + LINE_SEPARATOR;
 
+    //@@author paullowse
     private int entryNumber;
     private String type;
     private String description;

@@ -25,6 +25,7 @@ public class ByeCommand extends Command {
     public static final String COMMAND_DETAILED_HELP = COMMAND_HELP + COMMAND_PARAMETERS_INFO
             + LINE_SEPARATOR;
 
+    //@@author paullowse
     public ByeCommand() {
     }
 

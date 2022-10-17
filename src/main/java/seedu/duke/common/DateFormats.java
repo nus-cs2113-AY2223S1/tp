@@ -4,8 +4,10 @@ package seedu.duke.common;
  * Provides enum variables for the approved date formats for input and output.
  */
 public enum DateFormats {
+    //@@author wcwy
     DATE_INPUT_PATTERN("ddMMyyyy"),
-    DATE_OUTPUT_PATTERN("MMM dd yyyy");
+    DATE_OUTPUT_PATTERN("MMM dd yyyy"),
+    DATE_STORAGE_OUTPUT_PATTERN("yyyy-MM-dd");
 
     public final String message;
 

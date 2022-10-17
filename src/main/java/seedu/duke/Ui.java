@@ -9,6 +9,7 @@ import static seedu.duke.common.InfoMessages.INFO_HELP_PROMPT;
 import java.util.Scanner;
 
 public class Ui {
+    //@@author chydarren
     private String input;
     private Scanner in;
 
@@ -26,6 +27,7 @@ public class Ui {
         System.out.println(INFO_DIVIDER);
     }
 
+    //@@author paullowse
     /**
      * Initialises the variables of the Ui class.
      */
@@ -43,6 +45,7 @@ public class Ui {
         return input;
     }
 
+    //@@author chydarren
     /**
      * Prepares the error message to be displayed to the user.
      *
@@ -68,6 +71,7 @@ public class Ui {
         printMessages(INFO_GREET.toString(), INFO_HELP_PROMPT.toString());
     }
 
+    //@@author chinhan99
     /**
      * Prepares the help messages to be displayed to the user.
      *
@@ -77,6 +81,7 @@ public class Ui {
         printMessages(INFO_HELP_GREET.toString(), helpMessage);
     }
 
+    //@@author chydarren
     /**
      * Prepares the exit message to be displayed to the user.
      */

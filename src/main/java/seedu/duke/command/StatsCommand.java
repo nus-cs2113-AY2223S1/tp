@@ -38,10 +38,12 @@ public class StatsCommand extends Command {
     public static final String COMMAND_DETAILED_HELP = COMMAND_HELP + COMMAND_PARAMETERS_INFO
             + LINE_SEPARATOR;
 
+    //@@author chydarren
     private static final Logger statsLogger = Logger.getLogger(StatsCommand.class.getName());
 
     private String statsType;
 
+    //@@author paullowse
     public StatsCommand() {
     }
 
@@ -56,6 +58,7 @@ public class StatsCommand extends Command {
         return mandatoryTags;
     }
 
+    //@@author chydarren
     /**
      * Executes the operations related to the command.
      *
@@ -116,6 +119,7 @@ public class StatsCommand extends Command {
         statsLogger.log(Level.INFO, "End of Stats command.");
     }
 
+    //@@author paullowse
     /**
      * Enables the program to exit when the Bye command is issued.
      *

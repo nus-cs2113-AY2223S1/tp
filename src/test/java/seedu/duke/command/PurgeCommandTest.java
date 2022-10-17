@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class PurgeCommandTest {
-
+    //@@author brian-vb
     @Test
     public void purge_IfEmpty_ReturnTrue() {
         TransactionList transactions = new TransactionList();

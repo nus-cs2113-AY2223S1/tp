@@ -3,27 +3,31 @@ package seedu.duke;
 import seedu.duke.command.Command;
 import seedu.duke.data.TransactionList;
 import seedu.duke.exception.MoolahException;
+import seedu.duke.exception.StorageWriteErrorException;
 import seedu.duke.parser.CommandParser;
 
+import java.io.IOException;
+
 public class Duke {
+    //@@author paullowse
     private Storage storage;
     private TransactionList transactions;
     private Ui ui;
 
+    //@@author chinhan99
     public Duke() { // TODO: Add a file path when implementing storage feature
         ui = new Ui();
-        transactions = new TransactionList();
 
-        // TODO: Ideal code after adding the storage feature
-        /**storage = new Storage(filePath);
+        storage = new Storage();
         try {
-            tasks = new TaskList(storage.load());
-        } catch (DukeException e) {
-            ui.showLoadingError();
-            tasks = new TaskList();
-        }**/
+            transactions = new TransactionList(storage.initializeFile());
+        } catch (MoolahException e) {
+            Ui.showErrorMessage(e.getMessage());
+            transactions = new TransactionList();
+        }
     }
 
+    //@@author paullowse
     public void run() {
         ui.showGreeting();
         boolean isExit = false;
@@ -36,6 +40,7 @@ public class Duke {
             } catch (MoolahException e) {
                 Ui.showErrorMessage(e.getMessage());
             }
+
         }
     }
 
