@@ -9,5 +9,6 @@ public enum Command {
     INVALID,
     UPDATE,
     AUTH,
-    LIST
+    LIST,
+    SEARCH
 }

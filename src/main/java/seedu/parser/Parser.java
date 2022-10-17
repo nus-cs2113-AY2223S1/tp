@@ -8,6 +8,7 @@ import seedu.exception.UnneededArgumentsException;
  */
 public class Parser {
     private static final String COMMAND_FIND = "find";
+    private static final String COMMAND_SEARCH = "search";
     private static final String COMMAND_EXIT = "exit";
     private static final String COMMAND_UPDATE = "update";
     private static final String COMMAND_AUTH = "auth";
@@ -15,6 +16,7 @@ public class Parser {
 
     /**
      * To convert the user input into commands for the program.
+     *
      * @param input User input
      * @return Command that user wants to do.
      */
@@ -45,7 +47,16 @@ public class Parser {
                 command = Command.AUTH;
                 break;
             case COMMAND_LIST:
+                if (hasCommandArgumentFlag) {
+                    throw new UnneededArgumentsException("list");
+                }
                 command = Command.LIST;
+                break;
+            case COMMAND_SEARCH:
+                if (!hasCommandArgumentFlag) {
+                    throw new NoCommandArgumentException("search");
+                }
+                command = Command.SEARCH;
                 break;
             default:
                 command = Command.INVALID;
@@ -57,11 +68,16 @@ public class Parser {
 
     /**
      * Check number of words in string and see if there are arguments.
+     *
      * @param input input string to check
      * @return If arguments are present, return true. If not, return false
      */
     public boolean hasCommandArguments(String input) {
         String[] words = input.trim().split("\\s+");
         return words.length > 1;
+    }
+
+    public static String[] splitCommandArgument(String input) {
+        return input.split("\\s+", 2);
     }
 }

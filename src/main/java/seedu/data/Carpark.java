@@ -1,6 +1,9 @@
 package seedu.data;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
+import seedu.parser.search.Sentence;
+import seedu.parser.search.Word;
 
 /**
  * Carpark class that represents a carpark and all the information stored in it.
@@ -13,6 +16,8 @@ public class Carpark {
     private String availableLots;
     private String lotType;
     private String agency;
+    @JsonIgnore
+    private Sentence developmentSentence;
 
     /**
      * Used to print the identifier for a carpark.
@@ -22,6 +27,19 @@ public class Carpark {
     @Override
     public String toString() {
         return String.format("CarparkID %s at %s: %s lots available", carparkId, development, availableLots);
+    }
+
+    /**
+     * Resets the bolding on every word in the {@link Carpark#developmentSentence} instance.
+     */
+    public void resetBold() {
+        for (Word word : developmentSentence.getWords()) {
+            word.makeBold(false);
+        }
+    }
+
+    public Sentence getDevelopmentSentence() {
+        return developmentSentence;
     }
 
     public String getCarparkId() {
@@ -49,6 +67,7 @@ public class Carpark {
     @JsonProperty("Development")
     public void setDevelopment(String development) {
         this.development = development;
+        developmentSentence = new Sentence(development);
     }
 
     public String getLocation() {
@@ -86,4 +105,5 @@ public class Carpark {
     public void setAgency(String agency) {
         this.agency = agency;
     }
+
 }

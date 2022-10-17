@@ -9,6 +9,7 @@ import java.util.Objects;
 import seedu.api.Api;
 import seedu.commands.Auth;
 import seedu.commands.Find;
+import seedu.commands.Search;
 import seedu.common.CommonFiles;
 import seedu.data.Carpark;
 import seedu.data.CarparkList;
@@ -17,6 +18,7 @@ import seedu.exception.NoCommandArgumentException;
 import seedu.exception.ParkingException;
 import seedu.parser.Command;
 import seedu.parser.Parser;
+import seedu.parser.search.Sentence;
 import seedu.ui.Ui;
 
 /**
@@ -108,6 +110,11 @@ public class Parking {
                 break;
             case LIST:
                 ui.print(carparkList.toString());
+                break;
+            case SEARCH:
+                Sentence searchQuery = new Sentence(Parser.splitCommandArgument(input)[1]);
+                ui.print(Search.runSearch(carparkList, searchQuery).getSearchListString());
+                carparkList.resetBoldForAllCarparks();
                 break;
             default:
                 ui.showInvalidCommandError();
