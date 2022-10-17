@@ -9,6 +9,35 @@ import seedu.duke.commands.Command;
 class DukeTest {
 
     @Test
+    public void testInvalidCommandWord() {
+        System.out.println("Running JUnit tests for exceptions in case of invalid command word");
+        String input = "ad m/cs2113 s/y1s1 mc/4 g/A+";
+        ModuleList modulelist = new ModuleList();
+        int initialCount = modulelist.getCount();
+        Command c = Parser.parse(input);
+        // Gets updated count in module list
+        int finalCount = modulelist.getCount();
+        // finalCount is supposed to be equal to initialCount since 1 module is not added due to exception
+        assertEquals(initialCount, finalCount);
+    }
+    @Test
+    public void testInvalidInputFormat() {
+        System.out.println("Running JUnit tests for exceptions in case of invalid input format");
+        String input = "add o/cs2113 s/y1s1 mc/4 g/A+";
+        ModuleList modulelist = new ModuleList();
+
+        //adding the module
+        int initialCount = modulelist.getCount();
+        Command c = Parser.parse(input);
+
+        // Gets updated count in module list
+        int finalCount = modulelist.getCount();
+
+        // finalCount is supposed to be equal to initialCount since 1 module is not added due to exception
+        assertEquals(initialCount, finalCount);
+    }
+
+    @Test
     public void testAdd() {
         System.out.println("Running JUnit Test for Add");
 
