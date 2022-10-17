@@ -77,8 +77,27 @@ _Written by: Author name_
 _Written by: Author name_
 
 ### Data Component 
+The data component is represented by a `data` package which consists of all the classes that is part of the data stored 
+by Moolah Manager. Within the `data` package, a transaction package and a transactionList class is stored. 
 
-_Written by: Author name_
+The `transactionList` class is a representation of a list of transactions, and the
+operations related to the `transactionList` such as CRUD are implemented within this class.
+
+Within the transaction package, the following classes are stored: 
+1. Transaction 
+2. Income 
+3. Expense
+4. Category
+
+The `Transaction` class is the abstract classes of an `Income` or an `Expense`. The `Category` represents a category of 
+a transaction. 
+
+A more detailed explaination on the implementation on the transactions can be viewed under Section
+[Implementation for Transaction](#implementation-for-transaction).
+
+
+
+_Written by: Chia Thin Hong_
 
 ### Storage Component 
 
