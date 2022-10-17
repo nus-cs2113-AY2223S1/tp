@@ -13,7 +13,7 @@ public class UserUniversityListTest {
     void exists() {
         testManager.createList("UCLA");
         testManager.createList("UCB");
-        assertEquals(true, testManager.foundKey("UCLA"));
+        assertEquals(true, testManager.foundKeyAll("UCLA"));
     }
 
 
@@ -101,5 +101,87 @@ public class UserUniversityListTest {
                 "Programming Methodology II", "4", "8", "UCB", "USA");
         testManager.addModule("UCB", mod2);
         testManager.displayAll();
+    }
+
+    @Test
+    void addFavourite_CorrectInput_CorrectOutput() throws InvalidUserCommandException {
+        testManager.createList("UCLA");
+        testManager.createList("UCB");
+        testManager.addFavourite("UCLA");
+        testManager.addFavourite("UCB");
+        assertEquals(2, testManager.getMyManager().size());
+        assertEquals(2, testManager.getMyFavourites().size());
+    }
+
+    @Test
+    void addFavourite_NoLists_throwException() {
+        assertThrows(InvalidUserCommandException.class, () -> testManager.addFavourite("UCLA"));
+    }
+
+    @Test
+    void addFavourite_duplicate_throwException() throws InvalidUserCommandException {
+        testManager.createList("UCLA");
+        testManager.addFavourite("UCLA");
+        assertThrows(InvalidUserCommandException.class, () -> testManager.addFavourite("UCLA"));
+    }
+
+    @Test
+    void removeFavourite_CorrectInput_CorrectOutput() throws InvalidUserCommandException {
+        testManager.createList("UCLA");
+        testManager.addFavourite("UCLA");
+        assertEquals(1, testManager.getMyFavourites().size());
+        testManager.deleteFavourite("UCLA");
+        assertEquals(0, testManager.getMyFavourites().size());
+    }
+
+    @Test
+    void removeFavourite_NoSuchLists_throwException() throws InvalidUserCommandException {
+        assertThrows(InvalidUserCommandException.class, () -> testManager.deleteFavourite("UCLA"));
+        testManager.createList("UCLA");
+        assertThrows(InvalidUserCommandException.class, () -> testManager.deleteFavourite("UCLA"));
+        testManager.addFavourite("UCLA");
+        testManager.deleteFavourite("UCLA");
+        assertThrows(InvalidUserCommandException.class, () -> testManager.deleteFavourite("UCLA"));
+    }
+
+    @Test
+    void addModule_Ucla_correctUpdatesOnFavourites() throws InvalidUserCommandException {
+        testManager.createList("UCLA");
+        testManager.addFavourite("UCLA");
+        assertEquals(0, testManager.getMyManager().get("UCLA").getMyModules().getModules().size());
+        assertEquals(0, testManager.getMyFavourites().get("UCLA").getMyModules().getModules().size());
+        UserModuleMapping mod = new UserModuleMapping("CS101", "Programming Intro", "CS1010",
+                "Programming Methodology", "4", "4", "UCLA", "USA");
+        testManager.addModule("UCLA", mod);
+        assertEquals(1, testManager.getMyManager().get("UCLA").getMyModules().getModules().size());
+        assertEquals(1, testManager.getMyFavourites().get("UCLA").getMyModules().getModules().size());
+    }
+
+    @Test
+    void deleteModule_Ucla_correctUpdatesOnFavourites() throws InvalidUserCommandException {
+        testManager.createList("UCLA");
+        testManager.addFavourite("UCLA");
+        UserModuleMapping mod = new UserModuleMapping("CS101", "Programming Intro", "CS1010",
+                "Programming Methodology", "4", "4", "UCLA", "USA");
+        UserModuleMapping mod2 = new UserModuleMapping("CS201", "Programming Intro II", "CS2030",
+                "Programming Methodology II ", "4", "4", "UCLA", "USA");
+        testManager.addModule("UCLA", mod);
+        testManager.addModule("UCLA", mod2);
+        assertEquals(2, testManager.getMyManager().get("UCLA").getMyModules().getModules().size());
+        assertEquals(2, testManager.getMyFavourites().get("UCLA").getMyModules().getModules().size());
+        testManager.deleteModule("UCLA", "CS201");
+        assertEquals(1, testManager.getMyManager().get("UCLA").getMyModules().getModules().size());
+        assertEquals(1, testManager.getMyFavourites().get("UCLA").getMyModules().getModules().size());
+        testManager.deleteFavourite("UCLA");
+        testManager.addModule("UCLA", mod2);
+        assertEquals(2, testManager.getMyManager().get("UCLA").getMyModules().getModules().size());
+    }
+
+    @Test
+    void deleteList_Ucla_correctUpdatesOnFavourites() throws InvalidUserCommandException {
+        testManager.createList("UCLA");
+        testManager.addFavourite("UCLA");
+        testManager.deleteList("UCLA");
+        assertEquals(0, testManager.getMyFavourites().size());
     }
 }
