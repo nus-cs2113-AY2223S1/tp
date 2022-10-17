@@ -37,7 +37,7 @@ public class AddCommand extends Command {
     @Override
     public void execute() throws IllegalValueException {
         String[] argumentList = Parser.getArgumentList(arguments);
-        String addType = Parser.getAddType(argumentList);
+        String addType = Parser.getClassType(argumentList);
         switch (addType) {
         case ("food"):
             addFood(argumentList);

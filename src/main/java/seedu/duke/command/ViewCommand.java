@@ -30,7 +30,7 @@ public class ViewCommand extends Command {
     @Override
     public void execute() throws IllegalValueException {
         String[] argumentList = Parser.getArgumentList(arguments);
-        String viewType = argumentList[0];
+        String viewType = Parser.getClassType(argumentList);
         switch (viewType) {
         case ("biometrics"):
             viewBiometrics();

@@ -23,9 +23,9 @@ public class Parser {
     private static Logger logger = Logger.getLogger("Parser");
 
     public static Command parse(String input) {
-        String userCommand = input.split(" ")[0];
+        String userCommand = getUserCommand(input);
         logger.log(Level.FINE, "command: " + userCommand);
-        String arguments = input.substring(userCommand.length()).trim();
+        String arguments = getArgumentSubString(input, userCommand);
         logger.log(Level.FINE, "arguments:" + arguments);
         switch (userCommand) {
         case "greet":
@@ -53,13 +53,22 @@ public class Parser {
         }
     }
 
+    private static String getUserCommand(String input) {
+        String userCommand = input.split(" ")[0];
+        return userCommand;
+    }
+
+    private static String getArgumentSubString(String input, String userCommand) {
+        return input.substring(userCommand.length()).trim();
+    }
+
     public static String[] getArgumentList(String arguments) {
         assert (arguments != null);
         String[] argumentList = arguments.split("\\s*/\\s*");
         return argumentList;
     }
 
-    public static String getAddType(String[] argumentList) {
+    public static String getClassType(String[] argumentList) {
         return argumentList[0];
     }
 }
