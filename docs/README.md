@@ -1,6 +1,5 @@
-# Duke
-
-{Give product intro here}
+# RecipEditor
+A command line application that allows you to manage your recipes 
 
 Useful links:
 * [User Guide](UserGuide.md)
