@@ -98,7 +98,7 @@ public class Api {
      * @throws EmptyResponseException if empty/invalid response received.
      * @throws UnauthorisedAccessApiException if access not granted.
      */
-    public void fetchData() throws EmptyResponseException, UnauthorisedAccessApiException, FileWriteException {
+    public String fetchData() throws EmptyResponseException, UnauthorisedAccessApiException, FileWriteException {
         String result = "";
         int fetchTries = FETCH_TRIES;
         do {
@@ -117,7 +117,7 @@ public class Api {
         if (fetchTries == 0 && result.isEmpty()) {
             throw new EmptyResponseException();
         }
-        storage.writeDataToFile(result);
+        return result;
     }
 
     /**
@@ -128,8 +128,20 @@ public class Api {
      * @throws UnauthorisedAccessApiException if access not granted.
      */
     public void syncFetchData() throws FileWriteException, EmptyResponseException, UnauthorisedAccessApiException {
-        asyncExecuteRequest(0);
-        fetchData();
+        int i = 0;
+        String result = "";
+        while (i <= 3000) {
+            asyncExecuteRequest(i);
+            String dataReceived = fetchData();
+            int dataCount = countDataSet(dataReceived);
+        }
+        storage.writeDataToFile(result);
+    }
+
+    public int countDataSet(String data) {
+        String[] dataSplit = data.split("\"value\":\\[",2);
+        int counter = dataSplit[1].;
+        return dataSplit.length;
     }
 
     /**
