@@ -46,6 +46,11 @@ public class ConsoleParserConfigurations {
     public static final String COMMAND_ADD_EXPENSE_ARG_REMARKS_DESC = "remarks";
     public static final boolean COMMAND_ADD_EXPENSE_ARG_REMARKS_HAS_VAL = true;
     public static final boolean COMMAND_ADD_EXPENSE_ARG_REMARKS_IS_MAND = false;
+    public static final String COMMAND_ADD_EXPENSE_ARG_CURRENCY = "x";
+    public static final String COMMAND_ADD_EXPENSE_ARG_CURRENCY_LONG = "currency";
+    public static final String COMMAND_ADD_EXPENSE_ARG_CURRENCY_DESC = "currency";
+    public static final boolean COMMAND_ADD_EXPENSE_ARG_CURRENCY_HAS_VAL = true;
+    public static final boolean COMMAND_ADD_EXPENSE_ARG_CURRENCY_IS_MAND = false;
     public static final String COMMAND_ADD_EXPENSE_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS = ""
             + "Command Add-Expense does not have all of the required options.";
 
@@ -117,6 +122,11 @@ public class ConsoleParserConfigurations {
     public static final String COMMAND_EDIT_EXPENSE_ARG_REMARKS_DESC = "Remarks";
     public static final boolean COMMAND_EDIT_EXPENSE_ARG_REMARKS_HAS_VAL = true;
     public static final boolean COMMAND_EDIT_EXPENSE_ARG_REMARKS_IS_MAND = false;
+    public static final String COMMAND_EDIT_EXPENSE_ARG_CURRENCY = "x";
+    public static final String COMMAND_EDIT_EXPENSE_ARG_CURRENCY_LONG = "currency";
+    public static final String COMMAND_EDIT_EXPENSE_ARG_CURRENCY_DESC = "currency";
+    public static final boolean COMMAND_EDIT_EXPENSE_ARG_CURRENCY_HAS_VAL = true;
+    public static final boolean COMMAND_EDIT_EXPENSE_ARG_CURRENCY_IS_MAND = false;
     public static final String COMMAND_EDIT_EXPENSE_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS = ""
             + "Command Edit-Expense does not have all of the required options.";
 
@@ -133,6 +143,7 @@ public class ConsoleParserConfigurations {
     public static final String COMMAND_SORT_EXPENSE_ARG_TYPE_VAL_ALPHABETICAL = "alphabetical";
     public static final String COMMAND_SORT_EXPENSE_ARG_TYPE_VAL_AMOUNT = "amount";
     public static final String COMMAND_SORT_EXPENSE_ARG_TYPE_VAL_DATE = "date";
+    public static final String COMMAND_SORT_EXPENSE_ARG_TYPE_VAL_CURRENCY = "currency";
     public static final String COMMAND_SORT_EXPENSE_ARG_ORDER = "o";
     public static final String COMMAND_SORT_EXPENSE_ARG_ORDER_LONG = "order";
     public static final String COMMAND_SORT_EXPENSE_ARG_ORDER_DESC = ""
@@ -141,6 +152,23 @@ public class ConsoleParserConfigurations {
     public static final boolean COMMAND_SORT_EXPENSE_ARG_ORDER_IS_MAND = true;
     public static final String COMMAND_SORT_EXPENSE_ARG_ORDER_VAL_ASCENDING = "ascending";
     public static final String COMMAND_SORT_EXPENSE_ARG_ORDER_VAL_DESCENDING = "descending";
+
+    /**
+     * Defines parameters for console command Convert-Currency.
+     */
+    public static final String COMMAND_CONVERT_CURRENCY = "Convert-Currency";
+    public static final String COMMAND_CONVERT_CURRENCY_ARG_EXPENSE_INDEX = "e";
+    public static final String COMMAND_CONVERT_CURRENCY_ARG_EXPENSE_INDEX_LONG = "expense-index";
+    public static final String COMMAND_CONVERT_CURRENCY_ARG_EXPENSE_INDEX_DESC = "Index";
+    public static final boolean COMMAND_CONVERT_CURRENCY_ARG_EXPENSE_INDEX_HAS_VAL = true;
+    public static final boolean COMMAND_CONVERT_CURRENCY_ARG_EXPENSE_INDEX_IS_MAND = true;
+    public static final String COMMAND_CONVERT_CURRENCY_ARG_CURRENCY = "x";
+    public static final String COMMAND_CONVERT_CURRENCY_ARG_CURRENCY_LONG = "currency";
+    public static final String COMMAND_CONVERT_CURRENCY_ARG_CURRENCY_DESC = "currency";
+    public static final boolean COMMAND_CONVERT_CURRENCY_ARG_CURRENCY_HAS_VAL = true;
+    public static final boolean COMMAND_CONVERT_CURRENCY_ARG_CURRENCY_IS_MAND = true;
+    public static final String COMMAND_CONVERT_CURRENCY_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS = ""
+            + "Command Convert-Currency does not have all of the required options.";
 
     /**
      * Defines parameters for console command Add-Target.
@@ -290,6 +318,13 @@ public class ConsoleParserConfigurations {
                 COMMAND_ADD_EXPENSE_ARG_REMARKS_DESC
         );
         optionRemarks.setRequired(COMMAND_ADD_EXPENSE_ARG_REMARKS_IS_MAND);
+        Option optionCurrency = new Option(
+                COMMAND_ADD_EXPENSE_ARG_CURRENCY,
+                COMMAND_ADD_EXPENSE_ARG_CURRENCY_LONG,
+                COMMAND_ADD_EXPENSE_ARG_CURRENCY_HAS_VAL,
+                COMMAND_ADD_EXPENSE_ARG_CURRENCY_DESC
+        );
+        optionCurrency.setRequired(COMMAND_ADD_EXPENSE_ARG_CURRENCY_IS_MAND);
 
         Options options = new Options();
         options.addOption(optionName);
@@ -298,6 +333,7 @@ public class ConsoleParserConfigurations {
         options.addOption(optionDescription);
         options.addOption(optionCategory);
         options.addOption(optionRemarks);
+        options.addOption(optionCurrency);
 
         return options;
     }
@@ -405,6 +441,13 @@ public class ConsoleParserConfigurations {
                 COMMAND_EDIT_EXPENSE_ARG_REMARKS_DESC
         );
         optionRemarks.setRequired(COMMAND_EDIT_EXPENSE_ARG_REMARKS_IS_MAND);
+        Option optionCurrency = new Option(
+                COMMAND_EDIT_EXPENSE_ARG_CURRENCY,
+                COMMAND_EDIT_EXPENSE_ARG_CURRENCY_LONG,
+                COMMAND_EDIT_EXPENSE_ARG_CURRENCY_HAS_VAL,
+                COMMAND_EDIT_EXPENSE_ARG_CURRENCY_DESC
+        );
+        optionCurrency.setRequired(COMMAND_EDIT_EXPENSE_ARG_CURRENCY_IS_MAND);
 
         Options options = new Options();
         options.addOption(optionExpenseIndex);
@@ -414,6 +457,7 @@ public class ConsoleParserConfigurations {
         options.addOption(optionAmount);
         options.addOption(optionCategory);
         options.addOption(optionRemarks);
+        options.addOption(optionCurrency);
 
         return options;
     }
@@ -442,6 +486,34 @@ public class ConsoleParserConfigurations {
         Options options = new Options();
         options.addOption(optionType);
         options.addOption(optionOrder);
+
+        return options;
+    }
+
+    /**
+     * Generates an {@link Options} object with required arguments for command Change-Currency.
+     *
+     * @return {@link Options} object initialized with the required arguments.
+     */
+    public static Options getCommandConvertCurrencyOptions() {
+        Option optionExpenseIndex = new Option(
+                COMMAND_CONVERT_CURRENCY_ARG_EXPENSE_INDEX,
+                COMMAND_CONVERT_CURRENCY_ARG_EXPENSE_INDEX_LONG,
+                COMMAND_CONVERT_CURRENCY_ARG_EXPENSE_INDEX_HAS_VAL,
+                COMMAND_CONVERT_CURRENCY_ARG_EXPENSE_INDEX_DESC
+        );
+        optionExpenseIndex.setRequired(COMMAND_CONVERT_CURRENCY_ARG_EXPENSE_INDEX_IS_MAND);
+        Option optionCurrency = new Option(
+                COMMAND_CONVERT_CURRENCY_ARG_CURRENCY,
+                COMMAND_CONVERT_CURRENCY_ARG_CURRENCY_LONG,
+                COMMAND_CONVERT_CURRENCY_ARG_CURRENCY_HAS_VAL,
+                COMMAND_CONVERT_CURRENCY_ARG_CURRENCY_DESC
+        );
+        optionCurrency.setRequired(COMMAND_CONVERT_CURRENCY_ARG_CURRENCY_IS_MAND);
+
+        Options options = new Options();
+        options.addOption(optionExpenseIndex);
+        options.addOption(optionCurrency);
 
         return options;
     }
