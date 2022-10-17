@@ -26,6 +26,8 @@ public class HelpCommand extends Command {
     private static final String COMMAND_FIND_UNFINISHED_TX = "find-tx /s unfinished";
     private static final String COMMAND_SORT_ITEM = "sort-items /mo <mode: hl or  lh> /mi <min> /ma <max>";
     private static final String COMMAND_LIST_CATEGORIES = "list-categories";
+    private static final String COMMAND_FIND_USER = "find-user /k <keyword>";
+    private static final String COMMAND_FIND_ITEM = "find-item /k <keyword>";
     private static final Map<String, String> commandToDetailMap = Map.ofEntries(
             Map.entry("List all commands", COMMAND_HELP),
             Map.entry("List all users", COMMAND_LIST_USERS),
@@ -43,7 +45,9 @@ public class HelpCommand extends Command {
             Map.entry("Find all finished transactions", COMMAND_FIND_FINISHED_TX),
             Map.entry("Find all unfinished transactions", COMMAND_FIND_UNFINISHED_TX),
             Map.entry("Sort all items in a range", COMMAND_SORT_ITEM),
-            Map.entry("List all categories available", COMMAND_LIST_CATEGORIES)
+            Map.entry("List all categories available", COMMAND_LIST_CATEGORIES),
+            Map.entry("Find user by keywords", COMMAND_FIND_USER),
+            Map.entry("Find item by keywords", COMMAND_FIND_ITEM)
     );
 
     /**

@@ -18,6 +18,14 @@ public class Item {
         this.category = Category.mapCategory(categoryNumber);
     }
 
+    public Item(String itemId, String name, int categoryNumber, double price, String ownerId) {
+        this.itemId = itemId;
+        this.name = name;
+        this.pricePerDay = price;
+        this.ownerId = ownerId;
+        this.category = Category.mapCategory(categoryNumber);
+    }
+
     public String getOwnerId() {
         return ownerId;
     }
@@ -39,10 +47,6 @@ public class Item {
                 this.ownerId);
     }
 
-    public Category.Categories getCategory() {
-        return category;
-    }
-
     public boolean isAvailable(TransactionList transactionList) {
         return !transactionList.hasThisItemBeingBorrowed(itemId);
     }
@@ -60,5 +64,11 @@ public class Item {
         String itemOwner = "Owner: " + getOwnerId() + " ";
         String itemPrice = "PricePerDay: $" + pricePerDay;
         return itemIcon + itemId + itemName + itemCategory + itemOwner + itemPrice;
+    }
+
+    public String convertItemToFileFormat() {
+        String separator = " | ";
+        return itemId + separator + name + separator + pricePerDay + separator + ownerId
+                + separator + Category.setCategory(category);
     }
 }

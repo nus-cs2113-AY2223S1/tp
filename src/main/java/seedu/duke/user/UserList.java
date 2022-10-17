@@ -81,4 +81,12 @@ public class UserList {
         }
         return String.valueOf(listString);
     }
+
+    public String convertUserListToFileFormat() {
+        StringBuilder formattedString = new StringBuilder();
+        for (User user : userList) {
+            formattedString.append(user.convertItemToFileFormat()).append('\n');
+        }
+        return formattedString.toString();
+    }
 }

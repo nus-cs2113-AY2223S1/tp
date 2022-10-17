@@ -1,9 +1,13 @@
 package seedu.duke;
 
+import seedu.duke.exception.ItemFileNotFoundException;
 import seedu.duke.exception.StoreFailureException;
 import seedu.duke.exception.TransactionFileNotFoundException;
+import seedu.duke.exception.UserFileNotFoundException;
 import seedu.duke.item.ItemList;
+import seedu.duke.storage.ItemStorage;
 import seedu.duke.storage.TransactionStorage;
+import seedu.duke.storage.UserStorage;
 import seedu.duke.transaction.TransactionList;
 import seedu.duke.command.Command;
 import seedu.duke.parser.CommandParser;
@@ -18,10 +22,12 @@ import static seedu.duke.storage.FilePath.USER_FILE_PATH;
  * A chatbot named Duke.
  */
 public class Duke {
-    private final UserList userList;
-    private final ItemList itemList;
+    private UserList userList;
+    private ItemList itemList;
     private TransactionList transactionList;
     private final TransactionStorage transactionStorage;
+    private final ItemStorage itemStorage;
+    private final UserStorage userStorage;
     private boolean isLastCommand = false;
 
     /**
@@ -33,13 +39,12 @@ public class Duke {
      */
     public Duke(String userFilePath, String itemFilePath, String transactionFilePath) {
         userList = new UserList();
-        itemList = new ItemList();
-        // userStorage = new UserStorage(userFilePath);
-        // itemStorage = new ItemStorage(itemFilePath);
+        userStorage = new UserStorage(userFilePath);
+        itemStorage = new ItemStorage(itemFilePath);
         transactionStorage = new TransactionStorage(transactionFilePath);
-        // initializeItemList();
-        // initializeUserList();
+        initializeUserList();
         initializeTransactionList();
+        initializeItemList();
     }
 
     /**
@@ -53,6 +58,22 @@ public class Duke {
         }
     }
 
+    private void initializeItemList() {
+        try {
+            this.itemList = new ItemList(itemStorage.loadData());
+        } catch (ItemFileNotFoundException e) {
+            this.itemList = new ItemList();
+        }
+    }
+
+    private void initializeUserList() {
+        try {
+            this.userList = new UserList(userStorage.loadData());
+        } catch (UserFileNotFoundException e) {
+            this.userList = new UserList();
+        }
+    }
+
     /**
      * Writes data in 3 list to files.
      *
@@ -61,8 +82,8 @@ public class Duke {
      */
     private void writeDataToFile(boolean isLastCommand) throws StoreFailureException {
         if (isLastCommand) {
-            // userStorage.writeData(userList)
-            // itemStorage.writeData(itemList)
+            userStorage.writeData(userList);
+            itemStorage.writeData(itemList);
             transactionStorage.writeData(transactionList);
         }
     }

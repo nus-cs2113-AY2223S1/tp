@@ -2,6 +2,7 @@ package seedu.duke.item;
 
 import seedu.duke.exception.InvalidItemException;
 import seedu.duke.exception.ItemNotFoundException;
+import seedu.duke.transaction.Transaction;
 import seedu.duke.transaction.TransactionList;
 
 import java.util.ArrayList;
@@ -15,6 +16,10 @@ public class ItemList {
     public ItemList() { // store files from data.txt
         // this.itemList = fileItems;
         this.itemList = new ArrayList<>();
+    }
+
+    public ItemList(ArrayList<Item> itemList) {
+        this.itemList = itemList;
     }
 
     /**
@@ -98,8 +103,7 @@ public class ItemList {
     }
 
     public void deleteAllItemOfAnUser(String username, TransactionList transactionList) {
-        itemList.removeIf(
-                item -> item.getOwnerId().equals(username) && item.isAvailable(transactionList));
+        itemList.removeIf(item -> item.getOwnerId().equals(username) && item.isAvailable(transactionList));
     }
 
     public String toString(TransactionList transactionList) {
@@ -115,5 +119,13 @@ public class ItemList {
                     .append(item.toString(transactionList));
         }
         return String.valueOf(listString);
+    }
+
+    public String convertItemListToFileFormat() {
+        StringBuilder formattedString = new StringBuilder();
+        for (Item item : itemList) {
+            formattedString.append(item.convertItemToFileFormat()).append('\n');
+        }
+        return formattedString.toString();
     }
 }
