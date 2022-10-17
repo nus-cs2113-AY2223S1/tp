@@ -6,34 +6,74 @@ import java.util.ArrayList;
 
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_USER_NOT_FOUND;
 
+/**
+ * A representation of a list of User.
+ */
 public class UserList {
     protected ArrayList<User> userList;
 
+    /**
+     * Constructor for UserList.
+     *
+     * @param userList the list of users from the stored file
+     */
     public UserList(ArrayList<User> userList) {
         this.userList = userList;
     }
 
+    /**
+     * Constructor for UserList.
+     */
     public UserList() {
         this.userList = new ArrayList<>();
     }
 
+    /**
+     * Adds a new user to the list.
+     *
+     * @param toAdd the user to be added
+     */
     public void addUser(User toAdd) {
         userList.add(toAdd);
     }
 
+    /**
+     * Removes a user from the list.
+     *
+     * @param userName name of the user to be removed
+     * @throws UserNotFoundException if user is not found
+     */
     public void deleteUser(String userName) throws UserNotFoundException {
         User user = getUserById(userName);
         userList.remove(user);
     }
 
+    /**
+     * Gets the size of user list.
+     *
+     * @return the size of user list
+     */
     public int getSize() {
         return userList.size();
     }
 
+    /**
+     * Gets the user based on index specified.
+     *
+     * @param index of user
+     * @return the user with the corresponding index
+     */
     public User getUser(int index) {
         return userList.get(index - 1);
     }
 
+    /**
+     * Get user by name.
+     *
+     * @param userName name of the user
+     * @return the user with the corresponding name
+     * @throws UserNotFoundException if user is not found
+     */
     public User getUserById(String userName) throws UserNotFoundException {
         for (User user : userList) {
             if (user.getName().equals(userName)) {
