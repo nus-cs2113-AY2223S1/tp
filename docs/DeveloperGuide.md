@@ -43,7 +43,6 @@ The following sequence diagram shows how the viewTransactionsByStatus operation 
 |v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
 |v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
 
-## Implementation
 
 Feature: Find Item/ User by keyword.
 
@@ -68,9 +67,9 @@ Given below is an example usage scenario and how the FindItem mechanism works at
 
 Figure: ItemList Object Diagram
 
-The user enters the following command: “find-item /k Book”. In this case, the keyword is book. The entire ItemList is iterated through, and an ItemList containing all of the Items which contain the keyword is returned. 3 Items contain the keyword “Book”, hence these 3 items are returned by the function ItemList.getItemsByKeyword. This ItemList is then converted to a String via the method ItemList.toString, and printed by Ui.printResponse so that the user is able to see all the matching Items. The control flow is shown below.
+The user enters the following command: “find-item /k Book”. In this case, the keyword is book. The entire ItemList is iterated through, and an ItemList containing all of the Items which contain the keyword is returned. 3 Items contain the keyword “Book”, hence these 3 items are returned by the function ItemList.getItemsByKeyword. This ItemList is then converted to a String via the method ItemList.toString, and printed by Ui.printResponse so that the user is able to see all the matching Items. The sequence diagram is shown below.
 
-Figure: Class Level Diagram
+Figure: FindItem Sequence Diagram
 
 
 ## Non-Functional Requirements
