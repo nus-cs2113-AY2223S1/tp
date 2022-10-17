@@ -53,7 +53,7 @@ public class UiTest {
                 + "     " + "view      " + "/view LISTS                             "
                 + "Displays all existing university lists that have been created by the user\n"
                 + "     " + "view      " + "/view u/UNIVERSITY                      "
-                + "Displays all modules that have been added to the user's input university’s list in the format\n"
+                + "Displays all modules that have been added to the user's input university's list in the format\n"
                 + "                                                       "
                 + "[Home University Module Code] [Home University Module Title] | "
                 + "[Partner University Module Code] [Partner University Module Title] | [Equivalent NUS Credits]\n"
