@@ -30,7 +30,7 @@ public class Media {
      * @return Formatted media review
      */
     public String toString() {
-        return this.title + "Rating: " + this.rating + "Genre: ";
+        return this.title + " Rating:" + this.rating + " Genre:" + this.genre;
     }
 
 }

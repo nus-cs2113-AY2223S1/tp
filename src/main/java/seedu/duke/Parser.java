@@ -97,14 +97,7 @@ public class Parser {
     public void executeAdd(String userInput) {
         String[] fields = userInput.split("/");
         try {
-            if (!userInput.contains(movieKeyword)
-                    || !userInput.contains(tvKeyword)
-                    || !userInput.contains(ratingKeyword)
-                    || !userInput.contains(dateKeyword)
-                    || !userInput.contains(genreKeyword)
-            ) {
-                throw new Exception();
-            } else if (userInput.contains(movieKeyword)) {
+            if (userInput.contains(movieKeyword)) {
                 addMedia(fields, movieSpacing);
             } else {
                 addMedia(fields, tvSpacing);

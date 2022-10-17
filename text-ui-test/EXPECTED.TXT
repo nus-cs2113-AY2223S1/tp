@@ -6,9 +6,9 @@ Welcome to your Movie Reviews bot,
 |____/ \__,_|_|\_\___|
 
 	Got it. I've added the following item to the list:
-	[Movie]  inception Rating: 99.5 Date watched:  2 sep 22
+    	[Movie] Inception  Rating:4.0 Genre: Thriller Date watched: 5 Sep 22
 
-	Now you have 1 reviews in the list.
+    	Now you have 1 reviews in the list.
 
 ---------------
 See you again!
