@@ -1,0 +1,74 @@
+@startuml
+!include Style.puml
+class Category{
+
+}
+
+class CategoryList{
+
+}
+
+class TransactionList {
+    + TransactionList()
+    + TransactionList(TransactionList)
+    + getEntry(int) : Transaction
+    + size() : int
+    + addExpense(description:String, amount:int,
+              category:String, date:LocalDate) : String
+    + addIncome(description:String, amount:int,
+              category:String, date:LocalDate) : String
+    + listTransactions(type: String, category:String,
+              date:LocalDate) : String
+    + findTransaction(String) : String
+    + deleteTransaction(int) : String
+    + purgeTransactions()
+}
+
+class "Transaction {abstract}"{
+    - category: String
+    - description: String
+    - amount: int
+    - date: LocalDate
+    + Transaction(description:String, amount:int,
+          category:String, date:LocalDate)
+    + getType() : String {abstract}
+    + getDescription() : String
+    + setDescription(String)
+    + getAmount() : int
+    + setAmount(int)
+    + getCategory() : String
+    + setCategory(String)
+    + getDate() : LocalDate
+    + setDate(LocalDate)
+    + printFormattedDate() : String
+    + printFormattedCategory() : String
+    + toString() : String
+}
+
+class Income {
+    + TRANSACTION_NAME: String = "income"{static}
+    + ICON_INCOME: String = "[+]" {static}
+    + Income(description:String, amount:int,
+              category:String, date:LocalDate)
+      getType() : String
+      getIcon() : String
+      toString() : String
+}
+
+class Expense {
+    + TRANSACTION_NAME: String = "expense"{static}
+    + ICON_INCOME: String = "[-]" {static}
+    + Expense(description:String, amount:int,
+              category:String, date:LocalDate)
+      getType() : String
+      getIcon() : String
+      toString() : String
+}
+
+
+Income -up-|> "Transaction {abstract}"
+Expense -up-|> "Transaction {abstract}"
+
+TransactionList -> "*" "Transaction {abstract}" : contains >
+
+@enduml

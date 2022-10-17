@@ -81,7 +81,7 @@ The data component is represented by a `data` package which consists of all the 
 by Moolah Manager. Within the `data` package, a transaction package and a transactionList class is stored. 
 
 The `transactionList` class is a representation of a list of transactions, and the
-operations related to the `transactionList` such as CRUD are implemented within this class.
+operations related to the `transactionList` implemented within this class.
 
 Within the transaction package, the following classes are stored: 
 1. Transaction 
@@ -89,8 +89,16 @@ Within the transaction package, the following classes are stored:
 3. Expense
 4. Category
 
+The structure of the data component in Moolah Manager is illustrated in the class diagram below:
+![Data Component Class Diagram](images/DataComponentClassDiagram.png)
+
+From the class diagram, it can be seen that the transactionList mainly contain methods for CRUD operations to the list, 
+such as getting, adding, editing, deleting and purging of transaction(s) from the list.
+
 The `Transaction` class is the abstract classes of an `Income` or an `Expense`. The `Category` represents a category of 
-a transaction. 
+a transaction. Within the transaction class and its subclasses, getters and setters are used to access the private 
+variables. These classes override the toString() method for a self-defined print format when the transactions are 
+displayed.
 
 A more detailed explaination on the implementation on the transactions can be viewed under Section
 [Implementation for Transaction](#implementation-for-transaction).
