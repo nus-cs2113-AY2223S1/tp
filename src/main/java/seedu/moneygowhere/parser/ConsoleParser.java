@@ -13,6 +13,7 @@ import seedu.moneygowhere.commands.ConsoleCommandAddIncome;
 import seedu.moneygowhere.commands.ConsoleCommandAddRecurringPayment;
 import seedu.moneygowhere.commands.ConsoleCommandAddTarget;
 import seedu.moneygowhere.commands.ConsoleCommandBye;
+import seedu.moneygowhere.commands.ConsoleCommandConvertCurrency;
 import seedu.moneygowhere.commands.ConsoleCommandDeleteExpense;
 import seedu.moneygowhere.commands.ConsoleCommandEditExpense;
 import seedu.moneygowhere.commands.ConsoleCommandSortExpense;
@@ -20,14 +21,15 @@ import seedu.moneygowhere.commands.ConsoleCommandViewExpense;
 import seedu.moneygowhere.commands.ConsoleCommandViewRecurringPayment;
 import seedu.moneygowhere.common.Configurations;
 import seedu.moneygowhere.common.Messages;
-import seedu.moneygowhere.exceptions.ConsoleParserCommandAddExpenseInvalidException;
-import seedu.moneygowhere.exceptions.ConsoleParserCommandAddIncomeInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandAddRecurringPaymentInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandAddTargetInvalidException;
+import seedu.moneygowhere.exceptions.ConsoleParserCommandConvertCurrencyInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandDeleteExpenseInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandEditExpenseInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandNotFoundException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandSortExpenseInvalidTypeException;
+import seedu.moneygowhere.exceptions.ConsoleParserCommandAddExpenseInvalidException;
+import seedu.moneygowhere.exceptions.ConsoleParserCommandAddIncomeInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandViewExpenseInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandViewRecurringPaymentInvalidException;
 
@@ -74,7 +76,9 @@ public class ConsoleParser {
                     && cliOptions.hasLongOption(
                     ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_CATEGORY_LONG)
                     && cliOptions.hasLongOption(
-                    ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_REMARKS_LONG);
+                    ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_REMARKS_LONG)
+                    && cliOptions.hasLongOption(
+                    ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_CURRENCY_LONG);
 
             assert hasAllCliOptions :
                     ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS;
@@ -107,6 +111,10 @@ public class ConsoleParser {
             String remarks = cli.getOptionValue(
                     ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_REMARKS_LONG
             );
+            String currencyStr = cli.getOptionValue(
+                    ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_CURRENCY_LONG
+            );
+
 
             /* Parses and normalizes arguments */
 
@@ -122,6 +130,13 @@ public class ConsoleParser {
                 );
             }
 
+            String currency;
+            if (currencyStr == null) {
+                currency = "SGD";
+            } else {
+                currency = currencyStr.toUpperCase();
+            }
+
             /* Returns parsed arguments */
 
             return new ConsoleCommandAddExpense(
@@ -130,7 +145,8 @@ public class ConsoleParser {
                     description,
                     amount,
                     category,
-                    remarks
+                    remarks,
+                    currency
             );
         } catch (ParseException
                  | DateTimeParseException
@@ -258,7 +274,9 @@ public class ConsoleParser {
                     && cliOptions.hasLongOption(
                     ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_CATEGORY_LONG)
                     && cliOptions.hasLongOption(
-                    ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_REMARKS_LONG);
+                    ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_REMARKS_LONG)
+                    && cliOptions.hasLongOption(
+                    ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_CURRENCY_LONG);
             assert hasAllCliOptions :
                     ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS;
 
@@ -293,6 +311,9 @@ public class ConsoleParser {
             String remarks = cli.getOptionValue(
                     ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_REMARKS_LONG
             );
+            String currency = cli.getOptionValue(
+                    ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_CURRENCY_LONG
+            );
 
             /* Parses and normalizes arguments */
 
@@ -324,7 +345,8 @@ public class ConsoleParser {
                     description,
                     amount,
                     category,
-                    remarks);
+                    remarks,
+                    currency);
         } catch (ParseException
                  | DateTimeParseException
                  | NumberFormatException
@@ -366,7 +388,9 @@ public class ConsoleParser {
                             || type.equalsIgnoreCase(
                             ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE_VAL_AMOUNT)
                             || type.equalsIgnoreCase(
-                            ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE_VAL_DATE))) {
+                            ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE_VAL_DATE)
+                            || type.equalsIgnoreCase(
+                            ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE_VAL_CURRENCY))) {
                 throw new ConsoleParserCommandSortExpenseInvalidTypeException();
             }
 
@@ -389,6 +413,56 @@ public class ConsoleParser {
                  | RuntimeException exception) {
             throw new ConsoleParserCommandSortExpenseInvalidTypeException(
                     Messages.CONSOLE_ERROR_COMMAND_SORT_EXPENSE_INVALID,
+                    exception
+            );
+        }
+    }
+
+    private static ConsoleCommandConvertCurrency parseCommandConvertCurrency(String arguments)
+            throws ConsoleParserCommandConvertCurrencyInvalidException {
+        try {
+            String[] argumentsArr = tokenizeCommandArguments(arguments);
+
+            Options cliOptions = ConsoleParserConfigurations.getCommandConvertCurrencyOptions();
+
+            /* Checks if all options are added */
+
+            boolean hasAllCliOptions = cliOptions.hasLongOption(
+                    ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY_ARG_EXPENSE_INDEX_LONG)
+                    && cliOptions.hasLongOption(
+                    ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY_ARG_CURRENCY_LONG);
+            assert hasAllCliOptions :
+                    ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS;
+
+            CommandLineParser cliParser = new DefaultParser();
+            CommandLine cli = cliParser.parse(cliOptions, argumentsArr);
+
+            String expenseIndexStr = cli.getOptionValue(
+                    ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY_ARG_EXPENSE_INDEX_LONG
+            );
+            String currency = cli.getOptionValue(
+                    ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY_ARG_CURRENCY_LONG
+            );
+
+            /* Checks if mandatory arguments are provided */
+
+            if (expenseIndexStr == null || currency == null) {
+                throw new ConsoleParserCommandConvertCurrencyInvalidException();
+            }
+
+            /* Parses and normalizes arguments */
+
+            int expenseIndex = Integer.parseInt(expenseIndexStr);
+            currency = currency.toUpperCase();
+
+            /* Returns parsed arguments */
+
+            return new ConsoleCommandConvertCurrency(expenseIndex, currency);
+        } catch (ParseException
+                 | NumberFormatException
+                 | ConsoleParserCommandConvertCurrencyInvalidException exception) {
+            throw new ConsoleParserCommandConvertCurrencyInvalidException(
+                    Messages.CONSOLE_ERROR_COMMAND_CONVERT_CURRENCY_INVALID,
                     exception
             );
         }
@@ -644,6 +718,7 @@ public class ConsoleParser {
      * @throws ConsoleParserCommandDeleteExpenseInvalidException   If the command delete-expense is invalid.
      * @throws ConsoleParserCommandEditExpenseInvalidException     If the command edit-expense is invalid.
      * @throws ConsoleParserCommandSortExpenseInvalidTypeException If the command sort-expense is invalid.
+     * @throws ConsoleParserCommandConvertCurrencyInvalidException If the command convert-currency is invalid.
      * @throws ConsoleParserCommandAddTargetInvalidException       If the command add-target is invalid.
      * @throws ConsoleParserCommandAddIncomeInvalidException       If the command add-income is invalid.
      */
@@ -654,6 +729,7 @@ public class ConsoleParser {
             ConsoleParserCommandDeleteExpenseInvalidException,
             ConsoleParserCommandEditExpenseInvalidException,
             ConsoleParserCommandSortExpenseInvalidTypeException,
+            ConsoleParserCommandConvertCurrencyInvalidException,
             ConsoleParserCommandAddTargetInvalidException,
             ConsoleParserCommandAddIncomeInvalidException,
             ConsoleParserCommandAddRecurringPaymentInvalidException,
@@ -681,6 +757,8 @@ public class ConsoleParser {
             return parseCommandAddRecurringPayment(arguments);
         } else if (command.equalsIgnoreCase(ConsoleParserConfigurations.COMMAND_VIEW_RECURRING_PAYMENT)) {
             return parseCommandViewRecurringPayment(arguments);
+        } else if (command.equalsIgnoreCase(ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY)) {
+            return parseCommandConvertCurrency(arguments);
         } else {
             throw new ConsoleParserCommandNotFoundException(Messages.CONSOLE_ERROR_COMMAND_NOT_FOUND);
         }

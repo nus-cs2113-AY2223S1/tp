@@ -72,7 +72,7 @@ public class LocalStorage {
 
     private static Expense createExpense(String textFromFile) throws LocalStorageLoadDataInputError {
         String[] splitInputs = textFromFile.split(DIVIDER);
-        if (splitInputs.length != 6) {
+        if (splitInputs.length != 7) {
             throw new LocalStorageLoadDataInputError();
         }
         String name = splitInputs[0];
@@ -81,7 +81,8 @@ public class LocalStorage {
         BigDecimal amount = new BigDecimal(splitInputs[3]);
         String category = splitInputs[4];
         String remarks = splitInputs[5];
-        return new Expense(name, dateTime, description, amount, category, remarks);
+        String currency = splitInputs[6];
+        return new Expense(name, dateTime, description, amount, category, remarks, currency);
     }
 
     /**
@@ -125,7 +126,8 @@ public class LocalStorage {
                             + expense.getDescription() + DIVIDER
                             + expense.getAmount() + DIVIDER
                             + expense.getCategory() + DIVIDER
-                            + expense.getRemarks()
+                            + expense.getRemarks() + DIVIDER
+                            + expense.getCurrency()
             );
         }
         return textData;
