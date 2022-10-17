@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 import static seedu.duke.common.DateFormats.DATE_OUTPUT_PATTERN;
 
-public class Transaction {
+public abstract class Transaction {
     //@@author chydarren
     private static final String PREFIX_CATEGORY = "[";
     private static final String POSTFIX_CATEGORY = "]";
