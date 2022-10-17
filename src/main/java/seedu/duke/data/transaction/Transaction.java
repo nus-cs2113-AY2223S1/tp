@@ -27,9 +27,7 @@ public abstract class Transaction {
         this.date = date;
     }
 
-    public String getType() {
-        return null;
-    }
+    public abstract String getType();
 
     public String getDescription() {
         return description;
@@ -57,6 +55,10 @@ public abstract class Transaction {
 
     public LocalDate getDate() {
         return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
     //@@author wcwy
