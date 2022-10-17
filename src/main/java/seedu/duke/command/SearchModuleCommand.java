@@ -13,8 +13,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class SearchModuleCommand extends Command {
-    public static final String FORMAT = "search /code [MODULE_CODE] /title [MODULE_TITLE] "
-            + "/level [LEVEL] /sem [SEMESTER]";
     public static final String COMMAND_WORD = "search";
 
     // private String toSearchModuleCode;
@@ -70,10 +68,8 @@ public class SearchModuleCommand extends Command {
      * @return true if module level matches input level
      */
     static boolean isSameModuleLevel(Module module, String level) {
-        // get the first int embedded in the module code
-        String moduleCode = module.moduleCode;
-        int moduleLevel = (Integer.parseInt(moduleCode.replaceAll("[^0-9]", ""))) / 1000;
-
+        // get the first integer embedded in the module code
+        int moduleLevel = module.getModuleLevel(module);
         return level.equals(Integer.toString(moduleLevel));
     }
 
