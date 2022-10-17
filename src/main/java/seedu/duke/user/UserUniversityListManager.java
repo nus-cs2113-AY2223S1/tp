@@ -18,11 +18,13 @@ public class UserUniversityListManager {
 
     // we store the key as the PU name
     private HashMap<String, UserUniversityList> myManager;
+    private HashMap<String, UserUniversityList> myFavourites;
 
     private static Logger logger = Logger.getLogger("UniversityListManagerLogger");
 
     public UserUniversityListManager() {
         myManager = new HashMap<String, UserUniversityList>();
+        myFavourites = new HashMap<String, UserUniversityList>();
     }
 
     public UserUniversityListManager(String fileContent) {
@@ -66,6 +68,20 @@ public class UserUniversityListManager {
     }
 
     /**
+     * Method to print all the favourite lists of the user
+     * For each university, method first prints the university name
+     * Method then prints all the modules user has saved for that particular university
+     */
+    public void displayFavourites() {
+        for (Map.Entry<String, UserUniversityList> set : myFavourites.entrySet()) {
+            String universityName = set.getKey();
+            UserUniversityList universityList = set.getValue();
+            System.out.println(universityName);
+            universityList.displayModules();
+        }
+    }
+
+    /**
      * Method to print exactly the modules saved by user for a given university name.
      * @param input The partner university name
      * @throws InvalidUserCommandException If input is not a valid university name
@@ -77,8 +93,12 @@ public class UserUniversityListManager {
         myUniversityList.displayModules();
     }
 
-    public boolean foundKey(String inputSchool) {
+    public boolean foundKeyAll(String inputSchool) {
         return myManager.containsKey(inputSchool);
+    }
+
+    public boolean foundKeyFavourites(String inputSchool) {
+        return myFavourites.containsKey(inputSchool);
     }
 
     public void addModule(String inputSchool, UserModuleMapping inputModule) throws InvalidUserCommandException {
@@ -97,7 +117,7 @@ public class UserUniversityListManager {
     public void deleteModule(String inputSchool, String puCode) throws InvalidUserCommandException {
         assert inputSchool.length() > 0 : "Input school cannot be empty";
         assert puCode.length() > 0 : "Deleting PU code cannot be empty";
-        if (foundKey(inputSchool)) {
+        if (foundKeyAll(inputSchool)) {
             myManager.get(inputSchool).deleteModuleByPuCode(puCode);
         } else {
             throw new InvalidUserCommandException("No such university found");
@@ -110,12 +130,16 @@ public class UserUniversityListManager {
      */
     public void deleteList(String inputSchool) throws InvalidUserCommandException {
         assert inputSchool.length() > 0 : "Input school cannot be empty";
-        if (!foundKey(inputSchool)) {
+        if (!foundKeyAll(inputSchool)) {
             throw new InvalidUserCommandException("No such university found");
         } else {
             myManager.remove(inputSchool);
             logger.log(Level.FINER, "delete list for " + inputSchool);
             System.out.print(Ui.printPuListDeletedAcknowledgement(inputSchool));
+            if (foundKeyFavourites(inputSchool)) {
+                myFavourites.remove(inputSchool);
+                logger.log(Level.FINER, "delete favourite for " + inputSchool);
+            }
         }
     }
 
@@ -136,7 +160,36 @@ public class UserUniversityListManager {
         return myManager;
     }
 
+    public HashMap<String, UserUniversityList> getMyFavourites() {
+        return myFavourites;
+    }
+
     public void setMyManager(HashMap<String, UserUniversityList> myManager) {
         this.myManager = myManager;
+    }
+
+    public void addFavourite(String input) throws InvalidUserCommandException {
+        if (!myManager.containsKey(input)) {
+            throw new InvalidUserCommandException("No such university in list currently");
+        } else if (myFavourites.containsKey(input)) {
+            throw new InvalidUserCommandException("University already added");
+        } else {
+            UserUniversityList u = myManager.get(input);
+            myFavourites.put(input, u);
+        }
+    }
+
+    public void deleteFavourite(String input) throws InvalidUserCommandException {
+        if (!myManager.containsKey(input)) {
+            throw new InvalidUserCommandException("No such university in all your lists currently");
+        } else if (!myFavourites.containsKey(input)) {
+            throw new InvalidUserCommandException("No such university in favourite currently");
+        } else {
+            myFavourites.remove(input);
+        }
+    }
+
+    public void setMyFavourites(HashMap<String, UserUniversityList> myFavourites) {
+        this.myFavourites = myFavourites;
     }
 }
