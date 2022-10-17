@@ -2,9 +2,9 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2022-10-10T18:16:57.616774Z</date>
-  <millis>1665425817616</millis>
-  <nanos>774000</nanos>
+  <date>2022-10-17T17:07:29.447934Z</date>
+  <millis>1666026449447</millis>
+  <nanos>934000</nanos>
   <sequence>0</sequence>
   <logger>global</logger>
   <level>INFO</level>
@@ -14,9 +14,9 @@
   <message>starting Timetabler program...</message>
 </record>
 <record>
-  <date>2022-10-10T18:16:57.902124Z</date>
-  <millis>1665425817902</millis>
-  <nanos>124000</nanos>
+  <date>2022-10-17T17:07:29.739491Z</date>
+  <millis>1666026449739</millis>
+  <nanos>491000</nanos>
   <sequence>1</sequence>
   <logger>global</logger>
   <level>INFO</level>
@@ -26,9 +26,9 @@
   <message>api call successful, module exists</message>
 </record>
 <record>
-  <date>2022-10-10T18:16:57.997247Z</date>
-  <millis>1665425817997</millis>
-  <nanos>247000</nanos>
+  <date>2022-10-17T17:07:29.824499Z</date>
+  <millis>1666026449824</millis>
+  <nanos>499000</nanos>
   <sequence>2</sequence>
   <logger>global</logger>
   <level>FINE</level>
@@ -38,9 +38,9 @@
   <message>attempting to add lessons data to module object</message>
 </record>
 <record>
-  <date>2022-10-10T18:16:58.005156Z</date>
-  <millis>1665425818005</millis>
-  <nanos>156000</nanos>
+  <date>2022-10-17T17:07:29.832063Z</date>
+  <millis>1666026449832</millis>
+  <nanos>63000</nanos>
   <sequence>3</sequence>
   <logger>global</logger>
   <level>FINE</level>
@@ -50,9 +50,9 @@
   <message>module exists in selected semester</message>
 </record>
 <record>
-  <date>2022-10-10T18:16:58.005757Z</date>
-  <millis>1665425818005</millis>
-  <nanos>757000</nanos>
+  <date>2022-10-17T17:07:29.832463Z</date>
+  <millis>1666026449832</millis>
+  <nanos>463000</nanos>
   <sequence>4</sequence>
   <logger>global</logger>
   <level>FINE</level>
@@ -62,9 +62,9 @@
   <message>lessons are added, returning list of lesson data</message>
 </record>
 <record>
-  <date>2022-10-10T18:16:58.005881Z</date>
-  <millis>1665425818005</millis>
-  <nanos>881000</nanos>
+  <date>2022-10-17T17:07:29.832578Z</date>
+  <millis>1666026449832</millis>
+  <nanos>578000</nanos>
   <sequence>5</sequence>
   <logger>global</logger>
   <level>INFO</level>
@@ -74,9 +74,9 @@
   <message>api call successful, attempting to add module to timetable</message>
 </record>
 <record>
-  <date>2022-10-10T18:16:58.009193Z</date>
-  <millis>1665425818009</millis>
-  <nanos>193000</nanos>
+  <date>2022-10-17T17:07:29.843316Z</date>
+  <millis>1666026449843</millis>
+  <nanos>316000</nanos>
   <sequence>6</sequence>
   <logger>global</logger>
   <level>FINE</level>
@@ -86,9 +86,9 @@
   <message>module index accepted</message>
 </record>
 <record>
-  <date>2022-10-10T18:16:58.009427Z</date>
-  <millis>1665425818009</millis>
-  <nanos>427000</nanos>
+  <date>2022-10-17T17:07:29.843539Z</date>
+  <millis>1666026449843</millis>
+  <nanos>539000</nanos>
   <sequence>7</sequence>
   <logger>global</logger>
   <level>FINE</level>
@@ -98,22 +98,10 @@
   <message>lesson type index accepted</message>
 </record>
 <record>
-  <date>2022-10-10T18:16:58.009740Z</date>
-  <millis>1665425818009</millis>
-  <nanos>740000</nanos>
+  <date>2022-10-17T17:07:29.847253Z</date>
+  <millis>1666026449847</millis>
+  <nanos>253000</nanos>
   <sequence>8</sequence>
-  <logger>global</logger>
-  <level>FINE</level>
-  <class>seedu.duke.commands.CommandSetLesson</class>
-  <method>getPreferredLesson</method>
-  <thread>1</thread>
-  <message>preferred lesson index accepted</message>
-</record>
-<record>
-  <date>2022-10-10T18:16:58.010989Z</date>
-  <millis>1665425818010</millis>
-  <nanos>989000</nanos>
-  <sequence>9</sequence>
   <logger>global</logger>
   <level>INFO</level>
   <class>seedu.duke.Duke</class>
@@ -122,10 +110,10 @@
   <message>exit flag detected, attempting to exit</message>
 </record>
 <record>
-  <date>2022-10-10T18:16:58.011129Z</date>
-  <millis>1665425818011</millis>
-  <nanos>129000</nanos>
-  <sequence>10</sequence>
+  <date>2022-10-17T17:07:29.847401Z</date>
+  <millis>1666026449847</millis>
+  <nanos>401000</nanos>
+  <sequence>9</sequence>
   <logger>global</logger>
   <level>INFO</level>
   <class>seedu.duke.Duke</class>

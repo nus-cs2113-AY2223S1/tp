@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import seedu.duke.Duke;
 import seedu.duke.Exceptions;
+import seedu.duke.UI;
 import seedu.duke.module.lessons.Lesson;
 import seedu.duke.module.lessons.Lecture;
 import seedu.duke.module.lessons.Tutorial;
@@ -37,8 +38,8 @@ public class Nusmods {
         String mod = new String();
         while (!validUri) {
             try {
-                if (Duke.sc.hasNextLine()) {
-                    mod = Duke.sc.nextLine().toUpperCase().trim();
+                if (UI.sc.hasNextLine()) {
+                    mod = UI.sc.nextLine().toUpperCase().trim();
                 }
                 new URL(baseUri + mod + ".json").toURI();
                 validUri = true;
