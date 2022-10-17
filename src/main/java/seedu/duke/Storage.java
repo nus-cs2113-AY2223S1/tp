@@ -19,6 +19,8 @@ public class Storage {
     private static final String SEPARATOR = " | ";
     private static final String COLON = " : ";
     private static final String EMPTY_STRING = "";
+    private static final String OPEN_BRACKET = "[";
+    private static final String CLOSE_BRACKET = "]";
     private static final String LOG_ADD_CLIENT_LABEL = "Client has been added to text file as: ";
     private static final String LOG_ADD_PROPERTY_LABEL = "Property has been added to text file as: ";
     private static final String LOG_ADD_PAIRING_LABEL = "Pairings has been added to text file as: ";
@@ -209,16 +211,16 @@ public class Storage {
                 String[] propertyParameters = pairingParameters[1].split("\\s\\|\\s");
 
                 //Client Information
-                String clientName = clientParamters[0];
+                String clientName = clientParamters[0].replace(OPEN_BRACKET, EMPTY_STRING);
                 String clientContactNumber = clientParamters[1];
                 String clientEmail = clientParamters[2];
-                String clientBudget = clientParamters[3];
+                String clientBudget = clientParamters[3].replace(CLOSE_BRACKET, EMPTY_STRING);
 
                 //Property Information
-                String landLordName = propertyParameters[0];
+                String landLordName = propertyParameters[0].replace(OPEN_BRACKET,EMPTY_STRING);
                 String propertyAddress = propertyParameters[1];
                 String rentalPrice = propertyParameters[2];
-                String unitType = propertyParameters[3];
+                String unitType = propertyParameters[3].replace(CLOSE_BRACKET,EMPTY_STRING);
 
 
 
