@@ -100,15 +100,39 @@ _Written by: Author name_
 
 ### Overview for Transaction
 
-{Give a brief overview of the Transaction feature in Moolah Manager application.}
+{Give a brief overview of the Transaction features (i.e. purpose of each command) in Moolah Manager application.}
 
 _Written by: Author name_
 
 ### Implementation for Transaction
 
-{Provide the class diagram for Transaction} 
+Each `Transaction` object in Moolah Manager represents a transaction record, which can be of `Income`
+or `Expense` type. Below is a simplified class diagram (note: methods have been omitted) containing the attributes
+within each transaction and how the transactions are associated with the `TransactionList`.
 
-_Written by: Author name_
+<p align="center">
+    <img src="images/TransactionClassDiagram.png">
+    <br />
+    <i>Figure 1: SimplifiedClass Diagram for Transaction</i>
+</p>
+
+The `TransactionList` holds a dynamic array list that can store multiple `Transaction` objects.
+
+Each Transaction object contains the following mandatory member attributes:
+1. **category** A category for the transaction.
+2. **description** More information regarding the transaction, written without any space.
+3. **amount** Value of the transaction in numerical form. Only integers within 0 and 10000000 is accepted.
+4. **date** Date of the transaction. The format must be in "yyyyMMdd".
+
+Some important operations are performed within the `TransactionList` class, which implements the following:
+- `TransactionList#addIncome(String description, int amount, String category, LocalDate date)` - Adds a transaction of class type Income into the transactions list.
+- `TransactionList#addExpense(String description, int amount, String category, LocalDate date)` - Adds a transaction of class type Expense into the transactions list.
+- `TransactionList#listTransactions(String type, String category, LocalDate date)` - List all or some transactions based on selection.
+- `TransactionList#findTransactions(String keywords)` - Find specific transaction(s) based on any keywords inputted by the user.
+- `TransactionList#deleteTransaction(int index)` - Deletes a transaction from the transactions list based on the specified index.
+- `TransactionList#purgeTransactions()` - Purges all transactions in the transactions list.
+
+_Written by: Chua Han Yong Darren_
 
 ### Help Command
 
