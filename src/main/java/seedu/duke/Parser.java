@@ -35,7 +35,7 @@ public class Parser {
         case "set":
             return new SetCommand(arguments, true);
         case "add":
-            return new AddCommand(arguments, true);
+            return new AddCommand(arguments, true, false);
         case "view":
             return new ViewCommand(arguments);
         case "mark":

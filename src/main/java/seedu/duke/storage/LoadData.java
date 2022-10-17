@@ -35,7 +35,13 @@ public class LoadData {
                     setCommand.setData(ui, storage, biometrics, exerciseList, foodList);
                     setCommand.execute();
                 } else {
-                    AddCommand addCommand = new AddCommand(line, false);
+                    String[] saveDataArray = line.split("\\|");
+                    boolean isMarkDone = false;
+                    if (saveDataArray.length == 2 && saveDataArray[1].trim().equals("1")) {
+                        isMarkDone = true;
+                    }
+                    AddCommand addCommand = new AddCommand(saveDataArray[0]
+                            .trim(), false, isMarkDone);
                     addCommand.setData(ui, storage, biometrics, exerciseList, foodList);
                     addCommand.execute();
                 }

@@ -64,8 +64,8 @@ public class Ui {
         columnSpacingArray[0] = Math.max(columnSpacingArray[0], exerciseArrayList.size() % 10 + 1);
         for (Exercise exercise : exerciseArrayList) {
             columnSpacingArray[1] = Math.max(columnSpacingArray[1], exercise.getExerciseName().length());
-            columnSpacingArray[2] = Math.max(columnSpacingArray[2], exercise.getRepetitions() % 10 + 1);
-            columnSpacingArray[3] = Math.max(columnSpacingArray[3], exercise.getRepetitions() % 10 + 1);
+            columnSpacingArray[2] = Math.max(columnSpacingArray[2], exercise.getRepetition() % 10 + 1);
+            columnSpacingArray[3] = Math.max(columnSpacingArray[3], exercise.getRepetition() % 10 + 1);
             columnSpacingArray[4] = Math.max(columnSpacingArray[4], exercise.getCaloriesBurnt() % 10 + 1);
         }
     }
@@ -77,7 +77,7 @@ public class Ui {
             String exerciseName = addRightPadding(exercise.getExerciseName(), columnSpacingArray[1]) + " | ";
             String sets = addRightPadding(Integer.toString(exercise.getSet()),
                     columnSpacingArray[3]) + " | ";
-            String repetitions = addRightPadding(Integer.toString(exercise.getRepetitions()),
+            String repetitions = addRightPadding(Integer.toString(exercise.getRepetition()),
                     columnSpacingArray[3]) + " | ";
             String calories = addRightPadding(Integer.toString(exercise.getCaloriesBurnt()),
                     columnSpacingArray[4]) + " | ";

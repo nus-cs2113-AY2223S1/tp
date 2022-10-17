@@ -15,6 +15,7 @@ import seedu.duke.storage.Storage;
 import java.util.Arrays;
 
 public class AddCommand extends Command {
+    private final boolean isMarkDone;
     private Ui ui;
     private String arguments;
     private boolean toDisplay;
@@ -29,9 +30,10 @@ public class AddCommand extends Command {
 
     private Biometrics biometrics;
 
-    public AddCommand(String arguments, boolean toDisplay) {
+    public AddCommand(String arguments, boolean toDisplay, boolean isMarkDone) {
         this.arguments = arguments;
         this.toDisplay = toDisplay;
+        this.isMarkDone = isMarkDone;
     }
 
     @Override
@@ -66,6 +68,9 @@ public class AddCommand extends Command {
             exerciseList.addExercise(exercise);
             assert (exerciseList.getCurrentExercise(exerciseList.getCurrentExerciseListSize() - 1)
                     .equals(exercise)) : "Exercise not added properly";
+            if (isMarkDone) {
+                exerciseList.markDone(exerciseList.getCurrentExerciseListSize() - 1);
+            }
             if (toDisplay) {
                 ui.output(exercise.toString());
                 ui.output(" This strength exercise is added to the exercise list successfully");

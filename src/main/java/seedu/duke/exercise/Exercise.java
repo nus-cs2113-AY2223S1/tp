@@ -18,7 +18,7 @@ public class Exercise {
         return exerciseName;
     }
 
-    public int getRepetitions() {
+    public int getRepetition() {
         return repetition;
     }
 
@@ -41,6 +41,13 @@ public class Exercise {
         return "[ ]";
     }
 
+    public int getTaskStatusInNumber() {
+        if (isDone) {
+            return 1;
+        }
+        return 0;
+    }
+
     public void setDone(boolean isDone) {
         this.isDone = isDone;
     }
@@ -53,4 +60,8 @@ public class Exercise {
                 + String.format("Status: %s", getTaskStatus());
     }
 
+    public String saveExercise() {
+        return "exercise /" + getExerciseName() + " /"
+                + getSet() + " /" + getRepetition() + " /" + getCaloriesBurnt() + " | " + getTaskStatusInNumber();
+    }
 }

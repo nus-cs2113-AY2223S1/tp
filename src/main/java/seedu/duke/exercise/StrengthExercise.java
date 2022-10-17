@@ -14,10 +14,16 @@ public class StrengthExercise extends Exercise {
     }
 
     @Override
+    public String saveExercise() {
+        return "strength /" + getExerciseName() + " /"
+                + getSet() + " /" + getRepetition() + " /" + getCaloriesBurnt() + " | " + getTaskStatusInNumber();
+    }
+
+    @Override
     public String toString() {
-        return "Exercise: " + getExerciseName() + System.lineSeparator()
+        return "Strength Exercise: " + getExerciseName() + System.lineSeparator()
                 + "Sets: " + getSet() + System.lineSeparator()
-                + "Repetitions: " + getRepetitions() + System.lineSeparator()
+                + "Repetitions: " + getRepetition() + System.lineSeparator()
                 + "Calories Burnt: " + getCaloriesBurnt() + System.lineSeparator()
                 + String.format("Status: %s", getTaskStatus());
     }
