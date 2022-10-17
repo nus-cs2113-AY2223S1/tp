@@ -718,7 +718,7 @@ public class ConsoleParser {
      * @throws ConsoleParserCommandDeleteExpenseInvalidException   If the command delete-expense is invalid.
      * @throws ConsoleParserCommandEditExpenseInvalidException     If the command edit-expense is invalid.
      * @throws ConsoleParserCommandSortExpenseInvalidTypeException If the command sort-expense is invalid.
-     * @throws ConsoleParserCommandConvertCurrencyInvalidException  If the command convert-currency is invalid.
+     * @throws ConsoleParserCommandConvertCurrencyInvalidException If the command convert-currency is invalid.
      * @throws ConsoleParserCommandAddTargetInvalidException       If the command add-target is invalid.
      * @throws ConsoleParserCommandAddIncomeInvalidException       If the command add-income is invalid.
      */
