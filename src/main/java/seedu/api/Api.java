@@ -203,7 +203,7 @@ public class Api {
      * @throws EmptySecretFileException If the file is empty.
      */
     public void loadApiKey(String file, String directory, boolean toloadDefault)
-            throws NoFileFoundException, EmptySecretFileException {
+            throws NoFileFoundException {
         try {
             String key = FileReader.readStringFromTxt(file, directory, true).trim();
             if (key.isEmpty()) {
@@ -216,6 +216,8 @@ public class Api {
             authStatus = AuthenticationStatus.API_CHANGED;
         } catch (IOException e) {
             throw new NoFileFoundException("API key file is missing! Please check " + file + ".");
+        } catch (EmptySecretFileException e) {
+            ui.print(e.getMessage());
         }
     }
 
