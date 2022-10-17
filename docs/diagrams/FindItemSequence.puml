@@ -1,0 +1,10 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+Ui -> CommandParser: Authentication Request
+CommandParser --> Command: Authentication Response
+Command -> ItemList: Another authentication Request
+ItemList --> Command: another authentication Response
+@enduml
