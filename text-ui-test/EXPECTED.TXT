@@ -10,6 +10,7 @@
 Your MoneyGoWhere? Let me help you find it.
 There is no load file found...
 Please ensure the file is named correctly and is in the right directory if you have a load file.
+Currencies loaded successfully :)
 
 
 ERROR: The command entered is invalid.
@@ -18,7 +19,7 @@ ERROR: The command entered is invalid.
 Name          : Test Expense 1
 Date and Time : 01 Jan 2022 12:00
 Description   : null
-Amount        : 1337.37
+Amount        : 1337.37 SGD
 Category      : null
 Remarks       : Remarks here
 
@@ -28,7 +29,7 @@ The expense was added successfully.
 Name          : Test Expense 2
 Date and Time : 01 Jan 2022 12:01
 Description   : null
-Amount        : 10.80
+Amount        : 10.80 SGD
 Category      : null
 Remarks       : null
 
@@ -38,7 +39,7 @@ The expense was added successfully.
 Name          : Test Expense 3
 Date and Time : 02 Jan 2022 12:02
 Description   : This is a test expense 3
-Amount        : 20.80
+Amount        : 20.80 SGD
 Category      : null
 Remarks       : null
 
@@ -48,7 +49,7 @@ The expense was added successfully.
 Name          : Test Expense 4
 Date and Time : 03 Jan 2022 12:03
 Description   : This is a test expense 4
-Amount        : 30.90
+Amount        : 30.90 SGD
 Category      : Category Alpha
 Remarks       : null
 
@@ -58,112 +59,112 @@ The expense was added successfully.
 Name          : Test Expense 4
 Date and Time : 03 Jan 2022 12:03
 Description   : This is a test expense 4
-Amount        : 30.90
+Amount        : 30.90 SGD
 Category      : Category Alpha
 Remarks       : Remarks here
 
 The expense was added successfully.
 
 
-ERROR: The arguments entered are invalid. SYNTAX: Add-Expense -n NAME -a AMOUNT [-d dd/MM/yyyy HHmm] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS]
+ERROR: The arguments entered are invalid. SYNTAX: Add-Expense -n NAME -a AMOUNT [-d dd/MM/yyyy HHmm] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS] [-x CURRENCY]
 
 
-ERROR: The arguments entered are invalid. SYNTAX: Add-Expense -n NAME -a AMOUNT [-d dd/MM/yyyy HHmm] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS]
+ERROR: The arguments entered are invalid. SYNTAX: Add-Expense -n NAME -a AMOUNT [-d dd/MM/yyyy HHmm] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS] [-x CURRENCY]
 
 
-ERROR: The arguments entered are invalid. SYNTAX: Add-Expense -n NAME -a AMOUNT [-d dd/MM/yyyy HHmm] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS]
+ERROR: The arguments entered are invalid. SYNTAX: Add-Expense -n NAME -a AMOUNT [-d dd/MM/yyyy HHmm] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS] [-x CURRENCY]
 
 
 ---- EXPENSE INDEX 0 ----
-Name          : Test Expense 4
-Date and Time : 03 Jan 2022 12:03
-Description   : This is a test expense 4
-Amount        : 30.90
-Category      : Category Alpha
-Remarks       : null
+Name          : Test Expense 1
+Date and Time : 01 Jan 2022 12:00
+Description   : null
+Amount        : 1337.37 SGD
+Category      : null
+Remarks       : Remarks here
 
 ---- EXPENSE INDEX 1 ----
-Name          : Test Expense 4
-Date and Time : 03 Jan 2022 12:03
-Description   : This is a test expense 4
-Amount        : 30.90
-Category      : Category Alpha
-Remarks       : Remarks here
+Name          : Test Expense 2
+Date and Time : 01 Jan 2022 12:01
+Description   : null
+Amount        : 10.80 SGD
+Category      : null
+Remarks       : null
 
 ---- EXPENSE INDEX 2 ----
 Name          : Test Expense 3
 Date and Time : 02 Jan 2022 12:02
 Description   : This is a test expense 3
-Amount        : 20.80
+Amount        : 20.80 SGD
 Category      : null
 Remarks       : null
 
 ---- EXPENSE INDEX 3 ----
-Name          : Test Expense 2
-Date and Time : 01 Jan 2022 12:01
-Description   : null
-Amount        : 10.80
-Category      : null
+Name          : Test Expense 4
+Date and Time : 03 Jan 2022 12:03
+Description   : This is a test expense 4
+Amount        : 30.90 SGD
+Category      : Category Alpha
 Remarks       : null
 
 ---- EXPENSE INDEX 4 ----
+Name          : Test Expense 4
+Date and Time : 03 Jan 2022 12:03
+Description   : This is a test expense 4
+Amount        : 30.90 SGD
+Category      : Category Alpha
+Remarks       : Remarks here
+
+
+
+---- EXPENSE INDEX 0 ----
 Name          : Test Expense 1
 Date and Time : 01 Jan 2022 12:00
 Description   : null
-Amount        : 1337.37
+Amount        : 1337.37 SGD
 Category      : null
 Remarks       : Remarks here
 
 
 
 ---- EXPENSE INDEX 0 ----
-Name          : Test Expense 4
-Date and Time : 03 Jan 2022 12:03
-Description   : This is a test expense 4
-Amount        : 30.90
-Category      : Category Alpha
-Remarks       : null
-
-
-
----- EXPENSE INDEX 0 ----
-Name          : Test Expense 4
-Date and Time : 03 Jan 2022 12:03
-Description   : This is a test expense 4
-Amount        : 30.90
-Category      : Category Alpha
-Remarks       : null
+Name          : Test Expense 1
+Date and Time : 01 Jan 2022 12:00
+Description   : null
+Amount        : 1337.37 SGD
+Category      : null
+Remarks       : Remarks here
 
 ---- EXPENSE INDEX 1 ----
-Name          : Test Expense 4
-Date and Time : 03 Jan 2022 12:03
-Description   : This is a test expense 4
-Amount        : 30.90
-Category      : Category Alpha
-Remarks       : Remarks here
+Name          : Test Expense 2
+Date and Time : 01 Jan 2022 12:01
+Description   : null
+Amount        : 10.80 SGD
+Category      : null
+Remarks       : null
 
 ---- EXPENSE INDEX 2 ----
 Name          : Test Expense 3
 Date and Time : 02 Jan 2022 12:02
 Description   : This is a test expense 3
-Amount        : 20.80
+Amount        : 20.80 SGD
 Category      : null
 Remarks       : null
 
 ---- EXPENSE INDEX 3 ----
-Name          : Test Expense 2
-Date and Time : 01 Jan 2022 12:01
-Description   : null
-Amount        : 10.80
-Category      : null
+Name          : Test Expense 4
+Date and Time : 03 Jan 2022 12:03
+Description   : This is a test expense 4
+Amount        : 30.90 SGD
+Category      : Category Alpha
 Remarks       : null
 
 ---- EXPENSE INDEX 4 ----
-Name          : Test Expense 1
-Date and Time : 01 Jan 2022 12:00
-Description   : null
-Amount        : 1337.37
-Category      : null
+Name          : Test Expense 4
+Date and Time : 03 Jan 2022 12:03
+Description   : This is a test expense 4
+Amount        : 30.90 SGD
+Category      : Category Alpha
 Remarks       : Remarks here
 
 
@@ -172,43 +173,43 @@ ERROR: The expense is not found.
 
 
 ---- EXPENSE INDEX 0 ----
-Name          : Test Expense 4
-Date and Time : 03 Jan 2022 12:03
-Description   : This is a test expense 4
-Amount        : 30.90
-Category      : Category Alpha
-Remarks       : null
+Name          : Test Expense 1
+Date and Time : 01 Jan 2022 12:00
+Description   : null
+Amount        : 1337.37 SGD
+Category      : null
+Remarks       : Remarks here
 
 ---- EXPENSE INDEX 1 ----
-Name          : Test Expense 4
-Date and Time : 03 Jan 2022 12:03
-Description   : This is a test expense 4
-Amount        : 30.90
-Category      : Category Alpha
-Remarks       : Remarks here
+Name          : Test Expense 2
+Date and Time : 01 Jan 2022 12:01
+Description   : null
+Amount        : 10.80 SGD
+Category      : null
+Remarks       : null
 
 ---- EXPENSE INDEX 2 ----
 Name          : Test Expense 3
 Date and Time : 02 Jan 2022 12:02
 Description   : This is a test expense 3
-Amount        : 20.80
+Amount        : 20.80 SGD
 Category      : null
 Remarks       : null
 
 ---- EXPENSE INDEX 3 ----
-Name          : Test Expense 2
-Date and Time : 01 Jan 2022 12:01
-Description   : null
-Amount        : 10.80
-Category      : null
+Name          : Test Expense 4
+Date and Time : 03 Jan 2022 12:03
+Description   : This is a test expense 4
+Amount        : 30.90 SGD
+Category      : Category Alpha
 Remarks       : null
 
 ---- EXPENSE INDEX 4 ----
-Name          : Test Expense 1
-Date and Time : 01 Jan 2022 12:00
-Description   : null
-Amount        : 1337.37
-Category      : null
+Name          : Test Expense 4
+Date and Time : 03 Jan 2022 12:03
+Description   : This is a test expense 4
+Amount        : 30.90 SGD
+Category      : Category Alpha
 Remarks       : Remarks here
 
 
@@ -217,35 +218,35 @@ The expense was deleted successfully.
 
 
 ---- EXPENSE INDEX 0 ----
-Name          : Test Expense 4
-Date and Time : 03 Jan 2022 12:03
-Description   : This is a test expense 4
-Amount        : 30.90
-Category      : Category Alpha
-Remarks       : null
+Name          : Test Expense 1
+Date and Time : 01 Jan 2022 12:00
+Description   : null
+Amount        : 1337.37 SGD
+Category      : null
+Remarks       : Remarks here
 
 ---- EXPENSE INDEX 1 ----
-Name          : Test Expense 4
-Date and Time : 03 Jan 2022 12:03
-Description   : This is a test expense 4
-Amount        : 30.90
-Category      : Category Alpha
-Remarks       : Remarks here
+Name          : Test Expense 2
+Date and Time : 01 Jan 2022 12:01
+Description   : null
+Amount        : 10.80 SGD
+Category      : null
+Remarks       : null
 
 ---- EXPENSE INDEX 2 ----
 Name          : Test Expense 3
 Date and Time : 02 Jan 2022 12:02
 Description   : This is a test expense 3
-Amount        : 20.80
+Amount        : 20.80 SGD
 Category      : null
 Remarks       : null
 
 ---- EXPENSE INDEX 3 ----
-Name          : Test Expense 1
-Date and Time : 01 Jan 2022 12:00
-Description   : null
-Amount        : 1337.37
-Category      : null
+Name          : Test Expense 4
+Date and Time : 03 Jan 2022 12:03
+Description   : This is a test expense 4
+Amount        : 30.90 SGD
+Category      : Category Alpha
 Remarks       : Remarks here
 
 
@@ -254,7 +255,7 @@ Remarks       : Remarks here
 Name          : Exp3
 Date and Time : 02 Jan 2022 12:02
 Description   : This is a test expense 3
-Amount        : 20.80
+Amount        : 20.80 SGD
 Category      : null
 Remarks       : null
 
@@ -263,9 +264,20 @@ The expense was edited successfully.
 
 ---- EXPENSE INDEX 1 ----
 Name          : Exp2
-Date and Time : 03 Jan 2022 12:03
-Description   : This is a test expense 4
-Amount        : 10.70
+Date and Time : 01 Jan 2022 12:00
+Description   : null
+Amount        : 10.70 SGD
+Category      : null
+Remarks       : Remarks here
+
+The expense was edited successfully.
+
+
+---- EXPENSE INDEX 0 ----
+Name          : Exp1
+Date and Time : 01 Jan 2021 12:00
+Description   : This is a test expense 1
+Amount        : 13.37 SGD
 Category      : Category Alpha
 Remarks       : Remarks here
 
@@ -276,18 +288,7 @@ The expense was edited successfully.
 Name          : Exp1
 Date and Time : 01 Jan 2021 12:00
 Description   : This is a test expense 1
-Amount        : 13.37
-Category      : Category Alpha
-Remarks       : Remarks here
-
-The expense was edited successfully.
-
-
----- EXPENSE INDEX 0 ----
-Name          : Exp2
-Date and Time : 03 Jan 2022 12:03
-Description   : This is a test expense 4
-Amount        : 10.70
+Amount        : 13.37 SGD
 Category      : Category Alpha
 Remarks       : Remarks here
 
@@ -295,45 +296,45 @@ Remarks       : Remarks here
 Name          : Exp3
 Date and Time : 02 Jan 2022 12:02
 Description   : This is a test expense 3
-Amount        : 20.80
+Amount        : 20.80 SGD
 Category      : null
 Remarks       : null
 
 ---- EXPENSE INDEX 2 ----
-Name          : Test Expense 1
-Date and Time : 01 Jan 2022 12:00
+Name          : Test Expense 2
+Date and Time : 01 Jan 2022 12:01
 Description   : null
-Amount        : 1337.37
+Amount        : 10.80 SGD
 Category      : null
-Remarks       : Remarks here
+Remarks       : null
 
 ---- EXPENSE INDEX 3 ----
-Name          : Exp1
-Date and Time : 01 Jan 2021 12:00
-Description   : This is a test expense 1
-Amount        : 13.37
+Name          : Test Expense 4
+Date and Time : 03 Jan 2022 12:03
+Description   : This is a test expense 4
+Amount        : 30.90 SGD
 Category      : Category Alpha
 Remarks       : Remarks here
 
 
 
-ERROR: The arguments entered are invalid. SYNTAX: Edit-Expense -e EXPENSE-INDEX [-n NAME] [-d dd/MM/yyyy HHmm] [-t DESCRIPTION] [-a AMOUNT] [-c CATEGORY] [-r REMARKS]
+ERROR: The arguments entered are invalid. SYNTAX: Edit-Expense -e EXPENSE-INDEX [-n NAME] [-d dd/MM/yyyy HHmm] [-t DESCRIPTION] [-a AMOUNT] [-c CATEGORY] [-r REMARKS] [-x CURRENCY]
 
 
-ERROR: The arguments entered are invalid. SYNTAX: Edit-Expense -e EXPENSE-INDEX [-n NAME] [-d dd/MM/yyyy HHmm] [-t DESCRIPTION] [-a AMOUNT] [-c CATEGORY] [-r REMARKS]
+ERROR: The arguments entered are invalid. SYNTAX: Edit-Expense -e EXPENSE-INDEX [-n NAME] [-d dd/MM/yyyy HHmm] [-t DESCRIPTION] [-a AMOUNT] [-c CATEGORY] [-r REMARKS] [-x CURRENCY]
 
 
-ERROR: The arguments entered are invalid. SYNTAX: Edit-Expense -e EXPENSE-INDEX [-n NAME] [-d dd/MM/yyyy HHmm] [-t DESCRIPTION] [-a AMOUNT] [-c CATEGORY] [-r REMARKS]
+ERROR: The arguments entered are invalid. SYNTAX: Edit-Expense -e EXPENSE-INDEX [-n NAME] [-d dd/MM/yyyy HHmm] [-t DESCRIPTION] [-a AMOUNT] [-c CATEGORY] [-r REMARKS] [-x CURRENCY]
 
 
 ERROR: The expense is not found.
 
 
 ---- EXPENSE INDEX 0 ----
-Name          : Exp2
-Date and Time : 03 Jan 2022 12:03
-Description   : This is a test expense 4
-Amount        : 10.70
+Name          : Exp1
+Date and Time : 01 Jan 2021 12:00
+Description   : This is a test expense 1
+Amount        : 13.37 SGD
 Category      : Category Alpha
 Remarks       : Remarks here
 
@@ -341,23 +342,23 @@ Remarks       : Remarks here
 Name          : Exp3
 Date and Time : 02 Jan 2022 12:02
 Description   : This is a test expense 3
-Amount        : 20.80
+Amount        : 20.80 SGD
 Category      : null
 Remarks       : null
 
 ---- EXPENSE INDEX 2 ----
-Name          : Test Expense 1
-Date and Time : 01 Jan 2022 12:00
+Name          : Test Expense 2
+Date and Time : 01 Jan 2022 12:01
 Description   : null
-Amount        : 1337.37
+Amount        : 10.80 SGD
 Category      : null
-Remarks       : Remarks here
+Remarks       : null
 
 ---- EXPENSE INDEX 3 ----
-Name          : Exp1
-Date and Time : 01 Jan 2021 12:00
-Description   : This is a test expense 1
-Amount        : 13.37
+Name          : Test Expense 4
+Date and Time : 03 Jan 2022 12:03
+Description   : This is a test expense 4
+Amount        : 30.90 SGD
 Category      : Category Alpha
 Remarks       : Remarks here
 
@@ -373,10 +374,10 @@ The expense was deleted successfully.
 
 
 ---- EXPENSE INDEX 0 ----
-Name          : Exp1
-Date and Time : 01 Jan 2021 12:00
-Description   : This is a test expense 1
-Amount        : 13.37
+Name          : Test Expense 4
+Date and Time : 03 Jan 2022 12:03
+Description   : This is a test expense 4
+Amount        : 30.90 SGD
 Category      : Category Alpha
 Remarks       : Remarks here
 
@@ -470,16 +471,16 @@ Your expenses have been sorted successfully.
 Your expenses have been sorted successfully.
 
 
-ERROR: The arguments entered are invalid. SYNTAX: Sort-Expense -t alphabetical/amount/date -o ascending/descending
+ERROR: The arguments entered are invalid. SYNTAX: Sort-Expense -t alphabetical/amount/date/currency -o ascending/descending
 
 
-ERROR: The arguments entered are invalid. SYNTAX: Sort-Expense -t alphabetical/amount/date -o ascending/descending
+ERROR: The arguments entered are invalid. SYNTAX: Sort-Expense -t alphabetical/amount/date/currency -o ascending/descending
 
 
-ERROR: The arguments entered are invalid. SYNTAX: Sort-Expense -t alphabetical/amount/date -o ascending/descending
+ERROR: The arguments entered are invalid. SYNTAX: Sort-Expense -t alphabetical/amount/date/currency -o ascending/descending
 
 
-ERROR: The arguments entered are invalid. SYNTAX: Sort-Expense -t alphabetical/amount/date -o ascending/descending
+ERROR: The arguments entered are invalid. SYNTAX: Sort-Expense -t alphabetical/amount/date/currency -o ascending/descending
 
 
 ERROR: The command entered is invalid.
