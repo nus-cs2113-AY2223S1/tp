@@ -6,6 +6,7 @@ import seedu.moneygowhere.commands.ConsoleCommandAddIncome;
 import seedu.moneygowhere.commands.ConsoleCommandAddRecurringPayment;
 import seedu.moneygowhere.commands.ConsoleCommandAddTarget;
 import seedu.moneygowhere.commands.ConsoleCommandBye;
+import seedu.moneygowhere.commands.ConsoleCommandConvertCurrency;
 import seedu.moneygowhere.commands.ConsoleCommandDeleteExpense;
 import seedu.moneygowhere.commands.ConsoleCommandEditExpense;
 import seedu.moneygowhere.commands.ConsoleCommandSortExpense;
@@ -13,6 +14,8 @@ import seedu.moneygowhere.commands.ConsoleCommandViewExpense;
 import seedu.moneygowhere.commands.ConsoleCommandViewRecurringPayment;
 import seedu.moneygowhere.common.Configurations;
 import seedu.moneygowhere.common.Messages;
+import seedu.moneygowhere.currency.CurrencyApi;
+import seedu.moneygowhere.data.currency.CurrencyManager;
 import seedu.moneygowhere.data.expense.Expense;
 import seedu.moneygowhere.data.expense.ExpenseManager;
 import seedu.moneygowhere.data.income.Income;
@@ -25,12 +28,14 @@ import seedu.moneygowhere.exceptions.ConsoleParserCommandAddExpenseInvalidExcept
 import seedu.moneygowhere.exceptions.ConsoleParserCommandAddIncomeInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandAddRecurringPaymentInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandAddTargetInvalidException;
+import seedu.moneygowhere.exceptions.ConsoleParserCommandConvertCurrencyInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandDeleteExpenseInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandEditExpenseInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandNotFoundException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandSortExpenseInvalidTypeException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandViewExpenseInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandViewRecurringPaymentInvalidException;
+import seedu.moneygowhere.exceptions.CurrencyInvalidException;
 import seedu.moneygowhere.exceptions.ExpenseManagerExpenseNotFoundException;
 import seedu.moneygowhere.logger.LocalLogger;
 import seedu.moneygowhere.parser.ConsoleParser;
@@ -41,8 +46,6 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Scanner;
 
 /**
@@ -56,6 +59,7 @@ public class ConsoleInterface {
     private TargetManager targetManager;
     private IncomeManager incomeManager;
     private RecurringPaymentManager recurringPaymentManager;
+    private CurrencyManager currencyManager;
 
     /**
      * Initializes the console interface.
@@ -76,6 +80,7 @@ public class ConsoleInterface {
         targetManager = new TargetManager();
         incomeManager = new IncomeManager();
         recurringPaymentManager = new RecurringPaymentManager();
+        currencyManager = new CurrencyManager();
     }
 
     /**
@@ -169,7 +174,8 @@ public class ConsoleInterface {
         expenseStr += "Description   : " + expense.getDescription() + "\n";
         expenseStr += "Amount        : " + expense.getAmount() + "\n";
         expenseStr += "Category      : " + expense.getCategory() + "\n";
-        expenseStr += "Remarks       : " + expense.getRemarks();
+        expenseStr += "Remarks       : " + expense.getRemarks() + "\n";
+        expenseStr += "Currency      : " + expense.getCurrency();
 
         return expenseStr;
     }
@@ -238,13 +244,21 @@ public class ConsoleInterface {
     }
 
     private void runCommandAddExpense(ConsoleCommandAddExpense consoleCommandAddExpense) {
+        try {
+            currencyManager.hasCurrency(consoleCommandAddExpense.getCurrency());
+        } catch (CurrencyInvalidException exception) {
+            printErrorMessage(exception.getMessage());
+            return;
+        }
+
         Expense expense = new Expense(
                 consoleCommandAddExpense.getName(),
                 consoleCommandAddExpense.getDateTime(),
                 consoleCommandAddExpense.getDescription(),
                 consoleCommandAddExpense.getAmount(),
                 consoleCommandAddExpense.getCategory(),
-                consoleCommandAddExpense.getRemarks());
+                consoleCommandAddExpense.getRemarks(),
+                consoleCommandAddExpense.getCurrency());
         expenseManager.addExpense(expense);
 
         printInformationalMessage(convertExpenseToConsoleString(expense));
@@ -353,8 +367,20 @@ public class ConsoleInterface {
         if (remarks == null) {
             remarks = oldExpense.getRemarks();
         }
+        String currency = consoleCommandEditExpense.getCurrency();
+        if (currency == null) {
+            currency = oldExpense.getCurrency();
+        } else {
+            try {
+                currencyManager.hasCurrency(consoleCommandEditExpense.getCurrency());
+            } catch (CurrencyInvalidException exception) {
+                printErrorMessage(exception.getMessage());
+                return;
+            }
+        }
+        currency = currency.toUpperCase();
 
-        Expense newExpense = new Expense(name, dateTime, description, amount, category, remarks);
+        Expense newExpense = new Expense(name, dateTime, description, amount, category, remarks, currency);
         try {
             expenseManager.editExpense(expenseIndex, newExpense);
         } catch (ExpenseManagerExpenseNotFoundException exception) {
@@ -370,15 +396,47 @@ public class ConsoleInterface {
         LocalStorage.saveToFile(expenseManager);
     }
 
-    @SuppressWarnings("Java8ListSort")
     private void runCommandSortExpense(ConsoleCommandSortExpense commandSortExpense) {
-        ArrayList<Expense> expenses = expenseManager.getExpenses();
-        Comparator<Expense> comparator = commandSortExpense.getComparator();
-
-        Collections.sort(expenses, comparator);
         expenseManager.updateSortExpenses(commandSortExpense);
-
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_SORTED_EXPENSE_SUCCESS);
+
+        LocalStorage.saveToFile(expenseManager);
+    }
+
+    private void runCommandConvertCurrency(ConsoleCommandConvertCurrency consoleCommandConvertCurrency) {
+        int expenseIndex = consoleCommandConvertCurrency.getExpenseIndex();
+
+        Expense expense;
+        try {
+            expense = expenseManager.getExpense(expenseIndex);
+        } catch (ExpenseManagerExpenseNotFoundException exception) {
+            printErrorMessage(exception.getMessage());
+            return;
+        }
+
+        try {
+            currencyManager.hasCurrency(consoleCommandConvertCurrency.getCurrency());
+        } catch (CurrencyInvalidException exception) {
+            printErrorMessage(exception.getMessage());
+            return;
+        }
+
+        consoleCommandConvertCurrency.changeCurrency(expense, currencyManager);
+        expenseManager.sortExpenses();
+
+        DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern(
+                Configurations.CONSOLE_INTERFACE_DATE_TIME_OUTPUT_FORMAT
+        );
+        String expenseStr = "";
+        expenseStr += "---- EXPENSE INDEX " + expenseIndex + " ----\n";
+        expenseStr += "Name          : " + expense.getName() + "\n";
+        expenseStr += "Date and Time : " + expense.getDateTime().format(dateTimeFormat) + "\n";
+        expenseStr += "Description   : " + expense.getDescription() + "\n";
+        expenseStr += "Amount        : " + expense.getAmount() + " " + expense.getCurrency() + "\n";
+        expenseStr += "Category      : " + expense.getCategory() + "\n";
+        expenseStr += "Remarks       : " + expense.getRemarks() + "\n";
+        printInformationalMessage(expenseStr);
+        printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_CONVERT_CURRENCY_SUCCESS);
 
         LocalStorage.saveToFile(expenseManager);
     }
@@ -483,6 +541,7 @@ public class ConsoleInterface {
                  | ConsoleParserCommandDeleteExpenseInvalidException
                  | ConsoleParserCommandEditExpenseInvalidException
                  | ConsoleParserCommandSortExpenseInvalidTypeException
+                 | ConsoleParserCommandConvertCurrencyInvalidException
                  | ConsoleParserCommandAddTargetInvalidException
                  | ConsoleParserCommandAddIncomeInvalidException
                  | ConsoleParserCommandAddRecurringPaymentInvalidException
@@ -498,6 +557,8 @@ public class ConsoleInterface {
      */
     public void run() {
         LocalStorage.loadFromFile(expenseManager);
+        CurrencyApi.getCurrencyApi(currencyManager);
+
         printBlankLine();
 
         while (true) {
@@ -516,6 +577,8 @@ public class ConsoleInterface {
                 runCommandEditExpense((ConsoleCommandEditExpense) consoleCommand);
             } else if (consoleCommand instanceof ConsoleCommandSortExpense) {
                 runCommandSortExpense((ConsoleCommandSortExpense) consoleCommand);
+            } else if (consoleCommand instanceof ConsoleCommandConvertCurrency) {
+                runCommandConvertCurrency((ConsoleCommandConvertCurrency) consoleCommand);
             } else if (consoleCommand instanceof ConsoleCommandAddIncome) {
                 runCommandAddIncome((ConsoleCommandAddIncome) consoleCommand);
             } else if (consoleCommand instanceof ConsoleCommandAddRecurringPayment) {

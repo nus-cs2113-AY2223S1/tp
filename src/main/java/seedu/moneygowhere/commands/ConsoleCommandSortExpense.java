@@ -1,17 +1,11 @@
 package seedu.moneygowhere.commands;
 
-import seedu.moneygowhere.data.expense.Expense;
 import seedu.moneygowhere.parser.ConsoleParserConfigurations;
-
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.util.Comparator;
 
 @SuppressWarnings("FieldMayBeFinal")
 public class ConsoleCommandSortExpense extends ConsoleCommand {
     private String type;
     private boolean order;
-
 
     /**
      * Reads in type & order of sorting to run sorting command later.
