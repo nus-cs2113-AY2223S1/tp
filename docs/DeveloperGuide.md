@@ -177,10 +177,24 @@ Some important operations are performed within the `TransactionList` class, whic
 _Written by: Chua Han Yong Darren_
 
 ### Help Command
+The help command displays the help message to the users to guide them on the usage and provide descriptions for each 
+available command. 
 
-{Describe the implementation for the Help Command}
+The help command can be run as `help` or `help o/detailed`, where the latter will display a more detailed version of 
+help messages to the users. 
 
-_Written by: Author name_
+The structure of the application focusing on the help command is illustrated in the class diagram below:
+![Data Component Class Diagram](images/HelpClassDiagram.png)
+
+For each command subclass, they will implement the getHelpMessage() and getDetailedHelpMessage() methods. These methods 
+will contain their corresponding HelpMessage Enum that stores the help messages as strings inside the enum.
+
+In the help classes, during the execute() call, it will call either generateBasicHelp() or generateDetailedHelp() method
+based on the help option given by the user. 
+
+<!-- Todo: Add sequence diagram -->
+
+_Written by: Chia Thin Hong_
 
 ### Add Command
 
