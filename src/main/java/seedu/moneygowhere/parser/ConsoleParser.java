@@ -705,42 +705,62 @@ public class ConsoleParser {
         }
     }
 
-    private static ConsoleCommandAddRecurringPayment parseCommandAddRecurringPayment(String arguments) throws
+    private static void validateCommandAddRecurringPaymentOptions(Options options) {
+        boolean hasAllCliOptions = options.hasLongOption(
+                ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_NAME_LONG)
+                && options.hasLongOption(
+                ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_INTERVAL_LONG)
+                && options.hasLongOption(
+                ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_AMOUNT_LONG)
+                && options.hasLongOption(
+                ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_DESCRIPTION_LONG);
+
+        assert hasAllCliOptions :
+                ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS;
+    }
+
+    private static CommandLine parseCommandAddRecurringPaymentArguments(Options options, String arguments) throws
             ConsoleParserCommandAddRecurringPaymentInvalidException {
         try {
-            String[] argumentsArr = tokenizeCommandArguments(arguments);
+            CommandLine commandline = parseCommandArguments(options, arguments);
 
-            Options cliOptions = ConsoleParserConfigurations.getCommandAddRecurringPaymentOptions();
-            CommandLineParser cliParser = new DefaultParser();
-            CommandLine cli = cliParser.parse(cliOptions, argumentsArr);
+            return commandline;
+        } catch (ParseException exception) {
+            throw new ConsoleParserCommandAddRecurringPaymentInvalidException(exception);
+        }
+    }
 
-            String name = cli.getOptionValue(
+    private static void validateCommandAddRecurringPaymentValues(CommandLine commandLine) throws
+            ConsoleParserCommandAddRecurringPaymentInvalidException {
+        String name = commandLine.getOptionValue(
+                ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_NAME_LONG
+        );
+
+        if (name.isBlank()) {
+            throw new ConsoleParserCommandAddRecurringPaymentInvalidException();
+        }
+    }
+
+    private static ConsoleCommandAddRecurringPayment parseCommandAddRecurringPaymentValues(
+            CommandLine commandLine
+    ) throws ConsoleParserCommandAddRecurringPaymentInvalidException {
+        try {
+            String name = commandLine.getOptionValue(
                     ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_NAME_LONG
             );
-            String amountStr = cli.getOptionValue(
+            String amountStr = commandLine.getOptionValue(
                     ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_AMOUNT_LONG
             );
-            String intervalStr = cli.getOptionValue(
+            String intervalStr = commandLine.getOptionValue(
                     ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_INTERVAL_LONG
             );
-
-            /* Checks if mandatory arguments are provided */
-
-            if (name == null || amountStr == null || intervalStr == null) {
-                throw new ConsoleParserCommandAddRecurringPaymentInvalidException();
-            }
-
-            String description = cli.getOptionValue(
+            String description = commandLine.getOptionValue(
                     ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_DESCRIPTION_LONG
             );
-
-            /* Parses and normalizes arguments */
 
             BigDecimal amount = new BigDecimal(amountStr);
 
             int interval = Integer.parseInt(intervalStr);
-
-            /* Returns parsed arguments */
 
             return new ConsoleCommandAddRecurringPayment(
                     name,
@@ -748,9 +768,36 @@ public class ConsoleParser {
                     description,
                     amount
             );
-        } catch (ParseException
-                 | NumberFormatException
-                 | ConsoleParserCommandAddRecurringPaymentInvalidException exception) {
+        } catch (DateTimeParseException | NumberFormatException exception) {
+            throw new ConsoleParserCommandAddRecurringPaymentInvalidException(exception);
+        }
+    }
+
+    private static ConsoleCommandAddRecurringPayment normalizeCommandAddRecurringPaymentValues(
+            ConsoleCommandAddRecurringPayment consoleCommandAddRecurringPayment
+    ) {
+        return consoleCommandAddRecurringPayment;
+    }
+
+    private static ConsoleCommandAddRecurringPayment parseCommandAddRecurringPayment(String arguments) throws
+            ConsoleParserCommandAddRecurringPaymentInvalidException {
+        try {
+            Options options = ConsoleParserConfigurations.getCommandAddRecurringPaymentOptions();
+
+            validateCommandAddRecurringPaymentOptions(options);
+
+            CommandLine commandLine = parseCommandAddRecurringPaymentArguments(options, arguments);
+
+            validateCommandAddRecurringPaymentValues(commandLine);
+
+            ConsoleCommandAddRecurringPayment consoleCommandAddRecurringPayment
+                    = parseCommandAddRecurringPaymentValues(commandLine);
+
+            ConsoleCommandAddRecurringPayment consoleCommandAddRecurringPaymentNormalized
+                    = normalizeCommandAddRecurringPaymentValues(consoleCommandAddRecurringPayment);
+
+            return consoleCommandAddRecurringPaymentNormalized;
+        } catch (ConsoleParserCommandAddRecurringPaymentInvalidException exception) {
             throw new ConsoleParserCommandAddRecurringPaymentInvalidException(
                     Messages.CONSOLE_ERROR_COMMAND_ADD_RECURRING_PAYMENT_INVALID,
                     exception
@@ -758,20 +805,53 @@ public class ConsoleParser {
         }
     }
 
-    private static ConsoleCommandViewRecurringPayment parseCommandViewRecurringPayment(String arguments) throws
+    private static void validateCommandViewRecurringPaymentOptions(Options options) {
+        boolean hasAllCliOptions = options.hasLongOption(
+                ConsoleParserConfigurations.COMMAND_VIEW_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_LONG);
+
+        assert hasAllCliOptions :
+                ConsoleParserConfigurations.COMMAND_VIEW_RECURRING_PAYMENT_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS;
+    }
+
+    private static CommandLine parseCommandViewRecurringPaymentArguments(Options options, String arguments) throws
             ConsoleParserCommandViewRecurringPaymentInvalidException {
         try {
-            String[] argumentsArr = tokenizeCommandArguments(arguments);
+            CommandLine commandline = parseCommandArguments(options, arguments);
 
-            Options cliOptions = ConsoleParserConfigurations.getCommandViewRecurringPaymentOptions();
-            CommandLineParser cliParser = new DefaultParser();
-            CommandLine cli = cliParser.parse(cliOptions, argumentsArr);
+            return commandline;
+        } catch (ParseException exception) {
+            throw new ConsoleParserCommandViewRecurringPaymentInvalidException(exception);
+        }
+    }
 
-            String recurringPaymentIndexStr = cli.getOptionValue(
+    private static void validateCommandViewRecurringPaymentValues(CommandLine commandLine) throws
+            ConsoleParserCommandViewRecurringPaymentInvalidException {
+        String recurringPaymentIndexStr = commandLine.getOptionValue(
+                ConsoleParserConfigurations.COMMAND_VIEW_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_LONG
+        );
+
+        if (recurringPaymentIndexStr != null) {
+            int recurringPaymentIndex;
+
+            try {
+                recurringPaymentIndex = Integer.parseInt(recurringPaymentIndexStr);
+            } catch (NumberFormatException exception) {
+                throw new ConsoleParserCommandViewRecurringPaymentInvalidException(exception);
+            }
+
+            if (recurringPaymentIndex < 0) {
+                throw new ConsoleParserCommandViewRecurringPaymentInvalidException();
+            }
+        }
+    }
+
+    private static ConsoleCommandViewRecurringPayment parseCommandViewRecurringPaymentValues(
+            CommandLine commandLine
+    ) throws ConsoleParserCommandViewRecurringPaymentInvalidException {
+        try {
+            String recurringPaymentIndexStr = commandLine.getOptionValue(
                     ConsoleParserConfigurations.COMMAND_VIEW_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_LONG
             );
-
-            /* Parses and normalizes arguments */
 
             int recurringPaymentIndex;
             if (recurringPaymentIndexStr == null) {
@@ -780,10 +860,37 @@ public class ConsoleParser {
                 recurringPaymentIndex = Integer.parseInt(recurringPaymentIndexStr);
             }
 
-            /* Returns parsed arguments */
-
             return new ConsoleCommandViewRecurringPayment(recurringPaymentIndex);
-        } catch (ParseException | NumberFormatException exception) {
+        } catch (DateTimeParseException | NumberFormatException exception) {
+            throw new ConsoleParserCommandViewRecurringPaymentInvalidException(exception);
+        }
+    }
+
+    private static ConsoleCommandViewRecurringPayment normalizeCommandViewRecurringPaymentValues(
+            ConsoleCommandViewRecurringPayment consoleCommandViewRecurringPayment
+    ) {
+        return consoleCommandViewRecurringPayment;
+    }
+
+    private static ConsoleCommandViewRecurringPayment parseCommandViewRecurringPayment(String arguments) throws
+            ConsoleParserCommandViewRecurringPaymentInvalidException {
+        try {
+            Options options = ConsoleParserConfigurations.getCommandViewRecurringPaymentOptions();
+
+            validateCommandViewRecurringPaymentOptions(options);
+
+            CommandLine commandLine = parseCommandViewRecurringPaymentArguments(options, arguments);
+
+            validateCommandViewRecurringPaymentValues(commandLine);
+
+            ConsoleCommandViewRecurringPayment consoleCommandViewRecurringPayment
+                    = parseCommandViewRecurringPaymentValues(commandLine);
+
+            ConsoleCommandViewRecurringPayment consoleCommandViewRecurringPaymentNormalized
+                    = normalizeCommandViewRecurringPaymentValues(consoleCommandViewRecurringPayment);
+
+            return consoleCommandViewRecurringPaymentNormalized;
+        } catch (ConsoleParserCommandViewRecurringPaymentInvalidException exception) {
             throw new ConsoleParserCommandViewRecurringPaymentInvalidException(
                     Messages.CONSOLE_ERROR_COMMAND_VIEW_RECURRING_PAYMENT_INVALID,
                     exception

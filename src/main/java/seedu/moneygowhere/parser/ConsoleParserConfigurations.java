@@ -221,6 +221,8 @@ public class ConsoleParserConfigurations {
     public static final String COMMAND_ADD_RECURRING_PAYMENT_ARG_DESCRIPTION_DESC = "Description";
     public static final boolean COMMAND_ADD_RECURRING_PAYMENT_ARG_DESCRIPTION_HAS_VAL = true;
     public static final boolean COMMAND_ADD_RECURRING_PAYMENT_ARG_DESCRIPTION_IS_MAND = false;
+    public static final String COMMAND_ADD_RECURRING_PAYMENT_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS = ""
+            + "Command Add-RecurringPayment does not have all of the required options.";
 
     /**
      * Defines parameters for console command View-RecurringPayment.
@@ -237,6 +239,8 @@ public class ConsoleParserConfigurations {
             true;
     public static final boolean COMMAND_VIEW_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_IS_MAND =
             false;
+    public static final String COMMAND_VIEW_RECURRING_PAYMENT_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS = ""
+            + "Command View-RecurringPayment does not have all of the required options.";
 
     /**
      * Generates an {@link Options} object with required arguments for command Add-Expense.
