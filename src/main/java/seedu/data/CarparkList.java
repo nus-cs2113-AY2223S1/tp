@@ -2,6 +2,8 @@ package seedu.data;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 import seedu.exception.NoCarparkFoundException;
@@ -14,14 +16,17 @@ import seedu.parser.search.Word;
  * Container for all the {@link Carpark} classes. Contains method for finding the carpark.
  */
 public class CarparkList {
-    private final List<Carpark> carparks;
+    private List<Carpark> carparks;
+    private final HashMap<String, Carpark> carparkHashMap = new HashMap<String, Carpark>();
 
     public CarparkList(Path filepath, Path filepathBackup) throws NoFileFoundException {
         carparks = FileReader.loadLtaJson(filepath, filepathBackup);
+        combineByLotType();
     }
 
     public CarparkList(List<Carpark> carparks) {
         this.carparks = carparks;
+        combineByLotType();
     }
 
     /**
@@ -32,36 +37,36 @@ public class CarparkList {
      * @throws NoCarparkFoundException If no carpark was found
      */
     public Carpark findCarpark(String searchString) throws NoCarparkFoundException {
-        for (Carpark carpark : carparks) {
-            if (carpark.getCarparkId().equalsIgnoreCase(searchString)) {
-                return carpark;
-            }
+        if (carparkHashMap.get(searchString.toLowerCase()) == null) {
+            throw new NoCarparkFoundException();
         }
-        throw new NoCarparkFoundException();
+        else {
+            return carparkHashMap.get(searchString.toLowerCase());
+        }
     }
 
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
         for (Carpark carpark : carparks) {
-            result.append(carpark.toString()).append("\n");
+            result.append(carpark.getDetailViewString()).append("\n");
         }
         return result.toString();
     }
 
     public CarparkList searchStrings(Sentence searchQuery) {
-        List<Carpark> carparkListBuffer = carparks;
+        HashSet<Carpark> carparkListBuffer = new HashSet<>(carparks);
         for (Word word : searchQuery.getWords()) {
             carparkListBuffer = filterBySubstring(carparkListBuffer, word.toString());
         }
-        return new CarparkList(carparkListBuffer);
+        return new CarparkList(new ArrayList<>(carparkListBuffer));
     }
 
-    private List<Carpark> filterBySubstring(List<Carpark> carparkList, String wordString) {
-        List<Carpark> bufferList = new ArrayList<>();
+    private HashSet<Carpark> filterBySubstring(HashSet<Carpark> carparkList, String wordString) {
+        HashSet<Carpark> bufferList = new HashSet<>();
         for (Carpark carpark : carparkList) {
             for (Word word : carpark.getDevelopmentSentence().getWords()) {
-                if (word.toString().equalsIgnoreCase(wordString)) {
+                if (word.toString().toLowerCase().startsWith(wordString.toLowerCase())) {
                     word.makeBold(true);
                     bufferList.add(carpark);
                     break;
@@ -80,8 +85,20 @@ public class CarparkList {
     public String getSearchListString() {
         StringBuilder bufferString = new StringBuilder();
         for (Carpark carpark: carparks) {
-            bufferString.append(carpark.getDevelopmentSentence().toString()).append("\n");
+            bufferString.append(carpark.getListViewString()).append("\n");
         }
         return bufferString.toString();
+    }
+
+    public void combineByLotType() {
+        for (Carpark carpark : carparks) {
+            String carparkId = carpark.getCarparkId().toLowerCase();
+            if (!carparkHashMap.containsKey(carparkId)) {
+                carparkHashMap.put(carparkId, carpark);
+            } else {
+                carparkHashMap.get(carparkId).addCarparkLotType(carpark);
+            }
+        }
+        carparks = new ArrayList<>(carparkHashMap.values());
     }
 }

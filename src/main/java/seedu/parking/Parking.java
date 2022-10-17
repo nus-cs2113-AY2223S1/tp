@@ -77,9 +77,9 @@ public class Parking {
                 try {
                     String carparkID = find.getCarparkID(input);
                     Carpark carpark = carparkList.findCarpark(carparkID);
-                    ui.print(carpark.toString());
+                    ui.print(carpark.getDetailViewString());
                 } catch (NoCommandArgumentException | NoCarparkFoundException exception) {
-                    ui.printError(exception);;
+                    ui.printError(exception);
                 }
                 break;
             case UPDATE:

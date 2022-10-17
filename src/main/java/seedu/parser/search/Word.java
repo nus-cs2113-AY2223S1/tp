@@ -1,7 +1,7 @@
 package seedu.parser.search;
 
 /**
- * Represents a single word in a {@link SearchQuery}.
+ * Represents a single word in a {@link Sentence}.
  */
 public class Word {
     private final String text;
@@ -31,5 +31,13 @@ public class Word {
         } else {
             return text;
         }
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public boolean isBold() {
+        return isBold;
     }
 }

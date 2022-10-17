@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Sentence {
-    private List<Word> words = new ArrayList<>();
+    private final List<Word> words = new ArrayList<>();
+    private final String textString;
 
     public Sentence(String input) {
         String[] wordStrings = input.trim().split("[ /,-]");
+        textString = input;
         for (String word : wordStrings) {
             words.add(new Word(word));
         }
@@ -15,11 +17,13 @@ public class Sentence {
 
     @Override
     public String toString() {
-        StringBuilder bufferString = new StringBuilder();
+        String outputString = textString;
         for (Word word : words) {
-            bufferString.append(word).append(" ");
+            if (word.isBold()) {
+                outputString = outputString.replace(word.getText(), word.toString());
+            }
         }
-        return bufferString.toString().trim();
+        return outputString.trim();
     }
 
     public List<Word> getWords() {

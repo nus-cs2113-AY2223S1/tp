@@ -8,9 +8,8 @@ import seedu.exception.ParkingException;
  * Represents a user interface that handles input and output with the user.
  */
 public class Ui {
-
+    private static final String SEPARATOR_STRING = "===========================================";
     private Scanner in;
-
     public Ui() {
         this.in = new Scanner(System.in);
     }
@@ -167,5 +166,8 @@ public class Ui {
      */
     public void changeScanner(Scanner in) {
         this.in = in;
+    }
+    public static String getSeparatorString() {
+        return SEPARATOR_STRING;
     }
 }
