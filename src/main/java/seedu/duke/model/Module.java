@@ -75,7 +75,7 @@ public class Module {
         return null;
     }
 
-    public int getModuleLevel (Module module){
+    public int getModuleLevel(Module module) {
         String moduleCode = module.moduleCode;
         int moduleLevel = (Integer.parseInt(moduleCode.replaceAll("[^0-9]", ""))) / 1000;
         return moduleLevel;
