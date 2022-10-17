@@ -8,15 +8,9 @@ import recipeditor.command.Command;
 import recipeditor.command.ExitCommand;
 import recipeditor.command.CommandResult;
 
+
 public class Recipeditor {
 
-    /**
-     * TODO: Do we want to make the important classes instance based or Class level based.
-     * Aka Do we want to call static Classes or Instance of the class
-     * For example do we want static methods of Storage, RecipeList
-     * (because we only manipulate 1 list at a time when the program runs?)
-     * Or do we want to have instances of them?
-     */
 
     public static void main(String[] args) {
         run(args);
