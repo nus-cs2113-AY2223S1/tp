@@ -1,22 +1,22 @@
 package seedu.duke.commands;
 
-import seedu.duke.Duke;
 import seedu.duke.Timetable;
+import seedu.duke.UI;
 
 import java.io.IOException;
 
 
 public class CommandDeleteModule {
-    public static String deleteModule(Timetable timetable) {
+    public static String deleteModule() {
 
-        System.out.println(timetable.listModules());
+        UI.printResponse(Timetable.listModules());
 
-        System.out.println("Which module you would like to delete? " 
+        UI.printResponse("Which module you would like to delete? "
                 + "Please enter the index of that module. ");
 
         try {
-            String index = Duke.sc.nextLine();
-            timetable.deleteModule(Integer.parseInt(index));
+            String index = UI.sc.nextLine();
+            Timetable.deleteModule(Integer.parseInt(index));
         } catch (IndexOutOfBoundsException e) {
             return "Please input a valid index!";
         } catch (NumberFormatException e) {
