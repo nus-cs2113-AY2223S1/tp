@@ -127,22 +127,24 @@ public class SearchModuleCommand extends Command {
 
         // filter the searchResult if toSearchLevel is not empty and level does not match
         if (toSearchLevel != null) {
+            List<Module> updatedSearchResult = new ArrayList<>();;
             for (int i = 0; i < searchResult.size(); i++) {
-                if (!isSameModuleLevel(searchResult.get(i), toSearchLevel)) {
-                    searchResult.remove(i);
-                    i--;
+                if (isSameModuleLevel(searchResult.get(i), toSearchLevel)) {
+                    updatedSearchResult.add(searchResult.get(i));
                 }
             }
+            searchResult = updatedSearchResult;
         }
 
         // filter the searchResult if toSearchSemester is not empty and semester does not match
         if (toSearchSemester != null) {
+            List<Module> updatedSearchResult = new ArrayList<>();;
             for (int i = 0; i < searchResult.size(); i++) {
-                if (!isOfferedInSemester(searchResult.get(i), toSearchSemester)) {
-                    searchResult.remove(i);
-                    i--;
+                if (isOfferedInSemester(searchResult.get(i), toSearchSemester)) {
+                    updatedSearchResult.add(searchResult.get(i));
                 }
             }
+            searchResult = updatedSearchResult;
         }
 
         return searchResult;
