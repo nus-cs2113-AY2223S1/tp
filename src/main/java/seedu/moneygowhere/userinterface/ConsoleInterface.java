@@ -6,6 +6,7 @@ import seedu.moneygowhere.commands.ConsoleCommandAddIncome;
 import seedu.moneygowhere.commands.ConsoleCommandAddRecurringPayment;
 import seedu.moneygowhere.commands.ConsoleCommandAddTarget;
 import seedu.moneygowhere.commands.ConsoleCommandBye;
+import seedu.moneygowhere.commands.ConsoleCommandConvertCurrency;
 import seedu.moneygowhere.commands.ConsoleCommandDeleteExpense;
 import seedu.moneygowhere.commands.ConsoleCommandEditExpense;
 import seedu.moneygowhere.commands.ConsoleCommandSortExpense;
@@ -27,6 +28,7 @@ import seedu.moneygowhere.exceptions.ConsoleParserCommandAddExpenseInvalidExcept
 import seedu.moneygowhere.exceptions.ConsoleParserCommandAddIncomeInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandAddRecurringPaymentInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandAddTargetInvalidException;
+import seedu.moneygowhere.exceptions.ConsoleParserCommandConvertCurrencyInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandDeleteExpenseInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandEditExpenseInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandNotFoundException;
@@ -44,8 +46,6 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Scanner;
 
 /**
@@ -318,13 +318,6 @@ public class ConsoleInterface {
             return;
         }
 
-        try {
-            currencyManager.hasCurrency(consoleCommandEditExpense.getCurrency());
-        } catch (CurrencyInvalidException exception) {
-            printErrorMessage(exception.getMessage());
-            return;
-        }
-
         String name = consoleCommandEditExpense.getName();
         if (name == null) {
             name = oldExpense.getName();
@@ -352,7 +345,15 @@ public class ConsoleInterface {
         String currency = consoleCommandEditExpense.getCurrency();
         if (currency == null) {
             currency = oldExpense.getCurrency();
+        } else {
+            try {
+                currencyManager.hasCurrency(consoleCommandEditExpense.getCurrency());
+            } catch (CurrencyInvalidException exception) {
+                printErrorMessage(exception.getMessage());
+                return;
+            }
         }
+        currency = currency.toUpperCase();
 
         Expense newExpense = new Expense(name, dateTime, description, amount, category, remarks, currency);
         try {
@@ -381,11 +382,46 @@ public class ConsoleInterface {
 
     @SuppressWarnings("Java8ListSort")
     private void runCommandSortExpense(ConsoleCommandSortExpense commandSortExpense) {
-        ArrayList<Expense> expenses = expenseManager.getExpenses();
-        Comparator<Expense> comparator = commandSortExpense.getComparator();
-        Collections.sort(expenses,comparator);
         expenseManager.updateSortExpenses(commandSortExpense);
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_SORTED_EXPENSE_SUCCESS);
+
+        LocalStorage.saveToFile(expenseManager);
+    }
+
+    private void runCommandChangeCurrency(ConsoleCommandConvertCurrency consoleCommandConvertCurrency) {
+        int expenseIndex = consoleCommandConvertCurrency.getExpenseIndex();
+
+        Expense expense;
+        try {
+            expense = expenseManager.getExpense(expenseIndex);
+        } catch (ExpenseManagerExpenseNotFoundException exception) {
+            printErrorMessage(exception.getMessage());
+            return;
+        }
+
+        try {
+            currencyManager.hasCurrency(consoleCommandConvertCurrency.getCurrency());
+        } catch (CurrencyInvalidException exception) {
+            printErrorMessage(exception.getMessage());
+            return;
+        }
+
+        consoleCommandConvertCurrency.changeCurrency(expense, currencyManager);
+        expenseManager.sortExpenses();
+
+        DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern(
+                Configurations.CONSOLE_INTERFACE_DATE_TIME_OUTPUT_FORMAT
+        );
+        String expenseStr = "";
+        expenseStr += "---- EXPENSE INDEX " + expenseIndex + " ----\n";
+        expenseStr += "Name          : " + expense.getName() + "\n";
+        expenseStr += "Date and Time : " + expense.getDateTime().format(dateTimeFormat) + "\n";
+        expenseStr += "Description   : " + expense.getDescription() + "\n";
+        expenseStr += "Amount        : " + expense.getAmount() + " " + expense.getCurrency() + "\n";
+        expenseStr += "Category      : " + expense.getCategory() + "\n";
+        expenseStr += "Remarks       : " + expense.getRemarks() + "\n";
+        printInformationalMessage(expenseStr);
+        printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_CONVERT_CURRENCY_SUCCESS);
 
         LocalStorage.saveToFile(expenseManager);
     }
@@ -516,7 +552,8 @@ public class ConsoleInterface {
                      | ConsoleParserCommandAddTargetInvalidException
                      | ConsoleParserCommandAddIncomeInvalidException
                      | ConsoleParserCommandAddRecurringPaymentInvalidException
-                     | ConsoleParserCommandViewRecurringPaymentInvalidException exception) {
+                     | ConsoleParserCommandViewRecurringPaymentInvalidException
+                     | ConsoleParserCommandConvertCurrencyInvalidException exception) {
                 printErrorMessage(exception.getMessage());
             }
             // Execute function according to the ConsoleCommand object returned by the parser
@@ -535,6 +572,8 @@ public class ConsoleInterface {
                 runCommandEditExpense((ConsoleCommandEditExpense) consoleCommand);
             } else if (consoleCommand instanceof ConsoleCommandSortExpense) {
                 runCommandSortExpense((ConsoleCommandSortExpense) consoleCommand);
+            } else if (consoleCommand instanceof ConsoleCommandConvertCurrency) {
+                runCommandChangeCurrency((ConsoleCommandConvertCurrency) consoleCommand);
             } else if (consoleCommand instanceof ConsoleCommandAddIncome) {
                 runCommandAddIncome((ConsoleCommandAddIncome) consoleCommand);
             } else if (consoleCommand instanceof ConsoleCommandAddRecurringPayment) {

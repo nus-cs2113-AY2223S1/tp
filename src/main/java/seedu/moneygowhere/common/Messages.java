@@ -224,6 +224,26 @@ public class Messages {
             + CONSOLE_COMMAND_SORT_EXPENSE_SYNTAX;
 
     /**
+     * Defines messages for console command Convert-Currency.
+     */
+    public static final String CONSOLE_COMMAND_CONVERT_CURRENCY_SYNTAX = ""
+            + "SYNTAX: "
+            + ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY
+            + " -"
+            + ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY_ARG_EXPENSE_INDEX
+            + " "
+            + ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY_ARG_EXPENSE_INDEX_LONG.toUpperCase()
+            + " -"
+            + ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY_ARG_CURRENCY
+            + " "
+            + ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY_ARG_CURRENCY_LONG.toUpperCase();
+    public static final String CONSOLE_MESSAGE_COMMAND_CONVERT_CURRENCY_SUCCESS = ""
+            + "The expense's currency was changed successfully.";
+    public static final String CONSOLE_ERROR_COMMAND_CONVERT_CURRENCY_INVALID = ""
+            + "The arguments entered are invalid. "
+            + CONSOLE_COMMAND_CONVERT_CURRENCY_SYNTAX;
+
+    /**
      * Defines messages for console command Add-Target.
      */
     public static final String CONSOLE_COMMAND_ADD_TARGET_SYNTAX = ""

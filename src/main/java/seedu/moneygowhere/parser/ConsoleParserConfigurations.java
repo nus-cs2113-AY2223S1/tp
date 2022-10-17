@@ -154,6 +154,23 @@ public class ConsoleParserConfigurations {
     public static final String COMMAND_SORT_EXPENSE_ARG_ORDER_VAL_DESCENDING = "descending";
 
     /**
+     * Defines parameters for console command Convert-Currency.
+     */
+    public static final String COMMAND_CONVERT_CURRENCY = "Convert-Currency";
+    public static final String COMMAND_CONVERT_CURRENCY_ARG_EXPENSE_INDEX = "e";
+    public static final String COMMAND_CONVERT_CURRENCY_ARG_EXPENSE_INDEX_LONG = "expense-index";
+    public static final String COMMAND_CONVERT_CURRENCY_ARG_EXPENSE_INDEX_DESC = "Index";
+    public static final boolean COMMAND_CONVERT_CURRENCY_ARG_EXPENSE_INDEX_HAS_VAL = true;
+    public static final boolean COMMAND_CONVERT_CURRENCY_ARG_EXPENSE_INDEX_IS_MAND = true;
+    public static final String COMMAND_CONVERT_CURRENCY_ARG_CURRENCY = "x";
+    public static final String COMMAND_CONVERT_CURRENCY_ARG_CURRENCY_LONG = "currency";
+    public static final String COMMAND_CONVERT_CURRENCY_ARG_CURRENCY_DESC = "currency";
+    public static final boolean COMMAND_CONVERT_CURRENCY_ARG_CURRENCY_HAS_VAL = true;
+    public static final boolean COMMAND_CONVERT_CURRENCY_ARG_CURRENCY_IS_MAND = true;
+    public static final String COMMAND_CONVERT_CURRENCY_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS = ""
+            + "Command Convert-Currency does not have all of the required options.";
+
+    /**
      * Defines parameters for console command Add-Target.
      */
     public static final String COMMAND_ADD_TARGET = "Add-Target";
@@ -465,6 +482,34 @@ public class ConsoleParserConfigurations {
         Options options = new Options();
         options.addOption(optionType);
         options.addOption(optionOrder);
+
+        return options;
+    }
+
+    /**
+     * Generates an {@link Options} object with required arguments for command Change-Currency.
+     *
+     * @return {@link Options} object initialized with the required arguments.
+     */
+    public static Options getCommandConvertCurrencyOptions() {
+        Option optionExpenseIndex = new Option(
+                COMMAND_CONVERT_CURRENCY_ARG_EXPENSE_INDEX,
+                COMMAND_CONVERT_CURRENCY_ARG_EXPENSE_INDEX_LONG,
+                COMMAND_CONVERT_CURRENCY_ARG_EXPENSE_INDEX_HAS_VAL,
+                COMMAND_CONVERT_CURRENCY_ARG_EXPENSE_INDEX_DESC
+        );
+        optionExpenseIndex.setRequired(COMMAND_CONVERT_CURRENCY_ARG_EXPENSE_INDEX_IS_MAND);
+        Option optionCurrency = new Option(
+                COMMAND_CONVERT_CURRENCY_ARG_CURRENCY,
+                COMMAND_CONVERT_CURRENCY_ARG_CURRENCY_LONG,
+                COMMAND_CONVERT_CURRENCY_ARG_CURRENCY_HAS_VAL,
+                COMMAND_CONVERT_CURRENCY_ARG_CURRENCY_DESC
+        );
+        optionCurrency.setRequired(COMMAND_CONVERT_CURRENCY_ARG_CURRENCY_IS_MAND);
+
+        Options options = new Options();
+        options.addOption(optionExpenseIndex);
+        options.addOption(optionCurrency);
 
         return options;
     }

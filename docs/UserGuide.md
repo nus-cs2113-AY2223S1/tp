@@ -62,7 +62,7 @@ Syntax: `Edit-Expense -e EXPENSE_NUMBER [-n NAME] [-a AMOUNT] [-d DATE] [-t DESC
 
 * `EXPENSE_NUMBER` is an integer value.
 * `NAME`, `DESCRIPTION`, `CATEGORY` and `REMARKS` are text strings. You may use spaces within the text if you wrap the text with double quotes.
-* `CURRENCY` is a text string. By default, it will be SGD.
+* `CURRENCY` is a text string. 
 * `AMOUNT` is a decimal value.
 * `DATE` is a text string in the format `"dd/MM/yyyy HHmm"`.
 
@@ -76,18 +76,31 @@ Example of usage:
 * `Edit-Expense -e 1 -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359" -t "Monthly payment" -c "Work expenses" -r "Remarks here" -x USD`
 
 ### Sorting expenses: `Sort-Expense`
-Sorts the list of expenses according to an alphabetical, amount or date order. It can be sorted in both ascending and
-descending order.
+Sorts the list of expenses according to an alphabetical, amount, date or currency order. It can be sorted in both ascending and
+descending order. 
 
 Syntax: `Sort-Expense -t TYPE -o ORDER`
 
-* `TYPE` is a text string. It can be either `alphabetical`, `amount` or `date`.
+* `TYPE` is a text string. It can be either `alphabetical`, `amount`, `date` or `currency`.
 * `ORDER` is a text string. It can be either `ascending` or `descending`.
 
 Example of usage:
 * `Sort-Expense -t date -o ascending`
 * `Sort-Expense -t amount -o descending`
 * `Sort-Expense -t alphabetical -o ascending`
+* `Sort-Expense -t currency -o descending`
+
+### Converting currency of an expense: `Convert-Currency`
+Converts the currency of an expense from the list of expenses.
+
+Syntax: `Convert-Currency -e EXPENSE_NUMBER -x CURRENCY`
+
+* `EXPENSE_NUMBER` is an integer value.
+* `CURRENCY` is a text string.
+
+Example of usage:
+
+* `Convert-Currency -e 1 -x USD`
 
 ### Adding recurring payments: `Add-RecurringPayment`
 Adds a recurring payment to the list of recurring payments
@@ -131,3 +144,4 @@ file in your other devices. Date will be saved automatically.
 * Delete expense: `Delete-Expense -e 1`
 * Edit expense: `Edit-Expense -e 1 -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359" -t "Monthly payment" -c "Work expenses" -r "Remarks here" -x USD`
 * Sort expense: `Sort-Expense -t alphabetical -o ascending"`
+* Convert currency: `Convert-Currency -e 1 -x USD`

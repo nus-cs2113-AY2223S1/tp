@@ -27,7 +27,7 @@ public class Configurations {
     public static final boolean LOCAL_LOGGER_LOGGING_FILE_TO_APPEND = true;
 
     /**
-     * Defines configuration parameters for {@link seedu.moneygowhere.storage.LocalStorage}.
+     * Defines configuration parameters for {@link seedu.moneygowhere.currency.CurrencyApi}.
      */
     public static final String CURRENCY_API_URL = ""
             + "https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/sgd.json";
@@ -35,4 +35,9 @@ public class Configurations {
     public static final String FILE_PATH_CURRENCIES = DIRECTORY_PATH + FILE_NAME_CURRENCIES;
     public static final int NUMBER_OF_CURRENCIES = 267;
     public static final int IGNORED_LINES = 3;
+
+    /**
+     * Defines configuration parameters for {@link seedu.moneygowhere.data.currency.CurrencyManager}.
+     */
+    public static final String CURRENCY_SINGAPORE_DOLLARS = "SGD";
 }

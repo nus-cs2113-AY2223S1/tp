@@ -1,6 +1,8 @@
 package seedu.moneygowhere.data.currency;
 
-
+/**
+ * Stores data associated with a currency.
+ */
 public class Currency {
     private String currencyCode;
     private Float rate;

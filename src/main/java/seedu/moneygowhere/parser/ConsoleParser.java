@@ -13,6 +13,7 @@ import seedu.moneygowhere.commands.ConsoleCommandAddIncome;
 import seedu.moneygowhere.commands.ConsoleCommandAddRecurringPayment;
 import seedu.moneygowhere.commands.ConsoleCommandAddTarget;
 import seedu.moneygowhere.commands.ConsoleCommandBye;
+import seedu.moneygowhere.commands.ConsoleCommandConvertCurrency;
 import seedu.moneygowhere.commands.ConsoleCommandDeleteExpense;
 import seedu.moneygowhere.commands.ConsoleCommandEditExpense;
 import seedu.moneygowhere.commands.ConsoleCommandSortExpense;
@@ -22,6 +23,7 @@ import seedu.moneygowhere.common.Configurations;
 import seedu.moneygowhere.common.Messages;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandAddRecurringPaymentInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandAddTargetInvalidException;
+import seedu.moneygowhere.exceptions.ConsoleParserCommandConvertCurrencyInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandDeleteExpenseInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandEditExpenseInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandNotFoundException;
@@ -416,6 +418,56 @@ public class ConsoleParser {
         }
     }
 
+    private static ConsoleCommandConvertCurrency parseCommandConvertCurrency(String arguments)
+            throws ConsoleParserCommandConvertCurrencyInvalidException {
+        try {
+            String[] argumentsArr = tokenizeCommandArguments(arguments);
+
+            Options cliOptions = ConsoleParserConfigurations.getCommandConvertCurrencyOptions();
+
+            /* Checks if all options are added */
+
+            boolean hasAllCliOptions = cliOptions.hasLongOption(
+                    ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY_ARG_EXPENSE_INDEX_LONG)
+                    && cliOptions.hasLongOption(
+                    ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY_ARG_CURRENCY_LONG);
+            assert hasAllCliOptions :
+                    ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS;
+
+            CommandLineParser cliParser = new DefaultParser();
+            CommandLine cli = cliParser.parse(cliOptions, argumentsArr);
+
+            String expenseIndexStr = cli.getOptionValue(
+                    ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY_ARG_EXPENSE_INDEX_LONG
+            );
+            String currency = cli.getOptionValue(
+                    ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY_ARG_CURRENCY_LONG
+            );
+
+            /* Checks if mandatory arguments are provided */
+
+            if (expenseIndexStr == null || currency == null) {
+                throw new ConsoleParserCommandConvertCurrencyInvalidException();
+            }
+
+            /* Parses and normalizes arguments */
+
+            int expenseIndex = Integer.parseInt(expenseIndexStr);
+            currency = currency.toUpperCase();
+
+            /* Returns parsed arguments */
+
+            return new ConsoleCommandConvertCurrency(expenseIndex, currency);
+        } catch (ParseException
+                 | NumberFormatException
+                 | ConsoleParserCommandConvertCurrencyInvalidException exception) {
+            throw new ConsoleParserCommandConvertCurrencyInvalidException(
+                    Messages.CONSOLE_ERROR_COMMAND_CONVERT_CURRENCY_INVALID,
+                    exception
+            );
+        }
+    }
+
     private static ConsoleCommandAddTarget parseCommandAddTarget(String arguments) throws
             ConsoleParserCommandAddTargetInvalidException {
         try {
@@ -666,6 +718,7 @@ public class ConsoleParser {
      * @throws ConsoleParserCommandDeleteExpenseInvalidException   If the command delete-expense is invalid.
      * @throws ConsoleParserCommandEditExpenseInvalidException     If the command edit-expense is invalid.
      * @throws ConsoleParserCommandSortExpenseInvalidTypeException If the command sort-expense is invalid.
+     * @throws ConsoleParserCommandConvertCurrencyInvalidException  If the command convert-currency is invalid.
      * @throws ConsoleParserCommandAddTargetInvalidException       If the command add-target is invalid.
      * @throws ConsoleParserCommandAddIncomeInvalidException       If the command add-income is invalid.
      */
@@ -676,6 +729,7 @@ public class ConsoleParser {
             ConsoleParserCommandDeleteExpenseInvalidException,
             ConsoleParserCommandEditExpenseInvalidException,
             ConsoleParserCommandSortExpenseInvalidTypeException,
+            ConsoleParserCommandConvertCurrencyInvalidException,
             ConsoleParserCommandAddTargetInvalidException,
             ConsoleParserCommandAddIncomeInvalidException,
             ConsoleParserCommandAddRecurringPaymentInvalidException,
@@ -703,6 +757,8 @@ public class ConsoleParser {
             return parseCommandAddRecurringPayment(arguments);
         } else if (command.equalsIgnoreCase(ConsoleParserConfigurations.COMMAND_VIEW_RECURRING_PAYMENT)) {
             return parseCommandViewRecurringPayment(arguments);
+        } else if (command.equalsIgnoreCase(ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY)) {
+            return parseCommandConvertCurrency(arguments);
         } else {
             throw new ConsoleParserCommandNotFoundException(Messages.CONSOLE_ERROR_COMMAND_NOT_FOUND);
         }

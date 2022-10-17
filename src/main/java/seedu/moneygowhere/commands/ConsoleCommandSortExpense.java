@@ -64,12 +64,15 @@ public class ConsoleCommandSortExpense extends ConsoleCommand {
     private Comparator<Expense> sortByDate = new Comparator<>() {
         @Override
         public int compare(Expense expense1, Expense expense2) {
-            LocalDateTime expenseName1 = expense1.getDateTime();
-            LocalDateTime expenseName2 = expense2.getDateTime();
-            if (order) {
-                return expenseName1.compareTo(expenseName2);
+            LocalDateTime expenseDate1 = expense1.getDateTime();
+            LocalDateTime expenseDate2 = expense2.getDateTime();
+            if (expenseDate1.equals(expenseDate2)) {
+                return sortByAlphabet.compare(expense1, expense2);
             }
-            return expenseName2.compareTo(expenseName1);
+            if (order) {
+                return expenseDate1.compareTo(expenseDate2);
+            }
+            return expenseDate2.compareTo(expenseDate1);
         }
     };
 
@@ -94,23 +97,29 @@ public class ConsoleCommandSortExpense extends ConsoleCommand {
     private Comparator<Expense> sortByAmount = new Comparator<>() {
         @Override
         public int compare(Expense expense1, Expense expense2) {
-            BigDecimal expenseName1 = expense1.getAmount();
-            BigDecimal expenseName2 = expense2.getAmount();
-            if (order) {
-                return expenseName1.compareTo(expenseName2);
+            BigDecimal expenseAmount1 = expense1.getAmount();
+            BigDecimal expenseAmount2 = expense2.getAmount();
+            if (expenseAmount1.equals(expenseAmount2)) {
+                return sortByAlphabet.compare(expense1, expense2);
             }
-            return expenseName2.compareTo(expenseName1);
+            if (order) {
+                return expenseAmount1.compareTo(expenseAmount2);
+            }
+            return expenseAmount2.compareTo(expenseAmount1);
         }
     };
 
     /**
-     * Comparator sorts from A to Z if ascending order, Z to A if descending order.
+     * Comparator sorts currencies from A to Z if ascending order, Z to A if descending order.
      */
     private Comparator<Expense> sortByCurrency = new Comparator<>() {
         @Override
         public int compare(Expense expense1, Expense expense2) {
             String expenseCurrency1 = expense1.getCurrency();
             String expenseCurrency2 = expense2.getCurrency();
+            if (expenseCurrency1.equalsIgnoreCase(expenseCurrency2)) {
+                return sortByAmount.compare(expense1, expense2);
+            }
             if (order) {
                 return expenseCurrency1.compareTo(expenseCurrency2);
             }

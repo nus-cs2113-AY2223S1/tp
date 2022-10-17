@@ -6,6 +6,7 @@ import seedu.moneygowhere.exceptions.ExpenseManagerExpenseNotFoundException;
 import seedu.moneygowhere.parser.ConsoleParserConfigurations;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 /**
  * Stores and manages a list of expenses.
@@ -17,14 +18,14 @@ public class ExpenseManager {
 
     public ExpenseManager() {
         sortCommandSetting = new ConsoleCommandSortExpense(
-                ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE_VAL_DATE,
-                ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_ORDER_VAL_DESCENDING
+                ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE_VAL_ALPHABETICAL,
+                ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_ORDER_VAL_ASCENDING
         );
         expenses = new ArrayList<>() {
             @Override
             public boolean add(Expense newExpense) {
                 super.add(newExpense);
-                expenses.sort(sortCommandSetting.getComparator());
+                sortExpenses();
                 return true;
             }
         };
@@ -69,30 +70,25 @@ public class ExpenseManager {
     public void editExpense(int expenseIndex, Expense expense) throws ExpenseManagerExpenseNotFoundException {
         try {
             expenses.set(expenseIndex, expense);
-            expenses.sort(sortCommandSetting.getComparator());
+            sortExpenses();
         } catch (IndexOutOfBoundsException exception) {
             throw new ExpenseManagerExpenseNotFoundException(Messages.EXPENSE_MANAGER_ERROR_EXPENSE_NOT_FOUND);
         }
     }
 
-    public void deleteRemarks(int expenseIndex) throws ExpenseManagerExpenseNotFoundException {
-        try {
-            Expense expense = expenses.get(expenseIndex);
-            expense.setRemarks(null);
-        } catch (IndexOutOfBoundsException exception) {
-            throw new ExpenseManagerExpenseNotFoundException(Messages.EXPENSE_MANAGER_ERROR_EXPENSE_NOT_FOUND);
-        }
+    public void sortExpenses() {
+        Comparator<Expense> comparator = sortCommandSetting.getComparator();
+        expenses.sort(comparator);
     }
 
     public void updateSortExpenses(ConsoleCommandSortExpense commandSortExpense) {
         String type = commandSortExpense.getType();
         String order = commandSortExpense.getOrder();
         sortCommandSetting = new ConsoleCommandSortExpense(type, order);
+        sortExpenses();
     }
 
     public ConsoleCommandSortExpense getSortCommandSetting() {
         return sortCommandSetting;
     }
-
-
 }
