@@ -20,6 +20,8 @@ public class UserUniversityListManager {
     private HashMap<String, UserUniversityList> myManager;
     private HashMap<String, UserUniversityList> myFavourites;
 
+    private UserDeletedModules deletedModulesList = new UserDeletedModules();
+
     private static Logger logger = Logger.getLogger("UniversityListManagerLogger");
 
     public UserUniversityListManager() {
@@ -35,6 +37,10 @@ public class UserUniversityListManager {
             System.out.println("Creating new University List Manager");
             myManager = new HashMap<String, UserUniversityList>();
         }
+    }
+
+    public UserDeletedModules getUserDeletedModules() {
+        return deletedModulesList;
     }
 
     /**
@@ -117,7 +123,13 @@ public class UserUniversityListManager {
     public void deleteModule(String inputSchool, String puCode) throws InvalidUserCommandException {
         assert inputSchool.length() > 0 : "Input school cannot be empty";
         assert puCode.length() > 0 : "Deleting PU code cannot be empty";
+<<<<<<< HEAD
         if (foundKeyAll(inputSchool)) {
+=======
+        if (foundKey(inputSchool)) {
+            UserModuleMapping deletedModule = myManager.get(inputSchool).getMyModules().getModuleByPuCode(puCode);
+            deletedModulesList.addToDeletedModules(deletedModule);
+>>>>>>> 8d8550f6be2ae96baee80512ccc6fae208f603c8
             myManager.get(inputSchool).deleteModuleByPuCode(puCode);
         } else {
             throw new InvalidUserCommandException("No such university found");
