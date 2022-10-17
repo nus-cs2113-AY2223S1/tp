@@ -5,5 +5,8 @@
                 |
 Program starting!
 Parseable command at the momemt: add, delete, list, view, exit
->>> Echo CommandResult message: RecipEditor ends here...
+Error creating data file
+File not found :< Creating your data file now...
+Error creating data file
+>>> RecipEditor ends here...
 Program exiting

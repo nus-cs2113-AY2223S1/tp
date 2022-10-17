@@ -1,5 +1,6 @@
 package recipeditor.ui;
 
+import recipeditor.Recipeditor;
 import recipeditor.recipe.Ingredient;
 import recipeditor.recipe.Recipe;
 
@@ -40,7 +41,7 @@ public class AddMode {
                 input = askDescription(input);
                 break;
             case INGREDIENTS_STAGE:
-                input  = askIngredients(input);
+                input = askIngredients(input);
                 break;
             case STEPS_STAGE:
                 input = askSteps(input);
@@ -56,6 +57,13 @@ public class AddMode {
     public void exitAddMode() {
         Ui.showMessage(EXIT);
         Ui.showDivider();
+    }
+
+    public Recipe getRecipe() {
+        if (isValid) {
+            return addedRecipe;
+        }
+        return null;
     }
 
     private String askTitle(String input) {
@@ -110,7 +118,6 @@ public class AddMode {
         } else {
             stage++;
         }
-
         return input;
     }
 

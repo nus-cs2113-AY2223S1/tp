@@ -1,11 +1,11 @@
 package recipeditor;
 
 import recipeditor.parser.Parser;
+import recipeditor.storage.Storage;
 import recipeditor.ui.Ui;
 
 import recipeditor.command.Command;
 import recipeditor.command.ExitCommand;
-import recipeditor.parser.Parser;
 import recipeditor.command.CommandResult;
 
 public class Recipeditor {
@@ -51,6 +51,8 @@ public class Recipeditor {
      * Main Command Loop Input -> Command -> Command Result -> Show & Save.
      */
     private static void runCommandLoopUntilExitCommand() {
+        Storage.createDataFile();
+        Storage.loadRecipesFromDataFile();
         Command command;
         do {
             String input = Ui.readInput();

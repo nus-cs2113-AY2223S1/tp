@@ -2,7 +2,6 @@ package recipeditor.recipe;
 
 import java.util.ArrayList;
 
-
 public class Ingredient {
     private String name;
     private double amount;
@@ -12,6 +11,9 @@ public class Ingredient {
         this.name = name;
         this.amount = amount;
         this.unit = unit;
+    }
+
+    public Ingredient() {
     }
 
     public double getAmount() {
