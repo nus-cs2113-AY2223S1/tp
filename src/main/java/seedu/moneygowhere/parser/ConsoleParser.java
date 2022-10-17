@@ -41,6 +41,12 @@ import java.util.List;
  * Provide functions to parse inputs read from standard input.
  */
 public class ConsoleParser {
+    /**
+     * Tokenizes command arguments for use by {@link DefaultParser#parse(Options, String[])}.
+     *
+     * @param arguments Arguments to tokenize.
+     * @return Tokenized arguments.
+     */
     private static String[] tokenizeCommandArguments(String arguments) {
         StringTokenizer stringTokenizer = new StringTokenizer(arguments);
         stringTokenizer.setQuoteMatcher(StringMatcherFactory.INSTANCE.quoteMatcher());
@@ -50,6 +56,14 @@ public class ConsoleParser {
         return tokenList.toArray(new String[0]);
     }
 
+    /**
+     * Parses command arguments.
+     *
+     * @param options Command line options.
+     * @param arguments Command line arguments.
+     * @return Parsed command arguments.
+     * @throws ParseException If an error is encountered during the parsing of command line arguments.
+     */
     private static CommandLine parseCommandArguments(Options options, String arguments) throws ParseException {
         String[] argumentsArr = tokenizeCommandArguments(arguments);
 
@@ -924,14 +938,16 @@ public class ConsoleParser {
      *
      * @param consoleInput String read from standard input.
      * @return Parsed command and arguments
-     * @throws ConsoleParserCommandNotFoundException               If the command is not found.
-     * @throws ConsoleParserCommandAddExpenseInvalidException      If the command add-expense is invalid.
-     * @throws ConsoleParserCommandViewExpenseInvalidException     If the command view-expense is invalid.
-     * @throws ConsoleParserCommandDeleteExpenseInvalidException   If the command delete-expense is invalid.
-     * @throws ConsoleParserCommandEditExpenseInvalidException     If the command edit-expense is invalid.
-     * @throws ConsoleParserCommandSortExpenseInvalidTypeException If the command sort-expense is invalid.
-     * @throws ConsoleParserCommandAddTargetInvalidException       If the command add-target is invalid.
-     * @throws ConsoleParserCommandAddIncomeInvalidException       If the command add-income is invalid.
+     * @throws ConsoleParserCommandNotFoundException                    If the command is not found.
+     * @throws ConsoleParserCommandAddExpenseInvalidException           If the command Add-Expense is invalid.
+     * @throws ConsoleParserCommandViewExpenseInvalidException          If the command View-Expense is invalid.
+     * @throws ConsoleParserCommandDeleteExpenseInvalidException        If the command Delete-Expense is invalid.
+     * @throws ConsoleParserCommandEditExpenseInvalidException          If the command Edit-Expense is invalid.
+     * @throws ConsoleParserCommandSortExpenseInvalidTypeException      If the command Sort-Expense is invalid.
+     * @throws ConsoleParserCommandAddTargetInvalidException            If the command Add-Target is invalid.
+     * @throws ConsoleParserCommandAddIncomeInvalidException            If the command Add-Income is invalid.
+     * @throws ConsoleParserCommandAddRecurringPaymentInvalidException  If the command Add-RecurringPayment is invalid.
+     * @throws ConsoleParserCommandViewRecurringPaymentInvalidException If the command View-RecurringPayment is invalid.
      */
     public static ConsoleCommand parse(String consoleInput) throws
             ConsoleParserCommandNotFoundException,
