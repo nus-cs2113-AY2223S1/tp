@@ -1,7 +1,7 @@
 package seedu.duke.command;
 
-import seedu.duke.biometrics.Biometrics;
 import seedu.duke.Ui;
+import seedu.duke.biometrics.Biometrics;
 import seedu.duke.exercise.ExerciseList;
 import seedu.duke.food.FoodList;
 import seedu.duke.storage.Storage;
@@ -20,13 +20,14 @@ public class HelpCommand extends Command {
                 + "help - to display the help message\n"
                 + "exit - to exit the program\n"
                 + "set biometrics /{age} /{gender} /height /{weight} /{fat percentage}\n"
-                + "add exercise /{description} /{repetitions} /{calories}\n"
+                + "add strength /{description} /{sets} /{repetitions} /{calories}\n"
                 + "add food /{description} /{calories}\n"
                 + "add weight /{weight} /{fat percentage}\n"
                 + "remove food /{food index}\n"
                 + "mark {done/undone} /{exercise index}\n"
                 + "e_remove exercise /{index}\n"
-                + "view {biometrics/exercise/food}");
+                + "view {biometrics/food/exercise {/done}/strength {/done}}\n"
+                + "find {strength /{exercise name}}");
     }
 
     @Override

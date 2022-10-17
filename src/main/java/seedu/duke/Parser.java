@@ -3,6 +3,7 @@ package seedu.duke;
 import seedu.duke.command.AddCommand;
 import seedu.duke.command.Command;
 import seedu.duke.command.ExitCommand;
+import seedu.duke.command.FindCommand;
 import seedu.duke.command.GreetCommand;
 import seedu.duke.command.HelpCommand;
 import seedu.duke.command.InvalidCommand;
@@ -41,6 +42,8 @@ public class Parser {
             return new MarkCommand(arguments);
         case "remove":
             return new RemoveCommand(arguments);
+        case "find":
+            return new FindCommand(arguments);
         case "help":
             return new HelpCommand();
         case "e_remove":
