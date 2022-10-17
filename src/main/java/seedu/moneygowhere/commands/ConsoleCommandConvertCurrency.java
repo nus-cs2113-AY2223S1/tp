@@ -27,9 +27,8 @@ public class ConsoleCommandConvertCurrency extends ConsoleCommand {
     }
 
     public void changeCurrency(Expense expense, CurrencyManager currencyManager) {
-        Float newAmount = currencyManager.exchangeCurrency(expense, currency);
-        BigDecimal newAmountInBigDecimal = new BigDecimal(Float.toString(newAmount));
-        expense.setAmount(newAmountInBigDecimal);
+        BigDecimal newAmount = currencyManager.exchangeCurrency(expense, currency);
+        expense.setAmount(newAmount);
         expense.setCurrency(currency);
     }
 }

@@ -1,18 +1,20 @@
 package seedu.moneygowhere.data.currency;
 
+import java.math.BigDecimal;
+
 /**
  * Stores data associated with a currency.
  */
 public class Currency {
     private String currencyCode;
-    private Float rate;
+    private BigDecimal rate;
 
-    public Currency(String currencyCode, Float rate) {
+    public Currency(String currencyCode, BigDecimal rate) {
         this.currencyCode = currencyCode;
         this.rate = rate;
     }
 
-    public Float getRate() {
+    public BigDecimal getRate() {
         return rate;
     }
 

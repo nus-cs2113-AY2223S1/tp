@@ -5,13 +5,14 @@ import seedu.moneygowhere.common.Messages;
 import seedu.moneygowhere.data.expense.Expense;
 import seedu.moneygowhere.exceptions.CurrencyInvalidException;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 
 /**
  * Stores and manages a HashMap of currencies.
  */
 public class CurrencyManager {
-    private HashMap<String, Float> exchangeRates;
+    private HashMap<String, BigDecimal> exchangeRates;
 
     public CurrencyManager() {
         exchangeRates = new HashMap<>();
@@ -19,7 +20,7 @@ public class CurrencyManager {
 
     public void addCurrency(Currency currency) {
         String currencyCode = currency.getCurrencyCode();
-        Float rate = currency.getRate();
+        BigDecimal rate = currency.getRate();
         exchangeRates.put(currencyCode, rate);
     }
 
@@ -30,30 +31,30 @@ public class CurrencyManager {
         throw new CurrencyInvalidException(Messages.CURRENCY_MANAGER_CURRENCY_NOT_FOUND);
     }
 
-    private Float getRate(String currency) {
+    private BigDecimal getRate(String currency) {
         return exchangeRates.get(currency);
     }
 
-    private Float convertToSgd(String currency, Float amount) {
-        Float rate = getRate(currency);
-        return (amount / rate);
+    private BigDecimal convertToSgd(String currency, BigDecimal amount) {
+        BigDecimal rate = getRate(currency);
+        return (amount.divide(rate));
     }
 
-    private Float convertToNewCurrency(Float amountInSgd, String newCurrency) {
-        Float rate = getRate(newCurrency);
-        return (amountInSgd * rate);
+    private BigDecimal convertToNewCurrency(BigDecimal amountInSgd, String newCurrency) {
+        BigDecimal rate = getRate(newCurrency);
+        return (amountInSgd.multiply(rate));
     }
 
-    public Float exchangeCurrency(Expense expense, String newCurrency) {
+    public BigDecimal exchangeCurrency(Expense expense, String newCurrency) {
         String oldCurrency = expense.getCurrency();
-        Float amountInSgd = expense.getAmount().floatValue();
+        BigDecimal amountInSgd = expense.getAmount();
         if (!(oldCurrency.equals(Configurations.CURRENCY_SINGAPORE_DOLLARS))) {
             amountInSgd = convertToSgd(oldCurrency, amountInSgd);
         }
         if (newCurrency.equals(Configurations.CURRENCY_SINGAPORE_DOLLARS)) {
             return amountInSgd;
         }
-        Float amountInNewCurrency = convertToNewCurrency(amountInSgd, newCurrency);
+        BigDecimal amountInNewCurrency = convertToNewCurrency(amountInSgd, newCurrency);
         return amountInNewCurrency;
     }
 }

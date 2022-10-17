@@ -388,7 +388,7 @@ public class ConsoleInterface {
         LocalStorage.saveToFile(expenseManager);
     }
 
-    private void runCommandChangeCurrency(ConsoleCommandConvertCurrency consoleCommandConvertCurrency) {
+    private void runCommandConvertCurrency(ConsoleCommandConvertCurrency consoleCommandConvertCurrency) {
         int expenseIndex = consoleCommandConvertCurrency.getExpenseIndex();
 
         Expense expense;
@@ -573,7 +573,7 @@ public class ConsoleInterface {
             } else if (consoleCommand instanceof ConsoleCommandSortExpense) {
                 runCommandSortExpense((ConsoleCommandSortExpense) consoleCommand);
             } else if (consoleCommand instanceof ConsoleCommandConvertCurrency) {
-                runCommandChangeCurrency((ConsoleCommandConvertCurrency) consoleCommand);
+                runCommandConvertCurrency((ConsoleCommandConvertCurrency) consoleCommand);
             } else if (consoleCommand instanceof ConsoleCommandAddIncome) {
                 runCommandAddIncome((ConsoleCommandAddIncome) consoleCommand);
             } else if (consoleCommand instanceof ConsoleCommandAddRecurringPayment) {

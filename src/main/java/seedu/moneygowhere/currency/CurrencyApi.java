@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.FileNotFoundException;
+import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -37,7 +38,7 @@ public class CurrencyApi {
             throw new CurrencyLoadDataInputException();
         }
         String currencyCode = splitInputs[0];
-        Float rate = Float.parseFloat(splitInputs[1]);
+        BigDecimal rate = new BigDecimal(splitInputs[1]);
         return new Currency(currencyCode, rate);
     }
 
