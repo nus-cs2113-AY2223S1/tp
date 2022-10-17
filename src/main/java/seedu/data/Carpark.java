@@ -3,8 +3,10 @@ package seedu.data;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
+
 import seedu.common.CommonData;
 import seedu.parser.search.Sentence;
 import seedu.parser.search.Word;
@@ -52,7 +54,8 @@ public class Carpark {
     }
 
     public String getListViewString() {
-        return developmentSentence.toString() + String.format(":   %s available lots total", availableLots);
+        return String.format("CarparkID %s at %s\n   %s available lots total", carparkId,
+                developmentSentence.toString(), availableLots);
     }
 
     public String getDetailViewString() {
@@ -161,6 +164,11 @@ public class Carpark {
         this.agency = agency;
     }
 
+    /**
+     * Add a carpark lot type to the {@link Carpark#allAvailableLots} Hashmap object,
+     * where the key is a {@link LotType} and the value is the number of lots.
+     * @param carpark Carpark object to be added.
+     */
     public void addCarparkLotType(Carpark carpark) {
         allAvailableLots.put(carpark.getLotType(), carpark.getAvailableLots());
         availableLots += carpark.getAvailableLots();

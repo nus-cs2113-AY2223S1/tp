@@ -16,14 +16,28 @@ import seedu.parser.search.Word;
  * Container for all the {@link Carpark} classes. Contains method for finding the carpark.
  */
 public class CarparkList {
-    private List<Carpark> carparks;
     private final HashMap<String, Carpark> carparkHashMap = new HashMap<String, Carpark>();
+    private List<Carpark> carparks;
 
+    /**
+     * Constructor for the {@link CarparkList} class. Loads from a {@link Path} object
+     * that points to a {@code .json} file.
+     *
+     * @param filepath Filepath to load from.
+     * @param filepathBackup Backup filepath to load from.
+     * @throws NoFileFoundException If no valid file is found in either location.
+     */
     public CarparkList(Path filepath, Path filepathBackup) throws NoFileFoundException {
         carparks = FileReader.loadLtaJson(filepath, filepathBackup);
         combineByLotType();
     }
 
+    /**
+     * Constructor for the {@link CarparkList} class. Initializes an object from a given
+     * list of {@link Carpark} objects.
+     *
+     * @param carparks {@link List} of {@link Carpark} objects.
+     */
     public CarparkList(List<Carpark> carparks) {
         this.carparks = carparks;
         combineByLotType();
@@ -39,8 +53,7 @@ public class CarparkList {
     public Carpark findCarpark(String searchString) throws NoCarparkFoundException {
         if (carparkHashMap.get(searchString.toLowerCase()) == null) {
             throw new NoCarparkFoundException();
-        }
-        else {
+        } else {
             return carparkHashMap.get(searchString.toLowerCase());
         }
     }
@@ -49,12 +62,20 @@ public class CarparkList {
     public String toString() {
         StringBuilder result = new StringBuilder();
         for (Carpark carpark : carparks) {
-            result.append(carpark.getDetailViewString()).append("\n");
+            result.append(carpark.getListViewString()).append("\n");
         }
         return result.toString();
     }
 
-    public CarparkList searchStrings(Sentence searchQuery) {
+    /**
+     * Filter {@link CarparkList#carparks} with a {@link Sentence} object, where
+     * every word in the query must be present or a prefixing substring of a word
+     * in the {@link Carpark} object's development string.
+     *
+     * @param searchQuery {@link Sentence} object to use as a search.
+     * @return Filtered {@link CarparkList} object.
+     */
+    public CarparkList filterByAllStrings(Sentence searchQuery) {
         HashSet<Carpark> carparkListBuffer = new HashSet<>(carparks);
         for (Word word : searchQuery.getWords()) {
             carparkListBuffer = filterBySubstring(carparkListBuffer, word.toString());
@@ -76,20 +97,31 @@ public class CarparkList {
         return bufferList;
     }
 
+    /**
+     * Resets the {@link Word#isBold} attribute in all {@link Carpark} objects.
+     */
     public void resetBoldForAllCarparks() {
         for (Carpark carpark : carparks) {
             carpark.resetBold();
         }
     }
 
+    /**
+     * Gets a formatted string for use with the {@link seedu.commands.Search Search} command.
+     * @return
+     */
     public String getSearchListString() {
         StringBuilder bufferString = new StringBuilder();
-        for (Carpark carpark: carparks) {
+        for (Carpark carpark : carparks) {
             bufferString.append(carpark.getListViewString()).append("\n");
         }
         return bufferString.toString();
     }
 
+    /**
+     * Combines multiple {@link Carpark} objects that have the same {@link Carpark#carparkId} value, and groups them
+     * based on lot type.
+     */
     public void combineByLotType() {
         for (Carpark carpark : carparks) {
             String carparkId = carpark.getCarparkId().toLowerCase();
