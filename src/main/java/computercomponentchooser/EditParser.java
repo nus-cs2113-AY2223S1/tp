@@ -13,8 +13,9 @@ public class EditParser {
 
     static final int COMMAND_PARAMETER = 0;
 
-    static final int NAME_PARAMETER = 1;
-    static final int TYPE_PARAMETER = 2;
+    static final int TYPE_PARAMETER = 1;
+
+    static final int NAME_PARAMETER = 2;
 
     static final int PRICE_PARAMETER = 3;
 
@@ -114,7 +115,7 @@ public class EditParser {
                 Ui.printLine();
                 break;
             case "edit":
-                buildName = getParameter(line, NAME_PARAMETER);
+                buildName = getParameter(line, TYPE_PARAMETER);
                 Ui.printLine();
                 System.out.println("You are now editing " + buildName);
                 Ui.printLine();
