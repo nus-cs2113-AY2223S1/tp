@@ -1,2 +1,0 @@
-add /movie Inception /rating 4 /date 5 Sep 22 /genre Thriller
-bye
