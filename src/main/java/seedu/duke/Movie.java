@@ -1,6 +1,10 @@
 package seedu.duke;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class Movie extends Media {
+    private static Logger logger = Logger.getLogger("MovieLogger");
     public String dateWatched;
 
     /**.
@@ -11,7 +15,11 @@ public class Movie extends Media {
      */
     public Movie(String title, double rating, String dateWatched) {
         super(title,rating);
+        assert title.length() > 0 : "Movie title length must be more than 0";
+        assert rating >= 0 : "Minimum rating must be 0";
+        assert dateWatched.length() > 0 : "Length of date must be more than 0";
         this.dateWatched = dateWatched;
+        logger.log(Level.INFO, "Added movie to list");
     }
 
     @Override
