@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2022-10-16T08:55:49.161095400Z</date>
+  <millis>1665910549161</millis>
+  <nanos>95400</nanos>
+  <sequence>4</sequence>
+  <logger>seedu.duke.command.flightcommand.DeleteFlightCommand</logger>
+  <level>INFO</level>
+  <class>seedu.duke.command.flightcommand.DeleteFlightCommand</class>
+  <method>setUpLogger</method>
+  <thread>1</thread>
+  <message>Going to start processing</message>
+</record>
+</log>
