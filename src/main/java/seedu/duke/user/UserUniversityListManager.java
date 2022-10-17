@@ -68,7 +68,7 @@ public class UserUniversityListManager {
     }
 
     /**
-     * Method to print all the favourite lists of the user
+     * Method to print all the favourite lists of the user.
      * For each university, method first prints the university name
      * Method then prints all the modules user has saved for that particular university
      */
