@@ -50,10 +50,10 @@ public class Api {
     /**
      * Builds the API HTTP GET request header and body.
      */
-    private void generateHttpRequestCarpark() {
+    private void generateHttpRequestCarpark(int skip) {
         String authHeaderName = "AccountKey";
         request = HttpRequest.newBuilder(
-                URI.create(LTA_BASE_URL))
+                URI.create(LTA_BASE_URL + "?skip=" + skip))
             .header(authHeaderName, apiKey)
             .build();
     }
@@ -61,8 +61,8 @@ public class Api {
     /**
      * Sends the HTTP GET request to the API endpoint asynchronously.
      */
-    public void asyncExecuteRequest() {
-        generateHttpRequestCarpark();
+    public void asyncExecuteRequest(int skip) {
+        generateHttpRequestCarpark(skip);
         responseFuture = client.sendAsync(request, HttpResponse.BodyHandlers.ofString());
     }
 
@@ -110,7 +110,7 @@ public class Api {
                 fetchTries--;
             }
             if (fetchTries > 0 && result.isEmpty()) {
-                asyncExecuteRequest();
+                asyncExecuteRequest(0);
             }
         } while (fetchTries > 0 && result.isEmpty());
 
@@ -128,7 +128,7 @@ public class Api {
      * @throws UnauthorisedAccessApiException if access not granted.
      */
     public void syncFetchData() throws FileWriteException, EmptyResponseException, UnauthorisedAccessApiException {
-        asyncExecuteRequest();
+        asyncExecuteRequest(0);
         fetchData();
     }
 
@@ -172,7 +172,7 @@ public class Api {
             isDifferent = false;
         }
         boolean isSuccess = false;
-        asyncExecuteRequest();
+        asyncExecuteRequest(0);
         try {
             fetchData();
             isSuccess = true;

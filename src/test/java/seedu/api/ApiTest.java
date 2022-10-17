@@ -32,7 +32,7 @@ public class ApiTest {
     public void fetchDataUnauthorizedAccess() throws ParkingException {
         Api api = new Api(testJsonFile, testJsonFileDirectory);
         api.loadApiKey(testApiKeyFileInvalid, testJsonFileDirectory, true);
-        api.asyncExecuteRequest();
+        api.asyncExecuteRequest(0);
         Assertions.assertThrows(UnauthorisedAccessApiException.class, () -> api.fetchData());
     }
 
