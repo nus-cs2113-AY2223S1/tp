@@ -15,13 +15,15 @@ _____________________________________________________________________________
      --------  --------------------------------------  -------
      create    /create u/UNIVERSITY                    Creates an empty module list for the input university
      exit      /exit
-     view      /view MODULES                           Displays all existing university modules mappings that are approved in the format
-                                                       [Partner University Module Code] [Partner University Module Title] [Partner University Module Credits] | [NUS Module Code] [NUS Module Title] [NUS Module Credits] in NUS
      view      /view LISTS                             Displays all existing university lists that have been created by the user
-     view      /view u/UNIVERSITY                      Displays all modules that have been added to the user's input university’s list in the format
+     view      /view u/UNIVERSITY                      Displays all modules that have been added to the user's input university's list in the format
                                                        [Home University Module Code] [Home University Module Title] | [Partner University Module Code] [Partner University Module Title] | [Equivalent NUS Credits]
-     view      /view UNIVERSITIES                      Displays all universities with module mappings available in database
-     view      /view DATABASE u/UNIVERSITY             Displays all modules mappings offered by UNIVERSITY in database
+     view      /view DELETE HISTORY                    Displays up to 5 most recent modules that the user has deleted
+     list      /list MODULES                           Displays all existing university modules mappings that are approved in the format
+                                                       [Partner University Module Code] [Partner University Module Title] [Partner University Module Credits] | [NUS Module Code] [NUS Module Title] [NUS Module Credits] in NUS
+     list      /list UNIVERSITIES                      Displays all universities with module mappings available in database
+     list      /list m/MODULECODE                      List all module mappings for NUS MODULECODE in database
+     list      /list u/UNIVERSITY                      List all module mappings offered by UNIVERSITY in database
      add       /add u/UNIVERSITY m/MODULECODE          Add input Partner University module code to input university list                       
      delete    /delete u/UNIVERSITY m/MODULECODE       Remove input Partner University module code from input university list                  
      delete    /delete u/UNIVERSITY                    Delete input university list                        

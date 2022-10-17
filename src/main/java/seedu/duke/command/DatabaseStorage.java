@@ -10,7 +10,6 @@ import seedu.duke.exceptions.InvalidDatabaseLineException;
 import seedu.duke.module.Module;
 import seedu.duke.module.ModuleMapping;
 import seedu.duke.university.University;
-import seedu.duke.command.Database;
 import seedu.duke.parser.DatabaseParser;
 
 public class DatabaseStorage {

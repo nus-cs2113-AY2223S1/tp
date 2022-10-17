@@ -1,9 +1,5 @@
 package seedu.duke.university;
 
-import java.util.ArrayList;
-
-import seedu.duke.module.Module;
-
 public class University {
     private String name;
     private String country;
