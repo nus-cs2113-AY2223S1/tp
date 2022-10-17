@@ -105,16 +105,18 @@ displayed.
 A more detailed explaination on the implementation on the transactions can be viewed under Section
 [Implementation for Transaction](#implementation-for-transaction).
 
-#### How the data component works
-- When MoolahManager starts running, the Duke class will call the storage methods to initialize the transactionList. 
-A temporary transactionList will be returned by the storage if the exists stored transaction records. 
-Based on the whether the initialization is successful, corresponding constructor will be called to initialize a 
-transactionList object to be used throughout the application running time.
+#### How the data component interacts
+- When MoolahManager starts running, the `Duke` class will initialize a `Storage` object which will attempt to 
+read from the file and initialize a `transactionList`. The temporary `transactionList` containing all the stored 
+transaction records will be returned by the `Storage`. 
+Based on the whether the initialization is successful, the corresponding constructor will be called to initialize a 
+`transactionList` object which will be used throughout the application running time to hold the `transactions` added.
+
   ![Sequence Diagram on Creation of TransactionList](images/TransactionListSequenceDiagram.png)
 
-- A transaction (either an income or expense) is created by an `add` command, can be modified by an `edit` command and 
-can be deleted by a `delete` or `purge` command. These interactions is described in further detail under each command 
-section below.
+- A transaction (either an income or expense) is created by an `addCommand` class, can be modified by an `editCommand` 
+class and can be deleted by a `deleteCommand` or `purgeCommand` class. These interactions is described in further detail
+under each command section below.
 
 <!-- TODO: Describe how category and categoryList work here -->
 

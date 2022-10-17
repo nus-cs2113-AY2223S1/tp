@@ -24,7 +24,7 @@ class TransactionList {
     + purgeTransactions()
 }
 
-class "Transaction {abstract}"{
+abstract class "Transaction"{
     - category: String
     - description: String
     - amount: int
@@ -66,9 +66,9 @@ class Expense {
 }
 
 
-Income -up-|> "Transaction {abstract}"
-Expense -up-|> "Transaction {abstract}"
+Income -up-|> "Transaction"
+Expense -up-|> "Transaction"
 
-TransactionList -> "*" "Transaction {abstract}" : contains >
+TransactionList -> "*" "Transaction" : contains >
 
 @enduml
