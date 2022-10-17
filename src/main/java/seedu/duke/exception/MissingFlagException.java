@@ -1,9 +1,18 @@
 package seedu.duke.exception;
 
-import seedu.duke.exception.DukeException;
-
 /**
  * Represents exception when flags required for command are missing.
  */
-public class MissingFlagException extends DukeException {
+public class MissingFlagException extends DukeParseException {
+
+    private final String message;
+
+    public MissingFlagException(String message) {
+        this.message = message;
+    }
+
+    @Override
+    public String toString() {
+        return message;
+    }
 }

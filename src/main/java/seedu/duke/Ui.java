@@ -1,58 +1,22 @@
 package seedu.duke;
 
+import seedu.duke.exception.DukeException;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import static seedu.duke.Messages.MESSAGE_ALREADY_PAIRED;
-import static seedu.duke.Messages.MESSAGE_EMPTY_PROPERTY_INDEX;
-import static seedu.duke.Messages.MESSAGE_INVALID_PROPERTY_INDEX;
-import static seedu.duke.Messages.MESSAGE_INVALID_PROPERTY_INDEX_FLAG_FORMAT;
-import static seedu.duke.Messages.MESSAGE_MISSING_PROPERTY_INDEX_FLAG;
-import static seedu.duke.Messages.MESSAGE_PROPERTY_DELETED;
-import static seedu.duke.Messages.MESSAGE_WELCOME;
-import static seedu.duke.Messages.MESSAGE_PROPERTY_ADDED;
-import static seedu.duke.Messages.MESSAGE_ADD_CLIENT_WRONG_FORMAT;
-import static seedu.duke.Messages.MESSAGE_CHECK_PROPERTY_RESULT;
-import static seedu.duke.Messages.MESSAGE_CHECK_PROPERTY_WRONG_FORMAT;
-import static seedu.duke.Messages.MESSAGE_CLIENT_ADDED;
-import static seedu.duke.Messages.MESSAGE_CLIENT_ALREADY_PAIRED;
-import static seedu.duke.Messages.MESSAGE_CLIENT_DELETED;
-import static seedu.duke.Messages.MESSAGE_CLIENT_INPUT_EXAMPLE;
-import static seedu.duke.Messages.MESSAGE_COMMAND_UNDEFINED;
-import static seedu.duke.Messages.MESSAGE_EMPTY_ADD_DESCRIPTION;
-import static seedu.duke.Messages.MESSAGE_EMPTY_CHECK_DESCRIPTION;
-import static seedu.duke.Messages.MESSAGE_PAIRED;
-import static seedu.duke.Messages.MESSAGE_UNPAIRED;
-import static seedu.duke.Messages.MESSAGE_NO_EXISTING_PAIR;
-import static seedu.duke.Messages.MESSAGE_MISSING_SUB_COMMAND_TYPE_FOR_ADD;
-import static seedu.duke.Messages.MESSAGE_EMPTY_PROPERTY_DESCRIPTION;
-import static seedu.duke.Messages.MESSAGE_EMPTY_CLIENT_DESCRIPTION;
-import static seedu.duke.Messages.MESSAGE_EMPTY_COMMAND_PAIR_UNPAIR;
-import static seedu.duke.Messages.MESSAGE_EMPTY_CLIENT_INDEX;
-import static seedu.duke.Messages.MESSAGE_EMPTY_DELETE_DESCRIPTION;
-import static seedu.duke.Messages.MESSAGE_INVALID_BUDGET_FORMAT;
-import static seedu.duke.Messages.MESSAGE_INVALID_CLIENT_INDEX;
-import static seedu.duke.Messages.MESSAGE_INVALID_CLIENT_INDEX_FLAG_FORMAT;
-import static seedu.duke.Messages.MESSAGE_INVALID_CONTACT_NUMBER;
-import static seedu.duke.Messages.MESSAGE_INVALID_EMAIL;
-import static seedu.duke.Messages.MESSAGE_MISSING_CLIENT_INDEX_FLAG;
-import static seedu.duke.Messages.MESSAGE_MISSING_SUB_COMMAND_TYPE_FOR_CHECK;
-import static seedu.duke.Messages.MESSAGE_MISSING_SUB_COMMAND_TYPE_FOR_DELETE;
-import static seedu.duke.Messages.MESSAGE_NUMBER_OF_LIST_RESULTS;
-import static seedu.duke.Messages.MESSAGE_TRY_AGAIN;
-import static seedu.duke.Messages.MESSAGE_NOT_INTEGER;
-import static seedu.duke.Messages.MESSAGE_ADD_PROPERTY_WRONG_FORMAT;
-import static seedu.duke.Messages.MESSAGE_PROPERTY_INPUT_EXAMPLE;
-import static seedu.duke.Messages.MESSAGE_INVALID_SINGAPORE_ADDRESS;
-import static seedu.duke.Messages.MESSAGE_VALID_SINGAPORE_ADDRESS_EXAMPLE;
-import static seedu.duke.Messages.MESSAGE_INVALID_PRICE_FORMAT;
-import static seedu.duke.Messages.MESSAGE_NOT_VALID_INDEX;
-import static seedu.duke.Messages.MESSAGE_PAIR_UNPAIR_WRONG_FORMAT;
-import static seedu.duke.Messages.MESSAGE_PAIR_UNPAIR_INPUT_EXAMPLE;
-import static seedu.duke.Messages.MESSAGE_INCORRECT_LIST_DETAILS;
-import static seedu.duke.Messages.MESSAGE_MISSING_LIST_DETAILS;
 import static seedu.duke.Messages.LINE_BREAK;
-import static seedu.duke.Messages.MESSAGE_BYE_PARAMETERS_PRESENT;
+import static seedu.duke.Messages.MESSAGE_CHECK_PROPERTY_RESULT;
+import static seedu.duke.Messages.MESSAGE_CLIENT_ADDED;
+import static seedu.duke.Messages.MESSAGE_CLIENT_DELETED;
+import static seedu.duke.Messages.MESSAGE_COMMAND_UNDEFINED;
+import static seedu.duke.Messages.MESSAGE_NUMBER_OF_LIST_RESULTS;
+import static seedu.duke.Messages.MESSAGE_PAIRED;
+import static seedu.duke.Messages.MESSAGE_PROPERTY_ADDED;
+import static seedu.duke.Messages.MESSAGE_PROPERTY_DELETED;
+import static seedu.duke.Messages.MESSAGE_UNPAIRED;
+import static seedu.duke.Messages.MESSAGE_WELCOME;
+
 
 /**
  * Handler for all interactions between the user and the command line.
@@ -103,56 +67,6 @@ public class Ui {
         showToUser("  " + clientList.getClientList().get(currentListSize - 1));
     }
 
-    public void showMissingCommandAddDetailMessage() {
-        showToUser(MESSAGE_EMPTY_ADD_DESCRIPTION);
-    }
-
-    public void showUndefinedSubCommandAddTypeMessage() {
-        showToUser(MESSAGE_MISSING_SUB_COMMAND_TYPE_FOR_ADD);
-    }
-
-    public void showAddPropertyWrongFormatMessage() {
-        showToUser(MESSAGE_ADD_PROPERTY_WRONG_FORMAT);
-        showToUser(MESSAGE_PROPERTY_INPUT_EXAMPLE);
-        showToUser(MESSAGE_TRY_AGAIN);
-    }
-
-    public void showAddClientWrongFormatMessage() {
-        showToUser(MESSAGE_ADD_CLIENT_WRONG_FORMAT);
-        showToUser(MESSAGE_CLIENT_INPUT_EXAMPLE);
-        showToUser(MESSAGE_TRY_AGAIN);
-    }
-
-    public void showInvalidSingaporeAddressMessage() {
-        showToUser(MESSAGE_INVALID_SINGAPORE_ADDRESS);
-        showToUser(MESSAGE_VALID_SINGAPORE_ADDRESS_EXAMPLE);
-        showToUser(MESSAGE_TRY_AGAIN);
-    }
-
-    public void showInvalidPriceFormatMessage() {
-        showToUser(MESSAGE_INVALID_PRICE_FORMAT);
-    }
-
-    public void showInvalidContactNumberMessage() {
-        showToUser(MESSAGE_INVALID_CONTACT_NUMBER);
-    }
-
-    public void showInvalidEmailMessage() {
-        showToUser(MESSAGE_INVALID_EMAIL);
-    }
-
-    public void showInvalidBudgetFormatMessage() {
-        showToUser(MESSAGE_INVALID_BUDGET_FORMAT);
-    }
-
-    public void showEmptyPropertyDetailMessage() {
-        showToUser(MESSAGE_EMPTY_PROPERTY_DESCRIPTION);
-    }
-
-    public void showEmptyClientDetailMessage() {
-        showToUser(MESSAGE_EMPTY_CLIENT_DESCRIPTION);
-    }
-
 
     /* Delete-Command-related showMessage methods. */
 
@@ -164,46 +78,6 @@ public class Ui {
     public void showClientDeletedConfirmationMessage(Client deletedClient) {
         showToUser(MESSAGE_CLIENT_DELETED);
         showToUser("  " + deletedClient);
-    }
-
-    public void showUndefinedSubCommandDeleteTypeMessage() {
-        showToUser(MESSAGE_MISSING_SUB_COMMAND_TYPE_FOR_DELETE);
-    }
-
-    public void showMissingCommandDeleteDetailMessage() {
-        showToUser(MESSAGE_EMPTY_DELETE_DESCRIPTION);
-    }
-
-    public void showInvalidPropertyIndexDeleteMessage() {
-        showToUser(MESSAGE_INVALID_PROPERTY_INDEX);
-    }
-
-    public void showEmptyPropertyIndexDeleteMessage() {
-        showToUser(MESSAGE_EMPTY_PROPERTY_INDEX);
-    }
-
-    public void showMissingPropertyIndexFlagMessage() {
-        showToUser(MESSAGE_MISSING_PROPERTY_INDEX_FLAG);
-    }
-
-    public void showInvalidPropertyIndexFlagFormatMessage() {
-        showToUser(MESSAGE_INVALID_PROPERTY_INDEX_FLAG_FORMAT);
-    }
-
-    public void showInvalidClientIndexDeleteMessage() {
-        showToUser(MESSAGE_INVALID_CLIENT_INDEX);
-    }
-
-    public void showEmptyClientIndexDeleteMessage() {
-        showToUser(MESSAGE_EMPTY_CLIENT_INDEX);
-    }
-
-    public void showMissingClientIndexFlagMessage() {
-        showToUser(MESSAGE_MISSING_CLIENT_INDEX_FLAG);
-    }
-
-    public void showInvalidClientIndexFlagFormatMessage() {
-        showToUser(MESSAGE_INVALID_CLIENT_INDEX_FLAG_FORMAT);
     }
 
 
@@ -219,50 +93,8 @@ public class Ui {
         showToUser("  " + client.getClientName() + " and " + property.getPropertyAddress());
     }
 
-    public void showEmptyCommandPairUnpairDetailsMessage() {
-        showToUser(MESSAGE_EMPTY_COMMAND_PAIR_UNPAIR);
-    }
-
-    public void showNotValidIndexMessage() {
-        showToUser(MESSAGE_NOT_VALID_INDEX);
-    }
-
-    public void showNotIntegerMessage() {
-        showToUser(MESSAGE_NOT_INTEGER);
-    }
-
-    public void showPairUnpairWrongFormatMessage() {
-        showToUser(MESSAGE_PAIR_UNPAIR_WRONG_FORMAT);
-        showToUser(MESSAGE_PAIR_UNPAIR_INPUT_EXAMPLE);
-        showToUser(MESSAGE_TRY_AGAIN);
-    }
-
-    public void showClientAlreadyPairedMessage() {
-        showToUser(MESSAGE_CLIENT_ALREADY_PAIRED);
-    }
-
-    public void showAlreadyPairedMessage() {
-        showToUser(MESSAGE_ALREADY_PAIRED);
-    }
-
-    public void showNoExistingPairMessage() {
-        showToUser(MESSAGE_NO_EXISTING_PAIR);
-    }
-
 
     /* Check-Command-related showMessage methods. */
-
-    public void showCheckPropertyWrongFormatMessage() {
-        showToUser(MESSAGE_CHECK_PROPERTY_WRONG_FORMAT);
-    }
-
-    public void showUndefinedSubCommandCheckTypeMessage() {
-        showToUser(MESSAGE_MISSING_SUB_COMMAND_TYPE_FOR_CHECK);
-    }
-
-    public void showEmptyCommandCheckDetailException() {
-        showToUser(MESSAGE_EMPTY_CHECK_DESCRIPTION);
-    }
 
     public void displayOneClient(Client client, int i) {
         System.out.println(i + ".");
@@ -276,27 +108,18 @@ public class Ui {
         System.out.println(LINE_BREAK);
     }
 
-    public void showByeParametersPresentMessage() {
-        showToUser(MESSAGE_BYE_PARAMETERS_PRESENT);
-    }
-
-    public void showIncorrectListDetailsMessage() {
-        showToUser(MESSAGE_INCORRECT_LIST_DETAILS);
-    }
-
-    public void showMissingListDetailsMessage() {
-        showToUser(MESSAGE_MISSING_LIST_DETAILS);
-    }
-
     public void showCheckProperty(ArrayList<Client> tenants) {
         showToUser(MESSAGE_CHECK_PROPERTY_RESULT);
         int count = 0;
         for (Client tenant : tenants) {
-            // Remove brackets at first and last indexes of tenant(client) string
-            String tenantInfo = tenant.toString().substring(1, tenant.toString().length() - 1);
+            String tenantInfo = tenant.toString();
 
             showToUser(String.format("  %d. %s", ++count, tenantInfo));
         }
         showToUser(MESSAGE_NUMBER_OF_LIST_RESULTS + count);
+    }
+
+    public void showExceptionMessage(DukeException e) {
+        showToUser(e.toString());
     }
 }

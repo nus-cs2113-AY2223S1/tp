@@ -25,8 +25,8 @@ public class CommandPair extends Command {
      * @param commandPairDetails Parsed client and property indexes from the user's input.
      */
     public CommandPair(ArrayList<Integer> commandPairDetails) {
-        this.clientIndex = commandPairDetails.get(0);
-        this.propertyIndex = commandPairDetails.get(1);
+        this.propertyIndex = commandPairDetails.get(0);
+        this.clientIndex = commandPairDetails.get(1);
     }
 
     /**

@@ -1,10 +1,10 @@
 package seedu.duke.exception;
 
-public class ExistingPairException extends DukeCommandException {
+public class ExtraParametersException extends DukeParseException {
 
     private final String message;
 
-    public ExistingPairException(String message) {
+    public ExtraParametersException(String message) {
         this.message = message;
     }
 
