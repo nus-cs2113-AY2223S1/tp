@@ -32,72 +32,14 @@ public class ConsoleCommandSortExpense extends ConsoleCommand {
         return type;
     }
 
+    public boolean getOrderValue() {
+        return order;
+    }
+
     public String getOrder() {
         if (order) {
             return ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_ORDER_VAL_ASCENDING;
         }
         return ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_ORDER_VAL_DESCENDING;
     }
-
-    /**
-     * Function to get the comparator based on type of sorting.
-     *
-     * @return a comparator that corresponds to the type of sorting
-     */
-    public Comparator<Expense> getComparator() {
-        Comparator<Expense> comparator = null;
-        if (type.equalsIgnoreCase(ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE_VAL_DATE)) {
-            comparator = sortByDate;
-        } else if (type.equalsIgnoreCase(ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE_VAL_ALPHABETICAL)) {
-            comparator = sortByAlphabet;
-        } else if (type.equalsIgnoreCase(ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE_VAL_AMOUNT)) {
-            comparator = sortByAmount;
-        }
-        return comparator;
-    }
-
-    /**
-     * Comparator sorts by date in ascending or descending order.
-     */
-    private Comparator<Expense> sortByDate = new Comparator<>() {
-        @Override
-        public int compare(Expense expense1, Expense expense2) {
-            LocalDateTime expenseName1 = expense1.getDateTime();
-            LocalDateTime expenseName2 = expense2.getDateTime();
-            if (order) {
-                return expenseName1.compareTo(expenseName2);
-            }
-            return expenseName2.compareTo(expenseName1);
-        }
-    };
-
-    /**
-     * Comparator sorts from A to Z if ascending order, Z to A if descending order.
-     */
-    private Comparator<Expense> sortByAlphabet = new Comparator<>() {
-        @Override
-        public int compare(Expense expense1, Expense expense2) {
-            String expenseName1 = expense1.getName();
-            String expenseName2 = expense2.getName();
-            if (order) {
-                return expenseName1.compareTo(expenseName2);
-            }
-            return expenseName2.compareTo(expenseName1);
-        }
-    };
-
-    /**
-     * Comparator sorts by amount, in ascending/descending order.
-     */
-    private Comparator<Expense> sortByAmount = new Comparator<>() {
-        @Override
-        public int compare(Expense expense1, Expense expense2) {
-            BigDecimal expenseName1 = expense1.getAmount();
-            BigDecimal expenseName2 = expense2.getAmount();
-            if (order) {
-                return expenseName1.compareTo(expenseName2);
-            }
-            return expenseName2.compareTo(expenseName1);
-        }
-    };
 }
