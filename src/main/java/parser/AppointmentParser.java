@@ -76,19 +76,19 @@ public class AppointmentParser {
         return new AddAppointmentCommand(petName, appointmentDate, service);
     }
 
-    public Command prepareSetAppointmentStatusCommand(String input){
+    public Command prepareSetAppointmentStatusCommand(String input) {
         int i = input.indexOf(" i/");
         int s = input.indexOf(" s/");
 
-        if(i > s || i == -1 || s == -1){
+        if (i > s || i == -1 || s == -1) {
             System.out.println("invalid input");
             return new EndCommand();
         }
 
         String index = input.substring(i + lengthOfSignature, s);
-        int indexInt = parser.indexOfInput(index);
+        int indexInt = parser.isStatus(index);
 
-        if(indexInt == -1){
+        if (indexInt == -1) {
             System.out.println("Error: index entered invalid for setting appointment status");
             return new EndCommand();
         }
@@ -96,14 +96,15 @@ public class AppointmentParser {
         String status = input.substring(s + lengthOfSignature);
         int statusInt = parser.isStatus(status);
 
-        if(statusInt == -1 || (statusInt != 1 && statusInt != 0)){
+        if (statusInt == -1 || (statusInt != 1 && statusInt != 0)) {
             System.out.println("Error: status entered invalid for setting appointment status");
             return new EndCommand();
         }
 
         return new SetAppointmentStatusCommand(Integer.parseInt(index),
-                    Integer.parseInt(status));
-
+                Integer.parseInt(status));
+    }
+    
     /*
     public Command prepareAllocateAppointment(String input){
         int i = input.indexOf(" i/");

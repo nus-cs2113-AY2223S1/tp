@@ -6,7 +6,7 @@ import service.ServiceList;
 
 public abstract class Command {
 
-    Command() {
+    public Command() {
     }
     public abstract void execute();
     public abstract boolean isExit();
