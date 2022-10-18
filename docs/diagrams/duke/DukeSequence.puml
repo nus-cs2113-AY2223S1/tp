@@ -12,7 +12,10 @@ deactivate "<<class>>\n:Ui"
 activate ":Storage"
 return userList, itemList, transactionList
 loop until isLastCommand
-    User -> ":Duke" : input
+    ":Duke" -> "<<class>>\n:Ui": readInput()
+    activate "<<class>>\n:Ui"
+    User -> "<<class>>\n:Ui" : input
+    return input
     ":Duke" -> ":CommandParser" : parse command
     activate ":CommandParser"
     ":CommandParser" -> ":CommandParser" : getCommand()

@@ -19,7 +19,7 @@ activate ":RemoveTransactionCommand"
 return args
     ":RemoveTransactionCommand" -> ":TransactionList": getTransactionById()
     activate ":TransactionList"
-opt transaction can be found
+alt transaction is valid
     ":TransactionList" --> ":RemoveTransactionCommand": :Transaction
     deactivate ":TransactionList"
     ":RemoveTransactionCommand" -> ":TransactionList": deleteTransaction()
@@ -30,7 +30,13 @@ opt transaction can be found
     "<<class>>\n:Ui" --> ":Duke"
     deactivate "<<class>>\n:Ui"
     deactivate ":TransactionList"
-
+else transaction is invalid
+    ":RemoveTransactionCommand" --> ":Duke" : DukeException
+    deactivate ":RemoveTransactionCommand"
+    ":Duke" -> "<<class>>\n:Ui" : print error
+    activate "<<class>>\n:Ui"
+    "<<class>>\n:Ui" --> ":Duke" : error message
+    deactivate "<<class>>\n:Ui"
 end
 deactivate ":RemoveTransactionCommand"
 ":Duke" --> "User"

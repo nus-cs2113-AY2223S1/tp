@@ -19,7 +19,7 @@ activate ":RemoveItemCommand"
 return args
     ":RemoveItemCommand" -> ":ItemList": getItemById()
     activate ":ItemList"
-opt item can be found
+opt item is valid
     ":ItemList" --> ":RemoveItemCommand": :Item
     deactivate ":ItemList"
     ":RemoveItemCommand" -> ":ItemList": deleteItem()
@@ -30,7 +30,13 @@ opt item can be found
     "<<class>>\n:Ui" --> ":Duke"
     deactivate "<<class>>\n:Ui"
     deactivate ":ItemList"
-
+else item is invalid
+    ":RemoveItemCommand" --> ":Duke" : DukeException
+    deactivate ":RemoveItemCommand"
+    ":Duke" -> "<<class>>\n:Ui" : print error
+    activate "<<class>>\n:Ui"
+    "<<class>>\n:Ui" --> ":Duke" : error message
+    deactivate "<<class>>\n:Ui"
 end
 deactivate ":RemoveItemCommand"
 ":Duke" --> "User"

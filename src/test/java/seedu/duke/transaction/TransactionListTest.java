@@ -16,7 +16,7 @@ class TransactionListTest {
         TransactionList transactionList = new TransactionList();
         Transaction transaction = new Transaction("6650266082", "6650266082", "6650266082", 5,
                 LocalDate.parse("2022-10-03"));
-        transactionList.add(transaction);
+        transactionList.addTransaction(transaction);
         assertEquals(1, transactionList.getSize());
     }
 
@@ -26,7 +26,7 @@ class TransactionListTest {
         TransactionList transactionList = new TransactionList();
         Transaction transaction = new Transaction("6650266082", "6650266082", "6650266082", 5,
                 LocalDate.parse("2022-10-03"));
-        transactionList.add(transaction);
+        transactionList.addTransaction(transaction);
         assertEquals(transaction, transactionList.getTransactionById(transaction.getTxId()));
     }
 
@@ -35,7 +35,7 @@ class TransactionListTest {
         TransactionList transactionList = new TransactionList();
         Transaction transaction = new Transaction("6650266082", "6650266082", "6650266082", 5,
                 LocalDate.parse("2022-10-03"));
-        transactionList.add(transaction);
+        transactionList.addTransaction(transaction);
         assertThrows(TransactionNotFoundException.class, () -> transactionList.getTransactionById("6650266w82"));
 
     }
@@ -45,7 +45,7 @@ class TransactionListTest {
         TransactionList transactionList = new TransactionList();
         Transaction transaction = new Transaction("6650266082", "6650266082", "6650266082", 5,
                 LocalDate.parse("2022-10-03"));
-        transactionList.add(transaction);
+        transactionList.addTransaction(transaction);
         assertTrue(transactionList.getTransactionById(transaction.getTxId()).isFinished());
     }
 
@@ -54,7 +54,7 @@ class TransactionListTest {
         TransactionList transactionList = new TransactionList();
         Transaction transaction = new Transaction("6650266082", "6650266082", "6650266082", 100,
                 LocalDate.parse("2022-10-03"));
-        transactionList.add(transaction);
+        transactionList.addTransaction(transaction);
         assertFalse(transactionList.getTransactionById(transaction.getTxId()).isFinished());
     }
 
@@ -63,7 +63,7 @@ class TransactionListTest {
         TransactionList transactionList = new TransactionList();
         Transaction transaction = new Transaction("6650266082", "6650266082", "6650266082", 5,
                 LocalDate.parse("2022-10-03"));
-        transactionList.add(transaction);
+        transactionList.addTransaction(transaction);
         transactionList.deleteTransaction(transaction.getTxId());
         assertEquals(0, transactionList.getSize());
     }

@@ -19,7 +19,7 @@ activate ":RemoveUserCommand"
 return args
     ":RemoveUserCommand" -> ":UserList": getUserById()
     activate ":UserList"
-opt user can be found
+alt user is valid
     ":UserList" --> ":RemoveUserCommand": :User
     deactivate ":UserList"
 
@@ -34,6 +34,13 @@ opt user can be found
     "<<class>>\n:Ui" --> ":Duke"
     deactivate "<<class>>\n:Ui"
     deactivate ":UserList"
+else user is invalid
+    ":RemoveUserCommand" --> ":Duke" : DukeException
+    deactivate ":RemoveUserCommand"
+    ":Duke" -> "<<class>>\n:Ui" : print error
+    activate "<<class>>\n:Ui"
+    "<<class>>\n:Ui" --> ":Duke" : error message
+    deactivate "<<class>>\n:Ui"
 end
 deactivate ":RemoveUserCommand"
 ":Duke" --> "User"
