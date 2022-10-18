@@ -14,6 +14,9 @@ _____________________________________________________________________________
      COMMAND   FORMAT                                  PURPOSE
      --------  --------------------------------------  -------
      create    /create u/UNIVERSITY                    Creates an empty module list for the input university
+     favourite /favourite /add u/UNIVERSITY            Adds a university list to the user's favourites
+     favourite /favourite /del u/UNIVERSITY            Deletes a university list from the user's favourites
+     favourite /favourite /view                        View the user's favourite university lists
      exit      /exit
      view      /view LISTS                             Displays all existing university lists that have been created by the user
      view      /view u/UNIVERSITY                      Displays all the modules that have been added to the user's input university's list in the format:
