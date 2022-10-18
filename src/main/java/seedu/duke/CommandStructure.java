@@ -10,6 +10,9 @@ public class CommandStructure {
     public static final String COMMAND_CHECK = "check";
     public static final String COMMAND_EXIT  = "quit";
 
+    public static final String PROPERTY_FLAG = "-property";
+    public static final String CLIENT_FLAG = "-client";
+
 
     public static final String[] ADD_PROPERTY_FLAGS = {"n/", "a/", "p/", "t/"};
     public static final String[] ADD_CLIENT_FLAGS = {"n/", "c/", "e/", "b/"};
