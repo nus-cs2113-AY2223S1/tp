@@ -31,7 +31,7 @@ alt user is valid
     return
     ":RemoveUserCommand" -> "<<class>>\n:Ui": deleteItemMessage()
     activate "<<class>>\n:Ui"
-    "<<class>>\n:Ui" --> ":Duke"
+    return
     deactivate "<<class>>\n:Ui"
     deactivate ":UserList"
 else user is invalid

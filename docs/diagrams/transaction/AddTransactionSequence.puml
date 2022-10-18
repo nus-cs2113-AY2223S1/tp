@@ -18,7 +18,7 @@ activate ":AddTransactionCommand"
 activate ":AddTransactionCommand"
 return args
 alt args is valid
-    ":AddTransactionCommand" -> ":Transaction": new
+    ":AddTransactionCommand" -> ":Transaction": new Transaction()
     activate ":Transaction"
     ":Transaction" --> ":AddTransactionCommand": transaction
     ":AddTransactionCommand" -> ":TransactionList": add()
@@ -27,7 +27,6 @@ alt args is valid
     activate "<<class>>\n:Ui"
     return
     deactivate ":TransactionList"
-    return
     deactivate "<<class>>\n:Ui"
     deactivate ":Transaction"
 else args is invalid
