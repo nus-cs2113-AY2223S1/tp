@@ -46,7 +46,6 @@ public class AppointmentParser {
 
 
     public Command prepareRemoveAppointment(String input){
-        input = " " + input;
         int index = parser.indexOfRemove(input);
         if(index == -1){
             System.out.println("Error: index entered invalid for removing an appointment");
@@ -83,11 +82,23 @@ public class AppointmentParser {
         }
 
         String index = input.substring(i + lengthOfSignature, s);
+        int indexInt = parser.indexOfInput(index);
+
+        if(indexInt == -1){
+            System.out.println("Error: index entered invalid for setting appointment status");
+            return new EndCommand();
+        }
+
         String status = input.substring(s + lengthOfSignature);
+        int statusInt = parser.isStatus(status);
+
+        if(statusInt == -1 || (statusInt != 1 && statusInt != 0)){
+            System.out.println("Error: status entered invalid for setting appointment status");
+            return new EndCommand();
+        }
 
         return new SetAppointmentStatusCommand(Integer.parseInt(index),
                     Integer.parseInt(status));
-    }
 
     /*
     public Command prepareAllocateAppointment(String input){
