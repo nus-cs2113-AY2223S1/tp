@@ -73,7 +73,7 @@ public class PurgeCommand extends Command {
 
         if (input.equals("Y")) {
             try {
-                TransactionList.purgeTransactions();
+                transactions.purgeTransactions();
                 assert PurgeCommand.isEmpty(transactions);
                 Ui.showInfoMessage(INFO_PURGE.toString());
                 purgeLogger.log(Level.INFO, "The transactions list is now empty"

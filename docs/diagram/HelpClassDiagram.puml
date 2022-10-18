@@ -1,0 +1,50 @@
+@startuml
+!include Style.puml
+abstract class "Command"{
+    + getHelpMessage() : HelpMessage {abstract}
+    + getDetailedHelpMessage() : HelpMessage {abstract}
+    + execute() : void {abstract}
+}
+
+class HelpCommand{
+    + getHelpMessage() : HelpMessage
+    + getDetailedHelpMessage() : HelpMessage
+    + execute() : void
+    - generateBasicHelp() : String
+    - generateDetailedHelp() : String
+}
+
+class AddCommand{
+    + getHelpMessage() : HelpMessage
+    + getDetailedHelpMessage() : HelpMessage
+    + execute() : void
+}
+
+note left: Similar for all other \ncommand subclasses
+
+enum "<<enumeration>>\nHelpMessage" {
+    ADD_CMD_BASIC_HELP
+    ADD_CMD_DETAILED_HELP
+    EDIT_CMD_BASIC_HELP
+    EDIT_CMD_DETAILED_HELP
+    DELETE_CMD_BASIC_HELP
+    DELETE_CMD_DETAILED_HELP
+    PURGE_CMD_BASIC_HELP
+    PURGE_CMD_DETAILED_HELP
+    LIST_CMD_BASIC_HELP
+    LIST_CMD_DETAILED_HELP
+    STATS_CMD_BASIC_HELP
+    STATS_CMD_DETAILED_HELP
+    FIND_CMD_BASIC_HELP
+    FIND_CMD_DETAILED_HELP
+    HELP_CMD_BASIC_HELP
+    HELP_CMD_DETAILED_HELP
+    BYE_CMD_BASIC_HELP
+    BYE_CMD_DETAILED_HELP
+}
+
+
+HelpCommand -up-|> "Command"
+AddCommand -up-|> "Command"
+
+@enduml

@@ -1,0 +1,25 @@
+@startuml
+!include Style.puml
+
+class TransactionList {
+}
+
+class "{abstract}\n Transaction"{
+    - category: String
+    - description: String
+    - amount: int
+    - date: LocalDate
+}
+
+class Income {
+}
+
+class Expense {
+}
+
+
+Income -up-|> "{abstract}\n Transaction"
+Expense -up-|> "{abstract}\n Transaction"
+
+TransactionList -> "*" "{abstract}\n Transaction" : transactions
+@enduml
