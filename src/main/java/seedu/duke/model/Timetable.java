@@ -47,27 +47,41 @@ public class Timetable {
     private ConsoleBorder consoleBorder;
     private Logger logger;
 
+    /**
+     * Creates a timetable with default settings. Default for windows is simple style and no colour. Default
+     * for other OSes is fancy style with colour.
+     * @param lessons List of (Module, RawLesson) pairs.
+     */
     public Timetable(List<Pair<Module, RawLesson>> lessons) {
-        this(lessons, false, true);
+        this(lessons, SystemUtils.IS_OS_WINDOWS ? false : true, SystemUtils.IS_OS_WINDOWS ? true : false);
     }
 
+    /**
+     * Creates a timetable with specified settings.
+     * @param lessons List of (Module, RawLesson) pairs.
+     * @param withColor Whether to use coloured output.
+     * @param isStyleSimple Whether to use simple output.
+     */
     public Timetable(List<Pair<Module, RawLesson>> lessons, boolean withColor, boolean isStyleSimple) {
         assert lessons != null : "List of lessons should not be null";
         logger = Logger.getLogger(SUBSYSTEM_NAME);
         logger.log(Level.FINE, "Creating a timetable with " + lessons.size() + " lessons");
-        // this.isStyleSimple = isStyleSimple;
-        this.withColor = SystemUtils.IS_OS_WINDOWS ? false : withColor;
+        this.withColor = withColor;
         this.consoleBorder = ConsoleBorder.getInstance(isStyleSimple);
         this.sortedLessons = sortLessons(lessons);
+        // collect a sorted list of modules
         this.modules = new ArrayList<>(lessons.stream().map(s -> s.getLeft()).collect(Collectors.toSet()));
         this.modules.sort((a, b) -> a.moduleCode.compareTo(b.moduleCode));
+        // find the earliest and latest time in the schedule
         String earliest = lessons.stream().map(s -> s.getRight().startTime).min(String::compareTo).orElseThrow();
         this.firstHour = Integer.parseInt(earliest.substring(0, 2)); // round down to the hour
         String latest = lessons.stream().map(s -> s.getRight().endTime).max(String::compareTo).orElseThrow();
         this.lastHour = Integer.parseInt(latest.substring(0, 2)) + 1; // round up to next hour
         this.timeslots = (this.lastHour - this.firstHour) * 2 + 1; // every half an hour
-        this.days = List.of(Day.values()).subList(0, 5);
-        Pair<List<Integer>, List<Integer>> res = computeIndentation(days, sortedLessons);
+        this.days = List.of(Day.values()).subList(0, 5); // monday to friday
+        // check whether any classes need to be indented
+        // classes need to be indented if their timeslots overlap
+        Pair<List<Integer>, List<Integer>> res = computeIndentation(days, sortedLessons); 
         this.columns = res.getLeft();
         this.indents = res.getRight();
         int columnTotal = 1; // time column
@@ -77,6 +91,7 @@ public class Timetable {
         this.width = columnTotal * (COLUMN_WIDTH + 1) + RIGHT_PADDING;
         this.height = HEADER_ROWS + timeslots * ROWS_PER_TIME + BOTTOM_PADDING;
         this.buffer = new String[height][width];
+        // write data into the buffer
         initialiseBuffer();
         writeHeader();
         writeLessons(sortedLessons, indents);
@@ -119,6 +134,11 @@ public class Timetable {
         }
     }
 
+    /**
+     * Sorts lessons by earliest start time, then latest end time, then module code.
+     * @param lessons List of (Module, RawLesson) pairs.
+     * @return The sorted list.
+     */
     private List<Pair<Module, RawLesson>> sortLessons(List<Pair<Module, RawLesson>> lessons) {
         List<Pair<Module, RawLesson>> sortedLessons = new ArrayList<>(lessons);
         sortedLessons.sort((a, b) -> {
@@ -138,6 +158,13 @@ public class Timetable {
         return sortedLessons;
     }
 
+    /**
+     * Computes whether any indentation of lessons is required.
+     * @param days The days.
+     * @param sortedLessons The lessons, sorted.
+     * @return A pair of lists. The first list has one element for each day and represents the column width of that day.
+     *         The second list has one element for each lesson and contains the indentation level for that lesson within the day.
+     */
     private Pair<List<Integer>, List<Integer>> computeIndentation(List<Day> days,
             List<Pair<Module, RawLesson>> sortedLessons) {
         List<List<List<Pair<Module, RawLesson>>>> lessonStack = new ArrayList<>();
