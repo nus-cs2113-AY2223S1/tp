@@ -1,15 +1,16 @@
 package seedu.duke.ui;
 
 import java.util.ArrayDeque;
+import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.Map;
 
 import seedu.duke.module.ModuleMapping;
 import seedu.duke.university.University;
 import seedu.duke.user.UserModuleMapping;
 import seedu.duke.user.UserModuleMappingList;
 import seedu.duke.user.UserUniversityList;
-
-import java.util.Scanner;
 
 public class Ui {
     public static final String LINE = "_____________________________________________________________________________\n";
@@ -235,6 +236,11 @@ public class Ui {
         return printModulesInUserList(puModules);
     }
 
+
+    /**
+     * Prints the name of all universities available in the database.
+     * @param universities The list of universities in the database.
+     */
     public static void printUniversitiesInDatabase(ArrayList<University> universities) {
         int i = 1;
         for (University university : universities) {
@@ -243,9 +249,52 @@ public class Ui {
         }
     }
 
+    /**
+     * Sequentially prints eligible module mappings from a list.
+     * The NUS module code and title as well as the equivalent partner university
+     * module code and title are printed.
+     * @param moduleMappings A list containing module mappings.
+     */
     public static void printMappings(ArrayList<ModuleMapping> moduleMappings) {
         for (ModuleMapping moduleMapping : moduleMappings) {
             System.out.println(moduleMapping.toString());
         }
+    }
+
+    /**
+     * Prints all the lists that the user has favourited.
+     * Lists are printed sequentially, starting with the university name
+     * and then all modules in that university's list on a new line.
+     * @param userFavouriteLists A dictionary containing a user's favourited lists.
+     */
+    public static void printUserFavouriteLists(HashMap<String, UserUniversityList> userFavouriteLists) {
+        for (Map.Entry<String, UserUniversityList> set : userFavouriteLists.entrySet()) {
+            String universityName = set.getKey();
+            UserUniversityList universityList = set.getValue();
+            System.out.println(universityName);
+            universityList.displayModules();
+        }
+    }
+
+    /**
+     * Prints an acknowledgement message to inform the user that they have
+     * successfully added a list to their favourites.
+     * @param universityName The name of the university for which the list is favourited by the user.
+     * @return Acknowledgement message to user for adding a list to favourites.
+     */
+    public static String printFavouriteListAddedAcknowledgement(String universityName) {
+        String message = LINE + "Success! You added:\n" + universityName + "to your favourited lists" + "\n" + LINE;
+        return message;
+    }
+
+    /**
+     * Prints an acknowledgement message to inform the user that they have
+     * successfully deleted a list from their favourites.
+     * @param universityName The name of the university for which the list was favourited by the user.
+     * @return Acknowledgement message to user for deleting a list from favourites.
+     */
+    public static String printFavouriteListDeletedAcknowledgement(String universityName) {
+        String message = LINE + "Success! You deleted:\n" + universityName + "from your favourited lists" + "\n" + LINE;
+        return message;
     }
 }
