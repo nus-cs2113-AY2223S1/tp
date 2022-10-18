@@ -7,6 +7,19 @@ import java.util.logging.Logger;
  * Resolves the user input into a command to execute
  */
 public class Parser {
+    final String movieKeyword = "/movie";
+    final int movieSpacing = 5;
+    final String tvKeyword = "/tv";
+    final int tvSpacing = 2;
+    final String ratingKeyword = "/rating";
+    final int ratingSpacing = 6;
+    final String dateKeyword = "/date";
+    final int dateSpacing = 4;
+    final String genreKeyword = "/genre";
+    final int genreSpacing = 5;
+    final String siteKeyword = "/site";
+    final int siteSpacing = 4;
+
     private Commands executor;
     private ReviewList mediaList;
 
@@ -63,31 +76,31 @@ public class Parser {
         Ui.print(output);
     }
 
+    public void addMedia(String[] fields, Integer spacingType) {
+        String name = fields[1].substring(spacingType);
+        double rating = Double.parseDouble(fields[2].substring(ratingSpacing));
+        String date = fields[3].substring(dateSpacing);
+        String genre = fields[4].substring(genreSpacing);
+        Media toAdd;
+
+        if (spacingType == movieSpacing) {
+            toAdd = new Movie(name, rating, genre, date);
+        } else {
+            String site = fields[5].substring(siteSpacing);
+            toAdd = new TvShow(name, rating, genre, date, site);
+        }
+        executor = new AddCommand(mediaList, toAdd);
+        String output = executor.execute();
+        Ui.print(output);
+    }
+
     public void executeAdd(String userInput) {
-        final String movieKeyword = "/movie";
-        final int movieSpacing = 5;
-        final String ratingKeyword = "/rating";
-        final int ratingSpacing = 6;
-        final String dateKeyword = "/date";
-        final int dateSpacing = 4;
-
         String[] fields = userInput.split("/");
-
         try {
-            if (!userInput.contains(movieKeyword)
-                    || !userInput.contains(ratingKeyword)
-                    || !userInput.contains(dateKeyword)
-            ) {
-                throw new Exception();
+            if (userInput.contains(movieKeyword)) {
+                addMedia(fields, movieSpacing);
             } else {
-                String name = fields[1].substring(movieSpacing);
-                double rating = Double.parseDouble(fields[2].substring(ratingSpacing));
-                String date = fields[3].substring(dateSpacing);
-                
-                Movie toAdd = new Movie(name, rating, date);
-                executor = new AddCommand(mediaList, toAdd);
-                String output = executor.execute();
-                Ui.print(output);
+                addMedia(fields, tvSpacing);
             }
         } catch (Exception e) {
             System.out.println("\nIncomplete or wrongly formatted command, try again.\n");

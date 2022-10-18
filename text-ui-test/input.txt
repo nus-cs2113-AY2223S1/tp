@@ -1,2 +1,1 @@
-add /movie inception /rating 99.5 /date 2 sep 22
-bye
+add /movie Inception /rating 10 /date 5 Sep 22 /genre scifi
