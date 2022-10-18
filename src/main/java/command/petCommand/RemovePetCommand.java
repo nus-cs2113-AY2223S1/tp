@@ -1,9 +1,10 @@
-package command;
+package command.petCommand;
 
+import command.Command;
 import pet.Pet;
 import pet.PetList;
 
-public class RemovePetCommand extends Command{
+public class RemovePetCommand extends Command {
     public final static String COMMAND_WORD = "remove";
     private int index;
 

@@ -1,4 +1,4 @@
-package command;
+package command.appointmentCommand;
 
 import appointment.AppointmentList;
 

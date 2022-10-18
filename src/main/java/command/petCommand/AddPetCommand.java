@@ -1,5 +1,6 @@
-package command;
+package command.petCommand;
 
+import command.Command;
 import pet.Pet;
 import pet.PetList;
 

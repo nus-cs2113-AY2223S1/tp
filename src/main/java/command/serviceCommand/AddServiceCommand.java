@@ -1,11 +1,12 @@
-package command;
+package command.serviceCommand;
 
 import appointment.AppointmentList;
+import command.Command;
 import employee.EmployeeList;
 import service.Service;
 import service.ServiceList;
 
-public class AddServiceCommand extends Command{
+public class AddServiceCommand extends Command {
     public final static String COMMAND_WORD = "add";
     private final Service service;
 

@@ -1,6 +1,9 @@
 package parser;
 
 import command.*;
+import command.petCommand.AddPetCommand;
+import command.petCommand.RemovePetCommand;
+import command.petCommand.ViewPetCommand;
 
 public class PetParser {
     private int lengthOfSignature;

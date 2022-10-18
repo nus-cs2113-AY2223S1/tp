@@ -1,6 +1,10 @@
 package parser;
 
 import command.*;
+import command.appointmentCommand.AddAppointmentCommand;
+import command.appointmentCommand.RemoveAppointmentCommand;
+import command.appointmentCommand.SetAppointmentStatusCommand;
+import command.appointmentCommand.ViewAppointmentCommand;
 
 public class AppointmentParser {
     private int lengthOfSignature;

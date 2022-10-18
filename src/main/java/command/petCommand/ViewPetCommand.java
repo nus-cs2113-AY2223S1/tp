@@ -1,11 +1,12 @@
-package command;
+package command.petCommand;
 
 import appointment.AppointmentList;
+import command.Command;
 import pet.Pet;
 import pet.PetList;
 
 
-public class ViewPetCommand extends Command{
+public class ViewPetCommand extends Command {
     private PetList Pets;
 
     @Override

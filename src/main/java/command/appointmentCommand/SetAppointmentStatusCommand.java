@@ -1,6 +1,7 @@
-package command;
+package command.appointmentCommand;
 
 import appointment.AppointmentList;
+import command.Command;
 
 public class SetAppointmentStatusCommand extends Command {
     public final static String COMMAND_WORD = "status";

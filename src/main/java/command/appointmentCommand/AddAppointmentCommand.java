@@ -1,7 +1,8 @@
-package command;
+package command.appointmentCommand;
 
 import appointment.Appointment;
 import appointment.AppointmentList;
+import command.Command;
 import employee.EmployeeList;
 import service.Service;
 import service.ServiceList;
