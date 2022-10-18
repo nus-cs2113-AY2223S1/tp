@@ -7,6 +7,7 @@ import seedu.duke.biometrics.WeightAndFat;
 import seedu.duke.exception.IllegalValueException;
 import seedu.duke.exercise.Exercise;
 import seedu.duke.exercise.ExerciseList;
+import seedu.duke.food.Food;
 import seedu.duke.food.FoodList;
 
 import java.io.FileWriter;
@@ -43,11 +44,10 @@ public class SaveData {
         for (Exercise exercise : exerciseList.getCurrentExerciseList()) {
             output.write(exercise.saveExercise() + System.lineSeparator());
         }
-        //        dataType = "food ";
-        //        for (Food food : foodList.getFoodList()){
-        //            output.write(String.format("%s %s",
-        //                    dataType, foodList.saveFood()) + System.lineSeparator());
-        //        }
+        dataType = "food ";
+        for (Food food : foodList.getFoodList()) {
+            output.write(dataType + food.saveFood() + System.lineSeparator());
+        }
         output.close();
     }
 }

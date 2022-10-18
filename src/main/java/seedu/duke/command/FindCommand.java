@@ -16,6 +16,8 @@ import java.util.stream.Collectors;
 public class FindCommand extends Command {
     private String arguments;
     private ExerciseList exerciseList;
+
+    private FoodList foodList;
     private Ui ui;
 
     public FindCommand(String arguments) {
@@ -30,6 +32,9 @@ public class FindCommand extends Command {
         case "strength":
             findStrength(argumentList);
             break;
+        case "food":
+            findFood(argumentList);
+            break;
         default:
             handleInvalidFindType();
         }
@@ -42,11 +47,29 @@ public class FindCommand extends Command {
         ui.outputExerciseList(filteredExerciseList);
     }
 
+    private void findFood(String[] argumentList) throws IllegalValueException {
+        handleInvalidFindFoodCommand(argumentList);
+        ui.output("Here are the matching food in your food list:");
+        for (int i = 0; i < foodList.getFoodListSize(); i++) {
+            if (foodList.getFood(i).getFoodDescription().contains(argumentList[1])) {
+                ui.output ((i + 1) + " " + (foodList.getFood(i).getFoodDescription()) + " "
+                        + foodList.getFood(i).getCalories());
+            }
+        }
+    }
+
     private static void handleInvalidFindStrengthCommand(String[] argumentList) throws IllegalValueException {
         if (argumentList.length != 2) {
             throw new IllegalValueException("Invalid find strength command");
         }
     }
+
+    private static void handleInvalidFindFoodCommand(String[] argumentList) throws IllegalValueException {
+        if (argumentList.length != 2) {
+            throw new IllegalValueException("Invalid find food command");
+        }
+    }
+
 
     private ArrayList<Exercise> getFilteredExerciseList(String[] argumentList) {
         ArrayList<Exercise> filteredExerciseList = (ArrayList<Exercise>) exerciseList.getCompletedExerciseList()
@@ -68,5 +91,6 @@ public class FindCommand extends Command {
     public void setData(Ui ui, Storage storage, Biometrics biometrics, ExerciseList exerciseList, FoodList foodList) {
         this.ui = ui;
         this.exerciseList = exerciseList;
+        this.foodList = foodList;
     }
 }
