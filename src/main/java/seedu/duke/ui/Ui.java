@@ -64,8 +64,8 @@ public class Ui {
      */
     public static String printCommands() {
         String message = LINE
-                + SPACING + "COMMAND   " + "FORMAT                                               " + "PURPOSE\n"
-                + SPACING + "--------  " + "--------------------------------------               " + "-------\n"
+                + SPACING + "COMMAND   " + "FORMAT                                                " + "PURPOSE\n"
+                + SPACING + "--------  " + "--------------------------------------                " + "-------\n"
                 + SPACING + "help      " + "/help                                                 "
                 + "Displays eligible user commands for the program\n"
                 + SPACING + "create    " + "/create u/UNIVERSITY_NAME_IN_UNDERSCORES              "

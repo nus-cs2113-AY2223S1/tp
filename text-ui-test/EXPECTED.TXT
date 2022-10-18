@@ -10,8 +10,8 @@ Hello! Welcome to easySEP, your personal companion for planning your student exc
 How may I help you today?
 _____________________________________________________________________________
 _____________________________________________________________________________
-     COMMAND   FORMAT                                               PURPOSE
-     --------  --------------------------------------               -------
+     COMMAND   FORMAT                                                PURPOSE
+     --------  --------------------------------------                -------
      help      /help                                                 Displays eligible user commands for the program
      create    /create u/UNIVERSITY_NAME_IN_UNDERSCORES              Creates an empty module list for the input university
      favourite /favourite add/UNIVERSITY_NAME_IN_UNDERSCORES         Adds a university list to the user's favourites

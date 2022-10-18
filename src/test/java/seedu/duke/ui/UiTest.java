@@ -44,8 +44,8 @@ public class UiTest {
     @Test
     public void testPrintCommands() {
         String expected = "_____________________________________________________________________________\n"
-                + "     " + "COMMAND   " + "FORMAT                                               " + "PURPOSE\n"
-                + "     " + "--------  " + "--------------------------------------               " + "-------\n"
+                + "     " + "COMMAND   " + "FORMAT                                                " + "PURPOSE\n"
+                + "     " + "--------  " + "--------------------------------------                " + "-------\n"
                 + "     " + "help      " + "/help                                                 "
                 + "Displays eligible user commands for the program\n"
                 + "     " + "create    " + "/create u/UNIVERSITY_NAME_IN_UNDERSCORES              "
