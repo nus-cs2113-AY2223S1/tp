@@ -163,7 +163,8 @@ public class Timetable {
      * @param days The days.
      * @param sortedLessons The lessons, sorted.
      * @return A pair of lists. The first list has one element for each day and represents the column width of that day.
-     *         The second list has one element for each lesson and contains the indentation level for that lesson within the day.
+     *         The second list has one element for each lesson and contains the indentation level for that lesson within 
+     *         the day.
      */
     private Pair<List<Integer>, List<Integer>> computeIndentation(List<Day> days,
             List<Pair<Module, RawLesson>> sortedLessons) {
