@@ -3,12 +3,14 @@ passenger add n/Ivan Theng dt/2145 fn/sq852 gn/05 bg/test sn/17d bt/2100
 passenger add n/Ivan Theng dt/2145 fn/sq852 gn/05
 passenger add n/ dt/2145 fn/sq832 gn/05 bg/01 sn/18d bt/2100
 passenger add n/Vignesh dt/2145 fn/sq832 gn/05 bg/02 sn/17d bt/2100
-flight add fn/SQ712 a/Singapore Airlines d/Bangkok t/1600 gn/B1 tl/T1 c/03-3
+flight add fn/SQ712 a/Singapore Airlines d/Bangkok t/1600 gn/B1 tl/T1 c/03-03
+flight add fn/SQ712 a/Singapore Airlines d/Bangkok t/1600 gn/B1 tl/T1 c/03-03
+flight add fn/sq712 a/SINGAPORE Airlines d/bangkok t/3000 gn/b1 tl/T1 c/03-03
 flight delete SQ324
 flight delete SQ712
 passenger add
 passenger list
-flight add fn/SQ712 a/Singapore Airlines d/Bangkok t/1600 gn/B1 tl/T1 c/03-3
+flight add fn/SQ712 a/Singapore Airlines d/Bangkok t/1600 gn/B1 tl/T1 c/03-03
 flight add
 flight list
 Passenger delete n/Ivan Theng fn/sq832 sn/17d dt/2145

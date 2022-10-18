@@ -78,6 +78,15 @@ public class Ui {
         return "Unable to add Passenger. Seat number is already occupied on the flight!";
     }
 
+    public String getDuplicateFlightError() {
+        return "Unable to add Flight! Flight already exist.";
+    }
+
+    public String getGateOccupiedError() {
+        return "Unable to add Flight! \n" +
+                "Designated gate is already occupied at that time, please select a different gate number.";
+    }
+
     public String getOperationError() {
         return "Input a valid operation, please try again.";
     }
@@ -117,16 +126,16 @@ public class Ui {
     }
 
     public void showFlightListHeader() {
-        System.out.print("\n+-----------------------------------------------------------"
-                + "--------------------------------------------------------------+\n"
-                + "|                                                 FLIGHT DETAILS LOGBOOK"
-                + "                                                  |\n"
+        System.out.print("\n+--------------------------------------------------------------"
+                + "--------------------------------------------------------------------------------+\n"
+                + "|                                                           FLIGHT DETAILS LOGBOOK"
+                + "                                                            |\n"
                 + "+-----------------------------------------------------------"
-                + "--------------------------------------------------------------+\n"
-                + "| FLIGHT NUM |           AIRLINE           |  DESTINATION | DEPARTURE TIME |"
-                + " GATE NUM | TERMINAL | CHECK-IN ROW/DOOR      |\n"
+                + "-----------------------------------------------------------------------------------+\n"
+                + "| FLIGHT NUM | DEPARTURE DATE |        AIRLINE         |      DESTINATION      | DEPARTURE TIME |"
+                + " GATE NUM |  TERMINAL  |  CHECK-IN ROW/DOOR  |\n"
                 + "+-----------------------------------------------------------"
-                + "--------------------------------------------------------------+\n");
+                + "-----------------------------------------------------------------------------------+\n");
     }
 
     public void showPassengerListBody(String name, String departureDate, String departureTime,
@@ -181,9 +190,9 @@ public class Ui {
     }
 
     public void showEmptyFlightList() {
-        System.out.printf("| %75s %-43s |\n"
-                        + "+-----------------------------------------------------------"
-                        + "--------------------------------------------------------------+\n",
+        System.out.printf("| %85s %-53s |\n"
+                        + "+--------------------------------------------------------------------"
+                        + "--------------------------------------------------------------------------+\n",
                 "The Flight schedule is empty.", " ");
     }
 
@@ -191,8 +200,8 @@ public class Ui {
         System.out.println("FLIGHT " + flightNum + " NOT FOUND.");
     }
 
-    public void showEmptyDescriptionMessage() {
-        System.out.println("oops! The description is empty :(");
+    public String showEmptyDescriptionMessage() {
+        return "oops! The description is empty :(";
     }
 
     public void showFlightAddedMessage() {
@@ -208,7 +217,7 @@ public class Ui {
         checkEmptyFlightList(flightList);
         for (FlightInfo flight : flightList) {
             System.out.println("\n+-----------------------------------------------------------"
-                    + "--------------------------------------------------------------+"
+                    + "-----------------------------------------------------------------------------------+"
                     + flight);
         }
     }
@@ -233,13 +242,25 @@ public class Ui {
     }
 
     public String getMissingDetailsError() {
-        return "Please fill up passenger details for all fields.\n Invalid input. Try again!";
+        return "Please fill up details for all fields.\n Invalid input. Try again!";
     }
 
     public String getExceedNameLengthError(String name) {
         return "Stop! The input name with " + name.length()
                 + " characters is too long!\n"
                 + "Please input a name that is within 24 characters.";
+    }
+
+    public String getExceedAirlineLengthError(String airline) {
+        return "Stop! The airline input with " + airline.length()
+                + " characters is too long!\n"
+                + "Please keep your input to 22 characters.";
+    }
+
+    public String getExceedDestinationLengthError(String destination) {
+        return "Stop! The destination input with " + destination.length()
+                + " characters is too long!\n"
+                + "Please keep your input to 22 characters.";
     }
 
     public String getNameError() {
@@ -250,6 +271,11 @@ public class Ui {
     public String getDepartureTimeError() {
         return "Stop! The departure time input format is wrong.\n"
                 + "Please try again in 24Hr time format.";
+    }
+
+    public String getCheckInFormatError() {
+        return "Stop! The check in row/door format is wrong.\n"
+                + "Please try again using rr-dd format";
     }
 
     public String getFlightNumberError() {
