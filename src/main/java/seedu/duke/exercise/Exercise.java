@@ -34,6 +34,10 @@ public class Exercise {
         return 1;
     }
 
+    public int getTime() {
+        return 1;
+    }
+
     public String getTaskStatus() {
         if (isDone) {
             return "[X]";

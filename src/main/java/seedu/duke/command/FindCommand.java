@@ -4,6 +4,7 @@ import seedu.duke.Parser;
 import seedu.duke.Ui;
 import seedu.duke.biometrics.Biometrics;
 import seedu.duke.exception.IllegalValueException;
+import seedu.duke.exercise.CardioExercise;
 import seedu.duke.exercise.Exercise;
 import seedu.duke.exercise.ExerciseList;
 import seedu.duke.exercise.StrengthExercise;
@@ -32,11 +33,27 @@ public class FindCommand extends Command {
         case "strength":
             findStrength(argumentList);
             break;
+        case "cardio":
+            findCardio(argumentList);
+            break;
         case "food":
             findFood(argumentList);
             break;
         default:
             handleInvalidFindType();
+        }
+    }
+
+    private void findCardio(String[] argumentList) throws IllegalValueException {
+        handleInvalidFindCardioCommand(argumentList);
+        ArrayList<Exercise> filteredExerciseList = getFilteredCardioExerciseList(argumentList);
+        ui.output("", "Here are the matching cardio exercises in your list:");
+        ui.outputExerciseList(filteredExerciseList);
+    }
+
+    private void handleInvalidFindCardioCommand(String[] argumentList) throws IllegalValueException {
+        if (argumentList.length != 2) {
+            throw new IllegalValueException("Invalid find cardio command");
         }
     }
 
@@ -70,6 +87,18 @@ public class FindCommand extends Command {
         }
     }
 
+
+    private ArrayList<Exercise> getFilteredCardioExerciseList(String[] argumentList) {
+        ArrayList<Exercise> filteredExerciseList = (ArrayList<Exercise>) exerciseList.getCompletedExerciseList()
+                .stream().filter(CardioExercise.class::isInstance)
+                .filter(e -> e.getExerciseName().contains(argumentList[1]))
+                .collect(Collectors.toList());
+        filteredExerciseList.addAll(exerciseList.getCurrentExerciseList()
+                .stream().filter(CardioExercise.class::isInstance)
+                .filter(e -> e.getExerciseName().contains(argumentList[1]))
+                .collect(Collectors.toList()));
+        return filteredExerciseList;
+    }
 
     private ArrayList<Exercise> getFilteredExerciseList(String[] argumentList) {
         ArrayList<Exercise> filteredExerciseList = (ArrayList<Exercise>) exerciseList.getCompletedExerciseList()

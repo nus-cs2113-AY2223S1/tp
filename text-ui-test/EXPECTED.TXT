@@ -18,13 +18,14 @@ help - to display the help message
 exit - to exit the program
 set biometrics /{age} /{gender} /height /{weight} /{fat percentage}
 add strength /{description} /{sets} /{repetitions} /{calories}
+add cardio /{description} /{time} /{repetitions} /{calories}
 add food /{description} /{calories}
 add weight /{weight} /{fat percentage}
 remove food /{food index}
 mark {done/undone} /{exercise index}
 e_remove exercise /{index}
-view {biometrics/food/exercise {/done}/strength {/done}}
-find {strength /food {description}}
+view {biometrics/food} {exercise/strength/cardio /{done}}
+find {strength/cardio/food} /{description}
 --------------------------------------------------
 --------------------------------------------------
 Biometrics:
