@@ -5,6 +5,7 @@ public class FinanceException extends Throwable {
         COMMAND_TYPE_EXCEPTION,
         USERFILE_CREATE_EXCEPTION,
         USERFILE_WRITE_EXCEPTION,
+        CURRENCY_NOT_FOUND,
         //UNKNOWN_EXCEPTION
     }
 
@@ -27,6 +28,8 @@ public class FinanceException extends Throwable {
         case USERFILE_WRITE_EXCEPTION:
             errorMessage = "Userfile writing failed.";
             break;
+        case CURRENCY_NOT_FOUND:
+            errorMessage = "Currency type is not valid";
         default:
             errorMessage = "Unknown exception happens.";
             break;

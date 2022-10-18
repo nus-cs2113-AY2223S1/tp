@@ -69,31 +69,30 @@ public class Duke {
                     boolean user = false;
                     do {
                         try {
-                            Ui.usernameLogin();
+                            Ui.showEnterUsernamePrompt();
                             userName = in.nextLine();
                             Wallet wallet = WalletFile.getWallet(userName);
-                            Ui.passwordLogin();
+                            Ui.showEnterPasswordPrompt();
                             passWord = in.nextLine();
                             if (wallet.getPassWord().equals(passWord)) {
                                 user = true;
                                 System.out.println("Successful login, you can now access your account.");
                                 Account.accountCommands(wallet);
                             } else {
-                                System.out.println("Your password is incorrect, "
-                                        +
-                                        "please re-enter your login information.");
+                                Ui.showInvalidPasswordPrompt();
                             }
                         } catch (FileNotFoundException e) {
-                            System.out.println("Username not found, please enter another username");
+                            Ui.showInvalidUsernamePrompt();
                         }
                     } while (!user);
                     break;
                 case CURRENCIES:
-                    System.out.println("\t\t\tALL CURRENCIES");
+                    /*System.out.println("\t\t\tALL CURRENCIES");
                     System.out.println("\tVALUE\t\t\t\t\tNAMES");
                     for (List<String> x : allCurrencies){
                         System.out.println("\t" + x.get(1) + "\t\t\t" + x.get(0));
-                    }
+                    }*/
+                    Currency.exchangeCommands();
                     break;
                 default:
                     throw new FinanceException(ExceptionCollection.COMMAND_TYPE_EXCEPTION);
