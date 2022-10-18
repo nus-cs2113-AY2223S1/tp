@@ -21,19 +21,19 @@ alt args is valid
     ":Item" --> ":AddItemCommand": item
     ":AddItemCommand" -> ":ItemList": addItem()
     activate ":ItemList"
-    ":AddItemCommand" -> "<<class>>\n:Ui": addItemMessage()
-    activate "<<class>>\n:Ui"
+    ":AddItemCommand" -> "<<class>>\nUi": addItemMessage()
+    activate "<<class>>\nUi"
     return
     deactivate ":ItemList"
-    deactivate "<<class>>\n:Ui"
+    deactivate "<<class>>\nUi"
     deactivate ":Item"
 else args is invalid
     ":AddItemCommand" --> ":Duke" : DukeException
     deactivate ":AddItemCommand"
-    ":Duke" -> "<<class>>\n:Ui" : print error
-    activate "<<class>>\n:Ui"
-    "<<class>>\n:Ui" --> ":Duke" : error message
-    deactivate "<<class>>\n:Ui"
+    ":Duke" -> "<<class>>\nUi" : print error
+    activate "<<class>>\nUi"
+    "<<class>>\nUi" --> ":Duke" : error message
+    deactivate "<<class>>\nUi"
 end
 ":Duke" --> "User"
 @enduml

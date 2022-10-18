@@ -23,19 +23,19 @@ alt args is valid
     ":Transaction" --> ":AddTransactionCommand": transaction
     ":AddTransactionCommand" -> ":TransactionList": add()
     activate ":TransactionList"
-    ":AddTransactionCommand" -> "<<class>>\n:Ui": addTransactionMessage()
-    activate "<<class>>\n:Ui"
+    ":AddTransactionCommand" -> "<<class>>\nUi": addTransactionMessage()
+    activate "<<class>>\nUi"
     return
     deactivate ":TransactionList"
-    deactivate "<<class>>\n:Ui"
+    deactivate "<<class>>\nUi"
     deactivate ":Transaction"
 else args is invalid
     ":AddTransactionCommand" --> ":Duke" : DukeException
     deactivate ":AddTransactionCommand"
-    ":Duke" -> "<<class>>\n:Ui" : print error
-    activate "<<class>>\n:Ui"
-    "<<class>>\n:Ui" --> ":Duke" : error message
-    deactivate "<<class>>\n:Ui"
+    ":Duke" -> "<<class>>\nUi" : print error
+    activate "<<class>>\nUi"
+    "<<class>>\nUi" --> ":Duke" : error message
+    deactivate "<<class>>\nUi"
 end
 ":Duke" --> "User"
 @enduml

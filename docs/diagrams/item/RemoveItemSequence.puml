@@ -25,18 +25,18 @@ alt item is valid
     ":RemoveItemCommand" -> ":ItemList": deleteItem()
     activate ":ItemList"
     return
-    ":RemoveItemCommand" -> "<<class>>\n:Ui": deleteItemMessage()
-    activate "<<class>>\n:Ui"
+    ":RemoveItemCommand" -> "<<class>>\nUi": deleteItemMessage()
+    activate "<<class>>\nUi"
     return
-    deactivate "<<class>>\n:Ui"
+    deactivate "<<class>>\nUi"
     deactivate ":ItemList"
 else item is invalid
     ":RemoveItemCommand" --> ":Duke" : DukeException
     deactivate ":RemoveItemCommand"
-    ":Duke" -> "<<class>>\n:Ui" : print error
-    activate "<<class>>\n:Ui"
-    "<<class>>\n:Ui" --> ":Duke" : error message
-    deactivate "<<class>>\n:Ui"
+    ":Duke" -> "<<class>>\nUi" : print error
+    activate "<<class>>\nUi"
+    "<<class>>\nUi" --> ":Duke" : error message
+    deactivate "<<class>>\nUi"
 end
 deactivate ":RemoveItemCommand"
 ":Duke" --> "User"

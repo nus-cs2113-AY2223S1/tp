@@ -29,18 +29,18 @@ alt user is valid
     ":RemoveUserCommand" -> ":ItemList": deleteAllItemOfAnUser()
     activate ":ItemList"
     return
-    ":RemoveUserCommand" -> "<<class>>\n:Ui": deleteItemMessage()
-    activate "<<class>>\n:Ui"
+    ":RemoveUserCommand" -> "<<class>>\nUi": deleteUserMessage()
+    activate "<<class>>\nUi"
     return
-    deactivate "<<class>>\n:Ui"
+    deactivate "<<class>>\nUi"
     deactivate ":UserList"
 else user is invalid
     ":RemoveUserCommand" --> ":Duke" : DukeException
     deactivate ":RemoveUserCommand"
-    ":Duke" -> "<<class>>\n:Ui" : print error
-    activate "<<class>>\n:Ui"
-    "<<class>>\n:Ui" --> ":Duke" : error message
-    deactivate "<<class>>\n:Ui"
+    ":Duke" -> "<<class>>\nUi" : print error
+    activate "<<class>>\nUi"
+    "<<class>>\nUi" --> ":Duke" : error message
+    deactivate "<<class>>\nUi"
 end
 deactivate ":RemoveUserCommand"
 ":Duke" --> "User"
