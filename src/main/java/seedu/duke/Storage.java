@@ -207,14 +207,14 @@ public class Storage {
 
             while (scanner.hasNext()) {
                 String[] pairingParameters = scanner.nextLine().split("\\s\\:\\s");
-                String[] clientParamters = pairingParameters[0].split("\\s\\|\\s");
+                String[] clientParameters = pairingParameters[0].split("\\s\\|\\s");
                 String[] propertyParameters = pairingParameters[1].split("\\s\\|\\s");
 
                 //Client Information
-                String clientName = clientParamters[0].replace(OPEN_BRACKET, EMPTY_STRING);
-                String clientContactNumber = clientParamters[1];
-                String clientEmail = clientParamters[2];
-                String clientBudget = clientParamters[3].replace(CLOSE_BRACKET, EMPTY_STRING);
+                String clientName = clientParameters[0].replace(OPEN_BRACKET, EMPTY_STRING);
+                String clientContactNumber = clientParameters[1];
+                String clientEmail = clientParameters[2];
+                String clientBudget = clientParameters[3].replace(CLOSE_BRACKET, EMPTY_STRING);
 
                 //Property Information
                 String landLordName = propertyParameters[0].replace(OPEN_BRACKET,EMPTY_STRING);

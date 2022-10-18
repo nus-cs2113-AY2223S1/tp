@@ -1,14 +1,13 @@
 package seedu.duke;
 
 import seedu.duke.command.Command;
+
 import seedu.duke.command.CommandBye;
-
 import seedu.duke.exception.DukeException;
-
-import java.io.IOException;
+import seedu.duke.parsermanager.Parser;
+import seedu.duke.parsermanager.ParserManager;
 
 public class Duke {
-    private Parser parser;
     private Ui ui;
     private Storage storage;
     private PropertyList propertyList;
@@ -20,14 +19,15 @@ public class Duke {
         this.propertyList = new PropertyList();
         this.clientList = new ClientList();
         this.pairingList = new PairingList();
-        this.parser = new Parser(clientList, propertyList, pairingList);
         this.storage = new Storage(clientList, propertyList, pairingList);
     }
 
 
-    public void run() throws IOException {
+    public void run() {
 
         Command command;
+        Parser parser;
+        ParserManager parserManager = new ParserManager(clientList, propertyList, pairingList);
         boolean isCommandBye = false;
 
         ui.showWelcomeMessage();
@@ -36,9 +36,13 @@ public class Duke {
             try {
                 //System.exit(0); //to pass CI
                 String userInputText = ui.readCommand();
-                command = parser.parseCommand(userInputText);
+
+
+                parser = parserManager.parseCommand(userInputText);
+                command = parser.parseCommand();
                 command.execute(ui, storage, propertyList, clientList, pairingList);
                 isCommandBye = (command instanceof CommandBye);
+
             } catch (DukeException e) {
                 ui.showExceptionMessage(e);
             }
@@ -48,7 +52,7 @@ public class Duke {
     /**
      * Main entry-point for the java.duke.Duke application.
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         new Duke().run();
     }
 }
