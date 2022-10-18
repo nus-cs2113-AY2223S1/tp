@@ -41,6 +41,14 @@ public class HelpCommand extends Command {
         this.isDetailed = false;
     }
 
+    /**
+     * Sets a boolean value to indicate if the user chooses to display the help message in detail.
+     *
+     * <p>When the boolean isDetailed is set to true, the help command will display the detailed help messages
+     * to the user.
+     *
+     * @param isDetailed A boolean indicating if the user chooses to display the help message in detail.
+     */
     @Override
     public void setIsDetailedOption(boolean isDetailed) {
         this.isDetailed = isDetailed;
@@ -78,6 +86,11 @@ public class HelpCommand extends Command {
         Ui.showHelp(helpMessage);
     }
 
+    /**
+     * Consolidates all the basic help messages from the available commands and returns it.
+     *
+     * @return A string containing all basic help messages of valid commands.
+     */
     private String generateBasicHelp() {
         String helpMessage = HelpCommand.COMMAND_HELP + LINE_SEPARATOR
                 + AddCommand.COMMAND_HELP + LINE_SEPARATOR
@@ -92,6 +105,11 @@ public class HelpCommand extends Command {
         return helpMessage;
     }
 
+    /**
+     * Consolidates all the detailed help messages from the available commands and returns it.
+     *
+     * @return A string containing all detailed help messages of valid commands.
+     */
     private String generateDetailedHelp() {
         String helpMessage = HelpCommand.COMMAND_DETAILED_HELP + LINE_SEPARATOR
                 + AddCommand.COMMAND_DETAILED_HELP + LINE_SEPARATOR
