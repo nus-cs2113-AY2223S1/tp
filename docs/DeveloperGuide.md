@@ -9,8 +9,8 @@ Click to view the latest release of [RecipEditor]((https://github.com/AY2223S1-C
 
 [Design](#design)
 - [Architecture](#architecture)
-- [Ui Component](#ui-component)
 - [Logic Component](#logic-component)
+- [Ui Component](#ui-component)
 - [Storage Component](#storage-component)
 - [Implementation](#implementation)
     - [Loading Of Data On Startup](#loading-of-data-on-startup)
@@ -30,6 +30,19 @@ Click to view the latest release of [RecipEditor]((https://github.com/AY2223S1-C
 ## Design
 ### Architecture
 {architecture-level description}
+
+### Ui Component
+The UI component is responsible for all user interfaces of the application.
+
+<p align="center" width="100%">
+  <img width="80%" src="images/UiClassDiagram.png" alt="Ui Class Diagram"/>
+</p>
+
+**API:** `Ui.java`
+1. `Ui` calls `CommandResult` to show the output message after a command is completed.
+2. `AddMode` calls `Recipe` to add new recipe into the list.
+3. `AddMode` calls `Ingredient` to parse ingredients according to its name, amount and unit.
+
 
 ### Storage Component
 The storage component allows data to be read from and saved to a storage file.
