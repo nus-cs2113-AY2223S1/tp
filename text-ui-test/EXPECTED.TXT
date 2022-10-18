@@ -5,6 +5,7 @@ Welcome to your Movie Reviews bot,
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+
 	Got it. I've added the following item to the list:
 	[Movie] Inception  Rating:10.0 Genre: scifi Date watched: 5 Sep 22 
 
