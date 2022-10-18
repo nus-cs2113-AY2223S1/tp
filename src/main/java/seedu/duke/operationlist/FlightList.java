@@ -181,7 +181,7 @@ public class FlightList extends OperationList {
     private void checkAvailableGateNumber() throws SkyControlException {
         for (int i = 0; i < flightIndex; i++) {
             validateFlight(i);
-            if(isGateOccupied()) {
+            if (isGateOccupied()) {
                 resetChecks();
                 throw new SkyControlException(ui.getGateOccupiedError());
             }
@@ -215,7 +215,7 @@ public class FlightList extends OperationList {
     }
 
     private void validateDestinationLength(String destination) throws SkyControlException {
-        if(destination.length() > DESTINATION_LENGTH_LIMIT) {
+        if (destination.length() > DESTINATION_LENGTH_LIMIT) {
             throw new SkyControlException(ui.getExceedAirlineLengthError(destination));
         }
     }
