@@ -5,6 +5,7 @@ import seedu.duke.Ui;
 import seedu.duke.biometrics.Biometrics;
 import seedu.duke.biometrics.WeightAndFat;
 import seedu.duke.exception.IllegalValueException;
+import seedu.duke.exercise.CardioExercise;
 import seedu.duke.exercise.Exercise;
 import seedu.duke.exercise.ExerciseList;
 import seedu.duke.exercise.StrengthExercise;
@@ -46,6 +47,9 @@ public class ViewCommand extends Command {
             break;
         case ("strength"):
             viewStrengthExercise(argumentList);
+            break;
+        case ("cardio"):
+            viewCardioExercise(argumentList);
             break;
         default:
             handleInvalidViewType();
@@ -89,6 +93,22 @@ public class ViewCommand extends Command {
         }
         return (ArrayList<Exercise>) exerciseList.getCompletedExerciseList()
                 .stream().filter(StrengthExercise.class::isInstance).collect(Collectors.toList());
+    }
+
+    private void viewCardioExercise(String[] argumentList) throws IllegalValueException {
+        handleInvalidViewExerciseCommand(argumentList);
+        ArrayList<Exercise> cardioExerciseArrayList = getCardioExerciseArrayListByCommand(argumentList);
+        ui.showExerciseListCaption(cardioExerciseArrayList.size(), argumentList, "Cardio exercises");
+        ui.outputExerciseList(cardioExerciseArrayList);
+    }
+
+    private ArrayList<Exercise> getCardioExerciseArrayListByCommand(String[] argumentList) {
+        if (argumentList.length == 1) {
+            return (ArrayList<Exercise>) exerciseList.getCurrentExerciseList()
+                    .stream().filter(CardioExercise.class::isInstance).collect(Collectors.toList());
+        }
+        return (ArrayList<Exercise>) exerciseList.getCompletedExerciseList()
+                .stream().filter(CardioExercise.class::isInstance).collect(Collectors.toList());
     }
 
 
