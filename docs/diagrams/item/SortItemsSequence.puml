@@ -1,0 +1,34 @@
+@startuml
+hide footbox
+Actor User
+"User" -> ":Duke": "sort-items..."
+activate ":Duke"
+":Duke" -> ":CommandParser": createCommand()
+activate ":CommandParser"
+":CommandParser" -> ":SortItemCommand": new
+activate ":SortItemCommand"
+return
+":CommandParser" --> ":Duke": command
+deactivate
+":Duke" -> ":SortItemCommand" : executeCommand()
+activate ":SortItemCommand"
+":SortItemCommand" -> ":SortItemCommand": sortAndFilter()
+activate ":SortItemCommand"
+":SortItemCommand" -> ":SortItemCommand": getArgsSortItemsCmd()
+activate ":SortItemCommand"
+return args
+alt args is valid
+    return sortedItems
+    ":SortItemCommand" -> "<<class>>\n:Ui": printResponse()
+    activate "<<class>>\n:Ui"
+    return sortedItems message
+else args is invalid
+    ":SortItemCommand" --> ":Duke" : DukeException
+        deactivate ":SortItemCommand"
+        ":Duke" -> "<<class>>\n:Ui" : print error
+        activate "<<class>>\n:Ui"
+        "<<class>>\n:Ui" --> ":Duke" : error message
+        deactivate "<<class>>\n:Ui"
+end
+":Duke" --> "User"
+@enduml
