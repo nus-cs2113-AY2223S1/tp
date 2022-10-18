@@ -65,7 +65,7 @@ public class PetParser {
 
 
     public Command prepareRemovePet(String input){
-        int index = parser.indexOfRemove(input);
+        int index = parser.indexOfInput(input);
         if(index == -1){
             System.out.println("input invalid");
             return new EndCommand();

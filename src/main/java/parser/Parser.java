@@ -1,7 +1,6 @@
 package parser;
 import command.*;
 import exception.DukeException;
-import seedu.duke.Duke;
 
 public class Parser {
     private final int lengthOfSignature = 3;
@@ -66,7 +65,7 @@ public class Parser {
      */
 
 
-    public int indexOfRemove(String input){
+    public int indexOfInput(String input){
         try {
             return numberInInput(input, " i/");
         } catch (DukeException e){
