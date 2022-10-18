@@ -23,16 +23,21 @@ public class SortCommand extends Commands {
             this.reviewList.inputs.sort(Comparator.comparing(Media::getTitle));
             break;
 
+        case "genre":
+            this.reviewList.inputs.sort(Comparator.comparing(Media::getGenre));
+            break;
+
         case "date":
             break;
 
         default:
+            int throwDummyException = Integer.parseInt("dummy");
             break;
         }
 
         output += "Your list has been sorted by " + userInput[1] + '\n';
         Commands listExecutor = new ListCommand(this.reviewList);
-        output = listExecutor.execute();
+        output += listExecutor.execute();
 
         return output;
     }

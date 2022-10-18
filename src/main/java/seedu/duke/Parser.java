@@ -36,6 +36,7 @@ public class Parser {
         final String clearCommand = "clear";
         final String endCommand = "bye";
         final String favouriteCommand = "favourite";
+        final String sortCommand = "sort";
         final String NT = "";
         
         String[] words = userInput.split(" ");
@@ -62,8 +63,12 @@ public class Parser {
             executeClear();
             break;
 
-        case favouriteCommand:;
+        case favouriteCommand:
             executeFavourite(words);
+            break;
+
+        case sortCommand:
+            executeSort(words);
             break;
         
         case NT:
@@ -72,6 +77,17 @@ public class Parser {
             logger.log(Level.WARNING, "An unrecognised command was given by the user.");
             System.out.println("Unrecognised command");
             break;
+        }
+    }
+
+    public void executeSort(String[] words) {
+        try {
+
+            executor = new SortCommand(mediaList, words);
+            String output = executor.execute();
+            Ui.print(output);
+        } catch (Exception e) {
+            System.out.println("\nIncomplete or wrongly formatted command, try again.\n");
         }
     }
 

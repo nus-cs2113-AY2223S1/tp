@@ -9,6 +9,18 @@ public class Media {
     public double rating;
     public String genre;
 
+    public String getGenre() {
+        return genre;
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
     public boolean isFavourite() {
         return favourite;
     }
