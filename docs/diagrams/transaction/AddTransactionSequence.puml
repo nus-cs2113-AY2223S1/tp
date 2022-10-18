@@ -1,0 +1,42 @@
+@startuml
+hide footbox
+
+Actor User
+"User" -> ":Duke": "add-tx..."
+activate ":Duke"
+":Duke" -> ":CommandParser": createCommand()
+activate ":CommandParser"
+":CommandParser" -> ":AddTransactionCommand": new
+activate ":AddTransactionCommand"
+return :AddTransactionCommand
+":CommandParser" --> ":Duke": command
+deactivate
+
+":Duke" -> ":AddTransactionCommand" : executeCommand()
+activate ":AddTransactionCommand"
+":AddTransactionCommand" -> ":AddTransactionCommand": getArgsAddTxCmd()
+activate ":AddTransactionCommand"
+return args
+alt args is valid
+    ":AddTransactionCommand" -> ":Transaction": new
+    activate ":Transaction"
+    ":Transaction" --> ":AddTransactionCommand": transaction
+    ":AddTransactionCommand" -> ":TransactionList": add()
+    activate ":TransactionList"
+    ":AddTransactionCommand" -> "<<class>>\n:Ui": addTransactionMessage()
+    activate "<<class>>\n:Ui"
+    return
+    deactivate ":TransactionList"
+    return
+    deactivate "<<class>>\n:Ui"
+    deactivate ":Transaction"
+else args is invalid
+    ":AddTransactionCommand" --> ":Duke" : DukeException
+    deactivate ":AddTransactionCommand"
+    ":Duke" -> "<<class>>\n:Ui" : print error
+    activate "<<class>>\n:Ui"
+    "<<class>>\n:Ui" --> ":Duke" : error message
+    deactivate "<<class>>\n:Ui"
+end
+":Duke" --> "User"
+@enduml

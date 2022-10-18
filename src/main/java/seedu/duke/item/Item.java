@@ -43,7 +43,7 @@ public class Item {
     }
 
     public Item updatePrice(double newPricePerDay) {
-        return new Item(this.name, Category.setCategory(this.category), newPricePerDay,
+        return new Item(this.itemId, this.name, Category.setCategory(this.category), newPricePerDay,
                 this.ownerId);
     }
 

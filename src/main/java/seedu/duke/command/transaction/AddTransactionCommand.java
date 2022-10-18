@@ -183,7 +183,7 @@ public class AddTransactionCommand extends Command {
             LocalDate createdAt = LocalDate.parse(args[3]);
             Transaction transaction =
                     new Transaction(itemName, itemId, borrowId, duration, createdAt);
-            this.transactionList.add(transaction);
+            this.transactionList.addTransaction(transaction);
             Ui.addTransactionMessage(transaction, transactionList.getSize());
         }
         return false;

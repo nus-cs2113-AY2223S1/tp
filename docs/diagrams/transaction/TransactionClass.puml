@@ -1,0 +1,69 @@
+@startuml
+title Transaction Diagram
+
+skinparam classAttributeIconSize 0
+hide footbox
+
+class Transaction {
+    - transactionId: String
+    - itemName: String
+    - itemId: String
+    - borrower: String
+    - duration: Integer
+    - createdAt: LocalDate
+    - returnedAt: LocalDate
+
+    + Transaction(itemName: String, itemId: String, borrower: String, duration: int, createdAt: LocalDate)
+    + Transaction(transactionId: String, itemName: String, itemId: String, borrower: String, duration: int, createdAt: LocalDate)
+    + getTxId(): String
+    + getItemId(): String
+    + getBorrower(): String
+    + getReturnDate(): LocalDate
+    + isFinished(): boolean
+    + convertTransactionToFileFormat(): String
+    + updateDuration(newDuration: int): Transaction
+    + toString(): String
+}
+
+class TransactionList {
+    + TransactionList()
+    + TransactionList(transactionList: ArrayList<Transaction>)
+    + getSize(): int
+    + getTransactionList(): ArrayList<Transaction>
+    + addTransaction(transaction: Transaction): void
+    updateTransactionDuration(transactionId: String, duration: int): Transaction
+    + deleteTransaction(transactionId: String): void
+    + getTransactionById(transactionId: String): Transaction
+    + hasThisBorrower(username: String): boolean
+    + hasThisItemBeingBorrowed(itemId: String): boolean
+    + convertTransactionListToFileFormat(): String
+    + toString(): String
+}
+
+class TransactionStorage {
+    {static} - SEPARATOR: String
+    - transactionFilePath: String
+    + TransactionStorage(transactionFilePath: String)
+    + loadData(): ArrayList<Transaction>
+    + writeData(transactionList: TransactionList): void
+    + handleTransactionLine(splitTransactionLine: String[]): Transaction
+}
+
+class IdGenerator {
+    {static} + generateId(): String
+}
+
+abstract class Storage {
+}
+
+class DateParser {
+    {static} + formatDateToString(date: LocalDate): String
+}
+
+TransactionStorage .> TransactionList : > loads and writes
+TransactionList *--> "0..*" Transaction: transactionList
+Transaction ..> IdGenerator
+Transaction ..> DateParser
+Storage <|-- TransactionStorage
+
+@enduml
