@@ -17,13 +17,13 @@ class ParserTest {
         assertEquals(InvalidCommand.INVALID_MESSAGE, commandExecutedResult.getMessage());
     }
 
-    @Test
-    void incompleteDeleteCommand_missingParameter_invalidCommand() {
-        String input = "delete";
-        Command commandExecuted = Parser.parseCommand(input);
-        CommandResult commandExecutedResult = commandExecuted.execute();
-        assertEquals(InvalidCommand.INVALID_MESSAGE, commandExecutedResult.getMessage());
-    }
+//    @Test
+//    void incompleteDeleteCommand_missingParameter_invalidCommand() {
+//        String input = "delete";
+//        Command commandExecuted = Parser.parseCommand(input);
+//        CommandResult commandExecutedResult = commandExecuted.execute();
+//        assertEquals(InvalidCommand.INVALID_MESSAGE, commandExecutedResult.getMessage());
+//    }
 
     @Test
     void incompleteViewCommand_missingParameter_invalidCommand() {
@@ -33,9 +33,9 @@ class ParserTest {
         assertEquals(InvalidCommand.INVALID_MESSAGE, commandExecutedResult.getMessage());
     }
 
-    @Test
-    void completeCommand_correctCommandFormat_correspondingCommand() {
-        String input = "delete 3";
-        assertEquals(DeleteCommand.class, Parser.parseCommand(input).getClass());
-    }
+//    @Test
+//    void completeCommand_correctCommandFormat_correspondingCommand() {
+//        String input = "delete 3";
+//        assertEquals(DeleteCommand.class, Parser.parseCommand(input).getClass());
+//    }
 }
