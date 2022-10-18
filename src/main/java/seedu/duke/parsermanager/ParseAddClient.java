@@ -71,14 +71,14 @@ public class ParseAddClient extends Parser {
 
     private ArrayList<String> processCommandAddClientDetails(String rawCommandDetail)
             throws MissingFlagException, IncorrectFlagOrderException {
-        int[] flagIndexPositions = getFlagIndexPositions(rawCommandDetail);
+        String[] flags = ADD_CLIENT_FLAGS;
+        int[] flagIndexPositions = getFlagIndexPositions(rawCommandDetail, flags);
         checkForMissingClientFlags(flagIndexPositions);
-        checkFlagsOrder(flagIndexPositions);
+        checkClientFlagsOrder(flagIndexPositions);
         return extractClientDetails(rawCommandDetail, flagIndexPositions);
     }
 
-    private int[] getFlagIndexPositions(String commandDetail) {
-        String[] flags = ADD_CLIENT_FLAGS;
+    private int[] getFlagIndexPositions(String commandDetail, String[] flags) {
         int[] flagIndexPositions = new int[flags.length];
 
         for (int flagIndex = 0; flagIndex < flags.length; flagIndex++) {
@@ -101,7 +101,7 @@ public class ParseAddClient extends Parser {
         return (flagIndexPosition != MISSING_FLAG_VALUE);
     }
 
-    private void checkFlagsOrder(int[] flagIndexPositions) throws IncorrectFlagOrderException {
+    private void checkClientFlagsOrder(int[] flagIndexPositions) throws IncorrectFlagOrderException {
         checkForCorrectFlagOrder(flagIndexPositions[CLIENT_NAME_INDEX],
                 flagIndexPositions[CLIENT_CONTACT_NUMBER_INDEX]);
         boolean hasEmail = (flagIndexPositions[CLIENT_EMAIL_INDEX] != MISSING_FLAG_VALUE);
@@ -142,12 +142,12 @@ public class ParseAddClient extends Parser {
         String clientBudgetPerMonth = extractDetail(rawClientDetail,
                 addClientFlagIndexPositions[CLIENT_BUDGET_INDEX] + FLAG_JUMPER_VALUE);
 
-        ArrayList<String> processedClientDetails = new ArrayList<>();
-        processedClientDetails.add(clientName.trim());
-        processedClientDetails.add(clientContactNumber.trim());
-        processedClientDetails.add(clientEmail.trim());
-        processedClientDetails.add(clientBudgetPerMonth.trim());
-        return processedClientDetails;
+        ArrayList<String> extractedClientDetails = new ArrayList<>();
+        extractedClientDetails.add(clientName.trim());
+        extractedClientDetails.add(clientContactNumber.trim());
+        extractedClientDetails.add(clientEmail.trim());
+        extractedClientDetails.add(clientBudgetPerMonth.trim());
+        return extractedClientDetails;
     }
 
     private static String extractDetail(String rawDetail, int beginIndex) {

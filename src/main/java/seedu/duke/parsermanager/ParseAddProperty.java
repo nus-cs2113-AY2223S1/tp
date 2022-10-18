@@ -16,12 +16,12 @@ import java.util.regex.Pattern;
 import static seedu.duke.CommandStructure.ADD_PROPERTY_FLAGS;
 import static seedu.duke.Messages.EXCEPTION;
 import static seedu.duke.Messages.MESSAGE_ADD_PROPERTY_WRONG_FORMAT;
-import static seedu.duke.Messages.MESSAGE_EMPTY_DESCRIPTION;
-import static seedu.duke.Messages.MESSAGE_INVALID_PRICE_FORMAT;
 import static seedu.duke.Messages.MESSAGE_INVALID_SINGAPORE_ADDRESS;
+import static seedu.duke.Messages.MESSAGE_INVALID_PRICE_FORMAT;
 
 public class ParseAddProperty extends Parser {
     private final String commandDescription;
+    private static final int PROPERTY_FLAG_SIZE = 4;
 
     public ParseAddProperty(String addCommandDescription) {
         this.commandDescription = addCommandDescription;
@@ -29,18 +29,11 @@ public class ParseAddProperty extends Parser {
 
     public Command parseCommand() throws EmptyDescriptionException, InvalidSingaporeAddressException,
             MissingFlagException, IncorrectFlagOrderException, InvalidPriceFormatException, EmptyDetailException {
-
-        checkForEmptyDescription(commandDescription);
-        ArrayList<String> propertyDetails;
         try {
-
             checkForEmptyDetails(commandDescription);
-
-            propertyDetails = processCommandDetails(commandDescription);
+            ArrayList<String> propertyDetails = processCommandAddPropertyDetails(commandDescription);
             validatePropertyDetails(propertyDetails);
-
             return new CommandAddProperty(propertyDetails);
-
         } catch (InvalidSingaporeAddressException e) {
             throw new InvalidSingaporeAddressException(MESSAGE_INVALID_SINGAPORE_ADDRESS);
         } catch (MissingFlagException e) {
@@ -52,21 +45,6 @@ public class ParseAddProperty extends Parser {
         } catch (EmptyDetailException e) {
             throw new EmptyDetailException(MESSAGE_ADD_PROPERTY_WRONG_FORMAT);
         }
-
-
-    }
-
-    private void checkForEmptyDescription(String commandDetail) throws EmptyDescriptionException {
-        boolean isEmptyDescription = isEmptyString(commandDetail);
-        if (isEmptyDescription) {
-            throw new EmptyDescriptionException(MESSAGE_EMPTY_DESCRIPTION);
-        }
-    }
-
-    private boolean isEmptyString(String commandDetail) {
-        String trimmedString = commandDetail.trim();
-
-        return trimmedString.isEmpty();
     }
 
     private void checkForEmptyDetails(String commandDetail) throws EmptyDetailException {
@@ -76,14 +54,75 @@ public class ParseAddProperty extends Parser {
         }
     }
 
-    private ArrayList<String> processCommandDetails(String rawCommandDetail)
-            throws MissingFlagException, IncorrectFlagOrderException {
+    private boolean isEmptyString(String commandDetail) {
+        return commandDetail.trim().isEmpty();
+    }
 
+    private ArrayList<String> processCommandAddPropertyDetails(String rawCommandDetail)
+            throws MissingFlagException, IncorrectFlagOrderException {
         String[] flags = ADD_PROPERTY_FLAGS;
         int[] flagIndexPositions = getFlagIndexPositions(rawCommandDetail, flags);
-        checkForMissingFlags(flagIndexPositions);
-        checkFlagsOrder(flagIndexPositions);
-        return extractCommandDetails(rawCommandDetail, flags, flagIndexPositions);
+        checkForMissingPropertyFlags(flagIndexPositions);
+        checkPropertyFlagsOrder(flagIndexPositions);
+        return extractPropertyDetails(rawCommandDetail, flagIndexPositions);
+    }
+
+    private int[] getFlagIndexPositions(String commandDetail, String[] flags) {
+        int[] flagIndexPositions = new int[flags.length];
+
+        for (int flagIndex = 0; flagIndex < flags.length; flagIndex++) {
+            flagIndexPositions[flagIndex] = commandDetail.indexOf(flags[flagIndex]);
+        }
+        return flagIndexPositions;
+    }
+
+    private void checkForMissingPropertyFlags(int[] flagIndexPositions) throws MissingFlagException {
+        for (int flagIndex : flagIndexPositions) {
+            if (!isFlagPresent(flagIndex)) {
+                throw new MissingFlagException(EXCEPTION);
+            }
+        }
+    }
+
+    private boolean isFlagPresent(int flagIndexPosition) {
+        return (flagIndexPosition != -1);
+    }
+
+    private void checkPropertyFlagsOrder(int[] flagIndexPositions) throws IncorrectFlagOrderException {
+        for (int flagIndex = 0; flagIndex < flagIndexPositions.length - 1; flagIndex++) {
+            checkForCorrectFlagOrder(flagIndexPositions[flagIndex], flagIndexPositions[flagIndex + 1]);
+        }
+    }
+
+    private void checkForCorrectFlagOrder(int flagPosition, int nextFlagPosition) throws IncorrectFlagOrderException {
+        boolean hasCorrectOrder = (flagPosition < nextFlagPosition);
+        if (!hasCorrectOrder) {
+            throw new IncorrectFlagOrderException(EXCEPTION);
+        }
+    }
+
+    private ArrayList<String> extractPropertyDetails(String rawPropertyDetail, int[] addPropertyFlagIndexPositions) {
+        ArrayList<String> extractedPropertyDetails = new ArrayList<>();
+        for (int flagIndex = 0; flagIndex < PROPERTY_FLAG_SIZE; flagIndex++) {
+            boolean isLastFlagIndex = ((flagIndex + 1) == PROPERTY_FLAG_SIZE);
+            if (isLastFlagIndex) {
+                extractedPropertyDetails.add(extractDetail(rawPropertyDetail,
+                        addPropertyFlagIndexPositions[flagIndex] + 2).trim());
+            } else {
+                extractedPropertyDetails.add(extractDetail(rawPropertyDetail,
+                        addPropertyFlagIndexPositions[flagIndex] + 2,
+                        addPropertyFlagIndexPositions[flagIndex + 1]).trim());
+            }
+        }
+        return extractedPropertyDetails;
+    }
+
+    private static String extractDetail(String rawDetail, int beginIndex) {
+        return rawDetail.substring(beginIndex).trim();
+    }
+
+    private static String extractDetail(String rawDetail, int beginIndex, int endIndex) {
+        return rawDetail.substring(beginIndex, endIndex).trim();
     }
 
     private void validatePropertyDetails(ArrayList<String> propertyDetails) throws EmptyDetailException,
@@ -98,50 +137,6 @@ public class ParseAddProperty extends Parser {
         checkForPriceNumberFormat(propertyDetails.get(2));
     }
 
-    private int[] getFlagIndexPositions(String commandDetail, String[] flags) {
-        int[] flagIndexPositions = new int[flags.length];
-
-        for (int i = 0; i < flags.length; i++) {
-            flagIndexPositions[i] = commandDetail.indexOf(flags[i]);
-        }
-        return flagIndexPositions;
-    }
-
-    private void checkForMissingFlags(int[] flagIndexPositions) throws MissingFlagException {
-        for (int flagIndex : flagIndexPositions) {
-            if (!isFlagPresent(flagIndex)) {
-                throw  new MissingFlagException(EXCEPTION);
-            }
-        }
-    }
-
-    private void checkFlagsOrder(int[] flagIndexPositions) throws IncorrectFlagOrderException {
-        for (int i = 0; i < flagIndexPositions.length - 1; i++) {
-            checkForCorrectFlagOrder(flagIndexPositions[i], flagIndexPositions[i + 1]);
-        }
-    }
-
-    private ArrayList<String> extractCommandDetails(String rawCommandDetail, String[] flags,
-                                                    int[] flagIndexPositions) {
-        ArrayList<String> extractedCommandDetails = new ArrayList<>();
-        for (int i = 0; i < flags.length; i++) {
-            String extractedDetail;
-            if (i == flags.length - 1) {
-                /* The extracted detail for the last flag starts from the char after the flag, to the end of
-                   rawCommandDetails */
-                extractedDetail = extractDetail(rawCommandDetail, flagIndexPositions[i] + flags[i].length());
-            } else {
-                // The extracted detail for non-last starts from the char after the flag, to index before the next flag
-                extractedDetail = extractDetail(
-                        rawCommandDetail,
-                        flagIndexPositions[i] + flags[i].length(),
-                        flagIndexPositions[i + 1]);
-            }
-            extractedCommandDetails.add(extractedDetail.trim());
-        }
-        return extractedCommandDetails;
-    }
-
     private void checkForValidSingaporeAddress(String address) throws InvalidSingaporeAddressException {
         boolean hasValidSingaporeLandedPropertyAddress = checkForValidSingaporeLandedPropertyAddress(address);
         boolean hasValidSingaporeBuildingAddress = checkForValidSingaporeBuildingAddress(address);
@@ -150,34 +145,6 @@ public class ParseAddProperty extends Parser {
         if (!hasValidSingaporeAddress) {
             throw new InvalidSingaporeAddressException(EXCEPTION);
         }
-    }
-
-    private void checkForPriceNumberFormat(String budget) throws InvalidPriceFormatException {
-        //Accepts only positive whole number
-        String regex = "^[1-9]\\d*$";
-        boolean hasValidPriceNumberFormat = checkForDetailFormat(regex, budget);
-        if (!hasValidPriceNumberFormat) {
-            throw new InvalidPriceFormatException(EXCEPTION);
-        }
-    }
-
-    private boolean isFlagPresent(int flagIndexPosition) {
-        return (flagIndexPosition != -1);
-    }
-
-    private void checkForCorrectFlagOrder(int flagPosition, int nextFlagPosition) throws IncorrectFlagOrderException {
-        boolean hasCorrectOrder = (flagPosition < nextFlagPosition);
-        if (!hasCorrectOrder) {
-            throw new IncorrectFlagOrderException(EXCEPTION);
-        }
-    }
-
-    private static String extractDetail(String rawDetail, int beginIndex) {
-        return rawDetail.substring(beginIndex).trim();
-    }
-
-    private static String extractDetail(String rawDetail, int beginIndex, int endIndex) {
-        return rawDetail.substring(beginIndex, endIndex).trim();
     }
 
     private boolean checkForValidSingaporeLandedPropertyAddress(String address) {
@@ -228,11 +195,18 @@ public class ParseAddProperty extends Parser {
                 || hasValidBuildingAddressWithBuildingName || hasValidBuildingAddressWithStreetNumberAndBuildingName;
     }
 
+    private void checkForPriceNumberFormat(String budget) throws InvalidPriceFormatException {
+        //Accepts only positive whole number
+        String regex = "^[1-9]\\d*$";
+        boolean hasValidPriceNumberFormat = checkForDetailFormat(regex, budget);
+        if (!hasValidPriceNumberFormat) {
+            throw new InvalidPriceFormatException(EXCEPTION);
+        }
+    }
+
     private boolean checkForDetailFormat(String regex, String detail) {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(detail);
         return matcher.matches();
     }
-
-
 }
