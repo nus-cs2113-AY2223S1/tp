@@ -148,11 +148,11 @@ execution of the application.
     <i>Figure 2.6: Class Diagram for UI Component</i>
 </p>
 
-_Written by: Chua Han Yong Darren_
-
 As seen from the class diagram, every command that requires the ability to print to the system output will have
 to call the functions from the `Ui` class. To add on, the `Duke` class will also use the `Ui` class to read user 
 input.
+
+_Written by: Chua Han Yong Darren_
 
 ### Common Component
 
