@@ -17,7 +17,7 @@ public class TvShow extends Media {
      * @param site Platform or website to watch the show
      */
     public TvShow(String title, double rating, String genre, String dateWatched, String site) {
-        super(title, rating, genre);
+        super(title, rating, genre, dateWatched);
         assert dateWatched.length() > 0 : "Length of date must be more than 0";
         assert site.length() > 0 : "Length of date must be more than 0";
         this.dateWatched = dateWatched;
