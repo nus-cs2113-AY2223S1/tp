@@ -3,7 +3,8 @@
 ## Acknowledgements
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}  
-Zhou Zhou's Individual Project: https://github.com/maanyos/ip
+Zhou Zhou's Individual Project: https://github.com/maanyos/ip \
+Nay Chi's Individual Project: https://github.com/NayChi-7/ip
 
 ## Design & implementation
 
@@ -15,6 +16,19 @@ WeightAndFatList is separated from Biometrics for better abstraction and cohesio
 [Proposed] Weight and fat records will be associated with a date, and the WeightAndFatList class
 stores records in descending order of date for viewing purposes.
 ![Biometrics.png](UmlDiagrams/Biometrics.png)
+
+
+Food component:
+
+Food and FoodList are two classes implemented for storing user's food consumption.
+The interaction between the Food, FoodList class and Command classes(Addcommand, RemoveCommand, 
+FindCommand and ViewCommand). Only food related details(i.e. methods and attributes) are added in the
+diagram below for readibility.
+![Food.png](UmlDiagrams/Food.png)
+
+\
+[Proposed] Food records will be associated with a date, and the FoodList class 
+stores records in descending order of date for viewing purposes.
 
 
 ## Product scope
@@ -32,17 +46,21 @@ to better understand their journey and progress towards their fitness goals.
 
 ## User Stories
 
-| Version | As a ... | I want to ...                  | So that I can ...                                           |
-|---------|----------|--------------------------------|-------------------------------------------------------------|
-| v1.0    | new user | see usage instructions         | refer to them when I forget how to use the application      |
-| v2.0    | old user | record my biometrics over time | see how I am progressing in my fitness journey              |
-| v2.0    | user     | find a to-do item by name      | locate a to-do without having to go through the entire list |
-| v2.1    | new user | set my biometrics              | receive personalised recommendations                        |
+| Version | As a ...       | I want to ...                  | So that I can ...                                           |
+|---------|----------------|--------------------------------|-------------------------------------------------------------|
+| v1.0    | new user       | see usage instructions         | refer to them when I forget how to use the application      |
+| v1.0    | user           | add my food consumption        | to keep track of my food consumptions over time             |
+| v1.0    | user           | view my food consumption       | to see my record of food consumptions                       |
+| v2.0    | old user       | record my biometrics over time | see how I am progressing in my fitness journey              |
+| v2.0    | user           | find a to-do item by name      | locate a to-do without having to go through the entire list |
+| v2.0    | long term user | save my food consumptions      | to keep a record of all my food data over time              |
+| v2.0    | long term user | find certain food consumption  | to see my consumption of certain food over time             |
+| v2.1    | new user       | set my biometrics              | receive personalised recommendations                        |
 
 ## Non-Functional Requirements
-
-{Give non-functional requirements}
-
+1. This app should work on all OS (Linux, Mac, Windows) that has JDK 11 installed.
+2. This app is meant for a single user (will not be able to keep track of different user's records).
+3. This app is targeted towards users with above-average typing speed, especially those who prefer typing over other means of input.
 ## Glossary
 
 * *glossary item* - Definition

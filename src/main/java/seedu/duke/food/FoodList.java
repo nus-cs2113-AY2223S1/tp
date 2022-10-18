@@ -22,11 +22,11 @@ public class FoodList {
         return foodList.get(index);
     }
 
-    public Food removeFood(int index) throws IllegalValueException {
+    public void removeFood(int index) throws IllegalValueException {
         if (index < 0 || index >= getFoodListSize()) {
             throw new IllegalValueException("Please provide a valid index for food");
         }
-        return foodList.remove(index);
+        foodList.remove(index);
     }
 
 
