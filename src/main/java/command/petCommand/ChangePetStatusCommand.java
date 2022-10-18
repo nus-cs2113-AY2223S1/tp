@@ -1,4 +1,4 @@
-package command;
+package command.petCommand;
 
 import pet.Pet;
 import pet.PetList;

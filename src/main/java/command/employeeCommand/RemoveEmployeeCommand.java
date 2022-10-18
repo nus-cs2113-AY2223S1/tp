@@ -1,21 +1,20 @@
-package command;
+package command.employeeCommand;
 
 import appointment.AppointmentList;
+import command.Command;
 import employee.EmployeeList;
 import service.ServiceList;
 
-public class RemoveAppointmentCommand extends Command{
-
+public class RemoveEmployeeCommand extends Command {
     public final static String COMMAND_WORD = "remove";
-    private final int appointmentId;
+    private int employeeId;
 
-    public RemoveAppointmentCommand(int appointmentId) {
-        this.appointmentId = appointmentId;
+    public RemoveEmployeeCommand(int employeeId){
+        this.employeeId = employeeId;
     }
-
     @Override
     public void execute() {
-        AppointmentList.removeAppointment(appointmentId);
+        EmployeeList.removeEmployee(employeeId);
     }
 
     @Override

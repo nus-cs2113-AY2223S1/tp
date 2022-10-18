@@ -1,6 +1,9 @@
 package parser;
 
 import command.*;
+import command.serviceCommand.AddServiceCommand;
+import command.serviceCommand.RemoveServiceCommand;
+import command.serviceCommand.ViewServiceCommand;
 
 public class ServiceParser {
     private int lengthOfSignature;
