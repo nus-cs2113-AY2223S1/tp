@@ -5,8 +5,8 @@ import seedu.duke.exception.IllegalValueException;
 import java.util.ArrayList;
 
 public class ExerciseList {
-    ArrayList<Exercise> currentExerciseList;
-    ArrayList<Exercise> completedExerciseList;
+    private ArrayList<Exercise> currentExerciseList;
+    private ArrayList<Exercise> completedExerciseList;
 
     public ExerciseList() {
         this.currentExerciseList = new ArrayList<>();
