@@ -446,7 +446,7 @@ public class ParameterParser {
             statsType = "categories";
             break;
         default:
-            parserLogger.log(Level.WARNING, "An invalid statstic type error is caught for the given parameter: "
+            parserLogger.log(Level.WARNING, "An invalid statistic type error is caught for the given parameter: "
                     + parameter);
             throw new ListStatisticsInvalidStatsTypeException();
         }

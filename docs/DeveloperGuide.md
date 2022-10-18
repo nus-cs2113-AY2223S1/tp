@@ -132,8 +132,24 @@ _Written by: Chia Thin Hong_
 _Written by: Author name_
 
 ### Parser Component
+The Parser component comprises of two main parsers: `CommandParser` and `ParameterParser`. Together, both these 
+parsers are used to generate a command object with its accurate parameters according to the input from the UI. 
 
-_Written by: Author name_
+The structure of the data component in Moolah Manager is illustrated in the class diagram below:
+![Data Component Class Diagram](images/ParserClassDiagram.png)
+
+After `run()` is called by `main()` in Duke, the `CommandParser` is first called to parse the command. The initial
+ input is split into the commandWord and parameters using `splitInput()`. Next, the command word is parsed using 
+ `getCommand()`. With the new command created, the parameters are then parsed by calling `ParameterParser.parse()`
+ 
+In `ParameterParser`, multiple checks are done to ensure that the userInput is accurate. For example, checks are done 
+to confirm that all mandatory tags are filled, that no unsupported tags are used, no duplicate tags, no tags are
+without parameters and finally that the formats of parameters are accurate. After all the checks are done`setCommand` 
+is called to customize the command accordingly.
+
+With the checked and accurate commands and parameters, the command is then executed by `Duke`
+
+_Written by: Paul Low_
 
 ### UI Component
 
