@@ -6,10 +6,9 @@ Click to view the latest release of [RecipEditor]((https://github.com/AY2223S1-C
 
 ## Content page
 [Acknowledgements](#acknowledgements)
+
 [Design](#design)
 - [Architecture](#architecture)
-- [Data Component](#data-component)
-    - [Data Component (Storage)](#data-component-storage)
 - [Ui Component](#ui-component)
 - [Logic Component](#logic-component)
 - [Storage Component](#storage-component)
@@ -28,10 +27,27 @@ Click to view the latest release of [RecipEditor]((https://github.com/AY2223S1-C
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
-## Design & implementation
+## Design
+### Architecture
+{architecture-level description}
 
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+### Storage Component
+The storage component allows data to be read from and saved to a storage file.
 
+<p align="center" width="100%">
+  <img width="80%" src="images/StorageClassDiagram.png" alt="Storage Class Diagram"/>
+</p>
+
+**API:** `Storage.java`
+1. `Storage` calls `Recipe` when saving data from `RecipeList` to an external storage file.
+2. `Storage` calls `RecipeList` when loading recipe data from external storage file to.
+3. `Storage` calls `Ui` to show relevant messages to the user. 
+
+The external storage file contains:
+- Recipe Name
+- Recipe Description
+- Recipe Ingredients (name, amount, unit)
+- Recipe Steps
 
 ## Product scope
 ### Target user profile
