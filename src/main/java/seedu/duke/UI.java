@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 
@@ -14,7 +15,12 @@ public class UI {
 
     public static String getInput() {
         Scanner in = new Scanner(System.in);
-        String input = in.nextLine();
+        String input = "";
+        try {
+            input = in.nextLine();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
         return input;
     }
 
