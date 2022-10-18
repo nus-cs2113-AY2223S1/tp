@@ -25,7 +25,7 @@ public class CurrencyApi {
     }
 
     public static File initialiseFile() {
-        File directory = new File(Configurations.LOCAL_STORAGE_DIRECTORY_PATH);
+        File directory = new File(Configurations.LOCAL_STORAGE_DIRECTORY);
         directory.mkdir();
         String newFilePath = new File(Configurations.FILE_PATH_CURRENCIES).getAbsolutePath();
         return new File(newFilePath);
