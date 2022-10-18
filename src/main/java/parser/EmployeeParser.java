@@ -15,7 +15,6 @@ public class EmployeeParser {
     }
 
 
-
     public Command parseEmployee(String input) {
         try {
             if(!input.contains(" ")) {
@@ -53,7 +52,6 @@ public class EmployeeParser {
         String name = input.substring(startOfN + lengthOfSignature);
         return new AddEmployeeCommand(name);
     }
-
 
     public Command prepareRemoveEmployee(String input){
         int index = parser.indexOfInput(input);
