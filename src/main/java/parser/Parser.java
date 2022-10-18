@@ -26,7 +26,7 @@ public class Parser {
                 return new EndCommand();
             }
             
-            System.out.println("Error: only one parameter received and it is not bye");
+            System.out.println("Sorry, only one parameter received and it is not bye");
             return new EmptyCommand();
         }
 
@@ -45,7 +45,7 @@ public class Parser {
         case "service":
             return serviceParser.parseService(statement);
         default:
-            System.out.println("Error: unrecognized operation");
+            System.out.println("Sorry, unrecognized operation");
             return new EmptyCommand();
         }
     }
@@ -70,7 +70,7 @@ public class Parser {
         try {
             return numberInInput(input, " i/");
         } catch (DukeException e){
-            System.out.println("Error: signature \"i/\" not found.");
+            System.out.println("Sorry, signature \"i/\" not found.");
             return -1;
         }
     }
@@ -101,7 +101,7 @@ public class Parser {
         try {
             return numberInInput(input, " s/");
         } catch (DukeException e){
-            System.out.println("Error: signature \"s/\" not found.");
+            System.out.println("Sorry, signature \"s/\" not found.");
             return -1;
         }
     }
@@ -110,7 +110,7 @@ public class Parser {
         try{
             return numberInInput(input, " h/");
         } catch (DukeException e){
-            System.out.println("Error: signature \"h/\" not found.");
+            System.out.println("Sorry, signature \"h/\" not found.");
             return -1;
         }
     }
