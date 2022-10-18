@@ -29,7 +29,8 @@ public class Recipeditor {
      */
     private static void start(String[] args) {
         Ui.showGreeting();
-        //TODO: Load from storage
+        Storage.createDataFile();
+        Storage.loadRecipesFromDataFile();
     }
 
     /**
@@ -45,12 +46,11 @@ public class Recipeditor {
      * Main Command Loop Input -> Command -> Command Result -> Show & Save.
      */
     private static void runCommandLoopUntilExitCommand() {
-        Storage.createDataFile();
-        Storage.loadRecipesFromDataFile();
+
         Command command;
         do {
             String input = Ui.readInput();
-            command = new Parser().parseCommand(input);
+            command = Parser.parseCommand(input);
             CommandResult result = executeCommand(command);
             Ui.showResult(result);
 
@@ -60,7 +60,6 @@ public class Recipeditor {
     private static CommandResult executeCommand(Command command) {
         try {
             CommandResult result = command.execute();
-            //TODO: Save the recipe?
             return result;
         } catch (Exception e) {
             Ui.showMessage(e.getMessage());

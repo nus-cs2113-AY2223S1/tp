@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javax.xml.namespace.QName;
+
 import recipeditor.recipe.Ingredient;
 import recipeditor.recipe.Recipe;
 import recipeditor.recipe.RecipeList;
@@ -14,6 +16,8 @@ import recipeditor.ui.Ui;
 
 public class Storage {
     private static final String DATA_FILE_PATH = "./data/data.txt";
+
+    private static final String DATA_STORAGE = "./data/";
     private static final String RECIPE_NAME_FIELD_TYPE = "Recipe Name";
     private static final String RECIPE_DESCRIPTION_FIELD_TYPE = "Recipe Description";
     private static final String RECIPE_INGREDIENTS_FIELD_TYPE = "Recipe Ingredients";
@@ -31,6 +35,18 @@ public class Storage {
             Ui.showMessage("Error creating data file");
         }
     }
+
+    /** Create storage folder for recipes */
+    // public static void createDataFolder() {
+    //     Path path = Paths.get()
+    //     try{
+            
+    //     } catch (IOException e){
+    //         Ui.showMessage("Error creating folder");
+    //     }
+    // }
+
+
 
     public static void loadRecipeToDataFile(Recipe recipe) {
         try {
