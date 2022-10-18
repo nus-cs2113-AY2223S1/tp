@@ -37,16 +37,30 @@ public class PetParser {
     public Command prepareAddPet(String input){
         int startOfN = input.indexOf(" n/");
         int startOfS = input.indexOf(" s/");
+        int startOfH = input.indexOf(" h/");
 
-        if(startOfN > startOfS || startOfN == -1|| startOfS == -1){
+        if(startOfN > startOfS || startOfS > startOfH|| startOfN == -1){
             System.out.println("Error: format of parameters entered for adding a pet is invalid");
             return new EndCommand();
         }
 
 
         String name = input.substring(startOfN + lengthOfSignature, startOfS);
-        String species = input.substring(startOfS + lengthOfSignature);
-        return new AddPetCommand(name, species, true);
+        String species = input.substring(startOfS + lengthOfSignature, startOfH);
+        String status = input.substring(startOfH);
+
+        int statusInt = parser.isHealthy(status);
+
+        if(statusInt != 1 && statusInt != 0){
+            System.out.println("Error: health entered invalid for adding a pet");
+            return new EndCommand();
+        }
+
+        if(statusInt == 1){
+            return new AddPetCommand(name, species, true);
+        }
+
+        return new AddPetCommand(name, species, false);
     }
 
 

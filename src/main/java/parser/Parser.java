@@ -95,6 +95,8 @@ public class Parser {
         return numberInInput(input, " s/");
     }
 
-
+    public int isHealthy(String input){
+        return numberInInput(input, " h/");
+    }
 
 }
