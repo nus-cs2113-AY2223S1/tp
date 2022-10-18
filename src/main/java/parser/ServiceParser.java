@@ -1,9 +1,13 @@
 package parser;
 
 import command.*;
+import command.employeeCommand.AddEmployeeCommand;
+import command.employeeCommand.RemoveEmployeeCommand;
+import command.employeeCommand.ViewEmployeeCommand;
 import command.serviceCommand.AddServiceCommand;
 import command.serviceCommand.RemoveServiceCommand;
 import command.serviceCommand.ViewServiceCommand;
+import exception.DukeException;
 
 public class ServiceParser {
     private int lengthOfSignature;
@@ -15,49 +19,52 @@ public class ServiceParser {
     }
 
     public Command parseService(String input){
-        if(!input.contains(" ")){
-            if(input.equals("view")){
-                return new ViewServiceCommand();
+        try {
+            if (!input.contains(" ")) {
+                if (input.equals("view")) {
+                    return new ViewServiceCommand();
+                } else {
+                    throw new DukeException();
+                }
             }
-            System.out.println("Error: too little parameters entered for service operation");
-            return new EndCommand();
-        }
-
-        String type = input.substring(0,input.indexOf(" "));
-        String statement = input.substring(input.indexOf(" "));
-        switch(type) {
-        case AddServiceCommand.COMMAND_WORD:
-            return prepareAddService(statement);
-        case RemoveServiceCommand.COMMAND_WORD:
-            return prepareRemoveService(statement);
-        default:
-            System.out.println("Error: unrecognized service operation");
-            return new EndCommand();
+            String type = input.substring(0,input.indexOf(" "));
+            String statement = input.substring(input.indexOf(" "));
+            switch (type) {
+            case AddServiceCommand.COMMAND_WORD:
+                return prepareAddService(statement);
+            case RemoveServiceCommand.COMMAND_WORD:
+                return prepareRemoveService(statement);
+            default:
+                throw new DukeException();
+            }
+        } catch (DukeException e) {
+            System.out.println("Sorry, unrecognized service operation.");
+            return new EmptyCommand();
         }
     }
 
     public Command prepareAddService(String input){
-        int d = input.indexOf(" d/");
-
-        if(d == -1){
-            System.out.println("Error: no description entered");
-            return new EndCommand();
+        try {
+            int startOfD = input.indexOf(" d/");
+            if (startOfD == -1) {
+                throw new DukeException();
+            }
+            String description = input.substring(startOfD + lengthOfSignature);
+            return new AddServiceCommand(description);
+        } catch (DukeException e) {
+            System.out.println("Sorry, format of parameters entered for adding an service is invalid");
+            return new EmptyCommand();
         }
-
-        String description = input.substring(d + lengthOfSignature);
-
-        return new AddServiceCommand(description);
-
     }
 
 
     public Command prepareRemoveService(String input){
-        int index = parser.indexOfInput(input);
-        if(index == -1){
-            System.out.println("Error: index entered invalid for removing a service");
-            return new EndCommand();
+        try {
+            int index = parser.indexOfInput(input);
+            return new RemoveServiceCommand(index);
+        } catch (DukeException e) {
+            System.out.println("Sorry, index entered invalid for removing an service");
+            return new EmptyCommand();
         }
-
-        return new RemoveServiceCommand(index);
     }
 }
