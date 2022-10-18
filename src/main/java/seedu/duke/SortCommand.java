@@ -28,6 +28,7 @@ public class SortCommand extends Commands {
             break;
 
         case "date":
+            this.reviewList.inputs.sort(Comparator.comparing(Media::getDateWatched));
             break;
 
         default:
