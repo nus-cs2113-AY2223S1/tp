@@ -19,7 +19,6 @@ class FlightListTest {
         Command testCommand = Parser.parse(addLineInput);
         testCommand.execute(testFlightList, addLineInput);
         testFlightList.getNumberOfFlights();
-        //assertEquals("SQ712",);
     }
 
     @Test

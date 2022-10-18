@@ -1,6 +1,16 @@
 package seedu.duke.terminalinfo;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class FlightInfo {
+
+    private static SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yy");
+    private static Date date = new Date();
+
+    private static String dateToday = formatter.format(date);
+    private static String departureDate = dateToday;
+
     protected String flightNum;
     protected String airline;
     protected String destination;
@@ -20,7 +30,7 @@ public class FlightInfo {
         this.checkLn = checkIn;
     }
 
-    public String getFlightNum() {
+    public String getFlightNumber() {
         return flightNum;
     }
 
@@ -50,7 +60,7 @@ public class FlightInfo {
 
     @Override
     public String toString() {
-        System.out.format("| %10s | %27s |%13s | %14s | %8s | %8s | %18s |", this.flightNum,
+        System.out.format("| %10s | %14s | %22s |%22s | %14s | %8s | %10s | %19s |", this.flightNum, this.departureDate,
                 this.airline, this.destination, this.departureTime, this.gateNum, this.terminal, this.checkLn);
         return "";
     }
