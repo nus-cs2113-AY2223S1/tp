@@ -40,4 +40,5 @@ public class Configurations {
      * Defines configuration parameters for {@link seedu.moneygowhere.data.currency.CurrencyManager}.
      */
     public static final String CURRENCY_SINGAPORE_DOLLARS = "SGD";
+    public static final int NUMBER_OF_DECIMAL_PLACES = 5;
 }
