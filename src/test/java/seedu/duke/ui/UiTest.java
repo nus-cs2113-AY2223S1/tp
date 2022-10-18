@@ -2,7 +2,6 @@ package seedu.duke.ui;
 
 import org.junit.jupiter.api.Test;
 import seedu.duke.user.UserModuleMapping;
-//import seedu.duke.DukeException;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -49,21 +48,27 @@ public class UiTest {
                 + "     " + "--------  " + "--------------------------------------  " + "-------\n"
                 + "     " + "create    " + "/create u/UNIVERSITY                    "
                 + "Creates an empty module list for the input university\n"
+                + "     " + "favourite " + "/favourite /add u/UNIVERSITY            "
+                + "Adds a university list to the user's favourites\n"
+                + "     " + "favourite " + "/favourite /del u/UNIVERSITY            "
+                + "Deletes a university list from the user's favourites\n"
+                + "     " + "favourite " + "/favourite /view                        "
+                + "View the user's favourite university lists\n"
                 + "     " + "exit      " + "/exit\n"
                 + "     " + "view      " + "/view LISTS                             "
                 + "Displays all existing university lists that have been created by the user\n"
                 + "     " + "view      " + "/view u/UNIVERSITY                      "
-                + "Displays all modules that have been added to the user's input university's list in the format\n"
+                + "Displays all the modules that have been added to the user's input university's list in the format:\n"
                 + "                                                       "
                 + "[Home University Module Code] [Home University Module Title] | "
                 + "[Partner University Module Code] [Partner University Module Title] | [Equivalent NUS Credits]\n"
                 + "     " + "view      " + "/view DELETE HISTORY                    "
                 + "Displays up to 5 most recent modules that the user has deleted\n"
                 + "     " + "list      " + "/list MODULES                           "
-                + "Displays all existing university modules mappings that are approved in the format\n"
+                + "Displays all existing university modules mappings that are approved in the format:\n"
                 + "                                                       "
                 + "[Partner University Module Code] [Partner University Module Title] "
-                + "[Partner University Module Credits] | [NUS Module Code] [NUS Module Title] "
+                + "[Partner University Module Credits] | [NUS Module Code] | [NUS Module Title] | "
                 + "[NUS Module Credits] in NUS\n"
                 + "     " + "list      " + "/list UNIVERSITIES                      "
                 + "Displays all universities with module mappings available in database\n"
