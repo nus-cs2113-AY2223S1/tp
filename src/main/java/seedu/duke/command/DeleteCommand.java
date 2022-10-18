@@ -83,7 +83,7 @@ public class DeleteCommand extends Command {
         before adding entry to arraylist
         */
         try {
-            deleteLogger.setLevel(Level.WARNING);
+            deleteLogger.setLevel(Level.SEVERE);
             deleteLogger.log(Level.INFO, "Delete Command checks whether the index is valid "
                     + "before executing the command.");
             boolean isInputValid = true;

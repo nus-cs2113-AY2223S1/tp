@@ -133,7 +133,7 @@ public class AddCommand extends Command {
     public void execute(TransactionList transactions, Ui ui, Storage storage) throws MoolahException {
         //@@author chinhan99
         try {
-            addLogger.setLevel(Level.WARNING);
+            addLogger.setLevel(Level.SEVERE);
             addLogger.log(Level.INFO, "Add Command checks the type of the transaction "
                     + "before adding into the transaction class.");
             assert date != null;
