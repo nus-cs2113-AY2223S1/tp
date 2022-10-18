@@ -12,8 +12,16 @@ public class ModuleList {
         if (isRepeat) {
             UI.repetitionMessage(mod.getCourse());
         } else {
+            int before = modules.size();
             modules.add(mod);
             UI.addMessage(mod.getCourse(), mod.getSemesterTaken(), mod.getGrade());
+            int after = modules.size();
+
+            try {
+                assert before + 1 == after : "module list size should be increased by 1 after add";
+            } catch (AssertionError e) {
+                System.out.println(e.getMessage());
+            }
         }
     }
 
@@ -31,9 +39,16 @@ public class ModuleList {
         boolean isFound = false;
         for (Module mod : modules) {
             if (mod.getCourse().matches(modCode)) {
+                int before = modules.size();
                 modules.remove(indexCounter);
                 UI.deleteMessage(modCode);
                 isFound = true;
+                int after = modules.size();
+                try {
+                    assert before == after + 1 : "module list size should be decreased by 1 after delete";
+                } catch (AssertionError e) {
+                    System.out.println(e.getMessage());
+                }
                 break;
             }
             indexCounter += 1;
