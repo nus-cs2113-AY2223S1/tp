@@ -3,7 +3,7 @@ package seedu.moneygowhere.storage;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXParseException;
 
-class NullErrorHandler implements ErrorHandler {
+public class NullErrorHandler implements ErrorHandler {
     @Override
     public void fatalError(SAXParseException e) {
     }
