@@ -30,6 +30,39 @@ public class ParseAddProperty extends Parser {
     private static final int FLAG_JUMPER_VALUE = 2;
     private static final int UNIT_VALUE = 1;
 
+    /* Add Property Regex for Validation */
+    //Singapore Address Related Regex
+    private static final String LANDED_PROPERTY_UNIT_NUMBER_REGEX = "^([0-9]{1,4})([A-Z]?) ";
+    private static final String BUILDING_BLOCK_NUMBER_REGEX = "^([0-9]{1,4})([A-Z]?) ";
+    private static final String STREET_NAME_REGEX = "[^.!@#$%^&*()_+=<>\\s\\n?`~0-9,{}|-]([a-zA-Z\\s]+)[^.!@#$%^&*()_+"
+            + "=<>\\s\\n?`~0-9,{}|-]";
+    private static final String STREET_NUMBER_REGEX = " ([1-9]{1}[0-9]{0,3})";
+    private static final String BUILDING_UNIT_FLOOR_AND_NUMBER_REGEX = " #(([0]{1}[1-9]{1})|([1-9]{1}[0-9]{1,2}))-(([0]"
+            + "{1}[1-9]{1})|([1-9]{1}[0-9]{1,3}))([A-Z]?)";
+    private static final String BUILDING_NAME_REGEX = " [^.!@#$%^&*()_+=<>\\s\\n?`~0-9,{}|-]([a-zA-Z\\s]+)[^.!@#$%^&*()"
+            + "_+=<>\\s\\n?`~0-9,{}|-]";
+    private static final String POSTAL_CODE_REGEX = ", (Singapore [0-9]{6})$";
+
+    //Singapore Landed Property Regex
+    private static final String LANDED_PROPERTY_ADDRESS_REGEX = LANDED_PROPERTY_UNIT_NUMBER_REGEX + STREET_NAME_REGEX
+            + POSTAL_CODE_REGEX;
+    private static final String LANDED_PROPERTY_ADDRESS_WITH_STREET_NUMBER_REGEX = LANDED_PROPERTY_UNIT_NUMBER_REGEX
+            + STREET_NAME_REGEX + STREET_NUMBER_REGEX + POSTAL_CODE_REGEX;
+
+    //Singapore Building Regex
+    private static final String BUILDING_ADDRESS_REGEX = BUILDING_BLOCK_NUMBER_REGEX + STREET_NAME_REGEX
+            + BUILDING_UNIT_FLOOR_AND_NUMBER_REGEX + POSTAL_CODE_REGEX;
+    private static final String BUILDING_ADDRESS_WITH_STREET_NUMBER_REGEX = BUILDING_BLOCK_NUMBER_REGEX
+            + STREET_NAME_REGEX + STREET_NUMBER_REGEX + BUILDING_UNIT_FLOOR_AND_NUMBER_REGEX + POSTAL_CODE_REGEX;
+    private static final String BUILDING_ADDRESS_WITH_BUILDING_NAME_REGEX = BUILDING_BLOCK_NUMBER_REGEX
+            + STREET_NAME_REGEX + BUILDING_UNIT_FLOOR_AND_NUMBER_REGEX + BUILDING_NAME_REGEX + POSTAL_CODE_REGEX;
+    private static final String BUILDING_ADDRESS_WITH_STREET_NUMBER_AND_BUILDING_NAME_REGEX
+            = BUILDING_BLOCK_NUMBER_REGEX + STREET_NAME_REGEX + STREET_NUMBER_REGEX
+            + BUILDING_UNIT_FLOOR_AND_NUMBER_REGEX + BUILDING_NAME_REGEX + POSTAL_CODE_REGEX;
+
+    //Accepts only positive whole number for price
+    private static final String VALID_PRICE_REGEX = "^[1-9]\\d*$";
+
     public ParseAddProperty(String addCommandDescription) {
         this.commandDescription = addCommandDescription;
     }
@@ -155,57 +188,26 @@ public class ParseAddProperty extends Parser {
     }
 
     private boolean checkForValidSingaporeLandedPropertyAddress(String address) {
-        String landedPropertyUnitNumberRegex = "^([0-9]{1,4})([A-Z]?) ";
-        String streetNameRegex = "[^.!@#$%^&*()_+=<>\\s\\n?`~0-9,{}|-]([a-zA-Z\\s]+)[^.!@#$%^&*()_+=<>\\s\\n?`~0-9,"
-                + "{}|-]";
-        String streetNumberRegex = " ([1-9]{1}[0-9]{0,3})";
-        String postalCodeRegex = ", (Singapore [0-9]{6})$";
-
-        String landedPropertyAddressRegex = landedPropertyUnitNumberRegex + streetNameRegex + postalCodeRegex;
-        String landedPropertyAddressWithStreetNumberRegex = landedPropertyUnitNumberRegex + streetNameRegex
-                + streetNumberRegex + postalCodeRegex;
-
-        boolean hasValidLandedPropertyAddress = checkForDetailFormat(landedPropertyAddressRegex, address);
+        boolean hasValidLandedPropertyAddress = checkForDetailFormat(LANDED_PROPERTY_ADDRESS_REGEX, address);
         boolean hasValidLandedPropertyAddressWithStreetNumber
-                = checkForDetailFormat(landedPropertyAddressWithStreetNumberRegex, address);
+                = checkForDetailFormat(LANDED_PROPERTY_ADDRESS_WITH_STREET_NUMBER_REGEX, address);
         return hasValidLandedPropertyAddress || hasValidLandedPropertyAddressWithStreetNumber;
     }
 
     private boolean checkForValidSingaporeBuildingAddress(String address) {
-        String buildingBlockNumberRegex = "^([0-9]{1,4})([A-Z]?) ";
-        String streetNameRegex = "[^.!@#$%^&*()_+=<>\\s\\n?`~0-9,{}|-]([a-zA-Z\\s]+)[^.!@#$%^&*()_+=<>\\s\\n?`~0-9,"
-                + "{}|-]";
-        String streetNumberRegex = " ([1-9]{1}[0-9]{0,3})";
-        String buildingUnitFloorAndNumberRegex = " #(([0]{1}[1-9]{1})|([1-9]{1}[0-9]{1,2}))-(([0]{1}[1-9]{1})|([1-9]"
-                + "{1}[0-9]{1,3}))([A-Z]?)";
-        String buildingNameRegex = " [^.!@#$%^&*()_+=<>\\s\\n?`~0-9,{}|-]([a-zA-Z\\s]+)[^.!@#$%^&*()_+=<>\\s\\n?`~0-9"
-                + ",{}|-]";
-        String postalCodeRegex = ", (Singapore [0-9]{6})$";
-
-        String buildingAddressRegex = buildingBlockNumberRegex + streetNameRegex + buildingUnitFloorAndNumberRegex
-                + postalCodeRegex;
-        String buildingAddressWithStreetNumberRegex = buildingBlockNumberRegex + streetNameRegex + streetNumberRegex
-                + buildingUnitFloorAndNumberRegex + postalCodeRegex;
-        String buildingAddressWithBuildingNameRegex = buildingBlockNumberRegex + streetNameRegex
-                + buildingUnitFloorAndNumberRegex + buildingNameRegex + postalCodeRegex;
-        String buildingAddressWithStreetNumberAndBuildingNameRegex = buildingBlockNumberRegex + streetNameRegex
-                + streetNumberRegex + buildingUnitFloorAndNumberRegex + buildingNameRegex + postalCodeRegex;
-
-        boolean hasValidBuildingAddress = checkForDetailFormat(buildingAddressRegex, address);
+        boolean hasValidBuildingAddress = checkForDetailFormat(BUILDING_ADDRESS_REGEX, address);
         boolean hasValidBuildingAddressWithStreetNumber
-                = checkForDetailFormat(buildingAddressWithStreetNumberRegex, address);
+                = checkForDetailFormat(BUILDING_ADDRESS_WITH_STREET_NUMBER_REGEX, address);
         boolean hasValidBuildingAddressWithBuildingName
-                = checkForDetailFormat(buildingAddressWithBuildingNameRegex, address);
+                = checkForDetailFormat(BUILDING_ADDRESS_WITH_BUILDING_NAME_REGEX, address);
         boolean hasValidBuildingAddressWithStreetNumberAndBuildingName
-                = checkForDetailFormat(buildingAddressWithStreetNumberAndBuildingNameRegex, address);
+                = checkForDetailFormat(BUILDING_ADDRESS_WITH_STREET_NUMBER_AND_BUILDING_NAME_REGEX, address);
         return hasValidBuildingAddress || hasValidBuildingAddressWithStreetNumber
                 || hasValidBuildingAddressWithBuildingName || hasValidBuildingAddressWithStreetNumberAndBuildingName;
     }
 
     private void checkForPriceNumberFormat(String budget) throws InvalidPriceFormatException {
-        //Accepts only positive whole number
-        String regex = "^[1-9]\\d*$";
-        boolean hasValidPriceNumberFormat = checkForDetailFormat(regex, budget);
+        boolean hasValidPriceNumberFormat = checkForDetailFormat(VALID_PRICE_REGEX, budget);
         if (!hasValidPriceNumberFormat) {
             throw new InvalidPriceFormatException(EXCEPTION);
         }
