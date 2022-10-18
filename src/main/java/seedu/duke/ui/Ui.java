@@ -8,8 +8,9 @@ import java.util.Scanner;
 
 public class Ui {
     protected Scanner in = new Scanner(System.in);
+    protected static final int EMPTY_FLIGHT_LIST = 0;
     protected static final int FORMAT_NAME_SPACE = 24;
-    protected static final int FORMAT_DOD_SPACE = 9;
+    protected static final int FORMAT_DOD_SPACE = 14;
     protected static final int FORMAT_DT_SPACE = 14;
     protected static final int FORMAT_FN_SPACE = 10;
     protected static final int FORMAT_GN_SPACE = 8;
@@ -25,13 +26,6 @@ public class Ui {
     protected static String formattedBoardingGroup;
     protected static String formattedSeatNumber;
     protected static String formattedBoardingTime;
-    protected static String formattedFlightNum;
-    protected static String formattedAirline;
-    protected static String formattedFlightDestination;
-    protected static String formattedFlightDepartureTime;
-    protected static String formattedFlightGateNumber;
-    protected static String formattedTerminal;
-    protected static String formattedCheckin;
 
     protected String lineSeparator;
     protected static final String LOGO = "   _____ _             _____            _             _\n"
@@ -84,6 +78,15 @@ public class Ui {
         return "Unable to add Passenger. Seat number is already occupied on the flight!";
     }
 
+    public String getDuplicateFlightError() {
+        return "Unable to add Flight! Flight already exist.";
+    }
+
+    public String getGateOccupiedError() {
+        return "Unable to add Flight! \n"
+                + "Designated gate is already occupied at that time, please select a different gate number.";
+    }
+
     public String getOperationError() {
         return "Input a valid operation, please try again.";
     }
@@ -110,29 +113,29 @@ public class Ui {
     }
 
     public void showPassengerListHeader() {
-        System.out.print("\n+-----------------------------------------------------------"
-                + "--------------------------------------------------------------+\n"
+        System.out.print("\n+---------------------------------------------------------"
+                + "---------------------------------------------------------------------+\n"
                 + "|                                                  PASSENGER DETAILS LOGBOOK"
-                + "                                              |\n"
-                + "+-----------------------------------------------------------"
+                + "                                                   |\n"
+                + "+----------------------------------------------------------------"
                 + "--------------------------------------------------------------+\n"
-                + "|           NAME           | DEPARTURE | DEPARTURE TIME | FLIGHT NUM |"
+                + "|           NAME           | DEPARTURE DATE | DEPARTURE TIME | FLIGHT NUM |"
                 + " GATE NUM | BOARDING GRP | SEAT NUM | BOARDING TIME |\n"
-                + "+-----------------------------------------------------------"
+                + "+----------------------------------------------------------------"
                 + "--------------------------------------------------------------+\n");
     }
 
     public void showFlightListHeader() {
-        System.out.print("\n+-----------------------------------------------------------"
-                + "--------------------------------------------------------------+\n"
-                + "|                                                 FLIGHT DETAILS LOGBOOK"
-                + "                                              |\n"
+        System.out.print("\n+--------------------------------------------------------------"
+                + "--------------------------------------------------------------------------------+\n"
+                + "|                                                           FLIGHT DETAILS LOGBOOK"
+                + "                                                            |\n"
                 + "+-----------------------------------------------------------"
-                + "--------------------------------------------------------------+\n"
-                + "| FLIGHT NUM |           AIRLINE           |  DESTINATION | DEPARTURE TIME |"
-                + " GATE NUM | TERMINAL | CHECK-IN ROW/DOOR  |\n"
+                + "-----------------------------------------------------------------------------------+\n"
+                + "| FLIGHT NUM | DEPARTURE DATE |        AIRLINE         |      DESTINATION      | DEPARTURE TIME |"
+                + " GATE NUM |  TERMINAL  |  CHECK-IN ROW/DOOR  |\n"
                 + "+-----------------------------------------------------------"
-                + "--------------------------------------------------------------+\n");
+                + "-----------------------------------------------------------------------------------+\n");
     }
 
     public void showPassengerListBody(String name, String departureDate, String departureTime,
@@ -145,8 +148,8 @@ public class Ui {
 
     private static void showFormattedDetail() {
         System.out.printf("| %s | %s | %s | %s | %s | %s | %s | %s |\n"
-                        + "+-----------------------------------------------------------"
-                        + "--------------------------------------------------------------+\n",
+                        + "+---------------------------------------------------------------"
+                        + "---------------------------------------------------------------+\n",
                 formattedName, formattedDepartureDate, formattedDepartureTime, formattedFlightNumber,
                 formattedGateNumber, formattedBoardingGroup, formattedSeatNumber, formattedBoardingTime);
     }
@@ -180,18 +183,25 @@ public class Ui {
     }
 
     public void showEmptyPassengerList() {
-        System.out.printf("| %80s %-38s |\n"
-                        + "+-----------------------------------------------------------"
+        System.out.printf("| %80s %-43s |\n"
+                        + "+----------------------------------------------------------------"
                         + "--------------------------------------------------------------+\n",
                 "The passenger details logbook is empty.", " ");
+    }
+
+    public void showEmptyFlightList() {
+        System.out.printf("| %85s %-53s |\n"
+                        + "+--------------------------------------------------------------------"
+                        + "--------------------------------------------------------------------------+\n",
+                "The Flight schedule is empty.", " ");
     }
 
     public void showFlightNotFoundMessage(String flightNum) {
         System.out.println("FLIGHT " + flightNum + " NOT FOUND.");
     }
 
-    public void showEmptyDescriptionMessage() {
-        System.out.println("oops! The description is empty :(");
+    public String showEmptyDescriptionMessage() {
+        return "oops! The description is empty :(";
     }
 
     public void showFlightAddedMessage() {
@@ -204,10 +214,18 @@ public class Ui {
 
     public void showListOfFlights(ArrayList<FlightInfo> flightList) {
         showFlightListHeader();
+        checkEmptyFlightList(flightList);
         for (FlightInfo flight : flightList) {
             System.out.println("\n+-----------------------------------------------------------"
-                    + "--------------------------------------------------------------+"
+                    + "-----------------------------------------------------------------------------------+"
                     + flight);
+        }
+    }
+
+    public void checkEmptyFlightList(ArrayList<FlightInfo> flightList) {
+        int numOfFlights = flightList.size();
+        if (numOfFlights == EMPTY_FLIGHT_LIST) {
+            showEmptyFlightList();
         }
     }
 
@@ -224,7 +242,53 @@ public class Ui {
     }
 
     public String getMissingDetailsError() {
-        return "Please fill up passenger details for all fields.\n Invalid input. Try again!";
+        return "Please fill up details for all fields.\n Invalid input. Try again!";
+    }
+
+    public String getExceedNameLengthError(String name) {
+        return "Stop! The input name with " + name.length()
+                + " characters is too long!\n"
+                + "Please input a name that is within 24 characters.";
+    }
+
+    public String getExceedAirlineLengthError(String airline) {
+        return "Stop! The airline input with " + airline.length()
+                + " characters is too long!\n"
+                + "Please keep your input to 22 characters.";
+    }
+
+    public String getExceedDestinationLengthError(String destination) {
+        return "Stop! The destination input with " + destination.length()
+                + " characters is too long!\n"
+                + "Please keep your input to 22 characters.";
+    }
+
+    public String getNameError() {
+        return "Stop! The input name cannot have any special characters or numbers.\n"
+                + "Please try again.";
+    }
+
+    public String getDepartureTimeError() {
+        return "Stop! The departure time input format is wrong.\n"
+                + "Please try again in 24Hr time format.";
+    }
+
+    public String getCheckInFormatError() {
+        return "Stop! The check in row/door format is wrong.\n"
+                + "Please try again using rr-dd format";
+    }
+
+    public String getFlightNumberError() {
+        return "Stop! The flight number input format is wrong.\n"
+                + "Please try again with the following format:\n"
+                + "'SQ12' - For international flights\n"
+                + "'SQ123' - For regional flights\n"
+                + "'SQ1234' - For domestic flights";
+    }
+
+    public String getBoardingTimeError() {
+        return "Stop! The boarding time input format is wrong.\n"
+                + "Please try again in 24Hr time format.";
     }
 }
 

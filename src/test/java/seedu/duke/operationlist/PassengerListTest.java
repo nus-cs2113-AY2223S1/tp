@@ -3,24 +3,23 @@ package seedu.duke.operationlist;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import seedu.duke.parsers.Parser;
 import seedu.duke.command.Command;
 import seedu.duke.exceptions.SkyControlException;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 public class PassengerListTest {
-
-    protected static String addLineInput = "passenger add n/Ivan dod/08011998 dt/2145 fn/sq832 "
+    protected SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yy");
+    protected Date dateTest = new Date();
+    protected  String dateTodayTest = formatter.format(dateTest);
+    protected static String addLineInput = "passenger add n/Ivan dt/2145 fn/sq832 "
             + "gn/05 bg/01 sn/17d bt/2100";
-    protected static String lineInputWithError = "passenger delete n/Ivan";
     protected static String deleteLineInput = "passenger delete n/Ivan fn/sq832 sn/17d dt/2145";
     protected static PassengerList testPassengerList = new PassengerList();
-    protected static Parser parserTest = new PassengerList();
-    protected static String errorMessage = "The system is unable to delete the specified passenger "
-            + "\nas he/she is not found in the passenger list "
-            + "or his/her \ndetail have been input incorrectly.";
 
     @Test
     void checkAddOperation() throws SkyControlException {
@@ -29,7 +28,7 @@ public class PassengerListTest {
         testPassengerList.getNumberOfPassengers();
         assertEquals(1, testPassengerList.numOfPassengers);
         assertEquals("IVAN", testPassengerList.name);
-        assertEquals("08011998", testPassengerList.departureDate);
+        assertEquals(dateTodayTest, testPassengerList.departureDate);
         assertEquals("2145", testPassengerList.departureTime);
         assertEquals("SQ832", testPassengerList.flightNumber);
         assertEquals("05", testPassengerList.gateNumber);
