@@ -16,7 +16,7 @@ activate ":AddItemCommand"
 activate ":AddItemCommand"
 return args
 alt args is valid
-    ":AddItemCommand" -> ":Item": new
+    ":AddItemCommand" -> ":Item": new Item()
     activate ":Item"
     ":Item" --> ":AddItemCommand": item
     ":AddItemCommand" -> ":ItemList": addItem()
@@ -25,7 +25,6 @@ alt args is valid
     activate "<<class>>\n:Ui"
     return
     deactivate ":ItemList"
-    return
     deactivate "<<class>>\n:Ui"
     deactivate ":Item"
 else args is invalid

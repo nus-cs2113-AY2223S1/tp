@@ -28,14 +28,13 @@ loop until isLastCommand
         ":CommandParser" -> ":Command": createCommand()
         activate ":Command"
         return command
+        return command
         ":Duke" -> ":Command" : execute command
         activate ":Command"
-        ":Command" -> ":Command" : executeCommand()
-        ":Command" --> ":Command"
-        deactivate ":Command"
+        ":Command" -> "<<class>>\n:Ui": print response
+        activate "<<class>>\n:Ui"
         ":Command" --> ":Duke"
         deactivate ":Command"
-        destroy ":Command"
 
     else command is invalid
         ":Duke" -> "<<class>>\n:Ui" : print error

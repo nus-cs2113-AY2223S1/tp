@@ -16,7 +16,7 @@ activate ":AddUserCommand"
 activate ":AddUserCommand"
 return args
 alt args is valid
-    ":AddUserCommand" -> ":User": new
+    ":AddUserCommand" -> ":User": new User()
     activate ":User"
     ":User" --> ":AddUserCommand": user
     ":AddUserCommand" -> ":UserList": addUser()
@@ -25,7 +25,6 @@ alt args is valid
     activate "<<class>>\n:Ui"
     return
     deactivate ":UserList"
-    return
     deactivate "<<class>>\n:Ui"
     deactivate ":User"
 else args is invalid

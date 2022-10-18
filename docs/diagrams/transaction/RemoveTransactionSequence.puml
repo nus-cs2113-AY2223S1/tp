@@ -27,7 +27,7 @@ alt transaction is valid
     return
     ":RemoveTransactionCommand" -> "<<class>>\n:Ui": deleteTransactionMessage()
     activate "<<class>>\n:Ui"
-    "<<class>>\n:Ui" --> ":Duke"
+    return
     deactivate "<<class>>\n:Ui"
     deactivate ":TransactionList"
 else transaction is invalid
