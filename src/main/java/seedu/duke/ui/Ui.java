@@ -83,8 +83,8 @@ public class Ui {
     }
 
     public String getGateOccupiedError() {
-        return "Unable to add Flight! \n" +
-                "Designated gate is already occupied at that time, please select a different gate number.";
+        return "Unable to add Flight! \n"
+                + "Designated gate is already occupied at that time, please select a different gate number.";
     }
 
     public String getOperationError() {
