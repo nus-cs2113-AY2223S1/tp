@@ -72,7 +72,6 @@ public class Parser {
     }
      */
 
-
     public int indexOfInput(String input) throws DukeException {
         try {
             return numberInInput(input, " i/");
