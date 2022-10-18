@@ -2,6 +2,7 @@ package seedu.duke.parsermanager;
 
 import seedu.duke.command.Command;
 import seedu.duke.exception.ClientAlreadyPairedException;
+import seedu.duke.exception.DukeException;
 import seedu.duke.exception.EmptyDescriptionException;
 import seedu.duke.exception.EmptyDetailException;
 import seedu.duke.exception.ExistingPairException;
@@ -18,9 +19,5 @@ import seedu.duke.exception.NoExistingPairException;
 import seedu.duke.exception.NotIntegerException;
 
 public abstract class Parser {
-    public abstract Command parseCommand() throws EmptyDescriptionException, InvalidSingaporeAddressException,
-            MissingFlagException, IncorrectFlagOrderException, InvalidPriceFormatException, EmptyDetailException,
-            InvalidContactNumberException, InvalidEmailException, InvalidBudgetFormatException, InvalidIndexException,
-            NotIntegerException, ClientAlreadyPairedException, ExistingPairException, NoExistingPairException,
-            ExtraParametersException;
+    public abstract Command parseCommand() throws DukeException;
 }

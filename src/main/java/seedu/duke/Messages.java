@@ -113,8 +113,12 @@ public class Messages {
     public static final String MESSAGE_EXISTING_PAIR = "OOPS!! This client and this property are already paired "
             + "together. You don't need to pair them again.";
 
+    public static final String MESSAGE_BUDGET_EXCEEDED = "OOPS!! The rental price exceeds the client's budget. "
+            + "Pair unsuccessful.";
+
     public static final String MESSAGE_NO_EXISTING_PAIR = "OOPS!! This property is not being rented by the tenant. "
             + "Unpair unsuccessful.";
+
 
 
     /* Check property/client related Error Messages */
