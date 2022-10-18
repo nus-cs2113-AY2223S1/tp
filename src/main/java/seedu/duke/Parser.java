@@ -19,7 +19,7 @@ public class Parser {
     final int genreSpacing = 5;
     final String siteKeyword = "/site";
     final int siteSpacing = 4;
-
+    final int favouriteSpacing = 9;
     private Commands executor;
     private ReviewList mediaList;
 
@@ -35,6 +35,7 @@ public class Parser {
         final String deleteCommand = "delete";
         final String clearCommand = "clear";
         final String endCommand = "bye";
+        final String favouriteCommand = "favourite";
         final String NT = "";
         
         String[] words = userInput.split(" ");
@@ -60,6 +61,10 @@ public class Parser {
         case clearCommand:
             executeClear();
             break;
+
+        case favouriteCommand:;
+            executeFavourite(words);
+            break;
         
         case NT:
         
@@ -67,6 +72,16 @@ public class Parser {
             logger.log(Level.WARNING, "An unrecognised command was given by the user.");
             System.out.println("Unrecognised command");
             break;
+        }
+    }
+
+    public void executeFavourite(String[] words) {
+        try {
+            executor = new FavouriteCommand(mediaList, words);
+            String output = executor.execute();
+            Ui.print(output);
+        } catch (Exception e) {
+            System.out.println("\nIncomplete or wrongly formatted command, try again.\n");
         }
     }
 
