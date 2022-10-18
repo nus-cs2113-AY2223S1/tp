@@ -6,7 +6,7 @@ public class EmployeeList {
     static ArrayList<Employee> employees = new ArrayList<>();
 
     public static void listEmployee() {
-        System.out.println("Here are the employees in your list:");
+        System.out.println("Here are the employees in your employee list:");
         for (Employee employee : employees) {
             System.out.print(employee.getEmployeeId() + ". ");
             System.out.println(employee.getEmployeeName());
