@@ -1,0 +1,69 @@
+@startuml
+'https://plantuml.com/class-diagram
+skinparam classAttributeIconSize 0
+
+
+abstract class Command {
+{abstract} +execute(): void
+}
+class AddCommand {
+-arguments: String
++execute(): void
++addFood(argumentList:
+String[]): void
+}
+
+class RemoveCommand {
+-arguments: String
++execute(): void
+-removeFood(argumentList:
+String[]): void
+}
+
+class ViewCommand {
+-arguments: String
++execute(): void
+-viewFood(argumentList:
+String[]): void
+}
+class FindCommand {
+-arguments: String
++execute(): void
+-findFood(argumentList:
+String[]): void
+-handleInvalidFindFoodCommand(
+argumentList: String[]): void
+}
+class Food {
+-String foodDescription
+-int calories
++getFoodDescription(): String
++getCalories(): int
++toString(): String
++saveFood(): String
+}
+class FoodList {
+-ArrayList foodList
+
++FoodList()
++addFood(food: Food): void
++getFood(): Food
++removeFood(index: int): void
++getFoodList(): ArrayList
++getFoodListSize(): int
+}
+
+
+AddCommand --|> Command
+RemoveCommand --|> Command
+FindCommand --|> Command
+AddCommand --> "1"Food
+FindCommand --> "1"Food
+RemoveCommand --> "1"Food
+AddCommand --> FoodList
+FindCommand --> FoodList
+ViewCommand --> FoodList
+RemoveCommand --> FoodList
+FoodList *-> "*"Food : ArrayList of >
+
+@enduml
