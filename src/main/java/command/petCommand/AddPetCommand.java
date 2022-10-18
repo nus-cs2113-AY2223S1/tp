@@ -11,6 +11,7 @@ public class AddPetCommand extends Command {
     private String species;
     private boolean ishealthy;
     public AddPetCommand(String name, String species, boolean ishealthy){
+        super();
 
         this.name = name;
         this.species = species;

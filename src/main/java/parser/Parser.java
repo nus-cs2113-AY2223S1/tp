@@ -27,8 +27,9 @@ public class Parser {
             }
             
             System.out.println("Error: only one parameter received and it is not bye");
-            return new EndCommand();
+            return new EmptyCommand();
         }
+
 
         int indexOfSpace = input.indexOf(" ");
         String type = input.substring(0,indexOfSpace);
@@ -45,7 +46,7 @@ public class Parser {
             return serviceParser.parseService(statement);
         default:
             System.out.println("Error: unrecognized operation");
-            return new EndCommand();
+            return new EmptyCommand();
         }
     }
 
@@ -66,12 +67,17 @@ public class Parser {
 
 
     public int indexOfRemove(String input){
-        return numberInInput(input, " i/");
+        try {
+            return numberInInput(input, " i/");
+        } catch (DukeException e){
+            System.out.println("Error: signature \"i/\" not found.");
+            return -1;
+        }
     }
 
-    public int numberInInput(String input, String format){
+    public int numberInInput(String input, String format) throws DukeException {
         if(!input.contains(format)){
-            return -1;
+            throw new DukeException();
         }
 
         String id = input.substring(input.indexOf(format)+lengthOfSignature);
@@ -92,11 +98,21 @@ public class Parser {
     }
 
     public int isStatus(String input){
-        return numberInInput(input, " s/");
+        try {
+            return numberInInput(input, " s/");
+        } catch (DukeException e){
+            System.out.println("Error: signature \"s/\" not found.");
+            return -1;
+        }
     }
 
     public int isHealthy(String input){
-        return numberInInput(input, " h/");
+        try{
+            return numberInInput(input, " h/");
+        } catch (DukeException e){
+            System.out.println("Error: signature \"h/\" not found.");
+            return -1;
+        }
     }
 
 }
