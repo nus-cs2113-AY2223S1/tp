@@ -57,6 +57,7 @@ public class ParameterParser {
     private static final Logger parserLogger = Logger.getLogger(ParameterParser.class.getName());
 
     //@@author chinhan99
+
     /**
      * Parses the parameters input into proper parameters of the command object.
      *
@@ -71,7 +72,7 @@ public class ParameterParser {
      * @throws MoolahException If Moolah Manager captures any command input exceptions.
      */
     public static void parse(Command command, String parametersInput) throws MoolahException {
-        parserLogger.setLevel(Level.WARNING);
+        parserLogger.setLevel(Level.SEVERE);
         assert command != null;
         String[] splits = parametersInput.split(DELIMITER);
 
@@ -119,6 +120,7 @@ public class ParameterParser {
     }
 
     //@@author chinhan99
+
     /**
      * Checks if the split user inputs contains any unsupported tag.
      *
@@ -150,6 +152,7 @@ public class ParameterParser {
     }
 
     //@@author wcwy
+
     /**
      * Checks if the split user inputs contains a tag multiple times.
      *
@@ -172,6 +175,7 @@ public class ParameterParser {
     }
 
     //@@author chinhan99
+
     /**
      * Checks if there are missing parameter within the user input.
      * If the split.length() is <= 2, it means that only the tag exists , and there is no parameter after the tag.
@@ -189,6 +193,7 @@ public class ParameterParser {
     }
 
     //@@author wcwy
+
     /**
      * Returns a boolean value on whether a tag can be found among the split user inputs.
      *
@@ -208,6 +213,7 @@ public class ParameterParser {
     }
 
     //@@author chinhan99
+
     /**
      * Returns a boolean value on whether a tag can be found among the split user inputs.
      *
@@ -230,6 +236,7 @@ public class ParameterParser {
     }
 
     //@@author paullowse
+
     /**
      * For each split parameters, split it into tag and parameter, then check and set the parameters into the Command.
      *
@@ -247,6 +254,19 @@ public class ParameterParser {
     }
 
     //@@author wcwy
+
+    /**
+     * Sets the parsed parameter for each valid tag of the command.
+     *
+     * <p>The parameters set will be parsed into a correct format/data type before storing into a parameter
+     * within the Command object given. This ensures that the execution of the command will not encounter
+     * any unformatted input or unsupported data type issue, as far as possible.
+     *
+     * @param command   A command object created based on the command word given by user.
+     * @param tag       The tag used before the parameter to indicate the type of the parameter provided.
+     * @param parameter The value of a parameter given by the user for the chosen command.
+     * @throws MoolahException If an error is found when the parameter is parsed.
+     */
     private static void setParameter(Command command, String tag, String parameter) throws MoolahException {
         switch (tag) {
         case COMMAND_TAG_TRANSACTION_TYPE:
@@ -285,6 +305,7 @@ public class ParameterParser {
     }
 
     //@@author chydarren
+
     /**
      * Parses the user parameter input for the description and returns it.
      *
@@ -305,8 +326,9 @@ public class ParameterParser {
     }
 
     //@@author wcwy
+
     /**
-     * Check if the type parameter is a valid transaction type and returns the parameter if it is valid.
+     * Checks if the type parameter is a valid transaction type and returns the parameter if it is valid.
      *
      * @param parameter The user input after the user tag.
      * @return The user input after the user tag.
@@ -325,6 +347,7 @@ public class ParameterParser {
     }
 
     //@@author chinhan99
+
     /**
      * Parses the user parameter input for the description and returns it.
      *
@@ -374,6 +397,7 @@ public class ParameterParser {
     }
 
     //@@author wcwy
+
     /**
      * Parses the user parameter input for date into a LocalDate object and returns it.
      *
@@ -393,6 +417,7 @@ public class ParameterParser {
     }
 
     //@@author brian-vb
+
     /**
      * Parses the user parameter input for entry number into an integer and returns it.
      *
@@ -414,6 +439,7 @@ public class ParameterParser {
     }
 
     //@@author wcwy
+
     /**
      * Return a boolean value indicating if the option selected by user is "detailed".
      *
@@ -433,6 +459,7 @@ public class ParameterParser {
     }
 
     //@@author chydarren
+
     /**
      * Check if the type parameter is a valid statistic type and returns the parameter if it is valid.
      *
@@ -455,6 +482,7 @@ public class ParameterParser {
     }
 
     //@@author chinhan99
+
     /**
      * Checks if the parameter contains numeric characters.
      *

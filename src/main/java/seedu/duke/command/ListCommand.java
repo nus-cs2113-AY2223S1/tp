@@ -89,6 +89,7 @@ public class ListCommand extends Command {
     }
 
     //@@author chydarren
+
     /**
      * Executes the operations related to the command.
      *
@@ -109,10 +110,10 @@ public class ListCommand extends Command {
     /**
      * List all or some transactions based on selection.
      *
-     * @param transactions  An instance of the TransactionList class.
-     * @param type          The type of transaction.
-     * @param category      A category for the transaction.
-     * @param date          Date of the transaction with format in "yyyyMMdd".
+     * @param transactions An instance of the TransactionList class.
+     * @param type         The type of transaction.
+     * @param category     A category for the transaction.
+     * @param date         Date of the transaction with format in "yyyyMMdd".
      * @throws InputTransactionUnknownTypeException If class type cannot be found in the packages.
      */
     private static void listTransactions(TransactionList transactions, String type, String category, LocalDate date)
@@ -135,6 +136,7 @@ public class ListCommand extends Command {
     }
 
     //@@author paullowse
+
     /**
      * Enables the program to exit when the Bye command is issued.
      *

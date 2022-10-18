@@ -34,6 +34,7 @@ public class CommandParser {
     private static final Logger parserLogger = Logger.getLogger(ParameterParser.class.getName());
 
     //@@author wcwy
+
     /**
      * Parses the user input into Command class based on the command word.
      *
@@ -65,6 +66,7 @@ public class CommandParser {
     }
 
     //@@author chydarren
+
     /**
      * Splits the user input into two parts, i.e. the command word and the parameter(s).
      *
@@ -83,6 +85,7 @@ public class CommandParser {
     }
 
     //@@author paullowse
+
     /**
      * Creates a Command object based on the command word entered by user.
      *

@@ -59,6 +59,7 @@ public class StatsCommand extends Command {
     }
 
     //@@author chydarren
+
     /**
      * Executes the operations related to the command.
      *
@@ -83,8 +84,8 @@ public class StatsCommand extends Command {
     /**
      * Lists the statistics depending on the type of statistics requested.
      *
-     * @param statsType     The type of statistics that is needed, e.g. categories.
-     * @param transactions  An instance of the TransactionList class.
+     * @param statsType    The type of statistics that is needed, e.g. categories.
+     * @param transactions An instance of the TransactionList class.
      * @throws ListStatisticsInvalidStatsTypeException If the type of statistics is not recognised.
      */
     private static void listStatisticsByStatsType(String statsType, TransactionList transactions)
@@ -120,6 +121,7 @@ public class StatsCommand extends Command {
     }
 
     //@@author paullowse
+
     /**
      * Enables the program to exit when the Bye command is issued.
      *

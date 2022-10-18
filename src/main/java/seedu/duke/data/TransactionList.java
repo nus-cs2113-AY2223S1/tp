@@ -136,7 +136,7 @@ public class TransactionList {
      * @throws InputTransactionUnknownTypeException If class type cannot be found in the packages.
      */
     public boolean isMatchListFilters(Transaction transaction, String type, String category,
-                                      LocalDate date) throws InputTransactionUnknownTypeException {
+            LocalDate date) throws InputTransactionUnknownTypeException {
         boolean isMatch;
         try {
             isMatch = ((type.isEmpty() || isTransactionInstance(transaction, type))

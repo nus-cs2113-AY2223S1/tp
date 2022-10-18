@@ -28,6 +28,7 @@ public class Ui {
     }
 
     //@@author paullowse
+
     /**
      * Initialises the variables of the Ui class.
      */
@@ -46,6 +47,7 @@ public class Ui {
     }
 
     //@@author chydarren
+
     /**
      * Prepares the error message to be displayed to the user.
      *
@@ -72,16 +74,18 @@ public class Ui {
     }
 
     //@@author chinhan99
+
     /**
      * Prepares the help messages to be displayed to the user.
      *
-     * @param helpMessage   A help message that specifies the details of how to use the program.
+     * @param helpMessage A help message that specifies the details of how to use the program.
      */
     public static void showHelp(String helpMessage) {
         printMessages(INFO_HELP_GREET.toString(), helpMessage);
     }
 
     //@@author chydarren
+
     /**
      * Prepares the exit message to be displayed to the user.
      */
@@ -93,9 +97,9 @@ public class Ui {
      * Prepares the messages to be displayed to the user when add or delete has been performed on
      * the transaction list.
      *
-     * @param infoMessage           An information message that describes the functionality of
-     *                              the program.
-     * @param transactionDetails    Details of the action that has been performed on the transaction.
+     * @param infoMessage        An information message that describes the functionality of
+     *                           the program.
+     * @param transactionDetails Details of the action that has been performed on the transaction.
      */
     public static void showTransactionAction(String infoMessage, String transactionDetails) {
         printMessages(infoMessage, transactionDetails);
