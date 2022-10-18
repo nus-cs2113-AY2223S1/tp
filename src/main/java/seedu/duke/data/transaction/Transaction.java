@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 import static seedu.duke.common.DateFormats.DATE_OUTPUT_PATTERN;
 
-public class Transaction {
+public abstract class Transaction {
     //@@author chydarren
     private static final String PREFIX_CATEGORY = "[";
     private static final String POSTFIX_CATEGORY = "]";
@@ -27,9 +27,7 @@ public class Transaction {
         this.date = date;
     }
 
-    public String getType() {
-        return null;
-    }
+    public abstract String getType();
 
     public String getDescription() {
         return description;
@@ -57,6 +55,10 @@ public class Transaction {
 
     public LocalDate getDate() {
         return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
     //@@author wcwy

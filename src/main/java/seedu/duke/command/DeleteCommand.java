@@ -95,7 +95,7 @@ public class DeleteCommand extends Command {
             }
             assert index > 0;
             if (isInputValid) {
-                String transaction = TransactionList.deleteTransaction(index);
+                String transaction = transactions.deleteTransaction(index);
                 Ui.showTransactionAction(INFO_DELETE.toString(), transaction);
                 deleteLogger.log(Level.INFO, "The requested transaction has been deleted "
                         + "and the UI should display the confirmation message respectively.");

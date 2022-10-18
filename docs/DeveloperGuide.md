@@ -83,9 +83,51 @@ _Written by: Author name_
 
 _Written by: Author name_
 
-### Data Component
+### Data Component 
+The data component is represented by a `data` package which consists of all the classes that is part of the data stored 
+by Moolah Manager. Within the `data` package, a transaction package and a transactionList class is stored. 
 
-_Written by: Author name_
+The `transactionList` class is a representation of a list of transactions, and the
+operations related to the `transactionList` implemented within this class.
+
+Within the transaction package, the following classes are stored: 
+1. Transaction 
+2. Income 
+3. Expense
+4. Category
+
+The structure of the data component in Moolah Manager is illustrated in the class diagram below:
+![Data Component Class Diagram](images/DataComponentClassDiagram.png)
+
+From the class diagram, it can be seen that the transactionList mainly contain methods for CRUD operations to the list, 
+such as getting, adding, editing, deleting and purging of transaction(s) from the list.
+
+The `Transaction` class is the abstract classes of an `Income` or an `Expense`. The `Category` represents a category of 
+a transaction. Within the transaction class and its subclasses, getters and setters are used to access the private 
+variables. These classes override the toString() method for a self-defined print format when the transactions are 
+displayed. 
+
+<!-- TODO: Complete category and categoryList in sequence diagram and write their explanation here -->
+
+A more detailed explaination on the implementation on the transactions can be viewed under Section
+[Implementation for Transaction](#implementation-for-transaction).
+
+#### How the data component interacts
+- When MoolahManager starts running, the `Duke` class will initialize a `Storage` object which will attempt to 
+read from the file and initialize a `transactionList`. The temporary `transactionList` containing all the stored 
+transaction records will be returned by the `Storage`. 
+Based on the whether the initialization is successful, the corresponding constructor will be called to initialize a 
+`transactionList` object which will be used throughout the application running time to hold the `transactions` added.
+
+  ![Sequence Diagram on Creation of TransactionList](images/TransactionListSequenceDiagram.png)
+
+- A transaction (either an income or expense) is created by an `addCommand` class, can be modified by an `editCommand` 
+class and can be deleted by a `deleteCommand` or `purgeCommand` class. These interactions is described in further detail
+under each command section below.
+
+<!-- TODO: Describe how category and categoryList work here -->
+
+_Written by: Chia Thin Hong_
 
 ### Storage Component
 
@@ -149,10 +191,24 @@ Some important operations are performed within the `TransactionList` class, whic
 _Written by: Chua Han Yong Darren_
 
 ### Help Command
+The help command displays the help message to the users to guide them on the usage and provide descriptions for each 
+available command. 
 
-{Describe the implementation for the Help Command}
+The help command can be run as `help` or `help o/detailed`, where the latter will display a more detailed version of 
+help messages to the users. 
 
-_Written by: Author name_
+The structure of the application focusing on the help command is illustrated in the class diagram below:
+![Data Component Class Diagram](images/HelpClassDiagram.png)
+
+For each command subclass, they will implement the getHelpMessage() and getDetailedHelpMessage() methods. These methods 
+will contain their corresponding HelpMessage Enum that stores the help messages as strings inside the enum.
+
+In the help classes, during the execute() call, it will call either generateBasicHelp() or generateDetailedHelp() method
+based on the help option given by the user. 
+
+<!-- Todo: Add sequence diagram -->
+
+_Written by: Chia Thin Hong_
 
 ### Add Command
 

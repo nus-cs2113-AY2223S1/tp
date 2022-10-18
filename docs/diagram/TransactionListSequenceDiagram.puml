@@ -1,0 +1,50 @@
+@startuml
+!include Style.puml
+
+actor Main
+Participant ":Duke" as duke
+Participant ":Storage" as storage
+Participant "storedTransactions:\nTransactionList" as storedList
+Participant "transactionList:\nTransactionList" as transactionList
+Participant "transactionList:\nTransactionList" as emptyTransactionList
+
+create duke
+Main -> duke:Duke()
+activate duke
+    create storage
+    duke -> storage:Storage()
+        activate storage
+        create storedList
+        storage -> storedList:TransactionList()
+            activate storedList
+        return :TransactionList
+    return :Storage
+
+    duke -> storage:initializeFile()
+    activate storage
+        storage -> storedList:Add transactions
+        note right
+        Minimal notation.
+        Details hidden for adding transactions
+        from file read into storedTransactions.
+        end note
+    return stored:TransactionList
+
+    destroy storedList
+    note over storedList
+        Due to UML tool limitation, the lifeline is not shown ended after the red cross
+    end note
+
+    alt Successful initialization
+        create transactionList
+        duke -> transactionList:TransactionList(stored)
+        activate transactionList
+        return transactionList:TransactionList
+    else File initialization failure
+        create emptyTransactionList
+        duke -> emptyTransactionList:TransactionList()
+        activate emptyTransactionList
+        return transactionList:TransactionList
+
+    end
+@enduml

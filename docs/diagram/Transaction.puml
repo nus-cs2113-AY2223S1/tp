@@ -1,8 +1,5 @@
 @startuml
-'https://plantuml.com/sequence-diagram
-
-hide circle
-skinparam classAttributeIconSize 0
+!include Style.puml
 
 class TransactionList {
 }
