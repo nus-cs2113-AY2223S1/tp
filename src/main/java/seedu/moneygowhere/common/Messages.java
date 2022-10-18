@@ -26,6 +26,8 @@ public class Messages {
      */
     public static final String EXPENSE_MANAGER_ERROR_EXPENSE_NOT_FOUND = ""
             + "The expense is not found.";
+    public static final String EXPENSE_MANAGER_DUPLICATE_EXPENSE = ""
+            + "There is already a similar expense";
 
     /**
      * Defines messages for {@link seedu.moneygowhere.data.target.TargetManager}.
@@ -38,16 +40,25 @@ public class Messages {
      */
     public static final String LOCAL_STORAGE_ERROR_NO_LOAD_FILE = ""
             + "There is no load file found...\n"
-            + "Please ensure the file is named correctly and is in the right directory if you have a load file.";
-    public static final String LOCAL_STORAGE_ERROR_IN_LOAD_FILE = ""
+            + "Please ensure the file is named correctly and "
+            + "is in the right directory if you have a load file.";
+    public static final String LOCAL_STORAGE_ERROR_CORRUPTED_OR_EMPTY_LOAD_FILE = ""
+            + "The load file is empty or corrupted...\n"
+            + "Please ensure the load file is not modified if you have a load file.";
+    public static final String LOCAL_STORAGE_EXPENSE_ERROR_IN_LOAD_FILE = ""
             + "There is an error in load file found...\n"
             + "Please ensure the file is the correct load file without modifications to it.\n"
-            + "Error is found in line: ";
+            + "Error is found in expense id: ";
+    public static final String LOCAL_STORAGE_SORTCONFIG_ERROR_IN_LOAD_FILE = ""
+            + "There is no sorting configuration in load file found...\n"
+            + "Please ensure the file is the correct load file without modifications to it.";
     public static final String LOCAL_STORAGE_LOAD_SUCCESS = ""
             + "File loaded successfully :)";
     public static final String LOCAL_STORAGE_ERROR_SAVE_DATA = ""
             + "There is an error in saving file...\n"
             + "File does not exist or Path is wrong :(";
+    public static final String LOCAL_STORAGE_ERROR_WRITING_DATA = ""
+            + "There is an error in writing data to save file.";
 
     /**
      * Defines messages for {@link seedu.moneygowhere.currency.CurrencyApi }.
