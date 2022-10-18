@@ -25,6 +25,6 @@ class FlightListTest {
     public void checkDeleteOperation() throws SkyControlException {
         Command testCommand = Parser.parse(deleteLineInput);
         testCommand.execute(testFlightList, deleteLineInput);
-        assertEquals(1, testFlightList.flights.size());
+        assertEquals(0, testFlightList.flights.size());
     }
 }
