@@ -42,8 +42,7 @@ _Written by: Author name_
 
 ## Acknowledgements
 
-{List here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the
-original source as well}
+{List here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 _Written by: Author name_
 
@@ -59,15 +58,12 @@ Firstly, you should fork this repo, before cloning the fork to your computer.
 
 Next,
 
-1. **Ensure that Intellij JDK 11 is defined as an SDK**, as described in
-   this [[Set up JDK guide]](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk) -- this step is not needed if you
-   have used JDK 11 in a previous Intellij project.
+1. **Ensure that Intellij JDK 11 is defined as an SDK**, as described in this [[Set up JDK guide]](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk) -- this step is not needed if you have used JDK 11 in a previous Intellij project.
     * You _might need to set the Project language level_ section to the SDK default option.
-2. **Import the project _as a Gradle project_**, as described
-   in [[se-edu's Import Gradle Project guide]](https://se-education.org/guides/tutorials/intellijImportGradleProject.html)
-   .
-3. **Running the project**: After finishing the import, locate the `src/main/java/seedu.duke/Duke.java` file in this
-   project, right-click it, and choose `Run Duke.main()`.
+2. **Import the project _as a Gradle project_**, as described in
+[[se-edu's Import Gradle Project guide]](https://se-education.org/guides/tutorials/intellijImportGradleProject.html).
+3. **Running the project**: After finishing the import, locate the `src/main/java/seedu.duke/Duke.java` 
+file in this project, right-click it, and choose `Run Duke.main()`.
 
 _Written by: Paul Low_
 
@@ -84,6 +80,7 @@ _Written by: Author name_
 _Written by: Author name_
 
 ### Data Component 
+
 The data component is represented by a `data` package which consists of all the classes that is part of the data stored 
 by Moolah Manager. Within the `data` package, a transaction package and a transactionList class is stored. 
 
@@ -113,6 +110,7 @@ A more detailed explaination on the implementation on the transactions can be vi
 [Implementation for Transaction](#implementation-for-transaction).
 
 #### How the data component interacts
+
 - When MoolahManager starts running, the `Duke` class will initialize a `Storage` object which will attempt to 
 read from the file and initialize a `transactionList`. The temporary `transactionList` containing all the stored 
 transaction records will be returned by the `Storage`. 
@@ -139,7 +137,22 @@ _Written by: Author name_
 
 ### UI Component
 
-_Written by: Author name_
+The UI component consists of a `Ui` class that displays information and error messages based on the user 
+input and the behavior of the application. Static messages are pre-defined in the `ErrorMessages` and `InfoMessages` 
+classes from the Common component, while  dynamic messages such as a transactions list may be generated during 
+execution of the application.
+
+<p align="center">
+    <img src="images/UiComponentClassDiagram.png">
+    <br />
+    <i>Figure 2.6: Class Diagram for UI Component</i>
+</p>
+
+_Written by: Chua Han Yong Darren_
+
+As seen from the class diagram, every command that requires the ability to print to the system output will have
+to call the functions from the `Ui` class. To add on, the `Duke` class will also use the `Ui` class to read user 
+input.
 
 ### Common Component
 
@@ -156,13 +169,13 @@ _Written by: Author name_
 ### Implementation for Transaction
 
 Each `Transaction` object in Moolah Manager represents a transaction record, which can be of `Income`
-or `Expense` type. Below is a simplified class diagram (note: methods have been omitted) containing the attributes
-within each transaction and how the transactions are associated with the `TransactionList`.
+or `Expense` type. Below is a simplified class diagram (with methods omitted) containing the attributes
+within each transaction and how each transaction is associated with the `TransactionList`.
 
 <p align="center">
     <img src="images/TransactionClassDiagram.png">
     <br />
-    <i>Figure 1: SimplifiedClass Diagram for Transaction</i>
+    <i>Figure 1: Simplified Class Diagram for Transaction</i>
 </p>
 
 The `TransactionList` holds a dynamic array list that can store multiple `Transaction` objects.
@@ -235,7 +248,6 @@ which calls for `AddCommand#execute()`. Lastly it is also associated with `Param
     <i>Figure 3.2: Class Diagram for AddCommand and Related Classes</i>
 </p>
 
-
 These are the important operations performed within the `AddCommand` class, with task description:
 
 - `AddCommand#execute(TransactionList transactions, Ui ui, Storage storage)` - Adds a `Transaction` object to the
@@ -278,9 +290,39 @@ _Written by: Paul Low_
 
 ### Find Command
 
-{Describe the implementation for the Find Command}
+The `FindCommand` class provides the functionality of finding a specific or few transaction(s) 
+from the list of transactions recorded in Moolah Manager, based on  multiple searching keywords that 
+match the details of the transaction(s).
 
-_Written by: Author name_
+The sequence diagram below shows the interactions of a successful execution of the `FindCommand`.
+
+<p align="center">
+    <img src="images/FindCommandSequenceDiagram.png">
+    <br />
+    <i>Figure 3.3: Sequence Diagram for Find Command</i>
+</p>
+
+**Step 1.** The user executes `find KEYWORDS` command with an intent to view a filtered list of transactions 
+that match the searching keywords.
+
+**Step 2.** The `CommandParser#parse()` method is called to initialize the `Command` object with `FindCommand`, 
+accompanied by a string of keywords to search for.
+
+**Step 3.** Moolah Manager (`Duke`) calls `FindCommand#execute()` method which first checks whether the string of 
+keywords is empty via the `FindCommand#checkFindFormat()` method. If `keywords` is empty, a 
+`FindTransactionMissingKeywordsException` object will be thrown with an error message.
+
+**Step 4.** Since there exists a string of keywords in a successful execution, the `TransactionList#findTransactions()` 
+method will be called to loop through all `Transaction` objects from `ArrayList<Transaction>`, checking if they match 
+(i.e. contain) any searching keywords given.
+
+**Step 5.** `Transaction` objects that contain the searching keywords will be appended into a formatted string and 
+returned by the `TransactionList#findTransactions()` method.
+
+**Step 6.** If `FindCommand` checks that `transactionsList` string is not empty, it will call `Ui#showTransactionsList()` 
+method to display the transactions. Otherwise, `Ui#showInfoMessage()` will be called.
+
+_Written by: Chua Han Yong Darren_
 
 ### Stats Command
 
