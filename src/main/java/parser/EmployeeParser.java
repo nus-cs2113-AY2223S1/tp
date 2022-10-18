@@ -5,6 +5,7 @@ import command.employeeCommand.AddEmployeeCommand;
 import command.employeeCommand.RemoveEmployeeCommand;
 import command.employeeCommand.ViewEmployeeCommand;
 import exception.DukeException;
+import seedu.duke.Duke;
 
 public class EmployeeParser {
     private int lengthOfSignature;
@@ -41,25 +42,26 @@ public class EmployeeParser {
     }
 
     public Command prepareAddEmployee(String input) {
-        int startOfN = input.indexOf(" n/");
-
-        if (startOfN == -1) {
+        try {
+            int startOfN = input.indexOf(" n/");
+            if (startOfN == -1) {
+                throw new DukeException();
+            }
+            String name = input.substring(startOfN + lengthOfSignature);
+            return new AddEmployeeCommand(name);
+        } catch (DukeException e) {
             System.out.println("Sorry, format of parameters entered for adding an employee is invalid");
             return new EmptyCommand();
         }
-
-        String name = input.substring(startOfN + lengthOfSignature);
-        return new AddEmployeeCommand(name);
     }
 
     public Command prepareRemoveEmployee(String input){
-        int index = parser.indexOfInput(input);
-
-        if (index == -1) {
+        try {
+            int index = parser.indexOfInput(input);
+            return new RemoveEmployeeCommand(index);
+        } catch (DukeException e) {
             System.out.println("Sorry, index entered invalid for removing an employee ");
             return new EmptyCommand();
         }
-
-        return new RemoveEmployeeCommand(index);
     }
 }
