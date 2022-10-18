@@ -133,6 +133,9 @@ public class Messages {
             + "The arguments entered are invalid. "
             + CONSOLE_COMMAND_VIEW_EXPENSE_SYNTAX;
 
+    public static final String COMMAND_VIEW_EXPENSE_EMPTY_LIST = ""
+            + "Your list of expenses is empty. ";
+
     /**
      * Defines messages for console command Delete-Expense.
      */

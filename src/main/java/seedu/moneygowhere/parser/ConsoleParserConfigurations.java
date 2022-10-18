@@ -152,6 +152,8 @@ public class ConsoleParserConfigurations {
     public static final boolean COMMAND_SORT_EXPENSE_ARG_ORDER_IS_MAND = true;
     public static final String COMMAND_SORT_EXPENSE_ARG_ORDER_VAL_ASCENDING = "ascending";
     public static final String COMMAND_SORT_EXPENSE_ARG_ORDER_VAL_DESCENDING = "descending";
+    public static final String COMMAND_SORT_EXPENSE_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS = ""
+            + "Command Sort-Expense does not have all of the required options.";
 
     /**
      * Defines parameters for console command Convert-Currency.
