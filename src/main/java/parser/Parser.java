@@ -1,5 +1,7 @@
 package parser;
 import command.*;
+import exception.DukeException;
+import seedu.duke.Duke;
 
 public class Parser {
     private final int lengthOfSignature = 3;
@@ -16,7 +18,7 @@ public class Parser {
     }
 
 
-    public Command parseCommand(String input){
+    public Command parseCommand(String input) {
         input = input.trim();
 
         if(!input.contains(" ")){
