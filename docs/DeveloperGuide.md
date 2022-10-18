@@ -69,6 +69,7 @@ Figure: ItemList Object Diagram
 
 The user enters the following command: “find-item /k Book”. In this case, the keyword is book. The entire ItemList is iterated through, and an ItemList containing all of the Items which contain the keyword is returned. 3 Items contain the keyword “Book”, hence these 3 items are returned by the function ItemList.getItemsByKeyword. This ItemList is then converted to a String via the method ItemList.toString, and printed by Ui.printResponse so that the user is able to see all the matching Items. The sequence diagram is shown below.
 
+![alt text](http://url/to/img.png)
 Figure: FindItem Sequence Diagram
 
 
