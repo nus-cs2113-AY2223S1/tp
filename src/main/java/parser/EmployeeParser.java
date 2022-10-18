@@ -56,7 +56,7 @@ public class EmployeeParser {
 
 
     public Command prepareRemoveEmployee(String input){
-        int index = parser.indexOfRemove(input);
+        int index = parser.indexOfInput(input);
 
         if(index == -1){
             System.out.println("Error: index entered invalid for removing an employee ");
