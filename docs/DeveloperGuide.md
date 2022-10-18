@@ -11,15 +11,20 @@
 ## Design  
 This sector describes the architecture design of Upcycle with its components, and UML diagrams are used to support.
 ### Duke 
+![DukeSequence](images/DukeSequence.png)
 ### User component
 ### Item component 
 ### Transaction component
+The Class diagram below show how Transaction-related classes interact with each other. `Transaction` object contains `transactionId`, `itemName`, `itemId`, `borrower`, `duration`, `createdAt`, `returnedAt` attributes. Among those, `transactionId` is created by `IdGenerator`'s static method and dates are parsed by `DateParser`, therefore, Transaction class depends on those two classes.
+Transactions are stored in `TransactionList`, which will be loaded and written on the file by `TransactionStorage` (inherits from `Storage`) whenever Upcycle runs or exits. All transaction-related commands operate mainly on a list of transaction (transactionList:TransactionList)
+
+![TransactionClassDiagram](images/TransactionClassDiagram.png)
 ### Ui component 
 ### Storage component 
 ### Command component
 
 ## Implementation
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+This sector describe how features are implemented, where readers can get insight into the mechanisms of them with step-by-step descriptions and UML diagrams.
 
 ### User-related Features
 

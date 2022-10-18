@@ -60,7 +60,7 @@ class DateParser {
     {static} + formatDateToString(date: LocalDate): String
 }
 
-TransactionStorage -> TransactionList : > loads and writes
+TransactionStorage .> TransactionList : > loads and writes
 TransactionList *--> "0..*" Transaction: transactionList
 Transaction ..> IdGenerator
 Transaction ..> DateParser

@@ -48,5 +48,7 @@ end
 ":Duke" -> ":Storage" : writeData()
 activate ":Storage"
 return
+":Duke" --> "User"
+deactivate ":Duke"
 
 @enduml
