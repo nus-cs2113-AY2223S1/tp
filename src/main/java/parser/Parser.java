@@ -26,9 +26,9 @@ public class Parser {
                 }
 
                 throw new DukeException();
-            }
-        } catch (DukeException e){
-            System.out.println("Error: only one parameter received and it is not bye");
+            }   
+        } catch (DukeException e) {
+            System.out.println("Sorry, only one parameter received and it is not bye");
             return new EmptyCommand();
         }
 
@@ -36,6 +36,7 @@ public class Parser {
         int indexOfSpace = input.indexOf(" ");
         String type = input.substring(0,indexOfSpace);
         String statement = input.substring(indexOfSpace).trim();
+
 
         try {
             switch (type) {
@@ -51,7 +52,7 @@ public class Parser {
                 throw new DukeException();
             }
         } catch (DukeException e){
-            System.out.println("Error: unrecognized operation");
+            System.out.println("Sorry, unrecognized operation");
             return new EmptyCommand();
         }
     }
