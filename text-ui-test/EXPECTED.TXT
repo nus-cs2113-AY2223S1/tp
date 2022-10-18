@@ -2,3 +2,6 @@
 	[Movie] Inception  Rating:10.0 Genre: scifi Date watched: 5 Sep 22 
 
 	Now you have 1 reviews in the list.
+
+---------------
+See you again!
