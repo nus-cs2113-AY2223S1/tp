@@ -9,6 +9,7 @@ import seedu.duke.command.DeleteCommand;
 import seedu.duke.command.ViewCommand;
 import seedu.duke.command.HelpCommand;
 import seedu.duke.command.ListCommand;
+import seedu.duke.command.FavouriteCommand;
 import seedu.duke.exceptions.InvalidUserCommandException;
 
 public class CommandParser {
@@ -70,6 +71,13 @@ public class CommandParser {
             userInputTokenized[1] = userInputTokenized[1].replace('_', ' ');
             ListCommand newListCommand = new ListCommand(userInputTokenized, CommandType.LIST);
             return newListCommand;
+        case "/favourite":
+            if (!isValidFavouriteCommand(userInputTokenized)) {
+                throw new InvalidUserCommandException("Error! Invalid favourite command. "
+                        + "Please follow the command format provided");
+            }
+            FavouriteCommand newFavouriteCommand = new FavouriteCommand(userInputTokenized, CommandType.FAVOURITE);
+            return newFavouriteCommand;
         default:
             throw new InvalidUserCommandException("Error! Unidentified command. "
                     + "Please follow the command format provided!");
@@ -119,6 +127,17 @@ public class CommandParser {
         if (parameters.length == 2
                 && (parameters[1].trim().equals("UNIVERSITIES") || parameters[1].trim().equals("MODULES")
                 || parameters[1].startsWith("m/") || parameters[1].startsWith("u/"))) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private static boolean isValidFavouriteCommand(String[] parameters) {
+        boolean isValidLength = parameters.length == 2;
+        boolean isValidPrefix = parameters[1].startsWith("add/") || parameters[1].startsWith("del/")
+                || parameters[1].equals("view/");
+        if (isValidLength && isValidPrefix) {
             return true;
         } else {
             return false;

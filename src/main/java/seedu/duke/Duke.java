@@ -8,6 +8,7 @@ import seedu.duke.command.Database;
 import seedu.duke.command.DatabaseStorage;
 import seedu.duke.command.ListCommand;
 import seedu.duke.command.ViewCommand;
+import seedu.duke.command.FavouriteCommand;
 import seedu.duke.exceptions.InvalidUserCommandException;
 import seedu.duke.exceptions.ModuleNotFoundException;
 import seedu.duke.exceptions.UniversityNotFoundException;
@@ -29,8 +30,8 @@ public class Duke {
      */
     public static void main(String[] args) {
         System.err.close();
-        System.out.println(Ui.greetUser());
-        System.out.println(Ui.printCommands());
+        System.out.print(Ui.greetUser());
+        System.out.print(Ui.printCommands());
         DatabaseStorage.loadDatabase();
         UserUniversityListManager userUniversityListManager = UserStorageParser.getSavedLists();
 
@@ -43,7 +44,7 @@ public class Duke {
                     exit();
                     break;
                 case HELP:
-                    System.out.println(Ui.printCommands());
+                    System.out.print(Ui.printCommands());
                     break;
                 case DELETE:
                     try {
@@ -113,15 +114,31 @@ public class Duke {
                         System.out.println(e.getMessage());
                     }
                     break;
+                case FAVOURITE:
+                    try {
+                        FavouriteCommand favouriteCommand = (FavouriteCommand) newUserCommand;
+                        if (favouriteCommand.getFavouriteOption().equals("VIEW")) {
+                            userUniversityListManager.displayFavourites();
+                        } else if (favouriteCommand.getFavouriteOption().equals("ADD")) {
+                            String universityName = favouriteCommand.getUniversityName();
+                            userUniversityListManager.addFavourite(universityName);
+                            System.out.print(Ui.printFavouriteListAddedAcknowledgement(universityName));
+                        } else if (favouriteCommand.getFavouriteOption().equals("DELETE")) {
+                            String universityName = favouriteCommand.getUniversityName();
+                            userUniversityListManager.deleteFavourite(universityName);
+                            System.out.print(Ui.printFavouriteListDeletedAcknowledgement(universityName));
+                        }
+                    } catch (NoSuchElementException e) {
+                        System.out.println(e.getMessage());
+                    }
+                    break;
                 default:
                     break;
                 }
             } catch (InvalidUserCommandException e) {
                 System.out.println(e.getMessage());
             }
-
         }
-
     }
 
     private static void exit() {
