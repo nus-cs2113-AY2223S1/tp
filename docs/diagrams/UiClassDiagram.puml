@@ -1,0 +1,35 @@
+@startuml
+'hide class fields
+hide class methods
+
+package Recipe {
+class RecipeList
+class Recipe
+class Ingredient
+}
+
+package Ui {
+class Ui
+class AddMode
+}
+
+class Ui {
+'    - {static} DIVIDER = "-------"
+'    - {static} START = "Program starting!"
+'    - {static} COMMAND = "Parseable command at the moment: add, delete, list, view, exit"
+'    - {static} EXIT = "Program exiting"
+'    - {static} PROMPT = ">>>"
+}
+
+class AddMode {
+    Recipe addedRecipe
+    boolean isValid
+}
+
+Ui ..> CommandResult
+
+AddMode --> Recipe
+AddMode --> Ingredient
+Recipe *-right-> Ingredient
+
+@enduml
