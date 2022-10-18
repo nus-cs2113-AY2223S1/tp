@@ -1,6 +1,8 @@
 package parser;
 
 import command.*;
+import exception.DukeException;
+import seedu.duke.Duke;
 
 public class EmployeeParser {
     private int lengthOfSignature;
@@ -12,26 +14,30 @@ public class EmployeeParser {
 
 
 
-    public Command parseEmployee(String input){
-        if(!input.contains(" ")){
-            if(input.equals("view")){
-                return new ViewEmployeeCommand();
+    public Command parseEmployee(String input) {
+        try {
+            if(!input.contains(" ")) {
+                if(input.equals("view")) {
+                    return new ViewEmployeeCommand();
+                } else {
+                    throw new DukeException();
+                }
             }
-            System.out.println("Error: too little parameters entered for employee operation");
-            return new EndCommand();
+            String type = input.substring(0,input.indexOf(" "));
+            String statement = input.substring(input.indexOf(" "));
+            switch(type) {
+            case AddEmployeeCommand.COMMAND_WORD:
+                return prepareAddEmployee(statement);
+            case RemoveEmployeeCommand.COMMAND_WORD:
+                return prepareRemoveEmployee(statement);
+            default:
+                System.out.println("Error: unrecognized employee operation");
+                return new EndCommand();
+            }
+        } catch (DukeException e) {
+            System.out.println("Sorry, but I don't understand what you mean.");
         }
-
-        String type = input.substring(0,input.indexOf(" "));
-        String statement = input.substring(input.indexOf(" "));
-        switch(type) {
-        case AddEmployeeCommand.COMMAND_WORD:
-            return prepareAddEmployee(statement);
-        case RemoveEmployeeCommand.COMMAND_WORD:
-            return prepareRemoveEmployee(statement);
-        default:
-            System.out.println("Error: unrecognized employee operation");
-            return new EndCommand();
-        }
+        return new EmptyCommand();
     }
 
     public Command prepareAddEmployee(String input){
