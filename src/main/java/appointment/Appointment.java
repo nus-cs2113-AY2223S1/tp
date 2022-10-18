@@ -10,10 +10,10 @@ public class Appointment {
 
     public final int appointmentId;
     public String petName;
+    public String service;
 
     private String appointmentDate;
     private AppointmentStatus appointmentStatus;
-    private String service;
 
     public Appointment(String petName, String appointmentDate, String service) {
         this.appointmentId = ++id;
