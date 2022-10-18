@@ -17,8 +17,7 @@ public class LinkedHashMap2D<T> {
             LinkedHashMap<String, T> innerMap = new LinkedHashMap<String, T>();
             outerMap.put(key1, innerMap);
             innerMap.put(key2, value);
-        }
-        else {
+        } else {
             innerMap.put(key2, value);
         }
     }
@@ -37,7 +36,7 @@ public class LinkedHashMap2D<T> {
     }
 
     public ArrayList<String> getNameList() {
-        ArrayList<String> list = new ArrayList();
+        ArrayList<String> list = new ArrayList<String>();
         for (String key1 : outerMap.keySet()) {
             innerMap = outerMap.get(key1);
             for (String key2 : innerMap.keySet()) {
@@ -48,7 +47,7 @@ public class LinkedHashMap2D<T> {
     }
 
     public ArrayList<String> getTypeList() {
-        ArrayList<String> list = new ArrayList();
+        ArrayList<String> list = new ArrayList<String>();
         for (String key1 : outerMap.keySet()) {
             list.add(key1);
         }
@@ -56,7 +55,7 @@ public class LinkedHashMap2D<T> {
     }
 
     public ArrayList<String> getNamesOfTypeList(String type) {
-        ArrayList<String> list = new ArrayList();
+        ArrayList<String> list = new ArrayList<String>();
         innerMap = outerMap.get(type);
         for (String key2 : innerMap.keySet()) {
             list.add(key2);
