@@ -15,9 +15,8 @@ public class AddCommand extends Command {
     }
 
     public CommandResult execute() {
-        // TODO: Execution of command
         if (isValid) {
-            RecipeList.addRecipe(addedRecipe); //HERE SEEM TO THROW ERROR
+            RecipeList.addRecipe(addedRecipe); 
             Storage.writeRecipeListToFile();
             return new CommandResult(addedRecipe.getTitle() + " added to the recipe.");
         } else {

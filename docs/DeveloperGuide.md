@@ -8,10 +8,21 @@
 
 ### Add functionality
 
+### Architecture
+
+### Interaction flow
+![Architecture](.\Architecture.png)
+`Ui`: interfacing with the user
+
+`Parser`: parsing the input to give the correct output
+
+`Command`: carry out the 
+
+`CommandResult`: Hold various output table attributes to be displayed by `Ui`
+
+
+
 ### Parser functionality
-
-
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 
 
 ## Product scope
