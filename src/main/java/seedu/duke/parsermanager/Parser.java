@@ -7,6 +7,7 @@ import seedu.duke.exception.EmptyDetailException;
 import seedu.duke.exception.ExistingPairException;
 import seedu.duke.exception.ExtraParametersException;
 import seedu.duke.exception.IncorrectFlagOrderException;
+import seedu.duke.exception.IncorrectListFlagsException;
 import seedu.duke.exception.InvalidBudgetFormatException;
 import seedu.duke.exception.InvalidContactNumberException;
 import seedu.duke.exception.InvalidEmailException;
@@ -22,5 +23,5 @@ public abstract class Parser {
             MissingFlagException, IncorrectFlagOrderException, InvalidPriceFormatException, EmptyDetailException,
             InvalidContactNumberException, InvalidEmailException, InvalidBudgetFormatException, InvalidIndexException,
             NotIntegerException, ClientAlreadyPairedException, ExistingPairException, NoExistingPairException,
-            ExtraParametersException;
+            ExtraParametersException, IncorrectListFlagsException;
 }

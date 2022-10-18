@@ -132,12 +132,28 @@ public class Messages {
 
     /* List related Error Messages */
 
-    public static final String MESSAGE_INCORRECT_LIST_DETAILS = "OOPS!!! Please enter either -client or -property to"
-            + " list clients and properties respectively";
+    public static final String MESSAGE_INCORRECT_LIST_DETAILS = "OOPS!!! Please enter -client"
+            + " to list clients, -property to list properties, and -everything to list"
+            + " everything";
 
     public static final String LINE_BREAK = "----------------------------------------------------------------------"
             + "----------";
 
     public static final String MESSAGE_BYE_PARAMETERS_PRESENT = "Please type bye without any parameters"
             + " if you would like to quit";
+
+    public static final String MESSAGE_INCORRECT_PROPERTY_LIST_FLAG = "Please type the following "
+            + "after list -property to display - "
+            + "\na/ for property address"
+            + "\nt/ for property type"
+            + "\nn/ for property owner name"
+            + "\nt/ for property type";
+
+    public static final String MESSAGE_INCORRECT_CLIENT_LIST_FLAG = "Please type the following "
+            + "after list -client to display - "
+            + "\nn/ for client name"
+            + "\nc/ for client contact number"
+            + "\ne/ for client email"
+            + "\nb/ for client budget";
+    public static final String MESSAGE_BYE = "Goodbye :). See you soon!";
 }
