@@ -24,7 +24,7 @@ remove food /{food index}
 mark {done/undone} /{exercise index}
 e_remove exercise /{index}
 view {biometrics/food/exercise {/done}/strength {/done}}
-find {strength /{exercise name}}
+find {strength /food {description}}
 --------------------------------------------------
 --------------------------------------------------
 Biometrics:

@@ -22,4 +22,8 @@ public class Food {
         return "Food Description: " + foodDescription + System.lineSeparator()
                 + "calories: " + calories;
     }
+
+    public String saveFood() {
+        return String.format("/%s /%d", foodDescription, calories);
+    }
 }

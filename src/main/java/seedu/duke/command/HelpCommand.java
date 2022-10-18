@@ -27,7 +27,7 @@ public class HelpCommand extends Command {
                 + "mark {done/undone} /{exercise index}\n"
                 + "e_remove exercise /{index}\n"
                 + "view {biometrics/food/exercise {/done}/strength {/done}}\n"
-                + "find {strength /{exercise name}}");
+                + "find {strength /food {description}}");
     }
 
     @Override
