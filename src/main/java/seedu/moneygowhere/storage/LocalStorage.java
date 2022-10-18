@@ -33,6 +33,9 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+/**
+ * Loads and save data to a xml file.
+ */
 public class LocalStorage {
     private final String XML_ROOT = "MoneyGoWhere";
     private final String XML_SORTCONFIG_ELEMENT = "Sort_Configuration";
@@ -53,6 +56,9 @@ public class LocalStorage {
         initialiseFile();
     }
 
+    /**
+     * Function to create data file and its directory.
+     */
     private void initialiseFile() {
         File directory = new File(LOCAL_STORAGE_DIRECTORY_PATH);
         directory.mkdir();
@@ -60,6 +66,12 @@ public class LocalStorage {
         this.saveFile = new File(newFilePath);
     }
 
+    /**
+     * This method reads saved data and configurations from a load file
+     * and add it to the list that stores expenses
+     *
+     * @param expenseManager arraylist to store expenses
+     */
     public void loadFromFile(ExpenseManager expenseManager) {
         Expense loadExpense;
         boolean hasParsedSortconfig = false;
@@ -96,7 +108,7 @@ public class LocalStorage {
     }
 
     /**
-     * This method reads in the sortCommandSetting in text file.
+     * This method reads in the sortCommandSetting in xml file.
      */
     private ConsoleCommandSortExpense loadSortCommandSetting(NodeList sortConfig) {
         String type = sortConfig.item(0).getAttributes()
@@ -106,6 +118,12 @@ public class LocalStorage {
         return new ConsoleCommandSortExpense(type, order);
     }
 
+    /**
+     * This method takes in an expense node and convert it into an Expense object
+     *
+     * @param node containing information from an expense
+     * @return an expense created with data by node
+     */
     private Expense createExpense(Node node) throws LocalStorageLoadDataInputError {
         if (node.getNodeType() != Node.ELEMENT_NODE) {
             throw new LocalStorageLoadDataInputError();
@@ -128,6 +146,12 @@ public class LocalStorage {
         return new Expense(name, dateTime, description, amount, category, remark, currency);
     }
 
+    /**
+     * This method saves current data into a xml file
+     *
+     * @param savedExpenses arraylist containing all expenses
+     * @param sortCommandSetting configurations for sorting
+     */
     public void saveToFile(ArrayList<Expense> savedExpenses, ConsoleCommandSortExpense sortCommandSetting) {
         Integer index = 1;
         try {
@@ -171,7 +195,6 @@ public class LocalStorage {
         }
     }
 
-    // write doc to output stream
     private void writeXml(Document doc)
             throws TransformerException {
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
