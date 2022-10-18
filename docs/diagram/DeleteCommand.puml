@@ -1,0 +1,36 @@
+@startuml
+!include Style.puml
+
+class DeleteCommand {
++ COMMAND_WORD: String
+    + COMMAND_DESCRIPTION: String
+    + COMMAND_USAGE: String
+    + COMMAND_PARAMETERS_INFO: String
+
+    - entryNumber: int
+
+    +getMandatoryTags()
+    +setEntryNumber(): int
+    +{abstract}execute()
+}
+
+class "{abstract}\n Command"{
+
+    + COMMAND_WORD: String
+    + COMMAND_DESCRIPTION: String
+    + COMMAND_USAGE: String
+    + COMMAND_PARAMETERS_INFO: String
+
+    - type: String
+    - category: String
+    - description: String
+    - amount: int
+    - date: LocalDate
+
+    +getMandatoryTags()
+    +{abstract}execute()
+}
+
+
+"{abstract}\n Command" <|-- DeleteCommand
+@enduml
