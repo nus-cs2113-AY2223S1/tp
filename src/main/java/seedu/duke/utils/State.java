@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class State {
-    private static final int MODULES_LIST_SIZE = 3;
+    private static final int MODULES_LIST_SIZE = 5;
     private int semester = 1;
 
     private List<List<SelectedModule>> selectedModulesList = new ArrayList<>(Collections.nCopies(MODULES_LIST_SIZE,

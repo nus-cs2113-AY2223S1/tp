@@ -48,7 +48,7 @@ public class Duke {
             }
         }
         try {
-            storage.saveState(state);
+            storage.saveState(state, ui);
         } catch (IOException e) {
             ui.addMessage(IO_ERROR_MESSAGE);
             ui.displayUi();
