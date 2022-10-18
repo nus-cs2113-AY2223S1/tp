@@ -16,6 +16,9 @@ public class Duke {
         Ui.showWelcomeMessage();
 
         List<String> existingUserNames;
+        List<List<String>> allCurrencies;
+
+        allCurrencies = Currency.getListOfAllCurrencies();
 
         existingUserNames = UserNameFileWorkings.userNameFile();
 
@@ -84,6 +87,13 @@ public class Duke {
                             System.out.println("Username not found, please enter another username");
                         }
                     } while (!user);
+                    break;
+                case CURRENCIES:
+                    System.out.println("\t\t\tALL CURRENCIES");
+                    System.out.println("\tVALUE\t\t\t\t\tNAMES");
+                    for (List<String> x : allCurrencies){
+                        System.out.println("\t" + x.get(1) + "\t\t\t" + x.get(0));
+                    }
                     break;
                 default:
                     throw new FinanceException(ExceptionCollection.COMMAND_TYPE_EXCEPTION);

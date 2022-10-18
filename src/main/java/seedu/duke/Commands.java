@@ -3,5 +3,6 @@ package seedu.duke;
 enum Commands {
     LOGIN,
     REGISTER,
-    BYE
+    BYE,
+    CURRENCIES
 }
