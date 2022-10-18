@@ -6,6 +6,7 @@ import seedu.moneygowhere.data.expense.Expense;
 import seedu.moneygowhere.exceptions.CurrencyInvalidException;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.HashMap;
 
 /**
@@ -37,7 +38,7 @@ public class CurrencyManager {
 
     private BigDecimal convertToSgd(String currency, BigDecimal amount) {
         BigDecimal rate = getRate(currency);
-        return (amount.divide(rate));
+        return (amount.divide(rate, Configurations.NUMBER_OF_DECIMAL_PLACES, RoundingMode.HALF_UP));
     }
 
     private BigDecimal convertToNewCurrency(BigDecimal amountInSgd, String newCurrency) {
@@ -48,10 +49,10 @@ public class CurrencyManager {
     public BigDecimal exchangeCurrency(Expense expense, String newCurrency) {
         String oldCurrency = expense.getCurrency();
         BigDecimal amountInSgd = expense.getAmount();
-        if (!(oldCurrency.equals(Configurations.CURRENCY_SINGAPORE_DOLLARS))) {
+        if (!(oldCurrency.equalsIgnoreCase(Configurations.CURRENCY_SINGAPORE_DOLLARS))) {
             amountInSgd = convertToSgd(oldCurrency, amountInSgd);
         }
-        if (newCurrency.equals(Configurations.CURRENCY_SINGAPORE_DOLLARS)) {
+        if (newCurrency.equalsIgnoreCase(Configurations.CURRENCY_SINGAPORE_DOLLARS)) {
             return amountInSgd;
         }
         BigDecimal amountInNewCurrency = convertToNewCurrency(amountInSgd, newCurrency);
