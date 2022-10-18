@@ -1,10 +1,10 @@
 package seedu.duke;
 
 public class Ui {
-    private static final String indentation = "    ";
+    private static final String INDENTATION = "    ";
 
     public static void showWelcomeMessage() {
-        String logo = "\n"
+        final String LOGO = "\n"
                 +
                 "    _____                                              __  __                                         \n"
                 +
@@ -21,36 +21,85 @@ public class Ui {
                 "                                                __/ |                                __/ |            \n"
                 +
                 "                                               |___/                                |___/             \n";
-        showStandardOutput(indentation + "Welcome to " + logo);
+        showStandardOutput(INDENTATION + "Welcome to " + LOGO);
+    }
+
+    public static void showExitMessage() {
+        final String EXIT_MESSAGE = "Bye. Thank you for your support!";
+        showStandardOutput(INDENTATION + EXIT_MESSAGE);
+    }
+
+    public static void showAccountEntryMessage(String username) {
+        final String MESSAGE = "You login as " + username + "\n" + INDENTATION + "Please enter any command.";
+        showStandardOutput(INDENTATION + MESSAGE);
+    }
+
+    public static void showAccountExitMessage(String username) {
+        final String MESSAGE = "Wallet " + username + " logout.";
+        showStandardOutput(INDENTATION + MESSAGE);
     }
 
     public static void showExceptionMessage(String exceptionMessage) {
-        showStandardOutput(indentation + exceptionMessage);
+        showStandardOutput(INDENTATION + exceptionMessage);
     }
 
     // Maybe be improved
     public static void showPromptInfo() {
         String promptInfo = "Would you like to register or login?";
-        System.out.println(indentation + promptInfo);
+        System.out.println(INDENTATION + promptInfo);
         System.out.println();
     }
 
     public static void showRegisterInfo() {
         final String MESSAGE = "Nice, we will be creating you a new wallet right away, but first of all, \n"
                 +
-                indentation
+                INDENTATION
                 +
                 "please first add your username and then a password for your wallet.";
-        showStandardOutput(indentation + MESSAGE);
+        showStandardOutput(INDENTATION + MESSAGE);
+    }
+
+    public static void showLoginInfo() {
+        final String MESSAGE = "Please enter your username and password to login your wallet";
+        showStandardOutput(INDENTATION + MESSAGE);
     }
 
     public static void showRegisterSuccessInfo() {
         final String MESSAGE = "Nice, a new wallet has been created for you, \n"
                 +
-                indentation
+                INDENTATION
                 +
                 "You can now login to it";
-        showStandardOutput(indentation + MESSAGE);
+        showStandardOutput(INDENTATION + MESSAGE);
+    }
+
+    public static void showEnterUsernamePrompt() {
+        final String MESSAGE = "Please enter your username: ";
+        System.out.print(MESSAGE);
+    }
+
+    public static void showEnterPasswordPrompt() {
+        Ui.showEmptyLine();
+        final String MESSAGE = "Please enter your password: ";
+        System.out.print(MESSAGE);
+    }
+
+    public static void showInvalidUsernamePrompt() {
+        showEmptyLine();
+        final String MESSAGE = "Username duplicated, Please enter another username: ";
+        System.out.print(MESSAGE);
+    }
+
+    public static void showInvalidPasswordPrompt() {
+        showEmptyLine();
+        final String MESSAGE = "Password too short, Please enter another password: ";
+        System.out.print(MESSAGE);
+    }
+
+    public static void showLoginResults(Boolean isLoginSuccess) {
+        final String MESSAGE = isLoginSuccess ? "Login successfully."
+                : "Username or Password not correct. Please try again.";
+        showStandardOutput(INDENTATION + MESSAGE);
     }
 
     public static void showStandardOutput(String output) {
@@ -61,22 +110,11 @@ public class Ui {
         System.out.println();
     }
 
-    public static void usernameLogin() {
-        final String MESSAGE =  "Please enter your username: ";
-        showStandardOutput(MESSAGE);
+    public static void showEmptyLine() {
+        System.out.println();
     }
 
-    public static void passwordLogin() {
-        final String MESSAGE = "Please enter your password: ";
-        showStandardOutput(MESSAGE);
-    }
-
-    public static void accountEntry() {
-        final String MESSAGE = "Welcome to your account\nPlease enter any commands";
-        showStandardOutput(MESSAGE);
-    }
-    
     private static void printSplitLine() {
-        System.out.println(indentation + "____________________________________________________________");
+        System.out.println(INDENTATION + "____________________________________________________________");
     }
 }

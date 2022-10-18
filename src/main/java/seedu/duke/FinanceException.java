@@ -2,7 +2,9 @@ package seedu.duke;
 
 public class FinanceException extends Throwable {
     public enum ExceptionCollection {
-        COMMAND_TYPE_EXCEPTION
+        COMMAND_TYPE_EXCEPTION,
+        USERFILE_CREATE_EXCEPTION,
+        USERFILE_WRITE_EXCEPTION,
         //UNKNOWN_EXCEPTION
     }
 
@@ -18,6 +20,12 @@ public class FinanceException extends Throwable {
         switch (exceptionType) {
         case COMMAND_TYPE_EXCEPTION:
             errorMessage = "Command type not correct.";
+            break;
+        case USERFILE_CREATE_EXCEPTION:
+            errorMessage = "Userfile created failed.";
+            break;
+        case USERFILE_WRITE_EXCEPTION:
+            errorMessage = "Userfile writing failed.";
             break;
         default:
             errorMessage = "Unknown exception happens.";
