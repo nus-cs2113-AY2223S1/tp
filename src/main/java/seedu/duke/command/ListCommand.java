@@ -98,7 +98,7 @@ public class ListCommand extends Command {
      */
     @Override
     public void execute(TransactionList transactions, Ui ui, Storage storage) throws MoolahException {
-        listLogger.setLevel(Level.WARNING);
+        listLogger.setLevel(Level.SEVERE);
         listLogger.log(Level.INFO, "List command starts passing the tags for filter, if any,"
                 + " into the listTransactions method.");
 

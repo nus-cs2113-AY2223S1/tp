@@ -99,6 +99,7 @@ public class ParameterParser {
     }
 
     //@@author wcwy
+
     /**
      * Checks if all the mandatory tags exists in the split user inputs.
      *

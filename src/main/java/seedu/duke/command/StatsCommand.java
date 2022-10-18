@@ -68,7 +68,7 @@ public class StatsCommand extends Command {
      */
     @Override
     public void execute(TransactionList transactions, Ui ui, Storage storage) throws MoolahException {
-        statsLogger.setLevel(Level.WARNING);
+        statsLogger.setLevel(Level.SEVERE);
         statsLogger.log(Level.INFO, "Stats command starts passing the type of statistics"
                 + " and transactions list into the listStatisticsByStatsType method.");
 
