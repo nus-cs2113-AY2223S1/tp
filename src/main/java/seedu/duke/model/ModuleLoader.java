@@ -17,21 +17,47 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 
 import seedu.duke.parser.LessonTypeParser;
 
-public class ModuleLoader {
+/**
+ * Loads module data from the resource file.
+ */
+class ModuleLoader {
 
-    public static String getStringOrEmpty(JsonNode node, String key) {
+    /**
+     * Helper function to convert a JsonNode object field to a string with a default value of "".
+     * @param node The JsonNode object
+     * @param key The key of the string data to be retrieved
+     * @return Returns the value indexed by the provided key or an empty string is the key is not present
+     */
+    private static String getStringOrEmpty(JsonNode node, String key) {
         return Optional.<JsonNode>ofNullable(node.get(key)).<String>map(JsonNode::asText).orElse("");
     }
 
-    public static int getIntOrEmpty(JsonNode node, String key) {
+    /**
+     * Helper function to convert a JsonNode object field to a string with a default value of 0.
+     * @param node The JsonNode object
+     * @param key The key of the int data to be retrieved
+     * @return Returns the value indexed by the provided key or 0 is the key is not present
+     */
+    private static int getIntOrEmpty(JsonNode node, String key) {
         return Optional.<JsonNode>ofNullable(node.get(key)).<Integer>map(JsonNode::asInt).orElse(0);
     }
 
-    public static <T> Stream<T> toStream(Iterator<T> iterator) {
+    /**
+     * Helper function to convert an iterator to a stream.
+     * @param <T> The type contained in the iterator
+     * @param iterator The iterator
+     * @return A stream containing the values being iterated over
+     */
+    private static <T> Stream<T> toStream(Iterator<T> iterator) {
         return StreamSupport.stream(((Iterable<T>) () -> iterator).spliterator(), false);
     }
 
-    public static List<Integer> jsonNodeAsIntList(JsonNode array) {
+    /**
+     * Helper function to convert an integer array in a JsonNode to an integer list in java.
+     * @param array The JsonNode representing the array
+     * @return The data as a list of integers
+     */
+    private static List<Integer> jsonNodeAsIntList(JsonNode array) {
         if (array == null || !array.isArray()) {
             return List.of();
         }
@@ -40,7 +66,12 @@ public class ModuleLoader {
                 .collect(Collectors.toList());
     }
 
-    public static RawLesson jsonNodeToRawLesson(JsonNode node) {
+    /**
+     * Parses a RawLesson object from a JsonNode.
+     * @param node The JsonNode object
+     * @return The data as a RawLesson object
+     */
+    private static RawLesson jsonNodeToRawLesson(JsonNode node) {
         return new RawLesson(node.get("classNo").asText(),
                 Day.valueOf(node.get("day").asText()),
                 node.get("endTime").asText(),
@@ -51,7 +82,12 @@ public class ModuleLoader {
                 node.get("size").asInt());
     }
 
-    public static SemesterData jsonNodeToSemesterData(JsonNode node) {
+    /**
+     * Parses a SemesterData object from a JsonNode.
+     * @param node The JsonNode object
+     * @return The data as a SemesterData object
+     */
+    private static SemesterData jsonNodeToSemesterData(JsonNode node) {
         return new SemesterData(
                 node.get("semester").asInt(),
                 toStream(((ArrayNode) node.get("timetable")).elements())
@@ -61,7 +97,12 @@ public class ModuleLoader {
                 getIntOrEmpty(node, "examDuration"));
     }
 
-    public static Module jsonNodeToModule(JsonNode node) {
+    /**
+     * Parses a Module object from a JsonNode.
+     * @param node The JsonNode object
+     * @return The data as a Module object
+     */
+    private static Module jsonNodeToModule(JsonNode node) {
         return new Module(
                 node.get("acadYear").asText(),
                 node.get("moduleCode").asText(),
@@ -79,7 +120,11 @@ public class ModuleLoader {
                 getStringOrEmpty(node, "preclusion"));
     }
 
-    public static List<Module> loadModules() {
+    /**
+     * Loads a list of modules from the resource file.
+     * @return A list of modules sorted by module code
+     */
+    static List<Module> loadModules() {
         ArrayList<Module> modules = new ArrayList<>();
         try {
             InputStream fullData = ModuleLoader.class.getClassLoader()

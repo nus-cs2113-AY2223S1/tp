@@ -31,7 +31,7 @@ public class Timetable {
 
     public static final String SUBSYSTEM_NAME = "timetable";
 
-    private boolean isStyleSimple;
+    // private boolean isStyleSimple;
     private boolean withColor;
     private int firstHour;
     private int lastHour;
@@ -55,7 +55,7 @@ public class Timetable {
         assert lessons != null : "List of lessons should not be null";
         logger = Logger.getLogger(SUBSYSTEM_NAME);
         logger.log(Level.FINE, "Creating a timetable with " + lessons.size() + " lessons");
-        this.isStyleSimple = isStyleSimple;
+        // this.isStyleSimple = isStyleSimple;
         this.withColor = SystemUtils.IS_OS_WINDOWS ? false : withColor;
         this.consoleBorder = ConsoleBorder.getInstance(isStyleSimple);
         this.sortedLessons = sortLessons(lessons);
