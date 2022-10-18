@@ -61,6 +61,8 @@ public class ConsoleInterface {
     private RecurringPaymentManager recurringPaymentManager;
     private CurrencyManager currencyManager;
 
+    private LocalStorage localStorage;
+
     /**
      * Initializes the console interface.
      */
@@ -81,6 +83,8 @@ public class ConsoleInterface {
         incomeManager = new IncomeManager();
         recurringPaymentManager = new RecurringPaymentManager();
         currencyManager = new CurrencyManager();
+
+        localStorage = new LocalStorage();
     }
 
     /**
@@ -265,7 +269,7 @@ public class ConsoleInterface {
         printBlankLine();
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_ADD_EXPENSE_SUCCESS);
 
-        LocalStorage.saveToFile(expenseManager);
+        localStorage.saveToFile(expenseManager.getExpenses(), expenseManager.getSortCommandSetting());
     }
 
     private void viewExpenseByExpenseIndex(int expenseIndex) {
@@ -333,7 +337,7 @@ public class ConsoleInterface {
 
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_DELETE_EXPENSE_SUCCESS);
 
-        LocalStorage.saveToFile(expenseManager);
+        localStorage.saveToFile(expenseManager.getExpenses(), expenseManager.getSortCommandSetting());
     }
 
     private void runCommandEditExpense(ConsoleCommandEditExpense consoleCommandEditExpense) {
@@ -397,14 +401,14 @@ public class ConsoleInterface {
         printBlankLine();
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_EDIT_EXPENSE_SUCCESS);
 
-        LocalStorage.saveToFile(expenseManager);
+        localStorage.saveToFile(expenseManager.getExpenses(), expenseManager.getSortCommandSetting());
     }
 
     private void runCommandSortExpense(ConsoleCommandSortExpense commandSortExpense) {
         expenseManager.updateSortExpenses(commandSortExpense);
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_SORTED_EXPENSE_SUCCESS);
 
-        LocalStorage.saveToFile(expenseManager);
+        localStorage.saveToFile(expenseManager.getExpenses(), expenseManager.getSortCommandSetting());
     }
 
     private void runCommandConvertCurrency(ConsoleCommandConvertCurrency consoleCommandConvertCurrency) {
@@ -431,7 +435,7 @@ public class ConsoleInterface {
         printInformationalMessage(convertExpenseToConsoleString(expense));
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_CONVERT_CURRENCY_SUCCESS);
 
-        LocalStorage.saveToFile(expenseManager);
+        localStorage.saveToFile(expenseManager.getExpenses(), expenseManager.getSortCommandSetting());
     }
 
     private void runCommandAddTarget(ConsoleCommandAddTarget consoleCommandAddTarget) {
@@ -549,7 +553,7 @@ public class ConsoleInterface {
      * Runs the command line interface which the user interacts with.
      */
     public void run() {
-        LocalStorage.loadFromFile(expenseManager);
+        localStorage.loadFromFile(expenseManager);
         CurrencyApi.getCurrencyApi(currencyManager);
 
         printBlankLine();
