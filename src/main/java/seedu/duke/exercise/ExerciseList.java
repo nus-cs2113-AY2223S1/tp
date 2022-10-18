@@ -17,6 +17,7 @@ public class ExerciseList {
         currentExerciseList.add(exercise);
     }
 
+
     public Exercise getCurrentExercise(int index) throws IllegalValueException {
         if (index >= getCurrentExerciseListSize() || index < 0) {
             throw new IllegalValueException("Exercise not found");
