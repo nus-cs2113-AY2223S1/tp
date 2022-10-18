@@ -1,18 +1,18 @@
 package seedu.duke.command;
 
-import seedu.duke.biometrics.Biometrics;
 import seedu.duke.Parser;
 import seedu.duke.Ui;
+import seedu.duke.biometrics.Biometrics;
 import seedu.duke.biometrics.WeightAndFat;
-import seedu.duke.biometrics.WeightAndFatList;
 import seedu.duke.exception.IllegalValueException;
 import seedu.duke.exercise.Exercise;
 import seedu.duke.exercise.ExerciseList;
-import seedu.duke.food.Food;
+import seedu.duke.exercise.StrengthExercise;
 import seedu.duke.food.FoodList;
 import seedu.duke.storage.Storage;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class ViewCommand extends Command {
 
@@ -30,7 +30,7 @@ public class ViewCommand extends Command {
     @Override
     public void execute() throws IllegalValueException {
         String[] argumentList = Parser.getArgumentList(arguments);
-        String viewType = argumentList[0];
+        String viewType = Parser.getClassType(argumentList);
         switch (viewType) {
         case ("biometrics"):
             viewBiometrics();
@@ -44,10 +44,14 @@ public class ViewCommand extends Command {
         case ("weight"):
             viewWeight();
             break;
+        case ("strength"):
+            viewStrengthExercise(argumentList);
+            break;
         default:
             handleInvalidViewType();
         }
     }
+
 
     private void handleInvalidViewType() throws IllegalValueException {
         throw new IllegalValueException("Invalid view command");
@@ -71,74 +75,43 @@ public class ViewCommand extends Command {
         }
     }
 
+    private void viewStrengthExercise(String[] argumentList) throws IllegalValueException {
+        handleInvalidViewExerciseCommand(argumentList);
+        ArrayList<Exercise> strengthExerciseArrayList = getStrengthExerciseArrayListByCommand(argumentList);
+        ui.showExerciseListCaption(strengthExerciseArrayList.size(), argumentList, "Strength exercises");
+        ui.outputExerciseList(strengthExerciseArrayList);
+    }
+
+    private ArrayList<Exercise> getStrengthExerciseArrayListByCommand(String[] argumentList) {
+        if (argumentList.length == 1) {
+            return (ArrayList<Exercise>) exerciseList.getCurrentExerciseList()
+                    .stream().filter(StrengthExercise.class::isInstance).collect(Collectors.toList());
+        }
+        return (ArrayList<Exercise>) exerciseList.getCompletedExerciseList()
+                .stream().filter(StrengthExercise.class::isInstance).collect(Collectors.toList());
+    }
+
+
     private void viewExercise(String[] argumentList) throws IllegalValueException {
+        handleInvalidViewExerciseCommand(argumentList);
+        ArrayList<Exercise> exerciseArrayList = getExerciseArrayListByCommand(argumentList);
+        ui.showExerciseListCaption(exerciseArrayList.size(), argumentList, "Exercises");
+        ui.outputExerciseList(exerciseArrayList);
+    }
+
+
+    private ArrayList<Exercise> getExerciseArrayListByCommand(String[] argumentList) {
+        if (argumentList.length == 1) {
+            return exerciseList.getCurrentExerciseList();
+        }
+        return exerciseList.getCompletedExerciseList();
+    }
+
+
+    private static void handleInvalidViewExerciseCommand(String[] argumentList) throws IllegalValueException {
         if (argumentList.length == 2 && !argumentList[1].equals("done") || argumentList.length > 2) {
             throw new IllegalValueException("Invalid view command");
         }
-        if (argumentList.length == 1) {
-            viewCurrentExercise();
-        } else if (argumentList.length == 2) {
-            viewCompletedExercise();
-        }
-    }
-
-    private void viewCompletedExercise() {
-        ArrayList<Exercise> completedExerciseArrayListList = exerciseList.getCompletedExerciseList();
-        Integer[] columnSpacingArray = {5, 8, 3, 8};
-        ui.printEmptyLine();
-        ui.showCompletedExerciseCaption(completedExerciseArrayListList.size());
-        getColumnsSpacing(completedExerciseArrayListList, columnSpacingArray);
-        generateTableHeader(columnSpacingArray);
-        printExerciseList(completedExerciseArrayListList, columnSpacingArray);
-        ui.printEmptyLine();
-    }
-
-    private void viewCurrentExercise() {
-        ui.printEmptyLine();
-        ArrayList<Exercise> exerciseArrayList = exerciseList.getCurrentExerciseList();
-        Integer[] columnSpacingArray = {5, 8, 3, 8};
-        ui.showCurrentExerciseCaption(exerciseArrayList.size());
-        getColumnsSpacing(exerciseArrayList, columnSpacingArray);
-        generateTableHeader(columnSpacingArray);
-        printExerciseList(exerciseArrayList, columnSpacingArray);
-        ui.printEmptyLine();
-    }
-
-    private void getColumnsSpacing(ArrayList<Exercise> exerciseArrayList, Integer[] columnSpacingArray) {
-        for (Exercise exercise : exerciseArrayList) {
-            columnSpacingArray[1] = Math.max(columnSpacingArray[1], exercise.getExerciseName().length());
-            columnSpacingArray[2] = Math.max(columnSpacingArray[2], exercise.getRepetitions() % 10 + 1);
-            columnSpacingArray[3] = Math.max(columnSpacingArray[3], exercise.getCaloriesBurnt() % 10 + 1);
-        }
-    }
-
-    private void printExerciseList(ArrayList<Exercise> exerciseArrayListList, Integer[] columnSpacingArray) {
-        for (int i = 0; i < exerciseArrayListList.size(); i++) {
-            Exercise exercise = exerciseArrayListList.get(i);
-            String index = addRightPadding(Integer.toString(i + 1), columnSpacingArray[0]) + " | ";
-            String exerciseName = addRightPadding(exercise.getExerciseName(), columnSpacingArray[1]) + " | ";
-            String repetitions = addRightPadding(Integer.toString(exercise.getRepetitions()),
-                    columnSpacingArray[2]) + " | ";
-            String calories = addRightPadding(Integer.toString(exercise.getCaloriesBurnt()),
-                    columnSpacingArray[3]) + " | ";
-            String status = exercise.getTaskStatus();
-            ui.printInSameLine(index, exerciseName, repetitions, calories, status);
-        }
-    }
-
-    private void generateTableHeader(Integer[] columnSpacingArray) {
-        String paddedIndex = addRightPadding("index", columnSpacingArray[0]) + " | ";
-        String paddedExercise = addRightPadding("Exercise", columnSpacingArray[1]) + " | ";
-        String paddedRep = addRightPadding("Rep", columnSpacingArray[2]) + " | ";
-        String paddedCalories = addRightPadding("Calories", columnSpacingArray[3]) + " | ";
-        String paddedStatus = "Status";
-        String line = paddedIndex + paddedExercise + paddedRep + paddedCalories + paddedStatus;
-        String separatorLine = "-".repeat(line.length());
-        ui.output(separatorLine, line, separatorLine);
-    }
-
-    private static String addRightPadding(String string, int numberOfSpace) {
-        return String.format("%-" + numberOfSpace + "s", string);
     }
 
     @Override

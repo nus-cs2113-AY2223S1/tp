@@ -6,22 +6,34 @@ set bio /29 /other /295 /25 /25
 view biometrics
 set biometrics /12 /female /200 /85 /0
 view biometrics
-add exercise /squat /10 /100
-add exercise /bench /10 /120
-add exercise /deadlift /12 /150
+add strength /squat /3 /10 /100
+add strength /bench /3 /10 /120
+add strength /deadlift /3 /12 /150
 view exercise
+view strength
 view exercise /done
+view strength /done
 view exer
 view exercise /do
+view strength /do
 view exercise donea
-add exercise /press /10 /200
+view strength donea
+add strength /press /5 /5 /200
+add strength /press /3 /12 /200
 mark done /2
 mark done /5
+view exercise /done
+view strength /done
 view exercise
+view strength
+mark done /3
+mark undone /3
+view exercise /done
+view strength /done
 mark done /1
 view exercise /done
-mark undone /3
-mark undone /2
-mark done /1
+view strength /done
 view exercise
+view strength
+find strength /press
 exit
