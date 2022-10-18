@@ -23,7 +23,7 @@ class DukeTest {
             content = input.substring(length + 1);
         }
         String finalContent = content;
-        assertThrows(InvalidCommandWordException.class, ()-> Parser.specificCase(splitText[0], finalContent));
+        assertThrows(InvalidCommandWordException.class, () -> Parser.specificCase(splitText[0], finalContent));
     }
 
     @Test
@@ -37,7 +37,7 @@ class DukeTest {
             content = input.substring(length + 1);
         }
         String finalContent = content;
-        assertThrows(InvalidInputFormatException.class, ()-> Parser.specificCase(splitText[0], finalContent));
+        assertThrows(InvalidInputFormatException.class, () -> Parser.specificCase(splitText[0], finalContent));
     }
 
     @Test
@@ -51,7 +51,7 @@ class DukeTest {
             content = input.substring(length + 1);
         }
         String finalContent = content;
-        assertThrows(InvalidInputContentException.class, ()-> Parser.specificCase(splitText[0], finalContent));
+        assertThrows(InvalidInputContentException.class, () -> Parser.specificCase(splitText[0], finalContent));
     }
 
     @Test
