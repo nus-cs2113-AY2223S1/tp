@@ -7,6 +7,7 @@ import seedu.duke.model.Module;
 import seedu.duke.model.RawLesson;
 import seedu.duke.model.SelectedModule;
 import seedu.duke.model.Timetable;
+import seedu.duke.parser.Parser;
 import seedu.duke.utils.State;
 import seedu.duke.utils.Storage;
 import seedu.duke.utils.Ui;
@@ -17,9 +18,17 @@ import java.util.Map;
 
 public class ViewTimetableCommand extends Command {
     public static final String COMMAND_WORD = "view";
+    private boolean showFancy;
+    private boolean showSimple;
 
-    public ViewTimetableCommand(String[] input) {
-        super(input);
+    public ViewTimetableCommand(String input) {
+        super(input.split("\\s+"));
+        var params = Parser.parseParams(input);
+        showFancy = params.containsKey("fancy");
+        showSimple = params.containsKey("simple");
+        // if (showFancy && showSimple) {
+        //     throw new Exception("Timetable cannot be both simple and fancy!");
+        // }
     }
 
     @Override
@@ -39,7 +48,8 @@ public class ViewTimetableCommand extends Command {
             ui.displayUi();
             return;
         }
-        Timetable timetable = new Timetable(lessons, false, true);
+        Timetable timetable = showFancy ? new Timetable(lessons, true, false) : 
+                (showSimple ? new Timetable(lessons, false, true) : new Timetable(lessons));
         ui.addMessage(timetable.toString());
         ui.displayUi();
     }
