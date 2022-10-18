@@ -9,7 +9,9 @@ import recipeditor.command.ExitCommand;
 import recipeditor.command.InvalidCommand;
 import recipeditor.command.ViewCommand;
 
+import recipeditor.recipe.Recipe;
 import recipeditor.ui.AddMode;
+import recipeditor.ui.AddModeText;
 import recipeditor.ui.Ui;
 
 public class Parser {
@@ -35,13 +37,15 @@ public class Parser {
     }
 
     private static Command parseAddCommand() {
-        AddMode add = new AddMode(); // Switch to Add Mode in here
-        add.enterAddMode();
-        add.exitAddMode();
-        //Recipe addedRecipe = add.getRecipe();
-        //Storage.loadRecipeToDataFile(addedRecipe);
-        Ui.showMessage("Is the recipe valid? " + add.isValid);
-        return new AddCommand(add.isValid, add.addedRecipe); // Pass validty and potential recipe to AddCommand
+
+        AddModeText add = new AddModeText();
+        add.enterAddModeText();
+
+        //        AddMode add = new AddMode(); // Switch to Add Mode in here
+        //        add.enterAddMode();
+        //        add.exitAddMode();
+        //        Ui.showMessage("Is the recipe valid? " + add.isValid);
+        return new AddCommand(true, new Recipe()); // Dummy
     }
 
     private static Command parseListAlterCommand(String[] parsed, String commandWord) {
@@ -61,11 +65,4 @@ public class Parser {
         return new InvalidCommand();
     }
 
-    //    private void checkForExcessArgument(String[] args, int length)
-    //            throws ExcessArgumentException {
-    //        if (args.length > length) {
-    //            throw new ExcessArgumentException();
-    //        }
-    //    }
-    
 }

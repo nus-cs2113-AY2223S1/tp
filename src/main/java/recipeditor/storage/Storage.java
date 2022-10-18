@@ -39,24 +39,22 @@ public class Storage {
         }
     }
 
-    /** Create storage folder for recipes */
-     public static void createDataFolder() {
-         Path path = Paths.get(Storage.DATA_STORAGE);
-         try{
-             Files.createDirectories(path);
-             Ui.showMessage("Directory created");
-         } catch (IOException e){
-             Ui.showMessage("Error creating folder");
-         }
-     }
+    /**
+     * Create storage folder for recipes.
+     */
+    public static void createDataFolder() {
+        Path path = Paths.get(Storage.DATA_STORAGE);
+        try {
+            Files.createDirectories(path);
+            Ui.showMessage("Directory created");
+        } catch (IOException e) {
+            Ui.showMessage("Error creating folder");
+        }
+    }
 
-     public static void saveRecipe(){
+    public static void saveRecipe() {
 
-     }
-
-
-
-
+    }
 
 
     public static void loadRecipeToDataFile(Recipe recipe) {

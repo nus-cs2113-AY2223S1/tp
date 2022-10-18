@@ -29,8 +29,6 @@ public class Recipeditor {
      */
     private static void start(String[] args) {
         Ui.showGreeting();
-//        Storage.createDataFile();
-//        Storage.loadRecipesFromDataFile();
         Storage.createDataFolder();
     }
 
