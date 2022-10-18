@@ -11,7 +11,6 @@ import seedu.duke.exception.UndefinedSubCommandTypeException;
 
 import java.util.ArrayList;
 
-import static seedu.duke.CommandStructure.CLIENT_FLAG;
 import static seedu.duke.CommandStructure.COMMAND_ADD;
 import static seedu.duke.CommandStructure.COMMAND_CHECK;
 import static seedu.duke.CommandStructure.COMMAND_DELETE;
@@ -19,7 +18,6 @@ import static seedu.duke.CommandStructure.COMMAND_EXIT;
 import static seedu.duke.CommandStructure.COMMAND_LIST;
 import static seedu.duke.CommandStructure.COMMAND_PAIR;
 import static seedu.duke.CommandStructure.COMMAND_UNPAIR;
-import static seedu.duke.CommandStructure.PROPERTY_FLAG;
 import static seedu.duke.Messages.MESSAGE_INCORRECT_LIST_DETAILS;
 import static seedu.duke.Messages.MESSAGE_MISSING_SUB_COMMAND_TYPE;
 
@@ -35,6 +33,8 @@ public class ParserManager {
     private static final int SUB_COMMAND_INDEX = 0;
     private static final int COMMAND_FLAG_INDEX = 1;
     private static final int COMMAND_DESCRIPTION_INDEX = 1;
+    private static final String PROPERTY_FLAG = "-property";
+    private static final String CLIENT_FLAG = "-client";
 
     public ParserManager(ClientList clientL, PropertyList propertyL, PairingList pairingL) {
         clientList = clientL;
