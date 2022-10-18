@@ -68,7 +68,7 @@ public class LocalStorage {
 
     /**
      * This method reads saved data and configurations from a load file
-     * and add it to the list that stores expenses
+     * and add it to the list that stores expenses.
      *
      * @param expenseManager arraylist to store expenses
      */
@@ -119,7 +119,7 @@ public class LocalStorage {
     }
 
     /**
-     * This method takes in an expense node and convert it into an Expense object
+     * This method takes in an expense node and convert it into an Expense object.
      *
      * @param node containing information from an expense
      * @return an expense created with data by node
@@ -147,7 +147,7 @@ public class LocalStorage {
     }
 
     /**
-     * This method saves current data into a xml file
+     * This method saves current data into a xml file.
      *
      * @param savedExpenses arraylist containing all expenses
      * @param sortCommandSetting configurations for sorting
@@ -158,7 +158,7 @@ public class LocalStorage {
             DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
             Document doc = docBuilder.newDocument();
-            Element rootElement = doc.createElement(XML_ROOT);
+            Element rootElement = doc.createElement(Xml_ROOT);
             doc.appendChild(rootElement);
             Element sortConfig = doc.createElement(XML_SORTCONFIG_ELEMENT);
             sortConfig.setAttribute(XML_SORTCONFIG_TYPE_ATTRIBUTE, sortCommandSetting.getType());
