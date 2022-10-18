@@ -2,7 +2,7 @@
 
 ## Acknowledgements
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+AddressBook-Level3 https://github.com/se-edu/addressbook-level3
 
 ## Design & implementation
 
@@ -20,10 +20,17 @@
 
 ## User Stories
 
-|Version| As a ... | I want to ... | So that I can ...|
-|--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+|Version| As a ... | I want to ...                    | So that I can ...                            |
+|--------|---------|----------------------------------|----------------------------------------------|
+|v1.0|user| add movies to a list             | keep track of which movies I have watched.   |
+|v1.0|user| add ratings out of 10 to a movie | remember how much I enjoyed the movie.       |
+|v1.0|user| remove movies from my list       | delete erroneous entries.                    |
+|v1.0|user| list the movies I have added       | view what movies I have watched              |
+|v1.0|user| enter the date I watched the movie       | recall when I watched the movie.             |
+|v2.0|user| arrange my review list by worst or best ratings        | see the shows that I like or hate the most.  |
+|v2.0|user| star/favorite a movie        | mark shows that I would like to watch again. |
+|v2.0|user| display a list that displays starred movies and shows        | view which are my favorites.|
+
 
 ## Non-Functional Requirements
 

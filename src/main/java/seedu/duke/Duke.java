@@ -3,19 +3,32 @@ package seedu.duke;
 import java.util.Scanner;
 
 public class Duke {
-    /**
-     * Main entry-point for the java.duke.Duke application.
-     */
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("What is your name?");
+    private Storage storage;
+    private Ui ui;
+    private Parser parser;
+    private ReviewList reviewList;
+    private String filepath = "data/reviews.txt";
+    
+    public Duke() {
+        // Creating the helper objects that the Duke instance will need
+        ui = new Ui();
+        reviewList = new ReviewList();
+        parser = new Parser(reviewList);
+    }
 
-        Scanner in = new Scanner(System.in);
-        System.out.println("Hello " + in.nextLine());
+    public void run() {
+        ui.greetUser();
+        Scanner userInputScanner = new Scanner(System.in);         
+        
+        while (ui.isExit == false) {
+            parser.processUserInput(ui.getInput(userInputScanner));
+        }
+        
+        userInputScanner.close();
+        ui.printExitGreeting();
+    }
+
+    public static void main(String[] args) {
+        new Duke().run();
     }
 }
