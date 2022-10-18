@@ -1,0 +1,76 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+hide circle
+skinparam classAttributeIconSize 0
+
+class Duke {
+    - storage: Storage
+    - transactions: TransactionList
+    - ui: Ui
+
+    +run()
+    +main()
+}
+
+class "CommandParser"{
+    - EMPTY_STRING: String
+    - DELIMITER: String
+    - SPLIT_POSITION: int
+    - parserLogger: Logger
+
+    +parse(): Command
+    +splitInput(): String[]
+    +getCommand(): Command
+}
+
+class "ParameterParser"{
+    - EMPTY_STRING: String
+    - DELIMITER: String
+    - SPLIT_POSITION: int
+    - MINIMUM_TAG_LENGTH: int
+    - parserLogger: Logger
+
+    +parse()
+    +checkMandatoryTagsExist()
+    +checkUnsupportedTagsNotExist()
+    +checkDuplicateTagsNotExist()
+    +checkParameterNotEmpty()
+    +findMatchingTagAmongInputs(): boolean
+    +findIfParameterTagAmongTags(): boolean
+    +setCommand()
+    +setParameter()
+    +parseTypeTagForListing(): String
+    +parseTypeTagForAdding(): String
+    +parseCategoryTag(): String
+    +parseAmountTag(): int
+    +parseDateTag(): LocalDate
+    +parseEntryTag(): int
+    +parseHelpOptionTag(): boolean
+    +parseStatsTypeTag(): String
+    +containNumeric(): boolean
+    +containAlphabet(): boolean
+}
+
+class "{abstract}\n Command"{
+
+    + COMMAND_WORD: String
+    + COMMAND_DESCRIPTION: String
+    + COMMAND_USAGE: String
+    + COMMAND_PARAMETERS_INFO: String
+
+    - type: String
+    - category: String
+    - description: String
+    - amount: int
+    - date: LocalDate
+
+    +getMandatoryTags()
+    +{abstract}execute()
+}
+
+Duke --> "CommandParser"
+"CommandParser" --> "ParameterParser"
+"CommandParser" --> "{abstract}\n Command"
+
+@enduml
