@@ -48,8 +48,14 @@ public class ViewTimetableCommand extends Command {
             ui.displayUi();
             return;
         }
-        Timetable timetable = showFancy ? new Timetable(lessons, true, false) : 
-                (showSimple ? new Timetable(lessons, false, true) : new Timetable(lessons));
+        Timetable timetable;
+        if (showFancy) {
+            timetable = new Timetable(lessons, true, false);
+        } else if (showSimple) {
+            timetable = new Timetable(lessons, false, true);
+        } else {
+            timetable = new Timetable(lessons);
+        }
         ui.addMessage(timetable.toString());
         ui.displayUi();
     }
