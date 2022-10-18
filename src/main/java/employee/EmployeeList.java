@@ -21,19 +21,14 @@ public class EmployeeList {
     }
 
     public static void removeEmployee(int employeeId) {
-        boolean removeFlag = false;
         for (Employee employee : employees) {
             if (employee.getEmployeeId() == employeeId) {
                 System.out.println("Noted. I've removed this employee:");
                 System.out.println(employee.getEmployeeName());
                 System.out.println("Now you have " + (employees.size() - 1) + " employees in the employee list.");
                 employees.remove(employee);
-                removeFlag = true;
                 break;
             }
-        }
-        if (!removeFlag) {
-            System.out.println("Sorry, no corresponding employee found.");
         }
     }
 }
