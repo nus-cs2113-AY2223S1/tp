@@ -32,7 +32,7 @@ import seedu.moneygowhere.exceptions.ConsoleParserCommandConvertCurrencyInvalidE
 import seedu.moneygowhere.exceptions.ConsoleParserCommandDeleteExpenseInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandEditExpenseInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandNotFoundException;
-import seedu.moneygowhere.exceptions.ConsoleParserCommandSortExpenseInvalidTypeException;
+import seedu.moneygowhere.exceptions.ConsoleParserCommandSortExpenseInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandViewExpenseInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandViewRecurringPaymentInvalidException;
 import seedu.moneygowhere.exceptions.CurrencyInvalidException;
@@ -296,6 +296,10 @@ public class ConsoleInterface {
     private void viewExpense() {
         ArrayList<Expense> expenses = expenseManager.getExpenses();
 
+        if (expenses.isEmpty()) {
+            printInformationalMessage(Messages.COMMAND_VIEW_EXPENSE_EMPTY_LIST);
+        }
+
         for (int index = 0; index < expenses.size(); index++) {
             Expense expense = expenses.get(index);
 
@@ -424,18 +428,7 @@ public class ConsoleInterface {
         consoleCommandConvertCurrency.changeCurrency(expense, currencyManager);
         expenseManager.sortExpenses();
 
-        DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern(
-                Configurations.CONSOLE_INTERFACE_DATE_TIME_OUTPUT_FORMAT
-        );
-        String expenseStr = "";
-        expenseStr += "---- EXPENSE INDEX " + expenseIndex + " ----\n";
-        expenseStr += "Name          : " + expense.getName() + "\n";
-        expenseStr += "Date and Time : " + expense.getDateTime().format(dateTimeFormat) + "\n";
-        expenseStr += "Description   : " + expense.getDescription() + "\n";
-        expenseStr += "Amount        : " + expense.getAmount() + " " + expense.getCurrency() + "\n";
-        expenseStr += "Category      : " + expense.getCategory() + "\n";
-        expenseStr += "Remarks       : " + expense.getRemarks() + "\n";
-        printInformationalMessage(expenseStr);
+        printInformationalMessage(convertExpenseToConsoleString(expense));
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_CONVERT_CURRENCY_SUCCESS);
 
         LocalStorage.saveToFile(expenseManager);
@@ -540,7 +533,7 @@ public class ConsoleInterface {
                  | ConsoleParserCommandViewExpenseInvalidException
                  | ConsoleParserCommandDeleteExpenseInvalidException
                  | ConsoleParserCommandEditExpenseInvalidException
-                 | ConsoleParserCommandSortExpenseInvalidTypeException
+                 | ConsoleParserCommandSortExpenseInvalidException
                  | ConsoleParserCommandConvertCurrencyInvalidException
                  | ConsoleParserCommandAddTargetInvalidException
                  | ConsoleParserCommandAddIncomeInvalidException
