@@ -29,7 +29,7 @@ This sector describe how features are implemented, where readers can get insight
 ### User-related Features
 
 #### Add a user
->> This feature allows user to add a new user to their list and upon successful adding, a confirmation response about the new user will be sent from Ui to user
+> This feature allows user to add a new user to their list and upon successful adding, a confirmation response about the new user will be sent from Ui to user
 
 Given below is an example usage scenario and how the command mechanism behaves at each step.
 
@@ -46,7 +46,7 @@ The following sequence diagram shows how the add user operation works:
 
 #### Remove a user
 
->>This feature allows user to remove a user to their list and upon successful removing, a confirmation response about the deleted user will be sent from Ui to user
+>This feature allows user to remove a user to their list and upon successful removing, a confirmation response about the deleted user will be sent from Ui to user
 
 Given below is an example usage scenario and how the command mechanism behaves at each step.
 
@@ -68,7 +68,7 @@ The following sequence diagram shows how the remove user operation works:
 ### Item-related Features 
 
 #### Add an item 
->>This feature allows user to add a new item to their list and upon successful adding, a confirmation response about the new item will be sent from Ui to user
+>This feature allows user to add a new item to their list and upon successful adding, a confirmation response about the new item will be sent from Ui to user
 
 Given below is an example usage scenario and how the command mechanism behaves at each step.
 
@@ -84,7 +84,7 @@ The following sequence diagram shows how the add item operation works:
 ![addUserSequence](images/AddItemSequence.png)
 
 #### Remove an item
->>This feature allows user to remove an item to their list and upon successful removing, a confirmation response about the deleted item will be sent from Ui to user
+>This feature allows user to remove an item to their list and upon successful removing, a confirmation response about the deleted item will be sent from Ui to user
 
 Given below is an example usage scenario and how the command mechanism behaves at each step.
 
@@ -104,7 +104,7 @@ The following sequence diagram shows how the remove item operation works:
 ### Transaction-related Features
 
 #### Add a Transaction
->>This feature allows user to add a new transaction to their list and upon successful adding, a confirmation response about the new transaction will be sent from Ui to user
+>This feature allows user to add a new transaction to their list and upon successful adding, a confirmation response about the new transaction will be sent from Ui to user
 
 Given below is an example usage scenario and how the command mechanism behaves at each step.
 
@@ -120,7 +120,7 @@ The following sequence diagram shows how the add transaction operation works:
 ![addUserSequence](images/AddTransactionSequence.png)
 
 #### Remove a Transaction
->>This feature allows user to remove a transaction to their list and upon successful removing, a confirmation response about the deleted transaction will be sent from Ui to user
+>This feature allows user to remove a transaction to their list and upon successful removing, a confirmation response about the deleted transaction will be sent from Ui to user
 
 Given below is an example usage scenario and how the command mechanism behaves at each step.
 
@@ -138,7 +138,7 @@ The following sequence diagram shows how the remove transaction operation works:
 ![removeTransactionSequence](images/RemoveTransactionSequence.png)
 
 #### View Transactions By Status
->> The viewTransactionsByStatus feature is facilitated by the TransactionList class. It extends the command class to add an additional command for users to view the history of finished or ongoing transactions for recording purposes. The feature implements the following commands:
+> The viewTransactionsByStatus feature is facilitated by the TransactionList class. It extends the command class to add an additional command for users to view the history of finished or ongoing transactions for recording purposes. The feature implements the following commands:
 * `find-tx /s finished`: Lists down all the transactions that have been completed.
 * `find-tx /s unfinished`: Lists down all the transactions that are currently still ongoing.
 
@@ -154,7 +154,7 @@ Step 4: Once the transactionList has been completely iterated through, a message
 
 The following sequence diagram shows how the viewTransactionsByStatus operation works:
 
-![viewTransactionsByStatus](https://user-images.githubusercontent.com/47519031/196048142-2f99254e-143c-484b-888e-fde270330368.png)
+![viewTransactionsByStatus](images/ViewTransactionByStatusSequence.png)
 
 ### Help Command
 ### Exit Command
