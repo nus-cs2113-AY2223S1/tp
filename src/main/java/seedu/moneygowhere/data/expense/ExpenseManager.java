@@ -52,7 +52,7 @@ public class ExpenseManager {
     public ArrayList<Expense> getExpensesByCategory(String categoryName) {
         ArrayList<Expense> expensesByCategory = new ArrayList<>();
 
-        for (Expense expense: expenses) {
+        for (Expense expense : expenses) {
             if (expense.getCategory().equals(categoryName)) {
                 expensesByCategory.add(expense);
             }

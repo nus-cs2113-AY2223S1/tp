@@ -14,8 +14,8 @@ import seedu.moneygowhere.commands.ConsoleCommandViewExpense;
 import seedu.moneygowhere.commands.ConsoleCommandViewRecurringPayment;
 import seedu.moneygowhere.common.Configurations;
 import seedu.moneygowhere.common.Messages;
-import seedu.moneygowhere.data.currency.CurrencyManager;
 import seedu.moneygowhere.currency.CurrencyApi;
+import seedu.moneygowhere.data.currency.CurrencyManager;
 import seedu.moneygowhere.data.expense.Expense;
 import seedu.moneygowhere.data.expense.ExpenseManager;
 import seedu.moneygowhere.data.income.Income;
@@ -158,18 +158,83 @@ public class ConsoleInterface {
     }
 
     /**
-     * Prints a recurring payment to standard output.
+     * Converts an expense to a console string for use by {@link ConsoleInterface}.
      *
-     * @param recurringPayment Recurring payment to print.
+     * @param expense expense to convert.
+     * @return Expense formatted as a console string.
      */
-    public static void printRecurringPayment(RecurringPayment recurringPayment) {
+    public static String convertExpenseToConsoleString(Expense expense) {
+        DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern(
+                Configurations.CONSOLE_INTERFACE_DATE_TIME_OUTPUT_FORMAT
+        );
+
+        String expenseStr = "";
+        expenseStr += "Name          : " + expense.getName() + "\n";
+        expenseStr += "Date and Time : " + expense.getDateTime().format(dateTimeFormat) + "\n";
+        expenseStr += "Description   : " + expense.getDescription() + "\n";
+        expenseStr += "Amount        : " + expense.getAmount() + "\n";
+        expenseStr += "Category      : " + expense.getCategory() + "\n";
+        expenseStr += "Remarks       : " + expense.getRemarks() + "\n";
+        expenseStr += "Currency      : " + expense.getCurrency();
+
+        return expenseStr;
+    }
+
+    /**
+     * Converts a target to a console string for use by {@link ConsoleInterface}.
+     *
+     * @param target target to convert.
+     * @return Target formatted as a console string.
+     */
+    public static String convertTargetToConsoleString(Target target) {
+        DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern(
+                Configurations.CONSOLE_INTERFACE_DATE_TIME_OUTPUT_FORMAT
+        );
+
+        String targetStr = "";
+        targetStr += "Name          : " + target.getName() + "\n";
+        targetStr += "Date and Time : " + target.getDateTime().format(dateTimeFormat) + "\n";
+        targetStr += "Description   : " + target.getDescription() + "\n";
+        targetStr += "Amount        : " + target.getAmount() + "\n";
+        targetStr += "Current Amount: " + target.getCurrentAmount();
+
+        return targetStr;
+    }
+
+    /**
+     * Converts an income to a console string for use by {@link ConsoleInterface}.
+     *
+     * @param income Income to convert.
+     * @return Income formatted as a console string.
+     */
+    public static String convertIncomeToConsoleString(Income income) {
+        DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern(
+                Configurations.CONSOLE_INTERFACE_DATE_TIME_OUTPUT_FORMAT
+        );
+
+        String incomeStr = "";
+        incomeStr += "Name          : " + income.getName() + "\n";
+        incomeStr += "Date and Time : " + income.getDateTime().format(dateTimeFormat) + "\n";
+        incomeStr += "Description   : " + income.getDescription() + "\n";
+        incomeStr += "Amount        : " + income.getAmount();
+
+        return incomeStr;
+    }
+
+    /**
+     * Converts a recurring payment to a console string for use by {@link ConsoleInterface}.
+     *
+     * @param recurringPayment Recurring payment to convert.
+     * @return Recurring payment formatted as a console string.
+     */
+    public static String convertRecurringPaymentToConsoleString(RecurringPayment recurringPayment) {
         String recurringPaymentStr = "";
         recurringPaymentStr += "Name            : " + recurringPayment.getName() + "\n";
         recurringPaymentStr += "Interval (Days) : " + recurringPayment.getInterval() + "\n";
         recurringPaymentStr += "Description     : " + recurringPayment.getDescription() + "\n";
         recurringPaymentStr += "Amount          : " + recurringPayment.getAmount();
 
-        printInformationalMessage(recurringPaymentStr);
+        return recurringPaymentStr;
     }
 
     private void runCommandBye(ConsoleCommandBye consoleCommandBye) {
@@ -196,43 +261,11 @@ public class ConsoleInterface {
                 consoleCommandAddExpense.getCurrency());
         expenseManager.addExpense(expense);
 
-        DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern(
-                Configurations.CONSOLE_INTERFACE_DATE_TIME_OUTPUT_FORMAT
-        );
-
-        String expenseStr = "";
-        expenseStr += "Name          : " + expense.getName() + "\n";
-        expenseStr += "Date and Time : " + expense.getDateTime().format(dateTimeFormat) + "\n";
-        expenseStr += "Description   : " + expense.getDescription() + "\n";
-        expenseStr += "Amount        : " + expense.getAmount() + " " + expense.getCurrency() + "\n";
-        expenseStr += "Category      : " + expense.getCategory() + "\n";
-        expenseStr += "Remarks       : " + expense.getRemarks() + "\n";
-        printInformationalMessage(expenseStr);
-
+        printInformationalMessage(convertExpenseToConsoleString(expense));
+        printBlankLine();
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_ADD_EXPENSE_SUCCESS);
 
         LocalStorage.saveToFile(expenseManager);
-    }
-
-    private void viewExpense() {
-        ArrayList<Expense> expenses = expenseManager.getExpenses();
-
-        for (int index = 0; index < expenses.size(); index++) {
-            Expense expense = expenses.get(index);
-
-            DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern(
-                    Configurations.CONSOLE_INTERFACE_DATE_TIME_OUTPUT_FORMAT
-            );
-            String expenseStr = "";
-            expenseStr += "---- EXPENSE INDEX " + index + " ----\n";
-            expenseStr += "Name          : " + expense.getName() + "\n";
-            expenseStr += "Date and Time : " + expense.getDateTime().format(dateTimeFormat) + "\n";
-            expenseStr += "Description   : " + expense.getDescription() + "\n";
-            expenseStr += "Amount        : " + expense.getAmount() + " " + expense.getCurrency() + "\n";
-            expenseStr += "Category      : " + expense.getCategory() + "\n";
-            expenseStr += "Remarks       : " + expense.getRemarks() + "\n";
-            printInformationalMessage(expenseStr);
-        }
     }
 
     private void viewExpenseByExpenseIndex(int expenseIndex) {
@@ -241,21 +274,12 @@ public class ConsoleInterface {
             expense = expenseManager.getExpense(expenseIndex);
         } catch (ExpenseManagerExpenseNotFoundException exception) {
             printErrorMessage(exception.getMessage());
+
             return;
         }
 
-        DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern(
-                Configurations.CONSOLE_INTERFACE_DATE_TIME_OUTPUT_FORMAT
-        );
-        String expenseStr = "";
-        expenseStr += "---- EXPENSE INDEX " + expenseIndex + " ----\n";
-        expenseStr += "Name          : " + expense.getName() + "\n";
-        expenseStr += "Date and Time : " + expense.getDateTime().format(dateTimeFormat) + "\n";
-        expenseStr += "Description   : " + expense.getDescription() + "\n";
-        expenseStr += "Amount        : " + expense.getAmount() + " " + expense.getCurrency() + "\n";
-        expenseStr += "Category      : " + expense.getCategory() + "\n";
-        expenseStr += "Remarks       : " + expense.getRemarks() + "\n";
-        System.out.println(expenseStr);
+        printInformationalMessage("---- EXPENSE INDEX " + expenseIndex + " ----");
+        printInformationalMessage(convertExpenseToConsoleString(expense));
     }
 
     private void viewExpenseByExpenseCategory(String expenseCategory) {
@@ -264,18 +288,19 @@ public class ConsoleInterface {
         for (int index = 0; index < expenses.size(); index++) {
             Expense expense = expenses.get(index);
 
-            DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern(
-                    Configurations.CONSOLE_INTERFACE_DATE_TIME_OUTPUT_FORMAT
-            );
-            String expenseStr = "";
-            expenseStr += "---- EXPENSE INDEX " + index + " ----\n";
-            expenseStr += "Name          : " + expense.getName() + "\n";
-            expenseStr += "Date and Time : " + expense.getDateTime().format(dateTimeFormat) + "\n";
-            expenseStr += "Description   : " + expense.getDescription() + "\n";
-            expenseStr += "Amount        : " + expense.getAmount() + " " + expense.getCurrency() + "\n";
-            expenseStr += "Category      : " + expense.getCategory();
-            expenseStr += "Remarks       : " + expense.getRemarks() + "\n";
-            printInformationalMessage(expenseStr);
+            printInformationalMessage("---- EXPENSE INDEX " + index + " ----");
+            printInformationalMessage(convertExpenseToConsoleString(expense));
+        }
+    }
+
+    private void viewExpense() {
+        ArrayList<Expense> expenses = expenseManager.getExpenses();
+
+        for (int index = 0; index < expenses.size(); index++) {
+            Expense expense = expenses.get(index);
+
+            printInformationalMessage("---- EXPENSE INDEX " + index + " ----");
+            printInformationalMessage(convertExpenseToConsoleString(expense));
         }
     }
 
@@ -363,24 +388,14 @@ public class ConsoleInterface {
             return;
         }
 
-        DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern(
-                Configurations.CONSOLE_INTERFACE_DATE_TIME_OUTPUT_FORMAT
-        );
-        String expenseStr = "";
-        expenseStr += "---- EXPENSE INDEX " + expenseIndex + " ----\n";
-        expenseStr += "Name          : " + newExpense.getName() + "\n";
-        expenseStr += "Date and Time : " + newExpense.getDateTime().format(dateTimeFormat) + "\n";
-        expenseStr += "Description   : " + newExpense.getDescription() + "\n";
-        expenseStr += "Amount        : " + newExpense.getAmount() + " " + newExpense.getCurrency() + "\n";
-        expenseStr += "Category      : " + newExpense.getCategory() + "\n";
-        expenseStr += "Remarks       : " + newExpense.getRemarks() + "\n";
-        printInformationalMessage(expenseStr);
+        printInformationalMessage("---- EXPENSE INDEX " + expenseIndex + " ----");
+        printInformationalMessage(convertExpenseToConsoleString(newExpense));
+        printBlankLine();
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_EDIT_EXPENSE_SUCCESS);
 
         LocalStorage.saveToFile(expenseManager);
     }
 
-    @SuppressWarnings("Java8ListSort")
     private void runCommandSortExpense(ConsoleCommandSortExpense commandSortExpense) {
         expenseManager.updateSortExpenses(commandSortExpense);
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_SORTED_EXPENSE_SUCCESS);
@@ -435,17 +450,8 @@ public class ConsoleInterface {
                 consoleCommandAddTarget.getCurrentAmount());
         targetManager.addTarget(target);
 
-        DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern(
-                Configurations.CONSOLE_INTERFACE_DATE_TIME_OUTPUT_FORMAT
-        );
-        String targetStr = "";
-        targetStr += "Name          : " + target.getName() + "\n";
-        targetStr += "Date and Time : " + target.getDateTime().format(dateTimeFormat) + "\n";
-        targetStr += "Description   : " + target.getDescription() + "\n";
-        targetStr += "Amount        : " + target.getAmount() + "\n";
-        targetStr += "Current Amount: " + target.getCurrentAmount() + "\n";
-        printInformationalMessage(targetStr);
-
+        printInformationalMessage(convertTargetToConsoleString(target));
+        printBlankLine();
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_ADD_TARGET_SUCCESS);
 
         /*
@@ -462,16 +468,8 @@ public class ConsoleInterface {
                 consoleCommandAddIncome.getAmount());
         incomeManager.addIncome(income);
 
-        DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern(
-                Configurations.CONSOLE_INTERFACE_DATE_TIME_OUTPUT_FORMAT
-        );
-        String incomeStr = "";
-        incomeStr += "Name          : " + income.getName() + "\n";
-        incomeStr += "Date and Time : " + income.getDateTime().format(dateTimeFormat) + "\n";
-        incomeStr += "Description   : " + income.getDescription() + "\n";
-        incomeStr += "Amount        : " + income.getAmount() + "\n";
-        printInformationalMessage(incomeStr);
-
+        printInformationalMessage(convertIncomeToConsoleString(income));
+        printBlankLine();
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_ADD_INCOME_SUCCESS);
 
         /*
@@ -490,7 +488,7 @@ public class ConsoleInterface {
 
         recurringPaymentManager.addRecurringPayment(recurringPayment);
 
-        printRecurringPayment(recurringPayment);
+        printInformationalMessage(convertRecurringPaymentToConsoleString(recurringPayment));
         printBlankLine();
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_ADD_RECURRING_PAYMENT_SUCCESS);
     }
@@ -501,16 +499,22 @@ public class ConsoleInterface {
         for (int index = 0; index < recurringPayments.size(); index++) {
             RecurringPayment recurringPayment = recurringPayments.get(index);
 
-            printInformationalMessage("---- RECURRING PAYMENT INDEX " + index + " ----");
-            printRecurringPayment(recurringPayment);
+            String printStr = ""
+                    + "---- RECURRING PAYMENT INDEX " + index + " ----\n"
+                    + convertRecurringPaymentToConsoleString(recurringPayment);
+
+            printInformationalMessage(printStr);
         }
     }
 
     private void viewRecurringPaymentByIndex(int recurringPaymentIndex) {
         RecurringPayment recurringPayment = recurringPaymentManager.getRecurringPayment(recurringPaymentIndex);
 
-        printInformationalMessage("---- RECURRING PAYMENT INDEX " + recurringPaymentIndex + " ----");
-        printRecurringPayment(recurringPayment);
+        String printStr = ""
+                + "---- RECURRING PAYMENT INDEX " + recurringPaymentIndex + " ----\n"
+                + convertRecurringPaymentToConsoleString(recurringPayment);
+
+        printInformationalMessage(printStr);
     }
 
     private void runCommandViewRecurringPayment(ConsoleCommandViewRecurringPayment consoleCommandViewRecurringPayment) {
@@ -523,43 +527,44 @@ public class ConsoleInterface {
         }
     }
 
+    private ConsoleCommand getConsoleCommand() {
+        String consoleInput = getConsoleInput();
+
+        printBlankLine();
+
+        ConsoleCommand consoleCommand = null;
+        try {
+            consoleCommand = ConsoleParser.parse(consoleInput);
+        } catch (ConsoleParserCommandNotFoundException
+                 | ConsoleParserCommandAddExpenseInvalidException
+                 | ConsoleParserCommandViewExpenseInvalidException
+                 | ConsoleParserCommandDeleteExpenseInvalidException
+                 | ConsoleParserCommandEditExpenseInvalidException
+                 | ConsoleParserCommandSortExpenseInvalidTypeException
+                 | ConsoleParserCommandConvertCurrencyInvalidException
+                 | ConsoleParserCommandAddTargetInvalidException
+                 | ConsoleParserCommandAddIncomeInvalidException
+                 | ConsoleParserCommandAddRecurringPaymentInvalidException
+                 | ConsoleParserCommandViewRecurringPaymentInvalidException exception) {
+            printErrorMessage(exception.getMessage());
+        }
+
+        return consoleCommand;
+    }
+
     /**
      * Runs the command line interface which the user interacts with.
      */
-    @SuppressWarnings("StatementWithEmptyBody")
     public void run() {
         LocalStorage.loadFromFile(expenseManager);
         CurrencyApi.getCurrencyApi(currencyManager);
+
         printBlankLine();
 
         while (true) {
-            String consoleInput = getConsoleInput();
-            printBlankLine();
+            ConsoleCommand consoleCommand = getConsoleCommand();
 
-            ConsoleCommand consoleCommand = null;
-            boolean hasParseError = true;
-
-            // Parse input command and arguments into a ConsoleCommand object
-            try {
-                consoleCommand = ConsoleParser.parse(consoleInput);
-                hasParseError = false;
-            } catch (ConsoleParserCommandNotFoundException
-                     | ConsoleParserCommandAddExpenseInvalidException
-                     | ConsoleParserCommandViewExpenseInvalidException
-                     | ConsoleParserCommandDeleteExpenseInvalidException
-                     | ConsoleParserCommandEditExpenseInvalidException
-                     | ConsoleParserCommandSortExpenseInvalidTypeException
-                     | ConsoleParserCommandAddTargetInvalidException
-                     | ConsoleParserCommandAddIncomeInvalidException
-                     | ConsoleParserCommandAddRecurringPaymentInvalidException
-                     | ConsoleParserCommandViewRecurringPaymentInvalidException
-                     | ConsoleParserCommandConvertCurrencyInvalidException exception) {
-                printErrorMessage(exception.getMessage());
-            }
-            // Execute function according to the ConsoleCommand object returned by the parser
-            if (hasParseError) {
-                // Do nothing if there is a parse error
-            } else if (consoleCommand instanceof ConsoleCommandBye) {
+            if (consoleCommand instanceof ConsoleCommandBye) {
                 runCommandBye((ConsoleCommandBye) consoleCommand);
                 return;
             } else if (consoleCommand instanceof ConsoleCommandAddExpense) {
@@ -580,8 +585,6 @@ public class ConsoleInterface {
                 runCommandAddRecurringPayment((ConsoleCommandAddRecurringPayment) consoleCommand);
             } else if (consoleCommand instanceof ConsoleCommandViewRecurringPayment) {
                 runCommandViewRecurringPayment((ConsoleCommandViewRecurringPayment) consoleCommand);
-            } else {
-                // Do nothing if the command is not found
             }
 
             printBlankLine();

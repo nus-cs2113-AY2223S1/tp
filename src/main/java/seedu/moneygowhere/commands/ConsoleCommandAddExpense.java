@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 /**
  * Stores the add-expense command and its arguments.
  */
-@SuppressWarnings("FieldMayBeFinal")
+@SuppressWarnings({"FieldMayBeFinal", "unused"})
 public class ConsoleCommandAddExpense extends ConsoleCommand {
     private String name;
     private LocalDateTime dateTime;
@@ -38,27 +38,55 @@ public class ConsoleCommandAddExpense extends ConsoleCommand {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public LocalDateTime getDateTime() {
         return dateTime;
+    }
+
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
     }
 
     public String getDescription() {
         return description;
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public BigDecimal getAmount() {
         return amount;
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
     }
 
     public String getCategory() {
         return category;
     }
-    
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
     public String getRemarks() {
         return remarks;
     }
 
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
+
     public String getCurrency() {
         return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
     }
 }
