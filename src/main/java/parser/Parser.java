@@ -1,7 +1,6 @@
 package parser;
 import command.*;
 import exception.DukeException;
-import seedu.duke.Duke;
 
 public class Parser {
     private final int lengthOfSignature = 3;
@@ -20,12 +19,15 @@ public class Parser {
 
     public Command parseCommand(String input) {
         input = input.trim();
+        try {
+            if (!input.contains(" ")) {
+                if (input.equals("bye")) {
+                    return new EndCommand();
+                }
 
-        if(!input.contains(" ")){
-            if(input.equals("bye")){
-                return new EndCommand();
-            }
-            
+                throw new DukeException();
+            }   
+        } catch (DukeException e) {
             System.out.println("Sorry, only one parameter received and it is not bye");
             return new EmptyCommand();
         }
@@ -35,16 +37,21 @@ public class Parser {
         String type = input.substring(0,indexOfSpace);
         String statement = input.substring(indexOfSpace).trim();
 
-        switch(type) {
-        case "appointment":
-            return appointmentParser.parseAppointment(statement);
-        case "pet":
-            return petParser.parsePet(statement);
-        case "employee":
-            return employeeParser.parseEmployee(statement);
-        case "service":
-            return serviceParser.parseService(statement);
-        default:
+
+        try {
+            switch (type) {
+            case "appointment":
+                return appointmentParser.parseAppointment(statement);
+            case "pet":
+                return petParser.parsePet(statement);
+            case "employee":
+                return employeeParser.parseEmployee(statement);
+            case "service":
+                return serviceParser.parseService(statement);
+            default:
+                throw new DukeException();
+            }
+        } catch (DukeException e){
             System.out.println("Sorry, unrecognized operation");
             return new EmptyCommand();
         }
@@ -66,12 +73,11 @@ public class Parser {
      */
 
 
-    public int indexOfRemove(String input){
+    public int indexOfInput(String input) throws DukeException {
         try {
             return numberInInput(input, " i/");
         } catch (DukeException e){
-            System.out.println("Sorry, signature \"i/\" not found.");
-            return -1;
+            throw new DukeException();
         }
     }
 
@@ -81,37 +87,39 @@ public class Parser {
         }
 
         String id = input.substring(input.indexOf(format)+lengthOfSignature);
-        if(!isInt(id)){
-            return -1;
+
+        try{
+            isInt(id);
+        } catch (DukeException e){
+            throw new DukeException();
         }
 
         return Integer.parseInt(id);
     }
 
 
-    public boolean isInt(String input){
+    public boolean isInt(String input) throws DukeException {
         Boolean strResult = input.matches("\\d?");
         if(strResult) {
             return true;
         }
-        return false;
+
+        throw new DukeException();
     }
 
-    public int isStatus(String input){
+    public int isStatus(String input) throws DukeException {
         try {
             return numberInInput(input, " s/");
         } catch (DukeException e){
-            System.out.println("Sorry, signature \"s/\" not found.");
-            return -1;
+            throw new DukeException();
         }
     }
 
-    public int isHealthy(String input){
+    public int isHealthy(String input) throws DukeException {
         try{
             return numberInInput(input, " h/");
         } catch (DukeException e){
-            System.out.println("Sorry, signature \"h/\" not found.");
-            return -1;
+            throw new DukeException();
         }
     }
 

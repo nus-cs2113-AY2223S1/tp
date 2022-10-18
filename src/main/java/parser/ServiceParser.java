@@ -52,7 +52,7 @@ public class ServiceParser {
 
 
     public Command prepareRemoveService(String input){
-        int index = parser.indexOfRemove(input);
+        int index = parser.indexOfInput(input);
         if(index == -1){
             System.out.println("Error: index entered invalid for removing a service");
             return new EndCommand();
