@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -17,7 +20,7 @@ import recipeditor.ui.Ui;
 public class Storage {
     private static final String DATA_FILE_PATH = "./data/data.txt";
 
-    private static final String DATA_STORAGE = "./data/";
+    private static final String DATA_STORAGE = "./Storage/";
     private static final String RECIPE_NAME_FIELD_TYPE = "Recipe Name";
     private static final String RECIPE_DESCRIPTION_FIELD_TYPE = "Recipe Description";
     private static final String RECIPE_INGREDIENTS_FIELD_TYPE = "Recipe Ingredients";
@@ -37,14 +40,22 @@ public class Storage {
     }
 
     /** Create storage folder for recipes */
-    // public static void createDataFolder() {
-    //     Path path = Paths.get()
-    //     try{
-            
-    //     } catch (IOException e){
-    //         Ui.showMessage("Error creating folder");
-    //     }
-    // }
+     public static void createDataFolder() {
+         Path path = Paths.get(Storage.DATA_STORAGE);
+         try{
+             Files.createDirectories(path);
+             Ui.showMessage("Directory created");
+         } catch (IOException e){
+             Ui.showMessage("Error creating folder");
+         }
+     }
+
+     public static void saveRecipe(){
+
+     }
+
+
+
 
 
 
