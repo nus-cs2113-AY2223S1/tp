@@ -34,6 +34,7 @@ public class Parser {
 
     }
 
+
     private static Command parseAddCommand() {
         AddMode add = new AddMode(); // Switch to Add Mode in here
         add.enterAddMode();
@@ -61,11 +62,5 @@ public class Parser {
         return new InvalidCommand();
     }
 
-    //    private void checkForExcessArgument(String[] args, int length)
-    //            throws ExcessArgumentException {
-    //        if (args.length > length) {
-    //            throw new ExcessArgumentException();
-    //        }
-    //    }
     
 }

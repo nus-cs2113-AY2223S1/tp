@@ -6,13 +6,18 @@
 
 ## Design & implementation
 
+### Add functionality
+
+### Parser functionality
+
+
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 
 
 ## Product scope
 ### Target user profile
 
-{Describe the target user profile}
+Target user of the application is avid cook who wants to organize their recipe list for ease of reference and search 
 
 ### Value proposition
 
