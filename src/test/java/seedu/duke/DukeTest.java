@@ -114,7 +114,7 @@ class DukeTest {
         String inputAdd = "add m/cs2113 s/y1s1 mc/4 g/A+";
         String inputDelete = "delete m/cs2113";
         ModuleList modulelist = new ModuleList();
-        int initialCount = modulelist.getCount();
+        final int initialCount = modulelist.getCount();
 
         // Adds a new module
         Command c = Parser.parse(inputAdd);
@@ -125,7 +125,7 @@ class DukeTest {
         c.execute(modulelist);
 
         // Gets updated count in module list
-        int finalCount = modulelist.getCount();
+        final int finalCount = modulelist.getCount();
 
         // finalCount and initialCount supposed to be same count
         assertEquals(initialCount, finalCount);
