@@ -21,13 +21,14 @@ public class HelpCommand extends Command {
                 + "exit - to exit the program\n"
                 + "set biometrics /{age} /{gender} /height /{weight} /{fat percentage}\n"
                 + "add strength /{description} /{sets} /{repetitions} /{calories}\n"
+                + "add cardio /{description} /{time} /{repetitions} /{calories}\n"
                 + "add food /{description} /{calories}\n"
                 + "add weight /{weight} /{fat percentage}\n"
                 + "remove food /{food index}\n"
                 + "mark {done/undone} /{exercise index}\n"
                 + "e_remove exercise /{index}\n"
-                + "view {biometrics/food/exercise {/done}/strength {/done}}\n"
-                + "find {strength /food {description}}");
+                + "view {biometrics/food} {exercise/strength/cardio /{done}}\n"
+                + "find {strength/cardio/food} /{description}");
     }
 
     @Override

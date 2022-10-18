@@ -5,6 +5,7 @@ import seedu.duke.Ui;
 import seedu.duke.biometrics.Biometrics;
 import seedu.duke.biometrics.WeightAndFat;
 import seedu.duke.exception.IllegalValueException;
+import seedu.duke.exercise.CardioExercise;
 import seedu.duke.exercise.Exercise;
 import seedu.duke.exercise.ExerciseList;
 import seedu.duke.exercise.StrengthExercise;
@@ -47,6 +48,9 @@ public class AddCommand extends Command {
         case ("strength"):
             addStrengthExercise(argumentList);
             break;
+        case ("cardio"):
+            addCardioExercise(argumentList);
+            break;
         case ("weight"):
             addWeightAndFat(argumentList);
             break;
@@ -76,7 +80,32 @@ public class AddCommand extends Command {
                 ui.output(" This strength exercise is added to the exercise list successfully");
             }
         } catch (NumberFormatException e) {
-            throw new IllegalValueException("Set, repetition and calories must be integer");
+            throw new IllegalValueException("Set, repetition and calories must be integers");
+        }
+    }
+
+    private void addCardioExercise(String[] argumentList) throws IllegalValueException {
+        if (argumentList.length != 5) {
+            throw new IllegalValueException("Invalid add cardio exercise command");
+        }
+        String description = argumentList[1];
+        try {
+            int time = Integer.parseInt(argumentList[2]);
+            int repetition = Integer.parseInt(argumentList[3]);
+            int calories = Integer.parseInt(argumentList[4]);
+            Exercise exercise = new CardioExercise(description, time, repetition, calories);
+            exerciseList.addExercise(exercise);
+            assert (exerciseList.getCurrentExercise(exerciseList.getCurrentExerciseListSize() - 1)
+                    .equals(exercise)) : "Exercise not added properly";
+            if (isMarkDone) {
+                exerciseList.markDone(exerciseList.getCurrentExerciseListSize() - 1);
+            }
+            if (toDisplay) {
+                ui.output(exercise.toString());
+                ui.output(" This cardio exercise is added to the exercise list successfully");
+            }
+        } catch (NumberFormatException e) {
+            throw new IllegalValueException("Time, repetition and calories must be integers");
         }
     }
 
