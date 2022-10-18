@@ -9,6 +9,16 @@ public class Media {
     public double rating;
     public String genre;
 
+    public boolean isFavourite() {
+        return favourite;
+    }
+
+    public void setFavourite(boolean favourite) {
+        this.favourite = favourite;
+    }
+
+    public boolean favourite = false;
+
     /**.
      * Creates a new review
      * @param title Title of media

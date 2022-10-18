@@ -12,7 +12,7 @@ public class ListCommand extends Commands {
         for (int i = 0; i < reviewList.inputs.size(); i++) {
             output += (i + 1) + ". " + reviewList.inputs.get(i).toString() + "\n";
         }
-        output.strip();
+        output = output.strip();
         return output;
     }
 
