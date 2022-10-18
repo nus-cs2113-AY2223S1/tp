@@ -23,6 +23,15 @@ import static seedu.duke.Messages.MESSAGE_INVALID_BUDGET_FORMAT;
 public class ParseAddClient extends Parser {
     private final String commandDescription;
 
+    private static final int CLIENT_NAME_INDEX = 0;
+    private static final int CLIENT_CONTACT_NUMBER_INDEX = 1;
+    private static final int CLIENT_EMAIL_INDEX = 2;
+    private static final int CLIENT_BUDGET_INDEX = 3;
+
+    private static final int MISSING_FLAG_VALUE = -1;
+    private static final int FLAG_JUMPER_VALUE = 2;
+
+
     public ParseAddClient(String addCommandDescription) {
         this.commandDescription = addCommandDescription;
     }
@@ -72,15 +81,15 @@ public class ParseAddClient extends Parser {
         String[] flags = ADD_CLIENT_FLAGS;
         int[] flagIndexPositions = new int[flags.length];
 
-        for (int i = 0; i < flags.length; i++) {
-            flagIndexPositions[i] = commandDetail.indexOf(flags[i]);
+        for (int flagIndex = 0; flagIndex < flags.length; flagIndex++) {
+            flagIndexPositions[flagIndex] = commandDetail.indexOf(flags[flagIndex]);
         }
         return flagIndexPositions;
     }
 
     private void checkForMissingClientFlags(int[] flagIndexPositions) throws MissingFlagException {
         for (int flagIndex = 0; flagIndex < flagIndexPositions.length; flagIndex++) {
-            boolean isEmailIndex = (flagIndex == 2);
+            boolean isEmailIndex = (flagIndex == CLIENT_EMAIL_INDEX);
             //Skip empty check for email as email is optional
             if (!isEmailIndex && !isFlagPresent(flagIndex)) {
                 throw new MissingFlagException(EXCEPTION);
@@ -89,17 +98,20 @@ public class ParseAddClient extends Parser {
     }
 
     private boolean isFlagPresent(int flagIndexPosition) {
-        return (flagIndexPosition != -1);
+        return (flagIndexPosition != MISSING_FLAG_VALUE);
     }
 
     private void checkFlagsOrder(int[] flagIndexPositions) throws IncorrectFlagOrderException {
-        checkForCorrectFlagOrder(flagIndexPositions[0], flagIndexPositions[1]);
-        boolean hasEmail = (flagIndexPositions[2] != -1);
+        checkForCorrectFlagOrder(flagIndexPositions[CLIENT_NAME_INDEX],
+                flagIndexPositions[CLIENT_CONTACT_NUMBER_INDEX]);
+        boolean hasEmail = (flagIndexPositions[CLIENT_EMAIL_INDEX] != MISSING_FLAG_VALUE);
         if (hasEmail) {
-            checkForCorrectFlagOrder(flagIndexPositions[1], flagIndexPositions[2]);
-            checkForCorrectFlagOrder(flagIndexPositions[2], flagIndexPositions[3]);
+            checkForCorrectFlagOrder(flagIndexPositions[CLIENT_CONTACT_NUMBER_INDEX],
+                    flagIndexPositions[CLIENT_EMAIL_INDEX]);
+            checkForCorrectFlagOrder(flagIndexPositions[CLIENT_EMAIL_INDEX], flagIndexPositions[CLIENT_BUDGET_INDEX]);
         }  else {
-            checkForCorrectFlagOrder(flagIndexPositions[1], flagIndexPositions[3]);
+            checkForCorrectFlagOrder(flagIndexPositions[CLIENT_CONTACT_NUMBER_INDEX],
+                    flagIndexPositions[CLIENT_BUDGET_INDEX]);
         }
     }
 
@@ -111,21 +123,24 @@ public class ParseAddClient extends Parser {
     }
 
     private ArrayList<String> extractClientDetails(String rawClientDetail, int[] addClientFlagIndexPositions) {
-        boolean hasEmail = (addClientFlagIndexPositions[2] != -1);
+        boolean hasEmail = (addClientFlagIndexPositions[CLIENT_EMAIL_INDEX] != MISSING_FLAG_VALUE);
         String clientContactNumber;
         String clientEmail = "";
         if (hasEmail) {
-            clientContactNumber = extractDetail(rawClientDetail, addClientFlagIndexPositions[1] + 2,
-                    addClientFlagIndexPositions[2]);
-            clientEmail = extractDetail(rawClientDetail, addClientFlagIndexPositions[2] + 2,
-                    addClientFlagIndexPositions[3]);
+            clientContactNumber = extractDetail(rawClientDetail,
+                    addClientFlagIndexPositions[CLIENT_CONTACT_NUMBER_INDEX] + FLAG_JUMPER_VALUE,
+                    addClientFlagIndexPositions[CLIENT_EMAIL_INDEX]);
+            clientEmail = extractDetail(rawClientDetail, addClientFlagIndexPositions[CLIENT_EMAIL_INDEX]
+                    + FLAG_JUMPER_VALUE, addClientFlagIndexPositions[CLIENT_BUDGET_INDEX]);
         } else {
-            clientContactNumber = extractDetail(rawClientDetail, addClientFlagIndexPositions[1] + 2,
-                    addClientFlagIndexPositions[3]);
+            clientContactNumber = extractDetail(rawClientDetail,
+                    addClientFlagIndexPositions[CLIENT_CONTACT_NUMBER_INDEX] + FLAG_JUMPER_VALUE,
+                    addClientFlagIndexPositions[CLIENT_BUDGET_INDEX]);
         }
-        String clientName = extractDetail(rawClientDetail, addClientFlagIndexPositions[0] + 2,
-                addClientFlagIndexPositions[1]);
-        String clientBudgetPerMonth = extractDetail(rawClientDetail, addClientFlagIndexPositions[3] + 2);
+        String clientName = extractDetail(rawClientDetail, addClientFlagIndexPositions[CLIENT_NAME_INDEX]
+                + FLAG_JUMPER_VALUE, addClientFlagIndexPositions[CLIENT_CONTACT_NUMBER_INDEX]);
+        String clientBudgetPerMonth = extractDetail(rawClientDetail,
+                addClientFlagIndexPositions[CLIENT_BUDGET_INDEX] + FLAG_JUMPER_VALUE);
 
         ArrayList<String> processedClientDetails = new ArrayList<>();
         processedClientDetails.add(clientName.trim());
@@ -146,17 +161,17 @@ public class ParseAddClient extends Parser {
     private void validateClientDetails(ArrayList<String> clientDetails) throws EmptyDetailException,
             InvalidContactNumberException, InvalidEmailException, InvalidBudgetFormatException {
         //Checks for Missing Client Name, Contact Number, Budget Per Month (SGD)
-        checkForEmptyDetails(clientDetails.get(0));
-        checkForEmptyDetails(clientDetails.get(1));
-        checkForEmptyDetails(clientDetails.get(3));
+        checkForEmptyDetails(clientDetails.get(CLIENT_NAME_INDEX));
+        checkForEmptyDetails(clientDetails.get(CLIENT_CONTACT_NUMBER_INDEX));
+        checkForEmptyDetails(clientDetails.get(CLIENT_BUDGET_INDEX));
 
         //Checks for Contact Number, Email and Budget Format
-        checkForValidSingaporeContactNumber(clientDetails.get(1));
-        boolean hasEmail = !clientDetails.get(2).isEmpty();
+        checkForValidSingaporeContactNumber(clientDetails.get(CLIENT_CONTACT_NUMBER_INDEX));
+        boolean hasEmail = !clientDetails.get(CLIENT_EMAIL_INDEX).isEmpty();
         if (hasEmail) {
-            checkForValidEmail(clientDetails.get(2));
+            checkForValidEmail(clientDetails.get(CLIENT_EMAIL_INDEX));
         }
-        checkForBudgetNumberFormat(clientDetails.get(3));
+        checkForBudgetNumberFormat(clientDetails.get(CLIENT_BUDGET_INDEX));
     }
 
     private void checkForValidSingaporeContactNumber(String clientContactNumber) throws InvalidContactNumberException {
