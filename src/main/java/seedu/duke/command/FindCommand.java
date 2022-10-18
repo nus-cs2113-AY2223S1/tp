@@ -52,7 +52,7 @@ public class FindCommand extends Command {
         ui.output("Here are the matching food in your food list:");
         for (int i = 0; i < foodList.getFoodListSize(); i++) {
             if (foodList.getFood(i).getFoodDescription().contains(argumentList[1])) {
-                ui.output ((i + 1) + " " + (foodList.getFood(i).getFoodDescription()) + " "
+                ui.output((i + 1) + " " + (foodList.getFood(i).getFoodDescription()) + " "
                         + foodList.getFood(i).getCalories());
             }
         }
