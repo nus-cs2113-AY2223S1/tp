@@ -79,6 +79,7 @@ public class LocalStorage {
         try {
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
+            db.setErrorHandler(new NullErrorHandler());
             Document doc = db.parse(saveFile);
             doc.getDocumentElement().normalize();
             NodeList expenseList = doc.getElementsByTagName(XML_EXPENSE_ELEMENT);
