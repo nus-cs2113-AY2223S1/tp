@@ -6,7 +6,7 @@ import java.util.LinkedHashMap;
 public class LinkedHashMap2D<T> {
     private LinkedHashMap<String, LinkedHashMap<String, T>> outerMap
             = new LinkedHashMap<String, LinkedHashMap<String, T>>();
-    private LinkedHashMap<String, T> innerMap;
+    private LinkedHashMap<String, T> innerMap = new LinkedHashMap<String, T>();
 
     public LinkedHashMap2D() {
     }
@@ -14,10 +14,13 @@ public class LinkedHashMap2D<T> {
     public void addElement(String key1, String key2, T value) {
         innerMap = outerMap.get(key1);
         if (innerMap == null) {
-            innerMap = new LinkedHashMap<String, T>();
+            LinkedHashMap<String, T> innerMap = new LinkedHashMap<String, T>();
             outerMap.put(key1, innerMap);
+            innerMap.put(key2, value);
         }
-        innerMap.put(key2, value);
+        else {
+            innerMap.put(key2, value);
+        }
     }
 
     public T getElement(String key1, String key2) {
