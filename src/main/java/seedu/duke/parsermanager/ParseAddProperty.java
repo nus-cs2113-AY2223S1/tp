@@ -21,7 +21,14 @@ import static seedu.duke.Messages.MESSAGE_INVALID_PRICE_FORMAT;
 
 public class ParseAddProperty extends Parser {
     private final String commandDescription;
+
     private static final int PROPERTY_FLAG_SIZE = 4;
+    private static final int PROPERTY_ADDRESS_INDEX = 1;
+    private static final int PROPERTY_PRICE_INDEX = 2;
+
+    private static final int MISSING_FLAG_VALUE = -1;
+    private static final int FLAG_JUMPER_VALUE = 2;
+    private static final int UNIT_VALUE = 1;
 
     public ParseAddProperty(String addCommandDescription) {
         this.commandDescription = addCommandDescription;
@@ -34,16 +41,16 @@ public class ParseAddProperty extends Parser {
             ArrayList<String> propertyDetails = processCommandAddPropertyDetails(commandDescription);
             validatePropertyDetails(propertyDetails);
             return new CommandAddProperty(propertyDetails);
-        } catch (InvalidSingaporeAddressException e) {
-            throw new InvalidSingaporeAddressException(MESSAGE_INVALID_SINGAPORE_ADDRESS);
+        } catch (EmptyDetailException e) {
+            throw new EmptyDetailException(MESSAGE_ADD_PROPERTY_WRONG_FORMAT);
         } catch (MissingFlagException e) {
             throw new MissingFlagException(MESSAGE_ADD_PROPERTY_WRONG_FORMAT);
         } catch (IncorrectFlagOrderException e) {
             throw new IncorrectFlagOrderException(MESSAGE_ADD_PROPERTY_WRONG_FORMAT);
+        } catch (InvalidSingaporeAddressException e) {
+            throw new InvalidSingaporeAddressException(MESSAGE_INVALID_SINGAPORE_ADDRESS);
         } catch (InvalidPriceFormatException e) {
             throw new InvalidPriceFormatException(MESSAGE_INVALID_PRICE_FORMAT);
-        } catch (EmptyDetailException e) {
-            throw new EmptyDetailException(MESSAGE_ADD_PROPERTY_WRONG_FORMAT);
         }
     }
 
@@ -85,12 +92,12 @@ public class ParseAddProperty extends Parser {
     }
 
     private boolean isFlagPresent(int flagIndexPosition) {
-        return (flagIndexPosition != -1);
+        return (flagIndexPosition != MISSING_FLAG_VALUE);
     }
 
     private void checkPropertyFlagsOrder(int[] flagIndexPositions) throws IncorrectFlagOrderException {
-        for (int flagIndex = 0; flagIndex < flagIndexPositions.length - 1; flagIndex++) {
-            checkForCorrectFlagOrder(flagIndexPositions[flagIndex], flagIndexPositions[flagIndex + 1]);
+        for (int flagIndex = 0; flagIndex < PROPERTY_FLAG_SIZE - UNIT_VALUE; flagIndex++) {
+            checkForCorrectFlagOrder(flagIndexPositions[flagIndex], flagIndexPositions[flagIndex + UNIT_VALUE]);
         }
     }
 
@@ -104,14 +111,14 @@ public class ParseAddProperty extends Parser {
     private ArrayList<String> extractPropertyDetails(String rawPropertyDetail, int[] addPropertyFlagIndexPositions) {
         ArrayList<String> extractedPropertyDetails = new ArrayList<>();
         for (int flagIndex = 0; flagIndex < PROPERTY_FLAG_SIZE; flagIndex++) {
-            boolean isLastFlagIndex = ((flagIndex + 1) == PROPERTY_FLAG_SIZE);
+            boolean isLastFlagIndex = ((flagIndex + UNIT_VALUE) == PROPERTY_FLAG_SIZE);
             if (isLastFlagIndex) {
                 extractedPropertyDetails.add(extractDetail(rawPropertyDetail,
-                        addPropertyFlagIndexPositions[flagIndex] + 2).trim());
+                        addPropertyFlagIndexPositions[flagIndex] + FLAG_JUMPER_VALUE).trim());
             } else {
                 extractedPropertyDetails.add(extractDetail(rawPropertyDetail,
-                        addPropertyFlagIndexPositions[flagIndex] + 2,
-                        addPropertyFlagIndexPositions[flagIndex + 1]).trim());
+                        addPropertyFlagIndexPositions[flagIndex] + FLAG_JUMPER_VALUE,
+                        addPropertyFlagIndexPositions[flagIndex + UNIT_VALUE]).trim());
             }
         }
         return extractedPropertyDetails;
@@ -133,8 +140,8 @@ public class ParseAddProperty extends Parser {
         }
 
         //Checks Format for Address (Singapore) and Renting Price
-        checkForValidSingaporeAddress(propertyDetails.get(1));
-        checkForPriceNumberFormat(propertyDetails.get(2));
+        checkForValidSingaporeAddress(propertyDetails.get(PROPERTY_ADDRESS_INDEX));
+        checkForPriceNumberFormat(propertyDetails.get(PROPERTY_PRICE_INDEX));
     }
 
     private void checkForValidSingaporeAddress(String address) throws InvalidSingaporeAddressException {
