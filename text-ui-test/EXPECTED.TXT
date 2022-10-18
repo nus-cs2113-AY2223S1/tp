@@ -1,0 +1,4 @@
+	Got it. I've added the following item to the list:
+	[Movie] Inception  Rating:10.0 Genre: scifi Date watched: 5 Sep 22 
+
+	Now you have 1 reviews in the list.
