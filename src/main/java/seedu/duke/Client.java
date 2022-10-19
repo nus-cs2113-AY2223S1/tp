@@ -42,6 +42,13 @@ public class Client {
         return clientEmail;
     }
 
+    public String getClientEmailForList() {
+        if (clientEmail.isEmpty()) {
+            return "This client has not provided an e-mail";
+        }
+        return clientEmail;
+    }
+
     public String getClientBudgetPerMonth() {
         return clientBudgetPerMonth;
     }

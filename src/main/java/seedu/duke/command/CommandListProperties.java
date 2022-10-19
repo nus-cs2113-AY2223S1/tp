@@ -12,5 +12,7 @@ public class CommandListProperties extends Command {
         for (int i = 0; i < propertyList.getCurrentListSize(); i++) {
             ui.displayOneProperty(propertyList.getPropertyList().get(i), i + 1);
         }
+        System.out.println("There are " + propertyList.getCurrentListSize()
+                + " properties in this list");
     }
 }
