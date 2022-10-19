@@ -35,6 +35,15 @@ public abstract class Component {
         return String.format("%s [$%s] [%s W]", name, price, power);
     }
 
+    /**
+     * Returns a string representation of the component's attributes and used to save.
+     *
+     * @return  a string representation of the component's attributes
+     */
+    public String saveAsString() {
+        return getType() + " " + name + " " + price + " " + power;
+    }
+
     public String getDetails() {
         return String.format("Name: %s\nPrice: $%s\nPower: %s W", name, price, power);
     }

@@ -11,4 +11,9 @@ public class PowerSupply extends Component {
     public String getType() {
         return "powersupply";
     }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }

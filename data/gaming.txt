@@ -1,0 +1,4 @@
+gpu nivida 1234 123 12 1
+cpu intel 1234 123 12 1
+motherboard mother 1234 123 12 1 0
+drive ssd 1234 123 12 ssd

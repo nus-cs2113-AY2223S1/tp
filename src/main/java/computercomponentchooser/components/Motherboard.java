@@ -44,6 +44,11 @@ public class Motherboard extends Component {
         return super.toString() + String.format(" [%s] [%s RAM slots] [%s GPU slots]", socket, memorySlots, gpuSlots);
     }
 
+    @Override
+    public String saveAsString() {
+        return super.saveAsString() + " " + socket + " " + memorySlots + " " + gpuSlots;
+    }
+
     public String getDetails() {
         return super.getDetails() + String.format("\nSocket: %s\nRAM Slots: %s\nGPU Slots: %s", socket, memorySlots,
                 gpuSlots);

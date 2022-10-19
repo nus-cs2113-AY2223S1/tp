@@ -53,6 +53,11 @@ public class Cpu extends Component {
         return super.toString() + String.format(" [%s] [%s GHz]", socket, clock);
     }
 
+    @Override
+    public String saveAsString() {
+        return super.saveAsString() + " " + socket + " " + clock;
+    }
+
     public String getDetails() {
         return super.getDetails() + String.format("\nSocket: %s\nClock: %s GHz", socket, clock);
     }
