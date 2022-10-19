@@ -60,7 +60,7 @@ public class Patient {
         String message = "\t";
         message += "Name: " + getName();
         message += "\n\t";
-        message += "Gender: " + (gender.equals("M") ? "Male\n\t" : "Female\n\t");
+        message += "Gender: " + (gender.equalsIgnoreCase("M") ? "Male\n\t" : "Female\n\t");
         message += "Date of Birth: " + getBirthDate();
         message += "\n\t";
         message += "ID: " + getId();

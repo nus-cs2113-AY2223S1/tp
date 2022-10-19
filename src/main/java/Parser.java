@@ -108,19 +108,27 @@ public class Parser {
             if (matchesView) {
                 visitList.viewAll(ui);
             } else if (matcherAdd.find()) {
+                String patientId = matcherAdd.group(1);
+                checkPatientExists(patientId);
                 String reason = matcherAdd.group(4);
                 if (reason.isEmpty()) {
-                    visitList.addVisit(ui, matcherAdd.group(1), matcherAdd.group(2), matcherAdd.group(3));
+                    visitList.addVisit(ui, patientId, matcherAdd.group(2), matcherAdd.group(3));
                 } else {
-                    visitList.addVisit(ui, matcherAdd.group(1), matcherAdd.group(2),
+                    visitList.addVisit(ui, patientId, matcherAdd.group(2),
                             matcherAdd.group(3), matcherAdd.group(4));
                 }
             } else if (matcherEdit.find()) {
-                visitList.editReason(ui, matcherEdit.group(1), matcherEdit.group(2));
+                String patientId = matcherAdd.group(1);
+                checkPatientExists(patientId);
+                visitList.editReason(ui, patientId, matcherEdit.group(2));
             } else if (matcherViewPatient.find()) {
-                visitList.viewPatient(ui, matcherViewPatient.group(1));
+                String patientId = matcherAdd.group(1);
+                checkPatientExists(patientId);
+                visitList.viewPatient(ui, patientId);
             } else if (matcherViewVisit.find()) {
-                //visitList.viewVisit(ui, matcherViewVisit.group(1), matcherViewVisit.group(2));
+                String patientId = matcherAdd.group(1);
+                checkPatientExists(patientId);
+                //visitList.viewVisit(ui, patientId, matcherViewVisit.group(2));
             } else {
                 throw new OneDocException("Your input is incorrect! Please format it as such:"
                         + UI.VISIT_ADD
@@ -163,22 +171,20 @@ public class Parser {
             if (matchesView) {
                 prescriptionList.viewAll(ui);
             } else if (matcherAdd.find()) {
-                prescriptionList.add(ui, matcherAdd.group(1), matcherAdd.group(2),
+                String patientId = matcherAdd.group(1);
+                checkPatientExists(patientId);
+                prescriptionList.add(ui, patientId, matcherAdd.group(2),
                         matcherAdd.group(3), matcherAdd.group(4));
             } else if (matcherEdit.find()) {
                 parseEditPrescription(Integer.valueOf(matcherEdit.group(1)),
                         matcherEdit.group(2), matcherEdit.group(3));
             } else if (matcherViewPatient.find()) {
                 String patientId = matcherViewPatient.group(1);
-                if (patientList.findPatient(patientId) == null) {
-                    throw new OneDocException("That patient ID doesn't exist!");
-                }
+                checkPatientExists(patientId);
                 //prescriptionList.viewPatientPres(ui, patientId);
             } else if (matcherViewActive.find()) {
                 String patientId = matcherViewPatient.group(1);
-                if (patientList.findPatient(patientId) == null) {
-                    throw new OneDocException("That patient ID doesn't exist!");
-                }
+                checkPatientExists(patientId);
                 //prescriptionList.viewActPatientPres(ui, patientId);
             } else if (matcherChangeActive.find()) {
                 //index is matcherChangeActive.group(1), so prescriptionList.activatePres(ui, matcherChangeActive.group(1));
@@ -189,7 +195,7 @@ public class Parser {
                         + UI.PRESCRIPTION_ADD
                         + "\nn - The prescription name should be one or two words"
                         + "\nd - The dosage should be a number followed by an amount"
-                        + "\nt - The time interval should be instructions on how to take, with any number of words"
+                        + "\nt - The time instruction should be instructions on how to take, with any number of words"
                         + UI.PRESCRIPTION_EDIT
                         + "\nn/d/t - Please edit only one aspect of a prescription at a time"
                         + UI.PRESCRIPTION_VIEW_ALL
@@ -208,23 +214,29 @@ public class Parser {
         return SubMenuState.IN_SUB_MENU;
     }
 
+    private void checkPatientExists(String patientId) throws OneDocException {
+        if (patientList.findPatient(patientId) == null) {
+            throw new OneDocException("That patient ID doesn't exist!");
+        }
+    }
 
     private static Matcher patientAddMatcher(String input) {
         Pattern patientAddPattern = Pattern.compile(
-                "^add\\s*n/(\\w+\\s*\\w+|\\w+)\\s*g/(M|F)\\s*d/(\\d\\d-\\d\\d-\\d\\d\\d\\d)\\s*i/(\\w+)\\s*$",
+                "^add\\s*n/\\s*(\\w+\\s*\\w+|\\w+)\\s*g/\\s*(M|F)\\s*"
+                        + "d/\\s*(\\d\\d-\\d\\d-\\d\\d\\d\\d)\\s*i/\\s*(\\w+)\\s*$",
                 Pattern.CASE_INSENSITIVE);
         return patientAddPattern.matcher(input);
     }
 
     private static Matcher patientRetrieveMatcher(String input) {
         Pattern patientRetrievePattern = Pattern.compile(
-                "^retrieve\\s*i/(\\w+)\\s*$", Pattern.CASE_INSENSITIVE);
+                "^retrieve\\s*i/\\s*(\\w+)\\s*$", Pattern.CASE_INSENSITIVE);
         return patientRetrievePattern.matcher(input);
     }
 
     private static Matcher patientEditMatcher(String input) {
         Pattern patientEditPattern = Pattern.compile(
-                "^edit\\s*i/(\\w+)\\s*([n|g|d])/([\\w-]+)$", Pattern.CASE_INSENSITIVE);
+                "^edit\\s*i/\\s*(\\w+)\\s*(n|g|d)/\\s*([\\w-\\s]+)$", Pattern.CASE_INSENSITIVE);
         return patientEditPattern.matcher(input);
     }
 
@@ -263,64 +275,65 @@ public class Parser {
 
     private static Matcher addVisitMatcher(String input) {
         Pattern addVisitPattern = Pattern.compile(
-                "^add\\s*i/(\\w+)\\s*d/(\\d\\d-\\d\\d-\\d\\d\\d\\d)\\s*t/(\\d\\d:\\d\\d)\\s*"
-                        + "(?:r/((?:\\w+\\s+\\w+)+|\\w+)\\s*)*$", Pattern.CASE_INSENSITIVE);
+                "^add\\s*i/\\s*(\\w+)\\s*d/\\s*(\\d\\d-\\d\\d-\\d\\d\\d\\d)\\s*t/\\s*(\\d\\d:\\d\\d)\\s*"
+                        + "(?:r/\\s*((?:\\w+\\s*)*\\w+))*\\s*$", Pattern.CASE_INSENSITIVE);
         return addVisitPattern.matcher(input);
     }
 
     private static Matcher editVisitMatcher(String input) {
         Pattern editVisitPattern = Pattern.compile(
-                "^edit\\s*i/(\\w+)\\s*r/((?:\\w+\\s+\\w+)+|\\w+)\\s*$", Pattern.CASE_INSENSITIVE);
+                "^edit\\s*i/\\s*(\\w+)\\s*r/\\s*((?:\\w+\\s*)*\\w+)\\s*$", Pattern.CASE_INSENSITIVE);
         return editVisitPattern.matcher(input);
     }
 
     private static Matcher viewVisitPatientMatcher(String input) {
         Pattern viewVisitPatientPattern = Pattern.compile(
-                "^viewPatient\\s*i/(\\w+)\\s*$", Pattern.CASE_INSENSITIVE);
+                "^viewPatient\\s*i/\\s*(\\w+)\\s*$", Pattern.CASE_INSENSITIVE);
         return viewVisitPatientPattern.matcher(input);
     }
 
     private static Matcher viewOneVisitMatcher(String input) {
         Pattern viewOneVisitPattern = Pattern.compile(
-                "^viewVisit\\s*i/(\\w+)\\s*(\\d+)\\s*$", Pattern.CASE_INSENSITIVE);
+                "^viewVisit\\s*i/\\s*(\\w+)\\s*(\\d+)\\s*$", Pattern.CASE_INSENSITIVE);
         return viewOneVisitPattern.matcher(input);
     }
 
     private static Matcher addPrescriptionMatcher(String input) {
         Pattern addPrescriptionPattern = Pattern.compile(
-                "^add\\s*i/(\\w+)\\s*n/(\\w+\\s*\\w+|\\w+)\\s*"
-                        + "d/(\\d+\\s*\\w+)\\s*t/((?:\\w+\\s+\\w+)+|\\w+)\\s*$",
+                "^add\\s*i/\\s*(\\w+)\\s*n/\\s*(\\w+\\s*\\w+|\\w+)\\s*"
+                        + "d/\\s*(\\d+\\s*\\w+)\\s*t/\\s*((?:\\w+\\s*)*\\w+)\\s*$",
                 Pattern.CASE_INSENSITIVE);
         return addPrescriptionPattern.matcher(input);
     }
 
     private static Matcher editPrescriptionMatcher(String input) {
         Pattern editPrescriptionPattern = Pattern.compile(
-                "^edit\\s*i/(\\d+)\\s*([n|d|t])/([\\w-]+)$", Pattern.CASE_INSENSITIVE);
+                "^edit\\s*i/\\s*(\\d+)\\s*(n|d|t)/\\s*([\\w-\\s]+)$",
+                Pattern.CASE_INSENSITIVE);
         return editPrescriptionPattern.matcher(input);
     }
 
     private static Matcher viewPrescriptionPatientMatcher(String input) {
         Pattern viewPrescriptionPatientPattern = Pattern.compile(
-                "^viewPatientPres\\s*i/(\\w+)\\s*$", Pattern.CASE_INSENSITIVE);
+                "^viewPatientPres\\s*i/\\s*(\\w+)\\s*$", Pattern.CASE_INSENSITIVE);
         return viewPrescriptionPatientPattern.matcher(input);
     }
 
     private static Matcher viewPrescriptionActiveMatcher(String input) {
         Pattern viewPrescriptionActivePattern = Pattern.compile(
-                "^viewActPatientPres\\s*i/(\\w+)\\s*$", Pattern.CASE_INSENSITIVE);
+                "^viewActPatientPres\\s*i/\\s*(\\w+)\\s*$", Pattern.CASE_INSENSITIVE);
         return viewPrescriptionActivePattern.matcher(input);
     }
 
     private static Matcher changePrescriptionActiveMatcher(String input) {
         Pattern changePrescriptionActivePattern = Pattern.compile(
-                "^activate\\s*i/(\\d+)\\s*$", Pattern.CASE_INSENSITIVE);
+                "^activate\\s*i/\\s*(\\d+)\\s*$", Pattern.CASE_INSENSITIVE);
         return changePrescriptionActivePattern.matcher(input);
     }
 
     private static Matcher changePrescriptionInactiveMatcher(String input) {
         Pattern changePrescriptionInactivePattern = Pattern.compile(
-                "^deactivate\\s*i/(\\d+)\\s*$", Pattern.CASE_INSENSITIVE);
+                "^deactivate\\s*i/\\s*(\\d+)\\s*$", Pattern.CASE_INSENSITIVE);
         return changePrescriptionInactivePattern.matcher(input);
     }
 
@@ -345,11 +358,11 @@ public class Parser {
             }
             break;
         case "t":
-            Pattern matchTimeInt = Pattern.compile("^(\\w+)$", Pattern.CASE_INSENSITIVE);
-            if (matchTimeInt.matcher(input).find()) {
+            Pattern matchTimeInst = Pattern.compile("^((?:\\w+\\s*)*\\w+)\\s*$", Pattern.CASE_INSENSITIVE);
+            if (matchTimeInst.matcher(input).find()) {
                 prescriptionList.edit(ui, id, "", "", input);
             } else {
-                throw new OneDocException("Time interval is incorrectly formatted! "
+                throw new OneDocException("Time instruction is incorrectly formatted! "
                         + "Please use words and numbers to describe the time interval");
             }
             break;
