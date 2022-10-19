@@ -11,8 +11,10 @@
 [3. Design](#3-design) <br>
 &nbsp;&nbsp;[3.1. Architecture](#31-architecture) <br>
 &nbsp;&nbsp;[3.2. Model Component](#32-model-component) <br>
-&nbsp;&nbsp;[3.3. View Component](#33-view-component) <br>
-&nbsp;&nbsp;[3.4. Controller Component](#34-controller-component) <br>
+&nbsp;&nbsp;[3.3. Parser Component](#33-parser-component) <br>
+&nbsp;&nbsp;[3.4. Command Component](#34-command-component) <br>
+&nbsp;&nbsp;[3.5 UI Component](#35-ui-component) <br>
+&nbsp;&nbsp;[3.6 Storage Component](#36-storage-component) <br>
 [4. Implementation](#4-implementation) <br>
 [5. Documentation](#5-documentation) <br>
 [6. Testing](#6-testing) <br>
@@ -78,17 +80,46 @@ to set up IDEA’s coding style to match ours.
 
 ### 3.1 Architecture
 
-**How the architecture components interact with each other**
+**How the architecture components interact with each other**   
 
-## 3.2 Model Component
+<code>Storage</code>: Reads and writes data to the hard disk in a NUSMods export link format.
 
-## 3.3 View Component
+### 3.2 Model Component
 
-## 3.4 Controller Component
+### 3.3 Parser Component
+The <code>Parser</code> component can:
+- return the correct command type based on user input.
+
+### 3.4 Command Component
+
+### 3.5 UI Component
+
+### 3.6 Storage Component
+<img src="..\docs\images\storageClass.png" title="Storage Class"/>  
+
+The <code>Storage</code> component can:  
+- read from a NUSMods export link  
+- save as a NUSMods export link format
+
+Different checks have been implemented to ensure that even
+if the data file is modified in any way, it would not crash the programme.
+
+#### Why it is implemented this way
+To facilitate easy transfer of information from NUSMods to YAMOM.
+#### Alternatives considered
+Storing as <code>.json</code> file
+- would not be readable by the user
+- would have to implement another function for export/import function
 
 ## 4. Implementation
 
 This section describes how key features of YAMOM are implemented in the latest release V1.0
+
+### Storage feature
+
+
+<img src="..\docs\images\storageOpenPreviousState.png" title="Opening saved state"/>
+
 
 
 ### Target user profile

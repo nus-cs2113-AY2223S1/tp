@@ -57,9 +57,9 @@ public class Storage {
 
     private static String lessonDelimiter = ",";
 
-    public static final int SEMESTER_PARAM_INDEX = 4;
+    private static final int SEMESTER_PARAM_INDEX = 4;
 
-    public static final int MODULES_PARAM_INDEX = 5;
+    private static final int MODULES_PARAM_INDEX = 5;
 
     public static final String FILE_PATH = "data/duke.txt";
 
@@ -101,7 +101,7 @@ public class Storage {
      * @return the link for exporting to NUSMods
      * @throws FileNotFoundException the file in the file path cannot be found
      */
-    public String readPreviousState() throws FileNotFoundException {
+    private String readPreviousState() throws FileNotFoundException {
         String link = "";
         File file = new File(FILE_PATH);
         Scanner scanner = new Scanner(file);
@@ -122,7 +122,7 @@ public class Storage {
      * @param link  for exporting to NUSMods
      * @param state current state of the application to be saved
      */
-    public void loadPreviousState(String link, State state) {
+    private void loadPreviousState(String link, State state) {
         if (link.isEmpty()) {
             return;
         }
@@ -183,7 +183,7 @@ public class Storage {
      * @param link single string from the saved <code>duke.txt</code> file
      * @return if the link is of a valid form
      */
-    public boolean isValidPreviousState(String link) {
+    private boolean isValidPreviousState(String link) {
         Pattern pattern = Pattern.compile(SUPPOSED_START_REGEX);
         Matcher matcher = pattern.matcher(link);
         boolean hasMatch = matcher.find();
@@ -219,7 +219,7 @@ public class Storage {
      * @param lessonType     specified lesson type
      * @param classNo        specified class number
      */
-    private static void addValidLesson(SelectedModule selectedModule, int semester,
+    private void addValidLesson(SelectedModule selectedModule, int semester,
                                        LessonType lessonType, String classNo) {
         List<RawLesson> potentialLesson = selectedModule.getModule().getSemesterData(semester)
                 .getLessonsByTypeAndNo(lessonType, classNo);
@@ -235,7 +235,7 @@ public class Storage {
      * @param lessonInfo single lesson information of a module
      * @return if the lesson information is of a valid form
      */
-    public boolean isLessonInfo(String lessonInfo) {
+    private boolean isLessonInfo(String lessonInfo) {
         //pattern for classNo is not definite.
         Pattern pattern = Pattern.compile("[A-Z]{3,4}\\d?:");
         Matcher matcher = pattern.matcher(lessonInfo);
@@ -248,7 +248,7 @@ public class Storage {
      * @param shortString unique identifier for <code>LessonType</code>
      * @return corresponding <code>LessonType</code>
      */
-    public static LessonType getLessonType(String shortString) {
+    public LessonType getLessonType(String shortString) {
         Map<String, LessonType> map = new HashMap<>();
         map.put("TUT", LessonType.TUTORIAL);
         map.put("TUT2", LessonType.TUTORIAL_TYPE_2);
@@ -304,7 +304,7 @@ public class Storage {
      * @param selectedModules list of selected modules from the state
      * @param toSave          NUSMods formatted link
      */
-    public void appendModules(List<SelectedModule> selectedModules, StringBuilder toSave) {
+    private void appendModules(List<SelectedModule> selectedModules, StringBuilder toSave) {
         moduleDelimiter = "";
         for (SelectedModule selectedModule: selectedModules) {
             toSave.append(moduleDelimiter);
