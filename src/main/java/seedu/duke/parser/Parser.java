@@ -122,7 +122,7 @@ public class Parser {
 
         try {
             determineWrongCommand(keywords);
-        } catch (Exception e){
+        } catch (Exception e) {
             throw e;
         }
 
@@ -143,7 +143,7 @@ public class Parser {
         }
     }
 
-    public static Command viewHelpExitCommand(String[] keywords, Command command) throws UnknownCommandException{
+    public static Command viewHelpExitCommand(String[] keywords, Command command) throws UnknownCommandException {
         if (isOneWordCommand(keywords)) {
             return command;
         } else {
