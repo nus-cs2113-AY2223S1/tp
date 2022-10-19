@@ -120,6 +120,21 @@ public class PairingList {
         return false;
     }
 
+    /**
+     * Returns true if the rental price of the property exceeds the client's budget.
+     *
+     * @param client Client to be paired with the property.
+     * @param property Property to be paired with the client.
+     * @return True is rental price exceeds client's budget; false if rental price is equal to or lower than clien's
+     *         budget.
+     */
+
+    public boolean hasPriceExceededBudget(Client client, Property property) {
+        int clientBudget = Integer.parseInt(client.getClientBudgetPerMonth());
+        int rentalPrice = Integer.parseInt(property.getRentingPrice());
+        return rentalPrice > clientBudget;
+    }
+
 
     /**
      * Fetches a list of tenants that is renting the property.
