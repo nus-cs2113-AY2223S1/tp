@@ -126,7 +126,8 @@ class DukeTest {
     }
 
     //checks that the index is correctly retrieved
-    @Test public void testGettingCurrencyIndex () throws FinanceException {
+    @Test
+    public void testGettingCurrencyIndex () throws FinanceException {
         int actualCurrencyIndex = Currency.findIndexOfCurrency("inr", currenciesList);
         assertEquals(3, actualCurrencyIndex);
     }
