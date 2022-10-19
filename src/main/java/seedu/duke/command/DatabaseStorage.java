@@ -17,6 +17,7 @@ public class DatabaseStorage {
     private static final String DATABASE_FILE_PATH = "./data/data.csv";
 
     public static void loadDatabase() {
+    private static final String PARTNER_UNVIERSITY_COUNTRY = "nil";
         logger.log(Level.INFO, "Start loading database");
 
         try {
@@ -72,9 +73,6 @@ public class DatabaseStorage {
         String partnerUniversityName = lineData[0];
         assert partnerUniversityName.length() > 0 : "Partner University should not be empty";
 
-        // TODO: v2.0 add country for partner university
-        final String partnerUniversityCountry = "null";
-
         String parterUniversityModuleCode = lineData[1];
         assert parterUniversityModuleCode.length() > 0
                 : "Partner University Module Code should not be empty";
@@ -96,8 +94,8 @@ public class DatabaseStorage {
         String nusModuleCredit = lineData[6];
         assert nusModuleCredit.length() > 0 : "NUS Module Credit should not be empty";
 
-        updateUniversityDatabase(partnerUniversityName, partnerUniversityCountry);
-        updateModuleMappingDatabase(partnerUniversityName, partnerUniversityCountry, parterUniversityModuleCode,
+        updateUniversityDatabase(partnerUniversityName, PARTNER_UNVIERSITY_COUNTRY);
+        updateModuleMappingDatabase(partnerUniversityName, PARTNER_UNVIERSITY_COUNTRY, parterUniversityModuleCode,
                 partnerUnviersityModuleTitle, partnerUniversityModuleCredit, nusModuleCode, nusModuleTitle,
                 nusModuleCredit);
 
