@@ -6,14 +6,22 @@ public class ModuleMapping {
     private Module partnerUniversityModule;
     private Module nusModule;
 
+    /**
+     * Constructor for new module mapping
+     * 
+     * @param partnerUniversityModule Partner university module part of the module
+     *                                mapping
+     * @param nusModule               NUS module part of the module mapping
+     * @throws InvalidModuleMappingException If any constructor parameters are empty
+     */
     public ModuleMapping(Module partnerUniversityModule, Module nusModule) throws InvalidModuleMappingException {
         if (!isValidModuleMapping(partnerUniversityModule, nusModule)) {
             throw new InvalidModuleMappingException(
                     "Invalid Module Mapping: " + partnerUniversityModule.toString() + " " + nusModule.toString());
         }
 
-        this.partnerUniversityModule = partnerUniversityModule;
-        this.nusModule = nusModule;
+        setPartnerUniversityModule(partnerUniversityModule);
+        setNusModule(nusModule);
     }
 
     @Override
@@ -37,6 +45,14 @@ public class ModuleMapping {
         this.nusModule = nusModule;
     }
 
+    /**
+     * Checks if module mapping is valid
+     * 
+     * @param partnerUniversityModule Partner university module part of the module
+     *                                mapping
+     * @param nusModule               NUS module part of the module mapping
+     * @return True if no empty parameters, false otherwise
+     */
     private boolean isValidModuleMapping(Module partnerUniversityModule, Module nusModule) {
         if (partnerUniversityModule.getCode().length() == 0) {
             return false;

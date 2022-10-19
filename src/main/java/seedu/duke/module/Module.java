@@ -9,6 +9,15 @@ public class Module {
     private String credit;
     private University university;
 
+    /**
+     * Constructor for new module
+     * 
+     * @param code       Module code of new module
+     * @param title      Module title of new module
+     * @param credit     Module credit of new module
+     * @param university University that the new module belongs to
+     * @throws InvalidModuleException If any constructor parameters are empty
+     */
     public Module(String code, String title, String credit, University university) throws InvalidModuleException {
         if (!isValidModule(code, title, credit, university)) {
             throw new InvalidModuleException(
@@ -58,6 +67,15 @@ public class Module {
         this.university = university;
     }
 
+    /**
+     * Checks if module is valid
+     * 
+     * @param code       Module code of new module
+     * @param title      Module title of new module
+     * @param credit     Module credit of new module
+     * @param university University that the new module belongs to
+     * @return True if no empty parameters, false otherwise
+     */
     private boolean isValidModule(String code, String title, String credit, University university) {
         if (code.length() == 0) {
             return false;
