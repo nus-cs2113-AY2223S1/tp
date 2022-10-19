@@ -8,6 +8,9 @@ import java.util.regex.Pattern;
 
 import static seedu.duke.Messages.EXCEPTION;
 
+/**
+ * Parses input for add-type command.
+ */
 public abstract class ParseAdd extends Parser {
     protected static final int MISSING_FLAG_VALUE = -1;
 

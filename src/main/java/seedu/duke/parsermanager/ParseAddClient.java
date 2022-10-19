@@ -18,6 +18,9 @@ import static seedu.duke.Messages.MESSAGE_INVALID_CONTACT_NUMBER;
 import static seedu.duke.Messages.MESSAGE_INVALID_EMAIL;
 import static seedu.duke.Messages.MESSAGE_INVALID_BUDGET_FORMAT;
 
+/**
+ * Parses input for add client command.
+ */
 public class ParseAddClient extends ParseAdd {
     private final String commandDescription;
 

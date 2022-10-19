@@ -16,6 +16,9 @@ import static seedu.duke.Messages.MESSAGE_ADD_PROPERTY_WRONG_FORMAT;
 import static seedu.duke.Messages.MESSAGE_INVALID_SINGAPORE_ADDRESS;
 import static seedu.duke.Messages.MESSAGE_INVALID_PRICE_FORMAT;
 
+/**
+ * Parses input for add property command.
+ */
 public class ParseAddProperty extends ParseAdd {
     private final String commandDescription;
 
