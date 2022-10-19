@@ -1,8 +1,21 @@
-Recipe Name: djhsl;k
-Recipe Description: fshjl
+Recipe Name: tomato rice
+Recipe Description: da
 Recipe Ingredients: 
-gfs | 34.0 | fds 
+fish  | 2.0 | da 
 Recipe Steps: 
-1) glkds
-2) fsl
+1) da
+____________________________________________________________
+Recipe Name: tomato rice
+Recipe Description: da
+Recipe Ingredients: 
+fish  | 2.0 | da 
+Recipe Steps: 
+1) da
+____________________________________________________________
+Recipe Name: carbonara
+Recipe Description: dsa
+Recipe Ingredients: 
+mushroom | 32.0 | fd 
+Recipe Steps: 
+1) adsa
 ____________________________________________________________

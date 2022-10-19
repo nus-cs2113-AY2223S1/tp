@@ -4,16 +4,16 @@ import recipeditor.recipe.RecipeList;
 
 import java.util.ArrayList;
 
-public class FindCommandByTitle extends Command {
+public class FindCommand extends Command {
     public static final String COMMAND_TYPE = "find";
-    public String recipeTitle;
+    public String findInput;
 
-    public FindCommandByTitle(String recipeTitle) {
-        this.recipeTitle = recipeTitle;
+    public FindCommand(String findInput) {
+        this.findInput = findInput;
     }
 
     public CommandResult execute() {
-        ArrayList<String> foundRecipeTitlesList = RecipeList.findRecipeTitlesFromTitle(recipeTitle);
+        ArrayList<String> foundRecipeTitlesList = RecipeList.findRecipeTitles(findInput);
         StringBuilder output = new StringBuilder();
         for (int i = 0; i < foundRecipeTitlesList.size(); i++) {
             output.append(String.format("%n%d. %s", i + 1, foundRecipeTitlesList.get(i)));

@@ -52,11 +52,19 @@ public class RecipeList {
         return -1;
     }
 
-    public static ArrayList<String> findRecipeTitlesFromTitle(String recipeTitle) {
+    public static ArrayList<String> findRecipeTitles(String findInput) {
         ArrayList<String> foundRecipeTitlesList = new ArrayList<>();
         for (Recipe r : recipes) {
-            if (r.getTitle().contains(recipeTitle)) {
+            // find recipe title according to recipe title
+            if (r.getTitle().contains(findInput)) {
                 foundRecipeTitlesList.add(r.getTitle());
+            }
+            // find recipe title according to ingredient name
+            ArrayList<Ingredient> recipeIngredients = r.getIngredients();
+            for (Ingredient i : recipeIngredients) {
+                if (i.getName().contains(findInput)) {
+                    foundRecipeTitlesList.add(r.getTitle());
+                }
             }
         }
         return foundRecipeTitlesList;

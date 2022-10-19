@@ -7,7 +7,6 @@ import recipeditor.recipe.RecipeList;
 import recipeditor.ui.AddMode;
 import recipeditor.ui.EditMode;
 
-import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -30,7 +29,7 @@ public class Parser {
             return parseEditCommand(parsed);
         case ViewCommand.COMMAND_TYPE:
             return parseListAlterCommand(parsed, commandWord);
-        case FindCommandByTitle.COMMAND_TYPE:
+        case FindCommand.COMMAND_TYPE:
             return parseFindCommandByTitle(parsed);
         default:
             return new InvalidCommand();
@@ -77,7 +76,7 @@ public class Parser {
             return new InvalidCommand();
         }
         String recipeTitle = convertStringArrayToString(parsed);
-        return new FindCommandByTitle(recipeTitle.toString());
+        return new FindCommand(recipeTitle.toString());
     }
 
     private static String convertStringArrayToString(String[] stringArray) {
