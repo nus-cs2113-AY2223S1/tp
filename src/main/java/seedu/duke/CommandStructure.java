@@ -19,7 +19,7 @@ public class CommandStructure {
     
     public static final String PROPERTY_FLAG = "-property";
     public static final String CLIENT_FLAG = "-client";
-    private static final String EVERYTHING_FLAG = "-everything";
+    public static final String EVERYTHING_FLAG = "-everything";
 
     public static final String[] ADD_PROPERTY_FLAGS = {"n/", "a/", "p/", "t/"};
     public static final String[] ADD_CLIENT_FLAGS = {"n/", "c/", "e/", "b/"};
