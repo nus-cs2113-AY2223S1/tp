@@ -32,7 +32,8 @@ public class ViewItemCommand extends Command {
 
     private String getArgsViewItemCmd() throws InvalidArgumentException {
         String arg;
-        if (parts[0].startsWith("i ")) {
+        String delimiter = CommandParser.getArgsDelimiter(parts[0]);
+        if (delimiter.equals("i")) {
             arg = CommandParser.getArgValue(parts[0]);
         } else {
             throw new InvalidArgumentException(MESSAGE_INVALID_PARTS);

@@ -61,11 +61,12 @@ public class SortItemCommand extends Command {
     private String[] getArgsSortItemsCmd() throws InvalidArgumentException {
         String[] args = new String[3];
         for (String part : parts) {
-            if (part.startsWith("mo ")) {
+            String delimiter = CommandParser.getArgsDelimiter(part);
+            if (delimiter.equals("mo")) {
                 args[0] = CommandParser.getArgValue(part);
-            } else if (part.startsWith("mi ")) {
+            } else if (delimiter.equals("mi")) {
                 args[1] = CommandParser.getArgValue(part);
-            } else if (part.startsWith("ma ")) {
+            } else if (delimiter.equals("ma")) {
                 args[2] = CommandParser.getArgValue(part);
             } else {
                 throw new InvalidArgumentException(MESSAGE_INVALID_PARTS);

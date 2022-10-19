@@ -50,4 +50,5 @@ public class ExceptionMessages {
     public static final String MESSAGE_FILE_NOT_FOUND = "OOPS!!! I cannot find your file";
     public static final String MESSAGE_STORE_INVALID =
             "Something went wrong when storing your tasks";
+    public static final String MESSAGE_ARGUMENT_EMPTY = "The value cannot be empty";
 }

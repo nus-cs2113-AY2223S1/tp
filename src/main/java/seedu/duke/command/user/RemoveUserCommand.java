@@ -55,7 +55,8 @@ public class RemoveUserCommand extends Command {
     private String[] getArgsRemoveUserCmd() throws InvalidArgumentException {
         String[] args = new String[1];
         for (String part : parts) {
-            if (part.startsWith("u ")) {
+            String delimiter = CommandParser.getArgsDelimiter(part);
+            if (delimiter.equals("u")) {
                 args[0] = CommandParser.getArgValue(part);
             } else {
                 throw new InvalidArgumentException(MESSAGE_INVALID_PARTS);
