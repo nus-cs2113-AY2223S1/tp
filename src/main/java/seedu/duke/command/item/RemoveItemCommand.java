@@ -49,7 +49,8 @@ public class RemoveItemCommand extends Command {
     private String[] getArgsRemoveItemCmd() throws InvalidArgumentException {
         String[] args = new String[1];
         for (String part : parts) {
-            if (part.startsWith("i")) {
+            String delimiter = CommandParser.getArgsDelimiter(part);
+            if (delimiter.equals("i")) {
                 args[0] = CommandParser.getArgValue(part);
             } else {
                 throw new InvalidArgumentException(MESSAGE_INVALID_PARTS);

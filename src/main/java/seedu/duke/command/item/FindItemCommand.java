@@ -27,7 +27,8 @@ public class FindItemCommand extends Command {
     private String getArgsFindItemCommand() throws InvalidArgumentException {
         String arg = "";
         for (String part : parts) {
-            if (part.startsWith("k")) {
+            String delimiter = CommandParser.getArgsDelimiter(part);
+            if (delimiter.equals("k")) {
                 arg = CommandParser.getArgValue(part);
             } else {
                 throw new InvalidArgumentException(MESSAGE_INVALID_PARTS);
