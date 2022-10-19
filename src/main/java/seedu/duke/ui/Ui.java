@@ -111,6 +111,10 @@ public class Ui {
         return message;
     }
 
+    public static void printExceptionMessage(Exception e) {
+        System.out.println(e.getMessage());
+    }
+
     /**
      * Displays to the user information regarding a module.
      * 

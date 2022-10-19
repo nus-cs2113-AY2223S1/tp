@@ -23,10 +23,12 @@ public class Database {
         return moduleMappings;
     }
 
+    /**
+     * Adds university to list of universities.
+     * 
+     * @param newUniversity New university to be added
+     */
     public static void addUniversity(University newUniversity) {
-        assert newUniversity.getName().length() > 0 : "New university name cannot be empty";
-        assert newUniversity.getCountry().length() > 0 : "New university country cannot be empty";
-
         if (isNewUniversity(newUniversity)) {
             logger.log(Level.FINE, "New university found, adding to list");
 
@@ -34,23 +36,22 @@ public class Database {
         }
     }
 
+    /**
+     * Adds module mapping to list of module mappings.
+     * 
+     * @param newModuleMapping New module mapping to be added
+     */
     public static void addModuleMapping(ModuleMapping newModuleMapping) {
-        assert newModuleMapping.getPartnerUniversityModule().getCode().length() > 0
-                : "Partner University module code cannot be empty";
-        assert newModuleMapping.getPartnerUniversityModule().getTitle().length() > 0
-                : "Partner University module title cannot be empty";
-        assert newModuleMapping.getPartnerUniversityModule().getCredit().length() > 0
-                : "Partner University module credit cannot be empty";
-        assert newModuleMapping.getNusModule().getCode().length() > 0
-                : "NUS module code cannot be empty";
-        assert newModuleMapping.getNusModule().getTitle().length() > 0
-                : "NUS module title cannot be empty";
-        assert newModuleMapping.getNusModule().getCredit().length() > 0
-                : "NUS module credit cannot be empty";
-
         moduleMappings.add(newModuleMapping);
     }
 
+    /**
+     * Checks if the new university has not been added to the current list of
+     * universities before.
+     * 
+     * @param newUniversity New university to be added
+     * @return True if the university has not been added before, false otherwise
+     */
     private static boolean isNewUniversity(University newUniversity) {
         assert newUniversity.getName().length() > 0 : "New university name cannot be empty";
         assert newUniversity.getCountry().length() > 0 : "New university country cannot be empty";
@@ -63,15 +64,32 @@ public class Database {
         return true;
     }
 
+    /**
+     * Search for partner university module code in current list of module mappings.
+     * 
+     * @param moduleCode Partner university module code to find
+     * @return Module mapping which contains partner university module code
+     * @throws ModuleNotFoundException If module code is not found inside of current
+     *                                 list of module mappings
+     */
     public static ModuleMapping findPuMapping(String moduleCode) throws ModuleNotFoundException {
         for (ModuleMapping moduleMapping : moduleMappings) {
             if (moduleMapping.getPartnerUniversityModule().getCode().equals(moduleCode)) {
                 return moduleMapping;
             }
         }
+
         throw new ModuleNotFoundException("Error! " + moduleCode + " not found in database");
     }
 
+    /**
+     * Search for NUS module code in current list of module mappings.
+     * 
+     * @param moduleCode NUS module code to find
+     * @return List of module mappings which contains the NUS module code
+     * @throws ModuleNotFoundException If there are no module mappings which
+     *                                 contains the NUS module code
+     */
     public static ArrayList<ModuleMapping> findNusMapping(String moduleCode) throws ModuleNotFoundException {
         ArrayList<ModuleMapping> nusMappings = new ArrayList<>();
 
@@ -81,13 +99,21 @@ public class Database {
             }
         }
 
-        if (nusMappings.size() > 0) {
-            return nusMappings;
+        if (nusMappings.size() == 0) {
+            throw new ModuleNotFoundException("Error! " + moduleCode + " not found in database");
         }
 
-        throw new ModuleNotFoundException("Error! " + moduleCode + " not found in database");
+        return nusMappings;
     }
 
+    /**
+     * Search for university name in current list of module mappings.
+     * 
+     * @param universityName Name of university to find
+     * @return List of module mappings which contains the university name
+     * @throws UniversityNotFoundException If there are no module mappings which
+     *                                     contains the university name
+     */
     public static ArrayList<ModuleMapping> findUniversityMapping(String universityName)
             throws UniversityNotFoundException {
         ArrayList<ModuleMapping> universityMappings = new ArrayList<>();
@@ -98,10 +124,11 @@ public class Database {
             }
         }
 
-        if (universityMappings.size() > 0) {
-            return universityMappings;
+        if (universityMappings.size() == 0) {
+            throw new UniversityNotFoundException("Error! " + universityName + " not found in database");
         }
 
-        throw new UniversityNotFoundException("Error! " + universityName + " not found in database");
+        return universityMappings;
     }
+
 }

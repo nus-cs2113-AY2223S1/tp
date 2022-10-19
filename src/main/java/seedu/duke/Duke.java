@@ -56,7 +56,7 @@ public class Duke {
                         }
                         UserStorageParser.storeCreatedLists(userUniversityListManager);
                     } catch (NoSuchElementException e) {
-                        System.out.println(e.getMessage());
+                        Ui.printExceptionMessage(e);
                     }
                     break;
                 case CREATE:
@@ -73,7 +73,7 @@ public class Duke {
                             userUniversityListManager.displayUniversity(viewCommand.getUniversityName());
                         }
                     } catch (InvalidUserCommandException e) {
-                        System.out.println(e.getMessage());
+                        Ui.printExceptionMessage(e);
                     }
                     break;
                 case ADD:
@@ -88,7 +88,7 @@ public class Duke {
                         userUniversityListManager.addModule(newUserCommand.getUniversityName(), userModuleToAdd);
                         UserStorageParser.storeCreatedLists(userUniversityListManager);
                     } catch (ModuleNotFoundException | NoSuchElementException e) {
-                        System.out.println(e.getMessage());
+                        Ui.printExceptionMessage(e);
                     }
                     break;
                 case LIST:
@@ -111,7 +111,7 @@ public class Duke {
                             Ui.printMappings(moduleMappings);
                         }
                     } catch (ModuleNotFoundException | UniversityNotFoundException e) {
-                        System.out.println(e.getMessage());
+                        Ui.printExceptionMessage(e);
                     }
                     break;
                 case FAVOURITE:
@@ -129,14 +129,14 @@ public class Duke {
                             System.out.print(Ui.printFavouriteListDeletedAcknowledgement(universityName));
                         }
                     } catch (NoSuchElementException e) {
-                        System.out.println(e.getMessage());
+                        Ui.printExceptionMessage(e);
                     }
                     break;
                 default:
                     break;
                 }
             } catch (InvalidUserCommandException e) {
-                System.out.println(e.getMessage());
+                Ui.printExceptionMessage(e);
             }
         }
     }
