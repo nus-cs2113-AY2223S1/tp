@@ -26,3 +26,10 @@ mango | 1.0 | kg
 Recipe Steps: 
 1) fdslkj
 ____________________________________________________________
+Recipe Name: hoho
+Recipe Description: this
+Recipe Ingredients: 
+abc | 1.0 | kg 
+Recipe Steps: 
+1) Add abc to this
+____________________________________________________________
