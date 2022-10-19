@@ -4,7 +4,7 @@ import recipeditor.recipe.Recipe;
 import recipeditor.recipe.RecipeList;
 
 public class EditCommand extends Command {
-    public static final String COMMAND_TYPE = "edit";
+    public static final String COMMAND_TYPE = "/edit";
     private int index;
     private Recipe editedRecipe;
 

@@ -68,16 +68,4 @@ public class Ui {
         System.out.print("\033[H\033[2J"); // This will clear the terminal, I don't know why...
         System.out.flush();
     }
-
-    public static void printFilePath(File file, String filePath) {
-        try {
-            if (file.createNewFile()) {
-                System.out.printf("File has been created at %s\n", filePath);
-            } else {
-                System.out.printf("File already exists at %s\n", filePath);
-            }
-        } catch (IOException e) {
-            System.out.println("Error creating file: Could not create file at %s" + filePath);
-        }
-    }
 }

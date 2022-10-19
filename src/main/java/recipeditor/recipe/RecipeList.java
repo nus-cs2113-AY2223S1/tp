@@ -41,15 +41,49 @@ public class RecipeList {
         return null;
     }
 
-    public static int getRecipeIndexFromTitle(String recipleTitle) {
+    public static int getRecipeIndexFromTitle(String recipeTitle) {
         int i = 0;
         for (Recipe r : recipes) {
-            if (r.getTitle().equals(recipleTitle)) {
+            if (r.getTitle().equals(recipeTitle)) {
                 return i;
             }
             i++;
         }
         return -1;
+    }
+
+    public static ArrayList<String> findRecipeTitles(char flag, String findInput) {
+        switch (flag) {
+        case 'r':
+            return findRecipeTitlesFromRecipeTitle(findInput);
+        case 'i':
+            return findRecipeTitlesFromIngredientName(findInput);
+        default:
+            return new ArrayList<String>();
+        }
+    }
+
+    public static ArrayList<String> findRecipeTitlesFromRecipeTitle(String findInput) {
+        ArrayList<String> foundRecipeTitlesList = new ArrayList<>();
+        for (Recipe r : recipes) {
+            if (r.getTitle().contains(findInput)) {
+                foundRecipeTitlesList.add(r.getTitle());
+            }
+        }
+        return foundRecipeTitlesList;
+    }
+
+    public static ArrayList<String> findRecipeTitlesFromIngredientName(String findInput) {
+        ArrayList<String> foundRecipeTitlesList = new ArrayList<>();
+        for (Recipe r : recipes) {
+            ArrayList<Ingredient> recipeIngredients = r.getIngredients();
+            for (Ingredient i : recipeIngredients) {
+                if (i.getName().contains(findInput)) {
+                    foundRecipeTitlesList.add(r.getTitle());
+                }
+            }
+        }
+        return foundRecipeTitlesList;
     }
 
     public static int getSize() {

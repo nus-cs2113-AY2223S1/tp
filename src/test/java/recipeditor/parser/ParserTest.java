@@ -27,7 +27,7 @@ class ParserTest {
 
     @Test
     void incompleteViewCommand_missingParameter_invalidCommand() {
-        String input = "view";
+        String input = "/view";
         Command commandExecuted = Parser.parseCommand(input);
         CommandResult commandExecutedResult = commandExecuted.execute();
         assertEquals(InvalidCommand.INVALID_MESSAGE, commandExecutedResult.getMessage());
