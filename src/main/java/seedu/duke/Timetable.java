@@ -3,6 +3,8 @@ package seedu.duke;
 import seedu.duke.module.Module;
 import seedu.duke.module.lessons.Lesson;
 import seedu.duke.data.DataManager;
+import seedu.duke.data.LessonManager;
+import seedu.duke.data.ModuleManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,8 +14,8 @@ public class Timetable {
 
     public static void addNewModule(String code, String name, String description, List<Lesson> lessons) {
         Module newModule = new Module(code, name, description, lessons); 
-        DataManager.addLessons(newModule);
-        DataManager.addModule(code, name, description);
+        LessonManager.addLesson(newModule);
+        ModuleManager.addModule(code, name, description);
         listOfModules.add(newModule);
     }
 
@@ -35,7 +37,7 @@ public class Timetable {
         return null;
     }
 
-    public String listModules() {
+    public static String listModules() {
         //list to print
         StringBuilder list;
         int counter = 1;
@@ -53,16 +55,17 @@ public class Timetable {
         return list.toString();
     }
 
-
-    public void deleteModule(int index) {
+    public static void deleteModule(int index) {
+        Module module = listOfModules.get(index - 1);
+        DataManager.deleteModule(module);
         listOfModules.remove(index - 1);
     }    // the nth module in list has index n-1
 
-    public int getListLength() {
+    public static int getListLength() {
         return listOfModules.size();
     }
 
-    public String getShortenedList() {
+    public static String getShortenedList() {
         StringBuilder list = new StringBuilder();
         int index = 1;
         for (Module module : listOfModules) {
@@ -72,40 +75,40 @@ public class Timetable {
         return list.toString();
     }
 
-    public int getLessonTypeLength(int index) {
+    public static int getLessonTypeLength(int index) {
         return listOfModules.get(index).getLessonTypeLength();
     }
 
-    public String getLessonTypes(int index) {
+    public static String getLessonTypes(int index) {
         return listOfModules.get(index).getLessonTypes();
     }
 
-    public String getLessonTypeFromIndex(int indexForModule, int lessonIndex) {
+    public static String getLessonTypeFromIndex(int indexForModule, int lessonIndex) {
         assert indexForModule >= 0 : "index should be within range";
         assert lessonIndex >= 0 : "index should be within range";
 
         return listOfModules.get(indexForModule).getTypeOfLessonFromIndex(lessonIndex);
     }
 
-    public String listAllPossibleLessonReplacements(int indexForModule, String targetLessonType) {
+    public static String listAllPossibleLessonReplacements(int indexForModule, String targetLessonType) {
         assert indexForModule >= 0 : "index should be within range";
 
         return listOfModules.get(indexForModule).getListOfLessonReplacements(targetLessonType);
     }
 
-    public int getNumberOfPossibleReplacements(int indexForModule, String targetLessonType) {
+    public static int getNumberOfPossibleReplacements(int indexForModule, String targetLessonType) {
         assert indexForModule >= 0 : "index should be within range";
 
         return listOfModules.get(indexForModule).getNumberOfReplacements(targetLessonType);
     }
 
-    public Lesson getLessonReplacement(int indexForModule, int indexForTarget, String targetType) {
+    public static Lesson getLessonReplacement(int indexForModule, int indexForTarget, String targetType) {
         assert indexForModule >= 0 : "index should be within range";
 
         return listOfModules.get(indexForModule).getReplacement(targetType, indexForTarget);
     }
 
-    public void replaceLesson(Lesson newLesson, int indexForModule) {
+    public static void replaceLesson(Lesson newLesson, int indexForModule) {
         assert indexForModule >= 0 : "index should be within range";
 
         listOfModules.get(indexForModule).replaceAttending(newLesson);

@@ -1,6 +1,7 @@
 package seedu.duke.commands;
 
 import seedu.duke.Timetable;
+import seedu.duke.UI;
 import seedu.duke.commands.nusmodsapi.Nusmods;
 import seedu.duke.module.Module;
 
@@ -10,16 +11,16 @@ import java.util.Scanner;
 
 public class CommandInfoModule {
 
-    public static String findModule(Timetable timetable) {
+    public static String findModule() {
         Nusmods mods = new Nusmods();
         String[] found = new String[3];
-        System.out.println("Please the module code you wish to get information about");
+        UI.printResponse("Please the module code you wish to get information about");
         try {
             found = mods.getModuleInfo();
         } catch (IOException e) {
-            System.out.println("Some IO errors has occurred, please try again");
+            UI.printResponse("Some IO errors has occurred, please try again");
         } catch (InterruptedException e) {
-            System.out.println("The API request was interrupted, please try again.");
+            UI.printResponse("The API request was interrupted, please try again.");
         }
         return formatFoundModules(found);
     }
