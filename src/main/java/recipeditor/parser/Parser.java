@@ -1,8 +1,14 @@
 package recipeditor.parser;
 
-import recipeditor.command.*;
-
-
+import recipeditor.command.Command;
+import recipeditor.command.AddCommand;
+import recipeditor.command.DeleteCommand;
+import recipeditor.command.ExitCommand;
+import recipeditor.command.ListCommand;
+import recipeditor.command.EditCommand;
+import recipeditor.command.ViewCommand;
+import recipeditor.command.FindCommand;
+import recipeditor.command.InvalidCommand;
 import recipeditor.recipe.RecipeList;
 import recipeditor.ui.AddMode;
 import recipeditor.ui.EditMode;
@@ -72,10 +78,10 @@ public class Parser {
         if (parsed.length < 2) {
             return new InvalidCommand();
         }
-        String FlagAndInputString = convertStringArrayToString(parsed);
-        String[] FlagAndInput = FlagAndInputString.split(" ", 2);
-        char flag = FlagAndInput[0].charAt(0);
-        String input = FlagAndInput[1];
+        String flagAndInputString = convertStringArrayToString(parsed);
+        String[] flagAndInput = flagAndInputString.split(" ", 2);
+        char flag = flagAndInput[0].charAt(0);
+        String input = flagAndInput[1];
         return new FindCommand(flag, input);
     }
 
@@ -87,8 +93,8 @@ public class Parser {
             String flag = flagAndInput[1];
             output.append(flag + " ");
         }
-        for(int i = 2; i < stringArray.length; i++) {
-            if (i == stringArray.length - 1){
+        for (int i = 2; i < stringArray.length; i++) {
+            if (i == stringArray.length - 1) {
                 output.append(stringArray[i]);
             } else {
                 output.append(stringArray[i] + " ");

@@ -73,7 +73,7 @@ public class RecipeList {
         return foundRecipeTitlesList;
     }
 
-        public static ArrayList<String> findRecipeTitlesFromIngredientName(String findInput) {
+    public static ArrayList<String> findRecipeTitlesFromIngredientName(String findInput) {
         ArrayList<String> foundRecipeTitlesList = new ArrayList<>();
         for (Recipe r : recipes) {
             ArrayList<Ingredient> recipeIngredients = r.getIngredients();
