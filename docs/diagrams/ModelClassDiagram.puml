@@ -1,0 +1,65 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+show field
+show methods
+
+package Storage <<Rectangle>> {
+Class HiddenStorage #FFFFFF
+}
+
+Package Model <<Rectangle>> {
+Class CarparkList {
+    -carparkHashMap: HashMap<String, Carpark>
+    -carparks: List<Carpark>
+    +CarparkList(Path, Path)
+    +findCarpark(String) : Carpark
+    +filterByAllStrings(Sentence) : CarparkFilteredList
+}
+
+Class Sentence {
+    -words: ArrayList<Word>
+    +Sentence(String)
+    +toString(): String
+}
+
+Class Word {
+    - isBold :boolean
+    - text :String
+    + toString(): String
+}
+
+Class Carpark {
+    -isFavourited: boolean
+    -allAvailableLots: HashMap<LotType, int>
+    -developmentSentence: Sentence
+    +getListViewString(): String
+    +getDetailViewString(): String
+    +addCarparkLotType()
+}
+Class CarparkFilteredList {
+    +CarparkFilteredList(List<Carpark>)
+    +getSearchListString(): String
+}
+
+Class "<<enumeration>>\nLotType" as LotType
+    {
+        CAR
+        MOTORCYCLE
+        HEAVY_VEHICLE
+    }
+    hide empty methods
+}
+
+Class HiddenOutside #FFFFFF
+
+Storage -[dashed]-> CarparkList
+CarparkList *--> "1..*" Carpark : contains
+CarparkList <|-- CarparkFilteredList
+CarparkFilteredList --> "*" Carpark : contains references to
+Carpark *--> "1" Sentence : contains
+Sentence *--> "1..*" Word : contains
+Carpark -[dashed]-> LotType
+@enduml

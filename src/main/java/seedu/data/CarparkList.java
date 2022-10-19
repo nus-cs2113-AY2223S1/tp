@@ -19,11 +19,12 @@ public class CarparkList {
     private final HashMap<String, Carpark> carparkHashMap = new HashMap<String, Carpark>();
     private List<Carpark> carparks;
 
+
     /**
      * Constructor for the {@link CarparkList} class. Loads from a {@link Path} object
      * that points to a {@code .json} file.
      *
-     * @param filepath Filepath to load from.
+     * @param filepath       Filepath to load from.
      * @param filepathBackup Backup filepath to load from.
      * @throws NoFileFoundException If no valid file is found in either location.
      */
@@ -38,7 +39,7 @@ public class CarparkList {
      *
      * @param carparks {@link List} of {@link Carpark} objects.
      */
-    public CarparkList(List<Carpark> carparks) {
+    CarparkList(List<Carpark> carparks) {
         this.carparks = carparks;
         combineByLotType();
     }
@@ -75,12 +76,12 @@ public class CarparkList {
      * @param searchQuery {@link Sentence} object to use as a search.
      * @return Filtered {@link CarparkList} object.
      */
-    public CarparkList filterByAllStrings(Sentence searchQuery) {
+    public CarparkFilteredList filterByAllStrings(Sentence searchQuery) {
         HashSet<Carpark> carparkListBuffer = new HashSet<>(carparks);
         for (Word word : searchQuery.getWords()) {
             carparkListBuffer = filterBySubstring(carparkListBuffer, word.toString());
         }
-        return new CarparkList(new ArrayList<>(carparkListBuffer));
+        return new CarparkFilteredList(new ArrayList<>(carparkListBuffer));
     }
 
     private HashSet<Carpark> filterBySubstring(HashSet<Carpark> carparkList, String wordString) {
@@ -98,29 +99,6 @@ public class CarparkList {
     }
 
     /**
-     * Resets the {@link Word#isBold} attribute in all {@link Carpark} objects.
-     */
-    public void resetBoldForAllCarparks() {
-        for (Carpark carpark : carparks) {
-            carpark.resetBold();
-        }
-    }
-
-    /**
-     * Gets a formatted string for use with the {@link seedu.commands.Search Search} command.
-     * @return
-     */
-    public String getSearchListString() {
-        StringBuilder bufferString = new StringBuilder();
-        int index = 1;
-        for (Carpark carpark : carparks) {
-            bufferString.append(String.format("%d. ", index)).append(carpark.getListViewString()).append("\n");
-            index += 1;
-        }
-        return bufferString.toString();
-    }
-
-    /**
      * Combines multiple {@link Carpark} objects that have the same {@link Carpark#carparkId} value, and groups them
      * based on lot type.
      */
@@ -134,5 +112,18 @@ public class CarparkList {
             }
         }
         carparks = new ArrayList<>(carparkHashMap.values());
+    }
+
+    public List<Carpark> getCarparks() {
+        return carparks;
+    }
+
+    /**
+     * Resets the {@link Word#isBold} attribute in all {@link Carpark} objects to false.
+     */
+    public void resetBoldForAllCarparks() {
+        for (Carpark carpark : carparks) {
+            carpark.resetBold();
+        }
     }
 }
