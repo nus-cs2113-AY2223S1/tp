@@ -24,9 +24,8 @@ public class HelpCommand extends Command {
                 + "add cardio /{description} /{time} /{repetitions} /{calories}\n"
                 + "add food /{description} /{calories}\n"
                 + "add weight /{weight} /{fat percentage}\n"
-                + "remove food /{food index}\n"
+                + "remove {food/exercise} /{food index/exerciseList index}\n"
                 + "mark {done/undone} /{exercise index}\n"
-                + "e_remove exercise /{index}\n"
                 + "view {biometrics/food} {exercise/strength/cardio /{done}}\n"
                 + "find {strength/cardio/food} /{description}");
     }

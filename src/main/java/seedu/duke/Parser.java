@@ -9,7 +9,6 @@ import seedu.duke.command.HelpCommand;
 import seedu.duke.command.InvalidCommand;
 import seedu.duke.command.MarkCommand;
 import seedu.duke.command.RemoveCommand;
-import seedu.duke.command.RemoveExerciseCommand;
 import seedu.duke.command.SetCommand;
 import seedu.duke.command.ViewCommand;
 
@@ -46,8 +45,6 @@ public class Parser {
             return new FindCommand(arguments);
         case "help":
             return new HelpCommand();
-        case "e_remove":
-            return new RemoveExerciseCommand(arguments);
         default:
             return new InvalidCommand();
         }
