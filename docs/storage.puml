@@ -1,0 +1,16 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+->Storage:openPreviousState()
+alt Has previous state
+    Storage->Storage:loadPreviousState()
+else No previous state
+    Storage->Storage:Display error message
+end
+Storage -> Bob: Authentication Request
+Bob --> Bob: Authentication Response
+
+Alice -> Bob: Another authentication Request
+Alice <-- Bob: another authentication Response
+@enduml
