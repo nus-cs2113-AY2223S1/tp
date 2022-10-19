@@ -647,7 +647,7 @@ public class ConsoleParserConfigurations {
                 COMMAND_VIEW_TARGET_ARG_TARGET_INDEX_HAS_VAL,
                 COMMAND_VIEW_TARGET_ARG_TARGET_INDEX_DESC
         );
-        optionTargetIndex.setRequired( COMMAND_VIEW_TARGET_ARG_TARGET_INDEX_IS_MAND);
+        optionTargetIndex.setRequired(COMMAND_VIEW_TARGET_ARG_TARGET_INDEX_IS_MAND);
 
         Options options = new Options();
         options.addOption(optionTargetIndex);

@@ -20,12 +20,7 @@ public class ConsoleParserCommandAddTargetInvalidException extends MoneyGoWhereE
         super(cause);
     }
 
-    public ConsoleParserCommandAddTargetInvalidException(
-            String message,
-            Throwable cause,
-            boolean enableSuppression,
-            boolean writableStackTrace
-    ) {
+    public ConsoleParserCommandAddTargetInvalidException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
     }
 }

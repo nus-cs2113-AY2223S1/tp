@@ -67,7 +67,7 @@ public class ConsoleParser {
     /**
      * Parses command arguments.
      *
-     * @param options Command line options.
+     * @param options   Command line options.
      * @param arguments Command line arguments.
      * @return Parsed command arguments.
      * @throws ParseException If an error is encountered during the parsing of command line arguments.
@@ -1107,7 +1107,7 @@ public class ConsoleParser {
             int targetIndex;
 
             try {
-               targetIndex = Integer.parseInt(targetIndexStr);
+                targetIndex = Integer.parseInt(targetIndexStr);
             } catch (NumberFormatException exception) {
                 throw new ConsoleParserCommandEditTargetInvalidException(exception);
             }
@@ -1486,9 +1486,15 @@ public class ConsoleParser {
      * @throws ConsoleParserCommandViewExpenseInvalidException          If the command view-expense is invalid.
      * @throws ConsoleParserCommandDeleteExpenseInvalidException        If the command delete-expense is invalid.
      * @throws ConsoleParserCommandEditExpenseInvalidException          If the command edit-expense is invalid.
-     * @throws ConsoleParserCommandSortExpenseInvalidException      If the command sort-expense is invalid.
+     * @throws ConsoleParserCommandSortExpenseInvalidException          If the command sort-expense is invalid.
      * @throws ConsoleParserCommandConvertCurrencyInvalidException      If the command convert-currency is invalid.
      * @throws ConsoleParserCommandAddTargetInvalidException            If the command add-target is invalid.
+     *                                                                  <<<<<<< Updated upstream
+     *                                                                  =======
+     * @throws ConsoleParserCommandViewTargetInvalidException           If the command view-target is invalid.
+     * @throws ConsoleParserCommandDeleteTargetInvalidException         If the command delete-target is invalid.
+     * @throws ConsoleParserCommandEditTargetInvalidException           If the command edit-target is invalid.
+     *                                                                  >>>>>>> Stashed changes
      * @throws ConsoleParserCommandAddIncomeInvalidException            If the command add-income is invalid.
      * @throws ConsoleParserCommandAddRecurringPaymentInvalidException  If the command Add-RecurringPayment is invalid.
      * @throws ConsoleParserCommandViewRecurringPaymentInvalidException If the command View-RecurringPayment is invalid.
