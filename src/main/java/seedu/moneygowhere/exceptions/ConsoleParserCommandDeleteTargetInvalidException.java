@@ -17,7 +17,12 @@ public class ConsoleParserCommandDeleteTargetInvalidException extends MoneyGoWhe
         super(cause);
     }
 
-    public ConsoleParserCommandDeleteTargetInvalidException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+    public ConsoleParserCommandDeleteTargetInvalidException(
+            String message,
+            Throwable cause,
+            boolean enableSuppression,
+            boolean writableStackTrace
+    ) {
         super(message, cause, enableSuppression, writableStackTrace);
     }
 }
