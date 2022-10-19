@@ -123,6 +123,7 @@ public class Parser {
             entity = inputWords[ENTITY_INDEX];
         }
     }
+    
     //@@author shengiv
     public static void getInputWords(String lineInput) {
         inputWords = lineInput.split("\\s+");
