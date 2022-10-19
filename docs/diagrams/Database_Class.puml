@@ -1,0 +1,50 @@
+@startuml
+
+class DatabaseStorage {
+    {static} + loadDatabase() : void
+    {static} - readFile(String filePath) : void
+    {static} - readDatabaseLine(String line) : String[]
+    {static} - updateDatabase(String[] lineData) : void
+    {static} - updateUniversityDatabase(String partnerUniversityName, String partnerUniversityCountry) : void
+    {static} - updateModuleMappingDatabase(String partnerUniversityName, String partnerUniversityCountry, String parterUniversityModuleCode, String partnerUnviersityModuleTitle String partnerUniversityModuleCredit, String nusModuleCode, String nusModuleTitle, String nusModuleCredit) : void
+}
+
+class FileNotFoundException {
+
+}
+
+class DatabaseParser {
+    {static} + parseDatabaseLine(String line) : String[]
+}
+
+class InvalidDatabaseLineException {
+
+}
+
+class Database {
+    {static} - universities : ArrayList<University>
+    {static} - moduleMappings : ArrayList<ModuleMapping>
+    {static} - isNewUniversity(University newUniversity) : boolean
+    {static} + addUniversity(University newUniversity) : void
+    {static} + addModuleMapping(ModuleMapping newModuleMapping) : void
+    {static} + findPuMapping(String moduleCode) : ModuleMapping
+    {static} + findNusMapping(String moduleCode) : ArrayList<ModuleMapping>
+    {static} + findUniversityMapping(String universityName) : ArrayList<ModuleMapping>
+}
+
+class UniversityNotFoundException {
+
+}
+
+class ModuleNotFoundException {
+
+}
+
+DatabaseStorage --> FileNotFoundException : <<throws>>
+DatabaseStorage "1" --> "1" Database
+DatabaseStorage "1" --> "1" DatabaseParser
+DatabaseParser --> InvalidDatabaseLineException : << throws>>
+Database --> UniversityNotFoundException : <<throws>>
+Database --> ModuleNotFoundException : <<throws>>
+
+@enduml
