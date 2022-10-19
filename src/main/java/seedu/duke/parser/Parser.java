@@ -24,9 +24,17 @@ public class Parser {
         case (SearchModuleCommand.COMMAND_WORD):
             return searchCommand(userInput);
         case (AddModuleCommand.COMMAND_WORD):
-            return addDeleteCommand(keywords, new AddModuleCommand(keywords));
+            try {
+                return addDeleteCommand(keywords, new AddModuleCommand(keywords));
+            } catch (Exception e) {
+                throw e;
+            }
         case (DeleteModuleCommand.COMMAND_WORD):
-            return addDeleteCommand(keywords, new DeleteModuleCommand(keywords));
+            try {
+                return addDeleteCommand(keywords, new DeleteModuleCommand(keywords));
+            } catch (Exception e) {
+                throw e;
+            }
         case (ViewTimetableCommand.COMMAND_WORD):
             return viewHelpExitCommand(keywords, new ViewTimetableCommand(keywords));
         case (HelpCommand.COMMAND_WORD):
