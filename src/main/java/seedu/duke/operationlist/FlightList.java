@@ -63,7 +63,7 @@ public class FlightList extends OperationList {
         checkFlightNumberDuplicates();
         checkAvailableGateNumber();
         FlightInfo flight = new FlightInfo(flightNumber, airline, destination,
-                departureTime, gateNumber, terminal, checkIn);
+                departureTime, gateNumber, checkIn);
         flights.add(flightIndex, flight);
         flightIndex++;
         ui.showFlightAddedMessage();
@@ -127,7 +127,6 @@ public class FlightList extends OperationList {
         getDestination(flightDetail);
         getDepartureTime(flightDetail);
         getGateNumber(flightDetail);
-        getTerminal(flightDetail);
         getCheckIn(flightDetail);
     }
 
@@ -152,10 +151,6 @@ public class FlightList extends OperationList {
 
     private void getGateNumber(String detail) throws SkyControlException {
         gateNumber = extractDetail(detail, GATE_NUMBER_DELIMITER, TERMINAL_DELIMITER).toUpperCase();
-    }
-
-    private void getTerminal(String detail) throws SkyControlException {
-        terminal = extractDetail(detail, TERMINAL_DELIMITER, CHECK_IN_ROW_DELIMITER).toUpperCase();
     }
 
     private void getCheckIn(String detail) throws SkyControlException {
@@ -216,7 +211,7 @@ public class FlightList extends OperationList {
 
     private void validateDestinationLength(String destination) throws SkyControlException {
         if (destination.length() > DESTINATION_LENGTH_LIMIT) {
-            throw new SkyControlException(ui.getExceedAirlineLengthError(destination));
+            throw new SkyControlException(ui.getExceedDestinationLengthError(destination));
         }
     }
 
