@@ -1491,7 +1491,7 @@ public class ConsoleParser {
      * @throws ConsoleParserCommandAddTargetInvalidException            If the command add-target is invalid.
      * @throws ConsoleParserCommandViewTargetInvalidException           If the command view-target is invalid.
      * @throws ConsoleParserCommandDeleteTargetInvalidException         If the command delete-target is invalid.
-     * @throws ConsoleParserCommandEditTargetInvalidException           If the command edit-target is invalid.     >>>>>>> Stashed changes
+     * @throws ConsoleParserCommandEditTargetInvalidException           If the command edit-target is invalid.
      * @throws ConsoleParserCommandAddIncomeInvalidException            If the command add-income is invalid.
      * @throws ConsoleParserCommandAddRecurringPaymentInvalidException  If the command Add-RecurringPayment is invalid.
      * @throws ConsoleParserCommandViewRecurringPaymentInvalidException If the command View-RecurringPayment is invalid.

@@ -15,7 +15,13 @@ public class ConsoleCommandEditTarget extends ConsoleCommand {
     private BigDecimal amount;
     private BigDecimal currentAmount;
 
-    public ConsoleCommandEditTarget(int targetIndex, String name, LocalDateTime dateTime, String description, BigDecimal amount, BigDecimal currentAmount) {
+    public ConsoleCommandEditTarget(
+            int targetIndex,
+            String name,
+            LocalDateTime dateTime,
+            String description,
+            BigDecimal amount,
+            BigDecimal currentAmount) {
         this.targetIndex = targetIndex;
         this.name = name;
         this.dateTime = dateTime;

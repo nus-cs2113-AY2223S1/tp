@@ -17,7 +17,12 @@ public class ConsoleParserCommandViewTargetInvalidException extends MoneyGoWhere
         super(cause);
     }
 
-    public ConsoleParserCommandViewTargetInvalidException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+    public ConsoleParserCommandViewTargetInvalidException(
+            String message,
+            Throwable cause,
+            boolean enableSuppression,
+            boolean writableStackTrace
+    ) {
         super(message, cause, enableSuppression, writableStackTrace);
     }
 }

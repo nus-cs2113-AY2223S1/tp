@@ -14,7 +14,12 @@ public class ConsoleCommandAddTarget extends ConsoleCommand {
     private BigDecimal amount;
     private BigDecimal currentAmount;
 
-    public ConsoleCommandAddTarget(String name, LocalDateTime dateTime, String description, BigDecimal amount, BigDecimal currentAmount) {
+    public ConsoleCommandAddTarget(
+            String name,
+            LocalDateTime dateTime,
+            String description,
+            BigDecimal amount,
+            BigDecimal currentAmount) {
         this.name = name;
         this.dateTime = dateTime;
         this.description = description;
