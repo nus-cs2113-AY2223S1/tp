@@ -1,0 +1,29 @@
+
+'https://plantuml.com/sequence-diagram
+
+@startuml
+activate Duke
+[-> Duke: User input
+Duke -> Parser: parse(input)
+activate Parser
+Parser -> Parser: specificCase(commandWord, content)
+activate Parser
+Parser -> Add: new Add(content)
+activate Add
+return c: Add
+return c: Add
+return c: Add
+deactivate Parser
+Duke -> Add: c.execute(moduleList)
+activate Add
+activate ModuleList
+Add -> ModuleList: add(modToAdd)
+deactivate Add
+ModuleList -> ModuleList: checkRepetition(modToAdd)
+activate ModuleList
+return isRepeat: boolean
+ModuleList -> UI: printAddMessage(mod_info)
+activate UI
+deactivate UI
+
+@enduml
