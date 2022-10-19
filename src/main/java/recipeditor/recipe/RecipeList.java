@@ -41,15 +41,25 @@ public class RecipeList {
         return null;
     }
 
-    public static int getRecipeIndexFromTitle(String recipleTitle) {
+    public static int getRecipeIndexFromTitle(String recipeTitle) {
         int i = 0;
         for (Recipe r : recipes) {
-            if (r.getTitle().equals(recipleTitle)) {
+            if (r.getTitle().equals(recipeTitle)) {
                 return i;
             }
             i++;
         }
         return -1;
+    }
+
+    public static ArrayList<String> findRecipeTitlesFromTitle(String recipeTitle) {
+        ArrayList<String> foundRecipeTitlesList = new ArrayList<>();
+        for (Recipe r : recipes) {
+            if (r.getTitle().contains(recipeTitle)) {
+                foundRecipeTitlesList.add(r.getTitle());
+            }
+        }
+        return foundRecipeTitlesList;
     }
 
     public static int getSize() {

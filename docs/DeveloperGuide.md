@@ -39,7 +39,7 @@ The UI component is responsible for all user interfaces of the application.
 </p>
 
 **API:** `Ui.java`
-1. `Ui` calls `CommandResult` to show the output message after a command is completed.
+1. `Ui` takes `CommandResult` as a parameter to show the output message after a command is completed.
 2. `AddMode` calls `Recipe` to add new recipe into the list.
 3. `AddMode` calls `Ingredient` to parse ingredients according to its name, amount and unit.
 

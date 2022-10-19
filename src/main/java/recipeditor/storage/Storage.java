@@ -59,7 +59,7 @@ public class Storage {
             Recipe newRecipe = new Recipe();
             while (s.hasNext()) {
                 String input = s.nextLine();
-                String[] fieldTypeAndData = input.split(":");
+                String[] fieldTypeAndData = input.split(": ");
                 switch (fieldTypeAndData[0]) {
                 case RECIPE_NAME_FIELD_TYPE:
                     newRecipe.setTitle(fieldTypeAndData[1]);

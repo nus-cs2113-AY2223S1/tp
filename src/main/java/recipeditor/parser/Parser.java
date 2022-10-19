@@ -1,20 +1,13 @@
 package recipeditor.parser;
 
-import recipeditor.command.Command;
-import recipeditor.command.AddCommand;
-import recipeditor.command.ListCommand;
-import recipeditor.command.InvalidCommand;
-import recipeditor.command.ExitCommand;
-import recipeditor.command.DeleteCommand;
-import recipeditor.command.EditCommand;
-import recipeditor.command.ViewCommand;
+import recipeditor.command.*;
 
 
 import recipeditor.recipe.RecipeList;
 import recipeditor.ui.AddMode;
 import recipeditor.ui.EditMode;
-import recipeditor.ui.Ui;
 
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -37,6 +30,8 @@ public class Parser {
             return parseEditCommand(parsed);
         case ViewCommand.COMMAND_TYPE:
             return parseListAlterCommand(parsed, commandWord);
+        case FindCommandByTitle.COMMAND_TYPE:
+            return parseFindCommandByTitle(parsed);
         default:
             return new InvalidCommand();
         }
@@ -75,6 +70,26 @@ public class Parser {
         edit.enterEditMode(parsed[1]);
         edit.exitEditMode();
         return new EditCommand(RecipeList.getRecipeIndexFromTitle(parsed[1]), edit.getEditedRecipe());
+    }
+
+    private static Command parseFindCommandByTitle(String[] parsed) {
+        if (parsed.length < 2) {
+            return new InvalidCommand();
+        }
+        String recipeTitle = convertStringArrayToString(parsed);
+        return new FindCommandByTitle(recipeTitle.toString());
+    }
+
+    private static String convertStringArrayToString(String[] stringArray) {
+        StringBuilder output = new StringBuilder();
+        for(int i = 1; i < stringArray.length; i++) {
+            if (i == stringArray.length - 1){
+                output.append(stringArray[i]);
+            } else {
+                output.append(stringArray[i] + " ");
+            }
+        }
+        return output.toString();
     }
 
     //    private void checkForExcessArgument(String[] args, int length)
