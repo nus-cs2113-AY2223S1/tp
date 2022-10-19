@@ -39,7 +39,7 @@ public class ViewTimetableCommand extends Command {
             ui.displayUi();
             return;
         }
-        Timetable timetable = new Timetable(lessons);
+        Timetable timetable = new Timetable(lessons, false, true);
         ui.addMessage(timetable.toString());
         ui.displayUi();
     }
@@ -63,8 +63,16 @@ public class ViewTimetableCommand extends Command {
         for (Map.Entry<LessonType, String> slot: selectedSlots.entrySet()) {
             Module module = selectedModule.getModule();
             int semester = state.getSemester();
-            RawLesson lesson = module.getSemesterData(semester)
-                    .getLessonsByTypeAndNo(slot.getKey(), slot.getValue()).get(0);
+            List<RawLesson> potentialLesson = module.getSemesterData(semester)
+                    .getLessonsByTypeAndNo(slot.getKey(), slot.getValue());
+            addValidLesson(lessons, module, potentialLesson);
+        }
+    }
+
+    private static void addValidLesson(List<Pair<Module, RawLesson>> lessons, Module module,
+                                       List<RawLesson> potentialLesson) {
+        if (!potentialLesson.isEmpty()) {
+            RawLesson lesson = potentialLesson.get(0);
             lessons.add(Pair.of(module, lesson));
         }
     }

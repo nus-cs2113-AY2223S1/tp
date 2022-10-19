@@ -8,9 +8,22 @@ __ __ _____ _____ _____ _____
 
 How can I help you today?
 --------------------------------------
-Module search list
-CS2113
-CS2113T
+Search Result:
+Total 2 module(s) found
+
+GEA1000 Quantitative Reasoning with Data
+GEA1000N Quantitative Reasoning with Data
+
+To get full details of the module, type 'get <module code>'
+--------------------------------------
+--------------------------------------
+Search Result:
+Total 2 module(s) found
+
+CS2113 Software Engineering & Object-Oriented Programming
+CS2113T Software Engineering & Object-Oriented Programming
+
+To get full details of the module, type 'get <module code>'
 --------------------------------------
 --------------------------------------
 CS2113 has been added
@@ -66,5 +79,7 @@ Slot selected successfully
 --------------------------------------
 --------------------------------------
 --------------------------------------
+This is your export link:
+https://nusmods.com/timetable/sem-1/share?CS2113=LEC:1,TUT:4
 Bye bye, See you again
 --------------------------------------
