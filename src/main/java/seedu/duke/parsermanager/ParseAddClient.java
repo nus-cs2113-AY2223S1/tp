@@ -10,8 +10,6 @@ import seedu.duke.exception.InvalidEmailException;
 import seedu.duke.exception.MissingFlagException;
 
 import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import static seedu.duke.CommandStructure.ADD_CLIENT_FLAGS;
 import static seedu.duke.Messages.EXCEPTION;
@@ -20,7 +18,7 @@ import static seedu.duke.Messages.MESSAGE_INVALID_CONTACT_NUMBER;
 import static seedu.duke.Messages.MESSAGE_INVALID_EMAIL;
 import static seedu.duke.Messages.MESSAGE_INVALID_BUDGET_FORMAT;
 
-public class ParseAddClient extends Parser {
+public class ParseAddClient extends ParseAdd {
     private final String commandDescription;
 
     private static final int CLIENT_NAME_INDEX = 0;
@@ -28,7 +26,6 @@ public class ParseAddClient extends Parser {
     private static final int CLIENT_EMAIL_INDEX = 2;
     private static final int CLIENT_BUDGET_INDEX = 3;
 
-    private static final int MISSING_FLAG_VALUE = -1;
     private static final int FLAG_JUMPER_VALUE = 2;
 
     /* Add Client Regex for Validation */
@@ -46,7 +43,7 @@ public class ParseAddClient extends Parser {
         this.commandDescription = addCommandDescription;
     }
 
-    public Command parseCommand() throws MissingFlagException, IncorrectFlagOrderException, EmptyDetailException,
+    public Command parseCommand() throws EmptyDetailException, MissingFlagException, IncorrectFlagOrderException,
             InvalidContactNumberException, InvalidEmailException, InvalidBudgetFormatException {
         try {
             checkForEmptyDetails(commandDescription);
@@ -68,47 +65,22 @@ public class ParseAddClient extends Parser {
         }
     }
 
-    private void checkForEmptyDetails(String commandDetail) throws EmptyDetailException {
-        boolean isEmptyDetail = isEmptyString(commandDetail);
-        if (isEmptyDetail) {
-            throw new EmptyDetailException(EXCEPTION);
-        }
-    }
-
-    private boolean isEmptyString(String commandDetail) {
-        return commandDetail.trim().isEmpty();
-    }
-
     private ArrayList<String> processCommandAddClientDetails(String rawCommandDetail)
             throws MissingFlagException, IncorrectFlagOrderException {
-        String[] flags = ADD_CLIENT_FLAGS;
-        int[] flagIndexPositions = getFlagIndexPositions(rawCommandDetail, flags);
+        int[] flagIndexPositions = getFlagIndexPositions(rawCommandDetail, ADD_CLIENT_FLAGS);
         checkForMissingClientFlags(flagIndexPositions);
         checkClientFlagsOrder(flagIndexPositions);
         return extractClientDetails(rawCommandDetail, flagIndexPositions);
-    }
-
-    private int[] getFlagIndexPositions(String commandDetail, String[] flags) {
-        int[] flagIndexPositions = new int[flags.length];
-
-        for (int flagIndex = 0; flagIndex < flags.length; flagIndex++) {
-            flagIndexPositions[flagIndex] = commandDetail.indexOf(flags[flagIndex]);
-        }
-        return flagIndexPositions;
     }
 
     private void checkForMissingClientFlags(int[] flagIndexPositions) throws MissingFlagException {
         for (int flagIndex = 0; flagIndex < flagIndexPositions.length; flagIndex++) {
             boolean isEmailIndex = (flagIndex == CLIENT_EMAIL_INDEX);
             //Skip empty check for email as email is optional
-            if (!isEmailIndex && !isFlagPresent(flagIndex)) {
+            if (!isEmailIndex && !checkForFlagPresence(flagIndex)) {
                 throw new MissingFlagException(EXCEPTION);
             }
         }
-    }
-
-    private boolean isFlagPresent(int flagIndexPosition) {
-        return (flagIndexPosition != MISSING_FLAG_VALUE);
     }
 
     private void checkClientFlagsOrder(int[] flagIndexPositions) throws IncorrectFlagOrderException {
@@ -122,13 +94,6 @@ public class ParseAddClient extends Parser {
         }  else {
             checkForCorrectFlagOrder(flagIndexPositions[CLIENT_CONTACT_NUMBER_INDEX],
                     flagIndexPositions[CLIENT_BUDGET_INDEX]);
-        }
-    }
-
-    private void checkForCorrectFlagOrder(int flagPosition, int nextFlagPosition) throws IncorrectFlagOrderException {
-        boolean hasCorrectOrder = (flagPosition < nextFlagPosition);
-        if (!hasCorrectOrder) {
-            throw new IncorrectFlagOrderException(EXCEPTION);
         }
     }
 
@@ -158,14 +123,6 @@ public class ParseAddClient extends Parser {
         extractedClientDetails.add(clientEmail.trim());
         extractedClientDetails.add(clientBudgetPerMonth.trim());
         return extractedClientDetails;
-    }
-
-    private static String extractDetail(String rawDetail, int beginIndex) {
-        return rawDetail.substring(beginIndex).trim();
-    }
-
-    private static String extractDetail(String rawDetail, int beginIndex, int endIndex) {
-        return rawDetail.substring(beginIndex, endIndex).trim();
     }
 
     private void validateClientDetails(ArrayList<String> clientDetails) throws EmptyDetailException,
@@ -203,11 +160,5 @@ public class ParseAddClient extends Parser {
         if (!hasValidBudgetNumberFormat) {
             throw new InvalidBudgetFormatException(EXCEPTION);
         }
-    }
-
-    private boolean checkForDetailFormat(String regex, String detail) {
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(detail);
-        return matcher.matches();
     }
 }
