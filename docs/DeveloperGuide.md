@@ -31,16 +31,16 @@ Note: The `Carpark` class contain many getters, setters and annotations to be us
 See [`FileLoader`](#FileLoader) for more information.
 
 #### API Component
+![API Class Diagram](images/ApiClassDiagram.png)
 The model component consists of a `Api` class that supports API call to LTA DataMall Services, under the
 package `seedu.api`.
 
-This component 
+This component:
 * Focuses on communicating with an external Api by using HTTP requests. 
 * JSON response will be stored in the local JSON file as long as the response is `200 OK` and not empty.
 * Only reads from the secret.txt file once and stores the API as a variable (will only read from the file
 if requested again).
 
-This component 
 
 How the API component of data fetching works
 1. The initialisation of the class will make an instance of the `Storage`, `HttpClient` and `Ui` class.

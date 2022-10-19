@@ -1,0 +1,52 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+show field
+show methods
+
+package Storage <<Rectangle>> {
+Class HiddenStorage #FFFFFF
+}
+
+package UI <<Rectangle>> {
+Class Ui #FFFFFF
+}
+
+package API <<Rectangle>> {
+Class Api {
+    -<u>FETCH_TRIES: int
+    -client: HttpClient
+    -ui: Ui
+    -request: HttpRequest
+    -responseFuture: CompletableFuture<HttpResponse<String>>
+    -apiKey: String
+    -authStatus: AuthenticationStatus
+    +Api(String, String)
+    +getApiKey(): String
+    +getAuthStatus(): String
+    +loadApiKey(String, String, boolean)
+    +loadDefaultApiKey()
+    +isApiValid(String): boolean
+    +asyncExecuteRequest()
+    +asyncGetResponse(): String
+    +fetchData()
+    +syncFetchData()
+    }
+
+Class "<<enumeration>>\nAuthenticationStatus" as AuthenticationStatus
+    {
+        SUCCESS
+        API_CHANGED
+        FAIL
+        DEFAULT
+    }
+    hide empty methods
+}
+
+Api --> AuthenticationStatus
+Api *-->"1" Storage
+Api *-->"1" Ui
+
+@enduml

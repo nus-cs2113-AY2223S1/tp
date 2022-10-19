@@ -10,7 +10,7 @@ package Storage <<Rectangle>> {
 Class HiddenStorage #FFFFFF
 }
 
-Package Model <<Rectangle>> {
+package Model <<Rectangle>> {
 Class CarparkList {
     -carparkHashMap: HashMap<String, Carpark>
     -carparks: List<Carpark>
