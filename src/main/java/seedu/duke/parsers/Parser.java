@@ -124,10 +124,12 @@ public class Parser {
         }
     }
 
+    //@@author shengiv
     public static void getInputWords(String lineInput) {
         inputWords = lineInput.split("\\s+");
     }
 
+    //@@author ivanthengwr
     private static void checkBlankOperation(String lineInput) {
         boolean isNotBye = !lineInput.contains(EXIT_ENTITY);
         if (inputWords.length == ONE_WORD && isNotBye) {

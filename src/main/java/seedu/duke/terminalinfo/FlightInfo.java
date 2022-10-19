@@ -28,6 +28,7 @@ public class FlightInfo {
         this.checkLn = checkIn;
     }
 
+    //@@author Franky4566
     public String getFlightNumber() {
         return flightNum;
     }
