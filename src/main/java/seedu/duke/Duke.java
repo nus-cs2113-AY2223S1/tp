@@ -77,7 +77,7 @@ public class Duke {
                     break;
                 case ADD:
                     try {
-                        ModuleMapping moduleMapping = Database.findModuleMapping(newUserCommand.getModuleCode());
+                        ModuleMapping moduleMapping = Database.findPuMapping(newUserCommand.getModuleCode());
                         Module puModule = moduleMapping.getPartnerUniversityModule();
                         Module nusModule = moduleMapping.getNusModule();
                         UserModuleMapping userModuleToAdd = new UserModuleMapping(puModule.getCode(),

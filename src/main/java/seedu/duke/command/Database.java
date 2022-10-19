@@ -63,7 +63,7 @@ public class Database {
         return true;
     }
 
-    public static ModuleMapping findModuleMapping(String moduleCode) throws ModuleNotFoundException {
+    public static ModuleMapping findPuMapping(String moduleCode) throws ModuleNotFoundException {
         for (ModuleMapping moduleMapping : moduleMappings) {
             if (moduleMapping.getPartnerUniversityModule().getCode().equals(moduleCode)) {
                 return moduleMapping;
