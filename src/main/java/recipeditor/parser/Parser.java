@@ -1,15 +1,18 @@
 package recipeditor.parser;
 
-import recipeditor.command.AddCommand;
 import recipeditor.command.Command;
-import recipeditor.command.DeleteCommand;
-import recipeditor.exception.ExcessArgumentException;
+import recipeditor.command.AddCommand;
 import recipeditor.command.ListCommand;
-import recipeditor.command.ExitCommand;
 import recipeditor.command.InvalidCommand;
+import recipeditor.command.ExitCommand;
+import recipeditor.command.DeleteCommand;
+import recipeditor.command.EditCommand;
 import recipeditor.command.ViewCommand;
 
+
+import recipeditor.recipe.RecipeList;
 import recipeditor.ui.AddMode;
+import recipeditor.ui.EditMode;
 import recipeditor.ui.Ui;
 
 import java.util.logging.Level;
@@ -30,6 +33,8 @@ public class Parser {
         case ExitCommand.COMMAND_TYPE:
             return new ExitCommand();
         case DeleteCommand.COMMAND_TYPE:
+        case EditCommand.COMMAND_TYPE:
+            return parseEditCommand(parsed);
         case ViewCommand.COMMAND_TYPE:
             return parseListAlterCommand(parsed, commandWord);
         default:
@@ -63,6 +68,13 @@ public class Parser {
             }
         }
         return new InvalidCommand();
+    }
+
+    private static Command parseEditCommand(String[] parsed) {
+        EditMode edit = new EditMode();
+        edit.enterEditMode(parsed[1]);
+        edit.exitEditMode();
+        return new EditCommand(RecipeList.getRecipeIndexFromTitle(parsed[1]), edit.getEditedRecipe());
     }
 
     //    private void checkForExcessArgument(String[] args, int length)

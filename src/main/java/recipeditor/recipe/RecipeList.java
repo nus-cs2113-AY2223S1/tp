@@ -28,13 +28,28 @@ public class RecipeList {
         recipes.remove(index);
     }
 
-    public Recipe getRecipeFromTitle(String recipleTitle) {
+    public static void editRecipe(int index, Recipe newRecipe) {
+        recipes.set(index, newRecipe);
+    }
+
+    public static Recipe getRecipeFromTitle(String recipleTitle) {
         for (Recipe r : recipes) {
             if (r.getTitle().equals(recipleTitle)) {
                 return r;
             }
         }
         return null;
+    }
+
+    public static int getRecipeIndexFromTitle(String recipleTitle) {
+        int i = 0;
+        for (Recipe r : recipes) {
+            if (r.getTitle().equals(recipleTitle)) {
+                return i;
+            }
+            i++;
+        }
+        return -1;
     }
 
     public static int getSize() {
