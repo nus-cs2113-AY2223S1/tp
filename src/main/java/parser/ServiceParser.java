@@ -52,7 +52,7 @@ public class ServiceParser {
             String description = input.substring(startOfD + lengthOfSignature);
             return new AddServiceCommand(description);
         } catch (DukeException e) {
-            System.out.println("Sorry, format of parameters entered for adding an service is invalid");
+            System.out.println("Sorry, format of parameters entered for adding a service is invalid");
             return new EmptyCommand();
         }
     }
@@ -63,7 +63,7 @@ public class ServiceParser {
             int index = parser.indexOfInput(input);
             return new RemoveServiceCommand(index);
         } catch (DukeException e) {
-            System.out.println("Sorry, index entered invalid for removing an service");
+            System.out.println("Sorry, index entered invalid for removing a service");
             return new EmptyCommand();
         }
     }

@@ -5,6 +5,7 @@ import command.appointmentCommand.AddAppointmentCommand;
 import command.appointmentCommand.RemoveAppointmentCommand;
 import command.appointmentCommand.SetAppointmentStatusCommand;
 import command.appointmentCommand.ViewAppointmentCommand;
+import exception.DukeException;
 
 public class AppointmentParser {
     private int lengthOfSignature;
@@ -16,93 +17,97 @@ public class AppointmentParser {
     }
 
     public Command parseAppointment(String input){
-        if(!input.contains(" ")){
-            if(input.equals("view")){
-                return new ViewAppointmentCommand();
+        try {
+            if(!input.contains(" ")){
+                if(input.equals("view")){
+                    return new ViewAppointmentCommand();
+                }
+                throw new DukeException();
             }
-            System.out.println("Error: too little parameters entered for appointment operation");
-            return new EndCommand();
-        }
-        if(input.equals("view")){
-            return new ViewAppointmentCommand();
-        }
 
-
-        String type = input.substring(0,input.indexOf(" "));
-        String statement = input.substring(input.indexOf(" "));
-        switch(type) {
-        case AddAppointmentCommand.COMMAND_WORD:
-            return prepareAddAppointment(statement);
-        case RemoveAppointmentCommand.COMMAND_WORD:
-            return prepareRemoveAppointment(statement);
-        /*
-        case AllocateAppointmentCommand.COMMAND_WORD:
-            return prepareAllocateAppointment(statement);
-        break;
-        */
-        case SetAppointmentStatusCommand.COMMAND_WORD:
-            return prepareSetAppointmentStatusCommand(statement);
-        default:
-            System.out.println("Error: unrecognized appointment operation");
-            return new EndCommand();
+            String type = input.substring(0,input.indexOf(" "));
+            String statement = input.substring(input.indexOf(" "));
+            switch(type) {
+            case AddAppointmentCommand.COMMAND_WORD:
+                return prepareAddAppointment(statement);
+            case RemoveAppointmentCommand.COMMAND_WORD:
+                return prepareRemoveAppointment(statement);
+            /*
+            case AllocateAppointmentCommand.COMMAND_WORD:
+                return prepareAllocateAppointment(statement);
+            break;
+            */
+            case SetAppointmentStatusCommand.COMMAND_WORD:
+                return prepareSetAppointmentStatusCommand(statement);
+            default:
+                System.out.println("Error: unrecognized appointment operation");
+                return new EndCommand();
+            }
+        } catch (DukeException e) {
+            System.out.println("Sorry, unrecognized appointment operation.");
+            return new EmptyCommand();
         }
     }
 
 
     public Command prepareRemoveAppointment(String input){
-        int index = parser.indexOfInput(input);
-        if(index == -1){
-            System.out.println("Error: index entered invalid for removing an appointment");
-            return new EndCommand();
+        try {
+            int index = parser.indexOfInput(input);
+            return new RemoveAppointmentCommand(index);
+        } catch (DukeException e) {
+            System.out.println("Sorry, index entered invalid for removing an appointment");
+            return new EmptyCommand();
         }
-
-        return new RemoveAppointmentCommand(index);
     }
 
     public Command prepareAddAppointment(String input){
-        int s = input.indexOf(" s/");
-        int p = input.indexOf(" p/");
-        int d = input.indexOf(" d/");
+        try {
+            int s = input.indexOf(" s/");
+            int p = input.indexOf(" p/");
+            int d = input.indexOf(" d/");
 
-        if(s > p || p > d || s == -1 || p == -1 || d == -1){
-            System.out.println("Error: format of parameters entered for adding an appointment is invalid");
-            return new EndCommand();
+            if (s > p || p > d || s == -1 || p == -1 || d == -1) {
+                throw new DukeException();
+            }
+
+            String service = input.substring(s + lengthOfSignature, p);
+            String petName = input.substring(p + lengthOfSignature, d);
+            String appointmentDate = input.substring(d + lengthOfSignature);
+            return new AddAppointmentCommand(petName, appointmentDate, service);
+        } catch (DukeException e) {
+            System.out.println("Sorry, format of parameters entered for adding an appointment is invalid");
+            return new EmptyCommand();
         }
-
-        String service = input.substring(s + lengthOfSignature, p);
-        String petName = input.substring(p + lengthOfSignature, d);
-        String appointmentDate = input.substring(d + lengthOfSignature);
-
-        return new AddAppointmentCommand(petName, appointmentDate, service);
     }
 
     public Command prepareSetAppointmentStatusCommand(String input) {
-        int i = input.indexOf(" i/");
-        int s = input.indexOf(" s/");
+        try {
+            int i = input.indexOf(" i/");
+            int s = input.indexOf(" s/");
+            if (i > s || i == -1 || s == -1) {
+                throw new DukeException();
+            }
 
-        if (i > s || i == -1 || s == -1) {
-            System.out.println("invalid input");
-            return new EndCommand();
+            String index = input.substring(i, s);
+            int indexInt = parser.indexOfInput(index);
+            if (indexInt == -1) {
+                throw new DukeException();
+            }
+
+            String status = input.substring(s);
+            int statusInt = parser.isStatus(status);
+            if (statusInt == -1 || (statusInt != 1 && statusInt != 0)) {
+                throw new DukeException();
+            }
+
+            return new SetAppointmentStatusCommand(indexInt,
+                    statusInt);
+        } catch (DukeException e) {
+            System.out.println("Sorry, format of parameters entered for setting status of an appointment is invalid");
+            return new EmptyCommand();
         }
 
-        String index = input.substring(i, s);
-        int indexInt = parser.indexOfInput(index);
 
-        if (indexInt == -1) {
-            System.out.println("Error: index entered invalid for setting appointment status");
-            return new EndCommand();
-        }
-
-        String status = input.substring(s);
-        int statusInt = parser.isStatus(status);
-
-        if (statusInt == -1 || (statusInt != 1 && statusInt != 0)) {
-            System.out.println("Error: status entered invalid for setting appointment status");
-            return new EndCommand();
-        }
-
-        return new SetAppointmentStatusCommand(indexInt,
-                statusInt);
     }
 
     /*
