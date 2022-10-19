@@ -75,19 +75,18 @@ public class EditMode {
         }
 
         switch (commandWord) {
-            case "/add":
-                return "Add command";
-            case "/del":
-                return "Del command";
-            case "/swap":
-                return "Swap command";
-            case "/view":
-                return "View command";
-            case "/done":
-                return "Quit command";
-
-            default:
-                return INVALID_INPUT;
+        case "/add":
+            return "Add command";
+        case "/del":
+            return "Del command";
+        case "/swap":
+            return "Swap command";
+        case "/view":
+            return "View command";
+        case "/done":
+            return "Quit command";
+        default:
+            return INVALID_INPUT;
         }
     }
 }
