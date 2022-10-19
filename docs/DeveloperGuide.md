@@ -13,6 +13,10 @@ This sector describes the architecture design of Upcycle with its components, an
 ### Duke 
 ![DukeSequence](images/DukeSequence.png)
 ### User component
+The class diagram below shows how User-related classes interact with each other. `User` object contains `name`, `age`, `contactNumber` attributes. Users are stored in UserList, which will be loaded and written on the file by `UserStorage` (inherits from `Storage`) whenever Upcycle runs or exits.
+All user-related commands operate mainly on a list of users (userList:UserList).
+
+![UserClassDiagram](images/UserClassDiagram.png)
 ### Item component 
 ### Transaction component
 The Class diagram below show how Transaction-related classes interact with each other. `Transaction` object contains `transactionId`, `itemName`, `itemId`, `borrower`, `duration`, `createdAt`, `returnedAt` attributes. Among those, `transactionId` is created by `IdGenerator`'s static method and dates are parsed by `DateParser`, therefore, Transaction class depends on those two classes.
