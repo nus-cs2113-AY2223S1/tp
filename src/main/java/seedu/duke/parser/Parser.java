@@ -1,13 +1,6 @@
 package seedu.duke.parser;
 
-import seedu.duke.command.AddModuleCommand;
-import seedu.duke.command.Command;
-import seedu.duke.command.DeleteModuleCommand;
-import seedu.duke.command.ExitCommand;
-import seedu.duke.command.HelpCommand;
-import seedu.duke.command.ViewTimetableCommand;
-import seedu.duke.command.SelectSlotCommand;
-import seedu.duke.command.SearchModuleCommand;
+import seedu.duke.command.*;
 import seedu.duke.exceptions.IncompleteCommandException;
 import seedu.duke.exceptions.InvalidModuleException;
 import seedu.duke.exceptions.UnknownCommandException;
@@ -35,6 +28,8 @@ public class Parser {
             return new SelectSlotCommand(userInput);
         case (ExitCommand.COMMAND_WORD):
             return viewHelpExitCommand(keywords, new ExitCommand(keywords));
+        case (ExportCommand.COMMAND_WORD):
+            return viewHelpExitCommand(keywords, new ExportCommand(keywords));
         default:
             throw new UnknownCommandException();
         }
