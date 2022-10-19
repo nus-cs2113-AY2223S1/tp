@@ -120,17 +120,18 @@ public class Parser {
      */
     public static Command addDeleteCommand(String[] keywords, Command command) throws Exception {
 
+        if (isValidTwoWordCommand(keywords)) {
+            return command;
+        }
+
+        // TODO: to refactor the exception mechanism
         try {
             determineWrongCommand(keywords);
         } catch (Exception e) {
             throw e;
         }
 
-        if (isValidTwoWordCommand(keywords)) {
-            return command;
-        } else {
-            throw new UnknownCommandException();
-        }
+        return null;
     }
 
     private static void determineWrongCommand(String[] keywords) throws Exception {
