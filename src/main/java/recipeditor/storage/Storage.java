@@ -6,6 +6,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import recipeditor.recipe.Ingredient;
 import recipeditor.recipe.Recipe;
@@ -19,21 +21,27 @@ public class Storage {
     private static final String RECIPE_INGREDIENTS_FIELD_TYPE = "Recipe Ingredients";
     private static final String RECIPE_STEPS_FIELD_TYPE = "Recipe Steps";
 
+    private static Logger logger = Logger.getLogger("LOGS");
+
     public static void createDataFile() {
         try {
             File file = new File(DATA_FILE_PATH);
+            if (!file.getParentFile().exists()) {
+                file.getParentFile().mkdirs();
+            }
             if (file.createNewFile()) {
-                Ui.printFilePath(file, DATA_FILE_PATH);
+                logger.log(Level.INFO, "New data file is created at " + DATA_FILE_PATH);
             } else {
-                Ui.printFilePath(file, DATA_FILE_PATH);
+                logger.log(Level.INFO, "Data file already exists at " + DATA_FILE_PATH);
             }
         } catch (IOException ioException) {
-            Ui.showMessage("Error creating data file");
+            Ui.showMessage(ioException.getMessage());
         }
     }
 
     public static void loadRecipeToDataFile(Recipe recipe) {
         try {
+            logger.log(Level.INFO, "Loading Recipe to Data File");
             FileWriter fw = new FileWriter(DATA_FILE_PATH, true);
             fw.write(recipe.getRecipeAttributesFormatted());
             fw.write(Ui.DIVIDER + "\n");
@@ -45,6 +53,7 @@ public class Storage {
 
     public static void loadRecipesFromDataFile() {
         try {
+            logger.log(Level.INFO, "Loading Recipe from Data File");
             File dataFile = new File(DATA_FILE_PATH);
             Scanner s = new Scanner(dataFile);
             Recipe newRecipe = new Recipe();

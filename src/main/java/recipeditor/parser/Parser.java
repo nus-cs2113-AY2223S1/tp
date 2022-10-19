@@ -12,7 +12,11 @@ import recipeditor.command.ViewCommand;
 import recipeditor.ui.AddMode;
 import recipeditor.ui.Ui;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class Parser {
+    private static Logger logger = Logger.getLogger("LOGS");
 
     public static Command parseCommand(String input) {
         String[] parsed = input.split(" ");
@@ -40,7 +44,7 @@ public class Parser {
         add.exitAddMode();
         //Recipe addedRecipe = add.getRecipe();
         //Storage.loadRecipeToDataFile(addedRecipe);
-        Ui.showMessage("Is the recipe valid? " + add.isValid);
+        logger.log(Level.INFO, "Is the recipe valid? "+ add.isValid);
         return new AddCommand(add.isValid, add.addedRecipe); // Pass validty and potential recipe to AddCommand
     }
 
