@@ -39,7 +39,7 @@ public class CarparkList {
      *
      * @param carparks {@link List} of {@link Carpark} objects.
      */
-    public CarparkList(List<Carpark> carparks) {
+    CarparkList(List<Carpark> carparks) {
         this.carparks = carparks;
         combineByLotType();
     }

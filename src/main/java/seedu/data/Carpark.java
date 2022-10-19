@@ -68,7 +68,7 @@ public class Carpark {
         return bufferString;
     }
 
-    public String getLotBreakdownString() {
+    private String getLotBreakdownString() {
         StringBuilder bufferString = new StringBuilder();
         List<LotType> lotTypes = new ArrayList<>();
         lotTypes.add(LotType.CAR);
