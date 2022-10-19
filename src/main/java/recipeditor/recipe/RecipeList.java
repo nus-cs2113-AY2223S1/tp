@@ -52,14 +52,30 @@ public class RecipeList {
         return -1;
     }
 
-    public static ArrayList<String> findRecipeTitles(String findInput) {
+    public static ArrayList<String> findRecipeTitles(char flag, String findInput) {
+        switch (flag) {
+        case 'r':
+            return findRecipeTitlesFromRecipeTitle(findInput);
+        case 'i':
+            return findRecipeTitlesFromIngredientName(findInput);
+        default:
+            return new ArrayList<String>();
+        }
+    }
+
+    public static ArrayList<String> findRecipeTitlesFromRecipeTitle(String findInput) {
         ArrayList<String> foundRecipeTitlesList = new ArrayList<>();
         for (Recipe r : recipes) {
-            // find recipe title according to recipe title
             if (r.getTitle().contains(findInput)) {
                 foundRecipeTitlesList.add(r.getTitle());
             }
-            // find recipe title according to ingredient name
+        }
+        return foundRecipeTitlesList;
+    }
+
+        public static ArrayList<String> findRecipeTitlesFromIngredientName(String findInput) {
+        ArrayList<String> foundRecipeTitlesList = new ArrayList<>();
+        for (Recipe r : recipes) {
             ArrayList<Ingredient> recipeIngredients = r.getIngredients();
             for (Ingredient i : recipeIngredients) {
                 if (i.getName().contains(findInput)) {

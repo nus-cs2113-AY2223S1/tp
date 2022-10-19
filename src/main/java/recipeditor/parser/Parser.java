@@ -34,7 +34,6 @@ public class Parser {
         default:
             return new InvalidCommand();
         }
-
     }
 
     private static Command parseAddCommand() {
@@ -73,13 +72,22 @@ public class Parser {
         if (parsed.length < 2) {
             return new InvalidCommand();
         }
-        String recipeTitle = convertStringArrayToString(parsed);
-        return new FindCommand(recipeTitle);
+        String FlagAndInputString = convertStringArrayToString(parsed);
+        String[] FlagAndInput = FlagAndInputString.split(" ", 2);
+        char flag = FlagAndInput[0].charAt(0);
+        String input = FlagAndInput[1];
+        return new FindCommand(flag, input);
     }
 
     private static String convertStringArrayToString(String[] stringArray) {
         StringBuilder output = new StringBuilder();
-        for(int i = 1; i < stringArray.length; i++) {
+        // Finding the flag in the string array input
+        if (stringArray[1].contains("-")) {
+            String[] flagAndInput = stringArray[1].split("-");
+            String flag = flagAndInput[1];
+            output.append(flag + " ");
+        }
+        for(int i = 2; i < stringArray.length; i++) {
             if (i == stringArray.length - 1){
                 output.append(stringArray[i]);
             } else {

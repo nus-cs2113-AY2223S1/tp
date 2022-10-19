@@ -1,7 +1,5 @@
 package recipeditor.command;
 
-import recipeditor.ui.Ui;
-
 public class InvalidCommand extends Command {
     public static final String COMMAND_TYPE = "/invalid";
     public static String INVALID_MESSAGE = "This command is invalid! Please write again!";
