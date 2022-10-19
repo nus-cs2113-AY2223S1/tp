@@ -23,7 +23,8 @@ public class DatabaseTest {
         Database.addModuleMapping(moduleMapping);
 
         assertEquals(
-                "21121340 Computer Networks 2.5MCs in Zhejiang University | CS2105 Intro to Computer Networks 4MCs in NUS",
+                "21121340 Computer Networks 2.5MCs in Zhejiang University | CS2105 Intro to Computer "
+                        + "Networks 4MCs in NUS",
                 Database.getModuleMappings().get(Database.getModuleMappings().size() - 1).toString());
     }
 
@@ -41,7 +42,8 @@ public class DatabaseTest {
         DatabaseStorage.loadDatabase();
 
         assertEquals(
-                "C3130 Information Security 5MCs in Aalto University | CS2107 Introduction to Information Se 4MCs in NUS",
+                "C3130 Information Security 5MCs in Aalto University | CS2107 Introduction to Information "
+                        + "Se 4MCs in NUS",
                 Database.findPuMapping("C3130").toString());
     }
 
@@ -57,19 +59,19 @@ public class DatabaseTest {
         DatabaseStorage.loadDatabase();
 
         assertEquals(
-                "[COM162 Object Oriented Design and Programming with Java 15MCs in The University of " +
-                        "Sheffield | CS2113 Software Engineering & Object- 4MCs in NUS, CS329E Elements of Software " +
-                        "Engineering 3MCs in The University of Texas at Austin | CS2113 Software Engineering & " +
-                        "Object- 4MCs in NUS, COM162 Object Oriented Design and Programming with Java 15MCs in The " +
-                        "University of Sheffield | CS2113 Software Engineering & Object- 4MCs in NUS, CS329E " +
-                        "Elements of Software Engineering 3MCs in The University of Texas at Austin | CS2113 " +
-                        "Software Engineering & Object- 4MCs in NUS, COM162 Object Oriented Design and Programming " +
-                        "with Java 15MCs in The University of Sheffield | CS2113 Software Engineering & Object- 4MCs " +
-                        "in NUS, CS329E Elements of Software Engineering 3MCs in The University of Texas at " +
-                        "Austin | CS2113 Software Engineering & Object- 4MCs in NUS, COM162 Object Oriented Design " +
-                        "and Programming with Java 15MCs in The University of Sheffield | CS2113 Software " +
-                        "Engineering & Object- 4MCs in NUS, CS329E Elements of Software Engineering 3MCs in The " +
-                        "University of Texas at Austin | CS2113 Software Engineering & Object- 4MCs in NUS]",
+                "[COM162 Object Oriented Design and Programming with Java 15MCs in The University of "
+                        + "Sheffield | CS2113 Software Engineering & Object- 4MCs in NUS, CS329E Elements of Software "
+                        + "Engineering 3MCs in The University of Texas at Austin | CS2113 Software Engineering & "
+                        + "Object- 4MCs in NUS, COM162 Object Oriented Design and Programming with Java 15MCs in The "
+                        + "University of Sheffield | CS2113 Software Engineering & Object- 4MCs in NUS, CS329E "
+                        + "Elements of Software Engineering 3MCs in The University of Texas at Austin | CS2113 "
+                        + "Software Engineering & Object- 4MCs in NUS, COM162 Object Oriented Design and Programming "
+                        + "with Java 15MCs in The University of Sheffield | CS2113 Software Engineering & Object- 4MCs "
+                        + "in NUS, CS329E Elements of Software Engineering 3MCs in The University of Texas at "
+                        + "Austin | CS2113 Software Engineering & Object- 4MCs in NUS, COM162 Object Oriented Design "
+                        + "and Programming with Java 15MCs in The University of Sheffield | CS2113 Software "
+                        + "Engineering & Object- 4MCs in NUS, CS329E Elements of Software Engineering 3MCs in The "
+                        + "University of Texas at Austin | CS2113 Software Engineering & Object- 4MCs in NUS]",
                 Database.findNusMapping("CS2113").toString());
     }
 
@@ -85,42 +87,42 @@ public class DatabaseTest {
         DatabaseStorage.loadDatabase();
 
         assertEquals(
-                "[C3130 Information Security 5MCs in Aalto University | CS2107 Introduction to Information " +
-                        "Se 4MCs in NUS, C3150 Software Engineering 5MCs in Aalto University | CS2103 Software " +
-                        "Engineering 4MCs in NUS, CS-C3130 Information Security 5MCs in Aalto University | CS2107 " +
-                        "Introduction to Information Se 4MCs in NUS, CS--E4300 Network Security 5MCs in Aalto " +
-                        "University | CS2107 Introduction to Information Se 4MCs in NUS, CS--E4320 Cryptography and " +
-                        "Data Security 5MCs in Aalto University | CS2107 Introduction to Information Se 4MCs in " +
-                        "NUS, ELEC-E7120 Wireless Systems 5MCs in Aalto University | CS4222 Wireless Networking 4MCs " +
-                        "in NUS, C3130 Information Security 5MCs in Aalto University | CS2107 Introduction to " +
-                        "Information Se 4MCs in NUS, C3150 Software Engineering 5MCs in Aalto University | CS2103 " +
-                        "Software Engineering 4MCs in NUS, CS-C3130 Information Security 5MCs in Aalto University | " +
-                        "CS2107 Introduction to Information Se 4MCs in NUS, CS--E4300 Network Security 5MCs in Aalto " +
-                        "University | CS2107 Introduction to Information Se 4MCs in NUS, CS--E4320 Cryptography and " +
-                        "Data Security 5MCs in Aalto University | CS2107 Introduction to Information Se 4MCs in NUS, " +
-                        "ELEC-E7120 Wireless Systems 5MCs in Aalto University | CS4222 Wireless Networking 4MCs in " +
-                        "NUS, C3130 Information Security 5MCs in Aalto University | CS2107 Introduction to " +
-                        "Information Se 4MCs in NUS, C3150 Software Engineering 5MCs in Aalto University | CS2103 " +
-                        "Software Engineering 4MCs in NUS, CS-C3130 Information Security 5MCs in Aalto University | " +
-                        "CS2107 Introduction to Information Se 4MCs in NUS, CS--E4300 Network Security 5MCs in Aalto " +
-                        "University | CS2107 Introduction to Information Se 4MCs in NUS, CS--E4320 Cryptography and " +
-                        "Data Security 5MCs in Aalto University | CS2107 Introduction to Information Se 4MCs in NUS, " +
-                        "ELEC-E7120 Wireless Systems 5MCs in Aalto University | CS4222 Wireless Networking 4MCs in " +
-                        "NUS, C3130 Information Security 5MCs in Aalto University | CS2107 Introduction to " +
-                        "Information Se 4MCs in NUS, C3150 Software Engineering 5MCs in Aalto University | CS2103 " +
-                        "Software Engineering 4MCs in NUS, CS-C3130 Information Security 5MCs in Aalto University | " +
-                        "CS2107 Introduction to Information Se 4MCs in NUS, CS--E4300 Network Security 5MCs in " +
-                        "Aalto University | CS2107 Introduction to Information Se 4MCs in NUS, CS--E4320 " +
-                        "Cryptography and Data Security 5MCs in Aalto University | CS2107 Introduction to " +
-                        "Information Se 4MCs in NUS, ELEC-E7120 Wireless Systems 5MCs in Aalto University | CS4222 " +
-                        "Wireless Networking 4MCs in NUS, C3130 Information Security 5MCs in Aalto University | " +
-                        "CS2107 Introduction to Information Se 4MCs in NUS, C3150 Software Engineering 5MCs in Aalto " +
-                        "University | CS2103 Software Engineering 4MCs in NUS, CS-C3130 Information Security 5MCs in " +
-                        "Aalto University | CS2107 Introduction to Information Se 4MCs in NUS, CS--E4300 Network " +
-                        "Security 5MCs in Aalto University | CS2107 Introduction to Information Se 4MCs in NUS, " +
-                        "CS--E4320 Cryptography and Data Security 5MCs in Aalto University | CS2107 Introduction to " +
-                        "Information Se 4MCs in NUS, ELEC-E7120 Wireless Systems 5MCs in Aalto University | CS4222 " +
-                        "Wireless Networking 4MCs in NUS]",
+                "[C3130 Information Security 5MCs in Aalto University | CS2107 Introduction to Information "
+                        + "Se 4MCs in NUS, C3150 Software Engineering 5MCs in Aalto University | CS2103 Software "
+                        + "Engineering 4MCs in NUS, CS-C3130 Information Security 5MCs in Aalto University | CS2107 "
+                        + "Introduction to Information Se 4MCs in NUS, CS--E4300 Network Security 5MCs in Aalto "
+                        + "University | CS2107 Introduction to Information Se 4MCs in NUS, CS--E4320 Cryptography and "
+                        + "Data Security 5MCs in Aalto University | CS2107 Introduction to Information Se 4MCs in "
+                        + "NUS, ELEC-E7120 Wireless Systems 5MCs in Aalto University | CS4222 Wireless Networking 4MCs "
+                        + "in NUS, C3130 Information Security 5MCs in Aalto University | CS2107 Introduction to "
+                        + "Information Se 4MCs in NUS, C3150 Software Engineering 5MCs in Aalto University | CS2103 "
+                        + "Software Engineering 4MCs in NUS, CS-C3130 Information Security 5MCs in Aalto University | "
+                        + "CS2107 Introduction to Information Se 4MCs in NUS, CS--E4300 Network Security 5MCs in Aalto "
+                        + "University | CS2107 Introduction to Information Se 4MCs in NUS, CS--E4320 Cryptography and "
+                        + "Data Security 5MCs in Aalto University | CS2107 Introduction to Information Se 4MCs in NUS, "
+                        + "ELEC-E7120 Wireless Systems 5MCs in Aalto University | CS4222 Wireless Networking 4MCs in "
+                        + "NUS, C3130 Information Security 5MCs in Aalto University | CS2107 Introduction to "
+                        + "Information Se 4MCs in NUS, C3150 Software Engineering 5MCs in Aalto University | CS2103 "
+                        + "Software Engineering 4MCs in NUS, CS-C3130 Information Security 5MCs in Aalto University | "
+                        + "CS2107 Introduction to Information Se 4MCs in NUS, CS--E4300 Network Security 5MCs in Aalto "
+                        + "University | CS2107 Introduction to Information Se 4MCs in NUS, CS--E4320 Cryptography and "
+                        + "Data Security 5MCs in Aalto University | CS2107 Introduction to Information Se 4MCs in NUS, "
+                        + "ELEC-E7120 Wireless Systems 5MCs in Aalto University | CS4222 Wireless Networking 4MCs in "
+                        + "NUS, C3130 Information Security 5MCs in Aalto University | CS2107 Introduction to "
+                        + "Information Se 4MCs in NUS, C3150 Software Engineering 5MCs in Aalto University | CS2103 "
+                        + "Software Engineering 4MCs in NUS, CS-C3130 Information Security 5MCs in Aalto University | "
+                        + "CS2107 Introduction to Information Se 4MCs in NUS, CS--E4300 Network Security 5MCs in "
+                        + "Aalto University | CS2107 Introduction to Information Se 4MCs in NUS, CS--E4320 "
+                        + "Cryptography and Data Security 5MCs in Aalto University | CS2107 Introduction to "
+                        + "Information Se 4MCs in NUS, ELEC-E7120 Wireless Systems 5MCs in Aalto University | CS4222 "
+                        + "Wireless Networking 4MCs in NUS, C3130 Information Security 5MCs in Aalto University | "
+                        + "CS2107 Introduction to Information Se 4MCs in NUS, C3150 Software Engineering 5MCs in Aalto "
+                        + "University | CS2103 Software Engineering 4MCs in NUS, CS-C3130 Information Security 5MCs in "
+                        + "Aalto University | CS2107 Introduction to Information Se 4MCs in NUS, CS--E4300 Network "
+                        + "Security 5MCs in Aalto University | CS2107 Introduction to Information Se 4MCs in NUS, "
+                        + "CS--E4320 Cryptography and Data Security 5MCs in Aalto University | CS2107 Introduction to "
+                        + "Information Se 4MCs in NUS, ELEC-E7120 Wireless Systems 5MCs in Aalto University | CS4222 "
+                        + "Wireless Networking 4MCs in NUS]",
                 Database.findUniversityMapping("Aalto University").toString());
     }
 
@@ -129,6 +131,6 @@ public class DatabaseTest {
         DatabaseStorage.loadDatabase();
 
         assertThrows(UniversityNotFoundException.class,
-                () -> Database.findUniversityMapping("ABCD").toString());
+            () -> Database.findUniversityMapping("ABCD").toString());
     }
 }
