@@ -31,7 +31,7 @@ public class Authentication {
         return isProgramEnd;
     }
 
-    private static Commands getCommandType(String inputLine) throws FinanceException {
+    public static Commands getCommandType(String inputLine) throws FinanceException {
         Commands commandType;
         try {
             commandType = Commands.valueOf(inputLine.toUpperCase());
