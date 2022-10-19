@@ -5,6 +5,7 @@ import command.appointmentCommand.AddAppointmentCommand;
 import command.appointmentCommand.RemoveAppointmentCommand;
 import command.appointmentCommand.SetAppointmentStatusCommand;
 import command.appointmentCommand.ViewAppointmentCommand;
+import exception.DukeException;
 
 public class AppointmentParser {
     private int lengthOfSignature;
@@ -16,35 +17,35 @@ public class AppointmentParser {
     }
 
     public Command parseAppointment(String input){
-        if(!input.contains(" ")){
-            if(input.equals("view")){
-                return new ViewAppointmentCommand();
+        try {
+            if(!input.contains(" ")){
+                if(input.equals("view")){
+                    return new ViewAppointmentCommand();
+                }
+                throw new DukeException();
             }
-            System.out.println("Error: too little parameters entered for appointment operation");
-            return new EndCommand();
-        }
-        if(input.equals("view")){
-            return new ViewAppointmentCommand();
-        }
 
-
-        String type = input.substring(0,input.indexOf(" "));
-        String statement = input.substring(input.indexOf(" "));
-        switch(type) {
-        case AddAppointmentCommand.COMMAND_WORD:
-            return prepareAddAppointment(statement);
-        case RemoveAppointmentCommand.COMMAND_WORD:
-            return prepareRemoveAppointment(statement);
-        /*
-        case AllocateAppointmentCommand.COMMAND_WORD:
-            return prepareAllocateAppointment(statement);
-        break;
-        */
-        case SetAppointmentStatusCommand.COMMAND_WORD:
-            return prepareSetAppointmentStatusCommand(statement);
-        default:
-            System.out.println("Error: unrecognized appointment operation");
-            return new EndCommand();
+            String type = input.substring(0,input.indexOf(" "));
+            String statement = input.substring(input.indexOf(" "));
+            switch(type) {
+            case AddAppointmentCommand.COMMAND_WORD:
+                return prepareAddAppointment(statement);
+            case RemoveAppointmentCommand.COMMAND_WORD:
+                return prepareRemoveAppointment(statement);
+            /*
+            case AllocateAppointmentCommand.COMMAND_WORD:
+                return prepareAllocateAppointment(statement);
+            break;
+            */
+            case SetAppointmentStatusCommand.COMMAND_WORD:
+                return prepareSetAppointmentStatusCommand(statement);
+            default:
+                System.out.println("Error: unrecognized appointment operation");
+                return new EndCommand();
+            }
+        } catch (DukeException e) {
+            System.out.println("Sorry, unrecognized appointment operation.");
+            return new EmptyCommand();
         }
     }
 
