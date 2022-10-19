@@ -17,7 +17,7 @@ public class ModuleMappingTest {
 
         assertEquals(
                 "21121340 Computer Networks 2.5MCs in Zhejiang University | CS2105 Intro to Computer"
-                        + "Networks 4MCs in NUS",
+                        + " Networks 4MCs in NUS",
                 moduleMapping.toString());
     }
 }
