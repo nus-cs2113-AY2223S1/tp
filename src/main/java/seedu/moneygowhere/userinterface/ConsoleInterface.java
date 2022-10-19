@@ -286,7 +286,7 @@ public class ConsoleInterface {
         printInformationalMessage(convertExpenseToConsoleString(expense));
     }
 
-    private void viewExpenseByExpenseCategory(String expenseCategory) {
+    private void viewExpenseByExpenseCategory(String expenseCategory) throws ExpenseManagerExpenseNotFoundException {
         ArrayList<Expense> expenses = expenseManager.getExpensesByCategory(expenseCategory);
 
         for (int index = 0; index < expenses.size(); index++) {
@@ -319,7 +319,11 @@ public class ConsoleInterface {
         if (expenseIndex >= 0) {
             viewExpenseByExpenseIndex(expenseIndex);
         } else if (expenseCategory != null && !expenseCategory.isEmpty()) {
-            viewExpenseByExpenseCategory(expenseCategory);
+            try {
+                viewExpenseByExpenseCategory(expenseCategory);
+            } catch (ExpenseManagerExpenseNotFoundException exception) {
+                printErrorMessage(exception.getMessage());
+            }
         } else {
             viewExpense();
         }

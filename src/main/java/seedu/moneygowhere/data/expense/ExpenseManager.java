@@ -49,13 +49,17 @@ public class ExpenseManager {
         return expenses;
     }
 
-    public ArrayList<Expense> getExpensesByCategory(String categoryName) {
+    public ArrayList<Expense> getExpensesByCategory(String categoryName) throws ExpenseManagerExpenseNotFoundException {
         ArrayList<Expense> expensesByCategory = new ArrayList<>();
 
-        for (Expense expense : expenses) {
-            if (expense.getCategory().equals(categoryName)) {
-                expensesByCategory.add(expense);
+        try {
+            for (Expense expense : expenses) {
+                if (expense.getCategory().equals(categoryName)) {
+                    expensesByCategory.add(expense);
+                }
             }
+        } catch (NullPointerException exception) {
+            throw new ExpenseManagerExpenseNotFoundException(Messages.EXPENSE_MANAGER_ERROR_EXPENSE_NOT_FOUND);
         }
 
         return expensesByCategory;
