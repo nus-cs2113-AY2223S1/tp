@@ -1,9 +1,9 @@
 package seedu.duke.exceptions;
 
-public class InvalidDatabaseLineException extends Exception {
+public class InvalidUniversityException extends Exception {
     private String message;
 
-    public InvalidDatabaseLineException(String message) {
+    public InvalidUniversityException(String message) {
         this.message = message;
     }
 
