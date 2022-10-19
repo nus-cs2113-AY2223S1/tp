@@ -17,36 +17,34 @@ public class UI {
     // Patient
     private static final String PATIENT_MAIN_MENU =
             "This is the Patient Main Menu!" + System.lineSeparator()
-            + "List of commands: " + System.lineSeparator()
-            + "* To add a patient: add n/[name] g/[M/F] d/[DOB] i/[ID]" + System.lineSeparator()
-            + "* To list all patients: viewall" + System.lineSeparator()
-            + "* To retrieve information about a specific patient: retrieve i/[ID]" + System.lineSeparator()
-            + "* To edit a patient's records: edit i/ID (n/[name] or g/[M/F] or d/[DOB])" + System.lineSeparator()
-            + "* To return to main menu: main" + System.lineSeparator()
-            + "* To quit OneDoc: bye";
+            + "List of commands: "
+            + UI.PATIENT_ADD
+            + UI.PATIENT_VIEW_ALL
+            + UI.PATIENT_RETRIEVE
+            + UI.PATIENT_EDIT
+            + UI.RETURN_TO_MAIN
+            + UI.EXIT_PROGRAM;
 
     // Prescription
     private static final String NO_PRESCRIPTION_MESSAGE = "There are currently no prescriptions in the record.";
     private static final String PRESCRIPTION_MAIN_MENU =
             "This is the Prescription Main Menu!" + System.lineSeparator()
-            + "List of commands:" + System.lineSeparator()
-            + "* To add a prescription: add i/ID n/[name] d/[dosage] t/[time interval]" + System.lineSeparator()
-            + "* To edit a prescription: edit i/[index] (n/[name] or d/[dosage] or t/[time interval])"
-            + System.lineSeparator()
-            + "* To view all prescription records: viewAll" + System.lineSeparator()
-            + "* To return to main menu: main" + System.lineSeparator()
-            + "* To quit OneDoc: bye";
+            + "List of commands:"
+            + UI.PRESCRIPTION_ADD
+            + UI.PRESCRIPTION_EDIT
+            + UI.PRESCRIPTION_VIEW_ALL
+            + UI.RETURN_TO_MAIN
+            + UI.EXIT_PROGRAM;
 
     // Visit
     private static final String VISIT_MAIN_MENU =
             "This is the Visits Main Menu!" + System.lineSeparator()
-            + "List of commands:" + System.lineSeparator()
-            + "* To add a visit: add i/[ID] d/[date] t/[time] r/[reason]" + System.lineSeparator()
-            + "* To edit a visit's reason: edit i/[ID] r/[reason]"
-            + System.lineSeparator()
-            + "* To view all visit records: 'viewAll'" + System.lineSeparator()
-            + "* To return to main menu: main" + System.lineSeparator()
-            + "* To quit OneDoc: bye";
+            + "List of commands:"
+            + UI.VISIT_ADD
+            + UI.VISIT_EDIT
+            + UI.VISIT_VIEW_ALL
+            + UI.RETURN_TO_MAIN
+            + UI.EXIT_PROGRAM;
 
     private static final String INDEX_OUT_OF_RANGE_MESSAGE = "The index number is out of range. Try again.";
 
@@ -168,5 +166,26 @@ public class UI {
         }
         System.out.println();
     }
+
+    public static final String PATIENT_ADD = "\n* To add a patient: add n/[name] g/[M/F] d/[DOB] i/[ID]";
+    public static final String PATIENT_EDIT = "\n* To edit a patient's information: "
+            + "edit i/[ID] (n/[name] or g/[M/F] or d/[DOB])";
+    public static final String PATIENT_RETRIEVE = "\n* To retrieve information about a specific patient:"
+            + " retrieve i/[ID]";
+
+    public static final String PATIENT_VIEW_ALL = "\n* To list all patients: viewall";
+    public static final String VISIT_ADD = "\n* To add a visit: add i/[ID] d/[date] t/[time] r/[reason]";
+    public static final String VISIT_EDIT = "\n* To edit a visit's reason: edit i/[ID] r/[reason]";
+    public static final String VISIT_VIEW_ALL = "\n* To list all visits: viewall";
+    public static final String PRESCRIPTION_ADD = "\n* To add a prescription: add i/ID "
+            + "n/[name] d/[dosage] t/[time interval]";
+    public static final String PRESCRIPTION_EDIT = "\n* To edit a prescription: edit i/[index] "
+            + "(n/[name] or d/[dosage] or t/[time interval])";
+
+    public static final String PRESCRIPTION_VIEW_ALL = "\n* To list all prescriptions: viewall";
+
+    public static final String RETURN_TO_MAIN =  "\n* To return to main menu: main";
+
+    public static final String EXIT_PROGRAM =  "\n* To quit OneDoc: bye";
 }
 
