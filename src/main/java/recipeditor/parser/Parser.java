@@ -31,6 +31,7 @@ public class Parser {
         case ExitCommand.COMMAND_TYPE:
             return new ExitCommand();
         case DeleteCommand.COMMAND_TYPE:
+            return null;
         case EditCommand.COMMAND_TYPE:
             return parseEditCommand(parsed);
         case ViewCommand.COMMAND_TYPE:
@@ -68,10 +69,17 @@ public class Parser {
     }
 
     private static Command parseEditCommand(String[] parsed) {
-        EditMode edit = new EditMode();
-        edit.enterEditMode(parsed[1]);
-        edit.exitEditMode();
-        return new EditCommand(RecipeList.getRecipeIndexFromTitle(parsed[1]), edit.getEditedRecipe());
+        if (parsed.length > 1) {
+            int index = RecipeList.getRecipeIndexFromTitle(parsed[1]);
+            if (index != -1) {
+                EditMode edit = new EditMode();
+                edit.enterEditMode(parsed[1]);
+                edit.exitEditMode();
+                return new EditCommand(index, edit.getEditedRecipe());
+            }
+            return new InvalidCommand();
+        }
+        return new InvalidCommand();
     }
 
     private static Command parseFindCommand(String[] parsed) {

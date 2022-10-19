@@ -5,12 +5,12 @@ import java.util.ArrayList;
 public class RecipeList {
     private static ArrayList<Recipe> recipes = new ArrayList<>();
 
-    public RecipeList(ArrayList<Recipe> load) {
+    private RecipeList(ArrayList<Recipe> load) {
         recipes = new ArrayList<>();
         recipes.addAll(load);
     }
 
-    public RecipeList() {
+    private RecipeList() {
         this(null);
     }
 

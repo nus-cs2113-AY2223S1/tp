@@ -99,6 +99,10 @@ public class Recipe {
         this.steps.remove(index);
     }
 
+    public void changeStep(int index, String newStep) {
+        this.steps.set(index, newStep);
+    }
+
     public String getIngredientAttributesFormatted() {
         StringBuilder recipeIngredientStringFormatted = new StringBuilder();
         for (Ingredient i : ingredients) {
