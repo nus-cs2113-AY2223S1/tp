@@ -101,11 +101,13 @@ public class FlightList extends OperationList {
         }
     }
 
+    //@@author Franky4566
     @Override
     public void listOperation() {
         ui.showListOfFlights(flights);
     }
 
+    //@@author JordanKwua
     private static boolean findAndRemoveFlight(String flightNumber) {
         boolean isFlightFound = false;
         assert !flights.isEmpty();
@@ -121,6 +123,7 @@ public class FlightList extends OperationList {
         return isFlightFound;
     }
 
+    //@@author Franky4566
     public void getNumberOfFlights() {
         assert numOfFlights >= 0;
         numOfFlights = flights.size();
