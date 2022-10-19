@@ -1,0 +1,29 @@
+
+'https://plantuml.com/sequence-diagram
+
+@startuml
+activate Duke
+[-> Duke: User input
+Duke -> Parser: parse(input)
+activate Parser
+Parser -> Parser: specificCase(commandWord, content)
+activate Parser
+Parser -> Delete: new Delete(content)
+activate Delete
+return c: Delete
+return c: Delete
+return c: Delete
+deactivate Parser
+Duke -> Delete: c.execute(moduleList)
+activate Delete
+activate ModuleList
+Delete -> ModuleList: Delete(modCodeToDelete)
+deactivate Delete
+ModuleList -> ModuleList: checkPresence(modCodeToDelete)
+activate ModuleList
+return isPresent: boolean
+ModuleList -> UI: printDeleteMessage(mod_info)
+activate UI
+deactivate UI
+
+@enduml

@@ -25,6 +25,25 @@ Below illustrate the add mechanism using a sequence diagram:
 ![AddUML.png](AddUML.png)
 
 
+### Deletion feature
+
+blah blah blah by BRANDON THE AWESOME YAYY
+
+HAAHAHHAHA
+
+![DeleteUML.png](DeleteUML.png)
+
+
+### View feature
+
+blah blah by insuf
+
+
+### Mcs feature
+
+blah blah by ishita
+
+
 
 
 
