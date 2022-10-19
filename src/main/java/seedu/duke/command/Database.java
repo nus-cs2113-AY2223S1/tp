@@ -99,11 +99,11 @@ public class Database {
             }
         }
 
-        if (nusMappings.size() > 0) {
-            return nusMappings;
+        if (nusMappings.size() == 0) {
+            throw new ModuleNotFoundException("Error! " + moduleCode + " not found in database");
         }
 
-        throw new ModuleNotFoundException("Error! " + moduleCode + " not found in database");
+        return nusMappings;
     }
 
     /**
@@ -124,12 +124,11 @@ public class Database {
             }
         }
 
-        if (universityMappings.size() > 0) {
-            return universityMappings;
+        if (universityMappings.size() == 0) {
+            throw new UniversityNotFoundException("Error! " + universityName + " not found in database");
         }
 
-        throw new UniversityNotFoundException("Error! " + universityName + " not found in database");
+        return universityMappings;
     }
 
-    
 }

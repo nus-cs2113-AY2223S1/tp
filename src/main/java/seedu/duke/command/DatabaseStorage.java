@@ -22,6 +22,9 @@ public class DatabaseStorage {
 
     private static final String PARTNER_UNVIERSITY_COUNTRY = "nil";
 
+    /**
+     * Loads data from data.csv into database
+     */
     public static void loadDatabase() {
         logger.log(Level.INFO, "Start loading database");
 
@@ -34,6 +37,12 @@ public class DatabaseStorage {
         logger.log(Level.INFO, "Finish loading database");
     }
 
+    /**
+     * Read entire data.csv file and populate database
+     * 
+     * @param filePath File path to data.csv
+     * @throws FileNotFoundException If data.csv not found at file path
+     */
     private static void readFile(String filePath) throws FileNotFoundException {
         File file = new File(filePath);
 
@@ -58,6 +67,12 @@ public class DatabaseStorage {
         scanner.close();
     }
 
+    /**
+     * Get useful data to get ready to populate database
+     * 
+     * @param line Current database line
+     * @return Array of strings which contains all useful data
+     */
     private static String[] readDatabaseLine(String line) {
         // cannot use new String[7] because of bug if empty "Pre Approved?" field
         String[] lineData = { "", "", "", "", "", "", "" };
@@ -71,6 +86,12 @@ public class DatabaseStorage {
         return lineData;
     }
 
+    /**
+     * Update database with useful data from each line
+     * 
+     * @param lineData Current array of strings which contains the useful data from
+     *                 the current line
+     */
     private static void updateDatabase(String[] lineData) {
         assert lineData.length == 7 : "Line data should have 7 elements";
 
@@ -92,6 +113,12 @@ public class DatabaseStorage {
         logger.log(Level.FINE, "Finish updating database");
     }
 
+    /**
+     * Updates the university database with a new university
+     * 
+     * @param partnerUniversityName    Name of current partner university
+     * @param partnerUniversityCountry Country of current partner university
+     */
     private static void updateUniversityDatabase(String partnerUniversityName, String partnerUniversityCountry) {
         logger.log(Level.FINER, "Start updating university database");
 
@@ -105,6 +132,21 @@ public class DatabaseStorage {
         logger.log(Level.FINER, "Finish updating university database");
     }
 
+    /**
+     * Updates the module mapping database with a new module mapping
+     * 
+     * @param partnerUniversityName         Name of current partner university
+     * @param partnerUniversityCountry      Country of current partner university
+     * @param parterUniversityModuleCode    Module code of current partner
+     *                                      university module
+     * @param partnerUnviersityModuleTitle  Module title of current partner
+     *                                      university module
+     * @param partnerUniversityModuleCredit Module credit of current partner
+     *                                      university module
+     * @param nusModuleCode                 Module code of current NUS module
+     * @param nusModuleTitle                Module title of current NUS module
+     * @param nusModuleCredit               Module credit of current NUS module
+     */
     private static void updateModuleMappingDatabase(String partnerUniversityName, String partnerUniversityCountry,
             String parterUniversityModuleCode,
             String partnerUnviersityModuleTitle, String partnerUniversityModuleCredit,
