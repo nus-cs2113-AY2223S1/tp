@@ -10,6 +10,7 @@ import seedu.duke.command.InvalidModuleCommand;
 import seedu.duke.command.UnknownCommand;
 import seedu.duke.command.ViewTimetableCommand;
 import seedu.duke.command.SelectSlotCommand;
+import seedu.duke.command.SelectSemesterCommand;
 import seedu.duke.command.SearchModuleCommand;
 
 import java.util.Map;
@@ -35,6 +36,8 @@ public class Parser {
             return new SelectSlotCommand(userInput);
         case (ExitCommand.COMMAND_WORD):
             return viewHelpExitCommand(keywords, new ExitCommand(keywords));
+        case (SelectSemesterCommand.COMMAND_WORD):
+            return selectSemesterCommand(keywords, new SelectSemesterCommand(keywords));
         default:
             return new UnknownCommand(keywords);
         }
@@ -97,6 +100,11 @@ public class Parser {
         return isTwoWordsCommand(keywords) && isValidModuleCode(keywords[1]);
     }
 
+    private static boolean isValidSemester(String[] keywords) {
+        int semesterInput = Integer.parseInt(keywords[1]);
+        return semesterInput > 0 && semesterInput <= 4;
+    }
+
     public static Command searchCommand(String userInput) {
         return new SearchModuleCommand(userInput);
     }
@@ -131,6 +139,14 @@ public class Parser {
 
     public static Command viewHelpExitCommand(String[] keywords, Command command) {
         if (isOneWordCommand(keywords)) {
+            return command;
+        } else {
+            return new UnknownCommand(keywords);
+        }
+    }
+
+    public static Command selectSemesterCommand(String[] keywords, Command command) {
+        if (isValidSemester(keywords)) {
             return command;
         } else {
             return new UnknownCommand(keywords);
