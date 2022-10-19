@@ -10,5 +10,7 @@ public enum Command {
     UPDATE,
     AUTH,
     LIST,
-    SEARCH
+    SEARCH,
+    FAVOURITE,
+    UNFAVOURITE
 }
