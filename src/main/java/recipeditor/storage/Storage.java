@@ -135,5 +135,16 @@ public class Storage {
         }
     }
 
-
+    public static void writeRecipeToDataFile(Recipe addedRecipe) {
+        try {
+            FileWriter fw = new FileWriter(DATA_FILE_PATH, true);
+            StringBuilder formattedRecipeString = new StringBuilder();
+            formattedRecipeString.append(addedRecipe.getRecipeAttributesFormatted());
+            formattedRecipeString.append(Ui.DIVIDER + "\n");
+            fw.write(formattedRecipeString.toString());
+            fw.close();
+        } catch (IOException ioException) {
+            Ui.showMessage("Error in loading recipes to data file");
+        }
+    }
 }

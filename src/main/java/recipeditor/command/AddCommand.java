@@ -22,7 +22,7 @@ public class AddCommand extends Command {
         if (isValid) {
             assert addedRecipe != null;
             RecipeList.addRecipe(addedRecipe); //HERE SEEM TO THROW ERROR
-            Storage.writeRecipeListToFile();
+            Storage.writeRecipeToDataFile(addedRecipe);
             return new CommandResult(addedRecipe.getTitle() + " added to the recipe.");
         } else {
             return new CommandResult("invalid " + COMMAND_TYPE);
