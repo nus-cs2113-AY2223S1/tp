@@ -103,6 +103,8 @@ public class Parser {
             boolean matchesView = input.equalsIgnoreCase(VIEW_ALL_COMMAND);
             Matcher matcherAdd = addVisitMatcher(input);
             Matcher matcherEdit = editVisitMatcher(input);
+            Matcher matcherViewPatient = viewVisitPatientMatcher(input);
+            Matcher matcherViewVisit = viewOneVisitMatcher(input);
             if (matchesView) {
                 visitList.viewAll(ui);
             } else if (matcherAdd.find()) {
@@ -115,6 +117,10 @@ public class Parser {
                 }
             } else if (matcherEdit.find()) {
                 visitList.editReason(ui, matcherEdit.group(1), matcherEdit.group(2));
+            } else if (matcherViewPatient.find()){
+                visitList.viewPatient(ui, matcherViewPatient.group(1));
+            } else if (matcherViewVisit.find()) {
+                //visitList.viewVisit(ui, matcherViewVisit.group(1), matcherViewVisit.group(2));
             } else {
                 throw new OneDocException("Your input is incorrect! Please format it as such:"
                         + UI.VISIT_ADD
@@ -123,7 +129,10 @@ public class Parser {
                         + "\nr - The reason is optional, and can be any number of words"
                         + UI.VISIT_EDIT
                         + "\nr - The reason can be added or edited with any number of words"
-                        + UI.VISIT_VIEW_ALL);
+                        + UI.VISIT_VIEW_ALL
+                        + UI.VISIT_VIEW_PATIENT
+                        + UI.VISIT_VIEW
+                        + "\nINDEX - The index should be relative to all the visits of a patient");
             }
         } catch (OneDocException e) {
             System.out.println("Incorrect format: " + e.getMessage());
@@ -238,6 +247,18 @@ public class Parser {
         Pattern editVisitPattern = Pattern.compile(
                 "^edit\\s*i/(\\w+)\\s*r/((?:\\w+\\s+\\w+)+|\\w+)\\s*$", Pattern.CASE_INSENSITIVE);
         return editVisitPattern.matcher(input);
+    }
+
+    private static Matcher viewVisitPatientMatcher(String input) {
+        Pattern viewVisitPatientPattern = Pattern.compile(
+                "^viewPatient\\s*i/(\\w+)\\s*$", Pattern.CASE_INSENSITIVE);
+        return viewVisitPatientPattern.matcher(input);
+    }
+
+    private static Matcher viewOneVisitMatcher(String input) {
+        Pattern viewOneVisitPattern = Pattern.compile(
+                "^viewVisit\\s*i/(\\w+)\\s*(\\d+)\\s*$", Pattern.CASE_INSENSITIVE);
+        return viewOneVisitPattern.matcher(input);
     }
 
     private static Matcher addPrescriptionMatcher(String input) {

@@ -43,6 +43,8 @@ public class UI {
             + UI.VISIT_ADD
             + UI.VISIT_EDIT
             + UI.VISIT_VIEW_ALL
+            + UI.VISIT_VIEW_PATIENT
+            + UI.VISIT_VIEW
             + UI.RETURN_TO_MAIN
             + UI.EXIT_PROGRAM;
 
@@ -177,6 +179,9 @@ public class UI {
     public static final String VISIT_ADD = "\n* To add a visit: add i/[ID] d/[date] t/[time] r/[reason]";
     public static final String VISIT_EDIT = "\n* To edit a visit's reason: edit i/[ID] r/[reason]";
     public static final String VISIT_VIEW_ALL = "\n* To list all visits: viewall";
+    public static final String VISIT_VIEW_PATIENT = "\n* To list all visits of one patient: viewPatient/[ID]";
+    public static final String VISIT_VIEW = "\n* To view a patient's specific visit: viewVisit i/[ID] [INDEX]";
+
     public static final String PRESCRIPTION_ADD = "\n* To add a prescription: add i/ID "
             + "n/[name] d/[dosage] t/[time interval]";
     public static final String PRESCRIPTION_EDIT = "\n* To edit a prescription: edit i/[index] "
