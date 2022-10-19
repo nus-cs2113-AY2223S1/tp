@@ -28,7 +28,7 @@ public class SelectSemesterCommand extends Command {
         logger = Logger.getLogger(SUBSYSTEM_NAME);
         logger.log(Level.INFO, "Loading select semester command");
 
-        assert updatedSemester >= 1 && updatedSemester <= 4: "semester selected should be in a valid range";
+        assert updatedSemester >= 1 && updatedSemester <= 4 : "semester selected should be in a valid range";
         logger = Logger.getLogger(SUBSYSTEM_NAME);
         logger.log(Level.INFO, "Updating semester currently being planned");
 
