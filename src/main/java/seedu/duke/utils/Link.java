@@ -2,7 +2,6 @@ package seedu.duke.utils;
 
 import seedu.duke.model.LessonType;
 import seedu.duke.model.Module;
-import seedu.duke.model.Module;
 import seedu.duke.model.RawLesson;
 import seedu.duke.model.SelectedModule;
 import seedu.duke.model.Timetable;
@@ -14,6 +13,19 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Handles the creating and parsing of NUSMods export link.
+ *
+ * <p>It would be in the form</p>
+ * https://nusmods.com/timetable/sem-SEMESTER_NUMBER/share?MODULE_INFO&MODULE_INFO etc
+ *
+ * <p>The MODULE_INFO will be in the form</p>
+ * MODULE_CODE=LESSON:LESSON_NUMBER,LESSON:LESSON_NUMBER etc
+ *
+ * <p>An e.g.</p>
+ * <a href="https://nusmods.com/timetable/sem-1/share?CS1231=SEC:1,TUT:04&CS2113=TUT:4,LEC:1">
+ *         https://nusmods.com/timetable/sem-1/share?CS1231=SEC:1,TUT:04&CS2113=TUT:4,LEC:1</a>
+ */
 public class Link {
     private static final String DOMAIN = "https://nusmods.com/timetable/";
 
@@ -43,10 +55,10 @@ public class Link {
     public static final int MODULES_PARAM_INDEX = 5;
 
     /**
-     * Finds the saved semester and split the remaining parts into module code and lessons information.
+     * Parses the NUSMods export link into module code and lessons information.
      *
      * @param link  for exporting to NUSMods
-     * @param state current state of the application to be saved
+     * @param state current state of the application to be saved to
      */
     public static void parseLink(String link, State state) {
         if (link.isEmpty()) {
@@ -161,7 +173,7 @@ public class Link {
      * @param lessonInfo single lesson information of a module
      * @return if the lesson information is of a valid form
      */
-    public static boolean isLessonInfo(String lessonInfo) {
+    private static boolean isLessonInfo(String lessonInfo) {
         //pattern for classNo is not definite.
         Pattern pattern = Pattern.compile("[A-Z]{3,4}\\d?:");
         Matcher matcher = pattern.matcher(lessonInfo);
@@ -174,7 +186,7 @@ public class Link {
      * @param shortString unique identifier for <code>LessonType</code>
      * @return corresponding <code>LessonType</code>
      */
-    public static LessonType getLessonType(String shortString) {
+    private static LessonType getLessonType(String shortString) {
         Map<String, LessonType> map = new HashMap<>();
         map.put("TUT", LessonType.TUTORIAL);
         map.put("TUT2", LessonType.TUTORIAL_TYPE_2);
@@ -191,6 +203,11 @@ public class Link {
         return map.get(shortString);
     }
 
+    /**
+     * Creates a NUSMods export link from current state.
+     * @param state current state of the application to be saved
+     * @return the valid NUSMods export link
+     */
     public static String getLink(State state) {
         StringBuilder toSave = new StringBuilder();
         toSave.append(DOMAIN);
@@ -202,14 +219,14 @@ public class Link {
         appendModules(selectedModules, toSave);
         return String.valueOf(toSave);
     }
-    
+
     /**
      * Goes through the selected modules from the state and appends it in the correct format to be saved.
      *
      * @param selectedModules list of selected modules from the state
      * @param toSave          NUSMods formatted link
      */
-    public static void appendModules(List<SelectedModule> selectedModules, StringBuilder toSave) {
+    private static void appendModules(List<SelectedModule> selectedModules, StringBuilder toSave) {
         moduleDelimiter = "";
         for (SelectedModule selectedModule: selectedModules) {
             toSave.append(moduleDelimiter);

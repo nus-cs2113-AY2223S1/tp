@@ -9,17 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Handles the saving and loading of states into a format that can be exported to NUSMods
- *
- * <p>It would be in the form</p>
- * https://nusmods.com/timetable/sem-SEMESTER_NUMBER/share?MODULE_INFO&MODULE_INFO etc
- *
- * <p>The MODULE_INFO will be in the form</p>
- * MODULE_CODE=LESSON:LESSON_NUMBER,LESSON:LESSON_NUMBER etc
- *
- * <p>An e.g.</p>
- * <a href="https://nusmods.com/timetable/sem-1/share?CS1231=SEC:1,TUT:04&CS2113=TUT:4,LEC:1">
- *         https://nusmods.com/timetable/sem-1/share?CS1231=SEC:1,TUT:04&CS2113=TUT:4,LEC:1</a>
+ * Handles the saving and loading of states.
  */
 public class Storage {
     public static final String FILE_PATH = "data/duke.txt";
@@ -62,7 +52,7 @@ public class Storage {
      * @return the link for exporting to NUSMods
      * @throws FileNotFoundException the file in the file path cannot be found
      */
-    public String readPreviousState() throws FileNotFoundException {
+    private String readPreviousState() throws FileNotFoundException {
         String link = "";
         File file = new File(FILE_PATH);
         Scanner scanner = new Scanner(file);
@@ -93,7 +83,6 @@ public class Storage {
         if (file.getParentFile().mkdirs()) {
             file.createNewFile();
         }
-
         String toSave = Link.getLink(state);
         ui.addMessage(EXPORT_MESSAGE);
         ui.addMessage(toSave);
@@ -102,6 +91,4 @@ public class Storage {
         fw.write(String.valueOf(toSave));
         fw.close();
     }
-
-
 }
