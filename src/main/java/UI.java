@@ -168,15 +168,18 @@ public class UI {
     }
 
     public static final String PATIENT_ADD = "\n* To add a patient: add n/[name] g/[M/F] d/[DOB] i/[ID]";
-    public static final String PATIENT_EDIT = "\n* To edit a patient's info: edit i/[ID] (n/[name] or g/[M/F] or d/[DOB])";
+    public static final String PATIENT_EDIT = "\n* To edit a patient's info: "
+            + "edit i/[ID] (n/[name] or g/[M/F] or d/[DOB])";
     public static final String PATIENT_RETRIEVE = "\n* To retrieve a patient's info: retrieve i/[ID]";
 
     public static final String PATIENT_VIEW_ALL = "\n* To list all patients: viewall";
     public static final String VISIT_ADD = "\n* To add a visit: add i/[ID] d/[date] t/[time] r/[reason]";
     public static final String VISIT_EDIT = "\n* To edit a visit's reason: edit i/[ID] r/[reason]";
     public static final String VISIT_VIEW_ALL = "\n* To list all visits: viewall";
-    public static final String PRESCRIPTION_ADD = "\n* To add a prescription: add i/ID n/[name] d/[dosage] t/[time interval]";
-    public static final String PRESCRIPTION_EDIT = "\n* To edit a prescription: edit i/[index] (n/[name] or d/[dosage] or t/[time interval])";
+    public static final String PRESCRIPTION_ADD = "\n* To add a prescription: add i/ID "
+            + "n/[name] d/[dosage] t/[time interval]";
+    public static final String PRESCRIPTION_EDIT = "\n* To edit a prescription: edit i/[index] "
+            + "(n/[name] or d/[dosage] or t/[time interval])";
 
     public static final String PRESCRIPTION_VIEW_ALL = "\n* To list all prescriptions: viewall";
 
