@@ -66,13 +66,13 @@ public class AddTransactionCommand extends Command {
     private String[] getArgsAddTxCmd() throws InvalidArgumentException {
         String[] args = new String[4];
         for (String part : parts) {
-            if (part.startsWith("i")) {
+            if (part.startsWith("i ")) {
                 args[0] = CommandParser.getArgValue(part);
-            } else if (part.startsWith("b")) {
+            } else if (part.startsWith("b ")) {
                 args[1] = CommandParser.getArgValue(part);
-            } else if (part.startsWith("d")) {
+            } else if (part.startsWith("d ")) {
                 args[2] = CommandParser.getArgValue(part);
-            } else if (part.startsWith("c")) {
+            } else if (part.startsWith("c ")) {
                 args[3] = CommandParser.getArgValue(part);
             } else {
                 throw new InvalidArgumentException(MESSAGE_INVALID_PARTS);

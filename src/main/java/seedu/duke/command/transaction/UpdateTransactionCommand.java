@@ -52,9 +52,9 @@ public class UpdateTransactionCommand {
     private String[] getArgsAddTxCmd() throws InvalidArgumentException {
         String[] args = new String[this.parts.length];
         for (String part : parts) {
-            if (part.startsWith("t")) {
+            if (part.startsWith("t ")) {
                 args[0] = CommandParser.getArgValue(part);
-            } else if (part.startsWith("d")) {
+            } else if (part.startsWith("d ")) {
                 args[1] = CommandParser.getArgValue(part);
             } else {
                 throw new InvalidArgumentException(MESSAGE_INVALID_PARTS);

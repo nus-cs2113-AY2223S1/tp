@@ -31,7 +31,7 @@ public class ViewTransactionsByStatusCommand extends Command {
 
     private String getArgs() throws InvalidArgumentException {
         String args;
-        if (parts[0].startsWith("s")) {
+        if (parts[0].startsWith("s ")) {
             args = CommandParser.getArgValue(parts[0]);
         } else {
             throw new InvalidArgumentException(MESSAGE_INVALID_PARTS);

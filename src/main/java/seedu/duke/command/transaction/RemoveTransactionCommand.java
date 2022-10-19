@@ -44,7 +44,7 @@ public class RemoveTransactionCommand extends Command {
     private String[] getArgsRemoveTxCmd() throws InvalidArgumentException {
         String[] args = new String[1];
         for (String part : parts) {
-            if (part.startsWith("t")) {
+            if (part.startsWith("t ")) {
                 args[0] = CommandParser.getArgValue(part);
             } else {
                 throw new InvalidArgumentException(MESSAGE_INVALID_PARTS);

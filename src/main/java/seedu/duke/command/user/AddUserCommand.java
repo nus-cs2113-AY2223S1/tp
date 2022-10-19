@@ -51,11 +51,11 @@ public class AddUserCommand extends Command {
     private String[] getArgsAddUserCmd() throws InvalidArgumentException {
         String[] args = new String[3];
         for (String part : parts) {
-            if (part.startsWith("n")) {
+            if (part.startsWith("n ")) {
                 args[0] = CommandParser.getArgValue(part);
-            } else if (part.startsWith("a")) {
+            } else if (part.startsWith("a ")) {
                 args[1] = CommandParser.getArgValue(part);
-            } else if (part.startsWith("c")) {
+            } else if (part.startsWith("c ")) {
                 args[2] = CommandParser.getArgValue(part);
             } else {
                 throw new InvalidArgumentException(MESSAGE_INVALID_PARTS);

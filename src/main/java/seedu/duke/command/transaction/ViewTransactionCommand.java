@@ -27,7 +27,7 @@ public class ViewTransactionCommand extends Command {
 
     private String getArgsViewTransactionCmd() throws InvalidArgumentException {
         String arg;
-        if (parts[0].startsWith("t")) {
+        if (parts[0].startsWith("t ")) {
             arg = CommandParser.getArgValue(parts[0]);
         } else {
             throw new InvalidArgumentException(MESSAGE_INVALID_PARTS);

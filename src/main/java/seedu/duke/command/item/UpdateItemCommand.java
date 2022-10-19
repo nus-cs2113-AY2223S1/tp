@@ -39,9 +39,9 @@ public class UpdateItemCommand extends Command {
     public String[] getArgsUpdateItemCmd() throws InvalidArgumentException {
         String[] args = new String[this.parts.length];
         for (String part : parts) {
-            if (part.startsWith("i")) {
+            if (part.startsWith("i ")) {
                 args[0] = CommandParser.getArgValue(part);
-            } else if (part.startsWith("p")) {
+            } else if (part.startsWith("p ")) {
                 args[2] = CommandParser.getArgValue(part);
             } else {
                 throw new InvalidArgumentException(MESSAGE_INVALID_PARTS);
