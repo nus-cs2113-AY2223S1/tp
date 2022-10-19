@@ -11,19 +11,21 @@ import seedu.duke.module.Module;
 import seedu.duke.module.ModuleMapping;
 import seedu.duke.university.University;
 import seedu.duke.parser.DatabaseParser;
+import seedu.duke.ui.Ui;
 
 public class DatabaseStorage {
     private static Logger logger = Logger.getLogger("DatabaseStorage");
     private static final String DATABASE_FILE_PATH = "./data/data.csv";
 
-    public static void loadDatabase() {
     private static final String PARTNER_UNVIERSITY_COUNTRY = "nil";
+
+    public static void loadDatabase() {
         logger.log(Level.INFO, "Start loading database");
 
         try {
             readFile(DATABASE_FILE_PATH);
         } catch (FileNotFoundException e) {
-            logger.log(Level.WARNING, "Database file not found");
+            Ui.printExceptionMessage(e);
         }
 
         logger.log(Level.INFO, "Finish loading database");
