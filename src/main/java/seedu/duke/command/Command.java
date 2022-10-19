@@ -22,6 +22,7 @@ public abstract class Command {
     public static String COMMAND_PARAMETERS_INFO;
 
     //@@author paullowse
+
     /**
      * Get the default mandatory tags of the command (no mandatory tag).
      * To be overridden by subclasses which the command requires mandatory tag.
@@ -47,9 +48,9 @@ public abstract class Command {
     /**
      * Executes the operations related to the command.
      *
-     * @param ui An instance of the Ui class.
+     * @param ui           An instance of the Ui class.
      * @param transactions An instance of the TransactionList class.
-     * @param storage An instance of the Storage class.
+     * @param storage      An instance of the Storage class.
      */
     public abstract void execute(TransactionList transactions, Ui ui, Storage storage) throws MoolahException;
 

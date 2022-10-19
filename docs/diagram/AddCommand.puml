@@ -1,0 +1,43 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+hide circle
+skinparam classAttributeIconSize 0
+
+class AddCommand {
++ COMMAND_WORD: String
+    + COMMAND_DESCRIPTION: String
+    + COMMAND_USAGE: String
+    + COMMAND_PARAMETERS_INFO: String
+
+    - type: String
+    - category: String
+    - description: String
+    - amount: int
+    - date: LocalDate
+
+    +getMandatoryTags()
+    +{abstract}execute()
+}
+
+class "{abstract}\n Command"{
+
+    + COMMAND_WORD: String
+    + COMMAND_DESCRIPTION: String
+    + COMMAND_USAGE: String
+    + COMMAND_PARAMETERS_INFO: String
+
+    - type: String
+    - category: String
+    - description: String
+    - amount: int
+    - date: LocalDate
+
+    +getMandatoryTags()
+    +{abstract}execute()
+}
+
+
+
+AddCommand --|> "{abstract}\n Command"
+@enduml

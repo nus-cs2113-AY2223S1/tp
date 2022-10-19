@@ -56,7 +56,7 @@ public class PurgeCommand extends Command {
     @Override
     public void execute(TransactionList transactions, Ui ui, Storage storage) throws MoolahException {
         // Shows confirmation prompt before deleting all transactions
-        purgeLogger.setLevel(Level.WARNING);
+        purgeLogger.setLevel(Level.SEVERE);
         purgeLogger.log(Level.INFO, "Purge Command checks if there are no transactions"
                 + " to be purged. If so, the command is aborted.");
         boolean check = isEmpty(transactions);

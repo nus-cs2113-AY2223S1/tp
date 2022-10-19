@@ -4,7 +4,7 @@
 class TransactionList {
 }
 
-class "{abstract}\n Transaction"{
+class Transaction{
     - category: String
     - description: String
     - amount: int
@@ -12,14 +12,18 @@ class "{abstract}\n Transaction"{
 }
 
 class Income {
+    + TRANSACTION_NAME: String = "income"{static}
+    + ICON_INCOME: String = "[+]" {static}
 }
 
 class Expense {
+    + TRANSACTION_NAME: String = "income"{static}
+    + ICON_INCOME: String = "[+]" {static}
 }
 
 
-Income -up-|> "{abstract}\n Transaction"
-Expense -up-|> "{abstract}\n Transaction"
+Income -up-|> Transaction
+Expense -up-|> Transaction
 
-TransactionList -> "*" "{abstract}\n Transaction" : transactions
+TransactionList -> "*" Transaction : contains
 @enduml
