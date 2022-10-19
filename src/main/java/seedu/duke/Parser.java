@@ -37,6 +37,7 @@ public class Parser {
         final String endCommand = "bye";
         final String favouriteCommand = "favourite";
         final String sortCommand = "sort";
+        final String findCommand = "find";
         final String NT = "";
         
         String[] words = userInput.split(" ");
@@ -67,10 +68,14 @@ public class Parser {
             executeFavourite(words);
             break;
 
+        case findCommand:
+            executeFind(words);
+            break;
+
         case sortCommand:
             executeSort(words);
             break;
-        
+
         case NT:
         
         default:
@@ -80,9 +85,18 @@ public class Parser {
         }
     }
 
+    public void executeFind(String[] words) {
+        try {
+            executor = new FindCommand(mediaList, words [1]); //should we do more than one word?
+            String output = executor.execute();
+            Ui.print(output);
+        } catch (Exception e) {
+            System.out.println("\nIncomplete or wrongly formatted command, try again.\n");
+        }
+    }
+
     public void executeSort(String[] words) {
         try {
-
             executor = new SortCommand(mediaList, words);
             String output = executor.execute();
             Ui.print(output);
