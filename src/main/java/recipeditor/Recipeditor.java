@@ -9,6 +9,8 @@ import recipeditor.command.ExitCommand;
 import recipeditor.command.CommandResult;
 
 public class Recipeditor {
+    public static final String DATA_FILE_PATH = "./data/data.txt";
+    public static final String TEMPORARY_DATA_FILE_PATH = "./data/temporary_data.txt";
 
     /**
      * TODO: Do we want to make the important classes instance based or Class level based.
@@ -51,8 +53,8 @@ public class Recipeditor {
      * Main Command Loop Input -> Command -> Command Result -> Show & Save.
      */
     private static void runCommandLoopUntilExitCommand() {
-        Storage.createDataFile();
-        Storage.loadRecipesFromDataFile();
+        Storage.createFile(DATA_FILE_PATH);
+        Storage.loadRecipesFromFile(DATA_FILE_PATH);
         Command command;
         do {
             String input = Ui.readInput();

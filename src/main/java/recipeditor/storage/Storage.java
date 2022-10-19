@@ -15,7 +15,6 @@ import recipeditor.recipe.RecipeList;
 import recipeditor.ui.Ui;
 
 public class Storage {
-    private static final String DATA_FILE_PATH = "./data/data.txt";
     private static final String RECIPE_NAME_FIELD_TYPE = "Recipe Name";
     private static final String RECIPE_DESCRIPTION_FIELD_TYPE = "Recipe Description";
     private static final String RECIPE_INGREDIENTS_FIELD_TYPE = "Recipe Ingredients";
@@ -23,26 +22,26 @@ public class Storage {
 
     private static Logger logger = Logger.getLogger("LOGS");
 
-    public static void createDataFile() {
+    public static void createFile(String filePath) {
         try {
-            File file = new File(DATA_FILE_PATH);
+            File file = new File(filePath);
             if (!file.getParentFile().exists()) {
                 file.getParentFile().mkdirs();
             }
             if (file.createNewFile()) {
-                logger.log(Level.INFO, "New data file is created at " + DATA_FILE_PATH);
+                logger.log(Level.INFO, "New data file is created at " + filePath);
             } else {
-                logger.log(Level.INFO, "Data file already exists at " + DATA_FILE_PATH);
+                logger.log(Level.INFO, "Data file already exists at " + filePath);
             }
         } catch (IOException ioException) {
             Ui.showMessage(ioException.getMessage());
         }
     }
 
-    public static void loadRecipeToDataFile(Recipe recipe) {
+    public static void loadRecipeToFile(String filePath, Recipe recipe) {
         try {
             logger.log(Level.INFO, "Loading Recipe to Data File");
-            FileWriter fw = new FileWriter(DATA_FILE_PATH, true);
+            FileWriter fw = new FileWriter(filePath, true);
             fw.write(recipe.getRecipeAttributesFormatted());
             fw.write(Ui.DIVIDER + "\n");
             fw.close();
@@ -51,10 +50,10 @@ public class Storage {
         }
     }
 
-    public static void loadRecipesFromDataFile() {
+    public static void loadRecipesFromFile(String filePath) {
         try {
             logger.log(Level.INFO, "Loading Recipe from Data File");
-            File dataFile = new File(DATA_FILE_PATH);
+            File dataFile = new File(filePath);
             Scanner s = new Scanner(dataFile);
             Recipe newRecipe = new Recipe();
             while (s.hasNext()) {
@@ -84,7 +83,7 @@ public class Storage {
             }
         } catch (FileNotFoundException e) {
             Ui.showMessage("File not found :< Creating your data file now...");
-            createDataFile();
+            createFile(filePath);
         }
     }
 
@@ -120,9 +119,9 @@ public class Storage {
         return steps;
     }
 
-    public static void writeRecipeListToFile() {
+    public static void writeRecipeListToFile(String filePath) {
         try {
-            FileWriter fw = new FileWriter(DATA_FILE_PATH, true);
+            FileWriter fw = new FileWriter(filePath, true);
             StringBuilder formattedRecipeList = new StringBuilder();
             for (int i = 0; i < RecipeList.getSize(); i++) {
                 formattedRecipeList.append(RecipeList.getRecipe(i).getRecipeAttributesFormatted());
@@ -135,9 +134,9 @@ public class Storage {
         }
     }
 
-    public static void writeRecipeToDataFile(Recipe addedRecipe) {
+    public static void writeRecipeToFile(String filePath, Recipe addedRecipe) {
         try {
-            FileWriter fw = new FileWriter(DATA_FILE_PATH, true);
+            FileWriter fw = new FileWriter(filePath, true);
             StringBuilder formattedRecipeString = new StringBuilder();
             formattedRecipeString.append(addedRecipe.getRecipeAttributesFormatted());
             formattedRecipeString.append(Ui.DIVIDER + "\n");
