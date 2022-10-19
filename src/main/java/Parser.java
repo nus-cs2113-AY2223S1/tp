@@ -117,7 +117,7 @@ public class Parser {
                 }
             } else if (matcherEdit.find()) {
                 visitList.editReason(ui, matcherEdit.group(1), matcherEdit.group(2));
-            } else if (matcherViewPatient.find()){
+            } else if (matcherViewPatient.find()) {
                 visitList.viewPatient(ui, matcherViewPatient.group(1));
             } else if (matcherViewVisit.find()) {
                 //visitList.viewVisit(ui, matcherViewVisit.group(1), matcherViewVisit.group(2));
