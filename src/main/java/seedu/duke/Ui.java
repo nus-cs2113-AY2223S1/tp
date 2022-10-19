@@ -45,7 +45,7 @@ public class Ui {
 
     // Maybe be improved
     public static void showPromptInfo() {
-        String promptInfo = "Would you like to register or login?";
+        String promptInfo = "Would you like to register, login, or work with currencies?";
         System.out.println(INDENTATION + promptInfo);
         System.out.println();
     }
@@ -99,6 +99,31 @@ public class Ui {
     public static void showLoginResults(Boolean isLoginSuccess) {
         final String MESSAGE = isLoginSuccess ? "Login successfully."
                 : "Username or Password not correct. Please try again.";
+        showStandardOutput(INDENTATION + MESSAGE);
+    }
+
+    public static void showCurrencyEntry(){
+        final String MESSAGE = "Entering the currency portal";
+        showStandardOutput(INDENTATION + MESSAGE);
+    }
+
+    public static void showCurrencyOptions(){
+        final String MESSAGE = "Would you like to get information about a currency or check a conversion rate?";
+        showStandardOutput(INDENTATION + MESSAGE);
+    }
+
+    public static void showIncorrectCurrencyEntry(){
+        final String MESSAGE = "Incorrect currency command, enter EXIT to leave currency portal";
+        showStandardOutput(INDENTATION + MESSAGE);
+    }
+
+    public static void showIncorrectCurrencyInfo(String s){
+        final String MESSAGE = "Incorrect currency command, please enter in the format: "+ s + " symbol";
+        showStandardOutput(INDENTATION + MESSAGE);
+    }
+
+    public static void showIncorrectCurrencyConversion(){
+        final String MESSAGE = "Incorrect currency command, please enter one of these formats: conversion symbol or conversion symbol symbol";
         showStandardOutput(INDENTATION + MESSAGE);
     }
 
