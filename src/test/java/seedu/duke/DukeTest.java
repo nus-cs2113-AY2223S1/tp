@@ -102,7 +102,7 @@ class DukeTest {
 
     //Checks whether retrieved usernames match the list we expect to get
     @Test
-    public void testRetrievingUserNames() throws FileNotFoundException {
+    public void testRetrievingUserNames() throws FinanceException {
         List<String> retrievedUsernames = UserNameFileWorkings.getUserNames(path);
         assertEquals(usernamesList,retrievedUsernames);
     }
@@ -120,7 +120,7 @@ class DukeTest {
         try {
             List<List<String>> retrievedUsernames = Currency.readInCurrencies(path);
             assertEquals(currenciesList, retrievedUsernames);
-        } catch (IOException e) {
+        } catch (FinanceException e) {
             throw new RuntimeException(e);
         }
     }

@@ -12,19 +12,16 @@ public class Duke {
      * Main entry-point for the java.duke.Duke application.
      */
     public static void main(String[] args) throws IOException {
-        Scanner in = new Scanner(System.in);
+        //Scanner in = new Scanner(System.in);
+        //List<String> existingUserNames;
+        //List<List<String>> allCurrencies;
+        //allCurrencies = Currency.getListOfAllCurrencies();
+        //existingUserNames = UserNameFileWorkings.userNameFile();
         Ui.showWelcomeMessage();
-
-        List<String> existingUserNames;
-        List<List<String>> allCurrencies;
-
-        allCurrencies = Currency.getListOfAllCurrencies();
-
-        existingUserNames = UserNameFileWorkings.userNameFile();
-
         boolean isProgramEnd = false;
-
         while (!isProgramEnd) {
+            isProgramEnd = Authentication.handleAuthenticationRequest();
+            /*
             try {
                 Ui.showPromptInfo();
                 Commands commandType;
@@ -87,11 +84,6 @@ public class Duke {
                     } while (!user);
                     break;
                 case CURRENCIES:
-                    /*System.out.println("\t\t\tALL CURRENCIES");
-                    System.out.println("\tVALUE\t\t\t\t\tNAMES");
-                    for (List<String> x : allCurrencies){
-                        System.out.println("\t" + x.get(1) + "\t\t\t" + x.get(0));
-                    }*/
                     Currency.exchangeCommands();
                     break;
                 default:
@@ -100,6 +92,7 @@ public class Duke {
             } catch (FinanceException e) {
                 e.handleException();
             }
+            */
         }
     }
 }

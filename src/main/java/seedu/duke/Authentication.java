@@ -1,7 +1,5 @@
 package seedu.duke;
 
-import java.io.FileNotFoundException;
-
 import seedu.duke.FinanceException.ExceptionCollection;
 
 public class Authentication {
@@ -17,6 +15,9 @@ public class Authentication {
                 break;
             case LOGIN:
                 LoginCommand.handleLogin();
+                break;
+            case CURRENCIES:
+                Currency.exchangeCommands();
                 break;
             case BYE:
                 isProgramEnd = true;
