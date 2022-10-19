@@ -1,7 +1,5 @@
 package seedu.duke;
 
-import java.util.Scanner;
-
 import seedu.duke.FinanceException.ExceptionCollection;
 
 public class Account {
@@ -14,24 +12,24 @@ public class Account {
             String command = splitInput[0];
             try{
                 switch (command) {
-                    case "balance":
-                        System.out.println("Your current balance is: " + wallet.getBalance());
-                        break;
-                    case "deposit":
-                        //Ui.deposit;
-                        break;
-                    case "withdraw":
-                        //Ui.withdraw;
-                        break;
-                    case "delete":
-                        //delete account
-                        break;
-                    case "exit":
-                        isAccountExit = true;
-                        Ui.showAccountExitMessage(wallet.getUserName());
-                        break;
-                    default:
-                        throw new FinanceException(ExceptionCollection.COMMAND_TYPE_EXCEPTION);
+                case "balance":
+                    System.out.println("Your current balance is: " + wallet.getBalance());
+                    break;
+                case "deposit":
+                    //Ui.deposit;
+                    break;
+                case "withdraw":
+                    //Ui.withdraw;
+                    break;
+                case "delete":
+                    isAccountExit = DeleteCommand.handleDelete(wallet);
+                    break;
+                case "exit":
+                    isAccountExit = true;
+                    Ui.showAccountExitMessage(wallet.getUserName());
+                    break;
+                default:
+                    throw new FinanceException(ExceptionCollection.COMMAND_TYPE_EXCEPTION);
                 }
             } catch (FinanceException e) {
                 e.handleException();

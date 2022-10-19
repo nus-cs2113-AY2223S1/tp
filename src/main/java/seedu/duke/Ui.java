@@ -102,27 +102,40 @@ public class Ui {
         showStandardOutput(INDENTATION + MESSAGE);
     }
 
-    public static void showCurrencyEntry(){
+    public static void showDeletionConfirmPrompt(String username) {
+        final String MESSAGE = "Your wallet username: " + username + "\n"
+                + INDENTATION + "Are you sure to delete your wallet? Your wallet can't be retrieved and you will automatically logout.\n"
+                + INDENTATION + "Please enter Y or yes to proceed. Any other input will cancel the deletion operation.";
+        showStandardOutput(INDENTATION + MESSAGE);
+    }
+
+    public static void showDeletionResult(Boolean isDeleted) {
+        final String MESSAGE = isDeleted ? "Deletion operation successful. Wallet logout."
+                : "Deletion operation canceled.";
+        showStandardOutput(INDENTATION + MESSAGE);
+    }
+
+    public static void showCurrencyEntry() {
         final String MESSAGE = "Entering the currency portal";
         showStandardOutput(INDENTATION + MESSAGE);
     }
 
-    public static void showCurrencyOptions(){
+    public static void showCurrencyOptions() {
         final String MESSAGE = "Would you like to get information about a currency or check a conversion rate?";
         showStandardOutput(INDENTATION + MESSAGE);
     }
 
-    public static void showIncorrectCurrencyEntry(){
+    public static void showIncorrectCurrencyEntry() {
         final String MESSAGE = "Incorrect currency command, enter EXIT to leave currency portal";
         showStandardOutput(INDENTATION + MESSAGE);
     }
 
-    public static void showIncorrectCurrencyInfo(String s){
-        final String MESSAGE = "Incorrect currency command, please enter in the format: "+ s + " symbol";
+    public static void showIncorrectCurrencyInfo(String s) {
+        final String MESSAGE = "Incorrect currency command, please enter in the format: " + s + " symbol";
         showStandardOutput(INDENTATION + MESSAGE);
     }
 
-    public static void showIncorrectCurrencyConversion(){
+    public static void showIncorrectCurrencyConversion() {
         final String MESSAGE = "Incorrect currency command, please enter one of these formats: conversion symbol or conversion symbol symbol";
         showStandardOutput(INDENTATION + MESSAGE);
     }
