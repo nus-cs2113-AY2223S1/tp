@@ -71,9 +71,15 @@ public class Parser {
                 parseEditPatient(matcherEdit.group(1), matcherEdit.group(2), matcherEdit.group(3));
             } else {
                 throw new OneDocException("Your input is incorrect! Please format it as such:"
-                        + "\nTo add a patient: add n/[name] g/[M/F] d/[DOB] i/[ID]"
-                        + "\nTo edit a patient's info: edit i/[ID] (n/[name] or g/[M/F] or d/[DOB])"
-                        + "\nTo retrieve a patient's info: retrieve i/[ID]");
+                        + UI.PATIENT_ADD
+                        + "\nn - The name should be one of two words"
+                        + "\ng - The gender should be one letter, M or F"
+                        + "\nd - The date of birth should be formatted as DD-MM-YYYY"
+                        + "\ni - The id can be a sequence of numbers or letters"
+                        + UI.PATIENT_EDIT
+                        + "\nn/g/d - Please edit only one aspect of a patient at a time"
+                        + UI.PATIENT_RETRIEVE
+                        + UI.PATIENT_VIEW_ALL);
             }
         } catch (OneDocException e) {
             System.out.println("Incorrect format: " + e.getMessage());
@@ -111,8 +117,13 @@ public class Parser {
                 visitList.editReason(ui, matcherEdit.group(1), matcherEdit.group(2));
             } else {
                 throw new OneDocException("Your input is incorrect! Please format it as such:"
-                        + "\nTo add a visit: add i/[ID] d/[date] t/[time] r/[reason]"
-                        + "\nTo edit a visit's reason: edit i/[ID] r/[reason]");
+                        + UI.VISIT_ADD
+                        + "\nd - The date should be formatted as DD-MM-YYYY"
+                        + "\nt - The time should be formatted as HH:MM"
+                        + "\nr - The reason is optional, and can be any number of words"
+                        + UI.VISIT_EDIT
+                        + "\nr - The reason can be added or edited with any number of words"
+                        + UI.VISIT_VIEW_ALL);
             }
         } catch (OneDocException e) {
             System.out.println("Incorrect format: " + e.getMessage());
@@ -146,8 +157,13 @@ public class Parser {
                         matcherEdit.group(2), matcherEdit.group(3));
             } else {
                 throw new OneDocException("Your input is incorrect! Please format it as such:"
-                        + "\nTo add a prescription: add i/ID n/[name] d/[dosage] t/[time interval]"
-                        + "\nTo edit a prescription: edit i/[index] (n/[name] or d/[dosage] or t/[time interval])");
+                        + UI.PRESCRIPTION_ADD
+                        + "\nn - The prescription name should be one or two words"
+                        + "\nd - The dosage should be a number followed by an amount"
+                        + "\nt - The time interval should be instructions on how to take, with any number of words"
+                        + UI.PRESCRIPTION_EDIT
+                        + "\nn/d/t - Please edit only one aspect of a prescription at a time"
+                        + UI.PRESCRIPTION_VIEW_ALL);
             }
         } catch (OneDocException e) {
             System.out.println("Incorrect format: " + e.getMessage());
