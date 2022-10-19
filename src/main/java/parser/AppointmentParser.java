@@ -51,13 +51,13 @@ public class AppointmentParser {
 
 
     public Command prepareRemoveAppointment(String input){
-        int index = parser.indexOfInput(input);
-        if(index == -1){
-            System.out.println("Error: index entered invalid for removing an appointment");
-            return new EndCommand();
+        try {
+            int index = parser.indexOfInput(input);
+            return new RemoveAppointmentCommand(index);
+        } catch (DukeException e) {
+            System.out.println("Sorry, index entered invalid for removing an appointment");
+            return new EmptyCommand();
         }
-
-        return new RemoveAppointmentCommand(index);
     }
 
     public Command prepareAddAppointment(String input){
