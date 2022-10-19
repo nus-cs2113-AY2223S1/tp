@@ -42,6 +42,10 @@ class StrengthExercise {
 -set: int
 }
 
+class CardioExercise{
+-time: int
+}
+
 class AddCommand {
 -arguments: String;
 -toDisplay: boolean
@@ -84,6 +88,7 @@ Command <|-- RemoveCommand
 Command <|-- FindCommand
 ExerciseList "1" o--> "*"Exercise : contains >
 Exercise <|-- StrengthExercise
+Exercise <|-- CardioExercise
 AddCommand "1"--> "1"ExerciseList
 MarkCommand "1"--> "1"ExerciseList
 ViewCommand "1"--> "1"ExerciseList
