@@ -6,14 +6,16 @@ import seedu.duke.Ui;
 import seedu.duke.data.TransactionList;
 import seedu.duke.data.transaction.Expense;
 import seedu.duke.data.transaction.Income;
+import seedu.duke.data.transaction.Transaction;
 import seedu.duke.exception.MoolahException;
 import seedu.duke.exception.InputTransactionUnknownTypeException;
+import seedu.duke.exception.StorageWriteErrorException;
 
+import java.io.IOException;
 import java.time.LocalDate;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 
 import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_TYPE;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_CATEGORY;
@@ -51,8 +53,10 @@ public class AddCommand extends Command {
     // Detailed help description
     public static final String COMMAND_DETAILED_HELP = COMMAND_HELP + COMMAND_PARAMETERS_INFO + "\n";
 
-    private static final Logger statsLogger = Logger.getLogger(AddCommand.class.getName());
+    //@@author chinhan99
+    private static final Logger addLogger = Logger.getLogger(AddCommand.class.getName());
 
+    //@@author paullowse
     private String type;
     private String description;
     private int amount;
@@ -91,6 +95,7 @@ public class AddCommand extends Command {
         return mandatoryTags;
     }
 
+    //@@author wcwy
     @Override
     public void setType(String type) {
         this.type = type;
@@ -126,31 +131,41 @@ public class AddCommand extends Command {
      */
     @Override
     public void execute(TransactionList transactions, Ui ui, Storage storage) throws MoolahException {
-        statsLogger.setLevel(Level.WARNING);
-        statsLogger.log(Level.INFO, "Add Command checks the type of the transaction "
-                + "before adding into the transaction class.");
-        assert date != null;
-        switch (type) {
-        case Expense.TRANSACTION_NAME:
-            String expense = transactions.addExpense(description, amount, category, date);
-            Ui.showTransactionAction(INFO_ADD_EXPENSE.toString(), expense);
-            statsLogger.log(Level.INFO, "New expense transaction has been added "
-                    + "and the UI should display acknowledgment message respectively.");
-            break;
-        case Income.TRANSACTION_NAME:
-            String income = transactions.addIncome(description, amount, category, date);
-            Ui.showTransactionAction(INFO_ADD_INCOME.toString(), income);
-            statsLogger.log(Level.INFO, "New income transaction has been added "
-                    + "and the UI should display acknowledgment message respectively.");
-            break;
-        default:
-            statsLogger.log(Level.WARNING, "InputTransactionUnknownTypeException thrown when the transaction type"
-                    + " is unknown.");
-            throw new InputTransactionUnknownTypeException();
-
+        //@@author chinhan99
+        try {
+            addLogger.setLevel(Level.SEVERE);
+            addLogger.log(Level.INFO, "Add Command checks the type of the transaction "
+                    + "before adding into the transaction class.");
+            assert date != null;
+            //@@author wcwy
+            switch (type) {
+            case Expense.TRANSACTION_NAME:
+                String expense = transactions.addExpense(description, amount, category, date);
+                Ui.showTransactionAction(INFO_ADD_EXPENSE.toString(), expense);
+                addLogger.log(Level.INFO, "New expense transaction has been added "
+                        + "and the UI should display acknowledgment message respectively.");
+                storage.writeToFile(transactions.getTransactions());
+                break;
+            case Income.TRANSACTION_NAME:
+                String income = transactions.addIncome(description, amount, category, date);
+                Ui.showTransactionAction(INFO_ADD_INCOME.toString(), income);
+                addLogger.log(Level.INFO, "New income transaction has been added "
+                        + "and the UI should display acknowledgment message respectively.");
+                storage.writeToFile(transactions.getTransactions());
+                break;
+            default:
+                addLogger.log(Level.WARNING, "InputTransactionUnknownTypeException thrown "
+                        + "when the transaction type is unknown.");
+                throw new InputTransactionUnknownTypeException();
+            }
+        } catch (IOException e) {
+            throw new StorageWriteErrorException();
         }
-        statsLogger.log(Level.INFO, "End of Add command.");
+        //@@author chinhan99
+        addLogger.log(Level.INFO, "End of Add command.");
     }
+
+    //@@author paullowse
 
     /**
      * Enables the program to exit when the Bye command is issued.

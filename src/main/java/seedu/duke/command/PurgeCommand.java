@@ -3,6 +3,12 @@ package seedu.duke.command;
 import seedu.duke.Storage;
 import seedu.duke.Ui;
 import seedu.duke.data.TransactionList;
+import seedu.duke.exception.MoolahException;
+import seedu.duke.exception.StorageWriteErrorException;
+
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static seedu.duke.common.InfoMessages.INFO_PURGE;
 import static seedu.duke.common.InfoMessages.INFO_PURGE_ABORT;
@@ -31,8 +37,14 @@ public class PurgeCommand extends Command {
     public static final String COMMAND_DETAILED_HELP = COMMAND_HELP + COMMAND_PARAMETERS_INFO
             + LINE_SEPARATOR;
 
+    //@@author brian-vb
+    private static final Logger purgeLogger = Logger.getLogger(AddCommand.class.getName());
+
+    //@@author paullowse
     public PurgeCommand() {
     }
+
+    //@@author brian-vb
 
     /**
      * Executes the operations related to the command.
@@ -42,23 +54,42 @@ public class PurgeCommand extends Command {
      * @param storage      An instance of the Storage class.
      */
     @Override
-    public void execute(TransactionList transactions, Ui ui, Storage storage) {
+    public void execute(TransactionList transactions, Ui ui, Storage storage) throws MoolahException {
         // Shows confirmation prompt before deleting all transactions
+        purgeLogger.setLevel(Level.SEVERE);
+        purgeLogger.log(Level.INFO, "Purge Command checks if there are no transactions"
+                + " to be purged. If so, the command is aborted.");
         boolean check = isEmpty(transactions);
         if (check) {
             Ui.showInfoMessage(INFO_PURGE_EMPTY.toString());
+            purgeLogger.log(Level.INFO, "The transactions list is found to be empty"
+                    + " and the UI should display that information to the user respectively.");
             return;
         }
-        ui.showInfoMessage(INFO_PURGE_WARNING.toString());
+        Ui.showInfoMessage(INFO_PURGE_WARNING.toString());
+        purgeLogger.log(Level.INFO, "The UI should display a confirmation prompt"
+                + " for which the User would need to respond.");
         String input = ui.readCommand();
 
         if (input.equals("Y")) {
-            TransactionList.purgeTransactions();
-            Ui.showInfoMessage(INFO_PURGE.toString());
+            try {
+                transactions.purgeTransactions();
+                assert PurgeCommand.isEmpty(transactions);
+                Ui.showInfoMessage(INFO_PURGE.toString());
+                purgeLogger.log(Level.INFO, "The transactions list is now empty"
+                        + " and the UI should display that information to the user respectively.");
+                storage.writeToFile(transactions.getTransactions());
+                purgeLogger.log(Level.INFO, "The end of the Purge Command.");
+            } catch (IOException e) {
+                throw new StorageWriteErrorException();
+            }
             return;
         }
 
         Ui.showInfoMessage(INFO_PURGE_ABORT.toString());
+        purgeLogger.log(Level.INFO, "The user would have responded to not proceed with the command"
+                + " and the UI should display that information to abort the command respectively.");
+        purgeLogger.log(Level.INFO, "The end of the Purge Command.");
     }
 
     public static boolean isEmpty(TransactionList transactions) {
@@ -68,6 +99,8 @@ public class PurgeCommand extends Command {
         }
         return false;
     }
+
+    //@@author paullowse
 
     /**
      * Enables the program to exit when the Bye command is issued.

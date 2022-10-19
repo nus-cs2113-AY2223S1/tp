@@ -23,6 +23,7 @@ public enum InfoMessages {
     INFO_PURGE_EMPTY("The command is aborted as the transactions list is empty."),
     INFO_PURGE_WARNING("Are you sure you want to proceed with this command? Please enter 'Y' to confirm.");
 
+    //@@author chydarren
     public final String message;
 
     /**

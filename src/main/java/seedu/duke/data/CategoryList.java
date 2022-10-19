@@ -5,6 +5,7 @@ import seedu.duke.data.transaction.Category;
 import java.util.ArrayList;
 
 public class CategoryList {
+    //@@author chydarren
     private static final String EMPTY_STRING = "";
     private static final String LINE_SEPARATOR = System.lineSeparator();
 
