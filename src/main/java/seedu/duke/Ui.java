@@ -19,6 +19,7 @@ public class Ui {
 
 
     public String input() {
+
         return in.nextLine();
     }
 
