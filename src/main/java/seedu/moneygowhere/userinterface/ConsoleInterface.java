@@ -649,6 +649,9 @@ public class ConsoleInterface {
                  | ConsoleParserCommandSortExpenseInvalidException
                  | ConsoleParserCommandConvertCurrencyInvalidException
                  | ConsoleParserCommandAddTargetInvalidException
+                 | ConsoleParserCommandViewTargetInvalidException
+                 | ConsoleParserCommandDeleteTargetInvalidException
+                 | ConsoleParserCommandEditTargetInvalidException
                  | ConsoleParserCommandAddIncomeInvalidException
                  | ConsoleParserCommandAddRecurringPaymentInvalidException
                  | ConsoleParserCommandViewRecurringPaymentInvalidException exception) {
@@ -687,6 +690,12 @@ public class ConsoleInterface {
                 runCommandConvertCurrency((ConsoleCommandConvertCurrency) consoleCommand);
             } else if (consoleCommand instanceof ConsoleCommandAddIncome) {
                 runCommandAddIncome((ConsoleCommandAddIncome) consoleCommand);
+            } else if (consoleCommand instanceof ConsoleCommandViewTarget) {
+                runCommandViewTarget((ConsoleCommandViewTarget) consoleCommand);
+            } else if (consoleCommand instanceof ConsoleCommandDeleteTarget) {
+                runCommandDeleteTarget((ConsoleCommandDeleteTarget) consoleCommand);
+            } else if (consoleCommand instanceof ConsoleCommandEditTarget) {
+                runCommandEditTarget((ConsoleCommandEditTarget) consoleCommand);
             } else if (consoleCommand instanceof ConsoleCommandAddRecurringPayment) {
                 runCommandAddRecurringPayment((ConsoleCommandAddRecurringPayment) consoleCommand);
             } else if (consoleCommand instanceof ConsoleCommandViewRecurringPayment) {

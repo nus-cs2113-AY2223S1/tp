@@ -1489,12 +1489,9 @@ public class ConsoleParser {
      * @throws ConsoleParserCommandSortExpenseInvalidException          If the command sort-expense is invalid.
      * @throws ConsoleParserCommandConvertCurrencyInvalidException      If the command convert-currency is invalid.
      * @throws ConsoleParserCommandAddTargetInvalidException            If the command add-target is invalid.
-     *                                                                  <<<<<<< Updated upstream
-     *                                                                  =======
      * @throws ConsoleParserCommandViewTargetInvalidException           If the command view-target is invalid.
      * @throws ConsoleParserCommandDeleteTargetInvalidException         If the command delete-target is invalid.
-     * @throws ConsoleParserCommandEditTargetInvalidException           If the command edit-target is invalid.
-     *                                                                  >>>>>>> Stashed changes
+     * @throws ConsoleParserCommandEditTargetInvalidException           If the command edit-target is invalid.     >>>>>>> Stashed changes
      * @throws ConsoleParserCommandAddIncomeInvalidException            If the command add-income is invalid.
      * @throws ConsoleParserCommandAddRecurringPaymentInvalidException  If the command Add-RecurringPayment is invalid.
      * @throws ConsoleParserCommandViewRecurringPaymentInvalidException If the command View-RecurringPayment is invalid.
@@ -1508,6 +1505,9 @@ public class ConsoleParser {
             ConsoleParserCommandSortExpenseInvalidException,
             ConsoleParserCommandConvertCurrencyInvalidException,
             ConsoleParserCommandAddTargetInvalidException,
+            ConsoleParserCommandViewTargetInvalidException,
+            ConsoleParserCommandDeleteTargetInvalidException,
+            ConsoleParserCommandEditTargetInvalidException,
             ConsoleParserCommandAddIncomeInvalidException,
             ConsoleParserCommandAddRecurringPaymentInvalidException,
             ConsoleParserCommandViewRecurringPaymentInvalidException {
@@ -1530,6 +1530,12 @@ public class ConsoleParser {
             return parseCommandConvertCurrency(arguments);
         } else if (command.equalsIgnoreCase(ConsoleParserConfigurations.COMMAND_ADD_TARGET)) {
             return parseCommandAddTarget(arguments);
+        } else if (command.equalsIgnoreCase(ConsoleParserConfigurations.COMMAND_VIEW_TARGET)) {
+            return parseCommandViewTarget(arguments);
+        } else if (command.equalsIgnoreCase(ConsoleParserConfigurations.COMMAND_DELETE_TARGET)) {
+            return parseCommandDeleteTarget(arguments);
+        } else if (command.equalsIgnoreCase(ConsoleParserConfigurations.COMMAND_EDIT_TARGET)) {
+            return parseCommandEditTarget(arguments);
         } else if (command.equalsIgnoreCase(ConsoleParserConfigurations.COMMAND_ADD_INCOME)) {
             return parseCommandAddIncome(arguments);
         } else if (command.equalsIgnoreCase(ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT)) {
