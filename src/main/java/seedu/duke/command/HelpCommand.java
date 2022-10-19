@@ -7,6 +7,10 @@ import seedu.duke.utils.Ui;
 
 public class HelpCommand extends Command {
     public static final String COMMAND_WORD = "help";
+
+    public static final String FORMAT = HelpCommand.COMMAND_WORD
+            + ": lists all functions!\n";
+
     public static final String HELP_MODULE_COMMAND_USAGE =  HelpCommand.COMMAND_WORD
             + ": lists all functions!\n";
     public static final String ADD_MODULE_COMMAND_USAGE = AddModuleCommand.COMMAND_WORD
