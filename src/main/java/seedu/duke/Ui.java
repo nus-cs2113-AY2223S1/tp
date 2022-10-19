@@ -109,7 +109,8 @@ public class Ui {
         String paddedRep = addRightPadding("Reps", columnSpacingArray[4]) + " | ";
         String paddedCalories = addRightPadding("Calories", columnSpacingArray[5]) + " | ";
         String paddedStatus = "Status";
-        String line = paddedIndex + paddedExercise + paddedSets + paddedTime + paddedRep + paddedCalories + paddedStatus;
+        String line = paddedIndex + paddedExercise + paddedSets + paddedTime + paddedRep
+                + paddedCalories + paddedStatus;
         String separatorLine = "-".repeat(line.length());
         output(separatorLine, line, separatorLine);
     }

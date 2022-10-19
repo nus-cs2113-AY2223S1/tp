@@ -16,7 +16,8 @@ public class MarkCommand extends Command {
     private Ui ui;
     private ExerciseList exerciseList;
     private String arguments;
-    private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+    private static final Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+
 
     public MarkCommand(String arguments) {
         this.arguments = arguments;
