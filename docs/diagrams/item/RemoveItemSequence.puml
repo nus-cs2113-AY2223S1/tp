@@ -6,10 +6,10 @@ Actor User
 activate ":Duke"
 ":Duke" -> ":CommandParser": createCommand()
 activate ":CommandParser"
-":CommandParser" -> ":RemoveItemCommand": new
+":CommandParser" -> ":RemoveItemCommand"**: new
 activate ":RemoveItemCommand"
-return :RemoveItemCommand
-":CommandParser" --> ":Duke": command
+return
+":CommandParser" --> ":Duke"
 deactivate
 
 ":Duke" -> ":RemoveItemCommand" : executeCommand()
@@ -20,7 +20,7 @@ return args
     ":RemoveItemCommand" -> ":ItemList": getItemById()
     activate ":ItemList"
 alt item is valid
-    ":ItemList" --> ":RemoveItemCommand": :Item
+    ":ItemList" --> ":RemoveItemCommand"
     deactivate ":ItemList"
     ":RemoveItemCommand" -> ":ItemList": deleteItem()
     activate ":ItemList"
@@ -31,13 +31,16 @@ alt item is valid
     deactivate "<<class>>\nUi"
     deactivate ":ItemList"
 else item is invalid
-    ":RemoveItemCommand" --> ":Duke" : DukeException
-    deactivate ":RemoveItemCommand"
+    ":RemoveItemCommand" -> ":DukeException"** : new
+    destroy ":RemoveItemCommand"
+    activate ":DukeException"
+    ":DukeException" --> ":Duke"
+    destroy ":DukeException"
     ":Duke" -> "<<class>>\nUi" : print error
     activate "<<class>>\nUi"
     "<<class>>\nUi" --> ":Duke" : error message
     deactivate "<<class>>\nUi"
 end
 deactivate ":RemoveItemCommand"
-":Duke" --> "User"
+
 @enduml

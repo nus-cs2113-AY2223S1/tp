@@ -14,9 +14,9 @@ return userList, itemList, transactionList
 loop until isLastCommand
     ":Duke" -> "<<class>>\nUi": readInput()
     activate "<<class>>\nUi"
-    User -> "<<class>>\nUi" : input
-    return input
-    ":Duke" -> ":CommandParser" : parse command
+    User -> "<<class>>\nUi":input
+    return
+    ":Duke" -> ":CommandParser" : createCommand()
     activate ":CommandParser"
     ":CommandParser" -> ":CommandParser" : getCommand()
     activate ":CommandParser"
@@ -24,8 +24,7 @@ loop until isLastCommand
     deactivate ":CommandParser"
 
     alt command is valid
-        create ":Command"
-        ":CommandParser" -> ":Command": createCommand()
+        ":CommandParser" -> ":Command"**: new
         activate ":Command"
         return command
         return command
@@ -36,6 +35,7 @@ loop until isLastCommand
         deactivate "<<class>>\nUi"
         ":Command" --> ":Duke"
         deactivate ":Command"
+        destroy ":Command"
 
     else command is invalid
         ":Duke" -> "<<class>>\nUi" : print error

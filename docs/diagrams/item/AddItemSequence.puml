@@ -5,10 +5,10 @@ Actor User
 activate ":Duke"
 ":Duke" -> ":CommandParser": createCommand()
 activate ":CommandParser"
-":CommandParser" -> ":AddItemCommand": new
+":CommandParser" -> ":AddItemCommand"**: new
 activate ":AddItemCommand"
-return :AddItemCommand
-":CommandParser" --> ":Duke": command
+return
+":CommandParser" --> ":Duke"
 deactivate
 ":Duke" -> ":AddItemCommand" : executeCommand()
 activate ":AddItemCommand"
@@ -16,9 +16,10 @@ activate ":AddItemCommand"
 activate ":AddItemCommand"
 return args
 alt args is valid
-    ":AddItemCommand" -> ":Item": new Item()
+    ":AddItemCommand" -> ":Item"**: new Item()
     activate ":Item"
-    ":Item" --> ":AddItemCommand": item
+    ":Item" --> ":AddItemCommand"
+    deactivate ":Item"
     ":AddItemCommand" -> ":ItemList": addItem()
     activate ":ItemList"
     ":AddItemCommand" -> "<<class>>\nUi": addItemMessage()
@@ -28,12 +29,15 @@ alt args is valid
     deactivate "<<class>>\nUi"
     deactivate ":Item"
 else args is invalid
-    ":AddItemCommand" --> ":Duke" : DukeException
-    deactivate ":AddItemCommand"
+    ":AddItemCommand" -> ":DukeException"** : new
+    destroy ":AddItemCommand"
+    activate ":DukeException"
+    ":DukeException" --> ":Duke"
+    destroy ":DukeException"
     ":Duke" -> "<<class>>\nUi" : print error
     activate "<<class>>\nUi"
     "<<class>>\nUi" --> ":Duke" : error message
     deactivate "<<class>>\nUi"
 end
-":Duke" --> "User"
+
 @enduml

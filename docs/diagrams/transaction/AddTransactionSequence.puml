@@ -6,10 +6,10 @@ Actor User
 activate ":Duke"
 ":Duke" -> ":CommandParser": createCommand()
 activate ":CommandParser"
-":CommandParser" -> ":AddTransactionCommand": new
+":CommandParser" -> ":AddTransactionCommand"**: new
 activate ":AddTransactionCommand"
-return :AddTransactionCommand
-":CommandParser" --> ":Duke": command
+return
+":CommandParser" --> ":Duke":
 deactivate
 
 ":Duke" -> ":AddTransactionCommand" : executeCommand()
@@ -18,9 +18,9 @@ activate ":AddTransactionCommand"
 activate ":AddTransactionCommand"
 return args
 alt args is valid
-    ":AddTransactionCommand" -> ":Transaction": new Transaction()
+    ":AddTransactionCommand" -> ":Transaction"**: new Transaction()
     activate ":Transaction"
-    ":Transaction" --> ":AddTransactionCommand": transaction
+    ":Transaction" --> ":AddTransactionCommand"
     ":AddTransactionCommand" -> ":TransactionList": add()
     activate ":TransactionList"
     ":AddTransactionCommand" -> "<<class>>\nUi": addTransactionMessage()
@@ -30,12 +30,15 @@ alt args is valid
     deactivate "<<class>>\nUi"
     deactivate ":Transaction"
 else args is invalid
-    ":AddTransactionCommand" --> ":Duke" : DukeException
-    deactivate ":AddTransactionCommand"
+    ":AddTransactionCommand" -> ":DukeException"** : new
+    destroy ":AddTransactionCommand"
+    activate ":DukeException"
+    ":DukeException" --> ":Duke"
+    destroy ":DukeException"
     ":Duke" -> "<<class>>\nUi" : print error
     activate "<<class>>\nUi"
     "<<class>>\nUi" --> ":Duke" : error message
     deactivate "<<class>>\nUi"
 end
-":Duke" --> "User"
+
 @enduml
