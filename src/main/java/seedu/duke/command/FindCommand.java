@@ -4,6 +4,7 @@ import seedu.duke.Storage;
 import seedu.duke.Ui;
 import seedu.duke.data.TransactionList;
 import seedu.duke.exception.FindTransactionMissingKeywordsException;
+import seedu.duke.exception.MoolahException;
 
 import static seedu.duke.common.InfoMessages.INFO_LIST_FILTERED;
 import static seedu.duke.common.InfoMessages.INFO_LIST_UNFILTERED;
@@ -27,20 +28,13 @@ public class FindCommand extends Command {
             + "such as type, category, amount, date or description.";
 
     // Basic help description
-    public static final String COMMAND_HELP = "Command Word: " + COMMAND_WORD
-            + LINE_SEPARATOR
-            + COMMAND_DESCRIPTION
-            + LINE_SEPARATOR
-            + COMMAND_USAGE
-            + LINE_SEPARATOR;
+    public static final String COMMAND_HELP = "Command Word: " + COMMAND_WORD + LINE_SEPARATOR
+            + COMMAND_DESCRIPTION + LINE_SEPARATOR + COMMAND_USAGE + LINE_SEPARATOR;
     // Detailed help description
     public static final String COMMAND_DETAILED_HELP = COMMAND_HELP + COMMAND_PARAMETERS_INFO
             + LINE_SEPARATOR;
 
     protected String keywords;
-
-    public FindCommand() {
-    }
 
     /**
      * Initialises the variables of the FindCommand class.
@@ -64,28 +58,32 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Executes the operations related to the command.
+     * Executes the "Find" command. Checks that the input contain a search expression, i.e. keywords
+     * before performing any search on the transactions list.
      *
      * @param ui           An instance of the Ui class.
      * @param transactions An instance of the TransactionList class.
      * @param storage      An instance of the Storage class.
      */
     @Override
-    public void execute(TransactionList transactions, Ui ui, Storage storage) {
-        try {
-            // Checks the format of find to ensure that it contains keywords used in the search expression
-            checkFindFormat(keywords);
-            String transactionsList = transactions.findTransactions(keywords);
-            if (transactionsList.isEmpty()) {
-                ui.showInfoMessage(INFO_LIST_UNFILTERED.toString());
-                return;
-            }
-            ui.showTransactionsList(transactionsList, INFO_LIST_FILTERED.toString());
-        } catch (FindTransactionMissingKeywordsException e) {
-            ui.showErrorMessage(e.getMessage());
+    public void execute(TransactionList transactions, Ui ui, Storage storage) throws MoolahException {
+        // Checks the format of find to ensure that it contains keywords used in the search expression
+        checkFindFormat(keywords);
+        assert !keywords.isBlank();
+        String transactionsList = transactions.findTransactions(keywords);
+        if (transactionsList.isEmpty()) {
+            ui.showInfoMessage(INFO_LIST_UNFILTERED.toString());
+            return;
         }
+        assert !transactionsList.isEmpty();
+        ui.showTransactionsList(transactionsList, INFO_LIST_FILTERED.toString());
     }
 
+    /**
+     * Enables the program to exit when the Bye command is issued.
+     *
+     * @return A boolean value that indicates whether the program shall exit.
+     */
     @Override
     public boolean isExit() {
         return false;

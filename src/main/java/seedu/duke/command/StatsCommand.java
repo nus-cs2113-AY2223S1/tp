@@ -5,9 +5,12 @@ import seedu.duke.Ui;
 import seedu.duke.data.CategoryList;
 import seedu.duke.data.TransactionList;
 import seedu.duke.exception.ListStatisticsInvalidStatsTypeException;
-import seedu.duke.exception.ListStatisticsMissingTagException;
 import seedu.duke.exception.MoolahException;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import static seedu.duke.command.CommandTag.COMMAND_TAG_STATISTICS_TYPE;
 import static seedu.duke.common.InfoMessages.INFO_STATS_CATEGORIES;
 import static seedu.duke.common.InfoMessages.INFO_STATS_EMPTY;
 
@@ -30,16 +33,27 @@ public class StatsCommand extends Command {
 
     // Basic help description
     public static final String COMMAND_HELP = "Command Word: " + COMMAND_WORD + LINE_SEPARATOR
-            + COMMAND_DESCRIPTION + LINE_SEPARATOR
-            + COMMAND_USAGE + LINE_SEPARATOR;
+            + COMMAND_DESCRIPTION + LINE_SEPARATOR + COMMAND_USAGE + LINE_SEPARATOR;
     // Detailed help description
     public static final String COMMAND_DETAILED_HELP = COMMAND_HELP + COMMAND_PARAMETERS_INFO
             + LINE_SEPARATOR;
 
-    private String input;
+    private static final Logger statsLogger = Logger.getLogger(StatsCommand.class.getName());
 
-    public StatsCommand(String input) {
-        this.input = input;
+    private String statsType;
+
+    public StatsCommand() {
+    }
+
+    /**
+     * Gets the mandatory tags of the command.
+     *
+     * @return A string array containing all mandatory tags.
+     */
+    @Override
+    public String[] getMandatoryTags() {
+        String[] mandatoryTags = new String[]{COMMAND_TAG_STATISTICS_TYPE};
+        return mandatoryTags;
     }
 
     /**
@@ -51,90 +65,62 @@ public class StatsCommand extends Command {
      */
     @Override
     public void execute(TransactionList transactions, Ui ui, Storage storage) throws MoolahException {
-        /*
-        Checks if userInput is in the correct input format by further parsing,
-        before adding entry to arraylist
-        */
-        String[] splits = input.split(" ");
-        checkTagsExist(splits);
+        statsLogger.setLevel(Level.WARNING);
+        statsLogger.log(Level.INFO, "Stats command starts passing the type of statistics"
+                + " and transactions list into the listStatisticsByStatsType method.");
 
-        String statsType = "";
-
-        for (String split : splits) {
-            String tag = split.substring(0, 2);
-            String parameter = split.substring(2);
-            switch (tag) {
-            case "s/":
-                listStatisticsByStatsType(parameter, transactions);
-                break;
-            /*case "t/":
-                break;
-            case "n/":
-                break;*/
-            default:
-                break;
-            }
-        }
+        listStatisticsByStatsType(statsType, transactions);
     }
 
+    @Override
+    public void setStatsType(String statsType) {
+        this.statsType = statsType;
+    }
+
+    /**
+     * Lists the statistics depending on the type of statistics requested.
+     *
+     * @param statsType     The type of statistics that is needed, e.g. categories.
+     * @param transactions  An instance of the TransactionList class.
+     * @throws ListStatisticsInvalidStatsTypeException If the type of statistics is not recognised.
+     */
     private static void listStatisticsByStatsType(String statsType, TransactionList transactions)
             throws ListStatisticsInvalidStatsTypeException {
-        /*
-        Known issue; currently each repeat use of command will generate more classes, need
-        to probably add into constructor and pass in categories
-        */
+        statsLogger.log(Level.INFO, "A new instance of CategoryList is created.");
         CategoryList categories = new CategoryList();
 
         switch (statsType) {
         case "categories":
+            statsLogger.log(Level.INFO, "The categories and amount for each category are "
+                    + " being tallied and computed.");
             categories.calculateTotalAmount(transactions);
             String categoriesList = categories.listCategories();
+
             if (categoriesList.isEmpty()) {
+                statsLogger.log(Level.INFO, "Categories list is empty, so UI should display that"
+                        + " there are no statistics available.");
                 Ui.showInfoMessage(INFO_STATS_EMPTY.toString());
+                statsLogger.log(Level.INFO, "End of Stats command.");
                 return;
             }
+            assert !categoriesList.isEmpty();
+            statsLogger.log(Level.INFO, "Categories list is available, so UI should display the"
+                    + " categories and amount of savings per category.");
             Ui.showTransactionsList(categoriesList, INFO_STATS_CATEGORIES.toString());
             break;
         default:
+            statsLogger.log(Level.WARNING, "An exception has been caught due to an invalid statistics type.");
             throw new ListStatisticsInvalidStatsTypeException();
         }
+
+        statsLogger.log(Level.INFO, "End of Stats command.");
     }
 
     /**
-     * Checks if the targeted tags exists in the split user inputs.
+     * Enables the program to exit when the Bye command is issued.
      *
-     * @param splits The user input after the command word, split into a list for every space found.
-     * @throws ListStatisticsMissingTagException Missing tag exception.
+     * @return A boolean value that indicates whether the program shall exit.
      */
-    private static void checkTagsExist(String[] splits) throws ListStatisticsMissingTagException {
-        // TODO: To add the tags into Command class instead
-        String[] tags = new String[]{"s/"};
-        for (String tag : tags) {
-            boolean found = findMatchingTagFromInputs(tag, splits);
-            if (!found) {
-                throw new ListStatisticsMissingTagException();
-            }
-        }
-    }
-
-    /**
-     * Returns a boolean value on whether a tag can be found among the split user inputs.
-     *
-     * @param tag    A specific tag used to locate the command parameter.
-     * @param splits The user input after the command word, split into a list for every space found.
-     * @return Whether the tag is found within the split inputs.
-     */
-    private static boolean findMatchingTagFromInputs(String tag, String[] splits) {
-        boolean found = false;
-        for (String split : splits) {
-            if (split.startsWith(tag)) {
-                found = true;
-                break;
-            }
-        }
-        return found;
-    }
-
     @Override
     public boolean isExit() {
         return false;

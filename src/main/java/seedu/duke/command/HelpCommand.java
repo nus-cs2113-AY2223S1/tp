@@ -4,6 +4,8 @@ import seedu.duke.Storage;
 import seedu.duke.Ui;
 import seedu.duke.data.TransactionList;
 
+import static seedu.duke.command.CommandTag.COMMAND_TAG_HELP_OPTION;
+
 /**
  * Represents a help command object that will execute the operations for Help command.
  */
@@ -24,22 +26,36 @@ public class HelpCommand extends Command {
             + "(Optional) o/detailed - Detailed version of guide.";
 
     // Basic help description
-    public static final String COMMAND_HELP = "Command Word: " + COMMAND_WORD
-            + LINE_SEPARATOR
-            + COMMAND_DESCRIPTION
-            + LINE_SEPARATOR
-            + COMMAND_USAGE
-            + LINE_SEPARATOR;
+    public static final String COMMAND_HELP = "Command Word: " + COMMAND_WORD + LINE_SEPARATOR
+            + COMMAND_DESCRIPTION + LINE_SEPARATOR + COMMAND_USAGE + LINE_SEPARATOR;
     // Detailed help description
     public static final String COMMAND_DETAILED_HELP = COMMAND_HELP + COMMAND_PARAMETERS_INFO + "\n";
 
-    private String input;
+    private boolean isDetailed;
 
+    /**
+     * Instantiates the ListCommand class with required variables.
+     */
     public HelpCommand() {
+        this.isDetailed = false;
     }
 
-    public HelpCommand(String input) {
-        this.input = input;
+    @Override
+    public void setIsDetailedOption(boolean isDetailed) {
+        this.isDetailed = isDetailed;
+    }
+
+    /**
+     * Gets the optional tags of the command.
+     *
+     * @return A string array containing all optional tags.
+     */
+    @Override
+    public String[] getOptionalTags() {
+        String[] optionalTags = new String[]{
+            COMMAND_TAG_HELP_OPTION
+        };
+        return optionalTags;
     }
 
     /**
@@ -52,7 +68,7 @@ public class HelpCommand extends Command {
     @Override
     public void execute(TransactionList transactions, Ui ui, Storage storage) {
         String helpMessage = "";
-        if (input.contains("o/detailed")) {
+        if (isDetailed) {
             helpMessage = generateDetailedHelp();
         } else {
             helpMessage = generateBasicHelp();
@@ -89,6 +105,11 @@ public class HelpCommand extends Command {
         return helpMessage;
     }
 
+    /**
+     * Enables the program to exit when the Bye command is issued.
+     *
+     * @return A boolean value that indicates whether the program shall exit.
+     */
     @Override
     public boolean isExit() {
         return false;

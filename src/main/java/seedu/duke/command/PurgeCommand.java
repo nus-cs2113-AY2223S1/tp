@@ -69,6 +69,11 @@ public class PurgeCommand extends Command {
         return false;
     }
 
+    /**
+     * Enables the program to exit when the Bye command is issued.
+     *
+     * @return A boolean value that indicates whether the program shall exit.
+     */
     @Override
     public boolean isExit() {
         return false;
