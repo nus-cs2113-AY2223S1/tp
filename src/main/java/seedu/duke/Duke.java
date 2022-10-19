@@ -36,8 +36,6 @@ public class Duke {
             try {
                 //System.exit(0); //to pass CI
                 String userInputText = ui.readCommand();
-
-
                 parser = parserManager.parseCommand(userInputText);
                 command = parser.parseCommand();
                 command.execute(ui, storage, propertyList, clientList, pairingList);
