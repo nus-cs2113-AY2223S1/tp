@@ -130,7 +130,7 @@ public class Parser {
         try {
             if (userInput.contains(movieKeyword)) {
                 addMedia(fields, movieSpacing);
-            } else {
+            } else if (userInput.contains(tvKeyword)) {
                 addMedia(fields, tvSpacing);
             }
         } catch (Exception e) {
