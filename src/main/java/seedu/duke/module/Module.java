@@ -1,5 +1,6 @@
 package seedu.duke.module;
 
+import seedu.duke.exceptions.InvalidModuleException;
 import seedu.duke.university.University;
 
 public class Module {
@@ -8,12 +9,11 @@ public class Module {
     private String credit;
     private University university;
 
-    public Module(String code, String title, String credit, University university) {
-        assert code.length() > 0 : "Code cannot be empty";
-        assert title.length() > 0 : "Title cannot be empty";
-        assert credit.length() > 0 : "Credit cannot be empty";
-        assert university.getName().length() > 0 : "University name cannot be empty";
-        assert university.getCountry().length() > 0 : "University country cannot be empty";
+    public Module(String code, String title, String credit, University university) throws InvalidModuleException {
+        if (!isValidModule(code, title, credit, university)) {
+            throw new InvalidModuleException(
+                    "Invalid Module: " + code + " " + title + " " + credit + "MCs in " + university.toString());
+        }
 
         setCode(code);
         setTitle(title);
@@ -56,5 +56,29 @@ public class Module {
 
     public void setUniversity(University university) {
         this.university = university;
+    }
+
+    private boolean isValidModule(String code, String title, String credit, University university) {
+        if (code.length() == 0) {
+            return false;
+        }
+
+        if (title.length() == 0) {
+            return false;
+        }
+
+        if (credit.length() == 0) {
+            return false;
+        }
+
+        if (university.getName().length() == 0) {
+            return false;
+        }
+
+        if (university.getCountry().length() == 0) {
+            return false;
+        }
+
+        return true;
     }
 }
