@@ -48,6 +48,7 @@ public class PassengerList extends OperationList {
     public PassengerList() {
     }
 
+    //@@author shengiv
     @Override
     public void addOperation(String passengerDetail) throws SkyControlException {
         getNumberOfPassengers();
@@ -61,6 +62,7 @@ public class PassengerList extends OperationList {
         Ui.showAddedPassenger(passenger);
     }
 
+    //@@author ivanthengwr
     private void checkPassengerDetails() throws SkyControlException {
         if (isExceedNameLength) {
             resetCheckFormat();
@@ -79,6 +81,7 @@ public class PassengerList extends OperationList {
         }
     }
 
+    //@@author shengiv
     private void checkPassengerDuplicate() throws SkyControlException {
         for (int i = 0; i < numOfPassengers; i++) {
             validatePassenger(i);
@@ -89,6 +92,7 @@ public class PassengerList extends OperationList {
         }
     }
 
+    //@@author ivanthengwr
     @Override
     public void deleteOperation(String passengerDetail) throws SkyControlException {
         getNumberOfPassengers();
@@ -164,6 +168,7 @@ public class PassengerList extends OperationList {
         boardingTime = passengers.get(index).getBoardingTime();
     }
 
+    //@@author shengiv
     private void getPassengerName(String passengerDetail) throws SkyControlException {
         if (isAdd) {
             name = getSubstringBetweenDelimiters(passengerDetail,
@@ -254,6 +259,7 @@ public class PassengerList extends OperationList {
         return outputString.toUpperCase();
     }
 
+    //@@author ivanthengwr
     private void validateDetailFormat() {
         isExceedNameLength = name.length() > NAME_LENGTH_LIMIT;
         isWrongNameFormat = !name.matches(REGEX_LETTER);
