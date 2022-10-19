@@ -9,7 +9,7 @@ public class Pet {
     public static int numOfPets = 0;
     //public static int idTracker = 1;
 
-    public Pet(String name, String species, Boolean isHealthy) {
+    public Pet(String name, String species, boolean isHealthy) {
         this.name = name;
         this.species = species;
         // this.id = id;
