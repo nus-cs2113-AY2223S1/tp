@@ -117,20 +117,14 @@ public class Ui {
      * @return Formatted string for a module and its associated NUS code, title, modular credits and PU information.
      */
     public static String printModule(UserModuleMapping module) {
+        assert module.getPuCode().length() > 0 : "PU module code length cannot be empty";
+        assert module.getPuTitle().length() > 0 : "PU module title length cannot be empty";
+        assert module.getPuCredit().length() > 0 : "PU module credits length cannot be empty";
+        assert module.getPuName().length() > 0 : "PU name length cannot be empty";
+        assert module.getNusCode().length() > 0 : "NUS module code length cannot be empty";
+        assert module.getNusTitle().length() > 0 : "NUS module title length cannot be empty";
+        assert module.getNusCredit().length() > 0 : "NUS module credits length cannot be empty";
         String message = "NUS: " + module.getNusCode() + " " + module.getNusTitle() + " | Partner University: "
-                + module.getPuCode() + " " + module.getPuTitle() + " | Equivalent NUS Credits: " + module.getNusCredit()
-                + " MCs";
-        return message;
-    }
-
-    /**
-     * Displays to the user information regarding a deleted module.
-     *
-     * @return Formatted string for a module and its associated NUS code, title, modular credits and PU information.
-     */
-    public static String printDeletedModule(UserModuleMapping module) {
-        String puName = module.getPuName();
-        String message = "NUS: " + module.getNusCode() + " " + module.getNusTitle() + " | " + puName + ": "
                 + module.getPuCode() + " " + module.getPuTitle() + " | Equivalent NUS Credits: " + module.getNusCredit()
                 + " MCs";
         return message;
@@ -176,11 +170,12 @@ public class Ui {
      * Prints an acknowledgement message to inform the user that they successfully created a list for
      * the chosen partner university.
      * 
-     * @param uniName The name of the partner university
+     * @param universityName The name of the partner university
      * @return Formatted string for the partner university list created.
      */
-    public static String printPuListCreatedAcknowledgement(String uniName) {
-        String message = LINE + "Success! You have created a new list for " + uniName + "\n" + LINE;
+    public static String printPuListCreatedAcknowledgement(String universityName) {
+        assert universityName.length() > 0 : "University name should not be empty";
+        String message = LINE + "Success! You have created a new list for " + universityName + "\n" + LINE;
         return message;
     }
 
@@ -188,11 +183,12 @@ public class Ui {
      * Prints an acknowledgement message to inform the user that they successfully deleted the list for
      * the chosen partner university.
      *
-     * @param uniName The name of the partner university
+     * @param universityName The name of the partner university
      * @return Formatted string for the partner university list deleted.
      */
-    public static String printPuListDeletedAcknowledgement(String uniName) {
-        String message = LINE + "Success! You deleted the list for " + uniName + "\n" + LINE;
+    public static String printPuListDeletedAcknowledgement(String universityName) {
+        assert universityName.length() > 0 : "University name should not be empty";
+        String message = LINE + "Success! You deleted the list for " + universityName + "\n" + LINE;
         return message;
     }
 
@@ -203,6 +199,7 @@ public class Ui {
      * @return Formatted string for the modules in the list.
      */
     public static String printModulesInUserList(ArrayList<UserModuleMapping> modules) {
+        assert modules.size() > 0 : "List of module mappings should not be empty";
         String message = LINE;
         for (int i = 0; i < modules.size(); i++) {
             message += Integer.toString(i + 1);
@@ -221,12 +218,13 @@ public class Ui {
      * @return Formatted string for the deleted modules in the list.
      */
     public static String printDeletedModulesHistory(ArrayDeque<UserModuleMapping> deletedModules) {
+        assert deletedModules.size() > 0 : "List of module mappings should not be empty";
         String message = LINE;
         int i = 1;
         for (UserModuleMapping module : deletedModules) {
             message += Integer.toString(i++);
             message += ". ";
-            message += printDeletedModule(module);
+            message += printModule(module);
             message += "\n";
         }
         message += LINE;
@@ -236,6 +234,7 @@ public class Ui {
     public static String printPuList(UserUniversityList puList) {
         UserModuleMappingList puModulesList = puList.getMyModules();
         ArrayList<UserModuleMapping> puModules = puModulesList.getModules();
+        assert puModules.size() > 0 : "List of module mappings should not be empty";
         return printModulesInUserList(puModules);
     }
 
@@ -245,6 +244,7 @@ public class Ui {
      * @param universities The list of universities in the database.
      */
     public static void printUniversitiesInDatabase(ArrayList<University> universities) {
+        assert universities.size() > 0 : "List of universities should not be empty";
         int i = 1;
         for (University university : universities) {
             System.out.println(i + ". " + university.toString());
@@ -259,6 +259,7 @@ public class Ui {
      * @param moduleMappings A list containing module mappings.
      */
     public static void printMappings(ArrayList<ModuleMapping> moduleMappings) {
+        assert moduleMappings.size() > 0 : "List of module mappings should not be empty";
         for (ModuleMapping moduleMapping : moduleMappings) {
             System.out.println(moduleMapping.toString());
         }
@@ -271,6 +272,7 @@ public class Ui {
      * @param userFavouriteLists A dictionary containing a user's favourited lists.
      */
     public static void printUserFavouriteLists(HashMap<String, UserUniversityList> userFavouriteLists) {
+        assert userFavouriteLists.size() > 0 : "Dictionary of university name to favourited lists should not be empty";
         for (Map.Entry<String, UserUniversityList> set : userFavouriteLists.entrySet()) {
             String universityName = set.getKey();
             UserUniversityList universityList = set.getValue();
@@ -286,6 +288,7 @@ public class Ui {
      * @return Acknowledgement message to user for adding a list to favourites.
      */
     public static String printFavouriteListAddedAcknowledgement(String universityName) {
+        assert universityName.length() > 0 : "University name should not be empty";
         String message = LINE + "Success! You added:\n" + universityName + "to your favourited lists" + "\n" + LINE;
         return message;
     }
@@ -297,6 +300,7 @@ public class Ui {
      * @return Acknowledgement message to user for deleting a list from favourites.
      */
     public static String printFavouriteListDeletedAcknowledgement(String universityName) {
+        assert universityName.length() > 0 : "University name should not be empty";
         String message = LINE + "Success! You deleted:\n" + universityName + "from your favourited lists" + "\n" + LINE;
         return message;
     }
