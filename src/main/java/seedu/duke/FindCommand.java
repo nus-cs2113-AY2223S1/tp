@@ -1,13 +1,15 @@
 package seedu.duke;
 
-public class ListCommand extends Commands {
-    private final String outputString = "---Here are the reviews in your list---\n";
+public class FindCommand extends Commands {
+    private final String outputString = "---Here are the reviews that match the keyword---\n";
     private final String movieString = "\nMovies:\n";
     private final String tvShowString = "\nTV Shows:\n";
     private final String listDelimeter = ". ";
+    protected String searchTerm;
 
-    public ListCommand(ReviewList reviews) {
+    public FindCommand(ReviewList reviews, String searchTerm) {
         super(reviews);
+        this.searchTerm = searchTerm;
     }
 
     @Override
@@ -19,10 +21,10 @@ public class ListCommand extends Commands {
 
         for (int i = 0; i < reviewList.inputs.size(); i++) {
             Media media = reviewList.inputs.get(i);
-            if (media instanceof Movie) {
+            if (media instanceof Movie && media.getTitle().contains(searchTerm)) {
                 moviesList += (movieIndex) + listDelimeter + reviewList.inputs.get(i).toString() + "\n";
                 movieIndex += 1;
-            } else if (media instanceof TvShow) {
+            } else if (media instanceof TvShow && media.getTitle().contains(searchTerm)) {
                 tvShowList += (tvShowIndex) + listDelimeter + reviewList.inputs.get(i).toString() + "\n";
                 tvShowIndex += 1;
             }
@@ -31,5 +33,4 @@ public class ListCommand extends Commands {
         output = output.strip();
         return output;
     }
-
 }
