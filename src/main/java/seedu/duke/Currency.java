@@ -117,7 +117,7 @@ public class Currency {
         }
     }
 
-    private static int findIndexOfCurrency(String s, List<List<String>> allCurrencies) throws FinanceException {
+    public static int findIndexOfCurrency(String s, List<List<String>> allCurrencies) throws FinanceException {
         for(int i = 0; i < allCurrencies.size(); i++){
             if(allCurrencies.get(i).get(0).contains(s)){
                 return i;
