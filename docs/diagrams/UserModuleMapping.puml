@@ -1,0 +1,50 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+class Module {
+}
+
+class UserModuleMapping {
+    + nusModule:Module
+    + puModule:Module
+    - comment: String
+    + UserModuleMapping(puCode:String, puTitle:String, nusCode:String, nusTitle:String,
+                        nusCredit:String, puCredit:String, puName:String, puCountry:String)
+    + toString()
+    + getNusCode()
+    + getPuCode()
+    + getNusTitle()
+    + getNusCredit()
+    + getPuTitle()
+    + getPuCredit()
+    + getPuName()
+    + getComment()
+    + setNusCode()
+    + setPuCode()
+    + setNusTitle()
+    + setNusCredit()
+    + setPuTitle()
+    + setPuCredit()
+    + setPuName()
+    + setComment()
+}
+
+class UserModuleMappingList {
+    - modules:ArrayList<UserModuleMapping>
+    + setModules(ArrayList<UserModuleMapping> modules
+    + UserModuleMappingList()
+    + findModuleByCode(input:UserModuleMapping)
+    + addModule(input:UserModuleMapping)
+    + addModule(input:UserModuleMapping, isFromDatabase:boolean)
+    + displayAll()
+    + deleteModuleByPuCode(input:String)
+    + getModuleByPuCode(input:String)
+    + deleteModule(index:int)
+    + updateModule(puCode:String, nusCode:String, updates:String)
+    + findModuleByTitle(keyword:String)
+}
+
+UserModuleMapping " * " --> "0..2" Module :> Maps
+UserModuleMappingList " * " --> " * " UserModuleMapping :> Stores multiple mappings
+
+@enduml
