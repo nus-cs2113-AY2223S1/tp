@@ -168,9 +168,10 @@ public class UI {
     }
 
     public static final String PATIENT_ADD = "\n* To add a patient: add n/[name] g/[M/F] d/[DOB] i/[ID]";
-    public static final String PATIENT_EDIT = "\n* To edit a patient's info: "
+    public static final String PATIENT_EDIT = "\n* To edit a patient's information: "
             + "edit i/[ID] (n/[name] or g/[M/F] or d/[DOB])";
-    public static final String PATIENT_RETRIEVE = "\n* To retrieve a patient's info: retrieve i/[ID]";
+    public static final String PATIENT_RETRIEVE = "\n* To retrieve information about a specific patient:"
+            + " retrieve i/[ID]";
 
     public static final String PATIENT_VIEW_ALL = "\n* To list all patients: viewall";
     public static final String VISIT_ADD = "\n* To add a visit: add i/[ID] d/[date] t/[time] r/[reason]";
