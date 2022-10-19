@@ -3,64 +3,70 @@ package seedu.duke.operationlist;
 import seedu.duke.terminalinfo.FlightInfo;
 import seedu.duke.exceptions.SkyControlException;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class FlightList extends OperationList {
     public static int flightIndex = 0;
-
     private static final String FLIGHT_ADD_COMMAND = "flight add";
+    private static final String FLIGHT_ADD_DELIMITER = "flight add ";
     private static final String FLIGHT_DELETE_COMMAND = "flight delete";
-    private static final String FLIGHT_NUMBER_DELIMITER = "fn/";
-    private static final String AIRLINE_DELIMITER = "a/";
-    private static final String DESTINATION_DELIMITER = "d/";
-    private static final String DEPARTURE_TIME_DELIMITER = "t/";
-    private static final String GATE_NUMBER_DELIMITER = "gn/";
-    private static final String TERMINAL_DELIMITER = "tl/";
-    private static final String CHECK_IN_ROW_DELIMITER = "c/";
-    private static final String END_OF_INPUT = "empty";
+    private static final String FLIGHT_NUMBER_DELIMITER = " fn/";
+    private static final String AIRLINE_DELIMITER = " a/";
+    private static final String DESTINATION_DELIMITER = " d/";
+    private static final String DEPARTURE_TIME_DELIMITER = " t/";
+    private static final String GATE_NUMBER_DELIMITER = " gn/";
+    private static final String TERMINAL_DELIMITER = " tl/";
+    private static final String CHECK_IN_ROW_DELIMITER = " c/";
+
+    protected static final String EMPTY_STRING = "";
+    protected static final int AIRLINE_LENGTH_LIMIT = 22;
+    protected static final int DESTINATION_LENGTH_LIMIT = 22;
+    protected static boolean isFlightNumberPresent = false;
+    protected static boolean isDepartureTimePresent = false;
+    protected static boolean isGateNumberPresent = false;
+    protected String flightNumber;
+    protected String airline;
+    protected String destination;
+    protected String departureTime;
+    protected String gateNumber;
+    protected String terminal;
+    protected String checkIn;
 
     protected static int numOfFlights = 0;
 
     public static void checkCommandLength(String description) throws SkyControlException {
         if (description.isEmpty()) {
-            throw new SkyControlException(description);
+            throw new SkyControlException(ui.showEmptyDescriptionMessage());
         }
     }
 
-    public static String extractDetail(String command, String start, String end) {
+    public static String extractDetail(String command, String start, String end) throws SkyControlException {
+
         String extractedDetail;
-        if (end.equals("empty")) {
-            extractedDetail = command.substring(command.indexOf(start) + start.length());
-        } else {
-            extractedDetail = command.substring(command.indexOf(start) + start.length(), command.indexOf(end) - 1);
+        int startIndex = command.indexOf(start) + start.length();
+        int endIndex = command.lastIndexOf(end);
+        if (endIndex <= startIndex || endIndex < 0 || startIndex < 0) {
+            throw new SkyControlException(ui.getErrorMessage());
+        }
+        extractedDetail = command.substring(startIndex, endIndex).trim();
+        if (extractedDetail.equals(EMPTY_STRING)) {
+            throw new SkyControlException(ui.getMissingDetailsError());
         }
         return extractedDetail;
     }
 
     @Override
-    public void addOperation(String detail) {
-        try {
-            checkCommandLength(detail.substring(FLIGHT_ADD_COMMAND.length()));
-            String flightNum = extractDetail(detail, FLIGHT_NUMBER_DELIMITER, AIRLINE_DELIMITER).toUpperCase();
-            String airline = extractDetail(detail, AIRLINE_DELIMITER, DESTINATION_DELIMITER).toUpperCase();
-            String destination = extractDetail(detail, DESTINATION_DELIMITER, DEPARTURE_TIME_DELIMITER).toUpperCase();
-            String departureTime = extractDetail(detail, DEPARTURE_TIME_DELIMITER, GATE_NUMBER_DELIMITER).toUpperCase();
-            String gateNum = extractDetail(detail, GATE_NUMBER_DELIMITER, TERMINAL_DELIMITER).toUpperCase();
-            String terminal = extractDetail(detail, TERMINAL_DELIMITER, CHECK_IN_ROW_DELIMITER).toUpperCase();
-            String checkInRowAndDoor = extractDetail(detail, CHECK_IN_ROW_DELIMITER, END_OF_INPUT).toUpperCase();
-
-            FlightInfo flight = new FlightInfo(flightNum, airline, destination,
-                    departureTime, gateNum, terminal, checkInRowAndDoor);
-            flights.add(flightIndex, flight);
-            flightIndex++;
-            ui.showFlightAddedMessage();
-
-        } catch (SkyControlException e) {
-            ui.showEmptyDescriptionMessage();
-        }
-    }
-
-    public void getNumberOfFlights() {
-        assert numOfFlights >= 0;
-        numOfFlights = flights.size();
+    public void addOperation(String command) throws SkyControlException {
+        checkCommandLength(command.substring(FLIGHT_ADD_COMMAND.length()));
+        getFlightDetails(command.substring(FLIGHT_ADD_DELIMITER.length()));
+        checkFlightNumberDuplicates();
+        checkAvailableGateNumber();
+        FlightInfo flight = new FlightInfo(flightNumber, airline, destination,
+                departureTime, gateNumber, terminal, checkIn);
+        flights.add(flightIndex, flight);
+        flightIndex++;
+        ui.showFlightAddedMessage();
     }
 
     @Override
@@ -99,14 +105,143 @@ public class FlightList extends OperationList {
         boolean isFlightFound = false;
         assert !flights.isEmpty();
         for (FlightInfo flight : flights) {
-            if (flight.getFlightNum().equals(flightNumber)) {
+            if (flight.getFlightNumber().equals(flightNumber)) {
                 isFlightFound = true;
                 flights.remove(flight);
                 flightIndex--;
-                ui.showFlightRemovedMessage(flightNumber.toUpperCase());
+                ui.showFlightRemovedMessage(flightNumber);
                 break;
             }
         }
         return isFlightFound;
     }
+
+    public void getNumberOfFlights() {
+        assert numOfFlights >= 0;
+        numOfFlights = flights.size();
+    }
+
+    public void getFlightDetails(String flightDetail) throws SkyControlException {
+        getFlightNumber(flightDetail);
+        getAirline(flightDetail);
+        getDestination(flightDetail);
+        getDepartureTime(flightDetail);
+        getGateNumber(flightDetail);
+        getTerminal(flightDetail);
+        getCheckIn(flightDetail);
+    }
+
+    private void getFlightNumber(String detail) throws SkyControlException {
+        flightNumber = extractDetail(detail, FLIGHT_NUMBER_DELIMITER, AIRLINE_DELIMITER).toUpperCase();
+    }
+
+    private void getAirline(String detail) throws SkyControlException {
+        airline = extractDetail(detail, AIRLINE_DELIMITER, DESTINATION_DELIMITER).toUpperCase();
+        validateAirlineLength(airline);
+    }
+
+    private void getDestination(String detail) throws SkyControlException {
+        destination = extractDetail(detail, DESTINATION_DELIMITER, DEPARTURE_TIME_DELIMITER).toUpperCase();
+        validateDestinationLength(destination);
+    }
+
+    private void getDepartureTime(String detail) throws SkyControlException {
+        departureTime = extractDetail(detail, DEPARTURE_TIME_DELIMITER, GATE_NUMBER_DELIMITER).toUpperCase();
+        validateTime(departureTime);
+    }
+
+    private void getGateNumber(String detail) throws SkyControlException {
+        gateNumber = extractDetail(detail, GATE_NUMBER_DELIMITER, TERMINAL_DELIMITER).toUpperCase();
+    }
+
+    private void getTerminal(String detail) throws SkyControlException {
+        terminal = extractDetail(detail, TERMINAL_DELIMITER, CHECK_IN_ROW_DELIMITER).toUpperCase();
+    }
+
+    private void getCheckIn(String detail) throws SkyControlException {
+        int indexOfCheckIn = detail.indexOf(CHECK_IN_ROW_DELIMITER);
+        int startIndex = indexOfCheckIn + CHECK_IN_ROW_DELIMITER.length();
+        checkIn = detail.substring(startIndex).toUpperCase();
+        if (checkIn.equals(EMPTY_STRING)) {
+            throw new SkyControlException(ui.getMissingDetailsError());
+        }
+        validateCheckIn(checkIn);
+    }
+
+    private void checkFlightNumberDuplicates() throws SkyControlException {
+        for (int i = 0; i < flightIndex; i++) {
+            validateFlight(i);
+            if (isFlightDuplicate()) {
+                resetChecks();
+                throw new SkyControlException(ui.getDuplicateFlightError());
+            }
+        }
+    }
+
+    private void checkAvailableGateNumber() throws SkyControlException {
+        for (int i = 0; i < flightIndex; i++) {
+            validateFlight(i);
+            if (isGateOccupied()) {
+                resetChecks();
+                throw new SkyControlException(ui.getGateOccupiedError());
+            }
+        }
+    }
+
+    private void validateFlight(int index) {
+        getNumberOfFlights();
+        assert index < numOfFlights;
+        isFlightNumberPresent = flights.get(index).getFlightNumber().contains(flightNumber);
+        isDepartureTimePresent = flights.get(index).getDepartureTime().contains(departureTime);
+        isGateNumberPresent = flights.get(index).getGateNum().contains(gateNumber);
+    }
+
+    private boolean isFlightDuplicate() {
+        boolean isFlightDuplicate;
+        isFlightDuplicate = isFlightNumberPresent;
+        return isFlightDuplicate;
+    }
+
+    private boolean isGateOccupied() {
+        boolean isGateOccupied;
+        isGateOccupied = isDepartureTimePresent && isGateNumberPresent;
+        return isGateOccupied;
+    }
+
+    private void validateAirlineLength(String airline) throws SkyControlException {
+        if (airline.length() > AIRLINE_LENGTH_LIMIT) {
+            throw new SkyControlException(ui.getExceedAirlineLengthError(airline));
+        }
+    }
+
+    private void validateDestinationLength(String destination) throws SkyControlException {
+        if (destination.length() > DESTINATION_LENGTH_LIMIT) {
+            throw new SkyControlException(ui.getExceedAirlineLengthError(destination));
+        }
+    }
+
+    private void validateTime(String time) throws SkyControlException {
+        String timeRegex = "([01]?[0-9]|2[0-3])[0-5][0-9]";
+        Pattern p = Pattern.compile(timeRegex);
+        Matcher m = p.matcher(time);
+        if (!m.matches()) {
+            throw new SkyControlException(ui.getDepartureTimeError());
+        }
+    }
+
+    private void validateCheckIn(String checkIn) throws SkyControlException {
+        String checkInRegex = "[0-9]{2}-[0-9]{2}";
+        Pattern p = Pattern.compile(checkInRegex);
+        Matcher m = p.matcher(checkIn);
+        if (!m.matches()) {
+            throw new SkyControlException(ui.getCheckInFormatError());
+        }
+    }
+
+    private void resetChecks() {
+        isFlightNumberPresent = false;
+        isGateNumberPresent = false;
+        isDepartureTimePresent = false;
+    }
+
 }
