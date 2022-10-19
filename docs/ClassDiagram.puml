@@ -1,0 +1,104 @@
+@startuml Class Diagram
+'https://plantuml.com/class-diagram
+
+class Duke
+class Parser
+class UI
+class Command
+class Add
+class Delete
+class Exit
+class Mcs
+class View
+class ModuleList
+class Module
+
+class Duke {
+moduleList: ModuleList
+main(): void
+run(): void
+}
+
+class Parser {
+parse(): Command
+specificCase(): Command
+}
+
+class UI {
+getInput(): String
+}
+
+class Command {
+Command()
+execute(): void
+checkExit(): boolean
+}
+
+class Module {
+course: String
+semesterTaken: String
+grade: String
+mcs: int
+Module(course: String, semesterTaken: String, grade: String, mcs: int)
+toString(): String
+}
+
+class Add {
+mod: Module
+addition(): void
+extractingContent(): String
+positions(): int
+}
+
+class Delete {
+modCode: String
+Delete(input: String)
+setModCode(): String
+positions(): int[]
+execute(): void
+}
+
+class Exit {
+checkExit(): boolean
+}
+
+class Mcs {
+Mcs(input: String)
+setSem(): void
+positions(): int[]
+execute(): void
+}
+
+class View {
+View(input: String)
+setSem(): void
+execute(): void
+}
+
+class ModuleList {
+modules: ArrayList
+viewCount: int
+mcsCount: int
+add(Module): void
+delete(): void
+view(): void
+mc(): void
+}
+
+Command <|-- Add : execute
+Command <|-- Delete : execute
+Command <|-- Exit : execute
+Command <|-- Mcs : execute
+Command <|-- View : execute
+Duke - "1" ModuleList
+Duke - UI
+Duke - Parser
+Module -- Add
+ModuleList - UI
+UI -- Exit
+Command - ModuleList
+ModuleList -> "0..*" Module : add
+
+
+
+@enduml
