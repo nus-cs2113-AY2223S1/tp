@@ -53,7 +53,7 @@ public class Duke {
                         passWord = in.nextLine();
                         System.out.println(" ");
                         passWordLength = passWord.length();
-                    } while (passWordLength > 8);
+                    } while (passWordLength < 8);
 
                     existingUserNames.add(userName);
                     UserNameFileWorkings.writeToUserNames(userName);
