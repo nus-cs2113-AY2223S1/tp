@@ -20,8 +20,8 @@ public class UI {
             + "List of commands: "
             + UI.PATIENT_ADD
             + UI.PATIENT_VIEW_ALL
-            + UI.PATIENT_EDIT
             + UI.PATIENT_RETRIEVE
+            + UI.PATIENT_EDIT
             + UI.RETURN_TO_MAIN
             + UI.EXIT_PROGRAM;
 
