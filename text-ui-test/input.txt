@@ -1,1 +1,1 @@
-add /movie Inception /rating 10 /date 5 Sep 22 /genre scifi
+bye
