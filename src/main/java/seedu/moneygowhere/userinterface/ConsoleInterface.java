@@ -8,9 +8,12 @@ import seedu.moneygowhere.commands.ConsoleCommandAddTarget;
 import seedu.moneygowhere.commands.ConsoleCommandBye;
 import seedu.moneygowhere.commands.ConsoleCommandConvertCurrency;
 import seedu.moneygowhere.commands.ConsoleCommandDeleteExpense;
+import seedu.moneygowhere.commands.ConsoleCommandDeleteTarget;
 import seedu.moneygowhere.commands.ConsoleCommandEditExpense;
+import seedu.moneygowhere.commands.ConsoleCommandEditTarget;
 import seedu.moneygowhere.commands.ConsoleCommandSortExpense;
 import seedu.moneygowhere.commands.ConsoleCommandViewExpense;
+import seedu.moneygowhere.commands.ConsoleCommandViewTarget;
 import seedu.moneygowhere.commands.ConsoleCommandViewRecurringPayment;
 import seedu.moneygowhere.common.Configurations;
 import seedu.moneygowhere.common.Messages;
@@ -30,13 +33,17 @@ import seedu.moneygowhere.exceptions.ConsoleParserCommandAddRecurringPaymentInva
 import seedu.moneygowhere.exceptions.ConsoleParserCommandAddTargetInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandConvertCurrencyInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandDeleteExpenseInvalidException;
+import seedu.moneygowhere.exceptions.ConsoleParserCommandDeleteTargetInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandEditExpenseInvalidException;
+import seedu.moneygowhere.exceptions.ConsoleParserCommandEditTargetInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandNotFoundException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandSortExpenseInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandViewExpenseInvalidException;
+import seedu.moneygowhere.exceptions.ConsoleParserCommandViewTargetInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandViewRecurringPaymentInvalidException;
 import seedu.moneygowhere.exceptions.CurrencyInvalidException;
 import seedu.moneygowhere.exceptions.ExpenseManagerExpenseNotFoundException;
+import seedu.moneygowhere.exceptions.TargetManagerTargetNotFoundException;
 import seedu.moneygowhere.logger.LocalLogger;
 import seedu.moneygowhere.parser.ConsoleParser;
 import seedu.moneygowhere.storage.LocalStorage;
@@ -453,8 +460,110 @@ public class ConsoleInterface {
 
         /*
          TODO Add saveToFile for Target
-         saveToFile(targetManager.getTargets());
+         localStorage.saveToFile(targetManager.getTargets());
         */
+    }
+
+    private void viewTargetByTargetIndex(int targetIndex) {
+        Target target;
+        try {
+            target = targetManager.getTarget(targetIndex);
+        } catch (TargetManagerTargetNotFoundException exception) {
+            printErrorMessage(exception.getMessage());
+
+            return;
+        }
+
+        printInformationalMessage("---- TARGET INDEX " + targetIndex + " ----");
+        printInformationalMessage(convertTargetToConsoleString(target));
+    }
+
+    private void viewTarget() {
+        ArrayList<Target> targets = targetManager.getTargets();
+
+        if (targets.isEmpty()) {
+            printInformationalMessage(Messages.COMMAND_VIEW_TARGET_EMPTY_LIST);
+        }
+
+        for (int index = 0; index < targets.size(); index++) {
+            Target target = targets.get(index);
+
+            printInformationalMessage("---- TARGET INDEX " + index + " ----");
+            printInformationalMessage(convertTargetToConsoleString(target));
+        }
+    }
+
+    private void runCommandViewTarget(ConsoleCommandViewTarget consoleCommandViewTarget) {
+        int targetIndex = consoleCommandViewTarget.getTargetIndex();
+
+        if (targetIndex >= 0) {
+            viewTargetByTargetIndex(targetIndex);
+        } else {
+            viewTarget();
+        }
+    }
+
+    private void runCommandDeleteTarget(ConsoleCommandDeleteTarget consoleCommandDeleteTarget) {
+        int targetIndex = consoleCommandDeleteTarget.getTargetIndex();
+
+        try {
+            targetManager.deleteTarget(targetIndex);
+        } catch (TargetManagerTargetNotFoundException exception) {
+            printErrorMessage(exception.getMessage());
+            return;
+        }
+
+        printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_DELETE_TARGET_SUCCESS);
+
+        // localStorage.saveToFile(targetManager.getTargets());
+    }
+
+    private void runCommandEditTarget(ConsoleCommandEditTarget consoleCommandEditTarget) {
+        int targetIndex = consoleCommandEditTarget.getTargetIndex();
+
+        Target oldTarget;
+        try {
+            oldTarget = targetManager.getTarget(targetIndex);
+        } catch (TargetManagerTargetNotFoundException exception) {
+            printErrorMessage(exception.getMessage());
+            return;
+        }
+
+        String name = consoleCommandEditTarget.getName();
+        if (name == null) {
+            name = oldTarget.getName();
+        }
+        LocalDateTime dateTime = consoleCommandEditTarget.getDateTime();
+        if (dateTime == null) {
+            dateTime = oldTarget.getDateTime();
+        }
+        String description = consoleCommandEditTarget.getDescription();
+        if (description == null) {
+            description = oldTarget.getDescription();
+        }
+        BigDecimal amount = consoleCommandEditTarget.getAmount();
+        if (amount == null) {
+            amount = oldTarget.getAmount();
+        }
+        BigDecimal currentAmount = consoleCommandEditTarget.getCurrentAmount();
+        if (currentAmount == null) {
+            currentAmount = oldTarget.getCurrentAmount();
+        }
+
+        Target newTarget = new Target(name, dateTime, description, amount, currentAmount);
+        try {
+            targetManager.editTarget(targetIndex, newTarget);
+        } catch (TargetManagerTargetNotFoundException exception) {
+            printErrorMessage(exception.getMessage());
+            return;
+        }
+
+        printInformationalMessage("---- TARGET INDEX " + targetIndex + " ----");
+        printInformationalMessage(convertTargetToConsoleString(newTarget));
+        printBlankLine();
+        printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_EDIT_TARGET_SUCCESS);
+
+        // localStorage.saveToFile(targetManager.getTargets());
     }
 
     private void runCommandAddIncome(ConsoleCommandAddIncome consoleCommandAddIncome) {

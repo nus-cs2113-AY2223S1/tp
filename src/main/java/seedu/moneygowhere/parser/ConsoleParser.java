@@ -15,9 +15,12 @@ import seedu.moneygowhere.commands.ConsoleCommandAddTarget;
 import seedu.moneygowhere.commands.ConsoleCommandBye;
 import seedu.moneygowhere.commands.ConsoleCommandConvertCurrency;
 import seedu.moneygowhere.commands.ConsoleCommandDeleteExpense;
+import seedu.moneygowhere.commands.ConsoleCommandDeleteTarget;
 import seedu.moneygowhere.commands.ConsoleCommandEditExpense;
+import seedu.moneygowhere.commands.ConsoleCommandEditTarget;
 import seedu.moneygowhere.commands.ConsoleCommandSortExpense;
 import seedu.moneygowhere.commands.ConsoleCommandViewExpense;
+import seedu.moneygowhere.commands.ConsoleCommandViewTarget;
 import seedu.moneygowhere.commands.ConsoleCommandViewRecurringPayment;
 import seedu.moneygowhere.common.Configurations;
 import seedu.moneygowhere.common.Messages;
@@ -27,10 +30,13 @@ import seedu.moneygowhere.exceptions.ConsoleParserCommandAddRecurringPaymentInva
 import seedu.moneygowhere.exceptions.ConsoleParserCommandAddTargetInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandConvertCurrencyInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandDeleteExpenseInvalidException;
+import seedu.moneygowhere.exceptions.ConsoleParserCommandDeleteTargetInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandEditExpenseInvalidException;
+import seedu.moneygowhere.exceptions.ConsoleParserCommandEditTargetInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandNotFoundException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandSortExpenseInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandViewExpenseInvalidException;
+import seedu.moneygowhere.exceptions.ConsoleParserCommandViewTargetInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandViewRecurringPaymentInvalidException;
 
 import java.math.BigDecimal;
@@ -744,6 +750,89 @@ public class ConsoleParser {
         }
     }
 
+    private static void validateCommandAddTargetOptions(Options options) {
+        boolean hasAllCliOptions = options.hasLongOption(
+                ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_NAME_LONG)
+                && options.hasLongOption(
+                ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_AMOUNT_LONG)
+                && options.hasLongOption(
+                ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_CURRENT_AMOUNT_LONG)
+                && options.hasLongOption(
+                ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_DATE_TIME_LONG)
+                && options.hasLongOption(
+                ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_DESCRIPTION_LONG);
+
+
+        assert hasAllCliOptions :
+                ConsoleParserConfigurations.COMMAND_ADD_TARGET_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS;
+    }
+
+    private static CommandLine parseCommandAddTargetArguments(Options options, String arguments) throws
+            ConsoleParserCommandAddTargetInvalidException {
+        try {
+            CommandLine commandline = parseCommandArguments(options, arguments);
+
+            return commandline;
+        } catch (ParseException exception) {
+            throw new ConsoleParserCommandAddTargetInvalidException(exception);
+        }
+    }
+
+    private static void validateCommandAddTargetValues(CommandLine commandLine) throws
+            ConsoleParserCommandAddTargetInvalidException {
+        String name = commandLine.getOptionValue(
+                ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_NAME_LONG
+        );
+
+        if (name.isBlank()) {
+            throw new ConsoleParserCommandAddTargetInvalidException();
+        }
+    }
+
+    private static ConsoleCommandAddTarget parseCommandAddTargetValues(CommandLine commandLine) throws
+            ConsoleParserCommandAddTargetInvalidException {
+        try {
+            String name = commandLine.getOptionValue(
+                    ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_NAME_LONG
+            );
+            String amountStr = commandLine.getOptionValue(
+                    ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_AMOUNT_LONG
+            );
+            String currentAmountStr = commandLine.getOptionValue(
+                    ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_CURRENT_AMOUNT_LONG
+            );
+            String dateTimeStr = commandLine.getOptionValue(
+                    ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_DATE_TIME_LONG
+            );
+            String description = commandLine.getOptionValue(
+                    ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_DESCRIPTION_LONG
+            );
+
+            BigDecimal amount = new BigDecimal(amountStr);
+            BigDecimal currentAmount = new BigDecimal(currentAmountStr);
+
+            LocalDateTime dateTime;
+            if (dateTimeStr == null) {
+                dateTime = LocalDateTime.now();
+            } else {
+                dateTime = LocalDateTime.parse(
+                        dateTimeStr,
+                        DateTimeFormatter.ofPattern(Configurations.CONSOLE_INTERFACE_DATE_TIME_INPUT_FORMAT)
+                );
+            }
+
+            return new ConsoleCommandAddTarget(
+                    name,
+                    dateTime,
+                    description,
+                    amount,
+                    currentAmount
+            );
+        } catch (DateTimeParseException | NumberFormatException exception) {
+            throw new ConsoleParserCommandAddTargetInvalidException(exception);
+        }
+    }
+
     private static ConsoleCommandAddTarget parseCommandAddTarget(String arguments) throws
             ConsoleParserCommandAddTargetInvalidException {
         try {
@@ -807,6 +896,303 @@ public class ConsoleParser {
                  | ConsoleParserCommandAddTargetInvalidException exception) {
             throw new ConsoleParserCommandAddTargetInvalidException(
                     Messages.CONSOLE_ERROR_COMMAND_ADD_TARGET_INVALID,
+                    exception
+            );
+        }
+    }
+
+    private static void validateCommandViewTargetOptions(Options options) {
+        boolean hasAllCliOptions = options.hasLongOption(
+                ConsoleParserConfigurations.COMMAND_VIEW_TARGET_ARG_TARGET_INDEX_LONG);
+
+        assert hasAllCliOptions :
+                ConsoleParserConfigurations.COMMAND_VIEW_TARGET_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS;
+    }
+
+    private static CommandLine parseCommandViewTargetArguments(Options options, String arguments) throws
+            ConsoleParserCommandViewTargetInvalidException {
+        try {
+            CommandLine commandline = parseCommandArguments(options, arguments);
+
+            return commandline;
+        } catch (ParseException exception) {
+            throw new ConsoleParserCommandViewTargetInvalidException(exception);
+        }
+    }
+
+    private static void validateCommandViewTargetValues(CommandLine commandLine) throws
+            ConsoleParserCommandViewTargetInvalidException {
+        String targetIndexStr = commandLine.getOptionValue(
+                ConsoleParserConfigurations.COMMAND_VIEW_TARGET_ARG_TARGET_INDEX_LONG
+        );
+
+        if (targetIndexStr != null) {
+            int targetIndex;
+
+            try {
+                targetIndex = Integer.parseInt(targetIndexStr);
+            } catch (NumberFormatException exception) {
+                throw new ConsoleParserCommandViewTargetInvalidException(exception);
+            }
+
+            if (targetIndex < 0) {
+                throw new ConsoleParserCommandViewTargetInvalidException();
+            }
+        }
+    }
+
+    private static ConsoleCommandViewTarget parseCommandViewTargetValues(CommandLine commandLine) throws
+            ConsoleParserCommandViewTargetInvalidException {
+        String targetIndexStr = commandLine.getOptionValue(
+                ConsoleParserConfigurations.COMMAND_VIEW_TARGET_ARG_TARGET_INDEX_LONG
+        );
+
+        int targetIndex;
+        if (targetIndexStr == null) {
+            targetIndex = -1;
+        } else {
+            targetIndex = Integer.parseInt(targetIndexStr);
+        }
+
+        return new ConsoleCommandViewTarget(
+                targetIndex
+        );
+    }
+
+    private static ConsoleCommandViewTarget parseCommandViewTarget(String arguments) throws
+            ConsoleParserCommandViewTargetInvalidException {
+        try {
+            Options options = ConsoleParserConfigurations.getCommandViewTargetOptions();
+
+            validateCommandViewTargetOptions(options);
+
+            CommandLine commandLine = parseCommandViewTargetArguments(options, arguments);
+
+            validateCommandViewTargetValues(commandLine);
+
+            ConsoleCommandViewTarget consoleCommandViewTarget =
+                    parseCommandViewTargetValues(commandLine);
+
+            return consoleCommandViewTarget;
+        } catch (ConsoleParserCommandViewTargetInvalidException exception) {
+            throw new ConsoleParserCommandViewTargetInvalidException(
+                    Messages.CONSOLE_ERROR_COMMAND_VIEW_TARGET_INVALID,
+                    exception
+            );
+        }
+    }
+
+    private static void validateCommandDeleteTargetOptions(Options options) {
+        boolean hasAllCliOptions = options.hasLongOption(
+                ConsoleParserConfigurations.COMMAND_DELETE_TARGET_ARG_TARGET_INDEX_LONG);
+
+        assert hasAllCliOptions :
+                ConsoleParserConfigurations.COMMAND_DELETE_TARGET_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS;
+    }
+
+    private static CommandLine parseCommandDeleteTargetArguments(Options options, String arguments) throws
+            ConsoleParserCommandDeleteTargetInvalidException {
+        try {
+            CommandLine commandline = parseCommandArguments(options, arguments);
+
+            return commandline;
+        } catch (ParseException exception) {
+            throw new ConsoleParserCommandDeleteTargetInvalidException(exception);
+        }
+    }
+
+    private static void validateCommandDeleteTargetValues(CommandLine commandLine) throws
+            ConsoleParserCommandDeleteTargetInvalidException {
+        String targetIndexStr = commandLine.getOptionValue(
+                ConsoleParserConfigurations.COMMAND_DELETE_EXPENSE_ARG_EXPENSE_INDEX_LONG
+        );
+
+        if (targetIndexStr != null) {
+            int targetIndex;
+
+            try {
+                targetIndex = Integer.parseInt(targetIndexStr);
+            } catch (NumberFormatException exception) {
+                throw new ConsoleParserCommandDeleteTargetInvalidException(exception);
+            }
+
+            if (targetIndex < 0) {
+                throw new ConsoleParserCommandDeleteTargetInvalidException();
+            }
+        }
+    }
+
+    private static ConsoleCommandDeleteTarget parseCommandDeleteTargetValues(CommandLine commandLine) throws
+            ConsoleParserCommandDeleteTargetInvalidException {
+        String targetIndexStr = commandLine.getOptionValue(
+                ConsoleParserConfigurations.COMMAND_DELETE_TARGET_ARG_TARGET_INDEX_LONG
+        );
+
+        int targetIndex;
+        if (targetIndexStr == null) {
+            targetIndex = -1;
+        } else {
+            targetIndex = Integer.parseInt(targetIndexStr);
+        }
+
+        return new ConsoleCommandDeleteTarget(targetIndex);
+    }
+
+    private static ConsoleCommandDeleteTarget parseCommandDeleteTarget(String arguments) throws
+            ConsoleParserCommandDeleteTargetInvalidException {
+        try {
+            Options options = ConsoleParserConfigurations.getCommandDeleteTargetOptions();
+
+            validateCommandDeleteTargetOptions(options);
+
+            CommandLine commandLine = parseCommandDeleteTargetArguments(options, arguments);
+
+            validateCommandDeleteTargetValues(commandLine);
+
+            ConsoleCommandDeleteTarget consoleCommandDeleteTarget
+                    = parseCommandDeleteTargetValues(commandLine);
+
+            return consoleCommandDeleteTarget;
+        } catch (ConsoleParserCommandDeleteTargetInvalidException exception) {
+            throw new ConsoleParserCommandDeleteTargetInvalidException(
+                    Messages.CONSOLE_ERROR_COMMAND_DELETE_EXPENSE_INVALID,
+                    exception
+            );
+        }
+    }
+
+    private static void validateCommandEditTargetOptions(Options options) {
+        boolean hasAllCliOptions = options.hasLongOption(
+                ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_TARGET_INDEX_LONG)
+                && options.hasLongOption(
+                ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_NAME_LONG)
+                && options.hasLongOption(
+                ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_DATE_TIME_LONG)
+                && options.hasLongOption(
+                ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_DESCRIPTION_LONG)
+                && options.hasLongOption(
+                ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_AMOUNT_LONG)
+                && options.hasLongOption(
+                ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_CURRENT_AMOUNT_LONG);
+
+        assert hasAllCliOptions :
+                ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS;
+    }
+
+    private static CommandLine parseCommandEditTargetArguments(Options options, String arguments) throws
+            ConsoleParserCommandEditTargetInvalidException {
+        try {
+            CommandLine commandline = parseCommandArguments(options, arguments);
+
+            return commandline;
+        } catch (ParseException exception) {
+            throw new ConsoleParserCommandEditTargetInvalidException(exception);
+        }
+    }
+
+    private static void validateCommandEditTargetValues(CommandLine commandLine) throws
+            ConsoleParserCommandEditTargetInvalidException {
+        String name = commandLine.getOptionValue(
+                ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_NAME_LONG
+        );
+        String targetIndexStr = commandLine.getOptionValue(
+                ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_TARGET_INDEX_LONG
+        );
+
+        if (name != null && name.isBlank()) {
+            throw new ConsoleParserCommandEditTargetInvalidException();
+        }
+
+        if (targetIndexStr != null) {
+            int targetIndex;
+
+            try {
+               targetIndex = Integer.parseInt(targetIndexStr);
+            } catch (NumberFormatException exception) {
+                throw new ConsoleParserCommandEditTargetInvalidException(exception);
+            }
+
+            if (targetIndex < 0) {
+                throw new ConsoleParserCommandEditTargetInvalidException();
+            }
+        }
+    }
+
+    private static ConsoleCommandEditTarget parseCommandEditTargetValues(CommandLine commandLine) throws
+            ConsoleParserCommandEditTargetInvalidException {
+        try {
+            String targetIndexStr = commandLine.getOptionValue(
+                    ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_TARGET_INDEX_LONG
+            );
+            String name = commandLine.getOptionValue(
+                    ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_NAME_LONG
+            );
+            String dateTimeStr = commandLine.getOptionValue(
+                    ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_DATE_TIME_LONG
+            );
+            String description = commandLine.getOptionValue(
+                    ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_DESCRIPTION_LONG
+            );
+            String amountStr = commandLine.getOptionValue(
+                    ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_AMOUNT_LONG
+            );
+            String currentAmountStr = commandLine.getOptionValue(
+                    ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_CURRENT_AMOUNT_LONG
+            );
+
+            int targetIndex = Integer.parseInt(targetIndexStr);
+
+            LocalDateTime dateTime;
+            if (dateTimeStr == null) {
+                dateTime = null;
+            } else {
+                dateTime = LocalDateTime.parse(
+                        dateTimeStr,
+                        DateTimeFormatter.ofPattern(Configurations.CONSOLE_INTERFACE_DATE_TIME_INPUT_FORMAT)
+                );
+            }
+
+            BigDecimal amount;
+            BigDecimal currentAmount;
+            if (amountStr == null || currentAmountStr == null) {
+                amount = null;
+                currentAmount = null;
+            } else {
+                amount = new BigDecimal(amountStr);
+                currentAmount = new BigDecimal(currentAmountStr);
+            }
+
+            return new ConsoleCommandEditTarget(
+                    targetIndex,
+                    name,
+                    dateTime,
+                    description,
+                    amount,
+                    currentAmount
+            );
+        } catch (DateTimeParseException | NumberFormatException exception) {
+            throw new ConsoleParserCommandEditTargetInvalidException(exception);
+        }
+    }
+
+    private static ConsoleCommandEditTarget parseCommandEditTarget(String arguments) throws
+            ConsoleParserCommandEditTargetInvalidException {
+        try {
+            Options options = ConsoleParserConfigurations.getCommandEditTargetOptions();
+
+            validateCommandEditTargetOptions(options);
+
+            CommandLine commandLine = parseCommandEditTargetArguments(options, arguments);
+
+            validateCommandEditTargetValues(commandLine);
+
+            ConsoleCommandEditTarget consoleCommandEditTarget
+                    = parseCommandEditTargetValues(commandLine);
+
+            return consoleCommandEditTarget;
+        } catch (ConsoleParserCommandEditTargetInvalidException exception) {
+            throw new ConsoleParserCommandEditTargetInvalidException(
+                    Messages.CONSOLE_ERROR_COMMAND_EDIT_TARGET_INVALID,
                     exception
             );
         }
