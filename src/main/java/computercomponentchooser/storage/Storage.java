@@ -150,6 +150,7 @@ public class Storage {
                 Build build = new Build(buildName);
                 buildManager.addBuild(build);
             }
+            scanner.close();
         }
     }
 
@@ -205,6 +206,7 @@ public class Storage {
                         break;
                     }
                 }
+                scanner.close();
             }
         }
     }
