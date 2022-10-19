@@ -28,6 +28,12 @@ public class Messages {
 
     public static final String MESSAGE_UNPAIRED = "Unpairing the following client and property: ";
 
+    public static final String MESSAGE_PAIRED_PROPERTIES_DELETED = "\nThe pairing this client has with "
+            + "the following property will be deleted:";
+
+    public static final String MESSAGE_PAIRED_CLIENTS_DELETED = "\nThe pairing(s) this property has with "
+            + "the following client(s) will be deleted:";
+
 
     /* General Error Messages */
 
