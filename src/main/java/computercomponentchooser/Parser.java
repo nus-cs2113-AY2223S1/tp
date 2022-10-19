@@ -4,6 +4,8 @@ import computercomponentchooser.exceptions.UnknownCommandException;
 import computercomponentchooser.exceptions.DuplicateBuildException;
 import computercomponentchooser.exceptions.UnlistedBuildException;
 
+import static computercomponentchooser.ComputerComponentChooser.storage;
+
 public class Parser {
 
     static final int COMMAND_PARAMETER = 0;
@@ -53,6 +55,11 @@ public class Parser {
                 Ui.printLine();
                 System.out.println("You have added " + name);
                 Ui.printLine();
+                try {
+                    storage.saveBuild(buildManager);
+                } catch (Exception e) {
+                    System.out.println("Error saving builds");
+                }
                 break;
             case "view":
                 name = getParameter(line, NAME_PARAMETER);
@@ -63,6 +70,11 @@ public class Parser {
             case "delete":
                 name = getParameter(line, NAME_PARAMETER);
                 newBuild = new Build(name);
+                try {
+                    storage.deleteBuild(name, buildManager);
+                } catch (Exception e) {
+                    System.out.println("Error saving builds");
+                }
                 buildManager.deleteBuild(name, newBuild);
                 Ui.printLine();
                 System.out.println("You have removed " + name);

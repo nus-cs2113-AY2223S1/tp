@@ -50,6 +50,7 @@ public class Ui {
     }
 
     void startSession() {
+
         Ui.printLogo();
         Ui.printLine();
         System.out.println("Hello! ComputerComponentChooser at your service!");

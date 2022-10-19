@@ -33,6 +33,11 @@ public class Memory extends Component {
         return super.toString() + String.format(" [%s GB] [%s MHz]", size, speed);
     }
 
+    @Override
+    public String saveAsString() {
+        return super.saveAsString() + " " + size + " " + speed;
+    }
+
     public String getDetails() {
         return super.getDetails() + String.format("\nSize: %s GB\nSpeed: %s MHz", size, speed);
     }

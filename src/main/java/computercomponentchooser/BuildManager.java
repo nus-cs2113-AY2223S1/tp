@@ -30,6 +30,9 @@ public class BuildManager {
     public Build getBuild(String name) {
         return builds.get(name);
     }
+    public Map<String, Build> getBuilds() {
+        return builds;
+    }
 
     public int size() {
         return builds.size();
