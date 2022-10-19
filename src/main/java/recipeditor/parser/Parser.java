@@ -44,7 +44,7 @@ public class Parser {
         add.exitAddMode();
         //Recipe addedRecipe = add.getRecipe();
         //Storage.loadRecipeToDataFile(addedRecipe);
-        logger.log(Level.INFO, "Is the recipe valid? "+ add.isValid);
+        logger.log(Level.INFO, "Is the recipe valid? " + add.isValid);
         return new AddCommand(add.isValid, add.addedRecipe); // Pass validty and potential recipe to AddCommand
     }
 

@@ -9,6 +9,7 @@ public class CommandResult {
     }
 
     public String getMessage() {
+        assert message != null;
         return message;
     }
 }
