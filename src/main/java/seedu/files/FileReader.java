@@ -76,11 +76,11 @@ public class FileReader {
         } else if (!file.exists()) {
             throw new NoFileFoundException(filePath + " file not found");
         }
-        String content = "";
+        StringBuilder content = new StringBuilder();
         Scanner scanner = new Scanner(file);
         while (scanner.hasNext()) {
-            content = scanner.nextLine().trim();
+            content.append(scanner.nextLine().trim()).append("\n");
         }
-        return content;
+        return content.toString();
     }
 }
