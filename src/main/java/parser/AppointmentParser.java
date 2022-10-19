@@ -81,32 +81,33 @@ public class AppointmentParser {
     }
 
     public Command prepareSetAppointmentStatusCommand(String input) {
-        int i = input.indexOf(" i/");
-        int s = input.indexOf(" s/");
+        try {
+            int i = input.indexOf(" i/");
+            int s = input.indexOf(" s/");
+            if (i > s || i == -1 || s == -1) {
+                throw new DukeException();
+            }
 
-        if (i > s || i == -1 || s == -1) {
-            System.out.println("invalid input");
-            return new EndCommand();
+            String index = input.substring(i, s);
+            int indexInt = parser.indexOfInput(index);
+            if (indexInt == -1) {
+                throw new DukeException();
+            }
+
+            String status = input.substring(s);
+            int statusInt = parser.isStatus(status);
+            if (statusInt == -1 || (statusInt != 1 && statusInt != 0)) {
+                throw new DukeException();
+            }
+
+            return new SetAppointmentStatusCommand(indexInt,
+                    statusInt);
+        } catch (DukeException e) {
+            System.out.println("Sorry, format of parameters entered for setting status of an appointment is invalid");
+            return new EmptyCommand();
         }
 
-        String index = input.substring(i, s);
-        int indexInt = parser.indexOfInput(index);
 
-        if (indexInt == -1) {
-            System.out.println("Error: index entered invalid for setting appointment status");
-            return new EndCommand();
-        }
-
-        String status = input.substring(s);
-        int statusInt = parser.isStatus(status);
-
-        if (statusInt == -1 || (statusInt != 1 && statusInt != 0)) {
-            System.out.println("Error: status entered invalid for setting appointment status");
-            return new EndCommand();
-        }
-
-        return new SetAppointmentStatusCommand(indexInt,
-                statusInt);
     }
 
     /*
