@@ -3,6 +3,8 @@ package seedu.duke;
 import seedu.duke.exception.DukeException;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 import static seedu.duke.Messages.LINE_BREAK;
@@ -12,6 +14,8 @@ import static seedu.duke.Messages.MESSAGE_CLIENT_DELETED;
 import static seedu.duke.Messages.MESSAGE_COMMAND_UNDEFINED;
 import static seedu.duke.Messages.MESSAGE_NUMBER_OF_LIST_RESULTS;
 import static seedu.duke.Messages.MESSAGE_PAIRED;
+import static seedu.duke.Messages.MESSAGE_PAIRED_CLIENTS_DELETED;
+import static seedu.duke.Messages.MESSAGE_PAIRED_PROPERTIES_DELETED;
 import static seedu.duke.Messages.MESSAGE_PROPERTY_ADDED;
 import static seedu.duke.Messages.MESSAGE_PROPERTY_DELETED;
 import static seedu.duke.Messages.MESSAGE_UNPAIRED;
@@ -78,6 +82,31 @@ public class Ui {
     public void showClientDeletedConfirmationMessage(Client deletedClient) {
         showToUser(MESSAGE_CLIENT_DELETED);
         showToUser("  " + deletedClient);
+    }
+
+    public void showPairedPropertiesDeletedConfirmationMessage(Client deletedClient, PairingList pairingList) {
+        HashMap<Client, Property> clientPropertyPairs = pairingList.getClientPropertyPairs();
+        if (clientPropertyPairs.containsKey(deletedClient)) {
+            Property pairedProperty = clientPropertyPairs.get(deletedClient);
+            showToUser(MESSAGE_PAIRED_PROPERTIES_DELETED);
+            showToUser("  " + pairedProperty.getPropertyAddress());
+        }
+    }
+
+    public void showPairedClientsDeletedConfirmationMessage(Property deletedProperty, PairingList pairingList) {
+        HashMap<Client, Property> clientPropertyPairs = pairingList.getClientPropertyPairs();
+        int currentIndex = 1;
+
+        for (Map.Entry<Client, Property> entry : clientPropertyPairs.entrySet()) {
+            if (entry.getValue().equals(deletedProperty)) {
+                if (currentIndex == 1) {
+                    showToUser(MESSAGE_PAIRED_CLIENTS_DELETED);
+                }
+                Client pairedClient = entry.getKey();
+                showToUser("  " + currentIndex + ". " + pairedClient.getClientName());
+                currentIndex++;
+            }
+        }
     }
 
 

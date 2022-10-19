@@ -18,6 +18,14 @@ class PairingListTest {
     public static final Client ABSENT_CLIENT = new Client("Doja Cat", "93437878",
             "doja88@example.com", "100000");
 
+
+    public static final Client BUDGET_CHECKER_CLIENT_RICH = new Client("Jojo Rabbit",
+            "97632911", "jojorabbit@example.com", "1000");
+
+    public static final Client BUDGET_CHECKER_CLIENT_POOR = new Client("Olivia Rodrigo",
+            "90234911", "oliviaaaR@example.com", "350");
+
+
     public static final Property PRESENT_PROPERTY = new Property("Mary Tan Bee Bee",
             "107 North Bridge Rd, Singapore 179105", "1000", "HDB 3 Room");
 
@@ -98,6 +106,13 @@ class PairingListTest {
         } catch (AssertionError e) {
             assertEquals(e.getMessage(), e.getMessage());
         }
+    }
+
+    @Test void hasPriceExceededBudget_differentBudgetClients_success() {
+        PairingList pairingList = pairingListInit();
+        assertTrue(pairingList.hasPriceExceededBudget(BUDGET_CHECKER_CLIENT_POOR, PRESENT_PROPERTY));
+        assertFalse(pairingList.hasPriceExceededBudget(PRESENT_CLIENT, PRESENT_PROPERTY));
+        assertFalse(pairingList.hasPriceExceededBudget(BUDGET_CHECKER_CLIENT_RICH, PRESENT_PROPERTY));
     }
 
     @Test

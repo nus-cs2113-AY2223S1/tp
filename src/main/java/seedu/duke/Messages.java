@@ -28,6 +28,12 @@ public class Messages {
 
     public static final String MESSAGE_UNPAIRED = "Unpairing the following client and property: ";
 
+    public static final String MESSAGE_PAIRED_PROPERTIES_DELETED = "\nThe pairing this client has with "
+            + "the following property will be deleted:";
+
+    public static final String MESSAGE_PAIRED_CLIENTS_DELETED = "\nThe pairing(s) this property has with "
+            + "the following client(s) will be deleted:";
+
 
     /* General Error Messages */
 
@@ -113,8 +119,12 @@ public class Messages {
     public static final String MESSAGE_EXISTING_PAIR = "OOPS!! This client and this property are already paired "
             + "together. You don't need to pair them again.";
 
+    public static final String MESSAGE_BUDGET_EXCEEDED = "OOPS!! The rental price exceeds the client's budget. "
+            + "Pair unsuccessful.";
+
     public static final String MESSAGE_NO_EXISTING_PAIR = "OOPS!! This property is not being rented by the tenant. "
             + "Unpair unsuccessful.";
+
 
 
     /* Check property/client related Error Messages */

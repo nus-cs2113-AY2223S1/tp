@@ -7,7 +7,9 @@ import seedu.duke.Property;
 import seedu.duke.PropertyList;
 import seedu.duke.command.Command;
 import seedu.duke.command.CommandPair;
+import seedu.duke.exception.BudgetExceededException;
 import seedu.duke.exception.ClientAlreadyPairedException;
+import seedu.duke.exception.DukeException;
 import seedu.duke.exception.EmptyDescriptionException;
 import seedu.duke.exception.ExistingPairException;
 import seedu.duke.exception.IncorrectFlagOrderException;
@@ -19,6 +21,7 @@ import java.util.ArrayList;
 
 import static seedu.duke.CommandStructure.PAIR_FLAGS;
 import static seedu.duke.Messages.EXCEPTION;
+import static seedu.duke.Messages.MESSAGE_BUDGET_EXCEEDED;
 import static seedu.duke.Messages.MESSAGE_CLIENT_ALREADY_PAIRED;
 import static seedu.duke.Messages.MESSAGE_EMPTY_DESCRIPTION;
 import static seedu.duke.Messages.MESSAGE_EXISTING_PAIR;
@@ -41,8 +44,7 @@ public class ParsePair extends Parser {
     }
 
     @Override
-    public Command parseCommand() throws InvalidIndexException, ClientAlreadyPairedException, MissingFlagException,
-            IncorrectFlagOrderException, NotIntegerException, ExistingPairException, EmptyDescriptionException {
+    public Command parseCommand() throws DukeException {
         try {
 
             checkForEmptyDescription(commandDescription);
@@ -63,6 +65,8 @@ public class ParsePair extends Parser {
             throw new NotIntegerException(MESSAGE_NOT_INTEGER);
         } catch (ExistingPairException e) {
             throw new ExistingPairException(MESSAGE_EXISTING_PAIR);
+        } catch (BudgetExceededException e) {
+            throw new BudgetExceededException(MESSAGE_BUDGET_EXCEEDED);
         }
     }
 
@@ -104,7 +108,7 @@ public class ParsePair extends Parser {
     }
 
     private void validatePairDetails(ArrayList<Integer> pairDetails) throws InvalidIndexException,
-            ClientAlreadyPairedException, ExistingPairException {
+            ClientAlreadyPairedException, ExistingPairException, BudgetExceededException {
         int propertyIndex = pairDetails.get(0);
         int clientIndex = pairDetails.get(1);
         checkForClientListIndexOutOfBounds(clientIndex);
@@ -119,6 +123,10 @@ public class ParsePair extends Parser {
 
         if (pairingList.isClientPairedWithProperty(client)) {
             throw new ClientAlreadyPairedException(EXCEPTION);
+        }
+
+        if (pairingList.hasPriceExceededBudget(client, property)) {
+            throw new BudgetExceededException(EXCEPTION);
         }
     }
 
