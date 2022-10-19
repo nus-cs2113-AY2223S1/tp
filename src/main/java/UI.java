@@ -33,6 +33,10 @@ public class UI {
             + UI.PRESCRIPTION_ADD
             + UI.PRESCRIPTION_EDIT
             + UI.PRESCRIPTION_VIEW_ALL
+            + UI.PRESCRIPTION_VIEW_PATIENT
+            + UI.PRESCRIPTION_VIEW_ACTIVE
+            + UI.PRESCRIPTION_CHANGE_ACTIVE
+            + UI.PRESCRIPTION_CHANGE_INACTIVE
             + UI.RETURN_TO_MAIN
             + UI.EXIT_PROGRAM;
 
@@ -179,7 +183,7 @@ public class UI {
     public static final String VISIT_ADD = "\n* To add a visit: add i/[ID] d/[date] t/[time] r/[reason]";
     public static final String VISIT_EDIT = "\n* To edit a visit's reason: edit i/[ID] r/[reason]";
     public static final String VISIT_VIEW_ALL = "\n* To list all visits: viewall";
-    public static final String VISIT_VIEW_PATIENT = "\n* To list all visits of one patient: viewPatient/[ID]";
+    public static final String VISIT_VIEW_PATIENT = "\n* To list all visits of one patient: viewPatient i/[ID]";
     public static final String VISIT_VIEW = "\n* To view a patient's specific visit: viewVisit i/[ID] [INDEX]";
 
     public static final String PRESCRIPTION_ADD = "\n* To add a prescription: add i/ID "
@@ -188,6 +192,18 @@ public class UI {
             + "(n/[name] or d/[dosage] or t/[time interval])";
 
     public static final String PRESCRIPTION_VIEW_ALL = "\n* To list all prescriptions: viewall";
+
+    public static final String PRESCRIPTION_VIEW_PATIENT = "\n* To list all prescriptions of one patient: "
+            + "viewPatientPres i/[ID]";
+
+    public static final String PRESCRIPTION_VIEW_ACTIVE = "\n* To list all active prescriptions of one "
+        + "patient: viewActPatientPres i/[ID]";
+
+    public static final String PRESCRIPTION_CHANGE_ACTIVE = "\n* To change a prescription record to be "
+            + "active: activate i/INDEX";
+
+    public static final String PRESCRIPTION_CHANGE_INACTIVE = "\n* To change a prescription record to be "
+            + "inactive: deactivate i/[ID]";
 
     public static final String RETURN_TO_MAIN =  "\n* To return to main menu: main";
 

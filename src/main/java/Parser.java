@@ -156,6 +156,10 @@ public class Parser {
             boolean matchesView = input.equalsIgnoreCase(VIEW_ALL_COMMAND);
             Matcher matcherAdd = addPrescriptionMatcher(input);
             Matcher matcherEdit = editPrescriptionMatcher(input);
+            Matcher matcherViewPatient = viewPrescriptionPatientMatcher(input);
+            Matcher matcherViewActive = viewPrescriptionActiveMatcher(input);
+            Matcher matcherChangeActive = changePrescriptionActiveMatcher(input);
+            Matcher matcherChangeInactive = changePrescriptionInactiveMatcher(input);
             if (matchesView) {
                 prescriptionList.viewAll(ui);
             } else if (matcherAdd.find()) {
@@ -164,6 +168,22 @@ public class Parser {
             } else if (matcherEdit.find()) {
                 parseEditPrescription(Integer.valueOf(matcherEdit.group(1)),
                         matcherEdit.group(2), matcherEdit.group(3));
+            } else if (matcherViewPatient.find()) {
+                String patientId = matcherViewPatient.group(1);
+                if (patientList.findPatient(patientId) == null) {
+                    throw new OneDocException("That patient ID doesn't exist!");
+                }
+                //prescriptionList.viewPatientPres(ui, patientId);
+            } else if (matcherViewActive.find()) {
+                String patientId = matcherViewPatient.group(1);
+                if (patientList.findPatient(patientId) == null) {
+                    throw new OneDocException("That patient ID doesn't exist!");
+                }
+                //prescriptionList.viewActPatientPres(ui, patientId);
+            } else if (matcherChangeActive.find()) {
+                //index is matcherChangeActive.group(1), so prescriptionList.activatePres(ui, matcherChangeActive.group(1));
+            } else if (matcherChangeInactive.find()) {
+                //index is matcherChangeInactive.group(1), so prescriptionList.deactivatePres(ui, matcherChangeInactive.group(1));
             } else {
                 throw new OneDocException("Your input is incorrect! Please format it as such:"
                         + UI.PRESCRIPTION_ADD
@@ -172,7 +192,12 @@ public class Parser {
                         + "\nt - The time interval should be instructions on how to take, with any number of words"
                         + UI.PRESCRIPTION_EDIT
                         + "\nn/d/t - Please edit only one aspect of a prescription at a time"
-                        + UI.PRESCRIPTION_VIEW_ALL);
+                        + UI.PRESCRIPTION_VIEW_ALL
+                        + UI.PRESCRIPTION_VIEW_PATIENT
+                        + UI.PRESCRIPTION_VIEW_ACTIVE
+                        + UI.PRESCRIPTION_CHANGE_ACTIVE
+                        + UI.PRESCRIPTION_CHANGE_INACTIVE
+                        + "\nINDEX - The index should be relative to all the visits of a patient");
             }
         } catch (OneDocException e) {
             System.out.println("Incorrect format: " + e.getMessage());
@@ -263,7 +288,8 @@ public class Parser {
 
     private static Matcher addPrescriptionMatcher(String input) {
         Pattern addPrescriptionPattern = Pattern.compile(
-                "^add\\s*i/(\\w+)\\s*n/(\\w+\\s*\\w+|\\w+)\\s*d/(\\d+\\s*\\w+)\\s*t/(\\w+)\\s*$",
+                "^add\\s*i/(\\w+)\\s*n/(\\w+\\s*\\w+|\\w+)\\s*"
+                        + "d/(\\d+\\s*\\w+)\\s*t/((?:\\w+\\s+\\w+)+|\\w+)\\s*$",
                 Pattern.CASE_INSENSITIVE);
         return addPrescriptionPattern.matcher(input);
     }
@@ -272,6 +298,30 @@ public class Parser {
         Pattern editPrescriptionPattern = Pattern.compile(
                 "^edit\\s*i/(\\d+)\\s*([n|d|t])/([\\w-]+)$", Pattern.CASE_INSENSITIVE);
         return editPrescriptionPattern.matcher(input);
+    }
+
+    private static Matcher viewPrescriptionPatientMatcher(String input) {
+        Pattern viewPrescriptionPatientPattern = Pattern.compile(
+                "^viewPatientPres\\s*i/(\\w+)\\s*$", Pattern.CASE_INSENSITIVE);
+        return viewPrescriptionPatientPattern.matcher(input);
+    }
+
+    private static Matcher viewPrescriptionActiveMatcher(String input) {
+        Pattern viewPrescriptionActivePattern = Pattern.compile(
+                "^viewActPatientPres\\s*i/(\\w+)\\s*$", Pattern.CASE_INSENSITIVE);
+        return viewPrescriptionActivePattern.matcher(input);
+    }
+
+    private static Matcher changePrescriptionActiveMatcher(String input) {
+        Pattern changePrescriptionActivePattern = Pattern.compile(
+                "^activate\\s*i/(\\d+)\\s*$", Pattern.CASE_INSENSITIVE);
+        return changePrescriptionActivePattern.matcher(input);
+    }
+
+    private static Matcher changePrescriptionInactiveMatcher(String input) {
+        Pattern changePrescriptionInactivePattern = Pattern.compile(
+                "^deactivate\\s*i/(\\d+)\\s*$", Pattern.CASE_INSENSITIVE);
+        return changePrescriptionInactivePattern.matcher(input);
     }
 
     private void parseEditPrescription(int id, String type, String input) throws OneDocException {
