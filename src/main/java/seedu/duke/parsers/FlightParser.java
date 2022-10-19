@@ -6,6 +6,7 @@ import seedu.duke.command.flightcommand.DeleteFlightCommand;
 import seedu.duke.command.flightcommand.ListFlightCommand;
 import seedu.duke.exceptions.SkyControlException;
 
+//@@author Franky4566
 public class FlightParser extends Parser {
     public static Command parse(String[] inputWords) throws SkyControlException {
         checkOperation(inputWords);
