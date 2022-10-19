@@ -186,7 +186,7 @@ public class Api {
     public void loadApiKey(String file, String directory, boolean toloadDefault)
             throws NoFileFoundException, EmptySecretFileException {
         try {
-            String key = FileReader.readStringFromTxt(file, directory, true);
+            String key = FileReader.readStringFromTxt(file, directory, true).trim();
             if (key.isEmpty()) {
                 if (toloadDefault) {
                     loadDefaultApiKey();
