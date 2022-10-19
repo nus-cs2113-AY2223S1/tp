@@ -8,6 +8,25 @@
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 
+### Addition feature
+
+The addition mechanism is facilitated by 'Parser', 'Add', 'ModuleList' and 'UI', where a Module object will be created according to the content inputted by the user and stored in the module list.
+
+Below is an example usage scenario and how the addition mechanism behaves at each step:
+
+Step 1: The user launches the application for the first time. A ModuleList object will be initiated with empty content.
+
+Step 2: The user input of "add m/cs2113 s/y2s1 mc/4 g/a" will be taken in for parser and an object of class 'Add' will be returned.
+
+Step 3: The execute method in the Add class that is overriden will be called with parameter of moduleList and module to be added passed. This will add the Module into the module list created in step 1.
+
+Below illustrate the add mechanism using a sequence diagram:
+
+![AddUML.png](AddUML.png)
+
+
+
+
 
 ## Product scope
 ### Target user profile
