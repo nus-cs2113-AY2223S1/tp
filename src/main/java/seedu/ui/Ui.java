@@ -50,14 +50,14 @@ public class Ui {
     // with minor modifications
     private void showLogo() {
         print(
-            "    ____\n"
-                + " __/  |_\\_\n"
-                + "|  _     _``-.\n"
-                + "'-(_)---(_)--'   _  _____ _  _  ___ \n"
-                + "  _ __  __ _ _ _| |/ /_ _| \\| |/ __|\n"
-                + " | '_ \\/ _` | '_| ' < | || .` | (_ |\n"
-                + " | .__/\\__,_|_| |_|\\_\\___|_|\\_|\\___|\n"
-                + " |_|                                ");
+                "    ____\n"
+                        + " __/  |_\\_\n"
+                        + "|  _     _``-.\n"
+                        + "'-(_)---(_)--'   _  _____ _  _  ___ \n"
+                        + "  _ __  __ _ _ _| |/ /_ _| \\| |/ __|\n"
+                        + " | '_ \\/ _` | '_| ' < | || .` | (_ |\n"
+                        + " | .__/\\__,_|_| |_|\\_\\___|_|\\_|\\___|\n"
+                        + " |_|                                ");
     }
     //@@author
 
@@ -159,6 +159,19 @@ public class Ui {
     public void showAuthError() {
         print("Unable to authenticate API Key!");
     }
+
+    public void showFavouriteAddSuccess(String carparkId) {
+        print(String.format("Added Carpark %s to favourites!", carparkId));
+    }
+
+    public void showUnfavouriteSuccess(String carparkId) {
+        print(String.format("Removed Carpark %s from favourites!", carparkId));
+    }
+
+    public void showUpdateFavouriteError() {
+        print("Could not update favourite list.");
+    }
+
     /**
      * Changes the scanner for the Ui object. To be used for JUnit testing.
      *

@@ -112,8 +112,10 @@ public class CarparkList {
      */
     public String getSearchListString() {
         StringBuilder bufferString = new StringBuilder();
+        int index = 1;
         for (Carpark carpark : carparks) {
-            bufferString.append(carpark.getListViewString()).append("\n");
+            bufferString.append(String.format("%d. ", index)).append(carpark.getListViewString()).append("\n");
+            index += 1;
         }
         return bufferString.toString();
     }

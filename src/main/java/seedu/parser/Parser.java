@@ -13,6 +13,8 @@ public class Parser {
     private static final String COMMAND_UPDATE = "update";
     private static final String COMMAND_AUTH = "auth";
     private static final String COMMAND_LIST = "list";
+    private static final String COMMAND_FAVOURITE = "favourite";
+    private static final String COMMAND_UNFAVOURITE = "unfavourite";
 
     /**
      * To convert the user input into commands for the program.
@@ -57,6 +59,18 @@ public class Parser {
                     throw new NoCommandArgumentException("search");
                 }
                 command = Command.SEARCH;
+                break;
+            case COMMAND_FAVOURITE:
+                if (!hasCommandArgumentFlag) {
+                    throw new NoCommandArgumentException("favourite");
+                }
+                command = Command.FAVOURITE;
+                break;
+            case COMMAND_UNFAVOURITE:
+                if (!hasCommandArgumentFlag) {
+                    throw new NoCommandArgumentException("unfavourite");
+                }
+                command = Command.UNFAVOURITE;
                 break;
             default:
                 command = Command.INVALID;

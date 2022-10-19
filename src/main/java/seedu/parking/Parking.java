@@ -2,20 +2,28 @@ package seedu.parking;
 
 import static seedu.common.CommonFiles.API_JSON_DIRECTORY;
 import static seedu.common.CommonFiles.API_KEY_FILE;
+import static seedu.common.CommonFiles.FAVOURITE_DIRECTORY;
+import static seedu.common.CommonFiles.FAVOURITE_FILE;
 import static seedu.common.CommonFiles.LTA_JSON_FILE;
 
+import java.io.IOException;
 import java.util.Objects;
 
 import seedu.api.Api;
 import seedu.commands.Auth;
+import seedu.commands.Favourite;
 import seedu.commands.Find;
 import seedu.commands.Search;
 import seedu.common.CommonFiles;
 import seedu.data.Carpark;
 import seedu.data.CarparkList;
+import seedu.exception.DuplicateCarparkException;
+import seedu.exception.FileWriteException;
 import seedu.exception.NoCarparkFoundException;
 import seedu.exception.NoCommandArgumentException;
+import seedu.exception.NoFileFoundException;
 import seedu.exception.ParkingException;
+import seedu.exception.UnneededArgumentsException;
 import seedu.parser.Command;
 import seedu.parser.Parser;
 import seedu.parser.search.Sentence;
@@ -37,7 +45,14 @@ public class Parking {
         ui.greetUser();
         Auth auth = new Auth();
         Api api = new Api(LTA_JSON_FILE, API_JSON_DIRECTORY);
-
+        Favourite favourite = new Favourite(FAVOURITE_DIRECTORY, FAVOURITE_FILE);
+        try {
+            favourite.updateFavouriteList();
+        } catch (IOException e) {
+            ui.showUpdateFavouriteError();
+        } catch (NoFileFoundException e) {
+            ui.printError(e);
+        }
         try {
             api.loadApiKey(API_KEY_FILE, API_JSON_DIRECTORY, true);
             api.asyncExecuteRequest();
@@ -75,10 +90,10 @@ public class Parking {
                 break;
             case FIND:
                 try {
-                    String carparkID = find.getCarparkID(input);
+                    String carparkID = find.getCarparkId(input);
                     Carpark carpark = carparkList.findCarpark(carparkID);
                     ui.print(carpark.getDetailViewString());
-                } catch (NoCommandArgumentException | NoCarparkFoundException exception) {
+                } catch (NoCommandArgumentException | NoCarparkFoundException | UnneededArgumentsException exception) {
                     ui.printError(exception);
                 }
                 break;
@@ -113,6 +128,31 @@ public class Parking {
                 Sentence searchQuery = new Sentence(Parser.splitCommandArgument(input)[1]);
                 ui.print(Search.runSearch(carparkList, searchQuery).getSearchListString());
                 carparkList.resetBoldForAllCarparks();
+                break;
+            case FAVOURITE:
+                try {
+                    String carparkID = find.getCarparkId(input);
+                    if (carparkID.equalsIgnoreCase("list")) {
+                        favourite.showList();
+                    } else {
+                        Carpark carpark = carparkList.findCarpark(carparkID);
+                        favourite.setFavourite(carparkID);
+                        ui.showFavouriteAddSuccess(carparkID);
+                    }
+                } catch (FileWriteException | UnneededArgumentsException | NoCommandArgumentException
+                         | NoCarparkFoundException | DuplicateCarparkException e) {
+                    ui.printError(e);
+                }
+                break;
+            case UNFAVOURITE:
+                try {
+                    String carparkId = favourite.getCarparkId(input);
+                    favourite.setUnfavourite(carparkId);
+                    ui.showUnfavouriteSuccess(carparkId);
+                } catch (FileWriteException | UnneededArgumentsException | NoCommandArgumentException
+                         | NoCarparkFoundException e) {
+                    ui.printError(e);
+                }
                 break;
             default:
                 ui.showInvalidCommandError();

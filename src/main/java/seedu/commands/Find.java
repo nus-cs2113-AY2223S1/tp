@@ -1,6 +1,7 @@
 package seedu.commands;
 
 import seedu.exception.NoCommandArgumentException;
+import seedu.exception.UnneededArgumentsException;
 import seedu.parser.Parser;
 
 /**
@@ -13,11 +14,15 @@ public class Find {
      *
      * @param input User command.
      * @return Carpark ID.
+     * @throws UnneededArgumentsException If too many arguments.
+     * @throws NoCommandArgumentException If not enough arguments.
      */
-    public String getCarparkID(String input) throws NoCommandArgumentException {
+    public String getCarparkId(String input) throws NoCommandArgumentException, UnneededArgumentsException {
         String[] words = Parser.splitCommandArgument(input);
         if (words.length == 2 && words[1].trim().length() > 0) {
             return words[1];
+        } else if (words.length > 2) {
+            throw new UnneededArgumentsException("find");
         } else {
             throw new NoCommandArgumentException("find");
         }

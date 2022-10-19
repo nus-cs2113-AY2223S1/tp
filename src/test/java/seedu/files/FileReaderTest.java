@@ -22,16 +22,14 @@ public class FileReaderTest {
     @Test
     void validLtaJsonFilepathTest() throws NoFileFoundException {
         List<Carpark> validCarparkList = FileReader.loadLtaJson(validPathAndFile, validBackupPathAndFile);
-        Assertions.assertEquals(validCarparkList.get(0).toString(), "CarparkID 1 at Suntec City: 1882 "
-                + "lots available");
+        Assertions.assertEquals("CarparkID 1 at Suntec City: 1882 lots available", validCarparkList.get(0).toString());
     }
-
 
     @Test
     void validBackupLtaJsonFilepathTest() throws NoFileFoundException {
         List<Carpark> validBackupCarparkList = FileReader.loadLtaJson(invalidPath, validBackupPathAndFile);
-        Assertions.assertEquals(validBackupCarparkList.get(0).toString(), "CarparkID 4 at Suntec City: "
-                + "1882 lots available");
+        Assertions.assertEquals("CarparkID 4 at Suntec City: 1882 lots available",
+                validBackupCarparkList.get(0).toString());
     }
 
     @Test
@@ -53,13 +51,14 @@ public class FileReaderTest {
     }
     @Test
     void validReadStringFromTextTest() throws IOException, NoFileFoundException {
-        Assertions.assertEquals(FileReader.readStringFromTxt("verification.txt",
-                testFileDirectory, false), "This is a valid read.");
+        Assertions.assertEquals("This is a valid read.\n",
+                FileReader.readStringFromTxt("verification.txt",
+                testFileDirectory, false));
     }
 
     @Test
     void emptyReadStringFromTextTest() throws IOException, NoFileFoundException {
-        Assertions.assertEquals(FileReader.readStringFromTxt("empty.txt",
-                testFileDirectory, false), "");
+        Assertions.assertEquals("", FileReader.readStringFromTxt("empty.txt",
+                testFileDirectory, false));
     }
 }

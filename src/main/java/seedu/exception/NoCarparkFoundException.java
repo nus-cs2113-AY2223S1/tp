@@ -1,7 +1,7 @@
 package seedu.exception;
 
 /**
- * Exception for when no carpark is found in the list.
+ * Exception for when no carpark is found.
  */
 public class NoCarparkFoundException extends ParkingException {
     /**
@@ -18,6 +18,6 @@ public class NoCarparkFoundException extends ParkingException {
      */
     @Override
     public String getMessage() {
-        return "No carpark was found in your list.";
+        return "No carpark was found.";
     }
 }
