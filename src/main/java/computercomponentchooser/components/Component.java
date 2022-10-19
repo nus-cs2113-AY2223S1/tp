@@ -36,9 +36,9 @@ public abstract class Component {
     }
 
     /**
-     * Returns a string representation of the component's attributes and used to save
+     * Returns a string representation of the component's attributes and used to save.
      *
-     * @return
+     * @return  a string representation of the component's attributes
      */
     public String saveAsString() {
         return getType() + " " + name + " " + price + " " + power;

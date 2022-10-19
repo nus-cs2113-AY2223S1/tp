@@ -2,7 +2,15 @@ package computercomponentchooser.storage;
 
 import computercomponentchooser.Build;
 import computercomponentchooser.BuildManager;
-import computercomponentchooser.components.*;
+import computercomponentchooser.components.Component;
+import computercomponentchooser.components.Cpu;
+import computercomponentchooser.components.Gpu;
+import computercomponentchooser.components.Motherboard;
+import computercomponentchooser.components.Drive;
+import computercomponentchooser.components.Memory;
+import computercomponentchooser.components.PowerSupply;
+
+
 import computercomponentchooser.exceptions.DuplicateBuildException;
 
 import java.io.File;
@@ -79,7 +87,7 @@ public class Storage {
         }
         File componentFile = new File(COMPONENT_FILE_PATH);
         if (componentFile.exists()) {
-            if(componentFile.delete()) { //Deletion of the whole file is not working
+            if (componentFile.delete()) { //Deletion of the whole file is not working
                 System.out.println("Deleted the file: " + componentFile.getName());
             } else {
                 System.out.println("Failed to delete the file.");
@@ -119,7 +127,7 @@ public class Storage {
             Files.createFile(file);
         }
         FileWriter fileWriter = new FileWriter(COMPONENT_FILE_PATH);
-        for(Component component : build.getAllComponents()) {
+        for (Component component : build.getAllComponents()) {
             fileWriter.write(component.saveAsString() + "\n");
         }
         fileWriter.close();
@@ -137,8 +145,8 @@ public class Storage {
         File file = new File(BUILD_FILE_PATH);
         Scanner scanner = new Scanner(file);
         while (scanner.hasNextLine()) {
-            String build_name = scanner.nextLine();
-            Build newBuild = new Build(build_name);
+            String buildName = scanner.nextLine();
+            Build newBuild = new Build(buildName);
             buildManager.addBuild(newBuild);
         }
     }
@@ -149,12 +157,12 @@ public class Storage {
      * @throws FileNotFoundException if the file is not found
      */
     public void loadComponent(BuildManager buildManager) throws FileNotFoundException {
-        for (String build_name : buildManager.getBuilds().keySet()) {
-            File file = new File(FILE_DIRECTORY + "/" + build_name + ".txt");
+        for (String buildName : buildManager.getBuilds().keySet()) {
+            File file = new File(FILE_DIRECTORY + "/" + buildName + ".txt");
             Scanner scanner = new Scanner(file);
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
-                Build build = buildManager.getBuilds().get(build_name);
+                Build build = buildManager.getBuilds().get(buildName);
                 String type = getParameter(line, TYPE_PARAMETER);
                 String name = getParameter(line, NAME_PARAMETER);
                 String price = getParameter(line, PRICE_PARAMETER);
