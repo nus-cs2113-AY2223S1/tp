@@ -69,10 +69,10 @@ public class Storage {
                 case RECIPE_INGREDIENTS_FIELD_TYPE:
                 case RECIPE_STEPS_FIELD_TYPE:
                     ArrayList<Ingredient> ingredients = getIngredientsDetails(s);
-                    newRecipe.setIngredients(ingredients);
+                    newRecipe.addIngredients(ingredients);
 
                     ArrayList<String> steps = getStepsDetails(s);
-                    newRecipe.setSteps(steps);
+                    newRecipe.addSteps(steps);
                     RecipeList.addRecipe(newRecipe);
                     newRecipe = new Recipe();
                     break;

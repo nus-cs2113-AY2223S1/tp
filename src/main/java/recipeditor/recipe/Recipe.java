@@ -1,12 +1,13 @@
 package recipeditor.recipe;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
 public class Recipe {
-    private String title;
-    private String description;
+    private String title = "";
+    private String description = "";
     private ArrayList<Ingredient> ingredients;
     private ArrayList<String> steps;
     private Logger logger = Logger.getLogger("LOGS");
@@ -50,16 +51,19 @@ public class Recipe {
         return ingredients;
     }
 
-    public void setIngredients(ArrayList<Ingredient> ingredients) {
-        this.ingredients = ingredients;
+    public void addIngredients(ArrayList<Ingredient> ingredients) {
+        this.ingredients.addAll(ingredients);
+    }
+
+    public void swapIngredients(int index1, int index2) throws IndexOutOfBoundsException {
+        Collections.swap(ingredients, index1, index2);
     }
 
     public void addIngredient(Ingredient ingredient) {
         this.ingredients.add(ingredient);
     }
 
-    public Ingredient getIngredient(int index) {
-        assert index >= 0 && index <= ingredients.size();
+    public Ingredient getIngredient(int index) throws IndexOutOfBoundsException {
         return this.ingredients.get(index);
     }
 
@@ -72,8 +76,7 @@ public class Recipe {
         return null;
     }
 
-    public void deleteIngredient(int index) {
-        assert index >= 0 && index <= ingredients.size();
+    public void deleteIngredient(int index) throws IndexOutOfBoundsException {
         this.ingredients.remove(index);
     }
 
@@ -81,26 +84,24 @@ public class Recipe {
         return steps;
     }
 
-    public void setSteps(ArrayList<String> steps) {
-        this.steps = steps;
+    public void addSteps(ArrayList<String> steps) {
+        this.steps.addAll(steps);
+    }
+
+    public void swapSteps(int index1, int index2) throws IndexOutOfBoundsException {
+        Collections.swap(steps, index1, index2);
     }
 
     public void addStep(String step) {
         steps.add(step);
     }
 
-    public String getStep(int index) {
-        assert index >= 0 && index <= steps.size();
+    public String getStep(int index) throws IndexOutOfBoundsException {
         return this.steps.get(index);
     }
 
-    public void deleteStep(int index) {
-        assert index >= 0 && index <= steps.size();
+    public void deleteStep(int index) throws IndexOutOfBoundsException {
         this.steps.remove(index);
-    }
-
-    public void changeStep(int index, String newStep) {
-        this.steps.set(index, newStep);
     }
 
     public String getIngredientAttributesFormatted() {

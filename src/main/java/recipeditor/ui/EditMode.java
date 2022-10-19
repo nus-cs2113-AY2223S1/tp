@@ -1,5 +1,7 @@
 package recipeditor.ui;
 
+import com.sun.source.tree.ReturnTree;
+import recipeditor.recipe.Ingredient;
 import recipeditor.recipe.Recipe;
 import recipeditor.recipe.RecipeList;
 import recipeditor.command.Command;
@@ -7,56 +9,148 @@ import recipeditor.command.InvalidCommand;
 
 public class EditMode {
     private static final String INVALID_INPUT = "Invalid input given.";
+    private static final String INVALID_FLAG = "Invalid flag given.";
+    private static final String INVALID_INDEX = "Invalid index given.";
+    private static final String GENERIC_ERROR = "Something happened.";
+
     private static final String ENTER = "Entering edit mode. Currently editing: ";
+    private static final String HELP_1 = "Available commands: /add, /del, /swap, /view, /done";
+    private static final String HELP_2 = "Available flags: -i (ingredients), -s (steps)";
     private static final String EXIT = "Exiting edit mode.";
     private static final String NOT_FOUND = "Recipe not found.";
-
     private static final String OLD = "Before:";
     private static final String NEW = "After:";
 
     private Recipe originalRecipe;
     private Recipe editedRecipe;
 
-    public void enterEditMode(String recipeTitle) {
-        Ui.showMessageInline(ENTER + recipeTitle);
-        originalRecipe = RecipeList.getRecipeFromTitle(recipeTitle);
-        editedRecipe = originalRecipe;
-        if (originalRecipe != null) {
+    public void enterEditMode(int index) {
+        if (index < 0) {
+            Ui.showMessageInline(NOT_FOUND);
+            return;
+        }
+        try {
+            originalRecipe = RecipeList.getRecipe(index);
+            Ui.showMessageInline(ENTER + originalRecipe.getTitle());
+
+            editedRecipe = new Recipe(originalRecipe.getTitle(), originalRecipe.getDescription());
+            editedRecipe.addIngredients(originalRecipe.getIngredients());
+            editedRecipe.addSteps(originalRecipe.getSteps());
+
             Ui.showMessageInline(originalRecipe.getRecipeAttributesFormatted());
+
             String input = "";
+
             while (!input.equals("/done")) {
+                Ui.showMessageInline(HELP_1);
+                Ui.showMessageInline(HELP_2);
                 input = Ui.readInput();
                 Ui.showMessageInline(parseEditInput(input));
             }
-        } else {
-            Ui.showMessageInline(NOT_FOUND);
-            Ui.showMessageInline(EXIT);
-            return;
+        } catch (IndexOutOfBoundsException i) {
+            Ui.showMessageInline(INVALID_INDEX);
+        } catch (NumberFormatException n) {
+            Ui.showMessageInline(INVALID_INPUT);
+        } catch (Exception e) {
+            Ui.showMessageInline(GENERIC_ERROR);
         }
-        Ui.showMessageInline(OLD);
-        Ui.showMessageInline(originalRecipe.getRecipeAttributesFormatted());
-        Ui.showMessageInline(NEW);
-        Ui.showMessageInline(editedRecipe.getRecipeAttributesFormatted());
+    }
+
+    private String parseEditInput(String input) {
+        try {
+            String[] parsed = input.split(" ");
+            String commandWord = parsed[0].toLowerCase();
+            int flagType = checkFlagType(parsed);
+
+            switch (commandWord) {
+            case "/add":
+                return "Add command";
+            case "/del":
+                if (flagType == 0) {
+                    return INVALID_FLAG;
+                }
+                int index = Integer.parseInt(parsed[2]) - 1;
+                if (flagType == 1) {
+                    editedRecipe.deleteIngredient(index);
+                    return OLD + "\n"
+                            + originalRecipe.getIngredientAttributesFormatted() + "\n"
+                            + NEW + "\n"
+                            + editedRecipe.getIngredientAttributesFormatted();
+                } else if (flagType == 2) {
+                    editedRecipe.deleteStep(index);
+                    return OLD + "\n"
+                            + originalRecipe.getStepAttributesFormatted() + "\n"
+                            + NEW + "\n"
+                            + editedRecipe.getStepAttributesFormatted();
+                }
+                return GENERIC_ERROR;
+            case "/swap":
+                if (flagType == 0) {
+                    return INVALID_FLAG;
+                }
+                int index1 = Integer.parseInt(parsed[2]) - 1;
+                int index2 = Integer.parseInt(parsed[3]) - 1;
+                if (flagType == 1) {
+                    editedRecipe.swapIngredients(index1, index2);
+                    return OLD + "\n"
+                            + originalRecipe.getIngredientAttributesFormatted() + "\n"
+                            + NEW + "\n"
+                            + editedRecipe.getIngredientAttributesFormatted();
+                } else if (flagType == 2) {
+                    editedRecipe.swapSteps(index1, index2);
+                    return OLD + "\n"
+                            + originalRecipe.getStepAttributesFormatted() + "\n"
+                            + NEW + "\n"
+                            + editedRecipe.getStepAttributesFormatted();
+                }
+                return GENERIC_ERROR;
+            case "/view":
+                return "View command";
+            case "/done":
+                return "Quit command";
+            default:
+                return INVALID_INPUT;
+            }
+
+        } catch (NumberFormatException n) {
+            return INVALID_INPUT;
+        } catch (IndexOutOfBoundsException i) {
+            return INVALID_INDEX;
+        } catch (Exception e) {
+            return GENERIC_ERROR;
+        }
+    }
+
+    private int checkFlagType(String[] stringArray) {
+        int flagCount = 0;
+        int flagType = 0;
+        for (String s: stringArray) {
+            if (s.contains("-")) {
+                flagCount += 1;
+                if (s.equals("-i")) {
+                    flagType = 1;
+                } else if (s.equals("-s")) {
+                    flagType = 2;
+                }
+            }
+        }
+        if (flagCount > 1) {
+            return 0;
+        }
+        return flagType;
+    }
+
+    public boolean exitEditMode() {
         Ui.showMessageInline(EXIT);
-    }
-
-    public void deleteStep(int index) {
-        editedRecipe.deleteStep(index);
-    }
-
-    public void deleteIngredient(int index) {
-        editedRecipe.deleteIngredient(index);
-    }
-
-    public void swapSteps(int a, int b) {
-        String step1 = editedRecipe.getStep(a);
-        String step2 = editedRecipe.getStep(b);
-        editedRecipe.changeStep(a, step2);
-        editedRecipe.changeStep(b, step1);
-    }
-
-    public void exitEditMode() {
-
+        if (editedRecipe == null) {
+            return false;
+        } else {
+            Ui.showMessageInline(OLD);
+            Ui.showMessageInline(originalRecipe.getRecipeAttributesFormatted());
+            Ui.showMessageInline(NEW);
+            Ui.showMessageInline(editedRecipe.getRecipeAttributesFormatted());
+            return true;
+        }
     }
 
     public Recipe getOriginalRecipe() {
@@ -65,28 +159,5 @@ public class EditMode {
 
     public Recipe getEditedRecipe() {
         return editedRecipe;
-    }
-
-    private String parseEditInput(String input) {
-        String[] parsed = input.split(" ");
-        String commandWord = parsed[0].toLowerCase();
-        if (commandWord.charAt(0) != '/') {
-            return INVALID_INPUT;
-        }
-
-        switch (commandWord) {
-        case "/add":
-            return "Add command";
-        case "/del":
-            return "Del command";
-        case "/swap":
-            return "Swap command";
-        case "/view":
-            return "View command";
-        case "/done":
-            return "Quit command";
-        default:
-            return INVALID_INPUT;
-        }
     }
 }

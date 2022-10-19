@@ -14,8 +14,7 @@ public class RecipeList {
         this(null);
     }
 
-    public static Recipe getRecipe(int index) {
-        assert index >= 0 && index <= recipes.size();
+    public static Recipe getRecipe(int index) throws IndexOutOfBoundsException {
         return recipes.get(index);
     }
 
@@ -23,8 +22,7 @@ public class RecipeList {
         recipes.add(recipe);
     }
 
-    public static void deleteRecipe(int index) {
-        assert index >= 0 && index <= recipes.size();
+    public static void deleteRecipe(int index) throws IndexOutOfBoundsException {
         recipes.remove(index);
     }
 
@@ -34,7 +32,7 @@ public class RecipeList {
 
     public static Recipe getRecipeFromTitle(String recipleTitle) {
         for (Recipe r : recipes) {
-            if (r.getTitle().equals(recipleTitle)) {
+            if (r.getTitle().equalsIgnoreCase(recipleTitle)) {
                 return r;
             }
         }
@@ -44,7 +42,7 @@ public class RecipeList {
     public static int getRecipeIndexFromTitle(String recipeTitle) {
         int i = 0;
         for (Recipe r : recipes) {
-            if (r.getTitle().equals(recipeTitle)) {
+            if (r.getTitle().equalsIgnoreCase(recipeTitle)) {
                 return i;
             }
             i++;

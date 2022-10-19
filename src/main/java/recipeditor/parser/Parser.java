@@ -69,15 +69,16 @@ public class Parser {
     }
 
     private static Command parseEditCommand(String[] parsed) {
+        int index = -1;
         if (parsed.length > 1) {
-            int index = RecipeList.getRecipeIndexFromTitle(parsed[1]);
-            if (index != -1) {
-                EditMode edit = new EditMode();
-                edit.enterEditMode(parsed[1]);
-                edit.exitEditMode();
-                return new EditCommand(index, edit.getEditedRecipe());
+            try {
+                index = Integer.parseInt(parsed[1]) - 1;
+            } catch (NumberFormatException n) {
+                index = RecipeList.getRecipeIndexFromTitle(parsed[1]);
             }
-            return new InvalidCommand();
+            EditMode edit = new EditMode();
+            edit.enterEditMode(index);
+            return new EditCommand(edit.exitEditMode(), index, edit.getEditedRecipe());
         }
         return new InvalidCommand();
     }
