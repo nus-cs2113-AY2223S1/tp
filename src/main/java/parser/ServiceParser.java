@@ -52,7 +52,7 @@ public class ServiceParser {
             String description = input.substring(startOfD + lengthOfSignature);
             return new AddServiceCommand(description);
         } catch (DukeException e) {
-            System.out.println("Sorry, format of parameters entered for adding an service is invalid");
+            System.out.println("Sorry, format of parameters entered for adding a service is invalid");
             return new EmptyCommand();
         }
     }

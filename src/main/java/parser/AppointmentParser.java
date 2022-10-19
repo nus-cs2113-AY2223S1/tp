@@ -61,20 +61,23 @@ public class AppointmentParser {
     }
 
     public Command prepareAddAppointment(String input){
-        int s = input.indexOf(" s/");
-        int p = input.indexOf(" p/");
-        int d = input.indexOf(" d/");
+        try {
+            int s = input.indexOf(" s/");
+            int p = input.indexOf(" p/");
+            int d = input.indexOf(" d/");
 
-        if(s > p || p > d || s == -1 || p == -1 || d == -1){
-            System.out.println("Error: format of parameters entered for adding an appointment is invalid");
-            return new EndCommand();
+            if (s > p || p > d || s == -1 || p == -1 || d == -1) {
+                throw new DukeException();
+            }
+
+            String service = input.substring(s + lengthOfSignature, p);
+            String petName = input.substring(p + lengthOfSignature, d);
+            String appointmentDate = input.substring(d + lengthOfSignature);
+            return new AddAppointmentCommand(petName, appointmentDate, service);
+        } catch (DukeException e) {
+            System.out.println("Sorry, format of parameters entered for adding an appointment is invalid");
+            return new EmptyCommand();
         }
-
-        String service = input.substring(s + lengthOfSignature, p);
-        String petName = input.substring(p + lengthOfSignature, d);
-        String appointmentDate = input.substring(d + lengthOfSignature);
-
-        return new AddAppointmentCommand(petName, appointmentDate, service);
     }
 
     public Command prepareSetAppointmentStatusCommand(String input) {
