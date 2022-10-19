@@ -8,7 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class AddCommand extends Command {
-    public static final String COMMAND_TYPE = "add";
+    public static final String COMMAND_TYPE = "/add";
     private Recipe addedRecipe;
     private boolean isValid;
 

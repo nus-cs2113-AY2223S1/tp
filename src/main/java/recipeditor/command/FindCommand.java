@@ -5,7 +5,8 @@ import recipeditor.recipe.RecipeList;
 import java.util.ArrayList;
 
 public class FindCommand extends Command {
-    public static final String COMMAND_TYPE = "find";
+    public static final String COMMAND_TYPE = "/find";
+    public static char flagType;
     public String findInput;
 
     public FindCommand(String findInput) {

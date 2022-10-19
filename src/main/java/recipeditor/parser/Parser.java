@@ -30,7 +30,7 @@ public class Parser {
         case ViewCommand.COMMAND_TYPE:
             return parseListAlterCommand(parsed, commandWord);
         case FindCommand.COMMAND_TYPE:
-            return parseFindCommandByTitle(parsed);
+            return parseFindCommand(parsed);
         default:
             return new InvalidCommand();
         }
@@ -41,8 +41,6 @@ public class Parser {
         AddMode add = new AddMode(); // Switch to Add Mode in here
         add.enterAddMode();
         add.exitAddMode();
-        //Recipe addedRecipe = add.getRecipe();
-        //Storage.loadRecipeToDataFile(addedRecipe);
         logger.log(Level.INFO, "Is the recipe valid? " + add.isValid);
         return new AddCommand(add.isValid, add.addedRecipe); // Pass validty and potential recipe to AddCommand
     }
@@ -71,12 +69,12 @@ public class Parser {
         return new EditCommand(RecipeList.getRecipeIndexFromTitle(parsed[1]), edit.getEditedRecipe());
     }
 
-    private static Command parseFindCommandByTitle(String[] parsed) {
+    private static Command parseFindCommand(String[] parsed) {
         if (parsed.length < 2) {
             return new InvalidCommand();
         }
         String recipeTitle = convertStringArrayToString(parsed);
-        return new FindCommand(recipeTitle.toString());
+        return new FindCommand(recipeTitle);
     }
 
     private static String convertStringArrayToString(String[] stringArray) {
