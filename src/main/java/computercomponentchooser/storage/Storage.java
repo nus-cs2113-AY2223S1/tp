@@ -143,11 +143,13 @@ public class Storage {
     public void loadBuild(BuildManager buildManager) throws FileNotFoundException, DuplicateBuildException {
 
         File file = new File(BUILD_FILE_PATH);
-        Scanner scanner = new Scanner(file);
-        while (scanner.hasNextLine()) {
-            String buildName = scanner.nextLine();
-            Build newBuild = new Build(buildName);
-            buildManager.addBuild(newBuild);
+        if (file.exists()) {
+            Scanner scanner = new Scanner(file);
+            while (scanner.hasNextLine()) {
+                String buildName = scanner.nextLine();
+                Build build = new Build(buildName);
+                buildManager.addBuild(build);
+            }
         }
     }
 
@@ -157,48 +159,51 @@ public class Storage {
      * @throws FileNotFoundException if the file is not found
      */
     public void loadComponent(BuildManager buildManager) throws FileNotFoundException {
-        for (String buildName : buildManager.getBuilds().keySet()) {
-            File file = new File(FILE_DIRECTORY + "/" + buildName + ".txt");
-            Scanner scanner = new Scanner(file);
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                Build build = buildManager.getBuilds().get(buildName);
-                String type = getParameter(line, TYPE_PARAMETER);
-                String name = getParameter(line, NAME_PARAMETER);
-                String price = getParameter(line, PRICE_PARAMETER);
-                String power = getParameter(line, POWER_PARAMETER);
-                switch (type) {
-                case "cpu":
-                    Cpu cpu = new Cpu(name, price, power,
-                            getParameter(line, 4), getParameter(line, 5));
-                    build.addComponent(type, cpu);
-                    break;
-                case "memory":
-                    Memory memory = new Memory(name, price, power, getParameter(line, 4),
-                            getParameter(line, 5));
-                    build.addComponent(type, memory);
-                    break;
-                case "motherboard":
-                    Motherboard motherboard = new Motherboard(name, price, power, getParameter(line, 4),
-                            getParameter(line, 5), getParameter(line, 6));
-                    build.addComponent(type, motherboard);
-                    break;
-                case "powersupply":
-                    PowerSupply powersupply = new PowerSupply(name, price, power);
-                    build.addComponent(type, powersupply);
-                    break;
-                case "gpu":
-                    Gpu gpu = new Gpu(name, price, power, getParameter(line, 4),
-                            getParameter(line, 5));
-                    build.addComponent(type, gpu);
-                    break;
-                case "drive":
-                    Drive drive = new Drive(name, price, power, getParameter(line, 4),
-                            getParameter(line, 5));
-                    build.addComponent(type, drive);
-                    break;
-                default:
-                    break;
+        File buildFile = new File(BUILD_FILE_PATH);
+        if (buildFile.exists()) {
+            for (String buildName : buildManager.getBuilds().keySet()) {
+                File file = new File(FILE_DIRECTORY + "/" + buildName + ".txt");
+                Scanner scanner = new Scanner(file);
+                while (scanner.hasNextLine()) {
+                    String line = scanner.nextLine();
+                    Build build = buildManager.getBuilds().get(buildName);
+                    String type = getParameter(line, TYPE_PARAMETER);
+                    String name = getParameter(line, NAME_PARAMETER);
+                    String price = getParameter(line, PRICE_PARAMETER);
+                    String power = getParameter(line, POWER_PARAMETER);
+                    switch (type) {
+                    case "cpu":
+                        Cpu cpu = new Cpu(name, price, power,
+                                getParameter(line, 4), getParameter(line, 5));
+                        build.addComponent(type, cpu);
+                        break;
+                    case "memory":
+                        Memory memory = new Memory(name, price, power, getParameter(line, 4),
+                                getParameter(line, 5));
+                        build.addComponent(type, memory);
+                        break;
+                    case "motherboard":
+                        Motherboard motherboard = new Motherboard(name, price, power, getParameter(line, 4),
+                                getParameter(line, 5), getParameter(line, 6));
+                        build.addComponent(type, motherboard);
+                        break;
+                    case "powersupply":
+                        PowerSupply powersupply = new PowerSupply(name, price, power);
+                        build.addComponent(type, powersupply);
+                        break;
+                    case "gpu":
+                        Gpu gpu = new Gpu(name, price, power, getParameter(line, 4),
+                                getParameter(line, 5));
+                        build.addComponent(type, gpu);
+                        break;
+                    case "drive":
+                        Drive drive = new Drive(name, price, power, getParameter(line, 4),
+                                getParameter(line, 5));
+                        build.addComponent(type, drive);
+                        break;
+                    default:
+                        break;
+                    }
                 }
             }
         }
