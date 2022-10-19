@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 
 import seedu.duke.exceptions.InvalidDatabaseLineException;
 import seedu.duke.exceptions.InvalidModuleException;
+import seedu.duke.exceptions.InvalidModuleMappingException;
 import seedu.duke.exceptions.InvalidUniversityException;
 import seedu.duke.module.Module;
 import seedu.duke.module.ModuleMapping;
@@ -120,7 +121,7 @@ public class DatabaseStorage {
             ModuleMapping newModuleMapping = new ModuleMapping(partnerUniversityModule, nusModule);
 
             Database.addModuleMapping(newModuleMapping);
-        } catch (InvalidUniversityException | InvalidModuleException e) {
+        } catch (InvalidUniversityException | InvalidModuleException | InvalidModuleMappingException e) {
             Ui.printExceptionMessage(e);
         }
 
