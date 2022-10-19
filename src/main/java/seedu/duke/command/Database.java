@@ -24,7 +24,7 @@ public class Database {
     }
 
     /**
-     * Adds university to list of universities
+     * Adds university to list of universities.
      * 
      * @param newUniversity New university to be added
      */
@@ -37,7 +37,7 @@ public class Database {
     }
 
     /**
-     * Adds module mapping to list of module mappings
+     * Adds module mapping to list of module mappings.
      * 
      * @param newModuleMapping New module mapping to be added
      */
@@ -47,7 +47,7 @@ public class Database {
 
     /**
      * Checks if the new university has not been added to the current list of
-     * universities before
+     * universities before.
      * 
      * @param newUniversity New university to be added
      * @return True if the university has not been added before, false otherwise
@@ -65,7 +65,7 @@ public class Database {
     }
 
     /**
-     * Search for partner university module code in current list of module mappings
+     * Search for partner university module code in current list of module mappings.
      * 
      * @param moduleCode Partner university module code to find
      * @return Module mapping which contains partner university module code
@@ -83,7 +83,7 @@ public class Database {
     }
 
     /**
-     * Search for NUS module code in current list of module mappings
+     * Search for NUS module code in current list of module mappings.
      * 
      * @param moduleCode NUS module code to find
      * @return List of module mappings which contains the NUS module code
@@ -107,7 +107,7 @@ public class Database {
     }
 
     /**
-     * Search for university name in current list of module mappings
+     * Search for university name in current list of module mappings.
      * 
      * @param universityName Name of university to find
      * @return List of module mappings which contains the university name

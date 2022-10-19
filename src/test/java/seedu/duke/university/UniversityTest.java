@@ -8,7 +8,7 @@ import seedu.duke.exceptions.InvalidUniversityException;
 
 public class UniversityTest {
     @Test
-    void toString_validUniversity_correctString() throws InvalidUniversityException{
+    void toString_validUniversity_correctString() throws InvalidUniversityException {
         University university = new University("NUS", "Singapore");
         assertEquals("NUS", university.toString());
     }

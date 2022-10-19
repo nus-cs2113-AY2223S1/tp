@@ -11,7 +11,7 @@ public class DatabaseParser {
     private static final int PARTS_LENGTH = 15;
 
     /**
-     * Parses current database line to obtain useful data and ignore useless data
+     * Parses current database line to obtain useful data and ignore useless data.
      * 
      * @param line Current database line
      * @return Array of strings containing useful data
@@ -36,8 +36,8 @@ public class DatabaseParser {
         String nusModuleCredit = parts[10];
 
         String[] lineData = { partnerUniversity, partnerUniversityModuleCode,
-                partnerUniversityModuleTitle, partnerUniversityModuleCredit, nusModuleCode,
-                nusModuleTitle, nusModuleCredit };
+            partnerUniversityModuleTitle, partnerUniversityModuleCredit, nusModuleCode,
+            nusModuleTitle, nusModuleCredit };
 
         logger.log(Level.FINE, "End parsing database line");
 

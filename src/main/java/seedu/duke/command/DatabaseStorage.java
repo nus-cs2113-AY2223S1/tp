@@ -23,7 +23,7 @@ public class DatabaseStorage {
     private static final String PARTNER_UNVIERSITY_COUNTRY = "nil";
 
     /**
-     * Loads data from data.csv into database
+     * Loads data from data.csv into database.
      */
     public static void loadDatabase() {
         logger.log(Level.INFO, "Start loading database");
@@ -38,7 +38,7 @@ public class DatabaseStorage {
     }
 
     /**
-     * Read entire data.csv file and populate database
+     * Read entire data.csv file and populate database.
      * 
      * @param filePath File path to data.csv
      * @throws FileNotFoundException If data.csv not found at file path
@@ -68,7 +68,7 @@ public class DatabaseStorage {
     }
 
     /**
-     * Get useful data to get ready to populate database
+     * Get useful data to get ready to populate database.
      * 
      * @param line Current database line
      * @return Array of strings which contains all useful data
@@ -87,7 +87,7 @@ public class DatabaseStorage {
     }
 
     /**
-     * Update database with useful data from each line
+     * Update database with useful data from each line.
      * 
      * @param lineData Current array of strings which contains the useful data from
      *                 the current line
@@ -114,7 +114,7 @@ public class DatabaseStorage {
     }
 
     /**
-     * Updates the university database with a new university
+     * Updates the university database with a new university.
      * 
      * @param partnerUniversityName    Name of current partner university
      * @param partnerUniversityCountry Country of current partner university
@@ -133,7 +133,7 @@ public class DatabaseStorage {
     }
 
     /**
-     * Updates the module mapping database with a new module mapping
+     * Updates the module mapping database with a new module mapping.
      * 
      * @param partnerUniversityName         Name of current partner university
      * @param partnerUniversityCountry      Country of current partner university

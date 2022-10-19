@@ -10,7 +10,7 @@ public class Module {
     private University university;
 
     /**
-     * Constructor for new module
+     * Constructor for new module.
      * 
      * @param code       Module code of new module
      * @param title      Module title of new module
@@ -68,7 +68,7 @@ public class Module {
     }
 
     /**
-     * Checks if module is valid
+     * Checks if module is valid.
      * 
      * @param code       Module code of new module
      * @param title      Module title of new module

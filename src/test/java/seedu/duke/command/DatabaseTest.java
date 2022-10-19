@@ -16,7 +16,8 @@ import seedu.duke.university.University;
 
 public class DatabaseTest {
     @Test
-    void addModuleMapping_validModuleMapping_correctString() throws InvalidUniversityException, InvalidModuleException, InvalidModuleMappingException{
+    void addModuleMapping_validModuleMapping_correctString()
+            throws InvalidUniversityException, InvalidModuleException, InvalidModuleMappingException {
         University partnerUniversity = new University("Zhejiang University", "China");
         Module partnerUniversityModule = new Module("21121340", "Computer Networks", "2.5", partnerUniversity);
         University nus = new University("NUS", "Singapore");

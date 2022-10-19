@@ -7,7 +7,7 @@ public class University {
     private String country;
 
     /**
-     * Constructor for new university
+     * Constructor for new university.
      * 
      * @param name    Name of new university
      * @param country Country of new university
@@ -44,7 +44,7 @@ public class University {
     }
 
     /**
-     * Checks if university is valid
+     * Checks if university is valid.
      * 
      * @param name    Name of new university
      * @param country Country of new university

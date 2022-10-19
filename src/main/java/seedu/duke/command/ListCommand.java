@@ -4,7 +4,7 @@ public class ListCommand extends Command {
     String listOption;
 
     /**
-     * Create new list command based on the type of list command
+     * Create new list command based on the type of list command.
      * 
      * @param parameters  Information about the new list command
      * @param commandType Type of new list command

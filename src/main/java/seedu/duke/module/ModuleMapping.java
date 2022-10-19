@@ -7,7 +7,7 @@ public class ModuleMapping {
     private Module nusModule;
 
     /**
-     * Constructor for new module mapping
+     * Constructor for new module mapping.
      * 
      * @param partnerUniversityModule Partner university module part of the module
      *                                mapping
@@ -46,7 +46,7 @@ public class ModuleMapping {
     }
 
     /**
-     * Checks if module mapping is valid
+     * Checks if module mapping is valid.
      * 
      * @param partnerUniversityModule Partner university module part of the module
      *                                mapping

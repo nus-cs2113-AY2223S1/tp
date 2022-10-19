@@ -4,7 +4,7 @@ public class ViewCommand extends Command {
     String viewOption;
 
     /**
-     * Create new view command based on the type of view command
+     * Create new view command based on the type of view command.
      * 
      * @param parameters  Information about the new view command
      * @param commandType Type of new view command
