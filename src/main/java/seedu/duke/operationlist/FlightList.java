@@ -47,7 +47,7 @@ public class FlightList extends OperationList {
         String extractedDetail;
         int startIndex = command.indexOf(start) + start.length();
         int endIndex = command.lastIndexOf(end);
-        checkNoDetailsMissing(startIndex,endIndex);
+        checkNoDetailsMissing(startIndex, endIndex);
         extractedDetail = command.substring(startIndex, endIndex).trim();
         if (extractedDetail.equals(EMPTY_STRING)) {
             throw new SkyControlException(ui.getMissingDetailsError());
@@ -65,6 +65,7 @@ public class FlightList extends OperationList {
     public void addOperation(String command) throws SkyControlException {
         checkCommandLength(command.substring(FLIGHT_ADD_COMMAND.length()));
         getFlightDetails(command.substring(FLIGHT_ADD_DELIMITER.length()));
+        validateDetailFormat();
         checkFlightNumberDuplicates();
         checkAvailableGateNumber();
         FlightInfo flight = new FlightInfo(flightNumber, airline, destination,
@@ -144,17 +145,14 @@ public class FlightList extends OperationList {
 
     private void getAirline(String detail) throws SkyControlException {
         airline = extractDetail(detail, AIRLINE_DELIMITER, DESTINATION_DELIMITER).toUpperCase();
-        validateAirlineLength(airline);
     }
 
     private void getDestination(String detail) throws SkyControlException {
         destination = extractDetail(detail, DESTINATION_DELIMITER, DEPARTURE_TIME_DELIMITER).toUpperCase();
-        validateDestinationLength(destination);
     }
 
     private void getDepartureTime(String detail) throws SkyControlException {
         departureTime = extractDetail(detail, DEPARTURE_TIME_DELIMITER, GATE_NUMBER_DELIMITER).toUpperCase();
-        validateTime(departureTime);
     }
 
     private void getGateNumber(String detail) throws SkyControlException {
@@ -168,6 +166,12 @@ public class FlightList extends OperationList {
         if (checkIn.equals(EMPTY_STRING)) {
             throw new SkyControlException(ui.getMissingDetailsError());
         }
+    }
+
+    private void validateDetailFormat() throws SkyControlException {
+        validateAirlineLength(airline);
+        validateDestinationLength(destination);
+        validateTime(departureTime);
         validateCheckIn(checkIn);
     }
 
