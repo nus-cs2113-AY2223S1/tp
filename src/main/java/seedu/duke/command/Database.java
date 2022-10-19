@@ -29,9 +29,6 @@ public class Database {
      * @param newUniversity New university to be added
      */
     public static void addUniversity(University newUniversity) {
-        assert newUniversity.getName().length() > 0 : "New university name cannot be empty";
-        assert newUniversity.getCountry().length() > 0 : "New university country cannot be empty";
-
         if (isNewUniversity(newUniversity)) {
             logger.log(Level.FINE, "New university found, adding to list");
 
@@ -45,19 +42,6 @@ public class Database {
      * @param newModuleMapping New module mapping to be added
      */
     public static void addModuleMapping(ModuleMapping newModuleMapping) {
-        assert newModuleMapping.getPartnerUniversityModule().getCode().length() > 0
-                : "Partner University module code cannot be empty";
-        assert newModuleMapping.getPartnerUniversityModule().getTitle().length() > 0
-                : "Partner University module title cannot be empty";
-        assert newModuleMapping.getPartnerUniversityModule().getCredit().length() > 0
-                : "Partner University module credit cannot be empty";
-        assert newModuleMapping.getNusModule().getCode().length() > 0
-                : "NUS module code cannot be empty";
-        assert newModuleMapping.getNusModule().getTitle().length() > 0
-                : "NUS module title cannot be empty";
-        assert newModuleMapping.getNusModule().getCredit().length() > 0
-                : "NUS module credit cannot be empty";
-
         moduleMappings.add(newModuleMapping);
     }
 
@@ -146,4 +130,6 @@ public class Database {
 
         throw new UniversityNotFoundException("Error! " + universityName + " not found in database");
     }
+
+    
 }

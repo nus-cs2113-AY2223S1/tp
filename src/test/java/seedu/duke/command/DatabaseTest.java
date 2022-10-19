@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.duke.exceptions.InvalidModuleException;
+import seedu.duke.exceptions.InvalidUniversityException;
 import seedu.duke.exceptions.ModuleNotFoundException;
 import seedu.duke.exceptions.UniversityNotFoundException;
 import seedu.duke.module.Module;
@@ -13,7 +15,7 @@ import seedu.duke.university.University;
 
 public class DatabaseTest {
     @Test
-    void addModuleMapping_validModuleMapping_correctString() {
+    void addModuleMapping_validModuleMapping_correctString() throws InvalidUniversityException, InvalidModuleException{
         University partnerUniversity = new University("Zhejiang University", "China");
         Module partnerUniversityModule = new Module("21121340", "Computer Networks", "2.5", partnerUniversity);
         University nus = new University("NUS", "Singapore");
@@ -29,7 +31,7 @@ public class DatabaseTest {
     }
 
     @Test
-    void addUniversity_validUniversity_correctString() {
+    void addUniversity_validUniversity_correctString() throws InvalidUniversityException {
         University nus = new University("NUS", "Singapore");
 
         Database.addUniversity(nus);
