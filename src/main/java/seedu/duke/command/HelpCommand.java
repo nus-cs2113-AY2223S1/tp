@@ -23,7 +23,6 @@ public class HelpCommand extends Command {
     public static final String SELECT_SLOT_COMMAND_USAGE = SelectSlotCommand.COMMAND_WORD
             + ": select /module [MODULE_CODE] /type [LESSON_TYPE] /code [CLASS_NO] - select slot for modules!\n";
 
-
     public static final String HELP_DISPLAY_MESSAGE = HELP_MODULE_COMMAND_USAGE
             + ADD_MODULE_COMMAND_USAGE
             + DELETE_MODULE_COMMAND_USAGE

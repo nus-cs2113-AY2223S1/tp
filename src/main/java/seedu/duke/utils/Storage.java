@@ -281,7 +281,7 @@ public class Storage {
         if (file.getParentFile().mkdirs()) {
             file.createNewFile();
         }
-
+        // to
         StringBuilder toSave = new StringBuilder();
         toSave.append(DOMAIN);
         toSave.append(SEMESTER_DELIMITER);
@@ -292,6 +292,8 @@ public class Storage {
         appendModules(selectedModules, toSave);
         ui.addMessage(EXPORT_MESSAGE);
         ui.addMessage(String.valueOf(toSave));
+        // create the NUSMod link
+
         ui.displayUi();
         FileWriter fw = new FileWriter(file);
         fw.write(String.valueOf(toSave));

@@ -5,12 +5,12 @@ import seedu.duke.command.Command;
 import seedu.duke.command.DeleteModuleCommand;
 import seedu.duke.command.ExitCommand;
 import seedu.duke.command.HelpCommand;
-import seedu.duke.command.IncompleteCommand;
-import seedu.duke.command.InvalidModuleCommand;
-import seedu.duke.command.UnknownCommand;
 import seedu.duke.command.ViewTimetableCommand;
 import seedu.duke.command.SelectSlotCommand;
 import seedu.duke.command.SearchModuleCommand;
+import seedu.duke.exceptions.IncompleteCommandException;
+import seedu.duke.exceptions.InvalidModuleException;
+import seedu.duke.exceptions.UnknownCommandException;
 
 import java.util.Map;
 import java.util.TreeMap;
@@ -18,7 +18,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Parser {
-    public static Command parse(String userInput) {
+    public static Command parse(String userInput) throws Exception {
         String[] keywords = userInput.split("\\s+");
         switch (keywords[0]) {
         case (SearchModuleCommand.COMMAND_WORD):
@@ -36,7 +36,7 @@ public class Parser {
         case (ExitCommand.COMMAND_WORD):
             return viewHelpExitCommand(keywords, new ExitCommand(keywords));
         default:
-            return new UnknownCommand(keywords);
+            throw new UnknownCommandException();
         }
     }
 
@@ -110,30 +110,36 @@ public class Parser {
      * @param command  the command that the user wants to execute
      * @return type of command
      */
-    public static Command addDeleteCommand(String[] keywords, Command command) {
+    public static Command addDeleteCommand(String[] keywords, Command command) throws Exception {
+
+        try {
+            determineWrongCommand(keywords);
+        } catch (Exception e){
+            throw e;
+        }
+
         if (isValidTwoWordCommand(keywords)) {
             return command;
         } else {
-            // System.out.println("Invalid module code");
-            return determineWrongCommand(keywords);
+            throw new UnknownCommandException();
         }
     }
 
-    private static Command determineWrongCommand(String[] keywords) {
+    private static void determineWrongCommand(String[] keywords) throws Exception {
         if (isOneWordCommand(keywords)) {
-            return new IncompleteCommand(keywords);
+            throw new IncompleteCommandException();
         } else if (isTwoWordsCommand(keywords) && !isValidModuleCode(keywords[1])) {
-            return new InvalidModuleCommand(keywords);
+            throw new InvalidModuleException();
         } else {
-            return new UnknownCommand(keywords);
+            throw new UnknownCommandException();
         }
     }
 
-    public static Command viewHelpExitCommand(String[] keywords, Command command) {
+    public static Command viewHelpExitCommand(String[] keywords, Command command) throws UnknownCommandException{
         if (isOneWordCommand(keywords)) {
             return command;
         } else {
-            return new UnknownCommand(keywords);
+            throw new UnknownCommandException();
         }
     }
 

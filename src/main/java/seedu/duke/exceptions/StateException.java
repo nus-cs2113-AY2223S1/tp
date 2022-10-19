@@ -1,8 +1,10 @@
 package seedu.duke.exceptions;
 
 public class StateException extends Exception {
+    private static final String ERROR_MESSAGE = "State dummy exception";
+
     @Override
     public String getMessage() {
-        return "State dummy exception";
+        return ERROR_MESSAGE;
     }
 }
