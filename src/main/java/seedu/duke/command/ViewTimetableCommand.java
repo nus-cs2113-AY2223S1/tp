@@ -39,7 +39,7 @@ public class ViewTimetableCommand extends Command {
             ui.displayUi();
             return;
         }
-        Timetable timetable = new Timetable(lessons);
+        Timetable timetable = new Timetable(lessons, false, true);
         ui.addMessage(timetable.toString());
         ui.displayUi();
     }
