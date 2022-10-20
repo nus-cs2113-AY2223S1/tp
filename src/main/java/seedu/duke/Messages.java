@@ -172,12 +172,15 @@ public class Messages {
 
     public static final String MESSAGE_INVALID_FIND_SUBCOMMANMD = "OOPS!!! You are either missing a subcommand or your"
             + " subcommand might in the wrong location. Please re-type in the correct format as shown below:"
-            + "\n    find -client f/Doja Cat";
+            + "\n    find -client f/Doja Cat"
+            + "\n    find -property f/Dover Cresent";
 
     public static final String MESSAGE_FIND_NO_DESCRIPTION = "OOPS!!! Seems like you forgot to include a tag."
             + " Please include a tag 'f/' along with the text you would like to find.";
 
     public static final String MESSAGE_FIND_INVALID_FLAG = "OOPS!!! Please ensure you only have 'f/' flag.";
 
-    public static final String MESSAGE_NO_MATCHES = "There is no client that fits within your query.";
+    public static final String MESSAGE_NO_CLIENT_MATCHES = "There is no client that fits within your query.";
+
+    public static final String MESSAGE_NO_PROPERTY_MATCHES = "There is no property that fits within your query.";
 }

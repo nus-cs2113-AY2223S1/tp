@@ -7,7 +7,7 @@ import seedu.duke.PropertyList;
 import seedu.duke.Storage;
 import seedu.duke.Ui;
 
-import static seedu.duke.Messages.MESSAGE_NO_MATCHES;
+import static seedu.duke.Messages.MESSAGE_NO_CLIENT_MATCHES;
 
 
 public class CommandFindClient extends Command {
@@ -38,7 +38,7 @@ public class CommandFindClient extends Command {
 
         // Display to user that there is no match
         if (hasNoMatches) {
-            ui.showToUser(MESSAGE_NO_MATCHES);
+            ui.showToUser(MESSAGE_NO_CLIENT_MATCHES);
         }
     }
 
