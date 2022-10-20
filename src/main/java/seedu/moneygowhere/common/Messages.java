@@ -59,6 +59,8 @@ public class Messages {
             + "File does not exist or Path is wrong :(";
     public static final String LOCAL_STORAGE_ERROR_WRITING_DATA = ""
             + "There is an error in writing data to save file.";
+    public static final String LOCAL_STORAGE_MERGE_EXTERNAL_DATA = ""
+            + "External File loaded successfully :)";
 
     /**
      * Defines messages for {@link seedu.moneygowhere.currency.CurrencyApi }.
@@ -437,4 +439,19 @@ public class Messages {
     public static final String CONSOLE_ERROR_COMMAND_VIEW_RECURRING_PAYMENT_INVALID = ""
             + "The arguments entered are invalid. "
             + CONSOLE_COMMAND_VIEW_RECURRING_PAYMENT_SYNTAX;
+
+    /**
+     * Defines messages for console command Merge-File.
+     */
+    public static final String CONSOLE_COMMAND_MERGE_EXTERNAL_FILE_SYNTAX = ""
+            + "SYNTAX: "
+            + ConsoleParserConfigurations.COMMAND_MERGE_EXTERNAL_FILE
+            + " -"
+            + ConsoleParserConfigurations.COMMAND_MERGE_EXTERNAL_FILE_ARG_MERGE_EXTERNAL_FILE_PATH
+            + " "
+            + ConsoleParserConfigurations.COMMAND_MERGE_EXTERNAL_FILE_ARG_MERGE_EXTERNAL_FILE_PATH_LONG.toUpperCase()
+            + "";
+    public static final String CONSOLE_ERROR_COMMAND_MERGE_EXTERNAL_FILE_INVALID = ""
+            + "The arguments entered are invalid. "
+            + CONSOLE_COMMAND_MERGE_EXTERNAL_FILE_SYNTAX;
 }

@@ -11,6 +11,7 @@ import seedu.moneygowhere.commands.ConsoleCommandDeleteExpense;
 import seedu.moneygowhere.commands.ConsoleCommandDeleteTarget;
 import seedu.moneygowhere.commands.ConsoleCommandEditExpense;
 import seedu.moneygowhere.commands.ConsoleCommandEditTarget;
+import seedu.moneygowhere.commands.ConsoleCommandMergeExternalFile;
 import seedu.moneygowhere.commands.ConsoleCommandSortExpense;
 import seedu.moneygowhere.commands.ConsoleCommandViewExpense;
 import seedu.moneygowhere.commands.ConsoleCommandViewTarget;
@@ -41,6 +42,7 @@ import seedu.moneygowhere.exceptions.ConsoleParserCommandSortExpenseInvalidExcep
 import seedu.moneygowhere.exceptions.ConsoleParserCommandViewExpenseInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandViewTargetInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandViewRecurringPaymentInvalidException;
+import seedu.moneygowhere.exceptions.ConsoleParserCommandMergeExternalFileInvalidException;
 import seedu.moneygowhere.exceptions.CurrencyInvalidException;
 import seedu.moneygowhere.exceptions.ExpenseManagerExpenseNotFoundException;
 import seedu.moneygowhere.exceptions.TargetManagerTargetNotFoundException;
@@ -633,6 +635,12 @@ public class ConsoleInterface {
         }
     }
 
+    private void runCommandMergeExternalFile(ConsoleCommandMergeExternalFile consoleCommandMergeExternalFile) {
+        String filePath = consoleCommandMergeExternalFile.getFilePath();
+
+        localStorage.loadFromExternalFile(expenseManager, filePath);
+    }
+
     private ConsoleCommand getConsoleCommand() {
         String consoleInput = getConsoleInput();
 
@@ -654,7 +662,8 @@ public class ConsoleInterface {
                  | ConsoleParserCommandEditTargetInvalidException
                  | ConsoleParserCommandAddIncomeInvalidException
                  | ConsoleParserCommandAddRecurringPaymentInvalidException
-                 | ConsoleParserCommandViewRecurringPaymentInvalidException exception) {
+                 | ConsoleParserCommandViewRecurringPaymentInvalidException
+                 | ConsoleParserCommandMergeExternalFileInvalidException exception) {
             printErrorMessage(exception.getMessage());
         }
 
@@ -700,6 +709,8 @@ public class ConsoleInterface {
                 runCommandAddRecurringPayment((ConsoleCommandAddRecurringPayment) consoleCommand);
             } else if (consoleCommand instanceof ConsoleCommandViewRecurringPayment) {
                 runCommandViewRecurringPayment((ConsoleCommandViewRecurringPayment) consoleCommand);
+            } else if (consoleCommand instanceof ConsoleCommandMergeExternalFile) {
+                runCommandMergeExternalFile((ConsoleCommandMergeExternalFile) consoleCommand);
             }
 
             printBlankLine();

@@ -155,7 +155,6 @@ public class LocalStorage {
                 expenseManager.addExpense(loadExpense);
             }
         } catch (FileNotFoundException e) {
-            initialiseFile();
             System.out.println(Messages.LOCAL_STORAGE_ERROR_NO_LOAD_FILE);
         } catch (SAXException | IOException | ParserConfigurationException e) {
             System.out.println(Messages.LOCAL_STORAGE_ERROR_CORRUPTED_OR_EMPTY_LOAD_FILE);

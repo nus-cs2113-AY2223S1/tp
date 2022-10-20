@@ -336,6 +336,24 @@ public class ConsoleParserConfigurations {
             + "Command View-RecurringPayment does not have all of the required options.";
 
     /**
+     * Defines parameters for console command Merge-file.
+     */
+    public static final String COMMAND_MERGE_EXTERNAL_FILE = ""
+            + "Merge-file";
+    public static final String COMMAND_MERGE_EXTERNAL_FILE_ARG_MERGE_EXTERNAL_FILE_PATH = ""
+            + "p";
+    public static final String COMMAND_MERGE_EXTERNAL_FILE_ARG_MERGE_EXTERNAL_FILE_PATH_LONG = ""
+            + "path";
+    public static final String COMMAND_MERGE_EXTERNAL_FILE_ARG_MERGE_EXTERNAL_FILE_PATH_DESC = ""
+            + "File Path";
+    public static final boolean COMMAND_MERGE_EXTERNAL_FILE_ARG_MERGE_EXTERNAL_FILE_PATH_HAS_VAL =
+            true;
+    public static final boolean COMMAND_MERGE_EXTERNAL_FILE_ARG_MERGE_EXTERNAL_FILE_PATH_IS_MAND =
+            true;
+    public static final String COMMAND_MERGE_EXTERNAL_FILE_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS = ""
+            + "Command Merge-file does not have all of the required options.";
+
+    /**
      * Generates an {@link Options} object with required arguments for command Add-Expense.
      *
      * @return {@link Options} object initialized with the required arguments.
@@ -838,6 +856,26 @@ public class ConsoleParserConfigurations {
 
         Options options = new Options();
         options.addOption(optionRecurringPaymentIndex);
+
+        return options;
+    }
+
+    /**
+     * Generates an {@link Options} object with required arguments for command Merge-File.
+     *
+     * @return {@link Options} object initialized with the required arguments.
+     */
+    public static Options getCommandMergeExternalFileOptions() {
+        Option optionMergeFilePath = new Option(
+                COMMAND_MERGE_EXTERNAL_FILE_ARG_MERGE_EXTERNAL_FILE_PATH,
+                COMMAND_MERGE_EXTERNAL_FILE_ARG_MERGE_EXTERNAL_FILE_PATH_LONG,
+                COMMAND_MERGE_EXTERNAL_FILE_ARG_MERGE_EXTERNAL_FILE_PATH_HAS_VAL,
+                COMMAND_MERGE_EXTERNAL_FILE_ARG_MERGE_EXTERNAL_FILE_PATH_DESC
+        );
+        optionMergeFilePath.setRequired(COMMAND_MERGE_EXTERNAL_FILE_ARG_MERGE_EXTERNAL_FILE_PATH_IS_MAND);
+
+        Options options = new Options();
+        options.addOption(optionMergeFilePath);
 
         return options;
     }
