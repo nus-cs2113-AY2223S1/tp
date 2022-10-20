@@ -16,7 +16,6 @@ public class TvShowTest {
         assertEquals("Friends", assertTvShow.title);
         assertEquals(5.0, assertTvShow.rating);
         assertEquals("Sitcom", assertTvShow.genre);
-        assertEquals("25 Aug 2022", assertTvShow.dateWatched);
         assertEquals("Netflix", assertTvShow.site);
     }
 }

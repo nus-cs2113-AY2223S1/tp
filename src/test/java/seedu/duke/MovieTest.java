@@ -16,7 +16,6 @@ public class MovieTest {
         assertEquals("Harry Potter",assertMovie.title);
         assertEquals(5.0,assertMovie.rating);
         assertEquals("SciFi", assertMovie.genre);
-        assertEquals("10-01-2020",assertMovie.dateWatched);
     }
 
     @Test
