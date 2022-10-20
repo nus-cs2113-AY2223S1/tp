@@ -28,7 +28,6 @@ class FindCommand {
     -listDelimiter: String
     #searchTerm: String
     +FindCommand(reviews: ReviewList, searchTerm: String)
-
 }
 
 class ListCommand {

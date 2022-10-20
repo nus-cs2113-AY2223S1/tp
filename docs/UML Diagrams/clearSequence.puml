@@ -1,0 +1,15 @@
+@startuml
+!include style.puml
+
+hide footbox
+
+participant Parser
+
+create "executor:\nClearCommand"
+Parser -> "executor:\nClearCommand" : executeClear()
+"executor:\nClearCommand" --> Parser: output: String
+
+participant Ui
+Parser -> Ui : print(output)
+
+@enduml

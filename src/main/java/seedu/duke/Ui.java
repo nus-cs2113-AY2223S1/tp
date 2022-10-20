@@ -10,12 +10,12 @@ public class Ui {
     protected boolean isExit;
     
     public void greetUser() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Welcome to your Movie Reviews bot,\n" + logo);
+        String logo = " ____        _        " + System.lineSeparator()
+                + "|  _ \\ _   _| | _____ " + System.lineSeparator()
+                + "| | | | | | | |/ / _ \\" + System.lineSeparator()
+                + "| |_| | |_| |   <  __/" + System.lineSeparator()
+                + "|____/ \\__,_|_|\\_\\___|" + System.lineSeparator();
+        System.out.println("Welcome to your Movie Reviews bot," + System.lineSeparator() + logo);
         logger.log(Level.INFO, "Greeted User");
     }
 
@@ -34,6 +34,7 @@ public class Ui {
         return userInput;
     }
 
+    //@@author naz019
     public static void print(String toPrint) {
         System.out.println(toPrint);
     }
