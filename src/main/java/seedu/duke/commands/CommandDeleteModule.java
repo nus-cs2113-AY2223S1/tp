@@ -47,10 +47,7 @@ public class CommandDeleteModule {
 
             isTryAgain = true;
 
-
             lgr.fine("Delete Module command run successful, no runtime error");
-
-
         }
         return "Successfully deleted module!";
     }
@@ -67,5 +64,5 @@ public class CommandDeleteModule {
         }
         return true;
     }
-
+    // code from Chee Heng
 }
