@@ -1,5 +1,6 @@
 package seedu.duke;
 
+//@@author naz019
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,6 +24,7 @@ public class Parser {
     private Commands executor;
     private ReviewList mediaList;
 
+    //@@author naz019
     private static Logger logger = Logger.getLogger("ParserClass");
 
     public Parser(ReviewList reviewList) {
@@ -42,6 +44,7 @@ public class Parser {
         
         String[] words = userInput.split(" ");
 
+        //@@author naz019
         assert words[0] != null : "words[0] is supposed to contain user command";
 
         switch (words[0]) {
@@ -79,6 +82,7 @@ public class Parser {
         case NT:
         
         default:
+            //@@author naz019
             logger.log(Level.WARNING, "An unrecognised command was given by the user.");
             System.out.println("Unrecognised command");
             break;

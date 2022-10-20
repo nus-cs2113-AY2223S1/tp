@@ -34,6 +34,7 @@ public class Ui {
         return userInput;
     }
 
+    //@@author naz019
     public static void print(String toPrint) {
         System.out.println(toPrint);
     }

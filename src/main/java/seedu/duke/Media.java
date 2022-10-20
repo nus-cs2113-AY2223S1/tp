@@ -15,7 +15,7 @@ public class Media {
     public String genre;
     public Date dateWatched;
     public String dateString;
-    public boolean favourite = false;
+    public boolean isFavourite = false;
 
     public Date getDateWatched() {
         return dateWatched;
@@ -34,11 +34,11 @@ public class Media {
     }
 
     public boolean isFavourite() {
-        return favourite;
+        return isFavourite;
     }
 
     public void setFavourite(boolean favourite) {
-        this.favourite = favourite;
+        this.isFavourite = favourite;
     }
 
 
