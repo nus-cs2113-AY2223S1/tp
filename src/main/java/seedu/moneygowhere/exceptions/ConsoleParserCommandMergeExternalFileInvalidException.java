@@ -4,7 +4,7 @@ package seedu.moneygowhere.exceptions;
  * Thrown when the command view-recurringpayment is invalid.
  */
 @SuppressWarnings("unused")
-public class ConsoleParserCommandMergeExternalFileInvalidException extends MoneyGoWhereException{
+public class ConsoleParserCommandMergeExternalFileInvalidException extends MoneyGoWhereException {
     public ConsoleParserCommandMergeExternalFileInvalidException() {
     }
 

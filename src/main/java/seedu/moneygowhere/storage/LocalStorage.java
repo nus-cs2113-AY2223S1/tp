@@ -298,14 +298,14 @@ public class LocalStorage {
             sortConfig.setAttribute(XML_SORTCONFIG_TYPE_ATTRIBUTE, sortCommandSetting.getType());
             sortConfig.setAttribute(XML_SORTCONFIG_ORDER_ATTRIBUTE, sortCommandSetting.getOrder());
             rootElement.appendChild(sortConfig);
-            parseExpenseToXML(doc, rootElement, savedExpenses);
+            parseExpenseToXml(doc, rootElement, savedExpenses);
             writeXml(doc);
         } catch (ParserConfigurationException | TransformerException e) {
             System.out.println(Messages.LOCAL_STORAGE_ERROR_WRITING_DATA);
         }
     }
 
-    private void parseExpenseToXML(Document doc, Element rootElement, ArrayList<Expense> savedExpenses) {
+    private void parseExpenseToXml(Document doc, Element rootElement, ArrayList<Expense> savedExpenses) {
         int index = 1;
         for (Expense expense : savedExpenses) {
             Element expenseElement = doc.createElement(XML_EXPENSE_ELEMENT);
@@ -334,7 +334,7 @@ public class LocalStorage {
         }
     }
 
-    private void parseTargetToXML(Document doc, Element rootElement, ArrayList<Target> savedTargets) {
+    private void parseTargetToXml(Document doc, Element rootElement, ArrayList<Target> savedTargets) {
         int index = 1;
         for (Target target : savedTargets) {
             Element targetElement = doc.createElement(XML_TARGET_ELEMENT);
@@ -361,7 +361,7 @@ public class LocalStorage {
         }
     }
 
-    private void parseRecurringPaymentToXML(Document doc, Element rootElement,
+    private void parseRecurringPaymentToXml(Document doc, Element rootElement,
                                             ArrayList<RecurringPayment> savedRecurringPayments) {
         int index = 1;
         for (RecurringPayment payment : savedRecurringPayments) {
@@ -386,7 +386,7 @@ public class LocalStorage {
         }
     }
 
-    private void parseIncomeToXML(Document doc, Element rootElement, ArrayList<Income> savedIncomes) {
+    private void parseIncomeToXml(Document doc, Element rootElement, ArrayList<Income> savedIncomes) {
         int index = 1;
         for (Income income : savedIncomes) {
             Element incomeElement = doc.createElement(XML_INCOME_ELEMENT);

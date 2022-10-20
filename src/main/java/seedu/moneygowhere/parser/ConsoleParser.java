@@ -1490,10 +1490,10 @@ public class ConsoleParser {
 
     private static ConsoleCommandMergeExternalFile parseCommandMergeExternalFileValues(
             CommandLine commandLine) {
-            String filePath = commandLine.getOptionValue(
-                    ConsoleParserConfigurations.COMMAND_MERGE_EXTERNAL_FILE_ARG_MERGE_EXTERNAL_FILE_PATH_LONG
-            );
-            return new ConsoleCommandMergeExternalFile(filePath);
+        String filePath = commandLine.getOptionValue(
+                ConsoleParserConfigurations.COMMAND_MERGE_EXTERNAL_FILE_ARG_MERGE_EXTERNAL_FILE_PATH_LONG
+        );
+        return new ConsoleCommandMergeExternalFile(filePath);
     }
 
     private static ConsoleCommandMergeExternalFile normalizeCommandMergeExternalFileValues(
