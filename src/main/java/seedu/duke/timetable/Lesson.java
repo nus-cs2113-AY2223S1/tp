@@ -42,11 +42,22 @@ public class Lesson extends Module {
         this.endTime = endTime;
     }
 
+    /**
+     * Checks if the day for a lesson is valid.
+     *
+     * @return True if the day for a lesson is one of five weekdays.
+     */
     boolean isValidDay() {
         return day.equals("monday") || day.equals("tuesday") || day.equals("wednesday")
                 || day.equals("thursday") || day.equals("friday");
     }
 
+    /**
+     * Checks if the input start time for a lesson is in valid format.
+     *
+     * @return True if the input start time for a lesson is valid.
+     * @throws InvalidTimeFormatException if the input start time for a lesson is invalid.
+     */
     boolean isValidStartTime() throws InvalidTimeFormatException {
         try {
             int startTimeAsInt = Integer.parseInt(startTime);
@@ -60,6 +71,12 @@ public class Lesson extends Module {
         return false;
     }
 
+    /**
+     * Checks if the input end time for a lesson is in valid format.
+     *
+     * @return True if the input end time for a lesson is valid.
+     * @throws InvalidTimeFormatException if the input end time for a lesson is invalid.
+     */
     boolean isValidEndTime() throws InvalidTimeFormatException {
         try {
             int endTimeAsInt = Integer.parseInt(endTime);
