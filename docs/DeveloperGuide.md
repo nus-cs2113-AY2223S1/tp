@@ -29,20 +29,18 @@
 [Appendix D: Glossary](#appendix-d-glossary) <br>
 [Appendix E: Acknowledgements](#appendix-e-acknowledgements) <br>
 
-
 ## 1. Introduction
 
 ### 1.1. Welcome!
 
 Welcome, and thank you for choosing to help contribute to Yet Another Module Organiser/ Manager!
-Yet Another Module Organizer and Manager (YAMOM) is an all-in-one desktop app featuring 
+Yet Another Module Organizer and Manager (YAMOM) is an all-in-one desktop app featuring
 a full course catalogue, module search and timetable builder for the National University of Singapore, optimized for use via a Command Line Interface.
 
-This document intends to onboard developers onto YAMOM. We hope to bring you in to fix bugs, or even adding 
+This document intends to onboard developers onto YAMOM. We hope to bring you in to fix bugs, or even adding
 new features and dimensions to YAMOM!
-It gives insights on how the project is set up, the architecture used, 
+It gives insights on how the project is set up, the architecture used,
 and the code style one should adopt when contributing to the project.
-
 
 ## 2. Setting up
 
@@ -71,10 +69,8 @@ This section describes the development tools used in the creation of YAMOM.
 In IntelliJ's IDEA we adopt [[se-edu/guides] IDEA: Configuring the code style](https://se-education.org/guides/tutorials/intellijCodeStyle.html)
 to set up IDEA’s coding style to match ours.
 
->Optionally, you can follow the guide [[se-edu/guides] Using Checkstyle](https://se-education.org/guides/tutorials/checkstyle.html)
->to find how to use the CheckStyle within IDEA e.g., to report problems as you write code.
-
-
+> Optionally, you can follow the guide [[se-edu/guides] Using Checkstyle](https://se-education.org/guides/tutorials/checkstyle.html)
+> to find how to use the CheckStyle within IDEA e.g., to report problems as you write code.
 
 ## 3. Design
 
@@ -82,14 +78,22 @@ to set up IDEA’s coding style to match ours.
 
 ### 3.1 Architecture
 
-**How the architecture components interact with each other**   
+**How the architecture components interact with each other**
+
+Core program flow is managed by the Duke class. The Duke class delegates work to the Ui class to handle user input.
+
+User input is passed to the Parser class to parse the input as a command.
+
+Each command subclass handles its own execution.
 
 <code>Storage</code>: Reads and writes data to the hard disk in a NUSMods export link format.
 
 ### 3.2 Model Component
 
 ### 3.3 Parser Component
+
 The <code>Parser</code> component can:
+
 - return the correct command type based on user input.
 
 ### 3.4 Command Component
@@ -181,19 +185,25 @@ details for 1 module.
 #### 3.5.2 Link Component
 
 #### 3.5.3 Storage Component
-![Storage Class](\..\docs\images\storageClass.png) 
 
-The <code>Storage</code> component can:  
-- read from the hard disk a single line which is supposed to be a NUSMods export link 
+![Storage Class](..\docs\images\storageClass.png)
+
+The <code>Storage</code> component can:
+
+- read from the hard disk a single line which is supposed to be a NUSMods export link
 - save to the hard disk
 
 Different checks have been implemented to ensure that even
 if the data file is modified in any way, it would not crash the programme.
 
 ##### Why it is implemented this way
+
 To facilitate easy transfer of information from NUSMods to YAMOM.
+
 ##### Alternatives considered
+
 Storing as <code>.json</code> file
+
 - would not be readable by the user
 - would have to implement another function for export/import function
 
@@ -203,7 +213,7 @@ This section describes how key features of YAMOM are implemented in the latest r
 
 ### Storage feature
 
-!["Opening saved state"](\..\docs\images\storageOpenPreviousState.png)  
+!["Opening saved state"](..\docs\images\storageOpenPreviousState.png)  
 When the application starts up, the storage openPreviousState function will be called
 to load previous state
 
@@ -231,22 +241,17 @@ code as far as possible.
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
 
-
-
 ## Appendix A: Product scope
-
 
 ## Appendix B: User Stories
 
 | Version | As a ... | I want to ...                                      | So that I can ...                               |
-|---------|----------|----------------------------------------------------|-------------------------------------------------|
+| ------- | -------- | -------------------------------------------------- | ----------------------------------------------- |
 | v1.0    | student  | search for modules by module code, name or faculty | quickly add them to my planner                  |
 | v1.0    | new user | view my timetable                                  | visualise my school schedule                    |
 | v1.0    | new user | add and remove modules to my planner               | customise and organise my modules this semester |
 | v1.0    | new user | view a short description of each module            | plan what modules to take                       |
-
-
-
+| v1.0    | student  | select timetable slots                             | plan my schedule                                |
 
 ## Appendix C: Non-Functional Requirements
 
@@ -254,8 +259,13 @@ code as far as possible.
 
 ## Appendix D: Glossary
 
-* *glossary item* - Definition
+- _glossary item_ - Definition
 
 ## Appendix E: Acknowledgements
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+
+### Third-party libraries
+
+- Jackson Databind 2.14.0-rc1 [maven](https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind)
+- Apache Common Langs 3.12.0 [maven](https://mvnrepository.com/artifact/org.apache.commons/commons-lang3)
