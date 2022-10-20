@@ -339,11 +339,11 @@ public class ConsoleParserConfigurations {
      * Defines parameters for console command Merge-file.
      */
     public static final String COMMAND_MERGE_EXTERNAL_FILE = ""
-            + "Merge-file";
+            + "Merge-File";
     public static final String COMMAND_MERGE_EXTERNAL_FILE_ARG_MERGE_EXTERNAL_FILE_PATH = ""
             + "p";
     public static final String COMMAND_MERGE_EXTERNAL_FILE_ARG_MERGE_EXTERNAL_FILE_PATH_LONG = ""
-            + "path";
+            + "path-string";
     public static final String COMMAND_MERGE_EXTERNAL_FILE_ARG_MERGE_EXTERNAL_FILE_PATH_DESC = ""
             + "File Path";
     public static final boolean COMMAND_MERGE_EXTERNAL_FILE_ARG_MERGE_EXTERNAL_FILE_PATH_HAS_VAL =

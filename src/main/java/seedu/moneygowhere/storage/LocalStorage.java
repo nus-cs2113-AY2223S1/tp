@@ -116,6 +116,7 @@ public class LocalStorage {
                 expenseManager.addExpense(loadExpense);
             }
             expenseManager.updateSortExpenses(defaultSortCommandSetting);
+            System.out.println(Messages.LOCAL_STORAGE_LOAD_SUCCESS);
         } catch (FileNotFoundException e) {
             initialiseFile();
             System.out.println(Messages.LOCAL_STORAGE_ERROR_NO_LOAD_FILE);
@@ -154,6 +155,7 @@ public class LocalStorage {
                 loadExpense = createExpense(node);
                 expenseManager.addExpense(loadExpense);
             }
+            System.out.println(Messages.LOCAL_STORAGE_MERGE_EXTERNAL_DATA_SUCCESSFUL);
         } catch (FileNotFoundException e) {
             System.out.println(Messages.LOCAL_STORAGE_ERROR_NO_LOAD_FILE);
         } catch (SAXException | IOException | ParserConfigurationException e) {

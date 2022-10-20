@@ -59,7 +59,7 @@ public class Messages {
             + "File does not exist or Path is wrong :(";
     public static final String LOCAL_STORAGE_ERROR_WRITING_DATA = ""
             + "There is an error in writing data to save file.";
-    public static final String LOCAL_STORAGE_MERGE_EXTERNAL_DATA = ""
+    public static final String LOCAL_STORAGE_MERGE_EXTERNAL_DATA_SUCCESSFUL = ""
             + "External File loaded successfully :)";
 
     /**
