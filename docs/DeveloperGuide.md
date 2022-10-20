@@ -82,6 +82,11 @@ User-facing parts of the program
 
 #### Logic Component
 
+How the authentication works:
+* When the user fails to authenticate his inital `API_KEY`, he can use the `auth` Command to authenticate his `API_KEY`. 
+* If the `API_KEY` is valid, then the program will reload the corresponding JSON file and `fetchData()` from the 
+authenticated API file.
+
 How the parsing works:
 
 * When called upon to parse a user command, the `Parser` class creates an `ABCCommandParser` (`ABC` is a placeholder 
