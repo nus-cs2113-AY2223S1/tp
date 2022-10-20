@@ -35,6 +35,7 @@ public class Duke {
 
     public static void main(String[] args) {
 
+
         setupLogger();
 
         lgr.info("starting Timetabler program...");
