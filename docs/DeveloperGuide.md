@@ -19,7 +19,7 @@
 
 * The code package command was inspired by a similar package of [@ivanthengwr](https://github.com/ivanthengwr)'s 
 [command package](https://github.com/ivanthengwr/ip/tree/master/src/main/java/duke/command) in his ip. 
-* The style of document in for the developer guide is inspired by the DG of  
+* The style of document in for the developer guide is inspired by the DG of
 [AY2122S1-CS2113T-T10-3](https://github.com/AY2122S1-CS2113T-T10-3/tp/blob/master/docs/DeveloperGuide.md#purpose-of-this-guide)
 
 ## Design
@@ -40,7 +40,9 @@ The following sequence diagrams to showcase the list of commands,
 parser() method will not be reflected in order to improve readability.
 
 1. [Delete a passenger feature](#Delete-a-passenger-feature)
-2. [List passengers feature](#List-passengers-feature)
+2. [List passengers feature](#List-passengers-feature)  
+
+---
 
 ### Delete a passenger feature 
 
@@ -88,6 +90,8 @@ When `paser` verifies that the command is an entity `passenger` and `delete` ope
 which in turn would call on `deleteOperation(passengerDetail)` in `PassengerList` class.
 2. Within `deleteOperation(passengerDetail)`, it would loop the arraylist `passengers` obtained from `OperationList`.
 3. If passenger is found, delete object `passenger` from `passengers`. ELse, return without deletion.
+
+---
 
 ### List passengers feature
 
