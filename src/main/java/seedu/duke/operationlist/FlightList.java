@@ -36,6 +36,7 @@ public class FlightList extends OperationList {
 
     protected static int numOfFlights = 0;
 
+    //@@author Franky4566
     public static void checkCommandLength(String description) throws SkyControlException {
         if (description.isEmpty()) {
             throw new SkyControlException(ui.showEmptyDescriptionMessage());
@@ -75,6 +76,7 @@ public class FlightList extends OperationList {
         ui.showFlightAddedMessage();
     }
 
+    //@@author JordanKwua
     @Override
     public void deleteOperation(String detail) {
         boolean isFlightFound;

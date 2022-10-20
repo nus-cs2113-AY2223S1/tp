@@ -311,6 +311,23 @@ public class Ui {
         return "Stop! The boarding time input format is wrong.\n"
                 + "Please try again in 24Hr time format.";
     }
+
+    public String getGateNumberError() {
+        return "Stop! The gate number input format is wrong.\n"
+                + "Gate number should be a digit and not more than 99, please try again.";
+    }
+
+    public String getBoardingGroupError() {
+        return "Stop! The boarding group input format is wrong.\n"
+                + "Boarding group should not be more than 10 and should be in digit form,\n"
+                + "please try again.";
+    }
+
+    public String getSeatNumberError() {
+        return "Stop! The Seat Number input format is wrong.\n"
+                + "Seat number should range between 00A to 99Z,\n"
+                + "please try again.";
+    }
 }
 
 
