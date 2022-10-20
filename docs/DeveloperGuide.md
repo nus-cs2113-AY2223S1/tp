@@ -85,6 +85,8 @@ Parsing, commands
 
 ### Favourite / Unfavourite feature
 
+![Favourite Class Diagram](images/FavouriteClassDiagram.png)
+
 #### Implementation
 
 The favourite / unfavourite feature is implemented with the Favourite class.
