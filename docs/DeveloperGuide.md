@@ -27,7 +27,6 @@ The sequence diagram below illustrates this add mechanism:
 
 ![AddUML.png](AddUML.png)
 
-
 ### Deletion feature
 
 The deletion mechanism is facilitated by 'Parser', 'Add', 'ModuleList' and 'UI', where a Module object will be deleted according to the module code inputted by the user and removed from the module list.
@@ -44,14 +43,27 @@ The sequence diagram below illustrates this delete mechanism:
 
 ![DeleteUML.png](DeleteUML.png)
 
-
 ### View feature
 
-blah blah by insuf
+The View mechanism is facilitated by 'Parser', 'View', 'ModuleList', and 'UI', where the user enters
+a semester and the total number of mcs taken that semester is calculated and displayed.
 
+Below is an example usage scenario and how the view mechanism behaves at each step.
+
+Step 1: Assume that the user has already added two modules to y2s1:
+The first module is CS2113, a 4 MC module which was added using the following command "add m/cs2113 s/y2s1 mc/4 g/a"
+The second module is CS2030, a 4 MC module which was added using the following command "add m/cs2030 s/y2s1 mc/4 g/a"
+
+Step 2: The user input of "view s/y2s1" will be taken in for the parser and an object of class 'View' will be returned.
+
+Step 3: The execute method of View class that is overrides will be called with parameter of the semester and will iterate through
+the moduleList. If the semester in which a particular module is taken matches the semester given as the argument, then the module will be added to an ArrayList called matchingModules. In the end, the arrayList matchingModules will be returned.
+
+The sequence diagram below illustrates this view mechanism.
+
+![viewUML.png](viewUML.png)
 
 ### Mcs feature
-
 
 The mcs mechanism is facilitated by 'Parser', 'Mcs', 'ModuleList', and 'UI', where the user enters
 a semester and the total number of mcs taken that semester is calculated and displayed. 
