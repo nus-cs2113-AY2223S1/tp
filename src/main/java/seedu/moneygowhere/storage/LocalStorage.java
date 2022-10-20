@@ -154,7 +154,6 @@ public class LocalStorage {
      * @param sortCommandSetting configurations for sorting
      */
     public void saveToFile(ArrayList<Expense> savedExpenses, ConsoleCommandSortExpense sortCommandSetting) {
-        Integer index = 1;
         try {
             DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
@@ -165,34 +164,39 @@ public class LocalStorage {
             sortConfig.setAttribute(XML_SORTCONFIG_TYPE_ATTRIBUTE, sortCommandSetting.getType());
             sortConfig.setAttribute(XML_SORTCONFIG_ORDER_ATTRIBUTE, sortCommandSetting.getOrder());
             rootElement.appendChild(sortConfig);
-            for (Expense expense : savedExpenses) {
-                Element expenseElement = doc.createElement(XML_EXPENSE_ELEMENT);
-                expenseElement.setAttribute(XML_EXPENSE_ID_ATTRIBUTE, index.toString());
-                rootElement.appendChild(expenseElement);
-                Element name = doc.createElement(XML_EXPENSE_NAME_ELEMENT);
-                name.setTextContent(expense.getName());
-                expenseElement.appendChild(name);
-                Element dateTime = doc.createElement(XML_EXPENSE_DATETIME_ELEMENT);
-                dateTime.setTextContent(expense.getDateTime().toString());
-                expenseElement.appendChild(dateTime);
-                Element description = doc.createElement(XML_EXPENSE_DESCRIPTION_ELEMENT);
-                description.setTextContent(expense.getDescription());
-                expenseElement.appendChild(description);
-                Element amount = doc.createElement(XML_EXPENSE_AMOUNT_ELEMENT);
-                amount.setAttribute(XML_EXPENSE_AMOUNT_CURRENCY_ATTRIBUTE, expense.getCurrency());
-                amount.setTextContent(expense.getAmount().toString());
-                expenseElement.appendChild(amount);
-                Element category = doc.createElement(XML_EXPENSE_CATEGORY_ELEMENT);
-                category.setTextContent(expense.getCategory());
-                expenseElement.appendChild(category);
-                Element remark = doc.createElement(XML_EXPENSE_REMARKS_ELEMENT);
-                remark.setTextContent(expense.getRemarks());
-                expenseElement.appendChild(remark);
-                index++;
-            }
+            parseExpenseToXML(doc, rootElement, savedExpenses);
             writeXml(doc);
         } catch (ParserConfigurationException | TransformerException e) {
             System.out.println(Messages.LOCAL_STORAGE_ERROR_WRITING_DATA);
+        }
+    }
+
+    private void parseExpenseToXML(Document doc, Element rootElement, ArrayList<Expense> savedExpenses) {
+        Integer index = 1;
+        for (Expense expense : savedExpenses) {
+            Element expenseElement = doc.createElement(XML_EXPENSE_ELEMENT);
+            expenseElement.setAttribute(XML_EXPENSE_ID_ATTRIBUTE, index.toString());
+            rootElement.appendChild(expenseElement);
+            Element name = doc.createElement(XML_EXPENSE_NAME_ELEMENT);
+            name.setTextContent(expense.getName());
+            expenseElement.appendChild(name);
+            Element dateTime = doc.createElement(XML_EXPENSE_DATETIME_ELEMENT);
+            dateTime.setTextContent(expense.getDateTime().toString());
+            expenseElement.appendChild(dateTime);
+            Element description = doc.createElement(XML_EXPENSE_DESCRIPTION_ELEMENT);
+            description.setTextContent(expense.getDescription());
+            expenseElement.appendChild(description);
+            Element amount = doc.createElement(XML_EXPENSE_AMOUNT_ELEMENT);
+            amount.setAttribute(XML_EXPENSE_AMOUNT_CURRENCY_ATTRIBUTE, expense.getCurrency());
+            amount.setTextContent(expense.getAmount().toString());
+            expenseElement.appendChild(amount);
+            Element category = doc.createElement(XML_EXPENSE_CATEGORY_ELEMENT);
+            category.setTextContent(expense.getCategory());
+            expenseElement.appendChild(category);
+            Element remark = doc.createElement(XML_EXPENSE_REMARKS_ELEMENT);
+            remark.setTextContent(expense.getRemarks());
+            expenseElement.appendChild(remark);
+            index++;
         }
     }
 
