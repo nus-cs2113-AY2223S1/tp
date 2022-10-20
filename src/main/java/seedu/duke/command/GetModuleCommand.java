@@ -38,7 +38,7 @@ public class GetModuleCommand extends Command {
         ui.addMessage("Faculty              : " + (module.faculty.isEmpty() ? "Nil" : module.faculty));
         ui.addMessage("Workload             : " + (module.workload.toString().isEmpty() ? "Nil" : module.workload
                 .toString()));
-        ui.addMessage("semester offering    : " + (module.getSemestersOffering(module).isEmpty() ? "Nil" : module
+        ui.addMessage("Semester offering    : " + (module.getSemestersOffering(module).isEmpty() ? "Nil" : module
                 .getSemestersOffering(module)));
         ui.addMessage("Prerequisite         : " + (module.prerequisite.toString().isEmpty() ? "Nil" : module
                 .prerequisite.toString()));

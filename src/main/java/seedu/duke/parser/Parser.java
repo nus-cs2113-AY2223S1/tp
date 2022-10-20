@@ -26,11 +26,11 @@ public class Parser {
         case (SearchModuleCommand.COMMAND_WORD):
             return searchCommand(userInput);
         case (GetModuleCommand.COMMAND_WORD):
-            return getCommand(keywords);
+            return getAddDeleteCommand(keywords, new GetModuleCommand(keywords));
         case (AddModuleCommand.COMMAND_WORD):
-            return addDeleteCommand(keywords, new AddModuleCommand(keywords));
+            return getAddDeleteCommand(keywords, new AddModuleCommand(keywords));
         case (DeleteModuleCommand.COMMAND_WORD):
-            return addDeleteCommand(keywords, new DeleteModuleCommand(keywords));
+            return getAddDeleteCommand(keywords, new DeleteModuleCommand(keywords));
         case (ViewTimetableCommand.COMMAND_WORD):
             return new ViewTimetableCommand(userInput);
         case (HelpCommand.COMMAND_WORD):
@@ -46,9 +46,14 @@ public class Parser {
         }
     }
 
-    private static Command getCommand(String[] keywords) {
-        return new GetModuleCommand(keywords);
-    }
+    // private static Command getCommand(String[] keywords) {
+    //     if (isValidTwoWordCommand(keywords)) {
+    //         return new GetModuleCommand(keywords);
+    //     } else {
+    //         // System.out.println("Invalid module code");
+    //         return determineWrongCommand(keywords);
+    //     }
+    // }
 
     public static boolean isPartialModuleCode(String moduleCode) {
         Pattern pattern = Pattern.compile("[a-z]{0,3}\\d{0,4}[a-z]?", Pattern.CASE_INSENSITIVE);
@@ -125,7 +130,7 @@ public class Parser {
      * @param command  the command that the user wants to execute
      * @return type of command
      */
-    public static Command addDeleteCommand(String[] keywords, Command command) {
+    public static Command getAddDeleteCommand(String[] keywords, Command command) {
         if (isValidTwoWordCommand(keywords)) {
             return command;
         } else {
