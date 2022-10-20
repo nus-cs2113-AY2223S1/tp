@@ -1,0 +1,39 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+show field
+show methods
+
+
+package Favourite <<Rectangle>> {
+Class Favourite {
+    -favouriteList: ArrayList<String>
+    -directory: String
+    -file: String
+    +Favourite(directory: String, file: String)
+    +setFavourite(carparkId: String)
+    +setUnfavourite(carparkId: String)
+    +updateFavouriteList()
+    +writeFavouriteList()
+    +getCarparkId(input: String) : String
+    +showList() : String
+}
+
+Class FileStorage {
+    -directoryPath: String
+    -filePath: String
+    -file: File
+    -ui: Ui
+    +FileStorage(directory: String, file: String)
+    -checkFileExists()
+    +writeDataToFile(data: String)
+}
+
+
+
+Class HiddenOutside #FFFFFF
+
+Favourite --> "1" FileStorage
+@enduml

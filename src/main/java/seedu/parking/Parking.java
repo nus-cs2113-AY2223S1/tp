@@ -133,7 +133,7 @@ public class Parking {
                 try {
                     String carparkID = find.getCarparkId(input);
                     if (carparkID.equalsIgnoreCase("list")) {
-                        favourite.showList();
+                        ui.print(favourite.showList());
                     } else {
                         Carpark carpark = carparkList.findCarpark(carparkID);
                         favourite.setFavourite(carparkID);

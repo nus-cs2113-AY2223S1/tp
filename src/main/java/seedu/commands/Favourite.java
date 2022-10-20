@@ -13,7 +13,6 @@ import seedu.exception.UnneededArgumentsException;
 import seedu.files.FileReader;
 import seedu.files.FileStorage;
 import seedu.parser.Parser;
-import seedu.ui.Ui;
 
 /**
  * Represents the 'favourite' and 'unfavourite' command to save carparks in a list.
@@ -23,7 +22,6 @@ public class Favourite {
     private ArrayList<String> favouriteList;
     private final String directory;
     private final String file;
-    private final Ui ui;
 
     /**
      * Constructor for favourite class.
@@ -32,7 +30,6 @@ public class Favourite {
      * @param file Filename of the favourite file.
      */
     public Favourite(String directory, String file) {
-        ui = new Ui();
         this.fileStorage = new FileStorage(directory, file);
         this.directory = directory;
         this.file = file;
@@ -125,7 +122,6 @@ public class Favourite {
         StringBuilder result = new StringBuilder();
         for (String id : favouriteList) {
             result.append(id).append("\n");
-            ui.print(id);
         }
         return result.toString();
     }
