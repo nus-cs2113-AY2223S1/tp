@@ -43,10 +43,24 @@ Some of the constraint includes:
 ___
 ## User Stories
 
-|Version| As a ... | I want to ... | So that I can ...|
-|--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+| Version | As a ...         | I want to ...                         | So that I can ...                                                    |
+|---------|------------------|---------------------------------------|----------------------------------------------------------------------|
+| v1.0    | Property Manager | add properties                        | keep track of properties                                             |
+| v1.0    | Property Manager | add clients                           | keep track of clients                                                |
+| v1.0    | Property Manager | delete properties                     | prevent properties I am no longer tracking from cluttering my data   |
+| v1.0    | Property Manager | delete clients                        | prevent clients I am no longer tracking from cluttering my data      |
+| v1.0    | Property Manager | view a list of properties             | find out what and how many properties I manage                       |
+| v1.0    | Property Manager | view a list of clients                | find out what and how many clients I manage                          |
+| v1.0    | Property Manager | check the details of a property       | find out which clients are renting the property                      |
+| v1.0    | Property Manager | pair a client to a property           | record down which client is renting which property                   |
+| v1.0    | Property Manager | unpair a client to a property         | update my rental records when a client is no longer renting property |
+| v1.0    | Property Manager | save my data                          | used the data created from a previous use of the app                 |
+| v1.0    | Property Manager | quit the app                          |                                                                      |
+| v2.0    | Property Manager | check the details of a client         | find out which property the client is renting                        |
+| v2.0    | Property Manager | edit client and property details      | keep my data updated                                                 |
+| v2.0    | Property Manager | search clients using their details    | easily find specific clients                                         |
+| v2.0    | Property Manager | search properties using their details | easily find specific properties                                      |
+
 ___
 ## Design
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
@@ -54,7 +68,7 @@ ___
 ### UI Component
 ### Client Component
 ### Property Component
-### Model Component
+### Pairing Component
 ### Storage Component
 For `Storage` feature:
 
