@@ -1,16 +1,6 @@
 package seedu.duke.parser;
 
-import seedu.duke.command.AddModuleCommand;
-import seedu.duke.command.Command;
-import seedu.duke.command.DeleteModuleCommand;
-import seedu.duke.command.ExitCommand;
-import seedu.duke.command.HelpCommand;
-import seedu.duke.command.IncompleteCommand;
-import seedu.duke.command.InvalidModuleCommand;
-import seedu.duke.command.UnknownCommand;
-import seedu.duke.command.ViewTimetableCommand;
-import seedu.duke.command.SelectSlotCommand;
-import seedu.duke.command.SearchModuleCommand;
+import seedu.duke.command.*;
 
 import java.util.Map;
 import java.util.TreeMap;
@@ -23,6 +13,8 @@ public class Parser {
         switch (keywords[0]) {
         case (SearchModuleCommand.COMMAND_WORD):
             return searchCommand(userInput);
+        case (GetModuleCommand.COMMAND_WORD):
+            return getCommand(keywords);
         case (AddModuleCommand.COMMAND_WORD):
             return addDeleteCommand(keywords, new AddModuleCommand(keywords));
         case (DeleteModuleCommand.COMMAND_WORD):
@@ -38,6 +30,14 @@ public class Parser {
         default:
             return new UnknownCommand(keywords);
         }
+    }
+
+    private static Command getCommand(String[] keywords) {
+        return new GetModuleCommand(keywords);
+    }
+
+    public static Command searchCommand(String userInput) {
+        return new SearchModuleCommand(userInput);
     }
 
     public static boolean isPartialModuleCode(String moduleCode) {
@@ -97,9 +97,7 @@ public class Parser {
         return isTwoWordsCommand(keywords) && isValidModuleCode(keywords[1]);
     }
 
-    public static Command searchCommand(String userInput) {
-        return new SearchModuleCommand(userInput);
-    }
+
 
     /**
      * Checks if the user entered a valid search or add or delete command in the
