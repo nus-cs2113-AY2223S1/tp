@@ -4,10 +4,18 @@
 
 AddressBook-Level3 https://github.com/se-edu/addressbook-level3
 
-## Design & implementation
-
+## Design
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+### Ui component
+![img_1.png](imgs/commandsUML.png)
 
+### Commands component
+![img.png](imgs/uiUML.png)
+
+
+## Implementation
+### Clearing the review list
+![img.png](imgs/clearSequence.png)
 
 ## Product scope
 ### Target user profile
