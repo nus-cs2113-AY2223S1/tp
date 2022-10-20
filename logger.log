@@ -2,9 +2,6 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2022-10-17T16:55:28.481882Z</date>
-  <millis>1666025728481</millis>
-  <nanos>882000</nanos>
   <sequence>0</sequence>
   <logger>global</logger>
   <level>INFO</level>
@@ -14,9 +11,6 @@
   <message>starting Timetabler program...</message>
 </record>
 <record>
-  <date>2022-10-17T16:55:37.647562Z</date>
-  <millis>1666025737647</millis>
-  <nanos>562000</nanos>
   <sequence>1</sequence>
   <logger>global</logger>
   <level>INFO</level>
@@ -26,9 +20,6 @@
   <message>api call successful, module exists</message>
 </record>
 <record>
-  <date>2022-10-17T16:55:37.745848Z</date>
-  <millis>1666025737745</millis>
-  <nanos>848000</nanos>
   <sequence>2</sequence>
   <logger>global</logger>
   <level>FINE</level>
@@ -38,9 +29,6 @@
   <message>attempting to add lessons data to module object</message>
 </record>
 <record>
-  <date>2022-10-17T16:55:37.753314Z</date>
-  <millis>1666025737753</millis>
-  <nanos>314000</nanos>
   <sequence>3</sequence>
   <logger>global</logger>
   <level>FINE</level>
@@ -50,9 +38,6 @@
   <message>module exists in selected semester</message>
 </record>
 <record>
-  <date>2022-10-17T16:55:37.753707Z</date>
-  <millis>1666025737753</millis>
-  <nanos>707000</nanos>
   <sequence>4</sequence>
   <logger>global</logger>
   <level>FINE</level>
@@ -62,9 +47,6 @@
   <message>lessons are added, returning list of lesson data</message>
 </record>
 <record>
-  <date>2022-10-17T16:55:37.753827Z</date>
-  <millis>1666025737753</millis>
-  <nanos>827000</nanos>
   <sequence>5</sequence>
   <logger>global</logger>
   <level>INFO</level>
@@ -74,9 +56,6 @@
   <message>api call successful, attempting to add module to timetable</message>
 </record>
 <record>
-  <date>2022-10-17T16:55:45.532075Z</date>
-  <millis>1666025745532</millis>
-  <nanos>75000</nanos>
   <sequence>6</sequence>
   <logger>global</logger>
   <level>INFO</level>
@@ -122,10 +101,6 @@
   <message>lessons are added, returning list of lesson data</message>
 </record>
 <record>
-  <date>2022-10-17T16:55:45.535169Z</date>
-  <millis>1666025745535</millis>
-  <nanos>169000</nanos>
-  <sequence>10</sequence>
   <logger>global</logger>
   <level>INFO</level>
   <class>seedu.duke.commands.CommandAddModule</class>
@@ -134,82 +109,6 @@
   <message>api call successful, attempting to add module to timetable</message>
 </record>
 <record>
-  <date>2022-10-17T16:55:54.477764Z</date>
-  <millis>1666025754477</millis>
-  <nanos>764000</nanos>
-  <sequence>11</sequence>
-  <logger>global</logger>
-  <level>FINE</level>
-  <class>seedu.duke.commands.CommandSetLesson</class>
-  <method>setLesson</method>
-  <thread>1</thread>
-  <message>module index accepted</message>
-</record>
-<record>
-  <date>2022-10-17T16:55:55.478153Z</date>
-  <millis>1666025755478</millis>
-  <nanos>153000</nanos>
-  <sequence>12</sequence>
-  <logger>global</logger>
-  <level>FINE</level>
-  <class>seedu.duke.commands.CommandSetLesson</class>
-  <method>runSetProcedure</method>
-  <thread>1</thread>
-  <message>lesson type index accepted</message>
-</record>
-<record>
-  <date>2022-10-17T16:55:56.482783Z</date>
-  <millis>1666025756482</millis>
-  <nanos>783000</nanos>
-  <sequence>13</sequence>
-  <logger>global</logger>
-  <level>FINE</level>
-  <class>seedu.duke.commands.CommandSetLesson</class>
-  <method>getPreferredLesson</method>
-  <thread>1</thread>
-  <message>preferred lesson index accepted</message>
-</record>
-<record>
-  <date>2022-10-17T16:55:58.491287Z</date>
-  <millis>1666025758491</millis>
-  <nanos>287000</nanos>
-  <sequence>14</sequence>
-  <logger>global</logger>
-  <level>FINE</level>
-  <class>seedu.duke.commands.CommandSetLesson</class>
-  <method>setLesson</method>
-  <thread>1</thread>
-  <message>module index accepted</message>
-</record>
-<record>
-  <date>2022-10-17T16:56:00.499306Z</date>
-  <millis>1666025760499</millis>
-  <nanos>306000</nanos>
-  <sequence>15</sequence>
-  <logger>global</logger>
-  <level>FINE</level>
-  <class>seedu.duke.commands.CommandSetLesson</class>
-  <method>runSetProcedure</method>
-  <thread>1</thread>
-  <message>lesson type index accepted</message>
-</record>
-<record>
-  <date>2022-10-17T16:56:02.500426Z</date>
-  <millis>1666025762500</millis>
-  <nanos>426000</nanos>
-  <sequence>16</sequence>
-  <logger>global</logger>
-  <level>FINE</level>
-  <class>seedu.duke.commands.CommandSetLesson</class>
-  <method>getPreferredLesson</method>
-  <thread>1</thread>
-  <message>preferred lesson index accepted</message>
-</record>
-<record>
-  <date>2022-10-17T16:56:20.556519Z</date>
-  <millis>1666025780556</millis>
-  <nanos>519000</nanos>
-  <sequence>17</sequence>
   <logger>global</logger>
   <level>INFO</level>
   <class>seedu.duke.Duke</class>
@@ -218,10 +117,6 @@
   <message>exit flag detected, attempting to exit</message>
 </record>
 <record>
-  <date>2022-10-17T16:56:20.558047Z</date>
-  <millis>1666025780558</millis>
-  <nanos>47000</nanos>
-  <sequence>18</sequence>
   <logger>global</logger>
   <level>INFO</level>
   <class>seedu.duke.Duke</class>

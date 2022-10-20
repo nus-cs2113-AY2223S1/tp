@@ -1,10 +1,7 @@
-<?xml version="1.0" encoding="US-ASCII" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2022-10-17T17:07:29.447934Z</date>
-  <millis>1666026449447</millis>
-  <nanos>934000</nanos>
   <sequence>0</sequence>
   <logger>global</logger>
   <level>INFO</level>
@@ -14,9 +11,6 @@
   <message>starting Timetabler program...</message>
 </record>
 <record>
-  <date>2022-10-17T17:07:29.739491Z</date>
-  <millis>1666026449739</millis>
-  <nanos>491000</nanos>
   <sequence>1</sequence>
   <logger>global</logger>
   <level>INFO</level>
@@ -26,9 +20,6 @@
   <message>api call successful, module exists</message>
 </record>
 <record>
-  <date>2022-10-17T17:07:29.824499Z</date>
-  <millis>1666026449824</millis>
-  <nanos>499000</nanos>
   <sequence>2</sequence>
   <logger>global</logger>
   <level>FINE</level>
@@ -38,9 +29,6 @@
   <message>attempting to add lessons data to module object</message>
 </record>
 <record>
-  <date>2022-10-17T17:07:29.832063Z</date>
-  <millis>1666026449832</millis>
-  <nanos>63000</nanos>
   <sequence>3</sequence>
   <logger>global</logger>
   <level>FINE</level>
@@ -50,9 +38,6 @@
   <message>module exists in selected semester</message>
 </record>
 <record>
-  <date>2022-10-17T17:07:29.832463Z</date>
-  <millis>1666026449832</millis>
-  <nanos>463000</nanos>
   <sequence>4</sequence>
   <logger>global</logger>
   <level>FINE</level>
@@ -62,9 +47,6 @@
   <message>lessons are added, returning list of lesson data</message>
 </record>
 <record>
-  <date>2022-10-17T17:07:29.832578Z</date>
-  <millis>1666026449832</millis>
-  <nanos>578000</nanos>
   <sequence>5</sequence>
   <logger>global</logger>
   <level>INFO</level>
@@ -74,9 +56,6 @@
   <message>api call successful, attempting to add module to timetable</message>
 </record>
 <record>
-  <date>2022-10-17T17:07:29.843316Z</date>
-  <millis>1666026449843</millis>
-  <nanos>316000</nanos>
   <sequence>6</sequence>
   <logger>global</logger>
   <level>FINE</level>
@@ -86,9 +65,6 @@
   <message>module index accepted</message>
 </record>
 <record>
-  <date>2022-10-17T17:07:29.843539Z</date>
-  <millis>1666026449843</millis>
-  <nanos>539000</nanos>
   <sequence>7</sequence>
   <logger>global</logger>
   <level>FINE</level>
@@ -98,22 +74,6 @@
   <message>lesson type index accepted</message>
 </record>
 <record>
-  <date>2022-10-17T17:07:29.847253Z</date>
-  <millis>1666026449847</millis>
-  <nanos>253000</nanos>
-  <sequence>8</sequence>
-  <logger>global</logger>
-  <level>INFO</level>
-  <class>seedu.duke.Duke</class>
-  <method>main</method>
-  <thread>1</thread>
-  <message>exit flag detected, attempting to exit</message>
-</record>
-<record>
-  <date>2022-10-17T17:07:29.847401Z</date>
-  <millis>1666026449847</millis>
-  <nanos>401000</nanos>
-  <sequence>9</sequence>
   <logger>global</logger>
   <level>INFO</level>
   <class>seedu.duke.Duke</class>
