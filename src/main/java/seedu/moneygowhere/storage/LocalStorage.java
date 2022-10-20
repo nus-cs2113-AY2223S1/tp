@@ -327,6 +327,31 @@ public class LocalStorage {
         }
     }
 
+    private void parseRecurringPaymentToXML(Document doc, Element rootElement,
+                                            ArrayList<RecurringPayment> savedRecurringPayments) {
+        int index = 1;
+        for (RecurringPayment payment : savedRecurringPayments) {
+            Element paymentElement = doc.createElement(XML_RECURRING_PAYMENT_ELEMENT);
+            paymentElement.setAttribute(XML_RECURRING_PAYMENT_ID_ATTRIBUTE, Integer.toString(index));
+            rootElement.appendChild(paymentElement);
+            Element name = doc.createElement(XML_RECURRING_PAYMENT_NAME_ELEMENT);
+            name.setTextContent(payment.getName());
+            paymentElement.appendChild(name);
+            Element interval = doc.createElement(XML_RECURRING_PAYMENT_INTERVAL_ELEMENT); // interval in days/month/year
+            // ??
+            interval.setTextContent("" + payment.getInterval()); // to append unit of time after implemented
+            paymentElement.appendChild(interval);
+            Element description = doc.createElement(XML_RECURRING_PAYMENT_DESCRIPTION_ELEMENT);
+            description.setTextContent(payment.getDescription());
+            paymentElement.appendChild(description);
+            Element amount = doc.createElement(XML_RECURRING_PAYMENT_AMOUNT_ELEMENT);
+            amount.setAttribute(XML_RECURRING_PAYMENT_CURRENCY_ATTRIBUTE, DEFAULT_CURRENCY);
+            amount.setTextContent(payment.getAmount().toString());
+            paymentElement.appendChild(amount);
+            index++;
+        }
+    }
+
     private void writeXml(Document doc)
             throws TransformerException {
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
