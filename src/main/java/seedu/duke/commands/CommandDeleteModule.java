@@ -2,6 +2,7 @@ package seedu.duke.commands;
 
 import seedu.duke.Duke;
 import seedu.duke.Timetable;
+import seedu.duke.UI;
 
 import java.io.IOException;
 import java.util.logging.Logger;
@@ -11,9 +12,9 @@ public class CommandDeleteModule {
 
     private static final Logger lgr = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
-    public static String deleteModule(Timetable timetable) {
+    public static String deleteModule() {
 
-        int listLength = timetable.getListLength();
+        int listLength = Timetable.getListLength();
 
         if (listLength == 0) {
             return "You have no modules to delete now!";
@@ -31,14 +32,14 @@ public class CommandDeleteModule {
             System.out.println("Which module you would like to delete? "
                     + "Please enter the index of that module. ");
 
-            System.out.println(timetable.listModules());
+            System.out.println(Timetable.listModules());
 
-            indexToSet = Duke.sc.nextLine();
+            indexToSet = UI.sc.nextLine();
 
             assert indexToSet != null;
 
             try {
-                timetable.deleteModule(Integer.parseInt(indexToSet));
+                Timetable.deleteModule(Integer.parseInt(indexToSet));
             } catch (NumberFormatException e) {
                 return "Please input an integer!";
             } catch (IndexOutOfBoundsException e) {
