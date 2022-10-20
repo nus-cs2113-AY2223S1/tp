@@ -224,6 +224,8 @@ public class UI {
         printLine();
         System.out.println(prescription);
         printLine();
+    }
+
     public void printNoMatchingPrescriptionMessage() {
         System.out.println(NO_MATCHING_PRESCRIPTION_MESSAGE);
     }
