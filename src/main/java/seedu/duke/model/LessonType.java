@@ -1,5 +1,8 @@
 package seedu.duke.model;
 
+/**
+ * Enumeration representing lesson types offered.
+ */
 public enum LessonType {
     DESIGN_LECTURE,
     LABORATORY,

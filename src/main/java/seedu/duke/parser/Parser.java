@@ -10,8 +10,8 @@ import seedu.duke.command.InvalidModuleCommand;
 import seedu.duke.command.UnknownCommand;
 import seedu.duke.command.ViewTimetableCommand;
 import seedu.duke.command.SelectSlotCommand;
-import seedu.duke.command.SearchModuleCodeCommand;
-import seedu.duke.command.SearchModuleNameCommand;
+import seedu.duke.command.SelectSemesterCommand;
+import seedu.duke.command.SearchModuleCommand;
 
 import java.util.Map;
 import java.util.TreeMap;
@@ -22,20 +22,22 @@ public class Parser {
     public static Command parse(String userInput) {
         String[] keywords = userInput.split("\\s+");
         switch (keywords[0]) {
-        case (SearchModuleNameCommand.COMMAND_WORD):
-            return searchCommand(keywords);
+        case (SearchModuleCommand.COMMAND_WORD):
+            return searchCommand(userInput);
         case (AddModuleCommand.COMMAND_WORD):
             return addDeleteCommand(keywords, new AddModuleCommand(keywords));
         case (DeleteModuleCommand.COMMAND_WORD):
             return addDeleteCommand(keywords, new DeleteModuleCommand(keywords));
         case (ViewTimetableCommand.COMMAND_WORD):
-            return viewHelpExitCommand(keywords, new ViewTimetableCommand(keywords));
+            return new ViewTimetableCommand(userInput);
         case (HelpCommand.COMMAND_WORD):
             return viewHelpExitCommand(keywords, new HelpCommand(keywords));
         case (SelectSlotCommand.COMMAND_WORD):
             return new SelectSlotCommand(userInput);
         case (ExitCommand.COMMAND_WORD):
             return viewHelpExitCommand(keywords, new ExitCommand(keywords));
+        case (SelectSemesterCommand.COMMAND_WORD):
+            return selectSemesterCommand(keywords, new SelectSemesterCommand(keywords));
         default:
             return new UnknownCommand(keywords);
         }
@@ -98,14 +100,13 @@ public class Parser {
         return isTwoWordsCommand(keywords) && isValidModuleCode(keywords[1]);
     }
 
-    public static Command searchCommand(String[] keywords) {
-        if (isMultiWordsCommand(keywords) && !containsValidModuleCode(keywords)) {
-            return new SearchModuleNameCommand(keywords);
-        } else if (isValidTwoWordCommand(keywords)) {
-            return new SearchModuleCodeCommand(keywords);
-        } else {
-            return determineWrongCommand(keywords);
-        }
+    private static boolean isValidSemester(String[] keywords) {
+        int semesterInput = Integer.parseInt(keywords[1]);
+        return semesterInput > 0 && semesterInput <= 4;
+    }
+
+    public static Command searchCommand(String userInput) {
+        return new SearchModuleCommand(userInput);
     }
 
     /**
@@ -144,6 +145,14 @@ public class Parser {
         }
     }
 
+    public static Command selectSemesterCommand(String[] keywords, Command command) {
+        if (isValidSemester(keywords)) {
+            return command;
+        } else {
+            return new UnknownCommand(keywords);
+        }
+    }
+
     public static Map<String, String> parseParams(String description) {
         Map<String, String> paramsMap = new TreeMap<>();
         int firstSlash = description.indexOf('/');
@@ -153,8 +162,8 @@ public class Parser {
         String paramsString = description.substring(firstSlash + 1);
         for (String param : paramsString.split(" /")) {
             int firstSpace = param.indexOf(' ');
-            String key = param.substring(0, firstSpace).trim();
-            String value = param.substring(firstSpace + 1).trim();
+            String key = firstSpace == -1 ? param : param.substring(0, firstSpace).trim();
+            String value = firstSpace == -1 ? "" : param.substring(firstSpace + 1).trim();
             paramsMap.put(key, value);
         }
         return paramsMap;

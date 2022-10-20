@@ -2,24 +2,26 @@
 
 ## Table Of Contents
 
-[1. Introduction](#1-introduction) <br>
-&nbsp;&nbsp;[1.1. Welcome!](#11-welcome)<br>
-[2. Setting up](#2-setting-up) <br>
-&nbsp;&nbsp;[2.1. Prerequisites](#21-prerequisites) <br>
-&nbsp;&nbsp;[2.2. Setting up the project locally](#22-setting-up-the-project-locally) <br>
-&nbsp;&nbsp;[2.3. Configure coding style](#23-configure-the-coding-style) <br>
-[3. Design](#3-design) <br>
-&nbsp;&nbsp;[3.1. Architecture](#31-architecture) <br>
-&nbsp;&nbsp;[3.2. Model Component](#32-model-component) <br>
-&nbsp;&nbsp;[3.3. Parser Component](#33-parser-component) <br>
-&nbsp;&nbsp;[3.4. Command Component](#34-command-component) <br>
-&nbsp;&nbsp;[3.5 UI Component](#35-ui-component) <br>
-&nbsp;&nbsp;[3.6 Storage Component](#36-storage-component) <br>
-[4. Implementation](#4-implementation) <br>
-[5. Documentation](#5-documentation) <br>
-[6. Testing](#6-testing) <br>
-&nbsp;&nbsp;[6.1. Running tests](#61-running-tests) <br>
-&nbsp;&nbsp;[6.2. Instructions for running manual tests](#62-instructions-for-manual-testing) <br>
+1. [Introduction](#1-introduction)
+   - [1.1. Welcome!](#11-welcome)
+2. [Setting up](#2-setting-up)
+   - [2.1. Prerequisites](#21-prerequisites)
+   - [2.2. Setting up the project locally](#22-setting-up-the-project-locally)
+   - [2.3. Configure coding style](#23-configure-the-coding-style)
+3. [Design](#3-design)
+   - [3.1. Architecture](#31-architecture)
+   - [3.2. Model Component](#32-model-component)
+   - [3.3. Parser Component](#33-parser-component)
+   - [3.4. Command Component](#34-command-component)
+   - [3.5 Utils Component](#35-utils-component)
+     - [3.5.1 Ui Component](#351-ui-component)
+     - [3.5.2 Link Component](#352-link-component)
+     - [3.5.3 Storage Component](#353-storage-component)
+4. [Implementation](#4-implementation)
+5. [Documentation](#5-documentation)
+6. [Testing](#6-testing)
+   - [6.1. Running tests](#61-running-tests)
+   - [6.2. Instructions for running manual tests](#62-instructions-for-manual-testing)
 
 [Appendix A: Product Scope](#appendix-a-product-scope) <br>
 [Appendix B: User Stores](#appendix-b-user-stories) <br>
@@ -92,21 +94,25 @@ The <code>Parser</code> component can:
 
 ### 3.4 Command Component
 
-### 3.5 UI Component
+### 3.5 Utils Component
 
-### 3.6 Storage Component
-<img src="..\docs\images\storageClass.png" title="Storage Class"/>  
+#### 3.5.1 UI Component
+
+#### 3.5.2 Link Component
+
+#### 3.5.3 Storage Component
+![Storage Class](\..\docs\images\storageClass.png) 
 
 The <code>Storage</code> component can:  
-- read from a NUSMods export link  
-- save as a NUSMods export link format
+- read from the hard disk a single line which is supposed to be a NUSMods export link 
+- save to the hard disk
 
 Different checks have been implemented to ensure that even
 if the data file is modified in any way, it would not crash the programme.
 
-#### Why it is implemented this way
+##### Why it is implemented this way
 To facilitate easy transfer of information from NUSMods to YAMOM.
-#### Alternatives considered
+##### Alternatives considered
 Storing as <code>.json</code> file
 - would not be readable by the user
 - would have to implement another function for export/import function
@@ -117,10 +123,9 @@ This section describes how key features of YAMOM are implemented in the latest r
 
 ### Storage feature
 
-
-<img src="..\docs\images\storageOpenPreviousState.png" title="Opening saved state"/>
-
-
+!["Opening saved state"](\..\docs\images\storageOpenPreviousState.png)  
+When the application starts up, the storage openPreviousState function will be called
+to load previous state
 
 ### Target user profile
 
@@ -139,6 +144,8 @@ written in [GitHub-Flavoured Markdown](https://github.github.com/gfm/).
 
 The following section describes the testing methodologies followed in this project to ensure high-quality, bug-free
 code as far as possible.
+
+## 6.1. Running tests
 
 ## 6.2 Instructions for manual testing
 

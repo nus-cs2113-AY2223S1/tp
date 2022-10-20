@@ -3,9 +3,11 @@
 
 ->Storage:openPreviousState()
 alt Has previous state
-    Storage -> Storage : loadPreviousState()
-    Storage -> State : previousState
-    Storage -> UI : Display success message
+    Storage -> Storage: loadPreviousState()
+    Storage -> Link: parseLink(link,state)
+    Link --> Storage: previousState
+    Storage -> State: previousState
+    Storage -> UI: Display success message
 else No previous state
     Storage -> UI : Display error message
 end

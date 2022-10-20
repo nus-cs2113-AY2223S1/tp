@@ -47,7 +47,8 @@ public class TimetableTest {
     @DisabledOnOs(OS.WINDOWS)
     public void timetable_lessonStartingAtHalfHour_formattedCorrectly() throws IOException {
         Module mod = Module.get("CS3216");
-        Timetable t = new Timetable(List.of(Pair.of(mod, mod.getSemesterData(1).getLessonsByNo("1").get(0))),
+        Timetable t = new Timetable(List.of(Pair.of(mod, 
+                mod.getSemesterData(1).getLessonsByTypeAndNo(LessonType.LECTURE, "1").get(0))),
                 false, false);
         InputStream stream = TimetableTest.class.getClassLoader().getResourceAsStream("timetableCS3216.txt");
         String expected = new String(stream.readAllBytes(), StandardCharsets.UTF_8);
@@ -63,16 +64,16 @@ public class TimetableTest {
         Module ee2211 = Module.get("EE2211");
         Module cs2113 = Module.get("CS2113");
         Timetable t = new Timetable(List.of(
-                Pair.of(st2334, st2334.getSemesterData(1).getLessonsByNo("2").get(0)),
-                Pair.of(st2334, st2334.getSemesterData(1).getLessonsByNo("9").get(0)),
-                Pair.of(ie2141, ie2141.getSemesterData(1).getLessonsByNo("03").get(0)),
-                Pair.of(ie2141, ie2141.getSemesterData(1).getLessonsByNo("1").get(0)),
-                Pair.of(ee4204, ee4204.getSemesterData(1).getLessonsByNo("01").get(0)),
-                Pair.of(ee4204, ee4204.getSemesterData(1).getLessonsByNo("01").get(1)),
-                Pair.of(ee2211, ee2211.getSemesterData(1).getLessonsByNo("01").get(0)),
-                Pair.of(ee2211, ee2211.getSemesterData(1).getLessonsByNo("19").get(0)),
-                Pair.of(cs2113, cs2113.getSemesterData(1).getLessonsByTypeAndNo(LessonType.LECTURE, "1").get(0)),
-                Pair.of(cs2113, cs2113.getSemesterData(1).getLessonsByNo("4").get(0))),
+            Pair.of(st2334, st2334.getSemesterData(1).getLessonsByTypeAndNo(LessonType.LECTURE, "2").get(0)),
+            Pair.of(st2334, st2334.getSemesterData(1).getLessonsByTypeAndNo(LessonType.TUTORIAL, "9").get(0)),
+            Pair.of(ie2141, ie2141.getSemesterData(1).getLessonsByTypeAndNo(LessonType.TUTORIAL, "03").get(0)),
+            Pair.of(ie2141, ie2141.getSemesterData(1).getLessonsByTypeAndNo(LessonType.LECTURE, "1").get(0)),
+            Pair.of(ee4204, ee4204.getSemesterData(1).getLessonsByTypeAndNo(LessonType.PACKAGED_LECTURE, "01").get(0)),
+            Pair.of(ee4204, ee4204.getSemesterData(1).getLessonsByTypeAndNo(LessonType.PACKAGED_TUTORIAL, "01").get(0)),
+            Pair.of(ee2211, ee2211.getSemesterData(1).getLessonsByTypeAndNo(LessonType.LECTURE, "01").get(0)),
+            Pair.of(ee2211, ee2211.getSemesterData(1).getLessonsByTypeAndNo(LessonType.TUTORIAL, "19").get(0)),
+            Pair.of(cs2113, cs2113.getSemesterData(1).getLessonsByTypeAndNo(LessonType.LECTURE, "1").get(0)),
+            Pair.of(cs2113, cs2113.getSemesterData(1).getLessonsByTypeAndNo(LessonType.TUTORIAL, "4").get(0))),
                 true, false);
         InputStream stream = TimetableTest.class.getClassLoader().getResourceAsStream("timetableColor.txt");
         String expected = new String(stream.readAllBytes(), StandardCharsets.UTF_8);
@@ -88,16 +89,18 @@ public class TimetableTest {
         Module ee2211 = Module.get("EE2211");
         Module cs2113 = Module.get("CS2113");
         Timetable t = new Timetable(List.of(
-                Pair.of(st2334, st2334.getSemesterData(1).getLessonsByNo("2").get(0)),
-                Pair.of(st2334, st2334.getSemesterData(1).getLessonsByNo("9").get(0)),
-                Pair.of(ie2141, ie2141.getSemesterData(1).getLessonsByNo("03").get(0)),
-                Pair.of(ie2141, ie2141.getSemesterData(1).getLessonsByNo("1").get(0)),
-                Pair.of(ee4204, ee4204.getSemesterData(1).getLessonsByNo("01").get(0)),
-                Pair.of(ee4204, ee4204.getSemesterData(1).getLessonsByNo("01").get(1)),
-                Pair.of(ee2211, ee2211.getSemesterData(1).getLessonsByNo("01").get(0)),
-                Pair.of(ee2211, ee2211.getSemesterData(1).getLessonsByNo("19").get(0)),
+                Pair.of(st2334, st2334.getSemesterData(1).getLessonsByTypeAndNo(LessonType.LECTURE, "2").get(0)),
+                Pair.of(st2334, st2334.getSemesterData(1).getLessonsByTypeAndNo(LessonType.TUTORIAL, "9").get(0)),
+                Pair.of(ie2141, ie2141.getSemesterData(1).getLessonsByTypeAndNo(LessonType.TUTORIAL, "03").get(0)),
+                Pair.of(ie2141, ie2141.getSemesterData(1).getLessonsByTypeAndNo(LessonType.LECTURE, "1").get(0)),
+                Pair.of(ee4204, ee4204.getSemesterData(1)
+                        .getLessonsByTypeAndNo(LessonType.PACKAGED_LECTURE, "01").get(0)),
+                Pair.of(ee4204, ee4204.getSemesterData(1)
+                        .getLessonsByTypeAndNo(LessonType.PACKAGED_TUTORIAL, "01").get(0)),
+                Pair.of(ee2211, ee2211.getSemesterData(1).getLessonsByTypeAndNo(LessonType.LECTURE, "01").get(0)),
+                Pair.of(ee2211, ee2211.getSemesterData(1).getLessonsByTypeAndNo(LessonType.TUTORIAL, "19").get(0)),
                 Pair.of(cs2113, cs2113.getSemesterData(1).getLessonsByTypeAndNo(LessonType.LECTURE, "1").get(0)),
-                Pair.of(cs2113, cs2113.getSemesterData(1).getLessonsByNo("4").get(0))));
+                Pair.of(cs2113, cs2113.getSemesterData(1).getLessonsByTypeAndNo(LessonType.TUTORIAL, "4").get(0))));
         String newlineRegex = "(\\r\\n|\\r|\\n)";
         InputStream stream = TimetableTest.class.getClassLoader().getResourceAsStream("timetableWindows.txt");
         String[] expected = new String(stream.readAllBytes(), StandardCharsets.UTF_8).split(newlineRegex);

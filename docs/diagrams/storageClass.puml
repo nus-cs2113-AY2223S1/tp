@@ -4,19 +4,6 @@ hide circle
 skinparam classAttributeIconSize 0
 
 class Storage {
-    - DOMAIN: String
-    - DELIMITER: String
-    - SEMESTER_DELIMITER: String
-    - SHARE_DELIMITER: String
-    - LESSON_TYPE_DELIMITER: String
-    - MODULE_CODE_DELIMITER: String
-    - POSSIBLE_SEMESTER_NUMBER: String
-    - SUPPOSED_PREFIX: String
-    - SUPPOSED_START_REGEX: String
-    - moduleDelimiter: String
-    - lessonDelimiter: String
-    - SEMESTER_PARAM_INDEX: int
-    - MODULES_PARAM_INDEX: int
     + FILE_PATH: String
     + NO_PREVIOUS_STATE_ERROR_MESSAGE: String
     + LOADING_PREVIOUS_STATE_MESSAGE: String
@@ -26,15 +13,6 @@ class Storage {
 
     + openPreviousState(State, Ui): void
     - readPreviousState(): String
-    - loadPreviousState(String, State): void
-    - getSemesterFromParam(String): int
-    - isValidPreviousState(String): boolean
-    - addLessons(String[], SelectedModule, int): void
-    - addValidLesson(SelectedModule, int, LessonType, String): void
-    - isLessonInfo(String): boolean
-    + getLessonType(String): LessonType
     + saveState(State, Ui): void
-    - appendModules(List<SelectedModule>, StringBuilder): void
-    - appendLessons(Map<LessonType, String>, StringBuilder): void
 }
 @enduml
