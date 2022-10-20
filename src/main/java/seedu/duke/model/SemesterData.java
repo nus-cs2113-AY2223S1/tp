@@ -64,5 +64,4 @@ public class SemesterData {
         return timetable.stream().filter(lesson -> lesson.lessonType == type).map(s -> s.classNo)
                 .collect(Collectors.toCollection(TreeSet::new));
     }
-
 }

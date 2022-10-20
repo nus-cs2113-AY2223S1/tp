@@ -4,6 +4,7 @@ import seedu.duke.command.AddModuleCommand;
 import seedu.duke.command.Command;
 import seedu.duke.command.DeleteModuleCommand;
 import seedu.duke.command.ExitCommand;
+import seedu.duke.command.GetModuleCommand;
 import seedu.duke.command.HelpCommand;
 import seedu.duke.command.IncompleteCommand;
 import seedu.duke.command.InvalidModuleCommand;
@@ -34,6 +35,8 @@ public class Parser {
         switch (keywords[0]) {
         case (SearchModuleCommand.COMMAND_WORD):
             return searchCommand(userInput);
+        case (GetModuleCommand.COMMAND_WORD):
+            return getCommand(keywords);
         case (AddModuleCommand.COMMAND_WORD):
             return addDeleteCommand(keywords, new AddModuleCommand(keywords));
         case (DeleteModuleCommand.COMMAND_WORD):
@@ -51,6 +54,10 @@ public class Parser {
         default:
             return new UnknownCommand(keywords);
         }
+    }
+
+    public static Command getCommand(String[] keywords) {
+        return new GetModuleCommand(keywords);
     }
 
     /**
@@ -91,7 +98,7 @@ public class Parser {
         return keywords.length == 1;
     }
 
-    private static boolean isValidTwoWordCommand(String[] keywords) {
+    public static boolean isValidTwoWordCommand(String[] keywords) {
         return isTwoWordsCommand(keywords) && isValidModuleCode(keywords[1]);
     }
 
@@ -116,7 +123,7 @@ public class Parser {
         }
     }
 
-    private static Command determineWrongCommand(String[] keywords) {
+    public static Command determineWrongCommand(String[] keywords) {
         if (isOneWordCommand(keywords)) {
             return new IncompleteCommand(keywords);
         } else if (isTwoWordsCommand(keywords) && !isValidModuleCode(keywords[1])) {
@@ -142,7 +149,7 @@ public class Parser {
         }
     }
 
-    private static boolean isValidSemester(String[] keywords) {
+    public static boolean isValidSemester(String[] keywords) {
         int semesterInput = Integer.parseInt(keywords[1]);
         return semesterInput > 0 && semesterInput <= 4;
     }
@@ -157,7 +164,7 @@ public class Parser {
      * @param keywords Contains the user input split by spaces.
      * @return If the user entered a valid special term.
      */
-    private static boolean isValidSpecialTerm(String[] keywords) {
+    public static boolean isValidSpecialTerm(String[] keywords) {
         StringBuilder semester = new StringBuilder();
         for (int i = 1; i < keywords.length; i++) {
             semester.append(keywords[i]);
