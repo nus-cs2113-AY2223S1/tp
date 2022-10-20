@@ -1,0 +1,28 @@
+@startuml
+
+class UserStorage {
+    {static} - USER_STORAGE_FILE_PATH
+
+    {static} + saveFile(String textToAdd) : void
+    {static} + loadFile() : void
+}
+
+class IOException {
+
+}
+
+class UserStorageParser {
+    {static} + convertUniversityListIntoFileContent(UserUniversityListManager uniList) : String
+    {static} + convertFileContentIntoUniversityList(String fileContent) : HashMap<String, UserUniversityList>
+    {static} + getSavedLists() : UserUniversityListManager
+    {static} + storeCreatedLists(UserUniversityListManager userUniversityListManager) : void
+}
+
+class InvalidUserStorageFileException {
+
+}
+
+UserStorage --> IOException : <<throws>>
+UserStorage "1" --> "1" UserStorageParser
+UserStorageParser --> InvalidUserStorageFileException : << throws>>
+@enduml
