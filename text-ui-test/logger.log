@@ -2,9 +2,9 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2022-10-12T14:43:12.526241Z</date>
-  <millis>1665585792526</millis>
-  <nanos>241000</nanos>
+  <date>2022-10-20T09:33:28.275305Z</date>
+  <millis>1666258408275</millis>
+  <nanos>305000</nanos>
   <sequence>0</sequence>
   <logger>global</logger>
   <level>INFO</level>
@@ -14,9 +14,9 @@
   <message>starting Timetabler program...</message>
 </record>
 <record>
-  <date>2022-10-12T14:43:13.297237Z</date>
-  <millis>1665585793297</millis>
-  <nanos>237000</nanos>
+  <date>2022-10-20T09:33:28.987957Z</date>
+  <millis>1666258408987</millis>
+  <nanos>957000</nanos>
   <sequence>1</sequence>
   <logger>global</logger>
   <level>INFO</level>
@@ -26,9 +26,9 @@
   <message>api call successful, module exists</message>
 </record>
 <record>
-  <date>2022-10-12T14:43:13.512763Z</date>
-  <millis>1665585793512</millis>
-  <nanos>763000</nanos>
+  <date>2022-10-20T09:33:29.304757Z</date>
+  <millis>1666258409304</millis>
+  <nanos>757000</nanos>
   <sequence>2</sequence>
   <logger>global</logger>
   <level>FINE</level>
@@ -38,9 +38,9 @@
   <message>attempting to add lessons data to module object</message>
 </record>
 <record>
-  <date>2022-10-12T14:43:13.536779Z</date>
-  <millis>1665585793536</millis>
-  <nanos>779000</nanos>
+  <date>2022-10-20T09:33:29.325427Z</date>
+  <millis>1666258409325</millis>
+  <nanos>427000</nanos>
   <sequence>3</sequence>
   <logger>global</logger>
   <level>FINE</level>
@@ -50,9 +50,9 @@
   <message>module exists in selected semester</message>
 </record>
 <record>
-  <date>2022-10-12T14:43:13.539438Z</date>
-  <millis>1665585793539</millis>
-  <nanos>438000</nanos>
+  <date>2022-10-20T09:33:29.327330Z</date>
+  <millis>1666258409327</millis>
+  <nanos>330000</nanos>
   <sequence>4</sequence>
   <logger>global</logger>
   <level>FINE</level>
@@ -62,9 +62,9 @@
   <message>lessons are added, returning list of lesson data</message>
 </record>
 <record>
-  <date>2022-10-12T14:43:13.539934Z</date>
-  <millis>1665585793539</millis>
-  <nanos>934000</nanos>
+  <date>2022-10-20T09:33:29.327959Z</date>
+  <millis>1666258409327</millis>
+  <nanos>959000</nanos>
   <sequence>5</sequence>
   <logger>global</logger>
   <level>INFO</level>
@@ -74,9 +74,9 @@
   <message>api call successful, attempting to add module to timetable</message>
 </record>
 <record>
-  <date>2022-10-12T14:43:13.553258Z</date>
-  <millis>1665585793553</millis>
-  <nanos>258000</nanos>
+  <date>2022-10-20T09:33:29.340033Z</date>
+  <millis>1666258409340</millis>
+  <nanos>33000</nanos>
   <sequence>6</sequence>
   <logger>global</logger>
   <level>FINE</level>
@@ -86,9 +86,9 @@
   <message>module index accepted</message>
 </record>
 <record>
-  <date>2022-10-12T14:43:13.554115Z</date>
-  <millis>1665585793554</millis>
-  <nanos>115000</nanos>
+  <date>2022-10-20T09:33:29.341009Z</date>
+  <millis>1666258409341</millis>
+  <nanos>9000</nanos>
   <sequence>7</sequence>
   <logger>global</logger>
   <level>FINE</level>
@@ -98,9 +98,9 @@
   <message>lesson type index accepted</message>
 </record>
 <record>
-  <date>2022-10-12T14:43:13.555332Z</date>
-  <millis>1665585793555</millis>
-  <nanos>332000</nanos>
+  <date>2022-10-20T09:33:29.342406Z</date>
+  <millis>1666258409342</millis>
+  <nanos>406000</nanos>
   <sequence>8</sequence>
   <logger>global</logger>
   <level>FINE</level>
@@ -110,10 +110,22 @@
   <message>preferred lesson index accepted</message>
 </record>
 <record>
-  <date>2022-10-12T14:43:13.563395Z</date>
-  <millis>1665585793563</millis>
-  <nanos>395000</nanos>
+  <date>2022-10-20T09:33:29.349393Z</date>
+  <millis>1666258409349</millis>
+  <nanos>393000</nanos>
   <sequence>9</sequence>
+  <logger>global</logger>
+  <level>FINE</level>
+  <class>seedu.duke.commands.CommandDeleteModule</class>
+  <method>deleteModule</method>
+  <thread>1</thread>
+  <message>Delete Module command run successful, no runtime error</message>
+</record>
+<record>
+  <date>2022-10-20T09:33:29.350129Z</date>
+  <millis>1666258409350</millis>
+  <nanos>129000</nanos>
+  <sequence>10</sequence>
   <logger>global</logger>
   <level>INFO</level>
   <class>seedu.duke.Duke</class>
@@ -122,10 +134,10 @@
   <message>exit flag detected, attempting to exit</message>
 </record>
 <record>
-  <date>2022-10-12T14:43:13.563766Z</date>
-  <millis>1665585793563</millis>
-  <nanos>766000</nanos>
-  <sequence>10</sequence>
+  <date>2022-10-20T09:33:29.350509Z</date>
+  <millis>1666258409350</millis>
+  <nanos>509000</nanos>
+  <sequence>11</sequence>
   <logger>global</logger>
   <level>INFO</level>
   <class>seedu.duke.Duke</class>
