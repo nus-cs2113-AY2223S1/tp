@@ -181,11 +181,11 @@ public class Parser {
             } else if (matcherViewPatient.find()) {
                 String patientId = matcherViewPatient.group(1);
                 checkPatientExists(patientId);
-                //prescriptionList.viewPatientPres(ui, patientId);
+                prescriptionList.viewPatientPrescription(ui, patientId);
             } else if (matcherViewActive.find()) {
-                String patientId = matcherViewPatient.group(1);
+                String patientId = matcherViewActive.group(1);
                 checkPatientExists(patientId);
-                //prescriptionList.viewActPatientPres(ui, patientId);
+                prescriptionList.viewActivePatientPrescription(ui, patientId);
             } else if (matcherChangeActive.find()) {
                 //index is matcherChangeActive.group(1),
                 // so prescriptionList.activatePres(ui, matcherChangeActive.group(1));
