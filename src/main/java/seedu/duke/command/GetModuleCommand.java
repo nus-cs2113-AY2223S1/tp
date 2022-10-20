@@ -46,7 +46,7 @@ public class GetModuleCommand extends Command {
         ui.addMessage("Corequisite          : " + (module.corequisite.isEmpty() ? "Nil" : module.corequisite));
 
         ui.displayDivider();
-        if (moduleOfferedInCurrentSem(module, state)) {
+        if (isModuleOfferedInCurrentSem(module, state)) {
             List<Pair<Module, RawLesson>> lessons = new ArrayList<>();
             Pair<Module, RawLesson> lesson;
             List<RawLesson> tempLesson = module.getSemesterData(state.getSemester()).timetable;
@@ -66,7 +66,7 @@ public class GetModuleCommand extends Command {
     }
 
     // check if module is offered in this semester
-    boolean moduleOfferedInCurrentSem(Module module, State state) {
+    boolean isModuleOfferedInCurrentSem(Module module, State state) {
         int sem = state.getSemester();
         return module.getSemestersOffering(module).contains(sem);
     }
