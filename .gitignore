@@ -18,3 +18,4 @@ text-ui-test/EXPECTED-UNIX.TXT
 logger.log
 /Sem1DataDirectory
 /Sem2DataDirectory
+/text-ui-test/logger.log
