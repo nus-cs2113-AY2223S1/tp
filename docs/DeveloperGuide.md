@@ -29,7 +29,33 @@ Click to view the latest release of [RecipEditor]((https://github.com/AY2223S1-C
 
 ## Design
 ### Architecture
-{architecture-level description}
+
+<p align="center" width="100%">
+  <img width="80%" src="images/MainClassDiagram.png" alt="Storage Class Diagram"/>
+</p>
+
+`Recipeditor` calls to various class a perform all the tasks assigned by the user.
+
+- `Ui`: handles interactions with users, including printing and reading
+- `Storage`: manages the storage of the list of recipes
+- `Command`: instructs the current task to perform
+- `CommandResult`: explains the outcome of each command performed
+- `Parser`: interprets the user input into different commands
+
+Software running flow:
+
+Upon start, Recipeditor will check load or create saves.
+
+During software run, it will repeat iterations of reading and executing commands.
+In each iteration,raw user inputs are read from CLI. They will be
+interpreted into commands for the software to execute.
+Each execution will either write or read the list of recipes
+depending on the command. Finally, the result of current iteration
+is reflected to the user.
+
+Termination of software purges all temporary data, while saved changes
+can be loaded from saves upon next software launch.
+
 
 ### Ui Component
 The UI component is responsible for all user interfaces of the application.
@@ -77,6 +103,35 @@ The external storage file contains:
 - Recipe Ingredients (name, amount, unit)
 - Recipe Steps
 
+### Command Component
+The command component features a list of commands falls under `Command`,
+identified from user input for the software to carry out certain tasks.
+A `CommandResult` is returned from `execute()` method call of each `Command`.
+The `CommandResult` consists of a single error message in `String`.
+
+<p align="center" width="100%">
+  <img width="80%" src="images/CommandClassDiagram.png" alt="Storage Class Diagram"/>
+</p>
+
+Each subclass of `Command` has their own attributes and `CommandResult`
+from `Execute` method, allowing them to perform respective tasks.
+
+All types of`Command`and their functionalities are explained below:
+
+`AddCommand`: Add a valid `Recipe` to `RecipeList`, otherwise shows error message
+for `invalid Recipe`
+
+`DeleteCommand`: Remove an existing `Recipe` at a valid index from `RecipeList`,
+otherwise show error message on `index out of bound`
+
+`ExitCommand`: Deliver a `CommandResult` to terminate software run.
+
+`InvalidCommand`: Deliver a `CommandResult` of invalid command
+
+`ListCommand`: Print all formatted `Recipe` in `RecipeList` to screen
+
+`ViewCommand`: View an existing `Recipe` at a valid index from `RecipeList`,
+otherwise show error message on `index out of bound`
 
 ## Product scope
 ### Target user profile
