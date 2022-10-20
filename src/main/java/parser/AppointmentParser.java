@@ -40,8 +40,7 @@ public class AppointmentParser {
             case SetAppointmentStatusCommand.COMMAND_WORD:
                 return prepareSetAppointmentStatusCommand(statement);
             default:
-                System.out.println("Error: unrecognized appointment operation");
-                return new EndCommand();
+                throw new DukeException();
             }
         } catch (DukeException e) {
             System.out.println("Sorry, unrecognized appointment operation.");
