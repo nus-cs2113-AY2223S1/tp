@@ -55,12 +55,12 @@ public class PrescriptionList {
         assert dosage != null : "dosage should not be null";
         assert timeInterval != null : "time interval should not be null";
 
-        if (prescriptionNumber < 1 || prescriptionNumber > prescriptionsList.size()) {
+        int index = prescriptionNumber - 1;
+
+        if (isInvalidIndex(index)) {
             ui.printIndexOutOfRangeErrorMessage();
             return;
         }
-
-        int index = prescriptionNumber - 1;
 
         Prescription prescriptionEdited = prescriptionsList.get(index);
 
@@ -77,5 +77,50 @@ public class PrescriptionList {
         }
 
         ui.printEditPrescriptionMessage(prescriptionEdited.toString());
+    }
+
+    public void activatePres(UI ui, String prescriptionNumber) {
+        Integer index = getIndex(ui, prescriptionNumber);
+        if (index == null) {
+            return;
+        }
+
+        Prescription prescriptionEdited = prescriptionsList.get(index);
+        prescriptionEdited.setActive();
+
+        ui.printActivatePrescriptionMessage(prescriptionEdited.toString());
+    }
+
+    private Integer getIndex(UI ui, String prescriptionNumber) {
+        int index;
+
+        try {
+            index = Integer.parseInt(prescriptionNumber) - 1;
+        } catch (NumberFormatException e) {
+            // Parser class have blocked all inputs that are not integer.
+            return null;
+        }
+
+        if (isInvalidIndex(index)) {
+            ui.printIndexOutOfRangeErrorMessage();
+            return null;
+        }
+        return index;
+    }
+
+    public void deactivatePres(UI ui, String prescriptionNumber) {
+        Integer index = getIndex(ui, prescriptionNumber);
+        if (index == null) {
+            return;
+        }
+
+        Prescription prescriptionEdited = prescriptionsList.get(index);
+        prescriptionEdited.setInactive();
+
+        ui.printDeactivatePrescriptionMessage(prescriptionEdited.toString());
+    }
+
+    private boolean isInvalidIndex(int index) {
+        return (index < 0 || index >= prescriptionsList.size());
     }
 }

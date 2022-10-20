@@ -188,10 +188,10 @@ public class Parser {
                 //prescriptionList.viewActPatientPres(ui, patientId);
             } else if (matcherChangeActive.find()) {
                 //index is matcherChangeActive.group(1),
-                // so prescriptionList.activatePres(ui, matcherChangeActive.group(1));
+                prescriptionList.activatePres(ui, matcherChangeActive.group(1));
             } else if (matcherChangeInactive.find()) {
                 //index is matcherChangeInactive.group(1),
-                // so prescriptionList.deactivatePres(ui, matcherChangeInactive.group(1));
+                prescriptionList.deactivatePres(ui, matcherChangeInactive.group(1));
             } else {
                 throw new OneDocException("Your input is incorrect! Please format it as such:"
                         + UI.PRESCRIPTION_ADD

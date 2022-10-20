@@ -13,6 +13,7 @@ public class UI {
 
     // General Invalid Error Message
     private static final String INVALID_MAIN_MENU_COMMAND_MESSAGE = "Incorrect input. Please type 1, 2, 3 or bye";
+    private static final String INDEX_OUT_OF_RANGE_MESSAGE = "The index number is out of range. Try again.";
 
     // Patient
     private static final String PATIENT_MAIN_MENU =
@@ -51,8 +52,6 @@ public class UI {
             + UI.VISIT_VIEW
             + UI.RETURN_TO_MAIN
             + UI.EXIT_PROGRAM;
-
-    private static final String INDEX_OUT_OF_RANGE_MESSAGE = "The index number is out of range. Try again.";
 
     public UI() {
         scanner = new Scanner(System.in);
@@ -208,5 +207,19 @@ public class UI {
     public static final String RETURN_TO_MAIN =  "\n* To return to main menu: main";
 
     public static final String EXIT_PROGRAM =  "\n* To quit OneDoc: bye";
+
+    public void printActivatePrescriptionMessage(String prescription) {
+        System.out.println("Ok, I've activated the prescription below:");
+        printLine();
+        System.out.println(prescription);
+        printLine();
+    }
+
+    public void printDeactivatePrescriptionMessage(String prescription) {
+        System.out.println("Ok, I've deactivated the prescription below:");
+        printLine();
+        System.out.println(prescription);
+        printLine();
+    }
 }
 
