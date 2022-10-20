@@ -98,7 +98,7 @@ public class UserStorageParser {
             String fileContent = convertUniversityListIntoFileContent(userUniversityListManager);
             UserStorage.saveFile(fileContent);
         } catch (IOException e) {
-            System.out.println("IOException has occurred");
+            System.out.println("Error, IOException has occurred");
         }
     }
 }

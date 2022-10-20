@@ -9,11 +9,11 @@ import java.util.logging.Logger;
 
 /**.
  * Deals with loading tasks from the specified file and saving tasks in the specified file
- * File name should be specified in Duke.java: "data/duke.txt"
+ * File name should be specified in Duke.java: "data/myinfo.txt"
  */
 public class UserStorage {
     private static Logger logger = Logger.getLogger("UserStorage");
-    private static final String USER_STORAGE_FILE_PATH = "data/duke.txt";
+    private static final String USER_STORAGE_FILE_PATH = "data/myinfo.txt";
 
     /**.
      * Clears content in the file and writes new text into the file.

@@ -1,0 +1,38 @@
+@startuml
+
+== Initialisation ==
+
+activate UserStorageParser
+-> UserStorageParser : getSavedLists()
+
+activate UserStorage
+UserStorageParser -> UserStorage : loadFile()
+UserStorage --> UserStorageParser : fileContent : String
+deactivate UserStorage
+
+create UserUniversityListManager
+UserStorageParser -> UserUniversityListManager : new(fileContent)
+activate UserUniversityListManager
+UserUniversityListManager -> UserStorageParser : convertFileContentIntoUniversityList(fileContent)
+UserStorageParser --> UserUniversityListManager : myManager : HashMap<String, UserUniversityList>
+deactivate UserUniversityListManager
+deactivate UserStorageParser
+
+== Getting User Input ==
+
+opt add/delete modules
+-> UserStorageParser : storeCreatedLists(userUniversityListManager)
+activate UserStorageParser
+UserStorageParser -> UserStorageParser : convertUniversityListIntoFileContent(userUniversityListManager)
+activate UserStorageParser
+UserStorageParser --> UserStorageParser : fileContent : String
+deactivate UserStorageParser
+UserStorageParser -> UserStorage : saveFile(fileContent)
+activate UserStorage
+UserStorage --> UserStorageParser
+deactivate UserStorage
+deactivate UserStorageParser
+end
+
+
+@enduml
