@@ -152,8 +152,7 @@ public class Parser {
             } else if (userInput.contains(tvKeyword)) {
                 addMedia(fields, tvSpacing);
                 logger.log(Level.INFO, "\n\tAdd command executed");
-            }
-            else {
+            } else {
                 throw new DukeException();
             }
         } catch (DukeException e) {
