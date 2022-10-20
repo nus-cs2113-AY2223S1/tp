@@ -3,9 +3,14 @@ package seedu.duke.timetable;
 import seedu.duke.exceptions.DuplicateLessonException;
 import seedu.duke.exceptions.InvalidTimeFormatException;
 import seedu.duke.exceptions.LessonNotFoundException;
+import seedu.duke.exceptions.TimetableClashException;
 import seedu.duke.ui.Ui;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -79,6 +84,29 @@ public class Timetable {
     }
 
     /**
+     * Checks if attempting to add a lesson results in a timetable clash.
+     *
+     * @param lesson The lesson that the user is attempting to add to a timetable.
+     * @return False if there is no timetable clash
+     * @throws TimetableClashException if there is a timetable clash
+     * @throws ParseException if there is an invalid time format parsed
+     */
+    boolean hasTimetableClash(Lesson lesson) throws TimetableClashException, ParseException {
+        SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
+        String day = lesson.getDay();
+        Date newStartTime = parser.parse(lesson.getStartTime());
+        Date newEndTime = parser.parse(lesson.getEndTime());
+        for (Lesson currentLesson : userTimetable.get(day)) {
+            Date currentStartTime = parser.parse(currentLesson.getStartTime());
+            Date currentEndTime = parser.parse(currentLesson.getEndTime());
+            if (newEndTime.after(currentStartTime) || newStartTime.before(currentEndTime)) {
+                throw new TimetableClashException("Error! There is a timetable clash!");
+            }
+        }
+        return false;
+    }
+
+    /**
      * Adds a lesson to the timetable based on day.
      *
      * @param newLesson The new lesson to be added to the timetable.
@@ -89,11 +117,20 @@ public class Timetable {
             throw new DuplicateLessonException("Duplicate lesson not allowed.");
         }
         try {
-            if (isValidDay(newLesson) && isValidStartTime(newLesson) && isValidEndTime(newLesson)) {
+            if (isValidDay(newLesson) && isValidStartTime(newLesson) && isValidEndTime(newLesson)
+                    && !hasTimetableClash(newLesson)) {
                 userTimetable.get(newLesson.getDay()).add(newLesson);
                 System.out.print(Ui.printLessonAddedAcknowledgement(newLesson));
+                Collections.sort(userTimetable.get(newLesson.getDay()), (l1, l2) -> {
+                    try {
+                        return new SimpleDateFormat("HH:mm").parse(l1.getStartTime())
+                                .compareTo(new SimpleDateFormat("HH:mm").parse(l2.getStartTime()));
+                    } catch (ParseException e) {
+                        return 0;
+                    }
+                });
             }
-        } catch (InvalidTimeFormatException e) {
+        } catch (InvalidTimeFormatException | TimetableClashException | ParseException e) {
             Ui.printExceptionMessage(e);
         }
     }
