@@ -52,10 +52,25 @@ blah blah by insuf
 
 ### Mcs feature
 
-blah blah by ishita
 
+The mcs mechanism is facilitated by 'Parser', 'Mcs', 'ModuleList', and 'UI', where the user enters
+a semester and the total number of mcs taken that semester is calculated and displayed. 
 
+Below is an example usage scenario and how the mcs mechanism behaves at each step.
 
+Step 1: Assume that the user has already added two modules to y2s1:
+The first module is CS2113, a 4 MC module which was added using the following command "add m/cs2113 s/y2s1 mc/4 g/a"
+The second module is CS2030, a 4 MC module which was added using the following command "add m/cs2030 s/y2s1 mc/4 g/a"
+
+Step 2: The user input of "mcs s/y2s1" will be taken in for the parser and an object of class 'Mcs' will be returned.
+
+Step 3: The execute method of MCs class that is overrides will be called with parameter of the semester and will iterate through 
+the moduleList. If the semester in which a particular module is taken matches the semester given as the argument, then mcsCount variable 
+will be increased by the number of Mcs of the module taken. In the end, mcsCount will be returned.
+
+The sequence diagram below illustrates this mcs mechanism.
+
+![McsUML.png](McsUML.png)
 
 
 ## Product scope

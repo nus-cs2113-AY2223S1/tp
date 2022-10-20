@@ -1,4 +1,3 @@
-
 'https://plantuml.com/sequence-diagram
 
 @startuml
@@ -8,21 +7,21 @@ Duke -> Parser: parse(input)
 activate Parser
 Parser -> Parser: specificCase(commandWord, content)
 activate Parser
-Parser -> Delete: new Delete(content)
-activate Delete
-return c: Delete
-return c: Delete
-return c: Delete
+Parser -> Mcs: new Mcs(content)
+activate Mcs
+return c: Mcs
+return c: Mcs
+return c: Mcs
 deactivate Parser
-Duke -> Delete: c.execute(moduleList)
-activate Delete
+Duke -> Mcs: c.execute(moduleList)
+activate Mcs
 activate ModuleList
-Delete -> ModuleList: Delete(modCodeToDelete)
-deactivate Delete
+Mcs -> ModuleList: mc(semester)
+deactivate Mcs
 ModuleList -> ModuleList: check mod.getSemesterTaken().matches(semester)
 activate ModuleList
 return mcsCount: integer
-ModuleList -> UI: printDeleteMessage(mod_info)
+ModuleList -> UI: mcMessage(semester, mcsCount)
 activate UI
 deactivate UI
 
