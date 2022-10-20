@@ -7,6 +7,7 @@ import java.util.Scanner;
 import java.util.Map;
 
 import seedu.duke.module.ModuleMapping;
+import seedu.duke.timetable.Lesson;
 import seedu.duke.university.University;
 import seedu.duke.user.UserModuleMapping;
 import seedu.duke.user.UserModuleMappingList;
@@ -306,6 +307,64 @@ public class Ui {
     public static String printFavouriteListDeletedAcknowledgement(String universityName) {
         assert universityName.length() > 0 : "University name should not be empty";
         String message = LINE + "Success! You deleted:\n" + universityName + "from your favourited lists" + "\n" + LINE;
+        return message;
+    }
+
+    /**
+     * Prints an acknowledgement message to inform the user that they have
+     * successfully created a timetable for a university.
+     * @param universityName The name of the university for which the timetable was created by the user.
+     * @return Acknowledgement message to user for creating a timetable for a university.
+     */
+    public static String printTimetableCreatedAcknowledgement(String universityName) {
+        assert universityName.length() > 0 : "University name should not be empty";
+        String message = LINE + "Success! You have created a new timetable for " + universityName + "\n" + LINE;
+        return message;
+    }
+
+    /**
+     * Prints an acknowledgement message to inform the user that they have
+     * successfully deleted the timetable for a university.
+     * @param universityName The name of the university for which the timetable was deleted by the user.
+     * @return Acknowledgement message to user for deleting the timetable for a university.
+     */
+    public static String printTimetableDeletedAcknowledgement(String universityName) {
+        assert universityName.length() > 0 : "University name should not be empty";
+        String message = LINE + "Success! You deleted the timetable for " + universityName + "\n" + LINE;
+        return message;
+    }
+
+    /**
+     * Displays to the user information regarding a lesson.
+     *
+     * @return Formatted string for a lesson and its associated module code, title, start time and end time.
+     */
+    public static String printLesson(Lesson lesson) {
+        assert lesson.getCode().length() > 0 : "Module code length cannot be empty";
+        assert lesson.getTitle().length() > 0 : "Module title length cannot be empty";
+        assert lesson.getStartTime().length() > 0 : "Lesson start time cannot be empty";
+        assert lesson.getEndTime().length() > 0 : "Lesson end time cannot be empty";
+        String message = lesson.getStartTime() + "hrs-" + lesson.getEndTime() + "hrs: "
+                + lesson.getCode() + " " + lesson.getTitle();
+        return message;
+    }
+
+    /**
+     * Sequentially prints each lesson stored in the timetable's list based on the day.
+     *
+     * @param lessons The list of lessons to be printed.
+     * @return Formatted string for the modules in the list.
+     */
+    public static String printLessonsByDayInTimetable(ArrayList<Lesson> lessons) {
+        assert lessons.size() > 0 : "List of lessons should not be empty";
+        String message = LINE;
+        for (int i = 0; i < lessons.size(); i++) {
+            message += Integer.toString(i + 1);
+            message += ". ";
+            message += printLesson(lessons.get(i));
+            message += "\n";
+        }
+        message += LINE;
         return message;
     }
 }
