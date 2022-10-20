@@ -1,5 +1,6 @@
 package seedu.commands;
 
+import seedu.data.CarparkFilteredList;
 import seedu.data.CarparkList;
 import seedu.parser.search.Sentence;
 import seedu.ui.Ui;
@@ -19,7 +20,7 @@ public class Search {
      * @return {@link CarparkList} that is filtered down to {@link seedu.data.Carpark Carpark} items containing all
      *      words in the searchQuery.
      */
-    public static CarparkList runSearch(CarparkList carparkList, Sentence searchQuery) {
+    public static CarparkFilteredList runSearch(CarparkList carparkList, Sentence searchQuery) {
         return carparkList.filterByAllStrings(searchQuery);
     }
 

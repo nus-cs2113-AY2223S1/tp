@@ -49,31 +49,26 @@ public class Carpark {
         }
     }
 
-    public Sentence getDevelopmentSentence() {
-        return developmentSentence;
-    }
-
     public String getListViewString() {
         return String.format("CarparkID %s at %s\n   %s available lots total", carparkId,
-                developmentSentence.toString(), availableLots);
+            developmentSentence.toString(), availableLots);
     }
 
     public String getDetailViewString() {
-        StringBuilder bufferString = new StringBuilder();
-        bufferString.append(Ui.getSeparatorString()).append("\n");
-        bufferString.append(developmentSentence.toString()).append("\n");
-        bufferString.append(Ui.getSeparatorString()).append("\n");
         String formatString = "Carpark code: %s\n"
             + "Favourited: %s\n"
             + "Number of available lots (total): %s";
         String favourited = isFavourited ? "Yes" : "No";
-        bufferString.append(String.format(formatString, carparkId, favourited, availableLots));
-        bufferString.append(getLotBreakdownString()).append("\n");
-        bufferString.append(Ui.getSeparatorString()).append("\n");
-        return bufferString.toString();
+        String bufferString = Ui.getSeparatorString() + "\n"
+            + developmentSentence.toString() + "\n"
+            + Ui.getSeparatorString() + "\n"
+            + String.format(formatString, carparkId, favourited, availableLots)
+            + getLotBreakdownString() + "\n"
+            + Ui.getSeparatorString() + "\n";
+        return bufferString;
     }
 
-    public String getLotBreakdownString() {
+    private String getLotBreakdownString() {
         StringBuilder bufferString = new StringBuilder();
         List<LotType> lotTypes = new ArrayList<>();
         lotTypes.add(LotType.CAR);
@@ -81,7 +76,7 @@ public class Carpark {
         lotTypes.add(LotType.HEAVY_VEHICLE);
         for (LotType lotType : lotTypes) {
             bufferString.append("\n").append(String.format("  %s: %s lots", CommonData.LOT_TYPE_TO_STRING.get(lotType),
-                    allAvailableLots.getOrDefault(lotType, 0)));
+                allAvailableLots.getOrDefault(lotType, 0)));
         }
         return bufferString.toString();
     }
@@ -142,6 +137,7 @@ public class Carpark {
             return LotType.CAR;
         }
     }
+
     public int getAvailableLots() {
         return availableLots;
     }
@@ -167,10 +163,16 @@ public class Carpark {
     /**
      * Add a carpark lot type to the {@link Carpark#allAvailableLots} Hashmap object,
      * where the key is a {@link LotType} and the value is the number of lots.
+     *
      * @param carpark Carpark object to be added.
      */
     public void addCarparkLotType(Carpark carpark) {
         allAvailableLots.put(carpark.getLotType(), carpark.getAvailableLots());
         availableLots += carpark.getAvailableLots();
+    }
+
+
+    public Sentence getDevelopmentSentence() {
+        return developmentSentence;
     }
 }
