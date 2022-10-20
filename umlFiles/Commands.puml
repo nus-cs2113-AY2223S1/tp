@@ -1,0 +1,73 @@
+@startuml
+!include style.puml
+
+abstract class Commands {
+    {abstract} String execute()
+}
+hide Commands fields
+
+class AddCommand {
+    +media: Media
+    +AddCommand(reviews: ReviewList, media: Media)
+}
+
+class ClearCommand {
+    +ClearCommand(reviews: ReviewList)
+}
+hide ClearCommand fields
+
+class FavouriteCommand {
+    +userInput: String[]
+    +FavouriteCommand(reviews: ReviewList, userInput: String[])
+}
+
+class FindCommand {
+    -outputString: String
+    -movieString: String
+    -tvShowString: String
+    -listDelimiter: String
+    #searchTerm: String
+    +FindCommand(reviews: ReviewList, searchTerm: String)
+
+}
+
+class ListCommand {
+    -outputString: String
+    -movieString: String
+    -tvShowString: String
+    -listDelimiter: String
+    +ListCommand((reviews: ReviewList)
+}
+
+class RemoveCommand {
+    +index: int
+    +RemoveCommand(reviews: ReviewList, index: int)
+}
+
+class SortCommand {
+    +userInput: String[]
+    +SortCommand(reviews: ReviewList, userInput: String[])
+}
+
+class ReviewList {
+    +inputs: ArrayList<Media>
+    +void add(media: Media)
+    +void remove(index: int)
+    +String toString()
+}
+
+Commands -up-> "1" ReviewList : > uses
+
+skinparam groupInheritance 1
+
+Commands <|-right- AddCommand
+Commands <|-right- ClearCommand
+Commands <|-- FavouriteCommand
+
+Commands <|-- FindCommand
+Commands <|-- ListCommand
+Commands <|-left- RemoveCommand
+Commands <|-left- SortCommand
+
+
+@enduml

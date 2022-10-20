@@ -3,7 +3,6 @@ package seedu.duke;
 import java.util.ArrayList;
 
 public class ClearCommand extends Commands {
-
     public ClearCommand(ReviewList reviews) {
         super(reviews);
     }

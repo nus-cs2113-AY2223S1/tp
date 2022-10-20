@@ -1,0 +1,14 @@
+@startuml
+!include style.puml
+
+class Ui {
+    -logger: Logger
+    +exitTrigger: String
+    #isExit: boolean
+    +void greetUser()
+    +String getInput(userInputScanner: Scanner)
+    +{static} void print(toPrint: String)
+    +void printExitGreeting()
+}
+
+@enduml
