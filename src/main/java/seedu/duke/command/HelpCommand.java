@@ -7,6 +7,10 @@ import seedu.duke.utils.Ui;
 
 public class HelpCommand extends Command {
     public static final String COMMAND_WORD = "help";
+
+    public static final String FORMAT = HelpCommand.COMMAND_WORD
+            + ": lists all functions!\n";
+
     public static final String HELP_MODULE_COMMAND_USAGE =  HelpCommand.COMMAND_WORD
             + ": lists all functions!\n";
     public static final String ADD_MODULE_COMMAND_USAGE = AddModuleCommand.COMMAND_WORD
@@ -22,6 +26,8 @@ public class HelpCommand extends Command {
             + ": displays current timetable!\n";
     public static final String SELECT_SLOT_COMMAND_USAGE = SelectSlotCommand.COMMAND_WORD
             + ": select /module [MODULE_CODE] /type [LESSON_TYPE] /code [CLASS_NO] - select slot for modules!\n";
+    public static final String SELECT_SEMESTER_COMMAND_USAGE = SelectSemesterCommand.COMMAND_WORD
+            + ": semester [SEMESTER SELECTED] = select semester to plan for and organise!\n";
 
 
     public static final String HELP_DISPLAY_MESSAGE = HELP_MODULE_COMMAND_USAGE
@@ -30,7 +36,8 @@ public class HelpCommand extends Command {
             + EXIT_MODULE_COMMAND_USAGE
             + SEARCH_MODULE_COMMAND_USAGE
             + VIEW_TIMETABLE_COMMAND_USAGE
-            + SELECT_SLOT_COMMAND_USAGE;
+            + SELECT_SLOT_COMMAND_USAGE
+            + SELECT_SEMESTER_COMMAND_USAGE;
 
     public HelpCommand(String[] input) {
         super(input);

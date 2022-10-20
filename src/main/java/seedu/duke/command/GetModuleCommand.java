@@ -4,7 +4,6 @@ import seedu.duke.utils.State;
 import seedu.duke.utils.Storage;
 import seedu.duke.utils.Ui;
 import seedu.duke.model.RawLesson;
-import seedu.duke.model.SelectedModule;
 import seedu.duke.model.Timetable;
 
 import java.util.ArrayList;
