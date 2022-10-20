@@ -79,9 +79,29 @@ Fetching data from LTA API
 
 User-facing parts of the program
 
+
 #### Logic Component
 
-Parsing, commands
+How the parsing works:
+
+* When called upon to parse a user command, the `Parser` class creates an `ABCCommandParser` (`ABC` is a placeholder 
+for the specific command name eg. `FindCommandParser`) which uses the other classes to parse the user command and
+create an `ABCCommand` object (eg. `FindCommand`), which the `Parser` returns back as a `Command` object.
+
+* All `ABCCommandParser` classes (eg. `FindCommandParser`, ``SearchCommandParser` etc) inherit from the `Parser` 
+interface so that they can be treated similarly where possible.
+
+
+
+How the command works:
+
+* When the `Parser` returns back as a `Command` object, it will run `execute`, which is a method to execute the command
+and return the intended result. `Execute` returns a `CommandResult`, which is an object that takes in `String` and
+`CarparkList` and returns what the user will be seeing on the terminal.
+* Each command will have its own class `ABCCommand` (`ABC` is a placeholder for the specific command name eg. 
+`FindCommand`) as an extension of the `Command` class.
+* All `ABCCommand` classes will have an override `execute` method, which will override the `execute` method in `Command` 
+and return the respective `CommandResult` result of the Command.
 
 #### Common Files
 
@@ -114,4 +134,3 @@ Parsing, commands
 ## Instructions for manual testing
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
-testetetestsststs
