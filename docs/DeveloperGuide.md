@@ -97,6 +97,86 @@ The <code>Parser</code> component can:
 - return the correct command type based on user input.
 
 ### 3.4 Command Component
+The <code>Command</code> component can:
+- execute and return the command type based on the first word of the user input.
+
+Below is a table of command subclasses and their respective command type. The different command types extends from the 
+Command class and are all in the command package.
+
+[//]: # (if the table is not necessary, remove it)
+| Command    | Command Type              | Action                                                                  |
+|------------|---------------------------|-------------------------------------------------------------------------|
+| `add`      | `AddModuleCommand`        | Adds the user input module into their timetable.                        |
+| `delete`   | `DeleteModuleCommand`     | Deletes the user input module from their timetable.                     |
+| `help`     | `HelpCommand`             | Displays the help message.                                              |
+| `search`   | `SearchModuleCommand`     | Searches the user input module based on code, title, semester or level. |
+| `select`   | `SelectSlotCommand`       | Selects the time slot for the different lesson types.                   |
+| `semester` | `SelectSemesterCommand`   | Selects the semester that the user want.                                |
+| `get`      | `GetCommand`              | Gets all the details with the user input module code.                   |
+| `view`     | `ViewCommand`             | Views the user timetable with user's selected modules.                  |
+| `bye`      | `ExitCommand`             | Exits the program.                                                      |
+| `nil`      | `InvalidCommand`          | Displays the invalid command message.                                   |
+| `nil`      | `IncompleteModuleCommand` | Display the incomplete command message.                                 |
+| `nil`      | `UnknownCommand`          | Display the unknown command message.                                    |
+
+#### 3.4.1 AddModuleCommand
+
+#### 3.4.2 DeleteModuleCommand
+
+#### 3.4.3 HelpCommand
+
+#### 3.4.4 SearchModuleCommand
+
+##### How the feature is implemented
+The <code>SearchModuleCommand</code> class extends the <code>Command</code> class.
+It overrides the <code>execute()</code> method from the <code>Command</code> class.
+The <code>execute()</code> method will search for the user input module primarily based on either module code or title,
+with additional parameters of semester and level to narrow down the search results.
+
+##### Why it is implemented this way.
+User may or may not know the exact module code or title. As such, the user can search for the module based on optional 
+parameters such as semester or level. However, the user must input at least the module code or title before additional 
+parameters can be added in order to refine the search.
+
+##### Alternatives considered.
+We thought of implementing the search feature in a way that the required user for multiple inputs and displaying all the
+different results after each input. However, we decided against it as it would be too tedious for the user to input 
+multiple times and the search process will be too long.
+
+#### 3.4.5 SelectCommand
+
+#### 3.4.6 SelectSemesterCommand
+
+#### 3.4.7 GetCommand
+
+##### How the feature is implemented
+The <code>GetCommand</code> class extends the <code>Command</code> class.
+It overrides the <code>execute()</code> method from the <code>Command</code> class.
+The <code>execute()</code> method will get all the module details from the user input module code.
+
+##### Why it is implemented this way.
+This function was implemented this way as it is the most intuitive way to get the module details. It also displays all
+the different lesson types and their respective time slots. However, if the user is planning in a semester that the 
+module is not offered, the user will be notified that the module is not offered in the current semester and timings will
+not be shown. This is to prevent the user from selecting a time slot that is not offered in the current semester, which 
+will reduce the chance of having an error if the user tries to select a time slot of the module that is not offered in 
+the current semester.
+
+##### Alternatives considered.
+We thought of displaying the full module details from the search results. However, we decided against it as it would be 
+too tedious for the user to search for the **exact module code** first before getting the details. The user may
+not know the exact module code, which is not very user-friendly and takes up a lot of time just to get the module 
+details for 1 module. 
+
+#### 3.4.8 ViewCommand
+
+#### 3.4.9 ExitCommand
+
+#### 3.4.10 InvalidCommand
+
+#### 3.4.11 IncompleteModuleCommand
+
+#### 3.4.12 UnknownCommand
 
 ### 3.5 Utils Component
 
