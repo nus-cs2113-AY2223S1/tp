@@ -23,6 +23,30 @@ The following diagram illustrates the flow of the program, from the initial load
 
 ![Database Sequence Diagram](./images/Database_Sequence.png)
 
+### User Storage
+
+User Storage stores user's information, which is a list of interested universities for SEP. Each university has a list of 
+modules that the user is interested in. This will be stored in a text file called myinfo.txt. 
+
+Upon starting easySEP, the UserStorage class will take in information from the text file and convert it into a String.
+UserStorageParser will create a new UserUniversityListManager, by converting the String into a HashMap<String, UserUniversityList>
+which serves as myManager for the UserUniversityListManager class.
+
+Relevant exceptions are thrown when there are unexpected scenarios. For example, if the data in the text file is stored in an invalid format,
+an InvalidUserStorageFileException will be thrown.
+
+During the duration of the program, whenever the user decides to alter the data in the text file
+(ie. add / delete universities or modules), UserStorageParser class will update the text file accordingly.
+This is achieved by converting myManager into a String format, before saving it in the text file.
+
+The following diagram illustrates the relationships between the two main user storage classes - UserStorage and UserStorageParser.
+
+![User Storage Class Diagram](./images/UserStorage_Class.png)
+
+The following diagram illustrates the flow of the program, from initialisation to updating of the text file.
+
+![User Storage Sequence Diagram](./images/UserStorage_Sequence.png)
+
 ## Product scope
 ### Target user profile
 
