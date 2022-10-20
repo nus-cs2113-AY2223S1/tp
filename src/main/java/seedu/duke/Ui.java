@@ -24,7 +24,6 @@ public class Ui {
         
         if (userInputScanner.hasNextLine()) {
             userInput = userInputScanner.nextLine();
-            logger.log(Level.INFO, "Added new command");
         }
 
         if (userInput.equals(exitTrigger)) {

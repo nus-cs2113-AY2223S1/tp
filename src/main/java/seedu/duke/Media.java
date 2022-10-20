@@ -15,6 +15,7 @@ public class Media {
     public String genre;
     public Date dateWatched;
     public String dateString;
+    public boolean favourite = false;
 
     public Date getDateWatched() {
         return dateWatched;
@@ -40,7 +41,6 @@ public class Media {
         this.favourite = favourite;
     }
 
-    public boolean favourite = false;
 
     /**.
      * Creates a new review

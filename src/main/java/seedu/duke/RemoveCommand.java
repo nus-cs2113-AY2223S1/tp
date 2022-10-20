@@ -10,6 +10,7 @@ public class RemoveCommand extends Commands {
 
     @Override
     public String execute() {
+        assert reviewList.inputs.size() != 0 : "Cannot remove from an array of size 0" ;
         Media deleteMedia = reviewList.inputs.get(index);
         reviewList.remove(index);
         return "Noted. I've deleted the following media:" + '\n' + '\t' + deleteMedia.toString()
