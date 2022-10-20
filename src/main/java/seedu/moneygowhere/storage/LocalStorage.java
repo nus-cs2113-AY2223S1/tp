@@ -352,6 +352,29 @@ public class LocalStorage {
         }
     }
 
+    private void parseIncomeToXML(Document doc, Element rootElement, ArrayList<Income> savedIncomes) {
+        Integer index = 1;
+        for (Income income : savedIncomes) {
+            Element incomeElement = doc.createElement(XML_INCOME_ELEMENT);
+            incomeElement.setAttribute(XML_INCOME_ID_ATTRIBUTE, index.toString());
+            rootElement.appendChild(incomeElement);
+            Element name = doc.createElement(XML_INCOME_NAME_ELEMENT);
+            name.setTextContent(income.getName());
+            incomeElement.appendChild(name);
+            Element dateTime = doc.createElement(XML_INCOME_DATETIME_ELEMENT);
+            dateTime.setTextContent(income.getDateTime().toString());
+            incomeElement.appendChild(dateTime);
+            Element description = doc.createElement(XML_INCOME_DESCRIPTION_ELEMENT);
+            description.setTextContent(income.getDescription());
+            incomeElement.appendChild(description);
+            Element amount = doc.createElement(XML_INCOME_AMOUNT_ELEMENT);
+            amount.setAttribute(XML_INCOME_CURRENCY_ATTRIBUTE, DEFAULT_CURRENCY);
+            amount.setTextContent(income.getAmount().toString());
+            incomeElement.appendChild(amount);
+            index++;
+        }
+    }
+
     private void writeXml(Document doc)
             throws TransformerException {
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
