@@ -36,14 +36,17 @@ public class GetModuleCommand extends Command {
         ui.addMessage("Module Credit        : " + (module.moduleCredit));
         ui.addMessage("Department           : " + (module.department.isEmpty() ? "Nil" : module.department));
         ui.addMessage("Faculty              : " + (module.faculty.isEmpty() ? "Nil" : module.faculty));
-        ui.addMessage("Workload             : " + (module.workload.toString().isEmpty() ? "Nil" : module.workload.toString()));
-        ui.addMessage("semester offering    : " + (module.getSemestersOffering(module).isEmpty() ? "Nil" : module.getSemestersOffering(module)));
-        ui.addMessage("Prerequisite         : " + (module.prerequisite.toString().isEmpty() ? "Nil" : module.prerequisite.toString()));
+        ui.addMessage("Workload             : " + (module.workload.toString().isEmpty() ? "Nil" : module.workload
+                .toString()));
+        ui.addMessage("semester offering    : " + (module.getSemestersOffering(module).isEmpty() ? "Nil" : module
+                .getSemestersOffering(module)));
+        ui.addMessage("Prerequisite         : " + (module.prerequisite.toString().isEmpty() ? "Nil" : module
+                .prerequisite.toString()));
         ui.addMessage("Preclusion           : " + (module.preclusion.isEmpty() ? "Nil" : module.preclusion));
         ui.addMessage("Corequisite          : " + (module.corequisite.isEmpty() ? "Nil" : module.corequisite));
 
         ui.displayDivider();
-        if (moduleOfferedInCurrentSem(module, state)){
+        if (moduleOfferedInCurrentSem(module, state)) {
             List<Pair<Module, RawLesson>> lessons = new ArrayList<>();
             Pair<Module, RawLesson> lesson;
             List<RawLesson> tempLesson = module.getSemesterData(state.getSemester()).timetable;
@@ -51,11 +54,12 @@ public class GetModuleCommand extends Command {
                 lesson = Pair.of(module, rawLesson);
                 lessons.add(lesson);
             }
-    
+
             Timetable timetable = new Timetable(lessons, true, false);
             ui.addMessage(timetable.toString());
         } else {
-            ui.addMessage("Module " + module.moduleCode + " is not offered in this semesterm, hence no timetable information is available due to unforseen circumstances");
+            ui.addMessage("Module " + module.moduleCode + " is not offered in this semester"
+                    + ", hence no timetable information is available due to unforseen circumstances");
         }
 
         ui.displayUi();
