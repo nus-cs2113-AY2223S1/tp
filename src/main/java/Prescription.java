@@ -64,6 +64,14 @@ public class Prescription {
         return isActive ? ACTIVE : INACTIVE;
     }
 
+    public boolean isMatchedPatient(String patientId) {
+        return this.patientId.equalsIgnoreCase(patientId);
+    }
+
+    public boolean isMatchedPatientActive(String patientId) {
+        return isMatchedPatient(patientId) && isActive;
+    }
+
     @Override
     public String toString() {
         return "\tID: " + patientId + System.lineSeparator()

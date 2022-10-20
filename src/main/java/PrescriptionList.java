@@ -41,9 +41,44 @@ public class PrescriptionList {
         ui.printViewAllPrescriptionsMessage();
         ui.printLine();
         for (int i = 0; i < prescriptionsList.size(); i++) {
-            System.out.println((i + 1) + ")");
+            System.out.println("Prescription #" + (i + 1));
             System.out.println(prescriptionsList.get(i));
             ui.printLine();
+        }
+    }
+
+    public void viewPatientPrescription(UI ui, String patientId) {
+        // TODO check if patientId is in patient list
+        if (isEmpty()) {
+            ui.printNoPrescriptionMessage();
+            return;
+        }
+
+        ui.printViewAllPrescriptionsMessage();
+        ui.printLine();
+        for (int i = 0; i < prescriptionsList.size(); i++) {
+            if (prescriptionsList.get(i).isMatchedPatient(patientId)) {
+                System.out.println("Prescription #" + (i + 1));
+                System.out.println(prescriptionsList.get(i));
+                ui.printLine();
+            }
+        }
+    }
+
+    public void viewActivePatientPrescription(UI ui, String patientId) {
+        if (isEmpty()) {
+            ui.printNoPrescriptionMessage();
+            return;
+        }
+
+        ui.printViewAllPrescriptionsMessage();
+        ui.printLine();
+        for (int i = 0; i < prescriptionsList.size(); i++) {
+            if (prescriptionsList.get(i).isMatchedPatientActive(patientId)) {
+                System.out.println("Prescription #" + (i + 1));
+                System.out.println(prescriptionsList.get(i));
+                ui.printLine();
+            }
         }
     }
 
