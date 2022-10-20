@@ -127,6 +127,17 @@ Example of usage:
 * `View-RecurringPayment`
 * `View-RecurringPayment -r 1`
 
+### Merge file: `Merge-File`
+Merge save file from an external source given path to the save file
+
+Syntax: `Merge-File [-p PATH_STRING]`
+
+* `RECURRING_PAYMENT_INDEX` is an integer value. If this argument is provided, MoneyGoWhere will only display the specified recurring payment.
+
+Example of usage:
+
+* `merge-file -p "C:\Users\the_d\Downloads\expenses.txt"`
+
 ## FAQ
 
 **Q**: How do I transfer my data to another computer?
