@@ -6,7 +6,10 @@
 
 ## Design & implementation
 
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+Our program is structured as pictured in the following class diagram:
+![ClassDiagram.png](ClassDiagram.png)
+
+All the inheritors of Command are features that will be described below.
 
 ### Addition feature
 
@@ -18,33 +21,68 @@ Step 1: The user launches the application for the first time. A ModuleList objec
 
 Step 2: The user input of "add m/cs2113 s/y2s1 mc/4 g/a" will be taken in for parser and an object of class 'Add' will be returned.
 
-Step 3: The execute method in the Add class that is overriden will be called with parameter of moduleList and module to be added passed. This will add the Module into the module list created in step 1.
+Step 3: The execute method in the Add class that is overrides will be called with parameter of moduleList and module to be added passed. This will add the Module into the module list created in step 1.
 
-Below illustrate the add mechanism using a sequence diagram:
+The sequence diagram below illustrates this add mechanism:
 
 ![AddUML.png](AddUML.png)
 
-
 ### Deletion feature
 
-blah blah blah by BRANDON THE AWESOME YAYY
+The deletion mechanism is facilitated by 'Parser', 'Add', 'ModuleList' and 'UI', where a Module object will be deleted according to the module code inputted by the user and removed from the module list.
 
-HAAHAHHAHA
+Below is an example usage scenario and how the addition mechanism behaves at each step:
+
+Step 1: Assume that the user has already added a module named CS2113 into the ModuleList using the following command, "add m/cs2113 s/y2s1 mc/4 g/a"
+
+Step 2: The user input of "delete m/cs2113" will be taken in for the parser and an object of class 'Delete' will be returned.
+
+Step 3: The execute method in the Delete class that is overrides will be called with parameter of the modCode and will iterate through moduleList looking for a Module that matches. It will then remove the Module from the moduleList.
+
+The sequence diagram below illustrates this delete mechanism:
 
 ![DeleteUML.png](DeleteUML.png)
 
-
 ### View feature
 
-blah blah by insuf
+The View mechanism is facilitated by 'Parser', 'View', 'ModuleList', and 'UI', where the user enters
+a semester and the total number of mcs taken that semester is calculated and displayed.
 
+Below is an example usage scenario and how the view mechanism behaves at each step.
+
+Step 1: Assume that the user has already added two modules to y2s1:
+The first module is CS2113, a 4 MC module which was added using the following command "add m/cs2113 s/y2s1 mc/4 g/a"
+The second module is CS2030, a 4 MC module which was added using the following command "add m/cs2030 s/y2s1 mc/4 g/a"
+
+Step 2: The user input of "view s/y2s1" will be taken in for the parser and an object of class 'View' will be returned.
+
+Step 3: The execute method of View class that is overrides will be called with parameter of the semester and will iterate through
+the moduleList. If the semester in which a particular module is taken matches the semester given as the argument, then the module will be added to an ArrayList called matchingModules. In the end, the arrayList matchingModules will be returned.
+
+The sequence diagram below illustrates this view mechanism.
+
+![viewUML.png](viewUML.png)
 
 ### Mcs feature
 
-blah blah by ishita
+The mcs mechanism is facilitated by 'Parser', 'Mcs', 'ModuleList', and 'UI', where the user enters
+a semester and the total number of mcs taken that semester is calculated and displayed. 
 
+Below is an example usage scenario and how the mcs mechanism behaves at each step.
 
+Step 1: Assume that the user has already added two modules to y2s1:
+The first module is CS2113, a 4 MC module which was added using the following command "add m/cs2113 s/y2s1 mc/4 g/a"
+The second module is CS2030, a 4 MC module which was added using the following command "add m/cs2030 s/y2s1 mc/4 g/a"
 
+Step 2: The user input of "mcs s/y2s1" will be taken in for the parser and an object of class 'Mcs' will be returned.
+
+Step 3: The execute method of MCs class that is overrides will be called with parameter of the semester and will iterate through 
+the moduleList. If the semester in which a particular module is taken matches the semester given as the argument, then mcsCount variable 
+will be increased by the number of Mcs of the module taken. In the end, mcsCount will be returned.
+
+The sequence diagram below illustrates this mcs mechanism.
+
+![McsUML.png](McsUML.png)
 
 
 ## Product scope
