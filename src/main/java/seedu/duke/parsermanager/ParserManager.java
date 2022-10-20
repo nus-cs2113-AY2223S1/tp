@@ -20,8 +20,10 @@ import static seedu.duke.CommandStructure.COMMAND_LIST;
 import static seedu.duke.CommandStructure.COMMAND_PAIR;
 import static seedu.duke.CommandStructure.COMMAND_UNPAIR;
 import static seedu.duke.CommandStructure.PROPERTY_FLAG;
+import static seedu.duke.CommandStructure.EVERYTHING_FLAG;
 import static seedu.duke.Messages.MESSAGE_INCORRECT_LIST_DETAILS;
 import static seedu.duke.Messages.MESSAGE_MISSING_SUB_COMMAND_TYPE;
+
 
 public class ParserManager {
     private static ClientList clientList;
@@ -35,6 +37,8 @@ public class ParserManager {
     private static final int SUB_COMMAND_INDEX = 0;
     private static final int COMMAND_FLAG_INDEX = 1;
     private static final int COMMAND_DESCRIPTION_INDEX = 1;
+    private static final String PROPERTY_FLAG = "-property";
+    private static final String CLIENT_FLAG = "-client";
 
 
     public ParserManager(ClientList clientL, PropertyList propertyL, PairingList pairingL) {
@@ -97,13 +101,16 @@ public class ParserManager {
                 throw new UndefinedSubCommandTypeException(MESSAGE_MISSING_SUB_COMMAND_TYPE);
             }
         case COMMAND_LIST:
-            boolean isListProperty = commandDetail.trim().equals(PROPERTY_FLAG);
-            boolean isListClient = commandDetail.trim().equals(CLIENT_FLAG);
-
+            ArrayList<String> listCommandTypeAndFlags = getListCommandType(commandDetail);
+            boolean isListProperty = listCommandTypeAndFlags.get(0).trim().equals(PROPERTY_FLAG);
+            boolean isListClient = listCommandTypeAndFlags.get(0).equals(CLIENT_FLAG);
+            boolean isListEverything = listCommandTypeAndFlags.get(0).equals(EVERYTHING_FLAG);
             if (isListProperty) {
-                return new ParseListProperty(commandDetail);
+                return new ParseListProperty(listCommandTypeAndFlags.get(1));
             } else if (isListClient) {
-                return new ParseListClient(commandDetail);
+                return new ParseListClient(listCommandTypeAndFlags.get(1));
+            } else if (isListEverything && listCommandTypeAndFlags.get(1).isEmpty()) {
+                return new ParseListEverything();
             } else {
                 throw new UndefinedSubCommandTypeException(MESSAGE_INCORRECT_LIST_DETAILS);
             }
@@ -127,4 +134,15 @@ public class ParserManager {
         return processedCommandDetails;
     }
 
+    private ArrayList<String> getListCommandType(String commandDetail) {
+        ArrayList<String> listCommandTypeAndFlags = new ArrayList<>();
+        String[] listTypeAndFlagsArray = commandDetail.split(EMPTY_SPACE, MAX_LENGTH);
+        listCommandTypeAndFlags.add(listTypeAndFlagsArray[0].trim());
+        if (listTypeAndFlagsArray.length == 1) {
+            listCommandTypeAndFlags.add("");
+        } else {
+            listCommandTypeAndFlags.add(listTypeAndFlagsArray[1].trim());
+        }
+        return listCommandTypeAndFlags;
+    }
 }

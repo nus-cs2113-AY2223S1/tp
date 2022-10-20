@@ -56,9 +56,33 @@ ___
 ### Property Component
 ### Model Component
 ### Storage Component
+For `Storage` feature:
+
+![Storage Design Diagram](diagrams/StorageDesignDiagram.jpg)
+
+The Storage class is a superclass itself that is not inherit from other class. This class is responsible for managing 
+three different text file:
+- `client.txt` - Stores the client that is in the Client ArrayList.
+- `property.txt` - Stores the property that is in the Property ArrayList.
+- `pairing.txt` - Stores the relationship between a client and property which is stored in the Pairing hashmap.
+
+
+It has an association with other class which includes:
+- CommandAddProperty
+- CommandAddClient
+- CommandDeleteProperty
+- CommandDeleteClient
+- CommandPair
+- CommandUnpair
+
+Since the arraylist changes by **adding** and **deleting** operations while hashmap changes by **pair** and **unpair** 
+operations, the text files will be updated when `add`, `delete`, `pair` or `unpair` is invoked.
+
 ### Common Classes
 ___
 ## Implementation
+
+This section describes the implementation details of the features within Property Rental Manager.
 
 ### Delete Client/Property feature
 The **delete client/property** mechanism involves the following classes: ```ParseDeleteClient```,
@@ -97,6 +121,56 @@ The following *sequence diagram* shows how the **delete property** operation wor
 ```PropertyList#deleteClient()``` method.
 
 ![Delete Property Sequence Diagram](diagrams/DeletePropertySD.png)
+
+### Storage
+The implementation of Storage class requires consists of different level of operations:
+
+- Load Files
+- Append to File
+- Update to File
+
+#### Load Files:
+![Load File Flowchart](diagrams/LoadFileFlowChart.jpg)
+At the file loading level, it comprises checks to verify the directory is created. This is done by invoking a method: 
+`loadFiles(hasDirectory, hasPropertyFile, hasClientFile, hasPairingFile, clientList, propertyList, pairingList)`.
+This method would conduct the following operations:
+- Create a `data` directory if not already exist. (`hasDirectory` is `false`)
+- Load Clients into Client ArrayList if `hasClientFile` is `true`.
+- Load Properties into Property ArrayList if `hasPropertyFile` is `true`.
+- Load Pairings into Pairing HashMap if `hasPairingFile` is `true`.
+
+An empty file would not be loaded into the ArrayList and PropertyList as the code is designed to read for `next()`.
+An empty file would invoke a `false` in `hasNext()`, thus adding operation would not continue. The overall operation can
+be visualised in the flowchart above.
+
+#### Append To File
+When file is appended into the text file, it's being stored in different formats as shown below:
+
+- Client:  `NAME | CONTACT_NUMBER | EMAIL <optional> | BUDGET` 
+- Property: `NAME | ADDRESS | RENTAL_PRICE | UNIT_TYPE` 
+- Pairing: `[CLIENT_FORMAT] : [PROPERTY_FORMAT]` 
+
+The text file of which Client, Property and Pairing is being stored is `client.txt`, `property.txt` and `pairing.txt` 
+respectively.
+
+![Add Client to Storage Diagram](diagrams/StorageAddClientSequenceDiagram.jpg)
+![Add Property to Storage Diagram](diagrams/StorageAddPropertySequenceDiagram.jpg)
+![Add Pair to Storage Diagram](diagrams/StorageAddPairSequenceDiagram.jpg)
+
+The three sequence diagram above shows the sequence of which the append operation is being invoked. All three
+operations are similar in operations but are invoked with different `parameter` and `path`.
+
+### Update To File
+The update operation happens when entries in ClientList and PropertyList is being deleted and entries the hash map of 
+PairingList is being removed.
+
+The sequence diagram of `updateClient`, `updateProperty` and `updatePair` can be seen below:
+![Update Client Sequence Diagram](diagrams/StorageUpdateClientSD.jpg)
+![Update Property Sequence Diagram](diagrams/StorageUpdatePropertySD.jpg)
+![Update Pairing Sequence Diagram](diagrams/StorageUpdatePairSD.jpg)
+
+Note that when delete operation is being invoked on client and property, the `updatePair` method will also be invoked to
+prevent entries retaining within pairingList after it has been deleted from clientList or propertyList.
 
 ## Documentation, logging, testing, configuration and dev-ops
 ___

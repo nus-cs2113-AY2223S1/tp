@@ -131,11 +131,60 @@ public class Ui {
         System.out.println(LINE_BREAK);
     }
 
+    public void displayOneClientName(Client client, int i) {
+        System.out.println(i + ".");
+        System.out.println(client.getClientName());
+        System.out.println(LINE_BREAK);
+    }
+
+    public void displayOneClientContact(Client client, int i) {
+        System.out.println(i + ".");
+        System.out.println(client.getClientContactNumber());
+        System.out.println(LINE_BREAK);
+    }
+
+    public void displayOneClientEmail(Client client, int i) {
+        System.out.println(i + ".");
+        System.out.println(client.getClientEmailForList());
+        System.out.println(LINE_BREAK);
+    }
+
+    public void displayOneClientBudget(Client client, int i) {
+        System.out.println(i + ".");
+        System.out.println(client.getClientBudgetPerMonth());
+        System.out.println(LINE_BREAK);
+    }
+
     public void displayOneProperty(Property property, int i) {
         System.out.println(i + ".");
         System.out.println(property.toString());
         System.out.println(LINE_BREAK);
     }
+
+    public void displayOnePropertyAddress(Property property, int i) {
+        System.out.println(i + ".");
+        System.out.println(property.getPropertyAddress());
+        System.out.println(LINE_BREAK);
+    }
+
+    public void displayOnePropertyLandlordName(Property property, int i) {
+        System.out.println(i + ".");
+        System.out.println(property.getLandlordName());
+        System.out.println(LINE_BREAK);
+    }
+
+    public void displayOnePropertyRentingPrice(Property property, int i) {
+        System.out.println(i + ".");
+        System.out.println(property.getRentingPrice());
+        System.out.println(LINE_BREAK);
+    }
+
+    public void displayOnePropertyUnitType(Property property, int i) {
+        System.out.println(i + ".");
+        System.out.println(property.getUnitType());
+        System.out.println(LINE_BREAK);
+    }
+
 
     public void showCheckProperty(ArrayList<Client> tenants) {
         showToUser(MESSAGE_CHECK_PROPERTY_RESULT);
