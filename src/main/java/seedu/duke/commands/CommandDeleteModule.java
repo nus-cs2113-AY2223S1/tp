@@ -35,20 +35,17 @@ public class CommandDeleteModule {
 
             indexToSet = Duke.sc.nextLine();
 
+            assert indexToSet != null;
+
             try {
-                timetable.deleteModule(indexToSet);
+                timetable.deleteModule(Integer.parseInt(indexToSet));
             } catch (NumberFormatException e) {
                 return "Please input an integer!";
             } catch (IndexOutOfBoundsException e) {
                 return "Please input an index in range!";
-
-
-                // assert null
-                //assert Integer.parseInt(indexToSet) > 0 : "Please input an index in range!";
-                //assert Integer.parseInt(indexToSet) <= timetable.getListLength() : "Please input an index in range!";
-
-                isTryAgain = true;
             }
+
+            isTryAgain = true;
 
 
             lgr.fine("Delete Module command run successful, no runtime error");
