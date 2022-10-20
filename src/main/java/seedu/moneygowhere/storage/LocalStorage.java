@@ -9,6 +9,7 @@ import seedu.moneygowhere.commands.ConsoleCommandSortExpense;
 import seedu.moneygowhere.common.Messages;
 import seedu.moneygowhere.data.expense.Expense;
 import seedu.moneygowhere.data.expense.ExpenseManager;
+import seedu.moneygowhere.data.target.Target;
 import seedu.moneygowhere.exceptions.LocalStorageLoadDataInputError;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -30,6 +31,10 @@ import java.util.ArrayList;
 
 import static seedu.moneygowhere.common.Configurations.LOCAL_STORAGE_DATA_FILE_PATH;
 import static seedu.moneygowhere.common.Configurations.LOCAL_STORAGE_DIRECTORY;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_ROOT;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_SORTCONFIG_ELEMENT;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_SORTCONFIG_ORDER_ATTRIBUTE;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_SORTCONFIG_TYPE_ATTRIBUTE;
 import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_EXPENSE_AMOUNT_CURRENCY_ATTRIBUTE;
 import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_EXPENSE_AMOUNT_ELEMENT;
 import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_EXPENSE_CATEGORY_ELEMENT;
@@ -39,10 +44,28 @@ import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_EXPENSE_
 import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_EXPENSE_ID_ATTRIBUTE;
 import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_EXPENSE_NAME_ELEMENT;
 import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_EXPENSE_REMARKS_ELEMENT;
-import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_ROOT;
-import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_SORTCONFIG_ELEMENT;
-import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_SORTCONFIG_ORDER_ATTRIBUTE;
-import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_SORTCONFIG_TYPE_ATTRIBUTE;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_TARGET_ELEMENT;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_TARGET_NAME_ELEMENT;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_TARGET_DATETIME_ELEMENT;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_TARGET_DESCRIPTION_ELEMENT;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_TARGET_AMOUNT_ELEMENT;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_TARGET_CURRENT_AMOUNT_ELEMENT;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_TARGET_CURRENCY_ATTRIBUTE;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_TARGET_ID_ATTRIBUTE;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_RECURRING_PAYMENT_ELEMENT;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_RECURRING_PAYMENT_ID_ATTRIBUTE;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_RECURRING_PAYMENT_NAME_ELEMENT;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_RECURRING_PAYMENT_INTERVAL_ELEMENT;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_RECURRING_PAYMENT_DESCRIPTION_ELEMENT;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_RECURRING_PAYMENT_AMOUNT_ELEMENT;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_RECURRING_PAYMENT_CURRENCY_ATTRIBUTE;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_INCOME_ELEMENT;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_INCOME_ID_ATTRIBUTE;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_INCOME_NAME_ELEMENT;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_INCOME_DATETIME_ELEMENT;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_INCOME_DESCRIPTION_ELEMENT;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_INCOME_AMOUNT_ELEMENT;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_INCOME_CURRENCY_ATTRIBUTE;
 
 /**
  * Loads and save data to a xml file.
@@ -170,10 +193,10 @@ public class LocalStorage {
     }
 
     private void parseExpenseToXML(Document doc, Element rootElement, ArrayList<Expense> savedExpenses) {
-        Integer index = 1;
+        int index = 1;
         for (Expense expense : savedExpenses) {
             Element expenseElement = doc.createElement(XML_EXPENSE_ELEMENT);
-            expenseElement.setAttribute(XML_EXPENSE_ID_ATTRIBUTE, index.toString());
+            expenseElement.setAttribute(XML_EXPENSE_ID_ATTRIBUTE, Integer.toString(index));
             rootElement.appendChild(expenseElement);
             Element name = doc.createElement(XML_EXPENSE_NAME_ELEMENT);
             name.setTextContent(expense.getName());
@@ -196,6 +219,34 @@ public class LocalStorage {
             expenseElement.appendChild(remark);
             index++;
         }
+    }
+
+    /**
+     * This method takes in a target node and convert it into a Target object.
+     *
+     * @param node containing information from a target
+     * @return a target created with data by node
+     */
+    private Target createTarget(Node node) throws LocalStorageLoadDataInputError {
+        if (node.getNodeType() != Node.ELEMENT_NODE) {
+            throw new LocalStorageLoadDataInputError();
+        }
+        Element element = (Element) node;
+        String name = element.getElementsByTagName(XML_TARGET_NAME_ELEMENT)
+                .item(0).getTextContent();
+        LocalDateTime dateTime = LocalDateTime.parse(element
+                .getElementsByTagName(XML_TARGET_DATETIME_ELEMENT).item(0).getTextContent());
+        String description = element.getElementsByTagName(XML_TARGET_DESCRIPTION_ELEMENT)
+                .item(0).getTextContent();
+        NodeList amountNodeList = element.getElementsByTagName(XML_TARGET_AMOUNT_ELEMENT);
+        BigDecimal amount = new BigDecimal(amountNodeList.item(0).getTextContent());
+        String currencyAmount = amountNodeList.item(0).getAttributes()
+                .getNamedItem(XML_TARGET_CURRENCY_ATTRIBUTE).getTextContent();
+        NodeList currentAmountNodeList = element.getElementsByTagName(XML_TARGET_CURRENT_AMOUNT_ELEMENT);
+        BigDecimal currentAmount = new BigDecimal(currentAmountNodeList.item(0).getTextContent());
+        String currencyCurrentAmount = currentAmountNodeList.item(0).getAttributes()
+                .getNamedItem(XML_TARGET_CURRENCY_ATTRIBUTE).getTextContent();
+        return new Target(name, dateTime, description, amount, currentAmount);
     }
 
     private void writeXml(Document doc)
