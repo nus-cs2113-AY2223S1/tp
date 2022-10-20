@@ -1,27 +1,32 @@
 @startuml
-'https://plantuml.com/class-diagram
+!include style.puml
 
-abstract class AbstractList
-abstract AbstractCollection
-interface List
-interface Collection
-
-List <|-- AbstractList
-Collection <|-- AbstractCollection
-
-Collection <|- List
-AbstractCollection <|- AbstractList
-AbstractList <|-- ArrayList
-
-class ArrayList {
-Object[] elementData
-size()
+abstract class Media {
+    +title: String
+    +rating: Double
+    +genre: String
+    +dateWatched: Date
+    +dateString: String
+    +isFavourite: boolean
+    +void toString()
 }
 
-enum TimeUnit {
-DAYS
-HOURS
-MINUTES
+class Movie {
+    +void Movie(title: String, rating: Double, genre: String,
+    dateWatchedString: String)
+    +void toString()
 }
+
+class TvShow {
+    +site: String
+    +dateWatched: String
+    +void TvShow(title: String, rating: Double, genre: String,
+    dateWatchedString: String, site: String)
+    +void toString()
+}
+
+skinparam groupInheritance 2
+Media <|-down- Movie
+Media <|-down- TvShow
 
 @enduml
