@@ -22,6 +22,9 @@ public class HelpCommand extends Command {
     public static final String SEARCH_MODULE_COMMAND_USAGE = SearchModuleCommand.COMMAND_WORD
             + ": search /code [MODULE_CODE] /title [MODULE_TITLE] /level [MODULE_LEVEL] "
             + "/sem [SEMESTER_OFFERED] - returns modules that match the similar search terms!\n";
+
+    public static final String GET_MODULE_COMMAND_USAGE = GetModuleCommand.COMMAND_WORD
+            + ": get [MODULE_CODE] - returns all details of the module!\n";
     public static final String VIEW_TIMETABLE_COMMAND_USAGE = ViewTimetableCommand.COMMAND_WORD
             + ": displays current timetable!\n";
     public static final String SELECT_SLOT_COMMAND_USAGE = SelectSlotCommand.COMMAND_WORD
@@ -35,6 +38,7 @@ public class HelpCommand extends Command {
             + DELETE_MODULE_COMMAND_USAGE
             + EXIT_MODULE_COMMAND_USAGE
             + SEARCH_MODULE_COMMAND_USAGE
+            + GET_MODULE_COMMAND_USAGE
             + VIEW_TIMETABLE_COMMAND_USAGE
             + SELECT_SLOT_COMMAND_USAGE
             + SELECT_SEMESTER_COMMAND_USAGE;
