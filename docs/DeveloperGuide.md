@@ -81,7 +81,46 @@ operations, the text files will be updated when `add`, `delete`, `pair` or `unpa
 ### Common Classes
 ___
 ## Implementation
-This section describes the implementation details of the features within Property Rental Manager. 
+
+This section describes the implementation details of the features within Property Rental Manager.
+
+### Delete Client/Property feature
+The **delete client/property** mechanism involves the following classes: ```ParseDeleteClient```,
+```ParseDeleteProperty```, ```CommandDeleteClient```, ```CommandDeleteProperty```,
+```ClientList```, ```PropertyList``` and ```PairingList```.
+
+Given below is an example usage scenario and how the delete client/property behaves at each step.
+
+**Step 1:** The user executes ```delete -client ic/INDEX``` or ```delete -property ip/INDEX```.
+The ```ParseDeleteClient``` or ```ParseDeleteProperty``` class is called respectively and the format of the user
+input is checked for any incorrect formatting.
+
+**Step 2:** If there are no errors, ```CommandDeleteClient``` or ```CommandDeleteProperty``` is called respectively.
+The ```CommandDeleteClient#execute()``` or ```CommandDeleteProperty#execute()``` method is then called.
+
+**Step 3:** The ```ClientList#deleteClient()``` or ```PropertyList#deleteProperty()``` method is called which 
+removes the Client or Property with that specific index from their respective ArrayList.
+
+**Step 4:** Any pairings involving that specific Client or Property is also deleted using the
+```pairingList#deletePairing()``` method. A message showing all the deleted pairs is shown to the user.
+
+**Step 5:** The corresponding line(s) in the respective files are deleted. The method is shown in the Storage
+Implementation section.
+
+The following *class diagram* shows all the classes involved in the **delete client/property** operation
+and their relationships.
+
+![Delete Client/Property Class Diagram](diagrams/DeleteClientPropertyCD.png)
+
+The following *sequence diagram* shows how the **delete client** operation works, showcasing the
+```ClientList#deleteClient()``` method.
+
+![Delete Client Sequence Diagram](diagrams/DeleteClientSD.png)
+
+The following *sequence diagram* shows how the **delete property** operation works, showcasing the
+```PropertyList#deleteClient()``` method.
+
+![Delete Property Sequence Diagram](diagrams/DeletePropertySD.png)
 
 ### Storage
 The implementation of Storage class requires consists of different level of operations:
@@ -133,9 +172,6 @@ The sequence diagram of `updateClient`, `updateProperty` and `updatePair` can be
 Note that when delete operation is being invoked on client and property, the `updatePair` method will also be invoked to
 prevent entries retaining within pairingList after it has been deleted from clientList or propertyList.
 
-
-
-___
 ## Documentation, logging, testing, configuration and dev-ops
 ___
 ## Appendix: Requirements
