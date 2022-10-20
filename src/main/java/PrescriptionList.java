@@ -48,7 +48,6 @@ public class PrescriptionList {
     }
 
     public void viewPatientPrescription(UI ui, String patientId) {
-        // TODO check if patientId is in patient list
         if (isEmpty()) {
             ui.printNoPrescriptionMessage();
             return;
@@ -98,19 +97,16 @@ public class PrescriptionList {
         int index = prescriptionNumber - 1;
 
         Prescription prescriptionEdited = prescriptionsList.get(index);
+        String newMedicine = medicine.isEmpty() ? prescriptionEdited.getMedicine() : medicine;
+        String newDosage = dosage.isEmpty() ? prescriptionEdited.getDosage() : dosage;
+        String newTimeInterval = timeInterval.isEmpty() ? prescriptionEdited.getTimeInterval() : timeInterval;
+        String patientId =  prescriptionEdited.getPatientId();
 
-        if (!medicine.isEmpty()) {
-            prescriptionEdited.setMedicine(medicine);
-        }
+        prescriptionEdited.setInactive();
+        Prescription newPrescription = new Prescription(patientId, newMedicine, newDosage, newTimeInterval);
 
-        if (!dosage.isEmpty()) {
-            prescriptionEdited.setDosage(dosage);
-        }
+        prescriptionsList.add(newPrescription);
 
-        if (!timeInterval.isEmpty()) {
-            prescriptionEdited.setTimeInterval(timeInterval);
-        }
-
-        ui.printEditPrescriptionMessage(prescriptionEdited.toString());
+        ui.printEditPrescriptionMessage(newPrescription.toString());
     }
 }
