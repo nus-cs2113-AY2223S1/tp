@@ -93,6 +93,88 @@ The <code>Parser</code> component can:
 - return the correct command type based on user input.
 
 ### 3.4 Command Component
+The <code>Command</code> component can:
+- execute and return the command type based on the first word of the user input.
+
+Below is a table of command and their respective command type.
+
+| Command    | Command Type              | Action                                                                      |
+|------------|---------------------------|-----------------------------------------------------------------------------|
+| `add`      | `AddModuleCommand`        | Adds the user input module into their timetable.                            |
+| `delete`   | `DeleteModuleCommand`     | Deletes the user input module from their timetable.                         |
+| `help`     | `HelpCommand`             | Displays the help message.                                                  |
+| `search`   | `SearchModuleCommand`     | Searches for the user input module based on code, title, semester or level. |
+| `select`   | `SelectSlotCommand`       | Selects the time slot for the different lesson types.                       |
+| `semester` | `SelectSemesterCommand`   | Selects the semester that the user want.                                    |
+| `get`      | `GetCommand`              | Gets all the details with the user input module code.                       |
+| `view`     | `ViewCommand`             | Views the user timetable with user's selected modules.                      |
+| `bye`      | `ExitCommand`             | Exits the program.                                                          |
+| `nil`      | `InvalidCommand`          | Displays the invalid command message.                                       |
+| `nil`      | `IncompleteModuleCommand` | Display the incomplete command message.                                     |
+| `nil`      | `UnknownCommand`          | Display the unknown command message.                                        |
+
+#### 3.4.1 AddModuleCommand
+The <code>AddModuleCommand</code> class can:
+- add the user input module into their timetable.
+
+#### 3.4.2 DeleteModuleCommand
+The <code>DeleteModuleCommand</code> class can:
+- delete the user input module from their timetable.
+
+#### 3.4.3 HelpCommand
+The <code>HelpCommand</code> class can:
+- display the help message.
+
+#### 3.4.4 SearchModuleCommand
+The <code>SearchModuleCommand</code> class can:
+- search for the user input module based on code, title, semester or level.
+
+##### How the feature is implemented
+The <code>SearchModuleCommand</code> class extends the <code>Command</code> class.
+It overrides the <code>execute()</code> method from the <code>Command</code> class.
+The <code>execute()</code> method will search for the user input module primarily based on either module code or title,
+with additional parameters of semester and level to narrow down the search results.
+
+##### Why it is implemented this way.
+User may or may not know the exact module code or title. As such, the user can search for the module based on optional 
+parameters such as semester or level. However, the user must input at least the module code or title before additional 
+parameters can be added in order to refine the search.
+
+##### Alternatives considered.
+
+
+
+#### 3.4.5 SelectCommand
+The <code>SelectCommand</code> class can:
+- select the time slot for the different lesson types.
+
+#### 3.4.6 SelectSemesterCommand
+The <code>SelectSemesterCommand</code> class can:
+- select the semester that the user want.
+
+#### 3.4.7 GetCommand
+The <code>GetCommand</code> class can:
+- get all the details with the user input module code.
+
+#### 3.4.8 ViewCommand
+The <code>ViewCommand</code> class can:
+- view the user timetable with user's selected modules.
+
+#### 3.4.9 ExitCommand
+The <code>ExitCommand</code> class can:
+- exit the program.
+
+#### 3.4.10 InvalidCommand
+The <code>InvalidCommand</code> class can:
+- display the invalid command message.
+
+#### 3.4.11 IncompleteModuleCommand
+The <code>IncompleteModuleCommand</code> class can:
+- display the incomplete command message.
+
+#### 3.4.12 UnknownCommand
+The <code>UnknownCommand</code> class can:
+- display the unknown command message.
 
 ### 3.5 Utils Component
 
