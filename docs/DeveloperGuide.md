@@ -23,6 +23,20 @@ The following diagram illustrates the flow of the program, from the initial load
 
 ![Database Sequence Diagram](./images/Database_Sequence.png)
 
+### Timetable
+Upon starting easySEP, a TimetableManager is created in preparation for users to begin adding Timetables. The TimetableManager is used to create new Timetables, manage existing Timetables and delete old Timetables. 
+These Timetables are stored in a HashMap and indexed by university name to facilitate easy reference.
+
+For existing Timetables, they can be used to add and delete Lessons. Each Timetable is made up of a HashMap of ArrayLists(type: Lesson) indexed by weekday e.g. Monday for easy compartmentalisation.
+Within Timetables, Lessons will compromise details like the day, start time and end time. The ArrayLists(type: Lesson) are sorted in non-descending order by the start time of the Lessons.
+
+Relevant exceptions are thrown when unanticipated scenarios occur. For instance, if the user attempts to delete a non-existent Timetable, a TimetableNotFoundException is thrown.
+Another example is the user attempting to add a lesson that is conflicting with an existing lesson in his/her timetable. In this case, a TimetableClashException is thrown.
+
+The following diagram illustrates the relationships between the three main timetable classes - TimetableManager, Timetable and Lesson.
+
+![Timetable Class Diagram](./images/Timetable_Class.png)
+
 ## Product scope
 ### Target user profile
 

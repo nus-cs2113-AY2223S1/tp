@@ -5,7 +5,6 @@ import seedu.duke.exceptions.LessonNotFoundException;
 import seedu.duke.exceptions.TimetableNotFoundException;
 import seedu.duke.ui.Ui;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,6 +17,10 @@ public class TimetableManager {
 
     public Timetable getTimetableByUniversityName(String universityName) {
         return timetableManager.get(universityName);
+    }
+
+    private boolean foundKeyAll(String universityName) {
+        return timetableManager.containsKey(universityName);
     }
 
     /**
@@ -34,10 +37,6 @@ public class TimetableManager {
             timetableManager.put(universityName, newTimetable);
             System.out.print(Ui.printTimetableCreatedAcknowledgement(universityName));
         }
-    }
-
-    public boolean foundKeyAll(String universityName) {
-        return timetableManager.containsKey(universityName);
     }
 
     /**

@@ -1,0 +1,82 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class TimetableManager {
+    - timetableManager: HashMap<String, Timetable>
+    + TimetableManager()
+    + getTimetableByUniversityName(universityName: String) : Timetable
+    - foundKeyAll(universityName: String) : boolean
+    + createTimetable(universityName: String)
+    + deleteTimetable(universityName: String)
+    + addLesson(newLesson: Lesson)
+    + deleteLesson(oldLesson: Lesson)
+    + printTimetable(universityName: String)
+    + printAllTimetables()
+}
+
+class Timetable {
+    - userTimetable: HashMap<String, ArrayList<Lesson>>
+    + Timetable()
+    - isValidDay(lesson: Lesson) : boolean
+    - isValidStartTime(lesson: Lesson) : boolean
+    - isValidEndTime(lesson: Lesson) : boolean
+    - hasTimetableClash(lesson: Lesson) : boolean
+    + addLesson(newLesson: Lesson)
+    + deleteLesson(oldLesson: Lesson)
+    + printTimetable()
+}
+
+class Lesson {
+    - day: String
+    - startTime: String
+    - endTime: String
+    + Lesson(code: String, title: String, university: University, day: String, startTime: String, endTime: String)
+    + getDay(): String
+    + setDay(day: String)
+    + getStartTime(): String
+    + setStartTime(startTime: String)
+    + getEndTime(): String
+    + setEndTime(endTime: String)
+}
+
+class Module {
+    - code: String
+    - title: String
+    - university: University
+    + Look at Module diagram for more attributes
+    + (): Look at Module diagram for more methods
+}
+
+class DuplicateLessonException {
+}
+
+class LessonNotFoundException {
+}
+
+class TimetableNotFoundException {
+}
+
+class TimetableClashException {
+}
+
+class InvalidModuleException {
+}
+
+class InvalidTimeFormatException {
+}
+
+class ParseException {
+}
+
+TimetableManager "1" --> "*" Timetable :> Manages
+Timetable "1" --> "*" Lesson :> Contains
+Lesson --> InvalidModuleException : <<throws>>
+Timetable --> InvalidTimeFormatException : <<throws>>
+Timetable --> TimetableClashException : <<throws>>
+Timetable --> ParseException : <<throws>>
+Timetable --> DuplicateLessonException : <<throws>>
+Timetable --> LessonNotFoundException : <<throws>>
+TimetableManager --> TimetableNotFoundException : <<throws>>
+Module <|-- Lesson
+
+@enduml

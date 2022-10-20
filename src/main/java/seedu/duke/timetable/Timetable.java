@@ -39,7 +39,7 @@ public class Timetable {
      * @param lesson The lesson to be validated.
      * @return True if the day for a lesson is one of five weekdays.
      */
-    boolean isValidDay(Lesson lesson) {
+    private boolean isValidDay(Lesson lesson) {
         String day = lesson.getDay();
         return day.equals("monday") || day.equals("tuesday") || day.equals("wednesday")
                 || day.equals("thursday") || day.equals("friday");
@@ -53,7 +53,7 @@ public class Timetable {
      * @return True if the input start time for a lesson is valid.
      * @throws InvalidTimeFormatException if the input start time for a lesson is invalid.
      */
-    boolean isValidStartTime(Lesson lesson) throws InvalidTimeFormatException {
+    private boolean isValidStartTime(Lesson lesson) throws InvalidTimeFormatException {
         String regex = "([01]?[0-9]|2[0-3]):[0-5][0-9]";
         Pattern p = Pattern.compile(regex);
         Matcher m = p.matcher(lesson.getStartTime());
@@ -72,7 +72,7 @@ public class Timetable {
      * @return True if the input end time for a lesson is valid.
      * @throws InvalidTimeFormatException if the input end time for a lesson is invalid.
      */
-    boolean isValidEndTime(Lesson lesson) throws InvalidTimeFormatException {
+    private boolean isValidEndTime(Lesson lesson) throws InvalidTimeFormatException {
         String regex = "([01]?[0-9]|2[0-3]):[0-5][0-9]";
         Pattern p = Pattern.compile(regex);
         Matcher m = p.matcher(lesson.getEndTime());
@@ -91,7 +91,7 @@ public class Timetable {
      * @throws TimetableClashException if there is a timetable clash
      * @throws ParseException if there is an invalid time format parsed
      */
-    boolean hasTimetableClash(Lesson lesson) throws TimetableClashException, ParseException {
+    private boolean hasTimetableClash(Lesson lesson) throws TimetableClashException, ParseException {
         SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
         String day = lesson.getDay();
         Date newStartTime = parser.parse(lesson.getStartTime());
