@@ -1,7 +1,6 @@
 package seedu.duke.timetable;
 
 import seedu.duke.exceptions.InvalidModuleException;
-import seedu.duke.exceptions.InvalidTimeFormatException;
 import seedu.duke.module.Module;
 import seedu.duke.university.University;
 
@@ -10,9 +9,9 @@ public class Lesson extends Module {
     private String startTime;
     private String endTime;
 
-    public Lesson(String code, String title, String credit, University university, String day, String startTime,
+    public Lesson(String code, String title, University university, String day, String startTime,
                   String endTime) throws InvalidModuleException {
-        super(code, title, credit, university);
+        super(code, title, null, university);
         this.day = day.toLowerCase();
         this.startTime = startTime;
         this.endTime = endTime;
