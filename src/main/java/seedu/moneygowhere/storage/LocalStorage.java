@@ -71,7 +71,7 @@ import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_INCOME_A
 import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_INCOME_CURRENCY_ATTRIBUTE;
 
 /**
- * Loads and save data to a xml file.
+ * Stores and load data to and from storage.
  */
 public class LocalStorage {
     private File saveFile;
@@ -81,7 +81,7 @@ public class LocalStorage {
     }
 
     /**
-     * Function to create data file and its directory.
+     * Create data file and its directory.
      */
     private void initialiseFile() {
         File directory = new File(LOCAL_STORAGE_DIRECTORY);
@@ -91,8 +91,10 @@ public class LocalStorage {
     }
 
     /**
-     * This method reads saved data and configurations from a load file
-     * and add it to the list that stores expenses.
+     * Reads saved data and configurations from a load file in a
+     * fixed directory, parse it and convert them into objects
+     * and add them to the arraylist that stores expenses.
+     * Sort the current arraylist afterwards based on saved configuration.
      *
      * @param expenseManager arraylist to store expenses
      */
@@ -117,11 +119,9 @@ public class LocalStorage {
             }
             expenseManager.updateSortExpenses(defaultSortCommandSetting);
             System.out.println(Messages.LOCAL_STORAGE_LOAD_SUCCESS);
-        } catch (FileNotFoundException e) {
-            initialiseFile();
-            System.out.println(Messages.LOCAL_STORAGE_ERROR_NO_LOAD_FILE);
         } catch (SAXException | IOException | ParserConfigurationException e) {
             System.out.println(Messages.LOCAL_STORAGE_ERROR_CORRUPTED_OR_EMPTY_LOAD_FILE);
+            initialiseFile();
         } catch (LocalStorageLoadDataInputError | NumberFormatException
                  | NullPointerException | DateTimeParseException e) {
             if (!hasParsedSortconfig) {
@@ -133,8 +133,9 @@ public class LocalStorage {
     }
 
     /**
-     * This method reads saved data and configurations from a load file
-     * and add it to the list that stores expenses.
+     * Reads saved data from a load file in the given directory,
+     * parse it and convert them into objects
+     * and add it to the arraylist that stores expenses.
      *
      * @param expenseManager arraylist to store expenses
      * @param filePath       path to save file to merge
@@ -156,8 +157,6 @@ public class LocalStorage {
                 expenseManager.addExpense(loadExpense);
             }
             System.out.println(Messages.LOCAL_STORAGE_MERGE_EXTERNAL_DATA_SUCCESSFUL);
-        } catch (FileNotFoundException e) {
-            System.out.println(Messages.LOCAL_STORAGE_ERROR_NO_LOAD_FILE);
         } catch (SAXException | IOException | ParserConfigurationException e) {
             System.out.println(Messages.LOCAL_STORAGE_ERROR_CORRUPTED_OR_EMPTY_LOAD_FILE);
         } catch (LocalStorageLoadDataInputError | NumberFormatException
@@ -167,21 +166,30 @@ public class LocalStorage {
     }
 
     /**
-     * This method reads in the sortCommandSetting in xml file.
+     * Returns a command to sort expense based
+     * on saved configuration for sorting obtained
+     * from parsing node.
+     *
+     * @param sortConfig node containing sorting configuration
+     * @return command to sort expense
      */
     private ConsoleCommandSortExpense loadSortCommandSetting(NodeList sortConfig) {
         String type = sortConfig.item(0).getAttributes()
                 .getNamedItem(XML_SORTCONFIG_TYPE_ATTRIBUTE).getTextContent();
         String order = sortConfig.item(0).getAttributes()
                 .getNamedItem(XML_SORTCONFIG_ORDER_ATTRIBUTE).getTextContent();
-        return new ConsoleCommandSortExpense(type, order);
+        ConsoleCommandSortExpense defaultSortCommandSetting
+                = new ConsoleCommandSortExpense(type, order);
+        return defaultSortCommandSetting;
     }
 
     /**
-     * This method takes in an expense node and convert it into an Expense object.
+     * Returns an expense object based on information
+     * obtained from parsing an Expense node.
      *
-     * @param node containing information from an expense
-     * @return an expense created with data by node
+     * @param node containing information about an expense
+     * @return an Expense object
+     * @throws LocalStorageLoadDataInputError   if type of input node is incorrect
      */
     private Expense createExpense(Node node) throws LocalStorageLoadDataInputError {
         if (node.getNodeType() != Node.ELEMENT_NODE) {
@@ -206,10 +214,12 @@ public class LocalStorage {
     }
 
     /**
-     * This method takes in a target node and convert it into a Target object.
+     * Returns a Target object based on information
+     * obtained from parsing a Target node.
      *
-     * @param node containing information from a target
-     * @return a target created with data by node
+     * @param node containing information about a target
+     * @return a Target object
+     * @throws LocalStorageLoadDataInputError   if type of input node is incorrect
      */
     private Target createTarget(Node node) throws LocalStorageLoadDataInputError {
         if (node.getNodeType() != Node.ELEMENT_NODE) {
@@ -234,10 +244,12 @@ public class LocalStorage {
     }
 
     /**
-     * This method takes in a RecurringPayment node and convert it into a RecurringPayment object.
+     * Returns a RecurringPayment object based on information
+     * obtained from parsing a RecurringPayment node.
      *
-     * @param node containing information from a recurring payment
-     * @return a Recurring Payment created with data by node
+     * @param node containing information about a recurring payment
+     * @return a RecurringPayment object
+     * @throws LocalStorageLoadDataInputError   if type of input node is incorrect
      */
     private RecurringPayment createRecurringPayment(Node node) throws LocalStorageLoadDataInputError {
         if (node.getNodeType() != Node.ELEMENT_NODE) {
@@ -258,10 +270,12 @@ public class LocalStorage {
     }
 
     /**
-     * This method takes in an Income node and convert it into an Income object.
+     * Returns a Income object based on information
+     * obtained from parsing a income node.
      *
-     * @param node containing information from an income
-     * @return income created with data by node
+     * @param node containing information about an income
+     * @return an Income object
+     * @throws LocalStorageLoadDataInputError   if type of input node is incorrect
      */
     private Income createIncome(Node node) throws LocalStorageLoadDataInputError {
         if (node.getNodeType() != Node.ELEMENT_NODE) {
@@ -282,7 +296,9 @@ public class LocalStorage {
     }
 
     /**
-     * This method saves current data into a xml file.
+     * Parse current expenses and configurations
+     * for sorting expenses and saves it to a xml
+     * file in storage.
      *
      * @param savedExpenses arraylist containing all expenses
      * @param sortCommandSetting configurations for sorting
