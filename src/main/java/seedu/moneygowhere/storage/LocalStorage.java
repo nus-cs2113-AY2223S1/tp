@@ -33,6 +33,7 @@ import java.util.ArrayList;
 
 import static seedu.moneygowhere.common.Configurations.LOCAL_STORAGE_DATA_FILE_PATH;
 import static seedu.moneygowhere.common.Configurations.LOCAL_STORAGE_DIRECTORY;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.DEFAULT_CURRENCY;
 import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_ROOT;
 import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_SORTCONFIG_ELEMENT;
 import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_SORTCONFIG_ORDER_ATTRIBUTE;
@@ -171,59 +172,6 @@ public class LocalStorage {
     }
 
     /**
-     * This method saves current data into a xml file.
-     *
-     * @param savedExpenses arraylist containing all expenses
-     * @param sortCommandSetting configurations for sorting
-     */
-    public void saveToFile(ArrayList<Expense> savedExpenses, ConsoleCommandSortExpense sortCommandSetting) {
-        try {
-            DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
-            Document doc = docBuilder.newDocument();
-            Element rootElement = doc.createElement(XML_ROOT);
-            doc.appendChild(rootElement);
-            Element sortConfig = doc.createElement(XML_SORTCONFIG_ELEMENT);
-            sortConfig.setAttribute(XML_SORTCONFIG_TYPE_ATTRIBUTE, sortCommandSetting.getType());
-            sortConfig.setAttribute(XML_SORTCONFIG_ORDER_ATTRIBUTE, sortCommandSetting.getOrder());
-            rootElement.appendChild(sortConfig);
-            parseExpenseToXML(doc, rootElement, savedExpenses);
-            writeXml(doc);
-        } catch (ParserConfigurationException | TransformerException e) {
-            System.out.println(Messages.LOCAL_STORAGE_ERROR_WRITING_DATA);
-        }
-    }
-
-    private void parseExpenseToXML(Document doc, Element rootElement, ArrayList<Expense> savedExpenses) {
-        int index = 1;
-        for (Expense expense : savedExpenses) {
-            Element expenseElement = doc.createElement(XML_EXPENSE_ELEMENT);
-            expenseElement.setAttribute(XML_EXPENSE_ID_ATTRIBUTE, Integer.toString(index));
-            rootElement.appendChild(expenseElement);
-            Element name = doc.createElement(XML_EXPENSE_NAME_ELEMENT);
-            name.setTextContent(expense.getName());
-            expenseElement.appendChild(name);
-            Element dateTime = doc.createElement(XML_EXPENSE_DATETIME_ELEMENT);
-            dateTime.setTextContent(expense.getDateTime().toString());
-            expenseElement.appendChild(dateTime);
-            Element description = doc.createElement(XML_EXPENSE_DESCRIPTION_ELEMENT);
-            description.setTextContent(expense.getDescription());
-            expenseElement.appendChild(description);
-            Element amount = doc.createElement(XML_EXPENSE_AMOUNT_ELEMENT);
-            amount.setAttribute(XML_EXPENSE_AMOUNT_CURRENCY_ATTRIBUTE, expense.getCurrency());
-            amount.setTextContent(expense.getAmount().toString());
-            expenseElement.appendChild(amount);
-            Element category = doc.createElement(XML_EXPENSE_CATEGORY_ELEMENT);
-            category.setTextContent(expense.getCategory());
-            expenseElement.appendChild(category);
-            Element remark = doc.createElement(XML_EXPENSE_REMARKS_ELEMENT);
-            remark.setTextContent(expense.getRemarks());
-            expenseElement.appendChild(remark);
-            index++;
-        }
-    }
-
-    /**
      * This method takes in a target node and convert it into a Target object.
      *
      * @param node containing information from a target
@@ -297,6 +245,86 @@ public class LocalStorage {
         String currency = amountNodeList.item(0).getAttributes()
                 .getNamedItem(XML_EXPENSE_AMOUNT_CURRENCY_ATTRIBUTE).getTextContent();
         return new Income(name, dateTime, description, amount);
+    }
+
+    /**
+     * This method saves current data into a xml file.
+     *
+     * @param savedExpenses arraylist containing all expenses
+     * @param sortCommandSetting configurations for sorting
+     */
+    public void saveToFile(ArrayList<Expense> savedExpenses, ConsoleCommandSortExpense sortCommandSetting) {
+        try {
+            DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+            Document doc = docBuilder.newDocument();
+            Element rootElement = doc.createElement(XML_ROOT);
+            doc.appendChild(rootElement);
+            Element sortConfig = doc.createElement(XML_SORTCONFIG_ELEMENT);
+            sortConfig.setAttribute(XML_SORTCONFIG_TYPE_ATTRIBUTE, sortCommandSetting.getType());
+            sortConfig.setAttribute(XML_SORTCONFIG_ORDER_ATTRIBUTE, sortCommandSetting.getOrder());
+            rootElement.appendChild(sortConfig);
+            parseExpenseToXML(doc, rootElement, savedExpenses);
+            writeXml(doc);
+        } catch (ParserConfigurationException | TransformerException e) {
+            System.out.println(Messages.LOCAL_STORAGE_ERROR_WRITING_DATA);
+        }
+    }
+
+    private void parseExpenseToXML(Document doc, Element rootElement, ArrayList<Expense> savedExpenses) {
+        int index = 1;
+        for (Expense expense : savedExpenses) {
+            Element expenseElement = doc.createElement(XML_EXPENSE_ELEMENT);
+            expenseElement.setAttribute(XML_EXPENSE_ID_ATTRIBUTE, Integer.toString(index));
+            rootElement.appendChild(expenseElement);
+            Element name = doc.createElement(XML_EXPENSE_NAME_ELEMENT);
+            name.setTextContent(expense.getName());
+            expenseElement.appendChild(name);
+            Element dateTime = doc.createElement(XML_EXPENSE_DATETIME_ELEMENT);
+            dateTime.setTextContent(expense.getDateTime().toString());
+            expenseElement.appendChild(dateTime);
+            Element description = doc.createElement(XML_EXPENSE_DESCRIPTION_ELEMENT);
+            description.setTextContent(expense.getDescription());
+            expenseElement.appendChild(description);
+            Element amount = doc.createElement(XML_EXPENSE_AMOUNT_ELEMENT);
+            amount.setAttribute(XML_EXPENSE_AMOUNT_CURRENCY_ATTRIBUTE, expense.getCurrency());
+            amount.setTextContent(expense.getAmount().toString());
+            expenseElement.appendChild(amount);
+            Element category = doc.createElement(XML_EXPENSE_CATEGORY_ELEMENT);
+            category.setTextContent(expense.getCategory());
+            expenseElement.appendChild(category);
+            Element remark = doc.createElement(XML_EXPENSE_REMARKS_ELEMENT);
+            remark.setTextContent(expense.getRemarks());
+            expenseElement.appendChild(remark);
+            index++;
+        }
+    }
+
+    private void parseTargetToXML(Document doc, Element rootElement, ArrayList<Target> savedTargets) {
+        int index = 1;
+        for (Target target : savedTargets) {
+            Element targetElement = doc.createElement(XML_TARGET_ELEMENT);
+            targetElement.setAttribute(XML_TARGET_ID_ATTRIBUTE, Integer.toString(index));
+            rootElement.appendChild(targetElement);
+            Element name = doc.createElement(XML_TARGET_NAME_ELEMENT);
+            name.setTextContent(target.getName());
+            targetElement.appendChild(name);
+            Element dateTime = doc.createElement(XML_TARGET_DATETIME_ELEMENT);
+            dateTime.setTextContent(target.getDateTime().toString());
+            targetElement.appendChild(dateTime);
+            Element description = doc.createElement(XML_TARGET_DESCRIPTION_ELEMENT);
+            description.setTextContent(target.getDescription());
+            targetElement.appendChild(description);
+            Element amount = doc.createElement(XML_TARGET_AMOUNT_ELEMENT);
+            amount.setAttribute(XML_TARGET_CURRENCY_ATTRIBUTE, DEFAULT_CURRENCY);
+            amount.setTextContent(target.getAmount().toString());
+            targetElement.appendChild(amount);
+            Element currentAmount = doc.createElement(XML_TARGET_CURRENT_AMOUNT_ELEMENT);
+            currentAmount.setAttribute(XML_TARGET_CURRENCY_ATTRIBUTE, DEFAULT_CURRENCY);
+            currentAmount.setTextContent(target.getCurrentAmount().toString());
+            targetElement.appendChild(currentAmount);
+            index++;
+        }
     }
 
     private void writeXml(Document doc)

@@ -1,6 +1,7 @@
 package seedu.moneygowhere.storage;
 
 public class LocalStorageConfigurations {
+    public static final String DEFAULT_CURRENCY = "SGD";
     public static final String XML_ROOT = "MoneyGoWhere";
     public static final String XML_SORTCONFIG_ELEMENT = "Sort_Configuration";
     public static final String XML_SORTCONFIG_TYPE_ATTRIBUTE = "Type";
