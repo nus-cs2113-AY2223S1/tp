@@ -7,6 +7,10 @@ public class ModuleList {
     public static int viewCount;
     public static int mcsCount;
 
+    /**
+     * Function to add a module to the moduleList if it does not already exist
+     * @param mod The module to be added to the list
+     */
     public void add(Module mod) {
         boolean isRepeat = checkRepetition(mod);
         if (isRepeat) {
@@ -25,6 +29,11 @@ public class ModuleList {
         }
     }
 
+    /**
+     * function to check if a given module already exists in the moduleList
+     * @param mod the module that needs to be searched for in the moduleList
+     * @return true if the module already exists. False if it does not. Format: boolean
+     */
     public boolean checkRepetition(Module mod) {
         for (Module m : modules) {
             if (m.getCourse().matches(mod.getCourse())) {
@@ -34,6 +43,10 @@ public class ModuleList {
         return false;
     }
 
+    /**
+     * function to delete a module from the moduleList. If the module is not found, an appropriate message is displayed
+     * @param modCode the module which has to be deleted from the moduleList.
+     */
     public void delete(String modCode) {
         int indexCounter = 0;
         boolean isFound = false;
@@ -58,6 +71,12 @@ public class ModuleList {
         }
     }
 
+    /**
+     * Function to find a list of all modules taken in a particular semester
+     * The function then calls the printResponse() method to print the appropriate response message
+     * @param semester The semester for which the modules need to be printed
+     */
+
     public void view(String semester) {
         ArrayList<Module> matchingModules = new ArrayList<>();
         viewCount = 0;
@@ -70,6 +89,12 @@ public class ModuleList {
         printResponse(semester, matchingModules);
     }
 
+    /**
+     * Function to print the response for a command to print a list of modules in a particular semester
+     * If the list is empty, an empty list message is displayed. Otherwise, the list is displayed.
+     * @param semester Semester for which the list of modules needs to be displayed
+     * @param matchingModules a Collection of all modules taken in the particular semester that need to be printed
+     */
     private static void printResponse(String semester, ArrayList<Module> matchingModules) {
         if (matchingModules.isEmpty()) {
             UI.emptyListMessage(semester);
@@ -78,6 +103,10 @@ public class ModuleList {
         }
     }
 
+    /**
+     * Function to calculate the number of Mcs in a particular semester and print it with appropriate message.
+     * @param semester the semester for which the mcs need to be calculated and printed
+     */
     public static void mc(String semester) {
         mcsCount = 0;
         for (Module mod : modules) {
