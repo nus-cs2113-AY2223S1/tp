@@ -9,6 +9,7 @@ import seedu.moneygowhere.commands.ConsoleCommandSortExpense;
 import seedu.moneygowhere.common.Messages;
 import seedu.moneygowhere.data.expense.Expense;
 import seedu.moneygowhere.data.expense.ExpenseManager;
+import seedu.moneygowhere.data.recurringpayments.RecurringPayment;
 import seedu.moneygowhere.data.target.Target;
 import seedu.moneygowhere.exceptions.LocalStorageLoadDataInputError;
 
@@ -247,6 +248,30 @@ public class LocalStorage {
         String currencyCurrentAmount = currentAmountNodeList.item(0).getAttributes()
                 .getNamedItem(XML_TARGET_CURRENCY_ATTRIBUTE).getTextContent();
         return new Target(name, dateTime, description, amount, currentAmount);
+    }
+
+    /**
+     * This method takes in a RecurringPayment node and convert it into a RecurringPayment object.
+     *
+     * @param node containing information from a recurring payment
+     * @return a Recurring Payment created with data by node
+     */
+    private RecurringPayment createRecurringPayment(Node node) throws LocalStorageLoadDataInputError {
+        if (node.getNodeType() != Node.ELEMENT_NODE) {
+            throw new LocalStorageLoadDataInputError();
+        }
+        Element element = (Element) node;
+        String name = element.getElementsByTagName(XML_RECURRING_PAYMENT_NAME_ELEMENT)
+                .item(0).getTextContent();
+        int interval = Integer.parseInt(element.getElementsByTagName(XML_RECURRING_PAYMENT_INTERVAL_ELEMENT)
+                .item(0).getTextContent());
+        String description = element.getElementsByTagName(XML_RECURRING_PAYMENT_DESCRIPTION_ELEMENT)
+                .item(0).getTextContent();
+        NodeList amountNodeList = element.getElementsByTagName(XML_RECURRING_PAYMENT_AMOUNT_ELEMENT);
+        BigDecimal amount = new BigDecimal(amountNodeList.item(0).getTextContent());
+        String currency = amountNodeList.item(0).getAttributes()
+                .getNamedItem(XML_RECURRING_PAYMENT_CURRENCY_ATTRIBUTE).getTextContent();
+        return new RecurringPayment(name, interval, description, amount);
     }
 
     private void writeXml(Document doc)
