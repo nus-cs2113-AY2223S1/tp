@@ -2,9 +2,6 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2022-10-20T09:18:06.109474Z</date>
-  <millis>1666257486109</millis>
-  <nanos>474000</nanos>
   <sequence>0</sequence>
   <logger>global</logger>
   <level>INFO</level>
@@ -14,9 +11,6 @@
   <message>starting Timetabler program...</message>
 </record>
 <record>
-  <date>2022-10-20T09:18:18.354443Z</date>
-  <millis>1666257498354</millis>
-  <nanos>443000</nanos>
   <sequence>1</sequence>
   <logger>global</logger>
   <level>INFO</level>
@@ -26,9 +20,6 @@
   <message>api call successful, module exists</message>
 </record>
 <record>
-  <date>2022-10-20T09:18:18.696683Z</date>
-  <millis>1666257498696</millis>
-  <nanos>683000</nanos>
   <sequence>2</sequence>
   <logger>global</logger>
   <level>FINE</level>
@@ -38,9 +29,6 @@
   <message>attempting to add lessons data to module object</message>
 </record>
 <record>
-  <date>2022-10-20T09:18:18.721566Z</date>
-  <millis>1666257498721</millis>
-  <nanos>566000</nanos>
   <sequence>3</sequence>
   <logger>global</logger>
   <level>FINE</level>
@@ -50,34 +38,7 @@
   <message>module exists in selected semester</message>
 </record>
 <record>
-  <date>2022-10-20T09:18:18.722534Z</date>
-  <millis>1666257498722</millis>
-  <nanos>534000</nanos>
   <sequence>4</sequence>
-  <logger>global</logger>
-  <level>WARNING</level>
-  <class>seedu.duke.commands.nusmodsapi.Nusmods</class>
-  <method>allocateLessonType</method>
-  <thread>1</thread>
-  <message>lesson does not fall in existing categories</message>
-</record>
-<record>
-  <date>2022-10-20T09:18:18.724400Z</date>
-  <millis>1666257498724</millis>
-  <nanos>400000</nanos>
-  <sequence>5</sequence>
-  <logger>global</logger>
-  <level>WARNING</level>
-  <class>seedu.duke.commands.nusmodsapi.Nusmods</class>
-  <method>allocateLessonType</method>
-  <thread>1</thread>
-  <message>lesson does not fall in existing categories</message>
-</record>
-<record>
-  <date>2022-10-20T09:18:18.724780Z</date>
-  <millis>1666257498724</millis>
-  <nanos>780000</nanos>
-  <sequence>6</sequence>
   <logger>global</logger>
   <level>FINE</level>
   <class>seedu.duke.commands.nusmodsapi.Nusmods</class>
@@ -86,10 +47,7 @@
   <message>lessons are added, returning list of lesson data</message>
 </record>
 <record>
-  <date>2022-10-20T09:18:18.725080Z</date>
-  <millis>1666257498725</millis>
-  <nanos>80000</nanos>
-  <sequence>7</sequence>
+  <sequence>5</sequence>
   <logger>global</logger>
   <level>INFO</level>
   <class>seedu.duke.commands.CommandAddModule</class>
@@ -98,10 +56,59 @@
   <message>api call successful, attempting to add module to timetable</message>
 </record>
 <record>
-  <date>2022-10-20T09:18:44.880387Z</date>
-  <millis>1666257524880</millis>
-  <nanos>387000</nanos>
+  <sequence>6</sequence>
+  <logger>global</logger>
+  <level>INFO</level>
+  <class>seedu.duke.commands.nusmodsapi.Nusmods</class>
+  <method>addModuleInfo</method>
+  <thread>1</thread>
+  <message>api call successful, module exists</message>
+</record>
+<record>
+  <date>2022-10-17T16:55:45.534183Z</date>
+  <millis>1666025745534</millis>
+  <nanos>183000</nanos>
+  <sequence>7</sequence>
+  <logger>global</logger>
+  <level>FINE</level>
+  <class>seedu.duke.commands.nusmodsapi.Nusmods</class>
+  <method>checkAllLessons</method>
+  <thread>1</thread>
+  <message>attempting to add lessons data to module object</message>
+</record>
+<record>
+  <date>2022-10-17T16:55:45.534540Z</date>
+  <millis>1666025745534</millis>
+  <nanos>540000</nanos>
   <sequence>8</sequence>
+  <logger>global</logger>
+  <level>FINE</level>
+  <class>seedu.duke.commands.nusmodsapi.Nusmods</class>
+  <method>checkAllLessons</method>
+  <thread>1</thread>
+  <message>module exists in selected semester</message>
+</record>
+<record>
+  <date>2022-10-17T16:55:45.534934Z</date>
+  <millis>1666025745534</millis>
+  <nanos>934000</nanos>
+  <sequence>9</sequence>
+  <logger>global</logger>
+  <level>FINE</level>
+  <class>seedu.duke.commands.nusmodsapi.Nusmods</class>
+  <method>findIndividualLessons</method>
+  <thread>1</thread>
+  <message>lessons are added, returning list of lesson data</message>
+</record>
+<record>
+  <logger>global</logger>
+  <level>INFO</level>
+  <class>seedu.duke.commands.CommandAddModule</class>
+  <method>addModule</method>
+  <thread>1</thread>
+  <message>api call successful, attempting to add module to timetable</message>
+</record>
+<record>
   <logger>global</logger>
   <level>INFO</level>
   <class>seedu.duke.Duke</class>
@@ -110,10 +117,6 @@
   <message>exit flag detected, attempting to exit</message>
 </record>
 <record>
-  <date>2022-10-20T09:18:44.881062Z</date>
-  <millis>1666257524881</millis>
-  <nanos>62000</nanos>
-  <sequence>9</sequence>
   <logger>global</logger>
   <level>INFO</level>
   <class>seedu.duke.Duke</class>

@@ -1,0 +1,38 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":CommandAddModule" as CommandAddModule LOGIC_COLOR
+participant ":Nusmods" as Nusmods LOGIC_COLOR
+participant "Timetable" as Timetable LOGIC_COLOR
+end box
+
+box API MODEL_COLOR_T1
+participant ":NUSmods API" as Api MODEL_COLOR
+end box
+
+[-> CommandAddModule : addModule(sem:String)
+activate CommandAddModule
+
+CommandAddModule -> Nusmods : addModuleInfo(:String, :String[])
+activate Nusmods
+
+Nusmods -> Nusmods : setURI()
+activate Nusmods
+Nusmods --> Nusmods : :String
+deactivate Nusmods
+
+Nusmods -> Api : query()
+activate Api
+Api --> Nusmods : data:JsonNode
+deactivate Api
+Nusmods --> CommandAddModule : :List<Lesson>
+deactivate Nusmods
+
+CommandAddModule -> Timetable : :addNewModule(:String, :String, :String, :List<Lesson>
+activate Timetable
+deactivate Timetable
+
+[<--CommandAddModule : responseToUser:String
+deactivate CommandAddModule
+@enduml

@@ -3,6 +3,7 @@ package seedu.duke.module;
 import seedu.duke.module.lessons.Lesson;
 import seedu.duke.module.lessons.Lecture;
 import seedu.duke.module.lessons.Tutorial;
+import seedu.duke.data.AttendingManager;
 import seedu.duke.module.lessons.Laboratory;
 import seedu.duke.module.lessons.Others;
 
@@ -24,6 +25,18 @@ public class Module {
 
     public String getModuleCode() {
         return moduleCode;
+    }
+
+    public String getModuleDescription() {
+        return moduleDescription;
+    }
+
+    public List<Lesson> getAttending() {
+        return attending;
+    }
+
+    public List<Lesson> getLessons() {
+        return lessons;
     }
 
     public Module(String moduleCode, String moduleName, String moduleDescription, List<Lesson> lessons) {
@@ -50,16 +63,33 @@ public class Module {
         String endTime = "Undetermined";
         switch (lesson.getLessonType()) {
         case "Lecture":
-            temp.add(new Lecture(day, startTime, endTime, "Lecture"));
+            Lecture tempLecture = new Lecture(day, startTime, endTime, "Lecture");
+            temp.add(tempLecture);
+            if (!AttendingManager.attendingExists(tempLecture, moduleCode)) {
+                AttendingManager.addAttending(tempLecture, this);
+            }
             break;
         case "Tutorial":
-            temp.add(new Tutorial(day, startTime, endTime, "Tutorial"));
+            Tutorial tempTutorial = new Tutorial(day, startTime, endTime, "Tutorial");
+            temp.add(tempTutorial);
+            if (!AttendingManager.attendingExists(tempTutorial, moduleCode)) {
+                AttendingManager.addAttending(tempTutorial, this);
+            }
             break;
         case "Laboratory":
-            temp.add(new Laboratory(day, startTime, endTime, "Laboratory"));
+            Laboratory tempLaboratory = new Laboratory(day, startTime, endTime, "Laboratory");
+            temp.add(tempLaboratory);
+            if (!AttendingManager.attendingExists(tempLaboratory, moduleCode)) {
+                AttendingManager.addAttending(tempLaboratory, this);
+            }
             break;
         default:
-            temp.add(new Others(day, startTime, endTime, "Others"));
+            Others tempOthers = new Others(day, startTime, endTime, "Others");
+            temp.add(tempOthers);
+            if (!AttendingManager.attendingExists(tempOthers, moduleCode)) {
+                AttendingManager.addAttending(tempOthers, this);
+            }
+            break;
         }
     }
 
@@ -163,14 +193,17 @@ public class Module {
     }
 
     public void replaceAttending(Lesson newLesson) {
-        int indexToRemove = 0;
+        int indexToSet = 0;
         for (Lesson lesson : attending) {
             if (lesson.getLessonType().equals(newLesson.getLessonType())) {
                 break;
             }
-            indexToRemove += 1;
+            indexToSet += 1;
         }
-        attending.remove(indexToRemove);
-        attending.add(newLesson);
+        if (indexToSet >= attending.size()) {
+            return;
+        }
+        attending.set(indexToSet, newLesson);
+        AttendingManager.setAttending(newLesson, moduleCode);
     }
 }
