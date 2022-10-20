@@ -90,6 +90,7 @@ public class Parser {
             executor = new FindCommand(mediaList, words [1]); //should we do more than one word?
             String output = executor.execute();
             Ui.print(output);
+            logger.log(Level.INFO, "\n\tFind command executed");
         } catch (Exception e) {
             System.out.println("\nIncomplete or wrongly formatted command, try again.\n");
         }
@@ -100,6 +101,7 @@ public class Parser {
             executor = new SortCommand(mediaList, words);
             String output = executor.execute();
             Ui.print(output);
+            logger.log(Level.INFO, "\n\tSort command executed");
         } catch (Exception e) {
             System.out.println("\nIncomplete or wrongly formatted command, try again.\n");
         }
@@ -110,6 +112,7 @@ public class Parser {
             executor = new FavouriteCommand(mediaList, words);
             String output = executor.execute();
             Ui.print(output);
+            logger.log(Level.INFO, "\n\tFavourites command executed");
         } catch (Exception e) {
             System.out.println("\nIncomplete or wrongly formatted command, try again.\n");
         }
@@ -119,6 +122,7 @@ public class Parser {
         executor = new ListCommand(mediaList);
         String output = executor.execute();
         Ui.print(output);
+        logger.log(Level.INFO, "\n\tList command executed");
     }
 
     public void addMedia(String[] fields, Integer spacingType) {
@@ -144,11 +148,17 @@ public class Parser {
         try {
             if (userInput.contains(movieKeyword)) {
                 addMedia(fields, movieSpacing);
+                logger.log(Level.INFO, "\n\tAdd command executed");
             } else if (userInput.contains(tvKeyword)) {
                 addMedia(fields, tvSpacing);
+                logger.log(Level.INFO, "\n\tAdd command executed");
             }
-        } catch (Exception e) {
-            System.out.println("\nIncomplete or wrongly formatted command, try again.\n");
+            else {
+                throw new DukeException();
+            }
+        } catch (DukeException e) {
+            logger.log(Level.WARNING, "\n\tAdd command failed");
+            System.out.println("\n" + e.getMessage());
         }
     }
 
@@ -156,21 +166,24 @@ public class Parser {
         executor = new ClearCommand(mediaList);
         String output = executor.execute();
         Ui.print(output);
+        logger.log(Level.INFO, "\n\tClear command executed");
     }
 
     public void executeDelete(String[] words) {
         try {
-            if (words.length <= 1) {
-                throw new Exception();
+            if (words.length < 1) {
+                throw new DukeException();
             } else {
                 String index = words[1];
                 int deleteIndex = Integer.parseInt(index) - 1;
                 executor = new RemoveCommand(mediaList, deleteIndex);
                 String output = executor.execute();
                 Ui.print(output);
+                logger.log(Level.INFO, "\n\tDelete command executed");
             }
-        } catch (Exception e) {
-            System.out.println("Wrong Command\n");
+        } catch (DukeException e) {
+            logger.log(Level.WARNING, "\n\tDelete command failed");
+            System.out.println("\n" + e.getMessage());
         }
 
     }
