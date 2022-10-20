@@ -129,7 +129,40 @@ public class LocalStorage {
                 System.out.println(Messages.LOCAL_STORAGE_EXPENSE_ERROR_IN_LOAD_FILE + (itr + 1));
             }
         }
+    }
 
+    /**
+     * This method reads saved data and configurations from a load file
+     * and add it to the list that stores expenses.
+     *
+     * @param expenseManager arraylist to store expenses
+     * @param filePath       path to save file to merge
+     */
+    public void loadFromExternalFile(ExpenseManager expenseManager, String filePath) {
+        Expense loadExpense;
+        int itr = 0;
+        try {
+            File externalFile = new File(filePath);
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            DocumentBuilder db = dbf.newDocumentBuilder();
+            db.setErrorHandler(new NullErrorHandler());
+            Document doc = db.parse(externalFile);
+            doc.getDocumentElement().normalize();
+            NodeList expenseList = doc.getElementsByTagName(XML_EXPENSE_ELEMENT);
+            for (itr = 0; itr < expenseList.getLength(); itr++) {
+                Node node = expenseList.item(itr);
+                loadExpense = createExpense(node);
+                expenseManager.addExpense(loadExpense);
+            }
+        } catch (FileNotFoundException e) {
+            initialiseFile();
+            System.out.println(Messages.LOCAL_STORAGE_ERROR_NO_LOAD_FILE);
+        } catch (SAXException | IOException | ParserConfigurationException e) {
+            System.out.println(Messages.LOCAL_STORAGE_ERROR_CORRUPTED_OR_EMPTY_LOAD_FILE);
+        } catch (LocalStorageLoadDataInputError | NumberFormatException
+                 | NullPointerException | DateTimeParseException e) {
+            System.out.println(Messages.LOCAL_STORAGE_EXPENSE_ERROR_IN_LOAD_FILE + (itr + 1));
+        }
     }
 
     /**
@@ -353,10 +386,10 @@ public class LocalStorage {
     }
 
     private void parseIncomeToXML(Document doc, Element rootElement, ArrayList<Income> savedIncomes) {
-        Integer index = 1;
+        int index = 1;
         for (Income income : savedIncomes) {
             Element incomeElement = doc.createElement(XML_INCOME_ELEMENT);
-            incomeElement.setAttribute(XML_INCOME_ID_ATTRIBUTE, index.toString());
+            incomeElement.setAttribute(XML_INCOME_ID_ATTRIBUTE, Integer.toString(index));
             rootElement.appendChild(incomeElement);
             Element name = doc.createElement(XML_INCOME_NAME_ELEMENT);
             name.setTextContent(income.getName());
