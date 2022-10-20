@@ -41,7 +41,7 @@ parser() method will not be reflected in order to improve readability.
 
 1. [Delete a passenger feature](#Delete-a-passenger-feature)
 2. [List passengers feature](#List-passengers-feature)
-3. [Delete a flight](#Delete-a-flight-feature)
+3. [Delete a flight feature](#Delete-a-flight-feature)
 
 ---
 
