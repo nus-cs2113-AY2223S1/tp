@@ -1,0 +1,64 @@
+@startuml
+!include <office/Concepts/globe_internet>
+!include <office/Concepts/documents>
+!include <office/Users/user>
+!include styles.puml
+
+Package " "<<Rectangle>>{
+    Class MoneyGoWhere MONEYGOWHERE_COLOR_1
+
+    Class Messages COMMON_COLOR_1
+    Class Configurations COMMON_COLOR_1
+
+    Class ConsoleInterface USER_INTERFACE_COLOR_1
+
+    Class ConsoleParser PARSER_COLOR_1
+    Class ConsoleParserConfigurations PARSER_COLOR_2
+
+    Class ExpenseManager DATA_COLOR_1
+    Class CategoryManager DATA_COLOR_2
+    Class IncomeManager DATA_COLOR_3
+    Class TargetManager DATA_COLOR_4
+    Class RecurringPaymentManager DATA_COLOR_5
+    Class CurrencyManager DATA_COLOR_6
+
+    Class LocalStorage STORAGE_COLOR_1
+
+    Class LocalLogger LOGGER_COLOR_1
+}
+
+Class "<$user>" as User USER_INTERFACE_COLOR_2
+Class "<$documents>" as DataFile STORAGE_COLOR_2
+Class "<$documents>" as LogFile LOGGER_COLOR_2
+
+MoneyGoWhere -down-> ConsoleInterface
+
+User -down-> ConsoleInterface
+
+ConsoleInterface -left-> ConsoleParser
+ConsoleInterface -down-> ExpenseManager
+ConsoleInterface -down-> CategoryManager
+ConsoleInterface -down-> IncomeManager
+ConsoleInterface -down-> TargetManager
+ConsoleInterface -down-> RecurringPaymentManager
+ConsoleInterface -down-> CurrencyManager
+ConsoleInterface -right-> LocalLogger
+
+ConsoleParser -down-> ConsoleParserConfigurations
+
+ExpenseManager -down-> LocalStorage
+
+CategoryManager -down-> LocalStorage
+
+IncomeManager -down-> LocalStorage
+
+TargetManager -down-> LocalStorage
+
+RecurringPaymentManager -down-> LocalStorage
+
+CurrencyManager -down-> LocalStorage
+
+LocalStorage .right.> DataFile
+
+LocalLogger .right.> LogFile
+@enduml
