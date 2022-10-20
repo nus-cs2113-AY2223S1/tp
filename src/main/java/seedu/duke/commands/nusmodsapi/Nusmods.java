@@ -50,7 +50,8 @@ public class Nusmods {
 
         return baseUri + mod + ".json";
     }
-    private HttpResponse<String> getResponse() throws IOException, InterruptedException{
+
+    private HttpResponse<String> getResponse() throws IOException, InterruptedException {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
@@ -98,12 +99,12 @@ public class Nusmods {
 
     private List<Lesson> addModuleComponents(String response, String currentSemester, String[] info)
             throws JsonProcessingException, Exceptions.InvalidSemException {
-            ObjectMapper mapper = new ObjectMapper();
-            JsonNode node = mapper.readTree(response);
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode node = mapper.readTree(response);
 
-            info[moduleCode] = node.get("moduleCode").asText();
-            info[moduleName] = node.get("title").asText();
-            info[moduleDescription] = node.get("description").asText();
+        info[moduleCode] = node.get("moduleCode").asText();
+        info[moduleName] = node.get("title").asText();
+        info[moduleDescription] = node.get("description").asText();
 
         JsonNode semData = node.get("semesterData");
         List<Lesson> lessons;
