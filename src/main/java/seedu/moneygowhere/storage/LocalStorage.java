@@ -9,6 +9,7 @@ import seedu.moneygowhere.commands.ConsoleCommandSortExpense;
 import seedu.moneygowhere.common.Messages;
 import seedu.moneygowhere.data.expense.Expense;
 import seedu.moneygowhere.data.expense.ExpenseManager;
+import seedu.moneygowhere.data.income.Income;
 import seedu.moneygowhere.data.recurringpayments.RecurringPayment;
 import seedu.moneygowhere.data.target.Target;
 import seedu.moneygowhere.exceptions.LocalStorageLoadDataInputError;
@@ -272,6 +273,30 @@ public class LocalStorage {
         String currency = amountNodeList.item(0).getAttributes()
                 .getNamedItem(XML_RECURRING_PAYMENT_CURRENCY_ATTRIBUTE).getTextContent();
         return new RecurringPayment(name, interval, description, amount);
+    }
+
+    /**
+     * This method takes in an Income node and convert it into an Income object.
+     *
+     * @param node containing information from an income
+     * @return income created with data by node
+     */
+    private Income createIncome(Node node) throws LocalStorageLoadDataInputError {
+        if (node.getNodeType() != Node.ELEMENT_NODE) {
+            throw new LocalStorageLoadDataInputError();
+        }
+        Element element = (Element) node;
+        String name = element.getElementsByTagName(XML_INCOME_NAME_ELEMENT)
+                .item(0).getTextContent();
+        LocalDateTime dateTime = LocalDateTime.parse(element
+                .getElementsByTagName(XML_INCOME_DATETIME_ELEMENT).item(0).getTextContent());
+        String description = element.getElementsByTagName(XML_INCOME_DESCRIPTION_ELEMENT)
+                .item(0).getTextContent();
+        NodeList amountNodeList = element.getElementsByTagName(XML_INCOME_AMOUNT_ELEMENT);
+        BigDecimal amount = new BigDecimal(amountNodeList.item(0).getTextContent());
+        String currency = amountNodeList.item(0).getAttributes()
+                .getNamedItem(XML_EXPENSE_AMOUNT_CURRENCY_ATTRIBUTE).getTextContent();
+        return new Income(name, dateTime, description, amount);
     }
 
     private void writeXml(Document doc)
