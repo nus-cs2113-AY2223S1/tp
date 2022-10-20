@@ -2,7 +2,7 @@
 !include <office/Concepts/globe_internet>
 !include <office/Concepts/documents>
 !include <office/Users/user>
-!include styles.puml
+!include https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/styles.puml
 
 Package " "<<Rectangle>>{
     Class MoneyGoWhere MONEYGOWHERE_COLOR_1
