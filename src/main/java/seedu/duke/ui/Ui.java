@@ -246,6 +246,7 @@ public class Ui {
 
     /**
      * Prints the name of all universities available in the database.
+     *
      * @param universities The list of universities in the database.
      */
     public static void printUniversitiesInDatabase(ArrayList<University> universities) {
@@ -261,6 +262,7 @@ public class Ui {
      * Sequentially prints eligible module mappings from a list.
      * The NUS module code and title as well as the equivalent partner university
      * module code and title are printed.
+     *
      * @param moduleMappings A list containing module mappings.
      */
     public static void printMappings(ArrayList<ModuleMapping> moduleMappings) {
@@ -274,6 +276,7 @@ public class Ui {
      * Prints all the lists that the user has favourited.
      * Lists are printed sequentially, starting with the university name
      * and then all modules in that university's list on a new line.
+     *
      * @param userFavouriteLists A dictionary containing a user's favourited lists.
      */
     public static void printUserFavouriteLists(HashMap<String, UserUniversityList> userFavouriteLists) {
@@ -289,6 +292,7 @@ public class Ui {
     /**
      * Prints an acknowledgement message to inform the user that they have
      * successfully added a list to their favourites.
+     *
      * @param universityName The name of the university for which the list is favourited by the user.
      * @return Acknowledgement message to user for adding a list to favourites.
      */
@@ -301,6 +305,7 @@ public class Ui {
     /**
      * Prints an acknowledgement message to inform the user that they have
      * successfully deleted a list from their favourites.
+     *
      * @param universityName The name of the university for which the list was favourited by the user.
      * @return Acknowledgement message to user for deleting a list from favourites.
      */
@@ -313,6 +318,7 @@ public class Ui {
     /**
      * Prints an acknowledgement message to inform the user that they have
      * successfully created a timetable for a university.
+     *
      * @param universityName The name of the university for which the timetable was created by the user.
      * @return Acknowledgement message to user for creating a timetable for a university.
      */
@@ -325,6 +331,7 @@ public class Ui {
     /**
      * Prints an acknowledgement message to inform the user that they have
      * successfully deleted the timetable for a university.
+     *
      * @param universityName The name of the university for which the timetable was deleted by the user.
      * @return Acknowledgement message to user for deleting the timetable for a university.
      */
@@ -342,6 +349,7 @@ public class Ui {
     public static String printLesson(Lesson lesson) {
         assert lesson.getCode().length() > 0 : "Module code length cannot be empty";
         assert lesson.getTitle().length() > 0 : "Module title length cannot be empty";
+        assert lesson.getDay().length() > 0 : "Lesson day length cannot be empty";
         assert lesson.getStartTime().length() > 0 : "Lesson start time cannot be empty";
         assert lesson.getEndTime().length() > 0 : "Lesson end time cannot be empty";
         String message = lesson.getStartTime() + "hrs-" + lesson.getEndTime() + "hrs: "
@@ -365,6 +373,34 @@ public class Ui {
             message += "\n";
         }
         message += LINE;
+        return message;
+    }
+
+    /**
+     * Prints an acknowledgement message to inform the user that they have
+     * successfully added a lesson to the timetable for a university.
+     *
+     * @param lesson The name of the university for which the timetable was created by the user.
+     * @return Acknowledgement message to user for adding a lesson to a university timetable.
+     */
+    public static String printLessonAddedAcknowledgement(Lesson lesson) {
+        String universityName = lesson.getUniversity().getName();
+        String message = LINE + "Success! You have added a new lesson:\n" + universityName + " "
+                + lesson.getDay() + " " + printLesson(lesson) + "\n" + LINE;
+        return message;
+    }
+
+    /**
+     * Prints an acknowledgement message to inform the user that they have
+     * successfully deleted a lesson from the timetable for a university.
+     *
+     * @param lesson The name of the university for which the timetable was deleted by the user.
+     * @return Acknowledgement message to user for deleting a lesson from a university timetable.
+     */
+    public static String printLessonDeletedAcknowledgement(Lesson lesson) {
+        String universityName = lesson.getUniversity().getName();
+        String message = LINE + "Success! You have deleted the lesson:\n" + universityName + " "
+                + lesson.getDay() + " " + printLesson(lesson) + "\n" + LINE;
         return message;
     }
 }

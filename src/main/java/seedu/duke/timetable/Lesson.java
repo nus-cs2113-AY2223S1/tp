@@ -41,35 +41,4 @@ public class Lesson extends Module {
     public void setEndTime(String endTime) {
         this.endTime = endTime;
     }
-
-    boolean isValidDay() {
-        return day.equals("monday") || day.equals("tuesday") || day.equals("wednesday")
-                || day.equals("thursday") || day.equals("friday");
-    }
-
-    boolean isValidStartTime() throws InvalidTimeFormatException {
-        try {
-            int startTimeAsInt = Integer.parseInt(startTime);
-            boolean withinTimeRange = startTimeAsInt >= 0 && startTimeAsInt <= 2359;
-            if (withinTimeRange) {
-                return true;
-            }
-        } catch (NumberFormatException e) {
-            throw new InvalidTimeFormatException("Invalid time format entered!");
-        }
-        return false;
-    }
-
-    boolean isValidEndTime() throws InvalidTimeFormatException {
-        try {
-            int endTimeAsInt = Integer.parseInt(endTime);
-            boolean withinTimeRange = endTimeAsInt >= 0 && endTimeAsInt <= 2359;
-            if (withinTimeRange) {
-                return true;
-            }
-        } catch (NumberFormatException e) {
-            throw new InvalidTimeFormatException("Invalid time format entered!");
-        }
-        return false;
-    }
 }
