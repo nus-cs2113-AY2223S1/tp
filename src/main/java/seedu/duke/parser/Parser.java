@@ -4,6 +4,7 @@ import seedu.duke.command.AddModuleCommand;
 import seedu.duke.command.Command;
 import seedu.duke.command.DeleteModuleCommand;
 import seedu.duke.command.ExitCommand;
+import seedu.duke.command.GetModuleCommand;
 import seedu.duke.command.HelpCommand;
 import seedu.duke.command.IncompleteCommand;
 import seedu.duke.command.InvalidModuleCommand;
@@ -24,6 +25,8 @@ public class Parser {
         switch (keywords[0]) {
         case (SearchModuleCommand.COMMAND_WORD):
             return searchCommand(userInput);
+        case (GetModuleCommand.COMMAND_WORD):
+            return getCommand(keywords);
         case (AddModuleCommand.COMMAND_WORD):
             return addDeleteCommand(keywords, new AddModuleCommand(keywords));
         case (DeleteModuleCommand.COMMAND_WORD):
@@ -41,6 +44,10 @@ public class Parser {
         default:
             return new UnknownCommand(keywords);
         }
+    }
+
+    private static Command getCommand(String[] keywords) {
+        return new GetModuleCommand(keywords);
     }
 
     public static boolean isPartialModuleCode(String moduleCode) {
