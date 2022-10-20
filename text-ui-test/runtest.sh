@@ -1,4 +1,4 @@
-#!/usr/bin/en./runtest.shv bash
+#!/usr/bin/env bash
 
 # change to script directory
 cd "${0%/*}"
