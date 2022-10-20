@@ -30,33 +30,42 @@ public class GetModuleCommand extends Command {
 
     @Override
     public void execute(State state, Ui ui, Storage storage) {
-        ui.addMessage("Module: " + module.moduleCode);
-        ui.addMessage("Module Name: " + module.title);
-        ui.addMessage("Module Description: " + module.description);
-        ui.addMessage("Module Credit: " + module.moduleCredit);
-        ui.addMessage("Department: " + module.department);
-        ui.addMessage("Faculty: " + module.faculty);
-        ui.addMessage("Workload: " + module.workload.toString());
-        ui.addMessage("semester offering : " + module.getSemestersOffering(module));
-        ui.addMessage("Prerequisite: " + module.prerequisite.toString());
-        ui.addMessage("Preclusion: " + module.preclusion);
-        ui.addMessage("Corequisite" + module.corequisite);
+        // if field is empty, display null in ui
+        ui.addMessage("Module               : " + (module.moduleCode.isEmpty() ? "Nil" : module.moduleCode));
+        ui.addMessage("Module Name          : " + (module.title.isEmpty() ? "Nil" : module.title));
+        ui.addMessage("Module Description   : " + (module.description.isEmpty() ? "Nil" : module.description));
+        ui.addMessage("Module Credit        : " + (module.moduleCredit));
+        ui.addMessage("Department           : " + (module.department.isEmpty() ? "Nil" : module.department));
+        ui.addMessage("Faculty              : " + (module.faculty.isEmpty() ? "Nil" : module.faculty));
+        ui.addMessage("Workload             : " + (module.workload.toString().isEmpty() ? "Nil" : module.workload.toString()));
+        ui.addMessage("semester offering    : " + (module.getSemestersOffering(module).isEmpty() ? "Nil" : module.getSemestersOffering(module)));
+        ui.addMessage("Prerequisite         : " + (module.prerequisite.toString().isEmpty() ? "Nil" : module.prerequisite.toString()));
+        ui.addMessage("Preclusion           : " + (module.preclusion.isEmpty() ? "Nil" : module.preclusion));
+        ui.addMessage("Corequisite          : " + (module.corequisite.isEmpty() ? "Nil" : module.corequisite));
 
         ui.displayDivider();
-        // add module's rawlesson into timetable
-        // shown in simple form
-
-        List<Pair<Module, RawLesson>> lessons = new ArrayList<>();
-        Pair<Module, RawLesson> lesson;
-        List<RawLesson> tempLesson = module.getSemesterData(state.getSemester()).timetable;
-        for (RawLesson rawLesson : tempLesson) {
-            lesson = Pair.of(module, rawLesson);
-            lessons.add(lesson);
+        if (moduleOfferedInCurrentSem(module, state)){
+            List<Pair<Module, RawLesson>> lessons = new ArrayList<>();
+            Pair<Module, RawLesson> lesson;
+            List<RawLesson> tempLesson = module.getSemesterData(state.getSemester()).timetable;
+            for (RawLesson rawLesson : tempLesson) {
+                lesson = Pair.of(module, rawLesson);
+                lessons.add(lesson);
+            }
+    
+            Timetable timetable = new Timetable(lessons, true, false);
+            ui.addMessage(timetable.toString());
+        } else {
+            ui.addMessage("Module " + module.moduleCode + " is not offered in this semesterm, hence no timetable information is available due to unforseen circumstances");
         }
 
-        Timetable timetable = new Timetable(lessons, true, false);
-        ui.addMessage(timetable.toString());
         ui.displayUi();
+    }
+
+    // check if module is offered in this semester
+    boolean moduleOfferedInCurrentSem(Module module, State state) {
+        int sem = state.getSemester();
+        return module.getSemestersOffering(module).contains(sem);
     }
 
     @Override
