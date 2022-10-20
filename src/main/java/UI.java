@@ -40,6 +40,10 @@ public class UI {
             + UI.PRESCRIPTION_CHANGE_INACTIVE
             + UI.RETURN_TO_MAIN
             + UI.EXIT_PROGRAM;
+    private static final String NO_MATCHING_PRESCRIPTION_MESSAGE = "There are currently no prescriptions from this "
+            + "patient.";
+    private static final String NO_MATCHING_ACTIVE_PRESCRIPTION_MESSAGE = "There are currently no active prescriptions "
+            + "from this patient.";
 
     // Visit
     private static final String VISIT_MAIN_MENU =
@@ -220,6 +224,12 @@ public class UI {
         printLine();
         System.out.println(prescription);
         printLine();
+    public void printNoMatchingPrescriptionMessage() {
+        System.out.println(NO_MATCHING_PRESCRIPTION_MESSAGE);
+    }
+
+    public void printNoMatchingActivePrescriptionMessage() {
+        System.out.println(NO_MATCHING_ACTIVE_PRESCRIPTION_MESSAGE);
     }
 }
 

@@ -41,9 +41,43 @@ public class PrescriptionList {
         ui.printViewAllPrescriptionsMessage();
         ui.printLine();
         for (int i = 0; i < prescriptionsList.size(); i++) {
-            System.out.println((i + 1) + ")");
+            System.out.println("Prescription #" + (i + 1));
             System.out.println(prescriptionsList.get(i));
             ui.printLine();
+        }
+    }
+
+    public void viewPatientPrescription(UI ui, String patientId) {
+        if (isEmpty() || hasPatientPrescription(patientId)) {
+            ui.printNoMatchingPrescriptionMessage();
+            return;
+        }
+
+        ui.printViewAllPrescriptionsMessage();
+        ui.printLine();
+        for (int i = 0; i < prescriptionsList.size(); i++) {
+            if (prescriptionsList.get(i).isMatchedPatient(patientId)) {
+                System.out.println("Prescription #" + (i + 1));
+                System.out.println(prescriptionsList.get(i));
+                ui.printLine();
+            }
+        }
+    }
+
+    public void viewActivePatientPrescription(UI ui, String patientId) {
+        if (isEmpty() || hasPatientPrescription(patientId)) {
+            ui.printNoMatchingActivePrescriptionMessage();
+            return;
+        }
+
+        ui.printViewAllPrescriptionsMessage();
+        ui.printLine();
+        for (int i = 0; i < prescriptionsList.size(); i++) {
+            if (prescriptionsList.get(i).isMatchedPatientActive(patientId)) {
+                System.out.println("Prescription #" + (i + 1));
+                System.out.println(prescriptionsList.get(i));
+                ui.printLine();
+            }
         }
     }
 
@@ -63,20 +97,27 @@ public class PrescriptionList {
         }
 
         Prescription prescriptionEdited = prescriptionsList.get(index);
+        String newMedicine = medicine.isEmpty() ? prescriptionEdited.getMedicine() : medicine;
+        String newDosage = dosage.isEmpty() ? prescriptionEdited.getDosage() : dosage;
+        String newTimeInterval = timeInterval.isEmpty() ? prescriptionEdited.getTimeInterval() : timeInterval;
+        String patientId =  prescriptionEdited.getPatientId();
 
-        if (!medicine.isEmpty()) {
-            prescriptionEdited.setMedicine(medicine);
+        prescriptionEdited.setInactive();
+        Prescription newPrescription = new Prescription(patientId, newMedicine, newDosage, newTimeInterval);
+
+        prescriptionsList.add(newPrescription);
+
+        ui.printEditPrescriptionMessage(newPrescription.toString());
+    }
+
+    private boolean hasPatientPrescription(String patientId) {
+        for (Prescription prescription : prescriptionsList) {
+            if (prescription.isMatchedPatientActive(patientId)) {
+                return true;
+            }
         }
 
-        if (!dosage.isEmpty()) {
-            prescriptionEdited.setDosage(dosage);
-        }
-
-        if (!timeInterval.isEmpty()) {
-            prescriptionEdited.setTimeInterval(timeInterval);
-        }
-
-        ui.printEditPrescriptionMessage(prescriptionEdited.toString());
+        return false;
     }
 
     public void activatePres(UI ui, String prescriptionNumber) {
