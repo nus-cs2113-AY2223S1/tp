@@ -44,7 +44,7 @@ parser() method will not be reflected in order to improve readability.
 3. [List passengers feature](#List-passengers-feature)
 4. [Add a flight feature](#Add-a-flight-feature)
 5. [Delete a flight feature](#Delete-a-flight-feature)
-5. [List flights feature](#List-flights-feature)
+6. [List flights feature](#List-flights-feature)
 
 ---
 
