@@ -1,6 +1,6 @@
 package seedu.duke;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -14,7 +14,7 @@ public class MovieTest {
         Movie assertMovie = (Movie) storedReviews.inputs.get(0);
         assertEquals(1,storedReviews.inputs.size());
         assertEquals("Harry Potter",assertMovie.title);
-        assertEquals("5.0",assertMovie.rating);
+        assertEquals(5.0,assertMovie.rating);
         assertEquals("SciFi", assertMovie.genre);
         assertEquals("10-01-2020",assertMovie.dateWatched);
     }
