@@ -639,6 +639,7 @@ public class ConsoleInterface {
         String filePath = consoleCommandMergeExternalFile.getFilePath();
 
         localStorage.loadFromExternalFile(expenseManager, filePath);
+        localStorage.saveToFile(expenseManager.getExpenses(), expenseManager.getSortCommandSetting());
     }
 
     private ConsoleCommand getConsoleCommand() {
