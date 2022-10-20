@@ -99,6 +99,8 @@ public class TransactionList {
         return income.toString();
     }
 
+    //@@author chinhan99
+
     public void addIncomeDuringStorage(String description, int amount, String category, LocalDate date) {
         Income income = new Income(description, amount, category, date);
         transactions.add(income);
@@ -109,7 +111,6 @@ public class TransactionList {
         Expense expense = new Expense(description, amount, category, date);
         transactions.add(expense);
     }
-
 
     //@@author chydarren
 
@@ -136,7 +137,7 @@ public class TransactionList {
      * @throws InputTransactionUnknownTypeException If class type cannot be found in the packages.
      */
     public boolean isMatchListFilters(Transaction transaction, String type, String category,
-                                      LocalDate date) throws InputTransactionUnknownTypeException {
+            LocalDate date) throws InputTransactionUnknownTypeException {
         boolean isMatch;
         try {
             isMatch = ((type.isEmpty() || isTransactionInstance(transaction, type))

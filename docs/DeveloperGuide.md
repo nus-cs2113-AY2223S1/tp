@@ -42,8 +42,7 @@ _Written by: Author name_
 
 ## Acknowledgements
 
-{List here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the
-original source as well}
+{List here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 _Written by: Author name_
 
@@ -59,15 +58,12 @@ Firstly, you should fork this repo, before cloning the fork to your computer.
 
 Next,
 
-1. **Ensure that Intellij JDK 11 is defined as an SDK**, as described in
-   this [[Set up JDK guide]](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk) -- this step is not needed if you
-   have used JDK 11 in a previous Intellij project.
+1. **Ensure that Intellij JDK 11 is defined as an SDK**, as described in this [[Set up JDK guide]](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk) -- this step is not needed if you have used JDK 11 in a previous Intellij project.
     * You _might need to set the Project language level_ section to the SDK default option.
-2. **Import the project _as a Gradle project_**, as described
-   in [[se-edu's Import Gradle Project guide]](https://se-education.org/guides/tutorials/intellijImportGradleProject.html)
-   .
-3. **Running the project**: After finishing the import, locate the `src/main/java/seedu.duke/Duke.java` file in this
-   project, right-click it, and choose `Run Duke.main()`.
+2. **Import the project _as a Gradle project_**, as described in
+[[se-edu's Import Gradle Project guide]](https://se-education.org/guides/tutorials/intellijImportGradleProject.html).
+3. **Running the project**: After finishing the import, locate the `src/main/java/seedu.duke/Duke.java` 
+file in this project, right-click it, and choose `Run Duke.main()`.
 
 _Written by: Paul Low_
 
@@ -84,6 +80,7 @@ _Written by: Author name_
 _Written by: Author name_
 
 ### Data Component 
+
 The data component is represented by a `data` package which consists of all the classes that is part of the data stored 
 by Moolah Manager. Within the `data` package, a transaction package and a transactionList class is stored. 
 
@@ -109,10 +106,11 @@ displayed.
 
 <!-- TODO: Complete category and categoryList in sequence diagram and write their explanation here -->
 
-A more detailed explaination on the implementation on the transactions can be viewed under Section
+A more detailed explanation on the implementation on the transactions can be viewed under Section
 [Implementation for Transaction](#implementation-for-transaction).
 
 #### How the data component interacts
+
 - When MoolahManager starts running, the `Duke` class will initialize a `Storage` object which will attempt to 
 read from the file and initialize a `transactionList`. The temporary `transactionList` containing all the stored 
 transaction records will be returned by the `Storage`. 
@@ -122,7 +120,7 @@ Based on the whether the initialization is successful, the corresponding constru
   ![Sequence Diagram on Creation of TransactionList](images/TransactionListSequenceDiagram.png)
 
 - A transaction (either an income or expense) is created by an `addCommand` class, can be modified by an `editCommand` 
-class and can be deleted by a `deleteCommand` or `purgeCommand` class. These interactions is described in further detail
+class and can be deleted by a `deleteCommand` or `purgeCommand` class. These interactions are described in further detail
 under each command section below.
 
 <!-- TODO: Describe how category and categoryList work here -->
@@ -134,12 +132,43 @@ _Written by: Chia Thin Hong_
 _Written by: Author name_
 
 ### Parser Component
+The Parser component comprises of two main parsers: `CommandParser` and `ParameterParser`. Together, both these 
+parsers are used to generate a command object with its accurate parameters according to the input from the UI. 
 
-_Written by: Author name_
+The structure of the data component in Moolah Manager is illustrated in the class diagram below:
+![Data Component Class Diagram](images/ParserClassDiagram.png)
+
+After `run()` is called by `main()` in Duke, the `CommandParser` is first called to parse the command. The initial
+ input is split into the commandWord and parameters using `splitInput()`. Next, the command word is parsed using 
+ `getCommand()`. With the new command created, the parameters are then parsed by calling `ParameterParser.parse()`
+ 
+In `ParameterParser`, multiple checks are done to ensure that the userInput is accurate. For example, checks are done 
+to confirm that all mandatory tags are filled, that no unsupported tags are used, no duplicate tags, no tags are
+without parameters and finally that the formats of parameters are accurate. After all the checks are done`setCommand` 
+is called to customize the command accordingly.
+
+With the checked and accurate commands and parameters, the command is then executed by `Duke`
+
+_Written by: Paul Low_
 
 ### UI Component
 
-_Written by: Author name_
+The UI component consists of a `Ui` class that displays information and error messages based on the user 
+input and the behavior of the application. Static messages are pre-defined in the `ErrorMessages` and `InfoMessages` 
+classes from the Common component, while  dynamic messages such as a transactions list may be generated during 
+execution of the application.
+
+<p align="center">
+    <img src="images/UiComponentClassDiagram.png">
+    <br />
+    <i>Figure 2.6: Class Diagram for UI Component</i>
+</p>
+
+As seen from the class diagram, every command that requires the ability to print to the system output will have
+to call the functions from the `Ui` class. To add on, the `Duke` class will also use the `Ui` class to read user 
+input.
+
+_Written by: Chua Han Yong Darren_
 
 ### Common Component
 
@@ -156,13 +185,13 @@ _Written by: Author name_
 ### Implementation for Transaction
 
 Each `Transaction` object in Moolah Manager represents a transaction record, which can be of `Income`
-or `Expense` type. Below is a simplified class diagram (note: methods have been omitted) containing the attributes
-within each transaction and how the transactions are associated with the `TransactionList`.
+or `Expense` type. Below is a simplified class diagram (with methods omitted) containing the attributes
+within each transaction and how each transaction is associated with the `TransactionList`.
 
 <p align="center">
     <img src="images/TransactionClassDiagram.png">
     <br />
-    <i>Figure 1: SimplifiedClass Diagram for Transaction</i>
+    <i>Figure 1: Simplified Class Diagram for Transaction</i>
 </p>
 
 The `TransactionList` holds a dynamic array list that can store multiple `Transaction` objects.
@@ -215,7 +244,7 @@ _Written by: Chia Thin Hong_
 
 **This feature allows the local and external (handled by Storage class) storage of transaction entries by the user.**
 
-The `AddCommand` inherits properties from the abstract `Command` class.he inheritance of `Command` from `AddCommand` is
+The `AddCommand` inherits properties from the abstract `Command` class. The inheritance of `Command` from `AddCommand` is
 shown below.
 
 <p align="center">
@@ -234,7 +263,6 @@ which calls for `AddCommand#execute()`. Lastly it is also associated with `Param
     <br />
     <i>Figure 3.2: Class Diagram for AddCommand and Related Classes</i>
 </p>
-
 
 These are the important operations performed within the `AddCommand` class, with task description:
 
@@ -258,10 +286,9 @@ _Written by: Author name_
 
 ### List Command
 
-{Describe the implementation for the List Command}
 
 The full command for list is `list [t/TYPE] [c/CATEGORY] [d/DATE]`
-For example, if `list' is called, all transactions that are present in Moolah Manager will be listed out
+For example, if 'list' is called, all transactions that are present in Moolah Manager will be listed out
 Adding tags such as type, category and date will list all transactions to that category
 
 In a command like `list c/food`
@@ -278,9 +305,39 @@ _Written by: Paul Low_
 
 ### Find Command
 
-{Describe the implementation for the Find Command}
+The `FindCommand` class provides the functionality of finding a specific or few transaction(s) 
+from the list of transactions recorded in Moolah Manager, based on  multiple searching keywords that 
+match the details of the transaction(s).
 
-_Written by: Author name_
+The sequence diagram below shows the interactions of a successful execution of the `FindCommand`.
+
+<p align="center">
+    <img src="images/FindCommandSequenceDiagram.png">
+    <br />
+    <i>Figure 3.3: Sequence Diagram for Find Command</i>
+</p>
+
+**Step 1.** The user executes `find KEYWORDS` command with an intent to view a filtered list of transactions 
+that match the searching keywords.
+
+**Step 2.** The `CommandParser#parse()` method is called to initialize the `Command` object with `FindCommand`, 
+accompanied by a string of keywords to search for.
+
+**Step 3.** Moolah Manager (`Duke`) calls `FindCommand#execute()` method which first checks whether the string of 
+keywords is empty via the `FindCommand#checkFindFormat()` method. If `keywords` is empty, a 
+`FindTransactionMissingKeywordsException` object will be thrown with an error message.
+
+**Step 4.** Since there exists a string of keywords in a successful execution, the `TransactionList#findTransactions()` 
+method will be called to loop through all `Transaction` objects from `ArrayList<Transaction>`, checking if they match 
+(i.e. contain) any searching keywords given.
+
+**Step 5.** `Transaction` objects that contain the searching keywords will be appended into a formatted string and 
+returned by the `TransactionList#findTransactions()` method.
+
+**Step 6.** If `FindCommand` checks that `transactionsList` string is not empty, it will call `Ui#showTransactionsList()` 
+method to display the transactions. Otherwise, `Ui#showInfoMessage()` will be called.
+
+_Written by: Chua Han Yong Darren_
 
 ### Stats Command
 
@@ -290,15 +347,107 @@ _Written by: Author name_
 
 ### Delete Command
 
-{Describe the implementation for the Delete Command}
+The `DeleteCommand` inherits properties from the abstract `Command` class. The inheritance of `Command` from `DeleteCommand` is
+shown below.
 
-_Written by: Author name_
+<p align="center">
+    <img src="images/DeleteCommandClassDiagram.png">
+    <br />
+    <i>Figure 3.4: Class Diagram for DeleteCommand Showing Inheritance of Command</i>
+</p>
+
+The full command for `delete` is `delete [e/ENTRY]`.
+For example, if 'delete' is called, the specific entry inputted in the command is deleted from the list of transactions in
+Moolah Manager.
+
+In a command like `delete 2`:
+
+1. The `main()` method in Duke calls `run()` in Duke. The `ui` reads the command via `ui.readCommand()` and parses it
+   through `CommandParser.parse()`.
+
+2. Within `CommandParser.parse()`, a few functions are called internally.
+   1. `spiltInput()` is called which splits the command from the parameter.
+   2. `getCommand()` is called which searches for the command.
+   3. `ParameterParser.parse()` is called.
+   
+3. Within `ParameterParser.parse()`, a few functions are called internally as well.
+   1. `checkMandatoryTagsExist()` is called where the parameters are checked for all required tags exist based on the command.
+   2. `checkUnsupportedTagsNotExist()` is called to check if the parameter do not contain any unsupported tags based on the command.
+   3. `checkDuplicateTagsNotExist()` is called to check if the parameter do not contain any duplicate tags.
+   4. `checkParameterNotEmpty()` is called to check that the parameter inputted is not empty.
+   5. Once all these checks are successful, `setCommand()` is called.
+   
+4. Within `setCommand()`, more functions are called internally.
+   1. `setParameter()` is called to set the index of the transaction to be deleted.
+   2. The setting is done via `command.setEntryNumber()` which takes in the parameter and executes it in the DeleteCommand Class.
+   3. The parameter, however, needs to be further parsed through the execution of the `parseEntryTag()` function.
+   4. It converts the parameter, which is currently a `String`, to a `Int`.
+   
+5. The delete command is undergoing execution in `command.execute()` which will call functions within the DeleteCommand Class.
+   1. The index, which is the local `entryNumber` variable, goes under further checks by ascertaining whether it is greater than the total
+      number of transactions in the list or lesser than or equal to zero.
+   2. It tells the total size via the local `numberOfTransactions` variable which takes the value called by `transactions.size()`
+      which is located in the TransactionList class.
+   3. Should the above condition be true, it is no longer a valid input and the local `isInputValid` variable is set as false.
+   4. An exception is thrown if `isInputValid` is false. Otherwise, `transactions.deleteTransaction()` is called to remove it.
+   
+6. The above function is called in the TransactionList class which does the following:
+   1. Retrieves the transaction to be deleted via `transactions.get()`.
+   2. Removes it via `transactions.remove()`.
+   
+7. The display shows the successful deletion via `ui.showTransactionAction()` and writes it to file by `storage.writeToFile()`.
+
+_Written by: Brian Wong Yun Long_
 
 ### Purge Command
 
-{Describe the implementation for the Purge Command}
+The `PurgeCommand` inherits properties from the abstract `Command` class. The inheritance of `Command` from `PurgeCommand` is
+shown below.
 
-_Written by: Author name_
+<p align="center">
+    <img src="images/PurgeCommandClassDiagram.png">
+    <br />
+    <i>Figure 3.5: Class Diagram for PurgeCommand Showing Inheritance of Command</i>
+</p>
+
+The full command for `purge` is `purge`.
+For example, if 'purge' is called, all transactions in Moolah Manager are removed.
+
+This is how the command works:
+
+1. The `main()` method in Duke calls `run()` in Duke. The `ui` reads the command via `ui.readCommand()` and parses it
+   through `CommandParser.parse()`.
+
+2. Within `CommandParser.parse()`, a few functions are called internally.
+   1. `spiltInput()` is called which splits the command from the parameter.
+   2. `getCommand()` is called which searches for the command.
+   3. `ParameterParser.parse()` is called.
+
+3. Within `ParameterParser.parse()`, a few functions are called internally as well.
+   1. `checkMandatoryTagsExist()` is called where the parameters are checked for all required tags exist based on the command.
+   2. `checkUnsupportedTagsNotExist()` is called to check if the parameter do not contain any unsupported tags based on the command.
+   3. `checkDuplicateTagsNotExist()` is called to check if the parameter do not contain any duplicate tags.
+   4. `checkParameterNotEmpty()` is called to check that the parameter inputted is not empty.
+   5. Once all these checks are successful, `setCommand()` is called.
+   
+4. Within `setCommand()`, there is no parameters required to be set for `purge`.
+
+5. The purge command is undergoing execution in `command.execute()` which will call functions within the PurgeCommand Class.
+   1. The function calls `isEmpty()` which returns `true` if the list of transactions is zero, `false` otherwise. It is stored 
+      in the local `check` variable.
+   2. The above function compares the size of the transactions list through the `transactions.size()` which is executed in
+      the TransactionList class and see if both are equal to zero.
+   3. The display will show an empty message if `isEmpty()` returns `true` via `ui.showInfoMessage()`, which exits the command.
+   4. Otherwise, a warning is displayed through `ui.showInfoMessage()` and reads in an input for the user to respond through `ui.readCommand()`.
+   5. If the input is `Y`, the command goes ahead and executes the `transactions.purgeTransactions()`. Any other input will
+      abort the command and the display will show an aborted message through `ui.showInfoMessage()`.
+   
+6. The `transactions.purgeTransactions()` function is executed in the TransactionList class.
+   1. The `transactions.clear()` function is called which deletes every single entry in Moolah Manager
+
+7. The display shows the successful purging via `ui.showInfoMessage()` and writes it to file by `storage.writeToFile()`.
+
+_Written by: Brian Wong Yun Long_
 
 ### Storage Operations
 
@@ -334,10 +483,10 @@ _Written by: Paul Low_
 
 ## Appendix B: User Stories
 
-|Version| As a ... | I want to ... | So that I can ...|
-|--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+| Version | As a ... | I want to ...             | So that I can ...                                           |
+|---------|----------|---------------------------|-------------------------------------------------------------|
+| v1.0    | new user | see usage instructions    | refer to them when I forget how to use the application      |
+| v2.0    | user     | find a to-do item by name | locate a to-do without having to go through the entire list |
 
 ## Appendix C: Non-Functional Requirements
 
