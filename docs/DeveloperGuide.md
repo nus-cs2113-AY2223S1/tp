@@ -42,7 +42,6 @@ Some of the constraint includes:
 - Unable to calculate tax payment
 ___
 ## User Stories
-
 | Version | As a ...         | I want to ...                         | So that I can ...                                                    |
 |---------|------------------|---------------------------------------|----------------------------------------------------------------------|
 | v1.0    | Property Manager | add properties                        | keep track of properties                                             |
@@ -55,7 +54,7 @@ ___
 | v1.0    | Property Manager | pair a client to a property           | record down which client is renting which property                   |
 | v1.0    | Property Manager | unpair a client to a property         | update my rental records when a client is no longer renting property |
 | v1.0    | Property Manager | save my data                          | used the data created from a previous use of the app                 |
-| v1.0    | Property Manager | quit the app                          |                                                                      |
+| v1.0    | Property Manager | quit the app                          | -                                                                    |
 | v2.0    | Property Manager | check the details of a client         | find out which property the client is renting                        |
 | v2.0    | Property Manager | edit client and property details      | keep my data updated                                                 |
 | v2.0    | Property Manager | search clients using their details    | easily find specific clients                                         |
@@ -66,9 +65,23 @@ ___
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 ### Architecture
 ### UI Component
+### Parser Component
 ### Client Component
 ### Property Component
+
 ### Pairing Component
+API: [```pairingList.java```](../src/main/java/seedu/duke/PairingList.java)
+
+```PairingList``` is responsible for recording which clients renting which property.
+
+```PairingList``` does not inherit from other classes. It stores references to Client and Property objects.
+
+This a partial class diagram of the ```PairingList``` class:
+
+![Pairing List Design Diagram](diagrams/PairingListDesignDiagram.png)
+```ParsePair``` and ```ParseUnpair``` contain references to data classes ```PairingList```, ```ClientList``` and 
+```PropertyList``` because the data classes provide the required information to validate user input.
+
 ### Storage Component
 For `Storage` feature:
 
@@ -96,6 +109,63 @@ operations, the text files will be updated when `add`, `delete`, `pair` or `unpa
 ___
 ## Implementation
 This section describes the implementation details of the features within Property Rental Manager. 
+
+### PairingList
+
+```PairingList``` facilities that pair and unpair commands by storing client-property pairs.
+
+When client rents a property, the client and property form a pair.
+
+*  ```PairingList``` uses a hash map to represent these client-property pairs, where the key is a ```Client``` object
+  and the value is a ```Property``` object.
+* A hash map is chosen due to its constant time lookup performance, making it efficient at querying the property that a
+  client is renting.
+* Also, the Java HashMap prevents duplicate keys, which dovetails nicely with the fact that real-life tenants only have
+  one place of residence at any time.
+
+#### Pair
+
+Here is a sequence diagram for the pair command, called from ```Duke.java```:
+
+![PairingList Add Pair Sequence Diagram](diagrams/PairingListAddPairSequenceDiagram.png)
+
+**NOTE**: Some self-invocated calls have been omitted because this diagram emphasises cross-class method calls.
+
+The pair command takes in user input of the format:
+```
+pair ip/PROPERTY_INDEX ic/CLIENT_INDEX
+```
+where ```PROERTY_INDEX``` and ```CLIENT_INDEX``` must be positive integers which are indexes present in ```ClientList```
+and ```PropertyList``` if their private arrays were 1-indexed.
+
+How the pair command works:
+1. The user input for a pair command is first parsed by ```Parser``` (specifically, ```ParsePair```).
+2. ```ParsePair``` checks the user input for formatting mistakes such as missing flags and wrong flag orders.
+3. ```ParsePair``` also calls helper methods in ```PairingList``` to check that the pairing client and property indexes
+    exists. Also, the client and property must not be already paired. The client must not be renting any property
+    presently as well.
+4. After passing all these checks, the program fetches the desired```Property``` and ```Client``` from
+   ```PropertyList``` and ```ClientList```.
+5. The ```Property``` and ```Client``` objects are inserted as a pair into the hashmap of ```PairingList```.
+ 
+#### Unpair
+
+The unpair command takes in user input of the format:
+```
+unpair ip/PROPERTY_INDEX ic/CLIENT_INDEX
+```
+where ```PROERTY_INDEX``` and ```CLIENT_INDEX``` must be positive integers which are indexes present in ```ClientList```
+and ```PropertyList``` if their private arrays were 1-indexed.
+
+
+How the unpair command works:
+1. The user input for a pair command is first parsed by ```Parser``` (specifically, ```ParseUnpair```).
+2. ```ParseUnpair``` checks the user input for formatting mistakes such as missing flags and wrong flag orders.
+3. ```ParseUnpair``` also calls helper methods in ```PairingList``` to check that the pairing client and property
+   indexes exist, and that the client-property pair exist in ```PairingList```.
+4. After passing all these checks, the ```PairingList``` deletes the hashmap entry in ```clientPropertyPairings```
+   which contains the client-property pair.
+
 
 ### Storage
 The implementation of Storage class requires consists of different level of operations:
@@ -148,7 +218,6 @@ Note that when delete operation is being invoked on client and property, the `up
 prevent entries retaining within pairingList after it has been deleted from clientList or propertyList.
 
 
-
 ___
 ## Documentation, logging, testing, configuration and dev-ops
 ___
@@ -162,6 +231,7 @@ ___
 
 ## Glossary
 
-* *glossary item* - Definition
+* *client* - Person who is seeking for property to rent
+
 
 ## Instructions for manual testing
