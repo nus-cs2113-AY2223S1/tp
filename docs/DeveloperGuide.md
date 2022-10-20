@@ -40,7 +40,8 @@ The following sequence diagrams to showcase the list of commands,
 parser() method will not be reflected in order to improve readability.
 
 1. [Delete a passenger feature](#Delete-a-passenger-feature)
-2. [List passengers feature](#List-passengers-feature)  
+2. [List passengers feature](#List-passengers-feature)
+3. [Delete a flight feature](#Delete-a-flight-feature)
 
 ---
 
@@ -141,6 +142,38 @@ When `paser` verifies that the command is an entity `passenger` and `list` opera
 from `OperationList` is empty or not.
 3. If `passengers` is empty, prints empty table, else prints respective passenger details in table form.
 
+---
+### Delete a flight feature
+
+A delete function which allows the user to delete a flight specified with its flight number and
+departure time from the flight list.
+
+This feature is facilitated by `DeleteFlightCommand`. It extends an abstract `Command` with an override
+method `execute`. The abstract `Command` extends a `Parser` which holds and validates the User input
+to determine the type of command.
+
+`DeleteFlightCommand` implements the following operation:
+* execute(OperationList flights, String lineInput) &#8594; An override method inherited from
+`command` to execute the delete operation that should delete the specified flight from the logbook.
+
+The sequence diagram shown below describes the behaviour of the flight delete operation. This scenario
+assumes that the manager has given a valid 'flight delete' command as an input for easier readability.
+
+**Sequence Diagram**
+
+![sequence diagram](../docs/ug-diagrams/images/flightDeleteCmdSeqDiagram.jpg)
+
+Assuming that the manager has entered a valid 'flight delete' command, `parser()` will verify that the command
+is an entity `flight` and a `delete` operation. `executeEntity()` runs within SkyControl which will
+create an instantiation of `DeleteFlightCommand`.
+
+1. `execute(flights, lineInput)` will run within `DeleteFlightCommand` which calls
+`deleteOperation(lineInput)` in `FlightList` class.
+2. Within `deleteOperaton(lineInput)`, it will check whether the flight number given is valid or not.
+3. Given a valid flight number, `findAndRemoveFlight(flightNumber)` will search through the entire arraylist `flights`
+to find if the flight number exists and remove it from the arraylist.
+4. Upon successful deletion, `showFlightRemovedMessage()` is called which prints a message to the user to indicate a successful
+delete operation
 
 ## Product scope
 ### Target user profile
