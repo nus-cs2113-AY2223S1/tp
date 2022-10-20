@@ -91,7 +91,7 @@ public class Parser {
 
     public void executeFind(String[] words) {
         try {
-            executor = new FindCommand(mediaList, words [1]); //should we do more than one word?
+            executor = new FindCommand(mediaList, words [1]); 
             String output = executor.execute();
             Ui.print(output);
             logger.log(Level.INFO, "\n\tFind command executed");
