@@ -128,7 +128,7 @@ Example of usage:
 * `View-RecurringPayment -r 1`
 
 ### Merge file: `Merge-File`
-Merge save file from an external source given path to the save file
+Merge save file from an external source given path to the save file (.xml)
 
 Syntax: `Merge-File [-p PATH_STRING]`
 
@@ -136,7 +136,7 @@ Syntax: `Merge-File [-p PATH_STRING]`
 
 Example of usage:
 
-* `merge-file -p "C:\Users\the_d\Downloads\expenses.txt"`
+* `merge-file -p "C:\Users\the_d\Downloads\expenses.xml"`
 
 ## FAQ
 
