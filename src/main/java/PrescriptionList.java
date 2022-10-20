@@ -120,7 +120,7 @@ public class PrescriptionList {
         return false;
     }
 
-    public void activatePres(UI ui, String prescriptionNumber) {
+    public void activatePrescription(UI ui, String prescriptionNumber) {
         Integer index = getIndex(ui, prescriptionNumber);
         if (index == null) {
             return;
@@ -130,6 +130,18 @@ public class PrescriptionList {
         prescriptionEdited.setActive();
 
         ui.printActivatePrescriptionMessage(prescriptionEdited.toString());
+    }
+
+    public void deactivatePrescription(UI ui, String prescriptionNumber) {
+        Integer index = getIndex(ui, prescriptionNumber);
+        if (index == null) {
+            return;
+        }
+
+        Prescription prescriptionEdited = prescriptionsList.get(index);
+        prescriptionEdited.setInactive();
+
+        ui.printDeactivatePrescriptionMessage(prescriptionEdited.toString());
     }
 
     private Integer getIndex(UI ui, String prescriptionNumber) {
@@ -147,18 +159,6 @@ public class PrescriptionList {
             return null;
         }
         return index;
-    }
-
-    public void deactivatePres(UI ui, String prescriptionNumber) {
-        Integer index = getIndex(ui, prescriptionNumber);
-        if (index == null) {
-            return;
-        }
-
-        Prescription prescriptionEdited = prescriptionsList.get(index);
-        prescriptionEdited.setInactive();
-
-        ui.printDeactivatePrescriptionMessage(prescriptionEdited.toString());
     }
 
     private boolean isInvalidIndex(int index) {
