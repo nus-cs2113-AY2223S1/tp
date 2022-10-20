@@ -48,7 +48,7 @@ public class TimetableManager {
     public void deleteTimetable(String universityName) {
         assert universityName.length() > 0 : "Input university name cannot be empty";
         if (!foundKeyAll(universityName)) {
-            System.out.println("Error: Timetable for " + universityName + " already exists");
+            System.out.println("Error: Timetable for " + universityName + " does not exist");
         } else {
             timetableManager.remove(universityName);
             System.out.print(Ui.printTimetableDeletedAcknowledgement(universityName));
