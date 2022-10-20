@@ -15,7 +15,7 @@ public class Ui {
                 + "| | | | | | | |/ / _ \\" + System.lineSeparator()
                 + "| |_| | |_| |   <  __/" + System.lineSeparator()
                 + "|____/ \\__,_|_|\\_\\___|" + System.lineSeparator();
-        System.out.println("Welcome to your Movie Reviews bot," + System.lineSeparator() + logo);
+        System.out.println("Welcome to your Movie Reviews bot,");
         logger.log(Level.INFO, "Greeted User");
     }
 
