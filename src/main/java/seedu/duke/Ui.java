@@ -1,12 +1,11 @@
 package seedu.duke;
 
+import java.util.Scanner;
+
 import static seedu.duke.common.InfoMessages.INFO_DIVIDER;
-import static seedu.duke.common.InfoMessages.INFO_EXIT;
 import static seedu.duke.common.InfoMessages.INFO_GREET;
 import static seedu.duke.common.InfoMessages.INFO_HELP_GREET;
 import static seedu.duke.common.InfoMessages.INFO_HELP_PROMPT;
-
-import java.util.Scanner;
 
 public class Ui {
     //@@author chydarren
@@ -28,7 +27,6 @@ public class Ui {
     }
 
     //@@author paullowse
-
     /**
      * Initialises the variables of the Ui class.
      */
@@ -47,23 +45,22 @@ public class Ui {
     }
 
     //@@author chydarren
-
     /**
      * Prepares the error message to be displayed to the user.
      *
-     * @param errorMessage An error message when an exception is handled by the program.
+     * @param message An error message when an exception is handled by the program.
      */
-    public static void showErrorMessage(String errorMessage) {
-        printMessages(errorMessage);
+    public static void showErrorMessage(String message) {
+        printMessages(message);
     }
 
     /**
      * Prepares the information message to be displayed to the user.
      *
-     * @param infoMessage An information message that describes the functionality of the program.
+     * @param message An information message that describes the functionality of the program.
      */
-    public static void showInfoMessage(String infoMessage) {
-        printMessages(infoMessage);
+    public static void showInfoMessage(String message) {
+        printMessages(message);
     }
 
     /**
@@ -74,44 +71,33 @@ public class Ui {
     }
 
     //@@author chinhan99
-
     /**
      * Prepares the help messages to be displayed to the user.
      *
-     * @param helpMessage A help message that specifies the details of how to use the program.
+     * @param message A message that specifies the details of how to use the program.
      */
-    public static void showHelp(String helpMessage) {
-        printMessages(INFO_HELP_GREET.toString(), helpMessage);
+    public static void showHelp(String message) {
+        printMessages(INFO_HELP_GREET.toString(), message);
     }
 
-    //@@author chydarren
-
     /**
-     * Prepares the exit message to be displayed to the user.
+     * Prepares the transaction list messages to be displayed to the user.
+     *
+     * @param list      A string containing the formatted transaction list.
+     * @param message   A message that complements with the transactions list.
      */
-    public static void showExit() {
-        printMessages(INFO_EXIT.toString());
+    public static void showList(String list, String message) {
+        printMessages(message, list);
     }
 
     /**
      * Prepares the messages to be displayed to the user when add or delete has been performed on
      * the transaction list.
      *
-     * @param infoMessage        An information message that describes the functionality of
-     *                           the program.
-     * @param transactionDetails Details of the action that has been performed on the transaction.
+     * @param message               A message that describes the functionality of the program.
+     * @param transactionDetails    Details of the action that has been performed on the transaction.
      */
-    public static void showTransactionAction(String infoMessage, String transactionDetails) {
-        printMessages(infoMessage, transactionDetails);
-    }
-
-    /**
-     * Prepares the transaction list messages to be displayed to the user.
-     *
-     * @param transactionsList A string containing the formatted transaction list.
-     * @param listMessage      A list message that complements with the transactions list.
-     */
-    public static void showTransactionsList(String transactionsList, String listMessage) {
-        printMessages(listMessage, transactionsList);
+    public static void showTransactionAction(String message, String transactionDetails) {
+        printMessages(message, transactionDetails);
     }
 }

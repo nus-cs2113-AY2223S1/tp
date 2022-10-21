@@ -7,6 +7,8 @@ import seedu.duke.exception.InputTransactionUnknownTypeException;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Represents a list of transactions added by the user into the application.
@@ -15,7 +17,9 @@ import java.util.ArrayList;
  */
 public class TransactionList {
     //@@author chydarren
-    private static final String EMPTY_STRING = "";
+    private static final String PREFIX_CATEGORY = "[";
+    private static final String POSTFIX_CATEGORY = "]";
+    private static final String SYMBOL_DOLLAR = "$";
     private static final String LINE_SEPARATOR = System.lineSeparator();
 
     //@@author chinhan99
@@ -23,6 +27,10 @@ public class TransactionList {
 
     public TransactionList(TransactionList transactionList) {
         transactions = transactionList.getTransactions();
+    }
+
+    public ArrayList<Transaction> getTransactions() {
+        return transactions;
     }
 
     //@@author wcwy
@@ -113,7 +121,6 @@ public class TransactionList {
     }
 
     //@@author chydarren
-
     /**
      * Checks whether the transaction belongs to the Income or Expense class type.
      *
@@ -137,7 +144,7 @@ public class TransactionList {
      * @throws InputTransactionUnknownTypeException If class type cannot be found in the packages.
      */
     public boolean isMatchListFilters(Transaction transaction, String type, String category,
-            LocalDate date) throws InputTransactionUnknownTypeException {
+                                      LocalDate date) throws InputTransactionUnknownTypeException {
         boolean isMatch;
         try {
             isMatch = ((type.isEmpty() || isTransactionInstance(transaction, type))
@@ -150,7 +157,7 @@ public class TransactionList {
     }
 
     /**
-     * List all or some transactions based on selection.
+     * Lists all or some transactions based on selection.
      *
      * @param type     The type of transaction.
      * @param category A category for the transaction.
@@ -160,7 +167,7 @@ public class TransactionList {
      */
     public String listTransactions(String type, String category, LocalDate date)
             throws InputTransactionUnknownTypeException {
-        String transactionsList = EMPTY_STRING;
+        String transactionsList = "";
         // Loops each transaction from the transactions list
         for (Transaction transaction : transactions) {
             if (isMatchListFilters(transaction, type, category, date)) {
@@ -171,13 +178,13 @@ public class TransactionList {
     }
 
     /**
-     * Find specific transaction(s) based on any keywords inputted by the user.
+     * Finds specific transaction(s) based on any keywords inputted by the user.
      *
      * @param keywords Any partial or full keyword(s) that matches the details of the transaction.
      * @return A string containing the formatted transaction list.
      */
     public String findTransactions(String keywords) {
-        String transactionsList = EMPTY_STRING;
+        String transactionsList = "";
         // Loops each transaction from the transactions list
         for (Transaction transaction : transactions) {
             // Includes only transactions that contain the keywords used in the search expression
@@ -188,14 +195,46 @@ public class TransactionList {
         return transactionsList;
     }
 
+    /**
+     * Reads the transactions list and adds each amount to the categories in categorical savings hashmap.
+     *
+     * @param categoricalSavings A hashmap containing all category-amount pair for total savings.
+     * @return A hashmap containing all category-amount pair for total savings.
+     */
+    public HashMap<String, Integer> processCategoricalSavings(HashMap<String, Integer> categoricalSavings) {
+        for (Transaction transaction : transactions) {
+            String category = transaction.getCategory();
+            int amount = transaction.getAmount();
+            // Creates a new category with starter amount if category not exists in hashmap
+            if (!categoricalSavings.containsKey(category)) {
+                categoricalSavings.put(category, amount);
+                continue;
+            }
+            categoricalSavings.put(category, categoricalSavings.get(category) + amount);
+        }
 
-    public ArrayList<Transaction> getTransactions() {
-        return transactions;
+        return categoricalSavings;
     }
 
+    /**
+     * Calculates and stores total savings for each transaction category into a hashmap.
+     *
+     * @return A hashmap containing all category-amount pair for total savings.
+     */
+    public String listCategoricalSavings() {
+        String categoricalSavingsList = "";
+        HashMap<String, Integer> categoricalSavings = new HashMap<>();
+        categoricalSavings = processCategoricalSavings(categoricalSavings);
+
+        for (Map.Entry<String, Integer> entry : categoricalSavings.entrySet()) {
+            categoricalSavingsList += String.format("%s%s%s %s%s%s", PREFIX_CATEGORY, entry.getKey(),
+                    POSTFIX_CATEGORY, SYMBOL_DOLLAR, entry.getValue(), LINE_SEPARATOR);
+        }
+
+        return categoricalSavingsList;
+    }
 
     //@@author brian-vb
-
     /**
      * Purges all records in the transactions list.
      */
