@@ -12,8 +12,12 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static seedu.duke.command.CommandTag.*;
-import static seedu.duke.common.InfoMessages.*;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_STATISTICS_TYPE;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_STATS_MONTH;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_STATS_YEAR;
+import static seedu.duke.common.InfoMessages.INFO_STATS_CATEGORIES;
+import static seedu.duke.common.InfoMessages.INFO_STATS_EMPTY;
+import static seedu.duke.common.InfoMessages.INFO_STATS_TIME;
 
 /**
  * Represents a get command object that will execute the operations for Get command.
@@ -63,8 +67,8 @@ public class StatsCommand extends Command {
     @Override
     public String[] getOptionalTags() {
         String[] optionalTags = new String[]{
-                COMMAND_TAG_STATS_MONTH,
-                COMMAND_TAG_STATS_YEAR
+            COMMAND_TAG_STATS_MONTH,
+            COMMAND_TAG_STATS_YEAR
         };
         return optionalTags;
     }
@@ -165,8 +169,7 @@ public class StatsCommand extends Command {
         // only year
         if (month == -1) {
             timeTransactions = transactions.getTransactionsByYear(year);
-        }
-        else {
+        } else {
             timeTransactions = transactions.getTransactionsByMonth(year, month);
         }
         String timeSavingsList = transactions.listTimeStats(timeTransactions, year, month);
