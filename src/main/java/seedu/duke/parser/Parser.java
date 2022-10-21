@@ -8,9 +8,7 @@ import seedu.duke.command.HelpCommand;
 import seedu.duke.command.ViewTimetableCommand;
 import seedu.duke.command.SelectSlotCommand;
 import seedu.duke.command.SearchModuleCommand;
-import seedu.duke.exceptions.IncompleteCommandException;
-import seedu.duke.exceptions.InvalidModuleException;
-import seedu.duke.exceptions.UnknownCommandException;
+import seedu.duke.exceptions.YamonException;
 
 import java.util.Map;
 import java.util.TreeMap;
@@ -18,33 +16,29 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Parser {
-    public static Command parse(String userInput) throws Exception {
+    public static Command parse(String userInput) throws YamonException {
         String[] keywords = userInput.split("\\s+");
-        switch (keywords[0]) {
-        case (SearchModuleCommand.COMMAND_WORD):
-            return searchCommand(userInput);
-        case (AddModuleCommand.COMMAND_WORD):
-            try {
-                return addDeleteCommand(keywords, new AddModuleCommand(keywords));
-            } catch (Exception e) {
-                throw e;
+        try {
+            switch (keywords[0]) {
+                case (SearchModuleCommand.COMMAND_WORD):
+                    return searchCommand(userInput);
+                case (AddModuleCommand.COMMAND_WORD):
+                    return moduleRelatedCommand(keywords, new AddModuleCommand(keywords));
+                case (DeleteModuleCommand.COMMAND_WORD):
+                    return moduleRelatedCommand(keywords, new DeleteModuleCommand(keywords));
+                case (ViewTimetableCommand.COMMAND_WORD):
+                    return singleWordCommand(keywords, new ViewTimetableCommand(keywords));
+                case (HelpCommand.COMMAND_WORD):
+                    return singleWordCommand(keywords, new HelpCommand(keywords));
+                case (SelectSlotCommand.COMMAND_WORD):
+                    return new SelectSlotCommand(userInput);
+                case (ExitCommand.COMMAND_WORD):
+                    return singleWordCommand(keywords, new ExitCommand(keywords));
+                default:
+                    throw new YamonException("Cannot process the command");
             }
-        case (DeleteModuleCommand.COMMAND_WORD):
-            try {
-                return addDeleteCommand(keywords, new DeleteModuleCommand(keywords));
-            } catch (Exception e) {
-                throw e;
-            }
-        case (ViewTimetableCommand.COMMAND_WORD):
-            return viewHelpExitCommand(keywords, new ViewTimetableCommand(keywords));
-        case (HelpCommand.COMMAND_WORD):
-            return viewHelpExitCommand(keywords, new HelpCommand(keywords));
-        case (SelectSlotCommand.COMMAND_WORD):
-            return new SelectSlotCommand(userInput);
-        case (ExitCommand.COMMAND_WORD):
-            return viewHelpExitCommand(keywords, new ExitCommand(keywords));
-        default:
-            throw new UnknownCommandException();
+        } catch (YamonException e) {
+            throw e;
         }
     }
 
@@ -118,37 +112,35 @@ public class Parser {
      * @param command  the command that the user wants to execute
      * @return type of command
      */
-    public static Command addDeleteCommand(String[] keywords, Command command) throws Exception {
+    public static Command moduleRelatedCommand(String[] keywords, Command command) throws YamonException {
 
         if (isValidTwoWordCommand(keywords)) {
             return command;
         }
 
-        // TODO: to refactor the exception mechanism
-        try {
-            determineWrongCommand(keywords);
-        } catch (Exception e) {
-            throw e;
-        }
-
-        return null;
-    }
-
-    private static void determineWrongCommand(String[] keywords) throws Exception {
+        String errorMessage;
         if (isOneWordCommand(keywords)) {
-            throw new IncompleteCommandException();
+            errorMessage = "Your command is incomplete.";
         } else if (isTwoWordsCommand(keywords) && !isValidModuleCode(keywords[1])) {
-            throw new InvalidModuleException();
+            errorMessage = "Module is invalid!"
+                    + System.lineSeparator()
+                    + "Please enter a valid module code." + System.lineSeparator()
+                    + "Each module of study has a unique module code consisting of a two- "
+                    + "or three-letter prefix that generally denotes the discipline,"
+                    + "and four digits, the first of which indicates the level of the module " + System.lineSeparator()
+                    + "(e.g., 1000 indicates a Level 1 module and 2000, a Level 2 module).";
         } else {
-            throw new UnknownCommandException();
+            errorMessage = "Unknown command, try again";
         }
+
+        throw new YamonException(errorMessage);
     }
 
-    public static Command viewHelpExitCommand(String[] keywords, Command command) throws UnknownCommandException {
+    public static Command singleWordCommand(String[] keywords, Command command) throws YamonException {
         if (isOneWordCommand(keywords)) {
             return command;
         } else {
-            throw new UnknownCommandException();
+            throw new YamonException("0 arguments expected");
         }
     }
 

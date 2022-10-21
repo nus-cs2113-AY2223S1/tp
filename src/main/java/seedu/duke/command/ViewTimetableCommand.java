@@ -1,7 +1,7 @@
 package seedu.duke.command;
 
 import org.apache.commons.lang3.tuple.Pair;
-import seedu.duke.exceptions.TimetableEmptyException;
+import seedu.duke.exceptions.YamonException;
 import seedu.duke.model.LessonType;
 import seedu.duke.model.Module;
 import seedu.duke.model.RawLesson;
@@ -34,7 +34,7 @@ public class ViewTimetableCommand extends Command {
         }
         try {
             checkForEmptyTimetable(numOfNotSelectedModules, selectedModules);
-        } catch (TimetableEmptyException e) {
+        } catch (YamonException e) {
             ui.addMessage(e.getMessage());
             ui.displayUi();
             return;
@@ -52,9 +52,11 @@ public class ViewTimetableCommand extends Command {
     }
 
     private static void checkForEmptyTimetable(int numOfNotSelectedModules, List<SelectedModule> selectedModules)
-            throws TimetableEmptyException {
+            throws YamonException {
         if (numOfNotSelectedModules == selectedModules.size()) {
-            throw new TimetableEmptyException();
+            final String ERROR_MESSAGE = "Your timetable is empty." + System.lineSeparator()
+                    + "Please select your modules first before viewing.";
+            throw new YamonException(ERROR_MESSAGE);
         }
     }
 
