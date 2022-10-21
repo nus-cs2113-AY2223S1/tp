@@ -2,9 +2,9 @@ package computercomponentchooser.components;
 
 public class Cooler extends Component {
 
-    private String fanSpeed;
-    private String noiseLevel;
-    private String socket;
+    protected String fanSpeed;
+    protected String noiseLevel;
+    protected String socket;
 
     public Cooler(String name, String price, String power, String fanSpeed, String noiseLevel, String socket) {
         this.name = name;
