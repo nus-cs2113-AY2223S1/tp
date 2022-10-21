@@ -18,7 +18,7 @@ public class DeleteModuleCommand extends Command {
     public DeleteModuleCommand(String[] input) {
         super(input);
         String moduleCode = input[1];
-        this.module = Module.get(moduleCode);
+        this.module = Module.get(moduleCode.toUpperCase());
     }
 
     @Override

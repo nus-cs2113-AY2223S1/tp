@@ -43,6 +43,7 @@ public class Duke {
                 isExit = command.isExit();
             } catch (Exception e) {
                 //TODO: implement catch block once exception is ready
+                e.printStackTrace();
             } finally {
                 ui.displayDivider();
             }
