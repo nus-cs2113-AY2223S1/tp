@@ -5,6 +5,7 @@ public class OneDoc {
     protected VisitList visitsList;
     protected PrescriptionList prescriptionsList;
     protected static Parser parser;
+    protected Storage storage;
     private static MainMenuState mainMenuState;
 
     public OneDoc() {
@@ -13,7 +14,8 @@ public class OneDoc {
         visitsList = new VisitList();
         prescriptionsList = new PrescriptionList();
         parser = new Parser(patientsList, visitsList, prescriptionsList, ui);
-
+        storage = new Storage();
+        storage.loadData(patientsList, visitsList, prescriptionsList);
         mainMenuState = MainMenuState.INVALID;
     }
 
