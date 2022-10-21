@@ -16,7 +16,7 @@ import seedu.parser.search.Word;
  * Container for all the {@link Carpark} classes. Contains method for finding the carpark.
  */
 public class CarparkList {
-    private final HashMap<String, Carpark> carparkHashMap = new HashMap<String, Carpark>();
+    public static final HashMap<String, Carpark> carparkHashMap = new HashMap<String, Carpark>();
     private List<Carpark> carparks;
 
 

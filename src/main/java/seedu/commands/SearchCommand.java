@@ -3,13 +3,18 @@ package seedu.commands;
 import seedu.data.CarparkFilteredList;
 import seedu.data.CarparkList;
 import seedu.parser.search.Sentence;
-import seedu.ui.Ui;
 
+public class SearchCommand extends Command {
 
-/**
- * Represents the 'search' command to search a list of carparks.
- */
-public class Search {
+    public static final String COMMAND_WORD = "search";
+    private final CarparkList carparkList;
+
+    private final Sentence searchQuery;
+
+    public SearchCommand(CarparkList carparkList, Sentence searchQuery) {
+        this.searchQuery = searchQuery;
+        this.carparkList = carparkList;
+    }
 
     /**
      * Runs a search in the {@link CarparkList} class.
@@ -23,4 +28,10 @@ public class Search {
         return carparkList.filterByAllStrings(searchQuery);
     }
 
+    @Override
+    public CommandResult execute() {
+        CarparkFilteredList result = runSearch(carparkList, searchQuery);
+        carparkList.resetBoldForAllCarparks();
+        return new CommandResult(result.getSearchListString());
+    }
 }

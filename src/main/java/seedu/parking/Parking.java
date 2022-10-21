@@ -24,7 +24,6 @@ import seedu.exception.NoCommandArgumentException;
 import seedu.exception.NoFileFoundException;
 import seedu.exception.ParkingException;
 import seedu.exception.UnneededArgumentsException;
-import seedu.parser.Command;
 import seedu.parser.Parser;
 import seedu.parser.search.Sentence;
 import seedu.ui.Ui;
