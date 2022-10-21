@@ -1,6 +1,5 @@
 package seedu.duke.data;
 
-import seedu.duke.common.Constants;
 import seedu.duke.data.transaction.Expense;
 import seedu.duke.data.transaction.Income;
 import seedu.duke.data.transaction.Transaction;

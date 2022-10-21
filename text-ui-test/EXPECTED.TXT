@@ -9,6 +9,8 @@ ____________________________________________________________
 ____________________________________________________________
 ____________________________________________________________
 Hello! I'm Moo and I will help you to manage your finances.
+Monthly budget set as: $1000
+Today is Oct 22 2022
 Enter <help> if you need the list of commands.
 ____________________________________________________________
 ____________________________________________________________
@@ -163,14 +165,17 @@ ____________________________________________________________
 ____________________________________________________________
 I have added the following Expense transaction:
 [-][food] $20 at Sep 13 2022 | Description: NIL
+Budget remained for the month of transaction: $980
 ____________________________________________________________
 ____________________________________________________________
 I have added the following Income transaction:
 [+][salary] $2000 at Sep 30 2022 | Description: jan_salary
+Budget remained for the month of transaction: $-1020
 ____________________________________________________________
 ____________________________________________________________
 I have added the following Expense transaction:
 [-][transport] $1 at Oct 02 2022 | Description: bus_fare
+Budget remained for the month of transaction: $999
 ____________________________________________________________
 ____________________________________________________________
 Parameter behind tag(s) is found to be empty, please check your input!
@@ -260,6 +265,7 @@ ____________________________________________________________
 ____________________________________________________________
 I have added the following Income transaction:
 [+][bonus] $10000000 at Oct 03 2022 | Description: thank_you_boss
+Budget remained for the month of transaction: $-9999001
 ____________________________________________________________
 ____________________________________________________________
 Type of transaction given is invalid, please check your input!
@@ -374,6 +380,7 @@ ____________________________________________________________
 ____________________________________________________________
 I have added the following Expense transaction:
 [-][transport] $1 at Oct 02 2022 | Description: i/i/i/i/
+Budget remained for the month of transaction: $999
 ____________________________________________________________
 ____________________________________________________________
 Not supported tag(s) detected, please check your input!

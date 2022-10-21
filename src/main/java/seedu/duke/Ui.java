@@ -112,7 +112,7 @@ public class Ui {
      * @param budgetInfo         A message that contains the monthly budget information.
      */
     public static void showTransactionAction(String message, String transactionDetails, String budgetInfo) {
-        printMessages(message, transactionDetails, INFO_REMAINING_BUDGET.toString(), budgetInfo);
+        printMessages(message, transactionDetails, INFO_REMAINING_BUDGET + budgetInfo);
     }
 
     // A temporary overload method for backward-compatibility for delete command
