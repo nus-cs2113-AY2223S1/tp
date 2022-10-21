@@ -9,6 +9,11 @@ import java.util.logging.Logger;
 
 public class SelectSemesterCommand extends Command {
     public static final String COMMAND_WORD = "semester";
+    public static final String FORMAT = "semester SEMESTER_SELECTED";
+    public static final String HELP_DISPLAY = COMMAND_WORD
+            + ": select semester to plan for and organise!\n"
+            + "Usage:\t"
+            + FORMAT;
     private static int updatedSemester;
 
     private Logger logger;

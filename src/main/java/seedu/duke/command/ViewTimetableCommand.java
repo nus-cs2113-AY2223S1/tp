@@ -18,6 +18,11 @@ import java.util.Map;
 
 public class ViewTimetableCommand extends Command {
     public static final String COMMAND_WORD = "view";
+    public static final String FORMAT = "view";
+    public static final String HELP_DISPLAY = COMMAND_WORD
+            + ": displays current timetable!\n"
+            + "Usage:\t"
+            + FORMAT;
     private boolean showFancy;
     private boolean showSimple;
 

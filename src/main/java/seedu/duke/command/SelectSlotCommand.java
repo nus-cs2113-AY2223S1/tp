@@ -12,9 +12,12 @@ import seedu.duke.utils.Storage;
 import seedu.duke.utils.Ui;
 
 public class SelectSlotCommand extends Command {
-    public static final String FORMAT = "select /module [MODULE_CODE] /type [LESSON_TYPE] /code [CLASS_NO]";
     public static final String COMMAND_WORD = "select";
-
+    public static final String FORMAT = "select /module MODULE_CODE /type LESSON_TYPE /code CLASS_NO";
+    public static final String HELP_DISPLAY = COMMAND_WORD
+            + ": select slot for modules!\n"
+            + "Usage:\t"
+            + FORMAT;
     private Map<String, String> params;
     private String moduleCode;
     private LessonType lessonType;
