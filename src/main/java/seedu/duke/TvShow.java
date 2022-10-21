@@ -47,9 +47,9 @@ public class TvShow extends Media {
             favourite = "Y";
         }
         
-        String returnString = "T|" + favourite + "|" + super.title + "|" + super.rating + 
-            "|" + super.genre + "|" + super.dateString + "|" + this.site;
+        String returnString = "T|" + favourite + "|" + super.title + "|" + super.rating 
+            + "|" + super.genre + "|" + super.dateString + "|" + this.site;
         
-            return returnString;
+        return returnString;
     }
 }

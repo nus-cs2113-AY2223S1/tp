@@ -7,7 +7,7 @@ import java.util.Scanner;
 import java.io.FileWriter;
 
 /**
- * Represents the storage of information relating to the tasklist
+ * Represents the storage of information relating to the tasklist.
  */
 public class Storage {
     private String filepath;
@@ -20,9 +20,9 @@ public class Storage {
 
     /**
      * Retreives the file storing user's tasks from the previous run
-     * of the program. If no such file is found, makes the appropriate file
+     * of the program. If no such file is found, makes the appropriate file.
      * 
-     * @return File representing the saved information
+     * @return File representing the saved information.
      */
     public File getMakeFile() {
         try {
