@@ -10,6 +10,9 @@ import seedu.duke.command.ViewTimetableCommand;
 import seedu.duke.command.SelectSlotCommand;
 import seedu.duke.command.SelectSemesterCommand;
 import seedu.duke.command.SearchModuleCommand;
+import seedu.duke.command.ImportCommand;
+import seedu.duke.command.ExportCommand;
+
 import seedu.duke.exceptions.YamomException;
 
 import java.util.Map;
@@ -50,6 +53,12 @@ public class Parser {
                 break;
             case (SelectSemesterCommand.COMMAND_WORD):
                 toExecute = selectSemesterCommand(keywords, new SelectSemesterCommand(keywords));
+                break;
+            case (ExportCommand.COMMAND_WORD):
+                toExecute = singleWordCommand(keywords, new ExportCommand(keywords));
+                break;
+            case (ImportCommand.COMMAND_WORD):
+                toExecute = nusmodCommand(keywords, new ImportCommand(keywords));
                 break;
             default:
                 throw new YamomException("Cannot process the command");
@@ -162,6 +171,14 @@ public class Parser {
         }
 
         throw new YamomException(errorMessage);
+    }
+
+    public static Command nusmodCommand(String[] keywords, Command command) throws YamomException {
+        if (isTwoWordsCommand(keywords)) {
+            return command;
+        } else {
+            throw new YamomException("no NUSMOD link given");
+        }
     }
 
     public static Command singleWordCommand(String[] keywords, Command command) throws YamomException {

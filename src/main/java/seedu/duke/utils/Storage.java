@@ -87,7 +87,7 @@ public class Storage {
         String toSave = Link.getLink(state);
         ui.addMessage(EXPORT_MESSAGE);
         ui.addMessage(toSave);
-        
+
         ui.displayUi();
         FileWriter fw = new FileWriter(file);
         fw.write(String.valueOf(toSave));
