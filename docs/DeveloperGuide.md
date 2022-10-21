@@ -32,6 +32,14 @@ modifyPatientDetails - this method takes in name, birthDate, gender and ID. It t
 If the patient is not found, returns. Else, if the name is not an empty String, replace the existing name with the input name.
 Repeat for birthDate and gender.
 
+### VisitList Component
+The `VisitList` Component,
+* stores the list of visits
+* can add new visit to the list
+* can edit reason for a existing visit in the list
+* can view all visits in the list
+* can view visits for a specific patient, based on their id
+
 ### PrescriptionList component
 **API**: `PrescriptionList.java`
 
