@@ -494,6 +494,14 @@ public class Messages {
             + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_DESCRIPTION
             + " "
             + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_DESCRIPTION_LONG.toUpperCase()
+            + "] [-"
+            + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_CATEGORY
+            + " "
+            + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_CATEGORY_LONG.toUpperCase()
+            + "] [-"
+            + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_CURRENCY
+            + " "
+            + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_CURRENCY_LONG.toUpperCase()
             + "]";
     public static final String CONSOLE_MESSAGE_COMMAND_EDIT_RECURRING_PAYMENT_SUCCESS = ""
             + "The recurring payment was edited successfully.";
