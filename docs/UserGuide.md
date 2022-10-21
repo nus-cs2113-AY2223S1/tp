@@ -127,6 +127,17 @@ Example of usage:
 * `View-RecurringPayment`
 * `View-RecurringPayment -r 1`
 
+### Deleting recurring payments: `Delete-RecurringPayment`
+Deletes a recurring payment from the list of recurring payments.
+
+Syntax: `Delete-RecurringPayment -r RECURRING_PAYMENT_INDEX`
+
+* `RECURRING_PAYMENT_INDEX` is an integer value.
+
+Example of usage:
+
+* `Delete-RecurringPayment -r 1`
+
 ### Merge file: `Merge-File`
 Merge save file from an external source given path to the save file (.xml)
 
