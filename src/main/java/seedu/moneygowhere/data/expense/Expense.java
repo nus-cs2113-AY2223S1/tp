@@ -15,6 +15,7 @@ public class Expense {
     private String category;
     private String remarks;
     private String currency;
+    private String modeOfPayment;
 
     public Expense(String name,
                    LocalDateTime dateTime,
@@ -22,7 +23,8 @@ public class Expense {
                    BigDecimal amount,
                    String category,
                    String remarks,
-                   String currency) {
+                   String currency,
+                   String modeOfPayment) {
         this.name = name;
         this.dateTime = dateTime;
         this.description = description;
@@ -30,6 +32,7 @@ public class Expense {
         this.category = category;
         this.remarks = remarks;
         this.currency = currency;
+        this.modeOfPayment = modeOfPayment;
     }
 
     public String getName() {
@@ -86,5 +89,13 @@ public class Expense {
 
     public void setCurrency(String currency) {
         this.currency = currency;
+    }
+
+    public String getModeOfPayment() {
+        return modeOfPayment;
+    }
+
+    public void setModeOfPayment(String modeOfPayment) {
+        this.modeOfPayment = modeOfPayment;
     }
 }

@@ -188,13 +188,14 @@ public class ConsoleInterface {
         );
 
         String expenseStr = "";
-        expenseStr += "Name          : " + expense.getName() + "\n";
-        expenseStr += "Date and Time : " + expense.getDateTime().format(dateTimeFormat) + "\n";
-        expenseStr += "Description   : " + expense.getDescription() + "\n";
-        expenseStr += "Amount        : " + expense.getAmount() + "\n";
-        expenseStr += "Category      : " + expense.getCategory() + "\n";
-        expenseStr += "Remarks       : " + expense.getRemarks() + "\n";
-        expenseStr += "Currency      : " + expense.getCurrency();
+        expenseStr += "Name            : " + expense.getName() + "\n";
+        expenseStr += "Date and Time   : " + expense.getDateTime().format(dateTimeFormat) + "\n";
+        expenseStr += "Description     : " + expense.getDescription() + "\n";
+        expenseStr += "Amount          : " + expense.getAmount() + "\n";
+        expenseStr += "Category        : " + expense.getCategory() + "\n";
+        expenseStr += "Remarks         : " + expense.getRemarks() + "\n";
+        expenseStr += "Currency        : " + expense.getCurrency() + "\n";
+        expenseStr += "Mode of Payment : " + expense.getModeOfPayment();
 
         return expenseStr;
     }
@@ -277,7 +278,8 @@ public class ConsoleInterface {
                 consoleCommandAddExpense.getAmount(),
                 consoleCommandAddExpense.getCategory(),
                 consoleCommandAddExpense.getRemarks(),
-                consoleCommandAddExpense.getCurrency());
+                consoleCommandAddExpense.getCurrency(),
+                consoleCommandAddExpense.getModeOfPayment());
         expenseManager.addExpense(expense);
 
         printInformationalMessage(convertExpenseToConsoleString(expense));
@@ -403,8 +405,21 @@ public class ConsoleInterface {
             }
         }
         currency = currency.toUpperCase();
+        String modeOfPayment = consoleCommandEditExpense.getModeOfPayment();
+        if (modeOfPayment == null) {
+            modeOfPayment = oldExpense.getModeOfPayment();
+        }
 
-        Expense newExpense = new Expense(name, dateTime, description, amount, category, remarks, currency);
+        Expense newExpense = new Expense(
+                name,
+                dateTime,
+                description,
+                amount,
+                category,
+                remarks,
+                currency,
+                modeOfPayment
+        );
         try {
             expenseManager.editExpense(expenseIndex, newExpense);
         } catch (ExpenseManagerExpenseNotFoundException exception) {
