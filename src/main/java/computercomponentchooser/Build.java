@@ -47,6 +47,12 @@ public class Build {
         case "monitor":
             components.addElement("monitor", component.getName(), component);
             break;
+        case "cooler":
+            components.addElement("cooler", component.getName(), component);
+            break;
+        case "case":
+            components.addElement("case", component.getName(), component);
+            break;
         case "other":
             components.addElement("other", component.getName(), component);
             break;
