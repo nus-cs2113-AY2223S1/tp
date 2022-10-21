@@ -11,6 +11,7 @@ import seedu.moneygowhere.commands.ConsoleCommandDeleteExpense;
 import seedu.moneygowhere.commands.ConsoleCommandDeleteRecurringPayment;
 import seedu.moneygowhere.commands.ConsoleCommandDeleteTarget;
 import seedu.moneygowhere.commands.ConsoleCommandEditExpense;
+import seedu.moneygowhere.commands.ConsoleCommandEditRecurringPayment;
 import seedu.moneygowhere.commands.ConsoleCommandEditTarget;
 import seedu.moneygowhere.commands.ConsoleCommandMergeExternalFile;
 import seedu.moneygowhere.commands.ConsoleCommandSortExpense;
@@ -38,6 +39,7 @@ import seedu.moneygowhere.exceptions.ConsoleParserCommandDeleteExpenseInvalidExc
 import seedu.moneygowhere.exceptions.ConsoleParserCommandDeleteRecurringPaymentInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandDeleteTargetInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandEditExpenseInvalidException;
+import seedu.moneygowhere.exceptions.ConsoleParserCommandEditRecurringPaymentInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandEditTargetInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandMergeExternalFileInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandNotFoundException;
@@ -663,6 +665,44 @@ public class ConsoleInterface {
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_DELETE_RECURRING_PAYMENT_SUCCESS);
     }
 
+    private void runCommandEditRecurringPayment(
+            ConsoleCommandEditRecurringPayment consoleCommandEditRecurringPayment
+    ) {
+        int recurringPaymentIndex = consoleCommandEditRecurringPayment.getRecurringPaymentIndex();
+
+        RecurringPayment recurringPayment;
+        try {
+            recurringPayment = recurringPaymentManager.getRecurringPayment(recurringPaymentIndex);
+        } catch (RecurringPaymentManagerRecurringPaymentNotFoundException exception) {
+            printErrorMessage(exception.getMessage());
+
+            return;
+        }
+
+        if (consoleCommandEditRecurringPayment.isNameSet()) {
+            recurringPayment.setName(consoleCommandEditRecurringPayment.getName());
+        }
+        if (consoleCommandEditRecurringPayment.isIntervalSet()) {
+            recurringPayment.setInterval(consoleCommandEditRecurringPayment.getInterval());
+        }
+        if (consoleCommandEditRecurringPayment.isDescriptionSet()) {
+            recurringPayment.setDescription(consoleCommandEditRecurringPayment.getDescription());
+        }
+        if (consoleCommandEditRecurringPayment.isAmountSet()) {
+            recurringPayment.setAmount(consoleCommandEditRecurringPayment.getAmount());
+        }
+
+        try {
+            recurringPaymentManager.editRecurringPayment(recurringPaymentIndex, recurringPayment);
+        } catch (RecurringPaymentManagerRecurringPaymentNotFoundException exception) {
+            printErrorMessage(exception.getMessage());
+
+            return;
+        }
+
+        printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_EDIT_RECURRING_PAYMENT_SUCCESS);
+    }
+
     private void runCommandMergeExternalFile(ConsoleCommandMergeExternalFile consoleCommandMergeExternalFile) {
         String filePath = consoleCommandMergeExternalFile.getFilePath();
 
@@ -693,6 +733,7 @@ public class ConsoleInterface {
                  | ConsoleParserCommandAddRecurringPaymentInvalidException
                  | ConsoleParserCommandViewRecurringPaymentInvalidException
                  | ConsoleParserCommandDeleteRecurringPaymentInvalidException
+                 | ConsoleParserCommandEditRecurringPaymentInvalidException
                  | ConsoleParserCommandMergeExternalFileInvalidException exception) {
             printErrorMessage(exception.getMessage());
         }
@@ -741,6 +782,8 @@ public class ConsoleInterface {
                 runCommandViewRecurringPayment((ConsoleCommandViewRecurringPayment) consoleCommand);
             } else if (consoleCommand instanceof ConsoleCommandDeleteRecurringPayment) {
                 runCommandDeleteRecurringPayment((ConsoleCommandDeleteRecurringPayment) consoleCommand);
+            } else if (consoleCommand instanceof ConsoleCommandEditRecurringPayment) {
+                runCommandEditRecurringPayment((ConsoleCommandEditRecurringPayment) consoleCommand);
             } else if (consoleCommand instanceof ConsoleCommandMergeExternalFile) {
                 runCommandMergeExternalFile((ConsoleCommandMergeExternalFile) consoleCommand);
             }
