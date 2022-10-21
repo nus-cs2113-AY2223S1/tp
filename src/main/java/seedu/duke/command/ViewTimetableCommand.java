@@ -20,6 +20,7 @@ public class ViewTimetableCommand extends Command {
     public static final String COMMAND_WORD = "view";
     private static final String ERROR_MESSAGE_EMPTY_TIMETABLE = "Your timetable is empty."
             + System.lineSeparator() + "Please select your modules first before viewing.";
+
     private boolean showFancy;
     private boolean showSimple;
 
