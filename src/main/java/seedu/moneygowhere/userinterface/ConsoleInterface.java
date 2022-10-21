@@ -48,6 +48,7 @@ import seedu.moneygowhere.exceptions.ConsoleParserCommandViewExpenseInvalidExcep
 import seedu.moneygowhere.exceptions.ConsoleParserCommandViewRecurringPaymentInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandViewTargetInvalidException;
 import seedu.moneygowhere.exceptions.CurrencyInvalidException;
+import seedu.moneygowhere.exceptions.CurrencyRatesNotFoundException;
 import seedu.moneygowhere.exceptions.ExpenseManagerExpenseNotFoundException;
 import seedu.moneygowhere.exceptions.RecurringPaymentManagerRecurringPaymentNotFoundException;
 import seedu.moneygowhere.exceptions.TargetManagerTargetNotFoundException;
@@ -268,7 +269,8 @@ public class ConsoleInterface {
     private void runCommandAddExpense(ConsoleCommandAddExpense consoleCommandAddExpense) {
         try {
             currencyManager.hasCurrency(consoleCommandAddExpense.getCurrency());
-        } catch (CurrencyInvalidException exception) {
+        } catch (CurrencyInvalidException
+                 | CurrencyRatesNotFoundException exception) {
             printErrorMessage(exception.getMessage());
             return;
         }
@@ -401,7 +403,8 @@ public class ConsoleInterface {
         } else {
             try {
                 currencyManager.hasCurrency(consoleCommandEditExpense.getCurrency());
-            } catch (CurrencyInvalidException exception) {
+            } catch (CurrencyInvalidException
+                     | CurrencyRatesNotFoundException exception) {
                 printErrorMessage(exception.getMessage());
                 return;
             }
@@ -455,11 +458,15 @@ public class ConsoleInterface {
             return;
         }
 
-        try {
-            currencyManager.hasCurrency(consoleCommandConvertCurrency.getCurrency());
-        } catch (CurrencyInvalidException exception) {
-            printErrorMessage(exception.getMessage());
-            return;
+        BigDecimal rate = consoleCommandConvertCurrency.getRate();
+        if (rate == null) {
+            try {
+                currencyManager.hasCurrency(consoleCommandConvertCurrency.getCurrency());
+            } catch (CurrencyInvalidException
+                     | CurrencyRatesNotFoundException exception) {
+                printErrorMessage(exception.getMessage());
+                return;
+            }
         }
 
         consoleCommandConvertCurrency.changeCurrency(expense, currencyManager);

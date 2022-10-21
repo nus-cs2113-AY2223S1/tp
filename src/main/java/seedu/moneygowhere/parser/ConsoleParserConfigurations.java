@@ -186,6 +186,11 @@ public class ConsoleParserConfigurations {
     public static final String COMMAND_CONVERT_CURRENCY_ARG_CURRENCY_DESC = "currency";
     public static final boolean COMMAND_CONVERT_CURRENCY_ARG_CURRENCY_HAS_VAL = true;
     public static final boolean COMMAND_CONVERT_CURRENCY_ARG_CURRENCY_IS_MAND = true;
+    public static final String COMMAND_CONVERT_CURRENCY_ARG_RATE = "r";
+    public static final String COMMAND_CONVERT_CURRENCY_ARG_RATE_LONG = "rate";
+    public static final String COMMAND_CONVERT_CURRENCY_ARG_RATE_DESC = "rate";
+    public static final boolean COMMAND_CONVERT_CURRENCY_ARG_RATE_HAS_VAL = true;
+    public static final boolean COMMAND_CONVERT_CURRENCY_ARG_RATE_IS_MAND = false;
     public static final String COMMAND_CONVERT_CURRENCY_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS = ""
             + "Command Convert-Currency does not have all of the required options.";
 
@@ -527,10 +532,9 @@ public class ConsoleParserConfigurations {
                 COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_HAS_VAL,
                 COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_DESC
         );
-        optionCurrency.setRequired(COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_IS_MAND);
+        optionModeOfPayment.setRequired(COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_IS_MAND);
 
         Options options = new Options();
-        options.addOption(optionModeOfPayment);
         options.addOption(optionName);
         options.addOption(optionAmount);
         options.addOption(optionDateTime);
@@ -538,6 +542,7 @@ public class ConsoleParserConfigurations {
         options.addOption(optionCategory);
         options.addOption(optionRemarks);
         options.addOption(optionCurrency);
+        options.addOption(optionModeOfPayment);
 
         return options;
     }
@@ -658,10 +663,9 @@ public class ConsoleParserConfigurations {
                 COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_HAS_VAL,
                 COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_DESC
         );
-        optionCurrency.setRequired(COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_IS_MAND);
+        optionModeOfPayment.setRequired(COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_IS_MAND);
 
         Options options = new Options();
-        options.addOption(optionModeOfPayment);
         options.addOption(optionExpenseIndex);
         options.addOption(optionName);
         options.addOption(optionDateTime);
@@ -670,6 +674,7 @@ public class ConsoleParserConfigurations {
         options.addOption(optionCategory);
         options.addOption(optionRemarks);
         options.addOption(optionCurrency);
+        options.addOption(optionModeOfPayment);
 
         return options;
     }
@@ -722,10 +727,18 @@ public class ConsoleParserConfigurations {
                 COMMAND_CONVERT_CURRENCY_ARG_CURRENCY_DESC
         );
         optionCurrency.setRequired(COMMAND_CONVERT_CURRENCY_ARG_CURRENCY_IS_MAND);
+        Option optionRate = new Option(
+                COMMAND_CONVERT_CURRENCY_ARG_RATE,
+                COMMAND_CONVERT_CURRENCY_ARG_RATE_LONG,
+                COMMAND_CONVERT_CURRENCY_ARG_RATE_HAS_VAL,
+                COMMAND_CONVERT_CURRENCY_ARG_RATE_DESC
+        );
+        optionRate.setRequired(COMMAND_CONVERT_CURRENCY_ARG_RATE_IS_MAND);
 
         Options options = new Options();
         options.addOption(optionExpenseIndex);
         options.addOption(optionCurrency);
+        options.addOption(optionRate);
 
         return options;
     }
