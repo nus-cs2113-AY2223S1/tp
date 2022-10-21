@@ -9,7 +9,8 @@ import seedu.duke.exception.FindInvalidFlagException;
 import java.util.ArrayList;
 
 import static seedu.duke.CommandStructure.FIND_FLAGS;
-import static seedu.duke.Messages.*;
+import static seedu.duke.Messages.MESSAGE_EMPTY_DESCRIPTION;
+import static seedu.duke.Messages.MESSAGE_FIND_INVALID_FLAG;
 
 
 public class ParseFindClient extends Parser {
