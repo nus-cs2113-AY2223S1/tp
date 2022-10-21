@@ -82,6 +82,14 @@ public class Build {
         return sb.toString();
     }
 
+    public String toCsv() {
+        StringBuilder sb = new StringBuilder();
+        for (Component component : getAllComponents()) {
+            sb.append(this.name + ",").append(component.toCsv()).append(System.lineSeparator());
+        }
+        return sb.toString();
+    }
+
     public ArrayList<Component> getAllComponents() {
         ArrayList<Component> allComponents = new ArrayList<>();
         for (String type : components.getTypeList()) {

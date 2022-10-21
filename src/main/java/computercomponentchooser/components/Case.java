@@ -32,6 +32,10 @@ public class Case extends Component {
         return super.toString() + String.format(" [%s] [%s]", formFactor, expansionSlots);
     }
 
+    public String toCsv() {
+        return super.toCsv() + "," + formFactor + "," + expansionSlots;
+    }
+
     public String saveAsString() {
         return super.saveAsString() + "/" + formFactor + "/" + expansionSlots;
     }

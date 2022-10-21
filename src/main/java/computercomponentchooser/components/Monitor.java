@@ -44,6 +44,10 @@ public class Monitor extends Component {
         return super.toString() + String.format(" [%s Hz] [%s ms] [%s p]", refreshRate, responseTime, resolution);
     }
 
+    public String toCsv() {
+        return super.toCsv() + "," + refreshRate + "," + responseTime + "," + resolution;
+    }
+
     public String saveAsString() {
         return super.saveAsString() + "/" + refreshRate + "/" + responseTime + "/" + resolution;
     }

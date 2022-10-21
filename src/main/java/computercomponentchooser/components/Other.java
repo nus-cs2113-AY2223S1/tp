@@ -13,6 +13,10 @@ public class Other extends Component {
         return super.toString();
     }
 
+    public String toCsv() {
+        return super.toCsv();
+    }
+
     @Override
     public String saveAsString() {
         return super.saveAsString();

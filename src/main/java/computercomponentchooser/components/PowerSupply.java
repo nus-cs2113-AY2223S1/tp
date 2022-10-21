@@ -8,12 +8,16 @@ public class PowerSupply extends Component {
         this.power = power;
     }
 
-    public String getType() {
-        return "powersupply";
-    }
-
     @Override
     public String toString() {
         return super.toString();
+    }
+
+    public String toCsv() {
+        return super.toCsv();
+    }
+
+    public String getType() {
+        return "powersupply";
     }
 }
