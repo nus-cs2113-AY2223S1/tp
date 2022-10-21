@@ -154,6 +154,7 @@ public class CommandParser {
     private static boolean isValidFavouriteOption(String option) {
         return option.startsWith("add/") || option.startsWith("del/") || option.startsWith("view/");
     }
+
     private static boolean isValidCommandOnModules(String[] parameters) {
         return parameters.length == THREE_PARAMETERS_LENGTH && parameters[UNIVERSITY_INDEX].startsWith("u/")
                 && parameters[MODULE_INDEX].startsWith("m/");
