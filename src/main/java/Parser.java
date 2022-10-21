@@ -110,6 +110,7 @@ public class Parser {
             } else if (matcherAdd.find()) {
                 String patientId = matcherAdd.group(1);
                 checkPatientExists(patientId);
+                assert !patientId.contains(" ");
                 String reason = matcherAdd.group(4);
                 if (reason.isEmpty()) {
                     visitList.addVisit(ui, patientId, matcherAdd.group(2), matcherAdd.group(3));
@@ -120,14 +121,17 @@ public class Parser {
             } else if (matcherEdit.find()) {
                 String patientId = matcherAdd.group(1);
                 checkPatientExists(patientId);
+                assert !patientId.contains(" ");
                 visitList.editReason(ui, patientId, matcherEdit.group(2));
             } else if (matcherViewPatient.find()) {
                 String patientId = matcherAdd.group(1);
                 checkPatientExists(patientId);
+                assert !patientId.contains(" ");
                 visitList.viewPatient(ui, patientId);
             } else if (matcherViewVisit.find()) {
                 String patientId = matcherAdd.group(1);
                 checkPatientExists(patientId);
+                assert !patientId.contains(" ");
                 //visitList.viewVisit(ui, patientId, matcherViewVisit.group(2));
             } else {
                 throw new OneDocException("Your input is incorrect! Please format it as such:"
@@ -173,6 +177,7 @@ public class Parser {
             } else if (matcherAdd.find()) {
                 String patientId = matcherAdd.group(1);
                 checkPatientExists(patientId);
+                assert !patientId.contains(" ");
                 prescriptionList.add(ui, patientId, matcherAdd.group(2),
                         matcherAdd.group(3), matcherAdd.group(4));
             } else if (matcherEdit.find()) {
@@ -181,10 +186,12 @@ public class Parser {
             } else if (matcherViewPatient.find()) {
                 String patientId = matcherViewPatient.group(1);
                 checkPatientExists(patientId);
+                assert !patientId.contains(" ");
                 prescriptionList.viewPatientPrescription(ui, patientId);
             } else if (matcherViewActive.find()) {
                 String patientId = matcherViewActive.group(1);
                 checkPatientExists(patientId);
+                assert !patientId.contains(" ");
                 prescriptionList.viewActivePatientPrescription(ui, patientId);
             } else if (matcherChangeActive.find()) {
                 //index is matcherChangeActive.group(1),
