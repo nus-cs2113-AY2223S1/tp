@@ -57,10 +57,10 @@ public class ConsoleParserConfigurations {
             + "PayLah/PayNow/Cash/Card";
     public static final boolean COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_HAS_VAL = true;
     public static final boolean COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_IS_MAND = false;
-    public static final String COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_PAYLAH = "PayLah";
-    public static final String COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_PAYNOW = "PayNow";
-    public static final String COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_CASH = "Cash";
-    public static final String COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_CARD = "Card";
+    public static final String COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_PAYLAH = "PayLah";
+    public static final String COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_PAYNOW = "PayNow";
+    public static final String COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_CASH = "Cash";
+    public static final String COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_CARD = "Card";
 
     public static final String COMMAND_ADD_EXPENSE_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS = ""
             + "Command Add-Expense does not have all of the required options.";
@@ -144,6 +144,10 @@ public class ConsoleParserConfigurations {
             + "PayLah/PayNow/Cash/Card";
     public static final boolean COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_HAS_VAL = true;
     public static final boolean COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_IS_MAND = false;
+    public static final String COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_PAYLAH = "PayLah";
+    public static final String COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_PAYNOW = "PayNow";
+    public static final String COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_CASH = "Cash";
+    public static final String COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_CARD = "Card";
     public static final String COMMAND_EDIT_EXPENSE_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS = ""
             + "Command Edit-Expense does not have all of the required options.";
 

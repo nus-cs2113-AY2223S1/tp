@@ -140,13 +140,13 @@ public class ConsoleParser {
 
         if (modeOfPayment != null
                 && !(modeOfPayment.equalsIgnoreCase(
-                        ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_CASH)
+                        ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_CASH)
                         || modeOfPayment.equalsIgnoreCase(
-                                ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_PAYNOW)
+                                ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_PAYNOW)
                         || modeOfPayment.equalsIgnoreCase(
-                                ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_PAYLAH)
+                                ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_PAYLAH)
                         || modeOfPayment.equalsIgnoreCase(
-                                ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_CARD))) {
+                                ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_CARD))) {
             throw new ConsoleParserCommandAddExpenseInvalidException();
         }
     }
@@ -224,16 +224,16 @@ public class ConsoleParser {
         if (modeOfPayment != null) {
             String modeOfPaymentNormalized = "";
             if (modeOfPayment.equalsIgnoreCase(
-                    ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_CASH)) {
+                    ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_CASH)) {
                 modeOfPaymentNormalized = "Cash";
             } else if (modeOfPayment.equalsIgnoreCase(
-                    ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_PAYNOW)) {
+                    ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_PAYNOW)) {
                 modeOfPaymentNormalized = "PayNow";
             } else if (modeOfPayment.equalsIgnoreCase(
-                    ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_PAYLAH)) {
+                    ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_PAYLAH)) {
                 modeOfPaymentNormalized = "PayLah";
             } else if (modeOfPayment.equalsIgnoreCase(
-                    ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_CARD)) {
+                    ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_CARD)) {
                 modeOfPaymentNormalized = "Card";
             }
             consoleCommandAddExpense.setModeOfPayment(modeOfPaymentNormalized);
@@ -520,13 +520,13 @@ public class ConsoleParser {
 
         if (modeOfPayment != null
                 && !(modeOfPayment.equalsIgnoreCase(
-                        ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_CASH)
+                        ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_CASH)
                         || modeOfPayment.equalsIgnoreCase(
-                        ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_PAYNOW)
+                        ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_PAYNOW)
                         || modeOfPayment.equalsIgnoreCase(
-                        ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_PAYLAH)
+                        ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_PAYLAH)
                         || modeOfPayment.equalsIgnoreCase(
-                        ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_CARD))) {
+                        ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_CARD))) {
             throw new ConsoleParserCommandEditExpenseInvalidException();
         }
     }
@@ -606,16 +606,16 @@ public class ConsoleParser {
         if (modeOfPayment != null) {
             String modeOfPaymentNormalized = "";
             if (modeOfPayment.equalsIgnoreCase(
-                    ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_CASH)) {
+                    ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_CASH)) {
                 modeOfPaymentNormalized = "Cash";
             } else if (modeOfPayment.equalsIgnoreCase(
-                    ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_PAYNOW)) {
+                    ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_PAYNOW)) {
                 modeOfPaymentNormalized = "PayNow";
             } else if (modeOfPayment.equalsIgnoreCase(
-                    ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_PAYLAH)) {
+                    ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_PAYLAH)) {
                 modeOfPaymentNormalized = "PayLah";
             } else if (modeOfPayment.equalsIgnoreCase(
-                    ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_CARD)) {
+                    ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_CARD)) {
                 modeOfPaymentNormalized = "Card";
             }
             consoleCommandEditExpense.setModeOfPayment(modeOfPaymentNormalized);
