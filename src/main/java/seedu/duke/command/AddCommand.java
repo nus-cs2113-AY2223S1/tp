@@ -14,7 +14,11 @@ import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static seedu.duke.command.CommandTag.*;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_AMOUNT;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_CATEGORY;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_DATE;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_DESCRIPTION;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_TYPE;
 import static seedu.duke.common.InfoMessages.INFO_ADD_EXPENSE;
 import static seedu.duke.common.InfoMessages.INFO_ADD_INCOME;
 
