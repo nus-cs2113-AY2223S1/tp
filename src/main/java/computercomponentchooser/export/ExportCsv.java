@@ -19,7 +19,7 @@ public class ExportCsv {
         this.buildManager = buildManager;
     }
 
-    public static void exportAllBuildsCSV(BuildManager buildManager) throws IOException {
+    public static void exportAllBuildsCsv(BuildManager buildManager) throws IOException {
         Path fileDirectory = Paths.get(FILE_DIRECTORY);
         if (!Files.exists(fileDirectory)) {
             Files.createDirectory(fileDirectory);

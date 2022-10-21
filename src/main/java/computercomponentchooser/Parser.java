@@ -137,7 +137,7 @@ public class Parser {
     private void mainParseExportCSV() throws IOException {
         Ui.printLine();
         System.out.println("Exporting builds...");
-        ExportCsv.exportAllBuildsCSV(buildManager);
+        ExportCsv.exportAllBuildsCsv(buildManager);
         Ui.printLine();
     }
 }
