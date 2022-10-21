@@ -48,7 +48,7 @@ public class VisitList {
         System.out.println("Here are the list of visits in the system:");
         for (int i = 0; i < getTotalVisits(); i++) {
             ui.printLine();
-            System.out.println((i + 1) + ")");
+            System.out.println("VisitIndex #"+ (i + 1) + ")");
             System.out.println(visitList.get(i));
         }
         ui.printLine();
@@ -63,11 +63,11 @@ public class VisitList {
         for (int i = 0; i < getTotalVisits(); i++) {
             if (visitList.get(i).getId().equals(id)) {
                 if (noOfPatientVisits == 0) {
-                    System.out.printf("Here are the list of visits for Patient with ID %s\n",id);
+                    System.out.printf("Here are the list of visits for Patient with ID: %s\n",id);
                 }
                 noOfPatientVisits++;
                 ui.printLine();
-                System.out.println(noOfPatientVisits + ")");
+                System.out.println("VisitIndex #" + (i + 1) + ")");
                 System.out.println(visitList.get(i));
             }
         }
@@ -77,4 +77,18 @@ public class VisitList {
         ui.printLine();
     }
 
+    public void viewVisit(UI ui, int index) {
+        if (isEmpty()) {
+            System.out.println("There are no visits in the system right now!");
+            return;
+        }
+        if(index < 1 || index > getTotalVisits()) {
+            System.out.printf("There is no such visit in the system with index %d!\n",index);
+        } else {
+            System.out.printf("Here is the visit with VisitIndex %d:\n",index);
+            ui.printLine();
+            System.out.println(visitList.get(index -1));
+        }
+        ui.printLine();
+    }
 }
