@@ -221,7 +221,35 @@ details for 1 module.
 
 #### 3.5.1 UI Component
 
+The <code>UI</code> component can:
+- read input from the user
+- store and print out messages to the user
+
+##### Why it is implemented this way
+To comply with the Model-View Controller Framework
+To separate the internal representations and processing of information from the presentation and acceptance of 
+information from the user
+
+##### Alternative Considered
+Each component to handle the presentation of information to the user
+
+- Increase coupling between components
+- Hard to define the sequence that information being presented to user
+
 #### 3.5.2 Link Component
+
+The <code>Link</code> component can:
+- create a [NUSmod](https://nusmods.com/) link to be used in a browser
+- Parse a NUSmod link to import modules into YAMOM
+
+##### Why is it implemented this way
+To separate out the handling of NUSmod compatibility 
+
+##### Alternative Considered
+To implement the handling of export in Storage class and import in Command class
+
+- Increase coupling between components
+- Decrease reusability of NUSmod link processing
 
 #### 3.5.3 Storage Component
 
