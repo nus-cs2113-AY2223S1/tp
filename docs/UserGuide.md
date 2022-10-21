@@ -127,6 +127,17 @@ Example of usage:
 * `View-RecurringPayment`
 * `View-RecurringPayment -r 1`
 
+### Deleting recurring payments: `Delete-RecurringPayment`
+Deletes a recurring payment from the list of recurring payments.
+
+Syntax: `Delete-RecurringPayment -r RECURRING_PAYMENT_INDEX`
+
+* `RECURRING_PAYMENT_INDEX` is an integer value.
+
+Example of usage:
+
+* `Delete-RecurringPayment -r 1`
+
 ### Editing recurring payments: `Edit-RecurringPayment`
 Edits a recurring payment in the list of recurring payments
 
