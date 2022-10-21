@@ -145,6 +145,28 @@ The following sequence diagram shows how the employee management works:
   - Pros: More easy, and the indexes are always continuous.	
   - Cons: The index of an employee may change frequently.
 
+### [Proposed] Pet management feature
+
+### Proposed Implementation
+
+The proposed appointment feature is facilitated by the pet package. It implement the following methods to help the head nurse manage pets.
+
+- `AddPetCommand#execute()` —  Register a new pet into the pet management system.
+- `RemovePetStatus#execute()` —  Remove a pet from the pet management system.
+- `ViewPetCommand#execute()` —  Display all registered pets in a stipulated format.
+
+Given below is an example usage scenario and how the Pet management mechanism behaves at each step.
+
+Step 1. The user launches the application and there are already pre-existing pet registered.
+
+Step 2. The user executes `pet add n/Taro s/cat h/1` command to register a cat named ‘Taro’, with a healthy status.
+
+Step 3. The user executes `pet remove 2/index` command to remove the second pet in the system.
+
+Step 4. The user executes `view pet` to display all pets in the pet manage system.
+
+The following sequence diagram shows how the status operation works:
+
 
 
 
