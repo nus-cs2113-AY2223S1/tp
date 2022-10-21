@@ -61,6 +61,12 @@ The following diagram illustrates the relationships between the three main timet
 
 ![Timetable Class Diagram](./images/Timetable_Class.png)
 
+### Commands
+To interact with easySEP, users have to input commands specified with parameters to perform operations which will be passed to the CommandParser to generate a corresponding Command according to their input.
+The Command will then be executed to perform the operation on the other classes managing the timetables and databases. Error checking is handled to throw InvalidUserCommandException if the user's input does not match
+the specified Command format. To deal with parsing parameters, spaces in University names and Module codes are to be replaced with underscores.
+
+[comment]: <> (The following diagram illustrates the relationships between the CommandParser class and the Command subclasses. ![CommandParser Sequence Diagram](./images/CommandParser_Sequence.png)
 
 ## Product scope
 ### Target user profile
