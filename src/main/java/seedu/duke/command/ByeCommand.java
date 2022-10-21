@@ -4,6 +4,8 @@ import seedu.duke.Storage;
 import seedu.duke.Ui;
 import seedu.duke.data.TransactionList;
 
+import static seedu.duke.common.InfoMessages.INFO_EXIT;
+
 /**
  * Represents a bye command object that will execute the operations for Bye command.
  */
@@ -38,7 +40,7 @@ public class ByeCommand extends Command {
      */
     @Override
     public void execute(TransactionList transactions, Ui ui, Storage storage) {
-        Ui.showExit();
+        Ui.showInfoMessage(INFO_EXIT.toString());
     }
 
     /**

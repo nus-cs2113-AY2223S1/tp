@@ -2,7 +2,7 @@ package seedu.duke.exception;
 
 import seedu.duke.common.ErrorMessages;
 
-public class ListStatisticsInvalidStatsTypeException extends MoolahException {
+public class ListStatsInvalidStatsTypeException extends MoolahException {
 
     /**
      * Returns the error message of the exception to alert user of the exception.

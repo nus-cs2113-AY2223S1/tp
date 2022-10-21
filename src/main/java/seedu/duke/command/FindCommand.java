@@ -71,13 +71,15 @@ public class FindCommand extends Command {
         // Checks the format of find to ensure that it contains keywords used in the search expression
         checkFindFormat(keywords);
         assert !keywords.isBlank();
+
         String transactionsList = transactions.findTransactions(keywords);
         if (transactionsList.isEmpty()) {
             ui.showInfoMessage(INFO_LIST_UNFILTERED.toString());
             return;
         }
+
         assert !transactionsList.isEmpty();
-        ui.showTransactionsList(transactionsList, INFO_LIST_FILTERED.toString());
+        ui.showList(transactionsList, INFO_LIST_FILTERED.toString());
     }
 
     //@@author paullowse
