@@ -83,6 +83,7 @@ public class Storage {
         if (file.getParentFile().mkdirs()) {
             file.createNewFile();
         }
+
         String toSave = Link.getLink(state);
         ui.addMessage(EXPORT_MESSAGE);
         ui.addMessage(toSave);

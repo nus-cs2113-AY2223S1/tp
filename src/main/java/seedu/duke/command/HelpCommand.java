@@ -32,7 +32,6 @@ public class HelpCommand extends Command {
     public static final String SELECT_SEMESTER_COMMAND_USAGE = SelectSemesterCommand.COMMAND_WORD
             + ": semester [SEMESTER SELECTED] = select semester to plan for and organise!\n";
 
-
     public static final String HELP_DISPLAY_MESSAGE = HELP_MODULE_COMMAND_USAGE
             + ADD_MODULE_COMMAND_USAGE
             + DELETE_MODULE_COMMAND_USAGE
