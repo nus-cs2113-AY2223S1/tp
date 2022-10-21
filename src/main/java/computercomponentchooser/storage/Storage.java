@@ -73,7 +73,7 @@ public class Storage {
     }
 
     /**
-     * Suppose to delete the txt file of the build all together but it doesn't work.
+     * Delete the text file of the build.
      *
      * @param name name of the build
      * @param buildManager buildManager
@@ -187,7 +187,7 @@ public class Storage {
                         loadMotherboard(line, name, price, power, build);
                         break;
                     case "powersupply":
-                        loadPowersupply(name, price, power, build);
+                        loadPowerSupply(name, price, power, build);
                         break;
                     case "gpu":
                         loadGpu(line, name, price, power, build);
@@ -251,7 +251,7 @@ public class Storage {
         build.addComponent("gpu", gpu);
     }
 
-    private static void loadPowersupply(String name, String price, String power, Build build) {
+    private static void loadPowerSupply(String name, String price, String power, Build build) {
         PowerSupply powersupply = new PowerSupply(name, price, power);
         build.addComponent("powersupply", powersupply);
     }
