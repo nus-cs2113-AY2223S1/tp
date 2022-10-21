@@ -10,7 +10,7 @@ List of commands:
 * To add a patient: add n/[name] g/[M/F] d/[DOB] i/[ID]
 * To list all patients: viewall
 * To retrieve information about a specific patient: retrieve i/[ID]
-* To edit a patient's records: edit i/ID (n/[name] or g/[M/F] or d/[DOB])
+* To edit a patient's information: edit i/[ID] (n/[name] or g/[M/F] or d/[DOB])
 * To return to main menu: main
 * To quit OneDoc: bye
 Ok! I've added a patient! The patient's details are as follows:

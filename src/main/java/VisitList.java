@@ -54,4 +54,27 @@ public class VisitList {
         ui.printLine();
     }
 
+    public void viewPatient(UI ui, String id) {
+        if (isEmpty()) {
+            System.out.println("There are no visits in the system right now!");
+            return;
+        }
+        int noOfPatientVisits = 0;
+        for (int i = 0; i < getTotalVisits(); i++) {
+            if (visitList.get(i).getId().equals(id)) {
+                if (noOfPatientVisits == 0) {
+                    System.out.printf("Here are the list of visits for Patient with ID %s\n",id);
+                }
+                noOfPatientVisits++;
+                ui.printLine();
+                System.out.println(noOfPatientVisits + ")");
+                System.out.println(visitList.get(i));
+            }
+        }
+        if (noOfPatientVisits == 0) {
+            System.out.printf("Sorry, Patient with ID %s has no visits recorded yet!\n",id);
+        }
+        ui.printLine();
+    }
+
 }
