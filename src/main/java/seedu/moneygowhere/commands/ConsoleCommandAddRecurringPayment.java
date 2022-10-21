@@ -11,12 +11,23 @@ public class ConsoleCommandAddRecurringPayment extends ConsoleCommand {
     private int interval;
     private String description;
     private BigDecimal amount;
+    private String category;
+    private String currency;
 
-    public ConsoleCommandAddRecurringPayment(String name, int interval, String description, BigDecimal amount) {
+    public ConsoleCommandAddRecurringPayment(
+            String name,
+            int interval,
+            String description,
+            BigDecimal amount,
+            String category,
+            String currency
+    ) {
         this.name = name;
         this.interval = interval;
         this.description = description;
         this.amount = amount;
+        this.category = category;
+        this.currency = currency;
     }
 
     public String getName() {
@@ -33,5 +44,13 @@ public class ConsoleCommandAddRecurringPayment extends ConsoleCommand {
 
     public BigDecimal getAmount() {
         return amount;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public String getCurrency() {
+        return currency;
     }
 }
