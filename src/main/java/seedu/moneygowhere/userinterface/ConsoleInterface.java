@@ -252,7 +252,9 @@ public class ConsoleInterface {
         recurringPaymentStr += "Name            : " + recurringPayment.getName() + "\n";
         recurringPaymentStr += "Interval (Days) : " + recurringPayment.getInterval() + "\n";
         recurringPaymentStr += "Description     : " + recurringPayment.getDescription() + "\n";
-        recurringPaymentStr += "Amount          : " + recurringPayment.getAmount();
+        recurringPaymentStr += "Amount          : " + recurringPayment.getAmount() + "\n";
+        recurringPaymentStr += "Category        : " + recurringPayment.getCategory() + "\n";
+        recurringPaymentStr += "Currency        : " + recurringPayment.getCurrency();
 
         return recurringPaymentStr;
     }
@@ -613,7 +615,9 @@ public class ConsoleInterface {
                 consoleCommandAddRecurringPayment.getName(),
                 consoleCommandAddRecurringPayment.getInterval(),
                 consoleCommandAddRecurringPayment.getDescription(),
-                consoleCommandAddRecurringPayment.getAmount()
+                consoleCommandAddRecurringPayment.getAmount(),
+                consoleCommandAddRecurringPayment.getCategory(),
+                consoleCommandAddRecurringPayment.getCurrency()
         );
 
         recurringPaymentManager.addRecurringPayment(recurringPayment);
@@ -705,6 +709,12 @@ public class ConsoleInterface {
         }
         if (consoleCommandEditRecurringPayment.isAmountSet()) {
             recurringPayment.setAmount(consoleCommandEditRecurringPayment.getAmount());
+        }
+        if (consoleCommandEditRecurringPayment.isCategorySet()) {
+            recurringPayment.setCategory(consoleCommandEditRecurringPayment.getCategory());
+        }
+        if (consoleCommandEditRecurringPayment.isCurrencySet()) {
+            recurringPayment.setCurrency(consoleCommandEditRecurringPayment.getCurrency());
         }
 
         try {

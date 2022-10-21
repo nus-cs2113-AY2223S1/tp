@@ -266,7 +266,8 @@ public class LocalStorage {
         BigDecimal amount = new BigDecimal(amountNodeList.item(0).getTextContent());
         String currency = amountNodeList.item(0).getAttributes()
                 .getNamedItem(XML_RECURRING_PAYMENT_CURRENCY_ATTRIBUTE).getTextContent();
-        return new RecurringPayment(name, interval, description, amount);
+        //TODO Add feature to save and load recurring payment category and currency
+        return new RecurringPayment(name, interval, description, amount, null, null);
     }
 
     /**
