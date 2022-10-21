@@ -127,6 +127,7 @@ The following sequence diagram shows how the employee management works:
 
 ![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/EmployeeManagement.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/EmployeeManagement.png)
 
+![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/EmployeeView.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/EmployeeView.png)
 
 
 ### Design considerations:
