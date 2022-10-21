@@ -1,2 +1,4 @@
 motherboard/ASUS ROG/600/130/lga1511/Full ATX/4/4
 case/Cooler Master/400/0/full ATX/2
+cpu/intel 10990x/1200/80/lga1511/3.8
+cooler/noctuna/300/60/1000/20/m4
