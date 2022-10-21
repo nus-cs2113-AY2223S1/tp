@@ -200,19 +200,11 @@ public class LocalStorage {
                 .item(0).getTextContent();
         assert name != null : "There must be a name";
 
-        LocalDateTime dateTime = LocalDateTime.parse(element
-                .getElementsByTagName(XML_EXPENSE_DATETIME_ELEMENT).item(0).getTextContent());
-
         String description = element.getElementsByTagName(XML_EXPENSE_DESCRIPTION_ELEMENT)
                 .item(0).getTextContent();
         if (description.isEmpty() || description.trim().isEmpty()) {
             description = null;
         }
-        NodeList amountNodeList = element.getElementsByTagName(XML_EXPENSE_AMOUNT_ELEMENT);
-        BigDecimal amount = new BigDecimal(amountNodeList.item(0).getTextContent());
-        String currency = amountNodeList.item(0).getAttributes()
-                .getNamedItem(XML_EXPENSE_AMOUNT_CURRENCY_ATTRIBUTE).getTextContent();
-        assert currency != null : "There must be a currency";
 
         String category = element.getElementsByTagName(XML_EXPENSE_CATEGORY_ELEMENT)
                 .item(0).getTextContent();
@@ -225,6 +217,16 @@ public class LocalStorage {
         if (remark.isEmpty() || remark.trim().isEmpty()) {
             remark = null;
         }
+
+        NodeList amountNodeList = element.getElementsByTagName(XML_EXPENSE_AMOUNT_ELEMENT);
+        String currency = amountNodeList.item(0).getAttributes()
+                .getNamedItem(XML_EXPENSE_AMOUNT_CURRENCY_ATTRIBUTE).getTextContent();
+        assert currency != null : "There must be a currency";
+        BigDecimal amount = new BigDecimal(amountNodeList.item(0).getTextContent());
+
+        LocalDateTime dateTime = LocalDateTime.parse(element
+                .getElementsByTagName(XML_EXPENSE_DATETIME_ELEMENT).item(0).getTextContent());
+
         return new Expense(name, dateTime, description, amount, category, remark, currency);
     }
 
@@ -244,9 +246,6 @@ public class LocalStorage {
                 .item(0).getTextContent();
         assert name != null : "There must be a name";
 
-        LocalDateTime dateTime = LocalDateTime.parse(element
-                .getElementsByTagName(XML_TARGET_DATETIME_ELEMENT).item(0).getTextContent());
-
         String description = element.getElementsByTagName(XML_TARGET_DESCRIPTION_ELEMENT)
                 .item(0).getTextContent();
         if (description.isEmpty() || description.trim().isEmpty()) {
@@ -264,6 +263,9 @@ public class LocalStorage {
         String currencyCurrentAmount = currentAmountNodeList.item(0).getAttributes()
                 .getNamedItem(XML_TARGET_CURRENCY_ATTRIBUTE).getTextContent();
         assert currencyCurrentAmount != null : "There must be a currency for current amount";
+
+        LocalDateTime dateTime = LocalDateTime.parse(element
+                .getElementsByTagName(XML_TARGET_DATETIME_ELEMENT).item(0).getTextContent());
 
         return new Target(name, dateTime, description, amount, currentAmount);
     }
@@ -284,9 +286,6 @@ public class LocalStorage {
                 .item(0).getTextContent();
         assert name != null : "There must be a name";
 
-        int interval = Integer.parseInt(element.getElementsByTagName(XML_RECURRING_PAYMENT_INTERVAL_ELEMENT)
-                .item(0).getTextContent());
-
         String description = element.getElementsByTagName(XML_RECURRING_PAYMENT_DESCRIPTION_ELEMENT)
                 .item(0).getTextContent();
         if (description.isEmpty() || description.trim().isEmpty()) {
@@ -304,6 +303,9 @@ public class LocalStorage {
         if (category.isEmpty() || category.trim().isEmpty()) {
             category = null;
         }
+
+        int interval = Integer.parseInt(element.getElementsByTagName(XML_RECURRING_PAYMENT_INTERVAL_ELEMENT)
+                .item(0).getTextContent());
 
         return new RecurringPayment(name, interval, description, amount, category, currency);
     }
