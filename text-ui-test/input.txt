@@ -1,7 +1,10 @@
+ThisCommandDoesNotExist
 Add-Expense -n "Test Expense 1" -a 1337.37 -d "01/01/2022 1200"
 Add-Expense -n "Test Expense 2" -a 10.80 -d "01/01/2022 1201"
 Add-Expense -n "Test Expense 3" -a 20.80 -d "02/01/2022 1202" -t "This is a test expense 3"
 Add-Expense -n "Test Expense 4" -a 30.90 -d "03/01/2022 1203" -t "This is a test expense 4" -c "Category Alpha"
+Add-Expense -n "Test Expense 5" -a 40.90 -d "04/01/2022 1204" -t "This is a test expense 5" -c "Category Bravo" -r "Remarks Alpha"
+Add-Expense -n "Test Expense 6" -a 50.90 -d "04/01/2022 1205" -t "This is a test expense 6" -c "Category Charlie" -r "Remarks Bravo" -x SGD
 Add-Expense -n "Test Expense Error 1"
 Add-Expense -n "Test Expense Error 2" -a 30.90ti
 Add-Expense -n "Test Expense Error 3" -a 1337 -d "ThisIsAnInvalidDate"
@@ -14,12 +17,35 @@ Delete-Expense -e 3
 View-Expense
 Edit-Expense -e 2 -n "Exp3"
 Edit-Expense -e 1 -n "Exp2" -a 10.70
-Edit-Expense -e 0 -n "Exp1" -a 13.37 -d "01/01/2021 1200" -t "This is a test expense 1" -c "Category Alpha"
+Edit-Expense -e 0 -n "Exp1" -a 13.37 -d "01/01/2021 1200" -t "This is a test expense 1" -c "Category Alpha" -r "Remarks Bravo"
 View-Expense
 Edit-Expense -e "ThisIsAnInvalidExpenseIndex"
 Edit-Expense -e 0 -a "ThisIsAnInvalidAmount"
 Edit-Expense -e 0 -a 7.80 -d "ThisIsAnInvalidDateTime"
-Edit-Expense -e 2147483647 -n "ThisExpenseDoesNotExist" -a 13.37 -d "01/01/2021 1200" -t "This expense does not exist" -c "Category Alpha"
+Edit-Expense -e 2147483647 -n "ThisExpenseDoesNotExist" -a 13.37 -d "01/01/2021 1200" -t "This expense does not exist" -c "Category Alpha" -r "Remarks Charlie"
 View-Expense
-ThisCommandDoesNotExist
+Delete-Expense -e 0
+Delete-Expense -e 0
+Delete-Expense -e 0
+View-Expense
+
+Add-RecurringPayment -n RecExp1 -i 30 -a 7.80
+Add-RecurringPayment -n "Rec Exp 2" -i 40 -a 9.80
+Add-RecurringPayment -n "Rec Exp 3" -i 50 -a 10.80 -t "This is a test recurring payment 3"
+View-RecurringPayment
+Add-RecurringPayment -n ErrRecExp1
+Add-RecurringPayment -n "Err Rec Exp 2"
+Add-RecurringPayment -n "Err Rec Exp 3" -i 60
+Add-RecurringPayment -n "Err Rec Exp 4" -i ThisIsAnInvalidInterval
+Add-RecurringPayment -n "Err Rec Exp 5" -i 70 -a ThisIsAnInvalidAmount
+View-RecurringPayment
+
+sort-expense -t alphabetical -o descending
+sort-expense -t amount -o ascending
+sort-expense -t date -o descending
+sort-expense
+sort-expense -t date -o
+sort-expense -t -o descending
+sort-expense -t date -o descend
+
 bye

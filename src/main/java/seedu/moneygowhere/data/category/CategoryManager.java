@@ -16,7 +16,7 @@ public class CategoryManager {
     }
 
     public boolean hasCategory(String categoryName) {
-        for (Category category: categories) {
+        for (Category category : categories) {
             if (category.categoryName.equals(categoryName)) {
                 return true;
             }
