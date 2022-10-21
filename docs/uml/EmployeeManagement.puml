@@ -11,13 +11,13 @@ end box
 [-> UiManager : readCommand("employee add n/Mozart")
 activate UiManager
 
-UiManager -> EmployeeParser : execute("employee add n/Mozart")
+UiManager -> EmployeeParser : execute("add n/Mozart")
 activate EmployeeParser
 
-EmployeeParser -> AddEmployeeCommand : prepareAddEmployee("employee add n/Mozart")
+EmployeeParser -> AddEmployeeCommand : prepareAddEmployee(" n/Mozart")
 activate AddEmployeeCommand
 
-AddEmployeeCommand -> EmployeeList : addEmployee("employee add n/Mozart")
+AddEmployeeCommand -> EmployeeList : addEmployee("Mozart")
 activate EmployeeList
 
 EmployeeList --> AddEmployeeCommand
