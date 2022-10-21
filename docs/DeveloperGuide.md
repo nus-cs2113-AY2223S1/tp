@@ -125,7 +125,10 @@ Step 4. The user executes `employee remove i/1` command to remove the employee w
 
 The following sequence diagram shows how the employee management works:
 
-![image-20221021211809531](C:\Users\13757\AppData\Roaming\Typora\typora-user-images\image-20221021211809531.png)
+![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/EmployeeManagement.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/EmployeeManagement.png)
+
+![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/EmployeeView.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/EmployeeView.png)
+
 
 ### Design considerations:
 
@@ -219,7 +222,6 @@ The following sequence diagram shows how the service management works:
   1. The service only has one attribute which is the description. 
   So can not attach more attributes to it.
   2. Less oop.
-
 
 ## Product scope
 ### Target user profile
