@@ -354,6 +354,64 @@ public class ConsoleParserConfigurations {
             + "Command Delete-RecurringPayment does not have all of the required options.";
 
     /**
+     * Defines parameters for console command Edit-RecurringPayment.
+     */
+    public static final String COMMAND_EDIT_RECURRING_PAYMENT = ""
+            + "Edit-RecurringPayment";
+    public static final String COMMAND_EDIT_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX = ""
+            + "r";
+    public static final String COMMAND_EDIT_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_LONG = ""
+            + "recurringpayment-index";
+    public static final String COMMAND_EDIT_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_DESC = ""
+            + "Index";
+    public static final boolean COMMAND_EDIT_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_HAS_VAL =
+            true;
+    public static final boolean COMMAND_EDIT_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_IS_MAND =
+            true;
+    public static final String COMMAND_EDIT_RECURRING_PAYMENT_ARG_NAME
+            = "n";
+    public static final String COMMAND_EDIT_RECURRING_PAYMENT_ARG_NAME_LONG = ""
+            + "name";
+    public static final String COMMAND_EDIT_RECURRING_PAYMENT_ARG_NAME_DESC = ""
+            + "Name";
+    public static final boolean COMMAND_EDIT_RECURRING_PAYMENT_ARG_NAME_HAS_VAL =
+            true;
+    public static final boolean COMMAND_EDIT_RECURRING_PAYMENT_ARG_NAME_IS_MAND =
+            false;
+    public static final String COMMAND_EDIT_RECURRING_PAYMENT_ARG_INTERVAL = ""
+            + "i";
+    public static final String COMMAND_EDIT_RECURRING_PAYMENT_ARG_INTERVAL_LONG = ""
+            + "interval";
+    public static final String COMMAND_EDIT_RECURRING_PAYMENT_ARG_INTERVAL_DESC = ""
+            + "Interval in days";
+    public static final boolean COMMAND_EDIT_RECURRING_PAYMENT_ARG_INTERVAL_HAS_VAL =
+            true;
+    public static final boolean COMMAND_EDIT_RECURRING_PAYMENT_ARG_INTERVAL_IS_MAND =
+            false;
+    public static final String COMMAND_EDIT_RECURRING_PAYMENT_ARG_AMOUNT = ""
+            + "a";
+    public static final String COMMAND_EDIT_RECURRING_PAYMENT_ARG_AMOUNT_LONG = ""
+            + "amount";
+    public static final String COMMAND_EDIT_RECURRING_PAYMENT_ARG_AMOUNT_DESC = ""
+            + "Amount";
+    public static final boolean COMMAND_EDIT_RECURRING_PAYMENT_ARG_AMOUNT_HAS_VAL =
+            true;
+    public static final boolean COMMAND_EDIT_RECURRING_PAYMENT_ARG_AMOUNT_IS_MAND =
+            false;
+    public static final String COMMAND_EDIT_RECURRING_PAYMENT_ARG_DESCRIPTION = ""
+            + "t";
+    public static final String COMMAND_EDIT_RECURRING_PAYMENT_ARG_DESCRIPTION_LONG = ""
+            + "description";
+    public static final String COMMAND_EDIT_RECURRING_PAYMENT_ARG_DESCRIPTION_DESC = ""
+            + "Description";
+    public static final boolean COMMAND_EDIT_RECURRING_PAYMENT_ARG_DESCRIPTION_HAS_VAL =
+            true;
+    public static final boolean COMMAND_EDIT_RECURRING_PAYMENT_ARG_DESCRIPTION_IS_MAND =
+            false;
+    public static final String COMMAND_EDIT_RECURRING_PAYMENT_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS = ""
+            + "Command Edit-RecurringPayment does not have all of the required options.";
+
+    /**
      * Defines parameters for console command Merge-file.
      */
     public static final String COMMAND_MERGE_EXTERNAL_FILE = ""
@@ -894,6 +952,58 @@ public class ConsoleParserConfigurations {
 
         Options options = new Options();
         options.addOption(optionRecurringPaymentIndex);
+
+        return options;
+    }
+
+    /**
+     * Generates an {@link Options} object with required arguments for command Edit-RecurringPayment.
+     *
+     * @return {@link Options} object initialized with the required arguments.
+     */
+    public static Options getCommandEditRecurringPaymentOptions() {
+        Option optionRecurringPaymentIndex = new Option(
+                COMMAND_EDIT_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX,
+                COMMAND_EDIT_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_LONG,
+                COMMAND_EDIT_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_HAS_VAL,
+                COMMAND_EDIT_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_DESC
+        );
+        optionRecurringPaymentIndex.setRequired(COMMAND_EDIT_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_IS_MAND);
+        Option optionName = new Option(
+                COMMAND_EDIT_RECURRING_PAYMENT_ARG_NAME,
+                COMMAND_EDIT_RECURRING_PAYMENT_ARG_NAME_LONG,
+                COMMAND_EDIT_RECURRING_PAYMENT_ARG_NAME_HAS_VAL,
+                COMMAND_EDIT_RECURRING_PAYMENT_ARG_NAME_DESC
+        );
+        optionName.setRequired(COMMAND_EDIT_RECURRING_PAYMENT_ARG_NAME_IS_MAND);
+        Option optionInterval = new Option(
+                COMMAND_EDIT_RECURRING_PAYMENT_ARG_INTERVAL,
+                COMMAND_EDIT_RECURRING_PAYMENT_ARG_INTERVAL_LONG,
+                COMMAND_EDIT_RECURRING_PAYMENT_ARG_INTERVAL_HAS_VAL,
+                COMMAND_EDIT_RECURRING_PAYMENT_ARG_INTERVAL_DESC
+        );
+        optionInterval.setRequired(COMMAND_EDIT_RECURRING_PAYMENT_ARG_INTERVAL_IS_MAND);
+        Option optionAmount = new Option(
+                COMMAND_EDIT_RECURRING_PAYMENT_ARG_AMOUNT,
+                COMMAND_EDIT_RECURRING_PAYMENT_ARG_AMOUNT_LONG,
+                COMMAND_EDIT_RECURRING_PAYMENT_ARG_AMOUNT_HAS_VAL,
+                COMMAND_EDIT_RECURRING_PAYMENT_ARG_AMOUNT_DESC
+        );
+        optionAmount.setRequired(COMMAND_EDIT_RECURRING_PAYMENT_ARG_AMOUNT_IS_MAND);
+        Option optionDescription = new Option(
+                COMMAND_EDIT_RECURRING_PAYMENT_ARG_DESCRIPTION,
+                COMMAND_EDIT_RECURRING_PAYMENT_ARG_DESCRIPTION_LONG,
+                COMMAND_EDIT_RECURRING_PAYMENT_ARG_DESCRIPTION_HAS_VAL,
+                COMMAND_EDIT_RECURRING_PAYMENT_ARG_DESCRIPTION_DESC
+        );
+        optionDescription.setRequired(COMMAND_EDIT_RECURRING_PAYMENT_ARG_DESCRIPTION_IS_MAND);
+
+        Options options = new Options();
+        options.addOption(optionRecurringPaymentIndex);
+        options.addOption(optionName);
+        options.addOption(optionInterval);
+        options.addOption(optionDescription);
+        options.addOption(optionAmount);
 
         return options;
     }
