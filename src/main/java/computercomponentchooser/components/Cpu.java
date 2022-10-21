@@ -55,7 +55,7 @@ public class Cpu extends Component {
 
     @Override
     public String saveAsString() {
-        return super.saveAsString() + " " + socket + " " + clock;
+        return super.saveAsString() + "/" + socket + "/" + clock;
     }
 
     public String getDetails() {

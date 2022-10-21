@@ -35,7 +35,7 @@ public class Memory extends Component {
 
     @Override
     public String saveAsString() {
-        return super.saveAsString() + " " + size + " " + speed;
+        return super.saveAsString() + "/" + size + "/" + speed;
     }
 
     public String getDetails() {

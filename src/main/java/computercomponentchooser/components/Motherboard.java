@@ -46,7 +46,7 @@ public class Motherboard extends Component {
 
     @Override
     public String saveAsString() {
-        return super.saveAsString() + " " + socket + " " + memorySlots + " " + gpuSlots;
+        return super.saveAsString() + "/" + socket + "/" + memorySlots + "/" + gpuSlots;
     }
 
     public String getDetails() {

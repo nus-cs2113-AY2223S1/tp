@@ -21,7 +21,7 @@ public class Parser {
     }
 
     private static String getParameter(String line, int mode) {
-        String[] lineSplit = line.split(" ", 2);
+        String[] lineSplit = line.split("/", 2);
         return lineSplit[mode];
     }
 
@@ -40,6 +40,7 @@ public class Parser {
         try {
             switch (command) {
             case "bye":
+                // fallthrough
             case "edit":
                 break;
             case "list":

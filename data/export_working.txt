@@ -1,0 +1,13 @@
+____________________________________________________________
+Info: 
+Build name: working
+Total cost: 1223.0
+Total power: 242
+Compatibility: Compatible
+
+Components list: 
+1. AMD [$500] [100 W] [am4] [3.6 GHz]
+2. ASUS [$300] [130 W] [am4] [4 RAM slots] [4 GPU slots]
+3. corsair [$300] [760 W]
+4. ravor black mouse [$123] [12 W]
+____________________________________________________________

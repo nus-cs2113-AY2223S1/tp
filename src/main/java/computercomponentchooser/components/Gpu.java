@@ -44,7 +44,7 @@ public class Gpu extends Component {
 
     @Override
     public String saveAsString() {
-        return super.saveAsString() + " " + memory + " " + clock;
+        return super.saveAsString() + "/" + memory + "/" + clock;
     }
 
     @Override

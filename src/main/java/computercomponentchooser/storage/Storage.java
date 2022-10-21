@@ -11,6 +11,9 @@ import computercomponentchooser.components.Memory;
 import computercomponentchooser.components.PowerSupply;
 import computercomponentchooser.components.Monitor;
 import computercomponentchooser.components.Other;
+import computercomponentchooser.components.Cooler;
+import computercomponentchooser.components.Case;
+
 
 import computercomponentchooser.exceptions.DuplicateBuildException;
 
@@ -41,7 +44,7 @@ public class Storage {
     }
 
     private static String getParameter(String line, int mode) {
-        String[] lineSplit = line.split(" ");
+        String[] lineSplit = line.split("/");
         return lineSplit[mode];
     }
 
@@ -70,7 +73,7 @@ public class Storage {
     }
 
     /**
-     * Suppose to delete the txt file of the build all together but it doesn't work.
+     * Delete the text file of the build.
      *
      * @param name name of the build
      * @param buildManager buildManager
@@ -175,42 +178,34 @@ public class Storage {
                     String power = getParameter(line, POWER_PARAMETER);
                     switch (type) {
                     case "cpu":
-                        Cpu cpu = new Cpu(name, price, power,
-                                getParameter(line, 4), getParameter(line, 5));
-                        build.addComponent(type, cpu);
+                        loadCpu(line, name, price, power, build);
                         break;
                     case "memory":
-                        Memory memory = new Memory(name, price, power, getParameter(line, 4),
-                                getParameter(line, 5));
-                        build.addComponent(type, memory);
+                        loadMemory(line, name, price, power, build);
                         break;
                     case "motherboard":
-                        Motherboard motherboard = new Motherboard(name, price, power, getParameter(line, 4),
-                                getParameter(line, 5), getParameter(line, 6));
-                        build.addComponent(type, motherboard);
+                        loadMotherboard(line, name, price, power, build);
                         break;
                     case "powersupply":
-                        PowerSupply powersupply = new PowerSupply(name, price, power);
-                        build.addComponent(type, powersupply);
+                        loadPowerSupply(name, price, power, build);
                         break;
                     case "gpu":
-                        Gpu gpu = new Gpu(name, price, power, getParameter(line, 4),
-                                getParameter(line, 5));
-                        build.addComponent(type, gpu);
+                        loadGpu(line, name, price, power, build);
                         break;
                     case "drive":
-                        Drive drive = new Drive(name, price, power, getParameter(line, 4),
-                                getParameter(line, 5));
-                        build.addComponent(type, drive);
+                        loadDrive(line, name, price, power, build);
                         break;
                     case "monitor":
-                        Monitor monitor = new Monitor(name, price, power, getParameter(line, 4),
-                                getParameter(line, 5), getParameter(line, 6));
-                        build.addComponent(type, monitor);
+                        loadMonitor(line, name, price, power, build);
+                        break;
+                    case "cooler":
+                        loadCooler(line, name, price, power, build);
+                        break;
+                    case "case":
+                        loadCase(line, name, price, power, build);
                         break;
                     case "other":
-                        Other other = new Other(name, price, power);
-                        build.addComponent(type, other);
+                        loadOther(name, price, power, build);
                         break;
                     default:
                         break;
@@ -219,5 +214,62 @@ public class Storage {
                 scanner.close();
             }
         }
+    }
+
+    private static void loadOther(String name, String price, String power, Build build) {
+        Other other = new Other(name, price, power);
+        build.addComponent("other", other);
+    }
+
+    private static void loadCase(String line, String name, String price, String power, Build build) {
+        Case case1 = new Case(name, price, power, getParameter(line, 4),
+                getParameter(line, 5));
+        build.addComponent("case", case1);
+    }
+
+    private static void loadCooler(String line, String name, String price, String power, Build build) {
+        Cooler cooler = new Cooler(name, price, power, getParameter(line, 4),
+                getParameter(line, 5), getParameter(line, 6));
+        build.addComponent("cooler", cooler);
+    }
+
+    private static void loadMonitor(String line, String name, String price, String power, Build build) {
+        Monitor monitor = new Monitor(name, price, power, getParameter(line, 4),
+                getParameter(line, 5), getParameter(line, 6));
+        build.addComponent("monitor", monitor);
+    }
+
+    private static void loadDrive(String line, String name, String price, String power, Build build) {
+        Drive drive = new Drive(name, price, power, getParameter(line, 4),
+                getParameter(line, 5));
+        build.addComponent("drive", drive);
+    }
+
+    private static void loadGpu(String line, String name, String price, String power, Build build) {
+        Gpu gpu = new Gpu(name, price, power, getParameter(line, 4),
+                getParameter(line, 5));
+        build.addComponent("gpu", gpu);
+    }
+
+    private static void loadPowerSupply(String name, String price, String power, Build build) {
+        PowerSupply powersupply = new PowerSupply(name, price, power);
+        build.addComponent("powersupply", powersupply);
+    }
+
+    private static void loadMotherboard(String line, String name, String price, String power, Build build) {
+        Motherboard motherboard = new Motherboard(name, price, power, getParameter(line, 4),
+                getParameter(line, 5), getParameter(line, 6));
+        build.addComponent("motherboard", motherboard);
+    }
+
+    private static void loadMemory(String line, String name, String price, String power, Build build) {
+        Memory memory = new Memory(name, price, power, getParameter(line, 4),
+                getParameter(line, 5));
+        build.addComponent("memory", memory);
+    }
+
+    private void loadCpu(String line, String name, String price, String power, Build build) {
+        Cpu cpu = new Cpu(name, price, power, getParameter(line, 4), getParameter(line, 5));
+        build.addComponent("cpu", cpu);
     }
 }

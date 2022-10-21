@@ -8,6 +8,8 @@ import computercomponentchooser.components.Memory;
 import computercomponentchooser.components.Monitor;
 import computercomponentchooser.components.PowerSupply;
 import computercomponentchooser.components.Other;
+import computercomponentchooser.components.Cooler;
+import computercomponentchooser.components.Case;
 
 import computercomponentchooser.exceptions.UnknownCommandException;
 import computercomponentchooser.export.ExportText;
@@ -36,7 +38,7 @@ public class EditParser {
     }
 
     private static String getParameter(String line, int mode) {
-        String[] lineSplit = line.split(" ");
+        String[] lineSplit = line.split("/");
         return lineSplit[mode];
     }
 
@@ -125,6 +127,16 @@ public class EditParser {
             Monitor monitor = new Monitor(name, price, power, getParameter(line, 5),
                     getParameter(line, 6), getParameter(line, 7));
             editBuild.addComponent(type, monitor);
+            break;
+        case "cooler":
+            Cooler cooler = new Cooler(name, price, power, getParameter(line, 5),
+                    getParameter(line, 6), getParameter(line, 7));
+            editBuild.addComponent(type, cooler);
+            break;
+        case "case":
+            Case case1 = new Case(name, price, power, getParameter(line, 5),
+                    getParameter(line, 6));
+            editBuild.addComponent(type, case1);
             break;
         case "other":
             Other other = new Other(name, price, power);
