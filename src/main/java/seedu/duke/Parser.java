@@ -31,7 +31,9 @@ public class Parser {
         this.mediaList = reviewList;
     }
 
+    
     public void processUserInput(String userInput) {
+        //@@author indraneelrp
         final String listCommand = "list";
         final String addCommand = "add";
         final String deleteCommand = "delete";
@@ -47,6 +49,7 @@ public class Parser {
         //@@author naz019
         assert words[0] != null : "words[0] is supposed to contain user command";
 
+        //@@author indraneelrp
         switch (words[0]) {
         case endCommand:
             break;
@@ -121,6 +124,7 @@ public class Parser {
         }
     }
 
+    //@@author indraneelrp
     public void executeList() {
         executor = new ListCommand(mediaList);
         String output = executor.execute();
@@ -128,6 +132,7 @@ public class Parser {
         logger.log(Level.INFO, "\n\tList command executed");
     }
 
+    //@@author indraneelrp
     public void addMedia(String[] fields, Integer spacingType) {
         String name = fields[1].substring(spacingType);
         double rating = Double.parseDouble(fields[2].substring(ratingSpacing));
