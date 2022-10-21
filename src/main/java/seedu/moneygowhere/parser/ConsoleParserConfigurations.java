@@ -314,6 +314,16 @@ public class ConsoleParserConfigurations {
     public static final String COMMAND_ADD_RECURRING_PAYMENT_ARG_DESCRIPTION_DESC = "Description";
     public static final boolean COMMAND_ADD_RECURRING_PAYMENT_ARG_DESCRIPTION_HAS_VAL = true;
     public static final boolean COMMAND_ADD_RECURRING_PAYMENT_ARG_DESCRIPTION_IS_MAND = false;
+    public static final String COMMAND_ADD_RECURRING_PAYMENT_ARG_CATEGORY = "c";
+    public static final String COMMAND_ADD_RECURRING_PAYMENT_ARG_CATEGORY_LONG = "category";
+    public static final String COMMAND_ADD_RECURRING_PAYMENT_ARG_CATEGORY_DESC = "Category";
+    public static final boolean COMMAND_ADD_RECURRING_PAYMENT_ARG_CATEGORY_HAS_VAL = true;
+    public static final boolean COMMAND_ADD_RECURRING_PAYMENT_ARG_CATEGORY_IS_MAND = false;
+    public static final String COMMAND_ADD_RECURRING_PAYMENT_ARG_CURRENCY = "x";
+    public static final String COMMAND_ADD_RECURRING_PAYMENT_ARG_CURRENCY_LONG = "currency";
+    public static final String COMMAND_ADD_RECURRING_PAYMENT_ARG_CURRENCY_DESC = "Currency";
+    public static final boolean COMMAND_ADD_RECURRING_PAYMENT_ARG_CURRENCY_HAS_VAL = true;
+    public static final boolean COMMAND_ADD_RECURRING_PAYMENT_ARG_CURRENCY_IS_MAND = false;
     public static final String COMMAND_ADD_RECURRING_PAYMENT_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS = ""
             + "Command Add-RecurringPayment does not have all of the required options.";
 
@@ -408,6 +418,16 @@ public class ConsoleParserConfigurations {
             true;
     public static final boolean COMMAND_EDIT_RECURRING_PAYMENT_ARG_DESCRIPTION_IS_MAND =
             false;
+    public static final String COMMAND_EDIT_RECURRING_PAYMENT_ARG_CATEGORY = "c";
+    public static final String COMMAND_EDIT_RECURRING_PAYMENT_ARG_CATEGORY_LONG = "category";
+    public static final String COMMAND_EDIT_RECURRING_PAYMENT_ARG_CATEGORY_DESC = "Category";
+    public static final boolean COMMAND_EDIT_RECURRING_PAYMENT_ARG_CATEGORY_HAS_VAL = true;
+    public static final boolean COMMAND_EDIT_RECURRING_PAYMENT_ARG_CATEGORY_IS_MAND = false;
+    public static final String COMMAND_EDIT_RECURRING_PAYMENT_ARG_CURRENCY = "x";
+    public static final String COMMAND_EDIT_RECURRING_PAYMENT_ARG_CURRENCY_LONG = "currency";
+    public static final String COMMAND_EDIT_RECURRING_PAYMENT_ARG_CURRENCY_DESC = "Currency";
+    public static final boolean COMMAND_EDIT_RECURRING_PAYMENT_ARG_CURRENCY_HAS_VAL = true;
+    public static final boolean COMMAND_EDIT_RECURRING_PAYMENT_ARG_CURRENCY_IS_MAND = false;
     public static final String COMMAND_EDIT_RECURRING_PAYMENT_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS = ""
             + "Command Edit-RecurringPayment does not have all of the required options.";
 
@@ -906,12 +926,28 @@ public class ConsoleParserConfigurations {
                 COMMAND_ADD_RECURRING_PAYMENT_ARG_DESCRIPTION_DESC
         );
         optionDescription.setRequired(COMMAND_ADD_RECURRING_PAYMENT_ARG_DESCRIPTION_IS_MAND);
+        Option optionCategory = new Option(
+                COMMAND_ADD_RECURRING_PAYMENT_ARG_CATEGORY,
+                COMMAND_ADD_RECURRING_PAYMENT_ARG_CATEGORY_LONG,
+                COMMAND_ADD_RECURRING_PAYMENT_ARG_CATEGORY_HAS_VAL,
+                COMMAND_ADD_RECURRING_PAYMENT_ARG_CATEGORY_DESC
+        );
+        optionCategory.setRequired(COMMAND_ADD_RECURRING_PAYMENT_ARG_CATEGORY_IS_MAND);
+        Option optionCurrency = new Option(
+                COMMAND_ADD_RECURRING_PAYMENT_ARG_CURRENCY,
+                COMMAND_ADD_RECURRING_PAYMENT_ARG_CURRENCY_LONG,
+                COMMAND_ADD_RECURRING_PAYMENT_ARG_CURRENCY_HAS_VAL,
+                COMMAND_ADD_RECURRING_PAYMENT_ARG_CURRENCY_DESC
+        );
+        optionCurrency.setRequired(COMMAND_ADD_RECURRING_PAYMENT_ARG_CURRENCY_IS_MAND);
 
         Options options = new Options();
         options.addOption(optionName);
         options.addOption(optionInterval);
         options.addOption(optionAmount);
         options.addOption(optionDescription);
+        options.addOption(optionCategory);
+        options.addOption(optionCurrency);
 
         return options;
     }
@@ -983,13 +1019,6 @@ public class ConsoleParserConfigurations {
                 COMMAND_EDIT_RECURRING_PAYMENT_ARG_INTERVAL_DESC
         );
         optionInterval.setRequired(COMMAND_EDIT_RECURRING_PAYMENT_ARG_INTERVAL_IS_MAND);
-        Option optionAmount = new Option(
-                COMMAND_EDIT_RECURRING_PAYMENT_ARG_AMOUNT,
-                COMMAND_EDIT_RECURRING_PAYMENT_ARG_AMOUNT_LONG,
-                COMMAND_EDIT_RECURRING_PAYMENT_ARG_AMOUNT_HAS_VAL,
-                COMMAND_EDIT_RECURRING_PAYMENT_ARG_AMOUNT_DESC
-        );
-        optionAmount.setRequired(COMMAND_EDIT_RECURRING_PAYMENT_ARG_AMOUNT_IS_MAND);
         Option optionDescription = new Option(
                 COMMAND_EDIT_RECURRING_PAYMENT_ARG_DESCRIPTION,
                 COMMAND_EDIT_RECURRING_PAYMENT_ARG_DESCRIPTION_LONG,
@@ -997,6 +1026,27 @@ public class ConsoleParserConfigurations {
                 COMMAND_EDIT_RECURRING_PAYMENT_ARG_DESCRIPTION_DESC
         );
         optionDescription.setRequired(COMMAND_EDIT_RECURRING_PAYMENT_ARG_DESCRIPTION_IS_MAND);
+        Option optionAmount = new Option(
+                COMMAND_EDIT_RECURRING_PAYMENT_ARG_AMOUNT,
+                COMMAND_EDIT_RECURRING_PAYMENT_ARG_AMOUNT_LONG,
+                COMMAND_EDIT_RECURRING_PAYMENT_ARG_AMOUNT_HAS_VAL,
+                COMMAND_EDIT_RECURRING_PAYMENT_ARG_AMOUNT_DESC
+        );
+        optionAmount.setRequired(COMMAND_EDIT_RECURRING_PAYMENT_ARG_AMOUNT_IS_MAND);
+        Option optionCategory = new Option(
+                COMMAND_EDIT_RECURRING_PAYMENT_ARG_CATEGORY,
+                COMMAND_EDIT_RECURRING_PAYMENT_ARG_CATEGORY_LONG,
+                COMMAND_EDIT_RECURRING_PAYMENT_ARG_CATEGORY_HAS_VAL,
+                COMMAND_EDIT_RECURRING_PAYMENT_ARG_CATEGORY_DESC
+        );
+        optionCategory.setRequired(COMMAND_EDIT_RECURRING_PAYMENT_ARG_CATEGORY_IS_MAND);
+        Option optionCurrency = new Option(
+                COMMAND_EDIT_RECURRING_PAYMENT_ARG_CURRENCY,
+                COMMAND_EDIT_RECURRING_PAYMENT_ARG_CURRENCY_LONG,
+                COMMAND_EDIT_RECURRING_PAYMENT_ARG_CURRENCY_HAS_VAL,
+                COMMAND_EDIT_RECURRING_PAYMENT_ARG_CURRENCY_DESC
+        );
+        optionCurrency.setRequired(COMMAND_EDIT_RECURRING_PAYMENT_ARG_CURRENCY_IS_MAND);
 
         Options options = new Options();
         options.addOption(optionRecurringPaymentIndex);
@@ -1004,6 +1054,8 @@ public class ConsoleParserConfigurations {
         options.addOption(optionInterval);
         options.addOption(optionDescription);
         options.addOption(optionAmount);
+        options.addOption(optionCategory);
+        options.addOption(optionCurrency);
 
         return options;
     }
