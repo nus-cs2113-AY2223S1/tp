@@ -196,8 +196,6 @@ public class LocalStorage {
             throw new LocalStorageLoadDataInputError();
         }
         Element element = (Element) node;
-        String name = element.getElementsByTagName(XML_EXPENSE_NAME_ELEMENT)
-                .item(0).getTextContent();
 
         String description = element.getElementsByTagName(XML_EXPENSE_DESCRIPTION_ELEMENT)
                 .item(0).getTextContent();
@@ -225,7 +223,10 @@ public class LocalStorage {
         LocalDateTime dateTime = LocalDateTime.parse(element
                 .getElementsByTagName(XML_EXPENSE_DATETIME_ELEMENT).item(0).getTextContent());
 
-        if(name.isEmpty() || name.trim().isEmpty() || currency.isEmpty() || currency.trim().isEmpty()) {
+        String name = element.getElementsByTagName(XML_EXPENSE_NAME_ELEMENT)
+                .item(0).getTextContent();
+
+        if (name.isEmpty() || name.trim().isEmpty() || currency.isEmpty() || currency.trim().isEmpty()) {
             throw new LocalStorageLoadDataInputError();
         }
 
@@ -266,7 +267,7 @@ public class LocalStorage {
         LocalDateTime dateTime = LocalDateTime.parse(element
                 .getElementsByTagName(XML_TARGET_DATETIME_ELEMENT).item(0).getTextContent());
 
-        if(name.isEmpty() || name.trim().isEmpty()
+        if (name.isEmpty() || name.trim().isEmpty()
                 || currencyCurrentAmount.isEmpty()
                 || currencyCurrentAmount.trim().isEmpty()
                 || currencyAmount.isEmpty()
@@ -312,7 +313,7 @@ public class LocalStorage {
         int interval = Integer.parseInt(element.getElementsByTagName(XML_RECURRING_PAYMENT_INTERVAL_ELEMENT)
                 .item(0).getTextContent());
 
-        if(name.isEmpty() || name.trim().isEmpty() || currency.isEmpty() || currency.trim().isEmpty()) {
+        if (name.isEmpty() || name.trim().isEmpty() || currency.isEmpty() || currency.trim().isEmpty()) {
             throw new LocalStorageLoadDataInputError();
         }
 
@@ -348,7 +349,7 @@ public class LocalStorage {
         String currency = amountNodeList.item(0).getAttributes()
                 .getNamedItem(XML_EXPENSE_AMOUNT_CURRENCY_ATTRIBUTE).getTextContent();
 
-        if(name.isEmpty() || name.trim().isEmpty() || currency.isEmpty() || currency.trim().isEmpty()) {
+        if (name.isEmpty() || name.trim().isEmpty() || currency.isEmpty() || currency.trim().isEmpty()) {
             throw new LocalStorageLoadDataInputError();
         }
 
