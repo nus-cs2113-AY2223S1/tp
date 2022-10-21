@@ -1,8 +1,8 @@
 package computercomponentchooser.components;
 
 public class Case extends Component {
-    private String formFactor;
-    private String expansionSlots;
+    protected String formFactor;
+    protected String expansionSlots;
 
     public Case(String name, String price, String power, String formFactor, String expansionSlots) {
         this.name = name;

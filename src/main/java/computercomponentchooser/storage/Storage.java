@@ -258,7 +258,7 @@ public class Storage {
 
     private static void loadMotherboard(String line, String name, String price, String power, Build build) {
         Motherboard motherboard = new Motherboard(name, price, power, getParameter(line, 4),
-                getParameter(line, 5), getParameter(line, 6));
+                getParameter(line, 5), getParameter(line, 6), getParameter(line, 7));
         build.addComponent("motherboard", motherboard);
     }
 

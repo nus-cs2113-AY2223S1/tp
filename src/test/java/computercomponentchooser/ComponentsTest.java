@@ -19,7 +19,7 @@ public class ComponentsTest {
     public void setUp() {
         cpu1 = new Cpu("cpu1", "123", "12", "1", "4.0");
         gpu1 = new Gpu("gpu1", "456", "45", "4","5");
-        mobo1 = new Motherboard("mobo1", "123", "12", "1", "2", "2");
+        mobo1 = new Motherboard("mobo1", "123", "12", "1", "Full ATX", "2", "2");
     }
 
     @Test

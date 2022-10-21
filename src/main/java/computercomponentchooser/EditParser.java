@@ -106,7 +106,7 @@ public class EditParser {
             break;
         case "motherboard":
             Motherboard motherboard = new Motherboard(name, price, power, getParameter(line, 5),
-                    getParameter(line, 6), getParameter(line, 7));
+                    getParameter(line, 6), getParameter(line, 7), getParameter(line, 8));
             editBuild.addComponent(type, motherboard);
             break;
         case "powersupply":

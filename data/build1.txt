@@ -1,4 +1,2 @@
-powersupply/psu/100/860
-cpu/Intel/500/130/lga1511/3.8
-motherboard/ROG/960/120/lga1511/4/4
-other/RazerMouse/300/3
+motherboard/ASUS ROG/600/130/lga1511/Full ATX/4/4
+case/Cooler Master/400/0/full ATX/2
