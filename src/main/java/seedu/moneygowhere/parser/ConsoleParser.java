@@ -1276,7 +1276,11 @@ public class ConsoleParser {
                 && options.hasLongOption(
                 ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_AMOUNT_LONG)
                 && options.hasLongOption(
-                ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_DESCRIPTION_LONG);
+                ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_DESCRIPTION_LONG)
+                && options.hasLongOption(
+                ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_CATEGORY_LONG)
+                && options.hasLongOption(
+                ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_CURRENCY_LONG);
 
         assert hasAllCliOptions :
                 ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS;
@@ -1311,25 +1315,37 @@ public class ConsoleParser {
             String name = commandLine.getOptionValue(
                     ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_NAME_LONG
             );
-            String amountStr = commandLine.getOptionValue(
-                    ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_AMOUNT_LONG
-            );
             String intervalStr = commandLine.getOptionValue(
                     ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_INTERVAL_LONG
             );
+            String amountStr = commandLine.getOptionValue(
+                    ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_AMOUNT_LONG
+            );
             String description = commandLine.getOptionValue(
                     ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_DESCRIPTION_LONG
+            );
+            String category = commandLine.getOptionValue(
+                    ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_CATEGORY_LONG
+            );
+            String currency = commandLine.getOptionValue(
+                    ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_CURRENCY_LONG
             );
 
             BigDecimal amount = new BigDecimal(amountStr);
 
             int interval = Integer.parseInt(intervalStr);
 
+            if (currency == null) {
+                currency = "SGD";
+            }
+
             return new ConsoleCommandAddRecurringPayment(
                     name,
                     interval,
                     description,
-                    amount
+                    amount,
+                    category,
+                    currency
             );
         } catch (DateTimeParseException | NumberFormatException exception) {
             throw new ConsoleParserCommandAddRecurringPaymentInvalidException(exception);
