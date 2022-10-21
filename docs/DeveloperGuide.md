@@ -125,7 +125,7 @@ Step 4. The user executes `employee remove i/1` command to remove the employee w
 
 The following sequence diagram shows how the employee management works:
 
-![image-20221021211809531](C:\Users\13757\AppData\Roaming\Typora\typora-user-images\image-20221021211809531.png)
+https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/EmployeeManagement.png
 
 ### Design considerations:
 
