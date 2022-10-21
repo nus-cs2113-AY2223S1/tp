@@ -10,6 +10,9 @@ import seedu.duke.exercise.ExerciseList;
 import seedu.duke.food.FoodList;
 import seedu.duke.storage.Storage;
 
+import java.io.IOException;
+import java.util.logging.Logger;
+
 public class Duke {
     /**
      * Main entry-point for the java.duke.Duke application.
@@ -23,6 +26,7 @@ public class Duke {
 
     private static FoodList foodList;
     public static boolean isProgramFinished = false;
+    private static final Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     public Duke() {
         ui = new Ui();
@@ -42,10 +46,13 @@ public class Duke {
         }
         ui.line();
         try {
+            TrackNFitLogger.setUp();
             Command loadCommand = new LoadCommand();
             loadCommand.setData(ui, storage, biometrics, exerciseList, foodList);
             loadCommand.execute();
         } catch (IllegalValueException e) {
+            ui.output(e.getMessage());
+        } catch (IOException e) {
             ui.output(e.getMessage());
         }
         ui.line();
@@ -60,6 +67,7 @@ public class Duke {
             ui.output(e.getMessage());
         } finally {
             ui.line();
+            LOGGER.info("Stopping duke");
         }
     }
 

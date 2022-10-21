@@ -14,6 +14,8 @@ import seedu.duke.food.FoodList;
 import seedu.duke.storage.Storage;
 
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class AddCommand extends Command {
     private final boolean isMarkDone;
@@ -30,6 +32,7 @@ public class AddCommand extends Command {
     private FoodList foodList;
 
     private Biometrics biometrics;
+    private static final Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     public AddCommand(String arguments, boolean toDisplay, boolean isMarkDone) {
         this.arguments = arguments;
@@ -61,6 +64,7 @@ public class AddCommand extends Command {
 
     private void addStrengthExercise(String[] argumentList) throws IllegalValueException {
         if (argumentList.length != 5) {
+            LOGGER.warning("Invalid arguments length for add strength exercise");
             throw new IllegalValueException("Invalid add strength exercise command");
         }
         String description = argumentList[1];
@@ -80,6 +84,7 @@ public class AddCommand extends Command {
                 ui.output(" This strength exercise is added to the exercise list successfully");
             }
         } catch (NumberFormatException e) {
+            LOGGER.log(Level.WARNING, "Error converting string to integer", e);
             throw new IllegalValueException("Set, repetition and calories must be integers");
         }
     }

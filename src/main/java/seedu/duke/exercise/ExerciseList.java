@@ -61,4 +61,8 @@ public class ExerciseList {
         completedExerciseList.remove(index);
         currentExerciseList.add(exercise);
     }
+
+    public void removeCurrentExercise(int index) {
+        currentExerciseList.remove(index);
+    }
 }
