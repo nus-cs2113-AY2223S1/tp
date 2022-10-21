@@ -6,12 +6,15 @@ import seedu.duke.utils.State;
 import seedu.duke.utils.Storage;
 import seedu.duke.utils.Ui;
 
+import java.util.List;
+
 /**
  * Delete module to state by module code, updates storage and displays execution through ui.
  */
 
 public class DeleteModuleCommand extends Command {
     Module module;
+    private boolean successful;
 
     public static final String COMMAND_WORD = "delete";
 
@@ -19,6 +22,7 @@ public class DeleteModuleCommand extends Command {
         super(input);
         String moduleCode = input[1];
         this.module = Module.get(moduleCode.toUpperCase());
+        this.successful = false;
     }
 
     @Override
@@ -27,7 +31,13 @@ public class DeleteModuleCommand extends Command {
 
         SelectedModule selectedModule = new SelectedModule(module, semester);
 
-        state.removeSelectedModule(selectedModule);
+        List<SelectedModule> currentSelectedModules = state.getSelectedModulesList();
+
+        if (currentSelectedModules.contains(selectedModule)) {
+            state.removeSelectedModule(selectedModule);
+            successful = true;
+        }
+
         ui.addMessage(getExecutionMessage());
         ui.displayUi();
     }
@@ -38,7 +48,13 @@ public class DeleteModuleCommand extends Command {
     }
 
     public String getExecutionMessage() {
-        return module.moduleCode + " has been deleted";
+        String outputMessage;
+        if (successful) {
+            outputMessage = module.moduleCode + " has been deleted!";
+        } else {
+            outputMessage = module.moduleCode + " does not exist in current list of selected list modules!";
+        }
+        return outputMessage;
     }
 
 }
