@@ -3,6 +3,9 @@ package computercomponentchooser;
 import computercomponentchooser.exceptions.UnknownCommandException;
 import computercomponentchooser.exceptions.DuplicateBuildException;
 import computercomponentchooser.exceptions.UnlistedBuildException;
+import computercomponentchooser.export.ExportText;
+
+import java.io.IOException;
 
 import static computercomponentchooser.ComputerComponentChooser.storage;
 
@@ -54,10 +57,13 @@ public class Parser {
             case "back":
                 mainParseBack();
                 break;
+            case "export":
+                mainParseExport();
+                break;
             default:
                 throw new UnknownCommandException();
             }
-        } catch (UnknownCommandException | DuplicateBuildException | UnlistedBuildException e) {
+        } catch (UnknownCommandException | DuplicateBuildException | UnlistedBuildException  | IOException e) {
             System.out.println(e.getMessage());
             Ui.printLine();
         }
@@ -110,9 +116,16 @@ public class Parser {
         Ui.printLine();
     }
 
-    private static void mainParseBack() {
+    private void mainParseBack() {
         Ui.printLine();
         System.out.println("Back to main mode.");
+        Ui.printLine();
+    }
+
+    private void mainParseExport() throws IOException {
+        Ui.printLine();
+        System.out.println("Exporting builds...");
+        ExportText.exportAllBuildsText(buildManager);
         Ui.printLine();
     }
 }

@@ -10,6 +10,7 @@ import computercomponentchooser.components.PowerSupply;
 import computercomponentchooser.components.Other;
 
 import computercomponentchooser.exceptions.UnknownCommandException;
+import computercomponentchooser.export.ExportText;
 
 import static computercomponentchooser.ComputerComponentChooser.storage;
 
@@ -72,6 +73,9 @@ public class EditParser {
                 parseInfo(editBuild);
                 break;
             case "back":
+                break;
+            case "export":
+                parseExport(editBuild);
                 break;
             default:
                 throw new UnknownCommandException();
@@ -186,6 +190,17 @@ public class EditParser {
         Ui.printLine();
         System.out.println("Build Info:");
         System.out.print(editBuild.getBuildInfo());
+        Ui.printLine();
+    }
+
+    public void parseExport(Build editBuild) {
+        Ui.printLine();
+        System.out.println("Exporting build to text file...");
+        try {
+            ExportText.exportBuildText(editBuild);
+        } catch (Exception e) {
+            System.out.println("Error exporting build");
+        }
         Ui.printLine();
     }
 }
