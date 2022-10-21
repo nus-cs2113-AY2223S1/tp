@@ -304,7 +304,7 @@ public class LocalStorage {
         if (category.isEmpty() || category.trim().isEmpty()) {
             category = null;
         }
-        
+
         return new RecurringPayment(name, interval, description, amount, category, currency);
     }
 
@@ -322,14 +322,23 @@ public class LocalStorage {
         Element element = (Element) node;
         String name = element.getElementsByTagName(XML_INCOME_NAME_ELEMENT)
                 .item(0).getTextContent();
+        assert name != null : "There must be a name";
+
         LocalDateTime dateTime = LocalDateTime.parse(element
                 .getElementsByTagName(XML_INCOME_DATETIME_ELEMENT).item(0).getTextContent());
+
         String description = element.getElementsByTagName(XML_INCOME_DESCRIPTION_ELEMENT)
                 .item(0).getTextContent();
+        if (description.isEmpty() || description.trim().isEmpty()) {
+            description = null;
+        }
+
         NodeList amountNodeList = element.getElementsByTagName(XML_INCOME_AMOUNT_ELEMENT);
         BigDecimal amount = new BigDecimal(amountNodeList.item(0).getTextContent());
         String currency = amountNodeList.item(0).getAttributes()
                 .getNamedItem(XML_EXPENSE_AMOUNT_CURRENCY_ATTRIBUTE).getTextContent();
+        assert currency != null : "There must be a currency for amount";
+
         return new Income(name, dateTime, description, amount);
     }
 
