@@ -11,10 +11,6 @@ import java.util.List;
 import seedu.duke.Timetable;
 import seedu.duke.module.Module;
 import seedu.duke.module.lessons.Lesson;
-import seedu.duke.module.lessons.Lecture;
-import seedu.duke.module.lessons.Tutorial;
-import seedu.duke.module.lessons.Laboratory;
-import seedu.duke.module.lessons.Others;
 
 /*
  * ### Public Functions: ###
@@ -123,7 +119,8 @@ public class AttendingManager {
         try {
             FileWriter myWriter = new FileWriter(dataDirectoryPath + "/AttendingData.txt", true);
             String line = moduleCode + "|" + lesson.getLessonType() + "|" + lesson.getDay()
-                    + "|" + lesson.getStartTime() + "|" + lesson.getEndTime();
+                    + "|" + lesson.getStartTime() + "|" + lesson.getEndTime()
+                    + "|" + lesson.getClassNumber();
             myWriter.write(line + "\n");
             attendingDataList.add(line);
             myWriter.close();
@@ -144,7 +141,8 @@ public class AttendingManager {
             String[] currLineList = currLine.split("\\|");
             if (currLineList[0].equals(moduleCode) && currLineList[1].equals(lessonToSet.getLessonType())) {
                 String newLine = moduleCode + "|" + lessonToSet.getLessonType() + "|" + lessonToSet.getDay()
-                        + "|" + lessonToSet.getStartTime() + "|" + lessonToSet.getEndTime();
+                        + "|" + lessonToSet.getStartTime() + "|" + lessonToSet.getEndTime()
+                        + "|" + lessonToSet.getClassNumber();
                 attendingDataList.set(i, newLine);
                 break;
             }
@@ -175,6 +173,7 @@ public class AttendingManager {
             String lessonDay = currLine[2];
             String lessonStart = currLine[3];
             String lessonEnd = currLine[4];
+            String classNumber = currLine[5];
 
             if (!currLine[0].equals(moduleCode)) {
                 moduleIndex++;
@@ -184,25 +183,8 @@ public class AttendingManager {
                 currModule = moduleList.get(moduleIndex);
                 moduleCode = currModule.getModuleCode();
             }
-
-            switch (lessonType) {
-            case "Lecture":
-                Lecture newLecture = new Lecture(lessonDay, lessonStart, lessonEnd, lessonType);
-                currModule.replaceAttending(newLecture);
-                break;
-            case "Tutorial":
-                Tutorial newTutorial = new Tutorial(lessonDay, lessonStart, lessonEnd, lessonType);
-                currModule.replaceAttending(newTutorial);
-                break;
-            case "Laboratory":
-                Laboratory newLaboratory = new Laboratory(lessonDay, lessonStart, lessonEnd, lessonType);
-                currModule.replaceAttending(newLaboratory);
-                break;
-            default:
-                Others newOthers = new Others(lessonDay, lessonStart, lessonEnd, lessonType);
-                currModule.replaceAttending(newOthers);
-                break;
-            }
+            Lesson newLesson = new Lesson(lessonDay, lessonStart, lessonEnd, lessonType, classNumber);
+            currModule.replaceAttending(newLesson);
         }
     }
 

@@ -1,13 +1,10 @@
 package seedu.duke.module;
 
 import seedu.duke.module.lessons.Lesson;
-import seedu.duke.module.lessons.Lecture;
-import seedu.duke.module.lessons.Tutorial;
 import seedu.duke.data.AttendingManager;
-import seedu.duke.module.lessons.Laboratory;
-import seedu.duke.module.lessons.Others;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -18,6 +15,7 @@ public class Module {
     private String moduleDescription;
     private List<Lesson> lessons;
     private List<Lesson> attending;
+    private HashMap<String, ArrayList<Lesson>> classifiedLessons;
 
     public String getModuleName() {
         return moduleName;
@@ -45,6 +43,7 @@ public class Module {
         this.moduleDescription = moduleDescription;
         this.lessons = lessons;
         this.attending = matchLessonTypes(lessons);
+        this.classifiedLessons = classifyLessons(lessons);
     }
 
     private List<Lesson> matchLessonTypes(List<Lesson> lessons) {
@@ -61,35 +60,12 @@ public class Module {
         String day = "Undetermined Day";
         String startTime = "Undetermined";
         String endTime = "Undetermined";
-        switch (lesson.getLessonType()) {
-        case "Lecture":
-            Lecture tempLecture = new Lecture(day, startTime, endTime, "Lecture");
-            temp.add(tempLecture);
-            if (!AttendingManager.attendingExists(tempLecture, moduleCode)) {
-                AttendingManager.addAttending(tempLecture, this);
-            }
-            break;
-        case "Tutorial":
-            Tutorial tempTutorial = new Tutorial(day, startTime, endTime, "Tutorial");
-            temp.add(tempTutorial);
-            if (!AttendingManager.attendingExists(tempTutorial, moduleCode)) {
-                AttendingManager.addAttending(tempTutorial, this);
-            }
-            break;
-        case "Laboratory":
-            Laboratory tempLaboratory = new Laboratory(day, startTime, endTime, "Laboratory");
-            temp.add(tempLaboratory);
-            if (!AttendingManager.attendingExists(tempLaboratory, moduleCode)) {
-                AttendingManager.addAttending(tempLaboratory, this);
-            }
-            break;
-        default:
-            Others tempOthers = new Others(day, startTime, endTime, "Others");
-            temp.add(tempOthers);
-            if (!AttendingManager.attendingExists(tempOthers, moduleCode)) {
-                AttendingManager.addAttending(tempOthers, this);
-            }
-            break;
+        String lessonType = lesson.getLessonType();
+        String classNumber = lesson.getClassNumber();
+        Lesson tempLesson = new Lesson(day, startTime, endTime, lessonType, classNumber);
+        temp.add(tempLesson);
+        if (!AttendingManager.attendingExists(tempLesson, moduleCode)) {
+            AttendingManager.addAttending(tempLesson, this);
         }
     }
 
@@ -205,5 +181,18 @@ public class Module {
         }
         attending.set(indexToSet, newLesson);
         AttendingManager.setAttending(newLesson, moduleCode);
+    }
+
+    private HashMap<String, ArrayList<Lesson>> classifyLessons(List<Lesson> lessons) {
+        HashMap<String, ArrayList<Lesson>> classifiedLessons = new HashMap<String, ArrayList<Lesson>>();
+        for (Lesson lesson : lessons) {
+            if(!classifiedLessons.containsKey(lesson.getLessonType())) {
+                classifiedLessons.put(lesson.getLessonType(), new ArrayList<Lesson>());
+                classifiedLessons.get(lesson.getLessonType()).add(lesson);
+            } else {
+                classifiedLessons.get(lesson.getLessonType()).add(lesson);
+            }
+        }
+        return classifiedLessons;
     }
 }
