@@ -1,11 +1,13 @@
 package computercomponentchooser;
 
 import computercomponentchooser.components.Cpu;
-import computercomponentchooser.components.Memory;
 import computercomponentchooser.components.Motherboard;
-import computercomponentchooser.components.PowerSupply;
-import computercomponentchooser.components.Gpu;
 import computercomponentchooser.components.Drive;
+import computercomponentchooser.components.Gpu;
+import computercomponentchooser.components.Memory;
+import computercomponentchooser.components.Monitor;
+import computercomponentchooser.components.PowerSupply;
+
 import computercomponentchooser.exceptions.UnknownCommandException;
 
 import static computercomponentchooser.ComputerComponentChooser.storage;
@@ -113,6 +115,11 @@ public class EditParser {
             Drive drive = new Drive(name, price, power, getParameter(line, 5),
                     getParameter(line, 6));
             editBuild.addComponent(type, drive);
+            break;
+        case "monitor":
+            Monitor monitor = new Monitor(name, price, power, getParameter(line, 5),
+                    getParameter(line, 6), getParameter(line, 7));
+            editBuild.addComponent(type, monitor);
             break;
         default:
             break;

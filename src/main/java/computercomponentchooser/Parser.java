@@ -17,7 +17,6 @@ public class Parser {
         this.buildManager = buildManager;
     }
 
-
     private static String getParameter(String line, int mode) {
         String[] lineSplit = line.split(" ", 2);
         return lineSplit[mode];
@@ -35,68 +34,85 @@ public class Parser {
 
     public void parse(String line) {
         String command = getParameter(line, COMMAND_PARAMETER);
-        Build newBuild;
-        String name;
         try {
             switch (command) {
             case "bye":
             case "edit":
                 break;
             case "list":
-                Ui.printLine();
-                System.out.println("Your current builds:");
-                System.out.print(buildManager.toString());
-                Ui.printLine();
+                mainParseList();
                 break;
             case "add":
-                name = getParameter(line, NAME_PARAMETER);
-                newBuild = new Build(name);
-                buildManager.addBuild(newBuild);
-                Ui.printLine();
-                System.out.println("You have added " + name);
-                Ui.printLine();
-                try {
-                    storage.saveBuild(buildManager);
-                } catch (Exception e) {
-                    System.out.println("Error saving builds");
-                }
+                mainParseAdd(line);
                 break;
             case "view":
-                name = getParameter(line, NAME_PARAMETER);
-                Ui.printLine();
-                System.out.print(buildManager.getBuild(name).toString());
-                Ui.printLine();
+                mainParseView(line);
                 break;
             case "delete":
-                name = getParameter(line, NAME_PARAMETER);
-                newBuild = new Build(name);
-                try {
-                    storage.deleteBuild(name, buildManager);
-                } catch (Exception e) {
-                    System.out.println("Error saving builds");
-                }
-                buildManager.deleteBuild(name, newBuild);
-                Ui.printLine();
-                System.out.println("You have removed " + name);
-                Ui.printLine();
+                mainParseDelete(line);
                 break;
             case "back":
-                Ui.printLine();
-                System.out.println("Back to main mode.");
-                Ui.printLine();
+                mainParseBack();
                 break;
             default:
                 throw new UnknownCommandException();
             }
-        } catch (UnknownCommandException e) {
-            System.out.println(e.getMessage());
-            Ui.printLine();
-        } catch (DuplicateBuildException e) {
-            System.out.println(e.getMessage());
-            Ui.printLine();
-        } catch (UnlistedBuildException e) {
+        } catch (UnknownCommandException | DuplicateBuildException | UnlistedBuildException e) {
             System.out.println(e.getMessage());
             Ui.printLine();
         }
+    }
+
+    private void mainParseAdd(String line) throws DuplicateBuildException {
+        Build newBuild;
+        String name;
+        name = getParameter(line, NAME_PARAMETER);
+        newBuild = new Build(name);
+        buildManager.addBuild(newBuild);
+        Ui.printLine();
+        System.out.println("You have added " + name);
+        Ui.printLine();
+        try {
+            storage.saveBuild(buildManager);
+        } catch (Exception e) {
+            System.out.println("Error saving builds");
+        }
+    }
+
+    private void mainParseView(String line) {
+        String name;
+        name = getParameter(line, NAME_PARAMETER);
+        Ui.printLine();
+        System.out.print(buildManager.getBuild(name).toString());
+        Ui.printLine();
+    }
+
+    private void mainParseDelete(String line) throws UnlistedBuildException {
+        String name;
+        Build newBuild;
+        name = getParameter(line, NAME_PARAMETER);
+        newBuild = new Build(name);
+        try {
+            storage.deleteBuild(name, buildManager);
+        } catch (Exception e) {
+            System.out.println("Error saving builds");
+        }
+        buildManager.deleteBuild(name, newBuild);
+        Ui.printLine();
+        System.out.println("You have removed " + name);
+        Ui.printLine();
+    }
+
+    private void mainParseList() {
+        Ui.printLine();
+        System.out.println("Your current builds:");
+        System.out.print(buildManager.toString());
+        Ui.printLine();
+    }
+
+    private static void mainParseBack() {
+        Ui.printLine();
+        System.out.println("Back to main mode.");
+        Ui.printLine();
     }
 }

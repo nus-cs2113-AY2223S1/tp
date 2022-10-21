@@ -9,7 +9,7 @@ import computercomponentchooser.components.Motherboard;
 import computercomponentchooser.components.Drive;
 import computercomponentchooser.components.Memory;
 import computercomponentchooser.components.PowerSupply;
-
+import computercomponentchooser.components.Monitor;
 
 import computercomponentchooser.exceptions.DuplicateBuildException;
 
@@ -201,6 +201,11 @@ public class Storage {
                         Drive drive = new Drive(name, price, power, getParameter(line, 4),
                                 getParameter(line, 5));
                         build.addComponent(type, drive);
+                        break;
+                    case "monitor":
+                        Monitor monitor = new Monitor(name, price, power, getParameter(line, 4),
+                                getParameter(line, 5), getParameter(line, 6));
+                        build.addComponent(type, monitor);
                         break;
                     default:
                         break;
