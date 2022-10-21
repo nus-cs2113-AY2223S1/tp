@@ -299,7 +299,7 @@ public class LocalStorage {
                 .getNamedItem(XML_RECURRING_PAYMENT_CURRENCY_ATTRIBUTE).getTextContent();
         assert !(currency.isEmpty() || currency.trim().isEmpty()) : "There must be a currency for amount";
 
-        String category = element.getElementsByTagName(XML_EXPENSE_CATEGORY_ELEMENT)
+        String category = element.getElementsByTagName(XML_RECURRING_PAYMENT_CATEGORY_ELEMENT)
                 .item(0).getTextContent();
         if (category.isEmpty() || category.trim().isEmpty()) {
             category = null;
