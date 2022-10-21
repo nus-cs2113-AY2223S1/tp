@@ -1,0 +1,27 @@
+@startuml
+!include style.puml
+
+box Service LOGIC_COLOR_T1
+participant UiManager LOGIC_COLOR
+participant ServiceParser LOGIC_COLOR
+participant AddServiceCommand LOGIC_COLOR
+participant ServiceList LOGIC_COLOR
+end box
+
+[-> UiManager : readCommand("service add d/Haircut")
+activate UiManager
+
+UiManager -> ServiceParser : execute("add d/Haircut")
+activate ServiceParser
+
+ServiceParser -> AddServiceCommand : prepareAddService(" d/Haircut")
+activate AddServiceCommand
+
+AddServiceCommand -> ServiceList : addService("Haircut")
+activate ServiceList
+
+ServiceList --> AddServiceCommand
+AddServiceCommand --> ServiceParser
+ServiceParser --> UiManager
+
+@enduml
