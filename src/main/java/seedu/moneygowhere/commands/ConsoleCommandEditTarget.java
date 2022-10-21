@@ -4,27 +4,38 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 /**
- * Stores the add-target command and its arguments.
+ * Stores the edit-target command and its arguments.
  */
-@SuppressWarnings("FieldMayBeFinal")
-public class ConsoleCommandAddTarget extends ConsoleCommand {
+@SuppressWarnings("unused")
+public class ConsoleCommandEditTarget extends ConsoleCommand {
+    private int targetIndex;
     private String name;
     private LocalDateTime dateTime;
     private String description;
     private BigDecimal amount;
     private BigDecimal currentAmount;
 
-    public ConsoleCommandAddTarget(
+    public ConsoleCommandEditTarget(
+            int targetIndex,
             String name,
             LocalDateTime dateTime,
             String description,
             BigDecimal amount,
             BigDecimal currentAmount) {
+        this.targetIndex = targetIndex;
         this.name = name;
         this.dateTime = dateTime;
         this.description = description;
         this.amount = amount;
         this.currentAmount = currentAmount;
+    }
+
+    public int getTargetIndex() {
+        return targetIndex;
+    }
+
+    public void setTargetIndex(int targetIndex) {
+        this.targetIndex = targetIndex;
     }
 
     public String getName() {

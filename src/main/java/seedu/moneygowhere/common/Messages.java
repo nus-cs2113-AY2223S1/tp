@@ -59,6 +59,8 @@ public class Messages {
             + "File does not exist or Path is wrong :(";
     public static final String LOCAL_STORAGE_ERROR_WRITING_DATA = ""
             + "There is an error in writing data to save file.";
+    public static final String LOCAL_STORAGE_MERGE_EXTERNAL_DATA_SUCCESSFUL = ""
+            + "External File loaded successfully :)";
 
     /**
      * Defines messages for {@link seedu.moneygowhere.currency.CurrencyApi }.
@@ -291,6 +293,79 @@ public class Messages {
             + CONSOLE_COMMAND_ADD_TARGET_SYNTAX;
 
     /**
+     * Defines messages for console command View-Target.
+     */
+    public static final String CONSOLE_COMMAND_VIEW_TARGET_SYNTAX = ""
+            + "SYNTAX: "
+            + ConsoleParserConfigurations.COMMAND_VIEW_TARGET
+            + " [-"
+            + ConsoleParserConfigurations.COMMAND_VIEW_TARGET_ARG_TARGET_INDEX
+            + " "
+            + ConsoleParserConfigurations.COMMAND_VIEW_TARGET_ARG_TARGET_INDEX_LONG.toUpperCase()
+            + "]";
+
+    public static final String CONSOLE_ERROR_COMMAND_VIEW_TARGET_INVALID = ""
+            + "The arguments entered are invalid. "
+            + CONSOLE_COMMAND_VIEW_TARGET_SYNTAX;
+
+    public static final String COMMAND_VIEW_TARGET_EMPTY_LIST = ""
+            + "Your list of targets is empty. ";
+
+    /**
+     * Defines messages for console command Delete-Target.
+     */
+    public static final String CONSOLE_COMMAND_DELETE_TARGET_SYNTAX = ""
+            + "SYNTAX: "
+            + ConsoleParserConfigurations.COMMAND_DELETE_TARGET
+            + " -"
+            + ConsoleParserConfigurations.COMMAND_DELETE_TARGET_ARG_TARGET_INDEX
+            + " "
+            + ConsoleParserConfigurations.COMMAND_DELETE_TARGET_ARG_TARGET_INDEX_LONG.toUpperCase();
+    public static final String CONSOLE_MESSAGE_COMMAND_DELETE_TARGET_SUCCESS = ""
+            + "The target was deleted successfully.";
+    public static final String CONSOLE_ERROR_COMMAND_DELETE_TARGET_INVALID = ""
+            + "The arguments entered are invalid. "
+            + CONSOLE_COMMAND_DELETE_TARGET_SYNTAX;
+
+
+    /**
+     * Defines messages for console command Edit-Target.
+     */
+    public static final String CONSOLE_COMMAND_EDIT_TARGET_SYNTAX = ""
+            + "SYNTAX: "
+            + ConsoleParserConfigurations.COMMAND_EDIT_TARGET
+            + " -"
+            + ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_TARGET_INDEX
+            + " "
+            + ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_TARGET_INDEX_LONG.toUpperCase()
+            + " [-"
+            + ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_NAME
+            + " "
+            + ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_NAME_LONG.toUpperCase()
+            + "] [-"
+            + ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_DATE_TIME
+            + " "
+            + Configurations.CONSOLE_INTERFACE_DATE_TIME_INPUT_FORMAT
+            + "] [-"
+            + ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_DESCRIPTION
+            + " "
+            + ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_DESCRIPTION_LONG.toUpperCase()
+            + "] [-"
+            + ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_AMOUNT
+            + " "
+            + ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_AMOUNT_LONG.toUpperCase()
+            + "] [-"
+            + ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_CURRENT_AMOUNT
+            + " "
+            + ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_CURRENT_AMOUNT_LONG.toUpperCase()
+            + "]";
+    public static final String CONSOLE_MESSAGE_COMMAND_EDIT_TARGET_SUCCESS = ""
+            + "The target was edited successfully.";
+    public static final String CONSOLE_ERROR_COMMAND_EDIT_TARGET_INVALID = ""
+            + "The arguments entered are invalid. "
+            + CONSOLE_COMMAND_EDIT_TARGET_SYNTAX;
+
+    /**
      * Defines messages for console command Add-Income.
      */
     public static final String CONSOLE_COMMAND_ADD_INCOME_SYNTAX = ""
@@ -364,4 +439,19 @@ public class Messages {
     public static final String CONSOLE_ERROR_COMMAND_VIEW_RECURRING_PAYMENT_INVALID = ""
             + "The arguments entered are invalid. "
             + CONSOLE_COMMAND_VIEW_RECURRING_PAYMENT_SYNTAX;
+
+    /**
+     * Defines messages for console command Merge-File.
+     */
+    public static final String CONSOLE_COMMAND_MERGE_EXTERNAL_FILE_SYNTAX = ""
+            + "SYNTAX: "
+            + ConsoleParserConfigurations.COMMAND_MERGE_EXTERNAL_FILE
+            + " -"
+            + ConsoleParserConfigurations.COMMAND_MERGE_EXTERNAL_FILE_ARG_MERGE_EXTERNAL_FILE_PATH
+            + " "
+            + ConsoleParserConfigurations.COMMAND_MERGE_EXTERNAL_FILE_ARG_MERGE_EXTERNAL_FILE_PATH_LONG.toUpperCase()
+            + "";
+    public static final String CONSOLE_ERROR_COMMAND_MERGE_EXTERNAL_FILE_INVALID = ""
+            + "The arguments entered are invalid. "
+            + CONSOLE_COMMAND_MERGE_EXTERNAL_FILE_SYNTAX;
 }
