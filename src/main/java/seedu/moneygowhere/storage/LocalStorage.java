@@ -34,10 +34,6 @@ import java.util.ArrayList;
 import static seedu.moneygowhere.common.Configurations.LOCAL_STORAGE_DATA_FILE_PATH;
 import static seedu.moneygowhere.common.Configurations.LOCAL_STORAGE_DIRECTORY;
 import static seedu.moneygowhere.storage.LocalStorageConfigurations.DEFAULT_CURRENCY;
-import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_ROOT;
-import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_SORTCONFIG_ELEMENT;
-import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_SORTCONFIG_ORDER_ATTRIBUTE;
-import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_SORTCONFIG_TYPE_ATTRIBUTE;
 import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_EXPENSE_AMOUNT_CURRENCY_ATTRIBUTE;
 import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_EXPENSE_AMOUNT_ELEMENT;
 import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_EXPENSE_CATEGORY_ELEMENT;
@@ -47,28 +43,32 @@ import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_EXPENSE_
 import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_EXPENSE_ID_ATTRIBUTE;
 import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_EXPENSE_NAME_ELEMENT;
 import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_EXPENSE_REMARKS_ELEMENT;
-import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_TARGET_ELEMENT;
-import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_TARGET_NAME_ELEMENT;
-import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_TARGET_DATETIME_ELEMENT;
-import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_TARGET_DESCRIPTION_ELEMENT;
-import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_TARGET_AMOUNT_ELEMENT;
-import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_TARGET_CURRENT_AMOUNT_ELEMENT;
-import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_TARGET_CURRENCY_ATTRIBUTE;
-import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_TARGET_ID_ATTRIBUTE;
-import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_RECURRING_PAYMENT_ELEMENT;
-import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_RECURRING_PAYMENT_ID_ATTRIBUTE;
-import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_RECURRING_PAYMENT_NAME_ELEMENT;
-import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_RECURRING_PAYMENT_INTERVAL_ELEMENT;
-import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_RECURRING_PAYMENT_DESCRIPTION_ELEMENT;
-import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_RECURRING_PAYMENT_AMOUNT_ELEMENT;
-import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_RECURRING_PAYMENT_CURRENCY_ATTRIBUTE;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_INCOME_AMOUNT_ELEMENT;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_INCOME_CURRENCY_ATTRIBUTE;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_INCOME_DATETIME_ELEMENT;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_INCOME_DESCRIPTION_ELEMENT;
 import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_INCOME_ELEMENT;
 import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_INCOME_ID_ATTRIBUTE;
 import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_INCOME_NAME_ELEMENT;
-import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_INCOME_DATETIME_ELEMENT;
-import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_INCOME_DESCRIPTION_ELEMENT;
-import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_INCOME_AMOUNT_ELEMENT;
-import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_INCOME_CURRENCY_ATTRIBUTE;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_RECURRING_PAYMENT_AMOUNT_ELEMENT;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_RECURRING_PAYMENT_CURRENCY_ATTRIBUTE;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_RECURRING_PAYMENT_DESCRIPTION_ELEMENT;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_RECURRING_PAYMENT_ELEMENT;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_RECURRING_PAYMENT_ID_ATTRIBUTE;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_RECURRING_PAYMENT_INTERVAL_ELEMENT;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_RECURRING_PAYMENT_NAME_ELEMENT;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_ROOT;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_SORTCONFIG_ELEMENT;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_SORTCONFIG_ORDER_ATTRIBUTE;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_SORTCONFIG_TYPE_ATTRIBUTE;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_TARGET_AMOUNT_ELEMENT;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_TARGET_CURRENCY_ATTRIBUTE;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_TARGET_CURRENT_AMOUNT_ELEMENT;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_TARGET_DATETIME_ELEMENT;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_TARGET_DESCRIPTION_ELEMENT;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_TARGET_ELEMENT;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_TARGET_ID_ATTRIBUTE;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_TARGET_NAME_ELEMENT;
 
 /**
  * Stores and load data to and from storage.
@@ -91,10 +91,9 @@ public class LocalStorage {
     }
 
     /**
-     * Reads saved data and configurations from a load file in a
-     * fixed directory, parse it and convert them into objects
-     * and add them to the arraylist that stores expenses.
-     * Sort the current arraylist afterwards based on saved configuration.
+     * Reads saved data and configurations from a load file in a fixed directory, parse it and convert them into objects
+     * and add them to the arraylist that stores expenses. Sort the current arraylist afterwards based on saved
+     * configuration.
      *
      * @param expenseManager arraylist to store expenses
      */
@@ -135,12 +134,11 @@ public class LocalStorage {
     }
 
     /**
-     * Reads saved data from a load file in the given directory,
-     * parse it and convert them into objects
-     * and add it to the arraylist that stores expenses.
+     * Reads saved data from a load file in the given directory, parse it and convert them into objects and add it to
+     * the arraylist that stores expenses.
      *
      * @param expenseManager arraylist to store expenses
-     * @param filePath       path to save file to merge
+     * @param filePath path to save file to merge
      */
     public void loadFromExternalFile(ExpenseManager expenseManager, String filePath) {
         Expense loadExpense;
@@ -170,9 +168,7 @@ public class LocalStorage {
     }
 
     /**
-     * Returns a command to sort expense based
-     * on saved configuration for sorting obtained
-     * from parsing node.
+     * Returns a command to sort expense based on saved configuration for sorting obtained from parsing node.
      *
      * @param sortConfig node containing sorting configuration
      * @return command to sort expense
@@ -188,12 +184,11 @@ public class LocalStorage {
     }
 
     /**
-     * Returns an expense object based on information
-     * obtained from parsing an Expense node.
+     * Returns an expense object based on information obtained from parsing an Expense node.
      *
      * @param node containing information about an expense
      * @return an Expense object
-     * @throws LocalStorageLoadDataInputError   if type of input node is incorrect
+     * @throws LocalStorageLoadDataInputError if type of input node is incorrect
      */
     private Expense createExpense(Node node) throws LocalStorageLoadDataInputError {
         if (node.getNodeType() != Node.ELEMENT_NODE) {
@@ -218,12 +213,11 @@ public class LocalStorage {
     }
 
     /**
-     * Returns a Target object based on information
-     * obtained from parsing a Target node.
+     * Returns a Target object based on information obtained from parsing a Target node.
      *
      * @param node containing information about a target
      * @return a Target object
-     * @throws LocalStorageLoadDataInputError   if type of input node is incorrect
+     * @throws LocalStorageLoadDataInputError if type of input node is incorrect
      */
     private Target createTarget(Node node) throws LocalStorageLoadDataInputError {
         if (node.getNodeType() != Node.ELEMENT_NODE) {
@@ -248,12 +242,11 @@ public class LocalStorage {
     }
 
     /**
-     * Returns a RecurringPayment object based on information
-     * obtained from parsing a RecurringPayment node.
+     * Returns a RecurringPayment object based on information obtained from parsing a RecurringPayment node.
      *
      * @param node containing information about a recurring payment
      * @return a RecurringPayment object
-     * @throws LocalStorageLoadDataInputError   if type of input node is incorrect
+     * @throws LocalStorageLoadDataInputError if type of input node is incorrect
      */
     private RecurringPayment createRecurringPayment(Node node) throws LocalStorageLoadDataInputError {
         if (node.getNodeType() != Node.ELEMENT_NODE) {
@@ -274,12 +267,11 @@ public class LocalStorage {
     }
 
     /**
-     * Returns a Income object based on information
-     * obtained from parsing a income node.
+     * Returns a Income object based on information obtained from parsing a income node.
      *
      * @param node containing information about an income
      * @return an Income object
-     * @throws LocalStorageLoadDataInputError   if type of input node is incorrect
+     * @throws LocalStorageLoadDataInputError if type of input node is incorrect
      */
     private Income createIncome(Node node) throws LocalStorageLoadDataInputError {
         if (node.getNodeType() != Node.ELEMENT_NODE) {
@@ -300,9 +292,7 @@ public class LocalStorage {
     }
 
     /**
-     * Parse current expenses and configurations
-     * for sorting expenses and saves it to a xml
-     * file in storage.
+     * Parse current expenses and configurations for sorting expenses and saves it to a xml file in storage.
      *
      * @param savedExpenses arraylist containing all expenses
      * @param sortCommandSetting configurations for sorting
