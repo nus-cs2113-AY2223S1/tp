@@ -31,10 +31,8 @@ public class CurrencyManager {
             return true;
         }
         if (exchangeRates.isEmpty()) {
-            System.out.println("no way");
             throw new CurrencyRatesNotFoundException(Messages.CURRENCY_MANAGER_RATES_NOT_FOUND);
         }
-        System.out.println("lolol");
         throw new CurrencyInvalidException(Messages.CURRENCY_MANAGER_CURRENCY_NOT_FOUND);
     }
 
