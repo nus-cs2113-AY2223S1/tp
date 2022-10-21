@@ -8,9 +8,8 @@ import seedu.duke.exception.FindInvalidFlagException;
 
 import java.util.ArrayList;
 
-import static seedu.duke.Messages.MESSAGE_FIND_NO_DESCRIPTION;
-import static seedu.duke.Messages.MESSAGE_FIND_INVALID_FLAG;
 import static seedu.duke.CommandStructure.FIND_FLAGS;
+import static seedu.duke.Messages.*;
 
 
 public class ParseFindClient extends Parser {
@@ -30,7 +29,7 @@ public class ParseFindClient extends Parser {
         boolean isValidDescription = checkCommandValidity(commandDescription);
 
         if (hasNoDescription) {
-            throw new FindDescriptionEmptyException(MESSAGE_FIND_NO_DESCRIPTION);
+            throw new FindDescriptionEmptyException(MESSAGE_EMPTY_DESCRIPTION);
         } else if (!isValidDescription) {
             throw new FindInvalidFlagException(MESSAGE_FIND_INVALID_FLAG);
         } else {
@@ -56,7 +55,7 @@ public class ParseFindClient extends Parser {
 
         boolean hasCorrectNumOfTag = queryLists.size() == SINGLE_TAG;
         boolean hasCorrectTag = commandDescription.contains(FIND_FLAGS);
-        boolean isValidTag = hasCorrectTag & hasCorrectNumOfTag;
+        boolean isValidTag = hasCorrectTag && hasCorrectNumOfTag;
         if (isValidTag) {
             return true;
         }

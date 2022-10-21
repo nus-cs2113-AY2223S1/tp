@@ -22,9 +22,7 @@ import static seedu.duke.CommandStructure.COMMAND_UNPAIR;
 import static seedu.duke.CommandStructure.EVERYTHING_FLAG;
 import static seedu.duke.CommandStructure.PROPERTY_FLAG;
 import static seedu.duke.CommandStructure.CLIENT_FLAG;
-import static seedu.duke.Messages.MESSAGE_INCORRECT_LIST_DETAILS;
-import static seedu.duke.Messages.MESSAGE_MISSING_SUB_COMMAND_TYPE;
-import static seedu.duke.Messages.MESSAGE_INVALID_FIND_SUBCOMMANMD;
+import static seedu.duke.Messages.*;
 
 
 public class ParserManager {
@@ -123,7 +121,7 @@ public class ParserManager {
             if (isClient) {
                 return new ParseFindClient(findCommandDescription);
             } else {
-                throw new UndefinedSubCommandTypeException(MESSAGE_INVALID_FIND_SUBCOMMANMD);
+                throw new UndefinedSubCommandTypeException(MESSAGE_MISSING_SUB_COMMAND_TYPE);
             }
         case COMMAND_EXIT:
             return new ParseExit(commandDetail);
