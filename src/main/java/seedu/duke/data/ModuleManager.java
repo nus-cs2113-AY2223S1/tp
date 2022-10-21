@@ -11,10 +11,6 @@ import java.util.List;
 import seedu.duke.Timetable;
 import seedu.duke.module.Module;
 import seedu.duke.module.lessons.Lesson;
-import seedu.duke.module.lessons.Lecture;
-import seedu.duke.module.lessons.Tutorial;
-import seedu.duke.module.lessons.Laboratory;
-import seedu.duke.module.lessons.Others;
 
 /*
  * ### Public Functions: ###
@@ -155,22 +151,9 @@ public class ModuleManager {
                     String lessonDay = lessonInfoList[2];
                     String lessonStart = lessonInfoList[3];
                     String lessonEnd = lessonInfoList[4];
-
+                    String classNumber = lessonInfoList[5];
                     if (lessonModuleCode.equals(code)) {
-                        switch (lessonType) {
-                        case "Lecture":
-                            lessons.add(new Lecture(lessonDay, lessonStart, lessonEnd, lessonType));
-                            break;
-                        case "Tutorial":
-                            lessons.add(new Tutorial(lessonDay, lessonStart, lessonEnd, lessonType));
-                            break;
-                        case "Laboratory":
-                            lessons.add(new Laboratory(lessonDay, lessonStart, lessonEnd, lessonType));
-                            break;
-                        default:
-                            lessons.add(new Others(lessonDay, lessonStart, lessonEnd, lessonType));
-                            break;
-                        }
+                        lessons.add(new Lesson(lessonDay, lessonStart, lessonEnd, lessonType, classNumber));
                     }
                 }
                 Timetable.addNewModuleFromFile(code, name, description, lessons);
