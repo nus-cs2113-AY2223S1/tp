@@ -462,6 +462,38 @@ public class Messages {
             + CONSOLE_COMMAND_DELETE_RECURRING_PAYMENT_SYNTAX;
     //endregion
 
+    //region Defines messages for console command Edit-RecurringPayment.
+    public static final String CONSOLE_COMMAND_EDIT_RECURRING_PAYMENT_SYNTAX = ""
+            + "SYNTAX: "
+            + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT
+            + " -"
+            + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX
+            + " "
+            + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_LONG.toUpperCase()
+            + " [-"
+            + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_NAME
+            + " "
+            + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_NAME_LONG.toUpperCase()
+            + "] [-"
+            + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_INTERVAL
+            + " "
+            + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_INTERVAL_LONG.toUpperCase()
+            + "] [-"
+            + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_AMOUNT
+            + " "
+            + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_AMOUNT_LONG.toUpperCase()
+            + "] [-"
+            + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_DESCRIPTION
+            + " "
+            + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_DESCRIPTION_LONG.toUpperCase()
+            + "]";
+    public static final String CONSOLE_MESSAGE_COMMAND_EDIT_RECURRING_PAYMENT_SUCCESS = ""
+            + "The recurring payment was edited successfully.";
+    public static final String CONSOLE_ERROR_COMMAND_EDIT_RECURRING_PAYMENT_INVALID = ""
+            + "The arguments entered are invalid. "
+            + CONSOLE_COMMAND_EDIT_RECURRING_PAYMENT_SYNTAX;
+    //endregion
+
     /**
      * Defines messages for console command Merge-File.
      */

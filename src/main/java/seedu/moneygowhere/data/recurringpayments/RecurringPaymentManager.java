@@ -45,4 +45,15 @@ public class RecurringPaymentManager {
             );
         }
     }
+
+    public void editRecurringPayment(int recurringPaymentIndex, RecurringPayment recurringPayment) throws
+            RecurringPaymentManagerRecurringPaymentNotFoundException {
+        try {
+            recurringPayments.set(recurringPaymentIndex, recurringPayment);
+        } catch (IndexOutOfBoundsException exception) {
+            throw new RecurringPaymentManagerRecurringPaymentNotFoundException(
+                    Messages.RECURRING_PAYMENT_MANAGER_RECURRING_PAYMENT_NOT_FOUND
+            );
+        }
+    }
 }
