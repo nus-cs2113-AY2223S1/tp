@@ -14,6 +14,11 @@ import java.util.logging.Logger;
 
 public class SearchModuleCommand extends Command {
     public static final String COMMAND_WORD = "search";
+    public static final String FORMAT = "search KEYWORD";
+    public static final String HELP_DISPLAY = COMMAND_WORD
+            + ": List out all modules that matches KEYWORD, where KEYWORD could be module code/faculty!\n"
+            + "Usage:\t"
+            + FORMAT;
 
     // private String toSearchModuleCode;
     private Map<String, String> params;
