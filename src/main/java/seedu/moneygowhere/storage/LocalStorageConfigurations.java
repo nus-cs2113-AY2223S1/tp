@@ -30,6 +30,7 @@ public class LocalStorageConfigurations {
     public static final String XML_RECURRING_PAYMENT_DESCRIPTION_ELEMENT = "Description";
     public static final String XML_RECURRING_PAYMENT_AMOUNT_ELEMENT = "Amount";
     public static final String XML_RECURRING_PAYMENT_CURRENCY_ATTRIBUTE = "Currency";
+    public static final String XML_RECURRING_PAYMENT_CATEGORY_ELEMENT = "Category";
     public static final String XML_INCOME_ELEMENT = "Income";
     public static final String XML_INCOME_ID_ATTRIBUTE = "Id";
     public static final String XML_INCOME_NAME_ELEMENT = "Name";

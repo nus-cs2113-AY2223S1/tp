@@ -51,6 +51,7 @@ import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_INCOME_E
 import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_INCOME_ID_ATTRIBUTE;
 import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_INCOME_NAME_ELEMENT;
 import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_RECURRING_PAYMENT_AMOUNT_ELEMENT;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_RECURRING_PAYMENT_CATEGORY_ELEMENT;
 import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_RECURRING_PAYMENT_CURRENCY_ATTRIBUTE;
 import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_RECURRING_PAYMENT_DESCRIPTION_ELEMENT;
 import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_RECURRING_PAYMENT_ELEMENT;
@@ -281,20 +282,34 @@ public class LocalStorage {
         Element element = (Element) node;
         String name = element.getElementsByTagName(XML_RECURRING_PAYMENT_NAME_ELEMENT)
                 .item(0).getTextContent();
+        assert name != null : "There must be a name";
+
         int interval = Integer.parseInt(element.getElementsByTagName(XML_RECURRING_PAYMENT_INTERVAL_ELEMENT)
                 .item(0).getTextContent());
+
         String description = element.getElementsByTagName(XML_RECURRING_PAYMENT_DESCRIPTION_ELEMENT)
                 .item(0).getTextContent();
+        if (description.isEmpty() || description.trim().isEmpty()) {
+            description = null;
+        }
+
         NodeList amountNodeList = element.getElementsByTagName(XML_RECURRING_PAYMENT_AMOUNT_ELEMENT);
         BigDecimal amount = new BigDecimal(amountNodeList.item(0).getTextContent());
         String currency = amountNodeList.item(0).getAttributes()
                 .getNamedItem(XML_RECURRING_PAYMENT_CURRENCY_ATTRIBUTE).getTextContent();
-        //TODO Add feature to save and load recurring payment category and currency
-        return new RecurringPayment(name, interval, description, amount, null, null);
+        assert currency != null : "There must be a currency for amount";
+
+        String category = element.getElementsByTagName(XML_EXPENSE_CATEGORY_ELEMENT)
+                .item(0).getTextContent();
+        if (category.isEmpty() || category.trim().isEmpty()) {
+            category = null;
+        }
+        
+        return new RecurringPayment(name, interval, description, amount, category, currency);
     }
 
     /**
-     * Returns a Income object based on information obtained from parsing a income node.
+     * Returns an Income object based on information obtained from parsing a income node.
      *
      * @param node containing information about an income
      * @return an Income object
