@@ -9,7 +9,8 @@ public class Motherboard extends Component {
 
     protected String gpuSlots;
 
-    public Motherboard(String name, String price, String power, String socket, String formFactor, String memorySlots, String gpuSlots) {
+    public Motherboard(String name, String price, String power, String socket, String formFactor, String memorySlots,
+                       String gpuSlots) {
         this.name = name;
         this.price = price;
         this.socket = socket;
