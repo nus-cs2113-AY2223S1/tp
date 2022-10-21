@@ -1,4 +1,0 @@
-CS2113|Tutorial|Undetermined Day|Undetermined|Undetermined
-CS2113|Lecture|Friday|1600|1800
-MA1511|Lecture|Undetermined Day|Undetermined|Undetermined
-MA1511|Tutorial|Thursday|1000|1200

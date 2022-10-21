@@ -1,9 +1,10 @@
 package seedu.duke;
 
+import seedu.duke.commands.CommandPrintTimetable;
+import seedu.duke.commands.CommandSetLesson;
 import seedu.duke.commands.CommandAddModule;
 import seedu.duke.commands.CommandDeleteModule;
 import seedu.duke.commands.CommandInfoModule;
-import seedu.duke.commands.CommandSetLesson;
 
 
 public class Parser {
@@ -13,36 +14,27 @@ public class Parser {
     private static final String COMMAND_EXIT = "quit";
     private static final String COMMAND_INFO = "info";
     private static final String COMMAND_SET = "set";
+    private static final String COMMAND_PRINT = "print";
 
 
-    public static String parseCommand(Timetable timetable, String command, String currentSemester) {
-
-        String response;
-
+    public static String parseCommand(String command, String currentSemester) {
         switch (command) {
         case COMMAND_ADD:
-            response = CommandAddModule.addModule(timetable,currentSemester);
-            break;
+            return CommandAddModule.addModule(currentSemester);
         case COMMAND_LIST:
-            response = timetable.listModules();
-            break;
+            return Timetable.listModules();
         case COMMAND_DELETE:
-            response = CommandDeleteModule.deleteModule(timetable);
-            break;
+            return CommandDeleteModule.deleteModule();
         case COMMAND_EXIT:
-            response = "quit";
-            break;
+            return "quit";
         case COMMAND_INFO:
-            response = CommandInfoModule.findModule(timetable);
-            break;
+            return CommandInfoModule.findModule();
         case COMMAND_SET:
-            response = CommandSetLesson.setLesson(timetable);
-            break;
+            return CommandSetLesson.setLesson();
+        case COMMAND_PRINT:
+            return CommandPrintTimetable.printTimetable();
         default:
-            response = "Invalid Command!";
-            break;
+            return "Invalid Command!";
         }
-        assert !response.equals(null) : "response to user should exist and not null";
-        return response;
     }
 }

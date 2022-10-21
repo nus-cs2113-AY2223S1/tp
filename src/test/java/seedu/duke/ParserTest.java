@@ -12,11 +12,11 @@ class ParserTest {
 
     @Test
     void parseCommand_randomInvalidString_parsedCorrectly() {
-        assertEquals("Invalid Command!", Parser.parseCommand(timetable, invalidCommand, currentSemester));
+        assertEquals("Invalid Command!", Parser.parseCommand(invalidCommand, currentSemester));
     }
 
     @Test
     void parseCommand_exitCommand_parsedCorrectly() {
-        assertEquals("quit", Parser.parseCommand(timetable, exitCommand, currentSemester));
+        assertEquals("quit", Parser.parseCommand(exitCommand, currentSemester));
     }
 }

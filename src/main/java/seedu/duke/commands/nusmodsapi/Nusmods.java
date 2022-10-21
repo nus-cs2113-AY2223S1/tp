@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import seedu.duke.Duke;
 import seedu.duke.Exceptions;
+import seedu.duke.UI;
 import seedu.duke.module.lessons.Lesson;
 import seedu.duke.module.lessons.Lecture;
 import seedu.duke.module.lessons.Tutorial;
@@ -37,8 +38,8 @@ public class Nusmods {
         String mod = new String();
         while (!validUri) {
             try {
-                if (Duke.sc.hasNextLine()) {
-                    mod = Duke.sc.nextLine().toUpperCase().trim();
+                if (UI.sc.hasNextLine()) {
+                    mod = UI.sc.nextLine().toUpperCase().trim();
                 }
                 new URL(baseUri + mod + ".json").toURI();
                 validUri = true;
@@ -50,15 +51,19 @@ public class Nusmods {
         return baseUri + mod + ".json";
     }
 
+    private HttpResponse<String> getResponse() throws IOException, InterruptedException {
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+                .GET()
+                .header("accept", "application/json")
+                .uri(URI.create(setUri()))
+                .build();
+        return client.send(request, HttpResponse.BodyHandlers.ofString());
+    }
+
     public String[] getModuleInfo() throws IOException, InterruptedException {
         while (true) {
-            HttpClient client = HttpClient.newHttpClient();
-            HttpRequest request = HttpRequest.newBuilder()
-                    .GET()
-                    .header("accept", "application/json")
-                    .uri(URI.create(setUri()))
-                    .build();
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            HttpResponse<String> response = getResponse();
             if (response.statusCode() != 200) {
                 System.out.println("Module not found, please try again.");
             } else {
@@ -81,13 +86,7 @@ public class Nusmods {
     public List<Lesson> addModuleInfo(String currentSemester, String[] info)
             throws IOException, InterruptedException, Exceptions.InvalidSemException, Exceptions.InvalidModuleCode {
         while (true) {
-            HttpClient client = HttpClient.newHttpClient();
-            HttpRequest request = HttpRequest.newBuilder()
-                    .GET()
-                    .header("accept", "application/json")
-                    .uri(URI.create(setUri()))
-                    .build();
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            HttpResponse<String> response = getResponse();
             if (response.statusCode() != 200) {
                 throw new Exceptions.InvalidModuleCode();
             } else {
