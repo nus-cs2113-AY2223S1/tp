@@ -82,10 +82,10 @@ public class Build {
         return sb.toString();
     }
 
-    public String toCSV() {
+    public String toCsv() {
         StringBuilder sb = new StringBuilder();
         for (Component component : getAllComponents()) {
-            sb.append(this.name + ",").append(component.toCSV()).append(System.lineSeparator());
+            sb.append(this.name + ",").append(component.toCsv()).append(System.lineSeparator());
         }
         return sb.toString();
     }

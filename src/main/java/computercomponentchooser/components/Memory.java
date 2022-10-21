@@ -33,8 +33,8 @@ public class Memory extends Component {
         return super.toString() + String.format(" [%s GB] [%s MHz]", size, speed);
     }
 
-    public String toCSV() {
-        return super.toCSV() + "," + size + "," + speed;
+    public String toCsv() {
+        return super.toCsv() + "," + size + "," + speed;
     }
 
     @Override

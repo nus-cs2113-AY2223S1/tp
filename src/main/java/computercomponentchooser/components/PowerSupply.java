@@ -13,8 +13,8 @@ public class PowerSupply extends Component {
         return super.toString();
     }
 
-    public String toCSV() {
-        return super.toCSV();
+    public String toCsv() {
+        return super.toCsv();
     }
 
     public String getType() {

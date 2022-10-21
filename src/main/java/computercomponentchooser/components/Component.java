@@ -35,7 +35,7 @@ public abstract class Component {
         return String.format("%s [$%s] [%s W]", name, price, power);
     }
 
-    public String toCSV() {
+    public String toCsv() {
         return String.format("%s,%s,%s", name, price, power);
     }
 

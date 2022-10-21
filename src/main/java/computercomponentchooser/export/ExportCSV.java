@@ -9,13 +9,13 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.Files;
 
-public class ExportCSV {
+public class ExportCsv {
     private static final String FILE_DIRECTORY = "data";
     private static String EXPORT_TEXT_FILE_PATH = "data/exportAllBuildsCSV.csv";
 
     private final BuildManager buildManager;
 
-    public ExportCSV(BuildManager buildManager) {
+    public ExportCsv(BuildManager buildManager) {
         this.buildManager = buildManager;
     }
 
@@ -31,7 +31,7 @@ public class ExportCSV {
         FileWriter fileWriter = new FileWriter(EXPORT_TEXT_FILE_PATH);
         fileWriter.write("Build Name, Component Name, Price, Power\n");
         for (Build build : buildManager.getBuilds().values()) {
-            fileWriter.write(build.toCSV());
+            fileWriter.write(build.toCsv());
         }
         fileWriter.close();
     }

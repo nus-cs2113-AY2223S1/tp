@@ -53,8 +53,8 @@ public class Cpu extends Component {
         return super.toString() + String.format(" [%s] [%s GHz]", socket, clock);
     }
 
-    public String toCSV() {
-        return super.toCSV() + "," + socket + "," + clock;
+    public String toCsv() {
+        return super.toCsv() + "," + socket + "," + clock;
     }
 
     @Override

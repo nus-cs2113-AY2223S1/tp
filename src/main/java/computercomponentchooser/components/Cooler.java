@@ -43,8 +43,8 @@ public class Cooler extends Component {
         return super.toString() + String.format(" [%s RPM] [%s dB] [%s]", fanSpeed, noiseLevel, socket);
     }
 
-    public String toCSV() {
-        return super.toCSV() + "," + fanSpeed + "," + noiseLevel + "," + socket;
+    public String toCsv() {
+        return super.toCsv() + "," + fanSpeed + "," + noiseLevel + "," + socket;
     }
 
     public String saveAsString() {

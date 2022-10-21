@@ -4,7 +4,7 @@ import computercomponentchooser.exceptions.UnknownCommandException;
 import computercomponentchooser.exceptions.DuplicateBuildException;
 import computercomponentchooser.exceptions.UnlistedBuildException;
 import computercomponentchooser.export.ExportText;
-import computercomponentchooser.export.ExportCSV;
+import computercomponentchooser.export.ExportCsv;
 
 import java.io.IOException;
 
@@ -137,7 +137,7 @@ public class Parser {
     private void mainParseExportCSV() throws IOException {
         Ui.printLine();
         System.out.println("Exporting builds...");
-        ExportCSV.exportAllBuildsCSV(buildManager);
+        ExportCsv.exportAllBuildsCSV(buildManager);
         Ui.printLine();
     }
 }
