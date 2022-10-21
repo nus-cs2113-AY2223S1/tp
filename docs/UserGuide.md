@@ -143,6 +143,7 @@ Edits a recurring payment in the list of recurring payments
 
 Syntax: `Edit-RecurringPayment -r RECURRING_PAYMENT_INDEX [-n NAME] [-i INTERVAL] [-a AMOUNT] [-t DESCRIPTION]`
 
+* `RECURRING_PAYMENT_INDEX` is an integer value.
 * `NAME` and `DESCRIPTION` are text strings. You may use spaces within the text if you wrap the text with double quotes.
 * `INTERVAL` is an integer value. Set this value to the estimated number of days between your recurring payments.
 * `AMOUNT` is a decimal value.
