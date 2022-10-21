@@ -25,9 +25,7 @@ Step 2. The user executes `task view` command to view all the current tasks for 
 
 Step 3. The user wishes to reallocate task 1 to another employee and executes `task reallocate i/1` . The `task reallocate` command also calls `TaskList#reallocateTask()`, and the user is prompted with a list of employees to reallocate this task, and the user executes `2` to reallocate the task from Employee 1 - ‘Sally’ to Employee 2 - ‘John’.
 
-The following sequence diagram shows how the task allocation/reallocation operation works:
-
-![https://se-education.org/addressbook-level3/images/UndoSequenceDiagram.png](https://se-education.org/addressbook-level3/images/UndoSequenceDiagram.png)
+> The following sequence diagram shows how the task allocation/reallocation operation works:
 
 Step 4. The user then executes the command `employee task i/2` to view the tasks of employee 2, which is ‘John’ in this case. The `employee task` command calls `EmployeeList#viewIndividualTask()` . Due to the reallocation done in step 3, the task 1 is moved from Employee 2 - ‘John’ instead of Employee 1 - ‘Sally’, and task 1 will not show up in Employee 1’s individual tasks.
 
@@ -74,13 +72,7 @@ Step 3. The user executes `appointment status i/2 s/COMPLETED` command to update
 
 Step 4. The user executes `appointment history` command to view the list of expired appointment. This will display the list of appointments that has already been completed by the clinic. Then, the user ends with application with `bye` command, the current state of `AppointmentList` and `AppointmentHistory` will be stored in a file through `Storage` .
 
-The following sequence diagram shows how the status operation works:
-
-![https://se-education.org/addressbook-level3/images/UndoSequenceDiagram.png](https://se-education.org/addressbook-level3/images/UndoSequenceDiagram.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-![https://se-education.org/addressbook-level3/images/CommitActivityDiagram.png](https://se-education.org/addressbook-level3/images/CommitActivityDiagram.png)
+> The following activity diagram summarizes what happens when a user executes a new command:
 
 ### Design considerations:
 
@@ -170,51 +162,62 @@ Step 4. The user executes `view pet` to display all pets in the pet manage syste
 
 The following sequence diagram shows how the status operation works:
 
-
-### [Proposed] Employee management feature
+### [Proposed] Service management feature
 
 ### Proposed Implementation
 
-The proposed employee management mechanism is facilitated by `Employee` , `EmployeeList`, `Storage`. It implements the following operations:
+The proposed service management mechanism is facilitated by`ServiceList`, `Service`. It implements the following operations:
 
-- `EmployeeList#addEmployee()` — Adds an employee to the employee list.
-- `EmployeeList#listEmployee()` — Views all the employees in the employee list.
-- `EmployeeList#removeEmployee()` — Removes an employee in the employee list.
-- `Storage#loadEmployee()` —  Storage stores the list of current employees into a file and this function loads it when application starts.
+- `ServiceList#addService()` — Adds a service to the service list.
+- `ServiceList#listService()` — Views all the services in the service list.
+- `ServiceList#removeService()` — Removes a service in the service list.
+- `Service#loadService()` —  Storage stores the list of current services into a file and this function loads it when application starts.
 
-Given below is an example usage scenario and how the employee management mechanism behaves at each step.
+Given below is an example usage scenario and how the service management mechanism behaves at each step.
 
-Step 1. The user launches the application and there are already pre-existing employees loaded. `EmployeeList` initializes and loads from `Storage` the existing employees.
+Step 1. The user launches the application and there are already pre-existing services loaded. `ServiceList` initializes and loads from `Storage` the existing services.
 
-Step 2. The user executes `employee add n/Mozart` command to add an employee named Mozart. This updates `EmployeeList` with the employee.
+Step 2. The user executes `service add d/Haircut` command to add a service with description 'd\Haircut'. This inserts a new service object into `ServiceList`.
 
-Step 3. The user executes `employee view` command to view the current employees.
+Step 3. The user executes `service view` command to view the current services.
 
-Step 4. The user executes `employee remove i/1` command to remove the employee with index 1 from the employee list.
+Step 4. The user executes `service remove i/1` command to remove the service with index 1 from the service list.
 
-The following sequence diagram shows how the employee management works:
+The following sequence diagram shows how the service management works
 
-![image-20221021211809531](C:\Users\13757\AppData\Roaming\Typora\typora-user-images\image-20221021211809531.png)
+![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/ServiceManagement.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/ServiceManagement.png)
+
+![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/ServiceView.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/ServiceView.png)
 
 ### Design considerations:
 
-**Aspect: How to number the employee:**
+**Aspect: How to represent the Service:**
 
 - Alternative 1 (current choice):
+  
+  Uses a class to represent the `Service`, with a unique id and a description.
 
-  Uses permanent indexes. When an employee is removed, the indexes of other employees are not changed.
-
-  - Pros: Each employee corresponds to only one index, which does not cause ambiguity.
-  - Cons: More complex, and the indexes easily get very large.
+  - Pros: 
+  1. Each service corresponds to only one index, which does not cause ambiguity.
+  2. If more features are to be added in Service, 
+  it could easily be done via adding more attributes and functions in it.
+  3. The design is more OOP.
+  
+  - Cons: 
+  1. Each Service causes more overhead. 
+  2. Index is not reused, so new index could become quite large. 
 
 - Alternative 2:
 
-  Uses dynamic indexes. When an employee is removed, the indexes of other employees are changed.
-
-  - Pros: More easy, and the indexes are always continuous.
-  - Cons: The index of an employee may change frequently.
-
-
+  Uses a global `ServiceList` to store all services. 
+  In Service class, create a static Arraylist to store all service strings.
+  - Pros: 
+  1. Take less memory and constructing or destructing cost.
+  2. The indexes are always continuous.
+  - Cons: 
+  1. The service only has one attribute which is the description. 
+  So can not attach more attributes to it.
+  2. Less oop.
 
 ## Product scope
 ### Target user profile

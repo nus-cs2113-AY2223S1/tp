@@ -1,0 +1,27 @@
+@startuml
+!include style.puml
+
+box Service LOGIC_COLOR_T1
+participant UiManager LOGIC_COLOR
+participant Parser LOGIC_COLOR
+participant ServiceParser LOGIC_COLOR
+participant ViewServiceCommand LOGIC_COLOR
+end box
+
+[-> UiManager : readCommand("Service view")
+activate UiManager
+
+UiManager -> Parser : parseCommand("Service view")
+activate Parser
+
+Parser -> ServiceParser : parseService("view")
+activate ServiceParser
+
+ServiceParser -> ViewServiceCommand : execute()
+activate ViewServiceCommand
+
+ViewServiceCommand --> ServiceParser
+ServiceParser --> Parser
+Parser --> UiManager
+
+@enduml
