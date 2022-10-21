@@ -198,7 +198,7 @@ public class LocalStorage {
         Element element = (Element) node;
         String name = element.getElementsByTagName(XML_EXPENSE_NAME_ELEMENT)
                 .item(0).getTextContent();
-        assert name != null : "There must be a name";
+        assert !(name.isEmpty() || name.trim().isEmpty()) : "There must be a name";
 
         String description = element.getElementsByTagName(XML_EXPENSE_DESCRIPTION_ELEMENT)
                 .item(0).getTextContent();
@@ -221,7 +221,7 @@ public class LocalStorage {
         NodeList amountNodeList = element.getElementsByTagName(XML_EXPENSE_AMOUNT_ELEMENT);
         String currency = amountNodeList.item(0).getAttributes()
                 .getNamedItem(XML_EXPENSE_AMOUNT_CURRENCY_ATTRIBUTE).getTextContent();
-        assert currency != null : "There must be a currency";
+        assert !(currency.isEmpty() || currency.trim().isEmpty()) : "There must be a currency";
         BigDecimal amount = new BigDecimal(amountNodeList.item(0).getTextContent());
 
         LocalDateTime dateTime = LocalDateTime.parse(element
@@ -244,7 +244,7 @@ public class LocalStorage {
         Element element = (Element) node;
         String name = element.getElementsByTagName(XML_TARGET_NAME_ELEMENT)
                 .item(0).getTextContent();
-        assert name != null : "There must be a name";
+        assert !(name.isEmpty() || name.trim().isEmpty()) : "There must be a name";
 
         String description = element.getElementsByTagName(XML_TARGET_DESCRIPTION_ELEMENT)
                 .item(0).getTextContent();
@@ -256,13 +256,13 @@ public class LocalStorage {
         BigDecimal amount = new BigDecimal(amountNodeList.item(0).getTextContent());
         String currencyAmount = amountNodeList.item(0).getAttributes()
                 .getNamedItem(XML_TARGET_CURRENCY_ATTRIBUTE).getTextContent();
-        assert currencyAmount != null : "There must be a currency for amount";
+        assert !(currencyAmount.isEmpty() || currencyAmount.trim().isEmpty()) : "There must be a currency for amount";
 
         NodeList currentAmountNodeList = element.getElementsByTagName(XML_TARGET_CURRENT_AMOUNT_ELEMENT);
         BigDecimal currentAmount = new BigDecimal(currentAmountNodeList.item(0).getTextContent());
         String currencyCurrentAmount = currentAmountNodeList.item(0).getAttributes()
                 .getNamedItem(XML_TARGET_CURRENCY_ATTRIBUTE).getTextContent();
-        assert currencyCurrentAmount != null : "There must be a currency for current amount";
+        assert !(currencyCurrentAmount.isEmpty() || currencyCurrentAmount.trim().isEmpty()) : "There must be a currency for current amount";
 
         LocalDateTime dateTime = LocalDateTime.parse(element
                 .getElementsByTagName(XML_TARGET_DATETIME_ELEMENT).item(0).getTextContent());
@@ -284,7 +284,7 @@ public class LocalStorage {
         Element element = (Element) node;
         String name = element.getElementsByTagName(XML_RECURRING_PAYMENT_NAME_ELEMENT)
                 .item(0).getTextContent();
-        assert name != null : "There must be a name";
+        assert !(name.isEmpty() || name.trim().isEmpty()) : "There must be a name";
 
         String description = element.getElementsByTagName(XML_RECURRING_PAYMENT_DESCRIPTION_ELEMENT)
                 .item(0).getTextContent();
@@ -296,7 +296,7 @@ public class LocalStorage {
         BigDecimal amount = new BigDecimal(amountNodeList.item(0).getTextContent());
         String currency = amountNodeList.item(0).getAttributes()
                 .getNamedItem(XML_RECURRING_PAYMENT_CURRENCY_ATTRIBUTE).getTextContent();
-        assert currency != null : "There must be a currency for amount";
+        assert !(currency.isEmpty() || currency.trim().isEmpty()) : "There must be a currency for amount";
 
         String category = element.getElementsByTagName(XML_EXPENSE_CATEGORY_ELEMENT)
                 .item(0).getTextContent();
@@ -324,7 +324,7 @@ public class LocalStorage {
         Element element = (Element) node;
         String name = element.getElementsByTagName(XML_INCOME_NAME_ELEMENT)
                 .item(0).getTextContent();
-        assert name != null : "There must be a name";
+        assert !(name.isEmpty() || name.trim().isEmpty()) : "There must be a name";
 
         LocalDateTime dateTime = LocalDateTime.parse(element
                 .getElementsByTagName(XML_INCOME_DATETIME_ELEMENT).item(0).getTextContent());
@@ -339,7 +339,7 @@ public class LocalStorage {
         BigDecimal amount = new BigDecimal(amountNodeList.item(0).getTextContent());
         String currency = amountNodeList.item(0).getAttributes()
                 .getNamedItem(XML_EXPENSE_AMOUNT_CURRENCY_ATTRIBUTE).getTextContent();
-        assert currency != null : "There must be a currency for amount";
+        assert !(currency.isEmpty() || currency.trim().isEmpty()) : "There must be a currency for amount";
 
         return new Income(name, dateTime, description, amount);
     }
