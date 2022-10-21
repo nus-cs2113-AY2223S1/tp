@@ -79,8 +79,18 @@ specified index
 
 ## Non-Functional Requirements
 
-{Give non-functional requirements}
+Parser:
 
+The parsing class utilizes regex for each of the commands for two main reasons: usability and error-catching.
+
+For usability, the input is automatically separated into distinct groups through the Java regex library, which allows
+input such as ID, name, etc. to be pulled out in multi-word or one word parts.
+
+For error-catching, the input is checked to be in a certain format (i.e. DOB is DD-MM-YYYY)
+or of a certain type (i.e. the ID is one word made up of letters and numbers).
+
+If there is an error, the regex also helps with identifying the exact error issue, and
+sending that back to the user.
 ## Glossary
 
 * *glossary item* - Definition
