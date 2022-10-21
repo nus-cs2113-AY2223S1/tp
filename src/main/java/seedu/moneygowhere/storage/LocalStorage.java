@@ -262,7 +262,8 @@ public class LocalStorage {
         BigDecimal currentAmount = new BigDecimal(currentAmountNodeList.item(0).getTextContent());
         String currencyCurrentAmount = currentAmountNodeList.item(0).getAttributes()
                 .getNamedItem(XML_TARGET_CURRENCY_ATTRIBUTE).getTextContent();
-        assert !(currencyCurrentAmount.isEmpty() || currencyCurrentAmount.trim().isEmpty()) : "There must be a currency for current amount";
+        assert !(currencyCurrentAmount.isEmpty() || currencyCurrentAmount.trim().isEmpty()) :
+                "There must be a currency for current amount";
 
         LocalDateTime dateTime = LocalDateTime.parse(element
                 .getElementsByTagName(XML_TARGET_DATETIME_ELEMENT).item(0).getTextContent());
