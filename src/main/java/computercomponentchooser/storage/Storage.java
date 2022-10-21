@@ -10,6 +10,7 @@ import computercomponentchooser.components.Drive;
 import computercomponentchooser.components.Memory;
 import computercomponentchooser.components.PowerSupply;
 import computercomponentchooser.components.Monitor;
+import computercomponentchooser.components.Other;
 
 import computercomponentchooser.exceptions.DuplicateBuildException;
 
@@ -206,6 +207,10 @@ public class Storage {
                         Monitor monitor = new Monitor(name, price, power, getParameter(line, 4),
                                 getParameter(line, 5), getParameter(line, 6));
                         build.addComponent(type, monitor);
+                        break;
+                    case "other":
+                        Other other = new Other(name, price, power);
+                        build.addComponent(type, other);
                         break;
                     default:
                         break;

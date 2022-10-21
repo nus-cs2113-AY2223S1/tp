@@ -47,6 +47,9 @@ public class Build {
         case "monitor":
             components.addElement("monitor", component.getName(), component);
             break;
+        case "other":
+            components.addElement("other", component.getName(), component);
+            break;
         default:
             // throw exception
             break;

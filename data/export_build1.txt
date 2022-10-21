@@ -1,0 +1,13 @@
+____________________________________________________________
+Info: 
+Build name: build1
+Total cost: 1860.0
+Total power: 253
+Compatibility: Compatible
+
+Components list: 
+1. psu [$100] [860 W]
+2. Intel [$500] [130 W] [lga1511] [3.8 GHz]
+3. ROG [$960] [120 W] [lga1511] [4 RAM slots] [4 GPU slots]
+4. RazerMouse [$300] [3 W]
+____________________________________________________________

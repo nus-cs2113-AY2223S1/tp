@@ -7,8 +7,10 @@ import computercomponentchooser.components.Gpu;
 import computercomponentchooser.components.Memory;
 import computercomponentchooser.components.Monitor;
 import computercomponentchooser.components.PowerSupply;
+import computercomponentchooser.components.Other;
 
 import computercomponentchooser.exceptions.UnknownCommandException;
+import computercomponentchooser.export.ExportText;
 
 import static computercomponentchooser.ComputerComponentChooser.storage;
 
@@ -72,6 +74,9 @@ public class EditParser {
                 break;
             case "back":
                 break;
+            case "export":
+                parseExport(editBuild);
+                break;
             default:
                 throw new UnknownCommandException();
             }
@@ -120,6 +125,10 @@ public class EditParser {
             Monitor monitor = new Monitor(name, price, power, getParameter(line, 5),
                     getParameter(line, 6), getParameter(line, 7));
             editBuild.addComponent(type, monitor);
+            break;
+        case "other":
+            Other other = new Other(name, price, power);
+            editBuild.addComponent(type, other);
             break;
         default:
             break;
@@ -181,6 +190,17 @@ public class EditParser {
         Ui.printLine();
         System.out.println("Build Info:");
         System.out.print(editBuild.getBuildInfo());
+        Ui.printLine();
+    }
+
+    public void parseExport(Build editBuild) {
+        Ui.printLine();
+        System.out.println("Exporting build to text file...");
+        try {
+            ExportText.exportBuildText(editBuild);
+        } catch (Exception e) {
+            System.out.println("Error exporting build");
+        }
         Ui.printLine();
     }
 }
