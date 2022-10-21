@@ -25,9 +25,7 @@ Step 2. The user executes `task view` command to view all the current tasks for 
 
 Step 3. The user wishes to reallocate task 1 to another employee and executes `task reallocate i/1` . The `task reallocate` command also calls `TaskList#reallocateTask()`, and the user is prompted with a list of employees to reallocate this task, and the user executes `2` to reallocate the task from Employee 1 - ‘Sally’ to Employee 2 - ‘John’.
 
-The following sequence diagram shows how the task allocation/reallocation operation works:
-
-![https://se-education.org/addressbook-level3/images/UndoSequenceDiagram.png](https://se-education.org/addressbook-level3/images/UndoSequenceDiagram.png)
+> The following sequence diagram shows how the task allocation/reallocation operation works:
 
 Step 4. The user then executes the command `employee task i/2` to view the tasks of employee 2, which is ‘John’ in this case. The `employee task` command calls `EmployeeList#viewIndividualTask()` . Due to the reallocation done in step 3, the task 1 is moved from Employee 2 - ‘John’ instead of Employee 1 - ‘Sally’, and task 1 will not show up in Employee 1’s individual tasks.
 
@@ -74,13 +72,7 @@ Step 3. The user executes `appointment status i/2 s/COMPLETED` command to update
 
 Step 4. The user executes `appointment history` command to view the list of expired appointment. This will display the list of appointments that has already been completed by the clinic. Then, the user ends with application with `bye` command, the current state of `AppointmentList` and `AppointmentHistory` will be stored in a file through `Storage` .
 
-The following sequence diagram shows how the status operation works:
-
-![https://se-education.org/addressbook-level3/images/UndoSequenceDiagram.png](https://se-education.org/addressbook-level3/images/UndoSequenceDiagram.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-![https://se-education.org/addressbook-level3/images/CommitActivityDiagram.png](https://se-education.org/addressbook-level3/images/CommitActivityDiagram.png)
+> The following activity diagram summarizes what happens when a user executes a new command:
 
 ### Design considerations:
 
@@ -191,7 +183,11 @@ Step 3. The user executes `service view` command to view the current services.
 
 Step 4. The user executes `service remove i/1` command to remove the service with index 1 from the service list.
 
-The following sequence diagram shows how the service management works:
+The following sequence diagram shows how the service management works
+
+![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/ServiceManagement.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/ServiceManagement.png)
+
+![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/ServiceView.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/ServiceView.png)
 
 ### Design considerations:
 
