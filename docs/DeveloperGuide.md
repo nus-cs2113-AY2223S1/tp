@@ -32,6 +32,35 @@ modifyPatientDetails - this method takes in name, birthDate, gender and ID. It t
 If the patient is not found, returns. Else, if the name is not an empty String, replace the existing name with the input name.
 Repeat for birthDate and gender.
 
+### PrescriptionList component
+**API**: `PrescriptionList.java`
+
+![](../diagrams/PrescriptionListClassDiagram.png)
+
+The `PrescriptionList` component,
+* stores the list of prescriptions
+* can add new prescription to the list
+* can edit existing prescriptions inside the list
+* can change the status of prescription inside the list
+* can view all prescriptions, view a patient's prescription or view a patient's active prescription 
+* depends on `UI` class (because the `PrescriptionList` component needs to interact with user through the `UI` 
+component)
+
+**Methods in `PrescriptionList` class:**
+
+* **`add`** - This method allow user to add prescription into the list by specifying `patientId`, `medicine`, `dosage` and 
+`timeInterval`.
+* **`viewAll`** - This methods iterates through the list of all prescriptions and print the details of prescriptions from
+all patients.
+* **`viewPatientPrescription`** - This method iterates through the list of prescriptions and print the details of 
+prescriptions from the specified `patientId`.
+* **`viewActivePatientPrescription`** - This method iterates through the list of prescriptions and print the details of
+all active prescriptions with the specified `patientId`
+* **`edit`** - This method allows user to edit the `medicine`, `dosage` or `timeInterval` of the prescription of the 
+specified index
+* **`activatePrescription`** - This method allows user to set the prescription of specified index as active.
+* **`deactivatePrescription`** - This method allows user to set the prescription of specified index as inactive.
+
 ## Product scope
 ### Target user profile
 
