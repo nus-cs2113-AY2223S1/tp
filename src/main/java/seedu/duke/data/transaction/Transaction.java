@@ -62,6 +62,12 @@ public abstract class Transaction {
     }
 
     //@@author wcwy
+
+    /**
+     * Returns the date of transaction in MMM dd yyyy format.
+     *
+     * @return Formatted date of the transaction
+     */
     public String printFormattedDate() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_OUTPUT_PATTERN.toString());
         return date.format(formatter);

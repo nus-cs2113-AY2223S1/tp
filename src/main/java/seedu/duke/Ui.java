@@ -1,11 +1,13 @@
 package seedu.duke;
 
+import seedu.duke.data.Budget;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
-import static seedu.duke.common.InfoMessages.INFO_DIVIDER;
-import static seedu.duke.common.InfoMessages.INFO_GREET;
-import static seedu.duke.common.InfoMessages.INFO_HELP_GREET;
-import static seedu.duke.common.InfoMessages.INFO_HELP_PROMPT;
+import static seedu.duke.common.DateFormats.DATE_OUTPUT_PATTERN;
+import static seedu.duke.common.InfoMessages.*;
 
 public class Ui {
     //@@author chydarren
@@ -27,6 +29,7 @@ public class Ui {
     }
 
     //@@author paullowse
+
     /**
      * Initialises the variables of the Ui class.
      */
@@ -45,6 +48,7 @@ public class Ui {
     }
 
     //@@author chydarren
+
     /**
      * Prepares the error message to be displayed to the user.
      *
@@ -67,10 +71,13 @@ public class Ui {
      * Prepares the greeting messages to be displayed to the user.
      */
     public static void showGreeting() {
-        printMessages(INFO_GREET.toString(), INFO_HELP_PROMPT.toString());
+        printMessages(INFO_GREET.toString(), INFO_CURRENT_BUDGET.toString() + Budget.getBudget(),
+                INFO_TODAY_DATE + showDateOfTheDay(), INFO_HELP_PROMPT.toString()
+        );
     }
 
     //@@author chinhan99
+
     /**
      * Prepares the help messages to be displayed to the user.
      *
@@ -83,8 +90,8 @@ public class Ui {
     /**
      * Prepares the transaction list messages to be displayed to the user.
      *
-     * @param list      A string containing the formatted transaction list.
-     * @param message   A message that complements with the transactions list.
+     * @param list    A string containing the formatted transaction list.
+     * @param message A message that complements with the transactions list.
      */
     public static void showList(String list, String message) {
         printMessages(message, list);
@@ -94,10 +101,21 @@ public class Ui {
      * Prepares the messages to be displayed to the user when add or delete has been performed on
      * the transaction list.
      *
-     * @param message               A message that describes the functionality of the program.
-     * @param transactionDetails    Details of the action that has been performed on the transaction.
+     * @param message            A message that describes the functionality of the program.
+     * @param transactionDetails Details of the action that has been performed on the transaction.
      */
     public static void showTransactionAction(String message, String transactionDetails) {
         printMessages(message, transactionDetails);
+    }
+
+    /**
+     * Returns the today's date in MMM dd yyyy format.
+     *
+     * @return Formatted today's date
+     */
+    public static String showDateOfTheDay() {
+        LocalDate todayDate = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_OUTPUT_PATTERN.toString());
+        return todayDate.format(formatter);
     }
 }
