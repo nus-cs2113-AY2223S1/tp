@@ -245,7 +245,7 @@ public class TransactionList {
 
     /**
      * Gets the range of dates for the last N number of weeks from occurring week.
-     * E.g. If the date is 21 October to backdate 2 weeks, the range will be 3 October to 16 October.
+     * E.g. If the date is 21 October 2022 to backdate 2 weeks, the range will be 3 October to 16 October 2022.
      *
      * @param numberOfWeeks N number of weeks to backdate, must be minimum 1 week.
      * @param date A specified date to backdate N weeks from occurring week.
@@ -262,7 +262,7 @@ public class TransactionList {
 
     /**
      * Gets the range of dates for the last N number of months from occurring month.
-     * E.g. If the date is 21 October to backdate 2 weeks, the range will be 3 October to 16 October.
+     * E.g. If the date is 21 October 2022 to backdate 2 months, the range will be 1 August to 30 September 2022.
      *
      * @param numberOfMonths N number of months to backdate, must be minimum 1 month.
      * @param date A specified date to backdate N months from occurring month.
