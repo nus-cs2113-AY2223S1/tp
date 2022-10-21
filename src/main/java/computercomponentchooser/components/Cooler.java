@@ -38,6 +38,7 @@ public class Cooler extends Component {
     public void setSocket(String socket) {
         this.socket = socket;
     }
+
     public String toString() {
         return super.toString() + String.format(" [%s RPM] [%s dB] [%s]", fanSpeed, noiseLevel, socket);
     }
