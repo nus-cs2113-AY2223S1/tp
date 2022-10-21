@@ -28,10 +28,24 @@ public class Movie extends Media {
 
     @Override
     /**
-     * Formats the movie review to display as output
+     * Formats the movie review to display as output.
      */
     public String toString() {
         return "[Movie]" + super.toString() + " Date watched:" + super.dateString;
     }
 
+    /**
+     * Creates the string that will be saved into the file 
+     * that represents the media.
+     * 
+     * @return formatted string representing Movie information.
+     */
+    @Override
+    public String createFileString() {
+        String favourite = "N";
+        if (this.isFavourite) {
+            favourite = "Y";
+        }
+        return "M|" + favourite + "|" + super.title + "|" + super.rating + "|" + super.genre + "|" + super.dateString;
+    }
 }
