@@ -44,6 +44,9 @@ public class Build {
         case "drive":
             components.addElement("drive", component.getName(), component);
             break;
+        case "monitor":
+            components.addElement("monitor", component.getName(), component);
+            break;
         default:
             // throw exception
             break;
