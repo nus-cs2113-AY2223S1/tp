@@ -241,18 +241,29 @@ public class LocalStorage {
         Element element = (Element) node;
         String name = element.getElementsByTagName(XML_TARGET_NAME_ELEMENT)
                 .item(0).getTextContent();
+        assert name != null : "There must be a name";
+
         LocalDateTime dateTime = LocalDateTime.parse(element
                 .getElementsByTagName(XML_TARGET_DATETIME_ELEMENT).item(0).getTextContent());
+
         String description = element.getElementsByTagName(XML_TARGET_DESCRIPTION_ELEMENT)
                 .item(0).getTextContent();
+        if (description.isEmpty() || description.trim().isEmpty()) {
+            description = null;
+        }
+
         NodeList amountNodeList = element.getElementsByTagName(XML_TARGET_AMOUNT_ELEMENT);
         BigDecimal amount = new BigDecimal(amountNodeList.item(0).getTextContent());
         String currencyAmount = amountNodeList.item(0).getAttributes()
                 .getNamedItem(XML_TARGET_CURRENCY_ATTRIBUTE).getTextContent();
+        assert currencyAmount != null : "There must be a currency for amount";
+
         NodeList currentAmountNodeList = element.getElementsByTagName(XML_TARGET_CURRENT_AMOUNT_ELEMENT);
         BigDecimal currentAmount = new BigDecimal(currentAmountNodeList.item(0).getTextContent());
         String currencyCurrentAmount = currentAmountNodeList.item(0).getAttributes()
                 .getNamedItem(XML_TARGET_CURRENCY_ATTRIBUTE).getTextContent();
+        assert currencyCurrentAmount != null : "There must be a currency for current amount";
+
         return new Target(name, dateTime, description, amount, currentAmount);
     }
 
