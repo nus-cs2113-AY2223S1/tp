@@ -170,6 +170,49 @@ Step 4. The user executes `view pet` to display all pets in the pet manage syste
 The following sequence diagram shows how the status operation works:
 
 
+### [Proposed] Employee management feature
+
+### Proposed Implementation
+
+The proposed employee management mechanism is facilitated by `Employee` , `EmployeeList`, `Storage`. It implements the following operations:
+
+- `EmployeeList#addEmployee()` — Adds an employee to the employee list.
+- `EmployeeList#listEmployee()` — Views all the employees in the employee list.
+- `EmployeeList#removeEmployee()` — Removes an employee in the employee list.
+- `Storage#loadEmployee()` —  Storage stores the list of current employees into a file and this function loads it when application starts.
+
+Given below is an example usage scenario and how the employee management mechanism behaves at each step.
+
+Step 1. The user launches the application and there are already pre-existing employees loaded. `EmployeeList` initializes and loads from `Storage` the existing employees.
+
+Step 2. The user executes `employee add n/Mozart` command to add an employee named Mozart. This updates `EmployeeList` with the employee.
+
+Step 3. The user executes `employee view` command to view the current employees.
+
+Step 4. The user executes `employee remove i/1` command to remove the employee with index 1 from the employee list.
+
+The following sequence diagram shows how the employee management works:
+
+![image-20221021211809531](C:\Users\13757\AppData\Roaming\Typora\typora-user-images\image-20221021211809531.png)
+
+### Design considerations:
+
+**Aspect: How to number the employee:**
+
+- Alternative 1 (current choice):
+
+  Uses permanent indexes. When an employee is removed, the indexes of other employees are not changed.
+
+  - Pros: Each employee corresponds to only one index, which does not cause ambiguity.
+  - Cons: More complex, and the indexes easily get very large.
+
+- Alternative 2:
+
+  Uses dynamic indexes. When an employee is removed, the indexes of other employees are changed.
+
+  - Pros: More easy, and the indexes are always continuous.
+  - Cons: The index of an employee may change frequently.
+
 
 
 ## Product scope
