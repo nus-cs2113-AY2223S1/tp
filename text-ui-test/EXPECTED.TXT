@@ -534,6 +534,22 @@ Description     : This is a test recurring payment 3
 Amount          : 10.80
 
 
+The recurring payment was deleted successfully.
+
+
+The recurring payment was deleted successfully.
+
+
+The recurring payment was deleted successfully.
+
+
+
+
+ERROR: The recurring payment is not found.
+
+
+
+
 ERROR: The command entered is invalid.
 
 

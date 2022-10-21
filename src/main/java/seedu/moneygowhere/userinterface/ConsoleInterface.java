@@ -8,14 +8,15 @@ import seedu.moneygowhere.commands.ConsoleCommandAddTarget;
 import seedu.moneygowhere.commands.ConsoleCommandBye;
 import seedu.moneygowhere.commands.ConsoleCommandConvertCurrency;
 import seedu.moneygowhere.commands.ConsoleCommandDeleteExpense;
+import seedu.moneygowhere.commands.ConsoleCommandDeleteRecurringPayment;
 import seedu.moneygowhere.commands.ConsoleCommandDeleteTarget;
 import seedu.moneygowhere.commands.ConsoleCommandEditExpense;
 import seedu.moneygowhere.commands.ConsoleCommandEditTarget;
 import seedu.moneygowhere.commands.ConsoleCommandMergeExternalFile;
 import seedu.moneygowhere.commands.ConsoleCommandSortExpense;
 import seedu.moneygowhere.commands.ConsoleCommandViewExpense;
-import seedu.moneygowhere.commands.ConsoleCommandViewTarget;
 import seedu.moneygowhere.commands.ConsoleCommandViewRecurringPayment;
+import seedu.moneygowhere.commands.ConsoleCommandViewTarget;
 import seedu.moneygowhere.common.Configurations;
 import seedu.moneygowhere.common.Messages;
 import seedu.moneygowhere.currency.CurrencyApi;
@@ -34,17 +35,19 @@ import seedu.moneygowhere.exceptions.ConsoleParserCommandAddRecurringPaymentInva
 import seedu.moneygowhere.exceptions.ConsoleParserCommandAddTargetInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandConvertCurrencyInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandDeleteExpenseInvalidException;
+import seedu.moneygowhere.exceptions.ConsoleParserCommandDeleteRecurringPaymentInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandDeleteTargetInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandEditExpenseInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandEditTargetInvalidException;
+import seedu.moneygowhere.exceptions.ConsoleParserCommandMergeExternalFileInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandNotFoundException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandSortExpenseInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandViewExpenseInvalidException;
-import seedu.moneygowhere.exceptions.ConsoleParserCommandViewTargetInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandViewRecurringPaymentInvalidException;
-import seedu.moneygowhere.exceptions.ConsoleParserCommandMergeExternalFileInvalidException;
+import seedu.moneygowhere.exceptions.ConsoleParserCommandViewTargetInvalidException;
 import seedu.moneygowhere.exceptions.CurrencyInvalidException;
 import seedu.moneygowhere.exceptions.ExpenseManagerExpenseNotFoundException;
+import seedu.moneygowhere.exceptions.RecurringPaymentManagerRecurringPaymentNotFoundException;
 import seedu.moneygowhere.exceptions.TargetManagerTargetNotFoundException;
 import seedu.moneygowhere.logger.LocalLogger;
 import seedu.moneygowhere.parser.ConsoleParser;
@@ -87,6 +90,7 @@ public class ConsoleInterface {
         }
 
         scanner = new Scanner(System.in);
+
         expenseManager = new ExpenseManager();
         targetManager = new TargetManager();
         incomeManager = new IncomeManager();
@@ -341,6 +345,7 @@ public class ConsoleInterface {
             expenseManager.deleteExpense(expenseIndex);
         } catch (ExpenseManagerExpenseNotFoundException exception) {
             printErrorMessage(exception.getMessage());
+
             return;
         }
 
@@ -616,7 +621,14 @@ public class ConsoleInterface {
     }
 
     private void viewRecurringPaymentByIndex(int recurringPaymentIndex) {
-        RecurringPayment recurringPayment = recurringPaymentManager.getRecurringPayment(recurringPaymentIndex);
+        RecurringPayment recurringPayment;
+        try {
+            recurringPayment = recurringPaymentManager.getRecurringPayment(recurringPaymentIndex);
+        } catch (RecurringPaymentManagerRecurringPaymentNotFoundException exception) {
+            printErrorMessage(exception.getMessage());
+
+            return;
+        }
 
         String printStr = ""
                 + "---- RECURRING PAYMENT INDEX " + recurringPaymentIndex + " ----\n"
@@ -633,6 +645,22 @@ public class ConsoleInterface {
         } else {
             viewRecurringPayment();
         }
+    }
+
+    private void runCommandDeleteRecurringPayment(
+            ConsoleCommandDeleteRecurringPayment consoleCommandDeleteRecurringPayment
+    ) {
+        int recurringPaymentIndex = consoleCommandDeleteRecurringPayment.getRecurringPaymentIndex();
+
+        try {
+            recurringPaymentManager.deleteRecurringPayment(recurringPaymentIndex);
+        } catch (RecurringPaymentManagerRecurringPaymentNotFoundException exception) {
+            printErrorMessage(exception.getMessage());
+
+            return;
+        }
+
+        printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_DELETE_RECURRING_PAYMENT_SUCCESS);
     }
 
     private void runCommandMergeExternalFile(ConsoleCommandMergeExternalFile consoleCommandMergeExternalFile) {
@@ -664,6 +692,7 @@ public class ConsoleInterface {
                  | ConsoleParserCommandAddIncomeInvalidException
                  | ConsoleParserCommandAddRecurringPaymentInvalidException
                  | ConsoleParserCommandViewRecurringPaymentInvalidException
+                 | ConsoleParserCommandDeleteRecurringPaymentInvalidException
                  | ConsoleParserCommandMergeExternalFileInvalidException exception) {
             printErrorMessage(exception.getMessage());
         }
@@ -710,6 +739,8 @@ public class ConsoleInterface {
                 runCommandAddRecurringPayment((ConsoleCommandAddRecurringPayment) consoleCommand);
             } else if (consoleCommand instanceof ConsoleCommandViewRecurringPayment) {
                 runCommandViewRecurringPayment((ConsoleCommandViewRecurringPayment) consoleCommand);
+            } else if (consoleCommand instanceof ConsoleCommandDeleteRecurringPayment) {
+                runCommandDeleteRecurringPayment((ConsoleCommandDeleteRecurringPayment) consoleCommand);
             } else if (consoleCommand instanceof ConsoleCommandMergeExternalFile) {
                 runCommandMergeExternalFile((ConsoleCommandMergeExternalFile) consoleCommand);
             }

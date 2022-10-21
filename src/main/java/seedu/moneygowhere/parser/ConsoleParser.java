@@ -15,14 +15,15 @@ import seedu.moneygowhere.commands.ConsoleCommandAddTarget;
 import seedu.moneygowhere.commands.ConsoleCommandBye;
 import seedu.moneygowhere.commands.ConsoleCommandConvertCurrency;
 import seedu.moneygowhere.commands.ConsoleCommandDeleteExpense;
+import seedu.moneygowhere.commands.ConsoleCommandDeleteRecurringPayment;
 import seedu.moneygowhere.commands.ConsoleCommandDeleteTarget;
 import seedu.moneygowhere.commands.ConsoleCommandEditExpense;
 import seedu.moneygowhere.commands.ConsoleCommandEditTarget;
+import seedu.moneygowhere.commands.ConsoleCommandMergeExternalFile;
 import seedu.moneygowhere.commands.ConsoleCommandSortExpense;
 import seedu.moneygowhere.commands.ConsoleCommandViewExpense;
-import seedu.moneygowhere.commands.ConsoleCommandViewTarget;
 import seedu.moneygowhere.commands.ConsoleCommandViewRecurringPayment;
-import seedu.moneygowhere.commands.ConsoleCommandMergeExternalFile;
+import seedu.moneygowhere.commands.ConsoleCommandViewTarget;
 import seedu.moneygowhere.common.Configurations;
 import seedu.moneygowhere.common.Messages;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandAddExpenseInvalidException;
@@ -31,15 +32,16 @@ import seedu.moneygowhere.exceptions.ConsoleParserCommandAddRecurringPaymentInva
 import seedu.moneygowhere.exceptions.ConsoleParserCommandAddTargetInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandConvertCurrencyInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandDeleteExpenseInvalidException;
+import seedu.moneygowhere.exceptions.ConsoleParserCommandDeleteRecurringPaymentInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandDeleteTargetInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandEditExpenseInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandEditTargetInvalidException;
+import seedu.moneygowhere.exceptions.ConsoleParserCommandMergeExternalFileInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandNotFoundException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandSortExpenseInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandViewExpenseInvalidException;
-import seedu.moneygowhere.exceptions.ConsoleParserCommandViewTargetInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandViewRecurringPaymentInvalidException;
-import seedu.moneygowhere.exceptions.ConsoleParserCommandMergeExternalFileInvalidException;
+import seedu.moneygowhere.exceptions.ConsoleParserCommandViewTargetInvalidException;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -69,7 +71,7 @@ public class ConsoleParser {
     /**
      * Parses command arguments.
      *
-     * @param options   Command line options.
+     * @param options Command line options.
      * @param arguments Command line arguments.
      * @return Parsed command arguments.
      * @throws ParseException If an error is encountered during the parsing of command line arguments.
@@ -1457,6 +1459,99 @@ public class ConsoleParser {
         }
     }
 
+    private static void validateCommandDeleteRecurringPaymentOptions(Options options) {
+        boolean hasAllCliOptions = options.hasLongOption(
+                ConsoleParserConfigurations.COMMAND_DELETE_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_LONG);
+
+        assert hasAllCliOptions :
+                ConsoleParserConfigurations.COMMAND_DELETE_RECURRING_PAYMENT_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS;
+    }
+
+    private static CommandLine parseCommandDeleteRecurringPaymentArguments(Options options, String arguments) throws
+            ConsoleParserCommandDeleteRecurringPaymentInvalidException {
+        try {
+            CommandLine commandline = parseCommandArguments(options, arguments);
+
+            return commandline;
+        } catch (ParseException exception) {
+            throw new ConsoleParserCommandDeleteRecurringPaymentInvalidException(exception);
+        }
+    }
+
+    private static void validateCommandDeleteRecurringPaymentValues(CommandLine commandLine) throws
+            ConsoleParserCommandDeleteRecurringPaymentInvalidException {
+        String recurringPaymentIndexStr = commandLine.getOptionValue(
+                ConsoleParserConfigurations.COMMAND_DELETE_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_LONG
+        );
+
+        if (recurringPaymentIndexStr != null) {
+            int recurringPaymentIndex;
+
+            try {
+                recurringPaymentIndex = Integer.parseInt(recurringPaymentIndexStr);
+            } catch (NumberFormatException exception) {
+                throw new ConsoleParserCommandDeleteRecurringPaymentInvalidException(exception);
+            }
+
+            if (recurringPaymentIndex < 0) {
+                throw new ConsoleParserCommandDeleteRecurringPaymentInvalidException();
+            }
+        }
+    }
+
+    private static ConsoleCommandDeleteRecurringPayment parseCommandDeleteRecurringPaymentValues(
+            CommandLine commandLine
+    ) throws ConsoleParserCommandDeleteRecurringPaymentInvalidException {
+        try {
+            String recurringPaymentIndexStr = commandLine.getOptionValue(
+                    ConsoleParserConfigurations.COMMAND_DELETE_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_LONG
+            );
+
+            int recurringPaymentIndex;
+            if (recurringPaymentIndexStr == null) {
+                recurringPaymentIndex = -1;
+            } else {
+                recurringPaymentIndex = Integer.parseInt(recurringPaymentIndexStr);
+            }
+
+            return new ConsoleCommandDeleteRecurringPayment(recurringPaymentIndex);
+        } catch (DateTimeParseException | NumberFormatException exception) {
+            throw new ConsoleParserCommandDeleteRecurringPaymentInvalidException(exception);
+        }
+    }
+
+    private static ConsoleCommandDeleteRecurringPayment normalizeCommandDeleteRecurringPaymentValues(
+            ConsoleCommandDeleteRecurringPayment consoleCommandDeleteRecurringPayment
+    ) {
+        return consoleCommandDeleteRecurringPayment;
+    }
+
+    private static ConsoleCommandDeleteRecurringPayment parseCommandDeleteRecurringPayment(String arguments) throws
+            ConsoleParserCommandDeleteRecurringPaymentInvalidException {
+        try {
+            Options options = ConsoleParserConfigurations.getCommandDeleteRecurringPaymentOptions();
+
+            validateCommandDeleteRecurringPaymentOptions(options);
+
+            CommandLine commandLine = parseCommandDeleteRecurringPaymentArguments(options, arguments);
+
+            validateCommandDeleteRecurringPaymentValues(commandLine);
+
+            ConsoleCommandDeleteRecurringPayment consoleCommandDeleteRecurringPayment
+                    = parseCommandDeleteRecurringPaymentValues(commandLine);
+
+            ConsoleCommandDeleteRecurringPayment consoleCommandDeleteRecurringPaymentNormalized
+                    = normalizeCommandDeleteRecurringPaymentValues(consoleCommandDeleteRecurringPayment);
+
+            return consoleCommandDeleteRecurringPaymentNormalized;
+        } catch (ConsoleParserCommandDeleteRecurringPaymentInvalidException exception) {
+            throw new ConsoleParserCommandDeleteRecurringPaymentInvalidException(
+                    Messages.CONSOLE_ERROR_COMMAND_DELETE_RECURRING_PAYMENT_INVALID,
+                    exception
+            );
+        }
+    }
+
     private static void validateCommandMergeExternalFileOptions(Options options) {
         boolean hasAllCliOptions = options.hasLongOption(
                 ConsoleParserConfigurations.COMMAND_MERGE_EXTERNAL_FILE_ARG_MERGE_EXTERNAL_FILE_PATH_LONG);
@@ -1554,21 +1649,25 @@ public class ConsoleParser {
      *
      * @param consoleInput String read from standard input.
      * @return Parsed command and arguments
-     * @throws ConsoleParserCommandNotFoundException                    If the command is not found.
-     * @throws ConsoleParserCommandAddExpenseInvalidException           If the command add-expense is invalid.
-     * @throws ConsoleParserCommandViewExpenseInvalidException          If the command view-expense is invalid.
-     * @throws ConsoleParserCommandDeleteExpenseInvalidException        If the command delete-expense is invalid.
-     * @throws ConsoleParserCommandEditExpenseInvalidException          If the command edit-expense is invalid.
-     * @throws ConsoleParserCommandSortExpenseInvalidException          If the command sort-expense is invalid.
-     * @throws ConsoleParserCommandConvertCurrencyInvalidException      If the command convert-currency is invalid.
-     * @throws ConsoleParserCommandAddTargetInvalidException            If the command add-target is invalid.
-     * @throws ConsoleParserCommandViewTargetInvalidException           If the command view-target is invalid.
-     * @throws ConsoleParserCommandDeleteTargetInvalidException         If the command delete-target is invalid.
-     * @throws ConsoleParserCommandEditTargetInvalidException           If the command edit-target is invalid.
-     * @throws ConsoleParserCommandAddIncomeInvalidException            If the command add-income is invalid.
-     * @throws ConsoleParserCommandAddRecurringPaymentInvalidException  If the command Add-RecurringPayment is invalid.
-     * @throws ConsoleParserCommandViewRecurringPaymentInvalidException If the command View-RecurringPayment is invalid.
-     * @throws ConsoleParserCommandMergeExternalFileInvalidException    If the command Merge-file is invalid
+     * @throws ConsoleParserCommandNotFoundException                      If the command is not found.
+     * @throws ConsoleParserCommandAddExpenseInvalidException             If the command add-expense is invalid.
+     * @throws ConsoleParserCommandViewExpenseInvalidException            If the command view-expense is invalid.
+     * @throws ConsoleParserCommandDeleteExpenseInvalidException          If the command delete-expense is invalid.
+     * @throws ConsoleParserCommandEditExpenseInvalidException            If the command edit-expense is invalid.
+     * @throws ConsoleParserCommandSortExpenseInvalidException            If the command sort-expense is invalid.
+     * @throws ConsoleParserCommandConvertCurrencyInvalidException        If the command convert-currency is invalid.
+     * @throws ConsoleParserCommandAddTargetInvalidException              If the command add-target is invalid.
+     * @throws ConsoleParserCommandViewTargetInvalidException             If the command view-target is invalid.
+     * @throws ConsoleParserCommandDeleteTargetInvalidException           If the command delete-target is invalid.
+     * @throws ConsoleParserCommandEditTargetInvalidException             If the command edit-target is invalid.
+     * @throws ConsoleParserCommandAddIncomeInvalidException              If the command add-income is invalid.
+     * @throws ConsoleParserCommandAddRecurringPaymentInvalidException    If the command Add-RecurringPayment is
+     *                                                                    invalid.
+     * @throws ConsoleParserCommandViewRecurringPaymentInvalidException   If the command View-RecurringPayment is
+     *                                                                    invalid.
+     * @throws ConsoleParserCommandDeleteRecurringPaymentInvalidException If the command Delete-RecurringPayment is
+     *                                                                    invalid.
+     * @throws ConsoleParserCommandMergeExternalFileInvalidException      If the command Merge-file is invalid
      */
     public static ConsoleCommand parse(String consoleInput) throws
             ConsoleParserCommandNotFoundException,
@@ -1585,6 +1684,7 @@ public class ConsoleParser {
             ConsoleParserCommandAddIncomeInvalidException,
             ConsoleParserCommandAddRecurringPaymentInvalidException,
             ConsoleParserCommandViewRecurringPaymentInvalidException,
+            ConsoleParserCommandDeleteRecurringPaymentInvalidException,
             ConsoleParserCommandMergeExternalFileInvalidException {
         String command = getConsoleCommand(consoleInput);
         String arguments = getConsoleCommandArguments(consoleInput);
@@ -1617,6 +1717,8 @@ public class ConsoleParser {
             return parseCommandAddRecurringPayment(arguments);
         } else if (command.equalsIgnoreCase(ConsoleParserConfigurations.COMMAND_VIEW_RECURRING_PAYMENT)) {
             return parseCommandViewRecurringPayment(arguments);
+        } else if (command.equalsIgnoreCase(ConsoleParserConfigurations.COMMAND_DELETE_RECURRING_PAYMENT)) {
+            return parseCommandDeleteRecurringPayment(arguments);
         } else if (command.equalsIgnoreCase(ConsoleParserConfigurations.COMMAND_MERGE_EXTERNAL_FILE)) {
             return parseCommandMergeExternalFile(arguments);
         } else {
