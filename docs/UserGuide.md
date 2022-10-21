@@ -127,6 +127,21 @@ Example of usage:
 * `View-RecurringPayment`
 * `View-RecurringPayment -r 1`
 
+### Editing recurring payments: `Edit-RecurringPayment`
+Edits a recurring payment in the list of recurring payments
+
+Syntax: `Edit-RecurringPayment -r RECURRING_PAYMENT_INDEX [-n NAME] [-i INTERVAL] [-a AMOUNT] [-t DESCRIPTION]`
+
+* `NAME` and `DESCRIPTION` are text strings. You may use spaces within the text if you wrap the text with double quotes.
+* `INTERVAL` is an integer value. Set this value to the estimated number of days between your recurring payments.
+* `AMOUNT` is a decimal value.
+
+Example of usage:
+* `Edit-RecurringPayment -r 1 -n "Mobile Plan"`
+* `Edit-RecurringPayment -r 1 -i 30`
+* `Edit-RecurringPayment -r 1 -a 20.00`
+* `Edit-RecurringPayment -r 1 -n "Mobile Plan" -i 30 -a 20.00 -t "Monthly payment for my mobile plan"`
+
 ### Merge file: `Merge-File`
 Merge save file from an external source given path to the save file (.xml)
 
