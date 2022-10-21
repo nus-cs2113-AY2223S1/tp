@@ -3,6 +3,8 @@ package computercomponentchooser;
 import computercomponentchooser.components.Component;
 import computercomponentchooser.components.Cpu;
 import computercomponentchooser.components.Motherboard;
+import computercomponentchooser.components.Cooler;
+import computercomponentchooser.components.Case;
 
 import java.util.ArrayList;
 
@@ -122,6 +124,7 @@ public class Build {
 
     public boolean checkSocket() {
         String socket = "";
+        Boolean socketCompatible = true;
         for (Component component : getAllComponents()) {
             if (component.getType().equals("cpu")) {
                 socket = ((Cpu) component).getSocket();
@@ -129,7 +132,31 @@ public class Build {
         }
         for (Component component : getAllComponents()) {
             if (component.getType().equals("motherboard")) {
-                if (socket.equals(((Motherboard) component).getSocket())) {
+                if (!((Motherboard) component).getSocket().equals(socket)) {
+                    socketCompatible = false;
+                }
+            }
+        }
+        for (Component component : getAllComponents()) {
+            if (component.getType().equals("cooler")) {
+                if (!((Cooler) component).getSocket().equals(socket)) {
+                    socketCompatible = false;
+                }
+            }
+        }
+        return socketCompatible;
+    }
+
+    public boolean checkFormFactor() {
+        String formFactor = "";
+        for (Component component : getAllComponents()) {
+            if (component.getType().equals("motherboard")) {
+                formFactor = ((Motherboard) component).getFormFactor();
+            }
+        }
+        for (Component component : getAllComponents()) {
+            if (component.getType().equals("case")) {
+                if (((Case) component).getFormFactor().equals(formFactor)) {
                     return true;
                 }
             }
@@ -172,7 +199,7 @@ public class Build {
     }
 
     public String getCompability() {
-        if (checkPowerSupply() && checkSocket() && checkGpuSlot() && checkMemorySlot()) {
+        if (checkPowerSupply() && checkSocket() && checkGpuSlot() && checkMemorySlot() && checkFormFactor()) {
             return "Compatible";
         } else {
             return "Not compatible";
@@ -194,6 +221,7 @@ public class Build {
         sb.append("Socket: ").append(checkSocket()).append(System.lineSeparator());
         sb.append("GPU slot: ").append(checkGpuSlot()).append(System.lineSeparator());
         sb.append("Memory slot: ").append(checkMemorySlot()).append(System.lineSeparator());
+        sb.append("Form factor: ").append(checkFormFactor()).append(System.lineSeparator());
         return sb.toString();
     }
 }
