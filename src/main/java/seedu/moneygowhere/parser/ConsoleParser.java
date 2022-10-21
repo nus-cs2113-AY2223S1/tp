@@ -1580,7 +1580,11 @@ public class ConsoleParser {
                 && options.hasLongOption(
                 ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_AMOUNT_LONG)
                 && options.hasLongOption(
-                ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_DESCRIPTION_LONG);
+                ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_DESCRIPTION_LONG)
+                && options.hasLongOption(
+                ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_CATEGORY_LONG)
+                && options.hasLongOption(
+                ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_CURRENCY_LONG);
 
         assert hasAllCliOptions :
                 ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS;
@@ -1647,6 +1651,15 @@ public class ConsoleParser {
                 consoleCommandEditRecurringPayment.setInterval(interval);
             }
             if (commandLine.hasOption(
+                    ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_DESCRIPTION_LONG
+            )) {
+                String description = commandLine.getOptionValue(
+                        ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_DESCRIPTION_LONG
+                );
+
+                consoleCommandEditRecurringPayment.setDescription(description);
+            }
+            if (commandLine.hasOption(
                     ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_AMOUNT_LONG
             )) {
                 String amountStr = commandLine.getOptionValue(
@@ -1658,13 +1671,22 @@ public class ConsoleParser {
                 consoleCommandEditRecurringPayment.setAmount(amount);
             }
             if (commandLine.hasOption(
-                    ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_DESCRIPTION_LONG
+                    ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_CATEGORY_LONG
             )) {
-                String description = commandLine.getOptionValue(
-                        ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_DESCRIPTION_LONG
+                String category = commandLine.getOptionValue(
+                        ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_CATEGORY_LONG
                 );
 
-                consoleCommandEditRecurringPayment.setDescription(description);
+                consoleCommandEditRecurringPayment.setCategory(category);
+            }
+            if (commandLine.hasOption(
+                    ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_CURRENCY_LONG
+            )) {
+                String currency = commandLine.getOptionValue(
+                        ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_CURRENCY_LONG
+                );
+
+                consoleCommandEditRecurringPayment.setCurrency(currency);
             }
 
             return consoleCommandEditRecurringPayment;
