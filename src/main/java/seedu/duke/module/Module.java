@@ -186,7 +186,7 @@ public class Module {
     private HashMap<String, ArrayList<Lesson>> classifyLessons(List<Lesson> lessons) {
         HashMap<String, ArrayList<Lesson>> classifiedLessons = new HashMap<String, ArrayList<Lesson>>();
         for (Lesson lesson : lessons) {
-            if(!classifiedLessons.containsKey(lesson.getLessonType())) {
+            if (!classifiedLessons.containsKey(lesson.getLessonType())) {
                 classifiedLessons.put(lesson.getLessonType(), new ArrayList<Lesson>());
                 classifiedLessons.get(lesson.getLessonType()).add(lesson);
             } else {
