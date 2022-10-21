@@ -58,6 +58,10 @@ public class Motherboard extends Component {
                 memorySlots, gpuSlots);
     }
 
+    public String toCSV() {
+        return super.toCSV() + "," + socket + "," + formFactor + "," + memorySlots + "," + gpuSlots;
+    }
+
     @Override
     public String saveAsString() {
         return super.saveAsString() + "/" + socket + "/" + formFactor + "/" + memorySlots + "/" + gpuSlots;

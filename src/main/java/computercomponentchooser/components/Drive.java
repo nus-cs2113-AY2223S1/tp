@@ -33,6 +33,10 @@ public class Drive extends Component {
         return super.toString() + String.format(" [%s GB] [%s]", size, driveType);
     }
 
+    public String toCSV() {
+        return super.toCSV() + "," + size + "," + driveType;
+    }
+
     @Override
     public String saveAsString() {
         return super.saveAsString() + "/" + size + "/" + driveType;

@@ -42,6 +42,10 @@ public class Gpu extends Component {
         return super.toString() + String.format(" [%s GB] [%s MHz]", memory, clock);
     }
 
+    public String toCSV() {
+        return super.toCSV() + "," + memory + "," + clock;
+    }
+
     @Override
     public String saveAsString() {
         return super.saveAsString() + "/" + memory + "/" + clock;

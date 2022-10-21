@@ -35,6 +35,10 @@ public abstract class Component {
         return String.format("%s [$%s] [%s W]", name, price, power);
     }
 
+    public String toCSV() {
+        return String.format("%s,%s,%s", name, price, power);
+    }
+
     /**
      * Returns a string representation of the component's attributes and used to save.
      *
