@@ -24,7 +24,6 @@ import static seedu.duke.CommandStructure.PROPERTY_FLAG;
 import static seedu.duke.CommandStructure.CLIENT_FLAG;
 import static seedu.duke.Messages.MESSAGE_INCORRECT_LIST_DETAILS;
 import static seedu.duke.Messages.MESSAGE_MISSING_SUB_COMMAND_TYPE;
-import static seedu.duke.Messages.MESSAGE_INVALID_FIND_SUBCOMMANMD;
 
 
 public class ParserManager {
