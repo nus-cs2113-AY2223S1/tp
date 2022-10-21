@@ -1,8 +1,19 @@
 package seedu.duke.parser;
 
-import seedu.duke.command.*;
-import seedu.duke.exceptions.YamonException;
+import seedu.duke.command.AddModuleCommand;
+import seedu.duke.command.Command;
+import seedu.duke.command.DeleteModuleCommand;
+import seedu.duke.command.ExitCommand;
+import seedu.duke.command.GetModuleCommand;
+import seedu.duke.command.HelpCommand;
+import seedu.duke.command.ViewTimetableCommand;
+import seedu.duke.command.SelectSlotCommand;
+import seedu.duke.command.SelectSemesterCommand;
+import seedu.duke.command.SearchModuleCommand;
+import seedu.duke.command.ImportCommand;
+import seedu.duke.command.ExportCommand;
 
+import seedu.duke.exceptions.YamomException;
 
 import java.util.Map;
 import java.util.TreeMap;
@@ -10,46 +21,56 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Parser {
-    public static Command parse(String userInput) throws YamonException {
+    public static Command parse(String userInput) throws YamomException {
         String[] keywords = userInput.split("\\s+");
 
         try {
             Command toExecute;
             switch (keywords[0]) {
-                case (SearchModuleCommand.COMMAND_WORD):
-                    toExecute = searchCommand(userInput);
-                    break;
-                case (AddModuleCommand.COMMAND_WORD):
-                    toExecute = moduleRelatedCommand(keywords, new AddModuleCommand(keywords));
-                    break;
-                case (DeleteModuleCommand.COMMAND_WORD):
-                    toExecute = moduleRelatedCommand(keywords, new DeleteModuleCommand(keywords));
-                    break;
-                case (ViewTimetableCommand.COMMAND_WORD):
-                    toExecute = singleWordCommand(keywords, new ViewTimetableCommand(keywords));
-                    break;
-                case (HelpCommand.COMMAND_WORD):
-                    toExecute = singleWordCommand(keywords, new HelpCommand(keywords));
-                    break;
-                case (SelectSlotCommand.COMMAND_WORD):
-                    toExecute = new SelectSlotCommand(userInput);
-                    break;
-                case (ExitCommand.COMMAND_WORD):
-                    toExecute = singleWordCommand(keywords, new ExitCommand(keywords));
-                    break;
-                case (ExportCommand.COMMAND_WORD):
-                    toExecute = singleWordCommand(keywords, new ExportCommand(keywords));
-                    break;
-                case (ImportCommand.COMMAND_WORD):
-                    toExecute = moduleRelatedCommand(keywords, new ImportCommand(keywords));
-                    break;
-                default:
-                    throw new YamonException("Cannot process the command");
+            case (SearchModuleCommand.COMMAND_WORD):
+                toExecute = searchCommand(userInput);
+                break;
+            case (GetModuleCommand.COMMAND_WORD):
+                toExecute = getCommand(keywords);
+                break;
+            case (AddModuleCommand.COMMAND_WORD):
+                toExecute = moduleRelatedCommand(keywords, new AddModuleCommand(keywords));
+                break;
+            case (DeleteModuleCommand.COMMAND_WORD):
+                toExecute = moduleRelatedCommand(keywords, new DeleteModuleCommand(keywords));
+                break;
+            case (ViewTimetableCommand.COMMAND_WORD):
+                toExecute = singleWordCommand(keywords, new ViewTimetableCommand(userInput));
+                break;
+            case (HelpCommand.COMMAND_WORD):
+                toExecute = singleWordCommand(keywords, new HelpCommand(keywords));
+                break;
+            case (SelectSlotCommand.COMMAND_WORD):
+                toExecute = new SelectSlotCommand(userInput);
+                break;
+            case (ExitCommand.COMMAND_WORD):
+                toExecute = singleWordCommand(keywords, new ExitCommand(keywords));
+                break;
+            case (SelectSemesterCommand.COMMAND_WORD):
+                toExecute = selectSemesterCommand(keywords, new SelectSemesterCommand(keywords));
+                break;
+            case (ExportCommand.COMMAND_WORD):
+                toExecute = singleWordCommand(keywords, new ExportCommand(keywords));
+                break;
+            case (ImportCommand.COMMAND_WORD):
+                toExecute = nusmodCommand(keywords, new ImportCommand(keywords));
+                break;
+            default:
+                throw new YamomException("Cannot process the command");
             }
             return toExecute;
-        } catch (YamonException e) {
+        } catch (YamomException e) {
             throw e;
         }
+    }
+
+    private static Command getCommand(String[] keywords) {
+        return new GetModuleCommand(keywords);
     }
 
     public static boolean isPartialModuleCode(String moduleCode) {
@@ -109,6 +130,11 @@ public class Parser {
         return isTwoWordsCommand(keywords) && isValidModuleCode(keywords[1]);
     }
 
+    private static boolean isValidSemester(String[] keywords) {
+        int semesterInput = Integer.parseInt(keywords[1]);
+        return semesterInput > 0 && semesterInput <= 4;
+    }
+
     public static Command searchCommand(String userInput) {
         return new SearchModuleCommand(userInput);
     }
@@ -122,7 +148,7 @@ public class Parser {
      * @param command  the command that the user wants to execute
      * @return type of command
      */
-    public static Command moduleRelatedCommand(String[] keywords, Command command) throws YamonException {
+    public static Command moduleRelatedCommand(String[] keywords, Command command) throws YamomException {
 
         if (isValidTwoWordCommand(keywords)) {
             return command;
@@ -144,14 +170,30 @@ public class Parser {
             errorMessage = "Unknown command, try again";
         }
 
-        throw new YamonException(errorMessage);
+        throw new YamomException(errorMessage);
     }
 
-    public static Command singleWordCommand(String[] keywords, Command command) throws YamonException {
+    public static Command nusmodCommand(String[] keywords, Command command) throws YamomException {
+        if (isTwoWordsCommand(keywords)) {
+            return command;
+        } else {
+            throw new YamomException("Expecting an NUSMOD link");
+        }
+    }
+
+    public static Command singleWordCommand(String[] keywords, Command command) throws YamomException {
         if (isOneWordCommand(keywords)) {
             return command;
         } else {
-            throw new YamonException("0 arguments expected");
+            throw new YamomException("0 arguments expected");
+        }
+    }
+
+    public static Command selectSemesterCommand(String[] keywords, Command command) throws YamomException {
+        if (isValidSemester(keywords)) {
+            return command;
+        } else {
+            throw new YamomException("Not a valid semester");
         }
     }
 
@@ -164,8 +206,8 @@ public class Parser {
         String paramsString = description.substring(firstSlash + 1);
         for (String param : paramsString.split(" /")) {
             int firstSpace = param.indexOf(' ');
-            String key = param.substring(0, firstSpace).trim();
-            String value = param.substring(firstSpace + 1).trim();
+            String key = firstSpace == -1 ? param : param.substring(0, firstSpace).trim();
+            String value = firstSpace == -1 ? "" : param.substring(firstSpace + 1).trim();
             paramsMap.put(key, value);
         }
         return paramsMap;

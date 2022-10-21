@@ -1,12 +1,13 @@
 package seedu.duke.command;
 
 import org.apache.commons.lang3.tuple.Pair;
-import seedu.duke.exceptions.YamonException;
+import seedu.duke.exceptions.YamomException;
 import seedu.duke.model.LessonType;
 import seedu.duke.model.Module;
 import seedu.duke.model.RawLesson;
 import seedu.duke.model.SelectedModule;
 import seedu.duke.model.Timetable;
+import seedu.duke.parser.Parser;
 import seedu.duke.utils.State;
 import seedu.duke.utils.Storage;
 import seedu.duke.utils.Ui;
@@ -17,9 +18,20 @@ import java.util.Map;
 
 public class ViewTimetableCommand extends Command {
     public static final String COMMAND_WORD = "view";
+    private static final String ERROR_MESSAGE_EMPTY_TIMETABLE = "Your timetable is empty."
+            + System.lineSeparator() + "Please select your modules first before viewing.";
 
-    public ViewTimetableCommand(String[] input) {
-        super(input);
+    private boolean showFancy;
+    private boolean showSimple;
+
+    public ViewTimetableCommand(String input) {
+        super(input.split("\\s+"));
+        var params = Parser.parseParams(input);
+        showFancy = params.containsKey("fancy");
+        showSimple = params.containsKey("simple");
+        // if (showFancy && showSimple) {
+        //     throw new Exception("Timetable cannot be both simple and fancy!");
+        // }
     }
 
     @Override
@@ -34,12 +46,19 @@ public class ViewTimetableCommand extends Command {
         }
         try {
             checkForEmptyTimetable(numOfNotSelectedModules, selectedModules);
-        } catch (YamonException e) {
+        } catch (YamomException e) {
             ui.addMessage(e.getMessage());
             ui.displayUi();
             return;
         }
-        Timetable timetable = new Timetable(lessons, false, true);
+        Timetable timetable;
+        if (showFancy) {
+            timetable = new Timetable(lessons, true, false);
+        } else if (showSimple) {
+            timetable = new Timetable(lessons, false, true);
+        } else {
+            timetable = new Timetable(lessons);
+        }
         ui.addMessage(timetable.toString());
         ui.displayUi();
     }
@@ -52,11 +71,9 @@ public class ViewTimetableCommand extends Command {
     }
 
     private static void checkForEmptyTimetable(int numOfNotSelectedModules, List<SelectedModule> selectedModules)
-            throws YamonException {
+            throws YamomException {
         if (numOfNotSelectedModules == selectedModules.size()) {
-            final String ERROR_MESSAGE = "Your timetable is empty." + System.lineSeparator()
-                    + "Please select your modules first before viewing.";
-            throw new YamonException(ERROR_MESSAGE);
+            throw new YamomException(ERROR_MESSAGE_EMPTY_TIMETABLE);
         }
     }
 
