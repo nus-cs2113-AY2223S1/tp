@@ -177,7 +177,7 @@ public class Parser {
         if (isTwoWordsCommand(keywords)) {
             return command;
         } else {
-            throw new YamomException("Expecting an NUSMOD link");
+            throw new YamomException("no NUSMOD link given");
         }
     }
 
