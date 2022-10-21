@@ -20,6 +20,11 @@ import seedu.duke.model.Module;
 public class GetModuleCommand extends Command {
     Module module;
     public static final String COMMAND_WORD = "get";
+    public static final String FORMAT = "get MODULE_CODE";
+    public static final String HELP_DISPLAY = COMMAND_WORD
+            + ": returns all details of the module!\n"
+            + "Usage:\t"
+            + FORMAT;
 
     public GetModuleCommand(String[] input) {
         super(input);
