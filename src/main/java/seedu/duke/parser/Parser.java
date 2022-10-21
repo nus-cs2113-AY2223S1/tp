@@ -4,9 +4,11 @@ import seedu.duke.command.AddModuleCommand;
 import seedu.duke.command.Command;
 import seedu.duke.command.DeleteModuleCommand;
 import seedu.duke.command.ExitCommand;
+import seedu.duke.command.GetModuleCommand;
 import seedu.duke.command.HelpCommand;
 import seedu.duke.command.ViewTimetableCommand;
 import seedu.duke.command.SelectSlotCommand;
+import seedu.duke.command.SelectSemesterCommand;
 import seedu.duke.command.SearchModuleCommand;
 import seedu.duke.exceptions.IncompleteCommandException;
 import seedu.duke.exceptions.InvalidModuleException;
@@ -23,21 +25,29 @@ public class Parser {
         switch (keywords[0]) {
         case (SearchModuleCommand.COMMAND_WORD):
             return searchCommand(userInput);
+        case (GetModuleCommand.COMMAND_WORD):
+            return getCommand(keywords);
         case (AddModuleCommand.COMMAND_WORD):
             return addDeleteCommand(keywords, new AddModuleCommand(keywords));
         case (DeleteModuleCommand.COMMAND_WORD):
             return addDeleteCommand(keywords, new DeleteModuleCommand(keywords));
         case (ViewTimetableCommand.COMMAND_WORD):
-            return viewHelpExitCommand(keywords, new ViewTimetableCommand(keywords));
+            return new ViewTimetableCommand(userInput);
         case (HelpCommand.COMMAND_WORD):
             return viewHelpExitCommand(keywords, new HelpCommand(keywords));
         case (SelectSlotCommand.COMMAND_WORD):
             return new SelectSlotCommand(userInput);
         case (ExitCommand.COMMAND_WORD):
             return viewHelpExitCommand(keywords, new ExitCommand(keywords));
+        case (SelectSemesterCommand.COMMAND_WORD):
+            return selectSemesterCommand(keywords, new SelectSemesterCommand(keywords));
         default:
             throw new UnknownCommandException();
         }
+    }
+
+    private static Command getCommand(String[] keywords) {
+        return new GetModuleCommand(keywords);
     }
 
     public static boolean isPartialModuleCode(String moduleCode) {
@@ -97,6 +107,11 @@ public class Parser {
         return isTwoWordsCommand(keywords) && isValidModuleCode(keywords[1]);
     }
 
+    private static boolean isValidSemester(String[] keywords) {
+        int semesterInput = Integer.parseInt(keywords[1]);
+        return semesterInput > 0 && semesterInput <= 4;
+    }
+
     public static Command searchCommand(String userInput) {
         return new SearchModuleCommand(userInput);
     }
@@ -143,6 +158,14 @@ public class Parser {
         }
     }
 
+    public static Command selectSemesterCommand(String[] keywords, Command command) {
+        if (isValidSemester(keywords)) {
+            return command;
+        } else {
+            return new UnknownCommand(keywords);
+        }
+    }
+
     public static Map<String, String> parseParams(String description) {
         Map<String, String> paramsMap = new TreeMap<>();
         int firstSlash = description.indexOf('/');
@@ -152,8 +175,8 @@ public class Parser {
         String paramsString = description.substring(firstSlash + 1);
         for (String param : paramsString.split(" /")) {
             int firstSpace = param.indexOf(' ');
-            String key = param.substring(0, firstSpace).trim();
-            String value = param.substring(firstSpace + 1).trim();
+            String key = firstSpace == -1 ? param : param.substring(0, firstSpace).trim();
+            String value = firstSpace == -1 ? "" : param.substring(firstSpace + 1).trim();
             paramsMap.put(key, value);
         }
         return paramsMap;

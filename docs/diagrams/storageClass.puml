@@ -1,0 +1,18 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+hide circle
+skinparam classAttributeIconSize 0
+
+class Storage {
+    + FILE_PATH: String
+    + NO_PREVIOUS_STATE_ERROR_MESSAGE: String
+    + LOADING_PREVIOUS_STATE_MESSAGE: String
+    + EXPORT_MESSAGE: String
+    - logger: Logger
+    + SUBSYSTEM_NAME: String
+
+    + openPreviousState(State, Ui): void
+    - readPreviousState(): String
+    + saveState(State, Ui): void
+}
+@enduml
