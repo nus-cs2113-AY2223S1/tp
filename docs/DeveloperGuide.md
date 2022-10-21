@@ -50,6 +50,12 @@ and are avid movie watchers. Therefore this app is customised to their preferenc
 |v2.0|user| star/favorite a movie        | mark shows that I would like to watch again. |
 |v2.0|user| display a list that displays starred movies and shows        | view which are my favorites.|
 |v2.0|user| be able to save my information after I exit the program   | offload it from my mind. |
+|v2.0|user| list the movies I have watched                        | view what movies I have watched              |
+|v2.0|user| list the tv shows I have watched                      | view what tv shows I have watched            |
+|v2.0|user| search movies using a keyword                         | to find a specific movie I have watched      |
+|v2.0|user| search tv show using a keyword                        | to find a specific tv show I have watched    |
+|v2.0|user| clear movies that I have watched                      | to clear my watch history                    |
+|v2.0|user| clear tv shows that I have watched                    | to clear my watch history                    |
 
 
 ## Non-Functional Requirements
@@ -63,6 +69,17 @@ and are avid movie watchers. Therefore this app is customised to their preferenc
 ## Instructions for manual testing
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+- Load Main 
+- Add a movie or tv show 
+  - Command:
+    - add /movie test /rating 5  /date 02-02-2022 /genre horror)
+    - add /tvshow test /rating 5  /date 02-02-2022 /genre horror /site e
+- List movies and tv shows 
+  - Command: list
+- Remove a movie or tv show
+  - Command: remove (index #)
+- Clear history
+  - Command: clear
 
 
 
