@@ -42,7 +42,9 @@ parser() method will not be reflected in order to improve readability.
 1. [Add a passenger feature](#Add-a-passenger-feature)
 2. [Delete a passenger feature](#Delete-a-passenger-feature)
 3. [List passengers feature](#List-passengers-feature)
-4. [Delete a flight feature](#Delete-a-flight-feature)
+4. [Add a flight feature](#Add-a-flight-feature)
+5. [Delete a flight feature](#Delete-a-flight-feature)
+6. [List flights feature](#List-flights-feature)
 
 ---
 
@@ -79,6 +81,7 @@ Step 4. The `passenger` object is then added to the list of passengers
 6. `Ui` class level method `showAddedPassenger(PassengerInfo passenger)` is used to display to the user that passenger
 has been added to the list successfully.
 
+---
 
 ### Delete a passenger feature 
 
@@ -178,6 +181,26 @@ from `OperationList` is empty or not.
 3. If `passengers` is empty, prints empty table, else prints respective passenger details in table form.
 
 ---
+
+### Add a flight feature
+
+The Add a flight function adds a flight with its corresponding details to the flight list.
+
+**Sequence Diagram**
+
+**_NOTE:_** Exceptions are omitted for readability.
+
+![sequence diagram](../docs/ug-diagrams/images/flightAddCmdSeqDiagram.jpg)
+
+When the `Parser` recognizes the `add flight` command, `AddFlightCommand` is instantiated.
+1. The `AddFlightCommand` then implements a new `addOperation(lineInput:String)` in `FlightList`
+2. `FlightList` then instantiates the `FlightInfo` Object using the attributes retrieved from the 
+user input in the previous step.
+3. `Ui` class level method `showFlightAddedMessage()` is used to inform the user they have added a flight.
+
+
+---
+
 ### Delete a flight feature
 
 A delete function which allows the user to delete a flight specified with its flight number and
@@ -209,6 +232,21 @@ create an instantiation of `DeleteFlightCommand`.
 to find if the flight number exists and remove it from the arraylist.
 4. Upon successful deletion, `showFlightRemovedMessage()` is called which prints a message to the user to indicate a successful
 delete operation
+
+---
+### List flights feature
+
+The list function lists out all flight details in a table form which is facilitated by `ListFlightCommand`. 
+It extends an abstract `Command` class with an override method called `execute`.
+
+![sequence diagram](../docs/ug-diagrams/images/flightListCmdSeqDiagram.jpg)
+
+When the `Parser` recognizes the `flight list` command, `ListFlightCommand` is instantiated.
+
+1. The `ListFlightCommand` would call on the `listOperation()` method in the `FlightList`. 
+2. In turn, the method calls `showListOfFlights` in the Ui class. It calls `checkEmptyFlightList` to check if the flight OperationList is empty.
+3. If the `numOfFlights == 0`, an empty table is printed. Else, it would print the respective flight details in a table form.
+
 
 ## Product scope
 ### Target user profile
