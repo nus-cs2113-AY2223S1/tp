@@ -36,9 +36,9 @@ public class TvShow extends Media {
 
     /**
      * Creates the string that will be saved into the file 
-     * that represents the media
+     * that represents the media.
      * 
-     * @return formatted string representing TvShow information
+     * @return formatted string representing TvShow information.
      */
     @Override
     public String createFileString() {
@@ -46,6 +46,10 @@ public class TvShow extends Media {
         if (this.isFavourite) {
             favourite = "Y";
         }
-        return "T|" + favourite + "|" + super.title + "|" + super.rating + "|" + super.genre + "|" + super.dateString + "|" + this.site;
+        
+        String returnString = "T|" + favourite + "|" + super.title + "|" + super.rating + 
+            "|" + super.genre + "|" + super.dateString + "|" + this.site;
+        
+            return returnString;
     }
 }

@@ -76,7 +76,7 @@ public class Media {
         title = "";
         rating = 0;
         genre = "";
-        dateWatched= null;
+        dateWatched = null;
     }
 
     /**.

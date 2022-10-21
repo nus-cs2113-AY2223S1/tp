@@ -35,8 +35,7 @@ public class Storage {
                 folder.mkdirs();
                 file.createNewFile();
                 return file;
-            }
-            else if (!file.exists() && folder.isDirectory()) {
+            } else if (!file.exists() && folder.isDirectory()) {
                 // need to create file as determined by the path string
                 file.createNewFile();
                 return file;
@@ -50,10 +49,10 @@ public class Storage {
     }
 
     public void loadMedia(File f, ReviewList reviewList) {
-        final String SPLITTER = "\\|";
-        final String MOVIE_IDENTIFIER = "M";
-        final String TVSHOW_IDENTIFIER = "T";
-        final String YES = "Y";
+        final String splitter = "\\|";
+        final String movieIdentifier = "M";
+        final String tvShowIdentifier = "T";
+        final String yesString = "Y";
 
         // read in past saved data
         try {
@@ -61,17 +60,17 @@ public class Storage {
         
             while (fileScanner.hasNext()) {
                 String lineInput = fileScanner.nextLine();
-                String[] words = lineInput.split(SPLITTER);
+                String[] words = lineInput.split(splitter);
                 double rating = Double.parseDouble(words[3]);
                 Media newMedia = new Media();
 
                 switch (words[0]) {
-                case MOVIE_IDENTIFIER:
+                case movieIdentifier:
                     newMedia = new Movie(words[2], rating, words[4], words[5]);
                     reviewList.add(newMedia);
                     break;
 
-                case TVSHOW_IDENTIFIER:
+                case tvShowIdentifier:
                     newMedia = new TvShow(words[2], rating, words[4], words[5], words[6]);
                     reviewList.add(newMedia);
                     break;
@@ -80,7 +79,7 @@ public class Storage {
                     break;
                 }
 
-                if (words[1].equals(YES)) {
+                if (words[1].equals(yesString)) {
                     newMedia.setFavourite(true);
                 }
             }
@@ -94,9 +93,9 @@ public class Storage {
 
     /**
      * Writes the information in the tasks array to the file
-     * in the specified location for storage
+     * in the specified location for storage.
      * 
-     * @param tasks the current list of tasks to be written into the file
+     * @param reviewList the current list of tasks to be written into the file.
      */
     public void updateFile(ReviewList reviewList) { 
         try {
