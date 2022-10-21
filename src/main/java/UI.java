@@ -13,42 +13,49 @@ public class UI {
 
     // General Invalid Error Message
     private static final String INVALID_MAIN_MENU_COMMAND_MESSAGE = "Incorrect input. Please type 1, 2, 3 or bye";
+    private static final String INDEX_OUT_OF_RANGE_MESSAGE = "The index number is out of range. Try again.";
 
     // Patient
     private static final String PATIENT_MAIN_MENU =
             "This is the Patient Main Menu!" + System.lineSeparator()
-            + "List of commands: " + System.lineSeparator()
-            + "* To add a patient: add n/[name] g/[M/F] d/[DOB] i/[ID]" + System.lineSeparator()
-            + "* To list all patients: viewall" + System.lineSeparator()
-            + "* To retrieve information about a specific patient: retrieve i/[ID]" + System.lineSeparator()
-            + "* To edit a patient's records: edit i/ID (n/[name] or g/[M/F] or d/[DOB])" + System.lineSeparator()
-            + "* To return to main menu: main" + System.lineSeparator()
-            + "* To quit OneDoc: bye";
+            + "List of commands: "
+            + UI.PATIENT_ADD
+            + UI.PATIENT_VIEW_ALL
+            + UI.PATIENT_RETRIEVE
+            + UI.PATIENT_EDIT
+            + UI.RETURN_TO_MAIN
+            + UI.EXIT_PROGRAM;
 
     // Prescription
     private static final String NO_PRESCRIPTION_MESSAGE = "There are currently no prescriptions in the record.";
     private static final String PRESCRIPTION_MAIN_MENU =
             "This is the Prescription Main Menu!" + System.lineSeparator()
-            + "List of commands:" + System.lineSeparator()
-            + "* To add a prescription: add i/ID n/[name] d/[dosage] t/[time interval]" + System.lineSeparator()
-            + "* To edit a prescription: edit i/[index] (n/[name] or d/[dosage] or t/[time interval])"
-            + System.lineSeparator()
-            + "* To view all prescription records: viewAll" + System.lineSeparator()
-            + "* To return to main menu: main" + System.lineSeparator()
-            + "* To quit OneDoc: bye";
+            + "List of commands:"
+            + UI.PRESCRIPTION_ADD
+            + UI.PRESCRIPTION_EDIT
+            + UI.PRESCRIPTION_VIEW_ALL
+            + UI.PRESCRIPTION_VIEW_PATIENT
+            + UI.PRESCRIPTION_VIEW_ACTIVE
+            + UI.PRESCRIPTION_CHANGE_ACTIVE
+            + UI.PRESCRIPTION_CHANGE_INACTIVE
+            + UI.RETURN_TO_MAIN
+            + UI.EXIT_PROGRAM;
+    private static final String NO_MATCHING_PRESCRIPTION_MESSAGE = "There are currently no prescriptions from this "
+            + "patient.";
+    private static final String NO_MATCHING_ACTIVE_PRESCRIPTION_MESSAGE = "There are currently no active prescriptions "
+            + "from this patient.";
 
     // Visit
     private static final String VISIT_MAIN_MENU =
             "This is the Visits Main Menu!" + System.lineSeparator()
-            + "List of commands:" + System.lineSeparator()
-            + "* To add a visit: add i/[ID] d/[date] t/[time] r/[reason]" + System.lineSeparator()
-            + "* To edit a visit's reason: edit i/[ID] r/[reason]"
-            + System.lineSeparator()
-            + "* To view all visit records: 'viewAll'" + System.lineSeparator()
-            + "* To return to main menu: main" + System.lineSeparator()
-            + "* To quit OneDoc: bye";
-
-    private static final String INDEX_OUT_OF_RANGE_MESSAGE = "The index number is out of range. Try again.";
+            + "List of commands:"
+            + UI.VISIT_ADD
+            + UI.VISIT_EDIT
+            + UI.VISIT_VIEW_ALL
+            + UI.VISIT_VIEW_PATIENT
+            + UI.VISIT_VIEW
+            + UI.RETURN_TO_MAIN
+            + UI.EXIT_PROGRAM;
 
     public UI() {
         scanner = new Scanner(System.in);
@@ -167,6 +174,64 @@ public class UI {
             System.out.print("_");
         }
         System.out.println();
+    }
+
+    public static final String PATIENT_ADD = "\n* To add a patient: add n/[name] g/[M/F] d/[DOB] i/[ID]";
+    public static final String PATIENT_EDIT = "\n* To edit a patient's information: "
+            + "edit i/[ID] (n/[name] or g/[M/F] or d/[DOB])";
+    public static final String PATIENT_RETRIEVE = "\n* To retrieve information about a specific patient:"
+            + " retrieve i/[ID]";
+
+    public static final String PATIENT_VIEW_ALL = "\n* To list all patients: viewall";
+    public static final String VISIT_ADD = "\n* To add a visit: add i/[ID] d/[date] t/[time] r/[reason]";
+    public static final String VISIT_EDIT = "\n* To edit a visit's reason: edit i/[ID] r/[reason]";
+    public static final String VISIT_VIEW_ALL = "\n* To list all visits: viewall";
+    public static final String VISIT_VIEW_PATIENT = "\n* To list all visits of one patient: viewPatient i/[ID]";
+    public static final String VISIT_VIEW = "\n* To view a patient's specific visit: viewVisit i/[ID] [INDEX]";
+
+    public static final String PRESCRIPTION_ADD = "\n* To add a prescription: add i/ID "
+            + "n/[name] d/[dosage] t/[time interval]";
+    public static final String PRESCRIPTION_EDIT = "\n* To edit a prescription: edit i/[index] "
+            + "(n/[name] or d/[dosage] or t/[time interval])";
+
+    public static final String PRESCRIPTION_VIEW_ALL = "\n* To list all prescriptions: viewall";
+
+    public static final String PRESCRIPTION_VIEW_PATIENT = "\n* To list all prescriptions of one patient: "
+            + "viewPatientPres i/[ID]";
+
+    public static final String PRESCRIPTION_VIEW_ACTIVE = "\n* To list all active prescriptions of one "
+        + "patient: viewActPatientPres i/[ID]";
+
+    public static final String PRESCRIPTION_CHANGE_ACTIVE = "\n* To change a prescription record to be "
+            + "active: activate i/INDEX";
+
+    public static final String PRESCRIPTION_CHANGE_INACTIVE = "\n* To change a prescription record to be "
+            + "inactive: deactivate i/[ID]";
+
+    public static final String RETURN_TO_MAIN =  "\n* To return to main menu: main";
+
+    public static final String EXIT_PROGRAM =  "\n* To quit OneDoc: bye";
+
+    public void printActivatePrescriptionMessage(String prescription) {
+        System.out.println("Ok, I've activated the prescription below:");
+        printLine();
+        System.out.println(prescription);
+        printLine();
+    }
+
+    public void printDeactivatePrescriptionMessage(String prescription) {
+        System.out.println("Ok, I've deactivated the prescription below:");
+        printLine();
+        System.out.println(prescription);
+        printLine();
+    }
+
+    public void printNoMatchingPrescriptionMessage() {
+        System.out.println(NO_MATCHING_PRESCRIPTION_MESSAGE);
+    }
+
+    public void printNoMatchingActivePrescriptionMessage() {
+        System.out.println(NO_MATCHING_ACTIVE_PRESCRIPTION_MESSAGE);
     }
 }
 

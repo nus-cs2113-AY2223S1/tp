@@ -41,9 +41,43 @@ public class PrescriptionList {
         ui.printViewAllPrescriptionsMessage();
         ui.printLine();
         for (int i = 0; i < prescriptionsList.size(); i++) {
-            System.out.println((i + 1) + ")");
+            System.out.println("Prescription #" + (i + 1));
             System.out.println(prescriptionsList.get(i));
             ui.printLine();
+        }
+    }
+
+    public void viewPatientPrescription(UI ui, String patientId) {
+        if (isEmpty() || hasPatientPrescription(patientId)) {
+            ui.printNoMatchingPrescriptionMessage();
+            return;
+        }
+
+        ui.printViewAllPrescriptionsMessage();
+        ui.printLine();
+        for (int i = 0; i < prescriptionsList.size(); i++) {
+            if (prescriptionsList.get(i).isMatchedPatient(patientId)) {
+                System.out.println("Prescription #" + (i + 1));
+                System.out.println(prescriptionsList.get(i));
+                ui.printLine();
+            }
+        }
+    }
+
+    public void viewActivePatientPrescription(UI ui, String patientId) {
+        if (isEmpty() || hasPatientPrescription(patientId)) {
+            ui.printNoMatchingActivePrescriptionMessage();
+            return;
+        }
+
+        ui.printViewAllPrescriptionsMessage();
+        ui.printLine();
+        for (int i = 0; i < prescriptionsList.size(); i++) {
+            if (prescriptionsList.get(i).isMatchedPatientActive(patientId)) {
+                System.out.println("Prescription #" + (i + 1));
+                System.out.println(prescriptionsList.get(i));
+                ui.printLine();
+            }
         }
     }
 
@@ -55,27 +89,79 @@ public class PrescriptionList {
         assert dosage != null : "dosage should not be null";
         assert timeInterval != null : "time interval should not be null";
 
-        if (prescriptionNumber < 1 || prescriptionNumber > prescriptionsList.size()) {
+        int index = prescriptionNumber - 1;
+
+        if (isInvalidIndex(index)) {
             ui.printIndexOutOfRangeErrorMessage();
             return;
         }
 
-        int index = prescriptionNumber - 1;
+        Prescription prescriptionEdited = prescriptionsList.get(index);
+        String newMedicine = medicine.isEmpty() ? prescriptionEdited.getMedicine() : medicine;
+        String newDosage = dosage.isEmpty() ? prescriptionEdited.getDosage() : dosage;
+        String newTimeInterval = timeInterval.isEmpty() ? prescriptionEdited.getTimeInterval() : timeInterval;
+        String patientId =  prescriptionEdited.getPatientId();
+
+        prescriptionEdited.setInactive();
+        Prescription newPrescription = new Prescription(patientId, newMedicine, newDosage, newTimeInterval);
+
+        prescriptionsList.add(newPrescription);
+
+        ui.printEditPrescriptionMessage(newPrescription.toString());
+    }
+
+    private boolean hasPatientPrescription(String patientId) {
+        for (Prescription prescription : prescriptionsList) {
+            if (prescription.isMatchedPatientActive(patientId)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public void activatePrescription(UI ui, String prescriptionNumber) {
+        Integer index = getIndex(ui, prescriptionNumber);
+        if (index == null) {
+            return;
+        }
 
         Prescription prescriptionEdited = prescriptionsList.get(index);
+        prescriptionEdited.setActive();
 
-        if (!medicine.isEmpty()) {
-            prescriptionEdited.setMedicine(medicine);
+        ui.printActivatePrescriptionMessage(prescriptionEdited.toString());
+    }
+
+    public void deactivatePrescription(UI ui, String prescriptionNumber) {
+        Integer index = getIndex(ui, prescriptionNumber);
+        if (index == null) {
+            return;
         }
 
-        if (!dosage.isEmpty()) {
-            prescriptionEdited.setDosage(dosage);
+        Prescription prescriptionEdited = prescriptionsList.get(index);
+        prescriptionEdited.setInactive();
+
+        ui.printDeactivatePrescriptionMessage(prescriptionEdited.toString());
+    }
+
+    private Integer getIndex(UI ui, String prescriptionNumber) {
+        int index;
+
+        try {
+            index = Integer.parseInt(prescriptionNumber) - 1;
+        } catch (NumberFormatException e) {
+            // Parser class have blocked all inputs that are not integer.
+            return null;
         }
 
-        if (!timeInterval.isEmpty()) {
-            prescriptionEdited.setTimeInterval(timeInterval);
+        if (isInvalidIndex(index)) {
+            ui.printIndexOutOfRangeErrorMessage();
+            return null;
         }
+        return index;
+    }
 
-        ui.printEditPrescriptionMessage(prescriptionEdited.toString());
+    private boolean isInvalidIndex(int index) {
+        return (index < 0 || index >= prescriptionsList.size());
     }
 }
