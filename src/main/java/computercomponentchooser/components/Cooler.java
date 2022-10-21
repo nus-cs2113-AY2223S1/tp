@@ -2,17 +2,17 @@ package computercomponentchooser.components;
 
 public class Cooler extends Component {
 
+    protected String socket;
     protected String fanSpeed;
     protected String noiseLevel;
-    protected String socket;
 
-    public Cooler(String name, String price, String power, String fanSpeed, String noiseLevel, String socket) {
+    public Cooler(String name, String price, String power, String socket, String fanSpeed, String noiseLevel) {
         this.name = name;
         this.price = price;
         this.power = power;
+        this.socket = socket;
         this.fanSpeed = fanSpeed;
         this.noiseLevel = noiseLevel;
-        this.socket = socket;
     }
 
     public String getFanSpeed() {
@@ -40,20 +40,20 @@ public class Cooler extends Component {
     }
 
     public String toString() {
-        return super.toString() + String.format(" [%s RPM] [%s dB] [%s]", fanSpeed, noiseLevel, socket);
+        return super.toString() + String.format(" [%s] [%s RPM] [%s dB]", socket, fanSpeed, noiseLevel);
     }
 
     public String toCsv() {
-        return super.toCsv() + "," + fanSpeed + "," + noiseLevel + "," + socket;
+        return super.toCsv() + "," + socket + "," + fanSpeed + "," + noiseLevel;
     }
 
     public String saveAsString() {
-        return super.saveAsString() + "/" + fanSpeed + "/" + noiseLevel + "/" + socket;
+        return super.saveAsString() + "," + socket + "," + fanSpeed + "," + noiseLevel;
     }
 
     public String getDetails() {
-        return super.getDetails() + String.format("\nFan Speed: %s RPM\nNoise Level: %s dB\nSocket: %s", fanSpeed,
-                noiseLevel, socket);
+        return super.getDetails() + String.format("\nSocket: %s\nFan Speed: %s RPM\nNoise Level: %s dB", socket, fanSpeed,
+                noiseLevel);
     }
 
     @Override
