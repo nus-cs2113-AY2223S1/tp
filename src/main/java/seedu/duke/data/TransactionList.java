@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.stream.Collectors;
 
+import static seedu.duke.common.Constants.MAX_AMOUNT_VALUE;
+import static seedu.duke.common.Constants.MAX_TRANSACTIONS_COUNT;
+
 /**
  * Represents a list of transactions added by the user into the application.
  * Operations related to modifying the list of transactions are defined under this class.
@@ -90,12 +93,12 @@ public class TransactionList {
      * @param amount      Value of the transaction in numerical form.
      * @param category    A category for the transaction.
      * @param date        Date of the transaction with format in "yyyyMMdd".
-     * @return A string that states the details of the added expense transaction.
+     * @return The expense object created and added to the list.
      */
-    public String addExpense(String description, int amount, String category, LocalDate date) {
+    public Expense addExpense(String description, int amount, String category, LocalDate date) {
         Expense expense = new Expense(description, amount, category, date);
         transactions.add(expense);
-        return expense.toString();
+        return expense;
     }
 
     /**
@@ -105,12 +108,12 @@ public class TransactionList {
      * @param amount      Value of the transaction in numerical form.
      * @param category    A category for the transaction.
      * @param date        Date of the transaction with format in "yyyyMMdd".
-     * @return A string that states the details of the added income transaction.
+     * @return The income object created and added to the transaction list.
      */
-    public String addIncome(String description, int amount, String category, LocalDate date) {
+    public Income addIncome(String description, int amount, String category, LocalDate date) {
         Income income = new Income(description, amount, category, date);
         transactions.add(income);
-        return income.toString();
+        return income;
     }
 
     //@@author chinhan99
@@ -151,7 +154,7 @@ public class TransactionList {
      * @throws InputTransactionUnknownTypeException If class type cannot be found in the packages.
      */
     public boolean isMatchListFilters(Transaction transaction, String type, String category,
-                                      LocalDate date) throws InputTransactionUnknownTypeException {
+            LocalDate date) throws InputTransactionUnknownTypeException {
         boolean isMatch;
         try {
             isMatch = ((type.isEmpty() || isTransactionInstance(transaction, type))
@@ -267,7 +270,7 @@ public class TransactionList {
      * E.g. If the date is 21 October 2022 to backdate 2 weeks, the range will be 3 October to 16 October 2022.
      *
      * @param numberOfWeeks N number of weeks to backdate, must be minimum 1 week.
-     * @param date A specified date to backdate N weeks from occurring week.
+     * @param date          A specified date to backdate N weeks from occurring week.
      * @return An array containing the start and end date.
      */
     public static LocalDate[] getWeekRange(LocalDate date, int numberOfWeeks) {
@@ -284,7 +287,7 @@ public class TransactionList {
      * E.g. If the date is 21 October 2022 to backdate 2 months, the range will be 1 August to 30 September 2022.
      *
      * @param numberOfMonths N number of months to backdate, must be minimum 1 month.
-     * @param date A specified date to backdate N months from occurring month.
+     * @param date           A specified date to backdate N months from occurring month.
      * @return An array containing the start and end date.
      */
     public static LocalDate[] getMonthRange(LocalDate date, int numberOfMonths) {
@@ -299,7 +302,7 @@ public class TransactionList {
     /**
      * Gets all transactions recorded on a specific year.
      *
-     * @param year  A specified year.
+     * @param year A specified year.
      * @return An array list containing all transactions recorded on a specific year.
      */
     public ArrayList<Transaction> getTransactionsByYear(int year) {
@@ -335,8 +338,8 @@ public class TransactionList {
     /**
      * Gets all transactions recorded on the last N weeks or months.
      *
-     * @param numberOfType  An integer that represents the last N number of weeks or months.
-     * @param type          A string that represents the getting of N "weeks", or "months".
+     * @param numberOfType An integer that represents the last N number of weeks or months.
+     * @param type         A string that represents the getting of N "weeks", or "months".
      * @return An array list containing all transactions recorded on the last N number of weeks or months.
      */
     public ArrayList<Transaction> getTransactionsByLastN(int numberOfType, String type) {
@@ -368,5 +371,36 @@ public class TransactionList {
      */
     public void purgeTransactions() {
         transactions.clear();
+    }
+
+    //@@author wcwy
+
+    /**
+     * Calculates the total expenses spent in the month and year of the provided date, and returns the sum as a long.
+     *
+     * @param date A date object in which the monthly total expenses calculated is based on.
+     * @return A long value indicating the amount of expenses spent in the month.
+     */
+    public long calculateMonthlyTotalExpense(LocalDate date) {
+        long totalExpense = 0;
+        int month = date.getMonthValue();
+        int year = date.getYear();
+        for (Transaction transaction : transactions) {
+            if (transaction.getDate().getMonthValue() == month && transaction.getDate().getYear() == year) {
+                /*
+                    Since the maximum number of transaction is 1000000 and maximum amount of expense is 10000000,
+                    the highest possible expense value is 10^6 * 10^7 = 10^15 < Long.MAX_VALUE (approx 9.22 * 10^18)
+                    Therefore, this function is safe from integer overflow UNLESS the max values in
+                    common.Constants.java is altered.
+                 */
+
+                assert (Long.valueOf(MAX_AMOUNT_VALUE) * Long.valueOf(MAX_TRANSACTIONS_COUNT) > 0);
+                assert (Long.valueOf(MAX_AMOUNT_VALUE) * Long.valueOf(MAX_TRANSACTIONS_COUNT)
+                        > Long.valueOf(MAX_AMOUNT_VALUE));
+
+                totalExpense += transaction.getAmount();
+            }
+        }
+        return totalExpense;
     }
 }

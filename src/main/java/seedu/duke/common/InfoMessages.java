@@ -22,7 +22,10 @@ public enum InfoMessages {
     INFO_PURGE("All your transactions have been purged."),
     INFO_PURGE_ABORT("Purging has been aborted. All transactions records are retained."),
     INFO_PURGE_EMPTY("The command is aborted as the transactions list is empty."),
-    INFO_PURGE_WARNING("Are you sure you want to proceed with this command? Please enter 'Y' to confirm.");
+    INFO_PURGE_WARNING("Are you sure you want to proceed with this command? Please enter 'Y' to confirm."),
+    INFO_CURRENT_BUDGET("Monthly budget set as: $"),
+    INFO_REMAINING_BUDGET("Budget remained for the month of transaction: $"),
+    INFO_TODAY_DATE("Today is ");
 
     //@@author chydarren
     public final String message;

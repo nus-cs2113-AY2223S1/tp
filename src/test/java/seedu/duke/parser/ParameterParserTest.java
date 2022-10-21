@@ -2,7 +2,7 @@ package seedu.duke.parser;
 
 import org.junit.jupiter.api.Test;
 import seedu.duke.command.AddCommand;
-import seedu.duke.exception.AddTransactionInvalidAmountException;
+import seedu.duke.exception.InputTransactionInvalidAmountException;
 import seedu.duke.exception.InputTransactionInvalidCategoryException;
 import seedu.duke.exception.InputTransactionInvalidDateException;
 import seedu.duke.exception.EmptyParameterException;
@@ -30,7 +30,7 @@ public class ParameterParserTest {
         String parametersInput = "t/expense c/food a/-20 d/13092022 i/isThisAnIncome";
 
         assertThrows(
-            AddTransactionInvalidAmountException.class,
+            InputTransactionInvalidAmountException.class,
             () -> ParameterParser.parse(addCommand, parametersInput)
         );
     }
@@ -41,7 +41,7 @@ public class ParameterParserTest {
         String parametersInput = "t/income c/bonus a/one_dollar d/13092022 i/thank_you_boss";
 
         assertThrows(
-            AddTransactionInvalidAmountException.class,
+            InputTransactionInvalidAmountException.class,
             () -> ParameterParser.parse(addCommand, parametersInput)
         );
     }
