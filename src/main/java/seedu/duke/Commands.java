@@ -1,6 +1,6 @@
 package seedu.duke;
 
-enum Commands {
+public enum Commands {
     LOGIN,
     REGISTER,
     BYE,
