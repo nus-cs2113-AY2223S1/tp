@@ -61,6 +61,9 @@ public class Messages {
             + "There is an error in writing data to save file.";
     public static final String LOCAL_STORAGE_MERGE_EXTERNAL_DATA_SUCCESSFUL = ""
             + "External File loaded successfully :)";
+    public static final String LOCAL_STORAGE_MERGE_EXTERNAL_DATA_WRONG_FILE_FORMAT = ""
+            + "Wrong file format given\n"
+            + "Please provide path to your xml file with the save data.";
 
     /**
      * Defines messages for {@link seedu.moneygowhere.currency.CurrencyApi }.
