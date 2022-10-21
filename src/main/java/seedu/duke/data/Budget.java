@@ -1,6 +1,8 @@
 package seedu.duke.data;
 
-import static seedu.duke.common.Constants.*;
+import static seedu.duke.common.Constants.MAX_TRANSACTIONS_COUNT;
+import static seedu.duke.common.Constants.MAX_AMOUNT_VALUE;
+import static seedu.duke.common.Constants.MIN_BUDGET_VALUE;
 
 /**
  * Represents the user's budget for the current month.
@@ -22,7 +24,7 @@ public class Budget {
     }
 
     /**
-     * Updates the budget value set for the current month
+     * Updates the budget value set for the current month.
      *
      * @param budget The new value for budget.
      */
@@ -31,7 +33,7 @@ public class Budget {
     }
 
     /**
-     * Return the amount of budget left in the month, as a string.
+     * Returns the amount of budget left in the month, as a string.
      *
      * <p>If the total amount of expenses is higher than the budget, a negative value in string will be returned.
      *

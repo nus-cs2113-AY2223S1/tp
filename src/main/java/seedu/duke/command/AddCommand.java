@@ -90,11 +90,11 @@ public class AddCommand extends Command {
     public String[] getMandatoryTags() {
 
         String[] mandatoryTags = new String[]{
-                COMMAND_TAG_TRANSACTION_TYPE,
-                COMMAND_TAG_TRANSACTION_CATEGORY,
-                COMMAND_TAG_TRANSACTION_AMOUNT,
-                COMMAND_TAG_TRANSACTION_DATE,
-                COMMAND_TAG_TRANSACTION_DESCRIPTION
+            COMMAND_TAG_TRANSACTION_TYPE,
+            COMMAND_TAG_TRANSACTION_CATEGORY,
+            COMMAND_TAG_TRANSACTION_AMOUNT,
+            COMMAND_TAG_TRANSACTION_DATE,
+            COMMAND_TAG_TRANSACTION_DESCRIPTION
         };
         return mandatoryTags;
     }
@@ -124,6 +124,7 @@ public class AddCommand extends Command {
     public void setDate(LocalDate date) {
         this.date = date;
     }
+
     public void setTransactionCreated(Transaction transaction) {
         this.transactionCreated = transaction;
     }

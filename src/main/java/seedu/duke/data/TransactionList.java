@@ -13,7 +13,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.stream.Collectors;
 
-import static seedu.duke.common.Constants.*;
+import static seedu.duke.common.Constants.MAX_AMOUNT_VALUE;
+import static seedu.duke.common.Constants.MAX_TRANSACTIONS_COUNT;
 
 /**
  * Represents a list of transactions added by the user into the application.
@@ -376,8 +377,8 @@ public class TransactionList {
                  */
 
                 assert (Long.valueOf(MAX_AMOUNT_VALUE) * Long.valueOf(MAX_TRANSACTIONS_COUNT) > 0);
-                assert (Long.valueOf(MAX_AMOUNT_VALUE) * Long.valueOf(MAX_TRANSACTIONS_COUNT) >
-                        Long.valueOf(MAX_AMOUNT_VALUE));
+                assert (Long.valueOf(MAX_AMOUNT_VALUE) * Long.valueOf(MAX_TRANSACTIONS_COUNT)
+                        > Long.valueOf(MAX_AMOUNT_VALUE));
 
                 totalExpense += transaction.getAmount();
             }

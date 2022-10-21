@@ -373,7 +373,7 @@ public class ParameterParser {
      *
      * @param parameter The user input after the user tag.
      * @return The amount integer if no exceptions are thrown.
-     * @throws InputTransactionInvalidAmountException If the transaction amount provided is not a valid accepted integer.
+     * @throws InputTransactionInvalidAmountException If the transaction amount given is not a valid accepted integer.
      */
     private static int parseAmountTag(String parameter) throws InputTransactionInvalidAmountException {
         Pattern specialSymbols = Pattern.compile("[!@#$%&*()_+=|<>?{}\\[\\]~-]");
