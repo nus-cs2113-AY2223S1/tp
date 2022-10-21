@@ -6,8 +6,31 @@
 
 ## Design & implementation
 
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+The Patient and PatientList classes are used in conjunction to manage patients, and the list of patients. Each patient has a name,
+an ID, a date of birth and gender. The PatientList class holds an ArrayList of Patients and manipulates them accordingly.
 
+At the start of the program, a new PatientList object is instantiated. Through methods in the Storage class, data is read from the
+relevant text files to create Patients that existed prior to the last closure of the program, and then adds these patients to the
+ArrayList in PatientList. This finishes the initial set-up.
+
+Methods in PatientList class:
+
+addPatient - this method takes in the aforementioned variables through UI class and parses them. If they are all valid, a new
+Patient is created and added to the ArrayList in PatientList.
+
+findPatient - this method takes in an ID, iterates through the ArrayList of Patients and compares the ID with the ID of each of the
+existing Patients in the list. If there is a match, the corresponding Patient is returned. Else, returns null.
+
+retrievePatient - this method is very similar to findPatient, but instead of returning the Patient found, it prints out the details
+of the Patient using the toString method in the Patient class.
+
+listPatients - this method first checks if the ArrayList of Patients is non-empty. If not so, it prints a message that there are
+no patients in the system currently and terminates.
+Else, it iterates through the ArrayList of Patients and uses the toString method in Patient to print out the details of each Patient.
+
+modifyPatientDetails - this method takes in name, birthDate, gender and ID. It tries to find the patient with a matching ID.
+If the patient is not found, returns. Else, if the name is not an empty String, replace the existing name with the input name.
+Repeat for birthDate and gender.
 
 ## Product scope
 ### Target user profile
