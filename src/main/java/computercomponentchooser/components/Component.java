@@ -41,7 +41,7 @@ public abstract class Component {
      * @return  a string representation of the component's attributes
      */
     public String saveAsString() {
-        return getType() + " " + name + " " + price + " " + power;
+        return getType() + "/" + name + "/" + price + "/" + power;
     }
 
     public String getDetails() {

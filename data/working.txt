@@ -1,3 +1,3 @@
-cpu AMD 500 100 am4 3.6
-motherboard ASUS 300 130 am4 4 4
-powersupply corsair 300 760
+cpu/AMD/500/100/am4/3.6
+motherboard/ASUS/300/130/am4/4/4
+powersupply/corsair/300/760

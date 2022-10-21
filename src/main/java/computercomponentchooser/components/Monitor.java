@@ -45,7 +45,7 @@ public class Monitor extends Component {
     }
 
     public String saveAsString() {
-        return super.saveAsString() + " " + refreshRate + " " + responseTime + " " + resolution;
+        return super.saveAsString() + "/" + refreshRate + "/" + responseTime + "/" + resolution;
     }
 
     public String getDetails() {

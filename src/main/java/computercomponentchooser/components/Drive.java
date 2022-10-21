@@ -35,7 +35,7 @@ public class Drive extends Component {
 
     @Override
     public String saveAsString() {
-        return super.saveAsString() + " " + size + " " + driveType;
+        return super.saveAsString() + "/" + size + "/" + driveType;
     }
 
     public String getDetails() {
