@@ -8,10 +8,6 @@ import seedu.duke.Duke;
 import seedu.duke.Exceptions;
 import seedu.duke.UI;
 import seedu.duke.module.lessons.Lesson;
-import seedu.duke.module.lessons.Lecture;
-import seedu.duke.module.lessons.Tutorial;
-import seedu.duke.module.lessons.Laboratory;
-import seedu.duke.module.lessons.Others;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -35,7 +31,7 @@ public class Nusmods {
 
     private String setUri() {
         boolean validUri = false;
-        String mod = new String();
+        String mod = null;
         while (!validUri) {
             try {
                 if (UI.sc.hasNextLine()) {
@@ -47,7 +43,7 @@ public class Nusmods {
                 System.out.println("Module not found, please try again.");;
             }
         }
-
+        assert mod != null : "URI creation failed, module code is invalid!";
         return baseUri + mod + ".json";
     }
 
@@ -144,33 +140,17 @@ public class Nusmods {
         int arrayIndex = 0;
         List<Lesson> lessons = new ArrayList<>();
         while (currentNode.get(arrayIndex) != null) {
-            String day = currentNode.get(arrayIndex).get("day").asText();
-            String startTime = currentNode.get(arrayIndex).get("startTime").asText();
-            String endTime = currentNode.get(arrayIndex).get("endTime").asText();
-            String lessonType = currentNode.get(arrayIndex).get("lessonType").toString();
+            JsonNode lessonNode = currentNode.get(arrayIndex);
+            String day = lessonNode.get("day").asText();
+            String startTime = lessonNode.get("startTime").asText();
+            String endTime = lessonNode.get("endTime").asText();
+            String lessonType = lessonNode.get("lessonType").toString();
+            String classNumber = lessonNode.get("classNo").toString();
 
-            allocateLessonType(lessons, day, startTime, endTime, lessonType);
+            lessons.add(new Lesson(day, startTime, endTime, lessonType, classNumber));
             arrayIndex += 1;
         }
         lgr.fine("lessons are added, returning list of lesson data");
         return lessons;
-    }
-
-    private static void allocateLessonType(List<Lesson> lessons, String day, String startTime,
-                                           String endTime, String lessonType) {
-        switch (lessonType) {
-        case "\"Lecture\"":
-            lessons.add(new Lecture(day, startTime, endTime, "Lecture"));
-            break;
-        case "\"Tutorial\"":
-            lessons.add(new Tutorial(day, startTime, endTime, "Tutorial"));
-            break;
-        case "\"Laboratory\"":
-            lessons.add(new Laboratory(day, startTime, endTime, "Laboratory"));
-            break;
-        default:
-            lgr.warning("lesson does not fall in existing categories");
-            lessons.add(new Others(day, startTime, endTime, "Others"));
-        }
     }
 }

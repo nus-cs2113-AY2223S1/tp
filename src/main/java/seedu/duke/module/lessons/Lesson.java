@@ -1,10 +1,11 @@
 package seedu.duke.module.lessons;
 
-public abstract class Lesson {
+public class Lesson {
     private String day;
     private String startTime;
     private String endTime;
     private String lessonType;
+    private String classNumber;
 
     public String getDay() {
         return day;
@@ -22,10 +23,15 @@ public abstract class Lesson {
         return lessonType;
     }
 
-    public Lesson(String day, String startTime, String endTime, String lessonType) {
+    public String getClassNumber() {
+        return classNumber;
+    }
+
+    public Lesson(String day, String startTime, String endTime, String lessonType, String classNumber) {
         this.day = day;
         this.startTime = startTime;
         this.endTime = endTime;
         this.lessonType = lessonType;
+        this.classNumber = classNumber;
     }
 }
