@@ -1,6 +1,5 @@
 package seedu.duke;
 
-//@@author naz019
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -91,6 +90,7 @@ public class Parser {
         }
     }
 
+    //@@author naz019
     public void executeFind(String[] words) {
         try {
             executor = new FindCommand(mediaList, words [1]); 
@@ -132,7 +132,7 @@ public class Parser {
         logger.log(Level.INFO, "\n\tList command executed");
     }
 
-    //@@author indraneelrp
+    //@@author redders7
     public void addMedia(String[] fields, Integer spacingType) {
         String name = fields[1].substring(spacingType);
         double rating = Double.parseDouble(fields[2].substring(ratingSpacing));
@@ -151,6 +151,7 @@ public class Parser {
         Ui.print(output);
     }
 
+    //@@author indraneelrp
     public void executeAdd(String userInput) {
         String[] fields = userInput.split("/");
         try {
@@ -181,6 +182,7 @@ public class Parser {
             if (words.length < 1) {
                 throw new DukeException();
             } else {
+                //@@author matthewphua
                 String index = words[1];
                 int deleteIndex = Integer.parseInt(index) - 1;
                 executor = new RemoveCommand(mediaList, deleteIndex);
