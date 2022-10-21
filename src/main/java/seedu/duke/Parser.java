@@ -1,6 +1,5 @@
 package seedu.duke;
 
-//@@author naz019
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -31,7 +30,9 @@ public class Parser {
         this.mediaList = reviewList;
     }
 
+    
     public void processUserInput(String userInput) {
+        //@@author indraneelrp
         final String listCommand = "list";
         final String addCommand = "add";
         final String deleteCommand = "delete";
@@ -47,6 +48,7 @@ public class Parser {
         //@@author naz019
         assert words[0] != null : "words[0] is supposed to contain user command";
 
+        //@@author indraneelrp
         switch (words[0]) {
         case endCommand:
             break;
@@ -82,13 +84,13 @@ public class Parser {
         case NT:
         
         default:
-            //@@author naz019
             logger.log(Level.WARNING, "An unrecognised command was given by the user.");
             System.out.println("Unrecognised command");
             break;
         }
     }
 
+    //@@author naz019
     public void executeFind(String[] words) {
         try {
             executor = new FindCommand(mediaList, words [1]); 
@@ -122,6 +124,7 @@ public class Parser {
         }
     }
 
+    //@@author indraneelrp
     public void executeList() {
         executor = new ListCommand(mediaList);
         String output = executor.execute();
@@ -129,6 +132,7 @@ public class Parser {
         logger.log(Level.INFO, "\n\tList command executed");
     }
 
+    //@@author redders7
     public void addMedia(String[] fields, Integer spacingType) {
         String name = fields[1].substring(spacingType);
         double rating = Double.parseDouble(fields[2].substring(ratingSpacing));
@@ -147,6 +151,7 @@ public class Parser {
         Ui.print(output);
     }
 
+    //@@author indraneelrp
     public void executeAdd(String userInput) {
         String[] fields = userInput.split("/");
         try {
@@ -177,6 +182,7 @@ public class Parser {
             if (words.length < 1) {
                 throw new DukeException();
             } else {
+                //@@author matthewphua
                 String index = words[1];
                 int deleteIndex = Integer.parseInt(index) - 1;
                 executor = new RemoveCommand(mediaList, deleteIndex);

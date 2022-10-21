@@ -33,4 +33,23 @@ public class TvShow extends Media {
         return "[TV Show]" + super.toString() + " Date watched:" + this.dateWatched + " Genre:" + this.genre
                 + " Site: " + site;
     }
+
+    /**
+     * Creates the string that will be saved into the file 
+     * that represents the media.
+     * 
+     * @return formatted string representing TvShow information.
+     */
+    @Override
+    public String createFileString() {
+        String favourite = "N";
+        if (this.isFavourite) {
+            favourite = "Y";
+        }
+        
+        String returnString = "T|" + favourite + "|" + super.title + "|" + super.rating 
+            + "|" + super.genre + "|" + super.dateString + "|" + this.site;
+        
+        return returnString;
+    }
 }

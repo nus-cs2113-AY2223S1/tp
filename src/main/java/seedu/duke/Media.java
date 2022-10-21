@@ -72,12 +72,29 @@ public class Media {
         logger.log(Level.INFO,"Added new Media to list");
     }
 
+    public Media() {
+        title = "";
+        rating = 0;
+        genre = "";
+        dateWatched = null;
+    }
+
     /**.
      * Formats the review to display as output
      * @return Formatted media review
      */
     public String toString() {
         return this.title + " Rating:" + this.rating + " Genre:" + this.genre;
+    }
+
+    /**
+     * Creates the string representation of the media for saving 
+     * into the file This method is to be overwritten by children classes.
+     * 
+     * @return empty string for generic media.
+     */
+    public String createFileString() {
+        return "";
     }
 
 }

@@ -8,6 +8,8 @@
 /build/
 src/main/resources/docs/
 
+src/main/java/seedu/duke/data/
+
 *.class
 
 # MacOS custom attributes files created by Finder
