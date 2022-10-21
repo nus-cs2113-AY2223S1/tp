@@ -18,6 +18,9 @@ AddressBook-Level3 https://github.com/se-edu/addressbook-level3
 ### Movie Classes
 ![img.png](img.png)
 
+### Storage Class
+![img.png](imgs/storageClass.png)
+
 
 ## Implementation
 ### Clearing the review list
@@ -27,6 +30,8 @@ AddressBook-Level3 https://github.com/se-edu/addressbook-level3
 ### Target user profile
 
 {Describe the target user profile}
+The target user profile is ideally individuals who are well-versed in the command line
+and are avid movie watchers. Therefore this app is customised to their preferences.
 
 ### Value proposition
 
@@ -44,6 +49,7 @@ AddressBook-Level3 https://github.com/se-edu/addressbook-level3
 |v2.0|user| arrange my review list by worst or best ratings        | see the shows that I like or hate the most.  |
 |v2.0|user| star/favorite a movie        | mark shows that I would like to watch again. |
 |v2.0|user| display a list that displays starred movies and shows        | view which are my favorites.|
+|v2.0|user| be able to save my information after I exit the program   | offload it from my mind. |
 
 
 ## Non-Functional Requirements
@@ -57,3 +63,6 @@ AddressBook-Level3 https://github.com/se-edu/addressbook-level3
 ## Instructions for manual testing
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+
+
+
