@@ -11,6 +11,7 @@ public class Duke {
     private String folderpath = "./data/";
     
     public Duke() {
+        //@@author indraneelrp
         // Creating the helper objects that the Duke instance will need
         ui = new Ui();
         reviewList = new ReviewList();
@@ -19,6 +20,7 @@ public class Duke {
     }
 
     public void run() {
+        //@@author indraneelrp
         ui.greetUser();
         storage.loadMedia(storage.getMakeFile(), reviewList);
 
