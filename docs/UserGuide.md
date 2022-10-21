@@ -45,7 +45,8 @@ ____________________________________________________________
 ```
 6. Type the valid command and press Enter to run the command. See [Feature](#3-features) or [Command Summary](#4-command-summary) for more information of commands.
 
-><span style="color: #FF1A00;">**IMPORTANT**</span>: **DO NOT** edit any files in ```/data/``` folders. This action potentially cause massive bugs when execute the program, and you may have to edit again or in the worst case, delete all storage file and all of your data will be gone forever
+><span style="color: #FF1A00;">**IMPORTANT**</span>: **DO NOT** edit any files in ```/data/``` folder. This action potentially cause unfixable bugs when execute the program, and you may have to edit again or in the worst case, delete all storage file and all of your data will be gone forever.
+
 ## 3. Features 
 
 This section allows users to understand all the features we offered, including the format, the constraint. We also demonstrate some examples of usage and the expected outcome.
@@ -76,7 +77,6 @@ Username: bui Age: 20 Contact: 82364873
 Total user(s) in database: 6
 ____________________________________________________________
 ```
-<br>
 
 #### 3.2.2. ```remove-user``` - Remove a user
 >Removes a user in the list
@@ -96,7 +96,6 @@ Noted. Following user has been deleted:
 Username: thanh Age: 20 Contact: 73648263 
 Total user(s) in database: 6
 ____________________________________________________________
-
 ```
 
 ### 3.3. Item-related features
@@ -120,7 +119,6 @@ Status: [Available] ItemId: 2cc4edf3 Item: weight Category: SPORTS_EQUIPMENT Own
 Total item(s) in database: 2
 ____________________________________________________________
 ```
-<br>
 
 #### 3.3.2. ```remove-item``` - Remove an item
 >Removes an item in the list
@@ -139,10 +137,8 @@ OK! I will remove the following item:
 Status: [Available] ItemId: 2cc4edf3 Item: weight Category: SPORTS_EQUIPMENT Owner: bui PricePerDay: $0.5
 Total item(s) in database: 1
 ____________________________________________________________
-
 ```
 
-<br>
 
 ### 3.4. Transaction-related features
 #### 3.4.1. ```add-tx``` - Add a new transaction
@@ -164,7 +160,6 @@ Status: [On loan] TransactionID: 80902c3b ItemName: weight ItemID: 2cc4edf3 Borr
 Total transaction(s) in database: 3
 ____________________________________________________________
 ```
-<br>
 
 #### 3.4.2. ```remove-tx``` - Remove a transaction
 >Removes a transaction in the list
@@ -186,7 +181,6 @@ ____________________________________________________________
 
 ```
 
-<br>
 
 ### 3.5. Exit Program
 
