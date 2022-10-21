@@ -16,6 +16,7 @@ public class HelpCommand extends Command {
     public static final String HELP_DISPLAY_MESSAGE = HelpCommand.HELP_DISPLAY
             + AddModuleCommand.HELP_DISPLAY
             + DeleteModuleCommand.HELP_DISPLAY
+            + DisplaySelectedModuleListCommand.HELP_DISPLAY
             + ExitCommand.HELP_DISPLAY
             + GetModuleCommand.HELP_DISPLAY
             + SearchModuleCommand.HELP_DISPLAY
