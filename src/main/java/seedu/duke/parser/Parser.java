@@ -8,7 +8,7 @@ import seedu.duke.command.HelpCommand;
 import seedu.duke.command.ViewTimetableCommand;
 import seedu.duke.command.SelectSlotCommand;
 import seedu.duke.command.SearchModuleCommand;
-import seedu.duke.exceptions.YamonException;
+import seedu.duke.exceptions.YamomException;
 
 import java.util.Map;
 import java.util.TreeMap;
@@ -16,37 +16,37 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Parser {
-    public static Command parse(String userInput) throws YamonException {
+    public static Command parse(String userInput) throws YamomException {
         String[] keywords = userInput.split("\\s+");
         try {
             Command toExecute;
             switch (keywords[0]) {
-                case (SearchModuleCommand.COMMAND_WORD):
-                    toExecute = searchCommand(userInput);
-                    break;
-                case (AddModuleCommand.COMMAND_WORD):
-                    toExecute = moduleRelatedCommand(keywords, new AddModuleCommand(keywords));
-                    break;
-                case (DeleteModuleCommand.COMMAND_WORD):
-                    toExecute = moduleRelatedCommand(keywords, new DeleteModuleCommand(keywords));
-                    break;
-                case (ViewTimetableCommand.COMMAND_WORD):
-                    toExecute =singleWordCommand(keywords, new ViewTimetableCommand(keywords));
-                    break;
-                case (HelpCommand.COMMAND_WORD):
-                    toExecute = singleWordCommand(keywords, new HelpCommand(keywords));
-                    break;
-                case (SelectSlotCommand.COMMAND_WORD):
-                    toExecute = new SelectSlotCommand(userInput);
-                    break;
-                case (ExitCommand.COMMAND_WORD):
-                    toExecute = singleWordCommand(keywords, new ExitCommand(keywords));
-                    break;
-                default:
-                    throw new YamonException("Cannot process the command");
+            case (SearchModuleCommand.COMMAND_WORD):
+                toExecute = searchCommand(userInput);
+                break;
+            case (AddModuleCommand.COMMAND_WORD):
+                toExecute = moduleRelatedCommand(keywords, new AddModuleCommand(keywords));
+                break;
+            case (DeleteModuleCommand.COMMAND_WORD):
+                toExecute = moduleRelatedCommand(keywords, new DeleteModuleCommand(keywords));
+                break;
+            case (ViewTimetableCommand.COMMAND_WORD):
+                toExecute = singleWordCommand(keywords, new ViewTimetableCommand(keywords));
+                break;
+            case (HelpCommand.COMMAND_WORD):
+                toExecute = singleWordCommand(keywords, new HelpCommand(keywords));
+                break;
+            case (SelectSlotCommand.COMMAND_WORD):
+                toExecute = new SelectSlotCommand(userInput);
+                break;
+            case (ExitCommand.COMMAND_WORD):
+                toExecute = singleWordCommand(keywords, new ExitCommand(keywords));
+                break;
+            default:
+                throw new YamomException("Cannot process the command");
             }
             return toExecute;
-        } catch (YamonException e) {
+        } catch (YamomException e) {
             throw e;
         }
     }
@@ -121,7 +121,7 @@ public class Parser {
      * @param command  the command that the user wants to execute
      * @return type of command
      */
-    public static Command moduleRelatedCommand(String[] keywords, Command command) throws YamonException {
+    public static Command moduleRelatedCommand(String[] keywords, Command command) throws YamomException {
 
         if (isValidTwoWordCommand(keywords)) {
             return command;
@@ -143,14 +143,14 @@ public class Parser {
             errorMessage = "Unknown command, try again";
         }
 
-        throw new YamonException(errorMessage);
+        throw new YamomException(errorMessage);
     }
 
-    public static Command singleWordCommand(String[] keywords, Command command) throws YamonException {
+    public static Command singleWordCommand(String[] keywords, Command command) throws YamomException {
         if (isOneWordCommand(keywords)) {
             return command;
         } else {
-            throw new YamonException("0 arguments expected");
+            throw new YamomException("0 arguments expected");
         }
     }
 
