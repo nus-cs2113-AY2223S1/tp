@@ -2,26 +2,23 @@ package seedu.duke.command;
 
 import seedu.duke.Storage;
 import seedu.duke.Ui;
-
 import seedu.duke.data.TransactionList;
 import seedu.duke.data.transaction.Expense;
 import seedu.duke.data.transaction.Income;
-import seedu.duke.data.transaction.Transaction;
-import seedu.duke.exception.MoolahException;
 import seedu.duke.exception.InputTransactionUnknownTypeException;
+import seedu.duke.exception.MoolahException;
 import seedu.duke.exception.StorageWriteErrorException;
 
 import java.io.IOException;
 import java.time.LocalDate;
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_TYPE;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_AMOUNT;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_CATEGORY;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_DATE;
-import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_AMOUNT;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_DESCRIPTION;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_TYPE;
 import static seedu.duke.common.InfoMessages.INFO_ADD_EXPENSE;
 import static seedu.duke.common.InfoMessages.INFO_ADD_INCOME;
 
@@ -48,10 +45,10 @@ public class AddCommand extends Command {
             + LINE_SEPARATOR + "DATE: Date of the transaction. The format must be in \"yyyyMMdd\"." + LINE_SEPARATOR
             + "DESCRIPTION: More information regarding the transaction, written without any space.";
     // Basic help description
-    public static final String COMMAND_HELP = "Command Word: " + COMMAND_WORD + "\n" + COMMAND_DESCRIPTION + "\n"
-            + COMMAND_USAGE + "\n";
+    public static final String COMMAND_HELP = "Command Word: " + COMMAND_WORD + LINE_SEPARATOR
+            + COMMAND_DESCRIPTION + LINE_SEPARATOR + COMMAND_USAGE + LINE_SEPARATOR;
     // Detailed help description
-    public static final String COMMAND_DETAILED_HELP = COMMAND_HELP + COMMAND_PARAMETERS_INFO + "\n";
+    public static final String COMMAND_DETAILED_HELP = COMMAND_HELP + COMMAND_PARAMETERS_INFO + LINE_SEPARATOR;
 
     //@@author chinhan99
     private static final Logger addLogger = Logger.getLogger(AddCommand.class.getName());

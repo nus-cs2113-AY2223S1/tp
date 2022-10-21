@@ -5,18 +5,20 @@ import seedu.duke.command.ListCommand;
 import seedu.duke.data.transaction.Expense;
 import seedu.duke.data.transaction.Income;
 
+import seedu.duke.exception.AddTransactionInvalidAmountException;
+import seedu.duke.exception.EmptyParameterException;
+import seedu.duke.exception.EntryNumberNotNumericException;
 import seedu.duke.exception.InputDuplicateTagException;
 import seedu.duke.exception.InputMissingTagException;
-import seedu.duke.exception.InputUnsupportedTagException;
-import seedu.duke.exception.MoolahException;
-import seedu.duke.exception.EmptyParameterException;
-import seedu.duke.exception.UnknownHelpOptionException;
-import seedu.duke.exception.InputTransactionInvalidDateException;
-import seedu.duke.exception.AddTransactionInvalidAmountException;
 import seedu.duke.exception.InputTransactionInvalidCategoryException;
-import seedu.duke.exception.EntryNumberNotNumericException;
+import seedu.duke.exception.InputTransactionInvalidDateException;
 import seedu.duke.exception.InputTransactionUnknownTypeException;
+import seedu.duke.exception.InputUnsupportedTagException;
 import seedu.duke.exception.ListStatsInvalidStatsTypeException;
+import seedu.duke.exception.MoolahException;
+import seedu.duke.exception.StatsInvalidMonthException;
+import seedu.duke.exception.StatsInvalidYearException;
+import seedu.duke.exception.UnknownHelpOptionException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -27,15 +29,16 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_TYPE;
-import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_DATE;
-import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_CATEGORY;
-import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_AMOUNT;
-import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_DESCRIPTION;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_HELP_OPTION;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_LIST_ENTRY_NUMBER;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_STATISTICS_TYPE;
-import static seedu.duke.command.CommandTag.COMMAND_TAG_HELP_OPTION;
-
+import static seedu.duke.command.CommandTag.COMMAND_TAG_STATS_MONTH;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_STATS_YEAR;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_AMOUNT;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_CATEGORY;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_DATE;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_DESCRIPTION;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_TYPE;
 import static seedu.duke.common.DateFormats.DATE_INPUT_PATTERN;
 
 /**
@@ -186,7 +189,8 @@ public class ParameterParser {
     public static void checkParameterNotEmpty(String[] splits) throws EmptyParameterException {
         for (String split : splits) {
             if (split.length() == 2) {
-                parserLogger.log(Level.WARNING, "An empty parameter error is caught for the given tag input: " + split);
+                parserLogger.log(Level.WARNING, "An empty parameter error is caught for the "
+                        + "given tag input: " + split);
                 throw new EmptyParameterException();
             }
         }
@@ -298,6 +302,12 @@ public class ParameterParser {
         case COMMAND_TAG_STATISTICS_TYPE:
             command.setStatsType(parseStatsTypeTag(parameter));
             break;
+        case COMMAND_TAG_STATS_MONTH:
+            command.setStatsMonth(parseStatsMonthTag(parameter));
+            break;
+        case COMMAND_TAG_STATS_YEAR:
+            command.setStatsYear(parseStatsYearTag(parameter));
+            break;
         default:
             parserLogger.log(Level.WARNING, "An unsupported tag exception is caught: " + tag);
             throw new InputUnsupportedTagException();
@@ -320,7 +330,8 @@ public class ParameterParser {
         case "income":
             return CLASS_TYPE_INCOME;
         default:
-            parserLogger.log(Level.WARNING, "An invalid type error is caught for the given parameter: " + parameter);
+            parserLogger.log(Level.WARNING, "An invalid type error "
+                    + "is caught for the given parameter: " + parameter);
             throw new InputTransactionUnknownTypeException();
         }
     }
@@ -339,7 +350,8 @@ public class ParameterParser {
         boolean isIncome = parameter.equals(Income.TRANSACTION_NAME);
 
         if (!isExpense && !isIncome) {
-            parserLogger.log(Level.WARNING, "An invalid type error is caught for the given parameter: " + parameter);
+            parserLogger.log(Level.WARNING, "An invalid type error "
+                    + "is caught for the given parameter: " + parameter);
             throw new InputTransactionUnknownTypeException();
         }
 
@@ -391,7 +403,8 @@ public class ParameterParser {
             return amount;
 
         } catch (NumberFormatException e) {
-            parserLogger.log(Level.WARNING, "An invalid amount error is caught for the given parameter: " + parameter);
+            parserLogger.log(Level.WARNING, "An invalid amount error "
+                    + "is caught for the given parameter: " + parameter);
             throw new AddTransactionInvalidAmountException();
         }
     }
@@ -411,7 +424,8 @@ public class ParameterParser {
             LocalDate date = LocalDate.parse(parameter, formatter);
             return date;
         } catch (DateTimeParseException exception) {
-            parserLogger.log(Level.WARNING, "An invalid date error is caught for the given parameter: " + parameter);
+            parserLogger.log(Level.WARNING, "An invalid date error "
+                    + "is caught for the given parameter: " + parameter);
             throw new InputTransactionInvalidDateException();
         }
     }
@@ -473,12 +487,54 @@ public class ParameterParser {
         case "categories":
             statsType = "categories";
             break;
+        case "time":
+            statsType = "time";
+            break;
         default:
             parserLogger.log(Level.WARNING, "An invalid statistic type error is caught for the given parameter: "
                     + parameter);
             throw new ListStatsInvalidStatsTypeException();
         }
         return statsType;
+    }
+
+    //@@author paullowse
+    public static int parseStatsMonthTag(String parameter) throws StatsInvalidMonthException,
+            EntryNumberNotNumericException {
+        int month;
+        try {
+            month = Integer.parseInt(parameter);
+        } catch (NumberFormatException e) {
+            parserLogger.log(Level.WARNING, "An invalid entry number error is caught for the given parameter: "
+                    + parameter);
+            throw new EntryNumberNotNumericException();
+        }
+
+        if (month > 12 || month < 0) {
+            parserLogger.log(Level.WARNING, "An invalid month number error is caught for the given parameter: "
+                    + parameter);
+            throw new StatsInvalidMonthException();
+        }
+        return month;
+    }
+
+    //@@author paullowse
+    public static int parseStatsYearTag(String parameter) throws StatsInvalidYearException,
+            EntryNumberNotNumericException {
+        int year;
+        try {
+            year = Integer.parseInt(parameter);
+        } catch (NumberFormatException e) {
+            parserLogger.log(Level.WARNING, "An invalid entry number error is caught for the given parameter: "
+                    + parameter);
+            throw new EntryNumberNotNumericException();
+        }
+        if (year < 0) {
+            parserLogger.log(Level.WARNING, "An invalid year number error is caught for the given parameter: "
+                    + parameter);
+            throw new StatsInvalidYearException();
+        }
+        return year;
     }
 
     //@@author chinhan99
