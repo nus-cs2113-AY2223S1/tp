@@ -133,11 +133,11 @@ public class ModuleManager {
             moduleFileReader = new FileReader(moduleDataFile);
             moduleBufferedReader = new BufferedReader(moduleFileReader);
             
-            List<Lesson> lessons = new ArrayList<Lesson>();
+            List<Lesson> lessons;
 
             //create and add module
             while ((currModuleLine = moduleBufferedReader.readLine()) != null) {
-                lessons.clear();
+                lessons = new ArrayList<>();
 
                 moduleDataList.add(currModuleLine + "\n");
                 moduleInfoList = currModuleLine.split("\\|");

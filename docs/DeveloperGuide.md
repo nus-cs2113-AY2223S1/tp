@@ -5,10 +5,14 @@
 
 Ideas for this project partly comes from NUSmods at https://nusmods.com/
 
-API and library used includes the following.
+API and library used includes the following:
+- [NUSMods API](https://api.nusmods.com/v2/) - To extract information about modules in NUS
+- [FasterXML](https://github.com/FasterXML/jackson) - Helps parse json files from the NUSMods API
 
 ## Design & implementation
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+
+
 
 ####Architecture
 <img src="images/architectureDiagram.png" width="280" />
@@ -21,6 +25,8 @@ The ***Architecture Diagram*** given above presents the high-level design of the
 4. `commands`: Exists as a package which includes all command functions.
 5. `Timetable`: Contains all the data in the current session. (Data can only be accessed and manipulated by commands)
 6. `data`: Manages the saving and loading of the current session data.
+7. `Nusmods`: Handles all communication to the NUSMods API and extracts useful information that is used for the rest of 
+the program.
 
 <p style='text-align: justify;'>The design of the product focuses on low coupling and high cohesion. Following as closely to the Single Responsibility Principle (SRP) as possible, each major component explained above has unique roles which is not overlapped by another component. For example, printing of all responses go through the UI class, which handles all interactions with user, including the display of program responses.</p>
 
@@ -61,14 +67,22 @@ The value proposition of the product lies in its ability to aid the management a
 
 ## User Stories
 
-|Version| As a ... | I want to ... | So that I can ...|
-|--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+| Version | As a ...     | I want to ...                                                  | So that I can ...                                           |
+|---------|--------------|----------------------------------------------------------------|-------------------------------------------------------------|
+| v1.0    | NUS Student  | See all the timings of the tutorials/lectures I am involved in | I can plan my work schedule conveniently                    |
+| v1.0    | NUS Student  | View the details of any module                                 | Get an overview of what the module is about                 |
+| v1.0    | NUS Student  | Keep track of the modules I want to take                       | Better plan out my schedule                                 |
+| v1.0    | NUS Student  | Remove the modules I do not wish to take                       | Keep only the modules that I am interested in               |
+| v1.0    | NUS Student  | Plan my schedule for the semester                              | Better prepare myself for the semester                      |
+| v2.0    | user         | find a to-do item by name                                      | locate a to-do without having to go through the entire list |
 
 ## Non-Functional Requirements
 
-{Give non-functional requirements}
+1. Program should run on any mainstream OS that runs Java 11 and have a stable internet 
+connection
+2. Users should be able to easily use all functionalities if they have a general idea of module codes
+in NUS.
+
 
 ## Glossary
 

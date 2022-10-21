@@ -51,15 +51,19 @@ public class Nusmods {
         return baseUri + mod + ".json";
     }
 
+    private HttpResponse<String> getResponse() throws IOException, InterruptedException {
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+                .GET()
+                .header("accept", "application/json")
+                .uri(URI.create(setUri()))
+                .build();
+        return client.send(request, HttpResponse.BodyHandlers.ofString());
+    }
+
     public String[] getModuleInfo() throws IOException, InterruptedException {
         while (true) {
-            HttpClient client = HttpClient.newHttpClient();
-            HttpRequest request = HttpRequest.newBuilder()
-                    .GET()
-                    .header("accept", "application/json")
-                    .uri(URI.create(setUri()))
-                    .build();
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            HttpResponse<String> response = getResponse();
             if (response.statusCode() != 200) {
                 System.out.println("Module not found, please try again.");
             } else {
@@ -82,13 +86,7 @@ public class Nusmods {
     public List<Lesson> addModuleInfo(String currentSemester, String[] info)
             throws IOException, InterruptedException, Exceptions.InvalidSemException, Exceptions.InvalidModuleCode {
         while (true) {
-            HttpClient client = HttpClient.newHttpClient();
-            HttpRequest request = HttpRequest.newBuilder()
-                    .GET()
-                    .header("accept", "application/json")
-                    .uri(URI.create(setUri()))
-                    .build();
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            HttpResponse<String> response = getResponse();
             if (response.statusCode() != 200) {
                 throw new Exceptions.InvalidModuleCode();
             } else {
