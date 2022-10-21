@@ -7,6 +7,7 @@ import computercomponentchooser.components.Gpu;
 import computercomponentchooser.components.Memory;
 import computercomponentchooser.components.Monitor;
 import computercomponentchooser.components.PowerSupply;
+import computercomponentchooser.components.Other;
 
 import computercomponentchooser.exceptions.UnknownCommandException;
 
@@ -120,6 +121,10 @@ public class EditParser {
             Monitor monitor = new Monitor(name, price, power, getParameter(line, 5),
                     getParameter(line, 6), getParameter(line, 7));
             editBuild.addComponent(type, monitor);
+            break;
+        case "other":
+            Other other = new Other(name, price, power);
+            editBuild.addComponent(type, other);
             break;
         default:
             break;
