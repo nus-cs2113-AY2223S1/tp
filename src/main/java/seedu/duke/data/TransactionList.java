@@ -248,9 +248,9 @@ public class TransactionList {
         String timeSavingsList = "";
 
         if (month == -1) {
-            timeSavingsList += "Year: " + year + LINE_SEPARATOR + LINE_SEPARATOR;
+            timeSavingsList += "Year: " + year + LINE_SEPARATOR;
         } else {
-            timeSavingsList += "Year: " + year + ", Month: " + month + LINE_SEPARATOR + LINE_SEPARATOR;
+            timeSavingsList += "Year: " + year + ", Month: " + month + LINE_SEPARATOR;
         }
 
         // Formats every entry in the hashmap into a categorical savings list
