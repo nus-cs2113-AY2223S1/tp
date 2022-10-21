@@ -8,8 +8,6 @@ import computercomponentchooser.components.Gpu;
 import computercomponentchooser.components.Drive;
 import computercomponentchooser.exceptions.UnknownCommandException;
 
-import java.util.ArrayList;
-
 import static computercomponentchooser.ComputerComponentChooser.storage;
 
 
@@ -45,104 +43,30 @@ public class EditParser {
 
     public void parse(String line) {
         String command = getParameter(line, COMMAND_PARAMETER).toLowerCase();
-
-        String name;
-        String type;
-        String price;
-        String power;
         Build editBuild = buildManager.getBuild(buildName);
+
         try {
             switch (command) {
             case "add":
-                name = getParameter(line, NAME_PARAMETER);
-                type = getParameter(line, TYPE_PARAMETER);
-                price = getParameter(line, PRICE_PARAMETER);
-                power = getParameter(line, POWER_PARAMETER);
-                switch (type) {
-                case "cpu":
-                    Cpu cpu = new Cpu(name, price, power,
-                            getParameter(line, 5), getParameter(line, 6));
-                    editBuild.addComponent(type, cpu);
-                    break;
-                case "memory":
-                    Memory memory = new Memory(name, price, power, getParameter(line, 5),
-                            getParameter(line, 6));
-                    editBuild.addComponent(type, memory);
-                    break;
-                case "motherboard":
-                    Motherboard motherboard = new Motherboard(name, price, power, getParameter(line, 5),
-                            getParameter(line, 6), getParameter(line, 7));
-                    editBuild.addComponent(type, motherboard);
-                    break;
-                case "powersupply":
-                    PowerSupply powersupply = new PowerSupply(name, price, power);
-                    editBuild.addComponent(type, powersupply);
-                    break;
-                case "gpu":
-                    Gpu gpu = new Gpu(name, price, power, getParameter(line, 5),
-                            getParameter(line, 6));
-                    editBuild.addComponent(type, gpu);
-                    break;
-                case "drive":
-                    Drive drive = new Drive(name, price, power, getParameter(line, 5),
-                            getParameter(line, 6));
-                    editBuild.addComponent(type, drive);
-                    break;
-                default:
-                    break;
-                } try {
-                    storage.saveComponent(editBuild);
-                } catch (Exception e) {
-                    System.out.println("Error saving build");
-                }
-
-                Ui.printLine();
-                System.out.println("You have added " + name);
-                Ui.printLine();
+                parseAdd(editBuild, line);
                 break;
             case "delete":
-                name = getParameter(line, NAME_PARAMETER);
-                type = getParameter(line, TYPE_PARAMETER);
-                editBuild.deleteComponent(type, name);
-                try {
-                    storage.saveComponent(editBuild);
-                } catch (Exception e) {
-                    System.out.println("Error saving build");
-                }
-                Ui.printLine();
-                System.out.println("You have removed " + name);
-                Ui.printLine();
+                parseDelete(editBuild, line);
                 break;
             case "list":
-                Ui.printLine();
-                System.out.println("Computer parts for " + buildName + ":");
-                System.out.print(editBuild.toString());
-                Ui.printLine();
+                parseList(editBuild);
                 break;
             case "edit":
-                buildName = getParameter(line, TYPE_PARAMETER);
-                Ui.printLine();
-                System.out.println("You are now editing " + buildName);
-                Ui.printLine();
+                parseEdit(line);
                 break;
             case "view":
-                name = getParameter(line, NAME_PARAMETER);
-                type = getParameter(line, TYPE_PARAMETER);
-                Ui.printLine();
-                System.out.println(editBuild.getComponent(type, name).getDetails());
-                Ui.printLine();
+                parseView(editBuild, line);
                 break;
             case "check":
-                Ui.printLine();
-                System.out.println("Compatibility Info:");
-                System.out.print(editBuild.getCompatibilityInfo());
-                Ui.printLine();
+                parseCheck(editBuild);
                 break;
             case "info":
-                Ui.printLine();
-                System.out.println("Build Info:");
-                System.out.print(editBuild.getBuildInfo());
-                Ui.printLine();
+                parseInfo(editBuild);
                 break;
             case "back":
                 break;
@@ -153,6 +77,104 @@ public class EditParser {
             System.out.println(e.getMessage());
             Ui.printLine();
         }
+    }
+
+    public void parseAdd(Build editBuild, String line) {
+        String name = getParameter(line, NAME_PARAMETER);
+        String type = getParameter(line, TYPE_PARAMETER);
+        String price = getParameter(line, PRICE_PARAMETER);
+        String power = getParameter(line, POWER_PARAMETER);
+        switch (type) {
+        case "cpu":
+            Cpu cpu = new Cpu(name, price, power,
+                    getParameter(line, 5), getParameter(line, 6));
+            editBuild.addComponent(type, cpu);
+            break;
+        case "memory":
+            Memory memory = new Memory(name, price, power, getParameter(line, 5),
+                    getParameter(line, 6));
+            editBuild.addComponent(type, memory);
+            break;
+        case "motherboard":
+            Motherboard motherboard = new Motherboard(name, price, power, getParameter(line, 5),
+                    getParameter(line, 6), getParameter(line, 7));
+            editBuild.addComponent(type, motherboard);
+            break;
+        case "powersupply":
+            PowerSupply powersupply = new PowerSupply(name, price, power);
+            editBuild.addComponent(type, powersupply);
+            break;
+        case "gpu":
+            Gpu gpu = new Gpu(name, price, power, getParameter(line, 5),
+                    getParameter(line, 6));
+            editBuild.addComponent(type, gpu);
+            break;
+        case "drive":
+            Drive drive = new Drive(name, price, power, getParameter(line, 5),
+                    getParameter(line, 6));
+            editBuild.addComponent(type, drive);
+            break;
+        default:
+            break;
+        } try {
+            storage.saveComponent(editBuild);
+        } catch (Exception e) {
+            System.out.println("Error saving build");
+        }
+
+        Ui.printLine();
+        System.out.println("You have added " + name);
+        Ui.printLine();
+    }
+
+    public void parseDelete(Build editBuild, String line) {
+        String name = getParameter(line, NAME_PARAMETER);
+        String type = getParameter(line, TYPE_PARAMETER);
+        editBuild.deleteComponent(type, name);
+        try {
+            storage.saveComponent(editBuild);
+        } catch (Exception e) {
+            System.out.println("Error saving build");
+        }
+        Ui.printLine();
+        System.out.println("You have removed " + name);
+        Ui.printLine();
+    }
+
+    public void parseList(Build editBuild) {
+        Ui.printLine();
+        System.out.println("Computer parts for " + buildName + ":");
+        System.out.print(editBuild.toString());
+        Ui.printLine();
+    }
+
+    public void parseEdit(String line) {
+        buildName = getParameter(line, TYPE_PARAMETER);
+        Ui.printLine();
+        System.out.println("You are now editing " + buildName);
+        Ui.printLine();
+    }
+
+    public void parseView(Build editBuild, String line) {
+        String name = getParameter(line, NAME_PARAMETER);
+        String type = getParameter(line, TYPE_PARAMETER);
+        Ui.printLine();
+        System.out.println(editBuild.getComponent(type, name).getDetails());
+        Ui.printLine();
+    }
+
+    public void parseCheck(Build editBuild) {
+        Ui.printLine();
+        System.out.println("Compatibility Info:");
+        System.out.print(editBuild.getCompatibilityInfo());
+        Ui.printLine();
+    }
+
+    public void parseInfo(Build editBuild) {
+        Ui.printLine();
+        System.out.println("Build Info:");
+        System.out.print(editBuild.getBuildInfo());
+        Ui.printLine();
     }
 }
 
