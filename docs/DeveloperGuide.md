@@ -12,6 +12,27 @@
 This sector describes the architecture design of Upcycle with its components, and UML diagrams are used to support.
 ### Duke 
 ![DukeSequence](images/DukeSequence.png)
+### Command component
+From the above, it is quite clear that the Command component is important as it governs execution of behaviors depending on user input.
+
+For our components, we try to be consistent by having an interface for classes that acts as a 'contract' to tell us what we can do with a class
+
+We therefore have a `CommandInterface` that is implemented by an abstract class `Command`, which is the base class for all commands
+
+Below, we show a simplified diagram of how our Command classes are designed
+
+![CommandDesign](images/CommandDesign.png)
+
+A few things to take note are:
+- `UserCommand`, `TransactionCommand` and `ItemCommand` are simplified here they comprise quite a number of classes
+- In general, each related has a `Add`, `Remove`, `List`, `View`, `Update` command
+- For example, the ItemCommand actually comprises `AddItemCommand`, `ListItemCommand`, `ViewItemCommand`, `UpdateItemCommand` and `DeleteItem` and will have other commands in the future.
+- Since `Comamnd` is abstract, each subclass will have its own implementation of `executeCommand`
+- `executeCommand` will either return a `Boolean` value or thrown an Exception
+- The `Boolean` returned value represents if the executing command is the last executed command(such as if a user exits the program)
+- `executeCommand` follows the delegation pattern. It receives `UserList`, `ItemList` and `TransactionList` which it delegates work to.
+
+
 ### User component
 The class diagram below shows how User-related classes interact with each other. `User` object contains `name`, `age`, `contactNumber` attributes. Users are stored in UserList, which will be loaded and written on the file by `UserStorage` (inherits from `Storage`) whenever Upcycle runs or exits.
 All user-related commands operate mainly on a list of users (userList:UserList).
@@ -24,8 +45,7 @@ Transactions are stored in `TransactionList`, which will be loaded and written o
 
 ![TransactionClassDiagram](images/TransactionClassDiagram.png)
 ### Ui component 
-### Storage component 
-### Command component
+### Storage component
 
 ## Implementation
 This sector describe how features are implemented, where readers can get insight into the mechanisms of them with step-by-step descriptions and UML diagrams.

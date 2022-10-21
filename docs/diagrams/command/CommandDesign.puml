@@ -1,0 +1,38 @@
+@startuml
+interface CommandInterface {
+ +boolean executeCommand()
+}
+abstract class "Command"
+class UserCommand {
+ - UserList userList
+ - ItemList itemList
+ - TransactionList transactionList
+' + boolean executeCommand()
+}
+class TransactionCommand {
+ - UserList userList
+ - ItemList itemList
+ - TransactionList transactionList
+ + boolean executeCommand()
+}
+class ItemCommand {
+ - UserList userList
+ - ItemList itemList
+ - TransactionList transactionList
+ + boolean executeCommand()
+}
+class HelpCommand {
+ + boolean executeCommand()
+}
+class ExitCommand {
+ + boolean executeCommand()
+}
+
+CommandInterface <|-- Command
+Command <|-- UserCommand
+Command <|-- TransactionCommand
+Command <|-- ItemCommand
+Command <|-- HelpCommand
+Command <|-- ExitCommand
+
+@enduml
