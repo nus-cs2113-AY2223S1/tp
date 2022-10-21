@@ -1,0 +1,20 @@
+@startuml
+class PrescriptionList {
++ void add(ui:UI, patientId:String, medicine:String, dosage:String, timeInterval:String)
++ void add(ui:UI, patientId:String, medicine:String, dosage:String, timeInterval:String, isActive:boolean)
++ void viewAll(ui:UI)
++ void viewPatientPrescription(ui:UI, patientId:String)
++ void viewActivePatientPrescription(ui:UI, patientId:String)
++ void edit(ui:UI, prescriptionNumber:int, medicine:String, dosage:String, timeInterval:String)
++ void activatePrescription(ui:UI, prescriptionNumber:String)
++ void deactivatePrescription(ui:UI, prescriptionNumber:String)
+}
+
+class Prescription {
+}
+
+class UI {}
+
+PrescriptionList *-down-> "*" Prescription : "contains" >
+PrescriptionList .right.> UI
+@enduml
