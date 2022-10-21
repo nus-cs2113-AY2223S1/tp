@@ -754,7 +754,9 @@ public class ConsoleParser {
         boolean hasAllCliOptions = options.hasLongOption(
                 ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY_ARG_EXPENSE_INDEX_LONG)
                 && options.hasLongOption(
-                ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY_ARG_CURRENCY_LONG);
+                ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY_ARG_CURRENCY_LONG)
+                && options.hasLongOption(
+                ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY_ARG_RATE_LONG);
         assert hasAllCliOptions :
                 ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS;
     }
@@ -778,14 +780,20 @@ public class ConsoleParser {
         String currency = commandLine.getOptionValue(
                 ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY_ARG_CURRENCY_LONG
         );
-
-        /* Checks if mandatory arguments are provided */
+        String rateStr = commandLine.getOptionValue(
+                ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY_ARG_RATE_LONG
+        );
 
         if (expenseIndexStr == null || currency == null) {
             throw new ConsoleParserCommandConvertCurrencyInvalidException();
         }
 
-
+        if (rateStr != null) {
+            BigDecimal rate = new BigDecimal(rateStr);
+            if (rate.compareTo(BigDecimal.ZERO) != 1) {
+                throw new ConsoleParserCommandConvertCurrencyInvalidException();
+            }
+        }
     }
 
     private static ConsoleCommandConvertCurrency parseCommandConvertCurrencyValues(CommandLine commandLine) {
@@ -795,13 +803,21 @@ public class ConsoleParser {
         String currency = commandLine.getOptionValue(
                 ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY_ARG_CURRENCY_LONG
         );
+        String rateStr = commandLine.getOptionValue(
+                ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY_ARG_RATE_LONG
+        );
 
         int expenseIndex = Integer.parseInt(expenseIndexStr);
         currency = currency.toUpperCase();
+        BigDecimal rate = null;
+        if (rateStr != null) {
+            rate = new BigDecimal(rateStr);
+        }
 
         return new ConsoleCommandConvertCurrency(
                 expenseIndex,
-                currency
+                currency,
+                rate
         );
     }
 
