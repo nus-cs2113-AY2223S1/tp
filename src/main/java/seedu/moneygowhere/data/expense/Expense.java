@@ -13,13 +13,23 @@ public class Expense {
     private String description;
     private BigDecimal amount;
     private String category;
+    private String remarks;
+    private String currency;
 
-    public Expense(String name, LocalDateTime dateTime, String description, BigDecimal amount, String category) {
+    public Expense(String name,
+                   LocalDateTime dateTime,
+                   String description,
+                   BigDecimal amount,
+                   String category,
+                   String remarks,
+                   String currency) {
         this.name = name;
         this.dateTime = dateTime;
         this.description = description;
         this.amount = amount;
         this.category = category;
+        this.remarks = remarks;
+        this.currency = currency;
     }
 
     public String getName() {
@@ -60,5 +70,21 @@ public class Expense {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
     }
 }
