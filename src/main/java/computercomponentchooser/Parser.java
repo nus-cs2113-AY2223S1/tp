@@ -63,7 +63,7 @@ public class Parser {
                 mainParseExport();
                 break;
             case "exportCSV":
-                mainParseExportCSV();
+                mainParseExportCsv();
                 break;
             default:
                 throw new UnknownCommandException();
@@ -134,7 +134,7 @@ public class Parser {
         Ui.printLine();
     }
 
-    private void mainParseExportCSV() throws IOException {
+    private void mainParseExportCsv() throws IOException {
         Ui.printLine();
         System.out.println("Exporting builds...");
         ExportCsv.exportAllBuildsCsv(buildManager);

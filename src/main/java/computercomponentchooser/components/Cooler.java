@@ -52,8 +52,8 @@ public class Cooler extends Component {
     }
 
     public String getDetails() {
-        return super.getDetails() + String.format("\nSocket: %s\nFan Speed: %s RPM\nNoise Level: %s dB", socket, fanSpeed,
-                noiseLevel);
+        return super.getDetails() + String.format("\nSocket: %s\nFan Speed: %s RPM\nNoise Level: %s dB", socket,
+                fanSpeed, noiseLevel);
     }
 
     @Override
