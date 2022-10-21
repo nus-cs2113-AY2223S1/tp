@@ -243,6 +243,25 @@ public class TransactionList {
         return categoricalSavingsList;
     }
 
+
+    public String listTimeStats(ArrayList<Transaction> timeTransactions, int year, int month) {
+        String timeSavingsList = "";
+
+        if (month == -1) {
+            timeSavingsList += "Year: " + year + LINE_SEPARATOR + LINE_SEPARATOR;
+        } else {
+            timeSavingsList += "Year: " + year + ", Month: " + month + LINE_SEPARATOR + LINE_SEPARATOR;
+        }
+
+        // Formats every entry in the hashmap into a categorical savings list
+        for (Transaction entry : timeTransactions) {
+            timeSavingsList += String.format("%s%s%s %s%s%s", PREFIX_CATEGORY, entry.getCategory(),
+                    POSTFIX_CATEGORY, SYMBOL_DOLLAR, entry.getAmount(), LINE_SEPARATOR);
+        }
+
+        return timeSavingsList;
+    }
+
     /**
      * Gets the range of dates for the last N number of weeks from occurring week.
      * E.g. If the date is 21 October 2022 to backdate 2 weeks, the range will be 3 October to 16 October 2022.

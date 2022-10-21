@@ -48,6 +48,9 @@ add t/income c/bonus a/9999999999999 d/03102022 i/thank_you_boss
 add t/income c/bonus a/10000000 d/20220101 i/thank_you_boss
 add t/income c/bonus a/10000000 d/obviouslyFalseDate i/thank_you_boss
 add t/income c/bonus a/10000000
+stats s/time y/2022 m/10
+stats s/time y/2022
+stats s/time m/9
 list
 delete 1
 delete e/1

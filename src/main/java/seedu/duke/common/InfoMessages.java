@@ -18,6 +18,7 @@ public enum InfoMessages {
     INFO_LIST_UNFILTERED("There are no transaction records that match your search expression."),
     INFO_STATS_EMPTY("There are no statistics available yet for the given statistics type."),
     INFO_STATS_CATEGORIES("Here are the total savings for each category:"),
+    INFO_STATS_TIME("Here are the total savings for "),
     INFO_PURGE("All your transactions have been purged."),
     INFO_PURGE_ABORT("Purging has been aborted. All transactions records are retained."),
     INFO_PURGE_EMPTY("The command is aborted as the transactions list is empty."),
