@@ -36,9 +36,18 @@ Repeat for birthDate and gender.
 The `VisitList` Component,
 * stores the list of visits
 * can add new visit to the list
-* can edit reason for a existing visit in the list
+* can edit reason for an existing visit in the list
 * can view all visits in the list
-* can view visits for a specific patient, based on their id
+* can view all visits for a patient
+* can view a specific visit
+* depends on `UI` class (as the `VisitList` component interacts with user through the UI component, and makes use of its methods to print details)
+
+**Methods in `VisitList` class:**
+* `addVisit` - This method allows user to add a visit to the `VisitList` by specifying `id` of patient, `dateOfVisit`, and `timeOfVisit`.
+* `editReason` - This method allows user to edit reason for an existing visit, by specifying `id` of patient and `reason` for visit
+* `viewAll` - This method iterates through the list of all visits, and prints each visit record
+* `viewPatient` - This method iterates through the list of all visits, and prints the visit records that match the specified `id` of patient
+* `viewVisit` - This method iterates through the list of all visits, and prints the visit record that matches the specified `index` of the visit
 
 ### PrescriptionList component
 **API**: `PrescriptionList.java`
