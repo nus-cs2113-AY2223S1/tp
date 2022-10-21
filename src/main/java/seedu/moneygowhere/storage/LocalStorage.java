@@ -197,18 +197,33 @@ public class LocalStorage {
         Element element = (Element) node;
         String name = element.getElementsByTagName(XML_EXPENSE_NAME_ELEMENT)
                 .item(0).getTextContent();
+        assert name != null : "There must be a name";
+
         LocalDateTime dateTime = LocalDateTime.parse(element
                 .getElementsByTagName(XML_EXPENSE_DATETIME_ELEMENT).item(0).getTextContent());
+
         String description = element.getElementsByTagName(XML_EXPENSE_DESCRIPTION_ELEMENT)
                 .item(0).getTextContent();
+        if (description.isEmpty() || description.trim().isEmpty()) {
+            description = null;
+        }
         NodeList amountNodeList = element.getElementsByTagName(XML_EXPENSE_AMOUNT_ELEMENT);
         BigDecimal amount = new BigDecimal(amountNodeList.item(0).getTextContent());
         String currency = amountNodeList.item(0).getAttributes()
                 .getNamedItem(XML_EXPENSE_AMOUNT_CURRENCY_ATTRIBUTE).getTextContent();
+        assert currency != null : "There must be a currency";
+
         String category = element.getElementsByTagName(XML_EXPENSE_CATEGORY_ELEMENT)
                 .item(0).getTextContent();
+        if (category.isEmpty() || category.trim().isEmpty()) {
+            category = null;
+        }
+
         String remark = element.getElementsByTagName(XML_EXPENSE_REMARKS_ELEMENT)
                 .item(0).getTextContent();
+        if (remark.isEmpty() || remark.trim().isEmpty()) {
+            remark = null;
+        }
         return new Expense(name, dateTime, description, amount, category, remark, currency);
     }
 
