@@ -534,6 +534,26 @@ Description     : This is a test recurring payment 3
 Amount          : 10.80
 
 
+The recurring payment was edited successfully.
+
+
+---- RECURRING PAYMENT INDEX 0 ----
+Name            : Rec Exp 1
+Interval (Days) : 31
+Description     : This is a test recurring payment 1
+Amount          : 7.81
+---- RECURRING PAYMENT INDEX 1 ----
+Name            : Rec Exp 2
+Interval (Days) : 40
+Description     : null
+Amount          : 9.80
+---- RECURRING PAYMENT INDEX 2 ----
+Name            : Rec Exp 3
+Interval (Days) : 50
+Description     : This is a test recurring payment 3
+Amount          : 10.80
+
+
 The recurring payment was deleted successfully.
 
 
