@@ -118,15 +118,15 @@ public class Parser {
                             matcherAdd.group(3), matcherAdd.group(4));
                 }
             } else if (matcherEdit.find()) {
-                String patientId = matcherAdd.group(1);
+                String patientId = matcherEdit.group(1);
                 checkPatientExists(patientId);
                 visitList.editReason(ui, patientId, matcherEdit.group(2));
             } else if (matcherViewPatient.find()) {
-                String patientId = matcherAdd.group(1);
+                String patientId = matcherViewPatient.group(1);
                 checkPatientExists(patientId);
                 visitList.viewPatient(ui, patientId);
             } else if (matcherViewVisit.find()) {
-                String patientId = matcherAdd.group(1);
+                String patientId = matcherViewVisit.group(1);
                 checkPatientExists(patientId);
                 //visitList.viewVisit(ui, patientId, matcherViewVisit.group(2));
             } else {
