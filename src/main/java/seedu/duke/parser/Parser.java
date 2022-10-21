@@ -4,6 +4,7 @@ import seedu.duke.command.AddModuleCommand;
 import seedu.duke.command.Command;
 import seedu.duke.command.DeleteModuleCommand;
 import seedu.duke.command.ExitCommand;
+import seedu.duke.command.GetModuleCommand;
 import seedu.duke.command.HelpCommand;
 import seedu.duke.command.IncompleteCommand;
 import seedu.duke.command.InvalidModuleCommand;
@@ -24,12 +25,14 @@ public class Parser {
         switch (keywords[0]) {
         case (SearchModuleCommand.COMMAND_WORD):
             return searchCommand(userInput);
+        case (GetModuleCommand.COMMAND_WORD):
+            return getCommand(keywords);
         case (AddModuleCommand.COMMAND_WORD):
             return addDeleteCommand(keywords, new AddModuleCommand(keywords));
         case (DeleteModuleCommand.COMMAND_WORD):
             return addDeleteCommand(keywords, new DeleteModuleCommand(keywords));
         case (ViewTimetableCommand.COMMAND_WORD):
-            return viewHelpExitCommand(keywords, new ViewTimetableCommand(keywords));
+            return new ViewTimetableCommand(userInput);
         case (HelpCommand.COMMAND_WORD):
             return viewHelpExitCommand(keywords, new HelpCommand(keywords));
         case (SelectSlotCommand.COMMAND_WORD):
@@ -41,6 +44,10 @@ public class Parser {
         default:
             return new UnknownCommand(keywords);
         }
+    }
+
+    private static Command getCommand(String[] keywords) {
+        return new GetModuleCommand(keywords);
     }
 
     public static boolean isPartialModuleCode(String moduleCode) {
@@ -162,8 +169,8 @@ public class Parser {
         String paramsString = description.substring(firstSlash + 1);
         for (String param : paramsString.split(" /")) {
             int firstSpace = param.indexOf(' ');
-            String key = param.substring(0, firstSpace).trim();
-            String value = param.substring(firstSpace + 1).trim();
+            String key = firstSpace == -1 ? param : param.substring(0, firstSpace).trim();
+            String value = firstSpace == -1 ? "" : param.substring(firstSpace + 1).trim();
             paramsMap.put(key, value);
         }
         return paramsMap;
