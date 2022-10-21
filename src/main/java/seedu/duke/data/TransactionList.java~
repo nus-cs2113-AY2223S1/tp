@@ -378,7 +378,7 @@ public class TransactionList {
                 assert (Long.valueOf(MAX_AMOUNT_VALUE) * Long.valueOf(MAX_TRANSACTIONS_COUNT) > 0);
                 assert (Long.valueOf(MAX_AMOUNT_VALUE) * Long.valueOf(MAX_TRANSACTIONS_COUNT) >
                         Long.valueOf(MAX_AMOUNT_VALUE));
-
+                
                 totalExpense += transaction.getAmount();
             }
         }

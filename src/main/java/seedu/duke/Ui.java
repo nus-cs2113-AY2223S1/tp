@@ -103,7 +103,13 @@ public class Ui {
      *
      * @param message            A message that describes the functionality of the program.
      * @param transactionDetails Details of the action that has been performed on the transaction.
+     * @param budgetInfo         A message that contains the monthly budget information.
      */
+    public static void showTransactionAction(String message, String transactionDetails, String budgetInfo) {
+        printMessages(message, transactionDetails, INFO_REMAINING_BUDGET.toString(), budgetInfo);
+    }
+
+    // A temporary overload method for backward-compatibility for delete command
     public static void showTransactionAction(String message, String transactionDetails) {
         printMessages(message, transactionDetails);
     }

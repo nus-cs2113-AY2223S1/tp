@@ -3,9 +3,11 @@ package seedu.duke.command;
 import seedu.duke.Storage;
 import seedu.duke.Ui;
 
+import seedu.duke.data.Budget;
 import seedu.duke.data.TransactionList;
 import seedu.duke.data.transaction.Expense;
 import seedu.duke.data.transaction.Income;
+import seedu.duke.data.transaction.Transaction;
 import seedu.duke.exception.MoolahException;
 import seedu.duke.exception.InputTransactionUnknownTypeException;
 import seedu.duke.exception.StorageWriteErrorException;
@@ -63,6 +65,7 @@ public class AddCommand extends Command {
     private int amount;
     private String category;
     private LocalDate date;
+    private Transaction transactionCreated;
 
     public AddCommand() {
     }
@@ -121,6 +124,9 @@ public class AddCommand extends Command {
     public void setDate(LocalDate date) {
         this.date = date;
     }
+    public void setTransactionCreated(Transaction transaction) {
+        this.transactionCreated = transaction;
+    }
 
     /**
      * Executes the "add" command. Checks and parses the necessary parameters before adding transaction.
@@ -138,38 +144,75 @@ public class AddCommand extends Command {
             addLogger.log(Level.INFO, "Add Command checks the type of the transaction "
                     + "before adding into the transaction class.");
             assert date != null;
-            //@@author wcwy
-            // The expected maximum number of transactions allowed to store is only one million.
-            if (transactions.size() == MAX_TRANSACTIONS_COUNT) {
-                addLogger.log(Level.WARNING, "A transaction is attempted to be stored beyond its capacity");
-                throw new MaximumTransactionCountException();
-            }
 
-            switch (type) {
-            case Expense.TRANSACTION_NAME:
-                String expense = transactions.addExpense(description, amount, category, date);
-                Ui.showTransactionAction(INFO_ADD_EXPENSE.toString(), expense);
-                addLogger.log(Level.INFO, "New expense transaction has been added "
-                        + "and the UI should display acknowledgment message respectively.");
-                storage.writeToFile(transactions.getTransactions());
-                break;
-            case Income.TRANSACTION_NAME:
-                String income = transactions.addIncome(description, amount, category, date);
-                Ui.showTransactionAction(INFO_ADD_INCOME.toString(), income);
-                addLogger.log(Level.INFO, "New income transaction has been added "
-                        + "and the UI should display acknowledgment message respectively.");
-                storage.writeToFile(transactions.getTransactions());
-                break;
-            default:
-                addLogger.log(Level.WARNING, "InputTransactionUnknownTypeException thrown "
-                        + "when the transaction type is unknown.");
-                throw new InputTransactionUnknownTypeException();
-            }
+            //@@author wcwy
+            checkTransactionCapacity(transactions);
+            String messageBanner = addTransaction(transactions);
+            long addedMonthExpenseSum = transactions.calculateMonthlyTotalExpense(date);
+            String budgetLeft = Budget.getBudgetLeft(addedMonthExpenseSum);
+
+            Ui.showTransactionAction(messageBanner, transactionCreated.toString(), budgetLeft);
+
+            //@@author chinhan99
+            storage.writeToFile(transactions.getTransactions());
         } catch (IOException e) {
             throw new StorageWriteErrorException();
         }
-        //@@author chinhan99
         addLogger.log(Level.INFO, "End of Add command.");
+    }
+
+    //@@author wcwy
+
+    /**
+     * Checks if the number of transactions in the transaction list has reached the capacity.
+     * This prevents the number of transactions added to the list to be more than the capacity.
+     *
+     * <p>With this, it is possible for the application to compute the maximum and minimum value budget difference
+     * to prevent integer overflow.
+     *
+     * @param transactions The list of transactions in the application.
+     * @throws MaximumTransactionCountException If the transaction list capacity has been reached.
+     */
+    private static void checkTransactionCapacity(TransactionList transactions) throws MaximumTransactionCountException {
+        // The expected maximum number of transactions allowed to store is only one million.
+        if (transactions.size() == MAX_TRANSACTIONS_COUNT) {
+            addLogger.log(Level.WARNING, "A transaction is attempted to be stored beyond its capacity");
+            throw new MaximumTransactionCountException();
+        }
+    }
+
+    /**
+     * Adds the transaction into the transaction list based on the parameters stored by the AddCommand object.
+     *
+     * <p>Store the transaction object created in transactionCreated and return the message banner based on the
+     * transaction type created.
+     *
+     * @param transactions The list of transactions in the application.
+     * @returns A string containing the message banner based on the type of transaction created.
+     * @throws InputTransactionUnknownTypeException If the type of the transactions
+     */
+    private String addTransaction(TransactionList transactions) throws InputTransactionUnknownTypeException {
+        String messageBanner = "";
+        Transaction transaction;
+        switch (type) {
+        case Expense.TRANSACTION_NAME:
+            transaction = transactions.addExpense(description, amount, category, date);
+            messageBanner = INFO_ADD_EXPENSE.toString();
+            addLogger.log(Level.INFO, "New expense transaction has been added "
+                    + "and the UI should display acknowledgment message respectively.");
+            break;
+        case Income.TRANSACTION_NAME:
+            transaction = transactions.addIncome(description, amount, category, date);
+            messageBanner = INFO_ADD_INCOME.toString();
+            addLogger.log(Level.INFO, "New income transaction has been added "
+                    + "and the UI should display acknowledgment message respectively.");
+            break;
+        default:
+            addLogger.log(Level.SEVERE, "The parsed type of transaction stored in addCommand is unknown!");
+            throw new InputTransactionUnknownTypeException();
+        }
+        setTransactionCreated(transaction);
+        return messageBanner;
     }
 
     //@@author paullowse
