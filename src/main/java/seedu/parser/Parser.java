@@ -1,10 +1,7 @@
 package seedu.parser;
 
 import seedu.api.Api;
-import seedu.commands.Command;
-import seedu.commands.FindCommand;
-import seedu.commands.InvalidCommand;
-import seedu.commands.SearchCommand;
+import seedu.commands.*;
 import seedu.data.CarparkList;
 import seedu.exception.InvalidCommandException;
 import seedu.exception.NoCommandArgumentException;
@@ -23,16 +20,14 @@ public class Parser {
     private CarparkList carparkList;
     private Api api;
 
-    public Parser(Api api, CarparkList carparkList) {
-        this.api = api;
-        this.carparkList = carparkList;
-    }
     /**
      * Used for the initial separation of command word and arguments
      */
     public static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
     public static final Pattern KEYWORDS_ARGS_FORMAT = Pattern.compile("(?<keywords>\\S+(?:\\s+\\S+)*)");
-    public Command parseCommand(String input) {
+    public Command parseCommand(String input, Api api, CarparkList carparkList) {
+        this.api = api;
+        this.carparkList = carparkList;
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(input.trim());
         if (!matcher.matches()) {
             return new InvalidCommand("Invalid Command");
@@ -42,10 +37,18 @@ public class Parser {
         final String arguments = matcher.group("arguments");
 
         switch (commandWord) {
+        case AuthCommand.COMMAND_WORD:
+            return new AuthCommand(api);
+        case ExitCommand.COMMAND_WORD:
+            return new ExitCommand();
         case FindCommand.COMMAND_WORD:
             return prepareFind(arguments);
+        case ListCommand.COMMAND_WORD:
+            return new ListCommand(carparkList);
         case SearchCommand.COMMAND_WORD:
             return prepareSearch(arguments);
+        case UpdateCommand.COMMAND_WORD:
+            return new UpdateCommand(api);
         default:
             return new InvalidCommand("Invalid Command");
         }

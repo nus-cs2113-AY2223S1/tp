@@ -1,6 +1,7 @@
 package seedu.commands;
 
 import seedu.data.CarparkList;
+import seedu.exception.FileWriteException;
 import seedu.exception.InvalidCommandException;
 import seedu.exception.NoCarparkFoundException;
 
@@ -13,7 +14,7 @@ public class Command {
     protected Command() {
     }
 
-    public CommandResult execute() throws InvalidCommandException, NoCarparkFoundException {
+    public CommandResult execute() throws InvalidCommandException, NoCarparkFoundException, FileWriteException {
         throw new InvalidCommandException();
     }
 }
