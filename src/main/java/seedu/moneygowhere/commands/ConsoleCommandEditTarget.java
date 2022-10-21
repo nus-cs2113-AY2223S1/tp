@@ -4,34 +4,38 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 /**
- * Stores the add-expense command and its arguments.
+ * Stores the edit-target command and its arguments.
  */
-@SuppressWarnings({"FieldMayBeFinal", "unused"})
-public class ConsoleCommandAddExpense extends ConsoleCommand {
+@SuppressWarnings("unused")
+public class ConsoleCommandEditTarget extends ConsoleCommand {
+    private int targetIndex;
     private String name;
     private LocalDateTime dateTime;
     private String description;
     private BigDecimal amount;
-    private String category;
-    private String remarks;
-    private String currency;
+    private BigDecimal currentAmount;
 
-    public ConsoleCommandAddExpense(
+    public ConsoleCommandEditTarget(
+            int targetIndex,
             String name,
             LocalDateTime dateTime,
             String description,
             BigDecimal amount,
-            String category,
-            String remarks,
-            String currency
-    ) {
+            BigDecimal currentAmount) {
+        this.targetIndex = targetIndex;
         this.name = name;
         this.dateTime = dateTime;
         this.description = description;
         this.amount = amount;
-        this.category = category;
-        this.remarks = remarks;
-        this.currency = currency;
+        this.currentAmount = currentAmount;
+    }
+
+    public int getTargetIndex() {
+        return targetIndex;
+    }
+
+    public void setTargetIndex(int targetIndex) {
+        this.targetIndex = targetIndex;
     }
 
     public String getName() {
@@ -66,27 +70,11 @@ public class ConsoleCommandAddExpense extends ConsoleCommand {
         this.amount = amount;
     }
 
-    public String getCategory() {
-        return category;
+    public BigDecimal getCurrentAmount() {
+        return currentAmount;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public String getRemarks() {
-        return remarks;
-    }
-
-    public void setRemarks(String remarks) {
-        this.remarks = remarks;
-    }
-
-    public String getCurrency() {
-        return currency;
-    }
-
-    public void setCurrency(String currency) {
-        this.currency = currency;
+    public void setCurrentAmount(BigDecimal amount) {
+        this.currentAmount = amount;
     }
 }

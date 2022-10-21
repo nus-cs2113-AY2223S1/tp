@@ -1,0 +1,62 @@
+!define MONEYGOWHERE_COLOR_1 #777777
+
+!define COMMON_COLOR_1 #FD841F
+
+!define USER_INTERFACE_COLOR_1 #5bb318
+!define USER_INTERFACE_COLOR_2 #7DCE13
+
+!define PARSER_COLOR_1 #344FA1
+!define PARSER_COLOR_2 #3D84B8
+
+!define DATA_COLOR_1 #1C0C5B
+!define DATA_COLOR_2 #3D2C8D
+!define DATA_COLOR_3 #4B3869
+!define DATA_COLOR_4 #664E88
+!define DATA_COLOR_5 #916BBF
+!define DATA_COLOR_6 #C996CC
+
+!define STORAGE_COLOR_1 #704F4F
+!define STORAGE_COLOR_2 #A77979
+
+!define LOGGER_COLOR_1 #B73E3E
+!define LOGGER_COLOR_2 #DD5353
+
+!define USER_COLOR #000000
+
+skinparam packageStyle Rectangle
+skinparam MinClassWidth 50
+skinparam ParticipantPadding 10
+skinparam BackgroundColor #ffffff
+skinparam DefaultTextAlignment center
+skinparam Shadowing false
+
+skinparam Class {
+    BorderThickness 0
+    BorderColor #ffffff
+    FontColor #ffffff
+    StereotypeFontColor #ffffff
+    FontName Arial
+}
+
+skinparam Actor {
+    BorderColor USER_COLOR
+    Color USER_COLOR
+    FontName Arial
+}
+
+skinparam Sequence {
+    BoxPadding 0
+    BoxFontSize 15
+    BoxFontColor #ffffff
+    MessageAlign center
+    FontName Arial
+}
+
+skinparam Participant {
+    Padding 20
+    FontColor #ffffff
+}
+
+hide footbox
+hide members
+hide circle
