@@ -7,6 +7,7 @@ import seedu.duke.utils.State;
 import seedu.duke.utils.Storage;
 import seedu.duke.utils.Ui;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -14,14 +15,16 @@ import java.util.Map;
  */
 
 public class AddModuleCommand extends Command {
-    Module module;
+    private Module module;
+    private boolean successful;
 
     public static final String COMMAND_WORD = "add";
-
-    public AddModuleCommand(String[] input) { //
+    
+    public AddModuleCommand(String[] input) {
         super(input);
         String moduleCode = input[1].toUpperCase();
         this.module = Module.get(moduleCode);
+        successful = false;
     }
 
     @Override
@@ -29,7 +32,13 @@ public class AddModuleCommand extends Command {
         int semester = state.getSemester();
         SelectedModule selectedModule = new SelectedModule(module, semester);
 
-        state.addSelectedModule(selectedModule);
+        List<SelectedModule> currentSelectedModules = state.getSelectedModulesList();
+
+        if (!currentSelectedModules.contains(selectedModule)) {
+            state.addSelectedModule(selectedModule);
+            successful = true;
+        }
+
         ui.addMessage(getExecutionMessage());
         ui.displayUi();
     }
@@ -41,6 +50,13 @@ public class AddModuleCommand extends Command {
 
     @Override
     public String getExecutionMessage() {
-        return module.moduleCode + " has been added";
+        String outputMessage;
+        if (successful) {
+            outputMessage = module.moduleCode + " has been added";
+        } else {
+            outputMessage = module.moduleCode + " has already been added!";
+        }
+
+        return outputMessage;
     }
 }

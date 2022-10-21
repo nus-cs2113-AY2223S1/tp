@@ -4,9 +4,11 @@ import seedu.duke.command.AddModuleCommand;
 import seedu.duke.command.Command;
 import seedu.duke.command.DeleteModuleCommand;
 import seedu.duke.command.ExitCommand;
+import seedu.duke.command.GetModuleCommand;
 import seedu.duke.command.HelpCommand;
 import seedu.duke.command.ViewTimetableCommand;
 import seedu.duke.command.SelectSlotCommand;
+import seedu.duke.command.SelectSemesterCommand;
 import seedu.duke.command.SearchModuleCommand;
 import seedu.duke.exceptions.YamomException;
 
@@ -49,6 +51,10 @@ public class Parser {
         } catch (YamomException e) {
             throw e;
         }
+    }
+
+    private static Command getCommand(String[] keywords) {
+        return new GetModuleCommand(keywords);
     }
 
     public static boolean isPartialModuleCode(String moduleCode) {
@@ -108,6 +114,11 @@ public class Parser {
         return isTwoWordsCommand(keywords) && isValidModuleCode(keywords[1]);
     }
 
+    private static boolean isValidSemester(String[] keywords) {
+        int semesterInput = Integer.parseInt(keywords[1]);
+        return semesterInput > 0 && semesterInput <= 4;
+    }
+
     public static Command searchCommand(String userInput) {
         return new SearchModuleCommand(userInput);
     }
@@ -154,6 +165,14 @@ public class Parser {
         }
     }
 
+    public static Command selectSemesterCommand(String[] keywords, Command command) {
+        if (isValidSemester(keywords)) {
+            return command;
+        } else {
+            return new UnknownCommand(keywords);
+        }
+    }
+
     public static Map<String, String> parseParams(String description) {
         Map<String, String> paramsMap = new TreeMap<>();
         int firstSlash = description.indexOf('/');
@@ -163,8 +182,8 @@ public class Parser {
         String paramsString = description.substring(firstSlash + 1);
         for (String param : paramsString.split(" /")) {
             int firstSpace = param.indexOf(' ');
-            String key = param.substring(0, firstSpace).trim();
-            String value = param.substring(firstSpace + 1).trim();
+            String key = firstSpace == -1 ? param : param.substring(0, firstSpace).trim();
+            String value = firstSpace == -1 ? "" : param.substring(firstSpace + 1).trim();
             paramsMap.put(key, value);
         }
         return paramsMap;
