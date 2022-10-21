@@ -15,8 +15,8 @@ public class ConsoleCommandEditExpense extends ConsoleCommand {
     private BigDecimal amount;
     private String category;
     private String remarks;
-
     private String currency;
+    private String modeOfPayment;
 
     public ConsoleCommandEditExpense(
             int expenseIndex,
@@ -26,7 +26,8 @@ public class ConsoleCommandEditExpense extends ConsoleCommand {
             BigDecimal amount,
             String category,
             String remarks,
-            String currency
+            String currency,
+            String modeOfPayment
     ) {
         this.expenseIndex = expenseIndex;
         this.name = name;
@@ -36,6 +37,7 @@ public class ConsoleCommandEditExpense extends ConsoleCommand {
         this.category = category;
         this.remarks = remarks;
         this.currency = currency;
+        this.modeOfPayment = modeOfPayment;
     }
 
     public int getExpenseIndex() {
@@ -100,5 +102,13 @@ public class ConsoleCommandEditExpense extends ConsoleCommand {
 
     public void setCurrency(String currency) {
         this.currency = currency;
+    }
+
+    public String getModeOfPayment() {
+        return modeOfPayment;
+    }
+
+    public void setModeOfPayment(String modeOfPayment) {
+        this.modeOfPayment = modeOfPayment;
     }
 }

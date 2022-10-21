@@ -105,7 +105,9 @@ public class ConsoleParser {
                 && options.hasLongOption(
                 ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_REMARKS_LONG)
                 && options.hasLongOption(
-                ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_CURRENCY_LONG);
+                ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_CURRENCY_LONG)
+                && options.hasLongOption(
+                ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_LONG);
 
         assert hasAllCliOptions :
                 ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS;
@@ -129,6 +131,22 @@ public class ConsoleParser {
         );
 
         if (name.isBlank()) {
+            throw new ConsoleParserCommandAddExpenseInvalidException();
+        }
+
+        String modeOfPayment = commandLine.getOptionValue(
+                ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT
+        );
+
+        if (modeOfPayment != null
+                && !(modeOfPayment.equalsIgnoreCase(
+                        ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_CASH)
+                        || modeOfPayment.equalsIgnoreCase(
+                                ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_PAYNOW)
+                        || modeOfPayment.equalsIgnoreCase(
+                                ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_PAYLAH)
+                        || modeOfPayment.equalsIgnoreCase(
+                                ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_CARD))) {
             throw new ConsoleParserCommandAddExpenseInvalidException();
         }
     }
@@ -157,6 +175,9 @@ public class ConsoleParser {
             String currency = commandLine.getOptionValue(
                     ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_CURRENCY_LONG
             );
+            String modeOfPayment = commandLine.getOptionValue(
+                    ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_LONG
+            );
 
             BigDecimal amount = new BigDecimal(amountStr);
 
@@ -181,7 +202,8 @@ public class ConsoleParser {
                     amount,
                     category,
                     remarks,
-                    currency
+                    currency,
+                    modeOfPayment
             );
         } catch (DateTimeParseException | NumberFormatException exception) {
             throw new ConsoleParserCommandAddExpenseInvalidException(exception);
@@ -196,6 +218,27 @@ public class ConsoleParser {
         String currencyNormalized = currency.toUpperCase();
 
         consoleCommandAddExpense.setCurrency(currencyNormalized);
+
+        String modeOfPayment = consoleCommandAddExpense.getModeOfPayment();
+
+        if (modeOfPayment != null) {
+            String modeOfPaymentNormalized = "";
+            if (modeOfPayment.equalsIgnoreCase(
+                    ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_CASH)) {
+                modeOfPaymentNormalized = "Cash";
+            } else if (modeOfPayment.equalsIgnoreCase(
+                    ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_PAYNOW)) {
+                modeOfPaymentNormalized = "PayNow";
+            } else if (modeOfPayment.equalsIgnoreCase(
+                    ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_PAYLAH)) {
+                modeOfPaymentNormalized = "PayLah";
+            } else if (modeOfPayment.equalsIgnoreCase(
+                    ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_CARD)) {
+                modeOfPaymentNormalized = "Card";
+            }
+            consoleCommandAddExpense.setModeOfPayment(modeOfPaymentNormalized);
+        }
+
 
         return consoleCommandAddExpense;
     }
@@ -426,7 +469,9 @@ public class ConsoleParser {
                 && options.hasLongOption(
                 ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_REMARKS_LONG)
                 && options.hasLongOption(
-                ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_CURRENCY_LONG);
+                ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_CURRENCY_LONG)
+                && options.hasLongOption(
+                ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_LONG);
 
         assert hasAllCliOptions :
                 ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS;
@@ -451,6 +496,9 @@ public class ConsoleParser {
         String expenseIndexStr = commandLine.getOptionValue(
                 ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_EXPENSE_INDEX_LONG
         );
+        String modeOfPayment = commandLine.getOptionValue(
+                ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_LONG
+        );
 
         if (name != null && name.isBlank()) {
             throw new ConsoleParserCommandEditExpenseInvalidException();
@@ -468,6 +516,18 @@ public class ConsoleParser {
             if (expenseIndex < 0) {
                 throw new ConsoleParserCommandEditExpenseInvalidException();
             }
+        }
+
+        if (modeOfPayment != null
+                && !(modeOfPayment.equalsIgnoreCase(
+                        ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_CASH)
+                        || modeOfPayment.equalsIgnoreCase(
+                        ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_PAYNOW)
+                        || modeOfPayment.equalsIgnoreCase(
+                        ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_PAYLAH)
+                        || modeOfPayment.equalsIgnoreCase(
+                        ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_CARD))) {
+            throw new ConsoleParserCommandEditExpenseInvalidException();
         }
     }
 
@@ -498,6 +558,9 @@ public class ConsoleParser {
             String currency = commandLine.getOptionValue(
                     ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_CURRENCY_LONG
             );
+            String modeOfPayment = commandLine.getOptionValue(
+                    ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_LONG
+            );
 
             int expenseIndex = Integer.parseInt(expenseIndexStr);
 
@@ -526,7 +589,8 @@ public class ConsoleParser {
                     amount,
                     category,
                     remarks,
-                    currency
+                    currency,
+                    modeOfPayment
             );
         } catch (DateTimeParseException | NumberFormatException exception) {
             throw new ConsoleParserCommandEditExpenseInvalidException(exception);
@@ -536,6 +600,26 @@ public class ConsoleParser {
     private static ConsoleCommandEditExpense normalizeCommandEditExpenseValues(
             ConsoleCommandEditExpense consoleCommandEditExpense
     ) {
+
+        String modeOfPayment = consoleCommandEditExpense.getModeOfPayment();
+
+        if (modeOfPayment != null) {
+            String modeOfPaymentNormalized = "";
+            if (modeOfPayment.equalsIgnoreCase(
+                    ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_CASH)) {
+                modeOfPaymentNormalized = "Cash";
+            } else if (modeOfPayment.equalsIgnoreCase(
+                    ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_PAYNOW)) {
+                modeOfPaymentNormalized = "PayNow";
+            } else if (modeOfPayment.equalsIgnoreCase(
+                    ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_PAYLAH)) {
+                modeOfPaymentNormalized = "PayLah";
+            } else if (modeOfPayment.equalsIgnoreCase(
+                    ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_CARD)) {
+                modeOfPaymentNormalized = "Card";
+            }
+            consoleCommandEditExpense.setModeOfPayment(modeOfPaymentNormalized);
+        }
         return consoleCommandEditExpense;
     }
 

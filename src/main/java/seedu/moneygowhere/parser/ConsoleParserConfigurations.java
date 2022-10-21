@@ -51,6 +51,17 @@ public class ConsoleParserConfigurations {
     public static final String COMMAND_ADD_EXPENSE_ARG_CURRENCY_DESC = "currency";
     public static final boolean COMMAND_ADD_EXPENSE_ARG_CURRENCY_HAS_VAL = true;
     public static final boolean COMMAND_ADD_EXPENSE_ARG_CURRENCY_IS_MAND = false;
+    public static final String COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT = "p";
+    public static final String COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_LONG = "mode of payment";
+    public static final String COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_DESC = ""
+            + "PayLah/PayNow/Cash/Card";
+    public static final boolean COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_HAS_VAL = true;
+    public static final boolean COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_IS_MAND = false;
+    public static final String COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_PAYLAH = "PayLah";
+    public static final String COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_PAYNOW = "PayNow";
+    public static final String COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_CASH = "Cash";
+    public static final String COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_CARD = "Card";
+
     public static final String COMMAND_ADD_EXPENSE_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS = ""
             + "Command Add-Expense does not have all of the required options.";
 
@@ -127,6 +138,16 @@ public class ConsoleParserConfigurations {
     public static final String COMMAND_EDIT_EXPENSE_ARG_CURRENCY_DESC = "currency";
     public static final boolean COMMAND_EDIT_EXPENSE_ARG_CURRENCY_HAS_VAL = true;
     public static final boolean COMMAND_EDIT_EXPENSE_ARG_CURRENCY_IS_MAND = false;
+    public static final String COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT = "p";
+    public static final String COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_LONG = "mode of payment";
+    public static final String COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_DESC = ""
+            + "PayLah/PayNow/Cash/Card";
+    public static final boolean COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_HAS_VAL = true;
+    public static final boolean COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_IS_MAND = false;
+    public static final String COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_PAYLAH = "PayLah";
+    public static final String COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_PAYNOW = "PayNow";
+    public static final String COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_CASH = "Cash";
+    public static final String COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_CARD = "Card";
     public static final String COMMAND_EDIT_EXPENSE_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS = ""
             + "Command Edit-Expense does not have all of the required options.";
 
@@ -140,18 +161,18 @@ public class ConsoleParserConfigurations {
             + "Alphabetical/Amount/Date";
     public static final boolean COMMAND_SORT_EXPENSE_ARG_TYPE_HAS_VAL = true;
     public static final boolean COMMAND_SORT_EXPENSE_ARG_TYPE_IS_MAND = true;
-    public static final String COMMAND_SORT_EXPENSE_ARG_TYPE_VAL_ALPHABETICAL = "alphabetical";
-    public static final String COMMAND_SORT_EXPENSE_ARG_TYPE_VAL_AMOUNT = "amount";
-    public static final String COMMAND_SORT_EXPENSE_ARG_TYPE_VAL_DATE = "date";
-    public static final String COMMAND_SORT_EXPENSE_ARG_TYPE_VAL_CURRENCY = "currency";
+    public static final String COMMAND_SORT_EXPENSE_ARG_TYPE_VAL_ALPHABETICAL = "Alphabetical";
+    public static final String COMMAND_SORT_EXPENSE_ARG_TYPE_VAL_AMOUNT = "Amount";
+    public static final String COMMAND_SORT_EXPENSE_ARG_TYPE_VAL_DATE = "Date";
+    public static final String COMMAND_SORT_EXPENSE_ARG_TYPE_VAL_CURRENCY = "Currency";
     public static final String COMMAND_SORT_EXPENSE_ARG_ORDER = "o";
     public static final String COMMAND_SORT_EXPENSE_ARG_ORDER_LONG = "order";
     public static final String COMMAND_SORT_EXPENSE_ARG_ORDER_DESC = ""
             + "Ascending/Descending";
     public static final boolean COMMAND_SORT_EXPENSE_ARG_ORDER_HAS_VAL = true;
     public static final boolean COMMAND_SORT_EXPENSE_ARG_ORDER_IS_MAND = true;
-    public static final String COMMAND_SORT_EXPENSE_ARG_ORDER_VAL_ASCENDING = "ascending";
-    public static final String COMMAND_SORT_EXPENSE_ARG_ORDER_VAL_DESCENDING = "descending";
+    public static final String COMMAND_SORT_EXPENSE_ARG_ORDER_VAL_ASCENDING = "Ascending";
+    public static final String COMMAND_SORT_EXPENSE_ARG_ORDER_VAL_DESCENDING = "Descending";
     public static final String COMMAND_SORT_EXPENSE_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS = ""
             + "Command Sort-Expense does not have all of the required options.";
 
@@ -504,8 +525,16 @@ public class ConsoleParserConfigurations {
                 COMMAND_ADD_EXPENSE_ARG_CURRENCY_DESC
         );
         optionCurrency.setRequired(COMMAND_ADD_EXPENSE_ARG_CURRENCY_IS_MAND);
+        Option optionModeOfPayment = new Option(
+                COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT,
+                COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_LONG,
+                COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_HAS_VAL,
+                COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_DESC
+        );
+        optionCurrency.setRequired(COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_IS_MAND);
 
         Options options = new Options();
+        options.addOption(optionModeOfPayment);
         options.addOption(optionName);
         options.addOption(optionAmount);
         options.addOption(optionDateTime);
@@ -627,8 +656,16 @@ public class ConsoleParserConfigurations {
                 COMMAND_EDIT_EXPENSE_ARG_CURRENCY_DESC
         );
         optionCurrency.setRequired(COMMAND_EDIT_EXPENSE_ARG_CURRENCY_IS_MAND);
+        Option optionModeOfPayment = new Option(
+                COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT,
+                COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_LONG,
+                COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_HAS_VAL,
+                COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_DESC
+        );
+        optionCurrency.setRequired(COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_IS_MAND);
 
         Options options = new Options();
+        options.addOption(optionModeOfPayment);
         options.addOption(optionExpenseIndex);
         options.addOption(optionName);
         options.addOption(optionDateTime);
