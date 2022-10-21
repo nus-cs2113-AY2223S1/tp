@@ -78,7 +78,7 @@ public class Ui {
      */
     public static void showGreeting() {
         printMessages(INFO_GREET.toString(), INFO_CURRENT_BUDGET.toString() + Budget.getBudget(),
-                INFO_TODAY_DATE + showDateOfTheDay(), INFO_HELP_PROMPT.toString()
+                INFO_HELP_PROMPT.toString()
         );
     }
 
