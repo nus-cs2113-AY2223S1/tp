@@ -35,6 +35,11 @@ public class Messages {
     public static final String TARGET_MANAGER_ERROR_TARGET_NOT_FOUND = ""
             + "The target is not found.";
 
+    //region Defines messages for RecurringPaymentManager.
+    public static final String RECURRING_PAYMENT_MANAGER_RECURRING_PAYMENT_NOT_FOUND = ""
+            + "The recurring payment is not found.";
+    //endregion
+
     /**
      * Defines messages for {@link seedu.moneygowhere.storage.LocalStorage}.
      */
@@ -439,6 +444,23 @@ public class Messages {
     public static final String CONSOLE_ERROR_COMMAND_VIEW_RECURRING_PAYMENT_INVALID = ""
             + "The arguments entered are invalid. "
             + CONSOLE_COMMAND_VIEW_RECURRING_PAYMENT_SYNTAX;
+
+    //region Defines messages for console command Delete-RecurringPayment.
+    public static final String CONSOLE_COMMAND_DELETE_RECURRING_PAYMENT_SYNTAX = ""
+            + "SYNTAX: "
+            + ConsoleParserConfigurations.COMMAND_DELETE_RECURRING_PAYMENT
+            + " -"
+            + ConsoleParserConfigurations.COMMAND_DELETE_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX
+            + " "
+            + ConsoleParserConfigurations
+            .COMMAND_DELETE_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_LONG
+            .toUpperCase();
+    public static final String CONSOLE_MESSAGE_COMMAND_DELETE_RECURRING_PAYMENT_SUCCESS = ""
+            + "The recurring payment was deleted successfully.";
+    public static final String CONSOLE_ERROR_COMMAND_DELETE_RECURRING_PAYMENT_INVALID = ""
+            + "The arguments entered are invalid. "
+            + CONSOLE_COMMAND_DELETE_RECURRING_PAYMENT_SYNTAX;
+    //endregion
 
     /**
      * Defines messages for console command Merge-File.

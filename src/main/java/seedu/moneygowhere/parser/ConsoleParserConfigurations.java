@@ -336,6 +336,24 @@ public class ConsoleParserConfigurations {
             + "Command View-RecurringPayment does not have all of the required options.";
 
     /**
+     * Defines parameters for console command Delete-RecurringPayment.
+     */
+    public static final String COMMAND_DELETE_RECURRING_PAYMENT = ""
+            + "Delete-RecurringPayment";
+    public static final String COMMAND_DELETE_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX = ""
+            + "r";
+    public static final String COMMAND_DELETE_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_LONG = ""
+            + "recurringpayment-index";
+    public static final String COMMAND_DELETE_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_DESC = ""
+            + "Index";
+    public static final boolean COMMAND_DELETE_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_HAS_VAL =
+            true;
+    public static final boolean COMMAND_DELETE_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_IS_MAND =
+            true;
+    public static final String COMMAND_DELETE_RECURRING_PAYMENT_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS = ""
+            + "Command Delete-RecurringPayment does not have all of the required options.";
+
+    /**
      * Defines parameters for console command Merge-file.
      */
     public static final String COMMAND_MERGE_EXTERNAL_FILE = ""
@@ -853,6 +871,26 @@ public class ConsoleParserConfigurations {
                 COMMAND_VIEW_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_DESC
         );
         optionRecurringPaymentIndex.setRequired(COMMAND_VIEW_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_IS_MAND);
+
+        Options options = new Options();
+        options.addOption(optionRecurringPaymentIndex);
+
+        return options;
+    }
+
+    /**
+     * Generates an {@link Options} object with required arguments for command Delete-RecurringPayment.
+     *
+     * @return {@link Options} object initialized with the required arguments.
+     */
+    public static Options getCommandDeleteRecurringPaymentOptions() {
+        Option optionRecurringPaymentIndex = new Option(
+                COMMAND_DELETE_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX,
+                COMMAND_DELETE_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_LONG,
+                COMMAND_DELETE_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_HAS_VAL,
+                COMMAND_DELETE_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_DESC
+        );
+        optionRecurringPaymentIndex.setRequired(COMMAND_DELETE_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_IS_MAND);
 
         Options options = new Options();
         options.addOption(optionRecurringPaymentIndex);
