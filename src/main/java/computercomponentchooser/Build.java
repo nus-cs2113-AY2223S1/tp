@@ -164,6 +164,23 @@ public class Build {
         return false;
     }
 
+    public boolean checkExpansionSlots() {
+        int slot = 0;
+        for (Component component : getAllComponents()) {
+            if (component.getType().equals("drive")) {
+                slot += 1;
+            }
+        }
+        for (Component component : getAllComponents()) {
+            if (component.getType().equals("case")) {
+                if (slot <= Integer.parseInt(((Case) component).getExpansionSlots())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public boolean checkGpuSlot() {
         int slot = 0;
         for (Component component : getAllComponents()) {
@@ -199,7 +216,8 @@ public class Build {
     }
 
     public String getCompability() {
-        if (checkPowerSupply() && checkSocket() && checkGpuSlot() && checkMemorySlot() && checkFormFactor()) {
+        if (checkPowerSupply() && checkSocket() && checkGpuSlot() && checkMemorySlot() && checkFormFactor()
+                && checkExpansionSlots()) {
             return "Compatible";
         } else {
             return "Not compatible";
@@ -221,6 +239,7 @@ public class Build {
         sb.append("Socket: ").append(checkSocket()).append(System.lineSeparator());
         sb.append("GPU slot: ").append(checkGpuSlot()).append(System.lineSeparator());
         sb.append("Memory slot: ").append(checkMemorySlot()).append(System.lineSeparator());
+        sb.append("Expansion slots: ").append(checkExpansionSlots()).append(System.lineSeparator());
         sb.append("Form factor: ").append(checkFormFactor()).append(System.lineSeparator());
         return sb.toString();
     }
