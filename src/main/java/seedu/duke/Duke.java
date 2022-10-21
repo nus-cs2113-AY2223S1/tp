@@ -5,19 +5,22 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
-import seedu.duke.FinanceException.ExceptionCollection;
+import seedu.duke.authentication.Authentication;
+import seedu.duke.exception.FinanceException;
+import seedu.duke.exception.FinanceException.ExceptionCollection;
 
 public class Duke {
     /**
      * Main entry-point for the java.duke.Duke application.
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         //Scanner in = new Scanner(System.in);
         //List<String> existingUserNames;
         //List<List<String>> allCurrencies;
         //allCurrencies = Currency.getListOfAllCurrencies();
         //existingUserNames = UserNameFileWorkings.userNameFile();
-        Ui.showWelcomeMessage();
+        BasicUi.showWelcomeMessage();
+        initializeCurrencyList();
         boolean isProgramEnd = false;
         while (!isProgramEnd) {
             isProgramEnd = Authentication.handleAuthenticationRequest();
@@ -93,6 +96,14 @@ public class Duke {
                 e.handleException();
             }
             */
+        }
+    }
+
+    private static void initializeCurrencyList(){
+        try {
+            CurrencyList.initializeCurrencyList();
+        } catch (FinanceException e) {
+            e.handleException();
         }
     }
 }

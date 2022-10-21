@@ -11,7 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import seedu.duke.FinanceException.ExceptionCollection;
+import seedu.duke.exception.FinanceException;
+import seedu.duke.exception.FinanceException.ExceptionCollection;
 
 /**
  * With this class, we can quickly get all the existing usernames

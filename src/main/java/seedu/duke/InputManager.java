@@ -15,16 +15,16 @@ public class InputManager {
     }
 
     public static String[] receiveValidRegisterInputs(List<String> existingUsernames) {
-        Ui.showEnterUsernamePrompt();
+        BasicUi.showEnterUsernamePrompt();
         String username = receiveInputLine();
         while (existingUsernames.contains(username)) {
-            Ui.showInvalidUsernamePrompt();
+            BasicUi.showInvalidUsernamePrompt();
             username = receiveInputLine();
         }
-        Ui.showEnterPasswordPrompt();
+        BasicUi.showEnterPasswordPrompt();
         String password = receiveInputLine();
         while (password.length() < 8) {
-            Ui.showInvalidPasswordPrompt();
+            BasicUi.showInvalidPasswordPrompt();
             password = receiveInputLine();
         }
         String[] registerInputs = new String[2];
@@ -34,9 +34,9 @@ public class InputManager {
     }
 
     public static String[] receiveLoginInputs() {
-        Ui.showEnterUsernamePrompt();
+        BasicUi.showEnterUsernamePrompt();
         String username = receiveInputLine();
-        Ui.showEnterPasswordPrompt();
+        BasicUi.showEnterPasswordPrompt();
         String password = receiveInputLine();
         String[] loginInputs = new String[2];
         loginInputs[0] = username;
