@@ -6,10 +6,10 @@ import seedu.duke.Ui;
 import seedu.duke.data.TransactionList;
 import seedu.duke.data.transaction.Expense;
 import seedu.duke.data.transaction.Income;
-import seedu.duke.data.transaction.Transaction;
 import seedu.duke.exception.MoolahException;
 import seedu.duke.exception.InputTransactionUnknownTypeException;
 import seedu.duke.exception.StorageWriteErrorException;
+import seedu.duke.exception.MaximumTransactionCountException;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -22,6 +22,7 @@ import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_CATEGORY;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_DATE;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_AMOUNT;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_DESCRIPTION;
+import static seedu.duke.common.Constants.MAX_TRANSACTIONS_COUNT;
 import static seedu.duke.common.InfoMessages.INFO_ADD_EXPENSE;
 import static seedu.duke.common.InfoMessages.INFO_ADD_INCOME;
 
@@ -86,11 +87,11 @@ public class AddCommand extends Command {
     public String[] getMandatoryTags() {
 
         String[] mandatoryTags = new String[]{
-            COMMAND_TAG_TRANSACTION_TYPE,
-            COMMAND_TAG_TRANSACTION_CATEGORY,
-            COMMAND_TAG_TRANSACTION_AMOUNT,
-            COMMAND_TAG_TRANSACTION_DATE,
-            COMMAND_TAG_TRANSACTION_DESCRIPTION
+                COMMAND_TAG_TRANSACTION_TYPE,
+                COMMAND_TAG_TRANSACTION_CATEGORY,
+                COMMAND_TAG_TRANSACTION_AMOUNT,
+                COMMAND_TAG_TRANSACTION_DATE,
+                COMMAND_TAG_TRANSACTION_DESCRIPTION
         };
         return mandatoryTags;
     }
@@ -138,6 +139,12 @@ public class AddCommand extends Command {
                     + "before adding into the transaction class.");
             assert date != null;
             //@@author wcwy
+            // The expected maximum number of transactions allowed to store is only one million.
+            if (transactions.size() == MAX_TRANSACTIONS_COUNT) {
+                addLogger.log(Level.WARNING, "A transaction is attempted to be stored beyond its capacity");
+                throw new MaximumTransactionCountException();
+            }
+
             switch (type) {
             case Expense.TRANSACTION_NAME:
                 String expense = transactions.addExpense(description, amount, category, date);

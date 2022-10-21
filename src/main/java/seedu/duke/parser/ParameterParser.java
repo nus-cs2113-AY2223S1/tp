@@ -12,7 +12,7 @@ import seedu.duke.exception.MoolahException;
 import seedu.duke.exception.EmptyParameterException;
 import seedu.duke.exception.UnknownHelpOptionException;
 import seedu.duke.exception.InputTransactionInvalidDateException;
-import seedu.duke.exception.AddTransactionInvalidAmountException;
+import seedu.duke.exception.InputTransactionInvalidAmountException;
 import seedu.duke.exception.InputTransactionInvalidCategoryException;
 import seedu.duke.exception.EntryNumberNotNumericException;
 import seedu.duke.exception.InputTransactionUnknownTypeException;
@@ -36,6 +36,8 @@ import static seedu.duke.command.CommandTag.COMMAND_TAG_LIST_ENTRY_NUMBER;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_STATISTICS_TYPE;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_HELP_OPTION;
 
+import static seedu.duke.common.Constants.MAX_AMOUNT_VALUE;
+import static seedu.duke.common.Constants.MIN_AMOUNT_VALUE;
 import static seedu.duke.common.DateFormats.DATE_INPUT_PATTERN;
 
 /**
@@ -371,28 +373,28 @@ public class ParameterParser {
      *
      * @param parameter The user input after the user tag.
      * @return The amount integer if no exceptions are thrown.
-     * @throws AddTransactionInvalidAmountException If the transaction amount provided is not a valid accepted integer.
+     * @throws InputTransactionInvalidAmountException If the transaction amount provided is not a valid accepted integer.
      */
-    private static int parseAmountTag(String parameter) throws AddTransactionInvalidAmountException {
+    private static int parseAmountTag(String parameter) throws InputTransactionInvalidAmountException {
         Pattern specialSymbols = Pattern.compile("[!@#$%&*()_+=|<>?{}\\[\\]~-]");
         Matcher hasSpecialSymbols = specialSymbols.matcher(parameter);
         try {
             if (containAlphabet(parameter) || hasSpecialSymbols.find()) {
                 parserLogger.log(Level.WARNING, "An invalid amount error is caught for the given parameter: "
                         + parameter);
-                throw new AddTransactionInvalidAmountException();
+                throw new InputTransactionInvalidAmountException();
             }
             int amount = Integer.parseInt(parameter);
-            if (amount < 0 || amount > 10000000) {
+            if (amount < MIN_AMOUNT_VALUE || amount > MAX_AMOUNT_VALUE) {
                 parserLogger.log(Level.WARNING, "An invalid amount error is caught for the given parameter: "
                         + parameter);
-                throw new AddTransactionInvalidAmountException();
+                throw new InputTransactionInvalidAmountException();
             }
             return amount;
 
         } catch (NumberFormatException e) {
             parserLogger.log(Level.WARNING, "An invalid amount error is caught for the given parameter: " + parameter);
-            throw new AddTransactionInvalidAmountException();
+            throw new InputTransactionInvalidAmountException();
         }
     }
 

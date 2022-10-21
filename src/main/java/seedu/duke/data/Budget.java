@@ -7,11 +7,11 @@ package seedu.duke.data;
  * Operations related to the budgets are also defined under this class.
  */
 public class Budget {
-    // Default value of the budget is $1000
+    // Default value of the monthly budget is $1000
     private static int budget = 1000;
 
     /**
-     * Retrieves the budget value set
+     * Retrieves the budget value set for the current month
      *
      * @return The budget value set by the user
      */
@@ -20,12 +20,23 @@ public class Budget {
     }
 
     /**
-     * Update the budget value set
+     * Updates the budget value set for the current month
      *
      * @param budget The new value for budget
      */
     public static void setBudget(int budget) {
         Budget.budget = budget;
+    }
+
+    /**
+     * Return the amount of budget left in
+     *
+     * @param transactionList
+     * @return
+     */
+    public static String getBudgetLeft(TransactionList transactionList) {
+
+        return "";
     }
 
 }

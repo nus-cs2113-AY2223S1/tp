@@ -5,6 +5,9 @@ import java.time.format.DateTimeFormatter;
 
 import static seedu.duke.common.DateFormats.DATE_OUTPUT_PATTERN;
 
+/**
+ * Represents a transaction made by the user, which could be either an income or an expense.
+ */
 public abstract class Transaction {
     //@@author chydarren
     private static final String PREFIX_CATEGORY = "[";
