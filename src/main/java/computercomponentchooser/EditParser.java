@@ -1,6 +1,13 @@
 package computercomponentchooser;
 
-import computercomponentchooser.components.*;
+import computercomponentchooser.components.Cpu;
+import computercomponentchooser.components.Motherboard;
+import computercomponentchooser.components.Drive;
+import computercomponentchooser.components.Gpu;
+import computercomponentchooser.components.Memory;
+import computercomponentchooser.components.Monitor;
+import computercomponentchooser.components.PowerSupply;
+
 import computercomponentchooser.exceptions.UnknownCommandException;
 
 import static computercomponentchooser.ComputerComponentChooser.storage;
