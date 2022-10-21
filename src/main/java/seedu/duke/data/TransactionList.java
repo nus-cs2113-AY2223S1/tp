@@ -6,9 +6,11 @@ import seedu.duke.data.transaction.Transaction;
 import seedu.duke.exception.InputTransactionUnknownTypeException;
 
 import java.time.LocalDate;
+import java.time.Year;
+import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Represents a list of transactions added by the user into the application.
@@ -20,6 +22,10 @@ public class TransactionList {
     private static final String PREFIX_CATEGORY = "[";
     private static final String POSTFIX_CATEGORY = "]";
     private static final String SYMBOL_DOLLAR = "$";
+    private static final String WEEKS = "weeks";
+    private static final String MONTHS = "months";
+    private static final int START = 0;
+    private static final int END = 1;
     private static final String LINE_SEPARATOR = System.lineSeparator();
 
     //@@author chinhan99
@@ -121,6 +127,7 @@ public class TransactionList {
     }
 
     //@@author chydarren
+
     /**
      * Checks whether the transaction belongs to the Income or Expense class type.
      *
@@ -224,9 +231,11 @@ public class TransactionList {
     public String listCategoricalSavings() {
         String categoricalSavingsList = "";
         HashMap<String, Integer> categoricalSavings = new HashMap<>();
+        // Adds each amount from transactions list to the categories in categorical savings hashmap
         categoricalSavings = processCategoricalSavings(categoricalSavings);
 
-        for (Map.Entry<String, Integer> entry : categoricalSavings.entrySet()) {
+        // Formats every entry in the hashmap into a categorical savings list
+        for (HashMap.Entry<String, Integer> entry : categoricalSavings.entrySet()) {
             categoricalSavingsList += String.format("%s%s%s %s%s%s", PREFIX_CATEGORY, entry.getKey(),
                     POSTFIX_CATEGORY, SYMBOL_DOLLAR, entry.getValue(), LINE_SEPARATOR);
         }
@@ -234,7 +243,107 @@ public class TransactionList {
         return categoricalSavingsList;
     }
 
+    /**
+     * Gets the range of dates for the last N number of weeks from occurring week.
+     * E.g. If the date is 21 October 2022 to backdate 2 weeks, the range will be 3 October to 16 October 2022.
+     *
+     * @param numberOfWeeks N number of weeks to backdate, must be minimum 1 week.
+     * @param date A specified date to backdate N weeks from occurring week.
+     * @return An array containing the start and end date.
+     */
+    public static LocalDate[] getWeekRange(LocalDate date, int numberOfWeeks) {
+        // Solution below adapted from https://stackoverflow.com/a/51356522
+        int dayOfWeek = date.getDayOfWeek().getValue();
+        LocalDate from = date.minusDays((dayOfWeek - 1) + (numberOfWeeks * 7));
+        LocalDate to = date.minusDays(dayOfWeek);
+
+        return new LocalDate[]{from, to};
+    }
+
+    /**
+     * Gets the range of dates for the last N number of months from occurring month.
+     * E.g. If the date is 21 October 2022 to backdate 2 months, the range will be 1 August to 30 September 2022.
+     *
+     * @param numberOfMonths N number of months to backdate, must be minimum 1 month.
+     * @param date A specified date to backdate N months from occurring month.
+     * @return An array containing the start and end date.
+     */
+    public static LocalDate[] getMonthRange(LocalDate date, int numberOfMonths) {
+        // Solution below adapted from https://stackoverflow.com/a/51356522
+        LocalDate lastMonth = date.minusMonths(1);
+        LocalDate from = date.minusMonths(numberOfMonths).withDayOfMonth(1);
+        LocalDate to = lastMonth.withDayOfMonth(lastMonth.getMonth().maxLength());
+
+        return new LocalDate[]{from, to};
+    }
+
+    /**
+     * Gets all transactions recorded on a specific year.
+     *
+     * @param year  A specified year.
+     * @return An array list containing all transactions recorded on a specific year.
+     */
+    public ArrayList<Transaction> getTransactionsByYear(int year) {
+        //@@author chydarren-reused
+        //Reused from https://stackoverflow.com/a/69440139
+        // with minor modifications
+        ArrayList<Transaction> transactionsByYear = (ArrayList<Transaction>) transactions.stream()
+                .filter(transaction -> Year.from(transaction.getDate()).equals(Year.of(year)))
+                .collect(Collectors.toList());
+        //@@author
+
+        return transactionsByYear;
+    }
+
+    /**
+     * Gets all transactions recorded on a specific month.
+     *
+     * @param year  A specified year.
+     * @param month A specified month within the year.
+     * @return An array list containing all transactions recorded on a specific month.
+     */
+    public ArrayList<Transaction> getTransactionsByMonth(int year, int month) {
+        //@@author chydarren-reused
+        //Reused from https://stackoverflow.com/a/69440139
+        ArrayList<Transaction> transactionsByMonth = (ArrayList<Transaction>) transactions.stream()
+                .filter(transaction -> YearMonth.from(transaction.getDate()).equals(YearMonth.of(year, month)))
+                .collect(Collectors.toList());
+        //@@author
+
+        return transactionsByMonth;
+    }
+
+    /**
+     * Gets all transactions recorded on the last N weeks or months.
+     *
+     * @param numberOfType  An integer that represents the last N number of weeks or months.
+     * @param type          A string that represents the getting of N "weeks", or "months".
+     * @return An array list containing all transactions recorded on the last N number of weeks or months.
+     */
+    public ArrayList<Transaction> getTransactionsByLastN(int numberOfType, String type) {
+        ArrayList<Transaction> transactionsByLastN = new ArrayList<>();
+        LocalDate[] dateRange = {};
+
+        if (type.equals(WEEKS)) {
+            dateRange = getWeekRange(LocalDate.now(), numberOfType);
+        } else {
+            assert type.equals(MONTHS);
+            dateRange = getMonthRange(LocalDate.now(), numberOfType);
+        }
+
+        for (Transaction transaction : transactions) {
+            LocalDate transactionDate = transaction.getDate();
+            // Transaction is added into the filtered array list if it falls within the expected date range
+            if (!(transactionDate.isBefore(dateRange[START]) || transactionDate.isAfter(dateRange[END]))) {
+                transactionsByLastN.add(transaction);
+            }
+        }
+
+        return transactionsByLastN;
+    }
+
     //@@author brian-vb
+
     /**
      * Purges all records in the transactions list.
      */
