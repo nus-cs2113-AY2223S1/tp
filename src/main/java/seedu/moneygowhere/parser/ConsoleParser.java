@@ -18,6 +18,7 @@ import seedu.moneygowhere.commands.ConsoleCommandDeleteExpense;
 import seedu.moneygowhere.commands.ConsoleCommandDeleteRecurringPayment;
 import seedu.moneygowhere.commands.ConsoleCommandDeleteTarget;
 import seedu.moneygowhere.commands.ConsoleCommandEditExpense;
+import seedu.moneygowhere.commands.ConsoleCommandEditRecurringPayment;
 import seedu.moneygowhere.commands.ConsoleCommandEditTarget;
 import seedu.moneygowhere.commands.ConsoleCommandMergeExternalFile;
 import seedu.moneygowhere.commands.ConsoleCommandSortExpense;
@@ -35,6 +36,7 @@ import seedu.moneygowhere.exceptions.ConsoleParserCommandDeleteExpenseInvalidExc
 import seedu.moneygowhere.exceptions.ConsoleParserCommandDeleteRecurringPaymentInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandDeleteTargetInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandEditExpenseInvalidException;
+import seedu.moneygowhere.exceptions.ConsoleParserCommandEditRecurringPaymentInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandEditTargetInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandMergeExternalFileInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandNotFoundException;
@@ -1552,6 +1554,141 @@ public class ConsoleParser {
         }
     }
 
+    private static void validateCommandEditRecurringPaymentOptions(Options options) {
+        boolean hasAllCliOptions = options.hasLongOption(
+                ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_LONG)
+                && options.hasLongOption(
+                ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_NAME_LONG)
+                && options.hasLongOption(
+                ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_INTERVAL_LONG)
+                && options.hasLongOption(
+                ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_AMOUNT_LONG)
+                && options.hasLongOption(
+                ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_DESCRIPTION_LONG);
+
+        assert hasAllCliOptions :
+                ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS;
+    }
+
+    private static CommandLine parseCommandEditRecurringPaymentArguments(Options options, String arguments) throws
+            ConsoleParserCommandEditRecurringPaymentInvalidException {
+        try {
+            CommandLine commandline = parseCommandArguments(options, arguments);
+
+            return commandline;
+        } catch (ParseException exception) {
+            throw new ConsoleParserCommandEditRecurringPaymentInvalidException(exception);
+        }
+    }
+
+    private static void validateCommandEditRecurringPaymentValues(CommandLine commandLine) throws
+            ConsoleParserCommandEditRecurringPaymentInvalidException {
+        String name = commandLine.getOptionValue(
+                ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_NAME_LONG
+        );
+
+        if (name != null && name.isBlank()) {
+            throw new ConsoleParserCommandEditRecurringPaymentInvalidException();
+        }
+    }
+
+    private static ConsoleCommandEditRecurringPayment parseCommandEditRecurringPaymentValues(
+            CommandLine commandLine
+    ) throws ConsoleParserCommandEditRecurringPaymentInvalidException {
+        try {
+            ConsoleCommandEditRecurringPayment consoleCommandEditRecurringPayment =
+                    new ConsoleCommandEditRecurringPayment();
+
+            if (commandLine.hasOption(
+                    ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_LONG
+            )) {
+                String recurringPaymentIndexStr = commandLine.getOptionValue(
+                        ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_LONG
+                );
+
+                int recurringPaymentIndex = Integer.parseInt(recurringPaymentIndexStr);
+
+                consoleCommandEditRecurringPayment.setRecurringPaymentIndex(recurringPaymentIndex);
+            }
+            if (commandLine.hasOption(
+                    ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_NAME_LONG
+            )) {
+                String name = commandLine.getOptionValue(
+                        ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_NAME_LONG
+                );
+
+                consoleCommandEditRecurringPayment.setName(name);
+            }
+            if (commandLine.hasOption(
+                    ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_INTERVAL_LONG
+            )) {
+                String intervalStr = commandLine.getOptionValue(
+                        ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_INTERVAL_LONG
+                );
+
+                int interval = Integer.parseInt(intervalStr);
+
+                consoleCommandEditRecurringPayment.setInterval(interval);
+            }
+            if (commandLine.hasOption(
+                    ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_AMOUNT_LONG
+            )) {
+                String amountStr = commandLine.getOptionValue(
+                        ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_AMOUNT_LONG
+                );
+
+                BigDecimal amount = new BigDecimal(amountStr);
+
+                consoleCommandEditRecurringPayment.setAmount(amount);
+            }
+            if (commandLine.hasOption(
+                    ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_DESCRIPTION_LONG
+            )) {
+                String description = commandLine.getOptionValue(
+                        ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_DESCRIPTION_LONG
+                );
+
+                consoleCommandEditRecurringPayment.setDescription(description);
+            }
+
+            return consoleCommandEditRecurringPayment;
+        } catch (DateTimeParseException | NumberFormatException exception) {
+            throw new ConsoleParserCommandEditRecurringPaymentInvalidException(exception);
+        }
+    }
+
+    private static ConsoleCommandEditRecurringPayment normalizeCommandEditRecurringPaymentValues(
+            ConsoleCommandEditRecurringPayment consoleCommandEditRecurringPayment
+    ) {
+        return consoleCommandEditRecurringPayment;
+    }
+
+    private static ConsoleCommandEditRecurringPayment parseCommandEditRecurringPayment(String arguments) throws
+            ConsoleParserCommandEditRecurringPaymentInvalidException {
+        try {
+            Options options = ConsoleParserConfigurations.getCommandEditRecurringPaymentOptions();
+
+            validateCommandEditRecurringPaymentOptions(options);
+
+            CommandLine commandLine = parseCommandEditRecurringPaymentArguments(options, arguments);
+
+            validateCommandEditRecurringPaymentValues(commandLine);
+
+            ConsoleCommandEditRecurringPayment consoleCommandEditRecurringPayment
+                    = parseCommandEditRecurringPaymentValues(commandLine);
+
+            ConsoleCommandEditRecurringPayment consoleCommandEditRecurringPaymentNormalized
+                    = normalizeCommandEditRecurringPaymentValues(consoleCommandEditRecurringPayment);
+
+            return consoleCommandEditRecurringPaymentNormalized;
+        } catch (ConsoleParserCommandEditRecurringPaymentInvalidException exception) {
+            throw new ConsoleParserCommandEditRecurringPaymentInvalidException(
+                    Messages.CONSOLE_ERROR_COMMAND_EDIT_RECURRING_PAYMENT_INVALID,
+                    exception
+            );
+        }
+    }
+
     private static void validateCommandMergeExternalFileOptions(Options options) {
         boolean hasAllCliOptions = options.hasLongOption(
                 ConsoleParserConfigurations.COMMAND_MERGE_EXTERNAL_FILE_ARG_MERGE_EXTERNAL_FILE_PATH_LONG);
@@ -1685,6 +1822,7 @@ public class ConsoleParser {
             ConsoleParserCommandAddRecurringPaymentInvalidException,
             ConsoleParserCommandViewRecurringPaymentInvalidException,
             ConsoleParserCommandDeleteRecurringPaymentInvalidException,
+            ConsoleParserCommandEditRecurringPaymentInvalidException,
             ConsoleParserCommandMergeExternalFileInvalidException {
         String command = getConsoleCommand(consoleInput);
         String arguments = getConsoleCommandArguments(consoleInput);
@@ -1719,6 +1857,8 @@ public class ConsoleParser {
             return parseCommandViewRecurringPayment(arguments);
         } else if (command.equalsIgnoreCase(ConsoleParserConfigurations.COMMAND_DELETE_RECURRING_PAYMENT)) {
             return parseCommandDeleteRecurringPayment(arguments);
+        } else if (command.equalsIgnoreCase(ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT)) {
+            return parseCommandEditRecurringPayment(arguments);
         } else if (command.equalsIgnoreCase(ConsoleParserConfigurations.COMMAND_MERGE_EXTERNAL_FILE)) {
             return parseCommandMergeExternalFile(arguments);
         } else {
