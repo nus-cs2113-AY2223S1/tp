@@ -22,6 +22,7 @@ import seedu.moneygowhere.commands.ConsoleCommandSortExpense;
 import seedu.moneygowhere.commands.ConsoleCommandViewExpense;
 import seedu.moneygowhere.commands.ConsoleCommandViewTarget;
 import seedu.moneygowhere.commands.ConsoleCommandViewRecurringPayment;
+import seedu.moneygowhere.commands.ConsoleCommandMergeExternalFile;
 import seedu.moneygowhere.common.Configurations;
 import seedu.moneygowhere.common.Messages;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandAddExpenseInvalidException;
@@ -38,6 +39,7 @@ import seedu.moneygowhere.exceptions.ConsoleParserCommandSortExpenseInvalidExcep
 import seedu.moneygowhere.exceptions.ConsoleParserCommandViewExpenseInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandViewTargetInvalidException;
 import seedu.moneygowhere.exceptions.ConsoleParserCommandViewRecurringPaymentInvalidException;
+import seedu.moneygowhere.exceptions.ConsoleParserCommandMergeExternalFileInvalidException;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -1455,6 +1457,77 @@ public class ConsoleParser {
         }
     }
 
+    private static void validateCommandMergeExternalFileOptions(Options options) {
+        boolean hasAllCliOptions = options.hasLongOption(
+                ConsoleParserConfigurations.COMMAND_MERGE_EXTERNAL_FILE_ARG_MERGE_EXTERNAL_FILE_PATH_LONG);
+
+        assert hasAllCliOptions :
+                ConsoleParserConfigurations.COMMAND_MERGE_EXTERNAL_FILE_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS;
+    }
+
+    private static CommandLine parseCommandMergeExternalFileArguments(Options options, String arguments) throws
+            ConsoleParserCommandMergeExternalFileInvalidException {
+        try {
+            CommandLine commandline = parseCommandArguments(options, arguments);
+            return commandline;
+        } catch (ParseException exception) {
+            throw new ConsoleParserCommandMergeExternalFileInvalidException(exception);
+        }
+    }
+
+    private static void validateCommandMergeExternalFileValues(CommandLine commandLine) throws
+            ConsoleParserCommandMergeExternalFileInvalidException {
+        String mergeFilePathString = commandLine.getOptionValue(
+                ConsoleParserConfigurations.COMMAND_MERGE_EXTERNAL_FILE_ARG_MERGE_EXTERNAL_FILE_PATH_LONG
+        );
+
+        if (mergeFilePathString != null) {
+            if (mergeFilePathString.split(" ").length != 1) {
+                throw new ConsoleParserCommandMergeExternalFileInvalidException();
+            }
+        }
+    }
+
+    private static ConsoleCommandMergeExternalFile parseCommandMergeExternalFileValues(
+            CommandLine commandLine) {
+        String filePath = commandLine.getOptionValue(
+                ConsoleParserConfigurations.COMMAND_MERGE_EXTERNAL_FILE_ARG_MERGE_EXTERNAL_FILE_PATH_LONG
+        );
+        return new ConsoleCommandMergeExternalFile(filePath);
+    }
+
+    private static ConsoleCommandMergeExternalFile normalizeCommandMergeExternalFileValues(
+            ConsoleCommandMergeExternalFile consoleCommandMergeExternalFile
+    ) {
+        return consoleCommandMergeExternalFile;
+    }
+
+    private static ConsoleCommandMergeExternalFile parseCommandMergeExternalFile(String arguments) throws
+            ConsoleParserCommandMergeExternalFileInvalidException {
+        try {
+            Options options = ConsoleParserConfigurations.getCommandMergeExternalFileOptions();
+
+            validateCommandMergeExternalFileOptions(options);
+
+            CommandLine commandLine = parseCommandMergeExternalFileArguments(options, arguments);
+
+            validateCommandMergeExternalFileValues(commandLine);
+
+            ConsoleCommandMergeExternalFile consoleCommandMergeExternalFile
+                    = parseCommandMergeExternalFileValues(commandLine);
+
+            ConsoleCommandMergeExternalFile consoleCommandMergeExternalFileNormalized
+                    = normalizeCommandMergeExternalFileValues(consoleCommandMergeExternalFile);
+
+            return consoleCommandMergeExternalFileNormalized;
+        } catch (ConsoleParserCommandMergeExternalFileInvalidException exception) {
+            throw new ConsoleParserCommandMergeExternalFileInvalidException(
+                    Messages.CONSOLE_ERROR_COMMAND_MERGE_EXTERNAL_FILE_INVALID,
+                    exception
+            );
+        }
+    }
+
     private static String getConsoleCommand(String consoleInput) {
         int numOperands = 2;
 
@@ -1495,6 +1568,7 @@ public class ConsoleParser {
      * @throws ConsoleParserCommandAddIncomeInvalidException            If the command add-income is invalid.
      * @throws ConsoleParserCommandAddRecurringPaymentInvalidException  If the command Add-RecurringPayment is invalid.
      * @throws ConsoleParserCommandViewRecurringPaymentInvalidException If the command View-RecurringPayment is invalid.
+     * @throws ConsoleParserCommandMergeExternalFileInvalidException    If the command Merge-file is invalid
      */
     public static ConsoleCommand parse(String consoleInput) throws
             ConsoleParserCommandNotFoundException,
@@ -1510,7 +1584,8 @@ public class ConsoleParser {
             ConsoleParserCommandEditTargetInvalidException,
             ConsoleParserCommandAddIncomeInvalidException,
             ConsoleParserCommandAddRecurringPaymentInvalidException,
-            ConsoleParserCommandViewRecurringPaymentInvalidException {
+            ConsoleParserCommandViewRecurringPaymentInvalidException,
+            ConsoleParserCommandMergeExternalFileInvalidException {
         String command = getConsoleCommand(consoleInput);
         String arguments = getConsoleCommandArguments(consoleInput);
 
@@ -1542,6 +1617,8 @@ public class ConsoleParser {
             return parseCommandAddRecurringPayment(arguments);
         } else if (command.equalsIgnoreCase(ConsoleParserConfigurations.COMMAND_VIEW_RECURRING_PAYMENT)) {
             return parseCommandViewRecurringPayment(arguments);
+        } else if (command.equalsIgnoreCase(ConsoleParserConfigurations.COMMAND_MERGE_EXTERNAL_FILE)) {
+            return parseCommandMergeExternalFile(arguments);
         } else {
             throw new ConsoleParserCommandNotFoundException(Messages.CONSOLE_ERROR_COMMAND_NOT_FOUND);
         }
