@@ -1,4 +1,6 @@
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -46,6 +48,7 @@ public class ParserTest {
         SubMenuState exit = p.patientParser("bye");
         assertEquals(SubMenuState.EXIT, exit);
     }
+
     @Test
     public void checkPatientParserCommands() {
 
@@ -78,6 +81,7 @@ public class ParserTest {
         SubMenuState exit = p.visitParser("bye");
         assertEquals(SubMenuState.EXIT, exit);
     }
+
     @Test
     public void checkVisitParserCommands() {
 
@@ -117,11 +121,11 @@ public class ParserTest {
         p.patientParser("add n/Ria g/F d/08-11-2001 i/400TXF");
         SubMenuState add = p.prescriptionParser("add n/Drug d/10 mg t/every 3 hours");
         assertEquals(add, SubMenuState.IN_SUB_MENU);
-//        assertEquals(1, presList.);
+        //assertEquals(1, presList.);
 
         //EDIT COMMAND - check that it works
         p.prescriptionParser("edit i/400TXF r/not a checkup");
-        //  assertEquals(1, presList.);
+        //assertEquals(1, presList.);
     }
 
     @Test
@@ -195,13 +199,13 @@ public class ParserTest {
 
         //extra spaces
         p.visitParser("add i/ 4005    d/ 08-11-2001 t/   08:00 r/new thing");
-//        assertEquals(1, patientList.getTotalNumberofPatients());
+        //assertEquals(1, patientList.getTotalNumberofPatients());
         assertFalse(visitList.isEmpty());
 
         //with or without reason
         p.visitParser("add i/4005 d/09-12-2022 t/09:00");
         assertFalse(visitList.isEmpty());
-//        assertEquals(2, patientList.getTotalNumberofPatients());
+        //assertEquals(2, patientList.getTotalNumberofPatients());
 
     }
 
