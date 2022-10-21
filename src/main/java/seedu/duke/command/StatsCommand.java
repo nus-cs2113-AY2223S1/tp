@@ -2,9 +2,8 @@ package seedu.duke.command;
 
 import seedu.duke.Storage;
 import seedu.duke.Ui;
-import seedu.duke.data.CategoryList;
 import seedu.duke.data.TransactionList;
-import seedu.duke.exception.ListStatisticsInvalidStatsTypeException;
+import seedu.duke.exception.ListStatsInvalidStatsTypeException;
 import seedu.duke.exception.MoolahException;
 
 import java.util.logging.Level;
@@ -40,7 +39,6 @@ public class StatsCommand extends Command {
 
     //@@author chydarren
     private static final Logger statsLogger = Logger.getLogger(StatsCommand.class.getName());
-
     private String statsType;
 
     //@@author paullowse
@@ -58,8 +56,12 @@ public class StatsCommand extends Command {
         return mandatoryTags;
     }
 
-    //@@author chydarren
+    @Override
+    public void setStatsType(String statsType) {
+        this.statsType = statsType;
+    }
 
+    //@@author chydarren
     /**
      * Executes the operations related to the command.
      *
@@ -70,58 +72,52 @@ public class StatsCommand extends Command {
     @Override
     public void execute(TransactionList transactions, Ui ui, Storage storage) throws MoolahException {
         statsLogger.setLevel(Level.SEVERE);
-        statsLogger.log(Level.INFO, "Stats command starts passing the type of statistics"
-                + " and transactions list into the listStatisticsByStatsType method.");
+        statsLogger.log(Level.INFO, "Entering execution of the Stats command.");
 
-        listStatisticsByStatsType(statsType, transactions);
-    }
-
-    @Override
-    public void setStatsType(String statsType) {
-        this.statsType = statsType;
+        listStatsByStatsType(statsType, transactions);
     }
 
     /**
      * Lists the statistics depending on the type of statistics requested.
      *
-     * @param statsType    The type of statistics that is needed, e.g. categories.
-     * @param transactions An instance of the TransactionList class.
-     * @throws ListStatisticsInvalidStatsTypeException If the type of statistics is not recognised.
+     * @param statsType                             The type of statistics that is needed.
+     * @param transactions                          An instance of the TransactionList class.
+     * @throws ListStatsInvalidStatsTypeException   If the type of statistics is not recognised.
      */
-    private static void listStatisticsByStatsType(String statsType, TransactionList transactions)
-            throws ListStatisticsInvalidStatsTypeException {
-        statsLogger.log(Level.INFO, "A new instance of CategoryList is created.");
-        CategoryList categories = new CategoryList();
-
+    private static void listStatsByStatsType(String statsType, TransactionList transactions)
+            throws ListStatsInvalidStatsTypeException {
         switch (statsType) {
         case "categories":
-            statsLogger.log(Level.INFO, "The categories and amount for each category are "
-                    + " being tallied and computed.");
-            categories.calculateTotalAmount(transactions);
-            String categoriesList = categories.listCategories();
-
-            if (categoriesList.isEmpty()) {
-                statsLogger.log(Level.INFO, "Categories list is empty, so UI should display that"
-                        + " there are no statistics available.");
-                Ui.showInfoMessage(INFO_STATS_EMPTY.toString());
-                statsLogger.log(Level.INFO, "End of Stats command.");
-                return;
-            }
-            assert !categoriesList.isEmpty();
-            statsLogger.log(Level.INFO, "Categories list is available, so UI should display the"
-                    + " categories and amount of savings per category.");
-            Ui.showTransactionsList(categoriesList, INFO_STATS_CATEGORIES.toString());
+            statsLogger.log(Level.INFO, "Stats type has been detected for categorical savings.");
+            statsTypeCategoricalSavings(transactions);
+            statsLogger.log(Level.INFO, "End of Stats command.");
             break;
         default:
-            statsLogger.log(Level.WARNING, "An exception has been caught due to an invalid statistics type.");
-            throw new ListStatisticsInvalidStatsTypeException();
+            statsLogger.log(Level.WARNING, "An exception has been caught due to an invalid stats type.");
+            throw new ListStatsInvalidStatsTypeException();
+        }
+    }
+
+    /**
+     * Display the statistics requested for current amount of savings in each category.
+     *
+     * @param transactions An instance of the TransactionList class.
+     */
+    public static void statsTypeCategoricalSavings(TransactionList transactions) {
+        String categoricalSavingsList = transactions.listCategoricalSavings();
+
+        if (categoricalSavingsList.isEmpty()) {
+            statsLogger.log(Level.INFO, "Categorical savings list is empty as there are no transactions available.");
+            Ui.showInfoMessage(INFO_STATS_EMPTY.toString());
+            return;
         }
 
-        statsLogger.log(Level.INFO, "End of Stats command.");
+        assert !categoricalSavingsList.isEmpty();
+        statsLogger.log(Level.INFO, "Categorical savings list is found to contain categories-amount pairs.");
+        Ui.showList(categoricalSavingsList, INFO_STATS_CATEGORIES.toString());
     }
 
     //@@author paullowse
-
     /**
      * Enables the program to exit when the Bye command is issued.
      *

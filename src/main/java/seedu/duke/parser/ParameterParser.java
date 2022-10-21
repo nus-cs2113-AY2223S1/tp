@@ -16,7 +16,7 @@ import seedu.duke.exception.AddTransactionInvalidAmountException;
 import seedu.duke.exception.InputTransactionInvalidCategoryException;
 import seedu.duke.exception.EntryNumberNotNumericException;
 import seedu.duke.exception.InputTransactionUnknownTypeException;
-import seedu.duke.exception.ListStatisticsInvalidStatsTypeException;
+import seedu.duke.exception.ListStatsInvalidStatsTypeException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -465,9 +465,9 @@ public class ParameterParser {
      *
      * @param parameter The user input after the user tag.
      * @return The statistic type.
-     * @throws ListStatisticsInvalidStatsTypeException If the statistic type given is not supported.
+     * @throws ListStatsInvalidStatsTypeException If the statistic type given is not supported.
      */
-    public static String parseStatsTypeTag(String parameter) throws ListStatisticsInvalidStatsTypeException {
+    public static String parseStatsTypeTag(String parameter) throws ListStatsInvalidStatsTypeException {
         String statsType;
         switch (parameter) {
         case "categories":
@@ -476,7 +476,7 @@ public class ParameterParser {
         default:
             parserLogger.log(Level.WARNING, "An invalid statistic type error is caught for the given parameter: "
                     + parameter);
-            throw new ListStatisticsInvalidStatsTypeException();
+            throw new ListStatsInvalidStatsTypeException();
         }
         return statsType;
     }
