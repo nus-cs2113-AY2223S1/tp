@@ -36,7 +36,7 @@ public class EditParser {
     }
 
     private static String getParameter(String line, int mode) {
-        String[] lineSplit = line.split(" ");
+        String[] lineSplit = line.split("/");
         return lineSplit[mode];
     }
 
