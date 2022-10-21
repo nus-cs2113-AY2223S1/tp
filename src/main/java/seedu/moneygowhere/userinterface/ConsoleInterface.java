@@ -695,6 +695,12 @@ public class ConsoleInterface {
         if (consoleCommandEditRecurringPayment.isAmountSet()) {
             recurringPayment.setAmount(consoleCommandEditRecurringPayment.getAmount());
         }
+        if (consoleCommandEditRecurringPayment.isCategorySet()) {
+            recurringPayment.setCategory(consoleCommandEditRecurringPayment.getCategory());
+        }
+        if (consoleCommandEditRecurringPayment.isCurrencySet()) {
+            recurringPayment.setCurrency(consoleCommandEditRecurringPayment.getCurrency());
+        }
 
         try {
             recurringPaymentManager.editRecurringPayment(recurringPaymentIndex, recurringPayment);
