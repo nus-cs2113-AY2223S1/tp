@@ -126,7 +126,7 @@ public class ParserManager {
             } else if (isFindProperty) {
                 return new ParseFindProperty(findCommandDescription);
             } else {
-                throw new UndefinedSubCommandTypeException(MESSAGE_INVALID_FIND_SUBCOMMANMD);
+                throw new UndefinedSubCommandTypeException(MESSAGE_MISSING_SUB_COMMAND_TYPE);
             }
         case COMMAND_EXIT:
             return new ParseExit(commandDetail);
