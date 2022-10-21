@@ -61,6 +61,20 @@ specified index
 * **`activatePrescription`** - This method allows user to set the prescription of specified index as active.
 * **`deactivatePrescription`** - This method allows user to set the prescription of specified index as inactive.
 
+### Prescription component
+The `Prescription` component,
+* stores the medicine name
+* the medicines timeInterval 
+* patient ID
+* dosage
+* if the Prescription is active or not 
+
+**Methods in `Prescription` class:**
+* 'add' - creates a new Prescription - needs to insert all the components except if active or not (if not included the default is active )
+* Getters and Setters for each of the components
+* Print format
+* method that checks if a patient has the Prescription
+* method that checks if a patient has the Prescription and if the Prescription is active
 ## Product scope
 ### Target user profile
 
