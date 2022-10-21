@@ -19,24 +19,33 @@ public class Parser {
     public static Command parse(String userInput) throws YamonException {
         String[] keywords = userInput.split("\\s+");
         try {
+            Command toExecute;
             switch (keywords[0]) {
                 case (SearchModuleCommand.COMMAND_WORD):
-                    return searchCommand(userInput);
+                    toExecute = searchCommand(userInput);
+                    break;
                 case (AddModuleCommand.COMMAND_WORD):
-                    return moduleRelatedCommand(keywords, new AddModuleCommand(keywords));
+                    toExecute = moduleRelatedCommand(keywords, new AddModuleCommand(keywords));
+                    break;
                 case (DeleteModuleCommand.COMMAND_WORD):
-                    return moduleRelatedCommand(keywords, new DeleteModuleCommand(keywords));
+                    toExecute = moduleRelatedCommand(keywords, new DeleteModuleCommand(keywords));
+                    break;
                 case (ViewTimetableCommand.COMMAND_WORD):
-                    return singleWordCommand(keywords, new ViewTimetableCommand(keywords));
+                    toExecute =singleWordCommand(keywords, new ViewTimetableCommand(keywords));
+                    break;
                 case (HelpCommand.COMMAND_WORD):
-                    return singleWordCommand(keywords, new HelpCommand(keywords));
+                    toExecute = singleWordCommand(keywords, new HelpCommand(keywords));
+                    break;
                 case (SelectSlotCommand.COMMAND_WORD):
-                    return new SelectSlotCommand(userInput);
+                    toExecute = new SelectSlotCommand(userInput);
+                    break;
                 case (ExitCommand.COMMAND_WORD):
-                    return singleWordCommand(keywords, new ExitCommand(keywords));
+                    toExecute = singleWordCommand(keywords, new ExitCommand(keywords));
+                    break;
                 default:
                     throw new YamonException("Cannot process the command");
             }
+            return toExecute;
         } catch (YamonException e) {
             throw e;
         }
@@ -119,6 +128,7 @@ public class Parser {
         }
 
         String errorMessage;
+
         if (isOneWordCommand(keywords)) {
             errorMessage = "Your command is incomplete.";
         } else if (isTwoWordsCommand(keywords) && !isValidModuleCode(keywords[1])) {
