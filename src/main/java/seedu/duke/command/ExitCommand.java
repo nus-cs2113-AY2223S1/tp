@@ -9,8 +9,9 @@ public class ExitCommand extends Command {
     public static final String FORMAT = "bye";
     public static final String HELP_DISPLAY = COMMAND_WORD
             + ": exit Yet Another Module Organiser / Manager (YAMOM)!\n"
-            + "Usage:\t"
-            + FORMAT;
+            + "\tUsage:\t"
+            + FORMAT
+            + System.lineSeparator();
 
     public ExitCommand(String[] input) {
         super(input);

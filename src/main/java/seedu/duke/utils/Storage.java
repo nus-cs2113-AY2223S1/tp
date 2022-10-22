@@ -34,13 +34,15 @@ public class Storage {
     public void openPreviousState(State state, Ui ui) {
         assert state != null : "List of lessons should not be null";
         logger = Logger.getLogger(SUBSYSTEM_NAME);
-        logger.log(Level.INFO, "Opening previous saved file");
+        logger.log(Level.FINE, "Attempting to open previous saved file");
         try {
             String link = readPreviousState();
             Link.parseLink(link, state);
             ui.addMessage(LOADING_PREVIOUS_STATE_MESSAGE);
+            logger.log(Level.FINE, "Opened previous saved file");
         } catch (FileNotFoundException e) {
             ui.addMessage(NO_PREVIOUS_STATE_ERROR_MESSAGE);
+            logger.log(Level.FINE, "No previous saved file");
         }
         ui.displayUi();
     }
@@ -77,7 +79,7 @@ public class Storage {
     public void saveState(State state, Ui ui) throws IOException {
         assert state != null : "State should not be null";
         logger = Logger.getLogger(SUBSYSTEM_NAME);
-        logger.log(Level.INFO, "Saving current state with " + state.getSelectedModulesList().size()
+        logger.log(Level.FINE, "Saving current state with " + state.getSelectedModulesList().size()
                 + " modules into a file. The format will be NUSMods export link.");
         File file = new File(FILE_PATH);
         if (file.getParentFile().mkdirs()) {

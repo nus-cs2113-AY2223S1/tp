@@ -23,8 +23,9 @@ public class GetModuleCommand extends Command {
     public static final String FORMAT = "get MODULE_CODE";
     public static final String HELP_DISPLAY = COMMAND_WORD
             + ": returns all details of the module!\n"
-            + "Usage:\t"
-            + FORMAT;
+            + "\tUsage:\t"
+            + FORMAT
+            + System.lineSeparator();
 
     public GetModuleCommand(String[] input) {
         super(input);

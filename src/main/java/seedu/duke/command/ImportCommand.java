@@ -7,6 +7,12 @@ import seedu.duke.utils.Ui;
 
 public class ImportCommand extends Command {
     public static final String COMMAND_WORD = "import";
+    public static final String FORMAT = "import NUSMods_LINK";
+    public static final String HELP_DISPLAY = COMMAND_WORD
+            + ": Imports timetable information from NUSMods generated link!\n"
+            + "\tUsage:\t"
+            + FORMAT
+            + System.lineSeparator();
     private static String nusModLink;
 
 
