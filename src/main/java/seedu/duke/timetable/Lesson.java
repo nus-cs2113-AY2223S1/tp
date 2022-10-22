@@ -9,9 +9,9 @@ public class Lesson extends Module {
     private String startTime;
     private String endTime;
 
-    public Lesson(String code, String title, University university, String day, String startTime,
+    public Lesson(String code, String title, String credit, University university, String day, String startTime,
                   String endTime) throws InvalidModuleException {
-        super(code, title, null, university);
+        super(code, title, credit, university);
         this.day = day.toLowerCase();
         this.startTime = startTime;
         this.endTime = endTime;
