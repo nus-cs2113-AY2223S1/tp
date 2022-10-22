@@ -5,7 +5,6 @@ import seedu.duke.Ui;
 import seedu.duke.data.TransactionList;
 import seedu.duke.exception.MoolahException;
 
-import java.io.IOException;
 import java.time.LocalDate;
 
 /**
@@ -84,7 +83,19 @@ public abstract class Command {
     }
 
     public void setStatsType(String statsType) {
-
     }
+
+    public void setStatsMonth(int month) {
+    }
+
+    public void setStatsYear(int year) {
+    }
+
+    public void setStatsNumber(int number) {
+    }
+
+    public void setStatsPeriod(String period) {
+    }
+
 
 }

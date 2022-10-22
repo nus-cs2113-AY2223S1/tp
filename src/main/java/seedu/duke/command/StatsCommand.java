@@ -3,15 +3,27 @@ package seedu.duke.command;
 import seedu.duke.Storage;
 import seedu.duke.Ui;
 import seedu.duke.data.TransactionList;
+import seedu.duke.data.transaction.Transaction;
 import seedu.duke.exception.ListStatsInvalidStatsTypeException;
 import seedu.duke.exception.MoolahException;
 
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static seedu.duke.command.CommandTag.COMMAND_TAG_STATISTICS_TYPE;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_STATS_MONTH;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_STATS_NUMBER;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_STATS_PERIOD;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_STATS_YEAR;
 import static seedu.duke.common.InfoMessages.INFO_STATS_CATEGORIES;
 import static seedu.duke.common.InfoMessages.INFO_STATS_EMPTY;
+import static seedu.duke.common.InfoMessages.INFO_STATS_EXPENSES;
+import static seedu.duke.common.InfoMessages.INFO_STATS_INCOME;
+import static seedu.duke.common.InfoMessages.INFO_STATS_SAVINGS;
+import static seedu.duke.common.InfoMessages.INFO_STATS_SUMMARY_HEADER;
+import static seedu.duke.common.InfoMessages.INFO_STATS_TIME;
+
 
 /**
  * Represents a get command object that will execute the operations for Get command.
@@ -40,6 +52,10 @@ public class StatsCommand extends Command {
     //@@author chydarren
     private static final Logger statsLogger = Logger.getLogger(StatsCommand.class.getName());
     private String statsType;
+    private int month = -1;
+    private int year = -1;
+    private String period = null;
+    private int number = -1;
 
     //@@author paullowse
     public StatsCommand() {
@@ -57,9 +73,46 @@ public class StatsCommand extends Command {
     }
 
     @Override
+    public String[] getOptionalTags() {
+        String[] optionalTags = new String[]{
+            COMMAND_TAG_STATS_MONTH,
+            COMMAND_TAG_STATS_YEAR,
+            COMMAND_TAG_STATS_NUMBER,
+            COMMAND_TAG_STATS_PERIOD,
+        };
+        return optionalTags;
+    }
+
+
+    @Override
     public void setStatsType(String statsType) {
         this.statsType = statsType;
     }
+
+    @Override
+    public void setStatsMonth(int month) {
+        this.month = month;
+    }
+
+    @Override
+    public void setStatsYear(int year) {
+        this.year = year;
+    }
+
+    @Override
+    public void setStatsNumber(int number) {
+        this.number = number;
+    }
+
+    @Override
+    public void setStatsPeriod(String period) {
+        this.period = period;
+    }
+
+    public int getStatsYear() {
+        return year;
+    }
+
 
     //@@author chydarren
     /**
@@ -74,7 +127,7 @@ public class StatsCommand extends Command {
         statsLogger.setLevel(Level.SEVERE);
         statsLogger.log(Level.INFO, "Entering execution of the Stats command.");
 
-        listStatsByStatsType(statsType, transactions);
+        listStatsByStatsType(statsType, transactions, month, year, period, number);
     }
 
     /**
@@ -82,16 +135,31 @@ public class StatsCommand extends Command {
      *
      * @param statsType                             The type of statistics that is needed.
      * @param transactions                          An instance of the TransactionList class.
-     * @throws ListStatsInvalidStatsTypeException   If the type of statistics is not recognised.
+     * @throws MoolahException   If the type of statistics is not recognised.
      */
-    private static void listStatsByStatsType(String statsType, TransactionList transactions)
-            throws ListStatsInvalidStatsTypeException {
+    private static void listStatsByStatsType(String statsType, TransactionList transactions, int month,
+                                             int year, String period, int number)
+            throws MoolahException {
         switch (statsType) {
         case "categories":
             statsLogger.log(Level.INFO, "Stats type has been detected for categorical savings.");
             statsTypeCategoricalSavings(transactions);
             statsLogger.log(Level.INFO, "End of Stats command.");
             break;
+        case "time":
+            statsLogger.log(Level.INFO, "Stats type has been detected for monthly savings.");
+            if (year == -1 && month == -1 && period != null && number != -1) {
+                statsLogger.log(Level.INFO, "Stats command uses lastNperiod.");
+                statsTypeTimeSavings(transactions, year, month, period, number);
+            } else if (year != -1 && period == null && number == -1) {
+                statsLogger.log(Level.INFO, "Stats command uses either monthly or yearly.");
+                statsTypeTimeSavings(transactions, year, month, period, number);
+            } else {
+                statsLogger.log(Level.WARNING, "An exception has been caught due to a missing tag");
+                throw new ListStatsInvalidStatsTypeException();
+            }
+            break;
+
         default:
             statsLogger.log(Level.WARNING, "An exception has been caught due to an invalid stats type.");
             throw new ListStatsInvalidStatsTypeException();
@@ -115,6 +183,57 @@ public class StatsCommand extends Command {
         assert !categoricalSavingsList.isEmpty();
         statsLogger.log(Level.INFO, "Categorical savings list is found to contain categories-amount pairs.");
         Ui.showList(categoricalSavingsList, INFO_STATS_CATEGORIES.toString());
+    }
+
+    //@@author paullowse
+    /**
+     * Calls transactions to get the necessary transaction list, convert the parameters into a String for output.
+     * Produces info strings, list of categories and summary statistics.
+     *
+     * @param transactions  An instance of the TransactionList class.
+     * @param year          A specified year
+     * @param month         A specified month
+     * @param period        A specified period of time
+     * @param number        A specified number of periods
+     * @throws MoolahException If the type of statistics is not recognised.
+     */
+    public static void statsTypeTimeSavings(TransactionList transactions, int year, int month,
+                                            String period, int number) throws MoolahException {
+
+        ArrayList<Transaction> timeTransactions;
+        // only year
+        if (period != null && number != -1) {
+            timeTransactions = transactions.getTransactionsByLastN(number, period);
+        } else if (month == -1) {
+            timeTransactions = transactions.getTransactionsByYear(year);
+        } else if (year != -1) {
+            timeTransactions = transactions.getTransactionsByMonth(year, month);
+        } else {
+            statsLogger.log(Level.WARNING, "An exception has been caught due to a missing tag");
+            throw new ListStatsInvalidStatsTypeException();
+        }
+        String timeSavingsList = transactions.listTimeStats(timeTransactions, year, month, period, number);
+
+        if (timeSavingsList.isEmpty()) {
+            statsLogger.log(Level.INFO, "Categorical savings list is empty as there are no transactions available.");
+            Ui.showInfoMessage(INFO_STATS_EMPTY.toString());
+            return;
+        }
+
+        // summary values
+        ArrayList<String> amounts;
+        amounts = transactions.processTimeSummaryStats(timeTransactions);
+
+        String incomeMessage = INFO_STATS_SUMMARY_HEADER + LINE_SEPARATOR
+                + INFO_STATS_INCOME.toString() + amounts.get(0);
+        String expensesMessage = INFO_STATS_EXPENSES.toString() + amounts.get(1);
+        String savingsMessage = INFO_STATS_SAVINGS.toString() + amounts.get(2);
+
+
+        assert !timeSavingsList.isEmpty();
+        statsLogger.log(Level.INFO, "Monthly savings list is found to contain categories-amount pairs.");
+        Ui.showStatsList(timeSavingsList, INFO_STATS_TIME.toString(), incomeMessage, expensesMessage, savingsMessage);
+
     }
 
     //@@author paullowse

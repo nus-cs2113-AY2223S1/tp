@@ -4,19 +4,22 @@ import seedu.duke.command.Command;
 import seedu.duke.command.ListCommand;
 import seedu.duke.data.transaction.Expense;
 import seedu.duke.data.transaction.Income;
-
+import seedu.duke.exception.EmptyParameterException;
+import seedu.duke.exception.EntryNumberNotNumericException;
 import seedu.duke.exception.InputDuplicateTagException;
 import seedu.duke.exception.InputMissingTagException;
-import seedu.duke.exception.InputUnsupportedTagException;
-import seedu.duke.exception.MoolahException;
-import seedu.duke.exception.EmptyParameterException;
-import seedu.duke.exception.UnknownHelpOptionException;
-import seedu.duke.exception.InputTransactionInvalidDateException;
-import seedu.duke.exception.AddTransactionInvalidAmountException;
+import seedu.duke.exception.InputTransactionInvalidAmountException;
 import seedu.duke.exception.InputTransactionInvalidCategoryException;
-import seedu.duke.exception.EntryNumberNotNumericException;
+import seedu.duke.exception.InputTransactionInvalidDateException;
 import seedu.duke.exception.InputTransactionUnknownTypeException;
+import seedu.duke.exception.InputUnsupportedTagException;
 import seedu.duke.exception.ListStatsInvalidStatsTypeException;
+import seedu.duke.exception.MoolahException;
+import seedu.duke.exception.StatsInvalidMonthException;
+import seedu.duke.exception.StatsInvalidNumberException;
+import seedu.duke.exception.StatsInvalidPeriodException;
+import seedu.duke.exception.StatsInvalidYearException;
+import seedu.duke.exception.UnknownHelpOptionException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -27,16 +30,22 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_TYPE;
-import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_DATE;
-import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_CATEGORY;
-import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_AMOUNT;
-import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_DESCRIPTION;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_HELP_OPTION;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_LIST_ENTRY_NUMBER;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_STATISTICS_TYPE;
-import static seedu.duke.command.CommandTag.COMMAND_TAG_HELP_OPTION;
-
+import static seedu.duke.command.CommandTag.COMMAND_TAG_STATS_MONTH;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_STATS_NUMBER;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_STATS_PERIOD;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_STATS_YEAR;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_AMOUNT;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_CATEGORY;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_DATE;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_DESCRIPTION;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_TYPE;
+import static seedu.duke.common.Constants.MAX_AMOUNT_VALUE;
+import static seedu.duke.common.Constants.MIN_AMOUNT_VALUE;
 import static seedu.duke.common.DateFormats.DATE_INPUT_PATTERN;
+
 
 /**
  * Parses the parameter portion of the user input and set the parameters into the Command object.
@@ -53,6 +62,9 @@ public class ParameterParser {
     private static final int MINIMUM_TAG_LENGTH = 2;
     private static final String CLASS_TYPE_EXPENSE = "seedu.duke.data.transaction.Expense";
     private static final String CLASS_TYPE_INCOME = "seedu.duke.data.transaction.Income";
+    private static final String WEEKS = "weeks";
+    private static final String MONTHS = "months";
+
     //@@author wcwy
     private static final Logger parserLogger = Logger.getLogger(ParameterParser.class.getName());
 
@@ -186,7 +198,8 @@ public class ParameterParser {
     public static void checkParameterNotEmpty(String[] splits) throws EmptyParameterException {
         for (String split : splits) {
             if (split.length() == 2) {
-                parserLogger.log(Level.WARNING, "An empty parameter error is caught for the given tag input: " + split);
+                parserLogger.log(Level.WARNING, "An empty parameter error is caught for the "
+                        + "given tag input: " + split);
                 throw new EmptyParameterException();
             }
         }
@@ -298,6 +311,18 @@ public class ParameterParser {
         case COMMAND_TAG_STATISTICS_TYPE:
             command.setStatsType(parseStatsTypeTag(parameter));
             break;
+        case COMMAND_TAG_STATS_MONTH:
+            command.setStatsMonth(parseStatsMonthTag(parameter));
+            break;
+        case COMMAND_TAG_STATS_YEAR:
+            command.setStatsYear(parseStatsYearTag(parameter));
+            break;
+        case COMMAND_TAG_STATS_NUMBER:
+            command.setStatsNumber(parseStatsNumberTag(parameter));
+            break;
+        case COMMAND_TAG_STATS_PERIOD:
+            command.setStatsPeriod(parseStatsPeriodTag(parameter));
+            break;
         default:
             parserLogger.log(Level.WARNING, "An unsupported tag exception is caught: " + tag);
             throw new InputUnsupportedTagException();
@@ -320,7 +345,8 @@ public class ParameterParser {
         case "income":
             return CLASS_TYPE_INCOME;
         default:
-            parserLogger.log(Level.WARNING, "An invalid type error is caught for the given parameter: " + parameter);
+            parserLogger.log(Level.WARNING, "An invalid type error "
+                    + "is caught for the given parameter: " + parameter);
             throw new InputTransactionUnknownTypeException();
         }
     }
@@ -339,7 +365,8 @@ public class ParameterParser {
         boolean isIncome = parameter.equals(Income.TRANSACTION_NAME);
 
         if (!isExpense && !isIncome) {
-            parserLogger.log(Level.WARNING, "An invalid type error is caught for the given parameter: " + parameter);
+            parserLogger.log(Level.WARNING, "An invalid type error "
+                    + "is caught for the given parameter: " + parameter);
             throw new InputTransactionUnknownTypeException();
         }
 
@@ -371,28 +398,28 @@ public class ParameterParser {
      *
      * @param parameter The user input after the user tag.
      * @return The amount integer if no exceptions are thrown.
-     * @throws AddTransactionInvalidAmountException If the transaction amount provided is not a valid accepted integer.
+     * @throws InputTransactionInvalidAmountException If the transaction amount given is not a valid accepted integer.
      */
-    private static int parseAmountTag(String parameter) throws AddTransactionInvalidAmountException {
+    private static int parseAmountTag(String parameter) throws InputTransactionInvalidAmountException {
         Pattern specialSymbols = Pattern.compile("[!@#$%&*()_+=|<>?{}\\[\\]~-]");
         Matcher hasSpecialSymbols = specialSymbols.matcher(parameter);
         try {
             if (containAlphabet(parameter) || hasSpecialSymbols.find()) {
                 parserLogger.log(Level.WARNING, "An invalid amount error is caught for the given parameter: "
                         + parameter);
-                throw new AddTransactionInvalidAmountException();
+                throw new InputTransactionInvalidAmountException();
             }
             int amount = Integer.parseInt(parameter);
-            if (amount < 0 || amount > 10000000) {
+            if (amount < MIN_AMOUNT_VALUE || amount > MAX_AMOUNT_VALUE) {
                 parserLogger.log(Level.WARNING, "An invalid amount error is caught for the given parameter: "
                         + parameter);
-                throw new AddTransactionInvalidAmountException();
+                throw new InputTransactionInvalidAmountException();
             }
             return amount;
 
         } catch (NumberFormatException e) {
             parserLogger.log(Level.WARNING, "An invalid amount error is caught for the given parameter: " + parameter);
-            throw new AddTransactionInvalidAmountException();
+            throw new InputTransactionInvalidAmountException();
         }
     }
 
@@ -411,7 +438,8 @@ public class ParameterParser {
             LocalDate date = LocalDate.parse(parameter, formatter);
             return date;
         } catch (DateTimeParseException exception) {
-            parserLogger.log(Level.WARNING, "An invalid date error is caught for the given parameter: " + parameter);
+            parserLogger.log(Level.WARNING, "An invalid date error "
+                    + "is caught for the given parameter: " + parameter);
             throw new InputTransactionInvalidDateException();
         }
     }
@@ -473,6 +501,9 @@ public class ParameterParser {
         case "categories":
             statsType = "categories";
             break;
+        case "time":
+            statsType = "time";
+            break;
         default:
             parserLogger.log(Level.WARNING, "An invalid statistic type error is caught for the given parameter: "
                     + parameter);
@@ -480,6 +511,83 @@ public class ParameterParser {
         }
         return statsType;
     }
+
+    //@@author paullowse
+    public static int parseStatsMonthTag(String parameter) throws StatsInvalidMonthException,
+            EntryNumberNotNumericException {
+        int month;
+        try {
+            month = Integer.parseInt(parameter);
+        } catch (NumberFormatException e) {
+            parserLogger.log(Level.WARNING, "An invalid entry number error is caught for the given parameter: "
+                    + parameter);
+            throw new EntryNumberNotNumericException();
+        }
+
+        if (month > 12 || month < 0) {
+            parserLogger.log(Level.WARNING, "An invalid month number error is caught for the given parameter: "
+                    + parameter);
+            throw new StatsInvalidMonthException();
+        }
+        return month;
+    }
+
+    //@@author paullowse
+    public static int parseStatsYearTag(String parameter) throws StatsInvalidYearException,
+            EntryNumberNotNumericException {
+        int year;
+        try {
+            year = Integer.parseInt(parameter);
+        } catch (NumberFormatException e) {
+            parserLogger.log(Level.WARNING, "An invalid entry number error is caught for the given parameter: "
+                    + parameter);
+            throw new EntryNumberNotNumericException();
+        }
+        if (year < 0) {
+            parserLogger.log(Level.WARNING, "An invalid year number error is caught for the given parameter: "
+                    + parameter);
+            throw new StatsInvalidYearException();
+        }
+        return year;
+    }
+
+    //@@author paullowse
+    public static String parseStatsPeriodTag(String parameter) throws StatsInvalidPeriodException {
+        String period;
+        switch (parameter) {
+        case WEEKS:
+            period = WEEKS;
+            break;
+        case MONTHS:
+            period = MONTHS;
+            break;
+        default:
+            parserLogger.log(Level.WARNING, "An invalid statistic period error is caught for the given parameter: "
+                    + parameter);
+            throw new StatsInvalidPeriodException();
+        }
+        return period;
+    }
+
+    //@@author paullowse
+    public static int parseStatsNumberTag(String parameter) throws EntryNumberNotNumericException,
+            StatsInvalidNumberException {
+        int statsNumber;
+        try {
+            statsNumber = Integer.parseInt(parameter);
+        } catch (NumberFormatException e) {
+            parserLogger.log(Level.WARNING, "An invalid entry number error is caught for the given parameter: "
+                    + parameter);
+            throw new EntryNumberNotNumericException();
+        }
+        if (statsNumber < 0) {
+            parserLogger.log(Level.WARNING, "An invalid year number error is caught for the given parameter: "
+                    + parameter);
+            throw new StatsInvalidNumberException();
+        }
+        return statsNumber;
+    }
+
 
     //@@author chinhan99
 

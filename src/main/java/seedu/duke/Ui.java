@@ -1,11 +1,18 @@
 package seedu.duke;
 
+import seedu.duke.data.Budget;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
+import static seedu.duke.common.DateFormats.DATE_OUTPUT_PATTERN;
+import static seedu.duke.common.InfoMessages.INFO_CURRENT_BUDGET;
 import static seedu.duke.common.InfoMessages.INFO_DIVIDER;
 import static seedu.duke.common.InfoMessages.INFO_GREET;
 import static seedu.duke.common.InfoMessages.INFO_HELP_GREET;
 import static seedu.duke.common.InfoMessages.INFO_HELP_PROMPT;
+import static seedu.duke.common.InfoMessages.INFO_REMAINING_BUDGET;
 
 public class Ui {
     //@@author chydarren
@@ -27,6 +34,7 @@ public class Ui {
     }
 
     //@@author paullowse
+
     /**
      * Initialises the variables of the Ui class.
      */
@@ -45,6 +53,7 @@ public class Ui {
     }
 
     //@@author chydarren
+
     /**
      * Prepares the error message to be displayed to the user.
      *
@@ -67,10 +76,13 @@ public class Ui {
      * Prepares the greeting messages to be displayed to the user.
      */
     public static void showGreeting() {
-        printMessages(INFO_GREET.toString(), INFO_HELP_PROMPT.toString());
+        printMessages(INFO_GREET.toString(), INFO_CURRENT_BUDGET.toString() + Budget.getBudget(),
+                INFO_HELP_PROMPT.toString()
+        );
     }
 
     //@@author chinhan99
+
     /**
      * Prepares the help messages to be displayed to the user.
      *
@@ -83,21 +95,49 @@ public class Ui {
     /**
      * Prepares the transaction list messages to be displayed to the user.
      *
-     * @param list      A string containing the formatted transaction list.
-     * @param message   A message that complements with the transactions list.
+     * @param list    A string containing the formatted transaction list.
+     * @param message A message that complements with the transactions list.
      */
     public static void showList(String list, String message) {
         printMessages(message, list);
     }
 
     /**
+     * Prepares the stats list messages to be displayed to the user.
+     *
+     * @param list    A string containing the formatted transaction list.
+     * @param message A message that complements with the transactions list.
+     */
+    public static void showStatsList(String list, String message, String incomeMessage,
+                                    String expenseMessage, String savingsMessage) {
+        printMessages(message, list, incomeMessage, expenseMessage, savingsMessage);
+    }
+
+    /**
      * Prepares the messages to be displayed to the user when add or delete has been performed on
      * the transaction list.
      *
-     * @param message               A message that describes the functionality of the program.
-     * @param transactionDetails    Details of the action that has been performed on the transaction.
+     * @param message            A message that describes the functionality of the program.
+     * @param transactionDetails Details of the action that has been performed on the transaction.
+     * @param budgetInfo         A message that contains the monthly budget information.
      */
+    public static void showTransactionAction(String message, String transactionDetails, String budgetInfo) {
+        printMessages(message, transactionDetails, INFO_REMAINING_BUDGET + budgetInfo);
+    }
+
+    // A temporary overload method for backward-compatibility for delete command
     public static void showTransactionAction(String message, String transactionDetails) {
         printMessages(message, transactionDetails);
+    }
+
+    /**
+     * Returns the today's date in MMM dd yyyy format.
+     *
+     * @return Formatted today's date
+     */
+    public static String showDateOfTheDay() {
+        LocalDate todayDate = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_OUTPUT_PATTERN.toString());
+        return todayDate.format(formatter);
     }
 }
