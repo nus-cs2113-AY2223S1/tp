@@ -70,7 +70,7 @@ public class VisitList {
         for (int i = 0; i < getTotalVisits(); i++) {
             if (visitList.get(i).getId().equals(id)) {
                 if (noOfPatientVisits == 0) {
-                    System.out.printf("Here are the list of visits for Patient with ID: %s\n",id);
+                    System.out.println("Here are the list of visits for Patient with ID: " + id);
                 }
                 noOfPatientVisits++;
                 ui.printLine();
@@ -79,7 +79,7 @@ public class VisitList {
             }
         }
         if (noOfPatientVisits == 0) {
-            System.out.printf("Sorry, Patient with ID %s has no visits recorded yet!\n",id);
+            System.out.println("Sorry, Patient with ID " + id + " has no visits recorded yet!");
         }
         ui.printLine();
     }
@@ -90,9 +90,9 @@ public class VisitList {
             return;
         }
         if (index < 1 || index > getTotalVisits()) {
-            System.out.printf("There is no such visit in the system with index %d!\n",index);
+            System.out.println("There is no such visit in the system with index " + index + "!");
         } else {
-            System.out.printf("Here is the visit with VisitIndex %d:\n",index);
+            System.out.println("Here is the visit with VisitIndex " + index + ":");
             ui.printLine();
             System.out.println(visitList.get(index - 1));
         }
