@@ -15,7 +15,7 @@ public class SelectSemesterCommand extends Command {
             + "\tUsage:\t"
             + FORMAT
             + System.lineSeparator();
-    private static int updatedSemester;
+    private int updatedSemester;
 
     private Logger logger;
 
@@ -38,10 +38,7 @@ public class SelectSemesterCommand extends Command {
         logger = Logger.getLogger(SUBSYSTEM_NAME);
         logger.log(Level.FINE, "Updating semester currently being planned");
 
-
-
         state.setSemester(updatedSemester);
-        //State.setSemester();
         ui.addMessage(getExecutionMessage());
         ui.displayUi();
     }
