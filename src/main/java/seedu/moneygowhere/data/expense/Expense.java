@@ -23,6 +23,12 @@ public class Expense {
                    String category,
                    String remarks,
                    String currency) {
+        assert !(currency == null || currency.isEmpty() || currency.trim().isEmpty()) :
+                "There must be a currency";
+        assert !(name == null || name.isEmpty() || name.trim().isEmpty()) :
+                "There must be a name";
+        assert amount != null : "There must be an amount";
+        assert dateTime != null : "There must be a date and time";
         this.name = name;
         this.dateTime = dateTime;
         this.description = description;
