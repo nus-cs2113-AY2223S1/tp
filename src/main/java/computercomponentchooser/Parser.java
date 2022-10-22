@@ -102,7 +102,7 @@ public class Parser {
         Ui.printLine();
         if (!filterType.equals("price") || !filterType.equals("power") || !filterType.equals("compatibility")) {
             throw new UnknownCommandException();
-        }// guard clause
+        } // guard clause, check if filterType is valid
 
         if (!filterType.equals("compatibility")) {
             lowestNumber = EditParser.getParameter(line, 2);
