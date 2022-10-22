@@ -245,9 +245,6 @@ public class EditParser {
         String name = getParameter(line, NAME_PARAMETER);
         String type = getParameter(line, TYPE_PARAMETER);
         Ui.printLine();
-        if (!BuildManager.doesBuildExist(name)) {
-            throw new UnlistedBuildException();
-        }
         System.out.println(editBuild.getComponent(type, name).getDetails());
         Ui.printLine();
     }
