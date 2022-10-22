@@ -61,6 +61,7 @@ public class Duke {
                     break;
                 case CREATE:
                     userUniversityListManager.createList(newUserCommand.getUniversityName());
+                    UserStorageParser.storeCreatedLists(userUniversityListManager);
                     break;
                 case VIEW:
                     try {
@@ -122,9 +123,11 @@ public class Duke {
                         } else if (favouriteCommand.getFavouriteOption().equals("ADD")) {
                             String universityName = favouriteCommand.getUniversityName();
                             userUniversityListManager.addFavourite(universityName);
+                            UserStorageParser.storeCreatedLists(userUniversityListManager);
                         } else if (favouriteCommand.getFavouriteOption().equals("DELETE")) {
                             String universityName = favouriteCommand.getUniversityName();
                             userUniversityListManager.deleteFavourite(universityName);
+                            UserStorageParser.storeCreatedLists(userUniversityListManager);
                         }
                     } catch (NoSuchElementException e) {
                         Ui.printExceptionMessage(e);
