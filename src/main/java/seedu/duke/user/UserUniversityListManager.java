@@ -162,8 +162,6 @@ public class UserUniversityListManager {
             throw new InvalidUserCommandException("University already added");
         } else {
             myManager.get(input).setFavourite(true);
-            //UserUniversityList u = myManager.get(input);
-            //myFavourites.put(input, u);
             System.out.print(Ui.printFavouriteListAddedAcknowledgement(input));
         }
     }
@@ -175,8 +173,18 @@ public class UserUniversityListManager {
             throw new InvalidUserCommandException("No such university in favourite list currently");
         } else {
             myManager.get(input).setFavourite(false);
-            //myFavourites.remove(input);
             System.out.print(Ui.printFavouriteListDeletedAcknowledgement(input));
         }
+    }
+
+    public HashMap<String, UserUniversityList> getMyFavourites(HashMap<String, UserUniversityList> myManager) {
+        HashMap<String, UserUniversityList> favouritesList = new HashMap<>();
+        for (Map.Entry<String, UserUniversityList> entry : myManager.entrySet()) {
+            UserUniversityList uni = entry.getValue();
+            if (uni.isFavourite()) {
+                favouritesList.put(uni.getUniversityName(), uni);
+            }
+        }
+        return favouritesList;
     }
 }
