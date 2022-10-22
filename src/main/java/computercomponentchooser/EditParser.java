@@ -91,8 +91,8 @@ public class EditParser {
     }
 
     public void parseAdd(Build editBuild, String line) throws BlankStringException {
-        String name = getParameter(line, NAME_PARAMETER);
         String type = getParameter(line, TYPE_PARAMETER);
+        String name = getParameter(line, NAME_PARAMETER);
         String price = getParameter(line, PRICE_PARAMETER);
         String power = getParameter(line, POWER_PARAMETER);
         if (name.isBlank() || type.isBlank() || price.isBlank() || power.isBlank()) {
@@ -100,52 +100,34 @@ public class EditParser {
         }
         switch (type) {
         case "cpu":
-            Cpu cpu = new Cpu(name, price, power,
-                    getParameter(line, 5), getParameter(line, 6));
-            editBuild.addComponent(type, cpu);
+            parseAddCpu(editBuild, line, type, name, price, power);
             break;
         case "memory":
-            Memory memory = new Memory(name, price, power, getParameter(line, 5),
-                    getParameter(line, 6));
-            editBuild.addComponent(type, memory);
+            parseAddMemory(editBuild, line, type, name, price, power);
             break;
         case "motherboard":
-            Motherboard motherboard = new Motherboard(name, price, power, getParameter(line, 5),
-                    getParameter(line, 6), getParameter(line, 7), getParameter(line, 8));
-            editBuild.addComponent(type, motherboard);
+            parseAddMotherboard(editBuild, line, type, name, price, power);
             break;
         case "powersupply":
-            PowerSupply powersupply = new PowerSupply(name, price, power);
-            editBuild.addComponent(type, powersupply);
+            parseAddPowerSupply(editBuild, line, type, name, price, power);
             break;
         case "gpu":
-            Gpu gpu = new Gpu(name, price, power, getParameter(line, 5),
-                    getParameter(line, 6));
-            editBuild.addComponent(type, gpu);
+            parseAddGpu(editBuild, line, type, name, price, power);
             break;
         case "drive":
-            Drive drive = new Drive(name, price, power, getParameter(line, 5),
-                    getParameter(line, 6));
-            editBuild.addComponent(type, drive);
+            parseAddDrive(editBuild, line, type, name, price, power);
             break;
         case "monitor":
-            Monitor monitor = new Monitor(name, price, power, getParameter(line, 5),
-                    getParameter(line, 6), getParameter(line, 7));
-            editBuild.addComponent(type, monitor);
+            parseAddMonitor(editBuild, line, type, name, price, power);
             break;
         case "cooler":
-            Cooler cooler = new Cooler(name, price, power, getParameter(line, 5),
-                    getParameter(line, 6), getParameter(line, 7));
-            editBuild.addComponent(type, cooler);
+            parseAddCooler(editBuild, line, type, name, price, power);
             break;
         case "case":
-            Case case1 = new Case(name, price, power, getParameter(line, 5),
-                    getParameter(line, 6));
-            editBuild.addComponent(type, case1);
+            parseAddCase(editBuild, line, type, name, price, power);
             break;
         case "other":
-            Other other = new Other(name, price, power);
-            editBuild.addComponent(type, other);
+            parseAddOther(editBuild, line, type, name, price, power);
             break;
         default:
             break;
@@ -158,6 +140,65 @@ public class EditParser {
         Ui.printLine();
         System.out.println("You have added " + name);
         Ui.printLine();
+    }
+
+    public void parseAddCpu(Build editBuild, String line, String type, String name, String price, String power) {
+        Cpu cpu = new Cpu(name, price, power, getParameter(line, 5), getParameter(line, 6));
+        editBuild.addComponent(type, cpu);
+    }
+
+    public void parseAddMemory(Build editBuild, String line, String type, String name, String price, String power) {
+        Memory memory = new Memory(name, price, power, getParameter(line, 5),
+                getParameter(line, 6));
+        editBuild.addComponent(type, memory);
+    }
+
+    public void parseAddMotherboard(Build editBuild, String line, String type, String name, String price,
+                                    String power) {
+        Motherboard motherboard = new Motherboard(name, price, power, getParameter(line, 5),
+                getParameter(line, 6), getParameter(line, 7), getParameter(line, 8));
+        editBuild.addComponent(type, motherboard);
+    }
+
+    public void parseAddPowerSupply(Build editBuild, String line, String type, String name, String price,
+                                    String power) {
+        PowerSupply powersupply = new PowerSupply(name, price, power);
+        editBuild.addComponent(type, powersupply);
+    }
+
+    public void parseAddGpu(Build editBuild, String line, String type, String name, String price, String power) {
+        Gpu gpu = new Gpu(name, price, power, getParameter(line, 5),
+                getParameter(line, 6));
+        editBuild.addComponent(type, gpu);
+    }
+
+    public void parseAddDrive(Build editBuild, String line, String type, String name, String price, String power) {
+        Drive drive = new Drive(name, price, power, getParameter(line, 5),
+                getParameter(line, 6));
+        editBuild.addComponent(type, drive);
+    }
+
+    public void parseAddMonitor(Build editBuild, String line, String type, String name, String price, String power) {
+        Monitor monitor = new Monitor(name, price, power, getParameter(line, 5),
+                getParameter(line, 6), getParameter(line, 7));
+        editBuild.addComponent(type, monitor);
+    }
+
+    public void parseAddCooler(Build editBuild, String line, String type, String name, String price, String power) {
+        Cooler cooler = new Cooler(name, price, power, getParameter(line, 5),
+                getParameter(line, 6), getParameter(line, 7));
+        editBuild.addComponent(type, cooler);
+    }
+
+    public void parseAddCase(Build editBuild, String line, String type, String name, String price, String power) {
+        Case case1 = new Case(name, price, power, getParameter(line, 5),
+                getParameter(line, 6));
+        editBuild.addComponent(type, case1);
+    }
+
+    public void parseAddOther(Build editBuild, String line, String type, String name, String price, String power) {
+        Other other = new Other(name, price, power);
+        editBuild.addComponent(type, other);
     }
 
     public void parseDelete(Build editBuild, String line) {

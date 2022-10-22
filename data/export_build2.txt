@@ -1,0 +1,12 @@
+____________________________________________________________
+Info: 
+Build name: build2
+Total cost: 3500.0
+Total power: 245
+Compatibility: Not compatible
+
+Components list: 
+1. AMD RYZEN [$500] [80 W] [AM4] [3.7 GHz]
+2. Samsung EVO [$500] [35 W] [500 GB] [ssd]
+3. nvidia3090x [$2500] [130 W] [16 GB] [1395 MHz]
+____________________________________________________________
