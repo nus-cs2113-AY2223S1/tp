@@ -24,52 +24,48 @@ public class Parser {
     public static Command parse(String userInput) throws YamomException {
         String[] keywords = userInput.split("\\s+");
 
-        try {
-            Command toExecute;
-            switch (keywords[0]) {
-            case (SearchModuleCommand.COMMAND_WORD):
-                toExecute = searchCommand(userInput);
-                break;
-            case (GetModuleCommand.COMMAND_WORD):
-                toExecute = getCommand(keywords);
-                break;
-            case (AddModuleCommand.COMMAND_WORD):
-                toExecute = moduleRelatedCommand(keywords, new AddModuleCommand(keywords));
-                break;
-            case (DeleteModuleCommand.COMMAND_WORD):
-                toExecute = moduleRelatedCommand(keywords, new DeleteModuleCommand(keywords));
-                break;
-            case (ViewTimetableCommand.COMMAND_WORD):
-                toExecute = singleWordCommand(keywords, new ViewTimetableCommand(userInput));
-                break;
-            case (HelpCommand.COMMAND_WORD):
-                toExecute = singleWordCommand(keywords, new HelpCommand(keywords));
-                break;
-            case (SelectSlotCommand.COMMAND_WORD):
-                toExecute = new SelectSlotCommand(userInput);
-                break;
-            case (ExitCommand.COMMAND_WORD):
-                toExecute = singleWordCommand(keywords, new ExitCommand(keywords));
-                break;
-            case (SelectSemesterCommand.COMMAND_WORD):
-                toExecute = selectSemesterCommand(keywords, new SelectSemesterCommand(keywords));
-                break;
-            case (ExportCommand.COMMAND_WORD):
-                toExecute = singleWordCommand(keywords, new ExportCommand(keywords));
-                break;
-            case (ImportCommand.COMMAND_WORD):
-                toExecute = nusmodCommand(keywords, new ImportCommand(keywords));
-                break;
-            case (DisplaySelectedModuleListCommand.COMMAND_WORD):
-                toExecute = singleWordCommand(keywords, new DisplaySelectedModuleListCommand(keywords));
-                break;
-            default:
-                throw new YamomException("Cannot process the command");
-            }
-            return toExecute;
-        } catch (YamomException e) {
-            throw e;
+        Command toExecute;
+        switch (keywords[0]) {
+        case (SearchModuleCommand.COMMAND_WORD):
+            toExecute = searchCommand(userInput);
+            break;
+        case (GetModuleCommand.COMMAND_WORD):
+            toExecute = getCommand(keywords);
+            break;
+        case (AddModuleCommand.COMMAND_WORD):
+            toExecute = moduleRelatedCommand(keywords, new AddModuleCommand(keywords));
+            break;
+        case (DeleteModuleCommand.COMMAND_WORD):
+            toExecute = moduleRelatedCommand(keywords, new DeleteModuleCommand(keywords));
+            break;
+        case (ViewTimetableCommand.COMMAND_WORD):
+            toExecute = singleWordCommand(keywords, new ViewTimetableCommand(userInput));
+            break;
+        case (HelpCommand.COMMAND_WORD):
+            toExecute = singleWordCommand(keywords, new HelpCommand(keywords));
+            break;
+        case (SelectSlotCommand.COMMAND_WORD):
+            toExecute = new SelectSlotCommand(userInput);
+            break;
+        case (ExitCommand.COMMAND_WORD):
+            toExecute = singleWordCommand(keywords, new ExitCommand(keywords));
+            break;
+        case (SelectSemesterCommand.COMMAND_WORD):
+            toExecute = selectSemesterCommand(keywords, new SelectSemesterCommand(keywords));
+            break;
+        case (ExportCommand.COMMAND_WORD):
+            toExecute = singleWordCommand(keywords, new ExportCommand(keywords));
+            break;
+        case (ImportCommand.COMMAND_WORD):
+            toExecute = nusmodCommand(keywords, new ImportCommand(keywords));
+            break;
+        case (DisplaySelectedModuleListCommand.COMMAND_WORD):
+            toExecute = singleWordCommand(keywords, new DisplaySelectedModuleListCommand(keywords));
+            break;
+        default:
+            throw new YamomException("Cannot process the command");
         }
+        return toExecute;
     }
 
     private static Command getCommand(String[] keywords) {

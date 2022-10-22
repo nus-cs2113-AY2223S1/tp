@@ -11,10 +11,11 @@ public class State {
     private static int semester;
 
     private List<List<SelectedModule>> selectedModulesList;
-    public State(){
+
+    public State() {
         semester = 1;
         selectedModulesList = new ArrayList<>();
-        for (int i = 0; i < MODULES_LIST_SIZE; i++){
+        for (int i = 0; i < MODULES_LIST_SIZE; i++) {
             selectedModulesList.add(new ArrayList<>());
         }
     }

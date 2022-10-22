@@ -30,14 +30,14 @@ public class ViewTimetableCommand extends Command {
     private boolean showFancy;
     private boolean showSimple;
 
-    public ViewTimetableCommand(String input) {
+    public ViewTimetableCommand(String input) throws YamomException {
         super(input.split("\\s+"));
         var params = Parser.parseParams(input);
         showFancy = params.containsKey("fancy");
         showSimple = params.containsKey("simple");
-        // if (showFancy && showSimple) {
-        //     throw new Exception("Timetable cannot be both simple and fancy!");
-        // }
+        if (showFancy && showSimple) {
+            throw new YamomException("Timetable cannot be both simple and fancy!");
+        }
     }
 
     @Override
