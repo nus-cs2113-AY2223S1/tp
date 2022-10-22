@@ -49,9 +49,8 @@ public class Messages {
 
     public static final String MESSAGE_NOT_INTEGER = "OOPS!! Please enter a positive integer as index";
 
-
-    /* Add Property/Client Related Error Messages */
-
+    //@@author OVReader
+    // Add Property/Client Related Error Messages
     public static final String MESSAGE_ADD_PROPERTY_WRONG_FORMAT = "OOPS!!! To add a property, it requires "
             + "the following format and details:\n"
             + "Format: add -property n/NAME a/ADDRESS p/PRICE t/TYPE\n"
@@ -95,6 +94,10 @@ public class Messages {
 
     public static final String MESSAGE_DUPLICATE_PROPERTY = "OOPS!!! There is already an existing property with the"
             + " same address.";
+
+    public static final String MESSAGE_DUPLICATE_CLIENT = "OOPS!!! There is already an existing client with the"
+            + " same name/contact number/email.";
+    //@@author
 
 
     /* Delete Property/Client Related Error Messages */

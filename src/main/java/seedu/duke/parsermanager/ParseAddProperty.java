@@ -2,8 +2,11 @@ package seedu.duke.parsermanager;
 
 import seedu.duke.Property;
 import seedu.duke.PropertyList;
+import seedu.duke.Ui;
+
 import seedu.duke.command.Command;
 import seedu.duke.command.CommandAddProperty;
+
 import seedu.duke.exception.DuplicatePropertyException;
 import seedu.duke.exception.EmptyDetailException;
 import seedu.duke.exception.IncorrectFlagOrderException;
@@ -135,7 +138,7 @@ public class ParseAddProperty extends ParseAdd {
         checkForValidSingaporeAddress(propertyDetails.get(PROPERTY_ADDRESS_INDEX));
         checkForPriceNumberFormat(propertyDetails.get(PROPERTY_PRICE_INDEX));
 
-        // Checks For Duplicate Property; Duplicate Property refers to properties with the same address.
+        // Duplicate Property refers to properties with the same address.
         checkForDuplicateProperty(propertyList, propertyDetails.get(PROPERTY_ADDRESS_INDEX));
     }
 
@@ -187,9 +190,15 @@ public class ParseAddProperty extends ParseAdd {
         for (Property property: propertyList.getPropertyList()) {
             boolean isDuplicateAddress = property.getPropertyAddress().equals(propertyAddress);
             if (isDuplicateAddress) {
+                showExistingDuplicateProperty(property);
                 return true;
             }
         }
         return false;
+    }
+
+    private static void showExistingDuplicateProperty(Property property) {
+        Ui ui = new Ui();
+        ui.showToUser("Existing Property:\n  " + property.toString());
     }
 }
