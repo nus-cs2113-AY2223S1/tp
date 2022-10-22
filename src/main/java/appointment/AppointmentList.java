@@ -42,17 +42,26 @@ public class AppointmentList {
     }
 
     public static void setAppointmentStatus(int appointmentId, int appointmentStatus) {
+        boolean setFlag = false;
         for (Appointment appointment : appointments) {
             if (appointment.appointmentId == appointmentId) {
                 switch (appointmentStatus) {
                 case 0:
                     appointment.setAppointmentStatus(AppointmentStatus.PENDING);
+                    setFlag = true;
                     break;
                 case 1:
                     appointment.setAppointmentStatus(AppointmentStatus.PROCESSING);
+                    setFlag = true;
                     break;
                 }
+                System.out.print("Noted. I've set this service: ");
+                System.out.print("Pet " + appointment.petName + " | " + "Service " + appointment.service);
+                System.out.print("as " + appointment.getAppointmentStatus());
             }
+        }
+        if (!setFlag) {
+            System.out.println("Sorry, no corresponding appointment found.");
         }
     }
 }
