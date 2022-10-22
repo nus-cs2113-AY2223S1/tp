@@ -87,7 +87,7 @@ Note:
 1. The user to be deleted should not borrow or lend any items at the moment
 2. All the items of this user will also be deleted
 
-Example of usage: ```remove-user /u [USERNAME]```
+Example of usage: ```remove-user /u thanh```
 
 Expected outcome:
 ```
@@ -95,6 +95,24 @@ ____________________________________________________________
 Noted. Following user has been deleted: 
 Username: thanh Age: 20 Contact: 73648263 
 Total user(s) in database: 6
+____________________________________________________________
+```
+
+#### 3.2.3. ```view-user``` - View a user
+>View the details of a user in the list
+
+Format: ```view-user /u [USERNAME]```
+
+Note:
+1. Username must be present in the user list
+
+Example of usage: ```view-user /u jingwei```
+
+Expected outcome:
+```
+____________________________________________________________
+Here is the user you have requested to view: 
+Username: jingwei Age: 19 Contact: 22384729 
 ____________________________________________________________
 ```
 
@@ -139,6 +157,23 @@ Total item(s) in database: 1
 ____________________________________________________________
 ```
 
+#### 3.3.3. ```view-item``` - View a specific item
+>View an item based on the itemId requested by the user
+
+Format: ```view-item /i [ITEM_ID]```
+
+Note:
+1. The itemId must be available (Present in item list)
+
+Example of usage: ```view-item /i 99995bb2```
+
+Expected outcome:
+```
+____________________________________________________________
+Here is the item you requested: 
+Status: [Available] ItemId: 99995bb2 Item: scale Category: SPORTS_EQUIPMENT Owner: jingwei PricePerDay: $1.0
+____________________________________________________________
+```
 
 ### 3.4. Transaction-related features
 #### 3.4.1. ```add-tx``` - Add a new transaction
@@ -169,7 +204,7 @@ Format: ```remove-tx /t [TRANSACTION_ID]```
 Note:
 1. You can use ```list-tx``` to get the transaction ID you want to delete
 
-Example of usage: ```remove-tx /t [TRANSACTION_ID]```
+Example of usage: ```remove-tx /t 80902c3b```
 
 Expected outcome:
 ```
@@ -181,6 +216,24 @@ ____________________________________________________________
 
 ```
 
+#### 3.4.3. ```view-tx``` - View a transaction
+>View the details of a transaction in the list
+
+Format: ```view-tx /t [TRANSACTION_ID]```
+
+Note:
+1. You can use ```list-tx``` to get the transaction ID you want to view
+
+Example of usage: ```remove-tx /t 4f7f7fe8```
+
+Expected outcome:
+```
+____________________________________________________________
+Here is the transaction you requested to view: 
+Status: [Returned] TransactionID: 4f7f7fe8 ItemName: weight ItemID: 5b727b2e BorrowerID: jingwei ReturnedDate: Sat, Oct 08 2022
+____________________________________________________________
+
+```
 
 ### 3.5. Exit Program
 
@@ -194,12 +247,15 @@ ____________________________________________________________
 | __*User-related features*__        |                                                                        |
 | Add a new user                     | add-user /n [USERNAME] /a [AGE] /c [CONTACT_NUMBER]                    |
 | Remove a user                      | remove-user /u [USERNAME]                                              |
+| View a user                        | view-user /u [USERNAME]                                              |
 | __*Item-related features*__        |                                                                        |
 | Add a new item                     | add-item /n [ITEM_NAME] /c [CATEGORY_INDEX] /p [PRICE] /o [USERNAME]   |
 | Remove an item                     | remove-item /i [ITEM_ID]                                               |
+| View an item                       | view-item /i [ITEM_ID]                                               |
 | __*Transaction-related features*__ |                                                                        |
 | Add a new transaction              | add-tx /i [ITEM_ID] /b [BORROWER_NAME] /d [DURATION] /c [CREATED_DATE] |
 | Remove a transaction               | remove-tx /t [TRANSACTION_ID]                                          |
+| View a transaction                 | view-tx /t [TRANSACTION_ID]                                          |
 | __*Others*__                       |                                                                        |
 | Get help                           | help                                                                   |
 | Exit program                       | bye                                                                    |
