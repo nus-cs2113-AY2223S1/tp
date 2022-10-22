@@ -75,8 +75,8 @@ public class Parser {
             default:
                 throw new UnknownCommandException();
             }
-        } catch (UnknownCommandException | DuplicateBuildException | UnlistedBuildException | IOException |
-                 BlankStringException e) {
+        } catch (UnknownCommandException | DuplicateBuildException | UnlistedBuildException | IOException
+                 | BlankStringException e) {
             System.out.println(e.getMessage());
             Ui.printLine();
         }

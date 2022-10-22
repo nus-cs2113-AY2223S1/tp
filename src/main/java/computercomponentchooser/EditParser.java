@@ -83,8 +83,8 @@ public class EditParser {
             default:
                 throw new UnknownCommandException();
             }
-        } catch (UnknownCommandException | ArrayIndexOutOfBoundsException | NullPointerException |
-                 BlankStringException e) {
+        } catch (UnknownCommandException | ArrayIndexOutOfBoundsException | NullPointerException
+                 | BlankStringException e) {
             System.out.println(e.getMessage());
             Ui.printLine();
         }
