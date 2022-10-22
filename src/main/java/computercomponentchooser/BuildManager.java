@@ -62,6 +62,7 @@ public class BuildManager {
         for (String name : builds.keySet()) {
             if (i == 0) {
                 System.out.println("Found Builds:");
+                i++;
             }
             if (name.contains(searchTerm)) {
                 System.out.println(name);

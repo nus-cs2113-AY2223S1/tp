@@ -1,0 +1,35 @@
+____________________________________________________________
+Info: 
+Build name: build2
+Total cost: 3500.0
+Total power: 245
+Compatibility: Not compatible
+
+Components list: 
+1. AMD RYZEN [$500] [80 W] [AM4] [3.7 GHz]
+2. Samsung EVO [$500] [35 W] [500 GB] [ssd]
+3. nvidia3090x [$2500] [130 W] [16 GB] [1395 MHz]
+________________________________________________________________________________________________________________________
+Info: 
+Build name: build1
+Total cost: 4000.0
+Total power: 375
+Compatibility: Not compatible
+
+Components list: 
+1. ASUS ROG [$600] [130 W] [lga1511] [Full ATX] [4 RAM slots] [4 GPU slots]
+2. Cooler Master [$400] [0 W] [full ATX] [2]
+3. intel 10990x [$1200] [80 W] [lga1511] [3.8 GHz]
+4. noctuna [$300] [60 W] [m4] [1000 RPM] [20 dB]
+5. Samsung EVO [$500] [35 W] [500 GB] [ssd]
+6. Samsung EVO 2 [$500] [35 W] [500 GB] [ssd]
+7. Samsung EVO 3 [$500] [35 W] [500 GB] [ssd]
+________________________________________________________________________________________________________________________
+Info: 
+Build name: testbuild
+Total cost: 0.0
+Total power: 0
+Compatibility: Not compatible
+
+Components list: 
+____________________________________________________________

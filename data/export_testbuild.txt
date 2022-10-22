@@ -1,0 +1,10 @@
+____________________________________________________________
+Info: 
+Build name: testbuild
+Total cost: 1200.0
+Total power: 80
+Compatibility: Not compatible
+
+Components list: 
+1. intel 10990x [$1200] [80 W] [lga1511] [3.8 GHz]
+____________________________________________________________
