@@ -25,6 +25,15 @@ public class Parser {
      */
     public static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
     public static final Pattern KEYWORDS_ARGS_FORMAT = Pattern.compile("(?<keywords>\\S+(?:\\s+\\S+)*)");
+
+    /**
+     * Parses user input into command for execution.
+     *
+     * @param input full user input string
+     * @param api api of the carpark data
+     * @param carparkList carpark List
+     * @return the command based on user input
+     */
     public Command parseCommand(String input, Api api, CarparkList carparkList) {
         this.api = api;
         this.carparkList = carparkList;
@@ -41,6 +50,8 @@ public class Parser {
             return prepareAuth(arguments);
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
+        case FavouriteCommand.COMMAND_WORD:
+            return prepareFavourite(arguments);
         case FindCommand.COMMAND_WORD:
             return prepareFind(arguments);
         case ListCommand.COMMAND_WORD:
@@ -54,15 +65,38 @@ public class Parser {
         }
     }
 
+    /**
+     * To prepare the arguments to be taken in for Auth Command.
+     *
+     * @param arguments arguments given by the user after the command word
+     * @return command to be carried out
+     */
     private Command prepareAuth(String arguments) {
         final String apiKey = arguments.trim();
         return new AuthCommand(api, apiKey);
     }
+
+    private Command prepareFavourite(String arguments) {
+        return new FavouriteCommand();
+    }
+
+    /**
+     * To prepare the arguments to be taken in for Find Command.
+     *
+     * @param arguments arguments given by the user after the command word
+     * @return command to be carried out
+     */
     private Command prepareFind(String arguments) {
         final String carparkID = arguments.trim();
         return new FindCommand(carparkID);
     }
 
+    /**
+     * To prepare the arguments to be taken in for Search Command.
+     *
+     * @param arguments arguments given by the user after the command word
+     * @return command to be carried out
+     */
     private Command prepareSearch(String arguments) {
         Sentence searchQuery = new Sentence(arguments);
         return new SearchCommand(carparkList, searchQuery);
@@ -84,82 +118,3 @@ public class Parser {
         return input.split("\\s+", 2);
     }
 }
-
-
-////-----------------------------------------------------------------------------------------------------------------------------------------------
-//    private static final String COMMAND_FIND = "find";
-//    private static final String COMMAND_SEARCH = "search";
-//    private static final String COMMAND_EXIT = "exit";
-//    private static final String COMMAND_UPDATE = "update";
-//    private static final String COMMAND_AUTH = "auth";
-//    private static final String COMMAND_LIST = "list";
-//    private static final String COMMAND_FAVOURITE = "favourite";
-//    private static final String COMMAND_UNFAVOURITE = "unfavourite";
-//
-//    /**
-//     * To convert the user input into commands for the program.
-//     *
-//     * @param input User input
-//     * @return Command that user wants to do.
-//     */
-//    public Command parseInputString(String input) throws NoCommandArgumentException, UnneededArgumentsException {
-//        Command command;
-//        boolean hasCommandArgumentFlag = hasCommandArguments(input);
-//        if (input.equals(COMMAND_EXIT)) {
-//            command = Command.EXIT;
-//        } else {
-//            String instruction = input.trim().split("\\s+")[0];
-//            switch (instruction) {
-//            case COMMAND_FIND:
-//                if (!hasCommandArgumentFlag) {
-//                    throw new NoCommandArgumentException("find");
-//                }
-//                command = Command.FIND;
-//                break;
-//            case COMMAND_UPDATE:
-//                if (hasCommandArgumentFlag) {
-//                    throw new UnneededArgumentsException("update");
-//                }
-//                command = Command.UPDATE;
-//                break;
-//            case COMMAND_AUTH:
-//                if (!hasCommandArgumentFlag) {
-//                    throw new NoCommandArgumentException("auth");
-//                }
-//                command = Command.AUTH;
-//                break;
-//            case COMMAND_LIST:
-//                if (hasCommandArgumentFlag) {
-//                    throw new UnneededArgumentsException("list");
-//                }
-//                command = Command.LIST;
-//                break;
-//            case COMMAND_SEARCH:
-//                if (!hasCommandArgumentFlag) {
-//                    throw new NoCommandArgumentException("search");
-//                }
-//                command = Command.SEARCH;
-//                break;
-//            case COMMAND_FAVOURITE:
-//                if (!hasCommandArgumentFlag) {
-//                    throw new NoCommandArgumentException("favourite");
-//                }
-//                command = Command.FAVOURITE;
-//                break;
-//            case COMMAND_UNFAVOURITE:
-//                if (!hasCommandArgumentFlag) {
-//                    throw new NoCommandArgumentException("unfavourite");
-//                }
-//                command = Command.UNFAVOURITE;
-//                break;
-//            default:
-//                command = Command.INVALID;
-//                break;
-//            }
-//        }
-//        return command;
-//    }
-//
-
-//
-//}

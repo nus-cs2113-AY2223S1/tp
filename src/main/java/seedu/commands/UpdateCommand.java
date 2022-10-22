@@ -5,6 +5,9 @@ import seedu.common.CommonFiles;
 import seedu.data.CarparkList;
 import seedu.exception.ParkingException;
 
+/**
+ * Represents a command to update the Json file according to the latest API.
+ */
 public class UpdateCommand extends Command {
     public static final String COMMAND_WORD = "update";
     private final Api api;
@@ -13,6 +16,12 @@ public class UpdateCommand extends Command {
         this.api = api;
     }
 
+    /**
+     * Updates the carpark list.
+     *
+     * @param api api that the programme has authenticated.
+     * @return updated carpark list
+     */
     private CarparkList updateCarparkList(Api api) {
         try {
             //fetch api

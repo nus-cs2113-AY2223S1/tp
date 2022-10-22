@@ -4,6 +4,10 @@ import seedu.data.CarparkFilteredList;
 import seedu.data.CarparkList;
 import seedu.parser.search.Sentence;
 
+/**
+ * Represents a command to search for the carparks that contain the searchQuery.
+ * Upon execution, it prints out all the carparks that contain the search keyword.
+ */
 public class SearchCommand extends Command {
 
     public static final String COMMAND_WORD = "search";

@@ -1,5 +1,9 @@
 package seedu.commands;
 
+/**
+ * Represents an invalid command.
+ * Upon execution, the user will see a message explaining that the input command is invalid.
+ */
 public class InvalidCommand extends Command {
 
     public final String showToUser;
