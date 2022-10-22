@@ -12,7 +12,8 @@ import java.util.List;
 
 public class Timetable {
     public static List<Module> listOfModules = new ArrayList<>();
-    public static LinkedHashMap<String, LinkedHashMap<String, String>> timetableDict = new LinkedHashMap<String, LinkedHashMap<String, String>>();
+    public static LinkedHashMap<String, LinkedHashMap<String, String>> timetableDict 
+                        = new LinkedHashMap<String, LinkedHashMap<String, String>>();
 
     private static void fillDay(LinkedHashMap<String, String> day) {
         int hourInt = 800;
@@ -27,29 +28,32 @@ public class Timetable {
             }
         }
     }
+    
     public static void initDict() {
         for (int i = 0; i < 5; i++) {
             switch (i) {
-                case 0: //Monday
-                    timetableDict.put("Monday", new LinkedHashMap<String, String>());
-                    fillDay(timetableDict.get("Monday"));
-                    break;
-                case 1: //Tuesday
-                    timetableDict.put("Tuesday", new LinkedHashMap<String, String>());
-                    fillDay(timetableDict.get("Tuesday"));
-                    break;
-                case 2: //Wednesday
-                    timetableDict.put("Wednesday", new LinkedHashMap<String, String>());
-                    fillDay(timetableDict.get("Wednesday"));
-                    break;
-                case 3: //Thursday
-                    timetableDict.put("Thursday", new LinkedHashMap<String, String>());
-                    fillDay(timetableDict.get("Thursday"));
-                    break;
-                case 4: //Friday
-                    timetableDict.put("Friday", new LinkedHashMap<String, String>());
-                    fillDay(timetableDict.get("Friday"));
-                    break;
+            case 0: //Monday
+                timetableDict.put("Monday", new LinkedHashMap<String, String>());
+                fillDay(timetableDict.get("Monday"));
+                break;
+            case 1: //Tuesday
+                timetableDict.put("Tuesday", new LinkedHashMap<String, String>());
+                fillDay(timetableDict.get("Tuesday"));
+                break;
+            case 2: //Wednesday
+                timetableDict.put("Wednesday", new LinkedHashMap<String, String>());
+                fillDay(timetableDict.get("Wednesday"));
+                break;
+            case 3: //Thursday
+                timetableDict.put("Thursday", new LinkedHashMap<String, String>());
+                fillDay(timetableDict.get("Thursday"));
+                break;
+            case 4: //Friday
+                timetableDict.put("Friday", new LinkedHashMap<String, String>());
+                fillDay(timetableDict.get("Friday"));
+                break;
+            default:
+                break;
             }
         }
     }
@@ -60,8 +64,8 @@ public class Timetable {
     public static void printDict() {
         for (String Day : timetableDict.keySet()) {
             System.out.println(Day + ":");
-            for (String Time : timetableDict.get(Day).keySet()) {
-                System.out.println(Time + ": " + timetableDict.get(Day).get(Time));
+            for (String time : timetableDict.get(Day).keySet()) {
+                System.out.println(time + ": " + timetableDict.get(Day).get(time));
             }
         }
     }
@@ -120,7 +124,8 @@ public class Timetable {
 
     public static String allocateModules() {
         int unallocated = 0;
-        String result = "Sorry, but we were unable to allocate timings for these modules due to timetable clashes:\n";
+        String result;
+        result = "Sorry, but we were unable to allocate timings for these modules due to timetable clashes:\n";
 
         for (Module module : listOfModules) {
             List<Lesson> attendingList = module.getAttending();
