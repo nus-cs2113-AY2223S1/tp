@@ -25,11 +25,19 @@ public class AppointmentList {
     }
 
     public static void removeAppointment(int appointmentId) {
+        boolean removeFlag = false;
         for (Appointment appointment : appointments) {
             if (appointment.appointmentId == appointmentId) {
                 appointments.remove(appointment);
+                System.out.print("Noted. I've removed this appointment:");
+                System.out.println("Pet " + appointment.petName + " | " + "Service " + appointment.service);
+                System.out.println("Now you have " + (appointments.size()) + " appointments in the list.");
+                removeFlag = true;
                 break;
             }
+        }
+        if (!removeFlag) {
+            System.out.println("Sorry, no corresponding appointment found.");
         }
     }
 
