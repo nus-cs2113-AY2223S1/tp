@@ -57,7 +57,7 @@ This sector describe how features are implemented, where readers can get insight
 
 Given below is an example usage scenario and how the command mechanism behaves at each step.
 
-Step 1: The user types in the command in the command line. The CommandParser class checks if the command is valid through the createCommand() method, and either sends an exception, or send the input to the AddUserCommand to be processed.
+Step 1: The user types in the command in the command line. The CommandParser class checks if the command is valid through the createCommand() method, and either sends an exception, or send the input to the AddUserCommand class to be processed.
 
 Step 2: The AddUserCommand command checks if the delimiters ('n', 'a', 'c') is present in the user input through the getArgsAddUserCmd() method. If not present, an exception will be thrown. The command also checks whether the input's final argument is valid through `isValidName()`, `isValidAge()`, `isValidContactNumber()` methods. An exception will also be thrown if the final argument does not satisfy the requirements (duplicate name, wrong range or format age, wrong contact length ,...).
 
@@ -74,7 +74,7 @@ The following sequence diagram shows how the add user operation works:
 
 Given below is an example usage scenario and how the command mechanism behaves at each step.
 
-Step 1: The user types in the command in the command line. The CommandParser class checks if the command is valid through the createCommand() method, and either sends an exception, or send the input to the RemoveUserCommand to be processed.
+Step 1: The user types in the command in the command line. The CommandParser class checks if the command is valid through the createCommand() method, and either sends an exception, or send the input to the RemoveUserCommand class to be processed.
 
 Step 2: The RemoveUserCommand command checks if the delimiters ('u') is present in the user input through the getArgsRemoveUserCmd() method. If not present, an exception will be thrown. The command also checks whether the input's final argument is valid (user can be deleted or not) by checking whether that user is currently borrowing or lending any item via `canDeleteUser()`, `isBorrowing()` and `isLending()` methods. An exception will also be thrown if the final argument does not satisfy the requirements (user not found, user is borrowing/lending).
 
@@ -88,6 +88,25 @@ Step 4: After deleting a user, a message will be displayed to the user via `Ui.d
 
 The following sequence diagram shows how the remove user operation works:
 ![removeUserSequence](images/RemoveUserSequence.png)
+
+#### View a user
+
+>This feature allows the user to view a specific user in the user list. Upon successfully sending the command, the Ui will display the details of the searched user
+
+Given below is an example usage scenario and how the command mechanism behaves at each step.
+
+Step 1: The user types in the command in the command line. The CommandParser class checks if the command is valid through the createCommand() method, and either sends an exception, or send the input to the ViewUserCommand class to be processed.
+
+Step 2: The ViewUserCommand command checks if the delimiters ('u') is present in the user input through the getArgsViewUserCmd() method. If not present, an exception will be thrown. The command also checks whether the input's final argument is valid (user can be found or not) by checking whether that user is currently in the user list via the `isValidUser` method. An exception will also be thrown if the final argument does not satisfy the requirements (user not found).
+
+Step 3: If all arguments are valid, then it finds the user in the userList by his/her name, which is unique:
+
+`userList.getUserById(userName);`
+
+Step 4: After finding the user, a message will be displayed to the user via `Ui.viewUserMessage()` method which show the specified user's details.
+
+The following sequence diagram shows how the remove user operation works:
+![viewUserSequence](images/ViewUserSequence.png)
 
 ### Item-related Features 
 
