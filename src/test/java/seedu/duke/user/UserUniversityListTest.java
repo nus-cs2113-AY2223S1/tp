@@ -1,10 +1,12 @@
 package seedu.duke.user;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.junit.jupiter.api.Test;
 import seedu.duke.exceptions.InvalidUserCommandException;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class UserUniversityListTest {
     UserUniversityListManager testManager = new UserUniversityListManager();
@@ -110,7 +112,10 @@ public class UserUniversityListTest {
         testManager.addFavourite("UCLA");
         testManager.addFavourite("UCB");
         assertEquals(2, testManager.getMyManager().size());
-        assertEquals(2, testManager.getMyFavourites().size());
+        for (Map.Entry<String, UserUniversityList> entry : testManager.getMyManager().entrySet()) {
+            UserUniversityList uni = entry.getValue();
+            assertTrue(uni.isFavourite());
+        }
     }
 
     @Test
@@ -129,9 +134,9 @@ public class UserUniversityListTest {
     void removeFavourite_CorrectInput_CorrectOutput() throws InvalidUserCommandException {
         testManager.createList("UCLA");
         testManager.addFavourite("UCLA");
-        assertEquals(1, testManager.getMyFavourites().size());
+        assertTrue(testManager.getMyManager().get("UCLA").isFavourite());
         testManager.deleteFavourite("UCLA");
-        assertEquals(0, testManager.getMyFavourites().size());
+        assertFalse(testManager.getMyManager().get("UCLA").isFavourite());
     }
 
     @Test
@@ -148,19 +153,21 @@ public class UserUniversityListTest {
     void addModule_Ucla_correctUpdatesOnFavourites() throws InvalidUserCommandException {
         testManager.createList("UCLA");
         testManager.addFavourite("UCLA");
+        HashMap<String, UserUniversityList> myManager = testManager.getMyManager();
         assertEquals(0, testManager.getMyManager().get("UCLA").getMyModules().getModules().size());
-        assertEquals(0, testManager.getMyFavourites().get("UCLA").getMyModules().getModules().size());
+        assertEquals(0, testManager.getMyFavourites(myManager).get("UCLA").getMyModules().getModules().size());
         UserModuleMapping mod = new UserModuleMapping("CS101", "Programming Intro", "CS1010",
                 "Programming Methodology", "4", "4", "UCLA", "USA");
         testManager.addModule("UCLA", mod);
         assertEquals(1, testManager.getMyManager().get("UCLA").getMyModules().getModules().size());
-        assertEquals(1, testManager.getMyFavourites().get("UCLA").getMyModules().getModules().size());
+        assertEquals(1, testManager.getMyFavourites(myManager).get("UCLA").getMyModules().getModules().size());
     }
 
     @Test
     void deleteModule_Ucla_correctUpdatesOnFavourites() throws InvalidUserCommandException {
         testManager.createList("UCLA");
         testManager.addFavourite("UCLA");
+        HashMap<String, UserUniversityList> myManager = testManager.getMyManager();
         UserModuleMapping mod = new UserModuleMapping("CS101", "Programming Intro", "CS1010",
                 "Programming Methodology", "4", "4", "UCLA", "USA");
         UserModuleMapping mod2 = new UserModuleMapping("CS201", "Programming Intro II", "CS2030",
@@ -168,10 +175,10 @@ public class UserUniversityListTest {
         testManager.addModule("UCLA", mod);
         testManager.addModule("UCLA", mod2);
         assertEquals(2, testManager.getMyManager().get("UCLA").getMyModules().getModules().size());
-        assertEquals(2, testManager.getMyFavourites().get("UCLA").getMyModules().getModules().size());
+        assertEquals(2, testManager.getMyFavourites(myManager).get("UCLA").getMyModules().getModules().size());
         testManager.deleteModule("UCLA", "CS201");
         assertEquals(1, testManager.getMyManager().get("UCLA").getMyModules().getModules().size());
-        assertEquals(1, testManager.getMyFavourites().get("UCLA").getMyModules().getModules().size());
+        assertEquals(1, testManager.getMyFavourites(myManager).get("UCLA").getMyModules().getModules().size());
         testManager.deleteFavourite("UCLA");
         testManager.addModule("UCLA", mod2);
         assertEquals(2, testManager.getMyManager().get("UCLA").getMyModules().getModules().size());
@@ -182,6 +189,7 @@ public class UserUniversityListTest {
         testManager.createList("UCLA");
         testManager.addFavourite("UCLA");
         testManager.deleteList("UCLA");
-        assertEquals(0, testManager.getMyFavourites().size());
+        HashMap<String, UserUniversityList> myManager = testManager.getMyManager();
+        assertEquals(0, testManager.getMyFavourites(myManager).size());
     }
 }
