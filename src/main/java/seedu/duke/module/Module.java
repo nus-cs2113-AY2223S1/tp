@@ -1,5 +1,6 @@
 package seedu.duke.module;
 
+import seedu.duke.Timetable;
 import seedu.duke.module.lessons.Lesson;
 import seedu.duke.data.AttendingManager;
 
@@ -197,9 +198,26 @@ public class Module {
         return null;
     }
 
-    public void replaceAttending(Lesson newLesson, Integer indexForLesson) {
-        attending.set(indexForLesson, newLesson);
+    public void replaceAttending(Lesson newLesson) {
+        int indexToSet = 0;
+        for (Lesson lesson : attending) {
+            if (lesson.getLessonType().equals(newLesson.getLessonType())) {
+                break;
+            }
+            indexToSet += 1;
+        }
+        if (indexToSet >= attending.size()) {
+            return;
+        }
+
+        //Setting attending for this module
+        attending.set(indexToSet, newLesson);
+
+        //Saving to AttendingData
         AttendingManager.setAttending(newLesson, moduleCode);
+
+        //Adding to timetableDict
+        Timetable.addToDict(newLesson, moduleCode);
     }
 
     private HashMap<String, ArrayList<Lesson>> classifyLessons(List<Lesson> lessons) {
