@@ -96,9 +96,23 @@ public class UserStorageParser {
             UserUniversityList uni = pair.getValue();
             output += "/" + uni.getUniversityName() + "%" + "\n";
             output += uni.getUniversityCountry()  + "%" + "\n";
+            output += addFavouritesToOutputString(uni);
             ArrayList<UserModuleMapping> modules = uni.getMyModules().getModules();
             output += addModulesToOutputString(modules);
         }
+        return output;
+    }
+
+    /**.
+     * Method to add 'T' if university is part of user's favourite list
+     * and 'F' if university is not part of user's favourite list
+     * @param uni university in user's university list
+     * @return string to add to output string, indicating if the university is part of user's favourite list
+     */
+    private static String addFavouritesToOutputString(UserUniversityList uni) {
+        String output = "";
+        output += uni.isFavourite() ? 'T' : 'F';
+        output += "%" + "\n";
         return output;
     }
 
@@ -152,16 +166,35 @@ public class UserStorageParser {
             throws InvalidUserStorageFileException {
         for (String uni: unis) {
             String[] items = splitLineInFileContent(uni);
+            if (items.length < 3) {
+                throw new InvalidUserStorageFileException("Invalid file format");
+            }
             String puName = items[0];
             String puCountry = items[1];
-            UserUniversityList uniList = new UserUniversityList(puName);
+            String isFavourite = items[2];
+            UserUniversityList newUni = new UserUniversityList(puName);
             UserModuleMappingList moduleList = new UserModuleMappingList();
             getModuleInfoFromString(items, moduleList, puCountry);
-            uniList.setMyModules(moduleList);
-            myManager.put(puName, uniList);
+            newUni.setMyModules(moduleList);
+            setFavourite(newUni, isFavourite);
+            myManager.put(puName, newUni);
         }
     }
 
+    /**.
+     * Method to indicate in UserUniversityList that this particular university is part of
+     * user's favourite list previously
+     * @param newUni university that is part of user's university list
+     * @param isFavourite 'T' if university is part of user's favourite list,
+     *                    'F' otherwise
+     */
+    private static void setFavourite(UserUniversityList newUni, String isFavourite) {
+        if (isFavourite.equals("T")) {
+            newUni.setFavourite(true);
+        } else {
+            newUni.setFavourite(false);
+        }
+    }
     /**.
      * Method to split file content by line, using regex "%"
      * @param uni string containing PU information, separated by "%"
@@ -180,7 +213,7 @@ public class UserStorageParser {
      */
     private static void getModuleInfoFromString(String[] items, UserModuleMappingList moduleList, String puCountry)
             throws InvalidUserStorageFileException {
-        for (int i = 2; i < items.length; ++i) {
+        for (int i = 3; i < items.length; ++i) {
             assert items.length > 1 : "This university has at least one module saved";
             String[] details = splitModuleInformationInFileContent(items[i]);
             if (!isValidFormat(details)) {
