@@ -191,12 +191,20 @@ public class ConsoleInterface {
         String expenseStr = "";
         expenseStr += "Name            : " + expense.getName() + "\n";
         expenseStr += "Date and Time   : " + expense.getDateTime().format(dateTimeFormat) + "\n";
-        expenseStr += "Description     : " + expense.getDescription() + "\n";
+        if (expense.getDescription() != null) {
+            expenseStr += "Description     : " + expense.getDescription() + "\n";
+        }
         expenseStr += "Amount          : " + expense.getAmount() + "\n";
-        expenseStr += "Category        : " + expense.getCategory() + "\n";
-        expenseStr += "Remarks         : " + expense.getRemarks() + "\n";
+        if (expense.getCategory() != null) {
+            expenseStr += "Category        : " + expense.getCategory() + "\n";
+        }
+        if (expense.getRemarks() != null) {
+            expenseStr += "Remarks         : " + expense.getRemarks() + "\n";
+        }
         expenseStr += "Currency        : " + expense.getCurrency() + "\n";
-        expenseStr += "Mode of Payment : " + expense.getModeOfPayment();
+        if (expense.getModeOfPayment() != null) {
+            expenseStr += "Mode of Payment : " + expense.getModeOfPayment();
+        }
 
         return expenseStr;
     }
@@ -215,7 +223,9 @@ public class ConsoleInterface {
         String targetStr = "";
         targetStr += "Name          : " + target.getName() + "\n";
         targetStr += "Date and Time : " + target.getDateTime().format(dateTimeFormat) + "\n";
-        targetStr += "Description   : " + target.getDescription() + "\n";
+        if (target.getDescription() != null) {
+            targetStr += "Description   : " + target.getDescription() + "\n";
+        }
         targetStr += "Amount        : " + target.getAmount() + "\n";
         targetStr += "Current Amount: " + target.getCurrentAmount();
 
@@ -236,7 +246,9 @@ public class ConsoleInterface {
         String incomeStr = "";
         incomeStr += "Name          : " + income.getName() + "\n";
         incomeStr += "Date and Time : " + income.getDateTime().format(dateTimeFormat) + "\n";
-        incomeStr += "Description   : " + income.getDescription() + "\n";
+        if (income.getDescription() != null) {
+            incomeStr += "Description   : " + income.getDescription() + "\n";
+        }
         incomeStr += "Amount        : " + income.getAmount();
 
         return incomeStr;
@@ -252,9 +264,13 @@ public class ConsoleInterface {
         String recurringPaymentStr = "";
         recurringPaymentStr += "Name            : " + recurringPayment.getName() + "\n";
         recurringPaymentStr += "Interval (Days) : " + recurringPayment.getInterval() + "\n";
-        recurringPaymentStr += "Description     : " + recurringPayment.getDescription() + "\n";
+        if (recurringPayment.getDescription() != null) {
+            recurringPaymentStr += "Description     : " + recurringPayment.getDescription() + "\n";
+        }
         recurringPaymentStr += "Amount          : " + recurringPayment.getAmount() + "\n";
-        recurringPaymentStr += "Category        : " + recurringPayment.getCategory() + "\n";
+        if (recurringPayment.getCategory() != null) {
+            recurringPaymentStr += "Category        : " + recurringPayment.getCategory() + "\n";
+        }
         recurringPaymentStr += "Currency        : " + recurringPayment.getCurrency();
 
         return recurringPaymentStr;
