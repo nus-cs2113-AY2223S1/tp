@@ -105,7 +105,7 @@ Step 3: If all arguments are valid, then it finds the user in the userList by hi
 
 Step 4: After finding the user, a message will be displayed to the user via `Ui.viewUserMessage()` method which show the specified user's details.
 
-The following sequence diagram shows how the remove user operation works:
+The following sequence diagram shows how the view user operation works:
 ![viewUserSequence](images/ViewUserSequence.png)
 
 ### Item-related Features 
@@ -160,7 +160,7 @@ Step 3: If all arguments are valid, then it finds the item in the itemList by it
 
 Step 4: After finding the user, a message will be displayed to the user via `Ui.viewItemMessage()` method which show the specified user's details.
 
-The following sequence diagram shows how the remove user operation works:
+The following sequence diagram shows how the view item operation works:
 ![viewItemSequence](images/ViewItemSequence.png)
 
 #### Sorting items
@@ -214,6 +214,25 @@ Step 4: After deleting a transaction, a message will be displayed to the user vi
 
 The following sequence diagram shows how the remove transaction operation works:
 ![removeTransactionSequence](images/RemoveTransactionSequence.png)
+
+#### View a transaction
+
+>This feature allows the user to view a specific transaction in the transaction list. Upon successfully sending the command, the Ui will display the details of the searched transaction
+
+Given below is an example usage scenario and how the command mechanism behaves at each step.
+
+Step 1: The user types in the command in the command line. The CommandParser class checks if the command is valid through the createCommand() method, and either sends an exception, or send the input to the ViewTransactionCommand class to be processed.
+
+Step 2: The ViewTransactionCommand command checks if the delimiters ('u') is present in the user input through the getArgsViewTransactionCmd() method. If not present, an exception will be thrown. The command also checks whether the input's final argument is valid (transaction can be found or not) by checking whether that transaction is currently in the transaction list via the `isValidTransaction` method. An exception will also be thrown if the final argument does not satisfy the requirements (transaction not found).
+
+Step 3: If all arguments are valid, then it finds the transaction in the transactionList by it's transactionId, which is unique:
+
+`transactionList.getTransactionById(transactionId)`
+
+Step 4: After finding the transaction, a message will be displayed to the user via `Ui.viewTransactionMessage()` method which show the specified transaction's details.
+
+The following sequence diagram shows how the view transaction operation works:
+![viewTransactionSequence](images/ViewTransactionSequence.png)
 
 #### View Transactions By Status
 > The viewTransactionsByStatus feature is facilitated by the TransactionList class. It extends the command class to add an additional command for users to view the history of finished or ongoing transactions for recording purposes. The feature implements the following commands:
