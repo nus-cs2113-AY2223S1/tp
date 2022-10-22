@@ -223,7 +223,7 @@ public class Build {
         return false;
     }
 
-    public String getCompability() {
+    public String getCompatibility() {
         if (checkPowerSupply() && checkSocket() && checkGpuSlot() && checkMemorySlot() && checkFormFactor()
                 && checkExpansionSlots()) {
             return "Compatible";
@@ -237,7 +237,7 @@ public class Build {
         sb.append("Build name: ").append(name).append(System.lineSeparator());
         sb.append("Total cost: ").append(getTotalCost()).append(System.lineSeparator());
         sb.append("Total power: ").append(getTotalPower()).append(System.lineSeparator());
-        sb.append("Compatibility: ").append(getCompability()).append(System.lineSeparator());
+        sb.append("Compatibility: ").append(getCompatibility()).append(System.lineSeparator());
         return sb.toString();
     }
 
