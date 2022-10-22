@@ -7,13 +7,12 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 import static seedu.duke.common.DateFormats.DATE_OUTPUT_PATTERN;
+import static seedu.duke.common.InfoMessages.INFO_CURRENT_BUDGET;
 import static seedu.duke.common.InfoMessages.INFO_DIVIDER;
 import static seedu.duke.common.InfoMessages.INFO_GREET;
 import static seedu.duke.common.InfoMessages.INFO_HELP_GREET;
 import static seedu.duke.common.InfoMessages.INFO_HELP_PROMPT;
-import static seedu.duke.common.InfoMessages.INFO_CURRENT_BUDGET;
 import static seedu.duke.common.InfoMessages.INFO_REMAINING_BUDGET;
-import static seedu.duke.common.InfoMessages.INFO_TODAY_DATE;
 
 public class Ui {
     //@@author chydarren
@@ -101,6 +100,17 @@ public class Ui {
      */
     public static void showList(String list, String message) {
         printMessages(message, list);
+    }
+
+    /**
+     * Prepares the stats list messages to be displayed to the user.
+     *
+     * @param list    A string containing the formatted transaction list.
+     * @param message A message that complements with the transactions list.
+     */
+    public static void showStatsList(String list, String message, String incomeMessage,
+                                    String expenseMessage, String savingsMessage) {
+        printMessages(message, list, incomeMessage, expenseMessage, savingsMessage);
     }
 
     /**

@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 
 import static seedu.duke.common.Constants.MAX_AMOUNT_VALUE;
 import static seedu.duke.common.Constants.MAX_TRANSACTIONS_COUNT;
+import static seedu.duke.common.InfoMessages.INFO_STATS_CATEGORIES_HEADER;
 
 /**
  * Represents a list of transactions added by the user into the application.
@@ -246,14 +247,31 @@ public class TransactionList {
         return categoricalSavingsList;
     }
 
+    //@@author paullow_se
 
-    public String listTimeStats(ArrayList<Transaction> timeTransactions, int year, int month) {
+    /**
+     * Produce Categorical saving list for timeTransactions.
+     *
+     * @param timeTransactions  An instance of the TransactionList class.
+     * @param year              A specified year
+     * @param month             A specified month
+     * @param period            A specified period of time
+     * @param number            A specified number of periods
+     * @return String output of transactions for the time period
+     */
+    public String listTimeStats(ArrayList<Transaction> timeTransactions, int year, int month, String period,
+                                int number) {
         String timeSavingsList = "";
 
-        if (month == -1) {
-            timeSavingsList += "Year: " + year + LINE_SEPARATOR;
+        if (period != null && number != -1) {
+            timeSavingsList += "The past " + number + " " + period + ": " + LINE_SEPARATOR + LINE_SEPARATOR
+                    + INFO_STATS_CATEGORIES_HEADER + LINE_SEPARATOR;
+        } else if (month == -1) {
+            timeSavingsList += "Year: " + year + LINE_SEPARATOR + LINE_SEPARATOR + INFO_STATS_CATEGORIES_HEADER
+                    + LINE_SEPARATOR;
         } else {
-            timeSavingsList += "Year: " + year + ", Month: " + month + LINE_SEPARATOR;
+            timeSavingsList += "Year: " + year + ", Month: " + month
+                    + LINE_SEPARATOR + LINE_SEPARATOR + INFO_STATS_CATEGORIES_HEADER + LINE_SEPARATOR;
         }
 
         // Formats every entry in the hashmap into a categorical savings list
@@ -263,6 +281,33 @@ public class TransactionList {
         }
 
         return timeSavingsList;
+    }
+
+    //@@author paullow_se
+    /**
+     * Produce Expense, Income and Savings statistics.
+     *
+     * @param timeTransactions  An instance of the TransactionList class.
+     * @return                  An amount arraylist of Expense and Income
+     */
+    public ArrayList<String> processTimeSummaryStats(ArrayList<Transaction> timeTransactions) {
+        int timeExpense = 0;
+        int timeIncome = 0;
+        for (Transaction entry : timeTransactions) {
+            String category = entry.getType();
+            if (category == "expense") {
+                timeExpense += entry.getAmount();
+            } else if (category == "income") {
+                timeIncome += entry.getAmount();
+            }
+        }
+        int timeSavings = timeIncome - timeExpense;
+
+        ArrayList<String> amounts = new ArrayList<String>();
+        amounts.add(Integer.toString(timeIncome));
+        amounts.add(Integer.toString(timeExpense));
+        amounts.add(Integer.toString(timeSavings));
+        return amounts;
     }
 
     /**
