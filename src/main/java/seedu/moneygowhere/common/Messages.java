@@ -50,6 +50,9 @@ public class Messages {
     public static final String LOCAL_STORAGE_ERROR_CORRUPTED_OR_EMPTY_LOAD_FILE = ""
             + "The load file is empty or corrupted...\n"
             + "Please ensure the load file is not modified if you have a load file.";
+    public static final String LOCAL_STORAGE_ERROR_INVALID_CHARACTER_IN_SAVE_DATA = ""
+            + "There is an invalid character in the inputs\n"
+            + "Failed to save data.";
     public static final String LOCAL_STORAGE_EXPENSE_ERROR_IN_LOAD_FILE = ""
             + "There is an error in load file found...\n"
             + "Please ensure the file is the correct load file without modifications to it.\n"

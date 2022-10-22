@@ -4,6 +4,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.w3c.dom.DOMException;
 import org.xml.sax.SAXException;
 import seedu.moneygowhere.commands.ConsoleCommandSortExpense;
 import seedu.moneygowhere.common.Messages;
@@ -27,7 +28,6 @@ import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
@@ -118,18 +118,22 @@ public class LocalStorage {
             ConsoleCommandSortExpense defaultSortCommandSetting = loadSortCommandSetting(sortConfig);
             hasParsedSortconfig = true;
             NodeList expenseList = doc.getElementsByTagName(XML_EXPENSE_ELEMENT);
-            for (itr = 0; itr < expenseList.getLength(); itr++) {
-                Node node = expenseList.item(itr);
-                loadExpense = createExpense(node);
-                expenseManager.addExpense(loadExpense);
+            if(expenseList.getLength() > 0) {
+                for (itr = 0; itr < expenseList.getLength(); itr++) {
+                    Node node = expenseList.item(itr);
+                    loadExpense = createExpense(node);
+                    expenseManager.addExpense(loadExpense);
+                }
             }
             expenseManager.updateSortExpenses(defaultSortCommandSetting);
             hasParsedExpenses = true;
             NodeList recurringPaymentList = doc.getElementsByTagName(XML_RECURRING_PAYMENT_ELEMENT);
-            for (itr = 0; itr < expenseList.getLength(); itr++) {
-                Node node = recurringPaymentList.item(itr);
-                loadRecurringPayment = createRecurringPayment(node);
-                recurringPaymentManager.addRecurringPayment(loadRecurringPayment);
+            if(recurringPaymentList.getLength() > 0) {
+                for (itr = 0; itr < expenseList.getLength(); itr++) {
+                    Node node = recurringPaymentList.item(itr);
+                    loadRecurringPayment = createRecurringPayment(node);
+                    recurringPaymentManager.addRecurringPayment(loadRecurringPayment);
+                }
             }
             System.out.println(Messages.LOCAL_STORAGE_LOAD_SUCCESS);
         } catch (FileNotFoundException e) {
@@ -266,6 +270,9 @@ public class LocalStorage {
 
         String modeOfPayment = element.getElementsByTagName(XML_EXPENSE_MODE_OF_PAYMENT_ELEMENT)
                 .item(0).getTextContent();
+        if (modeOfPayment.isEmpty() || modeOfPayment.trim().isEmpty()) {
+            modeOfPayment = null;
+        }
         return new Expense(name, dateTime, description, amount, category, remark, currency, modeOfPayment);
     }
 
@@ -416,6 +423,8 @@ public class LocalStorage {
             writeXml(doc);
         } catch (ParserConfigurationException | TransformerException e) {
             System.out.println(Messages.LOCAL_STORAGE_ERROR_WRITING_DATA);
+        } catch (DOMException e) {
+            System.out.println(Messages.LOCAL_STORAGE_ERROR_INVALID_CHARACTER_IN_SAVE_DATA);
         }
     }
 
