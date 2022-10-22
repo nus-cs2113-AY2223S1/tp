@@ -1,5 +1,7 @@
 Build Name, Component Name, Price, Power
 build2,AMD RYZEN,500,80,AM4,3.7
+build2,Samsung EVO,500,35,500,ssd
+build2,nvidia3090x,2500,130,16,1395
 build1,ASUS ROG,600,130,lga1511,Full ATX,4,4
 build1,Cooler Master,400,0,full ATX,2
 build1,intel 10990x,1200,80,lga1511,3.8
