@@ -22,9 +22,9 @@ public class LocalStorageConfigurations {
     public static final String XML_TARGET_DATETIME_ELEMENT = "DateTime";
     public static final String XML_TARGET_DESCRIPTION_ELEMENT = "Description";
     public static final String XML_TARGET_AMOUNT_ELEMENT = "Amount";
-    public static final String XML_TARGET_CURRENT_AMOUNT_ELEMENT = "Current Amount";
+    public static final String XML_TARGET_CURRENT_AMOUNT_ELEMENT = "Current_Amount";
     public static final String XML_TARGET_CURRENCY_ATTRIBUTE = "Currency";
-    public static final String XML_RECURRING_PAYMENT_ELEMENT = "Recurring Payment";
+    public static final String XML_RECURRING_PAYMENT_ELEMENT = "Recurring_Payment";
     public static final String XML_RECURRING_PAYMENT_ID_ATTRIBUTE = "Id";
     public static final String XML_RECURRING_PAYMENT_NAME_ELEMENT = "Name";
     public static final String XML_RECURRING_PAYMENT_INTERVAL_ELEMENT = "Interval";
