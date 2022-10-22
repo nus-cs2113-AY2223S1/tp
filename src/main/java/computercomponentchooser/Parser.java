@@ -1,10 +1,10 @@
 package computercomponentchooser;
 
-import computercomponentchooser.exceptions.UnknownCommandException;
 import computercomponentchooser.exceptions.DuplicateBuildException;
+import computercomponentchooser.exceptions.UnknownCommandException;
 import computercomponentchooser.exceptions.UnlistedBuildException;
-import computercomponentchooser.export.ExportText;
 import computercomponentchooser.export.ExportCsv;
+import computercomponentchooser.export.ExportText;
 
 import java.io.IOException;
 
@@ -65,6 +65,9 @@ public class Parser {
             case "exportCSV":
                 mainParseExportCsv();
                 break;
+            case "filter":
+                mainParseFilter(line);
+                break;
             default:
                 throw new UnknownCommandException();
             }
@@ -72,6 +75,19 @@ public class Parser {
             System.out.println(e.getMessage());
             Ui.printLine();
         }
+    }
+
+    private void mainParseFilter(String line) {
+        String filterType = EditParser.getParameter(line, 1);
+        String lowestNumber = "";
+        String highestNumber = "";
+        if (!filterType.equals("compatibility")) {
+            lowestNumber = EditParser.getParameter(line, 2);
+            highestNumber = EditParser.getParameter(line, 3);
+        }
+        Ui.printLine();
+        buildManager.filterBuilds(filterType, lowestNumber, highestNumber);
+        Ui.printLine();
     }
 
     private void mainParseAdd(String line) throws DuplicateBuildException {
