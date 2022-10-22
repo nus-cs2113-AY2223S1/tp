@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import java.io.IOException;
+import java.sql.Time;
 import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -41,6 +42,7 @@ public class Duke {
         String currentSemester = getSemester();
         boolean isRunning = !Objects.equals(currentSemester, EXIT_FLAG);
 
+        Timetable.initDict();
         DataManager.initDataFile(currentSemester);
         DataManager.loadTimetableFromDataFile();
 
