@@ -2,7 +2,7 @@
 hide footbox
 
 Actor User
-"User" -> ":Duke": "View-user..."
+"User" -> ":Duke": "view-user..."
 activate ":Duke"
 ":Duke" -> ":CommandParser": createCommand()
 activate ":CommandParser"
