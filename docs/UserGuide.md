@@ -268,6 +268,20 @@ view
 Your timetable is empty. Please select lessons first before viewing.
 --------------------------------------
 ```
+### Feature X: `list`
+
+Displays list of all selected modules and slots.
+
+Format: `list`
+
+Example of usage:
+
+`list`
+
+Sample Output:
+```
+
+```
 
 ### Select a timetable slot: `select`
 

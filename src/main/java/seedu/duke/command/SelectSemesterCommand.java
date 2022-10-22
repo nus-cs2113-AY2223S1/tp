@@ -12,9 +12,10 @@ public class SelectSemesterCommand extends Command {
     public static final String FORMAT = "semester SEMESTER_SELECTED";
     public static final String HELP_DISPLAY = COMMAND_WORD
             + ": select semester to plan for and organise!\n"
-            + "Usage:\t"
-            + FORMAT;
-    private static int updatedSemester;
+            + "\tUsage:\t"
+            + FORMAT
+            + System.lineSeparator();
+    private int updatedSemester;
 
     private Logger logger;
 
@@ -31,13 +32,11 @@ public class SelectSemesterCommand extends Command {
     public void execute(State state, Ui ui, Storage storage) {
         assert state != null : "List of lessons should not be null";
         logger = Logger.getLogger(SUBSYSTEM_NAME);
-        logger.log(Level.INFO, "Loading select semester command");
+        logger.log(Level.FINE, "Loading select semester command");
 
         assert updatedSemester >= 1 && updatedSemester <= 4 : "semester selected should be in a valid range";
         logger = Logger.getLogger(SUBSYSTEM_NAME);
-        logger.log(Level.INFO, "Updating semester currently being planned");
-
-
+        logger.log(Level.FINE, "Updating semester currently being planned");
 
         state.setSemester(updatedSemester);
         ui.addMessage(getExecutionMessage());

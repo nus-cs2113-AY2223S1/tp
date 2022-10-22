@@ -22,8 +22,9 @@ public class AddModuleCommand extends Command {
     public static final String FORMAT = "add MODULE_CODE";
     public static final String HELP_DISPLAY = COMMAND_WORD
             + ": add a module into your planner!\n"
-            + "Usage:\t"
-            + FORMAT;
+            + "\tUsage:\t"
+            + FORMAT
+            + System.lineSeparator();
 
     public AddModuleCommand(String[] input) {
         super(input);

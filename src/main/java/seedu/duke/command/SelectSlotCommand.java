@@ -16,8 +16,9 @@ public class SelectSlotCommand extends Command {
     public static final String FORMAT = "select /module MODULE_CODE /type LESSON_TYPE /code CLASS_NO";
     public static final String HELP_DISPLAY = COMMAND_WORD
             + ": select slot for modules!\n"
-            + "Usage:\t"
-            + FORMAT;
+            + "\tUsage:\t"
+            + FORMAT
+            + System.lineSeparator();
     private Map<String, String> params;
     private String moduleCode;
     private LessonType lessonType;
