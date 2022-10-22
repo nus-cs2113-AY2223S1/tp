@@ -12,4 +12,6 @@ public class CommandTag {
     public static final String COMMAND_TAG_STATISTICS_TYPE = "s/";
     public static final String COMMAND_TAG_STATS_MONTH = "m/";
     public static final String COMMAND_TAG_STATS_YEAR = "y/";
+    public static final String COMMAND_TAG_STATS_NUMBER = "n/";
+    public static final String COMMAND_TAG_STATS_PERIOD = "p/";
 }
