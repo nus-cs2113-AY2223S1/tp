@@ -637,6 +637,9 @@ public class ConsoleInterface {
         printInformationalMessage(convertRecurringPaymentToConsoleString(recurringPayment));
         printBlankLine();
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_ADD_RECURRING_PAYMENT_SUCCESS);
+
+        localStorage.saveToFile(expenseManager.getExpenses(), expenseManager.getSortCommandSetting(),
+                recurringPaymentManager.getRecurringPayments());
     }
 
     private void viewRecurringPayment() {
@@ -694,6 +697,9 @@ public class ConsoleInterface {
         }
 
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_DELETE_RECURRING_PAYMENT_SUCCESS);
+
+        localStorage.saveToFile(expenseManager.getExpenses(), expenseManager.getSortCommandSetting(),
+                recurringPaymentManager.getRecurringPayments());
     }
 
     private void runCommandEditRecurringPayment(
