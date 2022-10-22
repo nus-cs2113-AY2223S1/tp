@@ -1,9 +1,9 @@
 package seedu.duke.exceptions;
 
-public class InvalidDatabaseLineException extends Exception {
+public class LessonNotFoundException extends Exception {
     private String message;
 
-    public InvalidDatabaseLineException(String message) {
+    public LessonNotFoundException(String message) {
         this.message = message;
     }
 

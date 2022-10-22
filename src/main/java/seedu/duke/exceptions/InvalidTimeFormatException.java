@@ -1,9 +1,9 @@
 package seedu.duke.exceptions;
 
-public class InvalidDatabaseLineException extends Exception {
+public class InvalidTimeFormatException extends Exception {
     private String message;
 
-    public InvalidDatabaseLineException(String message) {
+    public InvalidTimeFormatException(String message) {
         this.message = message;
     }
 

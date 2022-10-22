@@ -1,9 +1,9 @@
 package seedu.duke.exceptions;
 
-public class InvalidDatabaseLineException extends Exception {
+public class TimetableClashException extends Exception {
     private String message;
 
-    public InvalidDatabaseLineException(String message) {
+    public TimetableClashException(String message) {
         this.message = message;
     }
 

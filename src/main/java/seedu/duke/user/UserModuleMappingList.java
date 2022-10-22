@@ -49,7 +49,7 @@ public class UserModuleMappingList {
         }
     }
 
-    public void addModule(UserModuleMapping input, boolean fromDatabase) {
+    public void addModule(UserModuleMapping input, boolean isFromDatabase) {
         modules.add(input);
     }
 

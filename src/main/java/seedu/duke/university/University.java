@@ -1,13 +1,23 @@
 package seedu.duke.university;
 
+import seedu.duke.exceptions.InvalidUniversityException;
+
 public class University {
     private String name;
     private String country;
 
-    public University(String name, String country) {
-        assert name.length() > 0 : "Name cannot be empty";
-        assert country.length() > 0 : "Country cannot be empty";
-        
+    /**
+     * Constructor for new university.
+     * 
+     * @param name    Name of new university
+     * @param country Country of new university
+     * @throws InvalidUniversityException If any constructor parameters are empty
+     */
+    public University(String name, String country) throws InvalidUniversityException {
+        if (!isValidUniversity(name, country)) {
+            throw new InvalidUniversityException("Invalid University: " + name + " " + country);
+        }
+
         setName(name);
         setCountry(country);
     }
@@ -31,5 +41,24 @@ public class University {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    /**
+     * Checks if university is valid.
+     * 
+     * @param name    Name of new university
+     * @param country Country of new university
+     * @return True if no empty parameters, false otherwise
+     */
+    private boolean isValidUniversity(String name, String country) {
+        if (name.length() == 0) {
+            return false;
+        }
+
+        if (country.length() == 0) {
+            return false;
+        }
+
+        return true;
     }
 }

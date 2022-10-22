@@ -1,9 +1,9 @@
 package seedu.duke.exceptions;
 
-public class InvalidDatabaseLineException extends Exception {
+public class TimetableNotFoundException extends Exception {
     private String message;
 
-    public InvalidDatabaseLineException(String message) {
+    public TimetableNotFoundException(String message) {
         this.message = message;
     }
 

@@ -1,0 +1,29 @@
+@startuml
+
+activate DatabaseStorage
+activate DatabaseParser
+activate Database
+
+-> DatabaseStorage : loadDatabase()
+
+DatabaseStorage -> DatabaseStorage : readFile(DATABASE_FILE_PATH)
+activate DatabaseStorage
+
+loop hasNextLine
+    DatabaseStorage -> DatabaseStorage : readDatabaseLine(line)
+    activate DatabaseStorage
+    DatabaseStorage -> DatabaseParser : parseDatabaseLine(line)
+    DatabaseParser --> DatabaseStorage : lineData : String[]
+
+    DatabaseStorage -> Database : addUniversity(newUniversity)
+    DatabaseStorage -> Database : addModuleMapping(newModuleMapping)
+    deactivate DatabaseStorage
+end
+
+deactivate DatabaseStorage
+
+deactivate DatabaseStorage
+deactivate DatabaseParser
+deactivate Database
+
+@enduml

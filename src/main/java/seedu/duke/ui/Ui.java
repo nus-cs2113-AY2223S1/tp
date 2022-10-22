@@ -1,15 +1,17 @@
 package seedu.duke.ui;
 
 import java.util.ArrayDeque;
+import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.Map;
 
 import seedu.duke.module.ModuleMapping;
+import seedu.duke.timetable.Lesson;
 import seedu.duke.university.University;
 import seedu.duke.user.UserModuleMapping;
 import seedu.duke.user.UserModuleMappingList;
 import seedu.duke.user.UserUniversityList;
-
-import java.util.Scanner;
 
 public class Ui {
     public static final String LINE = "_____________________________________________________________________________\n";
@@ -25,8 +27,7 @@ public class Ui {
     public static final String SPACING = "     ";
 
     /**
-     * Greets the user with an introductory message when the program is first
-     * started.
+     * Greets the user with an introductory message when the program is first started.
      */
     public static String greetUser() {
         String greeting = LOGO
@@ -39,8 +40,7 @@ public class Ui {
     /**
      * Reads the line of input that the user entered to the program.
      *
-     * @return The full user input to the program, with leading and trailing
-     *         whitespaces removed.
+     * @return The full user input to the program with leading and trailing whitespaces removed.
      */
     public static String getUserInput() {
         Scanner sc = new Scanner(System.in);
@@ -51,66 +51,84 @@ public class Ui {
      * Bids goodbye to the user when the user decides to terminate the program.
      */
     public static String sayByeToUser() {
-        String message = LINE
+        String goodbyeMessage = LINE
                 + "Goodbye. Hope to see you again soon!\n"
                 + LINE;
-        return message;
+        return goodbyeMessage;
     }
 
     /**
-     * Informs the user on the valid commands that have to be passed into the
-     * program.
-     * 
-     * @return Formatted string with instructions on the commands and their
-     *         associated format and purpose.
+     * Informs the user about valid commands that the program recognises and the purpose they serve.
+     * Serves as a reminder for users to input commands in their corresponding eligible formats.
+     *
+     * @return Formatted string with instructions on the commands and their associated format and purpose.
      */
     public static String printCommands() {
         String message = LINE
-                + SPACING + "COMMAND   " + "FORMAT                                  " + "PURPOSE\n"
-                + SPACING + "--------  " + "--------------------------------------  " + "-------\n"
-                + SPACING + "create    " + "/create u/UNIVERSITY                    "
+                + SPACING + "COMMAND   " + "FORMAT                                                " + "PURPOSE\n"
+                + SPACING + "--------  " + "--------------------------------------                " + "-------\n"
+                + SPACING + "help      " + "/help                                                 "
+                + "Displays eligible user commands for the program\n"
+                + SPACING + "create    " + "/create u/UNIVERSITY_NAME_IN_UNDERSCORES              "
                 + "Creates an empty module list for the input university\n"
-                + SPACING + "exit      " + "/exit\n"
-                + SPACING + "view      " + "/view LISTS                             "
+                + SPACING + "favourite " + "/favourite add/UNIVERSITY_NAME_IN_UNDERSCORES         "
+                + "Adds a university list to the user's favourites\n"
+                + SPACING + "favourite " + "/favourite del/UNIVERSITY_NAME_IN_UNDERSCORES         "
+                + "Deletes a university list from the user's favourites\n"
+                + SPACING + "favourite " + "/favourite view/                                      "
+                + "View the user's favourite university lists\n"
+                + SPACING + "exit      " + "/exit                                                 "
+                + "Terminate the program\n"
+                + SPACING + "view      " + "/view LISTS                                           "
                 + "Displays all existing university lists that have been created by the user\n"
-                + SPACING + "view      " + "/view u/UNIVERSITY                      "
-                + "Displays all modules that have been added to the user's input university's list in the format\n"
-                + "                                                       "
+                + SPACING + "view      " + "/view u/UNIVERSITY_NAME_IN_UNDERSCORES                "
+                + "Displays all the modules that have been added to the user's input university's list in the format:\n"
+                + "                                                                     "
                 + "[Home University Module Code] [Home University Module Title] | "
                 + "[Partner University Module Code] [Partner University Module Title] | [Equivalent NUS Credits]\n"
-                + SPACING + "view      " + "/view DELETE HISTORY                    "
+                + SPACING + "view      " + "/view DELETE_HISTORY                                  "
                 + "Displays up to 5 most recent modules that the user has deleted\n"
-                + SPACING + "list      " + "/list MODULES                           "
-                + "Displays all existing university modules mappings that are approved in the format\n"
-                + "                                                       "
+                + SPACING + "list      " + "/list MODULES                                         "
+                + "Displays all existing university modules mappings that are approved in the format:\n"
+                + "                                                                     "
                 + "[Partner University Module Code] [Partner University Module Title] "
                 + "[Partner University Module Credits] | [NUS Module Code] [NUS Module Title] "
                 + "[NUS Module Credits] in NUS\n"
-                + SPACING + "list      " + "/list UNIVERSITIES                      "
+                + SPACING + "list      " + "/list UNIVERSITIES                                    "
                 + "Displays all universities with module mappings available in database\n"
-                + SPACING + "list      " + "/list m/MODULECODE                      "
+                + SPACING + "list      " + "/list m/MODULECODE                                    "
                 + "List all module mappings for NUS MODULECODE in database\n"
-                + SPACING + "list      " + "/list u/UNIVERSITY                      "
+                + SPACING + "list      " + "/list u/UNIVERSITY_NAME_IN_UNDERSCORES                "
                 + "List all module mappings offered by UNIVERSITY in database\n"
-                + SPACING + "add       " + "/add u/UNIVERSITY m/MODULECODE          "
-                + "Add input Partner University module code to input university list                       \n"
-                + SPACING + "delete    " + "/delete u/UNIVERSITY m/MODULECODE       "
-                + "Remove input Partner University module code from input university list                  \n"
-                + SPACING + "delete    " + "/delete u/UNIVERSITY                    "
-                + "Delete input university list                        \n\n"
+                + SPACING + "add       " + "/add u/UNIVERSITY_NAME_IN_UNDERSCORES m/MODULECODE    "
+                + "Add input Partner University module code to input university list\n"
+                + SPACING + "delete    " + "/delete u/UNIVERSITY_NAME_IN_UNDERSCORES m/MODULECODE "
+                + "Remove input Partner University module code from input university list\n"
+                + SPACING + "delete    " + "/delete u/UNIVERSITY_NAME_IN_UNDERSCORES              "
+                + "Delete input university list\n\n"
                 + SPACING + "Note: Words in UPPER_CASE are parameters that you should input as a user\n"
                 + SPACING + "Note: There should not be spaces in parameters, replace with underscore instead\n"
                 + LINE;
         return message;
     }
 
+    public static void printExceptionMessage(Exception e) {
+        System.out.println(e.getMessage());
+    }
+
     /**
      * Displays to the user information regarding a module.
      * 
-     * @return Formatted string for each module and its associated code, title,
-     *         credit and PU information.
+     * @return Formatted string for a module and its associated NUS code, title, modular credits and PU information.
      */
     public static String printModule(UserModuleMapping module) {
+        assert module.getPuCode().length() > 0 : "PU module code length cannot be empty";
+        assert module.getPuTitle().length() > 0 : "PU module title length cannot be empty";
+        assert module.getPuCredit().length() > 0 : "PU module credits length cannot be empty";
+        assert module.getPuName().length() > 0 : "PU name length cannot be empty";
+        assert module.getNusCode().length() > 0 : "NUS module code length cannot be empty";
+        assert module.getNusTitle().length() > 0 : "NUS module title length cannot be empty";
+        assert module.getNusCredit().length() > 0 : "NUS module credits length cannot be empty";
         String message = "NUS: " + module.getNusCode() + " " + module.getNusTitle() + " | Partner University: "
                 + module.getPuCode() + " " + module.getPuTitle() + " | Equivalent NUS Credits: " + module.getNusCredit()
                 + " MCs";
@@ -118,22 +136,7 @@ public class Ui {
     }
 
     /**
-     * Displays to the user information regarding a deleted module.
-     * 
-     * @return Formatted string for each module and its associated code, title,
-     *         credit and PU information, incl PU name.
-     */
-    public static String printDeletedModule(UserModuleMapping module) {
-        String puName = module.getPuName();
-        String message = "NUS: " + module.getNusCode() + " " + module.getNusTitle() + " | " + puName + ": "
-                + module.getPuCode() + " " + module.getPuTitle() + " | Equivalent NUS Credits: " + module.getNusCredit()
-                + " MCs";
-        return message;
-    }
-
-    /**
-     * Prints an acknowledgement message to inform the user that they have
-     * successfully added a module to their list.
+     * Prints an acknowledgement message to inform the user that they successfully added a module to their list.
      * 
      * @param module The module added into the module list
      * @return Formatted string for the module added.
@@ -144,8 +147,8 @@ public class Ui {
     }
 
     /**
-     * Prints an acknowledgement message to inform the user that they successfully
-     * updated the module in their list.
+     * Prints an acknowledgement message to inform the user that they successfully updated
+     * information for a chosen module in their list.
      * 
      * @param module The module updated in the module list
      * @return Formatted string for the module updated.
@@ -157,8 +160,8 @@ public class Ui {
     }
 
     /**
-     * Prints an acknowledgement message to inform the user that they successfully
-     * deleted the module from their list.
+     * Prints an acknowledgement message to inform the user that they successfully deleted
+     * the chosen module from their list.
      * 
      * @param module The module deleted from the module list
      * @return Formatted string for the module deleted.
@@ -169,26 +172,28 @@ public class Ui {
     }
 
     /**
-     * Prints an acknowledgement message to inform the user that they have
-     * successfully created a list for the PU.
+     * Prints an acknowledgement message to inform the user that they successfully created a list for
+     * the chosen partner university.
      * 
-     * @param uniName The name of the PU
-     * @return Formatted string for the PU list created.
+     * @param universityName The name of the partner university
+     * @return Formatted string for the partner university list created.
      */
-    public static String printPuListCreatedAcknowledgement(String uniName) {
-        String message = LINE + "Success! You have created a new list for " + uniName + "\n" + LINE;
+    public static String printPuListCreatedAcknowledgement(String universityName) {
+        assert universityName.length() > 0 : "University name should not be empty";
+        String message = LINE + "Success! You have created a new list for " + universityName + "\n" + LINE;
         return message;
     }
 
     /**
-     * Prints an acknowledgement message to inform the user that they have
-     * successfully deleted the list for the PU.
-     * 
-     * @param uniName The name of the PU
-     * @return Formatted string for the PU list deleted.
+     * Prints an acknowledgement message to inform the user that they successfully deleted the list for
+     * the chosen partner university.
+     *
+     * @param universityName The name of the partner university
+     * @return Formatted string for the partner university list deleted.
      */
-    public static String printPuListDeletedAcknowledgement(String uniName) {
-        String message = LINE + "Success! You deleted the list for " + uniName + "\n" + LINE;
+    public static String printPuListDeletedAcknowledgement(String universityName) {
+        assert universityName.length() > 0 : "University name should not be empty";
+        String message = LINE + "Success! You deleted the list for " + universityName + "\n" + LINE;
         return message;
     }
 
@@ -199,6 +204,7 @@ public class Ui {
      * @return Formatted string for the modules in the list.
      */
     public static String printModulesInUserList(ArrayList<UserModuleMapping> modules) {
+        assert modules.size() > 0 : "List of module mappings should not be empty";
         String message = LINE;
         for (int i = 0; i < modules.size(); i++) {
             message += Integer.toString(i + 1);
@@ -217,12 +223,13 @@ public class Ui {
      * @return Formatted string for the deleted modules in the list.
      */
     public static String printDeletedModulesHistory(ArrayDeque<UserModuleMapping> deletedModules) {
+        assert deletedModules.size() > 0 : "List of module mappings should not be empty";
         String message = LINE;
         int i = 1;
         for (UserModuleMapping module : deletedModules) {
             message += Integer.toString(i++);
             message += ". ";
-            message += printDeletedModule(module);
+            message += printModule(module);
             message += "\n";
         }
         message += LINE;
@@ -232,20 +239,168 @@ public class Ui {
     public static String printPuList(UserUniversityList puList) {
         UserModuleMappingList puModulesList = puList.getMyModules();
         ArrayList<UserModuleMapping> puModules = puModulesList.getModules();
+        assert puModules.size() > 0 : "List of module mappings should not be empty";
         return printModulesInUserList(puModules);
     }
 
+
+    /**
+     * Prints the name of all universities available in the database.
+     *
+     * @param universities The list of universities in the database.
+     */
     public static void printUniversitiesInDatabase(ArrayList<University> universities) {
+        assert universities.size() > 0 : "List of universities should not be empty";
         int i = 1;
         for (University university : universities) {
             System.out.println(i + ". " + university.toString());
-            i += 1;
+            i++;
         }
     }
 
+    /**
+     * Sequentially prints eligible module mappings from a list.
+     * The NUS module code and title as well as the equivalent partner university
+     * module code and title are printed.
+     *
+     * @param moduleMappings A list containing module mappings.
+     */
     public static void printMappings(ArrayList<ModuleMapping> moduleMappings) {
+        assert moduleMappings.size() > 0 : "List of module mappings should not be empty";
         for (ModuleMapping moduleMapping : moduleMappings) {
             System.out.println(moduleMapping.toString());
         }
+    }
+
+    /**
+     * Prints all the lists that the user has favourited.
+     * Lists are printed sequentially, starting with the university name
+     * and then all modules in that university's list on a new line.
+     *
+     * @param userFavouriteLists A dictionary containing a user's favourited lists.
+     */
+    public static void printUserFavouriteLists(HashMap<String, UserUniversityList> userFavouriteLists) {
+        assert userFavouriteLists.size() > 0 : "Dictionary of university name to favourited lists should not be empty";
+        for (Map.Entry<String, UserUniversityList> set : userFavouriteLists.entrySet()) {
+            String universityName = set.getKey();
+            UserUniversityList universityList = set.getValue();
+            System.out.println(universityName);
+            universityList.displayModules();
+        }
+    }
+
+    /**
+     * Prints an acknowledgement message to inform the user that they have
+     * successfully added a list to their favourites.
+     *
+     * @param universityName The name of the university for which the list is favourited by the user.
+     * @return Acknowledgement message to user for adding a list to favourites.
+     */
+    public static String printFavouriteListAddedAcknowledgement(String universityName) {
+        assert universityName.length() > 0 : "University name should not be empty";
+        String message = LINE + "Success! You added:\n" + universityName + "to your favourited lists" + "\n" + LINE;
+        return message;
+    }
+
+    /**
+     * Prints an acknowledgement message to inform the user that they have
+     * successfully deleted a list from their favourites.
+     *
+     * @param universityName The name of the university for which the list was favourited by the user.
+     * @return Acknowledgement message to user for deleting a list from favourites.
+     */
+    public static String printFavouriteListDeletedAcknowledgement(String universityName) {
+        assert universityName.length() > 0 : "University name should not be empty";
+        String message = LINE + "Success! You deleted:\n" + universityName + "from your favourited lists" + "\n" + LINE;
+        return message;
+    }
+
+    /**
+     * Prints an acknowledgement message to inform the user that they have
+     * successfully created a timetable for a university.
+     *
+     * @param universityName The name of the university for which the timetable was created by the user.
+     * @return Acknowledgement message to user for creating a timetable for a university.
+     */
+    public static String printTimetableCreatedAcknowledgement(String universityName) {
+        assert universityName.length() > 0 : "University name should not be empty";
+        String message = LINE + "Success! You have created a new timetable for " + universityName + "\n" + LINE;
+        return message;
+    }
+
+    /**
+     * Prints an acknowledgement message to inform the user that they have
+     * successfully deleted the timetable for a university.
+     *
+     * @param universityName The name of the university for which the timetable was deleted by the user.
+     * @return Acknowledgement message to user for deleting the timetable for a university.
+     */
+    public static String printTimetableDeletedAcknowledgement(String universityName) {
+        assert universityName.length() > 0 : "University name should not be empty";
+        String message = LINE + "Success! You deleted the timetable for " + universityName + "\n" + LINE;
+        return message;
+    }
+
+    /**
+     * Displays to the user information regarding a lesson.
+     *
+     * @return Formatted string for a lesson and its associated module code, title, start time and end time.
+     */
+    public static String printLesson(Lesson lesson) {
+        assert lesson.getCode().length() > 0 : "Module code length cannot be empty";
+        assert lesson.getTitle().length() > 0 : "Module title length cannot be empty";
+        assert lesson.getDay().length() > 0 : "Lesson day length cannot be empty";
+        assert lesson.getStartTime().length() > 0 : "Lesson start time cannot be empty";
+        assert lesson.getEndTime().length() > 0 : "Lesson end time cannot be empty";
+        String message = lesson.getStartTime() + "hrs-" + lesson.getEndTime() + "hrs: "
+                + lesson.getCode() + " " + lesson.getTitle();
+        return message;
+    }
+
+    /**
+     * Sequentially prints each lesson stored in the timetable's list based on the day.
+     *
+     * @param lessons The list of lessons to be printed.
+     * @return Formatted string for the modules in the list.
+     */
+    public static String printLessonsByDayInTimetable(ArrayList<Lesson> lessons) {
+        assert lessons.size() > 0 : "List of lessons should not be empty";
+        String message = LINE;
+        for (int i = 0; i < lessons.size(); i++) {
+            message += Integer.toString(i + 1);
+            message += ". ";
+            message += printLesson(lessons.get(i));
+            message += "\n";
+        }
+        message += LINE;
+        return message;
+    }
+
+    /**
+     * Prints an acknowledgement message to inform the user that they have
+     * successfully added a lesson to the timetable for a university.
+     *
+     * @param lesson The name of the university for which the timetable was created by the user.
+     * @return Acknowledgement message to user for adding a lesson to a university timetable.
+     */
+    public static String printLessonAddedAcknowledgement(Lesson lesson) {
+        String universityName = lesson.getUniversity().getName();
+        String message = LINE + "Success! You have added a new lesson:\n" + universityName + " "
+                + lesson.getDay() + " " + printLesson(lesson) + "\n" + LINE;
+        return message;
+    }
+
+    /**
+     * Prints an acknowledgement message to inform the user that they have
+     * successfully deleted a lesson from the timetable for a university.
+     *
+     * @param lesson The name of the university for which the timetable was deleted by the user.
+     * @return Acknowledgement message to user for deleting a lesson from a university timetable.
+     */
+    public static String printLessonDeletedAcknowledgement(Lesson lesson) {
+        String universityName = lesson.getUniversity().getName();
+        String message = LINE + "Success! You have deleted the lesson:\n" + universityName + " "
+                + lesson.getDay() + " " + printLesson(lesson) + "\n" + LINE;
+        return message;
     }
 }

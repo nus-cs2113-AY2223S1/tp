@@ -3,7 +3,7 @@ package seedu.duke.user;
 import seedu.duke.exceptions.InvalidUserCommandException;
 import seedu.duke.ui.Ui;
 import seedu.duke.exceptions.InvalidUserStorageFileException;
-import seedu.duke.userstorage.UserStorageParser;
+import seedu.duke.parser.UserStorageParser;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -75,16 +75,9 @@ public class UserUniversityListManager {
 
     /**
      * Method to print all the favourite lists of the user.
-     * For each university, method first prints the university name
-     * Method then prints all the modules user has saved for that particular university
      */
     public void displayFavourites() {
-        for (Map.Entry<String, UserUniversityList> set : myFavourites.entrySet()) {
-            String universityName = set.getKey();
-            UserUniversityList universityList = set.getValue();
-            System.out.println(universityName);
-            universityList.displayModules();
-        }
+        Ui.printUserFavouriteLists(myFavourites);
     }
 
     /**
@@ -184,6 +177,7 @@ public class UserUniversityListManager {
         } else {
             UserUniversityList u = myManager.get(input);
             myFavourites.put(input, u);
+            System.out.println(Ui.printFavouriteListAddedAcknowledgement(input));
         }
     }
 
@@ -194,6 +188,7 @@ public class UserUniversityListManager {
             throw new InvalidUserCommandException("No such university in favourite currently");
         } else {
             myFavourites.remove(input);
+            System.out.println(Ui.printFavouriteListDeletedAcknowledgement(input));
         }
     }
 
