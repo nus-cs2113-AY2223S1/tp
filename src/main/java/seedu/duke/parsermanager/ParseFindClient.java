@@ -2,9 +2,9 @@ package seedu.duke.parsermanager;
 
 import seedu.duke.command.Command;
 import seedu.duke.command.CommandFindClient;
-import seedu.duke.exception.FindDescriptionEmptyException;
 import seedu.duke.exception.DukeException;
-import seedu.duke.exception.FindInvalidFlagException;
+import seedu.duke.exception.EmptyDescriptionException;
+import seedu.duke.exception.MissingFlagException;
 
 import java.util.ArrayList;
 
@@ -30,9 +30,9 @@ public class ParseFindClient extends Parser {
         boolean isValidDescription = checkCommandValidity(commandDescription);
 
         if (hasNoDescription) {
-            throw new FindDescriptionEmptyException(MESSAGE_EMPTY_DESCRIPTION);
+            throw new EmptyDescriptionException(MESSAGE_EMPTY_DESCRIPTION);
         } else if (!isValidDescription) {
-            throw new FindInvalidFlagException(MESSAGE_FIND_INVALID_FLAG);
+            throw new MissingFlagException(MESSAGE_FIND_INVALID_FLAG);
         } else {
             String queryText = commandDescription.replace(FIND_FLAGS, EMPTY_TEXT);
             return new CommandFindClient(queryText);
