@@ -1,0 +1,88 @@
+@startuml
+
+activate Duke
+activate Ui
+
+Duke -> Ui : getUserInput()
+Ui --> Duke : userInput : String
+
+activate CommandParser
+Duke -> CommandParser : CommandParser.getUserCommand(userInput)
+
+CommandParser -> CommandParser : parseUserCommand(userInput)
+activate CommandParser
+CommandParser --> CommandParser : userInputTokenized : String[]
+deactivate CommandParser
+
+alt list command
+
+    CommandParser -> CommandParser : isValidListCommand(userInputTokenized)
+    activate CommandParser
+    CommandParser --> CommandParser : isValid :boolean
+    deactivate CommandParser
+
+    opt isValid
+
+        create ListCommand
+        CommandParser -> ListCommand : ListCommand(userInputTokenized, CommandType.LIST)
+        activate ListCommand
+        ListCommand --> CommandParser : newListCommand : ListCommand
+        deactivate ListCommand
+
+    end
+
+else other command
+
+end
+
+CommandParser --> Duke : newUserCommand : Command
+
+alt list command
+
+    activate Database
+
+    alt list option equals "UNIVERSITIES"
+
+        Duke -> Database : getUniversities()
+        Database --> Duke : universities : ArrayList<University>
+
+        Duke -> Ui : printUniversitiesInDatabase(universities)
+
+    else list option equals "MODULES"
+
+        Duke -> Database : getModuleMappings()
+        Database --> Duke : moduleMappings : ArrayList<ModuleMappings>
+
+        Duke -> Ui : printMappings(moduleMappings)
+
+    else list option equals "module"
+
+        Duke -> ListCommand : getModuleCode()
+        activate ListCommand
+        ListCommand --> Duke : moduleCode :String
+        deactivate ListCommand
+        
+        Duke -> Database : findNusMapping(moduleCode)
+        Database --> Duke : moduleMappings : ArrayList<ModuleMapping>
+
+        Duke -> Ui : printMappings(moduleMappings)
+
+    else list option equals "universitiy"
+
+        Duke -> ListCommand : getUniversityName()
+        activate ListCommand
+        ListCommand --> Duke : universityName :String
+        deactivate ListCommand
+        
+        Duke -> Database : findUniversityMapping(universityName)
+        Database --> Duke : moduleMappings : ArrayList<ModuleMapping>
+
+        Duke -> Ui : printMappings(moduleMappings)
+
+    end
+
+else other command
+
+end
+
+@enduml
