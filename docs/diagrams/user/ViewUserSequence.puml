@@ -1,0 +1,44 @@
+@startuml
+hide footbox
+
+Actor User
+"User" -> ":Duke": "View-user..."
+activate ":Duke"
+":Duke" -> ":CommandParser": createCommand()
+activate ":CommandParser"
+":CommandParser" -> ":ViewUserCommand"**: new
+activate ":ViewUserCommand"
+return
+":CommandParser" --> ":Duke"
+deactivate
+
+":Duke" -> ":ViewUserCommand" : executeCommand()
+activate ":ViewUserCommand"
+":ViewUserCommand" -> ":ViewUserCommand": getArgsViewUserCmd()
+activate ":ViewUserCommand"
+return args
+    ":ViewUserCommand" -> ":UserList": getUserById()
+    activate ":UserList"
+alt user is valid
+    ":UserList" --> ":ViewUserCommand":
+    deactivate ":UserList"
+
+    ":ViewUserCommand" -> "<<class>>\nUi": viewUserMessage()
+    activate "<<class>>\nUi"
+    return
+    deactivate "<<class>>\nUi"
+    deactivate ":UserList"
+else user is invalid
+    ":ViewUserCommand" -> ":DukeException"** : new
+    destroy ":ViewUserCommand"
+    activate ":DukeException"
+    ":DukeException" --> ":Duke"
+    destroy ":DukeException"
+    ":Duke" -> "<<class>>\nUi" : print error
+    activate "<<class>>\nUi"
+    "<<class>>\nUi" --> ":Duke" : error message
+    deactivate "<<class>>\nUi"
+end
+deactivate ":ViewUserCommand"
+
+@enduml
