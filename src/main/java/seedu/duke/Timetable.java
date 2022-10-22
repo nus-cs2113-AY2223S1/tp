@@ -62,10 +62,10 @@ public class Timetable {
     For debugging
      */
     public static void printDict() {
-        for (String Day : timetableDict.keySet()) {
-            System.out.println(Day + ":");
-            for (String time : timetableDict.get(Day).keySet()) {
-                System.out.println(time + ": " + timetableDict.get(Day).get(time));
+        for (String day : timetableDict.keySet()) {
+            System.out.println(day + ":");
+            for (String time : timetableDict.get(day).keySet()) {
+                System.out.println(time + ": " + timetableDict.get(day).get(time));
             }
         }
     }
@@ -135,8 +135,6 @@ public class Timetable {
 
                     for (Lesson lesson : module.getLessons()) {
                         if (!lesson.getLessonType().equals(attendingLesson.getLessonType())) {
-                            // For debugging
-                            // System.out.println(lesson.getLessonType() + " --- " + attendingLesson.getLessonType() + " (skipped)");
                             continue;
                         }
                         String startTime = lesson.getStartTime();
