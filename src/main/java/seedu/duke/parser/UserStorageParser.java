@@ -44,9 +44,9 @@ public class UserStorageParser {
      * @param fileContent String with previously saved information of
      *                    user's saved list of universities and modules
      * @return HashMap, with Key = Partner University Name
-     * and Value = UserUniversityList, which stores modules information corresponding to the school
+     *              and Value = UserUniversityList, which stores modules information corresponding to the school
      * @throws InvalidUserStorageFileException when the String in data/myinfo.txt is in the wrong format
-     * ie. file corrupted between now and last saved
+     *              ie. file corrupted between now and last saved
      */
     public static HashMap<String, UserUniversityList> convertFileContentIntoUniversityList(String fileContent)
             throws InvalidUserStorageFileException {
@@ -65,7 +65,7 @@ public class UserStorageParser {
     /**.
      * Method to remove first backslash from output string
      * as backslash is meant to separate universities
-     * @param output, starting with backslash
+     * @param output starting with backslash
      * @return output with first backslash removed, to be stored into text file
      */
     private static String removeFirstBackSlash(String output) {
@@ -86,9 +86,9 @@ public class UserStorageParser {
      * Method to add universities and their respective modules to output string
      * @param uniList user's saved list of universities and modules
      * @return String with all information of user's list of universities and modules
-     * where universities are separated by "/",
-     * module information is separated by ";"
-     * and each line is separated by "%"
+     *              where universities are separated by "/",
+     *              module information is separated by ";"
+     *              and each line is separated by "%"
      */
     private static String addUniversitiesToOutputString(UserUniversityListManager uniList) {
         String output = "";
@@ -105,8 +105,8 @@ public class UserStorageParser {
      * Method to add modules to output string, for a particular university
      * @param modules user's saved list of modules for a particular university
      * @return String with all information of user's list of modules for the particular university
-     * where module information is separated by ";"
-     * and each line is separated by "%"
+     *              where module information is separated by ";"
+     *              and each line is separated by "%"
      */
     private static String addModulesToOutputString(ArrayList<UserModuleMapping> modules) {
         String output = "";
@@ -213,7 +213,7 @@ public class UserStorageParser {
      * Method to get user's saved lists of universities and modules from data/myinfo.txt
      * and convert it into usable format in UserUniversityListManager
      * @return new UserUniversityListManager object, with saved universities and modules information
-     * or empty new UserUniversityListManager object, if error has occurred while loading file
+     *              or empty new UserUniversityListManager object, if error has occurred while loading file
      */
     public static UserUniversityListManager getSavedLists() {
         try {
