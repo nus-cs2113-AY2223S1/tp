@@ -30,6 +30,7 @@ import seedu.duke.item.ItemList;
 import seedu.duke.transaction.TransactionList;
 import seedu.duke.user.UserList;
 
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_ARGUMENT_EMPTY;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_COMMAND_UNRECOGNIZABLE;
 
 /**
@@ -106,11 +107,16 @@ public class CommandParser {
      * @throws InvalidArgumentException If the value is empty
      */
     public static String getArgValue(String part) throws InvalidArgumentException {
-        String[] splitPart = part.split(DEFAULT_DELIMITER, 2);
-        if (splitPart.length == 1) {
-            throw new InvalidArgumentException("The value cannot be empty");
+        String[] splitPart = part.trim().split(DEFAULT_DELIMITER, 2);
+        if (splitPart.length != 2) {
+            throw new InvalidArgumentException(MESSAGE_ARGUMENT_EMPTY);
         }
         return splitPart[1].trim();
+    }
+
+    public static String getArgsDelimiter(String part) throws InvalidArgumentException {
+        String[] splitPart = part.trim().split(DEFAULT_DELIMITER, 2);
+        return splitPart[0].trim();
     }
 
     /**

@@ -1,0 +1,54 @@
+@startuml
+hide footbox
+
+Actor User
+User -> ":Duke" : run
+activate ":Duke"
+":Duke" -> "<<class>>\nUi" : printGreeting()
+activate "<<class>>\nUi"
+"<<class>>\nUi" --> ":Duke"
+deactivate "<<class>>\nUi"
+":Duke" -> ":Storage" : loadData()
+activate ":Storage"
+return userList, itemList, transactionList
+loop until isLastCommand
+    ":Duke" -> "<<class>>\nUi": readInput()
+    activate "<<class>>\nUi"
+    User -> "<<class>>\nUi":input
+    return
+    ":Duke" -> ":CommandParser" : createCommand()
+    activate ":CommandParser"
+    ":CommandParser" -> ":CommandParser" : getCommand()
+    activate ":CommandParser"
+    ":CommandParser" --> ":CommandParser"
+    deactivate ":CommandParser"
+
+    alt command is valid
+        ":CommandParser" -> ":Command"**: new
+        activate ":Command"
+        return command
+        return command
+        ":Duke" -> ":Command" : execute command
+        activate ":Command"
+        ":Command" -> "<<class>>\nUi": print response
+        activate "<<class>>\nUi"
+        deactivate "<<class>>\nUi"
+        ":Command" --> ":Duke"
+        deactivate ":Command"
+        destroy ":Command"
+
+    else command is invalid
+        ":Duke" -> "<<class>>\nUi" : print error
+        activate "<<class>>\nUi"
+        "<<class>>\nUi" --> ":Duke"
+        deactivate "<<class>>\nUi"
+    end
+end
+
+":Duke" -> ":Storage" : writeData()
+activate ":Storage"
+return
+":Duke" --> "User"
+deactivate ":Duke"
+
+@enduml

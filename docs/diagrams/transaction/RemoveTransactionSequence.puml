@@ -1,0 +1,46 @@
+@startuml
+hide footbox
+
+Actor User
+"User" -> ":Duke": "remove-tx..."
+activate ":Duke"
+":Duke" -> ":CommandParser": createCommand()
+activate ":CommandParser"
+":CommandParser" -> ":RemoveTransactionCommand"**: new
+activate ":RemoveTransactionCommand"
+return
+":CommandParser" --> ":Duke":
+deactivate
+
+":Duke" -> ":RemoveTransactionCommand" : executeCommand()
+activate ":RemoveTransactionCommand"
+":RemoveTransactionCommand" -> ":RemoveTransactionCommand": getArgsRemoveTxCmd()
+activate ":RemoveTransactionCommand"
+return args
+    ":RemoveTransactionCommand" -> ":TransactionList": getTransactionById()
+    activate ":TransactionList"
+alt transaction is valid
+    ":TransactionList" --> ":RemoveTransactionCommand"
+    deactivate ":TransactionList"
+    ":RemoveTransactionCommand" -> ":TransactionList": deleteTransaction()
+    activate ":TransactionList"
+    return
+    ":RemoveTransactionCommand" -> "<<class>>\nUi": deleteTransactionMessage()
+    activate "<<class>>\nUi"
+    return
+    deactivate "<<class>>\nUi"
+    deactivate ":TransactionList"
+else transaction is invalid
+    ":RemoveTransactionCommand" -> ":DukeException"** : new
+    destroy ":RemoveTransactionCommand"
+    activate ":DukeException"
+    ":DukeException" --> ":Duke"
+    destroy ":DukeException"
+    ":Duke" -> "<<class>>\nUi" : print error
+    activate "<<class>>\nUi"
+    "<<class>>\nUi" --> ":Duke" : error message
+    deactivate "<<class>>\nUi"
+end
+deactivate ":RemoveTransactionCommand"
+
+@enduml

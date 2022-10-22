@@ -1,0 +1,50 @@
+@startuml
+hide footbox
+
+Actor User
+"User" -> ":Duke": "remove-user..."
+activate ":Duke"
+":Duke" -> ":CommandParser": createCommand()
+activate ":CommandParser"
+":CommandParser" -> ":RemoveUserCommand"**: new
+activate ":RemoveUserCommand"
+return
+":CommandParser" --> ":Duke"
+deactivate
+
+":Duke" -> ":RemoveUserCommand" : executeCommand()
+activate ":RemoveUserCommand"
+":RemoveUserCommand" -> ":RemoveUserCommand": getArgsRemoveTxCmd()
+activate ":RemoveUserCommand"
+return args
+    ":RemoveUserCommand" -> ":UserList": getUserById()
+    activate ":UserList"
+alt user is valid
+    ":UserList" --> ":RemoveUserCommand":
+    deactivate ":UserList"
+
+    ":RemoveUserCommand" -> ":UserList": deleteUser()
+    activate ":UserList"
+    return
+    ":RemoveUserCommand" -> ":ItemList": deleteAllItemOfAnUser()
+    activate ":ItemList"
+    return
+    ":RemoveUserCommand" -> "<<class>>\nUi": deleteUserMessage()
+    activate "<<class>>\nUi"
+    return
+    deactivate "<<class>>\nUi"
+    deactivate ":UserList"
+else user is invalid
+    ":RemoveUserCommand" -> ":DukeException"** : new
+    destroy ":RemoveUserCommand"
+    activate ":DukeException"
+    ":DukeException" --> ":Duke"
+    destroy ":DukeException"
+    ":Duke" -> "<<class>>\nUi" : print error
+    activate "<<class>>\nUi"
+    "<<class>>\nUi" --> ":Duke" : error message
+    deactivate "<<class>>\nUi"
+end
+deactivate ":RemoveUserCommand"
+
+@enduml

@@ -48,7 +48,7 @@ public class TransactionList {
      *
      * @param transaction The transaction to be added
      */
-    public void add(Transaction transaction) {
+    public void addTransaction(Transaction transaction) {
         transactionList.add(transaction);
     }
 

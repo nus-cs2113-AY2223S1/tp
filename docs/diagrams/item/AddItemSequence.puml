@@ -1,0 +1,43 @@
+@startuml
+hide footbox
+Actor User
+"User" -> ":Duke": "add-item..."
+activate ":Duke"
+":Duke" -> ":CommandParser": createCommand()
+activate ":CommandParser"
+":CommandParser" -> ":AddItemCommand"**: new
+activate ":AddItemCommand"
+return
+":CommandParser" --> ":Duke"
+deactivate
+":Duke" -> ":AddItemCommand" : executeCommand()
+activate ":AddItemCommand"
+":AddItemCommand" -> ":AddItemCommand": getArgsAddItemCmd()
+activate ":AddItemCommand"
+return args
+alt args is valid
+    ":AddItemCommand" -> ":Item"**: new Item()
+    activate ":Item"
+    ":Item" --> ":AddItemCommand"
+    deactivate ":Item"
+    ":AddItemCommand" -> ":ItemList": addItem()
+    activate ":ItemList"
+    ":AddItemCommand" -> "<<class>>\nUi": addItemMessage()
+    activate "<<class>>\nUi"
+    return
+    deactivate ":ItemList"
+    deactivate "<<class>>\nUi"
+    deactivate ":Item"
+else args is invalid
+    ":AddItemCommand" -> ":DukeException"** : new
+    destroy ":AddItemCommand"
+    activate ":DukeException"
+    ":DukeException" --> ":Duke"
+    destroy ":DukeException"
+    ":Duke" -> "<<class>>\nUi" : print error
+    activate "<<class>>\nUi"
+    "<<class>>\nUi" --> ":Duke" : error message
+    deactivate "<<class>>\nUi"
+end
+
+@enduml
