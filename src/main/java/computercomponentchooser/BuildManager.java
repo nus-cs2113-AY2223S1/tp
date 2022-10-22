@@ -14,6 +14,7 @@ public class BuildManager {
         builds = new HashMap<>();
     }
 
+
     public void addBuild(Build build) throws DuplicateBuildException {
         if (builds.containsKey(build.getName())) {
             throw new DuplicateBuildException();
@@ -95,7 +96,7 @@ public class BuildManager {
         }
     }
 
-    private static int filterPrice(String lowestNumber, String highestNumber, int i) throws NumberFormatException {
+    private int filterPrice(String lowestNumber, String highestNumber, int i) throws NumberFormatException {
         for (String name : builds.keySet()) {
             float lowestNum = Float.parseFloat(lowestNumber);
             float highestNum = Float.parseFloat(highestNumber);
@@ -115,7 +116,7 @@ public class BuildManager {
         return i;
     }
 
-    private static int filterPower(String lowestNumber, String highestNumber, int i) throws NumberFormatException {
+    private int filterPower(String lowestNumber, String highestNumber, int i) throws NumberFormatException {
         for (String name : builds.keySet()) {
             int lowestNum = Integer.parseInt(lowestNumber);
             int highestNum = Integer.parseInt(highestNumber);
@@ -135,7 +136,7 @@ public class BuildManager {
         return i;
     }
 
-    private static int filterCompatibility(int i) {
+    private int filterCompatibility(int i) {
         for (String name : builds.keySet()) {
             Build build = builds.get(name);
             if (build.getCompatibility().equals("Compatible")) {
@@ -145,7 +146,7 @@ public class BuildManager {
         return i;
     }
 
-    private static int printFilteredList(int i, String name) {
+    private int printFilteredList(int i, String name) {
         if (i == 0) {
             System.out.println("Filtered Builds:");
         }
