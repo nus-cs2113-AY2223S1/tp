@@ -298,7 +298,7 @@ public class Ui {
      */
     public static String printFavouriteListAddedAcknowledgement(String universityName) {
         assert universityName.length() > 0 : "University name should not be empty";
-        String message = LINE + "Success! You added:\n" + universityName + "to your favourited lists" + "\n" + LINE;
+        String message = LINE + "Success! You added:\n" + universityName + " to your favourite lists" + "\n" + LINE;
         return message;
     }
 
@@ -311,7 +311,7 @@ public class Ui {
      */
     public static String printFavouriteListDeletedAcknowledgement(String universityName) {
         assert universityName.length() > 0 : "University name should not be empty";
-        String message = LINE + "Success! You deleted:\n" + universityName + "from your favourited lists" + "\n" + LINE;
+        String message = LINE + "Success! You deleted:\n" + universityName + " from your favourite lists" + "\n" + LINE;
         return message;
     }
 

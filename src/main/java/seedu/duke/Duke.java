@@ -122,11 +122,9 @@ public class Duke {
                         } else if (favouriteCommand.getFavouriteOption().equals("ADD")) {
                             String universityName = favouriteCommand.getUniversityName();
                             userUniversityListManager.addFavourite(universityName);
-                            System.out.print(Ui.printFavouriteListAddedAcknowledgement(universityName));
                         } else if (favouriteCommand.getFavouriteOption().equals("DELETE")) {
                             String universityName = favouriteCommand.getUniversityName();
                             userUniversityListManager.deleteFavourite(universityName);
-                            System.out.print(Ui.printFavouriteListDeletedAcknowledgement(universityName));
                         }
                     } catch (NoSuchElementException e) {
                         Ui.printExceptionMessage(e);

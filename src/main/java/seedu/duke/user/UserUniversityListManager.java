@@ -32,10 +32,12 @@ public class UserUniversityListManager {
     public UserUniversityListManager(String fileContent) {
         try {
             myManager = UserStorageParser.convertFileContentIntoUniversityList(fileContent);
+            myFavourites = new HashMap<String, UserUniversityList>();
         } catch (InvalidUserStorageFileException e) {
             System.out.println("Invalid file format in data/duke.txt");
             System.out.println("Creating new University List Manager");
             myManager = new HashMap<String, UserUniversityList>();
+            myFavourites = new HashMap<String, UserUniversityList>();
         }
     }
 
@@ -185,7 +187,7 @@ public class UserUniversityListManager {
         if (!myManager.containsKey(input)) {
             throw new InvalidUserCommandException("No such university in all your lists currently");
         } else if (!myFavourites.containsKey(input)) {
-            throw new InvalidUserCommandException("No such university in favourite currently");
+            throw new InvalidUserCommandException("No such university in favourite list currently");
         } else {
             myFavourites.remove(input);
             System.out.println(Ui.printFavouriteListDeletedAcknowledgement(input));

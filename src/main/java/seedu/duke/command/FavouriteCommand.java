@@ -8,10 +8,10 @@ public class FavouriteCommand extends Command {
         if (parameters[1].equals("view/")) {
             this.favouriteOption = "VIEW";
         } else if (parameters[1].startsWith("add/")) {
-            this.universityName = parameters[1].substring(2).replace("_", " ");
+            this.universityName = parameters[1].substring(4).replace("_", " ");
             this.favouriteOption = "ADD";
         } else if (parameters[1].startsWith("del/")) {
-            this.universityName = parameters[1].substring(2).replace("_", " ");
+            this.universityName = parameters[1].substring(4).replace("_", " ");
             this.favouriteOption = "DELETE";
         }
 
