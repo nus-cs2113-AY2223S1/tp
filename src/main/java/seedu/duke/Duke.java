@@ -40,12 +40,13 @@ public class Duke {
         String response;
         String input;
         String currentSemester = getSemester();
-        boolean isRunning = !Objects.equals(currentSemester, EXIT_FLAG);
 
         Timetable.initDict();
         DataManager.initDataFile(currentSemester);
         DataManager.loadTimetableFromDataFile();
 
+        boolean isRunning = !Objects.equals(currentSemester, EXIT_FLAG);
+        
         while (isRunning) {
             assert (currentSemester.equals("1") || currentSemester.equals("2"))  : "valid semester are only 1 or 2";
 
