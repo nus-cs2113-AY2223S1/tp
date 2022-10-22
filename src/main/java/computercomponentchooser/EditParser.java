@@ -11,6 +11,7 @@ import computercomponentchooser.components.Other;
 import computercomponentchooser.components.Cooler;
 import computercomponentchooser.components.Case;
 
+import computercomponentchooser.exceptions.BlankStringException;
 import computercomponentchooser.exceptions.UnknownCommandException;
 import computercomponentchooser.export.ExportText;
 
@@ -82,17 +83,21 @@ public class EditParser {
             default:
                 throw new UnknownCommandException();
             }
-        } catch (UnknownCommandException | ArrayIndexOutOfBoundsException | NullPointerException e) {
+        } catch (UnknownCommandException | ArrayIndexOutOfBoundsException | NullPointerException |
+                 BlankStringException e) {
             System.out.println(e.getMessage());
             Ui.printLine();
         }
     }
 
-    public void parseAdd(Build editBuild, String line) {
+    public void parseAdd(Build editBuild, String line) throws BlankStringException {
         String name = getParameter(line, NAME_PARAMETER);
         String type = getParameter(line, TYPE_PARAMETER);
         String price = getParameter(line, PRICE_PARAMETER);
         String power = getParameter(line, POWER_PARAMETER);
+        if (name.isBlank() || type.isBlank() || price.isBlank() || power.isBlank()) {
+            throw new BlankStringException();
+        }
         switch (type) {
         case "cpu":
             Cpu cpu = new Cpu(name, price, power,
@@ -171,8 +176,13 @@ public class EditParser {
 
     public void parseList(Build editBuild) {
         Ui.printLine();
+        if (editBuild.getAllComponents().size() == 0) {
+            System.out.println("You have no components");
+            Ui.printLine();
+            return;
+        }
         System.out.println("Computer parts for " + buildName + ":");
-        System.out.print(editBuild.toString());
+        System.out.print(editBuild);
         Ui.printLine();
     }
 
