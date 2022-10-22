@@ -7,7 +7,10 @@ import seedu.duke.user.UserModuleMapping;
 import seedu.duke.user.UserUniversityList;
 import seedu.duke.user.UserUniversityListManager;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 public class UserStorageTest {
     UserUniversityListManager testManager = new UserUniversityListManager();

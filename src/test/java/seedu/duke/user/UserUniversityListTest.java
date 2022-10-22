@@ -6,7 +6,10 @@ import seedu.duke.exceptions.InvalidUserCommandException;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class UserUniversityListTest {
     UserUniversityListManager testManager = new UserUniversityListManager();
@@ -167,13 +170,13 @@ public class UserUniversityListTest {
     void deleteModule_Ucla_correctUpdatesOnFavourites() throws InvalidUserCommandException {
         testManager.createList("UCLA");
         testManager.addFavourite("UCLA");
-        HashMap<String, UserUniversityList> myManager = testManager.getMyManager();
         UserModuleMapping mod = new UserModuleMapping("CS101", "Programming Intro", "CS1010",
                 "Programming Methodology", "4", "4", "UCLA", "USA");
         UserModuleMapping mod2 = new UserModuleMapping("CS201", "Programming Intro II", "CS2030",
                 "Programming Methodology II ", "4", "4", "UCLA", "USA");
         testManager.addModule("UCLA", mod);
         testManager.addModule("UCLA", mod2);
+        HashMap<String, UserUniversityList> myManager = testManager.getMyManager();
         assertEquals(2, testManager.getMyManager().get("UCLA").getMyModules().getModules().size());
         assertEquals(2, testManager.getMyFavourites(myManager).get("UCLA").getMyModules().getModules().size());
         testManager.deleteModule("UCLA", "CS201");
