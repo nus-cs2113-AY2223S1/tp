@@ -50,10 +50,18 @@ public class BuildManager {
     }
 
     public void findBuilds(String searchTerm) {
+        int i = 0;
         for (String name : builds.keySet()) {
+            if (i == 0) {
+                System.out.println("Found Builds:");
+            }
             if (name.contains(searchTerm)) {
                 System.out.println(name);
+                i++;
             }
+        }
+        if (i == 0) {
+            System.out.println("No builds that meet specifications found.");
         }
     }
 

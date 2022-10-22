@@ -68,6 +68,9 @@ public class Parser {
             case "filter":
                 mainParseFilter(line);
                 break;
+            case "find":
+                mainParseFind(line);
+                break;
             default:
                 throw new UnknownCommandException();
             }
@@ -75,6 +78,13 @@ public class Parser {
             System.out.println(e.getMessage());
             Ui.printLine();
         }
+    }
+
+    private void mainParseFind(String line) {
+        String searchTerm = EditParser.getParameter(line, 1);
+        Ui.printLine();
+        buildManager.findBuilds(searchTerm);
+        Ui.printLine();
     }
 
     private void mainParseFilter(String line) {
