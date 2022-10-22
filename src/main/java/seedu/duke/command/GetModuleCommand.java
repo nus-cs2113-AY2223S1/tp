@@ -11,26 +11,35 @@ import java.util.List;
 
 import org.apache.commons.lang3.tuple.Pair;
 
+import seedu.duke.exceptions.YamomException;
 import seedu.duke.model.Module;
 
 /**
  * Get all module details by module code. Display all tutorial and labs session in timetable format.
  */
-
 public class GetModuleCommand extends Command {
     Module module;
     public static final String COMMAND_WORD = "get";
-    public static final String FORMAT = "get MODULE_CODE";
+    public static final String FORMAT = "get [EXACT_MODULE_CODE]";
     public static final String HELP_DISPLAY = COMMAND_WORD
             + ": returns all details of the module!\n"
             + "\tUsage:\t"
             + FORMAT
             + System.lineSeparator();
 
-    public GetModuleCommand(String[] input) {
+    public GetModuleCommand(String[] input) throws YamomException {
         super(input);
-        String moduleCode = input[1].toUpperCase();
+
+        if (input.length < 2) {
+            throw new YamomException("Please enter a module code!");
+        }
+
+        String moduleCode = input[1].toUpperCase();  
         this.module = Module.get(moduleCode);
+        
+        if (!isModuleExist(module)) {
+            throw new YamomException("Module does not exist! Please input a valid module code. Try searching for it if you do not remember the exact module code.");
+        }
     }
 
     @Override
@@ -65,9 +74,9 @@ public class GetModuleCommand extends Command {
             ui.addMessage(timetable.toString());
         } else {
             ui.addMessage("Module " + module.moduleCode + " is not offered in this semester"
-                    + ", hence no timetable information is available due to unforseen circumstances");
+            + ", hence no timetable information is available due to unforseen circumstances");
         }
-
+        
         ui.displayUi();
     }
 
@@ -75,6 +84,13 @@ public class GetModuleCommand extends Command {
     boolean isModuleOfferedInCurrentSem(Module module, State state) {
         int sem = state.getSemester();
         return module.getSemestersOffering(module).contains(sem);
+    }
+
+    // Check if module input by user exists in module list. This is different from isValidModuleCode from Parser class.
+    boolean isModuleExist(Module module) {
+        // check if module exists in module list
+        List<Module> moduleList = Module.getAll();
+        return moduleList.contains(module);
     }
 
     @Override

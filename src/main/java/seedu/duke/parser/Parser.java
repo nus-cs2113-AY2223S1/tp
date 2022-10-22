@@ -112,14 +112,14 @@ public class Parser {
         return isModuleFaculty(moduleFaculty) || isPartialModuleFaculty(moduleFaculty);
     }
 
-    private static boolean containsValidModuleCode(String[] keywords) {
-        for (int i = 1; i < keywords.length; i++) {
-            if (isValidModuleCode(keywords[i])) {
-                return true;
-            }
-        }
-        return false;
-    }
+    // private static boolean containsValidModuleCode(String[] keywords) {
+    //     for (int i = 1; i < keywords.length; i++) {
+    //         if (isValidModuleCode(keywords[i])) {
+    //             return true;
+    //         }
+    //     }
+    //     return false;
+    // }
 
     private static boolean isValidTwoWordCommand(String[] keywords) {
         return isTwoWordsCommand(keywords) && isValidModuleCode(keywords[1]);

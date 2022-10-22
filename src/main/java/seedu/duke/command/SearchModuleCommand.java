@@ -118,19 +118,6 @@ public class SearchModuleCommand extends Command {
         List<Module> searchResult = new ArrayList<>();
 
         // add all the mods with similar toSearchModuleCode and toSearchModuleTitle to searchResult
-        // for (Module m : moduleList) {
-        //     if (toSearchModuleCode != null && m.moduleCode.contains(toSearchModuleCode.toUpperCase())) {
-        //         searchResult.add(m);
-        //     }
-
-        //     if (toSearchModuleTitle != null && m.title.toLowerCase().contains(toSearchModuleTitle.toLowerCase())) {
-        //         // add only if it is not already in the list
-        //         if (!searchResult.contains(m)) {
-        //             searchResult.add(m);
-        //         }
-        //     }
-        // }
-
         for (Module m : moduleList) {
             if (toSearchModuleCode != null && m.moduleCode.contains(toSearchModuleCode.toUpperCase())) {
                 searchResult.add(m);
