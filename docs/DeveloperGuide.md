@@ -144,6 +144,25 @@ Step 4: After deleting a item, a message will be displayed to the user via `Ui.d
 The following sequence diagram shows how the remove item operation works:
 ![removeItemSequence](images/RemoveItemSequence.png)
 
+#### View an item
+
+>This feature allows the user to view a specific item in the item list. Upon successfully sending the command, the Ui will display the details of the searched item
+
+Given below is an example usage scenario and how the command mechanism behaves at each step.
+
+Step 1: The user types in the command in the command line. The CommandParser class checks if the command is valid through the createCommand() method, and either sends an exception, or send the input to the ViewItemCommand class to be processed.
+
+Step 2: The ViewItemCommand command checks if the delimiters ('i') is present in the user input through the getArgsViewItemCmd() method. If not present, an exception will be thrown. The command also checks whether the input's final argument is valid (item can be found or not) by checking whether that item is currently in the item list via the `isValidItem` method. An exception will also be thrown if the final argument does not satisfy the requirements (item not found).
+
+Step 3: If all arguments are valid, then it finds the item in the itemList by it's itemId, which is unique:
+
+`itemList.getItemById(itemId);`
+
+Step 4: After finding the user, a message will be displayed to the user via `Ui.viewItemMessage()` method which show the specified user's details.
+
+The following sequence diagram shows how the remove user operation works:
+![viewItemSequence](images/ViewItemSequence.png)
+
 #### Sorting items
 >This feature allows user to sort and filter items on their list, and if the input command is correct, a list that is sorted and filtered will be sent from Ui to user
 
