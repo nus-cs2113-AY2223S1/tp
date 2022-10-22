@@ -115,5 +115,10 @@ public class Ui {
         displayDivider();
     }
 
+    public void displayUserPrompt(int semester) {
+        String promptFormat = "Sem " + "[" + semester
+                + "]" + " >> ";
+        System.out.print(promptFormat);
+    }
 }
 //@author
