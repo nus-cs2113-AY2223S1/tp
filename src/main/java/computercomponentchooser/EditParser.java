@@ -39,6 +39,7 @@ public class EditParser {
     }
 
     public static String getParameter(String line, int mode) {
+        assert mode >= 0;
         String[] lineSplit = line.split("/");
         return lineSplit[mode];
     }

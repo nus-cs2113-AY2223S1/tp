@@ -24,6 +24,7 @@ public class Parser {
 
     private static String getParameter(String line, int mode) {
         String[] lineSplit = line.split("/", 2);
+        assert mode >= 0 && mode < 2;
         return lineSplit[mode];
     }
 
