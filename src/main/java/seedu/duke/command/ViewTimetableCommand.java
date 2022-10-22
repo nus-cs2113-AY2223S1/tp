@@ -21,8 +21,9 @@ public class ViewTimetableCommand extends Command {
     public static final String FORMAT = "view";
     public static final String HELP_DISPLAY = COMMAND_WORD
             + ": displays current timetable!\n"
-            + "Usage:\t"
-            + FORMAT;
+            + "\tUsage:\t"
+            + FORMAT
+            + System.lineSeparator();
     private static final String ERROR_MESSAGE_EMPTY_TIMETABLE = "Your timetable is empty."
             + System.lineSeparator() + "Please select your modules first before viewing.";
 

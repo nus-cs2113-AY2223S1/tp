@@ -20,8 +20,9 @@ public class DeleteModuleCommand extends Command {
     public static final String FORMAT = "delete MODULE_CODE";
     public static final String HELP_DISPLAY = COMMAND_WORD
             + ": remove a module from your planner!\n"
-            + "Usage:\t"
-            + FORMAT;
+            + "\tUsage:\t"
+            + FORMAT
+            + System.lineSeparator();
 
     public DeleteModuleCommand(String[] input) {
         super(input);

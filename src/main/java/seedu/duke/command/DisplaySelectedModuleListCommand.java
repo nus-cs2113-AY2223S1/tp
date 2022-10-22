@@ -18,8 +18,9 @@ public class DisplaySelectedModuleListCommand extends Command {
     public static final String FORMAT = "list";
     public static final String HELP_DISPLAY = COMMAND_WORD
             + ": display list of all selected modules and slots!\n"
-            + "Usage:\t"
-            + FORMAT;
+            + "\tUsage:\t"
+            + FORMAT
+            + System.lineSeparator();
 
     public DisplaySelectedModuleListCommand(String[] input) {
         super(input);
@@ -34,7 +35,7 @@ public class DisplaySelectedModuleListCommand extends Command {
     public String convertWithStream(Map<LessonType, String> map) {
         String mapAsString = map.keySet().stream()
                 .map(key -> key + "=" + map.get(key))
-                .collect(Collectors.joining("- ", "\t", "\n"));
+                .collect(Collectors.joining(", ", "\t", "\n"));
         return mapAsString;
     }
 
@@ -63,8 +64,7 @@ public class DisplaySelectedModuleListCommand extends Command {
      * @param currentSelectedModules the list of all selectedModules and their selected slots for lessons
      */
     public String formatPrintSelectedSlotsList(List<SelectedModule> currentSelectedModules) {
-        String formattedSelectedSlotsList = null;
-
+        String formattedSelectedSlotsList = "";
         for (var selectedModule : currentSelectedModules) {
             Module module = selectedModule.getModule();
             Map<LessonType, String> selectedSlots = selectedModule.getSelectedSlots();
