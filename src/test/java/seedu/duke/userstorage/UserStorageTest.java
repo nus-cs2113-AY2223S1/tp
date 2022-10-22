@@ -2,6 +2,7 @@ package seedu.duke.userstorage;
 
 import org.junit.jupiter.api.Test;
 import seedu.duke.exceptions.InvalidUserCommandException;
+import seedu.duke.parser.UserStorageParser;
 import seedu.duke.user.UserModuleMapping;
 import seedu.duke.user.UserUniversityList;
 import seedu.duke.user.UserUniversityListManager;
