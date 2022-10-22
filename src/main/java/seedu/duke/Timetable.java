@@ -255,9 +255,9 @@ public class Timetable {
         return listOfModules.get(indexForModule).getReplacement(targetType, indexForTarget);
     }
 
-    public static void replaceLesson(Lesson newLesson, int indexForModule) {
+    public static void replaceLesson(Lesson newLesson, int indexForModule, Integer indexForLesson) {
         assert indexForModule >= 0 : "index should be within range";
 
-        listOfModules.get(indexForModule).replaceAttending(newLesson);
+        listOfModules.get(indexForModule).replaceAttending(newLesson, indexForLesson);
     }
 }

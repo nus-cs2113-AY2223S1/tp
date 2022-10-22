@@ -54,8 +54,8 @@ public class Module {
             int numberSameType = checkDuplicateLessonNumbers(list);
             for (int i = 0; i < numberSameType; i++) {
                 String tempLessonType = list.get(0).getLessonType();
-                String lessonType = numberSameType == 1 ? tempLessonType : tempLessonType + " " + (i + 1);
-                addToAttendingList(temp, lessonType);
+                //String lessonType = numberSameType == 1 ? tempLessonType : tempLessonType + " " + (i + 1);
+                addToAttendingList(temp, tempLessonType);
             }
         }
         return temp;
@@ -221,10 +221,10 @@ public class Module {
     }
 
     private HashMap<String, ArrayList<Lesson>> classifyLessons(List<Lesson> lessons) {
-        HashMap<String, ArrayList<Lesson>> classifiedLessons = new HashMap<String, ArrayList<Lesson>>();
+        HashMap<String, ArrayList<Lesson>> classifiedLessons = new HashMap<>();
         for (Lesson lesson : lessons) {
             if (!classifiedLessons.containsKey(lesson.getLessonType())) {
-                classifiedLessons.put(lesson.getLessonType(), new ArrayList<Lesson>());
+                classifiedLessons.put(lesson.getLessonType(), new ArrayList<>());
                 classifiedLessons.get(lesson.getLessonType()).add(lesson);
             } else {
                 classifiedLessons.get(lesson.getLessonType()).add(lesson);
