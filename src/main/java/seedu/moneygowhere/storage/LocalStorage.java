@@ -142,9 +142,11 @@ public class LocalStorage {
             if (!hasParsedSortconfig) {
                 System.out.println(Messages.LOCAL_STORAGE_SORTCONFIG_ERROR_IN_LOAD_FILE);
             } else if (!hasParsedExpenses) {
-                System.out.println(Messages.LOCAL_STORAGE_EXPENSE_ERROR_IN_LOAD_FILE + (itr + 1));
+                System.out.println(Messages.LOCAL_STORAGE_EXPENSE_ERROR_IN_LOAD_FILE
+                        + (itr + 1));
             } else {
-                System.out.println(Messages.LOCAL_STORAGE_RECURRING_PAYMENT_ERROR_IN_LOAD_FILE + (itr+1));
+                System.out.println(Messages.LOCAL_STORAGE_RECURRING_PAYMENT_ERROR_IN_LOAD_FILE
+                        + (itr + 1));
             }
         }
     }
@@ -191,9 +193,11 @@ public class LocalStorage {
         } catch (LocalStorageLoadDataInputError | NumberFormatException
                  | NullPointerException | DateTimeParseException e) {
             if (!hasParsedExpenses) {
-                System.out.println(Messages.LOCAL_STORAGE_EXPENSE_ERROR_IN_LOAD_FILE + (itr + 1));
+                System.out.println(Messages.LOCAL_STORAGE_EXPENSE_ERROR_IN_LOAD_FILE
+                        + (itr + 1));
             } else {
-                System.out.println(Messages.LOCAL_STORAGE_RECURRING_PAYMENT_ERROR_IN_LOAD_FILE + (itr+1));
+                System.out.println(Messages.LOCAL_STORAGE_RECURRING_PAYMENT_ERROR_IN_LOAD_FILE
+                        + (itr + 1));
             }
         }
     }
