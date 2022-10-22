@@ -50,10 +50,17 @@ public class Messages {
     public static final String LOCAL_STORAGE_ERROR_CORRUPTED_OR_EMPTY_LOAD_FILE = ""
             + "The load file is empty or corrupted...\n"
             + "Please ensure the load file is not modified if you have a load file.";
+    public static final String LOCAL_STORAGE_ERROR_INVALID_CHARACTER_IN_SAVE_DATA = ""
+            + "There is an invalid character in the inputs\n"
+            + "Failed to save data.";
     public static final String LOCAL_STORAGE_EXPENSE_ERROR_IN_LOAD_FILE = ""
             + "There is an error in load file found...\n"
             + "Please ensure the file is the correct load file without modifications to it.\n"
             + "Error is found in expense id: ";
+    public static final String LOCAL_STORAGE_RECURRING_PAYMENT_ERROR_IN_LOAD_FILE = ""
+            + "There is an error in load file found...\n"
+            + "Please ensure the file is the correct load file without modifications to it.\n"
+            + "Error is found in Recurring Payment id: ";
     public static final String LOCAL_STORAGE_SORTCONFIG_ERROR_IN_LOAD_FILE = ""
             + "There is no sorting configuration in load file found...\n"
             + "Please ensure the file is the correct load file without modifications to it.";
@@ -66,6 +73,9 @@ public class Messages {
             + "There is an error in writing data to save file.";
     public static final String LOCAL_STORAGE_MERGE_EXTERNAL_DATA_SUCCESSFUL = ""
             + "External File loaded successfully :)";
+    public static final String LOCAL_STORAGE_MERGE_EXTERNAL_DATA_WRONG_FILE_FORMAT = ""
+            + "Wrong file format given\n"
+            + "Please provide path to your xml file with the save data.";
 
     /**
      * Defines messages for {@link seedu.moneygowhere.currency.CurrencyApi }.

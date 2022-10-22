@@ -290,7 +290,8 @@ public class ConsoleInterface {
         printBlankLine();
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_ADD_EXPENSE_SUCCESS);
 
-        localStorage.saveToFile(expenseManager.getExpenses(), expenseManager.getSortCommandSetting());
+        localStorage.saveToFile(expenseManager.getExpenses(), expenseManager.getSortCommandSetting(),
+                recurringPaymentManager.getRecurringPayments());
     }
 
     private void viewExpenseByExpenseIndex(int expenseIndex) {
@@ -359,7 +360,8 @@ public class ConsoleInterface {
 
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_DELETE_EXPENSE_SUCCESS);
 
-        localStorage.saveToFile(expenseManager.getExpenses(), expenseManager.getSortCommandSetting());
+        localStorage.saveToFile(expenseManager.getExpenses(), expenseManager.getSortCommandSetting(),
+                recurringPaymentManager.getRecurringPayments());
     }
 
     private void runCommandEditExpense(ConsoleCommandEditExpense consoleCommandEditExpense) {
@@ -437,14 +439,16 @@ public class ConsoleInterface {
         printBlankLine();
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_EDIT_EXPENSE_SUCCESS);
 
-        localStorage.saveToFile(expenseManager.getExpenses(), expenseManager.getSortCommandSetting());
+        localStorage.saveToFile(expenseManager.getExpenses(), expenseManager.getSortCommandSetting(),
+                recurringPaymentManager.getRecurringPayments());
     }
 
     private void runCommandSortExpense(ConsoleCommandSortExpense commandSortExpense) {
         expenseManager.updateSortExpenses(commandSortExpense);
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_SORTED_EXPENSE_SUCCESS);
 
-        localStorage.saveToFile(expenseManager.getExpenses(), expenseManager.getSortCommandSetting());
+        localStorage.saveToFile(expenseManager.getExpenses(), expenseManager.getSortCommandSetting(),
+                recurringPaymentManager.getRecurringPayments());
     }
 
     private void runCommandConvertCurrency(ConsoleCommandConvertCurrency consoleCommandConvertCurrency) {
@@ -475,7 +479,8 @@ public class ConsoleInterface {
         printInformationalMessage(convertExpenseToConsoleString(expense));
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_CONVERT_CURRENCY_SUCCESS);
 
-        localStorage.saveToFile(expenseManager.getExpenses(), expenseManager.getSortCommandSetting());
+        localStorage.saveToFile(expenseManager.getExpenses(), expenseManager.getSortCommandSetting(),
+                recurringPaymentManager.getRecurringPayments());
     }
 
     private void runCommandAddTarget(ConsoleCommandAddTarget consoleCommandAddTarget) {
@@ -632,6 +637,9 @@ public class ConsoleInterface {
         printInformationalMessage(convertRecurringPaymentToConsoleString(recurringPayment));
         printBlankLine();
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_ADD_RECURRING_PAYMENT_SUCCESS);
+
+        localStorage.saveToFile(expenseManager.getExpenses(), expenseManager.getSortCommandSetting(),
+                recurringPaymentManager.getRecurringPayments());
     }
 
     private void viewRecurringPayment() {
@@ -689,6 +697,9 @@ public class ConsoleInterface {
         }
 
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_DELETE_RECURRING_PAYMENT_SUCCESS);
+
+        localStorage.saveToFile(expenseManager.getExpenses(), expenseManager.getSortCommandSetting(),
+                recurringPaymentManager.getRecurringPayments());
     }
 
     private void runCommandEditRecurringPayment(
@@ -738,8 +749,9 @@ public class ConsoleInterface {
     private void runCommandMergeExternalFile(ConsoleCommandMergeExternalFile consoleCommandMergeExternalFile) {
         String filePath = consoleCommandMergeExternalFile.getFilePath();
 
-        localStorage.loadFromExternalFile(expenseManager, filePath);
-        localStorage.saveToFile(expenseManager.getExpenses(), expenseManager.getSortCommandSetting());
+        localStorage.loadFromExternalFile(expenseManager, recurringPaymentManager, filePath);
+        localStorage.saveToFile(expenseManager.getExpenses(), expenseManager.getSortCommandSetting(),
+                recurringPaymentManager.getRecurringPayments());
     }
 
     private ConsoleCommand getConsoleCommand() {
@@ -777,7 +789,7 @@ public class ConsoleInterface {
      * Runs the command line interface which the user interacts with.
      */
     public void run() {
-        localStorage.loadFromFile(expenseManager);
+        localStorage.loadFromFile(expenseManager, recurringPaymentManager);
         CurrencyApi.getCurrencyApi(currencyManager);
 
         printBlankLine();
