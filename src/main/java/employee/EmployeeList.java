@@ -15,9 +15,9 @@ public class EmployeeList {
 
     public static void addEmployee(Employee employee) {
         employees.add(employee);
-        System.out.println("Got it. I've added this employee:");
+        System.out.print("Got it. I've added this employee:");
         System.out.println(employee.getEmployeeName());
-        System.out.println("Now you have " + employees.size() + " employees in the employee list.");
+        System.out.println("Now you have " + employees.size() + " employees in the list.");
     }
 
     public static void removeEmployee(int employeeId) {
