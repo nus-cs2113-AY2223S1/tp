@@ -52,6 +52,7 @@ public class CarparkList {
      * @throws NoCarparkFoundException If no carpark was found
      */
     public Carpark findCarpark(String searchString) throws NoCarparkFoundException {
+        carparkHashMap = new HashMap<String, Carpark>();
         if (carparkHashMap.get(searchString.toLowerCase()) == null) {
             throw new NoCarparkFoundException();
         } else {

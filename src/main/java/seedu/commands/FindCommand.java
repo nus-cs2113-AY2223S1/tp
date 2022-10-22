@@ -20,16 +20,10 @@ public class FindCommand extends Command {
 
     @Override
     public CommandResult execute() throws NoCarparkFoundException {
-        final Carpark result = findCarpark(carparkID);
+        final Carpark result = carparkList.findCarpark(carparkID);
         return new CommandResult(result.toString());
     }
 
 
-     public Carpark findCarpark(String searchString) throws NoCarparkFoundException {
-        if (CarparkList.carparkHashMap.get(searchString.toLowerCase()) == null) {
-            throw new NoCarparkFoundException();
-        } else {
-            return CarparkList.carparkHashMap.get(searchString.toLowerCase());
-        }
-    }
+
 }

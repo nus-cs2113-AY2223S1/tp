@@ -38,7 +38,7 @@ public class Parser {
 
         switch (commandWord) {
         case AuthCommand.COMMAND_WORD:
-            return new AuthCommand(api);
+            return prepareAuth(arguments);
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
         case FindCommand.COMMAND_WORD:
@@ -52,6 +52,11 @@ public class Parser {
         default:
             return new InvalidCommand("Invalid Command");
         }
+    }
+
+    private Command prepareAuth(String arguments) {
+        final String apiKey = arguments.trim();
+        return new AuthCommand(api, apiKey);
     }
     private Command prepareFind(String arguments) {
         final String carparkID = arguments.trim();
