@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Logger;
 
+
 public class Module {
     private static final Logger lgr = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private String moduleName;
@@ -42,26 +43,54 @@ public class Module {
         this.moduleName = moduleName;
         this.moduleDescription = moduleDescription;
         this.lessons = lessons;
-        this.attending = matchLessonTypes(lessons);
         this.classifiedLessons = classifyLessons(lessons);
+        this.attending = matchLessonTypes(classifiedLessons);
     }
 
-    private List<Lesson> matchLessonTypes(List<Lesson> lessons) {
+    private List<Lesson> matchLessonTypes(HashMap<String, ArrayList<Lesson>> classifiedLessons) {
         List<Lesson> temp = new ArrayList<>();
-        for (Lesson lesson : lessons) {
-            if (!checkExist(temp, lesson)) {
-                addToAttendingList(temp, lesson);
+        for (ArrayList<Lesson> list : classifiedLessons.values()) {
+            int numberSameType = checkDuplicateLessonNumbers(list);
+            for (int i = 0; i < numberSameType; i++) {
+                String tempLessonType = list.get(0).getLessonType();
+                String lessonType = numberSameType == 1 ? tempLessonType : tempLessonType + " " + (i + 1);
+                addToAttendingList(temp, lessonType);
             }
         }
         return temp;
     }
 
-    private void addToAttendingList(List<Lesson> temp, Lesson lesson) {
+    private int checkDuplicateLessonNumbers(ArrayList<Lesson> list) {
+        HashMap<String, Integer> checker = new HashMap<>();
+
+        for (Lesson lesson : list) {
+            String classNum = lesson.getClassNumber();
+            if (!checker.containsKey(classNum)) {
+                checker.put(classNum, 1);
+            } else {
+                int newCount = checker.get(classNum) + 1;
+                checker.remove(classNum);
+                checker.put(classNum, newCount);
+            }
+        }
+        return getHighestCount(checker);
+    }
+
+    private int getHighestCount(HashMap<String, Integer> checker) {
+        int highestCount = 0;
+        for (Integer count : checker.values()) {
+            if (count > highestCount) {
+                highestCount = count;
+            }
+        }
+        return highestCount;
+    }
+
+    private void addToAttendingList(List<Lesson> temp, String lessonType) {
         String day = "Undetermined Day";
         String startTime = "Undetermined";
         String endTime = "Undetermined";
-        String lessonType = lesson.getLessonType();
-        String classNumber = lesson.getClassNumber();
+        String classNumber = "NA";
         Lesson tempLesson = new Lesson(day, startTime, endTime, lessonType, classNumber);
         temp.add(tempLesson);
         if (!AttendingManager.attendingExists(tempLesson, moduleCode)) {
