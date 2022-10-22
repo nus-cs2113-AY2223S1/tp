@@ -195,6 +195,7 @@ public class UserStorageParser {
             newUni.setFavourite(false);
         }
     }
+
     /**.
      * Method to split file content by line, using regex "%"
      * @param uni string containing PU information, separated by "%"
