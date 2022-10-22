@@ -8,10 +8,17 @@ import java.util.List;
 
 public class State {
     private static final int MODULES_LIST_SIZE = 5;
-    private static int semester = 1;
+    private static int semester;
 
-    private List<List<SelectedModule>> selectedModulesList = new ArrayList<>(Collections.nCopies(MODULES_LIST_SIZE,
-            new ArrayList<>()));
+    private List<List<SelectedModule>> selectedModulesList;
+    public State(){
+        semester = 1;
+        selectedModulesList = new ArrayList<>();
+        for (int i = 0; i < MODULES_LIST_SIZE; i++){
+            selectedModulesList.add(new ArrayList<>());
+        }
+    }
+
 
     public List<SelectedModule> getSelectedModulesList() {
         return selectedModulesList.get(semester);
