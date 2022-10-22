@@ -18,7 +18,6 @@ public class UserUniversityListManager {
 
     // we store the key as the PU name
     private HashMap<String, UserUniversityList> myManager;
-    private HashMap<String, UserUniversityList> myFavourites;
 
     private UserDeletedModules deletedModulesList = new UserDeletedModules();
 
@@ -26,18 +25,15 @@ public class UserUniversityListManager {
 
     public UserUniversityListManager() {
         myManager = new HashMap<String, UserUniversityList>();
-        myFavourites = new HashMap<String, UserUniversityList>();
     }
 
     public UserUniversityListManager(String fileContent) {
         try {
             myManager = UserStorageParser.convertFileContentIntoUniversityList(fileContent);
-            myFavourites = new HashMap<String, UserUniversityList>();
         } catch (InvalidUserStorageFileException e) {
             System.out.println("Invalid file format in data/duke.txt");
             System.out.println("Creating new University List Manager");
             myManager = new HashMap<String, UserUniversityList>();
-            myFavourites = new HashMap<String, UserUniversityList>();
         }
     }
 
@@ -79,7 +75,7 @@ public class UserUniversityListManager {
      * Method to print all the favourite lists of the user.
      */
     public void displayFavourites() {
-        Ui.printUserFavouriteLists(myFavourites);
+        Ui.printUserFavouriteLists(myManager);
     }
 
     /**
@@ -96,10 +92,6 @@ public class UserUniversityListManager {
 
     public boolean foundKeyAll(String inputSchool) {
         return myManager.containsKey(inputSchool);
-    }
-
-    public boolean foundKeyFavourites(String inputSchool) {
-        return myFavourites.containsKey(inputSchool);
     }
 
     public void addModule(String inputSchool, UserModuleMapping inputModule) throws InvalidUserCommandException {
@@ -139,10 +131,6 @@ public class UserUniversityListManager {
             myManager.remove(inputSchool);
             logger.log(Level.FINER, "delete list for " + inputSchool);
             System.out.print(Ui.printPuListDeletedAcknowledgement(inputSchool));
-            if (foundKeyFavourites(inputSchool)) {
-                myFavourites.remove(inputSchool);
-                logger.log(Level.FINER, "delete favourite for " + inputSchool);
-            }
         }
     }
 
@@ -163,10 +151,6 @@ public class UserUniversityListManager {
         return myManager;
     }
 
-    public HashMap<String, UserUniversityList> getMyFavourites() {
-        return myFavourites;
-    }
-
     public void setMyManager(HashMap<String, UserUniversityList> myManager) {
         this.myManager = myManager;
     }
@@ -174,27 +158,25 @@ public class UserUniversityListManager {
     public void addFavourite(String input) throws InvalidUserCommandException {
         if (!myManager.containsKey(input)) {
             throw new InvalidUserCommandException("No such university in list currently");
-        } else if (myFavourites.containsKey(input)) {
+        } else if (myManager.containsKey(input) && myManager.get(input).isFavourite()) {
             throw new InvalidUserCommandException("University already added");
         } else {
-            UserUniversityList u = myManager.get(input);
-            myFavourites.put(input, u);
-            System.out.println(Ui.printFavouriteListAddedAcknowledgement(input));
+            myManager.get(input).setFavourite(true);
+            //UserUniversityList u = myManager.get(input);
+            //myFavourites.put(input, u);
+            System.out.print(Ui.printFavouriteListAddedAcknowledgement(input));
         }
     }
 
     public void deleteFavourite(String input) throws InvalidUserCommandException {
         if (!myManager.containsKey(input)) {
             throw new InvalidUserCommandException("No such university in all your lists currently");
-        } else if (!myFavourites.containsKey(input)) {
+        } else if (myManager.containsKey(input) && !myManager.get(input).isFavourite()) {
             throw new InvalidUserCommandException("No such university in favourite list currently");
         } else {
-            myFavourites.remove(input);
-            System.out.println(Ui.printFavouriteListDeletedAcknowledgement(input));
+            myManager.get(input).setFavourite(false);
+            //myFavourites.remove(input);
+            System.out.print(Ui.printFavouriteListDeletedAcknowledgement(input));
         }
-    }
-
-    public void setMyFavourites(HashMap<String, UserUniversityList> myFavourites) {
-        this.myFavourites = myFavourites;
     }
 }
