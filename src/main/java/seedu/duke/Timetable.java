@@ -258,6 +258,6 @@ public class Timetable {
     public static void replaceLesson(Lesson newLesson, int indexForModule, Integer indexForLesson) {
         assert indexForModule >= 0 : "index should be within range";
 
-        listOfModules.get(indexForModule).replaceAttending(newLesson, indexForLesson);
+        listOfModules.get(indexForModule).replaceAttending(newLesson);
     }
 }
