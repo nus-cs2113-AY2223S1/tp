@@ -15,6 +15,7 @@ public class LocalStorageConfigurations {
     public static final String XML_EXPENSE_AMOUNT_CURRENCY_ATTRIBUTE = "Currency";
     public static final String XML_EXPENSE_CATEGORY_ELEMENT = "Category";
     public static final String XML_EXPENSE_REMARKS_ELEMENT = "Remark";
+    public static final String XML_EXPENSE_MODE_OF_PAYMENT_ELEMENT = "Mode_Of_Payment";
     public static final String XML_TARGET_ELEMENT = "Target";
     public static final String XML_TARGET_ID_ATTRIBUTE = "Id";
     public static final String XML_TARGET_NAME_ELEMENT = "Name";

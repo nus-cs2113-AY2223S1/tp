@@ -109,13 +109,17 @@ class ConsoleParserTest {
         boolean isCategoryEqual = consoleCommandAddExpense
                 .getCategory()
                 == null;
+        boolean isModeOfPaymentEqual = consoleCommandAddExpense
+                .getModeOfPayment()
+                == null;
 
         assertTrue(
                 isNameEqual
                         && isDateTimeEqual
                         && isDescriptionEqual
                         && isAmountEqual
-                        && isCategoryEqual);
+                        && isCategoryEqual
+                        && isModeOfPaymentEqual);
     }
 
     @Test

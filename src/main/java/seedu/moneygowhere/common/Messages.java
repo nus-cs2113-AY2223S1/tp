@@ -89,6 +89,9 @@ public class Messages {
     /**
      * Defines messages for {@link seedu.moneygowhere.data.currency.CurrencyManager}.
      */
+    public static final String CURRENCY_MANAGER_RATES_NOT_FOUND = ""
+            + "There may be an error obtaining the updated Exchange Rate for your desired currency. " + '\n'
+            + "Please enter the exchange rate manually.";
     public static final String CURRENCY_MANAGER_CURRENCY_NOT_FOUND = ""
             + "Currency not found. Please try again.";
 
@@ -126,6 +129,10 @@ public class Messages {
             + ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_CURRENCY
             + " "
             + ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_CURRENCY_LONG.toUpperCase()
+            + "] [-"
+            + ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT
+            + " "
+            + ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_DESC
             + "]";
 
     public static final String CONSOLE_MESSAGE_COMMAND_ADD_EXPENSE_SUCCESS = ""
@@ -212,6 +219,10 @@ public class Messages {
             + ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_CURRENCY
             + " "
             + ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_CURRENCY_LONG.toUpperCase()
+            + "] [-"
+            + ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT
+            + " "
+            + ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_DESC
             + "]";
     public static final String CONSOLE_MESSAGE_COMMAND_EDIT_EXPENSE_SUCCESS = ""
             + "The expense was edited successfully.";
@@ -260,7 +271,12 @@ public class Messages {
             + " -"
             + ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY_ARG_CURRENCY
             + " "
-            + ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY_ARG_CURRENCY_LONG.toUpperCase();
+            + ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY_ARG_CURRENCY_LONG.toUpperCase()
+            + " [-"
+            + ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY_ARG_RATE
+            + " "
+            + ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY_ARG_RATE_LONG.toUpperCase()
+            + "]";
     public static final String CONSOLE_MESSAGE_COMMAND_CONVERT_CURRENCY_SUCCESS = ""
             + "The expense's currency was changed successfully.";
     public static final String CONSOLE_ERROR_COMMAND_CONVERT_CURRENCY_INVALID = ""

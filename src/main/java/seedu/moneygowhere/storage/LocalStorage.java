@@ -41,6 +41,7 @@ import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_EXPENSE_
 import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_EXPENSE_DESCRIPTION_ELEMENT;
 import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_EXPENSE_ELEMENT;
 import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_EXPENSE_ID_ATTRIBUTE;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_EXPENSE_MODE_OF_PAYMENT_ELEMENT;
 import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_EXPENSE_NAME_ELEMENT;
 import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_EXPENSE_REMARKS_ELEMENT;
 import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_INCOME_AMOUNT_ELEMENT;
@@ -230,7 +231,9 @@ public class LocalStorage {
             throw new LocalStorageLoadDataInputError();
         }
 
-        return new Expense(name, dateTime, description, amount, category, remark, currency);
+        String modeOfPayment = element.getElementsByTagName(XML_EXPENSE_MODE_OF_PAYMENT_ELEMENT)
+                .item(0).getTextContent();
+        return new Expense(name, dateTime, description, amount, category, remark, currency, modeOfPayment);
     }
 
     /**
@@ -405,6 +408,9 @@ public class LocalStorage {
             Element remark = doc.createElement(XML_EXPENSE_REMARKS_ELEMENT);
             remark.setTextContent(expense.getRemarks());
             expenseElement.appendChild(remark);
+            Element modeOfPayment = doc.createElement(XML_EXPENSE_MODE_OF_PAYMENT_ELEMENT);
+            remark.setTextContent(expense.getModeOfPayment());
+            expenseElement.appendChild(modeOfPayment);
             index++;
         }
     }
