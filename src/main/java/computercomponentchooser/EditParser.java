@@ -85,10 +85,13 @@ public class EditParser {
             default:
                 throw new UnknownCommandException();
             }
-        } catch (UnknownCommandException | UnlistedBuildException | ArrayIndexOutOfBoundsException
-                 | NullPointerException | BlankStringException e) {
+        } catch (UnknownCommandException | UnlistedBuildException | BlankStringException e) {
             Ui.printLine();
             System.out.println(e.getMessage());
+            Ui.printLine();
+        } catch (ArrayIndexOutOfBoundsException | NullPointerException e) {
+            Ui.printLine();
+            System.out.println("Please input a valid command");
             Ui.printLine();
         }
     }
