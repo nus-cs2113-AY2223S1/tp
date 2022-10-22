@@ -19,7 +19,7 @@ import seedu.duke.module.ModuleMapping;
 import seedu.duke.university.University;
 import seedu.duke.user.UserModuleMapping;
 import seedu.duke.user.UserUniversityListManager;
-import seedu.duke.userstorage.UserStorageParser;
+import seedu.duke.parser.UserStorageParser;
 
 public class Duke {
 

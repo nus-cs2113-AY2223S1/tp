@@ -1,10 +1,11 @@
-package seedu.duke.userstorage;
+package seedu.duke.parser;
 
 import seedu.duke.exceptions.InvalidUserStorageFileException;
 import seedu.duke.user.UserModuleMapping;
 import seedu.duke.user.UserModuleMappingList;
 import seedu.duke.user.UserUniversityList;
 import seedu.duke.user.UserUniversityListManager;
+import seedu.duke.userstorage.UserStorage;
 
 import java.io.IOException;
 import java.util.ArrayList;

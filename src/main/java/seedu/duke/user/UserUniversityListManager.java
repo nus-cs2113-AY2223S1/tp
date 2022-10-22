@@ -3,7 +3,7 @@ package seedu.duke.user;
 import seedu.duke.exceptions.InvalidUserCommandException;
 import seedu.duke.ui.Ui;
 import seedu.duke.exceptions.InvalidUserStorageFileException;
-import seedu.duke.userstorage.UserStorageParser;
+import seedu.duke.parser.UserStorageParser;
 
 import java.util.HashMap;
 import java.util.Map;
