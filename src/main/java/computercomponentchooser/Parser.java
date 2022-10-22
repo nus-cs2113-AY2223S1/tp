@@ -1,5 +1,6 @@
 package computercomponentchooser;
 
+import computercomponentchooser.exceptions.BlankStringException;
 import computercomponentchooser.exceptions.DuplicateBuildException;
 import computercomponentchooser.exceptions.UnknownCommandException;
 import computercomponentchooser.exceptions.UnlistedBuildException;
@@ -74,13 +75,14 @@ public class Parser {
             default:
                 throw new UnknownCommandException();
             }
-        } catch (UnknownCommandException | DuplicateBuildException | UnlistedBuildException  | IOException e) {
+        } catch (UnknownCommandException | DuplicateBuildException | UnlistedBuildException | IOException
+                 | BlankStringException e) {
             System.out.println(e.getMessage());
             Ui.printLine();
         }
     }
 
-    private void mainParseFind(String line) {
+    private void mainParseFind(String line) throws BlankStringException {
         String searchTerm = EditParser.getParameter(line, 1);
         Ui.printLine();
         buildManager.findBuilds(searchTerm);
@@ -100,10 +102,14 @@ public class Parser {
         Ui.printLine();
     }
 
-    private void mainParseAdd(String line) throws DuplicateBuildException {
+    private void mainParseAdd(String line) throws DuplicateBuildException, BlankStringException {
         Build newBuild;
         String name;
         name = getParameter(line, NAME_PARAMETER);
+        if (name.isBlank()) {
+            throw new BlankStringException();
+        }
+
         newBuild = new Build(name);
         buildManager.addBuild(newBuild);
         Ui.printLine();
@@ -142,8 +148,11 @@ public class Parser {
 
     private void mainParseList() {
         Ui.printLine();
+        if (buildManager.getBuilds().size() == 0) {
+            System.out.println("You have no builds");
+        }
         System.out.println("Your current builds:");
-        System.out.print(buildManager.toString());
+        System.out.print(buildManager);
         Ui.printLine();
     }
 
