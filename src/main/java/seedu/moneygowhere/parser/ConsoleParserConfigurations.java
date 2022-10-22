@@ -61,7 +61,6 @@ public class ConsoleParserConfigurations {
     public static final String COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_PAYNOW = "PayNow";
     public static final String COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_CASH = "Cash";
     public static final String COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_CARD = "Card";
-
     public static final String COMMAND_ADD_EXPENSE_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS = ""
             + "Command Add-Expense does not have all of the required options.";
 
@@ -315,6 +314,64 @@ public class ConsoleParserConfigurations {
     public static final String COMMAND_ADD_INCOME_ARG_DESCRIPTION_DESC = "Description";
     public static final boolean COMMAND_ADD_INCOME_ARG_DESCRIPTION_HAS_VAL = true;
     public static final boolean COMMAND_ADD_INCOME_ARG_DESCRIPTION_IS_MAND = false;
+    public static final String COMMAND_ADD_INCOME_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS = ""
+            + "Command Add-Income does not have all of the required options.";
+
+    /**
+     * Defines parameters for console command View-Income.
+     */
+    public static final String COMMAND_VIEW_INCOME = "View-Income";
+    public static final String COMMAND_VIEW_INCOME_ARG_INCOME_INDEX = "e";
+    public static final String COMMAND_VIEW_INCOME_ARG_INCOME_INDEX_LONG = "income-index";
+    public static final String COMMAND_VIEW_INCOME_ARG_INCOME_INDEX_DESC = "Index";
+    public static final boolean COMMAND_VIEW_INCOME_ARG_INCOME_INDEX_HAS_VAL = true;
+    public static final boolean COMMAND_VIEW_INCOME_ARG_INCOME_INDEX_IS_MAND = false;
+    public static final String COMMAND_VIEW_INCOME_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS = ""
+            + "Command View-Income does not have all of the required options.";
+
+    /**
+     * Defines parameters for console command Delete-Income.
+     */
+    public static final String COMMAND_DELETE_INCOME = "Delete-Income";
+    public static final String COMMAND_DELETE_INCOME_ARG_INCOME_INDEX = "e";
+    public static final String COMMAND_DELETE_INCOME_ARG_INCOME_INDEX_LONG = "income-index";
+    public static final String COMMAND_DELETE_INCOME_ARG_INCOME_INDEX_DESC = "Index";
+    public static final boolean COMMAND_DELETE_INCOME_ARG_INCOME_INDEX_HAS_VAL = true;
+    public static final boolean COMMAND_DELETE_INCOME_ARG_INCOME_INDEX_IS_MAND = true;
+    public static final String COMMAND_DELETE_INCOME_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS = ""
+            + "Command Delete-Income does not have all of the required options.";
+
+    /**
+     * Defines parameters for console command Edit-Income.
+     */
+    public static final String COMMAND_EDIT_INCOME = "Edit-Income";
+    public static final String COMMAND_EDIT_INCOME_ARG_INCOME_INDEX = "e";
+    public static final String COMMAND_EDIT_INCOME_ARG_INCOME_INDEX_LONG = "income-index";
+    public static final boolean COMMAND_EDIT_INCOME_ARG_INCOME_INDEX_HAS_VAL = true;
+    public static final boolean COMMAND_EDIT_INCOME_ARG_INCOME_INDEX_IS_MAND = true;
+    public static final String COMMAND_EDIT_INCOME_ARG_INCOME_INDEX_DESC = "Index";
+    public static final String COMMAND_EDIT_INCOME_ARG_NAME = "n";
+    public static final String COMMAND_EDIT_INCOME_ARG_NAME_LONG = "name";
+    public static final String COMMAND_EDIT_INCOME_ARG_NAME_DESC = "Name";
+    public static final boolean COMMAND_EDIT_INCOME_ARG_NAME_HAS_VAL = true;
+    public static final boolean COMMAND_EDIT_INCOME_ARG_NAME_IS_MAND = false;
+    public static final String COMMAND_EDIT_INCOME_ARG_AMOUNT = "a";
+    public static final String COMMAND_EDIT_INCOME_ARG_AMOUNT_LONG = "amount";
+    public static final String COMMAND_EDIT_INCOME_ARG_AMOUNT_DESC = "Amount";
+    public static final boolean COMMAND_EDIT_INCOME_ARG_AMOUNT_HAS_VAL = true;
+    public static final boolean COMMAND_EDIT_INCOME_ARG_AMOUNT_IS_MAND = false;
+    public static final String COMMAND_EDIT_INCOME_ARG_DATE_TIME = "d";
+    public static final String COMMAND_EDIT_INCOME_ARG_DATE_TIME_LONG = "datetime";
+    public static final String COMMAND_EDIT_INCOME_ARG_DATE_TIME_DESC = "Date & time";
+    public static final boolean COMMAND_EDIT_INCOME_ARG_DATE_TIME_HAS_VAL = true;
+    public static final boolean COMMAND_EDIT_INCOME_ARG_DATE_TIME_IS_MAND = false;
+    public static final String COMMAND_EDIT_INCOME_ARG_DESCRIPTION = "t";
+    public static final String COMMAND_EDIT_INCOME_ARG_DESCRIPTION_LONG = "description";
+    public static final String COMMAND_EDIT_INCOME_ARG_DESCRIPTION_DESC = "Description";
+    public static final boolean COMMAND_EDIT_INCOME_ARG_DESCRIPTION_HAS_VAL = true;
+    public static final boolean COMMAND_EDIT_INCOME_ARG_DESCRIPTION_IS_MAND = false;
+    public static final String COMMAND_EDIT_INCOME_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS = ""
+            + "Command Edit-Income does not have all of the required options.";
 
     /**
      * Defines parameters for console command Add-RecurringPayment.
@@ -938,6 +995,97 @@ public class ConsoleParserConfigurations {
         options.addOption(optionAmount);
         options.addOption(optionDateTime);
         options.addOption(optionDescription);
+
+        return options;
+    }
+
+    /**
+     * Generates an {@link Options} object with required arguments for command View-Income.
+     *
+     * @return {@link Options} object initialized with the required arguments.
+     */
+    public static Options getCommandViewIncomeOptions() {
+        Option optionIncomeIndex = new Option(
+                COMMAND_VIEW_INCOME_ARG_INCOME_INDEX,
+                COMMAND_VIEW_INCOME_ARG_INCOME_INDEX_LONG,
+                COMMAND_VIEW_INCOME_ARG_INCOME_INDEX_HAS_VAL,
+                COMMAND_VIEW_INCOME_ARG_INCOME_INDEX_DESC
+        );
+        optionIncomeIndex.setRequired(COMMAND_VIEW_INCOME_ARG_INCOME_INDEX_IS_MAND);
+
+        Options options = new Options();
+        options.addOption(optionIncomeIndex);
+
+        return options;
+    }
+
+    /**
+     * Generates an {@link Options} object with required arguments for command Delete-Income.
+     *
+     * @return {@link Options} object initialized with the required arguments.
+     */
+    public static Options getCommandDeleteIncomeOptions() {
+        Option optionIncomeIndex = new Option(
+                COMMAND_DELETE_INCOME_ARG_INCOME_INDEX,
+                COMMAND_DELETE_INCOME_ARG_INCOME_INDEX_LONG,
+                COMMAND_DELETE_INCOME_ARG_INCOME_INDEX_HAS_VAL,
+                COMMAND_DELETE_INCOME_ARG_INCOME_INDEX_DESC
+        );
+        optionIncomeIndex.setRequired(COMMAND_DELETE_INCOME_ARG_INCOME_INDEX_IS_MAND);
+
+        Options options = new Options();
+        options.addOption(optionIncomeIndex);
+
+        return options;
+    }
+
+    /**
+     * Generates an {@link Options} object with required arguments for command Edit-Income.
+     *
+     * @return {@link Options} object initialized with the required arguments.
+     */
+    public static Options getCommandEditIncomeOptions() {
+        Option optionIncomeIndex = new Option(
+                COMMAND_EDIT_INCOME_ARG_INCOME_INDEX,
+                COMMAND_EDIT_INCOME_ARG_INCOME_INDEX_LONG,
+                COMMAND_EDIT_INCOME_ARG_INCOME_INDEX_HAS_VAL,
+                COMMAND_EDIT_INCOME_ARG_INCOME_INDEX_DESC
+        );
+        optionIncomeIndex.setRequired(COMMAND_EDIT_INCOME_ARG_INCOME_INDEX_IS_MAND);
+        Option optionName = new Option(
+                COMMAND_EDIT_INCOME_ARG_NAME,
+                COMMAND_EDIT_INCOME_ARG_NAME_LONG,
+                COMMAND_EDIT_INCOME_ARG_NAME_HAS_VAL,
+                COMMAND_EDIT_INCOME_ARG_NAME_DESC
+        );
+        optionName.setRequired(COMMAND_EDIT_INCOME_ARG_NAME_IS_MAND);
+        Option optionDateTime = new Option(
+                COMMAND_EDIT_INCOME_ARG_DATE_TIME,
+                COMMAND_EDIT_INCOME_ARG_DATE_TIME_LONG,
+                COMMAND_EDIT_INCOME_ARG_DATE_TIME_HAS_VAL,
+                COMMAND_EDIT_INCOME_ARG_DATE_TIME_DESC
+        );
+        optionDateTime.setRequired(COMMAND_EDIT_INCOME_ARG_DATE_TIME_IS_MAND);
+        Option optionDescription = new Option(
+                COMMAND_EDIT_INCOME_ARG_DESCRIPTION,
+                COMMAND_EDIT_INCOME_ARG_DESCRIPTION_LONG,
+                COMMAND_EDIT_INCOME_ARG_DESCRIPTION_HAS_VAL,
+                COMMAND_EDIT_INCOME_ARG_DESCRIPTION_DESC
+        );
+        optionDescription.setRequired(COMMAND_EDIT_INCOME_ARG_DESCRIPTION_IS_MAND);
+        Option optionAmount = new Option(
+                COMMAND_EDIT_INCOME_ARG_AMOUNT,
+                COMMAND_EDIT_INCOME_ARG_AMOUNT_LONG,
+                COMMAND_EDIT_INCOME_ARG_AMOUNT_HAS_VAL,
+                COMMAND_EDIT_INCOME_ARG_AMOUNT_DESC
+        );
+
+        Options options = new Options();
+        options.addOption(optionIncomeIndex);
+        options.addOption(optionName);
+        options.addOption(optionDateTime);
+        options.addOption(optionDescription);
+        options.addOption(optionAmount);
 
         return options;
     }

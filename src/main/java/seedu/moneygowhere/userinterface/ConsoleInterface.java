@@ -1,23 +1,6 @@
 package seedu.moneygowhere.userinterface;
 
-import seedu.moneygowhere.commands.ConsoleCommand;
-import seedu.moneygowhere.commands.ConsoleCommandAddExpense;
-import seedu.moneygowhere.commands.ConsoleCommandAddIncome;
-import seedu.moneygowhere.commands.ConsoleCommandAddRecurringPayment;
-import seedu.moneygowhere.commands.ConsoleCommandAddTarget;
-import seedu.moneygowhere.commands.ConsoleCommandBye;
-import seedu.moneygowhere.commands.ConsoleCommandConvertCurrency;
-import seedu.moneygowhere.commands.ConsoleCommandDeleteExpense;
-import seedu.moneygowhere.commands.ConsoleCommandDeleteRecurringPayment;
-import seedu.moneygowhere.commands.ConsoleCommandDeleteTarget;
-import seedu.moneygowhere.commands.ConsoleCommandEditExpense;
-import seedu.moneygowhere.commands.ConsoleCommandEditRecurringPayment;
-import seedu.moneygowhere.commands.ConsoleCommandEditTarget;
-import seedu.moneygowhere.commands.ConsoleCommandMergeExternalFile;
-import seedu.moneygowhere.commands.ConsoleCommandSortExpense;
-import seedu.moneygowhere.commands.ConsoleCommandViewExpense;
-import seedu.moneygowhere.commands.ConsoleCommandViewRecurringPayment;
-import seedu.moneygowhere.commands.ConsoleCommandViewTarget;
+import seedu.moneygowhere.commands.*;
 import seedu.moneygowhere.common.Configurations;
 import seedu.moneygowhere.common.Messages;
 import seedu.moneygowhere.currency.CurrencyApi;
@@ -30,28 +13,7 @@ import seedu.moneygowhere.data.recurringpayments.RecurringPayment;
 import seedu.moneygowhere.data.recurringpayments.RecurringPaymentManager;
 import seedu.moneygowhere.data.target.Target;
 import seedu.moneygowhere.data.target.TargetManager;
-import seedu.moneygowhere.exceptions.ConsoleParserCommandAddExpenseInvalidException;
-import seedu.moneygowhere.exceptions.ConsoleParserCommandAddIncomeInvalidException;
-import seedu.moneygowhere.exceptions.ConsoleParserCommandAddRecurringPaymentInvalidException;
-import seedu.moneygowhere.exceptions.ConsoleParserCommandAddTargetInvalidException;
-import seedu.moneygowhere.exceptions.ConsoleParserCommandConvertCurrencyInvalidException;
-import seedu.moneygowhere.exceptions.ConsoleParserCommandDeleteExpenseInvalidException;
-import seedu.moneygowhere.exceptions.ConsoleParserCommandDeleteRecurringPaymentInvalidException;
-import seedu.moneygowhere.exceptions.ConsoleParserCommandDeleteTargetInvalidException;
-import seedu.moneygowhere.exceptions.ConsoleParserCommandEditExpenseInvalidException;
-import seedu.moneygowhere.exceptions.ConsoleParserCommandEditRecurringPaymentInvalidException;
-import seedu.moneygowhere.exceptions.ConsoleParserCommandEditTargetInvalidException;
-import seedu.moneygowhere.exceptions.ConsoleParserCommandMergeExternalFileInvalidException;
-import seedu.moneygowhere.exceptions.ConsoleParserCommandNotFoundException;
-import seedu.moneygowhere.exceptions.ConsoleParserCommandSortExpenseInvalidException;
-import seedu.moneygowhere.exceptions.ConsoleParserCommandViewExpenseInvalidException;
-import seedu.moneygowhere.exceptions.ConsoleParserCommandViewRecurringPaymentInvalidException;
-import seedu.moneygowhere.exceptions.ConsoleParserCommandViewTargetInvalidException;
-import seedu.moneygowhere.exceptions.CurrencyInvalidException;
-import seedu.moneygowhere.exceptions.CurrencyRatesNotFoundException;
-import seedu.moneygowhere.exceptions.ExpenseManagerExpenseNotFoundException;
-import seedu.moneygowhere.exceptions.RecurringPaymentManagerRecurringPaymentNotFoundException;
-import seedu.moneygowhere.exceptions.TargetManagerTargetNotFoundException;
+import seedu.moneygowhere.exceptions.*;
 import seedu.moneygowhere.logger.LocalLogger;
 import seedu.moneygowhere.parser.ConsoleParser;
 import seedu.moneygowhere.storage.LocalStorage;
@@ -622,6 +584,104 @@ public class ConsoleInterface {
          */
     }
 
+    private void viewIncomeByIncomeIndex(int incomeIndex) {
+        Income income;
+        try {
+            income = incomeManager.getIncome(incomeIndex);
+        } catch (IncomeManagerIncomeNotFoundException exception) {
+            printErrorMessage(exception.getMessage());
+
+            return;
+        }
+
+        printInformationalMessage("---- INCOME INDEX " + incomeIndex + " ----");
+        printInformationalMessage(convertIncomeToConsoleString(income));
+    }
+
+    private void viewIncome() {
+        ArrayList<Income> incomes = incomeManager.getIncomes();
+
+        if (incomes.isEmpty()) {
+            printInformationalMessage(Messages.COMMAND_VIEW_INCOME_EMPTY_LIST);
+        }
+
+        for (int index = 0; index < incomes.size(); index++) {
+            Income income = incomes.get(index);
+
+            printInformationalMessage("---- INCOME INDEX " + index + " ----");
+            printInformationalMessage(convertIncomeToConsoleString(income));
+        }
+    }
+
+    private void runCommandViewIncome(ConsoleCommandViewIncome consoleCommandViewIncome) {
+        int incomeIndex = consoleCommandViewIncome.getIncomeIndex();
+
+        if (incomeIndex >= 0) {
+            viewIncomeByIncomeIndex(incomeIndex);
+        } else {
+            viewIncome();
+        }
+    }
+
+    private void runCommandDeleteIncome(ConsoleCommandDeleteIncome consoleCommandDeleteIncome) {
+        int incomeIndex = consoleCommandDeleteIncome.getIncomeIndex();
+
+        try {
+            incomeManager.deleteIncome(incomeIndex);
+        } catch (IncomeManagerIncomeNotFoundException exception) {
+            printErrorMessage(exception.getMessage());
+            return;
+        }
+
+        printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_DELETE_INCOME_SUCCESS);
+
+        // localStorage.saveToFile(incomeManager.getIncomes());
+    }
+
+    private void runCommandEditIncome(ConsoleCommandEditIncome consoleCommandEditIncome) {
+        int incomeIndex = consoleCommandEditIncome.getIncomeIndex();
+
+        Income oldIncome;
+        try {
+            oldIncome = incomeManager.getIncome(incomeIndex);
+        } catch (IncomeManagerIncomeNotFoundException exception) {
+            printErrorMessage(exception.getMessage());
+            return;
+        }
+
+        String name = consoleCommandEditIncome.getName();
+        if (name == null) {
+            name = oldIncome.getName();
+        }
+        LocalDateTime dateTime = consoleCommandEditIncome.getDateTime();
+        if (dateTime == null) {
+            dateTime = oldIncome.getDateTime();
+        }
+        String description = consoleCommandEditIncome.getDescription();
+        if (description == null) {
+            description = oldIncome.getDescription();
+        }
+        BigDecimal amount = consoleCommandEditIncome.getAmount();
+        if (amount == null) {
+            amount = oldIncome.getAmount();
+        }
+
+        Income newIncome = new Income(name, dateTime, description, amount);
+        try {
+            incomeManager.editIncome(incomeIndex, newIncome);
+        } catch (IncomeManagerIncomeNotFoundException exception) {
+            printErrorMessage(exception.getMessage());
+            return;
+        }
+
+        printInformationalMessage("---- INCOME INDEX " + incomeIndex + " ----");
+        printInformationalMessage(convertIncomeToConsoleString(newIncome));
+        printBlankLine();
+        printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_EDIT_INCOME_SUCCESS);
+
+        // localStorage.saveToFile(incomeManager.getIncomes());
+    }
+
     private void runCommandAddRecurringPayment(ConsoleCommandAddRecurringPayment consoleCommandAddRecurringPayment) {
         RecurringPayment recurringPayment = new RecurringPayment(
                 consoleCommandAddRecurringPayment.getName(),
@@ -774,6 +834,9 @@ public class ConsoleInterface {
                  | ConsoleParserCommandDeleteTargetInvalidException
                  | ConsoleParserCommandEditTargetInvalidException
                  | ConsoleParserCommandAddIncomeInvalidException
+                 | ConsoleParserCommandViewIncomeInvalidException
+                 | ConsoleParserCommandDeleteIncomeInvalidException
+                 | ConsoleParserCommandEditIncomeInvalidException
                  | ConsoleParserCommandAddRecurringPaymentInvalidException
                  | ConsoleParserCommandViewRecurringPaymentInvalidException
                  | ConsoleParserCommandDeleteRecurringPaymentInvalidException
@@ -814,6 +877,12 @@ public class ConsoleInterface {
                 runCommandConvertCurrency((ConsoleCommandConvertCurrency) consoleCommand);
             } else if (consoleCommand instanceof ConsoleCommandAddIncome) {
                 runCommandAddIncome((ConsoleCommandAddIncome) consoleCommand);
+            } else if (consoleCommand instanceof ConsoleCommandViewIncome) {
+                runCommandViewIncome((ConsoleCommandViewIncome) consoleCommand);
+            } else if (consoleCommand instanceof ConsoleCommandDeleteIncome) {
+                runCommandDeleteIncome((ConsoleCommandDeleteIncome) consoleCommand);
+            } else if (consoleCommand instanceof ConsoleCommandEditIncome) {
+                runCommandEditIncome((ConsoleCommandEditIncome) consoleCommand);
             } else if (consoleCommand instanceof ConsoleCommandViewTarget) {
                 runCommandViewTarget((ConsoleCommandViewTarget) consoleCommand);
             } else if (consoleCommand instanceof ConsoleCommandDeleteTarget) {
