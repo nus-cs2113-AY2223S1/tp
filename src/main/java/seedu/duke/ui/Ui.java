@@ -92,7 +92,7 @@ public class Ui {
                 + "Displays all existing university modules mappings that are approved in the format:\n"
                 + "                                                                     "
                 + "[Partner University Module Code] [Partner University Module Title] "
-                + "[Partner University Module Credits] | [NUS Module Code] | [NUS Module Title] | "
+                + "[Partner University Module Credits] | [NUS Module Code] [NUS Module Title] "
                 + "[NUS Module Credits] in NUS\n"
                 + SPACING + "list      " + "/list UNIVERSITIES                                    "
                 + "Displays all universities with module mappings available in database\n"
