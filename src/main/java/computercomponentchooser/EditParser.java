@@ -13,6 +13,7 @@ import computercomponentchooser.components.Case;
 
 import computercomponentchooser.exceptions.BlankStringException;
 import computercomponentchooser.exceptions.UnknownCommandException;
+import computercomponentchooser.exceptions.UnlistedBuildException;
 import computercomponentchooser.export.ExportText;
 
 import static computercomponentchooser.ComputerComponentChooser.storage;
@@ -84,8 +85,9 @@ public class EditParser {
             default:
                 throw new UnknownCommandException();
             }
-        } catch (UnknownCommandException | ArrayIndexOutOfBoundsException | NullPointerException
-                 | BlankStringException e) {
+        } catch (UnknownCommandException | UnlistedBuildException | ArrayIndexOutOfBoundsException
+                 | NullPointerException | BlankStringException e) {
+            Ui.printLine();
             System.out.println(e.getMessage());
             Ui.printLine();
         }
@@ -110,7 +112,7 @@ public class EditParser {
             parseAddMotherboard(editBuild, line, type, name, price, power);
             break;
         case "powersupply":
-            parseAddPowerSupply(editBuild, line, type, name, price, power);
+            parseAddPowerSupply(editBuild, type, name, price, power);
             break;
         case "gpu":
             parseAddGpu(editBuild, line, type, name, price, power);
@@ -128,7 +130,7 @@ public class EditParser {
             parseAddCase(editBuild, line, type, name, price, power);
             break;
         case "other":
-            parseAddOther(editBuild, line, type, name, price, power);
+            parseAddOther(editBuild, type, name, price, power);
             break;
         default:
             break;
@@ -137,8 +139,6 @@ public class EditParser {
         } catch (Exception e) {
             System.out.println("Error saving build");
         }
-
-        Ui.printLine();
         System.out.println("You have added " + name);
         Ui.printLine();
     }
@@ -161,7 +161,7 @@ public class EditParser {
         editBuild.addComponent(type, motherboard);
     }
 
-    public void parseAddPowerSupply(Build editBuild, String line, String type, String name, String price,
+    public void parseAddPowerSupply(Build editBuild, String type, String name, String price,
                                     String power) {
         PowerSupply powersupply = new PowerSupply(name, price, power);
         editBuild.addComponent(type, powersupply);
@@ -197,7 +197,7 @@ public class EditParser {
         editBuild.addComponent(type, case1);
     }
 
-    public void parseAddOther(Build editBuild, String line, String type, String name, String price, String power) {
+    public void parseAddOther(Build editBuild, String type, String name, String price, String power) {
         Other other = new Other(name, price, power);
         editBuild.addComponent(type, other);
     }
@@ -228,17 +228,23 @@ public class EditParser {
         Ui.printLine();
     }
 
-    public void parseEdit(String line) {
+    public void parseEdit(String line) throws UnlistedBuildException {
         buildName = getParameter(line, TYPE_PARAMETER);
+        if (!BuildManager.doesBuildExist(buildName)) {
+            throw new UnlistedBuildException();
+        }
         Ui.printLine();
         System.out.println("You are now editing " + buildName);
         Ui.printLine();
     }
 
-    public void parseView(Build editBuild, String line) {
+    public void parseView(Build editBuild, String line) throws UnlistedBuildException {
         String name = getParameter(line, NAME_PARAMETER);
         String type = getParameter(line, TYPE_PARAMETER);
         Ui.printLine();
+        if (!BuildManager.doesBuildExist(name)) {
+            throw new UnlistedBuildException();
+        }
         System.out.println(editBuild.getComponent(type, name).getDetails());
         Ui.printLine();
     }

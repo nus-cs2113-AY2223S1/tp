@@ -3,9 +3,7 @@ package computercomponentchooser;
 import java.util.HashMap;
 import java.util.Map;
 
-import computercomponentchooser.exceptions.BlankStringException;
-import computercomponentchooser.exceptions.DuplicateBuildException;
-import computercomponentchooser.exceptions.UnlistedBuildException;
+import computercomponentchooser.exceptions.*;
 
 public class BuildManager {
     private static Map<String, Build> builds;
@@ -13,7 +11,6 @@ public class BuildManager {
     public BuildManager() {
         builds = new HashMap<>();
     }
-
 
     public void addBuild(Build build) throws DuplicateBuildException {
         if (builds.containsKey(build.getName())) {
@@ -71,43 +68,41 @@ public class BuildManager {
         }
     }
 
-    public void filterBuilds(String filterType, String lowestNumber, String highestNumber) {
+    public void filterBuilds(String filterType, String lowestNumber, String highestNumber) throws NumberFormatException,
+            UnknownCommandException, NegativeNumberException {
         int i = 0;
-        try {
-            switch (filterType) {
-            case "price":
-                i = filterPrice(lowestNumber, highestNumber, i);
-                break;
-            case "power":
-                i = filterPower(lowestNumber, highestNumber, i);
-                break;
-            case "compatibility":
-                i = filterCompatibility(i);
-                break;
-            default:
-                // add throw exception/assert if this works
-                break;
-            }
-            if (i == 0) {
-                System.out.println("No builds that meet specifications found.");
-            }
-        } catch (NumberFormatException e) {
-            System.out.println("Please enter a valid number.");
+
+        switch (filterType) {
+        case "price":
+            i = filterPrice(lowestNumber, highestNumber, i);
+            break;
+        case "power":
+            i = filterPower(lowestNumber, highestNumber, i);
+            break;
+        case "compatibility":
+            i = filterCompatibility(i);
+            break;
+        default:
+            throw new UnknownCommandException();
+        }
+        if (i == 0) {
+            System.out.println("No builds that meet specifications found.");
         }
     }
 
-    private int filterPrice(String lowestNumber, String highestNumber, int i) throws NumberFormatException {
+    private int filterPrice(String lowestNumber, String highestNumber, int i) throws NumberFormatException,
+            NegativeNumberException {
         for (String name : builds.keySet()) {
             float lowestNum = Float.parseFloat(lowestNumber);
             float highestNum = Float.parseFloat(highestNumber);
             if (highestNum < 0 || lowestNum < 0) {
-                System.out.println("Please enter number(s) greater than 0.");
-                break;
+                throw new NegativeNumberException();
             }
             Build build = builds.get(name);
             if (lowestNum > highestNum) {
-                System.out.println("Please enter a valid range.");
-                break;
+                float temp = lowestNum;
+                lowestNum = highestNum;
+                highestNum = temp;
             }
             if (lowestNum <= build.getTotalCost() && build.getTotalCost() <= highestNum) {
                 i = printFilteredList(i, name);
@@ -116,18 +111,19 @@ public class BuildManager {
         return i;
     }
 
-    private int filterPower(String lowestNumber, String highestNumber, int i) throws NumberFormatException {
+    private int filterPower(String lowestNumber, String highestNumber, int i) throws NumberFormatException,
+            NegativeNumberException {
         for (String name : builds.keySet()) {
             int lowestNum = Integer.parseInt(lowestNumber);
             int highestNum = Integer.parseInt(highestNumber);
             if (highestNum < 0 || lowestNum < 0) {
-                System.out.println("Please enter number(s) greater than 0.");
-                break;
+                throw new NegativeNumberException();
             }
             if (lowestNum > highestNum) {
-                System.out.println("Please enter a valid range.");
-                break;
-            } // different placement compared to price filter to avoid the similar lines warning
+                int temp = lowestNum;
+                lowestNum = highestNum;
+                highestNum = temp;
+            }
             Build build = builds.get(name);
             if (lowestNum <= build.getTotalPower() && build.getTotalPower() <= highestNum) {
                 i = printFilteredList(i, name);
@@ -153,5 +149,9 @@ public class BuildManager {
         System.out.println((i + 1) + ". " + name);
         i++;
         return i;
+    }
+
+    public static boolean doesBuildExist(String buildName) {
+        return builds.containsKey(buildName);
     }
 }

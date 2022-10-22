@@ -1,9 +1,6 @@
 package computercomponentchooser;
 
-import computercomponentchooser.exceptions.BlankStringException;
-import computercomponentchooser.exceptions.DuplicateBuildException;
-import computercomponentchooser.exceptions.UnknownCommandException;
-import computercomponentchooser.exceptions.UnlistedBuildException;
+import computercomponentchooser.exceptions.*;
 import computercomponentchooser.export.ExportCsv;
 import computercomponentchooser.export.ExportText;
 
@@ -77,8 +74,11 @@ public class Parser {
                 throw new UnknownCommandException();
             }
         } catch (UnknownCommandException | DuplicateBuildException | UnlistedBuildException | IOException
-                 | BlankStringException e) {
+                 | NegativeNumberException | BlankStringException e) {
             System.out.println(e.getMessage());
+            Ui.printLine();
+        } catch (NumberFormatException e) {
+            System.out.println("Please enter a valid number.");
             Ui.printLine();
         }
     }
@@ -90,7 +90,8 @@ public class Parser {
         Ui.printLine();
     }
 
-    private void mainParseFilter(String line) {
+    private void mainParseFilter(String line) throws NumberFormatException, UnknownCommandException,
+            NegativeNumberException {
         String filterType = EditParser.getParameter(line, 1);
         String lowestNumber = "";
         String highestNumber = "";
@@ -123,10 +124,13 @@ public class Parser {
         }
     }
 
-    private void mainParseView(String line) {
+    private void mainParseView(String line) throws UnlistedBuildException {
         String name;
         name = getParameter(line, NAME_PARAMETER);
         Ui.printLine();
+        if (!BuildManager.doesBuildExist(name)) {
+            throw new UnlistedBuildException();
+        }
         System.out.print(buildManager.getBuild(name).toString());
         Ui.printLine();
     }
@@ -136,12 +140,12 @@ public class Parser {
         Build newBuild;
         name = getParameter(line, NAME_PARAMETER);
         newBuild = new Build(name);
+        buildManager.deleteBuild(name, newBuild);
         try {
             storage.deleteBuild(name, buildManager);
         } catch (Exception e) {
             System.out.println("Error saving builds");
         }
-        buildManager.deleteBuild(name, newBuild);
         Ui.printLine();
         System.out.println("You have removed " + name);
         Ui.printLine();
