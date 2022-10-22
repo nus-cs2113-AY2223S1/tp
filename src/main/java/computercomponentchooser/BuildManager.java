@@ -72,7 +72,7 @@ public class BuildManager {
                     if (i == 0) {
                         System.out.println("Filtered Builds:");
                     }
-                    System.out.println((i+1) + ": " + name);
+                    System.out.println((i+1) + ". " + name);
                     i++;
                 }
             }
@@ -86,7 +86,7 @@ public class BuildManager {
                     if (i == 0) {
                         System.out.println("Filtered Builds:");
                     }
-                    System.out.println((i+1) + ": " + name);
+                    System.out.println((i+1) + ". " + name);
                     i++;
                 }
             }
@@ -98,7 +98,7 @@ public class BuildManager {
                     if (i == 0) {
                         System.out.println("Filtered Builds:");
                     }
-                    System.out.println((i+1) + ": " + name);
+                    System.out.println((i+1) + ". " + name);
                     i++;
                 }
             }
