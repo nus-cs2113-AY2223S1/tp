@@ -32,6 +32,66 @@ modifyPatientDetails - this method takes in name, birthDate, gender and ID. It t
 If the patient is not found, returns. Else, if the name is not an empty String, replace the existing name with the input name.
 Repeat for birthDate and gender.
 
+### VisitList Component
+The `VisitList` Component,
+* stores the list of visits
+* can add new visit to the list
+* can edit reason for an existing visit in the list
+* can view all visits in the list
+* can view all visits for a patient
+* can view a specific visit
+* depends on `UI` class (as the `VisitList` component interacts with user through the UI component, and makes use of its methods to print details)
+
+**Methods in `VisitList` class:**
+* `addVisit` - This method allows user to add a visit to the `VisitList` by specifying `id` of patient, `dateOfVisit`, and `timeOfVisit`.
+* `editReason` - This method allows user to edit reason for an existing visit, by specifying `id` of patient and `reason` for visit
+* `viewAll` - This method iterates through the list of all visits, and prints each visit record
+* `viewPatient` - This method iterates through the list of all visits, and prints the visit records that match the specified `id` of patient
+* `viewVisit` - This method iterates through the list of all visits, and prints the visit record that matches the specified `index` of the visit
+
+### PrescriptionList component
+**API**: `PrescriptionList.java`
+
+![](../diagrams/PrescriptionListClassDiagram.png)
+
+The `PrescriptionList` component,
+* stores the list of prescriptions
+* can add new prescription to the list
+* can edit existing prescriptions inside the list
+* can change the status of prescription inside the list
+* can view all prescriptions, view a patient's prescription or view a patient's active prescription 
+* depends on `UI` class (because the `PrescriptionList` component needs to interact with user through the `UI` 
+component)
+
+**Methods in `PrescriptionList` class:**
+
+* **`add`** - This method allow user to add prescription into the list by specifying `patientId`, `medicine`, `dosage` and 
+`timeInterval`.
+* **`viewAll`** - This methods iterates through the list of all prescriptions and print the details of prescriptions from
+all patients.
+* **`viewPatientPrescription`** - This method iterates through the list of prescriptions and print the details of 
+prescriptions from the specified `patientId`.
+* **`viewActivePatientPrescription`** - This method iterates through the list of prescriptions and print the details of
+all active prescriptions with the specified `patientId`
+* **`edit`** - This method allows user to edit the `medicine`, `dosage` or `timeInterval` of the prescription of the 
+specified index
+* **`activatePrescription`** - This method allows user to set the prescription of specified index as active.
+* **`deactivatePrescription`** - This method allows user to set the prescription of specified index as inactive.
+
+### Prescription component
+The `Prescription` component,
+* stores the medicine name
+* the medicines timeInterval 
+* patient ID
+* dosage
+* if the Prescription is active or not 
+
+**Methods in `Prescription` class:**
+* 'add' - creates a new Prescription - needs to insert all the components except if active or not (if not included the default is active )
+* Getters and Setters for each of the components
+* Print format
+* method that checks if a patient has the Prescription
+* method that checks if a patient has the Prescription and if the Prescription is active
 ## Product scope
 ### Target user profile
 
@@ -50,8 +110,18 @@ Repeat for birthDate and gender.
 
 ## Non-Functional Requirements
 
-{Give non-functional requirements}
+Parser:
 
+The parsing class utilizes regex for each of the commands for two main reasons: usability and error-catching.
+
+For usability, the input is automatically separated into distinct groups through the Java regex library, which allows
+input such as ID, name, etc. to be pulled out in multi-word or one word parts.
+
+For error-catching, the input is checked to be in a certain format (i.e. DOB is DD-MM-YYYY)
+or of a certain type (i.e. the ID is one word made up of letters and numbers).
+
+If there is an error, the regex also helps with identifying the exact error issue, and
+sending that back to the user.
 ## Glossary
 
 * *glossary item* - Definition
