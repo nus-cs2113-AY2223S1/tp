@@ -19,7 +19,13 @@ public class AddModuleCommand extends Command {
     private boolean successful;
 
     public static final String COMMAND_WORD = "add";
-    
+    public static final String FORMAT = "add MODULE_CODE";
+    public static final String HELP_DISPLAY = COMMAND_WORD
+            + ": add a module into your planner!\n"
+            + "\tUsage:\t"
+            + FORMAT
+            + System.lineSeparator();
+
     public AddModuleCommand(String[] input) {
         super(input);
         String moduleCode = input[1].toUpperCase();

@@ -13,11 +13,11 @@ import java.util.Scanner;
  */
 public class Ui {
 
-    private static final String LOGO = "                      \n"
-            + "__ __ _____ _____ _____ _____\n"
-            + "|  |  |  _  |     |     |     |\n"
-            + "|_   _|     | | | |  |  | | | |\n"
-            + "  |_| |__|__|_|_|_|_____|_|_|_|\n";
+    private static final String LOGO = "                      " + System.lineSeparator()
+            + "__ __ _____ _____ _____ _____" + System.lineSeparator()
+            + "|  |  |  _  |     |     |     |" + System.lineSeparator()
+            + "|_   _|     | | | |  |  | | | |" + System.lineSeparator()
+            + "  |_| |__|__|_|_|_|_____|_|_|_|" + System.lineSeparator();
 
 
     private static final String MESSAGE_GREET = "Hello from" + System.lineSeparator()
@@ -70,9 +70,18 @@ public class Ui {
     /**
      * To store String messages into a buffer.
      * @param message the message to add into the buffer.
+     * @param hasIndent whether to indent a message to the right, false by default if not specified by user
      */
+    public void addMessage(String message, boolean hasIndent) {
+        if (hasIndent) {
+            uiBuffer.add("\t" + message);
+        } else {
+            uiBuffer.add(message);
+        }
+    }
+
     public void addMessage(String message) {
-        uiBuffer.add(message);
+        addMessage(message, false);
     }
 
     public void addMessage(ArrayList<String> messages) {

@@ -42,7 +42,7 @@ public class Duke {
                 command.execute(state, ui, storage);
                 isExit = command.isExit();
             } catch (Exception e) {
-                //TODO: implement catch block once exception is ready
+                ui.displayMessage(e.getMessage());
             } finally {
                 ui.displayDivider();
             }
@@ -69,6 +69,7 @@ public class Duke {
      * Main entry-point for the java.duke.Duke application.
      */
     public static void main(String[] args) {
+
         new Duke(filePath).run();
     }
 }

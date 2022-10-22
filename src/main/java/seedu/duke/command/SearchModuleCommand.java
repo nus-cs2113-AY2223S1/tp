@@ -14,6 +14,12 @@ import java.util.logging.Logger;
 
 public class SearchModuleCommand extends Command {
     public static final String COMMAND_WORD = "search";
+    public static final String FORMAT = "search KEYWORD";
+    public static final String HELP_DISPLAY = COMMAND_WORD
+            + ": List out all modules that matches KEYWORD, where KEYWORD could be module code/faculty!\n"
+            + "\tUsage:\t"
+            + FORMAT
+            + System.lineSeparator();
 
     // private String toSearchModuleCode;
     private Map<String, String> params;
@@ -35,7 +41,7 @@ public class SearchModuleCommand extends Command {
     public void execute(State state, Ui ui, Storage storage) {
         assert state != null : "List of lessons should not be null";
         logger = Logger.getLogger(SUBSYSTEM_NAME);
-        logger.log(Level.INFO, "Loading search module command");
+        logger.log(Level.FINE, "Loading search module command");
 
         toSearchModuleCode = params.getOrDefault("code", null);
         toSearchModuleTitle = params.getOrDefault("title", null);
@@ -111,7 +117,20 @@ public class SearchModuleCommand extends Command {
         List<Module> moduleList = Module.getAll();
         List<Module> searchResult = new ArrayList<>();
 
-        // add all the mods with similar toSearchModuleCode to searchResult
+        // add all the mods with similar toSearchModuleCode and toSearchModuleTitle to searchResult
+        // for (Module m : moduleList) {
+        //     if (toSearchModuleCode != null && m.moduleCode.contains(toSearchModuleCode.toUpperCase())) {
+        //         searchResult.add(m);
+        //     }
+
+        //     if (toSearchModuleTitle != null && m.title.toLowerCase().contains(toSearchModuleTitle.toLowerCase())) {
+        //         // add only if it is not already in the list
+        //         if (!searchResult.contains(m)) {
+        //             searchResult.add(m);
+        //         }
+        //     }
+        // }
+
         for (Module m : moduleList) {
             if (toSearchModuleCode != null && m.moduleCode.contains(toSearchModuleCode.toUpperCase())) {
                 searchResult.add(m);
