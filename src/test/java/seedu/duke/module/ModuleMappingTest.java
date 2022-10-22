@@ -51,7 +51,7 @@ public class ModuleMappingTest {
         University partnerUniversity = new University("Zhejiang University", "China");
 
         assertThrows(InvalidModuleException.class,
-                () -> new Module("", "Computer Networks", "2.5", partnerUniversity));
+            () -> new Module("", "Computer Networks", "2.5", partnerUniversity));
     }
 
     @Test
@@ -59,7 +59,7 @@ public class ModuleMappingTest {
         University partnerUniversity = new University("Zhejiang University", "China");
 
         assertThrows(InvalidModuleException.class,
-                () -> new Module("21121340", "", "2.5", partnerUniversity));
+            () -> new Module("21121340", "", "2.5", partnerUniversity));
     }
 
     @Test
@@ -68,7 +68,7 @@ public class ModuleMappingTest {
         University partnerUniversity = new University("Zhejiang University", "China");
 
         assertThrows(InvalidModuleException.class,
-                () -> new Module("21121340", "Computer Networks", "", partnerUniversity));
+            () -> new Module("21121340", "Computer Networks", "", partnerUniversity));
     }
 
     @Test
@@ -76,7 +76,7 @@ public class ModuleMappingTest {
         University nus = new University("NUS", "Singapore");
 
         assertThrows(InvalidModuleException.class,
-                () -> new Module("", "Intro to Computer Networks", "4", nus));
+            () -> new Module("", "Intro to Computer Networks", "4", nus));
     }
 
     @Test
@@ -84,7 +84,7 @@ public class ModuleMappingTest {
         University nus = new University("NUS", "Singapore");
 
         assertThrows(InvalidModuleException.class,
-                () -> new Module("CS2105", "", "4", nus));
+            () -> new Module("CS2105", "", "4", nus));
     }
 
     @Test
@@ -92,6 +92,6 @@ public class ModuleMappingTest {
         University nus = new University("NUS", "Singapore");
 
         assertThrows(InvalidModuleException.class,
-                () -> new Module("CS2105", "Intro to Computer Networks", "", nus));
+            () -> new Module("CS2105", "Intro to Computer Networks", "", nus));
     }
 }

@@ -23,7 +23,7 @@ public class ModuleTest {
         University university = new University("NUS", "Singapore");
 
         assertThrows(InvalidModuleException.class,
-                () -> new Module("", "Software Engineering & Object-Oriented Programming", "4", university));
+            () -> new Module("", "Software Engineering & Object-Oriented Programming", "4", university));
     }
 
     @Test
@@ -32,7 +32,7 @@ public class ModuleTest {
         University university = new University("NUS", "Singapore");
 
         assertThrows(InvalidModuleException.class,
-                () -> new Module("CS2113", "", "4", university));
+            () -> new Module("CS2113", "", "4", university));
     }
 
     @Test
@@ -41,13 +41,13 @@ public class ModuleTest {
         University university = new University("NUS", "Singapore");
 
         assertThrows(InvalidModuleException.class,
-                () -> new Module("CS2113", "Software Engineering & Object-Oriented Programming", "", university));
+            () -> new Module("CS2113", "Software Engineering & Object-Oriented Programming", "", university));
     }
 
     @Test
     void moduleConstructor_invalidUniversityName_throwsInvalidUniversityException() {
         assertThrows(InvalidUniversityException.class,
-                () -> new University("", "Singapore"));
+            () -> new University("", "Singapore"));
     }
 
     @Test
