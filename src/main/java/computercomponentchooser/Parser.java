@@ -99,11 +99,15 @@ public class Parser {
         String filterType = EditParser.getParameter(line, 1);
         String lowestNumber = "";
         String highestNumber = "";
+        Ui.printLine();
+        if (!filterType.equals("price") || !filterType.equals("power") || !filterType.equals("compatibility")) {
+            throw new UnknownCommandException();
+        }// guard clause
+
         if (!filterType.equals("compatibility")) {
             lowestNumber = EditParser.getParameter(line, 2);
             highestNumber = EditParser.getParameter(line, 3);
         }
-        Ui.printLine();
         buildManager.filterBuilds(filterType, lowestNumber, highestNumber);
         Ui.printLine();
     }
