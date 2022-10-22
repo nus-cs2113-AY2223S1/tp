@@ -28,10 +28,10 @@ public class Parking {
     private CarparkList carparkList;
 
     public static void main(String[] args) {
-        new Parking.run(args);
+        new Parking().run();
     }
 
-    public void run(String[] args) {
+    public void run() {
         start();
         loadApi();
         loadJson();
@@ -77,7 +77,7 @@ public class Parking {
             String input = ui.getCommand();
             command = new Parser().parseCommand(input, api, carparkList);
             CommandResult result = executeCommand(command);
-
+            ui.printResult(result);
         } while (!ExitCommand.isExit(command));
     }
 
@@ -86,15 +86,12 @@ public class Parking {
             CommandResult result = command.execute();
             return result;
         } catch (FileWriteException | NoCarparkFoundException e) {
-            ui.print(e.getMessage());
+            return new CommandResult(e.getMessage());
         } catch (InvalidCommandException e) {
             throw new RuntimeException(e);
         }
     }
 }
-
-
-
 
 //----------------------------------------------------------------------------------------------------------------------------------------
 //    /**

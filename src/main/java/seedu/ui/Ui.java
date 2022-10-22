@@ -2,6 +2,7 @@ package seedu.ui;
 
 import java.util.Scanner;
 
+import seedu.commands.CommandResult;
 import seedu.exception.ParkingException;
 
 /**
@@ -76,6 +77,16 @@ public class Ui {
     public void greetUser() {
         showLogo();
         askName();
+    }
+
+    /**
+     * Shows the result of a command execution to hte user.
+     * Includes additional formatting of the results of different commands.
+     *
+     * @param result Command result
+     */
+    public void printResult(CommandResult result) {
+        print(result.showToUser);
     }
 
     /**

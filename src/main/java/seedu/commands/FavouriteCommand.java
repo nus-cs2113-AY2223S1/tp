@@ -110,7 +110,7 @@ public class FavouriteCommand extends Command {
         StringBuilder result = new StringBuilder();
         for (String id : favouriteList) {
             result.append(id).append("\n");
-            ui.print(id);
+            //ui.print(id);
         }
         return result.toString();
     }
