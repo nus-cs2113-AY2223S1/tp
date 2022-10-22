@@ -10,6 +10,11 @@ import seedu.duke.exceptions.InvalidUserCommandException;
 public class UserUniversityList {
     private UserModuleMappingList myModules;
     private String universityName;
+    private String universityCountry;
+
+    public String getUniversityCountry() {
+        return universityCountry;
+    }
 
     public UserUniversityList(String universityName) {
         this.universityName = universityName;

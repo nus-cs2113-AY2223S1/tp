@@ -95,6 +95,7 @@ public class UserStorageParser {
         for (Map.Entry<String, UserUniversityList> pair : uniList.getMyManager().entrySet()) {
             UserUniversityList uni = pair.getValue();
             output += "/" + uni.getUniversityName() + "%" + "\n";
+            output += uni.getUniversityCountry()  + "%" + "\n";
             ArrayList<UserModuleMapping> modules = uni.getMyModules().getModules();
             output += addModulesToOutputString(modules);
         }
@@ -151,12 +152,13 @@ public class UserStorageParser {
             throws InvalidUserStorageFileException {
         for (String uni: unis) {
             String[] items = splitLineInFileContent(uni);
-            String uniName = items[0];
-            UserUniversityList uniList = new UserUniversityList(uniName);
+            String puName = items[0];
+            String puCountry = items[1];
+            UserUniversityList uniList = new UserUniversityList(puName);
             UserModuleMappingList moduleList = new UserModuleMappingList();
-            getModuleInfoFromString(items, moduleList);
+            getModuleInfoFromString(items, moduleList, puCountry);
             uniList.setMyModules(moduleList);
-            myManager.put(uniName, uniList);
+            myManager.put(puName, uniList);
         }
     }
 
@@ -176,16 +178,16 @@ public class UserStorageParser {
      * @param moduleList list of PU modules that the user is interested in
      * @throws InvalidUserStorageFileException when the String in data/myinfo.txt is in the wrong format
      */
-    private static void getModuleInfoFromString(String[] items, UserModuleMappingList moduleList)
+    private static void getModuleInfoFromString(String[] items, UserModuleMappingList moduleList, String puCountry)
             throws InvalidUserStorageFileException {
-        for (int i = 1; i < items.length; ++i) {
+        for (int i = 2; i < items.length; ++i) {
             assert items.length > 1 : "This university has at least one module saved";
             String[] details = splitModuleInformationInFileContent(items[i]);
             if (!isValidFormat(details)) {
                 throw new InvalidUserStorageFileException("Invalid file format");
             }
             UserModuleMapping userModule = new UserModuleMapping(details[0], details[1],
-                    details[3], details[4], details[5], details[2], items[0], "test");
+                    details[3], details[4], details[5], details[2], items[0], puCountry);
             moduleList.addModule(userModule, true);
         }
     }
