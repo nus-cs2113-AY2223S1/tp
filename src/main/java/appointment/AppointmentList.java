@@ -18,7 +18,7 @@ public class AppointmentList {
 
     public static void addAppointment(Appointment appointment) {
         appointments.add(appointment);
-        System.out.print("Got it. I've added this appointment:");
+        System.out.print("Got it. I've added this appointment: ");
         System.out.println("Pet " + appointment.petName + " | " + "Service " + appointment.service);
         System.out.println("Now you have " + appointments.size() + " appointments in the list.");
 
@@ -29,7 +29,7 @@ public class AppointmentList {
         for (Appointment appointment : appointments) {
             if (appointment.appointmentId == appointmentId) {
                 appointments.remove(appointment);
-                System.out.print("Noted. I've removed this appointment:");
+                System.out.print("Noted. I've removed this appointment: ");
                 System.out.println("Pet " + appointment.petName + " | " + "Service " + appointment.service);
                 System.out.println("Now you have " + (appointments.size()) + " appointments in the list.");
                 removeFlag = true;
@@ -57,7 +57,7 @@ public class AppointmentList {
                 }
                 System.out.print("Noted. I've set this service: ");
                 System.out.print("Pet " + appointment.petName + " | " + "Service " + appointment.service);
-                System.out.print("as " + appointment.getAppointmentStatus());
+                System.out.println(" as " + appointment.getAppointmentStatus());
             }
         }
         if (!setFlag) {
