@@ -16,7 +16,7 @@ import seedu.parser.search.Word;
  * Container for all the {@link Carpark} classes. Contains method for finding the carpark.
  */
 public class CarparkList {
-    public static final HashMap<String, Carpark> carparkHashMap = new HashMap<String, Carpark>();
+    public static HashMap<String, Carpark> carparkHashMap;
     private List<Carpark> carparks;
 
 
@@ -103,6 +103,7 @@ public class CarparkList {
      * based on lot type.
      */
     public void combineByLotType() {
+        carparkHashMap = new HashMap<String, Carpark>();
         for (Carpark carpark : carparks) {
             String carparkId = carpark.getCarparkId().toLowerCase();
             if (!carparkHashMap.containsKey(carparkId)) {

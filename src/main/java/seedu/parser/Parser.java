@@ -54,7 +54,7 @@ public class Parser {
         }
     }
     private Command prepareFind(String arguments) {
-        final String carparkID = arguments;
+        final String carparkID = arguments.trim();
         return new FindCommand(carparkID);
     }
 

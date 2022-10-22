@@ -30,8 +30,8 @@ public class SearchCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        CarparkFilteredList result = runSearch(carparkList, searchQuery);
+        String result = runSearch(carparkList, searchQuery).getSearchListString();
         carparkList.resetBoldForAllCarparks();
-        return new CommandResult(result.getSearchListString());
+        return new CommandResult(result);
     }
 }
