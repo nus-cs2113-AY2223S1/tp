@@ -3,6 +3,7 @@ package seedu.duke.command;
 import seedu.duke.utils.State;
 import seedu.duke.utils.Storage;
 import seedu.duke.utils.Ui;
+import seedu.duke.exceptions.YamomException;
 import seedu.duke.model.Module;
 import seedu.duke.parser.Parser;
 
@@ -14,9 +15,9 @@ import java.util.logging.Logger;
 
 public class SearchModuleCommand extends Command {
     public static final String COMMAND_WORD = "search";
-    public static final String FORMAT = "search KEYWORD";
+    public static final String FORMAT = "search /code [SIMILAR_MODULE_CODE] /title [SIMILAR_MODULE_TITLE] /level <LEVEL> /sem <SEMESTER>";
     public static final String HELP_DISPLAY = COMMAND_WORD
-            + ": List out all modules that matches KEYWORD, where KEYWORD could be module code/faculty!\n"
+            + ": List out all modules that contains similar keywords in moduleList!\n"
             + "\tUsage:\t"
             + FORMAT
             + System.lineSeparator();
@@ -32,9 +33,18 @@ public class SearchModuleCommand extends Command {
 
     public static final String SUBSYSTEM_NAME = "SearchModuleCommand";
 
-    public SearchModuleCommand(String input) {
+    public SearchModuleCommand(String input) throws YamomException{
         super(input.split("\\s"));
         params = Parser.parseParams(input);
+        toSearchModuleCode = params.getOrDefault("code", null);
+        toSearchModuleTitle = params.getOrDefault("title", null);
+        toSearchLevel = params.getOrDefault("level", null);
+        toSearchSemester = params.getOrDefault("sem", null);
+
+        // if size of params is 0, then no params are given, throw exception
+        if (params.size() == 0 || toSearchModuleCode == null && toSearchModuleTitle == null) {
+            throw new YamomException("Please input valid search fields to search for! You can search by module code, module title, level and semester in this format. \nsearch /code [SIMILAR_MODULE_CODE] /title [SIMILAR_MODULE_TITLE] /level <LEVEL> /sem <SEMESTER>");
+        }
     }
 
     @Override
@@ -42,11 +52,6 @@ public class SearchModuleCommand extends Command {
         assert state != null : "List of lessons should not be null";
         logger = Logger.getLogger(SUBSYSTEM_NAME);
         logger.log(Level.FINE, "Loading search module command");
-
-        toSearchModuleCode = params.getOrDefault("code", null);
-        toSearchModuleTitle = params.getOrDefault("title", null);
-        toSearchLevel = params.getOrDefault("level", null);
-        toSearchSemester = params.getOrDefault("sem", null);
 
         List<Module> searchResult = filterModuleSearch(toSearchModuleCode, toSearchLevel,
                 toSearchSemester, toSearchModuleTitle);
@@ -101,9 +106,11 @@ public class SearchModuleCommand extends Command {
     /**
      * Filter module by user input arguments and return a list of modules that match the search query.
      * If no arguments are provided, no module will be returned.
-     * At least the module code or module title must be provided.
-     * If both module code and module title are provided, results will be display based on similar module code
-     * and module title but will not be repeated.
+     * At least either the module code or module title must be provided.
+     * If both module code and module title are provided, results will be display based on similar
+     * module code and module title but will not display repeated results.
+     * The level and semester arguments are optional. If provided, the results will be filtered and
+     * refined based on the input level and semester.
      * Arguments can be in any order.
      *
      * @param toSearchModuleCode  the module code that user input
