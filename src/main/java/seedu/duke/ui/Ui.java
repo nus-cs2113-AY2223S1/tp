@@ -280,12 +280,14 @@ public class Ui {
      * @param userFavouriteLists A dictionary containing a user's favourited lists.
      */
     public static void printUserFavouriteLists(HashMap<String, UserUniversityList> userFavouriteLists) {
-        assert userFavouriteLists.size() > 0 : "Dictionary of university name to favourited lists should not be empty";
+        assert userFavouriteLists.size() > 0 : "Dictionary of university name to favourite lists should not be empty";
         for (Map.Entry<String, UserUniversityList> set : userFavouriteLists.entrySet()) {
             String universityName = set.getKey();
             UserUniversityList universityList = set.getValue();
-            System.out.println(universityName);
-            universityList.displayModules();
+            if (universityList.isFavourite()) {
+                System.out.println(universityName);
+                universityList.displayModules();
+            }
         }
     }
 
@@ -298,7 +300,7 @@ public class Ui {
      */
     public static String printFavouriteListAddedAcknowledgement(String universityName) {
         assert universityName.length() > 0 : "University name should not be empty";
-        String message = LINE + "Success! You added:\n" + universityName + "to your favourited lists" + "\n" + LINE;
+        String message = LINE + "Success! You added:\n" + universityName + " to your favourite lists" + "\n" + LINE;
         return message;
     }
 
@@ -311,7 +313,7 @@ public class Ui {
      */
     public static String printFavouriteListDeletedAcknowledgement(String universityName) {
         assert universityName.length() > 0 : "University name should not be empty";
-        String message = LINE + "Success! You deleted:\n" + universityName + "from your favourited lists" + "\n" + LINE;
+        String message = LINE + "Success! You deleted:\n" + universityName + " from your favourite lists" + "\n" + LINE;
         return message;
     }
 

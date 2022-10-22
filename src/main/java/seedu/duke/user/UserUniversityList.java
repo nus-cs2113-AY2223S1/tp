@@ -10,10 +10,26 @@ import seedu.duke.exceptions.InvalidUserCommandException;
 public class UserUniversityList {
     private UserModuleMappingList myModules;
     private String universityName;
+    private String universityCountry;
+    private boolean isFavourite;
+
+    public String getUniversityCountry() {
+        return universityCountry;
+    }
+
+    public boolean isFavourite() {
+        return isFavourite;
+    }
+
+    public void setFavourite(boolean favourite) {
+        isFavourite = favourite;
+    }
 
     public UserUniversityList(String universityName) {
         this.universityName = universityName;
         this.myModules = new UserModuleMappingList();
+        this.universityCountry = "null";
+        this.isFavourite = false;
     }
 
     public void addModule(UserModuleMapping input) {
