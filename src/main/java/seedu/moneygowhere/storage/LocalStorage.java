@@ -118,7 +118,7 @@ public class LocalStorage {
             ConsoleCommandSortExpense defaultSortCommandSetting = loadSortCommandSetting(sortConfig);
             hasParsedSortconfig = true;
             NodeList expenseList = doc.getElementsByTagName(XML_EXPENSE_ELEMENT);
-            if(expenseList.getLength() > 0) {
+            if (expenseList.getLength() > 0) {
                 for (itr = 0; itr < expenseList.getLength(); itr++) {
                     Node node = expenseList.item(itr);
                     loadExpense = createExpense(node);
@@ -128,7 +128,7 @@ public class LocalStorage {
             expenseManager.updateSortExpenses(defaultSortCommandSetting);
             hasParsedExpenses = true;
             NodeList recurringPaymentList = doc.getElementsByTagName(XML_RECURRING_PAYMENT_ELEMENT);
-            if(recurringPaymentList.getLength() > 0) {
+            if (recurringPaymentList.getLength() > 0) {
                 for (itr = 0; itr < expenseList.getLength(); itr++) {
                     Node node = recurringPaymentList.item(itr);
                     loadRecurringPayment = createRecurringPayment(node);
@@ -177,18 +177,23 @@ public class LocalStorage {
             Document doc = db.parse(externalFile);
             doc.getDocumentElement().normalize();
             NodeList expenseList = doc.getElementsByTagName(XML_EXPENSE_ELEMENT);
-            for (itr = 0; itr < expenseList.getLength(); itr++) {
-                Node node = expenseList.item(itr);
-                loadExpense = createExpense(node);
-                expenseManager.addExpense(loadExpense);
+            if (expenseList.getLength() > 0) {
+                for (itr = 0; itr < expenseList.getLength(); itr++) {
+                    Node node = expenseList.item(itr);
+                    loadExpense = createExpense(node);
+                    expenseManager.addExpense(loadExpense);
+                }
             }
             hasParsedExpenses = true;
             NodeList recurringPaymentList = doc.getElementsByTagName(XML_RECURRING_PAYMENT_ELEMENT);
-            for (itr = 0; itr < expenseList.getLength(); itr++) {
-                Node node = recurringPaymentList.item(itr);
-                loadRecurringPayment = createRecurringPayment(node);
-                recurringPaymentManager.addRecurringPayment(loadRecurringPayment);
+            if (recurringPaymentList.getLength() > 0) {
+                for (itr = 0; itr < expenseList.getLength(); itr++) {
+                    Node node = recurringPaymentList.item(itr);
+                    loadRecurringPayment = createRecurringPayment(node);
+                    recurringPaymentManager.addRecurringPayment(loadRecurringPayment);
+                }
             }
+            System.out.println(Messages.LOCAL_STORAGE_LOAD_SUCCESS);
             System.out.println(Messages.LOCAL_STORAGE_MERGE_EXTERNAL_DATA_SUCCESSFUL);
         } catch (FileNotFoundException e) {
             System.out.println(Messages.LOCAL_STORAGE_ERROR_NO_LOAD_FILE);
