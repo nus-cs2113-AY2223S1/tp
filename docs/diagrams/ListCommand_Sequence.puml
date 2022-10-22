@@ -18,7 +18,13 @@ alt list command
 
     CommandParser -> CommandParser : isValidListCommand(userInputTokenized)
     activate CommandParser
-    CommandParser --> CommandParser : isValid :boolean
+
+    CommandParser -> CommandParser : isValidListOption(parameters[LIST_OPTION_INDEX])
+    activate CommandParser
+    CommandParser --> CommandParser : : boolean
+    deactivate CommandParser
+
+    CommandParser --> CommandParser : :boolean
     deactivate CommandParser
 
     opt isValid
@@ -36,6 +42,7 @@ else other command
 end
 
 CommandParser --> Duke : newUserCommand : Command
+deactivate CommandParser
 
 alt list command
 
@@ -83,6 +90,11 @@ alt list command
 
 else other command
 
+deactivate Database
+deactivate Ui
+
 end
+
+deactivate Duke
 
 @enduml
