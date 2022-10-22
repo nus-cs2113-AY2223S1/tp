@@ -21,9 +21,9 @@ _____________________________________________________________________________
      view      /view LISTS                                           Displays all existing university lists that have been created by the user
      view      /view u/UNIVERSITY_NAME_IN_UNDERSCORES                Displays all the modules that have been added to the user's input university's list in the format:
                                                                      [Home University Module Code] [Home University Module Title] | [Partner University Module Code] [Partner University Module Title] | [Equivalent NUS Credits]
-     view      /view DELETE HISTORY                                  Displays up to 5 most recent modules that the user has deleted
+     view      /view DELETE_HISTORY                                  Displays up to 5 most recent modules that the user has deleted
      list      /list MODULES                                         Displays all existing university modules mappings that are approved in the format:
-                                                                     [Partner University Module Code] [Partner University Module Title] [Partner University Module Credits] | [NUS Module Code] | [NUS Module Title] | [NUS Module Credits] in NUS
+                                                                     [Partner University Module Code] [Partner University Module Title] [Partner University Module Credits] | [NUS Module Code] [NUS Module Title] [NUS Module Credits] in NUS
      list      /list UNIVERSITIES                                    Displays all universities with module mappings available in database
      list      /list m/MODULECODE                                    List all module mappings for NUS MODULECODE in database
      list      /list u/UNIVERSITY_NAME_IN_UNDERSCORES                List all module mappings offered by UNIVERSITY in database

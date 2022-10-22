@@ -1,0 +1,83 @@
+@startuml
+
+class Duke {
+    {static} + main(String[] args) : void   
+}
+
+class Ui {
+    {static} + getUserInput() : String
+    {static} + printExceptionMessage(Exception e) : void
+    {static} + printUniversitiesInDatabase(ArrayList<University> universities) : void
+    {static} + printMappings(ArrayList<ModuleMapping> moduleMappings) : void
+}
+
+class CommandParser {
+    {static} + getUserCommand(String userInput) : Command
+    {static} - parseUserCommand(String userInput) : String[]
+    {static} - removeParameterUnderscores(String parameter) : String
+    {static} - isEmptyUserInput(String[] userInputTokenized) : boolean
+    {static} - isValidListCommand(String[] parameters) : boolean
+    {static} - isValidListOption(String option) : boolean
+}
+
+class InvalidUserCommandException {
+
+}
+
+enum CommandType {
+    CREATE
+    VIEW
+    ADD
+    DELETE
+    EXIT
+    HELP
+    LIST
+    FAVOURITE
+}
+
+class Command { 
+    - commandType : CommandType
+    - universityName : String
+    - moduleCode : String
+    - parameters : String[]
+    + Command(String[] parameters, CommandType commandType)
+    + getCommandType() : CommandType
+    + getUniversityName() : String
+    + getModuleCode() : String
+}
+
+class ListCommand {
+    - listOption : String
+    + ListCommand(String[] parameters, CommandType commandType)
+    + getListOption() : String
+}
+
+class Database {
+    {static} - universities : ArrayList<University>
+    {static} - moduleMappings : ArrayList<ModuleMapping>
+    {static} + getUniversities() : ArrayList <University>
+    {static} + getModuleMappings() : ArrayList<ModuleMapping>
+    {static} + findPuMapping(String moduleCode) : ModuleMapping
+    {static} + findNusMapping(String moduleCode) : ArrayList<ModuleMapping>
+    {static} + findUniversityMapping(String universityName) : ArrayList<ModuleMapping>
+}
+
+class ModuleNotFoundException {
+
+}
+
+class UniversityNotFoundException {
+
+}
+
+Duke "1" --> "1" Ui
+Duke "1" --> "1" CommandParser
+Duke "1" --> "1" Database
+Duke "1" o-- "*" Command
+CommandParser --> InvalidUserCommandException : <<throws>>
+CommandParser "1" --> "*" ListCommand
+ListCommand --|> Command
+Database --> ModuleNotFoundException : <<throws>>
+Database --> UniversityNotFoundException : <<throws>>
+
+@enduml
