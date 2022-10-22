@@ -1,0 +1,2 @@
+cpu/intel 10990x/1200/80/lga1511/3.8
+powersupply/psu/123/123123
