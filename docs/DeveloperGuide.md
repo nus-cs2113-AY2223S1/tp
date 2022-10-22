@@ -164,7 +164,7 @@ When client rents a property, the client and property form a pair.
 
 #### Pair
 
-Here is a sequence diagram for the pair command, called from ```Duke.java```:
+The sequence diagram for the pair command is called is shown below:
 
 ![PairingList Add Pair Sequence Diagram](diagrams/PairingListAddPairSequenceDiagram.png)
 

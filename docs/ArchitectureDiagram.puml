@@ -1,0 +1,54 @@
+
+@startuml
+
+!include style.puml
+
+Class User USER_COLOR
+
+Package " "<<Rectangle>>{
+    Class PropertyList PROPERTY_LIST_COLOR
+    Class ClientList CLIENT_LIST_COLOR
+    Class Storage STORAGE_COLOR
+    Class PairingList PAIRING_LIST_COLOR
+    Class Parser PARSER_COLOR
+    Class Duke DUKE_COLOR
+    Class Command COMMAND_COLOR
+
+    Class UI #lightgrey
+
+    Class Property PROPERTY_COLOR
+    Class Client CLIENT_COLOR
+}
+
+Class ClientFile CLIENT_LIST_COLOR_T1
+Class PropertyFile PROPERTY_LIST_COLOR_T1
+Class PairingListFile PAIRING_LIST_COLOR_T1
+
+User .[USER_COLOR].> UI
+
+Duke -[DUKE_COLOR]-> ClientList
+Duke -[DUKE_COLOR]-> PropertyList
+Duke -[DUKE_COLOR]-> PairingList
+Duke -up[DUKE_COLOR]-> UI
+Duke -[DUKE_COLOR]-> Parser
+Duke -[DUKE_COLOR]-> Command
+
+Storage -[STORAGE_COLOR_T3]-> ClientFile
+Storage -[STORAGE_COLOR_T3]-> PropertyFile
+Storage -[STORAGE_COLOR_T3]-> PairingListFile
+
+Parser -.[PARSER_COLOR].-> PropertyList
+Parser -.[PARSER_COLOR].-> ClientList
+Parser -.[PARSER_COLOR].-> PairingList
+
+PropertyList -[PROPERTY_LIST_COLOR]-> Property
+ClientList -[CLIENT_LIST_COLOR]-> Client
+
+PairingList .[PAIRING_LIST_COLOR].> Client
+PairingList .[PAIRING_LIST_COLOR].> Property
+
+Command .[COMMAND_COLOR].-> Storage
+Command .[COMMAND_COLOR].-> UI
+
+
+@enduml
