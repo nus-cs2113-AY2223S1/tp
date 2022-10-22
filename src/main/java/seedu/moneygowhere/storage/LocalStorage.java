@@ -11,6 +11,7 @@ import seedu.moneygowhere.data.expense.Expense;
 import seedu.moneygowhere.data.expense.ExpenseManager;
 import seedu.moneygowhere.data.income.Income;
 import seedu.moneygowhere.data.recurringpayments.RecurringPayment;
+import seedu.moneygowhere.data.recurringpayments.RecurringPaymentManager;
 import seedu.moneygowhere.data.target.Target;
 import seedu.moneygowhere.exceptions.LocalStorageLoadDataInputError;
 
@@ -26,6 +27,7 @@ import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
@@ -99,9 +101,12 @@ public class LocalStorage {
      *
      * @param expenseManager arraylist to store expenses
      */
-    public void loadFromFile(ExpenseManager expenseManager) {
+    public void loadFromFile(ExpenseManager expenseManager,
+                             RecurringPaymentManager recurringPaymentManager) {
         Expense loadExpense;
+        RecurringPayment loadRecurringPayment;
         boolean hasParsedSortconfig = false;
+        boolean hasParsedExpenses = false;
         int itr = 0;
         try {
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -109,16 +114,23 @@ public class LocalStorage {
             db.setErrorHandler(new NullErrorHandler());
             Document doc = db.parse(saveFile);
             doc.getDocumentElement().normalize();
-            NodeList expenseList = doc.getElementsByTagName(XML_EXPENSE_ELEMENT);
             NodeList sortConfig = doc.getElementsByTagName(XML_SORTCONFIG_ELEMENT);
             ConsoleCommandSortExpense defaultSortCommandSetting = loadSortCommandSetting(sortConfig);
             hasParsedSortconfig = true;
+            NodeList expenseList = doc.getElementsByTagName(XML_EXPENSE_ELEMENT);
             for (itr = 0; itr < expenseList.getLength(); itr++) {
                 Node node = expenseList.item(itr);
                 loadExpense = createExpense(node);
                 expenseManager.addExpense(loadExpense);
             }
             expenseManager.updateSortExpenses(defaultSortCommandSetting);
+            hasParsedExpenses = true;
+            NodeList recurringPaymentList = doc.getElementsByTagName(XML_RECURRING_PAYMENT_ELEMENT);
+            for (itr = 0; itr < expenseList.getLength(); itr++) {
+                Node node = recurringPaymentList.item(itr);
+                loadRecurringPayment = createRecurringPayment(node);
+                recurringPaymentManager.addRecurringPayment(loadRecurringPayment);
+            }
             System.out.println(Messages.LOCAL_STORAGE_LOAD_SUCCESS);
         } catch (FileNotFoundException e) {
             initialiseFile();
@@ -129,8 +141,10 @@ public class LocalStorage {
                  | NullPointerException | DateTimeParseException e) {
             if (!hasParsedSortconfig) {
                 System.out.println(Messages.LOCAL_STORAGE_SORTCONFIG_ERROR_IN_LOAD_FILE);
-            } else {
+            } else if (!hasParsedExpenses) {
                 System.out.println(Messages.LOCAL_STORAGE_EXPENSE_ERROR_IN_LOAD_FILE + (itr + 1));
+            } else {
+                System.out.println(Messages.LOCAL_STORAGE_RECURRING_PAYMENT_ERROR_IN_LOAD_FILE + (itr+1));
             }
         }
     }
@@ -142,8 +156,12 @@ public class LocalStorage {
      * @param expenseManager arraylist to store expenses
      * @param filePath path to save file to merge
      */
-    public void loadFromExternalFile(ExpenseManager expenseManager, String filePath) {
+    public void loadFromExternalFile(ExpenseManager expenseManager,
+                                     RecurringPaymentManager recurringPaymentManager,
+                                     String filePath) {
         Expense loadExpense;
+        RecurringPayment loadRecurringPayment;
+        boolean hasParsedExpenses = false;
         int itr = 0;
         try {
             File externalFile = new File(filePath);
@@ -158,6 +176,13 @@ public class LocalStorage {
                 loadExpense = createExpense(node);
                 expenseManager.addExpense(loadExpense);
             }
+            hasParsedExpenses = true;
+            NodeList recurringPaymentList = doc.getElementsByTagName(XML_RECURRING_PAYMENT_ELEMENT);
+            for (itr = 0; itr < expenseList.getLength(); itr++) {
+                Node node = recurringPaymentList.item(itr);
+                loadRecurringPayment = createRecurringPayment(node);
+                recurringPaymentManager.addRecurringPayment(loadRecurringPayment);
+            }
             System.out.println(Messages.LOCAL_STORAGE_MERGE_EXTERNAL_DATA_SUCCESSFUL);
         } catch (FileNotFoundException e) {
             System.out.println(Messages.LOCAL_STORAGE_ERROR_NO_LOAD_FILE);
@@ -165,7 +190,11 @@ public class LocalStorage {
             System.out.println(Messages.LOCAL_STORAGE_ERROR_CORRUPTED_OR_EMPTY_LOAD_FILE);
         } catch (LocalStorageLoadDataInputError | NumberFormatException
                  | NullPointerException | DateTimeParseException e) {
-            System.out.println(Messages.LOCAL_STORAGE_EXPENSE_ERROR_IN_LOAD_FILE + (itr + 1));
+            if (!hasParsedExpenses) {
+                System.out.println(Messages.LOCAL_STORAGE_EXPENSE_ERROR_IN_LOAD_FILE + (itr + 1));
+            } else {
+                System.out.println(Messages.LOCAL_STORAGE_RECURRING_PAYMENT_ERROR_IN_LOAD_FILE + (itr+1));
+            }
         }
     }
 
@@ -365,7 +394,9 @@ public class LocalStorage {
      * @param savedExpenses arraylist containing all expenses
      * @param sortCommandSetting configurations for sorting
      */
-    public void saveToFile(ArrayList<Expense> savedExpenses, ConsoleCommandSortExpense sortCommandSetting) {
+    public void saveToFile(ArrayList<Expense> savedExpenses,
+                           ConsoleCommandSortExpense sortCommandSetting,
+                           ArrayList<RecurringPayment> savedRecurringPayments) {
         try {
             DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
@@ -377,6 +408,7 @@ public class LocalStorage {
             sortConfig.setAttribute(XML_SORTCONFIG_ORDER_ATTRIBUTE, sortCommandSetting.getOrder());
             rootElement.appendChild(sortConfig);
             parseExpenseToXml(doc, rootElement, savedExpenses);
+            parseRecurringPaymentToXml(doc, rootElement, savedRecurringPayments);
             writeXml(doc);
         } catch (ParserConfigurationException | TransformerException e) {
             System.out.println(Messages.LOCAL_STORAGE_ERROR_WRITING_DATA);

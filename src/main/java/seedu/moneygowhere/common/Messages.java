@@ -54,6 +54,10 @@ public class Messages {
             + "There is an error in load file found...\n"
             + "Please ensure the file is the correct load file without modifications to it.\n"
             + "Error is found in expense id: ";
+    public static final String LOCAL_STORAGE_RECURRING_PAYMENT_ERROR_IN_LOAD_FILE = ""
+            + "There is an error in load file found...\n"
+            + "Please ensure the file is the correct load file without modifications to it.\n"
+            + "Error is found in Recurring Payment id: ";
     public static final String LOCAL_STORAGE_SORTCONFIG_ERROR_IN_LOAD_FILE = ""
             + "There is no sorting configuration in load file found...\n"
             + "Please ensure the file is the correct load file without modifications to it.";
