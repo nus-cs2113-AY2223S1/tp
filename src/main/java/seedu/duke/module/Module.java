@@ -53,8 +53,8 @@ public class Module {
             int numberSameType = checkDuplicateLessonNumbers(list);
             for (int i = 0; i < numberSameType; i++) {
                 String tempLessonType = list.get(0).getLessonType();
-                String lessonType = numberSameType == 1 ? tempLessonType : tempLessonType + " " + (i + 1);
-                addToAttendingList(temp, lessonType);
+                //String lessonType = numberSameType == 1 ? tempLessonType : tempLessonType + " " + (i + 1);
+                addToAttendingList(temp, tempLessonType);
             }
         }
         return temp;
@@ -197,26 +197,16 @@ public class Module {
         return null;
     }
 
-    public void replaceAttending(Lesson newLesson) {
-        int indexToSet = 0;
-        for (Lesson lesson : attending) {
-            if (lesson.getLessonType().equals(newLesson.getLessonType())) {
-                break;
-            }
-            indexToSet += 1;
-        }
-        if (indexToSet >= attending.size()) {
-            return;
-        }
-        attending.set(indexToSet, newLesson);
+    public void replaceAttending(Lesson newLesson, Integer indexForLesson) {
+        attending.set(indexForLesson, newLesson);
         AttendingManager.setAttending(newLesson, moduleCode);
     }
 
     private HashMap<String, ArrayList<Lesson>> classifyLessons(List<Lesson> lessons) {
-        HashMap<String, ArrayList<Lesson>> classifiedLessons = new HashMap<String, ArrayList<Lesson>>();
+        HashMap<String, ArrayList<Lesson>> classifiedLessons = new HashMap<>();
         for (Lesson lesson : lessons) {
             if (!classifiedLessons.containsKey(lesson.getLessonType())) {
-                classifiedLessons.put(lesson.getLessonType(), new ArrayList<Lesson>());
+                classifiedLessons.put(lesson.getLessonType(), new ArrayList<>());
                 classifiedLessons.get(lesson.getLessonType()).add(lesson);
             } else {
                 classifiedLessons.get(lesson.getLessonType()).add(lesson);
