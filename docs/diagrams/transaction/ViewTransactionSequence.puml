@@ -1,0 +1,44 @@
+@startuml
+hide footbox
+
+Actor Transaction
+"Transaction" -> ":Duke": "view-transaction..."
+activate ":Duke"
+":Duke" -> ":CommandParser": createCommand()
+activate ":CommandParser"
+":CommandParser" -> ":ViewTransactionCommand"**: new
+activate ":ViewTransactionCommand"
+return
+":CommandParser" --> ":Duke"
+deactivate
+
+":Duke" -> ":ViewTransactionCommand" : executeCommand()
+activate ":ViewTransactionCommand"
+":ViewTransactionCommand" -> ":ViewTransactionCommand": getArgsViewTransactionCmd()
+activate ":ViewTransactionCommand"
+return args
+    ":ViewTransactionCommand" -> ":TransactionList": getTransactionById()
+    activate ":TransactionList"
+alt Transaction is valid
+    ":TransactionList" --> ":ViewTransactionCommand":
+    deactivate ":TransactionList"
+
+    ":ViewTransactionCommand" -> "<<class>>\nUi": viewTransactionMessage()
+    activate "<<class>>\nUi"
+    return
+    deactivate "<<class>>\nUi"
+    deactivate ":TransactionList"
+else Transaction is invalid
+    ":ViewTransactionCommand" -> ":DukeException"** : new
+    destroy ":ViewTransactionCommand"
+    activate ":DukeException"
+    ":DukeException" --> ":Duke"
+    destroy ":DukeException"
+    ":Duke" -> "<<class>>\nUi" : print error
+    activate "<<class>>\nUi"
+    "<<class>>\nUi" --> ":Duke" : error message
+    deactivate "<<class>>\nUi"
+end
+deactivate ":ViewTransactionCommand"
+
+@enduml
