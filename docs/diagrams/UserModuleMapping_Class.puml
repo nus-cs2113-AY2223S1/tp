@@ -11,22 +11,9 @@ class UserModuleMapping {
     + UserModuleMapping(puCode:String, puTitle:String, nusCode:String, nusTitle:String,
                         nusCredit:String, puCredit:String, puName:String, puCountry:String)
     + toString()
-    + getNusCode()
-    + getPuCode()
-    + getNusTitle()
-    + getNusCredit()
-    + getPuTitle()
-    + getPuCredit()
-    + getPuName()
-    + getComment()
-    + setNusCode()
-    + setPuCode()
-    + setNusTitle()
-    + setNusCredit()
-    + setPuTitle()
-    + setPuCredit()
-    + setPuName()
-    + setComment()
+}
+
+class Ui {
 }
 
 class UserModuleMappingList {
@@ -45,6 +32,7 @@ class UserModuleMappingList {
 }
 
 UserModuleMapping " * " --> "0..2" Module :> Maps
-UserModuleMappingList " * " --> " * " UserModuleMapping :> Stores multiple mappings
+UserModuleMappingList " 1 " o--> " * " UserModuleMapping
+UserModuleMappingList .> Ui
 
 @enduml

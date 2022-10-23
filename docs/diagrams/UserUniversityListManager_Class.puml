@@ -1,34 +1,41 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
-class UserModuleMapping {
-}
 
 class UserModuleMappingList {
+}
+
+class InvalidUserCommandException {
+}
+
+class UserDeletedModules {
+    - deletedModules:ArrayDeque
+    + UserDeletedModules()
+    + addToDeletedModules(inputModule:UserModuleMapping)
+    + displayAll()
+}
+
+class Ui {
 }
 
 class UserUniversityList {
     - myModules:UserModuleMappingList
     - universityName:String
+    - universityCountry:String
+    - isFavourite:boolean
     + UserUniversityList(universityName:String)
     + addModule(input:UserModuleMapping)
     + deleteModuleByPuCode(puCode:String)
     + deleteModule(index:int)
     + displayModules()
-    + getMyModules()
-    + setMyModules(myModules:UserModuleMappingList)
-    + getUniversityName
-    + setUniversityName(universityName:String)
 }
 
 class UserUniversityListManager {
     - myManager:HashMap<String, UserUniversityList>
-    - myFavourites:HashMap<String, UserUniversityList>
     - deletedModulesList:UserDeletedModules
     - logger:Logger
     + UserUniversityListManager()
     + UserUniversityListManager(fileContent:String)
-    + getUserDeletedModules()
     + createList(input:String)
     + displayAll()
     + displayFavourites()
@@ -38,15 +45,14 @@ class UserUniversityListManager {
     + addModule(inputSchool:String, inputModule:UserModuleMapping)
     + deleteModule(inputSchool:String, puCode:String)
     + deleteList(inputSchool:String)
-    + getList(input:String)
-    + getMyManager()
-    + getMyFavourites()
     + addFavourite(input:String)
     + deleteFavourite(input:String)
 }
 
-UserUniversityListManager .> UserModuleMapping
-UserUniversityListManager " * " --> " * " UserUniversityList :> Manages multiple UserUniversityLists
-UserUniversityList ..> UserModuleMapping
-UserUniversityList " * " --> "0..1" UserModuleMappingList :> Manages a UserModuleMappingList
+UserUniversityListManager " 1 " o--> " *  " UserUniversityList
+UserUniversityListManager " 1  " o---> " 0..1 " UserDeletedModules
+UserUniversityList " 1 " o--> "0..1 " UserModuleMappingList
+UserUniversityListManager -> InvalidUserCommandException :<<throws>>
+UserUniversityList --> InvalidUserCommandException :<<throws>>
+UserUniversityListManager .> Ui
 @enduml
