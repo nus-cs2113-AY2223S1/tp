@@ -438,74 +438,7 @@ public class Storage {
         }
     }
 
-    /**
-     * Returns true or false depending on whether the Client is contained in the client list.
-     *
-     * @param pairingClient The Client that is in the pairing hash map to be compared with the clientList.
-     * @return true if pairingClient is in clientList and false if it's not.
-     */
-    public boolean hasClient(Client pairingClient) {
-        int clientListSize = clientList.getCurrentListSize();
 
-        String clientName = pairingClient.getClientName();
-        String clientContact = pairingClient.getClientContactNumber();
-        String clientEmail = pairingClient.getClientEmail();
-        String clientBudget = pairingClient.getClientBudgetPerMonth();
-
-        boolean hasClientName;
-        boolean hasClientContact;
-        boolean hasClientEmail;
-        boolean hasClientBudget;
-
-        for (int i = 0; i < clientListSize; i += 1) {
-            hasClientName = clientList.getClientList().get(i).getClientName().equals(clientName);
-            hasClientContact = clientList.getClientList().get(i).getClientContactNumber().equals(clientContact);
-            hasClientEmail = clientList.getClientList().get(i).getClientEmail().equals(clientEmail);
-            hasClientBudget = clientList.getClientList().get(i).getClientBudgetPerMonth().equals(clientBudget);
-
-            boolean hasCorrectClient = hasClientName && hasClientContact && hasClientEmail && hasClientBudget;
-
-            if (hasCorrectClient) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * Returns true or false depending on whether the Property is contained in the property list.
-     *
-     * @param pairingProperty The Property that is in the pairing hash map to be compared with propertyList.
-     * @return true if pairingProperty is in propertyList and false if it's not.
-     */
-    public boolean hasProperty(Property pairingProperty) {
-        int propertyListSize = propertyList.getCurrentListSize();
-
-        String landlordName = pairingProperty.getLandlordName();
-        String propertyAddress = pairingProperty.getPropertyAddress();
-        String propertyPrice = pairingProperty.getRentingPrice();
-        String propertyType = pairingProperty.getUnitType();
-
-        boolean hasLandlordName;
-        boolean hasPropertyAddress;
-        boolean hasPropertyPrice;
-        boolean hasPropertyType;
-
-        for (int i = 0; i < propertyListSize; i += 1) {
-            hasLandlordName = propertyList.getPropertyList().get(i).getLandlordName().equals(landlordName);
-            hasPropertyAddress = propertyList.getPropertyList().get(i).getPropertyAddress().equals(propertyAddress);
-            hasPropertyPrice = propertyList.getPropertyList().get(i).getRentingPrice().equals(propertyPrice);
-            hasPropertyType = propertyList.getPropertyList().get(i).getUnitType().equals(propertyType);
-
-            boolean hasCorrectProperty = hasLandlordName || hasPropertyAddress || hasPropertyPrice
-                    || hasPropertyType;
-
-            if (hasCorrectProperty) {
-                return true;
-            }
-        }
-        return false;
-    }
 
     /**
      * Populates the pairing file after comparing whether Client is in clientList and Property is in propertyList.
@@ -547,18 +480,48 @@ public class Storage {
                         unitType = propertyParameters[3].replace(CLOSE_BRACKET,EMPTY_STRING);
                     }
 
+                    // If both property and client have the right format
+                    Client pairingClient = new Client(clientName, clientContactNumber, clientEmail, clientBudget);
+                    Property pairingProperty = new Property(landLordName, propertyAddress, rentalPrice, unitType);
+
                     if ((clientParameters.length == 4) && (propertyParameters.length == 4)) {
-                        Client pairingClient = new Client(clientName, clientContactNumber, clientEmail, clientBudget);
-                        Property pairingProperty = new Property(landLordName, propertyAddress, rentalPrice, unitType);
+                        for (int i = 0; i < clientList.getCurrentListSize(); i += 1) {
+                            String clientListName = clientList.getClientList().get(i).getClientName();
+                            String clientListContactNumber = clientList.getClientList().get(i).getClientContactNumber();
+                            String clientListEmail = clientList.getClientList().get(i).getClientEmail();
+                            String clientListBudget = clientList.getClientList().get(i).getClientBudgetPerMonth();
+                            boolean isCorrectClientName = clientListName.equals(clientName);
+                            boolean isCorrectClientContact = clientListContactNumber.equals(clientContactNumber);
+                            boolean isCorrectClientEmail = clientListEmail.equals(clientEmail);
+                            boolean isCorrectClientBudget = clientListBudget.equals(clientBudget);
 
-                        boolean hasClient = hasClient(pairingClient);
-                        boolean hasProperty = hasProperty(pairingProperty);
+                            boolean isCorrectClient = isCorrectClientName && isCorrectClientContact
+                                    && isCorrectClientEmail && isCorrectClientBudget;
 
-                        if (hasClient && hasProperty) {
-                            pairingList.addPairing(pairingClient, pairingProperty);
-                        } else {
-                            System.out.println(Messages.MESSAGE_INVALID_PAIRING_FILE_INPUT);
+                            if (isCorrectClient) {
+                                pairingClient = clientList.getClientList().get(i);
+                            }
                         }
+
+                        for (int i = 0; i < propertyList.getCurrentListSize(); i += 1) {
+                            String propertyLandLordName = propertyList.getPropertyList().get(i).getLandlordName();
+                            String propertyListAddress = propertyList.getPropertyList().get(i).getPropertyAddress();
+                            String propertyListRentalPrice = propertyList.getPropertyList().get(i).getRentingPrice();
+                            String propertyListUnitType = propertyList.getPropertyList().get(i).getUnitType();
+                            boolean isCorrectLandlordName = propertyLandLordName.equals(landLordName);
+                            boolean isCorrectAddress = propertyListAddress.equals(propertyAddress);
+                            boolean isCorrectRental = propertyListRentalPrice.equals(rentalPrice);
+                            boolean isCorrectUnitType = propertyListUnitType.equals(unitType);
+
+                            boolean isCorrectProperty = isCorrectLandlordName && isCorrectAddress
+                                    && isCorrectRental && isCorrectUnitType;
+                            if (isCorrectProperty) {
+                                pairingProperty = propertyList.getPropertyList().get(i);
+                            }
+                        }
+
+                        pairingList.addPairing(pairingClient, pairingProperty);
+
                     }
                 }
             }
