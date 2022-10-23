@@ -153,7 +153,7 @@ public class TransactionList {
      * @throws InputTransactionInvalidTypeException If class type cannot be found in the packages.
      */
     public boolean isMatchListFilters(Transaction transaction, String type, String category,
-            LocalDate date) throws InputTransactionInvalidTypeException {
+                                      LocalDate date) throws InputTransactionInvalidTypeException {
         boolean isMatch;
         try {
             isMatch = ((type.isEmpty() || isTransactionInstance(transaction, type))
@@ -171,25 +171,31 @@ public class TransactionList {
      * @param type     The type of transaction.
      * @param category A category for the transaction.
      * @param date     Date of the transaction with format in "yyyyMMdd".
+     * @param year     A specified year.
+     * @param month    A specified month within the year.
      * @return A string containing the formatted transaction list.
      * @throws InputTransactionInvalidTypeException If class type cannot be found in the packages.
      */
     public String listTransactions(String type, String category, LocalDate date, int month, int year)
             throws InputTransactionInvalidTypeException {
-        String transactionsList = "";
+        ArrayList<Transaction> timeTransactions;
 
-        ArrayList<Transaction> timeTransactions = new ArrayList<>();
-
+        // Filters the transactions list by month or/and year first
         if (year != -1 && month != -1) {
             timeTransactions = getTransactionsByMonth(year, month);
         } else if (year != -1) {
+            assert month == -1;
             timeTransactions = getTransactionsByYear(year);
         } else {
+            // No filter month or/and year filter applied
             timeTransactions = transactions;
         }
 
-        // Loops each transaction from the transactions list
+        String transactionsList = "";
+
+        // Loops each transaction from the time transactions list
         for (Transaction transaction : timeTransactions) {
+            // Applies generic filter against each time transaction entry
             if (isMatchListFilters(transaction, type, category, date)) {
                 transactionsList += transaction.toString() + LINE_SEPARATOR;
             }
@@ -405,7 +411,7 @@ public class TransactionList {
      * @return An array list containing all transactions recorded on the last N number of weeks or months.
      */
     public static ArrayList<Transaction> getTransactionsByDateRange(LocalDate[] dateRange,
-            ArrayList<Transaction> transactionsByDateRange) {
+                                                                    ArrayList<Transaction> transactionsByDateRange) {
 
         for (Transaction transaction : transactions) {
             LocalDate transactionDate = transaction.getDate();
