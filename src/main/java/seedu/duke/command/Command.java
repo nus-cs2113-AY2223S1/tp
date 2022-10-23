@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
+//@@author chinhan99
 import seedu.duke.Storage;
 import seedu.duke.Ui;
 import seedu.duke.data.TransactionList;
@@ -11,6 +12,7 @@ import java.time.LocalDate;
  * Represents an object that can be inherited by other command objects.
  */
 public abstract class Command {
+    //@@author wcwy
     // The command word used to trigger the execution of Moolah Manager's operations
     public static String COMMAND_WORD;
     // The description for the usage of command

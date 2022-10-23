@@ -1,26 +1,32 @@
 package seedu.duke.parser;
 
+//@@author wcwy
 import seedu.duke.command.Command;
 import seedu.duke.command.ListCommand;
 import seedu.duke.data.transaction.Expense;
 import seedu.duke.data.transaction.Income;
-import seedu.duke.exception.EmptyParameterException;
-import seedu.duke.exception.EntryNumberNotNumericException;
-import seedu.duke.exception.InputDuplicateTagException;
-import seedu.duke.exception.InputMissingTagException;
+
+//@@author chydarren
+import seedu.duke.exception.GlobalEmptyParameterException;
+import seedu.duke.exception.GlobalInvalidMonthException;
+import seedu.duke.exception.GlobalInvalidNumberException;
+import seedu.duke.exception.GlobalInvalidPeriodException;
+import seedu.duke.exception.GlobalInvalidYearException;
+import seedu.duke.exception.GlobalNumberNotNumericException;
+import seedu.duke.exception.GlobalDuplicateTagException;
+import seedu.duke.exception.GlobalMissingTagException;
+
+//@@author brian-vb
 import seedu.duke.exception.InputTransactionInvalidAmountException;
 import seedu.duke.exception.InputTransactionInvalidCategoryException;
 import seedu.duke.exception.InputTransactionInvalidDateException;
-import seedu.duke.exception.InputTransactionUnknownTypeException;
-import seedu.duke.exception.InputUnsupportedTagException;
-import seedu.duke.exception.ListStatsInvalidStatsTypeException;
+import seedu.duke.exception.InputTransactionInvalidTypeException;
+import seedu.duke.exception.GlobalUnsupportedTagException;
+import seedu.duke.exception.StatsInvalidTypeException;
 import seedu.duke.exception.MoolahException;
-import seedu.duke.exception.StatsInvalidMonthException;
-import seedu.duke.exception.StatsInvalidNumberException;
-import seedu.duke.exception.StatsInvalidPeriodException;
-import seedu.duke.exception.StatsInvalidYearException;
-import seedu.duke.exception.UnknownHelpOptionException;
+import seedu.duke.exception.HelpUnknownOptionException;
 
+//@@author wcwy
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -30,22 +36,26 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+//@@author paullowse
 import static seedu.duke.command.CommandTag.COMMAND_TAG_HELP_OPTION;
-import static seedu.duke.command.CommandTag.COMMAND_TAG_LIST_ENTRY_NUMBER;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_GLOBAL_ENTRY_NUMBER;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_STATS_TYPE;
-import static seedu.duke.command.CommandTag.COMMAND_TAG_STATS_MONTH;
-import static seedu.duke.command.CommandTag.COMMAND_TAG_STATS_NUMBER;
-import static seedu.duke.command.CommandTag.COMMAND_TAG_STATS_PERIOD;
-import static seedu.duke.command.CommandTag.COMMAND_TAG_STATS_YEAR;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_GLOBAL_MONTH;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_GLOBAL_NUMBER;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_GLOBAL_PERIOD;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_GLOBAL_YEAR;
+
+//@@author chinhan99
 import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_AMOUNT;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_CATEGORY;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_DATE;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_DESCRIPTION;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_TYPE;
+
+//@@author chinhan99
 import static seedu.duke.common.Constants.MAX_AMOUNT_VALUE;
 import static seedu.duke.common.Constants.MIN_AMOUNT_VALUE;
 import static seedu.duke.common.DateFormats.DATE_INPUT_PATTERN;
-
 
 /**
  * Parses the parameter portion of the user input and set the parameters into the Command object.
@@ -103,7 +113,7 @@ public class ParameterParser {
             checkUnsupportedTagsNotExist(command, splits);
             // Might throw InputDuplicateTagException
             checkDuplicateTagsNotExist(splits);
-            // Might throw InputMissingParameterException
+            // Might throw InputEmptyParameterException
             checkParameterNotEmpty(splits);
 
             // The parameters input contains only the supported tags.
@@ -120,15 +130,15 @@ public class ParameterParser {
      *
      * @param command A command object created based on the command word given by user.
      * @param splits  The user input after the command word, split into a list for every space found.
-     * @throws InputMissingTagException If there is a missing mandatory tag.
+     * @throws GlobalMissingTagException If there is a missing mandatory tag.
      */
-    public static void checkMandatoryTagsExist(Command command, String[] splits) throws InputMissingTagException {
+    public static void checkMandatoryTagsExist(Command command, String[] splits) throws GlobalMissingTagException {
         String[] tags = command.getMandatoryTags();
         for (String tag : tags) {
             boolean found = findMatchingTagAmongInputs(tag, splits);
             if (!found) {
                 parserLogger.log(Level.WARNING, "A missing tag error is caught for the given tag: " + tag);
-                throw new InputMissingTagException();
+                throw new GlobalMissingTagException();
             }
         }
     }
@@ -140,10 +150,10 @@ public class ParameterParser {
      *
      * @param command A command object created based on the command word given by user.
      * @param splits  The user input after the command word, split into a list for every space found.
-     * @throws InputUnsupportedTagException If there is an extra tag that is not recognised.
+     * @throws GlobalUnsupportedTagException If there is an extra tag that is not recognised.
      */
     public static void checkUnsupportedTagsNotExist(Command command, String[] splits)
-            throws InputUnsupportedTagException {
+            throws GlobalUnsupportedTagException {
         String[] mandatoryTags = command.getMandatoryTags();
         String[] optionalTags = command.getOptionalTags();
 
@@ -151,7 +161,7 @@ public class ParameterParser {
             if (split.length() < MINIMUM_TAG_LENGTH) {
                 // None of the tags is shorter than two characters
                 parserLogger.log(Level.WARNING, "An unsupported tag error is caught for the given tag: " + split);
-                throw new InputUnsupportedTagException();
+                throw new GlobalUnsupportedTagException();
             }
             boolean hasFoundAmongMandatoryTag = findIfParameterTagAmongTags(split, mandatoryTags);
             boolean hasFoundAmongOptionalTag = findIfParameterTagAmongTags(split, optionalTags);
@@ -161,7 +171,7 @@ public class ParameterParser {
 
             // Found a tag entered by the user but does not exist in the supported tag for the command
             parserLogger.log(Level.WARNING, "An unsupported tag error is caught for the given tag: " + split);
-            throw new InputUnsupportedTagException();
+            throw new GlobalUnsupportedTagException();
         }
     }
 
@@ -171,9 +181,9 @@ public class ParameterParser {
      * Checks if the split user inputs contains a tag multiple times.
      *
      * @param splits The user input after the command word, split into a list for every space found.
-     * @throws InputDuplicateTagException If there is an extra of the same tag.
+     * @throws GlobalDuplicateTagException If there is an extra of the same tag.
      */
-    public static void checkDuplicateTagsNotExist(String[] splits) throws InputDuplicateTagException {
+    public static void checkDuplicateTagsNotExist(String[] splits) throws GlobalDuplicateTagException {
         HashMap<String, Integer> tagOccurenceMap = new HashMap<>();
         for (String split : splits) {
             assert split.length() >= MINIMUM_TAG_LENGTH;
@@ -182,7 +192,7 @@ public class ParameterParser {
             // The duplicated tag can be found in the hash map
             if (tagOccurenceMap.containsKey(tag)) {
                 parserLogger.log(Level.WARNING, "An duplicate tag error is caught for the given tag: " + tag);
-                throw new InputDuplicateTagException();
+                throw new GlobalDuplicateTagException();
             }
             tagOccurenceMap.put(tag, 1);
         }
@@ -195,14 +205,14 @@ public class ParameterParser {
      * If the split.length() is <= 2, it means that only the tag exists , and there is no parameter after the tag.
      *
      * @param splits The user input after the command word, split into a list for every space found.
-     * @throws EmptyParameterException If there exists a tag without parameter.
+     * @throws GlobalEmptyParameterException If there exists a tag without parameter.
      */
-    public static void checkParameterNotEmpty(String[] splits) throws EmptyParameterException {
+    public static void checkParameterNotEmpty(String[] splits) throws GlobalEmptyParameterException {
         for (String split : splits) {
             if (split.length() == 2) {
                 parserLogger.log(Level.WARNING, "An empty parameter error is caught for the "
                         + "given tag input: " + split);
-                throw new EmptyParameterException();
+                throw new GlobalEmptyParameterException();
             }
         }
     }
@@ -304,7 +314,7 @@ public class ParameterParser {
         case COMMAND_TAG_TRANSACTION_DESCRIPTION:
             command.setDescription(parameter);
             break;
-        case COMMAND_TAG_LIST_ENTRY_NUMBER:
+        case COMMAND_TAG_GLOBAL_ENTRY_NUMBER:
             command.setEntryNumber(parseEntryTag(parameter));
             break;
         case COMMAND_TAG_HELP_OPTION:
@@ -313,21 +323,21 @@ public class ParameterParser {
         case COMMAND_TAG_STATS_TYPE:
             command.setStatsType(parseStatsTypeTag(parameter));
             break;
-        case COMMAND_TAG_STATS_MONTH:
-            command.setStatsMonth(parseStatsMonthTag(parameter));
+        case COMMAND_TAG_GLOBAL_MONTH:
+            command.setStatsMonth(parseMonthTag(parameter));
             break;
-        case COMMAND_TAG_STATS_YEAR:
-            command.setStatsYear(parseStatsYearTag(parameter));
+        case COMMAND_TAG_GLOBAL_YEAR:
+            command.setStatsYear(parseYearTag(parameter));
             break;
-        case COMMAND_TAG_STATS_NUMBER:
-            command.setStatsNumber(parseStatsNumberTag(parameter));
+        case COMMAND_TAG_GLOBAL_NUMBER:
+            command.setStatsNumber(parseNumberTag(parameter));
             break;
-        case COMMAND_TAG_STATS_PERIOD:
-            command.setStatsPeriod(parseStatsPeriodTag(parameter));
+        case COMMAND_TAG_GLOBAL_PERIOD:
+            command.setStatsPeriod(parsePeriodTag(parameter));
             break;
         default:
             parserLogger.log(Level.WARNING, "An unsupported tag exception is caught: " + tag);
-            throw new InputUnsupportedTagException();
+            throw new GlobalUnsupportedTagException();
         }
     }
 
@@ -338,9 +348,9 @@ public class ParameterParser {
      *
      * @param parameter The user input after the user tag.
      * @return The class type if no exceptions are thrown.
-     * @throws InputTransactionUnknownTypeException If the transaction type provided is not supported.
+     * @throws InputTransactionInvalidTypeException If the transaction type provided is not supported.
      */
-    public static String parseTypeTagForListing(String parameter) throws InputTransactionUnknownTypeException {
+    public static String parseTypeTagForListing(String parameter) throws InputTransactionInvalidTypeException {
         switch (parameter) {
         case "expense":
             return CLASS_TYPE_EXPENSE;
@@ -349,7 +359,7 @@ public class ParameterParser {
         default:
             parserLogger.log(Level.WARNING, "An invalid type error "
                     + "is caught for the given parameter: " + parameter);
-            throw new InputTransactionUnknownTypeException();
+            throw new InputTransactionInvalidTypeException();
         }
     }
 
@@ -360,16 +370,16 @@ public class ParameterParser {
      *
      * @param parameter The user input after the user tag.
      * @return The user input after the user tag.
-     * @throws InputTransactionUnknownTypeException If the transaction type provided is not supported.
+     * @throws InputTransactionInvalidTypeException If the transaction type provided is not supported.
      */
-    public static String parseTypeTagForAdding(String parameter) throws InputTransactionUnknownTypeException {
+    public static String parseTypeTagForAdding(String parameter) throws InputTransactionInvalidTypeException {
         boolean isExpense = parameter.equals(Expense.TRANSACTION_NAME);
         boolean isIncome = parameter.equals(Income.TRANSACTION_NAME);
 
         if (!isExpense && !isIncome) {
             parserLogger.log(Level.WARNING, "An invalid type error "
                     + "is caught for the given parameter: " + parameter);
-            throw new InputTransactionUnknownTypeException();
+            throw new InputTransactionInvalidTypeException();
         }
 
         return parameter;
@@ -462,7 +472,7 @@ public class ParameterParser {
         } catch (NumberFormatException e) {
             parserLogger.log(Level.WARNING, "An invalid entry number error is caught for the given parameter: "
                     + parameter);
-            throw new EntryNumberNotNumericException();
+            throw new GlobalNumberNotNumericException();
         }
 
         return index;
@@ -475,16 +485,16 @@ public class ParameterParser {
      *
      * @param parameter The user input after the user tag.
      * @return A boolean value indicating if the option selected by user is "detailed"
-     * @throws UnknownHelpOptionException If the help option parameter selected is not 'detailed'.
+     * @throws HelpUnknownOptionException If the help option parameter selected is not 'detailed'.
      */
-    public static boolean parseHelpOptionTag(String parameter) throws UnknownHelpOptionException {
+    public static boolean parseHelpOptionTag(String parameter) throws HelpUnknownOptionException {
         boolean isValidHelpOption = parameter.equals("detailed");
         if (isValidHelpOption) {
             return true;
         } else {
             parserLogger.log(Level.WARNING, "An invalid help option error is caught for the given parameter: "
                     + parameter);
-            throw new UnknownHelpOptionException();
+            throw new HelpUnknownOptionException();
         }
     }
 
@@ -495,9 +505,9 @@ public class ParameterParser {
      *
      * @param parameter The user input after the user tag.
      * @return The statistic type.
-     * @throws ListStatsInvalidStatsTypeException If the statistic type given is not supported.
+     * @throws StatsInvalidTypeException If the statistic type given is not supported.
      */
-    public static String parseStatsTypeTag(String parameter) throws ListStatsInvalidStatsTypeException {
+    public static String parseStatsTypeTag(String parameter) throws StatsInvalidTypeException {
         switch (parameter) {
         case CATEGORIES:
             return CATEGORIES;
@@ -506,50 +516,50 @@ public class ParameterParser {
         default:
             parserLogger.log(Level.WARNING, "An invalid statistic type error is caught for the given parameter: "
                     + parameter);
-            throw new ListStatsInvalidStatsTypeException();
+            throw new StatsInvalidTypeException();
         }
     }
 
     //@@author paullowse
 
-    public static int parseStatsMonthTag(String parameter) throws StatsInvalidMonthException,
-            EntryNumberNotNumericException {
+    public static int parseMonthTag(String parameter) throws GlobalInvalidMonthException,
+            GlobalNumberNotNumericException {
         int month;
         try {
             month = Integer.parseInt(parameter);
         } catch (NumberFormatException e) {
-            parserLogger.log(Level.WARNING, "An invalid entry number error is caught for the given parameter: "
+            parserLogger.log(Level.WARNING, "An invalid number error is caught for the given parameter: "
                     + parameter);
-            throw new EntryNumberNotNumericException();
+            throw new GlobalNumberNotNumericException();
         }
 
         if (month > 12 || month < 0) {
             parserLogger.log(Level.WARNING, "An invalid month number error is caught for the given parameter: "
                     + parameter);
-            throw new StatsInvalidMonthException();
+            throw new GlobalInvalidMonthException();
         }
         return month;
     }
 
-    public static int parseStatsYearTag(String parameter) throws StatsInvalidYearException,
-            EntryNumberNotNumericException {
+    public static int parseYearTag(String parameter) throws GlobalInvalidYearException,
+            GlobalNumberNotNumericException {
         int year;
         try {
             year = Integer.parseInt(parameter);
         } catch (NumberFormatException e) {
-            parserLogger.log(Level.WARNING, "An invalid entry number error is caught for the given parameter: "
+            parserLogger.log(Level.WARNING, "An invalid number error is caught for the given parameter: "
                     + parameter);
-            throw new EntryNumberNotNumericException();
+            throw new GlobalNumberNotNumericException();
         }
         if (year < 0) {
             parserLogger.log(Level.WARNING, "An invalid year number error is caught for the given parameter: "
                     + parameter);
-            throw new StatsInvalidYearException();
+            throw new GlobalInvalidYearException();
         }
         return year;
     }
 
-    public static String parseStatsPeriodTag(String parameter) throws StatsInvalidPeriodException {
+    public static String parsePeriodTag(String parameter) throws GlobalInvalidPeriodException {
         String period;
         switch (parameter) {
         case WEEKS:
@@ -557,26 +567,26 @@ public class ParameterParser {
         case MONTHS:
             return MONTHS;
         default:
-            parserLogger.log(Level.WARNING, "An invalid statistic period error is caught for the given parameter: "
+            parserLogger.log(Level.WARNING, "An invalid period error is caught for the given parameter: "
                     + parameter);
-            throw new StatsInvalidPeriodException();
+            throw new GlobalInvalidPeriodException();
         }
     }
 
-    public static int parseStatsNumberTag(String parameter) throws EntryNumberNotNumericException,
-            StatsInvalidNumberException {
+    public static int parseNumberTag(String parameter) throws GlobalNumberNotNumericException,
+            GlobalInvalidNumberException {
         int statsNumber;
         try {
             statsNumber = Integer.parseInt(parameter);
         } catch (NumberFormatException e) {
-            parserLogger.log(Level.WARNING, "An invalid entry number error is caught for the given parameter: "
+            parserLogger.log(Level.WARNING, "An invalid number error is caught for the given parameter: "
                     + parameter);
-            throw new EntryNumberNotNumericException();
+            throw new GlobalNumberNotNumericException();
         }
         if (statsNumber < 0) {
             parserLogger.log(Level.WARNING, "An invalid year number error is caught for the given parameter: "
                     + parameter);
-            throw new StatsInvalidNumberException();
+            throw new GlobalInvalidNumberException();
         }
         return statsNumber;
     }

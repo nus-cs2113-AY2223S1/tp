@@ -1,8 +1,9 @@
 package seedu.duke.exception;
 
+//@@author wcwy
 import seedu.duke.common.ErrorMessages;
 
-public class InputMissingTagException extends MoolahException {
+public class HelpUnknownOptionException extends MoolahException {
     /**
      * Returns the error message of the exception to alert user of the exception.
      *
@@ -10,6 +11,7 @@ public class InputMissingTagException extends MoolahException {
      */
     @Override
     public String getMessage() {
-        return ErrorMessages.ERROR_INPUT_MISSING_TAG.toString();
+        return ErrorMessages.ERROR_UNKNOWN_HELP_OPTION.toString();
     }
+
 }

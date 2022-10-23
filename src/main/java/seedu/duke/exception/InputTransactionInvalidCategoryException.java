@@ -1,5 +1,6 @@
 package seedu.duke.exception;
 
+//@@author chinhan99
 import seedu.duke.common.ErrorMessages;
 
 public class InputTransactionInvalidCategoryException extends MoolahException {
@@ -10,7 +11,7 @@ public class InputTransactionInvalidCategoryException extends MoolahException {
      */
     @Override
     public String getMessage() {
-        return ErrorMessages.ERROR_INPUT_INVALID_CATEGORY.toString();
+        return ErrorMessages.ERROR_TRANSACTION_INVALID_CATEGORY.toString();
     }
 
 }

@@ -5,7 +5,7 @@ import seedu.duke.command.AddCommand;
 import seedu.duke.exception.InputTransactionInvalidAmountException;
 import seedu.duke.exception.InputTransactionInvalidCategoryException;
 import seedu.duke.exception.InputTransactionInvalidDateException;
-import seedu.duke.exception.EmptyParameterException;
+import seedu.duke.exception.GlobalEmptyParameterException;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -53,7 +53,7 @@ public class ParameterParserTest {
         String parametersInput = "t/income c/bonus a/1 d/ i/thank_you_boss";
 
         assertThrows(
-            EmptyParameterException.class,
+            GlobalEmptyParameterException.class,
             () -> ParameterParser.parse(addCommand, parametersInput)
         );
     }

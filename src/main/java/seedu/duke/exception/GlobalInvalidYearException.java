@@ -1,8 +1,9 @@
 package seedu.duke.exception;
 
+//@@author paullowse
 import seedu.duke.common.ErrorMessages;
 
-public class StatsInvalidYearException extends MoolahException {
+public class GlobalInvalidYearException extends MoolahException {
     /**
      * Returns the error message of the exception to alert user of the exception.
      *
@@ -10,6 +11,6 @@ public class StatsInvalidYearException extends MoolahException {
      */
     @Override
     public String getMessage() {
-        return ErrorMessages.ERROR_INPUT_INVALID_YEAR.toString();
+        return ErrorMessages.ERROR_GLOBAL_INVALID_YEAR.toString();
     }
 }

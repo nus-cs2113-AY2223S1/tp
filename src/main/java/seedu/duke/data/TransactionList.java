@@ -3,7 +3,7 @@ package seedu.duke.data;
 import seedu.duke.data.transaction.Expense;
 import seedu.duke.data.transaction.Income;
 import seedu.duke.data.transaction.Transaction;
-import seedu.duke.exception.InputTransactionUnknownTypeException;
+import seedu.duke.exception.InputTransactionInvalidTypeException;
 
 import java.time.LocalDate;
 import java.time.Year;
@@ -136,7 +136,7 @@ public class TransactionList {
      * @param transaction The transaction record from the transactions list.
      * @param classType   The transaction class type that is either Income or Expense.
      * @return A boolean value indicating whether transaction record belongs to the given class type.
-     * @throws InputTransactionUnknownTypeException If class type cannot be found in the packages.
+     * @throws InputTransactionInvalidTypeException If class type cannot be found in the packages.
      */
     public boolean isTransactionInstance(Object transaction, String classType) throws ClassNotFoundException {
         return Class.forName(classType).isInstance(transaction);
@@ -150,17 +150,17 @@ public class TransactionList {
      * @param category    A category for the transaction.
      * @param date        Date of the transaction with format in "yyyyMMdd".
      * @return A string containing the formatted transaction list.
-     * @throws InputTransactionUnknownTypeException If class type cannot be found in the packages.
+     * @throws InputTransactionInvalidTypeException If class type cannot be found in the packages.
      */
     public boolean isMatchListFilters(Transaction transaction, String type, String category,
-            LocalDate date) throws InputTransactionUnknownTypeException {
+            LocalDate date) throws InputTransactionInvalidTypeException {
         boolean isMatch;
         try {
             isMatch = ((type.isEmpty() || isTransactionInstance(transaction, type))
                     && (category.isEmpty() || transaction.getCategory().equals(category))
                     && (date == null || transaction.getDate().equals(date)));
         } catch (ClassNotFoundException e) {
-            throw new InputTransactionUnknownTypeException();
+            throw new InputTransactionInvalidTypeException();
         }
         return isMatch;
     }
@@ -172,13 +172,24 @@ public class TransactionList {
      * @param category A category for the transaction.
      * @param date     Date of the transaction with format in "yyyyMMdd".
      * @return A string containing the formatted transaction list.
-     * @throws InputTransactionUnknownTypeException If class type cannot be found in the packages.
+     * @throws InputTransactionInvalidTypeException If class type cannot be found in the packages.
      */
-    public String listTransactions(String type, String category, LocalDate date)
-            throws InputTransactionUnknownTypeException {
+    public String listTransactions(String type, String category, LocalDate date, int month, int year)
+            throws InputTransactionInvalidTypeException {
         String transactionsList = "";
+
+        ArrayList<Transaction> timeTransactions = new ArrayList<>();
+
+        if (year != -1 && month != -1) {
+            timeTransactions = getTransactionsByMonth(year, month);
+        } else if (year != -1) {
+            timeTransactions = getTransactionsByYear(year);
+        } else {
+            timeTransactions = transactions;
+        }
+
         // Loops each transaction from the transactions list
-        for (Transaction transaction : transactions) {
+        for (Transaction transaction : timeTransactions) {
             if (isMatchListFilters(transaction, type, category, date)) {
                 transactionsList += transaction.toString() + LINE_SEPARATOR;
             }

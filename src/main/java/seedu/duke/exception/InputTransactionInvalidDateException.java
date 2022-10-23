@@ -1,5 +1,6 @@
 package seedu.duke.exception;
 
+//@@author wcwy
 import seedu.duke.common.ErrorMessages;
 
 public class InputTransactionInvalidDateException extends MoolahException {
@@ -11,6 +12,6 @@ public class InputTransactionInvalidDateException extends MoolahException {
      */
     @Override
     public String getMessage() {
-        return ErrorMessages.ERROR_INPUT_INVALID_DATE.toString();
+        return ErrorMessages.ERROR_TRANSACTION_INVALID_DATE.toString();
     }
 }

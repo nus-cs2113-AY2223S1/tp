@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
+//@@author wcwy
 import seedu.duke.Storage;
 import seedu.duke.Ui;
 
@@ -8,11 +9,12 @@ import seedu.duke.data.TransactionList;
 import seedu.duke.data.transaction.Transaction;
 import seedu.duke.data.transaction.Expense;
 import seedu.duke.data.transaction.Income;
-import seedu.duke.exception.InputTransactionUnknownTypeException;
+import seedu.duke.exception.InputTransactionInvalidTypeException;
 import seedu.duke.exception.MoolahException;
 import seedu.duke.exception.StorageWriteErrorException;
 import seedu.duke.exception.MaximumTransactionCountException;
 
+//@@author chinhan99
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.logging.Level;
@@ -32,6 +34,7 @@ import static seedu.duke.common.InfoMessages.INFO_ADD_INCOME;
  * Represents an add command object that will execute the operations for Add command.
  */
 public class AddCommand extends Command {
+    //@@author chinhan99
     private static final String LINE_SEPARATOR = System.lineSeparator();
     // The command word used to trigger the execution of Moolah Manager's operations
     public static final String COMMAND_WORD = "ADD";
@@ -56,7 +59,6 @@ public class AddCommand extends Command {
     // Detailed help description
     public static final String COMMAND_DETAILED_HELP = COMMAND_HELP + COMMAND_PARAMETERS_INFO + LINE_SEPARATOR;
 
-    //@@author chinhan99
     private static final Logger addLogger = Logger.getLogger(AddCommand.class.getName());
 
     //@@author paullowse
@@ -135,7 +137,7 @@ public class AddCommand extends Command {
      * @param ui           An instance of the Ui class.
      * @param transactions An instance of the TransactionList class.
      * @param storage      An instance of the Storage class.
-     * @throws InputTransactionUnknownTypeException If the type of transaction is not recognised.
+     * @throws InputTransactionInvalidTypeException If the type of transaction is not recognised.
      */
     @Override
     public void execute(TransactionList transactions, Ui ui, Storage storage) throws MoolahException {
@@ -190,9 +192,9 @@ public class AddCommand extends Command {
      *
      * @param transactions The list of transactions in the application.
      * @returns A string containing the message banner based on the type of transaction created.
-     * @throws InputTransactionUnknownTypeException If the type of the transactions
+     * @throws InputTransactionInvalidTypeException If the type of the transactions
      */
-    private String addTransaction(TransactionList transactions) throws InputTransactionUnknownTypeException {
+    private String addTransaction(TransactionList transactions) throws InputTransactionInvalidTypeException {
         String messageBanner = "";
         Transaction transaction;
         switch (type) {
@@ -210,7 +212,7 @@ public class AddCommand extends Command {
             break;
         default:
             addLogger.log(Level.SEVERE, "The parsed type of transaction stored in addCommand is unknown!");
-            throw new InputTransactionUnknownTypeException();
+            throw new InputTransactionInvalidTypeException();
         }
         setTransactionCreated(transaction);
         return messageBanner;
