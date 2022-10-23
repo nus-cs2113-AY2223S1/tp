@@ -1,18 +1,14 @@
 package seedu.duke.parser;
 
-import seedu.duke.command.AddCommand;
-import seedu.duke.command.Command;
-import seedu.duke.command.CommandType;
-import seedu.duke.command.CreateCommand;
-import seedu.duke.command.ExitCommand;
-import seedu.duke.command.DeleteCommand;
-import seedu.duke.command.ViewCommand;
-import seedu.duke.command.HelpCommand;
-import seedu.duke.command.ListCommand;
-import seedu.duke.command.FavouriteCommand;
+import seedu.duke.command.*;
+import seedu.duke.exceptions.InvalidModuleException;
 import seedu.duke.exceptions.InvalidUserCommandException;
+import seedu.duke.exceptions.ModuleNotFoundException;
+import seedu.duke.module.Module;
+import seedu.duke.timetable.Lesson;
 
 public class CommandParser {
+    private static final int SIX_PARAMETERS_LENGTH = 6;
     private static final int THREE_PARAMETERS_LENGTH = 3;
     private static final int TWO_PARAMETERS_LENGTH = 2;
     private static final int ONE_PARAMETER_LENGTH = 1;
@@ -22,8 +18,12 @@ public class CommandParser {
     private static final int FAVORITE_OPTION_INDEX = 1;
     private static final int VIEW_OPTION_INDEX = 1;
     private static final int MODULE_INDEX = 2;
+    private static final int DAY_INDEX = 3;
+    private static final int LESSON_START_TIME_INDEX = 4;
+    private static final int LESSON_END_TIME_INDEX = 5;
 
-    public static Command getUserCommand(String userInput) throws InvalidUserCommandException {
+    public static Command getUserCommand(String userInput) throws InvalidUserCommandException,
+            ModuleNotFoundException, InvalidModuleException {
         String[] userInputTokenized = parseUserCommand(userInput);
         if (isEmptyUserInput(userInputTokenized)) {
             throw new InvalidUserCommandException("Error! Missing command. "
@@ -57,11 +57,8 @@ public class CommandParser {
                 throw new InvalidUserCommandException("Error! Invalid add command. "
                         + "Please follow the command format provided");
             }
-            boolean isAddModuleCommand = userInputTokenized.length == THREE_PARAMETERS_LENGTH;
-            if (isAddModuleCommand) {
-                userInputTokenized[MODULE_INDEX] = removeParameterUnderscores(userInputTokenized[MODULE_INDEX]);
-            }
-            AddCommand newAddCommand = new AddCommand(userInputTokenized, CommandType.ADD);
+            Lesson lessonToAdd = parseLesson(userInputTokenized);
+            AddCommand newAddCommand = new AddCommand(userInputTokenized, CommandType.ADD, lessonToAdd);
             return newAddCommand;
         case "/view":
             if (!isValidViewCommand(userInputTokenized)) {
@@ -76,8 +73,9 @@ public class CommandParser {
                         + "Please follow the command format provided");
             }
             boolean isDeleteModule = userInputTokenized.length == THREE_PARAMETERS_LENGTH;
+            Lesson lessonToDelete = parseLesson(userInputTokenized);
             DeleteCommand newDeleteCommand = new DeleteCommand(userInputTokenized, CommandType.DELETE,
-                    isDeleteModule);
+                    isDeleteModule, lessonToDelete);
             return newDeleteCommand;
         case "/list":
             if (!isValidListCommand(userInputTokenized)) {
@@ -99,6 +97,19 @@ public class CommandParser {
         }
     }
 
+    private static Lesson parseLesson(String[] userInputTokenized) throws ModuleNotFoundException,
+            InvalidModuleException {
+        if (!isValidCommandOnTimetable(userInputTokenized)) {
+            return null;
+        } else {
+            String code = userInputTokenized[MODULE_INDEX].substring(2);
+            Module puModule = Database.findPuMapping(code).getPartnerUniversityModule();
+            return new Lesson(puModule.getCode(),puModule.getTitle(),puModule.getUniversity(),
+                    userInputTokenized[DAY_INDEX], userInputTokenized[LESSON_START_TIME_INDEX], userInputTokenized[LESSON_END_TIME_INDEX]);
+        }
+
+    }
+
     private static String removeParameterUnderscores(String parameter) {
         return parameter.replace("_", " ");
     }
@@ -116,7 +127,7 @@ public class CommandParser {
     }
 
     private static boolean isValidAddCommand(String[] parameters) {
-        return isValidCommandOnModules(parameters);
+        return isValidCommandOnModules(parameters) || isValidCommandOnTimetable(parameters);
     }
 
     private static boolean isValidExitCommand(String[] parameters) {
@@ -128,7 +139,8 @@ public class CommandParser {
     }
 
     private static boolean isValidDeleteCommand(String[] parameters) {
-        return isValidCommandOnUniversity(parameters) || isValidCommandOnModules(parameters);
+        return isValidCommandOnUniversity(parameters) || isValidCommandOnModules(parameters)
+                || isValidCommandOnTimetable(parameters);
     }
 
 
@@ -162,6 +174,13 @@ public class CommandParser {
 
     private static boolean isValidCommandOnUniversity(String[] parameters) {
         return parameters.length == TWO_PARAMETERS_LENGTH && parameters[UNIVERSITY_INDEX].startsWith("u/");
+    }
+
+    private static boolean isValidCommandOnTimetable(String[] parameters) {
+        return parameters.length == SIX_PARAMETERS_LENGTH && parameters[UNIVERSITY_INDEX].startsWith("u/")
+                && parameters[MODULE_INDEX].startsWith("m/") && parameters[DAY_INDEX].startsWith("d/")
+                && parameters[LESSON_START_TIME_INDEX].startsWith("st/")
+                && parameters[LESSON_END_TIME_INDEX].startsWith("en/");
     }
 
     private static String[] parseUserCommand(String userInput) {
