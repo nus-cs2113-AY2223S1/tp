@@ -24,7 +24,6 @@ class Timetable {
     + hasTimetableClash(lesson: Lesson) : boolean
     + addLesson(newLesson: Lesson)
     + deleteLesson(oldLesson: Lesson)
-    + printTimetable()
 }
 
 class Lesson {
