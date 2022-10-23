@@ -129,7 +129,8 @@ public class Timetable {
 
         for (Module module : listOfModules) {
             List<Lesson> attendingList = module.getAttending();
-            for (Lesson attendingLesson : attendingList) {
+            for (int index = 0; index < attendingList.size(); index++) {
+                Lesson attendingLesson = attendingList.get(index);
                 if (attendingLesson.getDay().equals("Undetermined Day")) {
                     boolean isAllocated = false;
 
@@ -153,7 +154,7 @@ public class Timetable {
 
                         LinkedHashMap<String, String> dayMap = timetableDict.get(day);
                         if (dayMap.get(startTime).equals("______") && dayMap.get(endTime).equals("______")) {
-                            module.replaceAttending(lesson);
+                            module.replaceAttending(lesson, index);
                             isAllocated = true;
                             break;
                         }
@@ -261,6 +262,6 @@ public class Timetable {
     public static void replaceLesson(Lesson newLesson, int indexForModule, Integer indexForLesson) {
         assert indexForModule >= 0 : "index should be within range";
 
-        listOfModules.get(indexForModule).replaceAttending(newLesson);
+        listOfModules.get(indexForModule).replaceAttending(newLesson, indexForLesson);
     }
 }

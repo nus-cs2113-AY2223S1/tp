@@ -163,8 +163,8 @@ public class AttendingManager {
         String moduleCode;
         int moduleIndex = 0;
 
-        for (int i = 0; i < attendingDataList.size(); i++) {
-            currLine = attendingDataList.get(i).split("\\|");
+        for (int index = 0; index < attendingDataList.size(); index++) {
+            currLine = attendingDataList.get(index).split("\\|");
 
             currModule = moduleList.get(moduleIndex);
             moduleCode = currModule.getModuleCode();
@@ -184,7 +184,7 @@ public class AttendingManager {
                 moduleCode = currModule.getModuleCode();
             }
             Lesson newLesson = new Lesson(lessonDay, lessonStart, lessonEnd, lessonType, classNumber);
-            currModule.replaceAttending(newLesson);
+            currModule.replaceAttending(newLesson, index);
         }
     }
 
