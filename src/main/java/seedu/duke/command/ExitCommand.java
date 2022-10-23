@@ -9,13 +9,15 @@ public class ExitCommand extends Command {
     public static final String COMMAND_USAGE = "bye";
     public static final String COMMAND_DESCRIPTION = "Exit YAMOM!";
 
+    private static final String MESSAGE_EXIT = "Shutting down......";
+
     public ExitCommand(String[] input) {
         super(input);
     }
 
     @Override
     public void execute(State state, Ui ui, Storage storage) {
-
+        ui.displayMessage(getExecutionMessage());
     }
 
     @Override
@@ -25,7 +27,7 @@ public class ExitCommand extends Command {
 
     @Override
     public String getExecutionMessage() {
-        return null;
+        return MESSAGE_EXIT;
     }
 
     public static String getCommandDescription() {

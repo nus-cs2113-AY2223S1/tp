@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
+import seedu.duke.exceptions.YamomException;
 import seedu.duke.model.LessonType;
 import seedu.duke.model.Module;
 import seedu.duke.model.SelectedModule;
@@ -22,11 +23,17 @@ public class AddModuleCommand extends Command {
     private static final String COMMAND_USAGE = "add [MODULE_CODE]";
     private static final String COMMAND_DESCRIPTION = "add a module into YAMOM timetable.";
 
-    public AddModuleCommand(String[] input) {
+    private static final String ERROR_WRONG_FORMAT = "Wrong format, should be: " + COMMAND_USAGE;
+
+    public AddModuleCommand(String[] input) throws YamomException {
         super(input);
-        String moduleCode = input[1].toUpperCase();
-        this.module = Module.get(moduleCode);
-        successful = false;
+        try {
+            String moduleCode = input[1].toUpperCase();
+            this.module = Module.get(moduleCode);
+            successful = false;
+        } catch (Exception e) {
+            throw new YamomException(ERROR_WRONG_FORMAT);
+        }
     }
 
     @Override

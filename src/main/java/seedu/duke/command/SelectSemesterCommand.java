@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
+import seedu.duke.exceptions.YamomException;
 import seedu.duke.utils.State;
 import seedu.duke.utils.Storage;
 import seedu.duke.utils.Ui;
@@ -13,6 +14,8 @@ public class SelectSemesterCommand extends Command {
     public static final String COMMAND_DESCRIPTION = "Select another semester "
             + "to plan and organize timetable";
 
+    private static final String ERROR_WRONG_FORMAT = "Wrong format, should be: " + COMMAND_USAGE;
+
     private int updatedSemester;
 
     private Logger logger;
@@ -20,10 +23,13 @@ public class SelectSemesterCommand extends Command {
     public static final String SUBSYSTEM_NAME = "SelectSemesterCommand";
 
 
-    public SelectSemesterCommand(String[] input) {
+    public SelectSemesterCommand(String[] input) throws YamomException {
         super(input);
-        this.updatedSemester = Integer.parseInt(input[1]);
-
+        try {
+            this.updatedSemester = Integer.parseInt(input[1]);
+        } catch (Exception e) {
+            throw new YamomException(ERROR_WRONG_FORMAT);
+        }
     }
 
     @Override

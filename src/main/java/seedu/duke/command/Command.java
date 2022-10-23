@@ -6,7 +6,7 @@ import seedu.duke.utils.Ui;
 
 public abstract class Command {
     private final String[] input;
-    protected static final String DESCRIPTION_DELIMITER = " : ";
+    protected static final String DESCRIPTION_DELIMITER = "\t: ";
 
     public String[] getInput() {
         return input;

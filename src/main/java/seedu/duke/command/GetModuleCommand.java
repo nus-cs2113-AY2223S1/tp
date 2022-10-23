@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
+import seedu.duke.exceptions.YamomException;
 import seedu.duke.utils.State;
 import seedu.duke.utils.Storage;
 import seedu.duke.utils.Ui;
@@ -23,10 +24,17 @@ public class GetModuleCommand extends Command {
     public static final String COMMAND_USAGE = "get [MODULE_CODE]";
     public static final String COMMAND_DESCRIPTION = "Show all details of a module.";
 
-    public GetModuleCommand(String[] input) {
+    private static final String ERROR_WRONG_FORMAT = "Wrong format, should be: " + COMMAND_USAGE;
+
+    public GetModuleCommand(String[] input) throws YamomException {
         super(input);
-        String moduleCode = input[1].toUpperCase();
-        this.module = Module.get(moduleCode);
+
+        try {
+            String moduleCode = input[1].toUpperCase();
+            this.module = Module.get(moduleCode);
+        } catch (Exception e) {
+            throw new YamomException(ERROR_WRONG_FORMAT);
+        }
     }
 
     @Override
