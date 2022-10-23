@@ -142,7 +142,7 @@ public class Ui {
         String paddedStatus = "Status";
         String line = paddedIndex + paddedExercise + paddedSets + paddedTime + paddedRep
                 + paddedCalories + paddedDate + paddedStatus;
-        String separatorLine = "-".repeat(line.length()+4);
+        String separatorLine = "-".repeat(line.length() + 4);
         output(separatorLine, line, separatorLine);
     }
 
