@@ -31,7 +31,7 @@ public class Case extends Component {
         this.expansionSlots = expansionSlots;
     }
 
-/**
+    /**
      * Gets the size of the case.
      *
      * @return the size of the case
