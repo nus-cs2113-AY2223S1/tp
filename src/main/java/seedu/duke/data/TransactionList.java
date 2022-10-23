@@ -26,14 +26,12 @@ public class TransactionList {
     private static final String PREFIX_CATEGORY = "[";
     private static final String POSTFIX_CATEGORY = "]";
     private static final String SYMBOL_DOLLAR = "$";
-    private static final String WEEKS = "weeks";
-    private static final String MONTHS = "months";
     private static final int START = 0;
     private static final int END = 1;
     private static final String LINE_SEPARATOR = System.lineSeparator();
 
     //@@author chinhan99
-    private ArrayList<Transaction> transactions;
+    private static ArrayList<Transaction> transactions;
 
     public TransactionList(TransactionList transactionList) {
         transactions = transactionList.getTransactions();
@@ -247,17 +245,17 @@ public class TransactionList {
         return categoricalSavingsList;
     }
 
-    //@@author paullow_se
+    //@@author paullowse
 
     /**
-     * Produce Categorical saving list for timeTransactions.
+     * Produces Categorical saving list for timeTransactions.
      *
      * @param timeTransactions  An instance of the TransactionList class.
-     * @param year              A specified year
-     * @param month             A specified month
-     * @param period            A specified period of time
-     * @param number            A specified number of periods
-     * @return String output of transactions for the time period
+     * @param year              A specified year.
+     * @param month             A specified month.
+     * @param period            A specified period of time.
+     * @param number            A specified number of periods.
+     * @return String output of transactions for the time period.
      */
     public String listTimeStats(ArrayList<Transaction> timeTransactions, int year, int month, String period,
                                 int number) {
@@ -283,12 +281,11 @@ public class TransactionList {
         return timeSavingsList;
     }
 
-    //@@author paullow_se
     /**
-     * Produce Expense, Income and Savings statistics.
+     * Produces Expense, Income and Savings statistics.
      *
      * @param timeTransactions  An instance of the TransactionList class.
-     * @return                  An amount arraylist of Expense and Income
+     * @return An amount arraylist of Expense and Income.
      */
     public ArrayList<String> processTimeSummaryStats(ArrayList<Transaction> timeTransactions) {
         int timeExpense = 0;
@@ -310,38 +307,48 @@ public class TransactionList {
         return amounts;
     }
 
+    //@@author chydarren
+
     /**
-     * Gets the range of dates for the last N number of weeks from occurring week.
+     * Gets all transactions recorded in between specified weeks, backdated from given date.
      * E.g. If the date is 21 October 2022 to backdate 2 weeks, the range will be 3 October to 16 October 2022.
      *
-     * @param numberOfWeeks N number of weeks to backdate, must be minimum 1 week.
      * @param date          A specified date to backdate N weeks from occurring week.
-     * @return An array containing the start and end date.
+     * @param numberOfWeeks N number of weeks to backdate, must be minimum 1 week.
+     * @return An array list containing all transactions recorded in specified weeks.
      */
-    public static LocalDate[] getWeekRange(LocalDate date, int numberOfWeeks) {
+    public static ArrayList<Transaction> getTransactionsByWeekRange(LocalDate date, int numberOfWeeks) {
+        ArrayList<Transaction> transactionsByWeekRange = new ArrayList<>();
+
         // Solution below adapted from https://stackoverflow.com/a/51356522
+        // Gets the range of dates for the last N number of weeks from occurring week
         int dayOfWeek = date.getDayOfWeek().getValue();
         LocalDate from = date.minusDays((dayOfWeek - 1) + (numberOfWeeks * 7));
         LocalDate to = date.minusDays(dayOfWeek);
 
-        return new LocalDate[]{from, to};
+        transactionsByWeekRange = getTransactionsByDateRange(new LocalDate[]{from, to}, transactionsByWeekRange);
+        return transactionsByWeekRange;
     }
 
     /**
-     * Gets the range of dates for the last N number of months from occurring month.
+     * Gets all transactions recorded in between specified months, backdated from given date.
      * E.g. If the date is 21 October 2022 to backdate 2 months, the range will be 1 August to 30 September 2022.
      *
-     * @param numberOfMonths N number of months to backdate, must be minimum 1 month.
      * @param date           A specified date to backdate N months from occurring month.
-     * @return An array containing the start and end date.
+     * @param numberOfMonths N number of months to backdate, must be minimum 1 month.
+     * @return An array list containing all transactions recorded in specified months.
      */
-    public static LocalDate[] getMonthRange(LocalDate date, int numberOfMonths) {
+    public static ArrayList<Transaction> getTransactionsByMonthRange(LocalDate date, int numberOfMonths) {
+        ArrayList<Transaction> transactionsByMonthRange = new ArrayList<>();
+
         // Solution below adapted from https://stackoverflow.com/a/51356522
+        // Gets the range of dates for the last N number of months from occurring month
         LocalDate lastMonth = date.minusMonths(1);
         LocalDate from = date.minusMonths(numberOfMonths).withDayOfMonth(1);
         LocalDate to = lastMonth.withDayOfMonth(lastMonth.getMonth().maxLength());
 
-        return new LocalDate[]{from, to};
+        transactionsByMonthRange = getTransactionsByDateRange(new LocalDate[]{from, to}, transactionsByMonthRange);
+        return transactionsByMonthRange;
     }
 
     /**
@@ -383,30 +390,21 @@ public class TransactionList {
     /**
      * Gets all transactions recorded on the last N weeks or months.
      *
-     * @param numberOfType An integer that represents the last N number of weeks or months.
-     * @param type         A string that represents the getting of N "weeks", or "months".
+     * @param dateRange A specified range of dates.
      * @return An array list containing all transactions recorded on the last N number of weeks or months.
      */
-    public ArrayList<Transaction> getTransactionsByLastN(int numberOfType, String type) {
-        ArrayList<Transaction> transactionsByLastN = new ArrayList<>();
-        LocalDate[] dateRange = {};
-
-        if (type.equals(WEEKS)) {
-            dateRange = getWeekRange(LocalDate.now(), numberOfType);
-        } else {
-            assert type.equals(MONTHS);
-            dateRange = getMonthRange(LocalDate.now(), numberOfType);
-        }
+    public static ArrayList<Transaction> getTransactionsByDateRange(LocalDate[] dateRange,
+            ArrayList<Transaction> transactionsByDateRange) {
 
         for (Transaction transaction : transactions) {
             LocalDate transactionDate = transaction.getDate();
             // Transaction is added into the filtered array list if it falls within the expected date range
             if (!(transactionDate.isBefore(dateRange[START]) || transactionDate.isAfter(dateRange[END]))) {
-                transactionsByLastN.add(transaction);
+                transactionsByDateRange.add(transaction);
             }
         }
 
-        return transactionsByLastN;
+        return transactionsByDateRange;
     }
 
     //@@author brian-vb

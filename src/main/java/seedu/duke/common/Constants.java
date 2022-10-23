@@ -7,6 +7,7 @@ package seedu.duke.common;
  * <p>Note that altering the values in this folder may result in integer overflow in the program in extreme cases.
  */
 public class Constants {
+    //@@author wcwy
     /*
         WARNING: Editing the values below may result in integer overflow in
         1. TransactionList.calculateMonthlyTotalExpense()

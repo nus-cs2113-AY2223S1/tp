@@ -9,7 +9,7 @@ public class CommandTag {
     public static final String COMMAND_TAG_TRANSACTION_DESCRIPTION = "i/";
     public static final String COMMAND_TAG_LIST_ENTRY_NUMBER = "e/";
     public static final String COMMAND_TAG_HELP_OPTION = "o/";
-    public static final String COMMAND_TAG_STATISTICS_TYPE = "s/";
+    public static final String COMMAND_TAG_STATS_TYPE = "s/";
     public static final String COMMAND_TAG_STATS_MONTH = "m/";
     public static final String COMMAND_TAG_STATS_YEAR = "y/";
     public static final String COMMAND_TAG_STATS_NUMBER = "n/";

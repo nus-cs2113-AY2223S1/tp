@@ -3,7 +3,9 @@ package seedu.duke.command;
 import seedu.duke.Storage;
 import seedu.duke.Ui;
 import seedu.duke.data.TransactionList;
+import seedu.duke.exception.InputMissingTagException;
 import seedu.duke.exception.InputTransactionUnknownTypeException;
+import seedu.duke.exception.ListStatsInvalidStatsTypeException;
 import seedu.duke.exception.MoolahException;
 
 import java.time.LocalDate;
@@ -13,6 +15,8 @@ import java.util.logging.Level;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_TYPE;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_CATEGORY;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_DATE;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_STATS_MONTH;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_STATS_YEAR;
 import static seedu.duke.common.InfoMessages.INFO_LIST;
 import static seedu.duke.common.InfoMessages.INFO_LIST_EMPTY;
 
@@ -26,7 +30,7 @@ public class ListCommand extends Command {
     // The description for the usage of command
     public static final String COMMAND_DESCRIPTION = "To list all or some transactions based on selection.";
     // The guiding information for the usage of command
-    public static final String COMMAND_USAGE = "Usage: list [t/TYPE] [c/CATEGORY] [d/DATE]";
+    public static final String COMMAND_USAGE = "Usage: list [t/TYPE] [c/CATEGORY] [d/DATE] [m/MONTH] [y/YEAR]";
     // The formatting information for the parameters used by the command
     public static final String COMMAND_PARAMETERS_INFO = "Parameters information:"
             + LINE_SEPARATOR
@@ -48,6 +52,8 @@ public class ListCommand extends Command {
     private String category;
     private LocalDate date;
     private String type;
+    private int month;
+    private int year;
 
     /**
      * Initialises the variables of the ListCommand class.
@@ -56,6 +62,8 @@ public class ListCommand extends Command {
         category = "";
         date = null;
         type = "";
+        month = -1;
+        year = -1;
     }
 
     /**
@@ -68,7 +76,9 @@ public class ListCommand extends Command {
         String[] optionalTags = new String[]{
             COMMAND_TAG_TRANSACTION_TYPE,
             COMMAND_TAG_TRANSACTION_CATEGORY,
-            COMMAND_TAG_TRANSACTION_DATE
+            COMMAND_TAG_TRANSACTION_DATE,
+            COMMAND_TAG_STATS_MONTH,
+            COMMAND_TAG_STATS_YEAR
         };
         return optionalTags;
     }
@@ -88,6 +98,18 @@ public class ListCommand extends Command {
         this.date = date;
     }
 
+    @Override
+    public void setStatsMonth(int month) {
+        this.month = month;
+    }
+
+    @Override
+    public void setStatsYear(int year) {
+        this.year = year;
+    }
+
+    //@@author chydarren
+
     /**
      * Executes the operations related to the command.
      *
@@ -100,10 +122,9 @@ public class ListCommand extends Command {
         listLogger.setLevel(Level.SEVERE);
         listLogger.log(Level.INFO, "Entering execution of the List command.");
 
-        listTransactions(transactions, type, category, date);
+        listTransactions(transactions, type, category, date, month, year);
     }
 
-    //@@chydarren
     /**
      * List all or some transactions based on selection.
      *
@@ -113,8 +134,14 @@ public class ListCommand extends Command {
      * @param date         Date of the transaction with format in "yyyyMMdd".
      * @throws InputTransactionUnknownTypeException If class type cannot be found in the packages.
      */
-    private static void listTransactions(TransactionList transactions, String type, String category, LocalDate date)
-            throws InputTransactionUnknownTypeException {
+    private static void listTransactions(TransactionList transactions, String type, String category, LocalDate date,
+                                         int month, int year)
+            throws InputTransactionUnknownTypeException, InputMissingTagException {
+        if (month != -1 && year == -1) {
+            listLogger.log(Level.WARNING, "An exception has been caught as a month was given without a year.");
+            throw new InputMissingTagException();
+        }
+
         String transactionsList = transactions.listTransactions(type, category, date);
 
         if (transactionsList.isEmpty()) {
@@ -129,6 +156,7 @@ public class ListCommand extends Command {
     }
 
     //@@author paullowse
+
     /**
      * Enables the program to exit when the Bye command is issued.
      *

@@ -27,10 +27,8 @@ import java.util.logging.Logger;
  */
 public class CommandParser {
     //@@author chydarren
-    private static final String EMPTY_STRING = "";
     private static final String DELIMITER = " ";
     private static final int SPLIT_POSITION = 2;
-
     private static final Logger parserLogger = Logger.getLogger(ParameterParser.class.getName());
 
     //@@author wcwy
@@ -79,7 +77,7 @@ public class CommandParser {
         if (fullCommandInput.contains(DELIMITER)) {
             inputTokens = fullCommandInput.split(DELIMITER, SPLIT_POSITION);
         } else {
-            inputTokens = new String[]{fullCommandInput, EMPTY_STRING};
+            inputTokens = new String[]{fullCommandInput, ""};
         }
         return inputTokens;
     }
