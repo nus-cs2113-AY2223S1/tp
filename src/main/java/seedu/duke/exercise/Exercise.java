@@ -1,17 +1,21 @@
 package seedu.duke.exercise;
 
+import seedu.duke.command.DateCommand;
+
 public class Exercise {
+    private String date;
     private String exerciseName;
     private int repetition;
     private int caloriesBurnt;
     private boolean isDone;
 
 
-    public Exercise(String exerciseName, int repetitions, int caloriesBurnt) {
+    public Exercise(String exerciseName, int repetitions, int caloriesBurnt, String date) {
         this.exerciseName = exerciseName;
         this.repetition = repetitions;
         this.caloriesBurnt = caloriesBurnt;
         this.isDone = false;
+        this.date = date;
     }
 
     public String getExerciseName() {
@@ -36,6 +40,10 @@ public class Exercise {
 
     public int getTime() {
         return 1;
+    }
+
+    public String getDate() {
+        return date;
     }
 
     public String getTaskStatus() {

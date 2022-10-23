@@ -12,6 +12,8 @@ import seedu.duke.command.RemoveCommand;
 import seedu.duke.command.SetCommand;
 import seedu.duke.command.ViewCommand;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -67,5 +69,11 @@ public class Parser {
 
     public static String getClassType(String[] argumentList) {
         return argumentList[0];
+    }
+
+    public static String getDateNoDateTracker(String input) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        LocalDate localDate = LocalDate.parse(input, formatter);
+        return formatter.format(localDate);
     }
 }
