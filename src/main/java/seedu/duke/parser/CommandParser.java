@@ -104,15 +104,15 @@ public class CommandParser {
         } else {
             String code = userInputTokenized[MODULE_INDEX].substring(2);
             Module puModule = Database.findPuMapping(code).getPartnerUniversityModule();
-            return new Lesson(puModule.getCode(),puModule.getTitle(),puModule.getUniversity(),
-                    userInputTokenized[DAY_INDEX], userInputTokenized[LESSON_START_TIME_INDEX], userInputTokenized[LESSON_END_TIME_INDEX]);
+            String day = userInputTokenized[DAY_INDEX].substring(2);
+            String startTime = userInputTokenized[LESSON_START_TIME_INDEX].substring(3);
+            String endTime = userInputTokenized[LESSON_END_TIME_INDEX].substring(3);
+            return new Lesson(puModule.getCode(),puModule.getTitle(),puModule.getCredit(), puModule.getUniversity(),
+                    day, startTime, endTime);
         }
 
     }
 
-    private static String removeParameterUnderscores(String parameter) {
-        return parameter.replace("_", " ");
-    }
 
     private static boolean isEmptyUserInput(String[] userInputTokenized) {
         return userInputTokenized.length < ONE_PARAMETER_LENGTH;
@@ -190,4 +190,9 @@ public class CommandParser {
         }
         return userInputTokenized;
     }
+
+    private static String removeParameterUnderscores(String parameter) {
+        return parameter.replace("_", " ");
+    }
+
 }
