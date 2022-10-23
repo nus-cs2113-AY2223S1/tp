@@ -56,7 +56,6 @@ import static seedu.duke.common.DateFormats.DATE_INPUT_PATTERN;
  */
 public class ParameterParser {
     //@@author chydarren
-    private static final String EMPTY_STRING = "";
     private static final String DELIMITER = " ";
     private static final int SPLIT_POSITION = 2;
     private static final int MINIMUM_TAG_LENGTH = 2;
@@ -496,20 +495,16 @@ public class ParameterParser {
      * @throws ListStatsInvalidStatsTypeException If the statistic type given is not supported.
      */
     public static String parseStatsTypeTag(String parameter) throws ListStatsInvalidStatsTypeException {
-        String statsType;
         switch (parameter) {
         case "categories":
-            statsType = "categories";
-            break;
+            return "categories";
         case "time":
-            statsType = "time";
-            break;
+            return "time";
         default:
             parserLogger.log(Level.WARNING, "An invalid statistic type error is caught for the given parameter: "
                     + parameter);
             throw new ListStatsInvalidStatsTypeException();
         }
-        return statsType;
     }
 
     //@@author paullowse

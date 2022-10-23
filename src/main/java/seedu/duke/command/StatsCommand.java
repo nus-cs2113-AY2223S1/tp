@@ -7,6 +7,7 @@ import seedu.duke.data.transaction.Transaction;
 import seedu.duke.exception.ListStatsInvalidStatsTypeException;
 import seedu.duke.exception.MoolahException;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -203,8 +204,10 @@ public class StatsCommand extends Command {
 
         ArrayList<Transaction> timeTransactions;
         // only year
-        if (period != null && number != -1) {
-            timeTransactions = transactions.getTransactionsByLastN(number, period);
+        if (period != null && number != -1 && period == "weeks") {
+            timeTransactions = transactions.getTransactionsByWeekRange(LocalDate.now(), number);
+        } else if (period != null && number != -1 && period == "months") {
+            timeTransactions = transactions.getTransactionsByMonthRange(LocalDate.now(), number);
         } else if (month == -1) {
             timeTransactions = transactions.getTransactionsByYear(year);
         } else if (year != -1) {
