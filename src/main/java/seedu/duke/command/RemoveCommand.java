@@ -14,6 +14,7 @@ public class RemoveCommand extends Command {
     private String arguments;
     public static final String INVALID_REMOVE_FOOD_INPUT = "Invalid remove food input";
     private ExerciseList exerciseList;
+    private Biometrics biometrics;
 
     public RemoveCommand(String arguments) {
         this.arguments = arguments;
@@ -22,25 +23,38 @@ public class RemoveCommand extends Command {
     @Override
     public void execute() throws IllegalValueException {
         String[] argumentList = Parser.getArgumentList(arguments);
-        String removeType = argumentList[0];
-        switch (removeType) {
-        case ("food"):
-            removeFood(argumentList);
-            break;
-        case ("exercise"):
-            removeExercise(argumentList);
-            break;
-        default:
-            handleInvalidRemoveType();
+        if (argumentList.length != 2) {
+            throw new IllegalValueException("INVALID_NUMBER_INPUT");
         }
+        try {
+            int index = Integer.parseInt(argumentList[1]);
+            String removeType = argumentList[0];
+            switch (removeType) {
+            case ("food"):
+                removeFood(argumentList);
+                break;
+            case ("exercise"):
+                removeExercise(argumentList);
+                break;
+            case ("weight"):
+                removeWeight(index);
+                break;
+            default:
+                handleInvalidRemoveType();
+            }
+        } catch (NumberFormatException e) {
+            throw new IllegalValueException("Index should be numerical");
+        }
+    }
+
+    private void removeWeight(int index) throws IllegalValueException {
+        biometrics.weightAndFatList.removeWeightAndFat(index - 1);
+        ui.output(" Weight and fat record removed successfully");
     }
 
     //@@junhaoliu2468
     private void removeExercise(String[] argumentList) {
         try {
-            if (argumentList.length != 2) {
-                throw new IllegalValueException("INVALID_NUMBER_INPUT");
-            }
             int index = Integer.parseInt(argumentList[1]);
             if (index > exerciseList.getCurrentExerciseList().size() || index < 1) {
                 throw new IllegalValueException("INVALID_INDEX_INPUT");
@@ -53,15 +67,12 @@ public class RemoveCommand extends Command {
         }
     }
 
-    private void handleInvalidRemoveType() throws IllegalValueException {
-        throw new IllegalValueException("Invalid remove command");
+    private void handleInvalidRemoveType() {
+        ui.output("Invalid remove command");
     }
 
     private void removeFood(String[] argumentList) throws IllegalValueException {
         try {
-            if (argumentList.length != 2) {
-                throw new IllegalValueException(INVALID_REMOVE_FOOD_INPUT);
-            }
             assert argumentList.length == 2 : "Invalid remove food command";
             int index = Integer.parseInt(argumentList[1]);
             if (index <= 0 || index > foodList.getFoodListSize()) {
@@ -82,5 +93,6 @@ public class RemoveCommand extends Command {
         this.ui = ui;
         this.foodList = foodList;
         this.exerciseList = exerciseList;
+        this.biometrics = biometrics;
     }
 }

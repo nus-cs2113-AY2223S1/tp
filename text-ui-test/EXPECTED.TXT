@@ -21,9 +21,9 @@ add strength /{description} /{sets} /{repetitions} /{calories}
 add cardio /{description} /{time} /{repetitions} /{calories}
 add food /{description} /{calories}
 add weight /{weight} /{fat percentage}
-remove {food/exercise} /{food index/exerciseList index}
+remove {food/exercise/weight} /{index}
 mark {done/undone} /{exercise index}
-view {biometrics/food} {exercise/strength/cardio /{done}}
+view {biometrics/food/weight} {exercise/strength/cardio /{done}}
 find {strength/cardio/food} /{description}
 -------------------------------------------------------------
 -------------------------------------------------------------

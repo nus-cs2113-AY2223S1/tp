@@ -40,14 +40,14 @@ class RemoveCommandTest {
     @Test
     void execute_RemoveWithNoParameter_exceptionThrown() {
         String command = "remove food";
-        assertInvalidRemoveCommand(command, "Invalid remove food input");
+        assertInvalidRemoveCommand(command, "INVALID_NUMBER_INPUT");
     }
 
 
     @Test
     void execute_RemoveWithNonIntegerIndex_exceptionThrown() {
         String command = "remove food /0x";
-        assertInvalidRemoveCommand(command, "Invalid remove food input");
+        assertInvalidRemoveCommand(command, "Index should be numerical");
     }
 
     private void assertInvalidRemoveCommand(String input, String expectedMessage) {
