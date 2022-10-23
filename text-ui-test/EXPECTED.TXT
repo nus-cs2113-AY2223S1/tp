@@ -78,6 +78,8 @@ Parameters information:
 (Optional) TYPE - The type of transaction. Only "income" or "expense" is accepted.
 (Optional) CATEGORY: A category for the transaction. Only string containing alphabets is accepted.
 (Optional) DATE: Date of the transaction. The format must be in "yyyyMMdd".
+(Optional) MONTH: Month of the transaction. Only integers within 1 to 12 are accepted. Note that month must be accompanied by a year.
+(Optional) YEAR: Year of the transaction. Only integers from 1000 onwards are accepted.
 
 Command Word: FIND
 To find specific transaction(s) based on any keywords inputted by the user.
