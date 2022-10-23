@@ -12,6 +12,7 @@ import javax.swing.JMenuBar;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import java.io.FileWriter;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -20,6 +21,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Editor extends JFrame implements ActionListener {
+
+    private enum EditorState {
+        USING, SAVE, EXIT
+    }
 
     private static Logger logger = Logger.getLogger(Editor.class.getName());
 
@@ -78,21 +83,32 @@ public class Editor extends JFrame implements ActionListener {
 
     }
 
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == buttonSave) {
             this.state = EditorState.SAVE;
+            // Save to temporary
+            File temp = new File(Storage.TEMPORARY_PATH);
+            try{
+                FileWriter writer = new FileWriter(Storage.TEMPORARY_PATH);
+                writer.write(textArea.getText());
+                writer.close();
+            } catch (Exception ex){
+                ex.printStackTrace();
+            }
             frame.dispose();
+
         } else if (e.getSource() == buttonExit) {
             this.state = EditorState.EXIT;
             frame.dispose();
         }
     }
 
-    /** Enter AddMode is load template */
-    public void enterEditor(String path) {
+    public boolean enterEditor(String path) {
         Ui.showMessage("Please edit in the GUI editor!");
         loadFile(path);
+        // Wait until the editor is done
         while (this.state == EditorState.USING) {
             try {
                 Thread.sleep(500);
@@ -100,11 +116,11 @@ public class Editor extends JFrame implements ActionListener {
                 Ui.showMessage("Break from sleep");
             }
         }
-        // TODO: Trigger Parser
         logger.log(Level.INFO, "Editor State: " + this.state);
+        return (state.equals(EditorState.SAVE))? true : false;
     }
 
-
+    /** Load file from the path to the editor*/
     private void loadFile(String path){
         File textFile = new File(path);
         Scanner scan = null;
@@ -116,7 +132,6 @@ public class Editor extends JFrame implements ActionListener {
             }
         }
         catch (FileNotFoundException e){
-            //TODO: Catch
             e.printStackTrace();
         }
         finally{
@@ -124,5 +139,6 @@ public class Editor extends JFrame implements ActionListener {
         }
     }
 
+    
 }
 

@@ -19,16 +19,19 @@ import recipeditor.ui.Ui;
 
 public class Storage {
 
-    private static final String DATA_STORAGE = "./Storage/";
-    public final static String TEMPLATE_PATH = "./Storage/Template.txt";
-    private final static String TEMPLATE_FILE = "# Title \n\n"
-    +"# Description\n\n"
-    +"# Ingredients: <ingredient name> / <amount> / <unit> \n"
-    +"1. Butter / 2.1 / gram (this is an example)\n"
-    +"2. \n\n"
-    +"# Steps: \n"
-    +"1. This is the description for step 1 (this is an example) \n"
-    +"2. \n";
+    private static final String DATA_STORAGE_PATH = "./Storage/";
+    private static final String DATA_TEMPORARY_PATH = "./Storage/App";
+    public static final String TEMPLATE_PATH = "./Storage/App/Template.txt";
+    public static final String TEMPORARY_PATH = "./Storage/App/Temp.txt";
+    private final static String TEMPLATE_FILE = "# TITLE \n"
+    +"Example Title \n\n"
+    +"# DESCRIPTION\n"
+    +"Example Description\n\n"
+    +"# INGREDIENTS <ingredient name> / <amount> / <unit> \n"
+    +"1. Example ingredient / 1.2 / example unit \n\n"
+    +"# STEPS \n"
+    +"1. Example step \n";
+
 
     private static final String RECIPE_NAME_FIELD_TYPE = "Recipe Name";
     private static final String RECIPE_DESCRIPTION_FIELD_TYPE = "Recipe Description";
@@ -57,9 +60,9 @@ public class Storage {
      * Create storage folder for recipes and Template files
      */
     public static void createDataFolder() {
-        Path path = Paths.get(Storage.DATA_STORAGE);
         try {
-            Files.createDirectories(path);
+            Files.createDirectories(Paths.get(DATA_STORAGE_PATH));
+            Files.createDirectories(Paths.get(DATA_TEMPORARY_PATH));
             Ui.showMessage("Directory created");
             templateFile();
         } catch (IOException e) {
@@ -200,5 +203,16 @@ public class Storage {
         } finally{
             Ui.showMessage("Template file created");
         }
+    }
+
+    public static String loadFileContent(String path) throws FileNotFoundException{
+        File file = new File(path);
+        StringBuilder getContent = new StringBuilder();
+
+        Scanner scan = new Scanner(file);
+        while(scan.hasNext()){
+            getContent.append(scan.nextLine() + "\n");
+        }
+        return getContent.toString();
     }
 }
