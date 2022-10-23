@@ -27,7 +27,8 @@ public class UpdateCommand extends Command {
             //fetch api
             api.syncFetchData();
             //update json
-            CarparkList updatedCarparkList = new CarparkList(CommonFiles.LTA_FILE_PATH, CommonFiles.LTA_BACKUP_FILE_PATH);
+            CarparkList updatedCarparkList = new CarparkList(CommonFiles.LTA_FILE_PATH,
+                    CommonFiles.LTA_BACKUP_FILE_PATH);
             return updatedCarparkList;
         } catch (ParkingException e) {
             e.getMessage();

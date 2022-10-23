@@ -1,32 +1,39 @@
 package seedu.commands;
 
-import seedu.data.Carpark;
-import seedu.exception.*;
-import seedu.files.Favourite;
-import seedu.files.FileReader;
-import seedu.files.FileStorage;
-import seedu.parser.Parser;
-import seedu.ui.Ui;
-
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 
-import static seedu.common.CommonFiles.FAVOURITE_DIRECTORY;
-import static seedu.common.CommonFiles.FAVOURITE_FILE;
+import seedu.data.Carpark;
+import seedu.exception.DuplicateCarparkException;
+import seedu.exception.FileWriteException;
+import seedu.exception.NoCarparkFoundException;
+import seedu.files.Favourite;
 
+/**
+ * Represents the 'favourite' command to save carparks in a list.
+ */
 public class FavouriteCommand extends Command {
     public static final String COMMAND_WORD = "favourite";
     private final String argument;
     private ArrayList<String> favouriteList;
     private Favourite favourite;
 
-    public FavouriteCommand(String argument, Favourite favourite, ArrayList<String> favouriteList) {
+    /**
+     * Constructor for FavouriteCommand
+     *
+     * @param argument argument for the FavouriteCommand
+     * @param favourite favourite class
+     */
+    public FavouriteCommand(String argument, Favourite favourite) {
         this.argument = argument;
-        this.favourite =  favourite;
-        this.favouriteList = favouriteList;
+        this.favourite = favourite;
+        this.favouriteList = favourite.favouriteList;
     }
 
+    /**
+     * Executes FavouriteCommand
+     *
+     * @return CommandResult of FavouriteCommand
+     */
     @Override
     public CommandResult execute() {
         try {
@@ -48,10 +55,10 @@ public class FavouriteCommand extends Command {
     }
 
     /**
-     * Inserts a carpark into the favourite list.
+     * Inserts a carpark into the favourite list and writes it into the favouriteList.txt
      *
      * @param carparkId Carpark ID to favourite.
-     * @throws FileWriteException If unable to write to favourite.txt file.
+     * @throws FileWriteException        If unable to write to favourite.txt file.
      * @throws DuplicateCarparkException If carpark ID is already in favourites.
      */
     public void setFavourite(String carparkId) throws FileWriteException, DuplicateCarparkException {
@@ -62,6 +69,4 @@ public class FavouriteCommand extends Command {
         favouriteList.add(carparkId);
         favourite.writeFavouriteList();
     }
-
-
 }

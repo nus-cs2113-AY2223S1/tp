@@ -4,23 +4,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import seedu.exception.DuplicateCarparkException;
 import seedu.exception.FileWriteException;
-import seedu.exception.NoCarparkFoundException;
-import seedu.exception.NoCommandArgumentException;
 import seedu.exception.NoFileFoundException;
-import seedu.exception.UnneededArgumentsException;
-import seedu.files.FileReader;
-import seedu.files.FileStorage;
-import seedu.parser.Parser;
-import seedu.ui.Ui;
 
 /**
- * Represents the 'favourite' and 'unfavourite' command to save carparks in a list.
+ * Represents the 'favourite' class.
  */
 public class Favourite {
     private final FileStorage fileStorage;
-    private ArrayList<String> favouriteList;
+    public ArrayList<String> favouriteList;
     private final String directory;
     private final String file;
 

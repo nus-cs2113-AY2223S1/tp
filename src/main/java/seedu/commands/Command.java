@@ -11,6 +11,9 @@ import seedu.exception.NoCarparkFoundException;
 public class Command {
     protected CarparkList carparkList;
 
+    /**
+     * Constructor for Command class
+     */
     protected Command() {
     }
 

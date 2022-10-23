@@ -1,38 +1,34 @@
 package seedu.parser;
 
-import seedu.api.Api;
-import seedu.commands.*;
-import seedu.data.CarparkList;
-import seedu.exception.InvalidCommandException;
-import seedu.exception.NoCommandArgumentException;
-import seedu.exception.UnneededArgumentsException;
-import seedu.files.Favourite;
-import seedu.files.FileStorage;
-import seedu.parser.search.Sentence;
-
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static seedu.common.CommonFiles.FAVOURITE_DIRECTORY;
-import static seedu.common.CommonFiles.FAVOURITE_FILE;
-
+import seedu.api.Api;
+import seedu.commands.AuthCommand;
+import seedu.commands.Command;
+import seedu.commands.ExitCommand;
+import seedu.commands.FavouriteCommand;
+import seedu.commands.FindCommand;
+import seedu.commands.InvalidCommand;
+import seedu.commands.ListCommand;
+import seedu.commands.SearchCommand;
+import seedu.commands.UnfavouriteCommand;
+import seedu.commands.UpdateCommand;
+import seedu.data.CarparkList;
+import seedu.files.Favourite;
+import seedu.parser.search.Sentence;
 
 /**
  * Class to deal with parsing commands.
  */
 public class Parser {
+    public static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
     private CarparkList carparkList;
     private Api api;
     private Favourite favourite;
     private ArrayList<String> favouriteList;
-
-    /**
-     * Used for the initial separation of command word and arguments
-     */
-    public static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
-    public static final Pattern KEYWORDS_ARGS_FORMAT = Pattern.compile("(?<keywords>\\S+(?:\\s+\\S+)*)");
 
     /**
      * Parses user input into command for execution.
@@ -69,6 +65,8 @@ public class Parser {
             return prepareSearch(arguments);
         case UpdateCommand.COMMAND_WORD:
             return new UpdateCommand(api);
+        case UnfavouriteCommand.COMMAND_WORD:
+            return prepareUnfavourite(arguments);
         default:
             return new InvalidCommand("Invalid Command");
         }
@@ -85,9 +83,26 @@ public class Parser {
         return new AuthCommand(api, apiKey);
     }
 
+    /**
+     * To prepare the arguments to be taken in for Favourite Command.
+     *
+     * @param arguments arguments given by the user after the command word
+     * @return command to be carried out
+     */
     private Command prepareFavourite(String arguments) {
         final String CarparkID = arguments.trim();
-        return new FavouriteCommand(CarparkID, favourite, );
+        return new FavouriteCommand(CarparkID, favourite);
+    }
+
+    /**
+     * To prepare the arguments to be taken in for unfavourite Command.
+     *
+     * @param arguments arguments given by the user after the command word
+     * @return command to be carried out
+     */
+    private Command prepareUnfavourite(String arguments) {
+        final String CarparkID = arguments.trim();
+        return new FavouriteCommand(CarparkID, favourite);
     }
 
     /**
@@ -111,7 +126,6 @@ public class Parser {
         Sentence searchQuery = new Sentence(arguments);
         return new SearchCommand(carparkList, searchQuery);
     }
-
 
     /**
      * Check number of words in string and see if there are arguments.

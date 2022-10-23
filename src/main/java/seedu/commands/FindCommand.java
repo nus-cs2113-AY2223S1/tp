@@ -3,11 +3,7 @@ package seedu.commands;
 import seedu.data.Carpark;
 import seedu.data.CarparkList;
 import seedu.exception.NoCarparkFoundException;
-import seedu.exception.NoCommandArgumentException;
-import seedu.exception.UnneededArgumentsException;
-import seedu.parser.Parser;
 
-import java.util.HashMap;
 
 /**
  * Finds the carpark and prints out the informaiton of the carpark based on the carparkId input
@@ -21,6 +17,7 @@ public class FindCommand extends Command {
     public FindCommand(String carparkID) {
         this.carparkID = carparkID;
     }
+
 
     @Override
     public CommandResult execute() throws NoCarparkFoundException {
@@ -36,10 +33,10 @@ public class FindCommand extends Command {
      * @throws NoCarparkFoundException No such carparkId exists in the API.
      */
     public Carpark findThisCarpark(String searchString) throws NoCarparkFoundException {
-        if (CarparkList.carparkHashMap.get(searchString.toLowerCase()) == null) {
+        if (CarparkList.CARPARK_HASH_MAP.get(searchString.toLowerCase()) == null) {
             throw new NoCarparkFoundException();
         } else {
-            return CarparkList.carparkHashMap.get(searchString.toLowerCase());
+            return CarparkList.CARPARK_HASH_MAP.get(searchString.toLowerCase());
         }
     }
 

@@ -15,6 +15,12 @@ public class SearchCommand extends Command {
 
     private final Sentence searchQuery;
 
+    /**
+     * Constructor for SearchCommand
+     *
+     * @param carparkList carpark list of current api
+     * @param searchQuery argument for the search command
+     */
     public SearchCommand(CarparkList carparkList, Sentence searchQuery) {
         this.searchQuery = searchQuery;
         this.carparkList = carparkList;

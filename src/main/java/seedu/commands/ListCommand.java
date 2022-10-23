@@ -1,7 +1,6 @@
 package seedu.commands;
 
 import seedu.data.CarparkList;
-import seedu.parser.search.Sentence;
 
 /**
  * Represents a command to list all the carparks and their information in the api.

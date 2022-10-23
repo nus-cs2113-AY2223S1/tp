@@ -1,5 +1,8 @@
 package seedu.exception;
 
+/**
+ * Represents the exception thrown when the command input is invalid.
+ */
 public class InvalidCommandException extends ParkingException {
     /**
      * Constructor for the exception.
