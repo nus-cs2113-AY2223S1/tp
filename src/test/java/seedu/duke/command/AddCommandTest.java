@@ -49,9 +49,10 @@ public class AddCommandTest {
 
     @Test
     public void execute_addValidExpense_expectedSuccessfulExpenseAddition() throws MoolahException {
-        TransactionList transactions = new TransactionList();
         Ui ui = new Ui();
         Storage storage = new Storage();
+        TransactionList transactions = new TransactionList(storage.initializeFile());
+        transactions.purgeTransactions();
         AddCommand addCommand = new AddCommand("expense", "a", 1, "a", LocalDate.of(2022, 1, 1));
         addCommand.execute(transactions, ui, storage);
 
@@ -62,9 +63,10 @@ public class AddCommandTest {
 
     @Test
     public void execute_addValidIncome_expectedSuccessfulIncomeAddition() throws MoolahException {
-        TransactionList transactions = new TransactionList();
         Ui ui = new Ui();
         Storage storage = new Storage();
+        TransactionList transactions = new TransactionList(storage.initializeFile());
+        transactions.purgeTransactions();
         AddCommand addCommand = new AddCommand("income", "a", 1, "a", LocalDate.of(2022, 1, 1));
         addCommand.execute(transactions, ui, storage);
 
