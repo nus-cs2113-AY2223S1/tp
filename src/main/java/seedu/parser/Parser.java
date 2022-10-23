@@ -102,7 +102,7 @@ public class Parser {
      */
     private Command prepareUnfavourite(String arguments) {
         final String CarparkID = arguments.trim();
-        return new FavouriteCommand(CarparkID, favourite);
+        return new UnfavouriteCommand(CarparkID, favourite);
     }
 
     /**

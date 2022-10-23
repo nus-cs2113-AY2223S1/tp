@@ -3,6 +3,7 @@ package seedu.commands;
 import java.util.ArrayList;
 
 import seedu.data.Carpark;
+import seedu.data.CarparkList;
 import seedu.exception.DuplicateCarparkException;
 import seedu.exception.FileWriteException;
 import seedu.exception.NoCarparkFoundException;
@@ -14,7 +15,6 @@ import seedu.files.Favourite;
 public class FavouriteCommand extends Command {
     public static final String COMMAND_WORD = "favourite";
     private final String argument;
-    private ArrayList<String> favouriteList;
     private Favourite favourite;
 
     /**
@@ -26,7 +26,6 @@ public class FavouriteCommand extends Command {
     public FavouriteCommand(String argument, Favourite favourite) {
         this.argument = argument;
         this.favourite = favourite;
-        this.favouriteList = favourite.favouriteList;
     }
 
     /**
@@ -40,7 +39,7 @@ public class FavouriteCommand extends Command {
             if (argument.equalsIgnoreCase("list")) {
                 return new CommandResult(favourite.showList());
             } else {
-                Carpark result = carparkList.findCarpark(argument);
+                Carpark result = findThisCarpark(argument);
                 setFavourite(result.getCarparkId());
                 return new CommandResult("Added Carpark " + argument + " to favourites!");
             }
@@ -62,11 +61,26 @@ public class FavouriteCommand extends Command {
      * @throws DuplicateCarparkException If carpark ID is already in favourites.
      */
     public void setFavourite(String carparkId) throws FileWriteException, DuplicateCarparkException {
-        boolean containsSearchStr = favouriteList.stream().anyMatch(carparkId::equalsIgnoreCase);
+        boolean containsSearchStr = favourite.favouriteList.stream().anyMatch(carparkId::equalsIgnoreCase);
         if (containsSearchStr) {
             throw new DuplicateCarparkException();
         }
-        favouriteList.add(carparkId);
+        favourite.favouriteList.add(carparkId);
         favourite.writeFavouriteList();
+    }
+
+    /**
+     * Finds the carpark with the associated carparkId
+     *
+     * @param searchString String of the carparkId that user has inputted.
+     * @return Carpark with associated carparkId
+     * @throws NoCarparkFoundException No such carparkId exists in the API.
+     */
+    public static Carpark findThisCarpark(String searchString) throws NoCarparkFoundException {
+        if (CarparkList.CARPARK_HASH_MAP.get(searchString.toLowerCase()) == null) {
+            throw new NoCarparkFoundException();
+        } else {
+            return CarparkList.CARPARK_HASH_MAP.get(searchString.toLowerCase());
+        }
     }
 }

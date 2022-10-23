@@ -32,7 +32,7 @@ public class FindCommand extends Command {
      * @return Carpark with associated carparkId
      * @throws NoCarparkFoundException No such carparkId exists in the API.
      */
-    public Carpark findThisCarpark(String searchString) throws NoCarparkFoundException {
+    public static Carpark findThisCarpark(String searchString) throws NoCarparkFoundException {
         if (CarparkList.CARPARK_HASH_MAP.get(searchString.toLowerCase()) == null) {
             throw new NoCarparkFoundException();
         } else {
