@@ -9,25 +9,12 @@ import recipeditor.command.EditCommand;
 import recipeditor.command.ViewCommand;
 
 import recipeditor.recipe.Recipe;
-import recipeditor.ui.AddMode;
-import recipeditor.ui.AddModeText;
-import recipeditor.ui.Ui;
+import recipeditor.ui.Editor;
 import recipeditor.command.FindCommand;
 import recipeditor.command.InvalidCommand;
 import recipeditor.recipe.RecipeList;
-import recipeditor.ui.AddMode;
 import recipeditor.ui.EditMode;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import recipeditor.command.FindCommand;
-import recipeditor.command.InvalidCommand;
-import recipeditor.recipe.RecipeList;
-import recipeditor.ui.AddMode;
-import recipeditor.ui.EditMode;
-
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Parser {
@@ -38,41 +25,41 @@ public class Parser {
         String commandWord = parsed[0].toLowerCase();
 
         switch (commandWord) {
-        case AddCommand.COMMAND_TYPE:
-            return parseAddCommand();
-        case ListCommand.COMMAND_TYPE:
-            return new ListCommand();
-        case ExitCommand.COMMAND_TYPE:
-            return new ExitCommand();
-        case DeleteCommand.COMMAND_TYPE:
-            return null;
-        case EditCommand.COMMAND_TYPE:
-            return parseEditCommand(parsed);
-        case ViewCommand.COMMAND_TYPE:
-            return parseListAlterCommand(parsed, commandWord);
-        case FindCommand.COMMAND_TYPE:
-            return parseFindCommand(parsed);
-        default:
-            return new InvalidCommand();
+            case AddCommand.COMMAND_TYPE:
+                return parseAddCommand();
+            case ListCommand.COMMAND_TYPE:
+                return new ListCommand();
+            case ExitCommand.COMMAND_TYPE:
+                return new ExitCommand();
+            case DeleteCommand.COMMAND_TYPE:
+                return null;
+            case EditCommand.COMMAND_TYPE:
+                return parseEditCommand(parsed);
+            case ViewCommand.COMMAND_TYPE:
+                return parseListAlterCommand(parsed, commandWord);
+            case FindCommand.COMMAND_TYPE:
+                return parseFindCommand(parsed);
+            default:
+                return new InvalidCommand();
         }
     }
 
     private static Command parseAddCommand() {
-        AddModeText add = new AddModeText();
+        Editor add = new Editor();
         add.enterAddModeText();
 
-        //        AddMode add = new AddMode(); // Switch to Add Mode in here
-        //        add.enterAddMode();
-        //        add.exitAddMode();
-        //        Ui.showMessage("Is the recipe valid? " + add.isValid);
+        // AddMode add = new AddMode(); // Switch to Add Mode in here
+        // add.enterAddMode();
+        // add.exitAddMode();
+        // Ui.showMessage("Is the recipe valid? " + add.isValid);
         return new AddCommand(true, new Recipe()); // Dummy
-
 
         // AddMode add = new AddMode(); // Switch to Add Mode in here
         // add.enterAddMode();
         // add.exitAddMode();
         // logger.log(Level.INFO, "Is the recipe valid? " + add.isValid);
-        // return new AddCommand(add.isValid, add.addedRecipe); // Pass validty and potential recipe to AddCommand
+        // return new AddCommand(add.isValid, add.addedRecipe); // Pass validty and
+        // potential recipe to AddCommand
     }
 
     private static Command parseListAlterCommand(String[] parsed, String commandWord) {
@@ -136,11 +123,11 @@ public class Parser {
         return output.toString();
     }
 
-    //    private void checkForExcessArgument(String[] args, int length)
-    //            throws ExcessArgumentException {
-    //        if (args.length > length) {
-    //            throw new ExcessArgumentException();
-    //        }
-    //    }
-    
+    // private void checkForExcessArgument(String[] args, int length)
+    // throws ExcessArgumentException {
+    // if (args.length > length) {
+    // throw new ExcessArgumentException();
+    // }
+    // }
+
 }

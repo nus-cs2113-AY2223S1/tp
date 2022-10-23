@@ -20,6 +20,15 @@ import recipeditor.ui.Ui;
 public class Storage {
 
     private static final String DATA_STORAGE = "./Storage/";
+    public final static String TEMPLATE_PATH = "./Storage/Template.txt";
+    private final static String TEMPLATE_FILE = "# Title \n\n"
+    +"# Description\n\n"
+    +"# Ingredients: <ingredient name> / <amount> / <unit> \n"
+    +"1. Butter / 2.1 / gram (this is an example)\n"
+    +"2. \n\n"
+    +"# Steps: \n"
+    +"1. This is the description for step 1 (this is an example) \n"
+    +"2. \n";
 
     private static final String RECIPE_NAME_FIELD_TYPE = "Recipe Name";
     private static final String RECIPE_DESCRIPTION_FIELD_TYPE = "Recipe Description";
@@ -45,13 +54,14 @@ public class Storage {
     }
 
     /**
-     * Create storage folder for recipes.
+     * Create storage folder for recipes and Template files
      */
     public static void createDataFolder() {
         Path path = Paths.get(Storage.DATA_STORAGE);
         try {
             Files.createDirectories(path);
             Ui.showMessage("Directory created");
+            templateFile();
         } catch (IOException e) {
             Ui.showMessage("Error creating folder");
         }
@@ -60,7 +70,6 @@ public class Storage {
     public static void saveRecipe() {
 
     }
-
 
     public static void loadRecipeToFile(String filePath, Recipe recipe) {
         try {
@@ -84,25 +93,25 @@ public class Storage {
                 String input = s.nextLine();
                 String[] fieldTypeAndData = input.split(": ");
                 switch (fieldTypeAndData[0]) {
-                case RECIPE_NAME_FIELD_TYPE:
-                    newRecipe.setTitle(fieldTypeAndData[1]);
-                    break;
-                case RECIPE_DESCRIPTION_FIELD_TYPE:
-                    newRecipe.setDescription(fieldTypeAndData[1]);
-                    break;
-                case RECIPE_INGREDIENTS_FIELD_TYPE:
-                case RECIPE_STEPS_FIELD_TYPE:
-                    ArrayList<Ingredient> ingredients = getIngredientsDetails(s);
-                    newRecipe.addIngredients(ingredients);
+                    case RECIPE_NAME_FIELD_TYPE:
+                        newRecipe.setTitle(fieldTypeAndData[1]);
+                        break;
+                    case RECIPE_DESCRIPTION_FIELD_TYPE:
+                        newRecipe.setDescription(fieldTypeAndData[1]);
+                        break;
+                    case RECIPE_INGREDIENTS_FIELD_TYPE:
+                    case RECIPE_STEPS_FIELD_TYPE:
+                        ArrayList<Ingredient> ingredients = getIngredientsDetails(s);
+                        newRecipe.addIngredients(ingredients);
 
-                    ArrayList<String> steps = getStepsDetails(s);
-                    newRecipe.addSteps(steps);
-                    RecipeList.addRecipe(newRecipe);
-                    newRecipe = new Recipe();
-                    break;
-                default:
-                    Ui.showMessage("Error loading recipes from data file");
-                    break;
+                        ArrayList<String> steps = getStepsDetails(s);
+                        newRecipe.addSteps(steps);
+                        RecipeList.addRecipe(newRecipe);
+                        newRecipe = new Recipe();
+                        break;
+                    default:
+                        Ui.showMessage("Error loading recipes from data file");
+                        break;
                 }
             }
         } catch (FileNotFoundException e) {
@@ -168,6 +177,28 @@ public class Storage {
             fw.close();
         } catch (IOException ioException) {
             Ui.showMessage("Error in loading recipes to data file");
+        }
+    }
+
+    private static void templateFile() {
+        File file = new File(TEMPLATE_PATH);
+        if (file.exists()){
+            Ui.showMessage("Template file exists");
+        } else {
+            generateTemplateFile();
+        }
+    }
+
+    private static void generateTemplateFile(){
+        FileWriter fileWrite = null;
+        try {
+            fileWrite = new FileWriter(TEMPLATE_PATH);
+            fileWrite.write(TEMPLATE_FILE);
+            fileWrite.close();
+        } catch (IOException e) {
+            Ui.showMessage("Template file not generated");
+        } finally{
+            Ui.showMessage("Template file created");
         }
     }
 }

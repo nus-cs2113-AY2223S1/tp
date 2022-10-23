@@ -19,7 +19,6 @@ public class AddCommand extends Command {
     }
 
     public CommandResult execute() {
-        // TODO: Execution of command
         if (isValid) {
             assert addedRecipe != null;
             RecipeList.addRecipe(addedRecipe); //HERE SEEM TO THROW ERROR
