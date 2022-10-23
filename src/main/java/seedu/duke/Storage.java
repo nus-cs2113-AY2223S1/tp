@@ -1,5 +1,10 @@
 package seedu.duke;
 
+import seedu.duke.exception.DukeException;
+import seedu.duke.parsermanager.ParseAddClient;
+import seedu.duke.parsermanager.ParseAddProperty;
+
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -30,18 +35,33 @@ public class Storage {
     private static final String LOG_CLIENT_LOAD_LABEL = "Client has been successfully loaded into the array list.";
     private static final String LOG_PROPERTY_LOAD_LABEL = "Property has been successfully loaded into the array list.";
     private static final String LOG_PAIRING_LOAD_LABEL = "Pairing has been successfully loaded into the hashmap.";
+    private static final String CLIENT_NAME_FLAG = "n/";
+    private static final String CLIENT_CONTACT_FLAG = " c/";
+    private static final String CLIENT_EMAIL_FLAG = " e/";
+    private static final String CLIENT_BUDGET_FLAG = " b/";
+    private static final String LANDLORD_NAME_FLAG = "n/";
+    private static final String PROPERTY_ADDRESS_FLAG = " a/";
+    private static final String PROPERTY_RENTAL_FLAG = " p/";
+    private static final String PROPERTY_TYPE_FLAG = " t/";
 
     private static final Logger LOGGER = Logger.getLogger("Storage");
 
+    private ClientList clientList;
+    private PropertyList propertyList;
+    private PairingList pairingList;
 
 
     public Storage(ClientList clientList, PropertyList propertyList, PairingList pairingList) {
+        this.clientList = clientList;
+        this.propertyList = propertyList;
+        this.pairingList = pairingList;
+
         boolean hasDirectory = checkDirectory();
         boolean hasPropertyFile = checkPropertyFile();
         boolean hasClientFile = checkClientFile();
         boolean hasPairingFile = checkPair();
 
-        loadFiles(hasDirectory, hasPropertyFile, hasClientFile, hasPairingFile, clientList, propertyList, pairingList);
+        loadFiles(hasDirectory, hasPropertyFile, hasClientFile, hasPairingFile);
 
     }
 
@@ -74,10 +94,8 @@ public class Storage {
      */
     public boolean checkPropertyFile() {
         File propertyFile = new File(PROPERTY_PATH);
-        boolean hasPropertyFile = propertyFile.exists();
 
-
-        return hasPropertyFile;
+        return propertyFile.exists();
     }
 
 
@@ -89,10 +107,8 @@ public class Storage {
      */
     public boolean checkClientFile() {
         File clientFile = new File(CLIENT_PATH);
-        boolean hasClientFile = clientFile.exists();
 
-
-        return hasClientFile;
+        return clientFile.exists();
     }
 
     /**
@@ -116,13 +132,9 @@ public class Storage {
      * @param hasPropertyFile boolean value on whether property text file exist
      * @param hasClientFile boolean value on whether client text file exist
      * @param hasPairingFile boolean value on whether pairing text file exist
-     * @param clientList the array list containing the list of client
-     * @param propertyList the array list containing the list of property
-     * @param pairingList the hash map containing the pairing between client and property
      */
     public void loadFiles(boolean hasDirectory, boolean hasPropertyFile, boolean hasClientFile,
-                          boolean hasPairingFile, ClientList clientList, PropertyList propertyList,
-                          PairingList pairingList) {
+                          boolean hasPairingFile) {
         if (!hasDirectory) {
             makeDirectory();
         }
@@ -130,110 +142,108 @@ public class Storage {
         if (hasClientFile) {
             File clientFile = new File(CLIENT_PATH);
             assert clientFile.exists() : "Client text file does not exist";
-            loadClient(clientList, clientFile);
+            loadClient(clientFile);
         }
 
         if (hasPropertyFile) {
             File propertyFile = new File(PROPERTY_PATH);
             assert propertyFile.exists() : "Property text file does not exist";
-            loadProperty(propertyList, propertyFile);
+            loadProperty(propertyFile);
         }
 
         if (hasPairingFile) {
             File pairingFile = new File(PAIR_PATH);
             assert pairingFile.exists() : "Pairing text file does not exist";
-            loadPair(pairingList, pairingFile);
+            loadPair(pairingFile);
         }
     }
 
     /**
      * Adds the client list in the text file to the array list.
      *
-     * @param clientList Client List object that contains client's array list
      * @param clientFile The file that stores the list of client.
      */
-    public void loadClient(ClientList clientList, File clientFile) {
-
+    public void loadClient(File clientFile) {
         try {
             Scanner scanner = new Scanner(clientFile);
             while (scanner.hasNext()) {
                 String[] clientParameters = scanner.nextLine().split("\\s\\|\\s");
-                String clientName = clientParameters[0];
-                String clientContact = clientParameters[1];
-                String clientEmail = clientParameters[2];
-                String clientBudget = clientParameters[3].trim();
-                clientList.addClient(clientName, clientContact, clientEmail, clientBudget);
+                if (clientParameters.length == 4) {
+                    String clientName = clientParameters[0];
+                    String clientContact = clientParameters[1];
+                    String clientEmail = clientParameters[2];
+                    String clientBudget = clientParameters[3].trim();
+
+                    String description = CLIENT_NAME_FLAG + clientName + CLIENT_CONTACT_FLAG + clientContact
+                            + CLIENT_EMAIL_FLAG + clientEmail + CLIENT_BUDGET_FLAG + clientBudget;
+
+                    ParseAddClient parser = new ParseAddClient(description, clientList);
+                    try {
+                        parser.parseCommand();
+                        clientList.addClient(clientName, clientContact, clientEmail, clientBudget);
+                    } catch (DukeException e) {
+                        System.out.println(Messages.INVALID_CLIENT_FILE);
+                    }
+
+
+                }
             }
             LOGGER.log(Level.INFO, LOG_CLIENT_LOAD_LABEL);
         } catch (FileNotFoundException e) {
-            System.out.println("File is not found...");
+            System.out.println(Messages.MESSAGE_NO_FILE);
         }
 
-
+        updateClient();
     }
 
     /**
      * Loads the stored property file into the property array list.
      *
-     * @param propertyList Property List object that contains property's array list.
      * @param propertyFile The file that stores the list of property.
      */
-    public void loadProperty(PropertyList propertyList, File propertyFile) {
+    public void loadProperty(File propertyFile) {
         try {
             Scanner scanner = new Scanner(propertyFile);
             while (scanner.hasNext()) {
                 String[] propertyParameters = scanner.nextLine().split("\\s\\|\\s");
-                String landlordName = propertyParameters[0];
-                String address = propertyParameters[1];
-                String price = propertyParameters[2];
-                String unitType = propertyParameters[3].trim();
-                propertyList.addProperty(landlordName, address, price, unitType);
+                if (propertyParameters.length == 4) {
+                    String landlordName = propertyParameters[0];
+                    String address = propertyParameters[1];
+                    String price = propertyParameters[2];
+                    String unitType = propertyParameters[3].trim();
+
+                    String description = LANDLORD_NAME_FLAG + landlordName + PROPERTY_ADDRESS_FLAG + address
+                            + PROPERTY_RENTAL_FLAG + price + PROPERTY_TYPE_FLAG + unitType;
+
+                    ParseAddProperty parser = new ParseAddProperty(description, propertyList);
+                    try {
+                        parser.parseCommand();
+                        propertyList.addProperty(landlordName, address, price, unitType);
+                    } catch (DukeException e) {
+                        System.out.println(Messages.INVALID_PROPERTY_FILE);
+                    }
+                }
             }
             LOGGER.log(Level.INFO, LOG_PROPERTY_LOAD_LABEL);
         } catch (FileNotFoundException e) {
-            System.out.println("File is not found...");
+            System.out.println(Messages.MESSAGE_NO_FILE);
         }
+
+        updateProperty();
     }
 
     /**
      * Loads the stored pair file into the pair hash map.
      *
-     * @param pairingList Paring List object that contains the hash map for pairings.
      * @param pairFile The file that contains the pairing file.
      */
-    public void loadPair(PairingList pairingList, File pairFile) {
-        try {
-            Scanner scanner = new Scanner(pairFile);
+    public void loadPair(File pairFile) {
 
-            while (scanner.hasNext()) {
-                String[] pairingParameters = scanner.nextLine().split("\\s\\:\\s");
-                String[] clientParameters = pairingParameters[0].split("\\s\\|\\s");
-                String[] propertyParameters = pairingParameters[1].split("\\s\\|\\s");
+        // Update pairing hash map
+        scanPairingFile(pairFile);
 
-                //Client Information
-                String clientName = clientParameters[0].replace(OPEN_BRACKET, EMPTY_STRING);
-                String clientContactNumber = clientParameters[1];
-                String clientEmail = clientParameters[2];
-                String clientBudget = clientParameters[3].replace(CLOSE_BRACKET, EMPTY_STRING);
-
-                //Property Information
-                String landLordName = propertyParameters[0].replace(OPEN_BRACKET,EMPTY_STRING);
-                String propertyAddress = propertyParameters[1];
-                String rentalPrice = propertyParameters[2];
-                String unitType = propertyParameters[3].replace(CLOSE_BRACKET,EMPTY_STRING);
-
-
-
-                Client pairingClient = new Client(clientName, clientContactNumber, clientEmail, clientBudget);
-                Property pairingProperty = new Property(landLordName, propertyAddress, rentalPrice, unitType);
-
-                pairingList.addPairing(pairingClient, pairingProperty);
-            }
-
-            LOGGER.log(Level.INFO, LOG_PAIRING_LOAD_LABEL);
-        } catch (FileNotFoundException e) {
-            System.out.println("File is not found...");
-        }
+        // Re-populate pairing.txt
+        updatePair();
 
     }
 
@@ -260,7 +270,7 @@ public class Storage {
             LOGGER.log(Level.INFO, logMessage);
 
         } catch (IOException e) {
-            System.out.println("Property file does not exist.");
+            System.out.println(Messages.MESSAGE_NO_PROPERTY_FILE);
         }
 
     }
@@ -287,13 +297,17 @@ public class Storage {
             LOGGER.log(Level.INFO, logMessage);
 
         } catch (IOException e) {
-            System.out.println("Client file does not exist.");
+            System.out.println(Messages.MESSAGE_NO_CLIENT_FILE);
         }
     }
 
 
-
-
+    /**
+     * Appends the latest pair to the pairing hash map.
+     *
+     * @param clientFormat The key of the hash map, in the client format that will be inputted into pairing.txt
+     * @param propertyFormat The value of the hash map, in the property format that will be inputted into pairing.txt
+     */
     public void addToPairFile(String clientFormat, String propertyFormat) {
         try {
             FileWriter fw = new FileWriter(PAIR_PATH, true);
@@ -306,16 +320,15 @@ public class Storage {
             LOGGER.log(Level.INFO, logMessage);
 
         } catch (IOException e) {
-            System.out.println("Pairing file does not exist.");
+            System.out.println(Messages.MESSAGE_NO_PAIRING_FILE);
         }
     }
 
     /**
      * Updates the client list when entry in client list is deleted.
      *
-     * @param clientList The object containing the array list of client.
      */
-    public void updateClient(ClientList clientList) {
+    public void updateClient() {
         try {
             FileWriter clientFile = new FileWriter(CLIENT_PATH);
             ArrayList<Client> clientLists = clientList.getClientList();
@@ -339,16 +352,15 @@ public class Storage {
             LOGGER.log(Level.INFO, LOG_CLIENT_UPDATE_LABEL);
 
         } catch (IOException e) {
-            System.out.println("Client file does not exist.");
+            System.out.println(Messages.MESSAGE_NO_CLIENT_FILE);
         }
     }
 
     /**
      * Updates the property list in the text file when entry is deleted.
      *
-     * @param propertyList An object containing the array list of property.
      */
-    public void updateProperty(PropertyList propertyList) {
+    public void updateProperty() {
         try {
             FileWriter propertyFile = new FileWriter(PROPERTY_PATH);
             ArrayList<Property> propertyLists = propertyList.getPropertyList();
@@ -370,24 +382,49 @@ public class Storage {
             LOGGER.log(Level.INFO, LOG_PROPERTY_UPDATE_LABEL);
 
         } catch (IOException e) {
-            System.out.println("Property file does not exist.");
+            System.out.println(Messages.MESSAGE_NO_PROPERTY_FILE);
         }
     }
 
     /**
      * Updates the pairing text file when entries are unpaired.
      *
-     * @param pairingList An object containing the hashmap of the pairs.
      */
-    public void updatePair(PairingList pairingList) {
+    public void updatePair() {
         try {
             HashMap<Client, Property> clientPropertyPair = pairingList.getClientPropertyPairs();
             FileWriter pairFile = new FileWriter(PAIR_PATH);
 
+            String clientName;
+            String clientContact;
+            String clientEmail;
+            String clientBudget;
+            String landlordName;
+            String propertyAddress;
+            String propertyPrice;
+            String propertyType;
+
             String pairText = EMPTY_STRING;
             for (Client clientText : clientPropertyPair.keySet()) {
-                String propertyText = String.valueOf(clientPropertyPair.get(clientText));
-                String finalText = clientText + COLON + propertyText + System.lineSeparator();
+
+                clientName = clientText.getClientName();
+                clientContact = clientText.getClientContactNumber();
+                clientEmail = clientText.getClientEmail();
+                clientBudget = clientText.getClientBudgetPerMonth();
+
+                landlordName = clientPropertyPair.get(clientText).getLandlordName();
+                propertyAddress = clientPropertyPair.get(clientText).getPropertyAddress();
+                propertyPrice = clientPropertyPair.get(clientText).getRentingPrice();
+                propertyType = clientPropertyPair.get(clientText).getUnitType();
+
+                String clientFinalText = OPEN_BRACKET + clientName + SEPARATOR + clientContact + SEPARATOR
+                        + clientEmail + SEPARATOR + clientBudget + CLOSE_BRACKET;
+
+                String propertyFinalText = OPEN_BRACKET + landlordName + SEPARATOR + propertyAddress
+                        + SEPARATOR + propertyPrice + SEPARATOR + propertyType + CLOSE_BRACKET;
+
+                String finalText = clientFinalText + COLON + propertyFinalText;
+
                 pairText = pairText.concat(finalText);
             }
 
@@ -397,10 +434,140 @@ public class Storage {
             LOGGER.log(Level.INFO, LOG_PAIRING_UPDATE_LABEL);
 
         } catch (IOException e) {
-            System.out.println("Pair File does not exist.");
+            System.out.println(Messages.MESSAGE_NO_PAIRING_FILE);
+        }
+    }
+
+    /**
+     * Returns true or false depending on whether the Client is contained in the client list.
+     *
+     * @param pairingClient The Client that is in the pairing hash map to be compared with the clientList.
+     * @return true if pairingClient is in clientList and false if it's not.
+     */
+    public boolean hasClient(Client pairingClient) {
+        int clientListSize = clientList.getCurrentListSize();
+
+        String clientName = pairingClient.getClientName();
+        String clientContact = pairingClient.getClientContactNumber();
+        String clientEmail = pairingClient.getClientEmail();
+        String clientBudget = pairingClient.getClientBudgetPerMonth();
+
+        boolean hasClientName;
+        boolean hasClientContact;
+        boolean hasClientEmail;
+        boolean hasClientBudget;
+
+        for (int i = 0; i < clientListSize; i += 1) {
+            hasClientName = clientList.getClientList().get(i).getClientName().equals(clientName);
+            hasClientContact = clientList.getClientList().get(i).getClientContactNumber().equals(clientContact);
+            hasClientEmail = clientList.getClientList().get(i).getClientEmail().equals(clientEmail);
+            hasClientBudget = clientList.getClientList().get(i).getClientBudgetPerMonth().equals(clientBudget);
+
+            boolean hasCorrectClient = hasClientName && hasClientContact && hasClientEmail && hasClientBudget;
+
+            if (hasCorrectClient) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Returns true or false depending on whether the Property is contained in the property list.
+     *
+     * @param pairingProperty The Property that is in the pairing hash map to be compared with propertyList.
+     * @return true if pairingProperty is in propertyList and false if it's not.
+     */
+    public boolean hasProperty(Property pairingProperty) {
+        int propertyListSize = propertyList.getCurrentListSize();
+
+        String landlordName = pairingProperty.getLandlordName();
+        String propertyAddress = pairingProperty.getPropertyAddress();
+        String propertyPrice = pairingProperty.getRentingPrice();
+        String propertyType = pairingProperty.getUnitType();
+
+        boolean hasLandlordName;
+        boolean hasPropertyAddress;
+        boolean hasPropertyPrice;
+        boolean hasPropertyType;
+
+        for (int i = 0; i < propertyListSize; i += 1) {
+            hasLandlordName = propertyList.getPropertyList().get(i).getLandlordName().equals(landlordName);
+            hasPropertyAddress = propertyList.getPropertyList().get(i).getPropertyAddress().equals(propertyAddress);
+            hasPropertyPrice = propertyList.getPropertyList().get(i).getRentingPrice().equals(propertyPrice);
+            hasPropertyType = propertyList.getPropertyList().get(i).getUnitType().equals(propertyType);
+
+            boolean hasCorrectProperty = hasLandlordName || hasPropertyAddress || hasPropertyPrice
+                    || hasPropertyType;
+
+            if (hasCorrectProperty) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Populates the pairing file after comparing whether Client is in clientList and Property is in propertyList.
+     *
+     * @param pairFile The text file that will be read and check if it exists in clientList and propertyList.
+     */
+    public void scanPairingFile(File pairFile) {
+        Scanner scanner;
+        try {
+            scanner = new Scanner(pairFile);
+            while (scanner.hasNext()) {
+                String[] pairingParameters = scanner.nextLine().split("\\s\\:\\s");
+                if (pairingParameters.length == 2) {
+                    String[] clientParameters = pairingParameters[0].split("\\s\\|\\s");
+                    String[] propertyParameters = pairingParameters[1].split("\\s\\|\\s");
+
+                    String clientName = "";
+                    String clientContactNumber = "";
+                    String clientEmail = "";
+                    String clientBudget = "";
+                    String landLordName = "";
+                    String propertyAddress = "";
+                    String rentalPrice = "";
+                    String unitType = "";
+
+                    //Client Information
+                    if (clientParameters.length == 4) {
+                        clientName = clientParameters[0].replace(OPEN_BRACKET, EMPTY_STRING);
+                        clientContactNumber = clientParameters[1];
+                        clientEmail = clientParameters[2];
+                        clientBudget = clientParameters[3].replace(CLOSE_BRACKET, EMPTY_STRING);
+                    }
+
+                    //Property Information
+                    if (propertyParameters.length == 4) {
+                        landLordName = propertyParameters[0].replace(OPEN_BRACKET,EMPTY_STRING);
+                        propertyAddress = propertyParameters[1];
+                        rentalPrice = propertyParameters[2];
+                        unitType = propertyParameters[3].replace(CLOSE_BRACKET,EMPTY_STRING);
+                    }
+
+                    if ((clientParameters.length == 4) && (propertyParameters.length == 4)) {
+                        Client pairingClient = new Client(clientName, clientContactNumber, clientEmail, clientBudget);
+                        Property pairingProperty = new Property(landLordName, propertyAddress, rentalPrice, unitType);
+
+                        boolean hasClient = hasClient(pairingClient);
+                        boolean hasProperty = hasProperty(pairingProperty);
+
+                        if (hasClient && hasProperty) {
+                            pairingList.addPairing(pairingClient, pairingProperty);
+                        } else {
+                            System.out.println(Messages.MESSAGE_INVALID_PAIRING_FILE_INPUT);
+                        }
+                    }
+                }
+            }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
         }
 
 
     }
+
 
 }

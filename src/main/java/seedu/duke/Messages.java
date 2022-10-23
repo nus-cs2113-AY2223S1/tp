@@ -181,4 +181,25 @@ public class Messages {
     public static final String MESSAGE_NO_CLIENT_MATCHES = "There is no client that fits within your query.";
 
     public static final String MESSAGE_NO_PROPERTY_MATCHES = "There is no property that fits within your query.";
+
+
+
+    /* Message on Storage */
+    public static final String INVALID_CLIENT_FILE = "There are some errors in the entries detected. Those entries "
+        + "won't be added to the client list.";
+
+    public static final String INVALID_PROPERTY_FILE = "There are some errors in the entries detected. Those entries"
+        + " won't be added to the property list.";
+
+    public static final String MESSAGE_INVALID_PAIRING_FILE_INPUT = "The current line read is not in the right"
+            + "format.";
+
+    public static final String MESSAGE_NO_FILE = "File is not found...";
+
+
+    public static final String MESSAGE_NO_PROPERTY_FILE = "Property file does not exist.";
+
+    public static final String MESSAGE_NO_CLIENT_FILE = "Client file does not exist.";
+
+    public static final String MESSAGE_NO_PAIRING_FILE = "Pairing file does not exist.";
 }
