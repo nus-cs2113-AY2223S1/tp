@@ -533,7 +533,7 @@ public class ParameterParser {
             throw new GlobalNumberNotNumericException();
         }
 
-        if (month > 12 || month < 0) {
+        if (month > 12 || month <= 0) {
             parserLogger.log(Level.WARNING, "An invalid month number error is caught for the given parameter: "
                     + parameter);
             throw new GlobalInvalidMonthException();
@@ -551,7 +551,7 @@ public class ParameterParser {
                     + parameter);
             throw new GlobalNumberNotNumericException();
         }
-        if (year < 0) {
+        if (year <= 999) {
             parserLogger.log(Level.WARNING, "An invalid year number error is caught for the given parameter: "
                     + parameter);
             throw new GlobalInvalidYearException();
