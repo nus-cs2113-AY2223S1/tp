@@ -8,6 +8,7 @@ import seedu.duke.exercise.CardioExercise;
 import seedu.duke.exercise.Exercise;
 import seedu.duke.exercise.ExerciseList;
 import seedu.duke.exercise.StrengthExercise;
+import seedu.duke.food.Food;
 import seedu.duke.food.FoodList;
 import seedu.duke.storage.Storage;
 
@@ -66,13 +67,9 @@ public class FindCommand extends Command {
 
     private void findFood(String[] argumentList) throws IllegalValueException {
         handleInvalidFindFoodCommand(argumentList);
+        ArrayList<Food> filteredFoodList = getFilteredFoodList(argumentList);
         ui.output("Here are the matching food in your food list:");
-        for (int i = 0; i < foodList.getFoodListSize(); i++) {
-            if (foodList.getFood(i).getFoodDescription().contains(argumentList[1])) {
-                ui.output((i + 1) + " " + (foodList.getFood(i).getFoodDescription()) + " "
-                        + foodList.getFood(i).getCalories());
-            }
-        }
+        ui.outputFoodList(filteredFoodList);
     }
 
     private static void handleInvalidFindStrengthCommand(String[] argumentList) throws IllegalValueException {
@@ -85,6 +82,14 @@ public class FindCommand extends Command {
         if (argumentList.length != 2) {
             throw new IllegalValueException("Invalid find food command");
         }
+    }
+
+    private ArrayList<Food> getFilteredFoodList(String[] argumentList) {
+        ArrayList<Food> filteredFoodList = (ArrayList<Food>) foodList.getFoodList()
+                .stream().filter(Food.class::isInstance)
+                .filter(f -> f.getFoodDescription().contains(argumentList[1]))
+                .collect(Collectors.toList());
+        return filteredFoodList;
     }
 
 
