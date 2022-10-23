@@ -3,6 +3,9 @@ package seedu.duke.exception;
 //@@author wcwy
 import seedu.duke.common.ErrorMessages;
 
+/**
+ * Represents the exception where the date provided for the transaction is not in the supported format.
+ */
 public class InputTransactionInvalidDateException extends MoolahException {
 
     /**
