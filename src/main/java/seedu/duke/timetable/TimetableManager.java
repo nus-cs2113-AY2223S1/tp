@@ -1,6 +1,5 @@
 package seedu.duke.timetable;
 
-import seedu.duke.exceptions.DuplicateLessonException;
 import seedu.duke.exceptions.LessonNotFoundException;
 import seedu.duke.exceptions.TimetableNotFoundException;
 import seedu.duke.ui.Ui;
@@ -47,7 +46,7 @@ public class TimetableManager {
     public void deleteTimetable(String universityName) throws TimetableNotFoundException {
         assert universityName.length() > 0 : "Input university name cannot be empty";
         if (!foundKeyAll(universityName)) {
-            throw new TimetableNotFoundException("Error: Timetable for " + universityName + " does not exist");
+            throw new TimetableNotFoundException("Timetable for " + universityName + " not found!");
         } else {
             timetableManager.remove(universityName);
             System.out.print(Ui.printTimetableDeletedAcknowledgement(universityName));
@@ -61,11 +60,7 @@ public class TimetableManager {
      */
     public void addLesson(Lesson newLesson) {
         String universityName = newLesson.getUniversity().getName();
-        try {
-            timetableManager.get(universityName).addLesson(newLesson);
-        } catch (DuplicateLessonException e) {
-            Ui.printExceptionMessage(e);
-        }
+        timetableManager.get(universityName).addLesson(newLesson);
     }
 
     /**

@@ -1,9 +1,9 @@
 package seedu.duke.exceptions;
 
-public class DuplicateLessonException extends Exception {
+public class InvalidLessonDayException extends Exception {
     private String message;
 
-    public DuplicateLessonException(String message) {
+    public InvalidLessonDayException(String message) {
         this.message = message;
     }
 
