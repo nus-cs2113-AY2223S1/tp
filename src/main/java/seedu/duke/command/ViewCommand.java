@@ -9,6 +9,7 @@ import seedu.duke.exercise.CardioExercise;
 import seedu.duke.exercise.Exercise;
 import seedu.duke.exercise.ExerciseList;
 import seedu.duke.exercise.StrengthExercise;
+import seedu.duke.food.Food;
 import seedu.duke.food.FoodList;
 import seedu.duke.storage.Storage;
 import seedu.duke.biometrics.Calculator;
@@ -39,7 +40,7 @@ public class ViewCommand extends Command {
             viewBiometrics();
             break;
         case ("food"):
-            viewFood();
+            viewFood(argumentList);
             break;
         case ("exercise"):
             viewExercise(argumentList);
@@ -95,9 +96,15 @@ public class ViewCommand extends Command {
         }
     }
 
-    private void viewFood() throws IllegalValueException {
-        for (int i = 0; i < foodList.getFoodListSize(); i++) {
-            ui.output((i + 1) + " " + (foodList.getFood(i)));
+    private void viewFood(String[] argumentList) throws IllegalValueException {
+        handleInvalidViewFoodCommand(argumentList);
+        ArrayList<Food> foodArrayList = foodList.getFoodList();
+        ui.outputFoodList(foodArrayList);
+    }
+
+    private static void handleInvalidViewFoodCommand(String[] argumentList) throws IllegalValueException {
+        if (argumentList.length != 1) {
+            throw new IllegalValueException("Invalid view command");
         }
     }
 
