@@ -10,6 +10,7 @@ Nay Chi's Individual Project: https://github.com/NayChi-7/ip
 ## Design & implementation
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+### Class Diagrams
 Biometrics component:  
 The Biometrics component stores information about the user's biometrics and holds a reference
 to an ArrayList of the user's weight and fat records under WeightAndFatList class.  
@@ -23,7 +24,7 @@ Food component:
 Food and FoodList are two classes implemented for storing user's food consumption.
 The interaction between the Food, FoodList class and Command classes(Addcommand, RemoveCommand,
 FindCommand and ViewCommand). Only food related details(i.e. methods and attributes) are added in the
-diagram below for readability.
+diagram below for readability.  
 ![Food.png](UmlDiagrams/Food.png)
 
 \
@@ -46,6 +47,15 @@ filter exercise based on its status when user want to view the exercises based o
 
 [Proposed] StrengthExercise will be associated with a date, and the exercises will be displayed in descending order of
 date for viewing purposes.
+
+
+### Sequence diagrams
+Adding a new record  
+![Add.png](UmlDiagrams/Add.png)
+
+
+Adding weight and fat record
+![AddWeightAndFat.png](UmlDiagrams/AddWeightAndFat.png)
 
 ## Product scope
 
