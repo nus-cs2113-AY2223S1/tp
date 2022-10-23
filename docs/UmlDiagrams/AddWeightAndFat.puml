@@ -1,0 +1,28 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autoactivate on
+
+
+activate addCommand
+    addCommand -> addCommand: addWeightAndFat(argumentList)
+    addCommand -> weightAndFat **: new
+    activate weightAndFat
+    addCommand <-- weightAndFat: weightAndFat: WeightAndFat
+    addCommand -> weightAndFatList: addWeightAndFat(weightAndFat: WeightAndFat)
+    return
+    addCommand -> biometrics: setWeight(weight: int)
+    return
+    addCommand -> biometrics: setFat(fat: int)
+    return
+    opt display
+        addCommand -> weightAndFat: toString()
+        return weightAndFatString: String
+        addCommand -> ui: output(weightAndFatString: String)
+        return
+        addCommand -> ui: output(success message: String)
+        return
+    end
+return
+
+@enduml

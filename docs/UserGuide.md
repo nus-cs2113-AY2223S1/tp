@@ -2,32 +2,43 @@
 
 ## Introduction
 
-{Give a product intro}
+TracknFit is a fitness tracking application for fitness enthusiasts. It allows users to track their 
+exercise routines, nutritional habits and biometrics, to help the user better understand and progress
+towards their fitness journeys.
 
 ## Quick Start
 
 {Give steps to get started quickly}
 
 1. Ensure that you have Java 11 or above installed.
-1. Down the latest version of `Duke` from [here](http://link.to/duke).
+2. Down the latest version of `Duke` from [here](https://github.com/AY2223S1-CS2113-W12-3/tp).
 
 ## Features 
 
-{Give detailed description of each feature}
+{Give detailed description of each feature}  
+Set your biometrics within the app  
+Based on your fitness goals and biometrics, TracknFit can calculate recommended daily caloric balance [coming soon]
+Add a record of weight and fat percentage  
+View records of weight and fat percentage  
 
-### Adding a todo: `todo`
-Adds a new item to the list of todo items.
+**Records are displayed in order of date by default**  
+**Records are automatically saved when exiting TracknFit, and loaded when starting TracknFit**  
 
-Format: `todo n/TODO_NAME d/DEADLINE`
+### Setting Biometrics: `set biometrics`
+Sets user biometrics in TracknFit
 
-* The `DEADLINE` can be in a natural language format.
-* The `TODO_NAME` cannot contain punctuation.  
+Format: `set biometrics /{age} /{gender} /{height} /{weight} /{fat percentage}`
 
-Example of usage: 
+* age, height, weight and fat percentage should be integer values
+* gander can only be female, male or others
+* height should be in units of cm and cannot exceed 300cm
+* weight should be in units of kg and cannot exceed 400kg
+* fat percentage should be between 0% and 100%
 
-`todo n/Write the rest of the User Guide d/next week`
+Example of usage:
 
-`todo n/Refactor the User Guide to remove passive voice d/13/04/2020`
+`set biometrics /15 /male /146 /98 /55`
+
 
 ## FAQ
 
@@ -39,4 +50,8 @@ Example of usage:
 
 {Give a 'cheat sheet' of commands here}
 
-* Add todo `todo n/TODO_NAME d/DEADLINE`
+* Display help message `help`
+* Exit TracknFit `exit`
+* Set biometrics `set biometrics /{age} /{gender} /{height} /{weight} /{fat percentage}`
+* Add weight and fat percentage `add weight /{weight} /{fat percentage}`
+* View weight and fat percentage records `view weight`

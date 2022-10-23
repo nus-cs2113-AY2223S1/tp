@@ -1,0 +1,28 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autoactivate on
+
+'Duke -> ui: input()
+'User --> ui: user input
+'Duke <-- ui: user input
+
+Duke -> addCommand: execute()
+addCommand -> parser: getArgumentList(arguments: String)
+return argumentList: String[]
+addCommand -> parser: getClassType(argumentList: String[])
+return addType: String
+
+alt food
+
+else strength
+
+else cardio
+
+else weight
+    ref over addCommand: addWeightAndFat
+else invalid addType
+
+end
+
+@enduml
