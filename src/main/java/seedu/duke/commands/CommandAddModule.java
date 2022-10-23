@@ -39,7 +39,7 @@ public class CommandAddModule {
         if (isAlreadyInTimetable(info[0])) {
             return "Module " + info[0] + " : " + info[1] + " is already in your timetable!\n";
         }
-        Timetable.addNewModule(info[0], info[1], info[2], lessons);
+        Timetable.addNewModule(info[0], info[1], lessons);
         return "Successfully added new module: " + info[0] + " : " + info[1] + '\n';
     }
 

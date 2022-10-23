@@ -184,7 +184,7 @@ public class AttendingManager {
                 moduleCode = currModule.getModuleCode();
             }
             Lesson newLesson = new Lesson(lessonDay, lessonStart, lessonEnd, lessonType, classNumber);
-            currModule.replaceAttending(newLesson, index);
+            currModule.replaceAttending(newLesson, moduleIndex);
         }
     }
 

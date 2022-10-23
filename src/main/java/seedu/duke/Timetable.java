@@ -110,15 +110,15 @@ public class Timetable {
         }
     }
 
-    public static void addNewModule(String code, String name, String description, List<Lesson> lessons) {
-        Module newModule = new Module(code, name, description, lessons); 
+    public static void addNewModule(String code, String name, List<Lesson> lessons) {
+        Module newModule = new Module(code, name, lessons);
         LessonManager.addLesson(newModule);
-        ModuleManager.addModule(code, name, description);
+        ModuleManager.addModule(code, name);
         listOfModules.add(newModule);
     }
 
-    public static void addNewModuleFromFile(String code, String name, String description, List<Lesson> lessons) {
-        Module newModule = new Module(code, name, description, lessons); 
+    public static void addNewModuleFromFile(String code, String name, List<Lesson> lessons) {
+        Module newModule = new Module(code, name, lessons);
         listOfModules.add(newModule);
     }
 
