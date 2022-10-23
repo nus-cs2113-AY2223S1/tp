@@ -175,6 +175,30 @@ Status: [Available] ItemId: 99995bb2 Item: scale Category: SPORTS_EQUIPMENT Owne
 ____________________________________________________________
 ```
 
+#### 3.3.4. ``` sort-items``` - Sort and filter list of items
+>Sort and filter list of items based on the mode of sorting and price boundaries requested by the user
+
+Format: ```sort-items /mode [MODE_OF_SORTING] /min [MIN_PRICE] /max [MAX_PRICE]```
+
+Note:
+
+1. Mode of sorting must either be ```lh``` (low to high) or ``` hl``` (high to low)
+2. Minimum and maximum price filters are optional
+3. Minimum and Maximum price must be more than 0
+4. Minimum price must be less than maximum price
+
+Example of usage: ```sort-items /mode lh /min 1 /max 5```
+
+Expected outcome:
+```
+____________________________________________________________
+Here are 3 item(s) in your filtered list:
+   1. Status: [Available] ItemId: 895c7dd6 Item: scale Category: SPORTS_EQUIPMENT Owner: jingwei PricePerDay: $1.0
+   2. Status: [Available] ItemId: e084cd0a Item: battery Category: ELECTRICAL_APPLIANCES Owner: jingwei PricePerDay: $1.5
+   3. Status: [Available] ItemId: 4621bcf6 Item: charger Category: ELECTRICAL_APPLIANCES Owner: winston PricePerDay: $2.0
+____________________________________________________________
+```
+
 ### 3.4. Transaction-related features
 #### 3.4.1. ```add-tx``` - Add a new transaction
 >Adds a new transaction to the list
@@ -252,6 +276,7 @@ ____________________________________________________________
 | Add a new item                     | add-item /n [ITEM_NAME] /c [CATEGORY_INDEX] /p [PRICE] /o [USERNAME]   |
 | Remove an item                     | remove-item /i [ITEM_ID]                                               |
 | View an item                       | view-item /i [ITEM_ID]                                               |
+| Sort and filter list of items      | sort-items /mode [MODE_OF_SORTING] /min [MINIMUM_PRICE] /max [MAXIMUM_PRICE] |
 | __*Transaction-related features*__ |                                                                        |
 | Add a new transaction              | add-tx /i [ITEM_ID] /b [BORROWER_NAME] /d [DURATION] /c [CREATED_DATE] |
 | Remove a transaction               | remove-tx /t [TRANSACTION_ID]                                          |
