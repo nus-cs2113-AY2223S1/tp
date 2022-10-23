@@ -93,4 +93,8 @@ public class PatientList {
 
     }
 
+    public ArrayList<Patient> getPatients() {
+        return patients;
+    }
+
 }

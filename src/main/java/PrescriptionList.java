@@ -28,6 +28,12 @@ public class PrescriptionList {
         ui.printAddPrescriptionMessage(prescription.toString());
     }
 
+    public void loadPrescription(String patientID,
+                                 String medicine, String dosage, String timeInterval, boolean active) {
+        Prescription prescription = new Prescription(patientID, medicine, dosage, timeInterval, active);
+        prescriptionsList.add(prescription);
+    }
+
     public boolean isEmpty() {
         return prescriptionsList.isEmpty();
     }
@@ -48,7 +54,7 @@ public class PrescriptionList {
     }
 
     public void viewPatientPrescription(UI ui, String patientId) {
-        if (isEmpty() || hasPatientPrescription(patientId)) {
+        if (isEmpty() || !hasPatientPrescription(patientId)) {
             ui.printNoMatchingPrescriptionMessage();
             return;
         }
@@ -65,7 +71,7 @@ public class PrescriptionList {
     }
 
     public void viewActivePatientPrescription(UI ui, String patientId) {
-        if (isEmpty() || hasPatientPrescription(patientId)) {
+        if (isEmpty() || !hasPatientPrescription(patientId)) {
             ui.printNoMatchingActivePrescriptionMessage();
             return;
         }

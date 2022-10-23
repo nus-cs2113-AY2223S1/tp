@@ -9,11 +9,7 @@ public class Prescription {
     private static final String INACTIVE = "Inactive";
 
     public Prescription(String patientId, String medicine, String dosage, String timeInterval) {
-        this.patientId = patientId;
-        this.medicine = medicine;
-        this.dosage = dosage;
-        this.timeInterval = timeInterval;
-        this.isActive = true;
+        this (patientId, medicine, dosage, timeInterval, true);
     }
 
     public Prescription(String patientId, String medicine, String dosage, String timeInterval, boolean isActive) {

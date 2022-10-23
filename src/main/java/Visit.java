@@ -17,10 +17,7 @@ public class Visit {
     }
 
     public Visit(String id, String dateOfVisit, String timeOfVisit) {
-        this.id = id;
-        this.dateOfVisit = dateOfVisit;
-        this.timeOfVisit = timeOfVisit;
-        this.reason = "";
+        this (id, dateOfVisit, timeOfVisit, "");
     }
 
     public String getId() {
@@ -53,7 +50,7 @@ public class Visit {
         message += "\tTime: " + getTimeOfVisit();
         message += "\n";
         message += "\tReason: ";
-        message += getReason() == "" ? "NIL" : getReason();
+        message += getReason().equals("") ? "NIL" : getReason();
         return message;
     }
 }
