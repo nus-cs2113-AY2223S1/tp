@@ -30,7 +30,8 @@ public class ListCommand extends Command {
     // The command word used to trigger the execution of Moolah Manager's operations
     public static final String COMMAND_WORD = "LIST";
     // The description for the usage of command
-    public static final String COMMAND_DESCRIPTION = "To list all or some transactions based on selection.";
+    public static final String COMMAND_DESCRIPTION = "To list all or some transactions based on selection."
+            + " Note that the tags will be joint in the filter based on the 'AND' operation.";
     // The guiding information for the usage of command
     public static final String COMMAND_USAGE = "Usage: list [t/TYPE] [c/CATEGORY] [d/DATE] [m/MONTH] [y/YEAR]";
     // The formatting information for the parameters used by the command
@@ -39,7 +40,13 @@ public class ListCommand extends Command {
             + "(Optional) TYPE - The type of transaction. Only \"income\" or \"expense\" is accepted."
             + LINE_SEPARATOR
             + "(Optional) CATEGORY: A category for the transaction. Only string containing alphabets is accepted."
-            + LINE_SEPARATOR + "(Optional) DATE: Date of the transaction. The format must be in \"yyyyMMdd\".";
+            + LINE_SEPARATOR
+            + "(Optional) DATE: Date of the transaction. The format must be in \"yyyyMMdd\"."
+            + LINE_SEPARATOR
+            + "(Optional) MONTH: Month of the transaction. Only integers within 1 to 12 are accepted. Note that"
+            + " month must be accompanied by a year."
+            + LINE_SEPARATOR
+            + "(Optional) YEAR: Year of the transaction. Only integers from 1000 onwards are accepted.";
 
     // Basic help description
     public static final String COMMAND_HELP = "Command Word: " + COMMAND_WORD + LINE_SEPARATOR
@@ -76,11 +83,11 @@ public class ListCommand extends Command {
     @Override
     public String[] getOptionalTags() {
         String[] optionalTags = new String[]{
-            COMMAND_TAG_TRANSACTION_TYPE,
-            COMMAND_TAG_TRANSACTION_CATEGORY,
-            COMMAND_TAG_TRANSACTION_DATE,
-            COMMAND_TAG_GLOBAL_MONTH,
-            COMMAND_TAG_GLOBAL_YEAR
+                COMMAND_TAG_TRANSACTION_TYPE,
+                COMMAND_TAG_TRANSACTION_CATEGORY,
+                COMMAND_TAG_TRANSACTION_DATE,
+                COMMAND_TAG_GLOBAL_MONTH,
+                COMMAND_TAG_GLOBAL_YEAR
         };
         return optionalTags;
     }
