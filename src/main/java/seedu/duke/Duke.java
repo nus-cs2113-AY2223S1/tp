@@ -11,10 +11,7 @@ import seedu.duke.command.DatabaseStorage;
 import seedu.duke.command.ListCommand;
 import seedu.duke.command.ViewCommand;
 import seedu.duke.command.Database;
-import seedu.duke.exceptions.InvalidModuleException;
-import seedu.duke.exceptions.InvalidUserCommandException;
-import seedu.duke.exceptions.ModuleNotFoundException;
-import seedu.duke.exceptions.UniversityNotFoundException;
+import seedu.duke.exceptions.*;
 import seedu.duke.module.Module;
 import seedu.duke.parser.CommandParser;
 import seedu.duke.timetable.TimetableManager;
@@ -70,7 +67,7 @@ public class Duke {
                             }
                             UserStorageParser.storeCreatedLists(userUniversityListManager);
                         }
-                    } catch (NoSuchElementException e) {
+                    } catch (NoSuchElementException | TimetableNotFoundException e) {
                         Ui.printExceptionMessage(e);
                     }
                     break;

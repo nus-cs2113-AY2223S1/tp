@@ -44,10 +44,10 @@ public class TimetableManager {
      *
      * @param universityName The name of the university for which the timetable is deleted.
      */
-    public void deleteTimetable(String universityName) {
+    public void deleteTimetable(String universityName) throws TimetableNotFoundException {
         assert universityName.length() > 0 : "Input university name cannot be empty";
         if (!foundKeyAll(universityName)) {
-            System.out.println("Error: Timetable for " + universityName + " does not exist");
+            throw new TimetableNotFoundException("Error: Timetable for " + universityName + " does not exist");
         } else {
             timetableManager.remove(universityName);
             System.out.print(Ui.printTimetableDeletedAcknowledgement(universityName));
