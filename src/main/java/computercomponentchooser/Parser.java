@@ -12,6 +12,9 @@ import java.io.IOException;
 
 import static computercomponentchooser.ComputerComponentChooser.storage;
 
+/**
+ * Handles the parsing of user input in the main mode.
+ */
 public class Parser {
 
     static final int COMMAND_PARAMETER = 0;
@@ -19,26 +22,55 @@ public class Parser {
 
     private final BuildManager buildManager;
 
+    /**
+     * Initializes a new Parser object.
+     *
+     * @param buildManager The buildManager to be used.
+     */
     public Parser(BuildManager buildManager) {
         this.buildManager = buildManager;
     }
 
+    /**
+     * Retrieves the desired text from a position of the user input delimited by /.
+     *
+     * @param line The user input.
+     * @param mode The desired position of the input to be retrieved.
+     * @return The desired text at the desired position.
+     */
     private static String getParameter(String line, int mode) {
         String[] lineSplit = line.split("/", 2);
         assert mode >= 0 && mode < 2;
         return lineSplit[mode];
     }
 
+    /**
+     * Checks if the user input is bye.
+     *
+     * @param line The user input.
+     * @return A boolean value indicating whether the user input is bye.
+     */
     static boolean checkBye(String line) {
         String checkLine = line.toLowerCase();
         return checkLine.equals("bye");
     }
 
+    /**
+     * Checks if the user input is edit.
+     *
+     * @param line The user input.
+     * @return A boolean value indicating whether the user input is edit.
+     */
     static boolean checkEdit(String line) {
         String edit = getParameter(line, COMMAND_PARAMETER).toLowerCase();
         return edit.equals("edit");
     }
 
+    /**
+     * Parses the user input and executes the desired command.
+     *
+     * @param line The user input.
+     */
     public void parse(String line) {
         String command = getParameter(line, COMMAND_PARAMETER);
         try {
@@ -87,6 +119,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the 'find' user input and executes the desired command by finding a build depending on the search term.
+     *
+     * @param line The user input.
+     * @throws BlankStringException
+     */
     private void mainParseFind(String line) throws BlankStringException {
         String searchTerm = EditParser.getParameter(line, 1);
         Ui.printLine();
@@ -94,6 +132,16 @@ public class Parser {
         Ui.printLine();
     }
 
+
+    /**
+     * Parses the 'filter' user input and executes the desired command by listing the filtered builds depending on the
+     * filter term and provided parameters.
+     *
+     * @param line The user input.
+     * @throws NumberFormatException
+     * @throws UnknownCommandException
+     * @throws NegativeNumberException
+     */
     private void mainParseFilter(String line) throws NumberFormatException, UnknownCommandException,
             NegativeNumberException {
         String filterType = EditParser.getParameter(line, 1);
@@ -112,6 +160,13 @@ public class Parser {
         Ui.printLine();
     }
 
+    /**
+     * Parses the 'add' user input and executes the desired command by adding a build depending on the build name.
+     *
+     * @param line The user input.
+     * @throws DuplicateBuildException
+     * @throws BlankStringException
+     */
     private void mainParseAdd(String line) throws DuplicateBuildException, BlankStringException {
         Build newBuild;
         String name;
@@ -132,6 +187,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the 'view' user input and executes the desired command by viewing a build depending on the build name.
+     *
+     * @param line The user input.
+     * @throws UnlistedBuildException
+     */
     private void mainParseView(String line) throws UnlistedBuildException {
         String name;
         name = getParameter(line, NAME_PARAMETER);
@@ -143,6 +204,12 @@ public class Parser {
         Ui.printLine();
     }
 
+    /**
+     * Parses the 'delete' user input and executes the desired command by deleting a build depending on the build name.
+     *
+     * @param line The user input.
+     * @throws UnlistedBuildException
+     */
     private void mainParseDelete(String line) throws UnlistedBuildException {
         String name;
         Build newBuild;
@@ -159,6 +226,9 @@ public class Parser {
         Ui.printLine();
     }
 
+    /**
+     * Parses the 'list' user input and executes the desired command by listing all builds.
+     */
     private void mainParseList() {
         Ui.printLine();
         if (buildManager.getBuilds().size() == 0) {
@@ -169,12 +239,21 @@ public class Parser {
         Ui.printLine();
     }
 
+    /**
+     * Parses the 'back' user input and executes the desired command by going back to the main mode. This method is
+     * called when the user is in the edit mode.
+     */
     private void mainParseBack() {
         Ui.printLine();
         System.out.println("Back to main mode.");
         Ui.printLine();
     }
 
+    /**
+     * Parses the 'export' user input and executes the desired command by exporting all builds to a text file.
+     *
+     * @throws IOException
+     */
     private void mainParseExport() throws IOException {
         Ui.printLine();
         System.out.println("Exporting builds...");
@@ -182,6 +261,11 @@ public class Parser {
         Ui.printLine();
     }
 
+    /**
+     * Parses the 'exportCSV' user input and executes the desired command by exporting all builds to a CSV file.
+     *
+     * @throws IOException
+     */
     private void mainParseExportCsv() throws IOException {
         Ui.printLine();
         System.out.println("Exporting builds...");
