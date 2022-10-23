@@ -24,6 +24,7 @@ import seedu.exception.NoCommandArgumentException;
 import seedu.exception.NoFileFoundException;
 import seedu.exception.ParkingException;
 import seedu.exception.UnneededArgumentsException;
+import seedu.files.FileStorage;
 import seedu.parser.Command;
 import seedu.parser.Parser;
 import seedu.parser.search.Sentence;
@@ -46,6 +47,7 @@ public class Parking {
         Auth auth = new Auth();
         Api api = new Api(LTA_JSON_FILE, API_JSON_DIRECTORY);
         Favourite favourite = new Favourite(FAVOURITE_DIRECTORY, FAVOURITE_FILE);
+
         try {
             favourite.updateFavouriteList();
         } catch (IOException e) {
@@ -54,13 +56,13 @@ public class Parking {
             ui.printError(e);
         }
         try {
+            FileStorage.ensureBackup();
             api.loadApiKey(API_KEY_FILE, API_JSON_DIRECTORY, true);
             api.asyncExecuteRequest();
             api.fetchData();
             ui.print("Fetching data from API successful!");
         } catch (ParkingException e) {
             ui.print(e.getMessage());
-            ui.print("Loading from local backup: ");
         }
 
         // Load file from json

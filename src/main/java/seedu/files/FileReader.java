@@ -36,8 +36,8 @@ public class FileReader {
                 System.out.println("Backup load successful!");
                 return carparks;
             } catch (IOException backupException) {
-                throw new NoFileFoundException("Both the main file and backup file did not load correctly."
-                    + "Please check your directory at " + filepath + " and try again, or"
+                throw new NoFileFoundException("Both the main file and backup file did not load correctly. "
+                    + "Please check your directory at " + filepath + " and try again, or "
                     + "download a sample .json file and place it in " + filepathBackup + ".");
             }
         }
@@ -74,7 +74,7 @@ public class FileReader {
             directory.mkdirs();
             file.createNewFile();
         } else if (!file.exists()) {
-            throw new NoFileFoundException(filePath + " file not found");
+            throw new NoFileFoundException(filePath + ": file not found");
         }
         StringBuilder content = new StringBuilder();
         Scanner scanner = new Scanner(file);

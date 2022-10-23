@@ -38,11 +38,19 @@ shadowJar {
     archiveClassifier = null
 }
 
+sourceSets {
+    main {
+        resources {
+            srcDirs "resources/api"
+        }
+    }
+}
+
 checkstyle {
     toolVersion = '10.2'
 }
 
-run{
+run {
     standardInput = System.in
     enableAssertions = true
 }
