@@ -24,7 +24,7 @@ To add a new transaction entry, which could be either an "income" or an "expense
 Usage: add t/TYPE c/CATEGORY a/AMOUNT d/DATE i/DESCRIPTION
 
 Command Word: LIST
-To list all or some transactions based on selection.
+To list all or some transactions based on selection. Note that the tags will be joint in the filter based on the 'AND' operation.
 Usage: list [t/TYPE] [c/CATEGORY] [d/DATE] [m/MONTH] [y/YEAR]
 
 Command Word: FIND
@@ -72,7 +72,7 @@ DATE: Date of the transaction. The format must be in "yyyyMMdd".
 DESCRIPTION: More information regarding the transaction, written without any space.
 
 Command Word: LIST
-To list all or some transactions based on selection.
+To list all or some transactions based on selection. Note that the tags will be joint in the filter based on the 'AND' operation.
 Usage: list [t/TYPE] [c/CATEGORY] [d/DATE] [m/MONTH] [y/YEAR]
 Parameters information:
 (Optional) TYPE - The type of transaction. Only "income" or "expense" is accepted.
