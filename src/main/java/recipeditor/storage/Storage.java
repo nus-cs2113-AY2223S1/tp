@@ -38,7 +38,7 @@ public class Storage {
     private static final String RECIPE_INGREDIENTS_FIELD_TYPE = "Recipe Ingredients";
     private static final String RECIPE_STEPS_FIELD_TYPE = "Recipe Steps";
 
-    private static final Logger logger = Logger.getLogger("LOGS");
+    private static final Logger logger = Logger.getLogger(Storage.class.getName());
 
     public static void createFile(String filePath) {
         try {
@@ -63,10 +63,10 @@ public class Storage {
         try {
             Files.createDirectories(Paths.get(DATA_STORAGE_PATH));
             Files.createDirectories(Paths.get(DATA_TEMPORARY_PATH));
-            Ui.showMessage("Directory created");
+            logger.log(Level.INFO, "Directory created");
             templateFile();
         } catch (IOException e) {
-            Ui.showMessage("Error creating folder");
+            logger.log(Level.WARNING, "Error creating folder");
         }
     }
 
@@ -184,7 +184,7 @@ public class Storage {
     private static void templateFile() {
         File file = new File(TEMPLATE_PATH);
         if (file.exists()) {
-            Ui.showMessage("Template file exists");
+            logger.log(Level.INFO, "Template File exits");
         } else {
             generateTemplateFile();
         }
@@ -197,9 +197,9 @@ public class Storage {
             fileWrite.write(TEMPLATE_FILE);
             fileWrite.close();
         } catch (IOException e) {
-            Ui.showMessage("Template file not generated");
+            logger.log(Level.WARNING, "Error creating template file");
         } finally {
-            Ui.showMessage("Template file created");
+            logger.log(Level.INFO, "Template file created");
         }
     }
 
