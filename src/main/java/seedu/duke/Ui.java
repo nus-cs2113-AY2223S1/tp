@@ -3,6 +3,7 @@ package seedu.duke;
 import seedu.duke.exercise.CardioExercise;
 import seedu.duke.exercise.Exercise;
 import seedu.duke.exercise.StrengthExercise;
+import seedu.duke.food.Food;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -57,13 +58,21 @@ public class Ui {
 
     public void outputExerciseList(ArrayList<Exercise> exerciseArrayList) {
         Integer[] columnSpacingArray = {5, 8, 4, 4, 4, 8};
-        getColumnsSpacing(exerciseArrayList, columnSpacingArray);
+        getExerciseColumnsSpacing(exerciseArrayList, columnSpacingArray);
         generateExerciseTableHeader(columnSpacingArray);
         printExerciseList(exerciseArrayList, columnSpacingArray);
         printEmptyLine();
     }
 
-    private void getColumnsSpacing(ArrayList<Exercise> exerciseArrayList, Integer[] columnSpacingArray) {
+    public void outputFoodList(ArrayList<Food> foodArrayList) {
+        Integer[] columnSpacingArray = {5, 12, 8};
+        getFoodColumnsSpacing(foodArrayList, columnSpacingArray);
+        generateFoodTableHeader(columnSpacingArray);
+        printFoodList(foodArrayList, columnSpacingArray);
+        printEmptyLine();
+    }
+
+    private void getExerciseColumnsSpacing(ArrayList<Exercise> exerciseArrayList, Integer[] columnSpacingArray) {
         columnSpacingArray[0] = Math.max(columnSpacingArray[0], exerciseArrayList.size() % 10 + 1);
         for (Exercise exercise : exerciseArrayList) {
             if (exercise instanceof StrengthExercise) {
@@ -74,6 +83,14 @@ public class Ui {
             columnSpacingArray[1] = Math.max(columnSpacingArray[1], exercise.getExerciseName().length());
             columnSpacingArray[4] = Math.max(columnSpacingArray[4], exercise.getRepetition() % 10 + 1);
             columnSpacingArray[5] = Math.max(columnSpacingArray[5], exercise.getCaloriesBurnt() % 10 + 1);
+        }
+    }
+
+    private void getFoodColumnsSpacing(ArrayList<Food> foodArrayList, Integer[] columnSpacingArray) {
+        columnSpacingArray[0] = Math.max(columnSpacingArray[0], foodArrayList.size() % 10 + 1);
+        for (Food food : foodArrayList) {
+            columnSpacingArray[1] = Math.max(columnSpacingArray[1], food.getFoodDescription().length());
+            columnSpacingArray[2] = Math.max(columnSpacingArray[2], food.getCalories() % 10 + 1);
         }
     }
 
@@ -94,6 +111,17 @@ public class Ui {
         }
     }
 
+    private void printFoodList(ArrayList<Food> foodArrayListList, Integer[] columnSpacingArray) {
+        for (int i = 0; i < foodArrayListList.size(); i++) {
+            Food food = foodArrayListList.get(i);
+            String index = addRightPadding(Integer.toString(i + 1), columnSpacingArray[0]) + " | ";
+            String foodName = addRightPadding(food.getFoodDescription(), columnSpacingArray[1]) + " | ";
+            String calories = addRightPadding(Integer.toString(food.getCalories()),
+                    columnSpacingArray[2]) + " | ";
+            printInSameLine(index, foodName, calories);
+        }
+    }
+
     private String getTimeForPrint(Exercise exercise, Integer numberOfSpace) {
         if (exercise instanceof StrengthExercise) {
             return addRightPadding("-", numberOfSpace);
@@ -111,6 +139,15 @@ public class Ui {
         String paddedStatus = "Status";
         String line = paddedIndex + paddedExercise + paddedSets + paddedTime + paddedRep
                 + paddedCalories + paddedStatus;
+        String separatorLine = "-".repeat(line.length());
+        output(separatorLine, line, separatorLine);
+    }
+
+    private void generateFoodTableHeader(Integer[] columnSpacingArray) {
+        String paddedIndex = addRightPadding("Index", columnSpacingArray[0]) + " | ";
+        String paddedDescription = addRightPadding("Description", columnSpacingArray[1]) + " | ";
+        String paddedCalories = addRightPadding("Calories", columnSpacingArray[2]) + " | ";
+        String line = paddedIndex + paddedDescription + paddedCalories;
         String separatorLine = "-".repeat(line.length());
         output(separatorLine, line, separatorLine);
     }
