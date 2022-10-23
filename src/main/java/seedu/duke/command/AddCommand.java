@@ -83,6 +83,8 @@ public class AddCommand extends Command {
         this.date = date;
     }
 
+    //@@author wcwy
+
     /**
      * Gets the mandatory tags of the command.
      *
@@ -101,7 +103,6 @@ public class AddCommand extends Command {
         return mandatoryTags;
     }
 
-    //@@author wcwy
     @Override
     public void setType(String type) {
         this.type = type;
@@ -137,7 +138,7 @@ public class AddCommand extends Command {
      * @param ui           An instance of the Ui class.
      * @param transactions An instance of the TransactionList class.
      * @param storage      An instance of the Storage class.
-     * @throws InputTransactionInvalidTypeException If the type of transaction is not recognised.
+     * @throws InputTransactionInvalidTypeException If the type of transaction is not recognised or on storage error.
      */
     @Override
     public void execute(TransactionList transactions, Ui ui, Storage storage) throws MoolahException {
@@ -176,8 +177,9 @@ public class AddCommand extends Command {
      * @param transactions The list of transactions in the application.
      * @throws MaximumTransactionCountException If the transaction list capacity has been reached.
      */
-    private static void checkTransactionCapacity(TransactionList transactions) throws MaximumTransactionCountException {
-        // The expected maximum number of transactions allowed to store is only one million.
+    public static void checkTransactionCapacity(TransactionList transactions) throws MaximumTransactionCountException {
+        assert transactions != null;
+        // The expected maximum number of transactions allowed to store is only one million
         if (transactions.size() == MAX_TRANSACTIONS_COUNT) {
             addLogger.log(Level.WARNING, "A transaction is attempted to be stored beyond its capacity");
             throw new MaximumTransactionCountException();
@@ -195,6 +197,7 @@ public class AddCommand extends Command {
      * @throws InputTransactionInvalidTypeException If the type of the transactions
      */
     private String addTransaction(TransactionList transactions) throws InputTransactionInvalidTypeException {
+        assert (transactions != null);
         String messageBanner = "";
         Transaction transaction;
         switch (type) {

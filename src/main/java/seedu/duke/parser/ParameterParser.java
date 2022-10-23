@@ -3,6 +3,7 @@ package seedu.duke.parser;
 //@@author wcwy
 import seedu.duke.command.Command;
 import seedu.duke.command.ListCommand;
+import seedu.duke.data.Budget;
 import seedu.duke.data.transaction.Expense;
 import seedu.duke.data.transaction.Income;
 
@@ -27,6 +28,8 @@ import seedu.duke.exception.MoolahException;
 import seedu.duke.exception.HelpUnknownOptionException;
 
 //@@author wcwy
+import seedu.duke.exception.InputBudgetInvalidAmountException;
+import seedu.duke.exception.InputBudgetDuplicateException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -35,6 +38,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_BUDGET_AMOUNT;
+import static seedu.duke.common.Constants.MAX_BUDGET_VALUE;
+import static seedu.duke.common.Constants.MIN_BUDGET_VALUE;
+
 
 //@@author paullowse
 import static seedu.duke.command.CommandTag.COMMAND_TAG_HELP_OPTION;
@@ -335,6 +342,9 @@ public class ParameterParser {
         case COMMAND_TAG_GLOBAL_PERIOD:
             command.setStatsPeriod(parsePeriodTag(parameter));
             break;
+        case COMMAND_TAG_BUDGET_AMOUNT:
+            command.setBudgetAmount(parseBudgetTag(parameter));
+            break;
         default:
             parserLogger.log(Level.WARNING, "An unsupported tag exception is caught: " + tag);
             throw new GlobalUnsupportedTagException();
@@ -413,10 +423,8 @@ public class ParameterParser {
      * @throws InputTransactionInvalidAmountException If the transaction amount given is not a valid accepted integer.
      */
     private static int parseAmountTag(String parameter) throws InputTransactionInvalidAmountException {
-        Pattern specialSymbols = Pattern.compile("[!@#$%&*()_+=|<>?{}\\[\\]~-]");
-        Matcher hasSpecialSymbols = specialSymbols.matcher(parameter);
         try {
-            if (containAlphabet(parameter) || hasSpecialSymbols.find()) {
+            if (containAlphabet(parameter) || containSymbol(parameter)) {
                 parserLogger.log(Level.WARNING, "An invalid amount error is caught for the given parameter: "
                         + parameter);
                 throw new InputTransactionInvalidAmountException();
@@ -496,6 +504,47 @@ public class ParameterParser {
                     + parameter);
             throw new HelpUnknownOptionException();
         }
+    }
+
+    /**
+     * Parses the user parameter input for the budget amount and returns it as a long value.
+     *
+     * <p>Note: This method is created separately from parseAmountTag due to the difference in the data type for
+     * the parameter and its maximum amount.
+     *
+     * <p>For a new budget to be valid, it must satisfy the following requirements:
+     * 1. The budget should not contain any alphabets or symbols
+     * 2. The budget should be parsable into a long value
+     * 3. The budget range should fall within the minimum and maximum budget allowed
+     * 4. The budget should be different from the current budget
+     *
+     * @param parameter The user input after the user tag.
+     * @return The amount in long if no exceptions are thrown.
+     * @throws InputTransactionInvalidAmountException If the transaction amount given does not meet the 4 requirements.
+     */
+    public static long parseBudgetTag(String parameter) throws MoolahException {
+        long newBudget;
+        if (containAlphabet(parameter) || containSymbol(parameter)) {
+            throw new InputBudgetInvalidAmountException();
+        }
+
+        // Long value is used here as the maximum of budget can go as high as 2 * (2^31 - 1)
+        try {
+            newBudget = Long.parseLong(parameter);
+        } catch (NumberFormatException e) {
+            parserLogger.log(Level.WARNING, "Invalid budget amount error found for the given parameter: " + parameter);
+            throw new InputBudgetInvalidAmountException();
+        }
+
+        if (newBudget < MIN_BUDGET_VALUE || newBudget > MAX_BUDGET_VALUE) {
+            throw new InputBudgetInvalidAmountException();
+        }
+
+        if (newBudget == Budget.getBudget()) {
+            throw new InputBudgetDuplicateException();
+        }
+
+        return newBudget;
     }
 
     //@@author chydarren
@@ -623,5 +672,18 @@ public class ParameterParser {
             }
         }
         return false;
+    }
+
+    /**
+     * Checks if the parameter contains symbol characters.
+     *
+     * @param parameter The user input after the user tag.
+     * @return true if there are symbol characters within the parameter.
+     */
+    public static boolean containSymbol(String parameter) {
+        Pattern specialSymbols = Pattern.compile("[!@#$%&*()_+=|<>?{}\\[\\]~-]");
+        Matcher hasSpecialSymbols = specialSymbols.matcher(parameter);
+
+        return hasSpecialSymbols.find();
     }
 }

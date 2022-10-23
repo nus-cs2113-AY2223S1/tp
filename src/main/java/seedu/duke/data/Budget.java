@@ -4,6 +4,7 @@ import static seedu.duke.common.Constants.MAX_TRANSACTIONS_COUNT;
 import static seedu.duke.common.Constants.MAX_AMOUNT_VALUE;
 import static seedu.duke.common.Constants.MIN_BUDGET_VALUE;
 
+//@@author wcwy
 /**
  * Represents the user's budget for the current month.
  *
@@ -11,16 +12,15 @@ import static seedu.duke.common.Constants.MIN_BUDGET_VALUE;
  * Operations related to the budgets are also defined under this class.
  */
 public class Budget {
-    //@@author wcwy
     // Default value of the monthly budget is $1000
-    private static int budget = 1000;
+    private static long budget = 1000;
 
     /**
      * Retrieves the budget value set for the current month.
      *
      * @return The budget value set by the user.
      */
-    public static int getBudget() {
+    public static long getBudget() {
         return budget;
     }
 
@@ -29,7 +29,7 @@ public class Budget {
      *
      * @param budget The new value for budget.
      */
-    public static void setBudget(int budget) {
+    public static void setBudget(long budget) {
         Budget.budget = budget;
     }
 

@@ -19,6 +19,10 @@ To display a list of available commands with their respective expected parameter
 Type "help o/detailed" for a detailed version of all parameters used.
 Usage: help [o/detailed]
 
+Command Word: BUDGET
+To set the amount of monthly budget.
+Usage: budget b/BUDGET
+
 Command Word: ADD
 To add a new transaction entry, which could be either an "income" or an "expense" into the transaction list.
 Usage: add t/TYPE c/CATEGORY a/AMOUNT d/DATE i/DESCRIPTION
@@ -60,6 +64,12 @@ Type "help o/detailed" for a detailed version of all parameters used.
 Usage: help [o/detailed]
 Parameters information:
 (Optional) o/detailed - Detailed version of guide.
+
+Command Word: BUDGET
+To set the amount of monthly budget.
+Usage: budget b/BUDGET
+Parameters information: 
+BUDGET - Amount of monthly budget set.
 
 Command Word: ADD
 To add a new transaction entry, which could be either an "income" or an "expense" into the transaction list.
@@ -143,6 +153,34 @@ ____________________________________________________________
 Mandatory tag(s) missing, please check your input!
 ____________________________________________________________
 ____________________________________________________________
+Parameter behind tag(s) is found to be empty, please check your input!
+____________________________________________________________
+____________________________________________________________
+Mandatory tag(s) missing, please check your input!
+____________________________________________________________
+____________________________________________________________
+Invalid budget amount, please ensure your amount is in positive whole number of valid range only!
+____________________________________________________________
+____________________________________________________________
+Invalid budget amount, please ensure your amount is in positive whole number of valid range only!
+____________________________________________________________
+____________________________________________________________
+Invalid budget amount, please ensure your amount is in positive whole number of valid range only!
+____________________________________________________________
+____________________________________________________________
+Invalid budget amount, please ensure your amount is in positive whole number of valid range only!
+____________________________________________________________
+____________________________________________________________
+You have successfully updated the budget.
+Monthly budget set as: $10000
+____________________________________________________________
+____________________________________________________________
+Mandatory tag(s) missing, please check your input!
+____________________________________________________________
+____________________________________________________________
+Mandatory tag(s) missing, please check your input!
+____________________________________________________________
+____________________________________________________________
 Mandatory tag(s) missing, please check your input!
 ____________________________________________________________
 ____________________________________________________________
@@ -166,17 +204,17 @@ ____________________________________________________________
 ____________________________________________________________
 I have added the following Expense transaction:
 [-][food] $20 at Sep 13 2022 | Description: NIL
-Budget remained for the month of transaction: $980
+Budget remained for the month of transaction: $9980
 ____________________________________________________________
 ____________________________________________________________
 I have added the following Income transaction:
 [+][salary] $2000 at Sep 30 2022 | Description: jan_salary
-Budget remained for the month of transaction: $-1020
+Budget remained for the month of transaction: $7980
 ____________________________________________________________
 ____________________________________________________________
 I have added the following Expense transaction:
 [-][transport] $1 at Oct 02 2022 | Description: bus_fare
-Budget remained for the month of transaction: $999
+Budget remained for the month of transaction: $9999
 ____________________________________________________________
 ____________________________________________________________
 Parameter behind tag(s) is found to be empty, please check your input!
@@ -266,7 +304,7 @@ ____________________________________________________________
 ____________________________________________________________
 I have added the following Income transaction:
 [+][bonus] $10000000 at Oct 03 2022 | Description: thank_you_boss
-Budget remained for the month of transaction: $-9999001
+Budget remained for the month of transaction: $-9990001
 ____________________________________________________________
 ____________________________________________________________
 Type of transaction given is invalid, please check your input!
@@ -381,7 +419,7 @@ ____________________________________________________________
 ____________________________________________________________
 I have added the following Expense transaction:
 [-][transport] $1 at Oct 02 2022 | Description: i/i/i/i/
-Budget remained for the month of transaction: $999
+Budget remained for the month of transaction: $9999
 ____________________________________________________________
 ____________________________________________________________
 Not supported tag(s) detected, please check your input!

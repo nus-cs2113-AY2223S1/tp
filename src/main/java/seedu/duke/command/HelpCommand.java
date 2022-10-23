@@ -95,6 +95,7 @@ public class HelpCommand extends Command {
      */
     private String generateBasicHelp() {
         String helpMessage = HelpCommand.COMMAND_HELP + LINE_SEPARATOR
+                + BudgetCommand.COMMAND_HELP + LINE_SEPARATOR
                 + AddCommand.COMMAND_HELP + LINE_SEPARATOR
                 + ListCommand.COMMAND_HELP + LINE_SEPARATOR
                 + FindCommand.COMMAND_HELP + LINE_SEPARATOR
@@ -114,6 +115,7 @@ public class HelpCommand extends Command {
      */
     private String generateDetailedHelp() {
         String helpMessage = HelpCommand.COMMAND_DETAILED_HELP + LINE_SEPARATOR
+                + BudgetCommand.COMMAND_DETAILED_HELP + LINE_SEPARATOR
                 + AddCommand.COMMAND_DETAILED_HELP + LINE_SEPARATOR
                 + ListCommand.COMMAND_DETAILED_HELP + LINE_SEPARATOR
                 + FindCommand.COMMAND_DETAILED_HELP + LINE_SEPARATOR
