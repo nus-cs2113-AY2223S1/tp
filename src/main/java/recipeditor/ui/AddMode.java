@@ -1,6 +1,5 @@
 package recipeditor.ui;
 
-import recipeditor.Recipeditor;
 import recipeditor.recipe.Ingredient;
 import recipeditor.recipe.Recipe;
 

@@ -1,12 +1,13 @@
 package recipeditor.command;
 
+import recipeditor.Recipeditor;
 import recipeditor.recipe.Recipe;
 import recipeditor.recipe.RecipeList;
 import recipeditor.storage.Storage;
 import recipeditor.ui.Ui;
 
 public class DeleteCommand extends Command {
-    public static final String COMMAND_TYPE = "delete";
+    public static final String COMMAND_TYPE = "/delete";
     private final int index;
 
     /**
@@ -27,7 +28,7 @@ public class DeleteCommand extends Command {
         try {
             Recipe deletedRecipe = RecipeList.getRecipe(index);
             RecipeList.deleteRecipe(index);
-            Storage.writeRecipeListToFile();
+            Storage.writeRecipeListToFile(Recipeditor.DATA_FILE_PATH);
             return new CommandResult(String.format(
                     deletedRecipe.getTitle() + " is deleted.%n"));
         } catch (IndexOutOfBoundsException e) {
