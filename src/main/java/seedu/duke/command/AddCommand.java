@@ -137,7 +137,7 @@ public class AddCommand extends Command {
      * @param ui           An instance of the Ui class.
      * @param transactions An instance of the TransactionList class.
      * @param storage      An instance of the Storage class.
-     * @throws InputTransactionInvalidTypeException If the type of transaction is not recognised.
+     * @throws InputTransactionInvalidTypeException If the type of transaction is not recognised or on storage error.
      */
     @Override
     public void execute(TransactionList transactions, Ui ui, Storage storage) throws MoolahException {

@@ -38,14 +38,30 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_BUDGET_AMOUNT;
+import static seedu.duke.common.Constants.MAX_BUDGET_VALUE;
+import static seedu.duke.common.Constants.MIN_BUDGET_VALUE;
+
 
 //@@author paullowse
+import static seedu.duke.command.CommandTag.COMMAND_TAG_HELP_OPTION;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_GLOBAL_ENTRY_NUMBER;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_STATS_TYPE;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_GLOBAL_MONTH;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_GLOBAL_NUMBER;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_GLOBAL_PERIOD;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_GLOBAL_YEAR;
 
 //@@author chinhan99
+import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_AMOUNT;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_CATEGORY;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_DATE;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_DESCRIPTION;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_TYPE;
 
 //@@author chinhan99
-import static seedu.duke.command.CommandTag.*;
-import static seedu.duke.common.Constants.*;
+import static seedu.duke.common.Constants.MAX_AMOUNT_VALUE;
+import static seedu.duke.common.Constants.MIN_AMOUNT_VALUE;
 import static seedu.duke.common.DateFormats.DATE_INPUT_PATTERN;
 
 /**

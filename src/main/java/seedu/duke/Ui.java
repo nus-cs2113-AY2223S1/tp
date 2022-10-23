@@ -2,12 +2,15 @@ package seedu.duke;
 
 import seedu.duke.data.Budget;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
-import static seedu.duke.common.DateFormats.DATE_OUTPUT_PATTERN;
-import static seedu.duke.common.InfoMessages.*;
+import static seedu.duke.common.InfoMessages.INFO_CURRENT_BUDGET;
+import static seedu.duke.common.InfoMessages.INFO_DIVIDER;
+import static seedu.duke.common.InfoMessages.INFO_GREET;
+import static seedu.duke.common.InfoMessages.INFO_HELP_GREET;
+import static seedu.duke.common.InfoMessages.INFO_HELP_PROMPT;
+import static seedu.duke.common.InfoMessages.INFO_REMAINING_BUDGET;
+import static seedu.duke.common.InfoMessages.INFO_BUDGET_SET_SUCCESSFUL;
 
 public class Ui {
     //@@author chydarren

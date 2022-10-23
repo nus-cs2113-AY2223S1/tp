@@ -62,17 +62,18 @@ public class BudgetCommand extends Command {
     @Override
     public String[] getMandatoryTags() {
         String[] mandatoryTags = new String[]{
-                COMMAND_TAG_BUDGET_AMOUNT
+            COMMAND_TAG_BUDGET_AMOUNT
         };
         return mandatoryTags;
     }
 
     /**
+     * Update the monthly budget value stored in the program to new value and display acknowledgement message.
      *
      * @param transactions An instance of the TransactionList class.
      * @param ui           An instance of the Ui class.
      * @param storage      An instance of the Storage class.
-     * @throws MoolahException
+     * @throws MoolahException If storage error is found.
      */
     @Override
     public void execute(TransactionList transactions, Ui ui, Storage storage) throws MoolahException {

@@ -4,6 +4,7 @@ import static seedu.duke.common.Constants.MAX_TRANSACTIONS_COUNT;
 import static seedu.duke.common.Constants.MAX_AMOUNT_VALUE;
 import static seedu.duke.common.Constants.MIN_BUDGET_VALUE;
 
+//@@author wcwy
 /**
  * Represents the user's budget for the current month.
  *
@@ -11,7 +12,6 @@ import static seedu.duke.common.Constants.MIN_BUDGET_VALUE;
  * Operations related to the budgets are also defined under this class.
  */
 public class Budget {
-    //@@author wcwy
     // Default value of the monthly budget is $1000
     private static long budget = 1000;
 
