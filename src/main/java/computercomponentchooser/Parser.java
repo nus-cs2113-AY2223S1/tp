@@ -120,7 +120,7 @@ public class Parser {
     }
 
     /**
-     * Parses the 'find' user input and executes the desired command by finding a build depending on the search term.
+     * Parses the user input and executes the find command by finding a build depending on the search term.
      *
      * @param line The user input.
      * @throws BlankStringException
@@ -134,7 +134,7 @@ public class Parser {
 
 
     /**
-     * Parses the 'filter' user input and executes the desired command by listing the filtered builds depending on the
+     * Parses the user input and executes the filter command by listing the filtered builds depending on the
      * filter term and provided parameters.
      *
      * @param line The user input.
@@ -161,7 +161,7 @@ public class Parser {
     }
 
     /**
-     * Parses the 'add' user input and executes the desired command by adding a build depending on the build name.
+     * Parses the user input and executes the add command by adding a build depending on the build name.
      *
      * @param line The user input.
      * @throws DuplicateBuildException
@@ -188,7 +188,7 @@ public class Parser {
     }
 
     /**
-     * Parses the 'view' user input and executes the desired command by viewing a build depending on the build name.
+     * Parses the user input and executes the view command by viewing a build depending on the build name.
      *
      * @param line The user input.
      * @throws UnlistedBuildException
@@ -205,7 +205,7 @@ public class Parser {
     }
 
     /**
-     * Parses the 'delete' user input and executes the desired command by deleting a build depending on the build name.
+     * Parses the user input and executes the delete command by deleting a build depending on the build name.
      *
      * @param line The user input.
      * @throws UnlistedBuildException
@@ -227,7 +227,7 @@ public class Parser {
     }
 
     /**
-     * Parses the 'list' user input and executes the desired command by listing all builds.
+     * Parses the user input and executes the list command by listing all builds.
      */
     private void mainParseList() {
         Ui.printLine();
@@ -240,7 +240,7 @@ public class Parser {
     }
 
     /**
-     * Parses the 'back' user input and executes the desired command by going back to the main mode. This method is
+     * Parses the user input and executes the back command by going back to the main mode. This method is
      * called when the user is in the edit mode.
      */
     private void mainParseBack() {
@@ -250,7 +250,7 @@ public class Parser {
     }
 
     /**
-     * Parses the 'export' user input and executes the desired command by exporting all builds to a text file.
+     * Parses the user input and executes the export command by exporting all builds to a text file.
      *
      * @throws IOException
      */
@@ -262,7 +262,7 @@ public class Parser {
     }
 
     /**
-     * Parses the 'exportCSV' user input and executes the desired command by exporting all builds to a CSV file.
+     * Parses the user input and executes the exportCSV command by exporting all builds to a CSV file.
      *
      * @throws IOException
      */
