@@ -131,8 +131,8 @@ public class Ui {
         assert module.getNusTitle().length() > 0 : "NUS module title length cannot be empty";
         assert module.getNusCredit().length() > 0 : "NUS module credits length cannot be empty";
         String message = "NUS: " + module.getNusCode() + " " + module.getNusTitle() + " | Partner University: "
-                + module.getPuCode() + " " + module.getPuTitle() + " | Equivalent NUS Credits: " + module.getNusCredit()
-                + " MCs";
+                + module.getPuName() + " " + module.getPuCode() + " " + module.getPuTitle()
+                + " | Equivalent NUS Credits: " + module.getNusCredit() + " MCs";
         return message;
     }
 
@@ -227,6 +227,7 @@ public class Ui {
         assert deletedModules.size() > 0 : "List of module mappings should not be empty";
         String message = LINE;
         int i = 1;
+        message += "Your most recently deleted modules are:\n";
         for (UserModuleMapping module : deletedModules) {
             message += Integer.toString(i++);
             message += ". ";
@@ -252,10 +253,13 @@ public class Ui {
     public static void printUniversitiesInDatabase(ArrayList<University> universities) {
         assert universities.size() > 0 : "List of universities should not be empty";
         int i = 1;
+        System.out.print(LINE);
+        System.out.println("The universities available in the database are:");
         for (University university : universities) {
             System.out.println(i + ". " + university.toString());
             i++;
         }
+        System.out.print(LINE);
     }
 
     /**
@@ -266,9 +270,14 @@ public class Ui {
      */
     public static void printMappings(ArrayList<ModuleMapping> moduleMappings) {
         assert moduleMappings.size() > 0 : "List of module mappings should not be empty";
+        System.out.print(LINE);
+        int i = 1;
+        System.out.println("The eligible module mappings are:");
         for (ModuleMapping moduleMapping : moduleMappings) {
-            System.out.println(moduleMapping.toString());
+            System.out.println(i + ". " + moduleMapping.toString());
+            i++;
         }
+        System.out.print(LINE);
     }
 
     /**
@@ -280,12 +289,16 @@ public class Ui {
      */
     public static void printUserFavouriteLists(HashMap<String, UserUniversityList> userFavouriteLists) {
         assert userFavouriteLists.size() > 0 : "Dictionary of university name to favourite lists should not be empty";
+        System.out.print(LINE);
+        System.out.println("Your favourite lists are:");
+        int i = 1;
         for (Map.Entry<String, UserUniversityList> set : userFavouriteLists.entrySet()) {
             String universityName = set.getKey();
             UserUniversityList universityList = set.getValue();
             if (universityList.isFavourite()) {
-                System.out.println(universityName);
+                System.out.println(i + ". " + universityName);
                 universityList.displayModules();
+                i++;
             }
         }
     }
@@ -363,14 +376,13 @@ public class Ui {
      */
     public static String printLessonsByDayInTimetable(ArrayList<Lesson> lessons) {
         assert lessons.size() > 0 : "List of lessons should not be empty";
-        String message = LINE;
+        String message = "";
         for (int i = 0; i < lessons.size(); i++) {
             message += Integer.toString(i + 1);
             message += ". ";
             message += printLesson(lessons.get(i));
             message += "\n";
         }
-        message += LINE;
         return message;
     }
 
@@ -383,8 +395,10 @@ public class Ui {
      */
     public static String printLessonAddedAcknowledgement(Lesson lesson) {
         String universityName = lesson.getUniversity().getName();
+        String day = lesson.getDay();
+        day = day.substring(0,1).toUpperCase() + day.substring(1);
         String message = LINE + "Success! You have added a new lesson:\n" + universityName + " "
-                + lesson.getDay() + " " + printLesson(lesson) + "\n" + LINE;
+                + day + " " + printLesson(lesson) + "\n" + LINE;
         return message;
     }
 
@@ -397,8 +411,33 @@ public class Ui {
      */
     public static String printLessonDeletedAcknowledgement(Lesson lesson) {
         String universityName = lesson.getUniversity().getName();
+        String day = lesson.getDay();
+        day = day.substring(0,1).toUpperCase() + day.substring(1);
         String message = LINE + "Success! You have deleted the lesson:\n" + universityName + " "
-                + lesson.getDay() + " " + printLesson(lesson) + "\n" + LINE;
+                + day + " " + printLesson(lesson) + "\n" + LINE;
         return message;
+    }
+
+    /**
+     * Sequentially prints each day's lessons for a timetable.
+     */
+    public static void printTimetable(HashMap<String, ArrayList<Lesson>> timetable) {
+        System.out.println("_____________________________________________________________________________");
+        ArrayList<Lesson> mondayLessonList = timetable.get("monday");
+        ArrayList<Lesson> tuesdayLessonList = timetable.get("tuesday");
+        ArrayList<Lesson> wednesdayLessonList = timetable.get("wednesday");
+        ArrayList<Lesson> thursdayLessonList = timetable.get("thursday");
+        ArrayList<Lesson> fridayLessonList = timetable.get("friday");
+        System.out.println("Monday:");
+        System.out.print(Ui.printLessonsByDayInTimetable(mondayLessonList));
+        System.out.println("Tuesday:");
+        System.out.print(Ui.printLessonsByDayInTimetable(tuesdayLessonList));
+        System.out.println("Wednesday:");
+        System.out.print(Ui.printLessonsByDayInTimetable(wednesdayLessonList));
+        System.out.println("Thursday:");
+        System.out.print(Ui.printLessonsByDayInTimetable(thursdayLessonList));
+        System.out.println("Friday:");
+        System.out.print(Ui.printLessonsByDayInTimetable(fridayLessonList));
+        System.out.println("_____________________________________________________________________________");
     }
 }

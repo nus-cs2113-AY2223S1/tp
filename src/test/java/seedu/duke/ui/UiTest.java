@@ -97,7 +97,8 @@ public class UiTest {
                 "CS3243", "Introduction to Artificial Intelligence", "4",
                 "test", "test", "test");
         String expected = "NUS: " + "CS3243" + " " + "Introduction to Artificial Intelligence"
-                + " | Partner University: " + "CPSC123" + " " + "Intro to AI" + " | Equivalent NUS Credits: " + "4 MCs";
+                + " | Partner University: " + "test " + "CPSC123" + " " + "Intro to AI"
+                + " | Equivalent NUS Credits: " + "4 MCs";
         assertEquals(expected, Ui.printModule(dummy));
     }
 
@@ -108,7 +109,7 @@ public class UiTest {
                 "test", "test", "test");
         String expected = "_____________________________________________________________________________\n"
                 + "Success! You added:\n" + "NUS: " + "CS3243" + " "
-                + "Introduction to Artificial Intelligence" + " | Partner University: " + "CPSC123" + " "
+                + "Introduction to Artificial Intelligence" + " | Partner University: " + "test " + "CPSC123" + " "
                 + "Intro to AI" + " | Equivalent NUS Credits: " + "4 MCs"
                 + "\n" + "_____________________________________________________________________________\n";
         assertEquals(expected, Ui.printModuleAddedAcknowledgement(dummy));
@@ -122,7 +123,7 @@ public class UiTest {
         dummy.setComment("A+ or nothing");
         String expected = "_____________________________________________________________________________\n"
                 + "Success! You updated:\n" + "NUS: " + "CS3243" + " "
-                + "Introduction to Artificial Intelligence" + " | Partner University: " + "CPSC123" + " "
+                + "Introduction to Artificial Intelligence" + " | Partner University: " + "test " + "CPSC123" + " "
                 + "Intro to AI" + " | Equivalent NUS Credits: " + "4 MCs" + "\n"
                 + "With the following comment: " + dummy.getComment() + "\n"
                 + "_____________________________________________________________________________\n";
@@ -138,7 +139,7 @@ public class UiTest {
         String expected = "_____________________________________________________________________________\n"
                 + "Success! You deleted:\n" + "NUS: " + "CS3243" + " "
                 + "Introduction to Artificial Intelligence" + " | Partner University: "
-                + "CPSC123" + " " + "Intro to AI" + " | Equivalent NUS Credits: " + "4 MCs"
+                + "test " + "CPSC123" + " " + "Intro to AI" + " | Equivalent NUS Credits: " + "4 MCs"
                 + "\n" + "_____________________________________________________________________________\n";
         assertEquals(expected, Ui.printModuleDeletedAcknowledgement(dummy));
     }
@@ -172,9 +173,11 @@ public class UiTest {
         modules.add(dummy2);
         String expected = "_____________________________________________________________________________\n" + "1. "
                 + "NUS: " + "CS3243" + " " + "Introduction to Artificial Intelligence"
-                + " | Partner University: " + "CPSC123" + " " + "Intro to AI" + " | Equivalent NUS Credits: " + "4 MCs"
+                + " | Partner University: " + "test " + "CPSC123" + " " + "Intro to AI"
+                + " | Equivalent NUS Credits: " + "4 MCs"
                 + "\n" + "2. " + "NUS: " + "CS3244" + " " + "Machine Learning"
-                + " | Partner University: " + "CPSC456" + " " + "ML" + " | Equivalent NUS Credits: " + "4 MCs" + "\n"
+                + " | Partner University: " + "test " + "CPSC456" + " " + "ML"
+                + " | Equivalent NUS Credits: " + "4 MCs" + "\n"
                 + "_____________________________________________________________________________\n";
         assertEquals(expected, Ui.printModulesInUserList(modules));
     }

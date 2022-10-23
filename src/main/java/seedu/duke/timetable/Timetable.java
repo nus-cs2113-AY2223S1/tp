@@ -175,16 +175,4 @@ public class Timetable {
         userTimetable.get(oldLesson.getDay()).remove(oldLesson);
         System.out.print(Ui.printLessonDeletedAcknowledgement(oldLesson));
     }
-
-    /**
-     * Sequentially prints each day's lessons for a timetable.
-     */
-    public void printTimetable() {
-        for (Map.Entry<String, ArrayList<Lesson>> set : userTimetable.entrySet()) {
-            String day = set.getKey();
-            ArrayList<Lesson> lessonList = set.getValue();
-            System.out.println(day);
-            System.out.print(Ui.printLessonsByDayInTimetable(lessonList));
-        }
-    }
 }

@@ -89,7 +89,7 @@ public class TimetableManager {
         } else {
             Timetable timetable = timetableManager.get(universityName);
             System.out.println("Timetable for " + universityName + ":");
-            timetable.printTimetable();
+            Ui.printTimetable(timetable.getTimetable());
         }
     }
 
@@ -97,11 +97,13 @@ public class TimetableManager {
      * Sequentially prints all the timetables that the user has created for various universities.
      */
     public void printAllTimetables() {
+        System.out.println("_____________________________________________________________________________");
         for (Map.Entry<String, Timetable> set : timetableManager.entrySet()) {
             String universityName = set.getKey();
             Timetable timetable = timetableManager.get(universityName);
             System.out.println("Timetable for " + universityName + ":");
-            timetable.printTimetable();
+            Ui.printTimetable(timetable.getTimetable());
         }
+        System.out.println("_____________________________________________________________________________");
     }
 }

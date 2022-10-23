@@ -50,6 +50,7 @@ public class Duke {
                 switch (newUserCommand.getCommandType()) {
                 case EXIT:
                     exit();
+                    System.out.print(Ui.sayByeToUser());
                     break;
                 case HELP:
                     System.out.print(Ui.printCommands());
