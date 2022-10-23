@@ -11,6 +11,7 @@ import seedu.duke.item.ItemList;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INSUFFICIENT_ARGUMENTS;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PARTS;
 
+//@@author jorellesee
 public class FindItemCommand extends Command {
     private final String[] parts;
     private final ItemList itemList;

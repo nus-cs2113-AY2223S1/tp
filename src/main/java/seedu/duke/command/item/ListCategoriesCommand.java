@@ -4,6 +4,7 @@ import seedu.duke.command.Command;
 import seedu.duke.item.Category;
 import seedu.duke.ui.Ui;
 
+//@@author bdthanh
 /**
  * A representation of a command to list all categories.
  */

@@ -14,7 +14,7 @@ import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_COMMAND_UNR
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INSUFFICIENT_ARGUMENTS;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PARTS;
 
-
+//@@author jingwei55
 public class ViewTransactionsByStatusCommand extends Command {
 
     private final String[] parts;

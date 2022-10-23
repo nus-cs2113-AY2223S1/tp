@@ -18,6 +18,7 @@ import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_ITEM_NOT_FO
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_PRICE_FORMAT_INVALID;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_PRICE_LESS_THAN_ZERO;
 
+//@@author winston-lim
 public class UpdateItemCommand extends Command {
     private final String[] parts;
     private final ItemList itemList;

@@ -4,6 +4,7 @@ import seedu.duke.command.Command;
 import seedu.duke.ui.Ui;
 import seedu.duke.transaction.TransactionList;
 
+//@@author winston-lim
 public class ListTransactionsCommand extends Command {
     private final TransactionList txList;
 

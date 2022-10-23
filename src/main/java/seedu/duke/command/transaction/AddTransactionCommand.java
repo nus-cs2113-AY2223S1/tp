@@ -28,6 +28,7 @@ import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_ITEM_UNAVAI
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_NUMBER_FORMAT_INVALID;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_SELF_BORROWER;
 
+//@@author bdthanh
 /**
  * A representation of a command to add a new transaction.
  */

@@ -12,6 +12,7 @@ import seedu.duke.user.UserList;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INSUFFICIENT_ARGUMENTS;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PARTS;
 
+//@@author jingwei55
 public class ViewUserCommand extends Command {
     private final String[] parts;
     private final UserList userList;

@@ -5,6 +5,7 @@ import seedu.duke.ui.Ui;
 import seedu.duke.item.ItemList;
 import seedu.duke.transaction.TransactionList;
 
+//@@author winston-lim
 public class ListItemsCommand extends Command {
     private final ItemList itemList;
     private final TransactionList transactionList;
