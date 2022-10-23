@@ -6,6 +6,9 @@ import computercomponentchooser.storage.Storage;
 
 import java.io.FileNotFoundException;
 
+/**
+ * The main class of the application.
+ */
 public class ComputerComponentChooser {
 
     static BuildManager buildManager;
@@ -14,6 +17,9 @@ public class ComputerComponentChooser {
 
     static Storage storage;
 
+    /**
+     * Initializes the application.
+     */
     public ComputerComponentChooser() {
 
         buildManager = new BuildManager();
@@ -44,6 +50,11 @@ public class ComputerComponentChooser {
         ui.endSession();
     }
 
+    /**
+     * The main method of the application.
+     *
+     * @param args The command line arguments.
+     */
     public static void main(String[] args) {
 
         new ComputerComponentChooser();
