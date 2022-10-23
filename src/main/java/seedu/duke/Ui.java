@@ -92,6 +92,8 @@ public class Ui {
         printMessages(INFO_HELP_GREET.toString(), message);
     }
 
+    //@@author chydarren
+
     /**
      * Prepares the transaction list messages to be displayed to the user.
      *
@@ -101,6 +103,8 @@ public class Ui {
     public static void showList(String list, String message) {
         printMessages(message, list);
     }
+
+    //@@author paullowse
 
     /**
      * Prepares the stats list messages to be displayed to the user.
@@ -112,6 +116,8 @@ public class Ui {
                                     String expenseMessage, String savingsMessage) {
         printMessages(message, list, incomeMessage, expenseMessage, savingsMessage);
     }
+
+    //@@author chydarren
 
     /**
      * Prepares the messages to be displayed to the user when add or delete has been performed on
@@ -129,6 +135,8 @@ public class Ui {
     public static void showTransactionAction(String message, String transactionDetails) {
         printMessages(message, transactionDetails);
     }
+
+    //@@author wcwy
 
     /**
      * Returns the today's date in MMM dd yyyy format.
