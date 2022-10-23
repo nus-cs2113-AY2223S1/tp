@@ -1,0 +1,9 @@
+,---.          o     ,---.    |o|
+|---',---.,---..,---.|--- ,---|.|--- ,---.,---.
+|  \ |---'|    ||   ||    |   |||    |   ||
+`   ``---'`---'`|---'`---'`---'``---'`---'`
+                |
+Program starting!
+Parseable command at the moment: add, delete, list, view, exit
+>>> RecipEditor ends here...
+Program exiting
