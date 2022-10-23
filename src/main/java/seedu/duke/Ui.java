@@ -32,10 +32,12 @@ public class Ui {
     private static final String CLIENT_CONTACT_NUMBER_LABEL = "Client Contact Number: ";
     private static final String CLIENT_EMAIL_LABEL = "Client Email: ";
     private static final String CLIENT_BUDGET_LABEL = "Client Budget: ";
+
     private static final String PROPERTY_LANDLORD_LABEL = "Landlord Name: ";
     private static final String PROPERTY_ADDRESS_LABEL = "Property Address: ";
     private static final String PROPERTY_RENTAL_LABEL = "Property Rental Price: ";
     private static final String PROPERTY_UNIT_TYPE_LABEL = "Unit Type: ";
+
     private static final String SPACE = "\t";
 
 

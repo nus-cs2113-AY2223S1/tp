@@ -56,7 +56,9 @@ public class ParseFindClient extends Parser {
 
         boolean hasCorrectNumOfTag = queryLists.size() == SINGLE_TAG;
         boolean hasCorrectTag = commandDescription.contains(FIND_FLAGS);
-        boolean isValidTag = hasCorrectTag & hasCorrectNumOfTag;
+
+        boolean isValidTag = hasCorrectTag && hasCorrectNumOfTag;
+        
         if (isValidTag) {
             return true;
         }

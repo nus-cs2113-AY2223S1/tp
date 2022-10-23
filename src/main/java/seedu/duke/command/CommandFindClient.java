@@ -10,6 +10,7 @@ import seedu.duke.Ui;
 import static seedu.duke.Messages.MESSAGE_NO_CLIENT_MATCHES;
 
 
+
 public class CommandFindClient extends Command {
     private final String queryText;
 
@@ -57,7 +58,7 @@ public class CommandFindClient extends Command {
         String clientBudget = currentClient.getClientBudgetPerMonth().toLowerCase();
         String queryTextLowerCase = queryText.toLowerCase();
 
-        return clientName.contains(queryTextLowerCase) | clientContactNumber.contains(queryTextLowerCase)
-                | clientEmail.contains(queryTextLowerCase) | clientBudget.contains(queryTextLowerCase);
+        return clientName.contains(queryTextLowerCase) || clientContactNumber.contains(queryTextLowerCase)
+                || clientEmail.contains(queryTextLowerCase) || clientBudget.contains(queryTextLowerCase);
     }
 }
