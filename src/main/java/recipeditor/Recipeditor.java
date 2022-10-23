@@ -47,12 +47,9 @@ public class Recipeditor {
      * Main Command Loop Input -> Command -> Command Result -> Show & Save.
      */
     private static void runCommandLoopUntilExitCommand() {
-<<<<<<< HEAD
 
-=======
         Storage.createFile(DATA_FILE_PATH);
         Storage.loadRecipesFromFile(DATA_FILE_PATH);
->>>>>>> 0a8bfb181ad20afb97632e53a88afa0a60928182
         Command command;
         do {
             String input = Ui.readInput();

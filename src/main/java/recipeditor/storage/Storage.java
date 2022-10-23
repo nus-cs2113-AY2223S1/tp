@@ -20,6 +20,7 @@ import recipeditor.ui.Ui;
 public class Storage {
 
     private static final String DATA_STORAGE = "./Storage/";
+
     private static final String RECIPE_NAME_FIELD_TYPE = "Recipe Name";
     private static final String RECIPE_DESCRIPTION_FIELD_TYPE = "Recipe Description";
     private static final String RECIPE_INGREDIENTS_FIELD_TYPE = "Recipe Ingredients";

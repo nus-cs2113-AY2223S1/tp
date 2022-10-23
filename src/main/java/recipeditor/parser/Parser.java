@@ -8,11 +8,18 @@ import recipeditor.command.ListCommand;
 import recipeditor.command.EditCommand;
 import recipeditor.command.ViewCommand;
 
-
 import recipeditor.recipe.Recipe;
 import recipeditor.ui.AddMode;
 import recipeditor.ui.AddModeText;
 import recipeditor.ui.Ui;
+import recipeditor.command.FindCommand;
+import recipeditor.command.InvalidCommand;
+import recipeditor.recipe.RecipeList;
+import recipeditor.ui.AddMode;
+import recipeditor.ui.EditMode;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import recipeditor.command.FindCommand;
 import recipeditor.command.InvalidCommand;
@@ -51,7 +58,6 @@ public class Parser {
     }
 
     private static Command parseAddCommand() {
-
         AddModeText add = new AddModeText();
         add.enterAddModeText();
 
