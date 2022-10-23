@@ -130,6 +130,81 @@ public class Storage {
         }
     }
 
+    public void savePrescriptionData(PrescriptionList prescriptionList) {
+        FileWriter fileWriter = null;
+        try {
+            fileWriter = new FileWriter(prescriptionFile);
+        } catch (IOException e) {
+            UI.printErrorMessage("Error! File writer could not be created");
+            return;
+        }
+
+        try {
+            for (Prescription prescription: prescriptionList.getPrescriptions()) {
+                logPrescriptionIntoDataFile(fileWriter, prescription);
+            }
+        } catch (IOException e) {
+            UI.printErrorMessage("Error! Data could not be written into data file!");
+        } finally {
+            try {
+                fileWriter.close();
+            } catch (IOException e) {
+                UI.printErrorMessage("Error! File writer could not be closed!");
+                return;
+            }
+        }
+    }
+
+    public void saveVisitData(VisitList visitList) {
+        FileWriter fileWriter = null;
+        try {
+            fileWriter = new FileWriter(visitFile);
+        } catch (IOException e) {
+            UI.printErrorMessage("Error! File writer could not be created");
+            return;
+        }
+
+        try {
+            for (Visit visit: visitList.getVisits()) {
+                logVisitIntoDataFile(fileWriter, visit);
+            }
+        } catch (IOException e) {
+            UI.printErrorMessage("Error! Data could not be written into data file!");
+        } finally {
+            try {
+                fileWriter.close();
+            } catch (IOException e) {
+                UI.printErrorMessage("Error! File writer could not be closed!");
+                return;
+            }
+        }
+    }
+
+    private void logVisitIntoDataFile(FileWriter fileWriter, Visit visit) throws IOException {
+        fileWriter.write(visit.getId());
+        fileWriter.write(" | ");
+        fileWriter.write(visit.getReason());
+        fileWriter.write(" | ");
+        fileWriter.write(visit.getDateOfVisit());
+        fileWriter.write(" | ");
+        fileWriter.write(visit.getTimeOfVisit());
+        fileWriter.write(System.lineSeparator());
+    }
+
+    private void logPrescriptionIntoDataFile(FileWriter fileWriter, Prescription prescription) throws IOException {
+        fileWriter.write(prescription.getPatientId());
+        fileWriter.write(" | ");
+        fileWriter.write(prescription.getMedicine());
+        fileWriter.write(" | ");
+        fileWriter.write(prescription.getDosage());
+        fileWriter.write(" | ");
+        fileWriter.write(prescription.getTimeInterval());
+        fileWriter.write(" | ");
+        String activeStatus = prescription.isActive() ? "T" : "F";
+        fileWriter.write(activeStatus);
+        fileWriter.write(System.lineSeparator());
+    }
+
     private void logPatientIntoDataFile(FileWriter fileWriter, Patient patient) throws IOException {
         fileWriter.write(patient.getName());
         fileWriter.write(" | ");

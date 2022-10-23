@@ -68,6 +68,10 @@ public class Prescription {
         return isMatchedPatient(patientId) && isActive;
     }
 
+    public boolean isActive() {
+        return isActive;
+    }
+
     @Override
     public String toString() {
         return "\tID: " + patientId + System.lineSeparator()

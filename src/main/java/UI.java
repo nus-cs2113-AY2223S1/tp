@@ -115,7 +115,7 @@ public class UI {
     }
 
     public void printPatientEditedMessage(Patient patient) {
-        System.out.print("Alright, I've modified the details of the patient!");
+        System.out.print("Alright, I've modified the details of the patient! ");
         System.out.println("Here are the new details of the patient: ");
         printLine();
         System.out.println(patient);

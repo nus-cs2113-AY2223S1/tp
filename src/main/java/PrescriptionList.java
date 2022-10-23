@@ -7,6 +7,10 @@ public class PrescriptionList {
         prescriptionsList = new ArrayList<>();
     }
 
+    public ArrayList<Prescription> getPrescriptions() {
+        return prescriptionsList;
+    }
+
     public void add(UI ui, String patientId, String medicine, String dosage, String timeInterval) {
         assert patientId != null : "ID should not be null";
         assert medicine != null : "medicine should not be null";
@@ -71,7 +75,7 @@ public class PrescriptionList {
     }
 
     public void viewActivePatientPrescription(UI ui, String patientId) {
-        if (isEmpty() || !hasPatientPrescription(patientId)) {
+        if (isEmpty() || !hasActivePatientPrescription(patientId)) {
             ui.printNoMatchingActivePrescriptionMessage();
             return;
         }
@@ -117,6 +121,16 @@ public class PrescriptionList {
     }
 
     private boolean hasPatientPrescription(String patientId) {
+        for (Prescription prescription : prescriptionsList) {
+            if (prescription.isMatchedPatient(patientId)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private boolean hasActivePatientPrescription(String patientId) {
         for (Prescription prescription : prescriptionsList) {
             if (prescription.isMatchedPatientActive(patientId)) {
                 return true;

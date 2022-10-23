@@ -7,6 +7,9 @@ public class VisitList {
         visitList = new ArrayList<>();
     }
 
+    public ArrayList<Visit> getVisits() {
+        return visitList;
+    }
 
     public void addVisit(UI ui, String id, String dateOfVisit, String timeOfVisit, String reason) {
         Visit visit = new Visit(id,dateOfVisit,timeOfVisit,reason);

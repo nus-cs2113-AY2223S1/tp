@@ -18,6 +18,8 @@ public class ParserTest {
 
     private static UI ui;
 
+    private static Storage storage;
+
     @BeforeEach
     public void setUp() {
         patientList = new PatientList();
