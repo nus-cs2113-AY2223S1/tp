@@ -17,10 +17,11 @@ class TimetableManager {
 class Timetable {
     - userTimetable: HashMap<String, ArrayList<Lesson>>
     + Timetable()
-    - isValidDay(lesson: Lesson) : boolean
-    - isValidStartTime(lesson: Lesson) : boolean
-    - isValidEndTime(lesson: Lesson) : boolean
-    - hasTimetableClash(lesson: Lesson) : boolean
+    {static} + isValidDay(lesson: Lesson) : boolean
+    {static} + isValidStartTime(lesson: Lesson) : boolean
+    {static} + isValidEndTime(lesson: Lesson) : boolean
+    {static} + isValidTiming(lesson: Lesson) : boolean
+    + hasTimetableClash(lesson: Lesson) : boolean
     + addLesson(newLesson: Lesson)
     + deleteLesson(oldLesson: Lesson)
     + printTimetable()
@@ -47,9 +48,6 @@ class Module {
     + (): Look at Module diagram for more methods
 }
 
-class DuplicateLessonException {
-}
-
 class LessonNotFoundException {
 }
 
@@ -68,14 +66,17 @@ class InvalidTimeFormatException {
 class ParseException {
 }
 
+class InvalidLessonDayException {
+}
+
 TimetableManager "1" --> "*" Timetable :> Manages
 Timetable "1" --> "*" Lesson :> Contains
 Lesson --> InvalidModuleException : <<throws>>
 Timetable --> InvalidTimeFormatException : <<throws>>
 Timetable --> TimetableClashException : <<throws>>
 Timetable --> ParseException : <<throws>>
-Timetable --> DuplicateLessonException : <<throws>>
 Timetable --> LessonNotFoundException : <<throws>>
+Timetable --> InvalidLessonDayException : <<throws>>
 TimetableManager --> TimetableNotFoundException : <<throws>>
 Module <|-- Lesson
 

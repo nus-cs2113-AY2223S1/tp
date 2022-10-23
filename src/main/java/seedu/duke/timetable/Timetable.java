@@ -1,6 +1,6 @@
 package seedu.duke.timetable;
 
-import seedu.duke.exceptions.DuplicateLessonException;
+import seedu.duke.exceptions.InvalidLessonDayException;
 import seedu.duke.exceptions.InvalidTimeFormatException;
 import seedu.duke.exceptions.LessonNotFoundException;
 import seedu.duke.exceptions.TimetableClashException;
@@ -33,16 +33,25 @@ public class Timetable {
         userTimetable.put("friday", fridayList);
     }
 
+    public HashMap<String, ArrayList<Lesson>> getTimetable() {
+        return userTimetable;
+    }
+
     /**
      * Checks if the day for a lesson is valid.
      *
      * @param lesson The lesson to be validated.
      * @return True if the day for a lesson is one of five weekdays.
+     * @throws InvalidLessonDayException if the input day for a lesson is invalid.
      */
-    private boolean isValidDay(Lesson lesson) {
+    public static boolean isValidDay(Lesson lesson) throws InvalidLessonDayException {
         String day = lesson.getDay();
-        return day.equals("monday") || day.equals("tuesday") || day.equals("wednesday")
-                || day.equals("thursday") || day.equals("friday");
+        if (day.equals("monday") || day.equals("tuesday") || day.equals("wednesday")
+                || day.equals("thursday") || day.equals("friday")) {
+            return true;
+        } else {
+            throw new InvalidLessonDayException("Please enter a day from Monday to Friday.");
+        }
     }
 
     /**
@@ -53,7 +62,7 @@ public class Timetable {
      * @return True if the input start time for a lesson is valid.
      * @throws InvalidTimeFormatException if the input start time for a lesson is invalid.
      */
-    private boolean isValidStartTime(Lesson lesson) throws InvalidTimeFormatException {
+    public static boolean isValidStartTime(Lesson lesson) throws InvalidTimeFormatException {
         String regex = "([01]?[0-9]|2[0-3]):[0-5][0-9]";
         Pattern p = Pattern.compile(regex);
         Matcher m = p.matcher(lesson.getStartTime());
@@ -72,11 +81,30 @@ public class Timetable {
      * @return True if the input end time for a lesson is valid.
      * @throws InvalidTimeFormatException if the input end time for a lesson is invalid.
      */
-    private boolean isValidEndTime(Lesson lesson) throws InvalidTimeFormatException {
+    public static boolean isValidEndTime(Lesson lesson) throws InvalidTimeFormatException {
         String regex = "([01]?[0-9]|2[0-3]):[0-5][0-9]";
         Pattern p = Pattern.compile(regex);
         Matcher m = p.matcher(lesson.getEndTime());
         if (m.matches()) {
+            return true;
+        } else {
+            throw new InvalidTimeFormatException("Invalid time format entered!");
+        }
+    }
+
+    /**
+     * Checks if the time for a lesson is valid in terms of chronology.
+     * e.g. 09:00 to 10:00 is valid but 09:00 to 09:00 and 10:00 to 09:00 is invalid
+     *
+     * @param lesson The lesson to be validated.
+     * @return True if the input time for a lesson is valid.
+     * @throws InvalidTimeFormatException if the input end time for a lesson is invalid.
+     */
+    public static boolean isValidTiming(Lesson lesson) throws InvalidTimeFormatException, ParseException {
+        SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
+        Date startTime = parser.parse(lesson.getStartTime());
+        Date endTime = parser.parse(lesson.getEndTime());
+        if (startTime.before(endTime)) {
             return true;
         } else {
             throw new InvalidTimeFormatException("Invalid time format entered!");
@@ -91,7 +119,7 @@ public class Timetable {
      * @throws TimetableClashException if there is a timetable clash
      * @throws ParseException if there is an invalid time format parsed
      */
-    private boolean hasTimetableClash(Lesson lesson) throws TimetableClashException, ParseException {
+    public boolean hasNoTimetableClash(Lesson lesson) throws TimetableClashException, ParseException {
         SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
         String day = lesson.getDay();
         Date newStartTime = parser.parse(lesson.getStartTime());
@@ -99,26 +127,25 @@ public class Timetable {
         for (Lesson currentLesson : userTimetable.get(day)) {
             Date currentStartTime = parser.parse(currentLesson.getStartTime());
             Date currentEndTime = parser.parse(currentLesson.getEndTime());
-            if (newEndTime.after(currentStartTime) || newStartTime.before(currentEndTime)) {
+            boolean hasNoClash =
+                    (newStartTime.compareTo(currentStartTime) <= 0 && newEndTime.compareTo(currentStartTime) <= 0)
+                    || newStartTime.compareTo(currentEndTime) >= 0 && newEndTime.compareTo(currentEndTime) >= 0;
+            if (!hasNoClash) {
                 throw new TimetableClashException("Error! There is a timetable clash!");
             }
         }
-        return false;
+        return true;
     }
 
     /**
      * Adds a lesson to the timetable based on day.
      *
      * @param newLesson The new lesson to be added to the timetable.
-     * @throws DuplicateLessonException if there is a duplicate lesson already stored in the timetable.
      */
-    public void addLesson(Lesson newLesson) throws DuplicateLessonException {
-        if (userTimetable.get(newLesson.getDay()).contains(newLesson)) {
-            throw new DuplicateLessonException("Duplicate lesson not allowed.");
-        }
+    public void addLesson(Lesson newLesson) {
         try {
             if (isValidDay(newLesson) && isValidStartTime(newLesson) && isValidEndTime(newLesson)
-                    && !hasTimetableClash(newLesson)) {
+                    && isValidTiming(newLesson) && hasNoTimetableClash(newLesson)) {
                 userTimetable.get(newLesson.getDay()).add(newLesson);
                 System.out.print(Ui.printLessonAddedAcknowledgement(newLesson));
                 Collections.sort(userTimetable.get(newLesson.getDay()), (l1, l2) -> {
@@ -130,7 +157,7 @@ public class Timetable {
                     }
                 });
             }
-        } catch (InvalidTimeFormatException | TimetableClashException | ParseException e) {
+        } catch (InvalidLessonDayException | InvalidTimeFormatException | TimetableClashException | ParseException e) {
             Ui.printExceptionMessage(e);
         }
     }
