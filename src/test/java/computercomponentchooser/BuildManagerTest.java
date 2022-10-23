@@ -22,7 +22,8 @@ import computercomponentchooser.exceptions.UnlistedBuildException;
 
 public class BuildManagerTest {
     BuildManager buildManager;
-    Build build1, build2;
+    Build build1;
+    Build build2;
 
     @BeforeEach
     public void setUp() {
