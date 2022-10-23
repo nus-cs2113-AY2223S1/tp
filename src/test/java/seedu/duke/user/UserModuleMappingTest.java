@@ -29,7 +29,8 @@ public class UserModuleMappingTest {
         UserModuleMapping mod = new UserModuleMapping("CS24", "Data Structures", "CS2040",
                 "Data Structures & Algorithms", "4", "4", "UCB", "USA");
         myModules.addModule(mod);
-        assertEquals("CS2040 Data Structures & Algorithms | CS24 Data Structures 4 MCs",myModules.getModules().get(0).toString());
+        assertEquals("CS2040 Data Structures & Algorithms | CS24 Data Structures 4 MCs",
+                myModules.getModules().get(0).toString());
     }
 
     @Test
@@ -90,7 +91,7 @@ public class UserModuleMappingTest {
                 "Data Structures & Algorithms", "4", "4", "LSA","Africa");
         myModules.addModule(mod);
         assertEquals(mod, myModules.getModuleByPuCode("CS24"));
-        assertThrows(InvalidUserCommandException.class, ()->myModules.getModuleByPuCode("0"));
+        assertThrows(InvalidUserCommandException.class, () -> myModules.getModuleByPuCode("0"));
     }
 
     @Test
@@ -117,7 +118,7 @@ public class UserModuleMappingTest {
     }
 
     @Test
-    void updateModule_UCLA_correctDetails() throws InvalidUserCommandException {
+    void updateModule_Ucla_correctDetails() throws InvalidUserCommandException {
         UserModuleMapping mod = new UserModuleMapping("CS24", "Data Structures", "CS2040",
                 "Data Structures & Algorithms", "4", "4", "UCB", "USA");
         myModules.addModule(mod);
@@ -135,7 +136,7 @@ public class UserModuleMappingTest {
     }
 
     @Test
-    void findModuleByTitle_UCLA_true() {
+    void findModuleByTitle_Ucla_true() {
         UserModuleMapping mod = new UserModuleMapping("CS24", "Data Structures", "CS2040",
                 "Data Structures & Algorithms", "4", "4", "UCB", "USA");
         myModules.addModule(mod);
