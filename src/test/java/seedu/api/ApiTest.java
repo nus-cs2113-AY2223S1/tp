@@ -1,5 +1,7 @@
 package seedu.api;
 
+import static seedu.common.CommonData.API_KEY_DEFAULT;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -17,23 +19,27 @@ public class ApiTest {
     @Test
     public void loadApiKeyFileEmpty() {
         Api api = new Api(testJsonFile, testJsonFileDirectory);
-        Assertions.assertThrows(EmptySecretFileException.class, () -> api.loadApiKey(testEmptyApiKeyFile,
-                testJsonFileDirectory, true));
+        try {
+            api.loadApiKey(testEmptyApiKeyFile, testJsonFileDirectory, true);
+        } catch (NoFileFoundException e) {
+            assert false;
+        }
+        Assertions.assertEquals(API_KEY_DEFAULT, api.getApiKey());
     }
 
     @Test
     public void getApiKeyValid() throws EmptySecretFileException, NoFileFoundException {
         Api api = new Api(testJsonFile, testJsonFileDirectory);
         api.loadApiKey(testApiKeyFileInvalid, testJsonFileDirectory, true);
-        Assertions.assertEquals(api.getApiKey(), "abc123f-exampleinvalid-54321");
+        Assertions.assertEquals("abc123f-exampleinvalid-54321", api.getApiKey());
     }
 
     @Test
     public void fetchDataUnauthorizedAccess() throws ParkingException {
         Api api = new Api(testJsonFile, testJsonFileDirectory);
         api.loadApiKey(testApiKeyFileInvalid, testJsonFileDirectory, true);
-        api.asyncExecuteRequest();
-        Assertions.assertThrows(UnauthorisedAccessApiException.class, () -> api.fetchData());
+        api.asyncExecuteRequest(0, 0);
+        Assertions.assertThrows(UnauthorisedAccessApiException.class, () -> api.fetchData(0));
     }
 
 }

@@ -58,8 +58,7 @@ public class Parking {
         try {
             FileStorage.ensureBackup();
             api.loadApiKey(API_KEY_FILE, API_JSON_DIRECTORY, true);
-            api.asyncExecuteRequest();
-            api.fetchData();
+            api.syncFetchData();
             ui.print("Fetching data from API successful!");
         } catch (ParkingException e) {
             ui.print(e.getMessage());
