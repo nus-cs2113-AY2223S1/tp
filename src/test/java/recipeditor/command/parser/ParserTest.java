@@ -11,19 +11,19 @@ public class ParserTest {
     @Test
     void parserShouldReturnList() {
         Parser parse = new Parser();
-        assertTrue(parse.parseCommand("LiST") instanceof ListCommand);
+        assertTrue(parse.parseCommand("/LiST") instanceof ListCommand);
     }
 
     @Test
     void parserShouldReturnView() {
         Parser parse = new Parser();
-        assertTrue(parse.parseCommand("VIEw 1") instanceof ViewCommand);
+        assertTrue(parse.parseCommand("/VIEw 1") instanceof ViewCommand);
     }
 
     @Test
     void parserShouldReturnExit() {
         Parser parse = new Parser();
-        assertTrue(parse.parseCommand("Exit") instanceof ExitCommand);
+        assertTrue(parse.parseCommand("/Exit") instanceof ExitCommand);
     }
 
 }

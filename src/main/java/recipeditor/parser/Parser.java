@@ -1,20 +1,30 @@
 package recipeditor.parser;
 
-import recipeditor.command.AddCommand;
 import recipeditor.command.Command;
+import recipeditor.command.AddCommand;
 import recipeditor.command.DeleteCommand;
-import recipeditor.exception.ExcessArgumentException;
-import recipeditor.command.ListCommand;
 import recipeditor.command.ExitCommand;
-import recipeditor.command.InvalidCommand;
+import recipeditor.command.ListCommand;
+import recipeditor.command.EditCommand;
 import recipeditor.command.ViewCommand;
+
 
 import recipeditor.recipe.Recipe;
 import recipeditor.ui.AddMode;
 import recipeditor.ui.AddModeText;
 import recipeditor.ui.Ui;
 
+import recipeditor.command.FindCommand;
+import recipeditor.command.InvalidCommand;
+import recipeditor.recipe.RecipeList;
+import recipeditor.ui.AddMode;
+import recipeditor.ui.EditMode;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class Parser {
+    private static Logger logger = Logger.getLogger("LOGS");
 
     public static Command parseCommand(String input) {
         String[] parsed = input.split(" ");
@@ -28,12 +38,16 @@ public class Parser {
         case ExitCommand.COMMAND_TYPE:
             return new ExitCommand();
         case DeleteCommand.COMMAND_TYPE:
+            return null;
+        case EditCommand.COMMAND_TYPE:
+            return parseEditCommand(parsed);
         case ViewCommand.COMMAND_TYPE:
             return parseListAlterCommand(parsed, commandWord);
+        case FindCommand.COMMAND_TYPE:
+            return parseFindCommand(parsed);
         default:
             return new InvalidCommand();
         }
-
     }
 
     private static Command parseAddCommand() {
@@ -46,6 +60,13 @@ public class Parser {
         //        add.exitAddMode();
         //        Ui.showMessage("Is the recipe valid? " + add.isValid);
         return new AddCommand(true, new Recipe()); // Dummy
+
+
+        // AddMode add = new AddMode(); // Switch to Add Mode in here
+        // add.enterAddMode();
+        // add.exitAddMode();
+        // logger.log(Level.INFO, "Is the recipe valid? " + add.isValid);
+        // return new AddCommand(add.isValid, add.addedRecipe); // Pass validty and potential recipe to AddCommand
     }
 
     private static Command parseListAlterCommand(String[] parsed, String commandWord) {
@@ -65,4 +86,55 @@ public class Parser {
         return new InvalidCommand();
     }
 
+    private static Command parseEditCommand(String[] parsed) {
+        int index = -1;
+        if (parsed.length > 1) {
+            try {
+                index = Integer.parseInt(parsed[1]) - 1;
+            } catch (NumberFormatException n) {
+                index = RecipeList.getRecipeIndexFromTitle(parsed[1]);
+            }
+            EditMode edit = new EditMode();
+            edit.enterEditMode(index);
+            return new EditCommand(edit.exitEditMode(), index, edit.getEditedRecipe());
+        }
+        return new InvalidCommand();
+    }
+
+    private static Command parseFindCommand(String[] parsed) {
+        if (parsed.length < 2) {
+            return new InvalidCommand();
+        }
+        String flagAndInputString = convertStringArrayToString(parsed);
+        String[] flagAndInput = flagAndInputString.split(" ", 2);
+        char flag = flagAndInput[0].charAt(0);
+        String input = flagAndInput[1];
+        return new FindCommand(flag, input);
+    }
+
+    private static String convertStringArrayToString(String[] stringArray) {
+        StringBuilder output = new StringBuilder();
+        // Finding the flag in the string array input
+        if (stringArray[1].contains("-")) {
+            String[] flagAndInput = stringArray[1].split("-");
+            String flag = flagAndInput[1];
+            output.append(flag + " ");
+        }
+        for (int i = 2; i < stringArray.length; i++) {
+            if (i == stringArray.length - 1) {
+                output.append(stringArray[i]);
+            } else {
+                output.append(stringArray[i] + " ");
+            }
+        }
+        return output.toString();
+    }
+
+    //    private void checkForExcessArgument(String[] args, int length)
+    //            throws ExcessArgumentException {
+    //        if (args.length > length) {
+    //            throw new ExcessArgumentException();
+    //        }
+    //    }
+    
 }

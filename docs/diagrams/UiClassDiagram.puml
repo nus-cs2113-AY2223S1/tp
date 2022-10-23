@@ -1,5 +1,5 @@
 @startuml
-'hide class fields
+hide class fields
 hide class methods
 
 package Recipe {
@@ -22,8 +22,8 @@ class Ui {
 }
 
 class AddMode {
-    Recipe addedRecipe
-    boolean isValid
+'    Recipe addedRecipe
+'    boolean isValid
 }
 
 Ui ..> CommandResult
