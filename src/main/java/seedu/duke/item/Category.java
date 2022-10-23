@@ -1,10 +1,15 @@
 package seedu.duke.item;
 
+//@@author jingwei55
 public class Category {
     enum Categories {
         SPORTS_EQUIPMENT,
         TEXTBOOKS_AND_NOTES,
         ELECTRICAL_APPLIANCES,
+        FURNITURE,
+        KITCHEN_ITEMS,
+        VEHICLES,
+        CLOTHING,
         OTHERS //TO BE ADDED LATER
     }
 
@@ -21,8 +26,16 @@ public class Category {
             return 2;
         case ELECTRICAL_APPLIANCES:
             return 3;
-        default: //others
+        case FURNITURE:
             return 4;
+        case KITCHEN_ITEMS:
+            return 5;
+        case VEHICLES:
+            return 6;
+        case CLOTHING:
+            return 7;
+        default:
+            return 8;
         }
     }
 
@@ -39,7 +52,15 @@ public class Category {
             return Categories.TEXTBOOKS_AND_NOTES;
         case 3:
             return Categories.ELECTRICAL_APPLIANCES;
-        default: //others
+        case 4:
+            return Categories.FURNITURE;
+        case 5:
+            return Categories.KITCHEN_ITEMS;
+        case 6:
+            return Categories.VEHICLES;
+        case 7:
+            return Categories.CLOTHING;
+        default:
             return Categories.OTHERS;
         }
     }

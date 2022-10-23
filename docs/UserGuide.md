@@ -147,7 +147,7 @@ ____________________________________________________________
 Format: ```add-tx /i [ITEM_ID] /b [BORROWER_NAME] /d [DURATION] /c [CREATED_DATE]```
 
 Note:
-1. Duration must be a integer, greater than 0
+1. Duration must be an integer, greater than 0
 2. The format of create date is YYYY-MM-DD, and it must be before the input date
 
 Example of usage: ```add-tx /i 2cc4edf3 /b thanh /d 5 /c 2022-10-20```

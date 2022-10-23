@@ -3,6 +3,7 @@ package seedu.duke.item;
 import seedu.duke.id.IdGenerator;
 import seedu.duke.transaction.TransactionList;
 
+//@@author jingwei55
 public class Item {
     private final String itemId;
     private final String name;
