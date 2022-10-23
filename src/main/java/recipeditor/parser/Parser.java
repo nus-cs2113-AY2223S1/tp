@@ -13,6 +13,7 @@ import recipeditor.ui.Editor;
 import recipeditor.command.FindCommand;
 import recipeditor.command.InvalidCommand;
 import recipeditor.recipe.RecipeList;
+import recipeditor.storage.Storage;
 import recipeditor.ui.EditMode;
 
 import java.util.logging.Logger;
@@ -46,21 +47,9 @@ public class Parser {
 
     private static Command parseAddCommand() {
         Editor add = new Editor();
-        add.enterAddModeText();
-
-        // AddMode add = new AddMode(); // Switch to Add Mode in here
-        // add.enterAddMode();
-        // add.exitAddMode();
-        // Ui.showMessage("Is the recipe valid? " + add.isValid);
-        return new AddCommand(true, new Recipe()); // Dummy
-
-        // AddMode add = new AddMode(); // Switch to Add Mode in here
-        // add.enterAddMode();
-        // add.exitAddMode();
-        // logger.log(Level.INFO, "Is the recipe valid? " + add.isValid);
-        // return new AddCommand(add.isValid, add.addedRecipe); // Pass validty and
-        // potential recipe to AddCommand
-    }
+        add.enterEditor(Storage.TEMPLATE_PATH);
+        return new AddCommand(true, new Recipe());
+    } 
 
     private static Command parseListAlterCommand(String[] parsed, String commandWord) {
         if (parsed.length == 2) {

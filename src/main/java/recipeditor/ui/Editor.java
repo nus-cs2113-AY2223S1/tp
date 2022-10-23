@@ -89,13 +89,13 @@ public class Editor extends JFrame implements ActionListener {
         }
     }
 
-    /** Enter AddModeTextEditor */
-    public void enterAddModeText() {
+    /** Enter AddMode is load template */
+    public void enterEditor(String path) {
         Ui.showMessage("Please edit in the GUI editor!");
-        loadFile(Storage.TEMPLATE_PATH);
+        loadFile(path);
         while (this.state == EditorState.USING) {
             try {
-                Thread.sleep(500); //Sleep 500ms not polling
+                Thread.sleep(500);
             } catch (Exception e) {
                 Ui.showMessage("Break from sleep");
             }
@@ -104,9 +104,6 @@ public class Editor extends JFrame implements ActionListener {
         logger.log(Level.INFO, "Editor State: " + this.state);
     }
 
-    public void enterEditMode(){
-        
-    }
 
     private void loadFile(String path){
         File textFile = new File(path);
