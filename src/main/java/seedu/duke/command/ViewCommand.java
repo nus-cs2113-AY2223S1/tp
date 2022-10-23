@@ -75,13 +75,13 @@ public class ViewCommand extends Command {
     }
 
     private void viewFood(String[] argumentList) throws IllegalValueException {
-//        handleInvalidViewFoodCommand(argumentList);
+        handleInvalidViewFoodCommand(argumentList);
         ArrayList<Food> foodArrayList = foodList.getFoodList();
         ui.outputFoodList(foodArrayList);
     }
 
     private static void handleInvalidViewFoodCommand(String[] argumentList) throws IllegalValueException {
-        if (argumentList.length != 2) {
+        if (argumentList.length != 1) {
             throw new IllegalValueException("Invalid view command");
         }
     }
