@@ -25,7 +25,7 @@ Usage: add t/TYPE c/CATEGORY a/AMOUNT d/DATE i/DESCRIPTION
 
 Command Word: LIST
 To list all or some transactions based on selection.
-Usage: list [t/TYPE] [c/CATEGORY] [d/DATE]
+Usage: list [t/TYPE] [c/CATEGORY] [d/DATE] [m/MONTH] [y/YEAR]
 
 Command Word: FIND
 To find specific transaction(s) based on any keywords inputted by the user.
@@ -73,7 +73,7 @@ DESCRIPTION: More information regarding the transaction, written without any spa
 
 Command Word: LIST
 To list all or some transactions based on selection.
-Usage: list [t/TYPE] [c/CATEGORY] [d/DATE]
+Usage: list [t/TYPE] [c/CATEGORY] [d/DATE] [m/MONTH] [y/YEAR]
 Parameters information:
 (Optional) TYPE - The type of transaction. Only "income" or "expense" is accepted.
 (Optional) CATEGORY: A category for the transaction. Only string containing alphabets is accepted.

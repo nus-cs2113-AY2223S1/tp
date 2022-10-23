@@ -10,6 +10,6 @@ public class InvalidIndexException extends MoolahException {
      */
     @Override
     public String getMessage() {
-        return ErrorMessages.ERROR_INVALID_INDEX.toString();
+        return ErrorMessages.ERROR_INPUT_INVALID_INDEX.toString();
     }
 }

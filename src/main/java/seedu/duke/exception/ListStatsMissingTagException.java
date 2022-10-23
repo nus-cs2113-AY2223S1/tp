@@ -10,6 +10,6 @@ public class ListStatsMissingTagException extends MoolahException {
      */
     @Override
     public String getMessage() {
-        return ErrorMessages.ERROR_ADD_COMMAND_MISSING_TAG.toString();
+        return ErrorMessages.ERROR_INPUT_MISSING_TAG.toString();
     }
 }

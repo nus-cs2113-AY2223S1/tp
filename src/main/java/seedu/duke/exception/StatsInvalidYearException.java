@@ -10,6 +10,6 @@ public class StatsInvalidYearException extends MoolahException {
      */
     @Override
     public String getMessage() {
-        return ErrorMessages.ERROR_STATS_COMMAND_INVALID_YEAR.toString();
+        return ErrorMessages.ERROR_INPUT_INVALID_YEAR.toString();
     }
 }

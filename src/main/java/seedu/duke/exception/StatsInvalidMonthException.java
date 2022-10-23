@@ -10,6 +10,6 @@ public class StatsInvalidMonthException extends MoolahException {
      */
     @Override
     public String getMessage() {
-        return ErrorMessages.ERROR_STATS_COMMAND_INVALID_MONTH.toString();
+        return ErrorMessages.ERROR_INPUT_INVALID_MONTH.toString();
     }
 }

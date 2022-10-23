@@ -32,7 +32,7 @@ import java.util.regex.Pattern;
 
 import static seedu.duke.command.CommandTag.COMMAND_TAG_HELP_OPTION;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_LIST_ENTRY_NUMBER;
-import static seedu.duke.command.CommandTag.COMMAND_TAG_STATISTICS_TYPE;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_STATS_TYPE;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_STATS_MONTH;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_STATS_NUMBER;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_STATS_PERIOD;
@@ -56,12 +56,14 @@ import static seedu.duke.common.DateFormats.DATE_INPUT_PATTERN;
  */
 public class ParameterParser {
     //@@author chydarren
-    private static final String EMPTY_STRING = "";
     private static final String DELIMITER = " ";
     private static final int SPLIT_POSITION = 2;
     private static final int MINIMUM_TAG_LENGTH = 2;
     private static final String CLASS_TYPE_EXPENSE = "seedu.duke.data.transaction.Expense";
     private static final String CLASS_TYPE_INCOME = "seedu.duke.data.transaction.Income";
+    private static final String CATEGORIES = "categories";
+    private static final String TIME = "time";
+
     private static final String WEEKS = "weeks";
     private static final String MONTHS = "months";
 
@@ -308,7 +310,7 @@ public class ParameterParser {
         case COMMAND_TAG_HELP_OPTION:
             command.setIsDetailedOption(parseHelpOptionTag(parameter));
             break;
-        case COMMAND_TAG_STATISTICS_TYPE:
+        case COMMAND_TAG_STATS_TYPE:
             command.setStatsType(parseStatsTypeTag(parameter));
             break;
         case COMMAND_TAG_STATS_MONTH:
@@ -489,30 +491,27 @@ public class ParameterParser {
     //@@author chydarren
 
     /**
-     * Check if the type parameter is a valid statistic type and returns the parameter if it is valid.
+     * Checks if the type parameter is a valid statistic type and returns the parameter if it is valid.
      *
      * @param parameter The user input after the user tag.
      * @return The statistic type.
      * @throws ListStatsInvalidStatsTypeException If the statistic type given is not supported.
      */
     public static String parseStatsTypeTag(String parameter) throws ListStatsInvalidStatsTypeException {
-        String statsType;
         switch (parameter) {
-        case "categories":
-            statsType = "categories";
-            break;
-        case "time":
-            statsType = "time";
-            break;
+        case CATEGORIES:
+            return CATEGORIES;
+        case TIME:
+            return TIME;
         default:
             parserLogger.log(Level.WARNING, "An invalid statistic type error is caught for the given parameter: "
                     + parameter);
             throw new ListStatsInvalidStatsTypeException();
         }
-        return statsType;
     }
 
     //@@author paullowse
+
     public static int parseStatsMonthTag(String parameter) throws StatsInvalidMonthException,
             EntryNumberNotNumericException {
         int month;
@@ -532,7 +531,6 @@ public class ParameterParser {
         return month;
     }
 
-    //@@author paullowse
     public static int parseStatsYearTag(String parameter) throws StatsInvalidYearException,
             EntryNumberNotNumericException {
         int year;
@@ -551,25 +549,20 @@ public class ParameterParser {
         return year;
     }
 
-    //@@author paullowse
     public static String parseStatsPeriodTag(String parameter) throws StatsInvalidPeriodException {
         String period;
         switch (parameter) {
         case WEEKS:
-            period = WEEKS;
-            break;
+            return WEEKS;
         case MONTHS:
-            period = MONTHS;
-            break;
+            return MONTHS;
         default:
             parserLogger.log(Level.WARNING, "An invalid statistic period error is caught for the given parameter: "
                     + parameter);
             throw new StatsInvalidPeriodException();
         }
-        return period;
     }
 
-    //@@author paullowse
     public static int parseStatsNumberTag(String parameter) throws EntryNumberNotNumericException,
             StatsInvalidNumberException {
         int statsNumber;
@@ -587,7 +580,6 @@ public class ParameterParser {
         }
         return statsNumber;
     }
-
 
     //@@author chinhan99
 
