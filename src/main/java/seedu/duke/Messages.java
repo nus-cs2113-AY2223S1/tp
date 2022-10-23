@@ -139,6 +139,8 @@ public class Messages {
 
     /* Check property/client related Error Messages */
 
+    public static final String MESSAGE_CHECK_PROPERTY = "Showing check results for this property:";
+
     public static final String MESSAGE_CHECK_PROPERTY_RESULT = "Here are the tenants renting this property:";
 
     public static final String MESSAGE_CHECK_PROPERTY_WRONG_FORMAT = "OOPS!! To check property, please use the "
