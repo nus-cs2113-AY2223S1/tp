@@ -35,10 +35,17 @@ public class Messages {
     public static final String TARGET_MANAGER_ERROR_TARGET_NOT_FOUND = ""
             + "The target is not found.";
 
-    //region Defines messages for RecurringPaymentManager.
+    /**
+     * Defines messages for {@link seedu.moneygowhere.data.income.IncomeManager}.
+     */
+    public static final String INCOME_MANAGER_ERROR_INCOME_NOT_FOUND = ""
+            + "The income is not found.";
+
+    /**
+     * Defines messages for {@link seedu.moneygowhere.data.recurringpayments.RecurringPaymentManager}.
+     */
     public static final String RECURRING_PAYMENT_MANAGER_RECURRING_PAYMENT_NOT_FOUND = ""
             + "The recurring payment is not found.";
-    //endregion
 
     /**
      * Defines messages for {@link seedu.moneygowhere.storage.LocalStorage}.
@@ -50,10 +57,17 @@ public class Messages {
     public static final String LOCAL_STORAGE_ERROR_CORRUPTED_OR_EMPTY_LOAD_FILE = ""
             + "The load file is empty or corrupted...\n"
             + "Please ensure the load file is not modified if you have a load file.";
+    public static final String LOCAL_STORAGE_ERROR_INVALID_CHARACTER_IN_SAVE_DATA = ""
+            + "There is an invalid character in the inputs\n"
+            + "Failed to save data.";
     public static final String LOCAL_STORAGE_EXPENSE_ERROR_IN_LOAD_FILE = ""
             + "There is an error in load file found...\n"
             + "Please ensure the file is the correct load file without modifications to it.\n"
             + "Error is found in expense id: ";
+    public static final String LOCAL_STORAGE_RECURRING_PAYMENT_ERROR_IN_LOAD_FILE = ""
+            + "There is an error in load file found...\n"
+            + "Please ensure the file is the correct load file without modifications to it.\n"
+            + "Error is found in Recurring Payment id: ";
     public static final String LOCAL_STORAGE_SORTCONFIG_ERROR_IN_LOAD_FILE = ""
             + "There is no sorting configuration in load file found...\n"
             + "Please ensure the file is the correct load file without modifications to it.";
@@ -66,6 +80,9 @@ public class Messages {
             + "There is an error in writing data to save file.";
     public static final String LOCAL_STORAGE_MERGE_EXTERNAL_DATA_SUCCESSFUL = ""
             + "External File loaded successfully :)";
+    public static final String LOCAL_STORAGE_MERGE_EXTERNAL_DATA_WRONG_FILE_FORMAT = ""
+            + "Wrong file format given\n"
+            + "Please provide path to your xml file with the save data.";
 
     /**
      * Defines messages for {@link seedu.moneygowhere.currency.CurrencyApi }.
@@ -86,6 +103,9 @@ public class Messages {
     /**
      * Defines messages for {@link seedu.moneygowhere.data.currency.CurrencyManager}.
      */
+    public static final String CURRENCY_MANAGER_RATES_NOT_FOUND = ""
+            + "There may be an error obtaining the updated Exchange Rate for your desired currency. " + '\n'
+            + "Please enter the exchange rate manually.";
     public static final String CURRENCY_MANAGER_CURRENCY_NOT_FOUND = ""
             + "Currency not found. Please try again.";
 
@@ -123,6 +143,10 @@ public class Messages {
             + ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_CURRENCY
             + " "
             + ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_CURRENCY_LONG.toUpperCase()
+            + "] [-"
+            + ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT
+            + " "
+            + ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_DESC
             + "]";
 
     public static final String CONSOLE_MESSAGE_COMMAND_ADD_EXPENSE_SUCCESS = ""
@@ -209,6 +233,10 @@ public class Messages {
             + ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_CURRENCY
             + " "
             + ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_CURRENCY_LONG.toUpperCase()
+            + "] [-"
+            + ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT
+            + " "
+            + ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_DESC
             + "]";
     public static final String CONSOLE_MESSAGE_COMMAND_EDIT_EXPENSE_SUCCESS = ""
             + "The expense was edited successfully.";
@@ -257,7 +285,12 @@ public class Messages {
             + " -"
             + ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY_ARG_CURRENCY
             + " "
-            + ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY_ARG_CURRENCY_LONG.toUpperCase();
+            + ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY_ARG_CURRENCY_LONG.toUpperCase()
+            + " [-"
+            + ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY_ARG_RATE
+            + " "
+            + ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY_ARG_RATE_LONG.toUpperCase()
+            + "]";
     public static final String CONSOLE_MESSAGE_COMMAND_CONVERT_CURRENCY_SUCCESS = ""
             + "The expense's currency was changed successfully.";
     public static final String CONSOLE_ERROR_COMMAND_CONVERT_CURRENCY_INVALID = ""
@@ -395,11 +428,78 @@ public class Messages {
             + "]";
     public static final String CONSOLE_MESSAGE_COMMAND_ADD_INCOME_SUCCESS =
             "The income was added successfully.";
-    public static final String INCOME_MANAGER_ERROR_INCOME_NOT_FOUND = ""
-            + "The income is not found.";
     public static final String CONSOLE_ERROR_COMMAND_ADD_INCOME_INVALID = ""
             + "The arguments entered are invalid. "
             + CONSOLE_COMMAND_ADD_INCOME_SYNTAX;
+
+    /**
+     * Defines messages for console command View-Income.
+     */
+    public static final String CONSOLE_COMMAND_VIEW_INCOME_SYNTAX = ""
+            + "SYNTAX: "
+            + ConsoleParserConfigurations.COMMAND_VIEW_INCOME
+            + " [-"
+            + ConsoleParserConfigurations.COMMAND_VIEW_INCOME_ARG_INCOME_INDEX
+            + " "
+            + ConsoleParserConfigurations.COMMAND_VIEW_INCOME_ARG_INCOME_INDEX_LONG.toUpperCase()
+            + "]";
+
+    public static final String CONSOLE_ERROR_COMMAND_VIEW_INCOME_INVALID = ""
+            + "The arguments entered are invalid. "
+            + CONSOLE_COMMAND_VIEW_INCOME_SYNTAX;
+
+    public static final String COMMAND_VIEW_INCOME_EMPTY_LIST = ""
+            + "Your list of incomes is empty. ";
+
+    /**
+     * Defines messages for console command Delete-Income.
+     */
+    public static final String CONSOLE_COMMAND_DELETE_INCOME_SYNTAX = ""
+            + "SYNTAX: "
+            + ConsoleParserConfigurations.COMMAND_DELETE_INCOME
+            + " -"
+            + ConsoleParserConfigurations.COMMAND_DELETE_INCOME_ARG_INCOME_INDEX
+            + " "
+            + ConsoleParserConfigurations.COMMAND_DELETE_INCOME_ARG_INCOME_INDEX_LONG.toUpperCase();
+    public static final String CONSOLE_MESSAGE_COMMAND_DELETE_INCOME_SUCCESS = ""
+            + "The income was deleted successfully.";
+    public static final String CONSOLE_ERROR_COMMAND_DELETE_INCOME_INVALID = ""
+            + "The arguments entered are invalid. "
+            + CONSOLE_COMMAND_DELETE_INCOME_SYNTAX;
+
+
+    /**
+     * Defines messages for console command Edit-Income.
+     */
+    public static final String CONSOLE_COMMAND_EDIT_INCOME_SYNTAX = ""
+            + "SYNTAX: "
+            + ConsoleParserConfigurations.COMMAND_EDIT_INCOME
+            + " -"
+            + ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_INCOME_INDEX
+            + " "
+            + ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_INCOME_INDEX_LONG.toUpperCase()
+            + " [-"
+            + ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_NAME
+            + " "
+            + ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_NAME_LONG.toUpperCase()
+            + "] [-"
+            + ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_DATE_TIME
+            + " "
+            + Configurations.CONSOLE_INTERFACE_DATE_TIME_INPUT_FORMAT
+            + "] [-"
+            + ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_DESCRIPTION
+            + " "
+            + ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_DESCRIPTION_LONG.toUpperCase()
+            + "] [-"
+            + ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_AMOUNT
+            + " "
+            + ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_AMOUNT_LONG.toUpperCase()
+            + "]";
+    public static final String CONSOLE_MESSAGE_COMMAND_EDIT_INCOME_SUCCESS = ""
+            + "The income was edited successfully.";
+    public static final String CONSOLE_ERROR_COMMAND_EDIT_INCOME_INVALID = ""
+            + "The arguments entered are invalid. "
+            + CONSOLE_COMMAND_EDIT_INCOME_SYNTAX;
 
     /**
      * Defines messages for console command Add-RecurringPayment.
@@ -423,6 +523,14 @@ public class Messages {
             + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_DESCRIPTION
             + " "
             + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_DESCRIPTION_LONG.toUpperCase()
+            + "] [-"
+            + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_CATEGORY
+            + " "
+            + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_CATEGORY_LONG.toUpperCase()
+            + "] [-"
+            + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_CURRENCY
+            + " "
+            + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_CURRENCY_LONG.toUpperCase()
             + "]";
     public static final String CONSOLE_MESSAGE_COMMAND_ADD_RECURRING_PAYMENT_SUCCESS = ""
             + "The recurring payment was added successfully.";
@@ -486,6 +594,14 @@ public class Messages {
             + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_DESCRIPTION
             + " "
             + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_DESCRIPTION_LONG.toUpperCase()
+            + "] [-"
+            + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_CATEGORY
+            + " "
+            + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_CATEGORY_LONG.toUpperCase()
+            + "] [-"
+            + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_CURRENCY
+            + " "
+            + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_CURRENCY_LONG.toUpperCase()
             + "]";
     public static final String CONSOLE_MESSAGE_COMMAND_EDIT_RECURRING_PAYMENT_SUCCESS = ""
             + "The recurring payment was edited successfully.";

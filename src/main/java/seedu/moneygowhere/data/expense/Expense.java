@@ -15,6 +15,7 @@ public class Expense {
     private String category;
     private String remarks;
     private String currency;
+    private String modeOfPayment;
 
     public Expense(String name,
                    LocalDateTime dateTime,
@@ -22,7 +23,14 @@ public class Expense {
                    BigDecimal amount,
                    String category,
                    String remarks,
-                   String currency) {
+                   String currency,
+                   String modeOfPayment) {
+        assert !(currency == null || currency.isEmpty() || currency.trim().isEmpty()) :
+                "There must be a currency";
+        assert !(name == null || name.isEmpty() || name.trim().isEmpty()) :
+                "There must be a name";
+        assert amount != null : "There must be an amount";
+        assert dateTime != null : "There must be a date and time";
         this.name = name;
         this.dateTime = dateTime;
         this.description = description;
@@ -30,6 +38,7 @@ public class Expense {
         this.category = category;
         this.remarks = remarks;
         this.currency = currency;
+        this.modeOfPayment = modeOfPayment;
     }
 
     public String getName() {
@@ -86,5 +95,13 @@ public class Expense {
 
     public void setCurrency(String currency) {
         this.currency = currency;
+    }
+
+    public String getModeOfPayment() {
+        return modeOfPayment;
+    }
+
+    public void setModeOfPayment(String modeOfPayment) {
+        this.modeOfPayment = modeOfPayment;
     }
 }

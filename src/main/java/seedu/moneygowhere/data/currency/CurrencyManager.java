@@ -4,6 +4,7 @@ import seedu.moneygowhere.common.Configurations;
 import seedu.moneygowhere.common.Messages;
 import seedu.moneygowhere.data.expense.Expense;
 import seedu.moneygowhere.exceptions.CurrencyInvalidException;
+import seedu.moneygowhere.exceptions.CurrencyRatesNotFoundException;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -25,9 +26,12 @@ public class CurrencyManager {
         exchangeRates.put(currencyCode, rate);
     }
 
-    public boolean hasCurrency(String currency) throws CurrencyInvalidException {
+    public boolean hasCurrency(String currency) throws CurrencyInvalidException, CurrencyRatesNotFoundException {
         if (exchangeRates.containsKey(currency)) {
             return true;
+        }
+        if (exchangeRates.isEmpty()) {
+            throw new CurrencyRatesNotFoundException(Messages.CURRENCY_MANAGER_RATES_NOT_FOUND);
         }
         throw new CurrencyInvalidException(Messages.CURRENCY_MANAGER_CURRENCY_NOT_FOUND);
     }
@@ -56,6 +60,12 @@ public class CurrencyManager {
             return amountInSgd;
         }
         BigDecimal amountInNewCurrency = convertToNewCurrency(amountInSgd, newCurrency);
+        return amountInNewCurrency;
+    }
+
+    public BigDecimal exchangeCurrencyWithRate(Expense expense, BigDecimal rate) {
+        BigDecimal amount = expense.getAmount();
+        BigDecimal amountInNewCurrency = amount.multiply(rate);
         return amountInNewCurrency;
     }
 }

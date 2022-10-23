@@ -14,7 +14,7 @@ public class Configurations {
      * Defines configuration parameters for {@link seedu.moneygowhere.storage.LocalStorage}.
      */
     public static final String LOCAL_STORAGE_DIRECTORY = "./Memory/";
-    private static final String LOCAL_STORAGE_DATA_FILE = "expenses.xml";
+    private static final String LOCAL_STORAGE_DATA_FILE = "MoneyGoWhereData.xml";
     public static final String LOCAL_STORAGE_DATA_FILE_PATH = LOCAL_STORAGE_DIRECTORY + LOCAL_STORAGE_DATA_FILE;
 
     /**
