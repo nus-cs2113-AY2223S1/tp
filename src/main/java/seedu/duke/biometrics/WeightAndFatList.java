@@ -17,6 +17,13 @@ public class WeightAndFatList {
         weightAndFatArrayList.add(weightAndFat);
     }
 
+    public void removeWeightAndFat(int index) throws IllegalValueException {
+        if (index < 0 || index >= weightAndFatArrayList.size()) {
+            throw new IllegalValueException("Weight and fat record does not exist");
+        }
+        weightAndFatArrayList.remove(index);
+    }
+
     public int getSize() {
         return weightAndFatArrayList.size();
     }
