@@ -48,7 +48,7 @@ public class PrescriptionList {
     }
 
     public void viewPatientPrescription(UI ui, String patientId) {
-        if (isEmpty() || hasPatientPrescription(patientId)) {
+        if (isEmpty() || !hasPatientPrescription(patientId)) {
             ui.printNoMatchingPrescriptionMessage();
             return;
         }
@@ -65,7 +65,7 @@ public class PrescriptionList {
     }
 
     public void viewActivePatientPrescription(UI ui, String patientId) {
-        if (isEmpty() || hasPatientPrescription(patientId)) {
+        if (isEmpty() || !hasActivePatientPrescription(patientId)) {
             ui.printNoMatchingActivePrescriptionMessage();
             return;
         }
@@ -111,6 +111,16 @@ public class PrescriptionList {
     }
 
     private boolean hasPatientPrescription(String patientId) {
+        for (Prescription prescription : prescriptionsList) {
+            if (prescription.isMatchedPatient(patientId)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private boolean hasActivePatientPrescription(String patientId) {
         for (Prescription prescription : prescriptionsList) {
             if (prescription.isMatchedPatientActive(patientId)) {
                 return true;
