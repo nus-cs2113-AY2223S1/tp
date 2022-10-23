@@ -2,6 +2,9 @@ package computercomponentchooser;
 
 import java.util.Scanner;
 
+/**
+ * Handles interactions with the User.
+ */
 public class Ui {
     /**
      * A concatenation of strings that visually represents the word ComputerComponentChooser.
@@ -30,6 +33,12 @@ public class Ui {
 
     private final EditParser editParser;
 
+    /**
+     * Initializes a new Ui object.
+     *
+     * @param parser The parser to be used.
+     * @param editParser The editParser to be used.
+     */
     public Ui(Parser parser, EditParser editParser) {
         this.parser = parser;
         this.editParser = editParser;
@@ -49,6 +58,9 @@ public class Ui {
         System.out.println("Hello from\n" + LOGO);
     }
 
+    /**
+     * Prints the welcome message.
+     */
     void startSession() {
 
         Ui.printLogo();
