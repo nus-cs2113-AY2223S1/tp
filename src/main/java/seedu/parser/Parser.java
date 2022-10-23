@@ -6,10 +6,16 @@ import seedu.data.CarparkList;
 import seedu.exception.InvalidCommandException;
 import seedu.exception.NoCommandArgumentException;
 import seedu.exception.UnneededArgumentsException;
+import seedu.files.Favourite;
+import seedu.files.FileStorage;
 import seedu.parser.search.Sentence;
 
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static seedu.common.CommonFiles.FAVOURITE_DIRECTORY;
+import static seedu.common.CommonFiles.FAVOURITE_FILE;
 
 
 /**
@@ -19,6 +25,8 @@ public class Parser {
 
     private CarparkList carparkList;
     private Api api;
+    private Favourite favourite;
+    private ArrayList<String> favouriteList;
 
     /**
      * Used for the initial separation of command word and arguments
@@ -34,9 +42,10 @@ public class Parser {
      * @param carparkList carpark List
      * @return the command based on user input
      */
-    public Command parseCommand(String input, Api api, CarparkList carparkList) {
+    public Command parseCommand(String input, Api api, CarparkList carparkList, Favourite favourite) {
         this.api = api;
         this.carparkList = carparkList;
+        this.favourite = favourite;
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(input.trim());
         if (!matcher.matches()) {
             return new InvalidCommand("Invalid Command");
@@ -77,7 +86,8 @@ public class Parser {
     }
 
     private Command prepareFavourite(String arguments) {
-        return new FavouriteCommand();
+        final String CarparkID = arguments.trim();
+        return new FavouriteCommand(CarparkID, favourite, );
     }
 
     /**
