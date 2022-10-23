@@ -177,7 +177,7 @@ public class AddCommand extends Command {
      * @throws MaximumTransactionCountException If the transaction list capacity has been reached.
      */
     private static void checkTransactionCapacity(TransactionList transactions) throws MaximumTransactionCountException {
-        // The expected maximum number of transactions allowed to store is only one million.
+        // The expected maximum number of transactions allowed to store is only one million
         if (transactions.size() == MAX_TRANSACTIONS_COUNT) {
             addLogger.log(Level.WARNING, "A transaction is attempted to be stored beyond its capacity");
             throw new MaximumTransactionCountException();

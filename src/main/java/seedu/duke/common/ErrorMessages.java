@@ -27,7 +27,11 @@ public enum ErrorMessages {
             + "To preserve data, please STOP the program and edit your data file correctly."),
     ERROR_STORAGE_WRITE("Unable to write to Duke.txt. Please save your current Duke.txt file and restart Moolah"),
     ERROR_MAXIMUM_TRANSACTION_COUNT_REACHED("Unable to add transaction. "
-            + "The maximum allowed transaction size (1000000) has been reached.");
+            + "The maximum allowed transaction size (1000000) has been reached."),
+
+    ERROR_INVALID_BUDGET("Invalid budget amount, please ensure your amount is in positive whole number"
+            + " of valid range only!"),
+    ERROR_DUPLICATE_BUDGET("Provided budget is the same as the originally set value.");
 
     //@@author chydarren
     public final String message;

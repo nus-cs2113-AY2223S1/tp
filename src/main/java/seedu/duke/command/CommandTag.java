@@ -14,4 +14,5 @@ public class CommandTag {
     public static final String COMMAND_TAG_GLOBAL_PERIOD = "p/";
     public static final String COMMAND_TAG_HELP_OPTION = "o/";
     public static final String COMMAND_TAG_STATS_TYPE = "s/";
+    public static final String COMMAND_TAG_BUDGET_AMOUNT = "b/";
 }

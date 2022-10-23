@@ -7,12 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 import static seedu.duke.common.DateFormats.DATE_OUTPUT_PATTERN;
-import static seedu.duke.common.InfoMessages.INFO_CURRENT_BUDGET;
-import static seedu.duke.common.InfoMessages.INFO_DIVIDER;
-import static seedu.duke.common.InfoMessages.INFO_GREET;
-import static seedu.duke.common.InfoMessages.INFO_HELP_GREET;
-import static seedu.duke.common.InfoMessages.INFO_HELP_PROMPT;
-import static seedu.duke.common.InfoMessages.INFO_REMAINING_BUDGET;
+import static seedu.duke.common.InfoMessages.*;
 
 public class Ui {
     //@@author chydarren
@@ -136,16 +131,16 @@ public class Ui {
         printMessages(message, transactionDetails);
     }
 
-    //@@author wcwy
+    //@author wcwy
 
     /**
-     * Returns the today's date in MMM dd yyyy format.
+     * Prepares the messages to be displayed to the user when a new budget is set.
      *
-     * @return Formatted today's date
+     * @param currentBudget The string representation of the new budget set.
      */
-    public static String showDateOfTheDay() {
-        LocalDate todayDate = LocalDate.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_OUTPUT_PATTERN.toString());
-        return todayDate.format(formatter);
+    public static void showSetBudgetAcknowledgementMessage(String currentBudget) {
+        printMessages(INFO_BUDGET_SET_SUCCESSFUL.toString(), INFO_CURRENT_BUDGET + currentBudget);
     }
+
+
 }
