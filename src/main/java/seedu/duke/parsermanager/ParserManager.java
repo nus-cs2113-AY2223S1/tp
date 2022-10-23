@@ -116,11 +116,14 @@ public class ParserManager {
         case COMMAND_FIND:
             ArrayList<String> findCommandTypeAndFlag = splitCommandAndCommandType(commandDetail);
             String findSubCommandType = findCommandTypeAndFlag.get(SUB_COMMAND_INDEX);
-            boolean isClient = findSubCommandType.equals(CLIENT_FLAG);
+            boolean isFindClient = findSubCommandType.equals(CLIENT_FLAG);
+            boolean isFindProperty = findSubCommandType.equals(PROPERTY_FLAG);
 
             String findCommandDescription = findCommandTypeAndFlag.get(COMMAND_DESCRIPTION_INDEX);
-            if (isClient) {
+            if (isFindClient) {
                 return new ParseFindClient(findCommandDescription);
+            } else if (isFindProperty) {
+                return new ParseFindProperty(findCommandDescription);
             } else {
                 throw new UndefinedSubCommandTypeException(MESSAGE_MISSING_SUB_COMMAND_TYPE);
             }
