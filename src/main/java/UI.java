@@ -108,8 +108,14 @@ public class UI {
         printLine();
     }
 
+    public static void printErrorMessage(String errorMessage) {
+        printLine();
+        System.out.println("\t" + errorMessage);
+        printLine();
+    }
+
     public void printPatientEditedMessage(Patient patient) {
-        System.out.print("Alright, I've modified the details of the patient!");
+        System.out.print("Alright, I've modified the details of the patient! ");
         System.out.println("Here are the new details of the patient: ");
         printLine();
         System.out.println(patient);
@@ -168,7 +174,7 @@ public class UI {
         System.out.println("Goodbye!");
     }
 
-    public void printLine() {
+    public static void printLine() {
         System.out.print("\t");
         for (int i = 0; i < 60; i++) {
             System.out.print("_");

@@ -7,6 +7,10 @@ public class PrescriptionList {
         prescriptionsList = new ArrayList<>();
     }
 
+    public ArrayList<Prescription> getPrescriptions() {
+        return prescriptionsList;
+    }
+
     public void add(UI ui, String patientId, String medicine, String dosage, String timeInterval) {
         assert patientId != null : "ID should not be null";
         assert medicine != null : "medicine should not be null";
@@ -26,6 +30,12 @@ public class PrescriptionList {
         Prescription prescription = new Prescription(patientId, medicine, dosage, timeInterval, isActive);
         prescriptionsList.add(prescription);
         ui.printAddPrescriptionMessage(prescription.toString());
+    }
+
+    public void loadPrescription(String patientID,
+                                 String medicine, String dosage, String timeInterval, boolean active) {
+        Prescription prescription = new Prescription(patientID, medicine, dosage, timeInterval, active);
+        prescriptionsList.add(prescription);
     }
 
     public boolean isEmpty() {

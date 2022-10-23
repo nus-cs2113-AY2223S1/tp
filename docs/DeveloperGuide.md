@@ -4,6 +4,8 @@
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
+Storage class and its functions are largely adapted from Dhanish's IP on Duke.
+
 ## Design & implementation
 
 The Patient and PatientList classes are used in conjunction to manage patients, and the list of patients. Each patient has a name,
