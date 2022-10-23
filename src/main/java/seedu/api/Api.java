@@ -41,6 +41,9 @@ public class Api {
     /**
      * Constructor to create a new client.
      * Initializes the storage class for file writing purposes.
+     *
+     * @param file The file name where the storage file is stored.
+     * @param directory The directory path where the storage file is stored.
      */
     public Api(String file, String directory) {
         this.client = HttpClient.newHttpClient();
@@ -50,6 +53,8 @@ public class Api {
 
     /**
      * Builds the API HTTP GET request header and body.
+     *
+     * @param skip The number of data sets to skip.
      */
     private void generateHttpRequestCarpark(int skip) {
         String authHeaderName = "AccountKey";
@@ -61,6 +66,9 @@ public class Api {
 
     /**
      * Sends the HTTP GET request to the API endpoint asynchronously.
+     *
+     * @param skip The number of data sets to skip.
+     * @param index The index to insert the responseFuture call.
      */
     public void asyncExecuteRequest(int skip, int index) {
         generateHttpRequestCarpark(skip);
@@ -70,6 +78,7 @@ public class Api {
     /**
      * Waits (for at most 1s) and receive response from API endpoint. It breaks the asynchronous part of the code.
      *
+     * @param index The index to get the response from the responseFutureList
      * @return JSON string response from the API.
      * @throws UnauthorisedAccessApiException if API key is invalid.
      * @throws ServerNotReadyApiException if Server request timeout.
@@ -93,9 +102,10 @@ public class Api {
     }
 
     /**
-     * Execute the data fetching subroutine. Subroutine will repeat for a certain number of time
-     * and throws an exception if no response is received.
+     * Execute the data fetching subroutine for a specific index from the asynchronous call.
+     * Subroutine will repeat for a certain number of time and throws an exception if no response is received.
      *
+     * @param index The index to get the response from.
      * @throws FileWriteException if data fails to write.
      * @throws EmptyResponseException if empty/invalid response received.
      * @throws UnauthorisedAccessApiException if access not granted.
@@ -123,7 +133,7 @@ public class Api {
     }
 
     /**
-     * Synchronous version of data fetching from the API.
+     * Synchronous version of multiple data fetching from the API.
      *
      * @throws FileWriteException if data fails to write.
      * @throws EmptyResponseException if empty/invalid response received.
@@ -148,6 +158,12 @@ public class Api {
         storage.writeDataToFile(result);
     }
 
+    /**
+     * Process the data from the API to adhere to concatenating format.
+     *
+     * @param data raw data from the API.
+     * @return The processed data.
+     */
     public String processData(String data) {
         String[] dataSplit = data.split("\"value\":\\[",2);
         dataSplit = dataSplit[1].split("]}",2);
@@ -222,7 +238,6 @@ public class Api {
      * @param directory directory where the file is stored.
      * @param toloadDefault to load default api key or not.
      * @throws NoFileFoundException If directory / file is not found.
-     * @throws EmptySecretFileException If the file is empty.
      */
     public void loadApiKey(String file, String directory, boolean toloadDefault)
             throws NoFileFoundException {
