@@ -35,10 +35,17 @@ public class Messages {
     public static final String TARGET_MANAGER_ERROR_TARGET_NOT_FOUND = ""
             + "The target is not found.";
 
-    //region Defines messages for RecurringPaymentManager.
+    /**
+     * Defines messages for {@link seedu.moneygowhere.data.income.IncomeManager}.
+     */
+    public static final String INCOME_MANAGER_ERROR_INCOME_NOT_FOUND = ""
+            + "The income is not found.";
+
+    /**
+     * Defines messages for {@link seedu.moneygowhere.data.recurringpayments.RecurringPaymentManager}.
+     */
     public static final String RECURRING_PAYMENT_MANAGER_RECURRING_PAYMENT_NOT_FOUND = ""
             + "The recurring payment is not found.";
-    //endregion
 
     /**
      * Defines messages for {@link seedu.moneygowhere.storage.LocalStorage}.
@@ -421,11 +428,78 @@ public class Messages {
             + "]";
     public static final String CONSOLE_MESSAGE_COMMAND_ADD_INCOME_SUCCESS =
             "The income was added successfully.";
-    public static final String INCOME_MANAGER_ERROR_INCOME_NOT_FOUND = ""
-            + "The income is not found.";
     public static final String CONSOLE_ERROR_COMMAND_ADD_INCOME_INVALID = ""
             + "The arguments entered are invalid. "
             + CONSOLE_COMMAND_ADD_INCOME_SYNTAX;
+
+    /**
+     * Defines messages for console command View-Income.
+     */
+    public static final String CONSOLE_COMMAND_VIEW_INCOME_SYNTAX = ""
+            + "SYNTAX: "
+            + ConsoleParserConfigurations.COMMAND_VIEW_INCOME
+            + " [-"
+            + ConsoleParserConfigurations.COMMAND_VIEW_INCOME_ARG_INCOME_INDEX
+            + " "
+            + ConsoleParserConfigurations.COMMAND_VIEW_INCOME_ARG_INCOME_INDEX_LONG.toUpperCase()
+            + "]";
+
+    public static final String CONSOLE_ERROR_COMMAND_VIEW_INCOME_INVALID = ""
+            + "The arguments entered are invalid. "
+            + CONSOLE_COMMAND_VIEW_INCOME_SYNTAX;
+
+    public static final String COMMAND_VIEW_INCOME_EMPTY_LIST = ""
+            + "Your list of incomes is empty. ";
+
+    /**
+     * Defines messages for console command Delete-Income.
+     */
+    public static final String CONSOLE_COMMAND_DELETE_INCOME_SYNTAX = ""
+            + "SYNTAX: "
+            + ConsoleParserConfigurations.COMMAND_DELETE_INCOME
+            + " -"
+            + ConsoleParserConfigurations.COMMAND_DELETE_INCOME_ARG_INCOME_INDEX
+            + " "
+            + ConsoleParserConfigurations.COMMAND_DELETE_INCOME_ARG_INCOME_INDEX_LONG.toUpperCase();
+    public static final String CONSOLE_MESSAGE_COMMAND_DELETE_INCOME_SUCCESS = ""
+            + "The income was deleted successfully.";
+    public static final String CONSOLE_ERROR_COMMAND_DELETE_INCOME_INVALID = ""
+            + "The arguments entered are invalid. "
+            + CONSOLE_COMMAND_DELETE_INCOME_SYNTAX;
+
+
+    /**
+     * Defines messages for console command Edit-Income.
+     */
+    public static final String CONSOLE_COMMAND_EDIT_INCOME_SYNTAX = ""
+            + "SYNTAX: "
+            + ConsoleParserConfigurations.COMMAND_EDIT_INCOME
+            + " -"
+            + ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_INCOME_INDEX
+            + " "
+            + ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_INCOME_INDEX_LONG.toUpperCase()
+            + " [-"
+            + ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_NAME
+            + " "
+            + ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_NAME_LONG.toUpperCase()
+            + "] [-"
+            + ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_DATE_TIME
+            + " "
+            + Configurations.CONSOLE_INTERFACE_DATE_TIME_INPUT_FORMAT
+            + "] [-"
+            + ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_DESCRIPTION
+            + " "
+            + ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_DESCRIPTION_LONG.toUpperCase()
+            + "] [-"
+            + ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_AMOUNT
+            + " "
+            + ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_AMOUNT_LONG.toUpperCase()
+            + "]";
+    public static final String CONSOLE_MESSAGE_COMMAND_EDIT_INCOME_SUCCESS = ""
+            + "The income was edited successfully.";
+    public static final String CONSOLE_ERROR_COMMAND_EDIT_INCOME_INVALID = ""
+            + "The arguments entered are invalid. "
+            + CONSOLE_COMMAND_EDIT_INCOME_SYNTAX;
 
     /**
      * Defines messages for console command Add-RecurringPayment.
