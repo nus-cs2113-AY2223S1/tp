@@ -12,18 +12,14 @@ import java.util.logging.Level;
 //TODO: Better Exception check
 public class TextFileParser {
 
-    private static Logger logger = Logger.getLogger(TextFileParser.class.getName());
-
-    private enum LineType {
-        TITLE, DESCRIPTION, INGREDIENT, STEP, NORMAL
-    }
+    private static final Logger logger = Logger.getLogger(TextFileParser.class.getName());
 
     public TextFileParser() {
 
     }
 
     /**
-     * Parse the text file into a correct recipe
+     * Parse the text file into a correct recipe.
      */
     public Recipe parseTextToRecipe(String text) throws ParseFileException {
         Recipe recipe = new Recipe();
@@ -61,7 +57,6 @@ public class TextFileParser {
         }
         return recipe;
     }
-
 
     private LineType checkLineType(String line) throws ParseFileException {
         String[] parsedWords = line.split(" ");
@@ -105,7 +100,7 @@ public class TextFileParser {
     private Ingredient parsedIngredient(String line) throws ParseFileException {
         try {
             String[] parsed = line.split("/", 3);
-            String name = parsed[0].split("\\.",2)[1].trim();
+            String name = parsed[0].split("\\.", 2)[1].trim();
             double amount = Double.parseDouble(parsed[1]);
             return new Ingredient(name, amount, parsed[2]);
         } catch (Exception e) {
@@ -119,7 +114,11 @@ public class TextFileParser {
         return parsed[1].trim();
     }
 
-    private String removeIndex(String line){
+    private String removeIndex(String line) {
         return "";
+    }
+
+    private enum LineType {
+        TITLE, DESCRIPTION, INGREDIENT, STEP, NORMAL
     }
 }

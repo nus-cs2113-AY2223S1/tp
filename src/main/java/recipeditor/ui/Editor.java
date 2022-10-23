@@ -73,8 +73,7 @@ public class Editor extends JFrame implements ActionListener {
                 if (JOptionPane.showConfirmDialog(frame, "Do you want to save?", "Closing", JOptionPane.YES_NO_OPTION,
                         JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
                     state = EditorState.SAVE;
-                }
-                else {
+                } else {
                     state = EditorState.EXIT;
                 }
             }
@@ -90,11 +89,11 @@ public class Editor extends JFrame implements ActionListener {
             this.state = EditorState.SAVE;
             // Save to temporary
             File temp = new File(Storage.TEMPORARY_PATH);
-            try{
+            try {
                 FileWriter writer = new FileWriter(Storage.TEMPORARY_PATH);
                 writer.write(textArea.getText());
                 writer.close();
-            } catch (Exception ex){
+            } catch (Exception ex) {
                 ex.printStackTrace();
             }
             frame.dispose();
@@ -117,28 +116,28 @@ public class Editor extends JFrame implements ActionListener {
             }
         }
         logger.log(Level.INFO, "Editor State: " + this.state);
-        return (state.equals(EditorState.SAVE))? true : false;
+        return (state.equals(EditorState.SAVE)) ? true : false;
     }
 
-    /** Load file from the path to the editor*/
-    private void loadFile(String path){
+    /**
+     * Load file from the path to the editor.
+     */
+    private void loadFile(String path) {
         File textFile = new File(path);
         Scanner scan = null;
-        try{ 
+        try {
             scan = new Scanner(textFile);
-            while(scan.hasNext()){
-                String line = scan.nextLine()+"\n";
+            while (scan.hasNext()) {
+                String line = scan.nextLine() + "\n";
                 textArea.append(line);
             }
-        }
-        catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
-        }
-        finally{
+        } finally {
             scan.close();
         }
     }
 
-    
+
 }
 

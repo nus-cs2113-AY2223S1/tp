@@ -30,41 +30,41 @@ public class Parser {
         String commandWord = parsed[0].toLowerCase();
 
         switch (commandWord) {
-            case AddCommand.COMMAND_TYPE:
-                return parseAddCommand();
-            case ListCommand.COMMAND_TYPE:
-                return new ListCommand();
-            case ExitCommand.COMMAND_TYPE:
-                return new ExitCommand();
-            case DeleteCommand.COMMAND_TYPE:
-                return null;
-            case EditCommand.COMMAND_TYPE:
-                return parseEditCommand(parsed);
-            case ViewCommand.COMMAND_TYPE:
-                return parseListAlterCommand(parsed, commandWord);
-            case FindCommand.COMMAND_TYPE:
-                return parseFindCommand(parsed);
-            default:
-                return new InvalidCommand();
+        case AddCommand.COMMAND_TYPE:
+            return parseAddCommand();
+        case ListCommand.COMMAND_TYPE:
+            return new ListCommand();
+        case ExitCommand.COMMAND_TYPE:
+            return new ExitCommand();
+        case DeleteCommand.COMMAND_TYPE:
+            return null;
+        case EditCommand.COMMAND_TYPE:
+            return parseEditCommand(parsed);
+        case ViewCommand.COMMAND_TYPE:
+            return parseListAlterCommand(parsed, commandWord);
+        case FindCommand.COMMAND_TYPE:
+            return parseFindCommand(parsed);
+        default:
+            return new InvalidCommand();
         }
     }
 
     private static Command parseAddCommand() {
         boolean saveToTemp = new Editor().enterEditor(Storage.TEMPLATE_PATH);
-        boolean exitLoop = (saveToTemp)? false : true;
+        boolean exitLoop = (saveToTemp) ? false : true;
         boolean valid = false;
         Recipe addRecipe = new Recipe();
-        while(!exitLoop){
-            try{
+        while (!exitLoop) {
+            try {
                 String content = Storage.loadFileContent(Storage.TEMPORARY_PATH);
                 addRecipe = new TextFileParser().parseTextToRecipe(content);
                 valid = true;
                 exitLoop = true;
-            } catch (ParseFileException |FileNotFoundException e){
+            } catch (ParseFileException | FileNotFoundException e) {
                 Ui.showMessage(e.getMessage());
                 Ui.showMessage("Do you want to ABORT? (Y/N)");
-                String text  = Ui.readInput();
-                if(text.equalsIgnoreCase("n")){
+                String text = Ui.readInput();
+                if (text.equalsIgnoreCase("n")) {
                     new Editor().enterEditor(Storage.TEMPORARY_PATH);
                 } else {
                     exitLoop = true;
@@ -72,7 +72,7 @@ public class Parser {
             }
         }
         return new AddCommand(valid, addRecipe);
-    } 
+    }
 
     private static Command parseListAlterCommand(String[] parsed, String commandWord) {
         if (parsed.length == 2) {

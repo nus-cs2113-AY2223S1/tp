@@ -19,18 +19,18 @@ import recipeditor.ui.Ui;
 
 public class Storage {
 
-    private static final String DATA_STORAGE_PATH = "./Storage/";
-    private static final String DATA_TEMPORARY_PATH = "./Storage/App";
     public static final String TEMPLATE_PATH = "./Storage/App/Template.txt";
     public static final String TEMPORARY_PATH = "./Storage/App/Temp.txt";
-    private final static String TEMPLATE_FILE = "# TITLE \n"
-    +"Example Title \n\n"
-    +"# DESCRIPTION\n"
-    +"Example Description\n\n"
-    +"# INGREDIENTS <ingredient name> / <amount> / <unit> \n"
-    +"1. Example ingredient / 1.2 / example unit \n\n"
-    +"# STEPS \n"
-    +"1. Example step \n";
+    private static final String DATA_STORAGE_PATH = "./Storage/";
+    private static final String DATA_TEMPORARY_PATH = "./Storage/App";
+    private static final String TEMPLATE_FILE = "# TITLE \n"
+            + "Example Title \n\n"
+            + "# DESCRIPTION\n"
+            + "Example Description\n\n"
+            + "# INGREDIENTS <ingredient name> / <amount> / <unit> \n"
+            + "1. Example ingredient / 1.2 / example unit \n\n"
+            + "# STEPS \n"
+            + "1. Example step \n";
 
 
     private static final String RECIPE_NAME_FIELD_TYPE = "Recipe Name";
@@ -38,7 +38,7 @@ public class Storage {
     private static final String RECIPE_INGREDIENTS_FIELD_TYPE = "Recipe Ingredients";
     private static final String RECIPE_STEPS_FIELD_TYPE = "Recipe Steps";
 
-    private static Logger logger = Logger.getLogger("LOGS");
+    private static final Logger logger = Logger.getLogger("LOGS");
 
     public static void createFile(String filePath) {
         try {
@@ -57,7 +57,7 @@ public class Storage {
     }
 
     /**
-     * Create storage folder for recipes and Template files
+     * Create storage folder for recipes and Template files.
      */
     public static void createDataFolder() {
         try {
@@ -96,25 +96,25 @@ public class Storage {
                 String input = s.nextLine();
                 String[] fieldTypeAndData = input.split(": ");
                 switch (fieldTypeAndData[0]) {
-                    case RECIPE_NAME_FIELD_TYPE:
-                        newRecipe.setTitle(fieldTypeAndData[1]);
-                        break;
-                    case RECIPE_DESCRIPTION_FIELD_TYPE:
-                        newRecipe.setDescription(fieldTypeAndData[1]);
-                        break;
-                    case RECIPE_INGREDIENTS_FIELD_TYPE:
-                    case RECIPE_STEPS_FIELD_TYPE:
-                        ArrayList<Ingredient> ingredients = getIngredientsDetails(s);
-                        newRecipe.addIngredients(ingredients);
+                case RECIPE_NAME_FIELD_TYPE:
+                    newRecipe.setTitle(fieldTypeAndData[1]);
+                    break;
+                case RECIPE_DESCRIPTION_FIELD_TYPE:
+                    newRecipe.setDescription(fieldTypeAndData[1]);
+                    break;
+                case RECIPE_INGREDIENTS_FIELD_TYPE:
+                case RECIPE_STEPS_FIELD_TYPE:
+                    ArrayList<Ingredient> ingredients = getIngredientsDetails(s);
+                    newRecipe.addIngredients(ingredients);
 
-                        ArrayList<String> steps = getStepsDetails(s);
-                        newRecipe.addSteps(steps);
-                        RecipeList.addRecipe(newRecipe);
-                        newRecipe = new Recipe();
-                        break;
-                    default:
-                        Ui.showMessage("Error loading recipes from data file");
-                        break;
+                    ArrayList<String> steps = getStepsDetails(s);
+                    newRecipe.addSteps(steps);
+                    RecipeList.addRecipe(newRecipe);
+                    newRecipe = new Recipe();
+                    break;
+                default:
+                    Ui.showMessage("Error loading recipes from data file");
+                    break;
                 }
             }
         } catch (FileNotFoundException e) {
@@ -173,10 +173,8 @@ public class Storage {
     public static void writeRecipeToFile(String filePath, Recipe addedRecipe) {
         try {
             FileWriter fw = new FileWriter(filePath, true);
-            StringBuilder formattedRecipeString = new StringBuilder();
-            formattedRecipeString.append(addedRecipe.getRecipeAttributesFormatted());
-            formattedRecipeString.append(Ui.DIVIDER + "\n");
-            fw.write(formattedRecipeString.toString());
+            String formattedRecipeString = addedRecipe.getRecipeAttributesFormatted() + Ui.DIVIDER + "\n";
+            fw.write(formattedRecipeString);
             fw.close();
         } catch (IOException ioException) {
             Ui.showMessage("Error in loading recipes to data file");
@@ -185,14 +183,14 @@ public class Storage {
 
     private static void templateFile() {
         File file = new File(TEMPLATE_PATH);
-        if (file.exists()){
+        if (file.exists()) {
             Ui.showMessage("Template file exists");
         } else {
             generateTemplateFile();
         }
     }
 
-    private static void generateTemplateFile(){
+    private static void generateTemplateFile() {
         FileWriter fileWrite = null;
         try {
             fileWrite = new FileWriter(TEMPLATE_PATH);
@@ -200,17 +198,17 @@ public class Storage {
             fileWrite.close();
         } catch (IOException e) {
             Ui.showMessage("Template file not generated");
-        } finally{
+        } finally {
             Ui.showMessage("Template file created");
         }
     }
 
-    public static String loadFileContent(String path) throws FileNotFoundException{
+    public static String loadFileContent(String path) throws FileNotFoundException {
         File file = new File(path);
         StringBuilder getContent = new StringBuilder();
 
         Scanner scan = new Scanner(file);
-        while(scan.hasNext()){
+        while (scan.hasNext()) {
             getContent.append(scan.nextLine() + "\n");
         }
         return getContent.toString();
