@@ -9,7 +9,8 @@ import seedu.data.LotType;
  */
 public class CommonData {
     public static final String API_KEY_DEFAULT = "1B+7tBxzRNOtFbTxGcCiYA==";
-    public static final String API_RESPONSE_HEADER = "{\"odata.metadata\":\"http://datamall2.mytransport.sg/ltaodataservice/$metadata#CarParkAvailability\",\"value\":[";
+    public static final String API_RESPONSE_HEADER = "{\"odata.metadata\":\""
+            + "http://datamall2.mytransport.sg/ltaodataservice/$metadata#CarParkAvailability\",\"value\":[";
     public static final String API_RESPONSE_TAIL = "]}";
     public static final HashMap<LotType, String> LOT_TYPE_TO_STRING = new HashMap<>() { {
             put(LotType.CAR, "Cars");

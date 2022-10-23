@@ -1,6 +1,8 @@
 package seedu.api;
 
-import static seedu.common.CommonData.*;
+import static seedu.common.CommonData.API_KEY_DEFAULT;
+import static seedu.common.CommonData.API_RESPONSE_HEADER;
+import static seedu.common.CommonData.API_RESPONSE_TAIL;
 import static seedu.common.CommonFiles.LTA_BASE_URL;
 
 import java.io.IOException;
@@ -88,7 +90,6 @@ public class Api {
             throws UnauthorisedAccessApiException, ServerNotReadyApiException, UnknownResponseApiException {
         String result = "";
         try {
-//            HttpResponse<String> response = responseFuture.get(1000, TimeUnit.MILLISECONDS);
             HttpResponse<String> response = responseFutureList.get(index).get(1000, TimeUnit.MILLISECONDS);
             if (isValidResponse(response.statusCode())) {
                 result = response.body();
@@ -106,11 +107,13 @@ public class Api {
      * Subroutine will repeat for a certain number of time and throws an exception if no response is received.
      *
      * @param index The index to get the response from.
+     * @return String The raw data from the API.
      * @throws FileWriteException if data fails to write.
      * @throws EmptyResponseException if empty/invalid response received.
      * @throws UnauthorisedAccessApiException if access not granted.
      */
-    public String fetchData(int index) throws EmptyResponseException, UnauthorisedAccessApiException, FileWriteException {
+    public String fetchData(int index)
+            throws EmptyResponseException, UnauthorisedAccessApiException, FileWriteException {
         String result = "";
         int fetchTries = FETCH_TRIES;
         do {
@@ -165,8 +168,8 @@ public class Api {
      * @return The processed data.
      */
     public String processData(String data) {
-        String[] dataSplit = data.split("\"value\":\\[",2);
-        dataSplit = dataSplit[1].split("]}",2);
+        String[] dataSplit = data.split("\"value\":\\[", 2);
+        dataSplit = dataSplit[1].split("]}", 2);
         return dataSplit[0];
     }
 
@@ -210,7 +213,7 @@ public class Api {
             isDifferent = false;
         }
         boolean isSuccess = false;
-        asyncExecuteRequest(0,0);
+        asyncExecuteRequest(0, 0);
         try {
             fetchData(0);
             isSuccess = true;
