@@ -90,8 +90,8 @@ public class Parser {
      * @return command to be carried out
      */
     private Command prepareFavourite(String arguments) {
-        final String CarparkID = arguments.trim();
-        return new FavouriteCommand(CarparkID, favourite);
+        final String carparkID = arguments.trim();
+        return new FavouriteCommand(carparkID, favourite);
     }
 
     /**
@@ -101,8 +101,8 @@ public class Parser {
      * @return command to be carried out
      */
     private Command prepareUnfavourite(String arguments) {
-        final String CarparkID = arguments.trim();
-        return new UnfavouriteCommand(CarparkID, favourite);
+        final String carparkID = arguments.trim();
+        return new UnfavouriteCommand(carparkID, favourite);
     }
 
     /**

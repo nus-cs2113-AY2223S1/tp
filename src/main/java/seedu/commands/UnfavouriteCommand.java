@@ -1,7 +1,5 @@
 package seedu.commands;
 
-import java.util.ArrayList;
-
 import seedu.data.Carpark;
 import seedu.data.CarparkList;
 import seedu.exception.FileWriteException;

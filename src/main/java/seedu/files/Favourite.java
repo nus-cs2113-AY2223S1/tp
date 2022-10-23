@@ -11,8 +11,8 @@ import seedu.exception.NoFileFoundException;
  * Represents the 'favourite' class.
  */
 public class Favourite {
+    public static ArrayList<String> favouriteList ;
     private final FileStorage fileStorage;
-    public ArrayList<String> favouriteList;
     private final String directory;
     private final String file;
 
@@ -39,7 +39,7 @@ public class Favourite {
         String[] lines = content.split("\\R");
         ArrayList<String> tempArray = new ArrayList<String>();
         Collections.addAll(tempArray, lines);
-        this.favouriteList = tempArray;
+        favouriteList = tempArray;
     }
 
     /**
