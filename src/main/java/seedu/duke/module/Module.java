@@ -1,6 +1,5 @@
 package seedu.duke.module;
 
-import seedu.duke.Timetable;
 import seedu.duke.module.lessons.Lesson;
 import seedu.duke.data.AttendingManager;
 
@@ -51,10 +50,8 @@ public class Module {
     private List<Lesson> matchLessonTypes(HashMap<String, ArrayList<Lesson>> classifiedLessons) {
         List<Lesson> temp = new ArrayList<>();
         for (ArrayList<Lesson> list : classifiedLessons.values()) {
-            int numberSameType = checkDuplicateLessonNumbers(list);
-            for (int i = 0; i < numberSameType; i++) {
+            for (int i = 0; i < checkDuplicateLessonNumbers(list); i++) {
                 String tempLessonType = list.get(0).getLessonType();
-                //String lessonType = numberSameType == 1 ? tempLessonType : tempLessonType + " " + (i + 1);
                 addToAttendingList(temp, tempLessonType);
             }
         }
@@ -198,26 +195,9 @@ public class Module {
         return null;
     }
 
-    public void replaceAttending(Lesson newLesson) {
-        int indexToSet = 0;
-        for (Lesson lesson : attending) {
-            if (lesson.getLessonType().equals(newLesson.getLessonType())) {
-                break;
-            }
-            indexToSet += 1;
-        }
-        if (indexToSet >= attending.size()) {
-            return;
-        }
-
-        //Setting attending for this module
-        attending.set(indexToSet, newLesson);
-
-        //Saving to AttendingData
+    public void replaceAttending(Lesson newLesson, Integer indexForLesson) {
+        attending.set(indexForLesson, newLesson);
         AttendingManager.setAttending(newLesson, moduleCode);
-
-        //Adding to timetableDict
-        Timetable.addToDict(newLesson, moduleCode);
     }
 
     private HashMap<String, ArrayList<Lesson>> classifyLessons(List<Lesson> lessons) {
