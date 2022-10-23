@@ -139,6 +139,16 @@ public class Messages {
 
     /* Check property/client related Error Messages */
 
+    public static final String MESSAGE_CHECK_CLIENT = "Showing check results for this client:";
+
+    public static final String MESSAGE_CHECK_CLIENT_RESULT = "Here is the property this client is renting:";
+
+    public static final String MESSAGE_CHECK_CLIENT_WRONG_FORMAT = "OOPS!! To check client, please use the "
+            + "following format:\n"
+            + "  check -client ic/INDEX\n"
+            + "Example:\n"
+            + "  check -client ic/5";
+
     public static final String MESSAGE_CHECK_PROPERTY_RESULT = "Here are the tenants renting this property:";
 
     public static final String MESSAGE_CHECK_PROPERTY_WRONG_FORMAT = "OOPS!! To check property, please use the "

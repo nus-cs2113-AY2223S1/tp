@@ -8,6 +8,8 @@ import java.util.Map;
 import java.util.Scanner;
 
 import static seedu.duke.Messages.LINE_BREAK;
+import static seedu.duke.Messages.MESSAGE_CHECK_CLIENT;
+import static seedu.duke.Messages.MESSAGE_CHECK_CLIENT_RESULT;
 import static seedu.duke.Messages.MESSAGE_CHECK_PROPERTY_RESULT;
 import static seedu.duke.Messages.MESSAGE_CLIENT_ADDED;
 import static seedu.duke.Messages.MESSAGE_CLIENT_DELETED;
@@ -233,6 +235,12 @@ public class Ui {
         System.out.println(LINE_BREAK);
     }
 
+    public void showCheckClient(Client client, Property property) {
+        showToUser(MESSAGE_CHECK_CLIENT);
+        showToUser("  " + client.toString() + "\n");
+        showToUser(MESSAGE_CHECK_CLIENT_RESULT);
+        showToUser("  " + property.toString());
+    }
 
     public void showCheckProperty(ArrayList<Client> tenants) {
         showToUser(MESSAGE_CHECK_PROPERTY_RESULT);
