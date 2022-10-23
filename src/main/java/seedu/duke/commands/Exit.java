@@ -13,6 +13,10 @@ public class Exit extends Command {
         UI.endMessage();
     }
 
+    /**
+     * Function to check if command entered by user is an exit command or not
+     * @return true if the command is exit. Format: boolean
+     */
     @Override
     public boolean checkExit() {
         return true;

@@ -52,6 +52,11 @@ public class Add extends Command {
         }
     }
 
+    /**
+     * Function to check if the format of input is correct or not
+     * @param input input entered by user. Format: String
+     * @throws InvalidInputFormatException exception thrown if format of input is incorrect
+     */
 
     public void checkFormat(String input) throws InvalidInputFormatException {
         boolean isRight;
@@ -71,6 +76,12 @@ public class Add extends Command {
         }
     }
 
+    /**
+     * Function to check if content entered by user is empty or not
+     * @param input input entered by user. Format: String
+     * @param idx a collection of indexes where the details should be present. If these are empty, an exception should be thrown
+     * @throws InvalidInputContentException exception thrown if content of input is empty
+     */
     public void checkContent(String input, int[] idx) throws InvalidInputContentException {
         boolean isSame;
         isSame = InvalidInputContentException.emptyContent(idx[0], idx[1], input);
