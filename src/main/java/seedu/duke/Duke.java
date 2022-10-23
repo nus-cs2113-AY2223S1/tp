@@ -3,7 +3,14 @@ package seedu.duke;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
-import seedu.duke.command.*;
+import seedu.duke.command.Command;
+import seedu.duke.command.DeleteCommand;
+import seedu.duke.command.AddCommand;
+import seedu.duke.command.FavouriteCommand;
+import seedu.duke.command.DatabaseStorage;
+import seedu.duke.command.ListCommand;
+import seedu.duke.command.ViewCommand;
+import seedu.duke.command.Database;
 import seedu.duke.exceptions.InvalidModuleException;
 import seedu.duke.exceptions.InvalidUserCommandException;
 import seedu.duke.exceptions.ModuleNotFoundException;
@@ -55,7 +62,6 @@ public class Duke {
                         } else {
                             if (deleteCommand.getModuleCode() == null) {
                                 userUniversityListManager.deleteList(newUserCommand.getUniversityName());
-
                             } else {
                                 userUniversityListManager.deleteModule(newUserCommand.getUniversityName(),
                                         newUserCommand.getModuleCode());
