@@ -3,8 +3,14 @@ package seedu.files;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 
+import seedu.common.CommonFiles;
 import seedu.exception.FileWriteException;
 import seedu.ui.Ui;
 
@@ -59,6 +65,25 @@ public class FileStorage {
         } catch (IOException e) {
             throw new FileWriteException(filePath);
         }
-
     }
+
+    /**
+     * Copies backup from the internal .jar to an external directory.
+     */
+    //@@author GOXR3PLUS-reused
+    // Reused from
+    // https://stackoverflow.com/questions/10308221/how-to-copy-file-inside-jar-to-outside-the-jar/44077426#44077426
+    // with minor modifications
+    public static void ensureBackup() throws FileWriteException {
+        URL url = FileStorage.class.getResource("/ltaResponseSample.json");
+
+        Path backupPath = CommonFiles.LTA_BACKUP_FILE_PATH;
+        try {
+            InputStream source = url.openStream();
+            Files.copy(source, backupPath, StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException ex) {
+            throw new FileWriteException(backupPath.toString());
+        }
+    }
+    //@@author
 }
