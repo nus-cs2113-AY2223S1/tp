@@ -1,5 +1,7 @@
 package appointment;
 
+import employee.EmployeeList;
+
 import java.util.ArrayList;
 
 public class AppointmentList {
@@ -15,6 +17,17 @@ public class AppointmentList {
             System.out.println(appointment.getAppointmentStatus());
         }
     }
+
+    public static Appointment findAppointment(int appointmentId) {
+        // return appointment based on id
+        for (Appointment appointment : appointments) {
+            if (appointment.appointmentId == appointmentId) {
+                return appointment;
+            }
+        }
+        return null;
+    }
+
 
     public static void addAppointment(Appointment appointment) {
         appointments.add(appointment);
@@ -63,5 +76,9 @@ public class AppointmentList {
         if (!setFlag) {
             System.out.println("Sorry, no corresponding appointment found.");
         }
+    }
+
+    public static void viewAppointmentTasks(int appointmentId) {
+        AppointmentList.findAppointment(appointmentId).viewTasks();
     }
 }

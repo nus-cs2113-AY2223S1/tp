@@ -36,4 +36,17 @@ public class EmployeeList {
             System.out.println("Sorry, no corresponding employee found.");
         }
     }
+
+    public static Employee findEmployee(int employeeId) {
+        for (Employee employee : employees) {
+            if (employee.getEmployeeId() == employeeId) {
+                return employee;
+            }
+        }
+        return null;
+    }
+
+    public static void viewEmployeeTasks(int employeeId) {
+        EmployeeList.findEmployee(employeeId).viewTasks();
+    }
 }
