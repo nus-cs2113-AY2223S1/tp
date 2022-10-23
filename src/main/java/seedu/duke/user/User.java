@@ -1,5 +1,6 @@
 package seedu.duke.user;
 
+//@@author chiewyx
 /**
  * A representation of user.
  */

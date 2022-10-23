@@ -1,6 +1,5 @@
 package seedu.duke.command.item;
 
-
 import seedu.duke.command.Command;
 import seedu.duke.exception.DuplicateException;
 import seedu.duke.exception.InsufficientArgumentsException;
@@ -22,6 +21,7 @@ import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_NUMBER_FORM
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_PRICE_FORMAT_INVALID;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_PRICE_LESS_THAN_ZERO;
 
+//@@author bdthanh
 /**
  * A representation of a command to add a new item.
  */

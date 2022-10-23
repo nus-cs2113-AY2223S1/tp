@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_TX_NOT_FOUND;
 
+//@@author bdthanh
 public class TransactionList {
     private final ArrayList<Transaction> transactionList;
 

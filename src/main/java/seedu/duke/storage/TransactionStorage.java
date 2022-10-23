@@ -16,6 +16,7 @@ import java.util.Scanner;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_FILE_NOT_FOUND;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_STORE_INVALID;
 
+//@@author bdthanh
 public class TransactionStorage extends Storage {
     private static final String SEPARATOR = " \\| ";
     private final String transactionFilePath;

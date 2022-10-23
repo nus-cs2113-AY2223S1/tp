@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_USER_NOT_FOUND;
 
+//@@author chiewyx
 /**
  * A representation of a list of User.
  */

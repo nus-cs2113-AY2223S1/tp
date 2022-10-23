@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_ITEM_NOT_FOUND;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_ITEM_UNAVAILABLE;
 
+//@@author jingwei55
 public class ItemList {
     private final ArrayList<Item> itemList;
 

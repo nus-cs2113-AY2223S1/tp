@@ -139,7 +139,7 @@ Step 3: If all arguments are valid, then it finds and deletes the item in the it
 
 `itemList.deleteItem(itemId, transactionList);`
 
-Step 4: After deleting a item, a message will be displayed to the user via `Ui.deleteItemMessage()` method which show the deleted item's details and the size of itemList.
+Step 4: After deleting an item, a message will be displayed to the user via `Ui.deleteItemMessage()` method which show the deleted item's details and the size of itemList.
 
 The following sequence diagram shows how the remove item operation works:
 ![removeItemSequence](images/RemoveItemSequence.png)
@@ -235,7 +235,7 @@ The following sequence diagram shows how the view transaction operation works:
 ![viewTransactionSequence](images/ViewTransactionSequence.png)
 
 #### View Transactions By Status
-> The viewTransactionsByStatus feature is facilitated by the TransactionList class. It extends the command class to add an additional command for users to view the history of finished or ongoing transactions for recording purposes. The feature implements the following commands:
+> The viewTransactionsByStatus feature is facilitated by the TransactionList class. It extends the command class to add a command for users to view the history of finished or ongoing transactions for recording purposes. The feature implements the following commands:
 * `find-tx /s finished`: Lists down all the transactions that have been completed.
 * `find-tx /s unfinished`: Lists down all the transactions that are currently still ongoing.
 
@@ -268,10 +268,10 @@ The following sequence diagram shows how the viewTransactionsByStatus operation 
 
 ## User Stories
 
-|Version| As a ... | I want to ... | So that I can ...|
-|--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+| Version | As a ... | I want to ...             | So that I can ...                                           |
+|---------|----------|---------------------------|-------------------------------------------------------------|
+| v1.0    | new user | see usage instructions    | refer to them when I forget how to use the application      |
+| v2.0    | user     | find a to-do item by name | locate a to-do without having to go through the entire list |
 
 
 Feature: Find Item/ User by keyword.
@@ -295,9 +295,7 @@ Given below is an example usage scenario and how the FindItem mechanism works at
 
 ![Figure: ItemList Object Diagram](https://raw.githubusercontent.com/AY2223S1-CS2113-W12-1/tp/master/docs/diagrams/ItemList.png)
 
-
-
-The user enters the following command: “find-item /k Book”. In this case, the keyword is book. The entire ItemList is iterated through, and an ItemList containing all of the Items which contain the keyword is returned. 3 Items contain the keyword “Book”, hence these 3 items are returned by the function ItemList.getItemsByKeyword. This ItemList is then converted to a String via the method ItemList.toString, and printed by Ui.printResponse so that the user is able to see all the matching Items. The sequence diagram is shown below.
+The user enters the following command: “find-item /k Book”. In this case, the keyword is book. The entire ItemList is iterated through, and an ItemList containing all the Items which contain the keyword is returned. 3 Items contain the keyword “Book”, hence these 3 items are returned by the function ItemList.getItemsByKeyword. This ItemList is then converted to a String via the method ItemList.toString, and printed by Ui.printResponse so that the user is able to see all the matching Items. The sequence diagram is shown below.
 
 ![Figure: FindItem Sequence Diagram](https://raw.githubusercontent.com/AY2223S1-CS2113-W12-1/tp/master/docs/diagrams/FindItemSequence.png)
 

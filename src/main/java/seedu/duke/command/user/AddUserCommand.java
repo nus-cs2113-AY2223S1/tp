@@ -20,6 +20,7 @@ import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_USERNAME_TA
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_USER_AGE_INVALID;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_USER_AGE_OUT_OF_RANGE;
 
+//@@author bdthanh
 /**
  * A representation of a command to add a new user.
  */

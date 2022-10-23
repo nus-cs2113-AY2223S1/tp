@@ -17,6 +17,7 @@ import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PAR
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_USER_BORROWING;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_USER_LENDING;
 
+//@@author bdthanh
 /**
  * A representation of a command to remove a user.
  */

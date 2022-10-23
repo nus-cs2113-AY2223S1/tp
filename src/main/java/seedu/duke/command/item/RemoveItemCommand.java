@@ -14,6 +14,7 @@ import seedu.duke.transaction.TransactionList;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INSUFFICIENT_ARGUMENTS;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PARTS;
 
+//@@author bdthanh
 /**
  * A representation of a command to remove an item.
  */
