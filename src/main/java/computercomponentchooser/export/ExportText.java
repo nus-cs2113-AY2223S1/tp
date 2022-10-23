@@ -40,7 +40,7 @@ public class ExportText {
      * Exports all the builds to a text file.
      *
      * @param buildManager The buildManager to be used.
-     * @throws IOException
+     * @throws IOException If there is an error in writing to the file.
      */
     public static void exportAllBuildsText(BuildManager buildManager) throws IOException {
         Path fileDirectory = Paths.get(FILE_DIRECTORY);
@@ -66,7 +66,7 @@ public class ExportText {
      * build.
      *
      * @param build The build to be exported.
-     * @throws IOException
+     * @throws IOException If there is an error in writing to the file.
      */
     public static void exportBuildText(Build build) throws IOException {
         Path fileDirectory = Paths.get(FILE_DIRECTORY);

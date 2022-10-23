@@ -39,7 +39,7 @@ public class ExportCsv {
      * Exports all the builds to a CSV file.
      *
      * @param buildManager The buildManager to be used.
-     * @throws IOException
+     * @throws IOException If there is an error in writing to the file.
      */
     public static void exportAllBuildsCsv(BuildManager buildManager) throws IOException {
         Path fileDirectory = Paths.get(FILE_DIRECTORY);
