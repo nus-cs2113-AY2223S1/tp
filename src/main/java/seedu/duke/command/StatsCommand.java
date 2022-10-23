@@ -24,7 +24,6 @@ import static seedu.duke.common.InfoMessages.INFO_STATS_SAVINGS;
 import static seedu.duke.common.InfoMessages.INFO_STATS_SUMMARY_HEADER;
 import static seedu.duke.common.InfoMessages.INFO_STATS_TIME;
 
-
 /**
  * Represents a get command object that will execute the operations for Get command.
  */
@@ -82,8 +81,6 @@ public class StatsCommand extends Command {
         };
         return optionalTags;
     }
-
-
     @Override
     public void setStatsType(String statsType) {
         this.statsType = statsType;
@@ -113,8 +110,8 @@ public class StatsCommand extends Command {
         return year;
     }
 
-
     //@@author chydarren
+
     /**
      * Executes the operations related to the command.
      *
@@ -146,6 +143,7 @@ public class StatsCommand extends Command {
             statsTypeCategoricalSavings(transactions);
             statsLogger.log(Level.INFO, "End of Stats command.");
             break;
+        //@@author paullowse
         case "time":
             statsLogger.log(Level.INFO, "Stats type has been detected for monthly savings.");
             if (year == -1 && month == -1 && period != null && number != -1) {
@@ -159,12 +157,14 @@ public class StatsCommand extends Command {
                 throw new ListStatsInvalidStatsTypeException();
             }
             break;
-
+        //@@author chydarren
         default:
             statsLogger.log(Level.WARNING, "An exception has been caught due to an invalid stats type.");
             throw new ListStatsInvalidStatsTypeException();
         }
     }
+
+    //@@author chydarren
 
     /**
      * Display the statistics requested for current amount of savings in each category.
@@ -186,15 +186,16 @@ public class StatsCommand extends Command {
     }
 
     //@@author paullowse
+
     /**
      * Calls transactions to get the necessary transaction list, convert the parameters into a String for output.
      * Produces info strings, list of categories and summary statistics.
      *
      * @param transactions  An instance of the TransactionList class.
-     * @param year          A specified year
-     * @param month         A specified month
-     * @param period        A specified period of time
-     * @param number        A specified number of periods
+     * @param year          A specified year.
+     * @param month         A specified month.
+     * @param period        A specified period of time.
+     * @param number        A specified number of periods.
      * @throws MoolahException If the type of statistics is not recognised.
      */
     public static void statsTypeTimeSavings(TransactionList transactions, int year, int month,
@@ -237,6 +238,7 @@ public class StatsCommand extends Command {
     }
 
     //@@author paullowse
+
     /**
      * Enables the program to exit when the Bye command is issued.
      *

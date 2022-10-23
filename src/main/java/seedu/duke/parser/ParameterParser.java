@@ -513,6 +513,7 @@ public class ParameterParser {
     }
 
     //@@author paullowse
+
     public static int parseStatsMonthTag(String parameter) throws StatsInvalidMonthException,
             EntryNumberNotNumericException {
         int month;
@@ -532,7 +533,6 @@ public class ParameterParser {
         return month;
     }
 
-    //@@author paullowse
     public static int parseStatsYearTag(String parameter) throws StatsInvalidYearException,
             EntryNumberNotNumericException {
         int year;
@@ -551,7 +551,6 @@ public class ParameterParser {
         return year;
     }
 
-    //@@author paullowse
     public static String parseStatsPeriodTag(String parameter) throws StatsInvalidPeriodException {
         String period;
         switch (parameter) {
@@ -569,7 +568,6 @@ public class ParameterParser {
         return period;
     }
 
-    //@@author paullowse
     public static int parseStatsNumberTag(String parameter) throws EntryNumberNotNumericException,
             StatsInvalidNumberException {
         int statsNumber;
@@ -587,7 +585,6 @@ public class ParameterParser {
         }
         return statsNumber;
     }
-
 
     //@@author chinhan99
 

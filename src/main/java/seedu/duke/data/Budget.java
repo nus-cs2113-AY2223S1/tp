@@ -11,6 +11,7 @@ import static seedu.duke.common.Constants.MIN_BUDGET_VALUE;
  * Operations related to the budgets are also defined under this class.
  */
 public class Budget {
+    //@@author wcwy
     // Default value of the monthly budget is $1000
     private static int budget = 1000;
 

@@ -247,7 +247,7 @@ public class TransactionList {
         return categoricalSavingsList;
     }
 
-    //@@author paullow_se
+    //@@author paullowse
 
     /**
      * Produce Categorical saving list for timeTransactions.
@@ -283,7 +283,6 @@ public class TransactionList {
         return timeSavingsList;
     }
 
-    //@@author paullow_se
     /**
      * Produce Expense, Income and Savings statistics.
      *
@@ -309,6 +308,8 @@ public class TransactionList {
         amounts.add(Integer.toString(timeSavings));
         return amounts;
     }
+
+    //@@author chydarren
 
     /**
      * Gets the range of dates for the last N number of weeks from occurring week.
@@ -379,6 +380,8 @@ public class TransactionList {
 
         return transactionsByMonth;
     }
+
+    //@@author chydarren
 
     /**
      * Gets all transactions recorded on the last N weeks or months.

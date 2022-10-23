@@ -88,6 +88,8 @@ public class ListCommand extends Command {
         this.date = date;
     }
 
+    //@@author chydarren
+
     /**
      * Executes the operations related to the command.
      *
@@ -103,7 +105,6 @@ public class ListCommand extends Command {
         listTransactions(transactions, type, category, date);
     }
 
-    //@@chydarren
     /**
      * List all or some transactions based on selection.
      *
@@ -129,6 +130,7 @@ public class ListCommand extends Command {
     }
 
     //@@author paullowse
+
     /**
      * Enables the program to exit when the Bye command is issued.
      *
