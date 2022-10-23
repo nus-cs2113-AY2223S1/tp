@@ -63,11 +63,11 @@ public class SortItemCommand extends Command {
         String[] args = new String[3];
         for (String part : parts) {
             String delimiter = CommandParser.getArgsDelimiter(part);
-            if (delimiter.equals("mo")) {
+            if (delimiter.equals("mode")) {
                 args[0] = CommandParser.getArgValue(part);
-            } else if (delimiter.equals("mi")) {
+            } else if (delimiter.equals("min")) {
                 args[1] = CommandParser.getArgValue(part);
-            } else if (delimiter.equals("ma")) {
+            } else if (delimiter.equals("max")) {
                 args[2] = CommandParser.getArgValue(part);
             } else {
                 throw new InvalidArgumentException(MESSAGE_INVALID_PARTS);
