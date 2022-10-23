@@ -26,7 +26,7 @@ public class HelpCommand extends Command {
                 + "add weight /{weight} /{fat percentage}\n"
                 + "remove {food/exercise/weight} /{index}\n"
                 + "mark {done/undone} /{exercise index}\n"
-                + "view {biometrics/food/weight} {exercise/strength/cardio /{done}}\n"
+                + "view {biometrics/food/weight/bmi/maintenance} {exercise/strength/cardio /{done}}\n"
                 + "find {strength/cardio/food} /{description}");
     }
 
