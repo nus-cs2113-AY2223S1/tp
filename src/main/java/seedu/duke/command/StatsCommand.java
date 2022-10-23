@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static seedu.duke.command.CommandTag.COMMAND_TAG_STATISTICS_TYPE;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_STATS_TYPE;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_STATS_MONTH;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_STATS_NUMBER;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_STATS_PERIOD;
@@ -52,12 +52,13 @@ public class StatsCommand extends Command {
     //@@author chydarren
     private static final Logger statsLogger = Logger.getLogger(StatsCommand.class.getName());
     private String statsType;
+
+    //@@author paullowse
     private int month = -1;
     private int year = -1;
     private String period = null;
     private int number = -1;
 
-    //@@author paullowse
     public StatsCommand() {
     }
 
@@ -68,7 +69,7 @@ public class StatsCommand extends Command {
      */
     @Override
     public String[] getMandatoryTags() {
-        String[] mandatoryTags = new String[]{COMMAND_TAG_STATISTICS_TYPE};
+        String[] mandatoryTags = new String[]{COMMAND_TAG_STATS_TYPE};
         return mandatoryTags;
     }
 
@@ -131,9 +132,9 @@ public class StatsCommand extends Command {
     /**
      * Lists the statistics depending on the type of statistics requested.
      *
-     * @param statsType                             The type of statistics that is needed.
-     * @param transactions                          An instance of the TransactionList class.
-     * @throws MoolahException   If the type of statistics is not recognised.
+     * @param statsType     The type of statistics that is needed.
+     * @param transactions  An instance of the TransactionList class.
+     * @throws MoolahException If the type of statistics is not recognised.
      */
     private static void listStatsByStatsType(String statsType, TransactionList transactions, int month,
                                              int year, String period, int number)

@@ -26,8 +26,6 @@ public class TransactionList {
     private static final String PREFIX_CATEGORY = "[";
     private static final String POSTFIX_CATEGORY = "]";
     private static final String SYMBOL_DOLLAR = "$";
-    private static final String WEEKS = "weeks";
-    private static final String MONTHS = "months";
     private static final int START = 0;
     private static final int END = 1;
     private static final String LINE_SEPARATOR = System.lineSeparator();
