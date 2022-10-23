@@ -4,16 +4,21 @@ import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
 import seedu.duke.command.Command;
-import seedu.duke.command.Database;
+import seedu.duke.command.DeleteCommand;
+import seedu.duke.command.AddCommand;
+import seedu.duke.command.FavouriteCommand;
 import seedu.duke.command.DatabaseStorage;
 import seedu.duke.command.ListCommand;
 import seedu.duke.command.ViewCommand;
-import seedu.duke.command.FavouriteCommand;
+import seedu.duke.command.Database;
+import seedu.duke.exceptions.InvalidModuleException;
 import seedu.duke.exceptions.InvalidUserCommandException;
 import seedu.duke.exceptions.ModuleNotFoundException;
+import seedu.duke.exceptions.TimetableNotFoundException;
 import seedu.duke.exceptions.UniversityNotFoundException;
 import seedu.duke.module.Module;
 import seedu.duke.parser.CommandParser;
+import seedu.duke.timetable.TimetableManager;
 import seedu.duke.ui.Ui;
 import seedu.duke.module.ModuleMapping;
 import seedu.duke.university.University;
@@ -34,6 +39,9 @@ public class Duke {
         System.out.print(Ui.printCommands());
         DatabaseStorage.loadDatabase();
         UserUniversityListManager userUniversityListManager = UserStorageParser.getSavedLists();
+        //To be changed to loading timetable from database
+        //Timetable Manager timetableManager = UserStorageParser.getSavedTimetables();
+        TimetableManager timetableManager = new TimetableManager();
 
         while (!shouldExit) {
             try {
@@ -48,27 +56,37 @@ public class Duke {
                     break;
                 case DELETE:
                     try {
-                        if (newUserCommand.getModuleCode() == null) {
-                            userUniversityListManager.deleteList(newUserCommand.getUniversityName());
+                        DeleteCommand deleteCommand = (DeleteCommand) newUserCommand;
+                        if (deleteCommand.getLesson() != null) {
+                            timetableManager.addLesson(deleteCommand.getLesson());
+                            //UserStorageParser.storeTimetable(timetableManager);
                         } else {
-                            userUniversityListManager.deleteModule(newUserCommand.getUniversityName(),
-                                    newUserCommand.getModuleCode());
+                            if (deleteCommand.getModuleCode() == null) {
+                                userUniversityListManager.deleteList(newUserCommand.getUniversityName());
+                            } else {
+                                userUniversityListManager.deleteModule(newUserCommand.getUniversityName(),
+                                        newUserCommand.getModuleCode());
+                                timetableManager.deleteTimetable(newUserCommand.getUniversityName());
+                                //UserStorageParser.storeTimetable(timetableManager);
+                            }
+                            UserStorageParser.storeCreatedLists(userUniversityListManager);
                         }
-                        UserStorageParser.storeCreatedLists(userUniversityListManager);
-                    } catch (NoSuchElementException e) {
+                    } catch (NoSuchElementException | TimetableNotFoundException e) {
                         Ui.printExceptionMessage(e);
                     }
                     break;
                 case CREATE:
                     userUniversityListManager.createList(newUserCommand.getUniversityName());
+                    timetableManager.createTimetable(newUserCommand.getUniversityName());
                     UserStorageParser.storeCreatedLists(userUniversityListManager);
+                    //UserStorageParser.storeTimetable(timetableManager);
                     break;
                 case VIEW:
                     try {
                         ViewCommand viewCommand = (ViewCommand) newUserCommand;
                         if (viewCommand.getViewOption().equals("LISTS")) {
                             userUniversityListManager.displayAll();
-                        } else if (viewCommand.getViewOption().equals("DELETE")) {
+                        } else if (viewCommand.getViewOption().equals("DELETE_HISTORY")) {
                             userUniversityListManager.getUserDeletedModules().displayAll();
                         } else if (viewCommand.getViewOption().equals("UNIVERSITY")) {
                             userUniversityListManager.displayUniversity(viewCommand.getUniversityName());
@@ -79,15 +97,21 @@ public class Duke {
                     break;
                 case ADD:
                     try {
-                        ModuleMapping moduleMapping = Database.findPuMapping(newUserCommand.getModuleCode());
-                        Module puModule = moduleMapping.getPartnerUniversityModule();
-                        Module nusModule = moduleMapping.getNusModule();
-                        UserModuleMapping userModuleToAdd = new UserModuleMapping(puModule.getCode(),
-                                puModule.getTitle(), nusModule.getCode(), nusModule.getTitle(),
-                                nusModule.getCredit(), puModule.getCredit(), puModule.getUniversity().getName(),
-                                puModule.getUniversity().getCountry());
-                        userUniversityListManager.addModule(newUserCommand.getUniversityName(), userModuleToAdd);
-                        UserStorageParser.storeCreatedLists(userUniversityListManager);
+                        AddCommand addCommand = (AddCommand) newUserCommand;
+                        if (addCommand.getLesson() != null) {
+                            timetableManager.addLesson(addCommand.getLesson());
+                            //UserStorageParser.storeTimetable(timetableManager);
+                        } else {
+                            ModuleMapping moduleMapping = Database.findPuMapping(newUserCommand.getModuleCode());
+                            Module puModule = moduleMapping.getPartnerUniversityModule();
+                            Module nusModule = moduleMapping.getNusModule();
+                            UserModuleMapping userModuleToAdd = new UserModuleMapping(puModule.getCode(),
+                                    puModule.getTitle(), nusModule.getCode(), nusModule.getTitle(),
+                                    nusModule.getCredit(), puModule.getCredit(), puModule.getUniversity().getName(),
+                                    puModule.getUniversity().getCountry());
+                            userUniversityListManager.addModule(newUserCommand.getUniversityName(), userModuleToAdd);
+                            UserStorageParser.storeCreatedLists(userUniversityListManager);
+                        }
                     } catch (ModuleNotFoundException | NoSuchElementException e) {
                         Ui.printExceptionMessage(e);
                     }
@@ -136,7 +160,7 @@ public class Duke {
                 default:
                     break;
                 }
-            } catch (InvalidUserCommandException e) {
+            } catch (InvalidUserCommandException | InvalidModuleException | ModuleNotFoundException e) {
                 Ui.printExceptionMessage(e);
             }
         }

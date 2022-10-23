@@ -1,5 +1,7 @@
 package seedu.duke.command;
 
+import seedu.duke.timetable.Lesson;
+
 public abstract class Command {
     CommandType commandType;
     String universityName = null;
@@ -21,5 +23,9 @@ public abstract class Command {
 
     public String getModuleCode() {
         return moduleCode;
+    }
+
+    public Lesson getLesson() {
+        return null;
     }
 }
