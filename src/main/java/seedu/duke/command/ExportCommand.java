@@ -8,12 +8,8 @@ import seedu.duke.utils.Link;
 
 public class ExportCommand extends Command {
     public static final String COMMAND_WORD = "export";
-    public static final String FORMAT = "export";
-    public static final String HELP_DISPLAY = COMMAND_WORD
-            + ": generates an NUSMod Link for your current timetable!\n"
-            + "\tUsage:\t"
-            + FORMAT
-            + System.lineSeparator();
+    public static final String COMMAND_USAGE = "export";
+    public static final String COMMAND_DESCRIPTION = "Generates an NUSMod Link to be exported to the browser.";
 
     public ExportCommand(String[] input) {
         super(input);
@@ -37,5 +33,13 @@ public class ExportCommand extends Command {
     @Override
     public String getExecutionMessage() {
         return "Here is your NUSMod Link: ";
+    }
+
+    public static String getCommandDescription() {
+        return COMMAND_WORD + DESCRIPTION_DELIMITER + COMMAND_DESCRIPTION;
+    }
+
+    public static String getUsage() {
+        return COMMAND_USAGE;
     }
 }

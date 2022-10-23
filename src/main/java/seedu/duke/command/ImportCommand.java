@@ -8,12 +8,10 @@ import seedu.duke.utils.Ui;
 
 public class ImportCommand extends Command {
     public static final String COMMAND_WORD = "import";
-    public static final String FORMAT = "import NUSMods_LINK";
-    public static final String HELP_DISPLAY = COMMAND_WORD
-            + ": Imports timetable information from NUSMods generated link!\n"
-            + "\tUsage:\t"
-            + FORMAT
-            + System.lineSeparator();
+    public static final String COMMAND_USAGE = "import [NUSMods_LINK]";
+    public static final String COMMAND_DESCRIPTION = "Imports a timetable "
+            + " from an NUSMod timetable sharing link";
+
     private static String nusModLink;
 
 
@@ -42,5 +40,13 @@ public class ImportCommand extends Command {
     @Override
     public String getExecutionMessage() {
         return "Timetable imported to YAMOM!";
+    }
+
+    public static String getCommandDescription() {
+        return COMMAND_WORD + DESCRIPTION_DELIMITER + COMMAND_DESCRIPTION;
+    }
+
+    public static String getUsage() {
+        return COMMAND_USAGE;
     }
 }

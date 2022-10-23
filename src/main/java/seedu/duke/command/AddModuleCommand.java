@@ -19,12 +19,8 @@ public class AddModuleCommand extends Command {
     private boolean successful;
 
     public static final String COMMAND_WORD = "add";
-    public static final String FORMAT = "add MODULE_CODE";
-    public static final String HELP_DISPLAY = COMMAND_WORD
-            + ": add a module into your planner!\n"
-            + "\tUsage:\t"
-            + FORMAT
-            + System.lineSeparator();
+    private static final String COMMAND_USAGE = "add [MODULE_CODE]";
+    private static final String COMMAND_DESCRIPTION = "add a module into YAMOM timetable.";
 
     public AddModuleCommand(String[] input) {
         super(input);
@@ -65,4 +61,13 @@ public class AddModuleCommand extends Command {
 
         return outputMessage;
     }
+
+    public static String getCommandDescription() {
+        return COMMAND_WORD + DESCRIPTION_DELIMITER + COMMAND_DESCRIPTION;
+    }
+
+    public static String getUsage() {
+        return COMMAND_USAGE;
+    }
+
 }

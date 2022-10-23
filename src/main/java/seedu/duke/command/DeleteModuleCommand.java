@@ -17,12 +17,8 @@ public class DeleteModuleCommand extends Command {
     private boolean successful;
 
     public static final String COMMAND_WORD = "delete";
-    public static final String FORMAT = "delete MODULE_CODE";
-    public static final String HELP_DISPLAY = COMMAND_WORD
-            + ": remove a module from your planner!\n"
-            + "\tUsage:\t"
-            + FORMAT
-            + System.lineSeparator();
+    public static final String COMMAND_USAGE = "delete [MODULE_CODE]";
+    public static final String COMMAND_DESCRIPTION = "remove a module from YAMOM timetable.";
 
     public DeleteModuleCommand(String[] input) {
         super(input);
@@ -63,4 +59,11 @@ public class DeleteModuleCommand extends Command {
         return outputMessage;
     }
 
+    public static String getCommandDescription() {
+        return COMMAND_WORD + DESCRIPTION_DELIMITER + COMMAND_DESCRIPTION;
+    }
+
+    public static String getUsage() {
+        return COMMAND_USAGE;
+    }
 }

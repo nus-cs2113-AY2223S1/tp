@@ -14,12 +14,9 @@ import java.util.logging.Logger;
 
 public class SearchModuleCommand extends Command {
     public static final String COMMAND_WORD = "search";
-    public static final String FORMAT = "search KEYWORD";
-    public static final String HELP_DISPLAY = COMMAND_WORD
-            + ": List out all modules that matches KEYWORD, where KEYWORD could be module code/faculty!\n"
-            + "\tUsage:\t"
-            + FORMAT
-            + System.lineSeparator();
+    public static final String COMMAND_USAGE = "search [KEYWORD]";
+    public static final String COMMAND_DESCRIPTION = "List out all modules that contains KEYWORD"
+            + System.lineSeparator() + "\t * KEYWORD can either be module code or faculty.";
 
     // private String toSearchModuleCode;
     private Map<String, String> params;
@@ -164,5 +161,13 @@ public class SearchModuleCommand extends Command {
     @Override
     public String getExecutionMessage() {
         return null;
+    }
+
+    public static String getCommandDescription() {
+        return COMMAND_WORD + DESCRIPTION_DELIMITER + COMMAND_DESCRIPTION;
+    }
+
+    public static String getUsage() {
+        return COMMAND_USAGE;
     }
 }
