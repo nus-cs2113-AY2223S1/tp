@@ -1,6 +1,6 @@
 package seedu.api;
 
-import static seedu.common.CommonData.API_KEY_DEFAULT;
+import static seedu.common.CommonData.*;
 import static seedu.common.CommonFiles.LTA_BASE_URL;
 
 import java.io.IOException;
@@ -8,6 +8,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.ArrayList;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
@@ -33,7 +34,7 @@ public class Api {
     private final FileStorage storage;
     private final Ui ui;
     private HttpRequest request;
-    private CompletableFuture<HttpResponse<String>> responseFuture;
+    private ArrayList<CompletableFuture<HttpResponse<String>>> responseFutureList = new ArrayList<>(5);
     private String apiKey = "";
     private AuthenticationStatus authStatus = AuthenticationStatus.FAIL;
 
@@ -53,7 +54,7 @@ public class Api {
     private void generateHttpRequestCarpark(int skip) {
         String authHeaderName = "AccountKey";
         request = HttpRequest.newBuilder(
-                URI.create(LTA_BASE_URL + "?skip=" + skip))
+                URI.create(LTA_BASE_URL + "?$skip=" + skip))
             .header(authHeaderName, apiKey)
             .build();
     }
@@ -61,9 +62,9 @@ public class Api {
     /**
      * Sends the HTTP GET request to the API endpoint asynchronously.
      */
-    public void asyncExecuteRequest(int skip) {
+    public void asyncExecuteRequest(int skip, int index) {
         generateHttpRequestCarpark(skip);
-        responseFuture = client.sendAsync(request, HttpResponse.BodyHandlers.ofString());
+        responseFutureList.add(index, client.sendAsync(request, HttpResponse.BodyHandlers.ofString()));
     }
 
     /**
@@ -74,11 +75,12 @@ public class Api {
      * @throws ServerNotReadyApiException if Server request timeout.
      * @throws UnknownResponseApiException if response code is not handled properly.
      */
-    private String asyncGetResponse()
+    private String asyncGetResponse(int index)
             throws UnauthorisedAccessApiException, ServerNotReadyApiException, UnknownResponseApiException {
         String result = "";
         try {
-            HttpResponse<String> response = responseFuture.get(1000, TimeUnit.MILLISECONDS);
+//            HttpResponse<String> response = responseFuture.get(1000, TimeUnit.MILLISECONDS);
+            HttpResponse<String> response = responseFutureList.get(index).get(1000, TimeUnit.MILLISECONDS);
             if (isValidResponse(response.statusCode())) {
                 result = response.body();
             }
@@ -98,19 +100,19 @@ public class Api {
      * @throws EmptyResponseException if empty/invalid response received.
      * @throws UnauthorisedAccessApiException if access not granted.
      */
-    public String fetchData() throws EmptyResponseException, UnauthorisedAccessApiException, FileWriteException {
+    public String fetchData(int index) throws EmptyResponseException, UnauthorisedAccessApiException, FileWriteException {
         String result = "";
         int fetchTries = FETCH_TRIES;
         do {
             try {
-                result = asyncGetResponse().trim();
+                result = asyncGetResponse(index).trim();
             } catch (ServerNotReadyApiException | UnknownResponseApiException e) {
                 System.out.println(e.getMessage());
             } finally {
                 fetchTries--;
             }
             if (fetchTries > 0 && result.isEmpty()) {
-                asyncExecuteRequest(0);
+                asyncExecuteRequest(index * 500, index);
             }
         } while (fetchTries > 0 && result.isEmpty());
 
@@ -128,20 +130,28 @@ public class Api {
      * @throws UnauthorisedAccessApiException if access not granted.
      */
     public void syncFetchData() throws FileWriteException, EmptyResponseException, UnauthorisedAccessApiException {
-        int i = 0;
-        String result = "";
-        while (i <= 3000) {
-            asyncExecuteRequest(i);
-            String dataReceived = fetchData();
-            int dataCount = countDataSet(dataReceived);
+        String result = API_RESPONSE_HEADER;
+        for (int i = 0; i < 5; i++) {
+            asyncExecuteRequest(i * 500, i);
         }
+        for (int i = 0; i < 5; i++) {
+            String partialResult = fetchData(i);
+            String processedResult = processData(partialResult);
+            result += processedResult;
+            if (i != 4 && !processedResult.isEmpty()) {
+                result += ",";
+            }
+        }
+
+        result += API_RESPONSE_TAIL;
+
         storage.writeDataToFile(result);
     }
 
-    public int countDataSet(String data) {
+    public String processData(String data) {
         String[] dataSplit = data.split("\"value\":\\[",2);
-        int counter = dataSplit[1].;
-        return dataSplit.length;
+        dataSplit = dataSplit[1].split("]}",2);
+        return dataSplit[0];
     }
 
     /**
@@ -184,9 +194,9 @@ public class Api {
             isDifferent = false;
         }
         boolean isSuccess = false;
-        asyncExecuteRequest(0);
+        asyncExecuteRequest(0,0);
         try {
-            fetchData();
+            fetchData(0);
             isSuccess = true;
             authStatus = (isDifferent) ? AuthenticationStatus.SUCCESS : authStatus;
         } catch (EmptyResponseException | UnauthorisedAccessApiException | FileWriteException e) {
