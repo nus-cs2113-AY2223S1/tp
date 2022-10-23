@@ -1,7 +1,13 @@
 package seedu.duke.parsermanager;
 
+import seedu.duke.Client;
+import seedu.duke.ClientList;
+import seedu.duke.Ui;
+
 import seedu.duke.command.Command;
 import seedu.duke.command.CommandAddClient;
+
+import seedu.duke.exception.DuplicateClientException;
 import seedu.duke.exception.EmptyDetailException;
 import seedu.duke.exception.IncorrectFlagOrderException;
 import seedu.duke.exception.InvalidBudgetFormatException;
@@ -14,15 +20,14 @@ import java.util.ArrayList;
 import static seedu.duke.CommandStructure.ADD_CLIENT_FLAGS;
 import static seedu.duke.Messages.EXCEPTION;
 import static seedu.duke.Messages.MESSAGE_ADD_CLIENT_WRONG_FORMAT;
-import static seedu.duke.Messages.MESSAGE_INVALID_CONTACT_NUMBER;
-import static seedu.duke.Messages.MESSAGE_INVALID_EMAIL;
-import static seedu.duke.Messages.MESSAGE_INVALID_BUDGET_FORMAT;
 
+//@@author OVReader
 /**
  * Parses input for add client command.
  */
 public class ParseAddClient extends ParseAdd {
     private final String commandDescription;
+    private final ClientList clientList;
 
     private static final int CLIENT_NAME_INDEX = 0;
     private static final int CLIENT_CONTACT_NUMBER_INDEX = 1;
@@ -31,23 +36,25 @@ public class ParseAddClient extends ParseAdd {
 
     private static final int FLAG_JUMPER_VALUE = 2;
 
-    /* Add Client Regex for Validation */
+    // Adds Client Regex for Validation.
     private static final String VALID_SINGAPORE_CONTACT_NUMBER_REGEX = "^[689]\\d{7}$";
-    //General Email Regex (RFC 5322 Official Standard)
+    // General Email Regex (RFC 5322 Official Standard)
     private static final String VALID_EMAIL_REGEX = "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)"
             + "*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x"
             + "7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2"
             + "[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01"
             + "-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])";
-    //Accepts only positive whole number for budget
+    // Accepts only positive whole number for budget.
     private static final String VALID_BUDGET_REGEX = "^[1-9]\\d*$";
 
-    public ParseAddClient(String addCommandDescription) {
+    public ParseAddClient(String addCommandDescription, ClientList clientList) {
         this.commandDescription = addCommandDescription;
+        this.clientList = clientList;
     }
 
     public Command parseCommand() throws EmptyDetailException, MissingFlagException, IncorrectFlagOrderException,
-            InvalidContactNumberException, InvalidEmailException, InvalidBudgetFormatException {
+            InvalidContactNumberException, InvalidEmailException, InvalidBudgetFormatException,
+            DuplicateClientException {
         try {
             checkForEmptyDetails(commandDescription);
             ArrayList<String> clientDetails = processCommandAddClientDetails(commandDescription);
@@ -59,12 +66,6 @@ public class ParseAddClient extends ParseAdd {
             throw new MissingFlagException(MESSAGE_ADD_CLIENT_WRONG_FORMAT);
         } catch (IncorrectFlagOrderException e) {
             throw new IncorrectFlagOrderException(MESSAGE_ADD_CLIENT_WRONG_FORMAT);
-        } catch (InvalidContactNumberException e) {
-            throw new InvalidContactNumberException(MESSAGE_INVALID_CONTACT_NUMBER);
-        } catch (InvalidEmailException e) {
-            throw new InvalidEmailException(MESSAGE_INVALID_EMAIL);
-        } catch (InvalidBudgetFormatException e) {
-            throw new InvalidBudgetFormatException(MESSAGE_INVALID_BUDGET_FORMAT);
         }
     }
 
@@ -79,7 +80,7 @@ public class ParseAddClient extends ParseAdd {
     private void checkForMissingClientFlags(int[] flagIndexPositions) throws MissingFlagException {
         for (int flagIndex = 0; flagIndex < flagIndexPositions.length; flagIndex++) {
             boolean isEmailIndex = (flagIndex == CLIENT_EMAIL_INDEX);
-            //Skip empty check for email as email is optional
+            // Skips empty check for email as email is optional
             if (!isEmailIndex && !checkForFlagPresence(flagIndex)) {
                 throw new MissingFlagException(EXCEPTION);
             }
@@ -129,39 +130,68 @@ public class ParseAddClient extends ParseAdd {
     }
 
     private void validateClientDetails(ArrayList<String> clientDetails) throws EmptyDetailException,
-            InvalidContactNumberException, InvalidEmailException, InvalidBudgetFormatException {
-        //Checks for Missing Client Name, Contact Number, Budget Per Month (SGD)
+            InvalidContactNumberException, InvalidEmailException, InvalidBudgetFormatException,
+            DuplicateClientException {
+        // Checks for Missing Client Name, Contact Number, Budget Per Month (SGD)
         checkForEmptyDetails(clientDetails.get(CLIENT_NAME_INDEX));
         checkForEmptyDetails(clientDetails.get(CLIENT_CONTACT_NUMBER_INDEX));
         checkForEmptyDetails(clientDetails.get(CLIENT_BUDGET_INDEX));
 
-        //Checks for Contact Number, Email and Budget Format
+        // Checks for Contact Number, Email and Budget Format
         checkForValidSingaporeContactNumber(clientDetails.get(CLIENT_CONTACT_NUMBER_INDEX));
         boolean hasEmail = !clientDetails.get(CLIENT_EMAIL_INDEX).isEmpty();
         if (hasEmail) {
             checkForValidEmail(clientDetails.get(CLIENT_EMAIL_INDEX));
         }
         checkForBudgetNumberFormat(clientDetails.get(CLIENT_BUDGET_INDEX));
+
+        // Duplicate Client refers to clients with the same Name/Contact Number/Email.
+        checkForDuplicateClient(clientList, clientDetails);
+    }
+
+    private void checkForDuplicateClient(ClientList clientList, ArrayList<String> clientDetails) throws
+            DuplicateClientException {
+        boolean hasEmail = !clientDetails.get(CLIENT_EMAIL_INDEX).isEmpty();
+        boolean isDuplicateEmail = false;
+
+        for (Client client : clientList.getClientList()) {
+            boolean isDuplicateName = clientDetails.get(CLIENT_NAME_INDEX).equals(client.getClientName());
+            boolean isDuplicateContactNumber = clientDetails.get(CLIENT_CONTACT_NUMBER_INDEX)
+                    .equals(client.getClientContactNumber());
+            if (hasEmail) {
+                isDuplicateEmail = clientDetails.get(CLIENT_EMAIL_INDEX).equals(client.getClientEmail());
+            }
+            boolean isDuplicateClient = isDuplicateName || isDuplicateContactNumber || isDuplicateEmail;
+            if (isDuplicateClient) {
+                showExistingDuplicateClient(client);
+                throw new DuplicateClientException();
+            }
+        }
     }
 
     private void checkForValidSingaporeContactNumber(String clientContactNumber) throws InvalidContactNumberException {
         boolean hasValidContactNumber = checkForDetailFormat(VALID_SINGAPORE_CONTACT_NUMBER_REGEX, clientContactNumber);
         if (!hasValidContactNumber) {
-            throw new InvalidContactNumberException(EXCEPTION);
+            throw new InvalidContactNumberException();
         }
     }
 
     private void checkForValidEmail(String clientEmail) throws InvalidEmailException {
         boolean hasValidEmail = checkForDetailFormat(VALID_EMAIL_REGEX, clientEmail);
         if (!hasValidEmail) {
-            throw new InvalidEmailException(EXCEPTION);
+            throw new InvalidEmailException();
         }
     }
 
     private void checkForBudgetNumberFormat(String budget) throws InvalidBudgetFormatException {
         boolean hasValidBudgetNumberFormat = checkForDetailFormat(VALID_BUDGET_REGEX, budget);
         if (!hasValidBudgetNumberFormat) {
-            throw new InvalidBudgetFormatException(EXCEPTION);
+            throw new InvalidBudgetFormatException();
         }
+    }
+
+    private static void showExistingDuplicateClient(Client client) {
+        Ui ui = new Ui();
+        ui.showToUser("Existing Client:\n  " + client.toString());
     }
 }

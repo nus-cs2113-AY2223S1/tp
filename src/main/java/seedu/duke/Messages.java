@@ -6,7 +6,8 @@ package seedu.duke;
 public class Messages {
 
     public static final String EXCEPTION = "EXCEPTION";
-
+    public static final String LINE_BREAK = "----------------------------------------------------------------------"
+            + "----------";
 
     /* Confirmation Messages */
 
@@ -48,9 +49,8 @@ public class Messages {
 
     public static final String MESSAGE_NOT_INTEGER = "OOPS!! Please enter a positive integer as index";
 
-
-    /* Add Property/Client Related Error Messages */
-
+    //@@author OVReader
+    // Add Property/Client Related Error Messages
     public static final String MESSAGE_ADD_PROPERTY_WRONG_FORMAT = "OOPS!!! To add a property, it requires "
             + "the following format and details:\n"
             + "Format: add -property n/NAME a/ADDRESS p/PRICE t/TYPE\n"
@@ -67,15 +67,18 @@ public class Messages {
     public static final String MESSAGE_INVALID_SINGAPORE_ADDRESS = "OOPS!!! The address provided is invalid. "
             + "To add a property, A valid Singapore address must be provided\nwith the following "
             + "format and details:\n"
-            + "LANDED PROPERTY:\n  Format:  "
+            + LINE_BREAK
+            + "\nLANDED PROPERTY:\n  Format:  "
             + "[Unit Number]<space>[Street Name],<space>Singapore<space>[Postal Code]\n"
             + "  Example: 60 Aria Street, Singapore 602580\n"
-            + "BUILDINGS (e.g. HDBs, apartments, condominiums):\n"
+            + LINE_BREAK
+            + "\nBUILDINGS (e.g. HDBs, apartments, condominiums):\n"
             + "  Format (Without Building Name):\n  [Block Number]<space>[Street Name]<space>"
             + "#[Unit Level]-[Unit Number]{<space>[Building Name]},<space>Singapore<space>[Postal Code]\n"
             + "  Example: 101 Marlow Street #12-05, Singapore 059020\n"
             + "  Example (With Building Name): 101 Marlow Street #12-05 Clife Parkview, Singapore 059020\n"
-            + "Note: Format is <space> sensitive; [Detail] must be provided; {Detail} is optional\n"
+            + LINE_BREAK
+            + "\nNote: Format is <space> sensitive; [Detail] must be provided; {Detail} is optional\n"
             + "Any deviation from format will lead to invalid address.";
 
     public static final String MESSAGE_INVALID_PRICE_FORMAT = "OOPS!!! Please enter positive number "
@@ -88,6 +91,13 @@ public class Messages {
 
     public static final String MESSAGE_INVALID_BUDGET_FORMAT = "OOPS!!! Please enter positive number "
             + "(No letter/symbols, etc) for budget";
+
+    public static final String MESSAGE_DUPLICATE_PROPERTY = "OOPS!!! There is already an existing property with the"
+            + " same address.";
+
+    public static final String MESSAGE_DUPLICATE_CLIENT = "OOPS!!! There is already an existing client with the"
+            + " same name/contact number/email.";
+    //@@author
 
 
     /* Delete Property/Client Related Error Messages */
@@ -145,9 +155,6 @@ public class Messages {
     public static final String MESSAGE_INCORRECT_LIST_DETAILS = "OOPS!!! Please enter -client"
             + " to list clients, -property to list properties, and -everything to list"
             + " everything";
-
-    public static final String LINE_BREAK = "----------------------------------------------------------------------"
-            + "----------";
 
     public static final String MESSAGE_BYE_PARAMETERS_PRESENT = "Please type bye without any parameters"
             + " if you would like to quit";

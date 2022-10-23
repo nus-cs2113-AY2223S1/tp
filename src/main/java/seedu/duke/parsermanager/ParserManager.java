@@ -63,9 +63,9 @@ public class ParserManager {
             boolean isAddClient = subAddCommandType.equals(CLIENT_FLAG);
 
             if (isAddProperty) {
-                return new ParseAddProperty(addCommandDescription);
+                return new ParseAddProperty(addCommandDescription, propertyList);
             } else if (isAddClient) {
-                return new ParseAddClient(addCommandDescription);
+                return new ParseAddClient(addCommandDescription, clientList);
             } else {
                 throw new UndefinedSubCommandTypeException(MESSAGE_MISSING_SUB_COMMAND_TYPE);
             }
