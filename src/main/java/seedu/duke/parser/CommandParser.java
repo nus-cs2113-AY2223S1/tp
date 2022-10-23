@@ -1,6 +1,16 @@
 package seedu.duke.parser;
 
-import seedu.duke.command.*;
+import seedu.duke.command.Command;
+import seedu.duke.command.CreateCommand;
+import seedu.duke.command.ExitCommand;
+import seedu.duke.command.DeleteCommand;
+import seedu.duke.command.AddCommand;
+import seedu.duke.command.CommandType;
+import seedu.duke.command.FavouriteCommand;
+import seedu.duke.command.HelpCommand;
+import seedu.duke.command.ListCommand;
+import seedu.duke.command.ViewCommand;
+import seedu.duke.command.Database;
 import seedu.duke.exceptions.InvalidModuleException;
 import seedu.duke.exceptions.InvalidUserCommandException;
 import seedu.duke.exceptions.ModuleNotFoundException;
@@ -8,6 +18,18 @@ import seedu.duke.module.Module;
 import seedu.duke.timetable.Lesson;
 
 public class CommandParser {
+    private static final String UNIVERSITY_PREFIX = "u/";
+    private static final String MODULE_PREFIX = "m/";
+    private static final String DAY_PREFIX = "d/";
+    private static final String START_TIME_PREFIX = "st/";
+    private static final String END_TIME_PREFIX = "en/";
+    private static final String ADD_FAVORITE_PREFIX = "add/";
+    private static final String DELETE_FAVORITE_PREFIX = "del/";
+    private static final String VIEW_FAVORITE_PREFIX = "view/";
+    private static final String UNIVERSITIES_OPTION = "UNIVERSITIES";
+    private static final String USER_LISTS_OPTION = "LISTS";
+    private static final String MODULES_OPTION = "MODULES";
+    private static final String DELETE_HISTORY_OPTION = "DELETE_HISTORY";
     private static final int SIX_PARAMETERS_LENGTH = 6;
     private static final int THREE_PARAMETERS_LENGTH = 3;
     private static final int TWO_PARAMETERS_LENGTH = 2;
@@ -123,7 +145,8 @@ public class CommandParser {
     }
 
     private static boolean isValidViewOptionIndex(String option) {
-        return option.trim().equals("LISTS") || option.startsWith("u/") || option.trim().equals("DELETE_HISTORY");
+        return option.trim().equals(USER_LISTS_OPTION) || option.startsWith(UNIVERSITY_PREFIX)
+                || option.trim().equals(DELETE_HISTORY_OPTION);
     }
 
     private static boolean isValidAddCommand(String[] parameters) {
@@ -154,8 +177,8 @@ public class CommandParser {
     }
 
     private static boolean isValidListOption(String option) {
-        return option.trim().equals("UNIVERSITIES") || option.trim().equals("MODULES")
-                || option.startsWith("u/") || option.startsWith("m/");
+        return option.trim().equals(UNIVERSITIES_OPTION) || option.trim().equals(MODULES_OPTION)
+                || option.startsWith(UNIVERSITY_PREFIX) || option.startsWith(MODULE_PREFIX);
     }
 
     private static boolean isValidFavouriteCommand(String[] parameters) {
@@ -164,23 +187,28 @@ public class CommandParser {
     }
 
     private static boolean isValidFavouriteOption(String option) {
-        return option.startsWith("add/") || option.startsWith("del/") || option.startsWith("view/");
+        return option.startsWith(ADD_FAVORITE_PREFIX) || option.startsWith(DELETE_FAVORITE_PREFIX)
+                || option.startsWith(VIEW_FAVORITE_PREFIX);
     }
 
     private static boolean isValidCommandOnModules(String[] parameters) {
-        return parameters.length == THREE_PARAMETERS_LENGTH && parameters[UNIVERSITY_INDEX].startsWith("u/")
-                && parameters[MODULE_INDEX].startsWith("m/");
+        return parameters.length == THREE_PARAMETERS_LENGTH
+                && parameters[UNIVERSITY_INDEX].startsWith(UNIVERSITY_PREFIX)
+                && parameters[MODULE_INDEX].startsWith(MODULE_PREFIX);
     }
 
     private static boolean isValidCommandOnUniversity(String[] parameters) {
-        return parameters.length == TWO_PARAMETERS_LENGTH && parameters[UNIVERSITY_INDEX].startsWith("u/");
+        return parameters.length == TWO_PARAMETERS_LENGTH
+                && parameters[UNIVERSITY_INDEX].startsWith(UNIVERSITY_PREFIX);
     }
 
     private static boolean isValidCommandOnTimetable(String[] parameters) {
-        return parameters.length == SIX_PARAMETERS_LENGTH && parameters[UNIVERSITY_INDEX].startsWith("u/")
-                && parameters[MODULE_INDEX].startsWith("m/") && parameters[DAY_INDEX].startsWith("d/")
-                && parameters[LESSON_START_TIME_INDEX].startsWith("st/")
-                && parameters[LESSON_END_TIME_INDEX].startsWith("en/");
+        return parameters.length == SIX_PARAMETERS_LENGTH
+                && parameters[UNIVERSITY_INDEX].startsWith(UNIVERSITY_PREFIX)
+                && parameters[MODULE_INDEX].startsWith(MODULE_PREFIX)
+                && parameters[DAY_INDEX].startsWith(DAY_PREFIX)
+                && parameters[LESSON_START_TIME_INDEX].startsWith(START_TIME_PREFIX)
+                && parameters[LESSON_END_TIME_INDEX].startsWith(END_TIME_PREFIX);
     }
 
     private static String[] parseUserCommand(String userInput) {
