@@ -342,6 +342,17 @@ public class ConsoleInterface {
         }
     }
 
+    private void viewExpenseByExpenseName(String expenseName) throws ExpenseManagerExpenseNotFoundException {
+        ArrayList<Expense> expenses = expenseManager.getExpensesByName(expenseName);
+
+        for (int index = 0; index < expenses.size(); index++) {
+            Expense expense = expenses.get(index);
+
+            printInformationalMessage("---- EXPENSE INDEX " + index + " ----");
+            printInformationalMessage(convertExpenseToConsoleString(expense));
+        }
+    }
+
     private void viewExpense() {
         ArrayList<Expense> expenses = expenseManager.getExpenses();
 
@@ -360,12 +371,19 @@ public class ConsoleInterface {
     private void runCommandViewExpense(ConsoleCommandViewExpense consoleCommandViewExpense) {
         int expenseIndex = consoleCommandViewExpense.getExpenseIndex();
         String expenseCategory = consoleCommandViewExpense.getExpenseCategory();
+        String expenseName = consoleCommandViewExpense.getExpenseName();
 
         if (expenseIndex >= 0) {
             viewExpenseByExpenseIndex(expenseIndex);
         } else if (expenseCategory != null && !expenseCategory.isEmpty()) {
             try {
                 viewExpenseByExpenseCategory(expenseCategory);
+            } catch (ExpenseManagerExpenseNotFoundException exception) {
+                printErrorMessage(exception.getMessage());
+            }
+        } else if (expenseName != null && !expenseName.isEmpty()) {
+            try {
+                viewExpenseByExpenseName(expenseName);
             } catch (ExpenseManagerExpenseNotFoundException exception) {
                 printErrorMessage(exception.getMessage());
             }
