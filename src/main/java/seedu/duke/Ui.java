@@ -27,6 +27,14 @@ import static seedu.duke.Messages.MESSAGE_WELCOME;
  */
 public class Ui {
 
+    private static final String FULL_STOP = ".";
+    private static final String CLIENT_NAME_LABEL = "Client Name: ";
+    private static final String CLIENT_CONTACT_NUMBER_LABEL = "Client Contact Number: ";
+    private static final String CLIENT_EMAIL_LABEL = "Client Email: ";
+    private static final String CLIENT_BUDGET_LABEL = "Client Budget: ";
+    private static final String SPACE = "\t";
+
+
     private static boolean inputIsEmpty(String rawInput) {
         return rawInput.trim().isEmpty();
     }
@@ -126,8 +134,27 @@ public class Ui {
     /* Check-Command-related showMessage methods. */
 
     public void displayOneClient(Client client, int i) {
-        System.out.println(i + ".");
-        System.out.println(client.toString());
+
+        // Prints out the index and client name
+        String index = i + FULL_STOP;
+        String clientName = CLIENT_NAME_LABEL + client.getClientName();
+        System.out.println(index + SPACE + clientName);
+
+        // Prints out client's contact number
+        String clientContact = CLIENT_CONTACT_NUMBER_LABEL + client.getClientContactNumber();
+        System.out.println(SPACE + clientContact);
+
+        // Prints out client's email if it's indicated
+        String clientEmail = CLIENT_EMAIL_LABEL + client.getClientEmail();
+        boolean hasEmptyEmail = client.getClientEmail().isEmpty();
+        if (!hasEmptyEmail) {
+            System.out.println(SPACE + clientEmail);
+        }
+
+        // Prints out client's budget
+        String clientBudget = CLIENT_BUDGET_LABEL + client.getClientBudgetPerMonth();
+        System.out.println(SPACE + clientBudget);
+
         System.out.println(LINE_BREAK);
     }
 

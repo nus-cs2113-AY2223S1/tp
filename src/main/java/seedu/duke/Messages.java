@@ -166,4 +166,10 @@ public class Messages {
             + "\ne/ for client email"
             + "\nb/ for client budget";
     public static final String MESSAGE_BYE = "Goodbye :). See you soon!";
+
+
+    /* Error message for Find Function */
+    public static final String MESSAGE_FIND_INVALID_FLAG = "OOPS!!! Please ensure you only have 'f/' flag.";
+
+    public static final String MESSAGE_NO_MATCHES = "There is no client that fits within your query.";
 }
