@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+//@@author OVReader
 /**
  * Adds a client to the client list.
  */
@@ -44,7 +45,7 @@ public class CommandAddClient extends CommandAdd {
         clientList.addClient(clientName, clientContactNumber, clientEmail, clientBudgetPerMonth);
         ui.showClientAddedConfirmationMessage(clientList);
 
-        //Update Storage
+        // Updates Storage
         storage.addToClientFile(this.clientName, this.clientContactNumber,
                 this.clientEmail, this.clientBudgetPerMonth);
     }
