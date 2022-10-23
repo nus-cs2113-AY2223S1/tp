@@ -83,7 +83,7 @@ public class StatsCommand extends Command {
         };
         return optionalTags;
     }
-    
+
     @Override
     public void setStatsType(String statsType) {
         this.statsType = statsType;
