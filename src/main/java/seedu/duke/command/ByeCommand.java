@@ -1,6 +1,6 @@
-//@@author paullowse
 package seedu.duke.command;
 
+//@@author paullowse
 import seedu.duke.Storage;
 import seedu.duke.Ui;
 import seedu.duke.data.TransactionList;

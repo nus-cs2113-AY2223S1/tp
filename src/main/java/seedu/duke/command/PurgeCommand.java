@@ -1,6 +1,6 @@
-//@@author brian-vb
 package seedu.duke.command;
 
+//@@author brian-vb
 import seedu.duke.Storage;
 import seedu.duke.Ui;
 import seedu.duke.data.TransactionList;

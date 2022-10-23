@@ -1,6 +1,6 @@
-//@@author chinhan99
 package seedu.duke.exception;
 
+//@@author chinhan99
 import seedu.duke.common.ErrorMessages;
 
 public class StorageFileCorruptedException extends MoolahException {

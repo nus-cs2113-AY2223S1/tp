@@ -1,6 +1,6 @@
-//@@author paullowse
 package seedu.duke.exception;
 
+//@@author paullowse
 import seedu.duke.common.ErrorMessages;
 
 public class GlobalInvalidPeriodException extends MoolahException {

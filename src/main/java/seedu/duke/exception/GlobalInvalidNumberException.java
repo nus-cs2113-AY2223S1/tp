@@ -1,6 +1,6 @@
-//@@author brian-vb
 package seedu.duke.exception;
 
+//@@author brian-vb
 import seedu.duke.common.ErrorMessages;
 
 public class GlobalInvalidNumberException extends MoolahException {

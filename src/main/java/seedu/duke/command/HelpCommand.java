@@ -1,6 +1,6 @@
-//@author wcwy
 package seedu.duke.command;
 
+//@author wcwy
 import seedu.duke.Storage;
 import seedu.duke.Ui;
 import seedu.duke.data.TransactionList;

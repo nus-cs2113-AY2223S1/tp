@@ -1,6 +1,6 @@
-//@@author paullowse
 package seedu.duke.command;
 
+//@@author paullowse
 import seedu.duke.Storage;
 import seedu.duke.Ui;
 import seedu.duke.data.TransactionList;
@@ -79,8 +79,8 @@ public class ListCommand extends Command {
             COMMAND_TAG_TRANSACTION_TYPE,
             COMMAND_TAG_TRANSACTION_CATEGORY,
             COMMAND_TAG_TRANSACTION_DATE,
-                COMMAND_TAG_GLOBAL_MONTH,
-                COMMAND_TAG_GLOBAL_YEAR
+            COMMAND_TAG_GLOBAL_MONTH,
+            COMMAND_TAG_GLOBAL_YEAR
         };
         return optionalTags;
     }

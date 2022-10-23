@@ -1,6 +1,6 @@
-//@@author wcwy
 package seedu.duke.parser;
 
+//@@author wcwy
 import seedu.duke.command.Command;
 import seedu.duke.command.ListCommand;
 import seedu.duke.data.transaction.Expense;

@@ -1,6 +1,6 @@
-//@@author chinhan99
 package seedu.duke.command;
 
+//@@author chinhan99
 import seedu.duke.Storage;
 import seedu.duke.Ui;
 import seedu.duke.data.TransactionList;

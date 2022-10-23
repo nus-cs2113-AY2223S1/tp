@@ -1,6 +1,6 @@
-//@@author wcwy
 package seedu.duke.exception;
 
+//@@author wcwy
 import seedu.duke.common.ErrorMessages;
 
 public class GlobalMissingTagException extends MoolahException {

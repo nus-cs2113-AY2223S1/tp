@@ -1,6 +1,6 @@
-//@@author paullowse
 package seedu.duke.exception;
 
+//@@author paullowse
 import static seedu.duke.common.ErrorMessages.ERROR_GLOBAL_INVALID_COMMAND;
 
 public class GlobalInvalidCommandException extends MoolahException {

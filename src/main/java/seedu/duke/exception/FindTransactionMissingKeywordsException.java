@@ -1,6 +1,6 @@
-//@@author chydarren
 package seedu.duke.exception;
 
+//@@author chydarren
 import seedu.duke.common.ErrorMessages;
 
 public class FindTransactionMissingKeywordsException extends MoolahException {
