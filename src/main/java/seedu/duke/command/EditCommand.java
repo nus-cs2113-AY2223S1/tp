@@ -1,3 +1,4 @@
+//@@author brian-vb
 package seedu.duke.command;
 
 import seedu.duke.Storage;
@@ -6,8 +7,8 @@ import seedu.duke.data.TransactionList;
 
 import java.time.LocalDate;
 
+import static seedu.duke.command.CommandTag.COMMAND_TAG_GLOBAL_ENTRY_NUMBER;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_TYPE;
-import static seedu.duke.command.CommandTag.COMMAND_TAG_LIST_ENTRY_NUMBER;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_CATEGORY;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_DATE;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_AMOUNT;
@@ -17,6 +18,7 @@ import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_DESCRIPTION;
  * Represents an edit command object that will execute the operations for Edit command.
  */
 public class EditCommand extends Command {
+    //@@author brian-vb
     private static final String LINE_SEPARATOR = System.lineSeparator();
     // The command word used to trigger the execution of Moolah Manager's operations
     public static final String COMMAND_WORD = "EDIT";
@@ -67,7 +69,7 @@ public class EditCommand extends Command {
      */
     @Override
     public String[] getMandatoryTags() {
-        String[] mandatoryTags = new String[]{COMMAND_TAG_LIST_ENTRY_NUMBER};
+        String[] mandatoryTags = new String[]{COMMAND_TAG_GLOBAL_ENTRY_NUMBER};
         return mandatoryTags;
     }
 

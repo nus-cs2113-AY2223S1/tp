@@ -1,22 +1,23 @@
+//@@author paullowse
 package seedu.duke.command;
 
 import seedu.duke.Storage;
 import seedu.duke.Ui;
 import seedu.duke.data.TransactionList;
-import seedu.duke.exception.InputMissingTagException;
-import seedu.duke.exception.InputTransactionUnknownTypeException;
-import seedu.duke.exception.ListStatsInvalidStatsTypeException;
+import seedu.duke.exception.GlobalMissingTagException;
+import seedu.duke.exception.InputTransactionInvalidTypeException;
 import seedu.duke.exception.MoolahException;
 
 import java.time.LocalDate;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
+//@@author chydarren
 import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_TYPE;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_CATEGORY;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_DATE;
-import static seedu.duke.command.CommandTag.COMMAND_TAG_STATS_MONTH;
-import static seedu.duke.command.CommandTag.COMMAND_TAG_STATS_YEAR;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_GLOBAL_MONTH;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_GLOBAL_YEAR;
 import static seedu.duke.common.InfoMessages.INFO_LIST;
 import static seedu.duke.common.InfoMessages.INFO_LIST_EMPTY;
 
@@ -24,6 +25,7 @@ import static seedu.duke.common.InfoMessages.INFO_LIST_EMPTY;
  * Represents a list command object that will execute the operations for List command.
  */
 public class ListCommand extends Command {
+    //@@author chydarren
     private static final String LINE_SEPARATOR = System.lineSeparator();
     // The command word used to trigger the execution of Moolah Manager's operations
     public static final String COMMAND_WORD = "LIST";
@@ -77,8 +79,8 @@ public class ListCommand extends Command {
             COMMAND_TAG_TRANSACTION_TYPE,
             COMMAND_TAG_TRANSACTION_CATEGORY,
             COMMAND_TAG_TRANSACTION_DATE,
-            COMMAND_TAG_STATS_MONTH,
-            COMMAND_TAG_STATS_YEAR
+                COMMAND_TAG_GLOBAL_MONTH,
+                COMMAND_TAG_GLOBAL_YEAR
         };
         return optionalTags;
     }
@@ -132,17 +134,17 @@ public class ListCommand extends Command {
      * @param type         The type of transaction.
      * @param category     A category for the transaction.
      * @param date         Date of the transaction with format in "yyyyMMdd".
-     * @throws InputTransactionUnknownTypeException If class type cannot be found in the packages.
+     * @throws InputTransactionInvalidTypeException If class type cannot be found in the packages.
      */
     private static void listTransactions(TransactionList transactions, String type, String category, LocalDate date,
                                          int month, int year)
-            throws InputTransactionUnknownTypeException, InputMissingTagException {
+            throws InputTransactionInvalidTypeException, GlobalMissingTagException {
         if (month != -1 && year == -1) {
             listLogger.log(Level.WARNING, "An exception has been caught as a month was given without a year.");
-            throw new InputMissingTagException();
+            throw new GlobalMissingTagException();
         }
 
-        String transactionsList = transactions.listTransactions(type, category, date);
+        String transactionsList = transactions.listTransactions(type, category, date, month, year);
 
         if (transactionsList.isEmpty()) {
             listLogger.log(Level.INFO, "Transactions list is empty as there are no transactions available.");

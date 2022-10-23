@@ -1,8 +1,9 @@
+//@@author chydarren
 package seedu.duke.exception;
 
 import seedu.duke.common.ErrorMessages;
 
-public class InvalidIndexException extends MoolahException {
+public class GlobalInvalidMonthException extends MoolahException {
     /**
      * Returns the error message of the exception to alert user of the exception.
      *
@@ -10,6 +11,6 @@ public class InvalidIndexException extends MoolahException {
      */
     @Override
     public String getMessage() {
-        return ErrorMessages.ERROR_INPUT_INVALID_INDEX.toString();
+        return ErrorMessages.ERROR_GLOBAL_INVALID_MONTH.toString();
     }
 }

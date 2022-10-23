@@ -12,7 +12,7 @@ import seedu.duke.command.ListCommand;
 import seedu.duke.command.PurgeCommand;
 
 import seedu.duke.exception.MoolahException;
-import seedu.duke.exception.InvalidCommandException;
+import seedu.duke.exception.GlobalInvalidCommandException;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -89,9 +89,9 @@ public class CommandParser {
      *
      * @param commandWordInput The command word entered by user.
      * @return Command object created.
-     * @throws InvalidCommandException If the command word is not supported by the application.
+     * @throws GlobalInvalidCommandException If the command word is not supported by the application.
      */
-    public static Command getCommand(String commandWordInput, String parameterInput) throws InvalidCommandException {
+    public static Command getCommand(String commandWordInput, String parameterInput) throws GlobalInvalidCommandException {
         // TODO: Remove parameter input once a solution is found for managing parameter that allows space
         Command command = null;
         switch (commandWordInput.toUpperCase()) {
@@ -124,7 +124,7 @@ public class CommandParser {
             break;
         default:
             parserLogger.log(Level.WARNING, "An invalid command error is caught in this command");
-            throw new InvalidCommandException();
+            throw new GlobalInvalidCommandException();
         }
         return command;
     }

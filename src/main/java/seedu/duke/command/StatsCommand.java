@@ -1,10 +1,11 @@
+//@@author chydarren
 package seedu.duke.command;
 
 import seedu.duke.Storage;
 import seedu.duke.Ui;
 import seedu.duke.data.TransactionList;
 import seedu.duke.data.transaction.Transaction;
-import seedu.duke.exception.ListStatsInvalidStatsTypeException;
+import seedu.duke.exception.StatsInvalidTypeException;
 import seedu.duke.exception.MoolahException;
 
 import java.time.LocalDate;
@@ -12,11 +13,12 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+//@@author paullowse
 import static seedu.duke.command.CommandTag.COMMAND_TAG_STATS_TYPE;
-import static seedu.duke.command.CommandTag.COMMAND_TAG_STATS_MONTH;
-import static seedu.duke.command.CommandTag.COMMAND_TAG_STATS_NUMBER;
-import static seedu.duke.command.CommandTag.COMMAND_TAG_STATS_PERIOD;
-import static seedu.duke.command.CommandTag.COMMAND_TAG_STATS_YEAR;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_GLOBAL_MONTH;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_GLOBAL_NUMBER;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_GLOBAL_PERIOD;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_GLOBAL_YEAR;
 import static seedu.duke.common.InfoMessages.INFO_STATS_CATEGORIES;
 import static seedu.duke.common.InfoMessages.INFO_STATS_EMPTY;
 import static seedu.duke.common.InfoMessages.INFO_STATS_EXPENSES;
@@ -29,6 +31,7 @@ import static seedu.duke.common.InfoMessages.INFO_STATS_TIME;
  * Represents a get command object that will execute the operations for Get command.
  */
 public class StatsCommand extends Command {
+    //@@author paullowse
     private static final String LINE_SEPARATOR = System.lineSeparator();
     // The command word used to trigger the execution of Moolah Manager's operations
     public static final String COMMAND_WORD = "STATS";
@@ -76,10 +79,10 @@ public class StatsCommand extends Command {
     @Override
     public String[] getOptionalTags() {
         String[] optionalTags = new String[]{
-            COMMAND_TAG_STATS_MONTH,
-            COMMAND_TAG_STATS_YEAR,
-            COMMAND_TAG_STATS_NUMBER,
-            COMMAND_TAG_STATS_PERIOD,
+                COMMAND_TAG_GLOBAL_MONTH,
+                COMMAND_TAG_GLOBAL_YEAR,
+                COMMAND_TAG_GLOBAL_NUMBER,
+                COMMAND_TAG_GLOBAL_PERIOD,
         };
         return optionalTags;
     }
@@ -157,13 +160,13 @@ public class StatsCommand extends Command {
                 statsTypeTimeSavings(transactions, year, month, period, number);
             } else {
                 statsLogger.log(Level.WARNING, "An exception has been caught due to a missing tag");
-                throw new ListStatsInvalidStatsTypeException();
+                throw new StatsInvalidTypeException();
             }
             break;
         //@@author chydarren
         default:
             statsLogger.log(Level.WARNING, "An exception has been caught due to an invalid stats type.");
-            throw new ListStatsInvalidStatsTypeException();
+            throw new StatsInvalidTypeException();
         }
     }
 
@@ -216,7 +219,7 @@ public class StatsCommand extends Command {
             timeTransactions = transactions.getTransactionsByMonth(year, month);
         } else {
             statsLogger.log(Level.WARNING, "An exception has been caught due to a missing tag");
-            throw new ListStatsInvalidStatsTypeException();
+            throw new StatsInvalidTypeException();
         }
         String timeSavingsList = transactions.listTimeStats(timeTransactions, year, month, period, number);
 
@@ -239,7 +242,6 @@ public class StatsCommand extends Command {
         assert !timeSavingsList.isEmpty();
         statsLogger.log(Level.INFO, "Monthly savings list is found to contain categories-amount pairs.");
         Ui.showStatsList(timeSavingsList, INFO_STATS_TIME.toString(), incomeMessage, expensesMessage, savingsMessage);
-
     }
 
     //@@author paullowse

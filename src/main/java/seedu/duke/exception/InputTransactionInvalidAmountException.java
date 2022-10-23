@@ -1,8 +1,8 @@
+//@@author chinhan99
 package seedu.duke.exception;
 
 import seedu.duke.common.ErrorMessages;
 
-//@@author chinhan99
 public class InputTransactionInvalidAmountException extends MoolahException {
     /**
      * Returns the error message of the exception to alert user of the exception.
@@ -11,8 +11,7 @@ public class InputTransactionInvalidAmountException extends MoolahException {
      */
     @Override
     public String getMessage() {
-        return ErrorMessages.ERROR_INPUT_INVALID_AMOUNT.toString();
+        return ErrorMessages.ERROR_TRANSACTION_INVALID_AMOUNT.toString();
     }
 
 }
-//@@author

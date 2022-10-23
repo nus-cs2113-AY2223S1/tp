@@ -1,3 +1,4 @@
+//@author wcwy
 package seedu.duke.command;
 
 import seedu.duke.Storage;
@@ -10,6 +11,7 @@ import static seedu.duke.command.CommandTag.COMMAND_TAG_HELP_OPTION;
  * Represents a help command object that will execute the operations for Help command.
  */
 public class HelpCommand extends Command {
+    //@@author wcwy
     private static final String LINE_SEPARATOR = System.lineSeparator();
     // The command word used to trigger the execution of Moolah Manager's operations
     public static final String COMMAND_WORD = "HELP";

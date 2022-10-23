@@ -3,7 +3,6 @@ package seedu.duke;
 import seedu.duke.command.Command;
 import seedu.duke.data.TransactionList;
 import seedu.duke.exception.MoolahException;
-import seedu.duke.exception.StorageWriteErrorException;
 import seedu.duke.parser.CommandParser;
 
 import java.io.IOException;

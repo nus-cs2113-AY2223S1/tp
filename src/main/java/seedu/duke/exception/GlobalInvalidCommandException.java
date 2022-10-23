@@ -1,8 +1,9 @@
+//@@author paullowse
 package seedu.duke.exception;
 
-import seedu.duke.common.ErrorMessages;
+import static seedu.duke.common.ErrorMessages.ERROR_GLOBAL_INVALID_COMMAND;
 
-public class InputUnsupportedTagException extends MoolahException {
+public class GlobalInvalidCommandException extends MoolahException {
     /**
      * Returns the error message of the exception to alert user of the exception.
      *
@@ -10,6 +11,6 @@ public class InputUnsupportedTagException extends MoolahException {
      */
     @Override
     public String getMessage() {
-        return ErrorMessages.ERROR_INPUT_UNSUPPORTED_TAG.toString();
+        return ERROR_GLOBAL_INVALID_COMMAND.toString();
     }
 }

@@ -1,8 +1,9 @@
+//@@author chydarren
 package seedu.duke.exception;
 
 import seedu.duke.common.ErrorMessages;
 
-public class InputTransactionInvalidTagException extends MoolahException {
+public class InputTransactionInvalidTypeException extends MoolahException {
     /**
      * Returns the error message of the exception to alert user of the exception.
      *
@@ -10,6 +11,6 @@ public class InputTransactionInvalidTagException extends MoolahException {
      */
     @Override
     public String getMessage() {
-        return ErrorMessages.ERROR_INPUT_INVALID_TAG.toString();
+        return ErrorMessages.ERROR_TRANSACTION_INVALID_TYPE.toString();
     }
 }

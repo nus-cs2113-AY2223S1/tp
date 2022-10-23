@@ -1,8 +1,9 @@
+//@@author brian-vb
 package seedu.duke.exception;
 
 import seedu.duke.common.ErrorMessages;
 
-public class InputTransactionUnknownTypeException extends MoolahException {
+public class GlobalNumberNotNumericException extends MoolahException {
     /**
      * Returns the error message of the exception to alert user of the exception.
      *
@@ -10,6 +11,6 @@ public class InputTransactionUnknownTypeException extends MoolahException {
      */
     @Override
     public String getMessage() {
-        return ErrorMessages.ERROR_INPUT_INVALID_TYPE.toString();
+        return ErrorMessages.ERROR_GLOBAL_NUMBER_NOT_NUMERIC.toString();
     }
 }
