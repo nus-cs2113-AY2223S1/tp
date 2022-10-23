@@ -27,9 +27,25 @@ import java.nio.file.Files;
 import java.util.Map;
 import java.util.Scanner;
 
+/**
+ * Storage class that handles the saving and loading of the builds.
+ */
 public class Storage {
+
+    /**
+     * The relative path to the file directory that stores the builds files.
+     */
     private static final String FILE_DIRECTORY = "data";
+
+    /**
+     * The relative path to the file that stores the build names.
+     */
     private static String BUILD_FILE_PATH = "data/builds.txt";
+
+    /**
+     * The relative path to the file that stores the build parts.
+     * The name of the file is the name of the build.
+     */
     private static String COMPONENT_FILE_PATH;
     static final int TYPE_PARAMETER = 0;
 
@@ -39,10 +55,20 @@ public class Storage {
 
     static final int POWER_PARAMETER = 3;
 
+    /**
+     * Initializes the storage class.
+     */
     public Storage() {
 
     }
 
+    /**
+     * Gets the desired text from a position of the line saved in the file delimited by /.
+     *
+     * @param line the line to be read
+     * @param mode the desired position of the text to be retrieved
+     * @return
+     */
     private static String getParameter(String line, int mode) {
         String[] lineSplit = line.split("/");
         return lineSplit[mode];
@@ -73,10 +99,10 @@ public class Storage {
     }
 
     /**
-     * Delete the text file of the build.
+     * Deletes the text file of the build.
      *
      * @param name name of the build
-     * @param buildManager buildManager
+     * @param buildManager buildManager that contains all the builds
      * @throws IOException if the file is not found
      */
     public void deleteBuild(String name, BuildManager buildManager) throws IOException {
@@ -112,7 +138,8 @@ public class Storage {
     }
 
     /**
-     * Saves all the components in the build to the file with its name.
+     * Saves all the components in the build to the file.
+     * The name of the file is the name of the build.
      *
      * @param build the build that contains all the components
      * @throws IOException if the file cannot be created
@@ -138,7 +165,7 @@ public class Storage {
     }
 
     /**
-     * Loads all the builds from the file.
+     * Loads all the builds from the file that contains all the build names.
      *
      * @param buildManager the build manager that contains all the builds
      * @throws FileNotFoundException if the file is not found
@@ -159,7 +186,8 @@ public class Storage {
     }
 
     /**
-     * Loads all the components from the file to the respective build.
+     * Loads all the components from the file to their respective build.
+     *
      * @param buildManager the build manager that contains all the builds
      * @throws FileNotFoundException if the file is not found
      */
@@ -216,60 +244,148 @@ public class Storage {
         }
     }
 
-    private static void loadOther(String name, String price, String power, Build build) {
-        Other other = new Other(name, price, power);
-        build.addComponent("other", other);
+    /**
+     * Loads the cpu from the file.
+     *
+     * @param line the line that contains the cpu
+     * @param name the name of the cpu
+     * @param price the price of the cpu
+     * @param power the power of the cpu
+     * @param build the build that the cpu is added to
+     */
+    private void loadCpu(String line, String name, String price, String power, Build build) {
+        Cpu cpu = new Cpu(name, price, power, getParameter(line, 4), getParameter(line, 5));
+        build.addComponent("cpu", cpu);
     }
 
-    private static void loadCase(String line, String name, String price, String power, Build build) {
-        Case case1 = new Case(name, price, power, getParameter(line, 4),
-                getParameter(line, 5));
-        build.addComponent("case", case1);
-    }
-
-    private static void loadCooler(String line, String name, String price, String power, Build build) {
-        Cooler cooler = new Cooler(name, price, power, getParameter(line, 4),
-                getParameter(line, 5), getParameter(line, 6));
-        build.addComponent("cooler", cooler);
-    }
-
-    private static void loadMonitor(String line, String name, String price, String power, Build build) {
-        Monitor monitor = new Monitor(name, price, power, getParameter(line, 4),
-                getParameter(line, 5), getParameter(line, 6));
-        build.addComponent("monitor", monitor);
-    }
-
-    private static void loadDrive(String line, String name, String price, String power, Build build) {
-        Drive drive = new Drive(name, price, power, getParameter(line, 4),
-                getParameter(line, 5));
-        build.addComponent("drive", drive);
-    }
-
-    private static void loadGpu(String line, String name, String price, String power, Build build) {
-        Gpu gpu = new Gpu(name, price, power, getParameter(line, 4),
-                getParameter(line, 5));
-        build.addComponent("gpu", gpu);
-    }
-
-    private static void loadPowerSupply(String name, String price, String power, Build build) {
-        PowerSupply powersupply = new PowerSupply(name, price, power);
-        build.addComponent("powersupply", powersupply);
-    }
-
-    private static void loadMotherboard(String line, String name, String price, String power, Build build) {
-        Motherboard motherboard = new Motherboard(name, price, power, getParameter(line, 4),
-                getParameter(line, 5), getParameter(line, 6), getParameter(line, 7));
-        build.addComponent("motherboard", motherboard);
-    }
-
+    /**
+     * Loads the memory from the file.
+     *
+     * @param line the line that contains the memory
+     * @param name the name of the memory
+     * @param price the price of the memory
+     * @param power the power of the memory
+     * @param build the build that the memory is added to
+     */
     private static void loadMemory(String line, String name, String price, String power, Build build) {
         Memory memory = new Memory(name, price, power, getParameter(line, 4),
                 getParameter(line, 5));
         build.addComponent("memory", memory);
     }
 
-    private void loadCpu(String line, String name, String price, String power, Build build) {
-        Cpu cpu = new Cpu(name, price, power, getParameter(line, 4), getParameter(line, 5));
-        build.addComponent("cpu", cpu);
+    /**
+     * Loads the motherboard from the file.
+     *
+     * @param line the line that contains the motherboard
+     * @param name the name of the motherboard
+     * @param price the price of the motherboard
+     * @param power the power of the motherboard
+     * @param build the build that the motherboard is added to
+     */
+    private static void loadMotherboard(String line, String name, String price, String power, Build build) {
+        Motherboard motherboard = new Motherboard(name, price, power, getParameter(line, 4),
+                getParameter(line, 5), getParameter(line, 6), getParameter(line, 7));
+        build.addComponent("motherboard", motherboard);
+    }
+
+    /**
+     * Loads the power supply from the file.
+     *
+     * @param name the name of the power supply
+     * @param price the price of the power supply
+     * @param power the power of the power supply
+     * @param build the build that the power supply is added to
+     */
+    private static void loadPowerSupply(String name, String price, String power, Build build) {
+        PowerSupply powersupply = new PowerSupply(name, price, power);
+        build.addComponent("powersupply", powersupply);
+    }
+
+    /**
+     * Loads the gpu from the file.
+     *
+     * @param line the line that contains the gpu
+     * @param name the name of the gpu
+     * @param price the price of the gpu
+     * @param power the power of the gpu
+     * @param build the build that the gpu is added to
+     */
+    private static void loadGpu(String line, String name, String price, String power, Build build) {
+        Gpu gpu = new Gpu(name, price, power, getParameter(line, 4),
+                getParameter(line, 5));
+        build.addComponent("gpu", gpu);
+    }
+
+    /**
+     * Loads the drive from the file.
+     *
+     * @param line the line that contains the drive
+     * @param name the name of the drive
+     * @param price the price of the drive
+     * @param power the power of the drive
+     * @param build the build that the drive is added to
+     */
+    private static void loadDrive(String line, String name, String price, String power, Build build) {
+        Drive drive = new Drive(name, price, power, getParameter(line, 4),
+                getParameter(line, 5));
+        build.addComponent("drive", drive);
+    }
+
+    /**
+     * Loads the monitor from the file.
+     *
+     * @param line the line that contains the monitor
+     * @param name the name of the monitor
+     * @param price the price of the monitor
+     * @param power the power of the monitor
+     * @param build the build that the monitor is added to
+     */
+    private static void loadMonitor(String line, String name, String price, String power, Build build) {
+        Monitor monitor = new Monitor(name, price, power, getParameter(line, 4),
+                getParameter(line, 5), getParameter(line, 6));
+        build.addComponent("monitor", monitor);
+    }
+
+    /**
+     * Loads the cooler from the file.
+     *
+     * @param line the line that contains the cooler
+     * @param name the name of the cooler
+     * @param price the price of the cooler
+     * @param power the power of the cooler
+     * @param build the build that the cooler is added to
+     */
+    private static void loadCooler(String line, String name, String price, String power, Build build) {
+        Cooler cooler = new Cooler(name, price, power, getParameter(line, 4),
+                getParameter(line, 5), getParameter(line, 6));
+        build.addComponent("cooler", cooler);
+    }
+
+    /**
+     * Loads the case from the file.
+     *
+     * @param line the line that contains the case
+     * @param name the name of the case
+     * @param price the price of the case
+     * @param power the power of the case
+     * @param build the build that the case is added to
+     */
+    private static void loadCase(String line, String name, String price, String power, Build build) {
+        Case case1 = new Case(name, price, power, getParameter(line, 4),
+                getParameter(line, 5));
+        build.addComponent("case", case1);
+    }
+
+    /**
+     * Loads the other from the file.
+     *
+     * @param name the name of the other
+     * @param price the price of the other
+     * @param power the power of the other
+     * @param build the build that the other is added to
+     */
+    private static void loadOther(String name, String price, String power, Build build) {
+        Other other = new Other(name, price, power);
+        build.addComponent("other", other);
     }
 }
