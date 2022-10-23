@@ -123,7 +123,7 @@ public class Parser {
      * Parses the user input and executes the find command by finding a build depending on the search term.
      *
      * @param line The user input.
-     * @throws BlankStringException
+     * @throws BlankStringException If the search term is blank.
      */
     private void mainParseFind(String line) throws BlankStringException {
         String searchTerm = EditParser.getParameter(line, 1);
@@ -138,9 +138,9 @@ public class Parser {
      * filter term and provided parameters.
      *
      * @param line The user input.
-     * @throws NumberFormatException
-     * @throws UnknownCommandException
-     * @throws NegativeNumberException
+     * @throws NumberFormatException If the provided parameters are not numbers.
+     * @throws UnknownCommandException If the filter term is not valid.
+     * @throws NegativeNumberException If the provided parameters are negative.
      */
     private void mainParseFilter(String line) throws NumberFormatException, UnknownCommandException,
             NegativeNumberException {
@@ -164,8 +164,8 @@ public class Parser {
      * Parses the user input and executes the add command by adding a build depending on the build name.
      *
      * @param line The user input.
-     * @throws DuplicateBuildException
-     * @throws BlankStringException
+     * @throws DuplicateBuildException If the build name already exists.
+     * @throws BlankStringException If the build name is blank.
      */
     private void mainParseAdd(String line) throws DuplicateBuildException, BlankStringException {
         Build newBuild;
@@ -191,7 +191,7 @@ public class Parser {
      * Parses the user input and executes the view command by viewing a build depending on the build name.
      *
      * @param line The user input.
-     * @throws UnlistedBuildException
+     * @throws UnlistedBuildException If the build name does not exist.
      */
     private void mainParseView(String line) throws UnlistedBuildException {
         String name;
@@ -208,7 +208,7 @@ public class Parser {
      * Parses the user input and executes the delete command by deleting a build depending on the build name.
      *
      * @param line The user input.
-     * @throws UnlistedBuildException
+     * @throws UnlistedBuildException If the build name does not exist.
      */
     private void mainParseDelete(String line) throws UnlistedBuildException {
         String name;
@@ -252,7 +252,7 @@ public class Parser {
     /**
      * Parses the user input and executes the export command by exporting all builds to a text file.
      *
-     * @throws IOException
+     * @throws IOException If there is an error exporting the builds.
      */
     private void mainParseExport() throws IOException {
         Ui.printLine();
@@ -264,7 +264,7 @@ public class Parser {
     /**
      * Parses the user input and executes the exportCSV command by exporting all builds to a CSV file.
      *
-     * @throws IOException
+     * @throws IOException If there is an error exporting the builds.
      */
     private void mainParseExportCsv() throws IOException {
         Ui.printLine();

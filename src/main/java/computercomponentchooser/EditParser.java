@@ -52,7 +52,7 @@ public class EditParser {
      *
      * @param line The user input.
      * @param mode The desired position of the input to be retrieved.
-     * @return
+     * @return The desired text at the desired position.
      */
     public static String getParameter(String line, int mode) {
         assert mode >= 0;
@@ -127,7 +127,7 @@ public class EditParser {
      *
      * @param editBuild The build to be edited.
      * @param line The user input.
-     * @throws BlankStringException
+     * @throws BlankStringException If the user input is blank.
      */
     public void parseAdd(Build editBuild, String line) throws BlankStringException {
         String type = getParameter(line, TYPE_PARAMETER);
@@ -380,7 +380,7 @@ public class EditParser {
      * is in main mode and wants to edit a build.
      *
      * @param line The user input.
-     * @throws UnlistedBuildException
+     * @throws UnlistedBuildException If the build to be edited is not listed.
      */
     public void parseEdit(String line) throws UnlistedBuildException {
         buildName = getParameter(line, TYPE_PARAMETER);
@@ -398,7 +398,7 @@ public class EditParser {
      *
      * @param editBuild The build to be edited.
      * @param line The user input.
-     * @throws UnlistedBuildException
+     * @throws UnlistedBuildException If the build to be edited is not listed.
      */
     public void parseView(Build editBuild, String line) throws UnlistedBuildException {
         String name = getParameter(line, NAME_PARAMETER);
