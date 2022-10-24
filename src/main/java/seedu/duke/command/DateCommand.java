@@ -59,7 +59,7 @@ public class DateCommand extends Command {
         });
     }
 
-    public static void sortDateForFood (ArrayList <Food> foodArrayList){
+    public static void sortDateForFood(ArrayList<Food> foodArrayList) {
         Collections.sort(foodArrayList, new Comparator<Food>() {
             @Override
             public int compare(Food f1, Food f2) {

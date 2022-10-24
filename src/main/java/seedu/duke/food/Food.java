@@ -9,7 +9,7 @@ public class Food {
 
     private LocalDate date;
 
-    public Food(String foodDescription, int calories, LocalDate date ) {
+    public Food(String foodDescription, int calories, LocalDate date) {
         this.foodDescription = foodDescription;
         this.calories = calories;
         this.date = date;
