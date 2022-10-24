@@ -1,4 +1,4 @@
-package seedu.moneygowhere.currency;
+package seedu.moneygowhere.apis;
 
 import seedu.moneygowhere.common.Configurations;
 import seedu.moneygowhere.common.Messages;
