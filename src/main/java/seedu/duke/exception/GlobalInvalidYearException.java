@@ -1,9 +1,9 @@
 package seedu.duke.exception;
 
+//@@author paullowse
 import seedu.duke.common.ErrorMessages;
 
-//@@author chinhan99
-public class AddTransactionInvalidAmountException extends MoolahException {
+public class GlobalInvalidYearException extends MoolahException {
     /**
      * Returns the error message of the exception to alert user of the exception.
      *
@@ -11,8 +11,6 @@ public class AddTransactionInvalidAmountException extends MoolahException {
      */
     @Override
     public String getMessage() {
-        return ErrorMessages.ERROR_ADD_COMMAND_INVALID_AMOUNT.toString();
+        return ErrorMessages.ERROR_GLOBAL_INVALID_YEAR.toString();
     }
-
 }
-//@@author

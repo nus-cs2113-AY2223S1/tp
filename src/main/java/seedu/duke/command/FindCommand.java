@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
+//@@author chydarren
 import seedu.duke.Storage;
 import seedu.duke.Ui;
 import seedu.duke.data.TransactionList;
@@ -13,6 +14,7 @@ import static seedu.duke.common.InfoMessages.INFO_LIST_UNFILTERED;
  * Represents a find command object that will execute the operations for Find command.
  */
 public class FindCommand extends Command {
+    //@@author chydarren
     private static final String LINE_SEPARATOR = System.lineSeparator();
     // The command word used to trigger the execution of Moolah Manager's operations
     public static final String COMMAND_WORD = "FIND";
@@ -71,13 +73,15 @@ public class FindCommand extends Command {
         // Checks the format of find to ensure that it contains keywords used in the search expression
         checkFindFormat(keywords);
         assert !keywords.isBlank();
+
         String transactionsList = transactions.findTransactions(keywords);
         if (transactionsList.isEmpty()) {
             ui.showInfoMessage(INFO_LIST_UNFILTERED.toString());
             return;
         }
+
         assert !transactionsList.isEmpty();
-        ui.showTransactionsList(transactionsList, INFO_LIST_FILTERED.toString());
+        ui.showList(transactionsList, INFO_LIST_FILTERED.toString());
     }
 
     //@@author paullowse
