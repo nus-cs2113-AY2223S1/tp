@@ -4,7 +4,8 @@ import seedu.duke.biometrics.Biometrics;
 import seedu.duke.exception.IllegalValueException;
 
 public class ExerciseCaloriesCalculator {
-    public static int calculateCalories(Biometrics biometrics, double time, double metabolicEquivalent) throws IllegalValueException {
+    public static int calculateCalories(Biometrics biometrics, double time,
+                                        double metabolicEquivalent) throws IllegalValueException {
         if (biometrics.getWeight() == 0) {
             throw new IllegalValueException("Weight cannot be 0. Pls update biometrics");
         }

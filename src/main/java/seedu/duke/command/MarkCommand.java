@@ -68,10 +68,10 @@ public class MarkCommand extends Command {
                 assert exercise.getDone() : "exercise should be done";
                 ui.output(exercise.getExerciseName() + " is marked as done successfully",
                         "calories:" + exercise.getCaloriesBurnt());
-                break;
             } catch (NumberFormatException e) {
                 LOGGER.log(Level.WARNING, "Error converting string to double", e);
             }
+            break;
         case "undone":
             if (argumentList.length != 2) {
                 LOGGER.warning("Invalid mark undone command");
