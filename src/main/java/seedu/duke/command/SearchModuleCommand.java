@@ -14,6 +14,9 @@ import java.util.logging.Logger;
 
 public class SearchModuleCommand extends Command {
     public static final String COMMAND_WORD = "search";
+    public static final String COMMAND_USAGE = "search [KEYWORD]";
+    public static final String COMMAND_DESCRIPTION = "List out all modules that contains KEYWORD"
+            + System.lineSeparator() + "\t * KEYWORD can either be module code or faculty.";
 
     // private String toSearchModuleCode;
     private Map<String, String> params;
@@ -35,7 +38,7 @@ public class SearchModuleCommand extends Command {
     public void execute(State state, Ui ui, Storage storage) {
         assert state != null : "List of lessons should not be null";
         logger = Logger.getLogger(SUBSYSTEM_NAME);
-        logger.log(Level.INFO, "Loading search module command");
+        logger.log(Level.FINE, "Loading search module command");
 
         toSearchModuleCode = params.getOrDefault("code", null);
         toSearchModuleTitle = params.getOrDefault("title", null);
@@ -158,5 +161,13 @@ public class SearchModuleCommand extends Command {
     @Override
     public String getExecutionMessage() {
         return null;
+    }
+
+    public static String getCommandDescription() {
+        return COMMAND_WORD + DESCRIPTION_DELIMITER + COMMAND_DESCRIPTION;
+    }
+
+    public static String getUsage() {
+        return COMMAND_USAGE;
     }
 }

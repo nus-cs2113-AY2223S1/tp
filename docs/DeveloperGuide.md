@@ -121,7 +121,46 @@ Command class and are all in the command package.
 
 #### 3.4.1 AddModuleCommand
 
+##### How the feature is implemented
+The `AddModuleCommand` class extends the `Command` class.
+The constructor `AddModuleCommand()` parses the user `input` module code `.toUpperCase()` as the format to fetch an
+instance of `module` from its class. Boolean `successful` field is used to flag successfully added modules in comparison
+to instances where it is not possible to add the `module` as it already exists in the `state`'s `selectedModuleList`.
+It overrides the `execute()` method from the `Command` class, and updates `successful` accordingly, which will later be
+passed on to the overridden `getExecutionMessage()` which displays the result of data validation that new `selectedModule`
+added are unique.
+
+##### Why it is implemented this way.
+In order to be able to be able to compare the new instance of `selectedModule` created of the module code the user wants to delete,
+in the constructor against an instance of the module the user has previously added into the `selectedModuleList`, the `equals()`
+method extended from super class `Object` has been overridden to return `true` for instances where `semester` and `module`
+(specifically `moduleCode` attribute from the parent class) are the same, allowing us to validate and add the desired module.
+
+##### Alternatives considered.
+Initially, data validation was being handled by the `Parser` class, however in the principles of avoiding tight coupling 
+and improving cohesion, it was moved back under the `AddModuleCommand` class.
+
 #### 3.4.2 DeleteModuleCommand
+
+##### How the feature is implemented
+The `DeleteModuleCommand` class extends the `Command` class.
+Similar to `AddModuleCommand` class, the constructor `DeleteModuleCommand()` parses the user `input` module code `.toUpperCase()` as the format to fetch an
+instance of `module` from its class. Boolean `successful` field is used to flag successfully added modules in comparison
+to instances where it is not possible to add the `module` as it already exists in the `state`'s `selectedModuleList`.
+It overrides the `execute()` method from the `Command` class, and updates `successful` accordingly, which will later be
+passed on to the overridden `getExecutionMessage()` which displays the result of data validation that the `selectedModule`
+instance is only removed from the `selectedModuleList` if it exists.
+
+##### Why it is implemented this way.
+In order to be able to be able to compare the new instance of `selectedModule` created of the module code the user wants to delete,
+in the constructor against an instance of the module the user has previously added into the `selectedModuleList`, the `equals()`
+method extended from super class `Object` has been overridden to return `true` for instances where `semester` and `module`
+(specifically `moduleCode` attribute from the parent class) are the same, allowing us to validate and remove the desired module.
+
+
+##### Alternatives considered.
+Once again, data validation was being handled by the `Parser` class, however in the principles of avoiding tight coupling
+and improving cohesion, it was moved back under the `DeleteModuleCommand` class.
 
 #### 3.4.3 HelpCommand
 
@@ -182,7 +221,35 @@ details for 1 module.
 
 #### 3.5.1 UI Component
 
+The <code>UI</code> component can:
+- read input from the user
+- store and print out messages to the user
+
+##### Why it is implemented this way
+To comply with the Model-View Controller Framework
+To separate the internal representations and processing of information from the presentation and acceptance of 
+information from the user
+
+##### Alternative Considered
+Each component to handle the presentation of information to the user
+
+- Increase coupling between components
+- Hard to define the sequence that information being presented to user
+
 #### 3.5.2 Link Component
+
+The <code>Link</code> component can:
+- create a [NUSmod](https://nusmods.com/) link to be used in a browser
+- Parse a NUSmod link to import modules into YAMOM
+
+##### Why is it implemented this way
+To separate out the handling of NUSmod compatibility 
+
+##### Alternative Considered
+To implement the handling of export in Storage class and import in Command class
+
+- Increase coupling between components
+- Decrease reusability of NUSmod link processing
 
 #### 3.5.3 Storage Component
 

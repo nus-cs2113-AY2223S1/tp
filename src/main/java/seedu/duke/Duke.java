@@ -22,7 +22,7 @@ public class Duke {
         state = new State();
 
         storage = new Storage();
-        //TODO: the loading of module data and past user data here
+
         storage.openPreviousState(state, ui);
     }
 
@@ -36,13 +36,15 @@ public class Duke {
 
         while (!isExit) {
             try {
+                ui.displayUserPrompt(state.getSemester());
                 String userFullCommand = ui.readNext();
                 ui.displayDivider();
                 Command command = Parser.parse(userFullCommand);
                 command.execute(state, ui, storage);
                 isExit = command.isExit();
             } catch (Exception e) {
-                //TODO: implement catch block once exception is ready
+                e.printStackTrace();
+                ui.displayMessage(e.getMessage());
             } finally {
                 ui.displayDivider();
             }
@@ -69,6 +71,7 @@ public class Duke {
      * Main entry-point for the java.duke.Duke application.
      */
     public static void main(String[] args) {
+
         new Duke(filePath).run();
     }
 }

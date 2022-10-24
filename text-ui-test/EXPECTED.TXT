@@ -7,7 +7,42 @@ __ __ _____ _____ _____ _____
   |_| |__|__|_|_|_|_____|_|_|_|
 
 How can I help you today?
+Enter "help" to get started!
+Sem [1] >> --------------------------------------
+Here are all the commands available in YAMOM!
+
+add	: add a module into YAMOM timetable.
+delete	: remove a module from YAMOM timetable.
+list	: List out all the selected modules and lesson slots.
+bye	: Exit YAMOM!
+export	: Generates an NUSMod Link to be exported to the browser.
+get	: Show all details of a module.
+help	: List out all commands and  their respective usages in YAMOM
+import	: Imports a timetable  from an NUSMod timetable sharing link
+search	: List out all modules that contains KEYWORD
+	 * KEYWORD can either be module code or faculty.
+semester	: Select another semester to plan and organize timetable
+select	: Select a module slot
+view	: Display current user timetable
+
+Usage :
+	add [MODULE_CODE]
+	delete [MODULE_CODE]
+	list
+	bye
+	export
+	get [MODULE_CODE]
+	help
+	import [NUSMods_LINK]
+	search [KEYWORD]
+	semester [SEMESTER_SELECTED]
+	select /module <MODULE_CODE> /type <LESSON_TYPE> /code <CLASS_NO>
+	view
+
+Note: [ ] are required elements, < > are optional elements
+For more detailed guide, please visit https://ay2223s1-cs2113-f11-3.github.io/tp/
 --------------------------------------
+Sem [1] >> --------------------------------------
 Search Result:
 Total 2 module(s) found
 
@@ -16,7 +51,7 @@ GEA1000N Quantitative Reasoning with Data
 
 To get full details of the module, type 'get <module code>'
 --------------------------------------
---------------------------------------
+Sem [1] >> --------------------------------------
 Search Result:
 Total 2 module(s) found
 
@@ -25,59 +60,20 @@ CS2113T Software Engineering & Object-Oriented Programming
 
 To get full details of the module, type 'get <module code>'
 --------------------------------------
---------------------------------------
+Sem [1] >> --------------------------------------
 CS2113 has been added
 --------------------------------------
+Sem [1] >> --------------------------------------
+Error! 	0 arguments expected
 --------------------------------------
-                                                                    
-          : Mon      : Tues     : Wed      : Thur     : Fri         
-====================================================================
-   1200   :          :          +----------+          :             
-   1230   :          :          |CS2113    |          :             
-   1300   :          :          +-TUT[1]---+          :             
-   1330   :          :          :          :          :             
-   1400   :          :          :          :          :             
-   1430   :          :          :          :          :             
-   1500   :          :          :          :          :             
-   1530   :          :          :          :          :             
-   1600   :          :          :          :          +----------+  
-   1630   :          :          :          :          |CS2113    |  
-   1700   :          :          :          :          | LEC[1]   |  
-   1730   :          :          :          :          |          |  
-   1800   :          :          :          :          +----------+  
-   1830   :          :          :          :          :             
-   1900   :          :          :          :          :             
-                                                                    
-
---------------------------------------
---------------------------------------
+Sem [1] >> --------------------------------------
 Slot selected successfully
 --------------------------------------
+Sem [1] >> --------------------------------------
+Error! 	0 arguments expected
 --------------------------------------
-                                                                    
-          : Mon      : Tues     : Wed      : Thur     : Fri         
-====================================================================
-   1100   :          :          :          :          +----------+  
-   1130   :          :          :          :          |CS2113    |  
-   1200   :          :          :          :          +-TUT[4]---+  
-   1230   :          :          :          :          :             
-   1300   :          :          :          :          :             
-   1330   :          :          :          :          :             
-   1400   :          :          :          :          :             
-   1430   :          :          :          :          :             
-   1500   :          :          :          :          :             
-   1530   :          :          :          :          :             
-   1600   :          :          :          :          +----------+  
-   1630   :          :          :          :          |CS2113    |  
-   1700   :          :          :          :          | LEC[1]   |  
-   1730   :          :          :          :          |          |  
-   1800   :          :          :          :          +----------+  
-   1830   :          :          :          :          :             
-   1900   :          :          :          :          :             
-                                                                    
-
---------------------------------------
---------------------------------------
+Sem [1] >> --------------------------------------
+Shutting down......
 --------------------------------------
 This is your export link:
 https://nusmods.com/timetable/sem-1/share?CS2113=LEC:1,TUT:4

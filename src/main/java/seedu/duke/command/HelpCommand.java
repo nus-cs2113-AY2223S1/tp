@@ -1,47 +1,28 @@
 package seedu.duke.command;
 
-import seedu.duke.model.SelectedModule;
 import seedu.duke.utils.State;
 import seedu.duke.utils.Storage;
 import seedu.duke.utils.Ui;
 
+import java.util.ArrayList;
+
 public class HelpCommand extends Command {
     public static final String COMMAND_WORD = "help";
+    public static final String COMMAND_USAGE = "help";
+    public static final String COMMAND_DESCRIPTION = "List out all commands and "
+            + " their respective usages in YAMOM";
 
-    public static final String FORMAT = HelpCommand.COMMAND_WORD
-            + ": lists all functions!\n";
+    private static final String MESSAGE_COMMAND = "Here are all the commands "
+            + "available in YAMOM!" + System.lineSeparator();
 
-    public static final String HELP_MODULE_COMMAND_USAGE =  HelpCommand.COMMAND_WORD
-            + ": lists all functions!\n";
-    public static final String ADD_MODULE_COMMAND_USAGE = AddModuleCommand.COMMAND_WORD
-            + ": add a module into your planner!\n";
-    public static final String DELETE_MODULE_COMMAND_USAGE = DeleteModuleCommand.COMMAND_WORD
-            + ": delete MODULE - remove a module from your planner!\n";
-    public static final String EXIT_MODULE_COMMAND_USAGE = ExitCommand.COMMAND_WORD
-            + ": exit Yet Another Module Organiser / Manager (YAMOM)!\n";
-    public static final String SEARCH_MODULE_COMMAND_USAGE = SearchModuleCommand.COMMAND_WORD
-            + ": search /code [MODULE_CODE] /title [MODULE_TITLE] /level [MODULE_LEVEL] "
-            + "/sem [SEMESTER_OFFERED] - returns modules that match the similar search terms!\n";
+    private static final String MESSAGE_FORMAT_NOTE = System.lineSeparator() + "Note: "
+            + "[ ] are required elements, "
+            + "< > are optional elements";
 
-    public static final String GET_MODULE_COMMAND_USAGE = GetModuleCommand.COMMAND_WORD
-            + ": get [MODULE_CODE] - returns all details of the module!\n";
-    public static final String VIEW_TIMETABLE_COMMAND_USAGE = ViewTimetableCommand.COMMAND_WORD
-            + ": displays current timetable!\n";
-    public static final String SELECT_SLOT_COMMAND_USAGE = SelectSlotCommand.COMMAND_WORD
-            + ": select /module [MODULE_CODE] /type [LESSON_TYPE] /code [CLASS_NO] - select slot for modules!\n";
-    public static final String SELECT_SEMESTER_COMMAND_USAGE = SelectSemesterCommand.COMMAND_WORD
-            + ": semester [SEMESTER SELECTED] = select semester to plan for and organise!\n";
-
-
-    public static final String HELP_DISPLAY_MESSAGE = HELP_MODULE_COMMAND_USAGE
-            + ADD_MODULE_COMMAND_USAGE
-            + DELETE_MODULE_COMMAND_USAGE
-            + EXIT_MODULE_COMMAND_USAGE
-            + SEARCH_MODULE_COMMAND_USAGE
-            + GET_MODULE_COMMAND_USAGE
-            + VIEW_TIMETABLE_COMMAND_USAGE
-            + SELECT_SLOT_COMMAND_USAGE
-            + SELECT_SEMESTER_COMMAND_USAGE;
+    private static final String MESSAGE_USAGE = System.lineSeparator() + "Usage :";
+    private static final String USER_GUIDE_LINK = "https://ay2223s1-cs2113-f11-3.github.io/tp/";
+    private static final String MESSAGE_USER_GUIDE_REFERENCE = "For more "
+            + "detailed guide, please visit " + USER_GUIDE_LINK;
 
     public HelpCommand(String[] input) {
         super(input);
@@ -49,7 +30,17 @@ public class HelpCommand extends Command {
 
     @Override
     public void execute(State state, Ui ui, Storage storage) {
-        ui.addMessage(HELP_DISPLAY_MESSAGE);
+        ui.addMessage(MESSAGE_COMMAND);
+        ArrayList<String> commandDescriptions = getAllCommandDescription();
+        ui.addMessage(commandDescriptions);
+
+        ui.addMessage(MESSAGE_USAGE);
+        ArrayList<String> commandUsages = getAllCommandUsage();
+        ui.addMessage(commandUsages, true);
+
+        ui.addMessage(MESSAGE_FORMAT_NOTE);
+        ui.addMessage(MESSAGE_USER_GUIDE_REFERENCE);
+
         ui.displayUi();
     }
 
@@ -61,5 +52,51 @@ public class HelpCommand extends Command {
     @Override
     public String getExecutionMessage() {
         return null;
+    }
+
+    private ArrayList<String> getAllCommandDescription() {
+        ArrayList<String> commandDescriptions = new ArrayList<>();
+
+        commandDescriptions.add(AddModuleCommand.getCommandDescription());
+        commandDescriptions.add(DeleteModuleCommand.getCommandDescription());
+        commandDescriptions.add(DisplaySelectedModuleListCommand.getCommandDescription());
+        commandDescriptions.add(ExitCommand.getCommandDescription());
+        commandDescriptions.add(ExportCommand.getCommandDescription());
+        commandDescriptions.add(GetModuleCommand.getCommandDescription());
+        commandDescriptions.add(HelpCommand.getCommandDescription());
+        commandDescriptions.add(ImportCommand.getCommandDescription());
+        commandDescriptions.add(SearchModuleCommand.getCommandDescription());
+        commandDescriptions.add(SelectSemesterCommand.getCommandDescription());
+        commandDescriptions.add(SelectSlotCommand.getCommandDescription());
+        commandDescriptions.add(ViewTimetableCommand.getCommandDescription());
+
+        return commandDescriptions;
+    }
+
+    private ArrayList<String> getAllCommandUsage() {
+        ArrayList<String> commandUsages = new ArrayList<>();
+
+        commandUsages.add(AddModuleCommand.getUsage());
+        commandUsages.add(DeleteModuleCommand.getUsage());
+        commandUsages.add(DisplaySelectedModuleListCommand.getUsage());
+        commandUsages.add(ExitCommand.getUsage());
+        commandUsages.add(ExportCommand.getUsage());
+        commandUsages.add(GetModuleCommand.getUsage());
+        commandUsages.add(HelpCommand.getUsage());
+        commandUsages.add(ImportCommand.getUsage());
+        commandUsages.add(SearchModuleCommand.getUsage());
+        commandUsages.add(SelectSemesterCommand.getUsage());
+        commandUsages.add(SelectSlotCommand.getUsage());
+        commandUsages.add(ViewTimetableCommand.getUsage());
+
+        return commandUsages;
+    }
+
+    public static String getCommandDescription() {
+        return COMMAND_WORD + DESCRIPTION_DELIMITER + COMMAND_DESCRIPTION;
+    }
+
+    public static String getUsage() {
+        return COMMAND_USAGE;
     }
 }

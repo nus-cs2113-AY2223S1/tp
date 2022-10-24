@@ -97,7 +97,7 @@ Adds a module from available database into the user timetable
 
 Format: `add MODULE_CODE`
 
-* The `MODULE_CDOE` is not case sensitive, but has to be an exact match
+* The `MODULE_CDOE` is not case-sensitive, but has to be an exact match
 
 Example of usage:
 
@@ -137,7 +137,7 @@ Removes a module from the user timetable
 
 Format: `delete MODULE_CODE`
 
-* The `MODULE_CDOE` is not case sensitive, but has to be an exact match
+* The `MODULE_CDOE` is not case-sensitive, but has to be an exact match
 
 Example of usage:
 
@@ -165,7 +165,7 @@ Format: `search KEYWORD`
 
 * The `KEYWORD` will be the module code of interest.
 * The `KEYWORD` can be the faculty code or the module number
-* The `KEYWORD` is not case sensitive
+* The `KEYWORD` is not case-sensitive
 
 Example of usage:
 
@@ -208,6 +208,24 @@ Possible Error:
 > Note:
 > - The list of modules can get very long for a generic search
 
+### Changing semester to plan: `semester`
+
+Select semester to plan for and organise.
+
+Format: `semester SEMESTER_SELECTED`
+
+Example of usage: 
+
+`semester 1`
+
+Sample Output:
+
+```
+semester 3
+--------------------------------------
+You are now planning for special term I
+--------------------------------------
+```
 ### Viewing user timetable: `view`
 
 Prints out the current user timetable.
@@ -249,6 +267,20 @@ view
 --------------------------------------
 Your timetable is empty. Please select lessons first before viewing.
 --------------------------------------
+```
+### Feature X: `list`
+
+Displays list of all selected modules and slots.
+
+Format: `list`
+
+Example of usage:
+
+`list`
+
+Sample Output:
+```
+
 ```
 
 ### Select a timetable slot: `select`
