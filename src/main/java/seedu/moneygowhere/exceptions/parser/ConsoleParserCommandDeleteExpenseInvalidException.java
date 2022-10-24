@@ -1,5 +1,8 @@
-package seedu.moneygowhere.exceptions;
+package seedu.moneygowhere.exceptions.parser;
 
+import seedu.moneygowhere.exceptions.MoneyGoWhereException;
+
+//@@author xzynos
 @SuppressWarnings("unused")
 public class ConsoleParserCommandDeleteExpenseInvalidException extends MoneyGoWhereException {
     public ConsoleParserCommandDeleteExpenseInvalidException() {

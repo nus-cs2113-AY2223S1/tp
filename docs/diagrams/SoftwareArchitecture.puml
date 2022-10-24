@@ -7,61 +7,37 @@
 Package " "<<Rectangle>>{
     Class MoneyGoWhere MONEYGOWHERE_COLOR_1
 
-    Class Messages COMMON_COLOR_1
-    Class Configurations COMMON_COLOR_1
+    Class Common COMMON_COLOR_1
 
-    Class ConsoleInterface USER_INTERFACE_COLOR_1
+    Class UserInterface USER_INTERFACE_COLOR_1
 
-    Class ConsoleParser PARSER_COLOR_1
-    Class ConsoleParserConfigurations PARSER_COLOR_2
+    Class Parser PARSER_COLOR_1
 
-    Class ExpenseManager DATA_COLOR_1
-    Class CategoryManager DATA_COLOR_2
-    Class IncomeManager DATA_COLOR_3
-    Class TargetManager DATA_COLOR_4
-    Class RecurringPaymentManager DATA_COLOR_5
-    Class CurrencyManager DATA_COLOR_6
+    Class Data DATA_COLOR_1
 
-    Class CurrencyApi DATA_COLOR_6
+    Class Apis DATA_COLOR_6
 
-    Class LocalStorage STORAGE_COLOR_1
+    Class Storage STORAGE_COLOR_1
 
-    Class LocalLogger LOGGER_COLOR_1
+    Class Logger LOGGER_COLOR_1
 }
 
 Class "<$user>" as User USER_INTERFACE_COLOR_2
 Class "<$documents>" as DataFile STORAGE_COLOR_2
 Class "<$documents>" as LogFile LOGGER_COLOR_2
 
-MoneyGoWhere -down-> ConsoleInterface
+MoneyGoWhere -down-> UserInterface
 
-User -down-> ConsoleInterface
+User -down-> UserInterface
 
-ConsoleInterface -right-> ConsoleParser
-ConsoleInterface -down-> ExpenseManager
-ConsoleInterface -down-> CategoryManager
-ConsoleInterface -down-> IncomeManager
-ConsoleInterface -down-> TargetManager
-ConsoleInterface -down-> RecurringPaymentManager
-ConsoleInterface -down-> CurrencyManager
-ConsoleInterface -left-> LocalLogger
+UserInterface -right-> Parser
+UserInterface -down-> Data
+UserInterface -left-> Logger
 
-ConsoleParser -down-> ConsoleParserConfigurations
+Data -down-> Storage
+Data -down-> Apis
 
-ExpenseManager -down-> LocalStorage
+Storage .left.> DataFile
 
-CategoryManager -down-> LocalStorage
-
-IncomeManager -down-> LocalStorage
-
-TargetManager -down-> LocalStorage
-
-RecurringPaymentManager -down-> LocalStorage
-
-CurrencyManager -down-> LocalStorage
-CurrencyManager -down-> CurrencyApi
-
-LocalStorage .left.> DataFile
-
-LocalLogger .left.> LogFile
+Logger .left.> LogFile
 @enduml

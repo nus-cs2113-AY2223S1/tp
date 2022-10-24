@@ -3,8 +3,10 @@ package seedu.moneygowhere.commands;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+//@@author xzynos
+
 /**
- * Stores the edit-expense command and its arguments.
+ * Stores the command Edit-Expense and its arguments.
  */
 @SuppressWarnings("unused")
 public class ConsoleCommandEditExpense extends ConsoleCommand {
@@ -15,27 +17,27 @@ public class ConsoleCommandEditExpense extends ConsoleCommand {
     private BigDecimal amount;
     private String category;
     private String remarks;
-
     private String currency;
+    private String modeOfPayment;
+    private boolean isExpenseIndexSet;
+    private boolean isNameSet;
+    private boolean isDateTimeSet;
+    private boolean isDescriptionSet;
+    private boolean isAmountSet;
+    private boolean isCategorySet;
+    private boolean isRemarksSet;
+    private boolean isCurrencySet;
+    private boolean isModeOfPaymentSet;
 
-    public ConsoleCommandEditExpense(
-            int expenseIndex,
-            String name,
-            LocalDateTime dateTime,
-            String description,
-            BigDecimal amount,
-            String category,
-            String remarks,
-            String currency
-    ) {
-        this.expenseIndex = expenseIndex;
-        this.name = name;
-        this.dateTime = dateTime;
-        this.description = description;
-        this.amount = amount;
-        this.category = category;
-        this.remarks = remarks;
-        this.currency = currency;
+    public ConsoleCommandEditExpense() {
+        isExpenseIndexSet = false;
+        isNameSet = false;
+        isDateTimeSet = false;
+        isAmountSet = false;
+        isCategorySet = false;
+        isRemarksSet = false;
+        isCurrencySet = false;
+        isModeOfPaymentSet = false;
     }
 
     public int getExpenseIndex() {
@@ -44,6 +46,7 @@ public class ConsoleCommandEditExpense extends ConsoleCommand {
 
     public void setExpenseIndex(int expenseIndex) {
         this.expenseIndex = expenseIndex;
+        isExpenseIndexSet = true;
     }
 
     public String getName() {
@@ -52,6 +55,7 @@ public class ConsoleCommandEditExpense extends ConsoleCommand {
 
     public void setName(String name) {
         this.name = name;
+        isNameSet = true;
     }
 
     public LocalDateTime getDateTime() {
@@ -60,6 +64,7 @@ public class ConsoleCommandEditExpense extends ConsoleCommand {
 
     public void setDateTime(LocalDateTime dateTime) {
         this.dateTime = dateTime;
+        isDateTimeSet = true;
     }
 
     public String getDescription() {
@@ -68,6 +73,7 @@ public class ConsoleCommandEditExpense extends ConsoleCommand {
 
     public void setDescription(String description) {
         this.description = description;
+        isDescriptionSet = true;
     }
 
     public BigDecimal getAmount() {
@@ -76,6 +82,7 @@ public class ConsoleCommandEditExpense extends ConsoleCommand {
 
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
+        isAmountSet = true;
     }
 
     public String getCategory() {
@@ -84,6 +91,7 @@ public class ConsoleCommandEditExpense extends ConsoleCommand {
 
     public void setCategory(String category) {
         this.category = category;
+        isCategorySet = true;
     }
 
     public String getRemarks() {
@@ -92,6 +100,7 @@ public class ConsoleCommandEditExpense extends ConsoleCommand {
 
     public void setRemarks(String remarks) {
         this.remarks = remarks;
+        isRemarksSet = true;
     }
 
     public String getCurrency() {
@@ -100,5 +109,51 @@ public class ConsoleCommandEditExpense extends ConsoleCommand {
 
     public void setCurrency(String currency) {
         this.currency = currency;
+        isCurrencySet = true;
+    }
+
+    public String getModeOfPayment() {
+        return modeOfPayment;
+    }
+
+    public void setModeOfPayment(String modeOfPayment) {
+        this.modeOfPayment = modeOfPayment;
+        isModeOfPaymentSet = true;
+    }
+
+    public boolean isExpenseIndexSet() {
+        return isExpenseIndexSet;
+    }
+
+    public boolean isNameSet() {
+        return isNameSet;
+    }
+
+    public boolean isDateTimeSet() {
+        return isDateTimeSet;
+    }
+
+    public boolean isDescriptionSet() {
+        return isDescriptionSet;
+    }
+
+    public boolean isAmountSet() {
+        return isAmountSet;
+    }
+
+    public boolean isCategorySet() {
+        return isCategorySet;
+    }
+
+    public boolean isRemarksSet() {
+        return isRemarksSet;
+    }
+
+    public boolean isCurrencySet() {
+        return isCurrencySet;
+    }
+
+    public boolean isModeOfPaymentSet() {
+        return isModeOfPaymentSet;
     }
 }

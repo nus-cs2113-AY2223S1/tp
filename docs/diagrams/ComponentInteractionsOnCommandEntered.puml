@@ -1,0 +1,39 @@
+@startuml
+!include https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/styles.puml
+
+Actor User USER_COLOR
+Participant ":USERINTERFACE" as UserInterface USER_INTERFACE_COLOR_1
+Participant ":PARSER" as Parser PARSER_COLOR_1
+Participant ":DATA" as Data DATA_COLOR_1
+Participant ":STORAGE" as Storage STORAGE_COLOR_1
+
+User -[USER_COLOR]> UserInterface : "Add-Expense -n Expense -a 7.80"
+activate UserInterface USER_INTERFACE_COLOR_1
+
+UserInterface -[USER_INTERFACE_COLOR_1]> Parser : parse(consoleInput)
+activate Parser PARSER_COLOR_1
+
+Parser --[PARSER_COLOR_1]> UserInterface : consoleCommand
+deactivate Parser
+
+UserInterface -[USER_INTERFACE_COLOR_1]> UserInterface : runCommandAddExpense(consoleCommand)
+activate UserInterface USER_INTERFACE_COLOR_1
+
+UserInterface -[USER_INTERFACE_COLOR_1]> Data : addExpense(expense)
+activate Data DATA_COLOR_1
+
+Data --[DATA_COLOR_1]> UserInterface
+deactivate Data
+
+UserInterface -[USER_INTERFACE_COLOR_1]> Storage : saveToFile(expenses)
+activate Storage STORAGE_COLOR_1
+
+Storage --[STORAGE_COLOR_1]> UserInterface
+deactivate Storage
+
+UserInterface --[USER_INTERFACE_COLOR_1]> UserInterface
+deactivate UserInterface
+
+UserInterface --[USER_INTERFACE_COLOR_1]> User
+deactivate UserInterface
+@enduml

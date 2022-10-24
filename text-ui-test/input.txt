@@ -39,6 +39,14 @@ Add-RecurringPayment -n "Err Rec Exp 3" -i 60
 Add-RecurringPayment -n "Err Rec Exp 4" -i ThisIsAnInvalidInterval
 Add-RecurringPayment -n "Err Rec Exp 5" -i 70 -a ThisIsAnInvalidAmount
 View-RecurringPayment
+Edit-RecurringPayment -r 0 -n "Rec Exp 1" -i 31 -a 7.81 -t "This is a test recurring payment 1"
+View-RecurringPayment
+Delete-RecurringPayment -r 0
+Delete-RecurringPayment -r 0
+Delete-RecurringPayment -r 0
+View-RecurringPayment
+Delete-RecurringPayment -r 0
+View-RecurringPayment
 
 sort-expense -t alphabetical -o descending
 sort-expense -t amount -o ascending

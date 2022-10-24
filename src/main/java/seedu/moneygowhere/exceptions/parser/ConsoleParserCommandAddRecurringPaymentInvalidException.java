@@ -1,7 +1,11 @@
-package seedu.moneygowhere.exceptions;
+package seedu.moneygowhere.exceptions.parser;
+
+import seedu.moneygowhere.exceptions.MoneyGoWhereException;
+
+//@@author xzynos
 
 /**
- * Thrown when the command add-recurringpayment is invalid.
+ * Defines exception to be thrown when the command Add-RecurringPayment is invalid.
  */
 @SuppressWarnings("unused")
 public class ConsoleParserCommandAddRecurringPaymentInvalidException extends MoneyGoWhereException {

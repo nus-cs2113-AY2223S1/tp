@@ -1,7 +1,11 @@
-package seedu.moneygowhere.exceptions;
+package seedu.moneygowhere.exceptions.parser;
+
+import seedu.moneygowhere.exceptions.MoneyGoWhereException;
+
+//@@author jeyvia
 
 /**
- * Thrown when the command convert-currency is invalid.
+ * Defines exception to be thrown when the command Convert-Currency is invalid.
  */
 @SuppressWarnings("unused")
 public class ConsoleParserCommandConvertCurrencyInvalidException extends MoneyGoWhereException {
