@@ -36,7 +36,7 @@ public class PassengerList extends OperationList {
     protected static boolean isSeatNumberPresent = false;
     protected static boolean isDepartureTimePresent = false;
     protected static boolean isValidPassenger = false;
-    protected static boolean isSuccess = false;
+    protected static boolean isDeleteSuccess = false;
     protected static boolean isExceedNameLength = false;
     protected static boolean isWrongNameFormat = false;
     protected static boolean isWrongDepartureFormat = false;
@@ -48,7 +48,7 @@ public class PassengerList extends OperationList {
     protected String name;
     protected String departureDate;
     protected String departureTime;
-    protected String flightNumber;
+    protected static String flightNumber;
     protected String gateNumber;
     protected String seatNumber;
     protected String boardingTime;
@@ -126,14 +126,14 @@ public class PassengerList extends OperationList {
                 passengers.remove(i);
                 getNumberOfPassengers();
                 Ui.showDeleteMessage(name, flightNumber, seatNumber, numOfPassengers);
-                isSuccess = true;
+                isDeleteSuccess = true;
                 break;
             }
         }
-        if (!isSuccess) {
+        if (!isDeleteSuccess) {
             throw new SkyControlException(ui.getDeleteError());
         }
-        isSuccess = false;
+        isDeleteSuccess = false;
     }
 
     @Override
@@ -217,7 +217,7 @@ public class PassengerList extends OperationList {
         }
     }
 
-    private void getFlightNumber(String passengerDetail) throws SkyControlException {
+    static void getFlightNumber(String passengerDetail) throws SkyControlException {
         if (isAdd) {
             flightNumber = getSubstringBetweenDelimiters(passengerDetail,
                     FLIGHT_NUMBER_DELIMITER, GATE_NUMBER_DELIMITER);
@@ -225,6 +225,15 @@ public class PassengerList extends OperationList {
             flightNumber = getSubstringBetweenDelimiters(passengerDetail,
                     FLIGHT_NUMBER_DELIMITER, SEAT_NUMBER_DELIMITER);
         }
+    }
+
+    static String getFlightNumberForSync(String passengerDetail) {
+        try {
+            getFlightNumber(passengerDetail);
+        } catch (SkyControlException e) {
+            ui.showError(e.getMessage());
+        }
+        return flightNumber;
     }
 
     private void getGateNumber(String passengerDetail) throws SkyControlException {
@@ -266,7 +275,7 @@ public class PassengerList extends OperationList {
         }
     }
 
-    private String getSubstringBetweenDelimiters(String inputString, String startDelimiter, String endDelimiter)
+    private static String getSubstringBetweenDelimiters(String inputString, String startDelimiter, String endDelimiter)
             throws SkyControlException {
         int startIndex = inputString.indexOf(startDelimiter) + startDelimiter.length();
         int endIndex = inputString.lastIndexOf(endDelimiter);

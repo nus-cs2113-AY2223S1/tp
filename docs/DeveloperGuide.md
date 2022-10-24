@@ -39,9 +39,47 @@ List of Commands
 The following sequence diagrams to showcase the list of commands, 
 parser() method will not be reflected in order to improve readability.
 
-1. [Delete a passenger feature](#Delete-a-passenger-feature)
-2. [List passengers feature](#List-passengers-feature)
-3. [Delete a flight feature](#Delete-a-flight-feature)
+1. [Add a passenger feature](#Add-a-passenger-feature)
+2. [Delete a passenger feature](#Delete-a-passenger-feature)
+3. [List passengers feature](#List-passengers-feature)
+4. [Add a flight feature](#Add-a-flight-feature)
+5. [Delete a flight feature](#Delete-a-flight-feature)
+6. [List flights feature](#List-flights-feature)
+
+---
+
+### Add a passenger feature
+
+The command Add a passenger adds passenger details of a particular passenger to the passenger list.
+
+**Overview of relevant classes**
+
+**_NOTE:_** Minimal representation of structure of `AddPassengerCommand`
+
+![class diagram](../docs/ug-diagrams/images/passengerAddCmdClassDiagram.jpg)
+
+When the main class `SkyControl` receives a user input, it parses the input with the
+help of the `Parser` class which then forwards the input to the `Passenger Parser` class accordingly.
+The `Passenger Parser` retrieves the command `AddPassengerCommand` and returns it to `SkyControl` where
+further methods will be triggered as explained below.
+
+**Sequence Diagram**
+
+**_NOTE:_** Exceptions are omitted for readability. 
+
+![sequence diagram](../docs/ug-diagrams/images/passengerAddCmdSeqDiagram.jpg)
+
+1. Once the `AddPassengerCommand` is instantiated, the `execute` method is called from the `SkyControl` 
+class with passenger list and user input as method parameters.
+2. Within `AddPassengerCommand` the method `getPassengerDetail(String lineInput)` is called to extract the String 
+consisting of passenger details from the line input.
+3. `AddPassengerCommand` then calls the method `addOperation(String passengerDetail)` within the `PassengerList` class.
+4. `getPassengerDetails(String passengerDetail)` method then extracts each of the passenger detail into an attribute in 
+the `PassengerList` class
+5. `passenger` object of the class `PassengerInfo` is instantiated using the attributes retrieved from the method in 
+Step 4. The `passenger` object is then added to the list of passengers
+6. `Ui` class level method `showAddedPassenger(PassengerInfo passenger)` is used to display to the user that passenger
+has been added to the list successfully.
 
 ---
 
@@ -143,6 +181,26 @@ from `OperationList` is empty or not.
 3. If `passengers` is empty, prints empty table, else prints respective passenger details in table form.
 
 ---
+
+### Add a flight feature
+
+The Add a flight function adds a flight with its corresponding details to the flight list.
+
+**Sequence Diagram**
+
+**_NOTE:_** Exceptions are omitted for readability.
+
+![sequence diagram](../docs/ug-diagrams/images/flightAddCmdSeqDiagram.jpg)
+
+When the `Parser` recognizes the `add flight` command, `AddFlightCommand` is instantiated.
+1. The `AddFlightCommand` then implements a new `addOperation(lineInput:String)` in `FlightList`
+2. `FlightList` then instantiates the `FlightInfo` Object using the attributes retrieved from the 
+user input in the previous step.
+3. `Ui` class level method `showFlightAddedMessage()` is used to inform the user they have added a flight.
+
+
+---
+
 ### Delete a flight feature
 
 A delete function which allows the user to delete a flight specified with its flight number and
@@ -174,6 +232,21 @@ create an instantiation of `DeleteFlightCommand`.
 to find if the flight number exists and remove it from the arraylist.
 4. Upon successful deletion, `showFlightRemovedMessage()` is called which prints a message to the user to indicate a successful
 delete operation
+
+---
+### List flights feature
+
+The list function lists out all flight details in a table form which is facilitated by `ListFlightCommand`. 
+It extends an abstract `Command` class with an override method called `execute`.
+
+![sequence diagram](../docs/ug-diagrams/images/flightListCmdSeqDiagram.jpg)
+
+When the `Parser` recognizes the `flight list` command, `ListFlightCommand` is instantiated.
+
+1. The `ListFlightCommand` would call on the `listOperation()` method in the `FlightList`. 
+2. In turn, the method calls `showListOfFlights` in the Ui class. It calls `checkEmptyFlightList` to check if the flight OperationList is empty.
+3. If the `numOfFlights == 0`, an empty table is printed. Else, it would print the respective flight details in a table form.
+
 
 ## Product scope
 ### Target user profile

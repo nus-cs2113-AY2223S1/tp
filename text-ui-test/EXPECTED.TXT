@@ -9,6 +9,13 @@ Welcome to
               |___/
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Stop! The input passenger detail does not have a flight number that exist yet.
+Flight detail of the specific flight number should input first.
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Flight added!
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Passenger IVAN THENG of SQ832 17D has been added.
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -24,10 +31,12 @@ The system is unable to read your command, please try again.
 Unable to add Passenger. Seat number is already occupied on the flight!
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-Flight added!
+Unable to add Flight!
+Designated gate is already occupied at that time, please select a different gate number.
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-Unable to add Flight! Flight already exist.
+Unable to add Flight!
+Designated gate is already occupied at that time, please select a different gate number.
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Stop! The departure time input format is wrong.
@@ -37,7 +46,7 @@ Please try again in 24Hr time format.
 FLIGHT SQ324 NOT FOUND.
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-FLIGHT SQ712 HAS BEEN DELETED.
+FLIGHT SQ712 NOT FOUND.
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Detail of the operation is blank,
@@ -55,7 +64,8 @@ please try again and input all necessary details.
 
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-Flight added!
+Unable to add Flight!
+Designated gate is already occupied at that time, please select a different gate number.
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 oops! The description is empty :(
@@ -67,7 +77,7 @@ oops! The description is empty :(
 +----------------------------------------------------------------------------------------------------------------------------------+
 | FLIGHT NUM | DEPARTURE DATE |        AIRLINE         |      DESTINATION      | DEPARTURE TIME | GATE NUM |  CHECK-IN ROW/DOOR  |
 +----------------------------------------------------------------------------------------------------------------------------------+
-|      SQ712 |       24-10-22 |     SINGAPORE AIRLINES |               BANGKOK |           1600 |       B1 |               03-03 |
+|      SQ832 |       24-10-22 |     SINGAPORE AIRLINES |               BANGKOK |           1600 |       B1 |               03-03 |
 +----------------------------------------------------------------------------------------------------------------------------------+
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
