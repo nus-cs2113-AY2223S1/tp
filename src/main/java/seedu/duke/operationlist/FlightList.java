@@ -113,7 +113,7 @@ public class FlightList extends OperationList {
                 break;
             }
         }
-        if(!isFlightFound) {
+        if (!isFlightFound) {
             throw new SkyControlException(ui.getFlightNotFoundMessage(flightNumber));
         }
     }
