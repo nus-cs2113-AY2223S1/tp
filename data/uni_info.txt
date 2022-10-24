@@ -1,0 +1,7 @@
+Hanyang University%
+null%
+F%
+/Boston University%
+null%
+F%
+CS103;Introduction to Internet Technologies and Web Programming;3;IT1001;Introduction to Computing;4%

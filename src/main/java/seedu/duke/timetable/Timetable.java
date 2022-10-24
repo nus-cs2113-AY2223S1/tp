@@ -142,12 +142,14 @@ public class Timetable {
      *
      * @param newLesson The new lesson to be added to the timetable.
      */
-    public void addLesson(Lesson newLesson) {
+    public void addLesson(Lesson newLesson, boolean isLoadFromFile) {
         try {
             if (isValidDay(newLesson) && isValidStartTime(newLesson) && isValidEndTime(newLesson)
                     && isValidTiming(newLesson) && hasNoTimetableClash(newLesson)) {
                 userTimetable.get(newLesson.getDay()).add(newLesson);
-                System.out.print(Ui.printLessonAddedAcknowledgement(newLesson));
+                if (!isLoadFromFile) {
+                    System.out.print(Ui.printLessonAddedAcknowledgement(newLesson));
+                }
                 Collections.sort(userTimetable.get(newLesson.getDay()), (l1, l2) -> {
                     try {
                         return new SimpleDateFormat("HH:mm").parse(l1.getStartTime())

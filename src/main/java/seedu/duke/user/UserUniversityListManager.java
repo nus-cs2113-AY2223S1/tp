@@ -31,7 +31,7 @@ public class UserUniversityListManager {
         try {
             myManager = UserStorageParser.convertFileContentIntoUniversityList(fileContent);
         } catch (InvalidUserStorageFileException e) {
-            System.out.println("Invalid file format in data/duke.txt");
+            System.out.println("Invalid file format in data/uni_info.txt");
             System.out.println("Creating new University List Manager");
             myManager = new HashMap<String, UserUniversityList>();
         }
