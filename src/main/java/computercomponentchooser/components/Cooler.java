@@ -1,5 +1,7 @@
 package computercomponentchooser.components;
 
+import computercomponentchooser.exceptions.NegativeNumberException;
+
 /**
  * Represents the cooler in the computer build.
  */
@@ -29,8 +31,18 @@ public class Cooler extends Component {
      * @param socket the socket type of the cooler
      * @param fanSpeed the fan speed of the cooler
      * @param noiseLevel the fan noise of the cooler
+     * @throws NegativeNumberException If the user inputs a negative number.
+     * @throws NumberFormatException If the user inputs a non-integer.
      */
-    public Cooler(String name, String price, String power, String socket, String fanSpeed, String noiseLevel) {
+    public Cooler(String name, String price, String power, String socket, String fanSpeed, String noiseLevel)
+            throws NegativeNumberException, NumberFormatException {
+        double priceDouble = Double.parseDouble(price);
+        double powerDouble = Double.parseDouble(power);
+        double fanSpeedDouble = Double.parseDouble(fanSpeed);
+        double noiseLevelDouble = Double.parseDouble(noiseLevel);
+        if (priceDouble < 0 || powerDouble < 0 || fanSpeedDouble < 0 || noiseLevelDouble < 0) {
+            throw new NegativeNumberException();
+        }
         this.name = name;
         this.price = price;
         this.power = power;
@@ -120,7 +132,7 @@ public class Cooler extends Component {
      * @return a string representation of all the information of the cooler
      */
     public String saveAsString() {
-        return super.saveAsString() + "," + socket + "," + fanSpeed + "," + noiseLevel;
+        return super.saveAsString() + "/" + socket + "/" + fanSpeed + "/" + noiseLevel;
     }
 
     /**

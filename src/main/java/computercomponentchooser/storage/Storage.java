@@ -358,9 +358,15 @@ public class Storage {
      * @param build the build that the cooler is added to
      */
     private static void loadCooler(String line, String name, String price, String power, Build build) {
-        Cooler cooler = new Cooler(name, price, power, getParameter(line, 4),
-                getParameter(line, 5), getParameter(line, 6));
-        build.addComponent("cooler", cooler);
+        try {
+            Cooler cooler = new Cooler(name, price, power, getParameter(line, 4),
+                    getParameter(line, 5), getParameter(line, 6));
+            build.addComponent("cooler", cooler);
+        } catch (NegativeNumberException | NumberFormatException e) {
+            Ui.printLine();
+            System.out.println("Error when loading.");
+            Ui.printLine();
+        }
     }
 
     /**

@@ -312,8 +312,11 @@ public class EditParser {
      * @param name The name of the component to be added.
      * @param price The price of the component to be added.
      * @param power The power consumption of the component to be added.
+     * @throws NegativeNumberException If the user inputs a negative number.
+     * @throws NumberFormatException If the user inputs a non-integer.
      */
-    public void parseAddCooler(Build editBuild, String line, String type, String name, String price, String power) {
+    public void parseAddCooler(Build editBuild, String line, String type, String name, String price, String power)
+            throws NegativeNumberException, NumberFormatException {
         Cooler cooler = new Cooler(name, price, power, getParameter(line, 5),
                 getParameter(line, 6), getParameter(line, 7));
         editBuild.addComponent(type, cooler);
@@ -328,6 +331,8 @@ public class EditParser {
      * @param name The name of the component to be added.
      * @param price The price of the component to be added.
      * @param power The power consumption of the component to be added.
+     * @throws NegativeNumberException If the user inputs a negative number.
+     * @throws NumberFormatException If the user inputs a non-integer.
      */
     public void parseAddCase(Build editBuild, String line, String type, String name, String price, String power)
             throws NegativeNumberException, NumberFormatException {

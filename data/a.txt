@@ -1,1 +1,2 @@
-case/airflow/100/5/atx/3
+case/test/100.50/5.5/atx/3
+cooler/noctua/250/25/am4/2500/5
