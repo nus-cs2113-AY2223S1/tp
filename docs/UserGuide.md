@@ -16,12 +16,12 @@ MoneyGoWhere is a financial planner to help you manage your finances.
 ### Adding an expense: `Add-Expense`
 Adds a new expense to the list of expenses.
 
-Syntax: `Add-Expense -n NAME -a AMOUNT [-d DATE] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p MODE OF PAYMENT]`
+Syntax: `Add-Expense -n NAME -a AMOUNT [-d DATE_TIME] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p MODE OF PAYMENT]`
 
 * `NAME`, `DESCRIPTION`, `CATEGORY`, `REMARKS` and `MODE OF PAYMENT` are text strings. You may use spaces within the text if you wrap the text with double quotes.
 * `CURRENCY` is a text string. By default, it will be SGD. Otherwise, it must be a valid currency code.
 * `AMOUNT` is a decimal value.
-* `DATE` is a text string in the format `"dd/MM/yyyy HHmm"`. If this value is not provided, MoneyGoWhere will save the current date and time for you.
+* `DATE_TIME` is a text string in the format `"dd/MM/yyyy HHmm"`. If this value is not provided, MoneyGoWhere will save the current date and time for you.
 
 Example of usage: 
 
@@ -54,13 +54,13 @@ Example of usage:
 ### Editing an expense: `Edit-Expense`
 Edits an existing expense in the list of expenses.
 
-Syntax: `Edit-Expense -e EXPENSE_NUMBER [-n NAME] [-a AMOUNT] [-d DATE] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p MODE OF PAYMENT]`
+Syntax: `Edit-Expense -e EXPENSE_NUMBER [-n NAME] [-a AMOUNT] [-d DATE_TIME] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p MODE OF PAYMENT]`
 
 * `EXPENSE_NUMBER` is an integer value.
 * `NAME`, `DESCRIPTION`, `CATEGORY`, `REMARKS` and `MODE OF PAYMENT` are text strings. You may use spaces within the text if you wrap the text with double quotes.
 * `CURRENCY` is a text string. It must be a valid currency code.
 * `AMOUNT` is a decimal value.
-* `DATE` is a text string in the format `"dd/MM/yyyy HHmm"`.
+* `DATE_TIME` is a text string in the format `"dd/MM/yyyy HHmm"`.
 
 Example of usage:
 
@@ -147,8 +147,16 @@ Example of usage:
 * `Edit-RecurringPayment -r 1 -a 20.00`
 * `Edit-RecurringPayment -r 1 -n "Mobile Plan" -i 30 -a 20.00 -t "Monthly payment for my mobile plan" -c Telecom -x SGD -p Card`
 
-### Merge file: `Merge-File`
-Merge save file from an external source given path to the save file (.xml)
+### Adding an expense from recurring payments: `Pay-RecurringPayment`
+Adds an expense from an existing recurring payment
+
+Syntax: `Pay-RecurringPayment -r RECURRING_PAYMENT_INDEX [-d DATE_TIME]`
+
+* `RECURRING_PAYMENT_INDEX` is an integer value.
+* `DATE_TIME` is a text string in the format `"dd/MM/yyyy HHmm"`. If this value is not provided, MoneyGoWhere will save the current date and time for you.
+
+### Merging a data file: `Merge-File`
+Merges save file from an external source given path to the save file (.xml)
 
 Syntax: `Merge-File [-p PATH_STRING]`
 
@@ -156,7 +164,7 @@ Syntax: `Merge-File [-p PATH_STRING]`
 
 Example of usage:
 
-* `merge-file -p "C:\Users\the_d\Downloads\expenses.xml"`
+* `Merge-File -p "C:\Users\the_d\Downloads\expenses.xml"`
 
 ## FAQ
 
