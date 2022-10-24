@@ -15,6 +15,38 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static seedu.duke.CommandStructure.UNIT_TYPE_ONE;
+import static seedu.duke.CommandStructure.UNIT_TYPE_TWO;
+import static seedu.duke.CommandStructure.UNIT_TYPE_THREE;
+import static seedu.duke.CommandStructure.UNIT_TYPE_FOUR;
+import static seedu.duke.CommandStructure.UNIT_TYPE_FIVE;
+import static seedu.duke.CommandStructure.UNIT_TYPE_SIX;
+import static seedu.duke.CommandStructure.UNIT_TYPE_SEVEN;
+import static seedu.duke.CommandStructure.UNIT_TYPE_EIGHT;
+import static seedu.duke.CommandStructure.UNIT_TYPE_NINE;
+import static seedu.duke.CommandStructure.UNIT_TYPE_TEN;
+import static seedu.duke.CommandStructure.UNIT_TYPE_ELEVEN;
+import static seedu.duke.CommandStructure.UNIT_TYPE_TWELVE;
+import static seedu.duke.CommandStructure.UNIT_TYPE_THIRTEEN;
+import static seedu.duke.CommandStructure.UNIT_TYPE_FOURTEEN;
+import static seedu.duke.CommandStructure.UNIT_TYPE_FIFTEEN;
+import static seedu.duke.CommandStructure.ACTUAL_UNIT_TYPE_ONE;
+import static seedu.duke.CommandStructure.ACTUAL_UNIT_TYPE_TWO;
+import static seedu.duke.CommandStructure.ACTUAL_UNIT_TYPE_THREE;
+import static seedu.duke.CommandStructure.ACTUAL_UNIT_TYPE_FOUR;
+import static seedu.duke.CommandStructure.ACTUAL_UNIT_TYPE_FIVE;
+import static seedu.duke.CommandStructure.ACTUAL_UNIT_TYPE_SIX;
+import static seedu.duke.CommandStructure.ACTUAL_UNIT_TYPE_SEVEN;
+import static seedu.duke.CommandStructure.ACTUAL_UNIT_TYPE_EIGHT;
+import static seedu.duke.CommandStructure.ACTUAL_UNIT_TYPE_NINE;
+import static seedu.duke.CommandStructure.ACTUAL_UNIT_TYPE_TEN;
+import static seedu.duke.CommandStructure.ACTUAL_UNIT_TYPE_ELEVEN;
+import static seedu.duke.CommandStructure.ACTUAL_UNIT_TYPE_TWELVE;
+import static seedu.duke.CommandStructure.ACTUAL_UNIT_TYPE_THIRTEEN;
+import static seedu.duke.CommandStructure.ACTUAL_UNIT_TYPE_FOURTEEN;
+import static seedu.duke.CommandStructure.ACTUAL_UNIT_TYPE_FIFTEEN;
+
+
 
 public class Storage {
     private static final String DIRECTORY = "./data/";
@@ -49,6 +81,7 @@ public class Storage {
     private ClientList clientList;
     private PropertyList propertyList;
     private PairingList pairingList;
+    private HashMap<String, String> unitTypeHashMap = new HashMap<>();
 
 
     public Storage(ClientList clientList, PropertyList propertyList, PairingList pairingList) {
@@ -60,6 +93,23 @@ public class Storage {
         boolean hasPropertyFile = checkPropertyFile();
         boolean hasClientFile = checkClientFile();
         boolean hasPairingFile = checkPair();
+
+        // Loading all the actual and unit type label
+        unitTypeHashMap.put(ACTUAL_UNIT_TYPE_ONE, UNIT_TYPE_ONE);
+        unitTypeHashMap.put(ACTUAL_UNIT_TYPE_TWO, UNIT_TYPE_TWO);
+        unitTypeHashMap.put(ACTUAL_UNIT_TYPE_THREE, UNIT_TYPE_THREE);
+        unitTypeHashMap.put(ACTUAL_UNIT_TYPE_FOUR, UNIT_TYPE_FOUR);
+        unitTypeHashMap.put(ACTUAL_UNIT_TYPE_FIVE, UNIT_TYPE_FIVE);
+        unitTypeHashMap.put(ACTUAL_UNIT_TYPE_SIX, UNIT_TYPE_SIX);
+        unitTypeHashMap.put(ACTUAL_UNIT_TYPE_SEVEN, UNIT_TYPE_SEVEN);
+        unitTypeHashMap.put(ACTUAL_UNIT_TYPE_EIGHT, UNIT_TYPE_EIGHT);
+        unitTypeHashMap.put(ACTUAL_UNIT_TYPE_NINE, UNIT_TYPE_NINE);
+        unitTypeHashMap.put(ACTUAL_UNIT_TYPE_TEN, UNIT_TYPE_TEN);
+        unitTypeHashMap.put(ACTUAL_UNIT_TYPE_ELEVEN, UNIT_TYPE_ELEVEN);
+        unitTypeHashMap.put(ACTUAL_UNIT_TYPE_TWELVE, UNIT_TYPE_TWELVE);
+        unitTypeHashMap.put(ACTUAL_UNIT_TYPE_THIRTEEN, UNIT_TYPE_THIRTEEN);
+        unitTypeHashMap.put(ACTUAL_UNIT_TYPE_FOURTEEN, UNIT_TYPE_FOURTEEN);
+        unitTypeHashMap.put(ACTUAL_UNIT_TYPE_FIFTEEN, UNIT_TYPE_FIFTEEN);
 
         loadFiles(hasDirectory, hasPropertyFile, hasClientFile, hasPairingFile);
 
@@ -210,15 +260,17 @@ public class Storage {
                     String landlordName = propertyParameters[0];
                     String address = propertyParameters[1];
                     String price = propertyParameters[2];
-                    String unitType = propertyParameters[3].trim();
+                    String unitTypeString = propertyParameters[3].trim();
+
+                    String unitTypeLabel = getUnitTypeLabel(unitTypeString);
 
                     String description = LANDLORD_NAME_FLAG + landlordName + PROPERTY_ADDRESS_FLAG + address
-                            + PROPERTY_RENTAL_FLAG + price + PROPERTY_TYPE_FLAG + unitType;
+                            + PROPERTY_RENTAL_FLAG + price + PROPERTY_TYPE_FLAG + unitTypeLabel;
 
                     ParseAddProperty parser = new ParseAddProperty(description, propertyList);
                     try {
                         parser.parseCommand();
-                        propertyList.addProperty(landlordName, address, price, unitType);
+                        propertyList.addProperty(landlordName, address, price, unitTypeLabel);
                     } catch (DukeException e) {
                         System.out.println(Messages.INVALID_PROPERTY_FILE);
                     }
@@ -370,9 +422,11 @@ public class Storage {
                 String landlordName = propertyLists.get(i).getLandlordName();
                 String propertyAddress = propertyLists.get(i).getPropertyAddress();
                 String rentingPrice = propertyLists.get(i).getRentingPrice();
-                String unitType = propertyLists.get(i).getUnitType();
+                String unitTypeLabel = propertyLists.get(i).getUnitType();
+
+                String unitTypeString = getUnitTypeString(unitTypeLabel);
                 String finalText = landlordName + SEPARATOR + propertyAddress + SEPARATOR
-                        + rentingPrice + SEPARATOR + unitType + System.lineSeparator();
+                        + rentingPrice + SEPARATOR + unitTypeString + System.lineSeparator();
 
                 propertyText = propertyText.concat(finalText);
             }
@@ -526,5 +580,18 @@ public class Storage {
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public String getUnitTypeLabel(String unitTypeString) {
+        return unitTypeHashMap.get(unitTypeString);
+    }
+
+    public String getUnitTypeString(String unitTypeLabel) {
+        for (String key : unitTypeHashMap.keySet()) {
+            if (unitTypeHashMap.get(key).equals(unitTypeLabel)) {
+                return key;
+            }
+        }
+        return null;
     }
 }
