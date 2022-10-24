@@ -64,6 +64,14 @@ public class UserStorage {
         s.close();
         return fileContent;
     }
+
+    /**.
+     * Method to get the correct file path
+     * (ie. either uni storage or timetable storage)
+     * @param isUniStorage true if dealing with uni storage
+     * @return UNI_STORAGE_FILE_PATH if isUniStorage is true
+     *          TIMETABLE_STORAGE_FILE_PATH otherwise
+     */
     private static String getFilePath(boolean isUniStorage) {
         String userStorageFilePath;
         if (isUniStorage) {

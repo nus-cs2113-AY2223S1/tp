@@ -285,6 +285,14 @@ public class UserStorageParser {
         }
     }
 
+    /**.
+     * Method to convert timetable information into String to save to file
+     * Each university's timetable information is separated by "/"
+     * Each line is separated by "%"
+     * Each module information is separated by ";"
+     * @param timetableManager stores all timetables information
+     * @return output String to save to file
+     */
     private static String convertTimetableIntoFileContent(TimetableManager timetableManager) {
         logger.log(Level.INFO, "Start converting TimetableManager to String");
         if (isTimetableManagerEmpty(timetableManager)) {
@@ -296,6 +304,11 @@ public class UserStorageParser {
         return output;
     }
 
+    /**.
+     * Method to add Timetable information to output String
+     * @param timetableManager stores all timetables information
+     * @return output String with all timetables information
+     */
     private static String addTimetableToOutputString(TimetableManager timetableManager) {
         String output = "";
         for (Map.Entry<String, Timetable> pair : timetableManager.getTimetableManager().entrySet()) {
@@ -307,6 +320,11 @@ public class UserStorageParser {
         return output;
     }
 
+    /**.
+     * Method to add all lesson timings for the same school to output String
+     * @param timetable stores timetable information
+     * @return output String with all timetable information for one school
+     */
     private static String addLessonTimingsToOutputString(Timetable timetable) {
         String output = "";
         for (Map.Entry<String, ArrayList<Lesson>> entry : timetable.getTimetable().entrySet()) {
@@ -316,6 +334,11 @@ public class UserStorageParser {
         return output;
     }
 
+    /**.
+     * Method to add all timing details for the same day to output String
+     * @param listOfLessons stores all lessons information for the same school on the same day
+     * @return output String with all timetable information for the same day
+     */
     private static String addSingleLessonTimingToOutputString(ArrayList<Lesson> listOfLessons) {
         String output = "";
         for (Lesson lesson : listOfLessons) {
@@ -330,10 +353,23 @@ public class UserStorageParser {
         return output;
     }
 
+    /**.
+     * Method to check if timetableManager is empty
+     * @param timetableManager stores all timestables information
+     * @return true if timetableManager is empty, false otherwise
+     */
     private static boolean isTimetableManagerEmpty(TimetableManager timetableManager) {
         return timetableManager.getTimetableManager().size() == 0;
     }
 
+    /**.
+     * Method to convert file content in data/timetable_info.txt into TimetableManager
+     * so that user can load the saved information into a usable format when using the app
+     * @param fileContent String with previously saved information of user's saved list of timetable information
+     * @return TimetableManager which stores all timetables information
+     * @throws InvalidUserStorageFileException When the string in data/timetable_info.txt is in the wrong format
+     *              ie. file corrupted between now and last saved
+     */
     private static TimetableManager convertFileContentIntoTimetable(String fileContent)
             throws InvalidUserStorageFileException {
         logger.log(Level.INFO, "Start converting String to Timetable Manager");
@@ -348,6 +384,13 @@ public class UserStorageParser {
         return timetableManager;
     }
 
+    /**.
+     * Method to get timetable information from file content
+     * @param unis array of Strings, each representing timetable information for a particular school
+     * @param timetableManager stores all timetables information
+     * @throws InvalidUserStorageFileException When the string in data/timetable_info.txt is in the wrong format
+     *              ie. file corrupted between now and last saved
+     */
     private static void getTimetableInfoFromString(String[] unis, TimetableManager timetableManager)
             throws InvalidUserStorageFileException {
         for (String uni: unis) {
@@ -358,6 +401,14 @@ public class UserStorageParser {
         }
     }
 
+    /**.
+     * Method to get lesson timings information from file content
+     * @param items array of Strings, each representing module information for a particular lesson
+     * @param puName Partner University's name
+     * @param timetableManager stores all timetables information
+     * @throws InvalidUserStorageFileException When the string in data/timetable_info.txt is in the wrong format
+     *              ie. file corrupted between now and last saved
+     */
     private static void getLessonTimingsInfoFromString(String[] items, String puName, TimetableManager timetableManager)
             throws InvalidUserStorageFileException {
         for (int i = 1; i < items.length; ++i) {
@@ -382,6 +433,12 @@ public class UserStorageParser {
         }
     }
 
+    /**.
+     * Method to get user's saved lists of timetables from uni/timetable_info.txt
+     * and convert it into usable format in TimetableManager
+     * @return new TimetableManager object, with saved timetable information
+     *              or empty new TimetableManager object, if error has occurred while loading file
+     */
     public static TimetableManager getSavedTimetables() {
         try {
             isUniStorage = false;
@@ -394,6 +451,10 @@ public class UserStorageParser {
         return new TimetableManager();
     }
 
+    /**.
+     * Method to store user's list of timetables into data/timetable_info.txt
+     * @param timetableManager user's list of timetables
+     */
     public static void storeTimetable(TimetableManager timetableManager) {
         try {
             String fileContent = convertTimetableIntoFileContent(timetableManager);
