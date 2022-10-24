@@ -165,27 +165,34 @@ public class Ui {
     }
 
     public void displayOneClientName(Client client, int i) {
-        System.out.println(i + ".");
+        System.out.print(i + FULL_STOP);
         System.out.println(client.getClientName());
         System.out.println(LINE_BREAK);
     }
 
     public void displayOneClientContact(Client client, int i) {
-        System.out.println(i + ".");
-        System.out.println(client.getClientContactNumber());
+        System.out.print(i + FULL_STOP);
+        System.out.println(SPACE + client.getClientContactNumber());
         System.out.println(LINE_BREAK);
     }
 
     public void displayOneClientEmail(Client client, int i) {
-        System.out.println(i + ".");
-        System.out.println(client.getClientEmailForList());
+        System.out.print(i + FULL_STOP);
+        System.out.println(SPACE + client.getClientEmailForList());
         System.out.println(LINE_BREAK);
     }
 
     public void displayOneClientBudget(Client client, int i) {
-        System.out.println(i + ".");
-        System.out.println(client.getClientBudgetPerMonth());
+        System.out.print(i + FULL_STOP);
+        System.out.println(SPACE + client.getClientBudgetPerMonth());
         System.out.println(LINE_BREAK);
+    }
+
+    public void displayOneClientShort(Client client, int i) {
+        System.out.print(i + FULL_STOP);
+        System.out.println(SPACE + CLIENT_NAME_LABEL + client.getClientName());
+        System.out.println(SPACE + CLIENT_BUDGET_LABEL + client.getClientBudgetPerMonth());
+        System.out.println(SPACE + LINE_BREAK);
     }
 
     public void displayOneProperty(Property property, int i) {
@@ -210,27 +217,36 @@ public class Ui {
     }
 
     public void displayOnePropertyAddress(Property property, int i) {
-        System.out.println(i + ".");
-        System.out.println(property.getPropertyAddress());
+        System.out.print(i + FULL_STOP);
+        System.out.println(SPACE + property.getPropertyAddress());
         System.out.println(LINE_BREAK);
     }
 
+
     public void displayOnePropertyLandlordName(Property property, int i) {
-        System.out.println(i + ".");
-        System.out.println(property.getLandlordName());
+        System.out.print(i + FULL_STOP);
+        System.out.println(SPACE + property.getLandlordName());
         System.out.println(LINE_BREAK);
     }
 
     public void displayOnePropertyRentingPrice(Property property, int i) {
-        System.out.println(i + ".");
-        System.out.println(property.getRentingPrice());
+        System.out.print(i + FULL_STOP);
+        System.out.println(SPACE + property.getRentingPrice());
         System.out.println(LINE_BREAK);
     }
 
     public void displayOnePropertyUnitType(Property property, int i) {
-        System.out.println(i + ".");
-        System.out.println(property.getUnitType());
+        System.out.print(i + FULL_STOP);
+        System.out.println(SPACE + property.getUnitType());
         System.out.println(LINE_BREAK);
+    }
+
+    public void displayOnePropertyShort(Property property, int i) {
+        System.out.print(i + FULL_STOP);
+        System.out.println(SPACE + PROPERTY_ADDRESS_LABEL + property.getPropertyAddress());
+        System.out.println(SPACE + PROPERTY_UNIT_TYPE_LABEL + property.getUnitType());
+        System.out.println(SPACE + PROPERTY_RENTAL_LABEL + property.getRentingPrice());
+        System.out.println(SPACE + LINE_BREAK);
     }
 
     public void displayNoOfProperties(int i) {

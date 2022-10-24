@@ -30,6 +30,8 @@ public class CommandListClientsWithTags extends Command {
         case CommandStructure.BUDGET_FLAG:
             displayClientBudget(clientList, ui);
             break;
+        case CommandStructure.SHORT_FLAG:
+            displayClientShort(clientList, ui);
         default:
             break;
         }
@@ -38,6 +40,13 @@ public class CommandListClientsWithTags extends Command {
     private void displayClientContacts(ClientList clientList, Ui ui) {
         for (int i = 0; i < clientList.getCurrentListSize(); i++) {
             ui.displayOneClientContact(clientList.getClientList().get(i), i + 1);
+        }
+        ui.displayNoOfClients(clientList.getCurrentListSize());
+    }
+
+    public void displayClientShort(ClientList clientList, Ui ui) {
+        for (int i = 0; i < clientList.getCurrentListSize(); i++) {
+           ui.displayOneClientShort(clientList.getClientList().get(i), i + 1);
         }
         ui.displayNoOfClients(clientList.getCurrentListSize());
     }
