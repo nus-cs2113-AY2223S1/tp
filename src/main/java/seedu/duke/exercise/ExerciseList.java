@@ -1,8 +1,11 @@
 package seedu.duke.exercise;
 
+
 import seedu.duke.exception.IllegalValueException;
 
 import java.util.ArrayList;
+
+import static seedu.duke.command.DateCommand.sortDate;
 
 public class ExerciseList {
     private ArrayList<Exercise> currentExerciseList;
@@ -33,6 +36,7 @@ public class ExerciseList {
     }
 
     public ArrayList<Exercise> getCurrentExerciseList() {
+        sortDate(currentExerciseList);
         return currentExerciseList;
     }
 

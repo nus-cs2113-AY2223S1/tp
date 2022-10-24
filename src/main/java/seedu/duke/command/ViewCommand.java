@@ -12,6 +12,7 @@ import seedu.duke.exercise.StrengthExercise;
 import seedu.duke.food.Food;
 import seedu.duke.food.FoodList;
 import seedu.duke.storage.Storage;
+import seedu.duke.biometrics.Calculator;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;
@@ -20,6 +21,7 @@ public class ViewCommand extends Command {
 
     private Ui ui;
     private Biometrics biometrics;
+    private Calculator calculator;
     private String arguments;
     private ExerciseList exerciseList;
 
@@ -52,9 +54,29 @@ public class ViewCommand extends Command {
         case ("cardio"):
             viewCardioExercise(argumentList);
             break;
+        case ("bmi"):
+            viewBmi();
+            break;
+        case ("maintenance"):
+            viewMaintenanceCalories();
+            break;
         default:
             handleInvalidViewType();
         }
+    }
+
+    private void viewMaintenanceCalories() {
+        ui.line();
+        ui.output(calculator.getActivityStatus());
+        ui.output("Thus your maintenance calories is " + calculator.getIdealMaintenanceCalories());
+        ui.line();
+    }
+
+    private void viewBmi() {
+        ui.line();
+        ui.output("Your current BMI is :" + calculator.getBmi());
+        ui.output(calculator.getBmiStatus());
+        ui.line();
     }
 
 

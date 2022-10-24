@@ -1,10 +1,12 @@
 package seedu.duke.exercise;
 
+import java.time.LocalDate;
+
 public class StrengthExercise extends Exercise {
     private int set;
 
-    public StrengthExercise(String exerciseName, int set, int repetitions, int caloriesBurnt) {
-        super(exerciseName, repetitions, caloriesBurnt);
+    public StrengthExercise(String exerciseName, int set, int repetitions, int caloriesBurnt, String date) {
+        super(exerciseName, repetitions, caloriesBurnt, date);
         this.set = set;
     }
 
@@ -25,6 +27,7 @@ public class StrengthExercise extends Exercise {
                 + "Sets: " + getSet() + System.lineSeparator()
                 + "Repetitions: " + getRepetition() + System.lineSeparator()
                 + "Calories Burnt: " + getCaloriesBurnt() + System.lineSeparator()
+                + "Date: " + getDate() + System.lineSeparator()
                 + String.format("Status: %s", getTaskStatus());
     }
 }

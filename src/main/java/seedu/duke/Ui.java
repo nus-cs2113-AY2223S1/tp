@@ -15,7 +15,7 @@ public class Ui {
 
 
     public void line() {
-        System.out.println("-------------------------------------------------------------");
+        System.out.println("--------------------------------------------------------------------------");
     }
 
 
@@ -57,7 +57,7 @@ public class Ui {
     }
 
     public void outputExerciseList(ArrayList<Exercise> exerciseArrayList) {
-        Integer[] columnSpacingArray = {5, 8, 4, 4, 4, 8};
+        Integer[] columnSpacingArray = {5, 8, 4, 4, 4, 8, 8};
         getExerciseColumnsSpacing(exerciseArrayList, columnSpacingArray);
         generateExerciseTableHeader(columnSpacingArray);
         printExerciseList(exerciseArrayList, columnSpacingArray);
@@ -83,6 +83,7 @@ public class Ui {
             columnSpacingArray[1] = Math.max(columnSpacingArray[1], exercise.getExerciseName().length());
             columnSpacingArray[4] = Math.max(columnSpacingArray[4], exercise.getRepetition() % 10 + 1);
             columnSpacingArray[5] = Math.max(columnSpacingArray[5], exercise.getCaloriesBurnt() % 10 + 1);
+            columnSpacingArray[6] = Math.max(columnSpacingArray[6], exercise.getDate().length());
         }
     }
 
@@ -106,8 +107,9 @@ public class Ui {
                     columnSpacingArray[4]) + " | ";
             String calories = addRightPadding(Integer.toString(exercise.getCaloriesBurnt()),
                     columnSpacingArray[5]) + " | ";
+            String date = addRightPadding(exercise.getDate(),columnSpacingArray[6]) + " | ";
             String status = exercise.getTaskStatus();
-            printInSameLine(index, exerciseName, sets, time, repetitions, calories, status);
+            printInSameLine(index, exerciseName, sets, time, repetitions, calories, date, status);
         }
     }
 
@@ -136,10 +138,11 @@ public class Ui {
         String paddedTime = addRightPadding("Time", columnSpacingArray[3]) + " | ";
         String paddedRep = addRightPadding("Reps", columnSpacingArray[4]) + " | ";
         String paddedCalories = addRightPadding("Calories", columnSpacingArray[5]) + " | ";
+        String paddedDate = addRightPadding("Date",columnSpacingArray[6]) + " | ";
         String paddedStatus = "Status";
         String line = paddedIndex + paddedExercise + paddedSets + paddedTime + paddedRep
-                + paddedCalories + paddedStatus;
-        String separatorLine = "-".repeat(line.length());
+                + paddedCalories + paddedDate + paddedStatus;
+        String separatorLine = "-".repeat(line.length() + 4);
         output(separatorLine, line, separatorLine);
     }
 

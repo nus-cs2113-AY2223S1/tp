@@ -13,9 +13,11 @@ import seedu.duke.food.Food;
 import seedu.duke.food.FoodList;
 import seedu.duke.storage.Storage;
 
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.time.LocalDate;
 
 public class AddCommand extends Command {
     private final boolean isMarkDone;
@@ -63,8 +65,9 @@ public class AddCommand extends Command {
     }
 
     private void addStrengthExercise(String[] argumentList) throws IllegalValueException {
-        if (argumentList.length != 5) {
+        if (argumentList.length != 6 && argumentList.length != 5) {
             LOGGER.warning("Invalid arguments length for add strength exercise");
+
             throw new IllegalValueException("Invalid add strength exercise command");
         }
         String description = argumentList[1];
@@ -72,7 +75,13 @@ public class AddCommand extends Command {
             int set = Integer.parseInt(argumentList[2]);
             int repetition = Integer.parseInt(argumentList[3]);
             int calories = Integer.parseInt(argumentList[4]);
-            Exercise exercise = new StrengthExercise(description, set, repetition, calories);
+            String date;
+            if (argumentList.length != 6) {
+                date = LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+            } else {
+                date = argumentList[5];
+            }
+            Exercise exercise = new StrengthExercise(description, set, repetition, calories, date);
             exerciseList.addExercise(exercise);
             assert (exerciseList.getCurrentExercise(exerciseList.getCurrentExerciseListSize() - 1)
                     .equals(exercise)) : "Exercise not added properly";
@@ -90,7 +99,7 @@ public class AddCommand extends Command {
     }
 
     private void addCardioExercise(String[] argumentList) throws IllegalValueException {
-        if (argumentList.length != 5) {
+        if (argumentList.length != 6 && argumentList.length != 5) {
             throw new IllegalValueException("Invalid add cardio exercise command");
         }
         String description = argumentList[1];
@@ -98,7 +107,13 @@ public class AddCommand extends Command {
             int time = Integer.parseInt(argumentList[2]);
             int repetition = Integer.parseInt(argumentList[3]);
             int calories = Integer.parseInt(argumentList[4]);
-            Exercise exercise = new CardioExercise(description, time, repetition, calories);
+            String date;
+            if (argumentList.length != 6) {
+                date = LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+            } else {
+                date = argumentList[5];
+            }
+            Exercise exercise = new CardioExercise(description, time, repetition, calories, date);
             exerciseList.addExercise(exercise);
             assert (exerciseList.getCurrentExercise(exerciseList.getCurrentExerciseListSize() - 1)
                     .equals(exercise)) : "Exercise not added properly";
