@@ -90,17 +90,15 @@ public abstract class Command {
     public void setStatsType(String statsType) {
     }
 
-    public void setStatsMonth(int month) {
+    public void setGlobalMonth(int month) {
     }
 
-    public void setStatsYear(int year) {
+    public void setGlobalYear(int year) {
     }
 
-    public void setStatsNumber(int number) {
+    public void setGlobalNumber(int number) {
     }
 
-    public void setStatsPeriod(String period) {
+    public void setGlobalPeriod(String period) {
     }
-
-
 }

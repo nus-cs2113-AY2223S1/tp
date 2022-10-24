@@ -26,8 +26,11 @@ public class TransactionList {
     private static final String PREFIX_CATEGORY = "[";
     private static final String POSTFIX_CATEGORY = "]";
     private static final String SYMBOL_DOLLAR = "$";
+    private static final String INCOME = "income";
+    private static final String EXPENSE = "expense";
     private static final int START = 0;
     private static final int END = 1;
+    private static final int UNDEFINED_PARAMETER = -1;
     private static final String LINE_SEPARATOR = System.lineSeparator();
 
     //@@author chinhan99
@@ -176,15 +179,16 @@ public class TransactionList {
      * @return A string containing the formatted transaction list.
      * @throws InputTransactionInvalidTypeException If class type cannot be found in the packages.
      */
-    public String listTransactions(String type, String category, LocalDate date, int month, int year)
+    public String listTransactions(String type, String category, LocalDate date, int month, int year,
+                                   int number, String period)
             throws InputTransactionInvalidTypeException {
         ArrayList<Transaction> timeTransactions;
 
         // Filters the transactions list by month or/and year first
-        if (year != -1 && month != -1) {
+        if (year != UNDEFINED_PARAMETER && month != UNDEFINED_PARAMETER) {
             timeTransactions = getTransactionsByMonth(year, month);
-        } else if (year != -1) {
-            assert month == -1;
+        } else if (year != UNDEFINED_PARAMETER) {
+            assert month == UNDEFINED_PARAMETER;
             timeTransactions = getTransactionsByYear(year);
         } else {
             // No filter month or/and year filter applied
@@ -215,7 +219,7 @@ public class TransactionList {
         for (Transaction transaction : transactions) {
             // Includes only transactions that contain the keywords used in the search expression
             if (transaction.toString().contains(keywords)) {
-                transactionsList += transaction.toString() + LINE_SEPARATOR;
+                transactionsList += transaction + LINE_SEPARATOR;
             }
         }
         return transactionsList;
@@ -278,10 +282,10 @@ public class TransactionList {
                                 int number) {
         String timeSavingsList = "";
 
-        if (period != null && number != -1) {
+        if (period != null && number != UNDEFINED_PARAMETER) {
             timeSavingsList += "The past " + number + " " + period + ": " + LINE_SEPARATOR + LINE_SEPARATOR
                     + INFO_STATS_CATEGORIES_HEADER + LINE_SEPARATOR;
-        } else if (month == -1) {
+        } else if (month == UNDEFINED_PARAMETER) {
             timeSavingsList += "Year: " + year + LINE_SEPARATOR + LINE_SEPARATOR + INFO_STATS_CATEGORIES_HEADER
                     + LINE_SEPARATOR;
         } else {
@@ -309,9 +313,9 @@ public class TransactionList {
         int timeIncome = 0;
         for (Transaction entry : timeTransactions) {
             String category = entry.getType();
-            if (category == "expense") {
+            if (category.equals(EXPENSE)) {
                 timeExpense += entry.getAmount();
-            } else if (category == "income") {
+            } else if (category.equals(INCOME)) {
                 timeIncome += entry.getAmount();
             }
         }
