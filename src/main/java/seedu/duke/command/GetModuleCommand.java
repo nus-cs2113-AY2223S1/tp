@@ -6,14 +6,14 @@ import seedu.duke.utils.Storage;
 import seedu.duke.utils.Ui;
 import seedu.duke.model.RawLesson;
 import seedu.duke.model.Timetable;
+import seedu.duke.model.Module;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.apache.commons.lang3.tuple.Pair;
-
-import seedu.duke.exceptions.YamomException;
-import seedu.duke.model.Module;
 
 /**
  * Get all module details by module code. Display all tutorial and labs session in timetable format.
@@ -26,6 +26,9 @@ public class GetModuleCommand extends Command {
     public static final String MODULE_NOT_FOUND = "Module not found! Please enter a valid module code! Try searching "
             + "if you do not remember the exact module code.";
     private static final String ERROR_WRONG_FORMAT = "Wrong format, should be: " + COMMAND_USAGE;
+
+    private Logger logger;
+    private static final String SUBSYSTEM_NAME = "GetModuleCommand";
 
     public GetModuleCommand(String[] input) throws YamomException {
         super(input);
@@ -44,6 +47,9 @@ public class GetModuleCommand extends Command {
 
     @Override
     public void execute(State state, Ui ui, Storage storage) {
+        logger = Logger.getLogger(SUBSYSTEM_NAME);
+        logger.log(Level.FINE, "Loading get module command, starting to get module details");
+
         // if field is empty, display null in ui
         ui.addMessage("Module               : " + (module.moduleCode.isEmpty() ? "Nil" : module.moduleCode));
         ui.addMessage("Module Name          : " + (module.title.isEmpty() ? "Nil" : module.title));
@@ -62,6 +68,7 @@ public class GetModuleCommand extends Command {
 
         ui.displayDivider();
         if (isModuleOfferedInCurrentSem(module, state)) {
+            logger.log(Level.FINE, "Module is offered in current semester, module timetable will be displayed");
             List<Pair<Module, RawLesson>> lessons = new ArrayList<>();
             Pair<Module, RawLesson> lesson;
             List<RawLesson> tempLesson = module.getSemesterData(state.getSemester()).timetable;
@@ -73,6 +80,7 @@ public class GetModuleCommand extends Command {
             Timetable timetable = new Timetable(lessons, true, false);
             ui.addMessage(timetable.toString());
         } else {
+            logger.log(Level.FINE, "Module is not offered in current semester, module timetable will not be displayed");
             ui.addMessage("Module " + module.moduleCode + " is not offered in this semester"
                     + ", hence no timetable information is available due to unforseen circumstances");
         }
