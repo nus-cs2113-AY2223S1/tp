@@ -2,17 +2,23 @@ package seedu.duke.userstorage;
 
 import org.junit.jupiter.api.Test;
 import seedu.duke.exceptions.InvalidUserCommandException;
+import seedu.duke.exceptions.InvalidUserStorageFileException;
 import seedu.duke.parser.UserStorageParser;
 import seedu.duke.user.UserModuleMapping;
 import seedu.duke.user.UserUniversityList;
 import seedu.duke.user.UserUniversityListManager;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 
-public class UserStorageTest {
+public class UserUniStorageTest {
+    private static final String filePath = "data/uni_info.txt";
     UserUniversityListManager testManager = new UserUniversityListManager();
     UserModuleMapping testModule1 = new UserModuleMapping("MET CS 248", "Discrete Mathematics", "CS1231",
             "Discrete Structures", "4", "3", "Boston University", "USA");
@@ -26,66 +32,56 @@ public class UserStorageTest {
             "CS3230", "Design & Analysis of Algorithm", "4", "3",
             "Arizona State University", "USA");
 
-    @Test
-    public void testFileContentStringConversion_OneUniWithOneModule() throws InvalidUserCommandException {
-        testManager.createList("Boston University");
-        testManager.addModule("Boston University", testModule1);
-        assertEquals("Boston University%\n" + "null%\n" + "F%\n"
-                        + "MET CS 248;Discrete Mathematics;3;CS1231;Discrete Structures;4%\n",
-                UserStorageParser.convertUniversityListIntoFileContent(testManager));
+    private static void clearStorageFile(String filePath) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        fw.write("");
+        fw.close();
+    }
+
+    private static String getFileContents(String filePath) throws FileNotFoundException {
+        File f = new File(filePath);
+        Scanner s = new Scanner(f);
+        String fileContent = "";
+        while (s.hasNext()) {
+            fileContent += s.nextLine() + "\n";
+        }
+        s.close();
+        return fileContent;
     }
 
     @Test
-    public void testFileContentStringConversion_OneUniWithTwoModules() throws InvalidUserCommandException {
-        testManager.createList("Boston University");
-        testManager.addModule("Boston University", testModule1);
-        testManager.addModule("Boston University", testModule2);
-        assertEquals("Boston University%\n" + "null%\n" + "F%\n"
-                        + "MET CS 248;Discrete Mathematics;3;CS1231;Discrete Structures;4%\n"
-                        + "CS103;Introduction to Internet Technologies and Web Programming;3;"
-                        + "IT1001;Introduction to Computing;4%\n",
-                UserStorageParser.convertUniversityListIntoFileContent(testManager));
+    public void testInvalidUserStorageFileExceptionThrown_InvalidUniFormat() throws IOException {
+        clearStorageFile(filePath);
+        String fileContent = "Boston University%" + "null%";
+        assertThrows(InvalidUserStorageFileException.class,
+                () -> UserStorageParser.convertFileContentIntoUniversityList(fileContent));
     }
 
     @Test
-    public void testFileContentStringConversion_TwoUniWithTwoModulesEach() throws InvalidUserCommandException {
-        testManager.createList("Boston University");
-        testManager.createList("Arizona State University");
-        testManager.addModule("Boston University", testModule1);
-        testManager.addModule("Boston University", testModule2);
-        testManager.addModule("Arizona State University", testModule3);
-        testManager.addModule("Arizona State University", testModule4);
-        assertEquals("Boston University%\n" + "null%\n" + "F%\n"
-                        + "MET CS 248;Discrete Mathematics;3;CS1231;Discrete Structures;4%\n"
-                        + "CS103;Introduction to Internet Technologies and Web Programming;3;"
-                        + "IT1001;Introduction to Computing;4%\n"
-                        + "/Arizona State University%\n" + "null%\n" + "F%\n"
-                        + "CSE412;Database Management;3;CS2102;Database Systems;4%\n"
-                        + "CSE450;Design and Analysis of Algorithms;3;CS3230;Design & Analysis of Algorithm;4%\n",
-                UserStorageParser.convertUniversityListIntoFileContent(testManager));
+    public void testInvalidUserStorageFileExceptionThrown_InvalidFavouritesFormat() throws IOException {
+        clearStorageFile(filePath);
+        String fileContent = "Boston University%" + "null%" + "S%"
+                +  "MET CS 248;Discrete Mathematics;3;CS1231;Discrete Structures;4%";
+        assertThrows(InvalidUserStorageFileException.class,
+                () -> UserStorageParser.convertFileContentIntoUniversityList(fileContent));
     }
 
     @Test
-    public void testFileContentStringConversion_OneEmptyUni() throws InvalidUserCommandException {
-        testManager.createList("Boston University");
-        assertEquals("Boston University%\n" + "null%\n" + "F%\n",
-                UserStorageParser.convertUniversityListIntoFileContent(testManager));
+    public void testInvalidUserStorageFileExceptionThrown_InvalidModulesFormat() throws IOException {
+        clearStorageFile(filePath);
+        String fileContent = "Boston University%" + "null%" + "T%"
+                +  "MET CS 248;Discrete Mathematics;3;CS1231;Discrete Structures%";
+        assertThrows(InvalidUserStorageFileException.class,
+                () -> UserStorageParser.convertFileContentIntoUniversityList(fileContent));
     }
 
     @Test
-    public void testFileContentStringConversion_TwoEmptyUnis() throws InvalidUserCommandException {
-        testManager.createList("Boston University");
-        testManager.createList("Arizona State University");
-        assertEquals("Boston University%\n" + "null%\n" + "F%\n"
-                        + "/Arizona State University%\n" + "null%\n" + "F%\n",
-                UserStorageParser.convertUniversityListIntoFileContent(testManager));
-    }
-    
-    @Test
-    public void testUserUniversityListManagerConversion_OneUniWithOneModule_NotFavourite() {
+    public void testLoadingFile_OneUniWithOneModule_NotFavourite() throws IOException {
+        clearStorageFile(filePath);
         String fileContent = "Boston University%" + "null%" + "F%"
                 +  "MET CS 248;Discrete Mathematics;3;CS1231;Discrete Structures;4%";
-        testManager = new UserUniversityListManager(fileContent);
+        UserStorage.saveFile(fileContent, true);
+        testManager = UserStorageParser.getSavedLists();
         UserUniversityList testUniversityList = testManager.getMyManager().get("Boston University");
         assertEquals(testUniversityList.getMyModules().getModules().get(0).getPuCode(), "MET CS 248");
         assertEquals(testUniversityList.getMyModules().getModules().get(0).getPuTitle(), "Discrete Mathematics");
@@ -97,10 +93,12 @@ public class UserStorageTest {
     }
 
     @Test
-    public void testUserUniversityListManagerConversion_OneUniWithOneModule_IsFavourite() {
+    public void testLoadingFile_OneUniWithOneModule_IsFavourite() throws IOException {
+        clearStorageFile(filePath);
         String fileContent = "Boston University%" + "null%" + "T%"
                 +  "MET CS 248;Discrete Mathematics;3;CS1231;Discrete Structures;4%";
-        testManager = new UserUniversityListManager(fileContent);
+        UserStorage.saveFile(fileContent, true);
+        testManager = UserStorageParser.getSavedLists();
         UserUniversityList testUniversityList = testManager.getMyManager().get("Boston University");
         assertEquals(testUniversityList.getMyModules().getModules().get(0).getPuCode(), "MET CS 248");
         assertEquals(testUniversityList.getMyModules().getModules().get(0).getPuTitle(), "Discrete Mathematics");
@@ -112,31 +110,8 @@ public class UserStorageTest {
     }
 
     @Test
-    public void testUserUniversityListManagerConversion_OneUniWithTwoModules() {
-        String fileContent = "Boston University%" + "null%" + "F%"
-                                + "MET CS 248;Discrete Mathematics;3;CS1231;Discrete Structures;4%"
-                                + "CS103;Introduction to Internet Technologies and Web Programming;3;"
-                                + "IT1001;Introduction to Computing;4%";
-        testManager = new UserUniversityListManager(fileContent);
-        UserUniversityList testUniversityList = testManager.getMyManager().get("Boston University");
-        assertFalse(testManager.getMyManager().get("Boston University").isFavourite());
-        assertEquals(testUniversityList.getMyModules().getModules().get(0).getPuCode(), "MET CS 248");
-        assertEquals(testUniversityList.getMyModules().getModules().get(0).getPuTitle(), "Discrete Mathematics");
-        assertEquals(testUniversityList.getMyModules().getModules().get(0).getPuCredit(), "3");
-        assertEquals(testUniversityList.getMyModules().getModules().get(0).getNusCode(), "CS1231");
-        assertEquals(testUniversityList.getMyModules().getModules().get(0).getNusTitle(), "Discrete Structures");
-        assertEquals(testUniversityList.getMyModules().getModules().get(0).getNusCredit(), "4");
-        assertEquals(testUniversityList.getMyModules().getModules().get(1).getPuCode(), "CS103");
-        assertEquals(testUniversityList.getMyModules().getModules().get(1).getPuTitle(),
-                "Introduction to Internet Technologies and Web Programming");
-        assertEquals(testUniversityList.getMyModules().getModules().get(1).getPuCredit(), "3");
-        assertEquals(testUniversityList.getMyModules().getModules().get(1).getNusCode(), "IT1001");
-        assertEquals(testUniversityList.getMyModules().getModules().get(1).getNusTitle(), "Introduction to Computing");
-        assertEquals(testUniversityList.getMyModules().getModules().get(1).getNusCredit(), "4");
-    }
-
-    @Test
-    public void testUserUniversityListManagerConversion_TwoUnisWithTwoModulesEach() {
+    public void testLoadingFile_TwoUnisWithTwoModulesEach() throws IOException {
+        clearStorageFile(filePath);
         String fileContent = "Boston University%" + "null%" + "F%"
                 + "MET CS 248;Discrete Mathematics;3;CS1231;Discrete Structures;4%"
                 + "CS103;Introduction to Internet Technologies and Web Programming;3;"
@@ -144,7 +119,8 @@ public class UserStorageTest {
                 + "/Arizona State University%" + "null%" + "F%"
                 + "CSE412;Database Management;3;CS2102;Database Systems;4%"
                 + "CSE450;Design and Analysis of Algorithms;3;CS3230;Design & Analysis of Algorithm;4%";
-        testManager = new UserUniversityListManager(fileContent);
+        UserStorage.saveFile(fileContent, true);
+        testManager = UserStorageParser.getSavedLists();
         UserUniversityList testUniversityListBoston = testManager.getMyManager().get("Boston University");
         assertFalse(testManager.getMyManager().get("Boston University").isFavourite());
         assertEquals(testUniversityListBoston.getMyModules().getModules().get(0).getPuCode(), "MET CS 248");
@@ -180,24 +156,68 @@ public class UserStorageTest {
     }
 
     @Test
-    public void testUserUniversityListManagerConversion_OneEmptyUni() {
-        String fileContent = "Boston University%" + "null%" + "F%";
-        testManager = new UserUniversityListManager(fileContent);
-        UserUniversityList testUniversityList = testManager.getMyManager().get("Boston University");
-        assertTrue(testUniversityList.getMyModules().getModules().size() == 0);
-        assertFalse(testManager.getMyManager().get("Boston University").isFavourite());
-    }
-
-    @Test
-    public void testUserUniversityListManagerConversion_TwoEmptyUnis() {
-        String fileContent = "Boston University%" + "null%" + "F%"
+    public void testLoadingFile_TwoEmptyUnis_OneFavouriteOneNotFavourite() throws IOException {
+        clearStorageFile(filePath);
+        String fileContent = "Boston University%" + "null%" + "T%"
                             + "/Arizona State University%" + "null%" + "F%";
-        testManager = new UserUniversityListManager(fileContent);
+        UserStorage.saveFile(fileContent, true);
+        testManager = UserStorageParser.getSavedLists();
         UserUniversityList testUniversityList1 = testManager.getMyManager().get("Boston University");
         UserUniversityList testUniversityList2 = testManager.getMyManager().get("Arizona State University");
         assertTrue(testUniversityList1.getMyModules().getModules().size() == 0);
         assertTrue(testUniversityList2.getMyModules().getModules().size() == 0);
-        assertFalse(testManager.getMyManager().get("Boston University").isFavourite());
+        assertTrue(testManager.getMyManager().get("Boston University").isFavourite());
         assertFalse(testManager.getMyManager().get("Arizona State University").isFavourite());
+    }
+
+    @Test
+    public void testSavingFile_OneUniWithOneModule() throws InvalidUserCommandException, IOException {
+        clearStorageFile(filePath);
+        testManager.createList("Boston University");
+        testManager.addModule("Boston University", testModule1);
+        UserStorageParser.storeCreatedLists(testManager);
+        String fileContent = getFileContents(filePath);
+        assertEquals(fileContent, "Boston University%\n" + "null%\n" + "F%\n"
+                + "MET CS 248;Discrete Mathematics;3;CS1231;Discrete Structures;4%\n");
+    }
+
+    @Test
+    public void testSavingFile_TwoUniWithTwoModulesEach() throws InvalidUserCommandException, IOException {
+        clearStorageFile(filePath);
+        testManager.createList("Boston University");
+        testManager.addModule("Boston University", testModule1);
+        testManager.addModule("Boston University", testModule2);
+        testManager.createList("Arizona State University");
+        testManager.addModule("Arizona State University", testModule3);
+        testManager.addModule("Arizona State University", testModule4);
+        UserStorageParser.storeCreatedLists(testManager);
+        String fileContent = getFileContents(filePath);
+        assertEquals(fileContent, "Boston University%\n" + "null%\n" + "F%\n"
+                + "MET CS 248;Discrete Mathematics;3;CS1231;Discrete Structures;4%\n"
+                + "CS103;Introduction to Internet Technologies and Web Programming;3;"
+                + "IT1001;Introduction to Computing;4%\n"
+                + "/Arizona State University%\n" + "null%\n" + "F%\n"
+                + "CSE412;Database Management;3;CS2102;Database Systems;4%\n"
+                + "CSE450;Design and Analysis of Algorithms;3;CS3230;Design & Analysis of Algorithm;4%\n");
+    }
+
+    @Test
+    public void testSavingFile_OneEmptyUni_WithFavourite() throws IOException {
+        clearStorageFile(filePath);
+        testManager.createList("Boston University");
+        testManager.getMyManager().get("Boston University").setFavourite(true);
+        UserStorageParser.storeCreatedLists(testManager);
+        String fileContent = getFileContents(filePath);
+        assertEquals(fileContent, "Boston University%\n" + "null%\n" + "T%\n");
+    }
+
+    @Test
+    public void testLoadingFile_OneUniWithOneModule() throws IOException {
+        clearStorageFile(filePath);
+        String fileContent = "Boston University%" + "null%" + "F%"
+                +  "MET CS 248;Discrete Mathematics;3;CS1231;Discrete Structures;4%";
+        UserStorage.saveFile(fileContent, true);
+        UserUniversityListManager testManager = UserStorageParser.getSavedLists();
+
     }
 }
