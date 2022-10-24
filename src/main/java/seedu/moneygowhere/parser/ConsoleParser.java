@@ -575,64 +575,100 @@ public class ConsoleParser {
     private static ConsoleCommandEditExpense parseCommandEditExpenseValues(CommandLine commandLine) throws
             ConsoleParserCommandEditExpenseInvalidException {
         try {
-            String expenseIndexStr = commandLine.getOptionValue(
+            ConsoleCommandEditExpense consoleCommandEditExpense = new ConsoleCommandEditExpense();
+
+            if (commandLine.hasOption(
                     ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_EXPENSE_INDEX_LONG
-            );
-            String name = commandLine.getOptionValue(
+            )) {
+                String expenseIndexStr = commandLine.getOptionValue(
+                        ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_EXPENSE_INDEX_LONG
+                );
+
+                int expenseIndex = Integer.parseInt(expenseIndexStr);
+
+                consoleCommandEditExpense.setExpenseIndex(expenseIndex);
+            }
+            if (commandLine.hasOption(
                     ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_NAME_LONG
-            );
-            String dateTimeStr = commandLine.getOptionValue(
+            )) {
+                String name = commandLine.getOptionValue(
+                        ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_NAME_LONG
+                );
+
+                consoleCommandEditExpense.setName(name);
+            }
+            if (commandLine.hasOption(
                     ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_DATE_TIME_LONG
-            );
-            String description = commandLine.getOptionValue(
-                    ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_DESCRIPTION_LONG
-            );
-            String amountStr = commandLine.getOptionValue(
-                    ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_AMOUNT_LONG
-            );
-            String category = commandLine.getOptionValue(
-                    ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_CATEGORY_LONG
-            );
-            String remarks = commandLine.getOptionValue(
-                    ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_REMARKS_LONG
-            );
-            String currency = commandLine.getOptionValue(
-                    ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_CURRENCY_LONG
-            );
-            String modeOfPayment = commandLine.getOptionValue(
-                    ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_LONG
-            );
+            )) {
+                String dateTimeStr = commandLine.getOptionValue(
+                        ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_DATE_TIME_LONG
+                );
 
-            int expenseIndex = Integer.parseInt(expenseIndexStr);
-
-            LocalDateTime dateTime;
-            if (dateTimeStr == null) {
-                dateTime = null;
-            } else {
-                dateTime = LocalDateTime.parse(
+                LocalDateTime dateTime = LocalDateTime.parse(
                         dateTimeStr,
                         DateTimeFormatter.ofPattern(Configurations.CONSOLE_INTERFACE_DATE_TIME_INPUT_FORMAT)
                 );
+
+                consoleCommandEditExpense.setDateTime(dateTime);
+            }
+            if (commandLine.hasOption(
+                    ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_DESCRIPTION_LONG
+            )) {
+                String description = commandLine.getOptionValue(
+                        ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_DESCRIPTION_LONG
+                );
+
+                consoleCommandEditExpense.setDescription(description);
+            }
+            if (commandLine.hasOption(
+                    ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_AMOUNT_LONG
+            )) {
+                String amountStr = commandLine.getOptionValue(
+                        ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_AMOUNT_LONG
+                );
+
+                BigDecimal amount = new BigDecimal(amountStr);
+
+                consoleCommandEditExpense.setAmount(amount);
+            }
+            if (commandLine.hasOption(
+                    ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_CATEGORY_LONG
+            )) {
+                String category = commandLine.getOptionValue(
+                        ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_CATEGORY_LONG
+                );
+
+                consoleCommandEditExpense.setCategory(category);
+            }
+            if (commandLine.hasOption(
+                    ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_REMARKS_LONG
+            )) {
+                String remarks = commandLine.getOptionValue(
+                        ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_REMARKS_LONG
+                );
+
+                consoleCommandEditExpense.setRemarks(remarks);
+            }
+            if (commandLine.hasOption(
+                    ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_CURRENCY_LONG
+            )) {
+                String currency = commandLine.getOptionValue(
+                        ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_CURRENCY_LONG
+                );
+
+                consoleCommandEditExpense.setCurrency(currency);
+            }
+            if (commandLine.hasOption(
+                    ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_LONG
+            )) {
+                String modeOfPayment = commandLine.getOptionValue(
+                        ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_LONG
+                );
+
+                consoleCommandEditExpense.setModeOfPayment(modeOfPayment);
             }
 
-            BigDecimal amount;
-            if (amountStr == null) {
-                amount = null;
-            } else {
-                amount = new BigDecimal(amountStr);
-            }
-
-            return new ConsoleCommandEditExpense(
-                    expenseIndex,
-                    name,
-                    dateTime,
-                    description,
-                    amount,
-                    category,
-                    remarks,
-                    currency,
-                    modeOfPayment
-            );
+            return consoleCommandEditExpense;
         } catch (DateTimeParseException | NumberFormatException exception) {
             throw new ConsoleParserCommandEditExpenseInvalidException(exception);
         }

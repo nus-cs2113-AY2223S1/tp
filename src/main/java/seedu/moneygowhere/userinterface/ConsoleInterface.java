@@ -326,6 +326,7 @@ public class ConsoleInterface {
         } catch (CurrencyInvalidException
                  | CurrencyRatesNotFoundException exception) {
             printErrorMessage(exception.getMessage());
+
             return;
         }
 
@@ -363,8 +364,17 @@ public class ConsoleInterface {
         printInformationalMessage(convertExpenseToConsoleString(expense));
     }
 
-    private void viewExpenseByExpenseCategory(String expenseCategory) throws ExpenseManagerExpenseNotFoundException {
-        ArrayList<Expense> expenses = expenseManager.getExpensesByCategory(expenseCategory);
+    //@@author yuu-chennn
+    private void viewExpenseByExpenseCategory(String expenseCategory) {
+        ArrayList<Expense> expenses;
+
+        try {
+            expenses = expenseManager.getExpensesByCategory(expenseCategory);
+        } catch (ExpenseManagerExpenseNotFoundException exception) {
+            printErrorMessage(exception.getMessage());
+
+            return;
+        }
 
         for (int index = 0; index < expenses.size(); index++) {
             Expense expense = expenses.get(index);
@@ -374,8 +384,17 @@ public class ConsoleInterface {
         }
     }
 
-    private void viewExpenseByExpenseName(String expenseName) throws ExpenseManagerExpenseNotFoundException {
-        ArrayList<Expense> expenses = expenseManager.getExpensesByName(expenseName);
+    //@@author yuu-chennn
+    private void viewExpenseByExpenseName(String expenseName) {
+        ArrayList<Expense> expenses;
+
+        try {
+            expenses = expenseManager.getExpensesByName(expenseName);
+        } catch (ExpenseManagerExpenseNotFoundException exception) {
+            printErrorMessage(exception.getMessage());
+
+            return;
+        }
 
         for (int index = 0; index < expenses.size(); index++) {
             Expense expense = expenses.get(index);
@@ -410,17 +429,9 @@ public class ConsoleInterface {
         if (expenseIndex >= 0) {
             viewExpenseByExpenseIndex(expenseIndex);
         } else if (expenseCategory != null && !expenseCategory.isEmpty()) {
-            try {
-                viewExpenseByExpenseCategory(expenseCategory);
-            } catch (ExpenseManagerExpenseNotFoundException exception) {
-                printErrorMessage(exception.getMessage());
-            }
+            viewExpenseByExpenseCategory(expenseCategory);
         } else if (expenseName != null && !expenseName.isEmpty()) {
-            try {
-                viewExpenseByExpenseName(expenseName);
-            } catch (ExpenseManagerExpenseNotFoundException exception) {
-                printErrorMessage(exception.getMessage());
-            }
+            viewExpenseByExpenseName(expenseName);
         } else {
             viewExpense();
         }
@@ -448,75 +459,57 @@ public class ConsoleInterface {
     private void runCommandEditExpense(ConsoleCommandEditExpense consoleCommandEditExpense) {
         int expenseIndex = consoleCommandEditExpense.getExpenseIndex();
 
-        Expense oldExpense;
+        Expense expense;
         try {
-            oldExpense = expenseManager.getExpense(expenseIndex);
+            expense = expenseManager.getExpense(expenseIndex);
         } catch (ExpenseManagerExpenseNotFoundException exception) {
             printErrorMessage(exception.getMessage());
+
             return;
         }
 
-        String name = consoleCommandEditExpense.getName();
-        if (name == null) {
-            name = oldExpense.getName();
+        if (consoleCommandEditExpense.isNameSet()) {
+            expense.setName(consoleCommandEditExpense.getName());
         }
-        LocalDateTime dateTime = consoleCommandEditExpense.getDateTime();
-        if (dateTime == null) {
-            dateTime = oldExpense.getDateTime();
+        if (consoleCommandEditExpense.isDateTimeSet()) {
+            expense.setDateTime(consoleCommandEditExpense.getDateTime());
         }
-        String description = consoleCommandEditExpense.getDescription();
-        if (description == null) {
-            description = oldExpense.getDescription();
+        if (consoleCommandEditExpense.isDescriptionSet()) {
+            expense.setDescription(consoleCommandEditExpense.getDescription());
         }
-        BigDecimal amount = consoleCommandEditExpense.getAmount();
-        if (amount == null) {
-            amount = oldExpense.getAmount();
+        if (consoleCommandEditExpense.isAmountSet()) {
+            expense.setAmount(consoleCommandEditExpense.getAmount());
         }
-        String category = consoleCommandEditExpense.getCategory();
-        if (category == null) {
-            category = oldExpense.getCategory();
+        if (consoleCommandEditExpense.isCategorySet()) {
+            expense.setCategory(consoleCommandEditExpense.getCategory());
         }
-        String remarks = consoleCommandEditExpense.getRemarks();
-        if (remarks == null) {
-            remarks = oldExpense.getRemarks();
+        if (consoleCommandEditExpense.isRemarksSet()) {
+            expense.setRemarks(consoleCommandEditExpense.getRemarks());
         }
-        String currency = consoleCommandEditExpense.getCurrency();
-        if (currency == null) {
-            currency = oldExpense.getCurrency();
-        } else {
+        if (consoleCommandEditExpense.isCurrencySet()) {
+            String currency = consoleCommandEditExpense.getCurrency();
+
             try {
-                currencyManager.hasCurrency(consoleCommandEditExpense.getCurrency());
-            } catch (CurrencyInvalidException
-                     | CurrencyRatesNotFoundException exception) {
+                currencyManager.hasCurrency(currency);
+            } catch (CurrencyInvalidException | CurrencyRatesNotFoundException exception) {
                 printErrorMessage(exception.getMessage());
+
                 return;
             }
-        }
-        currency = currency.toUpperCase();
-        String modeOfPayment = consoleCommandEditExpense.getModeOfPayment();
-        if (modeOfPayment == null) {
-            modeOfPayment = oldExpense.getModeOfPayment();
+
+            expense.setCurrency(currency);
         }
 
-        Expense newExpense = new Expense(
-                name,
-                dateTime,
-                description,
-                amount,
-                category,
-                remarks,
-                currency,
-                modeOfPayment
-        );
         try {
-            expenseManager.editExpense(expenseIndex, newExpense);
+            expenseManager.editExpense(expenseIndex, expense);
         } catch (ExpenseManagerExpenseNotFoundException exception) {
             printErrorMessage(exception.getMessage());
+
             return;
         }
 
         printInformationalMessage("---- EXPENSE INDEX " + expenseIndex + " ----");
-        printInformationalMessage(convertExpenseToConsoleString(newExpense));
+        printInformationalMessage(convertExpenseToConsoleString(expense));
         printBlankLine();
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_EDIT_EXPENSE_SUCCESS);
 
@@ -1005,6 +998,7 @@ public class ConsoleInterface {
 
             if (consoleCommand instanceof ConsoleCommandBye) {
                 runCommandBye((ConsoleCommandBye) consoleCommand);
+
                 return;
             } else if (consoleCommand instanceof ConsoleCommandAddExpense) {
                 runCommandAddExpense((ConsoleCommandAddExpense) consoleCommand);
