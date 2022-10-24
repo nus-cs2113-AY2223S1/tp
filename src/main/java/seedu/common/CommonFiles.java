@@ -9,6 +9,8 @@ import java.nio.file.Paths;
 public class CommonFiles {
     public static final String API_JSON_DIRECTORY = "./resources/api";
     public static final String LTA_JSON_FILE = "ltaResponse.json";
+    public static final String CARPARK_LIST_DIRECTORY = "./resources";
+    public static final String CARPARK_LIST_FILE = "carparkList.txt";
     public static final Path LTA_FILE_PATH = Paths.get(CommonFiles.API_JSON_DIRECTORY, CommonFiles.LTA_JSON_FILE);
     public static final Path LTA_BACKUP_FILE_PATH = Paths.get(CommonFiles.API_JSON_DIRECTORY,
         "ltaResponseSample.json");

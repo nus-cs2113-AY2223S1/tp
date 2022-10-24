@@ -5,7 +5,6 @@ import static seedu.common.CommonData.API_RESPONSE_HEADER;
 import static seedu.common.CommonData.API_RESPONSE_TAIL;
 import static seedu.common.CommonData.LTA_BASE_URL;
 
-import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -276,10 +275,10 @@ public class Api {
             }
             apiKey = key;
             authStatus = AuthenticationStatus.API_CHANGED;
-        } catch (IOException e) {
+        } catch (NoFileFoundException e) {
             throw new NoFileFoundException("API key file is missing! Please check " + file + ".");
-        } catch (EmptySecretFileException e) {
-            ui.print(e.getMessage());
+        } catch (EmptySecretFileException | FileWriteException e) {
+            ui.printError(e);
         }
     }
 

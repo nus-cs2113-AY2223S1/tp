@@ -2,11 +2,12 @@ package seedu.parking;
 
 import static seedu.common.CommonFiles.API_JSON_DIRECTORY;
 import static seedu.common.CommonFiles.API_KEY_FILE;
+import static seedu.common.CommonFiles.CARPARK_LIST_DIRECTORY;
+import static seedu.common.CommonFiles.CARPARK_LIST_FILE;
 import static seedu.common.CommonFiles.FAVOURITE_DIRECTORY;
 import static seedu.common.CommonFiles.FAVOURITE_FILE;
 import static seedu.common.CommonFiles.LTA_JSON_FILE;
 
-import java.io.IOException;
 import java.util.Objects;
 
 import seedu.api.Api;
@@ -24,6 +25,7 @@ import seedu.exception.NoCommandArgumentException;
 import seedu.exception.NoFileFoundException;
 import seedu.exception.ParkingException;
 import seedu.exception.UnneededArgumentsException;
+import seedu.files.FileReader;
 import seedu.files.FileStorage;
 import seedu.parser.Command;
 import seedu.parser.Parser;
@@ -50,13 +52,12 @@ public class Parking {
 
         try {
             favourite.updateFavouriteList();
-        } catch (IOException e) {
+        } catch (FileWriteException e) {
             ui.showUpdateFavouriteError();
         } catch (NoFileFoundException e) {
             ui.printError(e);
         }
         try {
-            FileStorage.ensureBackup();
             api.loadApiKey(API_KEY_FILE, API_JSON_DIRECTORY, true);
             api.syncFetchData();
             ui.print("Fetching data from API successful!");
@@ -67,7 +68,10 @@ public class Parking {
         // Load file from json
         ui.showLoadingDataMessage();
         try {
-            carparkList = new CarparkList(CommonFiles.LTA_FILE_PATH, CommonFiles.LTA_BACKUP_FILE_PATH);
+            carparkList = FileReader.loadCarparkListFromTxt(CARPARK_LIST_FILE, CARPARK_LIST_DIRECTORY);
+            CarparkList newCarparkList = new CarparkList(CommonFiles.LTA_FILE_PATH, CommonFiles.LTA_BACKUP_FILE_PATH);
+            carparkList.update(newCarparkList);
+            FileStorage.saveCarparkList(carparkList);
             ui.showLoadingDataSuccess();
         } catch (ParkingException e) {
             ui.printError(e);

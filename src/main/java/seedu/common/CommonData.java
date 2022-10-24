@@ -1,5 +1,6 @@
 package seedu.common;
 
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 
 import seedu.data.LotType;
@@ -19,4 +20,5 @@ public class CommonData {
             put(LotType.MOTORCYCLE, "Motorcycles");
             put(LotType.HEAVY_VEHICLE, "Heavy Vehicles");
         }};
+    public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 }
