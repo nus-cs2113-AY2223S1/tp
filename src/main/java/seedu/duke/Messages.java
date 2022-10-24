@@ -84,6 +84,35 @@ public class Messages {
     public static final String MESSAGE_INVALID_PRICE_FORMAT = "OOPS!!! Please enter positive number "
             + "(No letter/symbols, etc) for renting price per month for property";
 
+    public static final String MESSAGE_INVALID_UNIT_TYPE_LABEL = "OOPS!!! Please enter one of the following "
+            + "valid unit type labels as shown below (Case-Sensitive & Space-Sensitive):\n"
+            + "Format: t/<label>\n"
+            + LINE_BREAK
+            + "\nHDB Labels:\n"
+            + "  <HDB 2> for HDB 2-Room Flexi\n"
+            + "  <HDB 3> for HDB 3-Room\n"
+            + "  <HDB 4> for HDB 4-Room\n"
+            + "  <HDB 5> for HDB 5-Room\n"
+            + "  <HDB 3Gen> for HDB Third-Generation\n"
+            + "  <HDB ExFlat> for HDB Executive Flat\n"
+            + "  <HDB DBSS> for HDB Design, Build and Sell Scheme (DBSS) Flat\n"
+            + "  <HDB ExMsn> for HDB Executive Maisonette\n"
+            + "  <HDB Jumbo> for HDB Jumbo Flat\n"
+            + "  <HDB TH> for HDB Terrace House\n"
+            + LINE_BREAK
+            + "\nCondominium Label:\n"
+            + "  <Condo> for Condominium\n"
+            + LINE_BREAK
+            + "\nPenthouse Label:\n"
+            + "  <PH> for Penthouse\n"
+            + LINE_BREAK
+            + "\nLanded Property Labels\n"
+            + "  <LP TH> for LP Terrace House\n"
+            + "  <LP SDH> for LP Semi-Detached House\n"
+            + "  <LP BGL> for LP Bungalow\n"
+            + LINE_BREAK
+            + "\nNote: Only unit type labels (Singapore-Based) are accepted by the program";
+
     public static final String MESSAGE_INVALID_CONTACT_NUMBER = "OOPS!!! Please enter a valid Singapore Contact Number "
             + "(No extension)";
 
