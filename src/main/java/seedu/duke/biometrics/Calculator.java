@@ -30,11 +30,14 @@ public class Calculator {
 
     public String getBmiStatus() {
         String bmiStatus;
-        if (bmi < 18.5) {
+        double healthyweight = 18.5;
+        double overweight = 24.9;
+        double obese = 29.9;
+        if (bmi < healthyweight) {
             bmiStatus = "You are currently in the underweight range";
-        } else if ((bmi >= 18.5) && (bmi <= 24.9)) {
+        } else if (bmi <= overweight) {
             bmiStatus = "You are currently in the healthy range";
-        } else if ((bmi >= 25) && (bmi <= 29.9)) {
+        } else if (bmi <= obese) {
             bmiStatus = "You are currently in the overweight range";
         } else {
             bmiStatus = "You are currently in the obese range. Start your workout journey! ";
