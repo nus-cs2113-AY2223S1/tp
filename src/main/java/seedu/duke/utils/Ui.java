@@ -21,7 +21,8 @@ public class Ui {
 
 
     private static final String MESSAGE_GREET = "Hello from" + System.lineSeparator()
-            + LOGO + System.lineSeparator() + "How can I help you today?";
+            + LOGO + System.lineSeparator() + "How can I help you today?"
+            + System.lineSeparator() + "Enter \"help\" to get started!";
     private static final String MESSAGE_BYE = "Bye bye, See you again";
     private static final String LINE_DIVIDER = "--------------------------------------";
 
@@ -84,10 +85,14 @@ public class Ui {
         addMessage(message, false);
     }
 
-    public void addMessage(ArrayList<String> messages) {
+    public void addMessage(ArrayList<String> messages, boolean hasIndent) {
         for (String message: messages) {
-            addMessage(message);
+            addMessage(message, hasIndent);
         }
+    }
+
+    public void addMessage(ArrayList<String> messages) {
+        addMessage(messages, false);
     }
 
     /**
@@ -115,5 +120,31 @@ public class Ui {
         displayDivider();
     }
 
+    /**
+     * To display a user prompt for the user to input information.
+     *
+     * @param semester the semester that the user is currently planning for.
+     */
+    public void displayUserPrompt(int semester) {
+        String promptFormat = "Sem " + "[" + currentUserSemester(semester)
+                + "]" + " >> ";
+        System.out.print(promptFormat);
+    }
+
+    private String currentUserSemester(int semester) {
+        assert semester >= 1 && semester <= 4 : "Invalid Semester given";
+        switch (semester) {
+        case (1):
+            return "1";
+        case (2):
+            return "2";
+        case (3):
+            return "ST1";
+        case (4):
+            return "ST2";
+        default:
+            return "Unknown";
+        }
+    }
 }
 //@author

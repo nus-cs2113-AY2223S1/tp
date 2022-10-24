@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
+import seedu.duke.exceptions.YamomException;
 import seedu.duke.utils.State;
 import seedu.duke.utils.Storage;
 import seedu.duke.utils.Ui;
@@ -20,26 +21,24 @@ import seedu.duke.model.Module;
 public class GetModuleCommand extends Command {
     Module module;
     public static final String COMMAND_WORD = "get";
-    public static final String FORMAT = "get [EXACT_MODULE_CODE]";
-    public static final String HELP_DISPLAY = COMMAND_WORD
-            + ": returns all details of the module!\n"
-            + "\tUsage:\t"
-            + FORMAT
-            + System.lineSeparator();
+    public static final String COMMAND_USAGE = "get [EXACT_MODULE_CODE]";
+    public static final String COMMAND_DESCRIPTION = "Show all details of a module.";
+    public static final String MISSING_MODULE_CODE = "Please enter a module code!";
+    public static final String MODULE_NOT_FOUND = "Module not found! Please enter a valid module code! Try searching if you do not remember the exact module code.";
+    // private static final String ERROR_WRONG_FORMAT = "Wrong format, should be: " + COMMAND_USAGE;
 
     public GetModuleCommand(String[] input) throws YamomException {
         super(input);
 
         if (input.length < 2) {
-            throw new YamomException("Please enter a module code!");
+            throw new YamomException(MISSING_MODULE_CODE);
         }
 
         String moduleCode = input[1].toUpperCase();
         this.module = Module.get(moduleCode);
 
         if (!isModuleExist(module)) {
-            throw new YamomException("Module does not exist! Please input a valid module code. Try searching for "
-                    + "it if you do not remember the exact module code.");
+            throw new YamomException(MODULE_NOT_FOUND);
         }
     }
 
@@ -102,5 +101,13 @@ public class GetModuleCommand extends Command {
     @Override
     public String getExecutionMessage() {
         return null;
+    }
+
+    public static String getCommandDescription() {
+        return COMMAND_WORD + DESCRIPTION_DELIMITER + COMMAND_DESCRIPTION;
+    }
+
+    public static String getUsage() {
+        return COMMAND_USAGE;
     }
 }

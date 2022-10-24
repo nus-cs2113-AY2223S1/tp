@@ -15,13 +15,9 @@ import java.util.logging.Logger;
 
 public class SearchModuleCommand extends Command {
     public static final String COMMAND_WORD = "search";
-    public static final String FORMAT = "search /code [SIMILAR_MODULE_CODE] /title [SIMILAR_MODULE_TITLE] /level "
-            + "<LEVEL> /sem <SEMESTER>";
-    public static final String HELP_DISPLAY = COMMAND_WORD
-            + ": List out all modules that contains similar keywords in moduleList! Either title or code have to be present.\n"
-            + "\tUsage:\t"
-            + FORMAT
-            + System.lineSeparator();
+    public static final String COMMAND_USAGE = "search /code [SIMILAR_MODULE_CODE] /title [SIMILAR_MODULE_TITLE] /level <level> /sem <semester>";
+    public static final String COMMAND_DESCRIPTION = "List out all modules that contains matching input search fields"
+            + System.lineSeparator() + "\t * Either the module code or title has to be present.";
 
     // private String toSearchModuleCode;
     private Map<String, String> params;
@@ -194,5 +190,13 @@ public class SearchModuleCommand extends Command {
     @Override
     public String getExecutionMessage() {
         return null;
+    }
+
+    public static String getCommandDescription() {
+        return COMMAND_WORD + DESCRIPTION_DELIMITER + COMMAND_DESCRIPTION;
+    }
+
+    public static String getUsage() {
+        return COMMAND_USAGE;
     }
 }

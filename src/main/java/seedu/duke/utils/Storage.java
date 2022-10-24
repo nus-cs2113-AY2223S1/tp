@@ -1,5 +1,7 @@
 package seedu.duke.utils;
 
+import seedu.duke.exceptions.YamomException;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -17,6 +19,8 @@ public class Storage {
     public static final String NO_PREVIOUS_STATE_ERROR_MESSAGE = "There was no previously saved state.";
 
     public static final String LOADING_PREVIOUS_STATE_MESSAGE = "Loading previous state.";
+
+    public static final String NO_PREVIOUS_SAVED_MODULE_ERROR_MESSAGE = "There are no modules saved";
 
     public static final String EXPORT_MESSAGE = "This is your export link:";
 
@@ -43,6 +47,9 @@ public class Storage {
         } catch (FileNotFoundException e) {
             ui.addMessage(NO_PREVIOUS_STATE_ERROR_MESSAGE);
             logger.log(Level.FINE, "No previous saved file");
+        } catch (YamomException e) {
+            ui.addMessage(NO_PREVIOUS_SAVED_MODULE_ERROR_MESSAGE);
+            logger.log(Level.FINE, "No previous saved modules");
         }
         ui.displayUi();
     }
