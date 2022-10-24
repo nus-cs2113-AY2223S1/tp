@@ -17,13 +17,14 @@ import java.util.logging.Logger;
 
 import static seedu.duke.command.CommandTag.COMMAND_TAG_GLOBAL_ENTRY_NUMBER;
 import static seedu.duke.common.InfoMessages.INFO_DELETE;
+import static seedu.duke.common.InfoMessages.LINE_SEPARATOR;
+
 
 /**
  * Represents a delete command object that will execute the operations for Delete command.
  */
 public class DeleteCommand extends Command {
     //@@author brian-vb
-    private static final String LINE_SEPARATOR = System.lineSeparator();
     // The command word used to trigger the execution of Moolah Manager's operations
     public static final String COMMAND_WORD = "DELETE";
     // The description for the usage of command

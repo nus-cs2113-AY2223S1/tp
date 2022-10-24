@@ -30,13 +30,13 @@ import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_TYPE;
 import static seedu.duke.common.Constants.MAX_TRANSACTIONS_COUNT;
 import static seedu.duke.common.InfoMessages.INFO_ADD_EXPENSE;
 import static seedu.duke.common.InfoMessages.INFO_ADD_INCOME;
+import static seedu.duke.common.InfoMessages.LINE_SEPARATOR;
 
 /**
  * Represents an add command object that will execute the operations for Add command.
  */
 public class AddCommand extends Command {
     //@@author chinhan99
-    private static final String LINE_SEPARATOR = System.lineSeparator();
     // The command word used to trigger the execution of Moolah Manager's operations
     public static final String COMMAND_WORD = "ADD";
 

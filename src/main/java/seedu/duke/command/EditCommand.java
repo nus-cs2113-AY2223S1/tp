@@ -28,13 +28,14 @@ import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_AMOUNT;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_DESCRIPTION;
 import static seedu.duke.common.InfoMessages.INFO_EDIT_EXPENSE;
 import static seedu.duke.common.InfoMessages.INFO_EDIT_INCOME;
+import static seedu.duke.common.InfoMessages.LINE_SEPARATOR;
+
 
 /**
  * Represents an edit command object that will execute the operations for Edit command.
  */
 public class EditCommand extends Command {
     //@@author brian-vb
-    private static final String LINE_SEPARATOR = System.lineSeparator();
     // The command word used to trigger the execution of Moolah Manager's operations
     public static final String COMMAND_WORD = "EDIT";
     // The description for the usage of command

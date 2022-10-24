@@ -6,13 +6,14 @@ import seedu.duke.Ui;
 import seedu.duke.data.TransactionList;
 
 import static seedu.duke.common.InfoMessages.INFO_EXIT;
+import static seedu.duke.common.InfoMessages.LINE_SEPARATOR;
+
 
 /**
  * Represents a bye command object that will execute the operations for Bye command.
  */
 public class ByeCommand extends Command {
     //@@author paullowse
-    private static final String LINE_SEPARATOR = System.lineSeparator();
     // The command word used to trigger the execution of Moolah Manager's operations
     public static final String COMMAND_WORD = "BYE";
     // The description for the usage of command

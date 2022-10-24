@@ -4,13 +4,13 @@ package seedu.duke.common;
  * Provides enum variables for storing custom program information messages.
  */
 public enum InfoMessages {
+    LINE_SEPARATOR(System.lineSeparator()),
+    SPACE(" "),
+    FULL_STOP("."),
+    FULL_STOP_SPACE(". "),
+    COLON_SPACE(": "),
+    DOLLAR_SIGN("$"),
     INFO_DIVIDER("____________________________________________________________"),
-    INFO_LINE_SEPARATOR(System.lineSeparator()),
-    INFO_SPACE(" "),
-    INFO_FULL_STOP("."),
-    INFO_FULL_STOP_SPACE(". "),
-    INFO_COLON_SPACE(": "),
-    INFO_DOLLAR_SIGN("$"),
     INFO_ADD_EXPENSE("I have added the following Expense transaction:"),
     INFO_ADD_INCOME("I have added the following Income transaction:"),
     INFO_EDIT_EXPENSE("I have edited the following Expense transaction:"),

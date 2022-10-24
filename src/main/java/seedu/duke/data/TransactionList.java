@@ -15,6 +15,8 @@ import java.util.stream.Collectors;
 import static seedu.duke.common.Constants.MAX_AMOUNT_VALUE;
 import static seedu.duke.common.Constants.MAX_TRANSACTIONS_COUNT;
 import static seedu.duke.common.InfoMessages.INFO_STATS_CATEGORIES_HEADER;
+import static seedu.duke.common.InfoMessages.LINE_SEPARATOR;
+import static seedu.duke.common.InfoMessages.DOLLAR_SIGN;
 
 /**
  * Represents a list of transactions added by the user into the application.
@@ -25,13 +27,11 @@ public class TransactionList {
     //@@author chydarren
     private static final String PREFIX_CATEGORY = "[";
     private static final String POSTFIX_CATEGORY = "]";
-    private static final String SYMBOL_DOLLAR = "$";
     private static final String INCOME = "income";
     private static final String EXPENSE = "expense";
     private static final int START = 0;
     private static final int END = 1;
     private static final int UNDEFINED_PARAMETER = -1;
-    private static final String LINE_SEPARATOR = System.lineSeparator();
 
     //@@author chinhan99
     private static ArrayList<Transaction> transactions;
@@ -216,7 +216,7 @@ public class TransactionList {
         for (Transaction transaction : transactions) {
             // Includes only transactions that contain the keywords used in the search expression
             if (transaction.toString().contains(keywords)) {
-                transactionsList += transaction + LINE_SEPARATOR;
+                transactionsList += transaction + LINE_SEPARATOR.toString();
             }
         }
         return transactionsList;
@@ -257,7 +257,7 @@ public class TransactionList {
         // Formats every entry in the hashmap into a categorical savings list
         for (HashMap.Entry<String, Integer> entry : categoricalSavings.entrySet()) {
             categoricalSavingsList += String.format("%s%s%s %s%s%s", PREFIX_CATEGORY, entry.getKey(),
-                    POSTFIX_CATEGORY, SYMBOL_DOLLAR, entry.getValue(), LINE_SEPARATOR);
+                    POSTFIX_CATEGORY, DOLLAR_SIGN, entry.getValue(), LINE_SEPARATOR);
         }
 
         return categoricalSavingsList;
@@ -293,7 +293,7 @@ public class TransactionList {
         // Formats every entry in the hashmap into a categorical savings list
         for (Transaction entry : timeTransactions) {
             timeSavingsList += String.format("%s%s%s %s%s%s", PREFIX_CATEGORY, entry.getCategory(),
-                    POSTFIX_CATEGORY, SYMBOL_DOLLAR, entry.getAmount(), LINE_SEPARATOR);
+                    POSTFIX_CATEGORY, DOLLAR_SIGN, entry.getAmount(), LINE_SEPARATOR);
         }
 
         return timeSavingsList;

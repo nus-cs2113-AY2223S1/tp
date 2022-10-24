@@ -6,13 +6,14 @@ import seedu.duke.Ui;
 import seedu.duke.data.TransactionList;
 
 import static seedu.duke.command.CommandTag.COMMAND_TAG_HELP_OPTION;
+import static seedu.duke.common.InfoMessages.LINE_SEPARATOR;
+
 
 /**
  * Represents a help command object that will execute the operations for Help command.
  */
 public class HelpCommand extends Command {
     //@@author wcwy
-    private static final String LINE_SEPARATOR = System.lineSeparator();
     // The command word used to trigger the execution of Moolah Manager's operations
     public static final String COMMAND_WORD = "HELP";
     // The description for the usage of command

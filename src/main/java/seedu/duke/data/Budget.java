@@ -6,13 +6,13 @@ import static java.lang.Math.abs;
 import static seedu.duke.common.Constants.MAX_TRANSACTIONS_COUNT;
 import static seedu.duke.common.Constants.MAX_AMOUNT_VALUE;
 import static seedu.duke.common.Constants.MIN_BUDGET_VALUE;
-import static seedu.duke.common.InfoMessages.INFO_COLON_SPACE;
 import static seedu.duke.common.InfoMessages.INFO_EXCEEDING_BUDGET;
 import static seedu.duke.common.InfoMessages.INFO_REMAINING_BUDGET;
 import static seedu.duke.common.InfoMessages.INFO_BUDGET_EXCEEDED_TIPS;
 import static seedu.duke.common.InfoMessages.INFO_BUDGET_NOT_EXCEEDED_TIPS;
-import static seedu.duke.common.InfoMessages.INFO_FULL_STOP_SPACE;
-import static seedu.duke.common.InfoMessages.INFO_DOLLAR_SIGN;
+import static seedu.duke.common.InfoMessages.DOLLAR_SIGN;
+import static seedu.duke.common.InfoMessages.COLON_SPACE;
+import static seedu.duke.common.InfoMessages.FULL_STOP_SPACE;
 
 //@@author wcwy
 
@@ -62,7 +62,7 @@ public class Budget {
         String message = getBudgetLeftMessage(budgetLeft, hasExceededBudget, monthYear);
 
         if (withTips) {
-            message += INFO_FULL_STOP_SPACE + getMoneyManagingTips(hasExceededBudget);
+            message += FULL_STOP_SPACE + getMoneyManagingTips(hasExceededBudget);
         }
 
         return message;
@@ -127,11 +127,11 @@ public class Budget {
         if (hasExceededBudget) {
             assert budgetLeft < 0;
             // The absolute value of budget left will be the amount of budget exceeded
-            return INFO_EXCEEDING_BUDGET + monthAndYear + INFO_COLON_SPACE + INFO_DOLLAR_SIGN
+            return INFO_EXCEEDING_BUDGET + monthAndYear + COLON_SPACE + DOLLAR_SIGN
                     + abs(budgetLeft);
         } else {
             assert budgetLeft >= 0;
-            return INFO_REMAINING_BUDGET + monthAndYear + INFO_COLON_SPACE + INFO_DOLLAR_SIGN
+            return INFO_REMAINING_BUDGET + monthAndYear + COLON_SPACE + DOLLAR_SIGN
                     + budgetLeft;
         }
     }
