@@ -4,7 +4,6 @@ import static seedu.common.CommonFiles.API_JSON_DIRECTORY;
 import static seedu.common.CommonFiles.API_KEY_FILE;
 import static seedu.common.CommonFiles.FAVOURITE_DIRECTORY;
 import static seedu.common.CommonFiles.FAVOURITE_FILE;
-import static seedu.common.CommonFiles.LTA_JSON_FILE;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -45,7 +44,7 @@ public class Parking {
         Ui ui = new Ui();
         ui.greetUser();
         Auth auth = new Auth();
-        Api api = new Api(LTA_JSON_FILE, API_JSON_DIRECTORY);
+        Api api = new Api();
         Favourite favourite = new Favourite(FAVOURITE_DIRECTORY, FAVOURITE_FILE);
 
         try {

@@ -46,11 +46,8 @@ public class Api {
     /**
      * Constructor to create a new client.
      * Initializes the storage class for file writing purposes.
-     *
-     * @param file The file name where the storage file is stored.
-     * @param directory The directory path where the storage file is stored.
      */
-    public Api(String file, String directory) {
+    public Api() {
         this.client = HttpClient.newHttpClient();
         this.storage = new FileStorage(API_JSON_DIRECTORY, LTA_JSON_FILE);
         this.ui = new Ui();
@@ -148,12 +145,14 @@ public class Api {
      */
     public void syncFetchData() throws FileWriteException, EmptyResponseException, UnauthorisedAccessApiException {
         String result = API_RESPONSE_HEADER;
+        int totalDataCount = 0;
         for (int i = 0; i < 5; i++) {
             asyncExecuteRequest(i * 500, i);
         }
         for (int i = 0; i < 5; i++) {
             String partialResult = fetchData(i);
             String processedResult = processData(partialResult);
+            totalDataCount += countData(processedResult);
             result += processedResult;
             if (i != 4 && !processedResult.isEmpty()) {
                 result += ",";
@@ -161,6 +160,7 @@ public class Api {
         }
 
         result += API_RESPONSE_TAIL;
+        ui.print(String.valueOf(totalDataCount));
 
         storage.writeDataToFile(result);
     }
@@ -175,6 +175,11 @@ public class Api {
         String[] dataSplit = data.split("\"value\":\\[", 2);
         dataSplit = dataSplit[1].split("]}", 2);
         return dataSplit[0];
+    }
+
+    public int countData(String data) {
+        String[] individualData = data.trim().split("},\\{");
+        return individualData.length;
     }
 
     /**
