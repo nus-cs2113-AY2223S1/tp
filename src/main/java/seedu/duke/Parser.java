@@ -21,13 +21,13 @@ import java.util.logging.Logger;
 
 public class Parser {
 
-    private static Logger logger = Logger.getLogger("Parser");
+    private static final Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     public static Command parse(String input) {
         String userCommand = getUserCommand(input);
-        logger.log(Level.FINE, "command: " + userCommand);
+        LOGGER.info("command: " + userCommand);
         String arguments = getArgumentSubString(input, userCommand);
-        logger.log(Level.FINE, "arguments:" + arguments);
+        LOGGER.info("arguments:" + arguments);
         switch (userCommand) {
         case "greet":
             return new GreetCommand();
