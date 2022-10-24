@@ -301,7 +301,7 @@ When client rents a property, the client and property form a pair.
 
 The sequence diagram for the pair command is called is shown below:
 
-![PairingList Add Pair Sequence Diagram](diagrams/PairingListAddPairSequenceDiagram.png)
+![PairingList Add Pair Sequence Diagram](diagrams/PairingListAddPairSD.png)
 
 **NOTE**: Some self-invocated calls have been omitted because this diagram emphasises cross-class method calls.
 
