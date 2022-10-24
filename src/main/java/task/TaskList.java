@@ -10,7 +10,8 @@ import java.util.ArrayList;
 public class TaskList {
     static ArrayList<Task> tasks = new ArrayList<>();
 
-    public static void listTasks() {
+    //view every single task in the clinic
+    public static void viewTasks() {
         System.out.println("Here are all the tasks:");
         for (Task task : tasks) {
             System.out.println("_______________________________________");
@@ -42,6 +43,19 @@ public class TaskList {
             EmployeeList.findEmployee(employeeId).addTaskToEmployee(taskToReassign);
             // Change employeeId in taskToReassign
             taskToReassign.setEmployeeId(employeeId);
+        }
+    }
+
+    public static void removeTask(int taskId) {
+        for (Task task : tasks) {
+            if (task.getTaskId() == taskId) {
+                System.out.print("Got it. I've removed this task: ");
+                System.out.println(task.getTaskDescription());
+                System.out.println("Performed by: " + task.getEmployeeId());
+                System.out.println("Appointment: " + task.getAppointmentId());
+                System.out.println("Now you have " + tasks.size() + " task in the list.");
+                break;
+            }
         }
     }
 
