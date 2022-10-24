@@ -3,7 +3,7 @@ package seedu.api;
 import static seedu.common.CommonData.API_KEY_DEFAULT;
 import static seedu.common.CommonData.API_RESPONSE_HEADER;
 import static seedu.common.CommonData.API_RESPONSE_TAIL;
-import static seedu.common.CommonFiles.LTA_BASE_URL;
+import static seedu.common.CommonData.LTA_BASE_URL;
 
 import java.io.IOException;
 import java.net.URI;
@@ -26,6 +26,7 @@ import seedu.exception.UnknownResponseApiException;
 import seedu.files.FileReader;
 import seedu.files.FileStorage;
 import seedu.ui.Ui;
+
 
 /**
  * Class to fetch .json data from APIs and save that locally.
@@ -120,7 +121,8 @@ public class Api {
             try {
                 result = asyncGetResponse(index).trim();
             } catch (ServerNotReadyApiException | UnknownResponseApiException e) {
-                System.out.println(e.getMessage());
+                e.setTryNumber(fetchTries);
+                ui.printError(e);
             } finally {
                 fetchTries--;
             }
@@ -136,7 +138,8 @@ public class Api {
     }
 
     /**
-     * Synchronous version of multiple data fetching from the API.
+     * Synchronous version of multiple data fetching from the API. If the result is fetched successfully, it will be
+     * stored locally.
      *
      * @throws FileWriteException if data fails to write.
      * @throws EmptyResponseException if empty/invalid response received.
@@ -144,12 +147,14 @@ public class Api {
      */
     public void syncFetchData() throws FileWriteException, EmptyResponseException, UnauthorisedAccessApiException {
         String result = API_RESPONSE_HEADER;
+        int totalDataCount = 0;
         for (int i = 0; i < 5; i++) {
             asyncExecuteRequest(i * 500, i);
         }
         for (int i = 0; i < 5; i++) {
             String partialResult = fetchData(i);
             String processedResult = processData(partialResult);
+            totalDataCount += countData(processedResult);
             result += processedResult;
             if (i != 4 && !processedResult.isEmpty()) {
                 result += ",";
@@ -157,6 +162,8 @@ public class Api {
         }
 
         result += API_RESPONSE_TAIL;
+
+        ui.print(totalDataCount + " Parking Lot data received from LTA!");
 
         storage.writeDataToFile(result);
     }
@@ -171,6 +178,17 @@ public class Api {
         String[] dataSplit = data.split("\"value\":\\[", 2);
         dataSplit = dataSplit[1].split("]}", 2);
         return dataSplit[0];
+    }
+
+    /**
+     * Count the number of parking lot data received from LTA.
+     *
+     * @param data processed data set to count.
+     * @return number of parking lots.
+     */
+    public int countData(String data) {
+        String[] individualData = data.trim().split("},\\{");
+        return individualData.length;
     }
 
     /**
