@@ -61,8 +61,8 @@ public class MarkCommand extends Command {
             }
             try {
                 Exercise exercise = exerciseList.getCurrentExercise(exerciseIndex);
-                double time = Double.parseDouble(argumentList[2]);
-                double metabolicEquivalent = Double.parseDouble(argumentList[3]);
+                double time = getTimeWithValidation(argumentList);
+                double metabolicEquivalent = getMetabolicEquivalentWithValidation(argumentList);
                 int calories = ExerciseCaloriesCalculator.calculateCalories(biometrics, time, metabolicEquivalent);
                 exerciseList.markDone(exerciseIndex, time, calories);
                 assert exercise.getDone() : "exercise should be done";
@@ -90,6 +90,22 @@ public class MarkCommand extends Command {
             LOGGER.log(Level.WARNING, "Invalid mark command");
             throw new IllegalValueException("Invalid mark command");
         }
+    }
+
+    private static double getMetabolicEquivalentWithValidation(String[] argumentList) throws IllegalValueException {
+        double metabolicEquivalent = Double.parseDouble(argumentList[3]);
+        if (metabolicEquivalent <= 0 || metabolicEquivalent > 50) {
+            throw new IllegalValueException("Invalid met value");
+        }
+        return metabolicEquivalent;
+    }
+
+    private static double getTimeWithValidation(String[] argumentList) throws IllegalValueException {
+        double time = Double.parseDouble(argumentList[2]);
+        if (time <= 0 || time > 1440) {
+            throw new IllegalValueException("Invalid value for time");
+        }
+        return time;
     }
 
     @Override
