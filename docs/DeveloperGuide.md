@@ -1,22 +1,63 @@
 # Upcycle - Developer Guide
 
+## Table of contents
+[Acknowledgements](#acknowledgements)
+1. [Introduction](#1-introduction)
+2. [Setup the environment](#2-setup-the-environment)
+3. [Design](#3-design)\
+   3.1. [Duke](#31-duke)\
+   3.2. [Command component](#32-command-component)\
+   3.3. [Model component](#33-model-component)\
+   3.4. [Ui component](#34-ui-component)\
+   3.5. [Storage component](#35-storage-component)\
+4. [Implementation](#4-implementation)\
+   4.1. [User-related features](#41-user-related-features)\
+   4.2. [Item-related features](#42-item-related-features)\
+   4.3. [Transaction-related features](#43-transaction-related-features)\
+   4.4. [Help command](#44-help-command)\
+   4.5. [Exit command](#45-exit-command)
+5. [Product Scope](#5-product-scope)\
+   5.1. [Target user profile](#51-target-user-profile)\
+   5.2. [Value proposition](#52-value-proposition)
+6. [User stories](#6-user-stories)
+7. [Non-functional requirements](#7-non-functional-requirements)
+8. [Instructions for manual testing](#8-instructions-for-manual-testing)
+
 ## Acknowledgements
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+This project is based on the skeleton code and documents of [SE-EDU AddressBook Level-3](https://se-education.org/addressbook-level3/)
 
-## Introduction
+## 1. Introduction
 
-## Setup the environment
+...To be updated
 
-## Design
+## 2. Setup the environment
+
+**Step 1**: JDK 11 and IntelliJ are recommended
+
+**Step 2**: Fork [our repo](https://github.com/AY2223S1-CS2113-W12-1/tp) and clone the fork to your local computer.
+
+**Step 3**: Set up the JDK:
+1. From the main menu, select File | Project Structure | Project Settings | Project | Project SDK
+2. If ```JDK 11``` is already defined in Intellij IDEA, select it and click ```Apply```
+3. If ```JDK 11``` is not defined, select Add SDK | Download JDK, choose the necessary JDK (JDK 11) and click Download, then click ```Apply```
+**Step 4**: Go to File | Open, locate and open the cloned repository.
+
+**Step 5**: Verify the setup:
+1. Run ```Duke.main()``` and try some commands.
+2. Run the JUnit tests in ```src/test/java/seedu.duke```
+
+## 3. Design
 
 This sector describes the architecture design of Upcycle with its components, and UML diagrams are used to support.
 
-### Duke
+### 3.1. Duke
 
 ![DukeSequence](images/DukeSequence.png)
 
-### Command component
+... To be updated
+
+### 3.2. Command component
 
 From the above, it is quite clear that the Command component is important as it governs execution of behaviors depending on user input.
 
@@ -38,31 +79,42 @@ A few things to take note are:
 - The `Boolean` returned value represents if the executing command is the last executed command(such as if a user exits the program)
 - `executeCommand` follows the delegation pattern. It receives `UserList`, `ItemList` and `TransactionList` which it delegates work to.
 
-### User component
+### 3.3. Model component
+#### 3.3.1. User component
 
 The class diagram below shows how User-related classes interact with each other. `User` object contains `name`, `age`, `contactNumber` attributes. Users are stored in UserList, which will be loaded and written on the file by `UserStorage` (inherits from `Storage`) whenever Upcycle runs or exits.
 All user-related commands operate mainly on a list of users (userList:UserList).
 
 ![UserClassDiagram](images/UserClassDiagram.png)
 
-### Item component
+#### 3.3.2. Item component
 
-### Transaction component
+...To be updated
 
-The Class diagram below show how Transaction-related classes interact with each other. `Transaction` object contains `transactionId`, `itemName`, `itemId`, `borrower`, `duration`, `createdAt`, `returnedAt` attributes. Among those, `transactionId` is created by `IdGenerator`'s static method and dates are parsed by `DateParser`, therefore, Transaction class depends on those two classes.
-Transactions are stored in `TransactionList`, which will be loaded and written on the file by `TransactionStorage` (inherits from `Storage`) whenever Upcycle runs or exits. All transaction-related commands operate mainly on a list of transaction (transactionList:TransactionList)
+#### 3.3.3. Transaction component
+
+The Class diagram below show how Transaction-related classes interact with each other. `Transaction` object contains `transactionId`, `itemName`, `itemId`, `borrower`, `duration`, `createdAt`, `returnedAt` 
+attributes. Among those, `transactionId` is created by `IdGenerator`'s static method and dates are parsed by `DateParser`, therefore, Transaction class depends on those two classes.
+Transactions are stored in `TransactionList`, which will be loaded and written on the file by `TransactionStorage` (inherits from `Storage`) whenever Upcycle runs or exits. All transaction-related 
+commands operate mainly on a list of transaction (transactionList:TransactionList)
 
 ![TransactionClassDiagram](images/TransactionClassDiagram.png)
 
-### Ui component
+### 3.4. Ui component
 
-### Storage component
+...To be updated
 
-## Implementation
+### 3.5. Storage component
+
+Upcycle stores the user's data, including the user list, item list, transaction list in three files ```user.txt```, ```item.txt```, ```transaction.txt```, respectively.
+The data will be loaded when running the program, and ONLY be written to the files when exiting the program correctly, otherwise, the data during the execution will be gone.
+These find can be found in ```data``` folder in the same directory with the folder containing project root.
+
+## 4. Implementation
 
 This sector describe how features are implemented, where readers can get insight into the mechanisms of them with step-by-step descriptions and UML diagrams.
 
-### User-related Features
+### 4.1. User-related Features
 
 #### Add a user
 
@@ -121,7 +173,8 @@ Step 4: After finding the user, a message will be displayed to the user via `Ui.
 The following sequence diagram shows how the view user operation works:
 ![viewUserSequence](images/ViewUserSequence.png)
 
-### Item-related Features
+**...To be updated(List, Find user)**
+### 4.2. Item-related Features
 
 #### Add an item
 
@@ -169,7 +222,7 @@ Step 1: The user types in the command in the command line. The CommandParser cla
 
 Step 2: The ViewItemCommand command checks if the delimiters ('i') is present in the user input through the getArgsViewItemCmd() method. If not present, an exception will be thrown. The command also checks whether the input's final argument is valid (item can be found or not) by checking whether that item is currently in the item list via the `isValidItem` method. An exception will also be thrown if the final argument does not satisfy the requirements (item not found).
 
-Step 3: If all arguments are valid, then it finds the item in the itemList by it's itemId, which is unique:
+Step 3: If all arguments are valid, then it finds the item in the itemList by itemId, which is unique:
 
 `itemList.getItemById(itemId);`
 
@@ -195,7 +248,9 @@ Step 4: This list of items will then be displayed to the user via `Ui.printRespo
 The following sequence diagram shows how the sort items operation works:
 ![sortItemSequence](images/SortItemsSequence.png)
 
-### Transaction-related Features
+**...To be updated(List, Find, Update item, list categories)**
+
+### 4.3. Transaction-related Features
 
 #### Add a Transaction
 
@@ -243,7 +298,7 @@ Step 1: The user types in the command in the command line. The CommandParser cla
 
 Step 2: The ViewTransactionCommand command checks if the delimiters ('u') is present in the user input through the getArgsViewTransactionCmd() method. If not present, an exception will be thrown. The command also checks whether the input's final argument is valid (transaction can be found or not) by checking whether that transaction is currently in the transaction list via the `isValidTransaction` method. An exception will also be thrown if the final argument does not satisfy the requirements (transaction not found).
 
-Step 3: If all arguments are valid, then it finds the transaction in the transactionList by it's transactionId, which is unique:
+Step 3: If all arguments are valid, then it finds the transaction in the transactionList by transactionId, which is unique:
 
 `transactionList.getTransactionById(transactionId)`
 
@@ -263,7 +318,7 @@ Given below is an example usage scenario and how the command mechanism behaves a
 
 Step 1: The user types in the command in the command line. The CommandParser class checks if the command is valid through the createCommand() method, and either sends an exception, or send the input to the ViewTransactionsByStatus command to be processed.
 
-Step 2: The ViewTransactionsByStatus command checks if the delimiter ('s') is present in the user input through the getArgs() method. If not present, an exception will be thrown. The command also checks whether the input's final argument is 'finished' or 'unfinish' through the isValidArgument() method. An exception will also be thrown if the final argument does not match the required words.
+Step 2: The ViewTransactionsByStatus command checks if the delimiter ('s') is present in the user input through the getArgs() method. If not present, an exception will be thrown. The command also checks whether the input's final argument is 'finished' or 'unfinished' through the isValidArgument() method. An exception will also be thrown if the final argument does not match the required words.
 
 Step 3: Assuming the final argument is 'finish', the entire transactionList will be iterated through, and an array will store the transaction if the transaction.isFinished() status is true.
 
@@ -273,21 +328,27 @@ The following sequence diagram shows how the viewTransactionsByStatus operation 
 
 ![viewTransactionsByStatus](images/ViewTransactionByStatusSequence.png)
 
-### Help Command
+**...To be updated(List, Update transaction)**
 
-### Exit Command
+### 4.4. Help Command
 
-## Product scope
+### 4.5. Exit Command
 
-### Target user profile
+## 5. Product scope
+
+### 5.1. Target user profile
+
+...To be updated
 
 {Describe the target user profile}
 
-### Value proposition
+### 5.2. Value proposition
+
+...To be updated
 
 {Describe the value proposition: what problem does it solve?}
 
-## User Stories
+## 6. User Stories
 
 | Version | As a ... | I want to ...             | So that I can ...                                           |
 | ------- | -------- | ------------------------- | ----------------------------------------------------------- |
@@ -319,14 +380,15 @@ The user enters the following command: “find-item /k Book”. In this case, th
 
 ![Figure: FindItem Sequence Diagram](https://raw.githubusercontent.com/AY2223S1-CS2113-W12-1/tp/master/docs/diagrams/FindItemSequence.png)
 
-## Non-Functional Requirements
+## 7. Non-Functional Requirements
 
-{Give non-functional requirements}
+1. Should work on any mainstream OS as long as it has Java 11 or above installed.
+2. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+3. Should work for only one user.
+4. Should work without Internet connection.
 
-## Glossary
+## 8. Instructions for manual testing
 
-- _glossary item_ - Definition
-
-## Instructions for manual testing
+...To be updated
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
