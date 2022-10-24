@@ -78,9 +78,9 @@ public class Duke {
                     break;
                 case CREATE:
                     userUniversityListManager.createList(newUserCommand.getUniversityName());
-                    timetableManager.createTimetable(newUserCommand.getUniversityName());
+                    timetableManager.createTimetable(newUserCommand.getUniversityName(), false);
                     UserStorageParser.storeCreatedLists(userUniversityListManager);
-                    //UserStorageParser.storeTimetable(timetableManager);
+                    UserStorageParser.storeTimetable(timetableManager);
                     break;
                 case VIEW:
                     try {
@@ -100,8 +100,8 @@ public class Duke {
                     try {
                         AddCommand addCommand = (AddCommand) newUserCommand;
                         if (addCommand.getLesson() != null) {
-                            timetableManager.addLesson(addCommand.getLesson());
-                            //UserStorageParser.storeTimetable(timetableManager);
+                            timetableManager.addLesson(addCommand.getLesson(), false);
+                            UserStorageParser.storeTimetable(timetableManager);
                         } else {
                             ModuleMapping moduleMapping = Database.findPuMapping(newUserCommand.getModuleCode());
                             Module puModule = moduleMapping.getPartnerUniversityModule();
