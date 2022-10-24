@@ -137,18 +137,13 @@ public class AddCommand extends Command {
 
     private void addFood(String[] argumentList) throws IllegalValueException {
         try {
-            if (argumentList.length < 3) {
+            if (argumentList.length != 3) {
                 throw new IllegalValueException(INVALID_FOOD_INPUT);
             }
-            LocalDate date;
-            if (argumentList.length == 4) {
-                date = LocalDate.parse(argumentList[3], DateTimeFormatter.ofPattern("d-M-yyyy"));
-            } else {
-                date = LocalDate.now();
-            }
+            assert argumentList.length == 3 : "Invalid add food command";
             String description = extractFoodName(argumentList[1]);
             int calories = extractCalories(argumentList[2]);
-            food = new Food(description, calories, date);
+            food = new Food(description, calories);
             foodList.addFood(food);
             assert foodList.getFood(foodList.getFoodListSize() - 1).equals(food) : "Food not added properly";
             if (toDisplay) {
@@ -157,8 +152,6 @@ public class AddCommand extends Command {
             }
         } catch (NumberFormatException e) {
             throw new IllegalValueException(INVALID_FOOD_INPUT);
-        } catch (DateTimeParseException e) {
-            throw new IllegalValueException("Date should be in the format dd-mm-yyyy");
         }
     }
 
