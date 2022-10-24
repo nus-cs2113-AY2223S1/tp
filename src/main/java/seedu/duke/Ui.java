@@ -129,11 +129,6 @@ public class Ui {
         printMessages(message, transactionDetails, budgetInfo);
     }
 
-    // A temporary overload method for backward-compatibility for delete command
-    public static void showTransactionAction(String message, String transactionDetails) {
-        printMessages(message, transactionDetails);
-    }
-
     //@author wcwy
 
     /**

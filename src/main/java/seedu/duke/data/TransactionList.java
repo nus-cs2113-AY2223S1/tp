@@ -28,8 +28,6 @@ public class TransactionList {
     private static final String SYMBOL_DOLLAR = "$";
     private static final String INCOME = "income";
     private static final String EXPENSE = "expense";
-    private static final String MONTHS = "months";
-    private static final String WEEKS = "weeks";
     private static final int START = 0;
     private static final int END = 1;
     private static final int UNDEFINED_PARAMETER = -1;
@@ -83,8 +81,8 @@ public class TransactionList {
      * @return A string tht states the details of the deleted transaction.
      */
     public String deleteTransaction(int index) {
-        Transaction transaction = transactions.get(index - 1);
-        transactions.remove(index - 1);
+        Transaction transaction = transactions.get(index);
+        transactions.remove(index);
         return transaction.toString();
     }
 
@@ -449,6 +447,10 @@ public class TransactionList {
         int month = date.getMonthValue();
         int year = date.getYear();
         for (Transaction transaction : transactions) {
+            // As sum of spending is to be calculated, thus only expense type transaction will be considered
+            if (!(transaction instanceof Expense)) {
+                continue;
+            }
             if (transaction.getDate().getMonthValue() == month && transaction.getDate().getYear() == year) {
                 /*
                     Since the maximum number of transaction is 1000000 and maximum amount of expense is 10000000,

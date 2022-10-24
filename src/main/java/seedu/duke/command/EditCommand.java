@@ -4,6 +4,8 @@ package seedu.duke.command;
 
 import seedu.duke.Storage;
 import seedu.duke.Ui;
+import seedu.duke.common.DateFormats;
+import seedu.duke.data.Budget;
 import seedu.duke.data.TransactionList;
 
 import seedu.duke.data.transaction.Transaction;
@@ -186,9 +188,14 @@ public class EditCommand extends Command {
                     if (newAmount == 0) {
                         newAmount = entry.getAmount();
                     }
-                    transactions.deleteTransaction(index);
+                    transactions.deleteTransaction(index - 1);
                     String message = transactions.editExpense(newDescription, newAmount, newCategory, newDate, index);
-                    Ui.showTransactionAction(INFO_EDIT_EXPENSE.toString(), message);
+
+                    long addedMonthExpenseSum = transactions.calculateMonthlyTotalExpense(newDate);
+                    String budgetInfo = Budget.generateBudgetRemainingMessage(addedMonthExpenseSum, true,
+                            DateFormats.retrieveFormattedMonthAndYear(newDate));
+
+                    Ui.showTransactionAction(INFO_EDIT_EXPENSE.toString(), message, budgetInfo);
                     editLogger.log(Level.INFO, "The requested transaction has been edited "
                             + "and the UI should display the confirmation message respectively.");
                 } else {
@@ -207,9 +214,14 @@ public class EditCommand extends Command {
                     if (newAmount == 0) {
                         newAmount = entry.getAmount();
                     }
-                    transactions.deleteTransaction(index);
+                    transactions.deleteTransaction(index - 1);
                     String message = transactions.editIncome(newDescription, newAmount, newCategory, newDate, index);
-                    Ui.showTransactionAction(INFO_EDIT_INCOME.toString(), message);
+
+                    long addedMonthExpenseSum = transactions.calculateMonthlyTotalExpense(newDate);
+                    String budgetInfo = Budget.generateBudgetRemainingMessage(addedMonthExpenseSum, true,
+                            DateFormats.retrieveFormattedMonthAndYear(newDate));
+
+                    Ui.showTransactionAction(INFO_EDIT_INCOME.toString(), message, budgetInfo);
                     editLogger.log(Level.INFO, "The requested transaction has been edited "
                             + "and the UI should display the confirmation message respectively.");
                 }

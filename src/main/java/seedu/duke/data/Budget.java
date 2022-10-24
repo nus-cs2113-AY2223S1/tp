@@ -1,13 +1,11 @@
 package seedu.duke.data;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 import static java.lang.Math.abs;
 import static seedu.duke.common.Constants.MAX_TRANSACTIONS_COUNT;
 import static seedu.duke.common.Constants.MAX_AMOUNT_VALUE;
 import static seedu.duke.common.Constants.MIN_BUDGET_VALUE;
-import static seedu.duke.common.DateFormats.MONTH_YEAR_OUTPUT_PATTERN;
 import static seedu.duke.common.InfoMessages.INFO_COLON_SPACE;
 import static seedu.duke.common.InfoMessages.INFO_EXCEEDING_BUDGET;
 import static seedu.duke.common.InfoMessages.INFO_REMAINING_BUDGET;
@@ -54,7 +52,7 @@ public class Budget {
      *
      * @param totalMonthlyExpense The long value representing the total sum of a monthly expense.
      * @param withTips            The boolean value to indicate whether tips need to be appended behind the message.
-     * @param date                The date of transaction.
+     * @param monthYear           The date of transaction.
      * @return The message generated based on the budget remained for the given date.
      */
     public static String generateBudgetRemainingMessage(long totalMonthlyExpense, boolean withTips, String monthYear) {
@@ -129,7 +127,7 @@ public class Budget {
         if (hasExceededBudget) {
             assert budgetLeft < 0;
             // The absolute value of budget left will be the amount of budget exceeded
-            return INFO_EXCEEDING_BUDGET+ monthAndYear + INFO_COLON_SPACE + INFO_DOLLAR_SIGN
+            return INFO_EXCEEDING_BUDGET + monthAndYear + INFO_COLON_SPACE + INFO_DOLLAR_SIGN
                     + abs(budgetLeft);
         } else {
             assert budgetLeft >= 0;
