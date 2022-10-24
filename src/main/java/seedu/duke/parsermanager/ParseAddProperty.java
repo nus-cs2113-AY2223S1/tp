@@ -1,7 +1,13 @@
 package seedu.duke.parsermanager;
 
+import seedu.duke.Property;
+import seedu.duke.PropertyList;
+import seedu.duke.Ui;
+
 import seedu.duke.command.Command;
 import seedu.duke.command.CommandAddProperty;
+
+import seedu.duke.exception.DuplicatePropertyException;
 import seedu.duke.exception.EmptyDetailException;
 import seedu.duke.exception.IncorrectFlagOrderException;
 import seedu.duke.exception.InvalidPriceFormatException;
@@ -13,14 +19,14 @@ import java.util.ArrayList;
 import static seedu.duke.CommandStructure.ADD_PROPERTY_FLAGS;
 import static seedu.duke.Messages.EXCEPTION;
 import static seedu.duke.Messages.MESSAGE_ADD_PROPERTY_WRONG_FORMAT;
-import static seedu.duke.Messages.MESSAGE_INVALID_SINGAPORE_ADDRESS;
-import static seedu.duke.Messages.MESSAGE_INVALID_PRICE_FORMAT;
 
+//@@author OVReader
 /**
  * Parses input for add property command.
  */
 public class ParseAddProperty extends ParseAdd {
     private final String commandDescription;
+    private final PropertyList propertyList;
 
     private static final int PROPERTY_FLAG_SIZE = 4;
     private static final int PROPERTY_ADDRESS_INDEX = 1;
@@ -29,8 +35,8 @@ public class ParseAddProperty extends ParseAdd {
     private static final int FLAG_JUMPER_VALUE = 2;
     private static final int UNIT_VALUE = 1;
 
-    /* Add Property Regex for Validation */
-    //Singapore Address Related Regex
+    // Add Property Regex for Validation
+    // Singapore Address Related Regex
     private static final String LANDED_PROPERTY_UNIT_NUMBER_REGEX = "^([0-9]{1,4})([A-Z]?) ";
     private static final String BUILDING_BLOCK_NUMBER_REGEX = "^([0-9]{1,4})([A-Z]?) ";
     private static final String STREET_NAME_REGEX = "[^.!@#$%^&*()_+=<>\\s\\n?`~0-9,{}|-]([a-zA-Z\\s]+)[^.!@#$%^&*()_+"
@@ -42,13 +48,13 @@ public class ParseAddProperty extends ParseAdd {
             + "_+=<>\\s\\n?`~0-9,{}|-]";
     private static final String POSTAL_CODE_REGEX = ", (Singapore [0-9]{6})$";
 
-    //Singapore Landed Property Regex
+    // Singapore Landed Property Regex
     private static final String LANDED_PROPERTY_ADDRESS_REGEX = LANDED_PROPERTY_UNIT_NUMBER_REGEX + STREET_NAME_REGEX
             + POSTAL_CODE_REGEX;
     private static final String LANDED_PROPERTY_ADDRESS_WITH_STREET_NUMBER_REGEX = LANDED_PROPERTY_UNIT_NUMBER_REGEX
             + STREET_NAME_REGEX + STREET_NUMBER_REGEX + POSTAL_CODE_REGEX;
 
-    //Singapore Building Regex
+    // Singapore Building Regex
     private static final String BUILDING_ADDRESS_REGEX = BUILDING_BLOCK_NUMBER_REGEX + STREET_NAME_REGEX
             + BUILDING_UNIT_FLOOR_AND_NUMBER_REGEX + POSTAL_CODE_REGEX;
     private static final String BUILDING_ADDRESS_WITH_STREET_NUMBER_REGEX = BUILDING_BLOCK_NUMBER_REGEX
@@ -59,15 +65,16 @@ public class ParseAddProperty extends ParseAdd {
             = BUILDING_BLOCK_NUMBER_REGEX + STREET_NAME_REGEX + STREET_NUMBER_REGEX
             + BUILDING_UNIT_FLOOR_AND_NUMBER_REGEX + BUILDING_NAME_REGEX + POSTAL_CODE_REGEX;
 
-    //Accepts only positive whole number for price
+    // Accepts only positive whole number for price.
     private static final String VALID_PRICE_REGEX = "^[1-9]\\d*$";
 
-    public ParseAddProperty(String addCommandDescription) {
+    public ParseAddProperty(String addCommandDescription, PropertyList propertyList) {
         this.commandDescription = addCommandDescription;
+        this.propertyList = propertyList;
     }
 
     public Command parseCommand() throws  EmptyDetailException, MissingFlagException, IncorrectFlagOrderException,
-            InvalidSingaporeAddressException, InvalidPriceFormatException {
+            InvalidSingaporeAddressException, InvalidPriceFormatException, DuplicatePropertyException {
         try {
             checkForEmptyDetails(commandDescription);
             ArrayList<String> propertyDetails = processCommandAddPropertyDetails(commandDescription);
@@ -79,10 +86,6 @@ public class ParseAddProperty extends ParseAdd {
             throw new MissingFlagException(MESSAGE_ADD_PROPERTY_WRONG_FORMAT);
         } catch (IncorrectFlagOrderException e) {
             throw new IncorrectFlagOrderException(MESSAGE_ADD_PROPERTY_WRONG_FORMAT);
-        } catch (InvalidSingaporeAddressException e) {
-            throw new InvalidSingaporeAddressException(MESSAGE_INVALID_SINGAPORE_ADDRESS);
-        } catch (InvalidPriceFormatException e) {
-            throw new InvalidPriceFormatException(MESSAGE_INVALID_PRICE_FORMAT);
         }
     }
 
@@ -125,15 +128,18 @@ public class ParseAddProperty extends ParseAdd {
     }
 
     private void validatePropertyDetails(ArrayList<String> propertyDetails) throws EmptyDetailException,
-            InvalidSingaporeAddressException, InvalidPriceFormatException {
-        //Checks for Missing Landlord Name, Property Address, Renting Price (SGD/month) and Unit-Type
+            InvalidSingaporeAddressException, InvalidPriceFormatException, DuplicatePropertyException {
+        // Checks for Missing Landlord Name, Property Address, Renting Price (SGD/month) and Unit-Type.
         for (String propertyDetail : propertyDetails) {
             checkForEmptyDetails(propertyDetail);
         }
 
-        //Checks Format for Address (Singapore) and Renting Price
+        // Checks Format for Address (Singapore) and Renting Price.
         checkForValidSingaporeAddress(propertyDetails.get(PROPERTY_ADDRESS_INDEX));
         checkForPriceNumberFormat(propertyDetails.get(PROPERTY_PRICE_INDEX));
+
+        // Duplicate Property refers to properties with the same address.
+        checkForDuplicateProperty(propertyList, propertyDetails.get(PROPERTY_ADDRESS_INDEX));
     }
 
     private void checkForValidSingaporeAddress(String address) throws InvalidSingaporeAddressException {
@@ -142,7 +148,7 @@ public class ParseAddProperty extends ParseAdd {
 
         boolean hasValidSingaporeAddress = hasValidSingaporeLandedPropertyAddress || hasValidSingaporeBuildingAddress;
         if (!hasValidSingaporeAddress) {
-            throw new InvalidSingaporeAddressException(EXCEPTION);
+            throw new InvalidSingaporeAddressException();
         }
     }
 
@@ -168,7 +174,31 @@ public class ParseAddProperty extends ParseAdd {
     private void checkForPriceNumberFormat(String budget) throws InvalidPriceFormatException {
         boolean hasValidPriceNumberFormat = checkForDetailFormat(VALID_PRICE_REGEX, budget);
         if (!hasValidPriceNumberFormat) {
-            throw new InvalidPriceFormatException(EXCEPTION);
+            throw new InvalidPriceFormatException();
         }
+    }
+
+    private void checkForDuplicateProperty(PropertyList propertyList, String propertyAddress)
+            throws DuplicatePropertyException {
+        boolean isDuplicateAddress = checkForDuplicateAddress(propertyList, propertyAddress);
+        if (isDuplicateAddress) {
+            throw new DuplicatePropertyException();
+        }
+    }
+
+    private boolean checkForDuplicateAddress(PropertyList propertyList, String propertyAddress) {
+        for (Property property: propertyList.getPropertyList()) {
+            boolean isDuplicateAddress = property.getPropertyAddress().equals(propertyAddress);
+            if (isDuplicateAddress) {
+                showExistingDuplicateProperty(property);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static void showExistingDuplicateProperty(Property property) {
+        Ui ui = new Ui();
+        ui.showToUser("Existing Property:\n  " + property.toString());
     }
 }

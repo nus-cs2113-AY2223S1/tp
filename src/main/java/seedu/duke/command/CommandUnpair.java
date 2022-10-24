@@ -41,7 +41,7 @@ public class CommandUnpair extends Command {
 
 
 
-        storage.updatePair(pairingList);
+        storage.updatePair();
         ui.showUnpairedConfirmationMessage(client, property);
 
     }

@@ -51,6 +51,7 @@ public class ParsePair extends Parser {
             ArrayList<String> pairDetailsString = processCommandDetails(commandDescription);
             ArrayList<Integer> pairDetailsInt = convertProcessedCommandDetailsToInteger(pairDetailsString);
 
+
             validatePairDetails(pairDetailsInt);
             return new CommandPair(pairDetailsInt);
         } catch (InvalidIndexException e) {

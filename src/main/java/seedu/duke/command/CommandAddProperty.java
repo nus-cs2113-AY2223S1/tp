@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 
 import java.util.ArrayList;
 
+//@@author OVReader
 /**
  * Adds a property to the property list.
  */
@@ -46,7 +47,7 @@ public class CommandAddProperty extends CommandAdd {
         propertyList.addProperty(landlordName, propertyAddress, rentingPrice, unitType);
         ui.showPropertyAddedConfirmationMessage(propertyList);
 
-        //Update Storage
+        // Updates Storage
         storage.addToPropertyFile(this.landlordName,this.propertyAddress,
                 this.rentingPrice, this.unitType);
     }

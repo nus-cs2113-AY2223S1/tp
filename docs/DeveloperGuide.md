@@ -68,6 +68,33 @@ ___
 ### Parser Component
 ### Client Component
 ### Property Component
+### List Component
+The list feature has the following commands in it -
+* `list -client` This lists every client, along with all their information
+* `list -property` This lists every property, along with all its information
+* `list -everything` This lists everything about both clients and properties
+* `list -client FLAG` This lists only the information present in the TAG for every client. The types of
+  TAGs are -
+    * `c/` This is for contact number
+    * `b/` This is for budget
+    * `n/` This is for name
+    * `e/` This is for e-mail
+* `list -property FLAG` This lists only the information present in the TAG for every property. The types
+  of TAG are -
+    * `a/` This is for address
+    * `n/` This is for name
+    * `p/` This is for price
+    * `t/` This is for type  
+
+There are 5 different classes, that each inherit from the abstract Command class. The commands read information from 
+the PropertyList and ClientList classes respectively, and display using the Ui class, making use of the objects of 
+these classes. The Commands which display all the information - i.e. CommandListClients, CommandListProperties, and
+CommandListEverything read and display using loops inside the overriden execute() method itself. The Commands which 
+display selected information - i.e. CommandListClientsWithTags and CommandListPropertiesWithTags use their private 
+methods to display their information. The class structure is as follows - 
+![ListClassDiagram](diagrams/ListClassDiagram.png)
+
+  
 
 ### Pairing Component
 API: [```pairingList.java```](../src/main/java/seedu/duke/PairingList.java)
@@ -111,6 +138,112 @@ ___
 
 This section describes the implementation details of the features within Property Rental Manager.
 
+---
+### Add Feature
+The add feature simply adds an entity to its corresponding list. For Property Rental Manager, there are two variations to the add feature, namely `add -client` and `add -property`.
+
+- `add -client`: Add a new client to the client list.
+- `add -property`: Add a new property to the property list.
+
+The implementation of add feature can be simplified into two major sections. The first section involves the parsing and validation of relevant information provided by the user while the second section comprises the actual addition of client/property to the client list/property list.
+
+<br/>
+
+**Section 1: Parse and Validation of Information**
+
+The first section is facilitated by the following classes:
+
+- `ParseAdd`: Contains common methods used by `ParseAddClient` and `ParseAddProperty`.
+- `ParseAddClient`: Extracts and validates client information from `commandDescription`(User Input).
+- `ParseAddProperty`: Extracts and validates property information from `commandDescription`(User Input).
+
+The following is a simple class diagram of the three classes:
+<p align="center">
+
+![](diagrams/ParseAddRelatedClassesDiagram.jpg)
+
+</p>
+
+<p align="center">
+Parse Add Related Classes Diagram
+</p>
+
+As shown above, both `ParseAddClient` and `ParseAddProperty` classes have a similar core method called `parseCommand()` which is responsible for client or property detail extraction and validation. The rest of the methods in both classes are sub-methods of the `parseCommand()` method.
+
+Also, most of the sub-methods are used to perform validations on the extracted details. These methods are implemented via regex pattern checker.
+
+- Client:
+    - `checkForValidSingaporeContactNumber(String)`
+    - `checkForValidEmail(String)`
+    - `checkForBudgetNumberFormat(String)`
+- Property:
+    - `checkForValidSingaporeAddress(String)`
+    - `checkForValidSingaporeLandedPropertyAddress(String)`
+    - `checkForValidSingaporeBuildingAddress(String)`
+    - `checkForPriceNumberFormat(String)`
+- Common:
+    - `checkForEmptyDetails(String)`: Checks for any missing essential details, non-essential detail such as optional email can be empty.
+
+Note: Since the target user is a property manager working in Singapore, some validations are tailored to Singapore context.
+
+<br/>
+
+**Section 2: Addition of client or property to client list or property list**
+
+The second section is facilitated by the following classes: 
+- `CommandAdd`: Abstract superclass of `CommandAddClient` and `CommandAddProperty` classes.
+- `CommandAddClient`: Creates a `Client` object and add it to the `clientList`.
+- `CommandAddProerty`: Creates a `Property` object and add it to the `propertyList`.
+
+The following is a simple class diagram of the three classes:
+
+<p align="center">
+
+![Command Add Related Classes Diagram](diagrams/CommandAddRelatedClassesDiagram.jpg)
+
+</p>
+
+<p align="center">
+Command Add Related Classes Diagram
+</p>
+
+
+As shown above, both `CommandAddClient` and `CommandAddProperty` classes have a similar core method called `execute(...)` which is responsible for the new client or property addition into their respective lists.
+
+<br/>
+
+**Example Scenario**
+
+Given below is an example scenario on how add client/property behaves at each step.
+
+
+- **Step 1**: The user executes ```add -client n/NAME c/CONTACT_NUMBER e/EMAIL b/BUDGET_MONTH``` or ```add -property n/NAME a/ADDRESS p/PRICE t/TYPE```. Depending on `add -client` or `add -property` specified, a `Parser` object of type `ParseAddClient` or `ParseAddProperty` is created.
+
+
+- **Step 2**: The `Parser` object will then call method `ParseAddClient#parseCommand()` or `ParseAddProperty#parseCommand()` which will check for any incorrect formatting before the extraction and validation of client/property details.
+
+
+- **Step 3**: If there is no error, a `Command` object of type `CommandAddClient` or `CommandAddProperty` is created.
+
+
+- **Step 4**: Next, the `Command` object will then call method `CommandAddClient#execute(...)` or `CommandAddProperty#execute(...)` which will add a new `Client` or `Property` type object created into their respective `clientList`/`propertyList`.
+
+
+- **Step 5**: Lastly, method `Ui#showClientAddedConfirmationMessage()` or `Ui#showPropertyAddedConfirmationMessage()` is called to notify user about the successful addition of new client or property. Also, method `Storage#addToClientFile` or `Storage#addToPropertyFile` is called to update their respective storage files.
+
+The following are simplified sequence diagrams of add feature for client and property:
+![Add Client Sequence Diagram](diagrams/AddClientSequenceDiagram.JPG)
+<p align="center">
+Add Client Sequence Diagram
+</p>
+
+![Add Property Sequence Diagram](diagrams/AddPropertySequenceDiagram.JPG)
+<p align="center">
+Add Property Sequence Diagram
+</p>
+
+---
+
 ### Delete Client/Property feature
 The **delete client/property** mechanism involves the following classes: ```ParseDeleteClient```,
 ```ParseDeleteProperty```, ```CommandDeleteClient```, ```CommandDeleteProperty```,
@@ -145,9 +278,11 @@ The following *sequence diagram* shows how the **delete client** operation works
 ![Delete Client Sequence Diagram](diagrams/DeleteClientSD.png)
 
 The following *sequence diagram* shows how the **delete property** operation works, showcasing the
-```PropertyList#deleteClient()``` method.
+```PropertyList#deleteProperty()``` method.
 
 ![Delete Property Sequence Diagram](diagrams/DeletePropertySD.png)
+
+---
 
 ### PairingList
 
@@ -205,6 +340,7 @@ How the unpair command works:
 4. After passing all these checks, the ```PairingList``` deletes the hashmap entry in ```clientPropertyPairings```
    which contains the client-property pair.
 
+---
 
 ### Storage
 The implementation of Storage class requires consists of different level of operations:
@@ -255,6 +391,51 @@ The sequence diagram of `updateClient`, `updateProperty` and `updatePair` can be
 
 Note that when delete operation is being invoked on client and property, the `updatePair` method will also be invoked to
 prevent entries retaining within pairingList after it has been deleted from clientList or propertyList.
+
+
+### List feature
+
+There are 3 main steps whenever a list command needs to be executed
+* When the user enters any command, it first needs be understood. That is handled by the ParseManager class.
+   Next, when the first word entered by the user is determined to be `list`, ParseManager itself then determines
+   the type of list command entered, including the tags. ParseListClient, ParseListProperty and ParseListEverything
+   are checkers to ensure that a valid command has been entered. ParseListClient and ParseListProperty also determine
+   if tags have been entered, and if those tags are valid.
+  ```
+        case COMMAND_LIST:
+            ArrayList<String> listCommandTypeAndFlags = getListCommandType(commandDetail);
+            boolean isListProperty = listCommandTypeAndFlags.get(0).trim().equals(PROPERTY_FLAG);
+            boolean isListClient = listCommandTypeAndFlags.get(0).equals(CLIENT_FLAG);
+            boolean isListEverything = listCommandTypeAndFlags.get(0).equals(EVERYTHING_FLAG);
+            if (isListProperty) {
+                return new ParseListProperty(listCommandTypeAndFlags.get(1));
+            } else if (isListClient) {
+                return new ParseListClient(listCommandTypeAndFlags.get(1));
+            } else if (isListEverything && listCommandTypeAndFlags.get(1).isEmpty()) {
+                return new ParseListEverything();
+            } else {
+                throw new UndefinedSubCommandTypeException(MESSAGE_INCORRECT_LIST_DETAILS);
+            }
+  ```
+This block of code is part of ParseManager. It determines the type of list operation(-client, 
+-property or -everything) and returns the corresponding object.  
+Both ParseListClient and ParseListObject then determine if tags are present, and if they are valid, 
+throwing exceptions if any errors are encountered. They then return the corresponding Command type necessary.
+
+* There are five different classes which handle each of the features described above. Each class inherits from the
+   abstract Command class, and reads information present in either the PropertyList or ClientList objects respectively.
+
+The execute function retrieves the propertyList holding all the current properties. It then loops 
+through every property present. For every property, it passes it to the corresponding display function
+in Ui.
+
+* Each of these commands then uses a method present in the Ui class, to print an individual client, or property.
+   The loop for printing every single client or property is present in the Command itself.
+  ![CommandListClientsClass](diagrams/CommandListPropertiesClass.png)
+The above is an example for CommandListProperties. It reads from PropertyList. Then, it displays each line
+using the displayOneProperty function in Ui.
+
+---
 
 ## Documentation, logging, testing, configuration and dev-ops
 ___
