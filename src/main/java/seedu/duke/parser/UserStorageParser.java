@@ -174,7 +174,7 @@ public class UserStorageParser {
             throws InvalidUserStorageFileException {
         for (String uni: unis) {
             String[] items = splitLineInFileContent(uni);
-            if (items.length < 3) {
+            if (!isValidUniFormat(items)) {
                 throw new InvalidUserStorageFileException("Invalid file format");
             }
             String puName = items[0];
@@ -187,6 +187,10 @@ public class UserStorageParser {
             setFavourite(newUni, isFavourite);
             myManager.put(puName, newUni);
         }
+    }
+
+    private static boolean isValidUniFormat(String[] items) {
+        return items.length >= 3 && (items[2].equals("T") || items[2].equals("F"));
     }
 
     /**.
@@ -225,7 +229,7 @@ public class UserStorageParser {
         for (int i = 3; i < items.length; ++i) {
             assert items.length > 1 : "This university has at least one module saved";
             String[] details = splitModuleInformationInFileContent(items[i]);
-            if (!isValidFormat(details)) {
+            if (!isValidModulesFormat(details)) {
                 throw new InvalidUserStorageFileException("Invalid file format");
             }
             UserModuleMapping userModule = new UserModuleMapping(details[0], details[1],
@@ -249,7 +253,7 @@ public class UserStorageParser {
      * @param details array of strings, holding module information
      * @return true if it is a valid format
      */
-    private static boolean isValidFormat(String[] details) {
+    private static boolean isValidModulesFormat(String[] details) {
         return details.length == 6;
     }
 
@@ -370,7 +374,7 @@ public class UserStorageParser {
      * @throws InvalidUserStorageFileException When the string in data/timetable_info.txt is in the wrong format
      *              ie. file corrupted between now and last saved
      */
-    private static TimetableManager convertFileContentIntoTimetable(String fileContent)
+    public static TimetableManager convertFileContentIntoTimetable(String fileContent)
             throws InvalidUserStorageFileException {
         logger.log(Level.INFO, "Start converting String to Timetable Manager");
         TimetableManager timetableManager = new TimetableManager();
@@ -413,7 +417,7 @@ public class UserStorageParser {
             throws InvalidUserStorageFileException {
         for (int i = 1; i < items.length; ++i) {
             String[] details = splitModuleInformationInFileContent(items[i]);
-            if (details.length != 7) {
+            if (!isValidTimetableFormat(details)) {
                 throw new InvalidUserStorageFileException("Invalid file format");
             }
             String moduleCode = details[0];
@@ -431,6 +435,10 @@ public class UserStorageParser {
                 Ui.printExceptionMessage(e);
             }
         }
+    }
+
+    private static boolean isValidTimetableFormat(String[] details) {
+        return details.length == 7;
     }
 
     /**.
