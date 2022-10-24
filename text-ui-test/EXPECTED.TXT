@@ -7,7 +7,7 @@
                            __/ |                                           
                           |___/                                            
 
-Your MoneyGoWhere? Let me help you find it.
+Your MoneyGoWhere? Let me help you track it.
 There is no load file found...
 Please ensure the file is named correctly and is in the right directory if you have a load file.
 Currencies loaded successfully :)
