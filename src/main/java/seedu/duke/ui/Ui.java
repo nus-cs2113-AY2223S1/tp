@@ -208,8 +208,8 @@ public class Ui {
                 "The Flight schedule is empty.", " ");
     }
 
-    public void showFlightNotFoundMessage(String flightNum) {
-        System.out.println("FLIGHT " + flightNum + " NOT FOUND.");
+    public String getFlightNotFoundMessage(String flightNum) {
+        return "FLIGHT " + flightNum + " NOT FOUND.";
     }
 
     public String showEmptyDescriptionMessage() {
@@ -252,8 +252,8 @@ public class Ui {
     }
 
     //@@author JordanKwua
-    public void showWrongFlightFormatMessage() {
-        System.out.println("Error: Flight number should start with 2 letters and trail with 1-4 numbers.");
+    public String getWrongFlightFormatErrorMessage() {
+        return "Flight number should start with 2 letters and trail with 1-4 numbers.";
     }
 
     //@@author shengiv
