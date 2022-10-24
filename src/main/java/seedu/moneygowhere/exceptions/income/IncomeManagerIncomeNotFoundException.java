@@ -1,4 +1,6 @@
-package seedu.moneygowhere.exceptions;
+package seedu.moneygowhere.exceptions.income;
+
+import seedu.moneygowhere.exceptions.MoneyGoWhereException;
 
 /**
  * Thrown when an income is not found in the income manager.
