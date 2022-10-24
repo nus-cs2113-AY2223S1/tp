@@ -13,7 +13,7 @@ public class Module {
     private static final Logger lgr = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private String moduleName;
     private String moduleCode;
-    private String moduleDescription;
+    //private String moduleDescription;
     private List<Lesson> lessons;
     private List<Lesson> attending;
     private HashMap<String, ArrayList<Lesson>> classifiedLessons;
@@ -26,10 +26,6 @@ public class Module {
         return moduleCode;
     }
 
-    public String getModuleDescription() {
-        return moduleDescription;
-    }
-
     public List<Lesson> getAttending() {
         return attending;
     }
@@ -38,10 +34,10 @@ public class Module {
         return lessons;
     }
 
-    public Module(String moduleCode, String moduleName, String moduleDescription, List<Lesson> lessons) {
+    public Module(String moduleCode, String moduleName, List<Lesson> lessons) {
         this.moduleCode = moduleCode;
         this.moduleName = moduleName;
-        this.moduleDescription = moduleDescription;
+        //this.moduleDescription = moduleDescription;
         this.lessons = lessons;
         this.classifiedLessons = classifyLessons(lessons);
         this.attending = matchLessonTypes(classifiedLessons);

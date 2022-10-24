@@ -15,8 +15,8 @@ class TimetableTest {
 
     @BeforeAll
     public static void setup() {
-        timetable.addNewModule("CS2113", "SE and OOP", "Sample Description", lesson);
-        timetable.addNewModule("CS2040", "DSA", "Sample Description", lesson);
+        timetable.addNewModule("CS2113", "SE and OOP", lesson);
+        timetable.addNewModule("CS2040", "DSA", lesson);
     }
 
     @Test

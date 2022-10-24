@@ -50,10 +50,10 @@ public class ModuleManager {
     * Adds a module into ModuleData.txt in the following format:
     * <code>|<name>|<description>\n
     */
-    public static void addModule(String code, String name, String description) {
+    public static void addModule(String code, String name) {
         try {
             FileWriter myWriter = new FileWriter(dataDirectoryPath + "/ModuleData.txt", true);
-            String line = code + "|" + name + "|" + description;
+            String line = code + "|" + name;
             myWriter.write(line + "\n");
             moduleDataList.add(line + "\n");
             myWriter.close();
@@ -140,7 +140,6 @@ public class ModuleManager {
 
                 String code = moduleInfoList[0];
                 String name = moduleInfoList[1];
-                String description = moduleInfoList[2];
 
                 //load lessonData for currModule into module object
                 for (String line : lessonDataList) {
@@ -156,7 +155,7 @@ public class ModuleManager {
                         lessons.add(new Lesson(lessonDay, lessonStart, lessonEnd, lessonType, classNumber));
                     }
                 }
-                Timetable.addNewModuleFromFile(code, name, description, lessons);
+                Timetable.addNewModuleFromFile(code, name, lessons);
             }
             moduleFileReader.close();
             moduleBufferedReader.close();
