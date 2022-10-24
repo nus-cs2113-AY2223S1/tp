@@ -234,7 +234,7 @@ public class Ui {
     }
 
     public void displayNoOfProperties(int i) {
-        if(i == 1) {
+        if (i == 1) {
             System.out.println("There is " + i + " property in the list");
         } else {
             System.out.println("There are " + i + " properties in this list");
@@ -242,7 +242,7 @@ public class Ui {
     }
 
     public void displayNoOfClients(int i) {
-        if(i == 1) {
+        if (i == 1) {
             System.out.println("There is " + i + " client in the list");
         } else {
             System.out.println("There are " + i + " clients in this list");
