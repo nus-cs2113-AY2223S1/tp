@@ -271,7 +271,7 @@ public class Storage {
                     ParseAddProperty parser = new ParseAddProperty(description, propertyList);
                     try {
                         parser.parseCommand();
-                        propertyList.addProperty(landlordName, address, price, unitTypeLabel);
+                        propertyList.addProperty(landlordName, address, price, unitTypeString);
                     } catch (DukeException e) {
                         System.out.println(Messages.INVALID_PROPERTY_FILE);
                     }
@@ -423,9 +423,8 @@ public class Storage {
                 String landlordName = propertyLists.get(i).getLandlordName();
                 String propertyAddress = propertyLists.get(i).getPropertyAddress();
                 String rentingPrice = propertyLists.get(i).getRentingPrice();
-                String unitTypeLabel = propertyLists.get(i).getUnitType();
+                String unitTypeString = propertyLists.get(i).getUnitType();
 
-                String unitTypeString = getUnitTypeString(unitTypeLabel);
                 String finalText = landlordName + SEPARATOR + propertyAddress + SEPARATOR
                         + rentingPrice + SEPARATOR + unitTypeString + System.lineSeparator();
 
