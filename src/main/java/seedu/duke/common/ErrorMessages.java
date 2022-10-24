@@ -7,6 +7,9 @@ public enum ErrorMessages {
     ERROR_GLOBAL_INVALID_COMMAND("Invalid command, please enter <help> if you need the list of commands."),
     ERROR_GLOBAL_DUPLICATE_TAG("Duplicate tag(s) detected, please check your input!"),
     ERROR_GLOBAL_MISSING_TAG("Mandatory tag(s) missing, please check your input!"),
+    ERROR_GLOBAL_MISSING_TAG_YEAR("Month tag must be accompanied by a year tag, please check your input!"),
+    ERROR_GLOBAL_MISSING_TAG_PERIODNUMBER("Period and number tags must be provided together, please check "
+            + "your input!"),
     ERROR_GLOBAL_UNSUPPORTED_TAG("Not supported tag(s) detected, please check your input!"),
     ERROR_GLOBAL_EMPTY_PARAMETER("Parameter behind tag(s) is found to be empty, please check your input!"),
     ERROR_GLOBAL_INVALID_INDEX("Invalid index, please ensure your index is correct!"),
