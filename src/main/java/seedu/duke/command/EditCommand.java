@@ -4,8 +4,16 @@ package seedu.duke.command;
 import seedu.duke.Storage;
 import seedu.duke.Ui;
 import seedu.duke.data.TransactionList;
+import seedu.duke.data.transaction.Transaction;
+import seedu.duke.exception.GlobalInvalidIndexException;
+import seedu.duke.exception.MoolahException;
 
+import seedu.duke.exception.StorageWriteErrorException;
+
+import java.io.IOException;
 import java.time.LocalDate;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static seedu.duke.command.CommandTag.COMMAND_TAG_GLOBAL_ENTRY_NUMBER;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_TYPE;
@@ -13,6 +21,8 @@ import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_CATEGORY;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_DATE;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_AMOUNT;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_DESCRIPTION;
+import static seedu.duke.common.InfoMessages.INFO_EDIT_EXPENSE;
+import static seedu.duke.common.InfoMessages.INFO_EDIT_INCOME;
 
 /**
  * Represents an edit command object that will execute the operations for Edit command.
@@ -58,6 +68,8 @@ public class EditCommand extends Command {
     private int amount;
     private String category;
     private LocalDate date;
+
+    private static final Logger editLogger = Logger.getLogger(DeleteCommand.class.getName());
 
     public EditCommand() {
     }
@@ -128,15 +140,85 @@ public class EditCommand extends Command {
      * @param storage      An instance of the Storage class.
      */
     @Override
-    public void execute(TransactionList transactions, Ui ui, Storage storage) {
-        // Dummy output for test
-        System.out.println(String.format("Entry number: %d\nType: %s\nDesc: %s\n$: %d\nCat: %s, Date: %s",
-                entryNumber,
-                type,
-                description,
-                amount,
-                category,
-                date.toString()));
+    public void execute(TransactionList transactions, Ui ui, Storage storage) throws MoolahException {
+        try {
+            editLogger.setLevel(Level.SEVERE);
+            editLogger.log(Level.INFO, "Edit Command checks whether the index is valid "
+                    + "before executing the command.");
+            int index = entryNumber;
+            Transaction entry = transactions.getEntry(index - 1);
+            boolean isInputValid = true;
+            int numberOfTransactions = transactions.size();
+
+            if ((index > numberOfTransactions) || (index <= 0)) {
+                isInputValid = false;
+            }
+            assert index > 0;
+
+            if (isInputValid) {
+                String newType = type;
+                String newDescription = description;
+                int newAmount = amount;
+                LocalDate newDate = date;
+                String newCategory = category;
+
+                if (newType == null) {
+                    newType = entry.getType();
+                }
+
+                if (newType.equals("expense")) {
+                    if (newDate == null) {
+                        newDate = entry.getDate();
+                    }
+
+                    if (newDescription == null) {
+                        newDescription = entry.getDescription();
+                    }
+
+                    if (newCategory == null) {
+                        newCategory = entry.getCategory();
+                    }
+
+                    if (newAmount == 0) {
+                        newAmount = entry.getAmount();
+                    }
+                    transactions.deleteTransaction(index);
+                    String message = transactions.editExpense(newDescription, newAmount, newCategory, newDate, index);
+                    Ui.showTransactionAction(INFO_EDIT_EXPENSE.toString(), message);
+                    editLogger.log(Level.INFO, "The requested transaction has been edited "
+                            + "and the UI should display the confirmation message respectively.");
+                } else {
+                    if (newDate == null) {
+                        newDate = entry.getDate();
+                    }
+
+                    if (newDescription == null) {
+                        newDescription = entry.getDescription();
+                    }
+
+                    if (newCategory == null) {
+                        newCategory = entry.getCategory();
+                    }
+
+                    if (newAmount == 0) {
+                        newAmount = entry.getAmount();
+                    }
+                    transactions.deleteTransaction(index);
+                    String message = transactions.editIncome(newDescription, newAmount, newCategory, newDate, index);
+                    Ui.showTransactionAction(INFO_EDIT_INCOME.toString(), message);
+                    editLogger.log(Level.INFO, "The requested transaction has been edited "
+                            + "and the UI should display the confirmation message respectively.");
+                }
+            } else {
+                editLogger.log(Level.WARNING, "InvalidIndexException thrown when the index "
+                        + "is invalid.");
+                throw new GlobalInvalidIndexException();
+            }
+            storage.writeToFile(transactions.getTransactions());
+        } catch (IOException e) {
+            throw new StorageWriteErrorException();
+        }
+        editLogger.log(Level.INFO, "This is the end of the edit command.");
     }
 
     /**
