@@ -17,25 +17,25 @@
 >  - Words in `UPPER_CASE` are the parameters supplied by the user.
 >  - Items in square bracket are optional.
 
-[Authenticate user API: `auth`](#authenticate-user-api:-`auth`)
+[Authenticate user API: `auth`](#authenticate-user-api-auth)
 
-[Authenticate default: `auth default`](#authenticate-default:-`auth default`)
+[Authenticate default: `auth default`](#authenticate-default-auth-default)
 
-[Authenticate status: `auth status`](#authenticate-status:-`auth status`)
+[Authenticate status: `auth status`](#authenticate-status-auth-status)
 
-[Find number of lots available by carpark ID: `find`](#find-number-of-lots-available-by-carpark-id:-`find`)
+[Find number of lots available by carpark ID: `find`](#find-number-of-lots-available-by-carpark-id-find)
 
-[Get a list of available carparks on the app: `list`](#get-a-list-of-available-carparks-on-the-app:-`list`)
+[Get a list of available carparks on the app: `list`](#get-a-list-of-available-carparks-on-the-app-list)
 
-[Update data from API: `update`](#update-data-from-api:-`update`)
+[Update data from API: `update`](#update-data-from-api-update)
 
-[Favourite carparks by carpark ID: `favourite`](#favourite-carparks-by-carpark-id:-`favourite`)
+[Favourite carparks by carpark ID: `favourite`](#favourite-carparks-by-carpark-id-favourite)
 
-[Unfavourite carparks by carpark ID: `unfavourite`](#unfavourite-carparks-by-carpark-id:-`unfavourite`)
+[Unfavourite carparks by carpark ID: `unfavourite`](#unfavourite-carparks-by-carpark-id-unfavourite)
 
-[List all IDs of favourite carparks: `favourite list`](#list-all-ids-of-favourite-carparks:-`favourite list`)
+[List all IDs of favourite carparks: `favourite list`](#list-all-ids-of-favourite-carparks-favourite-list)
 
-[Exiting the program: `exit`](#exiting-the-program:-`exit`)
+[Exiting the program: `exit`](#exiting-the-program-exit)
 
 ### Authenticate user API: `auth`
 
