@@ -444,7 +444,7 @@ public class TransactionList {
      * @param date A date object in which the monthly total expenses calculated is based on.
      * @return A long value indicating the amount of expenses spent in the month.
      */
-    public long calculateMonthlyTotalExpense(LocalDate date) {
+    public static long calculateMonthlyTotalExpense(LocalDate date) {
         long totalExpense = 0;
         int month = date.getMonthValue();
         int year = date.getYear();

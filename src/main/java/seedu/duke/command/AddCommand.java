@@ -4,6 +4,7 @@ package seedu.duke.command;
 import seedu.duke.Storage;
 import seedu.duke.Ui;
 
+import seedu.duke.common.DateFormats;
 import seedu.duke.data.Budget;
 import seedu.duke.data.TransactionList;
 import seedu.duke.data.transaction.Transaction;
@@ -153,7 +154,8 @@ public class AddCommand extends Command {
             checkTransactionCapacity(transactions);
             String messageBanner = addTransaction(transactions);
             long addedMonthExpenseSum = transactions.calculateMonthlyTotalExpense(date);
-            String budgetInfo = Budget.generateBudgetRemainingMessage(addedMonthExpenseSum, true, date);
+            String budgetInfo = Budget.generateBudgetRemainingMessage(addedMonthExpenseSum, true,
+                    DateFormats.retrieveFormattedMonthAndYear(date));
 
             Ui.showTransactionAction(messageBanner, transactionCreated.toString(), budgetInfo);
 

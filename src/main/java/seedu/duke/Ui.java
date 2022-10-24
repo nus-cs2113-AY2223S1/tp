@@ -74,7 +74,7 @@ public class Ui {
      * Prepares the greeting messages to be displayed to the user.
      */
     public static void showGreeting() {
-        printMessages(INFO_GREET.toString(), INFO_CURRENT_BUDGET.toString() + Budget.getBudget(),
+        printMessages(INFO_GREET.toString(), Budget.generateCurrentMonthBudgetRemainingMessage(),
                 INFO_HELP_PROMPT.toString()
         );
     }

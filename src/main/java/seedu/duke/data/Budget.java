@@ -8,7 +8,13 @@ import static seedu.duke.common.Constants.MAX_TRANSACTIONS_COUNT;
 import static seedu.duke.common.Constants.MAX_AMOUNT_VALUE;
 import static seedu.duke.common.Constants.MIN_BUDGET_VALUE;
 import static seedu.duke.common.DateFormats.MONTH_YEAR_OUTPUT_PATTERN;
-import static seedu.duke.common.InfoMessages.*;
+import static seedu.duke.common.InfoMessages.INFO_COLON_SPACE;
+import static seedu.duke.common.InfoMessages.INFO_EXCEEDING_BUDGET;
+import static seedu.duke.common.InfoMessages.INFO_REMAINING_BUDGET;
+import static seedu.duke.common.InfoMessages.INFO_BUDGET_EXCEEDED_TIPS;
+import static seedu.duke.common.InfoMessages.INFO_BUDGET_NOT_EXCEEDED_TIPS;
+import static seedu.duke.common.InfoMessages.INFO_FULL_STOP_SPACE;
+import static seedu.duke.common.InfoMessages.INFO_DOLLAR_SIGN;
 
 //@@author wcwy
 
@@ -51,16 +57,24 @@ public class Budget {
      * @param date                The date of transaction.
      * @return The message generated based on the budget remained for the given date.
      */
-    public static String generateBudgetRemainingMessage(long totalMonthlyExpense, boolean withTips, LocalDate date) {
+    public static String generateBudgetRemainingMessage(long totalMonthlyExpense, boolean withTips, String monthYear) {
         long budgetLeft = calculateBudgetLeft(totalMonthlyExpense);
         boolean hasExceededBudget = hasExceededBudget(budgetLeft);
-        String budgetMonthAndYear = retrieveFormattedMonthAndYear(date);
 
-        String message = getBudgetLeftMessage(budgetLeft, hasExceededBudget, budgetMonthAndYear);
+        String message = getBudgetLeftMessage(budgetLeft, hasExceededBudget, monthYear);
 
         if (withTips) {
             message += INFO_FULL_STOP_SPACE + getMoneyManagingTips(hasExceededBudget);
         }
+
+        return message;
+    }
+
+    public static String generateCurrentMonthBudgetRemainingMessage() {
+        LocalDate todayDate = LocalDate.now();
+        String monthYear = "current month";
+        long currentMonthTotalExpense = TransactionList.calculateMonthlyTotalExpense(todayDate);
+        String message = generateBudgetRemainingMessage(currentMonthTotalExpense, false, monthYear);
 
         return message;
     }
@@ -138,14 +152,5 @@ public class Budget {
         }
     }
 
-    /**
-     * Retrieves a formatted string containing the month and year of a date
-     *
-     * @param date Date of the transaction to be considered for the budget.
-     * @return A string containing the formatted output for month and year.
-     */
-    private static String retrieveFormattedMonthAndYear(LocalDate date) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(MONTH_YEAR_OUTPUT_PATTERN.toString());
-        return date.format(formatter);
-    }
+
 }
