@@ -12,6 +12,7 @@ import computercomponentchooser.components.Cooler;
 import computercomponentchooser.components.Case;
 
 import computercomponentchooser.exceptions.BlankStringException;
+import computercomponentchooser.exceptions.NegativeNumberException;
 import computercomponentchooser.exceptions.UnknownCommandException;
 import computercomponentchooser.exceptions.UnlistedBuildException;
 import computercomponentchooser.export.ExportText;
@@ -137,46 +138,58 @@ public class EditParser {
         if (name.isBlank() || type.isBlank() || price.isBlank() || power.isBlank()) {
             throw new BlankStringException();
         }
-        switch (type) {
-        case "cpu":
-            parseAddCpu(editBuild, line, type, name, price, power);
-            break;
-        case "memory":
-            parseAddMemory(editBuild, line, type, name, price, power);
-            break;
-        case "motherboard":
-            parseAddMotherboard(editBuild, line, type, name, price, power);
-            break;
-        case "powersupply":
-            parseAddPowerSupply(editBuild, type, name, price, power);
-            break;
-        case "gpu":
-            parseAddGpu(editBuild, line, type, name, price, power);
-            break;
-        case "drive":
-            parseAddDrive(editBuild, line, type, name, price, power);
-            break;
-        case "monitor":
-            parseAddMonitor(editBuild, line, type, name, price, power);
-            break;
-        case "cooler":
-            parseAddCooler(editBuild, line, type, name, price, power);
-            break;
-        case "case":
-            parseAddCase(editBuild, line, type, name, price, power);
-            break;
-        case "other":
-            parseAddOther(editBuild, type, name, price, power);
-            break;
-        default:
-            break;
-        } try {
-            storage.saveComponent(editBuild);
-        } catch (Exception e) {
-            System.out.println("Error saving build");
+        try {
+            switch (type) {
+            case "cpu":
+                parseAddCpu(editBuild, line, type, name, price, power);
+                break;
+            case "memory":
+                parseAddMemory(editBuild, line, type, name, price, power);
+                break;
+            case "motherboard":
+                parseAddMotherboard(editBuild, line, type, name, price, power);
+                break;
+            case "powersupply":
+                parseAddPowerSupply(editBuild, type, name, price, power);
+                break;
+            case "gpu":
+                parseAddGpu(editBuild, line, type, name, price, power);
+                break;
+            case "drive":
+                parseAddDrive(editBuild, line, type, name, price, power);
+                break;
+            case "monitor":
+                parseAddMonitor(editBuild, line, type, name, price, power);
+                break;
+            case "cooler":
+                parseAddCooler(editBuild, line, type, name, price, power);
+                break;
+            case "case":
+                parseAddCase(editBuild, line, type, name, price, power);
+                break;
+            case "other":
+                parseAddOther(editBuild, type, name, price, power);
+                break;
+            default:
+                break;
+            }
+            try {
+                storage.saveComponent(editBuild);
+            } catch (Exception e) {
+                System.out.println("Error saving build");
+            }
+            Ui.printLine();
+            System.out.println("You have added " + name);
+            Ui.printLine();
+        } catch (NumberFormatException e) {
+            Ui.printLine();
+            System.out.println("Please input numbers.");
+            Ui.printLine();
+        } catch (NegativeNumberException e) {
+            Ui.printLine();
+            System.out.println(e.getMessage());
+            Ui.printLine();
         }
-        System.out.println("You have added " + name);
-        Ui.printLine();
     }
 
     /**
@@ -299,8 +312,11 @@ public class EditParser {
      * @param name The name of the component to be added.
      * @param price The price of the component to be added.
      * @param power The power consumption of the component to be added.
+     * @throws NegativeNumberException If the user inputs a negative number.
+     * @throws NumberFormatException If the user inputs a non-integer.
      */
-    public void parseAddCooler(Build editBuild, String line, String type, String name, String price, String power) {
+    public void parseAddCooler(Build editBuild, String line, String type, String name, String price, String power)
+            throws NegativeNumberException, NumberFormatException {
         Cooler cooler = new Cooler(name, price, power, getParameter(line, 5),
                 getParameter(line, 6), getParameter(line, 7));
         editBuild.addComponent(type, cooler);
@@ -315,8 +331,11 @@ public class EditParser {
      * @param name The name of the component to be added.
      * @param price The price of the component to be added.
      * @param power The power consumption of the component to be added.
+     * @throws NegativeNumberException If the user inputs a negative number.
+     * @throws NumberFormatException If the user inputs a non-integer.
      */
-    public void parseAddCase(Build editBuild, String line, String type, String name, String price, String power) {
+    public void parseAddCase(Build editBuild, String line, String type, String name, String price, String power)
+            throws NegativeNumberException, NumberFormatException {
         Case case1 = new Case(name, price, power, getParameter(line, 5),
                 getParameter(line, 6));
         editBuild.addComponent(type, case1);

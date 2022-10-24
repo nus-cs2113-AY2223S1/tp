@@ -2,6 +2,7 @@ package computercomponentchooser.storage;
 
 import computercomponentchooser.Build;
 import computercomponentchooser.BuildManager;
+import computercomponentchooser.Ui;
 import computercomponentchooser.components.Component;
 import computercomponentchooser.components.Cpu;
 import computercomponentchooser.components.Gpu;
@@ -16,6 +17,7 @@ import computercomponentchooser.components.Case;
 
 
 import computercomponentchooser.exceptions.DuplicateBuildException;
+import computercomponentchooser.exceptions.NegativeNumberException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -356,9 +358,15 @@ public class Storage {
      * @param build the build that the cooler is added to
      */
     private static void loadCooler(String line, String name, String price, String power, Build build) {
-        Cooler cooler = new Cooler(name, price, power, getParameter(line, 4),
-                getParameter(line, 5), getParameter(line, 6));
-        build.addComponent("cooler", cooler);
+        try {
+            Cooler cooler = new Cooler(name, price, power, getParameter(line, 4),
+                    getParameter(line, 5), getParameter(line, 6));
+            build.addComponent("cooler", cooler);
+        } catch (NegativeNumberException | NumberFormatException e) {
+            Ui.printLine();
+            System.out.println("Error when loading.");
+            Ui.printLine();
+        }
     }
 
     /**
@@ -371,9 +379,15 @@ public class Storage {
      * @param build the build that the case is added to
      */
     private static void loadCase(String line, String name, String price, String power, Build build) {
-        Case case1 = new Case(name, price, power, getParameter(line, 4),
-                getParameter(line, 5));
-        build.addComponent("case", case1);
+        try {
+            Case case1 = new Case(name, price, power, getParameter(line, 4),
+                    getParameter(line, 5));
+            build.addComponent("case", case1);
+        } catch (NegativeNumberException | NumberFormatException e) {
+            Ui.printLine();
+            System.out.println("Error when loading.");
+            Ui.printLine();
+        }
     }
 
     /**

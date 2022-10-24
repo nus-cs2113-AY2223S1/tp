@@ -47,7 +47,7 @@ public class Ui {
     /**
      * prints the LINEBREAK String.
      */
-    static void printLine() {
+    public static void printLine() {
         System.out.println(LINEBREAK);
     }
 

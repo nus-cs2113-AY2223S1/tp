@@ -166,6 +166,7 @@ public class BuildManager {
      */
     private int filterPrice(String lowestNumber, String highestNumber, int i) throws NumberFormatException,
             NegativeNumberException {
+        assert i >= 0;
         for (String name : builds.keySet()) {
             float lowestNum = Float.parseFloat(lowestNumber);
             float highestNum = Float.parseFloat(highestNumber);
@@ -200,6 +201,7 @@ public class BuildManager {
      */
     private int filterPower(String lowestNumber, String highestNumber, int i) throws NumberFormatException,
             NegativeNumberException {
+        assert i >= 0;
         for (String name : builds.keySet()) {
             int lowestNum = Integer.parseInt(lowestNumber);
             int highestNum = Integer.parseInt(highestNumber);
@@ -227,6 +229,7 @@ public class BuildManager {
      * @return The number of builds that meet the user specified requirements.
      */
     private int filterCompatibility(int i) {
+        assert i >= 0;
         for (String name : builds.keySet()) {
             Build build = builds.get(name);
             if (build.getCompatibility().equals("Compatible")) {
