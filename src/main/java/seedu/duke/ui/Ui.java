@@ -420,6 +420,8 @@ public class Ui {
 
     /**
      * Sequentially prints each day's lessons for a timetable.
+     *
+     * @param timetable The dictionary containing the lists of lessons to be printed, indexed by weekday.
      */
     public static void printTimetable(HashMap<String, ArrayList<Lesson>> timetable) {
         System.out.println("_____________________________________________________________________________");
