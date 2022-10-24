@@ -1,11 +1,9 @@
 package seedu.api;
 
-import static seedu.common.CommonFiles.API_JSON_DIRECTORY;
 import static seedu.common.CommonData.API_KEY_DEFAULT;
 import static seedu.common.CommonData.API_RESPONSE_HEADER;
 import static seedu.common.CommonData.API_RESPONSE_TAIL;
 import static seedu.common.CommonData.LTA_BASE_URL;
-import static seedu.common.CommonFiles.LTA_JSON_FILE;
 
 import java.io.IOException;
 import java.net.URI;
@@ -46,10 +44,13 @@ public class Api {
     /**
      * Constructor to create a new client.
      * Initializes the storage class for file writing purposes.
+     *
+     * @param file The file name where the storage file is stored.
+     * @param directory The directory path where the storage file is stored.
      */
-    public Api() {
+    public Api(String file, String directory) {
         this.client = HttpClient.newHttpClient();
-        this.storage = new FileStorage(API_JSON_DIRECTORY, LTA_JSON_FILE);
+        this.storage = new FileStorage(directory, file);
         this.ui = new Ui();
     }
 
@@ -179,6 +180,12 @@ public class Api {
         return dataSplit[0];
     }
 
+    /**
+     * Count the number of parking lot data received from LTA.
+     *
+     * @param data processed data set to count.
+     * @return number of parking lots.
+     */
     public int countData(String data) {
         String[] individualData = data.trim().split("},\\{");
         return individualData.length;
