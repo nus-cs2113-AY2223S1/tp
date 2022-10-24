@@ -564,6 +564,8 @@ public class ParameterParser {
         switch (parameter) {
         case CATEGORIES:
             return CATEGORIES;
+        case MONTHS:
+            return MONTHS;
         case TIME:
             return TIME;
         default:

@@ -10,7 +10,7 @@ public enum DateFormats {
     //@@author wcwy
     DATE_INPUT_PATTERN("ddMMyyyy"),
     DATE_OUTPUT_PATTERN("MMM dd yyyy"),
-    MONTH_YEAR_OUTPUT_PATTERN("MMM yyyy"),
+    DATE_MONTH_PATTERN("MMM yyyy"),
     DATE_STORAGE_OUTPUT_PATTERN("yyyy-MM-dd");
 
     public final String message;
@@ -40,7 +40,7 @@ public enum DateFormats {
      * @return A string containing the formatted output for month and year.
      */
     public static String retrieveFormattedMonthAndYear(LocalDate date) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(MONTH_YEAR_OUTPUT_PATTERN.toString());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_MONTH_PATTERN.toString());
         return date.format(formatter);
     }
 }
