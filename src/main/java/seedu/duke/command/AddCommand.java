@@ -66,6 +66,7 @@ public class AddCommand extends Command {
 
     private void addStrengthExercise(String[] argumentList) throws IllegalValueException {
         if (argumentList.length != 6 && argumentList.length != 5) {
+        if (isMarkDone && argumentList.length != 8 || argumentList.length < 5 || argumentList.length > 6) {
             LOGGER.warning("Invalid arguments length for add strength exercise");
 
             throw new IllegalValueException("Invalid add strength exercise command");
