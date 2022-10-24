@@ -63,6 +63,12 @@ The following diagram illustrates the relationships between the three main timet
 
 ![Timetable Class Diagram](./images/Timetable_Class.png)
 
+In chronological order, the following diagrams illustrate the flow of the program for adding lessons, deleting lessons and displaying timetables to the user.
+
+![Timetable Add Lesson Sequence Diagram](./images/Timetable_addLesson_Sequence.png)
+![Timetable Delete Lesson Sequence Diagram](./images/Timetable_deleteLesson_Sequence.png)
+![Timetable Print Timetable Sequence Diagram](./images/Timetable_printTimetable_Sequence.png)
+
 ### Ui
 
 The Ui class is the cornerstone of the Duke program to facilitate interaction with the user. It is used to scan and collect user input, print error messages to the user upon invalid input commands, 

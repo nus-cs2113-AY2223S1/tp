@@ -8,7 +8,7 @@ class TimetableManager {
     - foundKeyAll(universityName: String) : boolean
     + createTimetable(universityName: String) : void
     + deleteTimetable(universityName: String) : void
-    + addLesson(newLesson: Lesson) : void
+    + addLesson(newLesson: Lesson, isLoadFromFile: boolean) : void
     + deleteLesson(oldLesson: Lesson) : void
     + printTimetable(universityName: String) : void
     + printAllTimetables() : void
@@ -22,7 +22,7 @@ class Timetable {
     {static} + isValidEndTime(lesson: Lesson) : boolean
     {static} + isValidTiming(lesson: Lesson) : boolean
     + hasTimetableClash(lesson: Lesson) : boolean
-    + addLesson(newLesson: Lesson) : void
+    + addLesson(newLesson: Lesson, isLoadFromFile: boolean) : void
     + deleteLesson(oldLesson: Lesson) : void
 }
 
