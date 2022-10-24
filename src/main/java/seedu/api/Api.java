@@ -1,9 +1,11 @@
 package seedu.api;
 
+import static seedu.common.CommonFiles.API_JSON_DIRECTORY;
 import static seedu.common.CommonData.API_KEY_DEFAULT;
 import static seedu.common.CommonData.API_RESPONSE_HEADER;
 import static seedu.common.CommonData.API_RESPONSE_TAIL;
-import static seedu.common.CommonFiles.LTA_BASE_URL;
+import static seedu.common.CommonData.LTA_BASE_URL;
+import static seedu.common.CommonFiles.LTA_JSON_FILE;
 
 import java.io.IOException;
 import java.net.URI;
@@ -16,25 +18,27 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-import seedu.exception.EmptyResponseException;
-import seedu.exception.EmptySecretFileException;
-import seedu.exception.FileWriteException;
-import seedu.exception.NoFileFoundException;
-import seedu.exception.ServerNotReadyApiException;
-import seedu.exception.UnauthorisedAccessApiException;
-import seedu.exception.UnknownResponseApiException;
-import seedu.files.FileReader;
-import seedu.files.FileStorage;
-import seedu.ui.Ui;
+import seedu.exception.*;
+//import seedu.exception.EmptyResponseException;
+//import seedu.exception.EmptySecretFileException;
+//import seedu.exception.FileWriteException;
+//import seedu.exception.NoFileFoundException;
+//import seedu.exception.ServerNotReadyApiException;
+//import seedu.exception.UnauthorisedAccessApiException;
+//import seedu.exception.UnknownResponseApiException;
+//import seedu.files.FileReader;
+//import seedu.files.FileStorage;
+//import seedu.ui.Ui;
+
 
 /**
  * Class to fetch .json data from APIs and save that locally.
  */
 public class Api {
-    private static final int FETCH_TRIES = 5;
-    private final HttpClient client;
-    private final FileStorage storage;
-    private final Ui ui;
+//    private static final int FETCH_TRIES = 5;
+//    private final HttpClient client;
+//    private final FileStorage storage;
+//    private final Ui ui;
     private HttpRequest request;
     private ArrayList<CompletableFuture<HttpResponse<String>>> responseFutureList = new ArrayList<>(5);
     private String apiKey = "";
@@ -49,7 +53,7 @@ public class Api {
      */
     public Api(String file, String directory) {
         this.client = HttpClient.newHttpClient();
-        this.storage = new FileStorage(directory, file);
+        this.storage = new FileStorage(API_JSON_DIRECTORY, LTA_JSON_FILE);
         this.ui = new Ui();
     }
 
@@ -120,7 +124,7 @@ public class Api {
             try {
                 result = asyncGetResponse(index).trim();
             } catch (ServerNotReadyApiException | UnknownResponseApiException e) {
-                System.out.println(e.getMessage());
+                ui.printError(e);
             } finally {
                 fetchTries--;
             }
@@ -136,7 +140,8 @@ public class Api {
     }
 
     /**
-     * Synchronous version of multiple data fetching from the API.
+     * Synchronous version of multiple data fetching from the API. If the result is fetched successfully, it will be
+     * stored locally.
      *
      * @throws FileWriteException if data fails to write.
      * @throws EmptyResponseException if empty/invalid response received.
