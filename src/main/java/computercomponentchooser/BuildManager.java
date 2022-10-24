@@ -229,7 +229,7 @@ public class BuildManager {
      * @return The number of builds that meet the user specified requirements.
      */
     private int filterCompatibility(int i) {
-        assert i >=0;
+        assert i >= 0;
         for (String name : builds.keySet()) {
             Build build = builds.get(name);
             if (build.getCompatibility().equals("Compatible")) {
