@@ -3,10 +3,9 @@ package seedu.exception;
 /**
  * Exception for unknown response code from API response.
  */
-public class UnknownResponseApiException extends ParkingException {
+public class UnknownResponseApiException extends ApiServerResponseErrorException {
 
     private final int responseCode;
-
     /**
      * Constructor for exception.
      *
@@ -25,7 +24,7 @@ public class UnknownResponseApiException extends ParkingException {
     @Override
     public String getMessage() {
         return "Response Code: " + responseCode
-            + "\nIf the problem persists please contact the developer. Trying again...";
+            + "\nIf the problem persists please contact the developer. Trying "
+            + super.getTryNumber() + " more time...";
     }
-
 }

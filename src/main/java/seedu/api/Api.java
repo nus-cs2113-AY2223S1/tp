@@ -120,6 +120,7 @@ public class Api {
             try {
                 result = asyncGetResponse(index).trim();
             } catch (ServerNotReadyApiException | UnknownResponseApiException e) {
+                e.setTryNumber(fetchTries);
                 ui.printError(e);
             } finally {
                 fetchTries--;
@@ -160,7 +161,8 @@ public class Api {
         }
 
         result += API_RESPONSE_TAIL;
-        ui.print(String.valueOf(totalDataCount));
+
+        ui.print(totalDataCount + " Parking Lot data received from LTA!");
 
         storage.writeDataToFile(result);
     }
