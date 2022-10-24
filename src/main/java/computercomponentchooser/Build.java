@@ -205,15 +205,16 @@ public class Build {
      */
     public boolean checkSocket() {
         String socket = "";
-        Boolean socketCompatible = true;
+        boolean socketCompatible = false;
         for (Component component : getAllComponents()) {
-            if (component.getType().equals("cpu")) {
-                socket = ((Cpu) component).getSocket();
+            if (component.getType().equals("motherboard")) {
+                socketCompatible = true;
+                socket = ((Motherboard) component).getSocket();
             }
         }
         for (Component component : getAllComponents()) {
-            if (component.getType().equals("motherboard")) {
-                if (!((Motherboard) component).getSocket().equals(socket)) {
+            if (component.getType().equals("cpu")) {
+                if (!((Cpu) component).getSocket().equals(socket)) {
                     socketCompatible = false;
                 }
             }
