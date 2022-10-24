@@ -21,7 +21,7 @@ import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_DATE;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_AMOUNT;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_DESCRIPTION;
 import static seedu.duke.common.InfoMessages.INFO_EDIT_EXPENSE;
-import static seedu.duke.common.InfoMessages.INFO_EDIT_EXPENSE;
+import static seedu.duke.common.InfoMessages.INFO_EDIT_INCOME;
 
 /**
  * Represents an edit command object that will execute the operations for Edit command.
