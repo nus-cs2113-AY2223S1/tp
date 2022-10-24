@@ -34,7 +34,7 @@ public enum DateFormats {
     }
 
     /**
-     * Retrieves a formatted string containing the month and year of a date
+     * Retrieves a formatted string containing the month and year of a date.
      *
      * @param date Date of the transaction to be considered for the budget.
      * @return A string containing the formatted output for month and year.
