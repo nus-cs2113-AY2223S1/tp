@@ -18,27 +18,26 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-import seedu.exception.*;
-//import seedu.exception.EmptyResponseException;
-//import seedu.exception.EmptySecretFileException;
-//import seedu.exception.FileWriteException;
-//import seedu.exception.NoFileFoundException;
-//import seedu.exception.ServerNotReadyApiException;
-//import seedu.exception.UnauthorisedAccessApiException;
-//import seedu.exception.UnknownResponseApiException;
-//import seedu.files.FileReader;
-//import seedu.files.FileStorage;
-//import seedu.ui.Ui;
+import seedu.exception.EmptyResponseException;
+import seedu.exception.EmptySecretFileException;
+import seedu.exception.FileWriteException;
+import seedu.exception.NoFileFoundException;
+import seedu.exception.ServerNotReadyApiException;
+import seedu.exception.UnauthorisedAccessApiException;
+import seedu.exception.UnknownResponseApiException;
+import seedu.files.FileReader;
+import seedu.files.FileStorage;
+import seedu.ui.Ui;
 
 
 /**
  * Class to fetch .json data from APIs and save that locally.
  */
 public class Api {
-//    private static final int FETCH_TRIES = 5;
-//    private final HttpClient client;
-//    private final FileStorage storage;
-//    private final Ui ui;
+    private static final int FETCH_TRIES = 5;
+    private final HttpClient client;
+    private final FileStorage storage;
+    private final Ui ui;
     private HttpRequest request;
     private ArrayList<CompletableFuture<HttpResponse<String>>> responseFutureList = new ArrayList<>(5);
     private String apiKey = "";
