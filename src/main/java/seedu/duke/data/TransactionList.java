@@ -83,6 +83,18 @@ public class TransactionList {
         return transaction.toString();
     }
 
+    public String editExpense(String description, int amount, String category, LocalDate date, int index) {
+        Expense expense = new Expense(description, amount, category, date);
+        transactions.add(index - 1, expense);
+        return expense.toString();
+    }
+
+    public String editIncome(String description, int amount, String category, LocalDate date, int index) {
+        Income income = new Income(description, amount, category, date);
+        transactions.add(index - 1, income);
+        return income.toString();
+    }
+
     //@@author wcwy
 
     /**
