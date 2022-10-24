@@ -1,14 +1,14 @@
-package seedu.duke.search;
+package seedu.duke.command;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
-import seedu.duke.command.SearchModuleCommand;
+import seedu.duke.exceptions.YamomException;
 import seedu.duke.model.Module;
 
-public class SearchTest {
+public class SearchModuleCommandTest {
     @Test
     void filterModuleSearch_allFieldsEmpty_expectCorrectNumberOfFilteredModule() {
         String toSearchModuleCode = null;
@@ -89,7 +89,7 @@ public class SearchTest {
         List<Module> searchResult = SearchModuleCommand.filterModuleSearch(toSearchModuleCode, toSearchLevel,
                 toSearchSemester, toSearchModuleTitle);
         int numberOfFilteredModulesInSearchResult = searchResult.size();
-        int expectedNumberOfFilteredModules = 18;
+        int expectedNumberOfFilteredModules = 7;
         assertEquals(expectedNumberOfFilteredModules, numberOfFilteredModulesInSearchResult);
     }
 
@@ -103,7 +103,7 @@ public class SearchTest {
         List<Module> searchResult = SearchModuleCommand.filterModuleSearch(toSearchModuleCode, toSearchLevel,
                 toSearchSemester, toSearchModuleTitle);
         int numberOfFilteredModulesInSearchResult = searchResult.size();
-        int expectedNumberOfFilteredModules = 8;
+        int expectedNumberOfFilteredModules = 7;
         assertEquals(expectedNumberOfFilteredModules, numberOfFilteredModulesInSearchResult);
     }
 
@@ -117,7 +117,7 @@ public class SearchTest {
         List<Module> searchResult = SearchModuleCommand.filterModuleSearch(toSearchModuleCode, toSearchLevel,
                 toSearchSemester, toSearchModuleTitle);
         int numberOfFilteredModulesInSearchResult = searchResult.size();
-        int expectedNumberOfFilteredModules = 5;
+        int expectedNumberOfFilteredModules = 4;
         assertEquals(expectedNumberOfFilteredModules, numberOfFilteredModulesInSearchResult);
     }
 }

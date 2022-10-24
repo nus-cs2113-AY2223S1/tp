@@ -34,11 +34,12 @@ public class GetModuleCommand extends Command {
             throw new YamomException("Please enter a module code!");
         }
 
-        String moduleCode = input[1].toUpperCase();  
+        String moduleCode = input[1].toUpperCase();
         this.module = Module.get(moduleCode);
-        
+
         if (!isModuleExist(module)) {
-            throw new YamomException("Module does not exist! Please input a valid module code. Try searching for it if you do not remember the exact module code.");
+            throw new YamomException("Module does not exist! Please input a valid module code. Try searching for "
+                    + "it if you do not remember the exact module code.");
         }
     }
 
@@ -74,9 +75,9 @@ public class GetModuleCommand extends Command {
             ui.addMessage(timetable.toString());
         } else {
             ui.addMessage("Module " + module.moduleCode + " is not offered in this semester"
-            + ", hence no timetable information is available due to unforseen circumstances");
+                    + ", hence no timetable information is available due to unforseen circumstances");
         }
-        
+
         ui.displayUi();
     }
 

@@ -15,9 +15,10 @@ import java.util.logging.Logger;
 
 public class SearchModuleCommand extends Command {
     public static final String COMMAND_WORD = "search";
-    public static final String FORMAT = "search /code [SIMILAR_MODULE_CODE] /title [SIMILAR_MODULE_TITLE] /level <LEVEL> /sem <SEMESTER>";
+    public static final String FORMAT = "search /code [SIMILAR_MODULE_CODE] /title [SIMILAR_MODULE_TITLE] /level "
+            + "<LEVEL> /sem <SEMESTER>";
     public static final String HELP_DISPLAY = COMMAND_WORD
-            + ": List out all modules that contains similar keywords in moduleList!\n"
+            + ": List out all modules that contains similar keywords in moduleList! Either title or code have to be present.\n"
             + "\tUsage:\t"
             + FORMAT
             + System.lineSeparator();
@@ -33,7 +34,7 @@ public class SearchModuleCommand extends Command {
 
     public static final String SUBSYSTEM_NAME = "SearchModuleCommand";
 
-    public SearchModuleCommand(String input) throws YamomException{
+    public SearchModuleCommand(String input) throws YamomException {
         super(input.split("\\s"));
         params = Parser.parseParams(input);
         toSearchModuleCode = params.getOrDefault("code", null);
@@ -42,8 +43,13 @@ public class SearchModuleCommand extends Command {
         toSearchSemester = params.getOrDefault("sem", null);
 
         // if size of params is 0, then no params are given, throw exception
-        if (params.size() == 0 || toSearchModuleCode == null && toSearchModuleTitle == null) {
-            throw new YamomException("Please input valid search fields to search for! You can search by module code, module title, level and semester in this format. \nsearch /code [SIMILAR_MODULE_CODE] /title [SIMILAR_MODULE_TITLE] /level <LEVEL> /sem <SEMESTER>");
+        if (params.size() == 0) {
+            throw new YamomException("Please input valid search fields to search for! You can search by module code, "
+                    + "module title, level and semester. \n\nType [help] for assistance!");
+        }
+        if (toSearchModuleCode == null && toSearchModuleTitle == null) {
+            throw new YamomException("Please input at least either the module code or title to search for! "
+                    + "\n\nType [help] for assistance!");
         }
     }
 
@@ -107,9 +113,9 @@ public class SearchModuleCommand extends Command {
      * Filter module by user input arguments and return a list of modules that match the search query.
      * If no arguments are provided, no module will be returned.
      * At least either the module code or module title must be provided.
-     * If both module code and module title are provided, results will be display based on similar
-     * module code and module title but will not display repeated results.
-     * The level and semester arguments are optional. If provided, the results will be filtered and
+     * If both module code and module title are provided, results displayed will contain modules that contains both
+     * the module code and module title.
+     * The level and semester arguments are optional. If provided, the results will be filtered and further
      * refined based on the input level and semester.
      * Arguments can be in any order.
      *
@@ -121,6 +127,8 @@ public class SearchModuleCommand extends Command {
      */
     public static List<Module> filterModuleSearch(String toSearchModuleCode, String toSearchLevel,
                                                   String toSearchSemester, String toSearchModuleTitle) {
+        assert toSearchModuleCode != null || toSearchModuleTitle != null : "At least either the module code or title "
+                + "must be provided to search for!";
         List<Module> moduleList = Module.getAll();
         List<Module> searchResult = new ArrayList<>();
 
@@ -138,9 +146,23 @@ public class SearchModuleCommand extends Command {
             }
         }
 
+        // if search field is both module code and module title, then searchResult will be updated to only
+        // showing modules that contains both user's input module code and title
+        if (toSearchModuleCode != null && toSearchModuleTitle != null) {
+            List<Module> updatedSearchResult = new ArrayList<>();
+            for (Module m : searchResult) {
+                if (m.moduleCode.contains(toSearchModuleCode.toUpperCase()) && m.title.toLowerCase()
+                        .contains(toSearchModuleTitle.toLowerCase())) {
+                    updatedSearchResult.add(m);
+                }
+            }
+            searchResult = updatedSearchResult;
+        }
+
         // filter the searchResult if toSearchLevel is not empty and level does not match
         if (toSearchLevel != null) {
-            List<Module> updatedSearchResult = new ArrayList<>();;
+            List<Module> updatedSearchResult = new ArrayList<>();
+            ;
             for (int i = 0; i < searchResult.size(); i++) {
                 if (isSameModuleLevel(searchResult.get(i), toSearchLevel)) {
                     updatedSearchResult.add(searchResult.get(i));
@@ -151,7 +173,8 @@ public class SearchModuleCommand extends Command {
 
         // filter the searchResult if toSearchSemester is not empty and semester does not match
         if (toSearchSemester != null) {
-            List<Module> updatedSearchResult = new ArrayList<>();;
+            List<Module> updatedSearchResult = new ArrayList<>();
+            ;
             for (int i = 0; i < searchResult.size(); i++) {
                 if (isOfferedInSemester(searchResult.get(i), toSearchSemester)) {
                     updatedSearchResult.add(searchResult.get(i));
