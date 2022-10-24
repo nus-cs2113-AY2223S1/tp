@@ -3,9 +3,9 @@ package seedu.duke.command;
 import seedu.duke.Parser;
 import seedu.duke.Ui;
 import seedu.duke.biometrics.Biometrics;
+import seedu.duke.biometrics.Calculator;
 import seedu.duke.exception.IllegalValueException;
 import seedu.duke.exercise.Exercise;
-import seedu.duke.exercise.ExerciseCaloriesCalculator;
 import seedu.duke.exercise.ExerciseList;
 import seedu.duke.food.FoodList;
 import seedu.duke.storage.Storage;
@@ -63,7 +63,7 @@ public class MarkCommand extends Command {
                 Exercise exercise = exerciseList.getCurrentExercise(exerciseIndex);
                 double time = getTimeWithValidation(argumentList);
                 double metabolicEquivalent = getMetabolicEquivalentWithValidation(argumentList);
-                int calories = ExerciseCaloriesCalculator.calculateCalories(biometrics, time, metabolicEquivalent);
+                int calories = Calculator.calculateCalories(biometrics, time, metabolicEquivalent);
                 exerciseList.markDone(exerciseIndex, time, calories);
                 assert exercise.getDone() : "exercise should be done";
                 ui.output(exercise.getExerciseName() + " is marked as done successfully",

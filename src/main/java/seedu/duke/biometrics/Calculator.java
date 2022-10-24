@@ -1,8 +1,6 @@
 package seedu.duke.biometrics;
 
-import seedu.duke.biometrics.Biometrics;
-
-import seedu.duke.Ui;
+import seedu.duke.exception.IllegalValueException;
 
 
 public class Calculator {
@@ -54,19 +52,19 @@ public class Calculator {
             activityStatus = "You have a sedentary lifestyle!";
             break;
         case (2):
-            activityStatus =  "You have a lightly active lifestyle!";
+            activityStatus = "You have a lightly active lifestyle!";
             break;
         case (3):
-            activityStatus =  "You have a moderately active lifestyle!";
+            activityStatus = "You have a moderately active lifestyle!";
             break;
         case (4):
-            activityStatus =  "You have a very active lifestyle!";
+            activityStatus = "You have a very active lifestyle!";
             break;
         case (5):
-            activityStatus =  "You have an extremely active lifestyle!";
+            activityStatus = "You have an extremely active lifestyle!";
             break;
         default:
-            activityStatus =  "You have not declared your activity level!";
+            activityStatus = "You have not declared your activity level!";
         }
         return activityStatus;
     }
@@ -99,6 +97,14 @@ public class Calculator {
             maintenanceCalories = (int) ((655 + (9.56 * weight) + (1.85 * height) - (4.7 * age)) * multiplier);
         }
         return maintenanceCalories;
+    }
+
+    public static int calculateCalories(Biometrics biometrics, double time,
+                                        double metabolicEquivalent) throws IllegalValueException {
+        if (biometrics.getWeight() == 0) {
+            throw new IllegalValueException("Weight cannot be 0. Pls update biometrics");
+        }
+        return (int) (0.0175 * biometrics.getWeight() * metabolicEquivalent * time);
     }
 }
 

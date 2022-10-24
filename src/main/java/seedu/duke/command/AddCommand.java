@@ -83,7 +83,7 @@ public class AddCommand extends Command {
             if (argumentList.length == 5) {
                 date = now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
             } else {
-                date = getDateWithValidation(argumentList);
+                date = getDateWithValidation(argumentList[5], toDisplay);
             }
             Exercise exercise = new StrengthExercise(description, weight, set, repetition, date);
             exerciseList.addExercise(exercise);
@@ -104,12 +104,11 @@ public class AddCommand extends Command {
         }
     }
 
-    private static String getDateWithValidation(String[] argumentList) throws IllegalValueException {
-        String date = argumentList[5];
+    private static String getDateWithValidation(String date, boolean toDisplay) throws IllegalValueException {
         LocalDate today = LocalDate.now();
         try {
             LocalDate localDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-            if (today.isAfter(localDate)) {
+            if (toDisplay && today.isAfter(localDate)) {
                 throw new IllegalValueException("Date cannot be before today");
             }
         } catch (DateTimeException e) {
@@ -157,7 +156,7 @@ public class AddCommand extends Command {
             if (argumentList.length == 4) {
                 date = now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
             } else {
-                date = getDateWithValidation(argumentList);
+                date = getDateWithValidation(argumentList[4], toDisplay);
             }
             Exercise exercise = new CardioExercise(description, distance, repetition, date);
             exerciseList.addExercise(exercise);
