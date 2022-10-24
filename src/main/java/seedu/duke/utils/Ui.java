@@ -85,10 +85,14 @@ public class Ui {
         addMessage(message, false);
     }
 
-    public void addMessage(ArrayList<String> messages) {
+    public void addMessage(ArrayList<String> messages, boolean hasIndent) {
         for (String message: messages) {
-            addMessage(message);
+            addMessage(message, hasIndent);
         }
+    }
+
+    public void addMessage(ArrayList<String> messages) {
+        addMessage(messages, false);
     }
 
     /**

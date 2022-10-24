@@ -68,7 +68,7 @@ public class Parser {
         return toExecute;
     }
 
-    private static Command getCommand(String[] keywords) {
+    private static Command getCommand(String[] keywords) throws YamomException {
         return new GetModuleCommand(keywords);
     }
 

@@ -13,12 +13,10 @@ import seedu.duke.utils.Ui;
 
 public class SelectSlotCommand extends Command {
     public static final String COMMAND_WORD = "select";
-    public static final String FORMAT = "select /module MODULE_CODE /type LESSON_TYPE /code CLASS_NO";
-    public static final String HELP_DISPLAY = COMMAND_WORD
-            + ": select slot for modules!\n"
-            + "\tUsage:\t"
-            + FORMAT
-            + System.lineSeparator();
+    public static final String COMMAND_USAGE = "select /module <MODULE_CODE> "
+            + "/type <LESSON_TYPE> /code <CLASS_NO>";
+    public static final String COMMAND_DESCRIPTION = "Select a module slot";
+
     private Map<String, String> params;
     private String moduleCode;
     private LessonType lessonType;
@@ -27,6 +25,7 @@ public class SelectSlotCommand extends Command {
 
     public SelectSlotCommand(String input) {
         super(input.split("\\s"));
+
         params = Parser.parseParams(input);
         successful = false;
     }
@@ -60,5 +59,13 @@ public class SelectSlotCommand extends Command {
     @Override
     public String getExecutionMessage() {
         return null;
+    }
+
+    public static String getCommandDescription() {
+        return COMMAND_WORD + DESCRIPTION_DELIMITER + COMMAND_DESCRIPTION;
+    }
+
+    public static String getUsage() {
+        return COMMAND_USAGE;
     }
 }

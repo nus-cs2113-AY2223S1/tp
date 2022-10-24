@@ -1,3 +1,4 @@
+help
 search /code gea
 search /code cs2113
 add cs2113
