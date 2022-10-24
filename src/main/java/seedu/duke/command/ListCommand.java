@@ -4,11 +4,11 @@ package seedu.duke.command;
 import seedu.duke.Storage;
 import seedu.duke.Ui;
 import seedu.duke.data.TransactionList;
-import seedu.duke.exception.GlobalMissingTagException;
-import seedu.duke.exception.InputTransactionInvalidTypeException;
-import seedu.duke.exception.MoolahException;
+import seedu.duke.data.transaction.Transaction;
+import seedu.duke.exception.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
@@ -19,13 +19,14 @@ import static seedu.duke.command.CommandTag.COMMAND_TAG_GLOBAL_MONTH;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_GLOBAL_YEAR;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_GLOBAL_NUMBER;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_GLOBAL_PERIOD;
+
 import static seedu.duke.common.InfoMessages.INFO_LIST;
 import static seedu.duke.common.InfoMessages.INFO_LIST_EMPTY;
 
 /**
  * Represents a list command object that will execute the operations for List command.
  */
-public class ListCommand extends Command {
+public class ListCommand extends ListAndStatsCommand {
     //@@author chydarren
     private static final String LINE_SEPARATOR = System.lineSeparator();
     // The command word used to trigger the execution of Moolah Manager's operations
@@ -56,20 +57,10 @@ public class ListCommand extends Command {
     public static final String COMMAND_DETAILED_HELP = COMMAND_HELP + COMMAND_PARAMETERS_INFO + LINE_SEPARATOR;
 
     //@@author chydarren
-    private static final int UNDEFINED_PARAMETER = -1;
-    private static final int TRUE_AND = 1;
-    private static final int TRUE_OR = 2;
-    private static final int TRUE_INVALID_OR = 3;
-    private static final int FALSE = 0;
-
     private static Logger listLogger = Logger.getLogger(ListCommand.class.getName());
     private String category;
     private LocalDate date;
     private String type;
-    private int month;
-    private int year;
-    private String period;
-    private int number;
 
     //@@author paullowse
 
@@ -77,13 +68,10 @@ public class ListCommand extends Command {
      * Initialises the variables of the ListCommand class.
      */
     public ListCommand() {
+        super();
         category = "";
         date = null;
         type = "";
-        month = UNDEFINED_PARAMETER;
-        year = UNDEFINED_PARAMETER;
-        period = null;
-        number = UNDEFINED_PARAMETER;
     }
 
     /**
@@ -120,57 +108,7 @@ public class ListCommand extends Command {
         this.date = date;
     }
 
-    @Override
-    public void setGlobalMonth(int month) {
-        this.month = month;
-    }
-
-    @Override
-    public void setGlobalYear(int year) {
-        this.year = year;
-    }
-
-    @Override
-    public void setGlobalNumber(int number) {
-        this.number = number;
-    }
-
-    @Override
-    public void setGlobalPeriod(String period) {
-        this.period = period;
-    }
-
     //@@author chydarren
-
-    /**
-     * Checks if the input contains month or/and year tags.
-     *
-     * @return 1 if both tags are given, 2 if only month is given, 0 if both are not given.
-     */
-    public int containMonthYear() {
-        if (month != UNDEFINED_PARAMETER && year != UNDEFINED_PARAMETER) {
-            return TRUE_AND;
-        } else if (year != UNDEFINED_PARAMETER) {
-            return TRUE_OR;
-        } else if (month != UNDEFINED_PARAMETER) {
-            return TRUE_INVALID_OR;
-        }
-        return FALSE;
-    }
-
-    /**
-     * Checks if the input contains period and/or number tags.
-     *
-     * @return 1 if both tags are given, 2 if either period/number is given, 0 if both are not given.
-     */
-    public int containPeriodNumber() {
-        if (period != null && number != UNDEFINED_PARAMETER) {
-            return TRUE_AND;
-        } else if (period != null || number != UNDEFINED_PARAMETER) {
-            return TRUE_OR;
-        }
-        return FALSE;
-    }
 
     /**
      * Executes the operations related to the command.
@@ -184,22 +122,9 @@ public class ListCommand extends Command {
         listLogger.setLevel(Level.SEVERE);
         listLogger.log(Level.INFO, "Entering execution of the List command.");
 
-        // Throws an invalid list tags exception if there are both month/year and period/number
-        if (containMonthYear() == TRUE_OR && containPeriodNumber() == TRUE_OR) {
-            listLogger.log(Level.WARNING, "An exception has been caught as an invalid combination of tags "
-                    + "has been given.");
-        // Throws a missing tag exception if month was given without a year
-        } else if (containMonthYear() == TRUE_INVALID_OR) {
-            listLogger.log(Level.WARNING, "An exception has been caught as a month was given without a year.");
-            throw new GlobalMissingTagException();
-        // Throws a missing tag if number and period was not given together
-        } else if (containPeriodNumber() == TRUE_OR) {
-            listLogger.log(Level.WARNING, "An exception has been caught as number and period needs to be "
-                    + "given together.");
-            throw new GlobalMissingTagException();
-        }
-
-        listTransactions(transactions, type, category, date, month, year, number, period);
+        // Checks if there are any error in the tag combinations related to DateIntervals
+        parseDateIntervalsTags();
+        listTransactions(transactions, type, category, date);
     }
 
     /**
@@ -209,12 +134,12 @@ public class ListCommand extends Command {
      * @param type         The type of transaction.
      * @param category     A category for the transaction.
      * @param date         Date of the transaction with format in "yyyyMMdd".
-     * @throws InputTransactionInvalidTypeException If class type cannot be found in the packages.
+     * @throws MoolahException If any type of exception has been caught within the function calls.
      */
-    private static void listTransactions(TransactionList transactions, String type, String category, LocalDate date,
-                                         int month, int year, int number, String period)
-            throws InputTransactionInvalidTypeException {
-        String transactionsList = transactions.listTransactions(type, category, date, month, year, number, period);
+    private void listTransactions(TransactionList transactions, String type, String category, LocalDate date)
+            throws MoolahException {
+        ArrayList<Transaction> timeTransactions = getTimeTransactions(transactions);
+        String transactionsList = transactions.listTransactions(timeTransactions, type, category, date);
 
         if (transactionsList.isEmpty()) {
             listLogger.log(Level.INFO, "Transactions list is empty as there are no transactions available.");

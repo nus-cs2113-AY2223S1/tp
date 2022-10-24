@@ -54,7 +54,7 @@ public abstract class Command {
      * @param storage      An instance of the Storage class.
      */
     public abstract void execute(TransactionList transactions, Ui ui, Storage storage) throws MoolahException;
-    
+
     /**
      * Enables the program to exit when the Bye command is issued.
      *

@@ -28,6 +28,8 @@ public class TransactionList {
     private static final String SYMBOL_DOLLAR = "$";
     private static final String INCOME = "income";
     private static final String EXPENSE = "expense";
+    private static final String MONTHS = "months";
+    private static final String WEEKS = "weeks";
     private static final int START = 0;
     private static final int END = 1;
     private static final int UNDEFINED_PARAMETER = -1;
@@ -174,27 +176,11 @@ public class TransactionList {
      * @param type     The type of transaction.
      * @param category A category for the transaction.
      * @param date     Date of the transaction with format in "yyyyMMdd".
-     * @param year     A specified year.
-     * @param month    A specified month within the year.
      * @return A string containing the formatted transaction list.
      * @throws InputTransactionInvalidTypeException If class type cannot be found in the packages.
      */
-    public String listTransactions(String type, String category, LocalDate date, int month, int year,
-                                   int number, String period)
+    public String listTransactions(ArrayList<Transaction> timeTransactions, String type, String category, LocalDate date)
             throws InputTransactionInvalidTypeException {
-        ArrayList<Transaction> timeTransactions;
-
-        // Filters the transactions list by month or/and year first
-        if (year != UNDEFINED_PARAMETER && month != UNDEFINED_PARAMETER) {
-            timeTransactions = getTransactionsByMonth(year, month);
-        } else if (year != UNDEFINED_PARAMETER) {
-            assert month == UNDEFINED_PARAMETER;
-            timeTransactions = getTransactionsByYear(year);
-        } else {
-            // No filter month or/and year filter applied
-            timeTransactions = transactions;
-        }
-
         String transactionsList = "";
 
         // Loops each transaction from the time transactions list

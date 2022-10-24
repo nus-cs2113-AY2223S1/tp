@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
+//@@author chydarren
 import seedu.duke.data.TransactionList;
 import seedu.duke.data.transaction.Transaction;
 import seedu.duke.exception.GlobalMissingPeriodNumberTagException;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public abstract class DateCommand extends Command {
+public abstract class ListAndStatsCommand extends Command {
     private static final int UNDEFINED_PARAMETER = -1;
     private static final int TRUE_AND = 1;
     private static final int TRUE_OR = 2;
@@ -20,20 +21,44 @@ public abstract class DateCommand extends Command {
     private static final int FALSE = 0;
     private static final String WEEKS = "weeks";
     private static final String MONTHS = "months";
-    private static Logger dateLogger = Logger.getLogger(DateCommand.class.getName());
+    private static Logger datedTransactionsLogger = Logger.getLogger(ListAndStatsCommand.class.getName());
 
-    private int month;
-    private int year;
-    private String period;
-    private int number;
+    //@@author paullowse
+    public int month;
+    public int year;
+    public String period;
+    public int number;
 
-    public DateCommand(int month, int year, String period, int number) {
+    public ListAndStatsCommand() {
+        this.month = UNDEFINED_PARAMETER;
+        this.year = UNDEFINED_PARAMETER;
+        this.period = null;
+        this.number = UNDEFINED_PARAMETER;
+
+        datedTransactionsLogger.setLevel(Level.SEVERE);
+    }
+
+    @Override
+    public void setGlobalMonth(int month) {
         this.month = month;
+    }
+
+    @Override
+    public void setGlobalYear(int year) {
         this.year = year;
-        this.period = period;
+    }
+
+    @Override
+    public void setGlobalNumber(int number) {
         this.number = number;
     }
 
+    @Override
+    public void setGlobalPeriod(String period) {
+        this.period = period;
+    }
+
+    //@@author chydarren
     /**
      * Checks if the input contains month or/and year tags.
      *
@@ -66,20 +91,22 @@ public abstract class DateCommand extends Command {
     }
 
     /**
+     * Parses the tags related to tag intervals and checks if there are any error in their combinations.
      *
+     * @throws MoolahException If any of the below exception conditions are met.
      */
     public void parseDateIntervalsTags() throws MoolahException {
         if (containMonthYear() != FALSE && containPeriodNumber() != FALSE) {
-            dateLogger.log(Level.WARNING, "An exception has been caught as an invalid combination of tags "
+            datedTransactionsLogger.log(Level.WARNING, "An exception has been caught as an invalid combination of tags "
                     + "has been given.");
             throw new GlobalUnsupportedTagException();
         } else if (containMonthYear() == TRUE_INVALID_OR) {
             // Throws a missing tag if number and period was not given together
-            dateLogger.log(Level.WARNING, "An exception has been caught as a month was given without a year.");
+            datedTransactionsLogger.log(Level.WARNING, "An exception has been caught as a month was given without a year.");
             throw new GlobalMissingYearTagException();
         } else if (containPeriodNumber() == TRUE_OR) {
             // Throws a missing tag if number and period was not given together
-            dateLogger.log(Level.WARNING, "An exception has been caught as number and period needs to be "
+            datedTransactionsLogger.log(Level.WARNING, "An exception has been caught as number and period needs to be "
                     + "given together.");
             throw new GlobalMissingPeriodNumberTagException();
         }
@@ -88,9 +115,10 @@ public abstract class DateCommand extends Command {
     /**
      * Gets the complete transactions list by date intervals.
      *
+     * @param transactions  An instance of the TransactionList class.
      * @return An array list containing all transactions recorded in specified date interval.
      */
-    public ArrayList<Transaction> getTimeTransactions(TransactionList transactions) throws MoolahException {
+    public ArrayList<Transaction> getTimeTransactions(TransactionList transactions) {
         ArrayList<Transaction> timeTransactions = transactions.getTransactions();
 
         if (containMonthYear() == TRUE_AND) {
