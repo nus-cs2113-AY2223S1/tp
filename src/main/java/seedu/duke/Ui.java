@@ -95,7 +95,7 @@ public class Ui {
         String subHeader = generateAllDataTableSubHeader(columnSpacingArraySubHeader);
 
         Integer[] columnSpacingArrayHeader = { 10, 23, 55, 60};
-        getAllRecordsHeaderSpacing (columnSpacingArrayHeader, subHeader);
+        getAllRecordsHeaderSpacing(columnSpacingArrayHeader, subHeader);
         generateAllDataTableHeader(columnSpacingArrayHeader);
         String separatorLine = "-".repeat(subHeader.length());
         output(separatorLine, subHeader, separatorLine);
@@ -161,7 +161,7 @@ public class Ui {
         }
     }
 
-    private void getAllRecordsHeaderSpacing( Integer[] columnSpacingArray, String subHeader) {
+    private void getAllRecordsHeaderSpacing(Integer[] columnSpacingArray, String subHeader) {
         columnSpacingArray[0] = subHeader.substring(0, subHeader.indexOf("| Weight")).length() - 1;
         columnSpacingArray[1] = subHeader.substring(subHeader.indexOf("| Weight"),
                 subHeader.indexOf("| Description")).length() - 3;
@@ -212,7 +212,7 @@ public class Ui {
 
     private void printAllRecords(ArrayList<Record> recordArrayList, Integer[] columnSpacingArray, String header) {
         for (int i = 0; i < recordArrayList.size(); i++) {
-            if (recordArrayList.get(i) instanceof WeightAndFat){
+            if (recordArrayList.get(i) instanceof WeightAndFat) {
                 String date = addRightPadding(recordArrayList.get(i).getDate(), columnSpacingArray[0]) + " | ";
                 WeightAndFat weightAndFat = (WeightAndFat) recordArrayList.get(i);
                 String weight = addRightPadding(Integer.toString(weightAndFat.getWeight()),
@@ -220,7 +220,7 @@ public class Ui {
                 String fat = addRightPadding(Integer.toString(weightAndFat.getFat()), columnSpacingArray[2]) + " | ";
                 printInSameLine(date, weight, fat);
             }
-            if (recordArrayList.get(i) instanceof Food){
+            if (recordArrayList.get(i) instanceof Food) {
                 String date = addRightPadding(recordArrayList.get(i).getDate(),
                         header.substring(0, header.indexOf("| Description")).length() - 1) + " | ";
                 Food food = (Food) recordArrayList.get(i);
@@ -229,7 +229,7 @@ public class Ui {
                         columnSpacingArray[4]) + " | ";
                 printInSameLine(date, foodName, calories);
             }
-            if (recordArrayList.get(i) instanceof Exercise){
+            if (recordArrayList.get(i) instanceof Exercise) {
                 String date = addRightPadding(recordArrayList.get(i).getDate(),
                         header.substring(0, header.indexOf("| Exercise")).length() - 1) + " | ";
                 Exercise exercise = (Exercise) recordArrayList.get(i);
@@ -298,6 +298,7 @@ public class Ui {
         String separatorLine = "-".repeat(header.length());
         output(separatorLine, header);
     }
+
     private String generateAllDataTableSubHeader(Integer[] columnSpacingArray) {
         String paddedDate = addRightPadding("Date", columnSpacingArray[0]) + " | ";
 

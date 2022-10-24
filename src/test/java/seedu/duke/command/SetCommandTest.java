@@ -1,6 +1,7 @@
 package seedu.duke.command;
 
 import org.junit.jupiter.api.Test;
+import seedu.duke.records.RecordList;
 import seedu.duke.records.biometrics.Biometrics;
 import seedu.duke.Parser;
 import seedu.duke.Ui;
@@ -15,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 class SetCommandTest {
 
     private final FoodList foodList = new FoodList();
+    private final RecordList recordList = new RecordList();
     private final Storage storage = new Storage();
 
     @Test
@@ -32,7 +34,7 @@ class SetCommandTest {
                 command, age, gender, height, weight, fatPercentage);
 
         Command c = Parser.parse(fullCommand);
-        c.setData(ui, storage, biometrics, exerciseList, foodList);
+        c.setData(ui, storage, biometrics, exerciseList, foodList, recordList);
         c.execute();
         assertEquals(age, biometrics.getAge());
         assertEquals(gender, biometrics.getGender());
@@ -56,7 +58,7 @@ class SetCommandTest {
                 command, age, gender, height, weight, fatPercentage);
 
         Command c = Parser.parse(fullCommand);
-        c.setData(ui, storage, biometrics, exerciseList, foodList);
+        c.setData(ui, storage, biometrics, exerciseList, foodList, recordList);
         try {
             c.execute();
             fail();
@@ -81,7 +83,7 @@ class SetCommandTest {
                 command, age, gender, height, weight, fatPercentage);
 
         Command c = Parser.parse(fullCommand);
-        c.setData(ui, storage, biometrics, exerciseList, foodList);
+        c.setData(ui, storage, biometrics, exerciseList, foodList, recordList);
         try {
             c.execute();
             fail();

@@ -3,6 +3,8 @@ package seedu.duke.command;
 import org.junit.jupiter.api.Test;
 import seedu.duke.Parser;
 import seedu.duke.Ui;
+import seedu.duke.records.Record;
+import seedu.duke.records.RecordList;
 import seedu.duke.records.biometrics.Biometrics;
 import seedu.duke.exception.IllegalValueException;
 import seedu.duke.records.exercise.Exercise;
@@ -23,6 +25,7 @@ class MarkCommandTest {
     private final Ui ui = new Ui();
     private final Biometrics biometrics = new Biometrics();
     private final FoodList foodList = new FoodList();
+    private final RecordList recordList = new RecordList();
     private final Storage storage = new Storage();
 
     @Test
@@ -129,7 +132,7 @@ class MarkCommandTest {
 
     private void assertInvalidMarkCommand(String input, String expectedMessage, ExerciseList exerciseList) {
         Command command = Parser.parse(input);
-        command.setData(ui, storage, biometrics, exerciseList, foodList);
+        command.setData(ui, storage, biometrics, exerciseList, foodList, recordList);
         try {
             command.execute();
             fail();
@@ -148,7 +151,7 @@ class MarkCommandTest {
         }
         String validMarkAsUndoneInput = "mark undone /" + index;
         Command command = Parser.parse(validMarkAsUndoneInput);
-        command.setData(ui, storage, biometrics, exerciseList, foodList);
+        command.setData(ui, storage, biometrics, exerciseList, foodList, recordList);
         command.execute();
         return exercise;
     }
@@ -162,7 +165,7 @@ class MarkCommandTest {
         }
         String input = "mark done /" + index;
         Command command = Parser.parse(input);
-        command.setData(ui, storage, biometrics, exerciseList, foodList);
+        command.setData(ui, storage, biometrics, exerciseList, foodList, recordList);
         command.execute();
         return exercise;
     }
@@ -197,7 +200,7 @@ class MarkCommandTest {
 
         for (String input : commandList) {
             Command c = Parser.parse(input);
-            c.setData(ui, storage, biometrics, exerciseList, foodList);
+            c.setData(ui, storage, biometrics, exerciseList, foodList, recordList);
             c.execute();
         }
     }

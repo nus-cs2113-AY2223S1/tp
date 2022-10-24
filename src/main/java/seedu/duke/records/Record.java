@@ -3,8 +3,7 @@ package seedu.duke.records;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Record
-{
+public class Record {
     private LocalDate date;
 
     public Record(LocalDate date) {

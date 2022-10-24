@@ -92,7 +92,7 @@ public class ViewCommand extends Command {
         throw new IllegalValueException("Invalid view command");
     }
 
-    private void viewAll(String[] argumentList) throws IllegalValueException{
+    private void viewAll(String[] argumentList) throws IllegalValueException {
         handleInvalidViewAllCommand(argumentList);
         ArrayList<WeightAndFat> weightAndFatList = biometrics.weightAndFatList.getWeightAndFatList();
         ArrayList<Food> foodArrayList = foodList.getFoodList();
