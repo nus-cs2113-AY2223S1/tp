@@ -69,7 +69,7 @@ public class Storage {
      *
      * @param line the line to be read
      * @param mode the desired position of the text to be retrieved
-     * @return
+     * @return the desired text
      */
     private static String getParameter(String line, int mode) {
         String[] lineSplit = line.split("/");

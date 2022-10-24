@@ -156,10 +156,10 @@ public class Build {
      *
      * @return The total cost of the build.
      */
-    public float getTotalCost() {
-        float totalCost = 0;
+    public double getTotalCost() {
+        double totalCost = 0;
         for (Component component : getAllComponents()) {
-            totalCost += Float.parseFloat(component.getPrice());
+            totalCost += Double.parseDouble(component.getPrice());
         }
         return totalCost;
     }
