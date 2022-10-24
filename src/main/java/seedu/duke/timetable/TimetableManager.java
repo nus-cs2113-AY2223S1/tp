@@ -1,8 +1,11 @@
 package seedu.duke.timetable;
 
+import seedu.duke.exceptions.InvalidUserStorageFileException;
 import seedu.duke.exceptions.LessonNotFoundException;
 import seedu.duke.exceptions.TimetableNotFoundException;
+import seedu.duke.parser.UserStorageParser;
 import seedu.duke.ui.Ui;
+import seedu.duke.user.UserUniversityList;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,8 +17,13 @@ public class TimetableManager {
         this.timetableManager = new HashMap<String, Timetable>();
     }
 
+
     public Timetable getTimetableByUniversityName(String universityName) {
         return timetableManager.get(universityName);
+    }
+
+    public HashMap<String, Timetable> getTimetableManager() {
+        return timetableManager;
     }
 
     private boolean foundKeyAll(String universityName) {
@@ -27,14 +35,16 @@ public class TimetableManager {
      *
      * @param universityName The name of the university for which the timetable is created.
      */
-    public void createTimetable(String universityName) {
+    public void createTimetable(String universityName, boolean isLoadFromFile) {
         assert universityName.length() > 0 : "Input university name cannot be empty";
         if (timetableManager.containsKey(universityName)) {
             System.out.println("Error: Timetable for " + universityName + " already exists");
         } else {
             Timetable newTimetable = new Timetable();
             timetableManager.put(universityName, newTimetable);
-            System.out.print(Ui.printTimetableCreatedAcknowledgement(universityName));
+            if (!isLoadFromFile) {
+                System.out.print(Ui.printTimetableCreatedAcknowledgement(universityName));
+            }
         }
     }
 
@@ -58,9 +68,9 @@ public class TimetableManager {
      *
      * @param newLesson The new lesson to be added to the timetable.
      */
-    public void addLesson(Lesson newLesson) {
+    public void addLesson(Lesson newLesson, boolean isLoadFromFile) {
         String universityName = newLesson.getUniversity().getName();
-        timetableManager.get(universityName).addLesson(newLesson);
+        timetableManager.get(universityName).addLesson(newLesson, isLoadFromFile);
     }
 
     /**
@@ -104,6 +114,5 @@ public class TimetableManager {
             System.out.println("Timetable for " + universityName + ":");
             Ui.printTimetable(timetable.getTimetable());
         }
-        System.out.println("_____________________________________________________________________________");
     }
 }

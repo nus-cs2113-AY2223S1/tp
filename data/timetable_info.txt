@@ -1,0 +1,5 @@
+Hanyang University%
+CSE1002;Introduction to computer science;3;nil;wednesday;15:00;16:00%
+/Boston University%
+CS103;Introduction to Internet Technologies and Web Programming;3;nil;tuesday;11:00;12:00%
+MET CS 248;Discrete Mathematics;3;nil;monday;11:00;12:00%

@@ -9,20 +9,24 @@ import java.util.logging.Logger;
 
 /**.
  * Deals with loading tasks from the specified file and saving tasks in the specified file
- * File name should be specified in Duke.java: "data/myinfo.txt"
+ * If saving university list and module info, file path = "data/uni_info.txt"
+ * If saving timetable info, file path = "data/timetable_info.txt"
  */
 public class UserStorage {
     private static Logger logger = Logger.getLogger("UserStorage");
-    private static final String USER_STORAGE_FILE_PATH = "data/myinfo.txt";
-
+    private static final String UNI_STORAGE_FILE_PATH = "data/uni_info.txt";
+    private static final String TIMETABLE_STORAGE_FILE_PATH = "data/timetable_info.txt";
+    
     /**.
      * Clears content in the file and writes new text into the file.
      * @param textToAdd Text to write into the file.
+     * @param isUniStorage Boolean to check if loading from uni storage or timetable storage
      * @throws IOException If input/output operations fail or are interrupted.
      */
-    public static void saveFile(String textToAdd) throws IOException {
+    public static void saveFile(String textToAdd, boolean isUniStorage) throws IOException {
         logger.log(Level.INFO, "Going to start file saving");
-        FileWriter fw = new FileWriter(USER_STORAGE_FILE_PATH, false);
+        String userStorageFilePath = getFilePath(isUniStorage);
+        FileWriter fw = new FileWriter(userStorageFilePath);
         logger.log(Level.INFO, "Going to add text into file");
         fw.write(textToAdd);
         fw.close();
@@ -32,13 +36,15 @@ public class UserStorage {
     /**.
      * Loads file that holds universities and modules information which
      * the user saves after exiting the app most recently
+     * @param isUniStorage Boolean to check if loading from uni storage or timetable storage
      * @return fileContent Content of the file
      * @throws IOException If input/output operations fail or are interrupted.
      */
-    public static String loadFile() throws IOException {
+    public static String loadFile(boolean isUniStorage) throws IOException {
         logger.log(Level.INFO, "Going to start loading file");
-        File f = new File(USER_STORAGE_FILE_PATH);
-        String[] words = USER_STORAGE_FILE_PATH.split("/");
+        String userStorageFilePath = getFilePath(isUniStorage);
+        File f = new File(userStorageFilePath);
+        String[] words = userStorageFilePath.split("/");
         String dirName = words[0] + '/';
         File dir = new File(dirName);
         if (!dir.isDirectory()) {
@@ -46,12 +52,12 @@ public class UserStorage {
             dir.mkdir();
         }
         if (!f.exists()) {
-            logger.log(Level.INFO, "Creating 'duke.txt' file in duke directory as it does not exist yet");
+            logger.log(Level.INFO, "Creating new text file as it does not exist yet");
             f.createNewFile();
         }
         Scanner s = new Scanner(f);
         String fileContent = "";
-        logger.log(Level.INFO, "Going to start retrieving file information from 'data/duke.txt'");
+        logger.log(Level.INFO, "Going to start retrieving file information from text file");
         while (s.hasNext()) {
             fileContent += s.nextLine();
         }
@@ -60,4 +66,20 @@ public class UserStorage {
         return fileContent;
     }
 
+    /**.
+     * Method to get the correct file path
+     * (ie. either uni storage or timetable storage)
+     * @param isUniStorage true if dealing with uni storage
+     * @return UNI_STORAGE_FILE_PATH if isUniStorage is true
+     *          TIMETABLE_STORAGE_FILE_PATH otherwise
+     */
+    private static String getFilePath(boolean isUniStorage) {
+        String userStorageFilePath;
+        if (isUniStorage) {
+            userStorageFilePath = UNI_STORAGE_FILE_PATH;
+        } else {
+            userStorageFilePath = TIMETABLE_STORAGE_FILE_PATH;
+        }
+        return userStorageFilePath;
+    }
 }
