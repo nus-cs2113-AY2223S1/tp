@@ -1,7 +1,7 @@
 package seedu.moneygowhere.data.recurringpayments;
 
 import seedu.moneygowhere.common.Messages;
-import seedu.moneygowhere.exceptions.RecurringPaymentManagerRecurringPaymentNotFoundException;
+import seedu.moneygowhere.exceptions.recurringpayment.RecurringPaymentManagerRecurringPaymentNotFoundException;
 
 import java.util.ArrayList;
 
