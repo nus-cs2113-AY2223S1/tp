@@ -68,6 +68,11 @@ public class Budget {
         return message;
     }
 
+    /**
+     * Generates a budget remaining message for the current month.
+     *
+     * @return A string containing the remaining budget to be displayed to the user.
+     */
     public static String generateCurrentMonthBudgetRemainingMessage() {
         LocalDate todayDate = LocalDate.now();
         String monthYear = "current month";
