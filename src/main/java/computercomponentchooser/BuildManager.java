@@ -259,7 +259,7 @@ public class BuildManager {
      * Finds the build with the specified name and returns a boolean value to indicate if the build is found.
      *
      * @param buildName The name of the build to be deleted.
-     * @return True if the build is deleted, false if the build is not found.
+     * @return True if the build is found, false if the build is not found.
      */
     public boolean doesBuildExist(String buildName) {
         return builds.containsKey(buildName);

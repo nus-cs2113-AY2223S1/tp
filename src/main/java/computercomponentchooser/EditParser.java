@@ -15,6 +15,7 @@ import computercomponentchooser.exceptions.BlankStringException;
 import computercomponentchooser.exceptions.NegativeNumberException;
 import computercomponentchooser.exceptions.UnknownCommandException;
 import computercomponentchooser.exceptions.UnlistedBuildException;
+import computercomponentchooser.exceptions.UnlistedComponentException;
 import computercomponentchooser.export.ExportText;
 
 import static computercomponentchooser.ComputerComponentChooser.storage;
@@ -112,7 +113,8 @@ public class EditParser {
             default:
                 throw new UnknownCommandException();
             }
-        } catch (UnknownCommandException | UnlistedBuildException | BlankStringException e) {
+        } catch (UnknownCommandException | UnlistedBuildException | UnlistedComponentException
+                 | BlankStringException e) {
             Ui.printLine();
             System.out.println(e.getMessage());
             Ui.printLine();
@@ -383,10 +385,14 @@ public class EditParser {
      *
      * @param editBuild The build to be edited.
      * @param line The user input.
+     * @throws UnlistedComponentException If the component to be deleted is not in the build.
      */
-    public void parseDelete(Build editBuild, String line) {
+    public void parseDelete(Build editBuild, String line) throws UnlistedComponentException {
         String name = getParameter(line, NAME_PARAMETER);
         String type = getParameter(line, TYPE_PARAMETER);
+        if (!editBuild.doesComponentExist(name)) {
+            throw new UnlistedComponentException();
+        }
         editBuild.deleteComponent(type, name);
         try {
             storage.saveComponent(editBuild);
@@ -439,11 +445,15 @@ public class EditParser {
      *
      * @param editBuild The build to be edited.
      * @param line The user input.
-     * @throws UnlistedBuildException If the build to be edited is not listed.
+     * @throws UnlistedBuildException If the build to be viewed is not listed.
+     * @throws UnlistedComponentException If the component to be viewed is not listed.
      */
-    public void parseView(Build editBuild, String line) throws UnlistedBuildException {
+    public void parseView(Build editBuild, String line) throws UnlistedBuildException, UnlistedComponentException {
         String name = getParameter(line, NAME_PARAMETER);
         String type = getParameter(line, TYPE_PARAMETER);
+        if (!editBuild.doesComponentExist(name)) {
+            throw new UnlistedComponentException();
+        }
         Ui.printLine();
         System.out.println(editBuild.getComponent(type, name).getDetails());
         Ui.printLine();
