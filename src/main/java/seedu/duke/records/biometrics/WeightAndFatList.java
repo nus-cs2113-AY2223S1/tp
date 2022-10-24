@@ -1,7 +1,6 @@
-package seedu.duke.biometrics;
+package seedu.duke.records.biometrics;
 
 import seedu.duke.exception.IllegalValueException;
-import seedu.duke.food.Food;
 
 import java.util.ArrayList;
 

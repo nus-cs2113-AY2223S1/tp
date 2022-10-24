@@ -2,16 +2,17 @@ package seedu.duke.command;
 
 import seedu.duke.Parser;
 import seedu.duke.Ui;
-import seedu.duke.biometrics.Biometrics;
+import seedu.duke.records.Record;
+import seedu.duke.records.RecordList;
+import seedu.duke.records.biometrics.Biometrics;
 import seedu.duke.exception.IllegalValueException;
 import seedu.duke.exception.InvalidDateException;
-import seedu.duke.exercise.Exercise;
-import seedu.duke.exercise.ExerciseList;
-import seedu.duke.food.Food;
-import seedu.duke.food.FoodList;
+import seedu.duke.records.exercise.Exercise;
+import seedu.duke.records.exercise.ExerciseList;
+import seedu.duke.records.food.Food;
+import seedu.duke.records.food.FoodList;
 import seedu.duke.storage.Storage;
 
-import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
@@ -72,6 +73,19 @@ public class DateCommand extends Command {
         });
     }
 
+    public static void sortDateForAll(ArrayList<Record> recordArrayList) {
+        Collections.sort(recordArrayList, new Comparator<Record>() {
+            @Override
+            public int compare(Record r1, Record r2) {
+                LocalDate r1Date = LocalDate.parse(Parser.getDateNoDateTracker(r1.getDate()),
+                        DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+                LocalDate r2Date = LocalDate.parse(Parser.getDateNoDateTracker(r2.getDate()),
+                        DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+                return r1Date.compareTo(r2Date);
+            }
+        });
+    }
+
 
     @Override
     public void execute() throws IllegalValueException {
@@ -79,7 +93,8 @@ public class DateCommand extends Command {
     }
 
     @Override
-    public void setData(Ui ui, Storage storage, Biometrics biometrics, ExerciseList exerciseList, FoodList foodList) {
+    public void setData(Ui ui, Storage storage, Biometrics biometrics, ExerciseList exerciseList, FoodList foodList,
+                        RecordList recordList) {
 
     }
 }

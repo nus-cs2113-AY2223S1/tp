@@ -1,21 +1,23 @@
-package seedu.duke.exercise;
+package seedu.duke.records.exercise;
 
-import seedu.duke.command.DateCommand;
+import seedu.duke.records.Record;
 
-public class Exercise {
-    private String date;
+import java.time.LocalDate;
+
+public class Exercise extends Record {
+    private LocalDate date;
     private String exerciseName;
     private int repetition;
     private int caloriesBurnt;
     private boolean isDone;
 
 
-    public Exercise(String exerciseName, int repetitions, int caloriesBurnt, String date) {
+    public Exercise(String exerciseName, int repetitions, int caloriesBurnt, LocalDate date) {
+        super(date);
         this.exerciseName = exerciseName;
         this.repetition = repetitions;
         this.caloriesBurnt = caloriesBurnt;
         this.isDone = false;
-        this.date = date;
     }
 
     public String getExerciseName() {
@@ -40,10 +42,6 @@ public class Exercise {
 
     public int getTime() {
         return 1;
-    }
-
-    public String getDate() {
-        return date;
     }
 
     public String getTaskStatus() {

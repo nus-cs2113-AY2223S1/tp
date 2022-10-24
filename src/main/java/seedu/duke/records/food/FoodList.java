@@ -1,4 +1,4 @@
-package seedu.duke.food;
+package seedu.duke.records.food;
 
 import seedu.duke.exception.IllegalValueException;
 

@@ -1,8 +1,4 @@
-package seedu.duke.biometrics;
-
-import seedu.duke.biometrics.Biometrics;
-
-import seedu.duke.Ui;
+package seedu.duke.records.biometrics;
 
 
 public class Calculator {

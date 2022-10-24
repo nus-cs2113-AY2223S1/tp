@@ -1,11 +1,11 @@
-package seedu.duke.exercise;
+package seedu.duke.records.exercise;
 
 import java.time.LocalDate;
 
 public class StrengthExercise extends Exercise {
     private int set;
 
-    public StrengthExercise(String exerciseName, int set, int repetitions, int caloriesBurnt, String date) {
+    public StrengthExercise(String exerciseName, int set, int repetitions, int caloriesBurnt, LocalDate date) {
         super(exerciseName, repetitions, caloriesBurnt, date);
         this.set = set;
     }

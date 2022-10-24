@@ -2,6 +2,7 @@ package seedu.duke.biometrics;
 
 import org.junit.jupiter.api.Test;
 import seedu.duke.exception.IllegalValueException;
+import seedu.duke.records.biometrics.Biometrics;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

@@ -2,15 +2,17 @@ package seedu.duke.command;
 
 import seedu.duke.Parser;
 import seedu.duke.Ui;
-import seedu.duke.biometrics.Biometrics;
-import seedu.duke.biometrics.WeightAndFat;
+import seedu.duke.records.Record;
+import seedu.duke.records.RecordList;
+import seedu.duke.records.biometrics.Biometrics;
+import seedu.duke.records.biometrics.WeightAndFat;
 import seedu.duke.exception.IllegalValueException;
-import seedu.duke.exercise.CardioExercise;
-import seedu.duke.exercise.Exercise;
-import seedu.duke.exercise.ExerciseList;
-import seedu.duke.exercise.StrengthExercise;
-import seedu.duke.food.Food;
-import seedu.duke.food.FoodList;
+import seedu.duke.records.exercise.CardioExercise;
+import seedu.duke.records.exercise.Exercise;
+import seedu.duke.records.exercise.ExerciseList;
+import seedu.duke.records.exercise.StrengthExercise;
+import seedu.duke.records.food.Food;
+import seedu.duke.records.food.FoodList;
 import seedu.duke.storage.Storage;
 
 import java.time.format.DateTimeFormatter;
@@ -35,6 +37,7 @@ public class AddCommand extends Command {
     private FoodList foodList;
 
     private Biometrics biometrics;
+    private RecordList recordList;
     private static final Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     public AddCommand(String arguments, boolean toDisplay, boolean isMarkDone) {
@@ -76,11 +79,11 @@ public class AddCommand extends Command {
             int set = Integer.parseInt(argumentList[2]);
             int repetition = Integer.parseInt(argumentList[3]);
             int calories = Integer.parseInt(argumentList[4]);
-            String date;
-            if (argumentList.length != 6) {
-                date = LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+            LocalDate date;
+            if (argumentList.length == 6) {
+                date = LocalDate.parse(argumentList[5], DateTimeFormatter.ofPattern("d-M-yyyy"));
             } else {
-                date = argumentList[5];
+                date = LocalDate.now();
             }
             Exercise exercise = new StrengthExercise(description, set, repetition, calories, date);
             exerciseList.addExercise(exercise);
@@ -108,11 +111,11 @@ public class AddCommand extends Command {
             int time = Integer.parseInt(argumentList[2]);
             int repetition = Integer.parseInt(argumentList[3]);
             int calories = Integer.parseInt(argumentList[4]);
-            String date;
-            if (argumentList.length != 6) {
-                date = LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+            LocalDate date;
+            if (argumentList.length == 6) {
+                date = LocalDate.parse(argumentList[5], DateTimeFormatter.ofPattern("d-M-yyyy"));
             } else {
-                date = argumentList[5];
+                date = LocalDate.now();
             }
             Exercise exercise = new CardioExercise(description, time, repetition, calories, date);
             exerciseList.addExercise(exercise);
@@ -207,10 +210,12 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void setData(Ui ui, Storage storage, Biometrics biometrics, ExerciseList exerciseList, FoodList foodList) {
+    public void setData(Ui ui, Storage storage, Biometrics biometrics, ExerciseList exerciseList, FoodList foodList,
+                        RecordList recordList) {
         this.ui = ui;
         this.exerciseList = exerciseList;
         this.foodList = foodList;
         this.biometrics = biometrics;
+        this.recordList = recordList;
     }
 }

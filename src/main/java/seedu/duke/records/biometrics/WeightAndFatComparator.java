@@ -1,4 +1,4 @@
-package seedu.duke.biometrics;
+package seedu.duke.records.biometrics;
 
 import java.util.Comparator;
 
