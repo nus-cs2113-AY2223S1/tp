@@ -8,6 +8,7 @@ import seedu.duke.command.passengercommand.AddPassengerCommand;
 import seedu.duke.command.passengercommand.DeletePassengerCommand;
 import seedu.duke.command.passengercommand.ListPassengerCommand;
 import seedu.duke.exceptions.SkyControlException;
+import seedu.duke.exceptions.SyncException;
 import seedu.duke.operationlist.FlightList;
 import seedu.duke.operationlist.OperationList;
 import seedu.duke.operationlist.PassengerList;
@@ -20,6 +21,8 @@ public class SkyControl {
     private OperationList flights;
     private static boolean isPassenger = false;
     private static boolean isFlight = false;
+    private static boolean isAdd = false;
+
 
     /**
      * Main entry-point for the java.duke.Duke application.
@@ -34,7 +37,7 @@ public class SkyControl {
         assert lineInput != null;
         checkEntity(lineInput);
         if (isPassenger) {
-            command.execute(passengers, lineInput);
+            executePassengerCommand(lineInput, command);
         } else if (isFlight) {
             command.execute(flights, lineInput);
         } else {
@@ -42,9 +45,23 @@ public class SkyControl {
         }
     }
 
+    private void executePassengerCommand(String lineInput, Command command) {
+        try {
+            if (isAdd) {
+                command.checkFlightDetailSync(flights, passengers, lineInput);
+            }
+            command.execute(passengers, lineInput);
+        } catch (SkyControlException | SyncException e) {
+            ui.showError(e.getMessage());
+        }
+    }
+
     private void checkEntity(String lineInput) {
         isPassenger = Parser.isPassengerEntity(lineInput);
         isFlight = Parser.isFlightEntity(lineInput);
+        if (isPassenger) {
+            isAdd = Parser.getAdd(lineInput);
+        }
     }
 
     private void setUpAllLogger() {
