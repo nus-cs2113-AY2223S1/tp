@@ -1,0 +1,76 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+hide circle
+skinparam classAttributeIconSize 0
+
+class Storage{
+    - DIRECTORY_PATH: String {static}
+    - FILE_PATH: String {static}
+    - DELIMITER: String {static}
+    - NUMBER_OF_STORED_PARAMETERS: int {static}
+    - TENS: int {static}
+    - HUNDREDS: int {static}
+    - THOUSANDS: int {static}
+    - storedTransactions: TransactionList {static}
+
+
+    - initializeFile(): TransactionList{static}
+    - checkIfFileExist(): File{static}
+    - storeBudgetLocally(){static}
+    - storeTransactionsLocally(){static}
+    - storeFileValuesLocally(){static}
+    - synthesizeDateString(): String{static}
+    - writeToFile()
+
+
+
+}
+class "TransactionList"{
++ addExpenseDuringStorage()
++ addIncomeDuringStorage()
+}
+
+class "ParameterParser"{
++ parse()
++parseBudgetTag()
+}
+class "CommandParser"{
++ getCommand():Command
+
+}
+
+class "Budget"{
++ getBudget():long
++ setBudget()
+}
+
+class "AddCommand"{
++ execute()
+}
+class "EditCommand"{
++ execute()
+}
+class "DeleteCommand"{
++ execute()
+}
+class "PurgeCommand"{
++ execute()
+}
+class "BudgetCommand"{
++ execute()
+}
+
+Duke <.. Storage: Initializes >
+Storage --> "ParameterParser": uses methods from >
+Storage --> "CommandParser": uses methods from >
+Storage --> "TransactionList":uses methods from >
+Storage --> "Budget":uses methods from >
+Storage <-right- "AddCommand":writes to <
+Storage <-- "EditCommand":writes to <
+Storage <-right- "DeleteCommand":writes to <
+Storage <-left- "PurgeCommand":writes to <
+Storage <-left- "BudgetCommand":writes to <
+
+
+@enduml
