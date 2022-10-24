@@ -4,23 +4,31 @@
 
 1. [Introduction](#1-introduction)
 2. [Quick Start](#2-quick-start)
-3. [Features](#3-features)
-
-    3.1 [Getting help](#31-getting-help)
-
-    3.2 [User-related features](#32-user-related-features)
-
-    3.3 [Item-related features](#33-item-related-features)
-
-    3.4 [Transaction-related features](#34-transaction-related-features)
-
+3. [Features](#3-features)\
+    3.1 [Getting help](#31-getting-help)\
+    3.2 [User-related features](#32-user-related-features)\
+    3.3 [Item-related features](#33-item-related-features)\
+    3.4 [Transaction-related features](#34-transaction-related-features)\
     3.5 [Exit program](#35-exit-program)
 4. [Command Summary](#4-command-summary)
 5. [Frequently Asked Questions](#5-frequently-asked-questions)
 
 ## 1. Introduction
 
-...To be updated
+Welcome to Upcycle - a perfect desktop app dedicate for managing rental businesses. The nature of these businesses 
+requires to deal with tons of data; therefore, noting down all information by notes and pen is not ideal for managers. 
+It is developed for rental business managers, who can type fast to efficiently keep track all of their customers, items, 
+and transactions via Command Line Interface with a single line of command. 
+
+This UserGuide introduces you a brief overview of our features with example of usage and expected outcome.
+
+>**Note:**
+> 
+>1. Upcycle commands are case-sensitive and space-insensitive. For example, ```upcycle``` and ```Upcycle``` are different words, ```Upcycle``` and ```Upcycle        ``` are the same words.
+>2. Parameters can be shuffled. For example, ```update-item /i [ITEM_ID] /p [PRICE]``` and ```update-item /p [PRICE] /i [ITEM_ID]``` are the same.
+>3. Phrases in ```[CAPITAL_WORDS]``` are the parameter for you to input.
+
+Let's hop into the sector [2. Quick Start](#2-quick-start) to start with us
 
 ## 2. Quick Start
 
@@ -53,12 +61,19 @@ This section allows users to understand all the features we offered, including t
 
 ### 3.1. Getting help
 
+>Get the list of all commands' format and their description
+
+Format: ```help```
+
+Expected outcome:
+```
 ...To be updated
+```
 
 ### 3.2. User-related features
 
 #### 3.2.1. ```add-user``` - Add a new user
->Adds a new user to the list
+>Add a new user to the list
 
 Format: ```add-user /n [USERNAME] /a [AGE] /c [CONTACT_NUMBER]```
 
@@ -79,7 +94,7 @@ ____________________________________________________________
 ```
 
 #### 3.2.2. ```remove-user``` - Remove a user
->Removes a user in the list
+>Remove a user in the list
 
 Format: ```remove-user /u [USERNAME]```
 
@@ -116,9 +131,11 @@ Username: jingwei Age: 19 Contact: 22384729
 ____________________________________________________________
 ```
 
+**...To be updated(List, Find user)**
+
 ### 3.3. Item-related features
 #### 3.3.1. ```add-item``` - Add a new item
->Adds a new item to the list
+>Add a new item to the list
 
 Format: ```add-item /n [ITEM_NAME] /c [CATEGORY_INDEX] /p [PRICE] /o [USERNAME]```
 
@@ -139,7 +156,7 @@ ____________________________________________________________
 ```
 
 #### 3.3.2. ```remove-item``` - Remove an item
->Removes an item in the list
+>Remove an item in the list
 
 Format: ```remove-item /i [ITEM_ID]```
 
@@ -199,9 +216,11 @@ Here are 3 item(s) in your filtered list:
 ____________________________________________________________
 ```
 
+**...To be updated(List, Find, Update item, List categories)**
+
 ### 3.4. Transaction-related features
 #### 3.4.1. ```add-tx``` - Add a new transaction
->Adds a new transaction to the list
+>Add a new transaction to the list
 
 Format: ```add-tx /i [ITEM_ID] /b [BORROWER_NAME] /d [DURATION] /c [CREATED_DATE]```
 
@@ -221,7 +240,7 @@ ____________________________________________________________
 ```
 
 #### 3.4.2. ```remove-tx``` - Remove a transaction
->Removes a transaction in the list
+>Remove a transaction in the list
 
 Format: ```remove-tx /t [TRANSACTION_ID]```
 
@@ -237,7 +256,6 @@ OK! I will remove the following item:
 Status: [On loan] TransactionID: 80902c3b ItemName: weight ItemID: 2cc4edf3 BorrowerID: thanh ReturnDate: Tue, Oct 25 2022 (4 day(s) remaining)
 Total transactions(s) in database: 2
 ____________________________________________________________
-
 ```
 
 #### 3.4.3. ```view-tx``` - View a transaction
@@ -256,12 +274,28 @@ ____________________________________________________________
 Here is the transaction you requested to view: 
 Status: [Returned] TransactionID: 4f7f7fe8 ItemName: weight ItemID: 5b727b2e BorrowerID: jingwei ReturnedDate: Sat, Oct 08 2022
 ____________________________________________________________
-
 ```
+
+**...To be updated(List, Update, View Tx by status)**
 
 ### 3.5. Exit Program
 
-...To be updated
+>Exit the program
+
+Format: ```bye```
+
+Note:
+1. After running this command, your data in user list, item list and transaction list are stored in 3 file 
+```user.txt```, ```item.txt```, and ```transaction.txt``` in ```/data/``` folders, respectively
+
+Example of usage: ```bye```
+
+Expected outcome:
+```
+____________________________________________________________
+Bye! See you again
+____________________________________________________________
+```
 
 
 ## 4. Command Summary
@@ -287,6 +321,8 @@ ____________________________________________________________
 
 ## 5. Frequently Asked Questions
 
-**Q**: How do I transfer my data to another computer?
+How do I transfer my data to another computer?
 
-**A**: {your answer here}
+>On your other computer, download your ```Upcycle.jar``` file following the instructions in [Quick Start](#2-quick-start). Then, you just copy the \data\ folder and paste into your folder for Upcycle on your new computer. That's it, now you can run our app with your previous data on another computer.
+
+

@@ -64,15 +64,19 @@ public class TransactionStorage extends Storage {
             fileWriter.write(formattedTransactionList);
             fileWriter.close();
         } catch (IOException e) {
-            int startIndex = transactionFilePath.lastIndexOf("/");
-            String fileDirectory =
-                    transactionFilePath.replace(transactionFilePath.substring(startIndex), "");
-            File file = new File(fileDirectory);
-            if (file.mkdir()) {
-                writeData(transactionList);
-            } else {
-                throw new StoreFailureException(MESSAGE_STORE_INVALID);
-            }
+            makeTransactionDir(transactionList);
+        }
+    }
+
+    public void makeTransactionDir(TransactionList transactionList) throws StoreFailureException {
+        int startIndex = transactionFilePath.lastIndexOf("/");
+        String fileDirectory =
+                transactionFilePath.replace(transactionFilePath.substring(startIndex), "");
+        File file = new File(fileDirectory);
+        if (file.mkdir()) {
+            writeData(transactionList);
+        } else {
+            throw new StoreFailureException(MESSAGE_STORE_INVALID);
         }
     }
 
