@@ -13,6 +13,7 @@ ____________________________________________________________
 ____________________________________________________________
 Hello! I'm Moo and I will help you to manage your finances.
 Budget remained for current month: $1000
+REMINDER: Continue to stay within your budget for this month! Good fortune!
 Enter <help> if you need the list of commands.
 ____________________________________________________________
 ____________________________________________________________

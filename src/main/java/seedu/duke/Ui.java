@@ -9,7 +9,6 @@ import static seedu.duke.common.InfoMessages.INFO_DIVIDER;
 import static seedu.duke.common.InfoMessages.INFO_GREET;
 import static seedu.duke.common.InfoMessages.INFO_HELP_GREET;
 import static seedu.duke.common.InfoMessages.INFO_HELP_PROMPT;
-import static seedu.duke.common.InfoMessages.INFO_REMAINING_BUDGET;
 import static seedu.duke.common.InfoMessages.INFO_BUDGET_SET_SUCCESSFUL;
 
 public class Ui {

@@ -10,9 +10,12 @@ import static seedu.duke.common.InfoMessages.INFO_EXCEEDING_BUDGET;
 import static seedu.duke.common.InfoMessages.INFO_REMAINING_BUDGET;
 import static seedu.duke.common.InfoMessages.INFO_BUDGET_EXCEEDED_TIPS;
 import static seedu.duke.common.InfoMessages.INFO_BUDGET_NOT_EXCEEDED_TIPS;
+import static seedu.duke.common.InfoMessages.INFO_BUDGET_NOT_EXCEEDED_REMINDER;
+import static seedu.duke.common.InfoMessages.INFO_BUDGET_EXCEEDED_REMINDER;
 import static seedu.duke.common.InfoMessages.DOLLAR_SIGN;
 import static seedu.duke.common.InfoMessages.COLON_SPACE;
 import static seedu.duke.common.InfoMessages.FULL_STOP_SPACE;
+import static seedu.duke.common.InfoMessages.LINE_SEPARATOR;
 
 //@@author wcwy
 
@@ -78,6 +81,9 @@ public class Budget {
         String monthYear = "current month";
         long currentMonthTotalExpense = TransactionList.calculateMonthlyTotalExpense(todayDate);
         String message = generateBudgetRemainingMessage(currentMonthTotalExpense, false, monthYear);
+
+        boolean currentMonthHasExceededBudget = hasExceededBudget(calculateBudgetLeft(currentMonthTotalExpense));
+        message += LINE_SEPARATOR + generateBudgetReminder(currentMonthHasExceededBudget);
 
         return message;
     }
@@ -153,6 +159,15 @@ public class Budget {
         } else {
             return INFO_BUDGET_NOT_EXCEEDED_TIPS.toString();
         }
+    }
+
+    private static String generateBudgetReminder(boolean hasExceededBudget) {
+        if (hasExceededBudget) {
+            return INFO_BUDGET_EXCEEDED_REMINDER.toString();
+        } else {
+            return INFO_BUDGET_NOT_EXCEEDED_REMINDER.toString();
+        }
+
     }
 
 
