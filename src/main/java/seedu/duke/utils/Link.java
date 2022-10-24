@@ -1,5 +1,6 @@
 package seedu.duke.utils;
 
+import seedu.duke.exceptions.YamomException;
 import seedu.duke.model.LessonType;
 import seedu.duke.model.Module;
 import seedu.duke.model.RawLesson;
@@ -54,15 +55,22 @@ public class Link {
 
     public static final int MODULES_PARAM_INDEX = 5;
 
+    private static final String LINK_EXAMPLE = "https://nusmods.com/timetable/sem-SEMESTER_NUMBER"
+            + "/share?MODULE_INFO&MODULE_INFO";
+
+    private static final String LINK_PROCESS_ERROR_MESSAGE = "Error processing NUSMod Link,"
+            + "Kindly ensure that the link is in the format of "
+            + System.lineSeparator() + LINK_EXAMPLE;
+
     /**
      * Parses the NUSMods export link into module code and lessons information.
      *
      * @param link  for exporting to NUSMods
      * @param state current state of the application to be saved to
      */
-    public static void parseLink(String link, State state) {
+    public static void parseLink(String link, State state) throws YamomException {
         if (link.isEmpty()) {
-            return;
+            throw new YamomException("No NUSMod Link given");
         }
         //Initial string :https://nusmods.com/timetable/sem-SEMESTER_NUMBER/share?MODULE_INFO&MODULE_INFO
         String[] infoParam = link.split(DELIMITER);
@@ -74,13 +82,15 @@ public class Link {
         infoParam[4] = "sem-SEMESTER_NUMBER"; <- SEMESTER_PARAM_INDEX
         infoParam[5] = "share?MODULE_INFO&MODULE_INFO"; <- MODULES_PARAM_INDEX
          */
-        String semesterParam = infoParam[SEMESTER_PARAM_INDEX];
+
         int semester;
         try {
+            String semesterParam = infoParam[SEMESTER_PARAM_INDEX];
             semester = getSemesterFromParam(semesterParam);
-        } catch (NumberFormatException e) {
-            semester = 0;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new YamomException(LINK_PROCESS_ERROR_MESSAGE);
         }
+
         if (Arrays.asList(1, 2, 3, 4).contains(semester)) {
             state.setSemester(semester);
         } else {

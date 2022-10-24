@@ -7,7 +7,8 @@ __ __ _____ _____ _____ _____
   |_| |__|__|_|_|_|_____|_|_|_|
 
 How can I help you today?
---------------------------------------
+Enter "help" to get started!
+Sem [1] >> --------------------------------------
 Here are all the commands available in YAMOM!
 
 add	: add a module into YAMOM timetable.
@@ -41,7 +42,7 @@ Usage :
 Note: [ ] are required elements, < > are optional elements
 For more detailed guide, please visit https://ay2223s1-cs2113-f11-3.github.io/tp/
 --------------------------------------
---------------------------------------
+Sem [1] >> --------------------------------------
 Search Result:
 Total 2 module(s) found
 
@@ -50,7 +51,7 @@ GEA1000N Quantitative Reasoning with Data
 
 To get full details of the module, type 'get <module code>'
 --------------------------------------
---------------------------------------
+Sem [1] >> --------------------------------------
 Search Result:
 Total 2 module(s) found
 
@@ -59,19 +60,19 @@ CS2113T Software Engineering & Object-Oriented Programming
 
 To get full details of the module, type 'get <module code>'
 --------------------------------------
---------------------------------------
+Sem [1] >> --------------------------------------
 CS2113 has been added
 --------------------------------------
---------------------------------------
+Sem [1] >> --------------------------------------
 Error! 	0 arguments expected
 --------------------------------------
---------------------------------------
+Sem [1] >> --------------------------------------
 Slot selected successfully
 --------------------------------------
---------------------------------------
+Sem [1] >> --------------------------------------
 Error! 	0 arguments expected
 --------------------------------------
---------------------------------------
+Sem [1] >> --------------------------------------
 Shutting down......
 --------------------------------------
 This is your export link:

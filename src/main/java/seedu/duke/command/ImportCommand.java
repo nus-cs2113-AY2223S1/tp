@@ -6,6 +6,9 @@ import seedu.duke.utils.State;
 import seedu.duke.utils.Storage;
 import seedu.duke.utils.Ui;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class ImportCommand extends Command {
     public static final String COMMAND_WORD = "import";
     public static final String COMMAND_USAGE = "import [NUSMods_LINK]";
@@ -27,9 +30,15 @@ public class ImportCommand extends Command {
     @Override
     public void execute(State state, Ui ui, Storage storage) {
 
-        Link.parseLink(nusModLink, state);
-        ui.addMessage(getExecutionMessage());
+        Logger logger = Logger.getLogger("Importing from NUSMod");
+        try {
+            Link.parseLink(nusModLink, state);
+            ui.addMessage(getExecutionMessage());
+        } catch (YamomException e) {
+            ui.addMessage(e.getMessage());
+        }
         ui.displayUi();
+        logger.log(Level.FINE, "Timetable imported from YAMOM");
     }
 
     @Override

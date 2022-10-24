@@ -36,6 +36,7 @@ public class Duke {
 
         while (!isExit) {
             try {
+                ui.displayUserPrompt(state.getSemester());
                 String userFullCommand = ui.readNext();
                 ui.displayDivider();
                 Command command = Parser.parse(userFullCommand);
