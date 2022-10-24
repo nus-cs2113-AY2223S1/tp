@@ -33,6 +33,35 @@
 
 #### BuildManager
 
+### Edit Mode
+
+#### Build 
+
+![](/images/Build.png)
+
+A build is a collection of components that are used to create a PC. A build can be saved and loaded from the storage. 
+The user can also export the build to a text file via the export functionality. 
+
+In our application build is a class object which contains a 2D linked hash map of components. LinkedHashMap2D is a class
+representing a 2D linked hash map data structure. The keys of the outer map are the component types and the keys of the inner
+are the component names. The values of the inner map are the components themselves.
+
+The user can add, delete, and view the components in the build. The user can also
+perform aggregate operations on the build such as viewing the total price of the build and viewing the total wattage of the build.
+There are also check compatibility functions that check if the build's components are compatible with each other in different ways. Such as:
+- Check if the power supply is compatible with the build's total power consumption
+- Checking if the build's motherboard is compatible with the build's CPU and Cooler
+- Checking if the form factor of the build's case is compatible with the build's motherboard
+- Checking if the build's storage is compatible with the case expansion slots
+- Checking if the number of the build's GPUs is compatible with the motherboard GPU slots
+- Checking if the number of the build's RAM is compatible with the motherboard RAM slots
+
+### Export
+
+In our application export is a utility class. The user can export all builds or a specific build to a text file. The user can also export
+all builds to a CSV file. 
+
+
 ## Product scope
 ### Target user profile
 
