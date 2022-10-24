@@ -33,6 +33,11 @@ public class UI {
         return sc.nextLine();
     }
 
+    public static String getModuleCodeFromUser() {
+        System.out.println("Please enter module code");
+        return sc.nextLine();
+    }
+
     public static String getCommandFromUser() {
         System.out.println("Here is a list of things I can do, enter the appropriate command to continue!\n"
                 + "1. add" + PRINTED_GAP + "2. list" + PRINTED_GAP + "3. info" + PRINTED_GAP

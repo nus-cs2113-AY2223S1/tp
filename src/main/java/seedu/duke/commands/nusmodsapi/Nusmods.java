@@ -4,9 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
-import seedu.duke.Duke;
 import seedu.duke.Exceptions;
-import seedu.duke.UI;
 import seedu.duke.module.lessons.Lesson;
 
 import java.io.IOException;
@@ -29,14 +27,12 @@ public class Nusmods {
     private final int moduleDescription = 2;
     private static final Logger lgr = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
-    private String setUri() {
+    private String setUri(String moduleCode) {
         boolean validUri = false;
         String mod = null;
         while (!validUri) {
             try {
-                if (UI.sc.hasNextLine()) {
-                    mod = UI.sc.nextLine().toUpperCase().trim();
-                }
+                mod = moduleCode.toUpperCase().trim();
                 new URL(baseUri + mod + ".json").toURI();
                 validUri = true;
             } catch (MalformedURLException | URISyntaxException e) {
@@ -47,19 +43,19 @@ public class Nusmods {
         return baseUri + mod + ".json";
     }
 
-    private HttpResponse<String> getResponse() throws IOException, InterruptedException {
+    private HttpResponse<String> getResponse(String moduleCode) throws IOException, InterruptedException {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
                 .header("accept", "application/json")
-                .uri(URI.create(setUri()))
+                .uri(URI.create(setUri(moduleCode)))
                 .build();
         return client.send(request, HttpResponse.BodyHandlers.ofString());
     }
 
-    public String[] getModuleInfo() throws IOException, InterruptedException {
+    public String[] getModuleInfo(String moduleCode) throws IOException, InterruptedException {
         while (true) {
-            HttpResponse<String> response = getResponse();
+            HttpResponse<String> response = getResponse(moduleCode);
             if (response.statusCode() != 200) {
                 System.out.println("Module not found, please try again.");
             } else {
@@ -79,12 +75,13 @@ public class Nusmods {
         return info;
     }
 
-    public List<Lesson> addModuleInfo(String currentSemester, String[] info)
-            throws IOException, InterruptedException, Exceptions.InvalidSemException, Exceptions.InvalidModuleCode {
+    public List<Lesson> addModuleInfo(String currentSemester, String[] info, String moduleCode)
+            throws IOException, InterruptedException, Exceptions.InvalidSemException,
+            Exceptions.InvalidModuleCodeException {
         while (true) {
-            HttpResponse<String> response = getResponse();
+            HttpResponse<String> response = getResponse(moduleCode);
             if (response.statusCode() != 200) {
-                throw new Exceptions.InvalidModuleCode();
+                throw new Exceptions.InvalidModuleCodeException();
             } else {
                 lgr.info("api call successful, module exists");
                 return addModuleComponents(response.body(), currentSemester, info);
