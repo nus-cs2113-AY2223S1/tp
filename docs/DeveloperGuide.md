@@ -63,6 +63,7 @@ ___
 ## Design
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 ### Architecture
+![Software Architecture Diagram](diagrams/ArchitectureDiagram.png)
 ### UI Component
 ### Parser Component
 ### Client Component
