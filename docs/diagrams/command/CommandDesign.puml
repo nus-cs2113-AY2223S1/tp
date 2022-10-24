@@ -28,7 +28,7 @@ class ExitCommand {
  + boolean executeCommand()
 }
 
-CommandInterface <|-- Command
+CommandInterface <|.. Command
 Command <|-- UserCommand
 Command <|-- TransactionCommand
 Command <|-- ItemCommand
