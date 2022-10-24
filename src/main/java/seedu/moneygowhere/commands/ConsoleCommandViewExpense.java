@@ -1,7 +1,9 @@
 package seedu.moneygowhere.commands;
 
+//@@author xzynos
+
 /**
- * Stores the view-expense command and its arguments.
+ * Stores the command View-Expense and its arguments.
  */
 @SuppressWarnings("FieldMayBeFinal")
 public class ConsoleCommandViewExpense extends ConsoleCommand {

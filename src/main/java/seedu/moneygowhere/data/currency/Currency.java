@@ -2,6 +2,8 @@ package seedu.moneygowhere.data.currency;
 
 import java.math.BigDecimal;
 
+//@@author jeyvia
+
 /**
  * Stores data associated with a currency.
  */

@@ -1,10 +1,10 @@
 package seedu.moneygowhere.storage;
 
+import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.w3c.dom.DOMException;
 import org.xml.sax.SAXException;
 import seedu.moneygowhere.commands.ConsoleCommandSortExpense;
 import seedu.moneygowhere.common.Messages;
@@ -14,7 +14,7 @@ import seedu.moneygowhere.data.income.Income;
 import seedu.moneygowhere.data.recurringpayments.RecurringPayment;
 import seedu.moneygowhere.data.recurringpayments.RecurringPaymentManager;
 import seedu.moneygowhere.data.target.Target;
-import seedu.moneygowhere.exceptions.LocalStorageLoadDataInputError;
+import seedu.moneygowhere.exceptions.storage.LocalStorageLoadDataException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -74,6 +74,8 @@ import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_TARGET_E
 import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_TARGET_ID_ATTRIBUTE;
 import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_TARGET_NAME_ELEMENT;
 
+//@@author LokQiJun
+
 /**
  * Stores and load data to and from storage.
  */
@@ -111,7 +113,7 @@ public class LocalStorage {
         try {
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
-            db.setErrorHandler(new NullErrorHandler());
+            db.setErrorHandler(new LocalStorageNullErrorHandler());
             Document doc = db.parse(saveFile);
             doc.getDocumentElement().normalize();
             NodeList sortConfig = doc.getElementsByTagName(XML_SORTCONFIG_ELEMENT);
@@ -135,13 +137,13 @@ public class LocalStorage {
                     recurringPaymentManager.addRecurringPayment(loadRecurringPayment);
                 }
             }
-            System.out.println(Messages.LOCAL_STORAGE_LOAD_SUCCESS);
+            System.out.println(Messages.LOCAL_STORAGE_MESSAGE_LOAD_SUCCESS);
         } catch (FileNotFoundException e) {
             initialiseFile();
             System.out.println(Messages.LOCAL_STORAGE_ERROR_NO_LOAD_FILE);
         } catch (SAXException | IOException | ParserConfigurationException e) {
             System.out.println(Messages.LOCAL_STORAGE_ERROR_CORRUPTED_OR_EMPTY_LOAD_FILE);
-        } catch (LocalStorageLoadDataInputError | NumberFormatException
+        } catch (LocalStorageLoadDataException | NumberFormatException
                  | NullPointerException | DateTimeParseException e) {
             if (!hasParsedSortconfig) {
                 System.out.println(Messages.LOCAL_STORAGE_SORTCONFIG_ERROR_IN_LOAD_FILE);
@@ -173,7 +175,7 @@ public class LocalStorage {
             File externalFile = new File(filePath);
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
-            db.setErrorHandler(new NullErrorHandler());
+            db.setErrorHandler(new LocalStorageNullErrorHandler());
             Document doc = db.parse(externalFile);
             doc.getDocumentElement().normalize();
             NodeList expenseList = doc.getElementsByTagName(XML_EXPENSE_ELEMENT);
@@ -193,13 +195,13 @@ public class LocalStorage {
                     recurringPaymentManager.addRecurringPayment(loadRecurringPayment);
                 }
             }
-            System.out.println(Messages.LOCAL_STORAGE_LOAD_SUCCESS);
-            System.out.println(Messages.LOCAL_STORAGE_MERGE_EXTERNAL_DATA_SUCCESSFUL);
+            System.out.println(Messages.LOCAL_STORAGE_MESSAGE_LOAD_SUCCESS);
+            System.out.println(Messages.LOCAL_STORAGE_MESSAGE_MERGE_FILE_SUCCESS);
         } catch (FileNotFoundException e) {
             System.out.println(Messages.LOCAL_STORAGE_ERROR_NO_LOAD_FILE);
         } catch (SAXException | IOException | ParserConfigurationException e) {
             System.out.println(Messages.LOCAL_STORAGE_ERROR_CORRUPTED_OR_EMPTY_LOAD_FILE);
-        } catch (LocalStorageLoadDataInputError | NumberFormatException
+        } catch (LocalStorageLoadDataException | NumberFormatException
                  | NullPointerException | DateTimeParseException e) {
             if (!hasParsedExpenses) {
                 System.out.println(Messages.LOCAL_STORAGE_EXPENSE_ERROR_IN_LOAD_FILE
@@ -232,11 +234,11 @@ public class LocalStorage {
      *
      * @param node containing information about an expense
      * @return an Expense object
-     * @throws LocalStorageLoadDataInputError if type of input node is incorrect
+     * @throws LocalStorageLoadDataException if type of input node is incorrect
      */
-    private Expense createExpense(Node node) throws LocalStorageLoadDataInputError {
+    private Expense createExpense(Node node) throws LocalStorageLoadDataException {
         if (node.getNodeType() != Node.ELEMENT_NODE) {
-            throw new LocalStorageLoadDataInputError();
+            throw new LocalStorageLoadDataException();
         }
         Element element = (Element) node;
 
@@ -270,7 +272,7 @@ public class LocalStorage {
                 .item(0).getTextContent();
 
         if (name.isEmpty() || name.trim().isEmpty() || currency.isEmpty() || currency.trim().isEmpty()) {
-            throw new LocalStorageLoadDataInputError();
+            throw new LocalStorageLoadDataException();
         }
 
         String modeOfPayment = element.getElementsByTagName(XML_EXPENSE_MODE_OF_PAYMENT_ELEMENT)
@@ -286,11 +288,11 @@ public class LocalStorage {
      *
      * @param node containing information about a target
      * @return a Target object
-     * @throws LocalStorageLoadDataInputError if type of input node is incorrect
+     * @throws LocalStorageLoadDataException if type of input node is incorrect
      */
-    private Target createTarget(Node node) throws LocalStorageLoadDataInputError {
+    private Target createTarget(Node node) throws LocalStorageLoadDataException {
         if (node.getNodeType() != Node.ELEMENT_NODE) {
-            throw new LocalStorageLoadDataInputError();
+            throw new LocalStorageLoadDataException();
         }
         Element element = (Element) node;
         String name = element.getElementsByTagName(XML_TARGET_NAME_ELEMENT)
@@ -320,7 +322,7 @@ public class LocalStorage {
                 || currencyCurrentAmount.trim().isEmpty()
                 || currencyAmount.isEmpty()
                 || currencyAmount.trim().isEmpty()) {
-            throw new LocalStorageLoadDataInputError();
+            throw new LocalStorageLoadDataException();
         }
 
         return new Target(name, dateTime, description, amount, currentAmount);
@@ -331,11 +333,11 @@ public class LocalStorage {
      *
      * @param node containing information about a recurring payment
      * @return a RecurringPayment object
-     * @throws LocalStorageLoadDataInputError if type of input node is incorrect
+     * @throws LocalStorageLoadDataException if type of input node is incorrect
      */
-    private RecurringPayment createRecurringPayment(Node node) throws LocalStorageLoadDataInputError {
+    private RecurringPayment createRecurringPayment(Node node) throws LocalStorageLoadDataException {
         if (node.getNodeType() != Node.ELEMENT_NODE) {
-            throw new LocalStorageLoadDataInputError();
+            throw new LocalStorageLoadDataException();
         }
         Element element = (Element) node;
         String name = element.getElementsByTagName(XML_RECURRING_PAYMENT_NAME_ELEMENT)
@@ -362,7 +364,7 @@ public class LocalStorage {
                 .item(0).getTextContent());
 
         if (name.isEmpty() || name.trim().isEmpty() || currency.isEmpty() || currency.trim().isEmpty()) {
-            throw new LocalStorageLoadDataInputError();
+            throw new LocalStorageLoadDataException();
         }
 
         return new RecurringPayment(name, interval, description, amount, category, currency);
@@ -373,11 +375,11 @@ public class LocalStorage {
      *
      * @param node containing information about an income
      * @return an Income object
-     * @throws LocalStorageLoadDataInputError if type of input node is incorrect
+     * @throws LocalStorageLoadDataException if type of input node is incorrect
      */
-    private Income createIncome(Node node) throws LocalStorageLoadDataInputError {
+    private Income createIncome(Node node) throws LocalStorageLoadDataException {
         if (node.getNodeType() != Node.ELEMENT_NODE) {
-            throw new LocalStorageLoadDataInputError();
+            throw new LocalStorageLoadDataException();
         }
         Element element = (Element) node;
         String name = element.getElementsByTagName(XML_INCOME_NAME_ELEMENT)
@@ -398,7 +400,7 @@ public class LocalStorage {
                 .getNamedItem(XML_EXPENSE_AMOUNT_CURRENCY_ATTRIBUTE).getTextContent();
 
         if (name.isEmpty() || name.trim().isEmpty() || currency.isEmpty() || currency.trim().isEmpty()) {
-            throw new LocalStorageLoadDataInputError();
+            throw new LocalStorageLoadDataException();
         }
 
         return new Income(name, dateTime, description, amount);

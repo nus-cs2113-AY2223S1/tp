@@ -2,13 +2,15 @@ package seedu.moneygowhere.data.expense;
 
 import seedu.moneygowhere.commands.ConsoleCommandSortExpense;
 import seedu.moneygowhere.common.Messages;
-import seedu.moneygowhere.exceptions.ExpenseManagerExpenseNotFoundException;
+import seedu.moneygowhere.exceptions.data.expense.ExpenseManagerExpenseNotFoundException;
 import seedu.moneygowhere.parser.ConsoleParserConfigurations;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
+
+//@@author xzynos
 
 /**
  * Stores and manages a list of expenses.
@@ -33,10 +35,12 @@ public class ExpenseManager {
         };
     }
 
+    //@@author xzynos
     public void addExpense(Expense expense) {
         expenses.add(expense);
     }
 
+    //@@author xzynos
     public Expense getExpense(int expenseIndex) throws ExpenseManagerExpenseNotFoundException {
         try {
             return expenses.get(expenseIndex);
@@ -45,10 +49,12 @@ public class ExpenseManager {
         }
     }
 
+    //@@author xzynos
     public ArrayList<Expense> getExpenses() {
         return expenses;
     }
 
+    //@@author yuu-chennn
     public ArrayList<Expense> getExpensesByCategory(String categoryName) throws ExpenseManagerExpenseNotFoundException {
         ArrayList<Expense> expensesByCategory = new ArrayList<>();
 
@@ -65,6 +71,7 @@ public class ExpenseManager {
         return expensesByCategory;
     }
 
+    //@@author yuu-chennn
     public ArrayList<Expense> getExpensesByName(String expenseName) throws ExpenseManagerExpenseNotFoundException {
         ArrayList<Expense> expensesByName = new ArrayList<>();
 
@@ -81,6 +88,7 @@ public class ExpenseManager {
         return expensesByName;
     }
 
+    //@@author xzynos
     public void deleteExpense(int expenseIndex) throws ExpenseManagerExpenseNotFoundException {
         try {
             expenses.remove(expenseIndex);
@@ -89,6 +97,7 @@ public class ExpenseManager {
         }
     }
 
+    //@@author xzynos
     public void editExpense(int expenseIndex, Expense expense) throws ExpenseManagerExpenseNotFoundException {
         try {
             expenses.set(expenseIndex, expense);
@@ -98,11 +107,13 @@ public class ExpenseManager {
         }
     }
 
+    //@@author jeyvia
     public void sortExpenses() {
         Comparator<Expense> comparator = getComparator();
         expenses.sort(comparator);
     }
 
+    //@@author jeyvia
     public void updateSortExpenses(ConsoleCommandSortExpense commandSortExpense) {
         String type = commandSortExpense.getType();
         String order = commandSortExpense.getOrder();
@@ -110,9 +121,12 @@ public class ExpenseManager {
         sortExpenses();
     }
 
+    //@@author jeyvia
     public ConsoleCommandSortExpense getSortCommandSetting() {
         return sortCommandSetting;
     }
+
+    //@@author jeyvia
 
     /**
      * Function to get the comparator based on type of sorting.
@@ -137,6 +151,8 @@ public class ExpenseManager {
         return comparator;
     }
 
+    //@@author jeyvia
+
     /**
      * Comparator sorts by date in ascending or descending order.
      */
@@ -155,6 +171,8 @@ public class ExpenseManager {
         }
     };
 
+    //@@author jeyvia
+
     /**
      * Comparator sorts from A to Z if ascending order, Z to A if descending order.
      */
@@ -169,6 +187,8 @@ public class ExpenseManager {
             return expenseName2.compareTo(expenseName1);
         }
     };
+
+    //@@author jeyvia
 
     /**
      * Comparator sorts by amount, in ascending/descending order.
@@ -187,6 +207,8 @@ public class ExpenseManager {
             return expenseAmount2.compareTo(expenseAmount1);
         }
     };
+
+    //@@author jeyvia
 
     /**
      * Comparator sorts currencies from A to Z if ascending order, Z to A if descending order.

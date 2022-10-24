@@ -1,7 +1,9 @@
 package seedu.moneygowhere.commands;
 
+//@@author penguin-s
+
 /**
- * Stores the view-target command and its arguments.
+ * Stores the command View-Target and its arguments.
  */
 @SuppressWarnings("FieldMayBeFinal")
 public class ConsoleCommandViewTarget extends ConsoleCommand {
