@@ -1,11 +1,14 @@
 package seedu.duke.command;
 
 //@@author brian-vb
+
 import seedu.duke.Storage;
 import seedu.duke.Ui;
 import seedu.duke.data.TransactionList;
+
 import seedu.duke.data.transaction.Transaction;
 import seedu.duke.exception.GlobalInvalidIndexException;
+
 import seedu.duke.exception.MoolahException;
 
 import seedu.duke.exception.StorageWriteErrorException;
@@ -141,6 +144,7 @@ public class EditCommand extends Command {
      */
     @Override
     public void execute(TransactionList transactions, Ui ui, Storage storage) throws MoolahException {
+
         try {
             editLogger.setLevel(Level.SEVERE);
             editLogger.log(Level.INFO, "Edit Command checks whether the index is valid "
@@ -219,6 +223,7 @@ public class EditCommand extends Command {
             throw new StorageWriteErrorException();
         }
         editLogger.log(Level.INFO, "This is the end of the edit command.");
+
     }
 
     /**

@@ -7,6 +7,9 @@ import seedu.duke.Ui;
 import seedu.duke.data.Budget;
 import seedu.duke.data.TransactionList;
 import seedu.duke.exception.MoolahException;
+import seedu.duke.exception.StorageWriteErrorException;
+
+import java.io.IOException;
 
 import static seedu.duke.command.CommandTag.COMMAND_TAG_BUDGET_AMOUNT;
 
@@ -77,8 +80,14 @@ public class BudgetCommand extends Command {
      */
     @Override
     public void execute(TransactionList transactions, Ui ui, Storage storage) throws MoolahException {
-        Budget.setBudget(budgetAmount);
-        ui.showSetBudgetAcknowledgementMessage(Long.toString(budgetAmount));
+        try {
+            Budget.setBudget(budgetAmount);
+            ui.showSetBudgetAcknowledgementMessage(Long.toString(budgetAmount));
+            //@@author chinhan99
+            storage.writeToFile(transactions.getTransactions());
+        } catch (IOException e) {
+            throw new StorageWriteErrorException();
+        }
     }
 
     //@@author paullowse
