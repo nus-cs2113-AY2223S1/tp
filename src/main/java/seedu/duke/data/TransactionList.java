@@ -179,7 +179,8 @@ public class TransactionList {
      * @return A string containing the formatted transaction list.
      * @throws InputTransactionInvalidTypeException If class type cannot be found in the packages.
      */
-    public String listTransactions(ArrayList<Transaction> timeTransactions, String type, String category, LocalDate date)
+    public String listTransactions(ArrayList<Transaction> timeTransactions, String type,
+                                   String category, LocalDate date)
             throws InputTransactionInvalidTypeException {
         String transactionsList = "";
 

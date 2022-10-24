@@ -59,11 +59,12 @@ public abstract class ListAndStatsCommand extends Command {
     }
 
     //@@author chydarren
+
     /**
      * Checks if the input contains month or/and year tags.
      *
      * @return 1 if both tags are given, 2 if only year is given, 3 if only month is given,
-     * 0 if both are not given.
+     *      0 if both are not given.
      */
     public int containMonthYear() {
         if (month != UNDEFINED_PARAMETER && year != UNDEFINED_PARAMETER) {
@@ -97,17 +98,18 @@ public abstract class ListAndStatsCommand extends Command {
      */
     public void parseDateIntervalsTags() throws MoolahException {
         if (containMonthYear() != FALSE && containPeriodNumber() != FALSE) {
-            datedTransactionsLogger.log(Level.WARNING, "An exception has been caught as an invalid combination of tags "
-                    + "has been given.");
+            datedTransactionsLogger.log(Level.WARNING, "An exception has been caught "
+                    + "as an invalid combination of tags has been given.");
             throw new GlobalUnsupportedTagException();
         } else if (containMonthYear() == TRUE_INVALID_OR) {
             // Throws a missing tag if number and period was not given together
-            datedTransactionsLogger.log(Level.WARNING, "An exception has been caught as a month was given without a year.");
+            datedTransactionsLogger.log(Level.WARNING, "An exception has been caught as "
+                    + "a month was given without a year.");
             throw new GlobalMissingYearTagException();
         } else if (containPeriodNumber() == TRUE_OR) {
             // Throws a missing tag if number and period was not given together
-            datedTransactionsLogger.log(Level.WARNING, "An exception has been caught as number and period needs to be "
-                    + "given together.");
+            datedTransactionsLogger.log(Level.WARNING, "An exception has been caught as "
+                    + "number and period needs to be given together.");
             throw new GlobalMissingPeriodNumberTagException();
         }
     }

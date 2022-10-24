@@ -5,7 +5,7 @@ import seedu.duke.Storage;
 import seedu.duke.Ui;
 import seedu.duke.data.TransactionList;
 import seedu.duke.data.transaction.Transaction;
-import seedu.duke.exception.*;
+import seedu.duke.exception.MoolahException;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
