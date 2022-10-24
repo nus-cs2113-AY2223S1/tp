@@ -17,6 +17,8 @@ import static seedu.duke.common.Constants.MAX_AMOUNT_VALUE;
 import static seedu.duke.common.Constants.MAX_TRANSACTIONS_COUNT;
 import static seedu.duke.common.DateFormats.DATE_MONTH_PATTERN;
 import static seedu.duke.common.InfoMessages.INFO_STATS_CATEGORIES_HEADER;
+import static seedu.duke.common.InfoMessages.LINE_SEPARATOR;
+import static seedu.duke.common.InfoMessages.DOLLAR_SIGN;
 import static seedu.duke.common.InfoMessages.INFO_STATS_MONTHS_COMMENT_ONE;
 import static seedu.duke.common.InfoMessages.INFO_STATS_MONTHS_COMMENT_TWO;
 import static seedu.duke.common.InfoMessages.INFO_STATS_MONTHS_COMMENT_THREE;
@@ -32,7 +34,6 @@ public class TransactionList {
     //@@author chydarren
     private static final String PREFIX_CATEGORY = "[";
     private static final String POSTFIX_CATEGORY = "]";
-    private static final String SYMBOL_DOLLAR = "$";
     private static final String INCOME = "income";
     private static final String EXPENSE = "expense";
     private static final String CLASS_TYPE_EXPENSE = "seedu.duke.data.transaction.Expense";
@@ -40,7 +41,6 @@ public class TransactionList {
     private static final int START = 0;
     private static final int END = 1;
     private static final int UNDEFINED_PARAMETER = -1;
-    private static final String LINE_SEPARATOR = System.lineSeparator();
 
     //@@author chinhan99
     private static ArrayList<Transaction> transactions;
@@ -90,8 +90,8 @@ public class TransactionList {
      * @return A string tht states the details of the deleted transaction.
      */
     public String deleteTransaction(int index) {
-        Transaction transaction = transactions.get(index - 1);
-        transactions.remove(index - 1);
+        Transaction transaction = transactions.get(index);
+        transactions.remove(index);
         return transaction.toString();
     }
 
@@ -225,7 +225,7 @@ public class TransactionList {
         for (Transaction transaction : transactions) {
             // Includes only transactions that contain the keywords used in the search expression
             if (transaction.toString().contains(keywords)) {
-                transactionsList += transaction + LINE_SEPARATOR;
+                transactionsList += transaction + LINE_SEPARATOR.toString();
             }
         }
         return transactionsList;
@@ -266,7 +266,7 @@ public class TransactionList {
         // Formats every entry in the hashmap into a categorical savings list
         for (HashMap.Entry<String, Integer> entry : categoricalSavings.entrySet()) {
             categoricalSavingsList += String.format("%s%s%s %s%s%s", PREFIX_CATEGORY, entry.getKey(),
-                    POSTFIX_CATEGORY, SYMBOL_DOLLAR, entry.getValue(), LINE_SEPARATOR);
+                    POSTFIX_CATEGORY, DOLLAR_SIGN, entry.getValue(), LINE_SEPARATOR);
         }
 
         return categoricalSavingsList;
@@ -349,11 +349,11 @@ public class TransactionList {
         for (HashMap.Entry<String, int[]> entry : monthlyExpenditure.entrySet()) {
             monthlyExpenditureList += String.format("%s%s%s%s", PREFIX_CATEGORY, entry.getKey(), POSTFIX_CATEGORY,
                     LINE_SEPARATOR);
-            monthlyExpenditureList += String.format("%s%s%s%s", "Income: ", SYMBOL_DOLLAR, entry.getValue()[0],
+            monthlyExpenditureList += String.format("%s%s%s%s", "Income: ", DOLLAR_SIGN, entry.getValue()[0],
                     LINE_SEPARATOR);
-            monthlyExpenditureList += String.format("%s%s%s%s", "Expense: ", SYMBOL_DOLLAR, entry.getValue()[1],
+            monthlyExpenditureList += String.format("%s%s%s%s", "Expense: ", DOLLAR_SIGN, entry.getValue()[1],
                     LINE_SEPARATOR);
-            monthlyExpenditureList += String.format("%s%s%s%s", "Savings: ", SYMBOL_DOLLAR, entry.getValue()[2],
+            monthlyExpenditureList += String.format("%s%s%s%s", "Savings: ", DOLLAR_SIGN, entry.getValue()[2],
                     LINE_SEPARATOR, LINE_SEPARATOR);
 
             int savingsPercentage = 100 * entry.getValue()[2] / entry.getValue()[0];
@@ -394,7 +394,7 @@ public class TransactionList {
         // Formats every entry in the hashmap into a categorical savings list
         for (Transaction entry : timeTransactions) {
             timeSavingsList += String.format("%s%s%s %s%s%s", PREFIX_CATEGORY, entry.getCategory(),
-                    POSTFIX_CATEGORY, SYMBOL_DOLLAR, entry.getAmount(), LINE_SEPARATOR);
+                    POSTFIX_CATEGORY, DOLLAR_SIGN, entry.getAmount(), LINE_SEPARATOR);
         }
 
         return timeSavingsList;
@@ -543,11 +543,15 @@ public class TransactionList {
      * @param date A date object in which the monthly total expenses calculated is based on.
      * @return A long value indicating the amount of expenses spent in the month.
      */
-    public long calculateMonthlyTotalExpense(LocalDate date) {
+    public static long calculateMonthlyTotalExpense(LocalDate date) {
         long totalExpense = 0;
         int month = date.getMonthValue();
         int year = date.getYear();
         for (Transaction transaction : transactions) {
+            // As sum of spending is to be calculated, thus only expense type transaction will be considered
+            if (!(transaction instanceof Expense)) {
+                continue;
+            }
             if (transaction.getDate().getMonthValue() == month && transaction.getDate().getYear() == year) {
                 /*
                     Since the maximum number of transaction is 1000000 and maximum amount of expense is 10000000,

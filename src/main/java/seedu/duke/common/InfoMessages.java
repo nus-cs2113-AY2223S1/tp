@@ -4,6 +4,12 @@ package seedu.duke.common;
  * Provides enum variables for storing custom program information messages.
  */
 public enum InfoMessages {
+    LINE_SEPARATOR(System.lineSeparator()),
+    SPACE(" "),
+    FULL_STOP("."),
+    FULL_STOP_SPACE(". "),
+    COLON_SPACE(": "),
+    DOLLAR_SIGN("$"),
     INFO_DIVIDER("____________________________________________________________"),
     INFO_ADD_EXPENSE("I have added the following Expense transaction:"),
     INFO_ADD_INCOME("I have added the following Income transaction:"),
@@ -38,7 +44,12 @@ public enum InfoMessages {
     INFO_PURGE_WARNING("Are you sure you want to proceed with this command? Please enter 'Y' to confirm."),
     INFO_BUDGET_SET_SUCCESSFUL("You have successfully updated the budget."),
     INFO_CURRENT_BUDGET("Monthly budget set as: $"),
-    INFO_REMAINING_BUDGET("Budget remained for the month of transaction: $");
+    INFO_REMAINING_BUDGET("Budget remained for "),
+    INFO_EXCEEDING_BUDGET("Budget exceeded for "),
+    INFO_BUDGET_EXCEEDED_TIPS("Consider spending less!"),
+    INFO_BUDGET_NOT_EXCEEDED_TIPS("Keep it up!"),
+    INFO_BUDGET_EXCEEDED_REMINDER("REMINDER: You have already exceeded the budget set for current month!"),
+    INFO_BUDGET_NOT_EXCEEDED_REMINDER("REMINDER: Continue to stay within your budget for this month! Good fortune!");
 
     //@@author chydarren
     public final String message;

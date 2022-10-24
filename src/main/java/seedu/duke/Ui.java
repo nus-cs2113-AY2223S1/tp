@@ -9,7 +9,6 @@ import static seedu.duke.common.InfoMessages.INFO_DIVIDER;
 import static seedu.duke.common.InfoMessages.INFO_GREET;
 import static seedu.duke.common.InfoMessages.INFO_HELP_GREET;
 import static seedu.duke.common.InfoMessages.INFO_HELP_PROMPT;
-import static seedu.duke.common.InfoMessages.INFO_REMAINING_BUDGET;
 import static seedu.duke.common.InfoMessages.INFO_BUDGET_SET_SUCCESSFUL;
 
 public class Ui {
@@ -74,7 +73,7 @@ public class Ui {
      * Prepares the greeting messages to be displayed to the user.
      */
     public static void showGreeting() {
-        printMessages(INFO_GREET.toString(), INFO_CURRENT_BUDGET.toString() + Budget.getBudget(),
+        printMessages(INFO_GREET.toString(), Budget.generateCurrentMonthBudgetRemainingMessage(),
                 INFO_HELP_PROMPT.toString()
         );
     }
@@ -126,12 +125,7 @@ public class Ui {
      * @param budgetInfo         A message that contains the monthly budget information.
      */
     public static void showTransactionAction(String message, String transactionDetails, String budgetInfo) {
-        printMessages(message, transactionDetails, INFO_REMAINING_BUDGET + budgetInfo);
-    }
-
-    // A temporary overload method for backward-compatibility for delete command
-    public static void showTransactionAction(String message, String transactionDetails) {
-        printMessages(message, transactionDetails);
+        printMessages(message, transactionDetails, budgetInfo);
     }
 
     //@author wcwy

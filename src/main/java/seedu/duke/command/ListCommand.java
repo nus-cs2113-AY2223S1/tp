@@ -22,13 +22,13 @@ import static seedu.duke.command.CommandTag.COMMAND_TAG_GLOBAL_PERIOD;
 
 import static seedu.duke.common.InfoMessages.INFO_LIST;
 import static seedu.duke.common.InfoMessages.INFO_LIST_EMPTY;
+import static seedu.duke.common.InfoMessages.LINE_SEPARATOR;
 
 /**
  * Represents a list command object that will execute the operations for List command.
  */
 public class ListCommand extends ListAndStatsCommand {
     //@@author chydarren
-    private static final String LINE_SEPARATOR = System.lineSeparator();
     // The command word used to trigger the execution of Moolah Manager's operations
     public static final String COMMAND_WORD = "LIST";
     // The description for the usage of command

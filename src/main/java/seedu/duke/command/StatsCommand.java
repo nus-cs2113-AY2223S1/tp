@@ -26,13 +26,13 @@ import static seedu.duke.common.InfoMessages.INFO_STATS_INCOME;
 import static seedu.duke.common.InfoMessages.INFO_STATS_SAVINGS;
 import static seedu.duke.common.InfoMessages.INFO_STATS_SUMMARY_HEADER;
 import static seedu.duke.common.InfoMessages.INFO_STATS_TIME;
+import static seedu.duke.common.InfoMessages.LINE_SEPARATOR;
 
 /**
  * Represents a get command object that will execute the operations for Get command.
  */
 public class StatsCommand extends ListAndStatsCommand {
     //@@author paullowse
-    private static final String LINE_SEPARATOR = System.lineSeparator();
     // The command word used to trigger the execution of Moolah Manager's operations
     public static final String COMMAND_WORD = "STATS";
     // The description for the usage of command
@@ -235,7 +235,7 @@ public class StatsCommand extends ListAndStatsCommand {
         ArrayList<String> amounts;
         amounts = transactions.processTimeSummaryStats(timeTransactions);
 
-        String incomeMessage = INFO_STATS_SUMMARY_HEADER + LINE_SEPARATOR
+        String incomeMessage = INFO_STATS_SUMMARY_HEADER + LINE_SEPARATOR.toString()
                 + INFO_STATS_INCOME + amounts.get(0);
         String expensesMessage = INFO_STATS_EXPENSES + amounts.get(1);
         String savingsMessage = INFO_STATS_SAVINGS + amounts.get(2);

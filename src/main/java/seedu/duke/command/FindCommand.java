@@ -9,13 +9,14 @@ import seedu.duke.exception.MoolahException;
 
 import static seedu.duke.common.InfoMessages.INFO_LIST_FILTERED;
 import static seedu.duke.common.InfoMessages.INFO_LIST_UNFILTERED;
+import static seedu.duke.common.InfoMessages.LINE_SEPARATOR;
+
 
 /**
  * Represents a find command object that will execute the operations for Find command.
  */
 public class FindCommand extends Command {
     //@@author chydarren
-    private static final String LINE_SEPARATOR = System.lineSeparator();
     // The command word used to trigger the execution of Moolah Manager's operations
     public static final String COMMAND_WORD = "FIND";
     // The description for the usage of command
