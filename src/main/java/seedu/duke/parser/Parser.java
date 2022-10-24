@@ -57,7 +57,7 @@ public class Parser {
             toExecute = singleWordCommand(keywords, new ExportCommand(keywords));
             break;
         case (ImportCommand.COMMAND_WORD):
-            toExecute = nusmodCommand(keywords, new ImportCommand(keywords));
+            toExecute = new ImportCommand(keywords);
             break;
         case (DisplaySelectedModuleListCommand.COMMAND_WORD):
             toExecute = singleWordCommand(keywords, new DisplaySelectedModuleListCommand(keywords));
@@ -68,7 +68,7 @@ public class Parser {
         return toExecute;
     }
 
-    private static Command getCommand(String[] keywords) {
+    private static Command getCommand(String[] keywords) throws YamomException {
         return new GetModuleCommand(keywords);
     }
 
@@ -170,14 +170,6 @@ public class Parser {
         }
 
         throw new YamomException(errorMessage);
-    }
-
-    public static Command nusmodCommand(String[] keywords, Command command) throws YamomException {
-        if (isTwoWordsCommand(keywords)) {
-            return command;
-        } else {
-            throw new YamomException("no NUSMOD link given");
-        }
     }
 
     public static Command singleWordCommand(String[] keywords, Command command) throws YamomException {

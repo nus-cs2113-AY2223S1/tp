@@ -22,7 +22,7 @@ public class Duke {
         state = new State();
 
         storage = new Storage();
-        //TODO: the loading of module data and past user data here
+
         storage.openPreviousState(state, ui);
     }
 
@@ -42,6 +42,7 @@ public class Duke {
                 command.execute(state, ui, storage);
                 isExit = command.isExit();
             } catch (Exception e) {
+                e.printStackTrace();
                 ui.displayMessage(e.getMessage());
             } finally {
                 ui.displayDivider();

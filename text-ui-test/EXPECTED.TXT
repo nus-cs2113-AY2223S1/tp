@@ -8,6 +8,40 @@ __ __ _____ _____ _____ _____
 
 How can I help you today?
 --------------------------------------
+Here are all the commands available in YAMOM!
+
+add	: add a module into YAMOM timetable.
+delete	: remove a module from YAMOM timetable.
+list	: List out all the selected modules and lesson slots.
+bye	: Exit YAMOM!
+export	: Generates an NUSMod Link to be exported to the browser.
+get	: Show all details of a module.
+help	: List out all commands and  their respective usages in YAMOM
+import	: Imports a timetable  from an NUSMod timetable sharing link
+search	: List out all modules that contains KEYWORD
+	 * KEYWORD can either be module code or faculty.
+semester	: Select another semester to plan and organize timetable
+select	: Select a module slot
+view	: Display current user timetable
+
+Usage :
+	add [MODULE_CODE]
+	delete [MODULE_CODE]
+	list
+	bye
+	export
+	get [MODULE_CODE]
+	help
+	import [NUSMods_LINK]
+	search [KEYWORD]
+	semester [SEMESTER_SELECTED]
+	select /module <MODULE_CODE> /type <LESSON_TYPE> /code <CLASS_NO>
+	view
+
+Note: [ ] are required elements, < > are optional elements
+For more detailed guide, please visit https://ay2223s1-cs2113-f11-3.github.io/tp/
+--------------------------------------
+--------------------------------------
 Search Result:
 Total 2 module(s) found
 
@@ -38,6 +72,7 @@ Slot selected successfully
 Error! 	0 arguments expected
 --------------------------------------
 --------------------------------------
+Shutting down......
 --------------------------------------
 This is your export link:
 https://nusmods.com/timetable/sem-1/share?CS2113=LEC:1,TUT:4
