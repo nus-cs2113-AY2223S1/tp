@@ -1,5 +1,26 @@
 # Developer Guide
 
+## Table of Contents
+* [Acknowledgements](#acknowledgements)
+* [Design & Implementation](#design--implementation)
+  * [Main Mode](#main-mode)
+    * [Build Manager](#build-manager) 
+  * [Edit Mode](#edit-mode)
+    * [Build](#build)
+    * [Components](#components)
+  * [Storage](#storage)
+  * [Export](#export)
+
+* [Appendix](#appendix)
+  * [Product Scope](#product-scope)
+  * [Target User Profile](#target-user-profile)
+  * [Value Proposition](#value-proposition)
+  * [User Stories](#user-stories)
+  * [Non-Functional Requirements](#non-functional-requirements)
+  * [Glossary](#glossary)
+* [Instructions for Manual Testing](#instructions-for-manual-testing)
+
+
 ## Acknowledgements
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
@@ -8,8 +29,9 @@
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 
-### BuildManager
+### Main Mode
 
+#### BuildManager
 
 ## Product scope
 ### Target user profile
