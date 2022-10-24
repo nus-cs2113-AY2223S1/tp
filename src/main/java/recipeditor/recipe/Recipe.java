@@ -80,6 +80,10 @@ public class Recipe {
         this.ingredients.remove(index);
     }
 
+    public void setIngredient(int index, Ingredient ingredient) throws IndexOutOfBoundsException {
+        this.ingredients.set(index, ingredient);
+    }
+
     public ArrayList<String> getSteps() {
         return steps;
     }
@@ -102,6 +106,10 @@ public class Recipe {
 
     public void deleteStep(int index) throws IndexOutOfBoundsException {
         this.steps.remove(index);
+    }
+
+    public void setStep(int index, String step) throws IndexOutOfBoundsException {
+        this.steps.set(index, step);
     }
 
     public String getIngredientAttributesFormatted() {

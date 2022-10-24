@@ -8,18 +8,21 @@ import recipeditor.command.Command;
 import recipeditor.command.InvalidCommand;
 
 public class EditMode {
-    private static final String INVALID_INPUT = "Invalid input given.";
-    private static final String INVALID_FLAG = "Invalid flag given.";
-    private static final String INVALID_INDEX = "Invalid index given.";
-    private static final String GENERIC_ERROR = "Something happened.";
+    private static final String INVALID_INPUT = "Invalid input given. ";
+    private static final String INVALID_FLAG = "Invalid flag given. ";
+    private static final String INVALID_INDEX = "Invalid index given. ";
+    private static final String GENERIC_ERROR = "Something happened. ";
 
     private static final String ENTER = "Entering edit mode. Currently editing: ";
-    private static final String HELP_1 = "Available commands: /add, /del, /swap, /view, /done";
-    private static final String HELP_2 = "Available flags: -i (ingredients), -s (steps)";
-    private static final String EXIT = "Exiting edit mode.";
-    private static final String NOT_FOUND = "Recipe not found.";
-    private static final String OLD = "Before:";
-    private static final String NEW = "After:";
+    private static final String HELP_1 = "Available commands: /add, /del, /swap, /view, /done ";
+    private static final String HELP_2 = "Available flags: -i (ingredients), -s (steps) ";
+    private static final String CHANGE_1 = "Enter your changes: ";
+    private static final String CHANGE_2 = "Ingredient format: <ingredient name> / <amount_in_float> / <unit>. "
+            + "Step format: <step> ";
+    private static final String EXIT = "Exiting edit mode. ";
+    private static final String NOT_FOUND = "Recipe not found. ";
+    private static final String OLD = "Before: ";
+    private static final String NEW = "After: ";
 
     private Recipe originalRecipe;
     private Recipe editedRecipe;
@@ -104,8 +107,36 @@ public class EditMode {
                             + editedRecipe.getStepAttributesFormatted();
                 }
                 return GENERIC_ERROR;
+            case "/change":
+                if (flagType == 0) {
+                    return INVALID_FLAG;
+                }
+                int indexToChange = Integer.parseInt(parsed[2]) - 1;
+                Ui.showMessageInline(CHANGE_1);
+                Ui.showMessageInline(CHANGE_2);
+                String newInput = Ui.readInput();
+                if (flagType == 1) {
+                    String[] parsedIngredient = newInput.split("/", 3);
+                    double amount = Double.parseDouble(parsedIngredient[1]);
+                    Ingredient newIngredient = new Ingredient(parsedIngredient[0], amount, parsedIngredient[2]);
+                    editedRecipe.setIngredient(indexToChange, newIngredient);
+                    return OLD + "\n"
+                            + originalRecipe.getIngredientAttributesFormatted() + "\n"
+                            + NEW + "\n"
+                            + editedRecipe.getIngredientAttributesFormatted();
+                } else if (flagType == 2) {
+                    editedRecipe.setStep(indexToChange, newInput);
+                    return OLD + "\n"
+                            + originalRecipe.getStepAttributesFormatted() + "\n"
+                            + NEW + "\n"
+                            + editedRecipe.getStepAttributesFormatted();
+                }
+                return GENERIC_ERROR;
             case "/view":
-                return "View command";
+                return OLD + "\n"
+                        + originalRecipe.getRecipeAttributesFormatted() + "\n"
+                        + NEW + "\n"
+                        + editedRecipe.getRecipeAttributesFormatted();
             case "/done":
                 return "Quit command";
             default:
