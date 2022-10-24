@@ -17,24 +17,23 @@ information quickly with minimal latency.
     * [Pair Client and Property: `pair`](#pair-client-and-property-pair)
     * [Unpair Client and Property: `unpair`](#unpair-client-and-property-unpair)
     * [Exit: `quit`](#exit-quit)
-    * [Saving and Loading Entries dynamically](#saving-and-loading-entries-dynamically)
+    * [Saving data](#saving-data)
+    * [Loading data](#loading-data)
 * [FAQ](#faq)
 * [Command Summary](#command-summary)
 
 
 ## Quick Start
 
-{Give steps to get started quickly}
-
-1. Ensure that you have Java 11 or above installed.
-1. Down the latest version of `Duke` from [here](http://link.to/duke).
+1. Ensure that you have Java 11 or above installed. 
+2. Download the latest version of `Property Rental Manager` from [here](http://link.to/duke).
 
 ## Features 
 
 Note:
-* Parameters appear in the form of a/PARAMETER 
-* `-property` and `-client` indicates whether the command is for property or client 
-* Words in UPPER_CASE are parameters to be specified by the user
+* Parameters appear in the form of a/PARAMETER.
+* `-property` and `-client` indicates whether the command is for property or client.
+* Words in UPPER_CASE are parameters to be specified by the user.
 
 
 ### Add Property: `add -property`
@@ -68,7 +67,7 @@ Displays the information of the specified client, along with the property the cl
 Pairs the client to the specified property, to record that the client is renting the property.
 
 <u>Format</u>: `pair ip/PROPERTY_INDEX ic/CLIENT_INDEX`
-* `PROPETY_INDEX` and `CLIENT_INDEX` must be indexes present in the client list and property list respectively.
+* `PROPERTY_INDEX` and `CLIENT_INDEX` must be indexes present in the client list and property list respectively.
 * The client must not currently be in a pairing.
 * The property can be paired with multiple clients.
 
@@ -78,13 +77,16 @@ Pairs the client to the specified property, to record that the client is renting
 Unpairs the client from the specified property, to record that the client is no longer renting the property.
 
 <u>Format</u>: `unpair ip/PROPERTY_INDEX ic/CLIENT_INDEX`
-* `PROPETY_INDEX` and `CLIENT_INDEX` must be indexes present in the client list and property list respectively.
+* `PROPERTY_INDEX` and `CLIENT_INDEX` must be indexes present in the client list and property list respectively.
 * The client and property must currently be in the same pairing.
 
 <u>Example</u>: `unpair ip/1 ic/5`
 
 ### Exit: `quit`
 
+### Loading data
+
+### Saving data
 
 ## FAQ
 
