@@ -1,9 +1,11 @@
 package seedu.duke.command;
 
 //@@author brian-vb
+
 import seedu.duke.Storage;
 import seedu.duke.Ui;
 import seedu.duke.data.TransactionList;
+import seedu.duke.exception.MoolahException;
 
 import java.time.LocalDate;
 
@@ -128,7 +130,7 @@ public class EditCommand extends Command {
      * @param storage      An instance of the Storage class.
      */
     @Override
-    public void execute(TransactionList transactions, Ui ui, Storage storage) {
+    public void execute(TransactionList transactions, Ui ui, Storage storage) throws MoolahException {
         // Dummy output for test
         System.out.println(String.format("Entry number: %d\nType: %s\nDesc: %s\n$: %d\nCat: %s, Date: %s",
                 entryNumber,
@@ -137,6 +139,18 @@ public class EditCommand extends Command {
                 amount,
                 category,
                 date.toString()));
+
+
+        // Storage code to be utilised in EditCommand when the TransactionList contents are edited
+
+        /*
+        try {
+
+        } catch (IOException e) {
+            throw new StorageWriteErrorException();
+        }
+
+        */
     }
 
     /**
