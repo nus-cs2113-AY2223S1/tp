@@ -124,6 +124,13 @@ public class Parser {
         }
     }
 
+    public static boolean getAdd(String lineInput) {
+        getInputWords(lineInput);
+        operation = inputWords[OPERATION_INDEX];
+        isAdd = operation.equalsIgnoreCase("add");
+        return isAdd;
+    }
+
     //@@author shengiv
     public static void getInputWords(String lineInput) {
         inputWords = lineInput.split("\\s+");

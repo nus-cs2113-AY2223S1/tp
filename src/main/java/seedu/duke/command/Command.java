@@ -1,11 +1,13 @@
 package seedu.duke.command;
 
 import seedu.duke.exceptions.SkyControlException;
+import seedu.duke.exceptions.SyncException;
 import seedu.duke.operationlist.OperationList;
 import seedu.duke.parsers.Parser;
 import seedu.duke.ui.Ui;
 
 public abstract class Command extends Parser {
+    public static final int MIN_LENGTH = 2;
     protected static Ui ui = new Ui();
     protected static final int DETAIL_INDEX = 1;
 
@@ -29,8 +31,21 @@ public abstract class Command extends Parser {
     }
 
     public static void checkBlankDetailInput() throws SkyControlException {
-        if (passengerDetailArray.length < 2) {
+        if (passengerDetailArray.length < MIN_LENGTH) {
             throw new SkyControlException(ui.getBlankOpsError());
+        }
+    }
+
+    public void checkFlightDetailSync(OperationList flights,
+                                      OperationList passengers,
+                                      String lineInput) throws SkyControlException, SyncException {
+        try {
+            getPassengerDetail(lineInput);
+            passengers.checkPassengerFlightSync(flights, passengerDetail);
+        } catch (SkyControlException e) {
+            throw new SkyControlException(ui.getBlankOpsError());
+        } catch (SyncException e) {
+            throw new SyncException(ui.getFlightNumberSyncError());
         }
     }
 
