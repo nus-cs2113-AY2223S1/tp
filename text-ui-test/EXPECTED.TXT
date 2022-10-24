@@ -31,16 +31,16 @@ To add a new transaction entry, which could be either an "income" or an "expense
 Usage: add t/TYPE c/CATEGORY a/AMOUNT d/DATE i/DESCRIPTION
 
 Command Word: LIST
-To list all or some transactions based on selection. Note that the tags will be joint in the filter based on the 'AND' operation.
-Usage: list [t/TYPE] [c/CATEGORY] [d/DATE] [m/MONTH] [y/YEAR]
+To list all or some transactions based on selection. Tags will be joined in the filter based on the 'AND' operation.
+Usage: list [t/TYPE] [c/CATEGORY] [d/DATE] [m/MONTH] [y/YEAR] [p/PERIOD] [n/NUMBER]
 
 Command Word: FIND
 To find specific transaction(s) based on any keywords inputted by the user.
 Usage: find KEYWORDS
 
 Command Word: STATS
-To get statistics of the transactions such as the total savings for each category, summary of expenditure, etc.
-Usage: stats s/STATISTICS_TYPE
+To get statistics of the transactions such as the total savings for each category, summary of expenditure over a time period.
+Usage: stats s/STATS_TYPE [m/MONTH] [y/YEAR] [p/PERIOD] [n/NUMBER]
 
 Command Word: EDIT
 To edit a specific entry in the list of transactions.
@@ -85,14 +85,16 @@ DATE: Date of the transaction. The format must be in "yyyyMMdd".
 DESCRIPTION: More information regarding the transaction, written without any space.
 
 Command Word: LIST
-To list all or some transactions based on selection. Note that the tags will be joint in the filter based on the 'AND' operation.
-Usage: list [t/TYPE] [c/CATEGORY] [d/DATE] [m/MONTH] [y/YEAR]
+To list all or some transactions based on selection. Tags will be joined in the filter based on the 'AND' operation.
+Usage: list [t/TYPE] [c/CATEGORY] [d/DATE] [m/MONTH] [y/YEAR] [p/PERIOD] [n/NUMBER]
 Parameters information:
 (Optional) TYPE - The type of transaction. Only "income" or "expense" is accepted.
 (Optional) CATEGORY: A category for the transaction. Only string containing alphabets is accepted.
 (Optional) DATE: Date of the transaction. The format must be in "yyyyMMdd".
-(Optional) MONTH: Month of the transaction. Only integers within 1 to 12 are accepted. Note that month must be accompanied by a year.
-(Optional) YEAR: Year of the transaction. Only integers from 1000 onwards are accepted.
+(Optional) MONTH: Month of the transaction. Only integers within 1 to 12 are accepted. Note that month must be accompanied by a year. This tag cannot be used together with [p/PERIOD] or [n/NUMBER] tags.
+(Optional) YEAR: Year of the transaction. Only integers from 1000 onwards are accepted.This tag cannot be used together with [p/PERIOD] or [n/NUMBER] tags.
+(Optional) PERIOD: Period of the transaction. Only "weeks" or "months" is accepted. Note thatperiod must be accompanied by a number to backdate from. This tag cannot be used together with [m/MONTH] or [y/YEAR] tags.
+(Optional) NUMBER: Last number of weeks or months. Only positive integers are accepted. Note thatnumber must be accompanied by a period that represents weeks or months. This tag cannot be used together with [m/MONTH] or [y/YEAR] tags.
 
 Command Word: FIND
 To find specific transaction(s) based on any keywords inputted by the user.
@@ -101,10 +103,13 @@ Parameters information:
 KEYWORDS: Any partial or full keyword(s) that matches the details of the transaction, such as type, category, amount, date or description.
 
 Command Word: STATS
-To get statistics of the transactions such as the total savings for each category, summary of expenditure, etc.
-Usage: stats s/STATISTICS_TYPE
+To get statistics of the transactions such as the total savings for each category, summary of expenditure over a time period.
+Usage: stats s/STATS_TYPE [m/MONTH] [y/YEAR] [p/PERIOD] [n/NUMBER]
 Parameters information:
-STATISTICS_TYPE: The type of statistics to be generated. Only "categories" is accepted.
+STATISTICS_TYPE: The type of statistics to be generated. Only "categories", "months" or "time" is accepted.(Optional) MONTH: Month of the transaction. Only integers within 1 to 12 are accepted. Note that month must be accompanied by a year. This tag cannot be used together with [p/PERIOD] or [n/NUMBER] tags.
+(Optional) YEAR: Year of the transaction. Only integers from 1000 onwards are accepted.This tag cannot be used together with [p/PERIOD] or [n/NUMBER] tags.
+(Optional) PERIOD: Period of the transaction. Only "weeks" or "months" is accepted. Note that period must be accompanied by a number to backdate from. This tag cannot be used together with [m/MONTH] or [y/YEAR] tags.
+(Optional) NUMBER: Last number of weeks or months. Only positive integers are accepted. Note thatnumber must be accompanied by a period that represents weeks or months. This tag cannot be used together with [m/MONTH] or [y/YEAR] tags.
 
 Command Word: EDIT
 To edit a specific entry in the list of transactions.

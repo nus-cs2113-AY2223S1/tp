@@ -5,6 +5,7 @@ import seedu.duke.Storage;
 import seedu.duke.Ui;
 import seedu.duke.data.TransactionList;
 import seedu.duke.data.transaction.Transaction;
+import seedu.duke.exception.InputTransactionInvalidTypeException;
 import seedu.duke.exception.StatsInvalidTypeException;
 import seedu.duke.exception.MoolahException;
 
@@ -18,6 +19,7 @@ import static seedu.duke.command.CommandTag.COMMAND_TAG_GLOBAL_NUMBER;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_GLOBAL_PERIOD;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_GLOBAL_YEAR;
 import static seedu.duke.common.InfoMessages.INFO_STATS_CATEGORIES;
+import static seedu.duke.common.InfoMessages.INFO_STATS_MONTHS;
 import static seedu.duke.common.InfoMessages.INFO_STATS_EMPTY;
 import static seedu.duke.common.InfoMessages.INFO_STATS_EXPENSES;
 import static seedu.duke.common.InfoMessages.INFO_STATS_INCOME;
@@ -34,14 +36,29 @@ public class StatsCommand extends ListAndStatsCommand {
     // The command word used to trigger the execution of Moolah Manager's operations
     public static final String COMMAND_WORD = "STATS";
     // The description for the usage of command
-    public static final String COMMAND_DESCRIPTION = "To get statistics of the transactions such "
-            + "as the total savings for each category, summary of expenditure, etc.";
+    public static final String COMMAND_DESCRIPTION = "To get statistics of the transactions such"
+            + " as the total savings for each category, summary of expenditure over a time period.";
     // The guiding information for the usage of command
-    public static final String COMMAND_USAGE = "Usage: stats s/STATISTICS_TYPE";
+    public static final String COMMAND_USAGE = "Usage: stats s/STATS_TYPE [m/MONTH] [y/YEAR] [p/PERIOD] [n/NUMBER]";
     // The formatting information for the parameters used by the command
     public static final String COMMAND_PARAMETERS_INFO = "Parameters information:"
             + LINE_SEPARATOR
-            + "STATISTICS_TYPE: The type of statistics to be generated. Only \"categories\" is accepted.";
+            + "STATISTICS_TYPE: The type of statistics to be generated. Only \"categories\", \"months\" or \"time\" "
+            + "is accepted."
+            + "(Optional) MONTH: Month of the transaction. Only integers within 1 to 12 are accepted. Note that "
+            + "month must be accompanied by a year. This tag cannot be used together with [p/PERIOD] or [n/NUMBER] "
+            + "tags."
+            + LINE_SEPARATOR
+            + "(Optional) YEAR: Year of the transaction. Only integers from 1000 onwards are accepted."
+            + "This tag cannot be used together with [p/PERIOD] or [n/NUMBER] tags."
+            + LINE_SEPARATOR
+            + "(Optional) PERIOD: Period of the transaction. Only \"weeks\" or \"months\" is accepted. Note that "
+            + "period must be accompanied by a number to backdate from. This tag cannot be used together with "
+            + "[m/MONTH] or [y/YEAR] tags."
+            + LINE_SEPARATOR
+            + "(Optional) NUMBER: Last number of weeks or months. Only positive integers are accepted. Note that"
+            + "number must be accompanied by a period that represents weeks or months. This tag cannot be used "
+            + "together with [m/MONTH] or [y/YEAR] tags.";
 
     // Basic help description
     public static final String COMMAND_HELP = "Command Word: " + COMMAND_WORD + LINE_SEPARATOR
@@ -56,6 +73,7 @@ public class StatsCommand extends ListAndStatsCommand {
     private static final int FALSE = 0;
     private static final String CATEGORIES = "categories";
     private static final String TIME = "time";
+    private static final String MONTHS = "months";
     private static Logger statsLogger = Logger.getLogger(StatsCommand.class.getName());
     private String statsType;
 
@@ -122,6 +140,9 @@ public class StatsCommand extends ListAndStatsCommand {
     private void listStatsByStatsType(String statsType, TransactionList transactions)
             throws MoolahException {
         switch (statsType) {
+        case MONTHS:
+            statsTypeMonthlyExpenditure(transactions);
+            break;
         case CATEGORIES:
             statsLogger.log(Level.INFO, "Stats type has been detected for categorical savings.");
             statsTypeCategoricalSavings(transactions);
@@ -171,6 +192,25 @@ public class StatsCommand extends ListAndStatsCommand {
         assert !categoricalSavingsList.isEmpty();
         statsLogger.log(Level.INFO, "Categorical savings list is found to contain categories-amount pairs.");
         Ui.showList(categoricalSavingsList, INFO_STATS_CATEGORIES.toString());
+    }
+
+    /**
+     * Display the statistics requested for the amount of expenditure and savings accumulated over different months.
+     *
+     * @param transactions An instance of the TransactionList class.
+     */
+    public void statsTypeMonthlyExpenditure(TransactionList transactions) throws InputTransactionInvalidTypeException {
+        String monthlyExpenditureList = transactions.listMonthlyExpenditure();
+
+        if (monthlyExpenditureList.isEmpty()) {
+            statsLogger.log(Level.INFO, "Monthly expenditure list is empty as there are no transactions available.");
+            Ui.showInfoMessage(INFO_STATS_EMPTY.toString());
+            return;
+        }
+
+        assert !monthlyExpenditureList.isEmpty();
+        statsLogger.log(Level.INFO, "Monthly expenditure list is found to contain month-expenditure pairs.");
+        Ui.showList(monthlyExpenditureList, INFO_STATS_MONTHS.toString());
     }
 
     //@@author paullowse
