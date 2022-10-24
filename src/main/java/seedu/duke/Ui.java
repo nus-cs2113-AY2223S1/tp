@@ -88,11 +88,14 @@ public class Ui {
                 columnSpacingArray[1] = Math.max(columnSpacingArray[1], String.valueOf(exercise.getWeight()).length());
                 columnSpacingArray[2] = Math.max(columnSpacingArray[2], String.valueOf(exercise.getSet()).length());
             } else if (exercise instanceof CardioExercise) {
-                columnSpacingArray[5] = Math.max(columnSpacingArray[5], String.valueOf((int) exercise.getDistance()).length());
+                columnSpacingArray[5] = Math.max(columnSpacingArray[5],
+                        String.valueOf((int) exercise.getDistance()).length());
             }
             columnSpacingArray[1] = Math.max(columnSpacingArray[1], exercise.getExerciseName().length());
-            columnSpacingArray[4] = Math.max(columnSpacingArray[4], String.valueOf(exercise.getRepetition()).length());
-            columnSpacingArray[6] = Math.max(columnSpacingArray[6], String.valueOf(exercise.getCaloriesBurnt()).length());
+            columnSpacingArray[4] = Math.max(columnSpacingArray[4],
+                    String.valueOf(exercise.getRepetition()).length());
+            columnSpacingArray[6] = Math.max(columnSpacingArray[6],
+                    String.valueOf(exercise.getCaloriesBurnt()).length());
         }
     }
 
