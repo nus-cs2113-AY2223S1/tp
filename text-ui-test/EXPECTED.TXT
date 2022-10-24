@@ -24,7 +24,7 @@ add weight /{weight} /{fat percentage}
 remove {food/exercise/weight} /{index}
 mark {done/undone} /{exercise index}
 view {biometrics/food/weight/bmi/maintenance} {exercise/strength/cardio /{done}}
-find {strength/cardio/food} /{description}
+find {strength/cardio/food/date_e/date_f} /{description}
 --------------------------------------------------------------------------
 --------------------------------------------------------------------------
 Biometrics:

@@ -4,6 +4,8 @@ import seedu.duke.exception.IllegalValueException;
 
 import java.util.ArrayList;
 
+import static seedu.duke.command.DateCommand.sortDateForFood;
+
 public class FoodList {
     ArrayList<Food> foodList;
 
@@ -31,6 +33,7 @@ public class FoodList {
 
 
     public ArrayList<Food> getFoodList() {
+        sortDateForFood(foodList);
         return foodList;
     }
 
