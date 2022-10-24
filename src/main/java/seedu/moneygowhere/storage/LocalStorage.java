@@ -367,7 +367,8 @@ public class LocalStorage {
             throw new LocalStorageLoadDataException();
         }
 
-        return new RecurringPayment(name, interval, description, amount, category, currency);
+        //todo Save modeOfPayment for RecurringPayment
+        return new RecurringPayment(name, interval, description, amount, category, currency, null);
     }
 
     /**
