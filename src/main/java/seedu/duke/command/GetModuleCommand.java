@@ -17,23 +17,27 @@ import seedu.duke.model.Module;
 /**
  * Get all module details by module code. Display all tutorial and labs session in timetable format.
  */
-
 public class GetModuleCommand extends Command {
     Module module;
     public static final String COMMAND_WORD = "get";
-    public static final String COMMAND_USAGE = "get [MODULE_CODE]";
+    public static final String COMMAND_USAGE = "get [EXACT_MODULE_CODE]";
     public static final String COMMAND_DESCRIPTION = "Show all details of a module.";
-
-    private static final String ERROR_WRONG_FORMAT = "Wrong format, should be: " + COMMAND_USAGE;
+    public static final String MISSING_MODULE_CODE = "Please enter a module code!";
+    public static final String MODULE_NOT_FOUND = "Module not found! Please enter a valid module code! Try searching if you do not remember the exact module code.";
+    // private static final String ERROR_WRONG_FORMAT = "Wrong format, should be: " + COMMAND_USAGE;
 
     public GetModuleCommand(String[] input) throws YamomException {
         super(input);
 
-        try {
-            String moduleCode = input[1].toUpperCase();
-            this.module = Module.get(moduleCode);
-        } catch (Exception e) {
-            throw new YamomException(ERROR_WRONG_FORMAT);
+        if (input.length < 2) {
+            throw new YamomException(MISSING_MODULE_CODE);
+        }
+
+        String moduleCode = input[1].toUpperCase();
+        this.module = Module.get(moduleCode);
+
+        if (!isModuleExist(module)) {
+            throw new YamomException(MODULE_NOT_FOUND);
         }
     }
 
@@ -48,7 +52,7 @@ public class GetModuleCommand extends Command {
         ui.addMessage("Faculty              : " + (module.faculty.isEmpty() ? "Nil" : module.faculty));
         ui.addMessage("Workload             : " + (module.workload.toString().isEmpty() ? "Nil" : module.workload
                 .toString()));
-        ui.addMessage("semester offering    : " + (module.getSemestersOffering(module).isEmpty() ? "Nil" : module
+        ui.addMessage("Semester offering    : " + (module.getSemestersOffering(module).isEmpty() ? "Nil" : module
                 .getSemestersOffering(module)));
         ui.addMessage("Prerequisite         : " + (module.prerequisite.toString().isEmpty() ? "Nil" : module
                 .prerequisite.toString()));
@@ -79,6 +83,13 @@ public class GetModuleCommand extends Command {
     boolean isModuleOfferedInCurrentSem(Module module, State state) {
         int sem = state.getSemester();
         return module.getSemestersOffering(module).contains(sem);
+    }
+
+    // Check if module input by user exists in module list. This is different from isValidModuleCode from Parser class.
+    boolean isModuleExist(Module module) {
+        // check if module exists in module list
+        List<Module> moduleList = Module.getAll();
+        return moduleList.contains(module);
     }
 
     @Override
