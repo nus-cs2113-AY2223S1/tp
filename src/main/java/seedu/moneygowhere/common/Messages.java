@@ -169,6 +169,10 @@ public class Messages {
             + ConsoleParserConfigurations.COMMAND_VIEW_EXPENSE_ARG_EXPENSE_CATEGORY
             + " "
             + ConsoleParserConfigurations.COMMAND_VIEW_EXPENSE_ARG_EXPENSE_CATEGORY_LONG.toUpperCase()
+            + "] [-"
+            + ConsoleParserConfigurations.COMMAND_VIEW_EXPENSE_ARG_EXPENSE_NAME
+            + " "
+            + ConsoleParserConfigurations.COMMAND_VIEW_EXPENSE_ARG_EXPENSE_NAME_LONG.toUpperCase()
             + "]";
 
     public static final String CONSOLE_ERROR_COMMAND_VIEW_EXPENSE_INVALID = ""
