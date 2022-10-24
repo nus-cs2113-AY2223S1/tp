@@ -14,7 +14,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 public class UserUniStorageTest {
@@ -54,7 +57,7 @@ public class UserUniStorageTest {
         clearStorageFile(filePath);
         String fileContent = "Boston University%" + "null%";
         assertThrows(InvalidUserStorageFileException.class,
-                () -> UserStorageParser.convertFileContentIntoUniversityList(fileContent));
+            () -> UserStorageParser.convertFileContentIntoUniversityList(fileContent));
     }
 
     @Test
@@ -63,7 +66,7 @@ public class UserUniStorageTest {
         String fileContent = "Boston University%" + "null%" + "S%"
                 +  "MET CS 248;Discrete Mathematics;3;CS1231;Discrete Structures;4%";
         assertThrows(InvalidUserStorageFileException.class,
-                () -> UserStorageParser.convertFileContentIntoUniversityList(fileContent));
+            () -> UserStorageParser.convertFileContentIntoUniversityList(fileContent));
     }
 
     @Test
@@ -72,7 +75,7 @@ public class UserUniStorageTest {
         String fileContent = "Boston University%" + "null%" + "T%"
                 +  "MET CS 248;Discrete Mathematics;3;CS1231;Discrete Structures%";
         assertThrows(InvalidUserStorageFileException.class,
-                () -> UserStorageParser.convertFileContentIntoUniversityList(fileContent));
+            () -> UserStorageParser.convertFileContentIntoUniversityList(fileContent));
     }
 
     @Test
