@@ -1,4 +1,6 @@
-package seedu.moneygowhere.exceptions;
+package seedu.moneygowhere.exceptions.target;
+
+import seedu.moneygowhere.exceptions.MoneyGoWhereException;
 
 /**
  * Thrown when a target is not found in target manager.

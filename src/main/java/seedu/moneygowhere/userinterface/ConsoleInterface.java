@@ -58,7 +58,7 @@ import seedu.moneygowhere.exceptions.CurrencyRatesNotFoundException;
 import seedu.moneygowhere.exceptions.expense.ExpenseManagerExpenseNotFoundException;
 import seedu.moneygowhere.exceptions.income.IncomeManagerIncomeNotFoundException;
 import seedu.moneygowhere.exceptions.RecurringPaymentManagerRecurringPaymentNotFoundException;
-import seedu.moneygowhere.exceptions.TargetManagerTargetNotFoundException;
+import seedu.moneygowhere.exceptions.target.TargetManagerTargetNotFoundException;
 import seedu.moneygowhere.logger.LocalLogger;
 import seedu.moneygowhere.parser.ConsoleParser;
 import seedu.moneygowhere.storage.LocalStorage;
