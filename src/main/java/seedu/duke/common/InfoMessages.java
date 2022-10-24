@@ -5,6 +5,12 @@ package seedu.duke.common;
  */
 public enum InfoMessages {
     INFO_DIVIDER("____________________________________________________________"),
+    INFO_LINE_SEPARATOR(System.lineSeparator()),
+    INFO_SPACE(" "),
+    INFO_FULL_STOP("."),
+    INFO_FULL_STOP_SPACE(". "),
+    INFO_COLON_SPACE(": "),
+    INFO_DOLLAR_SIGN("$"),
     INFO_ADD_EXPENSE("I have added the following Expense transaction:"),
     INFO_ADD_INCOME("I have added the following Income transaction:"),
     INFO_EDIT_EXPENSE("I have edited the following Expense transaction:"),
@@ -32,7 +38,10 @@ public enum InfoMessages {
     INFO_PURGE_WARNING("Are you sure you want to proceed with this command? Please enter 'Y' to confirm."),
     INFO_BUDGET_SET_SUCCESSFUL("You have successfully updated the budget."),
     INFO_CURRENT_BUDGET("Monthly budget set as: $"),
-    INFO_REMAINING_BUDGET("Budget remained for the month of transaction: $");
+    INFO_REMAINING_BUDGET("Budget remained for "),
+    INFO_EXCEEDING_BUDGET("Budget exceeded for "),
+    INFO_BUDGET_EXCEEDED_TIPS("Consider spending less!"),
+    INFO_BUDGET_NOT_EXCEEDED_TIPS("Keep it up!");
 
     //@@author chydarren
     public final String message;

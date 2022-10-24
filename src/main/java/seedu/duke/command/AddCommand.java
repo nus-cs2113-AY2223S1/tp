@@ -153,9 +153,9 @@ public class AddCommand extends Command {
             checkTransactionCapacity(transactions);
             String messageBanner = addTransaction(transactions);
             long addedMonthExpenseSum = transactions.calculateMonthlyTotalExpense(date);
-            String budgetLeft = Budget.getBudgetLeft(addedMonthExpenseSum);
+            String budgetInfo = Budget.generateBudgetRemainingMessage(addedMonthExpenseSum, true, date);
 
-            Ui.showTransactionAction(messageBanner, transactionCreated.toString(), budgetLeft);
+            Ui.showTransactionAction(messageBanner, transactionCreated.toString(), budgetInfo);
 
             //@@author chinhan99
             storage.writeToFile(transactions.getTransactions());
