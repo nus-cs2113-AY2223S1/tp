@@ -13,7 +13,11 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Represents an object that can be inherited by List and Stats command objects.
+ */
 public abstract class ListAndStatsCommand extends Command {
+    //@@author chydarren
     private static final int UNDEFINED_PARAMETER = -1;
     private static final int TRUE_AND = 1;
     private static final int TRUE_OR = 2;
@@ -35,6 +39,7 @@ public abstract class ListAndStatsCommand extends Command {
         this.period = null;
         this.number = UNDEFINED_PARAMETER;
 
+        //@@author chydarren
         datedTransactionsLogger.setLevel(Level.SEVERE);
     }
 
@@ -98,16 +103,17 @@ public abstract class ListAndStatsCommand extends Command {
      */
     public void parseDateIntervalsTags() throws MoolahException {
         if (containMonthYear() != FALSE && containPeriodNumber() != FALSE) {
+            // Throws an unsupported tag exception if tags are not supposed to be used together
             datedTransactionsLogger.log(Level.WARNING, "An exception has been caught "
                     + "as an invalid combination of tags has been given.");
             throw new GlobalUnsupportedTagException();
         } else if (containMonthYear() == TRUE_INVALID_OR) {
-            // Throws a missing tag if number and period was not given together
+            // Throws a missing tag exception if number and period was not given together
             datedTransactionsLogger.log(Level.WARNING, "An exception has been caught as "
                     + "a month was given without a year.");
             throw new GlobalMissingYearTagException();
         } else if (containPeriodNumber() == TRUE_OR) {
-            // Throws a missing tag if number and period was not given together
+            // Throws a missing tag exception if number and period was not given together
             datedTransactionsLogger.log(Level.WARNING, "An exception has been caught as "
                     + "number and period needs to be given together.");
             throw new GlobalMissingPeriodNumberTagException();
