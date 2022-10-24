@@ -2,8 +2,10 @@ package seedu.moneygowhere.commands;
 
 import java.math.BigDecimal;
 
+//@@author xzynos
+
 /**
- * Stores the add-recurringpayment command and its arguments.
+ * Stores the command Add-RecurringPayment and its arguments.
  */
 @SuppressWarnings("FieldMayBeFinal")
 public class ConsoleCommandAddRecurringPayment extends ConsoleCommand {

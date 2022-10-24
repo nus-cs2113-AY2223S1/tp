@@ -16,10 +16,10 @@ MoneyGoWhere is a financial planner to help you manage your finances.
 ### Adding an expense: `Add-Expense`
 Adds a new expense to the list of expenses.
 
-Syntax: `Add-Expense -n NAME -a AMOUNT [-d DATE] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS] [-x CURRENCY]`
+Syntax: `Add-Expense -n NAME -a AMOUNT [-d DATE] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p MODE OF PAYMENT]`
 
-* `NAME`, `DESCRIPTION`, `CATEGORY` and `REMARKS` are text strings. You may use spaces within the text if you wrap the text with double quotes.
-* `CURRENCY` is a text string. By default, it will be SGD. 
+* `NAME`, `DESCRIPTION`, `CATEGORY`, `REMARKS` and `MODE OF PAYMENT` are text strings. You may use spaces within the text if you wrap the text with double quotes.
+* `CURRENCY` is a text string. By default, it will be SGD. Otherwise, it must be a valid currency code.
 * `AMOUNT` is a decimal value.
 * `DATE` is a text string in the format `"dd/MM/yyyy HHmm"`. If this value is not provided, MoneyGoWhere will save the current date and time for you.
 
@@ -31,6 +31,7 @@ Example of usage:
 * `Add-Expense -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359" -t "Monthly payment" -c "Work expenses"`
 * `Add-Expense -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359" -t "Monthly payment" -c "Work expenses" -r "Remarks here"`
 * `Add-Expense -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359" -t "Monthly payment" -c "Work expenses" -r "Remarks here" -x USD`
+* `Add-Expense -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359" -t "Monthly payment" -c "Work expenses" -r "Remarks here" -x USD -p PayLah`
 
 ### Viewing expense(s): `View-Expense`
 Displays the past expenses you have added.
@@ -58,11 +59,11 @@ Example of usage:
 ### Editing an expense: `Edit-Expense`
 Edits an existing expense in the list of expenses.
 
-Syntax: `Edit-Expense -e EXPENSE_NUMBER [-n NAME] [-a AMOUNT] [-d DATE] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS] [-x CURRENCY]`
+Syntax: `Edit-Expense -e EXPENSE_NUMBER [-n NAME] [-a AMOUNT] [-d DATE] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p MODE OF PAYMENT]`
 
 * `EXPENSE_NUMBER` is an integer value.
-* `NAME`, `DESCRIPTION`, `CATEGORY` and `REMARKS` are text strings. You may use spaces within the text if you wrap the text with double quotes.
-* `CURRENCY` is a text string. 
+* `NAME`, `DESCRIPTION`, `CATEGORY`, `REMARKS` and `MODE OF PAYMENT` are text strings. You may use spaces within the text if you wrap the text with double quotes.
+* `CURRENCY` is a text string. It must be a valid currency code.
 * `AMOUNT` is a decimal value.
 * `DATE` is a text string in the format `"dd/MM/yyyy HHmm"`.
 
@@ -74,6 +75,7 @@ Example of usage:
 * `Edit-Expense -e 1 -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359" -t "Monthly payment" -c "Work expenses"`
 * `Edit-Expense -e 1 -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359" -t "Monthly payment" -c "Work expenses" -r "Remarks here"`
 * `Edit-Expense -e 1 -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359" -t "Monthly payment" -c "Work expenses" -r "Remarks here" -x USD`
+* `Edit-Expense -e 1 -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359" -t "Monthly payment" -c "Work expenses" -r "Remarks here" -x USD -p PayLah`
 
 ### Sorting expenses: `Sort-Expense`
 Sorts the list of expenses according to an alphabetical, amount, date or currency order. It can be sorted in both ascending and
@@ -93,14 +95,15 @@ Example of usage:
 ### Converting currency of an expense: `Convert-Currency`
 Converts the currency of an expense from the list of expenses.
 
-Syntax: `Convert-Currency -e EXPENSE_NUMBER -x CURRENCY`
+Syntax: `Convert-Currency -e EXPENSE_NUMBER -x CURRENCY [-r RATE]`
 
 * `EXPENSE_NUMBER` is an integer value.
-* `CURRENCY` is a text string.
+* `CURRENCY` is a text string. It must be a valid currency code.
+* `RATE` is a decimal value. This rate should be the rate to convert the expense amount from the old currency to the new currency. 
 
 Example of usage:
 
-* `Convert-Currency -e 1 -x USD`
+* `Convert-Currency -e 1 -x USD -r 1.35`
 
 ### Adding recurring payments: `Add-RecurringPayment`
 Adds a recurring payment to the list of recurring payments

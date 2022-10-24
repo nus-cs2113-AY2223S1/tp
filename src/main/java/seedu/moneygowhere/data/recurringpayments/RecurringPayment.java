@@ -2,6 +2,8 @@ package seedu.moneygowhere.data.recurringpayments;
 
 import java.math.BigDecimal;
 
+//@@author xzynos
+
 /**
  * Stores data associated with a recurring payment.
  */
@@ -22,6 +24,11 @@ public class RecurringPayment {
             String category,
             String currency
     ) {
+        assert !(currency == null || currency.isEmpty() || currency.trim().isEmpty()) :
+                "There must be a currency";
+        assert !(name == null || name.isEmpty() || name.trim().isEmpty()) :
+                "There must be a name";
+        assert amount != null : "There must be an amount";
         this.name = name;
         this.interval = interval;
         this.description = description;

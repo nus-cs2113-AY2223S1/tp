@@ -2,6 +2,11 @@ package seedu.moneygowhere.commands;
 
 import java.math.BigDecimal;
 
+//@@author xzynos
+
+/**
+ * Stores the command Edit-RecurringPayment and its arguments.
+ */
 @SuppressWarnings("unused")
 public class ConsoleCommandEditRecurringPayment extends ConsoleCommand {
     private int recurringPaymentIndex;
@@ -9,11 +14,15 @@ public class ConsoleCommandEditRecurringPayment extends ConsoleCommand {
     private int interval;
     private String description;
     private BigDecimal amount;
+    private String category;
+    private String currency;
     private boolean isRecurringPaymentIndexSet;
     private boolean isNameSet;
     private boolean isIntervalSet;
     private boolean isDescriptionSet;
     private boolean isAmountSet;
+    private boolean isCategorySet;
+    private boolean isCurrencySet;
 
     public ConsoleCommandEditRecurringPayment() {
         isRecurringPaymentIndexSet = false;
@@ -21,6 +30,8 @@ public class ConsoleCommandEditRecurringPayment extends ConsoleCommand {
         isIntervalSet = false;
         isDescriptionSet = false;
         isAmountSet = false;
+        isCategorySet = false;
+        isCurrencySet = false;
     }
 
     public int getRecurringPaymentIndex() {
@@ -68,6 +79,24 @@ public class ConsoleCommandEditRecurringPayment extends ConsoleCommand {
         isAmountSet = true;
     }
 
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+        isCategorySet = true;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+        isCurrencySet = true;
+    }
+
     public boolean isRecurringPaymentIndexSet() {
         return isRecurringPaymentIndexSet;
     }
@@ -86,5 +115,13 @@ public class ConsoleCommandEditRecurringPayment extends ConsoleCommand {
 
     public boolean isAmountSet() {
         return isAmountSet;
+    }
+
+    public boolean isCategorySet() {
+        return isCategorySet;
+    }
+
+    public boolean isCurrencySet() {
+        return isCurrencySet;
     }
 }
