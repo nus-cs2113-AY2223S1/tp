@@ -1,5 +1,7 @@
 package computercomponentchooser.components;
 
+import computercomponentchooser.exceptions.NegativeNumberException;
+
 /**
  * Represents the case of the computer build.
  */
@@ -23,7 +25,14 @@ public class Case extends Component {
      * @param formFactor the size of the case
      * @param expansionSlots the additional slots for the case to use additional features
      */
-    public Case(String name, String price, String power, String formFactor, String expansionSlots) {
+    public Case(String name, String price, String power, String formFactor, String expansionSlots)
+            throws NegativeNumberException, NumberFormatException {
+        double priceDouble = Double.parseDouble(price);
+        int powerInt = Integer.parseInt(power);
+        int expansionSlotsInt = Integer.parseInt(expansionSlots);
+        if (priceDouble < 0 || powerInt < 0 || expansionSlotsInt < 0) {
+            throw new NegativeNumberException();
+        }
         this.name = name;
         this.price = price;
         this.power = power;
