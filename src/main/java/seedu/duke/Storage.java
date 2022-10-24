@@ -89,10 +89,6 @@ public class Storage {
         this.propertyList = propertyList;
         this.pairingList = pairingList;
 
-        boolean hasDirectory = checkDirectory();
-        boolean hasPropertyFile = checkPropertyFile();
-        boolean hasClientFile = checkClientFile();
-        boolean hasPairingFile = checkPair();
 
         // Loading all the actual and unit type label
         unitTypeHashMap.put(ACTUAL_UNIT_TYPE_ONE, UNIT_TYPE_ONE);
@@ -110,6 +106,11 @@ public class Storage {
         unitTypeHashMap.put(ACTUAL_UNIT_TYPE_THIRTEEN, UNIT_TYPE_THIRTEEN);
         unitTypeHashMap.put(ACTUAL_UNIT_TYPE_FOURTEEN, UNIT_TYPE_FOURTEEN);
         unitTypeHashMap.put(ACTUAL_UNIT_TYPE_FIFTEEN, UNIT_TYPE_FIFTEEN);
+
+        boolean hasDirectory = checkDirectory();
+        boolean hasPropertyFile = checkPropertyFile();
+        boolean hasClientFile = checkClientFile();
+        boolean hasPairingFile = checkPair();
 
         loadFiles(hasDirectory, hasPropertyFile, hasClientFile, hasPairingFile);
 
