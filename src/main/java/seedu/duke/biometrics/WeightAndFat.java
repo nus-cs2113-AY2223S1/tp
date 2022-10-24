@@ -14,6 +14,14 @@ public class WeightAndFat {
         setFat(fat);
     }
 
+    public int getWeight() {
+        return weight;
+    }
+
+    public int getFat() {
+        return fat;
+    }
+
     public void setWeight(int weight) throws IllegalValueException {
         checkWeight(weight);
         this.weight = weight;

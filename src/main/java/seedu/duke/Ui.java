@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import seedu.duke.biometrics.WeightAndFat;
+import seedu.duke.biometrics.WeightAndFatList;
 import seedu.duke.exercise.CardioExercise;
 import seedu.duke.exercise.Exercise;
 import seedu.duke.exercise.StrengthExercise;
@@ -72,6 +74,14 @@ public class Ui {
         printEmptyLine();
     }
 
+    public void outputWeightList(ArrayList<WeightAndFat> weightAndFatArrayList) {
+        Integer[] columnSpacingArray = {5, 6, 14};
+        getWeightColumnsSpacing(weightAndFatArrayList, columnSpacingArray);
+        generateWeightTableHeader(columnSpacingArray);
+        printWeightList(weightAndFatArrayList, columnSpacingArray);
+        printEmptyLine();
+    }
+
     private void getExerciseColumnsSpacing(ArrayList<Exercise> exerciseArrayList, Integer[] columnSpacingArray) {
         columnSpacingArray[0] = Math.max(columnSpacingArray[0], exerciseArrayList.size() % 10 + 1);
         for (Exercise exercise : exerciseArrayList) {
@@ -92,6 +102,14 @@ public class Ui {
         for (Food food : foodArrayList) {
             columnSpacingArray[1] = Math.max(columnSpacingArray[1], food.getFoodDescription().length());
             columnSpacingArray[2] = Math.max(columnSpacingArray[2], food.getCalories() % 10 + 1);
+        }
+    }
+
+    private void getWeightColumnsSpacing(ArrayList<WeightAndFat> weightAndFatArrayList, Integer[] columnSpacingArray) {
+        columnSpacingArray[0] = Math.max(columnSpacingArray[0], weightAndFatArrayList.size() % 10 + 1);
+        for (WeightAndFat weightAndFat : weightAndFatArrayList) {
+            columnSpacingArray[1] = Math.max(columnSpacingArray[1], weightAndFat.getWeight() % 10 + 1);
+            columnSpacingArray[2] = Math.max(columnSpacingArray[2], weightAndFat.getFat() % 10 + 1);
         }
     }
 
@@ -124,6 +142,16 @@ public class Ui {
         }
     }
 
+    private void printWeightList(ArrayList<WeightAndFat> weightAndFatArrayList, Integer[] columnSpacingArray) {
+        for (int i = 0; i < weightAndFatArrayList.size(); i++) {
+            WeightAndFat weightAndFat = weightAndFatArrayList.get(i);
+            String index = addRightPadding(Integer.toString(i + 1), columnSpacingArray[0]) + " | ";
+            String weight = addRightPadding(Integer.toString(weightAndFat.getWeight()), columnSpacingArray[1]) + " | ";
+            String fat = addRightPadding(Integer.toString(weightAndFat.getFat()), columnSpacingArray[2]) + " | ";
+            printInSameLine(index, weight, fat);
+        }
+    }
+
     private String getTimeForPrint(Exercise exercise, Integer numberOfSpace) {
         if (exercise instanceof StrengthExercise) {
             return addRightPadding("-", numberOfSpace);
@@ -151,6 +179,15 @@ public class Ui {
         String paddedDescription = addRightPadding("Description", columnSpacingArray[1]) + " | ";
         String paddedCalories = addRightPadding("Calories", columnSpacingArray[2]) + " | ";
         String line = paddedIndex + paddedDescription + paddedCalories;
+        String separatorLine = "-".repeat(line.length());
+        output(separatorLine, line, separatorLine);
+    }
+
+    private void generateWeightTableHeader(Integer[] columnSpacingArray) {
+        String paddedIndex = addRightPadding("Index", columnSpacingArray[0]) + " | ";
+        String paddedWeight = addRightPadding("Weight", columnSpacingArray[1]) + " | ";
+        String paddedFat = addRightPadding("Fat Percentage", columnSpacingArray[2]) + " | ";
+        String line = paddedIndex + paddedWeight + paddedFat;
         String separatorLine = "-".repeat(line.length());
         output(separatorLine, line, separatorLine);
     }
