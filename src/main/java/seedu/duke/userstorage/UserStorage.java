@@ -9,7 +9,8 @@ import java.util.logging.Logger;
 
 /**.
  * Deals with loading tasks from the specified file and saving tasks in the specified file
- * File name should be specified in Duke.java: "data/uni_info.txt"
+ * If saving university list and module info, file path = "data/uni_info.txt"
+ * If saving timetable info, file path = "data/timetable_info.txt"
  */
 public class UserStorage {
     private static Logger logger = Logger.getLogger("UserStorage");
