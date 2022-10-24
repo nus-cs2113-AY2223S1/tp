@@ -43,7 +43,7 @@ public class Duke {
                 command.execute(state, ui, storage);
                 isExit = command.isExit();
             } catch (Exception e) {
-                e.printStackTrace();
+                // e.printStackTrace();
                 ui.displayMessage(e.getMessage());
             } finally {
                 ui.displayDivider();
@@ -52,7 +52,7 @@ public class Duke {
         try {
             storage.saveState(state, ui);
         } catch (IOException e) {
-            ui.addMessage(IO_ERROR_MESSAGE);
+            // ui.addMessage(IO_ERROR_MESSAGE);
             ui.displayUi();
         }
         endSequence();

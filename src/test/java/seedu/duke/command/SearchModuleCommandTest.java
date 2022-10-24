@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
-import seedu.duke.exceptions.YamomException;
 import seedu.duke.model.Module;
 
 public class SearchModuleCommandTest {

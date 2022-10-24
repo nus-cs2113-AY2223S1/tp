@@ -23,15 +23,15 @@ public class GetModuleCommand extends Command {
     public static final String COMMAND_WORD = "get";
     public static final String COMMAND_USAGE = "get [EXACT_MODULE_CODE]";
     public static final String COMMAND_DESCRIPTION = "Show all details of a module.";
-    public static final String MISSING_MODULE_CODE = "Please enter a module code!";
-    public static final String MODULE_NOT_FOUND = "Module not found! Please enter a valid module code! Try searching if you do not remember the exact module code.";
-    // private static final String ERROR_WRONG_FORMAT = "Wrong format, should be: " + COMMAND_USAGE;
+    public static final String MODULE_NOT_FOUND = "Module not found! Please enter a valid module code! Try searching "
+            + "if you do not remember the exact module code.";
+    private static final String ERROR_WRONG_FORMAT = "Wrong format, should be: " + COMMAND_USAGE;
 
     public GetModuleCommand(String[] input) throws YamomException {
         super(input);
 
         if (input.length < 2) {
-            throw new YamomException(MISSING_MODULE_CODE);
+            throw new YamomException(ERROR_WRONG_FORMAT);
         }
 
         String moduleCode = input[1].toUpperCase();

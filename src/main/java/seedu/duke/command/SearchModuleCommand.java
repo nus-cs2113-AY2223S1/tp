@@ -51,7 +51,7 @@ public class SearchModuleCommand extends Command {
 
     @Override
     public void execute(State state, Ui ui, Storage storage) {
-        assert state != null : "List of lessons should not be null";
+        assert state != null : "State object should not be null";
         logger = Logger.getLogger(SUBSYSTEM_NAME);
         logger.log(Level.FINE, "Loading search module command");
 
