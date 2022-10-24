@@ -7,6 +7,7 @@ public enum DateFormats {
     //@@author wcwy
     DATE_INPUT_PATTERN("ddMMyyyy"),
     DATE_OUTPUT_PATTERN("MMM dd yyyy"),
+    DATE_MONTH_PATTERN("MMM yyyy"),
     DATE_STORAGE_OUTPUT_PATTERN("yyyy-MM-dd");
 
     public final String message;

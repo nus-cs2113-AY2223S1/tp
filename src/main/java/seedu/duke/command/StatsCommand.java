@@ -43,7 +43,8 @@ public class StatsCommand extends ListAndStatsCommand {
     // The formatting information for the parameters used by the command
     public static final String COMMAND_PARAMETERS_INFO = "Parameters information:"
             + LINE_SEPARATOR
-            + "STATISTICS_TYPE: The type of statistics to be generated. Only \"categories\" or \"time\" is accepted."
+            + "STATISTICS_TYPE: The type of statistics to be generated. Only \"categories\", \"months\" or \"time\" "
+            + "is accepted."
             + "(Optional) MONTH: Month of the transaction. Only integers within 1 to 12 are accepted. Note that "
             + "month must be accompanied by a year. This tag cannot be used together with [p/PERIOD] or [n/NUMBER] "
             + "tags."
