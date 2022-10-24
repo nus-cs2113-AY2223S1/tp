@@ -33,6 +33,7 @@ public class CommandListPropertiesWithTags extends Command {
             break;
         case CommandStructure.SHORT_FLAG:
             displayPropertyShort(propertyList, ui);
+            break;
         default:
             break;
         }
@@ -67,7 +68,7 @@ public class CommandListPropertiesWithTags extends Command {
     }
 
     private void displayPropertyShort(PropertyList propertyList, Ui ui) {
-        for(int i = 0; i < propertyList.getCurrentListSize(); i++) {
+        for (int i = 0; i < propertyList.getCurrentListSize(); i++) {
             ui.displayOnePropertyShort(propertyList.getPropertyList().get(i), i + 1);
         }
         ui.displayNoOfProperties(propertyList.getCurrentListSize());

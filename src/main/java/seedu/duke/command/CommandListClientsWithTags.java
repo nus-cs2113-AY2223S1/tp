@@ -32,6 +32,7 @@ public class CommandListClientsWithTags extends Command {
             break;
         case CommandStructure.SHORT_FLAG:
             displayClientShort(clientList, ui);
+            break;
         default:
             break;
         }
@@ -46,7 +47,7 @@ public class CommandListClientsWithTags extends Command {
 
     public void displayClientShort(ClientList clientList, Ui ui) {
         for (int i = 0; i < clientList.getCurrentListSize(); i++) {
-           ui.displayOneClientShort(clientList.getClientList().get(i), i + 1);
+            ui.displayOneClientShort(clientList.getClientList().get(i), i + 1);
         }
         ui.displayNoOfClients(clientList.getCurrentListSize());
     }
