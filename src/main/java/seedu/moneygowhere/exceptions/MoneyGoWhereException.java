@@ -1,5 +1,7 @@
 package seedu.moneygowhere.exceptions;
 
+//@@author xzynos
+
 /**
  * Defines exceptions thrown by the program.
  */
@@ -39,8 +41,8 @@ public class MoneyGoWhereException extends Exception {
     }
 
     /**
-     * Initializes a new exception with a detail message and cause.
-     * Suppression and writable stack trace can be enabled or disabled.
+     * Initializes a new exception with a detail message and cause. Suppression and writable stack trace can be enabled
+     * or disabled.
      *
      * @param message Detail message.
      * @param cause Throwable cause.

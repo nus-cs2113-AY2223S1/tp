@@ -2,6 +2,8 @@ package seedu.moneygowhere.exceptions.data.currency;
 
 import seedu.moneygowhere.exceptions.MoneyGoWhereException;
 
+//@@author jeyvia
+
 /**
  * Defines exception to be thrown when the currency entered is invalid.
  */

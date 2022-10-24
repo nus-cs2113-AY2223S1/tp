@@ -2,6 +2,8 @@ package seedu.moneygowhere.exceptions.data.recurringpayment;
 
 import seedu.moneygowhere.exceptions.MoneyGoWhereException;
 
+//@@author xzynos
+
 /**
  * Defines exception to be thrown when a recurring payment is not found in recurring payment manager.
  */

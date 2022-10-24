@@ -10,6 +10,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
 
+//@@author xzynos
+
 /**
  * Stores and manages a list of expenses.
  */

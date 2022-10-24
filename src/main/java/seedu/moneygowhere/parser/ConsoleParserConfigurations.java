@@ -517,11 +517,11 @@ public class ConsoleParserConfigurations {
     /**
      * Defines parameters for console command Merge-file.
      */
-    public static final String COMMAND_MERGE_EXTERNAL_FILE = ""
+    public static final String COMMAND_MERGE_FILE = ""
             + "Merge-File";
-    public static final String COMMAND_MERGE_EXTERNAL_FILE_ARG_MERGE_EXTERNAL_FILE_PATH = ""
+    public static final String COMMAND_MERGE_FILE_ARG_MERGE_FILE_PATH = ""
             + "p";
-    public static final String COMMAND_MERGE_EXTERNAL_FILE_ARG_MERGE_EXTERNAL_FILE_PATH_LONG = ""
+    public static final String COMMAND_MERGE_FILE_ARG_MERGE_FILE_PATH_LONG = ""
             + "path-string";
     public static final String COMMAND_MERGE_EXTERNAL_FILE_ARG_MERGE_EXTERNAL_FILE_PATH_DESC = ""
             + "File Path";
@@ -1265,8 +1265,8 @@ public class ConsoleParserConfigurations {
      */
     public static Options getCommandMergeExternalFileOptions() {
         Option optionMergeFilePath = new Option(
-                COMMAND_MERGE_EXTERNAL_FILE_ARG_MERGE_EXTERNAL_FILE_PATH,
-                COMMAND_MERGE_EXTERNAL_FILE_ARG_MERGE_EXTERNAL_FILE_PATH_LONG,
+                COMMAND_MERGE_FILE_ARG_MERGE_FILE_PATH,
+                COMMAND_MERGE_FILE_ARG_MERGE_FILE_PATH_LONG,
                 COMMAND_MERGE_EXTERNAL_FILE_ARG_MERGE_EXTERNAL_FILE_PATH_HAS_VAL,
                 COMMAND_MERGE_EXTERNAL_FILE_ARG_MERGE_EXTERNAL_FILE_PATH_DESC
         );

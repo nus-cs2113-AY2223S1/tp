@@ -5,6 +5,8 @@ import seedu.moneygowhere.exceptions.data.income.IncomeManagerIncomeNotFoundExce
 
 import java.util.ArrayList;
 
+//@@author penguin-s
+
 /**
  * Stores and manages a list of incomes.
  */

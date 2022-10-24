@@ -3,6 +3,8 @@ package seedu.moneygowhere.commands;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+//@@author penguin-s
+
 /**
  * Stores the command Add-Income and its arguments.
  */

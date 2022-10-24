@@ -2,6 +2,8 @@ package seedu.moneygowhere.data.recurringpayments;
 
 import java.math.BigDecimal;
 
+//@@author xzynos
+
 /**
  * Stores data associated with a recurring payment.
  */

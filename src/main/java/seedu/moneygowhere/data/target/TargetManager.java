@@ -5,6 +5,8 @@ import seedu.moneygowhere.exceptions.data.target.TargetManagerTargetNotFoundExce
 
 import java.util.ArrayList;
 
+//@@author penguin-s
+
 /**
  * Stores and manages a list of expenses.
  */

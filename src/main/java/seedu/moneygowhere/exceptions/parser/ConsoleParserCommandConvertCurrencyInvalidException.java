@@ -2,6 +2,8 @@ package seedu.moneygowhere.exceptions.parser;
 
 import seedu.moneygowhere.exceptions.MoneyGoWhereException;
 
+//@@author jeyvia
+
 /**
  * Defines exception to be thrown when the command Convert-Currency is invalid.
  */

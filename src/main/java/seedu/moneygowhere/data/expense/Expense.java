@@ -3,6 +3,8 @@ package seedu.moneygowhere.data.expense;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+//@@author xzynos
+
 /**
  * Stores data associated with an expense.
  */

@@ -74,6 +74,8 @@ import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_TARGET_E
 import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_TARGET_ID_ATTRIBUTE;
 import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_TARGET_NAME_ELEMENT;
 
+//@@author LokQiJun
+
 /**
  * Stores and load data to and from storage.
  */
@@ -135,7 +137,7 @@ public class LocalStorage {
                     recurringPaymentManager.addRecurringPayment(loadRecurringPayment);
                 }
             }
-            System.out.println(Messages.LOCAL_STORAGE_LOAD_SUCCESS);
+            System.out.println(Messages.LOCAL_STORAGE_MESSAGE_LOAD_SUCCESS);
         } catch (FileNotFoundException e) {
             initialiseFile();
             System.out.println(Messages.LOCAL_STORAGE_ERROR_NO_LOAD_FILE);
@@ -193,8 +195,8 @@ public class LocalStorage {
                     recurringPaymentManager.addRecurringPayment(loadRecurringPayment);
                 }
             }
-            System.out.println(Messages.LOCAL_STORAGE_LOAD_SUCCESS);
-            System.out.println(Messages.LOCAL_STORAGE_MERGE_EXTERNAL_DATA_SUCCESSFUL);
+            System.out.println(Messages.LOCAL_STORAGE_MESSAGE_LOAD_SUCCESS);
+            System.out.println(Messages.LOCAL_STORAGE_MESSAGE_MERGE_FILE_SUCCESS);
         } catch (FileNotFoundException e) {
             System.out.println(Messages.LOCAL_STORAGE_ERROR_NO_LOAD_FILE);
         } catch (SAXException | IOException | ParserConfigurationException e) {

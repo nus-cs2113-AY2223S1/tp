@@ -2,6 +2,7 @@ package seedu.moneygowhere.exceptions.parser;
 
 import seedu.moneygowhere.exceptions.MoneyGoWhereException;
 
+//@@author xzynos
 @SuppressWarnings("unused")
 public class ConsoleParserCommandEditExpenseInvalidException extends MoneyGoWhereException {
     public ConsoleParserCommandEditExpenseInvalidException() {

@@ -2,6 +2,8 @@ package seedu.moneygowhere.exceptions.parser;
 
 import seedu.moneygowhere.exceptions.MoneyGoWhereException;
 
+//@@author jeyvia
+
 /**
  * Defines exception to be thrown when the arguments for command Sort-Expense is invalid.
  */

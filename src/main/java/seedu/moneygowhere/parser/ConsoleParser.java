@@ -57,10 +57,14 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 
+//@@author xzynos
+
 /**
  * Provide functions to parse inputs read from standard input.
  */
 public class ConsoleParser {
+    //@@author xzynos
+
     /**
      * Tokenizes command arguments for use by {@link DefaultParser#parse(Options, String[])}.
      *
@@ -76,10 +80,12 @@ public class ConsoleParser {
         return tokenList.toArray(new String[0]);
     }
 
+    //@@author xzynos
+
     /**
      * Parses command arguments.
      *
-     * @param options   Command line options.
+     * @param options Command line options.
      * @param arguments Command line arguments.
      * @return Parsed command arguments.
      * @throws ParseException If an error is encountered during the parsing of command line arguments.
@@ -93,10 +99,12 @@ public class ConsoleParser {
         return commandLine;
     }
 
+    //@@author xzynos
     private static ConsoleCommandBye parseCommandBye() {
         return new ConsoleCommandBye();
     }
 
+    //@@author xzynos
     private static void validateCommandAddExpenseOptions(Options options) {
         boolean hasAllCliOptions = options.hasLongOption(
                 ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_NAME_LONG)
@@ -119,6 +127,7 @@ public class ConsoleParser {
                 ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS;
     }
 
+    //@@author xzynos
     private static CommandLine parseCommandAddExpenseArguments(Options options, String arguments) throws
             ConsoleParserCommandAddExpenseInvalidException {
         try {
@@ -130,6 +139,7 @@ public class ConsoleParser {
         }
     }
 
+    //@@author xzynos
     private static void validateCommandAddExpenseValues(CommandLine commandLine) throws
             ConsoleParserCommandAddExpenseInvalidException {
         String name = commandLine.getOptionValue(
@@ -157,6 +167,7 @@ public class ConsoleParser {
         }
     }
 
+    //@@author xzynos
     private static ConsoleCommandAddExpense parseCommandAddExpenseValues(CommandLine commandLine) throws
             ConsoleParserCommandAddExpenseInvalidException {
         try {
@@ -216,6 +227,7 @@ public class ConsoleParser {
         }
     }
 
+    //@@author xzynos
     private static ConsoleCommandAddExpense normalizeCommandAddExpenseValues(
             ConsoleCommandAddExpense consoleCommandAddExpense
     ) {
@@ -249,6 +261,7 @@ public class ConsoleParser {
         return consoleCommandAddExpense;
     }
 
+    //@@author xzynos
     private static ConsoleCommandAddExpense parseCommandAddExpense(String arguments) throws
             ConsoleParserCommandAddExpenseInvalidException {
         try {
@@ -275,6 +288,7 @@ public class ConsoleParser {
         }
     }
 
+    //@@author xzynos
     private static void validateCommandViewExpenseOptions(Options options) {
         boolean hasAllCliOptions = options.hasLongOption(
                 ConsoleParserConfigurations.COMMAND_VIEW_EXPENSE_ARG_EXPENSE_INDEX_LONG)
@@ -285,6 +299,7 @@ public class ConsoleParser {
                 ConsoleParserConfigurations.COMMAND_VIEW_EXPENSE_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS;
     }
 
+    //@@author xzynos
     private static CommandLine parseCommandViewExpenseArguments(Options options, String arguments) throws
             ConsoleParserCommandViewExpenseInvalidException {
         try {
@@ -296,6 +311,7 @@ public class ConsoleParser {
         }
     }
 
+    //@@author xzynos
     private static void validateCommandViewExpenseValues(CommandLine commandLine) throws
             ConsoleParserCommandViewExpenseInvalidException {
         String expenseIndexStr = commandLine.getOptionValue(
@@ -317,6 +333,7 @@ public class ConsoleParser {
         }
     }
 
+    //@@author xzynos
     private static ConsoleCommandViewExpense parseCommandViewExpenseValues(CommandLine commandLine) throws
             ConsoleParserCommandViewExpenseInvalidException {
         String expenseIndexStr = commandLine.getOptionValue(
@@ -339,12 +356,14 @@ public class ConsoleParser {
         );
     }
 
+    //@@author xzynos
     private static ConsoleCommandViewExpense normalizeCommandViewExpenseValues(
             ConsoleCommandViewExpense consoleCommandViewExpense
     ) {
         return consoleCommandViewExpense;
     }
 
+    //@@author xzynos
     private static ConsoleCommandViewExpense parseCommandViewExpense(String arguments) throws
             ConsoleParserCommandViewExpenseInvalidException {
         try {
@@ -371,6 +390,7 @@ public class ConsoleParser {
         }
     }
 
+    //@@author xzynos
     private static void validateCommandDeleteExpenseOptions(Options options) {
         boolean hasAllCliOptions = options.hasLongOption(
                 ConsoleParserConfigurations.COMMAND_DELETE_EXPENSE_ARG_EXPENSE_INDEX_LONG);
@@ -379,6 +399,7 @@ public class ConsoleParser {
                 ConsoleParserConfigurations.COMMAND_DELETE_EXPENSE_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS;
     }
 
+    //@@author xzynos
     private static CommandLine parseCommandDeleteExpenseArguments(Options options, String arguments) throws
             ConsoleParserCommandDeleteExpenseInvalidException {
         try {
@@ -390,6 +411,7 @@ public class ConsoleParser {
         }
     }
 
+    //@@author xzynos
     private static void validateCommandDeleteExpenseValues(CommandLine commandLine) throws
             ConsoleParserCommandDeleteExpenseInvalidException {
         String expenseIndexStr = commandLine.getOptionValue(
@@ -411,6 +433,7 @@ public class ConsoleParser {
         }
     }
 
+    //@@author xzynos
     private static ConsoleCommandDeleteExpense parseCommandDeleteExpenseValues(CommandLine commandLine) throws
             ConsoleParserCommandDeleteExpenseInvalidException {
         String expenseIndexStr = commandLine.getOptionValue(
@@ -427,12 +450,14 @@ public class ConsoleParser {
         return new ConsoleCommandDeleteExpense(expenseIndex);
     }
 
+    //@@author xzynos
     private static ConsoleCommandDeleteExpense normalizeCommandDeleteExpenseValues(
             ConsoleCommandDeleteExpense consoleCommandDeleteExpense
     ) {
         return consoleCommandDeleteExpense;
     }
 
+    //@@author xzynos
     private static ConsoleCommandDeleteExpense parseCommandDeleteExpense(String arguments) throws
             ConsoleParserCommandDeleteExpenseInvalidException {
         try {
@@ -459,6 +484,7 @@ public class ConsoleParser {
         }
     }
 
+    //@@author xzynos
     private static void validateCommandEditExpenseOptions(Options options) {
         boolean hasAllCliOptions = options.hasLongOption(
                 ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_EXPENSE_INDEX_LONG)
@@ -483,6 +509,7 @@ public class ConsoleParser {
                 ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS;
     }
 
+    //@@author xzynos
     private static CommandLine parseCommandEditExpenseArguments(Options options, String arguments) throws
             ConsoleParserCommandEditExpenseInvalidException {
         try {
@@ -494,6 +521,7 @@ public class ConsoleParser {
         }
     }
 
+    //@@author xzynos
     private static void validateCommandEditExpenseValues(CommandLine commandLine) throws
             ConsoleParserCommandEditExpenseInvalidException {
         String name = commandLine.getOptionValue(
@@ -537,6 +565,7 @@ public class ConsoleParser {
         }
     }
 
+    //@@author xzynos
     private static ConsoleCommandEditExpense parseCommandEditExpenseValues(CommandLine commandLine) throws
             ConsoleParserCommandEditExpenseInvalidException {
         try {
@@ -603,6 +632,7 @@ public class ConsoleParser {
         }
     }
 
+    //@@author xzynos
     private static ConsoleCommandEditExpense normalizeCommandEditExpenseValues(
             ConsoleCommandEditExpense consoleCommandEditExpense
     ) {
@@ -629,6 +659,7 @@ public class ConsoleParser {
         return consoleCommandEditExpense;
     }
 
+    //@@author xzynos
     private static ConsoleCommandEditExpense parseCommandEditExpense(String arguments) throws
             ConsoleParserCommandEditExpenseInvalidException {
         try {
@@ -655,6 +686,7 @@ public class ConsoleParser {
         }
     }
 
+    //@@author jeyvia
     private static void validateCommandSortExpenseOptions(Options options) {
         boolean hasAllCliOptions = options.hasLongOption(
                 ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE_LONG)
@@ -664,6 +696,7 @@ public class ConsoleParser {
                 ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS;
     }
 
+    //@@author jeyvia
     private static CommandLine parseCommandSortExpenseArguments(Options options, String arguments) throws
             ConsoleParserCommandSortExpenseInvalidException, ParseException {
         try {
@@ -675,6 +708,7 @@ public class ConsoleParser {
         }
     }
 
+    //@@author jeyvia
     private static void validateCommandSortExpenseValues(CommandLine commandLine) throws
             ConsoleParserCommandSortExpenseInvalidException {
         String type = commandLine.getOptionValue(
@@ -709,6 +743,7 @@ public class ConsoleParser {
         }
     }
 
+    //@@author jeyvia
     private static ConsoleCommandSortExpense parseCommandSortExpenseValues(CommandLine commandLine) {
         String type = commandLine.getOptionValue(
                 ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE_LONG
@@ -722,12 +757,14 @@ public class ConsoleParser {
         );
     }
 
+    //@@author jeyvia
     private static ConsoleCommandSortExpense normalizeCommandSortExpenseValues(
             ConsoleCommandSortExpense consoleCommandSortExpense
     ) {
         return consoleCommandSortExpense;
     }
 
+    //@@author jeyvia
     private static ConsoleCommandSortExpense parseCommandSortExpense(String arguments) throws
             ConsoleParserCommandSortExpenseInvalidException {
         try {
@@ -756,6 +793,7 @@ public class ConsoleParser {
         }
     }
 
+    //@@author jeyvia
     private static void validateCommandConvertCurrencyOptions(Options options) {
         boolean hasAllCliOptions = options.hasLongOption(
                 ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY_ARG_EXPENSE_INDEX_LONG)
@@ -767,6 +805,7 @@ public class ConsoleParser {
                 ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS;
     }
 
+    //@@author jeyvia
     private static CommandLine parseCommandConvertCurrencyArguments(Options options, String arguments) throws
             ConsoleParserCommandConvertCurrencyInvalidException, ParseException {
         try {
@@ -778,6 +817,7 @@ public class ConsoleParser {
         }
     }
 
+    //@@author jeyvia
     private static void validateCommandConvertCurrencyValues(CommandLine commandLine) throws
             ConsoleParserCommandConvertCurrencyInvalidException {
         String expenseIndexStr = commandLine.getOptionValue(
@@ -802,6 +842,7 @@ public class ConsoleParser {
         }
     }
 
+    //@@author jeyvia
     private static ConsoleCommandConvertCurrency parseCommandConvertCurrencyValues(CommandLine commandLine) {
         String expenseIndexStr = commandLine.getOptionValue(
                 ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY_ARG_EXPENSE_INDEX_LONG
@@ -827,13 +868,14 @@ public class ConsoleParser {
         );
     }
 
+    //@@author jeyvia
     private static ConsoleCommandConvertCurrency normalizeCommandConvertCurrencyValues(
             ConsoleCommandConvertCurrency consoleCommandConvertCurrency
     ) {
         return consoleCommandConvertCurrency;
     }
 
-
+    //@@author jeyvia
     private static ConsoleCommandConvertCurrency parseCommandConvertCurrency(String arguments)
             throws ConsoleParserCommandConvertCurrencyInvalidException {
         try {
@@ -862,6 +904,7 @@ public class ConsoleParser {
         }
     }
 
+    //@@author penguin-s
     private static void validateCommandAddTargetOptions(Options options) {
         boolean hasAllCliOptions = options.hasLongOption(
                 ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_NAME_LONG)
@@ -879,6 +922,7 @@ public class ConsoleParser {
                 ConsoleParserConfigurations.COMMAND_ADD_TARGET_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS;
     }
 
+    //@@author penguin-s
     private static CommandLine parseCommandAddTargetArguments(Options options, String arguments) throws
             ConsoleParserCommandAddTargetInvalidException {
         try {
@@ -890,6 +934,7 @@ public class ConsoleParser {
         }
     }
 
+    //@@author penguin-s
     private static void validateCommandAddTargetValues(CommandLine commandLine) throws
             ConsoleParserCommandAddTargetInvalidException {
         String name = commandLine.getOptionValue(
@@ -901,6 +946,7 @@ public class ConsoleParser {
         }
     }
 
+    //@@author penguin-s
     private static ConsoleCommandAddTarget parseCommandAddTargetValues(CommandLine commandLine) throws
             ConsoleParserCommandAddTargetInvalidException {
         try {
@@ -945,6 +991,7 @@ public class ConsoleParser {
         }
     }
 
+    //@@author penguin-s
     private static ConsoleCommandAddTarget parseCommandAddTarget(String arguments) throws
             ConsoleParserCommandAddTargetInvalidException {
         try {
@@ -1013,6 +1060,7 @@ public class ConsoleParser {
         }
     }
 
+    //@@author penguin-s
     private static void validateCommandViewTargetOptions(Options options) {
         boolean hasAllCliOptions = options.hasLongOption(
                 ConsoleParserConfigurations.COMMAND_VIEW_TARGET_ARG_TARGET_INDEX_LONG);
@@ -1021,6 +1069,7 @@ public class ConsoleParser {
                 ConsoleParserConfigurations.COMMAND_VIEW_TARGET_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS;
     }
 
+    //@@author penguin-s
     private static CommandLine parseCommandViewTargetArguments(Options options, String arguments) throws
             ConsoleParserCommandViewTargetInvalidException {
         try {
@@ -1032,6 +1081,7 @@ public class ConsoleParser {
         }
     }
 
+    //@@author penguin-s
     private static void validateCommandViewTargetValues(CommandLine commandLine) throws
             ConsoleParserCommandViewTargetInvalidException {
         String targetIndexStr = commandLine.getOptionValue(
@@ -1053,6 +1103,7 @@ public class ConsoleParser {
         }
     }
 
+    //@@author penguin-s
     private static ConsoleCommandViewTarget parseCommandViewTargetValues(CommandLine commandLine) throws
             ConsoleParserCommandViewTargetInvalidException {
         String targetIndexStr = commandLine.getOptionValue(
@@ -1071,6 +1122,7 @@ public class ConsoleParser {
         );
     }
 
+    //@@author penguin-s
     private static ConsoleCommandViewTarget parseCommandViewTarget(String arguments) throws
             ConsoleParserCommandViewTargetInvalidException {
         try {
@@ -1094,6 +1146,7 @@ public class ConsoleParser {
         }
     }
 
+    //@@author penguin-s
     private static void validateCommandDeleteTargetOptions(Options options) {
         boolean hasAllCliOptions = options.hasLongOption(
                 ConsoleParserConfigurations.COMMAND_DELETE_TARGET_ARG_TARGET_INDEX_LONG);
@@ -1102,6 +1155,7 @@ public class ConsoleParser {
                 ConsoleParserConfigurations.COMMAND_DELETE_TARGET_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS;
     }
 
+    //@@author penguin-s
     private static CommandLine parseCommandDeleteTargetArguments(Options options, String arguments) throws
             ConsoleParserCommandDeleteTargetInvalidException {
         try {
@@ -1113,6 +1167,7 @@ public class ConsoleParser {
         }
     }
 
+    //@@author penguin-s
     private static void validateCommandDeleteTargetValues(CommandLine commandLine) throws
             ConsoleParserCommandDeleteTargetInvalidException {
         String targetIndexStr = commandLine.getOptionValue(
@@ -1134,6 +1189,7 @@ public class ConsoleParser {
         }
     }
 
+    //@@author penguin-s
     private static ConsoleCommandDeleteTarget parseCommandDeleteTargetValues(CommandLine commandLine) throws
             ConsoleParserCommandDeleteTargetInvalidException {
         String targetIndexStr = commandLine.getOptionValue(
@@ -1150,6 +1206,7 @@ public class ConsoleParser {
         return new ConsoleCommandDeleteTarget(targetIndex);
     }
 
+    //@@author penguin-s
     private static ConsoleCommandDeleteTarget parseCommandDeleteTarget(String arguments) throws
             ConsoleParserCommandDeleteTargetInvalidException {
         try {
@@ -1173,6 +1230,7 @@ public class ConsoleParser {
         }
     }
 
+    //@@author penguin-s
     private static void validateCommandEditTargetOptions(Options options) {
         boolean hasAllCliOptions = options.hasLongOption(
                 ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_TARGET_INDEX_LONG)
@@ -1191,6 +1249,7 @@ public class ConsoleParser {
                 ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS;
     }
 
+    //@@author penguin-s
     private static CommandLine parseCommandEditTargetArguments(Options options, String arguments) throws
             ConsoleParserCommandEditTargetInvalidException {
         try {
@@ -1202,6 +1261,7 @@ public class ConsoleParser {
         }
     }
 
+    //@@author penguin-s
     private static void validateCommandEditTargetValues(CommandLine commandLine) throws
             ConsoleParserCommandEditTargetInvalidException {
         String name = commandLine.getOptionValue(
@@ -1230,6 +1290,7 @@ public class ConsoleParser {
         }
     }
 
+    //@@author penguin-s
     private static ConsoleCommandEditTarget parseCommandEditTargetValues(CommandLine commandLine) throws
             ConsoleParserCommandEditTargetInvalidException {
         try {
@@ -1287,6 +1348,7 @@ public class ConsoleParser {
         }
     }
 
+    //@@author penguin-s
     private static ConsoleCommandEditTarget parseCommandEditTarget(String arguments) throws
             ConsoleParserCommandEditTargetInvalidException {
         try {
@@ -1310,6 +1372,7 @@ public class ConsoleParser {
         }
     }
 
+    //@@author penguin-s
     private static void validateCommandAddIncomeOptions(Options options) {
         boolean hasAllCliOptions = options.hasLongOption(
                 ConsoleParserConfigurations.COMMAND_ADD_INCOME_ARG_NAME_LONG)
@@ -1324,6 +1387,7 @@ public class ConsoleParser {
                 ConsoleParserConfigurations.COMMAND_ADD_INCOME_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS;
     }
 
+    //@@author penguin-s
     private static CommandLine parseCommandAddIncomeArguments(Options options, String arguments) throws
             ConsoleParserCommandAddIncomeInvalidException {
         try {
@@ -1335,6 +1399,7 @@ public class ConsoleParser {
         }
     }
 
+    //@@author penguin-s
     private static void validateCommandAddIncomeValues(CommandLine commandLine) throws
             ConsoleParserCommandAddIncomeInvalidException {
         String name = commandLine.getOptionValue(
@@ -1347,6 +1412,7 @@ public class ConsoleParser {
 
     }
 
+    //@@author penguin-s
     private static ConsoleCommandAddIncome parseCommandAddIncomeValues(CommandLine commandLine) throws
             ConsoleParserCommandAddIncomeInvalidException {
         try {
@@ -1386,6 +1452,7 @@ public class ConsoleParser {
         }
     }
 
+    //@@author penguin-s
     private static ConsoleCommandAddIncome parseCommandAddIncome(String arguments) throws
             ConsoleParserCommandAddIncomeInvalidException {
         try {
@@ -1450,6 +1517,7 @@ public class ConsoleParser {
         }
     }
 
+    //@@author penguin-s
     private static void validateCommandViewIncomeOptions(Options options) {
         boolean hasAllCliOptions = options.hasLongOption(
                 ConsoleParserConfigurations.COMMAND_VIEW_INCOME_ARG_INCOME_INDEX_LONG);
@@ -1458,6 +1526,7 @@ public class ConsoleParser {
                 ConsoleParserConfigurations.COMMAND_VIEW_INCOME_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS;
     }
 
+    //@@author penguin-s
     private static CommandLine parseCommandViewIncomeArguments(Options options, String arguments) throws
             ConsoleParserCommandViewIncomeInvalidException {
         try {
@@ -1469,6 +1538,7 @@ public class ConsoleParser {
         }
     }
 
+    //@@author penguin-s
     private static void validateCommandViewIncomeValues(CommandLine commandLine) throws
             ConsoleParserCommandViewIncomeInvalidException {
         String incomeIndexStr = commandLine.getOptionValue(
@@ -1490,6 +1560,7 @@ public class ConsoleParser {
         }
     }
 
+    //@@author penguin-s
     private static ConsoleCommandViewIncome parseCommandViewIncomeValues(CommandLine commandLine) throws
             ConsoleParserCommandViewIncomeInvalidException {
         String incomeIndexStr = commandLine.getOptionValue(
@@ -1508,6 +1579,7 @@ public class ConsoleParser {
         );
     }
 
+    //@@author penguin-s
     private static ConsoleCommandViewIncome parseCommandViewIncome(String arguments) throws
             ConsoleParserCommandViewIncomeInvalidException {
         try {
@@ -1531,6 +1603,7 @@ public class ConsoleParser {
         }
     }
 
+    //@@author penguin-s
     private static void validateCommandDeleteIncomeOptions(Options options) {
         boolean hasAllCliOptions = options.hasLongOption(
                 ConsoleParserConfigurations.COMMAND_DELETE_INCOME_ARG_INCOME_INDEX_LONG);
@@ -1539,6 +1612,7 @@ public class ConsoleParser {
                 ConsoleParserConfigurations.COMMAND_DELETE_INCOME_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS;
     }
 
+    //@@author penguin-s
     private static CommandLine parseCommandDeleteIncomeArguments(Options options, String arguments) throws
             ConsoleParserCommandDeleteIncomeInvalidException {
         try {
@@ -1550,6 +1624,7 @@ public class ConsoleParser {
         }
     }
 
+    //@@author penguin-s
     private static void validateCommandDeleteIncomeValues(CommandLine commandLine) throws
             ConsoleParserCommandDeleteIncomeInvalidException {
         String incomeIndexStr = commandLine.getOptionValue(
@@ -1571,6 +1646,7 @@ public class ConsoleParser {
         }
     }
 
+    //@@author penguin-s
     private static ConsoleCommandDeleteIncome parseCommandDeleteIncomeValues(CommandLine commandLine) throws
             ConsoleParserCommandDeleteIncomeInvalidException {
         String incomeIndexStr = commandLine.getOptionValue(
@@ -1587,6 +1663,7 @@ public class ConsoleParser {
         return new ConsoleCommandDeleteIncome(incomeIndex);
     }
 
+    //@@author penguin-s
     private static ConsoleCommandDeleteIncome parseCommandDeleteIncome(String arguments) throws
             ConsoleParserCommandDeleteIncomeInvalidException {
         try {
@@ -1610,6 +1687,7 @@ public class ConsoleParser {
         }
     }
 
+    //@@author penguin-s
     private static void validateCommandEditIncomeOptions(Options options) {
         boolean hasAllCliOptions = options.hasLongOption(
                 ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_INCOME_INDEX_LONG)
@@ -1626,6 +1704,7 @@ public class ConsoleParser {
                 ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS;
     }
 
+    //@@author penguin-s
     private static CommandLine parseCommandEditIncomeArguments(Options options, String arguments) throws
             ConsoleParserCommandEditIncomeInvalidException {
         try {
@@ -1637,6 +1716,7 @@ public class ConsoleParser {
         }
     }
 
+    //@@author penguin-s
     private static void validateCommandEditIncomeValues(CommandLine commandLine) throws
             ConsoleParserCommandEditIncomeInvalidException {
         String name = commandLine.getOptionValue(
@@ -1665,6 +1745,7 @@ public class ConsoleParser {
         }
     }
 
+    //@@author penguin-s
     private static ConsoleCommandEditIncome parseCommandEditIncomeValues(CommandLine commandLine) throws
             ConsoleParserCommandEditIncomeInvalidException {
         try {
@@ -1715,6 +1796,7 @@ public class ConsoleParser {
         }
     }
 
+    //@@author penguin-s
     private static ConsoleCommandEditIncome parseCommandEditIncome(String arguments) throws
             ConsoleParserCommandEditIncomeInvalidException {
         try {
@@ -1738,6 +1820,7 @@ public class ConsoleParser {
         }
     }
 
+    //@@author xzynos
     private static void validateCommandAddRecurringPaymentOptions(Options options) {
         boolean hasAllCliOptions = options.hasLongOption(
                 ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_NAME_LONG)
@@ -1756,6 +1839,7 @@ public class ConsoleParser {
                 ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS;
     }
 
+    //@@author xzynos
     private static CommandLine parseCommandAddRecurringPaymentArguments(Options options, String arguments) throws
             ConsoleParserCommandAddRecurringPaymentInvalidException {
         try {
@@ -1767,6 +1851,7 @@ public class ConsoleParser {
         }
     }
 
+    //@@author xzynos
     private static void validateCommandAddRecurringPaymentValues(CommandLine commandLine) throws
             ConsoleParserCommandAddRecurringPaymentInvalidException {
         String name = commandLine.getOptionValue(
@@ -1778,6 +1863,7 @@ public class ConsoleParser {
         }
     }
 
+    //@@author xzynos
     private static ConsoleCommandAddRecurringPayment parseCommandAddRecurringPaymentValues(
             CommandLine commandLine
     ) throws ConsoleParserCommandAddRecurringPaymentInvalidException {
@@ -1822,12 +1908,14 @@ public class ConsoleParser {
         }
     }
 
+    //@@author xzynos
     private static ConsoleCommandAddRecurringPayment normalizeCommandAddRecurringPaymentValues(
             ConsoleCommandAddRecurringPayment consoleCommandAddRecurringPayment
     ) {
         return consoleCommandAddRecurringPayment;
     }
 
+    //@@author xzynos
     private static ConsoleCommandAddRecurringPayment parseCommandAddRecurringPayment(String arguments) throws
             ConsoleParserCommandAddRecurringPaymentInvalidException {
         try {
@@ -1854,6 +1942,7 @@ public class ConsoleParser {
         }
     }
 
+    //@@author xzynos
     private static void validateCommandViewRecurringPaymentOptions(Options options) {
         boolean hasAllCliOptions = options.hasLongOption(
                 ConsoleParserConfigurations.COMMAND_VIEW_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_LONG);
@@ -1862,6 +1951,7 @@ public class ConsoleParser {
                 ConsoleParserConfigurations.COMMAND_VIEW_RECURRING_PAYMENT_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS;
     }
 
+    //@@author xzynos
     private static CommandLine parseCommandViewRecurringPaymentArguments(Options options, String arguments) throws
             ConsoleParserCommandViewRecurringPaymentInvalidException {
         try {
@@ -1873,6 +1963,7 @@ public class ConsoleParser {
         }
     }
 
+    //@@author xzynos
     private static void validateCommandViewRecurringPaymentValues(CommandLine commandLine) throws
             ConsoleParserCommandViewRecurringPaymentInvalidException {
         String recurringPaymentIndexStr = commandLine.getOptionValue(
@@ -1894,6 +1985,7 @@ public class ConsoleParser {
         }
     }
 
+    //@@author xzynos
     private static ConsoleCommandViewRecurringPayment parseCommandViewRecurringPaymentValues(
             CommandLine commandLine
     ) throws ConsoleParserCommandViewRecurringPaymentInvalidException {
@@ -1915,12 +2007,14 @@ public class ConsoleParser {
         }
     }
 
+    //@@author xzynos
     private static ConsoleCommandViewRecurringPayment normalizeCommandViewRecurringPaymentValues(
             ConsoleCommandViewRecurringPayment consoleCommandViewRecurringPayment
     ) {
         return consoleCommandViewRecurringPayment;
     }
 
+    //@@author xzynos
     private static ConsoleCommandViewRecurringPayment parseCommandViewRecurringPayment(String arguments) throws
             ConsoleParserCommandViewRecurringPaymentInvalidException {
         try {
@@ -1947,6 +2041,7 @@ public class ConsoleParser {
         }
     }
 
+    //@@author xzynos
     private static void validateCommandDeleteRecurringPaymentOptions(Options options) {
         boolean hasAllCliOptions = options.hasLongOption(
                 ConsoleParserConfigurations.COMMAND_DELETE_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_LONG);
@@ -1955,6 +2050,7 @@ public class ConsoleParser {
                 ConsoleParserConfigurations.COMMAND_DELETE_RECURRING_PAYMENT_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS;
     }
 
+    //@@author xzynos
     private static CommandLine parseCommandDeleteRecurringPaymentArguments(Options options, String arguments) throws
             ConsoleParserCommandDeleteRecurringPaymentInvalidException {
         try {
@@ -1966,6 +2062,7 @@ public class ConsoleParser {
         }
     }
 
+    //@@author xzynos
     private static void validateCommandDeleteRecurringPaymentValues(CommandLine commandLine) throws
             ConsoleParserCommandDeleteRecurringPaymentInvalidException {
         String recurringPaymentIndexStr = commandLine.getOptionValue(
@@ -1987,6 +2084,7 @@ public class ConsoleParser {
         }
     }
 
+    //@@author xzynos
     private static ConsoleCommandDeleteRecurringPayment parseCommandDeleteRecurringPaymentValues(
             CommandLine commandLine
     ) throws ConsoleParserCommandDeleteRecurringPaymentInvalidException {
@@ -2008,12 +2106,14 @@ public class ConsoleParser {
         }
     }
 
+    //@@author xzynos
     private static ConsoleCommandDeleteRecurringPayment normalizeCommandDeleteRecurringPaymentValues(
             ConsoleCommandDeleteRecurringPayment consoleCommandDeleteRecurringPayment
     ) {
         return consoleCommandDeleteRecurringPayment;
     }
 
+    //@@author xzynos
     private static ConsoleCommandDeleteRecurringPayment parseCommandDeleteRecurringPayment(String arguments) throws
             ConsoleParserCommandDeleteRecurringPaymentInvalidException {
         try {
@@ -2040,6 +2140,7 @@ public class ConsoleParser {
         }
     }
 
+    //@@author xzynos
     private static void validateCommandEditRecurringPaymentOptions(Options options) {
         boolean hasAllCliOptions = options.hasLongOption(
                 ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_LONG)
@@ -2060,6 +2161,7 @@ public class ConsoleParser {
                 ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS;
     }
 
+    //@@author xzynos
     private static CommandLine parseCommandEditRecurringPaymentArguments(Options options, String arguments) throws
             ConsoleParserCommandEditRecurringPaymentInvalidException {
         try {
@@ -2071,6 +2173,7 @@ public class ConsoleParser {
         }
     }
 
+    //@@author xzynos
     private static void validateCommandEditRecurringPaymentValues(CommandLine commandLine) throws
             ConsoleParserCommandEditRecurringPaymentInvalidException {
         String name = commandLine.getOptionValue(
@@ -2082,6 +2185,7 @@ public class ConsoleParser {
         }
     }
 
+    //@@author xzynos
     private static ConsoleCommandEditRecurringPayment parseCommandEditRecurringPaymentValues(
             CommandLine commandLine
     ) throws ConsoleParserCommandEditRecurringPaymentInvalidException {
@@ -2165,12 +2269,14 @@ public class ConsoleParser {
         }
     }
 
+    //@@author xzynos
     private static ConsoleCommandEditRecurringPayment normalizeCommandEditRecurringPaymentValues(
             ConsoleCommandEditRecurringPayment consoleCommandEditRecurringPayment
     ) {
         return consoleCommandEditRecurringPayment;
     }
 
+    //@@author xzynos
     private static ConsoleCommandEditRecurringPayment parseCommandEditRecurringPayment(String arguments) throws
             ConsoleParserCommandEditRecurringPaymentInvalidException {
         try {
@@ -2197,14 +2303,16 @@ public class ConsoleParser {
         }
     }
 
+    //@@author LokQiJun
     private static void validateCommandMergeExternalFileOptions(Options options) {
         boolean hasAllCliOptions = options.hasLongOption(
-                ConsoleParserConfigurations.COMMAND_MERGE_EXTERNAL_FILE_ARG_MERGE_EXTERNAL_FILE_PATH_LONG);
+                ConsoleParserConfigurations.COMMAND_MERGE_FILE_ARG_MERGE_FILE_PATH_LONG);
 
         assert hasAllCliOptions :
                 ConsoleParserConfigurations.COMMAND_MERGE_EXTERNAL_FILE_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS;
     }
 
+    //@@author LokQiJun
     private static CommandLine parseCommandMergeExternalFileArguments(Options options, String arguments) throws
             ConsoleParserCommandMergeExternalFileInvalidException {
         try {
@@ -2215,10 +2323,11 @@ public class ConsoleParser {
         }
     }
 
+    //@@author LokQiJun
     private static void validateCommandMergeExternalFileValues(CommandLine commandLine) throws
             ConsoleParserCommandMergeExternalFileInvalidException {
         String mergeFilePathString = commandLine.getOptionValue(
-                ConsoleParserConfigurations.COMMAND_MERGE_EXTERNAL_FILE_ARG_MERGE_EXTERNAL_FILE_PATH_LONG
+                ConsoleParserConfigurations.COMMAND_MERGE_FILE_ARG_MERGE_FILE_PATH_LONG
         );
 
         if (mergeFilePathString != null) {
@@ -2228,20 +2337,23 @@ public class ConsoleParser {
         }
     }
 
+    //@@author LokQiJun
     private static ConsoleCommandMergeExternalFile parseCommandMergeExternalFileValues(
             CommandLine commandLine) {
         String filePath = commandLine.getOptionValue(
-                ConsoleParserConfigurations.COMMAND_MERGE_EXTERNAL_FILE_ARG_MERGE_EXTERNAL_FILE_PATH_LONG
+                ConsoleParserConfigurations.COMMAND_MERGE_FILE_ARG_MERGE_FILE_PATH_LONG
         );
         return new ConsoleCommandMergeExternalFile(filePath);
     }
 
+    //@@author LokQiJun
     private static ConsoleCommandMergeExternalFile normalizeCommandMergeExternalFileValues(
             ConsoleCommandMergeExternalFile consoleCommandMergeExternalFile
     ) {
         return consoleCommandMergeExternalFile;
     }
 
+    //@@author LokQiJun
     private static ConsoleCommandMergeExternalFile parseCommandMergeExternalFile(String arguments) throws
             ConsoleParserCommandMergeExternalFileInvalidException {
         try {
@@ -2262,12 +2374,13 @@ public class ConsoleParser {
             return consoleCommandMergeExternalFileNormalized;
         } catch (ConsoleParserCommandMergeExternalFileInvalidException exception) {
             throw new ConsoleParserCommandMergeExternalFileInvalidException(
-                    Messages.CONSOLE_ERROR_COMMAND_MERGE_EXTERNAL_FILE_INVALID,
+                    Messages.CONSOLE_ERROR_COMMAND_MERGE_FILE_INVALID,
                     exception
             );
         }
     }
 
+    //@@author xzynos
     private static String getConsoleCommand(String consoleInput) {
         int numOperands = 2;
 
@@ -2276,6 +2389,7 @@ public class ConsoleParser {
         return consoleInputArr[0];
     }
 
+    //@@author xzynos
     private static String getConsoleCommandArguments(String consoleInput) {
         int numOperands = 2;
 
@@ -2288,6 +2402,8 @@ public class ConsoleParser {
 
         return arguments;
     }
+
+    //@@author xzynos
 
     /**
      * Parses an input read from standard input.
@@ -2379,7 +2495,7 @@ public class ConsoleParser {
             return parseCommandDeleteRecurringPayment(arguments);
         } else if (command.equalsIgnoreCase(ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT)) {
             return parseCommandEditRecurringPayment(arguments);
-        } else if (command.equalsIgnoreCase(ConsoleParserConfigurations.COMMAND_MERGE_EXTERNAL_FILE)) {
+        } else if (command.equalsIgnoreCase(ConsoleParserConfigurations.COMMAND_MERGE_FILE)) {
             return parseCommandMergeExternalFile(arguments);
         } else {
             throw new ConsoleParserCommandNotFoundException(Messages.CONSOLE_ERROR_COMMAND_NOT_FOUND);

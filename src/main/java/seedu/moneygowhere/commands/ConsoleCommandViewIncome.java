@@ -1,5 +1,7 @@
 package seedu.moneygowhere.commands;
 
+//@@author penguin-s
+
 /**
  * Stores the command View-Income and its arguments.
  */

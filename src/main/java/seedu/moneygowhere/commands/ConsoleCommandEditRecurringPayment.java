@@ -2,6 +2,8 @@ package seedu.moneygowhere.commands;
 
 import java.math.BigDecimal;
 
+//@@author xzynos
+
 /**
  * Stores the command Edit-RecurringPayment and its arguments.
  */

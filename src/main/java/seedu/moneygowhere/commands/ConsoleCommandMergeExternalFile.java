@@ -1,5 +1,7 @@
 package seedu.moneygowhere.commands;
 
+//@@author LokQiJun
+
 /**
  * Stores the command Merge-File and its arguments.
  */

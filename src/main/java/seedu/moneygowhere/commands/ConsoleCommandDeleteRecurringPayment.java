@@ -1,5 +1,7 @@
 package seedu.moneygowhere.commands;
 
+//@@author xzynos
+
 /**
  * Stores the command Delete-RecurringPayment and its arguments.
  */

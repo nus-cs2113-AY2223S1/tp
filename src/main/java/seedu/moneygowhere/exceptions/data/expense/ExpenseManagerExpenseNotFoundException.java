@@ -2,6 +2,8 @@ package seedu.moneygowhere.exceptions.data.expense;
 
 import seedu.moneygowhere.exceptions.MoneyGoWhereException;
 
+//@@author xzynos
+
 /**
  * Defines exception to be thrown when an expense is not found in expense manager.
  */

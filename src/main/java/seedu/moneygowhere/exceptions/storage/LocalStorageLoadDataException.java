@@ -2,6 +2,8 @@ package seedu.moneygowhere.exceptions.storage;
 
 import seedu.moneygowhere.exceptions.MoneyGoWhereException;
 
+//@@author LokQiJun
+
 /**
  * Defines exception to be thrown when there is an error in load data.
  */
