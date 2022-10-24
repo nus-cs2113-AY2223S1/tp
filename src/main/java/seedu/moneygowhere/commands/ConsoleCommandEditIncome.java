@@ -4,27 +4,36 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 /**
- * Stores the add-target command and its arguments.
+ * Stores the edit-income command and its arguments.
  */
-@SuppressWarnings("FieldMayBeFinal")
-public class ConsoleCommandAddTarget extends ConsoleCommand {
+@SuppressWarnings("unused")
+public class ConsoleCommandEditIncome extends ConsoleCommand {
+    private int incomeIndex;
     private String name;
     private LocalDateTime dateTime;
     private String description;
     private BigDecimal amount;
-    private BigDecimal currentAmount;
 
-    public ConsoleCommandAddTarget(
+    public ConsoleCommandEditIncome(
+            int incomeIndex,
             String name,
             LocalDateTime dateTime,
             String description,
-            BigDecimal amount,
-            BigDecimal currentAmount) {
+            BigDecimal amount
+    ) {
+        this.incomeIndex = incomeIndex;
         this.name = name;
         this.dateTime = dateTime;
         this.description = description;
         this.amount = amount;
-        this.currentAmount = currentAmount;
+    }
+
+    public int getIncomeIndex() {
+        return incomeIndex;
+    }
+
+    public void setIncomeIndex(int incomeIndex) {
+        this.incomeIndex = incomeIndex;
     }
 
     public String getName() {
@@ -57,13 +66,5 @@ public class ConsoleCommandAddTarget extends ConsoleCommand {
 
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
-    }
-
-    public BigDecimal getCurrentAmount() {
-        return currentAmount;
-    }
-
-    public void setCurrentAmount(BigDecimal amount) {
-        this.currentAmount = amount;
     }
 }
