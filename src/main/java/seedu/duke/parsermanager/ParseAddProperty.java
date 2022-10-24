@@ -12,11 +12,44 @@ import seedu.duke.exception.EmptyDetailException;
 import seedu.duke.exception.IncorrectFlagOrderException;
 import seedu.duke.exception.InvalidPriceFormatException;
 import seedu.duke.exception.InvalidSingaporeAddressException;
+import seedu.duke.exception.InvalidUnitTypeLabelException;
 import seedu.duke.exception.MissingFlagException;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import static seedu.duke.CommandStructure.ADD_PROPERTY_FLAGS;
+import static seedu.duke.CommandStructure.UNIT_TYPE_ONE;
+import static seedu.duke.CommandStructure.UNIT_TYPE_TWO;
+import static seedu.duke.CommandStructure.UNIT_TYPE_THREE;
+import static seedu.duke.CommandStructure.UNIT_TYPE_FOUR;
+import static seedu.duke.CommandStructure.UNIT_TYPE_FIVE;
+import static seedu.duke.CommandStructure.UNIT_TYPE_SIX;
+import static seedu.duke.CommandStructure.UNIT_TYPE_SEVEN;
+import static seedu.duke.CommandStructure.UNIT_TYPE_EIGHT;
+import static seedu.duke.CommandStructure.UNIT_TYPE_NINE;
+import static seedu.duke.CommandStructure.UNIT_TYPE_TEN;
+import static seedu.duke.CommandStructure.UNIT_TYPE_ELEVEN;
+import static seedu.duke.CommandStructure.UNIT_TYPE_TWELVE;
+import static seedu.duke.CommandStructure.UNIT_TYPE_THIRTEEN;
+import static seedu.duke.CommandStructure.UNIT_TYPE_FOURTEEN;
+import static seedu.duke.CommandStructure.UNIT_TYPE_FIFTEEN;
+import static seedu.duke.CommandStructure.ACTUAL_UNIT_TYPE_ONE;
+import static seedu.duke.CommandStructure.ACTUAL_UNIT_TYPE_TWO;
+import static seedu.duke.CommandStructure.ACTUAL_UNIT_TYPE_THREE;
+import static seedu.duke.CommandStructure.ACTUAL_UNIT_TYPE_FOUR;
+import static seedu.duke.CommandStructure.ACTUAL_UNIT_TYPE_FIVE;
+import static seedu.duke.CommandStructure.ACTUAL_UNIT_TYPE_SIX;
+import static seedu.duke.CommandStructure.ACTUAL_UNIT_TYPE_SEVEN;
+import static seedu.duke.CommandStructure.ACTUAL_UNIT_TYPE_EIGHT;
+import static seedu.duke.CommandStructure.ACTUAL_UNIT_TYPE_NINE;
+import static seedu.duke.CommandStructure.ACTUAL_UNIT_TYPE_TEN;
+import static seedu.duke.CommandStructure.ACTUAL_UNIT_TYPE_ELEVEN;
+import static seedu.duke.CommandStructure.ACTUAL_UNIT_TYPE_TWELVE;
+import static seedu.duke.CommandStructure.ACTUAL_UNIT_TYPE_THIRTEEN;
+import static seedu.duke.CommandStructure.ACTUAL_UNIT_TYPE_FOURTEEN;
+import static seedu.duke.CommandStructure.ACTUAL_UNIT_TYPE_FIFTEEN;
+
 import static seedu.duke.Messages.EXCEPTION;
 import static seedu.duke.Messages.MESSAGE_ADD_PROPERTY_WRONG_FORMAT;
 
@@ -31,6 +64,7 @@ public class ParseAddProperty extends ParseAdd {
     private static final int PROPERTY_FLAG_SIZE = 4;
     private static final int PROPERTY_ADDRESS_INDEX = 1;
     private static final int PROPERTY_PRICE_INDEX = 2;
+    private static final int PROPERTY_UNIT_TYPE_INDEX = 3;
 
     private static final int FLAG_JUMPER_VALUE = 2;
     private static final int UNIT_VALUE = 1;
@@ -68,13 +102,36 @@ public class ParseAddProperty extends ParseAdd {
     // Accepts only positive whole number for price.
     private static final String VALID_PRICE_REGEX = "^[1-9]\\d*$";
 
+    private static HashMap<String, String> UNIT_TYPE_HASHMAP;
+
+
+
     public ParseAddProperty(String addCommandDescription, PropertyList propertyList) {
         this.commandDescription = addCommandDescription;
         this.propertyList = propertyList;
+
+        HashMap<String, String> unitTypeHashMap = new HashMap<>();
+        unitTypeHashMap.put(UNIT_TYPE_ONE, ACTUAL_UNIT_TYPE_ONE);
+        unitTypeHashMap.put(UNIT_TYPE_TWO, ACTUAL_UNIT_TYPE_TWO);
+        unitTypeHashMap.put(UNIT_TYPE_THREE, ACTUAL_UNIT_TYPE_THREE);
+        unitTypeHashMap.put(UNIT_TYPE_FOUR, ACTUAL_UNIT_TYPE_FOUR);
+        unitTypeHashMap.put(UNIT_TYPE_FIVE, ACTUAL_UNIT_TYPE_FIVE);
+        unitTypeHashMap.put(UNIT_TYPE_SIX, ACTUAL_UNIT_TYPE_SIX);
+        unitTypeHashMap.put(UNIT_TYPE_SEVEN, ACTUAL_UNIT_TYPE_SEVEN);
+        unitTypeHashMap.put(UNIT_TYPE_EIGHT, ACTUAL_UNIT_TYPE_EIGHT);
+        unitTypeHashMap.put(UNIT_TYPE_NINE, ACTUAL_UNIT_TYPE_NINE);
+        unitTypeHashMap.put(UNIT_TYPE_TEN, ACTUAL_UNIT_TYPE_TEN);
+        unitTypeHashMap.put(UNIT_TYPE_ELEVEN, ACTUAL_UNIT_TYPE_ELEVEN);
+        unitTypeHashMap.put(UNIT_TYPE_TWELVE, ACTUAL_UNIT_TYPE_TWELVE);
+        unitTypeHashMap.put(UNIT_TYPE_THIRTEEN, ACTUAL_UNIT_TYPE_THIRTEEN);
+        unitTypeHashMap.put(UNIT_TYPE_FOURTEEN, ACTUAL_UNIT_TYPE_FOURTEEN);
+        unitTypeHashMap.put(UNIT_TYPE_FIFTEEN, ACTUAL_UNIT_TYPE_FIFTEEN);
+        UNIT_TYPE_HASHMAP = unitTypeHashMap;
     }
 
     public Command parseCommand() throws  EmptyDetailException, MissingFlagException, IncorrectFlagOrderException,
-            InvalidSingaporeAddressException, InvalidPriceFormatException, DuplicatePropertyException {
+            InvalidSingaporeAddressException, InvalidPriceFormatException, InvalidUnitTypeLabelException,
+            DuplicatePropertyException {
         try {
             checkForEmptyDetails(commandDescription);
             ArrayList<String> propertyDetails = processCommandAddPropertyDetails(commandDescription);
@@ -128,7 +185,8 @@ public class ParseAddProperty extends ParseAdd {
     }
 
     private void validatePropertyDetails(ArrayList<String> propertyDetails) throws EmptyDetailException,
-            InvalidSingaporeAddressException, InvalidPriceFormatException, DuplicatePropertyException {
+            InvalidSingaporeAddressException, InvalidPriceFormatException, InvalidUnitTypeLabelException,
+            DuplicatePropertyException {
         // Checks for Missing Landlord Name, Property Address, Renting Price (SGD/month) and Unit-Type.
         for (String propertyDetail : propertyDetails) {
             checkForEmptyDetails(propertyDetail);
@@ -137,6 +195,8 @@ public class ParseAddProperty extends ParseAdd {
         // Checks Format for Address (Singapore) and Renting Price.
         checkForValidSingaporeAddress(propertyDetails.get(PROPERTY_ADDRESS_INDEX));
         checkForPriceNumberFormat(propertyDetails.get(PROPERTY_PRICE_INDEX));
+        propertyDetails.set(PROPERTY_UNIT_TYPE_INDEX,
+                checkForValidUnitType(propertyDetails.get(PROPERTY_UNIT_TYPE_INDEX)));
 
         // Duplicate Property refers to properties with the same address.
         checkForDuplicateProperty(propertyList, propertyDetails.get(PROPERTY_ADDRESS_INDEX));
@@ -176,6 +236,15 @@ public class ParseAddProperty extends ParseAdd {
         if (!hasValidPriceNumberFormat) {
             throw new InvalidPriceFormatException();
         }
+    }
+
+    private String checkForValidUnitType(String unitTypeLabel) throws  InvalidUnitTypeLabelException {
+        String actualUnitType = UNIT_TYPE_HASHMAP.get(unitTypeLabel);
+        boolean hasValidUnitType = (actualUnitType != null);
+        if (!hasValidUnitType) {
+            throw new InvalidUnitTypeLabelException();
+        }
+        return actualUnitType;
     }
 
     private void checkForDuplicateProperty(PropertyList propertyList, String propertyAddress)
