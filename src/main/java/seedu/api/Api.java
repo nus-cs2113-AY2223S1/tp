@@ -151,13 +151,17 @@ public class Api {
         for (int i = 0; i < 5; i++) {
             asyncExecuteRequest(i * 500, i);
         }
+        boolean isWritten = false;
         for (int i = 0; i < 5; i++) {
             String partialResult = fetchData(i);
             String processedResult = processData(partialResult);
             totalDataCount += countData(processedResult);
-            result += processedResult;
-            if (i != 4 && !processedResult.isEmpty()) {
-                result += ",";
+
+            if (i != 0 && !processedResult.isEmpty() && isWritten) {
+                result += "," + processedResult;
+            } else if (!processedResult.isEmpty()) {
+                isWritten = true;
+                result += processedResult;
             }
         }
 
