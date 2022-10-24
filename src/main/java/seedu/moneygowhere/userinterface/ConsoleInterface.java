@@ -308,7 +308,9 @@ public class ConsoleInterface {
             recurringPaymentStr += "Category        : " + recurringPayment.getCategory() + "\n";
         }
         recurringPaymentStr += "Currency        : " + recurringPayment.getCurrency() + "\n";
-        recurringPaymentStr += "Mode of Payment : " + recurringPayment.getModeOfPayment();
+        if (recurringPayment.getModeOfPayment() != null) {
+            recurringPaymentStr += "Mode of Payment : " + recurringPayment.getModeOfPayment();
+        }
 
         return recurringPaymentStr;
     }
