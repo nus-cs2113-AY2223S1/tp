@@ -5,8 +5,6 @@ import seedu.duke.data.TransactionList;
 import seedu.duke.exception.MoolahException;
 import seedu.duke.parser.CommandParser;
 
-import java.io.IOException;
-
 public class Duke {
     //@@author paullowse
     private Storage storage;
@@ -16,8 +14,8 @@ public class Duke {
     //@@author chinhan99
     public Duke() { // TODO: Add a file path when implementing storage feature
         ui = new Ui();
-
         storage = new Storage();
+
         try {
             transactions = new TransactionList(storage.initializeFile());
         } catch (MoolahException e) {
