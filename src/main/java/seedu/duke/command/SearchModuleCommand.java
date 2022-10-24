@@ -20,7 +20,6 @@ public class SearchModuleCommand extends Command {
     public static final String COMMAND_DESCRIPTION = "List out all modules that contains matching input search fields"
             + System.lineSeparator() + "\t * Either the module code or title has to be present.";
 
-    // private String toSearchModuleCode;
     private Map<String, String> params;
     private String toSearchModuleCode;
     private String toSearchModuleTitle;
@@ -28,7 +27,6 @@ public class SearchModuleCommand extends Command {
     private String toSearchSemester;
 
     private Logger logger;
-
     public static final String SUBSYSTEM_NAME = "SearchModuleCommand";
 
     public SearchModuleCommand(String input) throws YamomException {
@@ -39,26 +37,26 @@ public class SearchModuleCommand extends Command {
         toSearchLevel = params.getOrDefault("level", null);
         toSearchSemester = params.getOrDefault("sem", null);
 
-        // if size of params is 0, then no params are given, throw exception
+        // if size of params is 0, means no params are given, throw exception
         if (params.size() == 0) {
             throw new YamomException("Please input valid search fields to search for! You can search by module code, "
-                    + "module title, level and semester. \n\nType [help] for assistance!");
+                    + "module title, level and semester.\n\nType [help] for assistance!");
         }
         if (toSearchModuleCode == null && toSearchModuleTitle == null) {
-            throw new YamomException("Please input at least either the module code or title to search for! "
+            throw new YamomException("Please input at least either the module code or title to search for!"
                     + "\n\nType [help] for assistance!");
         }
     }
 
     @Override
     public void execute(State state, Ui ui, Storage storage) {
-        assert state != null : "State object should not be null";
         logger = Logger.getLogger(SUBSYSTEM_NAME);
-        logger.log(Level.FINE, "Loading search module command");
+        logger.log(Level.FINE, "Loading search module command, starting to search for modules");
 
         List<Module> searchResult = filterModuleSearch(toSearchModuleCode, toSearchLevel,
                 toSearchSemester, toSearchModuleTitle);
 
+        logger.log(Level.FINE, "Search module command loaded, printing search result");
         ui.addMessage("Search Result:");
 
         if (searchResult.size() == 0) {

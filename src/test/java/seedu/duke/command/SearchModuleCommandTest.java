@@ -1,29 +1,50 @@
 package seedu.duke.command;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
+import seedu.duke.exceptions.YamomException;
 import seedu.duke.model.Module;
 
 public class SearchModuleCommandTest {
     @Test
-    void filterModuleSearch_allFieldsEmpty_expectCorrectNumberOfFilteredModule() {
-        String toSearchModuleCode = null;
-        String toSearchModuleTitle = null;
-        String toSearchLevel = null;
-        String toSearchSemester = null;
+    void searchModuleCommand_noFieldsEntered_exceptionThrown() {
+        String input = "search";
 
-        List<Module> searchResult = SearchModuleCommand.filterModuleSearch(toSearchModuleCode, toSearchLevel,
-                toSearchSemester, toSearchModuleTitle);
-        int numberOfFilteredModulesInSearchResult = searchResult.size();
-        int expectedNumberOfFilteredModules = 0;
-        assertEquals(expectedNumberOfFilteredModules, numberOfFilteredModulesInSearchResult);
+        String expected = "Error! \tPlease input valid search fields to search for! You can search by module code, "
+                + "module title, level and semester.\n"
+                + "\n"
+                + "Type [help] for assistance!";
+
+        try {
+            SearchModuleCommand searchModuleCommand = new SearchModuleCommand(input);
+            fail();
+        } catch (YamomException e) {
+            assertEquals(expected, e.getMessage());
+        }
     }
 
     @Test
-    void filterModuleSearch_fullValidInput_expectCorrectNumberOfFilteredModule() {
+    void searchModuleCommand_missingTitleAndCodeField_exceptionThrown() {
+        String input = "search /level 2 /sem 1";
+
+        String expected = "Error! \tPlease input at least either the module code or title to search for!\n"
+                + "\n"
+                + "Type [help] for assistance!";
+
+        try {
+            SearchModuleCommand searchModuleCommand = new SearchModuleCommand(input);
+            fail();
+        } catch (YamomException e) {
+            assertEquals(expected, e.getMessage());
+        }
+    }
+
+    @Test
+    void filterModuleSearch_fullValidInputFields_expectCorrectNumberOfFilteredModule() {
         String toSearchModuleCode = "dtk1234";
         String toSearchModuleTitle = "Design Thinking";
         String toSearchLevel = "1";

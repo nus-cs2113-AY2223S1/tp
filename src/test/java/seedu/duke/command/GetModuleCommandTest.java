@@ -1,6 +1,9 @@
 package seedu.duke.command;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.duke.command.GetModuleCommand.isModuleOfferedInCurrentSem;
 
 import java.io.ByteArrayOutputStream;
@@ -68,6 +71,7 @@ public class GetModuleCommandTest {
             String[] input = {"get", "X1010SC"};
             GetModuleCommand getModuleCommand = new GetModuleCommand(input);
             getModuleCommand.execute(state, ui, null);
+            fail();
         } catch (YamomException e) {
             assertEquals("Error! \tModule not found! Please enter a valid module code! Try searching "
                     + "if you do not remember the exact module code.", e.getMessage());
@@ -85,6 +89,7 @@ public class GetModuleCommandTest {
             String[] input = {"get"};
             GetModuleCommand getModuleCommand = new GetModuleCommand(input);
             getModuleCommand.execute(state, ui, null);
+            fail();
         } catch (YamomException e) {
             assertEquals("Error! \tWrong format, should be: get [EXACT_MODULE_CODE]", e.getMessage());
         }
@@ -126,7 +131,8 @@ public class GetModuleCommandTest {
                         + "Prerequisite         : Nil" + s
                         + "Preclusion           : CS1010, CS1010J, CS1010S, CS1010X, CS1010XCP, CS1101S" + s
                         + "Corequisite          : Nil" + s
-                        + "Module CS1010E is not offered in this semester, hence no timetable information is available due to unforseen circumstances" + s;
+                        + "Module CS1010E is not offered in this semester, hence no timetable information is available "
+                        + "due to unforseen circumstances" + s;
 
 
         assertEquals(expectedOutput, outContent.toString());
