@@ -3,6 +3,7 @@ package seedu.duke.command;
 import seedu.duke.Parser;
 import seedu.duke.Ui;
 import seedu.duke.biometrics.Biometrics;
+import seedu.duke.biometrics.Calculator;
 import seedu.duke.biometrics.WeightAndFat;
 import seedu.duke.exception.IllegalValueException;
 import seedu.duke.exercise.CardioExercise;
@@ -12,7 +13,6 @@ import seedu.duke.exercise.StrengthExercise;
 import seedu.duke.food.Food;
 import seedu.duke.food.FoodList;
 import seedu.duke.storage.Storage;
-import seedu.duke.biometrics.Calculator;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;
@@ -144,8 +144,13 @@ public class ViewCommand extends Command {
     private void viewExercise(String[] argumentList) throws IllegalValueException {
         handleInvalidViewExerciseCommand(argumentList);
         ArrayList<Exercise> exerciseArrayList = getExerciseArrayListByCommand(argumentList);
+        boolean isViewingCompletedExerciseList = isViewingCompletedExerciseList(argumentList);
         ui.showExerciseListCaption(exerciseArrayList.size(), argumentList, "Exercises");
         ui.outputExerciseList(exerciseArrayList);
+    }
+
+    private static boolean isViewingCompletedExerciseList(String[] argumentList) {
+        return argumentList.length != 1;
     }
 
 

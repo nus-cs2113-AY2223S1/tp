@@ -1,30 +1,35 @@
 package seedu.duke.exercise;
 
 public class CardioExercise extends Exercise {
-    private int time;
+    private double distance;
 
-    public CardioExercise(String exerciseName, int time, int repetitions, int caloriesBurnt, String date) {
-        super(exerciseName, repetitions, caloriesBurnt, date);
-        this.time = time;
+    public CardioExercise(String exerciseName, double distance, int repetitions, String date) {
+        super(exerciseName, repetitions, date);
+        this.distance = distance;
     }
 
+    public CardioExercise(String exerciseName, double distance, String date) {
+        this(exerciseName, distance, 1, date);
+    }
+
+
     @Override
-    public int getTime() {
-        return time;
+    public double getDistance() {
+        return distance;
     }
 
     @Override
     public String saveExercise() {
-        return "cardio /" + getExerciseName() + " /"
-                + getTime() + " /" + getRepetition() + " /" + getCaloriesBurnt() + " | " + getTaskStatusInNumber();
+        return "cardio /" + getExerciseName() + " /" + getDistance()
+                + " /" + getRepetition() + " /" + getDate() + " /"
+                + getCaloriesBurnt() + " /" + getTime() + " | " + getTaskStatusInNumber();
     }
 
     @Override
     public String toString() {
         return "Cardio Exercise: " + getExerciseName() + System.lineSeparator()
-                + "Time: " + getTime() + System.lineSeparator()
+                + "Distance: " + getDistance() + "km" + System.lineSeparator()
                 + "Repetitions: " + getRepetition() + System.lineSeparator()
-                + "Calories Burnt: " + getCaloriesBurnt() + System.lineSeparator()
                 + "Date: " + getDate() + System.lineSeparator()
                 + String.format("Status: %s", getTaskStatus());
     }

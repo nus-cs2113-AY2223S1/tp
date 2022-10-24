@@ -52,8 +52,10 @@ public class ExerciseList {
         return completedExerciseList.size();
     }
 
-    public void markDone(int index) throws IllegalValueException {
+    public void markDone(int index, double time, int calories) throws IllegalValueException {
         Exercise exercise = getCurrentExercise(index);
+        exercise.setTime(time);
+        exercise.setCaloriesBurnt(calories);
         exercise.setDone(true);
         currentExerciseList.remove(index);
         completedExerciseList.add(exercise);

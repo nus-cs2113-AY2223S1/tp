@@ -13,11 +13,11 @@ import seedu.duke.food.Food;
 import seedu.duke.food.FoodList;
 import seedu.duke.storage.Storage;
 
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.time.LocalDate;
 
 public class AddCommand extends Command {
     private final boolean isMarkDone;
@@ -28,7 +28,6 @@ public class AddCommand extends Command {
     public static final String INVALID_FOOD_INPUT = "Invalid food input";
     final String[] invalidFoodNames = {"", " ", "[]\\[;]"};
 
-    private Exercise exercise;
     private ExerciseList exerciseList;
 
     private FoodList foodList;
@@ -65,7 +64,6 @@ public class AddCommand extends Command {
     }
 
     private void addStrengthExercise(String[] argumentList) throws IllegalValueException {
-        if (argumentList.length != 6 && argumentList.length != 5) {
         if (isMarkDone && argumentList.length != 8 || argumentList.length < 5 || argumentList.length > 6) {
             LOGGER.warning("Invalid arguments length for add strength exercise");
 
@@ -73,21 +71,23 @@ public class AddCommand extends Command {
         }
         String description = argumentList[1];
         try {
-            int set = Integer.parseInt(argumentList[2]);
-            int repetition = Integer.parseInt(argumentList[3]);
-            int calories = Integer.parseInt(argumentList[4]);
+            int weight = Integer.parseInt(argumentList[2]);
+            int set = Integer.parseInt(argumentList[3]);
+            int repetition = Integer.parseInt(argumentList[4]);
             String date;
             if (argumentList.length != 6) {
                 date = LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
             } else {
                 date = argumentList[5];
             }
-            Exercise exercise = new StrengthExercise(description, set, repetition, calories, date);
+            Exercise exercise = new StrengthExercise(description, weight, set, repetition, date);
             exerciseList.addExercise(exercise);
             assert (exerciseList.getCurrentExercise(exerciseList.getCurrentExerciseListSize() - 1)
                     .equals(exercise)) : "Exercise not added properly";
             if (isMarkDone) {
-                exerciseList.markDone(exerciseList.getCurrentExerciseListSize() - 1);
+                int calories = Integer.parseInt(argumentList[6]);
+                double time = Double.parseDouble(argumentList[7]);
+                exerciseList.markDone(exerciseList.getCurrentExerciseListSize() - 1, time, calories);
             }
             if (toDisplay) {
                 ui.output(exercise.toString());
@@ -95,38 +95,39 @@ public class AddCommand extends Command {
             }
         } catch (NumberFormatException e) {
             LOGGER.log(Level.WARNING, "Error converting string to integer", e);
-            throw new IllegalValueException("Set, repetition and calories must be integers");
+            throw new IllegalValueException("Set and repetition must be integers");
         }
     }
 
     private void addCardioExercise(String[] argumentList) throws IllegalValueException {
-        if (argumentList.length != 6 && argumentList.length != 5) {
+        if (isMarkDone && argumentList.length != 8 || argumentList.length < 4 || argumentList.length > 5) {
             throw new IllegalValueException("Invalid add cardio exercise command");
         }
         String description = argumentList[1];
         try {
-            int time = Integer.parseInt(argumentList[2]);
+            double distance = Double.parseDouble(argumentList[2]);
             int repetition = Integer.parseInt(argumentList[3]);
-            int calories = Integer.parseInt(argumentList[4]);
             String date;
-            if (argumentList.length != 6) {
+            if (argumentList.length != 5) {
                 date = LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
             } else {
-                date = argumentList[5];
+                date = argumentList[4];
             }
-            Exercise exercise = new CardioExercise(description, time, repetition, calories, date);
+            Exercise exercise = new CardioExercise(description, distance, repetition, date);
             exerciseList.addExercise(exercise);
             assert (exerciseList.getCurrentExercise(exerciseList.getCurrentExerciseListSize() - 1)
                     .equals(exercise)) : "Exercise not added properly";
             if (isMarkDone) {
-                exerciseList.markDone(exerciseList.getCurrentExerciseListSize() - 1);
+                int calories = Integer.parseInt(argumentList[5]);
+                double time = Double.parseDouble(argumentList[6]);
+                exerciseList.markDone(exerciseList.getCurrentExerciseListSize() - 1, time, calories);
             }
             if (toDisplay) {
                 ui.output(exercise.toString());
                 ui.output(" This cardio exercise is added to the exercise list successfully");
             }
         } catch (NumberFormatException e) {
-            throw new IllegalValueException("Time, repetition and calories must be integers");
+            throw new IllegalValueException("Distance and repetition must be integers");
         }
     }
 
