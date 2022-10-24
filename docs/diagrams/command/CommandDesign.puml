@@ -4,31 +4,31 @@ interface CommandInterface {
 }
 abstract class "Command"
 class UserCommand {
- - UserList userList
- - ItemList itemList
- - TransactionList transactionList
-' + boolean executeCommand()
+ - userList: UserList
+ - itemList: ItemList
+ - transactionList: TransactionList
+ + executeCommand(): boolean
 }
 class TransactionCommand {
- - UserList userList
- - ItemList itemList
- - TransactionList transactionList
- + boolean executeCommand()
+ - userList: UserList
+ - itemList: ItemList
+ - transactionList: TransactionList
+ + executeCommand(): boolean
 }
 class ItemCommand {
- - UserList userList
- - ItemList itemList
- - TransactionList transactionList
- + boolean executeCommand()
+ - userList: UserList
+ - itemList: ItemList
+ - transactionList: TransactionList
+ + executeCommand(): boolean
 }
 class HelpCommand {
- + boolean executeCommand()
+ + executeCommand(): boolean
 }
 class ExitCommand {
- + boolean executeCommand()
+ + executeCommand(): boolean
 }
 
-CommandInterface <|-- Command
+CommandInterface <|.. Command
 Command <|-- UserCommand
 Command <|-- TransactionCommand
 Command <|-- ItemCommand
