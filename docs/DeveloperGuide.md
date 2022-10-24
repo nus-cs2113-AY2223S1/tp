@@ -5,10 +5,25 @@
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 ## Design & implementation
-
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+### Software Architecture:
+The software architecture diagram below describes the application's design and the interaction between components.
 
 ![Software-Architecture](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/SoftwareArchitecture.puml)
+
+### Core Components:
+* `MoneyGoWhere`: Main entrypoint of the application.
+* `Common`: Defines various parameters used by the application.
+* `UserInterface`: Provide functions to interface with the user via standard input and standard output.
+* `Parser`: Provide functions to parse inputs read from standard input.
+* `Data`: Stores data and provides functions to operate on data.
+* `Storage`: Defines functions to save and load data.
+* `Logger`: Defines functions to log the user's actions and the application's behaviour.
+
+### Component Interactions:
+The sequence diagram below describes the interaction between the various core components when a command is entered.
+In this example, the user enters the command `Add-Expense -n Expense -a 7.80` to add an expense with the name `Expense` and the amount `7.80`.
+
+![Component-Interaction-On-Command-Entered](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentInteractionsOnCommandEntered.puml)
 
 ## Product scope
 ### Target user profile
