@@ -2,7 +2,7 @@ package seedu.moneygowhere.data.expense;
 
 import seedu.moneygowhere.commands.ConsoleCommandSortExpense;
 import seedu.moneygowhere.common.Messages;
-import seedu.moneygowhere.exceptions.ExpenseManagerExpenseNotFoundException;
+import seedu.moneygowhere.exceptions.expense.ExpenseManagerExpenseNotFoundException;
 import seedu.moneygowhere.parser.ConsoleParserConfigurations;
 
 import java.math.BigDecimal;

@@ -1,4 +1,6 @@
-package seedu.moneygowhere.exceptions;
+package seedu.moneygowhere.exceptions.expense;
+
+import seedu.moneygowhere.exceptions.MoneyGoWhereException;
 
 /**
  * Thrown when an expense is not found in expense manager.

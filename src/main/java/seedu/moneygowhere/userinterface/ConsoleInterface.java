@@ -55,7 +55,7 @@ import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandViewRecurringPay
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandViewTargetInvalidException;
 import seedu.moneygowhere.exceptions.CurrencyInvalidException;
 import seedu.moneygowhere.exceptions.CurrencyRatesNotFoundException;
-import seedu.moneygowhere.exceptions.ExpenseManagerExpenseNotFoundException;
+import seedu.moneygowhere.exceptions.expense.ExpenseManagerExpenseNotFoundException;
 import seedu.moneygowhere.exceptions.IncomeManagerIncomeNotFoundException;
 import seedu.moneygowhere.exceptions.RecurringPaymentManagerRecurringPaymentNotFoundException;
 import seedu.moneygowhere.exceptions.TargetManagerTargetNotFoundException;
