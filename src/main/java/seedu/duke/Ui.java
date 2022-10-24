@@ -233,6 +233,22 @@ public class Ui {
         System.out.println(LINE_BREAK);
     }
 
+    public void displayNoOfProperties(int i) {
+        if(i == 1) {
+            System.out.println("There is " + i + " property in the list");
+        } else {
+            System.out.println("There are " + i + " properties in this list");
+        }
+    }
+
+    public void displayNoOfClients(int i) {
+        if(i == 1) {
+            System.out.println("There is " + i + " client in the list");
+        } else {
+            System.out.println("There are " + i + " clients in this list");
+        }
+    }
+
 
     public void showCheckProperty(ArrayList<Client> tenants) {
         showToUser(MESSAGE_CHECK_PROPERTY_RESULT);
