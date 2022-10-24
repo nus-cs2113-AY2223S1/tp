@@ -3,8 +3,10 @@ package seedu.moneygowhere.commands;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+//@@author penguin-s
+
 /**
- * Stores the edit-income command and its arguments.
+ * Stores the command Edit-Income and its arguments.
  */
 @SuppressWarnings("unused")
 public class ConsoleCommandEditIncome extends ConsoleCommand {

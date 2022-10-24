@@ -3,12 +3,14 @@ package seedu.moneygowhere.data.currency;
 import seedu.moneygowhere.common.Configurations;
 import seedu.moneygowhere.common.Messages;
 import seedu.moneygowhere.data.expense.Expense;
-import seedu.moneygowhere.exceptions.CurrencyInvalidException;
-import seedu.moneygowhere.exceptions.CurrencyRatesNotFoundException;
+import seedu.moneygowhere.exceptions.data.currency.CurrencyInvalidException;
+import seedu.moneygowhere.exceptions.data.currency.CurrencyRatesNotFoundException;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.HashMap;
+
+//@@author jeyvia
 
 /**
  * Stores and manages a HashMap of currencies.
@@ -31,9 +33,9 @@ public class CurrencyManager {
             return true;
         }
         if (exchangeRates.isEmpty()) {
-            throw new CurrencyRatesNotFoundException(Messages.CURRENCY_MANAGER_RATES_NOT_FOUND);
+            throw new CurrencyRatesNotFoundException(Messages.CURRENCY_MANAGER_ERROR_RATES_NOT_FOUND);
         }
-        throw new CurrencyInvalidException(Messages.CURRENCY_MANAGER_CURRENCY_NOT_FOUND);
+        throw new CurrencyInvalidException(Messages.CURRENCY_MANAGER_ERROR_CURRENCY_NOT_FOUND);
     }
 
     private BigDecimal getRate(String currency) {
@@ -42,7 +44,11 @@ public class CurrencyManager {
 
     private BigDecimal convertToSgd(String currency, BigDecimal amount) {
         BigDecimal rate = getRate(currency);
-        return (amount.divide(rate, Configurations.NUMBER_OF_DECIMAL_PLACES, RoundingMode.HALF_UP));
+        return (amount.divide(
+                rate,
+                Configurations.CURRENCY_MANAGER_CONVERSION_NUMBER_OF_DECIMAL_PLACES,
+                RoundingMode.HALF_UP
+        ));
     }
 
     private BigDecimal convertToNewCurrency(BigDecimal amountInSgd, String newCurrency) {
@@ -53,10 +59,10 @@ public class CurrencyManager {
     public BigDecimal exchangeCurrency(Expense expense, String newCurrency) {
         String oldCurrency = expense.getCurrency();
         BigDecimal amountInSgd = expense.getAmount();
-        if (!(oldCurrency.equalsIgnoreCase(Configurations.CURRENCY_SINGAPORE_DOLLARS))) {
+        if (!(oldCurrency.equalsIgnoreCase(Configurations.CURRENCY_MANAGER_CURRENCY_CODE_SINGAPORE_DOLLARS))) {
             amountInSgd = convertToSgd(oldCurrency, amountInSgd);
         }
-        if (newCurrency.equalsIgnoreCase(Configurations.CURRENCY_SINGAPORE_DOLLARS)) {
+        if (newCurrency.equalsIgnoreCase(Configurations.CURRENCY_MANAGER_CURRENCY_CODE_SINGAPORE_DOLLARS)) {
             return amountInSgd;
         }
         BigDecimal amountInNewCurrency = convertToNewCurrency(amountInSgd, newCurrency);

@@ -3,6 +3,8 @@ package seedu.moneygowhere.data.income;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+//@@author penguin-s
+
 /**
  * Stores data associated with an income.
  */

@@ -1,7 +1,9 @@
 package seedu.moneygowhere.commands;
 
+//@@author LokQiJun
+
 /**
- * Stores the merge external file command and its arguments.
+ * Stores the command Merge-File and its arguments.
  */
 public class ConsoleCommandMergeExternalFile extends ConsoleCommand {
     private String filePath;

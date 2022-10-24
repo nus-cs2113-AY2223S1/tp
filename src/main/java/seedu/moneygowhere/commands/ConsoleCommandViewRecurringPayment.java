@@ -1,7 +1,9 @@
 package seedu.moneygowhere.commands;
 
+//@@author xzynos
+
 /**
- * Stores the view-recurringpayment command and its arguments.
+ * Stores the command View-RecurringPayment and its arguments.
  */
 @SuppressWarnings("FieldMayBeFinal")
 public class ConsoleCommandViewRecurringPayment extends ConsoleCommand {

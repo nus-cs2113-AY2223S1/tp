@@ -8,13 +8,13 @@ import seedu.moneygowhere.commands.ConsoleCommandEditExpense;
 import seedu.moneygowhere.commands.ConsoleCommandViewExpense;
 import seedu.moneygowhere.commands.ConsoleCommandViewRecurringPayment;
 import seedu.moneygowhere.common.Configurations;
-import seedu.moneygowhere.exceptions.ConsoleParserCommandAddExpenseInvalidException;
-import seedu.moneygowhere.exceptions.ConsoleParserCommandAddRecurringPaymentInvalidException;
-import seedu.moneygowhere.exceptions.ConsoleParserCommandDeleteExpenseInvalidException;
-import seedu.moneygowhere.exceptions.ConsoleParserCommandEditExpenseInvalidException;
-import seedu.moneygowhere.exceptions.ConsoleParserCommandViewExpenseInvalidException;
-import seedu.moneygowhere.exceptions.ConsoleParserCommandViewRecurringPaymentInvalidException;
 import seedu.moneygowhere.exceptions.MoneyGoWhereException;
+import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandAddExpenseInvalidException;
+import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandAddRecurringPaymentInvalidException;
+import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandDeleteExpenseInvalidException;
+import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandEditExpenseInvalidException;
+import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandViewExpenseInvalidException;
+import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandViewRecurringPaymentInvalidException;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -24,6 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ConsoleParserTest {
+    //@@author xzynos
     @SuppressWarnings("ConstantConditions")
     @Test
     void parseCommand_aeNameAmount_ccaeNameAmountDateTime() throws
@@ -66,6 +67,7 @@ class ConsoleParserTest {
                         && isCategoryEqual);
     }
 
+    //@@author xzynos
     @Test
     void parseCommand_aeNameAmountDateTime_ccaeNameAmountDateTime() throws
             MoneyGoWhereException {
@@ -122,6 +124,7 @@ class ConsoleParserTest {
                         && isModeOfPaymentEqual);
     }
 
+    //@@author xzynos
     @Test
     void parseCommand_aeNameAmountDateTimeDescription_ccaeNameAmountDateTimeDescription() throws
             MoneyGoWhereException {
@@ -179,6 +182,7 @@ class ConsoleParserTest {
                         && isCategoryEqual);
     }
 
+    //@@author xzynos
     @Test
     void parseCommand_aeNameAmountDateTimeDescriptionCategory_ccaeNameAmountDateTimeDescriptionCategory() throws
             MoneyGoWhereException {
@@ -241,6 +245,7 @@ class ConsoleParserTest {
                         && isCategoryEqual);
     }
 
+    //@@author xzynos
     @Test
     void parseCommand_aeName_ccaeInvalidException() {
         String name = "Exp";
@@ -256,6 +261,7 @@ class ConsoleParserTest {
                 ConsoleParser.parse(input));
     }
 
+    //@@author xzynos
     @Test
     void parseCommand_aeNameAmount_ccaeInvalidException() {
         String name = "Exp";
@@ -277,6 +283,7 @@ class ConsoleParserTest {
                 ConsoleParser.parse(input));
     }
 
+    //@@author xzynos
     @Test
     void parseCommand_aeNameAmountDateTime_ccaeInvalidException() {
         String name = "Exp";
@@ -303,6 +310,7 @@ class ConsoleParserTest {
                 ConsoleParser.parse(input));
     }
 
+    //@@author xzynos
     @Test
     void parseCommand_ve_ccve() throws
             MoneyGoWhereException {
@@ -318,6 +326,7 @@ class ConsoleParserTest {
         assertTrue(isExpenseIndexEqual);
     }
 
+    //@@author xzynos
     @Test
     void parseCommand_veIndex_ccveIndex() throws
             MoneyGoWhereException {
@@ -339,6 +348,7 @@ class ConsoleParserTest {
         assertTrue(isExpenseIndexEqual);
     }
 
+    //@@author xzynos
     @Test
     void parseCommand_veIndex_ccveInvalidException() {
         String expenseIndex = "InvalidExpenseIndex";
@@ -355,6 +365,7 @@ class ConsoleParserTest {
                 ConsoleParser.parse(input));
     }
 
+    //@@author xzynos
     @Test
     void parseCommand_deIndex_ccdeIndex() throws
             MoneyGoWhereException {
@@ -377,6 +388,7 @@ class ConsoleParserTest {
         assertTrue(isExpenseIndexEqual);
     }
 
+    //@@author xzynos
     @Test
     void parseCommand_de_ccdeInvalidException() {
         String input = ""
@@ -386,6 +398,7 @@ class ConsoleParserTest {
                 ConsoleParser.parse(input));
     }
 
+    //@@author xzynos
     @Test
     void parseCommand_deIndex_ccdeInvalidException() {
         String expenseIndex = "InvalidExpenseIndex";
@@ -402,6 +415,7 @@ class ConsoleParserTest {
                 ConsoleParser.parse(input));
     }
 
+    //@@author xzynos
     @Test
     void parseCommand_eeIndexName_cceeIndexName() throws
             MoneyGoWhereException {
@@ -449,6 +463,7 @@ class ConsoleParserTest {
                         && isCategoryEqual);
     }
 
+    //@@author xzynos
     @Test
     void parseCommand_eeIndexNameAmount_cceeIndexNameAmount() throws
             MoneyGoWhereException {
@@ -501,6 +516,7 @@ class ConsoleParserTest {
                         && isCategoryEqual);
     }
 
+    //@@author xzynos
     @Test
     void parseCommand_eeIndexNameAmountDateTime_cceeIndexNameAmountDateTime() throws
             MoneyGoWhereException {
@@ -560,6 +576,7 @@ class ConsoleParserTest {
                         && isCategoryEqual);
     }
 
+    //@@author xzynos
     @Test
     void parseCommand_eeIndexNameAmountDateTimeDescription_cceeIndexNameAmountDateTimeDescription() throws
             MoneyGoWhereException {
@@ -624,6 +641,7 @@ class ConsoleParserTest {
                         && isCategoryEqual);
     }
 
+    //@@author xzynos
     @Test
     void parseCommand_eeIndexNameAmountDateTimeDescriptionCategory_cceeIndexNameAmountDateTimeDescriptionCategory()
             throws
@@ -694,6 +712,7 @@ class ConsoleParserTest {
                         && isCategoryEqual);
     }
 
+    //@@author xzynos
     @Test
     void parseCommand_ee_cceeInvalidException() {
         String input = ""
@@ -703,6 +722,7 @@ class ConsoleParserTest {
                 ConsoleParser.parse(input));
     }
 
+    //@@author xzynos
     @Test
     void parseCommand_eeIndex_cceeInvalidException() {
         String expenseIndex = "InvalidExpenseIndex";
@@ -719,6 +739,7 @@ class ConsoleParserTest {
                 ConsoleParser.parse(input));
     }
 
+    //@@author xzynos
     @Test
     void parseCommand_eeIndexAmount_cceeInvalidException() {
         String expenseIndex = "0";
@@ -740,6 +761,7 @@ class ConsoleParserTest {
                 ConsoleParser.parse(input));
     }
 
+    //@@author xzynos
     @Test
     void parseCommand_eeIndexAmountDateTime_cceeInvalidException() {
         String expenseIndex = "0";
@@ -766,6 +788,7 @@ class ConsoleParserTest {
                 ConsoleParser.parse(input));
     }
 
+    //@@author xzynos
     @Test
     void parseCommand_arpNameIntervalAmount_ccarpNameIntervalAmount() throws
             MoneyGoWhereException {
@@ -808,6 +831,7 @@ class ConsoleParserTest {
         );
     }
 
+    //@@author xzynos
     @Test
     void parseCommand_arpNameIntervalAmountDescription_ccarpNameIntervalAmountDescription() throws
             MoneyGoWhereException {
@@ -859,6 +883,7 @@ class ConsoleParserTest {
         );
     }
 
+    //@@author xzynos
     @Test
     void parseCommand_arp_ccarpInvalidException() {
         String input = ""
@@ -869,6 +894,7 @@ class ConsoleParserTest {
         );
     }
 
+    //@@author xzynos
     @Test
     void parseCommand_arpName_ccarpInvalidException() {
         String name = "RecurPay1";
@@ -885,6 +911,7 @@ class ConsoleParserTest {
         );
     }
 
+    //@@author xzynos
     @Test
     void parseCommand_arpNameInterval_ccarpInvalidException() {
         String name = "RecurPay1";
@@ -906,6 +933,7 @@ class ConsoleParserTest {
         );
     }
 
+    //@@author xzynos
     @Test
     void parseCommand_arpNameInvalidInterval_ccarpInvalidException() {
         String name = "RecurPay1";
@@ -927,6 +955,7 @@ class ConsoleParserTest {
         );
     }
 
+    //@@author xzynos
     @Test
     void parseCommand_arpNameIntervalInvalidAmount_ccarpInvalidException() {
         String name = "RecurPay1";
@@ -953,6 +982,7 @@ class ConsoleParserTest {
         );
     }
 
+    //@@author xzynos
     @Test
     void parseCommand_vrp_ccvrp() throws
             MoneyGoWhereException {
@@ -969,6 +999,7 @@ class ConsoleParserTest {
         assertTrue(isRecurringPaymentIndexEqual);
     }
 
+    //@@author xzynos
     @Test
     void parseCommand_vrpIndex_ccvrpIndex() throws
             MoneyGoWhereException {
@@ -991,6 +1022,7 @@ class ConsoleParserTest {
         assertTrue(isRecurringPaymentIndexEqual);
     }
 
+    //@@author xzynos
     @Test
     void parseCommand_vrpInvalidIndex_ccvrpInvalidException() {
         String recurringPaymentIndex = "InvalidIndex";

@@ -3,8 +3,10 @@ package seedu.moneygowhere.commands;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+//@@author xzynos
+
 /**
- * Stores the add-expense command and its arguments.
+ * Stores the command Add-Expense and its arguments.
  */
 @SuppressWarnings({"FieldMayBeFinal", "unused"})
 public class ConsoleCommandAddExpense extends ConsoleCommand {

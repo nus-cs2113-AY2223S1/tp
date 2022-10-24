@@ -1,9 +1,11 @@
 package seedu.moneygowhere.data.target;
 
 import seedu.moneygowhere.common.Messages;
-import seedu.moneygowhere.exceptions.TargetManagerTargetNotFoundException;
+import seedu.moneygowhere.exceptions.data.target.TargetManagerTargetNotFoundException;
 
 import java.util.ArrayList;
+
+//@@author penguin-s
 
 /**
  * Stores and manages a list of expenses.

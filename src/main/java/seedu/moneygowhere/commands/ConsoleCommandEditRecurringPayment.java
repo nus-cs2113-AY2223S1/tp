@@ -2,8 +2,10 @@ package seedu.moneygowhere.commands;
 
 import java.math.BigDecimal;
 
+//@@author xzynos
+
 /**
- * Stores the Edit-RecurringPayment command and its arguments.
+ * Stores the command Edit-RecurringPayment and its arguments.
  */
 @SuppressWarnings("unused")
 public class ConsoleCommandEditRecurringPayment extends ConsoleCommand {
