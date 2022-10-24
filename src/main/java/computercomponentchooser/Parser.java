@@ -111,9 +111,11 @@ public class Parser {
             }
         } catch (UnknownCommandException | DuplicateBuildException | UnlistedBuildException | IOException
                  | NegativeNumberException | BlankStringException e) {
+            Ui.printLine();
             System.out.println(e.getMessage());
             Ui.printLine();
         } catch (NumberFormatException e) {
+            Ui.printLine();
             System.out.println("Please enter a valid number.");
             Ui.printLine();
         }
@@ -132,7 +134,6 @@ public class Parser {
         Ui.printLine();
     }
 
-
     /**
      * Parses the user input and executes the filter command by listing the filtered builds depending on the
      * filter term and provided parameters.
@@ -145,17 +146,16 @@ public class Parser {
     private void mainParseFilter(String line) throws NumberFormatException, UnknownCommandException,
             NegativeNumberException {
         String filterType = EditParser.getParameter(line, 1);
-        String lowestNumber = "";
-        String highestNumber = "";
-        Ui.printLine();
-        if (!filterType.equals("price") || !filterType.equals("power") || !filterType.equals("compatibility")) {
-            throw new UnknownCommandException();
-        } // guard clause, check if filterType is valid
-
+        String lowestNumber = ""; // initialise as compatibility filter does not need this range
+        String highestNumber = ""; // initialise as compatibility filter does not need this range
         if (!filterType.equals("compatibility")) {
+            if (!filterType.equals("price") && !filterType.equals("power")) {
+                throw new UnknownCommandException();
+            } // guard clause, check if filterType is valid
             lowestNumber = EditParser.getParameter(line, 2);
             highestNumber = EditParser.getParameter(line, 3);
         }
+        Ui.printLine();
         buildManager.filterBuilds(filterType, lowestNumber, highestNumber);
         Ui.printLine();
     }
@@ -174,7 +174,6 @@ public class Parser {
         if (name.isBlank()) {
             throw new BlankStringException();
         }
-
         newBuild = new Build(name);
         buildManager.addBuild(newBuild);
         Ui.printLine();
