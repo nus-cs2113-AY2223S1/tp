@@ -2,16 +2,20 @@ package seedu.duke.biometrics;
 
 import seedu.duke.exception.IllegalValueException;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class WeightAndFat {
 
     private int weight;
     private int fat;
+    private LocalDate date;
 
-    public WeightAndFat(int weight, int fat) throws IllegalValueException {
+    public WeightAndFat(int weight, int fat, LocalDate date) throws IllegalValueException {
         setWeight(weight);
         setFat(fat);
+        setDate(date);
     }
 
     public int getWeight() {
@@ -22,6 +26,10 @@ public class WeightAndFat {
         return fat;
     }
 
+    public String getDate() {
+        return date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+    }
+
     public void setWeight(int weight) throws IllegalValueException {
         checkWeight(weight);
         this.weight = weight;
@@ -30,6 +38,10 @@ public class WeightAndFat {
     public void setFat(int fat) throws IllegalValueException {
         checkFat(fat);
         this.fat = fat;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
     static void checkWeight(int weight) throws IllegalValueException {
@@ -45,7 +57,7 @@ public class WeightAndFat {
     }
 
     public String saveWeightAndFat() {
-        return String.format("/%d /%d", weight, fat);
+        return String.format("/%d /%d /%s", weight, fat, getDate());
     }
 
     public String listWeightAndFat(ArrayList<WeightAndFat> weightAndFatArrayList) {
@@ -55,6 +67,7 @@ public class WeightAndFat {
     @Override
     public String toString() {
         return "Weight: " + weight + "kg" + System.lineSeparator()
-                + "Fat percentage: " + fat + "%";
+                + "Fat percentage: " + fat + "%" + System.lineSeparator()
+                + "Recorded on: " + getDate();
     }
 }

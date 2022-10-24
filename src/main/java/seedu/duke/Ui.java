@@ -75,7 +75,7 @@ public class Ui {
     }
 
     public void outputWeightList(ArrayList<WeightAndFat> weightAndFatArrayList) {
-        Integer[] columnSpacingArray = {5, 6, 14};
+        Integer[] columnSpacingArray = {5, 6, 14, 4};
         getWeightColumnsSpacing(weightAndFatArrayList, columnSpacingArray);
         generateWeightTableHeader(columnSpacingArray);
         printWeightList(weightAndFatArrayList, columnSpacingArray);
@@ -110,6 +110,7 @@ public class Ui {
         for (WeightAndFat weightAndFat : weightAndFatArrayList) {
             columnSpacingArray[1] = Math.max(columnSpacingArray[1], weightAndFat.getWeight() % 10 + 1);
             columnSpacingArray[2] = Math.max(columnSpacingArray[2], weightAndFat.getFat() % 10 + 1);
+            columnSpacingArray[3] = Math.max(columnSpacingArray[3], weightAndFat.getDate().length());
         }
     }
 
@@ -148,7 +149,8 @@ public class Ui {
             String index = addRightPadding(Integer.toString(i + 1), columnSpacingArray[0]) + " | ";
             String weight = addRightPadding(Integer.toString(weightAndFat.getWeight()), columnSpacingArray[1]) + " | ";
             String fat = addRightPadding(Integer.toString(weightAndFat.getFat()), columnSpacingArray[2]) + " | ";
-            printInSameLine(index, weight, fat);
+            String date = addRightPadding(weightAndFat.getDate(), columnSpacingArray[3]) + " | ";
+            printInSameLine(index, weight, fat, date);
         }
     }
 
@@ -187,7 +189,8 @@ public class Ui {
         String paddedIndex = addRightPadding("Index", columnSpacingArray[0]) + " | ";
         String paddedWeight = addRightPadding("Weight", columnSpacingArray[1]) + " | ";
         String paddedFat = addRightPadding("Fat Percentage", columnSpacingArray[2]) + " | ";
-        String line = paddedIndex + paddedWeight + paddedFat;
+        String paddedDate = addRightPadding("Date", columnSpacingArray[3]) + " | ";
+        String line = paddedIndex + paddedWeight + paddedFat + paddedDate;
         String separatorLine = "-".repeat(line.length());
         output(separatorLine, line, separatorLine);
     }
