@@ -111,7 +111,7 @@ public class LocalStorage {
         try {
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
-            db.setErrorHandler(new NullErrorHandler());
+            db.setErrorHandler(new LocalStorageNullErrorHandler());
             Document doc = db.parse(saveFile);
             doc.getDocumentElement().normalize();
             NodeList sortConfig = doc.getElementsByTagName(XML_SORTCONFIG_ELEMENT);
@@ -173,7 +173,7 @@ public class LocalStorage {
             File externalFile = new File(filePath);
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
-            db.setErrorHandler(new NullErrorHandler());
+            db.setErrorHandler(new LocalStorageNullErrorHandler());
             Document doc = db.parse(externalFile);
             doc.getDocumentElement().normalize();
             NodeList expenseList = doc.getElementsByTagName(XML_EXPENSE_ELEMENT);
