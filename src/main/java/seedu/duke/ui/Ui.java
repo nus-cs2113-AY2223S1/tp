@@ -89,7 +89,7 @@ public class Ui {
     }
 
     public String getGateOccupiedError() {
-        return "Unable to add Flight! \n"
+        return "Unable to add Flight!\n"
                 + "Designated gate is already occupied at that time, please select a different gate number.";
     }
 
@@ -327,6 +327,11 @@ public class Ui {
         return "Stop! The Seat Number input format is wrong.\n"
                 + "Seat number should range between 00A to 99Z,\n"
                 + "please try again.";
+    }
+
+    public String getFlightNumberSyncError() {
+        return "Stop! The input passenger detail does not have a flight number that exist yet.\n"
+                + "Flight detail of the specific flight number should input first.";
     }
 }
 
