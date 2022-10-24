@@ -38,61 +38,45 @@ public class Parser {
         Command toExecute;
         switch (keywords[0]) {
         case (SearchModuleCommand.COMMAND_WORD):
-            toExecute = searchCommand(userInput);
+            toExecute = new SearchModuleCommand(userInput);
             break;
         case (GetModuleCommand.COMMAND_WORD):
-            toExecute = getCommand(keywords);
+            toExecute = new GetModuleCommand(keywords);
             break;
         case (AddModuleCommand.COMMAND_WORD):
-            toExecute = moduleRelatedCommand(keywords, new AddModuleCommand(keywords));
+            toExecute = new AddModuleCommand(keywords);
             break;
         case (DeleteModuleCommand.COMMAND_WORD):
-            toExecute = moduleRelatedCommand(keywords, new DeleteModuleCommand(keywords));
+            toExecute = new DeleteModuleCommand(keywords);
             break;
         case (ViewTimetableCommand.COMMAND_WORD):
-            toExecute = singleWordCommand(keywords, new ViewTimetableCommand(userInput));
+            toExecute = new ViewTimetableCommand(userInput);
             break;
         case (HelpCommand.COMMAND_WORD):
-            toExecute = singleWordCommand(keywords, new HelpCommand(keywords));
+            toExecute = new HelpCommand(keywords);
             break;
         case (SelectSlotCommand.COMMAND_WORD):
             toExecute = new SelectSlotCommand(userInput);
             break;
         case (ExitCommand.COMMAND_WORD):
-            toExecute = singleWordCommand(keywords, new ExitCommand(keywords));
+            toExecute = new ExitCommand(keywords);
             break;
         case (SelectSemesterCommand.COMMAND_WORD):
-            toExecute = selectSemesterCommand(keywords, new SelectSemesterCommand(keywords));
+            toExecute = new SelectSemesterCommand(keywords);
             break;
         case (ExportCommand.COMMAND_WORD):
-            toExecute = singleWordCommand(keywords, new ExportCommand(keywords));
+            toExecute = new ExportCommand(keywords);
             break;
         case (ImportCommand.COMMAND_WORD):
             toExecute = new ImportCommand(keywords);
             break;
         case (DisplaySelectedModuleListCommand.COMMAND_WORD):
-            toExecute = singleWordCommand(keywords, new DisplaySelectedModuleListCommand(keywords));
+            toExecute = new DisplaySelectedModuleListCommand(keywords);
             break;
         default:
             throw new YamomException("Cannot process the command");
         }
         return toExecute;
-    }
-
-    private static Command getCommand(String[] keywords) throws YamomException {
-        return new GetModuleCommand(keywords);
-    }
-
-    /**
-     * Checks to see if the user supplied moduleCode is part of a valid module code.
-     *
-     * @param moduleCode The user supplied moduleCode.
-     * @return If the user supplied a valid partial module code.
-     */
-    public static boolean isPartialModuleCode(String moduleCode) {
-        Pattern pattern = Pattern.compile("[a-z]{0,3}\\d{0,4}[a-z]?", Pattern.CASE_INSENSITIVE);
-        Matcher matcher = pattern.matcher(moduleCode);
-        return (matcher.find() && matcher.group().length() == moduleCode.length());
     }
 
     /**
@@ -107,10 +91,6 @@ public class Parser {
         return (matcher.find() && matcher.group().length() == moduleCode.length());
     }
 
-    public static boolean isValidModuleCode(String moduleCode) {
-        return isModuleCode(moduleCode) || isPartialModuleCode(moduleCode);
-    }
-
     public static boolean isTwoWordsCommand(String[] keywords) {
         return keywords.length == 2;
     }
@@ -120,71 +100,66 @@ public class Parser {
     }
 
     public static boolean isValidTwoWordCommand(String[] keywords) {
-        return isTwoWordsCommand(keywords) && isValidModuleCode(keywords[1]);
-    }
-
-    public static Command searchCommand(String userInput) {
-        return new SearchModuleCommand(userInput);
+        return isTwoWordsCommand(keywords) && isModuleCode(keywords[1]);
     }
 
     /**
-     * Checks if the user entered a valid search or add or delete command in the
-     * format
-     * "search|add|delete MODULE_CODE".
+     * Checks if the user entered an invalid module related command. Different error messages
+     * will be thrown for different invalid commands.
      * 
-     * @param keywords contains the user input split by spaces
-     * @param command  the command that the user wants to execute
-     * @return type of command
+     * @param keywords            Contains the user input split by spaces.
+     * @param initialErrorMessage Indicates the proper format of the command.
      * @throws YamomException Contains a string that specifies the type of incorrect user input.
      */
-    public static Command moduleRelatedCommand(String[] keywords, Command command) throws YamomException {
+    public static void moduleRelatedCommandError(String[] keywords, String initialErrorMessage)
+            throws YamomException {
         if (isValidTwoWordCommand(keywords)) {
-            return command;
+            return;
         }
-        String errorMessage;
+        String errorMessage = initialErrorMessage + System.lineSeparator();
         if (isOneWordCommand(keywords)) {
-            errorMessage = "Your command is incomplete.";
-        } else if (isTwoWordsCommand(keywords) && !isValidModuleCode(keywords[1])) {
-            errorMessage = "Module is invalid!"
-                    + System.lineSeparator()
+            errorMessage += "Your command is incomplete.";
+        } else if (isTwoWordsCommand(keywords) && !isModuleCode(keywords[1])) {
+            errorMessage += "Module is invalid! "
                     + "Please enter a valid module code." + System.lineSeparator()
                     + "Each module of study has a unique module code consisting of a two- "
-                    + "or three-letter prefix that generally denotes the discipline,"
-                    + "and four digits, the first of which indicates the level of the module " + System.lineSeparator()
+                    + "or three-letter prefix that generally denotes the discipline," + System.lineSeparator()
+                    + "and four digits, the first of which indicates the level of the module" + System.lineSeparator()
                     + "(e.g., 1000 indicates a Level 1 module and 2000, a Level 2 module).";
         } else {
-            errorMessage = "Unknown command, try again";
+            errorMessage += "Unknown command, try again.";
         }
 
         throw new YamomException(errorMessage);
     }
 
-    public static Command singleWordCommand(String[] keywords, Command command) throws YamomException {
-        if (isOneWordCommand(keywords)) {
-            return command;
-        } else {
+    public static void singleWordCommandError(String[] keywords) throws YamomException {
+        if (!isOneWordCommand(keywords)) {
             throw new YamomException("0 arguments expected");
         }
     }
 
-    public static Command selectSemesterCommand(String[] keywords, Command command) throws YamomException {
-        if (isValidSemester(keywords) || isValidSpecialTerm(keywords)) {
-            return command;
-        } else {
-            throw new YamomException("Not a valid semester");
+    public static void selectSemesterCommandError(String[] keywords, String initialErrorMessage) throws YamomException {
+        if (!isValidSpecialTerm(keywords) && (!isValidSemester(keywords))) {
+            throw new YamomException(initialErrorMessage + System.lineSeparator() + "Not a valid semester.");
         }
     }
 
     public static boolean isValidSemester(String[] keywords) {
-        int semesterInput = Integer.parseInt(keywords[1]);
-        return semesterInput > 0 && semesterInput <= 4;
+        try {
+            int semesterInput = Integer.parseInt(keywords[1]);
+            return semesterInput > 0 && semesterInput <= 4;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+
     }
 
     /**
      * Checks for valid special term 1 and 2. Spaces and capitalization does not matter.
      * If the user entered a valid special term, the keyword at index 1 will be replaced
      * with the system understood semester number for special term (3/4) for the
-     * {@link #selectSemesterCommand(String[], Command)} to correctly instantiate
+     * {@link #selectSemesterCommandError(String[], String)} to correctly instantiate
      * the semester number.
      *
      * @param keywords Contains the user input split by spaces.

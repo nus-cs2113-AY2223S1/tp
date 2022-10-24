@@ -1,5 +1,7 @@
 package seedu.duke.command;
 
+import seedu.duke.exceptions.YamomException;
+import seedu.duke.parser.Parser;
 import seedu.duke.utils.State;
 import seedu.duke.utils.Storage;
 import seedu.duke.utils.Ui;
@@ -11,8 +13,9 @@ public class ExitCommand extends Command {
 
     private static final String MESSAGE_EXIT = "Shutting down......";
 
-    public ExitCommand(String[] input) {
+    public ExitCommand(String[] input) throws YamomException {
         super(input);
+        Parser.singleWordCommandError(input);
     }
 
     @Override
