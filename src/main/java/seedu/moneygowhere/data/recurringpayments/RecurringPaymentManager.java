@@ -1,9 +1,11 @@
 package seedu.moneygowhere.data.recurringpayments;
 
 import seedu.moneygowhere.common.Messages;
-import seedu.moneygowhere.exceptions.RecurringPaymentManagerRecurringPaymentNotFoundException;
+import seedu.moneygowhere.exceptions.data.recurringpayment.RecurringPaymentManagerRecurringPaymentNotFoundException;
 
 import java.util.ArrayList;
+
+//@@author xzynos
 
 /**
  * Stores and manages a list of recurring payments.
@@ -26,7 +28,7 @@ public class RecurringPaymentManager {
             return recurringPayments.get(recurringPaymentIndex);
         } catch (IndexOutOfBoundsException exception) {
             throw new RecurringPaymentManagerRecurringPaymentNotFoundException(
-                    Messages.RECURRING_PAYMENT_MANAGER_RECURRING_PAYMENT_NOT_FOUND
+                    Messages.RECURRING_PAYMENT_MANAGER_ERROR_RECURRING_PAYMENT_NOT_FOUND
             );
         }
     }
@@ -41,7 +43,7 @@ public class RecurringPaymentManager {
             recurringPayments.remove(recurringPaymentIndex);
         } catch (IndexOutOfBoundsException exception) {
             throw new RecurringPaymentManagerRecurringPaymentNotFoundException(
-                    Messages.RECURRING_PAYMENT_MANAGER_RECURRING_PAYMENT_NOT_FOUND
+                    Messages.RECURRING_PAYMENT_MANAGER_ERROR_RECURRING_PAYMENT_NOT_FOUND
             );
         }
     }
@@ -52,7 +54,7 @@ public class RecurringPaymentManager {
             recurringPayments.set(recurringPaymentIndex, recurringPayment);
         } catch (IndexOutOfBoundsException exception) {
             throw new RecurringPaymentManagerRecurringPaymentNotFoundException(
-                    Messages.RECURRING_PAYMENT_MANAGER_RECURRING_PAYMENT_NOT_FOUND
+                    Messages.RECURRING_PAYMENT_MANAGER_ERROR_RECURRING_PAYMENT_NOT_FOUND
             );
         }
     }
