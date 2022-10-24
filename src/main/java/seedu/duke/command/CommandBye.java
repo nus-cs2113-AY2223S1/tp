@@ -8,7 +8,7 @@ import seedu.duke.Storage;
 import seedu.duke.Ui;
 import static seedu.duke.Messages.MESSAGE_BYE;
 
-public class CommandQuit extends Command {
+public class CommandBye extends Command {
 
     @Override
     public void execute(Ui ui, Storage storage, PropertyList propertyList, ClientList clientList,

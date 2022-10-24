@@ -2,7 +2,7 @@ package seedu.duke;
 
 import seedu.duke.command.Command;
 
-import seedu.duke.command.CommandQuit;
+import seedu.duke.command.CommandBye;
 import seedu.duke.exception.DukeException;
 import seedu.duke.parsermanager.Parser;
 import seedu.duke.parsermanager.ParserManager;
@@ -28,7 +28,7 @@ public class Duke {
         Command command;
         Parser parser;
         ParserManager parserManager = new ParserManager(clientList, propertyList, pairingList);
-        boolean isCommandQuit = false;
+        boolean isCommandBye = false;
 
         ui.showWelcomeMessage();
 
@@ -39,12 +39,12 @@ public class Duke {
                 parser = parserManager.parseCommand(userInputText);
                 command = parser.parseCommand();
                 command.execute(ui, storage, propertyList, clientList, pairingList);
-                isCommandQuit = (command instanceof CommandQuit);
+                isCommandBye = (command instanceof CommandBye);
 
             } catch (DukeException e) {
                 ui.showExceptionMessage(e);
             }
-        } while (!isCommandQuit);
+        } while (!isCommandBye);
     }
 
     /**
