@@ -20,18 +20,16 @@ public class SearchModuleCommand extends Command {
     public static final String COMMAND_DESCRIPTION = "List out all modules that contains matching input search fields"
             + System.lineSeparator() + "\t * Either the module code or title has to be present.";
 
-    private Map<String, String> params;
     private String toSearchModuleCode;
     private String toSearchModuleTitle;
     private String toSearchLevel;
     private String toSearchSemester;
 
-    private Logger logger;
     public static final String SUBSYSTEM_NAME = "SearchModuleCommand";
 
     public SearchModuleCommand(String input) throws YamomException {
         super(input.split("\\s"));
-        params = Parser.parseParams(input);
+        Map<String, String> params = Parser.parseParams(input);
         toSearchModuleCode = params.getOrDefault("code", null);
         toSearchModuleTitle = params.getOrDefault("title", null);
         toSearchLevel = params.getOrDefault("level", null);
@@ -50,7 +48,7 @@ public class SearchModuleCommand extends Command {
 
     @Override
     public void execute(State state, Ui ui, Storage storage) {
-        logger = Logger.getLogger(SUBSYSTEM_NAME);
+        Logger logger = Logger.getLogger(SUBSYSTEM_NAME);
         logger.log(Level.FINE, "Loading search module command, starting to search for modules");
 
         List<Module> searchResult = filterModuleSearch(toSearchModuleCode, toSearchLevel,
@@ -63,8 +61,8 @@ public class SearchModuleCommand extends Command {
             ui.addMessage("No module found");
         } else {
             ui.addMessage("Total " + searchResult.size() + " module(s) found\n");
-            for (int i = 0; i < searchResult.size(); i++) {
-                ui.addMessage(searchResult.get(i).moduleCode + " " + searchResult.get(i).title);
+            for (Module module : searchResult) {
+                ui.addMessage(module.moduleCode + " " + module.title);
             }
             ui.addMessage("\nTo get full details of the module, type 'get <module code>'");
         }
@@ -97,11 +95,7 @@ public class SearchModuleCommand extends Command {
         int toSearchSemesterInt = Integer.parseInt(toSearchSemester);
 
         // check module is offered in which semester
-        if (module.getSemesterData(toSearchSemesterInt) != null) {
-            return true;
-        } else {
-            return false;
-        }
+        return module.getSemesterData(toSearchSemesterInt) != null;
     }
 
     /**
@@ -157,10 +151,9 @@ public class SearchModuleCommand extends Command {
         // filter the searchResult if toSearchLevel is not empty and level does not match
         if (toSearchLevel != null) {
             List<Module> updatedSearchResult = new ArrayList<>();
-            ;
-            for (int i = 0; i < searchResult.size(); i++) {
-                if (isSameModuleLevel(searchResult.get(i), toSearchLevel)) {
-                    updatedSearchResult.add(searchResult.get(i));
+            for (Module module : searchResult) {
+                if (isSameModuleLevel(module, toSearchLevel)) {
+                    updatedSearchResult.add(module);
                 }
             }
             searchResult = updatedSearchResult;
@@ -169,10 +162,9 @@ public class SearchModuleCommand extends Command {
         // filter the searchResult if toSearchSemester is not empty and semester does not match
         if (toSearchSemester != null) {
             List<Module> updatedSearchResult = new ArrayList<>();
-            ;
-            for (int i = 0; i < searchResult.size(); i++) {
-                if (isOfferedInSemester(searchResult.get(i), toSearchSemester)) {
-                    updatedSearchResult.add(searchResult.get(i));
+            for (Module module : searchResult) {
+                if (isOfferedInSemester(module, toSearchSemester)) {
+                    updatedSearchResult.add(module);
                 }
             }
             searchResult = updatedSearchResult;
