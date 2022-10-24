@@ -15,7 +15,7 @@ public class Ui {
 
 
     public void line() {
-        System.out.println("---------------------------------------------------------------------------------");
+        System.out.println("-------------------------------------------------------------------------------");
     }
 
 
@@ -73,25 +73,25 @@ public class Ui {
     }
 
     private void getExerciseColumnsSpacing(ArrayList<Exercise> exerciseArrayList, Integer[] columnSpacingArray) {
-        columnSpacingArray[0] = Math.max(columnSpacingArray[0], exerciseArrayList.size() % 10 + 1);
+        columnSpacingArray[0] = Math.max(columnSpacingArray[0], String.valueOf(exerciseArrayList.size()).length());
         for (Exercise exercise : exerciseArrayList) {
             if (exercise instanceof StrengthExercise) {
-                columnSpacingArray[1] = Math.max(columnSpacingArray[1], exercise.getWeight() % 10 + 1);
-                columnSpacingArray[2] = Math.max(columnSpacingArray[2], exercise.getSet() % 10 + 1);
+                columnSpacingArray[1] = Math.max(columnSpacingArray[1], String.valueOf(exercise.getWeight()).length());
+                columnSpacingArray[2] = Math.max(columnSpacingArray[2], String.valueOf(exercise.getSet()).length());
             } else if (exercise instanceof CardioExercise) {
-                columnSpacingArray[5] = Math.max(columnSpacingArray[5], (int) exercise.getDistance() % 10 + 1);
+                columnSpacingArray[5] = Math.max(columnSpacingArray[5], String.valueOf((int) exercise.getDistance()).length());
             }
             columnSpacingArray[1] = Math.max(columnSpacingArray[1], exercise.getExerciseName().length());
-            columnSpacingArray[4] = Math.max(columnSpacingArray[4], exercise.getRepetition() % 10 + 1);
-            columnSpacingArray[6] = Math.max(columnSpacingArray[6], exercise.getCaloriesBurnt() % 10 + 1);
+            columnSpacingArray[4] = Math.max(columnSpacingArray[4], String.valueOf(exercise.getRepetition()).length());
+            columnSpacingArray[6] = Math.max(columnSpacingArray[6], String.valueOf(exercise.getCaloriesBurnt()).length());
         }
     }
 
     private void getFoodColumnsSpacing(ArrayList<Food> foodArrayList, Integer[] columnSpacingArray) {
-        columnSpacingArray[0] = Math.max(columnSpacingArray[0], foodArrayList.size() % 10 + 1);
+        columnSpacingArray[0] = Math.max(columnSpacingArray[0], String.valueOf(foodArrayList.size()).length());
         for (Food food : foodArrayList) {
             columnSpacingArray[1] = Math.max(columnSpacingArray[1], food.getFoodDescription().length());
-            columnSpacingArray[2] = Math.max(columnSpacingArray[2], food.getCalories() % 10 + 1);
+            columnSpacingArray[2] = Math.max(columnSpacingArray[2], String.valueOf(food.getCalories()).length());
         }
     }
 
