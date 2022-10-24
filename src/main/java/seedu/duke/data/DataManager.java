@@ -1,6 +1,9 @@
 package seedu.duke.data;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+
+import seedu.duke.Exceptions;
 import seedu.duke.module.Module;
 
 public class DataManager {
@@ -33,27 +36,22 @@ public class DataManager {
         }
 
         //Load data files
-        AttendingManager.initAttendingDataFile();
         ModuleManager.initModuleDataFile();
-        LessonManager.initLessonDataFile();
-    }
-
-    /*
-     * Removes all relevant data from all data files
-     */
-    public static void deleteModule(Module module) {
-        AttendingManager.deleteAttending(module);
-        ModuleManager.deleteModule(module);
-        LessonManager.deleteLesson(module);
+        AttendingManager.initAttendingDataFile();
     }
 
     /*
      * Loads Timetable with info from all data files
      */
-    public static void loadTimetableFromDataFile() {
-        LessonManager.loadLessonIntoDataList();
+    public static void loadTimetableFromDataFile() throws Exceptions.FileLoadException, FileNotFoundException {
+        ModuleManager.loadModules();
         AttendingManager.loadAttendingIntoDataList();
-        ModuleManager.loadModuleIntoTimetable();
         AttendingManager.loadAttendingIntoTimetable();
+    }
+
+    public static void makeSave() {
+        ModuleManager.saveModules();
+        AttendingManager.saveAttendingIntoDataList();
+        AttendingManager.saveAttendingData();
     }
 }
