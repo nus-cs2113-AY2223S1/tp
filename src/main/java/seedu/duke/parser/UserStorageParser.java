@@ -460,7 +460,7 @@ public class UserStorageParser {
             String fileContent = convertTimetableIntoFileContent(timetableManager);
             isUniStorage = false;
             UserStorage.saveFile(fileContent, isUniStorage);
-        } catch (IOException e){
+        } catch (IOException e) {
             Ui.printExceptionMessage(e);
         }
     }

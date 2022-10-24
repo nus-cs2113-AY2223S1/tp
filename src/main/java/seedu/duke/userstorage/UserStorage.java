@@ -16,6 +16,7 @@ public class UserStorage {
     private static Logger logger = Logger.getLogger("UserStorage");
     private static final String UNI_STORAGE_FILE_PATH = "data/uni_info.txt";
     private static final String TIMETABLE_STORAGE_FILE_PATH = "data/timetable_info.txt";
+    
     /**.
      * Clears content in the file and writes new text into the file.
      * @param textToAdd Text to write into the file.

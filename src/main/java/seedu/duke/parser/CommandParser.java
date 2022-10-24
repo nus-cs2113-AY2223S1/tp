@@ -147,7 +147,7 @@ public class CommandParser {
 
     private static boolean isValidViewOptionIndex(String option) {
         return option.trim().equals(USER_LISTS_OPTION) || option.startsWith(UNIVERSITY_PREFIX)
-                || option.trim().equals(DELETE_HISTORY_OPTION) || option.trim().equals(TIMETABLES_OPTION) ;
+                || option.trim().equals(DELETE_HISTORY_OPTION) || option.trim().equals(TIMETABLES_OPTION);
     }
 
     private static boolean isValidAddCommand(String[] parameters) {
