@@ -41,7 +41,7 @@ public class ExerciseList {
     }
 
     public ArrayList<Exercise> getCompletedExerciseList() {
-        sortDate(completedExerciseList);
+        sortDateForExercise(completedExerciseList);
         return completedExerciseList;
     }
 
