@@ -293,7 +293,9 @@ public class ConsoleParser {
         boolean hasAllCliOptions = options.hasLongOption(
                 ConsoleParserConfigurations.COMMAND_VIEW_EXPENSE_ARG_EXPENSE_INDEX_LONG)
                 && options.hasLongOption(
-                ConsoleParserConfigurations.COMMAND_VIEW_EXPENSE_ARG_EXPENSE_CATEGORY_LONG);
+                ConsoleParserConfigurations.COMMAND_VIEW_EXPENSE_ARG_EXPENSE_CATEGORY_LONG)
+                && options.hasLongOption(
+                ConsoleParserConfigurations.COMMAND_VIEW_EXPENSE_ARG_EXPENSE_NAME_LONG);
 
         assert hasAllCliOptions :
                 ConsoleParserConfigurations.COMMAND_VIEW_EXPENSE_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS;
@@ -342,6 +344,9 @@ public class ConsoleParser {
         String expenseCategory = commandLine.getOptionValue(
                 ConsoleParserConfigurations.COMMAND_VIEW_EXPENSE_ARG_EXPENSE_CATEGORY_LONG
         );
+        String expenseName = commandLine.getOptionValue(
+                ConsoleParserConfigurations.COMMAND_VIEW_EXPENSE_ARG_EXPENSE_NAME_LONG
+        );
 
         int expenseIndex;
         if (expenseIndexStr == null) {
@@ -352,7 +357,8 @@ public class ConsoleParser {
 
         return new ConsoleCommandViewExpense(
                 expenseIndex,
-                expenseCategory
+                expenseCategory,
+                expenseName
         );
     }
 

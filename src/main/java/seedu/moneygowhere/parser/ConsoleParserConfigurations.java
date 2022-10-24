@@ -79,6 +79,11 @@ public class ConsoleParserConfigurations {
     public static final String COMMAND_VIEW_EXPENSE_ARG_EXPENSE_CATEGORY_DESC = "Category";
     public static final boolean COMMAND_VIEW_EXPENSE_ARG_EXPENSE_CATEGORY_HAS_VAL = true;
     public static final boolean COMMAND_VIEW_EXPENSE_ARG_EXPENSE_CATEGORY_IS_MAND = false;
+    public static final String COMMAND_VIEW_EXPENSE_ARG_EXPENSE_NAME = "n";
+    public static final String COMMAND_VIEW_EXPENSE_ARG_EXPENSE_NAME_LONG = "expense-name";
+    public static final String COMMAND_VIEW_EXPENSE_ARG_EXPENSE_NAME_DESC = "Name";
+    public static final boolean COMMAND_VIEW_EXPENSE_ARG_EXPENSE_NAME_HAS_VAL = true;
+    public static final boolean COMMAND_VIEW_EXPENSE_ARG_EXPENSE_NAME_IS_MAND = false;
     public static final String COMMAND_VIEW_EXPENSE_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS = ""
             + "Command View-Expense does not have all of the required options.";
     //endregion
@@ -634,10 +639,18 @@ public class ConsoleParserConfigurations {
                 COMMAND_VIEW_EXPENSE_ARG_EXPENSE_CATEGORY_DESC
         );
         optionExpenseCategory.setRequired(COMMAND_VIEW_EXPENSE_ARG_EXPENSE_CATEGORY_IS_MAND);
+        Option optionExpenseName = new Option(
+                COMMAND_VIEW_EXPENSE_ARG_EXPENSE_NAME,
+                COMMAND_VIEW_EXPENSE_ARG_EXPENSE_NAME_LONG,
+                COMMAND_VIEW_EXPENSE_ARG_EXPENSE_NAME_HAS_VAL,
+                COMMAND_VIEW_EXPENSE_ARG_EXPENSE_NAME_DESC
+        );
+        optionExpenseName.setRequired(COMMAND_VIEW_EXPENSE_ARG_EXPENSE_NAME_IS_MAND);
 
         Options options = new Options();
         options.addOption(optionExpenseIndex);
         options.addOption(optionExpenseCategory);
+        options.addOption(optionExpenseName);
 
         return options;
     }
