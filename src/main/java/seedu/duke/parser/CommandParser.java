@@ -3,6 +3,7 @@ package seedu.duke.parser;
 import seedu.duke.command.Command;
 import seedu.duke.command.AddCommand;
 import seedu.duke.command.ByeCommand;
+import seedu.duke.command.BudgetCommand;
 import seedu.duke.command.DeleteCommand;
 import seedu.duke.command.EditCommand;
 import seedu.duke.command.FindCommand;
@@ -119,6 +120,9 @@ public class CommandParser {
             break;
         case DeleteCommand.COMMAND_WORD:
             command = new DeleteCommand();
+            break;
+        case BudgetCommand.COMMAND_WORD:
+            command = new BudgetCommand();
             break;
         case ByeCommand.COMMAND_WORD:
             command = new ByeCommand();

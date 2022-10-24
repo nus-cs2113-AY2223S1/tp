@@ -4,10 +4,9 @@ package seedu.duke.exception;
 import seedu.duke.common.ErrorMessages;
 
 /**
- * Represents the exception where the date provided for the transaction is not in the supported format.
+ * Represents the exception where the budget value requested to be updated is the same as the current budget value.
  */
-public class InputTransactionInvalidDateException extends MoolahException {
-
+public class InputBudgetDuplicateException extends MoolahException {
     /**
      * Returns the error message of the exception to alert user of the exception.
      *
@@ -15,6 +14,7 @@ public class InputTransactionInvalidDateException extends MoolahException {
      */
     @Override
     public String getMessage() {
-        return ErrorMessages.ERROR_TRANSACTION_INVALID_DATE.toString();
+        return ErrorMessages.ERROR_DUPLICATE_BUDGET.toString();
     }
+
 }

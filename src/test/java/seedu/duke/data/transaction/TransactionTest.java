@@ -1,6 +1,7 @@
 package seedu.duke.data.transaction;
 
 import org.junit.jupiter.api.Test;
+import seedu.duke.data.TransactionList;
 
 import java.time.LocalDate;
 
@@ -43,5 +44,11 @@ public class TransactionTest {
     public void testSetCategory() {
         transaction.setCategory("Love");
         assertEquals("Love", transaction.getCategory());
+    }
+
+    //@@author wcwy
+    @Test
+    public void printFormattedDate_validDateFormat_expectCorrectFormatDate() {
+        assertEquals(transaction.printFormattedDate(), "Jan 01 2022");
     }
 }

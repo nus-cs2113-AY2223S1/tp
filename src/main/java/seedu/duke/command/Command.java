@@ -72,6 +72,9 @@ public abstract class Command {
     public void setAmount(int amount) {
     }
 
+    public void setBudgetAmount(long amount) {
+    }
+
     public void setCategory(String category) {
     }
 
