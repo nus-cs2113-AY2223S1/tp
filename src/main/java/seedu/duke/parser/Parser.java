@@ -101,10 +101,6 @@ public class Parser {
         return semesterInput > 0 && semesterInput <= 4;
     }
 
-    public static Command searchCommand(String userInput) {
-        return new SearchModuleCommand(userInput);
-    }
-
     /**
      * Checks if the user entered a valid search or add or delete command in the
      * format
