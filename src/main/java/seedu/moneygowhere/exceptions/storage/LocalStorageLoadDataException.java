@@ -3,7 +3,7 @@ package seedu.moneygowhere.exceptions.storage;
 import seedu.moneygowhere.exceptions.MoneyGoWhereException;
 
 /**
- * Thrown when there is an error in load data.
+ * Defines exception to be thrown when there is an error in load data.
  */
 @SuppressWarnings("unused")
 public class LocalStorageLoadDataException extends MoneyGoWhereException {

@@ -6,50 +6,41 @@ import seedu.moneygowhere.parser.ConsoleParserConfigurations;
  * Defines the messages used by program.
  */
 public class Messages {
-    /**
-     * Defines messages for {@link seedu.moneygowhere.userinterface.ConsoleInterface}.
-     */
+    //region Defines messages for ConsoleInterface
     public static final String CONSOLE_MESSAGE_GREETING = ""
             + "Your MoneyGoWhere? Let me help you find it.";
     public static final String CONSOLE_MESSAGE_GOODBYE = ""
             + "Bye. Hope to see you again soon!";
+    //endregion
 
-
-    /**
-     * Defines messages for {@link seedu.moneygowhere.parser.ConsoleParser}.
-     */
+    //region Defines messages for ConsoleParser
     public static final String CONSOLE_ERROR_COMMAND_NOT_FOUND = ""
             + "The command entered is invalid.";
+    //endregion
 
-    /**
-     * Defines messages for {@link seedu.moneygowhere.data.expense.ExpenseManager}.
-     */
+    //region Defines messages for ExpenseManager
     public static final String EXPENSE_MANAGER_ERROR_EXPENSE_NOT_FOUND = ""
             + "The expense is not found.";
     public static final String EXPENSE_MANAGER_DUPLICATE_EXPENSE = ""
             + "There is already a similar expense";
+    //endregion
 
-    /**
-     * Defines messages for {@link seedu.moneygowhere.data.target.TargetManager}.
-     */
+    //region Defines messages for TargetManager
     public static final String TARGET_MANAGER_ERROR_TARGET_NOT_FOUND = ""
             + "The target is not found.";
+    //endregion
 
-    /**
-     * Defines messages for {@link seedu.moneygowhere.data.income.IncomeManager}.
-     */
+    //region Defines messages for IncomeManager
     public static final String INCOME_MANAGER_ERROR_INCOME_NOT_FOUND = ""
             + "The income is not found.";
+    //endregion
 
-    /**
-     * Defines messages for {@link seedu.moneygowhere.data.recurringpayments.RecurringPaymentManager}.
-     */
+    //region Defines messages for RecurringPaymentManager
     public static final String RECURRING_PAYMENT_MANAGER_RECURRING_PAYMENT_NOT_FOUND = ""
             + "The recurring payment is not found.";
+    //endregion
 
-    /**
-     * Defines messages for {@link seedu.moneygowhere.storage.LocalStorage}.
-     */
+    //region Defines messages for LocalStorage
     public static final String LOCAL_STORAGE_ERROR_NO_LOAD_FILE = ""
             + "There is no load file found...\n"
             + "Please ensure the file is named correctly and "
@@ -83,10 +74,9 @@ public class Messages {
     public static final String LOCAL_STORAGE_MERGE_EXTERNAL_DATA_WRONG_FILE_FORMAT = ""
             + "Wrong file format given\n"
             + "Please provide path to your xml file with the save data.";
+    //endregion
 
-    /**
-     * Defines messages for {@link seedu.moneygowhere.currency.CurrencyApi }.
-     */
+    //region Defines messages for CurrencyApi
     public static final String CURRENCY_API_CONNECTION_FAILURE = ""
             + "Unable to connect to CurrencyAPI...\n"
             + "Using last saved currencies instead.";
@@ -99,19 +89,17 @@ public class Messages {
             + "Error is found in line: ";
     public static final String CURRENCY_API_LOAD_SUCCESS = ""
             + "Currencies loaded successfully :)";
+    //endregion
 
-    /**
-     * Defines messages for {@link seedu.moneygowhere.data.currency.CurrencyManager}.
-     */
+    //region Defines messages for CurrencyManager
     public static final String CURRENCY_MANAGER_RATES_NOT_FOUND = ""
             + "There may be an error obtaining the updated Exchange Rate for your desired currency. " + '\n'
             + "Please enter the exchange rate manually.";
     public static final String CURRENCY_MANAGER_CURRENCY_NOT_FOUND = ""
             + "Currency not found. Please try again.";
+    //endregion
 
-    /**
-     * Defines messages for console command Add-Expense.
-     */
+    //region Defines messages for console command Add-Expense
     public static final String CONSOLE_COMMAND_ADD_EXPENSE_SYNTAX = ""
             + "SYNTAX: "
             + ConsoleParserConfigurations.COMMAND_ADD_EXPENSE
@@ -148,16 +136,14 @@ public class Messages {
             + " "
             + ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_DESC
             + "]";
-
     public static final String CONSOLE_MESSAGE_COMMAND_ADD_EXPENSE_SUCCESS = ""
             + "The expense was added successfully.";
     public static final String CONSOLE_ERROR_COMMAND_ADD_EXPENSE_INVALID = ""
             + "The arguments entered are invalid. "
             + CONSOLE_COMMAND_ADD_EXPENSE_SYNTAX;
+    //endregion
 
-    /**
-     * Defines messages for console command View-Expense.
-     */
+    //region Defines messages for console command View-Expense
     public static final String CONSOLE_COMMAND_VIEW_EXPENSE_SYNTAX = ""
             + "SYNTAX: "
             + ConsoleParserConfigurations.COMMAND_VIEW_EXPENSE
@@ -170,17 +156,14 @@ public class Messages {
             + " "
             + ConsoleParserConfigurations.COMMAND_VIEW_EXPENSE_ARG_EXPENSE_CATEGORY_LONG.toUpperCase()
             + "]";
-
     public static final String CONSOLE_ERROR_COMMAND_VIEW_EXPENSE_INVALID = ""
             + "The arguments entered are invalid. "
             + CONSOLE_COMMAND_VIEW_EXPENSE_SYNTAX;
-
     public static final String COMMAND_VIEW_EXPENSE_EMPTY_LIST = ""
             + "Your list of expenses is empty. ";
+    //endregion
 
-    /**
-     * Defines messages for console command Delete-Expense.
-     */
+    //region Defines messages for console command Delete-Expense
     public static final String CONSOLE_COMMAND_DELETE_EXPENSE_SYNTAX = ""
             + "SYNTAX: "
             + ConsoleParserConfigurations.COMMAND_DELETE_EXPENSE
@@ -193,11 +176,9 @@ public class Messages {
     public static final String CONSOLE_ERROR_COMMAND_DELETE_EXPENSE_INVALID = ""
             + "The arguments entered are invalid. "
             + CONSOLE_COMMAND_DELETE_EXPENSE_SYNTAX;
+    //endregion
 
-
-    /**
-     * Defines messages for console command Edit-Expense.
-     */
+    //region Defines messages for console command Edit-Expense
     public static final String CONSOLE_COMMAND_EDIT_EXPENSE_SYNTAX = ""
             + "SYNTAX: "
             + ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE
@@ -243,10 +224,9 @@ public class Messages {
     public static final String CONSOLE_ERROR_COMMAND_EDIT_EXPENSE_INVALID = ""
             + "The arguments entered are invalid. "
             + CONSOLE_COMMAND_EDIT_EXPENSE_SYNTAX;
+    //endregion
 
-    /**
-     * Defines messages for console command Sort-Expense.
-     */
+    //region Defines messages for console command Sort-Expense
     public static final String CONSOLE_COMMAND_SORT_EXPENSE_SYNTAX = ""
             + "SYNTAX: "
             + ConsoleParserConfigurations.COMMAND_SORT_EXPENSE
@@ -271,10 +251,9 @@ public class Messages {
     public static final String CONSOLE_ERROR_COMMAND_SORT_EXPENSE_INVALID = ""
             + "The arguments entered are invalid. "
             + CONSOLE_COMMAND_SORT_EXPENSE_SYNTAX;
+    //endregion
 
-    /**
-     * Defines messages for console command Convert-Currency.
-     */
+    //region Defines messages for console command Convert-Currency
     public static final String CONSOLE_COMMAND_CONVERT_CURRENCY_SYNTAX = ""
             + "SYNTAX: "
             + ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY
@@ -296,10 +275,9 @@ public class Messages {
     public static final String CONSOLE_ERROR_COMMAND_CONVERT_CURRENCY_INVALID = ""
             + "The arguments entered are invalid. "
             + CONSOLE_COMMAND_CONVERT_CURRENCY_SYNTAX;
+    //endregion
 
-    /**
-     * Defines messages for console command Add-Target.
-     */
+    //region Defines messages for console command Add-Target
     public static final String CONSOLE_COMMAND_ADD_TARGET_SYNTAX = ""
             + "SYNTAX: "
             + ConsoleParserConfigurations.COMMAND_ADD_TARGET
@@ -329,10 +307,9 @@ public class Messages {
     public static final String CONSOLE_ERROR_COMMAND_ADD_TARGET_INVALID = ""
             + "The arguments entered are invalid. "
             + CONSOLE_COMMAND_ADD_TARGET_SYNTAX;
+    //endregion
 
-    /**
-     * Defines messages for console command View-Target.
-     */
+    //region Defines messages for console command View-Target
     public static final String CONSOLE_COMMAND_VIEW_TARGET_SYNTAX = ""
             + "SYNTAX: "
             + ConsoleParserConfigurations.COMMAND_VIEW_TARGET
@@ -341,17 +318,14 @@ public class Messages {
             + " "
             + ConsoleParserConfigurations.COMMAND_VIEW_TARGET_ARG_TARGET_INDEX_LONG.toUpperCase()
             + "]";
-
     public static final String CONSOLE_ERROR_COMMAND_VIEW_TARGET_INVALID = ""
             + "The arguments entered are invalid. "
             + CONSOLE_COMMAND_VIEW_TARGET_SYNTAX;
-
     public static final String COMMAND_VIEW_TARGET_EMPTY_LIST = ""
             + "Your list of targets is empty. ";
+    //endregion
 
-    /**
-     * Defines messages for console command Delete-Target.
-     */
+    //region Defines messages for console command Delete-Target
     public static final String CONSOLE_COMMAND_DELETE_TARGET_SYNTAX = ""
             + "SYNTAX: "
             + ConsoleParserConfigurations.COMMAND_DELETE_TARGET
@@ -364,11 +338,9 @@ public class Messages {
     public static final String CONSOLE_ERROR_COMMAND_DELETE_TARGET_INVALID = ""
             + "The arguments entered are invalid. "
             + CONSOLE_COMMAND_DELETE_TARGET_SYNTAX;
+    //endregion
 
-
-    /**
-     * Defines messages for console command Edit-Target.
-     */
+    //region Defines messages for console command Edit-Target
     public static final String CONSOLE_COMMAND_EDIT_TARGET_SYNTAX = ""
             + "SYNTAX: "
             + ConsoleParserConfigurations.COMMAND_EDIT_TARGET
@@ -402,10 +374,9 @@ public class Messages {
     public static final String CONSOLE_ERROR_COMMAND_EDIT_TARGET_INVALID = ""
             + "The arguments entered are invalid. "
             + CONSOLE_COMMAND_EDIT_TARGET_SYNTAX;
+    //endregion
 
-    /**
-     * Defines messages for console command Add-Income.
-     */
+    //region Defines messages for console command Add-Income
     public static final String CONSOLE_COMMAND_ADD_INCOME_SYNTAX = ""
             + "SYNTAX: "
             + ConsoleParserConfigurations.COMMAND_ADD_INCOME
@@ -431,10 +402,9 @@ public class Messages {
     public static final String CONSOLE_ERROR_COMMAND_ADD_INCOME_INVALID = ""
             + "The arguments entered are invalid. "
             + CONSOLE_COMMAND_ADD_INCOME_SYNTAX;
+    //endregion
 
-    /**
-     * Defines messages for console command View-Income.
-     */
+    //region Defines messages for console command View-Income
     public static final String CONSOLE_COMMAND_VIEW_INCOME_SYNTAX = ""
             + "SYNTAX: "
             + ConsoleParserConfigurations.COMMAND_VIEW_INCOME
@@ -443,17 +413,14 @@ public class Messages {
             + " "
             + ConsoleParserConfigurations.COMMAND_VIEW_INCOME_ARG_INCOME_INDEX_LONG.toUpperCase()
             + "]";
-
     public static final String CONSOLE_ERROR_COMMAND_VIEW_INCOME_INVALID = ""
             + "The arguments entered are invalid. "
             + CONSOLE_COMMAND_VIEW_INCOME_SYNTAX;
-
     public static final String COMMAND_VIEW_INCOME_EMPTY_LIST = ""
             + "Your list of incomes is empty. ";
+    //endregion
 
-    /**
-     * Defines messages for console command Delete-Income.
-     */
+    //region Defines messages for console command Delete-Income
     public static final String CONSOLE_COMMAND_DELETE_INCOME_SYNTAX = ""
             + "SYNTAX: "
             + ConsoleParserConfigurations.COMMAND_DELETE_INCOME
@@ -466,11 +433,9 @@ public class Messages {
     public static final String CONSOLE_ERROR_COMMAND_DELETE_INCOME_INVALID = ""
             + "The arguments entered are invalid. "
             + CONSOLE_COMMAND_DELETE_INCOME_SYNTAX;
+    //endregion
 
-
-    /**
-     * Defines messages for console command Edit-Income.
-     */
+    //region Defines messages for console command Edit-Income
     public static final String CONSOLE_COMMAND_EDIT_INCOME_SYNTAX = ""
             + "SYNTAX: "
             + ConsoleParserConfigurations.COMMAND_EDIT_INCOME
@@ -500,10 +465,9 @@ public class Messages {
     public static final String CONSOLE_ERROR_COMMAND_EDIT_INCOME_INVALID = ""
             + "The arguments entered are invalid. "
             + CONSOLE_COMMAND_EDIT_INCOME_SYNTAX;
+    //endregion
 
-    /**
-     * Defines messages for console command Add-RecurringPayment.
-     */
+    //region Defines messages for console command Add-RecurringPayment
     public static final String CONSOLE_COMMAND_ADD_RECURRING_PAYMENT_SYNTAX = ""
             + "SYNTAX: "
             + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT
@@ -537,10 +501,9 @@ public class Messages {
     public static final String CONSOLE_ERROR_COMMAND_ADD_RECURRING_PAYMENT_INVALID = ""
             + "The arguments entered are invalid. "
             + CONSOLE_COMMAND_ADD_RECURRING_PAYMENT_SYNTAX;
+    //endregion
 
-    /**
-     * Defines messages for console command View-RecurringPayment.
-     */
+    //region Defines messages for console command View-RecurringPayment
     public static final String CONSOLE_COMMAND_VIEW_RECURRING_PAYMENT_SYNTAX = ""
             + "SYNTAX: "
             + ConsoleParserConfigurations.COMMAND_VIEW_RECURRING_PAYMENT
@@ -552,8 +515,9 @@ public class Messages {
     public static final String CONSOLE_ERROR_COMMAND_VIEW_RECURRING_PAYMENT_INVALID = ""
             + "The arguments entered are invalid. "
             + CONSOLE_COMMAND_VIEW_RECURRING_PAYMENT_SYNTAX;
+    //endregion
 
-    //region Defines messages for console command Delete-RecurringPayment.
+    //region Defines messages for console command Delete-RecurringPayment
     public static final String CONSOLE_COMMAND_DELETE_RECURRING_PAYMENT_SYNTAX = ""
             + "SYNTAX: "
             + ConsoleParserConfigurations.COMMAND_DELETE_RECURRING_PAYMENT
@@ -570,7 +534,7 @@ public class Messages {
             + CONSOLE_COMMAND_DELETE_RECURRING_PAYMENT_SYNTAX;
     //endregion
 
-    //region Defines messages for console command Edit-RecurringPayment.
+    //region Defines messages for console command Edit-RecurringPayment
     public static final String CONSOLE_COMMAND_EDIT_RECURRING_PAYMENT_SYNTAX = ""
             + "SYNTAX: "
             + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT
@@ -610,9 +574,7 @@ public class Messages {
             + CONSOLE_COMMAND_EDIT_RECURRING_PAYMENT_SYNTAX;
     //endregion
 
-    /**
-     * Defines messages for console command Merge-File.
-     */
+    //region Defines messages for console command Merge-File
     public static final String CONSOLE_COMMAND_MERGE_EXTERNAL_FILE_SYNTAX = ""
             + "SYNTAX: "
             + ConsoleParserConfigurations.COMMAND_MERGE_EXTERNAL_FILE
@@ -624,4 +586,5 @@ public class Messages {
     public static final String CONSOLE_ERROR_COMMAND_MERGE_EXTERNAL_FILE_INVALID = ""
             + "The arguments entered are invalid. "
             + CONSOLE_COMMAND_MERGE_EXTERNAL_FILE_SYNTAX;
+    //endregion
 }

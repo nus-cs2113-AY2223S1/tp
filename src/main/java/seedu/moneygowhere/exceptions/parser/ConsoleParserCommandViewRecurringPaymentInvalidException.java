@@ -3,7 +3,7 @@ package seedu.moneygowhere.exceptions.parser;
 import seedu.moneygowhere.exceptions.MoneyGoWhereException;
 
 /**
- * Thrown when the command view-recurringpayment is invalid.
+ * Defines exception to be thrown when the command View-RecurringPayment is invalid.
  */
 @SuppressWarnings("unused")
 public class ConsoleParserCommandViewRecurringPaymentInvalidException extends MoneyGoWhereException {

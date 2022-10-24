@@ -3,7 +3,7 @@ package seedu.moneygowhere.exceptions.data.expense;
 import seedu.moneygowhere.exceptions.MoneyGoWhereException;
 
 /**
- * Thrown when an expense is not found in expense manager.
+ * Defines exception to be thrown when an expense is not found in expense manager.
  */
 @SuppressWarnings("unused")
 public class ExpenseManagerExpenseNotFoundException extends MoneyGoWhereException {

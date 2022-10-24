@@ -2295,27 +2295,27 @@ public class ConsoleParser {
      * @param consoleInput String read from standard input.
      * @return Parsed command and arguments
      * @throws ConsoleParserCommandNotFoundException                      If the command is not found.
-     * @throws ConsoleParserCommandAddExpenseInvalidException             If the command add-expense is invalid.
-     * @throws ConsoleParserCommandViewExpenseInvalidException            If the command view-expense is invalid.
-     * @throws ConsoleParserCommandDeleteExpenseInvalidException          If the command delete-expense is invalid.
-     * @throws ConsoleParserCommandEditExpenseInvalidException            If the command edit-expense is invalid.
-     * @throws ConsoleParserCommandSortExpenseInvalidException            If the command sort-expense is invalid.
-     * @throws ConsoleParserCommandConvertCurrencyInvalidException        If the command convert-currency is invalid.
-     * @throws ConsoleParserCommandAddTargetInvalidException              If the command add-target is invalid.
-     * @throws ConsoleParserCommandViewTargetInvalidException             If the command view-target is invalid.
-     * @throws ConsoleParserCommandDeleteTargetInvalidException           If the command delete-target is invalid.
-     * @throws ConsoleParserCommandEditTargetInvalidException             If the command edit-target is invalid.
-     * @throws ConsoleParserCommandAddIncomeInvalidException              If the command add-income is invalid.
-     * @throws ConsoleParserCommandViewIncomeInvalidException             If the command view-income is invalid.
-     * @throws ConsoleParserCommandDeleteIncomeInvalidException           If the command delete-income is invalid.
-     * @throws ConsoleParserCommandEditIncomeInvalidException             If the command edit-income is invalid.
-     * @throws ConsoleParserCommandAddRecurringPaymentInvalidException    If the command add-recurringPayment is
+     * @throws ConsoleParserCommandAddExpenseInvalidException             If the command Add-Expense is invalid.
+     * @throws ConsoleParserCommandViewExpenseInvalidException            If the command View-Expense is invalid.
+     * @throws ConsoleParserCommandDeleteExpenseInvalidException          If the command Delete-Expense is invalid.
+     * @throws ConsoleParserCommandEditExpenseInvalidException            If the command Edit-Expense is invalid.
+     * @throws ConsoleParserCommandSortExpenseInvalidException            If the command Sort-Expense is invalid.
+     * @throws ConsoleParserCommandConvertCurrencyInvalidException        If the command Convert-Currency is invalid.
+     * @throws ConsoleParserCommandAddTargetInvalidException              If the command Add-Target is invalid.
+     * @throws ConsoleParserCommandViewTargetInvalidException             If the command View-Target is invalid.
+     * @throws ConsoleParserCommandDeleteTargetInvalidException           If the command Delete-Target is invalid.
+     * @throws ConsoleParserCommandEditTargetInvalidException             If the command Edit-Target is invalid.
+     * @throws ConsoleParserCommandAddIncomeInvalidException              If the command Add-Income is invalid.
+     * @throws ConsoleParserCommandViewIncomeInvalidException             If the command View-Income is invalid.
+     * @throws ConsoleParserCommandDeleteIncomeInvalidException           If the command Delete-Income is invalid.
+     * @throws ConsoleParserCommandEditIncomeInvalidException             If the command Edit-Income is invalid.
+     * @throws ConsoleParserCommandAddRecurringPaymentInvalidException    If the command Add-RecurringPayment is
      *                                                                    invalid.
-     * @throws ConsoleParserCommandViewRecurringPaymentInvalidException   If the command view-recurringPayment is
+     * @throws ConsoleParserCommandViewRecurringPaymentInvalidException   If the command View-RecurringPayment is
      *                                                                    invalid.
-     * @throws ConsoleParserCommandDeleteRecurringPaymentInvalidException If the command delete-recurringPayment is
+     * @throws ConsoleParserCommandDeleteRecurringPaymentInvalidException If the command Delete-RecurringPayment is
      *                                                                    invalid.
-     * @throws ConsoleParserCommandMergeExternalFileInvalidException      If the command merge-file is invalid
+     * @throws ConsoleParserCommandMergeExternalFileInvalidException      If the command Merge-File is invalid
      */
     public static ConsoleCommand parse(String consoleInput) throws
             ConsoleParserCommandNotFoundException,

@@ -3,7 +3,7 @@ package seedu.moneygowhere.exceptions.data.currency;
 import seedu.moneygowhere.exceptions.MoneyGoWhereException;
 
 /**
- * Thrown when there are no rates to be found.
+ * Defines exception to be thrown when there are no rates to be found.
  */
 @SuppressWarnings("unused")
 public class CurrencyRatesNotFoundException extends MoneyGoWhereException {

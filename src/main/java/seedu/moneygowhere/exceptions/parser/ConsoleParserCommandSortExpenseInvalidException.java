@@ -3,7 +3,7 @@ package seedu.moneygowhere.exceptions.parser;
 import seedu.moneygowhere.exceptions.MoneyGoWhereException;
 
 /**
- * Thrown when the arguments for command sort-expense is invalid.
+ * Defines exception to be thrown when the arguments for command Sort-Expense is invalid.
  */
 @SuppressWarnings("unused")
 public class ConsoleParserCommandSortExpenseInvalidException extends MoneyGoWhereException {

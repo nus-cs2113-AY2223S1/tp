@@ -1,7 +1,7 @@
 package seedu.moneygowhere.commands;
 
 /**
- * Stores the Delete-RecurringPayment command and its arguments.
+ * Stores the command Delete-RecurringPayment and its arguments.
  */
 @SuppressWarnings("FieldMayBeFinal")
 public class ConsoleCommandDeleteRecurringPayment extends ConsoleCommand {

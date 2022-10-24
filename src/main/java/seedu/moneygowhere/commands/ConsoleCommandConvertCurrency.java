@@ -6,7 +6,7 @@ import seedu.moneygowhere.data.expense.Expense;
 import java.math.BigDecimal;
 
 /**
- * Stores the Convert-Currency command and its arguments.
+ * Stores the command Convert-Currency and its arguments.
  */
 @SuppressWarnings("FieldMayBeFinal")
 public class ConsoleCommandConvertCurrency extends ConsoleCommand {

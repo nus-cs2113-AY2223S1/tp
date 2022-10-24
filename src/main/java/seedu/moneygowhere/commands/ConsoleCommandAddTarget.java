@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 /**
- * Stores the add-target command and its arguments.
+ * Stores the command Add-Target and its arguments.
  */
 @SuppressWarnings("FieldMayBeFinal")
 public class ConsoleCommandAddTarget extends ConsoleCommand {

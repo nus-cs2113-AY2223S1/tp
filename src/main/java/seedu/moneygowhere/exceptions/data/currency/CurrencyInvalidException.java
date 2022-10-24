@@ -3,7 +3,7 @@ package seedu.moneygowhere.exceptions.data.currency;
 import seedu.moneygowhere.exceptions.MoneyGoWhereException;
 
 /**
- * Thrown when the currency entered is invalid.
+ * Defines exception to be thrown when the currency entered is invalid.
  */
 @SuppressWarnings("unused")
 public class CurrencyInvalidException extends MoneyGoWhereException {

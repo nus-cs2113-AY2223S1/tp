@@ -1,7 +1,7 @@
 package seedu.moneygowhere.commands;
 
 /**
- * Stores the delete-income command and its arguments.
+ * Stores the command Delete-Income and its arguments.
  */
 @SuppressWarnings("FieldMayBeFinal")
 public class ConsoleCommandDeleteIncome extends ConsoleCommand {

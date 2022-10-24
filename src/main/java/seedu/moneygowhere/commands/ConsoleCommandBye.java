@@ -1,7 +1,7 @@
 package seedu.moneygowhere.commands;
 
 /**
- * Stores the bye command and its arguments.
+ * Stores the command Bye and its arguments.
  */
 public class ConsoleCommandBye extends ConsoleCommand {
 }

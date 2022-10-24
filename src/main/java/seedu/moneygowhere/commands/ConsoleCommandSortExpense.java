@@ -2,6 +2,9 @@ package seedu.moneygowhere.commands;
 
 import seedu.moneygowhere.parser.ConsoleParserConfigurations;
 
+/**
+ * Stores the command Sort-Expense and its arguments.
+ */
 @SuppressWarnings("FieldMayBeFinal")
 public class ConsoleCommandSortExpense extends ConsoleCommand {
     private String type;

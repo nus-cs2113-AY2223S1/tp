@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 /**
- * Stores the add-income command and its arguments.
+ * Stores the command Add-Income and its arguments.
  */
 @SuppressWarnings("FieldMayBeFinal")
 public class ConsoleCommandAddIncome extends ConsoleCommand {

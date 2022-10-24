@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 /**
- * Stores the edit-expense command and its arguments.
+ * Stores the command Edit-Expense and its arguments.
  */
 @SuppressWarnings("unused")
 public class ConsoleCommandEditExpense extends ConsoleCommand {

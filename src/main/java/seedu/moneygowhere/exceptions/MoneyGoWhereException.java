@@ -1,7 +1,7 @@
 package seedu.moneygowhere.exceptions;
 
 /**
- * Define exceptions thrown the program.
+ * Defines exceptions thrown by the program.
  */
 public class MoneyGoWhereException extends Exception {
     /**

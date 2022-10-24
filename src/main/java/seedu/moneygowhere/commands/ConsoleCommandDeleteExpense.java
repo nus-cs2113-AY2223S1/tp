@@ -1,7 +1,7 @@
 package seedu.moneygowhere.commands;
 
 /**
- * Stores the delete-expense command and its arguments.
+ * Stores the command Delete-Expense and its arguments.
  */
 @SuppressWarnings("FieldMayBeFinal")
 public class ConsoleCommandDeleteExpense extends ConsoleCommand {

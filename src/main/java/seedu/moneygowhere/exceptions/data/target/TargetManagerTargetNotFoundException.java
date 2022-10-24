@@ -3,7 +3,7 @@ package seedu.moneygowhere.exceptions.data.target;
 import seedu.moneygowhere.exceptions.MoneyGoWhereException;
 
 /**
- * Thrown when a target is not found in target manager.
+ * Defines exception to be thrown when a target is not found in target manager.
  */
 @SuppressWarnings("unused")
 public class TargetManagerTargetNotFoundException extends MoneyGoWhereException {
