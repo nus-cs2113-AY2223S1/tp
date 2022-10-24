@@ -15,7 +15,8 @@ import java.util.logging.Logger;
 
 public class SearchModuleCommand extends Command {
     public static final String COMMAND_WORD = "search";
-    public static final String COMMAND_USAGE = "search /code [SIMILAR_MODULE_CODE] /title [SIMILAR_MODULE_TITLE] /level <level> /sem <semester>";
+    public static final String COMMAND_USAGE = "search /code [SIMILAR_MODULE_CODE] /title [SIMILAR_MODULE_TITLE] "
+            + "/level <level> /sem <semester>";
     public static final String COMMAND_DESCRIPTION = "List out all modules that contains matching input search fields"
             + System.lineSeparator() + "\t * Either the module code or title has to be present.";
 

@@ -81,13 +81,13 @@ public class GetModuleCommand extends Command {
     }
 
     // check if module is offered in this semester
-    boolean isModuleOfferedInCurrentSem(Module module, State state) {
+    public static boolean isModuleOfferedInCurrentSem(Module module, State state) {
         int sem = state.getSemester();
         return module.getSemestersOffering(module).contains(sem);
     }
 
     // Check if module input by user exists in module list. This is different from isValidModuleCode from Parser class.
-    boolean isModuleExist(Module module) {
+    public static boolean isModuleExist(Module module) {
         // check if module exists in module list
         List<Module> moduleList = Module.getAll();
         return moduleList.contains(module);
