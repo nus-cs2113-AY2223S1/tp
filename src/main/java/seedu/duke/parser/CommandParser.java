@@ -30,6 +30,7 @@ public class CommandParser {
     private static final String USER_LISTS_OPTION = "LISTS";
     private static final String MODULES_OPTION = "MODULES";
     private static final String DELETE_HISTORY_OPTION = "DELETE_HISTORY";
+    private static final String TIMETABLES_OPTION = "TIMETABLES";
     private static final int SIX_PARAMETERS_LENGTH = 6;
     private static final int THREE_PARAMETERS_LENGTH = 3;
     private static final int TWO_PARAMETERS_LENGTH = 2;
@@ -146,7 +147,7 @@ public class CommandParser {
 
     private static boolean isValidViewOptionIndex(String option) {
         return option.trim().equals(USER_LISTS_OPTION) || option.startsWith(UNIVERSITY_PREFIX)
-                || option.trim().equals(DELETE_HISTORY_OPTION);
+                || option.trim().equals(DELETE_HISTORY_OPTION) || option.trim().equals(TIMETABLES_OPTION) ;
     }
 
     private static boolean isValidAddCommand(String[] parameters) {

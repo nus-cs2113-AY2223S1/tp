@@ -39,9 +39,7 @@ public class Duke {
         System.out.print(Ui.printCommands());
         DatabaseStorage.loadDatabase();
         UserUniversityListManager userUniversityListManager = UserStorageParser.getSavedLists();
-        //To be changed to loading timetable from database
-        //Timetable Manager timetableManager = UserStorageParser.getSavedTimetables();
-        TimetableManager timetableManager = new TimetableManager();
+        TimetableManager timetableManager = UserStorageParser.getSavedTimetables();
 
         while (!shouldExit) {
             try {
@@ -59,8 +57,8 @@ public class Duke {
                     try {
                         DeleteCommand deleteCommand = (DeleteCommand) newUserCommand;
                         if (deleteCommand.getLesson() != null) {
-                            timetableManager.addLesson(deleteCommand.getLesson());
-                            //UserStorageParser.storeTimetable(timetableManager);
+                            timetableManager.deleteLesson(deleteCommand.getLesson());
+                            UserStorageParser.storeTimetable(timetableManager);
                         } else {
                             if (deleteCommand.getModuleCode() == null) {
                                 userUniversityListManager.deleteList(newUserCommand.getUniversityName());
@@ -68,7 +66,7 @@ public class Duke {
                                 userUniversityListManager.deleteModule(newUserCommand.getUniversityName(),
                                         newUserCommand.getModuleCode());
                                 timetableManager.deleteTimetable(newUserCommand.getUniversityName());
-                                //UserStorageParser.storeTimetable(timetableManager);
+                                UserStorageParser.storeTimetable(timetableManager);
                             }
                             UserStorageParser.storeCreatedLists(userUniversityListManager);
                         }
@@ -91,6 +89,8 @@ public class Duke {
                             userUniversityListManager.getUserDeletedModules().displayAll();
                         } else if (viewCommand.getViewOption().equals("UNIVERSITY")) {
                             userUniversityListManager.displayUniversity(viewCommand.getUniversityName());
+                        } else if (viewCommand.getViewOption().equals("TIMETABLES")) {
+                            timetableManager.printAllTimetables();
                         }
                     } catch (InvalidUserCommandException e) {
                         Ui.printExceptionMessage(e);
