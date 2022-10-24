@@ -1,6 +1,6 @@
 package seedu.duke;
 
-public class Ui {
+public class BasicUi {
     private static final String INDENTATION = "    ";
 
     public static void showWelcomeMessage() {
@@ -29,48 +29,8 @@ public class Ui {
         showStandardOutput(INDENTATION + EXIT_MESSAGE);
     }
 
-    public static void showAccountEntryMessage(String username) {
-        final String MESSAGE = "You login as " + username + "\n" + INDENTATION + "Please enter any command.";
-        showStandardOutput(INDENTATION + MESSAGE);
-    }
-
-    public static void showAccountExitMessage(String username) {
-        final String MESSAGE = "Wallet " + username + " logout.";
-        showStandardOutput(INDENTATION + MESSAGE);
-    }
-
     public static void showExceptionMessage(String exceptionMessage) {
         showStandardOutput(INDENTATION + exceptionMessage);
-    }
-
-    // Maybe be improved
-    public static void showPromptInfo() {
-        String promptInfo = "Would you like to register, login, or work with currencies?";
-        System.out.println(INDENTATION + promptInfo);
-        System.out.println();
-    }
-
-    public static void showRegisterInfo() {
-        final String MESSAGE = "Nice, we will be creating you a new wallet right away, but first of all, \n"
-                +
-                INDENTATION
-                +
-                "please first add your username and then a password for your wallet.";
-        showStandardOutput(INDENTATION + MESSAGE);
-    }
-
-    public static void showLoginInfo() {
-        final String MESSAGE = "Please enter your username and password to login your wallet";
-        showStandardOutput(INDENTATION + MESSAGE);
-    }
-
-    public static void showRegisterSuccessInfo() {
-        final String MESSAGE = "Nice, a new wallet has been created for you, \n"
-                +
-                INDENTATION
-                +
-                "You can now login to it";
-        showStandardOutput(INDENTATION + MESSAGE);
     }
 
     public static void showEnterUsernamePrompt() {
@@ -79,7 +39,7 @@ public class Ui {
     }
 
     public static void showEnterPasswordPrompt() {
-        Ui.showEmptyLine();
+        BasicUi.showEmptyLine();
         final String MESSAGE = "Please enter your password: ";
         System.out.print(MESSAGE);
     }
@@ -96,33 +56,36 @@ public class Ui {
         System.out.print(MESSAGE);
     }
 
-    public static void showLoginResults(Boolean isLoginSuccess) {
-        final String MESSAGE = isLoginSuccess ? "Login successfully."
-                : "Username or Password not correct. Please try again.";
-        showStandardOutput(INDENTATION + MESSAGE);
-    }
-
-    public static void showCurrencyEntry(){
+    public static void showCurrencyEntry() {
         final String MESSAGE = "Entering the currency portal";
         showStandardOutput(INDENTATION + MESSAGE);
     }
 
-    public static void showCurrencyOptions(){
+    public static void showCurrencyOptions() {
         final String MESSAGE = "Would you like to get information about a currency or check a conversion rate?";
-        showStandardOutput(INDENTATION + MESSAGE);
+        System.out.println(INDENTATION + MESSAGE);
     }
 
-    public static void showIncorrectCurrencyEntry(){
+    public static void showCurrencyInfo(CurrencyStructure currency) {
+        final String[] MESSAGES = { "Abbreviation: " + currency.getAbbrName(), 
+                "Full Name: " + currency.getFullName(),
+                "Symbol: " + currency.getSymbol(),
+                "Exchange rate with USD: " + String.format("%.2f", currency.getRate())};
+        final String MESSAGE = assembleMultipleLinesOutput(MESSAGES);
+        showStandardOutput(MESSAGE);
+    }
+
+    public static void showIncorrectCurrencyEntry() {
         final String MESSAGE = "Incorrect currency command, enter EXIT to leave currency portal";
         showStandardOutput(INDENTATION + MESSAGE);
     }
 
-    public static void showIncorrectCurrencyInfo(String s){
-        final String MESSAGE = "Incorrect currency command, please enter in the format: "+ s + " symbol";
+    public static void showIncorrectCurrencyInfo(String s) {
+        final String MESSAGE = "Incorrect currency command, please enter in the format: " + s + " symbol";
         showStandardOutput(INDENTATION + MESSAGE);
     }
 
-    public static void showIncorrectCurrencyConversion(){
+    public static void showIncorrectCurrencyConversion() {
         final String MESSAGE = "Incorrect currency command, please enter one of these formats: conversion symbol or conversion symbol symbol";
         showStandardOutput(INDENTATION + MESSAGE);
     }
@@ -137,6 +100,15 @@ public class Ui {
 
     public static void showEmptyLine() {
         System.out.println();
+    }
+
+    public static String assembleMultipleLinesOutput(String[] lines) {
+        String output = "";
+        for (int i = 0; i < lines.length - 1; i++) {
+            output += INDENTATION + lines[i] + "\n";
+        }
+        output += INDENTATION + lines[lines.length - 1];
+        return output;
     }
 
     private static void printSplitLine() {

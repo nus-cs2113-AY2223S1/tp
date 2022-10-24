@@ -11,11 +11,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import seedu.duke.exception.FinanceException;
+import seedu.duke.exception.FinanceException.ExceptionCollection;
+
 /**
  * With this class, we can quickly get all the existing usernames
  * to check whether user can create a wallet with such a new username.
  */
 public class UserNameFileWorkings {
+
+    final static Path FILE_PATH = Paths.get("src","main","data");
 
     public static List<String> userNameFile() throws IOException {
 
@@ -33,7 +38,7 @@ public class UserNameFileWorkings {
             existingUserNames = getUserNames(path);
             //System.out.println("I found some usernames saved");
 
-        } catch (FileNotFoundException e) {
+        } catch (FinanceException e) {
             //System.out.println("File not found, creating one");
             createUserNames(path);
             existingUserNames = new ArrayList<>();
@@ -42,17 +47,41 @@ public class UserNameFileWorkings {
         return existingUserNames;
     }
 
-    public static List<String> getUserNames(Path path) throws FileNotFoundException {
+    public static List<String> getUserNames(Path path) throws FinanceException {
         List<String> existingUserNames = new ArrayList<>();
         File f = new File(path + "/usernames.txt"); // create a File for the given file path
-        Scanner s = new Scanner(f); // create a Scanner using the File as the source
+        Scanner s;
+        try {
+            s = new Scanner(f);
+        } catch (FileNotFoundException e) {
+            throw new FinanceException(ExceptionCollection.USERNAME_FILE_NOT_FOUND_EXCEPTION);
+        } 
 
         while (s.hasNext()) {
             String line = s.nextLine();
             existingUserNames.add(line);
         }
 
+        s.close();
         return existingUserNames;
+    }
+
+    public static void deleteUserName(String username) throws FinanceException {
+        List<String> existingUserNames = getUserNames(FILE_PATH);
+        existingUserNames.remove(username);
+        Path path = Paths.get(FILE_PATH.toString(), "usernames.txt");
+        File f = new File(path.toString());
+        try {
+            FileWriter fileWriter = new FileWriter(f);
+            for (String dataLine: existingUserNames){
+                fileWriter.write(dataLine);
+                fileWriter.write(System.lineSeparator());
+            }
+            fileWriter.close();
+        } catch (IOException e) {
+            throw new FinanceException(ExceptionCollection.USERFILE_WRITE_EXCEPTION);
+        }
+        
     }
 
     protected static void createUserNames(Path filePath) throws IOException {

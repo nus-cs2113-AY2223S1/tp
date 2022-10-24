@@ -5,26 +5,26 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
-import seedu.duke.FinanceException.ExceptionCollection;
+import seedu.duke.authentication.Authentication;
+import seedu.duke.exception.FinanceException;
+import seedu.duke.exception.FinanceException.ExceptionCollection;
 
 public class Duke {
     /**
      * Main entry-point for the java.duke.Duke application.
      */
-    public static void main(String[] args) throws IOException {
-        Scanner in = new Scanner(System.in);
-        Ui.showWelcomeMessage();
-
-        List<String> existingUserNames;
-        List<List<String>> allCurrencies;
-
-        allCurrencies = Currency.getListOfAllCurrencies();
-
-        existingUserNames = UserNameFileWorkings.userNameFile();
-
+    public static void main(String[] args) {
+        //Scanner in = new Scanner(System.in);
+        //List<String> existingUserNames;
+        //List<List<String>> allCurrencies;
+        //allCurrencies = Currency.getListOfAllCurrencies();
+        //existingUserNames = UserNameFileWorkings.userNameFile();
+        BasicUi.showWelcomeMessage();
+        initializeCurrencyList();
         boolean isProgramEnd = false;
-
         while (!isProgramEnd) {
+            isProgramEnd = Authentication.handleAuthenticationRequest();
+            /*
             try {
                 Ui.showPromptInfo();
                 Commands commandType;
@@ -87,11 +87,6 @@ public class Duke {
                     } while (!user);
                     break;
                 case CURRENCIES:
-                    /*System.out.println("\t\t\tALL CURRENCIES");
-                    System.out.println("\tVALUE\t\t\t\t\tNAMES");
-                    for (List<String> x : allCurrencies){
-                        System.out.println("\t" + x.get(1) + "\t\t\t" + x.get(0));
-                    }*/
                     Currency.exchangeCommands();
                     break;
                 default:
@@ -100,6 +95,15 @@ public class Duke {
             } catch (FinanceException e) {
                 e.handleException();
             }
+            */
+        }
+    }
+
+    private static void initializeCurrencyList(){
+        try {
+            CurrencyList.initializeCurrencyList();
+        } catch (FinanceException e) {
+            e.handleException();
         }
     }
 }

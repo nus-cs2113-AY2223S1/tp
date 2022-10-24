@@ -1,14 +1,17 @@
-package seedu.duke;
+package seedu.duke.authentication;
 
-import java.io.FileNotFoundException;
-
-import seedu.duke.FinanceException.ExceptionCollection;
+import seedu.duke.Commands;
+import seedu.duke.Currency;
+import seedu.duke.InputManager;
+import seedu.duke.exception.FinanceException;
+import seedu.duke.exception.FinanceException.ExceptionCollection;
+import seedu.duke.BasicUi;
 
 public class Authentication {
     public static boolean handleAuthenticationRequest() {
         Boolean isProgramEnd = false;
         try {
-            Ui.showPromptInfo();
+            AuthenticationUi.showPromptInfo();
             String userInput = InputManager.receiveInputLine();
             Commands commandType = getCommandType(userInput);
             switch (commandType) {
@@ -18,9 +21,12 @@ public class Authentication {
             case LOGIN:
                 LoginCommand.handleLogin();
                 break;
+            case CURRENCIES:
+                Currency.exchangeCommands();
+                break;
             case BYE:
                 isProgramEnd = true;
-                Ui.showExitMessage();
+                BasicUi.showExitMessage();
                 break;
             default:
                 throw new FinanceException(ExceptionCollection.COMMAND_TYPE_EXCEPTION);
