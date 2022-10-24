@@ -42,7 +42,6 @@ import static seedu.duke.command.CommandTag.COMMAND_TAG_BUDGET_AMOUNT;
 import static seedu.duke.common.Constants.MAX_BUDGET_VALUE;
 import static seedu.duke.common.Constants.MIN_BUDGET_VALUE;
 
-
 //@@author paullowse
 import static seedu.duke.command.CommandTag.COMMAND_TAG_HELP_OPTION;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_GLOBAL_ENTRY_NUMBER;
@@ -76,6 +75,11 @@ public class ParameterParser {
     private static final String DELIMITER = " ";
     private static final int SPLIT_POSITION = 2;
     private static final int MINIMUM_TAG_LENGTH = 2;
+    private static final int MINIMUM_YEAR = 1000;
+    private static final int SMALLEST_POSITIVE_INTEGER = 0;
+    private static final int JANUARY = 1;
+    private static final int DECEMBER = 12;
+
     private static final String CLASS_TYPE_EXPENSE = "seedu.duke.data.transaction.Expense";
     private static final String CLASS_TYPE_INCOME = "seedu.duke.data.transaction.Income";
     private static final String CATEGORIES = "categories";
@@ -331,16 +335,16 @@ public class ParameterParser {
             command.setStatsType(parseStatsTypeTag(parameter));
             break;
         case COMMAND_TAG_GLOBAL_MONTH:
-            command.setStatsMonth(parseMonthTag(parameter));
+            command.setGlobalMonth(parseMonthTag(parameter));
             break;
         case COMMAND_TAG_GLOBAL_YEAR:
-            command.setStatsYear(parseYearTag(parameter));
+            command.setGlobalYear(parseYearTag(parameter));
             break;
         case COMMAND_TAG_GLOBAL_NUMBER:
-            command.setStatsNumber(parseNumberTag(parameter));
+            command.setGlobalNumber(parseNumberTag(parameter));
             break;
         case COMMAND_TAG_GLOBAL_PERIOD:
-            command.setStatsPeriod(parsePeriodTag(parameter));
+            command.setGlobalPeriod(parsePeriodTag(parameter));
             break;
         case COMMAND_TAG_BUDGET_AMOUNT:
             command.setBudgetAmount(parseBudgetTag(parameter));
@@ -582,7 +586,7 @@ public class ParameterParser {
             throw new GlobalNumberNotNumericException();
         }
 
-        if (month > 12 || month <= 0) {
+        if (month > DECEMBER || month < JANUARY) {
             parserLogger.log(Level.WARNING, "An invalid month number error is caught for the given parameter: "
                     + parameter);
             throw new GlobalInvalidMonthException();
@@ -600,7 +604,7 @@ public class ParameterParser {
                     + parameter);
             throw new GlobalNumberNotNumericException();
         }
-        if (year <= 999) {
+        if (year < MINIMUM_YEAR) {
             parserLogger.log(Level.WARNING, "An invalid year number error is caught for the given parameter: "
                     + parameter);
             throw new GlobalInvalidYearException();
@@ -632,7 +636,7 @@ public class ParameterParser {
                     + parameter);
             throw new GlobalNumberNotNumericException();
         }
-        if (statsNumber < 0) {
+        if (statsNumber < SMALLEST_POSITIVE_INTEGER) {
             parserLogger.log(Level.WARNING, "An invalid year number error is caught for the given parameter: "
                     + parameter);
             throw new GlobalInvalidNumberException();
