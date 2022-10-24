@@ -33,6 +33,6 @@ public class CommandCheckProperty extends CommandCheck {
                         PairingList pairingList) {
         Property property = propertyList.getPropertyList().get(propertyIndex);
         ArrayList<Client> tenants = pairingList.getPropertyTenants(property);
-        ui.showCheckProperty(tenants);
+        ui.showCheckProperty(property, tenants);
     }
 }

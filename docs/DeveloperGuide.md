@@ -278,7 +278,7 @@ The following *sequence diagram* shows how the **delete client** operation works
 ![Delete Client Sequence Diagram](diagrams/DeleteClientSD.png)
 
 The following *sequence diagram* shows how the **delete property** operation works, showcasing the
-```PropertyList#deleteClient()``` method.
+```PropertyList#deleteProperty()``` method.
 
 ![Delete Property Sequence Diagram](diagrams/DeletePropertySD.png)
 
