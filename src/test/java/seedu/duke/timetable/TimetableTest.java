@@ -65,7 +65,7 @@ public class TimetableTest {
         Timetable timetable = new Timetable();
         University university = new University("Stanford University", "USA");
         Lesson existingLesson = new Lesson("CS229", "Machine Learning", "5", university,"Tuesday", "09:00", "11:00");
-        timetable.addLesson(existingLesson);
+        timetable.addLesson(existingLesson, false);
         Lesson newLesson = new Lesson("CS161", "Algorithms", "5", university,"Tuesday", "10:00", "12:00");
         assertThrows(TimetableClashException.class, () -> timetable.hasNoTimetableClash(newLesson));
     }
@@ -76,7 +76,7 @@ public class TimetableTest {
         Timetable timetable = new Timetable();
         University university = new University("Stanford University", "USA");
         Lesson existingLesson = new Lesson("CS229", "Machine Learning", "5", university,"Tuesday", "11:00", "13:00");
-        timetable.addLesson(existingLesson);
+        timetable.addLesson(existingLesson, false);
         Lesson newLesson = new Lesson("CS161", "Algorithms", "5", university,"Tuesday", "10:00", "12:00");
         assertThrows(TimetableClashException.class, () -> timetable.hasNoTimetableClash(newLesson));
     }
@@ -86,11 +86,11 @@ public class TimetableTest {
         Timetable timetable = new Timetable();
         University university = new University("Stanford University", "USA");
         Lesson existingLesson = new Lesson("CS229", "Machine Learning", "5", university,"Tuesday", "11:00", "13:00");
-        timetable.addLesson(existingLesson);
+        timetable.addLesson(existingLesson, false);
         Lesson newLesson = new Lesson("CS161", "Algorithms", "5", university,"Tuesday", "09:00", "10:00");
-        timetable.addLesson(newLesson);
+        timetable.addLesson(newLesson, false);
         Lesson newLessonTwo = new Lesson("CS162", "Algorithms 2", "5", university,"Tuesday", "07:00", "09:00");
-        timetable.addLesson(newLessonTwo);
+        timetable.addLesson(newLessonTwo, false);
         System.out.println(Ui.printLessonsByDayInTimetable(timetable.getTimetable().get("tuesday")));
     }
 
