@@ -87,13 +87,19 @@ public class Ui {
                                  ArrayList<WeightAndFat> weightAndFatArrayList,
                                  ArrayList<Food> foodArrayList,
                                  ArrayList<Exercise> exerciseArrayList) {
-        Integer[] columnSpacingArrayHeader = { 4, 20, 20, 28};
-        Integer[] columnSpacingArraySubHeader = { 4, 6, 14, 12, 8, 8, 4, 4, 4, 8};
+
+        Integer[] columnSpacingArraySubHeader = { 10, 6, 14, 8, 8, 10, 4, 4, 4, 15};
         getAllRecordsColumnsSpacing(weightAndFatArrayList,
                 foodArrayList, exerciseArrayList, columnSpacingArraySubHeader);
+
+        String subHeader = generateAllDataTableSubHeader(columnSpacingArraySubHeader);
+
+        Integer[] columnSpacingArrayHeader = { 10, 23, 55, 60};
+        getAllRecordsHeaderSpacing (columnSpacingArrayHeader, subHeader);
         generateAllDataTableHeader(columnSpacingArrayHeader);
-        generateAllDataTableSubHeader(columnSpacingArraySubHeader);
-        printAllRecords(recordArrayList, columnSpacingArraySubHeader);
+        String separatorLine = "-".repeat(subHeader.length());
+        output(separatorLine, subHeader, separatorLine);
+        printAllRecords(recordArrayList, columnSpacingArraySubHeader, subHeader);
         printEmptyLine();
     }
 
@@ -155,6 +161,14 @@ public class Ui {
         }
     }
 
+    private void getAllRecordsHeaderSpacing( Integer[] columnSpacingArray, String subHeader) {
+        columnSpacingArray[0] = subHeader.substring(0, subHeader.indexOf("| Weight")).length() - 1;
+        columnSpacingArray[1] = subHeader.substring(subHeader.indexOf("| Weight"),
+                subHeader.indexOf("| Description")).length() - 3;
+        columnSpacingArray[2] = subHeader.substring(subHeader.indexOf("| Description"),
+                subHeader.indexOf("| Exercise")).length() - 3;
+    }
+
     private void printExerciseList(ArrayList<Exercise> exerciseArrayListList, Integer[] columnSpacingArray) {
         for (int i = 0; i < exerciseArrayListList.size(); i++) {
             Exercise exercise = exerciseArrayListList.get(i);
@@ -196,10 +210,10 @@ public class Ui {
         }
     }
 
-    private void printAllRecords(ArrayList<Record> recordArrayList, Integer[] columnSpacingArray) {
+    private void printAllRecords(ArrayList<Record> recordArrayList, Integer[] columnSpacingArray, String header) {
         for (int i = 0; i < recordArrayList.size(); i++) {
-            String date = addRightPadding(recordArrayList.get(i).getDate(), columnSpacingArray[0]) + " | ";
             if (recordArrayList.get(i) instanceof WeightAndFat){
+                String date = addRightPadding(recordArrayList.get(i).getDate(), columnSpacingArray[0]) + " | ";
                 WeightAndFat weightAndFat = (WeightAndFat) recordArrayList.get(i);
                 String weight = addRightPadding(Integer.toString(weightAndFat.getWeight()),
                         columnSpacingArray[1]) + " | ";
@@ -207,6 +221,8 @@ public class Ui {
                 printInSameLine(date, weight, fat);
             }
             if (recordArrayList.get(i) instanceof Food){
+                String date = addRightPadding(recordArrayList.get(i).getDate(),
+                        header.substring(0, header.indexOf("| Description")).length() - 1) + " | ";
                 Food food = (Food) recordArrayList.get(i);
                 String foodName = addRightPadding(food.getFoodDescription(), columnSpacingArray[3]) + " | ";
                 String calories = addRightPadding(Integer.toString(food.getCalories()),
@@ -214,15 +230,17 @@ public class Ui {
                 printInSameLine(date, foodName, calories);
             }
             if (recordArrayList.get(i) instanceof Exercise){
+                String date = addRightPadding(recordArrayList.get(i).getDate(),
+                        header.substring(0, header.indexOf("| Exercise")).length() - 1) + " | ";
                 Exercise exercise = (Exercise) recordArrayList.get(i);
-                String exerciseName = addRightPadding(exercise.getExerciseName(), columnSpacingArray[1]) + " | ";
+                String exerciseName = addRightPadding(exercise.getExerciseName(), columnSpacingArray[5]) + " | ";
                 String sets = addRightPadding(Integer.toString(exercise.getSet()),
-                        columnSpacingArray[2]) + " | ";
-                String time = getTimeForPrint(exercise, columnSpacingArray[3]) + " | ";
+                        columnSpacingArray[6]) + " | ";
+                String time = getTimeForPrint(exercise, columnSpacingArray[7]) + " | ";
                 String repetitions = addRightPadding(Integer.toString(exercise.getRepetition()),
-                        columnSpacingArray[4]) + " | ";
+                        columnSpacingArray[8]) + " | ";
                 String calories = addRightPadding(Integer.toString(exercise.getCaloriesBurnt()),
-                        columnSpacingArray[5]) + " | ";
+                        columnSpacingArray[9]) + " | ";
                 String status = exercise.getTaskStatus();
                 printInSameLine(date, exerciseName, sets, time, repetitions, calories, status);
             }
@@ -272,15 +290,15 @@ public class Ui {
     }
 
     private void generateAllDataTableHeader(Integer[] columnSpacingArray) {
-        String paddedDate = addRightPadding("Date", columnSpacingArray[0]) + " | ";
+        String paddedBlank = addRightPadding("", columnSpacingArray[0]) + " | ";
         String paddedWeightFat = addRightPadding("Weight&Fat", columnSpacingArray[1]) + " | ";
         String paddedFood = addRightPadding("Food", columnSpacingArray[2]) + " | ";
         String paddedExercise = addRightPadding("Exercise", columnSpacingArray[3]) + " | ";
-        String header = paddedDate + paddedWeightFat + paddedFood + paddedExercise;
+        String header = paddedBlank + paddedWeightFat + paddedFood + paddedExercise;
         String separatorLine = "-".repeat(header.length());
-        output(separatorLine, header, separatorLine);
+        output(separatorLine, header);
     }
-    private void generateAllDataTableSubHeader(Integer[] columnSpacingArray) {
+    private String generateAllDataTableSubHeader(Integer[] columnSpacingArray) {
         String paddedDate = addRightPadding("Date", columnSpacingArray[0]) + " | ";
 
         String paddedWeight = addRightPadding("Weight", columnSpacingArray[1]) + " | ";
@@ -293,15 +311,19 @@ public class Ui {
         String paddedSets = addRightPadding("Sets", columnSpacingArray[6]) + " | ";
         String paddedTime = addRightPadding("Time", columnSpacingArray[7]) + " | ";
         String paddedRep = addRightPadding("Reps", columnSpacingArray[8]) + " | ";
+        String paddedCaloriesBurnt = addRightPadding("Calories Burnt", columnSpacingArray[9]) + " | ";
         String paddedStatus = "Status";
 
         String line = paddedDate + paddedWeight + paddedFat + paddedDescription + paddedCalories + paddedExercise
-                + paddedSets + paddedTime + paddedRep + paddedStatus;
-        String separatorLine = "-".repeat(line.length());
-        output(separatorLine, line, separatorLine);
+                + paddedSets + paddedTime + paddedRep + paddedCaloriesBurnt + paddedStatus;
+        return line;
     }
 
     private static String addRightPadding(String string, int numberOfSpace) {
         return String.format("%-" + numberOfSpace + "s", string);
+    }
+
+    private static String addLeftPadding(String string, int numberOfSpace) {
+        return String.format("%" + numberOfSpace + "s", string);
     }
 }
