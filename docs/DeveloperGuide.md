@@ -128,8 +128,22 @@ under each command section below.
 _Written by: Chia Thin Hong_
 
 ### Storage Component
+The `Storage` component is a standalone class. It utilises its sub-methods and methods from external classes to perform it's read and write functions.
 
-_Written by: Author name_
+The structure of `Storage` can be seen below.
+<p align="center">
+    <img src="images/StorageComponentClassDiagram.png">
+    <br />
+    <i> Simplified Class Diagram for Storage Component</i>
+</p>
+
+1. `Duke` initializes `Storage` and `Storage#initializeFile` is called.
+2. During the initialization , parser methods from `CommandParser` and `ParameterParser` would be used to process the entries within `Duke.txt`.
+Methods from `Budget` and `TransactionList` would be used for the storage of `Budget` amount and `TransactionList` entries into the program.
+3. `TransactionList` is returned to `Duke` after the storage of entries within `Duke.txt`.
+4. After initialization and upon user input, `Command` classes such as `AddCommand`can call for `Storage#writeToFile` method in order to update the contents within `Duke.txt`.
+
+_Written by: Yong Chin Han_
 
 ### Parser Component
 The Parser component comprises of two main parsers: `CommandParser` and `ParameterParser`. Together, both these 
@@ -276,7 +290,7 @@ These are the important operations performed within the `AddCommand` class, with
   It is used externally by ParameterParser to verify if the user input contains the mandatory command tags, to correctly
   store the Transaction object in the program.
 
-Written by: Yong Chin Han
+_Written by: Yong Chin Han_
 
 ### Edit Command
 
@@ -450,12 +464,25 @@ This is how the command works:
 _Written by: Brian Wong Yun Long_
 
 ### Storage Operations
+The Storage class is a standalone class that contains methods used for the storage of Transaction entries and the Budget value.
 
-#### Reading From a File
+The class is first called by `Duke` during the initialising of the `TransactionList`. In this process, duke.txt's existance will be verified.
+1. If the file does not exist, an empty `Duke.txt` file would be created for the program to use. 
+2. If the file exists, it's values would be parsed to verify if they have been corrupted. If corrupted, the storage of values would halt and error messages would be shown to prompt user to correct file issues.
+Else, the values would update the program's `Budget` and the entries in `TransactionList`without any issues.
 
-#### Writing To a File
+#### Reading From Duke.txt 
+This specific operation is done during the initializing of the program. The `Budget` value and `TransactionList` entries would be parsed before their values are added into the program.
+`Storage#initializeFile` is called by `Duke`.
+`Storage#checkIfFileExist` is used to check if `Duke.txt` exists, and creates a new `Duke.txt` file if it does not exist.
+`Storage#storeFileValuesLocally` uses sub-methods and methods from external classes to parse each line entry within `Duke.txt` and store the values in the program.
 
-_Written by: Author name_
+#### Writing To Duke.txt
+This operation is done whenever the `TransactionList` entries or `Budget` value is changed via any of the `Command` classes;
+(e.g. Add, Delete, Purge , Edit and Budget commands). 
+The method `Storage#writeToFile` is used to update changes in `Budget` or `TransactionList`.
+
+_Written by: Yong Chin Han_ 
 
 ### Logging Operations
 

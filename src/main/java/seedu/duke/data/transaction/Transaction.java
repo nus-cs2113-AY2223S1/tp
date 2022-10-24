@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import static seedu.duke.common.DateFormats.DATE_OUTPUT_PATTERN;
+import static seedu.duke.common.InfoMessages.DOLLAR_SIGN;
 
 /**
  * Represents a transaction made by the user, which could be either an income or an expense.
@@ -12,7 +13,6 @@ public abstract class Transaction {
     //@@author chydarren
     private static final String PREFIX_CATEGORY = "[";
     private static final String POSTFIX_CATEGORY = "]";
-    private static final String SYMBOL_DOLLAR = "$";
     private static final String SYMBOL_PIPE = "|";
     private static final String TEXT_AT = "at";
     private static final String TEXT_DESCRIPTION = "Description:";
@@ -84,7 +84,7 @@ public abstract class Transaction {
 
     @Override
     public String toString() {
-        return String.format("%s %s%d %s %s %s %s %s", printFormattedCategory(), SYMBOL_DOLLAR,
+        return String.format("%s %s%d %s %s %s %s %s", printFormattedCategory(), DOLLAR_SIGN,
                 amount, TEXT_AT, printFormattedDate(), SYMBOL_PIPE, TEXT_DESCRIPTION, description);
     }
 

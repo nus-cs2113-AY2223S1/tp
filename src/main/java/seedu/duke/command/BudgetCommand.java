@@ -12,12 +12,12 @@ import seedu.duke.exception.StorageWriteErrorException;
 import java.io.IOException;
 
 import static seedu.duke.command.CommandTag.COMMAND_TAG_BUDGET_AMOUNT;
+import static seedu.duke.common.InfoMessages.LINE_SEPARATOR;
 
 /**
  * Represents a budget command object that will set the user's monthly budget on the Budget command.
  */
 public class BudgetCommand extends Command {
-    private static final String LINE_SEPARATOR = System.lineSeparator();
     // The command word used to trigger the execution of Moolah Manager's operations
     public static final String COMMAND_WORD = "BUDGET";
     // The description for the usage of command

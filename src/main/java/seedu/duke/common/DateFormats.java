@@ -1,5 +1,8 @@
 package seedu.duke.common;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Provides enum variables for the approved date formats for input and output.
  */
@@ -7,6 +10,7 @@ public enum DateFormats {
     //@@author wcwy
     DATE_INPUT_PATTERN("ddMMyyyy"),
     DATE_OUTPUT_PATTERN("MMM dd yyyy"),
+    DATE_MONTH_PATTERN("MMM yyyy"),
     DATE_STORAGE_OUTPUT_PATTERN("yyyy-MM-dd");
 
     public final String message;
@@ -27,5 +31,16 @@ public enum DateFormats {
      */
     public String toString() {
         return message;
+    }
+
+    /**
+     * Retrieves a formatted string containing the month and year of a date.
+     *
+     * @param date Date of the transaction to be considered for the budget.
+     * @return A string containing the formatted output for month and year.
+     */
+    public static String retrieveFormattedMonthAndYear(LocalDate date) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_MONTH_PATTERN.toString());
+        return date.format(formatter);
     }
 }

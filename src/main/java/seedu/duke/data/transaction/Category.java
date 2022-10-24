@@ -1,10 +1,12 @@
 package seedu.duke.data.transaction;
 
+
+import static seedu.duke.common.InfoMessages.DOLLAR_SIGN;
+
 public class Category {
     //@@author chydarren
     private static final String PREFIX_CATEGORY = "[";
     private static final String POSTFIX_CATEGORY = "]";
-    private static final String SYMBOL_DOLLAR = "$";
 
     private String category;
     private int amount;
@@ -32,6 +34,6 @@ public class Category {
     @Override
     public String toString() {
         return String.format("%s%s%s %s%d", PREFIX_CATEGORY, category, POSTFIX_CATEGORY,
-                SYMBOL_DOLLAR, amount);
+                DOLLAR_SIGN, amount);
     }
 }

@@ -4,6 +4,7 @@ package seedu.duke.command;
 import seedu.duke.Storage;
 import seedu.duke.Ui;
 
+import seedu.duke.common.DateFormats;
 import seedu.duke.data.Budget;
 import seedu.duke.data.TransactionList;
 import seedu.duke.data.transaction.Transaction;
@@ -29,13 +30,13 @@ import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_TYPE;
 import static seedu.duke.common.Constants.MAX_TRANSACTIONS_COUNT;
 import static seedu.duke.common.InfoMessages.INFO_ADD_EXPENSE;
 import static seedu.duke.common.InfoMessages.INFO_ADD_INCOME;
+import static seedu.duke.common.InfoMessages.LINE_SEPARATOR;
 
 /**
  * Represents an add command object that will execute the operations for Add command.
  */
 public class AddCommand extends Command {
     //@@author chinhan99
-    private static final String LINE_SEPARATOR = System.lineSeparator();
     // The command word used to trigger the execution of Moolah Manager's operations
     public static final String COMMAND_WORD = "ADD";
 
@@ -153,9 +154,10 @@ public class AddCommand extends Command {
             checkTransactionCapacity(transactions);
             String messageBanner = addTransaction(transactions);
             long addedMonthExpenseSum = transactions.calculateMonthlyTotalExpense(date);
-            String budgetLeft = Budget.getBudgetLeft(addedMonthExpenseSum);
+            String budgetInfo = Budget.generateBudgetRemainingMessage(addedMonthExpenseSum, true,
+                    DateFormats.retrieveFormattedMonthAndYear(date));
 
-            Ui.showTransactionAction(messageBanner, transactionCreated.toString(), budgetLeft);
+            Ui.showTransactionAction(messageBanner, transactionCreated.toString(), budgetInfo);
 
             //@@author chinhan99
             storage.writeToFile(transactions.getTransactions());
