@@ -67,7 +67,7 @@ public class Ui {
     }
 
     public void outputFoodList(ArrayList<Food> foodArrayList) {
-        Integer[] columnSpacingArray = {5, 12, 8};
+        Integer[] columnSpacingArray = {5, 12, 8, 4};
         getFoodColumnsSpacing(foodArrayList, columnSpacingArray);
         generateFoodTableHeader(columnSpacingArray);
         printFoodList(foodArrayList, columnSpacingArray);
@@ -102,6 +102,7 @@ public class Ui {
         for (Food food : foodArrayList) {
             columnSpacingArray[1] = Math.max(columnSpacingArray[1], food.getFoodDescription().length());
             columnSpacingArray[2] = Math.max(columnSpacingArray[2], food.getCalories() % 10 + 1);
+            columnSpacingArray[3] = Math.max(columnSpacingArray[3], food.getDate().length());
         }
     }
 
@@ -139,7 +140,8 @@ public class Ui {
             String foodName = addRightPadding(food.getFoodDescription(), columnSpacingArray[1]) + " | ";
             String calories = addRightPadding(Integer.toString(food.getCalories()),
                     columnSpacingArray[2]) + " | ";
-            printInSameLine(index, foodName, calories);
+            String date = addRightPadding(food.getDate(), columnSpacingArray[3]) + " | ";
+            printInSameLine(index, foodName, calories, date);
         }
     }
 
@@ -180,7 +182,8 @@ public class Ui {
         String paddedIndex = addRightPadding("Index", columnSpacingArray[0]) + " | ";
         String paddedDescription = addRightPadding("Description", columnSpacingArray[1]) + " | ";
         String paddedCalories = addRightPadding("Calories", columnSpacingArray[2]) + " | ";
-        String line = paddedIndex + paddedDescription + paddedCalories;
+        String paddedDate = addRightPadding("Date", columnSpacingArray[3]) + " | ";
+        String line = paddedIndex + paddedDescription + paddedCalories + paddedDate;
         String separatorLine = "-".repeat(line.length());
         output(separatorLine, line, separatorLine);
     }
