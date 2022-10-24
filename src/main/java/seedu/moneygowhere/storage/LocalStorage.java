@@ -60,6 +60,7 @@ import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_RECURRIN
 import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_RECURRING_PAYMENT_ELEMENT;
 import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_RECURRING_PAYMENT_ID_ATTRIBUTE;
 import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_RECURRING_PAYMENT_INTERVAL_ELEMENT;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_RECURRING_PAYMENT_MODE_OF_PAYMENT_ELEMENT;
 import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_RECURRING_PAYMENT_NAME_ELEMENT;
 import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_ROOT;
 import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_SORTCONFIG_ELEMENT;
@@ -367,8 +368,13 @@ public class LocalStorage {
             throw new LocalStorageLoadDataException();
         }
 
-        //todo Save modeOfPayment for RecurringPayment
-        return new RecurringPayment(name, interval, description, amount, category, currency, null);
+        String modeOfPayment = element.getElementsByTagName(XML_RECURRING_PAYMENT_MODE_OF_PAYMENT_ELEMENT)
+                .item(0).getTextContent();
+        if (modeOfPayment.isEmpty() || modeOfPayment.trim().isEmpty()) {
+            modeOfPayment = null;
+        }
+
+        return new RecurringPayment(name, interval, description, amount, category, currency, modeOfPayment);
     }
 
     /**
@@ -462,7 +468,7 @@ public class LocalStorage {
             remark.setTextContent(expense.getRemarks());
             expenseElement.appendChild(remark);
             Element modeOfPayment = doc.createElement(XML_EXPENSE_MODE_OF_PAYMENT_ELEMENT);
-            remark.setTextContent(expense.getModeOfPayment());
+            modeOfPayment.setTextContent(expense.getModeOfPayment());
             expenseElement.appendChild(modeOfPayment);
             index++;
         }
@@ -498,24 +504,26 @@ public class LocalStorage {
     private void parseRecurringPaymentToXml(Document doc, Element rootElement,
                                             ArrayList<RecurringPayment> savedRecurringPayments) {
         int index = 1;
-        for (RecurringPayment payment : savedRecurringPayments) {
-            Element paymentElement = doc.createElement(XML_RECURRING_PAYMENT_ELEMENT);
-            paymentElement.setAttribute(XML_RECURRING_PAYMENT_ID_ATTRIBUTE, Integer.toString(index));
-            rootElement.appendChild(paymentElement);
+        for (RecurringPayment recurringPayment : savedRecurringPayments) {
+            Element recurringPaymentElement = doc.createElement(XML_RECURRING_PAYMENT_ELEMENT);
+            recurringPaymentElement.setAttribute(XML_RECURRING_PAYMENT_ID_ATTRIBUTE, Integer.toString(index));
+            rootElement.appendChild(recurringPaymentElement);
             Element name = doc.createElement(XML_RECURRING_PAYMENT_NAME_ELEMENT);
-            name.setTextContent(payment.getName());
-            paymentElement.appendChild(name);
-            Element interval = doc.createElement(XML_RECURRING_PAYMENT_INTERVAL_ELEMENT); // interval in days/month/year
-            // ??
-            interval.setTextContent("" + payment.getInterval()); // to append unit of time after implemented
-            paymentElement.appendChild(interval);
+            name.setTextContent(recurringPayment.getName());
+            recurringPaymentElement.appendChild(name);
+            Element interval = doc.createElement(XML_RECURRING_PAYMENT_INTERVAL_ELEMENT);
+            interval.setTextContent("" + recurringPayment.getInterval());
+            recurringPaymentElement.appendChild(interval);
             Element description = doc.createElement(XML_RECURRING_PAYMENT_DESCRIPTION_ELEMENT);
-            description.setTextContent(payment.getDescription());
-            paymentElement.appendChild(description);
+            description.setTextContent(recurringPayment.getDescription());
+            recurringPaymentElement.appendChild(description);
             Element amount = doc.createElement(XML_RECURRING_PAYMENT_AMOUNT_ELEMENT);
-            amount.setAttribute(XML_RECURRING_PAYMENT_CURRENCY_ATTRIBUTE, DEFAULT_CURRENCY);
-            amount.setTextContent(payment.getAmount().toString());
-            paymentElement.appendChild(amount);
+            amount.setAttribute(XML_RECURRING_PAYMENT_CURRENCY_ATTRIBUTE, recurringPayment.getCurrency());
+            amount.setTextContent(recurringPayment.getAmount().toString());
+            recurringPaymentElement.appendChild(amount);
+            Element modeOfPayment = doc.createElement(XML_RECURRING_PAYMENT_MODE_OF_PAYMENT_ELEMENT);
+            modeOfPayment.setTextContent(recurringPayment.getModeOfPayment());
+            recurringPaymentElement.appendChild(modeOfPayment);
             index++;
         }
     }
