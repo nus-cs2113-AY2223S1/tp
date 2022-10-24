@@ -1,8 +1,13 @@
 help
 search /code gea
 search /code cs2113
+search /title operating system
 add cs2113
+list
 view /simple
 select /module cs2113 /type tutorial /code 4
 view /simple
+delete cs2113
+export
+semester 2
 bye
