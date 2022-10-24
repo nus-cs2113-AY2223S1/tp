@@ -2,6 +2,7 @@ package seedu.moneygowhere.data.category;
 
 import java.util.ArrayList;
 
+//@@author yuu-chennn
 @SuppressWarnings({"unused", "FieldMayBeFinal"})
 public class CategoryManager {
     private ArrayList<Category> categories;

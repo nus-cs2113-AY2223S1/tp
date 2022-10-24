@@ -1,9 +1,11 @@
 package seedu.moneygowhere.data.income;
 
 import seedu.moneygowhere.common.Messages;
-import seedu.moneygowhere.exceptions.IncomeManagerIncomeNotFoundException;
+import seedu.moneygowhere.exceptions.data.income.IncomeManagerIncomeNotFoundException;
 
 import java.util.ArrayList;
+
+//@@author penguin-s
 
 /**
  * Stores and manages a list of incomes.

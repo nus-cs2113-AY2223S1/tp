@@ -1,7 +1,11 @@
-package seedu.moneygowhere.exceptions;
+package seedu.moneygowhere.exceptions.parser;
+
+import seedu.moneygowhere.exceptions.MoneyGoWhereException;
+
+//@@author penguin-s
 
 /**
- * Thrown when the command add-expense is invalid.
+ * Defines exception to be thrown when the command Add-Expense is invalid.
  */
 @SuppressWarnings("unused")
 public class ConsoleParserCommandAddIncomeInvalidException extends MoneyGoWhereException {

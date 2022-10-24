@@ -1,7 +1,11 @@
-package seedu.moneygowhere.exceptions;
+package seedu.moneygowhere.exceptions.data.currency;
+
+import seedu.moneygowhere.exceptions.MoneyGoWhereException;
+
+//@@author jeyvia
 
 /**
- * Thrown when there is an error in currency load data.
+ * Defines exception to be thrown when there is an error in currency load data.
  */
 @SuppressWarnings("unused")
 public class CurrencyLoadDataInputException extends MoneyGoWhereException {

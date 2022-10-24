@@ -3,6 +3,8 @@ package seedu.moneygowhere.data.target;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+//@@author penguin-s
+
 /**
  * Stores data associated with a target.
  */
@@ -20,6 +22,11 @@ public class Target {
             String description,
             BigDecimal amount,
             BigDecimal currentAmount) {
+        assert !(name == null || name.isEmpty() || name.trim().isEmpty()) :
+                "There must be a name";
+        assert amount != null : "There must be an amount";
+        assert currentAmount != null : "There must be a current amount";
+        assert dateTime != null : "There must be a date and time";
         this.name = name;
         this.dateTime = dateTime;
         this.description = description;

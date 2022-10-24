@@ -1,7 +1,11 @@
-package seedu.moneygowhere.exceptions;
+package seedu.moneygowhere.exceptions.data.income;
+
+import seedu.moneygowhere.exceptions.MoneyGoWhereException;
+
+//@@author penguin-s
 
 /**
- * Thrown when an income is not found in the income manager.
+ * Defines exception to be thrown when an income is not found in the income manager.
  */
 @SuppressWarnings("unused")
 public class IncomeManagerIncomeNotFoundException extends MoneyGoWhereException {
