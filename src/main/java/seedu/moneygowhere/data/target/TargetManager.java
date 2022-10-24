@@ -1,7 +1,7 @@
 package seedu.moneygowhere.data.target;
 
 import seedu.moneygowhere.common.Messages;
-import seedu.moneygowhere.exceptions.target.TargetManagerTargetNotFoundException;
+import seedu.moneygowhere.exceptions.data.target.TargetManagerTargetNotFoundException;
 
 import java.util.ArrayList;
 

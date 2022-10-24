@@ -1,4 +1,4 @@
-package seedu.moneygowhere.exceptions.parser;
+package seedu.moneygowhere.exceptions.data.parser;
 
 import seedu.moneygowhere.exceptions.MoneyGoWhereException;
 

@@ -1,4 +1,4 @@
-package seedu.moneygowhere.exceptions.recurringpayment;
+package seedu.moneygowhere.exceptions.data.recurringpayment;
 
 import seedu.moneygowhere.exceptions.MoneyGoWhereException;
 

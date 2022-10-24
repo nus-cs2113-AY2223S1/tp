@@ -8,12 +8,12 @@ import seedu.moneygowhere.commands.ConsoleCommandEditExpense;
 import seedu.moneygowhere.commands.ConsoleCommandViewExpense;
 import seedu.moneygowhere.commands.ConsoleCommandViewRecurringPayment;
 import seedu.moneygowhere.common.Configurations;
-import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandAddExpenseInvalidException;
-import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandAddRecurringPaymentInvalidException;
-import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandDeleteExpenseInvalidException;
-import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandEditExpenseInvalidException;
-import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandViewExpenseInvalidException;
-import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandViewRecurringPaymentInvalidException;
+import seedu.moneygowhere.exceptions.data.parser.ConsoleParserCommandAddExpenseInvalidException;
+import seedu.moneygowhere.exceptions.data.parser.ConsoleParserCommandAddRecurringPaymentInvalidException;
+import seedu.moneygowhere.exceptions.data.parser.ConsoleParserCommandDeleteExpenseInvalidException;
+import seedu.moneygowhere.exceptions.data.parser.ConsoleParserCommandEditExpenseInvalidException;
+import seedu.moneygowhere.exceptions.data.parser.ConsoleParserCommandViewExpenseInvalidException;
+import seedu.moneygowhere.exceptions.data.parser.ConsoleParserCommandViewRecurringPaymentInvalidException;
 import seedu.moneygowhere.exceptions.MoneyGoWhereException;
 
 import java.math.BigDecimal;
