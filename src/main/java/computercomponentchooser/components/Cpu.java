@@ -1,5 +1,7 @@
 package computercomponentchooser.components;
 
+import computercomponentchooser.exceptions.NegativeNumberException;
+
 /**
  * Represents the CPU in the computer build.
  */
@@ -23,8 +25,17 @@ public class Cpu extends Component {
      * @param power the power consumption of the CPU
      * @param socket the socket of the CPU
      * @param clock the clock speed of the CPU
+     * @throws NumberFormatException If the user input is not a number.
+     * @throws NegativeNumberException If the user input is a negative number.
      */
-    public Cpu(String name, String price, String power, String socket, String clock) {
+    public Cpu(String name, String price, String power, String socket, String clock) throws NegativeNumberException,
+            NumberFormatException {
+        double priceDouble = Double.parseDouble(price);
+        int powerInt = Integer.parseInt(power);
+        double clockDouble = Double.parseDouble(clock);
+        if (priceDouble < 0 || powerInt < 0 || clockDouble < 0) {
+            throw new NegativeNumberException();
+        }
         this.name = name;
         this.price = price;
         this.power = power;

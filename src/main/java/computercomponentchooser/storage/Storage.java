@@ -256,8 +256,14 @@ public class Storage {
      * @param build the build that the cpu is added to
      */
     private void loadCpu(String line, String name, String price, String power, Build build) {
-        Cpu cpu = new Cpu(name, price, power, getParameter(line, 4), getParameter(line, 5));
-        build.addComponent("cpu", cpu);
+        try {
+            Cpu cpu = new Cpu(name, price, power, getParameter(line, 4), getParameter(line, 5));
+            build.addComponent("cpu", cpu);
+        } catch (NegativeNumberException | NumberFormatException e) {
+            Ui.printLine();
+            System.out.println("Error when loading.");
+            Ui.printLine();
+        }
     }
 
     /**
@@ -270,9 +276,15 @@ public class Storage {
      * @param build the build that the memory is added to
      */
     private static void loadMemory(String line, String name, String price, String power, Build build) {
-        Memory memory = new Memory(name, price, power, getParameter(line, 4),
-                getParameter(line, 5));
-        build.addComponent("memory", memory);
+        try {
+            Memory memory = new Memory(name, price, power, getParameter(line, 4),
+                    getParameter(line, 5));
+            build.addComponent("memory", memory);
+        } catch (NegativeNumberException | NumberFormatException e) {
+            Ui.printLine();
+            System.out.println("Error when loading.");
+            Ui.printLine();
+        }
     }
 
     /**
@@ -285,9 +297,15 @@ public class Storage {
      * @param build the build that the motherboard is added to
      */
     private static void loadMotherboard(String line, String name, String price, String power, Build build) {
-        Motherboard motherboard = new Motherboard(name, price, power, getParameter(line, 4),
-                getParameter(line, 5), getParameter(line, 6), getParameter(line, 7));
-        build.addComponent("motherboard", motherboard);
+        try {
+            Motherboard motherboard = new Motherboard(name, price, power, getParameter(line, 4),
+                    getParameter(line, 5), getParameter(line, 6), getParameter(line, 7));
+            build.addComponent("motherboard", motherboard);
+        } catch (NegativeNumberException | NumberFormatException e) {
+            Ui.printLine();
+            System.out.println("Error when loading.");
+            Ui.printLine();
+        }
     }
 
     /**
@@ -299,8 +317,14 @@ public class Storage {
      * @param build the build that the power supply is added to
      */
     private static void loadPowerSupply(String name, String price, String power, Build build) {
-        PowerSupply powersupply = new PowerSupply(name, price, power);
-        build.addComponent("powersupply", powersupply);
+        try {
+            PowerSupply powersupply = new PowerSupply(name, price, power);
+            build.addComponent("powersupply", powersupply);
+        } catch (NegativeNumberException | NumberFormatException e) {
+            Ui.printLine();
+            System.out.println("Error when loading.");
+            Ui.printLine();
+        }
     }
 
     /**
@@ -313,9 +337,15 @@ public class Storage {
      * @param build the build that the gpu is added to
      */
     private static void loadGpu(String line, String name, String price, String power, Build build) {
-        Gpu gpu = new Gpu(name, price, power, getParameter(line, 4),
-                getParameter(line, 5));
-        build.addComponent("gpu", gpu);
+        try {
+            Gpu gpu = new Gpu(name, price, power, getParameter(line, 4),
+                    getParameter(line, 5));
+            build.addComponent("gpu", gpu);
+        } catch (NegativeNumberException | NumberFormatException e) {
+            Ui.printLine();
+            System.out.println("Error when loading.");
+            Ui.printLine();
+        }
     }
 
     /**
@@ -328,9 +358,15 @@ public class Storage {
      * @param build the build that the drive is added to
      */
     private static void loadDrive(String line, String name, String price, String power, Build build) {
-        Drive drive = new Drive(name, price, power, getParameter(line, 4),
-                getParameter(line, 5));
-        build.addComponent("drive", drive);
+        try {
+            Drive drive = new Drive(name, price, power, getParameter(line, 4),
+                    getParameter(line, 5));
+            build.addComponent("drive", drive);
+        } catch (NegativeNumberException | NumberFormatException e) {
+            Ui.printLine();
+            System.out.println("Error when loading.");
+            Ui.printLine();
+        }
     }
 
     /**
@@ -343,9 +379,15 @@ public class Storage {
      * @param build the build that the monitor is added to
      */
     private static void loadMonitor(String line, String name, String price, String power, Build build) {
-        Monitor monitor = new Monitor(name, price, power, getParameter(line, 4),
-                getParameter(line, 5), getParameter(line, 6));
-        build.addComponent("monitor", monitor);
+        try {
+            Monitor monitor = new Monitor(name, price, power, getParameter(line, 4),
+                    getParameter(line, 5), getParameter(line, 6));
+            build.addComponent("monitor", monitor);
+        } catch (NegativeNumberException | NumberFormatException e) {
+            Ui.printLine();
+            System.out.println("Error when loading.");
+            Ui.printLine();
+        }
     }
 
     /**
@@ -399,7 +441,13 @@ public class Storage {
      * @param build the build that the other is added to
      */
     private static void loadOther(String name, String price, String power, Build build) {
-        Other other = new Other(name, price, power);
-        build.addComponent("other", other);
+        try {
+            Other other = new Other(name, price, power);
+            build.addComponent("other", other);
+        } catch (NegativeNumberException | NumberFormatException e) {
+            Ui.printLine();
+            System.out.println("Error when loading.");
+            Ui.printLine();
+        }
     }
 }
