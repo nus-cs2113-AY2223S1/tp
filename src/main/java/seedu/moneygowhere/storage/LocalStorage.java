@@ -228,7 +228,7 @@ public class LocalStorage {
             hasParsedExpenses = true;
             NodeList recurringPaymentList = doc.getElementsByTagName(XML_RECURRING_PAYMENT_ELEMENT);
             if (recurringPaymentList.getLength() > 0) {
-                for (itr = 0; itr < expenseList.getLength(); itr++) {
+                for (itr = 0; itr < recurringPaymentList.getLength(); itr++) {
                     Node node = recurringPaymentList.item(itr);
                     loadRecurringPayment = createRecurringPayment(node);
                     recurringPaymentManager.addRecurringPayment(loadRecurringPayment);
@@ -586,6 +586,9 @@ public class LocalStorage {
             amount.setAttribute(XML_RECURRING_PAYMENT_CURRENCY_ATTRIBUTE, recurringPayment.getCurrency());
             amount.setTextContent(recurringPayment.getAmount().toString());
             recurringPaymentElement.appendChild(amount);
+            Element category = doc.createElement(XML_RECURRING_PAYMENT_CATEGORY_ELEMENT);
+            category.setTextContent(recurringPayment.getCategory());
+            recurringPaymentElement.appendChild(category);
             Element modeOfPayment = doc.createElement(XML_RECURRING_PAYMENT_MODE_OF_PAYMENT_ELEMENT);
             modeOfPayment.setTextContent(recurringPayment.getModeOfPayment());
             recurringPaymentElement.appendChild(modeOfPayment);
