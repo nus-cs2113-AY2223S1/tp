@@ -26,11 +26,6 @@ Syntax: `Add-Expense -n NAME -a AMOUNT [-d DATE] [-t DESCRIPTION] [-c CATEGORY] 
 Example of usage: 
 
 * `Add-Expense -n Subscription -a 13.37`
-* `Add-Expense -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359"`
-* `Add-Expense -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359" -t "Monthly payment"`
-* `Add-Expense -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359" -t "Monthly payment" -c "Work expenses"`
-* `Add-Expense -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359" -t "Monthly payment" -c "Work expenses" -r "Remarks here"`
-* `Add-Expense -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359" -t "Monthly payment" -c "Work expenses" -r "Remarks here" -x USD`
 * `Add-Expense -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359" -t "Monthly payment" -c "Work expenses" -r "Remarks here" -x USD -p PayLah`
 
 ### Viewing expense(s): `View-Expense`
@@ -70,11 +65,6 @@ Syntax: `Edit-Expense -e EXPENSE_NUMBER [-n NAME] [-a AMOUNT] [-d DATE] [-t DESC
 Example of usage:
 
 * `Edit-Expense -e 1 -n Subscription -a 13.37`
-* `Edit-Expense -e 1 -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359"`
-* `Edit-Expense -e 1 -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359" -t "Monthly payment"`
-* `Edit-Expense -e 1 -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359" -t "Monthly payment" -c "Work expenses"`
-* `Edit-Expense -e 1 -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359" -t "Monthly payment" -c "Work expenses" -r "Remarks here"`
-* `Edit-Expense -e 1 -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359" -t "Monthly payment" -c "Work expenses" -r "Remarks here" -x USD`
 * `Edit-Expense -e 1 -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359" -t "Monthly payment" -c "Work expenses" -r "Remarks here" -x USD -p PayLah`
 
 ### Sorting expenses: `Sort-Expense`
@@ -108,15 +98,16 @@ Example of usage:
 ### Adding recurring payments: `Add-RecurringPayment`
 Adds a recurring payment to the list of recurring payments
 
-Syntax: `Add-RecurringPayment -n NAME -i INTERVAL -a AMOUNT [-t DESCRIPTION]`
+Syntax: `Add-RecurringPayment -n NAME -i INTERVAL -a AMOUNT [-t DESCRIPTION] [-c CATEGORY] [-x CURRENCY] [-p MODE_OF_PAYMENT]`
 
 * `NAME` and `DESCRIPTION` are text strings. You may use spaces within the text if you wrap the text with double quotes.
 * `INTERVAL` is an integer value. Set this value to the estimated number of days between your recurring payments.
 * `AMOUNT` is a decimal value.
+* `MODE_OF_PAYMENT` is a text string.
 
 Example of usage:
 * `Add-RecurringPayment -n "Mobile Plan" -i 30 -a 20.00`
-* `Add-RecurringPayment -n "Mobile Plan" -i 30 -a 20.00 -t "Monthly payment for my mobile plan"`
+* `Add-RecurringPayment -n "Mobile Plan" -i 30 -a 20.00 -t "Monthly payment for my mobile plan" -c "Telecom" -x "SGD" -p "Card"`
 
 ### Viewing recurring payments: `View-RecurringPayment`
 Displays the past recurring payments you have added.
