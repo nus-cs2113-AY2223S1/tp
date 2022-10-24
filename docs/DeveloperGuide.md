@@ -31,7 +31,33 @@
 
 ### Main Mode
 
+This section describes the implementation of Main Mode features.
+
+Once the `main()` method of ComputerComponentChooser is called, objects for the `BuildManager`, `Parser`, 
+`editParser`, `Storage`, `Ui` are created.
+
+
+
 #### BuildManager
+
+![](/images/BuildManager.png)
+
+The builds are managed by the BuildManager class. It contains a list of builds in a HashMap. The class also contains
+methods to find and filter builds based on user requirements. The BuildManager class is a singleton class, meaning that
+there is only one instance of the class in the program. This is to ensure that there is only one list of builds in the
+program. 
+
+In our application, BuildManager is a class object that contains a HashMap of builds. The HashMap is used to store the
+builds in the program. The key of the HashMap is the name of the build, and the value is the build object.
+
+The BuildManager class is responsible for the following operations:
+- Add a build to the list of builds
+- Delete a build from the list of builds
+- Get a particular build from the list of builds
+- Get the list of builds
+- Find build that contains a search term from the list of builds
+- Filter builds based on user requirements
+
 
 ### Edit Mode
 
@@ -55,6 +81,10 @@ There are also check compatibility functions that check if the build's component
 - Checking if the build's storage is compatible with the case expansion slots
 - Checking if the number of the build's GPUs is compatible with the motherboard GPU slots
 - Checking if the number of the build's RAM is compatible with the motherboard RAM slots
+
+#### Components
+
+### Storage
 
 ### Export
 
