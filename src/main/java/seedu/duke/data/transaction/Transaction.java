@@ -23,6 +23,8 @@ public abstract class Transaction {
     private int amount;
     private LocalDate date;
 
+    private String type;
+
     public Transaction(String description, int amount, String category, LocalDate date) {
         this.description = description;
         this.amount = amount;
@@ -84,5 +86,9 @@ public abstract class Transaction {
     public String toString() {
         return String.format("%s %s%d %s %s %s %s %s", printFormattedCategory(), SYMBOL_DOLLAR,
                 amount, TEXT_AT, printFormattedDate(), SYMBOL_PIPE, TEXT_DESCRIPTION, description);
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

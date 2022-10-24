@@ -7,6 +7,8 @@ public enum InfoMessages {
     INFO_DIVIDER("____________________________________________________________"),
     INFO_ADD_EXPENSE("I have added the following Expense transaction:"),
     INFO_ADD_INCOME("I have added the following Income transaction:"),
+    INFO_EDIT_EXPENSE("I have edited the following Expense transaction:"),
+    INFO_EDIT_INCOME("I have edited the following Income transaction:"),
     INFO_DELETE("I have deleted the following transaction:"),
     INFO_EXIT("Goodbye and see you soon."),
     INFO_GREET("Hello! I'm Moo and I will help you to manage your finances."),
