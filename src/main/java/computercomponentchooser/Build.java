@@ -365,4 +365,19 @@ public class Build {
         sb.append("Form factor: ").append(checkFormFactor()).append(System.lineSeparator());
         return sb.toString();
     }
+
+    /**
+     * Finds the component with the specified name and returns a boolean value to indicate if the component is found.
+     *
+     * @param name The name of the component.
+     * @return True if the build is found, false if the build is not found.
+     */
+    public boolean doesComponentExist(String name) {
+        for (Component component : getAllComponents()) {
+            if (component.getName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
