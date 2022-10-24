@@ -15,6 +15,7 @@ public class WeightAndFatList {
 
     public void addWeightAndFat(WeightAndFat weightAndFat) {
         weightAndFatArrayList.add(weightAndFat);
+        weightAndFatArrayList.sort(new WeightAndFatComparator());
     }
 
     public void removeWeightAndFat(int index) throws IllegalValueException {

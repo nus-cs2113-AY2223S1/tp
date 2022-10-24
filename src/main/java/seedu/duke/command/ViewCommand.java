@@ -91,9 +91,7 @@ public class ViewCommand extends Command {
     private void viewWeight() {
         ui.output(biometrics.weightAndFatList.getSize() + " records of weight and fat percentage:");
         ArrayList<WeightAndFat> weightAndFatList = biometrics.weightAndFatList.getWeightAndFatList();
-        for (WeightAndFat weightAndFat : weightAndFatList) {
-            ui.output(weightAndFat.listWeightAndFat(weightAndFatList));
-        }
+        ui.outputWeightList(weightAndFatList);
     }
 
     private void viewFood(String[] argumentList) throws IllegalValueException {
