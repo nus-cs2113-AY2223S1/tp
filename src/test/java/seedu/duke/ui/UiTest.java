@@ -21,15 +21,15 @@ public class UiTest {
                 + "                 |___/                      \n"
                 + "Hello! Welcome to easySEP, your personal companion for planning your student exchange :-)\n"
                 + "How may I help you today?\n"
-                + "_____________________________________________________________________________\n";
+                + "____________________________________________________________________________\n";
         assertEquals(expectedGreeting, Ui.greetUser());
     }
 
     @Test
     public void testGoodbye() {
-        String expectedGoodbye = "_____________________________________________________________________________\n"
+        String expectedGoodbye = "____________________________________________________________________________\n"
                 + "Goodbye. Hope to see you again soon!\n"
-                + "_____________________________________________________________________________\n";
+                + "____________________________________________________________________________\n";
         assertEquals(expectedGoodbye, Ui.sayByeToUser());
     }
 
@@ -43,7 +43,7 @@ public class UiTest {
 
     @Test
     public void testPrintCommands() {
-        String expected = "_____________________________________________________________________________\n"
+        String expected = "____________________________________________________________________________\n"
                 + "     " + "COMMAND   " + "FORMAT                                                " + "PURPOSE\n"
                 + "     " + "--------  " + "--------------------------------------                " + "-------\n"
                 + "     " + "help      " + "/help                                                 "
@@ -87,7 +87,7 @@ public class UiTest {
                 + "Delete input university list\n\n"
                 + "     " + "Note: Words in UPPER_CASE are parameters that you should input as a user\n"
                 + "     " + "Note: There should not be spaces in parameters, replace with underscore instead\n"
-                + "_____________________________________________________________________________\n";
+                + "____________________________________________________________________________\n";
         assertEquals(expected, Ui.printCommands());
     }
 
@@ -107,11 +107,11 @@ public class UiTest {
         UserModuleMapping dummy = new UserModuleMapping("CPSC123", "Intro to AI",
                 "CS3243", "Introduction to Artificial Intelligence", "4",
                 "test", "test", "test");
-        String expected = "_____________________________________________________________________________\n"
+        String expected = "____________________________________________________________________________\n"
                 + "Success! You added:\n" + "NUS: " + "CS3243" + " "
                 + "Introduction to Artificial Intelligence" + " | Partner University: " + "test " + "CPSC123" + " "
                 + "Intro to AI" + " | Equivalent NUS Credits: " + "4 MCs"
-                + "\n" + "_____________________________________________________________________________\n";
+                + "\n" + "____________________________________________________________________________\n";
         assertEquals(expected, Ui.printModuleAddedAcknowledgement(dummy));
     }
 
@@ -121,12 +121,12 @@ public class UiTest {
                 "CS3243", "Introduction to Artificial Intelligence", "4",
                 "test", "test", "test");
         dummy.setComment("A+ or nothing");
-        String expected = "_____________________________________________________________________________\n"
+        String expected = "____________________________________________________________________________\n"
                 + "Success! You updated:\n" + "NUS: " + "CS3243" + " "
                 + "Introduction to Artificial Intelligence" + " | Partner University: " + "test " + "CPSC123" + " "
                 + "Intro to AI" + " | Equivalent NUS Credits: " + "4 MCs" + "\n"
                 + "With the following comment: " + dummy.getComment() + "\n"
-                + "_____________________________________________________________________________\n";
+                + "____________________________________________________________________________\n";
         assertEquals(expected, Ui.printModuleUpdatedAcknowledgement(dummy));
 
     }
@@ -136,27 +136,27 @@ public class UiTest {
         UserModuleMapping dummy = new UserModuleMapping("CPSC123", "Intro to AI",
                 "CS3243", "Introduction to Artificial Intelligence", "4",
                 "test", "test", "test");
-        String expected = "_____________________________________________________________________________\n"
+        String expected = "____________________________________________________________________________\n"
                 + "Success! You deleted:\n" + "NUS: " + "CS3243" + " "
                 + "Introduction to Artificial Intelligence" + " | Partner University: "
                 + "test " + "CPSC123" + " " + "Intro to AI" + " | Equivalent NUS Credits: " + "4 MCs"
-                + "\n" + "_____________________________________________________________________________\n";
+                + "\n" + "____________________________________________________________________________\n";
         assertEquals(expected, Ui.printModuleDeletedAcknowledgement(dummy));
     }
 
     @Test
     public void testPrintPuListCreatedAcknowledgement() {
-        String expected = "_____________________________________________________________________________\n"
+        String expected = "____________________________________________________________________________\n"
                 + "Success! You have created a new list for " + "Stanford University" + "\n"
-                + "_____________________________________________________________________________\n";
+                + "____________________________________________________________________________\n";
         assertEquals(expected, Ui.printPuListCreatedAcknowledgement("Stanford University"));
     }
 
     @Test
     public void testPrintPuListDeletedAcknowledgement() {
-        String expected = "_____________________________________________________________________________\n"
+        String expected = "____________________________________________________________________________\n"
                 + "Success! You deleted the list for " + "Stanford University" + "\n"
-                + "_____________________________________________________________________________\n";
+                + "____________________________________________________________________________\n";
         assertEquals(expected, Ui.printPuListDeletedAcknowledgement("Stanford University"));
     }
 
@@ -171,14 +171,14 @@ public class UiTest {
                 "test", "test", "test");
         modules.add(dummy1);
         modules.add(dummy2);
-        String expected = "_____________________________________________________________________________\n" + "1. "
+        String expected = "____________________________________________________________________________\n" + "1. "
                 + "NUS: " + "CS3243" + " " + "Introduction to Artificial Intelligence"
                 + " | Partner University: " + "test " + "CPSC123" + " " + "Intro to AI"
                 + " | Equivalent NUS Credits: " + "4 MCs"
                 + "\n" + "2. " + "NUS: " + "CS3244" + " " + "Machine Learning"
                 + " | Partner University: " + "test " + "CPSC456" + " " + "ML"
                 + " | Equivalent NUS Credits: " + "4 MCs" + "\n"
-                + "_____________________________________________________________________________\n";
+                + "____________________________________________________________________________\n";
         assertEquals(expected, Ui.printModulesInUserList(modules));
     }
 }

@@ -141,6 +141,7 @@ public class Timetable {
      * Adds a lesson to the timetable based on day.
      *
      * @param newLesson The new lesson to be added to the timetable.
+     * @param isLoadFromFile Boolean variable to indicate if lesson is being loaded from user's saved file.
      */
     public void addLesson(Lesson newLesson, boolean isLoadFromFile) {
         try {

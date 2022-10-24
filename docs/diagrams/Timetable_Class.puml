@@ -6,12 +6,12 @@ class TimetableManager {
     + TimetableManager()
     + getTimetableByUniversityName(universityName: String) : Timetable
     - foundKeyAll(universityName: String) : boolean
-    + createTimetable(universityName: String)
-    + deleteTimetable(universityName: String)
-    + addLesson(newLesson: Lesson)
-    + deleteLesson(oldLesson: Lesson)
-    + printTimetable(universityName: String)
-    + printAllTimetables()
+    + createTimetable(universityName: String) : void
+    + deleteTimetable(universityName: String) : void
+    + addLesson(newLesson: Lesson, isLoadFromFile: boolean) : void
+    + deleteLesson(oldLesson: Lesson) : void
+    + printTimetable(universityName: String) : void
+    + printAllTimetables() : void
 }
 
 class Timetable {
@@ -22,8 +22,8 @@ class Timetable {
     {static} + isValidEndTime(lesson: Lesson) : boolean
     {static} + isValidTiming(lesson: Lesson) : boolean
     + hasTimetableClash(lesson: Lesson) : boolean
-    + addLesson(newLesson: Lesson)
-    + deleteLesson(oldLesson: Lesson)
+    + addLesson(newLesson: Lesson, isLoadFromFile: boolean) : void
+    + deleteLesson(oldLesson: Lesson) : void
 }
 
 class Lesson {
@@ -31,12 +31,12 @@ class Lesson {
     - startTime: String
     - endTime: String
     + Lesson(code: String, title: String, university: University, day: String, startTime: String, endTime: String)
-    + getDay(): String
-    + setDay(day: String)
-    + getStartTime(): String
-    + setStartTime(startTime: String)
-    + getEndTime(): String
-    + setEndTime(endTime: String)
+    + getDay() : String
+    + setDay(day: String) : void
+    + getStartTime() : String
+    + setStartTime(startTime: String) : void
+    + getEndTime() : String
+    + setEndTime(endTime: String) : void
 }
 
 class Module {

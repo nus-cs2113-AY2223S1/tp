@@ -1,0 +1,36 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class Ui {
+    {static} - LINE : String
+    {static} - LOGO : String
+    {static} - SPACING : String
+    {static} + greetUser() : String
+    {static} + getUserInput() : String
+    {static} + sayByeToUser() : String
+    {static} + printCommands() : String
+    {static} + printExceptionMessage(e: Exception) : void
+    {static} + printModule(module: UserModuleMapping) : String
+    {static} + printModuleAddedAcknowledgement(module: UserModuleMapping) : String
+    {static} + printModuleUpdatedAcknowledgement(module: UserModuleMapping) : String
+    {static} + printModuleDeletedAcknowledgement(module: UserModuleMapping) : String
+    {static} + printPuListCreatedAcknowledgement(universityName: String) : String
+    {static} + printPuListDeletedAcknowledgement(universityName: String) : String
+    {static} + printModulesInUserList(modules: ArrayList<UserModuleMapping>) : String
+    {static} + printDeletedModulesHistory(deletedModules: ArrayDeque<UserModuleMapping>) : String
+    {static} + printPuList(puList:UserUniversityList) : String
+    {static} + printUniversitiesInDatabase(universities: ArrayList<University>) : void
+    {static} + printMappings(moduleMappings: ArrayList<ModuleMapping>) : void
+    {static} + printUserFavouriteLists(userFavouriteLists: HashMap<String, UserUniversityList>) : void
+    {static} + printFavouriteListAddedAcknowledgement(universityName: String) : String
+    {static} + printFavouriteListDeletedAcknowledgement(universityName: String) : String
+    {static} + printTimetableCreatedAcknowledgement(universityName: String) : String
+    {static} + printTimetableDeletedAcknowledgement(universityName: String) : String
+    {static} + printLesson(lesson: Lesson) : String
+    {static} + printLessonsByDayInTimetable(lessons: ArrayList<Lesson>) : String
+    {static} + printLessonAddedAcknowledgement(lesson: Lesson) : String
+    {static} + printLessonDeletedAcknowledgement(lesson: Lesson) : String
+    {static} + printTimetable(timetable:HashMap<String, ArrayList<Lesson>>) : void
+}
+
+@enduml

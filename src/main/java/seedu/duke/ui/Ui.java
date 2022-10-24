@@ -14,8 +14,8 @@ import seedu.duke.user.UserModuleMappingList;
 import seedu.duke.user.UserUniversityList;
 
 public class Ui {
-    public static final String LINE = "_____________________________________________________________________________\n";
-    public static final String LOGO = "                        _____ ______ _____  \n"
+    private static final String LINE = "____________________________________________________________________________\n";
+    private static final String LOGO = "                        _____ ______ _____  \n"
             + "                       / ____|  ____|  __ \\ \n"
             + "   ___  __ _ ___ _   _| (___ | |__  | |__) |\n"
             + "  / _ \\/ _` / __| | | |\\___ \\|  __| |  ___/ \n"
@@ -24,7 +24,7 @@ public class Ui {
             + "                  __/ |                     \n"
             + "                 |___/                      \n";
 
-    public static final String SPACING = "     ";
+    private static final String SPACING = "     ";
 
     /**
      * Greets the user with an introductory message when the program is first
@@ -420,9 +420,11 @@ public class Ui {
 
     /**
      * Sequentially prints each day's lessons for a timetable.
+     *
+     * @param timetable The dictionary containing the lists of lessons to be printed, indexed by weekday.
      */
     public static void printTimetable(HashMap<String, ArrayList<Lesson>> timetable) {
-        System.out.println("_____________________________________________________________________________");
+        System.out.print(LINE);
         ArrayList<Lesson> mondayLessonList = timetable.get("monday");
         ArrayList<Lesson> tuesdayLessonList = timetable.get("tuesday");
         ArrayList<Lesson> wednesdayLessonList = timetable.get("wednesday");
@@ -438,6 +440,6 @@ public class Ui {
         System.out.print(Ui.printLessonsByDayInTimetable(thursdayLessonList));
         System.out.println("Friday:");
         System.out.print(Ui.printLessonsByDayInTimetable(fridayLessonList));
-        System.out.println("_____________________________________________________________________________");
+        System.out.print(LINE);
     }
 }

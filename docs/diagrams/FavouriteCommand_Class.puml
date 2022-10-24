@@ -1,0 +1,80 @@
+@startuml
+
+class Duke {
+    {static} + main(String[] args) : void
+}
+
+class Ui {
+    {static} + getUserInput() : String
+    {static} + printExceptionMessage(Exception e) : void
+    {static} + printUserFavouriteLists(userFavouriteLists: HashMap<String, UserUniversityList>) : void
+    {static} + printFavouriteListAddedAcknowledgement(universityName: String) : String
+    {static} + printFavouriteListDeletedAcknowledgement(universityName: String) : String
+}
+
+class CommandParser {
+    {static} + getUserCommand(String userInput) : Command
+    {static} - parseUserCommand(String userInput) : String[]
+    {static} - removeParameterUnderscores(String parameter) : String
+    {static} - isEmptyUserInput(String[] userInputTokenized) : boolean
+    {static} - isValidFavouriteCommand(String[] parameters) : boolean
+    {static} - isValidFavouriteOption(String option) : boolean
+}
+
+class UserStorageParser {
+    {static} + storeCreatedLists(userUniversityListManager: UserUniversityListManager) : void
+}
+
+class InvalidUserCommandException {
+
+}
+
+enum CommandType {
+    CREATE
+    VIEW
+    ADD
+    DELETE
+    EXIT
+    HELP
+    LIST
+    FAVOURITE
+}
+
+abstract class Command {
+    - commandType : CommandType
+    - universityName : String
+    - moduleCode : String
+    - parameters : String[]
+    + Command(String[] parameters, CommandType commandType)
+    + getCommandType() : CommandType
+    + getUniversityName() : String
+    + getModuleCode() : String
+}
+
+class FavouriteCommand {
+    - favouriteOption : String
+    + FavouriteCommand(String[] parameters, CommandType commandType)
+    + getFavouriteOption() : String
+}
+
+class UserUniversityListManager {
+    - myManager: HashMap<String, UserUniversityList>
+    + displayFavourites() : void
+    + addFavourite(input: String) : void
+    + deleteFavourite(input: String) : void
+}
+
+class InvalidUserCommandException {
+}
+
+Duke "1" --> "1" Ui
+Duke "1" --> "1" CommandParser
+Duke "1" --> "1" UserStorageParser
+Duke "1" o-- "*" Command
+CommandParser "1" --> "*" FavouriteCommand
+UserUniversityListManager "1" --> "1" Ui
+Command <|-- FavouriteCommand
+CommandParser --> InvalidUserCommandException : <<throws>>
+UserUniversityListManager --> InvalidUserCommandException : <<throws>>
+
+@enduml
