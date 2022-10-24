@@ -63,6 +63,21 @@ The following diagram illustrates the relationships between the three main timet
 
 ![Timetable Class Diagram](./images/Timetable_Class.png)
 
+In chronological order, the following diagrams illustrate the flow of the program for adding lessons, deleting lessons and displaying timetables to the user.
+
+![Timetable Add Lesson Sequence Diagram](./images/Timetable_addLesson_Sequence.png)
+![Timetable Delete Lesson Sequence Diagram](./images/Timetable_deleteLesson_Sequence.png)
+![Timetable Print Timetable Sequence Diagram](./images/Timetable_printTimetable_Sequence.png)
+
+### Ui
+
+The Ui class is the cornerstone of the Duke program to facilitate interaction with the user. It is used to scan and collect user input, print error messages to the user upon invalid input commands, 
+and display the appropriate acknowledgements or required information based on the user's command.
+
+The following diagram illustrates the methods within the Ui class that can be invoked by the other classes in Duke for the purpose of user interaction.
+
+![Ui Class Diagram](./images/Ui_Class.png)
+
 ### Commands
 
 To interact with easySEP, users have to input commands specified with parameters to perform operations which will be passed to the CommandParser to generate a corresponding Command according to their input.
@@ -84,6 +99,16 @@ To differentiate between the various functions of the list command, a variable `
 The following sequence diagram illustrates the flow of the program to read in the user input, parse the user input, check if it is a valid list command, and execute the relevant list command based on the `listOption`.
 
 ![List Command Sequence Diagram](./images/ListCommand_Sequence.png)
+
+#### Favourite Command
+
+A favourite command can be used by the user to favourite or un-favourite lists of module mappings that they have curated. It can also be used to display all of the user's favourite lists and the module mappings they contain.
+
+To differentiate between the various functions of the favourite command, a variable `favouriteOption` is used. This variable signals Duke to execute the relevant commands accordingly.
+
+The following class diagram illustrates the relationship between the respective classes involved in the creation and execution of a favourite command.
+
+![Favourite Command Class Diagram](./images/FavouriteCommand_Class.png)
 
 ## Product scope
 
