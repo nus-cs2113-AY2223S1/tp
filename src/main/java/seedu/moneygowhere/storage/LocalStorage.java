@@ -411,16 +411,16 @@ public class LocalStorage {
             description = null;
         }
 
-        NodeList amountNodeList = element.getElementsByTagName(XML_RECURRING_PAYMENT_AMOUNT_ELEMENT);
-        BigDecimal amount = new BigDecimal(amountNodeList.item(0).getTextContent());
-        String currency = amountNodeList.item(0).getAttributes()
-                .getNamedItem(XML_RECURRING_PAYMENT_CURRENCY_ATTRIBUTE).getTextContent();
-
         String category = element.getElementsByTagName(XML_RECURRING_PAYMENT_CATEGORY_ELEMENT)
                 .item(0).getTextContent();
         if (category.isEmpty() || category.trim().isEmpty()) {
             category = null;
         }
+
+        NodeList amountNodeList = element.getElementsByTagName(XML_RECURRING_PAYMENT_AMOUNT_ELEMENT);
+        BigDecimal amount = new BigDecimal(amountNodeList.item(0).getTextContent());
+        String currency = amountNodeList.item(0).getAttributes()
+                .getNamedItem(XML_RECURRING_PAYMENT_CURRENCY_ATTRIBUTE).getTextContent();
 
         int interval = Integer.parseInt(element.getElementsByTagName(XML_RECURRING_PAYMENT_INTERVAL_ELEMENT)
                 .item(0).getTextContent());
