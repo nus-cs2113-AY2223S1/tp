@@ -63,15 +63,19 @@ public class UserStorage extends Storage {
             fileWriter.write(formattedUserList);
             fileWriter.close();
         } catch (IOException e) {
-            int startIndex = userFilePath.lastIndexOf("/");
-            String fileDirectory =
-                    userFilePath.replace(userFilePath.substring(startIndex), "");
-            File file = new File(fileDirectory);
-            if (file.mkdir()) {
-                writeData(userList);
-            } else {
-                throw new StoreFailureException(MESSAGE_STORE_INVALID);
-            }
+            makeUserDir(userList);
+        }
+    }
+
+    public void makeUserDir(UserList userList) throws StoreFailureException {
+        int startIndex = userFilePath.lastIndexOf("/");
+        String fileDirectory =
+                userFilePath.replace(userFilePath.substring(startIndex), "");
+        File file = new File(fileDirectory);
+        if (file.mkdir()) {
+            writeData(userList);
+        } else {
+            throw new StoreFailureException(MESSAGE_STORE_INVALID);
         }
     }
 
