@@ -3,8 +3,10 @@ package seedu.moneygowhere.commands;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+//@@author penguin-s
+
 /**
- * Stores the add-target command and its arguments.
+ * Stores the command Add-Target and its arguments.
  */
 @SuppressWarnings("FieldMayBeFinal")
 public class ConsoleCommandAddTarget extends ConsoleCommand {

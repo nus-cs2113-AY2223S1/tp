@@ -3,8 +3,10 @@ package seedu.moneygowhere.commands;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+//@@author penguin-s
+
 /**
- * Stores the edit-target command and its arguments.
+ * Stores the command Edit-Target and its arguments.
  */
 @SuppressWarnings("unused")
 public class ConsoleCommandEditTarget extends ConsoleCommand {

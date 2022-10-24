@@ -2,8 +2,10 @@ package seedu.moneygowhere.commands;
 
 import java.math.BigDecimal;
 
+//@@author xzynos
+
 /**
- * Stores the Edit-RecurringPayment command and its arguments.
+ * Stores the command Edit-RecurringPayment and its arguments.
  */
 @SuppressWarnings("unused")
 public class ConsoleCommandEditRecurringPayment extends ConsoleCommand {
@@ -14,6 +16,7 @@ public class ConsoleCommandEditRecurringPayment extends ConsoleCommand {
     private BigDecimal amount;
     private String category;
     private String currency;
+    private String modeOfPayment;
     private boolean isRecurringPaymentIndexSet;
     private boolean isNameSet;
     private boolean isIntervalSet;
@@ -21,6 +24,7 @@ public class ConsoleCommandEditRecurringPayment extends ConsoleCommand {
     private boolean isAmountSet;
     private boolean isCategorySet;
     private boolean isCurrencySet;
+    private boolean isModeOfPaymentSet;
 
     public ConsoleCommandEditRecurringPayment() {
         isRecurringPaymentIndexSet = false;
@@ -30,6 +34,7 @@ public class ConsoleCommandEditRecurringPayment extends ConsoleCommand {
         isAmountSet = false;
         isCategorySet = false;
         isCurrencySet = false;
+        isModeOfPaymentSet = false;
     }
 
     public int getRecurringPaymentIndex() {
@@ -95,6 +100,15 @@ public class ConsoleCommandEditRecurringPayment extends ConsoleCommand {
         isCurrencySet = true;
     }
 
+    public String getModeOfPayment() {
+        return modeOfPayment;
+    }
+
+    public void setModeOfPayment(String modeOfPayment) {
+        this.modeOfPayment = modeOfPayment;
+        isModeOfPaymentSet = true;
+    }
+
     public boolean isRecurringPaymentIndexSet() {
         return isRecurringPaymentIndexSet;
     }
@@ -121,5 +135,9 @@ public class ConsoleCommandEditRecurringPayment extends ConsoleCommand {
 
     public boolean isCurrencySet() {
         return isCurrencySet;
+    }
+
+    public boolean isModeOfPaymentSet() {
+        return isModeOfPaymentSet;
     }
 }

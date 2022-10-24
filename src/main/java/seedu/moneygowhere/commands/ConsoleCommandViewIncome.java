@@ -1,7 +1,9 @@
 package seedu.moneygowhere.commands;
 
+//@@author penguin-s
+
 /**
- * Stores the view-income command and its arguments.
+ * Stores the command View-Income and its arguments.
  */
 @SuppressWarnings("FieldMayBeFinal")
 public class ConsoleCommandViewIncome extends ConsoleCommand {

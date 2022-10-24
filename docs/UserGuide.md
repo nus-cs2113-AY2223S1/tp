@@ -16,21 +16,16 @@ MoneyGoWhere is a financial planner to help you manage your finances.
 ### Adding an expense: `Add-Expense`
 Adds a new expense to the list of expenses.
 
-Syntax: `Add-Expense -n NAME -a AMOUNT [-d DATE] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p MODE OF PAYMENT]`
+Syntax: `Add-Expense -n NAME -a AMOUNT [-d DATE_TIME] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p MODE OF PAYMENT]`
 
 * `NAME`, `DESCRIPTION`, `CATEGORY`, `REMARKS` and `MODE OF PAYMENT` are text strings. You may use spaces within the text if you wrap the text with double quotes.
 * `CURRENCY` is a text string. By default, it will be SGD. Otherwise, it must be a valid currency code.
 * `AMOUNT` is a decimal value.
-* `DATE` is a text string in the format `"dd/MM/yyyy HHmm"`. If this value is not provided, MoneyGoWhere will save the current date and time for you.
+* `DATE_TIME` is a text string in the format `"dd/MM/yyyy HHmm"`. If this value is not provided, MoneyGoWhere will save the current date and time for you.
 
 Example of usage: 
 
 * `Add-Expense -n Subscription -a 13.37`
-* `Add-Expense -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359"`
-* `Add-Expense -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359" -t "Monthly payment"`
-* `Add-Expense -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359" -t "Monthly payment" -c "Work expenses"`
-* `Add-Expense -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359" -t "Monthly payment" -c "Work expenses" -r "Remarks here"`
-* `Add-Expense -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359" -t "Monthly payment" -c "Work expenses" -r "Remarks here" -x USD`
 * `Add-Expense -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359" -t "Monthly payment" -c "Work expenses" -r "Remarks here" -x USD -p PayLah`
 
 ### Viewing expense(s): `View-Expense`
@@ -59,22 +54,17 @@ Example of usage:
 ### Editing an expense: `Edit-Expense`
 Edits an existing expense in the list of expenses.
 
-Syntax: `Edit-Expense -e EXPENSE_NUMBER [-n NAME] [-a AMOUNT] [-d DATE] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p MODE OF PAYMENT]`
+Syntax: `Edit-Expense -e EXPENSE_NUMBER [-n NAME] [-a AMOUNT] [-d DATE_TIME] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p MODE OF PAYMENT]`
 
 * `EXPENSE_NUMBER` is an integer value.
 * `NAME`, `DESCRIPTION`, `CATEGORY`, `REMARKS` and `MODE OF PAYMENT` are text strings. You may use spaces within the text if you wrap the text with double quotes.
 * `CURRENCY` is a text string. It must be a valid currency code.
 * `AMOUNT` is a decimal value.
-* `DATE` is a text string in the format `"dd/MM/yyyy HHmm"`.
+* `DATE_TIME` is a text string in the format `"dd/MM/yyyy HHmm"`.
 
 Example of usage:
 
 * `Edit-Expense -e 1 -n Subscription -a 13.37`
-* `Edit-Expense -e 1 -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359"`
-* `Edit-Expense -e 1 -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359" -t "Monthly payment"`
-* `Edit-Expense -e 1 -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359" -t "Monthly payment" -c "Work expenses"`
-* `Edit-Expense -e 1 -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359" -t "Monthly payment" -c "Work expenses" -r "Remarks here"`
-* `Edit-Expense -e 1 -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359" -t "Monthly payment" -c "Work expenses" -r "Remarks here" -x USD`
 * `Edit-Expense -e 1 -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359" -t "Monthly payment" -c "Work expenses" -r "Remarks here" -x USD -p PayLah`
 
 ### Sorting expenses: `Sort-Expense`
@@ -108,15 +98,16 @@ Example of usage:
 ### Adding recurring payments: `Add-RecurringPayment`
 Adds a recurring payment to the list of recurring payments
 
-Syntax: `Add-RecurringPayment -n NAME -i INTERVAL -a AMOUNT [-t DESCRIPTION]`
+Syntax: `Add-RecurringPayment -n NAME -i INTERVAL -a AMOUNT [-t DESCRIPTION] [-c CATEGORY] [-x CURRENCY] [-p MODE_OF_PAYMENT]`
 
 * `NAME` and `DESCRIPTION` are text strings. You may use spaces within the text if you wrap the text with double quotes.
 * `INTERVAL` is an integer value. Set this value to the estimated number of days between your recurring payments.
 * `AMOUNT` is a decimal value.
+* `MODE_OF_PAYMENT` is a text string.
 
 Example of usage:
 * `Add-RecurringPayment -n "Mobile Plan" -i 30 -a 20.00`
-* `Add-RecurringPayment -n "Mobile Plan" -i 30 -a 20.00 -t "Monthly payment for my mobile plan"`
+* `Add-RecurringPayment -n "Mobile Plan" -i 30 -a 20.00 -t "Monthly payment for my mobile plan" -c Telecom -x SGD -p Card`
 
 ### Viewing recurring payments: `View-RecurringPayment`
 Displays the past recurring payments you have added.
@@ -152,13 +143,20 @@ Syntax: `Edit-RecurringPayment -r RECURRING_PAYMENT_INDEX [-n NAME] [-i INTERVAL
 * `AMOUNT` is a decimal value.
 
 Example of usage:
-* `Edit-RecurringPayment -r 1 -n "Mobile Plan"`
-* `Edit-RecurringPayment -r 1 -i 30`
-* `Edit-RecurringPayment -r 1 -a 20.00`
-* `Edit-RecurringPayment -r 1 -n "Mobile Plan" -i 30 -a 20.00 -t "Monthly payment for my mobile plan"`
 
-### Merge file: `Merge-File`
-Merge save file from an external source given path to the save file (.xml)
+* `Edit-RecurringPayment -r 1 -a 20.00`
+* `Edit-RecurringPayment -r 1 -n "Mobile Plan" -i 30 -a 20.00 -t "Monthly payment for my mobile plan" -c Telecom -x SGD -p Card`
+
+### Adding an expense from recurring payments: `Pay-RecurringPayment`
+Adds an expense from an existing recurring payment
+
+Syntax: `Pay-RecurringPayment -r RECURRING_PAYMENT_INDEX [-d DATE_TIME]`
+
+* `RECURRING_PAYMENT_INDEX` is an integer value.
+* `DATE_TIME` is a text string in the format `"dd/MM/yyyy HHmm"`. If this value is not provided, MoneyGoWhere will save the current date and time for you.
+
+### Merging a data file: `Merge-File`
+Merges save file from an external source given path to the save file (.xml)
 
 Syntax: `Merge-File [-p PATH_STRING]`
 
@@ -166,7 +164,7 @@ Syntax: `Merge-File [-p PATH_STRING]`
 
 Example of usage:
 
-* `merge-file -p "C:\Users\the_d\Downloads\expenses.xml"`
+* `Merge-File -p "C:\Users\the_d\Downloads\expenses.xml"`
 
 ## FAQ
 

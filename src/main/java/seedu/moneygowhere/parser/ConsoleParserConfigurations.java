@@ -3,18 +3,19 @@ package seedu.moneygowhere.parser;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 
+//@@author xzynos
+
 /**
  * Defines configuration parameters used by {@link ConsoleParser}.
  */
 public class ConsoleParserConfigurations {
-    /**
-     * Defines parameters for console command Bye.
-     */
+    //@@author xzynos
+    //region Defines parameters for console command Bye
     public static final String COMMAND_BYE = "bye";
+    //endregion
 
-    /**
-     * Defines parameters for console command Add-Expense.
-     */
+    //@@author xzynos
+    //region Defines parameters for console command Add-Expense
     public static final String COMMAND_ADD_EXPENSE = "Add-Expense";
     public static final String COMMAND_ADD_EXPENSE_ARG_NAME = "n";
     public static final String COMMAND_ADD_EXPENSE_ARG_NAME_LONG = "name";
@@ -63,10 +64,10 @@ public class ConsoleParserConfigurations {
     public static final String COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_CARD = "Card";
     public static final String COMMAND_ADD_EXPENSE_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS = ""
             + "Command Add-Expense does not have all of the required options.";
+    //endregion
 
-    /**
-     * Defines parameters for console command View-Expense.
-     */
+    //@@author xzynos
+    //region Defines parameters for console command View-Expense
     public static final String COMMAND_VIEW_EXPENSE = "View-Expense";
     public static final String COMMAND_VIEW_EXPENSE_ARG_EXPENSE_INDEX = "e";
     public static final String COMMAND_VIEW_EXPENSE_ARG_EXPENSE_INDEX_LONG = "expense-index";
@@ -78,12 +79,17 @@ public class ConsoleParserConfigurations {
     public static final String COMMAND_VIEW_EXPENSE_ARG_EXPENSE_CATEGORY_DESC = "Category";
     public static final boolean COMMAND_VIEW_EXPENSE_ARG_EXPENSE_CATEGORY_HAS_VAL = true;
     public static final boolean COMMAND_VIEW_EXPENSE_ARG_EXPENSE_CATEGORY_IS_MAND = false;
+    public static final String COMMAND_VIEW_EXPENSE_ARG_EXPENSE_NAME = "n";
+    public static final String COMMAND_VIEW_EXPENSE_ARG_EXPENSE_NAME_LONG = "expense-name";
+    public static final String COMMAND_VIEW_EXPENSE_ARG_EXPENSE_NAME_DESC = "Name";
+    public static final boolean COMMAND_VIEW_EXPENSE_ARG_EXPENSE_NAME_HAS_VAL = true;
+    public static final boolean COMMAND_VIEW_EXPENSE_ARG_EXPENSE_NAME_IS_MAND = false;
     public static final String COMMAND_VIEW_EXPENSE_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS = ""
             + "Command View-Expense does not have all of the required options.";
+    //endregion
 
-    /**
-     * Defines parameters for console command Delete-Expense.
-     */
+    //@@author xzynos
+    //region Defines parameters for console command Delete-Expense
     public static final String COMMAND_DELETE_EXPENSE = "Delete-Expense";
     public static final String COMMAND_DELETE_EXPENSE_ARG_EXPENSE_INDEX = "e";
     public static final String COMMAND_DELETE_EXPENSE_ARG_EXPENSE_INDEX_LONG = "expense-index";
@@ -92,10 +98,10 @@ public class ConsoleParserConfigurations {
     public static final boolean COMMAND_DELETE_EXPENSE_ARG_EXPENSE_INDEX_IS_MAND = true;
     public static final String COMMAND_DELETE_EXPENSE_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS = ""
             + "Command Delete-Expense does not have all of the required options.";
+    //endregion
 
-    /**
-     * Defines parameters for console command Edit-Expense.
-     */
+    //@@author xzynos
+    //region Defines parameters for console command Edit-Expense
     public static final String COMMAND_EDIT_EXPENSE = "Edit-Expense";
     public static final String COMMAND_EDIT_EXPENSE_ARG_EXPENSE_INDEX = "e";
     public static final String COMMAND_EDIT_EXPENSE_ARG_EXPENSE_INDEX_LONG = "expense-index";
@@ -149,10 +155,10 @@ public class ConsoleParserConfigurations {
     public static final String COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_CARD = "Card";
     public static final String COMMAND_EDIT_EXPENSE_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS = ""
             + "Command Edit-Expense does not have all of the required options.";
+    //endregion
 
-    /**
-     * Defines parameters for console command Sort-Expense.
-     */
+    //@@author jeyvia
+    //region Defines parameters for console command Sort-Expense
     public static final String COMMAND_SORT_EXPENSE = "Sort-Expense";
     public static final String COMMAND_SORT_EXPENSE_ARG_TYPE = "t";
     public static final String COMMAND_SORT_EXPENSE_ARG_TYPE_LONG = "type";
@@ -174,10 +180,10 @@ public class ConsoleParserConfigurations {
     public static final String COMMAND_SORT_EXPENSE_ARG_ORDER_VAL_DESCENDING = "Descending";
     public static final String COMMAND_SORT_EXPENSE_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS = ""
             + "Command Sort-Expense does not have all of the required options.";
+    //endregion
 
-    /**
-     * Defines parameters for console command Convert-Currency.
-     */
+    //@@author jeyvia
+    //region Defines parameters for console command Convert-Currency
     public static final String COMMAND_CONVERT_CURRENCY = "Convert-Currency";
     public static final String COMMAND_CONVERT_CURRENCY_ARG_EXPENSE_INDEX = "e";
     public static final String COMMAND_CONVERT_CURRENCY_ARG_EXPENSE_INDEX_LONG = "expense-index";
@@ -196,10 +202,10 @@ public class ConsoleParserConfigurations {
     public static final boolean COMMAND_CONVERT_CURRENCY_ARG_RATE_IS_MAND = false;
     public static final String COMMAND_CONVERT_CURRENCY_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS = ""
             + "Command Convert-Currency does not have all of the required options.";
+    //endregion
 
-    /**
-     * Defines parameters for console command Add-Target.
-     */
+    //@@author penguin-s
+    //region Defines parameters for console command Add-Target
     public static final String COMMAND_ADD_TARGET = "Add-Target";
     public static final String COMMAND_ADD_TARGET_ARG_NAME = "n";
     public static final String COMMAND_ADD_TARGET_ARG_NAME_LONG = "name";
@@ -228,10 +234,10 @@ public class ConsoleParserConfigurations {
     public static final boolean COMMAND_ADD_TARGET_ARG_DESCRIPTION_IS_MAND = false;
     public static final String COMMAND_ADD_TARGET_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS = ""
             + "Command Add-Target does not have all of the required options.";
+    //endregion
 
-    /**
-     * Defines parameters for console command View-Target.
-     */
+    //@@author penguin-s
+    //region Defines parameters for console command View-Target
     public static final String COMMAND_VIEW_TARGET = "View-Target";
     public static final String COMMAND_VIEW_TARGET_ARG_TARGET_INDEX = "e";
     public static final String COMMAND_VIEW_TARGET_ARG_TARGET_INDEX_LONG = "target-index";
@@ -240,10 +246,10 @@ public class ConsoleParserConfigurations {
     public static final boolean COMMAND_VIEW_TARGET_ARG_TARGET_INDEX_IS_MAND = false;
     public static final String COMMAND_VIEW_TARGET_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS = ""
             + "Command View-Target does not have all of the required options.";
+    //endregion
 
-    /**
-     * Defines parameters for console command Delete-Target.
-     */
+    //@@author penguin-s
+    //region Defines parameters for console command Delete-Target
     public static final String COMMAND_DELETE_TARGET = "Delete-Target";
     public static final String COMMAND_DELETE_TARGET_ARG_TARGET_INDEX = "e";
     public static final String COMMAND_DELETE_TARGET_ARG_TARGET_INDEX_LONG = "target-index";
@@ -252,10 +258,10 @@ public class ConsoleParserConfigurations {
     public static final boolean COMMAND_DELETE_TARGET_ARG_TARGET_INDEX_IS_MAND = true;
     public static final String COMMAND_DELETE_TARGET_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS = ""
             + "Command Delete-Expense does not have all of the required options.";
+    //endregion
 
-    /**
-     * Defines parameters for console command Edit-Target.
-     */
+    //@@author penguin-s
+    //region Defines parameters for console command Edit-Target
     public static final String COMMAND_EDIT_TARGET = "Edit-Target";
     public static final String COMMAND_EDIT_TARGET_ARG_TARGET_INDEX = "e";
     public static final String COMMAND_EDIT_TARGET_ARG_TARGET_INDEX_LONG = "target-index";
@@ -289,10 +295,10 @@ public class ConsoleParserConfigurations {
     public static final boolean COMMAND_EDIT_TARGET_ARG_DESCRIPTION_IS_MAND = false;
     public static final String COMMAND_EDIT_TARGET_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS = ""
             + "Command Edit-Target does not have all of the required options.";
+    //endregion
 
-    /**
-     * Defines parameters for console command Add-Income.
-     */
+    //@@author penguin-s
+    //region Defines parameters for console command Add-Income
     public static final String COMMAND_ADD_INCOME = "Add-Income";
     public static final String COMMAND_ADD_INCOME_ARG_NAME = "n";
     public static final String COMMAND_ADD_INCOME_ARG_NAME_LONG = "name";
@@ -316,10 +322,10 @@ public class ConsoleParserConfigurations {
     public static final boolean COMMAND_ADD_INCOME_ARG_DESCRIPTION_IS_MAND = false;
     public static final String COMMAND_ADD_INCOME_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS = ""
             + "Command Add-Income does not have all of the required options.";
+    //endregion
 
-    /**
-     * Defines parameters for console command View-Income.
-     */
+    //@@author penguin-s
+    //region Defines parameters for console command View-Income
     public static final String COMMAND_VIEW_INCOME = "View-Income";
     public static final String COMMAND_VIEW_INCOME_ARG_INCOME_INDEX = "e";
     public static final String COMMAND_VIEW_INCOME_ARG_INCOME_INDEX_LONG = "income-index";
@@ -328,10 +334,10 @@ public class ConsoleParserConfigurations {
     public static final boolean COMMAND_VIEW_INCOME_ARG_INCOME_INDEX_IS_MAND = false;
     public static final String COMMAND_VIEW_INCOME_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS = ""
             + "Command View-Income does not have all of the required options.";
+    //endregion
 
-    /**
-     * Defines parameters for console command Delete-Income.
-     */
+    //@@author penguin-s
+    //region Defines parameters for console command Delete-Income
     public static final String COMMAND_DELETE_INCOME = "Delete-Income";
     public static final String COMMAND_DELETE_INCOME_ARG_INCOME_INDEX = "e";
     public static final String COMMAND_DELETE_INCOME_ARG_INCOME_INDEX_LONG = "income-index";
@@ -340,10 +346,10 @@ public class ConsoleParserConfigurations {
     public static final boolean COMMAND_DELETE_INCOME_ARG_INCOME_INDEX_IS_MAND = true;
     public static final String COMMAND_DELETE_INCOME_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS = ""
             + "Command Delete-Income does not have all of the required options.";
+    //endregion
 
-    /**
-     * Defines parameters for console command Edit-Income.
-     */
+    //@@author penguin-s
+    //region Defines parameters for console command Edit-Income
     public static final String COMMAND_EDIT_INCOME = "Edit-Income";
     public static final String COMMAND_EDIT_INCOME_ARG_INCOME_INDEX = "e";
     public static final String COMMAND_EDIT_INCOME_ARG_INCOME_INDEX_LONG = "income-index";
@@ -372,10 +378,10 @@ public class ConsoleParserConfigurations {
     public static final boolean COMMAND_EDIT_INCOME_ARG_DESCRIPTION_IS_MAND = false;
     public static final String COMMAND_EDIT_INCOME_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS = ""
             + "Command Edit-Income does not have all of the required options.";
+    //endregion
 
-    /**
-     * Defines parameters for console command Add-RecurringPayment.
-     */
+    //@@author xzynos
+    //region Defines parameters for console command Add-RecurringPayment
     public static final String COMMAND_ADD_RECURRING_PAYMENT = "Add-RecurringPayment";
     public static final String COMMAND_ADD_RECURRING_PAYMENT_ARG_NAME = "n";
     public static final String COMMAND_ADD_RECURRING_PAYMENT_ARG_NAME_LONG = "name";
@@ -407,12 +413,18 @@ public class ConsoleParserConfigurations {
     public static final String COMMAND_ADD_RECURRING_PAYMENT_ARG_CURRENCY_DESC = "Currency";
     public static final boolean COMMAND_ADD_RECURRING_PAYMENT_ARG_CURRENCY_HAS_VAL = true;
     public static final boolean COMMAND_ADD_RECURRING_PAYMENT_ARG_CURRENCY_IS_MAND = false;
+    public static final String COMMAND_ADD_RECURRING_PAYMENT_ARG_MODE_OF_PAYMENT = "p";
+    public static final String COMMAND_ADD_RECURRING_PAYMENT_ARG_MODE_OF_PAYMENT_LONG = "mode of payment";
+    public static final String COMMAND_ADD_RECURRING_PAYMENT_ARG_MODE_OF_PAYMENT_DESC = ""
+            + "PayLah/PayNow/Cash/Card";
+    public static final boolean COMMAND_ADD_RECURRING_PAYMENT_ARG_MODE_OF_PAYMENT_HAS_VAL = true;
+    public static final boolean COMMAND_ADD_RECURRING_PAYMENT_ARG_MODE_OF_PAYMENT_IS_MAND = false;
     public static final String COMMAND_ADD_RECURRING_PAYMENT_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS = ""
             + "Command Add-RecurringPayment does not have all of the required options.";
+    //endregion
 
-    /**
-     * Defines parameters for console command View-RecurringPayment.
-     */
+    //@@author xzynos
+    //region Defines parameters for console command View-RecurringPayment
     public static final String COMMAND_VIEW_RECURRING_PAYMENT = ""
             + "View-RecurringPayment";
     public static final String COMMAND_VIEW_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX = ""
@@ -427,10 +439,10 @@ public class ConsoleParserConfigurations {
             false;
     public static final String COMMAND_VIEW_RECURRING_PAYMENT_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS = ""
             + "Command View-RecurringPayment does not have all of the required options.";
+    //endregion
 
-    /**
-     * Defines parameters for console command Delete-RecurringPayment.
-     */
+    //@@author xzynos
+    //region Defines parameters for console command Delete-RecurringPayment
     public static final String COMMAND_DELETE_RECURRING_PAYMENT = ""
             + "Delete-RecurringPayment";
     public static final String COMMAND_DELETE_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX = ""
@@ -445,10 +457,10 @@ public class ConsoleParserConfigurations {
             true;
     public static final String COMMAND_DELETE_RECURRING_PAYMENT_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS = ""
             + "Command Delete-RecurringPayment does not have all of the required options.";
+    //endregion
 
-    /**
-     * Defines parameters for console command Edit-RecurringPayment.
-     */
+    //@@author xzynos
+    //region Defines parameters for console command Edit-RecurringPayment
     public static final String COMMAND_EDIT_RECURRING_PAYMENT = ""
             + "Edit-RecurringPayment";
     public static final String COMMAND_EDIT_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX = ""
@@ -511,17 +523,46 @@ public class ConsoleParserConfigurations {
     public static final String COMMAND_EDIT_RECURRING_PAYMENT_ARG_CURRENCY_DESC = "Currency";
     public static final boolean COMMAND_EDIT_RECURRING_PAYMENT_ARG_CURRENCY_HAS_VAL = true;
     public static final boolean COMMAND_EDIT_RECURRING_PAYMENT_ARG_CURRENCY_IS_MAND = false;
+    public static final String COMMAND_EDIT_RECURRING_PAYMENT_ARG_MODE_OF_PAYMENT = "p";
+    public static final String COMMAND_EDIT_RECURRING_PAYMENT_ARG_MODE_OF_PAYMENT_LONG = "mode of payment";
+    public static final String COMMAND_EDIT_RECURRING_PAYMENT_ARG_MODE_OF_PAYMENT_DESC = ""
+            + "PayLah/PayNow/Cash/Card";
+    public static final boolean COMMAND_EDIT_RECURRING_PAYMENT_ARG_MODE_OF_PAYMENT_HAS_VAL = true;
+    public static final boolean COMMAND_EDIT_RECURRING_PAYMENT_ARG_MODE_OF_PAYMENT_IS_MAND = false;
     public static final String COMMAND_EDIT_RECURRING_PAYMENT_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS = ""
             + "Command Edit-RecurringPayment does not have all of the required options.";
+    //endregion
 
-    /**
-     * Defines parameters for console command Merge-file.
-     */
-    public static final String COMMAND_MERGE_EXTERNAL_FILE = ""
+    //@@author xzynos
+    //region Defines parameters for console command Pay-RecurringPayment
+    public static final String COMMAND_PAY_RECURRING_PAYMENT = ""
+            + "Pay-RecurringPayment";
+    public static final String COMMAND_PAY_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX = ""
+            + "r";
+    public static final String COMMAND_PAY_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_LONG = ""
+            + "recurringpayment-index";
+    public static final String COMMAND_PAY_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_DESC = ""
+            + "Index";
+    public static final boolean COMMAND_PAY_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_HAS_VAL =
+            true;
+    public static final boolean COMMAND_PAY_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_IS_MAND =
+            true;
+    public static final String COMMAND_PAY_RECURRING_PAYMENT_ARG_DATE_TIME = "d";
+    public static final String COMMAND_PAY_RECURRING_PAYMENT_ARG_DATE_TIME_LONG = "datetime";
+    public static final String COMMAND_PAY_RECURRING_PAYMENT_ARG_DATE_TIME_DESC = "Date & time";
+    public static final boolean COMMAND_PAY_RECURRING_PAYMENT_ARG_DATE_TIME_HAS_VAL = true;
+    public static final boolean COMMAND_PAY_RECURRING_PAYMENT_ARG_DATE_TIME_IS_MAND = false;
+    public static final String COMMAND_PAY_RECURRING_PAYMENT_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS = ""
+            + "Command Pay-RecurringPayment does not have all of the required options.";
+    //endregion
+
+    //@@author LokQiJun
+    //region Defines parameters for console command Merge-file
+    public static final String COMMAND_MERGE_FILE = ""
             + "Merge-File";
-    public static final String COMMAND_MERGE_EXTERNAL_FILE_ARG_MERGE_EXTERNAL_FILE_PATH = ""
+    public static final String COMMAND_MERGE_FILE_ARG_MERGE_FILE_PATH = ""
             + "p";
-    public static final String COMMAND_MERGE_EXTERNAL_FILE_ARG_MERGE_EXTERNAL_FILE_PATH_LONG = ""
+    public static final String COMMAND_MERGE_FILE_ARG_MERGE_FILE_PATH_LONG = ""
             + "path-string";
     public static final String COMMAND_MERGE_EXTERNAL_FILE_ARG_MERGE_EXTERNAL_FILE_PATH_DESC = ""
             + "File Path";
@@ -531,6 +572,9 @@ public class ConsoleParserConfigurations {
             true;
     public static final String COMMAND_MERGE_EXTERNAL_FILE_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS = ""
             + "Command Merge-file does not have all of the required options.";
+    //endregion
+
+    //@@author xzynos
 
     /**
      * Generates an {@link Options} object with required arguments for command Add-Expense.
@@ -608,6 +652,8 @@ public class ConsoleParserConfigurations {
         return options;
     }
 
+    //@@author xzynos
+
     /**
      * Generates an {@link Options} object with required arguments for command View-Expense.
      *
@@ -628,13 +674,23 @@ public class ConsoleParserConfigurations {
                 COMMAND_VIEW_EXPENSE_ARG_EXPENSE_CATEGORY_DESC
         );
         optionExpenseCategory.setRequired(COMMAND_VIEW_EXPENSE_ARG_EXPENSE_CATEGORY_IS_MAND);
+        Option optionExpenseName = new Option(
+                COMMAND_VIEW_EXPENSE_ARG_EXPENSE_NAME,
+                COMMAND_VIEW_EXPENSE_ARG_EXPENSE_NAME_LONG,
+                COMMAND_VIEW_EXPENSE_ARG_EXPENSE_NAME_HAS_VAL,
+                COMMAND_VIEW_EXPENSE_ARG_EXPENSE_NAME_DESC
+        );
+        optionExpenseName.setRequired(COMMAND_VIEW_EXPENSE_ARG_EXPENSE_NAME_IS_MAND);
 
         Options options = new Options();
         options.addOption(optionExpenseIndex);
         options.addOption(optionExpenseCategory);
+        options.addOption(optionExpenseName);
 
         return options;
     }
+
+    //@@author xzynos
 
     /**
      * Generates an {@link Options} object with required arguments for command Delete-Expense.
@@ -655,6 +711,8 @@ public class ConsoleParserConfigurations {
 
         return options;
     }
+
+    //@@author xzynos
 
     /**
      * Generates an {@link Options} object with required arguments for command Edit-Expense.
@@ -740,6 +798,8 @@ public class ConsoleParserConfigurations {
         return options;
     }
 
+    //@@author jeyvia
+
     /**
      * Generates an {@link Options} object with required arguments for command Sort-Expense.
      *
@@ -767,6 +827,8 @@ public class ConsoleParserConfigurations {
 
         return options;
     }
+
+    //@@author jeyvia
 
     /**
      * Generates an {@link Options} object with required arguments for command Change-Currency.
@@ -803,6 +865,8 @@ public class ConsoleParserConfigurations {
 
         return options;
     }
+
+    //@@author penguin-s
 
     /**
      * Generates an {@link Options} object with required arguments for command Add-Target.
@@ -856,6 +920,8 @@ public class ConsoleParserConfigurations {
         return options;
     }
 
+    //@@author penguin-s
+
     /**
      * Generates an {@link Options} object with required arguments for command View-Target.
      *
@@ -876,6 +942,8 @@ public class ConsoleParserConfigurations {
         return options;
     }
 
+    //@@author penguin-s
+
     /**
      * Generates an {@link Options} object with required arguments for command Delete-Target.
      *
@@ -895,6 +963,8 @@ public class ConsoleParserConfigurations {
 
         return options;
     }
+
+    //@@author penguin-s
 
     /**
      * Generates an {@link Options} object with required arguments for command Edit-Target.
@@ -955,6 +1025,8 @@ public class ConsoleParserConfigurations {
         return options;
     }
 
+    //@@author penguin-s
+
     /**
      * Generates an {@link Options} object with required arguments for command Add-Income.
      *
@@ -999,6 +1071,8 @@ public class ConsoleParserConfigurations {
         return options;
     }
 
+    //@@author penguin-s
+
     /**
      * Generates an {@link Options} object with required arguments for command View-Income.
      *
@@ -1019,6 +1093,8 @@ public class ConsoleParserConfigurations {
         return options;
     }
 
+    //@@author penguin-s
+
     /**
      * Generates an {@link Options} object with required arguments for command Delete-Income.
      *
@@ -1038,6 +1114,8 @@ public class ConsoleParserConfigurations {
 
         return options;
     }
+
+    //@@author penguin-s
 
     /**
      * Generates an {@link Options} object with required arguments for command Edit-Income.
@@ -1090,6 +1168,8 @@ public class ConsoleParserConfigurations {
         return options;
     }
 
+    //@@author xzynos
+
     /**
      * Generates an {@link Options} object with required arguments for command Add-RecurringPayment.
      *
@@ -1138,6 +1218,13 @@ public class ConsoleParserConfigurations {
                 COMMAND_ADD_RECURRING_PAYMENT_ARG_CURRENCY_DESC
         );
         optionCurrency.setRequired(COMMAND_ADD_RECURRING_PAYMENT_ARG_CURRENCY_IS_MAND);
+        Option optionModeOfPayment = new Option(
+                COMMAND_ADD_RECURRING_PAYMENT_ARG_MODE_OF_PAYMENT,
+                COMMAND_ADD_RECURRING_PAYMENT_ARG_MODE_OF_PAYMENT_LONG,
+                COMMAND_ADD_RECURRING_PAYMENT_ARG_MODE_OF_PAYMENT_HAS_VAL,
+                COMMAND_ADD_RECURRING_PAYMENT_ARG_MODE_OF_PAYMENT_DESC
+        );
+        optionModeOfPayment.setRequired(COMMAND_ADD_RECURRING_PAYMENT_ARG_MODE_OF_PAYMENT_IS_MAND);
 
         Options options = new Options();
         options.addOption(optionName);
@@ -1146,9 +1233,12 @@ public class ConsoleParserConfigurations {
         options.addOption(optionDescription);
         options.addOption(optionCategory);
         options.addOption(optionCurrency);
+        options.addOption(optionModeOfPayment);
 
         return options;
     }
+
+    //@@author xzynos
 
     /**
      * Generates an {@link Options} object with required arguments for command View-RecurringPayment.
@@ -1170,6 +1260,8 @@ public class ConsoleParserConfigurations {
         return options;
     }
 
+    //@@author xzynos
+
     /**
      * Generates an {@link Options} object with required arguments for command Delete-RecurringPayment.
      *
@@ -1189,6 +1281,8 @@ public class ConsoleParserConfigurations {
 
         return options;
     }
+
+    //@@author xzynos
 
     /**
      * Generates an {@link Options} object with required arguments for command Edit-RecurringPayment.
@@ -1245,6 +1339,13 @@ public class ConsoleParserConfigurations {
                 COMMAND_EDIT_RECURRING_PAYMENT_ARG_CURRENCY_DESC
         );
         optionCurrency.setRequired(COMMAND_EDIT_RECURRING_PAYMENT_ARG_CURRENCY_IS_MAND);
+        Option optionModeOfPayment = new Option(
+                COMMAND_EDIT_RECURRING_PAYMENT_ARG_MODE_OF_PAYMENT,
+                COMMAND_EDIT_RECURRING_PAYMENT_ARG_MODE_OF_PAYMENT_LONG,
+                COMMAND_EDIT_RECURRING_PAYMENT_ARG_MODE_OF_PAYMENT_HAS_VAL,
+                COMMAND_EDIT_RECURRING_PAYMENT_ARG_MODE_OF_PAYMENT_DESC
+        );
+        optionModeOfPayment.setRequired(COMMAND_EDIT_RECURRING_PAYMENT_ARG_MODE_OF_PAYMENT_IS_MAND);
 
         Options options = new Options();
         options.addOption(optionRecurringPaymentIndex);
@@ -1254,9 +1355,42 @@ public class ConsoleParserConfigurations {
         options.addOption(optionAmount);
         options.addOption(optionCategory);
         options.addOption(optionCurrency);
+        options.addOption(optionModeOfPayment);
 
         return options;
     }
+
+    //@@author xzynos
+
+    /**
+     * Generates an {@link Options} object with required arguments for command Delete-RecurringPayment.
+     *
+     * @return {@link Options} object initialized with the required arguments.
+     */
+    public static Options getCommandPayRecurringPaymentOptions() {
+        Option optionRecurringPaymentIndex = new Option(
+                COMMAND_PAY_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX,
+                COMMAND_PAY_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_LONG,
+                COMMAND_PAY_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_HAS_VAL,
+                COMMAND_PAY_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_DESC
+        );
+        optionRecurringPaymentIndex.setRequired(COMMAND_PAY_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_IS_MAND);
+        Option optionDateTime = new Option(
+                COMMAND_PAY_RECURRING_PAYMENT_ARG_DATE_TIME,
+                COMMAND_PAY_RECURRING_PAYMENT_ARG_DATE_TIME_LONG,
+                COMMAND_PAY_RECURRING_PAYMENT_ARG_DATE_TIME_HAS_VAL,
+                COMMAND_PAY_RECURRING_PAYMENT_ARG_DATE_TIME_DESC
+        );
+        optionDateTime.setRequired(COMMAND_PAY_RECURRING_PAYMENT_ARG_DATE_TIME_IS_MAND);
+
+        Options options = new Options();
+        options.addOption(optionRecurringPaymentIndex);
+        options.addOption(optionDateTime);
+
+        return options;
+    }
+
+    //@@author LokQiJun
 
     /**
      * Generates an {@link Options} object with required arguments for command Merge-File.
@@ -1265,8 +1399,8 @@ public class ConsoleParserConfigurations {
      */
     public static Options getCommandMergeExternalFileOptions() {
         Option optionMergeFilePath = new Option(
-                COMMAND_MERGE_EXTERNAL_FILE_ARG_MERGE_EXTERNAL_FILE_PATH,
-                COMMAND_MERGE_EXTERNAL_FILE_ARG_MERGE_EXTERNAL_FILE_PATH_LONG,
+                COMMAND_MERGE_FILE_ARG_MERGE_FILE_PATH,
+                COMMAND_MERGE_FILE_ARG_MERGE_FILE_PATH_LONG,
                 COMMAND_MERGE_EXTERNAL_FILE_ARG_MERGE_EXTERNAL_FILE_PATH_HAS_VAL,
                 COMMAND_MERGE_EXTERNAL_FILE_ARG_MERGE_EXTERNAL_FILE_PATH_DESC
         );

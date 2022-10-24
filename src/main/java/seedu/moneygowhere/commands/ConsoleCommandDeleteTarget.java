@@ -1,7 +1,9 @@
 package seedu.moneygowhere.commands;
 
+//@@author penguin-s
+
 /**
- * Stores the delete-target command and its arguments.
+ * Stores the command Delete-Target and its arguments.
  */
 @SuppressWarnings("FieldMayBeFinal")
 public class ConsoleCommandDeleteTarget extends ConsoleCommand {
