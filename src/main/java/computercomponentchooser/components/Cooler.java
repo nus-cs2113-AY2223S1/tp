@@ -37,10 +37,10 @@ public class Cooler extends Component {
     public Cooler(String name, String price, String power, String socket, String fanSpeed, String noiseLevel)
             throws NegativeNumberException, NumberFormatException {
         double priceDouble = Double.parseDouble(price);
-        double powerDouble = Double.parseDouble(power);
-        double fanSpeedDouble = Double.parseDouble(fanSpeed);
+        int powerInt = Integer.parseInt(power);
+        int fanSpeedInt = Integer.parseInt(fanSpeed);
         double noiseLevelDouble = Double.parseDouble(noiseLevel);
-        if (priceDouble < 0 || powerDouble < 0 || fanSpeedDouble < 0 || noiseLevelDouble < 0) {
+        if (priceDouble < 0 || powerInt < 0 || fanSpeedInt < 0 || noiseLevelDouble < 0) {
             throw new NegativeNumberException();
         }
         this.name = name;

@@ -1,5 +1,7 @@
 package computercomponentchooser.components;
 
+import computercomponentchooser.exceptions.NegativeNumberException;
+
 /**
  * Represents the drive in the computer build.
  */
@@ -23,8 +25,17 @@ public class Drive extends Component {
      * @param power the power consumption of the drive
      * @param size the size of the drive
      * @param driveType the type of the drive
+     * @throws NumberFormatException If the user input is not a number.
+     * @throws NegativeNumberException If the user input is a negative number.
      */
-    public Drive(String name, String price, String power, String size, String driveType) {
+    public Drive(String name, String price, String power, String size, String driveType) throws NegativeNumberException,
+            NumberFormatException {
+        double priceDouble = Double.parseDouble(price);
+        int powerInt = Integer.parseInt(power);
+        double sizeDouble = Double.parseDouble(size);
+        if (priceDouble < 0 || powerInt < 0 || sizeDouble < 0) {
+            throw new NegativeNumberException();
+        }
         this.name = name;
         this.price = price;
         this.size = size;

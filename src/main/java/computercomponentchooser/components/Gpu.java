@@ -1,5 +1,7 @@
 package computercomponentchooser.components;
 
+import computercomponentchooser.exceptions.NegativeNumberException;
+
 /**
  * Represents the GPU in the computer build.
  */
@@ -28,8 +30,18 @@ public class Gpu extends Component {
      * @param power the power consumption of the GPU
      * @param memory the VRAM of the GPU
      * @param clock the clock speed of the GPU
+     * @throws NumberFormatException If the user input is not a number.
+     * @throws NegativeNumberException If the user input is a negative number.
      */
-    public Gpu(String name, String price, String power, String memory, String clock) {
+    public Gpu(String name, String price, String power, String memory, String clock) throws NegativeNumberException,
+            NumberFormatException {
+        double priceDouble = Double.parseDouble(price);
+        int powerInt = Integer.parseInt(power);
+        int memoryInt = Integer.parseInt(memory);
+        int clockInt = Integer.parseInt(clock);
+        if (priceDouble < 0 || powerInt < 0 || memoryInt < 0 || clockInt < 0) {
+            throw new NegativeNumberException();
+        }
         this.name = name;
         this.price = price;
         this.memory = memory;

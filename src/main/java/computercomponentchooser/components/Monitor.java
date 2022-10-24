@@ -1,5 +1,7 @@
 package computercomponentchooser.components;
 
+import computercomponentchooser.exceptions.NegativeNumberException;
+
 /**
  * Represents the monitor of the computer build.
  */
@@ -31,7 +33,16 @@ public class Monitor extends Component {
      * @param resolution the resolution of the monitor
      */
     public Monitor(String name, String price, String power, String refreshRate, String responseTime,
-                   String resolution) {
+                   String resolution) throws NegativeNumberException, NumberFormatException {
+        double priceDouble = Double.parseDouble(price);
+        int powerInt = Integer.parseInt(power);
+        int refreshRateInt = Integer.parseInt(refreshRate);
+        int responseTimeInt = Integer.parseInt(responseTime);
+        int resolutionInt = Integer.parseInt(resolution);
+        if (priceDouble < 0 || powerInt < 0 || refreshRateInt < 0 || responseTimeInt < 0
+                || resolutionInt < 0) {
+            throw new NegativeNumberException();
+        }
         this.name = name;
         this.price = price;
         this.power = power;

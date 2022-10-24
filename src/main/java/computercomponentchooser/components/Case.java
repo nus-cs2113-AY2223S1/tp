@@ -30,9 +30,9 @@ public class Case extends Component {
     public Case(String name, String price, String power, String formFactor, String expansionSlots)
             throws NegativeNumberException, NumberFormatException {
         double priceDouble = Double.parseDouble(price);
-        double powerDouble = Double.parseDouble(power);
+        int powerInt = Integer.parseInt(power);
         int expansionSlotsInt = Integer.parseInt(expansionSlots);
-        if (priceDouble < 0 || powerDouble < 0 || expansionSlotsInt < 0) {
+        if (priceDouble < 0 || powerInt < 0 || expansionSlotsInt < 0) {
             throw new NegativeNumberException();
         }
         this.name = name;

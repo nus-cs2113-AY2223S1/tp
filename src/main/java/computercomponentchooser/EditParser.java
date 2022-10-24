@@ -183,7 +183,7 @@ public class EditParser {
             Ui.printLine();
         } catch (NumberFormatException e) {
             Ui.printLine();
-            System.out.println("Please input numbers.");
+            System.out.println("Please input the numbers correctly.");
             Ui.printLine();
         } catch (NegativeNumberException e) {
             Ui.printLine();
@@ -201,8 +201,11 @@ public class EditParser {
      * @param name The name of the component to be added.
      * @param price The price of the component to be added.
      * @param power The power consumption of the component to be added.
+     * @throws NumberFormatException If the user input is not a number.
+     * @throws NegativeNumberException If the user input is a negative number.
      */
-    public void parseAddCpu(Build editBuild, String line, String type, String name, String price, String power) {
+    public void parseAddCpu(Build editBuild, String line, String type, String name, String price, String power)
+            throws NegativeNumberException, NumberFormatException {
         Cpu cpu = new Cpu(name, price, power, getParameter(line, 5), getParameter(line, 6));
         editBuild.addComponent(type, cpu);
     }
@@ -216,8 +219,11 @@ public class EditParser {
      * @param name The name of the component to be added.
      * @param price The price of the component to be added.
      * @param power The power consumption of the component to be added.
+     * @throws NumberFormatException If the user input is not a number.
+     * @throws NegativeNumberException If the user input is a negative number.
      */
-    public void parseAddMemory(Build editBuild, String line, String type, String name, String price, String power) {
+    public void parseAddMemory(Build editBuild, String line, String type, String name, String price, String power)
+            throws NegativeNumberException, NumberFormatException {
         Memory memory = new Memory(name, price, power, getParameter(line, 5),
                 getParameter(line, 6));
         editBuild.addComponent(type, memory);
@@ -232,9 +238,11 @@ public class EditParser {
      * @param name The name of the component to be added.
      * @param price The price of the component to be added.
      * @param power The power consumption of the component to be added.
+     * @throws NumberFormatException If the user input is not a number.
+     * @throws NegativeNumberException If the user input is a negative number.
      */
     public void parseAddMotherboard(Build editBuild, String line, String type, String name, String price,
-                                    String power) {
+                                    String power) throws NegativeNumberException, NumberFormatException {
         Motherboard motherboard = new Motherboard(name, price, power, getParameter(line, 5),
                 getParameter(line, 6), getParameter(line, 7), getParameter(line, 8));
         editBuild.addComponent(type, motherboard);
@@ -248,9 +256,11 @@ public class EditParser {
      * @param name The name of the component to be added.
      * @param price The price of the component to be added.
      * @param power The power provided by the power supply to be added.
+     * @throws NumberFormatException If the user input is not a number.
+     * @throws NegativeNumberException If the user input is a negative number.
      */
-    public void parseAddPowerSupply(Build editBuild, String type, String name, String price,
-                                    String power) {
+    public void parseAddPowerSupply(Build editBuild, String type, String name, String price, String power) throws
+            NegativeNumberException, NumberFormatException {
         PowerSupply powersupply = new PowerSupply(name, price, power);
         editBuild.addComponent(type, powersupply);
     }
@@ -264,8 +274,11 @@ public class EditParser {
      * @param name The name of the component to be added.
      * @param price The price of the component to be added.
      * @param power The power consumption of the component to be added.
+     * @throws NumberFormatException If the user input is not a number.
+     * @throws NegativeNumberException If the user input is a negative number.
      */
-    public void parseAddGpu(Build editBuild, String line, String type, String name, String price, String power) {
+    public void parseAddGpu(Build editBuild, String line, String type, String name, String price, String power)
+            throws NegativeNumberException, NumberFormatException {
         Gpu gpu = new Gpu(name, price, power, getParameter(line, 5),
                 getParameter(line, 6));
         editBuild.addComponent(type, gpu);
@@ -280,8 +293,11 @@ public class EditParser {
      * @param name The name of the component to be added.
      * @param price The price of the component to be added.
      * @param power The power consumption of the component to be added.
+     * @throws NumberFormatException If the user input is not a number.
+     * @throws NegativeNumberException If the user input is a negative number.
      */
-    public void parseAddDrive(Build editBuild, String line, String type, String name, String price, String power) {
+    public void parseAddDrive(Build editBuild, String line, String type, String name, String price, String power)
+            throws NegativeNumberException, NumberFormatException {
         Drive drive = new Drive(name, price, power, getParameter(line, 5),
                 getParameter(line, 6));
         editBuild.addComponent(type, drive);
@@ -296,8 +312,11 @@ public class EditParser {
      * @param name The name of the component to be added.
      * @param price The price of the component to be added.
      * @param power The power consumption of the component to be added.
+     * @throws NumberFormatException If the user input is not a number.
+     * @throws NegativeNumberException If the user input is a negative number.
      */
-    public void parseAddMonitor(Build editBuild, String line, String type, String name, String price, String power) {
+    public void parseAddMonitor(Build editBuild, String line, String type, String name, String price, String power)
+            throws NegativeNumberException, NumberFormatException {
         Monitor monitor = new Monitor(name, price, power, getParameter(line, 5),
                 getParameter(line, 6), getParameter(line, 7));
         editBuild.addComponent(type, monitor);
@@ -312,8 +331,8 @@ public class EditParser {
      * @param name The name of the component to be added.
      * @param price The price of the component to be added.
      * @param power The power consumption of the component to be added.
-     * @throws NegativeNumberException If the user inputs a negative number.
-     * @throws NumberFormatException If the user inputs a non-integer.
+     * @throws NumberFormatException If the user input is not a number.
+     * @throws NegativeNumberException If the user input is a negative number.
      */
     public void parseAddCooler(Build editBuild, String line, String type, String name, String price, String power)
             throws NegativeNumberException, NumberFormatException {
@@ -331,8 +350,8 @@ public class EditParser {
      * @param name The name of the component to be added.
      * @param price The price of the component to be added.
      * @param power The power consumption of the component to be added.
-     * @throws NegativeNumberException If the user inputs a negative number.
-     * @throws NumberFormatException If the user inputs a non-integer.
+     * @throws NumberFormatException If the user input is not a number.
+     * @throws NegativeNumberException If the user input is a negative number.
      */
     public void parseAddCase(Build editBuild, String line, String type, String name, String price, String power)
             throws NegativeNumberException, NumberFormatException {
@@ -350,8 +369,11 @@ public class EditParser {
      * @param name The name of the component to be added.
      * @param price The price of the component to be added.
      * @param power The power consumption of the component to be added.
+     * @throws NumberFormatException If the user input is not a number.
+     * @throws NegativeNumberException If the user input is a negative number.
      */
-    public void parseAddOther(Build editBuild, String type, String name, String price, String power) {
+    public void parseAddOther(Build editBuild, String type, String name, String price, String power) throws
+            NegativeNumberException, NumberFormatException {
         Other other = new Other(name, price, power);
         editBuild.addComponent(type, other);
     }

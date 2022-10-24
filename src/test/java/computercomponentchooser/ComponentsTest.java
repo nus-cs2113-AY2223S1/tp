@@ -3,6 +3,7 @@ package computercomponentchooser;
 import computercomponentchooser.components.Cpu;
 import computercomponentchooser.components.Gpu;
 import computercomponentchooser.components.Motherboard;
+import computercomponentchooser.exceptions.NegativeNumberException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,9 +18,13 @@ public class ComponentsTest {
 
     @BeforeEach
     public void setUp() {
-        cpu1 = new Cpu("cpu1", "123", "12", "1", "4.0");
-        gpu1 = new Gpu("gpu1", "456", "45", "4","5");
-        mobo1 = new Motherboard("mobo1", "123", "12", "1", "Full ATX", "2", "2");
+        try {
+            cpu1 = new Cpu("cpu1", "123", "12", "1", "4.0");
+            gpu1 = new Gpu("gpu1", "456", "45", "4", "5");
+            mobo1 = new Motherboard("mobo1", "123", "12", "1", "Full ATX", "2", "2");
+        } catch (NumberFormatException | NegativeNumberException e) {
+            System.out.println("Error in setUp");
+        }
     }
 
     @Test
