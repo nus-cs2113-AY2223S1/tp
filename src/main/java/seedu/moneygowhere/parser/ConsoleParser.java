@@ -2203,7 +2203,9 @@ public class ConsoleParser {
                 && options.hasLongOption(
                 ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_CATEGORY_LONG)
                 && options.hasLongOption(
-                ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_CURRENCY_LONG);
+                ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_CURRENCY_LONG)
+                && options.hasLongOption(
+                ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_MODE_OF_PAYMENT_LONG);
 
         assert hasAllCliOptions :
                 ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS;
@@ -2309,6 +2311,15 @@ public class ConsoleParser {
                 );
 
                 consoleCommandEditRecurringPayment.setCurrency(currency);
+            }
+            if (commandLine.hasOption(
+                    ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_MODE_OF_PAYMENT_LONG
+            )) {
+                String modeOfPayment = commandLine.getOptionValue(
+                        ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_MODE_OF_PAYMENT_LONG
+                );
+
+                consoleCommandEditRecurringPayment.setModeOfPayment(modeOfPayment);
             }
 
             return consoleCommandEditRecurringPayment;
