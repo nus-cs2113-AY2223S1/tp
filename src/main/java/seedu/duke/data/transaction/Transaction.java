@@ -5,7 +5,10 @@ import java.time.format.DateTimeFormatter;
 
 import static seedu.duke.common.DateFormats.DATE_OUTPUT_PATTERN;
 
-public class Transaction {
+/**
+ * Represents a transaction made by the user, which could be either an income or an expense.
+ */
+public abstract class Transaction {
     //@@author chydarren
     private static final String PREFIX_CATEGORY = "[";
     private static final String POSTFIX_CATEGORY = "]";
@@ -27,9 +30,7 @@ public class Transaction {
         this.date = date;
     }
 
-    public String getType() {
-        return null;
-    }
+    public abstract String getType();
 
     public String getDescription() {
         return description;
@@ -59,7 +60,17 @@ public class Transaction {
         return date;
     }
 
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
     //@@author wcwy
+
+    /**
+     * Returns the date of transaction in MMM dd yyyy format.
+     *
+     * @return Formatted date of the transaction
+     */
     public String printFormattedDate() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_OUTPUT_PATTERN.toString());
         return date.format(formatter);

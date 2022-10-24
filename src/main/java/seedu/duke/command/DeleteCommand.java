@@ -1,9 +1,10 @@
 package seedu.duke.command;
 
+//@@author brian-vb
 import seedu.duke.Storage;
 import seedu.duke.Ui;
 import seedu.duke.data.TransactionList;
-import seedu.duke.exception.InvalidIndexException;
+import seedu.duke.exception.GlobalInvalidIndexException;
 import seedu.duke.exception.MoolahException;
 import seedu.duke.exception.StorageWriteErrorException;
 
@@ -11,13 +12,14 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static seedu.duke.command.CommandTag.COMMAND_TAG_LIST_ENTRY_NUMBER;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_GLOBAL_ENTRY_NUMBER;
 import static seedu.duke.common.InfoMessages.INFO_DELETE;
 
 /**
  * Represents a delete command object that will execute the operations for Delete command.
  */
 public class DeleteCommand extends Command {
+    //@@author brian-vb
     private static final String LINE_SEPARATOR = System.lineSeparator();
     // The command word used to trigger the execution of Moolah Manager's operations
     public static final String COMMAND_WORD = "DELETE";
@@ -56,7 +58,7 @@ public class DeleteCommand extends Command {
     @Override
     public String[] getMandatoryTags() {
         // The mandatory tags that must exist in the user input
-        String[] mandatoryTags = new String[]{COMMAND_TAG_LIST_ENTRY_NUMBER};
+        String[] mandatoryTags = new String[]{COMMAND_TAG_GLOBAL_ENTRY_NUMBER};
 
         return mandatoryTags;
     }
@@ -74,7 +76,7 @@ public class DeleteCommand extends Command {
      * @param ui           An instance of the Ui class.
      * @param transactions An instance of the TransactionList class.
      * @param storage      An instance of the Storage class.
-     * @throws InvalidIndexException If the index inputted is invalid.
+     * @throws GlobalInvalidIndexException If the index inputted is invalid.
      */
     @Override
     public void execute(TransactionList transactions, Ui ui, Storage storage) throws MoolahException {
@@ -83,7 +85,7 @@ public class DeleteCommand extends Command {
         before adding entry to arraylist
         */
         try {
-            deleteLogger.setLevel(Level.WARNING);
+            deleteLogger.setLevel(Level.SEVERE);
             deleteLogger.log(Level.INFO, "Delete Command checks whether the index is valid "
                     + "before executing the command.");
             boolean isInputValid = true;
@@ -95,7 +97,7 @@ public class DeleteCommand extends Command {
             }
             assert index > 0;
             if (isInputValid) {
-                String transaction = TransactionList.deleteTransaction(index);
+                String transaction = transactions.deleteTransaction(index);
                 Ui.showTransactionAction(INFO_DELETE.toString(), transaction);
                 deleteLogger.log(Level.INFO, "The requested transaction has been deleted "
                         + "and the UI should display the confirmation message respectively.");
@@ -103,7 +105,7 @@ public class DeleteCommand extends Command {
             } else {
                 deleteLogger.log(Level.WARNING, "InvalidIndexException thrown when the index "
                         + "is invalid.");
-                throw new InvalidIndexException();
+                throw new GlobalInvalidIndexException();
             }
         } catch (IOException e) {
             throw new StorageWriteErrorException();

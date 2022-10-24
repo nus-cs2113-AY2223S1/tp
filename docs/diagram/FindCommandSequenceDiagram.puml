@@ -1,0 +1,55 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+hide footbox
+
+Participant ":Duke" as Duke
+Participant ":CommandParser" as CommandParser
+Participant "command:FindCommand" as FindCommand
+Participant "transactions:TransactionList" as Transactions
+Participant "ui:Ui" as Ui
+
+-> Duke
+activate Duke
+
+Duke -> CommandParser:parse("find bus_fare")
+activate CommandParser
+
+CommandParser -> CommandParser:splitInput("find bus_fare")
+activate CommandParser
+return inputTokens: String[]
+
+CommandParser -> CommandParser:getCommand(commandWordInput: String, parameterInput: String)
+activate CommandParser
+
+create FindCommand
+CommandParser -> FindCommand
+activate FindCommand
+return
+
+return command: FindCommand
+
+return command: FindCommand
+deactivate CommandParser
+
+Duke -> FindCommand:execute(transactions: TransactionList, ui: Ui, storage: Storage)
+activate FindCommand
+
+ref over FindCommand
+    checkFindFormat(keywords: String)
+end ref
+
+FindCommand -> Transactions:findTransactions(keywords: String)
+activate Transactions
+return transactionsList: String
+
+alt transactionsList is empty
+    FindCommand -> Ui:showInfoMessage(message: String)
+    activate Ui
+else else
+    FindCommand -> Ui:showTransactionsList(transactionsList: String, listMessage: String)
+end
+
+return
+
+return
+@enduml

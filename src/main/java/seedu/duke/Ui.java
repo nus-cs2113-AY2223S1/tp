@@ -1,12 +1,16 @@
 package seedu.duke;
 
+import seedu.duke.data.Budget;
+
+import java.util.Scanner;
+
+import static seedu.duke.common.InfoMessages.INFO_CURRENT_BUDGET;
 import static seedu.duke.common.InfoMessages.INFO_DIVIDER;
-import static seedu.duke.common.InfoMessages.INFO_EXIT;
 import static seedu.duke.common.InfoMessages.INFO_GREET;
 import static seedu.duke.common.InfoMessages.INFO_HELP_GREET;
 import static seedu.duke.common.InfoMessages.INFO_HELP_PROMPT;
-
-import java.util.Scanner;
+import static seedu.duke.common.InfoMessages.INFO_REMAINING_BUDGET;
+import static seedu.duke.common.InfoMessages.INFO_BUDGET_SET_SUCCESSFUL;
 
 public class Ui {
     //@@author chydarren
@@ -28,6 +32,7 @@ public class Ui {
     }
 
     //@@author paullowse
+
     /**
      * Initialises the variables of the Ui class.
      */
@@ -46,68 +51,99 @@ public class Ui {
     }
 
     //@@author chydarren
+
     /**
      * Prepares the error message to be displayed to the user.
      *
-     * @param errorMessage An error message when an exception is handled by the program.
+     * @param message An error message when an exception is handled by the program.
      */
-    public static void showErrorMessage(String errorMessage) {
-        printMessages(errorMessage);
+    public static void showErrorMessage(String message) {
+        printMessages(message);
     }
 
     /**
      * Prepares the information message to be displayed to the user.
      *
-     * @param infoMessage An information message that describes the functionality of the program.
+     * @param message An information message that describes the functionality of the program.
      */
-    public static void showInfoMessage(String infoMessage) {
-        printMessages(infoMessage);
+    public static void showInfoMessage(String message) {
+        printMessages(message);
     }
 
     /**
      * Prepares the greeting messages to be displayed to the user.
      */
     public static void showGreeting() {
-        printMessages(INFO_GREET.toString(), INFO_HELP_PROMPT.toString());
+        printMessages(INFO_GREET.toString(), INFO_CURRENT_BUDGET.toString() + Budget.getBudget(),
+                INFO_HELP_PROMPT.toString()
+        );
     }
 
     //@@author chinhan99
+
     /**
      * Prepares the help messages to be displayed to the user.
      *
-     * @param helpMessage   A help message that specifies the details of how to use the program.
+     * @param message A message that specifies the details of how to use the program.
      */
-    public static void showHelp(String helpMessage) {
-        printMessages(INFO_HELP_GREET.toString(), helpMessage);
+    public static void showHelp(String message) {
+        printMessages(INFO_HELP_GREET.toString(), message);
     }
 
     //@@author chydarren
+
     /**
-     * Prepares the exit message to be displayed to the user.
+     * Prepares the transaction list messages to be displayed to the user.
+     *
+     * @param list    A string containing the formatted transaction list.
+     * @param message A message that complements with the transactions list.
      */
-    public static void showExit() {
-        printMessages(INFO_EXIT.toString());
+    public static void showList(String list, String message) {
+        printMessages(message, list);
     }
+
+    //@@author paullowse
+
+    /**
+     * Prepares the stats list messages to be displayed to the user.
+     *
+     * @param list    A string containing the formatted transaction list.
+     * @param message A message that complements with the transactions list.
+     */
+    public static void showStatsList(String list, String message, String incomeMessage,
+                                    String expenseMessage, String savingsMessage) {
+        printMessages(message, list, incomeMessage, expenseMessage, savingsMessage);
+    }
+
+    //@@author chydarren
 
     /**
      * Prepares the messages to be displayed to the user when add or delete has been performed on
      * the transaction list.
      *
-     * @param infoMessage           An information message that describes the functionality of
-     *                              the program.
-     * @param transactionDetails    Details of the action that has been performed on the transaction.
+     * @param message            A message that describes the functionality of the program.
+     * @param transactionDetails Details of the action that has been performed on the transaction.
+     * @param budgetInfo         A message that contains the monthly budget information.
      */
-    public static void showTransactionAction(String infoMessage, String transactionDetails) {
-        printMessages(infoMessage, transactionDetails);
+    public static void showTransactionAction(String message, String transactionDetails, String budgetInfo) {
+        printMessages(message, transactionDetails, INFO_REMAINING_BUDGET + budgetInfo);
     }
 
-    /**
-     * Prepares the transaction list messages to be displayed to the user.
-     *
-     * @param transactionsList A string containing the formatted transaction list.
-     * @param listMessage      A list message that complements with the transactions list.
-     */
-    public static void showTransactionsList(String transactionsList, String listMessage) {
-        printMessages(listMessage, transactionsList);
+    // A temporary overload method for backward-compatibility for delete command
+    public static void showTransactionAction(String message, String transactionDetails) {
+        printMessages(message, transactionDetails);
     }
+
+    //@author wcwy
+
+    /**
+     * Prepares the messages to be displayed to the user when a new budget is set.
+     *
+     * @param currentBudget The string representation of the new budget set.
+     */
+    public static void showSetBudgetAcknowledgementMessage(String currentBudget) {
+        printMessages(INFO_BUDGET_SET_SUCCESSFUL.toString(), INFO_CURRENT_BUDGET + currentBudget);
+    }
+
+
 }

@@ -1,8 +1,12 @@
 package seedu.duke.exception;
 
+//@@author wcwy
 import seedu.duke.common.ErrorMessages;
 
-public class EntryNumberNotNumericException extends MoolahException {
+/**
+ * Represents the exception where the budget value provided by the user is not a valid acceptable value.
+ */
+public class InputBudgetInvalidAmountException extends MoolahException {
     /**
      * Returns the error message of the exception to alert user of the exception.
      *
@@ -10,6 +14,7 @@ public class EntryNumberNotNumericException extends MoolahException {
      */
     @Override
     public String getMessage() {
-        return ErrorMessages.ERROR_ENTRY_NUMBER_NOT_NUMERIC.toString();
+        return ErrorMessages.ERROR_INVALID_BUDGET.toString();
     }
+
 }

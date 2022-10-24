@@ -1,8 +1,12 @@
 package seedu.duke.exception;
 
+//@@author wcwy
 import seedu.duke.common.ErrorMessages;
 
-public class InputUnsupportedTagException extends MoolahException {
+/**
+ * Represents the exception where the budget value requested to be updated is the same as the current budget value.
+ */
+public class InputBudgetDuplicateException extends MoolahException {
     /**
      * Returns the error message of the exception to alert user of the exception.
      *
@@ -10,6 +14,7 @@ public class InputUnsupportedTagException extends MoolahException {
      */
     @Override
     public String getMessage() {
-        return ErrorMessages.ERROR_INPUT_UNSUPPORTED_TAG.toString();
+        return ErrorMessages.ERROR_DUPLICATE_BUDGET.toString();
     }
+
 }

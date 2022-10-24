@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
+//@@author brian-vb
 import seedu.duke.Storage;
 import seedu.duke.Ui;
 import seedu.duke.data.TransactionList;
@@ -19,6 +20,7 @@ import static seedu.duke.common.InfoMessages.INFO_PURGE_WARNING;
  * Represents a purge command object that will execute the operations for Purge command.
  */
 public class PurgeCommand extends Command {
+    //@@author brian-vb
     private static final String LINE_SEPARATOR = System.lineSeparator();
     // The command word used to trigger the execution of Moolah Manager's operations
     public static final String COMMAND_WORD = "PURGE";
@@ -56,7 +58,7 @@ public class PurgeCommand extends Command {
     @Override
     public void execute(TransactionList transactions, Ui ui, Storage storage) throws MoolahException {
         // Shows confirmation prompt before deleting all transactions
-        purgeLogger.setLevel(Level.WARNING);
+        purgeLogger.setLevel(Level.SEVERE);
         purgeLogger.log(Level.INFO, "Purge Command checks if there are no transactions"
                 + " to be purged. If so, the command is aborted.");
         boolean check = isEmpty(transactions);
@@ -73,7 +75,7 @@ public class PurgeCommand extends Command {
 
         if (input.equals("Y")) {
             try {
-                TransactionList.purgeTransactions();
+                transactions.purgeTransactions();
                 assert PurgeCommand.isEmpty(transactions);
                 Ui.showInfoMessage(INFO_PURGE.toString());
                 purgeLogger.log(Level.INFO, "The transactions list is now empty"

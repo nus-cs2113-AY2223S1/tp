@@ -1,18 +1,23 @@
 package seedu.duke.command;
 
+//@@author paullowse
 import seedu.duke.Storage;
 import seedu.duke.Ui;
 import seedu.duke.data.TransactionList;
-import seedu.duke.exception.InputTransactionUnknownTypeException;
+import seedu.duke.exception.GlobalMissingTagException;
+import seedu.duke.exception.InputTransactionInvalidTypeException;
 import seedu.duke.exception.MoolahException;
 
 import java.time.LocalDate;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
+//@@author chydarren
 import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_TYPE;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_CATEGORY;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_DATE;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_GLOBAL_MONTH;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_GLOBAL_YEAR;
 import static seedu.duke.common.InfoMessages.INFO_LIST;
 import static seedu.duke.common.InfoMessages.INFO_LIST_EMPTY;
 
@@ -20,20 +25,28 @@ import static seedu.duke.common.InfoMessages.INFO_LIST_EMPTY;
  * Represents a list command object that will execute the operations for List command.
  */
 public class ListCommand extends Command {
+    //@@author chydarren
     private static final String LINE_SEPARATOR = System.lineSeparator();
     // The command word used to trigger the execution of Moolah Manager's operations
     public static final String COMMAND_WORD = "LIST";
     // The description for the usage of command
-    public static final String COMMAND_DESCRIPTION = "To list all or some transactions based on selection.";
+    public static final String COMMAND_DESCRIPTION = "To list all or some transactions based on selection."
+            + " Note that the tags will be joint in the filter based on the 'AND' operation.";
     // The guiding information for the usage of command
-    public static final String COMMAND_USAGE = "Usage: list [t/TYPE] [c/CATEGORY] [d/DATE]";
+    public static final String COMMAND_USAGE = "Usage: list [t/TYPE] [c/CATEGORY] [d/DATE] [m/MONTH] [y/YEAR]";
     // The formatting information for the parameters used by the command
     public static final String COMMAND_PARAMETERS_INFO = "Parameters information:"
             + LINE_SEPARATOR
             + "(Optional) TYPE - The type of transaction. Only \"income\" or \"expense\" is accepted."
             + LINE_SEPARATOR
             + "(Optional) CATEGORY: A category for the transaction. Only string containing alphabets is accepted."
-            + LINE_SEPARATOR + "(Optional) DATE: Date of the transaction. The format must be in \"yyyyMMdd\".";
+            + LINE_SEPARATOR
+            + "(Optional) DATE: Date of the transaction. The format must be in \"yyyyMMdd\"."
+            + LINE_SEPARATOR
+            + "(Optional) MONTH: Month of the transaction. Only integers within 1 to 12 are accepted. Note that"
+            + " month must be accompanied by a year."
+            + LINE_SEPARATOR
+            + "(Optional) YEAR: Year of the transaction. Only integers from 1000 onwards are accepted.";
 
     // Basic help description
     public static final String COMMAND_HELP = "Command Word: " + COMMAND_WORD + LINE_SEPARATOR
@@ -48,6 +61,8 @@ public class ListCommand extends Command {
     private String category;
     private LocalDate date;
     private String type;
+    private int month;
+    private int year;
 
     /**
      * Initialises the variables of the ListCommand class.
@@ -56,6 +71,8 @@ public class ListCommand extends Command {
         category = "";
         date = null;
         type = "";
+        month = -1;
+        year = -1;
     }
 
     /**
@@ -68,7 +85,9 @@ public class ListCommand extends Command {
         String[] optionalTags = new String[]{
             COMMAND_TAG_TRANSACTION_TYPE,
             COMMAND_TAG_TRANSACTION_CATEGORY,
-            COMMAND_TAG_TRANSACTION_DATE
+            COMMAND_TAG_TRANSACTION_DATE,
+            COMMAND_TAG_GLOBAL_MONTH,
+            COMMAND_TAG_GLOBAL_YEAR
         };
         return optionalTags;
     }
@@ -88,7 +107,18 @@ public class ListCommand extends Command {
         this.date = date;
     }
 
+    @Override
+    public void setStatsMonth(int month) {
+        this.month = month;
+    }
+
+    @Override
+    public void setStatsYear(int year) {
+        this.year = year;
+    }
+
     //@@author chydarren
+
     /**
      * Executes the operations related to the command.
      *
@@ -98,43 +128,44 @@ public class ListCommand extends Command {
      */
     @Override
     public void execute(TransactionList transactions, Ui ui, Storage storage) throws MoolahException {
-        listLogger.setLevel(Level.WARNING);
-        listLogger.log(Level.INFO, "List command starts passing the tags for filter, if any,"
-                + " into the listTransactions method.");
+        listLogger.setLevel(Level.SEVERE);
+        listLogger.log(Level.INFO, "Entering execution of the List command.");
 
-        // Passes the tags to the filter for transaction list
-        listTransactions(transactions, type, category, date);
+        listTransactions(transactions, type, category, date, month, year);
     }
 
     /**
      * List all or some transactions based on selection.
      *
-     * @param transactions  An instance of the TransactionList class.
-     * @param type          The type of transaction.
-     * @param category      A category for the transaction.
-     * @param date          Date of the transaction with format in "yyyyMMdd".
-     * @throws InputTransactionUnknownTypeException If class type cannot be found in the packages.
+     * @param transactions An instance of the TransactionList class.
+     * @param type         The type of transaction.
+     * @param category     A category for the transaction.
+     * @param date         Date of the transaction with format in "yyyyMMdd".
+     * @throws InputTransactionInvalidTypeException If class type cannot be found in the packages.
      */
-    private static void listTransactions(TransactionList transactions, String type, String category, LocalDate date)
-            throws InputTransactionUnknownTypeException {
-        listLogger.log(Level.INFO, "Listing of transactions is being processed into a"
-                + " transaction list variable.");
-        String transactionsList = transactions.listTransactions(type, category, date);
+    private static void listTransactions(TransactionList transactions, String type, String category, LocalDate date,
+                                         int month, int year)
+            throws InputTransactionInvalidTypeException, GlobalMissingTagException {
+        if (month != -1 && year == -1) {
+            listLogger.log(Level.WARNING, "An exception has been caught as a month was given without a year.");
+            throw new GlobalMissingTagException();
+        }
+
+        String transactionsList = transactions.listTransactions(type, category, date, month, year);
+
         if (transactionsList.isEmpty()) {
-            listLogger.log(Level.INFO, "Transactions list is empty, so UI should display that"
-                    + " there are no transaction records available.");
+            listLogger.log(Level.INFO, "Transactions list is empty as there are no transactions available.");
             Ui.showInfoMessage(INFO_LIST_EMPTY.toString());
-            listLogger.log(Level.INFO, "End of List command.");
             return;
         }
+
         assert !transactionsList.isEmpty();
-        listLogger.log(Level.INFO, "Transactions list is available, so UI should display the"
-                + " transaction records.");
-        Ui.showTransactionsList(transactionsList, INFO_LIST.toString());
-        listLogger.log(Level.INFO, "End of List command.");
+        listLogger.log(Level.INFO, "Transactions list is found to contain transaction records.");
+        Ui.showList(transactionsList, INFO_LIST.toString());
     }
 
     //@@author paullowse
+
     /**
      * Enables the program to exit when the Bye command is issued.
      *

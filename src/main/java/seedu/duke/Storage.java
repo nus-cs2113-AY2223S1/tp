@@ -5,7 +5,7 @@ import seedu.duke.common.DateFormats;
 import seedu.duke.data.TransactionList;
 import seedu.duke.data.transaction.Transaction;
 import seedu.duke.exception.MoolahException;
-import seedu.duke.exception.StorageInputCorruptedException;
+import seedu.duke.exception.StorageFileCorruptedException;
 import seedu.duke.exception.StorageWriteErrorException;
 import seedu.duke.parser.ParameterParser;
 
@@ -68,7 +68,7 @@ public class Storage {
      * Initializes the duke.txt by checking its existence, then store the data values to the program.
      *
      * @return The TransactionList storing entries which would be used in the program.
-     * @throws StorageInputCorruptedException If there are errors due to corrupted duke.txt data.
+     * @throws StorageFileCorruptedException If there are errors due to corrupted duke.txt data.
      * @throws StorageWriteErrorException     If the file could not be created or could not be written.
      */
     public TransactionList initializeFile() throws MoolahException {
@@ -80,7 +80,7 @@ public class Storage {
 
         } catch (MoolahException e) {
             // Catch any parsing errors and throw the default StorageInputCorruptedException
-            throw new StorageInputCorruptedException();
+            throw new StorageFileCorruptedException();
         } catch (IOException e) {
             throw new StorageWriteErrorException();
         }
@@ -103,7 +103,7 @@ public class Storage {
             String line = input.nextLine();
             String[] splits = line.split(DELIMITER);
             if (splits.length != NUMBER_OF_STORED_PARAMETERS) {
-                throw new StorageInputCorruptedException();
+                throw new StorageFileCorruptedException();
             }
 
             String type = splits[0];
@@ -134,11 +134,11 @@ public class Storage {
                     storedTransactions.addIncomeDuringStorage(description, amount, category, date);
                     break;
                 default:
-                    throw new StorageInputCorruptedException();
+                    throw new StorageFileCorruptedException();
                 }
             } catch (DateTimeParseException e) {
                 // If the date format is incorrect, which is due to corrupted date information
-                throw new StorageInputCorruptedException();
+                throw new StorageFileCorruptedException();
             }
 
         }

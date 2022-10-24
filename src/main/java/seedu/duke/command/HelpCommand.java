@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
+//@author wcwy
 import seedu.duke.Storage;
 import seedu.duke.Ui;
 import seedu.duke.data.TransactionList;
@@ -10,6 +11,7 @@ import static seedu.duke.command.CommandTag.COMMAND_TAG_HELP_OPTION;
  * Represents a help command object that will execute the operations for Help command.
  */
 public class HelpCommand extends Command {
+    //@@author wcwy
     private static final String LINE_SEPARATOR = System.lineSeparator();
     // The command word used to trigger the execution of Moolah Manager's operations
     public static final String COMMAND_WORD = "HELP";
@@ -29,7 +31,7 @@ public class HelpCommand extends Command {
     public static final String COMMAND_HELP = "Command Word: " + COMMAND_WORD + LINE_SEPARATOR
             + COMMAND_DESCRIPTION + LINE_SEPARATOR + COMMAND_USAGE + LINE_SEPARATOR;
     // Detailed help description
-    public static final String COMMAND_DETAILED_HELP = COMMAND_HELP + COMMAND_PARAMETERS_INFO + "\n";
+    public static final String COMMAND_DETAILED_HELP = COMMAND_HELP + COMMAND_PARAMETERS_INFO + LINE_SEPARATOR;
 
     //@@author wcwy
     private boolean isDetailed;
@@ -41,6 +43,14 @@ public class HelpCommand extends Command {
         this.isDetailed = false;
     }
 
+    /**
+     * Sets a boolean value to indicate if the user chooses to display the help message in detail.
+     *
+     * <p>When the boolean isDetailed is set to true, the help command will display the detailed help messages
+     * to the user.
+     *
+     * @param isDetailed A boolean indicating if the user chooses to display the help message in detail.
+     */
     @Override
     public void setIsDetailedOption(boolean isDetailed) {
         this.isDetailed = isDetailed;
@@ -78,8 +88,14 @@ public class HelpCommand extends Command {
         Ui.showHelp(helpMessage);
     }
 
+    /**
+     * Consolidates all the basic help messages from the available commands and returns it.
+     *
+     * @return A string containing all basic help messages of valid commands.
+     */
     private String generateBasicHelp() {
         String helpMessage = HelpCommand.COMMAND_HELP + LINE_SEPARATOR
+                + BudgetCommand.COMMAND_HELP + LINE_SEPARATOR
                 + AddCommand.COMMAND_HELP + LINE_SEPARATOR
                 + ListCommand.COMMAND_HELP + LINE_SEPARATOR
                 + FindCommand.COMMAND_HELP + LINE_SEPARATOR
@@ -92,8 +108,14 @@ public class HelpCommand extends Command {
         return helpMessage;
     }
 
+    /**
+     * Consolidates all the detailed help messages from the available commands and returns it.
+     *
+     * @return A string containing all detailed help messages of valid commands.
+     */
     private String generateDetailedHelp() {
         String helpMessage = HelpCommand.COMMAND_DETAILED_HELP + LINE_SEPARATOR
+                + BudgetCommand.COMMAND_DETAILED_HELP + LINE_SEPARATOR
                 + AddCommand.COMMAND_DETAILED_HELP + LINE_SEPARATOR
                 + ListCommand.COMMAND_DETAILED_HELP + LINE_SEPARATOR
                 + FindCommand.COMMAND_DETAILED_HELP + LINE_SEPARATOR
@@ -107,6 +129,7 @@ public class HelpCommand extends Command {
     }
 
     //@@author paullowse
+
     /**
      * Enables the program to exit when the Bye command is issued.
      *

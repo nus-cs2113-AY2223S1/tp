@@ -1,0 +1,38 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+hide circle
+skinparam classAttributeIconSize 0
+
+package "UI Component" <<Rectangle>> {
+    class Ui
+}
+
+class Duke {
+    - parser:Parser
+    - transactions: TransactionList
+    - storage: Storage
+    + main()
+    + run()
+}
+
+class Ui {
+    - in: Scanner
+    - input: String
+    + printMessages(String... messages)
+    + readCommand(): String
+    + showErrorMessage(String errorMessage)
+    + showInfoMessage(String infoMessage)
+    + showGreeting()
+    + showHelp(String helpMessage)
+    + showExit()
+    + showTransactionAction(String infoMessage, String transactionDetails)
+    + showTransactionsList(String transactionsList, String listMessage)
+}
+
+package command <<Rectangle>> {
+}
+
+Duke -> Ui
+command -[dashed]left-> Ui : uses >
+@enduml

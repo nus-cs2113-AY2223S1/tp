@@ -3,6 +3,7 @@ package seedu.duke.parser;
 import seedu.duke.command.Command;
 import seedu.duke.command.AddCommand;
 import seedu.duke.command.ByeCommand;
+import seedu.duke.command.BudgetCommand;
 import seedu.duke.command.DeleteCommand;
 import seedu.duke.command.EditCommand;
 import seedu.duke.command.FindCommand;
@@ -12,7 +13,7 @@ import seedu.duke.command.ListCommand;
 import seedu.duke.command.PurgeCommand;
 
 import seedu.duke.exception.MoolahException;
-import seedu.duke.exception.InvalidCommandException;
+import seedu.duke.exception.GlobalInvalidCommandException;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,13 +28,12 @@ import java.util.logging.Logger;
  */
 public class CommandParser {
     //@@author chydarren
-    private static final String EMPTY_STRING = "";
     private static final String DELIMITER = " ";
     private static final int SPLIT_POSITION = 2;
-
     private static final Logger parserLogger = Logger.getLogger(ParameterParser.class.getName());
 
     //@@author wcwy
+
     /**
      * Parses the user input into Command class based on the command word.
      *
@@ -65,6 +65,7 @@ public class CommandParser {
     }
 
     //@@author chydarren
+
     /**
      * Splits the user input into two parts, i.e. the command word and the parameter(s).
      *
@@ -77,20 +78,22 @@ public class CommandParser {
         if (fullCommandInput.contains(DELIMITER)) {
             inputTokens = fullCommandInput.split(DELIMITER, SPLIT_POSITION);
         } else {
-            inputTokens = new String[]{fullCommandInput, EMPTY_STRING};
+            inputTokens = new String[]{fullCommandInput, ""};
         }
         return inputTokens;
     }
 
     //@@author paullowse
+
     /**
      * Creates a Command object based on the command word entered by user.
      *
      * @param commandWordInput The command word entered by user.
      * @return Command object created.
-     * @throws InvalidCommandException If the command word is not supported by the application.
+     * @throws GlobalInvalidCommandException If the command word is not supported by the application.
      */
-    public static Command getCommand(String commandWordInput, String parameterInput) throws InvalidCommandException {
+    public static Command getCommand(String commandWordInput, String parameterInput) throws
+            GlobalInvalidCommandException {
         // TODO: Remove parameter input once a solution is found for managing parameter that allows space
         Command command = null;
         switch (commandWordInput.toUpperCase()) {
@@ -118,12 +121,15 @@ public class CommandParser {
         case DeleteCommand.COMMAND_WORD:
             command = new DeleteCommand();
             break;
+        case BudgetCommand.COMMAND_WORD:
+            command = new BudgetCommand();
+            break;
         case ByeCommand.COMMAND_WORD:
             command = new ByeCommand();
             break;
         default:
             parserLogger.log(Level.WARNING, "An invalid command error is caught in this command");
-            throw new InvalidCommandException();
+            throw new GlobalInvalidCommandException();
         }
         return command;
     }
