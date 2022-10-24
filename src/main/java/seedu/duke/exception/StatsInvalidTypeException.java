@@ -3,6 +3,9 @@ package seedu.duke.exception;
 //@@author chydarren
 import seedu.duke.common.ErrorMessages;
 
+/**
+ * Represents the exception where the type given for requesting statistics is not valid.
+ */
 public class StatsInvalidTypeException extends MoolahException {
 
     /**
