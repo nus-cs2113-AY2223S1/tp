@@ -1,4 +1,6 @@
-package seedu.moneygowhere.exceptions;
+package seedu.moneygowhere.exceptions.parser;
+
+import seedu.moneygowhere.exceptions.MoneyGoWhereException;
 
 /**
  * Thrown when the command add-target is invalid.
