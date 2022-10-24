@@ -930,6 +930,9 @@ public class ConsoleInterface {
         if (consoleCommandEditRecurringPayment.isCurrencySet()) {
             recurringPayment.setCurrency(consoleCommandEditRecurringPayment.getCurrency());
         }
+        if (consoleCommandEditRecurringPayment.isModeOfPaymentSet()) {
+            recurringPayment.setModeOfPayment(consoleCommandEditRecurringPayment.getModeOfPayment());
+        }
 
         try {
             recurringPaymentManager.editRecurringPayment(recurringPaymentIndex, recurringPayment);
