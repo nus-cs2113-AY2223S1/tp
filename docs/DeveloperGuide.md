@@ -60,6 +60,12 @@ that the build is able to function properly..
 | v2.0    | user     | delete a component         | remove components that have mistakes                        |
 | v2.0    | user     | check a build              | check the compatability of all components of a build        |
 | v2.0    | user     | info                       | view the relevant information about a build                 | 
+ | v2.0    | user     | export a build             | export a build to a text file                               |
+ | v2.0    | user     | export a build             | export a build to a csv file                                |
+ | v2.0    | user     | find a build               | locate a build without having to go through the entire list |
+ | v2.0    | user     | filter builds              | find all builds that are within a certain price range       |
+| v2.0    | user     | filter builds              | find all builds that are within a certain power range       |
+| v2.0    | user     | filter builds              | find all builds that are compatible                         |
 
 ## Non-Functional Requirements
 
