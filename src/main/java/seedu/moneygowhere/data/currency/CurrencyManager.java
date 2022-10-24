@@ -3,8 +3,8 @@ package seedu.moneygowhere.data.currency;
 import seedu.moneygowhere.common.Configurations;
 import seedu.moneygowhere.common.Messages;
 import seedu.moneygowhere.data.expense.Expense;
-import seedu.moneygowhere.exceptions.CurrencyInvalidException;
-import seedu.moneygowhere.exceptions.CurrencyRatesNotFoundException;
+import seedu.moneygowhere.exceptions.data.currency.CurrencyInvalidException;
+import seedu.moneygowhere.exceptions.data.currency.CurrencyRatesNotFoundException;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

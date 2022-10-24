@@ -4,7 +4,7 @@ import seedu.moneygowhere.common.Configurations;
 import seedu.moneygowhere.common.Messages;
 import seedu.moneygowhere.data.currency.Currency;
 import seedu.moneygowhere.data.currency.CurrencyManager;
-import seedu.moneygowhere.exceptions.CurrencyLoadDataInputException;
+import seedu.moneygowhere.exceptions.data.currency.CurrencyLoadDataInputException;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
