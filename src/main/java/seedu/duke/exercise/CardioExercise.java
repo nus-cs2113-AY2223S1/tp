@@ -8,10 +8,6 @@ public class CardioExercise extends Exercise {
         this.distance = distance;
     }
 
-    public CardioExercise(String exerciseName, double distance, String date) {
-        this(exerciseName, distance, 1, date);
-    }
-
 
     @Override
     public double getDistance() {
@@ -22,7 +18,7 @@ public class CardioExercise extends Exercise {
     public String saveExercise() {
         return "cardio /" + getExerciseName() + " /" + getDistance()
                 + " /" + getRepetition() + " /" + getDate() + " /"
-                + getCaloriesBurnt() + " /" + getTime() + " | " + getTaskStatusInNumber();
+                + getTime() + " /" + getCaloriesBurnt() + " | " + getTaskStatusInNumber();
     }
 
     @Override

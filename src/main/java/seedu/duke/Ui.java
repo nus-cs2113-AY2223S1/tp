@@ -15,7 +15,7 @@ public class Ui {
 
 
     public void line() {
-        System.out.println("--------------------------------------------------------------------------");
+        System.out.println("---------------------------------------------------------------------------------");
     }
 
 
@@ -120,7 +120,7 @@ public class Ui {
             return addRightPadding("-", numberOfSpace);
         }
         return addRightPadding(Integer.toString(exercise.getCaloriesBurnt()),
-                numberOfSpace) + " | ";
+                numberOfSpace);
     }
 
     private void printFoodList(ArrayList<Food> foodArrayListList, Integer[] columnSpacingArray) {
@@ -161,7 +161,7 @@ public class Ui {
         String paddedStatus = "Status";
         String line = paddedIndex + paddedExercise + paddedWeight + paddedSets
                 + paddedRep + paddedDistance + paddedCalories + paddedDate + paddedStatus;
-        String separatorLine = "-".repeat(line.length() + 4);
+        String separatorLine = "-".repeat(line.length());
         output(separatorLine, line, separatorLine);
     }
 

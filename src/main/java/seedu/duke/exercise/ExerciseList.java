@@ -41,6 +41,7 @@ public class ExerciseList {
     }
 
     public ArrayList<Exercise> getCompletedExerciseList() {
+        sortDate(completedExerciseList);
         return completedExerciseList;
     }
 
@@ -63,6 +64,8 @@ public class ExerciseList {
 
     public void markUndone(int index) throws IllegalValueException {
         Exercise exercise = getCompletedExercise(index);
+        exercise.setTime(0);
+        exercise.setCaloriesBurnt(0);
         exercise.setDone(false);
         completedExerciseList.remove(index);
         currentExerciseList.add(exercise);

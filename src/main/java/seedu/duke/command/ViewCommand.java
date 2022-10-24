@@ -144,13 +144,8 @@ public class ViewCommand extends Command {
     private void viewExercise(String[] argumentList) throws IllegalValueException {
         handleInvalidViewExerciseCommand(argumentList);
         ArrayList<Exercise> exerciseArrayList = getExerciseArrayListByCommand(argumentList);
-        boolean isViewingCompletedExerciseList = isViewingCompletedExerciseList(argumentList);
         ui.showExerciseListCaption(exerciseArrayList.size(), argumentList, "Exercises");
         ui.outputExerciseList(exerciseArrayList);
-    }
-
-    private static boolean isViewingCompletedExerciseList(String[] argumentList) {
-        return argumentList.length != 1;
     }
 
 

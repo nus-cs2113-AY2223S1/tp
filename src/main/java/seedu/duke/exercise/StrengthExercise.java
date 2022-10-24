@@ -21,9 +21,9 @@ public class StrengthExercise extends Exercise {
 
     @Override
     public String saveExercise() {
-        return "strength /" + getExerciseName() + " /" + getWeight() + "/"
-                + getSet() + " /" + getRepetition() + " /" + getDate() + " /" + getCaloriesBurnt()
-                + " /" + getTime() + " | " + getTaskStatusInNumber();
+        return "strength /" + getExerciseName() + " /" + getWeight() + " /"
+                + getSet() + " /" + getRepetition() + " /" + getDate() + " /" + getTime()
+                + " /" + getCaloriesBurnt() + " | " + getTaskStatusInNumber();
     }
 
     @Override

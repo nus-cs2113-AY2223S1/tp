@@ -8,6 +8,6 @@ public class ExerciseCaloriesCalculator {
         if (biometrics.getWeight() == 0) {
             throw new IllegalValueException("Weight cannot be 0. Pls update biometrics");
         }
-        return (int) (0.175 * biometrics.getWeight() * metabolicEquivalent * time);
+        return (int) (0.0175 * biometrics.getWeight() * metabolicEquivalent * time);
     }
 }

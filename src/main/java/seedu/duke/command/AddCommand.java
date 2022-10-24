@@ -64,9 +64,11 @@ public class AddCommand extends Command {
     }
 
     private void addStrengthExercise(String[] argumentList) throws IllegalValueException {
-        if (isMarkDone && argumentList.length != 8 || argumentList.length < 5 || argumentList.length > 6) {
+        if (!toDisplay && argumentList.length != 8) {
+            LOGGER.warning("Invalid arguments for loading strength exercise");
+            throw new IllegalValueException("Unable to load strength exercise");
+        } else if (toDisplay && (argumentList.length < 5 || argumentList.length > 6)) {
             LOGGER.warning("Invalid arguments length for add strength exercise");
-
             throw new IllegalValueException("Invalid add strength exercise command");
         }
         String description = argumentList[1];
@@ -75,7 +77,7 @@ public class AddCommand extends Command {
             int set = Integer.parseInt(argumentList[3]);
             int repetition = Integer.parseInt(argumentList[4]);
             String date;
-            if (argumentList.length != 6) {
+            if (argumentList.length == 5) {
                 date = LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
             } else {
                 date = argumentList[5];
@@ -85,8 +87,8 @@ public class AddCommand extends Command {
             assert (exerciseList.getCurrentExercise(exerciseList.getCurrentExerciseListSize() - 1)
                     .equals(exercise)) : "Exercise not added properly";
             if (isMarkDone) {
-                int calories = Integer.parseInt(argumentList[6]);
-                double time = Double.parseDouble(argumentList[7]);
+                double time = Double.parseDouble(argumentList[6]);
+                int calories = Integer.parseInt(argumentList[7]);
                 exerciseList.markDone(exerciseList.getCurrentExerciseListSize() - 1, time, calories);
             }
             if (toDisplay) {
@@ -100,15 +102,19 @@ public class AddCommand extends Command {
     }
 
     private void addCardioExercise(String[] argumentList) throws IllegalValueException {
-        if (isMarkDone && argumentList.length != 8 || argumentList.length < 4 || argumentList.length > 5) {
-            throw new IllegalValueException("Invalid add cardio exercise command");
+        if (!toDisplay && argumentList.length != 7) {
+            LOGGER.warning("Invalid arguments for loading cardio exercise");
+            throw new IllegalValueException("Unable to load cardio exercise");
+        } else if (toDisplay && (argumentList.length < 4 || argumentList.length > 5)) {
+            LOGGER.warning("Invalid arguments length for add strength exercise");
+            throw new IllegalValueException("Invalid add strength exercise command");
         }
         String description = argumentList[1];
         try {
             double distance = Double.parseDouble(argumentList[2]);
             int repetition = Integer.parseInt(argumentList[3]);
             String date;
-            if (argumentList.length != 5) {
+            if (argumentList.length == 4) {
                 date = LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
             } else {
                 date = argumentList[4];
@@ -118,8 +124,8 @@ public class AddCommand extends Command {
             assert (exerciseList.getCurrentExercise(exerciseList.getCurrentExerciseListSize() - 1)
                     .equals(exercise)) : "Exercise not added properly";
             if (isMarkDone) {
-                int calories = Integer.parseInt(argumentList[5]);
-                double time = Double.parseDouble(argumentList[6]);
+                double time = Double.parseDouble(argumentList[5]);
+                int calories = Integer.parseInt(argumentList[6]);
                 exerciseList.markDone(exerciseList.getCurrentExerciseListSize() - 1, time, calories);
             }
             if (toDisplay) {

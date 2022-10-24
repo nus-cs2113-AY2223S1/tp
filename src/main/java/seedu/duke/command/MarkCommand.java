@@ -66,8 +66,8 @@ public class MarkCommand extends Command {
                 int calories = ExerciseCaloriesCalculator.calculateCalories(biometrics, time, metabolicEquivalent);
                 exerciseList.markDone(exerciseIndex, time, calories);
                 assert exercise.getDone() : "exercise should be done";
-                ui.output(String.format("%s is marked as done successfully" + System.lineSeparator()
-                        + "  calories: %i", exercise.getCaloriesBurnt(), exercise.getExerciseName()));
+                ui.output(exercise.getExerciseName() + " is marked as done successfully",
+                        "calories:" + exercise.getCaloriesBurnt());
                 break;
             } catch (NumberFormatException e) {
                 LOGGER.log(Level.WARNING, "Error converting string to double", e);
