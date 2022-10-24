@@ -78,28 +78,18 @@ public class FlightList extends OperationList {
 
     //@@author JordanKwua
     @Override
-    public void deleteOperation(String detail) {
-        boolean isFlightFound;
-        try {
-            checkCommandLength(detail.substring(FLIGHT_DELETE_COMMAND.length()));
-            checkValidFlightNumber(detail.substring("flight delete ".length()));
-            String flightNum = detail.substring("flight delete ".length()).toUpperCase();
-            isFlightFound = findAndRemoveFlight(flightNum);
-            if (!isFlightFound) {
-                ui.showFlightNotFoundMessage(flightNum);
-            }
-        } catch (SkyControlException e) {
-            ui.showEmptyDescriptionMessage();
-        } catch (NumberFormatException e) {
-            ui.showWrongFlightFormatMessage();
-        }
+    public void deleteOperation(String detail) throws SkyControlException {
+        checkCommandLength(detail.substring(FLIGHT_DELETE_COMMAND.length()));
+        checkValidFlightNumber(detail.substring("flight delete ".length()));
+        String flightNum = detail.substring("flight delete ".length()).toUpperCase();
+        findAndRemoveFlight(flightNum);
     }
 
-    private void checkValidFlightNumber(String substring) throws NumberFormatException {
+    private void checkValidFlightNumber(String substring) throws SkyControlException {
         String[] letters = substring.split("");
         for (int i = 0; i < letters.length; i++) {
             if (!Character.isLetterOrDigit(substring.charAt(i))) {
-                throw new NumberFormatException(substring);
+                throw new SkyControlException(ui.getWrongFlightFormatErrorMessage());
             }
         }
     }
@@ -111,7 +101,7 @@ public class FlightList extends OperationList {
     }
 
     //@@author JordanKwua
-    private static boolean findAndRemoveFlight(String flightNumber) {
+    private static void findAndRemoveFlight(String flightNumber) throws SkyControlException {
         boolean isFlightFound = false;
         assert !flights.isEmpty();
         for (FlightInfo flight : flights) {
@@ -123,7 +113,9 @@ public class FlightList extends OperationList {
                 break;
             }
         }
-        return isFlightFound;
+        if(!isFlightFound) {
+            throw new SkyControlException(ui.getFlightNotFoundMessage(flightNumber));
+        }
     }
 
     //@@author Franky4566
