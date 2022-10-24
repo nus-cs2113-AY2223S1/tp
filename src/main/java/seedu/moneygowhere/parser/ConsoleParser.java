@@ -1875,7 +1875,9 @@ public class ConsoleParser {
                 && options.hasLongOption(
                 ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_CATEGORY_LONG)
                 && options.hasLongOption(
-                ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_CURRENCY_LONG);
+                ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_CURRENCY_LONG)
+                && options.hasLongOption(
+                ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_MODE_OF_PAYMENT_LONG);
 
         assert hasAllCliOptions :
                 ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS;
@@ -1928,6 +1930,9 @@ public class ConsoleParser {
             String currency = commandLine.getOptionValue(
                     ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_CURRENCY_LONG
             );
+            String modeOfPayment = commandLine.getOptionValue(
+                    ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_MODE_OF_PAYMENT_LONG
+            );
 
             BigDecimal amount = new BigDecimal(amountStr);
 
@@ -1943,7 +1948,8 @@ public class ConsoleParser {
                     description,
                     amount,
                     category,
-                    currency
+                    currency,
+                    modeOfPayment
             );
         } catch (DateTimeParseException | NumberFormatException exception) {
             throw new ConsoleParserCommandAddRecurringPaymentInvalidException(exception);

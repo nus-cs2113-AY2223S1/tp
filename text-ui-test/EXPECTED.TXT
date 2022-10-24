@@ -449,6 +449,7 @@ Interval (Days) : 30
 Amount          : 7.80
 Currency        : SGD
 
+
 The recurring payment was added successfully.
 
 
@@ -456,6 +457,7 @@ Name            : Rec Exp 2
 Interval (Days) : 40
 Amount          : 9.80
 Currency        : SGD
+
 
 The recurring payment was added successfully.
 
@@ -465,6 +467,7 @@ Interval (Days) : 50
 Description     : This is a test recurring payment 3
 Amount          : 10.80
 Currency        : SGD
+
 
 The recurring payment was added successfully.
 
@@ -474,17 +477,20 @@ Name            : RecExp1
 Interval (Days) : 30
 Amount          : 7.80
 Currency        : SGD
+
 ---- RECURRING PAYMENT INDEX 1 ----
 Name            : Rec Exp 2
 Interval (Days) : 40
 Amount          : 9.80
 Currency        : SGD
+
 ---- RECURRING PAYMENT INDEX 2 ----
 Name            : Rec Exp 3
 Interval (Days) : 50
 Description     : This is a test recurring payment 3
 Amount          : 10.80
 Currency        : SGD
+
 
 
 ERROR: The arguments entered are invalid. SYNTAX: Add-RecurringPayment -n NAME -i INTERVAL -a AMOUNT [-t DESCRIPTION] [-c CATEGORY] [-x CURRENCY]
@@ -507,17 +513,20 @@ Name            : RecExp1
 Interval (Days) : 30
 Amount          : 7.80
 Currency        : SGD
+
 ---- RECURRING PAYMENT INDEX 1 ----
 Name            : Rec Exp 2
 Interval (Days) : 40
 Amount          : 9.80
 Currency        : SGD
+
 ---- RECURRING PAYMENT INDEX 2 ----
 Name            : Rec Exp 3
 Interval (Days) : 50
 Description     : This is a test recurring payment 3
 Amount          : 10.80
 Currency        : SGD
+
 
 
 The recurring payment was edited successfully.
@@ -529,17 +538,20 @@ Interval (Days) : 31
 Description     : This is a test recurring payment 1
 Amount          : 7.81
 Currency        : SGD
+
 ---- RECURRING PAYMENT INDEX 1 ----
 Name            : Rec Exp 2
 Interval (Days) : 40
 Amount          : 9.80
 Currency        : SGD
+
 ---- RECURRING PAYMENT INDEX 2 ----
 Name            : Rec Exp 3
 Interval (Days) : 50
 Description     : This is a test recurring payment 3
 Amount          : 10.80
 Currency        : SGD
+
 
 
 The recurring payment was deleted successfully.

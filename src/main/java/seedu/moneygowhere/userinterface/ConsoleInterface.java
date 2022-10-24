@@ -307,7 +307,10 @@ public class ConsoleInterface {
         if (recurringPayment.getCategory() != null) {
             recurringPaymentStr += "Category        : " + recurringPayment.getCategory() + "\n";
         }
-        recurringPaymentStr += "Currency        : " + recurringPayment.getCurrency();
+        recurringPaymentStr += "Currency        : " + recurringPayment.getCurrency() + "\n";
+        if (recurringPayment.getModeOfPayment() != null) {
+            recurringPaymentStr += "Mode of Payment : " + recurringPayment.getModeOfPayment();
+        }
 
         return recurringPaymentStr;
     }
@@ -816,7 +819,8 @@ public class ConsoleInterface {
                 consoleCommandAddRecurringPayment.getDescription(),
                 consoleCommandAddRecurringPayment.getAmount(),
                 consoleCommandAddRecurringPayment.getCategory(),
-                consoleCommandAddRecurringPayment.getCurrency()
+                consoleCommandAddRecurringPayment.getCurrency(),
+                consoleCommandAddRecurringPayment.getModeOfPayment()
         );
 
         recurringPaymentManager.addRecurringPayment(recurringPayment);

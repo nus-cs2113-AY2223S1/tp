@@ -413,6 +413,12 @@ public class ConsoleParserConfigurations {
     public static final String COMMAND_ADD_RECURRING_PAYMENT_ARG_CURRENCY_DESC = "Currency";
     public static final boolean COMMAND_ADD_RECURRING_PAYMENT_ARG_CURRENCY_HAS_VAL = true;
     public static final boolean COMMAND_ADD_RECURRING_PAYMENT_ARG_CURRENCY_IS_MAND = false;
+    public static final String COMMAND_ADD_RECURRING_PAYMENT_ARG_MODE_OF_PAYMENT = "p";
+    public static final String COMMAND_ADD_RECURRING_PAYMENT_ARG_MODE_OF_PAYMENT_LONG = "mode of payment";
+    public static final String COMMAND_ADD_RECURRING_PAYMENT_ARG_MODE_OF_PAYMENT_DESC = ""
+            + "PayLah/PayNow/Cash/Card";
+    public static final boolean COMMAND_ADD_RECURRING_PAYMENT_ARG_MODE_OF_PAYMENT_HAS_VAL = true;
+    public static final boolean COMMAND_ADD_RECURRING_PAYMENT_ARG_MODE_OF_PAYMENT_IS_MAND = false;
     public static final String COMMAND_ADD_RECURRING_PAYMENT_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS = ""
             + "Command Add-RecurringPayment does not have all of the required options.";
     //endregion
@@ -1183,6 +1189,13 @@ public class ConsoleParserConfigurations {
                 COMMAND_ADD_RECURRING_PAYMENT_ARG_CURRENCY_DESC
         );
         optionCurrency.setRequired(COMMAND_ADD_RECURRING_PAYMENT_ARG_CURRENCY_IS_MAND);
+        Option optionModeOfPayment = new Option(
+                COMMAND_ADD_RECURRING_PAYMENT_ARG_MODE_OF_PAYMENT,
+                COMMAND_ADD_RECURRING_PAYMENT_ARG_MODE_OF_PAYMENT_LONG,
+                COMMAND_ADD_RECURRING_PAYMENT_ARG_MODE_OF_PAYMENT_HAS_VAL,
+                COMMAND_ADD_RECURRING_PAYMENT_ARG_MODE_OF_PAYMENT_DESC
+        );
+        optionModeOfPayment.setRequired(COMMAND_ADD_RECURRING_PAYMENT_ARG_MODE_OF_PAYMENT_IS_MAND);
 
         Options options = new Options();
         options.addOption(optionName);
@@ -1191,6 +1204,7 @@ public class ConsoleParserConfigurations {
         options.addOption(optionDescription);
         options.addOption(optionCategory);
         options.addOption(optionCurrency);
+        options.addOption(optionModeOfPayment);
 
         return options;
     }
