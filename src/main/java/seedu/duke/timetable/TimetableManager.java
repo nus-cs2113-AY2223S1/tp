@@ -14,8 +14,13 @@ public class TimetableManager {
         this.timetableManager = new HashMap<String, Timetable>();
     }
 
+
     public Timetable getTimetableByUniversityName(String universityName) {
         return timetableManager.get(universityName);
+    }
+
+    public HashMap<String, Timetable> getTimetableManager() {
+        return timetableManager;
     }
 
     private boolean foundKeyAll(String universityName) {
