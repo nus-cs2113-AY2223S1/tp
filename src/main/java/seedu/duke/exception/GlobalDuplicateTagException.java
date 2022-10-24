@@ -1,8 +1,12 @@
 package seedu.duke.exception;
 
+//@@author wcwy
 import seedu.duke.common.ErrorMessages;
 
-public class InputMissingTagException extends MoolahException {
+/**
+ * Represents the exception where a same tag is found more than once in the user input.
+ */
+public class GlobalDuplicateTagException extends MoolahException {
     /**
      * Returns the error message of the exception to alert user of the exception.
      *
@@ -10,6 +14,6 @@ public class InputMissingTagException extends MoolahException {
      */
     @Override
     public String getMessage() {
-        return ErrorMessages.ERROR_ADD_COMMAND_MISSING_TAG.toString();
+        return ErrorMessages.ERROR_GLOBAL_DUPLICATE_TAG.toString();
     }
 }

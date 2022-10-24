@@ -2,10 +2,14 @@ package seedu.duke;
 
 import seedu.duke.command.Command;
 import seedu.duke.common.DateFormats;
+import seedu.duke.data.Budget;
 import seedu.duke.data.TransactionList;
 import seedu.duke.data.transaction.Transaction;
 import seedu.duke.exception.MoolahException;
-import seedu.duke.exception.StorageInputCorruptedException;
+import seedu.duke.exception.InputBudgetDuplicateException;
+import seedu.duke.exception.InputBudgetInvalidAmountException;
+import seedu.duke.exception.StorageFileCorruptedTransactionException;
+import seedu.duke.exception.StorageFileCorruptedBudgetException;
 import seedu.duke.exception.StorageWriteErrorException;
 import seedu.duke.parser.ParameterParser;
 
@@ -68,19 +72,22 @@ public class Storage {
      * Initializes the duke.txt by checking its existence, then store the data values to the program.
      *
      * @return The TransactionList storing entries which would be used in the program.
-     * @throws StorageInputCorruptedException If there are errors due to corrupted duke.txt data.
-     * @throws StorageWriteErrorException     If the file could not be created or could not be written.
+     * @throws StorageFileCorruptedTransactionException If there are errors due to corrupted duke.txt data.
+     * @throws StorageWriteErrorException               If the file could not be created or could not be written.
      */
     public TransactionList initializeFile() throws MoolahException {
         try {
             File file = checkIfFileExist();
             Scanner input = new Scanner(file);
-            storeFileValuesLocally(storedTransactions, input);
+            storeFileValuesLocally(input);
             Ui.printMessages("* duke.txt loaded successfully! *");
 
-        } catch (MoolahException e) {
-            // Catch any parsing errors and throw the default StorageInputCorruptedException
-            throw new StorageInputCorruptedException();
+        } catch (StorageFileCorruptedBudgetException e) {
+            // Catch any Budget parsing errors and throw the default StorageInputCorruptedBudgetException
+            throw new StorageFileCorruptedBudgetException();
+        } catch (StorageFileCorruptedTransactionException e) {
+            // Catch any Transaction parsing errors and throw the default StorageInputCorruptedTransactionException
+            throw new StorageFileCorruptedTransactionException();
         } catch (IOException e) {
             throw new StorageWriteErrorException();
         }
@@ -88,58 +95,102 @@ public class Storage {
     }
 
     /**
+     * Stores budget value from duke.txt to the program by parsing the first line of the file.
+     *
+     * @param monthlyBudget The budget value to be parsed.
+     * @throws MoolahException When there are parsing errors, due to corrupted data.
+     */
+    private void storeBudgetLocally(String monthlyBudget) throws MoolahException {
+        try {
+            Command command = null;
+            ParameterParser.parseBudgetTag(monthlyBudget);
+            Budget.setBudget(Long.parseLong(monthlyBudget));
+
+
+        } catch (InputBudgetDuplicateException e) {
+            Ui.printMessages("* Budget value remains as default *");
+        } catch (InputBudgetInvalidAmountException e) {
+            throw new StorageFileCorruptedBudgetException();
+        }
+    }
+
+    /**
+     * Stores Transaction parameters from duke.txt to the program by parsing each line of the file after Budget value.
+     *
+     * @param lineString The individual lines from duke.txt which would be parsed.
+     * @throws MoolahException When there are parsing errors, due to corrupted data.
+     */
+    private void storeTransactionsLocally(String lineString) throws MoolahException {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DateFormats.DATE_STORAGE_OUTPUT_PATTERN.toString());
+        String[] splits = lineString.split(DELIMITER);
+        Command command = null;
+
+        if (splits.length != NUMBER_OF_STORED_PARAMETERS) {
+            throw new StorageFileCorruptedTransactionException();
+        }
+
+        String type = splits[0];
+        String category = splits[1];
+        String amountString = splits[2];
+        // Date has been formatted in duke.txt and must be synthesized into the correct string format before parsing
+        try {
+            LocalDate date = LocalDate.parse(splits[3], formatter);
+            String dateString = synthesizeDateString(date);
+
+
+            String description = splits[4];
+
+            String parametersInput = "t/" + type + " c/" + category + " a/" + amountString + " d/" + dateString
+                    + " i/" + description;
+            command = getCommand("add", parametersInput);
+
+            ParameterParser.parse(command, parametersInput);
+
+            // amount would be converted into an integer before being used in the addition of transaction locally
+            int amount = Integer.parseInt(splits[2]);
+
+            switch (type) {
+            case "expense":
+                storedTransactions.addExpenseDuringStorage(description, amount, category, date);
+                break;
+            case "income":
+                storedTransactions.addIncomeDuringStorage(description, amount, category, date);
+                break;
+            default:
+                throw new StorageFileCorruptedTransactionException();
+            }
+        } catch (DateTimeParseException e) {
+            // If the date format is incorrect, which is due to corrupted date information
+            throw new StorageFileCorruptedTransactionException();
+        } catch (MoolahException e) {
+            throw new StorageFileCorruptedTransactionException();
+        }
+    }
+
+
+    /**
      * Stores values from duke.txt to the program by parsing each line in the file.
      *
-     * @param storedTransactions The TransactionList to hold the stored values from the file.
-     * @param input              The input from duke.txt to be processed.
-     * @throws MoolahException WHen there are parsing errors, due to corrupted data.
+     * @param input The input from duke.txt to be processed.
+     * @throws MoolahException When there are parsing errors, due to corrupted data.
      */
 
-    private void storeFileValuesLocally(TransactionList storedTransactions, Scanner input) throws MoolahException {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DateFormats.DATE_STORAGE_OUTPUT_PATTERN.toString());
 
-        Command command = null;
+    private void storeFileValuesLocally(Scanner input) throws MoolahException {
+
+
+        // Processes the budget value located at the first line of the duke.txt file
+        if (input.hasNext()) {
+            String monthlyBudget = input.nextLine();
+            storeBudgetLocally(monthlyBudget);
+        } else {
+            // Else, the file would be empty
+            Ui.printMessages("* Duke.txt file is currently empty and ready to be written *");
+        }
+
         while (input.hasNext()) {
             String line = input.nextLine();
-            String[] splits = line.split(DELIMITER);
-            if (splits.length != NUMBER_OF_STORED_PARAMETERS) {
-                throw new StorageInputCorruptedException();
-            }
-
-            String type = splits[0];
-            String category = splits[1];
-            String amountString = splits[2];
-            // Date has been formatted in duke.txt and must be synthesized into the correct string format before parsing
-            try {
-                LocalDate date = LocalDate.parse(splits[3], formatter);
-                String dateString = synthesizeDateString(date);
-
-
-                String description = splits[4];
-
-                String parametersInput = "t/" + type + " c/" + category + " a/" + amountString + " d/" + dateString
-                        + " i/" + description;
-                command = getCommand("add", parametersInput);
-
-                ParameterParser.parse(command, parametersInput);
-
-                // amount would be converted into an integer before being used in the addition of transaction locally
-                int amount = Integer.parseInt(splits[2]);
-
-                switch (type) {
-                case "expense":
-                    storedTransactions.addExpenseDuringStorage(description, amount, category, date);
-                    break;
-                case "income":
-                    storedTransactions.addIncomeDuringStorage(description, amount, category, date);
-                    break;
-                default:
-                    throw new StorageInputCorruptedException();
-                }
-            } catch (DateTimeParseException e) {
-                // If the date format is incorrect, which is due to corrupted date information
-                throw new StorageInputCorruptedException();
-            }
+            storeTransactionsLocally(line);
 
         }
 
@@ -184,7 +235,9 @@ public class Storage {
      */
     public void writeToFile(ArrayList<Transaction> transactions) throws IOException {
         FileWriter fileWriter = new FileWriter(FILE_PATH);
+        long monthlyBudget = Budget.getBudget();
         String transactionEntry = "";
+        fileWriter.write(monthlyBudget + System.lineSeparator());
         for (Transaction transaction : transactions) {
 
             transactionEntry = transaction.getType() + " | " + transaction.getCategory() + " | "

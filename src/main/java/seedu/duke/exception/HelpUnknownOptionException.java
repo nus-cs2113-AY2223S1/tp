@@ -4,10 +4,9 @@ package seedu.duke.exception;
 import seedu.duke.common.ErrorMessages;
 
 /**
- * Represents the exception where the date provided for the transaction is not in the supported format.
+ * Represents the exception where the option chosen in help command is not "o/detailed".
  */
-public class InputTransactionInvalidDateException extends MoolahException {
-
+public class HelpUnknownOptionException extends MoolahException {
     /**
      * Returns the error message of the exception to alert user of the exception.
      *
@@ -15,6 +14,7 @@ public class InputTransactionInvalidDateException extends MoolahException {
      */
     @Override
     public String getMessage() {
-        return ErrorMessages.ERROR_TRANSACTION_INVALID_DATE.toString();
+        return ErrorMessages.ERROR_UNKNOWN_HELP_OPTION.toString();
     }
+
 }

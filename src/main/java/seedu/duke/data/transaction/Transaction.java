@@ -5,6 +5,9 @@ import java.time.format.DateTimeFormatter;
 
 import static seedu.duke.common.DateFormats.DATE_OUTPUT_PATTERN;
 
+/**
+ * Represents a transaction made by the user, which could be either an income or an expense.
+ */
 public abstract class Transaction {
     //@@author chydarren
     private static final String PREFIX_CATEGORY = "[";
@@ -19,6 +22,8 @@ public abstract class Transaction {
     private String description;
     private int amount;
     private LocalDate date;
+
+    private String type;
 
     public Transaction(String description, int amount, String category, LocalDate date) {
         this.description = description;
@@ -62,6 +67,12 @@ public abstract class Transaction {
     }
 
     //@@author wcwy
+
+    /**
+     * Returns the date of transaction in MMM dd yyyy format.
+     *
+     * @return Formatted date of the transaction
+     */
     public String printFormattedDate() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_OUTPUT_PATTERN.toString());
         return date.format(formatter);
@@ -75,5 +86,9 @@ public abstract class Transaction {
     public String toString() {
         return String.format("%s %s%d %s %s %s %s %s", printFormattedCategory(), SYMBOL_DOLLAR,
                 amount, TEXT_AT, printFormattedDate(), SYMBOL_PIPE, TEXT_DESCRIPTION, description);
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

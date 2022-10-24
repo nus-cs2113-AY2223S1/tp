@@ -1,8 +1,12 @@
 package seedu.duke.exception;
 
+//@@author chydarren
 import seedu.duke.common.ErrorMessages;
 
-public class InvalidIndexException extends MoolahException {
+/**
+ * Represents the exception where the type given for a transaction is not Income or Expense.
+ */
+public class InputTransactionInvalidTypeException extends MoolahException {
     /**
      * Returns the error message of the exception to alert user of the exception.
      *
@@ -10,6 +14,6 @@ public class InvalidIndexException extends MoolahException {
      */
     @Override
     public String getMessage() {
-        return ErrorMessages.ERROR_INVALID_INDEX.toString();
+        return ErrorMessages.ERROR_TRANSACTION_INVALID_TYPE.toString();
     }
 }

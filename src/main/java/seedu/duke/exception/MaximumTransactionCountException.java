@@ -4,10 +4,10 @@ package seedu.duke.exception;
 import seedu.duke.common.ErrorMessages;
 
 /**
- * Represents the exception where the date provided for the transaction is not in the supported format.
+ * Represents the exception where the number of transactions will exceed the maximum value set if a new transaction
+ * is added to the list.
  */
-public class InputTransactionInvalidDateException extends MoolahException {
-
+public class MaximumTransactionCountException extends MoolahException {
     /**
      * Returns the error message of the exception to alert user of the exception.
      *
@@ -15,6 +15,6 @@ public class InputTransactionInvalidDateException extends MoolahException {
      */
     @Override
     public String getMessage() {
-        return ErrorMessages.ERROR_TRANSACTION_INVALID_DATE.toString();
+        return ErrorMessages.ERROR_MAXIMUM_TRANSACTION_COUNT_REACHED.toString();
     }
 }

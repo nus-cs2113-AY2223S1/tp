@@ -1,8 +1,9 @@
 package seedu.duke.exception;
 
-import static seedu.duke.common.ErrorMessages.ERROR_INVALID_COMMAND;
+//@@author chinhan99
+import seedu.duke.common.ErrorMessages;
 
-public class InvalidCommandException extends MoolahException {
+public class InputTransactionInvalidAmountException extends MoolahException {
     /**
      * Returns the error message of the exception to alert user of the exception.
      *
@@ -10,6 +11,7 @@ public class InvalidCommandException extends MoolahException {
      */
     @Override
     public String getMessage() {
-        return ERROR_INVALID_COMMAND.toString();
+        return ErrorMessages.ERROR_TRANSACTION_INVALID_AMOUNT.toString();
     }
+
 }

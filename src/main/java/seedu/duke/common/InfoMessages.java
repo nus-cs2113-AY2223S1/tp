@@ -7,6 +7,8 @@ public enum InfoMessages {
     INFO_DIVIDER("____________________________________________________________"),
     INFO_ADD_EXPENSE("I have added the following Expense transaction:"),
     INFO_ADD_INCOME("I have added the following Income transaction:"),
+    INFO_EDIT_EXPENSE("I have edited the following Expense transaction:"),
+    INFO_EDIT_INCOME("I have edited the following Income transaction:"),
     INFO_DELETE("I have deleted the following transaction:"),
     INFO_EXIT("Goodbye and see you soon."),
     INFO_GREET("Hello! I'm Moo and I will help you to manage your finances."),
@@ -18,10 +20,19 @@ public enum InfoMessages {
     INFO_LIST_UNFILTERED("There are no transaction records that match your search expression."),
     INFO_STATS_EMPTY("There are no statistics available yet for the given statistics type."),
     INFO_STATS_CATEGORIES("Here are the total savings for each category:"),
+    INFO_STATS_TIME("Here are the total savings and expenses for"),
+    INFO_STATS_INCOME("Total Income = "),
+    INFO_STATS_EXPENSES("Total Expenses = "),
+    INFO_STATS_SAVINGS("Total Savings = "),
+    INFO_STATS_CATEGORIES_HEADER("-----CATGORIES-----"),
+    INFO_STATS_SUMMARY_HEADER("-----SUMMARY-----"),
     INFO_PURGE("All your transactions have been purged."),
     INFO_PURGE_ABORT("Purging has been aborted. All transactions records are retained."),
     INFO_PURGE_EMPTY("The command is aborted as the transactions list is empty."),
-    INFO_PURGE_WARNING("Are you sure you want to proceed with this command? Please enter 'Y' to confirm.");
+    INFO_PURGE_WARNING("Are you sure you want to proceed with this command? Please enter 'Y' to confirm."),
+    INFO_BUDGET_SET_SUCCESSFUL("You have successfully updated the budget."),
+    INFO_CURRENT_BUDGET("Monthly budget set as: $"),
+    INFO_REMAINING_BUDGET("Budget remained for the month of transaction: $");
 
     //@@author chydarren
     public final String message;

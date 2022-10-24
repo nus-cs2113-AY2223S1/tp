@@ -1,17 +1,18 @@
 package seedu.duke.command;
 
+//@@author chinhan99
 import seedu.duke.Storage;
 import seedu.duke.Ui;
 import seedu.duke.data.TransactionList;
 import seedu.duke.exception.MoolahException;
 
-import java.io.IOException;
 import java.time.LocalDate;
 
 /**
  * Represents an object that can be inherited by other command objects.
  */
 public abstract class Command {
+    //@@author wcwy
     // The command word used to trigger the execution of Moolah Manager's operations
     public static String COMMAND_WORD;
     // The description for the usage of command
@@ -71,6 +72,9 @@ public abstract class Command {
     public void setAmount(int amount) {
     }
 
+    public void setBudgetAmount(long amount) {
+    }
+
     public void setCategory(String category) {
     }
 
@@ -84,7 +88,17 @@ public abstract class Command {
     }
 
     public void setStatsType(String statsType) {
-
     }
 
+    public void setGlobalMonth(int month) {
+    }
+
+    public void setGlobalYear(int year) {
+    }
+
+    public void setGlobalNumber(int number) {
+    }
+
+    public void setGlobalPeriod(String period) {
+    }
 }

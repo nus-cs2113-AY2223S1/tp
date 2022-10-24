@@ -5,6 +5,15 @@ help o/detailed blablabla
 help /
 help o/
 help o/detailed o/detailed
+budget
+budget /
+budget b/
+budget 123123
+budget b/12345678901234567890
+budget b/-123
+budget b/123:123
+budget b/0
+budget b/10000
 stats
 stats blablabla
 stats /

@@ -1,8 +1,9 @@
 package seedu.duke.exception;
 
+//@@author brian-vb
 import seedu.duke.common.ErrorMessages;
 
-public class UnknownHelpOptionException extends MoolahException {
+public class GlobalInvalidNumberException extends MoolahException {
     /**
      * Returns the error message of the exception to alert user of the exception.
      *
@@ -10,7 +11,6 @@ public class UnknownHelpOptionException extends MoolahException {
      */
     @Override
     public String getMessage() {
-        return ErrorMessages.ERROR_UNKNOWN_HELP_OPTION.toString();
+        return ErrorMessages.ERROR_GLOBAL_INVALID_NUMBER.toString();
     }
-
 }

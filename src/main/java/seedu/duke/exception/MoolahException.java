@@ -1,5 +1,7 @@
 package seedu.duke.exception;
 
+//@@author wcwy
+
 /**
  * Represents the base class of the exceptions defined for Moolah Manager.
  */
