@@ -71,7 +71,8 @@ public class Ui {
     public static void updateItemMessage(Item item, TransactionList transactionList) {
         showLine();
         System.out.print(
-                "Done! Here is the item you updated" + '\n' + item.toString(transactionList));
+                "Done! Here is the item you updated" + '\n' + item.toString(transactionList) + '\n');
+        showLine();
     }
 
     public static void deleteItemMessage(Item item, int itemListSize,
