@@ -53,12 +53,19 @@ This section allows users to understand all the features we offered, including t
 
 ### 3.1. Getting help
 
+>Get the list of all commands' format and their description
+
+Format: ```help```
+
+Expected outcome:
+```
 ...To be updated
+```
 
 ### 3.2. User-related features
 
 #### 3.2.1. ```add-user``` - Add a new user
->Adds a new user to the list
+>Add a new user to the list
 
 Format: ```add-user /n [USERNAME] /a [AGE] /c [CONTACT_NUMBER]```
 
@@ -79,7 +86,7 @@ ____________________________________________________________
 ```
 
 #### 3.2.2. ```remove-user``` - Remove a user
->Removes a user in the list
+>Remove a user in the list
 
 Format: ```remove-user /u [USERNAME]```
 
@@ -118,7 +125,7 @@ ____________________________________________________________
 
 ### 3.3. Item-related features
 #### 3.3.1. ```add-item``` - Add a new item
->Adds a new item to the list
+>Add a new item to the list
 
 Format: ```add-item /n [ITEM_NAME] /c [CATEGORY_INDEX] /p [PRICE] /o [USERNAME]```
 
@@ -139,7 +146,7 @@ ____________________________________________________________
 ```
 
 #### 3.3.2. ```remove-item``` - Remove an item
->Removes an item in the list
+>Remove an item in the list
 
 Format: ```remove-item /i [ITEM_ID]```
 
@@ -177,7 +184,7 @@ ____________________________________________________________
 
 ### 3.4. Transaction-related features
 #### 3.4.1. ```add-tx``` - Add a new transaction
->Adds a new transaction to the list
+>Add a new transaction to the list
 
 Format: ```add-tx /i [ITEM_ID] /b [BORROWER_NAME] /d [DURATION] /c [CREATED_DATE]```
 
@@ -197,7 +204,7 @@ ____________________________________________________________
 ```
 
 #### 3.4.2. ```remove-tx``` - Remove a transaction
->Removes a transaction in the list
+>Remove a transaction in the list
 
 Format: ```remove-tx /t [TRANSACTION_ID]```
 
@@ -237,7 +244,22 @@ ____________________________________________________________
 
 ### 3.5. Exit Program
 
-...To be updated
+>Exit the program
+
+Format: ```bye```
+
+Note:
+1. After running this command, your data in user list, item list and transaction list are stored in 3 file 
+```user.txt```, ```item.txt```, and ```transaction.txt``` in ```/data/``` folders, respectively
+
+Example of usage: ```bye```
+
+Expected outcome:
+```
+____________________________________________________________
+Bye! See you again
+____________________________________________________________
+```
 
 
 ## 4. Command Summary
