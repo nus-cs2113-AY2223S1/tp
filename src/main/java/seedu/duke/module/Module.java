@@ -1,7 +1,6 @@
 package seedu.duke.module;
 
 import seedu.duke.module.lessons.Lesson;
-import seedu.duke.data.AttendingManager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -87,9 +86,6 @@ public class Module {
         String classNumber = "NA";
         Lesson tempLesson = new Lesson(day, startTime, endTime, lessonType, classNumber);
         temp.add(tempLesson);
-        if (!AttendingManager.attendingExists(tempLesson, moduleCode)) {
-            AttendingManager.addAttending(tempLesson, this);
-        }
     }
 
     private boolean checkExist(List<Lesson> temp, Lesson lessonToCheck) {
@@ -193,7 +189,6 @@ public class Module {
 
     public void replaceAttending(Lesson newLesson, Integer indexForLesson) {
         attending.set(indexForLesson, newLesson);
-        AttendingManager.setAttending(newLesson, moduleCode);
     }
 
     private HashMap<String, ArrayList<Lesson>> classifyLessons(List<Lesson> lessons) {
