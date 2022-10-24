@@ -4,7 +4,7 @@ import seedu.duke.Storage;
 import seedu.duke.Ui;
 import seedu.duke.data.TransactionList;
 import seedu.duke.data.transaction.Transaction;
-import seedu.duke.exception.InvalidIndexException;
+import seedu.duke.exception.GlobalInvalidIndexException;
 import seedu.duke.exception.MoolahException;
 
 import seedu.duke.exception.StorageWriteErrorException;
@@ -209,7 +209,7 @@ public class EditCommand extends Command {
             } else {
                 editLogger.log(Level.WARNING, "InvalidIndexException thrown when the index "
                         + "is invalid.");
-                throw new InvalidIndexException();
+                throw new GlobalInvalidIndexException();
             }
             storage.writeToFile(transactions.getTransactions());
         } catch (IOException e) {
