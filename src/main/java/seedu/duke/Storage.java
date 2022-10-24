@@ -519,18 +519,12 @@ public class Storage {
                                 pairingProperty = propertyList.getPropertyList().get(i);
                             }
                         }
-
                         pairingList.addPairing(pairingClient, pairingProperty);
-
                     }
                 }
             }
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
-
-
     }
-
-
 }
