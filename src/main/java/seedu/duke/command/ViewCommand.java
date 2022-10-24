@@ -1,9 +1,9 @@
 package seedu.duke.command;
 
+import seedu.duke.Calculator;
 import seedu.duke.Parser;
 import seedu.duke.Ui;
 import seedu.duke.biometrics.Biometrics;
-import seedu.duke.biometrics.Calculator;
 import seedu.duke.biometrics.WeightAndFat;
 import seedu.duke.exception.IllegalValueException;
 import seedu.duke.exercise.CardioExercise;
@@ -91,9 +91,7 @@ public class ViewCommand extends Command {
     private void viewWeight() {
         ui.output(biometrics.weightAndFatList.getSize() + " records of weight and fat percentage:");
         ArrayList<WeightAndFat> weightAndFatList = biometrics.weightAndFatList.getWeightAndFatList();
-        for (WeightAndFat weightAndFat : weightAndFatList) {
-            ui.output(weightAndFat.listWeightAndFat(weightAndFatList));
-        }
+        ui.outputWeightList(weightAndFatList);
     }
 
     private void viewFood(String[] argumentList) throws IllegalValueException {

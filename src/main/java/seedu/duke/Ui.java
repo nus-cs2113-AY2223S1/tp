@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import seedu.duke.biometrics.WeightAndFat;
 import seedu.duke.exercise.CardioExercise;
 import seedu.duke.exercise.Exercise;
 import seedu.duke.exercise.StrengthExercise;
@@ -65,10 +66,18 @@ public class Ui {
     }
 
     public void outputFoodList(ArrayList<Food> foodArrayList) {
-        Integer[] columnSpacingArray = {5, 12, 8};
+        Integer[] columnSpacingArray = {5, 12, 8, 4};
         getFoodColumnsSpacing(foodArrayList, columnSpacingArray);
         generateFoodTableHeader(columnSpacingArray);
         printFoodList(foodArrayList, columnSpacingArray);
+        printEmptyLine();
+    }
+
+    public void outputWeightList(ArrayList<WeightAndFat> weightAndFatArrayList) {
+        Integer[] columnSpacingArray = {5, 6, 14, 4};
+        getWeightColumnsSpacing(weightAndFatArrayList, columnSpacingArray);
+        generateWeightTableHeader(columnSpacingArray);
+        printWeightList(weightAndFatArrayList, columnSpacingArray);
         printEmptyLine();
     }
 
@@ -92,6 +101,16 @@ public class Ui {
         for (Food food : foodArrayList) {
             columnSpacingArray[1] = Math.max(columnSpacingArray[1], food.getFoodDescription().length());
             columnSpacingArray[2] = Math.max(columnSpacingArray[2], String.valueOf(food.getCalories()).length());
+            columnSpacingArray[3] = Math.max(columnSpacingArray[3], food.getDate().length());
+        }
+    }
+
+    private void getWeightColumnsSpacing(ArrayList<WeightAndFat> weightAndFatArrayList, Integer[] columnSpacingArray) {
+        columnSpacingArray[0] = Math.max(columnSpacingArray[0], weightAndFatArrayList.size() % 10 + 1);
+        for (WeightAndFat weightAndFat : weightAndFatArrayList) {
+            columnSpacingArray[1] = Math.max(columnSpacingArray[1], String.valueOf(weightAndFat.getWeight()).length());
+            columnSpacingArray[2] = Math.max(columnSpacingArray[2], String.valueOf(weightAndFat.getFat()).length());
+            columnSpacingArray[3] = Math.max(columnSpacingArray[3], weightAndFat.getDate().length());
         }
     }
 
@@ -130,7 +149,19 @@ public class Ui {
             String foodName = addRightPadding(food.getFoodDescription(), columnSpacingArray[1]) + " | ";
             String calories = addRightPadding(Integer.toString(food.getCalories()),
                     columnSpacingArray[2]) + " | ";
-            printInSameLine(index, foodName, calories);
+            String date = addRightPadding(food.getDate(), columnSpacingArray[3]) + " | ";
+            printInSameLine(index, foodName, calories, date);
+        }
+    }
+
+    private void printWeightList(ArrayList<WeightAndFat> weightAndFatArrayList, Integer[] columnSpacingArray) {
+        for (int i = 0; i < weightAndFatArrayList.size(); i++) {
+            WeightAndFat weightAndFat = weightAndFatArrayList.get(i);
+            String index = addRightPadding(Integer.toString(i + 1), columnSpacingArray[0]) + " | ";
+            String weight = addRightPadding(Integer.toString(weightAndFat.getWeight()), columnSpacingArray[1]) + " | ";
+            String fat = addRightPadding(Integer.toString(weightAndFat.getFat()), columnSpacingArray[2]) + " | ";
+            String date = addRightPadding(weightAndFat.getDate(), columnSpacingArray[3]) + " | ";
+            printInSameLine(index, weight, fat, date);
         }
     }
 
@@ -169,7 +200,18 @@ public class Ui {
         String paddedIndex = addRightPadding("Index", columnSpacingArray[0]) + " | ";
         String paddedDescription = addRightPadding("Description", columnSpacingArray[1]) + " | ";
         String paddedCalories = addRightPadding("Calories", columnSpacingArray[2]) + " | ";
-        String line = paddedIndex + paddedDescription + paddedCalories;
+        String paddedDate = addRightPadding("Date", columnSpacingArray[3]) + " | ";
+        String line = paddedIndex + paddedDescription + paddedCalories + paddedDate;
+        String separatorLine = "-".repeat(line.length());
+        output(separatorLine, line, separatorLine);
+    }
+
+    private void generateWeightTableHeader(Integer[] columnSpacingArray) {
+        String paddedIndex = addRightPadding("Index", columnSpacingArray[0]) + " | ";
+        String paddedWeight = addRightPadding("Weight", columnSpacingArray[1]) + " | ";
+        String paddedFat = addRightPadding("Fat Percentage", columnSpacingArray[2]) + " | ";
+        String paddedDate = addRightPadding("Date", columnSpacingArray[3]) + " | ";
+        String line = paddedIndex + paddedWeight + paddedFat + paddedDate;
         String separatorLine = "-".repeat(line.length());
         output(separatorLine, line, separatorLine);
     }

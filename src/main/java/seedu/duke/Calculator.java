@@ -1,5 +1,6 @@
-package seedu.duke.biometrics;
+package seedu.duke;
 
+import seedu.duke.biometrics.Biometrics;
 import seedu.duke.exception.IllegalValueException;
 
 

@@ -7,9 +7,11 @@ import seedu.duke.exception.IllegalValueException;
 import seedu.duke.exception.InvalidDateException;
 import seedu.duke.exercise.Exercise;
 import seedu.duke.exercise.ExerciseList;
+import seedu.duke.food.Food;
 import seedu.duke.food.FoodList;
 import seedu.duke.storage.Storage;
 
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
@@ -40,7 +42,7 @@ public class DateCommand extends Command {
         return LocalDate.now();
     }
 
-    public static void sortDate(ArrayList<Exercise> list) {
+    public static void sortDateForExercise(ArrayList<Exercise> list) {
         Collections.sort(list, new Comparator<Exercise>() {
             /**
              * This method compares two date strings.
@@ -56,6 +58,20 @@ public class DateCommand extends Command {
             }
         });
     }
+
+    public static void sortDateForFood(ArrayList<Food> foodArrayList) {
+        Collections.sort(foodArrayList, new Comparator<Food>() {
+            @Override
+            public int compare(Food f1, Food f2) {
+                LocalDate f1Date = LocalDate.parse(Parser.getDateNoDateTracker(f1.getDate()),
+                        DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+                LocalDate f2Date = LocalDate.parse(Parser.getDateNoDateTracker(f2.getDate()),
+                        DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+                return f1Date.compareTo(f2Date);
+            }
+        });
+    }
+
 
     @Override
     public void execute() throws IllegalValueException {

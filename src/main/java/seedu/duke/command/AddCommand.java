@@ -16,6 +16,7 @@ import seedu.duke.storage.Storage;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -191,13 +192,18 @@ public class AddCommand extends Command {
 
     private void addFood(String[] argumentList) throws IllegalValueException {
         try {
-            if (argumentList.length != 3) {
+            if (argumentList.length < 3) {
                 throw new IllegalValueException(INVALID_FOOD_INPUT);
             }
-            assert argumentList.length == 3 : "Invalid add food command";
+            LocalDate date;
+            if (argumentList.length == 4) {
+                date = LocalDate.parse(argumentList[3], DateTimeFormatter.ofPattern("d-M-yyyy"));
+            } else {
+                date = LocalDate.now();
+            }
             String description = extractFoodName(argumentList[1]);
             int calories = extractCalories(argumentList[2]);
-            food = new Food(description, calories);
+            food = new Food(description, calories, date);
             foodList.addFood(food);
             assert foodList.getFood(foodList.getFoodListSize() - 1).equals(food) : "Food not added properly";
             if (toDisplay) {
@@ -206,18 +212,26 @@ public class AddCommand extends Command {
             }
         } catch (NumberFormatException e) {
             throw new IllegalValueException(INVALID_FOOD_INPUT);
+        } catch (DateTimeParseException e) {
+            throw new IllegalValueException("Date should be in the format dd-mm-yyyy");
         }
     }
 
 
     private void addWeightAndFat(String[] argumentList) throws IllegalValueException {
-        if (argumentList.length != 3) {
+        if (argumentList.length < 3) {
             throw new IllegalValueException("INVALID_WEIGHT_INPUT");
         }
         try {
             int weight = Integer.parseInt(argumentList[1]);
             int fat = Integer.parseInt(argumentList[2]);
-            WeightAndFat weightAndFat = new WeightAndFat(weight, fat);
+            LocalDate date;
+            if (argumentList.length == 4) {
+                date = LocalDate.parse(argumentList[3], DateTimeFormatter.ofPattern("d-M-yyyy"));
+            } else {
+                date = LocalDate.now();
+            }
+            WeightAndFat weightAndFat = new WeightAndFat(weight, fat, date);
             biometrics.weightAndFatList.addWeightAndFat(weightAndFat);
             biometrics.setWeight(weight);
             biometrics.setFat(fat);
@@ -227,6 +241,8 @@ public class AddCommand extends Command {
             }
         } catch (NumberFormatException e) {
             throw new IllegalValueException("Weight and fat percentage should be numerical");
+        } catch (DateTimeParseException e) {
+            throw new IllegalValueException("Date should be in the format dd-mm-yyyy");
         }
     }
 

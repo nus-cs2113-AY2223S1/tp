@@ -51,9 +51,7 @@ public class Duke {
             Command loadCommand = new LoadCommand();
             loadCommand.setData(ui, storage, biometrics, exerciseList, foodList);
             loadCommand.execute();
-        } catch (IllegalValueException e) {
-            ui.output(e.getMessage());
-        } catch (IOException e) {
+        } catch (IllegalValueException | IOException e) {
             ui.output(e.getMessage());
         }
         ui.line();

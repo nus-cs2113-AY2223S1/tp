@@ -29,7 +29,7 @@ public class HelpCommand extends Command {
                 + "remove {food/exercise} /{food index/exerciseList index}\n"
                 + "mark {done/undone} /{exercise index} / {time}, {metabolic equivalent}\n"
                 + "view {biometrics/food/weight/bmi/maintenance} {exercise/strength/cardio /{done}}\n"
-                + "find {strength/cardio/food} /{description}");
+                + "find {strength/cardio/food/date_e/date_f} /{description}");
     }
 
     @Override
