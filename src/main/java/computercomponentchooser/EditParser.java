@@ -384,7 +384,7 @@ public class EditParser {
      */
     public void parseEdit(String line) throws UnlistedBuildException {
         buildName = getParameter(line, TYPE_PARAMETER);
-        if (!BuildManager.doesBuildExist(buildName)) {
+        if (!buildManager.doesBuildExist(buildName)) {
             throw new UnlistedBuildException();
         }
         Ui.printLine();

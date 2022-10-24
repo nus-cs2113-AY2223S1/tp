@@ -40,11 +40,10 @@ public class BuildManager {
      * Deletes a build from the buildManager.
      *
      * @param name The name of the build to be deleted.
-     * @param build The build to be deleted.
      * @throws UnlistedBuildException If the build does not exist.
      */
-    public void deleteBuild(String name, Build build) throws UnlistedBuildException {
-        if (!builds.containsKey(build.getName())) {
+    public void deleteBuild(String name) throws UnlistedBuildException {
+        if (!builds.containsKey(name)) {
             throw new UnlistedBuildException();
         }
         builds.remove(name);
@@ -259,7 +258,7 @@ public class BuildManager {
      * @param buildName The name of the build to be deleted.
      * @return True if the build is deleted, false if the build is not found.
      */
-    public static boolean doesBuildExist(String buildName) {
+    public boolean doesBuildExist(String buildName) {
         return builds.containsKey(buildName);
     }
 }

@@ -197,7 +197,7 @@ public class Parser {
         String name;
         name = getParameter(line, NAME_PARAMETER);
         Ui.printLine();
-        if (!BuildManager.doesBuildExist(name)) {
+        if (!buildManager.doesBuildExist(name)) {
             throw new UnlistedBuildException();
         }
         System.out.print(buildManager.getBuild(name).toString());
@@ -212,16 +212,14 @@ public class Parser {
      */
     private void mainParseDelete(String line) throws UnlistedBuildException {
         String name;
-        Build newBuild;
         name = getParameter(line, NAME_PARAMETER);
-        newBuild = new Build(name);
-        buildManager.deleteBuild(name, newBuild);
+        Ui.printLine();
+        buildManager.deleteBuild(name);
         try {
             storage.deleteBuild(name, buildManager);
         } catch (Exception e) {
             System.out.println("Error saving builds");
         }
-        Ui.printLine();
         System.out.println("You have removed " + name);
         Ui.printLine();
     }
