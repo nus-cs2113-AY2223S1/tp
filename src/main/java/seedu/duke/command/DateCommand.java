@@ -55,7 +55,7 @@ public class DateCommand extends Command {
                         DateTimeFormatter.ofPattern("dd-MM-yyyy"));
                 LocalDate o2Date = LocalDate.parse(Parser.getDateNoDateTracker(e2.getDate()),
                         DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-                return o1Date.compareTo(o2Date);
+                return o2Date.compareTo(o1Date);
             }
         });
     }

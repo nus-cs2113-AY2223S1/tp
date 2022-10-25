@@ -23,7 +23,7 @@ public class HelpCommand extends Command {
                 + "set biometrics /{age} /{gender} /height /{weight} /{fat percentage}\n"
                 + "mark {done/undone} /{exercise index}\n"
                 + "view {biometrics/food/weight/bmi/maintenance/all} {exercise/strength/cardio /{done}}\n"
-                + "add strength /{description} /{sets} /{repetitions} /{date}\n"
+                + "add strength /{description} /{weight} /{sets} /{repetitions} /{date}\n"
                 + "add cardio /{description} /{distance} /{repetitions} /{date}\n"
                 + "add food /{description} /{calories} /{date}\n"
                 + "add weight /{weight} /{fat percentage}\n"
