@@ -18,14 +18,13 @@ help - to display the help message
 exit - to exit the program
 set biometrics /{age} /{gender} /height /{weight} /{fat percentage}
 mark {done/undone} /{exercise index}
-view {biometrics/food/weight/bmi/maintenance} {exercise/strength/cardio /{done}}
+view {biometrics/food/weight/bmi/maintenance/all} {exercise/strength/cardio /{done}}
 add strength /{description} /{sets} /{repetitions} /{date}
 add cardio /{description} /{distance} /{repetitions} /{date}
 add food /{description} /{calories} /{date}
 add weight /{weight} /{fat percentage}
 remove {food/exercise} /{food index/exerciseList index}
 mark {done/undone} /{exercise index} / {time}, {metabolic equivalent}
-view {biometrics/food/weight/bmi/maintenance} {exercise/strength/cardio /{done}}
 find {strength/cardio/food/date_e/date_f} /{description}
 -------------------------------------------------------------------------------
 -------------------------------------------------------------------------------

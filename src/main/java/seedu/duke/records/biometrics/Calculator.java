@@ -1,6 +1,5 @@
-package seedu.duke;
+package seedu.duke.records.biometrics;
 
-import seedu.duke.records.biometrics.Biometrics;
 import seedu.duke.exception.IllegalValueException;
 
 public class Calculator {

@@ -3,16 +3,16 @@ package seedu.duke.command;
 import org.junit.jupiter.api.Test;
 import seedu.duke.Parser;
 import seedu.duke.Ui;
-import seedu.duke.biometrics.Biometrics;
-import seedu.duke.exception.IllegalValueException;
-import seedu.duke.exercise.ExerciseList;
+import seedu.duke.records.RecordList;
+import seedu.duke.records.biometrics.Biometrics;
+import seedu.duke.records.exercise.ExerciseList;
 
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.BeforeEach;
-import seedu.duke.food.FoodList;
+import seedu.duke.records.food.FoodList;
 import seedu.duke.storage.Storage;
 
 class RemoveCommandTest {
@@ -21,6 +21,7 @@ class RemoveCommandTest {
     private Biometrics biometrics = new Biometrics();
     private Ui ui = new Ui();
     private ExerciseList exerciseList = new ExerciseList();
+    private RecordList recordList = new RecordList();
     private final Storage storage = new Storage();
 
     @BeforeEach
@@ -32,7 +33,7 @@ class RemoveCommandTest {
 
         for (String input : commandList) {
             Command c = Parser.parse(input);
-            c.setData(ui, storage, biometrics, exerciseList, foodList);
+            c.setData(ui, storage, biometrics, exerciseList, foodList, recordList);
             c.execute();
         }
     }

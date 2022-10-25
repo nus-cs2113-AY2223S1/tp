@@ -2,15 +2,17 @@ package seedu.duke.command;
 
 import seedu.duke.Parser;
 import seedu.duke.Ui;
-import seedu.duke.biometrics.Biometrics;
-import seedu.duke.biometrics.WeightAndFat;
+import seedu.duke.records.Record;
+import seedu.duke.records.RecordList;
+import seedu.duke.records.biometrics.Biometrics;
+import seedu.duke.records.biometrics.WeightAndFat;
 import seedu.duke.exception.IllegalValueException;
-import seedu.duke.exercise.CardioExercise;
-import seedu.duke.exercise.Exercise;
-import seedu.duke.exercise.ExerciseList;
-import seedu.duke.exercise.StrengthExercise;
-import seedu.duke.food.Food;
-import seedu.duke.food.FoodList;
+import seedu.duke.records.exercise.CardioExercise;
+import seedu.duke.records.exercise.Exercise;
+import seedu.duke.records.exercise.ExerciseList;
+import seedu.duke.records.exercise.StrengthExercise;
+import seedu.duke.records.food.Food;
+import seedu.duke.records.food.FoodList;
 import seedu.duke.storage.Storage;
 
 import java.time.DateTimeException;
@@ -37,6 +39,7 @@ public class AddCommand extends Command {
     private FoodList foodList;
 
     private Biometrics biometrics;
+    private RecordList recordList;
     private static final Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     public AddCommand(String arguments, boolean toDisplay, boolean isMarkDone) {
@@ -75,14 +78,14 @@ public class AddCommand extends Command {
             LOGGER.warning("Invalid arguments length for add strength exercise");
             throw new IllegalValueException("Invalid add strength exercise command");
         }
-        String description = getDescriptionWithValidation(argumentList[0]);
+        String description = getDescriptionWithValidation(argumentList[1]);
         try {
             int weight = getWeightWithValidation(argumentList);
             int set = getSetWithValidation(argumentList);
             int repetition = getRepetitionWithValidation(argumentList);
-            String date;
+            LocalDate date;
             if (argumentList.length == 5) {
-                date = now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+                date = LocalDate.now();
             } else {
                 date = getDateWithValidation(argumentList[5], toDisplay);
             }
@@ -105,17 +108,18 @@ public class AddCommand extends Command {
         }
     }
 
-    private static String getDateWithValidation(String date, boolean toDisplay) throws IllegalValueException {
+    private static LocalDate getDateWithValidation(String date, boolean toDisplay) throws IllegalValueException {
         LocalDate today = LocalDate.now();
+        LocalDate localDate;
         try {
-            LocalDate localDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+            localDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
             if (toDisplay && today.isAfter(localDate)) {
                 throw new IllegalValueException("Date cannot be before today");
             }
         } catch (DateTimeException e) {
             throw new IllegalValueException("Date is in the wrong format");
         }
-        return date;
+        return localDate;
     }
 
     private static int getSetWithValidation(String[] argumentList) throws IllegalValueException {
@@ -149,13 +153,13 @@ public class AddCommand extends Command {
             LOGGER.warning("Invalid arguments length for add strength exercise");
             throw new IllegalValueException("Invalid add strength exercise command");
         }
-        String description = getDescriptionWithValidation(argumentList[0]);
+        String description = getDescriptionWithValidation(argumentList[1]);
         try {
             double distance = Double.parseDouble(argumentList[2]);
             int repetition = getRepetitionWithValidation(argumentList);
-            String date;
+            LocalDate date;
             if (argumentList.length == 4) {
-                date = now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+                date = LocalDate.now();
             } else {
                 date = getDateWithValidation(argumentList[4], toDisplay);
             }
@@ -262,10 +266,12 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void setData(Ui ui, Storage storage, Biometrics biometrics, ExerciseList exerciseList, FoodList foodList) {
+    public void setData(Ui ui, Storage storage, Biometrics biometrics, ExerciseList exerciseList, FoodList foodList,
+                        RecordList recordList) {
         this.ui = ui;
         this.exerciseList = exerciseList;
         this.foodList = foodList;
         this.biometrics = biometrics;
+        this.recordList = recordList;
     }
 }

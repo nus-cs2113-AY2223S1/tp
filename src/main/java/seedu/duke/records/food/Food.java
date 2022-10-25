@@ -1,18 +1,20 @@
-package seedu.duke.food;
+package seedu.duke.records.food;
+
+import seedu.duke.records.Record;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Food {
+public class Food extends Record {
     private String foodDescription;
     private int calories;
 
     private LocalDate date;
 
     public Food(String foodDescription, int calories, LocalDate date) {
+        super(date);
         this.foodDescription = foodDescription;
         this.calories = calories;
-        this.date = date;
     }
 
     public String getFoodDescription() {
@@ -21,10 +23,6 @@ public class Food {
 
     public int getCalories() {
         return calories;
-    }
-
-    public String getDate() {
-        return date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
     }
 
     @Override

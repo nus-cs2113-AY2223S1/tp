@@ -1,4 +1,4 @@
-package seedu.duke.exercise;
+package seedu.duke.records.exercise;
 
 
 import seedu.duke.exception.IllegalValueException;

@@ -1,9 +1,11 @@
-package seedu.duke.exercise;
+package seedu.duke.records.exercise;
+
+import java.time.LocalDate;
 
 public class CardioExercise extends Exercise {
     private double distance;
 
-    public CardioExercise(String exerciseName, double distance, int repetitions, String date) {
+    public CardioExercise(String exerciseName, double distance, int repetitions, LocalDate date) {
         super(exerciseName, repetitions, date);
         this.distance = distance;
     }

@@ -2,11 +2,13 @@ package seedu.duke.storage;
 
 
 import seedu.duke.Ui;
-import seedu.duke.biometrics.Biometrics;
+import seedu.duke.records.Record;
+import seedu.duke.records.RecordList;
+import seedu.duke.records.biometrics.Biometrics;
 import seedu.duke.exception.DukeException;
 import seedu.duke.exception.IllegalValueException;
-import seedu.duke.exercise.ExerciseList;
-import seedu.duke.food.FoodList;
+import seedu.duke.records.exercise.ExerciseList;
+import seedu.duke.records.food.FoodList;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -40,9 +42,10 @@ public class Storage {
      * @throws FileNotFoundException if save file does not exist
      * @throws IllegalValueException if any data fails to load
      */
-    public void loadData(Ui ui, Biometrics biometrics, ExerciseList exerciseList, FoodList foodList)
+    public void loadData(Ui ui, Biometrics biometrics, ExerciseList exerciseList, FoodList foodList,
+                         RecordList recordList)
             throws FileNotFoundException, IllegalValueException {
-        LoadData.loadData(dataFile, ui, this, biometrics, exerciseList, foodList);
+        LoadData.loadData(dataFile, ui, this, biometrics, exerciseList, foodList, recordList);
     }
 
     /**
