@@ -3,6 +3,7 @@ package seedu.duke.user;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import com.sun.jdi.InvalidCodeIndexException;
 import org.junit.jupiter.api.Test;
 import seedu.duke.exceptions.InvalidUserCommandException;
 
@@ -132,5 +133,11 @@ public class UserModuleMappingTest {
     @Test
     void findModuleByTitle_NoSuchModule_false() {
         assertEquals(false, myModules.findModuleByTitle("testing"));
+    }
+
+    @Test
+    void deleteModuleByIndex_outOfBounds_expectException() {
+        assertThrows(IndexOutOfBoundsException.class, () -> myModules.deleteModule(-1));
+        assertThrows(IndexOutOfBoundsException.class, () -> myModules.deleteModule((myModules.getModules().size() + 1)));
     }
 }
