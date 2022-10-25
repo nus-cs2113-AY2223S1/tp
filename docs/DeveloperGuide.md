@@ -4,7 +4,17 @@
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
-## Design & implementation
+## Getting Started
+This program was developed using the Java JDK 11 and the IDE Intellij IDEA.\
+The following steps will guide you through the setup process to get your development environment up and running.
+1. Install Java Development Kit (JDK) 11.
+2. Install Intellij IDEA.
+3. Fork the [MoneyGoWhere](https://github.com/AY2223S1-CS2113T-W11-1/tp) repository and clone it to your system.
+4. Launch Intellij IDEA and open the repository you have cloned.
+5. Navigate to `File > Project Structure > Project Settings > Project` and set `SDK` to `11`.
+6. Verify the setup process by running `MoneyGoWhere#main()`
+
+## Design & Implementation
 ### Software Architecture:
 The software architecture diagram below describes the application's design and the interaction between components.
 
@@ -30,12 +40,12 @@ the user enters the command `Add-Expense -n Expense -a 7.80` to add an expense w
 When the program is ready to receive the user's input, 
 it calls `UserInterface#getConsoleCommand()` which reads the input from standard in.
 * `UserInterface#getConsoleCommand()` calls `Parser#parse()` to parse the input string into a `ConsoleCommand` object.
-* Depending on the instance of `ConsoleCommand`, the corresponding command handler function will be called.
+* Depending on the instance of `ConsoleCommand`, the corresponding command handler function will be called.\
 In the example above, `ConsoleCommand` is an instance of `ConsoleCommandAddExpense` and hence, 
 `UserInterface#runCommandAddExpense()` is called.
-* The `UserInterface` command handler functions calls various `Data` functions to perform operations on data.
+* The `UserInterface` command handler functions calls various `Data` functions to perform operations on data.\
 In the example above, `UserInterface#runCommandAddExpense()` calls `Data#addExpense()` to add an expense to the program.
-* After the operations is performed, command handler functions calls `Storage` functions to save data.
+* After the operations is performed, command handler functions calls `Storage` functions to save data.\
 In the example above, `UserInterface#runCommandAddExpense()` calls `Storage#saveToFile()` to save the newly added expense to a file.
 
 ## Product scope
@@ -49,8 +59,8 @@ In the example above, `UserInterface#runCommandAddExpense()` calls `Storage#save
 
 ## User Stories
 
-|Version| As a ... | I want to ... | So that I can ...                                 |
-|--------|----------|---------------|---------------------------------------------------|
+| Version | As a ... | I want to ...                        | So that I can ...                                 |
+|---------|----------|--------------------------------------|---------------------------------------------------|
 | v1.0    | user     | add expenses                         | keep track of my finances                         |
 | v1.0    | user     | view expenses                        | keep track of my finances                         |
 | v1.0    | user     | view expenses by name                | search for past expenses easily                   |
