@@ -54,7 +54,7 @@ public class UiTest {
                 + "Adds a university list to the user's favourites\n"
                 + "     " + "favourite " + "/favourite del/UNIVERSITY_NAME_IN_UNDERSCORES         "
                 + "Deletes a university list from the user's favourites\n"
-                + "     " + "favourite " + "/favourite view/                                      "
+                + "     " + "favourite " + "/favourite VIEW                                       "
                 + "View the user's favourite university lists\n"
                 + "     " + "exit      " + "/exit                                                 "
                 + "Terminate the program\n"
