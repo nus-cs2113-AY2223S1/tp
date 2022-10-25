@@ -1,0 +1,55 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam ParticipantBackgroundColor MODEL_COLOR
+
+create ":Ui"
+create ":CarparkList"
+create ":Favourite" order 10
+activate ":Parking"
+":Parking" -> ":Favourite": Favourite()
+activate ":Favourite"
+
+create ":FileStorage" order 20
+":Favourite" -> ":FileStorage": FileStorage()
+activate ":FileStorage"
+return
+return
+deactivate ":Favourite"
+
+alt "favourite list"
+    ":Parking" -> ":Favourite": showList()
+    activate ":Favourite"
+    return String of carpark IDs
+    ":Parking" -> ":Ui": print()
+    activate ":Ui"
+    return
+else "favourite CARPARK_ID"
+    ":Parking" -> ":CarparkList": findCarpark()
+    activate ":CarparkList"
+    return
+    ":Parking" -> ":Favourite": setFavourite()
+    activate ":Favourite"
+    ":Favourite" -> ":Favourite": writeFavouriteList()
+    activate ":Favourite"
+    ":Favourite" -> ":FileStorage": writeDataToFile()
+    activate ":FileStorage"
+    return
+    return
+    return
+else "unfavourite CARPARK_ID"
+    ":Parking" -> ":Favourite": setUnfavourite()
+    activate ":Favourite"
+    ":Favourite" -> ":Favourite": writeFavouriteList()
+    activate ":Favourite"
+    ":Favourite" -> ":FileStorage": writeDataToFile()
+    activate ":FileStorage"
+    return
+    return
+    return
+end
+
+deactivate ":Parking"
+
+@enduml
