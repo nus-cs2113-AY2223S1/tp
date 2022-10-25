@@ -8,7 +8,6 @@ Hello from
       |_|         |___/             
 What would you like to do?
 To get started, type "help" to see the list of available commands
-
 ____________________________________________________________
 ____________________________________________________________
 Bye! See you again
