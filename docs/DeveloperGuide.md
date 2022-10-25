@@ -67,6 +67,10 @@ In the example above, `UserInterface#runCommandAddExpense()` calls `Data#addExpe
 * After the operations is performed, command handler functions calls `Storage` functions to save data.\
 In the example above, `UserInterface#runCommandAddExpense()` calls `Storage#saveToFile()` to save the newly added expense to a file.
 
+### Common Component
+
+![Component-Interaction-On-Command-Entered](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentCommon.puml)
+
 ## Product scope
 ### Target user profile
 
