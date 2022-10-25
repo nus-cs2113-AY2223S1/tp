@@ -235,7 +235,8 @@ public class TimetableDict {
             } else {
                 if (!lesson.getModuleCode().equals(getClashingModuleCode(lesson))) {
                     unallocated++;
-                    resultString += module.getModuleCode() + " (" + lesson.getLessonType() + ")\n";
+                    resultString += lesson.getModuleCode() + " (" + lesson.getLessonType() + ") clashes with "
+                         + getClashingModuleCode(lesson) + "\n";
                 }
             }
         }

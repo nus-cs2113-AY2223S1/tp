@@ -35,24 +35,22 @@ public class Lesson {
         return moduleCode;
     }
 
-    public void setModuleCode(String moduleCode) {
-        this.moduleCode = moduleCode.toUpperCase();
-    }
-
     public List<String> getInfo() {
         List<String> info = new ArrayList<String>();
         info.add(day);
         info.add(startTime);
         info.add(endTime);
         info.add(lessonType);
+        info.add(moduleCode);
         return info;
     }
 
-    public Lesson(String day, String startTime, String endTime, String lessonType, String classNumber) {
+    public Lesson(String day, String startTime, String endTime, String lessonType, String classNumber, String moduleCode) {
         this.day = day;
         this.startTime = startTime;
         this.endTime = endTime;
         this.lessonType = lessonType;
         this.classNumber = classNumber;
+        this.moduleCode = moduleCode;
     }
 }
