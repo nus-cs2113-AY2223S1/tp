@@ -14,6 +14,8 @@ public class Storage {
     private String folderpath;
 
     public Storage(String filepath, String folderpath) {
+        assert filepath.length() > 0 : "Filepath length cannot be 0";
+        assert folderpath.length() > 0 : "Folder-path length cannot be 0";
         this.filepath = filepath;
         this.folderpath = folderpath;
     }
