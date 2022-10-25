@@ -194,6 +194,7 @@ public class Parser {
         }
     }
 
+    //@@author matthewphua
     public void executeClear() {
         executor = new ClearCommand(mediaList);
         String output = executor.execute();
@@ -201,15 +202,24 @@ public class Parser {
         logger.log(Level.INFO, "\n\tClear command executed");
     }
 
+    //@@author matthewphua
     public void executeDelete(String[] words) {
         try {
-            if (words.length < 1) {
+            if (words.length != 3) {
                 throw new DukeException();
             } else {
-                //@@author matthewphua
-                String index = words[1];
-                int deleteIndex = Integer.parseInt(index) - 1;
-                executor = new RemoveCommand(mediaList, deleteIndex);
+                String typeString = words[1];
+                Class type;
+                if (typeString.equals("movie")) {
+                    type = Movie.class;
+                } else if (typeString.equals("tv")) {
+                    type = TvShow.class;
+                } else {
+                    throw new DukeException();
+                }
+                String index = words[2];
+                int deleteIndex = Integer.parseInt(index);
+                executor = new RemoveCommand(mediaList, type, deleteIndex);
                 String output = executor.execute();
                 Ui.print(output);
                 logger.log(Level.INFO, "\n\tDelete command executed");
