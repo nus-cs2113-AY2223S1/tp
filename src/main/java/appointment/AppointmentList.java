@@ -1,7 +1,5 @@
 package appointment;
 
-import employee.EmployeeList;
-
 import java.util.ArrayList;
 
 public class AppointmentList {

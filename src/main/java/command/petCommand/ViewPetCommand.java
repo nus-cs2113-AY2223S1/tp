@@ -1,6 +1,5 @@
 package command.petCommand;
 
-import appointment.AppointmentList;
 import command.Command;
 import pet.Pet;
 import pet.PetList;

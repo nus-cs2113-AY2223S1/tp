@@ -1,11 +1,5 @@
 package command;
 
-import appointment.AppointmentList;
-import employee.EmployeeList;
-import service.ServiceList;
-
-import java.io.IOException;
-import java.util.ArrayList;
 
 public class EndCommand extends Command{
 

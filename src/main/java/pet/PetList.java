@@ -1,5 +1,4 @@
 package pet;
-import appointment.Appointment;
 
 import java.util.ArrayList;
 
