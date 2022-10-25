@@ -307,6 +307,74 @@ Spending Habit: Oops, you spent too much. Do manage your expenses within your co
 
 ____________________________________________________________
 ____________________________________________________________
+Here are the total savings and expenses for
+Year: 2022
+
+-----CATEGORIES-----
+[transport] $1
+[salary] $2000
+[food] $20
+
+-----EXPENDITURE-----
+Income: $2000
+Expense: $21
+Savings: $1979
+____________________________________________________________
+____________________________________________________________
+Here are the total savings and expenses for
+Year: 2022, Month: 10
+
+-----CATEGORIES-----
+[transport] $1
+[salary] $2000
+[food] $20
+
+-----EXPENDITURE-----
+Income: $0
+Expense: $1
+Savings: $-1
+____________________________________________________________
+____________________________________________________________
+Month tag must be accompanied by a year tag, please check your input!
+____________________________________________________________
+____________________________________________________________
+Here are the total savings and expenses for
+The past 3 weeks: 
+
+-----CATEGORIES-----
+[transport] $1
+[salary] $2000
+[food] $20
+
+-----EXPENDITURE-----
+Income: $0
+Expense: $0
+Savings: $0
+____________________________________________________________
+____________________________________________________________
+Here are the total savings and expenses for
+The past 4 months: 
+
+-----CATEGORIES-----
+[transport] $1
+[salary] $2000
+[food] $20
+
+-----EXPENDITURE-----
+Income: $2000
+Expense: $20
+Savings: $1980
+____________________________________________________________
+____________________________________________________________
+Type of period given is invalid, please check your input!
+____________________________________________________________
+____________________________________________________________
+Period and number tags must be provided together, please check your input!
+____________________________________________________________
+____________________________________________________________
+Period and number tags must be provided together, please check your input!
+____________________________________________________________
+____________________________________________________________
 Keyword(s) for your search expression missing, please check your input!
 ____________________________________________________________
 ____________________________________________________________

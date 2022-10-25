@@ -1,23 +1,25 @@
 package seedu.duke.command;
 
 //@@author paullowse
+
 import seedu.duke.Storage;
 import seedu.duke.Ui;
 import seedu.duke.data.TransactionList;
 import seedu.duke.data.transaction.Transaction;
+import seedu.duke.exception.GlobalMissingTagException;
 import seedu.duke.exception.GlobalUnsupportedTagException;
-import seedu.duke.exception.StatsInvalidTypeException;
 import seedu.duke.exception.MoolahException;
+import seedu.duke.exception.StatsInvalidTypeException;
 
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static seedu.duke.command.CommandTag.COMMAND_TAG_STATS_TYPE;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_GLOBAL_MONTH;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_GLOBAL_NUMBER;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_GLOBAL_PERIOD;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_GLOBAL_YEAR;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_STATS_TYPE;
 import static seedu.duke.common.InfoMessages.COLON_SPACE;
 import static seedu.duke.common.InfoMessages.DOLLAR_SIGN;
 import static seedu.duke.common.InfoMessages.INFO_EXPENSE;
@@ -126,9 +128,12 @@ public class StatsCommand extends ListAndStatsCommand {
         statsLogger.log(Level.INFO, "Entering execution of the Stats command.");
 
         // Throws an unsupported tag exception if non-time_insights tag is using date intervals tags
-        if (!statsType.equals(TIME_INSIGHTS) && (containMonthYear() != FALSE
-            || containPeriodNumber() != FALSE)) {
+        if (!statsType.equals(TIME_INSIGHTS) && (containMonthYear() != FALSE || containPeriodNumber() != FALSE)) {
+            // Throws an unsupported tag exception if non-time_insights tag is using date intervals tags
             throw new GlobalUnsupportedTagException();
+        } else if (statsType.equals(TIME_INSIGHTS) && containMonthYear() == FALSE && containPeriodNumber() == FALSE) {
+            // Throws a missing mandatory tag(s) exception if there are no related tags for time_insights
+            throw new GlobalMissingTagException();
         }
 
         // Checks if there are any error in the tag combinations related to DateIntervals
