@@ -14,7 +14,9 @@ import seedu.duke.command.ImportCommand;
 import seedu.duke.command.ExportCommand;
 import seedu.duke.exceptions.YamomException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ParserTest {
     @Test
