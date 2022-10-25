@@ -1,12 +1,9 @@
 package seedu.duke.account;
 
+import java.io.IOException;
 import java.util.List;
 
-import seedu.duke.CurrencyList;
-import seedu.duke.CurrencyStructure;
-import seedu.duke.InputManager;
-import seedu.duke.Wallet;
-import seedu.duke.WalletFile;
+import seedu.duke.*;
 import seedu.duke.exception.FinanceException;
 import seedu.duke.exception.FinanceException.ExceptionCollection;
 
@@ -24,6 +21,7 @@ public class Account {
         while (!isAccountExit) {
             String in = InputManager.receiveInputLine().toLowerCase();
             String[] splits = in.split(" ");
+
             if (splits.length == 1) {
                 String commandType = splits[0];
                 try {
@@ -99,6 +97,86 @@ public class Account {
                 throw new FinanceException(ExceptionCollection.COMMAND_TYPE_EXCEPTION);
             }
         }
+    }
+
+    private boolean helpCenter(){
+        boolean isExit = false;
+        while(!isExit){
+            String in = InputManager.receiveInputLine().toLowerCase();
+            try{
+                if(in.equals("change default currency")){
+                    AccountUi.reenterPassword();
+                    boolean isCorrectPass = false;
+                    while(!isCorrectPass){
+                        if(wallet.getPassWord().equals(InputManager.receiveInputLine())) {
+                            System.out.println("Enter the currency you would like to change your default to: ");
+                            try {
+                                setDefaultCurrency(InputManager.receiveInputLine());
+                            } catch (FinanceException e) {
+                                e.handleException();
+                            }
+                            isCorrectPass = true;
+                        }
+                        else{
+                            System.out.println("Incorrect password, please try again.\nPassword:");
+                        }
+                    }
+                }
+                else if(in.equals("exit")){
+                    isExit = true;
+                }
+                else if(in.equals("change password")){
+                    AccountUi.reenterPassword();
+                    boolean isCorrectPass = false;
+                    while(!isCorrectPass){
+                        if(wallet.getPassWord().equals(InputManager.receiveInputLine())) {
+                            System.out.println("New password: ");
+                            wallet.setPassWord(InputManager.receiveInputLine());
+                            isCorrectPass = true;
+                        }
+                        else{
+                            System.out.println("Incorrect password, please try again.\nNew Password:");
+                        }
+                    }
+                }
+                else if(in.equals("change username")){
+                    AccountUi.reenterPassword();
+                    boolean isCorrectPass = false;
+                    while(!isCorrectPass){
+                        if(wallet.getPassWord().equals(InputManager.receiveInputLine())) {
+                            System.out.println("New username: ");
+                            List<String> existingUsernames;
+                            try {
+                                existingUsernames = UserNameFileWorkings.userNameFile();
+                            } catch (IOException e) {
+                                throw new FinanceException(ExceptionCollection.USERFILE_CREATE_EXCEPTION);
+                            }
+                            boolean isUserExists = false;
+                            while(!isUserExists) {
+                                String tempUser = InputManager.receiveInputLine();
+                                if (existingUsernames.contains(tempUser)) {
+                                    System.out.println("This username already exists, please enter another one\nNew Username: ");
+                                }
+                            }
+                            isCorrectPass = true;
+                        }
+                        else{
+                            System.out.println("Incorrect password, please try again.\nPassword:");
+                        }
+                    }
+                }
+                else if(in.equals("delete account")){
+                    return true;
+                }
+                else{
+                    throw new FinanceException(ExceptionCollection.COMMAND_TYPE_EXCEPTION);
+                }
+            }
+            catch (FinanceException e){
+                e.handleException();
+            }
+        }
+        return false;
     }
 
     private void setDefaultCurrency(String commandArg) throws FinanceException {

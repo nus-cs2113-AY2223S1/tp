@@ -8,7 +8,7 @@ import seedu.duke.exception.FinanceException;
 
 public class LoginCommand {
     public static void handleLogin() throws FinanceException {
-        Boolean isLoginSuccess = false;
+        boolean isLoginSuccess = false;
         try {
             AuthenticationUi.showLoginInfo();
             String[] userInputs = InputManager.receiveLoginInputs();
