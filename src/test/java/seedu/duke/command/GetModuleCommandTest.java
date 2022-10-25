@@ -35,7 +35,8 @@ public class GetModuleCommandTest {
         String s = System.lineSeparator();
         String expectedOutput = "Module               : CS1010X" + s
                 + "Module Name          : Programming Methodology" + s
-                + "Module Description   : This module introduces the fundamental concepts of problem solving by computing" + s
+                + "Module Description   : This module introduces the fundamental concepts of "
+                + "problem solving by computing" + s
                 + "\t\t\t\t\t and programming using an imperative programming language. It is the first and" + s
                 + "\t\t\t\t\t foremost introductory course to computing and is equivalent to CS1010, CS1010S" + s
                 + "\t\t\t\t\t and CS1010E Programming Methodology. The module will be taught using the Python" + s
