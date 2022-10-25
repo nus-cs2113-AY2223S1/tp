@@ -18,7 +18,7 @@ public class UserUniversityListTest {
     void exists() {
         testManager.createList("UCLA");
         testManager.createList("UCB");
-        assertEquals(true, testManager.foundKeyAll("UCLA"));
+        assertEquals(true, testManager.containsKey("UCLA"));
     }
 
 
