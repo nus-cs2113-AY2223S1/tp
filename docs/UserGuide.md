@@ -50,7 +50,6 @@ Hello from
       |_|         |___/             
 What would you like to do?
 To get started, type "help" to see the list of available commands
-
 ____________________________________________________________
 ```
 6. Type the valid command and press Enter to run the command. See [Feature](#3-features) or [Command Summary](#4-command-summary) for more information of commands.
