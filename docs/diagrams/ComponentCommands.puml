@@ -2,9 +2,7 @@
 !include https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/Styles.puml
 
 package Commands {
-    Class ConsoleCommand as "        ConsoleCommand        \n" <<abstract>>PARSER_COLOR_2
-
-    Class ConsoleCommandBye PARSER_COLOR_2
+    Class ConsoleCommand as "                                ConsoleCommand                                " <<abstract>>PARSER_COLOR_2
 
     Class ConsoleCommandAddExpense PARSER_COLOR_2
     Class ConsoleCommandViewExpense PARSER_COLOR_2
@@ -32,34 +30,36 @@ package Commands {
     Class ConsoleCommandConvertCurrency PARSER_COLOR_2
 
     Class ConsoleCommandMergeFile PARSER_COLOR_2
-}
 
-ConsoleCommandBye -left-|> ConsoleCommand
+    Class ConsoleCommandBye PARSER_COLOR_2
+}
 
 ConsoleCommandAddExpense -up-|> ConsoleCommand
 ConsoleCommandViewExpense -up-|> ConsoleCommand
-ConsoleCommandDeleteExpense -up-|> ConsoleCommand
-ConsoleCommandEditExpense -up-|> ConsoleCommand
+ConsoleCommandDeleteExpense --up-|> ConsoleCommand
+ConsoleCommandEditExpense --up-|> ConsoleCommand
 
-ConsoleCommandSortExpense -up-|> ConsoleCommand
+ConsoleCommandSortExpense ---up-|> ConsoleCommand
 
-ConsoleCommandAddIncome --up-|> ConsoleCommand
-ConsoleCommandViewIncome --up-|> ConsoleCommand
-ConsoleCommandDeleteIncome --up-|> ConsoleCommand
-ConsoleCommandEditIncome --up-|> ConsoleCommand
+ConsoleCommandAddIncome ----up-|> ConsoleCommand
+ConsoleCommandViewIncome ----up-|> ConsoleCommand
+ConsoleCommandDeleteIncome -----up-|> ConsoleCommand
+ConsoleCommandEditIncome -----up-|> ConsoleCommand
 
-ConsoleCommandAddTarget ---up-|> ConsoleCommand
-ConsoleCommandViewTarget ---up-|> ConsoleCommand
-ConsoleCommandDeleteTarget ---up-|> ConsoleCommand
-ConsoleCommandEditTarget ---up-|> ConsoleCommand
+ConsoleCommandAddTarget ------up-|> ConsoleCommand
+ConsoleCommandViewTarget ------up-|> ConsoleCommand
+ConsoleCommandDeleteTarget -------up-|> ConsoleCommand
+ConsoleCommandEditTarget -------up-|> ConsoleCommand
 
-ConsoleCommandAddRecurringPayment ----up-|> ConsoleCommand
-ConsoleCommandViewRecurringPayment ----up-|> ConsoleCommand
-ConsoleCommandDeleteRecurringPayment ----up-|> ConsoleCommand
-ConsoleCommandEditRecurringPayment ----up-|> ConsoleCommand
-ConsoleCommandPayRecurringPayment ----up-|> ConsoleCommand
+ConsoleCommandAddRecurringPayment --------up-|> ConsoleCommand
+ConsoleCommandViewRecurringPayment --------up-|> ConsoleCommand
+ConsoleCommandDeleteRecurringPayment ---------up-|> ConsoleCommand
+ConsoleCommandEditRecurringPayment ---------up-|> ConsoleCommand
+ConsoleCommandPayRecurringPayment ----------up-|> ConsoleCommand
 
-ConsoleCommandConvertCurrency -----up-|> ConsoleCommand
+ConsoleCommandConvertCurrency -----------up-|> ConsoleCommand
 
-ConsoleCommandMergeFile -----up-|> ConsoleCommand
+ConsoleCommandMergeFile -----------up-|> ConsoleCommand
+
+ConsoleCommandBye -----------up-|> ConsoleCommand
 @enduml
