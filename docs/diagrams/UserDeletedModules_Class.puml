@@ -1,0 +1,12 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class UserDeletedModules {
+    {static} - deletedModules : ArrayDeque<UserModuleMapping>
+
+    {static} + addToDeletedModules(inputModule : UserModuleMapping) : void
+    {static} + displayAll() : void
+}
+
+UserUniversityListManager "1" --> "1" UserDeletedModules
+@enduml

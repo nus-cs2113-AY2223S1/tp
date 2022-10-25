@@ -1,0 +1,28 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+-> UserUniversityListManager : deleteModule(inputSchool, puCode)
+activate UserUniversityListManager
+UserUniversityListManager -> UserUniversityListManager : foundKeyAll(inputSchool)
+activate UserUniversityListManager
+UserUniversityListManager --> UserUniversityListManager : :boolean
+deactivate UserUniversityListManager
+opt inputSchool exists in user's university list
+UserUniversityListManager -> UserDeletedModules : addToDeletedModules(deletedModule)
+activate UserDeletedModules
+opt ArrayDeque contains 5 module mappings
+UserDeletedModules -> UserDeletedModules : removeLast()
+activate UserDeletedModules
+UserDeletedModules --> UserDeletedModules
+deactivate UserDeletedModules
+end
+UserDeletedModules -> UserDeletedModules : addFirst(deletedModule)
+activate UserDeletedModules
+UserDeletedModules --> UserDeletedModules
+deactivate UserDeletedModules
+UserDeletedModules --> UserUniversityListManager
+deactivate UserDeletedModules
+<-- UserUniversityListManager
+deactivate UserUniversityListManager
+end
+@enduml
