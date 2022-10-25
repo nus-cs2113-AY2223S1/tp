@@ -58,7 +58,7 @@ public class Link {
     private static final String LINK_EXAMPLE = "https://nusmods.com/timetable/sem-SEMESTER_NUMBER"
             + "/share?MODULE_INFO&MODULE_INFO";
 
-    private static final String LINK_PROCESS_ERROR_MESSAGE = "Error processing NUSMod Link,"
+    private static final String LINK_PROCESS_ERROR_MESSAGE = "Error processing NUSMod Link, "
             + "Kindly ensure that the link is in the format of "
             + System.lineSeparator() + LINK_EXAMPLE;
 

@@ -1,15 +1,15 @@
 package seedu.duke.command;
 
+import seedu.duke.exceptions.YamomException;
 import seedu.duke.utils.State;
 import seedu.duke.utils.Storage;
 import seedu.duke.utils.Ui;
-import seedu.duke.exceptions.YamomException;
 import seedu.duke.model.Module;
 import seedu.duke.parser.Parser;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -190,4 +190,5 @@ public class SearchModuleCommand extends Command {
     public static String getUsage() {
         return COMMAND_USAGE;
     }
+
 }

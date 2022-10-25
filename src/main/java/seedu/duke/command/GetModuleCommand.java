@@ -6,14 +6,18 @@ import seedu.duke.utils.Storage;
 import seedu.duke.utils.Ui;
 import seedu.duke.model.RawLesson;
 import seedu.duke.model.Timetable;
-import seedu.duke.model.Module;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
+import java.lang.StringBuilder;
 
 import org.apache.commons.lang3.tuple.Pair;
+
+import seedu.duke.model.Module;
 
 /**
  * Get all module details by module code. Display all tutorial and labs session in timetable format.
@@ -26,7 +30,8 @@ public class GetModuleCommand extends Command {
     public static final String MODULE_NOT_FOUND = "Module not found! Please enter a valid module code! Try searching "
             + "if you do not remember the exact module code.";
     private static final String ERROR_WRONG_FORMAT = "Wrong format, should be: " + COMMAND_USAGE;
-
+    private static final int DESCRIPTION_SIZE = 80;
+    private static final String DESCRIPTION_INDENTATION = System.lineSeparator() + "\t\t\t\t\t";
     private Logger logger;
     private static final String SUBSYSTEM_NAME = "GetModuleCommand";
 
@@ -53,7 +58,8 @@ public class GetModuleCommand extends Command {
         // if field is empty, display null in ui
         ui.addMessage("Module               : " + (module.moduleCode.isEmpty() ? "Nil" : module.moduleCode));
         ui.addMessage("Module Name          : " + (module.title.isEmpty() ? "Nil" : module.title));
-        ui.addMessage("Module Description   : " + (module.description.isEmpty() ? "Nil" : module.description));
+        ui.addMessage("Module Description   : " + (module.description.isEmpty() ? "Nil"
+                : splitLongDescription(module.description)));
         ui.addMessage("Module Credit        : " + (module.moduleCredit == 0 ? "0" : module.moduleCredit));
         ui.addMessage("Department           : " + (module.department.isEmpty() ? "Nil" : module.department));
         ui.addMessage("Faculty              : " + (module.faculty.isEmpty() ? "Nil" : module.faculty));
@@ -66,6 +72,7 @@ public class GetModuleCommand extends Command {
         ui.addMessage("Preclusion           : " + (module.preclusion.isEmpty() ? "Nil" : module.preclusion));
         ui.addMessage("Corequisite          : " + (module.corequisite.isEmpty() ? "Nil" : module.corequisite));
 
+        ui.displayUi();
         ui.displayDivider();
         if (isModuleOfferedInCurrentSem(module, state)) {
             logger.log(Level.FINE, "Module is offered in current semester, module timetable will be displayed");
@@ -95,10 +102,25 @@ public class GetModuleCommand extends Command {
     }
 
     // Check if module input by user exists in module list. This is different from isValidModuleCode from Parser class.
-    public static boolean isModuleExist(Module module) {
+    boolean isModuleExist(Module module) {
         // check if module exists in module list
         List<Module> moduleList = Module.getAll();
         return moduleList.contains(module);
+    }
+
+    //adapted from https://stackoverflow.com/questions/25853393
+    private String splitLongDescription(String longDescription) {
+        Pattern pattern = Pattern.compile("\\G\\s*(.{1," + DESCRIPTION_SIZE + "})(?=\\s|$)", Pattern.DOTALL);
+        Matcher matcher = pattern.matcher(longDescription);
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        while (matcher.find()) {
+            stringBuilder.append(matcher.group());
+            stringBuilder.append(DESCRIPTION_INDENTATION);
+        }
+
+        return stringBuilder.toString();
     }
 
     @Override
