@@ -30,6 +30,7 @@ public class Parser {
     private Api api;
     private Favourite favourite;
     private ArrayList<String> favouriteList;
+    private static final String EMPTY_RESPONSE_HEADER = "Empty argument. Valid command(s): \n";
 
     /**
      * Parses user input into command for execution.
@@ -54,33 +55,33 @@ public class Parser {
         switch (commandWord) {
         case AuthCommand.COMMAND_WORD:
             if (arguments.trim().isEmpty()) {
-                return new InvalidCommand("Empty argument.\n" + CommonData.AUTH_FORMAT);
+                return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.AUTH_FORMAT);
             }
             return prepareAuth(arguments);
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
         case FavouriteCommand.COMMAND_WORD:
             if (arguments.trim().isEmpty()) {
-                return new InvalidCommand("Empty argument.\n" + CommonData.FAVOURITE_FORMAT);
+                return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.FAVOURITE_FORMAT);
             }
             return prepareFavourite(arguments);
         case FindCommand.COMMAND_WORD:
             if (arguments.trim().isEmpty()) {
-                return new InvalidCommand("Empty argument.\n" + CommonData.FIND_FORMAT);
+                return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.FIND_FORMAT);
             }
             return prepareFind(arguments);
         case ListCommand.COMMAND_WORD:
             return new ListCommand(carparkList);
         case SearchCommand.COMMAND_WORD:
             if (arguments.trim().isEmpty()) {
-                return new InvalidCommand("Empty argument.\n" + CommonData.SEARCH_FORMAT);
+                return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.SEARCH_FORMAT);
             }
             return prepareSearch(arguments);
         case UpdateCommand.COMMAND_WORD:
             return new UpdateCommand(api);
         case UnfavouriteCommand.COMMAND_WORD:
             if (arguments.trim().isEmpty()) {
-                return new InvalidCommand("Empty argument.\n" + CommonData.UNFAVOURITE_FORMAT);
+                return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.UNFAVOURITE_FORMAT);
             }
             return prepareUnfavourite(arguments);
         default:
