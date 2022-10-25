@@ -1,7 +1,6 @@
 package seedu.duke.command;
 
 //@@author wcwy
-
 import seedu.duke.Storage;
 import seedu.duke.Ui;
 import seedu.duke.data.Budget;
@@ -35,7 +34,6 @@ public class BudgetCommand extends Command {
     // Detailed budget description
     public static final String COMMAND_DETAILED_HELP = COMMAND_HELP + COMMAND_PARAMETERS_INFO
             + LINE_SEPARATOR;
-
 
     //@@author wcwy
     private long budgetAmount;

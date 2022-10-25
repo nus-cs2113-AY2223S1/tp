@@ -8,7 +8,6 @@ import seedu.duke.data.TransactionList;
 import static seedu.duke.common.InfoMessages.INFO_EXIT;
 import static seedu.duke.common.InfoMessages.LINE_SEPARATOR;
 
-
 /**
  * Represents a bye command object that will execute the operations for Bye command.
  */
