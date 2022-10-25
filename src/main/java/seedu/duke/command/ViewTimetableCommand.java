@@ -18,7 +18,7 @@ import java.util.Map;
 
 public class ViewTimetableCommand extends Command {
     public static final String COMMAND_WORD = "view";
-    public static final String COMMAND_USAGE = "view";
+    public static final String COMMAND_USAGE = "view (fancy|simple)";
     public static final String COMMAND_DESCRIPTION = "Display current user timetable";
 
     private static final String ERROR_MESSAGE_EMPTY_TIMETABLE = "Your timetable is empty."

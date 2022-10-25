@@ -24,6 +24,9 @@ import java.util.regex.Pattern;
  * Handles the analysing of user input into logical syntactical components that is understood by the application.
  */
 public class Parser {
+    private static final String ERROR_EMPTY_INPUT = "Please enter a command! "
+            + System.lineSeparator() + "Enter \"help\" to see all available commands in YAMOM!";
+
     /**
      * Analyzes based on the first word which is supposed to be a keyword specifying the
      * feature that the user wants to call upon.
@@ -34,6 +37,10 @@ public class Parser {
      */
     public static Command parse(String userInput) throws YamomException {
         String[] keywords = userInput.split("\\s+");
+
+        if (isEmptyInput(userInput)) {
+            throw new YamomException(ERROR_EMPTY_INPUT);
+        }
 
         Command toExecute;
         switch (keywords[0]) {
@@ -101,6 +108,10 @@ public class Parser {
 
     public static boolean isValidTwoWordCommand(String[] keywords) {
         return isTwoWordsCommand(keywords) && isModuleCode(keywords[1]);
+    }
+
+    private static boolean isEmptyInput(String command) {
+        return command.isBlank() || command.isEmpty();
     }
 
     /**

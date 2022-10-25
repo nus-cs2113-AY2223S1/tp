@@ -9,6 +9,40 @@ __ __ _____ _____ _____ _____
 How can I help you today?
 Enter "help" to get started!
 Sem [1] >> --------------------------------------
+Here are all the commands available in YAMOM!
+
+add	: add a module into YAMOM timetable.
+delete	: remove a module from YAMOM timetable.
+list	: List out all the selected modules and lesson slots.
+bye	: Exit YAMOM!
+export	: Generates an NUSMod Link to be exported to the browser.
+get	: Show all details of a module.
+help	: List out all commands and  their respective usages in YAMOM
+import	: Imports a timetable  from an NUSMod timetable sharing link
+search	: List out all modules that contains a search term
+	 * the search term can either be module code or a keyword in module title.
+semester	: Select another semester to plan and organize timetable
+select	: Select a module slot
+view	: Display current user timetable
+
+Usage :
+	add [MODULE_CODE]
+	delete [MODULE_CODE]
+	list
+	bye
+	export
+	get [MODULE_CODE]
+	help
+	import [NUSMods_LINK]
+	search (/code [MODULE_CODE] | /title [KEYWORD])
+	semester [SEMESTER_SELECTED]
+	select /module <MODULE_CODE> /type <LESSON_TYPE> /code <CLASS_NO>
+	view (fancy|simple)
+
+Note: [ ] are required elements, < > are optional elements
+For more detailed guide, please visit https://ay2223s1-cs2113-f11-3.github.io/tp/
+--------------------------------------
+Sem [1] >> --------------------------------------
 Search Result:
 Total 2 module(s) found
 
@@ -27,7 +61,26 @@ CS2113T Software Engineering & Object-Oriented Programming
 To get full details of the module, type 'get <module code>'
 --------------------------------------
 Sem [1] >> --------------------------------------
+Search Result:
+Total 5 module(s) found
+
+CG2271 Real-Time Operating Systems
+CS2106 Introduction to Operating Systems
+CS2106R Introduction to Operating Systems
+CS3221 Operating Systems Design and Pragmatics
+YSC3217 Programming Operating Systems, Interfaces & eXtras
+
+To get full details of the module, type 'get <module code>'
+--------------------------------------
+Sem [1] >> --------------------------------------
 CS2113 has been added
+--------------------------------------
+Sem [1] >> --------------------------------------
+CS2113	Software Engineering & Object-Oriented Programming
+	LECTURE=1, TUTORIAL=1
+
+
+Here's a list of your current selected module(s)!
 --------------------------------------
 Sem [1] >> --------------------------------------
 Error! 	0 arguments expected
@@ -39,8 +92,19 @@ Sem [1] >> --------------------------------------
 Error! 	0 arguments expected
 --------------------------------------
 Sem [1] >> --------------------------------------
+CS2113 has been deleted!
+--------------------------------------
+Sem [1] >> --------------------------------------
+Here is your NUSMod Link:
+	https://nusmods.com/timetable/sem-1/share?
+--------------------------------------
+Sem [1] >> --------------------------------------
+You are now planning for semester 2
+--------------------------------------
+Sem [2] >> --------------------------------------
+Shutting down......
 --------------------------------------
 This is your export link:
-https://nusmods.com/timetable/sem-1/share?CS2113=LEC:1,TUT:4
+https://nusmods.com/timetable/sem-2/share?
 Bye bye, See you again
 --------------------------------------

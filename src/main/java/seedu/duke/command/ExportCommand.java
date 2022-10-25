@@ -34,7 +34,7 @@ public class ExportCommand extends Command {
 
     @Override
     public String getExecutionMessage() {
-        return "Here is your NUSMod Link: ";
+        return "Here is your NUSMod Link:";
     }
 
     public static String getCommandDescription() {
