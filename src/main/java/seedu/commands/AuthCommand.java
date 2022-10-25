@@ -71,6 +71,12 @@ public class AuthCommand extends Command {
         }
     }
 
+    /**
+     * Fetch API Data from LTA and adds useful information for error handling.
+     *
+     * @return Appended message for more information.
+     * @throws UnauthorisedAccessApiException if authentication fails.
+     */
     private String fetchApiData() throws UnauthorisedAccessApiException {
         try {
             api.syncFetchData();
