@@ -2,7 +2,7 @@
 !include <office/Concepts/globe_internet>
 !include <office/Concepts/documents>
 !include <office/Users/user>
-!include https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/styles.puml
+!include https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/Styles.puml
 
 Package " "<<Rectangle>>{
     Class MoneyGoWhere MONEYGOWHERE_COLOR_1
@@ -12,6 +12,7 @@ Package " "<<Rectangle>>{
     Class UserInterface USER_INTERFACE_COLOR_1
 
     Class Parser PARSER_COLOR_1
+    Class Command PARSER_COLOR_2
 
     Class Data DATA_COLOR_1
 
@@ -34,10 +35,12 @@ UserInterface -right-> Parser
 UserInterface -down-> Data
 UserInterface -left-> Logger
 
+Logger .left.> LogFile
+
+Parser -down-> Command
+
 Data -down-> Storage
 Data -down-> Apis
 
 Storage .left.> DataFile
-
-Logger .left.> LogFile
 @enduml

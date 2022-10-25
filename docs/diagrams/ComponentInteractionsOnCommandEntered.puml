@@ -1,5 +1,5 @@
 @startuml
-!include https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/styles.puml
+!include https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/Styles.puml
 
 Actor User USER_COLOR
 Participant ":USERINTERFACE" as UserInterface USER_INTERFACE_COLOR_1
@@ -7,14 +7,21 @@ Participant ":PARSER" as Parser PARSER_COLOR_1
 Participant ":DATA" as Data DATA_COLOR_1
 Participant ":STORAGE" as Storage STORAGE_COLOR_1
 
-User -[USER_COLOR]> UserInterface : "Add-Expense -n Expense -a 7.80"
 activate UserInterface USER_INTERFACE_COLOR_1
+
+UserInterface -[USER_INTERFACE_COLOR_1]> UserInterface : getConsoleCommand()
+activate UserInterface USER_INTERFACE_COLOR_1
+
+User -[USER_COLOR]> UserInterface : "Add-Expense -n Expense -a 7.80"
 
 UserInterface -[USER_INTERFACE_COLOR_1]> Parser : parse(consoleInput)
 activate Parser PARSER_COLOR_1
 
-Parser --[PARSER_COLOR_1]> UserInterface : consoleCommand
+Parser --[PARSER_COLOR_1]> UserInterface : consoleCommandAddExpense
 deactivate Parser
+
+UserInterface --[USER_INTERFACE_COLOR_1]> UserInterface : consoleCommand
+deactivate UserInterface
 
 UserInterface -[USER_INTERFACE_COLOR_1]> UserInterface : runCommandAddExpense(consoleCommand)
 activate UserInterface USER_INTERFACE_COLOR_1
@@ -32,8 +39,5 @@ Storage --[STORAGE_COLOR_1]> UserInterface
 deactivate Storage
 
 UserInterface --[USER_INTERFACE_COLOR_1]> UserInterface
-deactivate UserInterface
-
-UserInterface --[USER_INTERFACE_COLOR_1]> User
 deactivate UserInterface
 @enduml
