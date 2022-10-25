@@ -60,23 +60,12 @@ public class Ui {
                         + " | .__/\\__,_|_| |_|\\_\\___|_|\\_|\\___|\n"
                         + " |_|                                ");
     }
-    //@@author
-
-    /**
-     * Prompts user to enter name and prints welcome message.
-     */
-    private void askName() {
-        print("What is your name?");
-        String name = getLine();
-        print(String.format("Welcome to parKING, %s!", name));
-    }
-
+    
     /**
      * Prints ASCII art and logo, and asks user for their name.
      */
     public void greetUser() {
         showLogo();
-        askName();
     }
 
     /**
