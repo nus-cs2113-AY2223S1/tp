@@ -24,9 +24,9 @@ This UserGuide introduces you a brief overview of our features with example of u
 
 >**Note:**
 > 
->1. Upcycle commands are case-sensitive and space-insensitive. For example, ```upcycle``` and ```Upcycle``` are different words, ```Upcycle``` and ```Upcycle        ``` are the same words.
+>1. Upcycle commands are case-sensitive and space-insensitive. For example, ```upcycle``` and ```Upcycle``` are different words, ```Upcycle``` and ```Upcycle ``` are the same words.
 >2. Parameters can be shuffled. For example, ```update-item /i [ITEM_ID] /p [PRICE]``` and ```update-item /p [PRICE] /i [ITEM_ID]``` are the same.
->3. Phrases in ```[CAPITAL_WORDS]``` are the parameter for you to input.
+>3. Phrases in ```[CAPITAL_WORDS]``` are the parameters for you to input.
 
 Let's hop into the sector [2. Quick Start](#2-quick-start) to start with us
 
@@ -192,7 +192,29 @@ Status: [Available] ItemId: 99995bb2 Item: scale Category: SPORTS_EQUIPMENT Owne
 ____________________________________________________________
 ```
 
-#### 3.3.4. ```sort-items``` - Sort and filter list of items
+#### 3.3.4. ```update-item``` - Updates properties of an item
+> Currently only supports updating the price of an item
+
+Format: ```update-item /i [ITEM_ID] /p [NEW_PRICE]```
+
+Note:
+
+1. `itemId` must exist i.e. item has been created and was not deleted 
+2. A valid price must be given i.e. non-zero and non-negative
+3. Price is in price per day
+4. You may or may not use floating point numbers for price
+
+Example of usage: ```update-item /i ea608c61 /p 4```
+
+Expected outcome:
+```
+____________________________________________________________
+Done! Here is the item you updated
+Status: [On loan] ItemId: ea608c61 Item: toy Category: SPORTS_EQUIPMENT Owner: WinstonLimCherHong PricePerDay: $4.0
+____________________________________________________________
+```
+
+#### 3.3.5. ```sort-items``` - Sort and filter list of items
 >Sort and filter list of items based on the mode of sorting and price boundaries requested by the user
 
 Format: ```sort-items /mode [MODE_OF_SORTING] /min [MIN_PRICE] /max [MAX_PRICE]```
@@ -216,7 +238,7 @@ Here are 3 item(s) in your filtered list:
 ____________________________________________________________
 ```
 
-#### 3.3.5. ```list-categories``` - List all categories 
+#### 3.3.6. ```list-categories``` - List all categories 
 >List all categories that can be assigned to items and their index
 
 Format: ```list-categories```
@@ -300,6 +322,26 @@ ____________________________________________________________
 Here is the transaction you requested to view: 
 Status: [Returned] TransactionID: 4f7f7fe8 ItemName: weight ItemID: 5b727b2e BorrowerID: jingwei ReturnedDate: Sat, Oct 08 2022
 ____________________________________________________________
+```
+
+#### 3.4.4. ```update-tx``` - Updates properties of a transaction
+>Currently supports only updating the duration of a transaction
+
+Format: ```update-tx /t [TRANSACTION_ID] /d [NEW_DURATION]```
+
+Note:
+1. `transactionId` must exist i.e. Transaction was created and has not been removed
+2. Duration must be a valid duration i.e. non-zero and non-negative
+3. Duration is in days and therefore should be a whole number
+
+Example of usage: ```update-tx /t 2c833e49 /d 11```
+
+```
+____________________________________________________________
+Done! Here is the updated transaction:
+Status: [On loan] TransactionID: 2c833e49 ItemName: toy ItemID: ea608c61 BorrowerID: test2 ReturnDate: Sat, Nov 05 2022 (11 day(s) remaining)
+____________________________________________________________
+
 ```
 
 **...To be updated(List, Update, View Tx by status)**
