@@ -31,8 +31,9 @@ public class GetModuleCommand extends Command {
             + "if you do not remember the exact module code.";
     private static final String ERROR_WRONG_FORMAT = "Wrong format, should be: " + COMMAND_USAGE;
     private static final int DESCRIPTION_SIZE = 80;
-    private static final String DESCRIPTION_INDENTATION = System.lineSeparator() + "\t\t\t\t\t";
+    // private static final String DESCRIPTION_INDENTATION = System.lineSeparator() + "\t\t\t\t\t";
     private Logger logger;
+    private static final String DESCRIPTION_INDENTATION = "\n" + "\t\t\t\t\t" + "  ";
     private static final String SUBSYSTEM_NAME = "GetModuleCommand";
 
     public GetModuleCommand(String[] input) throws YamomException {

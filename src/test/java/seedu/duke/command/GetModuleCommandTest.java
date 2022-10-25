@@ -23,6 +23,7 @@ public class GetModuleCommandTest {
         Ui ui = new Ui();
         State state = new State();
 
+        // set state to semester 1
         State.setSemester(1);
         String[] input = {"get", "CS1010X"};
         GetModuleCommand getModuleCommand = new GetModuleCommand(input);
@@ -32,42 +33,78 @@ public class GetModuleCommandTest {
 
         getModuleCommand.execute(state, ui, null);
         String s = System.lineSeparator();
-        String expectedOutput =
-                "Module               : CS1010X" + s
-                        + "Module Name          : Programming Methodology" + s
-                        + "Module Description   : This module introduces the fundamental concepts of problem "
-                        + "solving by computing" + s
-                        + "\t\t\t\t\t and programming using an imperative programming language. It is the first "
-                        + "and" + s
-                        + "\t\t\t\t\t foremost introductory course to computing and is equivalent to CS1010, "
-                        + "CS1010S" + s
-                        + "\t\t\t\t\t and CS1010E Programming Methodology. The module will be taught using the "
-                        + "Python" + s
-                        + "\t\t\t\t\t programming language and topics covered include problem solving by "
-                        + "computing," + s
-                        + "\t\t\t\t\t writing pseudo-codes, basic problem formulation and problem solving, "
-                        + "program" + s
-                        + "\t\t\t\t\t development, coding, testing and debugging, fundamental programming "
-                        + "constructs" + s
-                        + "\t\t\t\t\t (variables, types, expressions, assignments, functions, control "
-                        + "structures," + s
-                        + "\t\t\t\t\t etc.), fundamental data structures: arrays, strings and structures, "
-                        + "simple file" + s
-                        + "\t\t\t\t\t processing, and basic recursion." + s
-                        + "\t\t\t\t\t" + s
-                        + "Module Credit        : 4" + s
-                        + "Department           : Computer Science" + s
-                        + "Faculty              : Computing" + s
-                        + "Workload             : [2, 1, 1, 3, 3]" + s
-                        + "Semester offering    : [2, 3]" + s
-                        + "Prerequisite         : Nil" + s
-                        + "Preclusion           : CS1010 or its equivalent, CS1010FC" + s
-                        + "Corequisite          : Nil" + s
-                        + "--------------------------------------" + s
-                        + "Module CS1010X is not offered in this semester, hence no timetable information "
-                        + "is available due to unforseen circumstances" + s;
+        String expectedOutput = "Module               : CS1010X" + s
+                + "Module Name          : Programming Methodology" + s
+                + "Module Description   : This module introduces the fundamental concepts of problem solving by computing" + s
+                + "\t\t\t\t\t and programming using an imperative programming language. It is the first and" + s
+                + "\t\t\t\t\t foremost introductory course to computing and is equivalent to CS1010, CS1010S" + s
+                + "\t\t\t\t\t and CS1010E Programming Methodology. The module will be taught using the Python" + s
+                + "\t\t\t\t\t programming language and topics covered include problem solving by computing," + s
+                + "\t\t\t\t\t writing pseudo-codes, basic problem formulation and problem solving, program" + s
+                + "\t\t\t\t\t development, coding, testing and debugging, fundamental programming constructs" + s
+                + "\t\t\t\t\t (variables, types, expressions, assignments, functions, control structures," + s
+                + "\t\t\t\t\t etc.), fundamental data structures: arrays, strings and structures, simple file" + s
+                + "\t\t\t\t\t processing, and basic recursion." + s
+                + "\t\t\t\t\t" + s
+                + "Module Credit        : 4" + s
+                + "Department           : Computer Science" + s
+                + "Faculty              : Computing" + s
+                + "Workload             : [2, 1, 1, 3, 3]" + s
+                + "Semester offering    : [2, 3]" + s
+                + "Prerequisite         : Nil" + s
+                + "Preclusion           : CS1010 or its equivalent, CS1010FC" + s
+                + "Corequisite          : Nil" + s
+                + "--------------------------------------" + s
+                + "Module CS1010X is not offered in this semester, hence no timetable information "
+                + "is available due to unforseen circumstances" + s;
 
-        assertEquals(expectedOutput, outContent.toString());
+        assertEquals(expectedOutput.replaceAll("\\s+", ""),
+                outContent.toString().replaceAll("\\s+", ""));
+    }
+
+    @Test
+    void getModuleCommand_validModuleCodeCS1010E_expectCorrectModuleDetailsOutput() throws YamomException {
+
+        Ui ui = new Ui();
+        State state = new State();
+
+        // set state to semester 3 (special term 1)
+        State.setSemester(3);
+        String[] input = {"get", "CS1010e"};
+        GetModuleCommand getModuleCommand = new GetModuleCommand(input);
+
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+
+        getModuleCommand.execute(state, ui, null);
+        // String s = System.lineSeparator();
+        String expectedOutput = "Module               : CS1010E\r\n"
+                + "Module Name          : Programming Methodology\r\n"
+                + "Module Description   : This module introduces the fundamental concepts of problem solving by "
+                + "computing\r\n"
+                + "\t\t\t\t\t   and programming using an imperative programming language. It is the first and\r\n"
+                + "\t\t\t\t\t   foremost introductory course to computing.  Topics covered include computational\r\n"
+                + "\t\t\t\t\t   thinking and computational problem solving, designing and specifying an\r\n"
+                + "\t\t\t\t\t   algorithm, basic problem formulation and problem solving approaches, program\r\n"
+                + "\t\t\t\t\t   development, coding, testing and debugging, fundamental programming constructs\r\n"
+                + "\t\t\t\t\t   (variables, types, expressions, assignments, functions, control structures,\r\n"
+                + "\t\t\t\t\t   etc.), fundamental data structures (arrays, strings, composite data types),\r\n"
+                + "\t\t\t\t\t   basic sorting, and recursion.\r\n"
+                + "\t\t\t\t\t  \r\n"
+                + "Module Credit        : 4\r\n"
+                + "Department           : Computer Science\r\n"
+                + "Faculty              : Computing\r\n"
+                + "Workload             : [2, 1, 1, 3, 3]\r\n"
+                + "Semester offering    : [1, 2, 4]\r\n"
+                + "Prerequisite         : Nil\r\n"
+                + "Preclusion           : CS1010, CS1010J, CS1010S, CS1010X, CS1010XCP, CS1101S\r\n"
+                + "Corequisite          : Nil\r\n"
+                + "--------------------------------------\r\n"
+                + "Module CS1010E is not offered in this semester, hence no timetable information is available due "
+                + "to unforseen circumstances\r\n";
+
+        assertEquals(expectedOutput.replaceAll("\\s+", ""),
+                outContent.toString().replaceAll("\\s+", ""));
     }
 
     @Test
@@ -103,49 +140,6 @@ public class GetModuleCommandTest {
         } catch (YamomException e) {
             assertEquals("Error! \tWrong format, should be: get [EXACT_MODULE_CODE]", e.getMessage());
         }
-    }
-
-    @Test
-    void getModuleCommand_validModuleCodeCS1010E_expectCorrectModuleDetailsOutput() throws YamomException {
-
-        Ui ui = new Ui();
-        State state = new State();
-
-        State.setSemester(3);
-        String[] input = {"get", "CS1010e"};
-        GetModuleCommand getModuleCommand = new GetModuleCommand(input);
-
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-
-        getModuleCommand.execute(state, ui, null);
-        String s = System.lineSeparator();
-        String expectedOutput = "Module               : CS1010E" + s
-                + "Module Name          : Programming Methodology" + s
-                + "Module Description   : This module introduces the fundamental concepts of problem solving by "
-                + "computing" + s
-                + "\t\t\t\t\t and programming using an imperative programming language. It is the first and" + s
-                + "\t\t\t\t\t foremost introductory course to computing.  Topics covered include computational" + s
-                + "\t\t\t\t\t thinking and computational problem solving, designing and specifying an" + s
-                + "\t\t\t\t\t algorithm, basic problem formulation and problem solving approaches, program" + s
-                + "\t\t\t\t\t development, coding, testing and debugging, fundamental programming constructs" + s
-                + "\t\t\t\t\t (variables, types, expressions, assignments, functions, control structures," + s
-                + "\t\t\t\t\t etc.), fundamental data structures (arrays, strings, composite data types)," + s
-                + "\t\t\t\t\t basic sorting, and recursion." + s
-                + "\t\t\t\t\t" + s
-                + "Module Credit        : 4" + s
-                + "Department           : Computer Science" + s
-                + "Faculty              : Computing" + s
-                + "Workload             : [2, 1, 1, 3, 3]" + s
-                + "Semester offering    : [1, 2, 4]" + s
-                + "Prerequisite         : Nil" + s
-                + "Preclusion           : CS1010, CS1010J, CS1010S, CS1010X, CS1010XCP, CS1101S" + s
-                + "Corequisite          : Nil" + s
-                + "--------------------------------------" + s
-                + "Module CS1010E is not offered in this semester, hence no timetable information is available due "
-                + "to unforseen circumstances" + s;
-
-        assertEquals(expectedOutput, outContent.toString());
     }
 
     @Test
