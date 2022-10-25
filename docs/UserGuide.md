@@ -2,33 +2,83 @@
 
 ## Introduction
 
-{Give a product intro}
+easySEP is a Command Line Interface application that allows you to search for SEP module mappings for CS modules from universities all around the world.
 
 ## Quick Start
 
 {Give steps to get started quickly}
 
 1. Ensure that you have Java 11 or above installed.
-1. Down the latest version of `Duke` from [here](http://link.to/duke).
+2. Down the latest version of `easySEP` from [here](http://link.to/duke).
+3. Open your command prompt to the folder where you saved the .jar file
+4. Run java -jar easySEP.jar
 
 ## Features
+### Create Command: `/create u/{UNIVERSITY_NAME}`
 
-{Give detailed description of each feature}
+Creates a university list and the corresponding timetable for user's specified university.
 
-### Adding a todo: `todo`
 
-Adds a new item to the list of todo items.
+### Exit Command: `/exit`
 
-Format: `todo n/TODO_NAME d/DEADLINE`
+Exits easySEP
 
-- The `DEADLINE` can be in a natural language format.
-- The `TODO_NAME` cannot contain punctuation.
 
-Example of usage:
+### Help Command: `/help`
 
-`todo n/Write the rest of the User Guide d/next week`
+Prints out all the commands and command format required for easySEP
 
-`todo n/Refactor the User Guide to remove passive voice d/13/04/2020`
+
+### Add Command: `/add`
+
+Has a total of 2 functionalities: adding a lesson to the partner university timetable or adding a module mapping to the university list.
+
+#### Add Command for Lessons: `/add u/{UNIVERSITY_NAME} m/{MODULE_CODE} d/{DAY_OF_THE_WEEK} st/{START_TIME} en/{END_TIME}`
+
+Adds a lesson for the specified module code to the timetable for the specified university with given start time and end time on the specified day of the week.
+
+#### Add Command for Module Mapping: `/add u/{UNIVERSITY_NAME} m/{MODULE_CODE}`
+
+Adds module to university list.
+
+
+### Delete Command: `/delete`
+
+Has a total of 3 functionalities: deleting a lesson from timetable, deleting a module from a university list or deleting the entire university list.
+
+#### Delete Command for Lessons: `/delete u/{UNIVERSITY_NAME} m/{MODULE_CODE} d/{DAY_OF_THE_WEEK} st/{START_TIME} en/{END_TIME}`
+
+Deletes the specified lesson from the university's timetable
+
+#### Delete Command for Modules: `/delete u/{UNIVERSITY_NAME} m/{MODULE_CODE}`
+
+Deletes the specified module from the university's list
+
+#### Delete Command for Universities: `/delete u/{UNIVERSITY_NAME}`
+
+Deletes the university list for the specified university
+
+
+### View Command: `/view`
+
+Performs a total of 4 functionalities: displays all user created university lists, displays user's delete history, displays user's selected university list and timetable and displays all user's timetables.
+
+#### View Command for all user university lists: `/view LISTS`
+
+Displays all universities lists created by user.
+
+#### View Command for user's delete history: `/view DELETE_HISTORY`
+
+Displays delete history of the user.
+
+#### View Command for user's selected university: `/view u/{UNIVERSITY_NAME}`
+
+Displays the created list and timetable for the specified university.
+
+#### View Command for all timetables created by user: `/view TIMETABLES`
+
+Displays all timetables for universities lists created by user.
+
 
 ### List Command: `/list`
 
@@ -72,14 +122,24 @@ Example of usage:
 
 `/list u/Aalto_University`
 
+### Favourite Command: `/favourite`
+
+Performs a total of 3 functionalities: adding a university list to user's favourites, removing a university list from a user's favourites and viewing all the user's favourite university lists
+
+#### Favourite Command to add a university to favourites: `/favourite add/{UNIVERSITY_NAME}`
+
+Adds the specified university list to user's favourites.
+
+#### Favourite Command to remove a university to favourites: `/favourite del/{UNIVERSITY_NAME}`
+
+Removes the specified university list from user's favourites.
+
+#### Favourite Command to view user's favourites university lists: `/favourite VIEW`
+
+Displays all the user's favourite university lists.
+
 ## FAQ
-
-**Q**: How do I transfer my data to another computer?
-
-**A**: {your answer here}
 
 ## Command Summary
 
 {Give a 'cheat sheet' of commands here}
-
-- Add todo `todo n/TODO_NAME d/DEADLINE`
