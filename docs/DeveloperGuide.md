@@ -37,15 +37,21 @@
 
 ## Preface
 
-{Provide brief details of the Moolah Manager application and the purpose of the Developer Guide}
+Moolah Manager is a desktop app for managing your finances, optimised for use via a Command Line Interface (CLI). Designed for people who are
+fast typists, it can help to process day-to-day transactions, namely your incomes and expenses. These can help you to see all your transactions
+and provide you with a valuable insight into your spending habits.
 
-_Written by: Author name_
+This document is meant to assist potential users and developers in understanding how our program works.
+
+_Written by: Brian Wong Yun Long_
 
 ## Acknowledgements
 
-{List here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+The format of this development guide was adapted from [[SE-EDU AddressBook Level 3 Developer Guide]](https://se-education.org/addressbook-level3/DeveloperGuide.html)
 
-_Written by: Author name_
+Some code used in this program were reused and adapted from our individual projects from the CS2113 IP. 
+
+_Written by: Brian Wong Yun Long_
 
 ## Setting Up the Project
 
