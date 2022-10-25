@@ -10,8 +10,8 @@
    3.3. [User component](#33-user-component)\
    3.4. [Item component](#34-item-component)\
    3.5. [Transaction component](#35-transaction-component)\
-   3.6. [Ui component](#34-ui-component)\
-   3.7. [Storage component](#35-storage-component)
+   3.6. [Ui component](#36-ui-component)\
+   3.7. [Storage component](#37-storage-component)
 4. [Implementation](#4-implementation)\
    4.1. [User-related features](#41-user-related-features)\
    4.2. [Item-related features](#42-item-related-features)\
