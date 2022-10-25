@@ -2,7 +2,7 @@
 
 ## Introduction
 
-A command line application that allows you to manage your recipes 
+A command line / GUI application that allows you to manage your recipes 
 
 ## Quick Start
 
@@ -15,19 +15,53 @@ A command line application that allows you to manage your recipes
 
 {Give detailed description of each feature}
 
-### Adding a todo: `todo`
-Adds a new item to the list of todo items.
+### Adding recipe: `/add`
+
+Adds a new recipe to the list.
 
 Format: `todo n/TODO_NAME d/DEADLINE`
 
 * The `DEADLINE` can be in a natural language format.
-* The `TODO_NAME` cannot contain punctuation.  
+* The `TODO_NAME` cannot contain punctuation.
 
-Example of usage: 
+Example of usage:
 
 `todo n/Write the rest of the User Guide d/next week`
 
 `todo n/Refactor the User Guide to remove passive voice d/13/04/2020`
+
+### List all recipes: `/list`
+
+### Delete recipes: `/delete`
+
+### Edit recipes: `/edit`
+
+Edits an existing recipe from the list.
+
+Format: `/edit [RECIPE_NAME, RECIPE_INDEX]`
+
+CLI Mode: `[/add,/del,/swap,/change,/view,/done] [-t,-d,-i,-s] [index1] ...`
+
+* `-t` flag changes the title
+* `-d` flag changes the description
+* `-i` flag changes the ingredients
+* `-s` flag changes the steps
+
+Example of usage:
+
+`/edit fried rice`
+`/change -i 1`
+`rice / 100 / g`
+
+`/edit 5`
+`/swap -s 4 7`
+
+### View recipes: `/view`
+
+### Find recipes: `/find`
+
+### Exit program: `/exit`
+
 
 ## FAQ
 
