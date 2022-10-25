@@ -43,6 +43,10 @@ public class Item {
         return pricePerDay;
     }
 
+    public Category.Categories getCategory() {
+        return category;
+    }
+
     public Item updatePrice(double newPricePerDay) {
         return new Item(this.itemId, this.name, Category.setCategory(this.category), newPricePerDay,
                 this.ownerId);
