@@ -6,6 +6,8 @@ import task.TaskList;
 
 public class AddTaskCommand extends Command {
 
+    public final static String COMMAND_WORD = "add";
+
     private final Task task;
 
     public AddTaskCommand(int appointmentId, int employeeId, String taskDescription) {
