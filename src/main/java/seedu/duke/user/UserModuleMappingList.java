@@ -31,13 +31,14 @@ public class UserModuleMappingList {
      * @return true if module is found, false otherwise
      */
     public boolean findModuleByCode(UserModuleMapping input) {
+        boolean isFound = false;
         for (UserModuleMapping module : modules) {
             if (module.getNusCode().equals(input.getNusCode())
                 && module.getPuCode().equals(input.getPuCode())) {
-                return true;
+                isFound = true;
             }
         }
-        return false;
+        return isFound;
     }
 
     public void addModule(UserModuleMapping input) {
