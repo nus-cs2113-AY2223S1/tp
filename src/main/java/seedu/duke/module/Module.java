@@ -1,5 +1,6 @@
 package seedu.duke.module;
 
+import seedu.duke.Timetable;
 import seedu.duke.TimetableDict;
 import seedu.duke.module.lessons.Lesson;
 
@@ -187,12 +188,40 @@ public class Module {
     }
 
     public void replaceAttending(TimetableDict timetableDict, Lesson newLesson, Integer indexForLesson) {
+        Lesson oldLesson = attending.get(indexForLesson);
+        timetableDict.deleteLesson(oldLesson);
         attending.set(indexForLesson, newLesson);
         timetableDict.addLesson(newLesson, moduleCode);
     }
 
     public void replaceAttending(Lesson newLesson, Integer indexForLesson) {
+        Lesson oldLesson = attending.get(indexForLesson);
+        Timetable.timetableDict.deleteLesson(oldLesson);
         attending.set(indexForLesson, newLesson);
+        Timetable.timetableDict.addLesson(newLesson, moduleCode);
+    }
+
+    public void replaceAttending(Lesson newLesson) {
+        int indexToSet = 0;
+        for (Lesson lesson : attending) {
+            if (lesson.getLessonType().equals(newLesson.getLessonType())) {
+                break;
+            }
+            indexToSet += 1;
+        }
+        if (indexToSet >= attending.size()) {
+            return;
+        }
+
+        //delete old lesson from timetableDict
+        Lesson oldLesson = attending.get(indexToSet);
+        Timetable.timetableDict.deleteLesson(oldLesson);
+
+        //Setting attending for this module
+        attending.set(indexToSet, newLesson);
+
+        //Adding to timetableDict
+        Timetable.timetableDict.addLesson(newLesson, moduleCode);
     }
 
     private LinkedHashMap<String, ArrayList<Lesson>> classifyLessons(List<Lesson> lessons) {

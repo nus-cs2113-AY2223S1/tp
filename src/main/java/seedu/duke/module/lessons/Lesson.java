@@ -31,6 +31,14 @@ public class Lesson {
         return classNumber;
     }
 
+    public String getModuleCode() {
+        return moduleCode;
+    }
+    
+    public void setModuleCode(String moduleCode) {
+        this.moduleCode = moduleCode;
+    }
+
     public List<String> getInfo() {
         List<String> info = new ArrayList<String>();
         info.add(day);
