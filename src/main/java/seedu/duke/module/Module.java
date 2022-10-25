@@ -1,9 +1,10 @@
 package seedu.duke.module;
 
+import seedu.duke.TimetableDict;
 import seedu.duke.module.lessons.Lesson;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -12,10 +13,9 @@ public class Module {
     private static final Logger lgr = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private String moduleName;
     private String moduleCode;
-    //private String moduleDescription;
     private List<Lesson> lessons;
     private List<Lesson> attending;
-    private HashMap<String, ArrayList<Lesson>> classifiedLessons;
+    private LinkedHashMap<String, ArrayList<Lesson>> classifiedLessons;
 
     public String getModuleName() {
         return moduleName;
@@ -36,13 +36,12 @@ public class Module {
     public Module(String moduleCode, String moduleName, List<Lesson> lessons) {
         this.moduleCode = moduleCode;
         this.moduleName = moduleName;
-        //this.moduleDescription = moduleDescription;
         this.lessons = lessons;
         this.classifiedLessons = classifyLessons(lessons);
         this.attending = matchLessonTypes(classifiedLessons);
     }
 
-    private List<Lesson> matchLessonTypes(HashMap<String, ArrayList<Lesson>> classifiedLessons) {
+    private List<Lesson> matchLessonTypes(LinkedHashMap<String, ArrayList<Lesson>> classifiedLessons) {
         List<Lesson> temp = new ArrayList<>();
         for (ArrayList<Lesson> list : classifiedLessons.values()) {
             for (int i = 0; i < checkDuplicateLessonNumbers(list); i++) {
@@ -54,7 +53,7 @@ public class Module {
     }
 
     private int checkDuplicateLessonNumbers(ArrayList<Lesson> list) {
-        HashMap<String, Integer> checker = new HashMap<>();
+        LinkedHashMap<String, Integer> checker = new LinkedHashMap<>();
 
         for (Lesson lesson : list) {
             String classNum = lesson.getClassNumber();
@@ -69,7 +68,7 @@ public class Module {
         return getHighestCount(checker);
     }
 
-    private int getHighestCount(HashMap<String, Integer> checker) {
+    private int getHighestCount(LinkedHashMap<String, Integer> checker) {
         int highestCount = 0;
         for (Integer count : checker.values()) {
             if (count > highestCount) {
@@ -187,12 +186,17 @@ public class Module {
         return null;
     }
 
+    public void replaceAttending(TimetableDict timetableDict, Lesson newLesson, Integer indexForLesson) {
+        attending.set(indexForLesson, newLesson);
+        timetableDict.addLesson(newLesson, moduleCode);
+    }
+
     public void replaceAttending(Lesson newLesson, Integer indexForLesson) {
         attending.set(indexForLesson, newLesson);
     }
 
-    private HashMap<String, ArrayList<Lesson>> classifyLessons(List<Lesson> lessons) {
-        HashMap<String, ArrayList<Lesson>> classifiedLessons = new HashMap<>();
+    private LinkedHashMap<String, ArrayList<Lesson>> classifyLessons(List<Lesson> lessons) {
+        LinkedHashMap<String, ArrayList<Lesson>> classifiedLessons = new LinkedHashMap<>();
         for (Lesson lesson : lessons) {
             if (!classifiedLessons.containsKey(lesson.getLessonType())) {
                 classifiedLessons.put(lesson.getLessonType(), new ArrayList<>());
@@ -201,6 +205,16 @@ public class Module {
                 classifiedLessons.get(lesson.getLessonType()).add(lesson);
             }
         }
+        return classifiedLessons;
+    }
+
+    public LinkedHashMap<String, ArrayList<Lesson>> getClassifiedLessons() {
+        // System.out.println("---" + moduleCode + "---");
+        // for (String key : classifiedLessons.keySet()) {
+        //     for (Lesson lesson : classifiedLessons.get(key)) {
+        //         System.out.println(lesson.getLessonType() + "|" + lesson.getDay() + "|" + lesson.getStartTime() + "-" + lesson.getEndTime());
+        //     }
+        // }
         return classifiedLessons;
     }
 }

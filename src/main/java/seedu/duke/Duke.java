@@ -41,8 +41,6 @@ public class Duke {
         String input;
         String currentSemester = getSemester();
 
-        Timetable.initDict();
-
         if (!loadData(currentSemester)) {
             System.exit(0);
         }
