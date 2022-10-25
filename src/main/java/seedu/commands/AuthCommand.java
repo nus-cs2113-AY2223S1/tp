@@ -6,8 +6,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import seedu.api.Api;
+import seedu.exception.EmptyResponseException;
 import seedu.exception.FileWriteException;
-
+import seedu.exception.UnauthorisedAccessApiException;
 
 
 /**
@@ -38,14 +39,19 @@ public class AuthCommand extends Command {
     @Override
     public CommandResult execute() {
         try {
-            if (api.isApiValid(apiKey)) {
+            if (apiKey.equals("default")) {
+                api.loadDefaultApiKey();
+                String message = fetchApiData();
+                return new CommandResult("Authenticated successfully using default API Key." + message);
+            } else if (api.isApiValid(apiKey)) {
                 saveApiKey(apiKey);
-                return new CommandResult("Authenticated successfully.");
+                String message = fetchApiData();
+                return new CommandResult("Authenticated successfully." + message);
             }
-            throw new FileWriteException(API_KEY_FILE_PATH.toString());
-        } catch (FileWriteException e) {
-            e.getMessage();
-            return new CommandResult("Authenticated failed.");
+            return new CommandResult("Authentication failed. "
+                    + "Use command `auth <api_key>` to re-authenticate.");
+        } catch (FileWriteException | UnauthorisedAccessApiException e) {
+            return new CommandResult("Authentication failed. " + e.getMessage());
         }
     }
 
@@ -62,6 +68,17 @@ public class AuthCommand extends Command {
             fw.close();
         } catch (IOException e) {
             throw new FileWriteException(API_KEY_FILE_PATH.toString());
+        }
+    }
+
+    private String fetchApiData() throws UnauthorisedAccessApiException {
+        try {
+            api.syncFetchData();
+            return "";
+        } catch (FileWriteException e) {
+            return " However, data is not saved to local file. " + e.getMessage();
+        } catch (EmptyResponseException e) {
+            return " However, data from API is empty.";
         }
     }
 }

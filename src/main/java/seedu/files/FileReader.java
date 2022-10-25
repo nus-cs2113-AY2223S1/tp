@@ -83,7 +83,7 @@ public class FileReader {
         String filepath = Paths.get(directoryPath, filePath).toString();
         File file = new File(filepath);
         if (!file.exists() && createDirectory) {
-            System.out.println("File does not exist. Creating one at ./resources/api/secret.txt.");
+            System.out.println(filePath + " file does not exist. Creating one at " + directoryPath);
             File directory = new File(directoryPath);
             directory.mkdirs();
             try {
