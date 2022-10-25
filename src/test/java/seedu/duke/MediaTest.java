@@ -21,7 +21,7 @@ class MediaTest {
             DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
             dateFormat.setLenient(false);
             Date date = dateFormat.parse(dateWatchedString);
-        } catch (ParseException e){
+        } catch (ParseException e) {
             ex = e;
         }
 
@@ -38,7 +38,7 @@ class MediaTest {
             DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
             dateFormat.setLenient(false);
             Date date = dateFormat.parse(dateWatchedString);
-        } catch (ParseException e){
+        } catch (ParseException e) {
             ex = e;
         }
 
@@ -55,7 +55,7 @@ class MediaTest {
             DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
             dateFormat.setLenient(false);
             Date date = dateFormat.parse(dateWatchedString);
-        } catch (ParseException e){
+        } catch (ParseException e) {
             ex = e;
         }
 
@@ -72,7 +72,7 @@ class MediaTest {
             DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
             dateFormat.setLenient(false);
             Date date = dateFormat.parse(dateWatchedString);
-        } catch (ParseException e){
+        } catch (ParseException e) {
             ex = e;
         }
 
