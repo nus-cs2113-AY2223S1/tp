@@ -39,15 +39,18 @@ The software architecture diagram below describes the application's design and t
 ![Software-Architecture](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/SoftwareArchitecture.puml)
 
 ### Core Components:
-* `MoneyGoWhere`: Main entrypoint of the application.
-* `Common`: Defines various parameters used by the application.
-* `Exceptions`: Defines exceptions thrown by the program.
-* `UserInterface`: Provides functions to interface with the user via standard I/O and handle commands.
-* `Command`: Defines the commands accepted by the program along with its arguments.
-* `Parser`: Provides functions to parse inputs read from standard input.
-* `Data`: Stores data and provides functions to operate on data.
-* `Storage`: Defines functions to save and load data.
-* `Logger`: Defines functions to log the user's actions and the application's behaviour.
+
+| Component     | Function                                                                            |
+|---------------|-------------------------------------------------------------------------------------|
+| MoneyGoWhere  | Main entrypoint of the application.                                                 |
+| Common        | Defines various parameters used by the application.                                 |
+| Exceptions    | Defines exceptions thrown by the program.                                           |
+| UserInterface | Provides functions to interface with the user via standard I/O and handle commands. |
+| Command       | Defines the commands accepted by the program along with its arguments.              |
+| Parser        | Provides functions to parse inputs read from standard input.                        |
+| Data          | Stores data and provides functions to operate on data.                              |
+| Storage       | Defines functions to save and load data.                                            |
+| Logger        | Defines functions to log the user's actions and the application's behaviour.        |
 
 ### Component Interactions:
 The sequence diagram below describes the interaction between the various core components when a command is entered.
@@ -109,13 +112,13 @@ In the example above, `UserInterface#runCommandAddExpense()` calls `Storage#save
 | v1.0    | user     | sort expenses by date                             | keep track of my spending over time               |
 | v1.0    | user     | save my data to a file                            | store my data easily                              |
 | v1.0    | user     | load my data from a file                          | retrieve my data easily                           |
+| v1.0    | user     | add my income                                     | keep track if my spending exceeds my income       |
+| v1.0    | user     | add expense targets                               | keep track of my financial goals                  |
 | v2.0    | user     | convert between different currencies              | keep track of expenses across multiple currencies |
 | v2.0    | user     | update currency exchange rates                    | convert between currencies using the latest rates |
-| v1.0    | user     | add my income                                     | keep track if my spending exceeds my income       |
 | v2.0    | user     | view my income                                    | keep track if my spending exceeds my income       |
 | v2.0    | user     | delete my income                                  | keep track if my spending exceeds my income       |
 | v2.0    | user     | edit my income                                    | keep track if my spending exceeds my income       |
-| v1.0    | user     | add expense targets                               | keep track of my financial goals                  |
 | v2.0    | user     | view expense targets                              | keep track of my financial goals                  |
 | v2.0    | user     | delete expense targets                            | keep track of my financial goals                  |
 | v2.0    | user     | edit expense targets                              | keep track of my financial goals                  |
