@@ -16,7 +16,7 @@ Help will always be given at Hogwarts to those who ask for it
 Available commands:
 help - to display the help message
 exit - to exit the program
-set biometrics /{age} /{gender} /height /{weight} /{fat percentage}
+set biometrics /{age} /{gender} /height /{weight} /{fat percentage} /{activity level}
 mark {done/undone} /{exercise index}
 view {biometrics/food/weight/bmi/maintenance/all} {exercise/strength/cardio /{done}}
 add strength /{description} /{sets} /{repetitions} /{date}
