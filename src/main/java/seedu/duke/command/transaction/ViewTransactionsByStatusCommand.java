@@ -10,9 +10,9 @@ import seedu.duke.ui.Ui;
 
 import java.util.ArrayList;
 
-import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_COMMAND_UNRECOGNIZABLE;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INSUFFICIENT_ARGUMENTS;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PARTS;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_STATUS_INVALID;
 
 //@@author jingwei55
 public class ViewTransactionsByStatusCommand extends Command {
@@ -44,7 +44,7 @@ public class ViewTransactionsByStatusCommand extends Command {
         if (arg.equals("finished") || arg.equals("unfinished")) {
             return true;
         }
-        throw new InvalidArgumentException(MESSAGE_COMMAND_UNRECOGNIZABLE);
+        throw new InvalidArgumentException(MESSAGE_STATUS_INVALID);
     }
 
     /**

@@ -35,6 +35,8 @@ public class ExceptionMessages {
     public static final String MESSAGE_SELF_BORROWER =
             "Borrower cannot borrow items from his/herself";
     public static final String MESSAGE_DURATION_INVALID = "Duration cannot be less than 0";
+    public static final String MESSAGE_STATUS_INVALID =
+            "The status argument is invalid (only 2 status are accepted: finished or unfinished)";
 
     // Other messages
     public static final String MESSAGE_INVALID_PARTS = "One of the parts is in incorrect format";
