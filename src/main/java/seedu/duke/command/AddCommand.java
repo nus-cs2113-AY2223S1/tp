@@ -2,11 +2,10 @@ package seedu.duke.command;
 
 import seedu.duke.Parser;
 import seedu.duke.Ui;
-import seedu.duke.records.Record;
+import seedu.duke.exception.IllegalValueException;
 import seedu.duke.records.RecordList;
 import seedu.duke.records.biometrics.Biometrics;
 import seedu.duke.records.biometrics.WeightAndFat;
-import seedu.duke.exception.IllegalValueException;
 import seedu.duke.records.exercise.CardioExercise;
 import seedu.duke.records.exercise.Exercise;
 import seedu.duke.records.exercise.ExerciseList;
@@ -22,8 +21,6 @@ import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import static java.time.LocalDate.now;
 
 public class AddCommand extends Command {
     private final boolean isMarkDone;
@@ -132,7 +129,7 @@ public class AddCommand extends Command {
 
     private static int getWeightWithValidation(String[] argumentList) throws IllegalValueException {
         int weight = Integer.parseInt(argumentList[2]);
-        if (weight < 0 || weight > 700) {
+        if (weight < 0 || weight > 1000) {
             throw new IllegalValueException("Invalid number for weight");
         }
         return weight;
