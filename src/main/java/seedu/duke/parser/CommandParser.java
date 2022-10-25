@@ -4,16 +4,18 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.duke.command.item.AddItemCommand;
+import seedu.duke.command.item.FindItemCommand;
 import seedu.duke.command.item.ListCategoriesCommand;
 import seedu.duke.command.item.ListItemsCommand;
 import seedu.duke.command.item.RemoveItemCommand;
 import seedu.duke.command.item.SortItemCommand;
+import seedu.duke.command.item.UpdateItemCommand;
 import seedu.duke.command.item.ViewItemCommand;
-import seedu.duke.command.item.FindItemCommand;
 import seedu.duke.command.transaction.AddTransactionCommand;
-import seedu.duke.command.transaction.ViewTransactionCommand;
 import seedu.duke.command.transaction.ListTransactionsCommand;
 import seedu.duke.command.transaction.RemoveTransactionCommand;
+import seedu.duke.command.transaction.UpdateTransactionCommand;
+import seedu.duke.command.transaction.ViewTransactionCommand;
 import seedu.duke.command.transaction.ViewTransactionsByStatusCommand;
 import seedu.duke.command.user.AddUserCommand;
 import seedu.duke.command.user.FindUserCommand;
@@ -65,6 +67,8 @@ public class CommandParser {
     private static final String COMMAND_FIND_TX = "find-tx";
     private static final String COMMAND_SORT_ITEMS = "sort-items";
     private static final String COMMAND_LIST_CATEGORIES = "list-categories";
+    private static final String COMMAND_UPDATE_ITEM = "update-item";
+    private static final String COMMAND_UPDATE_TRANSACTION = "update-tx";
 
 
     /**
@@ -176,6 +180,10 @@ public class CommandParser {
             return new FindItemCommand(parts, itemList);
         case COMMAND_FIND_USER:
             return new FindUserCommand(parts,userList);
+        case COMMAND_UPDATE_ITEM:
+            return new UpdateItemCommand(parts, itemList, transactionList);
+        case COMMAND_UPDATE_TRANSACTION:
+            return new UpdateTransactionCommand(parts, transactionList);
         default:
             throw new CommandNotFoundException(MESSAGE_COMMAND_UNRECOGNIZABLE);
         }
