@@ -41,6 +41,7 @@ The software architecture diagram below describes the application's design and t
 ### Core Components:
 * `MoneyGoWhere`: Main entrypoint of the application.
 * `Common`: Defines various parameters used by the application.
+* `Exceptions`: Defines exceptions thrown by the program.
 * `UserInterface`: Provides functions to interface with the user via standard I/O and handle commands.
 * `Command`: Defines the commands accepted by the program along with its arguments.
 * `Parser`: Provides functions to parse inputs read from standard input.
@@ -69,11 +70,19 @@ In the example above, `UserInterface#runCommandAddExpense()` calls `Storage#save
 
 ### Common Component
 
-![Component-Interaction-On-Command-Entered](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentCommon.puml)
+![Component-Common](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentCommon.puml)
+
+### Exceptions Component
+
+![Component-Exceptions](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentExceptions.puml)
 
 ### UserInterface Component
 
-![Component-Interaction-On-Command-Entered](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentUserInterface.puml)
+![Component-UserInterface](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentUserInterface.puml)
+
+### Commands Component
+
+![Component-Commands](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentCommands.puml)
 
 ## Product scope
 ### Target user profile

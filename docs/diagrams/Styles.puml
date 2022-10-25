@@ -34,6 +34,8 @@ skinparam Participant {
     FontColor #ffffff
 }
 
+skinparam linetype ortho
+
 hide circle
 hide members
 hide footbox
