@@ -130,6 +130,7 @@ The `PurgeCommand` class contains the operations pertaining to deleting all tran
 The `StatsCommand` class contains the operations pertaining to getting statistics based on your list of transactions.
 
 The structure of the command component in Moolah Manager is illustrated in the class diagram below:
+![Command Component Class Diagram](images/CommandComponentClassDiagram.png)
 
 _Written by: Brian Wong Yun Long_
 
