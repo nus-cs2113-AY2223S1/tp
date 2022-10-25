@@ -9,7 +9,7 @@ import seedu.data.LotType;
  * Common shared data.
  */
 public class CommonData {
-    public static final String API_KEY_DEFAULT = "1B+7tBxzRNOtFbTxGcCiYA=";
+    public static final String API_KEY_DEFAULT = "1B+7tBxzRNOtFbTxGcCiYA==";
     public static final String LTA_BASE_URL = "http://datamall2.mytransport.sg/ltaodataservice/CarParkAvailabilityv2";
 
     public static final String API_RESPONSE_HEADER = "{\"odata.metadata\":\""

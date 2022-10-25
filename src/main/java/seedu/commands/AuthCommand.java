@@ -39,7 +39,10 @@ public class AuthCommand extends Command {
     @Override
     public CommandResult execute() {
         try {
-            if (apiKey.equals("default")) {
+            if (apiKey.equals("status")) {
+                String message = api.getApiAuthStatus();
+                return new CommandResult(message);
+            } else if (apiKey.equals("default")) {
                 api.loadDefaultApiKey();
                 String message = fetchApiData();
                 return new CommandResult("Authenticated successfully using default API Key." + message);
@@ -48,8 +51,7 @@ public class AuthCommand extends Command {
                 String message = fetchApiData();
                 return new CommandResult("Authenticated successfully." + message);
             }
-            return new CommandResult("Authentication failed. "
-                    + "Use command `auth <api_key>` to re-authenticate.");
+            return new CommandResult("Authentication failed.");
         } catch (FileWriteException | UnauthorisedAccessApiException e) {
             return new CommandResult("Authentication failed. " + e.getMessage());
         }
