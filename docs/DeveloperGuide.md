@@ -26,19 +26,26 @@ The following diagram illustrates the flow of the program, from the initial load
 
 ### User Storage
 
-User Storage stores user's information, which is a list of interested universities for SEP. Each university has a list of
-modules that the user is interested in. This will be stored in a text file called myinfo.txt.
+User Storage stores 2 different user information. University list is a list of interested universities for SEP
+and it is stored in a text file ("data/uni_info.txt"). For each university in the list, information includes
+Partner University's name, country, list of modules and their corresponding information. It also records whether the
+user previously added the particular university in the favourites list. Timetable list is a list of timetables 
+for universities that the user is interested in and it is stored in a text file ("data/timetable_info.txt"). For each
+timetable in the list, information includes Partner University's name, country, module information and lesson timings.
 
-Upon starting easySEP, the UserStorage class will take in information from the text file and convert it into a String.
+Upon starting easySEP, the UserStorage class will take in information from both text files and convert them into Strings.
 UserStorageParser will create a new UserUniversityListManager, by converting the String into a HashMap<String, UserUniversityList>
-which serves as myManager for the UserUniversityListManager class.
+which serves as myManager for the UserUniversityListManager class. UserStorageParser will also create a new TimetableManager,
+and add lessons to the TimetableManager, using the String extracted from the text file.
 
 Relevant exceptions are thrown when there are unexpected scenarios. For example, if the data in the text file is stored in an invalid format,
 an InvalidUserStorageFileException will be thrown.
 
-During the duration of the program, whenever the user decides to alter the data in the text file
-(ie. add / delete universities or modules), UserStorageParser class will update the text file accordingly.
-This is achieved by converting myManager into a String format, before saving it in the text file.
+During the duration of the program, whenever the user decides to alter the data corresponding to UserUniversityListManager
+(ie. add / delete universities or modules, or create new university list), UserStorageParser class will update "data/uni_info.txt" accordingly.
+Similarly, whenever the user decides to alter the data corresponding to TimetableManager (ie. add / delete lessons), UserStorageParser class will update
+"data/timetable_info.txt" accordingly. This is achieved by converting UserUniversityListManager / TimetableManager into a String,
+before saving it in the text file.
 
 The following diagram illustrates the relationships between the two main user storage classes - UserStorage and UserStorageParser.
 
