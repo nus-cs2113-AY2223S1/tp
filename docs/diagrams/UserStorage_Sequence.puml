@@ -2,11 +2,11 @@
 
 == Initialisation ==
 
-activate UserStorageParser
 -> UserStorageParser : getSavedLists()
+activate UserStorageParser
 
+UserStorageParser -> UserStorage : loadFile(isUniStorage = true)
 activate UserStorage
-UserStorageParser -> UserStorage : loadFile()
 UserStorage --> UserStorageParser : fileContent : String
 deactivate UserStorage
 
@@ -16,14 +16,54 @@ activate UserUniversityListManager
 UserUniversityListManager -> UserStorageParser : convertFileContentIntoUniversityList(fileContent)
 UserStorageParser --> UserUniversityListManager : myManager : HashMap<String, UserUniversityList>
 deactivate UserUniversityListManager
+<-- UserStorageParser : UserUniversityListManager
+deactivate UserStorageParser
+
+-> UserStorageParser : getSavedTimetables()
+activate UserStorageParser
+UserStorageParser -> UserStorage : loadFile(isUniStorage = false)
+activate UserStorage
+UserStorage --> UserStorageParser : fileContent : String
+deactivate UserStorage
+
+UserStorageParser -> UserStorageParser : convertFileContentIntoTimetable(fileContent)
+activate UserStorageParser
+create TimetableManager
+UserStorageParser -> TimetableManager : new
+activate TimetableManager
+loop
+TimetableManager -> TimetableManager : addLesson(lesson)
+activate TimetableManager
+TimetableManager --> TimetableManager
+deactivate TimetableManager
+end
+TimetableManager --> UserStorageParser
+deactivate TimetableManager
+UserStorageParser --> UserStorageParser
+deactivate UserStorageParser
+<-- UserStorageParser : TimetableManager
 deactivate UserStorageParser
 
 == Getting User Input ==
 
-opt add/delete modules
+opt add modules/delete modules/create uni lists
 -> UserStorageParser : storeCreatedLists(userUniversityListManager)
 activate UserStorageParser
 UserStorageParser -> UserStorageParser : convertUniversityListIntoFileContent(userUniversityListManager)
+activate UserStorageParser
+UserStorageParser --> UserStorageParser : fileContent : String
+deactivate UserStorageParser
+UserStorageParser -> UserStorage : saveFile(fileContent)
+activate UserStorage
+UserStorage --> UserStorageParser
+deactivate UserStorage
+deactivate UserStorageParser
+end
+
+opt add lessons/delete lessons/create uni lists
+-> UserStorageParser : storeTimetable(timetableManager)
+activate UserStorageParser
+UserStorageParser -> UserStorageParser : convertTimetableIntoFileContent(timetableManager)
 activate UserStorageParser
 UserStorageParser --> UserStorageParser : fileContent : String
 deactivate UserStorageParser

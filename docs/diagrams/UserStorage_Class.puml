@@ -1,10 +1,12 @@
 @startuml
 
 class UserStorage {
-    {static} - USER_STORAGE_FILE_PATH
+    {static} - UNI_STORAGE_FILE_PATH : String
+    {static} - TIMETABLE_STORAGE_FILE_PATH : String
 
-    {static} + saveFile(String textToAdd) : void
+    {static} + saveFile(textToAdd : String) : void
     {static} + loadFile() : void
+    {static} - getFilePath() : boolean
 }
 
 class IOException {
@@ -12,10 +14,35 @@ class IOException {
 }
 
 class UserStorageParser {
-    {static} + convertUniversityListIntoFileContent(UserUniversityListManager uniList) : String
-    {static} + convertFileContentIntoUniversityList(String fileContent) : HashMap<String, UserUniversityList>
+    {static} + convertUniversityListIntoFileContent(uniList : UserUniversityListManager) : String
+    {static} + convertFileContentIntoUniversityList(fileContent : String) : HashMap<String, UserUniversityList>
+    {static} + convertTimetableIntoFileContent(timetableManager TimetableManager) : String
+    {static} + convertFileContentIntoTimetable(fileContent : String) : TimetableManager
     {static} + getSavedLists() : UserUniversityListManager
-    {static} + storeCreatedLists(UserUniversityListManager userUniversityListManager) : void
+    {static} + storeCreatedLists(userUniversityListManager : UserUniversityListManager) : void
+    {static} + getSavedTimetables(): TimetableManager
+    {static} + storeTimetable(timetableManager TimetableManager) : void
+    {static} - removeFirstBackSlash(output : String) : String
+    {static} - isUserUniversityListManagerEmpty(uniList : UserUniversityListManager) : boolean
+    {static} - addUniversitiesToOutputString(uniList : UserUniversityListManager) : String
+    {static} - addFavouritesToOutputString(UserUniversityList uni) : String
+    {static} - addModulesToOutputString(modules : ArrayList<UserModuleMapping>) : String
+    {static} - isFileContentEmpty(fileContent : String) : boolean
+    {static} - splitUniversitiesInFileContent(fileContent : String) : String[]
+    {static} - getUniversityInfoFromString(unis : String[], myManager : HashMap<String, UserUniversityList>) : void
+    {static} - isValidUniFormat(items : String[]) : boolean
+    {static} - setFavourite(newUni : UserUniversityList, isFavourite : String) : void
+    {static} - splitLineInFileContent(uni : String) : String[]
+    {static} - getModuleInfoFromString(items : String[], moduleList : UserModuleMappingList, puCountry : String) : void
+    {static} - splitModuleInformationInFileContent(moduleInfo : String) : String[]
+    {static} - isValidModulesFormat(details : String[]) : boolean
+    {static} - addTimetableToOutputString(timetableManager : TimetableManager) : String
+    {static} - addLessonTimingsToOutputString(timetable : Timetable) : String
+    {static} - addSingleLessonTimingToOutputString(listOfLessons : ArrayList<Lesson>) : String
+    {static} - isTimetableManagerEmpty(timetableManager : TimetableManager) : boolean
+    {static} - getTimetableInfoFromString(unis : String[], timetableManager : TimetableManager) : void
+    {static} - getLessonTimingsInfoFromString(items : String[], puName : String, timetableManager : TimetableManager) : void
+    {static} - isValidTimetableFormat(details : String[]) : boolean
 }
 
 class InvalidUserStorageFileException {
