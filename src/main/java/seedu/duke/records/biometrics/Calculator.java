@@ -111,34 +111,34 @@ public class Calculator {
         return (int) (0.0175 * biometrics.getWeight() * metabolicEquivalent * time);
     }
 
-    public int calculateTotalCaloriesConsumed(ArrayList<Food> foodArrayList, String date){
+    public int calculateTotalCaloriesConsumed(ArrayList<Food> foodArrayList, String date) {
         int totalCaloriesConsumed = 0;
         ArrayList<Food> filteredFoodDateList = (ArrayList<Food>) foodArrayList
                 .stream().filter(Food.class::isInstance)
                 .filter(f -> f.getDate().contains(date))
                 .collect(Collectors.toList());
-        for (Food f: filteredFoodDateList){
+        for (Food f: filteredFoodDateList) {
             totalCaloriesConsumed += f.getCalories();
         }
         return totalCaloriesConsumed;
     }
 
-    public int calculateTotalCaloriesBurnt(ArrayList<Exercise> completedExerciseArrayList, String date){
+    public int calculateTotalCaloriesBurnt(ArrayList<Exercise> completedExerciseArrayList, String date) {
         int totalCaloriesBurnt = 0;
         ArrayList<Exercise> filteredExerciseDateList = (ArrayList<Exercise>) completedExerciseArrayList
                 .stream().filter(Exercise.class::isInstance)
                 .filter(e -> e.getDate().contains(date))
                 .collect(Collectors.toList());
-        for (Exercise e: filteredExerciseDateList){
+        for (Exercise e: filteredExerciseDateList) {
             totalCaloriesBurnt += e.getCaloriesBurnt();
         }
         return totalCaloriesBurnt;
     }
 
-    public int calculateTotalCaloriesSurplusDeficit (ArrayList<Exercise> completedExerciseArrayList,
+    public int calculateTotalCaloriesSurplusDeficit(ArrayList<Exercise> completedExerciseArrayList,
                                                      ArrayList<Food> foodArrayList, String date) {
         return calculateTotalCaloriesConsumed(foodArrayList,date)
-        -calculateTotalCaloriesBurnt(completedExerciseArrayList,date);
+                - calculateTotalCaloriesBurnt(completedExerciseArrayList,date);
     }
 
 
