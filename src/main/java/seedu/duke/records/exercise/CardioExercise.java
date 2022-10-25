@@ -3,30 +3,31 @@ package seedu.duke.records.exercise;
 import java.time.LocalDate;
 
 public class CardioExercise extends Exercise {
-    private int time;
+    private double distance;
 
-    public CardioExercise(String exerciseName, int time, int repetitions, int caloriesBurnt, LocalDate date) {
-        super(exerciseName, repetitions, caloriesBurnt, date);
-        this.time = time;
+    public CardioExercise(String exerciseName, double distance, int repetitions, LocalDate date) {
+        super(exerciseName, repetitions, date);
+        this.distance = distance;
     }
 
+
     @Override
-    public int getTime() {
-        return time;
+    public double getDistance() {
+        return distance;
     }
 
     @Override
     public String saveExercise() {
-        return "cardio /" + getExerciseName() + " /"
-                + getTime() + " /" + getRepetition() + " /" + getCaloriesBurnt() + " | " + getTaskStatusInNumber();
+        return "cardio /" + getExerciseName() + " /" + getDistance()
+                + " /" + getRepetition() + " /" + getDate() + " /"
+                + getTime() + " /" + getCaloriesBurnt() + " | " + getTaskStatusInNumber();
     }
 
     @Override
     public String toString() {
         return "Cardio Exercise: " + getExerciseName() + System.lineSeparator()
-                + "Time: " + getTime() + System.lineSeparator()
+                + "Distance: " + getDistance() + "km" + System.lineSeparator()
                 + "Repetitions: " + getRepetition() + System.lineSeparator()
-                + "Calories Burnt: " + getCaloriesBurnt() + System.lineSeparator()
                 + "Date: " + getDate() + System.lineSeparator()
                 + String.format("Status: %s", getTaskStatus());
     }

@@ -6,8 +6,6 @@ import seedu.duke.records.exercise.CardioExercise;
 import seedu.duke.records.exercise.Exercise;
 import seedu.duke.records.exercise.StrengthExercise;
 import seedu.duke.records.food.Food;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -18,7 +16,7 @@ public class Ui {
 
 
     public void line() {
-        System.out.println("--------------------------------------------------------------------------");
+        System.out.println("-------------------------------------------------------------------------------");
     }
 
 
@@ -60,7 +58,7 @@ public class Ui {
     }
 
     public void outputExerciseList(ArrayList<Exercise> exerciseArrayList) {
-        Integer[] columnSpacingArray = {5, 8, 4, 4, 4, 8, 8};
+        Integer[] columnSpacingArray = {5, 8, 6, 4, 4, 4, 8, 10};
         getExerciseColumnsSpacing(exerciseArrayList, columnSpacingArray);
         generateExerciseTableHeader(columnSpacingArray);
         printExerciseList(exerciseArrayList, columnSpacingArray);
@@ -88,7 +86,7 @@ public class Ui {
                                  ArrayList<Food> foodArrayList,
                                  ArrayList<Exercise> exerciseArrayList) {
 
-        Integer[] columnSpacingArraySubHeader = { 10, 6, 14, 8, 8, 10, 4, 4, 4, 15};
+        Integer[] columnSpacingArraySubHeader = { 10, 6, 14, 8, 8, 10, 4, 4, 4, 4, 15};
         getAllRecordsColumnsSpacing(weightAndFatArrayList,
                 foodArrayList, exerciseArrayList, columnSpacingArraySubHeader);
 
@@ -104,25 +102,28 @@ public class Ui {
     }
 
     private void getExerciseColumnsSpacing(ArrayList<Exercise> exerciseArrayList, Integer[] columnSpacingArray) {
-        columnSpacingArray[0] = Math.max(columnSpacingArray[0], exerciseArrayList.size() % 10 + 1);
+        columnSpacingArray[0] = Math.max(columnSpacingArray[0], String.valueOf(exerciseArrayList.size()).length());
         for (Exercise exercise : exerciseArrayList) {
             if (exercise instanceof StrengthExercise) {
-                columnSpacingArray[2] = Math.max(columnSpacingArray[2], exercise.getSet() % 10 + 1);
+                columnSpacingArray[1] = Math.max(columnSpacingArray[1], String.valueOf(exercise.getWeight()).length());
+                columnSpacingArray[2] = Math.max(columnSpacingArray[2], String.valueOf(exercise.getSet()).length());
             } else if (exercise instanceof CardioExercise) {
-                columnSpacingArray[3] = Math.max(columnSpacingArray[3], exercise.getTime() % 10 + 1);
+                columnSpacingArray[5] = Math.max(columnSpacingArray[5],
+                        String.valueOf((int) exercise.getDistance()).length());
             }
             columnSpacingArray[1] = Math.max(columnSpacingArray[1], exercise.getExerciseName().length());
-            columnSpacingArray[4] = Math.max(columnSpacingArray[4], exercise.getRepetition() % 10 + 1);
-            columnSpacingArray[5] = Math.max(columnSpacingArray[5], exercise.getCaloriesBurnt() % 10 + 1);
-            columnSpacingArray[6] = Math.max(columnSpacingArray[6], exercise.getDate().length());
+            columnSpacingArray[4] = Math.max(columnSpacingArray[4],
+                    String.valueOf(exercise.getRepetition()).length());
+            columnSpacingArray[6] = Math.max(columnSpacingArray[6],
+                    String.valueOf(exercise.getCaloriesBurnt()).length());
         }
     }
 
     private void getFoodColumnsSpacing(ArrayList<Food> foodArrayList, Integer[] columnSpacingArray) {
-        columnSpacingArray[0] = Math.max(columnSpacingArray[0], foodArrayList.size() % 10 + 1);
+        columnSpacingArray[0] = Math.max(columnSpacingArray[0], String.valueOf(foodArrayList.size()).length());
         for (Food food : foodArrayList) {
             columnSpacingArray[1] = Math.max(columnSpacingArray[1], food.getFoodDescription().length());
-            columnSpacingArray[2] = Math.max(columnSpacingArray[2], food.getCalories() % 10 + 1);
+            columnSpacingArray[2] = Math.max(columnSpacingArray[2], String.valueOf(food.getCalories()).length());
             columnSpacingArray[3] = Math.max(columnSpacingArray[3], food.getDate().length());
         }
     }
@@ -130,8 +131,8 @@ public class Ui {
     private void getWeightColumnsSpacing(ArrayList<WeightAndFat> weightAndFatArrayList, Integer[] columnSpacingArray) {
         columnSpacingArray[0] = Math.max(columnSpacingArray[0], weightAndFatArrayList.size() % 10 + 1);
         for (WeightAndFat weightAndFat : weightAndFatArrayList) {
-            columnSpacingArray[1] = Math.max(columnSpacingArray[1], weightAndFat.getWeight() % 10 + 1);
-            columnSpacingArray[2] = Math.max(columnSpacingArray[2], weightAndFat.getFat() % 10 + 1);
+            columnSpacingArray[1] = Math.max(columnSpacingArray[1], String.valueOf(weightAndFat.getWeight()).length());
+            columnSpacingArray[2] = Math.max(columnSpacingArray[2], String.valueOf(weightAndFat.getFat()).length());
             columnSpacingArray[3] = Math.max(columnSpacingArray[3], weightAndFat.getDate().length());
         }
     }
@@ -151,13 +152,15 @@ public class Ui {
         }
         for (Exercise exercise : exerciseArrayList) {
             if (exercise instanceof StrengthExercise) {
-                columnSpacingArray[6] = Math.max(columnSpacingArray[6], exercise.getSet() % 10 + 1);
+                columnSpacingArray[6] = Math.max(columnSpacingArray[1], String.valueOf(exercise.getWeight()).length());
+                columnSpacingArray[7] = Math.max(columnSpacingArray[2], String.valueOf(exercise.getSet()).length());
             } else if (exercise instanceof CardioExercise) {
-                columnSpacingArray[7] = Math.max(columnSpacingArray[7], exercise.getTime() % 10 + 1);
+                columnSpacingArray[9] = Math.max(columnSpacingArray[5],
+                        String.valueOf((int) exercise.getDistance()).length());
             }
             columnSpacingArray[5] = Math.max(columnSpacingArray[5], exercise.getExerciseName().length());
             columnSpacingArray[8] = Math.max(columnSpacingArray[8], exercise.getRepetition() % 10 + 1);
-            columnSpacingArray[9] = Math.max(columnSpacingArray[9], exercise.getCaloriesBurnt() % 10 + 1);
+            columnSpacingArray[10] = Math.max(columnSpacingArray[9], exercise.getCaloriesBurnt() % 10 + 1);
         }
     }
 
@@ -172,24 +175,34 @@ public class Ui {
     private void printExerciseList(ArrayList<Exercise> exerciseArrayListList, Integer[] columnSpacingArray) {
         for (int i = 0; i < exerciseArrayListList.size(); i++) {
             Exercise exercise = exerciseArrayListList.get(i);
-            String index = addRightPadding(Integer.toString(i + 1), columnSpacingArray[0]) + " | ";
-            String exerciseName = addRightPadding(exercise.getExerciseName(), columnSpacingArray[1]) + " | ";
+            String index = addRightPadding(Integer.toString(i + 1), columnSpacingArray[0])
+                    + " | ";
+            String exerciseName = addRightPadding(exercise.getExerciseName(), columnSpacingArray[1])
+                    + " | ";
+            String weight = getWeightForPrint(exercise, columnSpacingArray[2]) + " | ";
             String sets = addRightPadding(Integer.toString(exercise.getSet()),
-                    columnSpacingArray[2]) + " | ";
-            String time = getTimeForPrint(exercise, columnSpacingArray[3]) + " | ";
+                    columnSpacingArray[3]) + " | ";
             String repetitions = addRightPadding(Integer.toString(exercise.getRepetition()),
                     columnSpacingArray[4]) + " | ";
-            String calories = addRightPadding(Integer.toString(exercise.getCaloriesBurnt()),
-                    columnSpacingArray[5]) + " | ";
-            String date = addRightPadding(exercise.getDate(),columnSpacingArray[6]) + " | ";
+            String distance = getDistanceForPrint(exercise, columnSpacingArray[5]) + " | ";
+            String calories = getCaloriesForPrint(exercise, columnSpacingArray[6]) + " | ";
+            String date = addRightPadding(exercise.getDate(), columnSpacingArray[7]) + " | ";
             String status = exercise.getTaskStatus();
-            printInSameLine(index, exerciseName, sets, time, repetitions, calories, date, status);
+            printInSameLine(index, exerciseName, weight, sets, repetitions, distance, calories, date, status);
         }
     }
 
-    private void printFoodList(ArrayList<Food> foodArrayList, Integer[] columnSpacingArray) {
-        for (int i = 0; i < foodArrayList.size(); i++) {
-            Food food = foodArrayList.get(i);
+    private static String getCaloriesForPrint(Exercise exercise, int numberOfSpace) {
+        if (exercise.getCaloriesBurnt() == 0) {
+            return addRightPadding("-", numberOfSpace);
+        }
+        return addRightPadding(Integer.toString(exercise.getCaloriesBurnt()),
+                numberOfSpace);
+    }
+
+    private void printFoodList(ArrayList<Food> foodArrayListList, Integer[] columnSpacingArray) {
+        for (int i = 0; i < foodArrayListList.size(); i++) {
+            Food food = foodArrayListList.get(i);
             String index = addRightPadding(Integer.toString(i + 1), columnSpacingArray[0]) + " | ";
             String foodName = addRightPadding(food.getFoodDescription(), columnSpacingArray[1]) + " | ";
             String calories = addRightPadding(Integer.toString(food.getCalories()),
@@ -234,38 +247,48 @@ public class Ui {
                         header.substring(0, header.indexOf("| Exercise")).length() - 1) + " | ";
                 Exercise exercise = (Exercise) recordArrayList.get(i);
                 String exerciseName = addRightPadding(exercise.getExerciseName(), columnSpacingArray[5]) + " | ";
+
+                String weight = getWeightForPrint(exercise, columnSpacingArray[6]) + " | ";
                 String sets = addRightPadding(Integer.toString(exercise.getSet()),
-                        columnSpacingArray[6]) + " | ";
-                String time = getTimeForPrint(exercise, columnSpacingArray[7]) + " | ";
+                        columnSpacingArray[7]) + " | ";
                 String repetitions = addRightPadding(Integer.toString(exercise.getRepetition()),
                         columnSpacingArray[8]) + " | ";
-                String calories = addRightPadding(Integer.toString(exercise.getCaloriesBurnt()),
-                        columnSpacingArray[9]) + " | ";
+                String distance = getDistanceForPrint(exercise, columnSpacingArray[9]) + " | ";
+                String calories = getCaloriesForPrint(exercise, columnSpacingArray[10]) + " | ";
                 String status = exercise.getTaskStatus();
-                printInSameLine(date, exerciseName, sets, time, repetitions, calories, status);
+                printInSameLine(date, exerciseName, weight, sets, repetitions, distance, calories, status);
             }
         }
     }
 
-    private String getTimeForPrint(Exercise exercise, Integer numberOfSpace) {
+    private String getDistanceForPrint(Exercise exercise, Integer numberOfSpace) {
         if (exercise instanceof StrengthExercise) {
             return addRightPadding("-", numberOfSpace);
         }
-        return addRightPadding(Integer.toString(exercise.getTime()), numberOfSpace);
+        return addRightPadding(Double.toString(exercise.getDistance()), numberOfSpace);
     }
+
+    private String getWeightForPrint(Exercise exercise, Integer numberOfSpace) {
+        if (exercise instanceof CardioExercise) {
+            return addRightPadding("-", numberOfSpace);
+        }
+        return addRightPadding(Integer.toString(exercise.getWeight()), numberOfSpace);
+    }
+
 
     private void generateExerciseTableHeader(Integer[] columnSpacingArray) {
         String paddedIndex = addRightPadding("Index", columnSpacingArray[0]) + " | ";
         String paddedExercise = addRightPadding("Exercise", columnSpacingArray[1]) + " | ";
-        String paddedSets = addRightPadding("Sets", columnSpacingArray[2]) + " | ";
-        String paddedTime = addRightPadding("Time", columnSpacingArray[3]) + " | ";
+        String paddedWeight = addRightPadding("Weight", columnSpacingArray[2]) + " | ";
+        String paddedSets = addRightPadding("Sets", columnSpacingArray[3]) + " | ";
         String paddedRep = addRightPadding("Reps", columnSpacingArray[4]) + " | ";
-        String paddedCalories = addRightPadding("Calories", columnSpacingArray[5]) + " | ";
-        String paddedDate = addRightPadding("Date",columnSpacingArray[6]) + " | ";
+        String paddedDistance = addRightPadding("Dist", columnSpacingArray[5]) + " | ";
+        String paddedCalories = addRightPadding("Calories", columnSpacingArray[6]) + " | ";
+        String paddedDate = addRightPadding("Date", columnSpacingArray[7]) + " | ";
         String paddedStatus = "Status";
-        String line = paddedIndex + paddedExercise + paddedSets + paddedTime + paddedRep
-                + paddedCalories + paddedDate + paddedStatus;
-        String separatorLine = "-".repeat(line.length() + 4);
+        String line = paddedIndex + paddedExercise + paddedWeight + paddedSets
+                + paddedRep + paddedDistance + paddedCalories + paddedDate + paddedStatus;
+        String separatorLine = "-".repeat(line.length());
         output(separatorLine, line, separatorLine);
     }
 
@@ -309,14 +332,15 @@ public class Ui {
         String paddedCalories = addRightPadding("Calories", columnSpacingArray[4]) + " | ";
 
         String paddedExercise = addRightPadding("Exercise", columnSpacingArray[5]) + " | ";
-        String paddedSets = addRightPadding("Sets", columnSpacingArray[6]) + " | ";
-        String paddedTime = addRightPadding("Time", columnSpacingArray[7]) + " | ";
+        String paddedWeights = addRightPadding("Weights", columnSpacingArray[6]) + " | ";
+        String paddedSets = addRightPadding("Sets", columnSpacingArray[7]) + " | ";
         String paddedRep = addRightPadding("Reps", columnSpacingArray[8]) + " | ";
-        String paddedCaloriesBurnt = addRightPadding("Calories Burnt", columnSpacingArray[9]) + " | ";
+        String paddedDist = addRightPadding("Dist", columnSpacingArray[9]) + " | ";
+        String paddedCaloriesBurnt = addRightPadding("Calories Burnt", columnSpacingArray[10]) + " | ";
         String paddedStatus = "Status";
 
         String line = paddedDate + paddedWeight + paddedFat + paddedDescription + paddedCalories + paddedExercise
-                + paddedSets + paddedTime + paddedRep + paddedCaloriesBurnt + paddedStatus;
+                +paddedWeights + paddedSets + paddedRep + paddedDist + paddedCaloriesBurnt + paddedStatus;
         return line;
     }
 

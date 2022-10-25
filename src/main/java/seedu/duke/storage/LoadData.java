@@ -39,17 +39,14 @@ public class LoadData {
                     setCommand.execute();
                 } else {
                     String[] saveDataArray = line.split("\\|");
-                    boolean isMarkDone = false;
-                    if (saveDataArray.length == 2 && saveDataArray[1].trim().equals("1")) {
-                        isMarkDone = true;
-                    }
+                    boolean isMarkDone = saveDataArray[0].trim().equals("1");
                     AddCommand addCommand = new AddCommand(saveDataArray[0]
                             .trim(), false, isMarkDone);
                     addCommand.setData(ui, storage, biometrics, exerciseList, foodList, recordList);
                     addCommand.execute();
                 }
             } catch (IllegalValueException e) {
-                throw new IllegalValueException("error with loading :" + line);
+                throw new IllegalValueException("error with loading : " + line);
             }
         }
         input.close();

@@ -1,22 +1,22 @@
 package seedu.duke.records.exercise;
-
 import seedu.duke.records.Record;
 
 import java.time.LocalDate;
 
 public class Exercise extends Record {
     private LocalDate date;
+    private double time;
     private String exerciseName;
     private int repetition;
     private int caloriesBurnt;
     private boolean isDone;
 
-
-    public Exercise(String exerciseName, int repetitions, int caloriesBurnt, LocalDate date) {
+    public Exercise(String exerciseName, int repetitions, LocalDate date) {
         super(date);
         this.exerciseName = exerciseName;
         this.repetition = repetitions;
-        this.caloriesBurnt = caloriesBurnt;
+        this.time = 0.0;
+        this.caloriesBurnt = 0;
         this.isDone = false;
     }
 
@@ -40,7 +40,7 @@ public class Exercise extends Record {
         return 1;
     }
 
-    public int getTime() {
+    public double getDistance() {
         return 1;
     }
 
@@ -49,6 +49,10 @@ public class Exercise extends Record {
             return "[X]";
         }
         return "[ ]";
+    }
+
+    public String getTime() {
+        return String.format("%.1f", time);
     }
 
     public int getTaskStatusInNumber() {
@@ -62,6 +66,14 @@ public class Exercise extends Record {
         this.isDone = isDone;
     }
 
+    public void setCaloriesBurnt(int caloriesBurnt) {
+        this.caloriesBurnt = caloriesBurnt;
+    }
+
+    public void setTime(double time) {
+        this.time = time;
+    }
+
     @Override
     public String toString() {
         return "Exercise: " + exerciseName + System.lineSeparator()
@@ -73,5 +85,9 @@ public class Exercise extends Record {
     public String saveExercise() {
         return "exercise /" + getExerciseName() + " /"
                 + getSet() + " /" + getRepetition() + " /" + getCaloriesBurnt() + " | " + getTaskStatusInNumber();
+    }
+
+    public int getWeight() {
+        return 0;
     }
 }

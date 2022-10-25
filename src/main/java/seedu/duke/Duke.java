@@ -6,6 +6,7 @@ import seedu.duke.command.Command;
 import seedu.duke.command.GreetCommand;
 import seedu.duke.command.LoadCommand;
 import seedu.duke.command.SaveCommand;
+import seedu.duke.exception.DukeException;
 import seedu.duke.exception.IllegalValueException;
 import seedu.duke.records.exercise.ExerciseList;
 import seedu.duke.records.food.FoodList;
@@ -84,7 +85,7 @@ public class Duke {
                 Command command = Parser.parse(input);
                 command.setData(ui, storage, biometrics, exerciseList, foodList, recordList);
                 command.execute();
-            } catch (IllegalValueException e) {
+            } catch (DukeException e) {
                 ui.output(e.getMessage());
             } finally {
                 ui.line();
