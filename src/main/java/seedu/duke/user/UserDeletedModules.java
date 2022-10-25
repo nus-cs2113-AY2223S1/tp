@@ -14,6 +14,10 @@ public class UserDeletedModules {
         deletedModules = new ArrayDeque<>();
     }
 
+    public static ArrayDeque<UserModuleMapping> getDeletedModules() {
+        return deletedModules;
+    }
+
     /**.
      * Add a module to the deletedModules list
      * @param deletedModule Module to be added to deletedModules list
