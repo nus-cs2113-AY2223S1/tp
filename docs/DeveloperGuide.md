@@ -79,19 +79,21 @@ The list feature has the following commands in it -
     * `b/` This is for budget
     * `n/` This is for name
     * `e/` This is for e-mail
+    * `-short` This is for the shorthand version(displays just name and budget)
 * `list -property FLAG` This lists only the information present in the TAG for every property. The types
   of TAG are -
     * `a/` This is for address
     * `n/` This is for name
     * `p/` This is for price
-    * `t/` This is for type  
+    * `t/` This is for unit type
+    * `-short` This is for the shorthand version(displays address, price and unit type)
 
 There are 5 different classes, that each inherit from the abstract Command class. The commands read information from 
 the PropertyList and ClientList classes respectively, and display using the Ui class, making use of the objects of 
 these classes. The Commands which display all the information - i.e. CommandListClients, CommandListProperties, and
 CommandListEverything read and display using loops inside the overriden execute() method itself. The Commands which 
 display selected information - i.e. CommandListClientsWithTags and CommandListPropertiesWithTags use their private 
-methods to display their information. The class structure is as follows - 
+methods to display their information, using methods present in Ui. The class structure is as follows - 
 ![ListClassDiagram](diagrams/ListClassDiagram.png)
 
   
@@ -431,9 +433,12 @@ in Ui.
 
 * Each of these commands then uses a method present in the Ui class, to print an individual client, or property.
    The loop for printing every single client or property is present in the Command itself.
-  ![CommandListClientsClass](diagrams/CommandListPropertiesClass.png)
-The above is an example for CommandListProperties. It reads from PropertyList. Then, it displays each line
-using the displayOneProperty function in Ui.
+  ![CommandListClientsClass](diagrams/CommandListClientsClass.png)
+The above is an example for CommandListClients. It reads from ClientList. Then, it displays each line
+using the displayOneClient function in Ui.  
+The sequence diagram of the operation is as follows - 
+![ListSequence](diagrams/ListSequence.png)
+
 
 ---
 
