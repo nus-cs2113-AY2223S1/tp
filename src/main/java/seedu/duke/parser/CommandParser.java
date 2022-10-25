@@ -26,9 +26,9 @@ public class CommandParser {
     private static final String DAY_PREFIX = "d/";
     private static final String START_TIME_PREFIX = "st/";
     private static final String END_TIME_PREFIX = "en/";
-    private static final String ADD_FAVORITE_PREFIX = "add/";
-    private static final String DELETE_FAVORITE_PREFIX = "del/";
-    private static final String VIEW_FAVORITE_PREFIX = "VIEW";
+    private static final String ADD_FAVOURITE_PREFIX = "add/";
+    private static final String DELETE_FAVOURITE_PREFIX = "del/";
+    private static final String VIEW_FAVOURITE_PREFIX = "VIEW";
     private static final String UNIVERSITIES_OPTION = "UNIVERSITIES";
     private static final String USER_LISTS_OPTION = "LISTS";
     private static final String MODULES_OPTION = "MODULES";
@@ -41,7 +41,7 @@ public class CommandParser {
     private static final int COMMAND_INDEX = 0;
     private static final int UNIVERSITY_INDEX = 1;
     private static final int LIST_OPTION_INDEX = 1;
-    private static final int FAVORITE_OPTION_INDEX = 1;
+    private static final int FAVOURITE_OPTION_INDEX = 1;
     private static final int VIEW_OPTION_INDEX = 1;
     private static final int MODULE_INDEX = 2;
     private static final int DAY_INDEX = 3;
@@ -268,7 +268,7 @@ public class CommandParser {
      */
     private static boolean isValidFavouriteCommand(String[] parameters) {
         return parameters.length == TWO_PARAMETERS_LENGTH
-                && isValidFavouriteOption(parameters[FAVORITE_OPTION_INDEX]);
+                && isValidFavouriteOption(parameters[FAVOURITE_OPTION_INDEX]);
     }
 
     /**
@@ -278,8 +278,8 @@ public class CommandParser {
      * @return True if user input option is a valid favourite command option. False otherwise.
      */
     private static boolean isValidFavouriteOption(String option) {
-        return option.startsWith(ADD_FAVORITE_PREFIX) || option.startsWith(DELETE_FAVORITE_PREFIX)
-                || option.startsWith(VIEW_FAVORITE_PREFIX);
+        return option.startsWith(ADD_FAVOURITE_PREFIX) || option.startsWith(DELETE_FAVOURITE_PREFIX)
+                || option.startsWith(VIEW_FAVOURITE_PREFIX);
     }
 
     /**

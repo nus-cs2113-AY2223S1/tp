@@ -113,6 +113,30 @@ the specified Command format. To deal with parsing parameters, spaces in Univers
 The following class diagram illustrates the relationship between Command class and its subclasses as well as other classes related to Commands.
 ![Command Class Diagram](./images/Command_class.png)
 
+#### Create Command
+
+A Create command can be used to create a university list and its corresponding timetable.
+
+The following sequence diagram illustrates the relationship between the respective classes involved in the creation and execution of a create command.
+
+![Create Command Sequence Diagram](./images/CreateCommand_Sequence.png)
+
+#### Exit Command
+
+An Exit command can be used to exit the application.
+
+The following sequence diagram illustrates the relationship between the respective classes involved in the creation and execution of an exit command.
+
+![Exit Command Sequence Diagram](./images/ExitCommand_Sequence.png)
+
+#### Help Command
+
+A Help command can be used to exit the application.
+
+The following sequence diagram illustrates the relationship between the respective classes involved in the creation and execution of a help command.
+
+![Help Command Sequence Diagram](./images/HelpCommand_Sequence.png)
+
 #### Add Command
 
 An add command can be used to add a lesson to the timetable or add a module mapping to the user university list.
@@ -120,6 +144,22 @@ An add command can be used to add a lesson to the timetable or add a module mapp
 The following sequence diagram illustrates the relationship between the respective classes involved in the creation and execution of an add command.
 
 ![Add Command Sequence Diagram](./images/AddCommand_Sequence.png)
+
+#### Delete Command
+
+A delete command can be used to delete a lesson from the timetable, delete a module mapping from the user university list or delete an entire user created university list.
+
+The following sequence diagram illustrates the relationship between the respective classes involved in the creation and execution of a delete command.
+
+![Delete Command Sequence Diagram](./images/DeleteCommand_Sequence.png)
+
+#### View Command
+
+A view command can be used to view all user created university lists, view user's delete history, view user's selected university list or view all the user's created university lists' timetables.
+
+The following sequence diagram illustrates the relationship between the respective classes involved in the creation and execution of a view command.
+
+![View Command Sequence Diagram](./images/ViewCommand_Sequence.png)
 
 #### List Command
 
@@ -144,6 +184,10 @@ To differentiate between the various functions of the favourite command, a varia
 The following class diagram illustrates the relationship between the respective classes involved in the creation and execution of a favourite command.
 
 ![Favourite Command Class Diagram](./images/FavouriteCommand_Class.png)
+
+The following sequence diagram illustrates the flow of the program to read in the user input, parse the user input, check if it is a valid favourite command, and execute the relevant favourite command.
+
+![Favourite Command Sequence Diagram](./images/FavouriteCommand_Sequence.png)
 
 ## Product scope
 

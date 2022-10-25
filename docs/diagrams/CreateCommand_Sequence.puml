@@ -60,7 +60,7 @@ end
 CommandParser --> Duke : newUserCommand : Command
 deactivate CommandParser
 
-alt add command
+alt create command
 
 Duke -> Duke : executeCreateCommand(userUniversityListManager, timetableManager, newUserCommand)
 activate Duke
@@ -87,12 +87,9 @@ activate Duke
     activate UserStorageParser
 
     deactivate UserStorageParser
-
-else other command
 deactivate Duke
-
+else other command
 end
 
-deactivate Duke
 
 @enduml

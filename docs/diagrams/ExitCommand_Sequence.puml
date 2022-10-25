@@ -69,11 +69,9 @@ activate Duke
 
    deactivate Duke
 
-else other command
 deactivate Duke
-
+else other command
 end
-
 deactivate Duke
 
 @enduml
