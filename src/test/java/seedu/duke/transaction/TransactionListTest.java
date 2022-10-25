@@ -36,7 +36,8 @@ class TransactionListTest {
         Transaction transaction = new Transaction("6650266082", "6650266082", "6650266082", 5,
                 LocalDate.parse("2022-10-03"));
         transactionList.addTransaction(transaction);
-        assertThrows(TransactionNotFoundException.class, () -> transactionList.getTransactionById("6650266w82"));
+        assertThrows(TransactionNotFoundException.class,
+            () -> transactionList.getTransactionById("6650266w82"));
 
     }
 

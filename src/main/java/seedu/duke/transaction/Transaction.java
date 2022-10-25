@@ -6,7 +6,7 @@ import seedu.duke.parser.DateParser;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
-//@@author bdthanh
+// @@author bdthanh
 /**
  * A representation of transaction.
  */
@@ -124,8 +124,8 @@ public class Transaction {
      */
 
     public Transaction updateDuration(int newDuration) {
-        return new Transaction(this.transactionId, this.itemName, this.itemId, this.borrower, newDuration,
-                this.createdAt);
+        return new Transaction(this.transactionId, this.itemName, this.itemId, this.borrower,
+                newDuration, this.createdAt);
     }
 
     /**
