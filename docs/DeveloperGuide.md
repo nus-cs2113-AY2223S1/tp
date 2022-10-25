@@ -40,10 +40,10 @@ This project is based on the skeleton code and documents of [SE-EDU AddressBook 
 **Step 2**: Fork [our repo](https://github.com/AY2223S1-CS2113-W12-1/tp) and clone the fork to your local computer.
 
 **Step 3**: Set up the JDK:
-1. From the main menu, select File | Project Structure | Project Settings | Project | Project SDK
+1. From the main menu, select File > Project Structure > Project Settings > Project > Project SDK
 2. If ```JDK 11``` is already defined in Intellij IDEA, select it and click ```Apply```
-3. If ```JDK 11``` is not defined, select Add SDK | Download JDK, choose the necessary JDK (JDK 11) and click Download, then click ```Apply```
-**Step 4**: Go to File | Open, locate and open the cloned repository.
+3. If ```JDK 11``` is not defined, select Add SDK > Download JDK, choose the necessary JDK (JDK 11) and click Download, then click ```Apply```
+**Step 4**: Go to File > Open, locate and open the cloned repository.
 
 **Step 5**: Verify the setup:
 1. Run ```Duke.main()``` and try some commands.
