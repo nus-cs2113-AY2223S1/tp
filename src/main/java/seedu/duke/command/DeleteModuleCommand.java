@@ -3,6 +3,7 @@ package seedu.duke.command;
 import seedu.duke.exceptions.YamomException;
 import seedu.duke.model.Module;
 import seedu.duke.model.SelectedModule;
+import seedu.duke.parser.Parser;
 import seedu.duke.utils.State;
 import seedu.duke.utils.Storage;
 import seedu.duke.utils.Ui;
@@ -25,13 +26,11 @@ public class DeleteModuleCommand extends Command {
 
     public DeleteModuleCommand(String[] input) throws YamomException {
         super(input);
-        try {
-            String moduleCode = input[1];
-            this.module = Module.get(moduleCode.toUpperCase());
-            this.successful = false;
-        } catch (Exception e) {
-            throw new YamomException(ERROR_WRONG_FORMAT);
-        }
+        Parser.moduleRelatedCommandError(input, ERROR_WRONG_FORMAT);
+
+        String moduleCode = input[1];
+        this.module = Module.get(moduleCode.toUpperCase());
+        this.successful = false;
     }
 
     @Override

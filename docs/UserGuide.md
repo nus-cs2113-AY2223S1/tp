@@ -62,14 +62,38 @@ Sample Output:
 ```
 help
 --------------------------------------
-help: lists all functions!
-add: add a module into your planner!
-delete: delete MODULE - remove a module from your planner!
-bye: exit Yet Another Module Organiser / Manager (YAMOM)!
-search: [MODULE_CODE][MODULE_NAME] - returns modules that match the search terms!
-view: displays current timetable!
-select: select /module [MODULE_CODE] /type [LESSON_TYPE] /code [CLASS_NO] - select slot for modules!
+Here are all the commands available in YAMOM!
 
+add	: add a module into YAMOM timetable.
+delete	: remove a module from YAMOM timetable.
+list	: List out all the selected modules and lesson slots.
+bye	: Exit YAMOM!
+export	: Generates an NUSMod Link to be exported to the browser.
+get	: Show all details of a module.
+help	: List out all commands and  their respective usages in YAMOM
+import	: Imports a timetable  from an NUSMod timetable sharing link
+search	: List out all modules that contains a search term
+	 * the search term can either be module code or a keyword in module title.
+semester	: Select another semester to plan and organize timetable
+select	: Select a module slot
+view	: Display current user timetable
+
+Usage :
+	add [MODULE_CODE]
+	delete [MODULE_CODE]
+	list
+	bye
+	export
+	get [MODULE_CODE]
+	help
+	import [NUSMods_LINK]
+	search (/code [MODULE_CODE] | /title [KEYWORD])
+	semester [SEMESTER_SELECTED]
+	select /module <MODULE_CODE> /type <LESSON_TYPE> /code <CLASS_NO>
+	view (fancy|simple)
+
+Note: [ ] are required elements, < > are optional elements
+For more detailed guide, please visit https://ay2223s1-cs2113-f11-3.github.io/tp/
 --------------------------------------
 ```
 
@@ -124,6 +148,12 @@ Possible Error:
    ```
    add cs203
    --------------------------------------
+   Error! 	Wrong format, should be: add [MODULE_CODE]
+   Module is invalid! Please enter a valid module code.
+   Each module of study has a unique module code consisting of a two-
+   or three-letter prefix that generally denotes the discipline,
+   and four digits, the first of which indicates the level of the module
+   (e.g., 1000 indicates a Level 1 module and 2000, a Level 2 module).
    --------------------------------------
    ```
    
@@ -132,7 +162,8 @@ Possible Error:
    ```
    add CS1231 CS2101
    --------------------------------------
-   Sorry, I do not understand your command. Enter "help" for the available commands
+   Error! 	Wrong format, should be: add [MODULE_CODE]
+   Unknown command, try again.
    --------------------------------------
    ```
 
@@ -235,7 +266,8 @@ You are now planning for special term I
 
 Prints out the current user timetable.
 
-Format: `view`
+Format: `view /(simple|fancy)`  
+`view /simple` is equivalent to `view`  
 
 Example of usage:
 
@@ -270,7 +302,29 @@ Possible Error:
 ```
 view
 --------------------------------------
-Your timetable is empty. Please select lessons first before viewing.
+Error! 	Your timetable is empty.
+Please select your modules first before viewing.
+--------------------------------------
+```
+ - Random parameters:
+```
+view timetable
+--------------------------------------
+Error! 	Unknown command. Maybe you meant "view".
+--------------------------------------
+```
+ - Forgot backslash `/`:
+```
+view fancy
+--------------------------------------
+Error! 	Unknown command. Maybe you forgot a "/".
+--------------------------------------
+```
+ - Contains both `/fancy` and `/simple`:
+```
+view /simple /fancy
+--------------------------------------
+Error! 	Timetable cannot be both simple and fancy!
 --------------------------------------
 ```
 ### Feature X: `list`

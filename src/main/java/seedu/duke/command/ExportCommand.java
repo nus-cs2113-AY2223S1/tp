@@ -1,6 +1,7 @@
 package seedu.duke.command;
 
-import seedu.duke.model.SelectedModule;
+import seedu.duke.exceptions.YamomException;
+import seedu.duke.parser.Parser;
 import seedu.duke.utils.State;
 import seedu.duke.utils.Storage;
 import seedu.duke.utils.Ui;
@@ -11,8 +12,9 @@ public class ExportCommand extends Command {
     public static final String COMMAND_USAGE = "export";
     public static final String COMMAND_DESCRIPTION = "Generates an NUSMod Link to be exported to the browser.";
 
-    public ExportCommand(String[] input) {
+    public ExportCommand(String[] input) throws YamomException {
         super(input);
+        Parser.singleWordCommandError(input);
     }
 
     @Override
