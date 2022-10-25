@@ -28,10 +28,10 @@ public abstract class ListAndStatsCommand extends Command {
     private static Logger listStatsLogger = Logger.getLogger(ListAndStatsCommand.class.getName());
 
     //@@author paullowse
-    public int month;
-    public int year;
-    public String period;
-    public int number;
+    public static int month;
+    public static int year;
+    public static String period;
+    public static int number;
 
     public ListAndStatsCommand() {
         this.month = UNDEFINED_PARAMETER;
@@ -72,7 +72,7 @@ public abstract class ListAndStatsCommand extends Command {
      * @return 1 if both tags are given, 2 if only year is given, 3 if only month is given,
      *      0 if both are not given.
      */
-    public int containMonthYear() {
+    public static int containMonthYear() {
         if (month != UNDEFINED_PARAMETER && year != UNDEFINED_PARAMETER) {
             return CONTAIN_BOTH;
         } else if (year != UNDEFINED_PARAMETER) {
@@ -89,7 +89,7 @@ public abstract class ListAndStatsCommand extends Command {
      *
      * @return 1 if both tags are given, 2 if either period/number is given, 0 if both are not given.
      */
-    public int containPeriodNumber() {
+    public static int containPeriodNumber() {
         if (period != null && number != UNDEFINED_PARAMETER) {
             return CONTAIN_BOTH;
         } else if (period != null || number != UNDEFINED_PARAMETER) {
@@ -103,7 +103,7 @@ public abstract class ListAndStatsCommand extends Command {
      *
      * @throws MoolahException If any of the below exception conditions are met.
      */
-    public void parseDateIntervalsTags() throws MoolahException {
+    public static void parseDateIntervalsTags() throws MoolahException {
         if (containMonthYear() != FALSE && containPeriodNumber() != FALSE) {
             // Throws an unsupported tag exception if tags are not supposed to be used together
             listStatsLogger.log(Level.WARNING, "Exception occurred as an invalid combination "
