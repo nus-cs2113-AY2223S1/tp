@@ -69,11 +69,30 @@ _Written by: Paul Low_
 
 ## Design
 
-{Describe the design of the product. Use UML diagrams and short code snippets where applicable.}
-
 ### Architecture
+![Architecture Diagram](images/ArchitectureDiagram.png)
+The Architecture Diagram shown above explains the high-level design of Moolah Manager. 
+The `Duke` class contain the main method which holds the responsibility for the following:
+1. On application launch, it will initialise the `UI`, `Storage` and `Data` components. 
+2. During application execution, it will interact with `UI`, `Parser`, `Command` components 
+to execute the command entered by the users.
+3. On any exception caught, it will handle the exception and interact with the `UI` to display the error message.
 
-_Written by: Author name_
+`Common` represents a collection of classes or enums used by multiple components.
+
+The rest of the application consists of six components:
+ - `UI`: The user interface of Moolah Manager
+ - `Parser`: Parser for user's entered command.
+ - `Command`: The command executor.
+ - `Data`: Holds the data of the application in memory.
+ - `Storage`: File I/O to store the data onto the hard disk.
+
+#### How the architecture components interact with each other
+The sequence diagram below shows how the components interact on command `budget b/1000`.
+![Architecture Interaction](images/ArchitectureSequenceDiagram.png)
+The section below gives more detailed description of each component.
+
+_Written by: Chia Thin Hong_
 
 ### Command Component
 
