@@ -91,10 +91,10 @@ public class TaskParser {
 
     public Command prepareReassignTask(String input){
         try{
-            int startOfI = input.indexOf(" /i");
-            int startOfE = input.indexOf(" /e");
+            int startOfI = input.indexOf(" i/");
+            int startOfE = input.indexOf(" e/");
             if (startOfI > startOfE || startOfI == -1) {
-                System.out.println("Invalid Input! format of parameters entered for adding a pet is invalid");
+                System.out.println("Invalid Input! format of parameters entered for adding a task is invalid");
                 throw new DukeException();
             }
 
