@@ -138,7 +138,6 @@ public class UserModuleMappingTest {
     @Test
     void deleteModuleByIndex_outOfBounds_expectException() {
         assertThrows(IndexOutOfBoundsException.class, () -> myModules.deleteModule(-1));
-        assertThrows(IndexOutOfBoundsException.class,
-                () -> myModules.deleteModule((myModules.getModules().size() + 1)));
+        assertThrows(IndexOutOfBoundsException.class, () -> myModules.deleteModule((1)));
     }
 }
