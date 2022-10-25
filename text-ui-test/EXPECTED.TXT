@@ -107,8 +107,8 @@ Command Word: STATS
 To get statistics of the transactions such as the total savings for each category, summary of expenditure over a time period.
 Usage: stats s/STATS_TYPE [m/MONTH] [y/YEAR] [p/PERIOD] [n/NUMBER]
 Parameters information:
-STATISTICS_TYPE: The type of statistics to be generated. Only "categories", "months" or "time" is accepted.(Optional) MONTH: Month of the transaction. Only integers within 1 to 12 are accepted. Note that month must be accompanied by a year. This tag cannot be used together with [p/PERIOD] or [n/NUMBER] tags.
-(Optional) YEAR: Year of the transaction. Only integers from 1000 onwards are accepted.This tag cannot be used together with [p/PERIOD] or [n/NUMBER] tags.
+STATISTICS_TYPE: The type of statistics to be generated. Only "categorical_savings", "monthly_expenditure" or "time_insights" is accepted.
+(Optional) MONTH: Month of the transaction. Only integers within 1 to 12 are accepted. Note that month must be accompanied by a year. This tag cannot be used together with [p/PERIOD] or [n/NUMBER] tags.
 (Optional) PERIOD: Period of the transaction. Only "weeks" or "months" is accepted. Note that period must be accompanied by a number to backdate from. This tag cannot be used together with [m/MONTH] or [y/YEAR] tags.
 (Optional) NUMBER: Last number of weeks or months. Only positive integers are accepted. Note thatnumber must be accompanied by a period that represents weeks or months. This tag cannot be used together with [m/MONTH] or [y/YEAR] tags.
 
