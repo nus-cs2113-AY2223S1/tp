@@ -115,6 +115,8 @@ public class Link {
             String[] lessonsInfo = splitModuleAndLesson[1].split(lessonDelimiter);
             addLessons(lessonsInfo, selectedModule, semester);
             selectedModules.add(selectedModule);
+
+
         }
         state.setSelectedModulesList(selectedModules);
     }
@@ -141,7 +143,7 @@ public class Link {
         Pattern pattern = Pattern.compile(SUPPOSED_START_REGEX);
         Matcher matcher = pattern.matcher(link);
         boolean hasMatch = matcher.find();
-        boolean hasRequiredLength = link.length() >= SUPPOSED_PREFIX.length();
+        boolean hasRequiredLength = link.length() > SUPPOSED_PREFIX.length();
         return hasMatch && hasRequiredLength;
     }
 

@@ -45,7 +45,7 @@ public class Storage {
             for (String link: links) {
                 Link.parseLink(link, state);
             }
-            State.setSemester(1);
+            state.setSemester(1);
             ui.addMessage(LOADING_PREVIOUS_STATE_MESSAGE);
             logger.log(Level.FINE, "Opened previous saved file");
         } catch (FileNotFoundException e) {
