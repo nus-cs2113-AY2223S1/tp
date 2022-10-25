@@ -16,7 +16,7 @@ The following steps will guide you through the setup process to get your develop
 3. Fork the [MoneyGoWhere](https://github.com/AY2223S1-CS2113T-W11-1/tp) repository and clone it to your system.
 4. Launch Intellij IDEA and open the repository you have cloned.
 5. Navigate to `File > Project Structure > Project Settings > Project` and set `SDK` to `11`.
-6. Verify the setup process by running `MoneyGoWhere#main()`
+6. Verify the setup process by running `MoneyGoWhere#main()`.
 You should see the following greeting message if the project setup is successful:
 
 ```
@@ -55,7 +55,7 @@ the user enters the command `Add-Expense -n Expense -a 7.80` to add an expense w
 
 ![Component-Interaction-On-Command-Entered](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentInteractionsOnCommandEntered.puml)
 
-* The `UserInterface` runs cotinuously in a loop.
+* The `UserInterface` runs continuously in a loop.
 When the program is ready to receive the user's input, 
 it calls `UserInterface#getConsoleCommand()` which reads the input from standard in.
 * `UserInterface#getConsoleCommand()` calls `Parser#parse()` to parse the input string into a `ConsoleCommand` object.
