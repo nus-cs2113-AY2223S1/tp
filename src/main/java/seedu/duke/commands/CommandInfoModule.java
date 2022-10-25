@@ -14,9 +14,9 @@ public class CommandInfoModule {
     public static String findModule() {
         Nusmods mods = new Nusmods();
         String[] found = new String[3];
-        UI.printResponse("Please the module code you wish to get information about");
+        String moduleCode = UI.getModuleCodeFromUser();
         try {
-            found = mods.getModuleInfo();
+            found = mods.getModuleInfo(moduleCode);
         } catch (IOException e) {
             UI.printResponse("Some IO errors has occurred, please try again");
         } catch (InterruptedException e) {

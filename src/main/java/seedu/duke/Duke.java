@@ -1,7 +1,7 @@
 package seedu.duke;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.sql.Time;
 import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -41,9 +41,9 @@ public class Duke {
         String input;
         String currentSemester = getSemester();
 
-        Timetable.initDict();
-        DataManager.initDataFile(currentSemester);
-        DataManager.loadTimetableFromDataFile();
+        if (!loadData(currentSemester)) {
+            System.exit(0);
+        }
 
         boolean isRunning = !Objects.equals(currentSemester, EXIT_FLAG);
         
@@ -63,8 +63,29 @@ public class Duke {
             assert isRunning : "this is never set to false, use break to exit loop";
         }
 
+        saveData();
+
         UI.printGoodbyeMessage();
         lgr.info("exiting Timetabler program...");
+    }
+
+    private static void saveData() {
+        DataManager.makeSave();
+    }
+
+    private static boolean loadData(String currentSemester) {
+        DataManager.initDataFile(currentSemester);
+        try {
+            DataManager.loadTimetableFromDataFile();
+        } catch (FileNotFoundException e) {
+            UI.printResponse("Error, file not found!");
+            return false;
+        } catch (Exceptions.FileLoadException e) {
+            UI.printResponse("Error loading last save, are you connected to the internet?\n"
+                    + "Program exiting expectedly...");
+            return false;
+        }
+        return true;
     }
 
     private static String getSemester() {
