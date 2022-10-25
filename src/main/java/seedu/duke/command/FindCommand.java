@@ -55,7 +55,7 @@ public class FindCommand extends Command {
      * @param keywords A string containing the keywords used in the search expression.
      * @throws FindTransactionMissingKeywordsException If a user does not enter a search expression for Find.
      */
-    public void checkFindFormat(String keywords) throws FindTransactionMissingKeywordsException {
+    public static void checkFindFormat(String keywords) throws FindTransactionMissingKeywordsException {
         if (keywords.isBlank()) {
             throw new FindTransactionMissingKeywordsException();
         }
