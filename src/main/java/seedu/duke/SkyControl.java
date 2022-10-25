@@ -1,9 +1,11 @@
 package seedu.duke;
 
 import seedu.duke.command.Command;
-import seedu.duke.command.flightcommand.DeleteFlightCommand;
 import seedu.duke.command.flightcommand.AddFlightCommand;
+import seedu.duke.command.flightcommand.DeleteFlightCommand;
 import seedu.duke.command.flightcommand.ListFlightCommand;
+import seedu.duke.command.flightcommand.ModifyFlightNumCommand;
+import seedu.duke.command.flightcommand.ModifyGateNumCommand;
 import seedu.duke.command.passengercommand.AddPassengerCommand;
 import seedu.duke.command.passengercommand.DeletePassengerCommand;
 import seedu.duke.command.passengercommand.ListPassengerCommand;
@@ -21,6 +23,7 @@ public class SkyControl {
     private OperationList flights;
     private static boolean isPassenger = false;
     private static boolean isFlight = false;
+    private static boolean isModify = false;
     private static boolean isAdd = false;
 
 
@@ -33,15 +36,22 @@ public class SkyControl {
         flights = new FlightList();
     }
 
-    private void executeEntity(String lineInput, Command command) {
+    private void executeEntity(String lineInput, Command command) throws SkyControlException {
         assert lineInput != null;
         checkEntity(lineInput);
-        if (isPassenger) {
-            executePassengerCommand(lineInput, command);
-        } else if (isFlight) {
-            command.execute(flights, lineInput);
-        } else {
-            command.execute(flights, lineInput);
+        try {
+            if (isPassenger) {
+                executePassengerCommand(lineInput, command);
+            } else if (isFlight) {
+                command.execute(flights, lineInput);
+            } else if (isModify) {
+                command.execute(flights, lineInput);
+                command.execute(passengers, lineInput);
+            } else {
+                command.execute(flights, lineInput);
+            }
+        } catch (SkyControlException e) {
+            ui.showError(e.getMessage());
         }
     }
 
@@ -56,9 +66,10 @@ public class SkyControl {
         }
     }
 
-    private void checkEntity(String lineInput) {
+    private void checkEntity(String lineInput) throws SkyControlException {
         isPassenger = Parser.isPassengerEntity(lineInput);
         isFlight = Parser.isFlightEntity(lineInput);
+        isModify = Parser.isModifyCommand(lineInput);
         if (isPassenger) {
             isAdd = Parser.getAdd(lineInput);
         }
@@ -72,6 +83,8 @@ public class SkyControl {
         DeleteFlightCommand.setUpLogger();
         AddFlightCommand.setupLogger();
         ListFlightCommand.setupLogger();
+        ModifyFlightNumCommand.setupLogger();
+        ModifyGateNumCommand.setupLogger();
     }
 
     public void run() {

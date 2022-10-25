@@ -59,4 +59,13 @@ public class FlightInfo {
                 this.airline, this.destination, this.departureTime, this.gateNum, this.checkLn);
         return "";
     }
+
+    //@@author shengiv
+    public void setFlightNum(String newFlightNum) {
+        this.flightNum = newFlightNum;
+    }
+
+    public void setGateNum(String newGateNum) {
+        this.gateNum = newGateNum;
+    }
 }
