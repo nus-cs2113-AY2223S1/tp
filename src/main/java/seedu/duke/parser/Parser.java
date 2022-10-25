@@ -3,15 +3,17 @@ package seedu.duke.parser;
 import seedu.duke.command.AddModuleCommand;
 import seedu.duke.command.Command;
 import seedu.duke.command.DeleteModuleCommand;
+import seedu.duke.command.DisplaySelectedModuleListCommand;
 import seedu.duke.command.ExitCommand;
+import seedu.duke.command.GetModuleCommand;
 import seedu.duke.command.HelpCommand;
-import seedu.duke.command.IncompleteCommand;
-import seedu.duke.command.InvalidModuleCommand;
-import seedu.duke.command.UnknownCommand;
 import seedu.duke.command.ViewTimetableCommand;
 import seedu.duke.command.SelectSlotCommand;
 import seedu.duke.command.SelectSemesterCommand;
 import seedu.duke.command.SearchModuleCommand;
+import seedu.duke.command.ImportCommand;
+import seedu.duke.command.ExportCommand;
+import seedu.duke.exceptions.YamomException;
 
 import java.util.Map;
 import java.util.TreeMap;
@@ -19,28 +21,62 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Parser {
-    public static Command parse(String userInput) {
+    private static final String ERROR_EMPTY_INPUT = "Please enter a command! "
+            + System.lineSeparator() + "Enter \"help\" to see all available commands in YAMOM!";
+
+    public static Command parse(String userInput) throws YamomException {
         String[] keywords = userInput.split("\\s+");
+
+        if (isEmptyInput(keywords[0])) {
+            throw new YamomException(ERROR_EMPTY_INPUT);
+        }
+
+        Command toExecute;
         switch (keywords[0]) {
         case (SearchModuleCommand.COMMAND_WORD):
-            return searchCommand(userInput);
+            toExecute = new SearchModuleCommand(userInput);
+            break;
+        case (GetModuleCommand.COMMAND_WORD):
+            toExecute = getCommand(keywords);
+            break;
         case (AddModuleCommand.COMMAND_WORD):
-            return addDeleteCommand(keywords, new AddModuleCommand(keywords));
+            toExecute = moduleRelatedCommand(keywords, new AddModuleCommand(keywords));
+            break;
         case (DeleteModuleCommand.COMMAND_WORD):
-            return addDeleteCommand(keywords, new DeleteModuleCommand(keywords));
+            toExecute = moduleRelatedCommand(keywords, new DeleteModuleCommand(keywords));
+            break;
         case (ViewTimetableCommand.COMMAND_WORD):
-            return new ViewTimetableCommand(userInput);
+            toExecute = singleWordCommand(keywords, new ViewTimetableCommand(userInput));
+            break;
         case (HelpCommand.COMMAND_WORD):
-            return viewHelpExitCommand(keywords, new HelpCommand(keywords));
+            toExecute = singleWordCommand(keywords, new HelpCommand(keywords));
+            break;
         case (SelectSlotCommand.COMMAND_WORD):
-            return new SelectSlotCommand(userInput);
+            toExecute = new SelectSlotCommand(userInput);
+            break;
         case (ExitCommand.COMMAND_WORD):
-            return viewHelpExitCommand(keywords, new ExitCommand(keywords));
+            toExecute = singleWordCommand(keywords, new ExitCommand(keywords));
+            break;
         case (SelectSemesterCommand.COMMAND_WORD):
-            return selectSemesterCommand(keywords, new SelectSemesterCommand(keywords));
+            toExecute = selectSemesterCommand(keywords, new SelectSemesterCommand(keywords));
+            break;
+        case (ExportCommand.COMMAND_WORD):
+            toExecute = singleWordCommand(keywords, new ExportCommand(keywords));
+            break;
+        case (ImportCommand.COMMAND_WORD):
+            toExecute = new ImportCommand(keywords);
+            break;
+        case (DisplaySelectedModuleListCommand.COMMAND_WORD):
+            toExecute = singleWordCommand(keywords, new DisplaySelectedModuleListCommand(keywords));
+            break;
         default:
-            return new UnknownCommand(keywords);
+            throw new YamomException("Cannot process the command");
         }
+        return toExecute;
+    }
+
+    private static Command getCommand(String[] keywords) throws YamomException {
+        return new GetModuleCommand(keywords);
     }
 
     public static boolean isPartialModuleCode(String moduleCode) {
@@ -105,7 +141,11 @@ public class Parser {
         return semesterInput > 0 && semesterInput <= 4;
     }
 
-    public static Command searchCommand(String userInput) {
+    private static boolean isEmptyInput(String command) {
+        return command.isBlank() || command.isEmpty();
+    }
+
+    public static Command searchCommand(String userInput) throws YamomException {
         return new SearchModuleCommand(userInput);
     }
 
@@ -118,38 +158,44 @@ public class Parser {
      * @param command  the command that the user wants to execute
      * @return type of command
      */
-    public static Command addDeleteCommand(String[] keywords, Command command) {
+    public static Command moduleRelatedCommand(String[] keywords, Command command) throws YamomException {
+
         if (isValidTwoWordCommand(keywords)) {
             return command;
-        } else {
-            // System.out.println("Invalid module code");
-            return determineWrongCommand(keywords);
         }
-    }
 
-    private static Command determineWrongCommand(String[] keywords) {
+        String errorMessage;
+
         if (isOneWordCommand(keywords)) {
-            return new IncompleteCommand(keywords);
+            errorMessage = "Your command is incomplete.";
         } else if (isTwoWordsCommand(keywords) && !isValidModuleCode(keywords[1])) {
-            return new InvalidModuleCommand(keywords);
+            errorMessage = "Module is invalid!"
+                    + System.lineSeparator()
+                    + "Please enter a valid module code." + System.lineSeparator()
+                    + "Each module of study has a unique module code consisting of a two- "
+                    + "or three-letter prefix that generally denotes the discipline,"
+                    + "and four digits, the first of which indicates the level of the module " + System.lineSeparator()
+                    + "(e.g., 1000 indicates a Level 1 module and 2000, a Level 2 module).";
         } else {
-            return new UnknownCommand(keywords);
+            errorMessage = "Unknown command, try again";
         }
+
+        throw new YamomException(errorMessage);
     }
 
-    public static Command viewHelpExitCommand(String[] keywords, Command command) {
+    public static Command singleWordCommand(String[] keywords, Command command) throws YamomException {
         if (isOneWordCommand(keywords)) {
             return command;
         } else {
-            return new UnknownCommand(keywords);
+            throw new YamomException("0 arguments expected");
         }
     }
 
-    public static Command selectSemesterCommand(String[] keywords, Command command) {
+    public static Command selectSemesterCommand(String[] keywords, Command command) throws YamomException {
         if (isValidSemester(keywords)) {
             return command;
         } else {
-            return new UnknownCommand(keywords);
+            throw new YamomException("Not a valid semester");
         }
     }
 

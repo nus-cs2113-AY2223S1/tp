@@ -6,6 +6,10 @@ import seedu.duke.utils.Ui;
 
 public class ExitCommand extends Command {
     public static final String COMMAND_WORD = "bye";
+    public static final String COMMAND_USAGE = "bye";
+    public static final String COMMAND_DESCRIPTION = "Exit YAMOM!";
+
+    private static final String MESSAGE_EXIT = "Shutting down......";
 
     public ExitCommand(String[] input) {
         super(input);
@@ -13,7 +17,7 @@ public class ExitCommand extends Command {
 
     @Override
     public void execute(State state, Ui ui, Storage storage) {
-
+        ui.displayMessage(getExecutionMessage());
     }
 
     @Override
@@ -23,6 +27,14 @@ public class ExitCommand extends Command {
 
     @Override
     public String getExecutionMessage() {
-        return null;
+        return MESSAGE_EXIT;
+    }
+
+    public static String getCommandDescription() {
+        return COMMAND_WORD + DESCRIPTION_DELIMITER + COMMAND_DESCRIPTION;
+    }
+
+    public static String getUsage() {
+        return COMMAND_USAGE;
     }
 }

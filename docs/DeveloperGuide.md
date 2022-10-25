@@ -114,12 +114,159 @@ The <code>Parser</code> component can:
 - return the correct command type based on user input.
 
 ### 3.4 Command Component
+The <code>Command</code> component can:
+- execute and return the command type based on the first word of the user input.
+
+Below is a table of command subclasses and their respective command type. The different command types extends from the 
+Command class and are all in the command package.
+
+[//]: # (if the table is not necessary, remove it)
+| Command    | Command Type              | Action                                                                  |
+|------------|---------------------------|-------------------------------------------------------------------------|
+| `add`      | `AddModuleCommand`        | Adds the user input module into their timetable.                        |
+| `delete`   | `DeleteModuleCommand`     | Deletes the user input module from their timetable.                     |
+| `help`     | `HelpCommand`             | Displays the help message.                                              |
+| `search`   | `SearchModuleCommand`     | Searches the user input module based on code, title, semester or level. |
+| `select`   | `SelectSlotCommand`       | Selects the time slot for the different lesson types.                   |
+| `semester` | `SelectSemesterCommand`   | Selects the semester that the user want.                                |
+| `get`      | `GetCommand`              | Gets all the details with the user input module code.                   |
+| `view`     | `ViewCommand`             | Views the user timetable with user's selected modules.                  |
+| `bye`      | `ExitCommand`             | Exits the program.                                                      |
+| `nil`      | `InvalidCommand`          | Displays the invalid command message.                                   |
+| `nil`      | `IncompleteModuleCommand` | Display the incomplete command message.                                 |
+| `nil`      | `UnknownCommand`          | Display the unknown command message.                                    |
+
+#### 3.4.1 AddModuleCommand
+
+##### How the feature is implemented
+The `AddModuleCommand` class extends the `Command` class.
+The constructor `AddModuleCommand()` parses the user `input` module code `.toUpperCase()` as the format to fetch an
+instance of `module` from its class. Boolean `successful` field is used to flag successfully added modules in comparison
+to instances where it is not possible to add the `module` as it already exists in the `state`'s `selectedModuleList`.
+It overrides the `execute()` method from the `Command` class, and updates `successful` accordingly, which will later be
+passed on to the overridden `getExecutionMessage()` which displays the result of data validation that new `selectedModule`
+added are unique.
+
+##### Why it is implemented this way.
+In order to be able to be able to compare the new instance of `selectedModule` created of the module code the user wants to delete,
+in the constructor against an instance of the module the user has previously added into the `selectedModuleList`, the `equals()`
+method extended from super class `Object` has been overridden to return `true` for instances where `semester` and `module`
+(specifically `moduleCode` attribute from the parent class) are the same, allowing us to validate and add the desired module.
+
+##### Alternatives considered.
+Initially, data validation was being handled by the `Parser` class, however in the principles of avoiding tight coupling 
+and improving cohesion, it was moved back under the `AddModuleCommand` class.
+
+#### 3.4.2 DeleteModuleCommand
+
+##### How the feature is implemented
+The `DeleteModuleCommand` class extends the `Command` class.
+Similar to `AddModuleCommand` class, the constructor `DeleteModuleCommand()` parses the user `input` module code `.toUpperCase()` as the format to fetch an
+instance of `module` from its class. Boolean `successful` field is used to flag successfully added modules in comparison
+to instances where it is not possible to add the `module` as it already exists in the `state`'s `selectedModuleList`.
+It overrides the `execute()` method from the `Command` class, and updates `successful` accordingly, which will later be
+passed on to the overridden `getExecutionMessage()` which displays the result of data validation that the `selectedModule`
+instance is only removed from the `selectedModuleList` if it exists.
+
+##### Why it is implemented this way.
+In order to be able to be able to compare the new instance of `selectedModule` created of the module code the user wants to delete,
+in the constructor against an instance of the module the user has previously added into the `selectedModuleList`, the `equals()`
+method extended from super class `Object` has been overridden to return `true` for instances where `semester` and `module`
+(specifically `moduleCode` attribute from the parent class) are the same, allowing us to validate and remove the desired module.
+
+
+##### Alternatives considered.
+Once again, data validation was being handled by the `Parser` class, however in the principles of avoiding tight coupling
+and improving cohesion, it was moved back under the `DeleteModuleCommand` class.
+
+#### 3.4.3 HelpCommand
+
+#### 3.4.4 SearchModuleCommand
+
+##### How the feature is implemented
+The <code>SearchModuleCommand</code> class extends the <code>Command</code> class.
+It overrides the <code>execute()</code> method from the <code>Command</code> class.
+The <code>execute()</code> method will search for the user input module primarily based on either module code or title,
+with additional parameters of semester and level to narrow down the search results.
+
+##### Why it is implemented this way.
+User may or may not know the exact module code or title. As such, the user can search for the module based on optional 
+parameters such as semester or level. However, the user must input at least the module code or title before additional 
+parameters can be added in order to refine the search.
+
+##### Alternatives considered.
+We thought of implementing the search feature in a way that the required user for multiple inputs and displaying all the
+different results after each input. However, we decided against it as it would be too tedious for the user to input 
+multiple times and the search process will be too long.
+
+#### 3.4.5 SelectCommand
+
+#### 3.4.6 SelectSemesterCommand
+
+#### 3.4.7 GetCommand
+
+##### How the feature is implemented
+The <code>GetCommand</code> class extends the <code>Command</code> class.
+It overrides the <code>execute()</code> method from the <code>Command</code> class.
+The <code>execute()</code> method will get all the module details from the user input module code.
+
+##### Why it is implemented this way.
+This function was implemented this way as it is the most intuitive way to get the module details. It also displays all
+the different lesson types and their respective time slots. However, if the user is planning in a semester that the 
+module is not offered, the user will be notified that the module is not offered in the current semester and timings will
+not be shown. This is to prevent the user from selecting a time slot that is not offered in the current semester, which 
+will reduce the chance of having an error if the user tries to select a time slot of the module that is not offered in 
+the current semester.
+
+##### Alternatives considered.
+We thought of displaying the full module details from the search results. However, we decided against it as it would be 
+too tedious for the user to search for the **exact module code** first before getting the details. The user may
+not know the exact module code, which is not very user-friendly and takes up a lot of time just to get the module 
+details for 1 module. 
+
+#### 3.4.8 ViewCommand
+
+#### 3.4.9 ExitCommand
+
+#### 3.4.10 InvalidCommand
+
+#### 3.4.11 IncompleteModuleCommand
+
+#### 3.4.12 UnknownCommand
 
 ### 3.5 Utils Component
 
 #### 3.5.1 UI Component
 
+The <code>UI</code> component can:
+- read input from the user
+- store and print out messages to the user
+
+##### Why it is implemented this way
+To comply with the Model-View Controller Framework
+To separate the internal representations and processing of information from the presentation and acceptance of 
+information from the user
+
+##### Alternative Considered
+Each component to handle the presentation of information to the user
+
+- Increase coupling between components
+- Hard to define the sequence that information being presented to user
+
 #### 3.5.2 Link Component
+
+The <code>Link</code> component can:
+- create a [NUSmod](https://nusmods.com/) link to be used in a browser
+- Parse a NUSmod link to import modules into YAMOM
+
+##### Why is it implemented this way
+To separate out the handling of NUSmod compatibility 
+
+##### Alternative Considered
+To implement the handling of export in Storage class and import in Command class
+
+- Increase coupling between components
+- Decrease reusability of NUSmod link processing
 
 #### 3.5.3 Storage Component
 
