@@ -5,7 +5,7 @@ public class FavouriteCommand extends Command {
 
     public FavouriteCommand(String[] parameters, CommandType commandType) {
         super(parameters, commandType);
-        if (parameters[1].equals("view/")) {
+        if (parameters[1].equals("VIEW")) {
             this.favouriteOption = "VIEW";
         } else if (parameters[1].startsWith("add/")) {
             this.universityName = parameters[1].substring(4).replace("_", " ");
