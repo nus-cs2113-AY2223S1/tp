@@ -103,13 +103,6 @@ public class Calculator {
         return maintenanceCalories;
     }
 
-    public static int calculateCalories(Biometrics biometrics, double time,
-                                        double metabolicEquivalent) throws IllegalValueException {
-        if (biometrics.getWeight() == 0) {
-            throw new IllegalValueException("Weight cannot be 0. Pls update biometrics");
-        }
-        return (int) (0.0175 * biometrics.getWeight() * metabolicEquivalent * time);
-    }
 
     public int calculateTotalCaloriesConsumed(ArrayList<Food> foodArrayList, String date) {
         int totalCaloriesConsumed = 0;
@@ -117,10 +110,18 @@ public class Calculator {
                 .stream().filter(Food.class::isInstance)
                 .filter(f -> f.getDate().contains(date))
                 .collect(Collectors.toList());
-        for (Food f: filteredFoodDateList) {
+        for (Food f : filteredFoodDateList) {
             totalCaloriesConsumed += f.getCalories();
         }
         return totalCaloriesConsumed;
+    }
+
+    public static int calculateExerciseCalories(Biometrics biometrics, double time,
+                                                double metabolicEquivalent) throws IllegalValueException {
+        if (biometrics.getWeight() == 0) {
+            throw new IllegalValueException("Weight cannot be 0. Pls update biometrics");
+        }
+        return (int) (0.0175 * biometrics.getWeight() * metabolicEquivalent * time);
     }
 
     public int calculateTotalCaloriesBurnt(ArrayList<Exercise> completedExerciseArrayList, String date) {
@@ -129,16 +130,16 @@ public class Calculator {
                 .stream().filter(Exercise.class::isInstance)
                 .filter(e -> e.getDate().contains(date))
                 .collect(Collectors.toList());
-        for (Exercise e: filteredExerciseDateList) {
+        for (Exercise e : filteredExerciseDateList) {
             totalCaloriesBurnt += e.getCaloriesBurnt();
         }
         return totalCaloriesBurnt;
     }
 
     public int calculateTotalCaloriesSurplusDeficit(ArrayList<Exercise> completedExerciseArrayList,
-                                                     ArrayList<Food> foodArrayList, String date) {
-        return calculateTotalCaloriesConsumed(foodArrayList,date)
-                - calculateTotalCaloriesBurnt(completedExerciseArrayList,date);
+                                                    ArrayList<Food> foodArrayList, String date) {
+        return calculateTotalCaloriesConsumed(foodArrayList, date)
+                - calculateTotalCaloriesBurnt(completedExerciseArrayList, date);
     }
 
 

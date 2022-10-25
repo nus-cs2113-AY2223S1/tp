@@ -1,0 +1,34 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+-> MarkCommand++:execute()
+MarkCommand -> Parser++:getArgumentList(arguments: String)
+return argumentList: String[]
+MarkCommand -> MarkCommand++:markExercise(argumentList: String[])
+alt done
+MarkCommand -> ExerciseList++:getCurrentExercise(index: int)
+return exercise: Exercise
+MarkCommand -> MarkCommand++:getTimeWithValidation(argumentList: String[])
+return time: double
+MarkCommand -> MarkCommand++:getMetabolicEquivalentWithValidation(argumentList: String[])
+return met: double
+MarkCommand -> Calculator++:calculateExerciseCalories(biometrics: Biometrics, time: double, met: double)
+return calories: int
+MarkCommand -> ExerciseList++:markDone(index: int, time: double, calories: int)
+return
+MarkCommand -> Exercise++:getExerciseName()
+return name: String
+MarkCommand -> Ui++:output(markDoneMessage: String)
+return
+else undone
+MarkCommand -> ExerciseList++:getCompletedExercise(index: int)
+return exercise: Exercise
+MarkCommand -> ExerciseList++:markUndone(index: int)
+return
+MarkCommand -> Exercise++:getExerciseName()
+return name: String
+MarkCommand -> Ui++:output(markUnDoneMessage: String)
+return
+end
+
+@enduml
