@@ -1,8 +1,8 @@
 @startuml
 
 class UserStorage {
-    {static} - UNI_STORAGE_FILE_PATH
-    {static} - TIMETABLE_STORAGE_FILE_PATH
+    {static} - UNI_STORAGE_FILE_PATH : String
+    {static} - TIMETABLE_STORAGE_FILE_PATH : String
 
     {static} + saveFile(String textToAdd) : void
     {static} + loadFile() : void
