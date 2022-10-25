@@ -238,12 +238,6 @@ public class Module {
     }
 
     public LinkedHashMap<String, ArrayList<Lesson>> getClassifiedLessons() {
-        // System.out.println("---" + moduleCode + "---");
-        // for (String key : classifiedLessons.keySet()) {
-        //     for (Lesson lesson : classifiedLessons.get(key)) {
-        //         System.out.println(lesson.getLessonType() + "|" + lesson.getDay() + "|" + lesson.getStartTime() + "-" + lesson.getEndTime());
-        //     }
-        // }
         return classifiedLessons;
     }
 }

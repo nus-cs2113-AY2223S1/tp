@@ -222,7 +222,9 @@ public class TimetableDict {
         for (List<Lesson> permutation : result) {
             int numOfClashes = getNumOfClashes(permutation);
             permutationsByClashes.put(numOfClashes, permutation);
-            if (numOfClashes == 0) break;
+            if (numOfClashes == 0) {
+                break;
+            }
         }
 
         int unallocated = 0;
@@ -250,7 +252,7 @@ public class TimetableDict {
         TimetableDict tempTimetable = new TimetableDict();
         int numOfClashes = 0;
         for (Lesson lesson : lessons) {
-            if (checkClash(tempTimetable, lesson) == 1){
+            if (checkClash(tempTimetable, lesson) == 1) {
                 numOfClashes++;
                 continue;
             }
@@ -317,15 +319,6 @@ public class TimetableDict {
                         lessonIndex++;
                     }
                 }
-            }
-        }
-        // For debugging
-        System.out.println("----- " + module.getModuleCode() + " -----");
-        for (int i = 0; i < numOfPermutations; i++) {
-            List<Lesson> currPermutation = result.get(i);
-            System.out.println("--- Permutation " + (i+1) + " ---");
-            for (Lesson lesson : currPermutation) {
-                System.out.println(lesson.getLessonType() + "|" + lesson.getDay() + "|" + lesson.getStartTime() + "-" + lesson.getEndTime());
             }
         }
         return result;
