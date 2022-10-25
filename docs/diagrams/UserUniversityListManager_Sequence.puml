@@ -130,7 +130,7 @@ else schoolList exists
     activate UserUniversityListManager
 
     UserUniversityListManager -> Ui : printPuListDeletedAcknowledgement(inputSchool)
-    return 
+    return
 end
 
 deactivate UserUniversityListManager

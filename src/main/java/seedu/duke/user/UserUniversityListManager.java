@@ -94,13 +94,13 @@ public class UserUniversityListManager {
         return myManager.containsKey(inputSchool);
     }
 
-    public UserUniversityList getUserUniversityList (String input) {
+    public UserUniversityList getUserUniversityList(String input) {
         return myManager.get(input);
     }
 
     public void addModule(String inputSchool, UserModuleMapping inputModule) throws InvalidUserCommandException {
         if (containsKey(inputSchool)) {
-           getUserUniversityList(inputSchool).addModule(inputModule);
+            getUserUniversityList(inputSchool).addModule(inputModule);
         } else {
             throw new InvalidUserCommandException("No such university found");
         }
@@ -115,7 +115,8 @@ public class UserUniversityListManager {
         assert inputSchool.length() > 0 : "Input school cannot be empty";
         assert puCode.length() > 0 : "Deleting PU code cannot be empty";
         if (containsKey(inputSchool)) {
-            UserModuleMapping deletedModule = getUserUniversityList(inputSchool).getMyModules().getModuleByPuCode(puCode);
+            UserModuleMapping deletedModule = 
+                    getUserUniversityList(inputSchool).getMyModules().getModuleByPuCode(puCode);
             deletedModulesList.addToDeletedModules(deletedModule);
             getUserUniversityList(inputSchool).deleteModuleByPuCode(puCode);
         } else {
