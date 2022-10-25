@@ -124,7 +124,7 @@ public class Timetable {
         result = "Sorry, but we were unable to allocate timings for these modules due to timetable clashes:\n";
 
         for (Module module : listOfModules) {
-            List<Lesson> attendingList = module.getAttending();
+            List<Lesson> attendingList = module.getAllAttending();
             for (int index = 0; index < attendingList.size(); index++) {
                 Lesson attendingLesson = attendingList.get(index);
                 if (attendingLesson.getDay().equals("Undetermined Day")) {

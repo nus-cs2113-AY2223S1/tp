@@ -22,7 +22,7 @@ public class CommandPrintTimetable {
 
     private static void populateTimeline(String[][] timeline, List<Module> listOfModules) {
         for (Module module : listOfModules) {
-            List<Lesson> lessons = module.getAttending();
+            List<Lesson> lessons = module.getAllAttending();
             String name = module.getModuleCode();
             for (Lesson les : lessons) {
                 int[] info = convertTimeToIndex(les.getDay(), les.getStartTime(), les.getEndTime());

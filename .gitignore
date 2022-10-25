@@ -19,3 +19,4 @@ logger.log
 /Sem1DataDirectory
 /Sem2DataDirectory
 /text-ui-test/logger.log
+logger.log.lck

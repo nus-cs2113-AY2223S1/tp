@@ -2,9 +2,7 @@ package seedu.duke.module;
 
 import seedu.duke.module.lessons.Lesson;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.util.logging.Logger;
 
 
@@ -14,8 +12,8 @@ public class Module {
     private String moduleCode;
     //private String moduleDescription;
     private List<Lesson> lessons;
-    private List<Lesson> attending;
-    private HashMap<String, ArrayList<Lesson>> classifiedLessons;
+    private LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>> allLessons;
+    private LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>> allAttending;
 
     public String getModuleName() {
         return moduleName;
@@ -25,21 +23,50 @@ public class Module {
         return moduleCode;
     }
 
-    public List<Lesson> getAttending() {
-        return attending;
+    public List<Lesson> getAllAttending() {
+        List<Lesson> allAttending = new ArrayList<Lesson>();
+        for (HashMap<String, ArrayList<Lesson>> lessonTypes : this.allAttending.values()) {
+            for (ArrayList<Lesson> allClasses : lessonTypes.values()) {
+                for (Lesson lesson : allClasses) {
+                    allAttending.add(lesson);
+                }
+            }
+        }
+        return allAttending;
     }
 
     public List<Lesson> getLessons() {
         return lessons;
     }
 
+
     public Module(String moduleCode, String moduleName, List<Lesson> lessons) {
         this.moduleCode = moduleCode;
         this.moduleName = moduleName;
-        //this.moduleDescription = moduleDescription;
         this.lessons = lessons;
-        this.classifiedLessons = classifyLessons(lessons);
-        this.attending = matchLessonTypes(classifiedLessons);
+        this.allLessons = populateData();
+        this.allAttending = populateAttending();
+    }
+
+    private LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>> populateAttending() {
+        LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>> temp
+                = new LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>>();
+        for (String lessonType : allLessons.keySet()) { //initialises the types of lessons
+            if (!temp.containsKey(lessonType)) {
+                temp.put(lessonType, new LinkedHashMap<String, ArrayList<Lesson>>());
+            }
+            if (allLessons.get(lessonType).size() == 1) {
+                temp.replace(lessonType, allLessons.get(lessonType));
+            } else {
+                int numOfClasses = 0;
+                for (ArrayList<Lesson> numberedClass : allLessons.get(lessonType).values()) {
+                    numOfClasses = numberedClass.size();
+                    break;
+                }
+                addUnknownToAttendingList(temp.get(lessonType), lessonType, numOfClasses);
+            }
+        }
+        return temp;
     }
 
     private List<Lesson> matchLessonTypes(HashMap<String, ArrayList<Lesson>> classifiedLessons) {
@@ -79,6 +106,18 @@ public class Module {
         return highestCount;
     }
 
+    private void addUnknownToAttendingList(HashMap<String, ArrayList<Lesson>> temp, String lessonType, int size) {
+        ArrayList<Lesson> classes = new ArrayList<Lesson>();
+        String day = "Undetermined Day";
+        String startTime = "Undetermined";
+        String endTime = "Undetermined";
+        String classNumber = "NA";
+        for (int i = 0; i < size; i++) {
+            classes.add(new Lesson(day, startTime, endTime, lessonType, classNumber));
+        }
+        temp.put(classNumber, classes);
+    }
+
     private void addToAttendingList(List<Lesson> temp, String lessonType) {
         String day = "Undetermined Day";
         String startTime = "Undetermined";
@@ -100,7 +139,7 @@ public class Module {
     public String getModuleDetails() {
         StringBuilder details = new StringBuilder(this.getModuleCode() + ": " + this.getModuleName() + "\n");
 
-        for (Lesson lesson : attending) {
+        for (Lesson lesson : getAllAttending()) {
             details.append("     [").append(lesson.getLessonType()).append("] ").append(lesson.getDay()).append("   ")
                     .append(convertTime(lesson.getStartTime())).append(" - ")
                     .append(convertTime(lesson.getEndTime())).append("\n");
@@ -120,7 +159,7 @@ public class Module {
     public String getLessonTypes() {
         StringBuilder list = new StringBuilder();
         int index = 1;
-        for (Lesson lesson : attending) {
+        for (Lesson lesson : getAllAttending()) {
             list.append(index).append(". ").append(lesson.getLessonType()).append("     ");
             index += 1;
         }
@@ -128,7 +167,7 @@ public class Module {
     }
 
     public int getLessonTypeLength() {
-        return attending.size();
+        return getAllAttending().size();
     }
 
     @Override
@@ -138,9 +177,9 @@ public class Module {
 
     public String getTypeOfLessonFromIndex(int index) {
         assert index >= 0 : "index should be within range";
-        assert index < attending.size() : "index should be within range";
+        assert index < getAllAttending().size() : "index should be within range";
 
-        return attending.get(index).getLessonType();
+        return getAllAttending().get(index).getLessonType();
     }
 
     public String getListOfLessonReplacements(String targetType) {
@@ -187,20 +226,39 @@ public class Module {
         return null;
     }
 
-    public void replaceAttending(Lesson newLesson, Integer indexForLesson) {
-        attending.set(indexForLesson, newLesson);
+    public void replaceNewAttending(LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>> loadedLessons) {
+        this.allAttending = loadedLessons;
     }
 
-    private HashMap<String, ArrayList<Lesson>> classifyLessons(List<Lesson> lessons) {
-        HashMap<String, ArrayList<Lesson>> classifiedLessons = new HashMap<>();
+    public void replaceAttending(Lesson newLesson, Integer indexForLesson) {
+        getAllAttending().set(indexForLesson, newLesson);
+    }
+
+
+    /**
+     * Stores all lessons of the module gathered from the NUSMods API.
+     *
+     * @return A "2-key" hashmap of arrays. Representing lessonType : classNo : {class1, class2}
+     */
+    private LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>> populateData() {
+        LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>> data
+                = new LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>>();
         for (Lesson lesson : lessons) {
-            if (!classifiedLessons.containsKey(lesson.getLessonType())) {
-                classifiedLessons.put(lesson.getLessonType(), new ArrayList<>());
-                classifiedLessons.get(lesson.getLessonType()).add(lesson);
+            String lessonType = lesson.getLessonType();
+            String classNum = lesson.getClassNumber();
+            if (!data.containsKey(lessonType)) {
+               data.put(lessonType, new LinkedHashMap<String, ArrayList<Lesson>>());
+               data.get(lessonType).put(classNum, new ArrayList<Lesson>());
+               data.get(lessonType).get(classNum).add(lesson);
             } else {
-                classifiedLessons.get(lesson.getLessonType()).add(lesson);
+                if (!data.get(lessonType).containsKey(classNum)) {
+                    data.get(lessonType).put(classNum, new ArrayList<Lesson>());
+                    data.get(lessonType).get(classNum).add(lesson);
+                } else {
+                    data.get(lessonType).get(classNum).add(lesson);
+                }
             }
         }
-        return classifiedLessons;
+        return data;
     }
 }
