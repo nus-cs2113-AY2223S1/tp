@@ -1,15 +1,14 @@
 package seedu.duke.command;
 
 import seedu.duke.exceptions.YamomException;
-import seedu.duke.model.LessonType;
 import seedu.duke.model.Module;
 import seedu.duke.model.SelectedModule;
+import seedu.duke.parser.Parser;
 import seedu.duke.utils.State;
 import seedu.duke.utils.Storage;
 import seedu.duke.utils.Ui;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Add module to state by module code, updates storage and displays execution through ui.
@@ -27,13 +26,11 @@ public class AddModuleCommand extends Command {
 
     public AddModuleCommand(String[] input) throws YamomException {
         super(input);
-        try {
-            String moduleCode = input[1].toUpperCase();
-            this.module = Module.get(moduleCode);
-            successful = false;
-        } catch (Exception e) {
-            throw new YamomException(ERROR_WRONG_FORMAT);
-        }
+        Parser.moduleRelatedCommandError(input, ERROR_WRONG_FORMAT);
+
+        String moduleCode = input[1].toUpperCase();
+        this.module = Module.get(moduleCode);
+        successful = false;
     }
 
     @Override

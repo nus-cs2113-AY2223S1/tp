@@ -15,35 +15,31 @@ import java.util.logging.Logger;
 
 public class SearchModuleCommand extends Command {
     public static final String COMMAND_WORD = "search";
-    public static final String COMMAND_USAGE = "search /code [SIMILAR_MODULE_CODE] /title [SIMILAR_MODULE_TITLE] "
-            + "/level <level> /sem <semester>";
-    public static final String COMMAND_DESCRIPTION = "List out all modules that contains matching input search fields"
-            + System.lineSeparator() + "\t * Either the module code or title has to be present.";
+
+    public static final String COMMAND_USAGE = "search (/code [MODULE_CODE] | /title [KEYWORD]) "
+            + "</level [MODULE_LEVEL]> </sem [MODULE_SEMESTER]>";
+    public static final String COMMAND_DESCRIPTION = "List out all modules that contains a search term"
+            + System.lineSeparator() + "\t * the search term can either be module code or a keyword in module title."
+            + System.lineSeparator() + "\t * MODULE_LEVEL and MODULE_SEMESTER should be a single digit number";
+
+    private static final String ERROR_WRONG_FORMAT = "Wrong format given, should be "
+            + System.lineSeparator() + "\t" + COMMAND_USAGE;
+
+    private static final String ERROR_MISSING_CODE_AND_TITLE = "Search require at least a code field "
+            + "or a title field, in the format of: " + System.lineSeparator() + "\t" + COMMAND_USAGE;
+
+    public static final String SUBSYSTEM_NAME = "SearchModuleCommand";
 
     private String toSearchModuleCode;
     private String toSearchModuleTitle;
     private String toSearchLevel;
     private String toSearchSemester;
-
-    public static final String SUBSYSTEM_NAME = "SearchModuleCommand";
+    private Map<String, String> params;
 
     public SearchModuleCommand(String input) throws YamomException {
-        super(input.split("\\s"));
-        Map<String, String> params = Parser.parseParams(input);
-        toSearchModuleCode = params.getOrDefault("code", null);
-        toSearchModuleTitle = params.getOrDefault("title", null);
-        toSearchLevel = params.getOrDefault("level", null);
-        toSearchSemester = params.getOrDefault("sem", null);
-
-        // if size of params is 0, means no params are given, throw exception
-        if (params.size() == 0) {
-            throw new YamomException("Please input valid search fields to search for! You can search by module code, "
-                    + "module title, level and semester.\n\nType [help] for assistance!");
-        }
-        if (toSearchModuleCode == null && toSearchModuleTitle == null) {
-            throw new YamomException("Please input at least either the module code or title to search for!"
-                    + "\n\nType [help] for assistance!");
-        }
+        super(input.split("\\s+"));
+        params = Parser.parseParams(input);
+        processParams();
     }
 
     @Override
@@ -68,6 +64,22 @@ public class SearchModuleCommand extends Command {
         }
 
         ui.displayUi();
+    }
+
+    private void processParams() throws YamomException {
+
+        if (params.isEmpty()) {
+            throw new YamomException(ERROR_WRONG_FORMAT);
+        }
+
+        toSearchModuleCode = params.getOrDefault("code", null);
+        toSearchModuleTitle = params.getOrDefault("title", null);
+        toSearchLevel = params.getOrDefault("level", null);
+        toSearchSemester = params.getOrDefault("sem", null);
+
+        if (toSearchModuleCode == null && toSearchModuleTitle == null) {
+            throw new YamomException(ERROR_MISSING_CODE_AND_TITLE);
+        }
     }
 
     /**
@@ -108,10 +120,6 @@ public class SearchModuleCommand extends Command {
      * refined based on the input level and semester.
      * Arguments can be in any order.
      *
-     * @param toSearchModuleCode  the module code that user input
-     * @param toSearchLevel       the level that user input
-     * @param toSearchSemester    the semester that user input
-     * @param toSearchModuleTitle the module title that user input
      * @return list of modules that match the search query
      */
     public static List<Module> filterModuleSearch(String toSearchModuleCode, String toSearchLevel,

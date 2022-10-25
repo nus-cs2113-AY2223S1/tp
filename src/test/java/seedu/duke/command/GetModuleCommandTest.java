@@ -139,7 +139,7 @@ public class GetModuleCommandTest {
             getModuleCommand.execute(state, ui, null);
             fail();
         } catch (YamomException e) {
-            assertEquals("Error! \tWrong format, should be: get [EXACT_MODULE_CODE]", e.getMessage());
+            assertEquals("Error! \tPlease enter a module code!", e.getMessage());
         }
     }
 

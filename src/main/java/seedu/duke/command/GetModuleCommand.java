@@ -9,8 +9,6 @@ import seedu.duke.model.Timetable;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 import java.lang.StringBuilder;
@@ -27,20 +25,19 @@ public class GetModuleCommand extends Command {
     public static final String COMMAND_WORD = "get";
     public static final String COMMAND_USAGE = "get [EXACT_MODULE_CODE]";
     public static final String COMMAND_DESCRIPTION = "Show all details of a module.";
-    public static final String MODULE_NOT_FOUND = "Module not found! Please enter a valid module code! Try searching "
-            + "if you do not remember the exact module code.";
-    private static final String ERROR_WRONG_FORMAT = "Wrong format, should be: " + COMMAND_USAGE;
+    public static final String MISSING_MODULE_CODE = "Please enter a module code!";
+    public static final String MODULE_NOT_FOUND = "Module not found! Please enter a valid module code! "
+            + "Try searching if you do not remember the exact module code.";
+    // private static final String ERROR_WRONG_FORMAT = "Wrong format, should be: " + COMMAND_USAGE;
+
     private static final int DESCRIPTION_SIZE = 80;
-    // private static final String DESCRIPTION_INDENTATION = System.lineSeparator() + "\t\t\t\t\t";
-    private Logger logger;
-    private static final String DESCRIPTION_INDENTATION = "\n" + "\t\t\t\t\t" + "  ";
-    private static final String SUBSYSTEM_NAME = "GetModuleCommand";
+    private static final String DESCRIPTION_INDENTATION = System.lineSeparator() + "\t\t\t\t\t";
 
     public GetModuleCommand(String[] input) throws YamomException {
         super(input);
 
         if (input.length < 2) {
-            throw new YamomException(ERROR_WRONG_FORMAT);
+            throw new YamomException(MISSING_MODULE_CODE);
         }
 
         String moduleCode = input[1].toUpperCase();
@@ -53,9 +50,6 @@ public class GetModuleCommand extends Command {
 
     @Override
     public void execute(State state, Ui ui, Storage storage) {
-        logger = Logger.getLogger(SUBSYSTEM_NAME);
-        logger.log(Level.FINE, "Loading get module command, starting to get module details");
-
         // if field is empty, display null in ui
         ui.addMessage("Module               : " + (module.moduleCode.isEmpty() ? "Nil" : module.moduleCode));
         ui.addMessage("Module Name          : " + (module.title.isEmpty() ? "Nil" : module.title));
@@ -75,12 +69,12 @@ public class GetModuleCommand extends Command {
 
         ui.displayUi();
         ui.displayDivider();
+
         if (isModuleOfferedInCurrentSem(module, state)) {
-            logger.log(Level.FINE, "Module is offered in current semester, module timetable will be displayed");
             List<Pair<Module, RawLesson>> lessons = new ArrayList<>();
             Pair<Module, RawLesson> lesson;
-            List<RawLesson> tempLessons = module.getSemesterData(state.getSemester()).timetable;
-            for (RawLesson rawLesson : tempLessons) {
+            List<RawLesson> tempLesson = module.getSemesterData(state.getSemester()).timetable;
+            for (RawLesson rawLesson : tempLesson) {
                 lesson = Pair.of(module, rawLesson);
                 lessons.add(lesson);
             }
@@ -88,7 +82,6 @@ public class GetModuleCommand extends Command {
             Timetable timetable = new Timetable(lessons, true, false);
             ui.addMessage(timetable.toString());
         } else {
-            logger.log(Level.FINE, "Module is not offered in current semester, module timetable will not be displayed");
             ui.addMessage("Module " + module.moduleCode + " is not offered in this semester"
                     + ", hence no timetable information is available due to unforseen circumstances");
         }
@@ -103,7 +96,7 @@ public class GetModuleCommand extends Command {
     }
 
     // Check if module input by user exists in module list. This is different from isValidModuleCode from Parser class.
-    boolean isModuleExist(Module module) {
+    public static boolean isModuleExist(Module module) {
         // check if module exists in module list
         List<Module> moduleList = Module.getAll();
         return moduleList.contains(module);
@@ -142,3 +135,4 @@ public class GetModuleCommand extends Command {
         return COMMAND_USAGE;
     }
 }
+// >>>>>>> master

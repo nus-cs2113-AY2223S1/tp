@@ -24,8 +24,7 @@ public class SelectSlotCommand extends Command {
     private boolean successful;
 
     public SelectSlotCommand(String input) {
-        super(input.split("\\s"));
-
+        super(input.split("\\s+"));
         params = Parser.parseParams(input);
         successful = false;
     }

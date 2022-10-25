@@ -1,8 +1,10 @@
 package seedu.duke.command;
 
+import seedu.duke.exceptions.YamomException;
 import seedu.duke.model.LessonType;
 import seedu.duke.model.Module;
 import seedu.duke.model.SelectedModule;
+import seedu.duke.parser.Parser;
 import seedu.duke.utils.State;
 import seedu.duke.utils.Storage;
 import seedu.duke.utils.Ui;
@@ -19,9 +21,10 @@ public class DisplaySelectedModuleListCommand extends Command {
     public static final String COMMAND_DESCRIPTION = "List out all the selected modules "
             + "and lesson slots.";
 
-    public DisplaySelectedModuleListCommand(String[] input) {
+    public DisplaySelectedModuleListCommand(String[] input) throws YamomException {
         super(input);
         successful = false;
+        Parser.singleWordCommandError(input);
     }
 
     /**

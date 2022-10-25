@@ -1,5 +1,7 @@
 package seedu.duke.command;
 
+import seedu.duke.exceptions.YamomException;
+import seedu.duke.parser.Parser;
 import seedu.duke.utils.State;
 import seedu.duke.utils.Storage;
 import seedu.duke.utils.Ui;
@@ -24,8 +26,9 @@ public class HelpCommand extends Command {
     private static final String MESSAGE_USER_GUIDE_REFERENCE = "For more "
             + "detailed guide, please visit " + USER_GUIDE_LINK;
 
-    public HelpCommand(String[] input) {
+    public HelpCommand(String[] input) throws YamomException {
         super(input);
+        Parser.singleWordCommandError(input);
     }
 
     @Override
