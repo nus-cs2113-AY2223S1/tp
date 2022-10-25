@@ -1,14 +1,14 @@
 @startuml
 
 activate Duke
-activate Ui
 
 Duke -> Ui : getUserInput()
+activate Ui
 Ui --> Duke : userInput : String
+deactivate Ui
 
-activate CommandParser
 Duke -> CommandParser : CommandParser.getUserCommand(userInput)
-
+activate CommandParser
 CommandParser -> CommandParser : parseUserCommand(userInput)
 activate CommandParser
 CommandParser --> CommandParser : userInputTokenized : String[]
@@ -46,21 +46,27 @@ deactivate CommandParser
 
 alt list command
 
-    activate Database
-
     alt list option equals "UNIVERSITIES"
 
         Duke -> Database : getUniversities()
+        activate Database
         Database --> Duke : universities : ArrayList<University>
+        deactivate Database
 
         Duke -> Ui : printUniversitiesInDatabase(universities)
+        activate Ui
+        deactivate Ui
 
     else list option equals "MODULES"
 
         Duke -> Database : getModuleMappings()
+        activate Database
         Database --> Duke : moduleMappings : ArrayList<ModuleMappings>
+        deactivate Database
 
         Duke -> Ui : printMappings(moduleMappings)
+        activate Ui
+        deactivate Ui
 
     else list option equals "module"
 
@@ -70,9 +76,13 @@ alt list command
         deactivate ListCommand
         
         Duke -> Database : findNusMapping(moduleCode)
+        activate Database
         Database --> Duke : moduleMappings : ArrayList<ModuleMapping>
+        deactivate Database
 
         Duke -> Ui : printMappings(moduleMappings)
+        activate Ui
+        deactivate Ui
 
     else list option equals "universitiy"
 
@@ -82,9 +92,13 @@ alt list command
         deactivate ListCommand
         
         Duke -> Database : findUniversityMapping(universityName)
+        activate Database
         Database --> Duke : moduleMappings : ArrayList<ModuleMapping>
+        deactivate Database
 
         Duke -> Ui : printMappings(moduleMappings)
+        activate Ui
+        deactivate Ui
 
     end
 

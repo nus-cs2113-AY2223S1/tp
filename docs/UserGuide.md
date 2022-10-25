@@ -2,7 +2,9 @@
 
 ## Introduction
 
-easySEP is a Command Line Interface application that allows you to search for SEP module mappings for CS modules from universities all around the world.
+easySEP is a CLI application created to assist NUS Computer Engineering undergraduates intending to embark on a Student Exchange Programme in their planning for student exchange.
+In particular, it is a useful utility for exploring potential module mappings for various partner universities, creating and maintaining lists for them and also favouriting selected ones
+for easier reference. As an added feature, users can also curate their timetables to prevent potential clashes in lessons.
 
 ## Quick Start
 
@@ -124,19 +126,33 @@ Example of usage:
 
 ### Favourite Command: `/favourite`
 
-Performs a total of 3 functionalities: adding a university list to user's favourites, removing a university list from a user's favourites and viewing all the user's favourite university lists
+Performs a total of 3 functionalities: view all lists that are marked as favourites, add a new list to favourites and delete a list from favourites.
 
-#### Favourite Command to add a university to favourites: `/favourite add/{UNIVERSITY_NAME}`
+#### Favourite Command for viewing all favourited lists: `/favourite VIEW`
 
-Adds the specified university list to user's favourites.
+Displays all lists that are marked as favourites with their associated module mappings.
 
-#### Favourite Command to remove a university to favourites: `/favourite del/{UNIVERSITY_NAME}`
+Example of usage:
 
-Removes the specified university list from user's favourites.
+`/favourite VIEW`
 
-#### Favourite Command to view user's favourites university lists: `/favourite VIEW`
+#### Favourite Command for adding a list to favourites : `/favourite add/UNIVERSITY_NAME_IN_UNDERSCORES`
 
-Displays all the user's favourite university lists.
+Adds a list of module mappings for a particular partner university into favourites. This list of module mappings for the partner university
+must already be created beforehand in order to be added into favourites.
+
+Example of usage:
+
+`/favourite add/Boston_University`
+
+#### Favourite Command for deleting a list from favourites : `/favourite del/UNIVERSITY_NAME_IN_UNDERSCORES`
+
+Deletes a list of module mappings for a particular partner university from favourites. This list of module mappings for the partner university
+must already be marked as favourite beforehand in order to be deleted from favourites.
+
+Example of usage:
+
+`/favourite del/Boston_University`
 
 ## FAQ
 

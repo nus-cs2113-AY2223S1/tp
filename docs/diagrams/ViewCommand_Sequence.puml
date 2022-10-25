@@ -1,0 +1,119 @@
+@startuml
+
+activate Duke
+
+Duke -> UserStorageParser : getSavedLists()
+activate UserStorageParser
+
+UserStorageParser --> Duke : userUniversityListManager :UserUniversityListManager
+deactivate UserStorageParser
+
+Duke -> UserStorageParser : getSavedTimeTables()
+activate UserStorageParser
+
+UserStorageParser --> Duke : timetableManager :TimetableManager
+deactivate UserStorageParser
+
+Duke -> Ui : getUserInput()
+activate Ui
+
+Ui --> Duke : userInput : String
+deactivate Ui
+
+Duke -> CommandParser : CommandParser.getUserCommand(userInput)
+activate CommandParser
+
+CommandParser -> CommandParser : parseUserCommand(userInput)
+activate CommandParser
+
+CommandParser --> CommandParser : userInputTokenized : String[]
+deactivate CommandParser
+
+alt exit command
+
+    CommandParser -> CommandParser : isValidViewCommand(userInputTokenized)
+    activate CommandParser
+
+    CommandParser -> CommandParser : isValidViewOption(userInputTokenized[VIEW_OPTION_INDEX])
+    activate CommandParser
+
+    CommandParser --> CommandParser : :boolean
+    deactivate CommandParser
+
+    CommandParser --> CommandParser : :boolean
+    deactivate CommandParser
+
+    opt is valid view command
+
+        create ViewCommand
+        CommandParser -> ViewCommand : ViewCommand(userInputTokenized, CommandType.VIEW)
+        activate ViewCommand
+
+        ViewCommand --> CommandParser : newExitCommand :ViewCommand
+        deactivate ViewCommand
+    end
+
+else other command
+
+end
+
+CommandParser --> Duke : newUserCommand : Command
+deactivate CommandParser
+
+alt exit command
+
+Duke -> Duke : executeViewCommand(userUniversityListManager, timetableManager, newUserCommand)
+activate Duke
+
+   Duke -> ViewCommand : getViewOption()
+   activate ViewCommand
+
+   ViewCommand --> Duke : viewOption :String
+   deactivate ViewCommand
+
+   alt viewOption is LISTS
+   Duke -> UserUniversityListManager : displayAll()
+   activate UserUniversityListManager
+
+   deactivate UserUniversityListManager
+   else viewOption is DELETE_HISTORY
+    Duke -> UserUniversityListManager : getUserDeletedModules()
+    activate UserUniversityListManager
+
+    UserUniversityListManager --> Duke : :UserDeletedModules
+    deactivate UserUniversityListManager
+
+    Duke -> UserDeletedModules : displayAll()
+    activate UserDeletedModules
+
+    deactivate UserDeletedModules
+
+   else viewOption is UNIVERSITY
+    Duke -> ViewCommand : getUniversityName()
+    activate ViewCommand
+
+    ViewCommand --> Duke : universityName :String
+    deactivate ViewCommand
+    Duke -> UserUniversityListManager : displayUniversity(universityName)
+    activate UserUniversityListManager
+
+    deactivate UserUniversityListManager
+    Duke -> TimetableManager : printTimetable(universityName)
+    activate TimetableManager
+
+    deactivate TimetableManager
+
+   else viewOption is TIMETABLES
+    Duke -> TimetableManager : printAllTimeTables()
+    activate TimetableManager
+
+    deactivate TimetableManager
+
+else other command
+deactivate Duke
+
+end
+
+deactivate Duke
+
+@enduml
