@@ -8,12 +8,14 @@ public class Parser {
     private static EmployeeParser employeeParser;
     private static PetParser petParser;
     private static AppointmentParser appointmentParser;
+    private static TaskParser taskParser;
 
     public Parser(){
         serviceParser = new ServiceParser(this, lengthOfSignature);
         employeeParser = new EmployeeParser(this, lengthOfSignature);
         petParser = new PetParser(this, lengthOfSignature);
         appointmentParser = new AppointmentParser(this, lengthOfSignature);
+        taskParser = new TaskParser(this, lengthOfSignature);
     }
 
 
@@ -39,6 +41,8 @@ public class Parser {
             return employeeParser.parseEmployee(statement);
         case "service":
             return serviceParser.parseService(statement);
+        case "task":
+            return taskParser.parseTask(statement);
         default:
             throw new DukeException();
         }
