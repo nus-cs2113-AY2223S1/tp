@@ -2,6 +2,7 @@ package seedu.duke;
 
 import seedu.duke.authentication.Authentication;
 import seedu.duke.exception.FinanceException;
+import seedu.duke.newcurrency.PersonalCurrencyList;
 
 public class Duke {
     /**
@@ -19,6 +20,7 @@ public class Duke {
     private static void initializeCurrencyList(){
         try {
             CurrencyList.initializeCurrencyList();
+            PersonalCurrencyList.initializeCurrencyList();
         } catch (FinanceException e) {
             e.handleException();
         }
