@@ -2,12 +2,11 @@ package seedu.duke.storage;
 
 
 import seedu.duke.Ui;
-import seedu.duke.records.Record;
-import seedu.duke.records.RecordList;
-import seedu.duke.records.biometrics.Biometrics;
 import seedu.duke.command.AddCommand;
 import seedu.duke.command.SetCommand;
 import seedu.duke.exception.IllegalValueException;
+import seedu.duke.records.RecordList;
+import seedu.duke.records.biometrics.Biometrics;
 import seedu.duke.records.exercise.ExerciseList;
 import seedu.duke.records.food.FoodList;
 
@@ -39,7 +38,7 @@ public class LoadData {
                     setCommand.execute();
                 } else {
                     String[] saveDataArray = line.split("\\|");
-                    boolean isMarkDone = saveDataArray[0].trim().equals("1");
+                    boolean isMarkDone = saveDataArray[1].trim().equals("1");
                     AddCommand addCommand = new AddCommand(saveDataArray[0]
                             .trim(), false, isMarkDone);
                     addCommand.setData(ui, storage, biometrics, exerciseList, foodList, recordList);
