@@ -61,17 +61,11 @@ public class PetParser {
 
             // need to deal with input isHealthy not a number
             int statusInt = parser.isHealthy(status);
-            boolean isHealthy = statusInt == 0 ? false : true;
-
-
             if (statusInt != 1 && statusInt != 0) {
                 System.out.println("Invalid Input! health entered invalid for adding a pet");
                 throw new DukeException();
             }
-
-            if (statusInt == 1) {
-                return new AddPetCommand(name, species, isHealthy);
-            }
+            boolean isHealthy = statusInt == 0 ? false : true;
 
             return new AddPetCommand(name, species, isHealthy);
         }
