@@ -63,15 +63,19 @@ public class ItemStorage extends Storage {
             fileWriter.write(formattedItemList);
             fileWriter.close();
         } catch (IOException e) {
-            int startIndex = itemFilePath.lastIndexOf("/");
-            String fileDirectory =
-                    itemFilePath.replace(itemFilePath.substring(startIndex), "");
-            File file = new File(fileDirectory);
-            if (file.mkdir()) {
-                writeData(itemList);
-            } else {
-                throw new StoreFailureException(MESSAGE_STORE_INVALID);
-            }
+            makeItemDir(itemList);
+        }
+    }
+
+    public void makeItemDir(ItemList itemList) throws StoreFailureException {
+        int startIndex = itemFilePath.lastIndexOf("/");
+        String fileDirectory =
+                itemFilePath.replace(itemFilePath.substring(startIndex), "");
+        File file = new File(fileDirectory);
+        if (file.mkdir()) {
+            writeData(itemList);
+        } else {
+            throw new StoreFailureException(MESSAGE_STORE_INVALID);
         }
     }
 
