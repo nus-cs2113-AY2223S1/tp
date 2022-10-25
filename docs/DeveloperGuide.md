@@ -80,6 +80,10 @@ In the example above, `UserInterface#runCommandAddExpense()` calls `Storage#save
 
 ![Component-UserInterface](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentUserInterface.puml)
 
+### Commands Component
+
+![Component-Commands](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentCommands.puml)
+
 ## Product scope
 ### Target user profile
 
