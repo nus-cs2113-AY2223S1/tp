@@ -101,7 +101,11 @@ _Written by: Author name_
 ### Data Component 
 
 The data component is represented by a `data` package which consists of all the classes that is part of the data stored 
-by Moolah Manager. Within the `data` package, a transaction package and a transactionList class is stored. 
+by Moolah Manager. Within the `data` package, a transaction package, a budget class and a transactionList class is 
+stored. 
+
+The `budget` class is a representation of the monthly budget of the users. Operations related to viewing the budget and 
+differences from budget is implemented within this class.
 
 The `transactionList` class is a representation of a list of transactions, and the
 operations related to the `transactionList` implemented within this class.
@@ -110,28 +114,21 @@ Within the transaction package, the following classes are stored:
 1. Transaction 
 2. Income 
 3. Expense
-4. Category
 
 The structure of the data component in Moolah Manager is illustrated in the class diagram below:
 ![Data Component Class Diagram](images/DataComponentClassDiagram.png)
 
-From the class diagram, it can be seen that the transactionList mainly contain methods for CRUD operations to the list, 
-such as getting, adding, editing, deleting and purging of transaction(s) from the list.
+From the class diagram, it can be seen that the transactionList contain the methods for CRUD operations to the list, 
+such as getting, adding, editing, deleting and purging of transaction(s) in the list.
 
-The `Transaction` class is the abstract classes of an `Income` or an `Expense`. The `Category` represents a category of 
-a transaction. Within the transaction class and its subclasses, getters and setters are used to access the private 
-variables. These classes override the toString() method for a self-defined print format when the transactions are 
-displayed. 
-
-<!-- TODO: Complete category and categoryList in sequence diagram and write their explanation here -->
-
-A more detailed explanation on the implementation on the transactions can be viewed under Section
+The `Transaction` class is the abstract classes of an `Income` or an `Expense`. A more detailed explanation on the 
+implementation on the transactions can be viewed under Section
 [Implementation for Transaction](#implementation-for-transaction).
 
 #### How the data component interacts
 
 - When MoolahManager starts running, the `Duke` class will initialize a `Storage` object which will attempt to 
-read from the file and initialize a `transactionList`. The temporary `transactionList` containing all the stored 
+read from the file and initialize both `budget` and `transactionList`. The temporary `transactionList` containing all the stored 
 transaction records will be returned by the `Storage`. 
 Based on the whether the initialization is successful, the corresponding constructor will be called to initialize a 
 `transactionList` object which will be used throughout the application running time to hold the `transactions` added.
@@ -141,6 +138,8 @@ Based on the whether the initialization is successful, the corresponding constru
 - A transaction (either an income or expense) is created by an `addCommand` class, can be modified by an `editCommand` 
 class and can be deleted by a `deleteCommand` or `purgeCommand` class. These interactions are described in further detail
 under each command section below.
+
+- The monthly budget can be updated by `budget` command.
 
 <!-- TODO: Describe how category and categoryList work here -->
 
@@ -512,6 +511,7 @@ for different classes such as `parserLogger` and `addLogger` to set the log mess
 
 **Logging Levels**:
 
+* `ERROR`: An unexpected control flow captured
 * `WARNING`: An exception has been caught by the app
 * `INFO`: Information details what the app has done
 
