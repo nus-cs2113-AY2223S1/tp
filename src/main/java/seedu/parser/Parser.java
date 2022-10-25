@@ -15,6 +15,7 @@ import seedu.commands.ListCommand;
 import seedu.commands.SearchCommand;
 import seedu.commands.UnfavouriteCommand;
 import seedu.commands.UpdateCommand;
+import seedu.common.CommonData;
 import seedu.data.CarparkList;
 import seedu.files.Favourite;
 import seedu.parser.search.Sentence;
@@ -24,6 +25,7 @@ import seedu.parser.search.Sentence;
  */
 public class Parser {
     public static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+    private static final String EMPTY_RESPONSE_HEADER = "Empty argument. Valid command(s): \n";
 
     private CarparkList carparkList;
     private Api api;
@@ -52,20 +54,35 @@ public class Parser {
 
         switch (commandWord) {
         case AuthCommand.COMMAND_WORD:
+            if (arguments.trim().isEmpty()) {
+                return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.AUTH_FORMAT);
+            }
             return prepareAuth(arguments);
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
         case FavouriteCommand.COMMAND_WORD:
+            if (arguments.trim().isEmpty()) {
+                return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.FAVOURITE_FORMAT);
+            }
             return prepareFavourite(arguments);
         case FindCommand.COMMAND_WORD:
+            if (arguments.trim().isEmpty()) {
+                return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.FIND_FORMAT);
+            }
             return prepareFind(arguments);
         case ListCommand.COMMAND_WORD:
             return new ListCommand(carparkList);
         case SearchCommand.COMMAND_WORD:
+            if (arguments.trim().isEmpty()) {
+                return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.SEARCH_FORMAT);
+            }
             return prepareSearch(arguments);
         case UpdateCommand.COMMAND_WORD:
             return new UpdateCommand(api);
         case UnfavouriteCommand.COMMAND_WORD:
+            if (arguments.trim().isEmpty()) {
+                return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.UNFAVOURITE_FORMAT);
+            }
             return prepareUnfavourite(arguments);
         default:
             return new InvalidCommand("Invalid Command");

@@ -9,6 +9,6 @@ public class UnauthorisedAccessApiException extends ParkingException {
     }
 
     public String getMessage() {
-        return "Invalid API key. Use command `auth <api_key>` to re-authenticate.\n";
+        return "Invalid API key. Use command `auth <api_key>` to re-authenticate.";
     }
 }
