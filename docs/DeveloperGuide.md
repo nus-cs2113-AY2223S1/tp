@@ -58,6 +58,30 @@ The BuildManager class is responsible for the following operations:
 - Find build that contains a search term from the list of builds
 - Filter builds based on user requirements
 
+##### Add a build to the list of builds
+
+This feature allows users to add a build to the list.
+
+When the user first inputs a command for the adding of a build, the `Parser` class will parse the command and call the
+method `mainParseAdd()` in the Parser Class. 
+
+The 'mainParseAdd() will check if the provided name is valid or is blank or made up of white spaces. If the provided 
+name is valid, the method will create a build with the provided name and the method will call the method `addBuild()` 
+in the `BuildManager` class, passing `addBuild` the created build object with the provided name. If the provided name is 
+invalid, the `BlankStringException` exception will be thrown and an error message will be printed.
+
+The `addBuild()` method will check if the provided name is already in the list of builds. If the provided name is not
+in the list of builds, the method will add the build into the list of builds. If the provided name is already in the 
+list of builds, the `DuplicateBuildException` exception will be thrown and an error message will be printed.
+
+After adding the build into the list, the program will return to the `mainParseAdd` method where the method will print
+a message, telling the user the build has been added.
+
+Finally, the `mainParseAdd` method will call the `saveBuilds()` method in the `Storage` class to save the list of builds
+into the data file.
+
+The following sequence diagram shows how the add build operation works:
+![](/images/BuildManagerAddBuildSequence.png)
 
 ### Edit Mode
 
