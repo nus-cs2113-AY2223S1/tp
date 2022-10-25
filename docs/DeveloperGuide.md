@@ -264,10 +264,11 @@ The structure of the application focusing on the help command is illustrated in 
 For each command subclass, they will implement the getHelpMessage() and getDetailedHelpMessage() methods. These methods 
 will contain their corresponding HelpMessage Enum that stores the help messages as strings inside the enum.
 
-In the help classes, during the execute() call, it will call either generateBasicHelp() or generateDetailedHelp() method
-based on the help option given by the user. 
+In the help command, during the execute() call, it will call either generateBasicHelp() or generateDetailedHelp() method
+based on the help option chosen by the user. 
 
-<!-- Todo: Add sequence diagram -->
+![Data Component Class Diagram](images/HelpSequenceDiagram.png)
+
 
 _Written by: Chia Thin Hong_
 
