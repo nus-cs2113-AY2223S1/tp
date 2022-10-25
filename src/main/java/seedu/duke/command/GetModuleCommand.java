@@ -10,10 +10,10 @@ import seedu.duke.model.Timetable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
-import java.util.stream.Stream;
 import java.util.regex.Matcher;
 import java.lang.StringBuilder;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
 import seedu.duke.model.Module;
@@ -32,9 +32,8 @@ public class GetModuleCommand extends Command {
     // private static final String ERROR_WRONG_FORMAT = "Wrong format, should be: " + COMMAND_USAGE;
     private static final int HEADING_LENGTH = 12;
     private static final int DESCRIPTION_SIZE = 65;
-    private static final String DESCRIPTION_INDENTATION = System.lineSeparator() + Stream.<String>generate(() -> " ")
-            .limit(HEADING_LENGTH + " : ".length() - 1)
-            .reduce("", (a, b) -> a + b);
+    private static final String DESCRIPTION_INDENTATION = System.lineSeparator()
+            + StringUtils.repeat(" ", HEADING_LENGTH + " : ".length());
 
     public GetModuleCommand(String[] input) throws YamomException {
         super(input);
@@ -87,9 +86,7 @@ public class GetModuleCommand extends Command {
 
     private void addLine(Ui ui, String heading, String details) {
         String line = heading;
-        line += Stream.<String>generate(() -> " ")
-                .limit(HEADING_LENGTH - heading.length())
-                .reduce("", (a, b) -> a + b);
+        line += StringUtils.repeat(" ", HEADING_LENGTH - heading.length());
         line += " : ";
         line += (details == null || details.isEmpty()) ? "Nil" : splitLongDescription(details); 
         ui.displayMessage(line);
@@ -115,12 +112,12 @@ public class GetModuleCommand extends Command {
 
         StringBuilder stringBuilder = new StringBuilder();
         if (matcher.find()) {
-            stringBuilder.append(matcher.group());
+            stringBuilder.append(matcher.group().trim());
         }
 
         while (matcher.find()) {
             stringBuilder.append(DESCRIPTION_INDENTATION);
-            stringBuilder.append(matcher.group());
+            stringBuilder.append(matcher.group().trim());
         }
 
         return stringBuilder.toString();
