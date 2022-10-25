@@ -9,7 +9,7 @@
    3.2. [Command component](#32-command-component)\
    3.3. [Model component](#33-model-component)\
    3.4. [Ui component](#34-ui-component)\
-   3.5. [Storage component](#35-storage-component)\
+   3.5. [Storage component](#35-storage-component)
 4. [Implementation](#4-implementation)\
    4.1. [User-related features](#41-user-related-features)\
    4.2. [Item-related features](#42-item-related-features)\
@@ -113,6 +113,9 @@ These find can be found in ```data``` folder in the same directory with the fold
 ## 4. Implementation
 
 This sector describe how features are implemented, where readers can get insight into the mechanisms of them with step-by-step descriptions and UML diagrams.
+> **Note:**
+> 
+> ```executeCommand()``` method of every command return a boolean. Only ```ExitCommand``` returns ```true``` since it informs Duke that this is the last command to exit.
 
 ### 4.1. User-related Features
 
@@ -248,7 +251,21 @@ Step 4: This list of items will then be displayed to the user via `Ui.printRespo
 The following sequence diagram shows how the sort items operation works:
 ![sortItemSequence](images/SortItemsSequence.png)
 
-**...To be updated(List, Find, Update item, list categories)**
+### List categories
+
+>This feature allow users to view categories that can be assigned to items and their index after executing the command ```list-categories```.
+
+Given below is an example usage scenario and how the command mechanism behaves at each step.
+
+Step 1: The user types in the command ```list-categories``` in the command line. The CommandParser class checks if the command is valid through the createCommand() method.
+
+Step 2: Duke will receive the ```ListCategoriesCommand``` and execute it.
+
+Step 3: Since there is no parameter to check for list categories command, it will execute directly by calling ```Ui.printResponse(Category.listCategories());``` (```Category.listCategories()``` returns a string represent the category list)
+
+Step 4: The ```executeCommand()``` of ExitCommand returns false, so Duke will recognize this command is ```isLastCommand``` and exit the ```while``` loop and stop the program.
+
+**...To be updated(List, Find, Update item)**
 
 ### 4.3. Transaction-related Features
 
@@ -333,6 +350,19 @@ The following sequence diagram shows how the viewTransactionsByStatus operation 
 ### 4.4. Help Command
 
 ### 4.5. Exit Command
+
+>This feature allow users to exit the program, and they will receive goodbye message after executing the command ```help```.
+
+Given below is an example usage scenario and how the command mechanism behaves at each step.
+
+Step 1: The user types in the command ```help``` in the command line. The CommandParser class checks if the command is valid through the createCommand() method.
+
+Step 2: Duke will receive the ExitCommand and execute it.
+
+Step 3: Since there is no parameter to check for exit command, it will execute directly by calling ```Ui.printExitMessage()```
+
+Step 4: The ```executeCommand()``` of ExitCommand returns false, so Duke will recognize this command is ```isLastCommand``` and exit the ```while``` loop and stop the program.
+
 
 ## 5. Product scope
 

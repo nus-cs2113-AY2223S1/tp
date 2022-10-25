@@ -192,7 +192,7 @@ Status: [Available] ItemId: 99995bb2 Item: scale Category: SPORTS_EQUIPMENT Owne
 ____________________________________________________________
 ```
 
-#### 3.3.4. ``` sort-items``` - Sort and filter list of items
+#### 3.3.4. ```sort-items``` - Sort and filter list of items
 >Sort and filter list of items based on the mode of sorting and price boundaries requested by the user
 
 Format: ```sort-items /mode [MODE_OF_SORTING] /min [MIN_PRICE] /max [MAX_PRICE]```
@@ -216,7 +216,33 @@ Here are 3 item(s) in your filtered list:
 ____________________________________________________________
 ```
 
-**...To be updated(List, Find, Update item, List categories)**
+#### 3.3.5. ```list-categories``` - List all categories 
+>List all categories that can be assigned to items and their index
+
+Format: ```list-categories```
+
+Note:
+
+1. The index of categories is also listed and this number is used in ```add-item``` command
+
+Example of usage: ```list-categories```
+
+Expected outcome:
+```
+____________________________________________________________
+Here are available categories: 
+1. SPORTS_EQUIPMENT
+2. TEXTBOOKS_AND_NOTES
+3. ELECTRICAL_APPLIANCES
+4. FURNITURE
+5. KITCHEN_ITEMS
+6. VEHICLES
+7. CLOTHING
+8. OTHERS
+____________________________________________________________
+```
+
+**...To be updated(List, Find, Update item)**
 
 ### 3.4. Transaction-related features
 #### 3.4.1. ```add-tx``` - Add a new transaction
@@ -300,24 +326,24 @@ ____________________________________________________________
 
 ## 4. Command Summary
 
-| **Features**                       | **Format**                                                             |
-|------------------------------------|------------------------------------------------------------------------|
-| __*User-related features*__        |                                                                        |
-| Add a new user                     | add-user /n [USERNAME] /a [AGE] /c [CONTACT_NUMBER]                    |
-| Remove a user                      | remove-user /u [USERNAME]                                              |
-| View a user                        | view-user /u [USERNAME]                                              |
-| __*Item-related features*__        |                                                                        |
-| Add a new item                     | add-item /n [ITEM_NAME] /c [CATEGORY_INDEX] /p [PRICE] /o [USERNAME]   |
-| Remove an item                     | remove-item /i [ITEM_ID]                                               |
-| View an item                       | view-item /i [ITEM_ID]                                               |
+| **Features**                       | **Format**                                                                   |
+|------------------------------------|------------------------------------------------------------------------------|
+| __*User-related features*__        |                                                                              |
+| Add a new user                     | add-user /n [USERNAME] /a [AGE] /c [CONTACT_NUMBER]                          |
+| Remove a user                      | remove-user /u [USERNAME]                                                    |
+| View a user                        | view-user /u [USERNAME]                                                      |
+| __*Item-related features*__        |                                                                              |
+| Add a new item                     | add-item /n [ITEM_NAME] /c [CATEGORY_INDEX] /p [PRICE] /o [USERNAME]         |
+| Remove an item                     | remove-item /i [ITEM_ID]                                                     |
+| View an item                       | view-item /i [ITEM_ID]                                                       |
 | Sort and filter list of items      | sort-items /mode [MODE_OF_SORTING] /min [MINIMUM_PRICE] /max [MAXIMUM_PRICE] |
-| __*Transaction-related features*__ |                                                                        |
-| Add a new transaction              | add-tx /i [ITEM_ID] /b [BORROWER_NAME] /d [DURATION] /c [CREATED_DATE] |
-| Remove a transaction               | remove-tx /t [TRANSACTION_ID]                                          |
-| View a transaction                 | view-tx /t [TRANSACTION_ID]                                          |
-| __*Others*__                       |                                                                        |
-| Get help                           | help                                                                   |
-| Exit program                       | bye                                                                    |
+| __*Transaction-related features*__ |                                                                              |
+| Add a new transaction              | add-tx /i [ITEM_ID] /b [BORROWER_NAME] /d [DURATION] /c [CREATED_DATE]       |
+| Remove a transaction               | remove-tx /t [TRANSACTION_ID]                                                |
+| View a transaction                 | view-tx /t [TRANSACTION_ID]                                                  |
+| __*Others*__                       |                                                                              |
+| Get help                           | help                                                                         |
+| Exit program                       | bye                                                                          |
 
 ## 5. Frequently Asked Questions
 
