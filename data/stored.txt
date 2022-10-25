@@ -1,1 +1,4 @@
 M|Y| inception |99.0| thriller|10-01-2020
+M|N| titanic |98.0| romance|01-02-2019
+T|N| titanic |98.0| romance |01-02-2019| netflix
+M|N| hey |50.0| action|29-01-2000

@@ -140,15 +140,41 @@ public class Parser {
         String genre = fields[4].substring(genreSpacing);
         Media toAdd;
 
-        if (spacingType == movieSpacing) {
-            toAdd = new Movie(name, rating, genre, date);
-        } else {
-            String site = fields[5].substring(siteSpacing);
-            toAdd = new TvShow(name, rating, genre, date, site);
+        String[] dateFields = date.split("-");
+        try {
+            if (!isValidDate(dateFields)) {
+                throw new Exception();
+            }
+
+            if (spacingType == movieSpacing) {
+                toAdd = new Movie(name, rating, genre, date);
+            } else {
+                String site = fields[5].substring(siteSpacing);
+                toAdd = new TvShow(name, rating, genre, date, site);
+            }
+            executor = new AddCommand(mediaList, toAdd);
+            String output = executor.execute();
+            Ui.print(output);
+            logger.log(Level.INFO, "\n\tAdd command executed");
+        } catch (Exception e) {
+            System.out.println("Invalid date format");
         }
-        executor = new AddCommand(mediaList, toAdd);
-        String output = executor.execute();
-        Ui.print(output);
+    }
+
+    public boolean isValidDate(String[] dateFields) {
+        if (dateFields.length != 3) {
+            return false;
+        }
+
+        int day = Integer.parseInt(dateFields[0].trim());
+        int month = Integer.parseInt(dateFields[1].trim());
+        int year = Integer.parseInt(dateFields[2].trim());
+
+        if (day < 1 || day > 31 || month < 1 || month > 12 || year < 1 || year > 2022 || (day > 29 && month == 2)) {
+            return false;
+        }
+
+        return true;
     }
 
     //@@author indraneelrp
@@ -157,10 +183,8 @@ public class Parser {
         try {
             if (userInput.contains(movieKeyword)) {
                 addMedia(fields, movieSpacing);
-                logger.log(Level.INFO, "\n\tAdd command executed");
             } else if (userInput.contains(tvKeyword)) {
                 addMedia(fields, tvSpacing);
-                logger.log(Level.INFO, "\n\tAdd command executed");
             } else {
                 throw new DukeException();
             }
