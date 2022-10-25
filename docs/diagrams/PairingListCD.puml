@@ -1,0 +1,42 @@
+@startuml
+!include style.puml
+
+package Pair {
+    Class ParsePair PARSER_COLOR_T1
+    Class CommandPair COMMAND_COLOR_T1
+}
+
+Class PairingList PAIRING_LIST_COLOR
+Class ClientList CLIENT_LIST_COLOR
+Class PropertyList PROPERTY_LIST_COLOR
+Class Storage STORAGE_COLOR
+Class Ui UI_COLOR
+
+package Unpair {
+    Class ParseUnpair PARSER_COLOR_T2
+    Class CommandUnpair COMMAND_COLOR_T2
+}
+
+ParsePair -right[hidden]- PairingList
+PairingList -down[hidden]- ClientList
+ClientList -down[hidden]- PropertyList
+PropertyList -down[hidden]- Storage
+Storage -down[hidden]- Ui
+CommandPair -right[hidden]- Ui
+Ui -right[hidden] CommandUnpair
+
+
+ParsePair ...down..> CommandPair : creates >
+ParsePair -->"1" PairingList
+ParsePair -->"1" ClientList
+ParsePair -->"1" PropertyList
+
+ParseUnpair ...down..> CommandUnpair : creates >
+ParseUnpair -->"1" PairingList
+ParseUnpair -->"1" ClientList
+ParseUnpair -->"1" PropertyList
+
+CommandPair .right.> Ui
+
+@enduml
+

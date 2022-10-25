@@ -205,14 +205,16 @@ public class Messages {
             + "\na/ for property address"
             + "\nt/ for property type"
             + "\nn/ for property owner name"
-            + "\nt/ for property type";
+            + "\np/ for property price"
+            + "\n-short to display address, type and price";
 
     public static final String MESSAGE_INCORRECT_CLIENT_LIST_FLAG = "Please type the following "
             + "after list -client to display - "
             + "\nn/ for client name"
             + "\nc/ for client contact number"
             + "\ne/ for client email"
-            + "\nb/ for client budget";
+            + "\nb/ for client budget"
+            + "\n-short to display name and budget";
     public static final String MESSAGE_BYE = "Goodbye :). See you soon!";
 
 
