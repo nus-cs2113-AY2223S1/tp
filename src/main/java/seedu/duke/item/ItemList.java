@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_ITEM_NOT_FOUND;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_ITEM_UNAVAILABLE;
 
-//@@author jingwei55
+// @@author jingwei55
 public class ItemList {
     private final ArrayList<Item> itemList;
 
@@ -76,7 +76,7 @@ public class ItemList {
     public ItemList getItemsByKeyword(String keyword) throws ItemNotFoundException {
         ItemList returnList = new ItemList();
         for (Item item : this.itemList) {
-            if ((item.getName()).contains(keyword)) {
+            if ((item.getName()).toLowerCase().contains(keyword.toLowerCase())) {
                 returnList.addItem(item);
             }
         }
@@ -104,7 +104,8 @@ public class ItemList {
     }
 
     public void deleteAllItemOfAnUser(String username, TransactionList transactionList) {
-        itemList.removeIf(item -> item.getOwnerId().equals(username) && item.isAvailable(transactionList));
+        itemList.removeIf(
+            item -> item.getOwnerId().equals(username) && item.isAvailable(transactionList));
     }
 
     public String toString(TransactionList transactionList) {

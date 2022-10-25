@@ -5,21 +5,24 @@ import seedu.duke.exception.InsufficientArgumentsException;
 import seedu.duke.exception.InvalidArgumentException;
 import seedu.duke.exception.ItemNotFoundException;
 import seedu.duke.parser.CommandParser;
+import seedu.duke.transaction.TransactionList;
 import seedu.duke.ui.Ui;
 import seedu.duke.item.ItemList;
 
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INSUFFICIENT_ARGUMENTS;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PARTS;
 
-//@@author jorellesee
+// @@author jorellesee
 public class FindItemCommand extends Command {
     private final String[] parts;
     private final ItemList itemList;
+    private final TransactionList transactionList;
 
-    public FindItemCommand(String[] parts, ItemList itemList)
+    public FindItemCommand(String[] parts, ItemList itemList, TransactionList transactionList)
             throws InsufficientArgumentsException {
         this.parts = parts;
         this.itemList = itemList;
+        this.transactionList = transactionList;
         if (parts.length != 1) {
             throw new InsufficientArgumentsException(MESSAGE_INSUFFICIENT_ARGUMENTS);
         }
@@ -41,7 +44,7 @@ public class FindItemCommand extends Command {
     @Override
     public boolean executeCommand() throws InvalidArgumentException, ItemNotFoundException {
         String arg = getArgsFindItemCommand();
-        Ui.printResponse(itemList.getItemsByKeyword(arg).toString());
+        Ui.printResponse(itemList.getItemsByKeyword(arg).toString(this.transactionList));
         return false;
     }
 }

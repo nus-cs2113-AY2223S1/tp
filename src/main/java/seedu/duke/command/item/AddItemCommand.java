@@ -21,7 +21,7 @@ import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_NUMBER_FORM
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_PRICE_FORMAT_INVALID;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_PRICE_LESS_THAN_ZERO;
 
-//@@author bdthanh
+// @@author bdthanh
 /**
  * A representation of a command to add a new item.
  */
@@ -40,8 +40,8 @@ public class AddItemCommand extends Command {
      * @param transactionList The list of transactions to work with
      * @throws InsufficientArgumentsException If the number of args is incorrect
      */
-    public AddItemCommand(String[] parts, UserList userList, ItemList itemList, TransactionList transactionList)
-            throws InsufficientArgumentsException {
+    public AddItemCommand(String[] parts, UserList userList, ItemList itemList,
+            TransactionList transactionList) throws InsufficientArgumentsException {
         this.parts = parts;
         this.itemList = itemList;
         this.userList = userList;
@@ -98,6 +98,7 @@ public class AddItemCommand extends Command {
 
     /**
      * Checks if a user is valid or not.
+     * 
      * @param userId The input name of owner
      * @return true If that username can be found in user list
      * @throws UserNotFoundException If that user cannot be found in the list
@@ -128,6 +129,7 @@ public class AddItemCommand extends Command {
 
     /**
      * Checks if a price is valid or not.
+     * 
      * @param price The input price
      * @return true If that number can be parsed and has correct format
      * @throws InvalidPriceException If price value is less than 0
@@ -167,8 +169,8 @@ public class AddItemCommand extends Command {
      * @throws DuplicateException If that user have item with the same name
      * @throws InvalidPriceException If price value is less than 0
      */
-    public boolean executeCommand()
-            throws InvalidArgumentException, UserNotFoundException, DuplicateException, InvalidPriceException {
+    public boolean executeCommand() throws InvalidArgumentException, UserNotFoundException,
+            DuplicateException, InvalidPriceException {
         String[] args = getArgsAddItemCmd();
         if (areValidArgs(args)) {
             String name = args[0];
