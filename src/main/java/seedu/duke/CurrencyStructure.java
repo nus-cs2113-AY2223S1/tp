@@ -30,8 +30,7 @@ public class CurrencyStructure {
     }
 
     public boolean isSameCurrency(CurrencyStructure currency){
-        return abbrName.equals(currency.getAbbrName());
-
+        return this.abbrName.equals(currency.getAbbrName());
     }
 
     public boolean isMatchedCurrencyByAbbrName(String abbrName) {
@@ -39,10 +38,25 @@ public class CurrencyStructure {
     }
 
     public boolean isMatchedCurrencyByAnyPart(String anyPart) {
-        return (this.abbrName.contains(anyPart) || this.fullName.contains(anyPart) || this.symbol.contains(anyPart));
+        return this.abbrName.contains(anyPart) || this.fullName.contains(anyPart) || this.symbol.contains(anyPart);
     }
 
     public boolean isMatchedCurrencyByAnyExact(String anyExact) {
-        return (this.abbrName.equals(anyExact) || this.fullName.equals(anyExact) || this.symbol.equals(anyExact));
+        return this.abbrName.equals(anyExact) || this.fullName.equals(anyExact) || this.symbol.equals(anyExact);
+    }
+
+    public int getTypeOfName(String type){
+        if(type.equals(abbrName)){
+            return 1;
+        }
+        else if(type.equals(fullName)){
+            return 2;
+        }
+        else if(type.equals(symbol)){
+            return 3;
+        }
+        else{
+            return 0;
+        }
     }
 }

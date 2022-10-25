@@ -49,7 +49,7 @@ public class Currency {
         return currencyList;
     }
 
-    public static void exchangeCommands() throws FinanceException {
+    public static void exchangeCommands(CurrencyStructure defaultCurrency) throws FinanceException {
         BasicUi.showCurrencyEntry();
         List<CurrencyStructure> allCurrencies = getListOfAllCurrencies();
         boolean isCurrencyExit = false;
@@ -82,9 +82,9 @@ public class Currency {
                         boolean isErrorOne = true;
                         try {
                             CurrencyStructure currency = findCurrencyByAbbrName(splitInput[1], allCurrencies);
-                            double rate = currency.getRate();
+                            double rate = currency.getRate()/defaultCurrency.getRate();
                             System.out.println(
-                                    "Exchange rate from " + "USD" + " to " + splitInput[1] + " is " + rate);
+                                    "Exchange rate from " + defaultCurrency.getSymbol() + " to " + splitInput[1] + " is " + rate);
                         } catch (IndexOutOfBoundsException f) {
                             isErrorOne = false;
                             BasicUi.showIncorrectCurrencyConversion();
@@ -128,7 +128,7 @@ public class Currency {
         throw new FinanceException(ExceptionCollection.CURRENCY_NAME_NOT_FOUND_EXCEPTION);
     }
 
-    static int findIndexOfCurrency(String s, List<List<String>> allCurrencies) throws FinanceException {
+    public static int findIndexOfCurrency(String s, List<List<String>> allCurrencies) throws FinanceException {
         for(int i = 0; i < allCurrencies.size(); i++){
             if(allCurrencies.get(i).get(0).contains(s)){
                 return i;
