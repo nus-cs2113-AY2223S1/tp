@@ -23,7 +23,7 @@ add strength /{description} /{sets} /{repetitions} /{date}
 add cardio /{description} /{distance} /{repetitions} /{date}
 add food /{description} /{calories} /{date}
 add weight /{weight} /{fat percentage}
-remove {food/exercise} /{food index/exerciseList index}
+remove {food/exercise} /{food index/current exerciseList index}
 mark {done/undone} /{exercise index} / {time}, {metabolic equivalent}
 find {strength/cardio/food/date_e/date_f} /{description}
 -------------------------------------------------------------------------------
