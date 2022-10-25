@@ -39,6 +39,7 @@ The software architecture diagram below describes the application's design and t
 ![Software-Architecture](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/SoftwareArchitecture.puml)
 
 ### Core Components:
+
 | Component     | Function                                                                            |
 |---------------|-------------------------------------------------------------------------------------|
 | MoneyGoWhere  | Main entrypoint of the application.                                                 |
