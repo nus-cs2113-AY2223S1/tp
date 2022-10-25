@@ -103,7 +103,18 @@ commands operate mainly on a list of transaction (transactionList:TransactionLis
 
 ### 3.6. Ui component
 
-...To be updated
+The UI component handles anything related to user interaction.
+Primarily, it consists of two main operations: reading user inputs and printing responses to the user.
+For reading inputs, there is simply `UI::readInput`
+For printing responses, there are `UI::printResponse` and `UI::printErrorResponse`
+Further methods for printing specific responses that correspond to a user's behavior are defined for convenience.
+
+The design of the UI component is to simply act as a helper class i.e. one consists mainly of static methods that is called directly from the class.
+This makes sense as the UI class should not to be instantiated and is not inherited by other classes.
+
+Below, we detail the design of the UI class with a class diagram
+![UiDesign](images/UiDesign.png)
+
 
 ### 3.7. Storage component
 
