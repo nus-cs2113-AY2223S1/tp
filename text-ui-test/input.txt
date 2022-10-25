@@ -2,7 +2,6 @@ list
 view
 help
 search /code 2113 /title software
-get cs2113
 add cs2113
 list
 bye
