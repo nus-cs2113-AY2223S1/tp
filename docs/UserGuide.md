@@ -32,13 +32,17 @@ Example of usage:
 
 ### List all recipes: `/list`
 
+Lists all recipe.
+
+Format: `/list`
+
 ### Delete recipes: `/delete`
 
 ### Edit recipes: `/edit`
 
 Edits an existing recipe from the list.
 
-Format: `/edit [RECIPE_NAME, RECIPE_INDEX]`
+Format: `/edit [RECIPE_NAME,RECIPE_INDEX]`
 
 CLI Mode: `[/add,/del,/swap,/change,/view,/done] [-t,-d,-i,-s] [index1] ...`
 
@@ -57,6 +61,14 @@ Example of usage:
 `/swap -s 4 7`
 
 ### View recipes: `/view`
+
+Views a recipe.
+
+Format: `/view [index]`
+
+Example of usage:
+
+`/view 1`
 
 ### Find recipes: `/find`
 
