@@ -42,6 +42,15 @@ Note:
 
 
 ### List Properties: `list -property`
+Lists all properties present in the list
+### List Properties with tags: `list -property TAG` 
+Lists only selected details of all the properties, depending on the TAG. The commands for these are -
+* `list -property a/` This is for address
+* `list -property n/` This is for name
+* `list -property p/` This is for price
+* `list -property t/` This is for unit type
+* `list -property -short` This is for the shorthand version(displays address, price and unit type)
+
 
 ### Check Property: `check -property`
 Displays the information of the specified property, along with the clients the property is being rented by, if any.
@@ -55,6 +64,14 @@ Displays the information of the specified property, along with the clients the p
 ### Delete Client: `delete -client`
 
 ### List Clients: `list -client`
+Lists all the clients present in the list
+### List Clients with tags `list -client TAG` 
+List only selected details of all the clients, depending on TAG. The commands for these are-
+* `list -client c/` This is for contact number
+* `list -client b/` This is for budget
+* `list -client n/` This is for name
+* `list -client e/` This is for e-mail
+* `list -client -short` This is for the shorthand version(displays just name and budget)
 
 ### Check Client: `check -client`
 Displays the information of the specified client, along with the property the client is renting, if any.
@@ -82,6 +99,9 @@ Unpairs the client from the specified property, to record that the client is no 
 
 <u>Example</u>: `unpair ip/1 ic/5`
 
+### List everything `list -everything`
+Lists all information about every client and every property in the list
+
 ### Exit: `quit`
 
 ### Loading data
@@ -99,12 +119,27 @@ Unpairs the client from the specified property, to record that the client is no 
 * Add Property: `add -property n/NAME a/ADDRESS p/PRICE t/TYPE`
 * Delete Property: `delete -property ip/PROPERTY_INDEX`
 * List Properties: `list -property`
+* List Property Addresses: `list -property a/`
+* List Property Owner Names : `list -property n/`
+* List Property Budgets: `list -property b/`
+* List Property Unit Type: `list -property t/`
+* List Property Short: `list -property -short`
 * Check Property: `check -property ip/PROPERTY_INDEX`
+
 
 * Add Client: `add -client n/NAME c/CONTACT_NUMBER e/EMAIL b/BUDGET_MONTH`
 * Delete Client: `delete -client ic/CLIENT_INDEX`
 * List Clients: `list -client`
+* List Client Names: `list -client n/`
+* List Client Contact Numbers: `list -client c/`
+* List Client Budgets: `list -client b/`
+* List Client Emails: `list -client e/`
+* List Client Short: `list -client -short`
 * Check Client: `check -client ic/CLIENT_INDEX`
+
+
+* List Everything: `list -everything`
+
 
 * Pair: `pair ip/PROPERTY_INDEX ic/CLIENT_INDEX`
 * Unpair: `unpair ip/PROPERTY_INDEX ic/CLIENT_INDEX`
