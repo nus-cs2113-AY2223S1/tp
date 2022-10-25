@@ -281,7 +281,7 @@ The following sequence diagram shows how the viewTransactionsByStatus operation 
 
 ### Target user profile
 
-- Computing student at NUS
+- Student at NUS
 - Reasonably comfortable using CLI
 - Student staying at campus
 - Has a passion to serve the student community
