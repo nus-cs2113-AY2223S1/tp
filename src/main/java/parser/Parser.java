@@ -4,10 +4,10 @@ import exception.DukeException;
 
 public class Parser {
     private final int lengthOfSignature = 3;
-    private ServiceParser serviceParser;
-    private EmployeeParser employeeParser;
-    private PetParser petParser;
-    private AppointmentParser appointmentParser;
+    private static ServiceParser serviceParser;
+    private static EmployeeParser employeeParser;
+    private static PetParser petParser;
+    private static AppointmentParser appointmentParser;
 
     public Parser(){
         serviceParser = new ServiceParser(this, lengthOfSignature);
@@ -17,20 +17,19 @@ public class Parser {
     }
 
 
-    public Command parseCommand(String input) {
+    public static Command parseCommand(String input) throws DukeException{
         input = input.trim();
-        try {
+//        try {
             if (!input.contains(" ")) {
                 if (input.equals("bye")) {
                     return new EndCommand();
                 }
-
                 throw new DukeException();
             }   
-        } catch (DukeException e) {
-            System.out.println("Sorry, only one parameter received and it is not bye");
-            return new EmptyCommand();
-        }
+//        } catch (DukeException e) {
+//            System.out.println("Sorry, only one parameter received and it is not bye");
+//            return new EmptyCommand();
+//        }
 
 
         int indexOfSpace = input.indexOf(" ");
