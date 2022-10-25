@@ -21,6 +21,7 @@ help	: List out all commands and  their respective usages in YAMOM
 import	: Imports a timetable  from an NUSMod timetable sharing link
 search	: List out all modules that contains a search term
 	 * the search term can either be module code or a keyword in module title.
+	 * MODULE_LEVEL and MODULE_SEMESTER should be a single digit number
 semester	: Select another semester to plan and organize timetable
 select	: Select a module slot
 view	: Display current user timetable
@@ -34,10 +35,10 @@ Usage :
 	get [MODULE_CODE]
 	help
 	import [NUSMods_LINK]
-	search (/code [MODULE_CODE] | /title [KEYWORD])
+	search (/code [MODULE_CODE] | /title [KEYWORD]) </level [MODULE_LEVEL]> </sem [MODULE_SEMESTER]>
 	semester [SEMESTER_SELECTED]
 	select /module <MODULE_CODE> /type <LESSON_TYPE> /code <CLASS_NO>
-	view (fancy|simple)
+	view < /fancy | /simple >
 
 Note: [ ] are required elements, < > are optional elements
 For more detailed guide, please visit https://ay2223s1-cs2113-f11-3.github.io/tp/
@@ -83,13 +84,53 @@ CS2113	Software Engineering & Object-Oriented Programming
 Here's a list of your current selected module(s)!
 --------------------------------------
 Sem [1] >> --------------------------------------
-Error! 	0 arguments expected
+
+          : Mon      : Tues     : Wed      : Thur     : Fri
+====================================================================
+   1200   :          :          +----------+          :
+   1230   :          :          |CS2113    |          :
+   1300   :          :          +-TUT[1]---+          :
+   1330   :          :          :          :          :
+   1400   :          :          :          :          :
+   1430   :          :          :          :          :
+   1500   :          :          :          :          :
+   1530   :          :          :          :          :
+   1600   :          :          :          :          +----------+
+   1630   :          :          :          :          |CS2113    |
+   1700   :          :          :          :          | LEC[1]   |
+   1730   :          :          :          :          |          |
+   1800   :          :          :          :          +----------+
+   1830   :          :          :          :          :
+   1900   :          :          :          :          :
+
+
 --------------------------------------
 Sem [1] >> --------------------------------------
 Slot selected successfully
 --------------------------------------
 Sem [1] >> --------------------------------------
-Error! 	0 arguments expected
+
+          : Mon      : Tues     : Wed      : Thur     : Fri
+====================================================================
+   1100   :          :          :          :          +----------+
+   1130   :          :          :          :          |CS2113    |
+   1200   :          :          :          :          +-TUT[4]---+
+   1230   :          :          :          :          :
+   1300   :          :          :          :          :
+   1330   :          :          :          :          :
+   1400   :          :          :          :          :
+   1430   :          :          :          :          :
+   1500   :          :          :          :          :
+   1530   :          :          :          :          :
+   1600   :          :          :          :          +----------+
+   1630   :          :          :          :          |CS2113    |
+   1700   :          :          :          :          | LEC[1]   |
+   1730   :          :          :          :          |          |
+   1800   :          :          :          :          +----------+
+   1830   :          :          :          :          :
+   1900   :          :          :          :          :
+
+
 --------------------------------------
 Sem [1] >> --------------------------------------
 CS2113 has been deleted!

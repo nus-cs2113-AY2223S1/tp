@@ -15,16 +15,23 @@ import java.util.logging.Logger;
 
 public class SearchModuleCommand extends Command {
     public static final String COMMAND_WORD = "search";
-    public static final String COMMAND_USAGE = "search (/code [MODULE_CODE] | /title [KEYWORD])";
+    public static final String COMMAND_USAGE = "search (/code [MODULE_CODE] | /title [KEYWORD]) "
+            + "</level [MODULE_LEVEL]> </sem [MODULE_SEMESTER]>";
     public static final String COMMAND_DESCRIPTION = "List out all modules that contains a search term"
-            + System.lineSeparator() + "\t * the search term can either be module code or a keyword in module title.";
+            + System.lineSeparator() + "\t * the search term can either be module code or a keyword in module title."
+            + System.lineSeparator() + "\t * MODULE_LEVEL and MODULE_SEMESTER should be a single digit number";
 
-    // private String toSearchModuleCode;
+    private static final String ERROR_WRONG_FORMAT = "Wrong format given, should be "
+            + System.lineSeparator() + "\t" + COMMAND_USAGE;
+
+    private static final String ERROR_MISSING_CODE_AND_TITLE = "Search require at least a code field "
+            + "or a title field, in the format of: " + System.lineSeparator() + "\t" + COMMAND_USAGE;
+
     private Map<String, String> params;
-    private String toSearchModuleCode;
-    private String toSearchModuleTitle;
-    private String toSearchLevel;
-    private String toSearchSemester;
+    private static String toSearchModuleCode;
+    private static String toSearchModuleTitle;
+    private static String toSearchLevel;
+    private static String toSearchSemester;
 
     private Logger logger;
 
@@ -33,15 +40,7 @@ public class SearchModuleCommand extends Command {
     public SearchModuleCommand(String input) throws YamomException {
         super(input.split("\\s"));
         params = Parser.parseParams(input);
-
-        toSearchModuleCode = params.getOrDefault("code", null);
-        toSearchModuleTitle = params.getOrDefault("title", null);
-        toSearchLevel = params.getOrDefault("level", null);
-        toSearchSemester = params.getOrDefault("sem", null);
-
-        if (isAllNull(toSearchModuleCode, toSearchModuleTitle, toSearchLevel, toSearchSemester)) {
-            throw new YamomException("No search field provided! Should be " + COMMAND_USAGE);
-        }
+        processParams();
     }
 
     public void execute(State state, Ui ui, Storage storage) {
@@ -58,13 +57,29 @@ public class SearchModuleCommand extends Command {
             ui.addMessage("No module found");
         } else {
             ui.addMessage("Total " + searchResult.size() + " module(s) found\n");
-            for (int i = 0; i < searchResult.size(); i++) {
-                ui.addMessage(searchResult.get(i).moduleCode + " " + searchResult.get(i).title);
+            for (Module module : searchResult) {
+                ui.addMessage(module.moduleCode + " " + module.title);
             }
             ui.addMessage("\nTo get full details of the module, type 'get <module code>'");
         }
 
         ui.displayUi();
+    }
+
+    private void processParams() throws YamomException {
+
+        if (params.isEmpty()) {
+            throw new YamomException(ERROR_WRONG_FORMAT);
+        }
+
+        toSearchModuleCode = params.getOrDefault("code", null);
+        toSearchModuleTitle = params.getOrDefault("title", null);
+        toSearchLevel = params.getOrDefault("level", null);
+        toSearchSemester = params.getOrDefault("sem", null);
+
+        if (toSearchModuleCode == null && toSearchModuleTitle == null) {
+            throw new YamomException(ERROR_MISSING_CODE_AND_TITLE);
+        }
     }
 
     /**
@@ -92,11 +107,7 @@ public class SearchModuleCommand extends Command {
         int toSearchSemesterInt = Integer.parseInt(toSearchSemester);
 
         // check module is offered in which semester
-        if (module.getSemesterData(toSearchSemesterInt) != null) {
-            return true;
-        } else {
-            return false;
-        }
+        return module.getSemesterData(toSearchSemesterInt) != null;
     }
 
     /**
@@ -107,10 +118,6 @@ public class SearchModuleCommand extends Command {
      * and module title but will not be repeated.
      * Arguments can be in any order.
      *
-     * @param toSearchModuleCode  the module code that user input
-     * @param toSearchLevel       the level that user input
-     * @param toSearchSemester    the semester that user input
-     * @param toSearchModuleTitle the module title that user input
      * @return list of modules that match the search query
      */
     public static List<Module> filterModuleSearch(String toSearchModuleCode, String toSearchLevel,
@@ -134,10 +141,10 @@ public class SearchModuleCommand extends Command {
 
         // filter the searchResult if toSearchLevel is not empty and level does not match
         if (toSearchLevel != null) {
-            List<Module> updatedSearchResult = new ArrayList<>();;
-            for (int i = 0; i < searchResult.size(); i++) {
-                if (isSameModuleLevel(searchResult.get(i), toSearchLevel)) {
-                    updatedSearchResult.add(searchResult.get(i));
+            List<Module> updatedSearchResult = new ArrayList<>();
+            for (Module module : searchResult) {
+                if (isSameModuleLevel(module, toSearchLevel)) {
+                    updatedSearchResult.add(module);
                 }
             }
             searchResult = updatedSearchResult;
@@ -145,27 +152,16 @@ public class SearchModuleCommand extends Command {
 
         // filter the searchResult if toSearchSemester is not empty and semester does not match
         if (toSearchSemester != null) {
-            List<Module> updatedSearchResult = new ArrayList<>();;
-            for (int i = 0; i < searchResult.size(); i++) {
-                if (isOfferedInSemester(searchResult.get(i), toSearchSemester)) {
-                    updatedSearchResult.add(searchResult.get(i));
+            List<Module> updatedSearchResult = new ArrayList<>();
+            for (Module module : searchResult) {
+                if (isOfferedInSemester(module, toSearchSemester)) {
+                    updatedSearchResult.add(module);
                 }
             }
             searchResult = updatedSearchResult;
         }
 
         return searchResult;
-    }
-
-    // TODO: change to functional stream if possible
-    private boolean isAllNull(String... strings) {
-
-        for (String string : strings) {
-            if (string != null) {
-                return false;
-            }
-        }
-        return true;
     }
 
     @Override

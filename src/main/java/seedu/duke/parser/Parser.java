@@ -37,7 +37,7 @@ public class Parser {
             toExecute = new SearchModuleCommand(userInput);
             break;
         case (GetModuleCommand.COMMAND_WORD):
-            toExecute = getCommand(keywords);
+            toExecute = new GetModuleCommand(keywords);
             break;
         case (AddModuleCommand.COMMAND_WORD):
             toExecute = moduleRelatedCommand(keywords, new AddModuleCommand(keywords));
@@ -46,7 +46,7 @@ public class Parser {
             toExecute = moduleRelatedCommand(keywords, new DeleteModuleCommand(keywords));
             break;
         case (ViewTimetableCommand.COMMAND_WORD):
-            toExecute = singleWordCommand(keywords, new ViewTimetableCommand(userInput));
+            toExecute = new ViewTimetableCommand(userInput);
             break;
         case (HelpCommand.COMMAND_WORD):
             toExecute = singleWordCommand(keywords, new HelpCommand(keywords));
@@ -73,10 +73,6 @@ public class Parser {
             throw new YamomException("Cannot process the command");
         }
         return toExecute;
-    }
-
-    private static Command getCommand(String[] keywords) throws YamomException {
-        return new GetModuleCommand(keywords);
     }
 
     public static boolean isPartialModuleCode(String moduleCode) {
@@ -143,10 +139,6 @@ public class Parser {
 
     private static boolean isEmptyInput(String command) {
         return command.isBlank() || command.isEmpty();
-    }
-
-    public static Command searchCommand(String userInput) throws YamomException {
-        return new SearchModuleCommand(userInput);
     }
 
     /**
