@@ -73,14 +73,14 @@ The list feature has the following commands in it -
 * `list -client` This lists every client, along with all their information
 * `list -property` This lists every property, along with all its information
 * `list -everything` This lists everything about both clients and properties
-* `list -client FLAG` This lists only the information present in the TAG for every client. The types of
+* `list -client TAG` This lists only the information present in the TAG for every client. The types of
   TAGs are -
     * `c/` This is for contact number
     * `b/` This is for budget
     * `n/` This is for name
     * `e/` This is for e-mail
     * `-short` This is for the shorthand version(displays just name and budget)
-* `list -property FLAG` This lists only the information present in the TAG for every property. The types
+* `list -property TAG` This lists only the information present in the TAG for every property. The types
   of TAG are -
     * `a/` This is for address
     * `n/` This is for name
