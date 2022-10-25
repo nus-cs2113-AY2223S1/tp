@@ -17,66 +17,72 @@
 >  - Words in `UPPER_CASE` are the parameters supplied by the user.
 >  - Items in square bracket are optional.
 
-[Authenticate user API: `auth`](#authenticate-user-api-auth)
-
-[Authenticate default: `auth default`](#authenticate-default-auth-default)
-
-[Authenticate status: `auth status`](#authenticate-status-auth-status)
-
-[Find number of lots available by carpark ID: `find`](#find-number-of-lots-available-by-carpark-id-find)
-
-[Get a list of available carparks on the app: `list`](#get-a-list-of-available-carparks-on-the-app-list)
-
-[Update data from API: `update`](#update-data-from-api-update)
-
-[Favourite carparks by carpark ID: `favourite`](#favourite-carparks-by-carpark-id-favourite)
-
-[Unfavourite carparks by carpark ID: `unfavourite`](#unfavourite-carparks-by-carpark-id-unfavourite)
-
-[List all IDs of favourite carparks: `favourite list`](#list-all-ids-of-favourite-carparks-favourite-list)
-
-[Exiting the program: `exit`](#exiting-the-program-exit)
+| Command          | Description                                                                               |
+|------------------|-------------------------------------------------------------------------------------------| 
+| `auth API_KEY`   | [Authenticate API using user's API key](#authenticate-user-api-auth)                      |
+| `auth default`   | [Authenticate API using default key](#authenticate-default-auth-default)                  |
+| `auth status`    | [Authentication status](#authenticate-status-auth-status)                                 |
+| `find CARPARK_ID`| [Find number of lots available by carpark ID](#find-number-of-lots-available-by-carpark-id-find) | 
+| `list`           | [Get a list of available carparks on the app](#get-a-list-of-available-carparks-on-the-app-list) |
+| `update`         | [Update data from API](#update-data-from-api-update)                                      |
+| `favourite CARPARK_ID` | [Favourite carparks by carpark ID](#favourite-carparks-by-carpark-id-favourite)           |
+| `unfavourite CARPARK_ID` | [Unfavourite carparks by carpark ID](#unfavourite-carparks-by-carpark-id-unfavourite)     |
+| `favourite list` | [List all IDs of favourite carparks](#list-all-ids-of-favourite-carparks-favourite-list)  |
+| `exit`           | [Exiting the program](#exiting-the-program-exit)                                          |
 
 ### Authenticate user API: `auth`
 
 **Authenticate and subscribe to the API Service (LTA Data Mall) using the user’s API key.**
 
 - LTA Data Mall API information (click [here](https://datamall.lta.gov.sg/content/datamall/en/dynamic-data.html)).
-- API Registration (click [here](https://datamall.lta.gov.sg/content/datamall/en/request-for-api.html)). API key will be emailed to you.
+- API Registration (click [here](https://datamall.lta.gov.sg/content/datamall/en/request-for-api.html)).
+API key will be emailed to you.
 
 > Format : `auth API_KEY`
 
 - `API_KEY` is case sensitive and unique.
 - Upon successful authentication, the key will be stored locally and future authentication is not required.
 - User can use `auth` to change the current key. Only one and the most recent key will be stored.
-- If API key is invalid, the new key will not be stored and the previous key will be retained. If there are no API key beforehand, it will stay empty.
+- If API key is invalid, the new key will not be stored and the previous key will be retained. 
+If there are no API key beforehand, it will stay empty.
+
+Example of usage:
 
 ### Authenticate default: `auth default`
 
 **Authenticate using the default API key.**
 
 - For user with no API key, they can use the provided api key to access the services.
-- User will not be able to know the api key.
+- User will not be able to see the api key.
 
 > Format: `auth default`
+
+Example of usage:
 
 ### Authenticate status: `auth status`
 
 **Get the status of the api key authentication status.**
 
 - It will inform the user whether the user api key is entered and valid or whether the default API key is used.
-- If user has entered and validated their personal key before, they will be able to view their own API key. Otherwise, the default API key will not be revealed to the user.
+- If user has entered and validated their personal key before, they will be able to view their own API key. 
+Otherwise, the default API key will not be revealed to the user.
 
 > Format: `auth status`
+
+Example of usage:
 
 ### Find number of lots available by carpark ID: `find`
 
 **Returns the number of lots available in the carpark that the user has chosen to find.**
 
-- Using data from the API, after the user has inputted the ID of a certain carpark, the function will return the number of lots available in aforementioned carpark.
-- If the user inputs a non-existing carpark ID or inputs the wrong format, the program will prompt the user to re-enter the correct and existing carpark ID.
+- Using data from the API, after the user has inputted the ID of a certain carpark, 
+the function will return the number of lots available in aforementioned carpark.
+- If the user inputs a non-existing carpark ID or inputs the wrong format, 
+the program will prompt the user to re-enter the correct and existing carpark ID.
 
 > Format: `find CARPARK_ID`
+
+Example of usage:
 
 ### Get a list of available carparks on the app: `list`
 
@@ -85,6 +91,8 @@
 - Using data from the API, after the user has inputted the command, the function will return a list of carparks from the API.
 
 > Format: `list`
+
+Example of usage:
 
 ### Update data from API: `update`
 
