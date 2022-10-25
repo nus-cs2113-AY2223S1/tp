@@ -30,10 +30,11 @@ public class ParseListProperty extends Parser {
 
     boolean isValidTag(String commandFlags) {
         switch (commandFlags) {
-        case CommandStructure.NAME_FLAG: //deliberate fall through till /t
+        case CommandStructure.NAME_FLAG: //deliberate fall through till SHORT_FLAG
         case CommandStructure.ADDRESS_FLAG:
         case CommandStructure.PRICE_FLAG:
         case CommandStructure.TYPE_FLAG:
+        case CommandStructure.SHORT_FLAG:
             return true;//break not needed as we are returning
         default:
             return false;
