@@ -61,8 +61,8 @@ public class ListCommandTest {
         listCommand.setGlobalNumber(5);
 
         assertThrows(
-                GlobalUnsupportedTagException.class,
-                () -> listCommand.parseDateIntervalsTags()
+            GlobalUnsupportedTagException.class,
+            () -> listCommand.parseDateIntervalsTags()
         );
     }
 
@@ -72,8 +72,8 @@ public class ListCommandTest {
         listCommand.setGlobalNumber(1);
 
         assertThrows(
-                GlobalMissingPeriodNumberTagException.class,
-                () -> listCommand.parseDateIntervalsTags()
+            GlobalMissingPeriodNumberTagException.class,
+            () -> listCommand.parseDateIntervalsTags()
         );
     }
 
@@ -83,8 +83,8 @@ public class ListCommandTest {
         listCommand.setGlobalPeriod("weeks");
 
         assertThrows(
-                GlobalMissingPeriodNumberTagException.class,
-                () -> listCommand.parseDateIntervalsTags()
+            GlobalMissingPeriodNumberTagException.class,
+            () -> listCommand.parseDateIntervalsTags()
         );
     }
 
@@ -94,8 +94,8 @@ public class ListCommandTest {
         listCommand.setGlobalMonth(10);
 
         assertThrows(
-                GlobalMissingYearTagException.class,
-                () -> listCommand.parseDateIntervalsTags()
+            GlobalMissingYearTagException.class,
+            () -> listCommand.parseDateIntervalsTags()
         );
     }
 
@@ -105,7 +105,7 @@ public class ListCommandTest {
         listCommand.setGlobalYear(2010);
 
         assertDoesNotThrow(
-                () -> listCommand.parseDateIntervalsTags()
+            () -> listCommand.parseDateIntervalsTags()
         );
     }
 }

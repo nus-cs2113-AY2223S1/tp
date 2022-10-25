@@ -16,17 +16,18 @@ public class StatsCommandTest {
     @Test
     public void execute_useMonthYearTagsNotForTimeInsights_exceptionThrown()  {
         StatsCommand statsCommand = new StatsCommand();
-        TransactionList transactions = new TransactionList();
-        Ui ui = new Ui();
-        Storage storage = new Storage();
 
         statsCommand.setGlobalMonth(3);
         statsCommand.setGlobalYear(2012);
         statsCommand.setStatsType("categorical_savings");
 
+        TransactionList transactions = new TransactionList();
+        Ui ui = new Ui();
+        Storage storage = new Storage();
+
         assertThrows(
-                GlobalUnsupportedTagException.class,
-                () -> statsCommand.execute(transactions, ui, storage)
+            GlobalUnsupportedTagException.class,
+            () -> statsCommand.execute(transactions, ui, storage)
         );
     }
 
@@ -40,8 +41,8 @@ public class StatsCommandTest {
         statsCommand.setStatsType("time_insights");
 
         assertThrows(
-                GlobalMissingTagException.class,
-                () -> statsCommand.execute(transactions, ui, storage)
+            GlobalMissingTagException.class,
+            () -> statsCommand.execute(transactions, ui, storage)
         );
     }
 
@@ -53,8 +54,8 @@ public class StatsCommandTest {
         statsCommand.setStatsType("moolah");
 
         assertThrows(
-                StatsInvalidTypeException.class,
-                () -> statsCommand.listStatsByStatsType(transactions)
+            StatsInvalidTypeException.class,
+            () -> statsCommand.listStatsByStatsType(transactions)
         );
     }
 
@@ -66,7 +67,7 @@ public class StatsCommandTest {
         statsCommand.setStatsType("categorical_savings");
 
         assertDoesNotThrow(
-                () -> statsCommand.listStatsByStatsType(transactions)
+            () -> statsCommand.listStatsByStatsType(transactions)
         );
     }
 }

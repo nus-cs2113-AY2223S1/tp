@@ -6,7 +6,18 @@ import seedu.duke.command.Command;
 import seedu.duke.data.Budget;
 import seedu.duke.data.transaction.Expense;
 import seedu.duke.data.transaction.Income;
-import seedu.duke.exception.*;
+import seedu.duke.exception.GlobalEmptyParameterException;
+import seedu.duke.exception.GlobalDuplicateTagException;
+import seedu.duke.exception.GlobalMissingTagException;
+import seedu.duke.exception.InputTransactionInvalidAmountException;
+import seedu.duke.exception.InputTransactionInvalidCategoryException;
+import seedu.duke.exception.InputTransactionInvalidDateException;
+import seedu.duke.exception.InputTransactionInvalidTypeException;
+import seedu.duke.exception.MoolahException;
+import seedu.duke.exception.HelpUnknownOptionException;
+import seedu.duke.exception.InputBudgetInvalidAmountException;
+import seedu.duke.exception.InputBudgetDuplicateException;
+import seedu.duke.exception.StatsInvalidTypeException;
 
 import java.time.LocalDate;
 
@@ -247,8 +258,8 @@ public class ParameterParserTest {
     @Test
     public void parseTypeTagForListing_invalidInputTransactionType_exceptionThrown() {
         assertThrows(
-                InputTransactionInvalidTypeException.class,
-                () -> ParameterParser.parseTypeTagForListing("savings")
+            InputTransactionInvalidTypeException.class,
+            () -> ParameterParser.parseTypeTagForListing("savings")
         );
     }
 
@@ -262,8 +273,8 @@ public class ParameterParserTest {
     @Test
     public void parseStatsTypeTag_invalidStatsType_exceptionThrown() {
         assertThrows(
-                StatsInvalidTypeException.class,
-                () -> ParameterParser.parseStatsTypeTag("categories")
+            StatsInvalidTypeException.class,
+            () -> ParameterParser.parseStatsTypeTag("categories")
         );
     }
 
