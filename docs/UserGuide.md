@@ -66,24 +66,46 @@ Example of usage:
 
 Add user's food consumption in TracknFit
 
-Format: `add food /{description} /{calories}`
+Format: `add food /{description} /{calories} /{date}`
 
 * description needs to be a string
 * calories should be positive integer inputs in the units of kcal
+* date is an optional parameter. If user does not input a specific date,
+the program will automatically fill it with today's date
 
 Example of usage:
 
-`add food /ice cream /350`
+Adding without date:
+
+`add food /dumplings /300`
 
 Expected outcome:
 Food is added to the dietary consumption list.
 
 ```
--------------------------------------------------------------
-Food Description: ice cream
-calories: 250
-This food is added to the food list successfully
--------------------------------------------------------------
+add food /dumplings /300
+-------------------------------------------------------------------------------
+Food Description: dumplings
+calories: 300
+Recorded on: 25-10-2022
+ This food is added to the food list successfully
+-------------------------------------------------------------------------------
+```
+Adding with date:
+
+`add food /noodles /300 /24-10-2022`
+
+Expected outcome:
+Food is added to the dietary consumption list.
+
+```
+add food /noodles /300 /24-10-2022
+-------------------------------------------------------------------------------
+Food Description: noodles
+calories: 300
+Recorded on: 24-10-2022
+ This food is added to the food list successfully
+-------------------------------------------------------------------------------
 ```
 
 ### Viewing Food Consumptions: `view food`
@@ -99,16 +121,21 @@ Expected outcome:
 All historical records of the food consumed are displayed.
 
 ```
--------------------------------------------------------------
-----------------------------------
-Index | Description  | Calories | 
-----------------------------------
-1     | cola         | 100      | 
-2     | chicken rice | 200      | 
-3     | laksa        | 400      | 
-4     | ice cream    | 250      | 
+-------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------
+Index | Description                                         | Calories | Date       | 
+--------------------------------------------------------------------------------------
+1     | noodles                                             | 300      | 24-10-2022 | 
+2     | chicken rice                                        | 200      | 25-10-2022 | 
+3     | laksa                                               | 400      | 25-10-2022 | 
+4     | cola                                                | 1000     | 25-10-2022 | 
+5     | this is just for testing                            | 100      | 25-10-2022 | 
+6     | ice cream                                           | 200      | 25-10-2022 | 
+7     | very very very very long food name for testing view | 300      | 25-10-2022 | 
+8     | dumplings                                           | 300      | 25-10-2022 | 
 
--------------------------------------------------------------
+-------------------------------------------------------------------------------
+
 ```
 
 ### Remove Food Consumptions: `remove food`
@@ -124,16 +151,21 @@ Expected outcome:
 The first record in the food list will be deleted.
 
 ```
--------------------------------------------------------------
+-------------------------------------------------------------------------------
+remove food /1
+-------------------------------------------------------------------------------
  This food has been deleted from the food list successfully
-Food Description: cola
-calories: 100
--------------------------------------------------------------
+Food Description: noodles
+calories: 300
+Recorded on: 24-10-2022
+-------------------------------------------------------------------------------
+
 ```
 
-### Find Food Consumptions: `find food`
 
-View user's food consumption over time in TracknFit
+### Find Food Consumptions Based On Description: `find food`
+Find specific food records from user's food consumption over time using keyword in TracknFit
+
 
 Format: `find food /{description}`
 
@@ -145,14 +177,75 @@ All relevant records from the history would be printed out for the user to see h
 have been consuming.
 
 ```
--------------------------------------------------------------
+-------------------------------------------------------------------------------
 Here are the matching food in your food list:
-----------------------------------
-Index | Description  | Calories | 
-----------------------------------
-1     | laksa        | 400      | 
+-----------------------------------------------
+Index | Description  | Calories | Date       | 
+-----------------------------------------------
+1     | laksa        | 400      | 25-10-2022 | 
 
--------------------------------------------------------------
+-------------------------------------------------------------------------------
+```
+
+### Find Food Consumptions Based On Date: `find date_f`
+Find specific food records from user's food consumption over time using keyword in TracknFit
+
+Format: `find date_f /{date}`
+
+Example of usage:
+`find date_f /25-10-2022`
+
+Expected outcome:
+All relevant records from the history would be printed out for the user to see how much of a specific food they
+have been consuming.
+```
+-------------------------------------------------------------------------------
+
+Here are the food records in your list matching this date:
+--------------------------------------------------------------------------------------
+Index | Description                                         | Calories | Date       | 
+--------------------------------------------------------------------------------------
+1     | chicken rice                                        | 200      | 25-10-2022 | 
+2     | laksa                                               | 400      | 25-10-2022 | 
+3     | cola                                                | 1000     | 25-10-2022 | 
+4     | this is just for testing                            | 100      | 25-10-2022 | 
+5     | ice cream                                           | 200      | 25-10-2022 | 
+6     | very very very very long food name for testing view | 300      | 25-10-2022 | 
+7     | dumplings                                           | 300      | 25-10-2022 | 
+
+-------------------------------------------------------------------------------
+
+```
+
+### Viewing All Daily Records: `view all`
+View user's daily records over time in TracknFit
+
+Format: `view all`
+
+Example of usage:
+`view all`
+
+Expected outcome:
+All daily historical records of the user are displayed.
+```
+-------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------
+           | Weight&Fat              | Food                                                           | Exercise
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Date       | Weight | Fat Percentage | Description                                         | Calories | Exercise   | Weights    | Sets | Reps | Dist | Calories Burnt  | Status
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+23-10-2022 | 70     | 20             | 
+25-10-2022                           | chicken rice                                        | 200      | 
+25-10-2022                           | laksa                                               | 400      | 
+25-10-2022                           | cola                                                | 1000     | 
+25-10-2022                           | this is just for testing                            | 100      | 
+25-10-2022                           | ice cream                                           | 200      | 
+25-10-2022                           | very very very very long food name for testing view | 300      | 
+25-10-2022                           | dumplings                                           | 300      | 
+25-10-2022                                                                                            | strength   | 20         | 2    | 2    | -    | -               | [ ]
+
+-------------------------------------------------------------------------------
+
 ```
 
 ### Adding strength exercise: `add strength`
