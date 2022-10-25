@@ -1,0 +1,164 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+
+class Drive {
+# String size
+# String driveType
++ String getSize()
++ void setSize(String)
++ String getDriveType()
++ void setDriveType(String)
++ String toString()
++ String toCsv()
++ String saveAsString()
++ String getDetails()
++ String getType()
+}
+class Motherboard {
+# String socket
+# String formFactor
+# String memorySlots
+# String gpuSlots
++ String getSocket()
++ void setSocket(String)
++ String getFormFactor()
++ void setFormFactor(String)
++ String getMemorySlots()
++ void setMemorySlots(String)
++ String getGpuSlots()
++ void setGpuSlots(String)
++ String toString()
++ String toCsv()
++ String saveAsString()
++ String getDetails()
++ String getType()
+}
+class Memory {
+# String speed
+# String size
++ String getSpeed()
++ void setSpeed(String)
++ String getSize()
++ void setSize(String)
++ String toString()
++ String toCsv()
++ String saveAsString()
++ String getDetails()
++ String getType()
+}
+class PowerSupply {
++ String toString()
++ String toCsv()
++ String saveAsString()
++ String getType()
+}
+class Monitor {
+# String refreshRate
+# String responseTime
+# String resolution
++ String getRefreshRate()
++ void setRefreshRate(String)
++ String getResponseTime()
++ void setResponseTime(String)
++ String getResolution()
++ void setResolution(String)
++ String toString()
++ String toCsv()
++ String saveAsString()
++ String getDetails()
++ String getType()
+}
+class Case {
+# String formFactor
+# String expansionSlots
++ String getFormFactor()
++ void setFormFactor(String)
++ String getExpansionSlots()
++ void setExpansionSlots(String)
++ String toString()
++ String toCsv()
++ String saveAsString()
++ String getDetails()
++ String getType()
+}
+class Other {
++ String toString()
++ String toCsv()
++ String saveAsString()
++ String getDetails()
++ String getType()
+}
+class Cooler {
+# String socket
+# String fanSpeed
+# String noiseLevel
++ String getFanSpeed()
++ void setFanSpeed(String)
++ String getNoiseLevel()
++ void setNoiseLevel(String)
++ String getSocket()
++ void setSocket(String)
++ String toString()
++ String toCsv()
++ String saveAsString()
++ String getDetails()
++ String getType()
+}
+class Cpu {
+# String socket
+# String clock
++ String getSocket()
++ String getClock()
++ void setClock(String)
++ String toString()
++ String toCsv()
++ String saveAsString()
++ String getDetails()
++ String getType()
+}
+class Gpu {
+# String chipset
+# String memory
+# String clock
++ String getChipset()
++ void setChipset(String)
++ String getMemory()
++ void setMemory(String)
++ String getClock()
++ void setClock(String)
++ String toString()
++ String toCsv()
++ String saveAsString()
++ String getDetails()
++ String getType()
+}
+abstract class Component {
+# String name
+# String price
+# String power
++ String getName()
++ void setName(String)
++ String getPrice()
++ void setPrice(String)
++ String getPower()
++ void setPower(String)
++ String toString()
++ String toCsv()
++ String saveAsString()
++ String getDetails()
++ {abstract}Object getType()
+}
+
+
+Component <|-- Drive
+Component <|-- Motherboard
+Component <|-- Memory
+Component <|-- PowerSupply
+Component <|-- Monitor
+Component <|-- Case
+Component <|-- Other
+Component <|-- Cooler
+Component <|-- Cpu
+Component <|-- Gpu
+@enduml
