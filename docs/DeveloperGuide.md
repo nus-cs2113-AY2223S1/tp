@@ -76,6 +76,25 @@ In chronological order, the following diagrams illustrate the flow of the progra
 ![Timetable Delete Lesson Sequence Diagram](./images/Timetable_deleteLesson_Sequence.png)
 ![Timetable Print Timetable Sequence Diagram](./images/Timetable_printTimetable_Sequence.png)
 
+### Delete History
+
+To help users recall the modules that they had recently deleted, the Delete History feature allows them to view up to 5 most
+recently deleted module mappings. This can help them to add the module mappings back to the lists without having to search for the specific
+module code again. 
+
+The UserDeletedModules class has an ArrayDeque, which stores the recently deleted module mappings.
+When the user deletes a module mapping, it will be added to the ArrayDeque.
+If the ArrayDeque already contains 5 module mappings, the last one (least recent) will be deleted, before the addition of a new module mapping.
+Do note that delete history information is not stored upon exiting the app (ie. it is not stored in User Storage).
+
+The following diagram illustrates the relationship between UserUniversityListManager and UserDeletedModules classes.
+
+![User Deleted Modules Class Diagram](./images/UserDeletedModules_Class.png)
+
+The following diagram illustrates the flow of the program, when a user deletes a module. 
+
+![User Deleted Modules Sequence Diagram](./images/UserDeletedModules_Sequence.png)
+
 ### Ui
 
 The Ui class is the cornerstone of the Duke program to facilitate interaction with the user. It is used to scan and collect user input, print error messages to the user upon invalid input commands, 
