@@ -1,5 +1,5 @@
 @startuml
-!include https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/styles.puml
+!include https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/Styles.puml
 
 Actor User USER_COLOR
 Participant ":USERINTERFACE" as UserInterface USER_INTERFACE_COLOR_1
