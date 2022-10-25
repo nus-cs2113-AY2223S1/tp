@@ -115,7 +115,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_incorrectSelectModuleInput_throwYamomException() {
+    public void parse_incorrectSelectSemesterInput_throwYamomException() {
         String expectedErrorMessage = "Error! \tWrong format, should be: semester [SEMESTER_SELECTED]"
                 + System.lineSeparator() + "Not a valid semester.";
         YamomException exception = assertThrows(YamomException.class, () -> Parser.parse("semester 5"));
@@ -123,5 +123,15 @@ public class ParserTest {
 
         exception = assertThrows(YamomException.class, () -> Parser.parse("semester special term 3"));
         assertEquals(expectedErrorMessage, exception.getMessage());
+    }
+
+    @Test
+    public void parse_incorrectViewTimetableInput_throwYamomException() {
+        String expectedErrorMessage = "Error! \tUnknown command. Maybe you meant \"view\".";
+        YamomException exception = assertThrows(YamomException.class, () -> Parser.parse("view timetable"));
+        assertEquals(expectedErrorMessage, exception.getMessage());
+
+        exception = assertThrows(YamomException.class, () -> Parser.parse("view fancy"));
+        assertEquals("Error! \tUnknown command. Maybe you forgot a \"\\\".", exception.getMessage());
     }
 }

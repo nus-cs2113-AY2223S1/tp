@@ -29,11 +29,20 @@ public class ViewTimetableCommand extends Command {
 
     public ViewTimetableCommand(String input) throws YamomException {
         super(input.split("\\s+"));
+        input = input.toLowerCase();
         var params = Parser.parseParams(input);
         showFancy = params.containsKey("fancy");
         showSimple = params.containsKey("simple");
-        if (showFancy && showSimple) {
+        boolean isConflictingCommand = showFancy && showSimple;
+        boolean hasMissingBackslash = !input.contains("/") && (input.contains("fancy") || input.contains("simple"));
+        boolean unknownParametersEntered = (!showFancy && !showSimple)
+                && !Parser.isOneWordCommand(input.split("\\s+"));
+        if (isConflictingCommand) {
             throw new YamomException("Timetable cannot be both simple and fancy!");
+        } else if (hasMissingBackslash) {
+            throw new YamomException("Unknown command. Maybe you forgot a \"\\\".");
+        } else if (unknownParametersEntered) {
+            throw new YamomException("Unknown command. Maybe you meant \"view\".");
         }
     }
 
