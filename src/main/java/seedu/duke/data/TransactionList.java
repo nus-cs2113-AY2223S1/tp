@@ -561,7 +561,7 @@ public class TransactionList {
             if (transaction.getDate().getMonthValue() == month && transaction.getDate().getYear() == year) {
                 /*
                     Since the maximum number of transaction is 1000000 and maximum amount of expense is 10000000,
-                    the highest possible expense value is 10^6 * 10^7 = 10^15 < Long.MAX_VALUE (approx 9.22 * 10^18)
+                    the highest possible expense value is 10^6 * 10^7 = 10^13 < Long.MAX_VALUE (approx 9.22 * 10^18)
                     Therefore, this function is safe from integer overflow UNLESS the max values in
                     common.Constants.java is altered.
                  */

@@ -15,6 +15,7 @@
     * [Overview for Transaction](#overview-for-transaction)
     * [Implementation for Transaction](#implementation-for-transaction)
     * [Help Command](#help-command)
+    * [Budget Command](#budget-command)
     * [Add Command](#add-command)
     * [Edit Command](#edit-command)
     * [List Command](#list-command)
@@ -252,22 +253,47 @@ Some important operations are performed within the `TransactionList` class, whic
 _Written by: Chua Han Yong Darren_
 
 ### Help Command
-The help command displays the help message to the users to guide them on the usage and provide descriptions for each 
-available command. 
+The help command displays the help message to the users to guide them on the usage and provide descriptions for each
+available command.
 
-The help command can be run as `help` or `help o/detailed`, where the latter will display a more detailed version of 
-help messages to the users. 
+The help command can be run as `help` or `help o/detailed`, where the latter will display a more detailed version of
+help messages to the users.
 
 The structure of the application focusing on the help command is illustrated in the class diagram below:
 ![Data Component Class Diagram](images/HelpClassDiagram.png)
 
-For each command subclass, they will implement the getHelpMessage() and getDetailedHelpMessage() methods. These methods 
+For each command subclass, they will implement the getHelpMessage() and getDetailedHelpMessage() methods. These methods
 will contain their corresponding HelpMessage Enum that stores the help messages as strings inside the enum.
 
 In the help command, during the execute() call, it will call either generateBasicHelp() or generateDetailedHelp() method
-based on the help option chosen by the user. 
+based on the help option chosen by the user.
 
 ![Data Component Class Diagram](images/HelpSequenceDiagram.png)
+
+
+_Written by: Chia Thin Hong_
+
+### Budget Command
+
+The budget command allows user to set a new monthly budget. The range of accepted budget value is stored in the 
+`common/Constants.java` file, whereby the content of the file is as such:
+
+```
+public static int MAX_TRANSACTIONS_COUNT = 1000000;
+public static int MIN_AMOUNT_VALUE = 0;
+public static int MAX_AMOUNT_VALUE = 10000000;
+public static int MIN_BUDGET_VALUE = 1;
+public static long MAX_BUDGET_VALUE = Long.valueOf(MAX_TRANSACTIONS_COUNT) * Long.valueOf(MAX_AMOUNT_VALUE);
+```
+
+Under the default setting, the acceptable range of the monthly budget, is 0 < budget <= 10000000000000, which is 10^13 
+and it ensures that no integer overflow will occur as the `long` data type is used. 
+
+To set a new budget, user can use the command `budget b/AMOUNT` where the `AMOUNT` tag is any whole number within the 
+valid range above. 
+
+The interaction of the components on setting a budget can be seen in the sequence diagram under 
+[Architecture](#How-the-architecture-components-interact-with-each-other).
 
 
 _Written by: Chia Thin Hong_

@@ -100,7 +100,7 @@ public class Budget {
         /*
             Since the maximum number of transaction is 1000000, maximum amount of expense is 10000000,
             and minimum is 1, the lowest possible budget left value is
-            1 - (10^6 * 10^7) = -10^15 + 1 > Long.MIN_VALUE (approx -9.22 * 10^18)
+            1 - (10^6 * 10^7) = -10^13 + 1 > Long.MIN_VALUE (approx -9.22 * 10^18)
             Thus, this function is safe from integer overflow UNLESS the values in common.Constants.java is altered.
          */
 
