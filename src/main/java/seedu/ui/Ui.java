@@ -80,7 +80,7 @@ public class Ui {
     }
 
     /**
-     * Shows the result of a command execution to hte user.
+     * Shows the result of a command execution to the user.
      * Includes additional formatting of the results of different commands.
      *
      * @param result Command result
@@ -90,7 +90,8 @@ public class Ui {
     }
 
     /**
-     * Print exception message
+     * Print exception message.
+     *
      * @param e {@link ParkingException} exception
      */
     public void printError(ParkingException e) {
