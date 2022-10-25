@@ -36,10 +36,8 @@ public class UserNameFileWorkings {
 
         try {
             existingUserNames = getUserNames(path);
-            //System.out.println("I found some usernames saved");
 
         } catch (FinanceException e) {
-            //System.out.println("File not found, creating one");
             createUserNames(path);
             existingUserNames = new ArrayList<>();
         }

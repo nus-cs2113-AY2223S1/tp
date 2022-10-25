@@ -1,5 +1,5 @@
 usd,us dollar,$,1
-eur,euro €,1.0152
+eur,euro,€, 1.0152
 gbp,british pound sterling,£,0.8818
 inr,indian rupee,₹,82.2626
 arp,argentine peso,arp$,152.5054

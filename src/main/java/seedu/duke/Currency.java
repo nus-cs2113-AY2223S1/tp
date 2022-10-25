@@ -20,21 +20,12 @@ public class Currency {
         List<CurrencyStructure> currencies = new ArrayList<>();
         Path path = Paths.get("src", "main", "data");
 
-        // creates the directory
-        /* 
-        try {
-            Files.createDirectories(path);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        */
         currencies = readInCurrencies(path);
         return currencies;
     }
 
     public static List<CurrencyStructure> readInCurrencies(Path path) throws FinanceException {
         List<CurrencyStructure> currencyList = new ArrayList<>();
-        //File f = new File(path + "/currencies.txt"); // create a File for the given file path
         Path filePath = Paths.get(path.toString(), "currencies.txt");
         File file = new File(filePath.toString());
         Scanner scanner;
@@ -45,8 +36,7 @@ public class Currency {
         } // create a Scanner using the File as the source
         while (scanner.hasNext()) {
             String line = scanner.nextLine();
-            // List<String> items = Arrays.asList(line.split(","));
-            String[] items = line.split(", ");
+            String[] items = line.split(",");
             String abbrName = items[0];
             String fullName = items[1];
             String symbol = items[2];
@@ -111,6 +101,12 @@ public class Currency {
                 case "exit":
                     isCurrencyExit = true;
                     break;
+                case "list":
+                    System.out.println("\t\t\tALL CURRENCIES");
+                    for (CurrencyStructure x : allCurrencies){
+                        BasicUi.showCurrencyInfo(x);
+                    }
+                    break;
                 default:
                     throw new FinanceException(ExceptionCollection.COMMAND_TYPE_EXCEPTION);
                 }
@@ -130,5 +126,14 @@ public class Currency {
             }
         }
         throw new FinanceException(ExceptionCollection.CURRENCY_NAME_NOT_FOUND_EXCEPTION);
+    }
+
+    static int findIndexOfCurrency(String s, List<List<String>> allCurrencies) throws FinanceException {
+        for(int i = 0; i < allCurrencies.size(); i++){
+            if(allCurrencies.get(i).get(0).contains(s)){
+                return i;
+            }
+        }
+        throw new FinanceException(FinanceException.ExceptionCollection.CURRENCY_NOT_FOUND);
     }
 }

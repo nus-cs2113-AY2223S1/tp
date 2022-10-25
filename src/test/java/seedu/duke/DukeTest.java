@@ -68,7 +68,7 @@ class DukeTest {
 
     @Test
     public void testEmptyWalletBalance() {
-        assertEquals(0, emptyWallet.getBalance());
+        assertEquals(0, emptyWallet.getTotalBalance());
     }
 
     @Test
@@ -83,7 +83,7 @@ class DukeTest {
 
     @Test
     public void testFilledWalletBalance() {
-        assertEquals(1000, filledWallet.getBalance());
+        assertEquals(1000, filledWallet.getTotalBalance());
     }
 
     @Test
@@ -110,7 +110,7 @@ class DukeTest {
 
     //Checks whether retrieved usernames match the list we expect to get
     @Test
-    public void testRetrievingUserNames() throws FileNotFoundException {
+    public void testRetrievingUserNames() throws FileNotFoundException, FinanceException {
         List<String> retrievedUsernames = UserNameFileWorkings.getUserNames(path);
         assertEquals(usernamesList,retrievedUsernames);
     }
@@ -126,9 +126,9 @@ class DukeTest {
     @Test
     public void testReadingInCurrencies (){
         try {
-            List<List<String>> retrievedUsernames = Currency.readInCurrencies(path);
+            List<CurrencyStructure> retrievedUsernames = Currency.readInCurrencies(path);
             assertEquals(currenciesList, retrievedUsernames);
-        } catch (IOException e) {
+        } catch (FinanceException e) {
             throw new RuntimeException(e);
         }
     }

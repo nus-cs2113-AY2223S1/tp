@@ -18,6 +18,7 @@ public class FinanceException extends Throwable {
         WITHDRAW_MONEY_EXCEPTION,
         AMOUNT_PARSE_EXCEPTION,
         AMOUNT_NEGATIVE_EXCEPTION,
+        CURRENCY_NOT_FOUND
         //CURRENCY_INVALID_EXCEPTION
         //UNKNOWN_EXCEPTION
     }
@@ -73,6 +74,9 @@ public class FinanceException extends Throwable {
             break;
         case AMOUNT_NEGATIVE_EXCEPTION:
             errorMessage = "Money amount cannot be negative. Please enter a positive number.";
+            break;
+        case CURRENCY_NOT_FOUND:
+            errorMessage = "Currency type is not valid";
             break;
         default:
             errorMessage = "Unknown exception happens.";
