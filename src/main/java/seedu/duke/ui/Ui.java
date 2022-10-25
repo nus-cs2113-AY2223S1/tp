@@ -20,12 +20,15 @@ public class Ui {
                     + "      |_|         |___/             \n";
 
     public static final String greeting = "Hello from\n" + logo;
+    public static final String CALL_TO_ACTION =
+            "To get started, type \"help\" to see the list of available commands\n";
 
     public static void printGreeting() {
         assert logo != null;
         showLine();
         System.out.print(greeting);
         printQuestion();
+        System.out.println(CALL_TO_ACTION);
         showLine();
     }
 
