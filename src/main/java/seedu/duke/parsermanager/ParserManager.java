@@ -92,9 +92,12 @@ public class ParserManager {
             ArrayList<String> processedCheckCommandDetail = splitCommandAndCommandType(commandDetail);
             String subCheckCommandType = processedCheckCommandDetail.get(SUB_COMMAND_INDEX);
 
-            boolean isProperty = subCheckCommandType.equals(subCheckCommandType);
+            boolean isProperty = subCheckCommandType.equals(PROPERTY_FLAG);
+            boolean isClient = subCheckCommandType.equals(CLIENT_FLAG);
 
-            if (isProperty) {
+            if (isClient) {
+                return new ParseCheckClient(commandDetail, clientList);
+            } else if (isProperty) {
                 return new ParseCheckProperty(commandDetail, propertyList);
             } else {
                 throw new UndefinedSubCommandTypeException(MESSAGE_MISSING_SUB_COMMAND_TYPE);
