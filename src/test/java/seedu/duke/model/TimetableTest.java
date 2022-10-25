@@ -28,7 +28,7 @@ public class TimetableTest {
                 .collect(Collectors.toList()), false, false);
         InputStream stream = TimetableTest.class.getClassLoader().getResourceAsStream("timetableCS2113.txt");
         String expected = new String(stream.readAllBytes(), StandardCharsets.UTF_8);
-        assertEquals(expected, t.toString());
+        assertEquals(expected.replaceAll("\\s+",""), t.toString().replaceAll("\\s+",""));
     }
 
     @Test
@@ -40,7 +40,7 @@ public class TimetableTest {
                 .collect(Collectors.toList()), false, false);
         InputStream stream = TimetableTest.class.getClassLoader().getResourceAsStream("timetableCS1010S.txt");
         String expected = new String(stream.readAllBytes(), StandardCharsets.UTF_8);
-        assertEquals(expected, t.toString());
+        assertEquals(expected.replaceAll("\\s+",""), t.toString().replaceAll("\\s+",""));
     }
 
     @Test
@@ -52,7 +52,7 @@ public class TimetableTest {
                 false, false);
         InputStream stream = TimetableTest.class.getClassLoader().getResourceAsStream("timetableCS3216.txt");
         String expected = new String(stream.readAllBytes(), StandardCharsets.UTF_8);
-        assertEquals(expected, t.toString());
+        assertEquals(expected.replaceAll("\\s+",""), t.toString().replaceAll("\\s+",""));
     }
 
     @Test
@@ -77,7 +77,7 @@ public class TimetableTest {
                 true, false);
         InputStream stream = TimetableTest.class.getClassLoader().getResourceAsStream("timetableColor.txt");
         String expected = new String(stream.readAllBytes(), StandardCharsets.UTF_8);
-        assertEquals(expected, t.toString());
+        assertEquals(expected.replaceAll("\\s+",""), t.toString().replaceAll("\\s+",""));
     }
 
     @Test
@@ -107,7 +107,7 @@ public class TimetableTest {
         String[] actual = t.toString().split(newlineRegex);
         assertEquals(expected.length, actual.length);
         for (int i = 0; i < expected.length; i++) {
-            assertEquals(expected[i], actual[i]);
+            assertEquals(expected[i].replaceAll("\\s+",""), actual[i].replaceAll("\\s+",""));
         }
     }
 }
