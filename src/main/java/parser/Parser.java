@@ -19,7 +19,7 @@ public class Parser {
     }
 
 
-    public static Command parseCommand(String input) throws DukeException{
+    public Command parseCommand(String input) throws DukeException{
         input = input.trim();
         if (!input.contains(" ")) {
             if (input.equals("bye")) {
