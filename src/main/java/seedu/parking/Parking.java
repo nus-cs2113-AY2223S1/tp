@@ -8,55 +8,80 @@ import static seedu.common.CommonFiles.FAVOURITE_DIRECTORY;
 import static seedu.common.CommonFiles.FAVOURITE_FILE;
 import static seedu.common.CommonFiles.LTA_JSON_FILE;
 
-import java.util.Objects;
+import java.io.IOException;
 
 import seedu.api.Api;
-import seedu.commands.Auth;
-import seedu.commands.Favourite;
-import seedu.commands.Find;
-import seedu.commands.Search;
+import seedu.commands.Command;
+import seedu.commands.CommandResult;
+import seedu.commands.ExitCommand;
 import seedu.common.CommonFiles;
-import seedu.data.Carpark;
 import seedu.data.CarparkList;
-import seedu.exception.DuplicateCarparkException;
 import seedu.exception.FileWriteException;
+import seedu.exception.InvalidCommandException;
 import seedu.exception.NoCarparkFoundException;
-import seedu.exception.NoCommandArgumentException;
 import seedu.exception.NoFileFoundException;
 import seedu.exception.ParkingException;
-import seedu.exception.UnneededArgumentsException;
+import seedu.files.Favourite;
 import seedu.files.FileReader;
 import seedu.files.FileStorage;
-import seedu.parser.Command;
 import seedu.parser.Parser;
-import seedu.parser.search.Sentence;
 import seedu.ui.Ui;
+
+
 
 /**
  * Main class of the program.
  */
 public class Parking {
-    private static CarparkList carparkList;
+    private Ui ui;
+    private Api api;
+    private CarparkList carparkList;
+    private Favourite favourite;
+
+
+    public static void main(String[] args) {
+        new Parking().run();
+    }
 
     /**
-     * Main entry-point for the java.duke.Duke application.
+     * Runs the program until termination.
      */
-    public static void main(String[] args) {
-        Parser parser = new Parser();
-        Find find = new Find();
-        Ui ui = new Ui();
-        ui.greetUser();
-        Auth auth = new Auth();
-        Api api = new Api(LTA_JSON_FILE, API_JSON_DIRECTORY);
-        Favourite favourite = new Favourite(FAVOURITE_DIRECTORY, FAVOURITE_FILE);
+    public void run() {
+        start();
+        loadFavourite();
+        loadApi();
+        loadJson();
+        runCommandLoopUntilExitCommand();
+        exit();
+    }
 
+    /**
+     * Sets up the required objects, loads the data from the files and prints the welcome message.
+     */
+    private void start() {
+        this.ui = new Ui();
+        this.api = new Api(LTA_JSON_FILE, API_JSON_DIRECTORY);
+        this.favourite = new Favourite(FAVOURITE_DIRECTORY, FAVOURITE_FILE);
+        ui.greetUser();
+    }
+
+    /**
+     * Loads the data from favouriteList.txt into program.
+     */
+    private void loadFavourite() {
         try {
             favourite.updateFavouriteList();
-        } catch (FileWriteException e) {
+        } catch (IOException e) {
             ui.showUpdateFavouriteError();
-        } catch (NoFileFoundException e) {
+        } catch (NoFileFoundException | FileWriteException e) {
             ui.printError(e);
         }
+    }
+
+    /**
+     * Loads the api and fetches the data from api.
+     */
+    private void loadApi() {
         try {
             api.loadApiKey(API_KEY_FILE, API_JSON_DIRECTORY, true);
             api.syncFetchData();
@@ -64,8 +89,12 @@ public class Parking {
         } catch (ParkingException e) {
             ui.print(e.getMessage());
         }
+    }
 
-        // Load file from json
+    /**
+     * Loads the JSON file and writes the data from the api into the json file.
+     */
+    private void loadJson() {
         ui.showLoadingDataMessage();
         try {
             carparkList = FileReader.loadCarparkListFromTxt(CARPARK_LIST_FILE, CARPARK_LIST_DIRECTORY);
@@ -76,93 +105,44 @@ public class Parking {
         } catch (ParkingException e) {
             ui.printError(e);
         }
+    }
 
-        // Main loop for user to use program
-        boolean isExit = false;
-        while (!isExit) {
+    /**
+     * Prints the exit message and exits the program.
+     */
+    private void exit() {
+        ui.showByeMessage();
+        System.exit(0);
+    }
+
+    /**
+     * Reads the user input and parses it into its respective format, and executes the command, until the user issues
+     * the exit command.
+     */
+    private void runCommandLoopUntilExitCommand() {
+        Command command;
+        do {
             String input = ui.getCommand();
-            Command command;
-            try {
-                command = parser.parseInputString(input);
-            } catch (ParkingException e) {
-                ui.printError(e);
-                continue;
-            }
-            switch (Objects.requireNonNull(command)) {
-            case EXIT:
-                ui.showByeMessage();
-                isExit = true;
-                break;
-            case FIND:
-                try {
-                    String carparkID = find.getCarparkId(input);
-                    Carpark carpark = carparkList.findCarpark(carparkID);
-                    ui.print(carpark.getDetailViewString());
-                } catch (NoCommandArgumentException | NoCarparkFoundException | UnneededArgumentsException exception) {
-                    ui.printError(exception);
-                }
-                break;
-            case UPDATE:
-                try {
-                    //fetch api
-                    api.syncFetchData();
-                    //update json
-                    carparkList = new CarparkList(CommonFiles.LTA_FILE_PATH, CommonFiles.LTA_BACKUP_FILE_PATH);
-                    ui.showUpdateDataSuccess();
-                } catch (ParkingException e) {
-                    ui.printError(e);
-                } finally {
-                    System.out.println("Update data terminated"); // Debug line
-                }
-                break;
-            case AUTH:
-                try {
-                    String[] words = input.trim().split("\\s+", 2);
-                    if (api.isApiValid(words[1])) {
-                        auth.saveApiKey(input);
-                        ui.showApiKeySaved();
-                    }
-                } catch (ParkingException e) {
-                    ui.printError(e);
-                }
-                break;
-            case LIST:
-                ui.print(carparkList.toString());
-                break;
-            case SEARCH:
-                Sentence searchQuery = new Sentence(Parser.splitCommandArgument(input)[1]);
-                ui.print(Search.runSearch(carparkList, searchQuery).getSearchListString());
-                carparkList.resetBoldForAllCarparks();
-                break;
-            case FAVOURITE:
-                try {
-                    String carparkID = find.getCarparkId(input);
-                    if (carparkID.equalsIgnoreCase("list")) {
-                        ui.print(favourite.showList());
-                    } else {
-                        Carpark carpark = carparkList.findCarpark(carparkID);
-                        favourite.setFavourite(carparkID);
-                        ui.showFavouriteAddSuccess(carparkID);
-                    }
-                } catch (FileWriteException | UnneededArgumentsException | NoCommandArgumentException
-                         | NoCarparkFoundException | DuplicateCarparkException e) {
-                    ui.printError(e);
-                }
-                break;
-            case UNFAVOURITE:
-                try {
-                    String carparkId = favourite.getCarparkId(input);
-                    favourite.setUnfavourite(carparkId);
-                    ui.showUnfavouriteSuccess(carparkId);
-                } catch (FileWriteException | UnneededArgumentsException | NoCommandArgumentException
-                         | NoCarparkFoundException e) {
-                    ui.printError(e);
-                }
-                break;
-            default:
-                ui.showInvalidCommandError();
-                break;
-            }
+            command = new Parser().parseCommand(input, api, carparkList, favourite);
+            CommandResult result = executeCommand(command);
+            ui.printResult(result);
+        } while (!ExitCommand.isExit(command));
+    }
+
+    /**
+     * Executes the user input command and returns the result.
+     *
+     * @param command User command
+     * @return result of the command.
+     */
+    private CommandResult executeCommand(Command command) {
+        try {
+            CommandResult result = command.execute();
+            return result;
+        } catch (FileWriteException | NoCarparkFoundException e) {
+            return new CommandResult(e.getMessage());
+        } catch (InvalidCommandException e) {
+            throw new RuntimeException(e);
         }
     }
 }

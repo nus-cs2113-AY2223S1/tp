@@ -1,83 +1,130 @@
 package seedu.parser;
 
-import seedu.exception.NoCommandArgumentException;
-import seedu.exception.UnneededArgumentsException;
+import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import seedu.api.Api;
+import seedu.commands.AuthCommand;
+import seedu.commands.Command;
+import seedu.commands.ExitCommand;
+import seedu.commands.FavouriteCommand;
+import seedu.commands.FindCommand;
+import seedu.commands.InvalidCommand;
+import seedu.commands.ListCommand;
+import seedu.commands.SearchCommand;
+import seedu.commands.UnfavouriteCommand;
+import seedu.commands.UpdateCommand;
+import seedu.data.CarparkList;
+import seedu.files.Favourite;
+import seedu.parser.search.Sentence;
 
 /**
  * Class to deal with parsing commands.
  */
 public class Parser {
-    private static final String COMMAND_FIND = "find";
-    private static final String COMMAND_SEARCH = "search";
-    private static final String COMMAND_EXIT = "exit";
-    private static final String COMMAND_UPDATE = "update";
-    private static final String COMMAND_AUTH = "auth";
-    private static final String COMMAND_LIST = "list";
-    private static final String COMMAND_FAVOURITE = "favourite";
-    private static final String COMMAND_UNFAVOURITE = "unfavourite";
+    public static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+
+    private CarparkList carparkList;
+    private Api api;
+    private Favourite favourite;
+    private ArrayList<String> favouriteList;
 
     /**
-     * To convert the user input into commands for the program.
+     * Parses user input into command for execution.
      *
-     * @param input User input
-     * @return Command that user wants to do.
+     * @param input full user input string
+     * @param api api of the carpark data
+     * @param carparkList carpark List
+     * @return the command based on user input
      */
-    public Command parseInputString(String input) throws NoCommandArgumentException, UnneededArgumentsException {
-        Command command;
-        boolean hasCommandArgumentFlag = hasCommandArguments(input);
-        if (input.equals(COMMAND_EXIT)) {
-            command = Command.EXIT;
-        } else {
-            String instruction = input.trim().split("\\s+")[0];
-            switch (instruction) {
-            case COMMAND_FIND:
-                if (!hasCommandArgumentFlag) {
-                    throw new NoCommandArgumentException("find");
-                }
-                command = Command.FIND;
-                break;
-            case COMMAND_UPDATE:
-                if (hasCommandArgumentFlag) {
-                    throw new UnneededArgumentsException("update");
-                }
-                command = Command.UPDATE;
-                break;
-            case COMMAND_AUTH:
-                if (!hasCommandArgumentFlag) {
-                    throw new NoCommandArgumentException("auth");
-                }
-                command = Command.AUTH;
-                break;
-            case COMMAND_LIST:
-                if (hasCommandArgumentFlag) {
-                    throw new UnneededArgumentsException("list");
-                }
-                command = Command.LIST;
-                break;
-            case COMMAND_SEARCH:
-                if (!hasCommandArgumentFlag) {
-                    throw new NoCommandArgumentException("search");
-                }
-                command = Command.SEARCH;
-                break;
-            case COMMAND_FAVOURITE:
-                if (!hasCommandArgumentFlag) {
-                    throw new NoCommandArgumentException("favourite");
-                }
-                command = Command.FAVOURITE;
-                break;
-            case COMMAND_UNFAVOURITE:
-                if (!hasCommandArgumentFlag) {
-                    throw new NoCommandArgumentException("unfavourite");
-                }
-                command = Command.UNFAVOURITE;
-                break;
-            default:
-                command = Command.INVALID;
-                break;
-            }
+    public Command parseCommand(String input, Api api, CarparkList carparkList, Favourite favourite) {
+        this.api = api;
+        this.carparkList = carparkList;
+        this.favourite = favourite;
+        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(input.trim());
+        if (!matcher.matches()) {
+            return new InvalidCommand("Invalid Command");
         }
-        return command;
+
+        final String commandWord = matcher.group("commandWord");
+        final String arguments = matcher.group("arguments");
+
+        switch (commandWord) {
+        case AuthCommand.COMMAND_WORD:
+            return prepareAuth(arguments);
+        case ExitCommand.COMMAND_WORD:
+            return new ExitCommand();
+        case FavouriteCommand.COMMAND_WORD:
+            return prepareFavourite(arguments);
+        case FindCommand.COMMAND_WORD:
+            return prepareFind(arguments);
+        case ListCommand.COMMAND_WORD:
+            return new ListCommand(carparkList);
+        case SearchCommand.COMMAND_WORD:
+            return prepareSearch(arguments);
+        case UpdateCommand.COMMAND_WORD:
+            return new UpdateCommand(api);
+        case UnfavouriteCommand.COMMAND_WORD:
+            return prepareUnfavourite(arguments);
+        default:
+            return new InvalidCommand("Invalid Command");
+        }
+    }
+
+    /**
+     * To prepare the arguments to be taken in for Auth Command.
+     *
+     * @param arguments arguments given by the user after the command word
+     * @return command to be carried out
+     */
+    private Command prepareAuth(String arguments) {
+        final String apiKey = arguments.trim();
+        return new AuthCommand(api, apiKey);
+    }
+
+    /**
+     * To prepare the arguments to be taken in for Favourite Command.
+     *
+     * @param arguments arguments given by the user after the command word
+     * @return command to be carried out
+     */
+    private Command prepareFavourite(String arguments) {
+        final String carparkID = arguments.trim();
+        return new FavouriteCommand(carparkID, favourite);
+    }
+
+    /**
+     * To prepare the arguments to be taken in for unfavourite Command.
+     *
+     * @param arguments arguments given by the user after the command word
+     * @return command to be carried out
+     */
+    private Command prepareUnfavourite(String arguments) {
+        final String carparkID = arguments.trim();
+        return new UnfavouriteCommand(carparkID, favourite);
+    }
+
+    /**
+     * To prepare the arguments to be taken in for Find Command.
+     *
+     * @param arguments arguments given by the user after the command word
+     * @return command to be carried out
+     */
+    private Command prepareFind(String arguments) {
+        final String carparkID = arguments.trim();
+        return new FindCommand(carparkID);
+    }
+
+    /**
+     * To prepare the arguments to be taken in for Search Command.
+     *
+     * @param arguments arguments given by the user after the command word
+     * @return command to be carried out
+     */
+    private Command prepareSearch(String arguments) {
+        Sentence searchQuery = new Sentence(arguments);
+        return new SearchCommand(carparkList, searchQuery);
     }
 
     /**
