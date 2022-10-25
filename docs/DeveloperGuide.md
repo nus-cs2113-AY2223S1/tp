@@ -103,7 +103,35 @@ _Written by: Chia Thin Hong_
 
 ### Command Component
 
-_Written by: Author name_
+The command component is represented by a `command` package which consists of all the classes that is part of the data stored
+by Moolah Manager. Within the `command` package, there are many classes, each corresponding to all of our commands which are
+supported by the application.
+
+The `AddCommand` class contains the operations pertaining to adding a transaction into the list of transactions.
+
+The `BudgetCommand` class contains the operations pertaining to setting the budget for the user.
+
+The `ByeCommand` class contains the operations pertaining to exiting the program.
+
+The `CommandTag` class consists of all the tags that the program parses.
+
+The `DeleteCommand` class contains the operations pertaining to deleting a transaction from the list of transactions.
+
+The `EditCommand` class contains the operations pertaining to editing a transaction from the list of transactions.
+
+The `FindCommand` class contains the operations pertaining to searching the list of transactions for transactions that match the inputted keywords.
+
+The `HelpCommand` class contains the operations pertaining to displaying help messages for the user.
+
+The `ListCommand` class contains the operations pertaining to listing all transactions.
+
+The `PurgeCommand` class contains the operations pertaining to deleting all transaction from the list of transactions.
+
+The `StatsCommand` class contains the operations pertaining to getting statistics based on your list of transactions.
+
+The structure of the command component in Moolah Manager is illustrated in the class diagram below:
+
+_Written by: Brian Wong Yun Long_
 
 ### Data Component 
 
@@ -217,9 +245,19 @@ _Written by: Author name_
 
 ### Overview for Transaction
 
-{Give a brief overview of the Transaction features (i.e. purpose of each command) in Moolah Manager application.}
+The following commands are accepted in Moolah Manager:
+1) `Add` - Adds an `Income` or `expense` type transaction into the list of transaction. [Add Command](#add-command)
+2) `Budget` - Adds an `Budget` into Moolah Manager, which sets the basis for financial tracking. [Budget Command](#budget-command)
+3) `Bye` - Exits Moolah Manager. [Bye Command](#bye-command)
+4) `Delete` - Deletes an `Income` or `expense` type transaction from the list of transaction. [Delete Command](#delete-command)
+5) `Edit` - Edits an `Income` or `expense` type transaction from the list of transaction. [Edit Command](#edit-command)
+6) `Find` - Searches for an `Income` or `expense` type transaction from the list of transaction given keywords. [Find Command](#find-command)
+7) `Help` - Outputs the usage of commands of Moolah Manager. [Help Command](#help-command)
+8) `List` - List all transactions. [List Command](#list-command)
+9) `Purge` - Deletes all transactions from the list of transaction. [Purge Command](#purge-command)
+10) `Stats` - View statistics on transactions based on the list of transactions in Moolah Manager. [Stats Command](#stats-command)
 
-_Written by: Author name_
+_Written by: Brian Wong Yun Long_
 
 ### Implementation for Transaction
 
