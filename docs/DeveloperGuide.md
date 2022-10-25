@@ -13,7 +13,7 @@ The software architecture diagram below describes the application's design and t
 ### Core Components:
 * `MoneyGoWhere`: Main entrypoint of the application.
 * `Common`: Defines various parameters used by the application.
-* `UserInterface`: Provide functions to interface with the user via standard input and standard output.
+* `UserInterface`: Provide functions to interface with the user via standard I/O and handle commands.
 * `Parser`: Provide functions to parse inputs read from standard input.
 * `Data`: Stores data and provides functions to operate on data.
 * `Storage`: Defines functions to save and load data.
@@ -21,9 +21,22 @@ The software architecture diagram below describes the application's design and t
 
 ### Component Interactions:
 The sequence diagram below describes the interaction between the various core components when a command is entered.
-In this example, the user enters the command `Add-Expense -n Expense -a 7.80` to add an expense with the name `Expense` and the amount `7.80`.
+In this example, 
+the user enters the command `Add-Expense -n Expense -a 7.80` to add an expense with the name `Expense` and the amount `7.80`.
 
 ![Component-Interaction-On-Command-Entered](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentInteractionsOnCommandEntered.puml)
+
+* The `UserInterface` runs cotinuously in a loop.
+When the program is ready to receive the user's input, 
+it calls `UserInterface#getConsoleCommand()` which reads the input from standard in.
+* `UserInterface#getConsoleCommand()` calls `Parser#parse()` to parse the input string into a `ConsoleCommand` object.
+* Depending on the instance of `ConsoleCommand`, the corresponding command handler function will be called.
+In the example above, `ConsoleCommand` is an instance of `ConsoleCommandAddExpense` and hence, 
+`UserInterface#runCommandAddExpense()` is called.
+* The `UserInterface` command handler functions calls various `Data` functions to perform operations on data.
+In the example above, `UserInterface#runCommandAddExpense()` calls `Data#addExpense()` to add an expense to the program.
+* After the operations is performed, command handler functions calls `Storage` functions to save data.
+In the example above, `UserInterface#runCommandAddExpense()` calls `Storage#saveToFile()` to save the newly added expense to a file.
 
 ## Product scope
 ### Target user profile
