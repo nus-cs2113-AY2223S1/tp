@@ -41,6 +41,7 @@ The software architecture diagram below describes the application's design and t
 ### Core Components:
 * `MoneyGoWhere`: Main entrypoint of the application.
 * `Common`: Defines various parameters used by the application.
+* `Exceptions`: Defines exceptions thrown by the program.
 * `UserInterface`: Provides functions to interface with the user via standard I/O and handle commands.
 * `Command`: Defines the commands accepted by the program along with its arguments.
 * `Parser`: Provides functions to parse inputs read from standard input.
