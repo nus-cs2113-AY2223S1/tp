@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_USER_NOT_FOUND;
 
-//@@author chiewyx
+// @@author chiewyx
 /**
  * A representation of a list of User.
  */
@@ -88,8 +88,9 @@ public class UserList {
     public UserList getUsersByKeyword(String keyword) throws UserNotFoundException {
         UserList returnList = new UserList();
         for (User user : userList) {
-            if (user.getName().contains(keyword)) {
-                assert user.getName().contains(keyword) : "equals function not working";
+            if (user.getName().toLowerCase().contains(keyword.toLowerCase())) {
+                assert user.getName().toLowerCase()
+                        .contains(keyword.toLowerCase()) : "equals function not working";
                 returnList.addUser(user);
             }
         }
