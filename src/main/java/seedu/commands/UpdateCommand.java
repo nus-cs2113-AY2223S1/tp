@@ -26,7 +26,7 @@ public class UpdateCommand extends Command {
         try {
             //fetch api
             api.syncFetchData();
-            //update json
+            // Todo: Actually update the carpark instance.
             return "Update Successful.";
         } catch (ParkingException e) {
             return "Update unsuccessful. " + e.getMessage();

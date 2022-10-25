@@ -15,6 +15,7 @@ import seedu.commands.ListCommand;
 import seedu.commands.SearchCommand;
 import seedu.commands.UnfavouriteCommand;
 import seedu.commands.UpdateCommand;
+import seedu.common.CommonData;
 import seedu.data.CarparkList;
 import seedu.files.Favourite;
 import seedu.parser.search.Sentence;
@@ -52,20 +53,35 @@ public class Parser {
 
         switch (commandWord) {
         case AuthCommand.COMMAND_WORD:
+            if (arguments.trim().isEmpty()) {
+                return new InvalidCommand("Empty argument.\n" + CommonData.AUTH_FORMAT);
+            }
             return prepareAuth(arguments);
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
         case FavouriteCommand.COMMAND_WORD:
+            if (arguments.trim().isEmpty()) {
+                return new InvalidCommand("Empty argument.\n" + CommonData.FAVOURITE_FORMAT);
+            }
             return prepareFavourite(arguments);
         case FindCommand.COMMAND_WORD:
+            if (arguments.trim().isEmpty()) {
+                return new InvalidCommand("Empty argument.\n" + CommonData.FIND_FORMAT);
+            }
             return prepareFind(arguments);
         case ListCommand.COMMAND_WORD:
             return new ListCommand(carparkList);
         case SearchCommand.COMMAND_WORD:
+            if (arguments.trim().isEmpty()) {
+                return new InvalidCommand("Empty argument.\n" + CommonData.SEARCH_FORMAT);
+            }
             return prepareSearch(arguments);
         case UpdateCommand.COMMAND_WORD:
             return new UpdateCommand(api);
         case UnfavouriteCommand.COMMAND_WORD:
+            if (arguments.trim().isEmpty()) {
+                return new InvalidCommand("Empty argument.\n" + CommonData.UNFAVOURITE_FORMAT);
+            }
             return prepareUnfavourite(arguments);
         default:
             return new InvalidCommand("Invalid Command");
