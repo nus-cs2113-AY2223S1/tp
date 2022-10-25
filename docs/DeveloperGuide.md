@@ -81,6 +81,15 @@ There are also check compatibility functions that check if the build's component
 - Checking if the build's storage is compatible with the case expansion slots
 - Checking if the number of the build's GPUs is compatible with the motherboard GPU slots
 - Checking if the number of the build's RAM is compatible with the motherboard RAM slots
+
+##### Add & delete component
+
+The user can add and delete components from the build. When the user adds a component, the component is added to the 2D linked hash map. 
+When the user deletes a component, the component is removed from the 2D linked hash map. This is done by calling the `addComponent()` and `deleteComponent()` methods of the Build class.
+Which in turn calls the `addElement()` and `removeElement()` methods of the LinkedHashMap2D class.
+
+![](/images/BuildSequence.png)
+
 ### Storage
 
 ![](/images/Storage.png)
