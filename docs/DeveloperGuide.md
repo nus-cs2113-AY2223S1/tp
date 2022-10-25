@@ -18,6 +18,7 @@ The following steps will guide you through the setup process to get your develop
 5. Navigate to `File > Project Structure > Project Settings > Project` and set `SDK` to `11`.
 6. Verify the setup process by running `MoneyGoWhere#main()`
 You should see the following greeting message if the project setup is successful:
+
 ```
   __  __                         _____   __          ___                   
  |  \/  |                       / ____|  \ \        / / |                  
