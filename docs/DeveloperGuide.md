@@ -109,13 +109,13 @@ In the example above, `UserInterface#runCommandAddExpense()` calls `Storage#save
 | v1.0    | user     | sort expenses by date                             | keep track of my spending over time               |
 | v1.0    | user     | save my data to a file                            | store my data easily                              |
 | v1.0    | user     | load my data from a file                          | retrieve my data easily                           |
+| v1.0    | user     | add my income                                     | keep track if my spending exceeds my income       |
+| v1.0    | user     | add expense targets                               | keep track of my financial goals                  |
 | v2.0    | user     | convert between different currencies              | keep track of expenses across multiple currencies |
 | v2.0    | user     | update currency exchange rates                    | convert between currencies using the latest rates |
-| v1.0    | user     | add my income                                     | keep track if my spending exceeds my income       |
 | v2.0    | user     | view my income                                    | keep track if my spending exceeds my income       |
 | v2.0    | user     | delete my income                                  | keep track if my spending exceeds my income       |
 | v2.0    | user     | edit my income                                    | keep track if my spending exceeds my income       |
-| v1.0    | user     | add expense targets                               | keep track of my financial goals                  |
 | v2.0    | user     | view expense targets                              | keep track of my financial goals                  |
 | v2.0    | user     | delete expense targets                            | keep track of my financial goals                  |
 | v2.0    | user     | edit expense targets                              | keep track of my financial goals                  |
