@@ -9,9 +9,9 @@
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 ## Getting Started
-This program was developed using the Java JDK 11 and the IDE Intellij IDEA.
+This program was developed using the Java JDK 11 and Intellij IDEA.
 The following steps will guide you through the setup process to get your development environment up and running.
-1. Install Java Development Kit (JDK) 11.
+1. Install JDK 11.
 2. Install Intellij IDEA.
 3. Fork the [MoneyGoWhere](https://github.com/AY2223S1-CS2113T-W11-1/tp) repository and clone it to your system.
 4. Launch Intellij IDEA and open the repository you have cloned.
@@ -111,11 +111,13 @@ In the example above, `UserInterface#runCommandAddExpense()` calls `Storage#save
 
 ## Non-Functional Requirements
 
-{Give non-functional requirements}
+1. Works on any mainstream desktop OS supported by `Java 11`
 
 ## Glossary
 
-* *glossary item* - Definition
+| Term                  | Definition             |
+|-----------------------|------------------------|
+| Mainstream Desktop OS | Windows, Mac OS, Linux |
 
 ## Instructions for manual testing
 
