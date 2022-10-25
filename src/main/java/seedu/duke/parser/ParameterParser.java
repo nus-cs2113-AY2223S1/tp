@@ -1,13 +1,12 @@
 package seedu.duke.parser;
 
-//@@author wcwy
 import seedu.duke.command.Command;
 import seedu.duke.command.ListCommand;
+
 import seedu.duke.data.Budget;
 import seedu.duke.data.transaction.Expense;
 import seedu.duke.data.transaction.Income;
 
-//@@author chydarren
 import seedu.duke.exception.GlobalEmptyParameterException;
 import seedu.duke.exception.GlobalInvalidMonthException;
 import seedu.duke.exception.GlobalInvalidNumberException;
@@ -16,8 +15,6 @@ import seedu.duke.exception.GlobalInvalidYearException;
 import seedu.duke.exception.GlobalNumberNotNumericException;
 import seedu.duke.exception.GlobalDuplicateTagException;
 import seedu.duke.exception.GlobalMissingTagException;
-
-//@@author brian-vb
 import seedu.duke.exception.InputTransactionInvalidAmountException;
 import seedu.duke.exception.InputTransactionInvalidCategoryException;
 import seedu.duke.exception.InputTransactionInvalidDateException;
@@ -26,10 +23,9 @@ import seedu.duke.exception.GlobalUnsupportedTagException;
 import seedu.duke.exception.StatsInvalidTypeException;
 import seedu.duke.exception.MoolahException;
 import seedu.duke.exception.HelpUnknownOptionException;
-
-//@@author wcwy
 import seedu.duke.exception.InputBudgetInvalidAmountException;
 import seedu.duke.exception.InputBudgetDuplicateException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -38,11 +34,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import static seedu.duke.command.CommandTag.COMMAND_TAG_BUDGET_AMOUNT;
 import static seedu.duke.common.Constants.MAX_BUDGET_VALUE;
 import static seedu.duke.common.Constants.MIN_BUDGET_VALUE;
-
-//@@author paullowse
 import static seedu.duke.command.CommandTag.COMMAND_TAG_HELP_OPTION;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_GLOBAL_ENTRY_NUMBER;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_STATS_TYPE;
@@ -50,15 +45,12 @@ import static seedu.duke.command.CommandTag.COMMAND_TAG_GLOBAL_MONTH;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_GLOBAL_NUMBER;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_GLOBAL_PERIOD;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_GLOBAL_YEAR;
-
-//@@author chinhan99
 import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_AMOUNT;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_CATEGORY;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_DATE;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_DESCRIPTION;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_TYPE;
 
-//@@author chinhan99
 import static seedu.duke.common.Constants.MAX_AMOUNT_VALUE;
 import static seedu.duke.common.Constants.MIN_AMOUNT_VALUE;
 import static seedu.duke.common.DateFormats.DATE_INPUT_PATTERN;
