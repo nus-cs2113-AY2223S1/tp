@@ -1,7 +1,17 @@
 package seedu.duke.parser;
 
 import org.junit.jupiter.api.Test;
-import seedu.duke.command.*;
+import seedu.duke.command.AddModuleCommand;
+import seedu.duke.command.DeleteModuleCommand;
+import seedu.duke.command.ExitCommand;
+import seedu.duke.command.GetModuleCommand;
+import seedu.duke.command.HelpCommand;
+import seedu.duke.command.ViewTimetableCommand;
+import seedu.duke.command.SelectSlotCommand;
+import seedu.duke.command.SelectSemesterCommand;
+import seedu.duke.command.SearchModuleCommand;
+import seedu.duke.command.ImportCommand;
+import seedu.duke.command.ExportCommand;
 import seedu.duke.exceptions.YamomException;
 
 import static org.junit.jupiter.api.Assertions.*;
