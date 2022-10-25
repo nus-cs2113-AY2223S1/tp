@@ -33,7 +33,6 @@ public class Duke {
                 ui.showLine();
             }
         }
-        endProgram();
     }
 
     /**
@@ -43,8 +42,4 @@ public class Duke {
         new Duke().run();
     }
 
-
-    private static void endProgram(){
-        System.out.println("Bye!");
-    }
 }
