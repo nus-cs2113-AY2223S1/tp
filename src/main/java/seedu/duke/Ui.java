@@ -86,13 +86,13 @@ public class Ui {
                                  ArrayList<Food> foodArrayList,
                                  ArrayList<Exercise> exerciseArrayList) {
 
-        Integer[] columnSpacingArraySubHeader = { 10, 6, 14, 8, 8, 10, 4, 4, 4, 4, 15};
+        Integer[] columnSpacingArraySubHeader = { 10, 6, 14, 8, 8, 10, 10, 4, 4, 4, 15};
         getAllRecordsColumnsSpacing(weightAndFatArrayList,
                 foodArrayList, exerciseArrayList, columnSpacingArraySubHeader);
 
         String subHeader = generateAllDataTableSubHeader(columnSpacingArraySubHeader);
 
-        Integer[] columnSpacingArrayHeader = { 10, 23, 55, 60};
+        Integer[] columnSpacingArrayHeader = { 10, 23, 55};
         getAllRecordsHeaderSpacing(columnSpacingArrayHeader, subHeader);
         generateAllDataTableHeader(columnSpacingArrayHeader);
         String separatorLine = "-".repeat(subHeader.length());
@@ -152,15 +152,17 @@ public class Ui {
         }
         for (Exercise exercise : exerciseArrayList) {
             if (exercise instanceof StrengthExercise) {
-                columnSpacingArray[6] = Math.max(columnSpacingArray[1], String.valueOf(exercise.getWeight()).length());
-                columnSpacingArray[7] = Math.max(columnSpacingArray[2], String.valueOf(exercise.getSet()).length());
+                columnSpacingArray[6] = Math.max(columnSpacingArray[6], String.valueOf(exercise.getWeight()).length());
+                columnSpacingArray[7] = Math.max(columnSpacingArray[7], String.valueOf(exercise.getSet()).length());
             } else if (exercise instanceof CardioExercise) {
-                columnSpacingArray[9] = Math.max(columnSpacingArray[5],
+                columnSpacingArray[9] = Math.max(columnSpacingArray[9],
                         String.valueOf((int) exercise.getDistance()).length());
             }
             columnSpacingArray[5] = Math.max(columnSpacingArray[5], exercise.getExerciseName().length());
-            columnSpacingArray[8] = Math.max(columnSpacingArray[8], exercise.getRepetition() % 10 + 1);
-            columnSpacingArray[10] = Math.max(columnSpacingArray[9], exercise.getCaloriesBurnt() % 10 + 1);
+            columnSpacingArray[8] = Math.max(columnSpacingArray[8],
+                    String.valueOf(exercise.getRepetition()).length());
+            columnSpacingArray[10] = Math.max(columnSpacingArray[10],
+                    String.valueOf(exercise.getCaloriesBurnt()).length());
         }
     }
 
@@ -316,7 +318,7 @@ public class Ui {
         String paddedBlank = addRightPadding("", columnSpacingArray[0]) + " | ";
         String paddedWeightFat = addRightPadding("Weight&Fat", columnSpacingArray[1]) + " | ";
         String paddedFood = addRightPadding("Food", columnSpacingArray[2]) + " | ";
-        String paddedExercise = addRightPadding("Exercise", columnSpacingArray[3]) + " | ";
+        String paddedExercise = "Exercise";
         String header = paddedBlank + paddedWeightFat + paddedFood + paddedExercise;
         String separatorLine = "-".repeat(header.length());
         output(separatorLine, header);

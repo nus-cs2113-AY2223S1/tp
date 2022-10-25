@@ -78,7 +78,7 @@ public class AddCommand extends Command {
             LOGGER.warning("Invalid arguments length for add strength exercise");
             throw new IllegalValueException("Invalid add strength exercise command");
         }
-        String description = getDescriptionWithValidation(argumentList[0]);
+        String description = getDescriptionWithValidation(argumentList[1]);
         try {
             int weight = getWeightWithValidation(argumentList);
             int set = getSetWithValidation(argumentList);
@@ -153,7 +153,7 @@ public class AddCommand extends Command {
             LOGGER.warning("Invalid arguments length for add strength exercise");
             throw new IllegalValueException("Invalid add strength exercise command");
         }
-        String description = getDescriptionWithValidation(argumentList[0]);
+        String description = getDescriptionWithValidation(argumentList[1]);
         try {
             double distance = Double.parseDouble(argumentList[2]);
             int repetition = getRepetitionWithValidation(argumentList);
