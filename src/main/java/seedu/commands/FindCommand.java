@@ -13,6 +13,11 @@ public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
     private final String carparkID;
 
+    /**
+     * Constructor for the {@link FindCommand} class. Passes in a carparkID and carparkList
+     * @param carparkID ID to search for
+     * @param carparkList carparkList to search against.
+     */
     public FindCommand(String carparkID, CarparkList carparkList) {
         this.carparkID = carparkID;
         this.carparkList = carparkList;

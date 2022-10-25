@@ -60,11 +60,11 @@ public class FavouriteCommand extends Command {
      * @throws DuplicateCarparkException If carpark ID is already in favourites.
      */
     public void setFavourite(String carparkId) throws FileWriteException, DuplicateCarparkException {
-        boolean containsSearchStr = Favourite.favouriteList.stream().anyMatch(carparkId::equalsIgnoreCase);
+        boolean containsSearchStr = Favourite.getFavouriteList().stream().anyMatch(carparkId::equalsIgnoreCase);
         if (containsSearchStr) {
             throw new DuplicateCarparkException();
         }
-        Favourite.favouriteList.add(carparkId);
+        Favourite.getFavouriteList().add(carparkId);
         favourite.writeFavouriteList();
     }
 }

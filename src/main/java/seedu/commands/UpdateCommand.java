@@ -13,6 +13,12 @@ public class UpdateCommand extends Command {
     public static final String COMMAND_WORD = "update";
     private final Api api;
 
+    /**
+     * Constructor for the {@link UpdateCommand} class.
+     *
+     * @param api {@link Api} instance to be used to fetch data.
+     * @param carparkList {@link CarparkList} instance to be updated.
+     */
     public UpdateCommand(Api api, CarparkList carparkList) {
         this.api = api;
         this.carparkList = carparkList;

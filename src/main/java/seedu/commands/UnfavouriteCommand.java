@@ -51,11 +51,11 @@ public class UnfavouriteCommand extends Command {
      * @throws NoCarparkFoundException If carpark ID is not in favourites.
      */
     public void setUnfavourite(String carparkId) throws FileWriteException, NoCarparkFoundException {
-        boolean containsSearchStr = Favourite.favouriteList.stream().anyMatch(carparkId::equalsIgnoreCase);
+        boolean containsSearchStr = Favourite.getFavouriteList().stream().anyMatch(carparkId::equalsIgnoreCase);
         if (!containsSearchStr) {
             throw new NoCarparkFoundException();
         }
-        Favourite.favouriteList.removeIf(value->value.equalsIgnoreCase(carparkId));
+        Favourite.getFavouriteList().removeIf(value->value.equalsIgnoreCase(carparkId));
         favourite.writeFavouriteList();
     }
 }
