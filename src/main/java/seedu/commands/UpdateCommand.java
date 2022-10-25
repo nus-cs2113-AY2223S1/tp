@@ -22,23 +22,20 @@ public class UpdateCommand extends Command {
      * @param api api that the programme has authenticated.
      * @return updated carpark list
      */
-    private CarparkList updateCarparkList(Api api) {
+    private String updateCarparkList(Api api) {
         try {
             //fetch api
             api.syncFetchData();
             //update json
-            CarparkList updatedCarparkList = new CarparkList(CommonFiles.LTA_FILE_PATH,
-                    CommonFiles.LTA_BACKUP_FILE_PATH);
-            return updatedCarparkList;
+            return "Update Successful.";
         } catch (ParkingException e) {
-            e.getMessage();
-            return null;
+            return "Update unsuccessful. " + e.getMessage();
         }
     }
 
     @Override
     public CommandResult execute() {
-        CarparkList result = updateCarparkList(api);
-        return new CommandResult(result.toString());
+        String message = updateCarparkList(api);
+        return new CommandResult(message);
     }
 }
