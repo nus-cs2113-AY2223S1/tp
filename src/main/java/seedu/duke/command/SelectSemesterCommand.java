@@ -1,5 +1,7 @@
 package seedu.duke.command;
 
+import seedu.duke.exceptions.YamomException;
+import seedu.duke.parser.Parser;
 import seedu.duke.utils.State;
 import seedu.duke.utils.Storage;
 import seedu.duke.utils.Ui;
@@ -9,30 +11,34 @@ import java.util.logging.Logger;
 
 public class SelectSemesterCommand extends Command {
     public static final String COMMAND_WORD = "semester";
-    private static int updatedSemester;
+    public static final String COMMAND_USAGE = "semester [SEMESTER_SELECTED]";
+    public static final String COMMAND_DESCRIPTION = "Select another semester "
+            + "to plan and organize timetable";
+
+    private static final String ERROR_WRONG_FORMAT = "Wrong format, should be: " + COMMAND_USAGE;
+
+    private int updatedSemester;
 
     private Logger logger;
 
     public static final String SUBSYSTEM_NAME = "SelectSemesterCommand";
 
-
-    public SelectSemesterCommand(String[] input) {
+    public SelectSemesterCommand(String[] input) throws YamomException {
         super(input);
-        this.updatedSemester = Integer.parseInt(input[1]);
+        Parser.selectSemesterCommandError(input, ERROR_WRONG_FORMAT);
 
+        this.updatedSemester = Integer.parseInt(input[1]);
     }
 
     @Override
     public void execute(State state, Ui ui, Storage storage) {
         assert state != null : "List of lessons should not be null";
         logger = Logger.getLogger(SUBSYSTEM_NAME);
-        logger.log(Level.INFO, "Loading select semester command");
+        logger.log(Level.FINE, "Loading select semester command");
 
         assert updatedSemester >= 1 && updatedSemester <= 4 : "semester selected should be in a valid range";
         logger = Logger.getLogger(SUBSYSTEM_NAME);
-        logger.log(Level.INFO, "Updating semester currently being planned");
-
-
+        logger.log(Level.FINE, "Updating semester currently being planned");
 
         state.setSemester(updatedSemester);
         ui.addMessage(getExecutionMessage());
@@ -64,5 +70,11 @@ public class SelectSemesterCommand extends Command {
         return outputMessage;
     }
 
+    public static String getCommandDescription() {
+        return COMMAND_WORD + DESCRIPTION_DELIMITER + COMMAND_DESCRIPTION;
+    }
 
+    public static String getUsage() {
+        return COMMAND_USAGE;
+    }
 }
