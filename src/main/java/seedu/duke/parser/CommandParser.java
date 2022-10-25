@@ -172,7 +172,7 @@ public class CommandParser {
      * @return True if user input is a valid view command. False otherwise.
      */
     private static boolean isValidViewCommand(String[] parameters) {
-        return parameters.length == TWO_PARAMETERS_LENGTH && isValidViewOptionIndex(parameters[VIEW_OPTION_INDEX]);
+        return parameters.length == TWO_PARAMETERS_LENGTH && isValidViewOption(parameters[VIEW_OPTION_INDEX]);
     }
 
     /**
@@ -181,7 +181,7 @@ public class CommandParser {
      * @param option User input option
      * @return True if user input option is a valid view command option. False otherwise.
      */
-    private static boolean isValidViewOptionIndex(String option) {
+    private static boolean isValidViewOption(String option) {
         return option.trim().equals(USER_LISTS_OPTION) || option.startsWith(UNIVERSITY_PREFIX)
                 || option.trim().equals(DELETE_HISTORY_OPTION) || option.trim().equals(TIMETABLES_OPTION);
     }

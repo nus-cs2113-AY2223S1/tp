@@ -1,0 +1,98 @@
+@startuml
+
+activate Duke
+
+Duke -> UserStorageParser : getSavedLists()
+activate UserStorageParser
+
+UserStorageParser --> Duke : userUniversityListManager :UserUniversityListManager
+deactivate UserStorageParser
+
+Duke -> UserStorageParser : getSavedTimeTables()
+activate UserStorageParser
+
+UserStorageParser --> Duke : timetableManager :TimetableManager
+deactivate UserStorageParser
+
+Duke -> Ui : getUserInput()
+activate Ui
+
+Ui --> Duke : userInput : String
+deactivate Ui
+
+Duke -> CommandParser : CommandParser.getUserCommand(userInput)
+activate CommandParser
+
+CommandParser -> CommandParser : parseUserCommand(userInput)
+activate CommandParser
+
+CommandParser --> CommandParser : userInputTokenized : String[]
+deactivate CommandParser
+
+alt create command
+
+    CommandParser -> CommandParser : isValidCreateCommand(userInputTokenized)
+    activate CommandParser
+
+    CommandParser -> CommandParser : isValidCommandOnUniversity(userInputTokenized)
+    activate CommandParser
+
+    CommandParser --> CommandParser : :boolean
+    deactivate CommandParser
+
+    CommandParser --> CommandParser : :boolean
+    deactivate CommandParser
+
+    opt is valid create command
+
+        create CreateCommand
+        CommandParser -> CreateCommand : CreateCommand(userInputTokenized, CommandType.CREATE)
+        activate CreateCommand
+
+        CreateCommand --> CommandParser : newCreateCommand :CreateCommand
+        deactivate CreateCommand
+    end
+
+else other command
+
+end
+
+CommandParser --> Duke : newUserCommand : Command
+deactivate CommandParser
+
+alt add command
+
+Duke -> Duke : executeCreateCommand(userUniversityListManager, timetableManager, newUserCommand)
+activate Duke
+
+    Duke -> CreateCommand : getUniversityName()
+    activate CreateCommand
+
+    CreateCommand --> Duke : universityName :String
+    deactivate CreateCommand
+
+    Duke -> UserUniversityListManager : createList(universityName)
+    activate UserUniversityListManager
+
+    deactivate UserUniversityListManager
+
+    Duke -> TimetableManager : createTimetable(universityName)
+
+    Duke -> UserStorageParser : storeCreatedLists(userUniversityListManager)
+    activate UserStorageParser
+
+    deactivate UserStorageParser
+
+    Duke -> UserStorageParser : storeTimetable(timetableManager)
+    activate UserStorageParser
+
+    deactivate UserStorageParser
+
+else other command
+deactivate Duke
+
+end
+
+deactivate Duke
+
+@enduml
