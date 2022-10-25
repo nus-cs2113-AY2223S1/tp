@@ -9,6 +9,9 @@ import seedu.duke.model.Timetable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
+import java.lang.StringBuilder;
 
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -25,6 +28,9 @@ public class GetModuleCommand extends Command {
     public static final String MISSING_MODULE_CODE = "Please enter a module code!";
     public static final String MODULE_NOT_FOUND = "Module not found! Please enter a valid module code! Try searching if you do not remember the exact module code.";
     // private static final String ERROR_WRONG_FORMAT = "Wrong format, should be: " + COMMAND_USAGE;
+
+    private static final int DESCRIPTION_SIZE = 80;
+    private static final String DESCRIPTION_INDENTATION = System.lineSeparator() + "\t\t\t\t\t";
 
     public GetModuleCommand(String[] input) throws YamomException {
         super(input);
@@ -46,7 +52,8 @@ public class GetModuleCommand extends Command {
         // if field is empty, display null in ui
         ui.addMessage("Module               : " + (module.moduleCode.isEmpty() ? "Nil" : module.moduleCode));
         ui.addMessage("Module Name          : " + (module.title.isEmpty() ? "Nil" : module.title));
-        ui.addMessage("Module Description   : " + (module.description.isEmpty() ? "Nil" : module.description));
+        ui.addMessage("Module Description   : " + (module.description.isEmpty() ? "Nil"
+                : splitLongDescription(module.description)));
         ui.addMessage("Module Credit        : " + (module.moduleCredit == 0 ? "0" : module.moduleCredit));
         ui.addMessage("Department           : " + (module.department.isEmpty() ? "Nil" : module.department));
         ui.addMessage("Faculty              : " + (module.faculty.isEmpty() ? "Nil" : module.faculty));
@@ -59,7 +66,9 @@ public class GetModuleCommand extends Command {
         ui.addMessage("Preclusion           : " + (module.preclusion.isEmpty() ? "Nil" : module.preclusion));
         ui.addMessage("Corequisite          : " + (module.corequisite.isEmpty() ? "Nil" : module.corequisite));
 
+        ui.displayUi();
         ui.displayDivider();
+
         if (isModuleOfferedInCurrentSem(module, state)) {
             List<Pair<Module, RawLesson>> lessons = new ArrayList<>();
             Pair<Module, RawLesson> lesson;
@@ -90,6 +99,21 @@ public class GetModuleCommand extends Command {
         // check if module exists in module list
         List<Module> moduleList = Module.getAll();
         return moduleList.contains(module);
+    }
+
+    //adapted from https://stackoverflow.com/questions/25853393
+    private String splitLongDescription(String longDescription) {
+        Pattern pattern = Pattern.compile("\\G\\s*(.{1," + DESCRIPTION_SIZE + "})(?=\\s|$)", Pattern.DOTALL);
+        Matcher matcher = pattern.matcher(longDescription);
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        while (matcher.find()) {
+            stringBuilder.append(matcher.group());
+            stringBuilder.append(DESCRIPTION_INDENTATION);
+        }
+
+        return stringBuilder.toString();
     }
 
     @Override

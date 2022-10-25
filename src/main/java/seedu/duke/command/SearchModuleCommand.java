@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
+import seedu.duke.exceptions.YamomException;
 import seedu.duke.utils.State;
 import seedu.duke.utils.Storage;
 import seedu.duke.utils.Ui;
@@ -7,17 +8,17 @@ import seedu.duke.exceptions.YamomException;
 import seedu.duke.model.Module;
 import seedu.duke.parser.Parser;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class SearchModuleCommand extends Command {
     public static final String COMMAND_WORD = "search";
-    public static final String COMMAND_USAGE = "search /code [SIMILAR_MODULE_CODE] /title [SIMILAR_MODULE_TITLE] /level <level> /sem <semester>";
-    public static final String COMMAND_DESCRIPTION = "List out all modules that contains matching input search fields"
-            + System.lineSeparator() + "\t * Either the module code or title has to be present.";
+    public static final String COMMAND_USAGE = "search (/code [MODULE_CODE] | /title [KEYWORD])";
+    public static final String COMMAND_DESCRIPTION = "List out all modules that contains a search term"
+            + System.lineSeparator() + "\t * the search term can either be module code or a keyword in module title.";
 
     // private String toSearchModuleCode;
     private Map<String, String> params;
@@ -33,6 +34,7 @@ public class SearchModuleCommand extends Command {
     public SearchModuleCommand(String input) throws YamomException {
         super(input.split("\\s"));
         params = Parser.parseParams(input);
+
         toSearchModuleCode = params.getOrDefault("code", null);
         toSearchModuleTitle = params.getOrDefault("title", null);
         toSearchLevel = params.getOrDefault("level", null);
@@ -179,6 +181,17 @@ public class SearchModuleCommand extends Command {
         return searchResult;
     }
 
+    // TODO: change to functional stream if possible
+    private boolean isAllNull(String... strings) {
+
+        for (String string : strings) {
+            if (string != null) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     @Override
     public boolean isExit() {
         return false;
@@ -196,4 +209,5 @@ public class SearchModuleCommand extends Command {
     public static String getUsage() {
         return COMMAND_USAGE;
     }
+
 }
