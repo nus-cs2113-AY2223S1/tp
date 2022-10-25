@@ -1,0 +1,38 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autoactivate on
+
+'Duke -> ui: input()
+'User --> ui: user input
+'Duke <-- ui: user input
+
+Duke -> viewCommand: execute()
+viewCommand -> parser: getArgumentList(arguments: String)
+return argumentList: String[]
+viewCommand -> parser: getClassType(argumentList: String[])
+return viewType: String
+
+alt biometrics
+
+else food
+
+else exercise
+
+else weight
+
+else strength
+
+else cardio
+
+else bmi
+
+else maintenance
+
+else all
+    ref over viewCommand: viewAll
+else invalid viewType
+
+end
+
+@enduml

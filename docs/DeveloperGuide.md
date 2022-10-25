@@ -57,6 +57,15 @@ Adding a new record
 Adding weight and fat record
 ![AddWeightAndFat.png](UmlDiagrams/AddWeightAndFat.png)
 
+Adding food record
+![AddFood.png](UmlDiagrams/AddFood.png)
+
+Viewing historical records
+![View.png](UmlDiagrams/View.png)
+
+Viewing all historical records sorted by date
+![ViewAll.png](UmlDiagrams/ViewAll.png)
+
 ## Product scope
 
 ### Target user profile
