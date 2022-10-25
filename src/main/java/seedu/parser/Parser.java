@@ -10,6 +10,7 @@ import seedu.commands.Command;
 import seedu.commands.ExitCommand;
 import seedu.commands.FavouriteCommand;
 import seedu.commands.FindCommand;
+import seedu.commands.HelpCommand;
 import seedu.commands.InvalidCommand;
 import seedu.commands.ListCommand;
 import seedu.commands.SearchCommand;
@@ -84,6 +85,8 @@ public class Parser {
                 return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.UNFAVOURITE_FORMAT);
             }
             return prepareUnfavourite(arguments);
+        case HelpCommand.COMMAND_WORD:
+            return new HelpCommand();
         default:
             return new InvalidCommand("Invalid Command");
         }

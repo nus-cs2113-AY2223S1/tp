@@ -33,5 +33,6 @@ public class CommonData {
     public static final String UPDATE_FORMAT = "`update` \t: To fetch the latest data from LTA.";
     public static final String LIST_FORMAT = "`list` \t: List the carparks and its details.";
     public static final String EXIT_FORMAT = "`exit` \t: To quit parKING.";
+    public static final String HELP_FORMAT = "`help` \t: To display all possible commands.";
 
 }
