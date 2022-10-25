@@ -1,5 +1,7 @@
 package computercomponentchooser.components;
 
+import computercomponentchooser.exceptions.NegativeNumberException;
+
 /**
  * Represents the power supply(PSU) in the computer build.
  */
@@ -11,8 +13,15 @@ public class PowerSupply extends Component {
      * @param name the name of the power supply
      * @param price the price of the power supply
      * @param power the total power supplied to the computer
+     * @throws NumberFormatException If the user input is not a number.
+     * @throws NegativeNumberException If the user input is a negative number.
      */
-    public PowerSupply(String name, String price, String power) {
+    public PowerSupply(String name, String price, String power) throws NegativeNumberException, NumberFormatException {
+        double priceDouble = Double.parseDouble(price);
+        int powerInt = Integer.parseInt(power);
+        if (priceDouble < 0 || powerInt < 0) {
+            throw new NegativeNumberException();
+        }
         this.name = name;
         this.price = price;
         this.power = power;

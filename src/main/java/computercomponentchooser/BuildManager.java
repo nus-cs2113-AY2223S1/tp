@@ -40,11 +40,10 @@ public class BuildManager {
      * Deletes a build from the buildManager.
      *
      * @param name The name of the build to be deleted.
-     * @param build The build to be deleted.
      * @throws UnlistedBuildException If the build does not exist.
      */
-    public void deleteBuild(String name, Build build) throws UnlistedBuildException {
-        if (!builds.containsKey(build.getName())) {
+    public void deleteBuild(String name) throws UnlistedBuildException {
+        if (!builds.containsKey(name)) {
             throw new UnlistedBuildException();
         }
         builds.remove(name);
@@ -167,6 +166,7 @@ public class BuildManager {
      */
     private int filterPrice(String lowestNumber, String highestNumber, int i) throws NumberFormatException,
             NegativeNumberException {
+        assert i >= 0;
         for (String name : builds.keySet()) {
             float lowestNum = Float.parseFloat(lowestNumber);
             float highestNum = Float.parseFloat(highestNumber);
@@ -201,6 +201,7 @@ public class BuildManager {
      */
     private int filterPower(String lowestNumber, String highestNumber, int i) throws NumberFormatException,
             NegativeNumberException {
+        assert i >= 0;
         for (String name : builds.keySet()) {
             int lowestNum = Integer.parseInt(lowestNumber);
             int highestNum = Integer.parseInt(highestNumber);
@@ -228,6 +229,7 @@ public class BuildManager {
      * @return The number of builds that meet the user specified requirements.
      */
     private int filterCompatibility(int i) {
+        assert i >= 0;
         for (String name : builds.keySet()) {
             Build build = builds.get(name);
             if (build.getCompatibility().equals("Compatible")) {
@@ -257,9 +259,9 @@ public class BuildManager {
      * Finds the build with the specified name and returns a boolean value to indicate if the build is found.
      *
      * @param buildName The name of the build to be deleted.
-     * @return True if the build is deleted, false if the build is not found.
+     * @return True if the build is found, false if the build is not found.
      */
-    public static boolean doesBuildExist(String buildName) {
+    public boolean doesBuildExist(String buildName) {
         return builds.containsKey(buildName);
     }
 }

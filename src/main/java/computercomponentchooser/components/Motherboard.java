@@ -1,5 +1,7 @@
 package computercomponentchooser.components;
 
+import computercomponentchooser.exceptions.NegativeNumberException;
+
 /**
  * Represents the motherboard of the computer build.
  */
@@ -35,9 +37,18 @@ public class Motherboard extends Component {
      * @param formFactor the size of the motherboard
      * @param memorySlots the number of RAM slots on the motherboard
      * @param gpuSlots the number of PCI-E slots on the motherboard
+     * @throws NumberFormatException If the user input is not a number.
+     * @throws NegativeNumberException If the user input is a negative number.
      */
     public Motherboard(String name, String price, String power, String socket, String formFactor, String memorySlots,
-                       String gpuSlots) {
+                       String gpuSlots) throws NegativeNumberException, NumberFormatException {
+        double priceDouble = Double.parseDouble(price);
+        int powerInt = Integer.parseInt(power);
+        int memorySlotsInt = Integer.parseInt(memorySlots);
+        int gpuSlotsInt = Integer.parseInt(gpuSlots);
+        if (priceDouble < 0 || powerInt < 0 || memorySlotsInt < 0 || gpuSlotsInt < 0) {
+            throw new NegativeNumberException();
+        }
         this.name = name;
         this.price = price;
         this.socket = socket;

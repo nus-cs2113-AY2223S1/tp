@@ -1,0 +1,42 @@
+@startuml
+'https://plantuml.com/class-diagram
+skinparam classAttributeIconSize 0
+
+class Build {
+    +String:name
+    addComponent()
+    deleteComponent()
+    getComponent()
+    toString()
+    toCsv()
+    getAllComponents()
+    getTotalCost()
+    getTotalPower()
+    checkPowerSupply()
+    checkSocket()
+    checkFormFactor()
+    checkExpansionSlots()
+    checkGpuSlot()
+    checkMemorySlot()
+    getCompatibility()
+    getBuildInfo()
+    getCompatibilityInfo()
+}
+
+class LinkedHashMap2D {
+    addElement()
+    getElement()
+    removeElement()
+    getNameList()
+    GetTypeList()
+    GetNamesOfTypeList()
+}
+
+class Component {
+}
+
+
+Build *-- "1" LinkedHashMap2D
+LinkedHashMap2D *-- "many" Component
+
+@enduml

@@ -1,7 +1,6 @@
 motherboard/ASUS ROG/600/130/lga1511/Full ATX/4/4
-case/Cooler Master/400/0/full ATX/2
+case/Cooler Master/400/0/full ATX/2/3
 cpu/intel 10990x/1200/80/lga1511/3.8
-cooler/noctuna/300/60/m4/1000/20
 drive/Samsung EVO/500/35/500/ssd
 drive/Samsung EVO 2/500/35/500/ssd
 drive/Samsung EVO 3/500/35/500/ssd

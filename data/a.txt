@@ -1,0 +1,8 @@
+case/airflow/100.50/5/atx/3
+cooler/noctua/250/25/am4/2500/5
+other/mouse/20/1
+powersupply/corsair/350/850
+cpu/ryzen 9 5900X/550/105/am4/3.7
+drive/ssd/150/5/1/ssd
+monitor/prism/200/45/144/1/1080
+motherboard/x570/300/25/am4/atx/2/2

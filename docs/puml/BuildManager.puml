@@ -1,0 +1,23 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+skinparam classAttributeIconSize 0
+class BuildManager {
+    -builds: HashMap<String, Build>
+
+    +BuildManager()
+    +addBuild(): void
+    +deleteBuild(): void
+    +getBuild(): Build
+    +getBuilds(): HashMap<String, Build>
+    +size(): int
+    +findBuilds() : void
+    +filterBuilds() : void
+    +doesBuildExist() : boolean
+}
+
+class Build {
+}
+
+BuildManager --- Build
+@enduml

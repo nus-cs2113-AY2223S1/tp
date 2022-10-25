@@ -1,5 +1,7 @@
 package computercomponentchooser.components;
 
+import computercomponentchooser.exceptions.NegativeNumberException;
+
 /**
  * Represents other computer parts such as mouse, keyboard etc.
  */
@@ -11,8 +13,15 @@ public class Other extends Component {
      * @param name the name of the other component
      * @param price the price of the other component
      * @param power the power consumption of the other component
+     * @throws NumberFormatException If the user input is not a number.
+     * @throws NegativeNumberException If the user input is a negative number.
      */
-    public Other(String name, String price, String power) {
+    public Other(String name, String price, String power) throws NegativeNumberException, NumberFormatException {
+        double priceDouble = Double.parseDouble(price);
+        int powerInt = Integer.parseInt(power);
+        if (priceDouble < 0 || powerInt < 0) {
+            throw new NegativeNumberException();
+        }
         this.name = name;
         this.price = price;
         this.power = power;

@@ -156,10 +156,10 @@ public class Build {
      *
      * @return The total cost of the build.
      */
-    public float getTotalCost() {
-        float totalCost = 0;
+    public double getTotalCost() {
+        double totalCost = 0;
         for (Component component : getAllComponents()) {
-            totalCost += Float.parseFloat(component.getPrice());
+            totalCost += Double.parseDouble(component.getPrice());
         }
         return totalCost;
     }
@@ -205,15 +205,16 @@ public class Build {
      */
     public boolean checkSocket() {
         String socket = "";
-        Boolean socketCompatible = true;
+        boolean socketCompatible = false;
         for (Component component : getAllComponents()) {
-            if (component.getType().equals("cpu")) {
-                socket = ((Cpu) component).getSocket();
+            if (component.getType().equals("motherboard")) {
+                socketCompatible = true;
+                socket = ((Motherboard) component).getSocket();
             }
         }
         for (Component component : getAllComponents()) {
-            if (component.getType().equals("motherboard")) {
-                if (!((Motherboard) component).getSocket().equals(socket)) {
+            if (component.getType().equals("cpu")) {
+                if (!((Cpu) component).getSocket().equals(socket)) {
                     socketCompatible = false;
                 }
             }
@@ -363,5 +364,20 @@ public class Build {
         sb.append("Expansion slots: ").append(checkExpansionSlots()).append(System.lineSeparator());
         sb.append("Form factor: ").append(checkFormFactor()).append(System.lineSeparator());
         return sb.toString();
+    }
+
+    /**
+     * Finds the component with the specified name and returns a boolean value to indicate if the component is found.
+     *
+     * @param name The name of the component.
+     * @return True if the build is found, false if the build is not found.
+     */
+    public boolean doesComponentExist(String name) {
+        for (Component component : getAllComponents()) {
+            if (component.getName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
