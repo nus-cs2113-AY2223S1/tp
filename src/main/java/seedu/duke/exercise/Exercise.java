@@ -1,17 +1,21 @@
 package seedu.duke.exercise;
 
 public class Exercise {
+    private String date;
+    private double time;
     private String exerciseName;
     private int repetition;
     private int caloriesBurnt;
     private boolean isDone;
 
 
-    public Exercise(String exerciseName, int repetitions, int caloriesBurnt) {
+    public Exercise(String exerciseName, int repetitions, String date) {
         this.exerciseName = exerciseName;
         this.repetition = repetitions;
-        this.caloriesBurnt = caloriesBurnt;
+        this.time = 0.0;
+        this.caloriesBurnt = 0;
         this.isDone = false;
+        this.date = date;
     }
 
     public String getExerciseName() {
@@ -34,8 +38,12 @@ public class Exercise {
         return 1;
     }
 
-    public int getTime() {
+    public double getDistance() {
         return 1;
+    }
+
+    public String getDate() {
+        return date;
     }
 
     public String getTaskStatus() {
@@ -43,6 +51,10 @@ public class Exercise {
             return "[X]";
         }
         return "[ ]";
+    }
+
+    public String getTime() {
+        return String.format("%.1f", time);
     }
 
     public int getTaskStatusInNumber() {
@@ -56,6 +68,14 @@ public class Exercise {
         this.isDone = isDone;
     }
 
+    public void setCaloriesBurnt(int caloriesBurnt) {
+        this.caloriesBurnt = caloriesBurnt;
+    }
+
+    public void setTime(double time) {
+        this.time = time;
+    }
+
     @Override
     public String toString() {
         return "Exercise: " + exerciseName + System.lineSeparator()
@@ -67,5 +87,9 @@ public class Exercise {
     public String saveExercise() {
         return "exercise /" + getExerciseName() + " /"
                 + getSet() + " /" + getRepetition() + " /" + getCaloriesBurnt() + " | " + getTaskStatusInNumber();
+    }
+
+    public int getWeight() {
+        return 0;
     }
 }

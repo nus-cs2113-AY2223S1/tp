@@ -12,6 +12,8 @@ import seedu.duke.command.RemoveCommand;
 import seedu.duke.command.SetCommand;
 import seedu.duke.command.ViewCommand;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -19,13 +21,13 @@ import java.util.logging.Logger;
 
 public class Parser {
 
-    private static Logger logger = Logger.getLogger("Parser");
+    private static final Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     public static Command parse(String input) {
         String userCommand = getUserCommand(input);
-        logger.log(Level.FINE, "command: " + userCommand);
+        LOGGER.info("command: " + userCommand);
         String arguments = getArgumentSubString(input, userCommand);
-        logger.log(Level.FINE, "arguments:" + arguments);
+        LOGGER.info("arguments:" + arguments);
         switch (userCommand) {
         case "greet":
             return new GreetCommand();
@@ -67,5 +69,11 @@ public class Parser {
 
     public static String getClassType(String[] argumentList) {
         return argumentList[0];
+    }
+
+    public static String getDateNoDateTracker(String input) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        LocalDate localDate = LocalDate.parse(input, formatter);
+        return formatter.format(localDate);
     }
 }

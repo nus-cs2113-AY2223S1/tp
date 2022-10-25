@@ -1,8 +1,11 @@
 package seedu.duke.exercise;
 
+
 import seedu.duke.exception.IllegalValueException;
 
 import java.util.ArrayList;
+
+import static seedu.duke.command.DateCommand.sortDateForExercise;
 
 public class ExerciseList {
     private ArrayList<Exercise> currentExerciseList;
@@ -33,10 +36,12 @@ public class ExerciseList {
     }
 
     public ArrayList<Exercise> getCurrentExerciseList() {
+        sortDateForExercise(currentExerciseList);
         return currentExerciseList;
     }
 
     public ArrayList<Exercise> getCompletedExerciseList() {
+        sortDateForExercise(completedExerciseList);
         return completedExerciseList;
     }
 
@@ -48,8 +53,10 @@ public class ExerciseList {
         return completedExerciseList.size();
     }
 
-    public void markDone(int index) throws IllegalValueException {
+    public void markDone(int index, double time, int calories) throws IllegalValueException {
         Exercise exercise = getCurrentExercise(index);
+        exercise.setTime(time);
+        exercise.setCaloriesBurnt(calories);
         exercise.setDone(true);
         currentExerciseList.remove(index);
         completedExerciseList.add(exercise);
@@ -57,6 +64,8 @@ public class ExerciseList {
 
     public void markUndone(int index) throws IllegalValueException {
         Exercise exercise = getCompletedExercise(index);
+        exercise.setTime(0);
+        exercise.setCaloriesBurnt(0);
         exercise.setDone(false);
         completedExerciseList.remove(index);
         currentExerciseList.add(exercise);

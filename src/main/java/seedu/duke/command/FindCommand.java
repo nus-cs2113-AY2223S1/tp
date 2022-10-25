@@ -40,10 +40,37 @@ public class FindCommand extends Command {
         case "food":
             findFood(argumentList);
             break;
+        case "date_e":
+            findDateExercise(argumentList);
+            break;
+        case "date_f":
+            findDateFood(argumentList);
+            break;
         default:
             handleInvalidFindType();
         }
     }
+
+    private void findDateExercise(String[] argumentList) throws IllegalValueException {
+        handleInvalidFindDateCommand(argumentList);
+        ArrayList<Exercise> filteredDateList = getFilteredDateList(argumentList);
+        ui.output("", "Here are the exercises in your list matching this date:");
+        ui.outputExerciseList(filteredDateList);
+    }
+
+    private void findDateFood(String[] argumentList) throws IllegalValueException {
+        handleInvalidFindDateCommand(argumentList);
+        ArrayList<Food> filteredFoodDateList = getFilteredFoodDateList(argumentList);
+        ui.output("", "Here are the food records in your list matching this date:");
+        ui.outputFoodList(filteredFoodDateList);
+    }
+
+    private void handleInvalidFindDateCommand(String[] argumentList) throws IllegalValueException {
+        if (argumentList.length != 2) {
+            throw new IllegalValueException("Invalid find date command");
+        }
+    }
+
 
     private void findCardio(String[] argumentList) throws IllegalValueException {
         handleInvalidFindCardioCommand(argumentList);
@@ -92,6 +119,14 @@ public class FindCommand extends Command {
         return filteredFoodList;
     }
 
+    private ArrayList<Food> getFilteredFoodDateList(String[] argumentList) {
+        ArrayList<Food> filteredFoodDateList = (ArrayList<Food>) foodList.getFoodList()
+                .stream().filter(Food.class::isInstance)
+                .filter(f -> f.getDate().contains(argumentList[1]))
+                .collect(Collectors.toList());
+        return filteredFoodDateList;
+    }
+
 
     private ArrayList<Exercise> getFilteredCardioExerciseList(String[] argumentList) {
         ArrayList<Exercise> filteredExerciseList = (ArrayList<Exercise>) exerciseList.getCompletedExerciseList()
@@ -116,6 +151,19 @@ public class FindCommand extends Command {
                 .collect(Collectors.toList()));
         return filteredExerciseList;
     }
+
+    private ArrayList<Exercise> getFilteredDateList(String[] argumentList) {
+        ArrayList<Exercise> filteredExerciseList = (ArrayList<Exercise>) exerciseList.getCompletedExerciseList()
+                .stream().filter(StrengthExercise.class::isInstance)
+                .filter(e -> e.getDate().contains(argumentList[1]))
+                .collect(Collectors.toList());
+        filteredExerciseList.addAll(exerciseList.getCurrentExerciseList()
+                .stream().filter(StrengthExercise.class::isInstance)
+                .filter(e -> e.getDate().contains(argumentList[1]))
+                .collect(Collectors.toList()));
+        return filteredExerciseList;
+    }
+
 
     private void handleInvalidFindType() throws IllegalValueException {
         throw new IllegalValueException("Invalid find command");

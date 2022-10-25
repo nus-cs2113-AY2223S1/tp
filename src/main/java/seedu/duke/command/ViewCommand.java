@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
+import seedu.duke.Calculator;
 import seedu.duke.Parser;
 import seedu.duke.Ui;
 import seedu.duke.biometrics.Biometrics;
@@ -20,6 +21,7 @@ public class ViewCommand extends Command {
 
     private Ui ui;
     private Biometrics biometrics;
+    private Calculator calculator;
     private String arguments;
     private ExerciseList exerciseList;
 
@@ -52,9 +54,29 @@ public class ViewCommand extends Command {
         case ("cardio"):
             viewCardioExercise(argumentList);
             break;
+        case ("bmi"):
+            viewBmi();
+            break;
+        case ("maintenance"):
+            viewMaintenanceCalories();
+            break;
         default:
             handleInvalidViewType();
         }
+    }
+
+    private void viewMaintenanceCalories() {
+        ui.line();
+        ui.output(calculator.getActivityStatus());
+        ui.output("Thus your maintenance calories is " + calculator.getIdealMaintenanceCalories());
+        ui.line();
+    }
+
+    private void viewBmi() {
+        ui.line();
+        ui.output("Your current BMI is :" + calculator.getBmi());
+        ui.output(calculator.getBmiStatus());
+        ui.line();
     }
 
 
@@ -69,9 +91,7 @@ public class ViewCommand extends Command {
     private void viewWeight() {
         ui.output(biometrics.weightAndFatList.getSize() + " records of weight and fat percentage:");
         ArrayList<WeightAndFat> weightAndFatList = biometrics.weightAndFatList.getWeightAndFatList();
-        for (WeightAndFat weightAndFat : weightAndFatList) {
-            ui.output(weightAndFat.listWeightAndFat(weightAndFatList));
-        }
+        ui.outputWeightList(weightAndFatList);
     }
 
     private void viewFood(String[] argumentList) throws IllegalValueException {
