@@ -135,20 +135,16 @@ public class ListCommand extends ListAndStatsCommand {
 
         // Checks if there are any error in the tag combinations related to DateIntervals
         parseDateIntervalsTags();
-        listTransactions(transactions, type, category, date);
+        listTransactions(transactions);
     }
 
     /**
      * List all or some transactions based on selection.
      *
      * @param transactions An instance of the TransactionList class.
-     * @param type         The type of transaction.
-     * @param category     A category for the transaction.
-     * @param date         Date of the transaction with format in "yyyyMMdd".
      * @throws MoolahException If any type of exception has been caught within the function calls.
      */
-    private void listTransactions(TransactionList transactions, String type, String category, LocalDate date)
-            throws MoolahException {
+    private void listTransactions(TransactionList transactions) throws MoolahException {
         ArrayList<Transaction> timeTransactions = getTimeTransactions(transactions);
         String transactionsList = transactions.listTransactions(timeTransactions, type, category, date);
 

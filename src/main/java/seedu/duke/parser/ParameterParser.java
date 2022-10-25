@@ -71,12 +71,11 @@ public class ParameterParser {
     private static final int SMALLEST_POSITIVE_INTEGER = 0;
     private static final int JANUARY = 1;
     private static final int DECEMBER = 12;
-
     private static final String CLASS_TYPE_EXPENSE = "seedu.duke.data.transaction.Expense";
     private static final String CLASS_TYPE_INCOME = "seedu.duke.data.transaction.Income";
-    private static final String CATEGORIES = "categories";
-    private static final String TIME = "time";
-
+    private static final String CATEGORICAL_SAVINGS = "categorical_savings";
+    private static final String MONTHLY_EXPENDITURE = "monthly_expenditure";
+    private static final String TIME_INSIGHTS = "time_insights";
     private static final String WEEKS = "weeks";
     private static final String MONTHS = "months";
 
@@ -554,12 +553,12 @@ public class ParameterParser {
      */
     public static String parseStatsTypeTag(String parameter) throws StatsInvalidTypeException {
         switch (parameter) {
-        case CATEGORIES:
-            return CATEGORIES;
-        case MONTHS:
-            return MONTHS;
-        case TIME:
-            return TIME;
+        case CATEGORICAL_SAVINGS:
+            return CATEGORICAL_SAVINGS;
+        case MONTHLY_EXPENDITURE:
+            return MONTHLY_EXPENDITURE;
+        case TIME_INSIGHTS:
+            return TIME_INSIGHTS;
         default:
             parserLogger.log(Level.WARNING, "An invalid statistic type error is caught for the given parameter: "
                     + parameter);
