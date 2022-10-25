@@ -334,7 +334,22 @@ Step 3: Since there is no parameter to check for list categories command, it wil
 
 Step 4: The ```executeCommand()``` of ExitCommand returns false, so Duke will recognize this command is ```isLastCommand``` and exit the ```while``` loop and stop the program.
 
-**...To be updated(Find item)**
+### 4.2.8. Find Items by Keyword
+
+>This feature allow users to find items through the command ```find-item```.
+> 
+> Given below is an example usage scenario and how the command mechanism behaves at each step.
+
+Step 1: The user types in the command ```find-items /k [keyword]``` in the command line. The CommandParser class checks if the command is valid through the createCommand() method.
+
+Step 2: Duke will receive the ```FindItemsCommand``` and execute it.
+
+Step 3: FindItemsCommand will check for the delimiter "/k". If it is not present, an exception is thrown. Else the command is executed.
+
+Step 4: The ItemList is iterated through to check for Items that match the provided keyword. Matched items are appended to a List which is returned and then printed by Ui.printResponse.
+
+The following sequence diagram models the operation:
+![FindItemByKeywordSequence](images/FindItemByKeywordSequence.png)
 
 ### 4.3. Transaction-related Features
 
@@ -451,6 +466,7 @@ Step 6: Lastly, information about the updated transaction is printed to the user
 
 The following sequence diagram models the operation:
 ![updateTransactionSequence](images/UpdateTransactionSequence.png)
+
 
 **...To be updated(List, Update transaction)**
 

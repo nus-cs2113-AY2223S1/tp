@@ -1,0 +1,34 @@
+@startuml
+hide footbox
+
+Actor User
+"User" -> ":Duke": "find-item..."
+activate ":Duke"
+":Duke" -> ":CommandParser": createCommand()
+activate ":CommandParser"
+":CommandParser" -> ":FindItemCommand"**: new
+activate ":FindItemCommand"
+return
+":CommandParser" --> ":Duke"
+deactivate
+
+":Duke" -> ":FindItemCommand" : executeCommand()
+activate ":FindItemCommand"
+":FindItemCommand" -> ":FindItemCommand" : getArgsFindItemCommand
+activate ":FindItemCommand"
+":FindItemCommand" -> ":ItemList" : getItemsByKeyword()
+deactivate ":FindItemCommand"
+activate ":ItemList"
+":ItemList" -> ":returnList" : new ItemList()
+activate ":returnList"
+    loop for (Item item : this.itemList)
+        alt (item.getName()).toLowerCase().contains(keyword.toLowerCase())
+            ":ItemList" -> ":returnList" : Item
+        end
+    end
+":returnList" --> Ui
+deactivate ":returnList"
+Ui --> User: printResponse(returnList.toString());
+
+
+@enduml
