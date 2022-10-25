@@ -47,17 +47,32 @@ public class AccountUi {
         BasicUi.showStandardOutput(INDENTATION + MESSAGE);
     }
 
+    public static void showConvertAllResult(CurrencyStructure currency) {
+        final String MESSAGE = "You have successfully convert all currencies to " + currency.getAbbrName();
+        BasicUi.showStandardOutput(INDENTATION + MESSAGE);
+    }
+
+    public static void showExchangeResult(CurrencyStructure oldCurrency, double oldAmount,
+            CurrencyStructure newCurrency, double newAmount) {
+        String formattedOldAmount = String.format("%.2f", oldAmount);
+        String formattedNewAmount = String.format("%.2f", newAmount);
+        final String MESSAGE = "You have successfully convert " + oldCurrency.getAbbrName() + " " + formattedOldAmount
+                + " " + oldCurrency.getSymbol() + " to " + newCurrency.getAbbrName() + " " + formattedNewAmount + " "
+                + newCurrency.getSymbol();
+        BasicUi.showStandardOutput(INDENTATION + MESSAGE);
+    }
+
     public static void showWalletDetails(String username, CurrencyStructure defaultCurrency, List<Deposit> deposits) {
         List<String> messages = new ArrayList<>();
         String message = "Your username: " + username;
         messages.add(message);
         message = "Your default currency: " + defaultCurrency.getAbbrName();
         messages.add(message);
-        for (Deposit deposit: deposits) {
+        for (Deposit deposit : deposits) {
             String formattedBalance = String.format("%.2f", deposit.getBalance());
             CurrencyStructure currency = deposit.getCurrency();
             message = "Your balance in " + currency.getAbbrName() + " is: " + formattedBalance
-                + " " + currency.getSymbol();
+                    + " " + currency.getSymbol();
             messages.add(message);
         }
         String output = BasicUi.assembleMultipleLinesOutput(messages.toArray(new String[messages.size()]));
@@ -91,9 +106,9 @@ public class AccountUi {
 
     public static void listCommands() {
         final String MESSAGE = "Your available commands are : \n"
-                + INDENTATION + "1) balance" + INDENTATION + "2) detail" + INDENTATION + "3) save" + INDENTATION
-                + "4) withdraw" + INDENTATION + "5) delete" + INDENTATION + "6) exit" + INDENTATION + "7) list"
-                + INDENTATION + "8) transfer" + "9) currencies";
+                + INDENTATION + "1) help" + INDENTATION + "2) balance" + INDENTATION + "3) detail" + INDENTATION
+                + "4) save" + INDENTATION + "5) withdraw" + INDENTATION + "6) delete" + INDENTATION + "7) exit"
+                + INDENTATION + "8) list" + INDENTATION + "9) transfer" + INDENTATION + "10) currencies";
         BasicUi.showStandardOutput(INDENTATION + MESSAGE);
     }
 

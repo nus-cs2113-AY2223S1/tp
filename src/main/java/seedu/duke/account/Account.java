@@ -74,17 +74,25 @@ public class Account {
                     e.handleException();
                 }
             }
-            else if (splits.length == 2){
+            else if (splits.length == 2) {
                 String commandType = splits[0];
-                String commandArg = wallet.getDefaultCurrency().getAbbrName() + " " + splits[1];
+                String commandArg = splits[1];
                 try {
                     switch (commandType) {
+                        case "setdefault":
+                            setDefaultCurrency(commandArg);
+                          AccountHistoryFile.updateLoginAccount(wallet.getUserName(), loginTime, in);
+                            break;
+                        case "convertall":
+                            MoneyCommand.convertAllCommand(wallet,commandArg);
+                            AccountHistoryFile.updateLoginAccount(wallet.getUserName(), loginTime, in);
+                            break;
                         case "save":
                             MoneyCommand.saveCommand(wallet,commandArg);
                             AccountHistoryFile.updateLoginAccount(wallet.getUserName(), loginTime, in);
                             break;
                         case "withdraw":
-                            MoneyCommand.withdrawCommand(wallet, commandArg);
+                            MoneyCommand.withdrawCommand(wallet,commandArg);
                             AccountHistoryFile.updateLoginAccount(wallet.getUserName(), loginTime, in);
                             break;
                         default:
@@ -106,6 +114,7 @@ public class Account {
                 String commandArg = splits[1] + " " + splits[2];
                 try {
                     switch (commandType) {
+
                         case "save":
                             MoneyCommand.saveCommand(wallet,commandArg);
                             AccountHistoryFile.updateLoginAccount(wallet.getUserName(), loginTime, in);
@@ -129,11 +138,18 @@ public class Account {
                 String transferCurrency = splits[3];
 
                 try {
-                    if ("transfer".equals(commandType)) {
-                        MoneyCommand.transferMoney(wallet, recipientUsername, transferCurrency, amount);
-                        AccountUi.showTransfer(recipientUsername, transferCurrency, amount);
+
+                    switch (commandType) {
+                    case "convert":
+                        MoneyCommand.exchangeCommand(wallet, splits[1]+" "+splits[2]+" "+splits[3]);
                         AccountHistoryFile.updateLoginAccount(wallet.getUserName(), loginTime, in);
-                    } else {
+                        break;
+                    case "transfer":
+                        MoneyCommand.transferMoney(wallet, recipientUsername, trasnferCurrency, amount);
+                        AccountUi.showTransfer(recipientUsername, trasnferCurrency, amount);
+                        AccountHistoryFile.updateLoginAccount(wallet.getUserName(), loginTime, in);
+                        break;
+                    default:
                         throw new FinanceException(ExceptionCollection.COMMAND_TYPE_EXCEPTION);
                     }
                 } catch (FinanceException e) {
