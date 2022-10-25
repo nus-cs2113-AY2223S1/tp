@@ -1,8 +1,6 @@
 @startuml
 
 activate DatabaseStorage
-activate DatabaseParser
-activate Database
 
 -> DatabaseStorage : loadDatabase()
 
@@ -12,18 +10,25 @@ activate DatabaseStorage
 loop hasNextLine
     DatabaseStorage -> DatabaseStorage : readDatabaseLine(line)
     activate DatabaseStorage
+
     DatabaseStorage -> DatabaseParser : parseDatabaseLine(line)
+    activate DatabaseParser
     DatabaseParser --> DatabaseStorage : lineData : String[]
+    deactivate DatabaseParser
 
     DatabaseStorage -> Database : addUniversity(newUniversity)
+    activate Database
+    deactivate Database
+
     DatabaseStorage -> Database : addModuleMapping(newModuleMapping)
+    activate Database
+    deactivate Database
+
     deactivate DatabaseStorage
 end
 
 deactivate DatabaseStorage
 
 deactivate DatabaseStorage
-deactivate DatabaseParser
-deactivate Database
 
 @enduml
