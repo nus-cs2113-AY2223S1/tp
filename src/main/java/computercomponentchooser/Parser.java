@@ -230,6 +230,8 @@ public class Parser {
         Ui.printLine();
         if (buildManager.getBuilds().size() == 0) {
             System.out.println("You have no builds");
+            Ui.printLine();
+            return;
         }
         System.out.println("Your current builds:");
         System.out.print(buildManager);
