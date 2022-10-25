@@ -124,6 +124,32 @@ public class TimetableDict {
         }
     }
 
+    public String getClashingModuleCode(Lesson lesson) {
+        String startTime = lesson.getStartTime();
+        String endTime = lesson.getEndTime();
+        String day = lesson.getDay();
+        boolean isLessonTime = false;
+
+        if (day.equals("Undetermined Day")) {
+            return "";
+        }
+
+        LinkedHashMap<String, String> dayMap = timetable.get(day);
+        for (String hour : dayMap.keySet()) {
+            if (!isLessonTime && startTime.equals(hour)) {
+                isLessonTime = true;
+            }
+            if (isLessonTime && endTime.equals(hour)) {
+                break;
+            }
+            if (isLessonTime && !dayMap.get(hour).equals("______")) {
+                return dayMap.get(hour);
+            }
+        }
+
+        return "";
+    }
+
     public void deleteLesson(Lesson oldLesson) {
         String startTime = oldLesson.getStartTime();
         String endTime = oldLesson.getEndTime();
@@ -201,16 +227,16 @@ public class TimetableDict {
 
         int unallocated = 0;
         for (Lesson lesson : permutationsByClashes.get(permutationsByClashes.firstKey())) {
-            Module module = Timetable.getModuleByCode(lesson.getModuleCode().toUpperCase());
+            Module module = Timetable.getModuleByCode(lesson.getModuleCode());
             if (checkClash(this, lesson) == 0) {
                 module.replaceAttending(lesson);
             } else {
-                if (!lesson.getModuleCode().toUpperCase().equals(module.getModuleCode())) {
+                if (!lesson.getModuleCode().equals(getClashingModuleCode(lesson))) {
                     unallocated++;
                     resultString += module.getModuleCode() + " (" + lesson.getLessonType() + ")\n";
                 }
             }
-        } 
+        }
 
         if (unallocated != 0) {
             resultString += "Please rearrange some of your modules and try again!\n";

@@ -34,9 +34,9 @@ public class Lesson {
     public String getModuleCode() {
         return moduleCode;
     }
-    
+
     public void setModuleCode(String moduleCode) {
-        this.moduleCode = moduleCode;
+        this.moduleCode = moduleCode.toUpperCase();
     }
 
     public List<String> getInfo() {
