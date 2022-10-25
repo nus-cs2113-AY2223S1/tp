@@ -46,6 +46,9 @@ deactivate CommandParser
 
 alt list command
 
+    Duke -> Duke : executeListCommand(newUserCommand)
+    activate Duke
+
     alt list option equals "UNIVERSITIES"
 
         Duke -> Database : getUniversities()
@@ -102,13 +105,9 @@ alt list command
 
     end
 
+deactivate Duke
 else other command
-
-deactivate Database
-deactivate Ui
-
 end
-
 deactivate Duke
 
 @enduml
