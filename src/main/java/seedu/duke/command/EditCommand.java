@@ -30,7 +30,6 @@ import static seedu.duke.common.InfoMessages.INFO_EDIT_EXPENSE;
 import static seedu.duke.common.InfoMessages.INFO_EDIT_INCOME;
 import static seedu.duke.common.InfoMessages.LINE_SEPARATOR;
 
-
 /**
  * Represents an edit command object that will execute the operations for Edit command.
  */

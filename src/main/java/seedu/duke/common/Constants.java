@@ -1,6 +1,7 @@
 package seedu.duke.common;
 
 //@@author wcwy
+
 /**
  * Represents all the constant settings of the application.
  * Developers should update the constant in this file to allow for different limits for the application.

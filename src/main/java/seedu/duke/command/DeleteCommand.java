@@ -19,7 +19,6 @@ import static seedu.duke.command.CommandTag.COMMAND_TAG_GLOBAL_ENTRY_NUMBER;
 import static seedu.duke.common.InfoMessages.INFO_DELETE;
 import static seedu.duke.common.InfoMessages.LINE_SEPARATOR;
 
-
 /**
  * Represents a delete command object that will execute the operations for Delete command.
  */

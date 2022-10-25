@@ -5,7 +5,7 @@ import seedu.duke.Storage;
 import seedu.duke.Ui;
 import seedu.duke.data.TransactionList;
 import seedu.duke.data.transaction.Transaction;
-import seedu.duke.exception.InputTransactionInvalidTypeException;
+import seedu.duke.exception.GlobalUnsupportedTagException;
 import seedu.duke.exception.StatsInvalidTypeException;
 import seedu.duke.exception.MoolahException;
 
@@ -18,14 +18,15 @@ import static seedu.duke.command.CommandTag.COMMAND_TAG_GLOBAL_MONTH;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_GLOBAL_NUMBER;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_GLOBAL_PERIOD;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_GLOBAL_YEAR;
-import static seedu.duke.common.InfoMessages.INFO_STATS_CATEGORIES;
-import static seedu.duke.common.InfoMessages.INFO_STATS_MONTHS;
+import static seedu.duke.common.InfoMessages.COLON_SPACE;
+import static seedu.duke.common.InfoMessages.DOLLAR_SIGN;
+import static seedu.duke.common.InfoMessages.INFO_EXPENSE;
+import static seedu.duke.common.InfoMessages.INFO_INCOME;
+import static seedu.duke.common.InfoMessages.INFO_SAVINGS;
 import static seedu.duke.common.InfoMessages.INFO_STATS_EMPTY;
-import static seedu.duke.common.InfoMessages.INFO_STATS_EXPENSES;
-import static seedu.duke.common.InfoMessages.INFO_STATS_INCOME;
-import static seedu.duke.common.InfoMessages.INFO_STATS_SAVINGS;
-import static seedu.duke.common.InfoMessages.INFO_STATS_SUMMARY_HEADER;
-import static seedu.duke.common.InfoMessages.INFO_STATS_TIME;
+import static seedu.duke.common.InfoMessages.INFO_STATS_EXPENDITURE_HEADER;
+import static seedu.duke.common.InfoMessages.INFO_STATS_GENERIC;
+import static seedu.duke.common.InfoMessages.INFO_STATS_TIME_INSIGHTS;
 import static seedu.duke.common.InfoMessages.LINE_SEPARATOR;
 
 /**
@@ -43,8 +44,9 @@ public class StatsCommand extends ListAndStatsCommand {
     // The formatting information for the parameters used by the command
     public static final String COMMAND_PARAMETERS_INFO = "Parameters information:"
             + LINE_SEPARATOR
-            + "STATISTICS_TYPE: The type of statistics to be generated. Only \"categories\", \"months\" or \"time\" "
-            + "is accepted."
+            + "STATISTICS_TYPE: The type of statistics to be generated. Only \"categorical_savings\", "
+            + "\"monthly_expenditure\" or \"time_insights\" is accepted."
+            + LINE_SEPARATOR
             + "(Optional) MONTH: Month of the transaction. Only integers within 1 to 12 are accepted. Note that "
             + "month must be accompanied by a year. This tag cannot be used together with [p/PERIOD] or [n/NUMBER] "
             + "tags."
@@ -68,12 +70,10 @@ public class StatsCommand extends ListAndStatsCommand {
             + LINE_SEPARATOR;
 
     //@@author chydarren
-    private static final int TRUE_AND = 1;
-    private static final int TRUE_OR = 2;
+    private static final String CATEGORICAL_SAVINGS = "categorical_savings";
+    private static final String MONTHLY_EXPENDITURE = "monthly_expenditure";
+    private static final String TIME_INSIGHTS = "time_insights";
     private static final int FALSE = 0;
-    private static final String CATEGORIES = "categories";
-    private static final String TIME = "time";
-    private static final String MONTHS = "months";
     private static Logger statsLogger = Logger.getLogger(StatsCommand.class.getName());
     private String statsType;
 
@@ -125,46 +125,35 @@ public class StatsCommand extends ListAndStatsCommand {
         statsLogger.setLevel(Level.SEVERE);
         statsLogger.log(Level.INFO, "Entering execution of the Stats command.");
 
+        // Throws an unsupported tag exception if non-time_insights tag is using date intervals tags
+        if (!statsType.equals(TIME_INSIGHTS) && (containMonthYear() != FALSE
+            || containPeriodNumber() != FALSE)) {
+            throw new GlobalUnsupportedTagException();
+        }
+
         // Checks if there are any error in the tag combinations related to DateIntervals
         parseDateIntervalsTags();
-        listStatsByStatsType(statsType, transactions);
+        listStatsByStatsType(transactions);
     }
 
     /**
      * Lists the statistics depending on the type of statistics requested.
      *
-     * @param statsType     The type of statistics that is needed.
      * @param transactions  An instance of the TransactionList class.
      * @throws MoolahException If the type of statistics is not recognised.
      */
-    private void listStatsByStatsType(String statsType, TransactionList transactions)
-            throws MoolahException {
+    private void listStatsByStatsType(TransactionList transactions) throws MoolahException {
         switch (statsType) {
-        case MONTHS:
-            statsTypeMonthlyExpenditure(transactions);
-            break;
-        case CATEGORIES:
-            statsLogger.log(Level.INFO, "Stats type has been detected for categorical savings.");
-            statsTypeCategoricalSavings(transactions);
-            statsLogger.log(Level.INFO, "End of Stats command.");
+        case MONTHLY_EXPENDITURE:
+        case CATEGORICAL_SAVINGS:
+            statsLogger.log(Level.INFO, "Stats type has been detected for categorical savings "
+                    + "or monthly expenditure.");
+            statsTypeCategoricalSavingsOrMonthlyExpenditure(transactions);
             break;
         //@@author paullowse
-        case TIME:
-            statsLogger.log(Level.INFO, "Stats type has been detected for monthly savings.");
-            // Stats command uses last N months or years
-            if (containPeriodNumber() == TRUE_AND && containMonthYear() == FALSE) {
-                statsLogger.log(Level.INFO, "Stats command uses last N months or years.");
-                statsTypeTimeSavings(transactions);
-            // Stats command uses either monthly or yearly
-            } else if (containPeriodNumber() == FALSE && (containMonthYear() == TRUE_OR
-                    || containMonthYear() == TRUE_AND)) {
-                statsLogger.log(Level.INFO, "Stats command uses either monthly or yearly.");
-                statsTypeTimeSavings(transactions);
-            // Throws a missing tag if s/time was called without any relevant tags
-            } else {
-                statsLogger.log(Level.WARNING, "An exception has been caught due to a missing tag");
-                throw new StatsInvalidTypeException();
-            }
+        case TIME_INSIGHTS:
+            statsLogger.log(Level.INFO, "Stats type has been detected for time insights.");
+            statsTypeTimeInsights(transactions);
             break;
         //@@author chydarren
         default:
@@ -176,41 +165,28 @@ public class StatsCommand extends ListAndStatsCommand {
     //@@author chydarren
 
     /**
-     * Display the statistics requested for current amount of savings in each category.
+     * Display the statistics requested for current amount of savings in each category or the monthly expenditure.
      *
      * @param transactions An instance of the TransactionList class.
      */
-    public void statsTypeCategoricalSavings(TransactionList transactions) {
-        String categoricalSavingsList = transactions.listCategoricalSavings();
+    public void statsTypeCategoricalSavingsOrMonthlyExpenditure(TransactionList transactions) {
+        String genericStatsList = transactions.listMonthlyExpenditure();
 
-        if (categoricalSavingsList.isEmpty()) {
-            statsLogger.log(Level.INFO, "Categorical savings list is empty as there are no transactions available.");
+        if (statsType.equals(CATEGORICAL_SAVINGS)) {
+            // Replaces stats list with categorical savings if stats type is categorical_savings
+            genericStatsList = transactions.listCategoricalSavings();
+        }
+
+        if (genericStatsList.isEmpty()) {
+            statsLogger.log(Level.INFO, "Generic stats list is empty as there are no transactions available.");
             Ui.showInfoMessage(INFO_STATS_EMPTY.toString());
             return;
         }
 
-        assert !categoricalSavingsList.isEmpty();
-        statsLogger.log(Level.INFO, "Categorical savings list is found to contain categories-amount pairs.");
-        Ui.showList(categoricalSavingsList, INFO_STATS_CATEGORIES.toString());
-    }
-
-    /**
-     * Display the statistics requested for the amount of expenditure and savings accumulated over different months.
-     *
-     * @param transactions An instance of the TransactionList class.
-     */
-    public void statsTypeMonthlyExpenditure(TransactionList transactions) throws InputTransactionInvalidTypeException {
-        String monthlyExpenditureList = transactions.listMonthlyExpenditure();
-
-        if (monthlyExpenditureList.isEmpty()) {
-            statsLogger.log(Level.INFO, "Monthly expenditure list is empty as there are no transactions available.");
-            Ui.showInfoMessage(INFO_STATS_EMPTY.toString());
-            return;
-        }
-
-        assert !monthlyExpenditureList.isEmpty();
-        statsLogger.log(Level.INFO, "Monthly expenditure list is found to contain month-expenditure pairs.");
-        Ui.showList(monthlyExpenditureList, INFO_STATS_MONTHS.toString());
+        assert !genericStatsList.isEmpty();
+        statsLogger.log(Level.INFO, "Generic stats list has info available for categorical savings or "
+                + "monthly expenditure.");
+        Ui.showList(genericStatsList, String.format(INFO_STATS_GENERIC.toString(), statsType));
     }
 
     //@@author paullowse
@@ -221,12 +197,12 @@ public class StatsCommand extends ListAndStatsCommand {
      *
      * @param transactions An instance of the TransactionList class.
      */
-    public void statsTypeTimeSavings(TransactionList transactions) {
+    public void statsTypeTimeInsights(TransactionList transactions) {
         ArrayList<Transaction> timeTransactions = getTimeTransactions(transactions);
-        String timeSavingsList = transactions.listTimeStats(timeTransactions, year, month, period, number);
+        String timeInsightsList = transactions.listTimeStats(timeTransactions, year, month, period, number);
 
-        if (timeSavingsList.isEmpty()) {
-            statsLogger.log(Level.INFO, "Categorical savings list is empty as there are no transactions available.");
+        if (timeInsightsList.isEmpty()) {
+            statsLogger.log(Level.INFO, "Time insights list is empty as there are no transactions available.");
             Ui.showInfoMessage(INFO_STATS_EMPTY.toString());
             return;
         }
@@ -235,14 +211,15 @@ public class StatsCommand extends ListAndStatsCommand {
         ArrayList<String> amounts;
         amounts = transactions.processTimeSummaryStats(timeTransactions);
 
-        String incomeMessage = INFO_STATS_SUMMARY_HEADER + LINE_SEPARATOR.toString()
-                + INFO_STATS_INCOME + amounts.get(0);
-        String expensesMessage = INFO_STATS_EXPENSES + amounts.get(1);
-        String savingsMessage = INFO_STATS_SAVINGS + amounts.get(2);
+        String incomeMessage = INFO_STATS_EXPENDITURE_HEADER + LINE_SEPARATOR.toString()
+                + String.format("%s%s%s", INFO_INCOME, COLON_SPACE, DOLLAR_SIGN) + amounts.get(0);
+        String expensesMessage = String.format("%s%s%s", INFO_EXPENSE, COLON_SPACE, DOLLAR_SIGN) + amounts.get(1);
+        String savingsMessage = String.format("%s%s%s", INFO_SAVINGS, COLON_SPACE, DOLLAR_SIGN) + amounts.get(2);
 
-        assert !timeSavingsList.isEmpty();
-        statsLogger.log(Level.INFO, "Monthly savings list is found to contain categories-amount pairs.");
-        Ui.showStatsList(timeSavingsList, INFO_STATS_TIME.toString(), incomeMessage, expensesMessage, savingsMessage);
+        assert !timeInsightsList.isEmpty();
+        statsLogger.log(Level.INFO, "Time insights list has info available for the specified time period.");
+        Ui.showTimeInsightsList(timeInsightsList, INFO_STATS_TIME_INSIGHTS.toString(), incomeMessage, expensesMessage,
+                savingsMessage);
     }
 
     /**
