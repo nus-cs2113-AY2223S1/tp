@@ -2,26 +2,39 @@
 
 ## Table Of Contents
 
-1. [Introduction](#1-introduction)
-   - [1.1. Welcome!](#11-welcome)
-2. [Setting up](#2-setting-up)
-   - [2.1. Prerequisites](#21-prerequisites)
-   - [2.2. Setting up the project locally](#22-setting-up-the-project-locally)
-   - [2.3. Configure coding style](#23-configure-the-coding-style)
-3. [Design](#3-design)
-   - [3.1. Architecture](#31-architecture)
-   - [3.2. Model Component](#32-model-component)
-   - [3.3. Parser Component](#33-parser-component)
-   - [3.4. Command Component](#34-command-component)
-   - [3.5 Utils Component](#35-utils-component)
-     - [3.5.1 Ui Component](#351-ui-component)
-     - [3.5.2 Link Component](#352-link-component)
-     - [3.5.3 Storage Component](#353-storage-component)
-4. [Implementation](#4-implementation)
-5. [Documentation](#5-documentation)
-6. [Testing](#6-testing)
-   - [6.1. Running tests](#61-running-tests)
-   - [6.2. Instructions for running manual tests](#62-instructions-for-manual-testing)
+- [Developer Guide for Yet Another Module Organiser / Manager](#developer-guide-for-yet-another-module-organiser--manager)
+  - [Table Of Contents](#table-of-contents)
+  - [1. Introduction](#1-introduction)
+    - [1.1. Welcome!](#11-welcome)
+  - [2. Setting up](#2-setting-up)
+    - [2.1. Prerequisites](#21-prerequisites)
+    - [2.2. Setting up the project locally](#22-setting-up-the-project-locally)
+    - [2.3. Configure the coding style](#23-configure-the-coding-style)
+  - [3. Design](#3-design)
+    - [3.1 Architecture](#31-architecture)
+    - [3.2 Model Component](#32-model-component)
+    - [3.3 Parser Component](#33-parser-component)
+    - [3.4 Command Component](#34-command-component)
+    - [3.5 Utils Component](#35-utils-component)
+      - [3.5.1 UI Component](#351-ui-component)
+      - [3.5.2 Link Component](#352-link-component)
+      - [3.5.3 Storage Component](#353-storage-component)
+        - [Why it is implemented this way](#why-it-is-implemented-this-way)
+        - [Alternatives considered](#alternatives-considered)
+  - [4. Implementation](#4-implementation)
+    - [Storage feature](#storage-feature)
+    - [Target user profile](#target-user-profile)
+    - [Value proposition](#value-proposition)
+  - [5. Documentation](#5-documentation)
+  - [6. Testing](#6-testing)
+  - [6.1. Running tests](#61-running-tests)
+  - [6.2 Instructions for manual testing](#62-instructions-for-manual-testing)
+  - [Appendix A: Product scope](#appendix-a-product-scope)
+  - [Appendix B: User Stories](#appendix-b-user-stories)
+  - [Appendix C: Non-Functional Requirements](#appendix-c-non-functional-requirements)
+  - [Appendix D: Glossary](#appendix-d-glossary)
+  - [Appendix E: Acknowledgements](#appendix-e-acknowledgements)
+    - [Third-party libraries](#third-party-libraries)
 
 [Appendix A: Product Scope](#appendix-a-product-scope) <br>
 [Appendix B: User Stores](#appendix-b-user-stories) <br>
@@ -80,7 +93,11 @@ to set up IDEA’s coding style to match ours.
 
 **How the architecture components interact with each other**
 
-Core program flow is managed by the Duke class. The Duke class delegates work to the Ui class to handle user input.
+Core program flow is managed by the Duke class. 
+
+![Main Program Flow](images/mainProgramFlow.png)
+
+The Duke class delegates work to the Ui class to handle user input.
 
 User input is passed to the Parser class to parse the input as a command.
 

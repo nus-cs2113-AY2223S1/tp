@@ -1,0 +1,54 @@
+@startuml
+box Main
+Participant ":Duke" as Duke
+end box
+box Parser
+Participant ":Parser" as Parser
+end box
+box Command
+Participant ":Command" as Command
+end box
+box Ui
+Participant ":Ui" as Ui
+end box
+box State
+Participant ":State" as State
+end box
+box Storage
+Participant ":Storage" as Storage
+end box
+
+activate Duke
+group loop [!isExit]
+Duke -> Ui : readNext()
+activate Ui
+Ui --> Duke
+deactivate Ui
+Duke -> Parser : parse()
+activate Parser
+create Command
+Parser -> Command : new()
+activate Command
+Command --> Parser
+deactivate Command
+Parser --> Duke
+deactivate Parser
+Duke -> Command : execute()
+activate Command
+Command -> State : get/update state
+activate State
+State --> Command
+deactivate State
+Command -> Ui : displayMessage()
+activate Ui
+Ui --> Command
+deactivate Ui
+Command --> Duke
+deactivate Command
+destroy Command
+end
+Duke -> Storage : saveState()
+activate Storage
+Storage --> Duke
+deactivate Storage
+@enduml
