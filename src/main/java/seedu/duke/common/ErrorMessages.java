@@ -7,6 +7,9 @@ public enum ErrorMessages {
     ERROR_GLOBAL_INVALID_COMMAND("Invalid command, please enter <help> if you need the list of commands."),
     ERROR_GLOBAL_DUPLICATE_TAG("Duplicate tag(s) detected, please check your input!"),
     ERROR_GLOBAL_MISSING_TAG("Mandatory tag(s) missing, please check your input!"),
+    ERROR_GLOBAL_MISSING_TAG_YEAR("Month tag must be accompanied by a year tag, please check your input!"),
+    ERROR_GLOBAL_MISSING_TAG_PERIODNUMBER("Period and number tags must be provided together, please check "
+            + "your input!"),
     ERROR_GLOBAL_UNSUPPORTED_TAG("Not supported tag(s) detected, please check your input!"),
     ERROR_GLOBAL_EMPTY_PARAMETER("Parameter behind tag(s) is found to be empty, please check your input!"),
     ERROR_GLOBAL_INVALID_INDEX("Invalid index, please ensure your index is correct!"),
@@ -23,8 +26,10 @@ public enum ErrorMessages {
     ERROR_FIND_COMMAND_MISSING_KEYWORDS("Keyword(s) for your search expression missing, please check your input!"),
     ERROR_STATS_COMMAND_INVALID_TYPE("Type of statistics given is invalid, please check your input!"),
     ERROR_UNKNOWN_HELP_OPTION("The parameter used for help option is unknown, please check your input!"),
-    ERROR_STORAGE_FILE_CORRUPTED("Duke.txt corrupted. "
-            + "To preserve data, please STOP the program and edit your data file correctly."),
+    ERROR_STORAGE_TRANSACTION_CORRUPTED("Transaction values corrupted."
+            + " To preserve data, please STOP the program and edit your data file correctly."),
+    ERROR_STORAGE_BUDGET_CORRUPTED("Budget parameter is invalid or missing."
+            + " To preserve data, please STOP the program and edit your data file correctly."),
     ERROR_STORAGE_WRITE("Unable to write to Duke.txt. Please save your current Duke.txt file and restart Moolah"),
     ERROR_MAXIMUM_TRANSACTION_COUNT_REACHED("Unable to add transaction. "
             + "The maximum allowed transaction size (1000000) has been reached."),

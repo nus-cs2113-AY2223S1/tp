@@ -15,6 +15,7 @@
     * [Overview for Transaction](#overview-for-transaction)
     * [Implementation for Transaction](#implementation-for-transaction)
     * [Help Command](#help-command)
+    * [Budget Command](#budget-command)
     * [Add Command](#add-command)
     * [Edit Command](#edit-command)
     * [List Command](#list-command)
@@ -69,11 +70,30 @@ _Written by: Paul Low_
 
 ## Design
 
-{Describe the design of the product. Use UML diagrams and short code snippets where applicable.}
-
 ### Architecture
+![Architecture Diagram](images/ArchitectureDiagram.png)
+The Architecture Diagram shown above explains the high-level design of Moolah Manager. 
+The `Duke` class contain the main method which holds the responsibility for the following:
+1. On application launch, it will initialise the `UI`, `Storage` and `Data` components. 
+2. During application execution, it will interact with `UI`, `Parser`, `Command` components 
+to execute the command entered by the users.
+3. On any exception caught, it will handle the exception and interact with the `UI` to display the error message.
 
-_Written by: Author name_
+`Common` represents a collection of classes or enums used by multiple components.
+
+The rest of the application consists of six components:
+ - `UI`: The user interface of Moolah Manager
+ - `Parser`: Parser for user's entered command.
+ - `Command`: The command executor.
+ - `Data`: Holds the data of the application in memory.
+ - `Storage`: File I/O to store the data onto the hard disk.
+
+#### How the architecture components interact with each other
+The sequence diagram below shows how the components interact on command `budget b/1000`.
+![Architecture Interaction](images/ArchitectureSequenceDiagram.png)
+The section below gives more detailed description of each component.
+
+_Written by: Chia Thin Hong_
 
 ### Command Component
 
@@ -82,7 +102,11 @@ _Written by: Author name_
 ### Data Component 
 
 The data component is represented by a `data` package which consists of all the classes that is part of the data stored 
-by Moolah Manager. Within the `data` package, a transaction package and a transactionList class is stored. 
+by Moolah Manager. Within the `data` package, a transaction package, a budget class and a transactionList class is 
+stored. 
+
+The `budget` class is a representation of the monthly budget of the users. Operations related to viewing the budget and 
+differences from budget is implemented within this class.
 
 The `transactionList` class is a representation of a list of transactions, and the
 operations related to the `transactionList` implemented within this class.
@@ -91,28 +115,21 @@ Within the transaction package, the following classes are stored:
 1. Transaction 
 2. Income 
 3. Expense
-4. Category
 
 The structure of the data component in Moolah Manager is illustrated in the class diagram below:
 ![Data Component Class Diagram](images/DataComponentClassDiagram.png)
 
-From the class diagram, it can be seen that the transactionList mainly contain methods for CRUD operations to the list, 
-such as getting, adding, editing, deleting and purging of transaction(s) from the list.
+From the class diagram, it can be seen that the transactionList contain the methods for CRUD operations to the list, 
+such as getting, adding, editing, deleting and purging of transaction(s) in the list.
 
-The `Transaction` class is the abstract classes of an `Income` or an `Expense`. The `Category` represents a category of 
-a transaction. Within the transaction class and its subclasses, getters and setters are used to access the private 
-variables. These classes override the toString() method for a self-defined print format when the transactions are 
-displayed. 
-
-<!-- TODO: Complete category and categoryList in sequence diagram and write their explanation here -->
-
-A more detailed explanation on the implementation on the transactions can be viewed under Section
+The `Transaction` class is the abstract classes of an `Income` or an `Expense`. A more detailed explanation on the 
+implementation on the transactions can be viewed under Section
 [Implementation for Transaction](#implementation-for-transaction).
 
 #### How the data component interacts
 
 - When MoolahManager starts running, the `Duke` class will initialize a `Storage` object which will attempt to 
-read from the file and initialize a `transactionList`. The temporary `transactionList` containing all the stored 
+read from the file and initialize both `budget` and `transactionList`. The temporary `transactionList` containing all the stored 
 transaction records will be returned by the `Storage`. 
 Based on the whether the initialization is successful, the corresponding constructor will be called to initialize a 
 `transactionList` object which will be used throughout the application running time to hold the `transactions` added.
@@ -123,13 +140,29 @@ Based on the whether the initialization is successful, the corresponding constru
 class and can be deleted by a `deleteCommand` or `purgeCommand` class. These interactions are described in further detail
 under each command section below.
 
+- The monthly budget can be updated by `budget` command.
+
 <!-- TODO: Describe how category and categoryList work here -->
 
 _Written by: Chia Thin Hong_
 
 ### Storage Component
+The `Storage` component is a standalone class. It utilises its sub-methods and methods from external classes to perform it's read and write functions.
 
-_Written by: Author name_
+The structure of `Storage` can be seen below.
+<p align="center">
+    <img src="images/StorageComponentClassDiagram.png">
+    <br />
+    <i> Simplified Class Diagram for Storage Component</i>
+</p>
+
+1. `Duke` initializes `Storage` and `Storage#initializeFile` is called.
+2. During the initialization , parser methods from `CommandParser` and `ParameterParser` would be used to process the entries within `Duke.txt`.
+Methods from `Budget` and `TransactionList` would be used for the storage of `Budget` amount and `TransactionList` entries into the program.
+3. `TransactionList` is returned to `Duke` after the storage of entries within `Duke.txt`.
+4. After initialization and upon user input, `Command` classes such as `AddCommand`can call for `Storage#writeToFile` method in order to update the contents within `Duke.txt`.
+
+_Written by: Yong Chin Han_
 
 ### Parser Component
 The Parser component comprises of two main parsers: `CommandParser` and `ParameterParser`. Together, both these 
@@ -220,22 +253,48 @@ Some important operations are performed within the `TransactionList` class, whic
 _Written by: Chua Han Yong Darren_
 
 ### Help Command
-The help command displays the help message to the users to guide them on the usage and provide descriptions for each 
-available command. 
+The help command displays the help message to the users to guide them on the usage and provide descriptions for each
+available command.
 
-The help command can be run as `help` or `help o/detailed`, where the latter will display a more detailed version of 
-help messages to the users. 
+The help command can be run as `help` or `help o/detailed`, where the latter will display a more detailed version of
+help messages to the users.
 
 The structure of the application focusing on the help command is illustrated in the class diagram below:
 ![Data Component Class Diagram](images/HelpClassDiagram.png)
 
-For each command subclass, they will implement the getHelpMessage() and getDetailedHelpMessage() methods. These methods 
+For each command subclass, they will implement the getHelpMessage() and getDetailedHelpMessage() methods. These methods
 will contain their corresponding HelpMessage Enum that stores the help messages as strings inside the enum.
 
-In the help classes, during the execute() call, it will call either generateBasicHelp() or generateDetailedHelp() method
-based on the help option given by the user. 
+In the help command, during the execute() call, it will call either generateBasicHelp() or generateDetailedHelp() method
+based on the help option chosen by the user.
 
-<!-- Todo: Add sequence diagram -->
+![Data Component Class Diagram](images/HelpSequenceDiagram.png)
+
+
+_Written by: Chia Thin Hong_
+
+### Budget Command
+
+The budget command allows user to set a new monthly budget. The range of accepted budget value is stored in the 
+`common/Constants.java` file, whereby the content of the file is as such:
+
+```
+public static int MAX_TRANSACTIONS_COUNT = 1000000;
+public static int MIN_AMOUNT_VALUE = 0;
+public static int MAX_AMOUNT_VALUE = 10000000;
+public static int MIN_BUDGET_VALUE = 1;
+public static long MAX_BUDGET_VALUE = Long.valueOf(MAX_TRANSACTIONS_COUNT) * Long.valueOf(MAX_AMOUNT_VALUE);
+```
+
+Under the default setting, the acceptable range of the monthly budget, is 0 < budget <= 10000000000000, which is 10^13 
+and it ensures that no integer overflow will occur as the `long` data type is used. 
+
+To set a new budget, user can use the command `budget b/AMOUNT` where the `AMOUNT` tag is any whole number within the 
+valid range above. 
+
+The interaction of the components on setting a budget can be seen in the sequence diagram under 
+[Architecture](#How-the-architecture-components-interact-with-each-other).
+
 
 _Written by: Chia Thin Hong_
 
@@ -276,7 +335,7 @@ These are the important operations performed within the `AddCommand` class, with
   It is used externally by ParameterParser to verify if the user input contains the mandatory command tags, to correctly
   store the Transaction object in the program.
 
-Written by: Yong Chin Han
+_Written by: Yong Chin Han_
 
 ### Edit Command
 
@@ -450,12 +509,25 @@ This is how the command works:
 _Written by: Brian Wong Yun Long_
 
 ### Storage Operations
+The Storage class is a standalone class that contains methods used for the storage of Transaction entries and the Budget value.
 
-#### Reading From a File
+The class is first called by `Duke` during the initialising of the `TransactionList`. In this process, duke.txt's existance will be verified.
+1. If the file does not exist, an empty `Duke.txt` file would be created for the program to use. 
+2. If the file exists, it's values would be parsed to verify if they have been corrupted. If corrupted, the storage of values would halt and error messages would be shown to prompt user to correct file issues.
+Else, the values would update the program's `Budget` and the entries in `TransactionList`without any issues.
 
-#### Writing To a File
+#### Reading From Duke.txt 
+This specific operation is done during the initializing of the program. The `Budget` value and `TransactionList` entries would be parsed before their values are added into the program.
+`Storage#initializeFile` is called by `Duke`.
+`Storage#checkIfFileExist` is used to check if `Duke.txt` exists, and creates a new `Duke.txt` file if it does not exist.
+`Storage#storeFileValuesLocally` uses sub-methods and methods from external classes to parse each line entry within `Duke.txt` and store the values in the program.
 
-_Written by: Author name_
+#### Writing To Duke.txt
+This operation is done whenever the `TransactionList` entries or `Budget` value is changed via any of the `Command` classes;
+(e.g. Add, Delete, Purge , Edit and Budget commands). 
+The method `Storage#writeToFile` is used to update changes in `Budget` or `TransactionList`.
+
+_Written by: Yong Chin Han_ 
 
 ### Logging Operations
 
@@ -466,6 +538,7 @@ for different classes such as `parserLogger` and `addLogger` to set the log mess
 
 **Logging Levels**:
 
+* `ERROR`: An unexpected control flow captured
 * `WARNING`: An exception has been caught by the app
 * `INFO`: Information details what the app has done
 
