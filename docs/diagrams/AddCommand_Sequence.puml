@@ -1,0 +1,168 @@
+@startuml
+
+activate Duke
+
+Duke -> UserStorageParser : getSavedLists()
+activate UserStorageParser
+
+UserStorageParser --> Duke : userUniversityListManager :UserUniversityListManager
+deactivate UserStorageParser
+
+Duke -> UserStorageParser : getSavedTimeTables()
+activate UserStorageParser
+
+UserStorageParser --> Duke : timetableManager :TimetableManager
+deactivate UserStorageParser
+
+Duke -> Ui : getUserInput()
+activate Ui
+
+Ui --> Duke : userInput : String
+deactivate Ui
+
+Duke -> CommandParser : CommandParser.getUserCommand(userInput)
+activate CommandParser
+
+CommandParser -> CommandParser : parseUserCommand(userInput)
+activate CommandParser
+
+CommandParser --> CommandParser : userInputTokenized : String[]
+deactivate CommandParser
+
+alt add command
+
+    CommandParser -> CommandParser : isValidAddCommand(userInputTokenized)
+    activate CommandParser
+
+    CommandParser -> CommandParser : isValidCommandOnModules(userInputTokenized)
+    activate CommandParser
+
+    CommandParser --> CommandParser : :boolean
+    deactivate CommandParser
+
+    CommandParser -> CommandParser : isValidCommandOnTimetable(userInputTokenized)
+    activate CommandParser
+
+    CommandParser --> CommandParser : :boolean
+    deactivate CommandParser
+
+    CommandParser --> CommandParser : :boolean
+    deactivate CommandParser
+
+    opt is valid add command
+        CommandParser -> CommandParser : parseLesson(userInputTokenized)
+        activate CommandParser
+
+        CommandParser -> Database : findPuMapping(userInputTokenized[MODULE_INDEX])
+        activate Database
+
+        Database --> CommandParser : puModule :Module
+        deactivate Database
+
+        create Lesson
+        CommandParser -> Lesson : Lesson(puModule.getCode(), puModule.getTitle(), puModule.getCredit(), puModule.getUniversity(), userInputTokenized[DAY_INDEX], userInputTokenized[LESSON_START_TIME_INDEX], userInputTokenized[LESSON_END_TIME_INDEX])
+        activate Lesson
+
+        Lesson --> CommandParser : lesson :Lesson
+        deactivate Lesson
+
+        CommandParser --> CommandParser : lessonToAdd :Lesson
+        deactivate CommandParser
+
+        create AddCommand
+        CommandParser -> AddCommand : AddCommand(userInputTokenized, CommandType.ADD, lessonToAdd)
+        activate AddCommand
+
+        AddCommand --> CommandParser : newAddCommand :AddCommand
+        deactivate AddCommand
+    end
+
+else other command
+
+end
+
+CommandParser --> Duke : newUserCommand : Command
+deactivate CommandParser
+
+alt add command
+
+Duke -> Duke : executeAddCommand(userUniversityListManager, timetableManager, newUserCommand)
+activate Duke
+
+    Duke -> AddCommand : getLesson()
+    activate AddCommand
+
+    AddCommand --> Duke : lesson :Lesson
+    deactivate AddCommand
+
+    alt lesson is not null
+    Duke -> TimetableManager : addLesson(lesson, false)
+    activate TimetableManager
+
+    deactivate TimetableManager
+
+    Duke -> UserStorageParser : storeTimetable(timetableManager)
+    activate UserStorageParser
+
+    deactivate UserStorageParser
+
+    else lesson is null
+    Duke -> AddCommand : getModuleCode()
+    activate AddCommand
+
+    AddCommand --> Duke : moduleCode :String
+    deactivate AddCommand
+
+    Duke -> AddCommand : getUniversityName()
+    activate AddCommand
+
+    AddCommand --> Duke : universityName :String
+    deactivate AddCommand
+
+    Duke -> Database : findPuMapping(moduleCode)
+    activate Database
+
+    Database --> Duke : moduleMapping :ModuleMapping
+    deactivate Database
+
+    Duke -> ModuleMapping : getPartnerUniversityModule()
+    activate ModuleMapping
+
+    ModuleMapping --> Duke : puModule :Module
+    deactivate ModuleMapping
+
+    Duke -> ModuleMapping : getPartnerUniversityModule()
+    activate ModuleMapping
+
+    ModuleMapping --> Duke : nusModule :Module
+    deactivate ModuleMapping
+
+    create UserModuleMapping
+    Duke -> UserModuleMapping : UserModuleMapping(puModule.getCode(), puModule.getTitle(), nusModule.getCode(), nusModule.getTitle(), nusModule.getCredit(), puModule.getCredit(), puModule.getUniversity().getName(), puModule.getUniversity().getCountry())
+    activate UserModuleMapping
+
+    UserModuleMapping --> Duke : userModuleToAdd :UserModuleMapping
+    deactivate UserModuleMapping
+
+
+    Duke -> UserUniversityListManager : addModule(universityName, userModuleToAdd)
+    activate UserUniversityListManager
+
+    deactivate UserUniversityListManager
+
+    Duke -> UserStorageParser : storeCreatedLists(userUniversityListManager)
+    activate UserStorageParser
+
+    deactivate UserStorageParser
+
+    end
+
+
+else other command
+deactivate Duke
+
+end
+
+deactivate Duke
+
+@enduml

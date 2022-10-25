@@ -1,0 +1,74 @@
+@startuml
+
+activate Duke
+
+Duke -> UserStorageParser : getSavedLists()
+activate UserStorageParser
+
+UserStorageParser --> Duke : userUniversityListManager :UserUniversityListManager
+deactivate UserStorageParser
+
+Duke -> UserStorageParser : getSavedTimeTables()
+activate UserStorageParser
+
+UserStorageParser --> Duke : timetableManager :TimetableManager
+deactivate UserStorageParser
+
+Duke -> Ui : getUserInput()
+activate Ui
+
+Ui --> Duke : userInput : String
+deactivate Ui
+
+Duke -> CommandParser : CommandParser.getUserCommand(userInput)
+activate CommandParser
+
+CommandParser -> CommandParser : parseUserCommand(userInput)
+activate CommandParser
+
+CommandParser --> CommandParser : userInputTokenized : String[]
+deactivate CommandParser
+
+alt help command
+
+    CommandParser -> CommandParser : isValidHelpCommand(userInputTokenized)
+    activate CommandParser
+
+    CommandParser --> CommandParser : :boolean
+    deactivate CommandParser
+
+    opt is valid help command
+
+        create HelpCommand
+        CommandParser -> HelpCommand : HelpCommand(userInputTokenized, CommandType.HELP)
+        activate HelpCommand
+
+        HelpCommand --> CommandParser : newHelpCommand :HelpCommand
+        deactivate HelpCommand
+    end
+
+else other command
+
+end
+
+CommandParser --> Duke : newUserCommand : Command
+deactivate CommandParser
+
+alt help command
+
+Duke -> Duke : executeHelpCommand()
+activate Duke
+
+   Duke -> Ui : printCommands()
+   activate Ui
+
+   deactivate Ui
+
+else other command
+deactivate Duke
+
+end
+
+deactivate Duke
+
+@enduml
