@@ -1,10 +1,10 @@
 ding Dong
 help
 view biometrics
-set biometrics /10 /male /149 /89 /25
-set bio /29 /other /295 /25 /25
+set biometrics /10 /male /149 /89 /25 /2
+set bio /29 /other /295 /25 /25 /3
 view biometrics
-set biometrics /12 /female /200 /85 /0
+set biometrics /12 /female /200 /85 /0 /2
 view biometrics
 add strength /squat /3 /10 /100 /17-11-2000
 add strength /bench /3 /10 /120 /18-11-2000

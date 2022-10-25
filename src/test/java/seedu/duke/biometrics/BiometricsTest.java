@@ -12,7 +12,7 @@ public class BiometricsTest {
 
     @Test
     void saveBiometrics_biometricsSet_biometricsString() throws IllegalValueException {
-        biometrics.setBiometrics(10, "female", 87, 72, 64);
-        assertEquals("/10 /female /87 /72 /64", biometrics.saveBiometrics());
+        biometrics.setBiometrics(10, "female", 87, 72, 64,2);
+        assertEquals("/10 /female /87 /72 /64 /2", biometrics.saveBiometrics());
     }
 }

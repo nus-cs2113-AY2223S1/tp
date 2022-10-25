@@ -50,17 +50,18 @@ towards their fitness journeys.
 
 Sets user biometrics in TracknFit
 
-Format: `set biometrics /{age} /{gender} /{height} /{weight} /{fat percentage}`
+Format: `set biometrics /{age} /{gender} /{height} /{weight} /{fat percentage} /{activity level}`
 
 * age, height, weight and fat percentage should be integer values
 * gander can only be female, male or others
 * height should be in units of cm and cannot exceed 300cm
 * weight should be in units of kg and cannot exceed 400kg
 * fat percentage should be between 0% and 100%
+* activity level should be between 1 and 5
 
 Example of usage:
 
-`set biometrics /15 /male /146 /98 /55`
+`set biometrics /15 /male /146 /98 /55 /2`
 
 ### Adding Food Consumptions: `add food`
 
@@ -323,6 +324,133 @@ Index | Exercise | Weight | Sets | Reps | Dist | Calories | Date       | Status
 -------------------------------------------------------------------------------
 ```
 
+### Adding strength exercise: `add strength`
+
+Add strength exercise into the exercise list
+
+Format: `add strength /{exercise name} /{weight} /{sets} /{reps} [/{date}]`
+
+- exercise name must be within 50 characters
+- weight must be positive int and less or equal to 1000.
+- sets must be positive int and less or equal to 500
+- reps must be positive int and less or equal to 500
+- date must be in the format of `dd-MM-yyyy` and cannot be before the current date.
+- the current date will be set if date is omitted.
+
+Example of usage: `add strength /squat /100 /5 /5 /28-10-2022`
+
+Expected outcome: Strength exercises added to the exercise list.
+
+```
+-------------------------------------------------------------------------------
+Strength Exercise: squat
+Weight: 100kg
+Sets: 5
+Repetitions: 5
+Date: 28-10-2022
+Status: [ ]
+This strength exercise is added to the exercise list successfully
+-------------------------------------------------------------------------------
+```
+
+### Viewing strength exercise: `view strength`
+
+View user's strength exercises record in TracknFit
+
+Format: `view strength [/{done}]`
+
+- strength exercises yet to be completed will be displayed if `/{done}` is omitted
+- strength exercises completed will be displayed if `/done` is included.
+
+Example of usage: `view strength /done`
+
+Expected outcome: Completed strength exercises will be displayed
+
+```
+-------------------------------------------------------------------------------
+Index | Exercise | Weight | Sets | Reps | Dist | Calories | Date       | Status
+-------------------------------------------------------------------------------
+1     | press    | 120    | 5    | 5    | -    | -        | 27-10-2022 | [X]
+2     | squat    | 100    | 5    | 5    | -    | -        | 28-10-2022 | [X]
+
+-------------------------------------------------------------------------------
+```
+
+### Finding cardio exercise: `find cardio`
+
+View user's progress for cardio exercise overtime
+
+Format: find cardio /{exercise name}
+
+- exercise name must be within 50 characters
+
+Example of usage: `find cardio /sprints`
+
+Expected outcome: Cardio exercises whose name contain the search name will be displayed.
+
+```
+Here are the matching cardio exercises in your list:
+-------------------------------------------------------------------------------
+Index | Exercise | Weight | Sets | Reps | Dist | Calories | Date       | Status
+-------------------------------------------------------------------------------
+1     | sprints  | -      | 1    | 1    | 1.2  | -        | 25-10-2022 | [ ]
+2     | sprints  | -      | 3    | 2    | 3.2  | -        | 28-10-2022 | [ ]
+
+-------------------------------------------------------------------------------
+```
+
+
+### Adding strength exercise: `add cardio`
+
+Add cardio exercise into the exercise list
+
+Format: `add cardio /{description} /{distance} /{repetitions} [/{date}]`
+
+- exercise name must be within 50 characters
+- weight must be positive int and less or equal to 1000.
+- sets must be positive int and less or equal to 500
+- reps must be positive int and less or equal to 500
+- date must be in the format of `dd-MM-yyyy` and cannot be before the current date.
+- the current date will be set if date is omitted.
+
+Example of usage: `add cardio /sprints /1.2 /1 /28-10-2022`
+
+Expected outcome: Cardio exercises added to the exercise list.
+
+```
+-------------------------------------------------------------------------------
+Cardio Exercise: sprints
+Distance: 1.2km
+Repetitions: 1
+Date: 28-10-2022
+Status: [ ]
+ This cardio exercise is added to the exercise list successfully
+-------------------------------------------------------------------------------
+```
+
+### Viewing strength exercise: `view cardio`
+
+View user's cardio exercises record in TracknFit
+
+Format: `view cardio [/{done}]`
+
+- cardio exercises yet to be completed will be displayed if `/{done}` is omitted
+- cardio exercises completed will be displayed if `/done` is included.
+
+Example of usage: `view cardio /done`
+
+Expected outcome: Completed cardio exercises will be displayed
+
+```
+Index | Exercise | Weight | Sets | Reps | Dist | Calories | Date       | Status
+-------------------------------------------------------------------------------
+1     | sprints  | -      | 1    | 1    | 1.2  | -        | 25-10-2022 | [X]
+2     | sprints  | -      | 3    | 2    | 3.2  | -        | 28-10-2022 | [X]
+
+-------------------------------------------------------------------------------
+```
+
+
 ### Viewing exercise: `view exercise`
 
 View all exercises in the exercise list
@@ -393,6 +521,37 @@ mark done /3 /10 /5.5
 squat is marked as done successfully
 calories:62
 -------------------------------------------------------------------------------
+```
+
+### View BMI : `view bmi`
+
+Allows the user to check his/her BMI
+
+Format : view bmi
+
+Example of usage: `view bmi`
+
+Expected outcome: bmi of user will be displayed
+
+```
+"Your current BMI is : 25.2"
+"You are currently in the overweight range";
+```
+
+
+### View Maintenance : `view Maintenance`
+
+Allows the user to check his/her maintenance calories based on her biometrics
+
+Format : view maintenance
+
+Example of usage: `view maintenance`
+
+Expected outcome: Suggested maintenance calories of user will be displayed
+
+```
+"You have a moderately active lifestyle!"
+"Thus your maintenance calories is 2350 " 
 ```
 
 ## FAQ

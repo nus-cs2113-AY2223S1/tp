@@ -13,6 +13,7 @@ public class Biometrics {
     private int height;
     private int weight;
     private int fat;
+    private int activityLevel;
     public boolean isSet;
     public WeightAndFatList weightAndFatList;
 
@@ -22,6 +23,7 @@ public class Biometrics {
         height = 0;
         weight = 0;
         fat = 0;
+        activityLevel = 0;
         isSet = false;
         weightAndFatList = new WeightAndFatList();
     }
@@ -46,12 +48,18 @@ public class Biometrics {
         return fat;
     }
 
-    public void setBiometrics(int age, String gender, int height, int weight, int fat) throws IllegalValueException {
+    public int getActivityLevel() {
+        return activityLevel;
+    }
+
+    public void setBiometrics(int age, String gender, int height, int weight, int fat, int activityLevel)
+            throws IllegalValueException {
         setAge(age);
         setGender(gender);
         setHeight(height);
         setWeight(weight);
         setFat(fat);
+        setActivityLevel(activityLevel);
         isSet = true;
     }
 
@@ -86,6 +94,13 @@ public class Biometrics {
         this.fat = fat;
     }
 
+    public void setActivityLevel(int activityLevel) throws IllegalValueException {
+        if (activityLevel < 1 || activityLevel > 5) {
+            throw new IllegalValueException("The activity level ranges from 1 to 5 only!");
+        }
+        this.activityLevel = activityLevel;
+    }
+
     @Override
     public String toString() {
         if (!isSet) {
@@ -96,10 +111,11 @@ public class Biometrics {
                 + "Gender: " + gender + System.lineSeparator()
                 + "Height: " + height + "cm" + System.lineSeparator()
                 + "Weight: " + weight + "kg" + System.lineSeparator()
-                + "Fat percentage: " + fat + "%";
+                + "Fat percentage: " + fat + "%" + System.lineSeparator()
+                + "Activity Level: " + activityLevel;
     }
 
     public String saveBiometrics() {
-        return String.format("/%d /%s /%d /%d /%d", age, gender, height, weight, fat);
+        return String.format("/%d /%s /%d /%d /%d /%d", age, gender, height, weight, fat, activityLevel);
     }
 }

@@ -24,7 +24,6 @@ public class ViewCommand extends Command {
 
     private Ui ui;
     private Biometrics biometrics;
-    private Calculator calculator;
     private String arguments;
     private ExerciseList exerciseList;
 
@@ -74,17 +73,18 @@ public class ViewCommand extends Command {
     }
 
     private void viewMaintenanceCalories() {
-        ui.line();
+        Calculator calculator = new Calculator(biometrics.getGender(),biometrics.getWeight(),
+                biometrics.getHeight(),biometrics.getAge(),biometrics.getActivityLevel());
         ui.output(calculator.getActivityStatus());
         ui.output("Thus your maintenance calories is " + calculator.getIdealMaintenanceCalories());
-        ui.line();
     }
 
     private void viewBmi() {
-        ui.line();
+        Calculator calculator = new Calculator(biometrics.getGender(),biometrics.getWeight(),
+                biometrics.getHeight(),biometrics.getAge(),biometrics.getActivityLevel());
+        calculator.setBmi(biometrics.getWeight(),biometrics.getHeight());
         ui.output("Your current BMI is :" + calculator.getBmi());
         ui.output(calculator.getBmiStatus());
-        ui.line();
     }
 
 
