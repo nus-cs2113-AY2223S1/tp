@@ -5,9 +5,7 @@ import seedu.duke.command.Command;
 import seedu.duke.exception.DurationInvalidException;
 import seedu.duke.exception.InsufficientArgumentsException;
 import seedu.duke.exception.InvalidArgumentException;
-import seedu.duke.exception.ItemNotFoundException;
 import seedu.duke.exception.TransactionNotFoundException;
-import seedu.duke.exception.UserNotFoundException;
 import seedu.duke.ui.Ui;
 import seedu.duke.parser.CommandParser;
 import seedu.duke.transaction.Transaction;
@@ -19,7 +17,7 @@ import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_NUMBER_FORM
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PARTS;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_TX_NOT_FOUND;
 
-//@@author winston-lim
+// @@author winston-lim
 /**
  * A representation of a command to add a new transaction.
  */
@@ -111,8 +109,7 @@ public class UpdateTransactionCommand extends Command {
      *
      * @return false
      * @throws InvalidArgumentException If there is a part that cannot be parsed
-     * @throws ItemNotFoundException If the item cannot be found in the list
-     * @throws UserNotFoundException If the user cannot be found
+     * @throws TransactionNotFoundException If the user cannot be found
      * @throws DurationInvalidException If the number is less than 0
      */
     public boolean executeCommand() throws InvalidArgumentException, TransactionNotFoundException,

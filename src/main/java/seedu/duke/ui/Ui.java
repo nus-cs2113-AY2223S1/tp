@@ -8,12 +8,12 @@ import seedu.duke.user.User;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-//@@author jorellesee
+// @@author jorellesee
 public class Ui {
     private static final Scanner input = new Scanner(System.in);
 
-    public static final String logo = "                             _      \n"
-                    + " /\\ /\\ _ __   ___ _   _  ___| | ___ \n"
+    public static final String logo =
+            "                             _      \n" + " /\\ /\\ _ __   ___ _   _  ___| | ___ \n"
                     + "/ / \\ \\ '_ \\ / __| | | |/ __| |/ _ \\\n"
                     + "\\ \\_/ / |_) | (__| |_| | (__| |  __/\n"
                     + " \\___/| .__/ \\___|\\__, |\\___|_|\\___|\n"
@@ -70,8 +70,8 @@ public class Ui {
 
     public static void updateItemMessage(Item item, TransactionList transactionList) {
         showLine();
-        System.out.print(
-                "Done! Here is the item you updated" + '\n' + item.toString(transactionList) + '\n');
+        System.out.print("Done! Here is the item you updated" + '\n'
+                + item.toString(transactionList) + '\n');
         showLine();
     }
 

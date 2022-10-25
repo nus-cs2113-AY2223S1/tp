@@ -5,7 +5,7 @@ import seedu.duke.ui.Ui;
 
 import java.util.Map;
 
-//@@author winston-lim
+// @@author winston-lim
 /**
  * A representation of a command to print all commands.
  */
@@ -17,15 +17,19 @@ public class HelpCommand extends Command {
     private static final String COMMAND_VIEW_USER = "view-user /u <userName>";
     private static final String COMMAND_VIEW_ITEM = "view-item /i <itemId>";
     private static final String COMMAND_VIEW_TX = "view-tx /t <transactionId>";
-    private static final String COMMAND_ADD_USER = "add-user /n <userName> /a <age> /c <contactNumber>";
-    private static final String COMMAND_ADD_ITEM = "add-item /n <itemName> /c <categoryIndex> /p <price> /o <userName>";
-    private static final String COMMAND_ADD_TX = "add-tx /i <itemId> /b <borrowerName> /d <duration> /c <createdAt>";
+    private static final String COMMAND_ADD_USER =
+            "add-user /n <userName> /a <age> /c <contactNumber>";
+    private static final String COMMAND_ADD_ITEM =
+            "add-item /n <itemName> /c <categoryIndex> /p <price> /o <userName>";
+    private static final String COMMAND_ADD_TX =
+            "add-tx /i <itemId> /b <borrowerName> /d <duration> /c <createdAt>";
     private static final String COMMAND_REMOVE_USER = "remove-user /u <userName>";
     private static final String COMMAND_REMOVE_ITEM = "remove-item /i <itemId>";
     private static final String COMMAND_REMOVE_TX = "remove-tx /t <transactionId>";
     private static final String COMMAND_FIND_FINISHED_TX = "find-tx /s finished";
     private static final String COMMAND_FIND_UNFINISHED_TX = "find-tx /s unfinished";
-    private static final String COMMAND_SORT_ITEM = "sort-items /mo <mode: hl or  lh> /mi <min> /ma <max>";
+    private static final String COMMAND_SORT_ITEM =
+            "sort-items /mo <mode: hl or  lh> /mi <min> /ma <max>";
     private static final String COMMAND_LIST_CATEGORIES = "list-categories";
     private static final String COMMAND_FIND_USER = "find-user /k <keyword>";
     private static final String COMMAND_FIND_ITEM = "find-item /k <keyword>";
@@ -37,8 +41,7 @@ public class HelpCommand extends Command {
             Map.entry("View a user", COMMAND_VIEW_USER),
             Map.entry("View a item", COMMAND_VIEW_ITEM),
             Map.entry("View a transaction", COMMAND_VIEW_TX),
-            Map.entry("Add a user", COMMAND_ADD_USER),
-            Map.entry("Add a item", COMMAND_ADD_ITEM),
+            Map.entry("Add a user", COMMAND_ADD_USER), Map.entry("Add a item", COMMAND_ADD_ITEM),
             Map.entry("Add a transaction", COMMAND_ADD_TX),
             Map.entry("Remove a user", COMMAND_REMOVE_USER),
             Map.entry("Remove a item", COMMAND_REMOVE_ITEM),
@@ -48,8 +51,7 @@ public class HelpCommand extends Command {
             Map.entry("Sort all items in a range", COMMAND_SORT_ITEM),
             Map.entry("List all categories available", COMMAND_LIST_CATEGORIES),
             Map.entry("Find user by keywords", COMMAND_FIND_USER),
-            Map.entry("Find item by keywords", COMMAND_FIND_ITEM)
-    );
+            Map.entry("Find item by keywords", COMMAND_FIND_ITEM));
 
     /**
      * Execute HelpCommand (print all available commands).

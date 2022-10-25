@@ -35,7 +35,7 @@ import seedu.duke.user.UserList;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_ARGUMENT_EMPTY;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_COMMAND_UNRECOGNIZABLE;
 
-//@@author winston-lim
+// @@author winston-lim
 /**
  * A class that parses and analyses the input string from the user.
  */
@@ -136,7 +136,7 @@ public class CommandParser {
      * @throws InsufficientArgumentsException If number of args in the commands is not enough.
      */
     public static Command createCommand(String input, UserList userList, ItemList itemList,
-                                        TransactionList transactionList)
+            TransactionList transactionList)
             throws CommandNotFoundException, InsufficientArgumentsException {
         String command = getCommand(input);
         String[] parts = getParts(input);
@@ -177,9 +177,9 @@ public class CommandParser {
         case COMMAND_LIST_CATEGORIES:
             return new ListCategoriesCommand();
         case COMMAND_FIND_ITEM:
-            return new FindItemCommand(parts, itemList);
+            return new FindItemCommand(parts, itemList, transactionList);
         case COMMAND_FIND_USER:
-            return new FindUserCommand(parts,userList);
+            return new FindUserCommand(parts, userList);
         case COMMAND_UPDATE_ITEM:
             return new UpdateItemCommand(parts, itemList, transactionList);
         case COMMAND_UPDATE_TRANSACTION:

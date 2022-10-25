@@ -20,7 +20,7 @@ import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_USERNAME_TA
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_USER_AGE_INVALID;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_USER_AGE_OUT_OF_RANGE;
 
-//@@author bdthanh
+// @@author bdthanh
 /**
  * A representation of a command to add a new user.
  */
@@ -108,7 +108,8 @@ public class AddUserCommand extends Command {
      * @return true If contact number is in the correct format and correct length
      * @throws ContactNumberInvalidException If contact number has the wrong length
      */
-    private boolean isValidContactNumber(String contactNumber) throws ContactNumberInvalidException {
+    private boolean isValidContactNumber(String contactNumber)
+            throws ContactNumberInvalidException {
         if (contactNumber.length() != 8) {
             throw new ContactNumberInvalidException(MESSAGE_CONTACT_LENGTH_INVALID);
         }
@@ -144,8 +145,7 @@ public class AddUserCommand extends Command {
      * @throws DuplicateException If that username is taken
      * @throws InvalidUserException If age is out of range
      */
-    public boolean executeCommand()
-            throws InsufficientArgumentsException, InvalidArgumentException,
+    public boolean executeCommand() throws InsufficientArgumentsException, InvalidArgumentException,
             ContactNumberInvalidException, DuplicateException, InvalidUserException {
         String[] args = getArgsAddUserCmd();
         if (areValidArgs(args)) {
