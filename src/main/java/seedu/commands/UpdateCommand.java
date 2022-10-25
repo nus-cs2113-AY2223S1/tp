@@ -1,8 +1,6 @@
 package seedu.commands;
 
 import seedu.api.Api;
-import seedu.common.CommonFiles;
-import seedu.data.CarparkList;
 import seedu.exception.ParkingException;
 
 /**

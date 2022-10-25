@@ -60,7 +60,7 @@ public class Ui {
                         + " | .__/\\__,_|_| |_|\\_\\___|_|\\_|\\___|\n"
                         + " |_|                                ");
     }
-    
+
     /**
      * Prints ASCII art and logo, and asks user for their name.
      */

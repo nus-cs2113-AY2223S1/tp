@@ -25,12 +25,12 @@ import seedu.parser.search.Sentence;
  */
 public class Parser {
     public static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+    private static final String EMPTY_RESPONSE_HEADER = "Empty argument. Valid command(s): \n";
 
     private CarparkList carparkList;
     private Api api;
     private Favourite favourite;
     private ArrayList<String> favouriteList;
-    private static final String EMPTY_RESPONSE_HEADER = "Empty argument. Valid command(s): \n";
 
     /**
      * Parses user input into command for execution.
