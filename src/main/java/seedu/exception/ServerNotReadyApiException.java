@@ -3,7 +3,7 @@ package seedu.exception;
 /**
  * Exception for response code 503 API response.
  */
-public class ServerNotReadyApiException extends ParkingException {
+public class ServerNotReadyApiException extends ApiServerResponseErrorException {
     public ServerNotReadyApiException() {
         super();
     }
@@ -15,6 +15,7 @@ public class ServerNotReadyApiException extends ParkingException {
      */
     @Override
     public String getMessage() {
-        return "The server is currently unavailable: 503 Service Unavailable";
+        return "The server is currently unavailable: 503 Service Unavailable"
+                + "Trying " + super.getTryNumber() + " more time...";
     }
 }

@@ -2,6 +2,8 @@ package seedu.parking;
 
 import static seedu.common.CommonFiles.API_JSON_DIRECTORY;
 import static seedu.common.CommonFiles.API_KEY_FILE;
+import static seedu.common.CommonFiles.CARPARK_LIST_DIRECTORY;
+import static seedu.common.CommonFiles.CARPARK_LIST_FILE;
 import static seedu.common.CommonFiles.FAVOURITE_DIRECTORY;
 import static seedu.common.CommonFiles.FAVOURITE_FILE;
 import static seedu.common.CommonFiles.LTA_JSON_FILE;
@@ -20,8 +22,12 @@ import seedu.exception.NoCarparkFoundException;
 import seedu.exception.NoFileFoundException;
 import seedu.exception.ParkingException;
 import seedu.files.Favourite;
+import seedu.files.FileReader;
+import seedu.files.FileStorage;
 import seedu.parser.Parser;
 import seedu.ui.Ui;
+
+
 
 /**
  * Main class of the program.
@@ -67,7 +73,7 @@ public class Parking {
             favourite.updateFavouriteList();
         } catch (IOException e) {
             ui.showUpdateFavouriteError();
-        } catch (NoFileFoundException e) {
+        } catch (NoFileFoundException | FileWriteException e) {
             ui.printError(e);
         }
     }
@@ -78,12 +84,10 @@ public class Parking {
     private void loadApi() {
         try {
             api.loadApiKey(API_KEY_FILE, API_JSON_DIRECTORY, true);
-            api.asyncExecuteRequest();
-            api.fetchData();
+            api.syncFetchData();
             ui.print("Fetching data from API successful!");
         } catch (ParkingException e) {
             ui.print(e.getMessage());
-            ui.print("Loading from local backup: ");
         }
     }
 
@@ -93,7 +97,10 @@ public class Parking {
     private void loadJson() {
         ui.showLoadingDataMessage();
         try {
-            carparkList = new CarparkList(CommonFiles.LTA_FILE_PATH, CommonFiles.LTA_BACKUP_FILE_PATH);
+            carparkList = FileReader.loadCarparkListFromTxt(CARPARK_LIST_FILE, CARPARK_LIST_DIRECTORY);
+            CarparkList newCarparkList = new CarparkList(CommonFiles.LTA_FILE_PATH, CommonFiles.LTA_BACKUP_FILE_PATH);
+            carparkList.update(newCarparkList);
+            FileStorage.saveCarparkList(carparkList);
             ui.showLoadingDataSuccess();
         } catch (ParkingException e) {
             ui.printError(e);

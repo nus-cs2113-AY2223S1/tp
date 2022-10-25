@@ -1,13 +1,15 @@
 package seedu.api;
 
 import static seedu.common.CommonData.API_KEY_DEFAULT;
-import static seedu.common.CommonFiles.LTA_BASE_URL;
+import static seedu.common.CommonData.API_RESPONSE_HEADER;
+import static seedu.common.CommonData.API_RESPONSE_TAIL;
+import static seedu.common.CommonData.LTA_BASE_URL;
 
-import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.ArrayList;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
@@ -24,6 +26,7 @@ import seedu.files.FileReader;
 import seedu.files.FileStorage;
 import seedu.ui.Ui;
 
+
 /**
  * Class to fetch .json data from APIs and save that locally.
  */
@@ -33,13 +36,16 @@ public class Api {
     private final FileStorage storage;
     private final Ui ui;
     private HttpRequest request;
-    private CompletableFuture<HttpResponse<String>> responseFuture;
+    private ArrayList<CompletableFuture<HttpResponse<String>>> responseFutureList = new ArrayList<>(5);
     private String apiKey = "";
     private AuthenticationStatus authStatus = AuthenticationStatus.FAIL;
 
     /**
      * Constructor to create a new client.
      * Initializes the storage class for file writing purposes.
+     *
+     * @param file The file name where the storage file is stored.
+     * @param directory The directory path where the storage file is stored.
      */
     public Api(String file, String directory) {
         this.client = HttpClient.newHttpClient();
@@ -49,36 +55,42 @@ public class Api {
 
     /**
      * Builds the API HTTP GET request header and body.
+     *
+     * @param skip The number of data sets to skip.
      */
-    private void generateHttpRequestCarpark() {
+    private void generateHttpRequestCarpark(int skip) {
         String authHeaderName = "AccountKey";
         request = HttpRequest.newBuilder(
-                URI.create(LTA_BASE_URL))
+                URI.create(LTA_BASE_URL + "?$skip=" + skip))
             .header(authHeaderName, apiKey)
             .build();
     }
 
     /**
      * Sends the HTTP GET request to the API endpoint asynchronously.
+     *
+     * @param skip The number of data sets to skip.
+     * @param index The index to insert the responseFuture call.
      */
-    public void asyncExecuteRequest() {
-        generateHttpRequestCarpark();
-        responseFuture = client.sendAsync(request, HttpResponse.BodyHandlers.ofString());
+    public void asyncExecuteRequest(int skip, int index) {
+        generateHttpRequestCarpark(skip);
+        responseFutureList.add(index, client.sendAsync(request, HttpResponse.BodyHandlers.ofString()));
     }
 
     /**
      * Waits (for at most 1s) and receive response from API endpoint. It breaks the asynchronous part of the code.
      *
+     * @param index The index to get the response from the responseFutureList
      * @return JSON string response from the API.
      * @throws UnauthorisedAccessApiException if API key is invalid.
      * @throws ServerNotReadyApiException if Server request timeout.
      * @throws UnknownResponseApiException if response code is not handled properly.
      */
-    private String asyncGetResponse()
+    private String asyncGetResponse(int index)
             throws UnauthorisedAccessApiException, ServerNotReadyApiException, UnknownResponseApiException {
         String result = "";
         try {
-            HttpResponse<String> response = responseFuture.get(1000, TimeUnit.MILLISECONDS);
+            HttpResponse<String> response = responseFutureList.get(index).get(1000, TimeUnit.MILLISECONDS);
             if (isValidResponse(response.statusCode())) {
                 result = response.body();
             }
@@ -91,45 +103,95 @@ public class Api {
     }
 
     /**
-     * Execute the data fetching subroutine. Subroutine will repeat for a certain number of time
-     * and throws an exception if no response is received.
+     * Execute the data fetching subroutine for a specific index from the asynchronous call.
+     * Subroutine will repeat for a certain number of time and throws an exception if no response is received.
      *
+     * @param index The index to get the response from.
+     * @return String The raw data from the API.
      * @throws FileWriteException if data fails to write.
      * @throws EmptyResponseException if empty/invalid response received.
      * @throws UnauthorisedAccessApiException if access not granted.
      */
-    public void fetchData() throws EmptyResponseException, UnauthorisedAccessApiException, FileWriteException {
+    public String fetchData(int index)
+            throws EmptyResponseException, UnauthorisedAccessApiException, FileWriteException {
         String result = "";
         int fetchTries = FETCH_TRIES;
         do {
             try {
-                result = asyncGetResponse().trim();
+                result = asyncGetResponse(index).trim();
             } catch (ServerNotReadyApiException | UnknownResponseApiException e) {
-                System.out.println(e.getMessage());
+                e.setTryNumber(fetchTries);
+                ui.printError(e);
             } finally {
                 fetchTries--;
             }
             if (fetchTries > 0 && result.isEmpty()) {
-                asyncExecuteRequest();
+                asyncExecuteRequest(index * 500, index);
             }
         } while (fetchTries > 0 && result.isEmpty());
 
         if (fetchTries == 0 && result.isEmpty()) {
             throw new EmptyResponseException();
         }
-        storage.writeDataToFile(result);
+        return result;
     }
 
     /**
-     * Synchronous version of data fetching from the API.
+     * Synchronous version of multiple data fetching from the API. If the result is fetched successfully, it will be
+     * stored locally.
      *
      * @throws FileWriteException if data fails to write.
      * @throws EmptyResponseException if empty/invalid response received.
      * @throws UnauthorisedAccessApiException if access not granted.
      */
     public void syncFetchData() throws FileWriteException, EmptyResponseException, UnauthorisedAccessApiException {
-        asyncExecuteRequest();
-        fetchData();
+        String result = API_RESPONSE_HEADER;
+        int totalDataCount = 0;
+        for (int i = 0; i < 5; i++) {
+            asyncExecuteRequest(i * 500, i);
+        }
+        boolean isWritten = false;
+        for (int i = 0; i < 5; i++) {
+            String partialResult = fetchData(i);
+            String processedResult = processData(partialResult);
+            totalDataCount += countData(processedResult);
+
+            if (i != 0 && !processedResult.isEmpty() && isWritten) {
+                result += "," + processedResult;
+            } else if (!processedResult.isEmpty()) {
+                isWritten = true;
+                result += processedResult;
+            }
+        }
+
+        result += API_RESPONSE_TAIL;
+
+        ui.print(totalDataCount + " Parking Lot data received from LTA!");
+
+        storage.writeDataToFile(result);
+    }
+
+    /**
+     * Process the data from the API to adhere to concatenating format.
+     *
+     * @param data raw data from the API.
+     * @return The processed data.
+     */
+    public String processData(String data) {
+        String[] dataSplit = data.split("\"value\":\\[", 2);
+        dataSplit = dataSplit[1].split("]}", 2);
+        return dataSplit[0];
+    }
+
+    /**
+     * Count the number of parking lot data received from LTA.
+     *
+     * @param data processed data set to count.
+     * @return number of parking lots.
+     */
+    public int countData(String data) {
+        String[] individualData = data.trim().split("},\\{");
+        return individualData.length;
     }
 
     /**
@@ -172,9 +234,9 @@ public class Api {
             isDifferent = false;
         }
         boolean isSuccess = false;
-        asyncExecuteRequest();
+        asyncExecuteRequest(0, 0);
         try {
-            fetchData();
+            fetchData(0);
             isSuccess = true;
             authStatus = (isDifferent) ? AuthenticationStatus.SUCCESS : authStatus;
         } catch (EmptyResponseException | UnauthorisedAccessApiException | FileWriteException e) {
@@ -200,10 +262,9 @@ public class Api {
      * @param directory directory where the file is stored.
      * @param toloadDefault to load default api key or not.
      * @throws NoFileFoundException If directory / file is not found.
-     * @throws EmptySecretFileException If the file is empty.
      */
     public void loadApiKey(String file, String directory, boolean toloadDefault)
-            throws NoFileFoundException, EmptySecretFileException {
+            throws NoFileFoundException {
         try {
             String key = FileReader.readStringFromTxt(file, directory, true).trim();
             if (key.isEmpty()) {
@@ -214,8 +275,10 @@ public class Api {
             }
             apiKey = key;
             authStatus = AuthenticationStatus.API_CHANGED;
-        } catch (IOException e) {
+        } catch (NoFileFoundException e) {
             throw new NoFileFoundException("API key file is missing! Please check " + file + ".");
+        } catch (EmptySecretFileException | FileWriteException e) {
+            ui.printError(e);
         }
     }
 

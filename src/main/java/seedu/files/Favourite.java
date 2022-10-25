@@ -11,7 +11,7 @@ import seedu.exception.NoFileFoundException;
  * Represents the 'favourite' class.
  */
 public class Favourite {
-    public static ArrayList<String> favouriteList ;
+    public static ArrayList<String> favouriteList;
     private final FileStorage fileStorage;
     private final String directory;
     private final String file;
@@ -34,7 +34,7 @@ public class Favourite {
      * @throws IOException If unable to read from file.
      * @throws NoFileFoundException If no file found.
      */
-    public void updateFavouriteList() throws IOException, NoFileFoundException {
+    public void updateFavouriteList() throws IOException, NoFileFoundException, FileWriteException {
         String content = FileReader.readStringFromTxt(file, directory, true);
         String[] lines = content.split("\\R");
         ArrayList<String> tempArray = new ArrayList<String>();

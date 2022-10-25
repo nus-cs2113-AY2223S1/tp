@@ -1,5 +1,6 @@
 package seedu.data;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,9 +18,13 @@ import seedu.ui.Ui;
  */
 public class Carpark {
     @JsonIgnore
-    private final HashMap<LotType, Integer> allAvailableLots = new HashMap<>();
+    private HashMap<LotType, Integer> allAvailableLots = new HashMap<>() { {
+            put(LotType.CAR, 0);
+            put(LotType.MOTORCYCLE, 0);
+            put(LotType.HEAVY_VEHICLE, 0);
+        }};
     @JsonIgnore
-    private final boolean isFavourited = false;
+    private boolean isFavourited = false;
     private String carparkId;
     private String area;
     private String development;
@@ -29,6 +34,8 @@ public class Carpark {
     private String agency;
     @JsonIgnore
     private Sentence developmentSentence;
+    @JsonIgnore
+    private LocalDateTime lastUpdated;
 
     /**
      * Used to print the identifier for a carpark.
@@ -81,6 +88,7 @@ public class Carpark {
         return bufferString.toString();
     }
 
+    @JsonProperty("CarParkID")
     public String getCarparkId() {
         return carparkId;
     }
@@ -90,6 +98,7 @@ public class Carpark {
         this.carparkId = carparkId;
     }
 
+    @JsonProperty("Area")
     public String getArea() {
         return area;
     }
@@ -99,6 +108,7 @@ public class Carpark {
         this.area = area;
     }
 
+    @JsonProperty("Development")
     public String getDevelopment() {
         return development;
     }
@@ -109,6 +119,7 @@ public class Carpark {
         developmentSentence = new Sentence(development);
     }
 
+    @JsonProperty("Location")
     public String getLocation() {
         return location;
     }
@@ -118,6 +129,7 @@ public class Carpark {
         this.location = location;
     }
 
+    @JsonProperty("LotType")
     public LotType getLotType() {
         return lotType;
     }
@@ -138,6 +150,7 @@ public class Carpark {
         }
     }
 
+    @JsonProperty("AvailableLots")
     public int getAvailableLots() {
         return availableLots;
     }
@@ -149,8 +162,10 @@ public class Carpark {
         } catch (NumberFormatException e) {
             this.availableLots = 0;
         }
+        lastUpdated = LocalDateTime.now();
     }
 
+    @JsonProperty("Agency")
     public String getAgency() {
         return agency;
     }
@@ -158,6 +173,14 @@ public class Carpark {
     @JsonProperty("Agency")
     public void setAgency(String agency) {
         this.agency = agency;
+    }
+
+    private void setFavourited(boolean bool) {
+        isFavourited = bool;
+    }
+
+    public void setLastUpdated(String dateTimeString) {
+        lastUpdated = LocalDateTime.parse(dateTimeString, CommonData.DATE_TIME_FORMATTER);
     }
 
     /**
@@ -168,11 +191,86 @@ public class Carpark {
      */
     public void addCarparkLotType(Carpark carpark) {
         allAvailableLots.put(carpark.getLotType(), carpark.getAvailableLots());
-        availableLots += carpark.getAvailableLots();
+        updateAvailableLotsTotal();
     }
 
+    /**
+     * Add a carpark lot type to the {@link Carpark#allAvailableLots} Hashmap object,
+     * where the key is a {@link LotType} and the value is the number of lots.
+     *
+     * @param lotType Type of lot
+     * @param numberOfLots Number of lots
+     */
+    public void addCarparkLotType(LotType lotType, int numberOfLots) {
+        allAvailableLots.put(lotType, numberOfLots);
+        updateAvailableLotsTotal();
+    }
+
+    private void updateAvailableLotsTotal() {
+        int sum = 0;
+        for (int value : allAvailableLots.values()) {
+            sum += value;
+        }
+        availableLots = sum;
+    }
 
     public Sentence getDevelopmentSentence() {
         return developmentSentence;
+    }
+
+    public String getSaveString() {
+        String saveStringFormat = "%s || %s || %s || %s || %s || %s || %s || %s || %s \n";
+        String allAvailableLotsString = String.format("%s %s %s", allAvailableLots.get(LotType.CAR),
+                allAvailableLots.get(LotType.MOTORCYCLE), allAvailableLots.get(LotType.HEAVY_VEHICLE));
+        return String.format(saveStringFormat, carparkId, area, development, location, availableLots,
+                allAvailableLotsString, isFavourited, agency, lastUpdated.format(CommonData.DATE_TIME_FORMATTER));
+    }
+
+    /**
+     * Static method to generate a {@link CarparkList} object from a save string.
+     * @param saveString string to be parsed
+     * @return generated object.
+     */
+    public static Carpark parseCarpark(String saveString) {
+        String[] params = removeWhitespaces(saveString.split("\\|\\|"));
+        Carpark parsedCarpark = new Carpark();
+        parsedCarpark.setCarparkId(params[0]);
+        parsedCarpark.setArea(params[1]);
+        parsedCarpark.setDevelopment(params[2]);
+        parsedCarpark.setLocation(params[3]);
+        parsedCarpark.setAvailableLots(params[4]);
+        parsedCarpark.setAllAvailableLots(params[5]);
+        parsedCarpark.setFavourited(Boolean.parseBoolean(params[6]));
+        parsedCarpark.setAgency(params[7]);
+        parsedCarpark.setLastUpdated(params[8]);
+        return parsedCarpark;
+    }
+
+    public void updateTime() {
+        lastUpdated = LocalDateTime.now();
+    }
+
+    public void setAllAvailableLots(String params) {
+        String[] lots = params.split(" ");
+        addCarparkLotType(LotType.CAR, Integer.parseInt(lots[0]));
+        addCarparkLotType(LotType.MOTORCYCLE, Integer.parseInt(lots[1]));
+        addCarparkLotType(LotType.HEAVY_VEHICLE, Integer.parseInt(lots[2]));
+        updateAvailableLotsTotal();
+    }
+
+    public void setAllAvailableLots(HashMap<LotType, Integer> newAvailableLots) {
+        allAvailableLots = newAvailableLots;
+        updateAvailableLotsTotal();
+    }
+
+    private static String[] removeWhitespaces(String[] arr) {
+        for (int i = 0; i < arr.length; ++i) {
+            arr[i] = arr[i].trim();
+        }
+        return arr;
+    }
+
+    public HashMap<LotType, Integer> getAllAvailableLots() {
+        return allAvailableLots;
     }
 }

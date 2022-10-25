@@ -18,11 +18,9 @@ package API <<Rectangle>> {
 Class Api {
     -<u>FETCH_TRIES: int
     -client: HttpClient
-    -ui: Ui
     -request: HttpRequest
     -responseFuture: CompletableFuture<HttpResponse<String>>
     -apiKey: String
-    -authStatus: AuthenticationStatus
     +Api(String, String)
     +getApiKey(): String
     +getAuthStatus(): String
@@ -45,7 +43,7 @@ Class "<<enumeration>>\nAuthenticationStatus" as AuthenticationStatus
     hide empty methods
 }
 
-Api --> AuthenticationStatus
+Api -[dashed]-> AuthenticationStatus
 Api *-->"1" Storage
 Api *-->"1" Ui
 

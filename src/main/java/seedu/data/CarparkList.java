@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
+import seedu.exception.FileWriteException;
+import seedu.exception.InvalidFormatException;
 import seedu.exception.NoCarparkFoundException;
 import seedu.exception.NoFileFoundException;
 import seedu.files.FileReader;
@@ -28,7 +30,7 @@ public class CarparkList {
      * @param filepathBackup Backup filepath to load from.
      * @throws NoFileFoundException If no valid file is found in either location.
      */
-    public CarparkList(Path filepath, Path filepathBackup) throws NoFileFoundException {
+    public CarparkList(Path filepath, Path filepathBackup) throws NoFileFoundException, FileWriteException {
         carparks = FileReader.loadLtaJson(filepath, filepathBackup);
         combineByLotType();
     }
@@ -41,6 +43,35 @@ public class CarparkList {
      */
     CarparkList(List<Carpark> carparks) {
         this.carparks = carparks;
+    }
+
+    /**
+     * Constructor for the {@link CarparkList} class. Initializes an object from a
+     * save expressed in a string.
+     * @param saveStringFull A string that is a save of the entire List of {@link Carpark} objects.
+     */
+    public CarparkList(String saveStringFull) throws InvalidFormatException {
+        carparks = new ArrayList<>();
+        if (saveStringFull.equals("")) {
+            throw new InvalidFormatException("Save string empty! Loading from backup: ");
+        } else {
+            try {
+                String[] saveStrings = saveStringFull.split("\n");
+                for (String saveString : saveStrings) {
+                    carparks.add(Carpark.parseCarpark(saveString));
+                }
+            } catch (Exception e) {
+                throw new InvalidFormatException("Save string format invalid. Loading from backup: ");
+            }
+        }
+        combineByLotType();
+    }
+
+    /**
+     * Constructor for the {@link CarparkList} class. Initialises an empty CarparkList object.
+     */
+    public CarparkList() {
+        carparks = new ArrayList<>();
     }
 
     /**
@@ -123,6 +154,44 @@ public class CarparkList {
     public void resetBoldForAllCarparks() {
         for (Carpark carpark : carparks) {
             carpark.resetBold();
+        }
+    }
+
+    public String getSaveString() {
+        StringBuilder bufferString = new StringBuilder();
+        for (Carpark carpark : carparks) {
+            bufferString.append(carpark.getSaveString());
+        }
+        return bufferString.toString();
+    }
+
+    /**
+     * Updates the current {@link CarparkList} object with a newer generated one. The existing
+     * {@link Carpark} objects in {@link CarparkList#carparks} should not be affected by this and
+     * remain.
+     *
+     * @param carparkListNew The new carpark list to update with.
+     */
+    public void update(CarparkList carparkListNew) {
+        for (Carpark carpark : carparkListNew.getCarparks()) {
+            try {
+                Carpark carparkToBeUpdated = findCarpark(carpark.getCarparkId());
+                carparkToBeUpdated.setAllAvailableLots(carpark.getAllAvailableLots());
+                carparkToBeUpdated.updateTime();
+            } catch (NoCarparkFoundException e) {
+                carpark.updateTime();
+                carparks.add(carpark);
+            }
+        }
+        combineByLotType();
+    }
+
+    private boolean carparkExists(Carpark carpark) {
+        try {
+            findCarpark(carpark.getCarparkId());
+            return true;
+        } catch (NoCarparkFoundException e) {
+            return false;
         }
     }
 }
