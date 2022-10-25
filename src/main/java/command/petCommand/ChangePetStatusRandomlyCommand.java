@@ -8,6 +8,7 @@ import pet.PetUnhealthyStatus;
 import java.util.Random;
 
 public class ChangePetStatusRandomlyCommand {
+    public static final int NUM_OF_STATUS = 5;
     private int index;
 
     public ChangePetStatusRandomlyCommand(int index){
@@ -16,7 +17,7 @@ public class ChangePetStatusRandomlyCommand {
 
     public void excecute() {
         Random random = new Random();
-        int randomNumber = random.nextInt(5) + 1;
+        int randomNumber = random.nextInt(NUM_OF_STATUS) + 1;
         int changeIndex = index - 1;
         Pet currPet = PetList.petList.get(changeIndex);
         if (currPet.isHealthy == true){
