@@ -1,0 +1,23 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+hide circle
+skinparam classAttributeIconSize 0
+
+class Parser {
+
+    + parse(String): Command
+    + getCommand(String[]): Command
+    + isPartialModuleCode(String): boolean
+    + isModuleCode(String): boolean
+    + isTwoWordsCommand(String[]): boolean
+    + isOneWordCommand(String[]): boolean
+    + isValidTwoWordCommand(String[]): boolean
+    + addDeleteCommand(String[], Command): Command
+    + determineWrongCommand(String[]): Command
+    + viewHelpExitCommand(String[], Command): Command
+    + selectSemesterCommand(String[], Command): Command
+    + isValidSemester(String): boolean
+    + isValidSpecialTerm(String): boolean
+    + parseParams(String): Map<String, String>
+}
+@enduml

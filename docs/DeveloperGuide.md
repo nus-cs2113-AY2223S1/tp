@@ -91,7 +91,7 @@ Each command subclass handles its own execution.
 ### 3.2 Model Component
 
 ### 3.3 Parser Component
-
+![Parser Class](..\docs\images\parserClass.png)  
 The <code>Parser</code> component can:
 
 - return the correct command type based on user input.

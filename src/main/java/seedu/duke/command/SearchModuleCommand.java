@@ -31,7 +31,7 @@ public class SearchModuleCommand extends Command {
     public static final String SUBSYSTEM_NAME = "SearchModuleCommand";
 
     public SearchModuleCommand(String input) throws YamomException {
-        super(input.split("\\s"));
+        super(input.split("\\s+"));
         params = Parser.parseParams(input);
 
         toSearchModuleCode = params.getOrDefault("code", null);

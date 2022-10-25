@@ -32,8 +32,16 @@ public class ViewTimetableCommand extends Command {
         var params = Parser.parseParams(input);
         showFancy = params.containsKey("fancy");
         showSimple = params.containsKey("simple");
-        if (showFancy && showSimple) {
+        boolean isConflictingCommand = showFancy && showSimple;
+        boolean hasMissingBackslash = !input.contains("/") && (input.contains("fancy") || input.contains("simple"));
+        boolean unknownParametersEntered = input.split("\\s+").length > 2 || ((!showFancy && !showSimple)
+                && !Parser.isOneWordCommand(input.split("\\s+")));
+        if (isConflictingCommand) {
             throw new YamomException("Timetable cannot be both simple and fancy!");
+        } else if (hasMissingBackslash) {
+            throw new YamomException("Unknown command. Maybe you forgot a \"/\".");
+        } else if (unknownParametersEntered) {
+            throw new YamomException("Unknown command. Maybe you meant \"view\".");
         }
     }
 
