@@ -9,6 +9,8 @@ Package " "<<Rectangle>>{
 
     Class Common COMMON_COLOR_1
 
+    Class Exceptions EXCEPTIONS_COLOR_1
+
     Class UserInterface USER_INTERFACE_COLOR_1
 
     Class Parser PARSER_COLOR_1
