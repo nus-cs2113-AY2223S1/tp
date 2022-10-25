@@ -78,7 +78,7 @@ public class Parser {
             }
             return prepareSearch(arguments);
         case UpdateCommand.COMMAND_WORD:
-            return new UpdateCommand(api);
+            return new UpdateCommand(api, carparkList);
         case UnfavouriteCommand.COMMAND_WORD:
             if (arguments.trim().isEmpty()) {
                 return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.UNFAVOURITE_FORMAT);
@@ -108,7 +108,7 @@ public class Parser {
      */
     private Command prepareFavourite(String arguments) {
         final String carparkID = arguments.trim();
-        return new FavouriteCommand(carparkID, favourite);
+        return new FavouriteCommand(carparkID, favourite, carparkList);
     }
 
     /**
@@ -119,7 +119,7 @@ public class Parser {
      */
     private Command prepareUnfavourite(String arguments) {
         final String carparkID = arguments.trim();
-        return new UnfavouriteCommand(carparkID, favourite);
+        return new UnfavouriteCommand(carparkID, favourite, carparkList);
     }
 
     /**
@@ -130,7 +130,7 @@ public class Parser {
      */
     private Command prepareFind(String arguments) {
         final String carparkID = arguments.trim();
-        return new FindCommand(carparkID);
+        return new FindCommand(carparkID, carparkList);
     }
 
     /**
