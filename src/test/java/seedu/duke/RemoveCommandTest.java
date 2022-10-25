@@ -1,12 +1,10 @@
 package seedu.duke;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
 class RemoveCommandTest {
-    ReviewList storedReviews = new ReviewList();
     final String cannotFind = "Unable to find item for specified type and index";
     final String expectedMovie = "Noted. I've deleted the following media:\n" +
             "\t[Movie]Harry Potter Rating:5.0 Genre:SciFi Date watched:10-01-2020\n" +
@@ -17,6 +15,7 @@ class RemoveCommandTest {
     final String expectedMovieMultiple = "Noted. I've deleted the following media:\n" +
             "\t[Movie]Star Wars Rating:5.0 Genre:SciFi Date watched:10-02-2020\n" +
             "Now you have 1 reviews in the list.";
+    ReviewList storedReviews = new ReviewList();
 
     @Test
     void removeNotFound() {
