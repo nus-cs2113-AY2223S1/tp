@@ -1,8 +1,5 @@
 package command;
 
-import appointment.AppointmentList;
-import employee.EmployeeList;
-import service.ServiceList;
 
 public class EndCommand extends Command{
 
@@ -12,11 +9,13 @@ public class EndCommand extends Command{
 
     @Override
     public void execute() {
-        // end
+        System.out.println("Bye. Hope to see you again soon!");
     }
 
     @Override
     public boolean isExit() {
         return true;
     }
+
+
 }

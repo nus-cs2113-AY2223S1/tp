@@ -1,6 +1,5 @@
 package appointment;
 
-import service.Service;
 import task.Task;
 
 import java.time.LocalDateTime;

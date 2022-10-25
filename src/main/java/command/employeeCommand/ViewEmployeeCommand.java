@@ -1,9 +1,7 @@
 package command.employeeCommand;
 
-import appointment.AppointmentList;
 import command.Command;
 import employee.EmployeeList;
-import service.ServiceList;
 
 public class ViewEmployeeCommand extends Command {
 

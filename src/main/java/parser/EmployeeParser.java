@@ -5,7 +5,6 @@ import command.employeeCommand.AddEmployeeCommand;
 import command.employeeCommand.RemoveEmployeeCommand;
 import command.employeeCommand.ViewEmployeeCommand;
 import exception.DukeException;
-import seedu.duke.Duke;
 
 public class EmployeeParser {
     private int lengthOfSignature;
