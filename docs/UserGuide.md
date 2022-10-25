@@ -71,6 +71,18 @@ Expected outcome:
 ```
 ____________________________________________________________
 
+ADD-RELATED-COMMANDS: 
+--------------------
+Add a user: add-user /n <userName> /a <age> /c <contactNumber>
+Add a item: add-item /n <itemName> /c <categoryIndex> /p <price> /o <userName>
+Add a transaction: add-tx /i <itemId> /b <borrowerName> /d <duration> /c <createdAt>
+
+REMOVE-RELATED-COMMANDS: 
+--------------------
+Remove a user: remove-user /u <userName>
+Remove a item: remove-item /i <itemId>
+Remove a transaction: remove-tx /t <transactionId>
+
 LIST-RELATED-COMMANDS: 
 --------------------
 List all commands: help
@@ -84,18 +96,6 @@ VIEW-RELATED-COMMANDS:
 View a user: view-user /u <userName>
 View a item: view-item /i <itemId>
 View a transaction: view-tx /t <transactionId>
-
-ADD-RELATED-COMMANDS: 
---------------------
-Add a user: add-user /n <userName> /a <age> /c <contactNumber>
-Add a item: add-item /n <itemName> /c <categoryIndex> /p <price> /o <userName>
-Add a transaction: add-tx /i <itemId> /b <borrowerName> /d <duration> /c <createdAt>
-
-REMOVE-RELATED-COMMANDS: 
---------------------
-Remove a user: remove-user /u <userName>
-Remove a item: remove-item /i <itemId>
-Remove a transaction: remove-tx /t <transactionId>
 
 UPDATE-RELATED-COMMANDS: 
 --------------------
