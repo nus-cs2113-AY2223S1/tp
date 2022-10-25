@@ -119,7 +119,7 @@ This sector describe how features are implemented, where readers can get insight
 
 ### 4.1. User-related Features
 
-#### Add a user
+#### 4.1.1. Add a user
 
 > This feature allows user to add a new user to their list and upon successful adding, a confirmation response about the new user will be sent from Ui to user
 
@@ -136,7 +136,7 @@ Step 4: After adding the new user, a message will be displayed to the user via `
 The following sequence diagram shows how the add user operation works:
 ![addUserSequence](images/AddUserSequence.png)
 
-#### Remove a user
+#### 4.1.2. Remove a user
 
 > This feature allows user to remove a user to their list and upon successful removing, a confirmation response about the deleted user will be sent from Ui to user
 
@@ -157,7 +157,7 @@ Step 4: After deleting a user, a message will be displayed to the user via `Ui.d
 The following sequence diagram shows how the remove user operation works:
 ![removeUserSequence](images/RemoveUserSequence.png)
 
-#### List users
+#### 4.1.3. List users
 
 > This feature allows the user to view details of all users in the user list
 
@@ -174,7 +174,7 @@ Step 4: Lastly, `executeCommand` returns false to indicate that this is a non-te
 The following sequence diagram shows how the view user operation works:
 ![ListUserSequence](images/ListUserSequence.png)
 
-#### View a user
+#### 4.1.4. View a user
 
 > This feature allows the user to view a specific user in the user list. Upon successfully sending the command, the Ui will display the details of the searched user
 
@@ -193,10 +193,11 @@ Step 4: After finding the user, a message will be displayed to the user via `Ui.
 The following sequence diagram shows how the view user operation works:
 ![viewUserSequence](images/ViewUserSequence.png)
 
-**...To be updated(List, Find user)**
+**...To be updated(Find user)**
+
 ### 4.2. Item-related Features
 
-#### Add an item
+#### 4.2.1. Add an item
 
 > This feature allows user to add a new item to their list and upon successful adding, a confirmation response about the new item will be sent from Ui to user
 
@@ -213,7 +214,7 @@ Step 4: After adding the new item, a message will be displayed to the user via `
 The following sequence diagram shows how the add item operation works:
 ![addUserSequence](images/AddItemSequence.png)
 
-#### Remove an item
+#### 4.2.2 Remove an item
 
 > This feature allows user to remove an item to their list and upon successful removing, a confirmation response about the deleted item will be sent from Ui to user
 
@@ -232,7 +233,7 @@ Step 4: After deleting an item, a message will be displayed to the user via `Ui.
 The following sequence diagram shows how the remove item operation works:
 ![removeItemSequence](images/RemoveItemSequence.png)
 
-#### List items
+#### 4.2.3. List items
 
 > This feature allows the user to view details of all items in the item list
 
@@ -249,7 +250,7 @@ Step 4: Lastly, `executeCommand` returns false to indicate that this is a non-te
 The following sequence diagram shows how the view user operation works:
 ![ListItemsSequence](images/ListItemSequence.png)
 
-#### View an item
+#### 4.2.4. View an item
 
 > This feature allows the user to view a specific item in the item list. Upon successfully sending the command, the Ui will display the details of the searched item
 
@@ -268,7 +269,7 @@ Step 4: After finding the user, a message will be displayed to the user via `Ui.
 The following sequence diagram shows how the view item operation works:
 ![viewItemSequence](images/ViewItemSequence.png)
 
-#### Update an item
+#### 4.2.5. Update an item
 
 > This feature allows the user to update a specific item in the item list
 
@@ -289,7 +290,7 @@ Step 6: Lastly, information about the updated item is printed to the user
 The following sequence diagram models the operation:
 ![updateItemSequence](images/UpdateItemSequence.png)
 
-#### Sorting items
+#### 4.2.6. Sorting items
 
 > This feature allows user to sort and filter items on their list, and if the input command is correct, a list that is sorted and filtered will be sent from Ui to user
 
@@ -306,7 +307,7 @@ Step 4: This list of items will then be displayed to the user via `Ui.printRespo
 The following sequence diagram shows how the sort items operation works:
 ![sortItemSequence](images/SortItemsSequence.png)
 
-### List categories
+### 4.2.7. List categories
 
 >This feature allow users to view categories that can be assigned to items and their index after executing the command ```list-categories```.
 
@@ -320,11 +321,11 @@ Step 3: Since there is no parameter to check for list categories command, it wil
 
 Step 4: The ```executeCommand()``` of ExitCommand returns false, so Duke will recognize this command is ```isLastCommand``` and exit the ```while``` loop and stop the program.
 
-**...To be updated(List, Find, Update item)**
+**...To be updated(Find item)**
 
 ### 4.3. Transaction-related Features
 
-#### Add a Transaction
+#### 4.3.1. Add a Transaction
 
 > This feature allows user to add a new transaction to their list and upon successful adding, a confirmation response about the new transaction will be sent from Ui to user
 
@@ -341,7 +342,7 @@ Step 4: After adding the new transaction, a message will be displayed to the use
 The following sequence diagram shows how the add transaction operation works:
 ![addUserSequence](images/AddTransactionSequence.png)
 
-#### Remove a Transaction
+#### 4.3.2. Remove a Transaction
 
 > This feature allows user to remove a transaction to their list and upon successful removing, a confirmation response about the deleted transaction will be sent from Ui to user
 
@@ -360,7 +361,7 @@ Step 4: After deleting a transaction, a message will be displayed to the user vi
 The following sequence diagram shows how the remove transaction operation works:
 ![removeTransactionSequence](images/RemoveTransactionSequence.png)
 
-#### List transactions
+#### 4.3.3. List transactions
 
 > This feature allows the user to view details of all transactions
 
@@ -377,7 +378,7 @@ Step 4: Lastly, `executeCommand` returns false to indicate that this is a non-te
 The following sequence diagram shows how the view user operation works:
 ![ListTransactionSequence](images/ListTransactionSequence.png)
 
-#### View a transaction
+#### 4.3.4. View a transaction
 
 > This feature allows the user to view a specific transaction in the transaction list. Upon successfully sending the command, the Ui will display the details of the searched transaction
 
@@ -396,7 +397,7 @@ Step 4: After finding the transaction, a message will be displayed to the user v
 The following sequence diagram shows how the view transaction operation works:
 ![viewTransactionSequence](images/ViewTransactionSequence.png)
 
-#### View Transactions By Status
+#### 4.3.5. View Transactions By Status
 
 > The viewTransactionsByStatus feature is facilitated by the TransactionList class. It extends the command class to add a command for users to view the history of finished or ongoing transactions for recording purposes. The feature implements the following commands:
 
@@ -417,7 +418,7 @@ The following sequence diagram shows how the viewTransactionsByStatus operation 
 
 ![viewTransactionsByStatus](images/ViewTransactionByStatusSequence.png)
 
-#### Update an transaction
+#### 4.3.6. Update an transaction
 
 > This feature allows the user to update a specific item in the item list
 

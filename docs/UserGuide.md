@@ -147,7 +147,7 @@ Username: jingwei Age: 19 Contact: 22384729
 ____________________________________________________________
 ```
 
-**...To be updated(List, Find user)**
+**...To be updated(Find user)**
 
 ### 3.3. Item-related features
 #### 3.3.1. ```add-item``` - Add a new item
@@ -295,7 +295,7 @@ Here are available categories:
 ____________________________________________________________
 ```
 
-**...To be updated(List, Find, Update item)**
+**...To be updated(Find item)**
 
 ### 3.4. Transaction-related features
 #### 3.4.1. ```add-tx``` - Add a new transaction
@@ -371,7 +371,7 @@ ____________________________________________________________
 ```
 
 #### 3.4.5. ```update-tx``` - Updates properties of a transaction
->Currently supports only updating the duration of a transaction
+>Currently, supports only updating the duration of a transaction
 
 Format: ```update-tx /t [TRANSACTION_ID] /d [NEW_DURATION]```
 
@@ -390,7 +390,7 @@ ____________________________________________________________
 
 ```
 
-**...To be updated(List, Update, View Tx by status)**
+**...To be updated(View Tx by status)**
 
 ### 3.5. Exit Program
 
@@ -420,16 +420,21 @@ ____________________________________________________________
 | Add a new user                     | add-user /n [USERNAME] /a [AGE] /c [CONTACT_NUMBER]                                                 |
 | Remove a user                      | remove-user /u [USERNAME]                                                                           |
 | View a user                        | view-user /u [USERNAME]                                                                             |
+| List all users                     | list-users                                                                                          |
 | __*Item-related features*__        |                                                                                                     |
 | Add a new item                     | add-item /n [ITEM_NAME] /c [CATEGORY_INDEX] /p [PRICE] /o [USERNAME]                                |
 | Remove an item                     | remove-item /i [ITEM_ID]                                                                            |
+| List all items                     | list-items                                                                                          |
 | View an item                       | view-item /i [ITEM_ID]                                                                              |
 | List categories                    | list-categories                                                                                     |
+| Update an item                     | update-item /i [ITEM_ID] /p [NEW_PRICE]                                                             |
 | Sort and filter list of items      | sort-items /mode [MODE_OF_SORTING] /min [MINIMUM_PRICE] /max [MAXIMUM_PRICE] /cat [CATEGORY_NUMBER] |
 | __*Transaction-related features*__ |                                                                                                     |
 | Add a new transaction              | add-tx /i [ITEM_ID] /b [BORROWER_NAME] /d [DURATION] /c [CREATED_DATE]                              |
+| List all users                     | list-tx                                                                                             |
 | Remove a transaction               | remove-tx /t [TRANSACTION_ID]                                                                       |
 | View a transaction                 | view-tx /t [TRANSACTION_ID]                                                                         |
+| Update a transaction               | update-tx /t [TRANSACTION_ID] /d [NEW_DURATION]                                                     |
 | __*Others*__                       |                                                                                                     |
 | Get help                           | help                                                                                                |
 | Exit program                       | bye                                                                                                 |
