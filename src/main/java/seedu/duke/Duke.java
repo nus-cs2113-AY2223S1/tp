@@ -58,6 +58,7 @@ public class Duke {
                 break;
             }
 
+            saveData();
             System.out.println(response);
 
             assert isRunning : "this is never set to false, use break to exit loop";
