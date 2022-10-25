@@ -157,6 +157,23 @@ Step 4: After deleting a user, a message will be displayed to the user via `Ui.d
 The following sequence diagram shows how the remove user operation works:
 ![removeUserSequence](images/RemoveUserSequence.png)
 
+#### List users
+
+> This feature allows the user to view details of all users in the user list
+
+Given below is an example usage scenario and how the command mechanism behaves at each step.
+
+Step 1: The user types in the command in the command line. The CommandParser class checks if the command is valid through the createCommand() method, and either sends an exception, or send the input to the ListUsersCommand class to be processed.
+
+Step 2: In `ListUserCommand::exeucteCommand` work is delegated `UserList::toString()` to obtain a string representation of all users in the user list
+
+Step 3: The string representation is forwarded to `UI::printResponse` to show it to the user
+
+Step 4: Lastly, `executeCommand` returns false to indicate that this is a non-terminating command
+
+The following sequence diagram shows how the view user operation works:
+![ListUserSequence](images/ListUserSequence.png)
+
 #### View a user
 
 > This feature allows the user to view a specific user in the user list. Upon successfully sending the command, the Ui will display the details of the searched user
@@ -214,6 +231,23 @@ Step 4: After deleting an item, a message will be displayed to the user via `Ui.
 
 The following sequence diagram shows how the remove item operation works:
 ![removeItemSequence](images/RemoveItemSequence.png)
+
+#### List items
+
+> This feature allows the user to view details of all items in the item list
+
+Given below is an example usage scenario and how the command mechanism behaves at each step.
+
+Step 1: The user types in the command in the command line. The CommandParser class checks if the command is valid through the createCommand() method, and either sends an exception, or send the input to the ListItemsCommand class to be processed.
+
+Step 2: In `ListItemsComamnd::exeucteCommand` work is delegated `ItemList::toString()` to obtain a string representation of all items in the item list
+
+Step 3: The string representation is forwarded to `UI::printResponse` to show it to the user
+
+Step 4: Lastly, `executeCommand` returns false to indicate that this is a non-terminating command
+
+The following sequence diagram shows how the view user operation works:
+![ListItemsSequence](images/ListItemSequence.png)
 
 #### View an item
 
@@ -325,6 +359,23 @@ Step 4: After deleting a transaction, a message will be displayed to the user vi
 
 The following sequence diagram shows how the remove transaction operation works:
 ![removeTransactionSequence](images/RemoveTransactionSequence.png)
+
+#### List transactions
+
+> This feature allows the user to view details of all transactions
+
+Given below is an example usage scenario and how the command mechanism behaves at each step.
+
+Step 1: The user types in the command in the command line. The CommandParser class checks if the command is valid through the createCommand() method, and either sends an exception, or send the input to the ListTransactionsCommand class to be processed.
+
+Step 2: In `ListTransactionsCommand::exeucteCommand` work is delegated `TransactionList::toString()` to obtain a string representation of all transactions in the transaction list
+
+Step 3: The string representation is forwarded to `UI::printResponse` to show it to the user
+
+Step 4: Lastly, `executeCommand` returns false to indicate that this is a non-terminating command
+
+The following sequence diagram shows how the view user operation works:
+![ListTransactionSequence](images/ListTransactionSequence.png)
 
 #### View a transaction
 

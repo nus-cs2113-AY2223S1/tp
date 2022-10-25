@@ -1,0 +1,22 @@
+@startuml
+hide footbox
+Actor User
+"User" -> ":Duke": "list-users"
+activate ":Duke"
+":Duke" -> ":CommandParser": createCommand()
+activate ":CommandParser"
+":CommandParser" -> ":ListUsersCommand"**: new
+activate ":ListUsersCommand"
+return
+":CommandParser" --> ":Duke"
+deactivate
+":Duke" -> ":ListUsersCommand" : executeCommand()
+activate ":ListUsersCommand"
+":ListUsersCommand" -> ":UserList" : toString()
+activate ":UserList"
+return
+":ListUsersCommand" -> "<<class>>\nUI" : printResponse()
+return isLastCommand
+deactivate ":ListUsersCommand"
+
+@enduml
