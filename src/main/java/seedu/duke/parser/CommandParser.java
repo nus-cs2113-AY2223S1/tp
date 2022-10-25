@@ -17,6 +17,9 @@ import seedu.duke.exceptions.ModuleNotFoundException;
 import seedu.duke.module.Module;
 import seedu.duke.timetable.Lesson;
 
+/**
+ * Class to handle parsing user input and creating Command after checking for validity of user input.
+ */
 public class CommandParser {
     private static final String UNIVERSITY_PREFIX = "u/";
     private static final String MODULE_PREFIX = "m/";
@@ -45,6 +48,14 @@ public class CommandParser {
     private static final int LESSON_START_TIME_INDEX = 4;
     private static final int LESSON_END_TIME_INDEX = 5;
 
+    /**
+     * Creates a user command based on user input.
+     *
+     * @param userInput A line of user input.
+     * @return A Command corresponding to the type of action user wants to carry out
+     *
+     * @throws InvalidUserCommandException if the user command does not follow the command format laid out
+     */
     public static Command getUserCommand(String userInput) throws InvalidUserCommandException,
             ModuleNotFoundException, InvalidModuleException {
         String[] userInputTokenized = parseUserCommand(userInput);
@@ -120,89 +131,186 @@ public class CommandParser {
         }
     }
 
-    private static Lesson parseLesson(String[] userInputTokenized) throws ModuleNotFoundException,
-            InvalidModuleException {
-        if (!isValidCommandOnTimetable(userInputTokenized)) {
+    /**
+     * Creates a Lesson class from user input lesson timetable details.
+     *
+     * @param parameters User input split by spaces.
+     * @return Lesson if the user input is a valid command on timetables, null otherwise.
+     *
+     * @throws ModuleNotFoundException if user input module code is not found in database
+     * @throws InvalidModuleException if module details are invalid when passed into Lesson constructor
+     */
+    private static Lesson parseLesson(String[] parameters) throws ModuleNotFoundException, InvalidModuleException {
+        if (!isValidCommandOnTimetable(parameters)) {
             return null;
         } else {
-            String code = userInputTokenized[MODULE_INDEX].substring(2);
+            String code = parameters[MODULE_INDEX].substring(2);
             Module puModule = Database.findPuMapping(code).getPartnerUniversityModule();
-            String day = userInputTokenized[DAY_INDEX].substring(2);
-            String startTime = userInputTokenized[LESSON_START_TIME_INDEX].substring(3);
-            String endTime = userInputTokenized[LESSON_END_TIME_INDEX].substring(3);
+            String day = parameters[DAY_INDEX].substring(2);
+            String startTime = parameters[LESSON_START_TIME_INDEX].substring(3);
+            String endTime = parameters[LESSON_END_TIME_INDEX].substring(3);
             return new Lesson(puModule.getCode(),puModule.getTitle(),puModule.getCredit(), puModule.getUniversity(),
                     day, startTime, endTime);
         }
 
     }
 
-
-    private static boolean isEmptyUserInput(String[] userInputTokenized) {
-        return userInputTokenized.length < ONE_PARAMETER_LENGTH;
+    /**
+     * Checks whether a line of user input is empty.
+     *
+     * @param parameters User input split by spaces.
+     * @return True if the UserInput is empty. False otherwise.
+     */
+    private static boolean isEmptyUserInput(String[] parameters) {
+        return parameters.length < ONE_PARAMETER_LENGTH;
     }
 
+    /**
+     * Checks whether user input is a valid view command.
+     *
+     * @param parameters User input split by spaces.
+     * @return True if user input is a valid view command. False otherwise.
+     */
     private static boolean isValidViewCommand(String[] parameters) {
         return parameters.length == TWO_PARAMETERS_LENGTH && isValidViewOptionIndex(parameters[VIEW_OPTION_INDEX]);
     }
 
+    /**
+     * Checks whether user input option is a valid view command option.
+     *
+     * @param option User input option
+     * @return True if user input option is a valid view command option. False otherwise.
+     */
     private static boolean isValidViewOptionIndex(String option) {
         return option.trim().equals(USER_LISTS_OPTION) || option.startsWith(UNIVERSITY_PREFIX)
                 || option.trim().equals(DELETE_HISTORY_OPTION) || option.trim().equals(TIMETABLES_OPTION);
     }
 
+    /**
+     * Checks whether user input is a valid add command.
+     *
+     * @param parameters User input split by spaces.
+     * @return True if user input is a valid add command. False otherwise.
+     */
     private static boolean isValidAddCommand(String[] parameters) {
         return isValidCommandOnModules(parameters) || isValidCommandOnTimetable(parameters);
     }
 
+    /**
+     * Checks whether user input is a valid exit command.
+     *
+     * @param parameters User input split by spaces.
+     * @return True if user input is a valid exit command. False otherwise.
+     */
     private static boolean isValidExitCommand(String[] parameters) {
         return parameters.length == ONE_PARAMETER_LENGTH;
     }
 
+    /**
+     * Checks whether user input is a valid help command.
+     *
+     * @param parameters User input split by spaces.
+     * @return True if user input is a valid help command. False otherwise.
+     */
     private static boolean isValidHelpCommand(String[] parameters) {
         return parameters.length == ONE_PARAMETER_LENGTH;
     }
 
+    /**
+     * Checks whether user input is a valid delete command.
+     *
+     * @param parameters User input split by spaces.
+     * @return True if user input is a valid delete command. False otherwise.
+     */
     private static boolean isValidDeleteCommand(String[] parameters) {
         return isValidCommandOnUniversity(parameters) || isValidCommandOnModules(parameters)
                 || isValidCommandOnTimetable(parameters);
     }
 
 
+    /**
+     * Checks whether user input is a valid create command.
+     *
+     * @param parameters User input split by spaces.
+     * @return True if user input is a valid create command. False otherwise.
+     */
     private static boolean isValidCreateCommand(String[] parameters) {
         return isValidCommandOnUniversity(parameters);
     }
 
+    /**
+     * Checks whether user input is a valid list command.
+     *
+     * @param parameters User input split by spaces.
+     * @return True if user input is a valid list command. False otherwise.
+     */
     private static boolean isValidListCommand(String[] parameters) {
         return parameters.length == TWO_PARAMETERS_LENGTH
                 && isValidListOption(parameters[LIST_OPTION_INDEX]);
     }
 
+    /**
+     * Checks whether user input option is a valid list command option.
+     *
+     * @param option User input option
+     * @return True if user input option is a valid list command option. False otherwise.
+     */
     private static boolean isValidListOption(String option) {
         return option.trim().equals(UNIVERSITIES_OPTION) || option.trim().equals(MODULES_OPTION)
                 || option.startsWith(UNIVERSITY_PREFIX) || option.startsWith(MODULE_PREFIX);
     }
 
+    /**
+     * Checks whether user input is a valid favourite command.
+     *
+     * @param parameters User input split by spaces.
+     * @return True if user input is a valid favourite command. False otherwise.
+     */
     private static boolean isValidFavouriteCommand(String[] parameters) {
         return parameters.length == TWO_PARAMETERS_LENGTH
                 && isValidFavouriteOption(parameters[FAVORITE_OPTION_INDEX]);
     }
 
+    /**
+     * Checks whether user input option is a valid favourite command option.
+     *
+     * @param option User input option
+     * @return True if user input option is a valid favourite command option. False otherwise.
+     */
     private static boolean isValidFavouriteOption(String option) {
         return option.startsWith(ADD_FAVORITE_PREFIX) || option.startsWith(DELETE_FAVORITE_PREFIX)
                 || option.startsWith(VIEW_FAVORITE_PREFIX);
     }
 
+    /**
+     * Checks whether user input is a valid command on modules.
+     *
+     * @param parameters User input split by spaces.
+     * @return True if user input is a valid command on modules. False otherwise.
+     */
     private static boolean isValidCommandOnModules(String[] parameters) {
         return parameters.length == THREE_PARAMETERS_LENGTH
                 && parameters[UNIVERSITY_INDEX].startsWith(UNIVERSITY_PREFIX)
                 && parameters[MODULE_INDEX].startsWith(MODULE_PREFIX);
     }
 
+    /**
+     * Checks whether user input is a valid command on universities.
+     *
+     * @param parameters User input split by spaces.
+     * @return True if user input is a valid command on universities. False otherwise.
+     */
     private static boolean isValidCommandOnUniversity(String[] parameters) {
         return parameters.length == TWO_PARAMETERS_LENGTH
                 && parameters[UNIVERSITY_INDEX].startsWith(UNIVERSITY_PREFIX);
     }
 
+    /**
+     * Checks whether user input is a valid command on timetables.
+     *
+     * @param parameters User input split by spaces.
+     * @return True if user input is a valid command on timetables. False otherwise.
+     */
     private static boolean isValidCommandOnTimetable(String[] parameters) {
         return parameters.length == SIX_PARAMETERS_LENGTH
                 && parameters[UNIVERSITY_INDEX].startsWith(UNIVERSITY_PREFIX)
@@ -212,6 +320,12 @@ public class CommandParser {
                 && parameters[LESSON_END_TIME_INDEX].startsWith(END_TIME_PREFIX);
     }
 
+    /**
+     * Split user input by spaces and process each parameter by removing underscores.
+     *
+     * @param userInput A line of user input.
+     * @return An array of user input parameters split by spaces with underscores removed.
+     */
     private static String[] parseUserCommand(String userInput) {
         String[] userInputTokenized = userInput.split(" +");
         for (int i = 0; i < userInputTokenized.length; i++) {
@@ -220,6 +334,12 @@ public class CommandParser {
         return userInputTokenized;
     }
 
+    /**
+     * Removes underscores from user input parameter.
+     *
+     * @param parameter User input.
+     * @return User input with underscores removed.
+     */
     private static String removeParameterUnderscores(String parameter) {
         return parameter.replace("_", " ");
     }
