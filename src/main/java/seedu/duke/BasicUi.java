@@ -62,7 +62,14 @@ public class BasicUi {
     }
 
     public static void showCurrencyOptions() {
-        final String MESSAGE = "Would you like to get information about a currency or check a conversion rate?";
+        final String MESSAGE = "Would you like to get information about a currency/currencies or check a conversion rate?"
+                +
+                "\n"
+                +
+                INDENTATION
+                +
+                "You can do the following commands : info, conversion, exit, list.";
+
         System.out.println(INDENTATION + MESSAGE);
     }
 

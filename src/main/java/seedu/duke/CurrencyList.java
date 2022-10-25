@@ -27,7 +27,6 @@ public class CurrencyList {
 
     protected static List<CurrencyStructure> readInCurrencies(Path path) throws FinanceException {
         List<CurrencyStructure> currencyList = new ArrayList<>();
-        //File f = new File(path + "/currencies.txt"); // create a File for the given file path
         Path filePath = Paths.get(path.toString(), "currencies.txt");
         File file = new File(filePath.toString());
         Scanner scanner;
@@ -38,8 +37,7 @@ public class CurrencyList {
         } // create a Scanner using the File as the source
         while (scanner.hasNext()) {
             String line = scanner.nextLine();
-            // List<String> items = Arrays.asList(line.split(","));
-            String[] items = line.split(", ");
+            String[] items = line.split(",");
             String abbrName = items[0];
             String fullName = items[1];
             String symbol = items[2];
