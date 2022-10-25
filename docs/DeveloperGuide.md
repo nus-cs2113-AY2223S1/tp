@@ -263,7 +263,7 @@ Given below is an example usage scenario and how the command mechanism behaves a
 
 Step 1: The user types in the command in the command line. The CommandParser class checks if the command is valid through the createCommand() method, and either sends an exception or send the input to the SortItemCommand to be processed.
 
-Step 2: The SortItemCommand checks if the delimiters ('mode', 'min' (optional), 'max' (optional)) are present in the user input through the getArgsSortItemsCmd() method. If compulsory arguments are not present, an exception will be thrown. The command also checks whether the input's final argument is valid through `isValidMode()`, `isValidPrice()` and `isValidPriceBoundaries` methods. An exception will also be thrown if the final argument does not satisfy the requirements (incorrect sort format, format price, incorrect price boundaries...)
+Step 2: The SortItemCommand checks if the delimiters ('mode' (optional), 'min' (optional), 'max' (optional), 'cat' (optional)) are present in the user input through the getArgsSortItemsCmd() method. The default sorting mode is low to high if `/mode` is empty. The command checks whether the input's final argument is valid through `isValidMode()`, `isValidPrice()`, `isValidPriceBoundaries` and `isValidCategoryNumber` methods. An exception will also be thrown if the final argument does not satisfy the requirements (incorrect sort format, format price, incorrect price boundaries...)
 
 Step 3: If all arguments are valid, then `sortAndFilter()` will return a list based on the input arguments.
 
