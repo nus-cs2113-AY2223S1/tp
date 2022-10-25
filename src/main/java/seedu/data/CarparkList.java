@@ -18,7 +18,7 @@ import seedu.parser.search.Word;
  * Container for all the {@link Carpark} classes. Contains method for finding the carpark.
  */
 public class CarparkList {
-    public static final HashMap<String, Carpark> CARPARK_HASH_MAP = new HashMap<String, Carpark>();
+    public final HashMap<String, Carpark> carparkHashMap = new HashMap<String, Carpark>();
     private List<Carpark> carparks;
 
 
@@ -82,10 +82,10 @@ public class CarparkList {
      * @throws NoCarparkFoundException If no carpark was found
      */
     public Carpark findCarpark(String searchString) throws NoCarparkFoundException {
-        if (CARPARK_HASH_MAP.get(searchString.toLowerCase()) == null) {
+        if (carparkHashMap.get(searchString.toLowerCase()) == null) {
             throw new NoCarparkFoundException();
         } else {
-            return CARPARK_HASH_MAP.get(searchString.toLowerCase());
+            return carparkHashMap.get(searchString.toLowerCase());
         }
     }
 
@@ -135,13 +135,13 @@ public class CarparkList {
     public void combineByLotType() {
         for (Carpark carpark : carparks) {
             String carparkId = carpark.getCarparkId().toLowerCase();
-            if (!CARPARK_HASH_MAP.containsKey(carparkId)) {
-                CARPARK_HASH_MAP.put(carparkId, carpark);
+            if (!carparkHashMap.containsKey(carparkId)) {
+                carparkHashMap.put(carparkId, carpark);
             } else {
-                CARPARK_HASH_MAP.get(carparkId).addCarparkLotType(carpark);
+                carparkHashMap.get(carparkId).addCarparkLotType(carpark);
             }
         }
-        carparks = new ArrayList<>(CARPARK_HASH_MAP.values());
+        carparks = new ArrayList<>(carparkHashMap.values());
     }
 
     public List<Carpark> getCarparks() {

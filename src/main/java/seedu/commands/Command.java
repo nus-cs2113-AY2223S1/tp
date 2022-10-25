@@ -8,7 +8,7 @@ import seedu.exception.NoCarparkFoundException;
 /**
  * Represents an executable command
  */
-public class Command {
+public abstract class Command {
     protected CarparkList carparkList;
 
     /**
