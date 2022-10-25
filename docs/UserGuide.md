@@ -245,7 +245,7 @@ Status: [On loan] ItemId: ea608c61 Item: toy Category: SPORTS_EQUIPMENT Owner: W
 ____________________________________________________________
 ```
 
-#### 3.3.5. ```sort-items``` - Sort and filter list of items
+#### 3.3.6. ```sort-items``` - Sort and filter list of items
 >Sort and filter list of items based on the mode of sorting, price boundaries and category requested by the user
 
 Format: ```sort-items /mode [MODE_OF_SORTING] /min [MIN_PRICE] /max [MAX_PRICE] /cat [CATEGORY_NUMBER]```
@@ -269,7 +269,7 @@ Here are 2 item(s) in your filtered list:
 ____________________________________________________________
 ```
 
-#### 3.3.6. ```list-categories``` - List all categories 
+#### 3.3.7. ```list-categories``` - List all categories 
 >List all categories that can be assigned to items and their index
 
 Format: ```list-categories```
