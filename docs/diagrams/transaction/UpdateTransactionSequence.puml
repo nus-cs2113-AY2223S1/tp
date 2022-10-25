@@ -1,0 +1,57 @@
+@startuml
+hide footbox
+Actor User
+"User" -> ":Duke": "update-tx..."
+activate ":Duke"
+":Duke" -> ":CommandParser": createCommand()
+activate ":CommandParser"
+":CommandParser" -> ":UpdateTransactionCommand"**: new
+activate ":UpdateTransactionCommand"
+return
+":CommandParser" --> ":Duke"
+deactivate
+":Duke" -> ":UpdateTransactionCommand" : executeCommand()
+activate ":UpdateTransactionCommand"
+":UpdateTransactionCommand" -> ":UpdateTransactionCommand": getArgsUpdateTxCmd()
+activate ":UpdateTransactionCommand"
+return args
+alt args is valid
+":UpdateTransactionCommand" -> ":TransactionList": updateTransactionDuration()
+    activate ":TransactionList"
+    alt transaction exists
+        ":TransactionList" -> ":Transaction": updateDuration()
+        activate ":Transaction"
+        return updatedTransaction
+        return updatedTransaction
+        ":UpdateTransactionCommand" -> "<<class>>\nUi": updateTransactionMessage()
+        activate "<<class>>\nUi"
+        return
+        deactivate ":TransactionList"
+        deactivate "<<class>>\nUi"
+        deactivate ":Transaction"
+    else
+        ":TransactionList" -> ":DukeException"** : new
+        destroy ":TransactionList"
+        activate ":DukeException"
+        ":DukeException" --> ":Duke"
+        destroy ":DukeException"
+        ":Duke" -> "<<class>>\nUi" : print error
+        activate "<<class>>\nUi"
+        "<<class>>\nUi" --> ":Duke" : error message
+        deactivate "<<class>>\nUi"
+    end
+else args is invalid
+    ":UpdateTransactionCommand" -> ":DukeException"** : new
+    destroy ":UpdateTransactionCommand"
+    activate ":DukeException"
+    ":DukeException" --> ":Duke"
+    destroy ":DukeException"
+    ":Duke" -> "<<class>>\nUi" : print error
+    activate "<<class>>\nUi"
+    "<<class>>\nUi" --> ":Duke" : error message
+    deactivate "<<class>>\nUi"
+
+
+end
+
+@enduml

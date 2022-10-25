@@ -234,6 +234,27 @@ Step 4: After finding the user, a message will be displayed to the user via `Ui.
 The following sequence diagram shows how the view item operation works:
 ![viewItemSequence](images/ViewItemSequence.png)
 
+#### Update an item
+
+> This feature allows the user to update a specific item in the item list
+
+Given below is an example usage scenario and how the command mechanism behaves at each step.
+
+Step 1: The user types in the command in the command line. The CommandParser class checks if the command is valid through the createCommand() method, and either throws an exception, or forwards the input to `UpdateItemCommand` class to be processed.
+
+Step 2: `UpdateItemCommand::executeCommand` checks if the delimiters ('i', 'p') is present in the user input with the `getArgsViewItemCmd()` method. If any arguments are not present, an exception will be thrown.
+
+Step 3: If all commands are present, it then checks if arguments are valid with `UpdateItemCommand::areValidArgs` . An exception will also be thrown if the final argument does not satisfy the requirements (item not found or price not valid).
+
+Step 4: If all arguments are valid, it then delegates to `ItemList::updateItemPrice` which finds the item in the itemList by itemId, which is unique and calls `Item::updatePrice`, which returns an Item with updated price
+
+Step 5: `ItemList` then updates itself with the latest item and returns
+
+Step 6: Lastly, information about the updated item is printed to the user
+
+The following sequence diagram models the operation:
+![updateItemSequence](images/UpdateItemSequence.png)
+
 #### Sorting items
 
 > This feature allows user to sort and filter items on their list, and if the input command is correct, a list that is sorted and filtered will be sent from Ui to user
@@ -344,6 +365,27 @@ Step 4: Once the transactionList has been completely iterated through, a message
 The following sequence diagram shows how the viewTransactionsByStatus operation works:
 
 ![viewTransactionsByStatus](images/ViewTransactionByStatusSequence.png)
+
+#### Update an transaction
+
+> This feature allows the user to update a specific item in the item list
+
+Given below is an example usage scenario and how the command mechanism behaves at each step.
+
+Step 1: The user types in the command in the command line. The CommandParser class checks if the command is valid through the createCommand() method, and either throws an exception, or forwards the input to `UpdateTransactionCommand` class to be processed.
+
+Step 2: `UpdateTransactionCommand::executeCommand` checks if the delimiters ('t', 'd') is present in the user input with the `getArgsViewItemCmd()` method. If any arguments are not present, an exception will be thrown.
+
+Step 3: If all commands are present, it then checks if arguments are valid with `UpdateTransactionCommand::areValidArgs` . An exception will also be thrown if the final argument does not satisfy the requirements (transaction not found or duration not valid).
+
+Step 4: If all arguments are valid, it then delegates to `TransactionList::updateTransactionDuration` which finds the transaction in the list by `transactionId`, which is unique and calls `Transaction::updateDuration`, which returns a Transaction with updated duration
+
+Step 5: `TransactionList` then updates itself with the latest item and returns
+
+Step 6: Lastly, information about the updated transaction is printed to the user
+
+The following sequence diagram models the operation:
+![updateTransactionSequence](images/UpdateTransactionSequence.png)
 
 **...To be updated(List, Update transaction)**
 
