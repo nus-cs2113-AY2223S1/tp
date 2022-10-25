@@ -2,9 +2,9 @@ package seedu.duke.command;
 
 import seedu.duke.Parser;
 import seedu.duke.Ui;
+import seedu.duke.exception.IllegalValueException;
 import seedu.duke.records.RecordList;
 import seedu.duke.records.biometrics.Biometrics;
-import seedu.duke.exception.IllegalValueException;
 import seedu.duke.records.exercise.CardioExercise;
 import seedu.duke.records.exercise.Exercise;
 import seedu.duke.records.exercise.ExerciseList;
@@ -103,6 +103,8 @@ public class FindCommand extends Command {
     private static void handleInvalidFindStrengthCommand(String[] argumentList) throws IllegalValueException {
         if (argumentList.length != 2) {
             throw new IllegalValueException("Invalid find strength command");
+        } else if (argumentList[1].length() > 50) {
+            throw new IllegalValueException("Length of exercise name must be within 50 characters");
         }
     }
 
