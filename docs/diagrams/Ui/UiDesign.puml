@@ -1,0 +1,25 @@
+@startuml
+class UI{
+    - commandToDetailMap: LinkedHashMap<String, String>
+    - showLine(): void
+    + {static} readInput(): String
+    + {static} printResponse(): void
+    + {static} printErrorResponse(): void
+    + {static} printGreeting(): void
+    + {static} printExitMessage(): void
+    + {static} addItemMessage(): void
+    + {static} viewItemMessage(): void
+    + {static} updateItemMessage(): void
+    + {static} deleteItemMessage(): void
+    + {static} addTransactionMessage(): void
+    + {static} viewTransactionMessage(): void
+    + {static} viewCompletedTransactionMessage(): void
+    + {static} viewUncompletedTransactionMessage(): void
+    + {static} updateTransactionMessage(): void
+    + {static} deleteTransactionMessage(): void
+    + {static} viewUserMessage(): void
+    + {static} addUserMessage(): void
+    + {static} deleteUserMessage(): void
+}
+
+@enduml
