@@ -1,8 +1,9 @@
 package seedu.duke;
 
 public class RemoveCommand extends Commands {
-    int index;
-    Class type;
+    private final String cannotFind = "Unable to find item for specified type and index";
+    private int index;
+    private Class type;
 
     public RemoveCommand(ReviewList reviews, Class type, int index) {
         super(reviews);
@@ -27,7 +28,7 @@ public class RemoveCommand extends Commands {
                 }
             }
         }
-        return "Unable to find item for specified type and index";
+        return cannotFind;
     }
 
 }
