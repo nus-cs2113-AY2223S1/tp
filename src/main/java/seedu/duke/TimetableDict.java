@@ -191,7 +191,7 @@ public class TimetableDict {
     }
 
     public String allocateModules() {
-        String resultString = "Sorry, but we were unable to allocate timings for these modules due to timetable clashes:\n";
+        String resultString = "Sorry we were unable to allocate timings for these modules due to timetable clashes:\n";
 
         List<Module> listOfModules = Timetable.getListOfModules();
         int numOfPermutations = 1;
