@@ -24,37 +24,41 @@ public class Calculator {
         this.age = age;
         this.gender = gender;
         this.activityLevel = activityLevel;
-        this.bmi = 0;
         this.maintenanceCalories = 0;
         this.multiplier = 0;
     }
 
 
     public String getBmiStatus() {
-        String bmiStatus;
+        String bmiStatus = "You are currently unclassified as your BMI is not set yet!";
         double healthyweight = 18.5;
         double overweight = 24.9;
         double obese = 29.9;
-        if (bmi < healthyweight) {
+        double extremelyobese = 50.0;
+        if (this.bmi < healthyweight) {
             bmiStatus = "You are currently in the underweight range";
-        } else if (bmi <= overweight) {
+        } else if (this.bmi <= overweight) {
             bmiStatus = "You are currently in the healthy range";
-        } else if (bmi <= obese) {
+        } else if (this.bmi <= obese) {
             bmiStatus = "You are currently in the overweight range";
-        } else {
+        } else if (this.bmi <= extremelyobese) {
             bmiStatus = "You are currently in the obese range. Start your workout journey! ";
         }
         return bmiStatus;
     }
 
     public double getBmi() {
-        bmi = Double.valueOf(weight / ((height / 100) * (height / 100)));
-        return bmi;
+        return this.bmi;
+    }
+
+    public void setBmi(int weight,int height) {
+        this.bmi = Double.valueOf(Double.valueOf(weight)
+                / (Double.valueOf(height) / 100 * Double.valueOf(height) / 100));
     }
 
     public String getActivityStatus() {
         String activityStatus;
-        switch (activityLevel) {
+        switch (this.activityLevel) {
         case (1):
             activityStatus = "You have a sedentary lifestyle!";
             break;
@@ -78,7 +82,7 @@ public class Calculator {
 
 
     public int getIdealMaintenanceCalories() {
-        switch (activityLevel) {
+        switch (this.activityLevel) {
         case (1):
             multiplier = 1.2;
             break;
