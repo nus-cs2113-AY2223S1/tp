@@ -15,6 +15,7 @@ import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INSUFFICIEN
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PARTS;
 
 //@@author bdthanh
+
 /**
  * A representation of a command to remove an item.
  */
@@ -26,8 +27,8 @@ public class RemoveItemCommand extends Command {
     /**
      * Constructor for RemoveItemCommand.
      *
-     * @param parts The parts from user input
-     * @param itemList The list of items to work with
+     * @param parts           The parts from user input
+     * @param itemList        The list of items to work with
      * @param transactionList The list of transactions to work with
      * @throws InsufficientArgumentsException If the number of args is incorrect
      */
@@ -66,12 +67,13 @@ public class RemoveItemCommand extends Command {
      *
      * @return false
      * @throws InvalidArgumentException If there is a part that cannot be parsed
-     * @throws ItemNotFoundException If the item cannot be found in the list
-     * @throws InvalidItemException If the item is unavailable
+     * @throws ItemNotFoundException    If the item cannot be found in the list
+     * @throws InvalidItemException     If the item is unavailable
      */
     public boolean executeCommand()
             throws InvalidArgumentException, ItemNotFoundException, InvalidItemException {
         String[] args = getArgsRemoveItemCmd();
+        assert args.length == 1 : "Args length is invalid";
         String itemId = args[0];
         Item item = itemList.getItemById(itemId);
         itemList.deleteItem(itemId, transactionList);

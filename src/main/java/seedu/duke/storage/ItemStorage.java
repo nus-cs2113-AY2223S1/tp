@@ -85,7 +85,7 @@ public class ItemStorage extends Storage {
      * @param splitItemLine The raw item information.
      * @return An Item with full information.
      */
-    public Item handleItemLine(String[] splitItemLine) {
+    public static Item handleItemLine(String[] splitItemLine) {
         String itemId = splitItemLine[0];
         String itemName = splitItemLine[1];
         double price = Double.parseDouble(splitItemLine[2]);

@@ -6,7 +6,8 @@ import seedu.duke.parser.DateParser;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
-// @@author bdthanh
+//@@author bdthanh
+
 /**
  * A representation of transaction.
  */
@@ -22,14 +23,14 @@ public class Transaction {
     /**
      * Constructor method for transaction.
      *
-     * @param itemName The name of the item involved.
-     * @param itemId The id of the item involved.
+     * @param itemName   The name of the item involved.
+     * @param itemId     The id of the item involved.
      * @param borrowerId The id(name) of the user who borrows.
-     * @param duration The length of transaction(days).
-     * @param createdAt The day when transaction created.
+     * @param duration   The length of transaction(days).
+     * @param createdAt  The day when transaction created.
      */
     public Transaction(String itemName, String itemId, String borrowerId, int duration,
-            LocalDate createdAt) {
+                       LocalDate createdAt) {
         this.transactionId = IdGenerator.generateId();
         this.itemName = itemName;
         this.borrower = borrowerId;
@@ -43,14 +44,14 @@ public class Transaction {
      * Constructor method for transaction.
      *
      * @param transactionId The id of the transaction.
-     * @param itemName The name of the item involved.
-     * @param itemId The id of the item involved.
-     * @param borrowerId The id(name) of the user who borrows.
-     * @param duration The length of transaction(days).
-     * @param createdAt The day when transaction created.
+     * @param itemName      The name of the item involved.
+     * @param itemId        The id of the item involved.
+     * @param borrowerId    The id(name) of the user who borrows.
+     * @param duration      The length of transaction(days).
+     * @param createdAt     The day when transaction created.
      */
     public Transaction(String transactionId, String itemName, String itemId, String borrowerId,
-            int duration, LocalDate createdAt) {
+                       int duration, LocalDate createdAt) {
         this.transactionId = transactionId;
         this.itemName = itemName;
         this.borrower = borrowerId;
@@ -97,6 +98,15 @@ public class Transaction {
     }
 
     /**
+     * Gets the Duration.
+     *
+     * @return The Duration of transaction
+     */
+    public int getDuration() {
+        return duration;
+    }
+
+    /**
      * Checks if the transaction finished or not.
      *
      * @return true If the return date is before today
@@ -118,7 +128,7 @@ public class Transaction {
 
     /**
      * Updates the duration of the transaction.
-     * 
+     *
      * @param newDuration The new duration
      * @return The updated transaction
      */

@@ -86,7 +86,7 @@ public class TransactionStorage extends Storage {
      * @param splitTransactionLine The raw transaction information.
      * @return A Transaction with full information.
      */
-    public Transaction handleTransactionLine(String[] splitTransactionLine) {
+    public static Transaction handleTransactionLine(String[] splitTransactionLine) {
         String transactionId = splitTransactionLine[0];
         String itemName = splitTransactionLine[1];
         String itemId = splitTransactionLine[2];

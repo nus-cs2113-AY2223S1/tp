@@ -57,7 +57,7 @@ public class TransactionList {
      * Updates a transaction duration in the list given its ID.
      *
      * @param transactionId The id of the transaction to be deleted
-     * @param duration The new duration
+     * @param duration      The new duration
      * @throws TransactionNotFoundException If the transaction cannot be found in the list
      */
     public Transaction updateTransactionDuration(String transactionId, int duration)

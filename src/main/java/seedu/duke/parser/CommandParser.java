@@ -36,6 +36,7 @@ import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_ARGUMENT_EM
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_COMMAND_UNRECOGNIZABLE;
 
 // @@author winston-lim
+
 /**
  * A class that parses and analyses the input string from the user.
  */
@@ -127,16 +128,16 @@ public class CommandParser {
     /**
      * Parses the command from user.
      *
-     * @param input The input from user
-     * @param userList The list of users
-     * @param itemList The list of items
+     * @param input           The input from user
+     * @param userList        The list of users
+     * @param itemList        The list of items
      * @param transactionList The list of transactions
      * @return Commands based on the command word
-     * @throws CommandNotFoundException If the command is unrecognizable
+     * @throws CommandNotFoundException       If the command is unrecognizable
      * @throws InsufficientArgumentsException If number of args in the commands is not enough.
      */
     public static Command createCommand(String input, UserList userList, ItemList itemList,
-            TransactionList transactionList)
+                                        TransactionList transactionList)
             throws CommandNotFoundException, InsufficientArgumentsException {
         String command = getCommand(input);
         String[] parts = getParts(input);

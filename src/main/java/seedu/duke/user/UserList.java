@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_USER_NOT_FOUND;
 
 // @@author chiewyx
+
 /**
  * A representation of a list of User.
  */
@@ -98,15 +99,6 @@ public class UserList {
             throw new UserNotFoundException(MESSAGE_USER_NOT_FOUND);
         }
         return returnList;
-    }
-
-    public String listUser() {
-        StringBuilder listOfUsers = new StringBuilder();
-        listOfUsers.append("Here are your list of users:").append(System.lineSeparator());
-        for (User user : userList) {
-            listOfUsers.append(user.toString()).append(System.lineSeparator());
-        }
-        return listOfUsers.toString();
     }
 
     @Override
