@@ -1,4 +1,5 @@
 package seedu.duke.records.exercise;
+
 import seedu.duke.records.Record;
 
 import java.time.LocalDate;

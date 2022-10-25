@@ -340,7 +340,7 @@ public class Ui {
         String paddedStatus = "Status";
 
         String line = paddedDate + paddedWeight + paddedFat + paddedDescription + paddedCalories + paddedExercise
-                +paddedWeights + paddedSets + paddedRep + paddedDist + paddedCaloriesBurnt + paddedStatus;
+                + paddedWeights + paddedSets + paddedRep + paddedDist + paddedCaloriesBurnt + paddedStatus;
         return line;
     }
 
