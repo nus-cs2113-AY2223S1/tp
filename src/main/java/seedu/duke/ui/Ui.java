@@ -76,7 +76,7 @@ public class Ui {
                 + "Adds a university list to the user's favourites\n"
                 + SPACING + "favourite " + "/favourite del/UNIVERSITY_NAME_IN_UNDERSCORES         "
                 + "Deletes a university list from the user's favourites\n"
-                + SPACING + "favourite " + "/favourite view/                                      "
+                + SPACING + "favourite " + "/favourite VIEW                                       "
                 + "View the user's favourite university lists\n"
                 + SPACING + "exit      " + "/exit                                                 "
                 + "Terminate the program\n"

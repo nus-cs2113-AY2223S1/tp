@@ -28,7 +28,7 @@ public class CommandParser {
     private static final String END_TIME_PREFIX = "en/";
     private static final String ADD_FAVORITE_PREFIX = "add/";
     private static final String DELETE_FAVORITE_PREFIX = "del/";
-    private static final String VIEW_FAVORITE_PREFIX = "view/";
+    private static final String VIEW_FAVORITE_PREFIX = "VIEW";
     private static final String UNIVERSITIES_OPTION = "UNIVERSITIES";
     private static final String USER_LISTS_OPTION = "LISTS";
     private static final String MODULES_OPTION = "MODULES";
