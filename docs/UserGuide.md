@@ -9,13 +9,16 @@ information quickly with minimal latency.
     * [Add Property: `add -property`](#add-property-add--property)
     * [Delete Property: `delete -property`](#delete-property-delete--property)
     * [List Properties: `list -property`](#list-properties-list--property)
+    * [List Properties with tags: `list -property TAG`](#list-properties-with-tags-list--property-tag)
     * [Check Property: `check -property`](#check-property-check--property)
     * [Add Client: `add -client`](#add-client-add--client)
     * [Delete Client: `delete -client`](#delete-client-delete--client)
     * [List Clients: `list -client`](#list-clients-list--client)
+    * [List Clients With Tags: `list -client TAG`](#list-clients-with-tags-list--client-tag)
     * [Check Client: `check -client`](#check-client-check--client)
     * [Pair Client and Property: `pair`](#pair-client-and-property-pair)
     * [Unpair Client and Property: `unpair`](#unpair-client-and-property-unpair)
+    * [List Everything `list -everything`](#list-everything-list--everything)
     * [Exit: `quit`](#exit-quit)
     * [Saving data](#saving-data)
     * [Loading data](#loading-data)
@@ -43,7 +46,7 @@ Note:
 
 ### List Properties: `list -property`
 Lists all properties present in the list
-### List Properties with tags: `list -property TAG` 
+### List Properties With Tags: `list -property TAG` 
 Lists only selected details of all the properties, depending on the TAG. The commands for these are -
 * `list -property a/` This is for address
 * `list -property n/` This is for name
@@ -65,7 +68,7 @@ Displays the information of the specified property, along with the clients the p
 
 ### List Clients: `list -client`
 Lists all the clients present in the list
-### List Clients with tags `list -client TAG` 
+### List Clients With Tags `list -client TAG` 
 List only selected details of all the clients, depending on TAG. The commands for these are-
 * `list -client c/` This is for contact number
 * `list -client b/` This is for budget
