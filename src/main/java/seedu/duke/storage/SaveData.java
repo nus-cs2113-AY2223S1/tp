@@ -2,13 +2,13 @@ package seedu.duke.storage;
 
 
 import seedu.duke.Ui;
-import seedu.duke.biometrics.Biometrics;
-import seedu.duke.biometrics.WeightAndFat;
+import seedu.duke.records.biometrics.Biometrics;
+import seedu.duke.records.biometrics.WeightAndFat;
 import seedu.duke.exception.IllegalValueException;
-import seedu.duke.exercise.Exercise;
-import seedu.duke.exercise.ExerciseList;
-import seedu.duke.food.Food;
-import seedu.duke.food.FoodList;
+import seedu.duke.records.exercise.Exercise;
+import seedu.duke.records.exercise.ExerciseList;
+import seedu.duke.records.food.Food;
+import seedu.duke.records.food.FoodList;
 
 import java.io.FileWriter;
 import java.io.IOException;

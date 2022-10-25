@@ -3,11 +3,13 @@ package seedu.duke.command;
 import org.junit.jupiter.api.Test;
 import seedu.duke.Parser;
 import seedu.duke.Ui;
-import seedu.duke.biometrics.Biometrics;
+import seedu.duke.records.Record;
+import seedu.duke.records.RecordList;
+import seedu.duke.records.biometrics.Biometrics;
 import seedu.duke.exception.IllegalValueException;
-import seedu.duke.exercise.Exercise;
-import seedu.duke.exercise.ExerciseList;
-import seedu.duke.food.FoodList;
+import seedu.duke.records.exercise.Exercise;
+import seedu.duke.records.exercise.ExerciseList;
+import seedu.duke.records.food.FoodList;
 import seedu.duke.storage.Storage;
 
 import java.util.ArrayList;
@@ -23,6 +25,7 @@ class MarkCommandTest {
     private final Ui ui = new Ui();
     private final Biometrics biometrics = new Biometrics();
     private final FoodList foodList = new FoodList();
+    private final RecordList recordList = new RecordList();
     private final Storage storage = new Storage();
 
     @Test
@@ -88,7 +91,7 @@ class MarkCommandTest {
     }
 
     @Test
-    void execute_MarkWithTwoParametersWithOutOfBoundIndex_exceptionThrown() {
+    void execute_MarkUndoneWithTwoParametersWithOutOfBoundIndex_exceptionThrown() {
         ExerciseList exerciseList = new ExerciseList();
         try {
             addExercise(exerciseList);
@@ -99,8 +102,6 @@ class MarkCommandTest {
         int currentExerciseListSize = exerciseList.getCurrentExerciseListSize();
         int completedExerciseListSize = exerciseList.getCompletedExerciseListSize();
         ArrayList<String> testInputList = new ArrayList<>();
-        testInputList.add("mark done /-1");
-        testInputList.add("mark done /" + currentExerciseListSize + 1);
         testInputList.add("mark undone /-1");
         testInputList.add("mark undone /" + completedExerciseListSize + 1);
         for (String input : testInputList) {
@@ -109,7 +110,7 @@ class MarkCommandTest {
     }
 
     @Test
-    void execute_MarkWithMoreThanTwoParameters() {
+    void execute_MarkUnDoneWithMoreThanTwoParameters() {
         ExerciseList exerciseList = new ExerciseList();
         try {
             addExercise(exerciseList);
@@ -118,18 +119,16 @@ class MarkCommandTest {
             fail();
         }
         ArrayList<String> testInputList = new ArrayList<>();
-        testInputList.add("mark done /0 /xx ");
-        testInputList.add("mark done /2 /2");
         testInputList.add("mark undone /0 /xx");
         testInputList.add("mark undone /2 /2");
         for (String input : testInputList) {
-            assertInvalidMarkCommand(input, "Invalid mark command", exerciseList);
+            assertInvalidMarkCommand(input, "Invalid mark undone command", exerciseList);
         }
     }
 
     private void assertInvalidMarkCommand(String input, String expectedMessage, ExerciseList exerciseList) {
         Command command = Parser.parse(input);
-        command.setData(ui, storage, biometrics, exerciseList, foodList);
+        command.setData(ui, storage, biometrics, exerciseList, foodList, recordList);
         try {
             command.execute();
             fail();
@@ -148,7 +147,7 @@ class MarkCommandTest {
         }
         String validMarkAsUndoneInput = "mark undone /" + index;
         Command command = Parser.parse(validMarkAsUndoneInput);
-        command.setData(ui, storage, biometrics, exerciseList, foodList);
+        command.setData(ui, storage, biometrics, exerciseList, foodList, recordList);
         command.execute();
         return exercise;
     }
@@ -160,9 +159,9 @@ class MarkCommandTest {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        String input = "mark done /" + index;
+        String input = "mark done /" + index + " /20 /5";
         Command command = Parser.parse(input);
-        command.setData(ui, storage, biometrics, exerciseList, foodList);
+        command.setData(ui, storage, biometrics, exerciseList, foodList, recordList);
         command.execute();
         return exercise;
     }
@@ -191,13 +190,14 @@ class MarkCommandTest {
 
     private void addExercise(ExerciseList exerciseList) throws IllegalValueException {
         ArrayList<String> commandList = new ArrayList<>();
-        commandList.add("add strength /bench /3 /10 /180");
-        commandList.add("add strength /press /4 /8 /58");
-        commandList.add("add strength /deadlift /2 /6 /120");
+        commandList.add("add strength /bench /30 /10 /180");
+        commandList.add("add strength /press /40 /8 /58");
+        commandList.add("add strength /deadlift /20 /6 /120");
+        biometrics.setBiometrics(20, "male", 166, 76, 20);
 
         for (String input : commandList) {
             Command c = Parser.parse(input);
-            c.setData(ui, storage, biometrics, exerciseList, foodList);
+            c.setData(ui, storage, biometrics, exerciseList, foodList, recordList);
             c.execute();
         }
     }

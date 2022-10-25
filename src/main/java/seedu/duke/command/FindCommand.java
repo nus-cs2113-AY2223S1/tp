@@ -2,14 +2,15 @@ package seedu.duke.command;
 
 import seedu.duke.Parser;
 import seedu.duke.Ui;
-import seedu.duke.biometrics.Biometrics;
+import seedu.duke.records.RecordList;
+import seedu.duke.records.biometrics.Biometrics;
 import seedu.duke.exception.IllegalValueException;
-import seedu.duke.exercise.CardioExercise;
-import seedu.duke.exercise.Exercise;
-import seedu.duke.exercise.ExerciseList;
-import seedu.duke.exercise.StrengthExercise;
-import seedu.duke.food.Food;
-import seedu.duke.food.FoodList;
+import seedu.duke.records.exercise.CardioExercise;
+import seedu.duke.records.exercise.Exercise;
+import seedu.duke.records.exercise.ExerciseList;
+import seedu.duke.records.exercise.StrengthExercise;
+import seedu.duke.records.food.Food;
+import seedu.duke.records.food.FoodList;
 import seedu.duke.storage.Storage;
 
 import java.util.ArrayList;
@@ -40,19 +41,29 @@ public class FindCommand extends Command {
         case "food":
             findFood(argumentList);
             break;
-        case "date":
-            findDate(argumentList);
+        case "date_e":
+            findDateExercise(argumentList);
+            break;
+        case "date_f":
+            findDateFood(argumentList);
             break;
         default:
             handleInvalidFindType();
         }
     }
 
-    private void findDate(String[] argumentList) throws IllegalValueException {
+    private void findDateExercise(String[] argumentList) throws IllegalValueException {
         handleInvalidFindDateCommand(argumentList);
         ArrayList<Exercise> filteredDateList = getFilteredDateList(argumentList);
         ui.output("", "Here are the exercises in your list matching this date:");
         ui.outputExerciseList(filteredDateList);
+    }
+
+    private void findDateFood(String[] argumentList) throws IllegalValueException {
+        handleInvalidFindDateCommand(argumentList);
+        ArrayList<Food> filteredFoodDateList = getFilteredFoodDateList(argumentList);
+        ui.output("", "Here are the food records in your list matching this date:");
+        ui.outputFoodList(filteredFoodDateList);
     }
 
     private void handleInvalidFindDateCommand(String[] argumentList) throws IllegalValueException {
@@ -109,6 +120,14 @@ public class FindCommand extends Command {
         return filteredFoodList;
     }
 
+    private ArrayList<Food> getFilteredFoodDateList(String[] argumentList) {
+        ArrayList<Food> filteredFoodDateList = (ArrayList<Food>) foodList.getFoodList()
+                .stream().filter(Food.class::isInstance)
+                .filter(f -> f.getDate().contains(argumentList[1]))
+                .collect(Collectors.toList());
+        return filteredFoodDateList;
+    }
+
 
     private ArrayList<Exercise> getFilteredCardioExerciseList(String[] argumentList) {
         ArrayList<Exercise> filteredExerciseList = (ArrayList<Exercise>) exerciseList.getCompletedExerciseList()
@@ -152,7 +171,8 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void setData(Ui ui, Storage storage, Biometrics biometrics, ExerciseList exerciseList, FoodList foodList) {
+    public void setData(Ui ui, Storage storage, Biometrics biometrics, ExerciseList exerciseList, FoodList foodList,
+                        RecordList recordList) {
         this.ui = ui;
         this.exerciseList = exerciseList;
         this.foodList = foodList;

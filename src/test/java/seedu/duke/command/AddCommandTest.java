@@ -3,17 +3,13 @@ package seedu.duke.command;
 import org.junit.jupiter.api.Test;
 import seedu.duke.Parser;
 import seedu.duke.Ui;
-import seedu.duke.biometrics.Biometrics;
-import seedu.duke.biometrics.WeightAndFat;
-import seedu.duke.biometrics.WeightAndFatList;
+import seedu.duke.records.RecordList;
+import seedu.duke.records.biometrics.Biometrics;
+import seedu.duke.records.biometrics.WeightAndFat;
 import seedu.duke.exception.IllegalValueException;
-import seedu.duke.exercise.ExerciseList;
-import seedu.duke.food.Food;
-import seedu.duke.food.FoodList;
+import seedu.duke.records.exercise.ExerciseList;
+import seedu.duke.records.food.FoodList;
 import seedu.duke.storage.Storage;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -23,6 +19,7 @@ class AddCommandTest {
     Biometrics biometrics = new Biometrics();
     ExerciseList exerciseList = new ExerciseList();
     FoodList foodList = new FoodList();
+    RecordList recordList = new RecordList();
     Ui ui = new Ui();
     Storage storage = new Storage();
 
@@ -67,7 +64,7 @@ class AddCommandTest {
     void execute_validWeightAndFat_successfullyAddToList() throws IllegalValueException {
         String input = "add weight /74 /17 /11-08-2011";
         Command c = Parser.parse(input);
-        c.setData(ui, storage, biometrics, exerciseList, foodList);
+        c.setData(ui, storage, biometrics, exerciseList, foodList, recordList);
         c.execute();
         WeightAndFat weightAndFat = biometrics.weightAndFatList.getWeightAndFatList().get(0);
         assertEquals(weightAndFat.getWeight(), 74);
@@ -79,7 +76,7 @@ class AddCommandTest {
     void execute_invalidDate_exceptionThrown() {
         String input = "add weight /74 /17 /11082011";
         Command c = Parser.parse(input);
-        c.setData(ui, storage, biometrics, exerciseList, foodList);
+        c.setData(ui, storage, biometrics, exerciseList, foodList, recordList);
         try {
             c.execute();
         } catch (IllegalValueException e) {

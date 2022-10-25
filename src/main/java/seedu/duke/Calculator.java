@@ -1,9 +1,7 @@
-package seedu.duke.biometrics;
+package seedu.duke;
 
-import seedu.duke.biometrics.Biometrics;
-
-import seedu.duke.Ui;
-
+import seedu.duke.records.biometrics.Biometrics;
+import seedu.duke.exception.IllegalValueException;
 
 public class Calculator {
     private int height;
@@ -30,14 +28,11 @@ public class Calculator {
 
     public String getBmiStatus() {
         String bmiStatus;
-        double healthyweight = 18.5;
-        double overweight = 24.9;
-        double obese = 29.9;
-        if (bmi < healthyweight) {
+        if (bmi < 18.5) {
             bmiStatus = "You are currently in the underweight range";
-        } else if (bmi <= overweight) {
+        } else if ((bmi >= 18.5) && (bmi <= 24.9)) {
             bmiStatus = "You are currently in the healthy range";
-        } else if (bmi <= obese) {
+        } else if ((bmi >= 25) && (bmi <= 29.9)) {
             bmiStatus = "You are currently in the overweight range";
         } else {
             bmiStatus = "You are currently in the obese range. Start your workout journey! ";
@@ -57,19 +52,19 @@ public class Calculator {
             activityStatus = "You have a sedentary lifestyle!";
             break;
         case (2):
-            activityStatus =  "You have a lightly active lifestyle!";
+            activityStatus = "You have a lightly active lifestyle!";
             break;
         case (3):
-            activityStatus =  "You have a moderately active lifestyle!";
+            activityStatus = "You have a moderately active lifestyle!";
             break;
         case (4):
-            activityStatus =  "You have a very active lifestyle!";
+            activityStatus = "You have a very active lifestyle!";
             break;
         case (5):
-            activityStatus =  "You have an extremely active lifestyle!";
+            activityStatus = "You have an extremely active lifestyle!";
             break;
         default:
-            activityStatus =  "You have not declared your activity level!";
+            activityStatus = "You have not declared your activity level!";
         }
         return activityStatus;
     }
@@ -102,6 +97,14 @@ public class Calculator {
             maintenanceCalories = (int) ((655 + (9.56 * weight) + (1.85 * height) - (4.7 * age)) * multiplier);
         }
         return maintenanceCalories;
+    }
+
+    public static int calculateCalories(Biometrics biometrics, double time,
+                                        double metabolicEquivalent) throws IllegalValueException {
+        if (biometrics.getWeight() == 0) {
+            throw new IllegalValueException("Weight cannot be 0. Pls update biometrics");
+        }
+        return (int) (0.0175 * biometrics.getWeight() * metabolicEquivalent * time);
     }
 }
 
