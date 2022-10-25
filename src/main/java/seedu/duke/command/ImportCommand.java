@@ -1,6 +1,7 @@
 package seedu.duke.command;
 
 import seedu.duke.exceptions.YamomException;
+import seedu.duke.parser.Parser;
 import seedu.duke.utils.Link;
 import seedu.duke.utils.State;
 import seedu.duke.utils.Storage;
@@ -21,7 +22,7 @@ public class ImportCommand extends Command {
     public ImportCommand(String[] input) throws YamomException {
         super(input);
 
-        if (input.length != 2) {
+        if (Parser.isTwoWordsCommand(input)) {
             throw new YamomException("No nusmod link given");
         }
         nusModLink = input[1];

@@ -29,13 +29,15 @@ public class Parser {
 
     /**
      * Analyzes based on the first word which is supposed to be a keyword specifying the
-     * feature that the user wants to call upon.
+     * feature that the user wants to call upon. Converts user input to lower case so the
+     * parser will be case-insensitive.
      *
      * @param userInput The whole <code>String</code> that the user entered.
      * @return The corresponding <code>Command</code>.
      * @throws YamomException Contains a string that specifies the type of incorrect user input.
      */
     public static Command parse(String userInput) throws YamomException {
+        userInput = userInput.toLowerCase();
         String[] keywords = userInput.split("\\s+");
 
         if (isEmptyInput(userInput)) {
@@ -133,7 +135,7 @@ public class Parser {
         } else if (isTwoWordsCommand(keywords) && !isModuleCode(keywords[1])) {
             errorMessage += "Module is invalid! "
                     + "Please enter a valid module code." + System.lineSeparator()
-                    + "Each module of study has a unique module code consisting of a two- "
+                    + "Each module of study has a unique module code consisting of a two- " + System.lineSeparator()
                     + "or three-letter prefix that generally denotes the discipline," + System.lineSeparator()
                     + "and four digits, the first of which indicates the level of the module" + System.lineSeparator()
                     + "(e.g., 1000 indicates a Level 1 module and 2000, a Level 2 module).";
@@ -181,8 +183,8 @@ public class Parser {
         for (int i = 1; i < keywords.length; i++) {
             semester.append(keywords[i]);
         }
-        semester = new StringBuilder(semester.toString().toUpperCase());
-        if (semester.toString().matches("ST1|ST2|SPECIALTERM1|SPECIALTERM2")) {
+        semester = new StringBuilder(semester.toString());
+        if (semester.toString().matches("st1|st2|specialterm1|specialterm2")) {
             int correctSemester = Integer.parseInt(semester.substring(semester.length() - 1)) + 2;
             keywords[1] = String.valueOf(correctSemester);
             return  true;

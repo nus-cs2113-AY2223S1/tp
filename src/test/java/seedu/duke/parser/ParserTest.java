@@ -132,6 +132,6 @@ public class ParserTest {
         assertEquals(expectedErrorMessage, exception.getMessage());
 
         exception = assertThrows(YamomException.class, () -> Parser.parse("view fancy"));
-        assertEquals("Error! \tUnknown command. Maybe you forgot a \"\\\".", exception.getMessage());
+        assertEquals("Error! \tUnknown command. Maybe you forgot a \"/\".", exception.getMessage());
     }
 }
