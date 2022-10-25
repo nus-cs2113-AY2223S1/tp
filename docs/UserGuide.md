@@ -9,23 +9,28 @@ YAMOM is designed for users who are proficient in Command Line Interface (CLI).
 
 ## Table of Contents
 
-1. [Quick start](#quick-start)
-2. [Features](#features)
-    1. [Getting help: `help`](#getting-help-help)
-    2. [Exiting: `bye`](#exiting-yamom-bye)
-    3. [Add a module: `add`](#add-a-module-add)
-    4. [Remove a module: `delete`](#removing-a-module-delete)
-    5. [Search for module: `search`](#search-for-modules-search)
-    6. [View timetable: `view`](#viewing-user-timetable-view)
-    7. [Select module slot: `select`](#select-a-timetable-slot-select)
-    8. [Future Feature: `COMMAND`](#feature-x-command)
-3. [Application Data](#application-data)
-   1. [Data Storage](#data-storage)
-   2. [Transfer to Another Computer](#transfer-to-another-computer)
-   3. [Transfer to NUSMods](#transfer-to-nusmods-for-nus-students)
-4. [Frequently Asked Questions (FAQ)](#faq)
-5. [Command summary](#command-summary)
-6. [Credits](#credits)
+- [User Guide for Yet Another Module Organizer/Manager (YAMOM) v1.0](#user-guide-for-yet-another-module-organizermanager-yamom-v10)
+  - [Introduction](#introduction)
+  - [Table of Contents](#table-of-contents)
+  - [Quick Start](#quick-start)
+  - [Features](#features)
+    - [Getting help: `help`](#getting-help-help)
+    - [Exiting YAMOM: `bye`](#exiting-yamom-bye)
+    - [Add a module: `add`](#add-a-module-add)
+    - [Removing a module: `delete`](#removing-a-module-delete)
+    - [Search for Modules: `search`](#search-for-modules-search)
+    - [Changing semester to plan: `semester`](#changing-semester-to-plan-semester)
+    - [Viewing user timetable: `view`](#viewing-user-timetable-view)
+    - [Feature X: `list`](#feature-x-list)
+    - [Select a timetable slot: `select`](#select-a-timetable-slot-select)
+    - [Feature X: `COMMAND`](#feature-x-command)
+  - [Application Data](#application-data)
+    - [Data Storage](#data-storage)
+    - [Transfer to another computer](#transfer-to-another-computer)
+    - [Transfer to NUSMODs (for NUS students)](#transfer-to-nusmods-for-nus-students)
+  - [FAQ](#faq)
+  - [Command summary](#command-summary)
+  - [Credits](#credits)
 
 ## Quick Start
 
@@ -414,7 +419,12 @@ The NUSMOD url is available in `duke.txt`, copy the content of the file and past
 | Exit application          | `bye`                                                         | `bye`                                          |
 | Find module by keyword    | `find KEYWORD`                                                | `find cs2103`                                  |
 | Seek help                 | `help`                                                        | `help`                                         |
+| Import modules from NUSMods URL | `import URL` | `import https://nusmods.com/timetable/sem-1/share?CS2113=LEC:1,TUT:4` |
+| Export modules to NUSMods URL | `export` | `export` |
+| Change semester | `semester SEMESTER` | `semester 2` |
+| Seek help                 | `help`                                                        | `help`                                         |
 | View timetable            | `view`                                                        | `view`                                         |
+| List selected modules     | `list`                                                        | `list`                                         |
 | Add module timetable slot | `select /module MODULE_CODE /type LESSON_TYPE /code CLASS_NO` | `select /module CS1010 /type tutorial /code 1` |
 
 
