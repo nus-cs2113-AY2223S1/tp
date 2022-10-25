@@ -69,19 +69,19 @@ public class WalletFile {
         byte[] decodedBytes = Base64.getDecoder().decode(password);
         String decodedPassword = new String(decodedBytes);
         String currencyName = scan.nextLine().split(":")[1];
-        CurrencyStructure currency = CurrencyList.findCurrencyByAbbrName(currencyName);
+        CurrencyStructure defaultCurrency = CurrencyList.findCurrencyByAbbrName(currencyName);
         double totalBalance = Double.parseDouble(scan.nextLine().split(":")[1]);
         List<Deposit> depositList = new ArrayList<>();
         while (scan.hasNext()) {
             String[] splits = scan.nextLine().split(":");
             currencyName = splits[0];
-            currency = CurrencyList.findCurrencyByAbbrName(currencyName);
+            CurrencyStructure currency = CurrencyList.findCurrencyByAbbrName(currencyName);
             double balance = MoneyCommand.parseAmount(splits[1]);
             Deposit deposit = new Deposit(currency, balance);
             depositList.add(deposit);
         }
         scan.close();
-        return new Wallet(userName, decodedPassword, currency, totalBalance, depositList);
+        return new Wallet(userName, decodedPassword, defaultCurrency, totalBalance, depositList);
     }
 
     public static void deleteWallet(Wallet wallet) throws FinanceException {

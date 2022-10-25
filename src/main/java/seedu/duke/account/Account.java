@@ -52,14 +52,36 @@ public class Account {
                     e.handleException();
                 }
             }
-            else if (splits.length == 3) {
+            else if (splits.length == 2) {
                 String commandType = splits[0];
-                String commandArg = splits[1] + " " + splits[2];
+                String commandArg = splits[1];
                 try {
                     switch (commandType) {
                         case "setdefault":
                             setDefaultCurrency(commandArg);
                             break;
+                        case "convertall":
+                            MoneyCommand.convertAllCommand(wallet,commandArg);
+                            break;
+                        case "save":
+                            MoneyCommand.saveCommand(wallet,commandArg);
+                            break;
+                        case "withdraw":
+                            MoneyCommand.withdrawCommand(wallet,commandArg);
+                            break;
+                        default:
+                            throw new FinanceException(ExceptionCollection.COMMAND_TYPE_EXCEPTION);
+                    }
+
+                } catch (FinanceException e) {
+                    e.handleException();
+                }
+            }
+            else if (splits.length == 3) {
+                String commandType = splits[0];
+                String commandArg = splits[1] + " " + splits[2];
+                try {
+                    switch (commandType) {
                         case "save":
                             MoneyCommand.saveCommand(wallet,commandArg);
                             break;
@@ -82,6 +104,9 @@ public class Account {
 
                 try {
                     switch (commandType) {
+                    case "convert":
+                        MoneyCommand.exchangeCommand(wallet, splits[1]+" "+splits[2]+" "+splits[3]);
+                        break;
                     case "transfer":
                         MoneyCommand.transferMoney(wallet, recipientUsername, trasnferCurrency, amount);
                         AccountUi.showTransfer(recipientUsername, trasnferCurrency, amount);
