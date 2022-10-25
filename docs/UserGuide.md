@@ -336,6 +336,7 @@ ____________________________________________________________
 | Add a new item                     | add-item /n [ITEM_NAME] /c [CATEGORY_INDEX] /p [PRICE] /o [USERNAME]         |
 | Remove an item                     | remove-item /i [ITEM_ID]                                                     |
 | View an item                       | view-item /i [ITEM_ID]                                                       |
+| List categories                    | list-categories                                                              |
 | Sort and filter list of items      | sort-items /mode [MODE_OF_SORTING] /min [MINIMUM_PRICE] /max [MAXIMUM_PRICE] |
 | __*Transaction-related features*__ |                                                                              |
 | Add a new transaction              | add-tx /i [ITEM_ID] /b [BORROWER_NAME] /d [DURATION] /c [CREATED_DATE]       |
