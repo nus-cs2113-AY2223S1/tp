@@ -61,13 +61,13 @@ public class Media {
             dateFormat.setLenient(false);
             Date date = dateFormat.parse(dateWatchedString);
             this.dateWatched = date;
-        } catch (ParseException e) {
-            ;
-        }
 
-        String pattern = "dd-MM-yyyy";
-        DateFormat df = new SimpleDateFormat(pattern);
-        dateString = df.format(dateWatched);
+            String pattern = "dd-MM-yyyy";
+            DateFormat df = new SimpleDateFormat(pattern);
+            dateString = df.format(dateWatched);
+        } catch (ParseException e) {
+            System.out.println("Invalid date format. Use the following format: DD-MM-YYYY.");
+        }
 
         logger.log(Level.INFO,"Added new Media to list");
     }

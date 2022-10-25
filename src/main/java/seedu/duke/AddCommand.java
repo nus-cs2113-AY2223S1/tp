@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import java.util.Objects;
+
 public class AddCommand extends Commands {
     Media media;
 
@@ -14,5 +16,4 @@ public class AddCommand extends Commands {
         return "\tGot it. I've added the following item to the list:\n\t" + media.toString()
                 + "\n\n\tNow you have " + reviewList.inputs.size() + " reviews in the list.";
     }
-
 }
