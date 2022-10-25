@@ -1,6 +1,7 @@
 package seedu.duke.command.transaction;
 
 
+import seedu.duke.command.Command;
 import seedu.duke.exception.DurationInvalidException;
 import seedu.duke.exception.InsufficientArgumentsException;
 import seedu.duke.exception.InvalidArgumentException;
@@ -22,7 +23,7 @@ import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_TX_NOT_FOUN
 /**
  * A representation of a command to add a new transaction.
  */
-public class UpdateTransactionCommand {
+public class UpdateTransactionCommand extends Command {
     private final String[] parts;
     private final TransactionList transactionList;
 
