@@ -79,8 +79,8 @@ public class GetModuleCommand extends Command {
             logger.log(Level.FINE, "Module is offered in current semester, module timetable will be displayed");
             List<Pair<Module, RawLesson>> lessons = new ArrayList<>();
             Pair<Module, RawLesson> lesson;
-            List<RawLesson> tempLesson = module.getSemesterData(state.getSemester()).timetable;
-            for (RawLesson rawLesson : tempLesson) {
+            List<RawLesson> tempLessons = module.getSemesterData(state.getSemester()).timetable;
+            for (RawLesson rawLesson : tempLessons) {
                 lesson = Pair.of(module, rawLesson);
                 lessons.add(lesson);
             }
