@@ -78,8 +78,8 @@ public class ParserTest {
 
     @Test
     public void parse_importInput_returnNewImportCommand() throws YamomException {
-        assertTrue(Parser.parse("import " +
-                "https://nusmods.com/timetable/sem-1/share?CS1010=LAB:B03,SEC:1,TUT:01&CS2113=LEC:1,TUT:4")
+        assertTrue(Parser.parse("import "
+                + "https://nusmods.com/timetable/sem-1/share?CS1010=LAB:B03,SEC:1,TUT:01&CS2113=LEC:1,TUT:4")
                 instanceof ImportCommand);
     }
 
