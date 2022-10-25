@@ -84,7 +84,16 @@ To interact with easySEP, users have to input commands specified with parameters
 The Command will then be executed to perform the operation on the other classes managing the timetables and databases. Error checking is handled to throw InvalidUserCommandException if the user's input does not match
 the specified Command format. To deal with parsing parameters, spaces in University names and Module codes are to be replaced with underscores.
 
-[comment]: <> (The following diagram illustrates the relationships between the CommandParser class and the Command subclasses. ![CommandParser Sequence Diagram](./images/CommandParser_Sequence.png)
+The following class diagram illustrates the relationship between Command class and its subclasses as well as other classes related to Commands.
+![Command Class Diagram](./images/Command_class.png)
+
+#### Add Command
+
+An add command can be used to add a lesson to the timetable or add a module mapping to the user university list.
+
+The following sequence diagram illustrates the relationship between the respective classes involved in the creation and execution of an add command.
+
+![Add Command Sequence Diagram](./images/AddCommand_Sequence.png)
 
 #### List Command
 

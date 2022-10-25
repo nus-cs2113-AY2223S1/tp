@@ -11,6 +11,7 @@ import seedu.duke.command.FavouriteCommand;
 import seedu.duke.command.DatabaseStorage;
 import seedu.duke.command.ListCommand;
 import seedu.duke.command.ViewCommand;
+import seedu.duke.timetable.Lesson;
 import seedu.duke.command.Database;
 import seedu.duke.exceptions.InvalidModuleException;
 import seedu.duke.exceptions.InvalidUserCommandException;
@@ -184,18 +185,21 @@ public class Duke {
                                           TimetableManager timetableManager, AddCommand addCommand)
             throws InvalidUserCommandException {
         try {
-            if (addCommand.getLesson() != null) {
-                timetableManager.addLesson(addCommand.getLesson(), false);
+            Lesson lesson = addCommand.getLesson();
+            if (lesson != null) {
+                timetableManager.addLesson(lesson, false);
                 UserStorageParser.storeTimetable(timetableManager);
             } else {
-                ModuleMapping moduleMapping = Database.findPuMapping(addCommand.getModuleCode());
+                String moduleCode = addCommand.getModuleCode();
+                String universityName = addCommand.getUniversityName();
+                ModuleMapping moduleMapping = Database.findPuMapping(moduleCode);
                 Module puModule = moduleMapping.getPartnerUniversityModule();
                 Module nusModule = moduleMapping.getNusModule();
                 UserModuleMapping userModuleToAdd = new UserModuleMapping(puModule.getCode(),
                         puModule.getTitle(), nusModule.getCode(), nusModule.getTitle(),
                         nusModule.getCredit(), puModule.getCredit(), puModule.getUniversity().getName(),
                         puModule.getUniversity().getCountry());
-                userUniversityListManager.addModule(addCommand.getUniversityName(), userModuleToAdd);
+                userUniversityListManager.addModule(universityName, userModuleToAdd);
                 UserStorageParser.storeCreatedLists(userUniversityListManager);
             }
         } catch (ModuleNotFoundException | NoSuchElementException e) {

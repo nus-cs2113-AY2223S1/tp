@@ -1,0 +1,76 @@
+@startuml Command Class Diagram
+
+enum CommandType {
+    CREATE
+    VIEW
+    ADD
+    DELETE
+    EXIT
+    HELP
+    LIST
+    FAVOURITE
+}
+
+abstract class Command {
+    - commandType : CommandType
+    - universityName : String
+    - moduleCode : String
+    - parameters : String[]
+    + Command(String[] parameters, CommandType commandType)
+    + getCommandType() : CommandType
+    + getUniversityName() : String
+    + getModuleCode() : String
+}
+
+class ListCommand {
+    - listOption : String
+    + ListCommand(String[] parameters, CommandType commandType)
+    + getListOption() : String
+}
+
+class AddCommand {
+    - lesson : Lesson
+    + AddCommand(String[] parameters, CommandType commandType, Lesson lesson)
+    + getLesson() : Lesson
+}
+
+class CreateCommand {
+    + CreateCommand(String[] parameters, CommandType commandType)
+}
+
+class DeleteCommand {
+    - lesson : Lesson
+    + DeleteCommand(String[] parameters, CommandType commandType, boolean isDeleteModule, Lesson lesson)
+    + getLesson() : Lesson
+}
+
+class ExitCommand {
+    + ExitCommand(String[] parameters, CommandType commandType)
+}
+
+class FavouriteCommand {
+    - favouriteOption : String
+    + FavouriteCommand(String[] parameters, CommandType commandType)
+    + getFavouriteOption() : String
+}
+
+class HelpCommand {
+    + HelpCommand(String[] parameters, CommandType commandType)
+}
+
+class ViewCommand {
+    - viewOption : String
+    + ViewCommand(String[] paremeters, CommandType commandType)
+    + getViewOption() : String
+}
+
+ListCommand --|> Command
+AddCommand --|> Command
+CreateCommand --|> Command
+DeleteCommand --|> Command
+HelpCommand --|> Command
+ViewCommand --|> Command
+FavouriteCommand --|> Command
+ExitCommand --|> Command
+
+@enduml
