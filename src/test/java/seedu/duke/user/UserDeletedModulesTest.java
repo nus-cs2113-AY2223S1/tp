@@ -74,7 +74,8 @@ public class UserDeletedModulesTest {
         testManager.deleteModule("Boston University", "CS473");
         assertEquals(UserDeletedModules.getDeletedModules().size(), 5);
         assertEquals(UserDeletedModules.getDeletedModules().getFirst().getPuCode(), "CS473");
-        assertEquals(UserDeletedModules.getDeletedModules().getFirst().getPuTitle(), "Introduction to Software Engineering");
+        assertEquals(UserDeletedModules.getDeletedModules().getFirst().getPuTitle(),
+                "Introduction to Software Engineering");
         assertEquals(UserDeletedModules.getDeletedModules().getFirst().getNusCode(), "CS2103");
         assertEquals(UserDeletedModules.getDeletedModules().getFirst().getNusTitle(), "Software Engineering");
         assertEquals(UserDeletedModules.getDeletedModules().getFirst().getNusCredit(), "4");
