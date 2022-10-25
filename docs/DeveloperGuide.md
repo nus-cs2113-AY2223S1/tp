@@ -368,19 +368,14 @@ Step 4: The ```executeCommand()``` of ExitCommand returns false, so Duke will re
 
 ### 5.1. Target user profile
 
-...To be updated
-
 - Student at NUS
 - Reasonably comfortable using CLI
 - Student staying at campus
 - Has a passion to serve the student community
-- Student that have items he does not require
-- Student that wants to earn some money
-- Student that wants to borrow an item he does not own
+- Student who wants to host a rental business for his/her hall
+- Student who wants to help others borrow or loan items
 
 ### 5.2. Value proposition
-
-...To be updated
 
 Upcycle is a Database Management System that aims to promote frugality and sustainability by providing service for students
 staying in a particular community/hall to loan or borrow items they wish to share with their community.
