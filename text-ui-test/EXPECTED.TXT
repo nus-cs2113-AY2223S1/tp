@@ -8,13 +8,13 @@
                                                    
 Before we begin, enter which Semester it is, 1 or 2. Alternatively, enter 0 to quit.
 Here is a list of things I can do, enter the appropriate command to continue!
-1. add     2. list     3. info     4. set     5. delete     6. print     7. quit
+1. add     2. list     3. info     4. set     5. delete     6. allocate     7. print     8. quit
 
 Please enter module code
 Successfully added new module: CS2113 : Software Engineering & Object-Oriented Programming
 
 Here is a list of things I can do, enter the appropriate command to continue!
-1. add     2. list     3. info     4. set     5. delete     6. print     7. quit
+1. add     2. list     3. info     4. set     5. delete     6. allocate     7. print     8. quit
 
 Which module would you like to set lessons for? Enter corresponding valid index
 1. CS2113 : Software Engineering & Object-Oriented Programming
@@ -30,11 +30,11 @@ Which is your preferred timeslot? Enter corresponding valid index
 
 Invalid Timeslot Index!
 Here is a list of things I can do, enter the appropriate command to continue!
-1. add     2. list     3. info     4. set     5. delete     6. print     7. quit
+1. add     2. list     3. info     4. set     5. delete     6. allocate     7. print     8. quit
 
 Invalid Command!
 Here is a list of things I can do, enter the appropriate command to continue!
-1. add     2. list     3. info     4. set     5. delete     6. print     7. quit
+1. add     2. list     3. info     4. set     5. delete     6. allocate     7. print     8. quit
 
 Here are your modules:
 1. CS2113: Software Engineering & Object-Oriented Programming
@@ -43,7 +43,7 @@ Here are your modules:
 
 
 Here is a list of things I can do, enter the appropriate command to continue!
-1. add     2. list     3. info     4. set     5. delete     6. print     7. quit
+1. add     2. list     3. info     4. set     5. delete     6. allocate     7. print     8. quit
 
 Which module you would like to delete? Please enter the index of that module. 
 Here are your modules:
@@ -54,7 +54,7 @@ Here are your modules:
 
 Please input an index in range!
 Here is a list of things I can do, enter the appropriate command to continue!
-1. add     2. list     3. info     4. set     5. delete     6. print     7. quit
+1. add     2. list     3. info     4. set     5. delete     6. allocate     7. print     8. quit
 
 Which module you would like to delete? Please enter the index of that module. 
 Here are your modules:
@@ -65,7 +65,7 @@ Here are your modules:
 
 Please input an integer!
 Here is a list of things I can do, enter the appropriate command to continue!
-1. add     2. list     3. info     4. set     5. delete     6. print     7. quit
+1. add     2. list     3. info     4. set     5. delete     6. allocate     7. print     8. quit
 
 Which module you would like to delete? Please enter the index of that module. 
 Here are your modules:
@@ -76,7 +76,7 @@ Here are your modules:
 
 Successfully deleted module!
 Here is a list of things I can do, enter the appropriate command to continue!
-1. add     2. list     3. info     4. set     5. delete     6. print     7. quit
+1. add     2. list     3. info     4. set     5. delete     6. allocate     7. print     8. quit
 
  _____            __   __             ___              _       _ 
 /  ___|           \ \ / /            / _ \            (_)     | |
