@@ -209,7 +209,7 @@ public class AddCommand extends Command {
             int calories = extractCalories(argumentList[2]);
             food = new Food(description, calories, date);
             foodList.addFood(food);
-            assert foodList.getFood(foodList.getFoodListSize() - 1).equals(food) : "Food not added properly";
+            assert foodList.getFood(foodList.getFoodListSize() - 1).equals(food) : "Food added properly";
             if (toDisplay) {
                 ui.output(food.toString());
                 ui.output(" This food is added to the food list successfully");

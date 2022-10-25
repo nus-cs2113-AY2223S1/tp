@@ -1,0 +1,33 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autoactivate on
+
+
+activate viewCommand
+    viewCommand -> viewCommand: viewAll(argumentList)
+
+    viewCommand -> foodList: getFoodList()
+    return foodArrayList: ArrayList<Food>
+    viewCommand -> viewCommand: getExerciseArrayListByCommand()
+    return exerciseArrayList: ArrayList<Exercise>
+    viewCommand -> recordList: getRecordList()
+    return recordArrayList: ArrayList<Record>
+    viewCommand -> ui: outputAllRecords(recordArrayList, weightAndFatList, foodArrayList, exerciseArrayList)
+    ui -> ui: getAllRecordsColumnsSpacing(weightAndFatArrayList,foodArrayList, exerciseArrayList, columnSpacingArraySubHeader)
+    return
+    ui -> ui: generateAllDataTableSubHeader(columnSpacingArraySubHeader)
+    return subHeader: String
+    ui -> ui: getAllRecordsHeaderSpacing(columnSpacingArrayHeader, subHeader)
+    return
+    ui -> ui: generateAllDataTableHeader(columnSpacingArrayHeader)
+    return
+    ui -> ui: output(separatorLine, subHeader, separatorLine)
+    return
+    ui -> ui: printAllRecords(recordArrayList, columnSpacingArraySubHeader, subHeader)
+    return
+    ui -> ui: printEmptyLine()
+    return
+return
+
+@enduml

@@ -39,6 +39,93 @@ Example of usage:
 
 `set biometrics /15 /male /146 /98 /55`
 
+### Adding Food Consumptions: `add food`
+Add user's food consumption in TracknFit
+
+Format: `add food /{description} /{calories}`
+
+* description needs to be a string
+* calories should be positive integer inputs in the units of kcal
+
+Example of usage:
+
+`add food /ice cream /350`
+
+Expected outcome:
+Food is added to the dietary consumption list.
+
+```
+-------------------------------------------------------------
+Food Description: ice cream
+calories: 250
+This food is added to the food list successfully
+-------------------------------------------------------------
+```
+
+
+### Viewing Food Consumptions: `view food`
+View user's food consumption over time in TracknFit
+
+Format: `view food`
+
+Example of usage:
+`view food`
+
+Expected outcome:
+All historical records of the food consumed are displayed.
+```
+-------------------------------------------------------------
+----------------------------------
+Index | Description  | Calories | 
+----------------------------------
+1     | cola         | 100      | 
+2     | chicken rice | 200      | 
+3     | laksa        | 400      | 
+4     | ice cream    | 250      | 
+
+-------------------------------------------------------------
+```
+
+### Remove Food Consumptions: `remove food`
+Remove a specified record from food list in TracknFit
+
+Format: `remove food /{index}`
+
+Example of usage:
+`remove food /1`
+
+Expected outcome:
+The first record in the food list will be deleted.
+```
+-------------------------------------------------------------
+ This food has been deleted from the food list successfully
+Food Description: cola
+calories: 100
+-------------------------------------------------------------
+```
+
+### Find Food Consumptions: `find food`
+View user's food consumption over time in TracknFit
+
+Format: `find food /{description}`
+
+Example of usage:
+`find food /laksa`
+
+Expected outcome:
+All relevant records from the history would be printed out for the user to see how much of a specific food they 
+have been consuming.
+```
+-------------------------------------------------------------
+Here are the matching food in your food list:
+----------------------------------
+Index | Description  | Calories | 
+----------------------------------
+1     | laksa        | 400      | 
+
+-------------------------------------------------------------
+```
+
 
 ## FAQ
 
@@ -54,4 +141,9 @@ Example of usage:
 * Exit TracknFit `exit`
 * Set biometrics `set biometrics /{age} /{gender} /{height} /{weight} /{fat percentage}`
 * Add weight and fat percentage `add weight /{weight} /{fat percentage}`
+* Add food consumed `add food /{description} /{calories}`
 * View weight and fat percentage records `view weight`
+* View food records `view food`
+* Delete a food record `remove food /{index}`
+* Find food records using a keyword `find food /{description}`
+* 
