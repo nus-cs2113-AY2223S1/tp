@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_FILE_NOT_FOUND;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_STORAGE_ILLEGALLY_MODIFIED;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_STORE_INVALID;
 
 //@@author bdthanh
@@ -33,7 +34,7 @@ public class UserStorage extends Storage {
      * @return The list of users stored in the file.
      * @throws UserFileNotFoundException If the file cannot be found.
      */
-    public ArrayList<User> loadData() throws UserFileNotFoundException {
+    public ArrayList<User> loadData() throws UserFileNotFoundException, StoreFailureException {
         try {
             File userFile = new File(userFilePath);
             ArrayList<User> userList = new ArrayList<>();
@@ -47,6 +48,8 @@ public class UserStorage extends Storage {
             return userList;
         } catch (FileNotFoundException e) {
             throw new UserFileNotFoundException(MESSAGE_FILE_NOT_FOUND);
+        } catch (Exception e) {
+            throw new StoreFailureException(MESSAGE_STORAGE_ILLEGALLY_MODIFIED);
         }
     }
 

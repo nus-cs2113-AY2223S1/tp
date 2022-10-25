@@ -55,24 +55,33 @@ public class Duke {
     private void initializeTransactionList() {
         try {
             this.transactionList = new TransactionList(transactionStorage.loadData());
-        } catch (TransactionFileNotFoundException e) {
+        } catch (TransactionFileNotFoundException | StoreFailureException e) {
             this.transactionList = new TransactionList();
+            if (e instanceof StoreFailureException) {
+                Ui.printErrorMessage(e.getMessage());
+            }
         }
     }
 
     private void initializeItemList() {
         try {
             this.itemList = new ItemList(itemStorage.loadData());
-        } catch (ItemFileNotFoundException e) {
+        } catch (ItemFileNotFoundException | StoreFailureException e) {
             this.itemList = new ItemList();
+            if (e instanceof StoreFailureException) {
+                Ui.printErrorMessage(e.getMessage());
+            }
         }
     }
 
     private void initializeUserList() {
         try {
             this.userList = new UserList(userStorage.loadData());
-        } catch (UserFileNotFoundException e) {
+        } catch (UserFileNotFoundException | StoreFailureException e) {
             this.userList = new UserList();
+            if (e instanceof StoreFailureException) {
+                Ui.printErrorMessage(e.getMessage());
+            }
         }
     }
 
