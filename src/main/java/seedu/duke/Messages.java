@@ -84,6 +84,35 @@ public class Messages {
     public static final String MESSAGE_INVALID_PRICE_FORMAT = "OOPS!!! Please enter positive number "
             + "(No letter/symbols, etc) for renting price per month for property";
 
+    public static final String MESSAGE_INVALID_UNIT_TYPE_LABEL = "OOPS!!! Please enter one of the following "
+            + "valid unit type labels as shown below (Case-Sensitive & Space-Sensitive):\n"
+            + "Format: t/<label>\n"
+            + LINE_BREAK
+            + "\nHDB Labels:\n"
+            + "  <HDB 2> for HDB 2-Room Flexi\n"
+            + "  <HDB 3> for HDB 3-Room\n"
+            + "  <HDB 4> for HDB 4-Room\n"
+            + "  <HDB 5> for HDB 5-Room\n"
+            + "  <HDB 3Gen> for HDB Third-Generation\n"
+            + "  <HDB ExFlat> for HDB Executive Flat\n"
+            + "  <HDB DBSS> for HDB Design, Build and Sell Scheme (DBSS) Flat\n"
+            + "  <HDB ExMsn> for HDB Executive Maisonette\n"
+            + "  <HDB Jumbo> for HDB Jumbo Flat\n"
+            + "  <HDB TH> for HDB Terrace House\n"
+            + LINE_BREAK
+            + "\nCondominium Label:\n"
+            + "  <Condo> for Condominium\n"
+            + LINE_BREAK
+            + "\nPenthouse Label:\n"
+            + "  <PH> for Penthouse\n"
+            + LINE_BREAK
+            + "\nLanded Property Labels\n"
+            + "  <LP TH> for LP Terrace House\n"
+            + "  <LP SDH> for LP Semi-Detached House\n"
+            + "  <LP BGL> for LP Bungalow\n"
+            + LINE_BREAK
+            + "\nNote: Only unit type labels (Singapore-Based) are accepted by the program";
+
     public static final String MESSAGE_INVALID_CONTACT_NUMBER = "OOPS!!! Please enter a valid Singapore Contact Number "
             + "(No extension)";
 
@@ -149,6 +178,8 @@ public class Messages {
             + "Example:\n"
             + "  check -client ic/5";
 
+    public static final String MESSAGE_CHECK_PROPERTY = "Showing check results for this property:";
+
     public static final String MESSAGE_CHECK_PROPERTY_RESULT = "Here are the tenants renting this property:";
 
     public static final String MESSAGE_CHECK_PROPERTY_WRONG_FORMAT = "OOPS!! To check property, please use the "
@@ -191,4 +222,25 @@ public class Messages {
     public static final String MESSAGE_NO_CLIENT_MATCHES = "There is no client that fits within your query.";
 
     public static final String MESSAGE_NO_PROPERTY_MATCHES = "There is no property that fits within your query.";
+
+
+
+    /* Message on Storage */
+    public static final String INVALID_CLIENT_FILE = "There are some errors in the entries detected. Those entries "
+        + "won't be added to the client list.";
+
+    public static final String INVALID_PROPERTY_FILE = "There are some errors in the entries detected. Those entries"
+        + " won't be added to the property list.";
+
+    public static final String MESSAGE_INVALID_PAIRING_FILE_INPUT = "The current line read is not in the right"
+            + "format.";
+
+    public static final String MESSAGE_NO_FILE = "File is not found...";
+
+
+    public static final String MESSAGE_NO_PROPERTY_FILE = "Property file does not exist.";
+
+    public static final String MESSAGE_NO_CLIENT_FILE = "Client file does not exist.";
+
+    public static final String MESSAGE_NO_PAIRING_FILE = "Pairing file does not exist.";
 }

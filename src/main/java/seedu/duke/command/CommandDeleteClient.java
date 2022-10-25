@@ -27,7 +27,7 @@ public class CommandDeleteClient extends CommandDelete {
         pairingList.deletePairing(deletedClient);
 
         //Update Storage
-        storage.updateClient(clientList);
-        storage.updatePair(pairingList);
+        storage.updateClient();
+        storage.updatePair();
     }
 }

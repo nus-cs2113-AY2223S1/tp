@@ -68,6 +68,33 @@ ___
 ### Parser Component
 ### Client Component
 ### Property Component
+### List Component
+The list feature has the following commands in it -
+* `list -client` This lists every client, along with all their information
+* `list -property` This lists every property, along with all its information
+* `list -everything` This lists everything about both clients and properties
+* `list -client FLAG` This lists only the information present in the TAG for every client. The types of
+  TAGs are -
+    * `c/` This is for contact number
+    * `b/` This is for budget
+    * `n/` This is for name
+    * `e/` This is for e-mail
+* `list -property FLAG` This lists only the information present in the TAG for every property. The types
+  of TAG are -
+    * `a/` This is for address
+    * `n/` This is for name
+    * `p/` This is for price
+    * `t/` This is for type  
+
+There are 5 different classes, that each inherit from the abstract Command class. The commands read information from 
+the PropertyList and ClientList classes respectively, and display using the Ui class, making use of the objects of 
+these classes. The Commands which display all the information - i.e. CommandListClients, CommandListProperties, and
+CommandListEverything read and display using loops inside the overriden execute() method itself. The Commands which 
+display selected information - i.e. CommandListClientsWithTags and CommandListPropertiesWithTags use their private 
+methods to display their information. The class structure is as follows - 
+![ListClassDiagram](diagrams/ListClassDiagram.png)
+
+  
 
 ### Pairing Component
 API: [```pairingList.java```](../src/main/java/seedu/duke/PairingList.java)
@@ -251,7 +278,7 @@ The following *sequence diagram* shows how the **delete client** operation works
 ![Delete Client Sequence Diagram](diagrams/DeleteClientSD.png)
 
 The following *sequence diagram* shows how the **delete property** operation works, showcasing the
-```PropertyList#deleteClient()``` method.
+```PropertyList#deleteProperty()``` method.
 
 ![Delete Property Sequence Diagram](diagrams/DeletePropertySD.png)
 
@@ -364,6 +391,49 @@ The sequence diagram of `updateClient`, `updateProperty` and `updatePair` can be
 
 Note that when delete operation is being invoked on client and property, the `updatePair` method will also be invoked to
 prevent entries retaining within pairingList after it has been deleted from clientList or propertyList.
+
+
+### List feature
+
+There are 3 main steps whenever a list command needs to be executed
+* When the user enters any command, it first needs be understood. That is handled by the ParseManager class.
+   Next, when the first word entered by the user is determined to be `list`, ParseManager itself then determines
+   the type of list command entered, including the tags. ParseListClient, ParseListProperty and ParseListEverything
+   are checkers to ensure that a valid command has been entered. ParseListClient and ParseListProperty also determine
+   if tags have been entered, and if those tags are valid.
+  ```
+        case COMMAND_LIST:
+            ArrayList<String> listCommandTypeAndFlags = getListCommandType(commandDetail);
+            boolean isListProperty = listCommandTypeAndFlags.get(0).trim().equals(PROPERTY_FLAG);
+            boolean isListClient = listCommandTypeAndFlags.get(0).equals(CLIENT_FLAG);
+            boolean isListEverything = listCommandTypeAndFlags.get(0).equals(EVERYTHING_FLAG);
+            if (isListProperty) {
+                return new ParseListProperty(listCommandTypeAndFlags.get(1));
+            } else if (isListClient) {
+                return new ParseListClient(listCommandTypeAndFlags.get(1));
+            } else if (isListEverything && listCommandTypeAndFlags.get(1).isEmpty()) {
+                return new ParseListEverything();
+            } else {
+                throw new UndefinedSubCommandTypeException(MESSAGE_INCORRECT_LIST_DETAILS);
+            }
+  ```
+This block of code is part of ParseManager. It determines the type of list operation(-client, 
+-property or -everything) and returns the corresponding object.  
+Both ParseListClient and ParseListObject then determine if tags are present, and if they are valid, 
+throwing exceptions if any errors are encountered. They then return the corresponding Command type necessary.
+
+* There are five different classes which handle each of the features described above. Each class inherits from the
+   abstract Command class, and reads information present in either the PropertyList or ClientList objects respectively.
+
+The execute function retrieves the propertyList holding all the current properties. It then loops 
+through every property present. For every property, it passes it to the corresponding display function
+in Ui.
+
+* Each of these commands then uses a method present in the Ui class, to print an individual client, or property.
+   The loop for printing every single client or property is present in the Command itself.
+  ![CommandListClientsClass](diagrams/CommandListPropertiesClass.png)
+The above is an example for CommandListProperties. It reads from PropertyList. Then, it displays each line
+using the displayOneProperty function in Ui.
 
 ---
 

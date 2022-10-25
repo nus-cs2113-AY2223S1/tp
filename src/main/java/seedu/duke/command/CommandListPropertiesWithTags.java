@@ -40,32 +40,28 @@ public class CommandListPropertiesWithTags extends Command {
         for (int i = 0; i < propertyList.getCurrentListSize(); i++) {
             ui.displayOnePropertyAddress(propertyList.getPropertyList().get(i), i + 1);
         }
-        System.out.println("There are " + propertyList.getCurrentListSize()
-                + " properties in this list");
+        ui.displayNoOfProperties(propertyList.getCurrentListSize());
     }
 
     private void displayPropertyLandlordNames(PropertyList propertyList, Ui ui) {
         for (int i = 0; i < propertyList.getCurrentListSize(); i++) {
             ui.displayOnePropertyLandlordName(propertyList.getPropertyList().get(i), i + 1);
         }
-        System.out.println("There are " + propertyList.getCurrentListSize()
-                + " properties in this list");
+        ui.displayNoOfProperties(propertyList.getCurrentListSize());
     }
 
     private void displayPropertyPrices(PropertyList propertyList, Ui ui) {
         for (int i = 0; i < propertyList.getCurrentListSize(); i++) {
             ui.displayOnePropertyRentingPrice(propertyList.getPropertyList().get(i), i + 1);
         }
-        System.out.println("There are " + propertyList.getCurrentListSize()
-                + " properties in this list");
+        ui.displayNoOfProperties(propertyList.getCurrentListSize());
     }
 
     private void displayPropertyTypes(PropertyList propertyList, Ui ui) {
         for (int i = 0; i < propertyList.getCurrentListSize(); i++) {
             ui.displayOnePropertyUnitType(propertyList.getPropertyList().get(i), i + 1);
         }
-        System.out.println("There are " + propertyList.getCurrentListSize()
-                + " properties in this list");
+        ui.displayNoOfProperties(propertyList.getCurrentListSize());
     }
 }
 

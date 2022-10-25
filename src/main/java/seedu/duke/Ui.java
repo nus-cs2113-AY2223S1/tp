@@ -10,6 +10,7 @@ import java.util.Scanner;
 import static seedu.duke.Messages.LINE_BREAK;
 import static seedu.duke.Messages.MESSAGE_CHECK_CLIENT;
 import static seedu.duke.Messages.MESSAGE_CHECK_CLIENT_RESULT;
+import static seedu.duke.Messages.MESSAGE_CHECK_PROPERTY;
 import static seedu.duke.Messages.MESSAGE_CHECK_PROPERTY_RESULT;
 import static seedu.duke.Messages.MESSAGE_CLIENT_ADDED;
 import static seedu.duke.Messages.MESSAGE_CLIENT_DELETED;
@@ -234,6 +235,22 @@ public class Ui {
         System.out.println(property.getUnitType());
         System.out.println(LINE_BREAK);
     }
+        
+    public void displayNoOfProperties(int i) {
+        if (i == 1) {
+            System.out.println("There is " + i + " property in the list");
+        } else {
+            System.out.println("There are " + i + " properties in this list");
+        }
+    }
+
+    public void displayNoOfClients(int i) {
+        if (i == 1) {
+            System.out.println("There is " + i + " client in the list");
+        } else {
+            System.out.println("There are " + i + " clients in this list");
+        }
+    }
 
     public void showCheckClient(Client client, Property property) {
         showToUser(MESSAGE_CHECK_CLIENT);
@@ -242,12 +259,13 @@ public class Ui {
         showToUser("  " + property.toString());
     }
 
-    public void showCheckProperty(ArrayList<Client> tenants) {
+    public void showCheckProperty(Property property, ArrayList<Client> tenants) {
+        showToUser(MESSAGE_CHECK_PROPERTY);
+        showToUser("  " + property.toString() + "\n");
         showToUser(MESSAGE_CHECK_PROPERTY_RESULT);
         int count = 0;
         for (Client tenant : tenants) {
             String tenantInfo = tenant.toString();
-
             showToUser(String.format("  %d. %s", ++count, tenantInfo));
         }
         showToUser(MESSAGE_NUMBER_OF_LIST_RESULTS + count);
