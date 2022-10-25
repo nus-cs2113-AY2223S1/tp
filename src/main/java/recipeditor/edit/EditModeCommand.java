@@ -16,7 +16,7 @@ public abstract class EditModeCommand {
     public EditModeCommand(String[] parsedCommand, Recipe recipe) {
         this.parsedCommand = parsedCommand;
         this.recipe = recipe;
-        this.flag = FlagParser.CheckFlagType(parsedCommand);
+        this.flag = FlagParser.checkFlagType(parsedCommand);
     }
 
     public EditModeCommand(Recipe recipe) {
@@ -29,7 +29,7 @@ public abstract class EditModeCommand {
 
     public abstract Recipe execute() throws InvalidFlagException, ParseException;
 
-    String ShowRecipeChanges(Recipe newRecipe, Recipe oldRecipe) {
+    String showRecipeChanges(Recipe newRecipe, Recipe oldRecipe) {
         return "Old:" + "\n"
                 + oldRecipe.getRecipeAttributesFormatted() + "\n"
                 + "New:" + "\n"

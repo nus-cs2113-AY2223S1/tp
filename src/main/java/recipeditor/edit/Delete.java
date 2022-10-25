@@ -20,12 +20,12 @@ public class Delete extends EditModeCommand {
         switch (flag) {
         case INGREDIENT:
             recipe.deleteIngredient(index);
-            message = ShowRecipeChanges(recipe, oldRecipe);
+            message = showRecipeChanges(recipe, oldRecipe);
             Ui.showMessage(recipe.getRecipeAttributesFormatted());
             return recipe;
         case STEP:
             recipe.deleteStep(index);
-            message = ShowRecipeChanges(recipe, oldRecipe);
+            message = showRecipeChanges(recipe, oldRecipe);
             Ui.showMessage(recipe.getRecipeAttributesFormatted());
             return recipe;
         default:

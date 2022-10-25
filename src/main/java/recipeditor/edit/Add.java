@@ -9,11 +9,6 @@ import recipeditor.recipe.Recipe;
 
 public class Add extends EditModeCommand {
 
-//    private String[] parsedCommand;
-//    private Recipe recipe;
-//    private String message = "";
-//    FlagType flag;
-
     public Add(String[] parsedCommand, Recipe recipe) {
         super(parsedCommand, recipe);
     }

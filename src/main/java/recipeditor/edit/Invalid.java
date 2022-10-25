@@ -4,7 +4,7 @@ import recipeditor.exception.InvalidFlagException;
 import recipeditor.exception.ParseException;
 import recipeditor.recipe.Recipe;
 
-public class Invalid extends EditModeCommand{
+public class Invalid extends EditModeCommand {
 
     public Invalid(Recipe recipe) {
         super(recipe);

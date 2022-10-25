@@ -1,17 +1,18 @@
 package recipeditor.ui;
 
-import com.sun.source.tree.ReturnTree;
-import recipeditor.edit.*;
-import recipeditor.exception.ParseException;
-import recipeditor.recipe.Ingredient;
+import recipeditor.edit.Add;
+import recipeditor.edit.Delete;
+import recipeditor.edit.EditModeCommand;
+import recipeditor.edit.Invalid;
+import recipeditor.edit.Swap;
+import recipeditor.edit.Change;
+import recipeditor.edit.View;
+import recipeditor.edit.Quit;
 import recipeditor.recipe.Recipe;
 import recipeditor.recipe.RecipeList;
-import recipeditor.command.Command;
-import recipeditor.command.InvalidCommand;
 
 public class EditMode {
     private static final String INVALID_INPUT = "Invalid input given. ";
-    private static final String INVALID_FLAG = "Invalid flag given. ";
     private static final String INVALID_INDEX = "Invalid index given. ";
     private static final String GENERIC_ERROR = "Something happened. ";
 
@@ -60,10 +61,10 @@ public class EditMode {
 
     private String parseEditInput(String input) {
 
-        EditModeCommand cmd = new Invalid(editedRecipe);
+        EditModeCommand cmd;
         String[] parsed = input.split(" ");
         String commandWord = parsed[0].toLowerCase();
-        Ui.showMessageInline(commandWord);
+
         switch (commandWord) {
         case "/add":
             cmd = new Add(parsed, editedRecipe);
@@ -83,6 +84,8 @@ public class EditMode {
         case "/done":
             cmd = new Quit(editedRecipe);
             break;
+        default:
+            cmd = new Invalid(editedRecipe);
         }
 
         try {
@@ -105,10 +108,6 @@ public class EditMode {
             Ui.showMessageInline(editedRecipe.getRecipeAttributesFormatted());
             return true;
         }
-    }
-
-    public Recipe getOriginalRecipe() {
-        return originalRecipe;
     }
 
     public Recipe getEditedRecipe() {

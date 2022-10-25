@@ -4,9 +4,10 @@ import recipeditor.exception.InvalidFlagException;
 import recipeditor.exception.ParseException;
 import recipeditor.recipe.Recipe;
 
-public class View extends EditModeCommand{
+public class View extends EditModeCommand {
 
     private Recipe oldRecipe;
+
     public View(String[] parsedCommand, Recipe recipe, Recipe oldRecipe) {
         super(parsedCommand, recipe);
         this.oldRecipe = oldRecipe;
@@ -14,7 +15,7 @@ public class View extends EditModeCommand{
 
     @Override
     public Recipe execute() throws InvalidFlagException, ParseException {
-        message = ShowRecipeChanges(recipe, oldRecipe);
+        message = showRecipeChanges(recipe, oldRecipe);
         return recipe;
     }
 

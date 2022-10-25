@@ -4,7 +4,7 @@ import recipeditor.recipe.Recipe;
 
 public interface FlagParser {
 
-    static FlagType CheckFlagType(String[] parsedCommand) {
+    static FlagType checkFlagType(String[] parsedCommand) {
         int flagCount = 0;
         for (String s: parsedCommand) {
             if (s.contains("-")) {

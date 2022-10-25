@@ -18,7 +18,7 @@ public class Change extends EditModeCommand {
 
     @Override
     public Recipe execute() throws InvalidFlagException, ParseException {
-        int indexToChange = Integer.parseInt(parsedCommand[2]) - 1;
+
         Recipe oldRecipe = recipe;
         Ui.showMessageInline(CHANGE_1);
         Ui.showMessageInline(CHANGE_2);
@@ -26,25 +26,23 @@ public class Change extends EditModeCommand {
 
         switch (flag) {
         case INGREDIENT:
-            try {
-                Ingredient newIngredient = Ingredient.parsedIngredients(newInput);
-                recipe.setIngredient(indexToChange, newIngredient);
-                message = ShowRecipeChanges(recipe, oldRecipe);
-                return recipe;
-            } catch (Exception e) {
-                Ui.showMessage(e.getMessage());
-            }
+            int indexToChange = Integer.parseInt(parsedCommand[2]) - 1;
+            Ingredient newIngredient = Ingredient.parsedIngredients(newInput);
+            recipe.setIngredient(indexToChange, newIngredient);
+            message = showRecipeChanges(recipe, oldRecipe);
+            return recipe;
         case STEP:
+            indexToChange = Integer.parseInt(parsedCommand[2]) - 1;
             recipe.setStep(indexToChange, newInput);
-            message = ShowRecipeChanges(recipe, oldRecipe);
+            message = showRecipeChanges(recipe, oldRecipe);
             return recipe;
         case TITLE:
             recipe.setTitle(newInput);
-            message = ShowRecipeChanges(recipe, oldRecipe);
+            message = showRecipeChanges(recipe, oldRecipe);
             return recipe;
         case DESCRIPTION:
             recipe.setDescription(newInput);
-            message = ShowRecipeChanges(recipe, oldRecipe);
+            message = showRecipeChanges(recipe, oldRecipe);
             return recipe;
         default:
             throw new InvalidFlagException();
