@@ -14,6 +14,7 @@ import computercomponentchooser.components.Gpu;
 import computercomponentchooser.components.Memory;
 import computercomponentchooser.components.Motherboard;
 import computercomponentchooser.components.PowerSupply;
+import computercomponentchooser.exceptions.NegativeNumberException;
 
 public class BuildTest {
     @Test
@@ -25,7 +26,7 @@ public class BuildTest {
     }
 
     @Test
-    public void testAddComponent() {
+    public void testAddComponent() throws NegativeNumberException {
         Build build = new Build("test");
         Cpu cpu = new Cpu("cpu", "123", "12", "1", "4.0");
         build.addComponent("cpu", cpu);
@@ -33,7 +34,7 @@ public class BuildTest {
     }
 
     @Test
-    public void testDeleteComponent() {
+    public void testDeleteComponent() throws NegativeNumberException {
         Build build = new Build("test");
         Cpu cpu = new Cpu("cpu", "123", "12", "1", "4.0");
         build.addComponent("cpu", cpu);
@@ -43,7 +44,7 @@ public class BuildTest {
     }
 
     @Test
-    public void testAddNonExistentComponent() {
+    public void testAddNonExistentComponent() throws NegativeNumberException {
         Build build = new Build("test");
         Cpu cpu = new Cpu("cpu", "123", "12", "1", "4.0");
         build.addComponent("fake", cpu);
@@ -51,7 +52,7 @@ public class BuildTest {
     }
 
     @Test
-    public void testGetTotalCost() {
+    public void testGetTotalCost() throws NegativeNumberException {
         Build build = new Build("test");
         Cpu cpu = new Cpu("cpu", "123", "12", "1", "4.0");
         build.addComponent("cpu", cpu);
@@ -64,7 +65,7 @@ public class BuildTest {
     }
 
     @Test
-    public void testGetTotalPower() {
+    public void testGetTotalPower() throws NegativeNumberException {
         Build build = new Build("test");
         Cpu cpu = new Cpu("cpu", "123", "12", "1", "4.0");
         build.addComponent("cpu", cpu);
@@ -77,7 +78,7 @@ public class BuildTest {
     }
 
     @Test
-    public void testGetTotalPowerWithPowerSupply() {
+    public void testGetTotalPowerWithPowerSupply() throws NegativeNumberException {
         Build build = new Build("test");
         Cpu cpu = new Cpu("cpu", "123", "12", "1", "4.0");
         build.addComponent("cpu", cpu);
@@ -88,7 +89,7 @@ public class BuildTest {
     }
 
     @Test
-    public void testCheckPowerSupply() {
+    public void testCheckPowerSupply() throws NegativeNumberException {
         Build build = new Build("test");
         PowerSupply psu = new PowerSupply("psu", "100", "100");
         build.addComponent("powersupply", psu);
@@ -98,7 +99,7 @@ public class BuildTest {
     }
 
     @Test
-    public void testCheckPowerSupplyNotEnough() {
+    public void testCheckPowerSupplyNotEnough() throws NegativeNumberException {
         Build build = new Build("test");
         PowerSupply psu = new PowerSupply("psu", "100", "100");
         build.addComponent("powersupply", psu);
@@ -108,7 +109,7 @@ public class BuildTest {
     }
 
     @Test
-    public void testCheckSocket() {
+    public void testCheckSocket() throws NegativeNumberException {
         Build build = new Build("test");
         Cpu cpu = new Cpu("cpu", "123", "12", "ABC", "4.0");
         build.addComponent("cpu", cpu);
@@ -118,7 +119,7 @@ public class BuildTest {
     }
 
     @Test
-    public void testCheckSocketNotCompatible() {
+    public void testCheckSocketNotCompatible() throws NegativeNumberException {
         Build build = new Build("test");
         Cpu cpu = new Cpu("cpu", "123", "12", "ABC", "4.0");
         build.addComponent("cpu", cpu);
@@ -128,23 +129,23 @@ public class BuildTest {
     }
 
     @Test
-    public void testCheckSocketNoCpu() {
+    public void testCheckSocketNoCpu() throws NegativeNumberException {
         Build build = new Build("test");
         Motherboard mb = new Motherboard("mb", "123", "50", "DEF", "form", "4", "2");
         build.addComponent("motherboard", mb);
+        assertTrue(build.checkSocket());
+    }
+
+    @Test
+    public void testCheckSocketNoMb() throws NegativeNumberException {
+        Build build = new Build("test");
+        Cpu cpu = new Cpu("cpu", "123", "12", "ABC", "4.0");
+        build.addComponent("cpu", cpu);
         assertFalse(build.checkSocket());
     }
 
     @Test
-    public void testCheckSocketNoMb() {
-        Build build = new Build("test");
-        Cpu cpu = new Cpu("cpu", "123", "12", "ABC", "4.0");
-        build.addComponent("cpu", cpu);
-        assertTrue(build.checkSocket()); // change this once checkSocket is updated
-    }
-
-    @Test
-    public void testCheckFormFactor() {
+    public void testCheckFormFactor() throws NegativeNumberException {
         Build build = new Build("test");
         Motherboard mb = new Motherboard("mb", "123", "50", "ABC", "form", "4", "2");
         build.addComponent("motherboard", mb);
@@ -154,7 +155,7 @@ public class BuildTest {
     }
 
     @Test
-    public void testCheckFormFactorNotCompatible() {
+    public void testCheckFormFactorNotCompatible() throws NegativeNumberException {
         Build build = new Build("test");
         Motherboard mb = new Motherboard("mb", "123", "50", "ABC", "form", "4", "2");
         build.addComponent("motherboard", mb);
@@ -164,7 +165,7 @@ public class BuildTest {
     }
 
     @Test
-    public void testCheckFormFactorNoMb() {
+    public void testCheckFormFactorNoMb() throws NegativeNumberException {
         Build build = new Build("test");
         Case c = new Case("c", "123", "50", "form2", "2");
         build.addComponent("case", c);
@@ -172,7 +173,7 @@ public class BuildTest {
     }
 
     @Test
-    public void testCheckFormFactorNoCase() {
+    public void testCheckFormFactorNoCase() throws NegativeNumberException {
         Build build = new Build("test");
         Motherboard mb = new Motherboard("mb", "123", "50", "ABC", "form", "4", "2");
         build.addComponent("motherboard", mb);
@@ -180,7 +181,7 @@ public class BuildTest {
     }
 
     @Test
-    public void testCheckExpansionSlots() {
+    public void testCheckExpansionSlots() throws NegativeNumberException {
         Build build = new Build("test");
         Case c = new Case("c", "123", "50", "form", "2");
         build.addComponent("case", c);
@@ -190,7 +191,7 @@ public class BuildTest {
     }
 
     @Test
-    public void testCheckExpansionSlotsNotEnough() {
+    public void testCheckExpansionSlotsNotEnough() throws NegativeNumberException {
         Build build = new Build("test");
         Case c = new Case("c", "123", "50", "form", "1");
         build.addComponent("case", c);
@@ -202,7 +203,7 @@ public class BuildTest {
     }
 
     @Test
-    public void testCheckExpansionSlotsNoCase() {
+    public void testCheckExpansionSlotsNoCase() throws NegativeNumberException {
         Build build = new Build("test");
         Drive drive = new Drive("drive", "123", "50", "200", "SSD");
         build.addComponent("drive", drive);
@@ -210,7 +211,7 @@ public class BuildTest {
     }
 
     @Test
-    public void testCheckExpansionSlotsNoDrive() {
+    public void testCheckExpansionSlotsNoDrive() throws NegativeNumberException {
         Build build = new Build("test");
         Case c = new Case("c", "123", "50", "form", "1");
         build.addComponent("case", c);
@@ -218,7 +219,7 @@ public class BuildTest {
     }
 
     @Test
-    public void testCheckGpuSlot() {
+    public void testCheckGpuSlot() throws NegativeNumberException {
         Build build = new Build("test");
         Motherboard mb = new Motherboard("mb", "123", "50", "ABC", "form", "4", "2");
         build.addComponent("motherboard", mb);
@@ -228,7 +229,7 @@ public class BuildTest {
     }
 
     @Test
-    public void testCheckGpuSlotNotEnough() {
+    public void testCheckGpuSlotNotEnough() throws NegativeNumberException {
         Build build = new Build("test");
         Motherboard mb = new Motherboard("mb", "123", "50", "ABC", "form", "4", "1");
         build.addComponent("motherboard", mb);
@@ -240,7 +241,7 @@ public class BuildTest {
     }
 
     @Test
-    public void testCheckGpuSlotNoMb() {
+    public void testCheckGpuSlotNoMb() throws NegativeNumberException {
         Build build = new Build("test");
         Gpu gpu = new Gpu("gpu", "123", "50", "2", "2");
         build.addComponent("gpu", gpu);
@@ -248,7 +249,7 @@ public class BuildTest {
     }
 
     @Test
-    public void testCheckGpuSlotNoGpu() {
+    public void testCheckGpuSlotNoGpu() throws NegativeNumberException {
         Build build = new Build("test");
         Motherboard mb = new Motherboard("mb", "123", "50", "ABC", "form", "4", "1");
         build.addComponent("motherboard", mb);
@@ -256,7 +257,7 @@ public class BuildTest {
     }
 
     @Test
-    public void testCheckMemorySlot() {
+    public void testCheckMemorySlot() throws NegativeNumberException {
         Build build = new Build("test");
         Motherboard mb = new Motherboard("mb", "123", "50", "ABC", "form", "4", "2");
         build.addComponent("motherboard", mb);
@@ -266,7 +267,7 @@ public class BuildTest {
     }
 
     @Test
-    public void testCheckMemorySlotNotEnough() {
+    public void testCheckMemorySlotNotEnough() throws NegativeNumberException {
         Build build = new Build("test");
         Motherboard mb = new Motherboard("mb", "123", "50", "ABC", "form", "1", "2");
         build.addComponent("motherboard", mb);
@@ -278,7 +279,7 @@ public class BuildTest {
     }
 
     @Test
-    public void testCheckMemorySlotNoMb() {
+    public void testCheckMemorySlotNoMb() throws NegativeNumberException {
         Build build = new Build("test");
         Memory mem = new Memory("mem", "123", "50", "2", "2");
         build.addComponent("memory", mem);
@@ -286,7 +287,7 @@ public class BuildTest {
     }
 
     @Test
-    public void testCheckMemorySlotNoMem() {
+    public void testCheckMemorySlotNoMem() throws NegativeNumberException {
         Build build = new Build("test");
         Motherboard mb = new Motherboard("mb", "123", "50", "ABC", "form", "1", "2");
         build.addComponent("motherboard", mb);

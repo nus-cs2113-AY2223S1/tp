@@ -38,9 +38,7 @@ public class Monitor extends Component {
         int powerInt = Integer.parseInt(power);
         int refreshRateInt = Integer.parseInt(refreshRate);
         int responseTimeInt = Integer.parseInt(responseTime);
-        int resolutionInt = Integer.parseInt(resolution);
-        if (priceDouble < 0 || powerInt < 0 || refreshRateInt < 0 || responseTimeInt < 0
-                || resolutionInt < 0) {
+        if (priceDouble < 0 || powerInt < 0 || refreshRateInt < 0 || responseTimeInt < 0) {
             throw new NegativeNumberException();
         }
         this.name = name;

@@ -1,9 +1,10 @@
 package computercomponentchooser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,9 +20,9 @@ import computercomponentchooser.components.Motherboard;
 import computercomponentchooser.components.PowerSupply;
 import computercomponentchooser.exceptions.DuplicateBuildException;
 import computercomponentchooser.exceptions.NegativeNumberException;
-import computercomponentchooser.exceptions.UnlistedBuildException;
+import computercomponentchooser.storage.Storage;
 
-public class BuildManagerTest {
+public class StorageTest {
     BuildManager buildManager;
     Build build1;
     Build build2;
@@ -62,48 +63,23 @@ public class BuildManagerTest {
     }
 
     @Test
-    public void testAddAndGetBuild() throws DuplicateBuildException {
-        buildManager.addBuild(build1);
-        buildManager.addBuild(build2);
-        assertEquals(2, buildManager.size());
-        assertEquals(build1, buildManager.getBuild("build1"));
-        assertEquals(build2, buildManager.getBuild("build2"));
-    }
-
-    @Test
-    public void testAddDuplicateBuild() {
-        try {
-            buildManager.addBuild(build1);
-            buildManager.addBuild(build1);
-        } catch (DuplicateBuildException e) {
-            assertEquals("Build already exists", e.getMessage());
+    public void testSaveAndLoadBuilds() throws DuplicateBuildException, IOException {
+        // delete files in data directory
+        Path path = Path.of("data");
+        for (File file : path.toFile().listFiles()) {
+            file.delete();
         }
-    }
-
-    @Test
-    public void testDeleteBuild() throws DuplicateBuildException, UnlistedBuildException {
         buildManager.addBuild(build1);
         buildManager.addBuild(build2);
-        buildManager.deleteBuild("build1");
-        assertEquals(1, buildManager.size());
-        assertNull(buildManager.getBuild("build1"));
-    }
-
-    @Test
-    public void testDeleteUnlistedBuild() {
-        try {
-            buildManager.deleteBuild("fake");
-        } catch (UnlistedBuildException e) {
-            assertEquals("This build does not exist", e.getMessage());
-        }
-    }
-
-    @Test
-    public void testDoesBuildExist() throws DuplicateBuildException {
-        buildManager.addBuild(build1);
-        buildManager.addBuild(build2);
-        assertTrue(buildManager.doesBuildExist("build1"));
-        assertTrue(buildManager.doesBuildExist("build2"));
-        assertFalse(buildManager.doesBuildExist("fake"));
+        Storage storage = new Storage();
+        storage.saveBuild(buildManager);
+        storage.saveComponent(build1);
+        storage.saveComponent(build2);
+        BuildManager buildManager2 = new BuildManager();
+        storage.loadBuild(buildManager2);
+        storage.loadComponent(buildManager2);
+        assertEquals(buildManager2.size(), 2);
+        assertEquals(buildManager2.getBuild("build1").toString(), build1.toString());
+        assertEquals(buildManager2.getBuild("build2").toString(), build2.toString());
     }
 }
