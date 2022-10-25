@@ -75,6 +75,24 @@ public class Wallet {
         changeMoney(currency, -amount);
     }
 
+    public void exchangeMoney(CurrencyStructure oldCurrency, CurrencyStructure newCurrency, double oldAmount){
+        double oldRate = oldCurrency.getRate();
+        double newRate = newCurrency.getRate();
+        double newAmount = oldAmount * (newRate / oldRate); 
+        withdrawMoney(oldCurrency, oldAmount);
+        saveMoney(newCurrency, newAmount);
+    }
+
+    public void convertAllMoney(CurrencyStructure currency) {
+        int depositLength = deposits.size();
+        for (int i=0;i<depositLength;i++) {
+            Deposit deposit = deposits.get(i);
+            CurrencyStructure oldCurrency = deposit.getCurrency();
+            double oldamount = deposit.getBalance();
+            exchangeMoney(oldCurrency, currency, oldamount);
+        }
+    }
+
     private boolean changeMoney(CurrencyStructure currency, double amount) {
         boolean hasDeposit = false;
         for (Deposit deposit : deposits) {
