@@ -28,7 +28,7 @@ public class Ui {
         showLine();
         System.out.print(greeting);
         printQuestion();
-        System.out.println(CALL_TO_ACTION);
+        System.out.print(CALL_TO_ACTION);
         showLine();
     }
 

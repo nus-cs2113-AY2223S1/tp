@@ -29,17 +29,25 @@ public class HelpCommand extends Command {
     private static final String COMMAND_FIND_FINISHED_TX = "find-tx /s finished";
     private static final String COMMAND_FIND_UNFINISHED_TX = "find-tx /s unfinished";
     private static final String COMMAND_SORT_ITEM =
-            "sort-items /mo <mode: hl or  lh> /mi <min> /ma <max>";
+            "sort-items /mode <mode: hl or  lh> /min <min> /max <max> /cat <categoryIndex>";
     private static final String COMMAND_LIST_CATEGORIES = "list-categories";
     private static final String COMMAND_FIND_USER = "find-user /k <keyword>";
     private static final String COMMAND_FIND_ITEM = "find-item /k <keyword>";
     private static final String COMMAND_UPDATE_ITEM = "update-item /i <itemId> /p <price>";
-    private static final String COMMAND_UPDATE_TX = "update-tx /t <transactionid> /d <duration>";
+    private static final String COMMAND_UPDATE_TX = "update-tx /t <transactionId> /d <duration>";
     private static final String UNDERLINE = System.lineSeparator() + "--------------------";
     private final LinkedHashMap<String, String> commandToDetailMap;
 
     public HelpCommand() {
         this.commandToDetailMap = new LinkedHashMap<>();
+        this.commandToDetailMap.put(System.lineSeparator() + "ADD-RELATED-COMMANDS", UNDERLINE);
+        this.commandToDetailMap.put("Add a user", COMMAND_ADD_USER);
+        this.commandToDetailMap.put("Add a item", COMMAND_ADD_ITEM);
+        this.commandToDetailMap.put("Add a transaction", COMMAND_ADD_TX);
+        this.commandToDetailMap.put(System.lineSeparator() + "REMOVE-RELATED-COMMANDS", UNDERLINE);
+        this.commandToDetailMap.put("Remove a user", COMMAND_REMOVE_USER);
+        this.commandToDetailMap.put("Remove a item", COMMAND_REMOVE_ITEM);
+        this.commandToDetailMap.put("Remove a transaction", COMMAND_REMOVE_TX);
         this.commandToDetailMap.put(System.lineSeparator() + "LIST-RELATED-COMMANDS", UNDERLINE);
         this.commandToDetailMap.put("List all commands", COMMAND_HELP);
         this.commandToDetailMap.put("List all users", COMMAND_LIST_USERS);
@@ -50,14 +58,6 @@ public class HelpCommand extends Command {
         this.commandToDetailMap.put("View a user", COMMAND_VIEW_USER);
         this.commandToDetailMap.put("View a item", COMMAND_VIEW_ITEM);
         this.commandToDetailMap.put("View a transaction", COMMAND_VIEW_TX);
-        this.commandToDetailMap.put(System.lineSeparator() + "ADD-RELATED-COMMANDS", UNDERLINE);
-        this.commandToDetailMap.put("Add a user", COMMAND_ADD_USER);
-        this.commandToDetailMap.put("Add a item", COMMAND_ADD_ITEM);
-        this.commandToDetailMap.put("Add a transaction", COMMAND_ADD_TX);
-        this.commandToDetailMap.put(System.lineSeparator() + "REMOVE-RELATED-COMMANDS", UNDERLINE);
-        this.commandToDetailMap.put("Remove a user", COMMAND_REMOVE_USER);
-        this.commandToDetailMap.put("Remove a item", COMMAND_REMOVE_ITEM);
-        this.commandToDetailMap.put("Remove a transaction", COMMAND_REMOVE_TX);
         this.commandToDetailMap.put(System.lineSeparator() + "UPDATE-RELATED-COMMANDS", UNDERLINE);
         this.commandToDetailMap.put("Update price of an item", COMMAND_UPDATE_ITEM);
         this.commandToDetailMap.put("Update duration of a transaction", COMMAND_UPDATE_TX);
@@ -68,7 +68,6 @@ public class HelpCommand extends Command {
         this.commandToDetailMap.put("Find item by keywords", COMMAND_FIND_ITEM);
         this.commandToDetailMap.put("Sort all items in a range", COMMAND_SORT_ITEM);
     }
-
 
     /**
      * Execute HelpCommand (print all available commands).
