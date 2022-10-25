@@ -74,8 +74,10 @@ public class EditCommand extends Command {
     private String category;
     private LocalDate date;
 
+    //@@brian-vb
     private static final Logger editLogger = Logger.getLogger(DeleteCommand.class.getName());
 
+    //@@paullowse
     public EditCommand() {
     }
 
@@ -137,6 +139,7 @@ public class EditCommand extends Command {
         this.date = date;
     }
 
+    //@@author brian-vb
     /**
      * Executes the "edit" command.
      *
