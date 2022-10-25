@@ -2,7 +2,9 @@
 
 ## Introduction
 
-{Give a product intro}
+easySEP is a CLI application created to assist NUS Computer Engineering undergraduates intending to embark on a Student Exchange Programme in their planning for student exchange.
+In particular, it is a useful utility for exploring potential module mappings for various partner universities, creating and maintaining lists for them and also favouriting selected ones
+for easier reference. As an added feature, users can also curate their timetables to prevent potential clashes in lessons.
 
 ## Quick Start
 
@@ -71,6 +73,36 @@ Format: `/list u/UNIVERSITY_NAME_IN_UNDERSCORES`
 Example of usage:
 
 `/list u/Aalto_University`
+
+### Favourite Command: `/favourite`
+
+Performs a total of 3 functionalities: view all lists that are marked as favourites, add a new list to favourites and delete a list from favourites.
+
+#### Favourite Command for viewing all favourited lists: `/favourite view/`
+
+Displays all lists that are marked as favourites with their associated module mappings.
+
+Example of usage:
+
+`/favourite view/`
+
+#### Favourite Command for adding a list to favourites : `/favourite add/UNIVERSITY_NAME_IN_UNDERSCORES`
+
+Adds a list of module mappings for a particular partner university into favourites. This list of module mappings for the partner university
+must already be created beforehand in order to be added into favourites.
+
+Example of usage:
+
+`/favourite add/Boston_University`
+
+#### Favourite Command for deleting a list from favourites : `/favourite del/UNIVERSITY_NAME_IN_UNDERSCORES`
+
+Deletes a list of module mappings for a particular partner university from favourites. This list of module mappings for the partner university
+must already be marked as favourite beforehand in order to be deleted from favourites.
+
+Example of usage:
+
+`/favourite del/Boston_University`
 
 ## FAQ
 
