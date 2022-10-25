@@ -1,0 +1,29 @@
+@startuml
+!include https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/Styles.puml
+
+skinparam rectangleTextAlignment<<left>> left
+
+package Exceptions {
+    Class MoneyGoWhereException EXCEPTIONS_COLOR_1
+
+    Class ExpenseManagerExceptions EXCEPTIONS_COLOR_1
+    Class IncomeManagerExceptions EXCEPTIONS_COLOR_1
+    Class TargetManagerExceptions EXCEPTIONS_COLOR_1
+    Class RecurringPaymentManagerExceptions EXCEPTIONS_COLOR_1
+    Class CurrencyManagerExceptions EXCEPTIONS_COLOR_1
+
+    Class ConsoleParserExceptions EXCEPTIONS_COLOR_1
+
+    Class LocalStorageExceptions EXCEPTIONS_COLOR_1
+}
+
+ExpenseManagerExceptions -up-|> MoneyGoWhereException
+IncomeManagerExceptions --up-|> MoneyGoWhereException
+TargetManagerExceptions --up-|> MoneyGoWhereException
+RecurringPaymentManagerExceptions -up-|> MoneyGoWhereException
+CurrencyManagerExceptions --up-|> MoneyGoWhereException
+
+ConsoleParserExceptions ---up-|> MoneyGoWhereException
+
+LocalStorageExceptions ---up-|> MoneyGoWhereException
+@enduml
