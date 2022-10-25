@@ -15,22 +15,25 @@ import java.util.logging.Logger;
 public class CommandAddModule {
     private static final Logger lgr = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
-    public static String addModule(String currentSemester) {
+    public static  String addModule(String currentSemester) {
+        String moduleCode = UI.getModuleCodeFromUser();
+        return runAddModuleProcedure(currentSemester, moduleCode);
+    }
+
+    public static String runAddModuleProcedure(String currentSemester, String moduleCode) {
         Nusmods mod = new Nusmods();
         List<Lesson> lessons;
         String[] info = new String[3];
 
-        UI.printResponse("Please enter module code");
-
         try {
-            lessons = mod.addModuleInfo(currentSemester, info);
+            lessons = mod.addModuleInfo(currentSemester, info, moduleCode);
         } catch (IOException e) {
             return "Some IO errors has occurred, please try again";
         } catch (InterruptedException e) {
             return "The API request was interrupted, please try again.";
         } catch (Exceptions.InvalidSemException e) {
             return "Sorry, this module is not available in the current semester.";
-        } catch (Exceptions.InvalidModuleCode e) {
+        } catch (Exceptions.InvalidModuleCodeException e) {
             return "Module not found, please enter a valid module code next time!";
         }
 
@@ -38,6 +41,9 @@ public class CommandAddModule {
 
         if (isAlreadyInTimetable(info[0])) {
             return "Module " + info[0] + " : " + info[1] + " is already in your timetable!\n";
+        }
+        for (Lesson lesson : lessons) {
+            lesson.setModuleCode(moduleCode);
         }
         Timetable.addNewModule(info[0], info[1], lessons);
         return "Successfully added new module: " + info[0] + " : " + info[1] + '\n';

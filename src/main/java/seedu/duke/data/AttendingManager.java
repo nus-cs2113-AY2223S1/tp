@@ -28,7 +28,7 @@ import seedu.duke.module.lessons.Lesson;
  */
 
 public class AttendingManager {
-    public static ArrayList<String> attendingDataList = new ArrayList<String>();
+    public static ArrayList<String> attendingDataList = new ArrayList<>();
     static String currentSemester;
     static String dataDirectoryPath;
 
@@ -52,102 +52,36 @@ public class AttendingManager {
     /*
      * Erases data in attendingDataFile and writes data from attendingDataList into attendingDataFile
      */
-    private static void rewriteAttendingData() {
+    public static void saveAttendingData() {
         try {
-            // Erase Data
             FileWriter myWriter = new FileWriter(dataDirectoryPath + "/AttendingData.txt");
-            myWriter.write("");
-            myWriter.close();
-
-            myWriter = new FileWriter(dataDirectoryPath + "/AttendingData.txt", true);
             for (String line : attendingDataList) {
-                myWriter.write(line + "\n");
+                myWriter.write(line);
             }
-
             myWriter.close();
         } catch (IOException e) {
-            System.out.println("Failed to erase AttendingData.txt");
+            System.out.println("Failed to save to AttendingData.txt");
         }
-    }
-
-    /*
-     * Removes all attendingLesson for a given module from AttendingDataList
-     */
-    private static void removeModuleFromDataList(Module module) {
-        String moduleCode = module.getModuleCode();
-        String[] currLine;
-        int index = 0;
-
-        while (index < attendingDataList.size()) {
-            currLine = attendingDataList.get(index).split("\\|");
-            if (currLine[0].equals(moduleCode)) {
-                attendingDataList.remove(index);
-            } else {
-                index++;
-            }
-        }
-    }
-
-    /*
-     * Removes all instances of attendingLessons from attendingDataList and attendingDataFile
-     */
-    public static void deleteAttending(Module module) {
-        removeModuleFromDataList(module);
-        rewriteAttendingData();
-    }
-
-    /*
-     * Checks if there is an existing AttendingLesson in attendingDataList for a given module and lesson
-     */
-    public static boolean attendingExists(Lesson lesson, String moduleCode) {
-        for (int i = 0; i < attendingDataList.size(); i++) {
-            String[] currAttendingLessonLineList = attendingDataList.get(i).split("\\|");
-            if (currAttendingLessonLineList[0].equals(moduleCode)
-                    && currAttendingLessonLineList[1].equals(lesson.getLessonType())) {
-                return true;
-            }
-        }
-        return false;
     }
 
     /*
     * Adds an attendingLesson into AttendingData.txt in the following format:
     * <ModuleCode>|<lessonType>|<day>|<start>|<end>\n
     */
-    public static void addAttending(Lesson lesson, Module module) {
-        String moduleCode = module.getModuleCode();
-        try {
-            FileWriter myWriter = new FileWriter(dataDirectoryPath + "/AttendingData.txt", true);
-            String line = moduleCode + "|" + lesson.getLessonType() + "|" + lesson.getDay()
-                    + "|" + lesson.getStartTime() + "|" + lesson.getEndTime()
-                    + "|" + lesson.getClassNumber();
-            myWriter.write(line + "\n");
-            attendingDataList.add(line);
-            myWriter.close();
-        } catch (IOException e) {
-            System.out.println("Sorry, failed to add module to AttendingData.txt");
-        }
+    private static void addAttending(Lesson lesson, String moduleCode) {
+        String line = moduleCode + "|" + lesson.getLessonType() + "|" + lesson.getDay()
+                + "|" + lesson.getStartTime() + "|" + lesson.getEndTime()
+                + "|" + lesson.getClassNumber() + "\n";
+        attendingDataList.add(line);
     }
 
-    /*
-     * Replaces a current attendingLesson in AttendingDataFile with a new attendingLesson
-     */
-    public static void setAttending(Lesson lessonToSet, String moduleCode) {
-
-        String currLine;
-
-        for (int i = 0; i < attendingDataList.size(); i++) {
-            currLine = attendingDataList.get(i);
-            String[] currLineList = currLine.split("\\|");
-            if (currLineList[0].equals(moduleCode) && currLineList[1].equals(lessonToSet.getLessonType())) {
-                String newLine = moduleCode + "|" + lessonToSet.getLessonType() + "|" + lessonToSet.getDay()
-                        + "|" + lessonToSet.getStartTime() + "|" + lessonToSet.getEndTime()
-                        + "|" + lessonToSet.getClassNumber();
-                attendingDataList.set(i, newLine);
-                break;
+    public static void saveAttendingIntoDataList() {
+        attendingDataList.clear();
+        for (Module module : Timetable.listOfModules) {
+            for (Lesson lesson : module.getAttending()) {
+                addAttending(lesson, module.getModuleCode());
             }
         }
-        rewriteAttendingData();
     }
 
     /*
