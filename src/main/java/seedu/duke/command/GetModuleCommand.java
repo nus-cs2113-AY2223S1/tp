@@ -85,8 +85,7 @@ public class GetModuleCommand extends Command {
     }
 
     private void addLine(Ui ui, String heading, String details) {
-        String line = heading;
-        line += StringUtils.repeat(" ", HEADING_LENGTH - heading.length());
+        String line = StringUtils.rightPad(heading, HEADING_LENGTH);
         line += " : ";
         line += (details == null || details.isEmpty()) ? "Nil" : splitLongDescription(details); 
         ui.displayMessage(line);
