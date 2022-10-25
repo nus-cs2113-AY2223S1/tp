@@ -8,6 +8,9 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 public class TimetableDict {
+    /*
+     * timetable[String:day][String:hour] = String:moduleCode
+     */
     public LinkedHashMap<String, LinkedHashMap<String, String>> timetable 
                         = new LinkedHashMap<String, LinkedHashMap<String, String>>();
 
@@ -31,6 +34,27 @@ public class TimetableDict {
                 hourInt += 70;
             }
         }
+    }
+
+    private int checkClash(Lesson lesson) {
+        String startTime = lesson.getStartTime();
+        String day = lesson.getDay();
+        String endTime = lesson.getEndTime();
+        boolean isLessonTime = false;
+
+        LinkedHashMap<String, String> dayMap = timetable.get(day);
+        for (String hour : dayMap.keySet()) {
+            if (!isLessonTime && startTime.equals(hour)) {
+                isLessonTime = true;
+            }
+            if (isLessonTime && endTime.equals(hour)) {
+                break;
+            }
+            if (isLessonTime && !dayMap.get(hour).equals("______")) {
+                return 1;
+            }
+        }
+        return 0;
     }
 
     public void init() {
@@ -115,17 +139,21 @@ public class TimetableDict {
     }
 
     public String allocateModules() {
-        List<Module> listOfModules = Timetable.getListOfModules();
-        for (Module module : listOfModules) {
-            getPossibleLessonPermutations(module);
-        }
         return " ";
     }
 
-    // private int getNumOfClashes(List<Lesson> lessons) {
-    //     TimetableDict tempTimetable = new TimetableDict();
-        
-    // }
+    private int getNumOfClashes(List<Lesson> lessons) {
+        TimetableDict tempTimetable = new TimetableDict();
+        int numOfClashes = 0;
+        for (Lesson lesson : lessons) {
+            if (checkClash(lesson) == 1){
+                numOfClashes++;
+                continue;
+            }
+            tempTimetable.addLesson(lesson, "XXXXXX");
+        }
+        return numOfClashes;
+    }
 
     private List<List<Lesson>> getPossibleLessonPermutations(Module module) {
         LinkedHashMap<String, ArrayList<Lesson>> classifiedLessons = module.getClassifiedLessons(); //Lesson type -> list of lessons
@@ -141,10 +169,6 @@ public class TimetableDict {
             numOfPermutations = numOfPermutations * classifiedLessons.get(lessonType).size();
             lessonTypes.add(lessonType);
         }
-
-        // For debugging
-        // System.out.println("Num of permutations: " + numOfPermutations);
-        // System.out.println("Num of lesson types: " + lessonTypes.size());
 
         //setting all empty lists
         for (int permutationIndex = 0; permutationIndex < numOfPermutations; permutationIndex++) {

@@ -9,6 +9,7 @@ public class Lesson {
     private String endTime;
     private String lessonType;
     private String classNumber;
+    private String moduleCode;
 
     public String getDay() {
         return day;
