@@ -78,8 +78,18 @@ The API component is also able to:
 
 #### UI Component
 
-User-facing parts of the program
+The user-facing parts of the program are implemented with the Ui class.
 
+It implements the following main functions:
+
+- print() - Prints a string to System.out.
+- getLine() - Asks user for input and returns input.
+- getCommand() - Asks user for a command input and returns input.
+- showLogo() - Prints ASCII art of a car and parKING logo.
+- printResult() - Shows the result of a command execution to the user. Includes additional formatting of the results of different commands.
+- printError() - Print exception message.
+- changeScanner() - Changes the scanner for the Ui object. To be used for JUnit testing.
+- getSeparatorString() - Returns a separator string.
 
 #### Logic Component
 
@@ -152,6 +162,10 @@ Next, `2` is removed from `favouriteList` and `setUnfavourite()` calls `writeFav
 Step 5. The user wants to view all favourited carparks and executes `favourite list`. The command is passed to the Parser class which returns a Command with value `FAVOURITE`.
 The main program calls `showList()` this time as the second argument in the command is `list`. The `showList()` method
 uses StringBuilder to format all the contents of `favouriteList` into a user-friendly string, and returns it for printing.
+
+The following sequence diagrams shows how a favourite / unfavourite command works:
+
+![Favourite Sequence Diagram](images/FavouriteSequenceDiagram.png)
 
 #### Design considerations
 
