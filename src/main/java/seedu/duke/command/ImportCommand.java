@@ -22,7 +22,7 @@ public class ImportCommand extends Command {
     public ImportCommand(String[] input) throws YamomException {
         super(input);
 
-        if (Parser.isTwoWordsCommand(input)) {
+        if (!Parser.isTwoWordsCommand(input)) {
             throw new YamomException("No nusmod link given");
         }
         nusModLink = input[1];

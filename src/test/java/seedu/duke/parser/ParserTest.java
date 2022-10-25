@@ -113,8 +113,8 @@ public class ParserTest {
         exception = assertThrows(YamomException.class, () -> Parser.parse("delete me"));
         assertEquals("Error! \tWrong format, should be: delete [MODULE_CODE]" + System.lineSeparator()
                 + "Module is invalid! Please enter a valid module code." + System.lineSeparator()
-                + "Each module of study has a unique module code consisting of a two- or three-"
-                + "letter prefix that generally denotes the discipline," + System.lineSeparator()
+                + "Each module of study has a unique module code consisting of a two- " + System.lineSeparator()
+                + "or three-letter prefix that generally denotes the discipline," + System.lineSeparator()
                 + "and four digits, the first of which indicates the level of the module"
                 + System.lineSeparator() + "(e.g., 1000 indicates a Level 1 module and 2000, a Level 2 module).",
                 exception.getMessage());
