@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
+import seedu.duke.Calculator;
 import seedu.duke.Parser;
 import seedu.duke.Ui;
 import seedu.duke.biometrics.Biometrics;
@@ -12,7 +13,6 @@ import seedu.duke.exercise.StrengthExercise;
 import seedu.duke.food.Food;
 import seedu.duke.food.FoodList;
 import seedu.duke.storage.Storage;
-import seedu.duke.biometrics.Calculator;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;

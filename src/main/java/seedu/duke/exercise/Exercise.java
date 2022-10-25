@@ -1,19 +1,19 @@
 package seedu.duke.exercise;
 
-import seedu.duke.command.DateCommand;
-
 public class Exercise {
     private String date;
+    private double time;
     private String exerciseName;
     private int repetition;
     private int caloriesBurnt;
     private boolean isDone;
 
 
-    public Exercise(String exerciseName, int repetitions, int caloriesBurnt, String date) {
+    public Exercise(String exerciseName, int repetitions, String date) {
         this.exerciseName = exerciseName;
         this.repetition = repetitions;
-        this.caloriesBurnt = caloriesBurnt;
+        this.time = 0.0;
+        this.caloriesBurnt = 0;
         this.isDone = false;
         this.date = date;
     }
@@ -38,7 +38,7 @@ public class Exercise {
         return 1;
     }
 
-    public int getTime() {
+    public double getDistance() {
         return 1;
     }
 
@@ -53,6 +53,10 @@ public class Exercise {
         return "[ ]";
     }
 
+    public String getTime() {
+        return String.format("%.1f", time);
+    }
+
     public int getTaskStatusInNumber() {
         if (isDone) {
             return 1;
@@ -62,6 +66,14 @@ public class Exercise {
 
     public void setDone(boolean isDone) {
         this.isDone = isDone;
+    }
+
+    public void setCaloriesBurnt(int caloriesBurnt) {
+        this.caloriesBurnt = caloriesBurnt;
+    }
+
+    public void setTime(double time) {
+        this.time = time;
     }
 
     @Override
@@ -75,5 +87,9 @@ public class Exercise {
     public String saveExercise() {
         return "exercise /" + getExerciseName() + " /"
                 + getSet() + " /" + getRepetition() + " /" + getCaloriesBurnt() + " | " + getTaskStatusInNumber();
+    }
+
+    public int getWeight() {
+        return 0;
     }
 }
