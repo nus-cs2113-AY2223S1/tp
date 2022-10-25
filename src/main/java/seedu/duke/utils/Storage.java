@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,9 +21,9 @@ public class Storage {
 
     public static final String LOADING_PREVIOUS_STATE_MESSAGE = "Loading previous state.";
 
-    public static final String NO_PREVIOUS_SAVED_MODULE_ERROR_MESSAGE = "There are no modules saved";
+    public static final String NO_PREVIOUS_SAVED_MODULE_ERROR_MESSAGE = "There are no modules saved.";
 
-    public static final String EXPORT_MESSAGE = "This is your export link:";
+    public static final String EXPORT_MESSAGE = "These are your export links:";
 
     private Logger logger = Logger.getLogger(Storage.class.getName());
 
@@ -40,8 +41,11 @@ public class Storage {
         logger = Logger.getLogger(SUBSYSTEM_NAME);
         logger.log(Level.FINE, "Attempting to open previous saved file");
         try {
-            String link = readPreviousState();
-            Link.parseLink(link, state);
+            ArrayList<String> links = readPreviousState();
+            for (String link: links) {
+                Link.parseLink(link, state);
+            }
+            State.setSemester(1);
             ui.addMessage(LOADING_PREVIOUS_STATE_MESSAGE);
             logger.log(Level.FINE, "Opened previous saved file");
         } catch (FileNotFoundException e) {
@@ -58,22 +62,21 @@ public class Storage {
      * Opens the previously saved file. The saved file should only contain one line which is the
      * link for exporting to NUSMods.
      *
-     * @return the link for exporting to NUSMods
+     * @return the links for exporting to NUSMods
      * @throws FileNotFoundException the file in the file path cannot be found
      */
-    private String readPreviousState() throws FileNotFoundException {
-        String link = "";
+    private ArrayList<String> readPreviousState() throws FileNotFoundException {
+        ArrayList<String> links = new ArrayList<>();
         File file = new File(FILE_PATH);
         Scanner scanner = new Scanner(file);
         while (scanner.hasNext()) {
             String line = scanner.nextLine();
             if (!line.isEmpty() && Link.isValidPreviousState(line)) {
-                link = line;
-                break;
+                links.add(line);
             }
         }
         scanner.close();
-        return link;
+        return links;
     }
 
     /**
@@ -92,14 +95,15 @@ public class Storage {
         if (file.getParentFile().mkdirs()) {
             file.createNewFile();
         }
-
-        String toSave = Link.getLink(state);
         ui.addMessage(EXPORT_MESSAGE);
-        ui.addMessage(toSave);
-
-        ui.displayUi();
         FileWriter fw = new FileWriter(file);
-        fw.write(String.valueOf(toSave));
+        for (int i = 1; i <= 4; i++) {
+            state.setSemester(i);
+            String toSave = Link.getLink(state);
+            ui.addMessage(toSave);
+            fw.write(toSave + System.lineSeparator());
+        }
+        ui.displayUi();
         fw.close();
     }
 }

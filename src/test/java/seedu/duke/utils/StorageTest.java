@@ -1,6 +1,7 @@
 package seedu.duke.utils;
 
 import org.junit.jupiter.api.RepeatedTest;
+import org.junit.jupiter.api.Test;
 import seedu.duke.model.LessonType;
 import seedu.duke.model.Module;
 import seedu.duke.model.SelectedModule;
@@ -53,7 +54,7 @@ public class StorageTest {
         assertEquals(expectedString.toString(), actualString.toString());
     }
 
-    @RepeatedTest(value = 5, name = RepeatedTest.LONG_DISPLAY_NAME)
+    @Test
     public void openPreviousState_file_state() {
         Ui ui = new Ui();
         Storage storage = new Storage();

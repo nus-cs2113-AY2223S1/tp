@@ -7,6 +7,7 @@ import seedu.duke.model.RawLesson;
 import seedu.duke.model.SelectedModule;
 import seedu.duke.model.Timetable;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -87,7 +88,7 @@ public class Link {
         try {
             String semesterParam = infoParam[SEMESTER_PARAM_INDEX];
             semester = getSemesterFromParam(semesterParam);
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch (NumberFormatException e) {
             throw new YamomException(LINK_PROCESS_ERROR_MESSAGE);
         }
 
@@ -96,9 +97,13 @@ public class Link {
         } else {
             return;
         }
-        String modulesParam = infoParam[MODULES_PARAM_INDEX];
+        String modulesParam = infoParam[MODULES_PARAM_INDEX].trim();
         String cleanModuleParam = modulesParam.replace(SHARE_DELIMITER, "");
+        if (cleanModuleParam.isEmpty()) {
+            return;
+        }
         String[] moduleAndLessonsArray = cleanModuleParam.split(moduleDelimiter);
+        List<SelectedModule> selectedModules = new ArrayList<>();
         for (String moduleAndLessons : moduleAndLessonsArray) {
             String[] splitModuleAndLesson = moduleAndLessons.split(MODULE_CODE_DELIMITER);
             String moduleCode = splitModuleAndLesson[0].toUpperCase();
@@ -109,8 +114,9 @@ public class Link {
             SelectedModule selectedModule = new SelectedModule(module, semester);
             String[] lessonsInfo = splitModuleAndLesson[1].split(lessonDelimiter);
             addLessons(lessonsInfo, selectedModule, semester);
-            state.addSelectedModule(selectedModule);
+            selectedModules.add(selectedModule);
         }
+        state.setSelectedModulesList(selectedModules);
     }
 
     /**
