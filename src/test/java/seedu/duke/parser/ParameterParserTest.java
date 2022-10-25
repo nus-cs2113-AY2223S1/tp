@@ -6,17 +6,7 @@ import seedu.duke.command.Command;
 import seedu.duke.data.Budget;
 import seedu.duke.data.transaction.Expense;
 import seedu.duke.data.transaction.Income;
-import seedu.duke.exception.GlobalEmptyParameterException;
-import seedu.duke.exception.GlobalDuplicateTagException;
-import seedu.duke.exception.GlobalMissingTagException;
-import seedu.duke.exception.InputTransactionInvalidAmountException;
-import seedu.duke.exception.InputTransactionInvalidCategoryException;
-import seedu.duke.exception.InputTransactionInvalidDateException;
-import seedu.duke.exception.InputTransactionInvalidTypeException;
-import seedu.duke.exception.MoolahException;
-import seedu.duke.exception.HelpUnknownOptionException;
-import seedu.duke.exception.InputBudgetInvalidAmountException;
-import seedu.duke.exception.InputBudgetDuplicateException;
+import seedu.duke.exception.*;
 
 import java.time.LocalDate;
 
@@ -253,5 +243,34 @@ public class ParameterParserTest {
         );
     }
 
+    //@@author chydarren
+    @Test
+    public void parseTypeTagForListing_invalidInputTransactionType_exceptionThrown() {
+        assertThrows(
+                InputTransactionInvalidTypeException.class,
+                () -> ParameterParser.parseTypeTagForListing("savings")
+        );
+    }
 
+    @Test
+    public void parseTypeTagForListing_expenseTransactionType_expectClassTypeExpense()
+            throws InputTransactionInvalidTypeException {
+        assertEquals(ParameterParser.parseTypeTagForListing("expense"),
+                "seedu.duke.data.transaction.Expense");
+    }
+
+    @Test
+    public void parseStatsTypeTag_invalidStatsType_exceptionThrown() {
+        assertThrows(
+                StatsInvalidTypeException.class,
+                () -> ParameterParser.parseStatsTypeTag("categories")
+        );
+    }
+
+    @Test
+    public void parseStatsTypeTag_monthlyExpenditureStatsType_expectMonthlyExpenditure()
+            throws StatsInvalidTypeException {
+        assertEquals(ParameterParser.parseStatsTypeTag("monthly_expenditure"),
+                "monthly_expenditure");
+    }
 }

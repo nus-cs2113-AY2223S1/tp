@@ -127,7 +127,6 @@ public class StatsCommand extends ListAndStatsCommand {
         statsLogger.setLevel(Level.SEVERE);
         statsLogger.log(Level.INFO, "Entering execution of the Stats command.");
 
-        // Throws an unsupported tag exception if non-time_insights tag is using date intervals tags
         if (!statsType.equals(TIME_INSIGHTS) && (containMonthYear() != FALSE || containPeriodNumber() != FALSE)) {
             // Throws an unsupported tag exception if non-time_insights tag is using date intervals tags
             throw new GlobalUnsupportedTagException();
@@ -147,7 +146,7 @@ public class StatsCommand extends ListAndStatsCommand {
      * @param transactions  An instance of the TransactionList class.
      * @throws MoolahException If the type of statistics is not recognised.
      */
-    private void listStatsByStatsType(TransactionList transactions) throws MoolahException {
+    public void listStatsByStatsType(TransactionList transactions) throws MoolahException {
         switch (statsType) {
         case MONTHLY_EXPENDITURE:
         case CATEGORICAL_SAVINGS:
