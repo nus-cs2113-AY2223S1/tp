@@ -1,8 +1,6 @@
 @startuml
 !include https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/Styles.puml
 
-skinparam linetype ortho
-
 package Exceptions {
     Class MoneyGoWhereException EXCEPTIONS_COLOR_1
 
