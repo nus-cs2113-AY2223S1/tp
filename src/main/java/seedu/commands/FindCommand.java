@@ -27,7 +27,7 @@ public class FindCommand extends Command {
     @Override
     public CommandResult execute() throws NoCarparkFoundException {
         final Carpark result = findThisCarpark(carparkID);
-        return new CommandResult(result.toString());
+        return new CommandResult(result.getDetailViewString());
     }
 
     /**
