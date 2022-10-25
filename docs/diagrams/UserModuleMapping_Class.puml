@@ -4,6 +4,12 @@
 class Module {
 }
 
+class InvalidUniversityException {
+}
+
+class InvalidModuleException{
+}
+
 class UserModuleMapping {
     + nusModule:Module
     + puModule:Module
@@ -18,7 +24,6 @@ class Ui {
 
 class UserModuleMappingList {
     - modules:ArrayList<UserModuleMapping>
-    + setModules(ArrayList<UserModuleMapping> modules
     + UserModuleMappingList()
     + findModuleByCode(input:UserModuleMapping)
     + addModule(input:UserModuleMapping)
@@ -31,8 +36,10 @@ class UserModuleMappingList {
     + findModuleByTitle(keyword:String)
 }
 
-UserModuleMapping " * " --> "0..2" Module :> Maps
+UserModuleMapping " *  " --> "0..2" Module :> Maps
 UserModuleMappingList " 1 " o--> " * " UserModuleMapping
 UserModuleMappingList .> Ui
+UserModuleMapping --> InvalidModuleException :<<throws>>
+UserModuleMapping --> InvalidUniversityException :<<throws>>
 
 @enduml

@@ -115,7 +115,7 @@ public class UserUniversityListManager {
         assert inputSchool.length() > 0 : "Input school cannot be empty";
         assert puCode.length() > 0 : "Deleting PU code cannot be empty";
         if (containsKey(inputSchool)) {
-            UserModuleMapping deletedModule = 
+            UserModuleMapping deletedModule =
                     getUserUniversityList(inputSchool).getMyModules().getModuleByPuCode(puCode);
             deletedModulesList.addToDeletedModules(deletedModule);
             getUserUniversityList(inputSchool).deleteModuleByPuCode(puCode);

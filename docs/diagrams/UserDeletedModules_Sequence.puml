@@ -3,7 +3,7 @@
 
 -> UserUniversityListManager : deleteModule(inputSchool, puCode)
 activate UserUniversityListManager
-UserUniversityListManager -> UserUniversityListManager : foundKeyAll(inputSchool)
+UserUniversityListManager -> UserUniversityListManager : containsKey(inputSchool)
 activate UserUniversityListManager
 UserUniversityListManager --> UserUniversityListManager : :boolean
 deactivate UserUniversityListManager

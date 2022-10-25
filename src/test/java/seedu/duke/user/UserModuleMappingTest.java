@@ -3,26 +3,13 @@ package seedu.duke.user;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import com.sun.jdi.InvalidCodeIndexException;
 import org.junit.jupiter.api.Test;
 import seedu.duke.exceptions.InvalidUserCommandException;
 
 public class UserModuleMappingTest {
 
     UserModuleMappingList myModules = new UserModuleMappingList();
-
-    @Test
-    void addModule_cs2040_correctDetails() {
-        UserModuleMapping mod = new UserModuleMapping("CS24", "Data Structures", "CS2040",
-                "Data Structures & Algorithms", "4", "4", "UCB", "USA");
-        myModules.addModule(mod);
-        assertEquals(1, myModules.getModules().size());
-        assertEquals(true, myModules.findModuleByCode(mod));
-        assertEquals("CS24", myModules.getModules().get(0).getPuCode());
-        assertEquals("CS2040", myModules.getModules().get(0).getNusCode());
-        assertEquals("Data Structures", myModules.getModules().get(0).getPuTitle());
-        assertEquals("Data Structures & Algorithms", myModules.getModules().get(0).getNusTitle());
-        assertEquals("4", myModules.getModules().get(0).getNusCredit());
-    }
 
     @Test
     void toString_cs2040_correctDetails() {
@@ -146,5 +133,11 @@ public class UserModuleMappingTest {
     @Test
     void findModuleByTitle_NoSuchModule_false() {
         assertEquals(false, myModules.findModuleByTitle("testing"));
+    }
+
+    @Test
+    void deleteModuleByIndex_outOfBounds_expectException() {
+        assertThrows(IndexOutOfBoundsException.class, () -> myModules.deleteModule(-1));
+        assertThrows(IndexOutOfBoundsException.class, () -> myModules.deleteModule((1)));
     }
 }
