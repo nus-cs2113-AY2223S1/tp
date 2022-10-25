@@ -1,7 +1,0 @@
-Boston University%
-CAS MA 589;Computational Statistics;BT3102;Computational Methods for Business;4%
-MET CS 535;Computer Networks;CS3103;Computer Networks Practice;4%
-MET CS 248;Discrete Mathematics;CS1231;Discrete Structures;4%
-/The Hong Kong Polytechnic University%
-COMP4442;Service and Cloud Computing;CS5224;Cloud Computing;4%
-COMP3021;Programming Language Paradigms;CS4215;Programming Language Implement;4%
