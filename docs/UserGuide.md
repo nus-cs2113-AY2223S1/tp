@@ -113,7 +113,23 @@ Total user(s) in database: 6
 ____________________________________________________________
 ```
 
-#### 3.2.3. ```view-user``` - View a user
+#### 3.2.3. ```list-users``` - List all users
+>View the details of all user in the list
+
+Format: ```list-users```
+
+Example of usage: ```list-users```
+
+Expected outcome:
+```
+____________________________________________________________
+Here are 2 user(s) in your list:
+   1. Username: WinstonLimCherHong Age: 22 Contact: 91824633 
+   2. Username: test2 Age: 21 Contact: 91234557 
+____________________________________________________________
+```
+
+#### 3.2.4. ```view-user``` - View a user
 >View the details of a user in the list
 
 Format: ```view-user /u [USERNAME]```
@@ -174,7 +190,22 @@ Total item(s) in database: 1
 ____________________________________________________________
 ```
 
-#### 3.3.3. ```view-item``` - View a specific item
+#### 3.3.3. ```list-items``` - View all items
+>View all items
+
+Format: ```list-items```
+
+Example of usage: ```list-items```
+
+Expected outcome:
+```
+____________________________________________________________
+Here are 1 item(s) in your list:
+   1. Status: [On loan] ItemId: ea608c61 Item: toy Category: SPORTS_EQUIPMENT Owner: WinstonLimCherHong PricePerDay: $4.0
+____________________________________________________________
+```
+
+#### 3.3.4. ```view-item``` - View a specific item
 >View an item based on the itemId requested by the user
 
 Format: ```view-item /i [ITEM_ID]```
@@ -192,7 +223,7 @@ Status: [Available] ItemId: 99995bb2 Item: scale Category: SPORTS_EQUIPMENT Owne
 ____________________________________________________________
 ```
 
-#### 3.3.4. ```update-item``` - Updates properties of an item
+#### 3.3.5. ```update-item``` - Updates properties of an item
 > Currently only supports updating the price of an item
 
 Format: ```update-item /i [ITEM_ID] /p [NEW_PRICE]```
@@ -306,7 +337,22 @@ Total transactions(s) in database: 2
 ____________________________________________________________
 ```
 
-#### 3.4.3. ```view-tx``` - View a transaction
+#### 3.4.3. ```list-tx``` - View all transactions
+>View the details of all transactions in the list
+
+Format: ```list-tx```
+
+Example of usage: ```list-tx```
+
+Expected outcome:
+```
+____________________________________________________________
+Here are 1 transaction(s) in your list:
+   1. Status: [On loan] TransactionID: 2c833e49 ItemName: toy ItemID: ea608c61 BorrowerID: test2 ReturnDate: Sat, Nov 05 2022 (11 day(s) remaining)
+____________________________________________________________
+```
+
+#### 3.4.4. ```view-tx``` - View a transaction
 >View the details of a transaction in the list
 
 Format: ```view-tx /t [TRANSACTION_ID]```
@@ -324,7 +370,7 @@ Status: [Returned] TransactionID: 4f7f7fe8 ItemName: weight ItemID: 5b727b2e Bor
 ____________________________________________________________
 ```
 
-#### 3.4.4. ```update-tx``` - Updates properties of a transaction
+#### 3.4.5. ```update-tx``` - Updates properties of a transaction
 >Currently supports only updating the duration of a transaction
 
 Format: ```update-tx /t [TRANSACTION_ID] /d [NEW_DURATION]```
