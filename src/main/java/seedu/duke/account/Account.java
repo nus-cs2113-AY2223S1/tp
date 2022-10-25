@@ -17,50 +17,86 @@ public class Account {
         this.wallet = wallet;
     }
 
-    public void handleAccountRequest() {
+    public void handleAccountRequest() throws FinanceException {
         boolean isAccountExit = false;
         AccountUi.showAccountEntryMessage(wallet.getUserName());
         CurrencyStructure currency;
         while (!isAccountExit) {
             String in = InputManager.receiveInputLine().toLowerCase();
-            String[] splits = in.split(" ", 2);
-            String[] commandParams = (splits.length == 2) ? splits : new String[] {splits[0], ""};
-            String commandType = commandParams[0];
-            String commandArg = commandParams[1];
-            try {
-                switch (commandType) {
-                case "setdefault":
-                    setDefaultCurrency(commandArg);
-                    break;
-                case "balance":
-                    double totalBalance = wallet.getTotalBalance();
-                    currency = wallet.getDefaultCurrency();
-                    AccountUi.showTotalBalance(totalBalance, currency);
-                    break;
-                case "detail":
-                    String username = wallet.getUserName();
-                    currency = wallet.getDefaultCurrency();
-                    List<Deposit> deposits = wallet.getDeposits();
-                    AccountUi.showWalletDetails(username, currency, deposits);
-                    break;
-                case "save":
-                    MoneyCommand.saveCommand(wallet,commandArg);
-                    break;
-                case "withdraw":
-                    MoneyCommand.withdrawCommand(wallet, commandArg);
-                    break;
-                case "delete":
-                    isAccountExit = DeleteCommand.handleDelete(wallet);
-                    break;
-                case "exit":
-                    isAccountExit = true;
-                    AccountUi.showAccountExitMessage(wallet.getUserName());
-                    break;
-                default:
-                    throw new FinanceException(ExceptionCollection.COMMAND_TYPE_EXCEPTION);
+            String[] splits = in.split(" ");
+            if (splits.length == 1) {
+                String commandType = splits[0];
+                try {
+                    switch (commandType) {
+                    case "balance":
+                        double totalBalance = wallet.getTotalBalance();
+                        currency = wallet.getDefaultCurrency();
+                        AccountUi.showTotalBalance(totalBalance, currency);
+                        break;
+                    case "detail":
+                        String username = wallet.getUserName();
+                        currency = wallet.getDefaultCurrency();
+                        List<Deposit> deposits = wallet.getDeposits();
+                        AccountUi.showWalletDetails(username, currency, deposits);
+                        break;
+                    case "delete":
+                        isAccountExit = DeleteCommand.handleDelete(wallet);
+                        break;
+                    case "exit":
+                        isAccountExit = true;
+                        AccountUi.showAccountExitMessage(wallet.getUserName());
+                        break;
+                    case "list":
+                        AccountUi.listCommands();
+                        break;
+                    }
+                } catch (FinanceException e) {
+                    e.handleException();
                 }
-            } catch (FinanceException e) {
-                e.handleException();
+            }
+            else if (splits.length == 3) {
+                String commandType = splits[0];
+                String commandArg = splits[1] + " " + splits[2];
+                try {
+                    switch (commandType) {
+                        case "setdefault":
+                            setDefaultCurrency(commandArg);
+                            break;
+                        case "save":
+                            MoneyCommand.saveCommand(wallet,commandArg);
+                            break;
+                        case "withdraw":
+                            MoneyCommand.withdrawCommand(wallet, commandArg);
+                            break;
+                        default:
+                            throw new FinanceException(ExceptionCollection.COMMAND_TYPE_EXCEPTION);
+                    }
+
+                } catch (FinanceException e) {
+                    e.handleException();
+                }
+            }
+            else if (splits.length == 4){
+                String commandType = splits[0];
+                String recipientUsername = splits[1];
+                int amount = Integer.parseInt(splits[2]);
+                String trasnferCurrency = splits[3];
+
+                try {
+                    switch (commandType) {
+                    case "transfer":
+                        MoneyCommand.transferMoney(wallet, recipientUsername, trasnferCurrency, amount);
+                        AccountUi.showTransfer(recipientUsername, trasnferCurrency, amount);
+                        break;
+                    default:
+                        throw new FinanceException(ExceptionCollection.COMMAND_TYPE_EXCEPTION);
+                    }
+                } catch (FinanceException e) {
+                    e.handleException();
+                }
+            }
+            else {
+                throw new FinanceException(ExceptionCollection.COMMAND_TYPE_EXCEPTION);
             }
         }
     }

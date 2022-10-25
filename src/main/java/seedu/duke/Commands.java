@@ -4,5 +4,7 @@ public enum Commands {
     LOGIN,
     REGISTER,
     BYE,
-    CURRENCIES
+    CURRENCIES,
+    NEW_CURRENCY,
+    REMOVE
 }
