@@ -21,13 +21,20 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Parser {
+    private static final String ERROR_EMPTY_INPUT = "Please enter a command! "
+            + System.lineSeparator() + "Enter \"help\" to see all available commands in YAMOM!";
+
     public static Command parse(String userInput) throws YamomException {
         String[] keywords = userInput.split("\\s+");
+
+        if (isEmptyInput(keywords[0])) {
+            throw new YamomException(ERROR_EMPTY_INPUT);
+        }
 
         Command toExecute;
         switch (keywords[0]) {
         case (SearchModuleCommand.COMMAND_WORD):
-            toExecute = searchCommand(userInput);
+            toExecute = new SearchModuleCommand(userInput);
             break;
         case (GetModuleCommand.COMMAND_WORD):
             toExecute = getCommand(keywords);
@@ -134,7 +141,11 @@ public class Parser {
         return semesterInput > 0 && semesterInput <= 4;
     }
 
-    public static Command searchCommand(String userInput) {
+    private static boolean isEmptyInput(String command) {
+        return command.isBlank() || command.isEmpty();
+    }
+
+    public static Command searchCommand(String userInput) throws YamomException {
         return new SearchModuleCommand(userInput);
     }
 

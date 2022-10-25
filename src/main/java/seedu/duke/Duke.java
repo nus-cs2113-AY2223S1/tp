@@ -43,7 +43,7 @@ public class Duke {
                 command.execute(state, ui, storage);
                 isExit = command.isExit();
             } catch (Exception e) {
-                e.printStackTrace();
+                //e.printStackTrace();
                 ui.displayMessage(e.getMessage());
             } finally {
                 ui.displayDivider();

@@ -1,22 +1,23 @@
 package seedu.duke.command;
 
+import seedu.duke.exceptions.YamomException;
 import seedu.duke.utils.State;
 import seedu.duke.utils.Storage;
 import seedu.duke.utils.Ui;
 import seedu.duke.model.Module;
 import seedu.duke.parser.Parser;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class SearchModuleCommand extends Command {
     public static final String COMMAND_WORD = "search";
-    public static final String COMMAND_USAGE = "search [KEYWORD]";
-    public static final String COMMAND_DESCRIPTION = "List out all modules that contains KEYWORD"
-            + System.lineSeparator() + "\t * KEYWORD can either be module code or faculty.";
+    public static final String COMMAND_USAGE = "search (/code [MODULE_CODE] | /title [KEYWORD])";
+    public static final String COMMAND_DESCRIPTION = "List out all modules that contains a search term"
+            + System.lineSeparator() + "\t * the search term can either be module code or a keyword in module title.";
 
     // private String toSearchModuleCode;
     private Map<String, String> params;
@@ -29,21 +30,24 @@ public class SearchModuleCommand extends Command {
 
     public static final String SUBSYSTEM_NAME = "SearchModuleCommand";
 
-    public SearchModuleCommand(String input) {
+    public SearchModuleCommand(String input) throws YamomException {
         super(input.split("\\s"));
         params = Parser.parseParams(input);
-    }
-
-    @Override
-    public void execute(State state, Ui ui, Storage storage) {
-        assert state != null : "List of lessons should not be null";
-        logger = Logger.getLogger(SUBSYSTEM_NAME);
-        logger.log(Level.FINE, "Loading search module command");
 
         toSearchModuleCode = params.getOrDefault("code", null);
         toSearchModuleTitle = params.getOrDefault("title", null);
         toSearchLevel = params.getOrDefault("level", null);
         toSearchSemester = params.getOrDefault("sem", null);
+
+        if (isAllNull(toSearchModuleCode, toSearchModuleTitle, toSearchLevel, toSearchSemester)) {
+            throw new YamomException("No search field provided! Should be " + COMMAND_USAGE);
+        }
+    }
+
+    public void execute(State state, Ui ui, Storage storage) {
+        assert state != null : "List of lessons should not be null";
+        logger = Logger.getLogger(SUBSYSTEM_NAME);
+        logger.log(Level.FINE, "Loading search module command");
 
         List<Module> searchResult = filterModuleSearch(toSearchModuleCode, toSearchLevel,
                 toSearchSemester, toSearchModuleTitle);
@@ -153,6 +157,17 @@ public class SearchModuleCommand extends Command {
         return searchResult;
     }
 
+    // TODO: change to functional stream if possible
+    private boolean isAllNull(String... strings) {
+
+        for (String string : strings) {
+            if (string != null) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     @Override
     public boolean isExit() {
         return false;
@@ -170,4 +185,5 @@ public class SearchModuleCommand extends Command {
     public static String getUsage() {
         return COMMAND_USAGE;
     }
+
 }
