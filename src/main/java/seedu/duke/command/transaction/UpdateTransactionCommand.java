@@ -18,6 +18,7 @@ import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PAR
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_TX_NOT_FOUND;
 
 // @@author winston-lim
+
 /**
  * A representation of a command to add a new transaction.
  */
@@ -28,7 +29,7 @@ public class UpdateTransactionCommand extends Command {
     /**
      * Constructor for AddTransactionCommand.
      *
-     * @param parts The parts from user input
+     * @param parts           The parts from user input
      * @param transactionList The list of transactions to work with
      * @throws InsufficientArgumentsException If the number of args is incorrect
      */
@@ -67,10 +68,10 @@ public class UpdateTransactionCommand extends Command {
 
     /**
      * Checks if the given transaction is valid or not.
-     * 
-     * @param duration The input duration
+     *
+     * @param id The input id
      * @return true If that id exists in TransactionList
-     * @throws DurationInvalidException thrown when Duration format is invalid
+     * @throws TransactionNotFoundException thrown when transaction cannot be found
      */
     private boolean isValidTxId(String id) throws TransactionNotFoundException {
         try {
@@ -108,9 +109,9 @@ public class UpdateTransactionCommand extends Command {
      * Executes UpdateTransactionCommand.
      *
      * @return false
-     * @throws InvalidArgumentException If there is a part that cannot be parsed
+     * @throws InvalidArgumentException     If there is a part that cannot be parsed
      * @throws TransactionNotFoundException If the user cannot be found
-     * @throws DurationInvalidException If the number is less than 0
+     * @throws DurationInvalidException     If the number is less than 0
      */
     public boolean executeCommand() throws InvalidArgumentException, TransactionNotFoundException,
             DurationInvalidException {

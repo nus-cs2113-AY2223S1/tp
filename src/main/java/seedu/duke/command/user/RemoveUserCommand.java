@@ -17,7 +17,8 @@ import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PAR
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_USER_BORROWING;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_USER_LENDING;
 
-// @@author bdthanh
+//@@author bdthanh
+
 /**
  * A representation of a command to remove a user.
  */
@@ -30,14 +31,14 @@ public class RemoveUserCommand extends Command {
     /**
      * Constructor for RemoveUserCommand.
      *
-     * @param parts The parts from user input
-     * @param userList The list of users to work with
-     * @param itemList The list of items to work with
+     * @param parts           The parts from user input
+     * @param userList        The list of users to work with
+     * @param itemList        The list of items to work with
      * @param transactionList The list of transactions to work with
      * @throws InsufficientArgumentsException If the number of args is incorrect
      */
     public RemoveUserCommand(String[] parts, UserList userList, ItemList itemList,
-            TransactionList transactionList) throws InsufficientArgumentsException {
+                             TransactionList transactionList) throws InsufficientArgumentsException {
         this.parts = parts;
         this.userList = userList;
         this.itemList = itemList;
@@ -105,12 +106,13 @@ public class RemoveUserCommand extends Command {
      *
      * @return false
      * @throws InvalidArgumentException If there is a part that cannot be parsed
-     * @throws InvalidUserException If he/har is currently lending or borrowing
-     * @throws UserNotFoundException If the user cannot be found in the list
+     * @throws InvalidUserException     If he/har is currently lending or borrowing
+     * @throws UserNotFoundException    If the user cannot be found in the list
      */
     public boolean executeCommand()
             throws InvalidArgumentException, InvalidUserException, UserNotFoundException {
         String[] args = getArgsRemoveUserCmd();
+        assert args.length == 1 : "Args length is invalid";
         String username = args[0];
         User user = userList.getUserById(username);
         if (canDeleteUser(username, transactionList)) {

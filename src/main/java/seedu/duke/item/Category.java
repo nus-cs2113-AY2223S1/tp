@@ -15,6 +15,7 @@ public class Category {
 
     /**
      * Sets the category number based on the category name.
+     *
      * @param category type of category for the item user has added
      * @return corresponding category number
      */
@@ -41,6 +42,7 @@ public class Category {
 
     /**
      * Maps the category number to the corresponding category.
+     *
      * @param categoryNumber integer to be mapped
      * @return corresponding category enum
      */
@@ -67,6 +69,7 @@ public class Category {
 
     /**
      * List all available categories for the user to place their item in.
+     *
      * @return list of categories that are available
      */
     public static String listCategories() {

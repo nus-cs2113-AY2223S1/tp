@@ -19,8 +19,6 @@ public class ViewItemCommand extends Command {
     private final ItemList itemList;
     private final TransactionList transactionList;
 
-
-
     public ViewItemCommand(String[] parts, ItemList itemList,
                            TransactionList transactionList) throws InsufficientArgumentsException {
         this.parts = parts;

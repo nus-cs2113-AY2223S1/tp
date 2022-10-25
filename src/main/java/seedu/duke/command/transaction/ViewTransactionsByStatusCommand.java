@@ -49,7 +49,8 @@ public class ViewTransactionsByStatusCommand extends Command {
 
     /**
      * Displays the list of transactions based on user input.
-     * @param arg user input needed to return the appropriate list of transactions
+     *
+     * @param arg          user input needed to return the appropriate list of transactions
      * @param transactions Overall list of transactions
      */
     void getTransactionsByStatus(String arg, ArrayList<Transaction> transactions) {
@@ -66,6 +67,7 @@ public class ViewTransactionsByStatusCommand extends Command {
 
     /**
      * Search entire transaction list for transactions that are completed.
+     *
      * @param transactions list of transactions to search from
      * @return list of finished transactions
      */
@@ -81,6 +83,7 @@ public class ViewTransactionsByStatusCommand extends Command {
 
     /**
      * Search entire transaction list for transactions that are still ongoing.
+     *
      * @param transactions list of transactions to search from
      * @return list of unfinished transactions
      */

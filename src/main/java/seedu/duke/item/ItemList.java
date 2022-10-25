@@ -2,7 +2,6 @@ package seedu.duke.item;
 
 import seedu.duke.exception.InvalidItemException;
 import seedu.duke.exception.ItemNotFoundException;
-import seedu.duke.transaction.Transaction;
 import seedu.duke.transaction.TransactionList;
 
 import java.util.ArrayList;

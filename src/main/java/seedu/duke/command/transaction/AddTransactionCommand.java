@@ -29,6 +29,7 @@ import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_NUMBER_FORM
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_SELF_BORROWER;
 
 //@@author bdthanh
+
 /**
  * A representation of a command to add a new transaction.
  */
@@ -41,14 +42,14 @@ public class AddTransactionCommand extends Command {
     /**
      * Constructor for AddTransactionCommand.
      *
-     * @param parts The parts from user input
-     * @param userList The list of users to work with
-     * @param itemList The list of items to work with
+     * @param parts           The parts from user input
+     * @param userList        The list of users to work with
+     * @param itemList        The list of items to work with
      * @param transactionList The list of transactions to work with
      * @throws InsufficientArgumentsException If the number of args is incorrect
      */
     public AddTransactionCommand(String[] parts, UserList userList, ItemList itemList,
-            TransactionList transactionList) throws InsufficientArgumentsException {
+                                 TransactionList transactionList) throws InsufficientArgumentsException {
         this.parts = parts;
         this.transactionList = transactionList;
         this.itemList = itemList;
@@ -89,7 +90,7 @@ public class AddTransactionCommand extends Command {
      *
      * @param itemId The input item id
      * @return true If that item is available
-     * @throws InvalidItemException If the item is not available
+     * @throws InvalidItemException  If the item is not available
      * @throws ItemNotFoundException If the item cannot be found
      */
     private boolean isValidItem(String itemId) throws InvalidItemException, ItemNotFoundException {
@@ -105,7 +106,7 @@ public class AddTransactionCommand extends Command {
      * @param itemId The input item id
      * @param userId The input user id
      * @return true If the item owner is not the borrower
-     * @throws InvalidUserException If the user borrows him/herself
+     * @throws InvalidUserException  If the user borrows him/herself
      * @throws ItemNotFoundException If the item cannot be found
      * @throws UserNotFoundException If the user cannot be found
      */
@@ -157,6 +158,7 @@ public class AddTransactionCommand extends Command {
     private boolean areValidArgs(String[] args)
             throws InvalidItemException, InvalidUserException, DateFormatInvalidException,
             ItemNotFoundException, UserNotFoundException, DurationInvalidException {
+        assert args.length == 4 : "Args length is invalid";
         return isValidItem(args[0]) && isValidBorrower(args[0], args[1]) && isValidDuration(args[2])
                 && isValidCreatedDate(args[3]);
     }
@@ -165,18 +167,19 @@ public class AddTransactionCommand extends Command {
      * Executes AddTransactionCommand.
      *
      * @return false
-     * @throws InvalidArgumentException If there is a part that cannot be parsed
+     * @throws InvalidArgumentException   If there is a part that cannot be parsed
      * @throws DateFormatInvalidException If the number of args is incorrect
-     * @throws InvalidUserException If the user borrows themselves
-     * @throws InvalidItemException If the item is unavailable
-     * @throws ItemNotFoundException If the item cannot be found in the list
-     * @throws UserNotFoundException If the user cannot be found
-     * @throws DurationInvalidException If the number is less than 0
+     * @throws InvalidUserException       If the user borrows themselves
+     * @throws InvalidItemException       If the item is unavailable
+     * @throws ItemNotFoundException      If the item cannot be found in the list
+     * @throws UserNotFoundException      If the user cannot be found
+     * @throws DurationInvalidException   If the number is less than 0
      */
     public boolean executeCommand() throws InvalidArgumentException, DateFormatInvalidException,
             InvalidUserException, InvalidItemException, ItemNotFoundException,
             UserNotFoundException, DurationInvalidException {
         String[] args = getArgsAddTxCmd();
+        assert args.length == 4 : "Args length is invalid";
         if (areValidArgs(args)) {
             String itemId = args[0];
             String itemName = itemList.getItemById(args[0]).getName();

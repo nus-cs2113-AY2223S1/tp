@@ -13,6 +13,7 @@ import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INSUFFICIEN
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PARTS;
 
 //@@author bdthanh
+
 /**
  * A representation of a command to remove a transaction.
  */
@@ -23,7 +24,7 @@ public class RemoveTransactionCommand extends Command {
     /**
      * Constructor for RemoveItemCommand.
      *
-     * @param parts The parts from user input
+     * @param parts           The parts from user input
      * @param transactionList The list of transactions to work with
      * @throws InsufficientArgumentsException If the number of args is incorrect
      */
@@ -60,11 +61,12 @@ public class RemoveTransactionCommand extends Command {
      *
      * @return false
      * @throws TransactionNotFoundException If the transaction cannot be found in the list
-     * @throws InvalidArgumentException If there is a part that cannot be parsed
+     * @throws InvalidArgumentException     If there is a part that cannot be parsed
      */
     public boolean executeCommand()
             throws TransactionNotFoundException, InvalidArgumentException {
         String[] args = getArgsRemoveTxCmd();
+        assert args.length == 1 : "Args length is invalid";
         String transactionId = args[0].trim();
         Transaction deletedTransaction = transactionList.getTransactionById(transactionId);
         transactionList.deleteTransaction(transactionId);

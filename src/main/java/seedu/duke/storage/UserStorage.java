@@ -85,7 +85,7 @@ public class UserStorage extends Storage {
      * @param splitUserLine The raw user information.
      * @return A User with full information.
      */
-    public User handleUserLine(String[] splitUserLine) {
+    public static User handleUserLine(String[] splitUserLine) {
         String username = splitUserLine[0];
         int age = Integer.parseInt(splitUserLine[1]);
         String contactNumber = splitUserLine[2];

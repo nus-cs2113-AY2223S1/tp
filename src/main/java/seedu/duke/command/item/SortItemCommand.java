@@ -26,6 +26,7 @@ import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_PRICE_FORMA
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_NUMBER_FORMAT_INVALID;
 
 //@@author chiewyx
+
 /**
  * A representation of a command to sort items based on its price.
  */
@@ -46,8 +47,8 @@ public class SortItemCommand extends Command {
     /**
      * Constructor for SortItemCommand.
      *
-     * @param parts The parts from user input
-     * @param itemList The list of items to work with
+     * @param parts           The parts from user input
+     * @param itemList        The list of items to work with
      * @param transactionList The list of transactions to work with
      */
     public SortItemCommand(String[] parts, ItemList itemList, TransactionList transactionList) {
@@ -198,9 +199,9 @@ public class SortItemCommand extends Command {
      * Sorts and filters the list of items.
      *
      * @return a list containing the sorted and filtered items
-     * @throws InvalidArgumentException if the arguments are invalid
-     * @throws InvalidSortModeException if the mode of sorting is invalid
-     * @throws InvalidPriceException if minPrice and maxPrice are invalid
+     * @throws InvalidArgumentException        if the arguments are invalid
+     * @throws InvalidSortModeException        if the mode of sorting is invalid
+     * @throws InvalidPriceException           if minPrice and maxPrice are invalid
      * @throws InvalidPriceBoundariesException if minPrice > maxPrice
      */
     private List<Item> sortAndFilter() throws InvalidArgumentException, InvalidSortModeException,
@@ -241,9 +242,9 @@ public class SortItemCommand extends Command {
      * Executes SortItemsCommand.
      *
      * @return false
-     * @throws InvalidArgumentException if the arguments are invalid
-     * @throws InvalidSortModeException if the mode of sorting is invalid
-     * @throws InvalidPriceException if minPrice and maxPrice are invalid
+     * @throws InvalidArgumentException        if the arguments are invalid
+     * @throws InvalidSortModeException        if the mode of sorting is invalid
+     * @throws InvalidPriceException           if minPrice and maxPrice are invalid
      * @throws InvalidPriceBoundariesException if minPrice > maxPrice
      */
     public boolean executeCommand() throws InvalidArgumentException, InvalidSortModeException,

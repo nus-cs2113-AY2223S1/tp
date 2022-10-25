@@ -55,7 +55,7 @@ public class Ui {
 
 
     public static void addItemMessage(Item item, int itemListSize,
-            TransactionList transactionList) {
+                                      TransactionList transactionList) {
         showLine();
         assert itemListSize >= 0;
         System.out.print(
@@ -79,7 +79,7 @@ public class Ui {
     }
 
     public static void deleteItemMessage(Item item, int itemListSize,
-            TransactionList transactionList) {
+                                         TransactionList transactionList) {
         showLine();
         assert itemListSize >= 0;
         System.out.print("OK! I will remove the following item:\n" + item.toString(transactionList)
@@ -104,7 +104,8 @@ public class Ui {
 
     public static void viewCompletedTransactionsMessage(ArrayList<Transaction> transactions) {
         showLine();
-        System.out.print("Here are the completed transactions: " + '\n');
+        System.out.print(transactions.size() == 0
+                ? "There is no completed transaction\n" : "Here are the completed transactions: \n");
         for (Transaction transaction : transactions) {
             System.out.print(transaction + "\n");
         }
@@ -113,7 +114,8 @@ public class Ui {
 
     public static void viewUncompletedTransactionsMessage(ArrayList<Transaction> transactions) {
         showLine();
-        System.out.print("Here are the uncompleted transactions: " + '\n');
+        System.out.print(transactions.size() == 0
+                ? "There is no uncompleted transaction\n" : "Here are the uncompleted transactions: \n");
         for (Transaction transaction : transactions) {
             System.out.print(transaction + "\n");
         }

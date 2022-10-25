@@ -19,6 +19,7 @@ import static seedu.duke.storage.FilePath.TRANSACTION_FILE_PATH;
 import static seedu.duke.storage.FilePath.USER_FILE_PATH;
 
 //@@author bdthanh
+
 /**
  * A chatbot named Duke.
  */
@@ -34,11 +35,11 @@ public class Duke {
     /**
      * Constructor of Duke.
      *
-     * @param userFilePath The file path that Duke stores its users.
-     * @param itemFilePath The file path that Duke stores its items.
+     * @param userFilePath        The file path that Duke stores its users.
+     * @param itemFilePath        The file path that Duke stores its items.
      * @param transactionFilePath The file path that Duke stores its transactions.
      */
-    public Duke(String userFilePath, String itemFilePath, String transactionFilePath) {
+    private Duke(String userFilePath, String itemFilePath, String transactionFilePath) {
         userList = new UserList();
         userStorage = new UserStorage(userFilePath);
         itemStorage = new ItemStorage(itemFilePath);
