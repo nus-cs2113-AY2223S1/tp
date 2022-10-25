@@ -368,22 +368,39 @@ Step 4: The ```executeCommand()``` of ExitCommand returns false, so Duke will re
 
 ### 5.1. Target user profile
 
-...To be updated
-
-{Describe the target user profile}
+- Student at NUS
+- Reasonably comfortable using CLI
+- Student staying at campus
+- Has a passion to serve the student community
+- Student who wants to host a rental business for his/her hall
+- Student who wants to help others borrow or loan items
 
 ### 5.2. Value proposition
 
-...To be updated
-
-{Describe the value proposition: what problem does it solve?}
+Upcycle is a Database Management System that aims to promote frugality and sustainability by providing service for students
+staying in a particular community/hall to loan or borrow items they wish to share with their community.
 
 ## 6. User Stories
 
-| Version | As a ... | I want to ...             | So that I can ...                                           |
-| ------- | -------- | ------------------------- | ----------------------------------------------------------- |
-| v1.0    | new user | see usage instructions    | refer to them when I forget how to use the application      |
-| v2.0    | user     | find a to-do item by name | locate a to-do without having to go through the entire list |
+| Version | As a ... | I want to ...               | So that I can ...                                             |
+|---------|----------|-----------------------------|---------------------------------------------------------------|
+| v1.0    | new user | see usage instructions      | refer to them when I forget how to use the application        |
+| v1.0    | manager  | add a user                  | he may borrow and loan items                                  |
+| v1.0    | manager  | view a specific user        | know what items he is borrowing and loaning                   |
+| v1.0    | manager  | view all users              | see who are available for loaning and borrowing               |
+| v1.0    | manager  | delete a user               | remove the user if he violates community guidelines           |
+| v1.0    | manager  | add an item                 | make the item available for loan                              |
+| v1.0    | manager  | delete an item              | remove the item when a user decides not to loan it            |
+| v1.0    | manager  | create a transaction        | keep a record of that transaction                             |
+| v1.0    | manager  | view a transaction          | keep track of the status of the transaction                   |
+| v1.0    | manager  | delete a transaction        | remove transaction when users change their mind               |
+| v2.0    | manager  | find a item by keyword      | locate an item without going through the list                 |
+| v2.0    | manager  | find a user by keyword      | locate a user without going through the list                  |
+| v2.0    | manager  | view transactions by status | view the transactions that are finished or not finished       |
+| v2.0    | manager  | sort items                  | view items based on its price                                 |
+| v2.0    | manager  | update price                | change the price a user decides to loan his item for          |
+| v2.0    | manager  | update transaction          | change the number of days a user decides to loan his item for |
+| v2.0    | manager  | store my database           | maintain the database without losing my data                  |
 
 Feature: Find Item/ User by keyword.
 
