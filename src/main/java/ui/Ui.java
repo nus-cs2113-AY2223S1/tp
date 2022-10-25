@@ -4,7 +4,10 @@ import java.util.Scanner;
 
 public class Ui {
 
-    public static void showWelcome(){
+    public Ui() {
+    }
+
+    public void showWelcome(){
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -14,16 +17,16 @@ public class Ui {
         System.out.println("I am the nurse helper!");
     }
 
-    public static String readCommand(){
+    public String readCommand(){
         Scanner in = new Scanner(System.in);
         return in.nextLine();
     }
 
-    public static void showLine(){
+    public void showLine(){
         System.out.println("____________________________________________________________");
     }
 
-    public static void showError(String message) {
+    public void showError(String message) {
         if (message == null) {
             System.out.println("Sorry, unrecognized operation");
         } else {
