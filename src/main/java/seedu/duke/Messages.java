@@ -55,7 +55,7 @@ public class Messages {
             + "the following format and details:\n"
             + "Format: add -property n/NAME a/ADDRESS p/PRICE t/TYPE\n"
             + "Example: add -property n/Bob Tan Bee Bee a/25 Lower Kent Ridge Rd, Singapore 119081 "
-            + "p/1000 t/HDB 3 Room";
+            + "p/1000 t/HDB 3";
 
     public static final String MESSAGE_ADD_CLIENT_WRONG_FORMAT = "OOPS!!! To add a client, it requires "
             + "the following format and details:\n"
