@@ -2,7 +2,6 @@ package seedu.duke.item;
 
 import seedu.duke.exception.InvalidItemException;
 import seedu.duke.exception.ItemNotFoundException;
-import seedu.duke.transaction.Transaction;
 import seedu.duke.transaction.TransactionList;
 
 import java.util.ArrayList;
@@ -105,7 +104,7 @@ public class ItemList {
 
     public void deleteAllItemOfAnUser(String username, TransactionList transactionList) {
         itemList.removeIf(
-                item -> item.getOwnerId().equals(username) && item.isAvailable(transactionList));
+            item -> item.getOwnerId().equals(username) && item.isAvailable(transactionList));
     }
 
     public String toString(TransactionList transactionList) {
