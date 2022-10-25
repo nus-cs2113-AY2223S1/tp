@@ -17,18 +17,19 @@
 >  - Words in `UPPER_CASE` are the parameters supplied by the user.
 >  - Items in square bracket are optional.
 
-| Command                   | Description                                                                                  |
-|---------------------------|----------------------------------------------------------------------------------------------| 
-| `auth API_KEY`            | [Authenticate API using user's API key](#authenticate-user-api)                              |
-| `auth default`            | [Authenticate API using default key](#authenticate-default)                                  |
-| `auth status`             | [Authentication status](#authenticate-status-auth)                                           |
-| `find CARPARK_ID`         | [Find number of lots available by carpark ID](#find-number-of-lots-available-by-carpark-id)  | 
-| `list`                    | [Get a list of available carparks on the app](#get-a-list-of-available-carparks-on-the-app)  |
-| `update`                  | [Update data from API](#update-data-from-api)                                                |
-| `favourite CARPARK_ID`    | [Favourite carparks by carpark ID](#favourite-carparks-by-carpark-id)                        |
-| `unfavourite CARPARK_ID`  | [Unfavourite carparks by carpark ID](#unfavourite-carparks-by-carpark-id)                    |
-| `favourite list`          | [List all IDs of favourite carparks](#list-all-ids-of-favourite-carparks)                    |
-| `exit`                    | [Exiting the program](#exiting-the-program)                                                  |
+| Command                  | Description                                                                                 |
+|--------------------------|---------------------------------------------------------------------------------------------| 
+| `auth API_KEY`           | [Authenticate API using user's API key](#authenticate-user-api)                             |
+| `auth default`           | [Authenticate API using default key](#authenticate-default)                                 |
+| `auth status`            | [Authentication status](#authenticate-status-auth)                                          |
+| `find CARPARK_ID`        | [Find number of lots available by carpark ID](#find-number-of-lots-available-by-carpark-id) | 
+| `filter QUERY`           | [Filter carparks based on address](#filter-carparks-based-on-address)                       | 
+| `list`                   | [Get a list of available carparks on the app](#get-a-list-of-available-carparks-on-the-app) |
+| `update`                 | [Update data from API](#update-data-from-api)                                               |
+| `favourite CARPARK_ID`   | [Favourite carparks by carpark ID](#favourite-carparks-by-carpark-id)                       |
+| `unfavourite CARPARK_ID` | [Unfavourite carparks by carpark ID](#unfavourite-carparks-by-carpark-id)                   |
+| `favourite list`         | [List all IDs of favourite carparks](#list-all-ids-of-favourite-carparks)                   |
+| `exit`                   | [Exiting the program](#exiting-the-program)                                                 |
 
 ### Authenticate user API
 
@@ -76,8 +77,61 @@ Example of usage:
 the function will return the number of lots available in aforementioned carpark.
 - If the user inputs a non-existing carpark ID or inputs the wrong format, 
 the program will prompt the user to re-enter the correct and existing carpark ID.
+- `find` is case-insensitive and will find the correct carpark code even if lowercase is used.
 
 Example of usage:
+
+**Input:**
+
+```find a9```
+
+**Output:**
+```
+===========================================
+BLK 202/203 ANG MO KIO STREET 22
+===========================================
+Carpark code: A9
+Favourited: Yes
+Number of available lots (total): 132
+  Cars: 66 lots
+  Motorcycles: 0 lots
+  Heavy Vehicles: 0 lots
+===========================================
+```
+
+### Filter carparks based on address
+
+**Shows a list of carparks that match a given query.**
+> Format: `filter QUERY`
+
+- The filter command allows the user to search a carpark based on the name of the carpark. For example,
+a carpark may have the name of `BLK 208 CLEMENTI AVE 6` - a query of `clementi` or `208` will return this
+carpark as one of its results.
+- Multiple words can be input to narrow the filtered results further. Given the previous example, `clementi ave` will
+also give the above carpark as one of its results.
+- For convenience, the `filter` command also matches substrings at the _beginning_ of a word. Following the previous 
+example, `clem` will also match the above carpark.
+- In carpark names, matched words will be wrapped with ` to easily see at a glance what was matched. 
+
+Example of usage
+
+**Input:**
+
+```filter clem ave 2```
+
+**Output:**
+```    
+CarparkID C5 at BLK 358-360,36`2`-363,366-367 `CLEMENTI` `AVE` `2`
+    806 available lots total
+CarparkID C8 at BLK 335/338 `CLEMENTI` `AVE` `2`
+    356 available lots total
+CarparkID C28M at BLK `208` `CLEMENTI` `AVE` 6
+    370 available lots total
+CarparkID C6 at BLK 3`2`8-334 `CLEMENTI` `AVE` `2`
+    226 available lots total
+CarparkID C7 at BLK 349-355 `CLEMENTI` `AVE` `2`
+    304 available lots total
+```
 
 ### Get a list of available carparks on the app
 
@@ -94,7 +148,7 @@ Example of usage:
 > Format: `update`
 
 - The command requires a valid API access token to function.
-- This overwrites any previous data stored to the file.
+- This overwrites any previous availability data for any carparks fetched by the API.
 
 ### Favourite carparks by carpark ID
 
@@ -128,9 +182,14 @@ Example of usage:
 
 ## FAQ
 
-**Q**: How do I transfer my data to another computer? 
+**Q**: How is the data for the carparks stored? Can I change or edit this data?
 
-**A**: {your answer here}
+**A**: The carpark data is first fetched in a `.json` format, under 
+`.\resources\api\ltaResponse.json`. Then, this carpark data is written
+to a `.txt` file at `.\resources\carparkList.txt`. If you wish to manually edit any 
+carpark data, you can do so as long as the format is maintained. These changes will be reflected
+when you restart the program.
+
 
 ## Command Summary
 

@@ -40,6 +40,7 @@ public class FavouriteCommand extends Command {
             } else {
                 Carpark result = carparkList.findCarpark(argument);
                 setFavourite(result.getCarparkId());
+                result.setFavourite(true);
                 return new CommandResult("Added Carpark " + argument + " to favourites!");
             }
         } catch (NoCarparkFoundException e) {

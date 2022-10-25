@@ -270,6 +270,10 @@ public class Carpark {
         return arr;
     }
 
+    public void setFavourite(boolean setFavourite) {
+        isFavourited = setFavourite;
+    }
+
     public HashMap<LotType, Integer> getAllAvailableLots() {
         return allAvailableLots;
     }

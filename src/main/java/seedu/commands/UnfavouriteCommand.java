@@ -37,6 +37,7 @@ public class UnfavouriteCommand extends Command {
         try {
             Carpark result = carparkList.findCarpark(argument);
             setUnfavourite(result.getCarparkId());
+            result.setFavourite(false);
             return new CommandResult("Removed Carpark " + argument + " to favourites!");
         } catch (FileWriteException | NoCarparkFoundException e) {
             return new CommandResult(e.getMessage());
