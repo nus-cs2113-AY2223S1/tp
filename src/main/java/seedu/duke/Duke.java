@@ -116,10 +116,10 @@ public class Duke {
             } else {
                 if (deleteCommand.getModuleCode() == null) {
                     userUniversityListManager.deleteList(deleteCommand.getUniversityName());
+                    timetableManager.deleteTimetable(deleteCommand.getUniversityName());
                 } else {
                     userUniversityListManager.deleteModule(deleteCommand.getUniversityName(),
                             deleteCommand.getModuleCode());
-                    timetableManager.deleteTimetable(deleteCommand.getUniversityName());
                     UserStorageParser.storeTimetable(timetableManager);
                 }
                 UserStorageParser.storeCreatedLists(userUniversityListManager);
@@ -155,14 +155,15 @@ public class Duke {
     private static void executeViewCommand(UserUniversityListManager userUniversityListManager,
                                            TimetableManager timetableManager, ViewCommand viewCommand) {
         try {
-            if (viewCommand.getViewOption().equals("LISTS")) {
+            String viewOption = viewCommand.getViewOption();
+            if (viewOption.equals("LISTS")) {
                 userUniversityListManager.displayAll();
-            } else if (viewCommand.getViewOption().equals("DELETE_HISTORY")) {
+            } else if (viewOption.equals("DELETE_HISTORY")) {
                 userUniversityListManager.getUserDeletedModules().displayAll();
-            } else if (viewCommand.getViewOption().equals("UNIVERSITY")) {
+            } else if (viewOption.equals("UNIVERSITY")) {
                 userUniversityListManager.displayUniversity(viewCommand.getUniversityName());
                 timetableManager.printTimetable(viewCommand.getUniversityName());
-            } else if (viewCommand.getViewOption().equals("TIMETABLES")) {
+            } else if (viewOption.equals("TIMETABLES")) {
                 timetableManager.printAllTimetables();
             }
         } catch (InvalidUserCommandException | TimetableNotFoundException e) {

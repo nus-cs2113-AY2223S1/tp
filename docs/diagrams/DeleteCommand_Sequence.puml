@@ -29,9 +29,9 @@ activate CommandParser
 CommandParser --> CommandParser : userInputTokenized : String[]
 deactivate CommandParser
 
-alt add command
+alt delete command
 
-    CommandParser -> CommandParser : isValidAddCommand(userInputTokenized)
+    CommandParser -> CommandParser : isValidDeleteCommand(userInputTokenized)
     activate CommandParser
 
     CommandParser -> CommandParser : isValidCommandOnModules(userInputTokenized)
@@ -46,10 +46,16 @@ alt add command
     CommandParser --> CommandParser : :boolean
     deactivate CommandParser
 
+    CommandParser -> CommandParser : isValidCommandOnUniversities(userInputTokenized)
+    activate CommandParser
+
     CommandParser --> CommandParser : :boolean
     deactivate CommandParser
 
-    opt is valid add command
+    CommandParser --> CommandParser : :boolean
+    deactivate CommandParser
+
+    opt is valid delete command
         CommandParser -> CommandParser : parseLesson(userInputTokenized)
         activate CommandParser
 
@@ -66,15 +72,15 @@ alt add command
         Lesson --> CommandParser : lesson :Lesson
         deactivate Lesson
 
-        CommandParser --> CommandParser : lessonToAdd :Lesson
+        CommandParser --> CommandParser : lessonToDelete :Lesson
         deactivate CommandParser
 
-        create AddCommand
-        CommandParser -> AddCommand : AddCommand(userInputTokenized, CommandType.ADD, lessonToAdd)
-        activate AddCommand
+        create DeleteCommand
+        CommandParser -> DeleteCommand : DeleteCommand(userInputTokenized, CommandType.DELETE, isDeleteModule,lessonToDelete)
+        activate DeleteCommand
 
-        AddCommand --> CommandParser : newAddCommand :AddCommand
-        deactivate AddCommand
+        DeleteCommand --> CommandParser : newDeleteCommand :DeleteCommand
+        deactivate DeleteCommand
     end
 
 else other command
@@ -84,19 +90,19 @@ end
 CommandParser --> Duke : newUserCommand : Command
 deactivate CommandParser
 
-alt add command
+alt delete command
 
-Duke -> Duke : executeAddCommand(userUniversityListManager, timetableManager, newUserCommand)
+Duke -> Duke : executeDeleteCommand(userUniversityListManager, timetableManager, newUserCommand)
 activate Duke
 
-    Duke -> AddCommand : getLesson()
-    activate AddCommand
+    Duke -> DeleteCommand : getLesson()
+    activate DeleteCommand
 
-    AddCommand --> Duke : lesson :Lesson
-    deactivate AddCommand
+    DeleteCommand --> Duke : lesson :Lesson
+    deactivate DeleteCommand
 
     alt lesson is not null
-    Duke -> TimetableManager : addLesson(lesson, false)
+    Duke -> TimetableManager : deleteLesson(lesson, false)
     activate TimetableManager
 
     deactivate TimetableManager
@@ -107,56 +113,43 @@ activate Duke
     deactivate UserStorageParser
 
     else lesson is null
-    Duke -> AddCommand : getModuleCode()
-    activate AddCommand
+        Duke -> DeleteCommand : getUniversityName()
+        activate DeleteCommand
 
-    AddCommand --> Duke : moduleCode :String
-    deactivate AddCommand
+        DeleteCommand --> Duke : universityName :String
+        deactivate DeleteCommand
 
-    Duke -> AddCommand : getUniversityName()
-    activate AddCommand
+        alt module code is null
+        Duke -> UserUniversityListManager : deleteList(universityName)
+        activate UserUniversityListManager
 
-    AddCommand --> Duke : universityName :String
-    deactivate AddCommand
+        deactivate UserUniversityListManager
 
-    Duke -> Database : findPuMapping(moduleCode)
-    activate Database
+        Duke -> TimetableManager : deleteTimetable(universityName)
+        activate TimetableManager
 
-    Database --> Duke : moduleMapping :ModuleMapping
-    deactivate Database
+        deactivate TimetableManager
 
-    Duke -> ModuleMapping : getPartnerUniversityModule()
-    activate ModuleMapping
+        else module code is not null
+        Duke -> DeleteCommand : getModuleCode()
+        activate DeleteCommand
 
-    ModuleMapping --> Duke : puModule :Module
-    deactivate ModuleMapping
+        DeleteCommand --> Duke : moduleCode :String
+        deactivate DeleteCommand
 
-    Duke -> ModuleMapping : getPartnerUniversityModule()
-    activate ModuleMapping
+        Duke -> UserUniversityListManager : deleteModule(universityName, moduleCode)
+        activate UserUniversityListManager
 
-    ModuleMapping --> Duke : nusModule :Module
-    deactivate ModuleMapping
+        deactivate UserUniversityListManager
 
-    create UserModuleMapping
-    Duke -> UserModuleMapping : UserModuleMapping(puModule.getCode(), puModule.getTitle(), nusModule.getCode(), nusModule.getTitle(), nusModule.getCredit(), puModule.getCredit(), puModule.getUniversity().getName(), puModule.getUniversity().getCountry())
-    activate UserModuleMapping
+        end
 
-    UserModuleMapping --> Duke : userModuleToAdd :UserModuleMapping
-    deactivate UserModuleMapping
+        Duke -> UserStorageParser : storeCreatedLists(userUniversityListManager)
+        activate UserStorageParser
 
-
-    Duke -> UserUniversityListManager : addModule(universityName, userModuleToAdd)
-    activate UserUniversityListManager
-
-    deactivate UserUniversityListManager
-
-    Duke -> UserStorageParser : storeCreatedLists(userUniversityListManager)
-    activate UserStorageParser
-
-    deactivate UserStorageParser
+        deactivate UserStorageParser
 
     end
-
 
 else other command
 deactivate Duke
