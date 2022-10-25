@@ -56,6 +56,12 @@ public class Media {
         this.rating = rating;
         this.genre = genre;
 
+        convertDate(dateWatchedString);
+
+        logger.log(Level.INFO,"Added new Media to list");
+    }
+
+    public void convertDate(String dateWatchedString) {
         try {
             DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
             dateFormat.setLenient(false);
@@ -68,8 +74,6 @@ public class Media {
         } catch (ParseException e) {
             System.out.println("Invalid date format. Use the following format: DD-MM-YYYY.");
         }
-
-        logger.log(Level.INFO,"Added new Media to list");
     }
 
     public Media() {
