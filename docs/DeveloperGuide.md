@@ -7,9 +7,11 @@
 3. [Design](#3-design)\
    3.1. [Duke](#31-duke)\
    3.2. [Command component](#32-command-component)\
-   3.3. [Model component](#33-model-component)\
-   3.4. [Ui component](#34-ui-component)\
-   3.5. [Storage component](#35-storage-component)
+   3.3. [User component](#33-user-component)\
+   3.4. [Item component](#34-item-component)\
+   3.5. [Transaction component](#35-transaction-component)\
+   3.6. [Ui component](#34-ui-component)\
+   3.7. [Storage component](#35-storage-component)
 4. [Implementation](#4-implementation)\
    4.1. [User-related features](#41-user-related-features)\
    4.2. [Item-related features](#42-item-related-features)\
@@ -79,19 +81,18 @@ A few things to take note are:
 - The `Boolean` returned value represents if the executing command is the last executed command(such as if a user exits the program)
 - `executeCommand` follows the delegation pattern. It receives `UserList`, `ItemList` and `TransactionList` which it delegates work to.
 
-### 3.3. Model component
-#### 3.3.1. User component
+### 3.3. User component
 
 The class diagram below shows how User-related classes interact with each other. `User` object contains `name`, `age`, `contactNumber` attributes. Users are stored in UserList, which will be loaded and written on the file by `UserStorage` (inherits from `Storage`) whenever Upcycle runs or exits.
 All user-related commands operate mainly on a list of users (userList:UserList).
 
 ![UserClassDiagram](images/UserClassDiagram.png)
 
-#### 3.3.2. Item component
+### 3.4. Item component
 
 ...To be updated
 
-#### 3.3.3. Transaction component
+### 3.5. Transaction component
 
 The Class diagram below show how Transaction-related classes interact with each other. `Transaction` object contains `transactionId`, `itemName`, `itemId`, `borrower`, `duration`, `createdAt`, `returnedAt` 
 attributes. Among those, `transactionId` is created by `IdGenerator`'s static method and dates are parsed by `DateParser`, therefore, Transaction class depends on those two classes.
@@ -100,11 +101,11 @@ commands operate mainly on a list of transaction (transactionList:TransactionLis
 
 ![TransactionClassDiagram](images/TransactionClassDiagram.png)
 
-### 3.4. Ui component
+### 3.6. Ui component
 
 ...To be updated
 
-### 3.5. Storage component
+### 3.7. Storage component
 
 Upcycle stores the user's data, including the user list, item list, transaction list in three files ```user.txt```, ```item.txt```, ```transaction.txt```, respectively.
 The data will be loaded when running the program, and ONLY be written to the files when exiting the program correctly, otherwise, the data during the execution will be gone.

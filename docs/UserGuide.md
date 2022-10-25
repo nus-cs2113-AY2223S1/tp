@@ -49,6 +49,8 @@ Hello from
  \___/| .__/ \___|\__, |\___|_|\___|
       |_|         |___/             
 What would you like to do?
+To get started, type "help" to see the list of available commands
+
 ____________________________________________________________
 ```
 6. Type the valid command and press Enter to run the command. See [Feature](#3-features) or [Command Summary](#4-command-summary) for more information of commands.
@@ -67,7 +69,47 @@ Format: ```help```
 
 Expected outcome:
 ```
-...To be updated
+____________________________________________________________
+
+LIST-RELATED-COMMANDS: 
+--------------------
+List all commands: help
+List all users: list-users
+List all items: list-items
+List all categories available: list-categories
+List all transactions: list-tx
+
+VIEW-RELATED-COMMANDS: 
+--------------------
+View a user: view-user /u <userName>
+View a item: view-item /i <itemId>
+View a transaction: view-tx /t <transactionId>
+
+ADD-RELATED-COMMANDS: 
+--------------------
+Add a user: add-user /n <userName> /a <age> /c <contactNumber>
+Add a item: add-item /n <itemName> /c <categoryIndex> /p <price> /o <userName>
+Add a transaction: add-tx /i <itemId> /b <borrowerName> /d <duration> /c <createdAt>
+
+REMOVE-RELATED-COMMANDS: 
+--------------------
+Remove a user: remove-user /u <userName>
+Remove a item: remove-item /i <itemId>
+Remove a transaction: remove-tx /t <transactionId>
+
+UPDATE-RELATED-COMMANDS: 
+--------------------
+Update price of an item: update-item /i <itemId> /p <price>
+Update duration of a transaction: update-tx /t <transactionid> /d <duration>
+
+FIND-RELATED-COMMANDS: 
+--------------------
+Find all finished transactions: find-tx /s finished
+Find all unfinished transactions: find-tx /s unfinished
+Find user by keywords: find-user /k <keyword>
+Find item by keywords: find-item /k <keyword>
+Sort all items in a range: sort-items /mo <mode: hl or  lh> /mi <min> /ma <max>
+____________________________________________________________
 ```
 
 ### 3.2. User-related features
