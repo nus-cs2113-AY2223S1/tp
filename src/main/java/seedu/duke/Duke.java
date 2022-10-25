@@ -20,9 +20,7 @@ public class Duke {
     public Duke(String filePath) {
         ui = new Ui();
         state = new State();
-
         storage = new Storage();
-
         storage.openPreviousState(state, ui);
     }
 

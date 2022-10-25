@@ -10,6 +10,7 @@ import seedu.duke.model.Timetable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 import java.util.regex.Matcher;
 import java.lang.StringBuilder;
 
@@ -29,9 +30,11 @@ public class GetModuleCommand extends Command {
     public static final String MODULE_NOT_FOUND = "Module not found! Please enter a valid module code! "
             + "Try searching if you do not remember the exact module code.";
     // private static final String ERROR_WRONG_FORMAT = "Wrong format, should be: " + COMMAND_USAGE;
-
-    private static final int DESCRIPTION_SIZE = 80;
-    private static final String DESCRIPTION_INDENTATION = System.lineSeparator() + "\t\t\t\t\t";
+    private static final int HEADING_LENGTH = 12;
+    private static final int DESCRIPTION_SIZE = 65;
+    private static final String DESCRIPTION_INDENTATION = System.lineSeparator() + Stream.<String>generate(() -> " ")
+            .limit(HEADING_LENGTH + " : ".length() - 1)
+            .reduce("", (a, b) -> a + b);
 
     public GetModuleCommand(String[] input) throws YamomException {
         super(input);
@@ -51,24 +54,17 @@ public class GetModuleCommand extends Command {
     @Override
     public void execute(State state, Ui ui, Storage storage) {
         // if field is empty, display null in ui
-        ui.addMessage("Module               : " + (module.moduleCode.isEmpty() ? "Nil" : module.moduleCode));
-        ui.addMessage("Module Name          : " + (module.title.isEmpty() ? "Nil" : module.title));
-        ui.addMessage("Module Description   : " + (module.description.isEmpty() ? "Nil"
-                : splitLongDescription(module.description)));
-        ui.addMessage("Module Credit        : " + (module.moduleCredit == 0 ? "0" : module.moduleCredit));
-        ui.addMessage("Department           : " + (module.department.isEmpty() ? "Nil" : module.department));
-        ui.addMessage("Faculty              : " + (module.faculty.isEmpty() ? "Nil" : module.faculty));
-        ui.addMessage("Workload             : " + (module.workload.toString().isEmpty() ? "Nil" : module.workload
-                .toString()));
-        ui.addMessage("Semester offering    : " + (module.getSemestersOffering(module).isEmpty() ? "Nil" : module
-                .getSemestersOffering(module)));
-        ui.addMessage("Prerequisite         : " + (module.prerequisite.toString().isEmpty() ? "Nil" : module
-                .prerequisite.toString()));
-        ui.addMessage("Preclusion           : " + (module.preclusion.isEmpty() ? "Nil" : module.preclusion));
-        ui.addMessage("Corequisite          : " + (module.corequisite.isEmpty() ? "Nil" : module.corequisite));
-
-        ui.displayUi();
-        ui.displayDivider();
+        addLine(ui, "Code", module.moduleCode);
+        addLine(ui, "Name", module.title);
+        addLine(ui, "Description", module.description);
+        addLine(ui, "Credits", Integer.toString(module.moduleCredit));
+        addLine(ui, "Department", module.department);
+        addLine(ui, "Faculty", module.faculty);
+        addLine(ui, "Workload", module.workload.toString());
+        addLine(ui, "Semesters", module.getSemestersOffering().toString());
+        addLine(ui, "Prerequisite", module.prerequisite);
+        addLine(ui, "Preclusion", module.preclusion);
+        addLine(ui, "Corequisite", module.corequisite);
 
         if (isModuleOfferedInCurrentSem(module, state)) {
             List<Pair<Module, RawLesson>> lessons = new ArrayList<>();
@@ -78,21 +74,31 @@ public class GetModuleCommand extends Command {
                 lesson = Pair.of(module, rawLesson);
                 lessons.add(lesson);
             }
-
-            Timetable timetable = new Timetable(lessons, true, false);
+            addLine(ui, "Schedule", " ");
+            Timetable timetable = new Timetable(lessons, false, true);
             ui.addMessage(timetable.toString());
         } else {
-            ui.addMessage("Module " + module.moduleCode + " is not offered in this semester"
+            addLine(ui, "Schedule", "Module " + module.moduleCode + " is not offered in this semester"
                     + ", hence no timetable information is available due to unforseen circumstances");
         }
 
         ui.displayUi();
     }
 
+    private void addLine(Ui ui, String heading, String details) {
+        String line = heading;
+        line += Stream.<String>generate(() -> " ")
+                .limit(HEADING_LENGTH - heading.length())
+                .reduce("", (a, b) -> a + b);
+        line += " : ";
+        line += (details == null || details.isEmpty()) ? "Nil" : splitLongDescription(details); 
+        ui.displayMessage(line);
+    }
+
     // check if module is offered in this semester
     public static boolean isModuleOfferedInCurrentSem(Module module, State state) {
         int sem = state.getSemester();
-        return module.getSemestersOffering(module).contains(sem);
+        return module.getSemestersOffering().contains(sem);
     }
 
     // Check if module input by user exists in module list. This is different from isValidModuleCode from Parser class.
@@ -108,10 +114,13 @@ public class GetModuleCommand extends Command {
         Matcher matcher = pattern.matcher(longDescription);
 
         StringBuilder stringBuilder = new StringBuilder();
+        if (matcher.find()) {
+            stringBuilder.append(matcher.group());
+        }
 
         while (matcher.find()) {
-            stringBuilder.append(matcher.group());
             stringBuilder.append(DESCRIPTION_INDENTATION);
+            stringBuilder.append(matcher.group());
         }
 
         return stringBuilder.toString();
@@ -135,4 +144,3 @@ public class GetModuleCommand extends Command {
         return COMMAND_USAGE;
     }
 }
-// >>>>>>> master
