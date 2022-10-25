@@ -32,11 +32,17 @@ activate Data DATA_COLOR_1
 Data --[DATA_COLOR_1]> UserInterface
 deactivate Data
 
-UserInterface -[USER_INTERFACE_COLOR_1]> Storage : saveToFile(expenses)
+UserInterface -[USER_INTERFACE_COLOR_1]> Data : save()
+activate Data DATA_COLOR_1
+
+Data -[DATA_COLOR_1]> Storage : saveToFile(expenses)
 activate Storage STORAGE_COLOR_1
 
-Storage --[STORAGE_COLOR_1]> UserInterface
+Storage --[STORAGE_COLOR_1]> Data
 deactivate Storage
+
+Data --[DATA_COLOR_1]> UserInterface
+deactivate Data
 
 UserInterface --[USER_INTERFACE_COLOR_1]> UserInterface
 deactivate UserInterface
