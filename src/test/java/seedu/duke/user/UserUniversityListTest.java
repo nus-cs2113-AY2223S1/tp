@@ -195,4 +195,17 @@ public class UserUniversityListTest {
         HashMap<String, UserUniversityList> myManager = testManager.getMyManager();
         assertEquals(0, testManager.getMyFavourites(myManager).size());
     }
+
+    @Test
+    void displayUniversity_Ucla_correctPrintValues() throws InvalidUserCommandException {
+        testManager.createList("UCLA");
+        UserModuleMapping mod = new UserModuleMapping("CS101", "Programming Intro", "CS1010",
+                "Programming Methodology", "4", "4", "UCLA", "USA");
+        UserModuleMapping mod2 = new UserModuleMapping("CS201", "Programming Intro II", "CS2030",
+                "Programming Methodology II ", "4", "4", "UCLA", "USA");
+        testManager.addModule("UCLA", mod);
+        testManager.addModule("UCLA", mod2);
+        System.out.println("Test case 19 : ");
+        testManager.displayUniversity("UCLA");
+    }
 }
