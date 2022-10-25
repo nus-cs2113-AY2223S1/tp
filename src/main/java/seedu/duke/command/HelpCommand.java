@@ -22,14 +22,13 @@ public class HelpCommand extends Command {
                 + "exit - to exit the program\n"
                 + "set biometrics /{age} /{gender} /height /{weight} /{fat percentage}\n"
                 + "mark {done/undone} /{exercise index}\n"
-                + "view {biometrics/food/weight/bmi/maintenance} {exercise/strength/cardio /{done}}\n"
+                + "view {biometrics/food/weight/bmi/maintenance/all} {exercise/strength/cardio /{done}}\n"
                 + "add strength /{description} /{sets} /{repetitions} /{date}\n"
                 + "add cardio /{description} /{distance} /{repetitions} /{date}\n"
                 + "add food /{description} /{calories} /{date}\n"
                 + "add weight /{weight} /{fat percentage}\n"
                 + "remove {food/exercise} /{food index/exerciseList index}\n"
                 + "mark {done/undone} /{exercise index} / {time}, {metabolic equivalent}\n"
-                + "view {biometrics/food/weight/bmi/maintenance} {exercise/strength/cardio /{done}}\n"
                 + "find {strength/cardio/food/date_e/date_f} /{description}");
     }
 
