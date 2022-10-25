@@ -5,6 +5,7 @@ import seedu.duke.exception.InvalidSortModeException;
 import seedu.duke.exception.InvalidArgumentException;
 import seedu.duke.exception.InvalidPriceException;
 import seedu.duke.exception.InvalidPriceBoundariesException;
+import seedu.duke.item.Category;
 import seedu.duke.item.Item;
 import seedu.duke.item.ItemList;
 import seedu.duke.parser.CommandParser;
@@ -22,6 +23,7 @@ import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_PRICE_LESS_
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_SORT_MODE_INVALID;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PARTS;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_PRICE_FORMAT_INVALID;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_NUMBER_FORMAT_INVALID;
 
 //@@author chiewyx
 /**
@@ -29,10 +31,11 @@ import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_PRICE_FORMA
  */
 public class SortItemCommand extends Command {
     private static final String LOW_HIGH = "lh";
-
     private static final String HIGH_LOW = "hl";
     private static final String MIN_AMT = "0";
     private static final String MAX_AMT = "999999999";
+    private static final String DEFAULT_SORT = "lh";
+    private static final String NO_CATEGORY = "0";
 
     private final String[] parts;
 
@@ -60,7 +63,7 @@ public class SortItemCommand extends Command {
      * @throws InvalidArgumentException if there is a part that does not fit the command
      */
     private String[] getArgsSortItemsCmd() throws InvalidArgumentException {
-        String[] args = new String[3];
+        String[] args = new String[4];
         for (String part : parts) {
             String delimiter = CommandParser.getArgsDelimiter(part);
             if (delimiter.equals("mode")) {
@@ -69,6 +72,8 @@ public class SortItemCommand extends Command {
                 args[1] = CommandParser.getArgValue(part);
             } else if (delimiter.equals("max")) {
                 args[2] = CommandParser.getArgValue(part);
+            } else if (delimiter.equals("cat")) {
+                args[3] = CommandParser.getArgValue(part);
             } else {
                 throw new InvalidArgumentException(MESSAGE_INVALID_PARTS);
             }
@@ -83,11 +88,17 @@ public class SortItemCommand extends Command {
      * @return an array with optional arguments removed
      */
     private String[] removeOptionalArgs(String[] args) {
+        if (args[0] == null) {
+            args[0] = DEFAULT_SORT;
+        }
         if (args[1] == null) {
             args[1] = MIN_AMT;
         }
         if (args[2] == null) {
             args[2] = MAX_AMT;
+        }
+        if (args[3] == null) {
+            args[3] = NO_CATEGORY;
         }
         return args;
     }
@@ -162,10 +173,25 @@ public class SortItemCommand extends Command {
         }
     }
 
+    /**
+     * Checks if a categoryNumber is valid or not.
+     *
+     * @param categoryNumber the input category number
+     * @return true if that number can be parsed
+     */
+    private boolean isValidCategoryNumber(String categoryNumber) {
+        try {
+            Integer.parseInt(categoryNumber);
+            return true;
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException(MESSAGE_NUMBER_FORMAT_INVALID);
+        }
+    }
+
     private boolean areValidArgs(String[] args) throws InvalidSortModeException,
             InvalidPriceException, InvalidPriceBoundariesException {
         return isValidMode(args[0]) && isValidMin(args[1]) && isValidMax(args[2])
-                && isValidBoundaries(args[1], args[2]);
+                && isValidBoundaries(args[1], args[2]) && isValidCategoryNumber(args[3]);
     }
 
     /**
@@ -200,6 +226,12 @@ public class SortItemCommand extends Command {
                                 .filter(item -> item.getPricePerDay() >= min
                                         && item.getPricePerDay() <= max)
                                 .collect(Collectors.toList());
+            }
+            if (!mainArgs[3].equals(NO_CATEGORY)) {
+                int cat = Integer.parseInt(mainArgs[3]);
+                sortedItems = sortedItems.stream()
+                        .filter(item -> item.getCategory() == Category.mapCategory(cat))
+                        .collect(Collectors.toList());
             }
         }
         return sortedItems;

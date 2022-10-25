@@ -157,6 +157,23 @@ Step 4: After deleting a user, a message will be displayed to the user via `Ui.d
 The following sequence diagram shows how the remove user operation works:
 ![removeUserSequence](images/RemoveUserSequence.png)
 
+#### List users
+
+> This feature allows the user to view details of all users in the user list
+
+Given below is an example usage scenario and how the command mechanism behaves at each step.
+
+Step 1: The user types in the command in the command line. The CommandParser class checks if the command is valid through the createCommand() method, and either sends an exception, or send the input to the ListUsersCommand class to be processed.
+
+Step 2: In `ListUserCommand::exeucteCommand` work is delegated `UserList::toString()` to obtain a string representation of all users in the user list
+
+Step 3: The string representation is forwarded to `UI::printResponse` to show it to the user
+
+Step 4: Lastly, `executeCommand` returns false to indicate that this is a non-terminating command
+
+The following sequence diagram shows how the view user operation works:
+![ListUserSequence](images/ListUserSequence.png)
+
 #### View a user
 
 > This feature allows the user to view a specific user in the user list. Upon successfully sending the command, the Ui will display the details of the searched user
@@ -215,6 +232,23 @@ Step 4: After deleting an item, a message will be displayed to the user via `Ui.
 The following sequence diagram shows how the remove item operation works:
 ![removeItemSequence](images/RemoveItemSequence.png)
 
+#### List items
+
+> This feature allows the user to view details of all items in the item list
+
+Given below is an example usage scenario and how the command mechanism behaves at each step.
+
+Step 1: The user types in the command in the command line. The CommandParser class checks if the command is valid through the createCommand() method, and either sends an exception, or send the input to the ListItemsCommand class to be processed.
+
+Step 2: In `ListItemsComamnd::exeucteCommand` work is delegated `ItemList::toString()` to obtain a string representation of all items in the item list
+
+Step 3: The string representation is forwarded to `UI::printResponse` to show it to the user
+
+Step 4: Lastly, `executeCommand` returns false to indicate that this is a non-terminating command
+
+The following sequence diagram shows how the view user operation works:
+![ListItemsSequence](images/ListItemSequence.png)
+
 #### View an item
 
 > This feature allows the user to view a specific item in the item list. Upon successfully sending the command, the Ui will display the details of the searched item
@@ -263,7 +297,7 @@ Given below is an example usage scenario and how the command mechanism behaves a
 
 Step 1: The user types in the command in the command line. The CommandParser class checks if the command is valid through the createCommand() method, and either sends an exception or send the input to the SortItemCommand to be processed.
 
-Step 2: The SortItemCommand checks if the delimiters ('mode', 'min' (optional), 'max' (optional)) are present in the user input through the getArgsSortItemsCmd() method. If compulsory arguments are not present, an exception will be thrown. The command also checks whether the input's final argument is valid through `isValidMode()`, `isValidPrice()` and `isValidPriceBoundaries` methods. An exception will also be thrown if the final argument does not satisfy the requirements (incorrect sort format, format price, incorrect price boundaries...)
+Step 2: The SortItemCommand checks if the delimiters ('mode' (optional), 'min' (optional), 'max' (optional), 'cat' (optional)) are present in the user input through the getArgsSortItemsCmd() method. The default sorting mode is low to high if `/mode` is empty. The command checks whether the input's final argument is valid through `isValidMode()`, `isValidPrice()`, `isValidPriceBoundaries` and `isValidCategoryNumber` methods. An exception will also be thrown if the final argument does not satisfy the requirements (incorrect sort format, format price, incorrect price boundaries...)
 
 Step 3: If all arguments are valid, then `sortAndFilter()` will return a list based on the input arguments.
 
@@ -325,6 +359,23 @@ Step 4: After deleting a transaction, a message will be displayed to the user vi
 
 The following sequence diagram shows how the remove transaction operation works:
 ![removeTransactionSequence](images/RemoveTransactionSequence.png)
+
+#### List transactions
+
+> This feature allows the user to view details of all transactions
+
+Given below is an example usage scenario and how the command mechanism behaves at each step.
+
+Step 1: The user types in the command in the command line. The CommandParser class checks if the command is valid through the createCommand() method, and either sends an exception, or send the input to the ListTransactionsCommand class to be processed.
+
+Step 2: In `ListTransactionsCommand::exeucteCommand` work is delegated `TransactionList::toString()` to obtain a string representation of all transactions in the transaction list
+
+Step 3: The string representation is forwarded to `UI::printResponse` to show it to the user
+
+Step 4: Lastly, `executeCommand` returns false to indicate that this is a non-terminating command
+
+The following sequence diagram shows how the view user operation works:
+![ListTransactionSequence](images/ListTransactionSequence.png)
 
 #### View a transaction
 
