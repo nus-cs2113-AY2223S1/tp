@@ -81,6 +81,28 @@ There are also check compatibility functions that check if the build's component
 - Checking if the build's storage is compatible with the case expansion slots
 - Checking if the number of the build's GPUs is compatible with the motherboard GPU slots
 - Checking if the number of the build's RAM is compatible with the motherboard RAM slots
+### Storage
+
+![](/images/Storage.png)
+
+Note: Some methods are being left out to show the core functionality of the storage class.
+
+Storage is used for loading and saving the user's builds. The user can save their builds to a text file and load them 
+from a text file. 
+
+The `Storage` class has private attributes `FILE_DIRECTORY`, `BUILD_FILE_PATH` and `COMPONENT_FILE_PATH`. 
+`FILE_DIRECTORY` is the directory where the text files are stored. 
+`BUILD_FILE_PATH` is the path to the text file where all the build names are stored. 
+`COMPONENT_FILE_PATH` is the path to the text file where the file is named after the build name. The components of the build 
+are stored in their respective build text file.
+
+The `Storage` class has a constructor that takes in a `BuildManager` object. The `BuildManager` object is used to access the
+builds in the `BuildManager` object. The `Storage` class has a `loadBuild()` method that loads the builds from the text file
+a `saveBuild()` method that saves the builds from the `BuildManager` object into the text file. The `Storage` class also has
+a `loadComponent()` and `saveComponent()` methods utilize the `BuildManager` object to access the `Build` object to load and save
+the components of the build into their respective text files. The `deleteBuild()` method deletes the build from the text file with the path
+`BUILD_FILE_PATH` and deletes the text file with the path `COMPONENT_FILE_PATH` that is named after the build name.
+
 
 #### Components
 
