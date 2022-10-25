@@ -9,6 +9,13 @@ __ __ _____ _____ _____ _____
 How can I help you today?
 Enter "help" to get started!
 Sem [1] >> --------------------------------------
+You currently have no selected module(s)!
+--------------------------------------
+Sem [1] >> --------------------------------------
+Error! 	Your timetable is empty.
+Please select your modules first before viewing.
+--------------------------------------
+Sem [1] >> --------------------------------------
 Here are all the commands available in YAMOM!
 
 add	: add a module into YAMOM timetable.
@@ -32,7 +39,7 @@ Usage :
 	list
 	bye
 	export
-	get [MODULE_CODE]
+	get [EXACT_MODULE_CODE]
 	help
 	import [NUSMods_LINK]
 	search (/code [MODULE_CODE] | /title [KEYWORD]) </level [MODULE_LEVEL]> </sem [MODULE_SEMESTER]>
@@ -47,29 +54,8 @@ Sem [1] >> --------------------------------------
 Search Result:
 Total 2 module(s) found
 
-GEA1000 Quantitative Reasoning with Data
-GEA1000N Quantitative Reasoning with Data
-
-To get full details of the module, type 'get <module code>'
---------------------------------------
-Sem [1] >> --------------------------------------
-Search Result:
-Total 2 module(s) found
-
 CS2113 Software Engineering & Object-Oriented Programming
 CS2113T Software Engineering & Object-Oriented Programming
-
-To get full details of the module, type 'get <module code>'
---------------------------------------
-Sem [1] >> --------------------------------------
-Search Result:
-Total 5 module(s) found
-
-CG2271 Real-Time Operating Systems
-CS2106 Introduction to Operating Systems
-CS2106R Introduction to Operating Systems
-CS3221 Operating Systems Design and Pragmatics
-YSC3217 Programming Operating Systems, Interfaces & eXtras
 
 To get full details of the module, type 'get <module code>'
 --------------------------------------
@@ -84,68 +70,9 @@ CS2113	Software Engineering & Object-Oriented Programming
 Here's a list of your current selected module(s)!
 --------------------------------------
 Sem [1] >> --------------------------------------
-
-          : Mon      : Tues     : Wed      : Thur     : Fri
-====================================================================
-   1200   :          :          +----------+          :
-   1230   :          :          |CS2113    |          :
-   1300   :          :          +-TUT[1]---+          :
-   1330   :          :          :          :          :
-   1400   :          :          :          :          :
-   1430   :          :          :          :          :
-   1500   :          :          :          :          :
-   1530   :          :          :          :          :
-   1600   :          :          :          :          +----------+
-   1630   :          :          :          :          |CS2113    |
-   1700   :          :          :          :          | LEC[1]   |
-   1730   :          :          :          :          |          |
-   1800   :          :          :          :          +----------+
-   1830   :          :          :          :          :
-   1900   :          :          :          :          :
-
-
---------------------------------------
-Sem [1] >> --------------------------------------
-Slot selected successfully
---------------------------------------
-Sem [1] >> --------------------------------------
-
-          : Mon      : Tues     : Wed      : Thur     : Fri
-====================================================================
-   1100   :          :          :          :          +----------+
-   1130   :          :          :          :          |CS2113    |
-   1200   :          :          :          :          +-TUT[4]---+
-   1230   :          :          :          :          :
-   1300   :          :          :          :          :
-   1330   :          :          :          :          :
-   1400   :          :          :          :          :
-   1430   :          :          :          :          :
-   1500   :          :          :          :          :
-   1530   :          :          :          :          :
-   1600   :          :          :          :          +----------+
-   1630   :          :          :          :          |CS2113    |
-   1700   :          :          :          :          | LEC[1]   |
-   1730   :          :          :          :          |          |
-   1800   :          :          :          :          +----------+
-   1830   :          :          :          :          :
-   1900   :          :          :          :          :
-
-
---------------------------------------
-Sem [1] >> --------------------------------------
-CS2113 has been deleted!
---------------------------------------
-Sem [1] >> --------------------------------------
-Here is your NUSMod Link:
-	https://nusmods.com/timetable/sem-1/share?
---------------------------------------
-Sem [1] >> --------------------------------------
-You are now planning for semester 2
---------------------------------------
-Sem [2] >> --------------------------------------
 Shutting down......
 --------------------------------------
 This is your export link:
-https://nusmods.com/timetable/sem-2/share?
+https://nusmods.com/timetable/sem-1/share?CS2113=LEC:1,TUT:1
 Bye bye, See you again
 --------------------------------------

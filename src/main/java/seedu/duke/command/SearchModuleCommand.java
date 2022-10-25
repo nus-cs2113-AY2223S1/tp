@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 
 public class SearchModuleCommand extends Command {
     public static final String COMMAND_WORD = "search";
+
     public static final String COMMAND_USAGE = "search (/code [MODULE_CODE] | /title [KEYWORD]) "
             + "</level [MODULE_LEVEL]> </sem [MODULE_SEMESTER]>";
     public static final String COMMAND_DESCRIPTION = "List out all modules that contains a search term"
@@ -27,15 +28,13 @@ public class SearchModuleCommand extends Command {
     private static final String ERROR_MISSING_CODE_AND_TITLE = "Search require at least a code field "
             + "or a title field, in the format of: " + System.lineSeparator() + "\t" + COMMAND_USAGE;
 
-    private Map<String, String> params;
-    private static String toSearchModuleCode;
-    private static String toSearchModuleTitle;
-    private static String toSearchLevel;
-    private static String toSearchSemester;
-
-    private Logger logger;
-
     public static final String SUBSYSTEM_NAME = "SearchModuleCommand";
+
+    private String toSearchModuleCode;
+    private String toSearchModuleTitle;
+    private String toSearchLevel;
+    private String toSearchSemester;
+    private Map<String, String> params;
 
     public SearchModuleCommand(String input) throws YamomException {
         super(input.split("\\s+"));
@@ -43,14 +42,15 @@ public class SearchModuleCommand extends Command {
         processParams();
     }
 
+    @Override
     public void execute(State state, Ui ui, Storage storage) {
-        assert state != null : "List of lessons should not be null";
-        logger = Logger.getLogger(SUBSYSTEM_NAME);
-        logger.log(Level.FINE, "Loading search module command");
+        Logger logger = Logger.getLogger(SUBSYSTEM_NAME);
+        logger.log(Level.FINE, "Loading search module command, starting to search for modules");
 
         List<Module> searchResult = filterModuleSearch(toSearchModuleCode, toSearchLevel,
                 toSearchSemester, toSearchModuleTitle);
 
+        logger.log(Level.FINE, "Search module command loaded, printing search result");
         ui.addMessage("Search Result:");
 
         if (searchResult.size() == 0) {
@@ -113,19 +113,23 @@ public class SearchModuleCommand extends Command {
     /**
      * Filter module by user input arguments and return a list of modules that match the search query.
      * If no arguments are provided, no module will be returned.
-     * At least the module code or module title must be provided.
-     * If both module code and module title are provided, results will be display based on similar module code
-     * and module title but will not be repeated.
+     * At least either the module code or module title must be provided.
+     * If both module code and module title are provided, results displayed will contain modules that contains both
+     * the module code and module title.
+     * The level and semester arguments are optional. If provided, the results will be filtered and further
+     * refined based on the input level and semester.
      * Arguments can be in any order.
      *
      * @return list of modules that match the search query
      */
     public static List<Module> filterModuleSearch(String toSearchModuleCode, String toSearchLevel,
                                                   String toSearchSemester, String toSearchModuleTitle) {
+        assert toSearchModuleCode != null || toSearchModuleTitle != null : "At least either the module code or title "
+                + "must be provided to search for!";
         List<Module> moduleList = Module.getAll();
         List<Module> searchResult = new ArrayList<>();
 
-        // add all the mods with similar toSearchModuleCode to searchResult
+        // add all the mods with similar toSearchModuleCode and toSearchModuleTitle to searchResult
         for (Module m : moduleList) {
             if (toSearchModuleCode != null && m.moduleCode.contains(toSearchModuleCode.toUpperCase())) {
                 searchResult.add(m);
@@ -137,6 +141,19 @@ public class SearchModuleCommand extends Command {
                     searchResult.add(m);
                 }
             }
+        }
+
+        // if search field is both module code and module title, then searchResult will be updated to only
+        // showing modules that contains both user's input module code and title
+        if (toSearchModuleCode != null && toSearchModuleTitle != null) {
+            List<Module> updatedSearchResult = new ArrayList<>();
+            for (Module m : searchResult) {
+                if (m.moduleCode.contains(toSearchModuleCode.toUpperCase()) && m.title.toLowerCase()
+                        .contains(toSearchModuleTitle.toLowerCase())) {
+                    updatedSearchResult.add(m);
+                }
+            }
+            searchResult = updatedSearchResult;
         }
 
         // filter the searchResult if toSearchLevel is not empty and level does not match
