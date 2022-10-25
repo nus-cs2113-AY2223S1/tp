@@ -395,11 +395,13 @@ public class TransactionList {
                     + LINE_SEPARATOR + LINE_SEPARATOR + INFO_STATS_CATEGORIES_HEADER + LINE_SEPARATOR;
         }
 
+        String categoricalList = listCategoricalSavings();
+        timeInsightsList += categoricalList;
         // Formats every entry in the hashmap into a time insights list
-        for (Transaction entry : timeTransactions) {
-            timeInsightsList += String.format("%s%s%s %s%s%s", PREFIX_CATEGORY, entry.getCategory(),
-                    POSTFIX_CATEGORY, DOLLAR_SIGN, entry.getAmount(), LINE_SEPARATOR);
-        }
+        //for (Transaction entry : timeTransactions) {
+        //    timeInsightsList += String.format("%s%s%s %s%s%s", PREFIX_CATEGORY, entry.getCategory(),
+        //            POSTFIX_CATEGORY, DOLLAR_SIGN, entry.getAmount(), LINE_SEPARATOR);
+        //}
 
         return timeInsightsList;
     }
