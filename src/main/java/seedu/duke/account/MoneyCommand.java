@@ -38,6 +38,32 @@ public class MoneyCommand {
         AccountUi.showWithdrawResult(currency, amount);
     }
 
+    public static void transferWithdrawCommand(Wallet wallet, String commandArg) throws FinanceException {
+        String[] splittedCommandArgs = commandArg.split(" ");
+        if (splittedCommandArgs.length != 2) {
+            throw new FinanceException(ExceptionCollection.WITHDRAW_MONEY_EXCEPTION);
+        }
+        String argCurrency = splittedCommandArgs[0];
+        String argAmount = splittedCommandArgs[1];
+        CurrencyStructure currency = CurrencyList.findCurrencyByAbbrName(argCurrency);
+        double amount = parsePositiveAmount(argAmount);
+        wallet.withdrawMoney(currency, amount);
+        WalletFile.updateWallet(wallet);
+    }
+
+    public static void transferSaveCommand(Wallet wallet, String commandArg) throws FinanceException {
+        String[] splittedCommandArgs = commandArg.split(" ");
+        if (splittedCommandArgs.length != 2) {
+            throw new FinanceException(ExceptionCollection.SAVE_MONEY_EXCEPTION);
+        }
+        String argCurrency = splittedCommandArgs[0];
+        String argAmount = splittedCommandArgs[1];
+        CurrencyStructure currency = CurrencyList.findCurrencyByAbbrName(argCurrency);
+        double amount = parsePositiveAmount(argAmount);
+        wallet.saveMoney(currency, amount);
+        WalletFile.updateWallet(wallet);
+    }
+
     public static double parsePositiveAmount(String argAmount) throws FinanceException{
         double amount;
         try {
@@ -59,6 +85,16 @@ public class MoneyCommand {
             throw new FinanceException(ExceptionCollection.AMOUNT_PARSE_EXCEPTION);
         }
         return amount;
+    }
+
+    public static void transferMoney(Wallet currentUserWallet, String recipientUsername, String transferCurrency, int amount) throws FinanceException {
+        String commandArg = transferCurrency + " " + amount;
+        transferWithdrawCommand(currentUserWallet, commandArg);
+
+        Wallet recipientWallet = WalletFile.getWallet(recipientUsername);
+        transferSaveCommand(recipientWallet, commandArg);
+        //i should withdraw the amount from the current wallet based on the withdraw function, but maybe a new one without print
+        //then get the new wallet and increment that amount
     }
 
     

@@ -6,6 +6,9 @@ import seedu.duke.InputManager;
 import seedu.duke.exception.FinanceException;
 import seedu.duke.exception.FinanceException.ExceptionCollection;
 import seedu.duke.BasicUi;
+import seedu.duke.newcurrency.NewCurrency;
+
+import java.io.IOException;
 
 public class Authentication {
     public static boolean handleAuthenticationRequest() {
@@ -28,11 +31,19 @@ public class Authentication {
                 isProgramEnd = true;
                 BasicUi.showExitMessage();
                 break;
+            case NEW_CURRENCY:
+                NewCurrency.addNewCurrency();
+                break;
+            case REMOVE:
+                NewCurrency.removeCurrency();
+                break;
             default:
                 throw new FinanceException(ExceptionCollection.COMMAND_TYPE_EXCEPTION);
             }
         } catch (FinanceException e) {
             e.handleException();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
         return isProgramEnd;
     }

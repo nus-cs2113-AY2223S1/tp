@@ -22,7 +22,6 @@ public class RegisterCommand {
         String[] userInputs = InputManager.receiveValidRegisterInputs(existingUsernames);
         String username = userInputs[0];
         String passWord = userInputs[1];
-        //existingUsernames.add(username);
         try {
             UserNameFileWorkings.writeToUserNames(username);
         } catch (IOException e) {

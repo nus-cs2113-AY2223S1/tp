@@ -7,7 +7,7 @@ public class AuthenticationUi {
 
     // Maybe be improved
     public static void showPromptInfo() {
-        String promptInfo = "Would you like to register, login, or work with currencies?";
+        String promptInfo = "Would you like to register, login, work with currencies or add new_currency to follow?";
         System.out.println(INDENTATION + promptInfo);
         System.out.println();
     }

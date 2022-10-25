@@ -11,7 +11,8 @@ public class AccountUi {
     private static final String INDENTATION = "    ";
 
     public static void showAccountEntryMessage(String username) {
-        final String MESSAGE = "You login as " + username + "\n" + INDENTATION + "Please enter any command.";
+        final String MESSAGE = "You login as " + username + "\n" + INDENTATION + "Please enter any command."
+                + "\n" + INDENTATION + "You can use command list to view all available commands";
         BasicUi.showStandardOutput(INDENTATION + MESSAGE);
     }
 
@@ -85,6 +86,19 @@ public class AccountUi {
     public static void showDeletionResult(Boolean isDeleted) {
         final String MESSAGE = isDeleted ? "Deletion operation successful. Wallet logout."
                 : "Deletion operation canceled.";
+        BasicUi.showStandardOutput(INDENTATION + MESSAGE);
+    }
+
+    public static void listCommands() {
+        final String MESSAGE = "Your available commands are : \n"
+                + INDENTATION + "1) setdefault" + INDENTATION + "2) balance" + INDENTATION + "3) detail" + INDENTATION
+                + "4) save" + INDENTATION + "5) withdraw" + INDENTATION + "6) delete" + INDENTATION + "7) exit" + INDENTATION + "8) list"
+                + INDENTATION + "9) transfer";
+        BasicUi.showStandardOutput(INDENTATION + MESSAGE);
+    }
+
+    public static void showTransfer(String username, String currency, int amount) {
+        final String MESSAGE = "Successfully transfered " + amount + currency + " to " + username;
         BasicUi.showStandardOutput(INDENTATION + MESSAGE);
     }
 }

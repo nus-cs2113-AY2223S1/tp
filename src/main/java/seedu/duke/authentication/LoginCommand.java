@@ -1,7 +1,5 @@
 package seedu.duke.authentication;
 
-import java.io.FileNotFoundException;
-
 import seedu.duke.InputManager;
 import seedu.duke.Wallet;
 import seedu.duke.WalletFile;
@@ -27,7 +25,6 @@ public class LoginCommand {
                 AuthenticationUi.showLoginResults(isLoginSuccess);
             }
         } catch (FinanceException e) {
-            //Ui.showStandardOutput("Username not found, please enter another username");
             AuthenticationUi.showLoginResults(isLoginSuccess);
         }
     }
