@@ -11,7 +11,7 @@ public class AccountUi {
     private static final String INDENTATION = "    ";
 
     public static void showAccountEntryMessage(String username) {
-        final String MESSAGE = "You login as " + username + "\n" + INDENTATION + "Please enter any command."
+        final String MESSAGE = "You are logged in as " + username + "\n" + INDENTATION + "Please enter any command."
                 + "\n" + INDENTATION + "You can use command list to view all available commands";
         BasicUi.showStandardOutput(INDENTATION + MESSAGE);
     }
@@ -80,7 +80,7 @@ public class AccountUi {
     }
 
     public static void showHelpPrompt(){
-        final String MESSAGE = "You have entered into the help center, please enter what you need help with.";
+        final String MESSAGE = "You have entered into the help center, here you can \nchange your password, username, or default currency or delete your account";
         BasicUi.showStandardOutput(MESSAGE);
     }
 
@@ -106,10 +106,9 @@ public class AccountUi {
 
     public static void listCommands() {
         final String MESSAGE = "Your available commands are : \n"
-                + INDENTATION + "1) setdefault" + INDENTATION + "2) balance" + INDENTATION + "3) detail" + INDENTATION
+                + INDENTATION + "1) help" + INDENTATION + "2) balance" + INDENTATION + "3) detail" + INDENTATION
                 + "4) save" + INDENTATION + "5) withdraw" + INDENTATION + "6) delete" + INDENTATION + "7) exit"
-                + INDENTATION + "8) list"
-                + INDENTATION + "9) transfer";
+                + INDENTATION + "8) list" + INDENTATION + "9) transfer" + INDENTATION + "10) currencies";
         BasicUi.showStandardOutput(INDENTATION + MESSAGE);
     }
 

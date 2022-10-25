@@ -1,11 +1,8 @@
 package seedu.duke.authentication;
 
-import seedu.duke.Commands;
-import seedu.duke.Currency;
-import seedu.duke.InputManager;
+import seedu.duke.*;
 import seedu.duke.exception.FinanceException;
 import seedu.duke.exception.FinanceException.ExceptionCollection;
-import seedu.duke.BasicUi;
 import seedu.duke.newcurrency.NewCurrency;
 
 import java.io.IOException;
@@ -25,7 +22,7 @@ public class Authentication {
                 LoginCommand.handleLogin();
                 break;
             case CURRENCIES:
-                Currency.exchangeCommands();
+                Currency.exchangeCommands(new CurrencyStructure("usd", "us dollar", "$", 1));
                 break;
             case BYE:
                 isProgramEnd = true;
