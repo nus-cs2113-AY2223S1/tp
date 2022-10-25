@@ -18,7 +18,8 @@ public class FinanceException extends Throwable {
         WITHDRAW_MONEY_EXCEPTION,
         AMOUNT_PARSE_EXCEPTION,
         AMOUNT_NEGATIVE_EXCEPTION,
-        CURRENCY_NOT_FOUND
+        CURRENCY_NOT_FOUND,
+        NOT_PERSONAL_CURRENCY
         //CURRENCY_INVALID_EXCEPTION
         //UNKNOWN_EXCEPTION
     }
@@ -77,6 +78,9 @@ public class FinanceException extends Throwable {
             break;
         case CURRENCY_NOT_FOUND:
             errorMessage = "Currency type is not valid";
+            break;
+        case NOT_PERSONAL_CURRENCY:
+            errorMessage = "This is not your personal currency and cannot be removed";
             break;
         default:
             errorMessage = "Unknown exception happens.";
