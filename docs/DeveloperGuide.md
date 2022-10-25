@@ -5,7 +5,7 @@
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 ## Getting Started
-This program was developed using the Java JDK 11 and the IDE Intellij IDEA.\
+This program was developed using the Java JDK 11 and the IDE Intellij IDEA.
 The following steps will guide you through the setup process to get your development environment up and running.
 1. Install Java Development Kit (JDK) 11.
 2. Install Intellij IDEA.
@@ -13,6 +13,19 @@ The following steps will guide you through the setup process to get your develop
 4. Launch Intellij IDEA and open the repository you have cloned.
 5. Navigate to `File > Project Structure > Project Settings > Project` and set `SDK` to `11`.
 6. Verify the setup process by running `MoneyGoWhere#main()`
+You should see the following greeting message if the project setup is successful:
+```
+  __  __                         _____   __          ___                   
+ |  \/  |                       / ____|  \ \        / / |                  
+ | \  / | ___  _ __   ___ _   _| |  __  __\ \  /\  / /| |__   ___ _ __ ___ 
+ | |\/| |/ _ \| '_ \ / _ \ | | | | |_ |/ _ \ \/  \/ / | '_ \ / _ \ '__/ _ \
+ | |  | | (_) | | | |  __/ |_| | |__| | (_) \  /\  /  | | | |  __/ | |  __/
+ |_|  |_|\___/|_| |_|\___|\__, |\_____|\___/ \/  \/   |_| |_|\___|_|  \___|
+                           __/ |                                           
+                          |___/                                            
+
+Your MoneyGoWhere? Let me help you track it.
+```
 
 ## Design & Implementation
 ### Software Architecture:
