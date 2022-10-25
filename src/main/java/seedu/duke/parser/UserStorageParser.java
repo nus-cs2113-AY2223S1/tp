@@ -140,7 +140,8 @@ public class UserStorageParser {
             output += module.getPuCredit() + ";";
             output += module.getNusCode() + ";";
             output += module.getNusTitle() + ";";
-            output += module.getNusCredit() + "%" + "\n";
+            output += module.getNusCredit() + ";";
+            output += module.getComment() + "%\n";
         }
         return output;
     }
@@ -234,6 +235,9 @@ public class UserStorageParser {
             }
             UserModuleMapping userModule = new UserModuleMapping(details[0], details[1],
                     details[3], details[4], details[5], details[2], items[0], puCountry);
+            if (!details[6].equals("default")) {
+                userModule.setComment(details[6]);
+            }
             moduleList.addModule(userModule, true);
         }
     }
@@ -254,7 +258,7 @@ public class UserStorageParser {
      * @return true if it is a valid format
      */
     private static boolean isValidModulesFormat(String[] details) {
-        return details.length == 6;
+        return details.length == 7;
     }
 
     /**.
