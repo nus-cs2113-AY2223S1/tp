@@ -43,7 +43,8 @@ This project is based on the skeleton code and documents of [SE-EDU AddressBook 
 1. From the main menu, select File > Project Structure > Project Settings > Project > Project SDK
 2. If ```JDK 11``` is already defined in Intellij IDEA, select it and click ```Apply```
 3. If ```JDK 11``` is not defined, select Add SDK > Download JDK, choose the necessary JDK (JDK 11) and click Download, then click ```Apply```
-**Step 4**: Go to File > Open, locate and open the cloned repository.
+
+4. **Step 4**: Go to File > Open, locate and open the cloned repository.
 
 **Step 5**: Verify the setup:
 1. Run ```Duke.main()``` and try some commands.
