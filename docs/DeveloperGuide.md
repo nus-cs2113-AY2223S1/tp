@@ -10,7 +10,9 @@ Nay Chi's Individual Project: https://github.com/NayChi-7/ip
 ## Design & implementation
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+
 ### Class Diagrams
+
 Biometrics component:  
 The Biometrics component stores information about the user's biometrics and holds a reference
 to an ArrayList of the user's weight and fat records under WeightAndFatList class.  
@@ -35,30 +37,33 @@ CardioExercise/StrengthExercise and ExerciseList components:
 
 CardioExercise/StrengthExercise and ExerciseList are classes to store user's cardio/strength training exercises.
 Both CardioExercise and StrengthExercise inherit from Exercise and work similarly.
-CardioExercise/StrengthExcises are added, removed, found , mark done, mark undone and viewed from the ExerciseList with the use
+CardioExercise/StrengthExcises are added, removed, found , mark done, mark undone and viewed from the ExerciseList with
+the use
 of AddCommand, RemoveCommand, FindCommand, MarkCommand and ViewCommand.\
 ExerciseList stores Exercise objects in two Arraylist based on the status of the exercise to save the time needed to
 filter exercise based on its status when user want to view the exercises based on its status.
 
 ![](UmlDiagrams/StrengthExercise.png)
 
-
-
-
 [Proposed] StrengthExercise will be associated with a date, and the exercises will be displayed in descending order of
 date for viewing purposes.
 
-
 ### Sequence diagrams
+
 Adding a new record  
 ![Add.png](UmlDiagrams/Add.png)
-
 
 Adding weight and fat record
 ![AddWeightAndFat.png](UmlDiagrams/AddWeightAndFat.png)
 
 Adding food record
 ![AddFood.png](UmlDiagrams/AddFood.png)
+
+Adding strength exercise
+![](UmlDiagrams/AddStrengthExercise.png)
+
+Marking exercise
+![](UmlDiagrams/MarkExercise.png)
 
 Viewing historical records
 ![View.png](UmlDiagrams/View.png)

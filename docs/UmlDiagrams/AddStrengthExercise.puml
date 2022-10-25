@@ -1,0 +1,55 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autoactivate on
+
+
+activate AddCommand
+-->AddCommand++:execute()
+AddCommand -> Parser++:getArgumentList(Arguments: string)
+return argumentList: String[]
+AddCommand -> Parser++:getClassType((argumentList: String[]))
+return addType: String
+AddCommand -> AddCommand++:addStrengthExercise((argumentList: String[]))
+AddCommand -> AddCommand++:getDescriptionWithValidation((argumentList: String[]))
+return description: string
+AddCommand -> AddCommand++:getWeightWithValidation((argumentList: String[]))
+return weight: int
+AddCommand -> AddCommand++:getSetWithValidation((argumentList: String[])
+return set: int
+AddCommand -> AddCommand++:getRepetitionWithValidation((argumentList: String[]))
+return repetition: int
+
+alt date not included
+AddCommand -> LocalDate++:now()
+return date: LocalDate
+else date included
+AddCommand -> AddCommand:getDateWithValidation((argumentList[5]: string, toDisplay: boolean)
+return date: LocalDate
+AddCommand -> StrengthExercise**:create(description: String, weight: int, set: int, repetition: int, date: LocalDate)
+return exercise: StrengthExercise
+AddCommand -> ExerciseList++:addExercise(exercise: Exercise)
+return
+opt markDone
+AddCommand -> Double++:parseDouble(time: String)
+return time: Double
+AddCommand -> Integer++:parseInt(calories: String)
+return calories: int
+AddCommand -> ExerciseList:markDone(lastIndex: int, time: double, (calories: String)
+return
+end
+opt display
+AddCommand -> Ui++:output(exercise: String)
+return
+AddCommand -> Ui:output(addStrengthExerciseMessage: String)
+return
+end
+end
+return
+
+
+
+
+
+
+@enduml
