@@ -9,7 +9,7 @@ import seedu.duke.BasicUi;
 
 public class Authentication {
     public static boolean handleAuthenticationRequest() {
-        Boolean isProgramEnd = false;
+        boolean isProgramEnd = false;
         try {
             AuthenticationUi.showPromptInfo();
             String userInput = InputManager.receiveInputLine();

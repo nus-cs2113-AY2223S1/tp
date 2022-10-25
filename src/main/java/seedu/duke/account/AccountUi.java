@@ -63,6 +63,17 @@ public class AccountUi {
         BasicUi.showStandardOutput(output);
     }
 
+    public static void showHelpPrompt(){
+        final String MESSAGE = "You have entered into the help center, please enter what you need help with.";
+        BasicUi.showStandardOutput(MESSAGE);
+    }
+
+    public static void reenterPassword(){
+        final String MESSAGE = "Please re-enter your password to make this change";
+        BasicUi.showStandardOutput(MESSAGE);
+        System.out.println("Password: ");
+    }
+
     public static void showDeletionConfirmPrompt(String username) {
         final String[] MESSAGES = { "Your wallet username: " + username,
                 "Are you sure to delete your wallet? Your wallet can't be retrieved and you will automatically logout.",

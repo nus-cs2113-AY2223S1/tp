@@ -30,34 +30,19 @@ public class CurrencyStructure {
     }
 
     public boolean isSameCurrency(CurrencyStructure currency){
-        boolean isSameCurrency = false;
-        if (this.abbrName.equals(currency.getAbbrName())) {
-            isSameCurrency = true;
-        }
-        return isSameCurrency;
+        return abbrName.equals(currency.getAbbrName());
+
     }
 
     public boolean isMatchedCurrencyByAbbrName(String abbrName) {
-        boolean isMatch = false;
-        if (this.abbrName.equals(abbrName)) {
-            isMatch = true;
-        }
-        return isMatch;
+        return this.abbrName.equals(abbrName);
     }
 
     public boolean isMatchedCurrencyByAnyPart(String anyPart) {
-        boolean isMatch = false;
-        if (this.abbrName.contains(anyPart) || this.fullName.contains(anyPart) || this.symbol.contains(anyPart)) {
-            isMatch = true;
-        }
-        return isMatch;
+        return (this.abbrName.contains(anyPart) || this.fullName.contains(anyPart) || this.symbol.contains(anyPart));
     }
 
     public boolean isMatchedCurrencyByAnyExact(String anyExact) {
-        boolean isMatch = false;
-        if (this.abbrName.equals(anyExact) || this.fullName.equals(anyExact) || this.symbol.equals(anyExact)) {
-            isMatch = true;
-        }
-        return isMatch;
+        return (this.abbrName.equals(anyExact) || this.fullName.equals(anyExact) || this.symbol.equals(anyExact));
     }
 }
