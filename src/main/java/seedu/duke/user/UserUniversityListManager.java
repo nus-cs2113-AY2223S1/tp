@@ -47,7 +47,7 @@ public class UserUniversityListManager {
      */
     public void createList(String input) {
         assert input.length() > 0 : "Input school cannot be empty";
-        if (myManager.containsKey(input)) {
+        if (containsKey(input)) {
             System.out.println("Error: PU list already exists");
         } else {
             UserUniversityList newList = new UserUniversityList(input);
@@ -90,13 +90,17 @@ public class UserUniversityListManager {
         myUniversityList.displayModules();
     }
 
-    public boolean foundKeyAll(String inputSchool) {
+    public boolean containsKey(String inputSchool) {
         return myManager.containsKey(inputSchool);
     }
 
+    public UserUniversityList getUserUniversityList(String input) {
+        return myManager.get(input);
+    }
+
     public void addModule(String inputSchool, UserModuleMapping inputModule) throws InvalidUserCommandException {
-        if (myManager.containsKey(inputSchool)) {
-            myManager.get(inputSchool).addModule(inputModule);
+        if (containsKey(inputSchool)) {
+            getUserUniversityList(inputSchool).addModule(inputModule);
         } else {
             throw new InvalidUserCommandException("No such university found");
         }
@@ -110,10 +114,11 @@ public class UserUniversityListManager {
     public void deleteModule(String inputSchool, String puCode) throws InvalidUserCommandException {
         assert inputSchool.length() > 0 : "Input school cannot be empty";
         assert puCode.length() > 0 : "Deleting PU code cannot be empty";
-        if (foundKeyAll(inputSchool)) {
-            UserModuleMapping deletedModule = myManager.get(inputSchool).getMyModules().getModuleByPuCode(puCode);
+        if (containsKey(inputSchool)) {
+            UserModuleMapping deletedModule = 
+                    getUserUniversityList(inputSchool).getMyModules().getModuleByPuCode(puCode);
             deletedModulesList.addToDeletedModules(deletedModule);
-            myManager.get(inputSchool).deleteModuleByPuCode(puCode);
+            getUserUniversityList(inputSchool).deleteModuleByPuCode(puCode);
         } else {
             throw new InvalidUserCommandException("No such university found");
         }
@@ -125,7 +130,7 @@ public class UserUniversityListManager {
      */
     public void deleteList(String inputSchool) throws InvalidUserCommandException {
         assert inputSchool.length() > 0 : "Input school cannot be empty";
-        if (!foundKeyAll(inputSchool)) {
+        if (!containsKey(inputSchool)) {
             throw new InvalidUserCommandException("No such university found");
         } else {
             myManager.remove(inputSchool);

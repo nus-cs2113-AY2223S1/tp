@@ -1,0 +1,139 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+opt
+-> UserUniversityListManager : addModule(inputSchool, inputModule)
+activate UserUniversityListManager
+UserUniversityListManager -> UserUniversityListManager : containsKey(inputSchool)
+activate UserUniversityListManager
+return : boolean
+
+alt inputSchool exists
+    UserUniversityListManager -> UserUniversityListManager : getUserUniversityList(inputSchool)
+    activate UserUniversityListManager
+    return : UserUniversityList
+    UserUniversityListManager -> UserUniversityList : addModule(inputModule)
+    activate UserUniversityList
+
+    UserUniversityList -> UserModuleMappingList : addModule(input)
+    activate UserModuleMappingList
+    UserModuleMappingList -> UserModuleMappingList : findModuleByCode(input)
+    activate UserModuleMappingList
+    return : boolean
+    alt module already exists
+    else new module
+        UserModuleMappingList -> UserModuleMappingList : add(input)
+        activate UserModuleMappingList
+
+        UserModuleMappingList -> Ui : printModuleAddedAcknowledgement(input)
+        activate Ui
+        UserModuleMappingList <-- Ui
+        deactivate Ui
+        return
+    end
+    UserUniversityList <-- UserModuleMappingList
+    deactivate UserModuleMappingList
+    UserUniversityListManager <-- UserUniversityList
+    deactivate UserUniversityList
+
+else inputSchool does not exist
+end
+
+deactivate UserUniversityListManager
+end
+
+opt
+-> UserUniversityListManager : deleteModule(inputSchool, puCode)
+activate UserUniversityListManager
+UserUniversityListManager -> UserUniversityListManager : containsKey(inputSchool)
+activate UserUniversityListManager
+return : boolean
+alt inputSchool exists
+    UserUniversityListManager -> UserUniversityListManager : getUserUniversityList(inputSchool)
+    activate UserUniversityListManager
+    return : UserUniversityList
+
+    UserUniversityListManager -> UserUniversityList : getMyModules()
+    activate UserUniversityList
+
+
+    UserUniversityList -> UserModuleMappingList : getModuleByPuCode(puCode)
+    activate UserModuleMappingList
+    return : UserModuleMapping
+
+    return : UserModuleMapping
+
+    UserUniversityListManager -> UserDeletedModules : addToDeletedModule(deletedModule)
+    activate UserDeletedModules
+    return
+
+    UserUniversityListManager -> UserUniversityListManager : getUserUniversityList(inputSchool)
+    activate UserUniversityListManager
+    return : UserUniversityList
+
+    UserUniversityListManager -> UserUniversityList : deleteModuleByPuCode(puCode)
+    activate UserUniversityList
+
+    UserUniversityList -> UserModuleMappingList : deleteModuleByPuCode(puCode)
+    activate UserModuleMappingList
+    return
+
+    return
+
+
+else inputSchool does not exist
+end
+deactivate UserUniversityListManager
+end
+
+
+opt
+-> UserUniversityListManager : createList(input)
+activate UserUniversityListManager
+
+UserUniversityListManager -> UserUniversityListManager : containsKey((input)
+activate UserUniversityListManager
+return : boolean
+
+alt school already exists
+
+else new school list
+    UserUniversityListManager -> UserUniversityList : <<create>>
+    activate UserUniversityList
+    return UserUniversityList
+    UserUniversityListManager -> UserUniversityListManager : put(input, newLIst)
+    activate UserUniversityListManager
+
+    UserUniversityListManager -> Ui : printPuListCreatedAcknowledgement(input)
+    activate Ui
+    return
+
+    return
+
+end
+
+deactivate UserUniversityListManager
+end
+
+opt
+-> UserUniversityListManager : deleteList(input)
+activate UserUniversityListManager
+
+UserUniversityListManager -> UserUniversityListManager : containsKey((input)
+activate UserUniversityListManager
+return : boolean
+
+alt schoolList does not exist
+
+else schoolList exists
+    UserUniversityListManager -> UserUniversityListManager : remove(inputSchool)
+    activate UserUniversityListManager
+
+    UserUniversityListManager -> Ui : printPuListDeletedAcknowledgement(inputSchool)
+    return
+end
+
+deactivate UserUniversityListManager
+end
+
+@enduml

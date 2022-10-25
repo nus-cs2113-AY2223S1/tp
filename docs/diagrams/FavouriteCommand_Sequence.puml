@@ -1,0 +1,114 @@
+@startuml
+
+activate Duke
+
+Duke -> UserStorageParser : getSavedLists()
+activate UserStorageParser
+
+UserStorageParser --> Duke : userUniversityListManager :UserUniversityListManager
+deactivate UserStorageParser
+
+Duke -> UserStorageParser : getSavedTimeTables()
+activate UserStorageParser
+
+UserStorageParser --> Duke : timetableManager :TimetableManager
+deactivate UserStorageParser
+
+Duke -> Ui : getUserInput()
+activate Ui
+
+Ui --> Duke : userInput : String
+deactivate Ui
+
+Duke -> CommandParser : CommandParser.getUserCommand(userInput)
+activate CommandParser
+
+CommandParser -> CommandParser : parseUserCommand(userInput)
+activate CommandParser
+
+CommandParser --> CommandParser : userInputTokenized : String[]
+deactivate CommandParser
+
+alt help command
+
+    CommandParser -> CommandParser : isValidFavouriteCommand(userInputTokenized)
+    activate CommandParser
+
+    CommandParser -> CommandParser : isValidFavouriteOption(userInputTokenized[FAVOURITE_OPTION_INDEX])
+    activate CommandParser
+
+    CommandParser --> CommandParser : :boolean
+    deactivate CommandParser
+
+    CommandParser --> CommandParser : :boolean
+    deactivate CommandParser
+
+    opt is valid favourite command
+
+        create FavouriteCommand
+        CommandParser -> FavouriteCommand : FavouriteCommand(userInputTokenized, CommandType.FAVOURITE)
+        activate FavouriteCommand
+
+        FavouriteCommand --> CommandParser : newFavouriteCommand :FavouriteCommand
+        deactivate FavouriteCommand
+    end
+
+else other command
+
+end
+
+CommandParser --> Duke : newUserCommand : Command
+deactivate CommandParser
+
+alt favourite command
+
+Duke -> Duke : executeFavouriteCommand(userUniversityListManager, newUserCommand)
+activate Duke
+
+Duke -> FavouriteCommand : getFavouriteOption()
+activate FavouriteCommand
+
+FavouriteCommand --> Duke : favouriteOption :String
+deactivate FavouriteCommand
+
+alt favouriteOption is "VIEW"
+Duke -> UserUniversityListManager : displayFavourites()
+activate UserUniversityListManager
+
+deactivate UserUniversityListManager
+else favouriteOption is "ADD"
+Duke -> FavouriteCommand : getUniversityName()
+activate FavouriteCommand
+
+FavouriteCommand --> Duke : universityName :String
+deactivate FavouriteCommand
+Duke -> UserUniversityListManager : addFavourite(universityName)
+activate UserUniversityListManager
+
+deactivate UserUniversityListManager
+Duke -> UserStorageParser : storeCreatedLists(userUniversityListManager)
+activate UserStorageParser
+
+deactivate UserStorageParser
+else favouriteOption is "DELETE"
+Duke -> FavouriteCommand : getUniversityName()
+activate FavouriteCommand
+
+FavouriteCommand --> Duke : universityName :String
+deactivate FavouriteCommand
+Duke -> UserUniversityListManager : deleteFavourite(universityName)
+activate UserUniversityListManager
+
+deactivate UserUniversityListManager
+Duke -> UserStorageParser : storeCreatedLists(userUniversityListManager)
+activate UserStorageParser
+
+deactivate UserStorageParser
+
+deactivate Duke
+end
+else other command
+end
+deactivate Duke
+
+@enduml
