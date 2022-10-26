@@ -1,39 +1,44 @@
 # Developer Guide
 
-## Acknowledgements
+## Design & Implementation
 
-AddressBook-Level3 https://github.com/se-edu/addressbook-level3
+### Ui
+The Ui Class handles user input
 
-## Design & implementation
-
-
-## Design
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
-### Ui component
 ![img.png](imgs/UiClass.png)
-
-### Commands component
-![img.png](imgs/CommandsClass.png)
-
-### Movie Classes
-![img.png](imgs/MovieClass.png)
 
 ### Storage Class
 ![img.png](imgs/StorageClass.png)
 
+### Media Classes
+![img.png](imgs/MovieClass.png)
 
-## Implementation
-### Clearing the review list
-![img.png](imgs/clearSequence.png)
+### Commands
+![img.png](imgs/CommandsClass.png)
 
-### Sorting the review list
+
+#### Add
+![img_1.png](imgs/AddCommandSequence.png)
+
+#### Find
+![img_1.png](imgs/FindCommandSequence.png)
+
+#### List
+![img_2.png](imgs/ListCommandSequence.png)
+
+#### Sort
 ![img.png](imgs/sortSequence.png)
+
+### Remove
+![img.png](imgs/deleteSequence.png)
+
+#### Clearing the review list
+![img.png](imgs/clearSequence.png)
 
 ### Marking favourite reviews and listing all favourites
 ![img.png](imgs/favouriteSequence.png)
 
-### Deleting a review from the review list
-![img.png](imgs/deleteSequence.png)
+
 
 ## Product scope
 ### Target user profile
