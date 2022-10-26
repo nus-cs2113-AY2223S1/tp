@@ -3,3 +3,4 @@
 !define LOGIC_COLOR_T2 #5252CE
 !define LOGIC_COLOR_T3 #1616B0
 !define LOGIC_COLOR_T4 #101086
+skinparam classAttributeIconSize 0
