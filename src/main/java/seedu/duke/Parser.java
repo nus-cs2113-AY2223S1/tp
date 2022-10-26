@@ -2,12 +2,7 @@
 package seedu.duke;
 
 
-import seedu.duke.commands.Add;
-import seedu.duke.commands.Delete;
-import seedu.duke.commands.View;
-import seedu.duke.commands.Exit;
-import seedu.duke.commands.Mcs;
-import seedu.duke.commands.Command;
+import seedu.duke.commands.*;
 import seedu.duke.exceptions.InvalidCommandWordException;
 import seedu.duke.exceptions.InvalidInputContentException;
 import seedu.duke.exceptions.InvalidInputFormatException;
@@ -61,6 +56,8 @@ public class Parser {
             return new View(input);
         case "mcs":
             return new Mcs(input);
+        case "find":
+            return new Find(input);
         case "exit":
             return new Exit();
         default:

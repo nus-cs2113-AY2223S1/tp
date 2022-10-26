@@ -112,6 +112,14 @@ public class UI {
         System.out.println("You have " + mcs + " mcs for " + semester);
     }
 
+    public static void findMessage(ArrayList<Module> matchingModules) {
+        System.out.println("These are your matching modules:");
+        int counter = 1;
+        for (Module mod: matchingModules) {
+            System.out.println(counter + ". " + mod.toString());
+        }
+    }
+
     /**
      * Message to be displayed when an exception is encountered due to invalid input format
      */

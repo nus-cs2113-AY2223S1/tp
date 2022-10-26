@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import java.sql.Array;
 import java.util.ArrayList;
 
 public class ModuleList {
@@ -115,6 +116,23 @@ public class ModuleList {
             }
         }
         UI.mcMessage(semester, mcsCount);
+    }
+
+    public static boolean matchCheck(String keyword, Module mod) {
+        if (mod.getCourse().contains(keyword) || mod.getGrade().contains(keyword) ||
+                mod.getMcs() == Integer.parseInt(keyword) || mod.getSemesterTaken().contains(keyword)) {
+            return true;
+        }
+        return false;
+    }
+    public static void find(String keyword) {
+        ArrayList<Module> matchingModules = new ArrayList<Module>();
+        for (Module mod: modules) {
+            if (matchCheck(keyword, mod)) {
+                matchingModules.add(mod);
+            }
+        }
+        UI.findMessage(matchingModules);
     }
 
     // Returns total number of Modules in modules Array
