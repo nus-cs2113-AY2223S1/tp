@@ -25,7 +25,7 @@ YAMOM is designed for users who are proficient in Command Line Interface (CLI).
     - [Select a timetable slot: `select`](#select-a-timetable-slot-select)
     - [Export Timetable: `export`](#creating-an-nusmod-link-export)
     - [Import Timetable: `import`](#importing-a-timetable-import)
-    - [Feature X: `COMMAND`](#feature-x-command)
+<!--    - [Feature X: `COMMAND`](#feature-x-command) -->
   - [Application Data](#application-data)
     - [Data Storage](#data-storage)
     - [Transfer to another computer](#transfer-to-another-computer)
@@ -476,7 +476,7 @@ Error! 	Error processing NUSMod Link, Kindly ensure that the link is in the form
 https://nusmods.com/timetable/sem-SEMESTER_NUMBER/share?MODULE_INFO&MODULE_INFO
 --------------------------------------------------------------------------------
 ```
-
+<!--
 ### Feature X: `COMMAND`
 
 {Description of the command}.
@@ -498,7 +498,7 @@ Sample Output:
 ```
 
 Possible Error:
-
+-->
 > Note:
 
 ## Application Data
