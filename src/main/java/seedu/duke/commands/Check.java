@@ -16,8 +16,14 @@ public class Check extends Command {
     public static int SEMESTER_MINIMUM_SEP = 2;
     private static ArrayList<Module> modules = ModuleList.modules;
     private String type;
+
+    /**
+     * Constructor to initialize object of Check Command class
+     * Depending on the input it will either check for NOC or SEP
+     * @param input input entered by user. Format: String
+     */
     public Check(String input) {
-        this.type = input;
+        this.type = input.toUpperCase();
         switch (input) {
             // obtained >70 MCs, completed four semesters of study
         case "NOC":
@@ -39,6 +45,10 @@ public class Check extends Command {
         }
     }
 
+    /**
+     * Function to find the current semester the user is on depending on the grade of the modules.
+     * @return the semesters which have modules completed.
+     */
     public static int findCurrentSemester() {
         List<String> semesters = new ArrayList<>();
         for (Module mod: modules) {
@@ -50,6 +60,10 @@ public class Check extends Command {
         return semesters.size();
     }
 
+    /**
+     * Function to check if the user is eligible for NOC
+     * @return true if eligible, false otherwise
+     */
     public static boolean checkNOC() {
         if (checkNOCMc() && checkNOCSem()) {
             return true;
@@ -57,6 +71,10 @@ public class Check extends Command {
         return false;
     }
 
+    /**
+     * Function to check if the user fulfills the semester requirements for NOC
+     * @return true if fulfilled, false otherwise
+     */
     public static boolean checkNOCSem() {
         int currentSemester = findCurrentSemester();
         if (currentSemester >= SEMESTER_MINIMUM_NOC) {
@@ -65,6 +83,10 @@ public class Check extends Command {
         return false;
     }
 
+    /**
+     * Function to check if the user fulfills the MC requirements for NOC
+     * @return true if fulfilled, false otherwise
+     */
     public static boolean checkNOCMc() {
         int totalMCs = 0;
         for (Module mod: modules) {
@@ -76,6 +98,10 @@ public class Check extends Command {
         return false;
     }
 
+    /**
+     * Function to check if the user is eligible for SEP
+     * @return true if eligible, false otherwise
+     */
     public static boolean checkSEP() {
         if (checkSEPCAP() && checkSEPSem()) {
             return true;
@@ -83,6 +109,10 @@ public class Check extends Command {
         return false;
     }
 
+    /**
+     * Function to check if the user fulfills the CAP requirements for SEP
+     * @return true if fulfilled, false otherwise
+     */
     public static boolean checkSEPCAP() {
         double totalCAP = 0;
         int currentSemester = findCurrentSemester();
@@ -99,6 +129,10 @@ public class Check extends Command {
         return false;
     }
 
+    /**
+     * Function to check if the user fulfills the semester requirements for SEP
+     * @return true if fulfilled, false otherwise
+     */
     public static boolean checkSEPSem() {
         int currentSemester = findCurrentSemester();
         if (currentSemester >= SEMESTER_MINIMUM_SEP) {
@@ -107,6 +141,11 @@ public class Check extends Command {
         return false;
     }
 
+    /**
+     * Function to convert semester as a string into an integer
+     * @param semester the semester of a module  Format: String
+     * @return the semester in the form of an integer
+     */
     private static int convertSem(String semester) {
         switch (semester) {
         case "Y1S1":
@@ -130,6 +169,11 @@ public class Check extends Command {
         }
     }
 
+    /**
+     * Function to convert a letter grade into CAP
+     * @param grade The letter grade of a module. Format: String
+     * @return The equivalent CAP of the module.
+     */
     private static double convertCAP(String grade) {
         switch (grade) {
         case "F":
