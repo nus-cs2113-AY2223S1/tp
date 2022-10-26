@@ -1,22 +1,18 @@
 package seedu.duke.utils;
 
-import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Timeout;
 import seedu.duke.model.LessonType;
 import seedu.duke.model.Module;
 import seedu.duke.model.SelectedModule;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class StorageTest {
-    @RepeatedTest(value = 5, name = RepeatedTest.LONG_DISPLAY_NAME)
+    @Test
     public void saveState_state_outputFile() throws IOException {
         //Save state into file
         State state = new State();

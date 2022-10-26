@@ -3,6 +3,7 @@ package seedu.duke.command;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import seedu.duke.exceptions.YamomException;
@@ -13,6 +14,7 @@ import seedu.duke.utils.Ui;
 
 public class ImportCommandTest {
     @Test
+    @Disabled
     public void importCommand_importUrl_importsCorrectly() throws YamomException {
         State state = new State();
         Ui ui = new Ui();
