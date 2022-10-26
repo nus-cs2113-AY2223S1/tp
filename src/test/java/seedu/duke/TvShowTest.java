@@ -17,8 +17,10 @@ public class TvShowTest {
         assertEquals(5.0, assertTvShow.rating);
         assertEquals("Sitcom", assertTvShow.genre);
         assertEquals("Netflix", assertTvShow.site);
+        assertEquals("10-01-2022", assertTvShow.dateString);
+        assertEquals("[TV Show] Friends Rating:5.0 Genre:Sitcom Date watched:10-01-2022 Site: Netflix",
+                assertTvShow.toString());
     }
-
 
     @Test
     void clearTvShowList() {
@@ -26,7 +28,14 @@ public class TvShowTest {
         ReviewList assertList = storedReviews;
         storedReviews.add(friends);
         storedReviews.inputs.clear();
-
         assertEquals(0, assertList.inputs.size());
+    }
+
+    @Test
+    void createTVShowFileString() {
+        TvShow friends = new TvShow("Friends",5.0, "Sitcom","10-01-2022", "Netflix");
+        assertEquals("T|N|Friends|5.0|Sitcom|10-01-2022|Netflix", friends.createFileString());
+        friends.isFavourite = true;
+        assertEquals("T|Y|Friends|5.0|Sitcom|10-01-2022|Netflix", friends.createFileString());
     }
 }

@@ -12,6 +12,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class MediaTest {
+    ReviewList reviews;
+    @Test
+    void newMediaTest() {
+        Media inception = new Media("Inception", 4.5, "Sci-fi","10-01-2021");
+        assertEquals("Inception",inception.title);
+        assertEquals(4.5,inception.rating);
+        assertEquals("Sci-fi",inception.genre);
+        assertEquals("10-01-2021",inception.dateString);
+        assertEquals("Inception Rating:4.5 Genre:Sci-fi",inception.toString());
+    }
+
     @Test
     void convertDate_invalidDay_throwParseException() {
         String dateWatchedString = "32-01-2022";

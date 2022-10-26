@@ -16,6 +16,8 @@ public class MovieTest {
         assertEquals("Harry Potter",assertMovie.title);
         assertEquals(5.0,assertMovie.rating);
         assertEquals("SciFi", assertMovie.genre);
+        assertEquals("[Movie] Harry Potter Rating:5.0 Genre:SciFi Date watched:10-01-2020",
+                harryPotter.toString());
     }
 
     @Test
@@ -26,5 +28,13 @@ public class MovieTest {
         storedReviews.inputs.clear();
 
         assertEquals(0, assertList.inputs.size());
+    }
+
+    @Test
+    void createMovieFileString() {
+        Movie harryPotter = new Movie("Harry Potter",5.0, "SciFi","10-01-2020");
+        assertEquals("M|N|Harry Potter|5.0|SciFi|10-01-2020", harryPotter.createFileString());
+        harryPotter.isFavourite = true;
+        assertEquals("M|Y|Harry Potter|5.0|SciFi|10-01-2020", harryPotter.createFileString());
     }
 }

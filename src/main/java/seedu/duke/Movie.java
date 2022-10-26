@@ -22,7 +22,6 @@ public class Movie extends Media {
         assert title.length() > 0 : "Movie title length must be more than 0";
         assert rating >= 0 : "Minimum rating must be 0";
         assert dateWatchedString.length() > 0 : "Length of date must be more than 0";
-
         logger.log(Level.INFO, "Added new movie: " + title);
     }
 
@@ -31,7 +30,7 @@ public class Movie extends Media {
      * Formats the movie review to display as output.
      */
     public String toString() {
-        return "[Movie]" + super.toString() + " Date watched:" + super.dateString;
+        return "[Movie] " + super.toString() + " Date watched:" + super.dateString;
     }
 
     /**

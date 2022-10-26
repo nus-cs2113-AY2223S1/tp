@@ -1,0 +1,12 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+hide footbox
+
+ -> Parser: addMovie()
+Parser -> Parser: executeAdd()
+activate Parser
+
+
+
+@enduml
