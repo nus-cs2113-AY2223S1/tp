@@ -1,12 +1,13 @@
 package appointment;
-import org.junit.jupiter.api.Test;
+
 import pet.PetList;
 import pet.Pet;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 public class PetTest {
-    public void PetUnderTest(){
+    public void petUnderTest() {
         PetList petList = new PetList();
         Pet newPet = new Pet("YuHuan", "cat", true);
         petList.petList.add(newPet);
