@@ -8,28 +8,24 @@ for easier reference. As an added feature, users can also curate their timetable
 
 ## Quick Start
 
-{Give steps to get started quickly}
-
 1. Ensure that you have Java 11 or above installed.
-2. Down the latest version of `easySEP` from [here](http://link.to/duke).
+2. Download the latest version of `easySEP` from [here](http://link.to/duke).
 3. Open your command prompt to the folder where you saved the .jar file
 4. Run java -jar easySEP.jar
 
 ## Features
+
 ### Create Command: `/create u/{UNIVERSITY_NAME}`
 
 Creates a university list and the corresponding timetable for user's specified university.
-
 
 ### Exit Command: `/exit`
 
 Exits easySEP
 
-
 ### Help Command: `/help`
 
 Prints out all the commands and command format required for easySEP
-
 
 ### Add Command: `/add`
 
@@ -42,7 +38,6 @@ Adds a lesson for the specified module code to the timetable for the specified u
 #### Add Command for Module Mapping: `/add u/{UNIVERSITY_NAME} m/{MODULE_CODE}`
 
 Adds module to university list.
-
 
 ### Delete Command: `/delete`
 
@@ -59,7 +54,6 @@ Deletes the specified module from the university's list
 #### Delete Command for Universities: `/delete u/{UNIVERSITY_NAME}`
 
 Deletes the university list for the specified university
-
 
 ### View Command: `/view`
 
@@ -80,7 +74,6 @@ Displays the created list and timetable for the specified university.
 #### View Command for all timetables created by user: `/view TIMETABLES`
 
 Displays all timetables for universities lists created by user.
-
 
 ### List Command: `/list`
 
@@ -158,4 +151,24 @@ Example of usage:
 
 ## Command Summary
 
-{Give a 'cheat sheet' of commands here}
+| Command   | Format                                                | Purpose                                                                                                                                                                                                                                                     |
+| --------- | ----------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| help      | /help                                                 | Displays eligible user commands for the program                                                                                                                                                                                                             |
+| create    | /create u/UNIVERSITY_NAME_IN_UNDERSCORES              | Creates an empty module list for the input university                                                                                                                                                                                                       |
+| favourite | /favourite add/UNIVERSITY_NAME_IN_UNDERSCORES         | Adds a university list to the user's favourites                                                                                                                                                                                                             |
+| favourite | /favourite del/UNIVERSITY_NAME_IN_UNDERSCORES         | Deletes a university list from the user's favourites                                                                                                                                                                                                        |
+| favourite | /favourite view/                                      | View the user's favourite university lists                                                                                                                                                                                                                  |
+| exit      | /exit                                                 | Terminate the program                                                                                                                                                                                                                                       |
+| view      | /view LISTS                                           | Displays all existing university lists that have been created by the user                                                                                                                                                                                   |
+| view      | /view u/UNIVERSITY_NAME_IN_UNDERSCORES                | Displays all the modules that have been added to the user's input university's list in the format: [Home University Module Code] [Home University Module Title] [Partner University Module Code] [Partner University Module Title] [Equivalent NUS Credits] |
+| view      | /view DELETE_HISTORY                                  | Displays up to 5 most recent modules that the user has deleted                                                                                                                                                                                              |
+| list      | /list MODULES                                         | Displays all existing university modules mappings that are approved in the format: [Partner University Module Code] [Partner University Module Title] [Partner University Module Credits] [NUS Module Code] [NUS Module Title] [NUS Module Credits] in NUS  |
+| list      | /list UNIVERSITIES                                    | Displays all universities with module mappings available in database                                                                                                                                                                                        |
+| list      | /list m/MODULECODE                                    | List all module mappings for NUS MODULECODE in database                                                                                                                                                                                                     |
+| list      | /list u/UNIVERSITY_NAME_IN_UNDERSCORES                | List all module mappings offered by UNIVERSITY in database                                                                                                                                                                                                  |
+| add       | /add u/UNIVERSITY_NAME_IN_UNDERSCORES m/MODULECODE    | Add input Partner University module code to input university list                                                                                                                                                                                           |
+| delete    | /delete u/UNIVERSITY_NAME_IN_UNDERSCORES m/MODULECODE | Remove input Partner University module code from input university list                                                                                                                                                                                      |
+| delete    | /delete u/UNIVERSITY_NAME_IN_UNDERSCORES              | Delete input university list                                                                                                                                                                                                                                |
+
+Note: Words in UPPER_CASE are parameters that you should input as a user
+Note: There should not be spaces in parameters, replace with underscore instead
