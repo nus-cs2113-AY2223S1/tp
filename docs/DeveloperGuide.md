@@ -23,7 +23,8 @@
    5.2. [Value proposition](#52-value-proposition)
 6. [User stories](#6-user-stories)
 7. [Non-functional requirements](#7-non-functional-requirements)
-8. [Instructions for manual testing](#8-instructions-for-manual-testing)
+8. [Glossary](#8-glossary)
+9. [Instructions for manual testing](#9-instructions-for-manual-testing)
 
 ## Acknowledgements
 
@@ -118,6 +119,11 @@ Below, we detail the design of the UI class with a class diagram
 
 
 ### 3.7. Storage component
+
+Upcycle has three separate Storage class, dedicated for three types of object: ```UserStorage```, ```ItemStorage```, and ```TransactionStorage```. All of these inherit from an abstract class called ```Storage```. 
+The following  diagrams show more details about Storage classes: 
+
+![StorageClassDiagram](images/StorageClassDiagram.png)
 
 Upcycle stores the user's data, including the user list, item list, transaction list in three files ```user.txt```, ```item.txt```, ```transaction.txt```, respectively.
 The data will be loaded when running the program, and ONLY be written to the files when exiting the program correctly, otherwise, the data during the execution will be gone.
@@ -557,7 +563,11 @@ The user enters the following command: “find-item /k Book”. In this case, th
 3. Should work for only one user.
 4. Should work without Internet connection.
 
-## 8. Instructions for manual testing
+## 8. Glossary
+
+...To be updated
+
+## 9. Instructions for manual testing
 
 ...To be updated
 

@@ -70,7 +70,7 @@ public class ItemStorage extends Storage {
         }
     }
 
-    public void makeItemDir(ItemList itemList) throws StoreFailureException {
+    private void makeItemDir(ItemList itemList) throws StoreFailureException {
         int startIndex = itemFilePath.lastIndexOf("/");
         String fileDirectory =
                 itemFilePath.replace(itemFilePath.substring(startIndex), "");

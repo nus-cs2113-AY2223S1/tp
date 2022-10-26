@@ -35,10 +35,14 @@ else item is invalid
     destroy ":RemoveItemCommand"
     activate ":DukeException"
     ":DukeException" --> ":Duke"
-    destroy ":DukeException"
+    deactivate ":DukeException"
     ":Duke" -> "<<class>>\nUi" : print error
     activate "<<class>>\nUi"
-    "<<class>>\nUi" --> ":Duke" : error message
+    "<<class>>\nUi" -> ":DukeException": getMessage()
+    activate ":DukeException"
+    return
+    destroy ":DukeException"
+    "<<class>>\nUi" --> ":Duke"
     deactivate "<<class>>\nUi"
 end
 deactivate ":RemoveItemCommand"
