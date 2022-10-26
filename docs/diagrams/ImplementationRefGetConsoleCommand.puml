@@ -3,6 +3,8 @@
 
 skinparam noteTextAlignment left
 
+group sd Get Console Command
+
 Actor User USER_COLOR
 Participant "consoleInterface:ConsoleInterface" as consoleInterface USER_INTERFACE_COLOR_1
 Participant "<<class>>\nParser" as Parser PARSER_COLOR_1
@@ -18,7 +20,7 @@ activate consoleInterface USER_INTERFACE_COLOR_1
 User -[USER_COLOR]> consoleInterface : User command
 note right
     getConsoleInput() reads the
-    command entered by the user
+    command entered by the user.
 end note
 
 consoleInterface --[USER_INTERFACE_COLOR_1]> consoleInterface : consoleInput:String
@@ -28,8 +30,8 @@ consoleInterface -[USER_INTERFACE_COLOR_1]> Parser : parse(consoleInput:String)
 activate Parser PARSER_COLOR_1
 
 note right
-    Parser calls the corresponding parse command
-    function based on consoleInput.
+    Parser calls the corresponding parse
+    command function based on consoleInput.
 end note
 
 Parser --[PARSER_COLOR_1]> consoleInterface : consoleCommand:ConsoleCommand
@@ -37,4 +39,6 @@ deactivate Parser
 
 consoleInterface --[USER_INTERFACE_COLOR_1]> consoleInterface : consoleCommand:ConsoleCommand
 deactivate consoleInterface
+
+end group
 @enduml
