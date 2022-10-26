@@ -3,6 +3,7 @@
 
 skinparam noteTextAlignment left
 
+mainframe sd Get User Command
 Actor User USER_COLOR
 Participant ":UserInterface" as UserInterface USER_INTERFACE_COLOR_1
 Participant ":Parser" as Parser PARSER_COLOR_1
