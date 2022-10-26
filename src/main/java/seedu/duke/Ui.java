@@ -10,12 +10,7 @@ public class Ui {
     protected boolean isExit;
     
     public void greetUser() {
-        String logo = " ____        _        " + System.lineSeparator()
-                + "|  _ \\ _   _| | _____ " + System.lineSeparator()
-                + "| | | | | | | |/ / _ \\" + System.lineSeparator()
-                + "| |_| | |_| |   <  __/" + System.lineSeparator()
-                + "|____/ \\__,_|_|\\_\\___|" + System.lineSeparator();
-        System.out.println("Welcome to your Movie Reviews bot,");
+        System.out.println("Welcome to your Media Reviews bot,");
         logger.log(Level.INFO, "Greeted User");
     }
 
