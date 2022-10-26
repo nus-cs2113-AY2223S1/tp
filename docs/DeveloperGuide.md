@@ -95,7 +95,19 @@ In the example above, `UserInterface#runCommandAddExpense()` calls `Storage#save
 ## Implementation
 ### Adding an expense
 
-![Component-Commands](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ImplementationAddExpense.puml)
+![Implementation-Add-Expense](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ImplementationAddExpense.puml)
+
+### Viewing an expense
+
+![Implementation-View-Expense](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ImplementationViewExpense.puml)
+
+### Deleting an expense
+
+![Implementation-Delete-Expense](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ImplementationDeleteExpense.puml)
+
+### Editing an expense
+
+![Implementation-Edit-Expense](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ImplementationEditExpense.puml)
 
 ## Product scope
 ### Target user profile
@@ -151,4 +163,9 @@ In the example above, `UserInterface#runCommandAddExpense()` calls `Storage#save
 
 ## Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+### Launching MoneyGoWhere
+1. Set up the project according to the steps in [Getting Started](#getting-started)
+2. Launch MoneyGoWhere by running `main()` in `MoneyGoWhere.java`
+
+### Terminating MoneyGoWhere
+1. Enter `Bye` into the console
