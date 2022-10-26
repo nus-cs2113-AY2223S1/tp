@@ -202,24 +202,34 @@ public class TimetableDict {
             permutationsByMod.add(possiblePermutations);
         }
 
-        List<List<Lesson>> result = new ArrayList<>();
+        List<List<Lesson>> allPermutations = new ArrayList<>();
         for (int permutationIndex = 0; permutationIndex < numOfPermutations; permutationIndex++) {
-            result.add(new ArrayList<>());
+            allPermutations.add(new ArrayList<>());
         }
 
         for (int moduleIndex = 0; moduleIndex < listOfModules.size(); moduleIndex++) {
-            int permutationIndex = 0;
+            int permutationIndexForCurrMod = 0;
             for (int i = 0; i < numOfPermutations; i++) {
-                List<Lesson> currPermutation = result.get(i);
-                currPermutation.addAll(permutationsByMod.get(moduleIndex).get(permutationIndex));
+                List<Lesson> currPermutation = allPermutations.get(i);
+                currPermutation.addAll(permutationsByMod.get(moduleIndex).get(permutationIndexForCurrMod));
+                /*
+                 * Divide total permutations by number of permutations for current mod
+                 * only increase permutation index when current index hits these divisons
+                 */
                 if ((i + 1) % (numOfPermutations / permutationsByMod.get(moduleIndex).size()) == 0) { 
-                    permutationIndex++;
+                    permutationIndexForCurrMod++;
                 }
             }
         }
 
+        /*
+         * go thru all permutations, check num of clashes for every permutation
+         * add permutation to ordered hashmap where:
+         * key = num of clashes
+         * entry = permutation
+         */
         TreeMap<Integer, List<Lesson>> permutationsByClashes = new TreeMap<Integer, List<Lesson>>();
-        for (List<Lesson> permutation : result) {
+        for (List<Lesson> permutation : allPermutations) {
             int numOfClashes = getNumOfClashes(permutation);
             permutationsByClashes.put(numOfClashes, permutation);
             if (numOfClashes == 0) {
@@ -227,16 +237,23 @@ public class TimetableDict {
             }
         }
 
+        /*
+         * take first entry (will be the least number of clashes)
+         */
         int unallocated = 0;
         for (Lesson lesson : permutationsByClashes.get(permutationsByClashes.firstKey())) {
             Module module = Timetable.getModuleByCode(lesson.getModuleCode());
-            if (checkClash(this, lesson) == 0) {
+            if (checkClash(Timetable.timetableDict, lesson) == 0) {
                 module.replaceAttending(lesson);
-            } else {
-                if (!lesson.getModuleCode().equals(getClashingModuleCode(lesson))) {
+            } 
+        }
+
+        //Quick fix
+        for (Module module : listOfModules) {
+            for (Lesson attendingLesson : module.getAttending()) {
+                if (attendingLesson.getDay().equals("Undetermined Day")) {
                     unallocated++;
-                    resultString += lesson.getModuleCode() + " (" + lesson.getLessonType() + ") clashes with "
-                         + getClashingModuleCode(lesson) + "\n";
+                    resultString += attendingLesson.getModuleCode() + " (" + attendingLesson.getLessonType() + ")\n";
                 }
             }
         }
@@ -322,6 +339,18 @@ public class TimetableDict {
                 }
             }
         }
+        //For debugging
+        int permutationCounter = 1;
+        System.out.println("------ " + module.getModuleCode() + " ------");
+        for (List<Lesson> permutation : result) {
+            System.out.println("--- Permutation" + permutationCounter + " ---");
+            for (Lesson lesson : permutation) {
+                System.out.println(lesson.getLessonType() + "|" + lesson.getDay()
+                     + "|" + lesson.getStartTime() + "-" + lesson.getEndTime());
+            }
+            permutationCounter++;
+        }
+        System.out.print("\n");
         return result;
     }
 }
