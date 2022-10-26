@@ -7,9 +7,9 @@
   * [Add a passenger detail: `passenger add`](#Add-a-passenger-detail-passenger-add)
   * [Delete a passenger detail: `passenger delete`](#Delete-a-passenger-detail-passenger-delete)
   * [Display passenger detail logbook: `passenger list`](#Display-passenger-detail-logbook-passenger-list)
-  * [Adding a flight: `flight add`](#adding-a-flight-flight-add)
-  * [Delaying a flight: `delay`](#delaying-a-flight-delay)
-  * [List Flights](#list-flights-flight-list)
+  * [Add a flight detail: `flight add`](#add-a-flight-detail-flight-add)
+  * [Delay a flight: `delay`](#delay-a-flight-delay)
+  * [Display flight detail logbook: `flight list`](#display-flight-detail-logbook-flight-list)
   * [Command Summary](#Command-Summary)
 * [Frequently Asked Quesitions](#Frequently-Asked-Questions)
 
@@ -133,7 +133,7 @@ _If passenger details logbook is empty_.
 
 ---
 
-### Adding a flight: `flight add`
+## Add a flight detail: `flight add`
 
 Format: `flight add fn/FLIGHT_NUMBER a/AIRLINE d/DESTINATION dt/DEPARTURE_TIME gn/GATE_NUMBER c/CHECKIN_ROW_DOOR`
 
@@ -153,7 +153,7 @@ Flight added!
 ```
 ---
 
-### Delaying a flight: `delay`
+## Delay a flight: `delay`
 
 Format: `delay FLIGHT_NUMBER dt/NEW_DEPARTURE_TIME`
 
@@ -174,7 +174,7 @@ Departure time of flight SQ712 is delayed from 1600 to 1700.
 ```
 ---
 
-### List flights: `flight list`
+## Display flight detail logbook: `flight list`
 
 Format: `flight list`
 
@@ -212,7 +212,6 @@ flight list
 
 **Q**: How do I transfer my data to another computer?
 
-<br>
-
 **A**: {your answer here}  
 
+<br>
