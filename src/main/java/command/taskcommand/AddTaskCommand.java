@@ -1,11 +1,9 @@
-package command.taskCommand;
+package command.taskcommand;
 
 import command.Command;
 import exception.DukeException;
 import task.Task;
 import task.TaskList;
-
-import java.util.zip.DataFormatException;
 
 public class AddTaskCommand extends Command {
 

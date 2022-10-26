@@ -2,9 +2,9 @@ package parser;
 
 import command.Command;
 import command.EmptyCommand;
-import command.serviceCommand.AddServiceCommand;
-import command.serviceCommand.RemoveServiceCommand;
-import command.serviceCommand.ViewServiceCommand;
+import command.servicecommand.AddServiceCommand;
+import command.servicecommand.RemoveServiceCommand;
+import command.servicecommand.ViewServiceCommand;
 import exception.DukeException;
 
 public class ServiceParser {

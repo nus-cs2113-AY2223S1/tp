@@ -3,10 +3,10 @@ package parser;
 import command.Command;
 import command.EmptyCommand;
 import command.petcommand.RemovePetCommand;
-import command.taskCommand.AddTaskCommand;
-import command.taskCommand.ReassignTaskCommand;
-import command.taskCommand.RemoveTaskCommand;
-import command.taskCommand.ViewTaskCommand;
+import command.taskcommand.AddTaskCommand;
+import command.taskcommand.ReassignTaskCommand;
+import command.taskcommand.RemoveTaskCommand;
+import command.taskcommand.ViewTaskCommand;
 import exception.DukeException;
 
 public class TaskParser {

@@ -1,4 +1,4 @@
-package command.serviceCommand;
+package command.servicecommand;
 
 import command.Command;
 import service.Service;
