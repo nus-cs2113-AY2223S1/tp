@@ -1,7 +1,7 @@
 package pet;
 
 public enum PetHealthyStatus implements PetStatus {
-    crazy,
+    fantastic,
     energetic,
     happy,
     boring,
@@ -18,8 +18,8 @@ public enum PetHealthyStatus implements PetStatus {
             return "sleepy";
         case energetic:
             return "energetic";
-        case crazy:
-            return "crazy";
+        case fantastic:
+            return "fantastic";
         default:
             return "Healthy";
         }

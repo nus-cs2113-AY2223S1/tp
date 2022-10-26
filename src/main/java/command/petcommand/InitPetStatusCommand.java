@@ -35,7 +35,7 @@ public class InitPetStatusCommand {
                 currPet.status = PetHealthyStatus.energetic;
                 break;
             case 5:
-                currPet.status = PetHealthyStatus.crazy;
+                currPet.status = PetHealthyStatus.fantastic;
                 break;
             default:
                 break;

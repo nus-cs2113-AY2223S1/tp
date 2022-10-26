@@ -2,11 +2,11 @@ package parser;
 
 import command.Command;
 import command.EmptyCommand;
-import command.petcommand.RemovePetCommand;
 import command.taskcommand.AddTaskCommand;
+import command.taskcommand.FinishTaskCommand;
 import command.taskcommand.ReassignTaskCommand;
-import command.taskcommand.RemoveTaskCommand;
 import command.taskcommand.ViewTaskCommand;
+import command.taskcommand.RemoveTaskCommand;
 import exception.DukeException;
 
 public class TaskParser {
@@ -24,7 +24,7 @@ public class TaskParser {
                 if (input.equals("view")) {
                     return new ViewTaskCommand();
                 }
-                System.out.println("Invalid Input! too little parameters entered for pet operation");
+                System.out.println("Invalid Input! too little parameters entered for task operation");
                 throw new DukeException();
             }
 
@@ -33,12 +33,14 @@ public class TaskParser {
             switch (type) {
             case AddTaskCommand.COMMAND_WORD:
                 return prepareAddTask(statement);
-            case RemovePetCommand.COMMAND_WORD:
+            case RemoveTaskCommand.COMMAND_WORD:
                 return prepareRemoveTask(statement);
             case ReassignTaskCommand.COMMAND_WORD:
                 return prepareReassignTask(statement);
+            case FinishTaskCommand.COMMAND_WORD:
+                return prepareFinishTask(statement);
             default:
-                System.out.println("Invalid Input! unrecognized pet operation");
+                System.out.println("Invalid Input! unrecognized task operation");
                 throw new DukeException();
             }
         } catch (DukeException e) {
@@ -53,7 +55,7 @@ public class TaskParser {
             int startOfD = input.indexOf(" d/");
 
             if (startOfI > startOfE || startOfE > startOfD || startOfI == -1) {
-                System.out.println("Invalid Input! format of parameters entered for adding a pet is invalid");
+                System.out.println("Invalid Input! format of parameters entered for adding a task is invalid");
                 throw new DukeException();
             }
 
@@ -62,9 +64,9 @@ public class TaskParser {
             String description = input.substring(startOfD + lengthOfSignature).trim();
 
             int appointmentIdInt = Integer.parseInt(appointmentIdString);
-            int employeeIdint = Integer.parseInt(employeeIdString);
+            int employeeIdInt = Integer.parseInt(employeeIdString);
 
-            return new AddTaskCommand(appointmentIdInt, employeeIdint, description);
+            return new AddTaskCommand(appointmentIdInt, employeeIdInt, description);
         } catch (DukeException e) {
             return new EmptyCommand();
         }
@@ -95,6 +97,21 @@ public class TaskParser {
             int employeeIndexInt = Integer.parseInt(employeeIndexString);
 
             return new ReassignTaskCommand(taskIndexInt, employeeIndexInt);
+        } catch (DukeException e) {
+            return new EmptyCommand();
+        }
+    }
+
+    public Command prepareFinishTask(String input) {
+        try {
+            int startOfI = input.indexOf(" i/");
+            if (startOfI == -1) {
+                System.out.println("Invalid Input! format of parameters entered for adding a task is invalid");
+                throw new DukeException();
+            }
+            String taskIndexString = input.substring(startOfI + lengthOfSignature).trim();
+            int taskIndexInt = Integer.parseInt(taskIndexString);
+            return new FinishTaskCommand(taskIndexInt);
         } catch (DukeException e) {
             return new EmptyCommand();
         }
