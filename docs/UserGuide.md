@@ -16,13 +16,9 @@
 * [FAQ](#faq)
 * [Command Summary](#command-summary)
 
-<hr>
-
 ## Introduction
 
 MoneyGoWhere is a financial planner to help you manage your finances.
-
-<hr>
 
 ## Quick Start
 
@@ -31,15 +27,10 @@ MoneyGoWhere is a financial planner to help you manage your finances.
     2. Verify that the version of Java installed is ```Java 11```.
 2. Ensure that you have write permissions for the directory in which you are executing the program.
 
-<hr>
-
 ## Legend
 > ⚠️ **Warnings**
 
 > 💡 **Tips**
-
-
-<hr>
 
 ## Features
 
@@ -52,12 +43,13 @@ Syntax: `Add-Expense -n NAME -a AMOUNT [-d DATE_TIME] [-t DESCRIPTION] [-c CATEG
 <details>
 <summary>⚠️️️️ Syntax Notes</summary>
 
-* `NAME`, `DESCRIPTION`, `CATEGORY`, `REMARKS` and `MODE OF PAYMENT` are text strings. You may use spaces within the text if you wrap the text with double quotes.
-* `CURRENCY` is a text string. It must be a valid currency code.
-* `AMOUNT` is a decimal value.
-* `DATE_TIME` is a text string in the format `"dd/MM/yyyy HHmm"`.
++ `NAME`, `DESCRIPTION`, `CATEGORY`, `REMARKS` and `MODE OF PAYMENT` are text strings. You may use spaces within the text if you wrap the text with double quotes.
++ `CURRENCY` is a text string. It must be a valid currency code.
++ `AMOUNT` is a decimal value.
++ `DATE_TIME` is a text string in the format `"dd/MM/yyyy HHmm"`.
 </details>
 
+<br>
 
 Examples of usage: 
 * `Add-Expense -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359" -t "Monthly payment" -c "Work expenses" -r "Remarks here" -x USD -p PayLah`
@@ -78,8 +70,9 @@ Syntax: `View-Expense [-e EXPENSE_NUMBER]`
 If this argument is provided, MoneyGoWhere will only display the specified expense.
 </details>
 
-Example of usage:
+<br>
 
+Example of usage:
 * `View-Expense`
 * `View-Expense -e 1`
 
@@ -96,8 +89,9 @@ Syntax: `Delete-Expense -e EXPENSE_NUMBER`
 `EXPENSE_NUMBER` is an integer value.
 </details>
 
-Example of usage:
+<br>
 
+Example of usage:
 * `Delete-Expense -e 1`
 
 <hr>
@@ -117,9 +111,9 @@ Syntax: `Edit-Expense -e EXPENSE_NUMBER [-n NAME] [-a AMOUNT] [-d DATE_TIME] [-t
 * `DATE_TIME` is a text string in the format `"dd/MM/yyyy HHmm"`.
 </details>
 
+<br>
 
 Example of usage:
-
 * `Edit-Expense -e 1 -n Subscription -a 13.37`
 * `Edit-Expense -e 1 -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359" -t "Monthly payment" -c "Work expenses" -r "Remarks here" -x USD -p PayLah`
 
@@ -138,6 +132,7 @@ Syntax: `Sort-Expense -t TYPE -o ORDER`
 * `ORDER` is a text string. It can be either `ascending` or `descending`.
 </details>
 
+<br>
 
 Example of usage:
 * `Sort-Expense -t date -o ascending`
@@ -160,11 +155,10 @@ Syntax: `Convert-Currency -e EXPENSE_NUMBER -x CURRENCY [-r RATE]`
 * `RATE` is a decimal value. This rate should be the rate to convert the expense amount from the old currency to the new currency.
 </details>
 
+<br>
+
 Example of usage:
-
 * `Convert-Currency -e 1 -x USD -r 1.35`
-
-<hr>
 
 ## Managing your recurring payments
 ### Adding recurring payments: `Add-RecurringPayment`
@@ -180,6 +174,8 @@ Syntax: `Add-RecurringPayment -n NAME -i INTERVAL -a AMOUNT [-t DESCRIPTION] [-c
 * `AMOUNT` is a decimal value.
 * `MODE_OF_PAYMENT` is a text string.
 </details>
+
+<br>
 
 Example of usage:
 * `Add-RecurringPayment -n "Mobile Plan" -i 30 -a 20.00`
@@ -198,8 +194,9 @@ Syntax: `View-RecurringPayment [-r RECURRING_PAYMENT_INDEX]`
 * `RECURRING_PAYMENT_INDEX` is an integer value. If this argument is provided, MoneyGoWhere will only display the specified recurring payment.
 </details>
 
-Example of usage:
+<br>
 
+Example of usage:
 * `View-RecurringPayment`
 * `View-RecurringPayment -r 1`
 
@@ -216,8 +213,9 @@ Syntax: `Delete-RecurringPayment -r RECURRING_PAYMENT_INDEX`
 * `RECURRING_PAYMENT_INDEX` is an integer value.
 </details>
 
-Example of usage:
+<br>
 
+Example of usage:
 * `Delete-RecurringPayment -r 1`
 
 <hr>
@@ -236,8 +234,9 @@ Syntax: `Edit-RecurringPayment -r RECURRING_PAYMENT_INDEX [-n NAME] [-i INTERVAL
 * `AMOUNT` is a decimal value.
 </details>
 
-Example of usage:
+<br>
 
+Example of usage:
 * `Edit-RecurringPayment -r 1 -a 20.00`
 * `Edit-RecurringPayment -r 1 -n "Mobile Plan" -i 30 -a 20.00 -t "Monthly payment for my mobile plan" -c Telecom -x SGD -p Card`
 
@@ -248,14 +247,17 @@ Pays a recurring payment from the list of recurring payments.
 
 Syntax: `Pay-RecurringPayment -r RECURRING_PAYMENT_INDEX [-d DATE_TIME]`
 
+<details>
+<summary>⚠️️️️ Syntax Notes</summary>
+
 * `RECURRING_PAYMENT_INDEX` is an integer value.
 * `DATE_TIME` is a text string in the format `"dd/MM/yyyy HHmm"`. If this value is not provided, MoneyGoWhere will save the current date and time for you.
+</details>
+
+<br>
 
 Example of usage:
-
 * `Pay-RecurringPayment -r 1`
-
-<hr>
 
 ## Handling your data
 ### Merging a data file: `Merge-File`
@@ -269,8 +271,9 @@ Syntax: `Merge-File [-p PATH_STRING]`
 * `RECURRING_PAYMENT_INDEX` is an integer value. If this argument is provided, MoneyGoWhere will only display the specified recurring payment.
 </details>
 
-Example of usage:
+<br>
 
+Example of usage:
 * `Merge-File -p "C:\Users\the_d\Downloads\expenses.xml"`
 
 <hr>
@@ -293,8 +296,6 @@ Syntax: `exit`
 Example of usage:
 * `exit`
 
-<hr>
-
 ## FAQ
 
 **Q**: How do I transfer my data to another computer?
@@ -302,8 +303,6 @@ Example of usage:
 **A**: There will be a 'Memory' folder created in the same directory as your .jar file. 
 To transfer your data, simply copy the whole folder over to the same directory as the .jar 
 file in your other devices. Data will be saved automatically.
-
-<hr>
 
 ## Command Summary
 
@@ -324,5 +323,3 @@ A list of all valid commands.
 * Help: `help`
 * Exit: `exit`
 
-<hr>
-<br>
