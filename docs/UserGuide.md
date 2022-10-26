@@ -142,6 +142,23 @@ CarparkID C7 at BLK 349-355 `CLEMENTI` `AVE` `2`
 
 Example of usage:
 
+**Input:**
+
+```list```
+
+**Output:**
+
+```
+CarparkID T0129 at TANJONG KATONG COMPLEX
+   182 available lots total
+CarparkID KU1 at BLK 301/305-306/311-318 UBI AVENUE 1
+   376 available lots total
+CarparkID SAM2 at BLK 61 STRATHMORE AVENUE
+   302 available lots total
+CarparkID HG80 at BLK 941A HOUGANG STREET 92
+   730 available lots total
+```
+
 ### Update data from API
 
 **Fetches the most updated availability data and stores it locally.**
@@ -155,7 +172,39 @@ Example of usage:
 **Saves the carpark to a list of favourited carparks for easy subsequent access.**
 > Format: `favourite CARPARK_ID`
 
-- The command requires user to input a valid and existing carpark ID.
+- The command requires user to input a valid and existing carpark ID that is not already favourited.
+
+Example of usage:
+
+**Input (assuming carpark ID 1 is not favourited):**
+
+```favourite 1```
+
+**Output:**
+
+```
+Added Carpark 1 to favourites!
+```
+
+**Input (assuming carpark ID J8 is already favourited):**
+
+```favourite J8```
+
+**Output:**
+
+```
+Carpark already in list.
+```
+
+**Input:**
+
+```favourite not_a_carpark_ID```
+
+**Output:**
+
+```
+No carpark was found.
+```
 
 ### Unfavourite carparks by carpark ID 
 
@@ -164,10 +213,51 @@ Example of usage:
 
 - The command requires user to input a valid and existing carpark ID that is already favourited.
 
-### List all IDs of favourite carparks
+Example of usage:
 
-**Displays the IDs of all favourited carparks.**
+**Input (assuming carpark ID 1 is favourited):**
+
+```unfavourite 1```
+
+**Output:**
+
+```
+Removed Carpark 1 to favourites!
+```
+
+**Input (assuming carpark ID M32 is not favourited):**
+
+```unfavourite M32```
+
+**Output:**
+
+```
+No carpark was found.
+```
+
+### List lot availability of all favourite carparks
+
+**Displays the name, ID and total lot availability of all favourite carparks.**
 > Format: `favourite list`
+
+Example of usage:
+
+**Input:**
+
+```favourite list```
+
+**Output:**
+
+```
+CarparkID D0006 at DUXTON HILL OFF STREET: 104 lots available
+===========================================
+CarparkID CKM6 at BLK 462A CHOA CHU KANG AVE 4: 1606 lots available
+===========================================
+CarparkID A9 at BLK 202/203 ANG MO KIO STREET 22: 102 lots available
+===========================================
+CarparkID J8 at BLK 232/240 JURONG EAST ST 21: 318 lots available
+===========================================
+```
 
 ### Exiting the program
 
