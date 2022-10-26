@@ -45,14 +45,13 @@ public class TaskParser {
                 System.out.println("Invalid Input! unrecognized pet operation");
                 throw new DukeException();
             }
-        }
-        catch (DukeException e){
+        } catch (DukeException e) {
             return new EmptyCommand();
         }
     }
 
-    public Command prepareAddTask(String input){
-        try{
+    public Command prepareAddTask(String input) {
+        try {
             int startOfI = input.indexOf(" i/");
             int startOfE = input.indexOf(" e/");
             int startOfD = input.indexOf(" d/");
@@ -70,27 +69,23 @@ public class TaskParser {
             int employeeIdint = Integer.parseInt(employeeIdString);
 
             return new AddTaskCommand(appointmentIdInt, employeeIdint, description);
-        }
-
-        catch (DukeException e){
+        } catch (DukeException e) {
             return new EmptyCommand();
         }
     }
 
-    public Command prepareRemoveTask(String input){
-        try{
+    public Command prepareRemoveTask(String input) {
+        try {
             int index = parser.indexOfInput(input);
             return new RemoveTaskCommand(index);
-        }
-
-        catch (DukeException e){
+        } catch (DukeException e) {
             System.out.println("Sorry, index entered invalid for removing an task");
             return new EmptyCommand();
         }
     }
 
-    public Command prepareReassignTask(String input){
-        try{
+    public Command prepareReassignTask(String input) {
+        try {
             int startOfI = input.indexOf(" i/");
             int startOfE = input.indexOf(" e/");
             if (startOfI > startOfE || startOfI == -1) {
@@ -106,7 +101,7 @@ public class TaskParser {
             return new ReassignTaskCommand(TaskIndexInt, EmployeeIndexInt);
         }
 
-        catch (DukeException e){
+        catch (DukeException e) {
             return new EmptyCommand();
         }
     }

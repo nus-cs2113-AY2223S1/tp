@@ -10,7 +10,7 @@ public class Parser {
     private static AppointmentParser appointmentParser;
     private static TaskParser taskParser;
 
-    public Parser(){
+    public Parser() {
         serviceParser = new ServiceParser(this, lengthOfSignature);
         employeeParser = new EmployeeParser(this, lengthOfSignature);
         petParser = new PetParser(this, lengthOfSignature);
@@ -19,7 +19,7 @@ public class Parser {
     }
 
 
-    public Command parseCommand(String input) throws DukeException{
+    public Command parseCommand(String input) throws DukeException {
         input = input.trim();
         if (!input.contains(" ")) {
             if (input.equals("bye")) {
@@ -52,21 +52,21 @@ public class Parser {
     public int indexOfInput(String input) throws DukeException {
         try {
             return numberInInput(input, " i/");
-        } catch (DukeException e){
+        } catch (DukeException e) {
             throw new DukeException();
         }
     }
 
     public int numberInInput(String input, String format) throws DukeException {
-        if(!input.contains(format)){
+        if (!input.contains(format)) {
             throw new DukeException();
         }
 
-        String id = input.substring(input.indexOf(format)+lengthOfSignature);
+        String id = input.substring(input.indexOf(format) + lengthOfSignature);
 
         try{
             isInt(id);
-        } catch (DukeException e){
+        } catch (DukeException e) {
             throw new DukeException();
         }
 
@@ -76,7 +76,7 @@ public class Parser {
 
     public boolean isInt(String input) throws DukeException {
         Boolean strResult = input.matches("\\d?");
-        if(strResult) {
+        if (strResult) {
             return true;
         }
 
@@ -86,13 +86,13 @@ public class Parser {
     public int isStatus(String input) throws DukeException {
         try {
             return numberInInput(input, " s/");
-        } catch (DukeException e){
+        } catch (DukeException e) {
             throw new DukeException();
         }
     }
 
     public int isHealthy(String input) throws DukeException {
-        try{
+        try {
             return numberInInput(input, " h/");
         } catch (DukeException e){
             throw new DukeException();

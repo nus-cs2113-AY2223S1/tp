@@ -20,7 +20,7 @@ public class Task {
         this.isDone = false;
     }
 
-    public void setDone(){
+    public void setDone() {
         this.isDone = true;
     }
 
@@ -45,9 +45,9 @@ public class Task {
     }
 
     public String getStatus() {
-        if(isDone){
+        if (isDone) {
             return "Done";
-        } else{
+        } else {
             return "Not Done";
         }
     }

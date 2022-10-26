@@ -1,6 +1,6 @@
 package pet;
 
-public enum PetUnhealthyStatus implements PetStatus{
+public enum PetUnhealthyStatus implements PetStatus {
     exhausted,
     painful,
     injured,
@@ -8,7 +8,7 @@ public enum PetUnhealthyStatus implements PetStatus{
     dying
     ;
 
-    public String getPetStatusDescription(){
+    public String getPetStatusDescription() {
         switch (this) {
         case exhausted:
             return "exhausted";
