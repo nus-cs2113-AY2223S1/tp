@@ -16,12 +16,21 @@ public class Ui {
     }
 
     /**
-     * Print string to command line.
+     * Print string to command line with new line.
      *
      * @param line String to print.
      */
     public void println(String line) {
         System.out.println(line);
+    }
+
+    /**
+     * Print string to command line without new line.
+     *
+     * @param line String to print.
+     */
+    public void print(String line) {
+        System.out.print(line);
     }
 
     /**
@@ -39,7 +48,7 @@ public class Ui {
      * @return User input.
      */
     public String getCommand() {
-        println("Enter a command:");
+        print("Enter a command: ");
         return getLine();
     }
 
