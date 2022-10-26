@@ -32,6 +32,9 @@ AddressBook-Level3 https://github.com/se-edu/addressbook-level3
 ### Marking favourite reviews and listing all favourites
 ![img.png](imgs/favouriteSequence.png)
 
+### Deleting a review from the review list
+![img.png](imgs/deleteSequence.png)
+
 ## Product scope
 ### Target user profile
 
