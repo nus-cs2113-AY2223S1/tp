@@ -262,8 +262,31 @@ public class TransactionList {
         return categoricalSavings;
     }
 
+    //@@paullowse
     /**
-     * Formats the hashmap of categorical savings into a categorical savings list.
+     * Reads the transactions list and adds each amount to the categories in categorical savings hashmap.
+     *
+     * @param categoricalSavings A hashmap containing all category-amount pair for total savings.
+     * @return A hashmap containing all category-amount pair for total savings.
+     */
+    public HashMap<String, Integer> processCategoricalSavings(ArrayList<Transaction> timeTransactions,
+                                                              HashMap<String, Integer> categoricalSavings) {
+        for (Transaction transaction : timeTransactions) {
+            String category = transaction.getCategory();
+            int amount = transaction.getAmount();
+            // Creates a new category with starter amount if category not exists in hashmap
+            if (!categoricalSavings.containsKey(category)) {
+                categoricalSavings.put(category, amount);
+                continue;
+            }
+            categoricalSavings.put(category, categoricalSavings.get(category) + amount);
+        }
+
+        return categoricalSavings;
+    }
+
+    /**
+     * Formats the hashmap of categorical savings into a categorical savings list, using default transactions.
      *
      * @return A string that represents the formatted categorical savings list.
      */
@@ -272,6 +295,28 @@ public class TransactionList {
         HashMap<String, Integer> categoricalSavings = new HashMap<>();
         // Adds each amount from transactions list to the categories in categorical savings hashmap
         categoricalSavings = processCategoricalSavings(categoricalSavings);
+
+        // Formats every entry in the hashmap into a categorical savings list
+        for (HashMap.Entry<String, Integer> entry : categoricalSavings.entrySet()) {
+            categoricalSavingsList += String.format("%s%s%s %s%s%s", PREFIX_CATEGORY, entry.getKey(),
+                    POSTFIX_CATEGORY, DOLLAR_SIGN, entry.getValue(), LINE_SEPARATOR);
+        }
+
+        return categoricalSavingsList;
+    }
+
+    //@@chydarren
+    /**
+     * Formats the hashmap of categorical savings into a categorical savings list, using timeTransactions.
+     *
+     * @param timeTransactions An arraylist of transactions.
+     * @return A string that represents the formatted categorical savings list.
+     */
+    public String listCategoricalSavings(ArrayList<Transaction> timeTransactions) {
+        String categoricalSavingsList = "";
+        HashMap<String, Integer> categoricalSavings = new HashMap<>();
+        // Adds each amount from transactions list to the categories in categorical savings hashmap
+        categoricalSavings = processCategoricalSavings(timeTransactions, categoricalSavings);
 
         // Formats every entry in the hashmap into a categorical savings list
         for (HashMap.Entry<String, Integer> entry : categoricalSavings.entrySet()) {
@@ -311,8 +356,7 @@ public class TransactionList {
             int updatedIncome = monthlyExpenditure.get(date)[0] + income;
             int updatedExpense = monthlyExpenditure.get(date)[1] + expense;
 
-            monthlyExpenditure.put(date, new int[]{updatedIncome, updatedExpense,
-                updatedIncome - updatedExpense});
+            monthlyExpenditure.put(date, new int[]{updatedIncome, updatedExpense, updatedIncome - updatedExpense});
         }
 
         return monthlyExpenditure;
@@ -326,16 +370,18 @@ public class TransactionList {
      * @return A string containing the comment related to the spending habit for the month.
      */
     public String getSpendingHabitComment(int income, int savings) {
-        int savingsPercentage = HUNDRED_PERCENT * savings / income;
+        if (income > MIN_AMOUNT_VALUE) {
+            int savingsPercentage = HUNDRED_PERCENT * savings / income;
 
-        if (savingsPercentage >= HUNDRED_PERCENT) {
-            return INFO_STATS_HABIT_VERY_HIGH_SAVINGS.toString();
-        } else if (savingsPercentage >= SEVENTY_FIVE_PERCENT) {
-            return INFO_STATS_HABIT_HIGH_SAVINGS.toString();
-        } else if (savingsPercentage >= FIFTY_PERCENT) {
-            return INFO_STATS_HABIT_MEDIUM_SAVINGS.toString();
-        } else if (savingsPercentage >= TWENTY_FIVE_PERCENT) {
-            return INFO_STATS_HABIT_LOW_SAVINGS.toString();
+            if (savingsPercentage >= HUNDRED_PERCENT) {
+                return INFO_STATS_HABIT_VERY_HIGH_SAVINGS.toString();
+            } else if (savingsPercentage >= SEVENTY_FIVE_PERCENT) {
+                return INFO_STATS_HABIT_HIGH_SAVINGS.toString();
+            } else if (savingsPercentage >= FIFTY_PERCENT) {
+                return INFO_STATS_HABIT_MEDIUM_SAVINGS.toString();
+            } else if (savingsPercentage >= TWENTY_FIVE_PERCENT) {
+                return INFO_STATS_HABIT_LOW_SAVINGS.toString();
+            }
         }
         return INFO_STATS_HABIT_VERY_LOW_SAVINGS.toString();
     }
@@ -345,7 +391,7 @@ public class TransactionList {
      *
      * @return A string that represents the formatted monthly expenditure list.
      */
-    public String listMonthlyExpenditure()  {
+    public String listMonthlyExpenditure() {
         String monthlyExpenditureList = "";
         HashMap<String, int[]> monthlyExpenditure = new HashMap<>();
         // Adds each amount from transactions list to the month and year in monthly expenditure hashmap
@@ -373,11 +419,11 @@ public class TransactionList {
     /**
      * Produces Categorical saving list for timeTransactions.
      *
-     * @param timeTransactions  An instance of the TransactionList class.
-     * @param year              A specified year.
-     * @param month             A specified month.
-     * @param period            A specified period of time.
-     * @param number            A specified number of periods.
+     * @param timeTransactions An instance of the TransactionList class.
+     * @param year             A specified year.
+     * @param month            A specified month.
+     * @param period           A specified period of time.
+     * @param number           A specified number of periods.
      * @return String output of transactions for the time period.
      */
     public String listTimeStats(ArrayList<Transaction> timeTransactions, int year, int month, String period,
@@ -395,7 +441,7 @@ public class TransactionList {
                     + LINE_SEPARATOR + LINE_SEPARATOR + INFO_STATS_CATEGORIES_HEADER + LINE_SEPARATOR;
         }
 
-        String categoricalList = listCategoricalSavings();
+        String categoricalList = listCategoricalSavings(timeTransactions);
         timeInsightsList += categoricalList;
         // Formats every entry in the hashmap into a time insights list
         //for (Transaction entry : timeTransactions) {
@@ -409,7 +455,7 @@ public class TransactionList {
     /**
      * Produces Expense, Income and Savings statistics.
      *
-     * @param timeTransactions  An instance of the TransactionList class.
+     * @param timeTransactions An instance of the TransactionList class.
      * @return An amount arraylist of Expense and Income.
      */
     public ArrayList<String> processTimeSummaryStats(ArrayList<Transaction> timeTransactions) {

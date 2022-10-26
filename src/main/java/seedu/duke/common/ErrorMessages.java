@@ -14,7 +14,7 @@ public enum ErrorMessages {
     ERROR_GLOBAL_EMPTY_PARAMETER("Parameter behind tag(s) is found to be empty, please check your input!"),
     ERROR_GLOBAL_INVALID_INDEX("Invalid index, please ensure your index is correct!"),
     ERROR_GLOBAL_INVALID_MONTH("Invalid month, please check your input! Note: Month should be between 1 to 12."),
-    ERROR_GLOBAL_INVALID_YEAR("Invalid year, please check your input! Note: Year should be 1000 onwards."),
+    ERROR_GLOBAL_INVALID_YEAR("Invalid year, please check your input! Note: Year should be 1000 - 9999."),
     ERROR_GLOBAL_INVALID_PERIOD("Type of period given is invalid, please check your input!"),
     ERROR_GLOBAL_INVALID_NUMBER("Number for period stats given is invalid, please check your input!"),
     ERROR_GLOBAL_NUMBER_NOT_NUMERIC("Non-integer detected, please enter a numerical integer!"),
@@ -25,6 +25,7 @@ public enum ErrorMessages {
     ERROR_TRANSACTION_INVALID_TYPE("Type of transaction given is invalid, please check your input!"),
     ERROR_FIND_COMMAND_MISSING_KEYWORDS("Keyword(s) for your search expression missing, please check your input!"),
     ERROR_STATS_COMMAND_INVALID_TYPE("Type of statistics given is invalid, please check your input!"),
+    ERROR_STATS_INVALID_NUMBER("Invalid number, please check your input! Note: Stats number must between 1 - 100"),
     ERROR_UNKNOWN_HELP_OPTION("The parameter used for help option is unknown, please check your input!"),
     ERROR_STORAGE_TRANSACTION_CORRUPTED("Transaction values corrupted."
             + " To preserve data, please STOP the program and edit your data file correctly."),

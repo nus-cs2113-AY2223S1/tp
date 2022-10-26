@@ -2,24 +2,24 @@
 
 - [Introduction](#introduction)
 - [About This Guide](#about-this-guide)
-    * [What is in Moolah Manager](#what-is-in-moolah-manager)
-    * [Command Format](#command-format)
+  * [What is in Moolah Manager](#what-is-in-moolah-manager)
+  * [Command Format](#command-format)
 - [Getting Started](#getting-started)
-    * [Setting Up](#setting-up)
-    * [Viewing Help: `help`](#viewing-help---help-)
+  * [Setting Up](#setting-up)
+  * [Viewing Help: `help`](#viewing-help---help-)
 - [Managing Transactions](#managing-transactions)
-    * [Adding a Transaction: `add`](#adding-a-transaction---add-)
-    * [Editing a Transaction: `edit`](#editing-a-transaction---edit-)
-    * [Listing the Transactions: `list`](#listing-the-transactions---list-)
-    * [Searching for Transactions: `find`](#searching-for-transactions---find-)
-    * [Deleting a Transaction: `delete`](#deleting-a-transaction---delete-)
-    * [Purging all Transactions: `purge`](#purging-all-transactions---purge-)
+  * [Adding a Transaction: `add`](#adding-a-transaction---add-)
+  * [Editing a Transaction: `edit`](#editing-a-transaction---edit-)
+  * [Listing the Transactions: `list`](#listing-the-transactions---list-)
+  * [Searching for Transactions: `find`](#searching-for-transactions---find-)
+  * [Deleting a Transaction: `delete`](#deleting-a-transaction---delete-)
+  * [Purging all Transactions: `purge`](#purging-all-transactions---purge-)
 - [Budgeting and Financial Insights](#budgeting-and-financial-insights)
-    * [Viewing the Statistics: `stats`](#viewing-the-statistics---stats-)
-    * [Managing the Budget: `budget`](#managing-the-budget---budget-)
+  * [Viewing the Statistics: `stats`](#viewing-the-statistics---stats-)
+  * [Managing the Budget: `budget`](#managing-the-budget---budget-)
 - [General](#general)
-    * [Persistent Data](#persistent-data)
-    * [Exiting the Program: `exit`](#exiting-the-program---exit-)
+  * [Persistent Data](#persistent-data)
+  * [Exiting the Program: `exit`](#exiting-the-program---exit-)
 - [Command Summary](#command-summary)
 - [FAQ](#faq)
 
@@ -27,13 +27,13 @@
 
 _Written by: Chua Han Yong Darren_
 
-## About This Guide 
+## About This Guide
 
 ### What is in Moolah Manager
 
 _Written by: Paul Low_
 
-### Command Format 
+### Command Format
 
 _Written by: Chia Thin Hong_
 
@@ -113,11 +113,43 @@ _Written by: Brian Wong Yun Long_
 
 ## Command Summary
 
-{Give a 'cheat sheet' of commands here}
+
+| Command                                                                  | Command Syntax                                                               | Example                                                                                                                                                            |
+|--------------------------------------------------------------------------|------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| help                                                                     | help                                                                         | help                                                                                                                                                               |
+| help (detailed)                                                          | help o/detailed                                                              | help o/detailed                                                                                                                                                    |
+| add                                                                      | add t/TYPE c/CATEGORY a/AMOUNT d/DATE i/DESCRIPTION                          | add t/expense c/transport a/1 d/02102022 i/bus_fare <br> add t/income c/bonus a/10000000 d/03102022 i/thank_you_boss                                               |
+| list                                                                     | list                                                                         | list                                                                                                                                                               |
+| list ( with filters )                                                    | list [t/TYPE] [c/CATEGORY] [d/DATE] [m/MONTH] [y/YEAR] [p/PERIOD] [n/NUMBER] | list c/food d/13092022 <br> list t/income d/30092022  <br/>     list p/months n/1<br/>  list t/income d/30092022 y/2022<br/>   list t/income d/30092022 y/2022 m/9 |
+| statistics for categorical savings                                       | stats s/categorical_savings                                                  | stats s/categorical_savings                                                                                                                                        |
+| statistics for monthly expenditure                                       | stats s/monthly_expenditure                                                  | stats s/monthly_expenditure                                                                                                                                        |
+| statistics for time insight of a specific year OR month of specific year | stats s/time_insights y/YEAR [m/MONTH]                                       | stats s/time_insights y/2022 <br/> stats s/time_insights y/2002 m/10                                                                                               |
+| statistics for time insight for the PAST periods from current date       | stats s/time_insights p/PERIOD n/NUMBER                                      | stats s/time_insights p/weeks n/3 <br/> stats s/time_insights p/months n/12                                                                                        |
+| budget                                                                   | budget b/BUDGET                                                              | budget b/9999999999999 <br/> budget b/1                                                                                                                            |
+| delete                                                                   | delete e/ENTRY                                                               | delete e/3                                                                                                                                                         |
+| purge                                                                    | purge                                                                        | purge                                                                                                                                                              |
+| find                                                                     | find KEYWORDS                                                                | find bus_fare <br> find transport <br> find Sep 13                                                                                                                 |
+| bye                                                                      | bye                                                                          | bye                                                                                                                                                                |
+
+Tags used ( **OPTIONAL** tags are enclosed with SQUARE BRACKETS "[" and "]" in the **command syntax in the table** above):
+* The `TYPE` is either `"expense"` or `"income"`.
+* The `CATEGORY` is a one-word parameter flexibly defined by the user. [ No numerals, symbols or spacings are allowed ]
+* The `AMOUNT` is a positive numeral that is above 0 and below 100000001. [ No alphabets, symbols or spacings allowed ]
+* The `DATE` MUST be in ddMMyyyy format.
+* The `DESCRIPTION` is a single limitless parameter defined by the user. [ Spacings are not allowed ]
+* The `ENTRY` is the entry value which is a positive numeral that is above 0 and below 100000001. [ No alphabets, symbols or spacings allowed ]
+* The `KEYWORDS` are parameter value(s) within Search-fields that would be searched.  [ Available Search-fields: date, type, category , amount, description. Cross-search across different Search-fields NOT supported ]
+* The `BUDGET` is a positive numeral that is above 0 and below a Trillion (1000000000000) . [ No alphabets, symbols or spacings allowed ]
+* The `YEAR` is the year in yyyy format.
+* The `MONTH` is the month in numerical form. [ From 1 -12 , where 1 represents January ]
+* The `PERIOD` is the selection of either periods in `"weeks"` or `"months"`. [ Used with "n/NUMBER" ONLY ]
+* The `NUMBER` is the number of periods to view.  [ Used with "p/PERIODS" ONLY ]
+
+
 
 _Written by: Yong Chin Han_
 
-## FAQ 
+## FAQ
 
 **Q**: How do I transfer my data to another computer?
 

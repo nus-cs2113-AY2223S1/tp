@@ -7,24 +7,24 @@ import seedu.duke.data.Budget;
 import seedu.duke.data.transaction.Expense;
 import seedu.duke.data.transaction.Income;
 
+import seedu.duke.exception.GlobalDuplicateTagException;
 import seedu.duke.exception.GlobalEmptyParameterException;
 import seedu.duke.exception.GlobalInvalidMonthException;
-import seedu.duke.exception.GlobalInvalidNumberException;
 import seedu.duke.exception.GlobalInvalidPeriodException;
 import seedu.duke.exception.GlobalInvalidYearException;
-import seedu.duke.exception.GlobalNumberNotNumericException;
-import seedu.duke.exception.GlobalDuplicateTagException;
 import seedu.duke.exception.GlobalMissingTagException;
+import seedu.duke.exception.GlobalNumberNotNumericException;
+import seedu.duke.exception.GlobalUnsupportedTagException;
+import seedu.duke.exception.HelpUnknownOptionException;
+import seedu.duke.exception.InputBudgetDuplicateException;
+import seedu.duke.exception.InputBudgetInvalidAmountException;
 import seedu.duke.exception.InputTransactionInvalidAmountException;
 import seedu.duke.exception.InputTransactionInvalidCategoryException;
 import seedu.duke.exception.InputTransactionInvalidDateException;
 import seedu.duke.exception.InputTransactionInvalidTypeException;
-import seedu.duke.exception.GlobalUnsupportedTagException;
-import seedu.duke.exception.StatsInvalidTypeException;
 import seedu.duke.exception.MoolahException;
-import seedu.duke.exception.HelpUnknownOptionException;
-import seedu.duke.exception.InputBudgetInvalidAmountException;
-import seedu.duke.exception.InputBudgetDuplicateException;
+import seedu.duke.exception.StatsInvalidNumberException;
+import seedu.duke.exception.StatsInvalidTypeException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -68,6 +68,8 @@ public class ParameterParser {
     private static final int SPLIT_POSITION = 2;
     private static final int MINIMUM_TAG_LENGTH = 2;
     private static final int MINIMUM_YEAR = 1000;
+    private static final int MAXIMUM_YEAR = 9999;
+    private static final int MAXIMUM_STATS_NUMBER = 100;
     private static final int SMALLEST_POSITIVE_INTEGER = 0;
     private static final int JANUARY = 1;
     private static final int DECEMBER = 12;
@@ -425,7 +427,7 @@ public class ParameterParser {
                 throw new InputTransactionInvalidAmountException();
             }
             int amount = Integer.parseInt(parameter);
-            if (amount < MIN_AMOUNT_VALUE || amount > MAX_AMOUNT_VALUE) {
+            if (amount <= MIN_AMOUNT_VALUE || amount > MAX_AMOUNT_VALUE) {
                 parserLogger.log(Level.WARNING, "An invalid amount error is caught for the given parameter: "
                         + parameter);
                 throw new InputTransactionInvalidAmountException();
@@ -597,7 +599,7 @@ public class ParameterParser {
                     + parameter);
             throw new GlobalNumberNotNumericException();
         }
-        if (year < MINIMUM_YEAR) {
+        if (year < MINIMUM_YEAR || year > MAXIMUM_YEAR) {
             parserLogger.log(Level.WARNING, "An invalid year number error is caught for the given parameter: "
                     + parameter);
             throw new GlobalInvalidYearException();
@@ -619,8 +621,7 @@ public class ParameterParser {
         }
     }
 
-    public static int parseNumberTag(String parameter) throws GlobalNumberNotNumericException,
-            GlobalInvalidNumberException {
+    public static int parseNumberTag(String parameter) throws MoolahException {
         int statsNumber;
         try {
             statsNumber = Integer.parseInt(parameter);
@@ -629,10 +630,10 @@ public class ParameterParser {
                     + parameter);
             throw new GlobalNumberNotNumericException();
         }
-        if (statsNumber < SMALLEST_POSITIVE_INTEGER) {
+        if (statsNumber <= SMALLEST_POSITIVE_INTEGER || statsNumber > MAXIMUM_STATS_NUMBER) {
             parserLogger.log(Level.WARNING, "An invalid year number error is caught for the given parameter: "
                     + parameter);
-            throw new GlobalInvalidNumberException();
+            throw new StatsInvalidNumberException();
         }
         return statsNumber;
     }
