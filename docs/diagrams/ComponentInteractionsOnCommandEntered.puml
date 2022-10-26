@@ -33,7 +33,7 @@ MoneyGoWhere -[MONEYGOWHERE_COLOR_1]> UserInterface : run()
 activate UserInterface USER_INTERFACE_COLOR_1
 
 loop Command not equals "Bye"
-    ref over UserInterface, Parser
+    ref over User, UserInterface, Parser
         Get User Command
     end ref
 
