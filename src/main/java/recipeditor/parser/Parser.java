@@ -135,11 +135,4 @@ public class Parser {
         return output.toString();
     }
 
-    // private void checkForExcessArgument(String[] args, int length)
-    // throws ExcessArgumentException {
-    // if (args.length > length) {
-    // throw new ExcessArgumentException();
-    // }
-    // }
-
 }
