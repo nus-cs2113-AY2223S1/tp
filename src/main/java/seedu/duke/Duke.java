@@ -82,7 +82,11 @@ public class Duke {
             UI.printResponse("Error, file not found!");
             return false;
         } catch (Exceptions.FileLoadException e) {
-            UI.printResponse("Error loading last save, are you connected to the internet?\n"
+            UI.printResponse("API call failed, are you connected to the internet?\n"
+                    + "Program exiting expectedly...");
+            return false;
+        } catch (IndexOutOfBoundsException e) {
+            UI.printResponse("Corrupted file detected. Please delete all data files and relaunch the app.\n"
                     + "Program exiting expectedly...");
             return false;
         }
