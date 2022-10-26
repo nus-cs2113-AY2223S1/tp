@@ -1,0 +1,13 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+abstract class Command {
+    - input: String
+    # DESCRIPTION_DELIMITER: String 
+    
+    + getInput(): String[]
+    + {abstract} execute(State, Ui, Storage): void
+    + {abstract} isExit(): void
+    + {abstract} getExecutionMessage(): String
+}
+@enduml

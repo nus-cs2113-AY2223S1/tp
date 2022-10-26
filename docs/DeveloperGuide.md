@@ -87,13 +87,13 @@ to set up IDEA’s coding style to match ours.
 
 ## 3. Design
 
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+<!-- {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.} -->
 
 ### 3.1 Architecture
 
 **How the architecture components interact with each other**
 
-Core program flow is managed by the Duke class. 
+Core program flow is managed by the Duke class.
 
 ![Main Program Flow](images/mainProgramFlow.png)
 
@@ -107,36 +107,67 @@ Each command subclass handles its own execution.
 
 ### 3.2 Model Component
 
+The Model component is responsible for dealing with any module related data. It consists of the following classes:
+
+- `Day`: Represents a day in the timetable.
+- `LessonType`: Represents the type of lesson.
+- `Module`: Represents a module in NUS.
+- `ModuleLoader`: Loads the module information from the NUSMods resource file.
+- `RawLesson`: Represents a single block in a timetable representing one lesson slot. Properties are meant to be
+  freely accessed but not modified.
+- `SelectedModule`: Represents a module selected by the user that is to be added into his or her timetable.
+- `SemesterData`: Semester data contains all the module information pertaining to a single semester.
+- `Timetable`: Creates a timetable for the user with their selected modules and in their planning semester.
+
 ### 3.3 Parser Component
-![Parser Class](..\docs\images\parserClass.png)  
+
+![Parser Class](images/parserClass.png)  
+
+
 The <code>Parser</code> component can:
 
 - return the correct command type based on user input.
 
 ### 3.4 Command Component
+
+![Command Abstract Class](images/commandClass.png)
+
 The <code>Command</code> component can:
 - execute and return the command type based on the first word of the user input.
 
-Below is a table of command subclasses and their respective command type. The different command types extends from the 
+Below is a table of command subclasses and their respective command type. The different command types extends from the
 Command class and are all in the command package.
 
 [//]: # (if the table is not necessary, remove it)
-| Command    | Command Type              | Action                                                                  |
-|------------|---------------------------|-------------------------------------------------------------------------|
-| `add`      | `AddModuleCommand`        | Adds the user input module into their timetable.                        |
-| `delete`   | `DeleteModuleCommand`     | Deletes the user input module from their timetable.                     |
-| `help`     | `HelpCommand`             | Displays the help message.                                              |
-| `search`   | `SearchModuleCommand`     | Searches the user input module based on code, title, semester or level. |
-| `select`   | `SelectSlotCommand`       | Selects the time slot for the different lesson types.                   |
-| `semester` | `SelectSemesterCommand`   | Selects the semester that the user want.                                |
-| `get`      | `GetCommand`              | Gets all the details with the user input module code.                   |
-| `view`     | `ViewCommand`             | Views the user timetable with user's selected modules.                  |
-| `bye`      | `ExitCommand`             | Exits the program.                                                      |
-| `nil`      | `InvalidCommand`          | Displays the invalid command message.                                   |
-| `nil`      | `IncompleteModuleCommand` | Display the incomplete command message.                                 |
-| `nil`      | `UnknownCommand`          | Display the unknown command message.                                    |
+| Command Word | Command Subclass                   | Intended Outcome                                                   |
+|--------------|------------------------------------|--------------------------------------------------------------------|
+| `add`        | `AddModuleCommand`                 | Adds the user input module into their timetable.                   |
+| `delete`     | `DeleteModuleCommand`              | Deletes the user input module from their timetable.                |
+| `list`       | `DisplaySelectedModuleListCommand` | Display all the module and slot selected by user                   |
+| `bye`        | `ExitCommand`                      | Exits the program.                                                 |
+| `export`     | `ExportCommand`                    | Creates a portable NUSMod link to create their timetable on NUSMod |
+| `get`        | `GetCommand`                       | Display all details about a module.                                |
+| `help`       | `HelpCommand`                      | Display all possible command words and their usage to user.        |
+| `import`     | `ImportCommand`                    | Import user's timetable from a NUSMod share timetable link.        |
+| `search`     | `SearchModuleCommand`              | Searches similar modules based on code, title, semester or level.  |
+| `semester`   | `SelectSemesterCommand`            | Selects the semester that the user want.                           |
+| `select`     | `SelectSlotCommand`                | Selects the time slot for the different lesson types.              |
+| `view`       | `ViewCommand`                      | Views the user timetable with user's selected modules.             |
+
+<!--
+##### How the feature is implemented
+
+##### Why it is implemented this way.
+
+##### Alternatives considered.
+-->
 
 #### 3.4.1 AddModuleCommand
+
+The <code>AddModuleCommand</code> class extends from the <code>Command</code> class and adds the user input module into
+their timetable.
+
+![AddModuleCommand Class](..\docs\images\addModuleCommandClass.png)
 
 ##### How the feature is implemented
 The `AddModuleCommand` class extends the `Command` class.
@@ -153,11 +184,18 @@ in the constructor against an instance of the module the user has previously add
 method extended from super class `Object` has been overridden to return `true` for instances where `semester` and `module`
 (specifically `moduleCode` attribute from the parent class) are the same, allowing us to validate and add the desired module.
 
+The following sequence diagram shows how the undo operation works:
+
+![AddModuleCommandSequenceDiagram](images/AddModuleCommandSequenceDiagram.png)
+
 ##### Alternatives considered.
-Initially, data validation was being handled by the `Parser` class, however in the principles of avoiding tight coupling 
+Initially, data validation was being handled by the `Parser` class, however in the principles of avoiding tight coupling
 and improving cohesion, it was moved back under the `AddModuleCommand` class.
 
 #### 3.4.2 DeleteModuleCommand
+
+The <code>DeleteModuleCommand</code> class extends from the <code>Command</code> class and deletes the user input module
+from their timetable.
 
 ##### How the feature is implemented
 The `DeleteModuleCommand` class extends the `Command` class.
@@ -174,14 +212,33 @@ in the constructor against an instance of the module the user has previously add
 method extended from super class `Object` has been overridden to return `true` for instances where `semester` and `module`
 (specifically `moduleCode` attribute from the parent class) are the same, allowing us to validate and remove the desired module.
 
-
 ##### Alternatives considered.
 Once again, data validation was being handled by the `Parser` class, however in the principles of avoiding tight coupling
 and improving cohesion, it was moved back under the `DeleteModuleCommand` class.
 
 #### 3.4.3 HelpCommand
 
+The <code>HelpCommand</code> class extends from the <code>Command</code> class and displays the help message.
+
+##### How the feature is implemented
+The `HelpCommand` class extends the `Command` class
+The `HelpCommand` class compiles the description of each command keyword and their usages by invoking `getDescription` 
+and `getUsage` of the other command subclass.
+Within `HelpCommand` there are other messages that help to make it more user-friendly and intuitive to read.
+Among the message that `HelpCommand` contains, it has a link to the user guide that aim to direct user to the project repository,
+where user are able to read about the various commands in further details.
+
+##### Why it is implemented this way.
+It is to encapsulate the process of getting useful information within one class, where the class only focuses on compiling
+the information and formatting it in a way that makes most intuitive sense to the user.
+
+##### Alternatives considered.
+Each command class to print the messages sequentially, this creates unnecessary complexity when printing information as changing
+the number of commands available will involve refactoring at multiple parts of the codebase.
+
+
 #### 3.4.4 SearchModuleCommand
+![SearchModuleCommand](images/SearchModuleCommand.png)
 
 ##### How the feature is implemented
 The <code>SearchModuleCommand</code> class extends the <code>Command</code> class.
@@ -190,20 +247,32 @@ The <code>execute()</code> method will search for the user input module primaril
 with additional parameters of semester and level to narrow down the search results.
 
 ##### Why it is implemented this way.
-User may or may not know the exact module code or title. As such, the user can search for the module based on optional 
-parameters such as semester or level. However, the user must input at least the module code or title before additional 
+User may or may not know the exact module code or title. As such, the user can search for the module based on optional
+parameters such as semester or level. However, the user must input at least the module code or title before additional
 parameters can be added in order to refine the search.
 
 ##### Alternatives considered.
 We thought of implementing the search feature in a way that the required user for multiple inputs and displaying all the
-different results after each input. However, we decided against it as it would be too tedious for the user to input 
+different results after each input. However, we decided against it as it would be too tedious for the user to input
 multiple times and the search process will be too long.
 
 #### 3.4.5 SelectCommand
 
+The <code>SelectCommand</code> class extends from the <code>Command</code> class and selects the time slot for the different
+lesson types.
+
 #### 3.4.6 SelectSemesterCommand
 
+The <code>SelectSemesterCommand</code> class extends from the <code>Command</code> class and selects the semester that the
+user wish to plan for.
+
+
 #### 3.4.7 GetCommand
+
+The <code>GetCommand</code> class extends from the <code>Command</code> class and gets all the details of the module 
+that the user wants.
+
+![GetModuleCommand](images/GetModuleCommand.png)
 
 ##### How the feature is implemented
 The <code>GetCommand</code> class extends the <code>Command</code> class.
@@ -212,31 +281,31 @@ The <code>execute()</code> method will get all the module details from the user 
 
 ##### Why it is implemented this way.
 This function was implemented this way as it is the most intuitive way to get the module details. It also displays all
-the different lesson types and their respective time slots. However, if the user is planning in a semester that the 
+the different lesson types and their respective time slots. However, if the user is planning in a semester that the
 module is not offered, the user will be notified that the module is not offered in the current semester and timings will
-not be shown. This is to prevent the user from selecting a time slot that is not offered in the current semester, which 
-will reduce the chance of having an error if the user tries to select a time slot of the module that is not offered in 
+not be shown. This is to prevent the user from selecting a time slot that is not offered in the current semester, which
+will reduce the chance of having an error if the user tries to select a time slot of the module that is not offered in
 the current semester.
 
 ##### Alternatives considered.
-We thought of displaying the full module details from the search results. However, we decided against it as it would be 
+We thought of displaying the full module details from the search results. However, we decided against it as it would be
 too tedious for the user to search for the **exact module code** first before getting the details. The user may
-not know the exact module code, which is not very user-friendly and takes up a lot of time just to get the module 
-details for 1 module. 
+not know the exact module code, which is not very user-friendly and takes up a lot of time just to get the module
+details for 1 module.
 
 #### 3.4.8 ViewCommand
 
+The <code>ViewCommand</code> class extends from the <code>Command</code> class and displays the timetable of the current state's semester
+selected modules.
+
 #### 3.4.9 ExitCommand
-
-#### 3.4.10 InvalidCommand
-
-#### 3.4.11 IncompleteModuleCommand
-
-#### 3.4.12 UnknownCommand
+The <code>ExitCommand</code> class extends from the <code>Command</code> class and exits the program.
 
 ### 3.5 Utils Component
 
 #### 3.5.1 UI Component
+
+![UI Class](images/Ui.png)
 
 The <code>UI</code> component can:
 - read input from the user
@@ -244,7 +313,7 @@ The <code>UI</code> component can:
 
 ##### Why it is implemented this way
 To comply with the Model-View Controller Framework
-To separate the internal representations and processing of information from the presentation and acceptance of 
+To separate the internal representations and processing of information from the presentation and acceptance of
 information from the user
 
 ##### Alternative Considered
@@ -260,7 +329,7 @@ The <code>Link</code> component can:
 - Parse a NUSmod link to import modules into YAMOM
 
 ##### Why is it implemented this way
-To separate out the handling of NUSmod compatibility 
+To separate out the handling of NUSmod compatibility
 
 ##### Alternative Considered
 To implement the handling of export in Storage class and import in Command class
@@ -270,7 +339,7 @@ To implement the handling of export in Storage class and import in Command class
 
 #### 3.5.3 Storage Component
 
-![Storage Class](..\docs\images\storageClass.png)
+![Storage Class](images/storageClass.png)
 
 The <code>Storage</code> component can:
 
@@ -297,17 +366,17 @@ This section describes how key features of YAMOM are implemented in the latest r
 
 ### Storage feature
 
-!["Opening saved state"](..\docs\images\storageOpenPreviousState.png)  
+!["Opening saved state"](images/storageOpenPreviousState.png)  
 When the application starts up, the storage openPreviousState function will be called
 to load previous state
 
 ### Target user profile
 
-{Describe the target user profile}
+<!-- {Describe the target user profile} -->
 
 ### Value proposition
 
-{Describe the value proposition: what problem does it solve?}
+<!-- {Describe the value proposition: what problem does it solve?} -->
 
 ## 5. Documentation
 
@@ -323,23 +392,28 @@ code as far as possible.
 
 ## 6.2 Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+<!-- {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing} -->
 
 ## Appendix A: Product scope
 
 ## Appendix B: User Stories
 
 | Version | As a ... | I want to ...                                      | So that I can ...                               |
-| ------- | -------- | -------------------------------------------------- | ----------------------------------------------- |
+|---------|----------|----------------------------------------------------|-------------------------------------------------|
 | v1.0    | student  | search for modules by module code, name or faculty | quickly add them to my planner                  |
 | v1.0    | new user | view my timetable                                  | visualise my school schedule                    |
 | v1.0    | new user | add and remove modules to my planner               | customise and organise my modules this semester |
 | v1.0    | new user | view a short description of each module            | plan what modules to take                       |
 | v1.0    | student  | select timetable slots                             | plan my schedule                                |
+| v2.0    | student  | select semester                                    | plan my schedule in different semesters         |
+| v2.0    | student  | read details about a particular module             | know more about a module                        |
+| v2.0    | student  | export my timetable                                | share my timetable with my friend               |
+| v2.0    | student  | import timetable                                   | plan my timetable that is still in progress     |
+| v2.0    | user     | get help                                           | know how to use the application                 |
 
 ## Appendix C: Non-Functional Requirements
 
-<br>
+- YAMOM should display a colorful timetable to enhance readability
 
 ## Appendix D: Glossary
 
@@ -347,7 +421,9 @@ code as far as possible.
 
 ## Appendix E: Acknowledgements
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+Special thanks to the author of the following sources for inspiration and ideas that contributed to the development of 
+**YAMOM**
+- https://stackoverflow.com/questions/25853393
 
 ### Third-party libraries
 

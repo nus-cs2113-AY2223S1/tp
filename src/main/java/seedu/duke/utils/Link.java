@@ -102,9 +102,11 @@ public class Link {
         String modulesParam = infoParam[MODULES_PARAM_INDEX];
         String cleanModuleParam = modulesParam.replace(SHARE_DELIMITER, "");
         cleanModuleParam = cleanModuleParam.toUpperCase();
+
         if (cleanModuleParam.isEmpty()) {
             return;
         }
+
         String[] moduleAndLessonsArray = cleanModuleParam.split(moduleDelimiter);
         List<SelectedModule> selectedModules = new ArrayList<>();
         for (String moduleAndLessons : moduleAndLessonsArray) {
