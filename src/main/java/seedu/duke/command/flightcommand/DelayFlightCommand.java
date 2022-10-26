@@ -1,4 +1,5 @@
 package seedu.duke.command.flightcommand;
+
 import seedu.duke.command.Command;
 import seedu.duke.exceptions.SkyControlException;
 import seedu.duke.operationlist.OperationList;
@@ -9,9 +10,10 @@ import java.util.logging.LogManager;
 import java.util.logging.Level;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.FileHandler;
-public class DelayFlightCommand extends Command{
 
-    private static final Logger LOGGER = Logger.getLogger(AddFlightCommand.class.getName());
+public class DelayFlightCommand extends Command {
+
+    private static final Logger LOGGER = Logger.getLogger(DelayFlightCommand.class.getName());
 
     public static void setupLogger() {
         LogManager.getLogManager().reset();
@@ -32,6 +34,7 @@ public class DelayFlightCommand extends Command{
             DelayFlightCommand.LOGGER.log(Level.SEVERE, ui.getLoggerError());
         }
     }
+
     public void execute(OperationList entityList, String lineInput) throws SkyControlException {
         inputWords = lineInput.split("\\s+");
         String flightNum = getFlightNumFromModifyCmd(inputWords);

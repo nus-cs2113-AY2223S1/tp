@@ -21,9 +21,6 @@ public class FlightParser extends Parser {
         case "delete":
             command = new DeleteFlightCommand();
             break;
-        case "delay":
-//            FlightList.delayOperation(command.toString());
-            break;
         default:
             throw new SkyControlException(ui.getErrorMessage());
         }

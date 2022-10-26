@@ -74,6 +74,11 @@ public class PassengerList extends OperationList {
     }
 
     @Override
+    public void delayFlightDeparture(String flightNum, String newDepartureTime) {
+        modifyPassengersDepartureTime(flightNum, newDepartureTime);
+    }
+
+    @Override
     public void modifyFlightNum(String flightNum, String newFlightNum) {
         modifyPassengersFlightNum(flightNum, newFlightNum);
     }
@@ -81,11 +86,6 @@ public class PassengerList extends OperationList {
     @Override
     public void modifyGateNum(String flightNum, String newGateNum) {
         modifyPassengersGateNum(flightNum, newGateNum);
-    }
-
-    @Override
-    public void delayFlightDeparture(String flightNum, String newDepartureTime) throws SkyControlException {
-        modifyPassengersDepartureTime(flightNum, newDepartureTime);
     }
 
     //@@author ivanthengwr
@@ -150,9 +150,9 @@ public class PassengerList extends OperationList {
 
     private void modifyPassengersDepartureTime(String flightNum, String newDepartureTime) {
         getNumberOfPassengers();
-        for(int i = 0; i < numOfPassengers; i++) {
+        for (int i = 0; i < numOfPassengers; i++) {
             PassengerInfo passenger = passengers.get(i);
-            if(passenger.getFlightNumber().equals(flightNum)) {
+            if (passenger.getFlightNumber().equals(flightNum)) {
                 passenger.setDepartureTime(newDepartureTime);
             }
         }

@@ -152,7 +152,7 @@ public class FlightList extends OperationList {
             validateDetailFormat();
             checkFlightNumberDuplicates();
             checkAvailableGateNumber();
-            if(isDelay) {
+            if (isDelay) {
                 checkDelayTime();
             }
         } catch (Exception e) {

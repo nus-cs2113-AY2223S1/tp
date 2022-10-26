@@ -67,11 +67,9 @@ public class Parser {
             command = FlightParser.parse(inputWords);
         } else if (isExit) {
             command = new ExitCommand();
-        } else if (isModify) {
+        } else if (isModify | isDelay) {
             command = ModificationParser.parse(inputWords);
-        } else if (isDelay) {
-            command = ModificationParser.parse(inputWords);
-        } else {
+        }  else {
             throw new SkyControlException(ui.getErrorMessage());
         }
         return command;
