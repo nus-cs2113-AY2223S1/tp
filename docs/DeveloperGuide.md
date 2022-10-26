@@ -69,22 +69,6 @@ The UI component is responsible for all user interfaces of the application.
 2. `AddMode` calls `Recipe` to add new recipe into the list.
 3. `AddMode` calls `Ingredient` to parse ingredients according to its name, amount and unit.
 
-
-### Recipe Module
-The recipe module encapsulates the array, recipe and ingredient objects.
-
-<p align="center" width="100%">
-  <img width="80%" src="images/RecipeModuleDiagram.png" alt="Recipe Module Diagram"/>
-</p>
-
-**API:** `RecipeList.java`
-1. `RecipeList` calls `Recipe` to add new recipe to the list
-2. `RecipeList` calls `Recipe` to edit existing recipes
-3. `RecipeList` calls `Recipe` to delete a recipe
-
-**API:** `Recipe.java`
-1. `Recipe` calls `Ingredient` to add, edit or delete ingredients
-
 ### Storage Component
 The storage component allows data to be read from and saved to a storage file.
 
@@ -132,6 +116,21 @@ otherwise show error message on `index out of bound`
 
 `ViewCommand`: View an existing `Recipe` at a valid index from `RecipeList`,
 otherwise show error message on `index out of bound`
+
+### Recipe Module
+The recipe module encapsulates the array, recipe and ingredient objects.
+
+<p align="center" width="100%">
+  <img width="80%" src="images/RecipeModuleDiagram.png" alt="Recipe Module Diagram"/>
+</p>
+
+**API:** `RecipeList.java`
+1. `RecipeList` calls `Recipe` to add new recipe to the list
+2. `RecipeList` calls `Recipe` to edit existing recipes
+3. `RecipeList` calls `Recipe` to delete a recipe
+
+**API:** `Recipe.java`
+1. `Recipe` calls `Ingredient` to add, edit or delete ingredients
 
 ## Product scope
 ### Target user profile

@@ -1,25 +1,28 @@
 package recipeditor.ui;
 
-import com.sun.source.tree.ReturnTree;
-import recipeditor.recipe.Ingredient;
+import recipeditor.edit.Add;
+import recipeditor.edit.Delete;
+import recipeditor.edit.EditModeCommand;
+import recipeditor.edit.Invalid;
+import recipeditor.edit.Swap;
+import recipeditor.edit.Change;
+import recipeditor.edit.View;
+import recipeditor.edit.Quit;
 import recipeditor.recipe.Recipe;
 import recipeditor.recipe.RecipeList;
-import recipeditor.command.Command;
-import recipeditor.command.InvalidCommand;
 
 public class EditMode {
-    private static final String INVALID_INPUT = "Invalid input given.";
-    private static final String INVALID_FLAG = "Invalid flag given.";
-    private static final String INVALID_INDEX = "Invalid index given.";
-    private static final String GENERIC_ERROR = "Something happened.";
+    private static final String INVALID_INPUT = "Invalid input given. ";
+    private static final String INVALID_INDEX = "Invalid index given. ";
+    private static final String GENERIC_ERROR = "Something happened. ";
 
     private static final String ENTER = "Entering edit mode. Currently editing: ";
-    private static final String HELP_1 = "Available commands: /add, /del, /swap, /view, /done";
-    private static final String HELP_2 = "Available flags: -i (ingredients), -s (steps)";
-    private static final String EXIT = "Exiting edit mode.";
-    private static final String NOT_FOUND = "Recipe not found.";
-    private static final String OLD = "Before:";
-    private static final String NEW = "After:";
+    private static final String HELP_1 = "Available commands: /add, /del, /swap, /view, /done ";
+    private static final String HELP_2 = "Available flags: -i (ingredients), -s (steps) ";
+    private static final String EXIT = "Exiting edit mode. ";
+    private static final String NOT_FOUND = "Recipe not found. ";
+    private static final String OLD = "Before: ";
+    private static final String NEW = "After: ";
 
     private Recipe originalRecipe;
     private Recipe editedRecipe;
@@ -57,87 +60,41 @@ public class EditMode {
     }
 
     private String parseEditInput(String input) {
+
+        EditModeCommand cmd;
+        String[] parsed = input.split(" ");
+        String commandWord = parsed[0].toLowerCase();
+
+        switch (commandWord) {
+        case "/add":
+            cmd = new Add(parsed, editedRecipe);
+            break;
+        case "/del":
+            cmd = new Delete(parsed, editedRecipe);
+            break;
+        case "/swap":
+            cmd = new Swap(parsed, editedRecipe);
+            break;
+        case "/change":
+            cmd = new Change(parsed, editedRecipe);
+            break;
+        case "/view":
+            cmd = new View(parsed, editedRecipe, originalRecipe);
+            break;
+        case "/done":
+            cmd = new Quit(editedRecipe);
+            break;
+        default:
+            cmd = new Invalid(editedRecipe);
+        }
+
         try {
-            String[] parsed = input.split(" ");
-            String commandWord = parsed[0].toLowerCase();
-            int flagType = checkFlagType(parsed);
-
-            switch (commandWord) {
-            case "/add":
-                return "Add command";
-            case "/del":
-                if (flagType == 0) {
-                    return INVALID_FLAG;
-                }
-                int index = Integer.parseInt(parsed[2]) - 1;
-                if (flagType == 1) {
-                    editedRecipe.deleteIngredient(index);
-                    return OLD + "\n"
-                            + originalRecipe.getIngredientAttributesFormatted() + "\n"
-                            + NEW + "\n"
-                            + editedRecipe.getIngredientAttributesFormatted();
-                } else if (flagType == 2) {
-                    editedRecipe.deleteStep(index);
-                    return OLD + "\n"
-                            + originalRecipe.getStepAttributesFormatted() + "\n"
-                            + NEW + "\n"
-                            + editedRecipe.getStepAttributesFormatted();
-                }
-                return GENERIC_ERROR;
-            case "/swap":
-                if (flagType == 0) {
-                    return INVALID_FLAG;
-                }
-                int index1 = Integer.parseInt(parsed[2]) - 1;
-                int index2 = Integer.parseInt(parsed[3]) - 1;
-                if (flagType == 1) {
-                    editedRecipe.swapIngredients(index1, index2);
-                    return OLD + "\n"
-                            + originalRecipe.getIngredientAttributesFormatted() + "\n"
-                            + NEW + "\n"
-                            + editedRecipe.getIngredientAttributesFormatted();
-                } else if (flagType == 2) {
-                    editedRecipe.swapSteps(index1, index2);
-                    return OLD + "\n"
-                            + originalRecipe.getStepAttributesFormatted() + "\n"
-                            + NEW + "\n"
-                            + editedRecipe.getStepAttributesFormatted();
-                }
-                return GENERIC_ERROR;
-            case "/view":
-                return "View command";
-            case "/done":
-                return "Quit command";
-            default:
-                return INVALID_INPUT;
-            }
-
-        } catch (NumberFormatException n) {
-            return INVALID_INPUT;
-        } catch (IndexOutOfBoundsException i) {
-            return INVALID_INDEX;
+            editedRecipe = cmd.execute();
+            return cmd.getMessage();
         } catch (Exception e) {
-            return GENERIC_ERROR;
+            return e.getMessage();
         }
-    }
 
-    private int checkFlagType(String[] stringArray) {
-        int flagCount = 0;
-        int flagType = 0;
-        for (String s: stringArray) {
-            if (s.contains("-")) {
-                flagCount += 1;
-                if (s.equals("-i")) {
-                    flagType = 1;
-                } else if (s.equals("-s")) {
-                    flagType = 2;
-                }
-            }
-        }
-        if (flagCount > 1) {
-            return 0;
-        }
-        return flagType;
     }
 
     public boolean exitEditMode() {
@@ -153,11 +110,8 @@ public class EditMode {
         }
     }
 
-    public Recipe getOriginalRecipe() {
-        return originalRecipe;
-    }
-
     public Recipe getEditedRecipe() {
         return editedRecipe;
     }
+
 }
