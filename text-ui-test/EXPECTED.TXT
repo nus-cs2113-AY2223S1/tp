@@ -94,7 +94,7 @@ Parameters information:
 (Optional) DATE: Date of the transaction. The format must be in "yyyyMMdd".
 (Optional) MONTH: Month of the transaction. Only integers within 1 to 12 are accepted. Note that month must be accompanied by a year. This tag cannot be used together with [p/PERIOD] or [n/NUMBER] tags.
 (Optional) YEAR: Year of the transaction. Only integers from 1000 onwards are accepted.This tag cannot be used together with [p/PERIOD] or [n/NUMBER] tags.
-(Optional) PERIOD: Period of the transaction. Only "weeks" or "months" is accepted. Note thatperiod must be accompanied by a number to backdate from. This tag cannot be used together with [m/MONTH] or [y/YEAR] tags.
+(Optional) PERIOD: Period of the transaction. Only "weeks" or "months" is accepted. Note that period must be accompanied by a number to backdate from. This tag cannot be used together with [m/MONTH] or [y/YEAR] tags.
 (Optional) NUMBER: Last number of weeks or months. Only positive integers are accepted. Note thatnumber must be accompanied by a period that represents weeks or months. This tag cannot be used together with [m/MONTH] or [y/YEAR] tags.
 
 Command Word: FIND
@@ -293,15 +293,15 @@ ____________________________________________________________
 ____________________________________________________________
 Here are your requested statistics for the monthly_expenditure type:
 [Sep 2022]
-Income: $2000
-Expense: $20
+Income: $2001
+Expense: $21
 Savings: $1980
 Spending Habit: Excellent! You saved quite a lot this month.
 
 [Oct 2022]
-Income: $0
+Income: $1
 Expense: $1
-Savings: $-1
+Savings: $0
 Spending Habit: Oops, you spent too much. Do manage your expenses within your constraints.
 
 
@@ -316,8 +316,8 @@ Year: 2022
 [food] $20
 
 -----EXPENDITURE-----
-Income: $2000
-Expense: $21
+Income: $2001
+Expense: $22
 Savings: $1979
 ____________________________________________________________
 ____________________________________________________________
@@ -330,8 +330,8 @@ Year: 2022, Month: 10
 [food] $20
 
 -----EXPENDITURE-----
-Income: $0
-Expense: $1
+Income: $1
+Expense: $2
 Savings: $-1
 ____________________________________________________________
 ____________________________________________________________
@@ -347,8 +347,8 @@ The past 3 weeks:
 [food] $20
 
 -----EXPENDITURE-----
-Income: $0
-Expense: $0
+Income: $1
+Expense: $1
 Savings: $0
 ____________________________________________________________
 ____________________________________________________________
@@ -361,8 +361,8 @@ The past 4 months:
 [food] $20
 
 -----EXPENDITURE-----
-Income: $2000
-Expense: $20
+Income: $2001
+Expense: $21
 Savings: $1980
 ____________________________________________________________
 ____________________________________________________________

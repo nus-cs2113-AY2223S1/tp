@@ -22,7 +22,9 @@ public class Constants {
     public static int MIN_AMOUNT_VALUE = 1;
     public static int MAX_AMOUNT_VALUE = 10000000;
 
+
     // The amount of transaction is allowed to be in the range or 1 <= x <= MAX_AMOUNT * MAX_TRANSACTION
     public static int MIN_BUDGET_VALUE = 1;
+
     public static long MAX_BUDGET_VALUE = Long.valueOf(MAX_TRANSACTIONS_COUNT) * Long.valueOf(MAX_AMOUNT_VALUE);
 }

@@ -53,7 +53,7 @@ public class ListCommand extends ListAndStatsCommand {
             + "(Optional) YEAR: Year of the transaction. Only integers from 1000 onwards are accepted."
             + "This tag cannot be used together with [p/PERIOD] or [n/NUMBER] tags."
             + LINE_SEPARATOR
-            + "(Optional) PERIOD: Period of the transaction. Only \"weeks\" or \"months\" is accepted. Note that"
+            + "(Optional) PERIOD: Period of the transaction. Only \"weeks\" or \"months\" is accepted. Note that "
             + "period must be accompanied by a number to backdate from. This tag cannot be used together with "
             + "[m/MONTH] or [y/YEAR] tags."
             + LINE_SEPARATOR
