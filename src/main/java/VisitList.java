@@ -45,8 +45,12 @@ public class VisitList {
     }
 
     public void deleteReason(UI ui, int index) {
-        visitList.get(index - 1).setReason("");
-        ui.printDeleteVisitReasonMessage(visitList.get(index - 1).toString());
+        if (index < 1 || index > getTotalVisits()) {
+            System.out.println("There is no such visit in the system with index " + index + "!");
+        } else {
+            visitList.get(index - 1).setReason("");
+            ui.printDeleteVisitReasonMessage(visitList.get(index - 1).toString());
+        }
     }
 
     public boolean isEmpty() {
