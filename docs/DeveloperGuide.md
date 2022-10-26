@@ -108,12 +108,18 @@ Each command subclass handles its own execution.
 ### 3.2 Model Component
 
 ### 3.3 Parser Component
-![Parser Class](..\docs\images\parserClass.png)  
+
+![Parser Class](images/parserClass.png)  
+
+
 The <code>Parser</code> component can:
 
 - return the correct command type based on user input.
 
 ### 3.4 Command Component
+
+![Command Abstract Class](images/commandClass.png)
+
 The <code>Command</code> component can:
 - execute and return the command type based on the first word of the user input.
 
@@ -121,20 +127,26 @@ Below is a table of command subclasses and their respective command type. The di
 Command class and are all in the command package.
 
 [//]: # (if the table is not necessary, remove it)
-| Command    | Command Type              | Action                                                                  |
-|------------|---------------------------|-------------------------------------------------------------------------|
-| `add`      | `AddModuleCommand`        | Adds the user input module into their timetable.                        |
-| `delete`   | `DeleteModuleCommand`     | Deletes the user input module from their timetable.                     |
-| `help`     | `HelpCommand`             | Displays the help message.                                              |
-| `search`   | `SearchModuleCommand`     | Searches the user input module based on code, title, semester or level. |
-| `select`   | `SelectSlotCommand`       | Selects the time slot for the different lesson types.                   |
-| `semester` | `SelectSemesterCommand`   | Selects the semester that the user want.                                |
-| `get`      | `GetCommand`              | Gets all the details with the user input module code.                   |
-| `view`     | `ViewCommand`             | Views the user timetable with user's selected modules.                  |
-| `bye`      | `ExitCommand`             | Exits the program.                                                      |
-| `nil`      | `InvalidCommand`          | Displays the invalid command message.                                   |
-| `nil`      | `IncompleteModuleCommand` | Display the incomplete command message.                                 |
-| `nil`      | `UnknownCommand`          | Display the unknown command message.                                    |
+| Command Word | Command Subclass                   | Intended Outcome                                                   |
+|--------------|------------------------------------|--------------------------------------------------------------------|
+| `add`        | `AddModuleCommand`                 | Adds the user input module into their timetable.                   |
+| `delete`     | `DeleteModuleCommand`              | Deletes the user input module from their timetable.                |
+| `list`       | `DisplaySelectedModuleListCommand` | Display all the module and slot selected by user                   |
+| `bye`        | `ExitCommand`                      | Exits the program.                                                 |
+| `export`     | `ExportCommand`                    | Creates a portable NUSMod link to create their timetable on NUSMod |
+| `get`        | `GetCommand`                       | Display all details about a module.                                |
+| `help`       | `HelpCommand`                      | Display all possible command words and their usage to user.        |
+| `import`     | `ImportCommand`                    | Import user's timetable from a NUSMod share timetable link.        |
+| `search`     | `SearchModuleCommand`              | Searches similar modules based on code, title, semester or level.  |
+| `semester`   | `SelectSemesterCommand`            | Selects the semester that the user want.                           |
+| `select`     | `SelectSlotCommand`                | Selects the time slot for the different lesson types.              |
+| `view`       | `ViewCommand`                      | Views the user timetable with user's selected modules.             |
+
+##### How the feature is implemented
+
+##### Why it is implemented this way.
+
+##### Alternatives considered.
 
 #### 3.4.1 AddModuleCommand
 
@@ -180,6 +192,22 @@ Once again, data validation was being handled by the `Parser` class, however in 
 and improving cohesion, it was moved back under the `DeleteModuleCommand` class.
 
 #### 3.4.3 HelpCommand
+
+##### How the feature is implemented
+The `HelpCommand` class extends the `Command` class
+The `HelpCommand` class compiles the description of each command keyword and their usages by invoking `getDescription` 
+and `getUsage` of the other command subclass.
+Within `HelpCommand` there are other messages that help to make it more user-friendly and intuitive to read.
+Among the message that `HelpCommand` contains, it has a link to the user guide that aim to direct user to the project repository,
+where user are able to read about the various commands in further details.
+
+##### Why it is implemented this way.
+It is to encapsulate the process of getting useful information within one class, where the class only focuses on compiling
+the information and formatting it in a way that makes most intuitive sense to the user.
+
+##### Alternatives considered.
+Each command class to print the messages sequentially, this creates unnecessary complexity when printing information as changing
+the number of commands available will involve refactoring at multiple parts of the codebase.
 
 #### 3.4.4 SearchModuleCommand
 
@@ -228,17 +256,12 @@ details for 1 module.
 
 #### 3.4.9 ExitCommand
 
-#### 3.4.10 InvalidCommand
-
-#### 3.4.11 IncompleteModuleCommand
-
-#### 3.4.12 UnknownCommand
 
 ### 3.5 Utils Component
 
 #### 3.5.1 UI Component
 
-![UI Class](..\docs\images\Ui.png)
+![UI Class](images/Ui.png)
 
 The <code>UI</code> component can:
 - read input from the user
@@ -272,7 +295,7 @@ To implement the handling of export in Storage class and import in Command class
 
 #### 3.5.3 Storage Component
 
-![Storage Class](..\docs\images\storageClass.png)
+![Storage Class](images/storageClass.png)
 
 The <code>Storage</code> component can:
 
@@ -299,7 +322,7 @@ This section describes how key features of YAMOM are implemented in the latest r
 
 ### Storage feature
 
-!["Opening saved state"](..\docs\images\storageOpenPreviousState.png)  
+!["Opening saved state"](images/storageOpenPreviousState.png)  
 When the application starts up, the storage openPreviousState function will be called
 to load previous state
 
@@ -349,7 +372,9 @@ code as far as possible.
 
 ## Appendix E: Acknowledgements
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+Special thanks to the author of the following sources for inspiration and ideas that contributed to the development of 
+**YAMOM**
+- https://stackoverflow.com/questions/25853393
 
 ### Third-party libraries
 
