@@ -12,6 +12,7 @@ import seedu.files.Favourite;
  */
 public class FavouriteCommand extends Command {
     public static final String COMMAND_WORD = "favourite";
+    private static final String SEPARATOR_STRING = "===========================================";
     private final String argument;
     private final Favourite favourite;
 
@@ -36,7 +37,15 @@ public class FavouriteCommand extends Command {
     public CommandResult execute() {
         try {
             if (argument.equalsIgnoreCase("list")) {
-                return new CommandResult(favourite.showList());
+                StringBuilder content = new StringBuilder();
+                for (String id : Favourite.getFavouriteList()) {
+                    if (id.isEmpty()) {
+                        continue;
+                    }
+                    content.append(carparkList.findCarpark(id).toString());
+                    content.append("\n" + SEPARATOR_STRING + "\n");
+                }
+                return new CommandResult(content.toString());
             } else {
                 Carpark result = carparkList.findCarpark(argument);
                 setFavourite(result.getCarparkId());
