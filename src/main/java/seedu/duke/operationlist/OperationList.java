@@ -73,6 +73,7 @@ public abstract class OperationList extends Parser {
     public abstract void listOperation();
 
     public abstract void delayFlightDeparture(String flightNum, String newDepartureTime) throws SkyControlException;
+
     public abstract void modifyFlightNum(String flightNum, String newFlightNum) throws SkyControlException;
 
     public abstract void modifyGateNum(String flightNum, String newFlightNum) throws SkyControlException;

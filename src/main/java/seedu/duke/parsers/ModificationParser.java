@@ -26,9 +26,9 @@ public class ModificationParser extends Parser {
             command = new ModifyFlightNumCommand();
         } else if (isGateNumber) {
             command = new ModifyGateNumCommand();
-        } else if (isDepartureTime){
+        } else if (isDepartureTime) {
             command = new DelayFlightCommand();
-        }else {
+        } else {
             throw new SkyControlException(ui.getErrorMessage());
         }
         return command;
