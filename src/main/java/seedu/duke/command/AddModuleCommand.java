@@ -16,7 +16,9 @@ import java.util.List;
 
 public class AddModuleCommand extends Command {
     private Module module;
-    private boolean successful;
+    private boolean successfullyAdded;
+    boolean isModuleOffered;
+
 
     public static final String COMMAND_WORD = "add";
     private static final String COMMAND_USAGE = "add [MODULE_CODE]";
@@ -30,19 +32,19 @@ public class AddModuleCommand extends Command {
 
         String moduleCode = input[1].toUpperCase();
         this.module = Module.get(moduleCode);
-        successful = false;
+        successfullyAdded = false;
     }
 
     @Override
     public void execute(State state, Ui ui, Storage storage) {
         int semester = state.getSemester();
         SelectedModule selectedModule = new SelectedModule(module, semester);
-
         List<SelectedModule> currentSelectedModules = state.getSelectedModulesList();
+        isModuleOffered = module.getSemestersOffering().contains(semester);
 
-        if (!currentSelectedModules.contains(selectedModule)) {
+        if (isModuleOffered && !currentSelectedModules.contains(selectedModule)) {
             state.addSelectedModule(selectedModule);
-            successful = true;
+            successfullyAdded = true;
         }
 
         ui.addMessage(getExecutionMessage());
@@ -57,12 +59,15 @@ public class AddModuleCommand extends Command {
     @Override
     public String getExecutionMessage() {
         String outputMessage;
-        if (successful) {
-            outputMessage = module.moduleCode + " has been added";
+        if (isModuleOffered) {
+            if (successfullyAdded) {
+                outputMessage = module.moduleCode + " has been added";
+            } else {
+                outputMessage = module.moduleCode + " has already been added!";
+            }
         } else {
-            outputMessage = module.moduleCode + " has already been added!";
+            outputMessage = module.moduleCode + " is not being offered this semester!";
         }
-
         return outputMessage;
     }
 

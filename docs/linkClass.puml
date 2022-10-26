@@ -1,0 +1,32 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+hide circle
+skinparam classAttributeIconSize 0
+
+class Link {
+    - DOMAIN: String
+    - DELIMITER: String
+    - SEMESTER_DELIMITER: String
+    - SHARE_DELIMITER: String
+    - LESSON_TYPE_DELIMITER: String
+    - MODULE_CODE_DELIMITER: String
+    - POSSIBLE_SEMESTER_NUMBER: String
+    - SUPPOSED_PREFIX: String
+    - SUPPOSED_START_REGEX: String
+    - moduleDelimiter: String
+    - lessonDelimiter: String
+    - SEMESTER_PARAM_INDEX: int
+    - MODULES_PARAM_INDEX: int
+
+    + parseLink(State, Ui): void
+    - getSemesterFromParam(String): int
+    - isValidPreviousState(String): boolean
+    - addLessons(String[], SelectedModule, int): void
+    - addValidLesson(SelectedModule, int, LessonType, String): void
+    - isLessonInfo(String): boolean
+    + getLessonType(String): LessonType
+    + getLink(State, Ui): String
+    - appendModules(List<SelectedModule>, StringBuilder): void
+    - appendLessons(Map<LessonType, String>, StringBuilder): void
+}
+@enduml
