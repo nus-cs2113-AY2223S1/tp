@@ -52,20 +52,24 @@ public class AppointmentList {
         }
     }
 
+    private static AppointmentStatus intToAppointmentStatus(int status_idx) {
+        switch (status_idx) {
+        case 0:
+            // fall through
+        case 1:
+            return AppointmentStatus.PROCESSING;
+        case 2:
+            return AppointmentStatus.PROCESSED;
+        default:
+            return AppointmentStatus.PENDING;
+        }
+    }
+
     public static void setAppointmentStatus(int appointmentId, int appointmentStatus) {
         boolean setFlag = false;
         for (Appointment appointment : appointments) {
             if (appointment.appointmentId == appointmentId) {
-                switch (appointmentStatus) {
-                case 0:
-                    appointment.setAppointmentStatus(AppointmentStatus.PENDING);
-                    setFlag = true;
-                    break;
-                case 1:
-                    appointment.setAppointmentStatus(AppointmentStatus.PROCESSING);
-                    setFlag = true;
-                    break;
-                }
+                appointment.setAppointmentStatus(intToAppointmentStatus(appointmentStatus));
                 System.out.print("Noted. I've set this service: ");
                 System.out.print("Pet " + appointment.petName + " | " + "Service " + appointment.service);
                 System.out.println(" as " + appointment.getAppointmentStatus());

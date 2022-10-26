@@ -7,11 +7,11 @@ import pet.PetUnhealthyStatus;
 
 import java.util.Random;
 
-public class ChangePetStatusRandomlyCommand {
+public class InitPetStatusCommand {
     public static final int NUM_OF_STATUS = 5;
     private int index;
 
-    public ChangePetStatusRandomlyCommand(int index){
+    public InitPetStatusCommand(int index){
         this.index = index;
     }
 
