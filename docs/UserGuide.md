@@ -2,18 +2,18 @@
 
 ## Introduction
 
-parKING is a desktop app for that helps drivers choose the best place to park via a Command Line Interface (CLI) 
-while still having the benefits of a Graphical User Interface (GUI). If you can type fast, parKING can get you your 
-nearest carpark slot for you.
+parKING is a desktop app that helps drivers choose the best place to park via a Command Line Interface (CLI).
+parKING allows users to search, save and look at carpark availability information at a glance,
+while interfacing with LTA's real-time API that updates every minute. You can use parKING to plan trips in advance or 
+simply check lot availability before you leave the house.
 
 
 
 ## Quick Start
 
-{Give steps to get started quickly}
-
 1. Ensure that you have Java 11 or above installed.
-2. Down the latest version of `Duke` from [here](http://link.to/duke).
+2. Download the latest version of parKING from [here](https://github.com/AY2223S1-CS2113-T17-4/tp/releases/download/v2.0/parKING.jar).
+3. Use the command `java -jar parKING.jar` to start the program!
 
 ## Disclaimer regarding use of API key for the purposes of NUS CS2113
 
