@@ -16,6 +16,8 @@ simply check lot availability before you leave the house.
 3. Use the command `java -jar parKING.jar` to start the program!
 
 ## Disclaimer regarding use of API key for the purposes of NUS CS2113
+We understand that an api key is something personal and should not be shared with everyone. However, for the purpose of
+NUS CS2113, we have provided a default api key for testing purposes.
 
 ## Features
 
