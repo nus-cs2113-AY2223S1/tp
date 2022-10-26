@@ -71,4 +71,7 @@ public abstract class OperationList extends Parser {
     public abstract void deleteOperation(String detail) throws SkyControlException;
 
     public abstract void listOperation();
+
+//    public abstract void delayOperation();
+
 }

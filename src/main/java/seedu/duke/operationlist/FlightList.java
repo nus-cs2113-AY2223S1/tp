@@ -11,6 +11,8 @@ public class FlightList extends OperationList {
     private static final String FLIGHT_ADD_COMMAND = "flight add";
     private static final String FLIGHT_ADD_DELIMITER = "flight add ";
     private static final String FLIGHT_DELETE_COMMAND = "flight delete";
+    private static final String FLIGHT_DELAY_COMMAND = "flight delay";
+    private static final String FLIGHT_DELAY_DELIMITER = "flight delay ";
     private static final String FLIGHT_NUMBER_DELIMITER = " fn/";
     private static final String AIRLINE_DELIMITER = " a/";
     private static final String DESTINATION_DELIMITER = " d/";
@@ -118,6 +120,17 @@ public class FlightList extends OperationList {
         }
     }
 
+        public void delayOperation(String command) throws SkyControlException{
+        try {
+//            System.out.println(command);
+            checkCommandLength(command.substring(FLIGHT_DELAY_COMMAND.length()));
+//            getFlightNumber(command.substring(FLIGHT_DELAY_DELIMITER.length()));
+//            getDepartureTime()
+        } catch (SkyControlException e) {
+          ui.showEmptyDescriptionMessage();
+        }
+    }
+
     //@@author Franky4566
     public void getNumberOfFlights() {
         assert numOfFlights >= 0;
@@ -134,7 +147,9 @@ public class FlightList extends OperationList {
     }
 
     private void getFlightNumber(String detail) throws SkyControlException {
-        flightNumber = extractDetail(detail, FLIGHT_NUMBER_DELIMITER, AIRLINE_DELIMITER).toUpperCase();
+        if(isAdd) {
+            flightNumber = extractDetail(detail, FLIGHT_NUMBER_DELIMITER, AIRLINE_DELIMITER).toUpperCase();
+        }
     }
 
     private void getAirline(String detail) throws SkyControlException {

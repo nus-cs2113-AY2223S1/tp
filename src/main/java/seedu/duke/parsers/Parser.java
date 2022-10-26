@@ -26,6 +26,7 @@ public class Parser {
     protected static boolean isAdd = false;
     protected static boolean isDelete = false;
     protected static boolean isList = false;
+    protected static boolean isDelay = false;
     protected static boolean isExit = false;
     protected static boolean isBlankOperation = false;
     protected static String[] inputWords;
@@ -80,6 +81,7 @@ public class Parser {
         isAdd = operation.equalsIgnoreCase("add");
         isDelete = operation.equalsIgnoreCase("delete");
         isList = operation.equalsIgnoreCase("list");
+        isDelay = operation.equalsIgnoreCase("delay");
     }
 
     public static boolean isPassengerEntity(String lineInput) {

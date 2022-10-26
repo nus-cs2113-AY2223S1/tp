@@ -2,7 +2,14 @@
 
 ## Introduction
 
-{Give a product intro}
+SkyControl is a software which optimizes the use of the Command Line Interface (CLI)to manage flights and passengers in an airport terminal.
+
+- [Quick Start](#quick-start)
+- [Features](#features)
+    - [Adding a flight: `flight add`](#adding-a-flight-flight-add)
+    - [List Flights](#list-flights-flight-list)
+- [FAQ](#faq)
+- [Command Summary](#command-summary)
 
 ## Quick Start
 
@@ -13,21 +20,46 @@
 
 ## Features 
 
-{Give detailed description of each feature}
 
-### Adding a todo: `todo`
-Adds a new item to the list of todo items.
+### Adding a flight: `flight add`
 
-Format: `todo n/TODO_NAME d/DEADLINE`
+Format: `flight add fn/FLIGHT_NUMBER a/AIRLINE d/DESTINATION t/DEPARTURE_TIME gn/GATE_NUMBER c/CHECKIN_ROW_DOOR`
 
-* The `DEADLINE` can be in a natural language format.
-* The `TODO_NAME` cannot contain punctuation.  
+* The `FLIGHT_NUMBER` must consist of 2 alphabets followed by 1-4 digits.
+* The `DEAPRTURE_TIME` must be in 24HR time format e.g. 1600.
+* `GATE_NUMBER` must be a numerical number.
 
-Example of usage: 
+Example of usage:
+```
+flight add fn/sq712 a/singapore airlines d/bangkok t/1600 gn/05 c/03-03
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Flight added!
 
-`todo n/Write the rest of the User Guide d/next week`
+flight add fn/KE644 a/KOREA AIR d/KOREA t/0500 gn/22 c/10-04
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Flight added!
+```
 
-`todo n/Refactor the User Guide to remove passive voice d/13/04/2020`
+### List flights: `flight list`
+
+Format: `flight list`
+
+Example of usage:
+```
+flight list
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
++----------------------------------------------------------------------------------------------------------------------------------+
+|                                                  FLIGHT DETAILS LOGBOOK FOR TERMINAL 1                                         |
++----------------------------------------------------------------------------------------------------------------------------------+
+| FLIGHT NUM | DEPARTURE DATE |        AIRLINE         |      DESTINATION      | DEPARTURE TIME | GATE NUM |  CHECK-IN ROW/DOOR  |
++----------------------------------------------------------------------------------------------------------------------------------+
+|      SQ712 |       23-10-22 |     SINGAPORE AIRLINES |               BANGKOK |           1600 |       05 |               03-03 |
++----------------------------------------------------------------------------------------------------------------------------------+
+|      KE644 |       23-10-22 |              KOREA AIR |                 KOREA |           0500 |       22 |               10-04 |
++----------------------------------------------------------------------------------------------------------------------------------+
+```
+
 
 ## FAQ
 
@@ -35,8 +67,10 @@ Example of usage:
 
 **A**: {your answer here}
 
+<br>
+
 ## Command Summary
 
 {Give a 'cheat sheet' of commands here}
 
-* Add todo `todo n/TODO_NAME d/DEADLINE`
+<br>

@@ -5,6 +5,7 @@ import seedu.duke.command.Command;
 import seedu.duke.command.flightcommand.DeleteFlightCommand;
 import seedu.duke.command.flightcommand.ListFlightCommand;
 import seedu.duke.exceptions.SkyControlException;
+import seedu.duke.operationlist.FlightList;
 
 //@@author Franky4566
 public class FlightParser extends Parser {
@@ -19,6 +20,9 @@ public class FlightParser extends Parser {
             break;
         case "delete":
             command = new DeleteFlightCommand();
+            break;
+        case "delay":
+//            FlightList.delayOperation(command.toString());
             break;
         default:
             throw new SkyControlException(ui.getErrorMessage());
