@@ -238,6 +238,8 @@ details for 1 module.
 
 #### 3.5.1 UI Component
 
+![UI Class](..\docs\images\Ui.png)
+
 The <code>UI</code> component can:
 - read input from the user
 - store and print out messages to the user

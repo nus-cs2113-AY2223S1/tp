@@ -1,0 +1,28 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+class Ui {
+    - LOGO: String
+    - MESSAGE_GREET: String
+    - MESSAGE_BYE: String
+    - LINE_DIVIDER: String
+    - uiBuffer: ArrayList<String>
+    - scanner: Scanner
+
+    + close(): void
+    + readNext(): String
+    + displayUi(boolean): void
+    + displayUi(boolean): void
+    + addMessage(String, boolean): void
+    + addMessage(String): void
+    + addMessage(ArrayList<String>, boolean): void
+    + addMessage(ArrayList<String>): void
+    + displayMessage(String): void
+    + displayDivider(): void
+    + startMessage(): void
+    + endMessage(): void
+    + displayUserPrompt(int): void
+    - currentUserSemester(int): String
+
+}
+@enduml
