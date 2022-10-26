@@ -17,7 +17,7 @@ public class CommonFiles {
 
     public static final String API_KEY_FILE = "secret.txt";
     public static final Path API_KEY_FILE_PATH = Paths.get(CommonFiles.API_JSON_DIRECTORY, "secret.txt");
-    public static final String FAVOURITE_DIRECTORY = "./favourite";
+    public static final String FAVOURITE_DIRECTORY = "./resources/favourite";
     public static final String FAVOURITE_FILE = "favourite.txt";
     public static final Path FAVOURITE_PATH = Paths.get(CommonFiles.FAVOURITE_DIRECTORY, CommonFiles.FAVOURITE_FILE);
 }
