@@ -533,6 +533,29 @@ public class ConsoleParserConfigurations {
             + "Command Edit-RecurringPayment does not have all of the required options.";
     //endregion
 
+    //@@author xzynos
+    //region Defines parameters for console command Pay-RecurringPayment
+    public static final String COMMAND_PAY_RECURRING_PAYMENT = ""
+            + "Pay-RecurringPayment";
+    public static final String COMMAND_PAY_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX = ""
+            + "r";
+    public static final String COMMAND_PAY_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_LONG = ""
+            + "recurringpayment-index";
+    public static final String COMMAND_PAY_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_DESC = ""
+            + "Index";
+    public static final boolean COMMAND_PAY_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_HAS_VAL =
+            true;
+    public static final boolean COMMAND_PAY_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_IS_MAND =
+            true;
+    public static final String COMMAND_PAY_RECURRING_PAYMENT_ARG_DATE_TIME = "d";
+    public static final String COMMAND_PAY_RECURRING_PAYMENT_ARG_DATE_TIME_LONG = "datetime";
+    public static final String COMMAND_PAY_RECURRING_PAYMENT_ARG_DATE_TIME_DESC = "Date & time";
+    public static final boolean COMMAND_PAY_RECURRING_PAYMENT_ARG_DATE_TIME_HAS_VAL = true;
+    public static final boolean COMMAND_PAY_RECURRING_PAYMENT_ARG_DATE_TIME_IS_MAND = false;
+    public static final String COMMAND_PAY_RECURRING_PAYMENT_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS = ""
+            + "Command Pay-RecurringPayment does not have all of the required options.";
+    //endregion
+
     //@@author LokQiJun
     //region Defines parameters for console command Merge-file
     public static final String COMMAND_MERGE_FILE = ""
@@ -1333,6 +1356,36 @@ public class ConsoleParserConfigurations {
         options.addOption(optionCategory);
         options.addOption(optionCurrency);
         options.addOption(optionModeOfPayment);
+
+        return options;
+    }
+
+    //@@author xzynos
+
+    /**
+     * Generates an {@link Options} object with required arguments for command Delete-RecurringPayment.
+     *
+     * @return {@link Options} object initialized with the required arguments.
+     */
+    public static Options getCommandPayRecurringPaymentOptions() {
+        Option optionRecurringPaymentIndex = new Option(
+                COMMAND_PAY_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX,
+                COMMAND_PAY_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_LONG,
+                COMMAND_PAY_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_HAS_VAL,
+                COMMAND_PAY_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_DESC
+        );
+        optionRecurringPaymentIndex.setRequired(COMMAND_PAY_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_IS_MAND);
+        Option optionDateTime = new Option(
+                COMMAND_PAY_RECURRING_PAYMENT_ARG_DATE_TIME,
+                COMMAND_PAY_RECURRING_PAYMENT_ARG_DATE_TIME_LONG,
+                COMMAND_PAY_RECURRING_PAYMENT_ARG_DATE_TIME_HAS_VAL,
+                COMMAND_PAY_RECURRING_PAYMENT_ARG_DATE_TIME_DESC
+        );
+        optionDateTime.setRequired(COMMAND_PAY_RECURRING_PAYMENT_ARG_DATE_TIME_IS_MAND);
+
+        Options options = new Options();
+        options.addOption(optionRecurringPaymentIndex);
+        options.addOption(optionDateTime);
 
         return options;
     }

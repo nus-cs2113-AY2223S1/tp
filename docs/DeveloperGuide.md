@@ -2,13 +2,18 @@
 
 ## Introduction
 
-{add introduction here}
+MoneyGoWhere is a financial tracker designed to help computing professionals manage their finances.
+This developer guide explains the design considerations and implementation details required for future developers to work on MoneyGoWhere.
 
 ## Acknowledgements
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+We would like to acknowledge the following sources which our team has referenced during the development of MoneyGoWhere:
+* AddressBook-Level3's User Guide and Developer Guide ([Website](https://se-education.org/addressbook-level3/))
+* Apache Commons CLI Library ([Website](https://commons.apache.org/proper/commons-cli/))
+* Apache Commons Text Library ([Website](https://commons.apache.org/proper/commons-text/))
 
 ## Getting Started
+
 This program was developed using the Java JDK 11 and Intellij IDEA.
 The following steps will guide you through the setup process to get your development environment up and running.
 1. Install JDK 11.
@@ -32,7 +37,7 @@ You should see the following greeting message if the project setup is successful
 Your MoneyGoWhere? Let me help you track it.
 ```
 
-## Design & Implementation
+## Design
 ### Software Architecture:
 The software architecture diagram below describes the application's design and the interaction between components.
 
@@ -86,6 +91,51 @@ In the example above, `UserInterface#runCommandAddExpense()` calls `Storage#save
 ### Commands Component
 
 ![Component-Commands](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentCommands.puml)
+
+## Implementation
+### Reading and parsing the user's commands
+
+![Implementation-Add-Expense](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ImplementationRefGetConsoleCommand.puml)
+
+### Printing an expense
+
+![Implementation-Add-Expense](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ImplementationRefPrintExpense.puml)
+
+### Adding an expense
+
+![Implementation-Add-Expense](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ImplementationAddExpense.puml)
+
+### Viewing an expense
+
+![Implementation-View-Expense](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ImplementationViewExpense.puml)
+
+### Deleting an expense
+
+![Implementation-Delete-Expense](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ImplementationDeleteExpense.puml)
+
+### Editing an expense
+
+![Implementation-Edit-Expense](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ImplementationEditExpense.puml)
+
+### Adding a recurring payment
+
+![Implementation-Add-RecurringPayment](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ImplementationAddRecurringPayment.puml)
+
+### Viewing a recurring payment
+
+![Implementation-View-RecurringPayment](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ImplementationViewRecurringPayment.puml)
+
+### Deleting a recurring payment
+
+![Implementation-Delete-RecurringPayment](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ImplementationDeleteRecurringPayment.puml)
+
+### Editing a recurring payment
+
+![Implementation-Edit-RecurringPayment](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ImplementationEditRecurringPayment.puml)
+
+### Adding an expense from a existing recurring payment
+
+![Implementation-Edit-RecurringPayment](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ImplementationPayRecurringPayment.puml)
 
 ## Product scope
 ### Target user profile
@@ -141,4 +191,9 @@ In the example above, `UserInterface#runCommandAddExpense()` calls `Storage#save
 
 ## Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+### Launching MoneyGoWhere
+1. Set up the project according to the steps in [Getting Started](#getting-started)
+2. Launch MoneyGoWhere by running `main()` in `MoneyGoWhere.java`
+
+### Terminating MoneyGoWhere
+1. Enter `Bye` into the console

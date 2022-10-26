@@ -1,0 +1,25 @@
+@startuml
+!include https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/Styles.puml
+
+skinparam noteTextAlignment left
+
+group sd Print Recurring Payment
+
+Participant "consoleInterface:ConsoleInterface" as consoleInterface USER_INTERFACE_COLOR_1
+
+activate consoleInterface USER_INTERFACE_COLOR_1
+
+consoleInterface -[USER_INTERFACE_COLOR_1]> consoleInterface : convertRecurringPaymentToConsoleString(recurringPayment:RecurringPayment)
+activate consoleInterface USER_INTERFACE_COLOR_1
+
+consoleInterface --[USER_INTERFACE_COLOR_1]> consoleInterface : recurringPaymentStr:String
+deactivate consoleInterface
+
+consoleInterface -[USER_INTERFACE_COLOR_1]> consoleInterface : printInformationalMessage(recurringPaymentStr:String)
+activate consoleInterface USER_INTERFACE_COLOR_1
+
+consoleInterface --[USER_INTERFACE_COLOR_1]> consoleInterface
+deactivate consoleInterface
+
+end group
+@enduml
