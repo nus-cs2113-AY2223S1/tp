@@ -107,17 +107,20 @@ public class PrescriptionList {
         }
 
         Prescription prescriptionEdited = prescriptionsList.get(index);
-        String newMedicine = medicine.isEmpty() ? prescriptionEdited.getMedicine() : medicine;
-        String newDosage = dosage.isEmpty() ? prescriptionEdited.getDosage() : dosage;
-        String newTimeInterval = timeInterval.isEmpty() ? prescriptionEdited.getTimeInterval() : timeInterval;
-        String patientId =  prescriptionEdited.getPatientId();
 
-        prescriptionEdited.setInactive();
-        Prescription newPrescription = new Prescription(patientId, newMedicine, newDosage, newTimeInterval);
+        if (!medicine.isEmpty()) {
+            prescriptionEdited.setMedicine(medicine);
+        }
 
-        prescriptionsList.add(newPrescription);
+        if (!dosage.isEmpty()) {
+            prescriptionEdited.setDosage(dosage);
+        }
 
-        ui.printEditPrescriptionMessage(newPrescription.toString());
+        if (!timeInterval.isEmpty()) {
+            prescriptionEdited.setTimeInterval(timeInterval);
+        }
+
+        ui.printEditPrescriptionMessage(prescriptionEdited.toString());
     }
 
     private boolean hasPatientPrescription(String patientId) {
