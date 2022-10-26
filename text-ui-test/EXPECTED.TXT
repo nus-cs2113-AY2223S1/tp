@@ -35,8 +35,7 @@ Unable to add Flight!
 Designated gate is already occupied at that time, please select a different gate number.
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-Unable to add Flight!
-Designated gate is already occupied at that time, please select a different gate number.
+Unable to add Flight! Flight already exist.
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Stop! The departure time input format is wrong.
@@ -44,9 +43,6 @@ Please try again in 24Hr time format.
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 FLIGHT SQ324 NOT FOUND.
-
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-FLIGHT SQ712 NOT FOUND.
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Detail of the operation is blank,
@@ -64,10 +60,6 @@ please try again and input all necessary details.
 
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-Unable to add Flight!
-Designated gate is already occupied at that time, please select a different gate number.
-
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 oops! The description is empty :(
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -77,7 +69,7 @@ oops! The description is empty :(
 +----------------------------------------------------------------------------------------------------------------------------------+
 | FLIGHT NUM | DEPARTURE DATE |        AIRLINE         |      DESTINATION      | DEPARTURE TIME | GATE NUM |  CHECK-IN ROW/DOOR  |
 +----------------------------------------------------------------------------------------------------------------------------------+
-|      SQ832 |       26-10-22 |     SINGAPORE AIRLINES |               BANGKOK |           1600 |       B1 |               03-03 |
+|      SQ832 |       26-10-22 |     SINGAPORE AIRLINES |               BANGKOK |           1600 |       11 |               03-03 |
 +----------------------------------------------------------------------------------------------------------------------------------+
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -96,6 +88,10 @@ deleted from the passenger list.
 |                                          The passenger details logbook is empty.                                             |
 +------------------------------------------------------------------------------------------------------------------------------+
 
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+You did not input an operation.
+The system is unable to read your command, please try again.
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 You did not input an operation.
@@ -148,7 +144,7 @@ Unable to add Flight! Flight already exist.
 +----------------------------------------------------------------------------------------------------------------------------------+
 | FLIGHT NUM | DEPARTURE DATE |        AIRLINE         |      DESTINATION      | DEPARTURE TIME | GATE NUM |  CHECK-IN ROW/DOOR  |
 +----------------------------------------------------------------------------------------------------------------------------------+
-|      SQ712 |       26-10-22 |     SINGAPORE AIRLINES |               BANGKOK |           1600 |       D1 |               03-03 |
+|      SQ712 |       26-10-22 |     SINGAPORE AIRLINES |               BANGKOK |           1600 |       14 |               03-03 |
 +----------------------------------------------------------------------------------------------------------------------------------+
 |      SQ234 |       26-10-22 |     SINGAPORE AIRLINES |               BANGKOK |           1600 |       04 |               03-03 |
 +----------------------------------------------------------------------------------------------------------------------------------+
