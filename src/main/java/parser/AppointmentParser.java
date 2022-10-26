@@ -1,6 +1,8 @@
 package parser;
 
-import command.*;
+
+import command.Command;
+import command.EmptyCommand;
 import command.appointmentCommand.AddAppointmentCommand;
 import command.appointmentCommand.RemoveAppointmentCommand;
 import command.appointmentCommand.ViewAppointmentCommand;

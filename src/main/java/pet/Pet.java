@@ -1,5 +1,4 @@
 package pet;
-import pet.PetList.*;
 
 import java.util.Random;
 
@@ -27,7 +26,6 @@ public class Pet {
     }
 
     public String toString() {
-//        String isHealthy = this.isHealthy ? "healthy" : "unhealthy";
         return String.format("I am a cute %s, my name is %s, and I am currently %s",
                 species, name, status);
     }

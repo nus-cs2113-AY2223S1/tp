@@ -93,12 +93,12 @@ public class TaskParser {
                 throw new DukeException();
             }
 
-            String TaskIndexString = input.substring(startOfI + lengthOfSignature, startOfE).trim();
-            String EmployeeIndexString = input.substring(startOfE + lengthOfSignature).trim();
-            int TaskIndexInt = Integer.parseInt(TaskIndexString);
-            int EmployeeIndexInt = Integer.parseInt(EmployeeIndexString);
+            String taskIndexString = input.substring(startOfI + lengthOfSignature, startOfE).trim();
+            String employeeIndexString = input.substring(startOfE + lengthOfSignature).trim();
+            int taskIndexInt = Integer.parseInt(taskIndexString);
+            int employeeIndexInt = Integer.parseInt(employeeIndexString);
 
-            return new ReassignTaskCommand(TaskIndexInt, EmployeeIndexInt);
+            return new ReassignTaskCommand(taskIndexInt, employeeIndexInt);
         } catch (DukeException e) {
             return new EmptyCommand();
         }
