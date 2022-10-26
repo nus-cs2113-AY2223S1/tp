@@ -17,7 +17,7 @@
 
 ## Introduction
 
-{Give a product intro}  
+SkyControl is a software which optimizes the use of the Command Line Interface (CLI)to manage flights and passengers in an airport terminal. 
 
 ---
 
@@ -172,8 +172,8 @@ delay sq712 dt/1700
 Departure time of flight SQ712 is delayed from 1600 to 1700.
 
 ```
-
 ---
+
 ## Display flight detail logbook: `flight list`
 
 Format: `flight list`
@@ -206,11 +206,13 @@ flight list
 
 ---
 
-
 <br>
 
 ## Frequently Asked Questions
 
 **Q**: How do I transfer my data to another computer?
 
-**A**: {your answer here}
+**A**: {your answer here}  
+
+<br>
+
