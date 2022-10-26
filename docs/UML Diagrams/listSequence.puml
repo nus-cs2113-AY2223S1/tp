@@ -24,12 +24,13 @@ Parser -> "executor:\nListCommand" : execute()
             activate Movie
             Movie --> "executor:\nListCommand"
             deactivate Movie
-        end
+
         else Review is a TvShow
             "executor:\nListCommand" -> TvShow: toString()
             activate TvShow
             TvShow --> "executor:\nListCommand"
             deactivate TvShow
+        end
     end
 "executor:\nListCommand" --> Parser: output : String
 
@@ -41,5 +42,4 @@ deactivate Ui
 Parser -> Parser
 destroy "executor:\nListCommand"
 deactivate Parser
-
 @enduml
