@@ -2,110 +2,20 @@ package seedu.duke;
 
 import seedu.duke.module.Module;
 import seedu.duke.module.lessons.Lesson;
-import seedu.duke.data.DataManager;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 public class Timetable {
     public static List<Module> listOfModules = new ArrayList<>();
-    public static LinkedHashMap<String, LinkedHashMap<String, String>> timetableDict 
-                        = new LinkedHashMap<String, LinkedHashMap<String, String>>();
+    public static TimetableDict timetableDict = new TimetableDict();
 
-    private static void fillDay(LinkedHashMap<String, String> day) {
-        int hourInt = 800;
-        String hourStr;
-        for (int i = 0; i < 24; i++) {
-            hourStr = String.format("%04d", hourInt);
-            day.put(hourStr, "______");
-            if (i % 2 == 0) {
-                hourInt += 30;
-            } else {
-                hourInt += 70;
-            }
-        }
-    }
-    
-    public static void initDict() {
-        for (int i = 0; i < 5; i++) {
-            switch (i) {
-            case 0: //Monday
-                timetableDict.put("Monday", new LinkedHashMap<String, String>());
-                fillDay(timetableDict.get("Monday"));
-                break;
-            case 1: //Tuesday
-                timetableDict.put("Tuesday", new LinkedHashMap<String, String>());
-                fillDay(timetableDict.get("Tuesday"));
-                break;
-            case 2: //Wednesday
-                timetableDict.put("Wednesday", new LinkedHashMap<String, String>());
-                fillDay(timetableDict.get("Wednesday"));
-                break;
-            case 3: //Thursday
-                timetableDict.put("Thursday", new LinkedHashMap<String, String>());
-                fillDay(timetableDict.get("Thursday"));
-                break;
-            case 4: //Friday
-                timetableDict.put("Friday", new LinkedHashMap<String, String>());
-                fillDay(timetableDict.get("Friday"));
-                break;
-            default:
-                break;
-            }
-        }
+    public static void initTimetableDict() {
+        timetableDict.init();
     }
 
-    /*
-    For debugging
-     */
-    public static void printDict() {
-        for (String day : timetableDict.keySet()) {
-            System.out.println(day + ":");
-            for (String time : timetableDict.get(day).keySet()) {
-                System.out.println(time + ": " + timetableDict.get(day).get(time));
-            }
-        }
-    }
-
-    public static void addToDict(Lesson newLesson, String moduleCode) {
-        String startTime = newLesson.getStartTime();
-        String endTime = newLesson.getEndTime();
-        String day = newLesson.getDay();
-        boolean isLessonTime = false;
-
-        if (day.equals("Undetermined Day")) {
-            return;
-        }
-
-        LinkedHashMap<String, String> dayMap = timetableDict.get(day);
-        for (String hour : dayMap.keySet()) {
-            if (!isLessonTime && startTime.equals(hour)) {
-                isLessonTime = true;
-            }
-            if (isLessonTime && endTime.equals(hour)) {
-                break;
-            }
-            if (isLessonTime) {
-                dayMap.replace(hour, moduleCode);
-            }
-        }
-    }
-
-    /*
-     * Brute force method, can be optimized later
-     */
-    public static void deleteFromDict(Module module) {
-        String moduleCode = module.getModuleCode();
-        
-        for (String day : timetableDict.keySet()) {
-            LinkedHashMap<String, String> dayMap = timetableDict.get(day);
-            for (String hour : dayMap.keySet()) {
-                if (dayMap.get(hour).equals(moduleCode)) {
-                    dayMap.replace(hour, "______");
-                }
-            }
-        }
+    public static String allocateModules() {
+        return timetableDict.allocateModules();
     }
 
     public static void addNewModule(String code, String name, List<Lesson> lessons) {
@@ -118,57 +28,6 @@ public class Timetable {
         listOfModules.add(newModule);
     }
 
-    public static String allocateModules() {
-        int unallocated = 0;
-        String result;
-        result = "Sorry, but we were unable to allocate timings for these modules due to timetable clashes:\n";
-
-        for (Module module : listOfModules) {
-            List<Lesson> attendingList = module.getAllAttending();
-            for (int index = 0; index < attendingList.size(); index++) {
-                Lesson attendingLesson = attendingList.get(index);
-                if (attendingLesson.getDay().equals("Undetermined Day")) {
-                    boolean isAllocated = false;
-
-                    for (Lesson lesson : module.getLessons()) {
-                        if (!lesson.getLessonType().equals(attendingLesson.getLessonType())) {
-                            continue;
-                        }
-                        String startTime = lesson.getStartTime();
-                        String endTime = lesson.getEndTime();
-                        String day = lesson.getDay();
-
-                        if (endTime.charAt(2) == '3') {
-                            int endTimeInt = Integer.parseInt(endTime);
-                            endTimeInt -= 30;
-                            endTime = String.format("%04d", endTimeInt);
-                        } else {
-                            int endTimeInt = Integer.parseInt(endTime);
-                            endTimeInt -= 70;
-                            endTime = String.format("%04d", endTimeInt);
-                        }
-
-                        LinkedHashMap<String, String> dayMap = timetableDict.get(day);
-                        if (dayMap.get(startTime).equals("______") && dayMap.get(endTime).equals("______")) {
-                            module.replaceAttending(lesson, index);
-                            isAllocated = true;
-                            break;
-                        }
-                    }
-                    if (!isAllocated) {
-                        unallocated++;
-                        result += module.getModuleCode() + " (" + attendingLesson.getLessonType() + ")\n";
-                    }
-                }
-            }
-        }
-        result += "Please rearrange some of your modules and try again!\n";
-        if (unallocated != 0) {
-            return result;
-        } else {
-            return "Allocation successful!";
-        }
-    }
 
     public static List<Module> getListOfModules() {
         return listOfModules;
@@ -203,7 +62,7 @@ public class Timetable {
 
     public static void deleteModule(int index) {
         Module module = listOfModules.get(index - 1);
-        deleteFromDict(module);
+        timetableDict.deleteModule(module);
         listOfModules.remove(index - 1);
     }    // the nth module in list has index n-1
 
@@ -257,6 +116,6 @@ public class Timetable {
     public static void replaceLesson(Lesson newLesson, int indexForModule, Integer indexForLesson) {
         assert indexForModule >= 0 : "index should be within range";
 
-        listOfModules.get(indexForModule).replaceAttending(newLesson, indexForLesson);
+        listOfModules.get(indexForModule).replaceAttending(timetableDict, newLesson, indexForLesson);
     }
 }

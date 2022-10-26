@@ -41,7 +41,8 @@ public class UI {
     public static String getCommandFromUser() {
         System.out.println("Here is a list of things I can do, enter the appropriate command to continue!\n"
                 + "1. add" + PRINTED_GAP + "2. list" + PRINTED_GAP + "3. info" + PRINTED_GAP
-                + "4. set" + PRINTED_GAP + "5. delete" + PRINTED_GAP + "6. print" + PRINTED_GAP + "7. quit\n");
+                + "4. set" + PRINTED_GAP + "5. delete" + PRINTED_GAP + "6. allocate" + PRINTED_GAP
+                + "7. print" + PRINTED_GAP + "8. quit\n");
         return sc.nextLine();
     }
 

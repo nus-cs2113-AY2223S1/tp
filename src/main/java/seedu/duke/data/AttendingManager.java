@@ -78,6 +78,7 @@ public class AttendingManager {
     }
 
     public static void saveAttendingIntoDataList() {
+        attendingDataList.clear();
         for (Module module : Timetable.listOfModules) {
             for (Lesson lesson : module.getAllAttending()) {
                 addAttending(lesson, module.getModuleCode());

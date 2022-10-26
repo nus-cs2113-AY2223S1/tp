@@ -1,8 +1,13 @@
 package seedu.duke.module;
 
+import seedu.duke.Timetable;
+import seedu.duke.TimetableDict;
 import seedu.duke.module.lessons.Lesson;
 
 import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.logging.Logger;
 
 
@@ -10,10 +15,12 @@ public class Module {
     private static final Logger lgr = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private String moduleName;
     private String moduleCode;
-    //private String moduleDescription;
     private List<Lesson> lessons;
     private LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>> allLessons;
     private LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>> allAttending;
+    private List<Lesson> attending;
+    private LinkedHashMap<String, ArrayList<Lesson>> classifiedLessons;
+
 
     public String getModuleName() {
         return moduleName;
@@ -21,6 +28,10 @@ public class Module {
 
     public String getModuleCode() {
         return moduleCode;
+    }
+
+    public List<Lesson> getAttending() {
+        return attending;
     }
 
     public List<Lesson> getAllAttending() {
@@ -44,8 +55,10 @@ public class Module {
         this.moduleCode = moduleCode;
         this.moduleName = moduleName;
         this.lessons = lessons;
-        this.allLessons = populateData();
-        this.allAttending = populateAttending();
+        this.classifiedLessons = classifyLessons(lessons);
+        this.allLessons = populateData(); //this is the new classifiedLessons
+        this.allAttending = populateAttending(); //this is the new attending
+        this.attending = getAllAttending();
     }
 
     private LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>> populateAttending() {
@@ -69,7 +82,7 @@ public class Module {
         return temp;
     }
 
-    private List<Lesson> matchLessonTypes(HashMap<String, ArrayList<Lesson>> classifiedLessons) {
+    private List<Lesson> matchLessonTypes(LinkedHashMap<String, ArrayList<Lesson>> classifiedLessons) {
         List<Lesson> temp = new ArrayList<>();
         for (ArrayList<Lesson> list : classifiedLessons.values()) {
             for (int i = 0; i < checkDuplicateLessonNumbers(list); i++) {
@@ -81,7 +94,7 @@ public class Module {
     }
 
     private int checkDuplicateLessonNumbers(ArrayList<Lesson> list) {
-        HashMap<String, Integer> checker = new HashMap<>();
+        LinkedHashMap<String, Integer> checker = new LinkedHashMap<>();
 
         for (Lesson lesson : list) {
             String classNum = lesson.getClassNumber();
@@ -96,7 +109,7 @@ public class Module {
         return getHighestCount(checker);
     }
 
-    private int getHighestCount(HashMap<String, Integer> checker) {
+    private int getHighestCount(LinkedHashMap<String, Integer> checker) {
         int highestCount = 0;
         for (Integer count : checker.values()) {
             if (count > highestCount) {
@@ -226,13 +239,50 @@ public class Module {
         return null;
     }
 
+
     public void replaceNewAttending(LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>> loadedLessons) {
         this.allAttending = loadedLessons;
     }
 
-    public void replaceAttending(Lesson newLesson, Integer indexForLesson) {
-        getAllAttending().set(indexForLesson, newLesson);
+
+
+    public void replaceAttending(TimetableDict timetableDict, Lesson newLesson, Integer indexForLesson) {
+        Lesson oldLesson = attending.get(indexForLesson);
+        timetableDict.deleteLesson(oldLesson);
+        attending.set(indexForLesson, newLesson);
+        timetableDict.addLesson(newLesson, moduleCode);
     }
+
+    public void replaceAttending(Lesson newLesson, Integer indexForLesson) {
+        Lesson oldLesson = attending.get(indexForLesson);
+        Timetable.timetableDict.deleteLesson(oldLesson);
+        attending.set(indexForLesson, newLesson);
+        Timetable.timetableDict.addLesson(newLesson, moduleCode);
+    }
+
+    public void replaceAttending(Lesson newLesson) {
+        int indexToSet = 0;
+        for (Lesson lesson : attending) {
+            if (lesson.getLessonType().equals(newLesson.getLessonType())) {
+                break;
+            }
+            indexToSet += 1;
+        }
+        if (indexToSet >= attending.size()) {
+            return;
+        }
+
+        //delete old lesson from timetableDict
+        Lesson oldLesson = attending.get(indexToSet);
+        Timetable.timetableDict.deleteLesson(oldLesson);
+
+        //Setting attending for this module
+        attending.set(indexToSet, newLesson);
+
+        //Adding to timetableDict
+        Timetable.timetableDict.addLesson(newLesson, moduleCode);
+    }
+
 
 
     /**
@@ -260,5 +310,22 @@ public class Module {
             }
         }
         return data;
+    }
+
+    private LinkedHashMap<String, ArrayList<Lesson>> classifyLessons(List<Lesson> lessons) {
+        LinkedHashMap<String, ArrayList<Lesson>> classifiedLessons = new LinkedHashMap<>();
+        for (Lesson lesson : lessons) {
+            if (!classifiedLessons.containsKey(lesson.getLessonType())) {
+                classifiedLessons.put(lesson.getLessonType(), new ArrayList<>());
+                classifiedLessons.get(lesson.getLessonType()).add(lesson);
+            } else {
+                classifiedLessons.get(lesson.getLessonType()).add(lesson);
+            }
+        }
+        return classifiedLessons;
+    }
+
+    public LinkedHashMap<String, ArrayList<Lesson>> getClassifiedLessons() {
+        return classifiedLessons;
     }
 }

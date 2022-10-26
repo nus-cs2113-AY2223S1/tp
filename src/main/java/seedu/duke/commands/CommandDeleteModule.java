@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.logging.Logger;
 
 
-public class CommandDeleteModule {
+public class    CommandDeleteModule {
 
     private static final Logger lgr = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 

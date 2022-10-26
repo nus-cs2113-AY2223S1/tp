@@ -41,8 +41,6 @@ public class Duke {
         String input;
         String currentSemester = getSemester();
 
-        Timetable.initDict();
-
         if (!loadData(currentSemester)) {
             System.exit(0);
         }
@@ -60,6 +58,7 @@ public class Duke {
                 break;
             }
 
+            saveData();
             System.out.println(response);
 
             assert isRunning : "this is never set to false, use break to exit loop";
