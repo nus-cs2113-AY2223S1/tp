@@ -8,6 +8,7 @@ import seedu.duke.ui.Ui;
 
 public abstract class Command extends Parser {
     public static final int MIN_LENGTH = 2;
+    public static final int START_INDEX = 3;
     protected static Ui ui = new Ui();
     protected static final int DETAIL_INDEX = 1;
 
@@ -30,6 +31,14 @@ public abstract class Command extends Parser {
         }
     }
 
+    public static String getFlightNumFromModifyCmd(String[] inputWords) {
+        return inputWords[DETAIL_INDEX].toUpperCase();
+    }
+
+    public static String getModifiedDetail(String[] inputWords) {
+        return inputWords[2].substring(START_INDEX).toUpperCase();
+    }
+
     public static void checkBlankDetailInput() throws SkyControlException {
         if (passengerDetailArray.length < MIN_LENGTH) {
             throw new SkyControlException(ui.getBlankOpsError());
@@ -49,7 +58,7 @@ public abstract class Command extends Parser {
         }
     }
 
-    public abstract void execute(OperationList operations, String lineInput);
+    public abstract void execute(OperationList operations, String lineInput) throws SkyControlException;
 
     public boolean isExit() {
         return false;

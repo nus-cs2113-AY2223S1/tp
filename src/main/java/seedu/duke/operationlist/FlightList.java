@@ -94,6 +94,69 @@ public class FlightList extends OperationList {
         }
     }
 
+    //@@author shengiv
+    @Override
+    public void modifyFlightNum(String flightNum, String newFlightNum) throws SkyControlException {
+        FlightInfo flight = findFlightInfo(flightNum);
+        getFlightAttributes(flight);
+        flightNumber = newFlightNum;
+        validateModificationDetails(flight);
+        flight.setFlightNum(newFlightNum);
+        flights.add(flight);
+        flightIndex++;
+        ui.showUpdatedFlightNumber(flightNum, newFlightNum);
+    }
+
+    @Override
+    public void modifyGateNum(String flightNum, String newGateNum) throws SkyControlException {
+        FlightInfo flight = findFlightInfo(flightNum);
+        getFlightAttributes(flight);
+        gateNumber = newGateNum;
+        validateModificationDetails(flight);
+        flight.setGateNum(newGateNum);
+        flights.add(flight);
+        flightIndex++;
+        ui.showUpdatedGateNumber(flightNum, newGateNum);
+    }
+
+    private void getFlightAttributes(FlightInfo flight) {
+        flightNumber = flight.getFlightNumber();
+        airline = flight.getAirline();
+        destination = flight.getDestination();
+        departureTime = flight.getDepartureTime();
+        gateNumber = flight.getGateNum();
+        checkIn = flight.getCheckLn();
+    }
+
+    private static FlightInfo findFlightInfo(String flightNum) throws SkyControlException {
+        FlightInfo modifiedFlight = null;
+        for (FlightInfo flight : flights) {
+            if (flight.getFlightNumber().equals(flightNum)) {
+                modifiedFlight = flight;
+                flights.remove(flight);
+                flightIndex--;
+                break;
+            }
+        }
+        if (modifiedFlight == null) {
+            throw new SkyControlException(ui.getFlightNotFoundMessage(flightNum));
+        } else {
+            return modifiedFlight;
+        }
+    }
+
+    private void validateModificationDetails(FlightInfo flight) throws SkyControlException {
+        try {
+            validateDetailFormat();
+            checkFlightNumberDuplicates();
+            checkAvailableGateNumber();
+        } catch (Exception e) {
+            flights.add(flight);
+            flightIndex++;
+            throw new SkyControlException(e.getMessage());
+        }
+    }
+
     //@@author Franky4566
     @Override
     public void listOperation() {
