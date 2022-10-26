@@ -3,7 +3,9 @@
 ## Design & Implementation
 
 ### Ui
-The Ui Class handles user input
+The `Ui` class handles user input and basic output messages. It can
+* Read user input
+* Output various messages to the user
 
 ![img.png](imgs/UiClass.png)
 
@@ -14,14 +16,32 @@ The Ui Class handles user input
 ![img.png](imgs/MovieClass.png)
 
 ### Commands
+The command component enables users to make changes to their review list. The command word is taken from the first word
+of the user input, and is processed through the `Parser` class. The class diagram shows how the Commands parent class is
+implemented, as well as its extended classes.
 ![img.png](imgs/CommandsClass.png)
 
-
 #### Add
+The `add` command enables users to create new movie or TV Show reviews and add them to their review list. The following 
+is how the `add` command works:
+1. The `Parser` class takes in the user input, and parses this by using its `processUserInput` function.
+2. If the parsed command word is recognised to be the `add` command, the `executeAdd` function is called.
+3. Using the parsed command, `Parser` then determines whether the review to be added is a movie or Tv show. Otherwise, a 
+DukeException error is thrown.
+4. A new variable of type Media parent class, `toAdd`, is then created. The `AddCommand` function is then called to add
+the Movie or Tv Show `toAdd` into the review list, `reviewList`.
 ![img_1.png](imgs/AddCommandSequence.png)
 
 #### Find
-![img_1.png](imgs/FindCommandSequence.png)
+The find command enables users to search for existing reviews that contains a given keyword. This is done through the
+following steps: 
+1. The `Parser` class takes in the user input, and parses this by using its `processUserInput` function.
+2. If the parsed command word is recognised to be the `add` command, the `executeFind` function is called and extracts
+the keyword to search for from the user input.
+3. `Parser` then creates an `executor` object by creating a new `FindCommand`. `Parser` then calls the `execute` 
+function from `executor` which loops through all reviews in the list and displays those containing the given keyword
+using the `toString()` function found in both the `Movie` and `TvShow` subclasses.
+![img.png](imgs/FindCommandSequence.png)
 
 #### List
 ![img_2.png](imgs/ListCommandSequence.png)
@@ -29,7 +49,7 @@ The Ui Class handles user input
 #### Sort
 ![img.png](imgs/sortSequence.png)
 
-### Remove
+#### Remove
 ![img.png](imgs/deleteSequence.png)
 
 #### Clearing the review list
@@ -45,7 +65,7 @@ The Ui Class handles user input
 
 {Describe the target user profile}
 The target user profile is ideally individuals who are well-versed in the command line
-and are avid movie watchers. Therefore, this app is customised to their preferences.
+and are avid movie or TV show watchers. Therefore, this app is customised to their preferences.
 
 ### Value proposition
 
@@ -82,7 +102,6 @@ and are avid movie watchers. Therefore, this app is customised to their preferen
 
 ## Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
 - Load Main 
 - Add a movie or tv show 
   - Command:
