@@ -112,9 +112,28 @@ of information.
 
 ## User Stories
 
-|Version| As a ... | I want to ... | So that I can ...|
-|--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
+| Version | As a ...    | I want to ...                                               | So that I can ...                                                                   |
+|---------|-------------|-------------------------------------------------------------|-------------------------------------------------------------------------------------|
+| v1.0    | user        | exit the program                                            | leave the program without damage                                                    |
+| v1.0    | doctor/user | add a new patient                                           | have the patient record saved to the list of patients                               |
+| v1.0    | doctor/user | see all patients                                            | see all the patients that are saved in the program i.e. are treated by me           |
+| v1.0    | doctor/user | see all the information about a patient                     | refer to them to see all the patients that are being treated by me                  |
+| v1.0    | doctor/user | edit a patients record                                      | change his record to reflect changes in the patient                                 |
+| v1.0    | doctor/user | add a patient visitation record                             | refer later on for future care for the patient                                      |
+| v1.0    | doctor/user | add a reason for visit to the existing record               | have on record the reason the patient came for treatment for future use             |
+| v1.0    | doctor/user | edit a patient visitation record                            | change the visit information in case error was entered                              |
+| v1.0    | doctor/user | add new prescription for a patient                          | add a new prescription for treatment for the patient                                |
+| v1.0    | doctor/user | edit a prescription                                         | changes a prescription in case of a change in treatment or error in the current one |
+| v1.0    | doctor/user | view list of existing prescriptions for a patient           | refer to them for future patient treatments                                         |
+| v2.0    | doctor/user | view information for patient specific visit                 | refer to the visit in case i want to reflect on the visit                           |
+| v2.0    | doctor/user | view all patients visit                                     | see the patient and where treated and are on record                                 |
+| v2.0    | doctor/user | view list of all existing prescriptions for all of patients | see which prescription the patient was ever prescribed                              |
+| v2.0    | doctor/user | view list of all active prescriptions for all of patients   | see which prescription the patient is currently taking                              |
+| v2.0    | doctor/user | change a prescription status to active                      | have on record that the patient is currently taking the prescription                |
+| v2.0    | doctor/user | change a prescription status to inactive                    | have on record that the patient is currently not taking the prescription            |
+
+
+
 |v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
 
 ## Non-Functional Requirements
