@@ -85,9 +85,9 @@ public class Parking {
         try {
             api.loadApiKey(API_KEY_FILE, API_JSON_DIRECTORY, true);
             api.syncFetchData();
-            ui.print("Fetching data from API successful!");
+            ui.println("Fetching data from API successful!");
         } catch (ParkingException e) {
-            ui.print(e.getMessage());
+            ui.println(e.getMessage());
         }
     }
 

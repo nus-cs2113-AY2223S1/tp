@@ -26,7 +26,7 @@ public class CarparkFilteredList extends CarparkList {
         for (Carpark carpark : getCarparks()) {
             bufferString.append(carpark.getListViewString()).append("\n");
         }
-        return bufferString.toString();
+        return bufferString.toString().trim();
     }
 
 }

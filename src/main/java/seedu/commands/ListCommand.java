@@ -15,7 +15,7 @@ public class ListCommand extends Command {
     }
     @Override
     public CommandResult execute() {
-        String result = carparkList.toString();
+        String result = carparkList.toString().trim();
         return new CommandResult(result);
     }
 }

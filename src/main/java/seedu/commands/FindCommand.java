@@ -41,5 +41,4 @@ public class FindCommand extends Command {
         return carparkList.findCarpark(searchString);
     }
 
-
 }

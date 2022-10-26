@@ -38,15 +38,23 @@ public class FavouriteCommand extends Command {
         try {
             if (argument.equalsIgnoreCase("list")) {
                 StringBuilder content = new StringBuilder();
+                boolean isEmpty = true;
                 for (String id : Favourite.getFavouriteList()) {
                     if (id.isEmpty()) {
                         continue;
                     }
+                    if (isEmpty) {
+                        isEmpty = false;
+                    } else {
+                        content.append("\n" + SEPARATOR_STRING + "\n");
+                    }
                     assert carparkList.findCarpark(id) != null : "Could not find carpark!";
                     content.append(carparkList.findCarpark(id).toString());
-                    content.append("\n" + SEPARATOR_STRING + "\n");
                 }
-                return new CommandResult(content.toString());
+                if (isEmpty) {
+                    return new CommandResult("There is no favourites in the list!");
+                }
+                return new CommandResult(content.toString().trim());
             } else {
                 Carpark result = carparkList.findCarpark(argument);
                 setFavourite(result.getCarparkId());
