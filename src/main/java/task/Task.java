@@ -19,6 +19,7 @@ public class Task {
         this.appointmentId = appointmentId;
         this.employeeId = employeeId;
         this.taskDescription = taskDescription;
+
         this.isDone = false;
     }
 

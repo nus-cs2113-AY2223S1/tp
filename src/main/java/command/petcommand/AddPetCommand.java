@@ -23,7 +23,6 @@ public class AddPetCommand extends Command {
     public void execute() {
         Pet petToAdd = new Pet(name, species, isHealthy);
         PetList.pets.add(petToAdd);
-        Pet.numOfPets++;
         printAddPetMessage();
     }
 
