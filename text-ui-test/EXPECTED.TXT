@@ -326,8 +326,6 @@ Year: 2022, Month: 10
 
 -----CATEGORIES-----
 [transport] $1
-[salary] $2000
-[food] $20
 
 -----EXPENDITURE-----
 Income: $0
@@ -342,9 +340,6 @@ Here are the total savings and expenses for
 The past 3 weeks: 
 
 -----CATEGORIES-----
-[transport] $1
-[salary] $2000
-[food] $20
 
 -----EXPENDITURE-----
 Income: $0
@@ -356,7 +351,6 @@ Here are the total savings and expenses for
 The past 4 months: 
 
 -----CATEGORIES-----
-[transport] $1
 [salary] $2000
 [food] $20
 

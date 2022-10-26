@@ -25,6 +25,7 @@ public enum ErrorMessages {
     ERROR_TRANSACTION_INVALID_TYPE("Type of transaction given is invalid, please check your input!"),
     ERROR_FIND_COMMAND_MISSING_KEYWORDS("Keyword(s) for your search expression missing, please check your input!"),
     ERROR_STATS_COMMAND_INVALID_TYPE("Type of statistics given is invalid, please check your input!"),
+    ERROR_STATS_INVALID_NUMBER("Invalid number, please check your input! Note: Stats number must between 1 - 100"),
     ERROR_UNKNOWN_HELP_OPTION("The parameter used for help option is unknown, please check your input!"),
     ERROR_STORAGE_TRANSACTION_CORRUPTED("Transaction values corrupted."
             + " To preserve data, please STOP the program and edit your data file correctly."),

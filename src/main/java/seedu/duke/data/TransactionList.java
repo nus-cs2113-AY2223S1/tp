@@ -262,8 +262,31 @@ public class TransactionList {
         return categoricalSavings;
     }
 
+    //@@paullowse
     /**
-     * Formats the hashmap of categorical savings into a categorical savings list.
+     * Reads the transactions list and adds each amount to the categories in categorical savings hashmap.
+     *
+     * @param categoricalSavings A hashmap containing all category-amount pair for total savings.
+     * @return A hashmap containing all category-amount pair for total savings.
+     */
+    public HashMap<String, Integer> processCategoricalSavings(ArrayList<Transaction> timeTransactions,
+                                                              HashMap<String, Integer> categoricalSavings) {
+        for (Transaction transaction : timeTransactions) {
+            String category = transaction.getCategory();
+            int amount = transaction.getAmount();
+            // Creates a new category with starter amount if category not exists in hashmap
+            if (!categoricalSavings.containsKey(category)) {
+                categoricalSavings.put(category, amount);
+                continue;
+            }
+            categoricalSavings.put(category, categoricalSavings.get(category) + amount);
+        }
+
+        return categoricalSavings;
+    }
+
+    /**
+     * Formats the hashmap of categorical savings into a categorical savings list, using default transactions.
      *
      * @return A string that represents the formatted categorical savings list.
      */
@@ -272,6 +295,28 @@ public class TransactionList {
         HashMap<String, Integer> categoricalSavings = new HashMap<>();
         // Adds each amount from transactions list to the categories in categorical savings hashmap
         categoricalSavings = processCategoricalSavings(categoricalSavings);
+
+        // Formats every entry in the hashmap into a categorical savings list
+        for (HashMap.Entry<String, Integer> entry : categoricalSavings.entrySet()) {
+            categoricalSavingsList += String.format("%s%s%s %s%s%s", PREFIX_CATEGORY, entry.getKey(),
+                    POSTFIX_CATEGORY, DOLLAR_SIGN, entry.getValue(), LINE_SEPARATOR);
+        }
+
+        return categoricalSavingsList;
+    }
+
+    //@@chydarren
+    /**
+     * Formats the hashmap of categorical savings into a categorical savings list, using timeTransactions.
+     *
+     * @param timeTransactions An arraylist of transactions.
+     * @return A string that represents the formatted categorical savings list.
+     */
+    public String listCategoricalSavings(ArrayList<Transaction> timeTransactions) {
+        String categoricalSavingsList = "";
+        HashMap<String, Integer> categoricalSavings = new HashMap<>();
+        // Adds each amount from transactions list to the categories in categorical savings hashmap
+        categoricalSavings = processCategoricalSavings(timeTransactions, categoricalSavings);
 
         // Formats every entry in the hashmap into a categorical savings list
         for (HashMap.Entry<String, Integer> entry : categoricalSavings.entrySet()) {
@@ -395,7 +440,7 @@ public class TransactionList {
                     + LINE_SEPARATOR + LINE_SEPARATOR + INFO_STATS_CATEGORIES_HEADER + LINE_SEPARATOR;
         }
 
-        String categoricalList = listCategoricalSavings();
+        String categoricalList = listCategoricalSavings(timeTransactions);
         timeInsightsList += categoricalList;
         // Formats every entry in the hashmap into a time insights list
         //for (Transaction entry : timeTransactions) {
