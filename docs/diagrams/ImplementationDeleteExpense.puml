@@ -12,32 +12,32 @@ activate consoleInterface USER_INTERFACE_COLOR_1
 ref over consoleInterface: getConsoleCommand()
 
 opt consoleCommand instanceof ConsoleCommandDeleteExpense
+    consoleInterface -[USER_INTERFACE_COLOR_1]> consoleInterface : \lrunCommandDeleteExpense(\n\tconsoleCommand:ConsoleCommandDeleteExpense\n)
+    activate consoleInterface USER_INTERFACE_COLOR_1
 
-consoleInterface -[USER_INTERFACE_COLOR_1]> consoleInterface : \lrunCommandDeleteExpense(\n\tconsoleCommand:ConsoleCommandDeleteExpense\n)
-activate consoleInterface USER_INTERFACE_COLOR_1
+    consoleInterface -[USER_INTERFACE_COLOR_1]> expenseManager : deleteExpense(expenseIndex:int)
+    activate expenseManager DATA_COLOR_1
 
-consoleInterface -[USER_INTERFACE_COLOR_1]> expenseManager : deleteExpense(expenseIndex:int)
-activate expenseManager DATA_COLOR_1
+    expenseManager --[DATA_COLOR_1]> consoleInterface
+    deactivate expenseManager
 
-expenseManager --[DATA_COLOR_1]> consoleInterface
-deactivate expenseManager
+    ref over consoleInterface: printInformationalMessage(consoleStr:String)
 
-ref over consoleInterface: printInformationalMessage(consoleStr:String)
+    consoleInterface -[USER_INTERFACE_COLOR_1]> expenseManager : save()
+    activate expenseManager DATA_COLOR_1
 
-consoleInterface -[USER_INTERFACE_COLOR_1]> expenseManager : save()
-activate expenseManager DATA_COLOR_1
+    expenseManager -[DATA_COLOR_1]> LocalStorage : \lsaveToFile(\n\texpenses:ArrayList<Expenses>\n)
+    activate LocalStorage STORAGE_COLOR_1
 
-expenseManager -[DATA_COLOR_1]> LocalStorage : \lsaveToFile(\n\texpenses:ArrayList<Expenses>\n)
-activate LocalStorage STORAGE_COLOR_1
+    LocalStorage --[STORAGE_COLOR_1]> expenseManager
+    deactivate LocalStorage
 
-LocalStorage --[STORAGE_COLOR_1]> expenseManager
-deactivate LocalStorage
+    expenseManager --[DATA_COLOR_1]> consoleInterface
+    deactivate expenseManager
 
-expenseManager --[DATA_COLOR_1]> consoleInterface
-deactivate expenseManager
-
-consoleInterface --[USER_INTERFACE_COLOR_1]> consoleInterface
-deactivate consoleInterface
-
+    consoleInterface --[USER_INTERFACE_COLOR_1]> consoleInterface
+    deactivate consoleInterface
 end
+
+deactivate consoleInterface
 @enduml
