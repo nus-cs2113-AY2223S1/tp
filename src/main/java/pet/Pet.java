@@ -59,7 +59,7 @@ public class Pet {
                 break;
             }
         }
-        else if (isHealthy = false){
+        else {
             switch (randomNumber){
             case 1:
                 status = PetUnhealthyStatus.exhausted;

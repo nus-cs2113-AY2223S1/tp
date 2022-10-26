@@ -8,7 +8,7 @@ public enum PetUnhealthyStatus implements PetStatus{
     dying
     ;
 
-    public String getPetStatusDescription(){
+    public String getPetStatusDescription() {
         switch (this) {
         case exhausted:
             return "exhausted";
