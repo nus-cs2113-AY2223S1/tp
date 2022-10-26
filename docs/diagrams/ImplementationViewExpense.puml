@@ -12,75 +12,74 @@ activate consoleInterface USER_INTERFACE_COLOR_1
 ref over consoleInterface: getConsoleCommand()
 
 opt consoleCommand instanceof ConsoleCommandViewExpense
-
-consoleInterface -[USER_INTERFACE_COLOR_1]> consoleInterface : \lrunCommandViewExpense(\n\tconsoleCommand:ConsoleCommandViewExpense\n)
-activate consoleInterface USER_INTERFACE_COLOR_1
-
-alt expenseIndex >= 0
-    consoleInterface -[USER_INTERFACE_COLOR_1]> consoleInterface : viewExpenseByExpenseIndex(expenseIndex:int)
+    consoleInterface -[USER_INTERFACE_COLOR_1]> consoleInterface : \lrunCommandViewExpense(\n\tconsoleCommand:ConsoleCommandViewExpense\n)
     activate consoleInterface USER_INTERFACE_COLOR_1
 
-    consoleInterface -[USER_INTERFACE_COLOR_1]> expenseManager : getExpense(expenseIndex:int)
-    activate expenseManager DATA_COLOR_1
+    alt expenseIndex >= 0
+        consoleInterface -[USER_INTERFACE_COLOR_1]> consoleInterface : viewExpenseByExpenseIndex(expenseIndex:int)
+        activate consoleInterface USER_INTERFACE_COLOR_1
 
-    expenseManager --[DATA_COLOR_1]> consoleInterface : expense:Expense
-    deactivate expenseManager
+        consoleInterface -[USER_INTERFACE_COLOR_1]> expenseManager : getExpense(expenseIndex:int)
+        activate expenseManager DATA_COLOR_1
 
-    consoleInterface --[USER_INTERFACE_COLOR_1]> consoleInterface
-    deactivate consoleInterface
-else expenseName != null && !expenseName.isEmpty()
-    consoleInterface -[USER_INTERFACE_COLOR_1]> consoleInterface : viewExpenseByExpenseName(expenseName:String)
-    activate consoleInterface USER_INTERFACE_COLOR_1
+        expenseManager --[DATA_COLOR_1]> consoleInterface : expense:Expense
+        deactivate expenseManager
 
-    consoleInterface -[USER_INTERFACE_COLOR_1]> expenseManager : getExpensesByName(expenseName:String)
-    activate expenseManager DATA_COLOR_1
+        consoleInterface --[USER_INTERFACE_COLOR_1]> consoleInterface
+        deactivate consoleInterface
+    else expenseName != null && !expenseName.isEmpty()
+        consoleInterface -[USER_INTERFACE_COLOR_1]> consoleInterface : viewExpenseByExpenseName(expenseName:String)
+        activate consoleInterface USER_INTERFACE_COLOR_1
 
-    expenseManager --[DATA_COLOR_1]> consoleInterface : expenses:ArrayList<Expense>
-    deactivate expenseManager
+        consoleInterface -[USER_INTERFACE_COLOR_1]> expenseManager : getExpensesByName(expenseName:String)
+        activate expenseManager DATA_COLOR_1
 
-    consoleInterface --[USER_INTERFACE_COLOR_1]> consoleInterface
-    deactivate consoleInterface
-else expenseCategory != null && !expenseCategory.isEmpty()
-    consoleInterface -[USER_INTERFACE_COLOR_1]> consoleInterface : viewExpenseByExpenseCategory(expenseCategory:String)
-    activate consoleInterface USER_INTERFACE_COLOR_1
+        expenseManager --[DATA_COLOR_1]> consoleInterface : expenses:ArrayList<Expense>
+        deactivate expenseManager
 
-    consoleInterface -[USER_INTERFACE_COLOR_1]> expenseManager : getExpensesByCategory(expenseCategory:String)
-    activate expenseManager DATA_COLOR_1
+        consoleInterface --[USER_INTERFACE_COLOR_1]> consoleInterface
+        deactivate consoleInterface
+    else expenseCategory != null && !expenseCategory.isEmpty()
+        consoleInterface -[USER_INTERFACE_COLOR_1]> consoleInterface : viewExpenseByExpenseCategory(expenseCategory:String)
+        activate consoleInterface USER_INTERFACE_COLOR_1
 
-    expenseManager --[DATA_COLOR_1]> consoleInterface : expenses:ArrayList<Expense>
-    deactivate expenseManager
+        consoleInterface -[USER_INTERFACE_COLOR_1]> expenseManager : getExpensesByCategory(expenseCategory:String)
+        activate expenseManager DATA_COLOR_1
 
-    consoleInterface --[USER_INTERFACE_COLOR_1]> consoleInterface
-    deactivate consoleInterface
-else else
-    consoleInterface -[USER_INTERFACE_COLOR_1]> consoleInterface : viewExpense()
-    activate consoleInterface USER_INTERFACE_COLOR_1
+        expenseManager --[DATA_COLOR_1]> consoleInterface : expenses:ArrayList<Expense>
+        deactivate expenseManager
 
-    consoleInterface -[USER_INTERFACE_COLOR_1]> expenseManager : getExpenses()
-    activate expenseManager DATA_COLOR_1
+        consoleInterface --[USER_INTERFACE_COLOR_1]> consoleInterface
+        deactivate consoleInterface
+    else else
+        consoleInterface -[USER_INTERFACE_COLOR_1]> consoleInterface : viewExpense()
+        activate consoleInterface USER_INTERFACE_COLOR_1
 
-    expenseManager --[DATA_COLOR_1]> consoleInterface : expenses:ArrayList<Expense>
-    deactivate expenseManager
+        consoleInterface -[USER_INTERFACE_COLOR_1]> expenseManager : getExpenses()
+        activate expenseManager DATA_COLOR_1
+
+        expenseManager --[DATA_COLOR_1]> consoleInterface : expenses:ArrayList<Expense>
+        deactivate expenseManager
+
+        consoleInterface --[USER_INTERFACE_COLOR_1]> consoleInterface
+        deactivate consoleInterface
+    end
+
+    note right
+        Note that the functions
+        viewExpenseByExpenseIndex(),
+        viewExpenseByExpenseName(),
+        viewExpenseByExpenseCategory(),
+        viewExpense()
+        will call convertExpenseToConsoleString()
+        and printInformationalMessage() to print
+        the expense to the console. For simplicity,
+        the calls have been omitted.
+    end note
 
     consoleInterface --[USER_INTERFACE_COLOR_1]> consoleInterface
     deactivate consoleInterface
 end
-
-note right
-Note that the functions
-viewExpenseByExpenseIndex(),
-viewExpenseByExpenseName(),
-viewExpenseByExpenseCategory(),
-viewExpense()
-will call convertExpenseToConsoleString()
-and printInformationalMessage() to print
-the expense to the console. For simplicity,
-the calls have been omitted.
-end note
-
-consoleInterface --[USER_INTERFACE_COLOR_1]> consoleInterface
 
 deactivate consoleInterface
-
-end
 @enduml
