@@ -80,7 +80,7 @@ public class Storage {
     }
 
     /**
-     * Saves all current tasks by overriding the file.
+     * Saves all current selected modules for all semesters by overriding the file.
      *
      * @param state the current state of the application
      * @param ui    to output to the user
