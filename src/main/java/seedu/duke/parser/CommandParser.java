@@ -34,6 +34,7 @@ import seedu.duke.user.UserList;
 
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_ARGUMENT_EMPTY;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_COMMAND_UNRECOGNIZABLE;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_CONTAIN_DATA_SEPARATOR;
 
 // @@author winston-lim
 
@@ -138,9 +139,12 @@ public class CommandParser {
      */
     public static Command createCommand(String input, UserList userList, ItemList itemList,
                                         TransactionList transactionList)
-            throws CommandNotFoundException, InsufficientArgumentsException {
+            throws CommandNotFoundException, InsufficientArgumentsException, InvalidArgumentException {
         String command = getCommand(input);
         String[] parts = getParts(input);
+        if (isContainingDataSeparator(input)) {
+            throw new InvalidArgumentException(MESSAGE_CONTAIN_DATA_SEPARATOR);
+        }
         // assert that command exists
         switch (command) {
         case COMMAND_EXIT:
@@ -188,5 +192,9 @@ public class CommandParser {
         default:
             throw new CommandNotFoundException(MESSAGE_COMMAND_UNRECOGNIZABLE);
         }
+    }
+
+    private static boolean isContainingDataSeparator(String input) {
+        return input.contains("|");
     }
 }

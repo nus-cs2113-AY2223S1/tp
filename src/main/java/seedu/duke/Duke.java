@@ -55,34 +55,38 @@ public class Duke {
     private void initializeTransactionList() {
         try {
             this.transactionList = new TransactionList(transactionStorage.loadData());
-        } catch (TransactionFileNotFoundException | StoreFailureException e) {
+        } catch (TransactionFileNotFoundException e) {
             this.transactionList = new TransactionList();
-            if (e instanceof StoreFailureException) {
-                Ui.printErrorMessage(e.getMessage());
-            }
+        } catch (StoreFailureException e) {
+            resetAllListsDueToDataCorruption(e.getMessage());
         }
     }
 
     private void initializeItemList() {
         try {
             this.itemList = new ItemList(itemStorage.loadData());
-        } catch (ItemFileNotFoundException | StoreFailureException e) {
+        } catch (ItemFileNotFoundException e) {
             this.itemList = new ItemList();
-            if (e instanceof StoreFailureException) {
-                Ui.printErrorMessage(e.getMessage());
-            }
+        } catch (StoreFailureException e) {
+            resetAllListsDueToDataCorruption(e.getMessage());
         }
     }
 
     private void initializeUserList() {
         try {
             this.userList = new UserList(userStorage.loadData());
-        } catch (UserFileNotFoundException | StoreFailureException e) {
+        } catch (UserFileNotFoundException e) {
             this.userList = new UserList();
-            if (e instanceof StoreFailureException) {
-                Ui.printErrorMessage(e.getMessage());
-            }
+        } catch (StoreFailureException e) {
+            resetAllListsDueToDataCorruption(e.getMessage());
         }
+    }
+
+    private void resetAllListsDueToDataCorruption(String errorMessage) {
+        userList = new UserList();
+        itemList = new ItemList();
+        transactionList = new TransactionList();
+        Ui.printErrorMessage(errorMessage);
     }
 
     /**
