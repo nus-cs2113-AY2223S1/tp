@@ -1,17 +1,12 @@
-package command.appointmentCommand;
+package command.appointmentcommand;
 
 import appointment.Appointment;
 import appointment.AppointmentList;
 import command.Command;
-import employee.EmployeeList;
-import service.Service;
-import service.ServiceList;
-
-import java.time.LocalDateTime;
 
 public class AddAppointmentCommand extends Command {
 
-    public final static String COMMAND_WORD = "add";
+    public static final String COMMAND_WORD = "add";
 
     private final Appointment appointment;
 

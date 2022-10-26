@@ -1,15 +1,16 @@
-package command.employeeCommand;
+package command.employeecommand;
 
 import command.Command;
 import employee.EmployeeList;
 
 public class RemoveEmployeeCommand extends Command {
-    public final static String COMMAND_WORD = "remove";
+    public static final String COMMAND_WORD = "remove";
     private int employeeId;
 
-    public RemoveEmployeeCommand(int employeeId){
+    public RemoveEmployeeCommand(int employeeId) {
         this.employeeId = employeeId;
     }
+
     @Override
     public void execute() {
         EmployeeList.removeEmployee(employeeId);

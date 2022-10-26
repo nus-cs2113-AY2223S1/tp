@@ -28,7 +28,7 @@ public class Appointment {
     // view tasks for a find appointment
     public void viewTasks() {
         System.out.println("Appointment " + appointmentId + " Task List:");
-        for(Task task: tasks) {
+        for (Task task: tasks) {
             System.out.println("________________________");
             task.printTask();
         }

@@ -1,9 +1,9 @@
 package parser;
 
 import command.*;
-import command.employeeCommand.AddEmployeeCommand;
-import command.employeeCommand.RemoveEmployeeCommand;
-import command.employeeCommand.ViewEmployeeCommand;
+import command.employeecommand.AddEmployeeCommand;
+import command.employeecommand.RemoveEmployeeCommand;
+import command.employeecommand.ViewEmployeeCommand;
 import exception.DukeException;
 
 public class EmployeeParser {

@@ -1,9 +1,9 @@
 package command;
 
 
-public class EndCommand extends Command{
+public class EndCommand extends Command {
 
-    public EndCommand(){
+    public EndCommand() {
 
     }
 

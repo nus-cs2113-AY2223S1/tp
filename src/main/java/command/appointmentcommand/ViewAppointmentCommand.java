@@ -1,16 +1,15 @@
-package command.appointmentCommand;
+package command.appointmentcommand;
 
 import appointment.AppointmentList;
 import command.Command;
-import employee.EmployeeList;
-import service.ServiceList;
 
 public class ViewAppointmentCommand extends Command {
 
-    public final static String COMMAND_WORD = "view";
+    public static final String COMMAND_WORD = "view";
 
-    public ViewAppointmentCommand(){
+    public ViewAppointmentCommand() {
     }
+
     @Override
     public void execute() {
         AppointmentList.listAppointment();
