@@ -151,11 +151,11 @@ _Written by: Brian Wong Yun Long_
 _Written by: Paul Low_
 
 ### Managing the Budget: `budget`
-To set the amount of monthly budget, with a value between 1 - 10<sup>13</sup>.
+To set the amount of monthly budget, with a value from 1 to 10<sup>13</sup>.
 
 Format: `budget b/BUDGET`
 
-* The `BUDGET` must be a whole number between 1 and 10<sup>13</sup>.
+* The `BUDGET` must be a whole number from 1 to 10<sup>13</sup>.
 * The monthly budget is set to $1000 by default if the user has never run this command.
 
 Examples of usage:
@@ -209,17 +209,17 @@ _Written by: Brian Wong Yun Long_
 Tags used ( **OPTIONAL** tags are enclosed with SQUARE BRACKETS "[" and "]" in the **command syntax in the table** above):
 * The `TYPE` is either `"expense"` or `"income"`.
 * The `CATEGORY` is a one-word parameter flexibly defined by the user. [ No numeral, symbol or spacing is allowed ]
-* The `AMOUNT` is a positive whole number that is between 1 and 10000000. [ No alphabet, symbol or spacing is allowed ]
+* The `AMOUNT` is a positive whole number that is from 1 to 10000000. [ No alphabet, symbol or spacing is allowed ]
 * The `DATE` MUST be in ddMMyyyy format. [ E.g. 29102022 ] 
 * The `DESCRIPTION` is a one-word parameter defined by the user. [ Spacing is not allowed ]
-* The `ENTRY` is the entry value which is a positive whole number that is between 1 and 1000000. [ No alphabet, symbol or spacing is allowed ]
+* The `ENTRY` is the entry value which is a positive whole number that is from 1 to 1000000. [ No alphabet, symbol or spacing is allowed ]
 * The `KEYWORDS` is any string used to find matching transactions. [ Spacing is allowed (Special Case) ]
 <!-- * The `KEYWORDS` are parameter value(s) within Search-fields that would be searched.  [ Available Search-fields: date, type, category , amount, description. Cross-search across different Search-fields NOT supported ] -->
-* The `BUDGET` is a positive whole number that is between 1 and 10<sup>13</sup> (Ten Trillion). [ No alphabet, symbol or spacing is allowed ]
+* The `BUDGET` is a positive whole number that is from 1 to 10<sup>13</sup> (Ten Trillion). [ No alphabet, symbol or spacing is allowed ]
 * The `YEAR` is the year in yyyy format. 
 * The `MONTH` is the month in numerical form. [ From 1 to 12 , where 1 represents January etc. ]
 * The `PERIOD` is the selection of either periods in `"weeks"` or `"months"`. [ Used with "n/NUMBER" ONLY ]
-* The `NUMBER` is a positive whole number that is between 1 and 100, representing the number of periods to view.  [ Used with "p/PERIODS" ONLY ]
+* The `NUMBER` is a positive whole number that is from 1 to 100, representing the number of periods to view.  [ Used with "p/PERIODS" ONLY ]
 
 
 
