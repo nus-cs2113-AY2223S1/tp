@@ -427,7 +427,7 @@ public class ParameterParser {
                 throw new InputTransactionInvalidAmountException();
             }
             int amount = Integer.parseInt(parameter);
-            if (amount <= MIN_AMOUNT_VALUE || amount > MAX_AMOUNT_VALUE) {
+            if (amount < MIN_AMOUNT_VALUE || amount > MAX_AMOUNT_VALUE) {
                 parserLogger.log(Level.WARNING, "An invalid amount error is caught for the given parameter: "
                         + parameter);
                 throw new InputTransactionInvalidAmountException();
