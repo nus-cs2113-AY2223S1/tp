@@ -19,7 +19,10 @@ public class Ui {
 
     public String readCommand() {
         Scanner in = new Scanner(System.in);
-        return in.nextLine();
+        if (in.hasNextLine()) {
+            return in.nextLine();
+        }
+        return "bye";
     }
 
     public void showLine() {

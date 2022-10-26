@@ -5,5 +5,11 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
-What is your name?
-Hello James Gosling
+I am the nurse helper!
+____________________________________________________________
+Got it. I've added this appointment: Pet alex | Service shower
+Now you have 1 appointments in the list.
+____________________________________________________________
+____________________________________________________________
+Bye. Hope to see you again soon!
+____________________________________________________________
