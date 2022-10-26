@@ -1,0 +1,22 @@
+@startuml
+!include https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/Styles.puml
+
+skinparam noteTextAlignment left
+
+mainframe sd Print Expense
+Participant ":UserInterface" as UserInterface USER_INTERFACE_COLOR_1
+
+activate UserInterface USER_INTERFACE_COLOR_1
+
+UserInterface -[USER_INTERFACE_COLOR_1]> UserInterface : convertExpenseToConsoleString(expense:Expense)
+activate UserInterface USER_INTERFACE_COLOR_1
+
+UserInterface --[USER_INTERFACE_COLOR_1]> UserInterface : expenseStr:String
+deactivate UserInterface
+
+UserInterface -[USER_INTERFACE_COLOR_1]> UserInterface : printInformationalMessage(expenseStr:String)
+activate UserInterface USER_INTERFACE_COLOR_1
+
+UserInterface --[USER_INTERFACE_COLOR_1]> UserInterface
+deactivate UserInterface
+@enduml

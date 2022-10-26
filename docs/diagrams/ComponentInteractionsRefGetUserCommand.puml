@@ -1,0 +1,45 @@
+@startuml
+!include https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/Styles.puml
+
+skinparam noteTextAlignment left
+
+mainframe sd Get User Command
+Actor User USER_COLOR
+Participant ":UserInterface" as UserInterface USER_INTERFACE_COLOR_1
+Participant ":Parser" as Parser PARSER_COLOR_1
+Participant ":ConsoleCommandAddExpense" as ConsoleCommandAddExpense PARSER_COLOR_1
+
+activate UserInterface USER_INTERFACE_COLOR_1
+
+UserInterface -[USER_INTERFACE_COLOR_1]> UserInterface : getConsoleCommand()
+activate UserInterface USER_INTERFACE_COLOR_1
+
+UserInterface -[USER_INTERFACE_COLOR_1]> UserInterface : getConsoleInput()
+activate UserInterface USER_INTERFACE_COLOR_1
+
+User -[USER_COLOR]> UserInterface : "Add-Expense -n Lunch -a 7.80"
+note right
+    getConsoleInput() reads the command entered
+    by the user. This arrow represents the command
+    and is not an activation line.
+end note
+
+UserInterface --[USER_INTERFACE_COLOR_1]> UserInterface : consoleInput:String
+deactivate UserInterface
+
+UserInterface -[USER_INTERFACE_COLOR_1]> Parser : parse(consoleInput:String)
+activate Parser PARSER_COLOR_1
+
+create ConsoleCommandAddExpense
+Parser -[PARSER_COLOR_1]> ConsoleCommandAddExpense
+activate ConsoleCommandAddExpense PARSER_COLOR_1
+
+ConsoleCommandAddExpense --[PARSER_COLOR_1]> Parser
+deactivate ConsoleCommandAddExpense
+
+Parser --[PARSER_COLOR_1]> UserInterface : consoleCommand:ConsoleCommandAddExpense
+deactivate Parser
+
+UserInterface --[USER_INTERFACE_COLOR_1]> UserInterface : consoleCommand:ConsoleCommandAddExpense
+deactivate UserInterface
+@enduml

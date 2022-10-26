@@ -1,0 +1,44 @@
+@startuml
+!include https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/Styles.puml
+
+package Commands {
+    Class ConsoleCommand as "                ConsoleCommand                " <<abstract>>PARSER_COLOR_2
+
+    Class ConsoleCommandAddExpense PARSER_COLOR_2
+
+    Class ConsoleCommandSortExpense PARSER_COLOR_2
+
+    Class ConsoleCommandViewIncome PARSER_COLOR_2
+
+    Class ConsoleCommandDeleteTarget PARSER_COLOR_2
+
+    Class ConsoleCommandEditRecurringPayment PARSER_COLOR_2
+
+    Class ConsoleCommandConvertCurrency PARSER_COLOR_2
+
+    Class ConsoleCommandMergeFile PARSER_COLOR_2
+
+    Class ConsoleCommandBye PARSER_COLOR_2
+
+    note as Note
+        Note that this diagram
+        is not exhaustive.
+    end note
+}
+
+ConsoleCommandAddExpense -up-|> ConsoleCommand
+
+ConsoleCommandSortExpense -up-|> ConsoleCommand
+
+ConsoleCommandViewIncome -up-|> ConsoleCommand
+
+ConsoleCommandDeleteTarget --up-|> ConsoleCommand
+
+ConsoleCommandEditRecurringPayment --up-|> ConsoleCommand
+
+ConsoleCommandConvertCurrency --up-|> ConsoleCommand
+
+ConsoleCommandMergeFile ---up-|> ConsoleCommand
+
+ConsoleCommandBye ---up-|> ConsoleCommand
+@enduml
