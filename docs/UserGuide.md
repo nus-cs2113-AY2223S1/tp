@@ -16,6 +16,8 @@ nearest carpark slot for you.
 2. Down the latest version of `Duke` from [here](http://link.to/duke).
 
 ## Disclaimer regarding use of API key for the purposes of NUS CS2113
+We understand that an api key is something personal and should not be shared with everyone. However, for the purpose of
+NUS CS2113, we have provided a default api key for testing purposes.
 
 ## Features
 
