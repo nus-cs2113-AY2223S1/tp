@@ -84,17 +84,8 @@ public class Module {
         String startTime = "Undetermined";
         String endTime = "Undetermined";
         String classNumber = "NA";
-        Lesson tempLesson = new Lesson(day, startTime, endTime, lessonType, classNumber);
+        Lesson tempLesson = new Lesson(day, startTime, endTime, lessonType, classNumber, moduleCode);
         temp.add(tempLesson);
-    }
-
-    private boolean checkExist(List<Lesson> temp, Lesson lessonToCheck) {
-        for (Lesson lesson : temp) {
-            if (lesson.getLessonType().equals(lessonToCheck.getLessonType())) {
-                return true;
-            }
-        }
-        return false;
     }
 
     public String getModuleDetails() {
