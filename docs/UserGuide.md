@@ -212,14 +212,14 @@ Tags used ( **OPTIONAL** tags are enclosed with SQUARE BRACKETS "[" and "]" in t
 * The `AMOUNT` is a positive whole number that is between 1 and 10000000. [ No alphabet, symbol or spacing is allowed ]
 * The `DATE` MUST be in ddMMyyyy format. [ E.g. 29102022 ] 
 * The `DESCRIPTION` is a one-word parameter defined by the user. [ Spacing is not allowed ]
-* The `ENTRY` is the entry value which is a positive numeral that is between 1 and 1000000. [ No alphabet, symbol or spacing is allowed ]
+* The `ENTRY` is the entry value which is a positive whole number that is between 1 and 1000000. [ No alphabet, symbol or spacing is allowed ]
 * The `KEYWORDS` is any string used to find matching transactions. [ Spacing is allowed (Special Case) ]
 <!-- * The `KEYWORDS` are parameter value(s) within Search-fields that would be searched.  [ Available Search-fields: date, type, category , amount, description. Cross-search across different Search-fields NOT supported ] -->
 * The `BUDGET` is a positive whole number that is between 1 and 10<sup>13</sup> (Ten Trillion). [ No alphabet, symbol or spacing is allowed ]
 * The `YEAR` is the year in yyyy format. 
 * The `MONTH` is the month in numerical form. [ From 1 to 12 , where 1 represents January etc. ]
 * The `PERIOD` is the selection of either periods in `"weeks"` or `"months"`. [ Used with "n/NUMBER" ONLY ]
-* The `NUMBER` is the number of periods to view.  [ Used with "p/PERIODS" ONLY ]
+* The `NUMBER` is a positive whole number that is between 1 and 100, representing the number of periods to view.  [ Used with "p/PERIODS" ONLY ]
 
 
 

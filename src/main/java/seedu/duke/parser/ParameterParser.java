@@ -36,8 +36,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static seedu.duke.command.CommandTag.COMMAND_TAG_BUDGET_AMOUNT;
-import static seedu.duke.common.Constants.MAX_BUDGET_VALUE;
-import static seedu.duke.common.Constants.MIN_BUDGET_VALUE;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_HELP_OPTION;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_GLOBAL_ENTRY_NUMBER;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_STATS_TYPE;
@@ -51,8 +49,14 @@ import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_DATE;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_DESCRIPTION;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_TYPE;
 
+import static seedu.duke.common.Constants.MAX_BUDGET_VALUE;
+import static seedu.duke.common.Constants.MIN_BUDGET_VALUE;
 import static seedu.duke.common.Constants.MAX_AMOUNT_VALUE;
 import static seedu.duke.common.Constants.MIN_AMOUNT_VALUE;
+import static seedu.duke.common.Constants.MINIMUM_YEAR;
+import static seedu.duke.common.Constants.MAXIMUM_YEAR;
+import static seedu.duke.common.Constants.MAXIMUM_STATS_NUMBER;
+import static seedu.duke.common.Constants.MINIMUM_STATS_NUMBER;
 import static seedu.duke.common.DateFormats.DATE_INPUT_PATTERN;
 
 /**
@@ -67,10 +71,6 @@ public class ParameterParser {
     private static final String DELIMITER = " ";
     private static final int SPLIT_POSITION = 2;
     private static final int MINIMUM_TAG_LENGTH = 2;
-    private static final int MINIMUM_YEAR = 1000;
-    private static final int MAXIMUM_YEAR = 9999;
-    private static final int MAXIMUM_STATS_NUMBER = 100;
-    private static final int SMALLEST_POSITIVE_INTEGER = 0;
     private static final int JANUARY = 1;
     private static final int DECEMBER = 12;
     private static final String CLASS_TYPE_EXPENSE = "seedu.duke.data.transaction.Expense";
@@ -630,8 +630,8 @@ public class ParameterParser {
                     + parameter);
             throw new GlobalNumberNotNumericException();
         }
-        if (statsNumber <= SMALLEST_POSITIVE_INTEGER || statsNumber > MAXIMUM_STATS_NUMBER) {
-            parserLogger.log(Level.WARNING, "An invalid year number error is caught for the given parameter: "
+        if (statsNumber < MINIMUM_STATS_NUMBER || statsNumber > MAXIMUM_STATS_NUMBER) {
+            parserLogger.log(Level.WARNING, "An invalid number error is caught for the given parameter: "
                     + parameter);
             throw new StatsInvalidNumberException();
         }
