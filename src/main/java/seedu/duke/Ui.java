@@ -43,23 +43,29 @@ public class Ui {
 
     private static final String SPACE = "\t";
 
-
-    private static boolean inputIsEmpty(String rawInput) {
+    //@@author wilsonngja
+    private static boolean isInputEmpty(String rawInput) {
         return rawInput.trim().isEmpty();
     }
 
-    public static String readCommand() {
+    /**
+     * Accepts the input from the user and ignore empty input.
+     *
+     * @return the input string that user entered.
+     */
+    public String readCommand() {
         Scanner input = new Scanner(System.in);
 
         String rawInput = input.nextLine();
-        boolean isEmpty = inputIsEmpty(rawInput);
+        boolean isEmpty = isInputEmpty(rawInput);
         while (isEmpty) {
             rawInput = input.nextLine();
-            isEmpty = inputIsEmpty(rawInput);
+            isEmpty = isInputEmpty(rawInput);
         }
 
         return rawInput;
     }
+    //@@author
 
     public void showToUser(String message) {
         System.out.println(message);
@@ -198,6 +204,7 @@ public class Ui {
         System.out.println(SPACE + LINE_BREAK);
     }
 
+    //@@author wilsonngja
     public void displayOneProperty(Property property, int i) {
         // Prints out the index and landlord name
         String index = i + FULL_STOP;
@@ -218,6 +225,7 @@ public class Ui {
 
         System.out.println(LINE_BREAK);
     }
+    //@@author
 
     public void displayOnePropertyAddress(Property property, int i) {
         System.out.print(i + FULL_STOP);

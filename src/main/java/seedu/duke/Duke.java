@@ -1,3 +1,4 @@
+//@@author wilsonngja
 package seedu.duke;
 
 import seedu.duke.command.Command;
@@ -8,11 +9,13 @@ import seedu.duke.parsermanager.Parser;
 import seedu.duke.parsermanager.ParserManager;
 
 public class Duke {
+
     private Ui ui;
     private Storage storage;
     private PropertyList propertyList;
     private ClientList clientList;
     private PairingList pairingList;
+
 
     public Duke() {
         this.ui = new Ui();
@@ -34,7 +37,6 @@ public class Duke {
 
         do {
             try {
-                //System.exit(0); //to pass CI
                 String userInputText = ui.readCommand();
                 parser = parserManager.parseCommand(userInputText);
                 command = parser.parseCommand();
@@ -54,3 +56,4 @@ public class Duke {
         new Duke().run();
     }
 }
+//@@author

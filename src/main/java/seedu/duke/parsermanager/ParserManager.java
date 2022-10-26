@@ -1,3 +1,4 @@
+//@@author wilsonngja
 package seedu.duke.parsermanager;
 
 import seedu.duke.ClientList;
@@ -162,3 +163,4 @@ public class ParserManager {
         return listCommandTypeAndFlags;
     }
 }
+//@@author

@@ -218,6 +218,7 @@ public class Messages {
     public static final String MESSAGE_BYE = "Goodbye :). See you soon!";
 
 
+    //@@author wilsonngja
     /* Error message for Find Function */
     public static final String MESSAGE_FIND_INVALID_FLAG = "OOPS!!! Please ensure you only have 'f/' flag.";
 
@@ -245,4 +246,5 @@ public class Messages {
     public static final String MESSAGE_NO_CLIENT_FILE = "Client file does not exist.";
 
     public static final String MESSAGE_NO_PAIRING_FILE = "Pairing file does not exist.";
+    //@@author
 }

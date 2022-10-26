@@ -1,3 +1,4 @@
+//@@author wilsonngja
 package seedu.duke.command;
 
 import seedu.duke.Client;
@@ -62,3 +63,4 @@ public class CommandFindClient extends Command {
                 || clientEmail.contains(queryTextLowerCase) || clientBudget.contains(queryTextLowerCase);
     }
 }
+//@@author

@@ -1,3 +1,4 @@
+//@@author wilsonngja
 package seedu.duke.parsermanager;
 
 import seedu.duke.command.Command;
@@ -63,3 +64,4 @@ public class ParseFindProperty extends Parser {
         return false;
     }
 }
+//@@author

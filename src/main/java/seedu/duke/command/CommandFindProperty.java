@@ -1,3 +1,4 @@
+//@@author wilsonngja
 package seedu.duke.command;
 
 import seedu.duke.ClientList;
@@ -62,3 +63,4 @@ public class CommandFindProperty extends Command {
 
     }
 }
+//@@author

@@ -1,3 +1,4 @@
+//@@author wilsonngja
 package seedu.duke;
 
 import seedu.duke.exception.DukeException;
@@ -9,6 +10,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -295,6 +297,7 @@ public class Storage {
         // Update pairing hash map
         scanPairingFile(pairFile);
 
+        LOGGER.log(Level.INFO, LOG_PAIRING_LOAD_LABEL);
         // Re-populate pairing.txt
         updatePair();
 
@@ -594,3 +597,4 @@ public class Storage {
     }
 
 }
+//@@author
