@@ -7,9 +7,16 @@ participant Parser
 
 create "executor:\nClearCommand"
 Parser -> "executor:\nClearCommand" : executeClear()
+
+activate "executor:\nClearCommand"
 "executor:\nClearCommand" --> Parser: output: String
+destroy "executor:\nClearCommand"
 
 participant Ui
+
 Parser -> Ui : print(output)
+activate Ui
+Ui --> Parser
+deactivate Ui
 
 @enduml

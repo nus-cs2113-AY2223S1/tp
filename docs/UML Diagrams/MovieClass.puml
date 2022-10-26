@@ -12,15 +12,16 @@ abstract class Media {
 }
 
 class Movie {
-    +void Movie(title: String, rating: Double, genre: String,
+    +Movie(title: String, rating: Double, genre: String,
     dateWatchedString: String)
     +void toString()
 }
+hide Movie fields
 
 class TvShow {
     +site: String
     +dateWatched: String
-    +void TvShow(title: String, rating: Double, genre: String,
+    +TvShow(title: String, rating: Double, genre: String,
     dateWatchedString: String, site: String)
     +void toString()
 }

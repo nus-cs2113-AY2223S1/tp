@@ -10,16 +10,16 @@ AddressBook-Level3 https://github.com/se-edu/addressbook-level3
 ## Design
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 ### Ui component
-![img_1.png](imgs/commandsUML.png)
+![img.png](imgs/UiClass.png)
 
 ### Commands component
-![img.png](imgs/uiUML.png)
+![img.png](imgs/CommandsClass.png)
 
 ### Movie Classes
-![img.png](img.png)
+![img.png](imgs/MovieClass.png)
 
 ### Storage Class
-![img.png](imgs/storageClass.png)
+![img.png](imgs/StorageClass.png)
 
 
 ## Implementation
