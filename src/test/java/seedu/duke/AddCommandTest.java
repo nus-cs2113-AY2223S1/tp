@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class AddCommandTest {
     ReviewList reviews = new ReviewList();
+
     @Test
     void execute_addMovieTest() {
         Media harryPotter = new Movie("Harry Potter",5.0, "SciFi","10-01-2020");

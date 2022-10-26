@@ -13,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class MediaTest {
     ReviewList reviews;
+
     @Test
     void newMediaTest() {
         Media inception = new Media("Inception", 4.5, "Sci-fi","10-01-2021");

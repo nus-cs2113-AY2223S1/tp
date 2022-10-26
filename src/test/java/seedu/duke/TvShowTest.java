@@ -32,7 +32,7 @@ public class TvShowTest {
     }
 
     @Test
-    void createTVShowFileString() {
+    void createTvShowFileString() {
         TvShow friends = new TvShow("Friends",5.0, "Sitcom","10-01-2022", "Netflix");
         assertEquals("T|N|Friends|5.0|Sitcom|10-01-2022|Netflix", friends.createFileString());
         friends.isFavourite = true;
