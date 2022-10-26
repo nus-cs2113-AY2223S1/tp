@@ -120,6 +120,22 @@ public class UI {
         }
     }
 
+    public static void NOCEligibleMessage() {
+        System.out.println("You are eligible for NOC!");
+    }
+
+    public static void NOCIneligibleMessage() {
+        System.out.println("You are ineligible for NOC");
+    }
+
+    public static void SEPEligibleMessage() {
+        System.out.println("You are eligible for SEP!");
+    }
+
+    public static void SEPIneligibleMessage() {
+        System.out.println("You are ineligible for SEP");
+    }
+
     /**
      * Message to be displayed when an exception is encountered due to invalid input format
      */

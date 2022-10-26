@@ -58,6 +58,8 @@ public class Parser {
             return new Mcs(input);
         case "find":
             return new Find(input);
+        case "check":
+            return new Check(input);
         case "exit":
             return new Exit();
         default:
