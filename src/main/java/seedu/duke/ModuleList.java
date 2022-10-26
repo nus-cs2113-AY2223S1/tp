@@ -1,6 +1,5 @@
 package seedu.duke;
 
-import java.sql.Array;
 import java.util.ArrayList;
 
 public class ModuleList {
@@ -77,7 +76,6 @@ public class ModuleList {
      * The function then calls the printResponse() method to print the appropriate response message
      * @param semester The semester for which the modules need to be printed
      */
-
     public void view(String semester) {
         ArrayList<Module> matchingModules = new ArrayList<>();
         viewCount = 0;
@@ -96,7 +94,7 @@ public class ModuleList {
      * @param semester Semester for which the list of modules needs to be displayed
      * @param matchingModules a Collection of all modules taken in the particular semester that need to be printed
      */
-    private static void printResponse(String semester, ArrayList<Module> matchingModules) {
+    private void printResponse(String semester, ArrayList<Module> matchingModules) {
         if (matchingModules.isEmpty()) {
             UI.emptyListMessage(semester);
         } else {
@@ -108,7 +106,7 @@ public class ModuleList {
      * Function to calculate the number of Mcs in a particular semester and print it with appropriate message.
      * @param semester the semester for which the mcs need to be calculated and printed
      */
-    public static void mc(String semester) {
+    public void mc(String semester) {
         mcsCount = 0;
         for (Module mod : modules) {
             if (mod.getSemesterTaken().matches(semester)) {
@@ -118,21 +116,41 @@ public class ModuleList {
         UI.mcMessage(semester, mcsCount);
     }
 
-    public static boolean matchCheck(String keyword, Module mod) {
-        if (mod.getCourse().contains(keyword) || mod.getGrade().contains(keyword) ||
-                mod.getMcs() == Integer.parseInt(keyword) || mod.getSemesterTaken().contains(keyword)) {
-            return true;
-        }
-        return false;
+    /**
+     * For checking whether the module contains the keyword in its fields and return a boolean result.
+     * @param keyword the word to search for in existing modules
+     * @param mod the existing module to be checked
+     * @return true if mod contains the keyword specified in its field
+     */
+    public boolean findMatch(String keyword, Module mod) {
+        return mod.getCourse().equals(keyword) || mod.getGrade().equals(keyword) ||
+                mod.getSemesterTaken().equals(keyword) || (mod.getMcs() == Integer.parseInt(keyword));
     }
-    public static void find(String keyword) {
-        ArrayList<Module> matchingModules = new ArrayList<Module>();
+
+    /**
+     * For checking is there is any existing modules with the keyword specified in its field and print the appropriate message.
+     * @param keyword the word to search for in existing modules
+     */
+    public void find(String keyword) {
+        ArrayList<Module> matchingModules = new ArrayList<>();
         for (Module mod: modules) {
-            if (matchCheck(keyword, mod)) {
+            if (findMatch(keyword, mod)) {
                 matchingModules.add(mod);
             }
         }
-        UI.findMessage(matchingModules);
+        findMsg(matchingModules);
+    }
+
+    /**
+     * Printing the respective message with respect to the size of the matchingModules array list
+     * @param matchingModules the array list of modules containing the keyword
+     */
+    public void findMsg(ArrayList<Module> matchingModules) {
+        if (matchingModules.size() == 0) {
+            UI.emptyFindMessage();
+        } else {
+            UI.findMessage(matchingModules);
+        }
     }
 
     // Returns total number of Modules in modules Array

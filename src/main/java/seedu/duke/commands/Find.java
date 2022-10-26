@@ -2,7 +2,6 @@ package seedu.duke.commands;
 
 import seedu.duke.exceptions.InvalidInputContentException;
 import seedu.duke.ModuleList;
-import seedu.duke.exceptions.InvalidInputFormatException;
 
 public class Find extends Command {
     private String keyword;
@@ -14,25 +13,16 @@ public class Find extends Command {
      */
     public Find(String keyword) throws InvalidInputContentException {
         this.keyword = keyword.toUpperCase();
-        int[] idx = {0, keyword.length()};
-        checkContent(keyword, idx);
+        checkContent(keyword);
     }
 
     /**
      * function to check if input content is empty or not
      * @param input input entered by user. Format: String
-     * @param idx a collection of indexes where the details should be present. If these are empty, an exception should be thrown
      * @throws InvalidInputContentException exception thrown if input content is empty
      */
-    public void checkContent(String input, int[] idx) throws InvalidInputContentException {
-        boolean isSame;
-        isSame = InvalidInputContentException.emptyContent(idx[0], idx[1], input);
-        checkContentException(isSame);
-    }
-
-
-    public void checkContentException(boolean isSame) throws InvalidInputContentException {
-        if (isSame) {
+    public void checkContent(String input) throws InvalidInputContentException {
+        if (input.equals(" ")) {
             throw new InvalidInputContentException();
         }
     }
