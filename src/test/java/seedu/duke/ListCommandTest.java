@@ -10,14 +10,14 @@ class ListCommandTest {
             + "\nTV Shows:";
     final String expectedMovieList = "---Here are the reviews in your list---\n"
             + "\nMovies:\n"
-            + "1. [Movie]Harry Potter Rating:5.0 Genre:SciFi Date watched:10-01-2020\n"
+            + "1. [Movie] Harry Potter Rating:5.0 Genre:SciFi Date watched:10-01-2020\n"
             + "\nTV Shows:";
     final String expectedFullList = "---Here are the reviews in your list---\n"
             + "\nMovies:\n"
-            + "1. [Movie]Harry Potter Rating:5.0 Genre:SciFi Date watched:10-01-2020\n"
+            + "1. [Movie] Harry Potter Rating:5.0 Genre:SciFi Date watched:10-01-2020\n"
             + "\nTV Shows:"
-            + "\n1. [TV Show]Game of Thrones Rating:5.0 Genre:Fantasy "
-            + "Date watched:10-01-2020 Genre:Fantasy Site: HBO";
+            + "\n1. [TV Show] Game of Thrones Rating:5.0 Genre:Fantasy "
+            + "Date watched:10-01-2020 Site: HBO";
     ReviewList storedReviews = new ReviewList();
 
     @Test
