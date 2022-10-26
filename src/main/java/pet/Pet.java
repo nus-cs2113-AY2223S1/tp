@@ -1,5 +1,4 @@
 package pet;
-import pet.PetList.*;
 
 import java.util.Random;
 

@@ -1,6 +1,7 @@
 package parser;
 
-import command.*;
+import command.Command;
+import command.EmptyCommand;
 import command.serviceCommand.AddServiceCommand;
 import command.serviceCommand.RemoveServiceCommand;
 import command.serviceCommand.ViewServiceCommand;
