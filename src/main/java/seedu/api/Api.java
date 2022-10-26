@@ -166,7 +166,7 @@ public class Api {
 
         result += API_RESPONSE_TAIL;
 
-        ui.print(totalDataCount + " Parking Lot data received from LTA!");
+        ui.println(totalDataCount + " Parking Lot data received from LTA!");
 
         storage.writeDataToFile(result);
     }
@@ -295,10 +295,11 @@ public class Api {
         String message;
         switch(authStatus) {
         case FAIL:
-            message = "You have not authenticated your API key. Your API key is " + apiKey;
+            message = "You have not authenticated your API key. API key stored in the local file is " + apiKey
+                    + "\nUse command `auth APIKEY` to re-authenticate or change your key";
             break;
         case SUCCESS:
-            message = "You have authenticated your API key successfully. Your API key is " + apiKey;
+            message = "You have authenticated your API key successfully. API key stored in the local file is " + apiKey;
             break;
         case API_CHANGED:
             message = "You have loaded your API key (" + apiKey

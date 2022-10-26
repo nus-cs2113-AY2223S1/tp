@@ -23,9 +23,9 @@ public class HelpCommand extends Command {
                 + "information.\n";
         message += HELP_FORMAT + "\n";
         message += EXIT_FORMAT + "\n";
+        message += LIST_FORMAT + "\n";
         message += AUTH_FORMAT + "\n";
         message += UPDATE_FORMAT + "\n";
-        message += LIST_FORMAT + "\n";
         message += FILTER_FORMAT + "\n";
         message += FIND_FORMAT + "\n";
         message += FAVOURITE_FORMAT + "\n";

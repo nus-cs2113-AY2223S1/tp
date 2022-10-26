@@ -20,7 +20,7 @@ public class Ui {
      *
      * @param line String to print.
      */
-    public void print(String line) {
+    public void println(String line) {
         System.out.println(line);
     }
 
@@ -39,7 +39,7 @@ public class Ui {
      * @return User input.
      */
     public String getCommand() {
-        print("Enter a command:");
+        println("Enter a command:");
         return getLine();
     }
 
@@ -50,7 +50,7 @@ public class Ui {
     //Reused from https://www.asciiart.eu/vehicles/cars and http://patorjk.com/software/taag/
     // with minor modifications
     private void showLogo() {
-        print(
+        println(
                 "    ____\n"
                         + " __/  |_\\_\n"
                         + "|  _     _``-.\n"
@@ -75,7 +75,7 @@ public class Ui {
      * @param result Command result
      */
     public void printResult(CommandResult result) {
-        print(result.showToUser);
+        println(result.showToUser);
     }
 
     /**
@@ -84,93 +84,93 @@ public class Ui {
      * @param e {@link ParkingException} exception
      */
     public void printError(ParkingException e) {
-        print(e.getMessage());
+        println(e.getMessage());
     }
 
     /**
      * Show error message when fetching data is unsuccessful.
      */
     public void showFetchError() {
-        print("Something went wrong when fetching data, trying again...");
+        println("Something went wrong when fetching data, trying again...");
     }
 
     /**
      * Show error message when fetching data took too long.
      */
     public void showFetchTimeout() {
-        print("Fetch Timeout, trying again...");
+        println("Fetch Timeout, trying again...");
     }
 
     /**
      * Show error message when saving data to file.
      */
     public void showSaveError() {
-        print("Something went wrong when saving data.");
+        println("Something went wrong when saving data.");
     }
 
     /**
      * Show error message when creating file is unsuccessful.
      */
     public void showCreateFileError() {
-        print("Something wrong happened in file creation.");
+        println("Something wrong happened in file creation.");
     }
 
     /**
      * Show error message when invalid command is entered.
      */
     public void showInvalidCommandError() {
-        print("Invalid command. Try again.");
+        println("Invalid command. Try again.");
     }
 
     /**
      * Show goodbye message before user quits program.
      */
     public void showByeMessage() {
-        print("Goodbye.");
+        println("Goodbye.");
     }
 
     /**
      * Show message when loading data.
      */
     public void showLoadingDataMessage() {
-        print("Trying to load data...");
+        println("Trying to load data...");
     }
 
     /**
      * Show message when data is successfully loaded.
      */
     public void showLoadingDataSuccess() {
-        print("Load data sequence successful!");
+        println("Load data sequence successful!");
     }
 
     /**
      * Show message when data is successfully updated
      */
     public void showUpdateDataSuccess() {
-        print("Updated data successfully!");
+        println("Updated data successfully!");
     }
 
     public void showUpdateError() {
-        print("Unable to update data!");
+        println("Unable to update data!");
     }
     public void showApiKeySaved() {
-        print("API key saved successfully and the latest data has been downloaded.");
+        println("API key saved successfully and the latest data has been downloaded.");
     }
 
     public void showAuthError() {
-        print("Unable to authenticate API Key!");
+        println("Unable to authenticate API Key!");
     }
 
     public void showFavouriteAddSuccess(String carparkId) {
-        print(String.format("Added Carpark %s to favourites!", carparkId));
+        println(String.format("Added Carpark %s to favourites!", carparkId));
     }
 
     public void showUnfavouriteSuccess(String carparkId) {
-        print(String.format("Removed Carpark %s from favourites!", carparkId));
+        println(String.format("Removed Carpark %s from favourites!", carparkId));
     }
 
     public void showUpdateFavouriteError() {
-        print("Could not update favourite list.");
+        println("Could not update favourite list.");
     }
 
     /**

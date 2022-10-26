@@ -24,7 +24,7 @@ public class UiTest {
         System.setOut(new PrintStream(buffer));
 
         // Run what is supposed to output something
-        ui.print("Example string");
+        ui.println("Example string");
 
         // Stop capturing
         System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));
