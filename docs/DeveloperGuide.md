@@ -124,19 +124,19 @@ In the example above, `UserInterface#run()` calls `UserInterface#convertExpenseT
 
 ![Implementation-SD-Print-Expense](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ImplementationRefPrintExpense.puml)
 
-### Adding an expense
+### Adding an expense: `Add-Expense`
 
 ![Implementation-Add-Expense](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ImplementationAddExpense.puml)
 
-### Viewing an expense
+### Viewing an expense: `View-Expense`
 
 ![Implementation-View-Expense](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ImplementationViewExpense.puml)
 
-### Deleting an expense
+### Deleting an expense: `Delete-Expense`
 
 ![Implementation-Delete-Expense](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ImplementationDeleteExpense.puml)
 
-### Editing an expense
+### Editing an expense: `Edit-Expense`
 
 ![Implementation-Edit-Expense](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ImplementationEditExpense.puml)
 
@@ -144,23 +144,23 @@ In the example above, `UserInterface#run()` calls `UserInterface#convertExpenseT
 
 ![Implementation-SD-Print-RecurringPayment](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ImplementationRefPrintRecurringPayment.puml)
 
-### Adding a recurring payment
+### Adding a recurring payment: `Add-RecurringPayment`
 
 ![Implementation-Add-RecurringPayment](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ImplementationAddRecurringPayment.puml)
 
-### Viewing a recurring payment
+### Viewing a recurring payment: `View-RecurringPayment`
 
 ![Implementation-View-RecurringPayment](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ImplementationViewRecurringPayment.puml)
 
-### Deleting a recurring payment
+### Deleting a recurring payment: `Delete-RecurringPayment`
 
 ![Implementation-Delete-RecurringPayment](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ImplementationDeleteRecurringPayment.puml)
 
-### Editing a recurring payment
+### Editing a recurring payment: `Edit-RecurringPayment`
 
 ![Implementation-Edit-RecurringPayment](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ImplementationEditRecurringPayment.puml)
 
-### Adding an expense from a recurring payment
+### Adding an expense from a recurring payment: `Pay-RecurringPayment`
 
 ![Implementation-Edit-RecurringPayment](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ImplementationPayRecurringPayment.puml)
 
