@@ -6,24 +6,29 @@ skinparam rectangleTextAlignment<<left>> left
 package Exceptions {
     Class MoneyGoWhereException EXCEPTIONS_COLOR_1
 
-    Class ExpenseManagerExceptions EXCEPTIONS_COLOR_1
-    Class IncomeManagerExceptions EXCEPTIONS_COLOR_1
-    Class TargetManagerExceptions EXCEPTIONS_COLOR_1
-    Class RecurringPaymentManagerExceptions EXCEPTIONS_COLOR_1
-    Class CurrencyManagerExceptions EXCEPTIONS_COLOR_1
+    Class ExpenseManagerExpenseNotFoundException EXCEPTIONS_COLOR_1
+    Class IncomeManagerIncomeNotFoundException EXCEPTIONS_COLOR_1
+    Class TargetManagerTargetNotFoundException EXCEPTIONS_COLOR_1
+    Class RecurringPaymentManagerRecurringPaymentNotFoundException EXCEPTIONS_COLOR_1
+    Class CurrencyManagerCurrencyInvalidException EXCEPTIONS_COLOR_1
 
-    Class ConsoleParserExceptions EXCEPTIONS_COLOR_1
+    Class ConsoleParserCommandAddExpenseInvalidException EXCEPTIONS_COLOR_1
 
-    Class LocalStorageExceptions EXCEPTIONS_COLOR_1
+    Class LocalStorageLoadDataException EXCEPTIONS_COLOR_1
+
+    note as Note
+        Note that this diagram
+        is not exhaustive.
+    end note
 }
 
-ExpenseManagerExceptions -up-|> MoneyGoWhereException
-IncomeManagerExceptions --up-|> MoneyGoWhereException
-TargetManagerExceptions --up-|> MoneyGoWhereException
-RecurringPaymentManagerExceptions -up-|> MoneyGoWhereException
-CurrencyManagerExceptions --up-|> MoneyGoWhereException
+ExpenseManagerExpenseNotFoundException -up-|> MoneyGoWhereException
+IncomeManagerIncomeNotFoundException --up-|> MoneyGoWhereException
+TargetManagerTargetNotFoundException --up-|> MoneyGoWhereException
+RecurringPaymentManagerRecurringPaymentNotFoundException -up-|> MoneyGoWhereException
+CurrencyManagerCurrencyInvalidException --up-|> MoneyGoWhereException
 
-ConsoleParserExceptions ---up-|> MoneyGoWhereException
+ConsoleParserCommandAddExpenseInvalidException ---up-|> MoneyGoWhereException
 
-LocalStorageExceptions ---up-|> MoneyGoWhereException
+LocalStorageLoadDataException ---up-|> MoneyGoWhereException
 @enduml

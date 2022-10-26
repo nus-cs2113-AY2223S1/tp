@@ -1,14 +1,23 @@
-# Developer Guide
+# Developer Guide (Pre-Release)
 
 ## Introduction
 
-{add introduction here}
+MoneyGoWhere is a financial tracker designed to help computing professionals manage their finances.
+This developer guide explains the design considerations and implementation details required for future developers to work on MoneyGoWhere.
+
+`IMPORTANT:` In this pre-release version, the diagrams in this user guide are rendered on-the-fly as the webpage is loaded. 
+**If your internet connection is unstable, the diagrams may appear as broken links.** 
+Please refresh the webpage if the diagrams are not loaded in time.
 
 ## Acknowledgements
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+We would like to acknowledge the following sources which our team has referenced during the development of MoneyGoWhere:
+* AddressBook-Level3's User Guide and Developer Guide ([Website](https://se-education.org/addressbook-level3/))
+* Apache Commons CLI Library ([Website](https://commons.apache.org/proper/commons-cli/))
+* Apache Commons Text Library ([Website](https://commons.apache.org/proper/commons-text/))
 
 ## Getting Started
+
 This program was developed using the Java JDK 11 and Intellij IDEA.
 The following steps will guide you through the setup process to get your development environment up and running.
 1. Install JDK 11.
@@ -32,9 +41,9 @@ You should see the following greeting message if the project setup is successful
 Your MoneyGoWhere? Let me help you track it.
 ```
 
-## Design & Implementation
+## Design
 ### Software Architecture:
-The software architecture diagram below describes the application's design and the interaction between components.
+The software architecture diagram below describes the program's design and the interaction between components.
 
 ![Software-Architecture](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/SoftwareArchitecture.puml)
 
@@ -42,38 +51,62 @@ The software architecture diagram below describes the application's design and t
 
 | Component     | Function                                                                            |
 |---------------|-------------------------------------------------------------------------------------|
-| MoneyGoWhere  | Main entrypoint of the application.                                                 |
-| Common        | Defines various parameters used by the application.                                 |
+| MoneyGoWhere  | Main entrypoint of the program.                                                     |
+| Common        | Defines various parameters used by the program.                                     |
 | Exceptions    | Defines exceptions thrown by the program.                                           |
 | UserInterface | Provides functions to interface with the user via standard I/O and handle commands. |
 | Command       | Defines the commands accepted by the program along with its arguments.              |
 | Parser        | Provides functions to parse inputs read from standard input.                        |
 | Data          | Stores data and provides functions to operate on data.                              |
 | Storage       | Defines functions to save and load data.                                            |
-| Logger        | Defines functions to log the user's actions and the application's behaviour.        |
+| Logger        | Defines functions to log the user's actions and the program's behaviour.            |
 
 ### Component Interactions:
 The sequence diagram below describes the interaction between the various core components when a command is entered.
 In this example, 
-the user enters the command `Add-Expense -n Expense -a 7.80` to add an expense with the name `Expense` and the amount `7.80`.
+the user launches the program and enters the command `Add-Expense -n Expense -a 7.80` to add an expense with the name `Expense` and the amount `7.80`.
+The sequence diagrams referenced by the component interaction diagram can be seen [below](#component-interaction-sequence-diagrams)
 
 ![Component-Interaction-On-Command-Entered](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentInteractionsOnCommandEntered.puml)
 
-* The `UserInterface` runs continuously in a loop.
-When the program is ready to receive the user's input, 
-it calls `UserInterface#getConsoleCommand()` which reads the input from standard in.
-* `UserInterface#getConsoleCommand()` calls `Parser#parse()` to parse the input string into a `ConsoleCommand` object.
-* Depending on the instance of `ConsoleCommand`, the corresponding command handler function will be called.\
-In the example above, `ConsoleCommand` is an instance of `ConsoleCommandAddExpense` and hence, 
+* When the user launches the program, `MoneyGoWhere` creates an instance of `UserInterface`.
+* `MoneyGoWhere` calls `UserInterface#run()` to start the interface between the program and the user.
+* `UserInterface#run()` will execute continuously in a loop until the user enters the command `Bye`.
+* `UserInterface#run()` calls `UserInterface#getConsoleCommand()` to read and parse the user's input.
+* `UserInterface#run()` will then call the corresponding command handler function based on the user's input.\
+In the example above, `ConsoleCommand` is an instance of `ConsoleCommandAddExpense` and hence,
 `UserInterface#runCommandAddExpense()` is called.
-* The `UserInterface` command handler functions calls various `Data` functions to perform operations on data.\
+* When the command handler function is called, it calls `Data` functions to perform operations on data.\
 In the example above, `UserInterface#runCommandAddExpense()` calls `Data#addExpense()` to add an expense to the program.
-* After the operations is performed, command handler functions calls `Storage` functions to save data.\
+* After the operations are performed, command handler functions calls `Storage` functions to save data.\
 In the example above, `UserInterface#runCommandAddExpense()` calls `Storage#saveToFile()` to save the newly added expense to a file.
+
+#### Component Interaction Sequence Diagrams:
+
+![Component-Interaction-On-Command-Entered](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentInteractionsRefGetUserCommand.puml)
+
+* `UserInterface#getConsoleCommand()` calls `UserInterface#getConsoleInput()` to read the user's input as a string.
+* `UserInterface#getConsoleCommand()` then calls `Parser#parse()` to parse the input string into the corresponding console command object.
+
+![Component-Interaction-On-Command-Entered](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentInteractionsRefPrintExpense.puml)
+
+* `UserInterface#run()` will call the corresponding convert object function based on the data object's class.
+In the example above, `UserInterface#run()` calls `UserInterface#convertExpenseToConsoleString()` to convert the expense object into a formatted string.
+* `UserInterface#run()` will then call `UserInterface#printInformationalMessage()` to print the converted object.
+
+![Component-Interaction-On-Command-Entered](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentInteractionsRefSaveExpensesToFile.puml)
+
+* `UserInterface#run()` calls `Data#save()` to save the data managed by the data manager class.
+* `Data#save()` calls `Storage#saveToFile()` to write the data to a file.
 
 ### Common Component
 
+The Common component consists of the class `Messages` and `Configurations`.
+
 ![Component-Common](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentCommon.puml)
+
+The `Messages` class defines the messages used by the program during execution. It includes the informational, warning and error messages that are displayed to the user.
+The `Configurations` class defines the configuration parameters used by the program. It stores parameters such as formatting information, directory and file paths, and the URLs of different APIs.
 
 ### Exceptions Component
 
@@ -86,6 +119,55 @@ In the example above, `UserInterface#runCommandAddExpense()` calls `Storage#save
 ### Commands Component
 
 ![Component-Commands](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentCommands.puml)
+
+## Implementation
+### Reading and parsing the user's commands
+
+![Implementation-Add-Expense](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ImplementationRefGetConsoleCommand.puml)
+
+### Printing an expense
+
+![Implementation-SD-Print-Expense](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ImplementationRefPrintExpense.puml)
+
+### Adding an expense: `Add-Expense`
+
+![Implementation-Add-Expense](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ImplementationAddExpense.puml)
+
+### Viewing an expense: `View-Expense`
+
+![Implementation-View-Expense](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ImplementationViewExpense.puml)
+
+### Deleting an expense: `Delete-Expense`
+
+![Implementation-Delete-Expense](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ImplementationDeleteExpense.puml)
+
+### Editing an expense: `Edit-Expense`
+
+![Implementation-Edit-Expense](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ImplementationEditExpense.puml)
+
+### Printing a recurring payment
+
+![Implementation-SD-Print-RecurringPayment](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ImplementationRefPrintRecurringPayment.puml)
+
+### Adding a recurring payment: `Add-RecurringPayment`
+
+![Implementation-Add-RecurringPayment](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ImplementationAddRecurringPayment.puml)
+
+### Viewing a recurring payment: `View-RecurringPayment`
+
+![Implementation-View-RecurringPayment](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ImplementationViewRecurringPayment.puml)
+
+### Deleting a recurring payment: `Delete-RecurringPayment`
+
+![Implementation-Delete-RecurringPayment](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ImplementationDeleteRecurringPayment.puml)
+
+### Editing a recurring payment: `Edit-RecurringPayment`
+
+![Implementation-Edit-RecurringPayment](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ImplementationEditRecurringPayment.puml)
+
+### Adding an expense from a recurring payment: `Pay-RecurringPayment`
+
+![Implementation-Edit-RecurringPayment](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ImplementationPayRecurringPayment.puml)
 
 ## Product scope
 ### Target user profile
@@ -141,4 +223,9 @@ In the example above, `UserInterface#runCommandAddExpense()` calls `Storage#save
 
 ## Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+### Launching MoneyGoWhere
+1. Set up the project according to the steps in [Getting Started](#getting-started)
+2. Launch MoneyGoWhere by running `main()` in `MoneyGoWhere.java`
+
+### Terminating MoneyGoWhere
+1. Enter `Bye` into the console

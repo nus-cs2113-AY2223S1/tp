@@ -1,56 +1,88 @@
 @startuml
 !include https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/Styles.puml
 
+skinparam sequenceReferenceBackgroundColor #ffffff
+skinparam noteTextAlignment left
+
 Actor User USER_COLOR
+Participant ":MoneyGoWhere" as MoneyGoWhere MONEYGOWHERE_COLOR_1
 Participant ":UserInterface" as UserInterface USER_INTERFACE_COLOR_1
 Participant ":Parser" as Parser PARSER_COLOR_1
 Participant ":Data" as Data DATA_COLOR_1
+Participant ":Expense" as Expense DATA_COLOR_1
 Participant ":Storage" as Storage STORAGE_COLOR_1
 
+User -[USER_COLOR]> MoneyGoWhere
+activate MoneyGoWhere MONEYGOWHERE_COLOR_1
+
+create UserInterface
+MoneyGoWhere -[MONEYGOWHERE_COLOR_1]> UserInterface
 activate UserInterface USER_INTERFACE_COLOR_1
 
-UserInterface -[USER_INTERFACE_COLOR_1]> UserInterface : getConsoleCommand()
-activate UserInterface USER_INTERFACE_COLOR_1
-
-UserInterface -[USER_INTERFACE_COLOR_1]> UserInterface : getConsoleInput()
-activate UserInterface USER_INTERFACE_COLOR_1
-User -[USER_COLOR]> UserInterface : "Add-Expense -n Expense -a 7.80"
-UserInterface --[USER_INTERFACE_COLOR_1]> UserInterface : consoleInput
-deactivate UserInterface
-
-UserInterface -[USER_INTERFACE_COLOR_1]> Parser : parse(consoleInput)
-activate Parser PARSER_COLOR_1
-Parser --[PARSER_COLOR_1]> UserInterface : consoleCommandAddExpense
-deactivate Parser
-
-UserInterface --[USER_INTERFACE_COLOR_1]> UserInterface : consoleCommand
-deactivate UserInterface
-
-UserInterface -[USER_INTERFACE_COLOR_1]> UserInterface : runCommandAddExpense(consoleCommand)
-activate UserInterface USER_INTERFACE_COLOR_1
-
-UserInterface -[USER_INTERFACE_COLOR_1]> Data : addExpense(expense)
+create Data
+UserInterface -[USER_INTERFACE_COLOR_1]> Data
 activate Data DATA_COLOR_1
-Data --[DATA_COLOR_1]> UserInterface
-deactivate Data
-
-UserInterface -[USER_INTERFACE_COLOR_1]> UserInterface : printInformationalMessage(message)
-activate UserInterface USER_INTERFACE_COLOR_1
-UserInterface --[USER_INTERFACE_COLOR_1]> UserInterface
-deactivate UserInterface
-
-UserInterface -[USER_INTERFACE_COLOR_1]> Data : save()
-activate Data DATA_COLOR_1
-
-Data -[DATA_COLOR_1]> Storage : saveToFile(expenses)
-activate Storage STORAGE_COLOR_1
-
-Storage --[STORAGE_COLOR_1]> Data
-deactivate Storage
 
 Data --[DATA_COLOR_1]> UserInterface
 deactivate Data
 
-UserInterface --[USER_INTERFACE_COLOR_1]> UserInterface
+UserInterface -[USER_INTERFACE_COLOR_1]> MoneyGoWhere
 deactivate UserInterface
+
+MoneyGoWhere -[MONEYGOWHERE_COLOR_1]> UserInterface : run()
+activate UserInterface USER_INTERFACE_COLOR_1
+
+loop Command not equals "Bye"
+    ref over User, UserInterface, Parser
+        Get User Command
+    end ref
+
+    opt consoleCommand is instance of ConsoleCommandAddExpense
+        UserInterface -[USER_INTERFACE_COLOR_1]> UserInterface : \lrunCommandAddExpense(\n\tconsoleCommand:ConsoleCommandAddExpense\n)
+        activate UserInterface USER_INTERFACE_COLOR_1
+
+        note right
+            This diagram is not exhaustive. The other commands
+            are handled by different command handler functions.
+        end note
+
+        create Expense
+        UserInterface -[USER_INTERFACE_COLOR_1]> Expense
+        activate Expense DATA_COLOR_1
+
+        Expense --[DATA_COLOR_1]> UserInterface
+        deactivate Expense
+
+        UserInterface -[USER_INTERFACE_COLOR_1]> Data : addExpense(expense:Expense)
+        activate Data DATA_COLOR_1
+
+        Data --[DATA_COLOR_1]> UserInterface
+        deactivate Data
+
+        ref over UserInterface
+            Print Expense
+        end ref
+
+        ref over UserInterface, Storage
+            Save Expenses to File
+        end ref
+
+        UserInterface --[USER_INTERFACE_COLOR_1]> UserInterface
+        deactivate UserInterface
+    end opt
+end loop
+
+UserInterface --[USER_INTERFACE_COLOR_1]> MoneyGoWhere
+deactivate UserInterface
+
+destroy UserInterface
+destroy Parser
+destroy Data
+destroy Expense
+destroy Storage
+
+MoneyGoWhere --[MONEYGOWHERE_COLOR_1]> User
+deactivate MoneyGoWhere
+
+destroy MoneyGoWhere
 @enduml

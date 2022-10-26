@@ -1,0 +1,22 @@
+@startuml
+!include https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/Styles.puml
+
+skinparam noteTextAlignment left
+
+mainframe sd Save Expenses To File
+Participant ":UserInterface" as UserInterface USER_INTERFACE_COLOR_1
+Participant ":Data" as Data DATA_COLOR_1
+Participant ":Storage" as Storage STORAGE_COLOR_1
+
+UserInterface -[USER_INTERFACE_COLOR_1]> Data : save()
+activate Data DATA_COLOR_1
+
+Data -[DATA_COLOR_1]> Storage : saveToFile(expenses:ArrayList<Expense>)
+activate Storage STORAGE_COLOR_1
+
+Storage --[STORAGE_COLOR_1]> Data
+deactivate Storage
+
+Data --[DATA_COLOR_1]> UserInterface
+deactivate Data
+@enduml
