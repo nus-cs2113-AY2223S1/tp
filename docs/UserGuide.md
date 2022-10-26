@@ -1,5 +1,36 @@
 # User Guide
 
+## Table of Contents
+
+### 1. [Introduction](#introduction)
+### 2. [Quick Start](#quick-start)
+### 3. [Features](#features)
+3.1 [Create Command](#create-command-create-uuniversity_name)\
+3.2 [Exit Command](#exit-command-exit)\
+3.3 [Help Command](#help-command-help)\
+3.4 [Add Command](#add-command-add)\
+3.5 [Add Command for Lessons](#add-command-for-lessons-add-uuniversity_name-mmodule_code-dday_of_the_week-ststart_time-enend_time)\
+3.6 [Add Command for Module Mapping](#add-command-for-module-mapping-add-uuniversity_name-mmodule_code)\
+3.7 [Delete Command](#delete-command-delete)\
+3.8 [Delete Command for Lessons](#delete-command-for-lessons-delete-uuniversity_name-mmodule_code-dday_of_the_week-ststart_time-enend_time)\
+3.9 [Delete Command for Modules](#delete-command-for-modules-delete-uuniversity_name-mmodule_code)\
+3.10 [Delete Command for Universities](#delete-command-for-universities-delete-uuniversity_name)\
+3.11 [View Command](#view-command-view)\
+3.12 [View Command for University List](#view-command-for-all-user-university-lists-view-lists)\
+3.12 [View Command for delete history](#view-command-for-users-delete-history-view-delete_history)\
+3.13 [View Command for select University](#view-command-for-users-selected-university-view-uuniversity_name)\
+3.14 [View Command for Timetables](#view-command-for-all-timetables-created-by-user-view-timetables)\
+3.15 [List Command](#list-command-list)\
+3.16 [List Command for all Universities](#list-command-for-all-universities-list-universities)\
+3.17 [List Command for all Modules](#list-command-for-all-modules--list-modules)\
+3.18 [Filtered List Command by module](#filtered-list-command-by-module-list-mmodulecode)\
+3.19 [Filtered List Command by university](#filtered-list-command-by-university-name-list-uuniversity_name_in_underscores)\
+3.20 [Favourite Command](#favourite-command-favourite)\
+3.21 [Favourite Command to view favourite lists](#favourite-command-for-viewing-all-favourited-lists-favourite-view)\
+3.22 [Favourite Command to add list to favourites](#favourite-command-for-adding-a-list-to-favourites--favourite-adduniversity_name_in_underscores)\
+3.23 [Favourite Command to delete list from favourites](#favourite-command-for-deleting-a-list-from-favourites--favourite-deluniversity_name_in_underscores)
+### 4. [Command Summary](#command-summary)
+
 ## Introduction
 
 easySEP is a CLI application created to assist NUS Computer Engineering undergraduates intending to embark on a Student Exchange Programme in their planning for student exchange.
