@@ -71,7 +71,7 @@ public class Carpark {
             + Ui.getSeparatorString() + "\n"
             + String.format(formatString, carparkId, favourited, availableLots)
             + getLotBreakdownString() + "\n"
-            + Ui.getSeparatorString() + "\n";
+            + Ui.getSeparatorString();
         return bufferString;
     }
 

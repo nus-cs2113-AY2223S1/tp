@@ -46,7 +46,7 @@ public class FavouriteCommand extends Command {
                     content.append(carparkList.findCarpark(id).toString());
                     content.append("\n" + SEPARATOR_STRING + "\n");
                 }
-                return new CommandResult(content.toString());
+                return new CommandResult(content.toString().trim());
             } else {
                 Carpark result = carparkList.findCarpark(argument);
                 setFavourite(result.getCarparkId());
