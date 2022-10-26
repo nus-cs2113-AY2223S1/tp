@@ -36,8 +36,12 @@ public class VisitList {
 
     public void editReason(UI ui, int index, String reason) {
         assert reason != null : "reason should not be null, use deleteReason instead";
-        visitList.get(index - 1).setReason(reason);
-        ui.printEditVisitReasonMessage(visitList.get(index - 1).toString());
+        if (index < 1 || index > getTotalVisits()) {
+            System.out.println("There is no such visit in the system with index " + index + "!");
+        } else {
+            visitList.get(index - 1).setReason(reason);
+            ui.printEditVisitReasonMessage(visitList.get(index - 1).toString());
+        }
     }
 
     public void deleteReason(UI ui, int index) {
