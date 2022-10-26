@@ -59,7 +59,7 @@ public class AddModuleCommand extends Command {
     @Override
     public String getExecutionMessage() {
         String outputMessage;
-        if (isModuleOffered){
+        if (isModuleOffered) {
             if (successfullyAdded) {
                 outputMessage = module.moduleCode + " has been added";
             } else {
