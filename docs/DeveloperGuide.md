@@ -196,10 +196,26 @@ The module mapping support provided by the EduRec website is not helpful, allowi
 
 ## User Stories
 
-| Version | As a ... | I want to ...             | So that I can ...                                           |
-| ------- | -------- | ------------------------- | ----------------------------------------------------------- |
-| v1.0    | new user | see usage instructions    | refer to them when I forget how to use the application      |
-| v2.0    | user     | find a to-do item by name | locate a to-do without having to go through the entire list |
+| Version | As a ...              | I want to ...                                                            | So that I can ...                                                         |
+| ------- | --------------------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------------- |
+| v1.0    | interested user       | use a program that provides feedback to my actions                       | feel my commands being acknowledged                                       |
+| v1.0    | interested user       | have my commands understood by the program                               | use the easySEP to plan my SEP modules                                    |
+| v1.0    | user                  | save my shortlisted modules and their associated partner universities    | continue my module mapping search at a later time                         |
+| v1.0    | user                  | create a listing for my target university                                | track whatever modules I am interested in for my target university so far |
+| v1.0    | user                  | add a module that I am interested in to a list                           | track what I have seen so far                                             |
+| v1.0    | potential SEP student | plan my schedule based on the most up-to-date information                | ensure the currency of my plans                                           |
+| v1.0    | user                  | be able to delete modules that I am no longer interested in from my list | ignore them in my planning                                                |
+| v1.0    | user                  | edit my previous modules that I have added                               | make changes to my plans whenever needed                                  |
+| v1.0    | user                  | be able to view my past modules that I have saved                        | refer back to my previous lists                                           |
+| v2.0    | user                  | see the list of valid commands                                           | review the valid commands                                                 |
+| v2.0    | potential SEP student | be able to view the full list of modules available                       | consider all my available options                                         |
+| v2.0    | potential SEP student | be able to view the full list of partner universities available          | consider all my available options                                         |
+| v2.0    | user                  | be able to view all module mappings for an NUS module code               | consider modules to map                                                   |
+| v2.0    | user                  | be able to view all module mappings offered by a partner university      | consider modules to map                                                   |
+| v2.0    | user                  | see my most 5 recent deleted modules                                     | check my history                                                          |
+| v2.0    | user                  | be able to favourite my lists                                            | keep that of my priorities                                                |
+| v2.0    | user                  | various search functions for my lists                                    | search for information faster                                             |
+| v2.0    | user                  | be able to add class timings and create a timetable for SEP              | keep track of my timetable                                                |
 
 ## Non-Functional Requirements
 
@@ -207,7 +223,10 @@ The module mapping support provided by the EduRec website is not helpful, allowi
 
 ## Glossary
 
-- _glossary item_ - Definition
+- HU: home university
+- PU: partner university
+- u/ - university
+- m/ - modules
 
 ## Instructions for manual testing
 
