@@ -20,13 +20,13 @@ public class Employee {
         tasks.add(task);
     }
 
-    public void removeTaskFromEmployee(int taskId){
+    public void removeTaskFromEmployee(int taskId) {
         tasks.removeIf(task -> task.getTaskId() == taskId);
     }
 
-    public void viewTasks(){
+    public void viewTasks() {
         System.out.println("Employee " + employeeName + "'s Task List:");
-        for(Task task: tasks){
+        for (Task task: tasks) {
             System.out.println("________________________");
             task.printTask();
         }

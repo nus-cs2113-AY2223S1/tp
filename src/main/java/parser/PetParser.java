@@ -2,12 +2,11 @@ package parser;
 
 import command.Command;
 import command.EmptyCommand;
-import command.petCommand.AddPetCommand;
-import command.petCommand.RemovePetCommand;
-import command.petCommand.ViewPetCommand;
+import command.petcommand.AddPetCommand;
+import command.petcommand.RemovePetCommand;
+import command.petcommand.ViewPetCommand;
 import exception.DukeException;
 import pet.Pet;
-import seedu.duke.Duke;
 
 public class PetParser {
     private int lengthOfSignature;

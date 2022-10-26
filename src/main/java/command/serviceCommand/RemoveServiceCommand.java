@@ -4,11 +4,11 @@ import command.Command;
 import service.ServiceList;
 
 public class RemoveServiceCommand extends Command {
-    public final static String COMMAND_WORD = "remove";
+    public static final String COMMAND_WORD = "remove";
 
     private int serviceId;
 
-    public RemoveServiceCommand(int serviceId){
+    public RemoveServiceCommand(int serviceId) {
         this.serviceId = serviceId;
     }
 

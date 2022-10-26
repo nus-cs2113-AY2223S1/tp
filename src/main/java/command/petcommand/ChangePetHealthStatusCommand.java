@@ -1,4 +1,4 @@
-package command.petCommand;
+package command.petcommand;
 
 import pet.Pet;
 import pet.PetList;
@@ -9,7 +9,7 @@ public class ChangePetHealthStatusCommand {
     private int index;
     public boolean isHealthy;
 
-    public ChangePetHealthStatusCommand(int index, boolean isHealthy){
+    public ChangePetHealthStatusCommand(int index, boolean isHealthy) {
         this.index = index;
         this.isHealthy = isHealthy;
     }

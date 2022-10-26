@@ -1,4 +1,4 @@
-package command.petCommand;
+package command.petcommand;
 
 import pet.Pet;
 import pet.PetHealthyStatus;
@@ -11,17 +11,17 @@ public class InitPetStatusCommand {
     public static final int NUM_OF_STATUS = 5;
     private int index;
 
-    public InitPetStatusCommand(int index){
+    public InitPetStatusCommand(int index) {
         this.index = index;
     }
 
-    public void excecute() {
+    public void execute() {
         Random random = new Random();
         int randomNumber = random.nextInt(NUM_OF_STATUS) + 1;
         int changeIndex = index - 1;
         Pet currPet = PetList.petList.get(changeIndex);
-        if (currPet.isHealthy == true){
-            switch (randomNumber){
+        if (currPet.isHealthy == true) {
+            switch (randomNumber) {
             case 1:
                 currPet.status = PetHealthyStatus.happy;
                 break;
@@ -37,10 +37,11 @@ public class InitPetStatusCommand {
             case 5:
                 currPet.status = PetHealthyStatus.crazy;
                 break;
+            default:
+                break;
             }
-        }
-        else if (currPet.isHealthy = false){
-            switch (randomNumber){
+        } else if (currPet.isHealthy = false) {
+            switch (randomNumber) {
             case 1:
                 currPet.status = PetUnhealthyStatus.exhausted;
                 break;
@@ -55,6 +56,8 @@ public class InitPetStatusCommand {
                 break;
             case 5:
                 currPet.status = PetUnhealthyStatus.dying;
+                break;
+            default:
                 break;
             }
         }

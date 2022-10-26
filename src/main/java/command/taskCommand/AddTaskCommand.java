@@ -9,7 +9,7 @@ import java.util.zip.DataFormatException;
 
 public class AddTaskCommand extends Command {
 
-    public final static String COMMAND_WORD = "add";
+    public static final String COMMAND_WORD = "add";
 
     private final Task task;
 
