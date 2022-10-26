@@ -339,18 +339,6 @@ public class TimetableDict {
                 }
             }
         }
-        //For debugging
-        int permutationCounter = 1;
-        System.out.println("------ " + module.getModuleCode() + " ------");
-        for (List<Lesson> permutation : result) {
-            System.out.println("--- Permutation" + permutationCounter + " ---");
-            for (Lesson lesson : permutation) {
-                System.out.println(lesson.getLessonType() + "|" + lesson.getDay()
-                     + "|" + lesson.getStartTime() + "-" + lesson.getEndTime());
-            }
-            permutationCounter++;
-        }
-        System.out.print("\n");
         return result;
     }
 }
