@@ -13,6 +13,11 @@ public class PatientList {
         ui.printPatientAddedMessage(patient);
     }
 
+    public void loadPatient(String name, String birthDate, String gender, String id) {
+        Patient patient = new Patient(name, birthDate, gender, id);
+        patients.add(patient);
+    }
+
     public void retrievePatient(UI ui, String id) {
         for (Patient patient : patients) {
             if (patient.getId().equals(id)) {
@@ -86,6 +91,10 @@ public class PatientList {
 
         ui.printLine();
 
+    }
+
+    public ArrayList<Patient> getPatients() {
+        return patients;
     }
 
 }

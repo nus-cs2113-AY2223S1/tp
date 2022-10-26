@@ -17,10 +17,7 @@ public class Visit {
     }
 
     public Visit(String id, String dateOfVisit, String timeOfVisit) {
-        this.id = id;
-        this.dateOfVisit = dateOfVisit;
-        this.timeOfVisit = timeOfVisit;
-        this.reason = "";
+        this (id, dateOfVisit, timeOfVisit, "");
     }
 
     public String getId() {
@@ -47,13 +44,13 @@ public class Visit {
     public String toString() {
         String message = "";
         message += "\tID: " + getId();
-        message += "\n";
+        message += System.lineSeparator();
         message += "\tDate: " + getDateOfVisit();
-        message += "\n";
+        message += System.lineSeparator();
         message += "\tTime: " + getTimeOfVisit();
-        message += "\n";
+        message += System.lineSeparator();
         message += "\tReason: ";
-        message += getReason() == "" ? "NIL" : getReason();
+        message += getReason().equals("") ? "NIL" : getReason();
         return message;
     }
 }

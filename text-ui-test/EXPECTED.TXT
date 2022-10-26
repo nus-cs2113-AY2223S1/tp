@@ -1,3 +1,4 @@
+Loading existing data...
 Hello welcome to
 ıllıllı OneDoc ıllıllı
 Please choose one of the following options:
@@ -5,19 +6,4 @@ Please choose one of the following options:
 2 - Visits
 3 - Prescription
 bye - Quit OneDoc
-This is the Patient Main Menu!
-List of commands: 
-* To add a patient: add n/[name] g/[M/F] d/[DOB] i/[ID]
-* To list all patients: viewall
-* To retrieve information about a specific patient: retrieve i/[ID]
-* To edit a patient's information: edit i/[ID] (n/[name] or g/[M/F] or d/[DOB])
-* To return to main menu: main
-* To quit OneDoc: bye
-Ok! I've added a patient! The patient's details are as follows:
-	____________________________________________________________
-	Name: Michael
-	Gender: Male
-	Date of Birth: 22-12-2022
-	ID: 340994
-	____________________________________________________________
 Goodbye!
