@@ -325,7 +325,7 @@ public class TransactionList {
      * @return A string containing the comment related to the spending habit for the month.
      */
     public String getSpendingHabitComment(int income, int savings) {
-        if (income >= MIN_AMOUNT_VALUE) {
+        if (income > MIN_AMOUNT_VALUE) {
             int savingsPercentage = HUNDRED_PERCENT * savings / income;
 
             if (savingsPercentage >= HUNDRED_PERCENT) {

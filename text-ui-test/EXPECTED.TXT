@@ -293,15 +293,15 @@ ____________________________________________________________
 ____________________________________________________________
 Here are your requested statistics for the monthly_expenditure type:
 [Sep 2022]
-Income: $2001
-Expense: $21
+Income: $2000
+Expense: $20
 Savings: $1980
 Spending Habit: Excellent! You saved quite a lot this month.
 
 [Oct 2022]
-Income: $1
+Income: $0
 Expense: $1
-Savings: $0
+Savings: $-1
 Spending Habit: Oops, you spent too much. Do manage your expenses within your constraints.
 
 
@@ -316,8 +316,8 @@ Year: 2022
 [food] $20
 
 -----EXPENDITURE-----
-Income: $2001
-Expense: $22
+Income: $2000
+Expense: $21
 Savings: $1979
 ____________________________________________________________
 ____________________________________________________________
@@ -330,8 +330,8 @@ Year: 2022, Month: 10
 [food] $20
 
 -----EXPENDITURE-----
-Income: $1
-Expense: $2
+Income: $0
+Expense: $1
 Savings: $-1
 ____________________________________________________________
 ____________________________________________________________
@@ -347,8 +347,8 @@ The past 3 weeks:
 [food] $20
 
 -----EXPENDITURE-----
-Income: $1
-Expense: $1
+Income: $0
+Expense: $0
 Savings: $0
 ____________________________________________________________
 ____________________________________________________________
@@ -361,8 +361,8 @@ The past 4 months:
 [food] $20
 
 -----EXPENDITURE-----
-Income: $2001
-Expense: $21
+Income: $2000
+Expense: $20
 Savings: $1980
 ____________________________________________________________
 ____________________________________________________________
