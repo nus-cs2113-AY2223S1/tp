@@ -1,4 +1,5 @@
 package seedu.duke;
+
 import command.Command;
 import exception.DukeException;
 import parser.Parser;
@@ -15,7 +16,7 @@ public class Duke {
     }
 
     /**
-     * To run the Duke Application
+     * To run the Duke Application.
      */
     public void run() {
         ui.showWelcome();
