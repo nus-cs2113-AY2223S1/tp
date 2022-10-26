@@ -72,7 +72,10 @@ Here's a list of your current selected module(s)!
 Sem [1] >> --------------------------------------
 Shutting down......
 --------------------------------------
-This is your export link:
+These are your export links:
 https://nusmods.com/timetable/sem-1/share?CS2113=LEC:1,TUT:1
+https://nusmods.com/timetable/sem-2/share?
+https://nusmods.com/timetable/sem-3/share?
+https://nusmods.com/timetable/sem-4/share?
 Bye bye, See you again
 --------------------------------------

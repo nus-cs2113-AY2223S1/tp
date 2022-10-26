@@ -110,10 +110,7 @@ public class Link {
         }
         List<SelectedModule> selectedModules = new ArrayList<>();
         for (String moduleAndLessons : moduleAndLessonsArray) {
-            String[] splitModuleAndLesson = moduleAndLessons.split(MODULE_CODE_DELIMITER);
-            if (splitModuleAndLesson.length == 0) {
-                continue;
-            }
+            String[] splitModuleAndLesson = moduleAndLessons.split(Pattern.quote(MODULE_CODE_DELIMITER));
             String moduleCode = splitModuleAndLesson[0];
             Module module = Module.get(moduleCode.toUpperCase());
             if (module == null || module.getSemesterData(semester) == null) {
