@@ -34,55 +34,55 @@ public class Pet {
         Random random = new Random();
         int randomNumber = random.nextInt(NUM_OF_STATUS) + 1;
         if (this.isHealthy) {
-            switch (randomNumber) {
-            case 1:
-                status = PetHealthyStatus.crazy;
-                wellness = 10;
-                break;
-            case 2:
-                status = PetHealthyStatus.energetic;
-                wellness = 9;
-                break;
-            case 3:
-                status = PetHealthyStatus.happy;
-                wellness = 8;
-                break;
-            case 4:
-                status = PetHealthyStatus.boring;
-                wellness = 7;
-                break;
-            case 5:
-                status = PetHealthyStatus.sleepy;
-                wellness = 6;
-                break;
-            default:
-                break;
-            }
+            setPetStatus(randomNumber + 5);
         } else {
-            switch (randomNumber) {
-            case 1:
-                status = PetUnhealthyStatus.exhausted;
-                wellness = 5;
-                break;
-            case 2:
-                status = PetUnhealthyStatus.painful;
-                wellness = 4;
-                break;
-            case 3:
-                status = PetUnhealthyStatus.injured;
-                wellness = 3;
-                break;
-            case 4:
-                status = PetUnhealthyStatus.bleeding;
-                wellness = 2;
-                break;
-            case 5:
-                status = PetUnhealthyStatus.dying;
-                wellness = 1;
-                break;
-            default:
-                break;
-            }
+            setPetStatus(randomNumber);
+        }
+    }
+
+    public void changePetStatus(Integer wellnessFloat) {
+        Integer wellnessInt = Math.round(wellnessFloat);
+        if (wellnessInt >= 10) {
+            wellnessInt = 10;
+        } else if (wellnessInt <= 1) {
+            wellnessInt = 1;
+        }
+        this.wellness = wellnessInt;
+        setPetStatus(this.wellness);
+    }
+
+    public void setPetStatus(Integer wellness) {
+        switch (wellness) {
+        case 1:
+            status = PetUnhealthyStatus.dying;
+            break;
+        case 2:
+            status = PetUnhealthyStatus.bleeding;
+            break;
+        case 3:
+            status = PetUnhealthyStatus.injured;
+            break;
+        case 4:
+            status = PetUnhealthyStatus.painful;
+            break;
+        case 5:
+            status = PetUnhealthyStatus.exhausted;
+            break;
+        case 6:
+            status = PetHealthyStatus.sleepy;
+            break;
+        case 7:
+            status = PetHealthyStatus.boring;
+            break;
+        case 8:
+            status = PetHealthyStatus.happy;
+            break;
+        case 9:
+            status = PetHealthyStatus.energetic;
+            break;
+        case 10:
+            status = PetHealthyStatus.fantastic;
+            break;
         }
     }
 }
