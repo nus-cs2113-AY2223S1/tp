@@ -38,8 +38,6 @@ public class Duke {
                 String userFullCommand = ui.readNext();
                 ui.displayDivider();
                 Command command = Parser.parse(userFullCommand);
-                System.out.println(command.getClass().toString());
-                System.out.println(command == null);
                 command.execute(state, ui, storage);
                 isExit = command.isExit();
             } catch (Exception e) {
