@@ -64,7 +64,7 @@ Sem [1] >>
 
 ### Getting help: `help`
 
-Displays the list of funtionalities available by YAMOM.
+Displays the list of functionalities available by YAMOM.
 
 Format: `help`
 
