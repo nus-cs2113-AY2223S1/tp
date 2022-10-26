@@ -22,7 +22,7 @@ public class AddPetCommand extends Command {
     @Override
     public void execute() {
         Pet petToAdd = new Pet(name, species, isHealthy);
-        PetList.petList.add(petToAdd);
+        PetList.pets.add(petToAdd);
         Pet.numOfPets++;
         printAddPetMessage();
     }

@@ -18,7 +18,7 @@ public class ChangePetHealthStatusCommand {
         Random random = new Random();
         int randomNumber = random.nextInt(5) + 1;
         int changeIndex = index - 1;
-        Pet currPet = PetList.petList.get(changeIndex);
+        Pet currPet = PetList.pets.get(changeIndex);
         currPet.isHealthy = isHealthy;
     }
 }

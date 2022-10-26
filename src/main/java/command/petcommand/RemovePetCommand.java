@@ -14,7 +14,7 @@ public class RemovePetCommand extends Command {
 
     public void execute() {
         int deleteIndex = index - 1;
-        PetList.petList.remove(deleteIndex);
+        PetList.pets.remove(deleteIndex);
         Pet.numOfPets--;
         printPetRemoveMessage();
     }
