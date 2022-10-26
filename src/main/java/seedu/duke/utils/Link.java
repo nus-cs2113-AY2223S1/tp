@@ -7,6 +7,7 @@ import seedu.duke.model.RawLesson;
 import seedu.duke.model.SelectedModule;
 import seedu.duke.model.Timetable;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -98,6 +99,8 @@ public class Link {
         }
         String modulesParam = infoParam[MODULES_PARAM_INDEX];
         String cleanModuleParam = modulesParam.replace(SHARE_DELIMITER, "");
+        cleanModuleParam = cleanModuleParam.toUpperCase();
+        ArrayList<SelectedModule> selectedModules = new ArrayList<>();
         String[] moduleAndLessonsArray = cleanModuleParam.split(moduleDelimiter);
         for (String moduleAndLessons : moduleAndLessonsArray) {
             String[] splitModuleAndLesson = moduleAndLessons.split(MODULE_CODE_DELIMITER);
@@ -109,8 +112,9 @@ public class Link {
             SelectedModule selectedModule = new SelectedModule(module, semester);
             String[] lessonsInfo = splitModuleAndLesson[1].split(lessonDelimiter);
             addLessons(lessonsInfo, selectedModule, semester);
-            state.addSelectedModule(selectedModule);
+            selectedModules.add(selectedModule);
         }
+        state.setSelectedModulesList(selectedModules);
     }
 
     /**
