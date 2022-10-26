@@ -1,6 +1,5 @@
 package parser;
 
-
 import command.Command;
 import command.EmptyCommand;
 import command.appointmentCommand.AddAppointmentCommand;

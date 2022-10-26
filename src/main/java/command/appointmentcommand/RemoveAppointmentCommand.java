@@ -1,13 +1,11 @@
-package command.appointmentCommand;
+package command.appointmentcommand;
 
 import appointment.AppointmentList;
 import command.Command;
-import employee.EmployeeList;
-import service.ServiceList;
 
 public class RemoveAppointmentCommand extends Command {
 
-    public final static String COMMAND_WORD = "remove";
+    public static final String COMMAND_WORD = "remove";
     private final int appointmentId;
 
     public RemoveAppointmentCommand(int appointmentId) {

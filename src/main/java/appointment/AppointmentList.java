@@ -52,8 +52,8 @@ public class AppointmentList {
         }
     }
 
-    private static AppointmentStatus intToAppointmentStatus(int status_idx) {
-        switch (status_idx) {
+    private static AppointmentStatus intToAppointmentStatus(int statusIdx) {
+        switch (statusIdx) {
         case 0:
             // fall through
         case 1:
