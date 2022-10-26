@@ -7,7 +7,10 @@ Welcome to
  |_____/|_|\_\\__, |  \_____\___/|_| |_|\__|_|  \___/|_|
                __/ |
               |___/
+File or directory does not exist.
 
+Trying to create file now.
+File is created at: ./data/SkyControl.txt
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Stop! The input passenger detail does not have a flight number that exist yet.
 Flight detail of the specific flight number should input first.
