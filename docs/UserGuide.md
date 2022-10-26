@@ -192,7 +192,7 @@ Example of usage:
 
 **Input:**
 
-```list```
+ `list`
 
 **Output:**
 
