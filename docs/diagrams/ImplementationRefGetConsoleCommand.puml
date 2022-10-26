@@ -3,7 +3,7 @@
 
 skinparam noteTextAlignment left
 
-group sd Get Console Command
+mainframe sd Get Console Command
 
 Actor User USER_COLOR
 Participant "consoleInterface:ConsoleInterface" as consoleInterface USER_INTERFACE_COLOR_1
@@ -19,8 +19,9 @@ activate consoleInterface USER_INTERFACE_COLOR_1
 
 User -[USER_COLOR]> consoleInterface : User command
 note right
-    getConsoleInput() reads the
-    command entered by the user.
+    getConsoleInput() reads the command entered
+    by the user. This arrow represents the command
+    and is not an activation line.
 end note
 
 consoleInterface --[USER_INTERFACE_COLOR_1]> consoleInterface : consoleInput:String
@@ -39,6 +40,4 @@ deactivate Parser
 
 consoleInterface --[USER_INTERFACE_COLOR_1]> consoleInterface : consoleCommand:ConsoleCommand
 deactivate consoleInterface
-
-end group
 @enduml

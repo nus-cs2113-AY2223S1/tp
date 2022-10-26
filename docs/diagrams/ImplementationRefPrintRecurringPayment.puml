@@ -3,7 +3,7 @@
 
 skinparam noteTextAlignment left
 
-group sd Print Recurring Payment
+mainframe sd Print Recurring Payment
 
 Participant "consoleInterface:ConsoleInterface" as consoleInterface USER_INTERFACE_COLOR_1
 
@@ -20,6 +20,4 @@ activate consoleInterface USER_INTERFACE_COLOR_1
 
 consoleInterface --[USER_INTERFACE_COLOR_1]> consoleInterface
 deactivate consoleInterface
-
-end group
 @enduml

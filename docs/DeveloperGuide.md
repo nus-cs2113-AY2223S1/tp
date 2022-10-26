@@ -1,9 +1,11 @@
-# Developer Guide
+# Developer Guide (Pre-Release)
 
 ## Introduction
 
 MoneyGoWhere is a financial tracker designed to help computing professionals manage their finances.
 This developer guide explains the design considerations and implementation details required for future developers to work on MoneyGoWhere.
+
+`IMPORTANT:` The diagrams in this user guide are rendered on-the-fly as the webpage is loaded. **If your internet connection is unstable, the diagrams may appear as broken links.** Please refresh the webpage if the diagrams are not loaded in time.
 
 ## Acknowledgements
 
@@ -61,20 +63,29 @@ The software architecture diagram below describes the application's design and t
 The sequence diagram below describes the interaction between the various core components when a command is entered.
 In this example, 
 the user enters the command `Add-Expense -n Expense -a 7.80` to add an expense with the name `Expense` and the amount `7.80`.
+The sequence diagrams referenced by the component interaction diagram can be seen [below](#component-interaction-sequence-diagrams)
 
 ![Component-Interaction-On-Command-Entered](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentInteractionsOnCommandEntered.puml)
 
-* The `UserInterface` runs continuously in a loop.
-When the program is ready to receive the user's input, 
-it calls `UserInterface#getConsoleCommand()` which reads the input from standard in.
+* `UserInterface` runs continuously in a loop.
+  When the program is ready to receive the user's input,
+  it calls `UserInterface#getConsoleCommand()` which reads the input from standard in.
 * `UserInterface#getConsoleCommand()` calls `Parser#parse()` to parse the input string into a `ConsoleCommand` object.
 * Depending on the instance of `ConsoleCommand`, the corresponding command handler function will be called.\
-In the example above, `ConsoleCommand` is an instance of `ConsoleCommandAddExpense` and hence, 
-`UserInterface#runCommandAddExpense()` is called.
-* The `UserInterface` command handler functions calls various `Data` functions to perform operations on data.\
-In the example above, `UserInterface#runCommandAddExpense()` calls `Data#addExpense()` to add an expense to the program.
+  In the example above, `ConsoleCommand` is an instance of `ConsoleCommandAddExpense` and hence,
+  `UserInterface#runCommandAddExpense()` is called.
+* `UserInterface` command handler functions calls various `Data` functions to perform operations on data.\
+  In the example above, `UserInterface#runCommandAddExpense()` calls `Data#addExpense()` to add an expense to the program.
 * After the operations is performed, command handler functions calls `Storage` functions to save data.\
-In the example above, `UserInterface#runCommandAddExpense()` calls `Storage#saveToFile()` to save the newly added expense to a file.
+  In the example above, `UserInterface#runCommandAddExpense()` calls `Storage#saveToFile()` to save the newly added expense to a file.
+
+#### Component Interaction Sequence Diagrams:
+
+![Component-Interaction-On-Command-Entered](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentInteractionsRefGetUserCommand.puml)
+
+![Component-Interaction-On-Command-Entered](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentInteractionsRefPrintExpense.puml)
+
+![Component-Interaction-On-Command-Entered](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentInteractionsRefSaveExpensesToFile.puml)
 
 ### Common Component
 
@@ -99,7 +110,7 @@ In the example above, `UserInterface#runCommandAddExpense()` calls `Storage#save
 
 ### Printing an expense
 
-![Implementation-Add-Expense](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ImplementationRefPrintExpense.puml)
+![Implementation-SD-Print-Expense](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ImplementationRefPrintExpense.puml)
 
 ### Adding an expense
 
@@ -117,6 +128,10 @@ In the example above, `UserInterface#runCommandAddExpense()` calls `Storage#save
 
 ![Implementation-Edit-Expense](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ImplementationEditExpense.puml)
 
+### Printing a recurring payment
+
+![Implementation-SD-Print-RecurringPayment](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ImplementationRefPrintRecurringPayment.puml)
+
 ### Adding a recurring payment
 
 ![Implementation-Add-RecurringPayment](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ImplementationAddRecurringPayment.puml)
@@ -133,7 +148,7 @@ In the example above, `UserInterface#runCommandAddExpense()` calls `Storage#save
 
 ![Implementation-Edit-RecurringPayment](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ImplementationEditRecurringPayment.puml)
 
-### Adding an expense from a existing recurring payment
+### Adding an expense from a recurring payment
 
 ![Implementation-Edit-RecurringPayment](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ImplementationPayRecurringPayment.puml)
 
