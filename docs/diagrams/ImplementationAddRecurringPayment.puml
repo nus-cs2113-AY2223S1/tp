@@ -13,7 +13,7 @@ activate consoleInterface USER_INTERFACE_COLOR_1
 ref over consoleInterface: Get Console Command
 
 opt consoleCommand instanceof ConsoleCommandAddRecurringPayment
-    consoleInterface -[USER_INTERFACE_COLOR_1]> consoleInterface : \lrunCommandAddRecurringPayment(\n\tconsoleCommand:ConsoleCommandRecurringPayment\n)
+    consoleInterface -[USER_INTERFACE_COLOR_1]> consoleInterface : \lrunCommandAddRecurringPayment(\n\tconsoleCommand:ConsoleCommandAddRecurringPayment\n)
     activate consoleInterface USER_INTERFACE_COLOR_1
 
     create recurringPayment
