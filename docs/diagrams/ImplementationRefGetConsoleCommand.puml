@@ -3,7 +3,7 @@
 
 skinparam noteTextAlignment left
 
-group sd Get Console Command
+mainframe sd Get Console Command
 
 Actor User USER_COLOR
 Participant "consoleInterface:ConsoleInterface" as consoleInterface USER_INTERFACE_COLOR_1
@@ -39,6 +39,4 @@ deactivate Parser
 
 consoleInterface --[USER_INTERFACE_COLOR_1]> consoleInterface : consoleCommand:ConsoleCommand
 deactivate consoleInterface
-
-end group
 @enduml
