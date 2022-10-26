@@ -133,6 +133,10 @@ In the example above, `UserInterface#runCommandAddExpense()` calls `Storage#save
 
 ![Implementation-Edit-RecurringPayment](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ImplementationEditRecurringPayment.puml)
 
+### Adding an expense from a existing recurring payment
+
+![Implementation-Edit-RecurringPayment](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ImplementationPayRecurringPayment.puml)
+
 ## Product scope
 ### Target user profile
 
