@@ -2,13 +2,18 @@
 
 ## Introduction
 
-{add introduction here}
+MoneyGoWhere is a financial tracker designed to help computing professionals manage their finances.
+This developer guide explains the design considerations and implementation details required for future developers to work on MoneyGoWhere.
 
 ## Acknowledgements
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+We would like to acknowledge the following sources which our team has referenced during the development of MoneyGoWhere:
+* AddressBook-Level3's User Guide and Developer Guide ([Website](https://se-education.org/addressbook-level3/))
+* Apache Commons CLI Library ([Website](https://commons.apache.org/proper/commons-cli/))
+* Apache Commons Text Library ([Website](https://commons.apache.org/proper/commons-text/))
 
 ## Getting Started
+
 This program was developed using the Java JDK 11 and Intellij IDEA.
 The following steps will guide you through the setup process to get your development environment up and running.
 1. Install JDK 11.
