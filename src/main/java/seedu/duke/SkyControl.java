@@ -1,10 +1,16 @@
 package seedu.duke;
 
 import seedu.duke.command.Command;
-import seedu.duke.command.flightcommand.*;
+import seedu.duke.command.flightcommand.AddFlightCommand;
+import seedu.duke.command.flightcommand.DeleteFlightCommand;
+import seedu.duke.command.flightcommand.ListFlightCommand;
+import seedu.duke.command.flightcommand.ModifyFlightNumCommand;
+import seedu.duke.command.flightcommand.ModifyGateNumCommand;
+import seedu.duke.command.flightcommand.DelayFlightCommand;
 import seedu.duke.command.passengercommand.AddPassengerCommand;
 import seedu.duke.command.passengercommand.DeletePassengerCommand;
 import seedu.duke.command.passengercommand.ListPassengerCommand;
+
 import seedu.duke.exceptions.SkyControlException;
 import seedu.duke.exceptions.SyncException;
 import seedu.duke.operationlist.FlightList;
