@@ -51,6 +51,7 @@ public class UI {
             + "List of commands:"
             + UI.VISIT_ADD
             + UI.VISIT_EDIT
+            + UI.VISIT_DELETE_REASON
             + UI.VISIT_VIEW_ALL
             + UI.VISIT_VIEW_PATIENT
             + UI.VISIT_VIEW
@@ -196,15 +197,16 @@ public class UI {
             + " retrieve i/[ID]";
 
     public static final String PATIENT_VIEW_ALL = "\n* To list all patients: viewall";
-    public static final String VISIT_ADD = "\n* To add a visit: add i/[ID] d/[date] t/[time] r/[reason]";
-    public static final String VISIT_EDIT = "\n* To edit a visit's reason: edit i/[ID] r/[reason]";
+    public static final String VISIT_ADD = "\n* To add a visit: add i/[ID] d/[date] t/[time] (optional: r/[reason])";
+    public static final String VISIT_EDIT = "\n* To edit a visit's reason: edit x/[index] r/[reason]";
+    public static final String VISIT_DELETE_REASON = "\n* To delete a visit's reason: deleteReason x/[index]";
     public static final String VISIT_VIEW_ALL = "\n* To list all visits: viewall";
     public static final String VISIT_VIEW_PATIENT = "\n* To list all visits of one patient: viewPatient i/[ID]";
-    public static final String VISIT_VIEW = "\n* To view a patient's specific visit: viewVisit i/[ID] [INDEX]";
+    public static final String VISIT_VIEW = "\n* To view a patient's specific visit: viewVisit x/[index]";
 
     public static final String PRESCRIPTION_ADD = "\n* To add a prescription: add i/ID "
             + "n/[name] d/[dosage] t/[time interval]";
-    public static final String PRESCRIPTION_EDIT = "\n* To edit a prescription: edit i/[index] "
+    public static final String PRESCRIPTION_EDIT = "\n* To edit a prescription: edit x/[index] "
             + "(n/[name] or d/[dosage] or t/[time interval])";
 
     public static final String PRESCRIPTION_VIEW_ALL = "\n* To list all prescriptions: viewall";
@@ -216,10 +218,10 @@ public class UI {
         + "patient: viewActPatientPres i/[ID]";
 
     public static final String PRESCRIPTION_CHANGE_ACTIVE = "\n* To change a prescription record to be "
-            + "active: activate i/INDEX";
+            + "active: activate x/[index]";
 
     public static final String PRESCRIPTION_CHANGE_INACTIVE = "\n* To change a prescription record to be "
-            + "inactive: deactivate i/[ID]";
+            + "inactive: deactivate x/[index]";
 
     public static final String RETURN_TO_MAIN =  "\n* To return to main menu: main";
 

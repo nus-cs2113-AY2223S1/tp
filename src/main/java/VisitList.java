@@ -82,7 +82,7 @@ public class VisitList {
         }
         int noOfPatientVisits = 0;
         for (int i = 0; i < getTotalVisits(); i++) {
-            if (visitList.get(i).getId().equals(id)) {
+            if (visitList.get(i).getId().equalsIgnoreCase(id)) {
                 if (noOfPatientVisits == 0) {
                     System.out.println("Here are the list of visits for Patient with ID: " + id);
                 }

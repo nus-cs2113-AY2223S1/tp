@@ -66,7 +66,7 @@ public class PrescriptionList {
         ui.printViewAllPrescriptionsMessage();
         ui.printLine();
         for (int i = 0; i < prescriptionsList.size(); i++) {
-            if (prescriptionsList.get(i).isMatchedPatient(patientId)) {
+            if (prescriptionsList.get(i).isMatchedPatient(patientId.toUpperCase())) {
                 System.out.println("Prescription #" + (i + 1));
                 System.out.println(prescriptionsList.get(i));
                 ui.printLine();
@@ -83,7 +83,7 @@ public class PrescriptionList {
         ui.printViewAllPrescriptionsMessage();
         ui.printLine();
         for (int i = 0; i < prescriptionsList.size(); i++) {
-            if (prescriptionsList.get(i).isMatchedPatientActive(patientId)) {
+            if (prescriptionsList.get(i).isMatchedPatientActive(patientId.toUpperCase())) {
                 System.out.println("Prescription #" + (i + 1));
                 System.out.println(prescriptionsList.get(i));
                 ui.printLine();
@@ -122,7 +122,7 @@ public class PrescriptionList {
 
     private boolean hasPatientPrescription(String patientId) {
         for (Prescription prescription : prescriptionsList) {
-            if (prescription.isMatchedPatient(patientId)) {
+            if (prescription.isMatchedPatient(patientId.toUpperCase())) {
                 return true;
             }
         }
@@ -132,7 +132,7 @@ public class PrescriptionList {
 
     private boolean hasActivePatientPrescription(String patientId) {
         for (Prescription prescription : prescriptionsList) {
-            if (prescription.isMatchedPatientActive(patientId)) {
+            if (prescription.isMatchedPatientActive(patientId.toUpperCase())) {
                 return true;
             }
         }
