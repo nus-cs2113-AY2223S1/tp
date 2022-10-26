@@ -17,8 +17,6 @@ public class Pet {
     public static final int NUM_OF_STATUS = 5;
 
 
-    public static int numOfPets = 0;
-
     public Pet(String name, String species, boolean isHealthy) {
         this.name = name;
         this.species = species;
