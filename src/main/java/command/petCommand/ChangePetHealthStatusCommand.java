@@ -5,11 +5,11 @@ import pet.PetList;
 
 import java.util.Random;
 
-public class ChangePetHealthStatus {
+public class ChangePetHealthStatusCommand {
     private int index;
     public boolean isHealthy;
 
-    public ChangePetHealthStatus(int index, boolean isHealthy){
+    public ChangePetHealthStatusCommand(int index, boolean isHealthy){
         this.index = index;
         this.isHealthy = isHealthy;
     }
