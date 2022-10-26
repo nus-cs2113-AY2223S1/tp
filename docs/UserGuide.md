@@ -1,5 +1,5 @@
 # MoneyGoWhere
-<p align="center"><img alt="icon" src="https://raw.githubusercontent.com/ay2223s1-cs2113t-w11-1/tp/master/docs/images/icon.png"></p>
+<p align="center"><img alt="icon" src="https://raw.githubusercontent.com/penguin-s/tp/master/docs/images/icon.png"></p>
 
 <hr>
 
@@ -42,11 +42,11 @@ Syntax: `Add-Expense -n NAME -a AMOUNT [-d DATE_TIME] [-t DESCRIPTION] [-c CATEG
 
 <details>
 <summary>⚠️️️️ Syntax Notes</summary>
-
-+ `NAME`, `DESCRIPTION`, `CATEGORY`, `REMARKS` and `MODE OF PAYMENT` are text strings. You may use spaces within the text if you wrap the text with double quotes.
-+ `CURRENCY` is a text string. It must be a valid currency code.
-+ `AMOUNT` is a decimal value.
-+ `DATE_TIME` is a text string in the format `"dd/MM/yyyy HHmm"`.
+    
+    + `NAME`, `DESCRIPTION`, `CATEGORY`, `REMARKS` and `MODE OF PAYMENT` are text strings. You may use spaces within the text if you wrap the text with double quotes.
+    + `CURRENCY` is a text string. It must be a valid currency code.
+    + `AMOUNT` is a decimal value.
+    + `DATE_TIME` is a text string in the format `"dd/MM/yyyy HHmm"`.
 </details>
 
 <br>
