@@ -37,7 +37,7 @@ You should see the following greeting message if the project setup is successful
 Your MoneyGoWhere? Let me help you track it.
 ```
 
-## Design & Implementation
+## Design
 ### Software Architecture:
 The software architecture diagram below describes the application's design and the interaction between components.
 
@@ -91,6 +91,8 @@ In the example above, `UserInterface#runCommandAddExpense()` calls `Storage#save
 ### Commands Component
 
 ![Component-Commands](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentCommands.puml)
+
+## Implementation
 
 ## Product scope
 ### Target user profile
