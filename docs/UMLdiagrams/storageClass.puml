@@ -4,12 +4,12 @@ hide circle
 skinparam classAttributeIconSize 0
 
 class Storage {
-    + FILE_PATH: String
-    + NO_PREVIOUS_STATE_ERROR_MESSAGE: String
-    + LOADING_PREVIOUS_STATE_MESSAGE: String
-    + EXPORT_MESSAGE: String
+    <u>+ FILE_PATH: String
+    <u>+ NO_PREVIOUS_STATE_ERROR_MESSAGE: String
+    <u>+ LOADING_PREVIOUS_STATE_MESSAGE: String
+    <u>+ EXPORT_MESSAGE: String
     - logger: Logger
-    + SUBSYSTEM_NAME: String
+    <u>+ SUBSYSTEM_NAME: String
 
     + openPreviousState(State, Ui): void
     - readPreviousState(): String
