@@ -19,7 +19,7 @@ public class InitPetStatusCommand {
         Random random = new Random();
         int randomNumber = random.nextInt(NUM_OF_STATUS) + 1;
         int changeIndex = index - 1;
-        Pet currPet = PetList.petList.get(changeIndex);
+        Pet currPet = PetList.pets.get(changeIndex);
         if (currPet.isHealthy == true) {
             switch (randomNumber) {
             case 1:

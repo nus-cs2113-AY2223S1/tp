@@ -10,6 +10,6 @@ public class PetTest {
     public void petUnderTest() {
         PetList petList = new PetList();
         Pet newPet = new Pet("YuHuan", "cat", true);
-        petList.petList.add(newPet);
+        petList.pets.add(newPet);
     }
 }

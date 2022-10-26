@@ -4,6 +4,9 @@ import java.util.Random;
 
 
 public class Pet {
+
+    private static int id = 0;
+    public final int petId;
     public String name;
     public String species;
     // private int id;
@@ -15,12 +18,11 @@ public class Pet {
 
 
     public static int numOfPets = 0;
-    //public static int idTracker = 1;
 
     public Pet(String name, String species, boolean isHealthy) {
         this.name = name;
         this.species = species;
-        // this.id = id;
+        this.petId = id++;
         this.isHealthy = isHealthy;
         initPetStatus();
     }

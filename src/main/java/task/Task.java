@@ -9,6 +9,8 @@ public class Task {
     public int appointmentId;
 
     public int employeeId;
+
+    public int petId;
     public String taskDescription;
     public boolean isDone;
 
