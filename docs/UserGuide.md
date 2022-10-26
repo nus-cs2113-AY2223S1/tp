@@ -25,22 +25,24 @@ Example of usage:
 
 `add /movie Harry Potter /review 5.0 /date 10 Oct 2022`
 
-### Display movie reviews: `list`
-Displays all movies you have reviewed.
+### Display reviews: `list`
+Displays all movies and television shows you have reviewed. Output is seperated by media category. 
 
 Format: `list`
 
-### Delete a movie: `delete`
-Removes a movie review from your list.
+### Delete a review: `delete`
+Removes a movie or television review from your list. References the output from the list command to determine which index to delete.
 
-Format: `delete <index>`
+Format: `delete <type> <index>`
 
 Example of usage:
 
-`delete 1`
+`delete movie 1`
 
-### Clear all movie reviews: 'clear'
-Deletes all movie reviews in your list.
+`delete tv 1`
+
+### Clear all reviews: 'clear'
+Deletes all reviews in your list.
 
 Format: `clear`
 
