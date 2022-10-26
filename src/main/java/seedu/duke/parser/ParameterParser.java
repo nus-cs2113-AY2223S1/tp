@@ -68,6 +68,7 @@ public class ParameterParser {
     private static final int SPLIT_POSITION = 2;
     private static final int MINIMUM_TAG_LENGTH = 2;
     private static final int MINIMUM_YEAR = 1000;
+    private static final int MAXIMUM_YEAR = 9999;
     private static final int SMALLEST_POSITIVE_INTEGER = 0;
     private static final int JANUARY = 1;
     private static final int DECEMBER = 12;
@@ -597,7 +598,7 @@ public class ParameterParser {
                     + parameter);
             throw new GlobalNumberNotNumericException();
         }
-        if (year < MINIMUM_YEAR) {
+        if (year < MINIMUM_YEAR || year > MAXIMUM_YEAR) {
             parserLogger.log(Level.WARNING, "An invalid year number error is caught for the given parameter: "
                     + parameter);
             throw new GlobalInvalidYearException();
