@@ -136,6 +136,10 @@ public class UI {
         System.out.println("You are ineligible for SEP");
     }
 
+    public static void helpMessage(String message) {
+        System.out.println(message);
+    }
+
     /**
      * Message to be displayed when an exception is encountered due to invalid input format
      */
