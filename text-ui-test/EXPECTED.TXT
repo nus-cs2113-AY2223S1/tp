@@ -213,7 +213,7 @@ There are no transaction records found.
 ____________________________________________________________
 ____________________________________________________________
 I have added the following Expense transaction:
-[-][food] $20 at Sep 13 2022 | Description: NIL
+[-][food] $20 on Sep 13 2022 | Description: NIL
 Budget remained for Sep 2022: $9980. Keep it up!
 ____________________________________________________________
 ____________________________________________________________
@@ -227,12 +227,12 @@ Invalid amount, please ensure your amount is in positive whole number ($10000000
 ____________________________________________________________
 ____________________________________________________________
 I have added the following Income transaction:
-[+][salary] $2000 at Sep 30 2022 | Description: jan_salary
+[+][salary] $2000 on Sep 30 2022 | Description: jan_salary
 Budget remained for Sep 2022: $9980. Keep it up!
 ____________________________________________________________
 ____________________________________________________________
 I have added the following Expense transaction:
-[-][transport] $1 at Oct 02 2022 | Description: bus_fare
+[-][transport] $1 on Oct 02 2022 | Description: bus_fare
 Budget remained for Oct 2022: $9999. Keep it up!
 ____________________________________________________________
 ____________________________________________________________
@@ -267,13 +267,13 @@ Type of transaction given is invalid, please check your input!
 ____________________________________________________________
 ____________________________________________________________
 Here are your transaction records:
-[-][food] $20 at Sep 13 2022 | Description: NIL
-[-][transport] $1 at Oct 02 2022 | Description: bus_fare
+[-][food] $20 on Sep 13 2022 | Description: NIL
+[-][transport] $1 on Oct 02 2022 | Description: bus_fare
 
 ____________________________________________________________
 ____________________________________________________________
 Here are your transaction records:
-[-][food] $20 at Sep 13 2022 | Description: NIL
+[-][food] $20 on Sep 13 2022 | Description: NIL
 
 ____________________________________________________________
 ____________________________________________________________
@@ -281,7 +281,7 @@ There are no transaction records found.
 ____________________________________________________________
 ____________________________________________________________
 Here are your transaction records:
-[-][food] $20 at Sep 13 2022 | Description: NIL
+[-][food] $20 on Sep 13 2022 | Description: NIL
 
 ____________________________________________________________
 ____________________________________________________________
@@ -289,7 +289,7 @@ Parameter behind tag(s) is found to be empty, please check your input!
 ____________________________________________________________
 ____________________________________________________________
 Here are your transaction records:
-[+][salary] $2000 at Sep 30 2022 | Description: jan_salary
+[+][salary] $2000 on Sep 30 2022 | Description: jan_salary
 
 ____________________________________________________________
 ____________________________________________________________
@@ -382,7 +382,7 @@ Keyword(s) for your search expression missing, please check your input!
 ____________________________________________________________
 ____________________________________________________________
 Here are the transaction records that match your search expression:
-[-][transport] $1 at Oct 02 2022 | Description: bus_fare
+[-][transport] $1 on Oct 02 2022 | Description: bus_fare
 
 ____________________________________________________________
 ____________________________________________________________
@@ -390,9 +390,9 @@ There are no transaction records that match your search expression.
 ____________________________________________________________
 ____________________________________________________________
 Here are your transaction records:
-[-][food] $20 at Sep 13 2022 | Description: NIL
-[+][salary] $2000 at Sep 30 2022 | Description: jan_salary
-[-][transport] $1 at Oct 02 2022 | Description: bus_fare
+[-][food] $20 on Sep 13 2022 | Description: NIL
+[+][salary] $2000 on Sep 30 2022 | Description: jan_salary
+[-][transport] $1 on Oct 02 2022 | Description: bus_fare
 
 ____________________________________________________________
 ____________________________________________________________
@@ -400,7 +400,7 @@ Mandatory tag(s) missing, please check your input!
 ____________________________________________________________
 ____________________________________________________________
 I have added the following Income transaction:
-[+][bonus] $10000000 at Oct 03 2022 | Description: thank_you_boss
+[+][bonus] $10000000 on Oct 03 2022 | Description: thank_you_boss
 Budget remained for Oct 2022: $9999. Keep it up!
 ____________________________________________________________
 ____________________________________________________________
@@ -429,10 +429,10 @@ Mandatory tag(s) missing, please check your input!
 ____________________________________________________________
 ____________________________________________________________
 Here are your transaction records:
-[-][food] $20 at Sep 13 2022 | Description: NIL
-[+][salary] $2000 at Sep 30 2022 | Description: jan_salary
-[-][transport] $1 at Oct 02 2022 | Description: bus_fare
-[+][bonus] $10000000 at Oct 03 2022 | Description: thank_you_boss
+[-][food] $20 on Sep 13 2022 | Description: NIL
+[+][salary] $2000 on Sep 30 2022 | Description: jan_salary
+[-][transport] $1 on Oct 02 2022 | Description: bus_fare
+[+][bonus] $10000000 on Oct 03 2022 | Description: thank_you_boss
 
 ____________________________________________________________
 ____________________________________________________________
@@ -440,14 +440,14 @@ Mandatory tag(s) missing, please check your input!
 ____________________________________________________________
 ____________________________________________________________
 I have deleted the following transaction:
-[-][food] $20 at Sep 13 2022 | Description: NIL
+[-][food] $20 on Sep 13 2022 | Description: NIL
 Budget remained for Sep 2022: $10000. Keep it up!
 ____________________________________________________________
 ____________________________________________________________
 Here are your transaction records:
-[+][salary] $2000 at Sep 30 2022 | Description: jan_salary
-[-][transport] $1 at Oct 02 2022 | Description: bus_fare
-[+][bonus] $10000000 at Oct 03 2022 | Description: thank_you_boss
+[+][salary] $2000 on Sep 30 2022 | Description: jan_salary
+[-][transport] $1 on Oct 02 2022 | Description: bus_fare
+[+][bonus] $10000000 on Oct 03 2022 | Description: thank_you_boss
 
 ____________________________________________________________
 ____________________________________________________________
@@ -461,13 +461,13 @@ Invalid index, please ensure your index is correct!
 ____________________________________________________________
 ____________________________________________________________
 I have deleted the following transaction:
-[+][bonus] $10000000 at Oct 03 2022 | Description: thank_you_boss
+[+][bonus] $10000000 on Oct 03 2022 | Description: thank_you_boss
 Budget remained for Oct 2022: $9999. Keep it up!
 ____________________________________________________________
 ____________________________________________________________
 Here are your transaction records:
-[+][salary] $2000 at Sep 30 2022 | Description: jan_salary
-[-][transport] $1 at Oct 02 2022 | Description: bus_fare
+[+][salary] $2000 on Sep 30 2022 | Description: jan_salary
+[-][transport] $1 on Oct 02 2022 | Description: bus_fare
 
 ____________________________________________________________
 ____________________________________________________________
@@ -517,7 +517,7 @@ There are no transaction records found.
 ____________________________________________________________
 ____________________________________________________________
 I have added the following Expense transaction:
-[-][transport] $1 at Oct 02 2022 | Description: i/i/i/i/
+[-][transport] $1 on Oct 02 2022 | Description: i/i/i/i/
 Budget remained for Oct 2022: $9999. Keep it up!
 ____________________________________________________________
 ____________________________________________________________
