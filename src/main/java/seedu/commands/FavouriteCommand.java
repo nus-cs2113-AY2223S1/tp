@@ -42,6 +42,7 @@ public class FavouriteCommand extends Command {
                     if (id.isEmpty()) {
                         continue;
                     }
+                    assert carparkList.findCarpark(id) != null : "Could not find carpark!";
                     content.append(carparkList.findCarpark(id).toString());
                     content.append("\n" + SEPARATOR_STRING + "\n");
                 }
