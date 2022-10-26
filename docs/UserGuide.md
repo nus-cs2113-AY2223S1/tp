@@ -15,6 +15,8 @@ nearest carpark slot for you.
 1. Ensure that you have Java 11 or above installed.
 2. Down the latest version of `Duke` from [here](http://link.to/duke).
 
+## Disclaimer regarding use of API key for the purposes of NUS CS2113
+
 ## Features
 
 > Notes about the command format:
@@ -25,7 +27,7 @@ nearest carpark slot for you.
 |--------------------------|---------------------------------------------------------------------------------------------| 
 | `auth API_KEY`           | [Authenticate API using user's API key](#authenticate-user-api)                             |
 | `auth default`           | [Authenticate API using default key](#authenticate-default)                                 |
-| `auth status`            | [Authentication status](#authenticate-status-auth)                                          |
+| `auth status`            | [Authentication status](#authentication-status)                                             |
 | `find CARPARK_ID`        | [Find number of lots available by carpark ID](#find-number-of-lots-available-by-carpark-id) | 
 | `filter QUERY`           | [Filter carparks based on address](#filter-carparks-based-on-address)                       | 
 | `list`                   | [Get a list of available carparks on the app](#get-a-list-of-available-carparks-on-the-app) |
@@ -42,14 +44,25 @@ nearest carpark slot for you.
 
 - LTA Data Mall API information (click [here](https://datamall.lta.gov.sg/content/datamall/en/dynamic-data.html)).
 - API Registration (click [here](https://datamall.lta.gov.sg/content/datamall/en/request-for-api.html)).
-API key will be emailed to you.
+  API key will be emailed to you.
 - `API_KEY` is case sensitive and unique.
 - Upon successful authentication, the key will be stored locally and future authentication is not required.
 - User can use `auth` to change the current key. Only one and the most recent key will be stored.
-- If API key is invalid, the new key will not be stored and the previous key will be retained. 
-If there are no API key beforehand, it will stay empty.
+- If API key is invalid, the new key will not be stored and the previous key will be retained.
+  If there are no API key beforehand, it will stay empty.
+- Upon successful authentication, a fetching sequence will be initiated from the LTA API.
 
 Example of usage:
+
+**Input (assuming 12345678 is a valid API key)**
+
+```auth 12345678```
+
+**Output**
+```
+2312 Parking Lot data received from LTA!
+Authenticated successfully.
+```
 
 ### Authenticate default
 
@@ -58,29 +71,58 @@ Example of usage:
 
 - For user with no API key, they can use the provided api key to access the services.
 - User will not be able to see the api key.
+- A fetching sequence will be initiated also from LTA API.
 
 Example of usage:
 
-### Authenticate status
+**Input**
+
+```auth default```
+
+**Output**
+
+```
+2312 Parking Lot data received from LTA!
+Authenticated successfully using default API Key.
+```
+
+### Authentication status
 
 **Get the status of the api key authentication status.**
 > Format: `auth status`
 
 - It will inform the user whether the user api key is entered and valid or whether the default API key is used.
-- If user has entered and validated their personal key before, they will be able to view their own API key. 
-Otherwise, the default API key will not be revealed to the user.
+- If user has entered and validated their personal key before, they will be able to view their own API key.
+  Otherwise, the default API key will not be revealed to the user.
 
 Example of usage:
+
+**Input**
+
+```auth status```
+
+**Output**
+1. If user has inputted his personal API key and is authenticated
+
+```
+You have authenticated your API key successfully. API key stored in the local file is ********
+```
+
+2. If user has not inputted his personal API key and/or not authenticated
+
+```
+You have not authenticated your personal API key. Currently you have access to the API but you are using our default key!
+```
 
 ### Find number of lots available by carpark ID
 
 **Returns the number of lots available in the carpark that the user has chosen to find.**
 > Format: `find CARPARK_ID`
 
-- Using data from the API, after the user has inputted the ID of a certain carpark, 
-the function will return the number of lots available in aforementioned carpark.
-- If the user inputs a non-existing carpark ID or inputs the wrong format, 
-the program will prompt the user to re-enter the correct and existing carpark ID.
+- Using data from the API, after the user has inputted the ID of a certain carpark,
+  the function will return the number of lots available in aforementioned carpark.
+- If the user inputs a non-existing carpark ID or inputs the wrong format,
+  the program will prompt the user to re-enter the correct and existing carpark ID.
 - `find` is case-insensitive and will find the correct carpark code even if lowercase is used.
 
 Example of usage:
@@ -109,13 +151,13 @@ Number of available lots (total): 132
 > Format: `filter QUERY`
 
 - The filter command allows the user to search a carpark based on the name of the carpark. For example,
-a carpark may have the name of `BLK 208 CLEMENTI AVE 6` - a query of `clementi` or `208` will return this
-carpark as one of its results.
+  a carpark may have the name of `BLK 208 CLEMENTI AVE 6` - a query of `clementi` or `208` will return this
+  carpark as one of its results.
 - Multiple words can be input to narrow the filtered results further. Given the previous example, `clementi ave` will
-also give the above carpark as one of its results.
-- For convenience, the `filter` command also matches substrings at the _beginning_ of a word. Following the previous 
-example, `clem` will also match the above carpark.
-- In carpark names, matched words will be wrapped with ` to easily see at a glance what was matched. 
+  also give the above carpark as one of its results.
+- For convenience, the `filter` command also matches substrings at the _beginning_ of a word. Following the previous
+  example, `clem` will also match the above carpark.
+- In carpark names, matched words will be wrapped with ` to easily see at a glance what was matched.
 
 Example of usage
 
@@ -171,6 +213,19 @@ CarparkID HG80 at BLK 941A HOUGANG STREET 92
 - The command requires a valid API access token to function.
 - This overwrites any previous availability data for any carparks fetched by the API.
 
+Example of usage:
+
+**Input**
+
+```update```
+
+**Output**
+
+```
+2312 Parking Lot data received from LTA!
+Update Successful.
+```
+
 ### Favourite carparks by carpark ID
 
 **Saves the carpark to a list of favourited carparks for easy subsequent access.**
@@ -210,7 +265,7 @@ Carpark already in list.
 No carpark was found.
 ```
 
-### Unfavourite carparks by carpark ID 
+### Unfavourite carparks by carpark ID
 
 **Removes the carpark from a list of favourited carparks.**
 > Format: `unfavourite CARPARK_ID`
@@ -226,7 +281,7 @@ Example of usage:
 **Output:**
 
 ```
-Removed Carpark 1 to favourites!
+Removed Carpark 1 from favourites!
 ```
 
 **Input (assuming carpark ID M32 is not favourited):**
@@ -236,7 +291,7 @@ Removed Carpark 1 to favourites!
 **Output:**
 
 ```
-No carpark was found.
+Carpark not found in favourite list!
 ```
 
 ### List lot availability of all favourite carparks
@@ -269,24 +324,27 @@ CarparkID J8 at BLK 232/240 JURONG EAST ST 21: 318 lots available
 
 > Format: `exit`
 
-
-`todo n/Write the rest of the User Guide d/next week`
-
-`todo n/Refactor the User Guide to remove passive voice d/13/04/2020`
-
 ## FAQ
 
 **Q**: How is the data for the carparks stored? Can I change or edit this data?
 
-**A**: The carpark data is first fetched in a `.json` format, under 
+**A**: The carpark data is first fetched in a `.json` format, under
 `.\resources\api\ltaResponse.json`. Then, this carpark data is written
-to a `.txt` file at `.\resources\carparkList.txt`. If you wish to manually edit any 
+to a `.txt` file at `.\resources\carparkList.txt`. If you wish to manually edit any
 carpark data, you can do so as long as the format is maintained. These changes will be reflected
 when you restart the program.
 
-
 ## Command Summary
-
-{Give a 'cheat sheet' of commands here}
-
-* Add todo `todo n/TODO_NAME d/DEADLINE`
+| Command                  | Description                                                                                 |
+|--------------------------|---------------------------------------------------------------------------------------------| 
+| `auth API_KEY`           | [Authenticate API using user's API key](#authenticate-user-api)                             |
+| `auth default`           | [Authenticate API using default key](#authenticate-default)                                 |
+| `auth status`            | [Authentication status](#authentication-status)                                             |
+| `find CARPARK_ID`        | [Find number of lots available by carpark ID](#find-number-of-lots-available-by-carpark-id) | 
+| `filter QUERY`           | [Filter carparks based on address](#filter-carparks-based-on-address)                       | 
+| `list`                   | [Get a list of available carparks on the app](#get-a-list-of-available-carparks-on-the-app) |
+| `update`                 | [Update data from API](#update-data-from-api)                                               |
+| `favourite CARPARK_ID`   | [Favourite carparks by carpark ID](#favourite-carparks-by-carpark-id)                       |
+| `unfavourite CARPARK_ID` | [Unfavourite carparks by carpark ID](#unfavourite-carparks-by-carpark-id)                   |
+| `favourite list`         | [List all IDs of favourite carparks](#list-all-ids-of-favourite-carparks)                   |
+| `exit`                   | [Exiting the program](#exiting-the-program)                                                 |
