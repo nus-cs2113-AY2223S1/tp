@@ -6,6 +6,32 @@ skinparam classBackgroundColor MODEL_COLOR
 show field
 show methods
 
+package commands <<Rectangle>> {
+Class FavouriteCommand {
+    -favourite : Favourite
+    -argument : String
+    +<u>COMMAND_WORD : String
+    +FavouriteCommand(String, Favourite)
+    +setFavourite(String)
+    +<u>findThisCarpark(String) : Carpark
+    +execute() : CommandResult
+}
+
+Class UnfavouriteCommand {
+    -favourite : Favourite
+    -argument : String
+    +<u>COMMAND_WORD : String
+    +UnfavouriteCommand(String, Favourite)
+    +setUnFavourite(String)
+    +<u>findThisCarpark(String) : Carpark
+    +execute() : CommandResult
+}
+
+Command <|-- FavouriteCommand
+Command <|-- UnfavouriteCommand
+}
+
+
 
 package Favourite <<Rectangle>> {
 Class Favourite {
@@ -13,11 +39,8 @@ Class Favourite {
     -directory: String
     -file: String
     +Favourite(directory: String, file: String)
-    +setFavourite(carparkId: String)
-    +setUnfavourite(carparkId: String)
     +updateFavouriteList()
     +writeFavouriteList()
-    +getCarparkId(input: String) : String
     +showList() : String
 }
 
@@ -30,10 +53,9 @@ Class FileStorage {
     -checkFileExists()
     +writeDataToFile(data: String)
 }
-
-
-
-Class HiddenOutside #FFFFFF
-
 Favourite --> "1" FileStorage
+}
+
+FavouriteCommand <-- "1" Favourite
+UnfavouriteCommand <-- "1" Favourite
 @enduml
