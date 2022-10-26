@@ -93,6 +93,9 @@ In the example above, `UserInterface#runCommandAddExpense()` calls `Storage#save
 ![Component-Commands](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentCommands.puml)
 
 ## Implementation
+### Adding an expense
+
+![Component-Commands](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ImplementationAddExpense.puml)
 
 ## Product scope
 ### Target user profile
