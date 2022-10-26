@@ -1,0 +1,8 @@
+@startuml
+!include https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/Styles.puml
+
+package Common {
+    Class Configurations COMMON_COLOR_1
+    Class Messages COMMON_COLOR_1
+}
+@enduml
