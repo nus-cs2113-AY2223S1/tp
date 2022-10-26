@@ -3,6 +3,7 @@ package command.petcommand;
 import command.Command;
 import pet.Pet;
 import pet.PetList;
+import service.Service;
 
 public class RemovePetCommand extends Command {
     public static final String COMMAND_WORD = "remove";
@@ -14,12 +15,15 @@ public class RemovePetCommand extends Command {
 
     public void execute() {
         int deleteIndex = index - 1;
-        PetList.pets.remove(deleteIndex);
-        printPetRemoveMessage();
-    }
-
-    public void printPetRemoveMessage() {
-        System.out.println("Pet is removed");
+        for (Pet pet : PetList.pets) {
+            if (pet.petId == deleteIndex) {
+                System.out.println("Noted. I've removed this pet:");
+                System.out.println(pet.name);
+                System.out.println("Now you have " + (PetList.pets.size() - 1) + " pets in the pet list.");
+                PetList.pets.remove(pet);
+                break;
+            }
+        }
     }
 
     @Override
