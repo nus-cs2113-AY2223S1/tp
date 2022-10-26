@@ -3,7 +3,9 @@
 ## Design & Implementation
 
 ### Ui
-The Ui Class handles user input
+The `Ui` class handles user input and basic output messages. It can
+* Read user input
+* Output various messages to the user
 
 ![img.png](imgs/UiClass.png)
 
@@ -14,14 +16,32 @@ The Ui Class handles user input
 ![img.png](imgs/MovieClass.png)
 
 ### Commands
+The command component enables users to make changes to their review list. The command word is taken from the first word
+of the user input, and is processed through the `Parser` class. The class diagram shows how the Commands parent class is
+implemented, as well as its extended classes.
 ![img.png](imgs/CommandsClass.png)
 
-
 #### Add
+The `add` command enables users to create new movie or TV Show reviews and add them to their review list. The following 
+is how the `add` command works:
+1. The `Parser` class takes in the user input, and parses this by using its `processUserInput` function.
+2. If the parsed command word is recognised to be the `add` command, the `executeAdd` function is called.
+3. Using the parsed command, `Parser` then determines whether the review to be added is a movie or Tv show. Otherwise, a 
+DukeException error is thrown.
+4. A new variable of type Media parent class, `toAdd`, is then created. The `AddCommand` function is then called to add
+the Movie or Tv Show `toAdd` into the review list, `reviewList`.
 ![img_1.png](imgs/AddCommandSequence.png)
 
 #### Find
-![img_1.png](imgs/FindCommandSequence.png)
+The find command enables users to search for existing reviews that contains a given keyword. This is done through the
+following steps: 
+1. The `Parser` class takes in the user input, and parses this by using its `processUserInput` function.
+2. If the parsed command word is recognised to be the `add` command, the `executeFind` function is called and extracts
+the keyword to search for from the user input.
+3. `Parser` then creates an `executor` object by creating a new `FindCommand`. `Parser` then calls the `execute` 
+function from `executor` which loops through all reviews in the list and displays those containing the given keyword
+using the `toString()` function found in both the `Movie` and `TvShow` subclasses.
+![img.png](imgs/FindCommandSequence.png)
 
 #### List
 ![img_2.png](imgs/ListCommandSequence.png)
@@ -34,19 +54,19 @@ When the user wants to delete a specific review from the review list, they will 
 [mediaType] [index]" which triggers the executeDelete() method in Parser. For example, "delete movie 2" will delete the 
 review at index 2 of movie section of the review list.
 
-Step 1: To check that the command given by the user is valid, the program checks for the condition that the user input 
+1. To check that the command given by the user is valid, the program checks for the condition that the user input 
 array contains exactly three String objects, failing which a DukeException will be thrown.
 
-Step 2: The program then checks if a valid media type is given i.e. "movie" or "tv", failing which a DukeException will 
+2. The program then checks if a valid media type is given i.e. "movie" or "tv", failing which a DukeException will 
 also be thrown. 
 
-Step 3: If the previous conditions are successfully met, a RemoveCommand object is created and its execute() method is 
+3. If the previous conditions are successfully met, a RemoveCommand object is created and its execute() method is 
 called. This method loops through the review list, first checking whether the review is of the given media type, then 
 whether the review is at the given index.
 
-Step 4: If both conditions are met, the review is successfully removed from the review list.
+4. If both conditions are met, the review is successfully removed from the review list.
 
-Step 5: A string confirming the successful removal of the review is generated and printed for the user.
+5. A string confirming the successful removal of the review is generated and printed for the user.
 
 ![img.png](imgs/deleteSequence.png)
 
@@ -55,11 +75,11 @@ Step 5: A string confirming the successful removal of the review is generated an
 When the user wants to remove every review from the review list, they will use the following command: "clear", which 
 triggers the executeClear() method in Parser.
 
-Step 1: A ClearCommand object is created and its execute() method is called.
+1. A ClearCommand object is created and its execute() method is called.
 
-Step 2: The ArrayList method clear() is called on the review list, removing every Media object from the review list.
+2. The ArrayList method clear() is called on the review list, removing every Media object from the review list.
 
-Step 3: A string confirming the successful clearing of the review list is generated and printed for the user.
+3. A string confirming the successful clearing of the review list is generated and printed for the user.
 
 ![img.png](imgs/clearSequence.png)
 
@@ -109,7 +129,7 @@ printed for the user.
 
 {Describe the target user profile}
 The target user profile is ideally individuals who are well-versed in the command line
-and are avid movie watchers. Therefore, this app is customised to their preferences.
+and are avid movie or TV show watchers. Therefore, this app is customised to their preferences.
 
 ### Value proposition
 
@@ -146,7 +166,6 @@ and are avid movie watchers. Therefore, this app is customised to their preferen
 
 ## Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
 - Load Main 
 - Add a movie or tv show 
   - Command:
