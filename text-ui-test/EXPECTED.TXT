@@ -217,6 +217,15 @@ I have added the following Expense transaction:
 Budget remained for Sep 2022: $9980. Keep it up!
 ____________________________________________________________
 ____________________________________________________________
+Invalid amount, please ensure your amount is in positive numerals ($10000000 or less) only!
+____________________________________________________________
+____________________________________________________________
+Invalid amount, please ensure your amount is in positive numerals ($10000000 or less) only!
+____________________________________________________________
+____________________________________________________________
+Invalid amount, please ensure your amount is in positive numerals ($10000000 or less) only!
+____________________________________________________________
+____________________________________________________________
 I have added the following Income transaction:
 [+][salary] $2000 at Sep 30 2022 | Description: jan_salary
 Budget remained for Sep 2022: $9980. Keep it up!
