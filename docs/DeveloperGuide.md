@@ -2,20 +2,20 @@
 
 ## Acknowledgements
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+Parser class and its functions are largely adapted from Ria's IP and help from regex101 (https://regex101.com/).
 
 Storage class and its functions are largely adapted from Dhanish's IP on Duke.
 
 ## Design & implementation
 
 The Patient and PatientList classes are used in conjunction to manage patients, and the list of patients. Each patient has a name,
-an ID, a date of birth and gender. The PatientList class holds an ArrayList of Patients and manipulates them accordingly.
+a unique ID, a date of birth and gender. The PatientList class holds an ArrayList of Patients and manipulates them accordingly.
 
 At the start of the program, a new PatientList object is instantiated. Through methods in the Storage class, data is read from the
 relevant text files to create Patients that existed prior to the last closure of the program, and then adds these patients to the
 ArrayList in PatientList. This finishes the initial set-up.
 
-Methods in PatientList class:
+### Methods in PatientList class:
 
 addPatient - this method takes in the aforementioned variables through UI class and parses them. If they are all valid, a new
 Patient is created and added to the ArrayList in PatientList.
@@ -97,11 +97,18 @@ The `Prescription` component,
 ## Product scope
 ### Target user profile
 
-{Describe the target user profile}
+Our target user profile is a doctor in need of quick access to information about his/her patients, visits, and
+prescriptions. The doctor can quickly see all of the prescriptions that have been given, when a patient has visited, 
+what their reasons were, etc. through this interface. The doctor can also quickly update this before, during, or after
+each visit and prescription to ensure that it stays up to date and easy-to-use.
 
 ### Value proposition
 
-{Describe the value proposition: what problem does it solve?}
+Doctors tend to use sticky notes or quick pieces of paper to jot down notes such as prescriptions, reason for visit, etc.
+This platform allows a doctor to quickly reference basic information about a patient, find their previous prescriptions
+and visits, and look at the history to make a decision. A doctor can mark a prescription as active or inactive, allowing
+a consistent history. Moreover, the only part of these records that a doctor can delete is a reason, ensuring continuity
+of information.
 
 ## User Stories
 
@@ -112,7 +119,7 @@ The `Prescription` component,
 
 ## Non-Functional Requirements
 
-Parser:
+### Parser
 
 The parsing class utilizes regex for each of the commands for two main reasons: usability and error-catching.
 
@@ -124,10 +131,39 @@ or of a certain type (i.e. the ID is one word made up of letters and numbers).
 
 If there is an error, the regex also helps with identifying the exact error issue, and
 sending that back to the user.
+
+For example: the `add` command for `Patient`
+
+`To add a patient: add n/[name] g/[M/F] d/[DOB] i/[ID]`
+* n/ checks for one or two words to store as the name
+* g/ checks for one letter indicating male or female
+* d/ checks for date of birth formatted as (DD-MM-YYY)
+* i/ checks for a single ID containing numbers or letters
+
+### Index Reference
+
+We utilize both ID and index reference in this tP, which may look confusing at first.
+Indices for visit and prescription are unique when created, and can be found when adding, editing, or viewing
+a visit or prescription. If you want to find a visit, you can search for a patient's visits through viewPatient in the
+visit menu, and then use the given index of the visit you find to edit it. The same workflow applies for prescription.
+
 ## Glossary
 
-* *glossary item* - Definition
+* *patient* - A single individual with a unique ID
+* *visit* - A single visit of one existing patient on a specific date and time
+* *prescription* - A single prescription of one existing patient, either inactive if it has been updated
+* or active based on in the patient has been using it or if a new record has replaced it
 
 ## Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+To load sample data, please reference the following formats:
+
+`patient.txt`: Name | DOB | G | ID
+- Example: Jane Doe | 09-09-1978 | F | T1
+
+`visit.txt`: ID | Reason | Date | Time
+- Example: T1 | checkup | 08-11-2022 | 08:00
+
+`prescription.txt`: ID | Name | Dosage | Time Interval | Active Status (True or False)
+- Example: T2 | penicillin | 1 tablet | every 3 days | T
+
