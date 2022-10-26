@@ -9,11 +9,11 @@ import seedu.commands.AuthCommand;
 import seedu.commands.Command;
 import seedu.commands.ExitCommand;
 import seedu.commands.FavouriteCommand;
+import seedu.commands.FilterCommand;
 import seedu.commands.FindCommand;
 import seedu.commands.HelpCommand;
 import seedu.commands.InvalidCommand;
 import seedu.commands.ListCommand;
-import seedu.commands.SearchCommand;
 import seedu.commands.UnfavouriteCommand;
 import seedu.commands.UpdateCommand;
 import seedu.common.CommonData;
@@ -73,11 +73,11 @@ public class Parser {
             return prepareFind(arguments);
         case ListCommand.COMMAND_WORD:
             return new ListCommand(carparkList);
-        case SearchCommand.COMMAND_WORD:
+        case FilterCommand.COMMAND_WORD:
             if (arguments.trim().isEmpty()) {
                 return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.SEARCH_FORMAT);
             }
-            return prepareSearch(arguments);
+            return prepareFilter(arguments);
         case UpdateCommand.COMMAND_WORD:
             return new UpdateCommand(api, carparkList);
         case UnfavouriteCommand.COMMAND_WORD:
@@ -142,9 +142,9 @@ public class Parser {
      * @param arguments arguments given by the user after the command word
      * @return command to be carried out
      */
-    private Command prepareSearch(String arguments) {
+    private Command prepareFilter(String arguments) {
         Sentence searchQuery = new Sentence(arguments);
-        return new SearchCommand(carparkList, searchQuery);
+        return new FilterCommand(carparkList, searchQuery);
     }
 
     /**
