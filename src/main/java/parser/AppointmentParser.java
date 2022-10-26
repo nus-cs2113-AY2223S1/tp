@@ -1,24 +1,25 @@
 package parser;
 
-import command.*;
-import command.appointmentcommand.AddAppointmentCommand;
-import command.appointmentcommand.RemoveAppointmentCommand;
-import command.appointmentcommand.ViewAppointmentCommand;
+import command.Command;
+import command.EmptyCommand;
+import command.appointmentCommand.AddAppointmentCommand;
+import command.appointmentCommand.RemoveAppointmentCommand;
+import command.appointmentCommand.ViewAppointmentCommand;
 import exception.DukeException;
 
 public class AppointmentParser {
     private int lengthOfSignature;
     private Parser parser;
 
-    public AppointmentParser(Parser parser, int lengthOfSignature){
+    public AppointmentParser(Parser parser, int lengthOfSignature) {
         this.parser = parser;
         this.lengthOfSignature = lengthOfSignature;
     }
 
-    public Command parseAppointment(String input){
+    public Command parseAppointment(String input) {
         try {
-            if(!input.contains(" ")){
-                if(input.equals("view")){
+            if (!input.contains(" ")) {
+                if (input.equals("view")) {
                     return new ViewAppointmentCommand();
                 }
                 throw new DukeException();
@@ -26,7 +27,7 @@ public class AppointmentParser {
 
             String type = input.substring(0,input.indexOf(" "));
             String statement = input.substring(input.indexOf(" "));
-            switch(type) {
+            switch (type) {
             case AddAppointmentCommand.COMMAND_WORD:
                 return prepareAddAppointment(statement);
             case RemoveAppointmentCommand.COMMAND_WORD:
@@ -46,7 +47,7 @@ public class AppointmentParser {
     }
 
 
-    public Command prepareRemoveAppointment(String input){
+    public Command prepareRemoveAppointment(String input) {
         try {
             int index = parser.indexOfInput(input);
             return new RemoveAppointmentCommand(index);
@@ -56,7 +57,7 @@ public class AppointmentParser {
         }
     }
 
-    public Command prepareAddAppointment(String input){
+    public Command prepareAddAppointment(String input) {
         try {
             int s = input.indexOf(" s/");
             int p = input.indexOf(" p/");

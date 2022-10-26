@@ -1,15 +1,17 @@
 package parser;
 
-import command.*;
-import command.employeecommand.AddEmployeeCommand;
-import command.employeecommand.RemoveEmployeeCommand;
-import command.employeecommand.ViewEmployeeCommand;
+import command.Command;
+import command.EmptyCommand;
+import command.employeeCommand.AddEmployeeCommand;
+import command.employeeCommand.RemoveEmployeeCommand;
+import command.employeeCommand.ViewEmployeeCommand;
 import exception.DukeException;
 
 public class EmployeeParser {
     private int lengthOfSignature;
     private Parser parser;
-    public EmployeeParser(Parser parser, int lengthOfSignature){
+
+    public EmployeeParser(Parser parser, int lengthOfSignature) {
         this.parser = parser;
         this.lengthOfSignature = lengthOfSignature;
     }
@@ -54,7 +56,7 @@ public class EmployeeParser {
         }
     }
 
-    public Command prepareRemoveEmployee(String input){
+    public Command prepareRemoveEmployee(String input) {
         try {
             int index = parser.indexOfInput(input);
             return new RemoveEmployeeCommand(index);

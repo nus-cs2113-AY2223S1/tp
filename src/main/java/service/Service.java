@@ -6,7 +6,7 @@ public class Service {
     private String serviceDescription;
 
     public Service(String serviceDescription) {
-        this.serviceId= ++id;
+        this.serviceId = ++id;
         this.serviceDescription = serviceDescription;
     }
 

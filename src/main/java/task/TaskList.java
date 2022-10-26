@@ -34,7 +34,7 @@ public class TaskList {
         // employee aggregate task
         Employee employee = EmployeeList.findEmployee(task.getEmployeeId());
         if (employee == null) {
-             throw new DukeException();
+            throw new DukeException();
         }
         employee.addTaskToEmployee(task);
         // added to overall task list
@@ -47,10 +47,10 @@ public class TaskList {
     }
 
     // assign task to be done by another person
-    public static void reassignTask(int taskId, int employeeId){
+    public static void reassignTask(int taskId, int employeeId) {
         Task taskToReassign = TaskList.findTask(taskId);
         // Remove from original Employee's task list
-        if(taskToReassign != null){
+        if (taskToReassign != null) {
             EmployeeList.findEmployee(taskToReassign.getEmployeeId()).removeTaskFromEmployee(taskId);
             // Add to new Employee's task list
             EmployeeList.findEmployee(employeeId).addTaskToEmployee(taskToReassign);
@@ -72,7 +72,7 @@ public class TaskList {
         }
     }
 
-    public static Task findTask(int taskId){
+    public static Task findTask(int taskId) {
         for (Task task : tasks) {
             if (task.getTaskId() == taskId) {
                 return task;

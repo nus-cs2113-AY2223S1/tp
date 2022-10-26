@@ -1,5 +1,4 @@
 package pet;
-import pet.PetList.*;
 
 import java.util.Random;
 
@@ -27,7 +26,6 @@ public class Pet {
     }
 
     public String toString() {
-//        String isHealthy = this.isHealthy ? "healthy" : "unhealthy";
         return String.format("I am a cute %s, my name is %s, and I am currently %s",
                 species, name, status);
     }
@@ -35,8 +33,8 @@ public class Pet {
     private void initPetStatus() {
         Random random = new Random();
         int randomNumber = random.nextInt(NUM_OF_STATUS) + 1;
-        if (this.isHealthy){
-            switch (randomNumber){
+        if (this.isHealthy) {
+            switch (randomNumber) {
             case 1:
                 status = PetHealthyStatus.crazy;
                 wellness = 10;
@@ -57,10 +55,11 @@ public class Pet {
                 status = PetHealthyStatus.sleepy;
                 wellness = 6;
                 break;
+            default:
+                break;
             }
-        }
-        else if (isHealthy = false){
-            switch (randomNumber){
+        } else {
+            switch (randomNumber) {
             case 1:
                 status = PetUnhealthyStatus.exhausted;
                 wellness = 5;
@@ -80,6 +79,8 @@ public class Pet {
             case 5:
                 status = PetUnhealthyStatus.dying;
                 wellness = 1;
+                break;
+            default:
                 break;
             }
         }

@@ -17,12 +17,12 @@ public class TaskParser {
     private int lengthOfSignature;
     private Parser parser;
 
-    public TaskParser(Parser parser, int lengthOfSignature){
+    public TaskParser(Parser parser, int lengthOfSignature) {
         this.parser = parser;
         this.lengthOfSignature = lengthOfSignature;
     }
 
-    public Command parseTask(String input){
+    public Command parseTask(String input) {
         try {
             if (!input.contains(" ")) {
                 if (input.equals("view")) {
@@ -45,14 +45,13 @@ public class TaskParser {
                 System.out.println("Invalid Input! unrecognized pet operation");
                 throw new DukeException();
             }
-        }
-        catch (DukeException e){
+        } catch (DukeException e) {
             return new EmptyCommand();
         }
     }
 
-    public Command prepareAddTask(String input){
-        try{
+    public Command prepareAddTask(String input) {
+        try {
             int startOfI = input.indexOf(" i/");
             int startOfE = input.indexOf(" e/");
             int startOfD = input.indexOf(" d/");
@@ -70,27 +69,23 @@ public class TaskParser {
             int employeeIdint = Integer.parseInt(employeeIdString);
 
             return new AddTaskCommand(appointmentIdInt, employeeIdint, description);
-        }
-
-        catch (DukeException e){
+        } catch (DukeException e) {
             return new EmptyCommand();
         }
     }
 
-    public Command prepareRemoveTask(String input){
-        try{
+    public Command prepareRemoveTask(String input) {
+        try {
             int index = parser.indexOfInput(input);
             return new RemoveTaskCommand(index);
-        }
-
-        catch (DukeException e){
+        } catch (DukeException e) {
             System.out.println("Sorry, index entered invalid for removing an task");
             return new EmptyCommand();
         }
     }
 
-    public Command prepareReassignTask(String input){
-        try{
+    public Command prepareReassignTask(String input) {
+        try {
             int startOfI = input.indexOf(" i/");
             int startOfE = input.indexOf(" e/");
             if (startOfI > startOfE || startOfI == -1) {
@@ -98,15 +93,13 @@ public class TaskParser {
                 throw new DukeException();
             }
 
-            String TaskIndexString = input.substring(startOfI + lengthOfSignature, startOfE).trim();
-            String EmployeeIndexString = input.substring(startOfE + lengthOfSignature).trim();
-            int TaskIndexInt = Integer.parseInt(TaskIndexString);
-            int EmployeeIndexInt = Integer.parseInt(EmployeeIndexString);
+            String taskIndexString = input.substring(startOfI + lengthOfSignature, startOfE).trim();
+            String employeeIndexString = input.substring(startOfE + lengthOfSignature).trim();
+            int taskIndexInt = Integer.parseInt(taskIndexString);
+            int employeeIndexInt = Integer.parseInt(employeeIndexString);
 
-            return new ReassignTaskCommand(TaskIndexInt, EmployeeIndexInt);
-        }
-
-        catch (DukeException e){
+            return new ReassignTaskCommand(taskIndexInt, employeeIndexInt);
+        } catch (DukeException e) {
             return new EmptyCommand();
         }
     }

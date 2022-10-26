@@ -1,6 +1,7 @@
 package parser;
 
-import command.*;
+import command.Command;
+import command.EmptyCommand;
 import command.serviceCommand.AddServiceCommand;
 import command.serviceCommand.RemoveServiceCommand;
 import command.serviceCommand.ViewServiceCommand;
@@ -10,12 +11,12 @@ public class ServiceParser {
     private int lengthOfSignature;
     private Parser parser;
 
-    public ServiceParser(Parser parser, int lengthOfSignature){
+    public ServiceParser(Parser parser, int lengthOfSignature) {
         this.parser = parser;
         this.lengthOfSignature = lengthOfSignature;
     }
 
-    public Command parseService(String input){
+    public Command parseService(String input) {
         try {
             if (!input.contains(" ")) {
                 if (input.equals("view")) {
@@ -40,7 +41,7 @@ public class ServiceParser {
         }
     }
 
-    public Command prepareAddService(String input){
+    public Command prepareAddService(String input) {
         try {
             int startOfD = input.indexOf(" d/");
             if (startOfD == -1) {
@@ -55,7 +56,7 @@ public class ServiceParser {
     }
 
 
-    public Command prepareRemoveService(String input){
+    public Command prepareRemoveService(String input) {
         try {
             int index = parser.indexOfInput(input);
             return new RemoveServiceCommand(index);

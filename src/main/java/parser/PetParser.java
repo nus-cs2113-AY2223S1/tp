@@ -1,7 +1,10 @@
 package parser;
 
-import command.*;
-import command.petCommand.*;
+import command.Command;
+import command.EmptyCommand;
+import command.petCommand.AddPetCommand;
+import command.petCommand.RemovePetCommand;
+import command.petCommand.ViewPetCommand;
 import exception.DukeException;
 import pet.Pet;
 import seedu.duke.Duke;
@@ -10,13 +13,13 @@ public class PetParser {
     private int lengthOfSignature;
     private Parser parser;
 
-    public PetParser(Parser parser, int lengthOfSignature){
+    public PetParser(Parser parser, int lengthOfSignature) {
         this.parser = parser;
         this.lengthOfSignature = lengthOfSignature;
     }
 
 
-    public Command parsePet(String input){
+    public Command parsePet(String input) {
         try {
             if (!input.contains(" ")) {
                 if (input.equals("view")) {
@@ -37,13 +40,12 @@ public class PetParser {
                 System.out.println("Invalid Input! unrecognized pet operation");
                 throw new DukeException();
             }
-        }
-        catch (DukeException e){
+        } catch (DukeException e) {
             return new EmptyCommand();
         }
     }
 
-    public Command prepareAddPet(String input){
+    public Command prepareAddPet(String input) {
         try {
             int startOfN = input.indexOf(" n/");
             int startOfS = input.indexOf(" s/");
@@ -68,25 +70,21 @@ public class PetParser {
             boolean isHealthy = statusInt == 0 ? false : true;
 
             return new AddPetCommand(name, species, isHealthy);
-        }
-
-        catch (DukeException e){
+        } catch (DukeException e) {
             return new EmptyCommand();
         }
     }
 
 
     public Command prepareRemovePet(String input) {
-        try{
+        try {
             int index = parser.indexOfInput(input);
-            if(index <= 0 || index > Pet.numOfPets){
+            if (index <= 0 || index > Pet.numOfPets) {
                 System.out.println("Invalid Input! please enter a valid id");
                 throw new DukeException();
             }
             return new RemovePetCommand(index);
-        }
-
-        catch (DukeException e){
+        } catch (DukeException e) {
             return new EmptyCommand();
         }
     }
