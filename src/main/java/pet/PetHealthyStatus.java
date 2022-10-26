@@ -1,11 +1,12 @@
 package pet;
 
 public enum PetHealthyStatus implements PetStatus{
+    crazy,
+    energetic,
     happy,
     boring,
     sleepy,
-    energetic,
-    crazy;
+    ;
 
     public String getPetStatusDescription() {
         switch (this) {
