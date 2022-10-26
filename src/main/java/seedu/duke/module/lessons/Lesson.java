@@ -45,7 +45,8 @@ public class Lesson {
         return info;
     }
 
-    public Lesson(String day, String startTime, String endTime, String lessonType, String classNumber, String moduleCode) {
+    public Lesson(String day, String startTime, String endTime, String lessonType,
+                 String classNumber, String moduleCode) {
         this.day = day;
         this.startTime = startTime;
         this.endTime = endTime;
