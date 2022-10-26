@@ -118,7 +118,7 @@ public class AttendingManager {
                 }
                 currModule = moduleList.get(moduleIndex);
             }
-            Lesson newLesson = new Lesson(lessonDay, lessonStart, lessonEnd, lessonType, classNumber);
+            Lesson newLesson = new Lesson(lessonDay, lessonStart, lessonEnd, lessonType, classNumber, moduleCode);
             currModule.replaceAttending(newLesson, attendingIndex);
             attendingIndex++;
         }
