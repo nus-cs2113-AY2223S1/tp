@@ -7,6 +7,7 @@ Welcome to
  |_____/|_|\_\\__, |  \_____\___/|_| |_|\__|_|  \___/|_|
                __/ |
               |___/
+
 File or directory does not exist.
 
 Trying to create file now.
