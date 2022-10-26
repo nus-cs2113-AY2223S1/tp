@@ -21,9 +21,11 @@ YAMOM is designed for users who are proficient in Command Line Interface (CLI).
     - [Search for Modules: `search`](#search-for-modules-search)
     - [Changing semester to plan: `semester`](#changing-semester-to-plan-semester)
     - [Viewing user timetable: `view`](#viewing-user-timetable-view)
-    - [Feature X: `list`](#feature-x-list)
+    - [List out selected module: `list`](#listing-out-all-selected-modules-list)
     - [Select a timetable slot: `select`](#select-a-timetable-slot-select)
-    - [Feature X: `COMMAND`](#feature-x-command)
+    - [Export Timetable: `export`](#creating-an-nusmod-link-export)
+    - [Import Timetable: `import`](#importing-a-timetable-import)
+<!--    - [Feature X: `COMMAND`](#feature-x-command) -->
   - [Application Data](#application-data)
     - [Data Storage](#data-storage)
     - [Transfer to another computer](#transfer-to-another-computer)
@@ -40,7 +42,18 @@ YAMOM is designed for users who are proficient in Command Line Interface (CLI).
 4. Open the command line in that folder and run the command `java -jar [filename].jar`.
 5. You will receive a greeting if the application runs successfully.
 
+```
+Hello from
+                      
+__ __ _____ _____ _____ _____
+|  |  |  _  |     |     |     |
+|_   _|     | | | |  |  | | | |
+  |_| |__|__|_|_|_|_____|_|_|_|
 
+How can I help you today?
+Enter "help" to get started!
+Sem [1] >> 
+```
 
 ## Features 
 
@@ -197,50 +210,60 @@ Possible Error:
 
 List out all modules that matches the module code.
 
-Format: `search KEYWORD`
+Format: `search (/code [MODULE_CODE] | /title [KEYWORD]) </level [MODULE_LEVEL]> </sem [MODULE_SEMESTER]>`
 
-* The `KEYWORD` will be the module code of interest.
-* The `KEYWORD` can be the faculty code or the module number
-* The `KEYWORD` is not case-sensitive
+* The `MODULE_CODE` will be the module code of interest, can be partial module code
+* The `KEYWORD` will be a keyword in the module title
+* The `MODULE_LEVEL` will be the first digit of the module code (indicate level of module), a single digit number
+* The `MODULE_SEMESTER` will be the semester of interest
+* At least one of `/code [MODULE_CODE]` or `/title [KEYWORD]` must be present for search
+* `/level [MODULE_LEVEL` and `/sem [MODULE_SEMESTER]` are optional search fields
 
 Example of usage:
 
-`search cs`
+`search /code cs`
 
-`search 1010`
+`search /title programming /level 1`
 
-`search GEA1000`
+`search /code CS /title algorithm /level 5 /sem 2`
 
 Sample Output:
 ```
-search CG
---------------------------------------
-Module search list
-CG1111
-CG1111A
-CG1112
-CG2023
-CG2027
-CG2028
-CG2111A
-CG2271
-CG3002
-CG3207
-CG4001
-CG4002
-CG4003
---------------------------------------
+search /code CG /level 2
+--------------------------------------------------------------------------------
+Search Result:
+Total 5 module(s) found
+
+CG2023 Signals and Systems
+CG2027 Transistor-level Digital Circuits
+CG2028 Computer Organization
+CG2111A Engineering Principles and Practice II
+CG2271 Real-Time Operating Systems
+
+To get full details of the module, type 'get <module code>'
+-------------------------------------------------------------------------------- 
 ```
 
 Possible Error:
 1. Module code does not have a match
    * YAMOM will return an empty list of modules
    ```
-   search XX
+   search /code XX
    --------------------------------------
    Module search list
    --------------------------------------
    ```
+2. The search is not in the expected format
+   * YAMOM will prompt for the right search format
+
+    ```   
+    search ABC
+    --------------------------------------------------------------------------------
+    Error! 	Wrong format given, should be
+    search (/code [MODULE_CODE] | /title [KEYWORD]) </level [MODULE_LEVEL]> </sem [MODULE_SEMESTER]>
+    -------- ------------------------------------------------------------------------
+    ```
+   
 > Note:
 > - The list of modules can get very long for a generic search
 
@@ -262,6 +285,17 @@ semester 3
 You are now planning for special term I
 --------------------------------------
 ```
+
+Possible Error:
+1. User did not input a valid semester
+```
+semester 0
+--------------------------------------------------------------------------------
+Error! 	Wrong format, should be: semester [SEMESTER_SELECTED]
+Not a valid semester.
+--------------------------------------------------------------------------------
+```
+
 ### Viewing user timetable: `view`
 
 Prints out the current user timetable.
@@ -327,7 +361,7 @@ view /simple /fancy
 Error! 	Timetable cannot be both simple and fancy!
 --------------------------------------
 ```
-### Feature X: `list`
+### Listing out all selected modules: `list`
 
 Displays list of all selected modules and slots.
 
@@ -339,7 +373,27 @@ Example of usage:
 
 Sample Output:
 ```
+list
+--------------------------------------------------------------------------------
+CS1010	Programming Methodology
+	LABORATORY=B03, SECTIONAL_TEACHING=1, TUTORIAL=01
 
+CS2040C	Data Structures and Algorithms
+	LABORATORY=02, LECTURE=1
+
+
+Here's a list of your current selected module(s)!
+--------------------------------------------------------------------------------
+
+```
+
+Possible Error:
+- Empty timetable
+```
+list
+--------------------------------------------------------------------------------
+You currently have no selected module(s)!
+--------------------------------------------------------------------------------
 ```
 
 ### Select a timetable slot: `select`
@@ -366,6 +420,63 @@ Slot selected successfully
 --------------------------------------
 ```
 
+### Creating an NUSMod Link: `export`
+
+Creates a sharable NUSMod Link
+
+Format: `export`
+
+Example of usage:
+
+`export`
+
+Sample Output:
+```
+export
+--------------------------------------------------------------------------------
+Here is your NUSMod Link:
+	https://nusmods.com/timetable/sem-1/share?CS1010=LAB:B03,SEC:1,TUT:01
+--------------------------------------------------------------------------------
+```
+
+### Importing a timetable: `import`
+
+Import a timetable into YAMOM through a shareable NUSmod Link.
+
+Format: `import [NUSMOD_LINK]`
+
+* The `NUSMOD_LINK` need to be in the format of `https://nusmods.com/timetable/sem-SEMESTER_NUMBER/share?MODULE_INFO&MODULE_INFO`
+
+Example of usage:
+
+`import https://nusmods.com/timetable/sem-1/share?GEA1000=TUT:D01command Use YAMOM /when now`
+
+Sample Output:
+```
+import https://nusmods.com/timetable/sem-1/share?CS1010=LAB:B03,SEC:1,TUT:01
+--------------------------------------------------------------------------------
+Timetable imported to YAMOM!
+--------------------------------------------------------------------------------
+```
+
+Possible error:
+- No link given
+```
+import 
+--------------------------------------------------------------------------------
+Error! 	No nusmod link given
+--------------------------------------------------------------------------------
+```
+
+- Wrong link format
+```
+import www.google.com
+--------------------------------------------------------------------------------
+Error! 	Error processing NUSMod Link, Kindly ensure that the link is in the format of 
+https://nusmods.com/timetable/sem-SEMESTER_NUMBER/share?MODULE_INFO&MODULE_INFO
+--------------------------------------------------------------------------------
+```
+<!--
 ### Feature X: `COMMAND`
 
 {Description of the command}.
@@ -387,7 +498,7 @@ Sample Output:
 ```
 
 Possible Error:
-
+-->
 > Note:
 
 ## Application Data
@@ -402,6 +513,10 @@ The user data is stored in `duke.txt` under the data folder in the home director
 Copy the application file with the corresponding data file (remember to create the `data` folder under the home directory)
 
 ### Transfer to NUSMODs (for NUS students)
+(Reccomended)
+Enter the command `export` and the current timetable will be exported as a sharable NUSMod Link
+
+Alternatively:
 The NUSMOD url is available in `duke.txt`, copy the content of the file and paste it in the browser to view the timetable on NUSMOD
 
 ## FAQ
@@ -409,23 +524,24 @@ The NUSMOD url is available in `duke.txt`, copy the content of the file and past
 **Q**: How do I transfer my data to another computer? 
 
 **A**: YAMOM is designed with portability in mind. Simply copy the JAR file and the data folder over to your other computer and you are good to go.
+Alternatively, you can export the timetable, copy the link generated, and import on the other computer
 
 ## Command summary
 
-| Action                    | Format                                                        | Example                                        |
-|---------------------------|---------------------------------------------------------------|------------------------------------------------|
-| Add a module              | `add MODULE_CODE`                                             | `add CS2101`                                   |
-| Delete a module           | `delete MODULE_CODE`                                          | `delete CS2102`                                |
-| Exit application          | `bye`                                                         | `bye`                                          |
-| Find module by keyword    | `find KEYWORD`                                                | `find cs2103`                                  |
-| Seek help                 | `help`                                                        | `help`                                         |
-| Import modules from NUSMods URL | `import URL` | `import https://nusmods.com/timetable/sem-1/share?CS2113=LEC:1,TUT:4` |
-| Export modules to NUSMods URL | `export` | `export` |
-| Change semester | `semester SEMESTER` | `semester 2` |
-| Seek help                 | `help`                                                        | `help`                                         |
-| View timetable            | `view`                                                        | `view`                                         |
-| List selected modules     | `list`                                                        | `list`                                         |
-| Add module timetable slot | `select /module MODULE_CODE /type LESSON_TYPE /code CLASS_NO` | `select /module CS1010 /type tutorial /code 1` |
+| Action                           | Format                                                                                         | Example                                                               |
+|----------------------------------|------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------|
+| Add a module                     | `add [MODULE_CODE]`                                                                            | `add CS2101`                                                          |
+| Delete a module                  | `delete [MODULE_CODE]`                                                                         | `delete CS2102`                                                       |
+| Exit application                 | `bye`                                                                                          | `bye`                                                                 |
+| Read more details about a module | `get [MODULE_CODE]`                                                                            | `get CS2103`                                                          |
+| Find module by keyword           | `search /code [MODULE_CODE] /title [KEYWORD] </level [MODULE_LEVEL]> </sem [MODULE_SEMESTER]>` | `search /code cs /level 2 /sem 1`                                     |
+| Seek help                        | `help`                                                                                         | `help`                                                                |
+| Import modules from NUSMods URL  | `import [URL]`                                                                                 | `import https://nusmods.com/timetable/sem-1/share?CS2113=LEC:1,TUT:4` |
+| Export modules to NUSMods URL    | `export`                                                                                       | `export`                                                              |
+| Change semester                  | `semester [SEMESTER]`                                                                          | `semester 2`                                                          |
+| View timetable                   | `view /fancy` OR `view /simple`                                                                | `view /fancy`                                                         |
+| List selected modules            | `list`                                                                                         | `list`                                                                |
+| Add module timetable slot        | `select /module <MODULE_CODE> /type <LESSON_TYPE> /code <CLASS_NO>`                            | `select /module CS1010 /type tutorial /code 1`                        |
 
 
 ## Credits
