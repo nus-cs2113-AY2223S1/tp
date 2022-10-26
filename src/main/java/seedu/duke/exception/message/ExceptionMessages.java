@@ -54,6 +54,8 @@ public class ExceptionMessages {
     public static final String MESSAGE_STORE_INVALID =
             "Something went wrong when storing your tasks";
     public static final String MESSAGE_ARGUMENT_EMPTY = "The value cannot be empty";
+    public static final String MESSAGE_CONTAIN_DATA_SEPARATOR =
+            "Input cannot contain | character because it can cause errors when loading data";
     public static final String MESSAGE_STORAGE_ILLEGALLY_MODIFIED = "The data files has been illegally edited\n"
             + "Your previous data cannot be recovered\n"
             + "We will create three brand-new lists for your users, items, and transaction\n"
