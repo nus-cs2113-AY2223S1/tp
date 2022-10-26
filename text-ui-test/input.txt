@@ -1,7 +1,7 @@
-search /code gea
-search /code cs2113
+list
+view
+help
+search /code 2113 /title software
 add cs2113
-view
-select /module cs2113 /type tutorial /code 4
-view
+list
 bye

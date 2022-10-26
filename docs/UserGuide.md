@@ -9,23 +9,28 @@ YAMOM is designed for users who are proficient in Command Line Interface (CLI).
 
 ## Table of Contents
 
-1. [Quick start](#quick-start)
-2. [Features](#features)
-    1. [Getting help: `help`](#getting-help-help)
-    2. [Exiting: `bye`](#exiting-yamom-bye)
-    3. [Add a module: `add`](#add-a-module-add)
-    4. [Remove a module: `delete`](#removing-a-module-delete)
-    5. [Search for module: `search`](#search-for-modules-search)
-    6. [View timetable: `view`](#viewing-user-timetable-view)
-    7. [Select module slot: `select`](#select-a-timetable-slot-select)
-    8. [Future Feature: `COMMAND`](#feature-x-command)
-3. [Application Data](#application-data)
-   1. [Data Storage](#data-storage)
-   2. [Transfer to Another Computer](#transfer-to-another-computer)
-   3. [Transfer to NUSMods](#transfer-to-nusmods-for-nus-students)
-4. [Frequently Asked Questions (FAQ)](#faq)
-5. [Command summary](#command-summary)
-6. [Credits](#credits)
+- [User Guide for Yet Another Module Organizer/Manager (YAMOM) v1.0](#user-guide-for-yet-another-module-organizermanager-yamom-v10)
+  - [Introduction](#introduction)
+  - [Table of Contents](#table-of-contents)
+  - [Quick Start](#quick-start)
+  - [Features](#features)
+    - [Getting help: `help`](#getting-help-help)
+    - [Exiting YAMOM: `bye`](#exiting-yamom-bye)
+    - [Add a module: `add`](#add-a-module-add)
+    - [Removing a module: `delete`](#removing-a-module-delete)
+    - [Search for Modules: `search`](#search-for-modules-search)
+    - [Changing semester to plan: `semester`](#changing-semester-to-plan-semester)
+    - [Viewing user timetable: `view`](#viewing-user-timetable-view)
+    - [Feature X: `list`](#feature-x-list)
+    - [Select a timetable slot: `select`](#select-a-timetable-slot-select)
+    - [Feature X: `COMMAND`](#feature-x-command)
+  - [Application Data](#application-data)
+    - [Data Storage](#data-storage)
+    - [Transfer to another computer](#transfer-to-another-computer)
+    - [Transfer to NUSMODs (for NUS students)](#transfer-to-nusmods-for-nus-students)
+  - [FAQ](#faq)
+  - [Command summary](#command-summary)
+  - [Credits](#credits)
 
 ## Quick Start
 
@@ -57,14 +62,38 @@ Sample Output:
 ```
 help
 --------------------------------------
-help: lists all functions!
-add: add a module into your planner!
-delete: delete MODULE - remove a module from your planner!
-bye: exit Yet Another Module Organiser / Manager (YAMOM)!
-search: [MODULE_CODE][MODULE_NAME] - returns modules that match the search terms!
-view: displays current timetable!
-select: select /module [MODULE_CODE] /type [LESSON_TYPE] /code [CLASS_NO] - select slot for modules!
+Here are all the commands available in YAMOM!
 
+add	: add a module into YAMOM timetable.
+delete	: remove a module from YAMOM timetable.
+list	: List out all the selected modules and lesson slots.
+bye	: Exit YAMOM!
+export	: Generates an NUSMod Link to be exported to the browser.
+get	: Show all details of a module.
+help	: List out all commands and  their respective usages in YAMOM
+import	: Imports a timetable  from an NUSMod timetable sharing link
+search	: List out all modules that contains a search term
+	 * the search term can either be module code or a keyword in module title.
+semester	: Select another semester to plan and organize timetable
+select	: Select a module slot
+view	: Display current user timetable
+
+Usage :
+	add [MODULE_CODE]
+	delete [MODULE_CODE]
+	list
+	bye
+	export
+	get [MODULE_CODE]
+	help
+	import [NUSMods_LINK]
+	search (/code [MODULE_CODE] | /title [KEYWORD])
+	semester [SEMESTER_SELECTED]
+	select /module <MODULE_CODE> /type <LESSON_TYPE> /code <CLASS_NO>
+	view (fancy|simple)
+
+Note: [ ] are required elements, < > are optional elements
+For more detailed guide, please visit https://ay2223s1-cs2113-f11-3.github.io/tp/
 --------------------------------------
 ```
 
@@ -97,7 +126,7 @@ Adds a module from available database into the user timetable
 
 Format: `add MODULE_CODE`
 
-* The `MODULE_CDOE` is not case sensitive, but has to be an exact match
+* The `MODULE_CDOE` is not case-sensitive, but has to be an exact match
 
 Example of usage:
 
@@ -119,6 +148,12 @@ Possible Error:
    ```
    add cs203
    --------------------------------------
+   Error! 	Wrong format, should be: add [MODULE_CODE]
+   Module is invalid! Please enter a valid module code.
+   Each module of study has a unique module code consisting of a two-
+   or three-letter prefix that generally denotes the discipline,
+   and four digits, the first of which indicates the level of the module
+   (e.g., 1000 indicates a Level 1 module and 2000, a Level 2 module).
    --------------------------------------
    ```
    
@@ -127,7 +162,8 @@ Possible Error:
    ```
    add CS1231 CS2101
    --------------------------------------
-   Sorry, I do not understand your command. Enter "help" for the available commands
+   Error! 	Wrong format, should be: add [MODULE_CODE]
+   Unknown command, try again.
    --------------------------------------
    ```
 
@@ -137,7 +173,7 @@ Removes a module from the user timetable
 
 Format: `delete MODULE_CODE`
 
-* The `MODULE_CDOE` is not case sensitive, but has to be an exact match
+* The `MODULE_CDOE` is not case-sensitive, but has to be an exact match
 
 Example of usage:
 
@@ -165,7 +201,7 @@ Format: `search KEYWORD`
 
 * The `KEYWORD` will be the module code of interest.
 * The `KEYWORD` can be the faculty code or the module number
-* The `KEYWORD` is not case sensitive
+* The `KEYWORD` is not case-sensitive
 
 Example of usage:
 
@@ -208,11 +244,30 @@ Possible Error:
 > Note:
 > - The list of modules can get very long for a generic search
 
+### Changing semester to plan: `semester`
+
+Select semester to plan for and organise.
+
+Format: `semester SEMESTER_SELECTED`
+
+Example of usage: 
+
+`semester 1`
+
+Sample Output:
+
+```
+semester 3
+--------------------------------------
+You are now planning for special term I
+--------------------------------------
+```
 ### Viewing user timetable: `view`
 
 Prints out the current user timetable.
 
-Format: `view`
+Format: `view /(simple|fancy)`  
+`view /simple` is equivalent to `view`  
 
 Example of usage:
 
@@ -247,8 +302,44 @@ Possible Error:
 ```
 view
 --------------------------------------
-Your timetable is empty. Please select lessons first before viewing.
+Error! 	Your timetable is empty.
+Please select your modules first before viewing.
 --------------------------------------
+```
+ - Random parameters:
+```
+view timetable
+--------------------------------------
+Error! 	Unknown command. Maybe you meant "view".
+--------------------------------------
+```
+ - Forgot backslash `/`:
+```
+view fancy
+--------------------------------------
+Error! 	Unknown command. Maybe you forgot a "/".
+--------------------------------------
+```
+ - Contains both `/fancy` and `/simple`:
+```
+view /simple /fancy
+--------------------------------------
+Error! 	Timetable cannot be both simple and fancy!
+--------------------------------------
+```
+### Feature X: `list`
+
+Displays list of all selected modules and slots.
+
+Format: `list`
+
+Example of usage:
+
+`list`
+
+Sample Output:
+```
+
 ```
 
 ### Select a timetable slot: `select`
@@ -328,7 +419,12 @@ The NUSMOD url is available in `duke.txt`, copy the content of the file and past
 | Exit application          | `bye`                                                         | `bye`                                          |
 | Find module by keyword    | `find KEYWORD`                                                | `find cs2103`                                  |
 | Seek help                 | `help`                                                        | `help`                                         |
+| Import modules from NUSMods URL | `import URL` | `import https://nusmods.com/timetable/sem-1/share?CS2113=LEC:1,TUT:4` |
+| Export modules to NUSMods URL | `export` | `export` |
+| Change semester | `semester SEMESTER` | `semester 2` |
+| Seek help                 | `help`                                                        | `help`                                         |
 | View timetable            | `view`                                                        | `view`                                         |
+| List selected modules     | `list`                                                        | `list`                                         |
 | Add module timetable slot | `select /module MODULE_CODE /type LESSON_TYPE /code CLASS_NO` | `select /module CS1010 /type tutorial /code 1` |
 
 

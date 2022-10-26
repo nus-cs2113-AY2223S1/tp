@@ -2,6 +2,9 @@ package seedu.duke.utils;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.stream.Stream;
+
+import org.apache.commons.lang3.StringUtils;
 
 //@author CheahHaoYi-reused
 //Reused from CheahHaoYi/ip Ui class with slight modification
@@ -13,17 +16,18 @@ import java.util.Scanner;
  */
 public class Ui {
 
-    private static final String LOGO = "                      \n"
-            + "__ __ _____ _____ _____ _____\n"
-            + "|  |  |  _  |     |     |     |\n"
-            + "|_   _|     | | | |  |  | | | |\n"
-            + "  |_| |__|__|_|_|_|_____|_|_|_|\n";
+    private static final String LOGO = "                      " + System.lineSeparator()
+            + "__ __ _____ _____ _____ _____" + System.lineSeparator()
+            + "|  |  |  _  |     |     |     |" + System.lineSeparator()
+            + "|_   _|     | | | |  |  | | | |" + System.lineSeparator()
+            + "  |_| |__|__|_|_|_|_____|_|_|_|" + System.lineSeparator();
 
 
     private static final String MESSAGE_GREET = "Hello from" + System.lineSeparator()
-            + LOGO + System.lineSeparator() + "How can I help you today?";
+            + LOGO + System.lineSeparator() + "How can I help you today?"
+            + System.lineSeparator() + "Enter \"help\" to get started!";
     private static final String MESSAGE_BYE = "Bye bye, See you again";
-    private static final String LINE_DIVIDER = "--------------------------------------";
+    private static final String LINE_DIVIDER = StringUtils.repeat("-", 80);
 
     private ArrayList<String> uiBuffer;
     private Scanner scanner;
@@ -70,15 +74,28 @@ public class Ui {
     /**
      * To store String messages into a buffer.
      * @param message the message to add into the buffer.
+     * @param hasIndent whether to indent a message to the right, false by default if not specified by user
      */
+    public void addMessage(String message, boolean hasIndent) {
+        if (hasIndent) {
+            uiBuffer.add("\t" + message);
+        } else {
+            uiBuffer.add(message);
+        }
+    }
+
     public void addMessage(String message) {
-        uiBuffer.add(message);
+        addMessage(message, false);
+    }
+
+    public void addMessage(ArrayList<String> messages, boolean hasIndent) {
+        for (String message: messages) {
+            addMessage(message, hasIndent);
+        }
     }
 
     public void addMessage(ArrayList<String> messages) {
-        for (String message: messages) {
-            addMessage(message);
-        }
+        addMessage(messages, false);
     }
 
     /**
@@ -106,5 +123,31 @@ public class Ui {
         displayDivider();
     }
 
+    /**
+     * To display a user prompt for the user to input information.
+     *
+     * @param semester the semester that the user is currently planning for.
+     */
+    public void displayUserPrompt(int semester) {
+        String promptFormat = "Sem " + "[" + currentUserSemester(semester)
+                + "]" + " >> ";
+        System.out.print(promptFormat);
+    }
+
+    private String currentUserSemester(int semester) {
+        assert semester >= 1 && semester <= 4 : "Invalid Semester given";
+        switch (semester) {
+        case (1):
+            return "1";
+        case (2):
+            return "2";
+        case (3):
+            return "ST1";
+        case (4):
+            return "ST2";
+        default:
+            return "Unknown";
+        }
+    }
 }
 //@author

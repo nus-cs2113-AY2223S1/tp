@@ -1,12 +1,13 @@
 package seedu.duke.command;
 
 import org.apache.commons.lang3.tuple.Pair;
-import seedu.duke.exceptions.TimetableEmptyException;
+import seedu.duke.exceptions.YamomException;
 import seedu.duke.model.LessonType;
 import seedu.duke.model.Module;
 import seedu.duke.model.RawLesson;
 import seedu.duke.model.SelectedModule;
 import seedu.duke.model.Timetable;
+import seedu.duke.parser.Parser;
 import seedu.duke.utils.State;
 import seedu.duke.utils.Storage;
 import seedu.duke.utils.Ui;
@@ -17,9 +18,31 @@ import java.util.Map;
 
 public class ViewTimetableCommand extends Command {
     public static final String COMMAND_WORD = "view";
+    public static final String COMMAND_USAGE = "view < /fancy | /simple >";
+    public static final String COMMAND_DESCRIPTION = "Display current user timetable";
 
-    public ViewTimetableCommand(String[] input) {
-        super(input);
+    private static final String ERROR_MESSAGE_EMPTY_TIMETABLE = "Your timetable is empty."
+            + System.lineSeparator() + "Please select your modules first before viewing.";
+
+    private boolean showFancy;
+    private boolean showSimple;
+
+    public ViewTimetableCommand(String input) throws YamomException {
+        super(input.split("\\s+"));
+        var params = Parser.parseParams(input);
+        showFancy = params.containsKey("fancy");
+        showSimple = params.containsKey("simple");
+        boolean isConflictingCommand = showFancy && showSimple;
+        boolean hasMissingBackslash = !input.contains("/") && (input.contains("fancy") || input.contains("simple"));
+        boolean unknownParametersEntered = input.split("\\s+").length > 2 || ((!showFancy && !showSimple)
+                && !Parser.isOneWordCommand(input.split("\\s+")));
+        if (isConflictingCommand) {
+            throw new YamomException("Timetable cannot be both simple and fancy!");
+        } else if (hasMissingBackslash) {
+            throw new YamomException("Unknown command. Maybe you forgot a \"/\".");
+        } else if (unknownParametersEntered) {
+            throw new YamomException("Unknown command. Maybe you meant \"view\".");
+        }
     }
 
     @Override
@@ -34,12 +57,19 @@ public class ViewTimetableCommand extends Command {
         }
         try {
             checkForEmptyTimetable(numOfNotSelectedModules, selectedModules);
-        } catch (TimetableEmptyException e) {
+        } catch (YamomException e) {
             ui.addMessage(e.getMessage());
             ui.displayUi();
             return;
         }
-        Timetable timetable = new Timetable(lessons, false, true);
+        Timetable timetable;
+        if (showFancy) {
+            timetable = new Timetable(lessons, true, false);
+        } else if (showSimple) {
+            timetable = new Timetable(lessons, false, true);
+        } else {
+            timetable = new Timetable(lessons);
+        }
         ui.addMessage(timetable.toString());
         ui.displayUi();
     }
@@ -52,9 +82,9 @@ public class ViewTimetableCommand extends Command {
     }
 
     private static void checkForEmptyTimetable(int numOfNotSelectedModules, List<SelectedModule> selectedModules)
-            throws TimetableEmptyException {
+            throws YamomException {
         if (numOfNotSelectedModules == selectedModules.size()) {
-            throw new TimetableEmptyException();
+            throw new YamomException(ERROR_MESSAGE_EMPTY_TIMETABLE);
         }
     }
 
@@ -85,5 +115,13 @@ public class ViewTimetableCommand extends Command {
     @Override
     public String getExecutionMessage() {
         return null;
+    }
+
+    public static String getCommandDescription() {
+        return COMMAND_WORD + DESCRIPTION_DELIMITER + COMMAND_DESCRIPTION;
+    }
+
+    public static String getUsage() {
+        return COMMAND_USAGE;
     }
 }

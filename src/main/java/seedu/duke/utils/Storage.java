@@ -1,5 +1,7 @@
 package seedu.duke.utils;
 
+import seedu.duke.exceptions.YamomException;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -18,6 +20,8 @@ public class Storage {
 
     public static final String LOADING_PREVIOUS_STATE_MESSAGE = "Loading previous state.";
 
+    public static final String NO_PREVIOUS_SAVED_MODULE_ERROR_MESSAGE = "There are no modules saved";
+
     public static final String EXPORT_MESSAGE = "This is your export link:";
 
     private Logger logger = Logger.getLogger(Storage.class.getName());
@@ -34,13 +38,18 @@ public class Storage {
     public void openPreviousState(State state, Ui ui) {
         assert state != null : "List of lessons should not be null";
         logger = Logger.getLogger(SUBSYSTEM_NAME);
-        logger.log(Level.INFO, "Opening previous saved file");
+        logger.log(Level.FINE, "Attempting to open previous saved file");
         try {
             String link = readPreviousState();
             Link.parseLink(link, state);
             ui.addMessage(LOADING_PREVIOUS_STATE_MESSAGE);
+            logger.log(Level.FINE, "Opened previous saved file");
         } catch (FileNotFoundException e) {
             ui.addMessage(NO_PREVIOUS_STATE_ERROR_MESSAGE);
+            logger.log(Level.FINE, "No previous saved file");
+        } catch (YamomException e) {
+            ui.addMessage(NO_PREVIOUS_SAVED_MODULE_ERROR_MESSAGE);
+            logger.log(Level.FINE, "No previous saved modules");
         }
         ui.displayUi();
     }
@@ -77,15 +86,17 @@ public class Storage {
     public void saveState(State state, Ui ui) throws IOException {
         assert state != null : "State should not be null";
         logger = Logger.getLogger(SUBSYSTEM_NAME);
-        logger.log(Level.INFO, "Saving current state with " + state.getSelectedModulesList().size()
+        logger.log(Level.FINE, "Saving current state with " + state.getSelectedModulesList().size()
                 + " modules into a file. The format will be NUSMods export link.");
         File file = new File(FILE_PATH);
         if (file.getParentFile().mkdirs()) {
             file.createNewFile();
         }
+
         String toSave = Link.getLink(state);
         ui.addMessage(EXPORT_MESSAGE);
         ui.addMessage(toSave);
+
         ui.displayUi();
         FileWriter fw = new FileWriter(file);
         fw.write(String.valueOf(toSave));

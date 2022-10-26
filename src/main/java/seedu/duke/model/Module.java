@@ -3,6 +3,7 @@ package seedu.duke.model;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Module data for a single module. A module is identified by its module code. A module contains one or more
@@ -156,5 +157,14 @@ public class Module {
         String moduleCode = module.moduleCode;
         int moduleLevel = (Integer.parseInt(moduleCode.replaceAll("[^0-9]", ""))) / 1000;
         return moduleLevel;
+    }
+
+    // get the semesters that the module is offered in
+    public List<Integer> getSemestersOffering() {
+        List<Integer> semestersOffering = this.semesterData
+                .stream()
+                .map(semesterData -> semesterData.semester)
+                .collect(Collectors.toList());
+        return semestersOffering;
     }
 }
