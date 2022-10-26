@@ -58,18 +58,4 @@ public class Favourite {
     public static ArrayList<String> getFavouriteList() {
         return favouriteList;
     }
-
-
-    /**
-     * Returns the carpark IDs of all favourited carparks in a string.
-     *
-     * @return String of favourited carpark IDs.
-     */
-    public String showList() {
-        StringBuilder result = new StringBuilder();
-        for (String id : favouriteList) {
-            result.append(id).append("\n");
-        }
-        return result.toString();
-    }
 }
