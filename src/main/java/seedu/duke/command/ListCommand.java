@@ -50,14 +50,14 @@ public class ListCommand extends ListAndStatsCommand {
             + "month must be accompanied by a year. This tag cannot be used together with [p/PERIOD] or [n/NUMBER] "
             + "tags."
             + LINE_SEPARATOR
-            + "(Optional) YEAR: Year of the transaction. Only integers from 1000 onwards are accepted."
+            + "(Optional) YEAR: Year of the transaction. Only integers from 1000 onwards are accepted. "
             + "This tag cannot be used together with [p/PERIOD] or [n/NUMBER] tags."
             + LINE_SEPARATOR
             + "(Optional) PERIOD: Period of the transaction. Only \"weeks\" or \"months\" is accepted. Note that "
             + "period must be accompanied by a number to backdate from. This tag cannot be used together with "
             + "[m/MONTH] or [y/YEAR] tags."
             + LINE_SEPARATOR
-            + "(Optional) NUMBER: Last number of weeks or months. Only positive integers are accepted. Note that"
+            + "(Optional) NUMBER: Last number of weeks or months. Only positive integers are accepted. Note that "
             + "number must be accompanied by a period that represents weeks or months. This tag cannot be used "
             + "together with [m/MONTH] or [y/YEAR] tags.";
 
@@ -93,13 +93,13 @@ public class ListCommand extends ListAndStatsCommand {
     @Override
     public String[] getOptionalTags() {
         String[] optionalTags = new String[]{
-            COMMAND_TAG_TRANSACTION_TYPE,
-            COMMAND_TAG_TRANSACTION_CATEGORY,
-            COMMAND_TAG_TRANSACTION_DATE,
-            COMMAND_TAG_GLOBAL_MONTH,
-            COMMAND_TAG_GLOBAL_YEAR,
-            COMMAND_TAG_GLOBAL_NUMBER,
-            COMMAND_TAG_GLOBAL_PERIOD
+                COMMAND_TAG_TRANSACTION_TYPE,
+                COMMAND_TAG_TRANSACTION_CATEGORY,
+                COMMAND_TAG_TRANSACTION_DATE,
+                COMMAND_TAG_GLOBAL_MONTH,
+                COMMAND_TAG_GLOBAL_YEAR,
+                COMMAND_TAG_GLOBAL_NUMBER,
+                COMMAND_TAG_GLOBAL_PERIOD
         };
         return optionalTags;
     }
