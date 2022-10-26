@@ -216,6 +216,7 @@ The module mapping support provided by the EduRec website is not helpful, allowi
 | v2.0    | user                  | be able to favourite my lists                                            | keep that of my priorities                                                |
 | v2.0    | user                  | various search functions for my lists                                    | search for information faster                                             |
 | v2.0    | user                  | be able to add class timings and create a timetable for SEP              | keep track of my timetable                                                |
+| v2.1    | new user              | use a program that does not fail unexpectedly                            | do not have to deal with handling crashes                                 |
 
 ## Non-Functional Requirements
 
