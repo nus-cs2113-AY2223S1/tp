@@ -2,9 +2,9 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2022-10-26T07:38:29.236071200Z</date>
-  <millis>1666769909236</millis>
-  <nanos>71200</nanos>
+  <date>2022-10-26T09:05:52.281140200Z</date>
+  <millis>1666775152281</millis>
+  <nanos>140200</nanos>
   <sequence>4</sequence>
   <logger>seedu.duke.command.flightcommand.DeleteFlightCommand</logger>
   <level>INFO</level>

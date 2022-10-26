@@ -152,6 +152,9 @@ public class FlightList extends OperationList {
             validateDetailFormat();
             checkFlightNumberDuplicates();
             checkAvailableGateNumber();
+            if(isDelay) {
+                checkDelayTime();
+            }
         } catch (Exception e) {
             flights.add(flight);
             flightIndex++;
@@ -190,17 +193,15 @@ public class FlightList extends OperationList {
         getFlightAttributes(flight);
         oldDepartureTime = departureTime;
         departureTime = newDepartureTime;
-
         validateModificationDetails(flight);
-        checkDelayTime(oldDepartureTime, departureTime);
         flight.setDepartureTime(newDepartureTime);
         flights.add(flight);
         flightIndex++;
         ui.showUpdatedDepartureTime(flightNum, oldDepartureTime, newDepartureTime);
     }
 
-    private void checkDelayTime(String oldDepartureTime, String newDepartureTime) throws SkyControlException {
-        if (Integer.parseInt(oldDepartureTime) > Integer.parseInt(newDepartureTime)) {
+    private void checkDelayTime() throws SkyControlException {
+        if (Integer.parseInt(oldDepartureTime) > Integer.parseInt(departureTime)) {
             throw new SkyControlException(ui.getWrongDelayTimeError(flightNumber, oldDepartureTime));
         }
     }
