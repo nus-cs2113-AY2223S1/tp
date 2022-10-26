@@ -27,6 +27,19 @@
 
 ## Introduction
 
+Financial bookkeeping via traditional mobile applications has always been a hassle due to the repetitive clicks needed to
+manage monetary transactions. With Moolah Manager, you will be encouraged to take ownership of managing your finances via
+a time-saving and efficient command-line (CLI) interface.
+
+The main features of Moolah Manager include:
+
+- Managing records of monetary transactions
+- Gathering financial insights such as categorical savings and periodic expenditure
+- General budgeting and reminders about spending
+
+The application is optimised for use with a keyboard and all you need is to just type in your commands into a terminal.
+Moreover, if you are a fast-typist, the recording and querying of transactions can be performed efficiently.
+
 _Written by: Chua Han Yong Darren_
 
 ## About This Guide
@@ -57,10 +70,13 @@ _Written by: Chia Thin Hong_
 
 ### Setting Up
 
-{Give steps to get started quickly}
-
-1. Ensure that you have Java 11 or above installed.
-1. Down the latest version of `Duke` from [here](http://link.to/duke).
+1. Ensure that you have Java 11 or above installed. If not, kindly install Java's [latest version](https://www.oracle.com/java/technologies/downloads/).
+2. Download the latest version of `Moolah Manager` from [here](https://github.com/AY2223S1-CS2113-W12-2/tp/releases).
+   As shown in Figure 1 below, click on the `duke.jar` file from the latest version available.
+3. Copy the file to the directory that you wish to use as a home directory for Moolah Manager. The data saved during the
+   application will reside in the same directory.
+4. Launch a command prompt or terminal and run the command `java -jar duke.jar` to start the application.
+5. Moolah Manager will display a greeting message and a remaining budget for the current month.
 
 _Written by: Chua Han Yong Darren_
 
@@ -130,9 +146,70 @@ _Written by: Brian Wong Yun Long_
 
 ### Listing the Transactions: `list`
 
+
+Lists all or some transactions based on selection. If tag filters are used, the transactions retrieved from the records must
+match all the filter tags that have been specified in order to be recognized as a valid record.
+
+**Format:** `list [t/TYPE] [c/CATEGORY] [d/DATE] [m/MONTH] [y/YEAR] [p/PERIOD] [n/NUMBER]`
+
+| Field      | Description                                                                                                                        |
+|------------|------------------------------------------------------------------------------------------------------------------------------------|
+| `TYPE`     | The type of transaction. It should either be `expense` or `income`.                                                                |
+| `CATEGORY` | A category for the transaction. It is a one-word parameter flexibly defined by the user. No numeral, symbol or spacing is allowed. |
+| `DATE`     | The date when the transaction took place on. It must be in ddMMyyyy format, e.g. 29102022.                                         | 
+| `MONTH`    | The month which the transaction falls on. It is in numerical form, i.e. from 1 to 12, where 1 represents January.                  |                                                                                                 
+| `YEAR`     | The year which the transaction falls on. It must be in yyyy format and only year 1000 and onwards are accepted.                    | 
+| `PERIOD`   | The period which the transaction falls on. It should either be `weeks` or `months`                                                 |
+| `NUMBER`   | The last N number of weeks or months. It is a positive whole number that is from 1 to 100.                                         |
+
+**Important Information:**
+
+- In order to view transactions for a specific month via `m/MONTH` tag, it is mandatory to include a `y/YEAR` tag.
+- The `p/PERIOD` and `n/NUMBER` tags must be used as a pair for viewing transactions for the
+  last N number of weeks or months.
+- The `m/MONTH` and `y/YEAR` tags should not be used together with `p/PERIOD` and `n/NUMBER` tags.
+
+**Example(s):**
+
+- `list`
+- `list y/2022`
+- `list t/income c/transport d/27102022`
+- `list c/food m/1 y/2022`
+- `list t/expense c/leisure p/weeks n/5`
+
+**Expected output:**
+
+```
+list c/food m/1 y/2022
+____________________________________________________________
+Here are your transaction records:
+[-][food] $80 on Jan 13 2022 | Description: toilet_cake 
+[+][food] $20 on Jan 30 2022 | Description: banana_pudding
+____________________________________________________________
+```
+
 _Written by: Chua Han Yong Darren_
 
 ### Searching for Transactions: `find`
+
+Find a specific or multiple transactions based on any keywords that have been specified.
+
+**Format:** `find KEYWORDS`
+
+**Example(s):**
+
+- `find Jan 30`
+- `find banana_pudding`
+
+**Expected output:**
+
+```
+find Jan 30
+____________________________________________________________
+Here are the transaction records that match your search expression:
+[+][food] $20 at Jan 30 2022 | Description: banana_pudding
+____________________________________________________________
+```
 
 _Written by: Chua Han Yong Darren_
 
