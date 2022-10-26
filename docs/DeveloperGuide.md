@@ -3,7 +3,18 @@
 ## Table of contents
 
 ### 1. [Design & Implementation](#1-design--implementation)
+1.1 [Database](#11-database)\
+1.2 [User Storage](#12-user-storage)\
+1.3 [Timetable](#13-timetable)\
+1.4 [Delete History](#14-delete-history)\
+1.5 [Ui](#15-ui)\
+1.6 [Commands](#16-commands)\
+1.7 [User Module Mapping](#17-usermodulemappinglist)\
+1.8 [User University List Manager](#18-useruniversitylistmanager)
 ### 2. [Product Scope](#2-product-scope)
+2.1 [Target User Profile](#21-target-user-profile)\
+2.2 [Value Proposition](#22-value-proposition)\
+2.3 [Problem Addressed](#23-problem-addressed)
 ### 3. [Non-functional Requirements](#3-non-functional-requirements)
 ### 4. [Glossary](#4-glossary)
 ### 5. [Manual Testing](#5-instructions-for-manual-testing)
@@ -112,7 +123,7 @@ The Command will then be executed to perform the operation on the other classes 
 the specified Command format. To deal with parsing parameters, spaces in University names and Module codes are to be replaced with underscores.
 
 The following class diagram illustrates the relationship between Command class and its subclasses as well as other classes related to Commands.
-![Command Class Diagram](./images/Command_class.png)
+![Command Class Diagram](./images/Command_Class.png)
 
 #### 1.6.1 Create Command
 
