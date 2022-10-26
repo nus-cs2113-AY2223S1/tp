@@ -73,7 +73,7 @@ The personal currency feature allows users to add a new currency to the list of 
 
 Given below are the UML diagrams of the classes that are needed for adding/removing a personal currency: 
 
-![avatar](/property/newcurrency1.jpg)
+![avatar](/property/newcurrency1.png)
 
 Step 1: The user calls the command new_currency and is then prompted in the CLI with the following commands: 
 Please enter your new currency's abbreviation: `btc`
@@ -83,7 +83,7 @@ Please enter your new currency's rate: `0.000049`
 
 Based on that a new currency is created (in this example we have created a new currency of bitcoin).
 
-![avatar](/property/newcurrency2.jpg)
+![avatar](/property/newcurrency2.png)
 
 Step 2: In order for the new currency to be added to the currencies file, firstly the equivalent string value of it is needed to write it. For that the `getPersonalCurrencyFileLine` method of the `PersonalCurrencyList` class is called. It returns a string in the format of `“!btc,bitcoin,bc,4.9E-6”`. You can notice that there is `‘!’` in front of the string, that indicates that it is a personal currency. Then the `writeToCurrencies` method of `NewCurrencyFileWorkings` class is called with the previously returned string value as parameter to write that line to the currencies file.
 
