@@ -1,0 +1,11 @@
+@startuml
+skinparam classAttributeIconSize 0
+hide circle
+class AddModuleCommand {
+ -module: Module
+ -successful: boolean
+
+ -getExecutionMessage() : String
+
+}
+@enduml
