@@ -99,7 +99,7 @@ In the example above, `UserInterface#runCommandAddExpense()` calls `Storage#save
 
 ### Printing an expense
 
-![Implementation-Add-Expense](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ImplementationRefPrintExpense.puml)
+![Implementation-SD-Print-Expense](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ImplementationRefPrintExpense.puml)
 
 ### Adding an expense
 
@@ -117,6 +117,10 @@ In the example above, `UserInterface#runCommandAddExpense()` calls `Storage#save
 
 ![Implementation-Edit-Expense](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ImplementationEditExpense.puml)
 
+### Printing a recurring payment
+
+![Implementation-SD-Print-RecurringPayment](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ImplementationRefPrintRecurringPayment.puml)
+
 ### Adding a recurring payment
 
 ![Implementation-Add-RecurringPayment](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ImplementationAddRecurringPayment.puml)
@@ -133,7 +137,7 @@ In the example above, `UserInterface#runCommandAddExpense()` calls `Storage#save
 
 ![Implementation-Edit-RecurringPayment](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ImplementationEditRecurringPayment.puml)
 
-### Adding an expense from a existing recurring payment
+### Adding an expense from a recurring payment
 
 ![Implementation-Edit-RecurringPayment](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ImplementationPayRecurringPayment.puml)
 
