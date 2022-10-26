@@ -1,0 +1,67 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+show field
+show methods
+
+package Storage <<Rectangle>> {
+    Class HiddenStorage #FFFFFF
+}
+
+package Model <<Rectangle>> {
+    Class HiddenStorage #FFFFFF
+}
+
+package Logic <<Rectangle>> {
+class runCommandLoopUntilExit {
+    +command : Command
+    +executeCommand(command) : CommandResult
+}
+
+class Parser {
+    +<u> BASIC_COMMAND_FORMAT : Pattern
+    -<u> EMPTY_RESPONSE_HEADER : String
+    -carparkList : CarparkList
+    -api : Api
+    -favourite : Favourite
+    -favouriteList : ArrayList<String>
+    +parseCommand(String, Api, CarparkList, Favourite) : Command
+    -prepareAuth(String) : Command
+    -prepareFavourite(String) : Command
+    -prepareUnfavourite(String) : Command
+    -prepareFind(String) : Command
+    -prepareFilter(String) : Command
+    +hasCommandArgument(String) : boolean
+    +<u>splitCommandArgument(String) : String[]
+}
+
+
+class Command {
+  #carparkList : CarparkList
+  #Command()
+  +execute() : CommandResult
+}
+
+class CommandResult {
+  #carparkList : CarparkList
+  #Command()
+  +execute() : CommandResult
+}
+
+runCommandLoopUntilExit --> "1" Parser
+runCommandLoopUntilExit ...> CommandResult
+CommandResult <.. "produces" Command
+Command <|--- AuthCommand
+Command <|--- ExitCommand
+Command <|--- FavouriteCommand
+Command <|--- FindCommand
+Command <|--- InvalidCommand
+Command <|--- ListCommand
+Command <|--- FilterCommand
+Command <|--- UnfavouriteCommand
+Command <|--- UpdateCommand
+}
+
+@enduml
