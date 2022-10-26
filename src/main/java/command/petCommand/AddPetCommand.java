@@ -9,18 +9,18 @@ public class AddPetCommand extends Command {
     public static final String COMMAND_WORD = "add";
     private String name;
     private String species;
-    private boolean ishealthy;
-    public AddPetCommand(String name, String species, boolean ishealthy){
+    private boolean isHealthy;
+    public AddPetCommand(String name, String species, boolean isHealthy){
         super();
 
         this.name = name;
         this.species = species;
-        this.ishealthy = ishealthy;
+        this.isHealthy = isHealthy;
     }
 
     @Override
     public void execute() {
-        Pet petToAdd = new Pet(name, species, ishealthy);
+        Pet petToAdd = new Pet(name, species, isHealthy);
         PetList.petList.add(petToAdd);
         Pet.numOfPets++;
         printAddPetMessage();
