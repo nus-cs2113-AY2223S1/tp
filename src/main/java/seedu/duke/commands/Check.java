@@ -4,7 +4,6 @@ import seedu.duke.Module;
 import seedu.duke.ModuleList;
 import seedu.duke.UI;
 import seedu.duke.exceptions.InvalidInputContentException;
-import seedu.duke.exceptions.InvalidInputFormatException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +21,7 @@ public class Check extends Command {
      * Depending on the input it will either check for NOC or SEP
      * @param input input entered by user. Format: String
      */
-    public Check(String input) {
+    public Check(String input) throws InvalidInputContentException {
         this.type = input.toUpperCase();
         switch (input) {
             // obtained >70 MCs, completed four semesters of study
@@ -42,6 +41,7 @@ public class Check extends Command {
             }
             break;
         default:
+            throw new InvalidInputContentException();
         }
     }
 
