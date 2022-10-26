@@ -7,7 +7,7 @@
   * [Add a passenger detail: `passenger add`](#Add-a-passenger-detail-passenger-add)
   * [Delete a passenger detail: `passenger delete`](#Delete-a-passenger-detail-passenger-delete)
   * [Display passenger detail logbook: `passenger list`](#Display-passenger-detail-logbook-passenger-list)
-  * [Command Summary](#Command Summary)
+  * [Command Summary](#Command-Summary)
 * [Frequently Asked Quesitions](#Frequently-Asked-Questions)
 
 ---
