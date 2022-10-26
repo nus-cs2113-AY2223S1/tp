@@ -68,7 +68,7 @@ public class TransactionStorage extends Storage {
         }
     }
 
-    public void makeTransactionDir(TransactionList transactionList) throws StoreFailureException {
+    private void makeTransactionDir(TransactionList transactionList) throws StoreFailureException {
         int startIndex = transactionFilePath.lastIndexOf("/");
         String fileDirectory =
                 transactionFilePath.replace(transactionFilePath.substring(startIndex), "");

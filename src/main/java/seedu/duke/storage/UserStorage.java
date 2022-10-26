@@ -67,7 +67,7 @@ public class UserStorage extends Storage {
         }
     }
 
-    public void makeUserDir(UserList userList) throws StoreFailureException {
+    private void makeUserDir(UserList userList) throws StoreFailureException {
         int startIndex = userFilePath.lastIndexOf("/");
         String fileDirectory =
                 userFilePath.replace(userFilePath.substring(startIndex), "");

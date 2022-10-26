@@ -1,8 +1,11 @@
 @startuml
-interface CommandInterface {
+hide circle
+skinparam classAttributeIconSize 0
+
+interface "<<interface>>\nCommandInterface" {
  +boolean executeCommand()
 }
-abstract class "Command"
+abstract class "{abstract}\nCommand"
 class UserCommand {
  - userList: UserList
  - itemList: ItemList
@@ -28,11 +31,11 @@ class ExitCommand {
  + executeCommand(): boolean
 }
 
-CommandInterface <|.. Command
-Command <|-- UserCommand
-Command <|-- TransactionCommand
-Command <|-- ItemCommand
-Command <|-- HelpCommand
-Command <|-- ExitCommand
+"<<interface>>\nCommandInterface" <|.. "{abstract}\nCommand"
+"{abstract}\nCommand" <|-- UserCommand
+"{abstract}\nCommand" <|-- TransactionCommand
+"{abstract}\nCommand" <|-- ItemCommand
+"{abstract}\nCommand" <|-- HelpCommand
+"{abstract}\nCommand" <|-- ExitCommand
 
 @enduml

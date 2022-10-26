@@ -1,4 +1,8 @@
 @startuml
+skinparam classAttributeIconSize 0
+hide footbox
+hide circle
+
 class UI{
     - commandToDetailMap: LinkedHashMap<String, String>
     - showLine(): void
