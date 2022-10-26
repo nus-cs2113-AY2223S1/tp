@@ -25,7 +25,7 @@ public class Appointment {
         this.service = service;
     }
 
-    // view tasks for a particular appointment
+    // view tasks for a find appointment
     public void viewTasks(){
         System.out.println("Appointment " + appointmentId + " Task List:");
         for(Task task: tasks){

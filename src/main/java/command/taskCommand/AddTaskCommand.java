@@ -1,8 +1,11 @@
 package command.taskCommand;
 
 import command.Command;
+import exception.DukeException;
 import task.Task;
 import task.TaskList;
+
+import java.util.zip.DataFormatException;
 
 public class AddTaskCommand extends Command {
 
@@ -16,7 +19,11 @@ public class AddTaskCommand extends Command {
 
     @Override
     public void execute() {
-        TaskList.addTask(task);
+        try {
+            TaskList.addTask(task);
+        } catch (DukeException e) {
+            System.out.println("Sorry, no corresponding appointment/employee found to add the task.");
+        }
     }
 
     @Override

@@ -1,7 +1,10 @@
 package task;
 
+import appointment.Appointment;
 import appointment.AppointmentList;
+import employee.Employee;
 import employee.EmployeeList;
+import exception.DukeException;
 
 import java.util.ArrayList;
 
@@ -17,13 +20,25 @@ public class TaskList {
         }
     }
 
-    public static void addTask(Task task) {
-        tasks.add(task);
+    public static void addTask(Task task) throws DukeException {
+
         // appointment aggregate task
-        AppointmentList.findAppointment(task.getAppointmentId()).addTaskToAppointment(task);
+        Appointment appointment = AppointmentList.findAppointment(task.getAppointmentId());
+        if (appointment == null) {
+            throw new DukeException();
+        }
+        appointment.addTaskToAppointment(task);
+        // update appointment status here
+        appointment.updateAppointmentStatus();
+
         // employee aggregate task
-        EmployeeList.findEmployee(task.getEmployeeId()).addTaskToEmployee(task);
+        Employee employee = EmployeeList.findEmployee(task.getEmployeeId());
+        if (employee == null) {
+             throw new DukeException();
+        }
+        employee.addTaskToEmployee(task);
         // added to overall task list
+        tasks.add(task);
         System.out.print("Got it. I've added this task: ");
         System.out.println(task.getTaskDescription());
         System.out.println("Performed by: " + task.getEmployeeId());
