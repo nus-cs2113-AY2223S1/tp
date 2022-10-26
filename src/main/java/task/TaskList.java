@@ -13,7 +13,7 @@ public class TaskList {
 
     //view every single task in the clinic
     public static void viewTasks() {
-        System.out.println("Here are all the tasks:");
+        System.out.println("Here are all the tasks for the clinic:");
         for (Task task : tasks) {
             System.out.println("_______________________________________");
             task.printTask();
@@ -39,10 +39,8 @@ public class TaskList {
         employee.addTaskToEmployee(task);
         // added to overall task list
         tasks.add(task);
-        System.out.print("Got it. I've added this task: ");
-        System.out.println(task.getTaskDescription());
-        System.out.println("Performed by: " + task.getEmployeeId());
-        System.out.println("Appointment: " + task.getAppointmentId());
+        System.out.print("Got it. I've added this task: \n");
+        task.printTask();
         System.out.println("Now you have " + tasks.size() + " task in the list.");
     }
 
@@ -54,6 +52,7 @@ public class TaskList {
             EmployeeList.findEmployee(taskToReassign.getEmployeeId()).removeTaskFromEmployee(taskId);
             // Add to new Employee's task list
             EmployeeList.findEmployee(employeeId).addTaskToEmployee(taskToReassign);
+            System.out.println("Got it. Task " + taskId + " has been reassigned from " + EmployeeList.findEmployee(taskToReassign.getEmployeeId()).getEmployeeName() + " to " + EmployeeList.findEmployee(employeeId).getEmployeeName() + "!");
             // Change employeeId in taskToReassign
             taskToReassign.setEmployeeId(employeeId);
         }
@@ -62,10 +61,14 @@ public class TaskList {
     public static void removeTask(int taskId) {
         for (Task task : tasks) {
             if (task.getTaskId() == taskId) {
+                // remove from overall task list
+                tasks.remove(task);
+                // remove from appointment
+                AppointmentList.findAppointment(task.getAppointmentId()).removeTaskFromAppointment(taskId);
+                // remove from employee
+                EmployeeList.findEmployee(task.getEmployeeId()).removeTaskFromEmployee(taskId);
                 System.out.print("Got it. I've removed this task: ");
-                System.out.println(task.getTaskDescription());
-                System.out.println("Performed by: " + task.getEmployeeId());
-                System.out.println("Appointment: " + task.getAppointmentId());
+                task.printTask();
                 System.out.println("Now you have " + tasks.size() + " task in the list.");
                 break;
             }

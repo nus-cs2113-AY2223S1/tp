@@ -25,6 +25,12 @@ public class Appointment {
         this.service = service;
     }
 
+    public void printAppointmentDetails(){
+        System.out.println("Appointment ID: " + appointmentId);
+        System.out.println("Service: " + service);
+        System.out.println("Date: " + appointmentDate);
+    }
+
     // view tasks for a find appointment
     public void viewTasks() {
         System.out.println("Appointment " + appointmentId + " Task List:");
@@ -69,5 +75,14 @@ public class Appointment {
 
     public String getAppointmentDate() {
         return appointmentDate;
+    }
+
+    public void removeTaskFromAppointment(int taskId) {
+        for(Task task: tasks){
+            if(task.getTaskId()==taskId){
+                tasks.remove(task);
+                break;
+            }
+        }
     }
 }
