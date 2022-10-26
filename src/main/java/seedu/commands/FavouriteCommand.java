@@ -51,6 +51,9 @@ public class FavouriteCommand extends Command {
                     assert carparkList.findCarpark(id) != null : "Could not find carpark!";
                     content.append(carparkList.findCarpark(id).toString());
                 }
+                if (isEmpty) {
+                    return new CommandResult("There is no favourites in the list!");
+                }
                 return new CommandResult(content.toString().trim());
             } else {
                 Carpark result = carparkList.findCarpark(argument);
