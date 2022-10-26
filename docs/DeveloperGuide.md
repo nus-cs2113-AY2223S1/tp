@@ -37,19 +37,19 @@
 
 ## Preface
 
-Moolah Manager is a desktop app for managing your finances, optimised for use via a Command Line Interface (CLI). Designed for people who are
-fast typists, it can help to process day-to-day transactions, namely your incomes and expenses. These can help you to see all your transactions
-and provide you with a valuable insight into your spending habits.
+Moolah Manager is a desktop app for managing one's finances, optimised for use via a Command Line Interface (CLI). Designed for IT professionals who are
+fast typists, it can help to process day-to-day monetary transactions that are classified into income and expense. Users can expect to get an overview of their transactions
+at a glance and be provided with valuable insights into their spending habits. They are also encouraged to set budget goals to minimise their spending.
 
-This document is meant to assist potential users and developers in understanding how our program works.
+This document is meant assist developers in understanding how our program works.
 
 _Written by: Brian Wong Yun Long_
 
 ## Acknowledgements
 
-The format of this development guide was adapted from [[SE-EDU AddressBook Level 3 Developer Guide]](https://se-education.org/addressbook-level3/DeveloperGuide.html)
+The format of this development guide was adapted from [SE-EDU AddressBook Level 3 Developer Guide](https://se-education.org/addressbook-level3/DeveloperGuide.html).
 
-Some code used in this program were reused and adapted from our individual projects from the CS2113 IP. 
+Some parts of the source code in this program were reused and adapted from the team's individual projects during the CS2113 IP phase.
 
 _Written by: Brian Wong Yun Long_
 
@@ -345,7 +345,6 @@ _Written by: Chia Thin Hong_
 
 ### Add Command
 
-
 **This feature allows the local and external (handled by Storage class) storage of transaction entries by the user.**
 
 The `AddCommand` inherits properties from the abstract `Command` class. The inheritance of `Command` from `AddCommand` is
@@ -384,12 +383,9 @@ _Written by: Yong Chin Han_
 
 ### Edit Command
 
-{Describe the implementation for the Edit Command}
-
-_Written by: Author name_
+_Written by: Brian Wong Yun Long_
 
 ### List Command
-
 
 The full command for list is `list [t/TYPE] [c/CATEGORY] [d/DATE]`
 For example, if 'list' is called, all transactions that are present in Moolah Manager will be listed out
@@ -447,7 +443,7 @@ _Written by: Chua Han Yong Darren_
 
 {Describe the implementation for the Stats Command}
 
-_Written by: Author name_
+_Written by: Chua Han Yong Darren_
 
 ### Delete Command
 
@@ -576,8 +572,6 @@ _Written by: Yong Chin Han_
 
 ### Logging Operations
 
-{Describe how logging is performed in the developer code}
-
 Our team used `java.util.logging` package for the purposes of logging. We instantiated various objects
 for different classes such as `parserLogger` and `addLogger` to set the log messages.
 
@@ -593,27 +587,91 @@ _Written by: Paul Low_
 
 ### Target user profile
 
-{Describe the target user profile}
+Moolah Manager is developed for IT professionals who prefer using Command Line Interface (CLI) applications
+to quickly track and update their daily monetary transactions. They ought to be reasonably comfortable in typing over
+mouse interactions and can type fast.
 
 ### Value proposition
 
-{Describe the value proposition: what problem does it solve?}
+Financial bookkeeping using a mobile application is often a hassle due to repetitive clicks. Moolah Manager  boasts a
+time-saving CLI that encourages individuals to take ownership of tracking and reviewing their daily or monthly
+transactions in an efficient and effective way. Moreover, it facilitates budget planning to prevent overspending.
 
 ## Appendix B: User Stories
 
-| Version | As a ... | I want to ...             | So that I can ...                                           |
-|---------|----------|---------------------------|-------------------------------------------------------------|
-| v1.0    | new user | see usage instructions    | refer to them when I forget how to use the application      |
-| v2.0    | user     | find a to-do item by name | locate a to-do without having to go through the entire list |
+| Version | As a ...         | I want to ...                                                                        | So that I can ...                                                                                                              |
+|---------|------------------|--------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------|
+| v1.0    | fast-typing user | type my own actions instead of having to click through different GUI pages           | have a more convenient way of managing my spending                                                                             |
+| v1.0    | new user         | have similar features be grouped in the same family                                  | navigate the application easily                                                                                                |
+| v1.0    | new user         | list usable commands                                                                 | better utilize the application when I unfamiliar with the commands                                                             |
+| v1.0    | user             | add my income and daily expense into the application                                 | keep a record of my transaction history                                                                                        |
+| v1.0    | user             | add my salary into the application                                                   | gather insights from a trend of my income                                                                                      |
+| v1.0    | user             | add a category to each type of spending                                              | have an organised view of my financial statements                                                                              |
+| v1.0    | user             | view my daily expenditure                                                            | plan how I want to spend my remaining income throughout the rest of the week                                                   | 
+| v1.0    | user             | know which category of expenses I spend the most on                                  | better allocate my income for essential needs                                                                                  | 
+| v1.0    | careless user    | delete my spending or expenses in the application                                    | remove inputs that are false or outdated                                                                                       | 
+| v1.0    | careless user    | receive an error message when entering a wrong command                               | be aware that I need to rectify my incorrect input                                                                             |
+| v1.0    | forgetful user   | find a specific transaction                                                          | recall how much I spent or earned for a particular situation                                                                   |
+| v1.0    | busy user        | purge all my transactions at one go                                                  | refrain from deleting my transactions one by one when needed                                                                   |
+| v2.0    | new user         | be guided at the initial stage of using the application                              | make good use of the features                                                                                                  |
+| v2.0    | frequent user    | input a file with all my expenses for the application to retrieve data               | be more efficient and do not need to manually type my financial records into the command prompt                                |
+| v2.0    | frequent user    | save my input history into a file                                                    | have the inputs automatically read again in future without having to re-enter similar expenses each time I use the application | 
+| v2.0    | user             | gather a summary of my expenditure over a time period (i.e., daily, weekly, monthly) | better understand my spending habits                                                                                           |
+| v2.0    | user             | know the amount of savings tabulated from income and expenditure after each month    | review my spending and plan my budget for the next month                                                                       |
+| v2.0    | user             | gather individual insights of different time periods after adding my transactions    | analyze and reflect on the way I am managing my income and expenses                                                            |
+| v2.0    | user             | view recommended money-managing tips from the application                            | better improve my money-managing habits                                                                                        | 
+| v2.0    | user             | set up and update my budget                                                          | limit my spending against a budget                                                                                             |
+| v2.0    | user             | archive my financial transactions from the previous years                            | focus on transactions that matter only for the current year                                                                    |
+| v2.0    | careless user    | modify my spending or expenses in the application                                    | rectify any false input                                                                                                        |
+| v2.0    | forgetful user   | receive reminders on how I should spend my allowance                                 | be consciously aware of my budget constraints                                                                                  |
 
 ## Appendix C: Non-Functional Requirements
 
-{Give non-functional requirements}
+1. Should work on common operating systems including Windows, macOSX and Linux as long as it has Java 11 or above installed.
+2. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+3. Does not require an active connection to the Internet to use the application.
+4. Should respond to commands within 3 seconds with no noticeable sluggishness in performance for typical usage.
 
 ## Appendix D: Glossary
 
-* *glossary item* - Definition
+- **Transaction:** An instance when someone makes or receives a payment including deposits, withdrawals, and exchanges
+- **Budget:** An estimate of income or expenditure for a set period of time
+- **Income:** Payment received from others for work or personal purpose
+- **Expense:** Payment made to others for a purpose
+- **Savings:** Portion of income that is not spent on current expenditures
 
 ## Appendix E:  Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+### Launch and Shutdown
+
+- Initial Launch
+    1. Download the latest [duke.jar](https://github.com/AY2223S1-CS2113-W12-2/tp/releases/download/v2.0/duke.jar) and
+       copy it into a separate directory.
+    2. Ensure that Java 11 has been installed and configured on your operating system.
+    3. Launch a command prompt or terminal and run the command `java -jar duke.jar`.<br>
+       **Expected:** Moolah Manager will display a greeting message and a remaining budget for the current month.
+       A data file, `duke.txt` may be loaded if it exists in `./data/` directory.
+
+- Shutdown
+    1. Type `exit` to quit the program.<br>
+       **Expected:** Moolah Manager will terminate and displays a goodbye message.
+
+### Storage
+
+- Loading Data
+    1. Launch the application and change the state of the program, such as adding a new transaction. Close the window.
+    2. Re-launch the application.<br>
+       **Expected:** Moolah Manager will load the `duke.txt` data file and the state of the program is the same as when it was closed.
+
+- Missing Data File
+    1. As per the instructions from loading data, check there is a `duke.txt` data file in `./data/` directory.
+    2. In `./data/` directory, delete `duke.txt`.
+    3. Re-launch the application.<br>
+       **Expected:** No data file will be loaded into the application, and user may not see the former state of the program.
+
+- Corrupted Data File
+    1. As per the instructions from loading data, check there is a `duke.txt` data file in `./data/` directory.
+    2. In `./data/` directory, open `duke.txt` and try corrupting the records by e.g., removing the first pipe symbol from
+       the first row. Save the changes to the file.
+    3. Re-launch the application.<br>
+       **Expected:** The data file will not be loaded into the application, and user will be prompted that the file
