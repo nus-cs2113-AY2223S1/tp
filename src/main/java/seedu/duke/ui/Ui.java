@@ -342,6 +342,10 @@ public class Ui {
         return "Stop! The input passenger detail does not have a flight number that exist yet.\n"
                 + "Flight detail of the specific flight number should input first.";
     }
+
+    public void showFileNotFoundMessage() {
+        System.out.println("Cannot read data from file, file or directory does not exist.\n");
+    }
 }
 
 

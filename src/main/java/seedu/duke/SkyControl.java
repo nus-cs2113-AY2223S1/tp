@@ -15,12 +15,17 @@ import seedu.duke.operationlist.FlightList;
 import seedu.duke.operationlist.OperationList;
 import seedu.duke.operationlist.PassengerList;
 import seedu.duke.parsers.Parser;
+import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class SkyControl {
     private Ui ui;
     private OperationList passengers;
     private OperationList flights;
+    private Storage storage;
     private static boolean isPassenger = false;
     private static boolean isFlight = false;
     private static boolean isModify = false;
@@ -34,6 +39,7 @@ public class SkyControl {
         ui = new Ui();
         passengers = new PassengerList();
         flights = new FlightList();
+        storage = new Storage();
     }
 
     private void executeEntity(String lineInput, Command command) throws SkyControlException {
@@ -44,13 +50,15 @@ public class SkyControl {
                 executePassengerCommand(lineInput, command);
             } else if (isFlight) {
                 command.execute(flights, lineInput);
+                storage.insertIntoFile(flights.getFlights(), passengers.getPassengers());
             } else if (isModify) {
                 command.execute(flights, lineInput);
                 command.execute(passengers, lineInput);
+                storage.insertIntoFile(flights.getFlights(), passengers.getPassengers());
             } else {
                 command.execute(flights, lineInput);
             }
-        } catch (SkyControlException e) {
+        } catch (SkyControlException | IOException e) {
             ui.showError(e.getMessage());
         }
     }
@@ -61,7 +69,8 @@ public class SkyControl {
                 command.checkFlightDetailSync(flights, passengers, lineInput);
             }
             command.execute(passengers, lineInput);
-        } catch (SkyControlException | SyncException e) {
+            storage.insertIntoFile(flights.getFlights(), passengers.getPassengers());
+        } catch (SkyControlException | SyncException | IOException e) {
             ui.showError(e.getMessage());
         }
     }
@@ -89,7 +98,14 @@ public class SkyControl {
 
     public void run() {
         ui.showWelcomeMessage();
+        Storage.checkFileStatus();
         setUpAllLogger();
+        try {
+            storage.loadPassengers(passengers);
+            storage.loadFlights(flights);
+        } catch (FileNotFoundException e) {
+            ui.showFileNotFoundMessage();
+        }
         boolean isExit = false;
         while (!isExit) {
             try {

@@ -66,4 +66,10 @@ public class PassengerInfo {
     public void setGateNumber(String newGateNum) {
         this.gateNumber = newGateNum;
     }
+
+    public String convertToFileFormat() {
+        String passengerDetails = (this.name + "|" + this.departureTime + "|" + this.flightNumber + "|" + this.gateNumber
+                + "|" + this.boardingGroup + "|" + this.seatNumber + "|" + this.boardingTime + "\n");
+        return passengerDetails;
+    }
 }

@@ -1,5 +1,6 @@
 package seedu.duke.operationlist;
 
+import jdk.dynalink.Operation;
 import seedu.duke.exceptions.SkyControlException;
 import seedu.duke.exceptions.SyncException;
 import seedu.duke.parsers.Parser;
@@ -17,6 +18,10 @@ public abstract class OperationList extends Parser {
     protected static boolean isFlightNumberSync = false;
     protected static boolean isEmptyFlightList = false;
     protected static String flightNumber;
+
+    public ArrayList<PassengerInfo> getPassengers() {
+        return passengers;
+    }
 
     public ArrayList<FlightInfo> getFlights() {
         return flights;
@@ -75,4 +80,12 @@ public abstract class OperationList extends Parser {
     public abstract void modifyFlightNum(String flightNum, String newFlightNum) throws SkyControlException;
 
     public abstract void modifyGateNum(String flightNum, String newFlightNum) throws SkyControlException;
+
+    public void insertFlights(ArrayList<FlightInfo> flights) {
+        OperationList.flights = flights;
+    }
+
+    public void insertPassengers(ArrayList<PassengerInfo> passengers) {
+        OperationList.passengers = passengers;
+    }
 }

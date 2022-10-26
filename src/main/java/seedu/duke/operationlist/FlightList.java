@@ -87,8 +87,13 @@ public class FlightList extends OperationList {
 
     private void checkValidFlightNumber(String substring) throws SkyControlException {
         String[] letters = substring.split("");
-        for (int i = 0; i < letters.length; i++) {
-            if (!Character.isLetterOrDigit(substring.charAt(i))) {
+        for (int i = 0; i < 2; i++) {
+            if (!Character.isLetter(substring.charAt(i))) {
+                throw new SkyControlException(ui.getWrongFlightFormatErrorMessage());
+            }
+        }
+        for (int i = 2; i < letters.length; i++) {
+            if (!Character.isDigit(substring.charAt(i))) {
                 throw new SkyControlException(ui.getWrongFlightFormatErrorMessage());
             }
         }

@@ -4,6 +4,7 @@ import seedu.duke.exceptions.SkyControlException;
 import seedu.duke.terminalinfo.PassengerInfo;
 import seedu.duke.ui.Ui;
 
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
