@@ -6,13 +6,15 @@ skinparam classBackgroundColor MODEL_COLOR
 show field
 show methods
 
+package Model <<Rectangle>> {
+    Class HiddenStorage #FFFFFF
+}
+
 package Storage <<Rectangle>> {
     Class HiddenStorage #FFFFFF
 }
 
-package Model <<Rectangle>> {
-    Class HiddenStorage #FFFFFF
-}
+
 
 package Logic <<Rectangle>> {
 class runCommandLoopUntilExit {
@@ -43,6 +45,8 @@ class Command {
   #Command()
   +execute() : CommandResult
 }
+class XYZCommand {
+}
 
 class CommandResult {
   #carparkList : CarparkList
@@ -50,18 +54,16 @@ class CommandResult {
   +execute() : CommandResult
 }
 
-runCommandLoopUntilExit --> "1" Parser
-runCommandLoopUntilExit ...> CommandResult
-CommandResult <.. "produces" Command
-Command <|--- AuthCommand
-Command <|--- ExitCommand
-Command <|--- FavouriteCommand
-Command <|--- FindCommand
-Command <|--- InvalidCommand
-Command <|--- ListCommand
-Command <|--- FilterCommand
-Command <|--- UnfavouriteCommand
-Command <|--- UpdateCommand
+runCommandLoopUntilExit -> "1" Parser
+runCommandLoopUntilExit ......> CommandResult
+Command "executes" <.... runCommandLoopUntilExit
+CommandResult <... "produces" Command
+Command <|-- XYZCommand
+Parser ...> "creates"Command
 }
+
+Model <.. Command
+runCommandLoopUntilExit ---> Model
+Storage <- runCommandLoopUntilExit
 
 @enduml
