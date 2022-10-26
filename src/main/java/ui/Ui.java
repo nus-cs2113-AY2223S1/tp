@@ -7,7 +7,7 @@ public class Ui {
     public Ui() {
     }
 
-    public void showWelcome(){
+    public void showWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -17,12 +17,12 @@ public class Ui {
         System.out.println("I am the nurse helper!");
     }
 
-    public String readCommand(){
+    public String readCommand() {
         Scanner in = new Scanner(System.in);
         return in.nextLine();
     }
 
-    public void showLine(){
+    public void showLine() {
         System.out.println("____________________________________________________________");
     }
 

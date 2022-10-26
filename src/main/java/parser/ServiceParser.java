@@ -40,7 +40,7 @@ public class ServiceParser {
         }
     }
 
-    public Command prepareAddService(String input){
+    public Command prepareAddService(String input) {
         try {
             int startOfD = input.indexOf(" d/");
             if (startOfD == -1) {

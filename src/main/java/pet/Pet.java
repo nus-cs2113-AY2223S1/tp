@@ -57,6 +57,8 @@ public class Pet {
                 status = PetHealthyStatus.sleepy;
                 wellness = 6;
                 break;
+            default:
+                break;
             }
         } else {
             switch (randomNumber) {
@@ -79,6 +81,8 @@ public class Pet {
             case 5:
                 status = PetUnhealthyStatus.dying;
                 wellness = 1;
+                break;
+            default:
                 break;
             }
         }

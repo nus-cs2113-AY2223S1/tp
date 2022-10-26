@@ -72,7 +72,7 @@ public class TaskList {
         }
     }
 
-    public static Task findTask(int taskId){
+    public static Task findTask(int taskId) {
         for (Task task : tasks) {
             if (task.getTaskId() == taskId) {
                 return task;

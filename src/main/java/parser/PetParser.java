@@ -10,7 +10,7 @@ public class PetParser {
     private int lengthOfSignature;
     private Parser parser;
 
-    public PetParser(Parser parser, int lengthOfSignature){
+    public PetParser(Parser parser, int lengthOfSignature) {
         this.parser = parser;
         this.lengthOfSignature = lengthOfSignature;
     }
@@ -37,8 +37,7 @@ public class PetParser {
                 System.out.println("Invalid Input! unrecognized pet operation");
                 throw new DukeException();
             }
-        }
-        catch (DukeException e){
+        } catch (DukeException e) {
             return new EmptyCommand();
         }
     }
@@ -82,9 +81,7 @@ public class PetParser {
                 throw new DukeException();
             }
             return new RemovePetCommand(index);
-        }
-
-        catch (DukeException e) {
+        } catch (DukeException e) {
             return new EmptyCommand();
         }
     }
