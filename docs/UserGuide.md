@@ -2,7 +2,11 @@
 
 ## Introduction
 
-{Give a product intro}
+parKING is a desktop app for that helps drivers choose the best place to park via a Command Line Interface (CLI) 
+while still having the benefits of a Graphical User Interface (GUI). If you can type fast, parKING can get you your 
+nearest carpark slot for you.
+
+
 
 ## Quick Start
 
