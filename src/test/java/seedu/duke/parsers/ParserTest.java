@@ -12,7 +12,7 @@ class ParserTest {
             "Passenger add n/Ivan dod/08011998 dt/2145 fn/sq832 gn/05 bg/01 sn/17d bt/2100";
 
     @Test
-    void checkPassengerEntity() {
+    void checkPassengerEntity() throws SkyControlException {
         boolean ans = true;
         boolean result = Parser.isPassengerEntity(lineInput);
         assertEquals(ans, result);
@@ -21,12 +21,12 @@ class ParserTest {
     @Test
     void checkExitEntity() {
         boolean ans = false;
-        boolean result = Parser.isExitEntity(lineInput);
+        boolean result = Parser.isExitCommand(lineInput);
         assertEquals(ans, result);
     }
 
     @Test
-    void checkFlightEntity() {
+    void checkFlightEntity() throws SkyControlException {
         boolean ans = false;
         boolean result = Parser.isFlightEntity(lineInput);
         assertEquals(ans,result);

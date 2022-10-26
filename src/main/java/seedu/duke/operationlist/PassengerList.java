@@ -73,6 +73,16 @@ public class PassengerList extends OperationList {
         Ui.showAddedPassenger(passenger);
     }
 
+    @Override
+    public void modifyFlightNum(String flightNum, String newFlightNum) {
+        modifyPassengersFlightNum(flightNum, newFlightNum);
+    }
+
+    @Override
+    public void modifyGateNum(String flightNum, String newGateNum) {
+        modifyPassengersGateNum(flightNum, newGateNum);
+    }
+
     //@@author ivanthengwr
     private void checkPassengerDetails() throws SkyControlException {
         if (isExceedNameLength) {
@@ -109,6 +119,26 @@ public class PassengerList extends OperationList {
             if (isPassengerDuplicate()) {
                 resetCheckDuplicate();
                 throw new SkyControlException(ui.getDuplicatePassengerError());
+            }
+        }
+    }
+
+    private void modifyPassengersFlightNum(String flightNum, String newFlightNum) {
+        getNumberOfPassengers();
+        for (int i = 0; i < numOfPassengers; i++) {
+            PassengerInfo passenger = passengers.get(i);
+            if (passenger.getFlightNumber().equals(flightNum)) {
+                passenger.setFlightNumber(newFlightNum);
+            }
+        }
+    }
+
+    private void modifyPassengersGateNum(String flightNum, String newGateNum) {
+        getNumberOfPassengers();
+        for (int i = 0; i < numOfPassengers; i++) {
+            PassengerInfo passenger = passengers.get(i);
+            if (passenger.getFlightNumber().equals(flightNum)) {
+                passenger.setGateNumber(newGateNum);
             }
         }
     }
@@ -294,9 +324,9 @@ public class PassengerList extends OperationList {
         isExceedNameLength = name.length() > NAME_LENGTH_LIMIT;
         isWrongNameFormat = !name.matches(REGEX_LETTER);
         isWrongDepartureFormat = isValidTime(departureTime);
-        isWrongFlightNumFormat = isValidFlightNumber();
+        isWrongFlightNumFormat = isValidFlightNumber(flightNumber);
         isWrongBoardingTimeFormat = isValidTime(boardingTime);
-        isWrongGateNumberFormat = isValidGateNumber();
+        isWrongGateNumberFormat = isValidGateNumber(gateNumber);
         isWrongBoardingGroupFormat = isValidBoardingGroup();
         isWrongSeatNumberFormat = isValidSeatNumber();
     }
@@ -326,7 +356,7 @@ public class PassengerList extends OperationList {
         }
     }
 
-    private boolean isValidGateNumber() {
+    private boolean isValidGateNumber(String gateNumber) {
         boolean isNotValidLength = gateNumber.length() > MAX_GN_LENGTH
                 || gateNumber.length() < MIN_GN_LENGTH;
         boolean isNotValidNumber = !gateNumber.matches(REGEX_NUMBER);
@@ -344,11 +374,11 @@ public class PassengerList extends OperationList {
         return isNotValidTime;
     }
 
-    private boolean isValidFlightNumber() {
+    private boolean isValidFlightNumber(String flightNumber) {
         int lenOfFlightNum = flightNumber.length();
         if (lenOfFlightNum < FN_MIN_LENGTH) {
             return isWrongFlightNumFormat = true;
-        } else if (isValidFlightNumberTag()) {
+        } else if (isValidFlightNumberTag(flightNumber)) {
             int numOfDigits = checkNumOfDigits();
             if (isValidFLightNum(numOfDigits)) {
                 return isWrongFlightNumFormat;
@@ -374,7 +404,7 @@ public class PassengerList extends OperationList {
         return numOfDigits;
     }
 
-    private boolean isValidFlightNumberTag() {
+    private boolean isValidFlightNumberTag(String flightNumber) {
         boolean isValidFlightNumberTag;
         isValidFlightNumberTag = Character.isLetter(flightNumber.charAt(FIRST_INDEX))
                 && Character.isLetter(flightNumber.charAt(SECOND_INDEX));

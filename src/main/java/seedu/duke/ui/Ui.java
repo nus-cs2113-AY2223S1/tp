@@ -110,7 +110,8 @@ public class Ui {
 
     //@@author ivanthengwr
     public String getBlankOperationError() {
-        return "You did not input an operation.";
+        return "You did not input an operation.\n"
+                + "The system is unable to read your command, please try again.";
     }
 
     public void showError(String error) {
@@ -259,6 +260,14 @@ public class Ui {
     //@@author shengiv
     public String getMissingDetailsError() {
         return "Please fill up details for all fields.\n Invalid input. Try again!";
+    }
+
+    public void showUpdatedFlightNumber(String flightNum, String newFlightNum) {
+        System.out.println("Flight number of flight " + flightNum + " is updated to " + newFlightNum + ".");
+    }
+
+    public void showUpdatedGateNumber(String flightNum, String newGateNum) {
+        System.out.println("Gate number of flight " + flightNum + " is updated to " + newGateNum + ".");
     }
 
     //@@author ivanthengwr

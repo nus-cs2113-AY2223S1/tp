@@ -16,6 +16,7 @@ public class Parser {
     protected static Command command;
     protected static Ui ui = new Ui();
     protected static final String EXIT_ENTITY = "bye";
+    protected static final String MODIFY_COMMAND = "modify";
     protected static final String PASSENGER_ENTITY = "passenger";
     protected static final String FLIGHT_ENTITY = "flight";
     protected static final int ENTITY_INDEX = 0;
@@ -28,6 +29,7 @@ public class Parser {
     protected static boolean isList = false;
     protected static boolean isDelay = false;
     protected static boolean isExit = false;
+    protected static boolean isModify = false;
     protected static boolean isBlankOperation = false;
     protected static String[] inputWords;
     protected static String entity;
@@ -64,16 +66,19 @@ public class Parser {
             command = FlightParser.parse(inputWords);
         } else if (isExit) {
             command = new ExitCommand();
+        } else if (isModify) {
+            command = ModificationParser.parse(inputWords);
         } else {
             throw new SkyControlException(ui.getErrorMessage());
         }
         return command;
     }
 
-    public static void checkEntity(String lineInput) {
+    public static void checkEntity(String lineInput) throws SkyControlException {
         isPassengerEntity = isPassengerEntity(lineInput);
         isFlightEntity = isFlightEntity(lineInput);
-        isExit = isExitEntity(lineInput);
+        isExit = isExitCommand(lineInput);
+        isModify = isModifyCommand(lineInput);
     }
 
     public static void checkOperation(String[] inputWords) {
@@ -84,28 +89,25 @@ public class Parser {
         isDelay = operation.equalsIgnoreCase("delay");
     }
 
-    public static boolean isPassengerEntity(String lineInput) {
-        try {
-            getEntity(lineInput);
-        } catch (SkyControlException e) {
-            ui.showError(e.getMessage());
-            return false;
-        }
+    public static boolean isPassengerEntity(String lineInput) throws SkyControlException {
+        getEntity(lineInput);
         isPassengerEntity = entity.equalsIgnoreCase(PASSENGER_ENTITY);
         return isPassengerEntity;
     }
 
-    public static boolean isFlightEntity(String lineInput) {
-        try {
-            getEntity(lineInput);
-        } catch (SkyControlException e) {
-            return false;
-        }
+    public static boolean isFlightEntity(String lineInput) throws SkyControlException {
+        getEntity(lineInput);
         isFlightEntity = entity.equalsIgnoreCase(FLIGHT_ENTITY);
         return isFlightEntity;
     }
 
-    public static boolean isExitEntity(String lineInput) {
+    public static boolean isModifyCommand(String lineInput) throws SkyControlException {
+        getEntity(lineInput);
+        isModify = entity.equalsIgnoreCase(MODIFY_COMMAND);
+        return isModify;
+    }
+
+    public static boolean isExitCommand(String lineInput) {
         try {
             getEntity(lineInput);
         } catch (SkyControlException e) {

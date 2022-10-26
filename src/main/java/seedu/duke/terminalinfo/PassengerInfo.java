@@ -58,4 +58,12 @@ public class PassengerInfo {
     public String getBoardingTime() {
         return boardingTime;
     }
+
+    public void setFlightNumber(String newFlightNum) {
+        this.flightNumber = newFlightNum;
+    }
+
+    public void setGateNumber(String newGateNum) {
+        this.gateNumber = newGateNum;
+    }
 }
