@@ -117,6 +117,22 @@ In the example above, `UserInterface#runCommandAddExpense()` calls `Storage#save
 
 ![Implementation-Edit-Expense](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ImplementationEditExpense.puml)
 
+### Adding a recurring payment
+
+![Implementation-Add-RecurringPayment](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ImplementationAddRecurringPayment.puml)
+
+### Viewing a recurring payment
+
+![Implementation-View-RecurringPayment](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ImplementationViewRecurringPayment.puml)
+
+### Deleting a recurring payment
+
+![Implementation-Delete-RecurringPayment](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ImplementationDeleteRecurringPayment.puml)
+
+### Editing a recurring payment
+
+![Implementation-Edit-RecurringPayment](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ImplementationEditRecurringPayment.puml)
+
 ## Product scope
 ### Target user profile
 
