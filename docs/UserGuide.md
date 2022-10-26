@@ -60,7 +60,8 @@ i.e. `flight add [PASSENGER DETAIL]`
 **Function**:  
 **Usage**:
 
-Example:
+Example:  
+
 **Input**  
 **Output**  
 ---
