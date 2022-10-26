@@ -224,8 +224,8 @@ When client, property and pairing is added, text will be appended to the text fi
 
 - `Client`: Appends `CLIENT_NAME | CLIENT_CONTACT_NUMBER | CLIENT_EMAIL | CLIENT_BUDGET` to `client.txt`.
 - `Property`: Appends `LANDLORD_NAME | PROPERTY_ADDRESS | PROPERTY_RENTAL_RATE | PROPERTY_UNIT_TYPE` to `property.txt`.
-- `Pair`: Appends `[CLIENT_NAME | CLIENT_CONTACT_NUMBER | CLIENT_EMAIL | CLIENT_BUDGET] : [LANDLORD_NAME | PROPERTY_ADDRESS |
-  PROPERTY_RENTAL_RATE | PROPERTY_UNIT_TYPE]` to `pair.txt`.
+- `Pair`: Appends `[CLIENT_NAME | CLIENT_CONTACT_NUMBER | CLIENT_EMAIL | CLIENT_BUDGET] : [LANDLORD_NAME | 
+PROPERTY_ADDRESS | PROPERTY_RENTAL_RATE | PROPERTY_UNIT_TYPE]` to `pair.txt`.
 
 ### Updating data
 
