@@ -138,7 +138,9 @@ public class CarparkList {
             if (!carparkHashMap.containsKey(carparkId)) {
                 carparkHashMap.put(carparkId, carpark);
             } else {
-                carparkHashMap.get(carparkId).addCarparkLotType(carpark);
+                if (carparkHashMap.get(carparkId).getLotType() != null) {
+                    carparkHashMap.get(carparkId).addCarparkLotType(carpark);
+                }
             }
         }
         carparks = new ArrayList<>(carparkHashMap.values());

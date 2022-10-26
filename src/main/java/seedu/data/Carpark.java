@@ -208,8 +208,8 @@ public class Carpark {
 
     private void updateAvailableLotsTotal() {
         int sum = 0;
-        for (int value : allAvailableLots.values()) {
-            sum += value;
+        for (int lotNumber : allAvailableLots.values()) {
+            sum += lotNumber;
         }
         availableLots = sum;
     }
