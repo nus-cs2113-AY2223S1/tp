@@ -1,0 +1,35 @@
+@startuml
+!include style.puml
+
+hide footbox
+
+participant Parser
+
+Parser -> Parser : executeSort()
+activate Parser
+
+create "executor:\nSortCommand"
+Parser -> "executor:\nSortCommand"
+
+activate "executor:\nSortCommand"
+"executor:\nSortCommand" --> Parser
+deactivate "executor:\nSortCommand"
+
+Parser -> "executor:\nSortCommand" : execute()
+activate "executor:\nSortCommand"
+"executor:\nSortCommand" --> Parser: output : String
+deactivate "executor:\nSortCommand"
+
+participant Ui
+
+Parser -> Ui : print(output)
+activate Ui
+Ui --> Parser
+deactivate Ui
+
+Parser -> Parser
+destroy "executor:\nSortCommand"
+deactivate Parser
+
+
+@enduml

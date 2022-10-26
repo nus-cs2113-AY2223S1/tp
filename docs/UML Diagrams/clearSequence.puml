@@ -5,12 +5,20 @@ hide footbox
 
 participant Parser
 
+Parser -> Parser : executeClear()
+activate Parser
+
 create "executor:\nClearCommand"
-Parser -> "executor:\nClearCommand" : executeClear()
+Parser -> "executor:\nClearCommand"
 
 activate "executor:\nClearCommand"
-"executor:\nClearCommand" --> Parser: output: String
-destroy "executor:\nClearCommand"
+"executor:\nClearCommand" --> Parser
+deactivate "executor:\nClearCommand"
+
+Parser -> "executor:\nClearCommand" : execute()
+activate "executor:\nClearCommand"
+"executor:\nClearCommand" --> Parser: output : String
+deactivate "executor:\nClearCommand"
 
 participant Ui
 
@@ -18,5 +26,10 @@ Parser -> Ui : print(output)
 activate Ui
 Ui --> Parser
 deactivate Ui
+
+Parser -> Parser
+destroy "executor:\nClearCommand"
+deactivate Parser
+
 
 @enduml

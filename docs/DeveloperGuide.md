@@ -26,12 +26,15 @@ AddressBook-Level3 https://github.com/se-edu/addressbook-level3
 ### Clearing the review list
 ![img.png](imgs/clearSequence.png)
 
+### Sorting the review list
+![img.png](imgs/sortSequence.png)
+
 ## Product scope
 ### Target user profile
 
 {Describe the target user profile}
 The target user profile is ideally individuals who are well-versed in the command line
-and are avid movie watchers. Therefore this app is customised to their preferences.
+and are avid movie watchers. Therefore, this app is customised to their preferences.
 
 ### Value proposition
 
