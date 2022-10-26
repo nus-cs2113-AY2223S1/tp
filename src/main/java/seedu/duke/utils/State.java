@@ -33,7 +33,7 @@ public class State {
         return semester;
     }
 
-    public static void setSemester(int updatedSemester) {
+    public void setSemester(int updatedSemester) {
         semester = updatedSemester;
     }
 
