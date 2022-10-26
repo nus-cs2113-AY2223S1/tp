@@ -66,14 +66,20 @@ the user enters the command `Add-Expense -n Expense -a 7.80` to add an expense w
 
 ![Component-Interaction-On-Command-Entered](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentInteractionsOnCommandEntered.puml)
 
-* The `UserInterface` runs continuously in a loop.
+![Component-Interaction-On-Command-Entered](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentInteractionsRefGetUserCommand.puml)
+
+![Component-Interaction-On-Command-Entered](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentInteractionsRefPrintExpense.puml)
+
+![Component-Interaction-On-Command-Entered](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentInteractionsRefSaveExpensesToFile.puml)
+
+* `UserInterface` runs continuously in a loop.
 When the program is ready to receive the user's input, 
 it calls `UserInterface#getConsoleCommand()` which reads the input from standard in.
 * `UserInterface#getConsoleCommand()` calls `Parser#parse()` to parse the input string into a `ConsoleCommand` object.
 * Depending on the instance of `ConsoleCommand`, the corresponding command handler function will be called.\
 In the example above, `ConsoleCommand` is an instance of `ConsoleCommandAddExpense` and hence, 
 `UserInterface#runCommandAddExpense()` is called.
-* The `UserInterface` command handler functions calls various `Data` functions to perform operations on data.\
+* `UserInterface` command handler functions calls various `Data` functions to perform operations on data.\
 In the example above, `UserInterface#runCommandAddExpense()` calls `Data#addExpense()` to add an expense to the program.
 * After the operations is performed, command handler functions calls `Storage` functions to save data.\
 In the example above, `UserInterface#runCommandAddExpense()` calls `Storage#saveToFile()` to save the newly added expense to a file.
