@@ -1,4 +1,4 @@
-Welcome to your Media Reviews bot,
+Welcome to your Movie Reviews bot,
 
 ---------------
 See you again!

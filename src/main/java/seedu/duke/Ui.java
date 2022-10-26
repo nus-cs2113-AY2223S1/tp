@@ -10,7 +10,7 @@ public class Ui {
     protected boolean isExit;
     
     public void greetUser() {
-        System.out.println("Welcome to your Media Reviews bot,");
+        System.out.println("Welcome to your Movie Reviews bot,");
         logger.log(Level.INFO, "Greeted User");
     }
 
