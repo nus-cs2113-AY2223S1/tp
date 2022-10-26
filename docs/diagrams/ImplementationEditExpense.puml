@@ -12,44 +12,44 @@ activate consoleInterface USER_INTERFACE_COLOR_1
 ref over consoleInterface: getConsoleCommand()
 
 opt consoleCommand instanceof ConsoleCommandEditExpense
+    consoleInterface -[USER_INTERFACE_COLOR_1]> consoleInterface : \lrunCommandEditExpense(\n\tconsoleCommand:ConsoleCommandEditExpense\n)
+    activate consoleInterface USER_INTERFACE_COLOR_1
 
-consoleInterface -[USER_INTERFACE_COLOR_1]> consoleInterface : \lrunCommandEditExpense(\n\tconsoleCommand:ConsoleCommandEditExpense\n)
-activate consoleInterface USER_INTERFACE_COLOR_1
+    consoleInterface -[USER_INTERFACE_COLOR_1]> expenseManager : getExpense(expenseIndex:int)
+    activate expenseManager DATA_COLOR_1
 
-consoleInterface -[USER_INTERFACE_COLOR_1]> expenseManager : getExpense(expenseIndex:int)
-activate expenseManager DATA_COLOR_1
+    expenseManager --[DATA_COLOR_1]> consoleInterface : expense:Expense
+    deactivate expenseManager
 
-expenseManager --[DATA_COLOR_1]> consoleInterface : expense:Expense
-deactivate expenseManager
+    consoleInterface -[USER_INTERFACE_COLOR_1]> expenseManager : editExpense(expenseIndex:int)
+    activate expenseManager DATA_COLOR_1
 
-consoleInterface -[USER_INTERFACE_COLOR_1]> expenseManager : editExpense(expenseIndex:int)
-activate expenseManager DATA_COLOR_1
+    expenseManager --[DATA_COLOR_1]> consoleInterface
+    deactivate expenseManager
 
-expenseManager --[DATA_COLOR_1]> consoleInterface
-deactivate expenseManager
+    consoleInterface -[USER_INTERFACE_COLOR_1]> consoleInterface : convertExpenseToConsoleString(expense:Expense)
+    activate consoleInterface USER_INTERFACE_COLOR_1
 
-consoleInterface -[USER_INTERFACE_COLOR_1]> consoleInterface : convertExpenseToConsoleString(expense:Expense)
-activate consoleInterface USER_INTERFACE_COLOR_1
+    consoleInterface --[USER_INTERFACE_COLOR_1]> consoleInterface : consoleStr:String
+    deactivate consoleInterface
 
-consoleInterface --[USER_INTERFACE_COLOR_1]> consoleInterface : consoleStr:String
-deactivate consoleInterface
+    ref over consoleInterface: printInformationalMessage(consoleStr:String)
 
-ref over consoleInterface: printInformationalMessage(consoleStr:String)
+    consoleInterface -[USER_INTERFACE_COLOR_1]> expenseManager : save()
+    activate expenseManager DATA_COLOR_1
 
-consoleInterface -[USER_INTERFACE_COLOR_1]> expenseManager : save()
-activate expenseManager DATA_COLOR_1
+    expenseManager -[DATA_COLOR_1]> LocalStorage : \lsaveToFile(\n\texpenses:ArrayList<Expenses>\n)
+    activate LocalStorage STORAGE_COLOR_1
 
-expenseManager -[DATA_COLOR_1]> LocalStorage : \lsaveToFile(\n\texpenses:ArrayList<Expenses>\n)
-activate LocalStorage STORAGE_COLOR_1
+    LocalStorage --[STORAGE_COLOR_1]> expenseManager
+    deactivate LocalStorage
 
-LocalStorage --[STORAGE_COLOR_1]> expenseManager
-deactivate LocalStorage
+    expenseManager --[DATA_COLOR_1]> consoleInterface
+    deactivate expenseManager
 
-expenseManager --[DATA_COLOR_1]> consoleInterface
-deactivate expenseManager
-
-consoleInterface --[USER_INTERFACE_COLOR_1]> consoleInterface
-deactivate consoleInterface
-
+    consoleInterface --[USER_INTERFACE_COLOR_1]> consoleInterface
+    deactivate consoleInterface
 end
+
+deactivate consoleInterface
 @enduml
