@@ -38,8 +38,19 @@ public class Appointment {
         this.tasks.add(task);
     }
 
-    public void setAppointmentStatus(AppointmentStatus appointmentStatus) {
-        this.appointmentStatus = appointmentStatus;
+    // update appointment status after changing task
+    public void updateAppointmentStatus() {
+        appointmentStatus = AppointmentStatus.PROCESSING;
+        boolean isDone = true;
+        for (Task task: tasks) {
+            if (task.isDone == false) {
+                isDone = false;
+                break;
+            }
+        }
+        if (isDone) {
+            appointmentStatus = AppointmentStatus.PROCESSED;
+        }
     }
 
     public String getAppointmentStatus() {

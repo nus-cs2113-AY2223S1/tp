@@ -65,11 +65,12 @@ public class AppointmentList {
         }
     }
 
-    public static void setAppointmentStatus(int appointmentId, int appointmentStatus) {
+    public static void updateAppointmentStatus(int appointmentId) {
         boolean setFlag = false;
         for (Appointment appointment : appointments) {
             if (appointment.appointmentId == appointmentId) {
-                appointment.setAppointmentStatus(intToAppointmentStatus(appointmentStatus));
+
+                appointment.updateAppointmentStatus();
                 System.out.print("Noted. I've set this service: ");
                 System.out.print("Pet " + appointment.petName + " | " + "Service " + appointment.service);
                 System.out.println(" as " + appointment.getAppointmentStatus());
@@ -84,4 +85,5 @@ public class AppointmentList {
     public static void viewAppointmentTasks(int appointmentId) {
         AppointmentList.findAppointment(appointmentId).viewTasks();
     }
+
 }
