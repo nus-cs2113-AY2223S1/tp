@@ -48,7 +48,7 @@ public class Ui {
      * @return User input.
      */
     public String getCommand() {
-        print("Enter a command: ");
+        print("\nEnter a command: ");
         return getLine();
     }
 
