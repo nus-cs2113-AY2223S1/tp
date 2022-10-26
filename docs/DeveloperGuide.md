@@ -29,6 +29,9 @@ AddressBook-Level3 https://github.com/se-edu/addressbook-level3
 ### Sorting the review list
 ![img.png](imgs/sortSequence.png)
 
+### Marking favourite reviews and listing all favourites
+![img.png](imgs/favouriteSequence.png)
+
 ## Product scope
 ### Target user profile
 
