@@ -8,7 +8,7 @@ import java.util.List;
 
 public class State {
     private static final int MODULES_LIST_SIZE = 5;
-    private static int semester;
+    private int semester;
 
     private List<List<SelectedModule>> selectedModulesList;
 
@@ -26,14 +26,17 @@ public class State {
     }
 
     public void setSelectedModulesList(List<SelectedModule> list) {
-        this.selectedModulesList.set(semester, list);
+        List<SelectedModule> currentSelectedModules = selectedModulesList.get(semester);
+        currentSelectedModules.clear();
+        currentSelectedModules.addAll(list);
+        //selectedModulesList.set(semester, list);
     }
 
     public int getSemester() {
         return semester;
     }
 
-    public static void setSemester(int updatedSemester) {
+    public void setSemester(int updatedSemester) {
         semester = updatedSemester;
     }
 

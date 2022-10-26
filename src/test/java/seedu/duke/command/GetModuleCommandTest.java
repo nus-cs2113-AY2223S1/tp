@@ -24,7 +24,7 @@ public class GetModuleCommandTest {
         State state = new State();
 
         // set state to semester 1
-        State.setSemester(1);
+        state.setSemester(1);
         String[] input = {"get", "CS1010X"};
         GetModuleCommand getModuleCommand = new GetModuleCommand(input);
 
@@ -70,7 +70,7 @@ public class GetModuleCommandTest {
         State state = new State();
 
         // set state to semester 3 (special term 1)
-        State.setSemester(3);
+        state.setSemester(3);
         String[] input = {"get", "CS1010e"};
         GetModuleCommand getModuleCommand = new GetModuleCommand(input);
 
@@ -113,7 +113,7 @@ public class GetModuleCommandTest {
         Ui ui = new Ui();
         State state = new State();
 
-        State.setSemester(1);
+        state.setSemester(1);
 
         try {
             String[] input = {"get", "X1010SC"};
@@ -131,7 +131,7 @@ public class GetModuleCommandTest {
         Ui ui = new Ui();
         State state = new State();
 
-        State.setSemester(1);
+        state.setSemester(1);
 
         try {
             String[] input = {"get"};
@@ -151,7 +151,7 @@ public class GetModuleCommandTest {
         Module testModule = Module.get(moduleCode);
 
         // setting current semester to 1
-        State.setSemester(1);
+        state.setSemester(1);
 
         // check if module is offered in current semester
         boolean testResult = isModuleOfferedInCurrentSem(testModule, state);
@@ -167,7 +167,7 @@ public class GetModuleCommandTest {
         Module testModule = Module.get(moduleCode);
 
         // setting current semester to 4
-        State.setSemester(4);
+        state.setSemester(4);
 
         // check if module is offered in current semester
         boolean testResult = isModuleOfferedInCurrentSem(testModule, state);

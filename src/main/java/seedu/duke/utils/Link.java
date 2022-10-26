@@ -33,6 +33,8 @@ public class Link {
 
     private static final String DELIMITER = "/";
 
+    private static final String DELIMITER_REGEX = "\\/";
+
     private static final String SEMESTER_DELIMITER = "sem-";
 
     private static final String SHARE_DELIMITER = "share?";
@@ -74,7 +76,7 @@ public class Link {
             throw new YamomException("No NUSMod Link given");
         }
         //Initial string :https://nusmods.com/timetable/sem-SEMESTER_NUMBER/share?MODULE_INFO&MODULE_INFO
-        String[] infoParam = link.split(DELIMITER);
+        String[] infoParam = link.split(DELIMITER_REGEX);
         /*
         infoParam[0] = "https:";
         infoParam[1] = "";
@@ -97,17 +99,23 @@ public class Link {
         } else {
             return;
         }
-        String modulesParam = infoParam[MODULES_PARAM_INDEX].trim();
+        String modulesParam = infoParam[MODULES_PARAM_INDEX];
         String cleanModuleParam = modulesParam.replace(SHARE_DELIMITER, "");
         if (cleanModuleParam.isEmpty()) {
             return;
         }
         String[] moduleAndLessonsArray = cleanModuleParam.split(moduleDelimiter);
+        if (moduleAndLessonsArray.length == 0) {
+            return;
+        }
         List<SelectedModule> selectedModules = new ArrayList<>();
         for (String moduleAndLessons : moduleAndLessonsArray) {
             String[] splitModuleAndLesson = moduleAndLessons.split(MODULE_CODE_DELIMITER);
-            String moduleCode = splitModuleAndLesson[0].toUpperCase();
-            Module module = Module.get(moduleCode);
+            if (splitModuleAndLesson.length == 0) {
+                continue;
+            }
+            String moduleCode = splitModuleAndLesson[0];
+            Module module = Module.get(moduleCode.toUpperCase());
             if (module == null || module.getSemesterData(semester) == null) {
                 continue;
             }
@@ -115,8 +123,6 @@ public class Link {
             String[] lessonsInfo = splitModuleAndLesson[1].split(lessonDelimiter);
             addLessons(lessonsInfo, selectedModule, semester);
             selectedModules.add(selectedModule);
-
-
         }
         state.setSelectedModulesList(selectedModules);
     }
