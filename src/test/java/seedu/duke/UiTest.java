@@ -9,7 +9,7 @@ import java.io.PrintStream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class UiTest {
-    static final String expectedGreeting = "Welcome to your Media Reviews bot,\n";
+    static final String expectedGreeting = "Welcome to your Movie Reviews bot,\n";
 
     private final ByteArrayOutputStream out = new ByteArrayOutputStream();
     private final PrintStream reset = System.out;
