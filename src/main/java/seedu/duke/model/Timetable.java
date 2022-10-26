@@ -214,7 +214,7 @@ public class Timetable {
             buffer[row][column + i] = "" + text.charAt(i);
         }
         if (withColor) {
-            buffer[row][column + text.length() - 1] += Color.ANSI_RESET + Color.BACKGROUND_BLACK;
+            buffer[row][column + text.length() - 1] += Color.ANSI_RESET;
         }
     }
 
@@ -272,9 +272,6 @@ public class Timetable {
     public String toString() {
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < height; i++) {
-            if (withColor) {
-                builder.append(Color.BACKGROUND_BLACK);
-            }
             builder.append(String.join("", buffer[i]));
             if (withColor) {
                 builder.append(Color.ANSI_RESET);
