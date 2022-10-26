@@ -65,11 +65,13 @@ public class Parser {
             command = PassengerParser.parse(inputWords);
         } else if (isFlightEntity) {
             command = FlightParser.parse(inputWords);
+        } else if (isModify) {
+            command = ModificationParser.parse(inputWords);
+        } else if (isDelay) {
+            command = ModificationParser.parse(inputWords);
         } else if (isExit) {
             command = new ExitCommand();
-        } else if (isModify | isDelay) {
-            command = ModificationParser.parse(inputWords);
-        }  else {
+        } else {
             throw new SkyControlException(ui.getErrorMessage());
         }
         return command;
@@ -95,6 +97,7 @@ public class Parser {
         isPassengerEntity = entity.equalsIgnoreCase(PASSENGER_ENTITY);
         return isPassengerEntity;
     }
+
     //@@author shengiv
     public static boolean isFlightEntity(String lineInput) throws SkyControlException {
         getEntity(lineInput);

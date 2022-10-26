@@ -41,7 +41,10 @@ public class SkyControl {
                 executePassengerCommand(lineInput, command);
             } else if (isFlight) {
                 command.execute(flights, lineInput);
-            } else if (isModify | isDelay) {
+            } else if (isModify) {
+                command.execute(flights, lineInput);
+                command.execute(passengers, lineInput);
+            } else if (isDelay) {
                 command.execute(flights, lineInput);
                 command.execute(passengers, lineInput);
             } else {
@@ -67,7 +70,7 @@ public class SkyControl {
         isPassenger = Parser.isPassengerEntity(lineInput);
         isFlight = Parser.isFlightEntity(lineInput);
         isModify = Parser.isModifyCommand(lineInput);
-        isDelay = Parser.isModifyCommand(lineInput);
+        isDelay = Parser.isDelayCommand(lineInput);
         if (isPassenger) {
             isAdd = Parser.getAdd(lineInput);
         }
