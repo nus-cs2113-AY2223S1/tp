@@ -170,12 +170,96 @@ Unpairs the client from the specified property, to record that the client is no 
 
 <u>Example</u>: `unpair ip/1 ic/5`
 
+### Find Client and Property: `find`
+This feature allows for the queried text to be filtered. The queried text is not constrained within any field.
+This means that if the queried text matches the name of the first list and the address of second list, both entries
+will be counted as a match.
+
+<u>Format:</u> 
+`find -CLIENT/PROPERTY f/QUERY_TEXT`
+
+3 fields are required to be entered for successful operation:
+- Command: In the context of this feature, the command will be `find`
+- Client/Property: This section requires the selection of either client or property which is inputted after `-`.
+- Query Text: After the tag `f/`, enter the text that will be searched through.
+
+<u>Example:</u>
+
+1. `find -property f/Bob The Builder`
+2. `find -client f/Amos`
+
+The 1st command above search through the property list for any matches with `Bob the Builder` while the 2nd command 
+search through the client list for any matches with `Amos`.
 ### Exit: `quit`
 
+---
 ### Loading data
+The loading of the data occurs during the start of the program, before any command is entered.
+There will be 3 different loading operations:
+- Client
+- Property
+- Pairing
+
+Clients will be added to a list containing the clients if the data stored in `client.txt` conforms to the format. 
+Before appending into the list, it will also be passed through a check to ensure each of the entity is in the right 
+format. Should the data fail to be in the correct format, it won't be stored into list. 
+
+Similar operation can be applied to the `property list` where the data is stored in `property.txt`. The entries will 
+also be checked that it was stored in the right format and each of the entries conforms to the requirement before it's 
+added into the list containing all the property.
+
+The `pairing list` will be the last to load. This is done so to verify that the client and property is within the 
+Client's list and Property's list respectively. In the scenario where either of the entries is not in, the **pair 
+would not be loaded and will be considered as incorrect data inputted**.
 
 ### Saving data
 
+Saving of data occurs in 3 instances of operation:
+
+- Client is added to Client's List
+- Property is added to Property's List
+- Pair is added to Pairing's List
+
+When client, property and pairing is added, text will be appended to the text file as shown below:
+
+- `Client`: Appends `CLIENT_NAME | CLIENT_CONTACT_NUMBER | CLIENT_EMAIL | CLIENT_BUDGET` to `client.txt`.
+- `Property`: Appends `LANDLORD_NAME | PROPERTY_ADDRESS | PROPERTY_RENTAL_RATE | PROPERTY_UNIT_TYPE` to `property.txt`.
+- `Pair`: Appends `[CLIENT_NAME | CLIENT_CONTACT_NUMBER | CLIENT_EMAIL | CLIENT_BUDGET] : [LANDLORD_NAME | 
+PROPERTY_ADDRESS | PROPERTY_RENTAL_RATE | PROPERTY_UNIT_TYPE]` to `pair.txt`.
+
+### Updating data
+
+Updating of data occurs in 6 instances of operation:
+
+- Client is deleted from Client List - `delete -client` command invoked
+- Property is deleted from Property List - `delete -property` command invoked
+- Pair is removed from Pairing List - `unpair` command invoked
+- Incorrect data identified when loading of Client from `client.txt`
+- Incorrect data identified when loading of Property from `property.txt`
+- Missing Client or Property when loading Pairs from `pair.txt`
+
+When the updating operation occurs, it will iterate through the list, depending on which list has been updated.
+While iterating through the list, the program will **convert each entry into the correct format** and **store in their 
+respective text files.**
+
+### Manual input of data
+
+Since the data is stored in a text file, it **allows for user to manually key in the entries** and will be loaded
+when the program is re-ran.
+
+This is how the entries should be stored :
+
+Client: `CLIENT_NAME | CLIENT_CONTACT_NUMBER | CLIENT_EMAIL | CLIENT_BUDGET`
+
+Property: `LANDLORD_NAME | PROPERTY_ADDRESS | PROPERTY_RENTAL_RATE | PROPERTY_UNIT_TYPE`
+
+Pairing: `[CLIENT_NAME | CLIENT_CONTACT_NUMBER | CLIENT_EMAIL | CLIENT_BUDGET] : [LANDLORD_NAME | PROPERTY_ADDRESS |
+PROPERTY_RENTAL_RATE | PROPERTY_UNIT_TYPE]`
+
+Note that if the entries are stored incorrectly, the program will automatically remove the entries from the text file
+during the next run of the program. This is done so to **prevent overcrowding** of junk data.
+
+--- 
 ## FAQ
 
 **Q**: How do I transfer my data to another computer? 
@@ -188,14 +272,20 @@ Unpairs the client from the specified property, to record that the client is no 
 * Delete Property: `delete -property ip/PROPERTY_INDEX`
 * List Properties: `list -property`
 * Check Property: `check -property ip/PROPERTY_INDEX`
+* Find Property: `find -property f/QUERY_TEXT`
 
 * Add Client: `add -client n/NAME c/CONTACT_NUMBER e/EMAIL b/BUDGET_MONTH`
 * Delete Client: `delete -client ic/CLIENT_INDEX`
 * List Clients: `list -client`
 * Check Client: `check -client ic/CLIENT_INDEX`
+* Find Client: `find -client f/QUERY_TEXT`
 
 * Pair: `pair ip/PROPERTY_INDEX ic/CLIENT_INDEX`
 * Unpair: `unpair ip/PROPERTY_INDEX ic/CLIENT_INDEX`
 
 
-
+## Common Error Messages
+| Error Message                | Reason               | Remedy                |
+|------------------------------|----------------------|-----------------------|
+| *INSERT ERROR MESSAGE HERE*  | *INSERT REASON HERE* | *INSERT REMEDY HERE*  |
+| *INSERT ERROR MESSAGE HERE*  | *INSERT REASON HERE* | *INSERT REMEDY HERE*  |
