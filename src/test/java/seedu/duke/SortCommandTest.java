@@ -25,11 +25,11 @@ class SortCommandTest {
         storedReviews.add(movie2);
         storedReviews.add(movie3);
 
-        storedReviews.inputs.sort(Comparator.comparing(Media::getRating));
+        String[] userInput = {"sort", "rating"};
+        SortCommand sort = new SortCommand(storedReviews, userInput);
+        sort.execute();
 
-        Movie assertMovie = (Movie) storedReviews.inputs.get(0);
-
-        assertEquals(1.0,assertMovie.rating);
+        assertEquals(1.0, storedReviews.inputs.get(0).getRating());
     }
 
     @Test
@@ -43,11 +43,11 @@ class SortCommandTest {
         storedReviews.add(movie2);
         storedReviews.add(movie3);
 
-        storedReviews.inputs.sort(Comparator.comparing(Media::getTitle));
+        String[] userInput = {"sort", "title"};
+        SortCommand sort = new SortCommand(storedReviews, userInput);
+        sort.execute();
 
-        Movie assertMovie = (Movie) storedReviews.inputs.get(0);
-
-        assertEquals("Avengers",assertMovie.title);
+        assertEquals("Avengers", storedReviews.inputs.get(0).getTitle());
     }
 
     @Test
@@ -61,11 +61,11 @@ class SortCommandTest {
         storedReviews.add(movie2);
         storedReviews.add(movie3);
 
-        storedReviews.inputs.sort(Comparator.comparing(Media::getGenre));
+        String[] userInput = {"sort", "genre"};
+        SortCommand sort = new SortCommand(storedReviews, userInput);
+        sort.execute();
 
-        Movie assertMovie = (Movie) storedReviews.inputs.get(0);
-
-        assertEquals("Action",assertMovie.genre);
+        assertEquals("Action", storedReviews.inputs.get(0).getGenre());
     }
 
     @Test
@@ -79,14 +79,14 @@ class SortCommandTest {
         storedReviews.add(movie2);
         storedReviews.add(movie3);
 
-        storedReviews.inputs.sort(Comparator.comparing(Media::getDateWatched));
-
-        Movie assertMovie = (Movie) storedReviews.inputs.get(0);
+        String[] userInput = {"sort", "date"};
+        SortCommand sort = new SortCommand(storedReviews, userInput);
+        sort.execute();
 
         try {
             DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
             Date date = dateFormat.parse("15-02-2020");
-            assertEquals(date, assertMovie.getDateWatched());
+            assertEquals(date, storedReviews.inputs.get(0).getDateWatched());
         } catch (ParseException e) {
             fail("Encountered ParseException.");
         }
