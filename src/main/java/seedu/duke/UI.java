@@ -113,11 +113,16 @@ public class UI {
     }
 
     public static void findMessage(ArrayList<Module> matchingModules) {
-        System.out.println("These are your matching modules:");
+        System.out.println("These are your matching module(s):");
         int counter = 1;
         for (Module mod: matchingModules) {
             System.out.println(counter + ". " + mod.toString());
+            counter++;
         }
+    }
+
+    public static void emptyFindMessage() {
+        System.out.println("There are no existing modules that match your keyword inputted.");
     }
 
     public static void NOCEligibleMessage() {
