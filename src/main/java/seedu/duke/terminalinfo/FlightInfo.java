@@ -70,8 +70,8 @@ public class FlightInfo {
     }
 
     public String convertToFileFormat() {
-        String flightDetails = (this.flightNum + "|" + this.airline + "|" + this.destination +
-                "|" + this.departureTime + "|" + this.gateNum + "|" + this.checkLn + "\n");
+        String flightDetails = (this.flightNum + "|" + this.airline + "|" + this.destination
+                + "|" + this.departureTime + "|" + this.gateNum + "|" + this.checkLn + "\n");
         return flightDetails;
     }
 }

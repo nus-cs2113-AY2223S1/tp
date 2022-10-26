@@ -68,8 +68,9 @@ public class PassengerInfo {
     }
 
     public String convertToFileFormat() {
-        String passengerDetails = (this.name + "|" + this.departureTime + "|" + this.flightNumber + "|" + this.gateNumber
-                + "|" + this.boardingGroup + "|" + this.seatNumber + "|" + this.boardingTime + "\n");
+        String passengerDetails = (this.name + "|" + this.departureTime + "|" + this.flightNumber
+                + "|" + this.gateNumber + "|" + this.boardingGroup
+                + "|" + this.seatNumber + "|" + this.boardingTime + "\n");
         return passengerDetails;
     }
 }
