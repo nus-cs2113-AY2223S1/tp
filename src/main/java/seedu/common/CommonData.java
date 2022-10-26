@@ -29,7 +29,7 @@ public class CommonData {
             + "\n`favourite list` \t: to get the list of favourited carparks.";
     public static final String UNFAVOURITE_FORMAT = "`unfavourite CARPARK_ID` \t: unfavourite carpark by its ID.";
     public static final String FIND_FORMAT = "`find CARPARK_ID` \t: Display information about the queried carpark.";
-    public static final String SEARCH_FORMAT = "`search KEYWORD` \t: Find carpark based on its address.";
+    public static final String FILTER_FORMAT = "`filter KEYWORD` \t: Find carpark based on its address.";
     public static final String UPDATE_FORMAT = "`update` \t: To fetch the latest data from LTA.";
     public static final String LIST_FORMAT = "`list` \t: List the carparks and its details.";
     public static final String EXIT_FORMAT = "`exit` \t: To quit parKING.";

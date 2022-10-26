@@ -75,7 +75,7 @@ public class Parser {
             return new ListCommand(carparkList);
         case FilterCommand.COMMAND_WORD:
             if (arguments.trim().isEmpty()) {
-                return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.SEARCH_FORMAT);
+                return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.FILTER_FORMAT);
             }
             return prepareFilter(arguments);
         case UpdateCommand.COMMAND_WORD:
