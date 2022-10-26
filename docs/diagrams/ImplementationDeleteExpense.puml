@@ -9,7 +9,7 @@ Participant "<<class>>\nLocalStorage" as LocalStorage STORAGE_COLOR_1
 
 activate consoleInterface USER_INTERFACE_COLOR_1
 
-ref over consoleInterface: getConsoleCommand()
+ref over consoleInterface: Get Console Command
 
 opt consoleCommand instanceof ConsoleCommandDeleteExpense
     consoleInterface -[USER_INTERFACE_COLOR_1]> consoleInterface : \lrunCommandDeleteExpense(\n\tconsoleCommand:ConsoleCommandDeleteExpense\n)
@@ -21,7 +21,7 @@ opt consoleCommand instanceof ConsoleCommandDeleteExpense
     expenseManager --[DATA_COLOR_1]> consoleInterface
     deactivate expenseManager
 
-    ref over consoleInterface: printInformationalMessage(consoleStr:String)
+    ref over consoleInterface: Print Expense
 
     consoleInterface -[USER_INTERFACE_COLOR_1]> expenseManager : save()
     activate expenseManager DATA_COLOR_1
