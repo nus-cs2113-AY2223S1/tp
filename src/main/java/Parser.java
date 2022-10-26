@@ -138,7 +138,7 @@ public class Parser {
                 String patientId = matcherEdit.group(1);
                 checkPatientExists(patientId);
                 assert !patientId.contains(" ");
-                visitList.editReason(ui, patientId, matcherEdit.group(2));
+                //visitList.editReason(ui, patientId, matcherEdit.group(2));
                 storage.saveVisitData(visitList);
             } else if (matcherViewPatient.find()) {
                 String patientId = matcherViewPatient.group(1);

@@ -231,7 +231,7 @@ public class VisitListTest {
     void editReason() {
         VisitList visitList = new VisitList();
         visitList.addVisit(ui, "S123", "23-05-2020","13:00");
-        visitList.editReason(ui, "S123", "fever");
+        visitList.editReason(ui, 1, "fever");
         String expectedOutput =
                 "You have added a visit!" + System.lineSeparator()
                         + "\t____________________________________________________________"
@@ -249,6 +249,33 @@ public class VisitListTest {
                         + "\tDate: 23-05-2020" + System.lineSeparator()
                         + "\tTime: 13:00" + System.lineSeparator()
                         + "\tReason: fever" + System.lineSeparator()
+                        + "\t____________________________________________________________";
+        assertEquals(expectedOutput, OUTPUT_STREAM.toString().trim());
+    }
+
+    @Test
+    void deleteReason() {
+        VisitList visitList = new VisitList();
+        visitList.addVisit(ui, "S123", "23-05-2020","13:00", "flu");
+        visitList.deleteReason(ui, 1);
+        String expectedOutput =
+                "You have added a visit!" + System.lineSeparator()
+                        + "\t____________________________________________________________"
+                        + System.lineSeparator()
+                        + "\tID: S123" + System.lineSeparator()
+                        + "\tDate: 23-05-2020" + System.lineSeparator()
+                        + "\tTime: 13:00" + System.lineSeparator()
+                        + "\tReason: flu" + System.lineSeparator()
+                        + "\t____________________________________________________________"
+                        + System.lineSeparator()
+                        + "You have deleted the reason for the visit. Here's the updated visit!"
+                        + System.lineSeparator()
+                        + "\t____________________________________________________________"
+                        + System.lineSeparator()
+                        + "\tID: S123" + System.lineSeparator()
+                        + "\tDate: 23-05-2020" + System.lineSeparator()
+                        + "\tTime: 13:00" + System.lineSeparator()
+                        + "\tReason: NIL" + System.lineSeparator()
                         + "\t____________________________________________________________";
         assertEquals(expectedOutput, OUTPUT_STREAM.toString().trim());
     }

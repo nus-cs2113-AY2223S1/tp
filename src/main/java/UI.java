@@ -140,6 +140,13 @@ public class UI {
         printLine();
     }
 
+    public void printDeleteVisitReasonMessage(String visitString) {
+        System.out.println("You have deleted the reason for the visit. Here's the updated visit!");
+        printLine();
+        System.out.println(visitString);
+        printLine();
+    }
+
     public void printViewAllVisitsMessage() {
         System.out.println("Here are all the visits:");
     }
