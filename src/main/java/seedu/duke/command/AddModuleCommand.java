@@ -17,7 +17,7 @@ import java.util.List;
 public class AddModuleCommand extends Command {
     private final Module module;
     private boolean successfullyAdded;
-    boolean isModuleOffered;
+    private boolean isModuleOffered;
 
 
     public static final String COMMAND_WORD = "add";
@@ -32,13 +32,21 @@ public class AddModuleCommand extends Command {
 
         String moduleCode = input[1].toUpperCase();
         this.module = Module.get(moduleCode);
-        successfullyAdded = false;
+        this.successfullyAdded = false;
     }
 
     @Override
     public void execute(State state, Ui ui, Storage storage) {
         int semester = state.getSemester();
-        SelectedModule selectedModule = new SelectedModule(module, semester);
+        SelectedModule selectedModule;
+        try {
+            selectedModule = new SelectedModule(module, semester);
+        } catch (NullPointerException e) {
+            ui.addMessage(module.moduleCode + " is not being offered this semester!");
+            ui.displayUi();
+            return;
+        }
+
         List<SelectedModule> currentSelectedModules = state.getSelectedModulesList();
         isModuleOffered = module.getSemestersOffering().contains(semester);
 
@@ -59,14 +67,10 @@ public class AddModuleCommand extends Command {
     @Override
     public String getExecutionMessage() {
         String outputMessage;
-        if (isModuleOffered) {
-            if (successfullyAdded) {
-                outputMessage = module.moduleCode + " has been added";
-            } else {
-                outputMessage = module.moduleCode + " has already been added!";
-            }
+        if (successfullyAdded) {
+            outputMessage = module.moduleCode + " has been added";
         } else {
-            outputMessage = module.moduleCode + " is not being offered this semester!";
+            outputMessage = module.moduleCode + " has already been added!";
         }
         return outputMessage;
     }
