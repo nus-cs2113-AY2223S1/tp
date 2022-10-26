@@ -131,7 +131,7 @@ _Written by: Brian Wong Yun Long_
 | find                                                                     | find KEYWORDS                                                                | find bus_fare <br> find transport <br> find Sep 13                                                                                                                 |
 | bye                                                                      | bye                                                                          | bye                                                                                                                                                                |
 
-Tags used:
+Tags used ( **OPTIONAL** tags are enclosed with SQUARE BRACKETS "[" and "]" in the **command syntax in the table** above):
 * The `TYPE` is either `"expense"` or `"income"`.
 * The `CATEGORY` is a one-word parameter flexibly defined by the user. [ No numerals, symbols or spacings are allowed ]
 * The `AMOUNT` is a positive numeral that is above 0 and below 100000001. [ No alphabets, symbols or spacings allowed ]
@@ -146,8 +146,6 @@ Tags used:
 * The `NUMBER` is the number of periods to view.  [ Used with "p/PERIODS" ONLY ]
 
 
-Optional tags
-These tags are enclosed with "[" and "]" in the **command syntax** in the table above. 
 
 _Written by: Yong Chin Han_
 
