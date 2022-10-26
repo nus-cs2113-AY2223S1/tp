@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_FILE_NOT_FOUND;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_STORAGE_ILLEGALLY_MODIFIED;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_STORE_INVALID;
 
 //@@author bdthanh
@@ -33,7 +34,7 @@ public class ItemStorage extends Storage {
      * @return The list of items stored in the file.
      * @throws ItemFileNotFoundException If the file cannot be found.
      */
-    public ArrayList<Item> loadData() throws ItemFileNotFoundException {
+    public ArrayList<Item> loadData() throws ItemFileNotFoundException, StoreFailureException {
         try {
             File itemFile = new File(itemFilePath);
             ArrayList<Item> itemList = new ArrayList<>();
@@ -47,6 +48,8 @@ public class ItemStorage extends Storage {
             return itemList;
         } catch (FileNotFoundException e) {
             throw new ItemFileNotFoundException(MESSAGE_FILE_NOT_FOUND);
+        } catch (Exception e) {
+            throw new StoreFailureException(MESSAGE_STORAGE_ILLEGALLY_MODIFIED);
         }
     }
 
