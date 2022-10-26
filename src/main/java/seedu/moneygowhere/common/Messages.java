@@ -640,6 +640,25 @@ public class Messages {
 
     //endregion
 
+    //@@author xzynos
+    //region Defines messages for console command Pay-RecurringPayment
+    public static final String CONSOLE_COMMAND_PAY_RECURRING_PAYMENT_SYNTAX = ""
+            + "SYNTAX: "
+            + ConsoleParserConfigurations.COMMAND_PAY_RECURRING_PAYMENT
+            + " -"
+            + ConsoleParserConfigurations.COMMAND_PAY_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX
+            + " "
+            + ConsoleParserConfigurations
+            .COMMAND_PAY_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_LONG
+            .toUpperCase();
+    public static final String CONSOLE_MESSAGE_COMMAND_PAY_RECURRING_PAYMENT_SUCCESS = ""
+            + "The recurring payment was added as an expense successfully.";
+    public static final String CONSOLE_ERROR_COMMAND_PAY_RECURRING_PAYMENT_INVALID = ""
+            + "The arguments entered are invalid. "
+            + CONSOLE_COMMAND_PAY_RECURRING_PAYMENT_SYNTAX;
+
+    //endregion
+
     //@@author LokQiJun
     //region Defines messages for console command Merge-File
     public static final String CONSOLE_COMMAND_MERGE_FILE_SYNTAX = ""
