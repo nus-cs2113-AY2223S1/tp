@@ -87,7 +87,7 @@ to set up IDEA’s coding style to match ours.
 
 ## 3. Design
 
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+<!-- {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.} -->
 
 ### 3.1 Architecture
 
@@ -120,12 +120,18 @@ The Model component is responsible for dealing with any module related data. It 
 - `Timetable`: Creates a timetable for the user with their selected modules and in their planning semester.
 
 ### 3.3 Parser Component
-![Parser Class](..\docs\images\parserClass.png)  
+
+![Parser Class](images/parserClass.png)  
+
+
 The <code>Parser</code> component can:
 
 - return the correct command type based on user input.
 
 ### 3.4 Command Component
+
+![Command Abstract Class](images/commandClass.png)
+
 The <code>Command</code> component can:
 - execute and return the command type based on the first word of the user input.
 
@@ -133,20 +139,28 @@ Below is a table of command subclasses and their respective command type. The di
 Command class and are all in the command package.
 
 [//]: # (if the table is not necessary, remove it)
-| Command    | Command Type              | Action                                                                  |
-|------------|---------------------------|-------------------------------------------------------------------------|
-| `add`      | `AddModuleCommand`        | Adds the user input module into their timetable.                        |
-| `delete`   | `DeleteModuleCommand`     | Deletes the user input module from their timetable.                     |
-| `help`     | `HelpCommand`             | Displays the help message.                                              |
-| `search`   | `SearchModuleCommand`     | Searches the user input module based on code, title, semester or level. |
-| `select`   | `SelectSlotCommand`       | Selects the time slot for the different lesson types.                   |
-| `semester` | `SelectSemesterCommand`   | Selects the semester that the user want.                                |
-| `get`      | `GetCommand`              | Gets all the details with the user input module code.                   |
-| `view`     | `ViewCommand`             | Views the user timetable with user's selected modules.                  |
-| `bye`      | `ExitCommand`             | Exits the program.                                                      |
-| `nil`      | `InvalidCommand`          | Displays the invalid command message.                                   |
-| `nil`      | `IncompleteModuleCommand` | Display the incomplete command message.                                 |
-| `nil`      | `UnknownCommand`          | Display the unknown command message.                                    |
+| Command Word | Command Subclass                   | Intended Outcome                                                   |
+|--------------|------------------------------------|--------------------------------------------------------------------|
+| `add`        | `AddModuleCommand`                 | Adds the user input module into their timetable.                   |
+| `delete`     | `DeleteModuleCommand`              | Deletes the user input module from their timetable.                |
+| `list`       | `DisplaySelectedModuleListCommand` | Display all the module and slot selected by user                   |
+| `bye`        | `ExitCommand`                      | Exits the program.                                                 |
+| `export`     | `ExportCommand`                    | Creates a portable NUSMod link to create their timetable on NUSMod |
+| `get`        | `GetCommand`                       | Display all details about a module.                                |
+| `help`       | `HelpCommand`                      | Display all possible command words and their usage to user.        |
+| `import`     | `ImportCommand`                    | Import user's timetable from a NUSMod share timetable link.        |
+| `search`     | `SearchModuleCommand`              | Searches similar modules based on code, title, semester or level.  |
+| `semester`   | `SelectSemesterCommand`            | Selects the semester that the user want.                           |
+| `select`     | `SelectSlotCommand`                | Selects the time slot for the different lesson types.              |
+| `view`       | `ViewCommand`                      | Views the user timetable with user's selected modules.             |
+
+<!--
+##### How the feature is implemented
+
+##### Why it is implemented this way.
+
+##### Alternatives considered.
+-->
 
 #### 3.4.1 AddModuleCommand
 
@@ -205,6 +219,23 @@ and improving cohesion, it was moved back under the `DeleteModuleCommand` class.
 #### 3.4.3 HelpCommand
 
 The <code>HelpCommand</code> class extends from the <code>Command</code> class and displays the help message.
+
+##### How the feature is implemented
+The `HelpCommand` class extends the `Command` class
+The `HelpCommand` class compiles the description of each command keyword and their usages by invoking `getDescription` 
+and `getUsage` of the other command subclass.
+Within `HelpCommand` there are other messages that help to make it more user-friendly and intuitive to read.
+Among the message that `HelpCommand` contains, it has a link to the user guide that aim to direct user to the project repository,
+where user are able to read about the various commands in further details.
+
+##### Why it is implemented this way.
+It is to encapsulate the process of getting useful information within one class, where the class only focuses on compiling
+the information and formatting it in a way that makes most intuitive sense to the user.
+
+##### Alternatives considered.
+Each command class to print the messages sequentially, this creates unnecessary complexity when printing information as changing
+the number of commands available will involve refactoring at multiple parts of the codebase.
+
 
 #### 3.4.4 SearchModuleCommand
 ![SearchModuleCommand](images/SearchModuleCommand.png)
@@ -268,24 +299,13 @@ The <code>ViewCommand</code> class extends from the <code>Command</code> class a
 selected modules.
 
 #### 3.4.9 ExitCommand
-
 The <code>ExitCommand</code> class extends from the <code>Command</code> class and exits the program.
-
-#### 3.4.10 InvalidCommand
-
-The <code>InvalidCommand</code> class extends from the <code>Command</code> class and displays the invalid command message.
-
-#### 3.4.11 IncompleteModuleCommand
-
-The <code>IncompleteModuleCommand</code> class extends from the <code>Command</code> class and displays the incomplete module message.
-
-#### 3.4.12 UnknownCommand
-
-The <code>UnknownCommand</code> class extends from the <code>Command</code> class and displays the unknown command message.
 
 ### 3.5 Utils Component
 
 #### 3.5.1 UI Component
+
+![UI Class](images/Ui.png)
 
 The <code>UI</code> component can:
 - read input from the user
@@ -319,7 +339,7 @@ To implement the handling of export in Storage class and import in Command class
 
 #### 3.5.3 Storage Component
 
-![Storage Class](..\docs\images\storageClass.png)
+![Storage Class](images/storageClass.png)
 
 The <code>Storage</code> component can:
 
@@ -346,17 +366,17 @@ This section describes how key features of YAMOM are implemented in the latest r
 
 ### Storage feature
 
-!["Opening saved state"](..\docs\images\storageOpenPreviousState.png)  
+!["Opening saved state"](images/storageOpenPreviousState.png)  
 When the application starts up, the storage openPreviousState function will be called
 to load previous state
 
 ### Target user profile
 
-{Describe the target user profile}
+<!-- {Describe the target user profile} -->
 
 ### Value proposition
 
-{Describe the value proposition: what problem does it solve?}
+<!-- {Describe the value proposition: what problem does it solve?} -->
 
 ## 5. Documentation
 
@@ -372,23 +392,28 @@ code as far as possible.
 
 ## 6.2 Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+<!-- {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing} -->
 
 ## Appendix A: Product scope
 
 ## Appendix B: User Stories
 
 | Version | As a ... | I want to ...                                      | So that I can ...                               |
-| ------- | -------- | -------------------------------------------------- | ----------------------------------------------- |
+|---------|----------|----------------------------------------------------|-------------------------------------------------|
 | v1.0    | student  | search for modules by module code, name or faculty | quickly add them to my planner                  |
 | v1.0    | new user | view my timetable                                  | visualise my school schedule                    |
 | v1.0    | new user | add and remove modules to my planner               | customise and organise my modules this semester |
 | v1.0    | new user | view a short description of each module            | plan what modules to take                       |
 | v1.0    | student  | select timetable slots                             | plan my schedule                                |
+| v2.0    | student  | select semester                                    | plan my schedule in different semesters         |
+| v2.0    | student  | read details about a particular module             | know more about a module                        |
+| v2.0    | student  | export my timetable                                | share my timetable with my friend               |
+| v2.0    | student  | import timetable                                   | plan my timetable that is still in progress     |
+| v2.0    | user     | get help                                           | know how to use the application                 |
 
 ## Appendix C: Non-Functional Requirements
 
-<br>
+- YAMOM should display a colorful timetable to enhance readability
 
 ## Appendix D: Glossary
 
@@ -396,7 +421,9 @@ code as far as possible.
 
 ## Appendix E: Acknowledgements
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+Special thanks to the author of the following sources for inspiration and ideas that contributed to the development of 
+**YAMOM**
+- https://stackoverflow.com/questions/25853393
 
 ### Third-party libraries
 
