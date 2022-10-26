@@ -30,7 +30,11 @@ public class Parser {
         this.mediaList = reviewList;
     }
 
-    
+    public String[] getCommandWord(String input) {
+        String[] result = input.split(" ");
+        return result;
+    }
+
     public void processUserInput(String userInput) {
         //@@author indraneelrp
         final String listCommand = "list";
@@ -43,13 +47,13 @@ public class Parser {
         final String findCommand = "find";
         final String NT = "";
         
-        String[] words = userInput.split(" ");
+        String[] parsedCommand = getCommandWord(userInput);
 
         //@@author naz019
-        assert words[0] != null : "words[0] is supposed to contain user command";
+        assert parsedCommand[0] != null : "words[0] is supposed to contain user command";
 
         //@@author indraneelrp
-        switch (words[0]) {
+        switch (parsedCommand[0]) {
         case endCommand:
             break;
             
@@ -62,7 +66,7 @@ public class Parser {
             break;
     
         case deleteCommand:
-            executeDelete(words);
+            executeDelete(parsedCommand);
             break;
         
         case clearCommand:
@@ -70,15 +74,15 @@ public class Parser {
             break;
 
         case favouriteCommand:
-            executeFavourite(words);
+            executeFavourite(parsedCommand);
             break;
 
         case findCommand:
-            executeFind(words);
+            executeFind(parsedCommand);
             break;
 
         case sortCommand:
-            executeSort(words);
+            executeSort(parsedCommand);
             break;
 
         case NT:
@@ -93,7 +97,8 @@ public class Parser {
     //@@author naz019
     public void executeFind(String[] words) {
         try {
-            executor = new FindCommand(mediaList, words [1]); 
+            String keyWord = words[1];
+            executor = new FindCommand(mediaList, keyWord);
             String output = executor.execute();
             Ui.print(output);
             logger.log(Level.INFO, "\n\tFind command executed");
@@ -134,7 +139,7 @@ public class Parser {
 
     //@@author redders7
     public void addMedia(String[] fields, Integer spacingType) {
-        String name = fields[1].substring(spacingType);
+        String title = fields[1].substring(spacingType);
         double rating = Double.parseDouble(fields[2].substring(ratingSpacing));
         String date = fields[3].substring(dateSpacing);
         String genre = fields[4].substring(genreSpacing);
@@ -147,10 +152,10 @@ public class Parser {
             }
 
             if (spacingType == movieSpacing) {
-                toAdd = new Movie(name, rating, genre, date);
+                toAdd = new Movie(title, rating, genre, date);
             } else {
                 String site = fields[5].substring(siteSpacing);
-                toAdd = new TvShow(name, rating, genre, date, site);
+                toAdd = new TvShow(title, rating, genre, date, site);
             }
             executor = new AddCommand(mediaList, toAdd);
             String output = executor.execute();
@@ -179,12 +184,12 @@ public class Parser {
 
     //@@author indraneelrp
     public void executeAdd(String userInput) {
-        String[] fields = userInput.split("/");
+        String[] reviewFields = userInput.split("/");
         try {
             if (userInput.contains(movieKeyword)) {
-                addMedia(fields, movieSpacing);
+                addMedia(reviewFields, movieSpacing);
             } else if (userInput.contains(tvKeyword)) {
-                addMedia(fields, tvSpacing);
+                addMedia(reviewFields, tvSpacing);
             } else {
                 throw new DukeException();
             }

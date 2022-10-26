@@ -1,0 +1,41 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+hide footbox
+
+ -> Parser: userInput: String
+activate Parser
+Parser -> Parser: processUserInput(userInput)
+activate Parser
+return parsedCommand: String[]
+
+alt find command is given
+    Parser -> Parser: executeFind()
+    activate Parser
+    create "executor: FindCommand"
+    Parser -> "executor: FindCommand": FindCommand(mediaList,keyWord)
+    activate "executor: FindCommand"
+    "executor: FindCommand" --> Parser:
+    deactivate "executor: FindCommand"
+    Parser -> "executor: FindCommand": execute()
+    activate "executor: FindCommand"
+
+    loop for each review
+        participant Movie
+        participant TvShow
+        opt review exists in reviewList
+            alt review is a movie
+                "executor: FindCommand" -> Movie: toString()
+                activate Movie
+                return
+            else review is a Tv Show
+                "executor: FindCommand" -> TvShow: toString()
+                activate TvShow
+                return
+            end
+        end
+end
+deactivate Parser
+destroy "executor: FindCommand"
+
+@enduml

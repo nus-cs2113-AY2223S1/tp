@@ -1,12 +1,55 @@
 @startuml
-'https://plantuml.com/sequence-diagram
+!include style.puml
 
 hide footbox
 
- -> Parser: addMovie()
-Parser -> Parser: executeAdd()
+ -> Parser: userInput: String
 activate Parser
+Parser -> Parser: processUserInput(userInput)
+activate Parser
+return parsedCommand: String[]
 
+alt add command is given
+    Parser -> Parser: executeAdd()
+    activate Parser
+        alt review is a movie
+            Parser -> Parser: addMedia(reviewFields,MovieSpacing)
+            activate Parser
+            Parser -> Movie: Movie(title, rating, genre, date)
+            activate Movie
+            return toAdd: Movie
+            create "executor: AddCommand"
+            Parser -> "executor: AddCommand": AddCommand(reviewList, toAdd)
+            activate "executor: AddCommand"
+            "executor: AddCommand" --> Parser
+            deactivate "executor: AddCommand"
+            Parser -> "executor: AddCommand": execute()
+            activate "executor: AddCommand"
+            return output: String
+            destroy "executor: AddCommand"
+            deactivate Parser
 
+        else review is a TV show
+            Parser -> Parser: addMedia(reviewFields,TvSpacing)
+            activate Parser
+            Parser -> TvShow: TvShow(title, rating, genre, date, site)
+            activate TvShow
+            return toAdd: TvShow
+            create "executor: AddCommand"
+            Parser -> "executor: AddCommand": AddCommand(reviewList, toAdd)
+            activate "executor: AddCommand"
+            "executor: AddCommand" --> Parser
+            deactivate "executor: AddCommand"
+            Parser -> "executor: AddCommand": execute()
+            activate "executor: AddCommand"
+            return output: String
+            deactivate Parser
+
+        end
+        else other command
+        deactivate Parser
+
+end
+destroy "executor: AddCommand"
 
 @enduml
