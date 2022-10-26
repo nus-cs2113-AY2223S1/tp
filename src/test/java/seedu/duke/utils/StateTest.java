@@ -14,9 +14,6 @@ public class StateTest {
 
     @Test
     public void testGetSelectedModulesList_correctSelectedModuleList() {
-        State state = new State();
-        int semester = 1;
-
         // validate correct module details
         Module module1 = Module.get("CS1010S");
         assertNotNull(module1);
@@ -38,6 +35,7 @@ public class StateTest {
 
         // Validating list of selectedModules
         List<SelectedModule> list = new ArrayList<>();
+        int semester = 1;
 
         SelectedModule selectedModule1 = new SelectedModule(module1,semester);
         SelectedModule selectedModule2 = new SelectedModule(module1,semester);
@@ -47,6 +45,8 @@ public class StateTest {
         list.add(selectedModule1);
         list.add(selectedModule2);
         assertNotNull(list);
+
+        State state = new State();
 
         state.setSelectedModulesList(list);
         List<SelectedModule> listReturned = state.getSelectedModulesList();
@@ -72,9 +72,7 @@ public class StateTest {
 
 
     @Test
-    void TestAddSelectedModule_returnedListEqualsGenericListOfSelectedModulesAdded() {
-        State state = new State();
-        int semester = 1;
+    void testAddSelectedModule_returnedListEqualsGenericListOfSelectedModulesAdded() {
 
         // validate correct module details
         Module module1 = Module.get("CS1010S");
@@ -97,6 +95,7 @@ public class StateTest {
 
         // Validating list of selectedModules
         List<SelectedModule> list = new ArrayList<>();
+        int semester = 1;
 
         SelectedModule selectedModule1 = new SelectedModule(module1,semester);
         SelectedModule selectedModule2 = new SelectedModule(module1,semester);
@@ -107,6 +106,8 @@ public class StateTest {
         list.add(selectedModule2);
         assertNotNull(list);
 
+        State state = new State();
+
         // Add modules via state instance method
         state.addSelectedModule(selectedModule1);
         state.addSelectedModule(selectedModule2);
@@ -116,9 +117,7 @@ public class StateTest {
     }
 
     @Test
-    void TestRemoveSelectedModule_returnedListEqualsGenericListOfSelectedModulesAdded() {
-        State state = new State();
-        int semester = 1;
+    void testRemoveSelectedModule_returnedListEqualsGenericListOfSelectedModulesAdded() {
 
         // validate correct module details
         Module module1 = Module.get("CS1010S");
@@ -141,6 +140,7 @@ public class StateTest {
 
         // Validating list of selectedModules
         List<SelectedModule> list = new ArrayList<>();
+        int semester = 1;
 
         SelectedModule selectedModule1 = new SelectedModule(module1,semester);
         SelectedModule selectedModule2 = new SelectedModule(module1,semester);
@@ -150,6 +150,7 @@ public class StateTest {
         //list.add(selectedModule1);
         list.add(selectedModule2);
         assertNotNull(list);
+        State state = new State();
 
         // Add modules via state instance method
         state.addSelectedModule(selectedModule1);

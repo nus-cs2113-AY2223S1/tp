@@ -19,17 +19,12 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class DeleteModuleCommandTest {
 
     @Test
-    public void DeleteCommand_withoutModuleCode_throwsException() {
+    public void testDeleteCommand_withoutModuleCode_throwsException() {
         assertThrows(YamomException.class, () -> new DeleteModuleCommand(new String[]{ "delete" }));
     }
 
     @Test
     void testExecute_validModuleDeleted_StateUpdatedWithModuleDeleted() throws YamomException {
-        State state = new State();
-        Ui ui = new Ui();
-        Storage storage = new Storage();
-        int semester = 1;
-        state.setSemester(semester);
 
         // validate correct module details
         Module module = Module.get("CS1010S");
@@ -40,6 +35,12 @@ class DeleteModuleCommandTest {
         assertEquals(2, module.semesterData.size());
         assertEquals("Computer Science", module.department);
         assertEquals("Computing", module.faculty);
+
+        State state = new State();
+        Ui ui = new Ui();
+        Storage storage = new Storage();
+        int semester = 1;
+        state.setSemester(semester);
 
         SelectedModule selectedModule = new SelectedModule(module,semester);
         assertFalse(state.getSelectedModulesList().contains(selectedModule));
@@ -57,7 +58,7 @@ class DeleteModuleCommandTest {
 
     @Test
     void testIsExit_false() throws YamomException {
-        String testInput[] = {"remove","cs2113"};
+        String[] testInput = {"remove","cs2113"};
         assertFalse(new DeleteModuleCommand(testInput).isExit());
     }
 
@@ -66,12 +67,12 @@ class DeleteModuleCommandTest {
     //}
 
     @Test
-    void TestGetCommandDescription_CorrectCommandDescription() throws YamomException {
+    void testGetCommandDescription_CorrectCommandDescription() throws YamomException {
         assertEquals("delete\t: remove a module from YAMOM timetable.", DeleteModuleCommand.getCommandDescription());
     }
 
     @Test
-    void TestGetUsage_CorrectUsageDescription() {
+    void testGetUsage_CorrectUsageDescription() {
         assertEquals("delete [MODULE_CODE]", DeleteModuleCommand.getUsage());
     }
 

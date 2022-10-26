@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 class SelectedModuleTest {
 
     @Test
-    public void testEquals_instanceWithItself_true(){
+    public void testEquals_instanceWithItself_true() {
         // validate correct module details
         Module module = Module.get("CS1010S");
         assertNotNull(module);
@@ -35,7 +35,7 @@ class SelectedModuleTest {
     }
 
     @Test
-    public void testNotEquals_instanceWithAnotherInstanceWithDifferentSemesterAndSameModule_false(){
+    public void testNotEquals_instanceWithAnotherInstanceWithDifferentSemesterAndSameModule_false() {
         // validate correct module details
         Module module = Module.get("CS1010S");
         assertNotNull(module);
@@ -58,7 +58,7 @@ class SelectedModuleTest {
     }
 
     @Test
-    public void testNotEquals_instanceWithAnotherInstanceWithSameSemesterAndDifferentModule_false(){
+    public void testNotEquals_instanceWithAnotherInstanceWithSameSemesterAndDifferentModule_false() {
         // validate correct module details
         Module module = Module.get("CS1010S");
         assertNotNull(module);
@@ -90,7 +90,7 @@ class SelectedModuleTest {
     }
 
     @Test
-    public void testEquals_notInstanceOfSelectedModule_false(){
+    public void testEquals_notInstanceOfSelectedModule_false() {
         // validate correct module details
         Module module = Module.get("CS1010S");
         assertNotNull(module);
@@ -111,7 +111,7 @@ class SelectedModuleTest {
     }
 
     @Test
-    public void testEquals_instanceWithSameSemesterSameModuleDifferentSlots_true(){
+    public void testEquals_instanceWithSameSemesterSameModuleDifferentSlots_true() {
         // validate correct module details
         Module module = Module.get("CS1010S");
         assertNotNull(module);

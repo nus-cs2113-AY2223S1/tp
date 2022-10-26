@@ -22,17 +22,12 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 class AddModuleCommandTest {
 
     @Test
-    public void addCommand_withoutModuleCode_throwsException() {
+    public void testAddCommand_withoutModuleCode_throwsException() {
         assertThrows(YamomException.class, () -> new AddModuleCommand(new String[]{ "add" }));
     }
 
     @Test
     void testExecute_validModuleAdded_StateUpdatedWithNewModule() throws YamomException {
-        State state = new State();
-        Ui ui = new Ui();
-        Storage storage = new Storage();
-        int semester = 1;
-        state.setSemester(semester);
 
         // validate correct module details
         Module module = Module.get("CS1010S");
@@ -43,6 +38,12 @@ class AddModuleCommandTest {
         assertEquals(2, module.semesterData.size());
         assertEquals("Computer Science", module.department);
         assertEquals("Computing", module.faculty);
+
+        State state = new State();
+        Ui ui = new Ui();
+        Storage storage = new Storage();
+        int semester = 1;
+        state.setSemester(semester);
 
         SelectedModule selectedModule = new SelectedModule(module,semester);
         assertFalse(state.getSelectedModulesList().contains(selectedModule));
@@ -56,12 +57,6 @@ class AddModuleCommandTest {
     @Test
     @Disabled
     void testExecute_InvalidModuleAdded_StateDoesNotContainNewModule() throws YamomException {
-        State state = new State();
-        Ui ui = new Ui();
-        Storage storage = new Storage();
-        int semester = 1;
-        state.setSemester(semester);
-
         // validate correct module details
         Module module = Module.get("CS1010S");
         assertNotNull(module);
@@ -71,6 +66,12 @@ class AddModuleCommandTest {
         assertEquals(2, module.semesterData.size());
         assertEquals("Computer Science", module.department);
         assertEquals("Computing", module.faculty);
+
+        State state = new State();
+        Ui ui = new Ui();
+        Storage storage = new Storage();
+        int semester = 1;
+        state.setSemester(semester);
 
         SelectedModule selectedModule = new SelectedModule(module,semester);
         assertNull(state.getSelectedModulesList().contains(selectedModule));
@@ -84,7 +85,7 @@ class AddModuleCommandTest {
 
     @Test
     void testIsExit_false() throws YamomException {
-        String testInput[] = {"add","cs2113"};
+        String[] testInput = {"add","cs2113"};
         assertFalse(new AddModuleCommand(testInput).isExit());
     }
 
@@ -93,12 +94,12 @@ class AddModuleCommandTest {
     //}
 
     @Test
-    void TestGetCommandDescription_CorrectCommandDescription() throws YamomException {
+    void testGetCommandDescription_CorrectCommandDescription() throws YamomException {
         assertEquals("add\t: add a module into YAMOM timetable.", AddModuleCommand.getCommandDescription());
     }
 
     @Test
-    void TestGetUsage_CorrectUsageDescription() {
+    void testGetUsage_CorrectUsageDescription() {
         assertEquals("add [MODULE_CODE]", AddModuleCommand.getUsage());
     }
 }
