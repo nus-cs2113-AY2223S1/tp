@@ -1,4 +1,4 @@
-package command.petCommand;
+package command.petcommand;
 
 import command.Command;
 import pet.Pet;
@@ -10,7 +10,8 @@ public class AddPetCommand extends Command {
     private String name;
     private String species;
     private boolean isHealthy;
-    public AddPetCommand(String name, String species, boolean isHealthy){
+
+    public AddPetCommand(String name, String species, boolean isHealthy) {
         super();
 
         this.name = name;
@@ -26,7 +27,7 @@ public class AddPetCommand extends Command {
         printAddPetMessage();
     }
 
-    public void printAddPetMessage(){
+    public void printAddPetMessage() {
         System.out.println(String.format("Pet has been registered: name: %s, species: %s", name, species));
     }
 

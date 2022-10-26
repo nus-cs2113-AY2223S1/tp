@@ -2,9 +2,9 @@ package parser;
 
 import command.Command;
 import command.EmptyCommand;
-import command.appointmentCommand.AddAppointmentCommand;
-import command.appointmentCommand.RemoveAppointmentCommand;
-import command.appointmentCommand.ViewAppointmentCommand;
+import command.appointmentcommand.AddAppointmentCommand;
+import command.appointmentcommand.RemoveAppointmentCommand;
+import command.appointmentcommand.ViewAppointmentCommand;
 import exception.DukeException;
 
 public class AppointmentParser {

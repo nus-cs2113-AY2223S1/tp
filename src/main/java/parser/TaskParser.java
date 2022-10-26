@@ -2,16 +2,12 @@ package parser;
 
 import command.Command;
 import command.EmptyCommand;
-import command.petCommand.AddPetCommand;
-import command.petCommand.RemovePetCommand;
-import command.petCommand.ViewPetCommand;
-import command.taskCommand.AddTaskCommand;
-import command.taskCommand.ReassignTaskCommand;
-import command.taskCommand.RemoveTaskCommand;
-import command.taskCommand.ViewTaskCommand;
+import command.petcommand.RemovePetCommand;
+import command.taskcommand.AddTaskCommand;
+import command.taskcommand.ReassignTaskCommand;
+import command.taskcommand.RemoveTaskCommand;
+import command.taskcommand.ViewTaskCommand;
 import exception.DukeException;
-
-import javax.swing.text.View;
 
 public class TaskParser {
     private int lengthOfSignature;

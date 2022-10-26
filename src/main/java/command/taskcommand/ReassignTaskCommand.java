@@ -1,11 +1,11 @@
-package command.taskCommand;
+package command.taskcommand;
 
 import command.Command;
 import task.TaskList;
 
 public class ReassignTaskCommand extends Command {
 
-    public final static String COMMAND_WORD = "reassign";
+    public static final String COMMAND_WORD = "reassign";
 
     private final int taskId;
 
