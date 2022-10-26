@@ -3,7 +3,6 @@ package seedu.commands;
 import seedu.data.CarparkFilteredList;
 import seedu.data.CarparkList;
 import seedu.exception.NoCarparkFoundException;
-import seedu.exception.NoCommandArgumentException;
 import seedu.parser.search.Sentence;
 
 /**
@@ -49,7 +48,7 @@ public class FilterCommand extends Command {
             }
             carparkList.resetBoldForAllCarparks();
             return new CommandResult(result);
-        } catch (NoCarparkFoundException e){
+        } catch (NoCarparkFoundException e) {
             return new CommandResult(e.getMessage());
         }
 
