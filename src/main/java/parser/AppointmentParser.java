@@ -95,7 +95,7 @@ public class AppointmentParser {
 
             String status = input.substring(s);
             int statusInt = parser.isStatus(status);
-            if (statusInt == -1 || (statusInt != 1 && statusInt != 0)) {
+            if (statusInt == -1 || statusInt > 2) {
                 throw new DukeException();
             }
 

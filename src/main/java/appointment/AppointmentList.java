@@ -73,6 +73,7 @@ public class AppointmentList {
                 System.out.print("Noted. I've set this service: ");
                 System.out.print("Pet " + appointment.petName + " | " + "Service " + appointment.service);
                 System.out.println(" as " + appointment.getAppointmentStatus());
+                setFlag = true;
             }
         }
         if (!setFlag) {

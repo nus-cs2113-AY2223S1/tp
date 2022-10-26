@@ -49,6 +49,9 @@ public class Appointment {
         if (appointmentStatus == AppointmentStatus.PROCESSING) {
             return "PROCESSING";
         }
+        if (appointmentStatus == AppointmentStatus.PROCESSED) {
+            return "PROCESSED";
+        }
         // control should never reach here
         return "";
     }
