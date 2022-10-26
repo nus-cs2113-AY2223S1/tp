@@ -219,7 +219,7 @@ Example of usage:
 
 **Input**
 
-```update```
+ `update`
 
 **Output**
 
