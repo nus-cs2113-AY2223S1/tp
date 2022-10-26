@@ -24,14 +24,12 @@ The Ui Class handles user input
 ![img_1.png](imgs/FindCommandSequence.png)
 
 #### List
-Outputs reviews in movie and tv show categories. 
 ![img_2.png](imgs/ListCommandSequence.png)
 
 #### Sort
 ![img.png](imgs/sortSequence.png)
 
 ### Remove
-Removes media from a specified index and type. Outputs an error if user specifies invalid type or invalid format (less than 3 word inputs)
 ![img.png](imgs/deleteSequence.png)
 
 #### Clearing the review list
