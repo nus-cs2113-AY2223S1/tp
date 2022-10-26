@@ -145,8 +145,8 @@ public class Account {
                         AccountHistoryFile.updateLoginAccount(wallet.getUserName(), loginTime, in);
                         break;
                     case "transfer":
-                        MoneyCommand.transferMoney(wallet, recipientUsername, trasnferCurrency, amount);
-                        AccountUi.showTransfer(recipientUsername, trasnferCurrency, amount);
+                        MoneyCommand.transferMoney(wallet, recipientUsername, transferCurrency, amount);
+                        AccountUi.showTransfer(recipientUsername, transferCurrency, amount);
                         AccountHistoryFile.updateLoginAccount(wallet.getUserName(), loginTime, in);
                         break;
                     default:
@@ -294,5 +294,4 @@ public class Account {
         WalletFile.updateWallet(wallet);
         AccountUi.showSetDefaultCurrencyResult(oldCurrency.getAbbrName(), newCurrency.getAbbrName());
     }
-
 }

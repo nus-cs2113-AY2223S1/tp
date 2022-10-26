@@ -34,7 +34,7 @@ public class PersonalCurrencyList {
             scanner = new Scanner(file,"UTF-8");
         } catch (FileNotFoundException e) {
             throw new FinanceException(FinanceException.ExceptionCollection.CURRENCY_FILE_NOT_FOUND_EXCEPTION);
-        } // create a Scanner using the File as the source
+        }
         while (scanner.hasNext()) {
             String line = scanner.nextLine();
             String[] items = line.split(",");

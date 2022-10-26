@@ -12,8 +12,6 @@ import static seedu.duke.InputManager.receiveInputLine;
 
 public class NewCurrency {
 
-    //maybe add some extra thing in the end that shows that it is your own added currency so then everyone can have their own currencies with in the file
-
     public static void addNewCurrency() throws IOException {
 
         String newCurrency = "";
@@ -40,25 +38,20 @@ public class NewCurrency {
         //Adding to the list of currencies
         CurrencyStructure currency = new CurrencyStructure(abbrName, fullName, symbol, rate);
         currencyList.add(currency);
+        personalCurrencyList.add(currency);
     }
-
-
 
     public static void removeCurrency() throws FinanceException {
         NewCurrencyUi.showCurrencyRemovePrompt();
         NewCurrencyUi.showCurrencyRemoveQueryPrompt();
         String abbrName = "!" + receiveInputLine();
-        CurrencyStructure currenctCurrency = PersonalCurrencyList.findCurrencyByAbbrName(abbrName);
+        CurrencyStructure currenctCurrency = CurrencyList.findCurrencyByAbbrName(abbrName);
 
         //only if the currency we are trying to remove is personal, can we remove it
-        if (personalCurrencyList.contains(currenctCurrency)) {
+        if (currencyList.contains(currenctCurrency)) {
             NewCurrencyFileWorkings.deleteFromCurrencies(currenctCurrency);
         } else {
             throw new FinanceException(FinanceException.ExceptionCollection.NOT_PERSONAL_CURRENCY);
         }
-
-
-
-        //if the currencies first letter is ! then can remove otherwise not
     }
 }
