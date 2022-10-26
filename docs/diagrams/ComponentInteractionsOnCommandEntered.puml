@@ -34,7 +34,7 @@ UserInterface -[USER_INTERFACE_COLOR_1]> Parser : parse(consoleInput:String)
 
 activate Parser PARSER_COLOR_1
 
-Parser --[PARSER_COLOR_1]> UserInterface : consoleCommandAddExpense:ConsoleCommand
+Parser --[PARSER_COLOR_1]> UserInterface : consoleCommand:ConsoleCommand
 
 deactivate Parser
 
