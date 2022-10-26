@@ -217,13 +217,13 @@ I have added the following Expense transaction:
 Budget remained for Sep 2022: $9980. Keep it up!
 ____________________________________________________________
 ____________________________________________________________
-Invalid amount, please ensure your amount is in positive numerals ($10000000 or less) only!
+Invalid amount, please ensure your amount is in positive whole number ($10000000 or less) only!
 ____________________________________________________________
 ____________________________________________________________
-Invalid amount, please ensure your amount is in positive numerals ($10000000 or less) only!
+Invalid amount, please ensure your amount is in positive whole number ($10000000 or less) only!
 ____________________________________________________________
 ____________________________________________________________
-Invalid amount, please ensure your amount is in positive numerals ($10000000 or less) only!
+Invalid amount, please ensure your amount is in positive whole number ($10000000 or less) only!
 ____________________________________________________________
 ____________________________________________________________
 I have added the following Income transaction:
@@ -410,13 +410,13 @@ ____________________________________________________________
 Invalid category, please ensure your category is correct!
 ____________________________________________________________
 ____________________________________________________________
-Invalid amount, please ensure your amount is in positive numerals ($10000000 or less) only!
+Invalid amount, please ensure your amount is in positive whole number ($10000000 or less) only!
 ____________________________________________________________
 ____________________________________________________________
-Invalid amount, please ensure your amount is in positive numerals ($10000000 or less) only!
+Invalid amount, please ensure your amount is in positive whole number ($10000000 or less) only!
 ____________________________________________________________
 ____________________________________________________________
-Invalid amount, please ensure your amount is in positive numerals ($10000000 or less) only!
+Invalid amount, please ensure your amount is in positive whole number ($10000000 or less) only!
 ____________________________________________________________
 ____________________________________________________________
 Invalid date, please ensure your date format is correct!
