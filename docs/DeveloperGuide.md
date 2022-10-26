@@ -98,18 +98,37 @@ Step 5: Now we have the abbreviation of the currency and we will add `‘!’` i
 ## Product scope
 ### Target user profile
 
-{Describe the target user profile}
+ Someone who works with many types of currencies, is interested in the forex market, or is interested in having a completely online wallet for tracking the money in the account.
 
 ### Value proposition
 
-{Describe the value proposition: what problem does it solve?}
+User who has a wallet which can have multiple currencies and can change them from one currency to another, essentially a bank account manager, where user can also withdraw and add money to the account. If they are trying to withdraw more money than they have in one currency we give them the option of exchange some from another currency (e.g trying to withdraw 100 SGD, but only have 80 SGD, we would tell them they can convert 14.34 EUR to match the remaining 20 SGD). They can give out requests to convert either one, select amount of currencies or all of the currencies they have to one specific currency. 
 
 ## User Stories
 
 |Version| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+|v1.0|New User|Create a wallet| can access my wallet and see its total value|
+|v1.0|User|Add money to the wallet| to increase the balance in my account|
+|v1.0|User|Withdraw money| I can indicate money has been taken from the wallet|
+|v1.0|User|get the total balance in their account|get the total amount of money in the account in their default currency|
+|v1.0|User|get the wallet details|know how much of each currency they currently have in the account|
+|v1.0|User|Request my wallet to be deleted|So that all of the data on my wallet and everything will be deleted.|
+|v1.0|User|ask for the current exchange rate between two currencies| know the rate|
+|v1.0|User|Get details about a certain currency|Find all of its symbols and the main conversion rates between the major currencies|
+|v1.0|New User|Set username and password|Sets username and password to account in order for more secure access|
+
+|v2.0|User|Change password|I can change my password|
+|v2.0|User|Change username|I can change my username|
+|v2.0|User|get their account statement for the current cycle|get some sense of tracking within a single execution|
+|v2.0|User|Transfer funds|Send some money to some other wallet|
+|v2.0|User|Set default currency|So all withdrawals are made in that currency|
+|v2.0|User|View all available currencies|I can see all the currencies that are available to exchange|
+|v2.0|User|Convert all currencies to one currency|So that I can convert all of my currencies to only one currency|
+|v2.0|User|Edit the wallet settings|To change the default currency|
+|v2.0|User|Exchange currencies| I can get some of another currency|
+|v2.0|User|add a new personal currency|use that with my other transactions and keep track of it|
+|v2.0|User|remove my personal currency|I can remove once it's outdated or not needed anymore|
 
 ## Non-Functional Requirements
 
