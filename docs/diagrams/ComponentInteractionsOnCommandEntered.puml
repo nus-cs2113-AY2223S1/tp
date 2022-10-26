@@ -26,27 +26,27 @@ note right
     entered by the user
 end note
 
-UserInterface --[USER_INTERFACE_COLOR_1]> UserInterface : consoleInput: String
+UserInterface --[USER_INTERFACE_COLOR_1]> UserInterface : consoleInput:String
 
 deactivate UserInterface
 
-UserInterface -[USER_INTERFACE_COLOR_1]> Parser : parse(consoleInput: String)
+UserInterface -[USER_INTERFACE_COLOR_1]> Parser : parse(consoleInput:String)
 
 activate Parser PARSER_COLOR_1
 
-Parser --[PARSER_COLOR_1]> UserInterface : consoleCommandAddExpense: ConsoleCommand
+Parser --[PARSER_COLOR_1]> UserInterface : consoleCommandAddExpense:ConsoleCommand
 
 deactivate Parser
 
-UserInterface --[USER_INTERFACE_COLOR_1]> UserInterface : consoleCommand: ConsoleCommand
+UserInterface --[USER_INTERFACE_COLOR_1]> UserInterface : consoleCommand:ConsoleCommand
 
 deactivate UserInterface
 
-UserInterface -[USER_INTERFACE_COLOR_1]> UserInterface : runCommandAddExpense(consoleCommand: ConsoleCommandAddExpense)
+UserInterface -[USER_INTERFACE_COLOR_1]> UserInterface : runCommandAddExpense(consoleCommand:ConsoleCommandAddExpense)
 
 activate UserInterface USER_INTERFACE_COLOR_1
 
-UserInterface -[USER_INTERFACE_COLOR_1]> Data : addExpense(expense: Expense)
+UserInterface -[USER_INTERFACE_COLOR_1]> Data : addExpense(expense:Expense)
 
 activate Data DATA_COLOR_1
 
@@ -54,7 +54,7 @@ Data --[DATA_COLOR_1]> UserInterface
 
 deactivate Data
 
-UserInterface -[USER_INTERFACE_COLOR_1]> UserInterface : printInformationalMessage(message: String)
+UserInterface -[USER_INTERFACE_COLOR_1]> UserInterface : printInformationalMessage(message:String)
 
 activate UserInterface USER_INTERFACE_COLOR_1
 
@@ -66,7 +66,7 @@ UserInterface -[USER_INTERFACE_COLOR_1]> Data : save()
 
 activate Data DATA_COLOR_1
 
-Data -[DATA_COLOR_1]> Storage : saveToFile(expenses: ArrayList<Expenses>)
+Data -[DATA_COLOR_1]> Storage : saveToFile(expenses:ArrayList<Expense>)
 
 activate Storage STORAGE_COLOR_1
 
