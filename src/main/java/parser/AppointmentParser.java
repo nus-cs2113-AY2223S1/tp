@@ -15,7 +15,7 @@ public class AppointmentParser {
         this.lengthOfSignature = lengthOfSignature;
     }
 
-    public Command parseAppointment(String input){
+    public Command parseAppointment(String input) {
         try {
             if (!input.contains(" ")) {
                 if (input.equals("view")) {

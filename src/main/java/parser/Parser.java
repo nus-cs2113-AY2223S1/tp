@@ -64,7 +64,7 @@ public class Parser {
 
         String id = input.substring(input.indexOf(format) + lengthOfSignature);
 
-        try{
+        try {
             isInt(id);
         } catch (DukeException e) {
             throw new DukeException();
@@ -94,7 +94,7 @@ public class Parser {
     public int isHealthy(String input) throws DukeException {
         try {
             return numberInInput(input, " h/");
-        } catch (DukeException e){
+        } catch (DukeException e) {
             throw new DukeException();
         }
     }

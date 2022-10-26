@@ -17,12 +17,12 @@ public class TaskParser {
     private int lengthOfSignature;
     private Parser parser;
 
-    public TaskParser(Parser parser, int lengthOfSignature){
+    public TaskParser(Parser parser, int lengthOfSignature) {
         this.parser = parser;
         this.lengthOfSignature = lengthOfSignature;
     }
 
-    public Command parseTask(String input){
+    public Command parseTask(String input) {
         try {
             if (!input.contains(" ")) {
                 if (input.equals("view")) {
@@ -99,9 +99,7 @@ public class TaskParser {
             int EmployeeIndexInt = Integer.parseInt(EmployeeIndexString);
 
             return new ReassignTaskCommand(TaskIndexInt, EmployeeIndexInt);
-        }
-
-        catch (DukeException e) {
+        } catch (DukeException e) {
             return new EmptyCommand();
         }
     }
