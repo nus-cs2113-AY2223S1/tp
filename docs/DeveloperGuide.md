@@ -73,7 +73,7 @@ The sequence diagrams referenced by the component interaction diagram can be see
 * `MoneyGoWhere` calls `UserInterface#run()` to start the interface between the program and the user.
 * `UserInterface#run()` will execute continuously in a loop until the user enters the command `Bye`.
 * `UserInterface#run()` calls `UserInterface#getConsoleCommand()` to read and parse the user's input.
-* `UserInterface` will call the corresponding command handler function based on the user's input.\
+* `UserInterface#run()` will then call the corresponding command handler function based on the user's input.\
 In the example above, `ConsoleCommand` is an instance of `ConsoleCommandAddExpense` and hence,
 `UserInterface#runCommandAddExpense()` is called.
 * When the command handler function is called, it calls `Data` functions to perform operations on data.\
@@ -85,9 +85,19 @@ In the example above, `UserInterface#runCommandAddExpense()` calls `Storage#save
 
 ![Component-Interaction-On-Command-Entered](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentInteractionsRefGetUserCommand.puml)
 
+* `UserInterface#getConsoleCommand()` calls `UserInterface#getConsoleInput()` to read the user's input as a string.
+* `UserInterface#getConsoleCommand()` then calls `Parser#parse()` to parse the input string into the corresponding console command object.
+
 ![Component-Interaction-On-Command-Entered](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentInteractionsRefPrintExpense.puml)
 
+* `UserInterface#run()` will call the corresponding convert object function based on the data object's class.
+In the example above, `UserInterface#run()` calls `UserInterface#convertExpenseToConsoleString()` to convert the expense object into a formatted string.
+* `UserInterface#run()` will then call `UserInterface#printInformationalMessage()` to print the converted object.
+
 ![Component-Interaction-On-Command-Entered](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentInteractionsRefSaveExpensesToFile.puml)
+
+* `UserInterface#run()` calls `Data#save()` to save the data managed by the data manager class.
+* `Data#save()` calls `Storage#saveToFile()` to write the data to a file.
 
 ### Common Component
 
