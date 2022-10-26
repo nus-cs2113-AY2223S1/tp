@@ -32,7 +32,7 @@ opt consoleCommand instanceof ConsoleCommandEditExpense
     consoleInterface -[USER_INTERFACE_COLOR_1]> expenseManager : save()
     activate expenseManager DATA_COLOR_1
 
-    expenseManager -[DATA_COLOR_1]> LocalStorage : \lsaveToFile(\n\texpenses:ArrayList<Expenses>\n)
+    expenseManager -[DATA_COLOR_1]> LocalStorage : \lsaveToFile(\n\texpenses:ArrayList<Expense>\n)
     activate LocalStorage STORAGE_COLOR_1
 
     LocalStorage --[STORAGE_COLOR_1]> expenseManager
