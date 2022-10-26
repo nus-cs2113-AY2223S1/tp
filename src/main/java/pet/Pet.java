@@ -35,8 +35,8 @@ public class Pet {
     private void initPetStatus() {
         Random random = new Random();
         int randomNumber = random.nextInt(NUM_OF_STATUS) + 1;
-        if (this.isHealthy){
-            switch (randomNumber){
+        if (this.isHealthy) {
+            switch (randomNumber) {
             case 1:
                 status = PetHealthyStatus.crazy;
                 wellness = 10;
@@ -58,9 +58,8 @@ public class Pet {
                 wellness = 6;
                 break;
             }
-        }
-        else {
-            switch (randomNumber){
+        } else {
+            switch (randomNumber) {
             case 1:
                 status = PetUnhealthyStatus.exhausted;
                 wellness = 5;

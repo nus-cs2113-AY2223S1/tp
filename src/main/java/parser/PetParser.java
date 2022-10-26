@@ -16,7 +16,7 @@ public class PetParser {
     }
 
 
-    public Command parsePet(String input){
+    public Command parsePet(String input) {
         try {
             if (!input.contains(" ")) {
                 if (input.equals("view")) {
@@ -43,7 +43,7 @@ public class PetParser {
         }
     }
 
-    public Command prepareAddPet(String input){
+    public Command prepareAddPet(String input) {
         try {
             int startOfN = input.indexOf(" n/");
             int startOfS = input.indexOf(" s/");
@@ -68,25 +68,23 @@ public class PetParser {
             boolean isHealthy = statusInt == 0 ? false : true;
 
             return new AddPetCommand(name, species, isHealthy);
-        }
-
-        catch (DukeException e){
+        } catch (DukeException e) {
             return new EmptyCommand();
         }
     }
 
 
     public Command prepareRemovePet(String input) {
-        try{
+        try {
             int index = parser.indexOfInput(input);
-            if(index <= 0 || index > Pet.numOfPets){
+            if (index <= 0 || index > Pet.numOfPets) {
                 System.out.println("Invalid Input! please enter a valid id");
                 throw new DukeException();
             }
             return new RemovePetCommand(index);
         }
 
-        catch (DukeException e){
+        catch (DukeException e) {
             return new EmptyCommand();
         }
     }

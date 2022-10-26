@@ -1,6 +1,6 @@
 package pet;
 
-public enum PetUnhealthyStatus implements PetStatus{
+public enum PetUnhealthyStatus implements PetStatus {
     exhausted,
     painful,
     injured,
