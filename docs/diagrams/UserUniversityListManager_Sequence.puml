@@ -12,9 +12,9 @@ return : boolean
 alt school already exists
 
 else new school list
-    UserUniversityListManager -> UserUniversityList : UserUniversityList(input)
+    UserUniversityListManager -> UserUniversityList **: new
     activate UserUniversityList
-    return newList : UserUniversityList
+    return UserUniversityList
     UserUniversityListManager -> UserUniversityListManager : put(input, newList)
     activate UserUniversityListManager
 
