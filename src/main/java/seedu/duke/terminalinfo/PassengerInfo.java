@@ -66,4 +66,8 @@ public class PassengerInfo {
     public void setGateNumber(String newGateNum) {
         this.gateNumber = newGateNum;
     }
+
+    public void setDepartureTime(String newDepartureTime) {
+        this.departureTime = newDepartureTime;
+    }
 }

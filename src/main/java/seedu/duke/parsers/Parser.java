@@ -17,6 +17,7 @@ public class Parser {
     protected static Ui ui = new Ui();
     protected static final String EXIT_ENTITY = "bye";
     protected static final String MODIFY_COMMAND = "modify";
+    protected static final String DELAY_COMMAND = "delay";
     protected static final String PASSENGER_ENTITY = "passenger";
     protected static final String FLIGHT_ENTITY = "flight";
     protected static final int ENTITY_INDEX = 0;
@@ -68,6 +69,8 @@ public class Parser {
             command = new ExitCommand();
         } else if (isModify) {
             command = ModificationParser.parse(inputWords);
+        } else if (isDelay) {
+            command = ModificationParser.parse(inputWords);
         } else {
             throw new SkyControlException(ui.getErrorMessage());
         }
@@ -79,6 +82,7 @@ public class Parser {
         isFlightEntity = isFlightEntity(lineInput);
         isExit = isExitCommand(lineInput);
         isModify = isModifyCommand(lineInput);
+        isDelay = isDelayCommand(lineInput);
     }
 
     public static void checkOperation(String[] inputWords) {
@@ -86,7 +90,6 @@ public class Parser {
         isAdd = operation.equalsIgnoreCase("add");
         isDelete = operation.equalsIgnoreCase("delete");
         isList = operation.equalsIgnoreCase("list");
-        isDelay = operation.equalsIgnoreCase("delay");
     }
 
     public static boolean isPassengerEntity(String lineInput) throws SkyControlException {
@@ -94,7 +97,7 @@ public class Parser {
         isPassengerEntity = entity.equalsIgnoreCase(PASSENGER_ENTITY);
         return isPassengerEntity;
     }
-
+    //@@author shengiv
     public static boolean isFlightEntity(String lineInput) throws SkyControlException {
         getEntity(lineInput);
         isFlightEntity = entity.equalsIgnoreCase(FLIGHT_ENTITY);
@@ -107,6 +110,14 @@ public class Parser {
         return isModify;
     }
 
+    //@@author Franky4566
+    public static boolean isDelayCommand(String lineInput) throws SkyControlException {
+        getEntity(lineInput);
+        isDelay = entity.equalsIgnoreCase(DELAY_COMMAND);
+        return isDelay;
+    }
+
+    //@@author ivanthengwr
     public static boolean isExitCommand(String lineInput) {
         try {
             getEntity(lineInput);

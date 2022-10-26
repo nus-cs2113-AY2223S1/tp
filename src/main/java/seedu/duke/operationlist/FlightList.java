@@ -11,12 +11,10 @@ public class FlightList extends OperationList {
     private static final String FLIGHT_ADD_COMMAND = "flight add";
     private static final String FLIGHT_ADD_DELIMITER = "flight add ";
     private static final String FLIGHT_DELETE_COMMAND = "flight delete";
-    private static final String FLIGHT_DELAY_COMMAND = "flight delay";
-    private static final String FLIGHT_DELAY_DELIMITER = "flight delay ";
     private static final String FLIGHT_NUMBER_DELIMITER = " fn/";
     private static final String AIRLINE_DELIMITER = " a/";
     private static final String DESTINATION_DELIMITER = " d/";
-    private static final String DEPARTURE_TIME_DELIMITER = " t/";
+    private static final String DEPARTURE_TIME_DELIMITER = " dt/";
     private static final String GATE_NUMBER_DELIMITER = " gn/";
     private static final String CHECK_IN_ROW_DELIMITER = " c/";
 
@@ -29,12 +27,14 @@ public class FlightList extends OperationList {
     protected static boolean isGateNumberPresent = false;
     protected static String timeRegex = "([01]?[0-9]|2[0-3])[0-5][0-9]";
     protected static String checkInRegex = "[0-9]{2}-[0-9]{2}";
+    protected static String gateNumRegex = "^(\\d?[0-9]|[1-9]0)$";
     protected String flightNumber;
     protected String airline;
     protected String destination;
     protected String departureTime;
     protected String gateNumber;
     protected String checkIn;
+    protected String oldDepartureTime;
 
     protected static int numOfFlights = 0;
 
@@ -183,18 +183,28 @@ public class FlightList extends OperationList {
         }
     }
 
-        public void delayOperation(String command) throws SkyControlException{
-        try {
-//            System.out.println(command);
-            checkCommandLength(command.substring(FLIGHT_DELAY_COMMAND.length()));
-//            getFlightNumber(command.substring(FLIGHT_DELAY_DELIMITER.length()));
-//            getDepartureTime()
-        } catch (SkyControlException e) {
-          ui.showEmptyDescriptionMessage();
+    //@@author Franky4566
+    @Override
+    public void delayFlightDeparture(String flightNum, String newDepartureTime) throws SkyControlException {
+        FlightInfo flight = findFlightInfo(flightNum);
+        getFlightAttributes(flight);
+        oldDepartureTime = departureTime;
+        departureTime = newDepartureTime;
+
+        validateModificationDetails(flight);
+        checkDelayTime(oldDepartureTime, departureTime);
+        flight.setDepartureTime(newDepartureTime);
+        flights.add(flight);
+        flightIndex++;
+        ui.showUpdatedDepartureTime(flightNum, oldDepartureTime, newDepartureTime);
+    }
+
+    private void checkDelayTime(String oldDepartureTime, String newDepartureTime) throws SkyControlException {
+        if (Integer.parseInt(oldDepartureTime) > Integer.parseInt(newDepartureTime)) {
+            throw new SkyControlException(ui.getWrongDelayTimeError(flightNumber, oldDepartureTime));
         }
     }
 
-    //@@author Franky4566
     public void getNumberOfFlights() {
         assert numOfFlights >= 0;
         numOfFlights = flights.size();
@@ -210,7 +220,7 @@ public class FlightList extends OperationList {
     }
 
     private void getFlightNumber(String detail) throws SkyControlException {
-        if(isAdd) {
+        if (isAdd) {
             flightNumber = extractDetail(detail, FLIGHT_NUMBER_DELIMITER, AIRLINE_DELIMITER).toUpperCase();
         }
     }
@@ -245,6 +255,7 @@ public class FlightList extends OperationList {
         validateDestinationLength(destination);
         validateTime(departureTime);
         validateCheckIn(checkIn);
+        validateGateNumber(gateNumber);
     }
 
     private void checkFlightNumberDuplicates() throws SkyControlException {
@@ -270,7 +281,7 @@ public class FlightList extends OperationList {
     private void validateFlight(int index) {
         getNumberOfFlights();
         assert index < numOfFlights;
-        isFlightNumberPresent = flights.get(index).getFlightNumber().contains(flightNumber);
+        isFlightNumberPresent = flights.get(index).getFlightNumber().equals(flightNumber);
         isDepartureTimePresent = flights.get(index).getDepartureTime().contains(departureTime);
         isGateNumberPresent = flights.get(index).getGateNum().contains(gateNumber);
     }
@@ -312,6 +323,14 @@ public class FlightList extends OperationList {
         Matcher m = p.matcher(checkIn);
         if (!m.matches()) {
             throw new SkyControlException(ui.getCheckInFormatError());
+        }
+    }
+
+    private void validateGateNumber(String gateNumber) throws SkyControlException {
+        Pattern p = Pattern.compile(gateNumRegex);
+        Matcher m = p.matcher(gateNumber);
+        if (!m.matches()) {
+            throw new SkyControlException(ui.getGateNumberError());
         }
     }
 

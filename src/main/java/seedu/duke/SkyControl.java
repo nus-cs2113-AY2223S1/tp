@@ -25,6 +25,7 @@ public class SkyControl {
     private static boolean isFlight = false;
     private static boolean isModify = false;
     private static boolean isAdd = false;
+    private static boolean isDelay = false;
 
 
     /**
@@ -45,6 +46,9 @@ public class SkyControl {
             } else if (isFlight) {
                 command.execute(flights, lineInput);
             } else if (isModify) {
+                command.execute(flights, lineInput);
+                command.execute(passengers, lineInput);
+            }else if (isDelay) {
                 command.execute(flights, lineInput);
                 command.execute(passengers, lineInput);
             } else {

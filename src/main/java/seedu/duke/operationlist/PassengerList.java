@@ -83,6 +83,11 @@ public class PassengerList extends OperationList {
         modifyPassengersGateNum(flightNum, newGateNum);
     }
 
+    @Override
+    public void delayFlightDeparture(String flightNum, String newDepartureTime) throws SkyControlException {
+        modifyPassengersDepartureTime(flightNum, newDepartureTime);
+    }
+
     //@@author ivanthengwr
     private void checkPassengerDetails() throws SkyControlException {
         if (isExceedNameLength) {
@@ -139,6 +144,16 @@ public class PassengerList extends OperationList {
             PassengerInfo passenger = passengers.get(i);
             if (passenger.getFlightNumber().equals(flightNum)) {
                 passenger.setGateNumber(newGateNum);
+            }
+        }
+    }
+
+    private void modifyPassengersDepartureTime(String flightNum, String newDepartureTime) {
+        getNumberOfPassengers();
+        for(int i = 0; i < numOfPassengers; i++) {
+            PassengerInfo passenger = passengers.get(i);
+            if(passenger.getFlightNumber().equals(flightNum)) {
+                passenger.setDepartureTime(newDepartureTime);
             }
         }
     }

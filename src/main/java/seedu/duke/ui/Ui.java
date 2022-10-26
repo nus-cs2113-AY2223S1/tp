@@ -222,6 +222,7 @@ public class Ui {
     }
 
     //@@author JordanKwua
+    //@@author JordanKwua
     public void showFlightRemovedMessage(String flightNum) {
         System.out.println("FLIGHT " + flightNum + " HAS BEEN DELETED.");
     }
@@ -268,6 +269,17 @@ public class Ui {
 
     public void showUpdatedGateNumber(String flightNum, String newGateNum) {
         System.out.println("Gate number of flight " + flightNum + " is updated to " + newGateNum + ".");
+    }
+
+    //@@author Franky4566
+    public void showUpdatedDepartureTime(String flightNum, String oldDepartureTime, String newDepartureTime) {
+        System.out.println("Departure time of flight " + flightNum + " is delayed from "
+                + oldDepartureTime + " to " + newDepartureTime + ".");
+    }
+
+    public String getWrongDelayTimeError(String flightNum, String oldDepartureTime) {
+        return "Stop! Please enter a valid departure time for flight " + flightNum
+                + "\nTime must be later than " + oldDepartureTime + ".";
     }
 
     //@@author ivanthengwr
@@ -323,7 +335,7 @@ public class Ui {
 
     public String getGateNumberError() {
         return "Stop! The gate number input format is wrong.\n"
-                + "Gate number should be a digit and not more than 99, please try again.";
+                + "Gate number should be a digit between 0 and 99, please try again.";
     }
 
     public String getBoardingGroupError() {
