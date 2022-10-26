@@ -3,7 +3,6 @@ package parser;
 import command.*;
 import command.appointmentCommand.AddAppointmentCommand;
 import command.appointmentCommand.RemoveAppointmentCommand;
-import command.appointmentCommand.SetAppointmentStatusCommand;
 import command.appointmentCommand.ViewAppointmentCommand;
 import exception.DukeException;
 
@@ -37,8 +36,6 @@ public class AppointmentParser {
                 return prepareAllocateAppointment(statement);
             break;
             */
-            case SetAppointmentStatusCommand.COMMAND_WORD:
-                return prepareSetAppointmentStatusCommand(statement);
             default:
                 throw new DukeException();
             }
@@ -77,36 +74,6 @@ public class AppointmentParser {
             System.out.println("Sorry, format of parameters entered for adding an appointment is invalid");
             return new EmptyCommand();
         }
-    }
-
-    public Command prepareSetAppointmentStatusCommand(String input) {
-        try {
-            int i = input.indexOf(" i/");
-            int s = input.indexOf(" s/");
-            if (i > s || i == -1 || s == -1) {
-                throw new DukeException();
-            }
-
-            String index = input.substring(i, s);
-            int indexInt = parser.indexOfInput(index);
-            if (indexInt == -1) {
-                throw new DukeException();
-            }
-
-            String status = input.substring(s);
-            int statusInt = parser.isStatus(status);
-            if (statusInt == -1 || statusInt > 2) {
-                throw new DukeException();
-            }
-
-            return new SetAppointmentStatusCommand(indexInt,
-                    statusInt);
-        } catch (DukeException e) {
-            System.out.println("Sorry, format of parameters entered for setting status of an appointment is invalid");
-            return new EmptyCommand();
-        }
-
-
     }
 
     /*
