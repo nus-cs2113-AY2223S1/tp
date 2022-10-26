@@ -26,15 +26,6 @@ public abstract class ParseAdd extends Parser {
         return commandDetail.trim().isEmpty();
     }
 
-    protected int[] getFlagIndexPositions(String commandDetail, String[] flags) {
-        int[] flagIndexPositions = new int[flags.length];
-
-        for (int flagIndex = 0; flagIndex < flags.length; flagIndex++) {
-            flagIndexPositions[flagIndex] = commandDetail.indexOf(flags[flagIndex]);
-        }
-        return flagIndexPositions;
-    }
-
     protected boolean checkForFlagPresence(int flagIndexPosition) {
         return (flagIndexPosition != MISSING_FLAG_VALUE);
     }
@@ -44,14 +35,6 @@ public abstract class ParseAdd extends Parser {
         if (!hasCorrectOrder) {
             throw new IncorrectFlagOrderException(EXCEPTION);
         }
-    }
-
-    protected String extractDetail(String rawDetail, int beginIndex) {
-        return rawDetail.substring(beginIndex).trim();
-    }
-
-    protected String extractDetail(String rawDetail, int beginIndex, int endIndex) {
-        return rawDetail.substring(beginIndex, endIndex).trim();
     }
 
     protected boolean checkForDetailFormat(String regex, String detail) {
