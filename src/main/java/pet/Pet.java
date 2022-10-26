@@ -83,6 +83,8 @@ public class Pet {
         case 10:
             status = PetHealthyStatus.fantastic;
             break;
+        default:
+            break;
         }
     }
 }

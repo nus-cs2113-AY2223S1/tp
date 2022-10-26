@@ -81,4 +81,8 @@ public class TaskList {
         return null;
     }
 
+    public static void finishTask(int taskId) {
+        findTask(taskId).setDone();
+    }
+
 }
