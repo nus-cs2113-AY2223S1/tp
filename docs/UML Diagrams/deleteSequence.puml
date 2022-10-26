@@ -1,0 +1,76 @@
+@startuml
+!include style.puml
+
+hide footbox
+
+participant Parser
+
+Parser -> Parser : executeDelete()
+activate Parser
+
+alt Less than 3 words given as input
+
+    create DukeException
+    Parser -> DukeException
+    activate DukeException
+    DukeException --> Parser
+    destroy DukeException
+
+else User input contains 3 words
+    alt Invalid media type given
+
+        create DukeException
+            Parser -> DukeException
+            activate DukeException
+            DukeException --> Parser
+            destroy DukeException
+
+    end
+
+    create "executor:\nRemoveCommand"
+    Parser -> "executor:\nRemoveCommand"
+
+    activate "executor:\nRemoveCommand"
+    "executor:\nRemoveCommand" --> Parser
+    deactivate "executor:\nRemoveCommand"
+
+    Parser -> "executor:\nRemoveCommand" : execute()
+    activate "executor:\nRemoveCommand"
+
+    loop For each review
+        alt Review is of the type to be deleted
+
+            alt Review is at the index to be deleted
+                participant "reviewList: ReviewList"
+                "executor:\nRemoveCommand" -> "reviewList: ReviewList": remove(index)
+                activate "reviewList: ReviewList"
+                "reviewList: ReviewList" --> "executor:\nRemoveCommand"
+                deactivate "reviewList: ReviewList"
+
+            end
+
+        end
+
+    end
+
+    "executor:\nRemoveCommand" --> Parser: output : String
+    deactivate "executor:\nRemoveCommand"
+
+    participant Ui
+
+    Parser -> Ui : print(output)
+    activate Ui
+    Ui --> Parser
+    deactivate Ui
+
+
+end
+
+
+
+Parser -> Parser
+destroy "executor:\nRemoveCommand"
+deactivate Parser
+
+
+@enduml
