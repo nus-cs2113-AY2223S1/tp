@@ -15,7 +15,7 @@ import java.util.List;
  */
 
 public class AddModuleCommand extends Command {
-    private Module module;
+    private final Module module;
     private boolean successfullyAdded;
     boolean isModuleOffered;
 

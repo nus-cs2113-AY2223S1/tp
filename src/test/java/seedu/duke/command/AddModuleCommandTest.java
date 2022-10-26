@@ -70,16 +70,16 @@ class AddModuleCommandTest {
         State state = new State();
         Ui ui = new Ui();
         Storage storage = new Storage();
-        int semester = 1;
+        int semester = 4;
         state.setSemester(semester);
 
         SelectedModule selectedModule = new SelectedModule(module,semester);
-        assertNull(state.getSelectedModulesList().contains(selectedModule));
+        assertFalse(state.getSelectedModulesList().contains(selectedModule));
         // TODO: find out why trying to add a module that isn't offered
         //  in the current semester silently fails
-        String[] testInput = {"add","cs1010s"};
+        String[] testInput = {"add","cs2113"};
         AddModuleCommand addModuleCommand = new AddModuleCommand(testInput);
-        addModuleCommand.execute(state,ui,storage);
+        addModuleCommand.execute(state, ui, storage);
         assertFalse(state.getSelectedModulesList().contains(selectedModule));
     }
 
@@ -89,9 +89,6 @@ class AddModuleCommandTest {
         assertFalse(new AddModuleCommand(testInput).isExit());
     }
 
-    //@Test
-    //void getExecutionMessage() {
-    //}
 
     @Test
     void testGetCommandDescription_CorrectCommandDescription() throws YamomException {
