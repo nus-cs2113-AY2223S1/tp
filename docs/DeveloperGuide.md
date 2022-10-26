@@ -1,9 +1,11 @@
-# Developer Guide
+# Developer Guide (Pre-Release)
 
 ## Introduction
 
 MoneyGoWhere is a financial tracker designed to help computing professionals manage their finances.
 This developer guide explains the design considerations and implementation details required for future developers to work on MoneyGoWhere.
+
+:warning: The diagrams in this user guide are rendered on-the-fly as the webpage is loaded. **If your internet connection is unstable, the diagrams may appear as broken links.** Please refresh the webpage if the diagrams are not loaded in time.
 
 ## Acknowledgements
 
