@@ -26,10 +26,10 @@ public class State {
     }
 
     public void setSelectedModulesList(List<SelectedModule> list) {
-        List<SelectedModule> currentSelectedModules = selectedModulesList.get(semester);
-        currentSelectedModules.clear();
-        currentSelectedModules.addAll(list);
-        //selectedModulesList.set(semester, list);
+        //        List<SelectedModule> currentSelectedModules = selectedModulesList.get(semester);
+        //        currentSelectedModules.clear();
+        //        currentSelectedModules.addAll(list);
+        selectedModulesList.set(semester, list);
     }
 
     public int getSemester() {

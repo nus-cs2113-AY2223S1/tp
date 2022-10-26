@@ -113,7 +113,7 @@ public class Link {
                 return;
             }
             String moduleCode = splitModuleAndLesson[0];
-            Module module = Module.get(moduleCode.toUpperCase());
+            Module module = Module.get(moduleCode);
             if (module == null || module.getSemesterData(semester) == null) {
                 continue;
             }
