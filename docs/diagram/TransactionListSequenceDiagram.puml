@@ -1,15 +1,16 @@
 @startuml
 !include Style.puml
 
-actor Main
+
 Participant ":Duke" as duke
 Participant ":Storage" as storage
 Participant "storedTransactions:\nTransactionList" as storedList
+Participant ":Budget" as budget
 Participant "transactionList:\nTransactionList" as transactionList
 Participant "transactionList:\nTransactionList" as emptyTransactionList
 
-create duke
-Main -> duke:Duke()
+
+
 activate duke
     create storage
     duke -> storage:Storage()
@@ -22,12 +23,21 @@ activate duke
 
     duke -> storage:initializeFile()
     activate storage
-        storage -> storedList:Add transactions
-        note right
-        Minimal notation.
-        Details hidden for adding transactions
-        from file read into storedTransactions.
-        end note
+        storage -> budget:setBudget()
+        activate budget
+        return
+        loop Until End-of-File
+            alt isExpense
+                storage -> storedList:addExpenseDuringStorage()
+                activate storedList
+                return
+            else isIncome
+                storage -> storedList:addIncomeDuringStorage()
+                activate storedList
+                return
+            end
+        end
+
     return stored:TransactionList
 
     destroy storedList

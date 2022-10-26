@@ -22,20 +22,21 @@ import static seedu.duke.command.CommandTag.COMMAND_TAG_GLOBAL_PERIOD;
 
 import static seedu.duke.common.InfoMessages.INFO_LIST;
 import static seedu.duke.common.InfoMessages.INFO_LIST_EMPTY;
+import static seedu.duke.common.InfoMessages.LINE_SEPARATOR;
 
 /**
  * Represents a list command object that will execute the operations for List command.
  */
 public class ListCommand extends ListAndStatsCommand {
     //@@author chydarren
-    private static final String LINE_SEPARATOR = System.lineSeparator();
     // The command word used to trigger the execution of Moolah Manager's operations
     public static final String COMMAND_WORD = "LIST";
     // The description for the usage of command
     public static final String COMMAND_DESCRIPTION = "To list all or some transactions based on selection."
-            + " Note that the tags will be joint in the filter based on the 'AND' operation.";
+            + " Tags will be joined in the filter based on the 'AND' operation.";
     // The guiding information for the usage of command
-    public static final String COMMAND_USAGE = "Usage: list [t/TYPE] [c/CATEGORY] [d/DATE] [m/MONTH] [y/YEAR]";
+    public static final String COMMAND_USAGE = "Usage: list [t/TYPE] [c/CATEGORY] [d/DATE] [m/MONTH] [y/YEAR] "
+            + "[p/PERIOD] [n/NUMBER]";
     // The formatting information for the parameters used by the command
     public static final String COMMAND_PARAMETERS_INFO = "Parameters information:"
             + LINE_SEPARATOR
@@ -45,10 +46,20 @@ public class ListCommand extends ListAndStatsCommand {
             + LINE_SEPARATOR
             + "(Optional) DATE: Date of the transaction. The format must be in \"yyyyMMdd\"."
             + LINE_SEPARATOR
-            + "(Optional) MONTH: Month of the transaction. Only integers within 1 to 12 are accepted. Note that"
-            + " month must be accompanied by a year."
+            + "(Optional) MONTH: Month of the transaction. Only integers within 1 to 12 are accepted. Note that "
+            + "month must be accompanied by a year. This tag cannot be used together with [p/PERIOD] or [n/NUMBER] "
+            + "tags."
             + LINE_SEPARATOR
-            + "(Optional) YEAR: Year of the transaction. Only integers from 1000 onwards are accepted.";
+            + "(Optional) YEAR: Year of the transaction. Only integers from 1000 onwards are accepted."
+            + "This tag cannot be used together with [p/PERIOD] or [n/NUMBER] tags."
+            + LINE_SEPARATOR
+            + "(Optional) PERIOD: Period of the transaction. Only \"weeks\" or \"months\" is accepted. Note that"
+            + "period must be accompanied by a number to backdate from. This tag cannot be used together with "
+            + "[m/MONTH] or [y/YEAR] tags."
+            + LINE_SEPARATOR
+            + "(Optional) NUMBER: Last number of weeks or months. Only positive integers are accepted. Note that"
+            + "number must be accompanied by a period that represents weeks or months. This tag cannot be used "
+            + "together with [m/MONTH] or [y/YEAR] tags.";
 
     // Basic help description
     public static final String COMMAND_HELP = "Command Word: " + COMMAND_WORD + LINE_SEPARATOR
@@ -124,20 +135,16 @@ public class ListCommand extends ListAndStatsCommand {
 
         // Checks if there are any error in the tag combinations related to DateIntervals
         parseDateIntervalsTags();
-        listTransactions(transactions, type, category, date);
+        listTransactions(transactions);
     }
 
     /**
      * List all or some transactions based on selection.
      *
      * @param transactions An instance of the TransactionList class.
-     * @param type         The type of transaction.
-     * @param category     A category for the transaction.
-     * @param date         Date of the transaction with format in "yyyyMMdd".
      * @throws MoolahException If any type of exception has been caught within the function calls.
      */
-    private void listTransactions(TransactionList transactions, String type, String category, LocalDate date)
-            throws MoolahException {
+    private void listTransactions(TransactionList transactions) throws MoolahException {
         ArrayList<Transaction> timeTransactions = getTimeTransactions(transactions);
         String transactionsList = transactions.listTransactions(timeTransactions, type, category, date);
 

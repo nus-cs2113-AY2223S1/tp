@@ -8,32 +8,49 @@ import seedu.duke.exception.InputTransactionInvalidTypeException;
 import java.time.LocalDate;
 import java.time.Year;
 import java.time.YearMonth;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.stream.Collectors;
 
 import static seedu.duke.common.Constants.MAX_AMOUNT_VALUE;
+import static seedu.duke.common.Constants.MIN_AMOUNT_VALUE;
 import static seedu.duke.common.Constants.MAX_TRANSACTIONS_COUNT;
+import static seedu.duke.common.DateFormats.DATE_MONTH_PATTERN;
+import static seedu.duke.common.InfoMessages.LINE_SEPARATOR;
+import static seedu.duke.common.InfoMessages.DOLLAR_SIGN;
+import static seedu.duke.common.InfoMessages.COLON_SPACE;
+import static seedu.duke.common.InfoMessages.INFO_INCOME;
+import static seedu.duke.common.InfoMessages.INFO_EXPENSE;
+import static seedu.duke.common.InfoMessages.INFO_SAVINGS;
 import static seedu.duke.common.InfoMessages.INFO_STATS_CATEGORIES_HEADER;
+import static seedu.duke.common.InfoMessages.INFO_STATS_HABIT_VERY_LOW_SAVINGS;
+import static seedu.duke.common.InfoMessages.INFO_STATS_HABIT_LOW_SAVINGS;
+import static seedu.duke.common.InfoMessages.INFO_STATS_HABIT_MEDIUM_SAVINGS;
+import static seedu.duke.common.InfoMessages.INFO_STATS_HABIT_HIGH_SAVINGS;
+import static seedu.duke.common.InfoMessages.INFO_STATS_HABIT_VERY_HIGH_SAVINGS;
+
+
+//@@author chydarren
 
 /**
  * Represents a list of transactions added by the user into the application.
- * Operations related to modifying the list of transactions are defined under this class.
+ *
+ * <p>Operations related to modifying the list of transactions are defined under this class.
  * These operations include adding, listing, modifying, deleting and purging.
  */
 public class TransactionList {
-    //@@author chydarren
     private static final String PREFIX_CATEGORY = "[";
     private static final String POSTFIX_CATEGORY = "]";
-    private static final String SYMBOL_DOLLAR = "$";
     private static final String INCOME = "income";
     private static final String EXPENSE = "expense";
-    private static final String MONTHS = "months";
-    private static final String WEEKS = "weeks";
+    private static final int HUNDRED_PERCENT = 100;
+    private static final int SEVENTY_FIVE_PERCENT = 75;
+    private static final int FIFTY_PERCENT = 50;
+    private static final int TWENTY_FIVE_PERCENT = 25;
     private static final int START = 0;
     private static final int END = 1;
     private static final int UNDEFINED_PARAMETER = -1;
-    private static final String LINE_SEPARATOR = System.lineSeparator();
 
     //@@author chinhan99
     private static ArrayList<Transaction> transactions;
@@ -83,8 +100,8 @@ public class TransactionList {
      * @return A string tht states the details of the deleted transaction.
      */
     public String deleteTransaction(int index) {
-        Transaction transaction = transactions.get(index - 1);
-        transactions.remove(index - 1);
+        Transaction transaction = transactions.get(index);
+        transactions.remove(index);
         return transaction.toString();
     }
 
@@ -218,7 +235,7 @@ public class TransactionList {
         for (Transaction transaction : transactions) {
             // Includes only transactions that contain the keywords used in the search expression
             if (transaction.toString().contains(keywords)) {
-                transactionsList += transaction + LINE_SEPARATOR;
+                transactionsList += transaction + LINE_SEPARATOR.toString();
             }
         }
         return transactionsList;
@@ -246,9 +263,9 @@ public class TransactionList {
     }
 
     /**
-     * Calculates and stores total savings for each transaction category into a hashmap.
+     * Formats the hashmap of categorical savings into a categorical savings list.
      *
-     * @return A hashmap containing all category-amount pair for total savings.
+     * @return A string that represents the formatted categorical savings list.
      */
     public String listCategoricalSavings() {
         String categoricalSavingsList = "";
@@ -259,10 +276,96 @@ public class TransactionList {
         // Formats every entry in the hashmap into a categorical savings list
         for (HashMap.Entry<String, Integer> entry : categoricalSavings.entrySet()) {
             categoricalSavingsList += String.format("%s%s%s %s%s%s", PREFIX_CATEGORY, entry.getKey(),
-                    POSTFIX_CATEGORY, SYMBOL_DOLLAR, entry.getValue(), LINE_SEPARATOR);
+                    POSTFIX_CATEGORY, DOLLAR_SIGN, entry.getValue(), LINE_SEPARATOR);
         }
 
         return categoricalSavingsList;
+    }
+
+    /**
+     * Reads the transactions list and adds each amount to the month and year in monthly savings hashmap.
+     *
+     * @param monthlyExpenditure A hashmap containing all month-expenditure pair for total expenditure and savings.
+     * @return A hashmap containing all month-expenditure pair for total expenditure and savings.
+     */
+    public HashMap<String, int[]> processMonthlyExpenditure(HashMap<String, int[]> monthlyExpenditure) {
+        for (Transaction transaction : transactions) {
+            String date = transaction.getDate().format(DateTimeFormatter.ofPattern(DATE_MONTH_PATTERN.toString()));
+            int income = MIN_AMOUNT_VALUE;
+            int expense = MIN_AMOUNT_VALUE;
+
+            // Checks whether transaction is Income or Expense and places in respective amount
+            if (transaction instanceof Income) {
+                income = transaction.getAmount();
+            } else {
+                expense = transaction.getAmount();
+            }
+
+            // Creates a new month and year with starter amounts if not exists in hashmap
+            if (!monthlyExpenditure.containsKey(date)) {
+                monthlyExpenditure.put(date, new int[]{income, expense, income - expense});
+                continue;
+            }
+
+            // Adds amounts to existing month and year in hashmap
+            int updatedIncome = monthlyExpenditure.get(date)[0] + income;
+            int updatedExpense = monthlyExpenditure.get(date)[1] + expense;
+
+            monthlyExpenditure.put(date, new int[]{updatedIncome, updatedExpense,
+                updatedIncome - updatedExpense});
+        }
+
+        return monthlyExpenditure;
+    }
+
+    /**
+     * Gets comment related to spending habit each month.
+     *
+     * @param income  Income value of the transaction in numerical form.
+     * @param savings Savings value of the transaction in numerical form.
+     * @return A string containing the comment related to the spending habit for the month.
+     */
+    public String getSpendingHabitComment(int income, int savings) {
+        int savingsPercentage = HUNDRED_PERCENT * savings / income;
+
+        if (savingsPercentage >= HUNDRED_PERCENT) {
+            return INFO_STATS_HABIT_VERY_HIGH_SAVINGS.toString();
+        } else if (savingsPercentage >= SEVENTY_FIVE_PERCENT) {
+            return INFO_STATS_HABIT_HIGH_SAVINGS.toString();
+        } else if (savingsPercentage >= FIFTY_PERCENT) {
+            return INFO_STATS_HABIT_MEDIUM_SAVINGS.toString();
+        } else if (savingsPercentage >= TWENTY_FIVE_PERCENT) {
+            return INFO_STATS_HABIT_LOW_SAVINGS.toString();
+        }
+        return INFO_STATS_HABIT_VERY_LOW_SAVINGS.toString();
+    }
+
+    /**
+     * Formats the hashmap of monthly expenditure into a monthly expenditure list.
+     *
+     * @return A string that represents the formatted monthly expenditure list.
+     */
+    public String listMonthlyExpenditure()  {
+        String monthlyExpenditureList = "";
+        HashMap<String, int[]> monthlyExpenditure = new HashMap<>();
+        // Adds each amount from transactions list to the month and year in monthly expenditure hashmap
+        monthlyExpenditure = processMonthlyExpenditure(monthlyExpenditure);
+
+        // Formats every entry in the hashmap into a monthly expenditure summary list
+        for (HashMap.Entry<String, int[]> entry : monthlyExpenditure.entrySet()) {
+            monthlyExpenditureList += String.format("%s%s%s%s", PREFIX_CATEGORY, entry.getKey(), POSTFIX_CATEGORY,
+                    LINE_SEPARATOR);
+            monthlyExpenditureList += String.format("%s%s%s%s%s", INFO_INCOME, COLON_SPACE, DOLLAR_SIGN,
+                    entry.getValue()[0], LINE_SEPARATOR);
+            monthlyExpenditureList += String.format("%s%s%s%s%s", INFO_EXPENSE, COLON_SPACE, DOLLAR_SIGN,
+                    entry.getValue()[1], LINE_SEPARATOR);
+            monthlyExpenditureList += String.format("%s%s%s%s%s", INFO_SAVINGS, COLON_SPACE, DOLLAR_SIGN,
+                    entry.getValue()[2], LINE_SEPARATOR);
+            monthlyExpenditureList += String.format("%s%s%s%s", "Spending Habit: ",
+                    getSpendingHabitComment(entry.getValue()[2], entry.getValue()[0]), LINE_SEPARATOR, LINE_SEPARATOR);
+        }
+
+        return monthlyExpenditureList;
     }
 
     //@@author paullowse
@@ -279,26 +382,28 @@ public class TransactionList {
      */
     public String listTimeStats(ArrayList<Transaction> timeTransactions, int year, int month, String period,
                                 int number) {
-        String timeSavingsList = "";
+        String timeInsightsList = "";
 
         if (period != null && number != UNDEFINED_PARAMETER) {
-            timeSavingsList += "The past " + number + " " + period + ": " + LINE_SEPARATOR + LINE_SEPARATOR
+            timeInsightsList += "The past " + number + " " + period + ": " + LINE_SEPARATOR + LINE_SEPARATOR
                     + INFO_STATS_CATEGORIES_HEADER + LINE_SEPARATOR;
         } else if (month == UNDEFINED_PARAMETER) {
-            timeSavingsList += "Year: " + year + LINE_SEPARATOR + LINE_SEPARATOR + INFO_STATS_CATEGORIES_HEADER
+            timeInsightsList += "Year: " + year + LINE_SEPARATOR + LINE_SEPARATOR + INFO_STATS_CATEGORIES_HEADER
                     + LINE_SEPARATOR;
         } else {
-            timeSavingsList += "Year: " + year + ", Month: " + month
+            timeInsightsList += "Year: " + year + ", Month: " + month
                     + LINE_SEPARATOR + LINE_SEPARATOR + INFO_STATS_CATEGORIES_HEADER + LINE_SEPARATOR;
         }
 
-        // Formats every entry in the hashmap into a categorical savings list
-        for (Transaction entry : timeTransactions) {
-            timeSavingsList += String.format("%s%s%s %s%s%s", PREFIX_CATEGORY, entry.getCategory(),
-                    POSTFIX_CATEGORY, SYMBOL_DOLLAR, entry.getAmount(), LINE_SEPARATOR);
-        }
+        String categoricalList = listCategoricalSavings();
+        timeInsightsList += categoricalList;
+        // Formats every entry in the hashmap into a time insights list
+        //for (Transaction entry : timeTransactions) {
+        //    timeInsightsList += String.format("%s%s%s %s%s%s", PREFIX_CATEGORY, entry.getCategory(),
+        //            POSTFIX_CATEGORY, DOLLAR_SIGN, entry.getAmount(), LINE_SEPARATOR);
+        //}
 
-        return timeSavingsList;
+        return timeInsightsList;
     }
 
     /**
@@ -308,8 +413,8 @@ public class TransactionList {
      * @return An amount arraylist of Expense and Income.
      */
     public ArrayList<String> processTimeSummaryStats(ArrayList<Transaction> timeTransactions) {
-        int timeExpense = 0;
-        int timeIncome = 0;
+        int timeExpense = MIN_AMOUNT_VALUE;
+        int timeIncome = MIN_AMOUNT_VALUE;
         for (Transaction entry : timeTransactions) {
             String category = entry.getType();
             if (category.equals(EXPENSE)) {
@@ -444,15 +549,19 @@ public class TransactionList {
      * @param date A date object in which the monthly total expenses calculated is based on.
      * @return A long value indicating the amount of expenses spent in the month.
      */
-    public long calculateMonthlyTotalExpense(LocalDate date) {
+    public static long calculateMonthlyTotalExpense(LocalDate date) {
         long totalExpense = 0;
         int month = date.getMonthValue();
         int year = date.getYear();
         for (Transaction transaction : transactions) {
+            // As sum of spending is to be calculated, thus only expense type transaction will be considered
+            if (!(transaction instanceof Expense)) {
+                continue;
+            }
             if (transaction.getDate().getMonthValue() == month && transaction.getDate().getYear() == year) {
                 /*
                     Since the maximum number of transaction is 1000000 and maximum amount of expense is 10000000,
-                    the highest possible expense value is 10^6 * 10^7 = 10^15 < Long.MAX_VALUE (approx 9.22 * 10^18)
+                    the highest possible expense value is 10^6 * 10^7 = 10^13 < Long.MAX_VALUE (approx 9.22 * 10^18)
                     Therefore, this function is safe from integer overflow UNLESS the max values in
                     common.Constants.java is altered.
                  */

@@ -19,9 +19,9 @@ stats blablabla
 stats /
 stats s/
 stats s/invalid
-stats s/categories blablabla
-stats s/categories s/categories
-stats s/categories
+stats s/categorical_savings blablabla
+stats s/categorical_savings s/categorical_savings
+stats s/categorical_savings
 list
 add t/expense c/food a/20 d/13092022 i/NIL
 add t/income c/salary a/2000 d/30092022 i/jan_salary
@@ -42,7 +42,16 @@ list c/food d/30092022
 list c/food d/13092022
 list t/income d/
 list t/income d/30092022
-stats s/categories
+stats s/categorical_savings
+stats s/monthly_expenditure
+stats s/time_insights y/2022
+stats s/time_insights y/2022 m/10
+stats s/time_insights m/10
+stats s/time_insights p/weeks n/3
+stats s/time_insights p/months n/4
+stats s/time_insights p/mont n/4
+stats s/time_insights n/4
+stats s/time_insights p/months
 find
 find bus_fare
 find TOTALLY_NON_EXISTING_STRING

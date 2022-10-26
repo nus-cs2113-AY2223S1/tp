@@ -1,0 +1,27 @@
+@startuml
+!include Style.puml
+
+Participant ":Duke" as duke
+Participant ":HelpCommand" as command
+Participant ":Ui" as ui
+actor User
+
+duke -> command:execute()
+activate command
+    alt parameter o/detailed found
+        command -> command : generateBasicHelp()
+        activate command
+        return message:String
+    else parameter o/detailed not found
+        command -> command :generateDetailedHelp()
+        activate command
+        return message:String
+    end
+    command -> ui :showHelp(message)
+    activate ui
+        ui -> User
+    return
+
+return
+
+@enduml

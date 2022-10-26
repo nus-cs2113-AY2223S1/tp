@@ -3,24 +3,27 @@ package seedu.duke.command;
 //@@author brian-vb
 import seedu.duke.Storage;
 import seedu.duke.Ui;
+import seedu.duke.common.DateFormats;
+import seedu.duke.data.Budget;
 import seedu.duke.data.TransactionList;
 import seedu.duke.exception.GlobalInvalidIndexException;
 import seedu.duke.exception.MoolahException;
 import seedu.duke.exception.StorageWriteErrorException;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static seedu.duke.command.CommandTag.COMMAND_TAG_GLOBAL_ENTRY_NUMBER;
 import static seedu.duke.common.InfoMessages.INFO_DELETE;
+import static seedu.duke.common.InfoMessages.LINE_SEPARATOR;
 
 /**
  * Represents a delete command object that will execute the operations for Delete command.
  */
 public class DeleteCommand extends Command {
     //@@author brian-vb
-    private static final String LINE_SEPARATOR = System.lineSeparator();
     // The command word used to trigger the execution of Moolah Manager's operations
     public static final String COMMAND_WORD = "DELETE";
     // The description for the usage of command
@@ -95,10 +98,18 @@ public class DeleteCommand extends Command {
             if ((index > numberOfTransactions) || (index <= 0)) {
                 isInputValid = false;
             }
+
+
             assert index > 0;
             if (isInputValid) {
-                String transaction = transactions.deleteTransaction(index);
-                Ui.showTransactionAction(INFO_DELETE.toString(), transaction);
+                LocalDate date = transactions.getEntry(index - 1).getDate();
+                String transaction = transactions.deleteTransaction(index - 1);
+
+                long addedMonthExpenseSum = transactions.calculateMonthlyTotalExpense(date);
+                String budgetInfo = Budget.generateBudgetRemainingMessage(addedMonthExpenseSum, true,
+                        DateFormats.retrieveFormattedMonthAndYear(date));
+
+                Ui.showTransactionAction(INFO_DELETE.toString(), transaction, budgetInfo);
                 deleteLogger.log(Level.INFO, "The requested transaction has been deleted "
                         + "and the UI should display the confirmation message respectively.");
                 storage.writeToFile(transactions.getTransactions());

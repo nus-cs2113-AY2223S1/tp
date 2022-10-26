@@ -15,6 +15,7 @@
     * [Overview for Transaction](#overview-for-transaction)
     * [Implementation for Transaction](#implementation-for-transaction)
     * [Help Command](#help-command)
+    * [Budget Command](#budget-command)
     * [Add Command](#add-command)
     * [Edit Command](#edit-command)
     * [List Command](#list-command)
@@ -36,15 +37,21 @@
 
 ## Preface
 
-{Provide brief details of the Moolah Manager application and the purpose of the Developer Guide}
+Moolah Manager is a desktop app for managing your finances, optimised for use via a Command Line Interface (CLI). Designed for people who are
+fast typists, it can help to process day-to-day transactions, namely your incomes and expenses. These can help you to see all your transactions
+and provide you with a valuable insight into your spending habits.
 
-_Written by: Author name_
+This document is meant to assist potential users and developers in understanding how our program works.
+
+_Written by: Brian Wong Yun Long_
 
 ## Acknowledgements
 
-{List here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+The format of this development guide was adapted from [[SE-EDU AddressBook Level 3 Developer Guide]](https://se-education.org/addressbook-level3/DeveloperGuide.html)
 
-_Written by: Author name_
+Some code used in this program were reused and adapted from our individual projects from the CS2113 IP. 
+
+_Written by: Brian Wong Yun Long_
 
 ## Setting Up the Project
 
@@ -69,20 +76,72 @@ _Written by: Paul Low_
 
 ## Design
 
-{Describe the design of the product. Use UML diagrams and short code snippets where applicable.}
-
 ### Architecture
+![Architecture Diagram](images/ArchitectureDiagram.png)
+The Architecture Diagram shown above explains the high-level design of Moolah Manager. 
+The `Duke` class contain the main method which holds the responsibility for the following:
+1. On application launch, it will initialise the `UI`, `Storage` and `Data` components. 
+2. During application execution, it will interact with `UI`, `Parser`, `Command` components 
+to execute the command entered by the users.
+3. On any exception caught, it will handle the exception and interact with the `UI` to display the error message.
 
-_Written by: Author name_
+`Common` represents a collection of classes or enums used by multiple components.
+
+The rest of the application consists of six components:
+ - `UI`: The user interface of Moolah Manager
+ - `Parser`: Parser for user's entered command.
+ - `Command`: The command executor.
+ - `Data`: Holds the data of the application in memory.
+ - `Storage`: File I/O to store the data onto the hard disk.
+
+#### How the architecture components interact with each other
+The sequence diagram below shows how the components interact on command `budget b/1000`.
+![Architecture Interaction](images/ArchitectureSequenceDiagram.png)
+The section below gives more detailed description of each component.
+
+_Written by: Chia Thin Hong_
 
 ### Command Component
 
-_Written by: Author name_
+The command component is represented by a `command` package which consists of all the classes that is part of the data stored
+by Moolah Manager. Within the `command` package, there are many classes, each corresponding to all of our commands which are
+supported by the application.
+
+The `AddCommand` class contains the operations pertaining to adding a transaction into the list of transactions.
+
+The `BudgetCommand` class contains the operations pertaining to setting the budget for the user.
+
+The `ByeCommand` class contains the operations pertaining to exiting the program.
+
+The `CommandTag` class consists of all the tags that the program parses.
+
+The `DeleteCommand` class contains the operations pertaining to deleting a transaction from the list of transactions.
+
+The `EditCommand` class contains the operations pertaining to editing a transaction from the list of transactions.
+
+The `FindCommand` class contains the operations pertaining to searching the list of transactions for transactions that match the inputted keywords.
+
+The `HelpCommand` class contains the operations pertaining to displaying help messages for the user.
+
+The `ListCommand` class contains the operations pertaining to listing all transactions.
+
+The `PurgeCommand` class contains the operations pertaining to deleting all transaction from the list of transactions.
+
+The `StatsCommand` class contains the operations pertaining to getting statistics based on your list of transactions.
+
+The structure of the command component in Moolah Manager is illustrated in the class diagram below:
+![Command Component Class Diagram](images/CommandComponentClassDiagram.png)
+
+_Written by: Brian Wong Yun Long_
 
 ### Data Component 
 
 The data component is represented by a `data` package which consists of all the classes that is part of the data stored 
-by Moolah Manager. Within the `data` package, a transaction package and a transactionList class is stored. 
+by Moolah Manager. Within the `data` package, a transaction package, a budget class and a transactionList class is 
+stored. 
+
+The `budget` class is a representation of the monthly budget of the users. Operations related to viewing the budget and 
+differences from budget is implemented within this class.
 
 The `transactionList` class is a representation of a list of transactions, and the
 operations related to the `transactionList` implemented within this class.
@@ -91,28 +150,21 @@ Within the transaction package, the following classes are stored:
 1. Transaction 
 2. Income 
 3. Expense
-4. Category
 
 The structure of the data component in Moolah Manager is illustrated in the class diagram below:
 ![Data Component Class Diagram](images/DataComponentClassDiagram.png)
 
-From the class diagram, it can be seen that the transactionList mainly contain methods for CRUD operations to the list, 
-such as getting, adding, editing, deleting and purging of transaction(s) from the list.
+From the class diagram, it can be seen that the transactionList contain the methods for CRUD operations to the list, 
+such as getting, adding, editing, deleting and purging of transaction(s) in the list.
 
-The `Transaction` class is the abstract classes of an `Income` or an `Expense`. The `Category` represents a category of 
-a transaction. Within the transaction class and its subclasses, getters and setters are used to access the private 
-variables. These classes override the toString() method for a self-defined print format when the transactions are 
-displayed. 
-
-<!-- TODO: Complete category and categoryList in sequence diagram and write their explanation here -->
-
-A more detailed explanation on the implementation on the transactions can be viewed under Section
+The `Transaction` class is the abstract classes of an `Income` or an `Expense`. A more detailed explanation on the 
+implementation on the transactions can be viewed under Section
 [Implementation for Transaction](#implementation-for-transaction).
 
 #### How the data component interacts
 
 - When MoolahManager starts running, the `Duke` class will initialize a `Storage` object which will attempt to 
-read from the file and initialize a `transactionList`. The temporary `transactionList` containing all the stored 
+read from the file and initialize both `budget` and `transactionList`. The temporary `transactionList` containing all the stored 
 transaction records will be returned by the `Storage`. 
 Based on the whether the initialization is successful, the corresponding constructor will be called to initialize a 
 `transactionList` object which will be used throughout the application running time to hold the `transactions` added.
@@ -122,6 +174,8 @@ Based on the whether the initialization is successful, the corresponding constru
 - A transaction (either an income or expense) is created by an `addCommand` class, can be modified by an `editCommand` 
 class and can be deleted by a `deleteCommand` or `purgeCommand` class. These interactions are described in further detail
 under each command section below.
+
+- The monthly budget can be updated by `budget` command.
 
 <!-- TODO: Describe how category and categoryList work here -->
 
@@ -192,9 +246,19 @@ _Written by: Author name_
 
 ### Overview for Transaction
 
-{Give a brief overview of the Transaction features (i.e. purpose of each command) in Moolah Manager application.}
+The following commands are accepted in Moolah Manager:
+1) `Add` - Adds an `Income` or `expense` type transaction into the list of transaction. [Add Command](#add-command)
+2) `Budget` - Adds an `Budget` into Moolah Manager, which sets the basis for financial tracking. [Budget Command](#budget-command)
+3) `Bye` - Exits Moolah Manager. [Bye Command](#bye-command)
+4) `Delete` - Deletes an `Income` or `expense` type transaction from the list of transaction. [Delete Command](#delete-command)
+5) `Edit` - Edits an `Income` or `expense` type transaction from the list of transaction. [Edit Command](#edit-command)
+6) `Find` - Searches for an `Income` or `expense` type transaction from the list of transaction given keywords. [Find Command](#find-command)
+7) `Help` - Outputs the usage of commands of Moolah Manager. [Help Command](#help-command)
+8) `List` - List all transactions. [List Command](#list-command)
+9) `Purge` - Deletes all transactions from the list of transaction. [Purge Command](#purge-command)
+10) `Stats` - View statistics on transactions based on the list of transactions in Moolah Manager. [Stats Command](#stats-command)
 
-_Written by: Author name_
+_Written by: Brian Wong Yun Long_
 
 ### Implementation for Transaction
 
@@ -234,22 +298,48 @@ Some important operations are performed within the `TransactionList` class, whic
 _Written by: Chua Han Yong Darren_
 
 ### Help Command
-The help command displays the help message to the users to guide them on the usage and provide descriptions for each 
-available command. 
+The help command displays the help message to the users to guide them on the usage and provide descriptions for each
+available command.
 
-The help command can be run as `help` or `help o/detailed`, where the latter will display a more detailed version of 
-help messages to the users. 
+The help command can be run as `help` or `help o/detailed`, where the latter will display a more detailed version of
+help messages to the users.
 
 The structure of the application focusing on the help command is illustrated in the class diagram below:
 ![Data Component Class Diagram](images/HelpClassDiagram.png)
 
-For each command subclass, they will implement the getHelpMessage() and getDetailedHelpMessage() methods. These methods 
+For each command subclass, they will implement the getHelpMessage() and getDetailedHelpMessage() methods. These methods
 will contain their corresponding HelpMessage Enum that stores the help messages as strings inside the enum.
 
-In the help classes, during the execute() call, it will call either generateBasicHelp() or generateDetailedHelp() method
-based on the help option given by the user. 
+In the help command, during the execute() call, it will call either generateBasicHelp() or generateDetailedHelp() method
+based on the help option chosen by the user.
 
-<!-- Todo: Add sequence diagram -->
+![Data Component Class Diagram](images/HelpSequenceDiagram.png)
+
+
+_Written by: Chia Thin Hong_
+
+### Budget Command
+
+The budget command allows user to set a new monthly budget. The range of accepted budget value is stored in the 
+`common/Constants.java` file, whereby the content of the file is as such:
+
+```
+public static int MAX_TRANSACTIONS_COUNT = 1000000;
+public static int MIN_AMOUNT_VALUE = 0;
+public static int MAX_AMOUNT_VALUE = 10000000;
+public static int MIN_BUDGET_VALUE = 1;
+public static long MAX_BUDGET_VALUE = Long.valueOf(MAX_TRANSACTIONS_COUNT) * Long.valueOf(MAX_AMOUNT_VALUE);
+```
+
+Under the default setting, the acceptable range of the monthly budget, is 0 < budget <= 10000000000000, which is 10^13 
+and it ensures that no integer overflow will occur as the `long` data type is used. 
+
+To set a new budget, user can use the command `budget b/AMOUNT` where the `AMOUNT` tag is any whole number within the 
+valid range above. 
+
+The interaction of the components on setting a budget can be seen in the sequence diagram under 
+[Architecture](#How-the-architecture-components-interact-with-each-other).
+
 
 _Written by: Chia Thin Hong_
 
@@ -493,6 +583,7 @@ for different classes such as `parserLogger` and `addLogger` to set the log mess
 
 **Logging Levels**:
 
+* `ERROR`: An unexpected control flow captured
 * `WARNING`: An exception has been caught by the app
 * `INFO`: Information details what the app has done
 
