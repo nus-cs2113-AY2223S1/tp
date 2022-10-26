@@ -101,7 +101,12 @@ In the example above, `UserInterface#run()` calls `UserInterface#convertExpenseT
 
 ### Common Component
 
+The Common component consists of the class `Messages` and `Configurations`.
+
 ![Component-Common](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentCommon.puml)
+
+The `Messages` class defines the messages used by the program during execution. It includes the informational, warning and error messages that are displayed to the user.
+The `Configurations` class defines the configuration parameters used by the program. It stores parameters such as formatting information, directory and file paths, and the URLs of different APIs.
 
 ### Exceptions Component
 
