@@ -24,12 +24,14 @@ The Ui Class handles user input
 ![img_1.png](imgs/FindCommandSequence.png)
 
 #### List
+Outputs reviews in movie and tv show categories. 
 ![img_2.png](imgs/ListCommandSequence.png)
 
 #### Sort
 ![img.png](imgs/sortSequence.png)
 
 ### Remove
+Removes media from a specified index and type. Outputs an error if user specifies invalid type or invalid format (less than 3 word inputs)
 ![img.png](imgs/deleteSequence.png)
 
 #### Clearing the review list
@@ -91,7 +93,7 @@ and are avid movie watchers. Therefore, this app is customised to their preferen
 - List movies and tv shows 
   - Command: list
 - Remove a movie or tv show
-  - Command: remove (index #)
+  - Command: delete <type> <index #>
 - Clear history
   - Command: clear
 
