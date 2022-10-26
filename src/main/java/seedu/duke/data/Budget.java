@@ -1,10 +1,24 @@
 package seedu.duke.data;
 
+import java.time.LocalDate;
+
+import static java.lang.Math.abs;
 import static seedu.duke.common.Constants.MAX_TRANSACTIONS_COUNT;
 import static seedu.duke.common.Constants.MAX_AMOUNT_VALUE;
 import static seedu.duke.common.Constants.MIN_BUDGET_VALUE;
+import static seedu.duke.common.InfoMessages.INFO_EXCEEDING_BUDGET;
+import static seedu.duke.common.InfoMessages.INFO_REMAINING_BUDGET;
+import static seedu.duke.common.InfoMessages.INFO_BUDGET_EXCEEDED_TIPS;
+import static seedu.duke.common.InfoMessages.INFO_BUDGET_NOT_EXCEEDED_TIPS;
+import static seedu.duke.common.InfoMessages.INFO_BUDGET_NOT_EXCEEDED_REMINDER;
+import static seedu.duke.common.InfoMessages.INFO_BUDGET_EXCEEDED_REMINDER;
+import static seedu.duke.common.InfoMessages.DOLLAR_SIGN;
+import static seedu.duke.common.InfoMessages.COLON_SPACE;
+import static seedu.duke.common.InfoMessages.FULL_STOP_SPACE;
+import static seedu.duke.common.InfoMessages.LINE_SEPARATOR;
 
 //@@author wcwy
+
 /**
  * Represents the user's budget for the current month.
  *
@@ -34,18 +48,59 @@ public class Budget {
     }
 
     /**
-     * Returns the amount of budget left in the month, as a string.
+     * Generates a budget remaining message based on the total monthly expense given.
      *
-     * <p>If the total amount of expenses is higher than the budget, a negative value in string will be returned.
+     * <p>Caller method can choose to either to generate it with a tips behind or without it
+     * by setting the boolean withTips correspondingly.
      *
      * @param totalMonthlyExpense The long value representing the total sum of a monthly expense.
-     * @return A string value representing the amount of budget left.
+     * @param withTips            The boolean value to indicate whether tips need to be appended behind the message.
+     * @param monthYear           The date of transaction.
+     * @return The message generated based on the budget remained for the given date.
      */
-    public static String getBudgetLeft(long totalMonthlyExpense) {
+    public static String generateBudgetRemainingMessage(long totalMonthlyExpense, boolean withTips, String monthYear) {
+        long budgetLeft = calculateBudgetLeft(totalMonthlyExpense);
+        boolean hasExceededBudget = hasExceededBudget(budgetLeft);
+
+        String message = getBudgetLeftMessage(budgetLeft, hasExceededBudget, monthYear);
+
+        if (withTips) {
+            message += FULL_STOP_SPACE + getMoneyManagingTips(hasExceededBudget);
+        }
+
+        return message;
+    }
+
+    /**
+     * Generates a budget remaining message for the current month.
+     *
+     * @return A string containing the remaining budget to be displayed to the user.
+     */
+    public static String generateCurrentMonthBudgetRemainingMessage() {
+        LocalDate todayDate = LocalDate.now();
+        String monthYear = "current month";
+        long currentMonthTotalExpense = TransactionList.calculateMonthlyTotalExpense(todayDate);
+        String message = generateBudgetRemainingMessage(currentMonthTotalExpense, false, monthYear);
+
+        boolean currentMonthHasExceededBudget = hasExceededBudget(calculateBudgetLeft(currentMonthTotalExpense));
+        message += LINE_SEPARATOR + generateBudgetReminder(currentMonthHasExceededBudget);
+
+        return message;
+    }
+
+    /**
+     * Calculates and returns the amount of budget left in the month, as a long value.
+     *
+     * <p>If the total amount of expenses is higher than the budget, a negative value will be returned.
+     *
+     * @param totalMonthlyExpense The long value representing the total sum of a monthly expense.
+     * @return A long value representing the amount of budget left.
+     */
+    private static long calculateBudgetLeft(long totalMonthlyExpense) {
         /*
             Since the maximum number of transaction is 1000000, maximum amount of expense is 10000000,
             and minimum is 1, the lowest possible budget left value is
-            1 - (10^6 * 10^7) = -10^15 + 1 > Long.MIN_VALUE (approx -9.22 * 10^18)
+            1 - (10^6 * 10^7) = -10^13 + 1 > Long.MIN_VALUE (approx -9.22 * 10^18)
             Thus, this function is safe from integer overflow UNLESS the values in common.Constants.java is altered.
          */
 
@@ -53,6 +108,67 @@ public class Budget {
         assert (Long.valueOf(MAX_AMOUNT_VALUE) * Long.valueOf(MAX_TRANSACTIONS_COUNT) > Long.valueOf(MAX_AMOUNT_VALUE));
         assert (MIN_BUDGET_VALUE > 0);
 
-        return Long.toString(budget - totalMonthlyExpense);
+        return budget - totalMonthlyExpense;
     }
+
+    /**
+     * Checks if the budget has been exceeded.
+     *
+     * <p>If the budget is negative, it means that the total monthly expense is higher than the budget left.
+     * Thus, the budget is exceeded and returns true.
+     *
+     * <p>If the budget is not positive, it means that the total monthly expense is lower than or equals to the
+     * budget left. Thus budget is not yet exceeded and returns false.
+     *
+     * @param budgetLeft A long value indicating the difference of total monthly expense and monthly budget.
+     * @return A boolean value indicating whether the budget has been exceeded for the month.
+     */
+    private static boolean hasExceededBudget(long budgetLeft) {
+        return budgetLeft < 0;
+    }
+
+    /**
+     * Retrieves a message to inform user if the budget has been exceeded.
+     *
+     * @param budgetLeft        A long value indicating the difference of total monthly expense and monthly budget.
+     * @param hasExceededBudget A boolean value indicating whether the budget has been exceeded for the month.
+     * @return A budget remaining or exceeding message.
+     */
+    private static String getBudgetLeftMessage(long budgetLeft, boolean hasExceededBudget, String monthAndYear) {
+        if (hasExceededBudget) {
+            assert budgetLeft < 0;
+            // The absolute value of budget left will be the amount of budget exceeded
+            return INFO_EXCEEDING_BUDGET + monthAndYear + COLON_SPACE + DOLLAR_SIGN
+                    + abs(budgetLeft);
+        } else {
+            assert budgetLeft >= 0;
+            return INFO_REMAINING_BUDGET + monthAndYear + COLON_SPACE + DOLLAR_SIGN
+                    + budgetLeft;
+        }
+    }
+
+    /**
+     * Retrieves a money managing tips based on whether budget has been exceeded.
+     *
+     * @param hasExceededBudget A boolean value indicating whether the budget has been exceeded for the month.
+     * @return A string containing a money managing tips to the user.
+     */
+    private static String getMoneyManagingTips(boolean hasExceededBudget) {
+        if (hasExceededBudget) {
+            return INFO_BUDGET_EXCEEDED_TIPS.toString();
+        } else {
+            return INFO_BUDGET_NOT_EXCEEDED_TIPS.toString();
+        }
+    }
+
+    private static String generateBudgetReminder(boolean hasExceededBudget) {
+        if (hasExceededBudget) {
+            return INFO_BUDGET_EXCEEDED_REMINDER.toString();
+        } else {
+            return INFO_BUDGET_NOT_EXCEEDED_REMINDER.toString();
+        }
+
+    }
+
+
 }

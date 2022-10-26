@@ -1,20 +1,22 @@
 package seedu.duke.command;
 
 //@@author wcwy
-
 import seedu.duke.Storage;
 import seedu.duke.Ui;
 import seedu.duke.data.Budget;
 import seedu.duke.data.TransactionList;
 import seedu.duke.exception.MoolahException;
+import seedu.duke.exception.StorageWriteErrorException;
+
+import java.io.IOException;
 
 import static seedu.duke.command.CommandTag.COMMAND_TAG_BUDGET_AMOUNT;
+import static seedu.duke.common.InfoMessages.LINE_SEPARATOR;
 
 /**
  * Represents a budget command object that will set the user's monthly budget on the Budget command.
  */
 public class BudgetCommand extends Command {
-    private static final String LINE_SEPARATOR = System.lineSeparator();
     // The command word used to trigger the execution of Moolah Manager's operations
     public static final String COMMAND_WORD = "BUDGET";
     // The description for the usage of command
@@ -32,7 +34,6 @@ public class BudgetCommand extends Command {
     // Detailed budget description
     public static final String COMMAND_DETAILED_HELP = COMMAND_HELP + COMMAND_PARAMETERS_INFO
             + LINE_SEPARATOR;
-
 
     //@@author wcwy
     private long budgetAmount;
@@ -77,8 +78,14 @@ public class BudgetCommand extends Command {
      */
     @Override
     public void execute(TransactionList transactions, Ui ui, Storage storage) throws MoolahException {
-        Budget.setBudget(budgetAmount);
-        ui.showSetBudgetAcknowledgementMessage(Long.toString(budgetAmount));
+        try {
+            Budget.setBudget(budgetAmount);
+            ui.showSetBudgetAcknowledgementMessage(Long.toString(budgetAmount));
+            //@@author chinhan99
+            storage.writeToFile(transactions.getTransactions());
+        } catch (IOException e) {
+            throw new StorageWriteErrorException();
+        }
     }
 
     //@@author paullowse

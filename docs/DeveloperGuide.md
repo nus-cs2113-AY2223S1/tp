@@ -15,6 +15,7 @@
     * [Overview for Transaction](#overview-for-transaction)
     * [Implementation for Transaction](#implementation-for-transaction)
     * [Help Command](#help-command)
+    * [Budget Command](#budget-command)
     * [Add Command](#add-command)
     * [Edit Command](#edit-command)
     * [List Command](#list-command)
@@ -36,15 +37,21 @@
 
 ## Preface
 
-{Provide brief details of the Moolah Manager application and the purpose of the Developer Guide}
+Moolah Manager is a desktop app for managing one's finances, optimised for use via a Command Line Interface (CLI). Designed for IT professionals who are
+fast typists, it can help to process day-to-day monetary transactions that are classified into income and expense. Users can expect to get an overview of their transactions
+at a glance and be provided with valuable insights into their spending habits. They are also encouraged to set budget goals to minimise their spending.
 
-_Written by: Author name_
+This document is meant assist developers in understanding how our program works.
+
+_Written by: Brian Wong Yun Long_
 
 ## Acknowledgements
 
-{List here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+The format of this development guide was adapted from [SE-EDU AddressBook Level 3 Developer Guide](https://se-education.org/addressbook-level3/DeveloperGuide.html).
 
-_Written by: Author name_
+Some parts of the source code in this program were reused and adapted from the team's individual projects during the CS2113 IP phase.
+
+_Written by: Brian Wong Yun Long_
 
 ## Setting Up the Project
 
@@ -69,20 +76,72 @@ _Written by: Paul Low_
 
 ## Design
 
-{Describe the design of the product. Use UML diagrams and short code snippets where applicable.}
-
 ### Architecture
+![Architecture Diagram](images/ArchitectureDiagram.png)
+The Architecture Diagram shown above explains the high-level design of Moolah Manager. 
+The `Duke` class contain the main method which holds the responsibility for the following:
+1. On application launch, it will initialise the `UI`, `Storage` and `Data` components. 
+2. During application execution, it will interact with `UI`, `Parser`, `Command` components 
+to execute the command entered by the users.
+3. On any exception caught, it will handle the exception and interact with the `UI` to display the error message.
 
-_Written by: Author name_
+`Common` represents a collection of classes or enums used by multiple components.
+
+The rest of the application consists of six components:
+ - `UI`: The user interface of Moolah Manager
+ - `Parser`: Parser for user's entered command.
+ - `Command`: The command executor.
+ - `Data`: Holds the data of the application in memory.
+ - `Storage`: File I/O to store the data onto the hard disk.
+
+#### How the architecture components interact with each other
+The sequence diagram below shows how the components interact on command `budget b/1000`.
+![Architecture Interaction](images/ArchitectureSequenceDiagram.png)
+The section below gives more detailed description of each component.
+
+_Written by: Chia Thin Hong_
 
 ### Command Component
 
-_Written by: Author name_
+The command component is represented by a `command` package which consists of all the classes that is part of the data stored
+by Moolah Manager. Within the `command` package, there are many classes, each corresponding to all of our commands which are
+supported by the application.
+
+The `AddCommand` class contains the operations pertaining to adding a transaction into the list of transactions.
+
+The `BudgetCommand` class contains the operations pertaining to setting the budget for the user.
+
+The `ByeCommand` class contains the operations pertaining to exiting the program.
+
+The `CommandTag` class consists of all the tags that the program parses.
+
+The `DeleteCommand` class contains the operations pertaining to deleting a transaction from the list of transactions.
+
+The `EditCommand` class contains the operations pertaining to editing a transaction from the list of transactions.
+
+The `FindCommand` class contains the operations pertaining to searching the list of transactions for transactions that match the inputted keywords.
+
+The `HelpCommand` class contains the operations pertaining to displaying help messages for the user.
+
+The `ListCommand` class contains the operations pertaining to listing all transactions.
+
+The `PurgeCommand` class contains the operations pertaining to deleting all transaction from the list of transactions.
+
+The `StatsCommand` class contains the operations pertaining to getting statistics based on your list of transactions.
+
+The structure of the command component in Moolah Manager is illustrated in the class diagram below:
+![Command Component Class Diagram](images/CommandComponentClassDiagram.png)
+
+_Written by: Brian Wong Yun Long_
 
 ### Data Component 
 
 The data component is represented by a `data` package which consists of all the classes that is part of the data stored 
-by Moolah Manager. Within the `data` package, a transaction package and a transactionList class is stored. 
+by Moolah Manager. Within the `data` package, a transaction package, a budget class and a transactionList class is 
+stored. 
+
+The `budget` class is a representation of the monthly budget of the users. Operations related to viewing the budget and 
+differences from budget is implemented within this class.
 
 The `transactionList` class is a representation of a list of transactions, and the
 operations related to the `transactionList` implemented within this class.
@@ -91,28 +150,21 @@ Within the transaction package, the following classes are stored:
 1. Transaction 
 2. Income 
 3. Expense
-4. Category
 
 The structure of the data component in Moolah Manager is illustrated in the class diagram below:
 ![Data Component Class Diagram](images/DataComponentClassDiagram.png)
 
-From the class diagram, it can be seen that the transactionList mainly contain methods for CRUD operations to the list, 
-such as getting, adding, editing, deleting and purging of transaction(s) from the list.
+From the class diagram, it can be seen that the transactionList contain the methods for CRUD operations to the list, 
+such as getting, adding, editing, deleting and purging of transaction(s) in the list.
 
-The `Transaction` class is the abstract classes of an `Income` or an `Expense`. The `Category` represents a category of 
-a transaction. Within the transaction class and its subclasses, getters and setters are used to access the private 
-variables. These classes override the toString() method for a self-defined print format when the transactions are 
-displayed. 
-
-<!-- TODO: Complete category and categoryList in sequence diagram and write their explanation here -->
-
-A more detailed explanation on the implementation on the transactions can be viewed under Section
+The `Transaction` class is the abstract classes of an `Income` or an `Expense`. A more detailed explanation on the 
+implementation on the transactions can be viewed under Section
 [Implementation for Transaction](#implementation-for-transaction).
 
 #### How the data component interacts
 
 - When MoolahManager starts running, the `Duke` class will initialize a `Storage` object which will attempt to 
-read from the file and initialize a `transactionList`. The temporary `transactionList` containing all the stored 
+read from the file and initialize both `budget` and `transactionList`. The temporary `transactionList` containing all the stored 
 transaction records will be returned by the `Storage`. 
 Based on the whether the initialization is successful, the corresponding constructor will be called to initialize a 
 `transactionList` object which will be used throughout the application running time to hold the `transactions` added.
@@ -123,13 +175,29 @@ Based on the whether the initialization is successful, the corresponding constru
 class and can be deleted by a `deleteCommand` or `purgeCommand` class. These interactions are described in further detail
 under each command section below.
 
+- The monthly budget can be updated by `budget` command.
+
 <!-- TODO: Describe how category and categoryList work here -->
 
 _Written by: Chia Thin Hong_
 
 ### Storage Component
+The `Storage` component is a standalone class. It utilises its sub-methods and methods from external classes to perform it's read and write functions.
 
-_Written by: Author name_
+The structure of `Storage` can be seen below.
+<p align="center">
+    <img src="images/StorageComponentClassDiagram.png">
+    <br />
+    <i> Simplified Class Diagram for Storage Component</i>
+</p>
+
+1. `Duke` initializes `Storage` and `Storage#initializeFile` is called.
+2. During the initialization , parser methods from `CommandParser` and `ParameterParser` would be used to process the entries within `Duke.txt`.
+Methods from `Budget` and `TransactionList` would be used for the storage of `Budget` amount and `TransactionList` entries into the program.
+3. `TransactionList` is returned to `Duke` after the storage of entries within `Duke.txt`.
+4. After initialization and upon user input, `Command` classes such as `AddCommand`can call for `Storage#writeToFile` method in order to update the contents within `Duke.txt`.
+
+_Written by: Yong Chin Han_
 
 ### Parser Component
 The Parser component comprises of two main parsers: `CommandParser` and `ParameterParser`. Together, both these 
@@ -178,9 +246,19 @@ _Written by: Author name_
 
 ### Overview for Transaction
 
-{Give a brief overview of the Transaction features (i.e. purpose of each command) in Moolah Manager application.}
+The following commands are accepted in Moolah Manager:
+1) `Add` - Adds an `Income` or `expense` type transaction into the list of transaction. [Add Command](#add-command)
+2) `Budget` - Adds an `Budget` into Moolah Manager, which sets the basis for financial tracking. [Budget Command](#budget-command)
+3) `Bye` - Exits Moolah Manager. [Bye Command](#bye-command)
+4) `Delete` - Deletes an `Income` or `expense` type transaction from the list of transaction. [Delete Command](#delete-command)
+5) `Edit` - Edits an `Income` or `expense` type transaction from the list of transaction. [Edit Command](#edit-command)
+6) `Find` - Searches for an `Income` or `expense` type transaction from the list of transaction given keywords. [Find Command](#find-command)
+7) `Help` - Outputs the usage of commands of Moolah Manager. [Help Command](#help-command)
+8) `List` - List all transactions. [List Command](#list-command)
+9) `Purge` - Deletes all transactions from the list of transaction. [Purge Command](#purge-command)
+10) `Stats` - View statistics on transactions based on the list of transactions in Moolah Manager. [Stats Command](#stats-command)
 
-_Written by: Author name_
+_Written by: Brian Wong Yun Long_
 
 ### Implementation for Transaction
 
@@ -220,27 +298,52 @@ Some important operations are performed within the `TransactionList` class, whic
 _Written by: Chua Han Yong Darren_
 
 ### Help Command
-The help command displays the help message to the users to guide them on the usage and provide descriptions for each 
-available command. 
+The help command displays the help message to the users to guide them on the usage and provide descriptions for each
+available command.
 
-The help command can be run as `help` or `help o/detailed`, where the latter will display a more detailed version of 
-help messages to the users. 
+The help command can be run as `help` or `help o/detailed`, where the latter will display a more detailed version of
+help messages to the users.
 
 The structure of the application focusing on the help command is illustrated in the class diagram below:
 ![Data Component Class Diagram](images/HelpClassDiagram.png)
 
-For each command subclass, they will implement the getHelpMessage() and getDetailedHelpMessage() methods. These methods 
+For each command subclass, they will implement the getHelpMessage() and getDetailedHelpMessage() methods. These methods
 will contain their corresponding HelpMessage Enum that stores the help messages as strings inside the enum.
 
-In the help classes, during the execute() call, it will call either generateBasicHelp() or generateDetailedHelp() method
-based on the help option given by the user. 
+In the help command, during the execute() call, it will call either generateBasicHelp() or generateDetailedHelp() method
+based on the help option chosen by the user.
 
-<!-- Todo: Add sequence diagram -->
+![Data Component Class Diagram](images/HelpSequenceDiagram.png)
+
+
+_Written by: Chia Thin Hong_
+
+### Budget Command
+
+The budget command allows user to set a new monthly budget. The range of accepted budget value is stored in the 
+`common/Constants.java` file, whereby the content of the file is as such:
+
+```
+public static int MAX_TRANSACTIONS_COUNT = 1000000;
+public static int MIN_AMOUNT_VALUE = 0;
+public static int MAX_AMOUNT_VALUE = 10000000;
+public static int MIN_BUDGET_VALUE = 1;
+public static long MAX_BUDGET_VALUE = Long.valueOf(MAX_TRANSACTIONS_COUNT) * Long.valueOf(MAX_AMOUNT_VALUE);
+```
+
+Under the default setting, the acceptable range of the monthly budget, is 0 < budget <= 10000000000000, which is 10^13 
+and it ensures that no integer overflow will occur as the `long` data type is used. 
+
+To set a new budget, user can use the command `budget b/AMOUNT` where the `AMOUNT` tag is any whole number within the 
+valid range above. 
+
+The interaction of the components on setting a budget can be seen in the sequence diagram under 
+[Architecture](#How-the-architecture-components-interact-with-each-other).
+
 
 _Written by: Chia Thin Hong_
 
 ### Add Command
-
 
 **This feature allows the local and external (handled by Storage class) storage of transaction entries by the user.**
 
@@ -276,16 +379,13 @@ These are the important operations performed within the `AddCommand` class, with
   It is used externally by ParameterParser to verify if the user input contains the mandatory command tags, to correctly
   store the Transaction object in the program.
 
-Written by: Yong Chin Han
+_Written by: Yong Chin Han_
 
 ### Edit Command
 
-{Describe the implementation for the Edit Command}
-
-_Written by: Author name_
+_Written by: Brian Wong Yun Long_
 
 ### List Command
-
 
 The full command for list is `list [t/TYPE] [c/CATEGORY] [d/DATE]`
 For example, if 'list' is called, all transactions that are present in Moolah Manager will be listed out
@@ -343,7 +443,7 @@ _Written by: Chua Han Yong Darren_
 
 {Describe the implementation for the Stats Command}
 
-_Written by: Author name_
+_Written by: Chua Han Yong Darren_
 
 ### Delete Command
 
@@ -450,22 +550,34 @@ This is how the command works:
 _Written by: Brian Wong Yun Long_
 
 ### Storage Operations
+The Storage class is a standalone class that contains methods used for the storage of Transaction entries and the Budget value.
 
-#### Reading From a File
+The class is first called by `Duke` during the initialising of the `TransactionList`. In this process, duke.txt's existance will be verified.
+1. If the file does not exist, an empty `Duke.txt` file would be created for the program to use. 
+2. If the file exists, it's values would be parsed to verify if they have been corrupted. If corrupted, the storage of values would halt and error messages would be shown to prompt user to correct file issues.
+Else, the values would update the program's `Budget` and the entries in `TransactionList`without any issues.
 
-#### Writing To a File
+#### Reading From Duke.txt 
+This specific operation is done during the initializing of the program. The `Budget` value and `TransactionList` entries would be parsed before their values are added into the program.
+`Storage#initializeFile` is called by `Duke`.
+`Storage#checkIfFileExist` is used to check if `Duke.txt` exists, and creates a new `Duke.txt` file if it does not exist.
+`Storage#storeFileValuesLocally` uses sub-methods and methods from external classes to parse each line entry within `Duke.txt` and store the values in the program.
 
-_Written by: Author name_
+#### Writing To Duke.txt
+This operation is done whenever the `TransactionList` entries or `Budget` value is changed via any of the `Command` classes;
+(e.g. Add, Delete, Purge , Edit and Budget commands). 
+The method `Storage#writeToFile` is used to update changes in `Budget` or `TransactionList`.
+
+_Written by: Yong Chin Han_ 
 
 ### Logging Operations
-
-{Describe how logging is performed in the developer code}
 
 Our team used `java.util.logging` package for the purposes of logging. We instantiated various objects
 for different classes such as `parserLogger` and `addLogger` to set the log messages.
 
 **Logging Levels**:
 
+* `ERROR`: An unexpected control flow captured
 * `WARNING`: An exception has been caught by the app
 * `INFO`: Information details what the app has done
 
@@ -475,27 +587,91 @@ _Written by: Paul Low_
 
 ### Target user profile
 
-{Describe the target user profile}
+Moolah Manager is developed for IT professionals who prefer using Command Line Interface (CLI) applications
+to quickly track and update their daily monetary transactions. They ought to be reasonably comfortable in typing over
+mouse interactions and can type fast.
 
 ### Value proposition
 
-{Describe the value proposition: what problem does it solve?}
+Financial bookkeeping using a mobile application is often a hassle due to repetitive clicks. Moolah Manager  boasts a
+time-saving CLI that encourages individuals to take ownership of tracking and reviewing their daily or monthly
+transactions in an efficient and effective way. Moreover, it facilitates budget planning to prevent overspending.
 
 ## Appendix B: User Stories
 
-| Version | As a ... | I want to ...             | So that I can ...                                           |
-|---------|----------|---------------------------|-------------------------------------------------------------|
-| v1.0    | new user | see usage instructions    | refer to them when I forget how to use the application      |
-| v2.0    | user     | find a to-do item by name | locate a to-do without having to go through the entire list |
+| Version | As a ...         | I want to ...                                                                        | So that I can ...                                                                                                              |
+|---------|------------------|--------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------|
+| v1.0    | fast-typing user | type my own actions instead of having to click through different GUI pages           | have a more convenient way of managing my spending                                                                             |
+| v1.0    | new user         | have similar features be grouped in the same family                                  | navigate the application easily                                                                                                |
+| v1.0    | new user         | list usable commands                                                                 | better utilize the application when I unfamiliar with the commands                                                             |
+| v1.0    | user             | add my income and daily expense into the application                                 | keep a record of my transaction history                                                                                        |
+| v1.0    | user             | add my salary into the application                                                   | gather insights from a trend of my income                                                                                      |
+| v1.0    | user             | add a category to each type of spending                                              | have an organised view of my financial statements                                                                              |
+| v1.0    | user             | view my daily expenditure                                                            | plan how I want to spend my remaining income throughout the rest of the week                                                   | 
+| v1.0    | user             | know which category of expenses I spend the most on                                  | better allocate my income for essential needs                                                                                  | 
+| v1.0    | careless user    | delete my spending or expenses in the application                                    | remove inputs that are false or outdated                                                                                       | 
+| v1.0    | careless user    | receive an error message when entering a wrong command                               | be aware that I need to rectify my incorrect input                                                                             |
+| v1.0    | forgetful user   | find a specific transaction                                                          | recall how much I spent or earned for a particular situation                                                                   |
+| v1.0    | busy user        | purge all my transactions at one go                                                  | refrain from deleting my transactions one by one when needed                                                                   |
+| v2.0    | new user         | be guided at the initial stage of using the application                              | make good use of the features                                                                                                  |
+| v2.0    | frequent user    | input a file with all my expenses for the application to retrieve data               | be more efficient and do not need to manually type my financial records into the command prompt                                |
+| v2.0    | frequent user    | save my input history into a file                                                    | have the inputs automatically read again in future without having to re-enter similar expenses each time I use the application | 
+| v2.0    | user             | gather a summary of my expenditure over a time period (i.e., daily, weekly, monthly) | better understand my spending habits                                                                                           |
+| v2.0    | user             | know the amount of savings tabulated from income and expenditure after each month    | review my spending and plan my budget for the next month                                                                       |
+| v2.0    | user             | gather individual insights of different time periods after adding my transactions    | analyze and reflect on the way I am managing my income and expenses                                                            |
+| v2.0    | user             | view recommended money-managing tips from the application                            | better improve my money-managing habits                                                                                        | 
+| v2.0    | user             | set up and update my budget                                                          | limit my spending against a budget                                                                                             |
+| v2.0    | user             | archive my financial transactions from the previous years                            | focus on transactions that matter only for the current year                                                                    |
+| v2.0    | careless user    | modify my spending or expenses in the application                                    | rectify any false input                                                                                                        |
+| v2.0    | forgetful user   | receive reminders on how I should spend my allowance                                 | be consciously aware of my budget constraints                                                                                  |
 
 ## Appendix C: Non-Functional Requirements
 
-{Give non-functional requirements}
+1. Should work on common operating systems including Windows, macOSX and Linux as long as it has Java 11 or above installed.
+2. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+3. Does not require an active connection to the Internet to use the application.
+4. Should respond to commands within 3 seconds with no noticeable sluggishness in performance for typical usage.
 
 ## Appendix D: Glossary
 
-* *glossary item* - Definition
+- **Transaction:** An instance when someone makes or receives a payment including deposits, withdrawals, and exchanges
+- **Budget:** An estimate of income or expenditure for a set period of time
+- **Income:** Payment received from others for work or personal purpose
+- **Expense:** Payment made to others for a purpose
+- **Savings:** Portion of income that is not spent on current expenditures
 
 ## Appendix E:  Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+### Launch and Shutdown
+
+- Initial Launch
+    1. Download the latest [duke.jar](https://github.com/AY2223S1-CS2113-W12-2/tp/releases/download/v2.0/duke.jar) and
+       copy it into a separate directory.
+    2. Ensure that Java 11 has been installed and configured on your operating system.
+    3. Launch a command prompt or terminal and run the command `java -jar duke.jar`.<br>
+       **Expected:** Moolah Manager will display a greeting message and a remaining budget for the current month.
+       A data file, `duke.txt` may be loaded if it exists in `./data/` directory.
+
+- Shutdown
+    1. Type `exit` to quit the program.<br>
+       **Expected:** Moolah Manager will terminate and displays a goodbye message.
+
+### Storage
+
+- Loading Data
+    1. Launch the application and change the state of the program, such as adding a new transaction. Close the window.
+    2. Re-launch the application.<br>
+       **Expected:** Moolah Manager will load the `duke.txt` data file and the state of the program is the same as when it was closed.
+
+- Missing Data File
+    1. As per the instructions from loading data, check there is a `duke.txt` data file in `./data/` directory.
+    2. In `./data/` directory, delete `duke.txt`.
+    3. Re-launch the application.<br>
+       **Expected:** No data file will be loaded into the application, and user may not see the former state of the program.
+
+- Corrupted Data File
+    1. As per the instructions from loading data, check there is a `duke.txt` data file in `./data/` directory.
+    2. In `./data/` directory, open `duke.txt` and try corrupting the records by e.g., removing the first pipe symbol from
+       the first row. Save the changes to the file.
+    3. Re-launch the application.<br>
+       **Expected:** The data file will not be loaded into the application, and user will be prompted that the file.

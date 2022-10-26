@@ -4,9 +4,9 @@ package seedu.duke.exception;
 import seedu.duke.common.ErrorMessages;
 
 /**
- * Represents the exception where there are missing keywords in the search expression.
+ * Represents the exception where period and number tags are not given as a pair in the input.
  */
-public class FindTransactionMissingKeywordsException extends MoolahException {
+public class GlobalMissingPeriodNumberTagException extends MoolahException {
     /**
      * Returns the error message of the exception to alert user of the exception.
      *
@@ -14,6 +14,6 @@ public class FindTransactionMissingKeywordsException extends MoolahException {
      */
     @Override
     public String getMessage() {
-        return ErrorMessages.ERROR_FIND_COMMAND_MISSING_KEYWORDS.toString();
+        return ErrorMessages.ERROR_GLOBAL_MISSING_TAG_PERIODNUMBER.toString();
     }
 }

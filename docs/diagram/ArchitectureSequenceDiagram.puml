@@ -1,0 +1,44 @@
+@startuml
+!include Style.puml
+
+Participant ":Duke" as duke
+Participant ":Parser" as parser
+Participant ":Command" as command
+Participant ":Data" as data
+Participant ":Storage" as storage
+Participant ":Ui" as ui
+actor User
+
+activate duke
+duke -> ui:readCommand()
+activate ui
+User -> ui:"budget b/1000"
+return input:String
+
+duke -> parser:parse(input)
+activate parser
+    create command
+    parser -> command:new BudgetCommand()
+    activate command
+    return
+    parser -> command:setBudget(1000)
+    activate command
+    return
+return command:Command
+
+duke -> command:execute()
+activate command
+    command -> data:setBudget(1000)
+    activate data
+    return
+
+    command -> storage:writeToFile()
+    activate storage
+    return
+
+    command -> ui:displayMessage()
+    activate ui
+    return
+return
+
+@enduml

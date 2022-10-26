@@ -1,12 +1,9 @@
 package seedu.duke.exception;
 
-//@@author chydarren
 import seedu.duke.common.ErrorMessages;
 
-/**
- * Represents the exception where there are missing keywords in the search expression.
- */
-public class FindTransactionMissingKeywordsException extends MoolahException {
+public class StorageFileCorruptedBudgetException extends MoolahException {
+
     /**
      * Returns the error message of the exception to alert user of the exception.
      *
@@ -14,6 +11,7 @@ public class FindTransactionMissingKeywordsException extends MoolahException {
      */
     @Override
     public String getMessage() {
-        return ErrorMessages.ERROR_FIND_COMMAND_MISSING_KEYWORDS.toString();
+        return ErrorMessages.ERROR_STORAGE_BUDGET_CORRUPTED.toString();
     }
+
 }
