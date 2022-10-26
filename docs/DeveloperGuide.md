@@ -93,12 +93,6 @@ different commands.
 - getSeparatorString() - Returns a separator string.
 
 #### Logic Component
-
-How the authentication works:
-* When the user fails to authenticate his inital `API_KEY`, he can use the `auth` Command to authenticate his `API_KEY`. 
-* If the `API_KEY` is valid, then the program will reload the corresponding JSON file and `fetchData()` from the 
-authenticated API file.
-
 How the parsing works:
 
 * When called upon to parse a user command, the `Parser` class creates an `ABCCommandParser` (`ABC` is a placeholder 
@@ -117,6 +111,8 @@ and return the intended result. `Execute` returns a `CommandResult`, which is an
 `FindCommand`) as an extension of the `Command` class.
 * All `ABCCommand` classes will have an override `execute` method, which will override the `execute` method in `Command` 
 and return the respective `CommandResult` result of the Command.
+
+![Logic Class Diagram](images/LogicClassDiagram.png)
 
 ### Favourite / Unfavourite feature
 

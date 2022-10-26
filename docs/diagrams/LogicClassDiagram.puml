@@ -55,10 +55,10 @@ class CommandResult {
 }
 
 runCommandLoopUntilExit -> "1" Parser
-runCommandLoopUntilExit ......> CommandResult
-Command "executes" <.... runCommandLoopUntilExit
-CommandResult <... "produces" Command
-Command <|-- XYZCommand
+runCommandLoopUntilExit .....> CommandResult
+Command "executes" <... runCommandLoopUntilExit
+CommandResult <.. "produces" Command
+Command <|-- ABCCommand
 Parser ...> "creates"Command
 }
 
