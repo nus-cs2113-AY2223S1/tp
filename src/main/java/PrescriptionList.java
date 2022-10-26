@@ -184,4 +184,8 @@ public class PrescriptionList {
     private boolean isInvalidIndex(int index) {
         return (index < 0 || index >= prescriptionsList.size());
     }
+
+    public int getTotalPrescriptions() {
+        return prescriptionsList.size();
+    }
 }
