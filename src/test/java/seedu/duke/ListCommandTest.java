@@ -5,14 +5,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 class ListCommandTest {
-    final String expectedEmpty = "---Here are the reviews in your list---\n"
+    static final String expectedEmpty = "---Here are the reviews in your list---\n"
             + "\nMovies:\n"
             + "\nTV Shows:";
-    final String expectedMovieList = "---Here are the reviews in your list---\n"
+    static final String expectedMovieList = "---Here are the reviews in your list---\n"
             + "\nMovies:\n"
             + "1. [Movie] Harry Potter Rating:5.0 Genre:SciFi Date watched:10-01-2020\n"
             + "\nTV Shows:";
-    final String expectedFullList = "---Here are the reviews in your list---\n"
+    static final String expectedFullList = "---Here are the reviews in your list---\n"
             + "\nMovies:\n"
             + "1. [Movie] Harry Potter Rating:5.0 Genre:SciFi Date watched:10-01-2020\n"
             + "\nTV Shows:"
