@@ -4,11 +4,11 @@
 
 ### Database
 
-The database reads in SEP module data from data.csv and stores the useful data into an ArrayList of module mappings and universities.
+The database reads in SEP module data from `data.csv` and stores the useful data into an ArrayList of module mappings and universities.
 
-Upon starting easySEP, the DatabaseStorage will load each line from data.csv, parse the line using DatabaseParser, and store the data into the Database.
+Upon starting easySEP, the DatabaseStorage will load each line from `data.csv`, parse the line using DatabaseParser, and store the data into the Database.
 
-Relevant exceptions are thrown when there are unexpected scenarios. For instance, if data.csv cannot be found at the given file path, a FileNotFoundException is thrown.
+Relevant exceptions are thrown when there are unexpected scenarios. For instance, if `data.csv` cannot be found at the given file path, a FileNotFoundException is thrown.
 
 The following diagram illustrates the relationships between the three main database classes - DatabaseStorage, DatabaseParser, and Database.
 
