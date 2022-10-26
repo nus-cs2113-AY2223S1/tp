@@ -1,0 +1,131 @@
+@startuml
+!include Style.puml
+
+class "{abstract}\n Command" {
+        + COMMAND_WORD: String
+        + COMMAND_DESCRIPTION: String
+        + COMMAND_USAGE: String
+        + COMMAND_PARAMETERS_INFO: String
+
+        - type: String
+        - category: String
+        - description: String
+        - amount: int
+        - date: LocalDate
+
+        +getMandatoryTags()
+        +setBudgetAmount()
+        +{abstract}execute()
+}
+
+class AddCommand {
++ COMMAND_WORD: String
+    + COMMAND_DESCRIPTION: String
+    + COMMAND_USAGE: String
+    + COMMAND_PARAMETERS_INFO: String
+
+    - type: String
+    - category: String
+    - description: String
+    - amount: int
+    - date: LocalDate
+
+    +getMandatoryTags()
+    +{abstract}execute()
+}
+
+class ByeCommand {
++ COMMAND_WORD: String
+    + COMMAND_DESCRIPTION: String
+    + COMMAND_USAGE: String
+    + COMMAND_PARAMETERS_INFO: String
+
+
+    +{abstract}execute()
+}
+
+class DeleteCommand {
++ COMMAND_WORD: String
+    + COMMAND_DESCRIPTION: String
+    + COMMAND_USAGE: String
+    + COMMAND_PARAMETERS_INFO: String
+
+    - entryNumber: int
+
+    +getMandatoryTags()
+    +setEntryNumber(): int
+    +{abstract}execute()
+}
+
+class ListCommand {
++ COMMAND_WORD: String
+    + COMMAND_DESCRIPTION: String
+    + COMMAND_USAGE: String
+    + COMMAND_PARAMETERS_INFO: String
+
+    - type: String
+    - category: String
+    - date: LocalDate
+
+    -listTransactions: TransactionList
+    +{abstract}execute()
+}
+
+class PurgeCommand {
++ COMMAND_WORD: String
+    + COMMAND_DESCRIPTION: String
+    + COMMAND_USAGE: String
+    + COMMAND_PARAMETERS_INFO: String
+
+
+    +isEmpty(): TransactionList
+    +{abstract}execute()
+}
+
+class FindCommand {
++ COMMAND_WORD: String
+    + COMMAND_DESCRIPTION: String
+    + COMMAND_USAGE: String
+    + COMMAND_PARAMETERS_INFO: String
+
+    - keywords: String
+
+    +checkFindFormat() : String
+    +{abstract}execute()
+}
+
+class HelpCommand {
++ COMMAND_WORD: String
+    + COMMAND_DESCRIPTION: String
+    + COMMAND_USAGE: String
+    + COMMAND_PARAMETERS_INFO: String
+
+    - isDetailed : Boolean
+
+    -generateBasicHelp() : String
+    -generateDetailedHelp() : String
+    +{abstract}execute()
+}
+
+class BudgetCommand {
++ COMMAND_WORD: String
+    + COMMAND_DESCRIPTION: String
+    + COMMAND_USAGE: String
+    + COMMAND_PARAMETERS_INFO: String
+
+    - budgetAmount: long
+
+    +getMandatoryTags()
+    +setBudgetAmount()
+    +{abstract}execute()
+}
+
+FindCommand --|> "{abstract}\n Command"
+ByeCommand -up-|> "{abstract}\n Command"
+AddCommand -up-|> "{abstract}\n Command"
+DeleteCommand --|> "{abstract}\n Command"
+ListCommand --|> "{abstract}\n Command"
+PurgeCommand -up-|> "{abstract}\n Command"
+HelpCommand -left-|> "{abstract}\n Command"
+BudgetCommand -right-|> "{abstract}\n Command"
+@enduml
