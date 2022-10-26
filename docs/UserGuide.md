@@ -2,24 +2,24 @@
 
 - [Introduction](#introduction)
 - [About This Guide](#about-this-guide)
-    * [What is in Moolah Manager](#what-is-in-moolah-manager)
-    * [Command Format](#command-format)
+  * [What is in Moolah Manager](#what-is-in-moolah-manager)
+  * [Command Format](#command-format)
 - [Getting Started](#getting-started)
-    * [Setting Up](#setting-up)
-    * [Viewing Help: `help`](#viewing-help---help-)
+  * [Setting Up](#setting-up)
+  * [Viewing Help: `help`](#viewing-help---help-)
 - [Managing Transactions](#managing-transactions)
-    * [Adding a Transaction: `add`](#adding-a-transaction---add-)
-    * [Editing a Transaction: `edit`](#editing-a-transaction---edit-)
-    * [Listing the Transactions: `list`](#listing-the-transactions---list-)
-    * [Searching for Transactions: `find`](#searching-for-transactions---find-)
-    * [Deleting a Transaction: `delete`](#deleting-a-transaction---delete-)
-    * [Purging all Transactions: `purge`](#purging-all-transactions---purge-)
+  * [Adding a Transaction: `add`](#adding-a-transaction---add-)
+  * [Editing a Transaction: `edit`](#editing-a-transaction---edit-)
+  * [Listing the Transactions: `list`](#listing-the-transactions---list-)
+  * [Searching for Transactions: `find`](#searching-for-transactions---find-)
+  * [Deleting a Transaction: `delete`](#deleting-a-transaction---delete-)
+  * [Purging all Transactions: `purge`](#purging-all-transactions---purge-)
 - [Budgeting and Financial Insights](#budgeting-and-financial-insights)
-    * [Viewing the Statistics: `stats`](#viewing-the-statistics---stats-)
-    * [Managing the Budget: `budget`](#managing-the-budget---budget-)
+  * [Viewing the Statistics: `stats`](#viewing-the-statistics---stats-)
+  * [Managing the Budget: `budget`](#managing-the-budget---budget-)
 - [General](#general)
-    * [Persistent Data](#persistent-data)
-    * [Exiting the Program: `exit`](#exiting-the-program---exit-)
+  * [Persistent Data](#persistent-data)
+  * [Exiting the Program: `exit`](#exiting-the-program---exit-)
 - [Command Summary](#command-summary)
 - [FAQ](#faq)
 
@@ -27,13 +27,13 @@
 
 _Written by: Chua Han Yong Darren_
 
-## About This Guide 
+## About This Guide
 
 ### What is in Moolah Manager
 
 _Written by: Paul Low_
 
-### Command Format 
+### Command Format
 
 _Written by: Chia Thin Hong_
 
@@ -133,7 +133,7 @@ _Written by: Brian Wong Yun Long_
 
 Mandatory Tags
 
-* The `TRANSACTION_TYPE` is either `"expense"` or `"income"`. 
+* The `TRANSACTION_TYPE` is either `"expense"` or `"income"`.
 * The `CATEGORY_TYPE` is a one-word parameter flexibly defined by the user. [ No numerals, symbols or spacings are allowed ]
 * The `TRANSACTION_AMOUNT` is a positive numeral that is above 0 and below 100000001. [ No alphabets, symbols or spacings allowed ]
 * The `TRANSACTION_DATE` MUST be in ddMMyyyy format.
@@ -157,7 +157,7 @@ Optional tags
 
 _Written by: Yong Chin Han_
 
-## FAQ 
+## FAQ
 
 **Q**: How do I transfer my data to another computer?
 
