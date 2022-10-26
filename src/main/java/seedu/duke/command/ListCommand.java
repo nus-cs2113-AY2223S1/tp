@@ -1,6 +1,7 @@
 package seedu.duke.command;
 
 //@@author chydarren
+
 import seedu.duke.Storage;
 import seedu.duke.Ui;
 import seedu.duke.data.TransactionList;
@@ -50,14 +51,14 @@ public class ListCommand extends ListAndStatsCommand {
             + "month must be accompanied by a year. This tag cannot be used together with [p/PERIOD] or [n/NUMBER] "
             + "tags."
             + LINE_SEPARATOR
-            + "(Optional) YEAR: Year of the transaction. Only integers from 1000 onwards are accepted."
+            + "(Optional) YEAR: Year of the transaction. Only integers from 1000 onwards are accepted. "
             + "This tag cannot be used together with [p/PERIOD] or [n/NUMBER] tags."
             + LINE_SEPARATOR
-            + "(Optional) PERIOD: Period of the transaction. Only \"weeks\" or \"months\" is accepted. Note that"
+            + "(Optional) PERIOD: Period of the transaction. Only \"weeks\" or \"months\" is accepted. Note that "
             + "period must be accompanied by a number to backdate from. This tag cannot be used together with "
             + "[m/MONTH] or [y/YEAR] tags."
             + LINE_SEPARATOR
-            + "(Optional) NUMBER: Last number of weeks or months. Only positive integers are accepted. Note that"
+            + "(Optional) NUMBER: Last number of weeks or months. Only positive integers are accepted. Note that "
             + "number must be accompanied by a period that represents weeks or months. This tag cannot be used "
             + "together with [m/MONTH] or [y/YEAR] tags.";
 

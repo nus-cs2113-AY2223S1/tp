@@ -24,6 +24,9 @@ stats s/categorical_savings s/categorical_savings
 stats s/categorical_savings
 list
 add t/expense c/food a/20 d/13092022 i/NIL
+add t/expense c/food a/0 d/13092022 i/NIL
+add t/expense c/food a/00000 d/13092022 i/NIL
+add t/expense c/food a/9999999999999999999999999999999999999999999999999999999999999999999999999 d/13092022 i/NIL
 add t/income c/salary a/2000 d/30092022 i/jan_salary
 add t/expense c/transport a/1 d/02102022 i/bus_fare
 add t/ c/transport a/1 d/02102022 i/bus_fare
