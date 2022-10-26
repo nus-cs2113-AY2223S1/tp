@@ -54,7 +54,7 @@ The `VisitList` Component,
 ### PrescriptionList component
 **API**: `PrescriptionList.java`
 
-![](../diagrams/PrescriptionListClassDiagram.png)
+![](images/PrescriptionListClassDiagram.png)
 
 The `PrescriptionList` component,
 * stores the list of prescriptions

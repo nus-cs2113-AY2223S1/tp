@@ -1,0 +1,31 @@
+@startuml
+box
+participant ":PrescriptionList" as A
+participant ":Prescription" as B
+participant ":ArrayList<Prescription>" as C
+end box
+
+participant ":UI" as D
+
+[-> A : add(ui, "A01", "Panadol", \n"1 pill", "4 times a day")
+activate A
+
+A -> B : new Prescription("A01", "Panadol", \n"1 pill", "4 times a day")
+activate B
+return prescription:Prescription
+
+A -> C : add(prescription)
+activate C
+return
+
+A -> B : toString()
+activate B
+return :String
+
+A -> D : printAddPrescriptionMessage(:String)
+activate D
+return
+
+return
+
+@enduml

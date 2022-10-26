@@ -1,0 +1,35 @@
+@startuml
+box
+participant ":PrescriptionList" as A
+participant ":ArrayList<Prescription>" as C
+participant "prescriptionEdited\n:Prescription" as B
+end box
+
+participant ":UI" as D
+
+[-> A : activate(ui, 1)
+activate A
+
+A -> A : getIndex(ui, 1)
+activate A
+return 0
+
+A -> C : get(0)
+activate C
+return prescriptionEdited
+
+A -> B : setActive()
+activate B
+return
+
+A -> B : toString()
+activate B
+return :String
+
+A -> D : printActivatePrescriptionMessage(:String);
+activate D
+return
+
+return
+
+@enduml
