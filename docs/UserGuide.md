@@ -114,46 +114,40 @@ _Written by: Brian Wong Yun Long_
 ## Command Summary
 
 
-| Command                                                                  | Command Syntax                                                                                                                                          | Example                                                                                                                                                             |
-|--------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| help                                                                     | help                                                                                                                                                    | help                                                                                                                                                                |
-| help (detailed)                                                          | help o/detailed                                                                                                                                         | help o/detailed                                                                                                                                                     |
-| add                                                                      | add t/TRANSACTION_TYPE c/CATEGORY_TYPE a/TRANSACTION_AMOUNT d/TRANSACTION_DATE i/ADDITIONAL_INFO                                                        | add t/expense c/transport a/1 d/02102022 i/bus_fare <br> add t/income c/bonus a/10000000 d/03102022 i/thank_you_boss                                                |
-| list                                                                     | list                                                                                                                                                    | list                                                                                                                                                                |
-| list ( with filters )                                                    | list c/OPTIONAL_CATEGORY d/OPTIONAL_DATE t/OPTIONAL_TRANSACTION_TYPE  m/OPTIONAL_MONTH  y/OPTIONAL_YEAR p/OPTIONAL_PERIODS n/OPTIONAL_NUMBER_OF_PERIODS | list c/food d/13092022 <br> list t/income d/30092022  <br/>     list p/months n/1<br/>  list t/income d/30092022 y/2022<br/>   list t/income d/30092022 y/2022 m/9  |
-| statistics for categorical savings                                       | stats s/categorical_savings                                                                                                                             | stats s/categorical_savings                                                                                                                                         |
-| statistics for monthly expenditure                                       | stats s/monthly_expenditure                                                                                                                             | stats s/monthly_expenditure                                                                                                                                         |
-| statistics for time insight of a specific year OR month of specific year | stats s/time_insights y/YEAR_NUMBER m/OPTIONAL_MONTH                                                                                                    | stats s/time_insights y/2022 <br/> stats s/time_insights y/2002 m/10                                                                                                |
-| statistics for time insight for the PAST periods from current date       | stats s/time_insights p/PERIODS n/NUMBER_OF_PERIODS                                                                                                     | stats s/time_insights p/weeks n/3 <br/> stats s/time_insights p/months n/4                                                                                          |
-| budget                                                                   | budget b/MONTHLY_BUDGET                                                                                                                                 | budget b/9999999999999 <br/> budget b/1                                                                                                                             |
-| delete                                                                   | delete e/TASK_NUMBER                                                                                                                                    | delete e/3                                                                                                                                                          |
-| purge                                                                    | purge                                                                                                                                                   | purge                                                                                                                                                               |
-| find                                                                     | find KEYWORD(s)                                                                                                                                         | find bus_fare <br> find transport <br> find Sep 13                                                                                                                  |
-| bye                                                                      | bye                                                                                                                                                     | bye                                                                                                                                                                 |
+| Command                                                                  | Command Syntax                                                               | Example                                                                                                                                                            |
+|--------------------------------------------------------------------------|------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| help                                                                     | help                                                                         | help                                                                                                                                                               |
+| help (detailed)                                                          | help o/detailed                                                              | help o/detailed                                                                                                                                                    |
+| add                                                                      | add t/TYPE c/CATEGORY a/AMOUNT d/DATE i/DESCRIPTION                          | add t/expense c/transport a/1 d/02102022 i/bus_fare <br> add t/income c/bonus a/10000000 d/03102022 i/thank_you_boss                                               |
+| list                                                                     | list                                                                         | list                                                                                                                                                               |
+| list ( with filters )                                                    | list [t/TYPE] [c/CATEGORY] [d/DATE] [m/MONTH] [y/YEAR] [p/PERIOD] [n/NUMBER] | list c/food d/13092022 <br> list t/income d/30092022  <br/>     list p/months n/1<br/>  list t/income d/30092022 y/2022<br/>   list t/income d/30092022 y/2022 m/9 |
+| statistics for categorical savings                                       | stats s/categorical_savings                                                  | stats s/categorical_savings                                                                                                                                        |
+| statistics for monthly expenditure                                       | stats s/monthly_expenditure                                                  | stats s/monthly_expenditure                                                                                                                                        |
+| statistics for time insight of a specific year OR month of specific year | stats s/time_insights y/YEAR [m/MONTH]                                       | stats s/time_insights y/2022 <br/> stats s/time_insights y/2002 m/10                                                                                               |
+| statistics for time insight for the PAST periods from current date       | stats s/time_insights p/PERIOD n/NUMBER                                      | stats s/time_insights p/weeks n/3 <br/> stats s/time_insights p/months n/12                                                                                        |
+| budget                                                                   | budget b/BUDGET                                                              | budget b/9999999999999 <br/> budget b/1                                                                                                                            |
+| delete                                                                   | delete e/ENTRY                                                               | delete e/3                                                                                                                                                         |
+| purge                                                                    | purge                                                                        | purge                                                                                                                                                              |
+| find                                                                     | find KEYWORDS                                                                | find bus_fare <br> find transport <br> find Sep 13                                                                                                                 |
+| bye                                                                      | bye                                                                          | bye                                                                                                                                                                |
 
-Mandatory Tags
-
-* The `TRANSACTION_TYPE` is either `"expense"` or `"income"`.
-* The `CATEGORY_TYPE` is a one-word parameter flexibly defined by the user. [ No numerals, symbols or spacings are allowed ]
-* The `TRANSACTION_AMOUNT` is a positive numeral that is above 0 and below 100000001. [ No alphabets, symbols or spacings allowed ]
-* The `TRANSACTION_DATE` MUST be in ddMMyyyy format.
-* The `ADDITIONAL_INFO` is a single limitless parameter defined by the user. [ Spacings are not allowed ]
-* The `TASK_NUMBER` is the entry value which is a positive numeral that is above 0 and below 100000001. [ No alphabets, symbols or spacings allowed ]
-* The `KEYWORD` are parameter values within Search-fields that would be searched.  [ Available Search-fields: date, transaction type, category , amount, information. Cross-search across different Search-fields NOT supported ]
-* The `MONTHLY_BUDGET` is a positive numeral that is above 0 and below a Trillion (1000000000000) . [ No alphabets, symbols or spacings allowed ]
-* The `YEAR_NUMBER` is the year in yyyy format.
-* The `PERIODS` is the selection of either periods in `"weeks"` or `"months"`. [Used with "n/NUMBER_OF_PERIODS" ONLY]
-* The `NUMBER_OF_PERIODS` is the number of periods to view.  [Used with "p/PERIODS" ONLY]
+Tags used:
+* The `TYPE` is either `"expense"` or `"income"`.
+* The `CATEGORY` is a one-word parameter flexibly defined by the user. [ No numerals, symbols or spacings are allowed ]
+* The `AMOUNT` is a positive numeral that is above 0 and below 100000001. [ No alphabets, symbols or spacings allowed ]
+* The `DATE` MUST be in ddMMyyyy format.
+* The `DESCRIPTION` is a single limitless parameter defined by the user. [ Spacings are not allowed ]
+* The `ENTRY` is the entry value which is a positive numeral that is above 0 and below 100000001. [ No alphabets, symbols or spacings allowed ]
+* The `KEYWORDS` are parameter value(s) within Search-fields that would be searched.  [ Available Search-fields: date, type, category , amount, description. Cross-search across different Search-fields NOT supported ]
+* The `BUDGET` is a positive numeral that is above 0 and below a Trillion (1000000000000) . [ No alphabets, symbols or spacings allowed ]
+* The `YEAR` is the year in yyyy format.
+* The `MONTH` is the month in numerical form. [ From 1 -12 , where 1 represents January ]
+* The `PERIOD` is the selection of either periods in `"weeks"` or `"months"`. [ Used with "n/NUMBER" ONLY ]
+* The `NUMBER` is the number of periods to view.  [ Used with "p/PERIODS" ONLY ]
 
 
 Optional tags
-* The `OPTIONAL_MONTH` is the month value in numerical form where January is represented by '1'. [ from 1 - 12 . Must be used with y/OPTIONAL_YEAR or y/YEAR_NUMBER ]
-* The `OPTIONAL_CATEGORY` is the category label for the transactions under the same transaction category
-* The `OPTIONAL_DATE` is the date in ddMMyyyy format.
-* The `OPTIONAL_YEAR` is the year in yyyy format.[ Not recommended to use with d/ tag , since if the year is different from the year in the date d/ tag, nothing would show.]
-* The `OPTIONAL_PERIODS` is the selection of either periods in `"weeks"` or `"months"`. [Used with "n/OPTIONAL_NUMBER_OF_PERIODS" ]
-* The `OPTIONAL_NUMBER_OF_PERIODS`is the number of periods to view. [Used with "p/OPTIONAL_PERIODS"]
-* The `OPTIONAL_TRANSACTION_TYPE` is either `"expense"` or `"income"`.
+These tags are enclosed with "[" and "]" in the **command syntax** in the table above. 
 
 _Written by: Yong Chin Han_
 
