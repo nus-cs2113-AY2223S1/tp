@@ -101,13 +101,11 @@ public class Link {
         }
         String modulesParam = infoParam[MODULES_PARAM_INDEX];
         String cleanModuleParam = modulesParam.replace(SHARE_DELIMITER, "");
+        cleanModuleParam = cleanModuleParam.toUpperCase();
         if (cleanModuleParam.isEmpty()) {
             return;
         }
         String[] moduleAndLessonsArray = cleanModuleParam.split(moduleDelimiter);
-        if (moduleAndLessonsArray.length == 0) {
-            return;
-        }
         List<SelectedModule> selectedModules = new ArrayList<>();
         for (String moduleAndLessons : moduleAndLessonsArray) {
             String[] splitModuleAndLesson = moduleAndLessons.split(Pattern.quote(MODULE_CODE_DELIMITER));
@@ -120,7 +118,7 @@ public class Link {
                 continue;
             }
             SelectedModule selectedModule = new SelectedModule(module, semester);
-            String[] lessonsInfo = splitModuleAndLesson[1].split(lessonDelimiter);
+            String[] lessonsInfo = (splitModuleAndLesson[1]).split(lessonDelimiter);
             addLessons(lessonsInfo, selectedModule, semester);
             selectedModules.add(selectedModule);
         }
@@ -166,7 +164,7 @@ public class Link {
             if (!isLessonInfo(lessonsInfo[i])) {
                 continue;
             }
-            String[] lessonInfo = lessonsInfo[i].split(LESSON_TYPE_DELIMITER);
+            String[] lessonInfo = (lessonsInfo[i]).split(LESSON_TYPE_DELIMITER);
             LessonType lessonType = getLessonType(lessonInfo[0]);
             String classNo = lessonInfo[1];
             addValidLesson(selectedModule, semester, lessonType, classNo);
