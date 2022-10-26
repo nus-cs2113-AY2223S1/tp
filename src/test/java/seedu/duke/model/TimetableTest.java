@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,7 +12,6 @@ import java.util.stream.Collectors;
 import org.apache.commons.lang3.tuple.Pair;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.DisabledOnOs;
-import org.junit.jupiter.api.condition.EnabledOnOs;
 import org.junit.jupiter.api.condition.OS;
 
 /**
@@ -44,12 +44,11 @@ public class TimetableTest {
     }
 
     @Test
-    @DisabledOnOs(OS.WINDOWS)
-    public void timetable_lessonStartingAtHalfHour_formattedCorrectly() throws IOException {
+    public void timetable_lessonStartingAtHalfHour_formattedCorrectly() throws IOException, URISyntaxException {
         Module mod = Module.get("CS3216");
         Timetable t = new Timetable(List.of(Pair.of(mod, 
                 mod.getSemesterData(1).getLessonsByTypeAndNo(LessonType.LECTURE, "1").get(0))),
-                false, false);
+                false, true);
         InputStream stream = TimetableTest.class.getClassLoader().getResourceAsStream("timetableCS3216.txt");
         String expected = new String(stream.readAllBytes(), StandardCharsets.UTF_8);
         assertEquals(expected.replaceAll("\\s+",""), t.toString().replaceAll("\\s+",""));
@@ -57,7 +56,7 @@ public class TimetableTest {
 
     @Test
     @DisabledOnOs(OS.WINDOWS)
-    public void timetable_colored_formattedCorrectly() throws IOException {
+    public void timetable_colored_formattedCorrectly() throws IOException, URISyntaxException {
         Module st2334 = Module.get("ST2334");
         Module ie2141 = Module.get("IE2141");
         Module ee4204 = Module.get("EE4204");
@@ -81,7 +80,6 @@ public class TimetableTest {
     }
 
     @Test
-    @EnabledOnOs(OS.WINDOWS)
     public void timetable_windows_formattedCorrectly() throws IOException {
         Module st2334 = Module.get("ST2334");
         Module ie2141 = Module.get("IE2141");
@@ -100,7 +98,8 @@ public class TimetableTest {
                 Pair.of(ee2211, ee2211.getSemesterData(1).getLessonsByTypeAndNo(LessonType.LECTURE, "01").get(0)),
                 Pair.of(ee2211, ee2211.getSemesterData(1).getLessonsByTypeAndNo(LessonType.TUTORIAL, "19").get(0)),
                 Pair.of(cs2113, cs2113.getSemesterData(1).getLessonsByTypeAndNo(LessonType.LECTURE, "1").get(0)),
-                Pair.of(cs2113, cs2113.getSemesterData(1).getLessonsByTypeAndNo(LessonType.TUTORIAL, "4").get(0))));
+                Pair.of(cs2113, cs2113.getSemesterData(1).getLessonsByTypeAndNo(LessonType.TUTORIAL, "4").get(0))), 
+                        false, true);
         String newlineRegex = "(\\r\\n|\\r|\\n)";
         InputStream stream = TimetableTest.class.getClassLoader().getResourceAsStream("timetableWindows.txt");
         String[] expected = new String(stream.readAllBytes(), StandardCharsets.UTF_8).split(newlineRegex);

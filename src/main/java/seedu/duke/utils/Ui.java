@@ -2,6 +2,9 @@ package seedu.duke.utils;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.stream.Stream;
+
+import org.apache.commons.lang3.StringUtils;
 
 //@author CheahHaoYi-reused
 //Reused from CheahHaoYi/ip Ui class with slight modification
@@ -24,7 +27,7 @@ public class Ui {
             + LOGO + System.lineSeparator() + "How can I help you today?"
             + System.lineSeparator() + "Enter \"help\" to get started!";
     private static final String MESSAGE_BYE = "Bye bye, See you again";
-    private static final String LINE_DIVIDER = "--------------------------------------";
+    private static final String LINE_DIVIDER = StringUtils.repeat("-", 80);
 
     private ArrayList<String> uiBuffer;
     private Scanner scanner;

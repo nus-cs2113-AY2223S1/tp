@@ -1,0 +1,24 @@
+Code         : CS1010X
+Name         : Programming Methodology
+Description  : This module introduces the fundamental concepts of problem
+               solving by computing and programming using an imperative
+               programming language. It is the first and foremost introductory
+               course to computing and is equivalent to CS1010, CS1010S and
+               CS1010E Programming Methodology. The module will be taught using
+               the Python programming language and topics covered include
+               problem solving by computing, writing pseudo-codes, basic problem
+               formulation and problem solving, program development, coding,
+               testing and debugging, fundamental programming constructs
+               (variables, types, expressions, assignments, functions, control
+               structures, etc.), fundamental data structures: arrays, strings
+               and structures, simple file processing, and basic recursion.
+Credits      : 4
+Department   : Computer Science
+Faculty      : Computing
+Workload     : [2, 1, 1, 3, 3]
+Semesters    : [2, 3]
+Prerequisite : Nil
+Preclusion   : CS1010 or its equivalent, CS1010FC
+Corequisite  : Nil
+Schedule     : Module CS1010X is not offered in this semester, hence no
+               timetable information is available due to unforseen circumstances

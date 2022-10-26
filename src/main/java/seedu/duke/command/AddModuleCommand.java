@@ -40,7 +40,7 @@ public class AddModuleCommand extends Command {
         int semester = state.getSemester();
         SelectedModule selectedModule = new SelectedModule(module, semester);
         List<SelectedModule> currentSelectedModules = state.getSelectedModulesList();
-        isModuleOffered = module.getSemestersOffering(module).contains(semester);
+        isModuleOffered = module.getSemestersOffering().contains(semester);
 
         if (isModuleOffered && !currentSelectedModules.contains(selectedModule)) {
             state.addSelectedModule(selectedModule);
