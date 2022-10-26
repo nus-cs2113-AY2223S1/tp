@@ -19,7 +19,7 @@ public class Constants {
     public static int MAX_TRANSACTIONS_COUNT = 1000000;
 
     // The amount of one transaction is allowed to be in the range or 0 <= x <= 10000000
-    public static int MIN_AMOUNT_VALUE = 0;
+    public static int MIN_AMOUNT_VALUE = 1;
     public static int MAX_AMOUNT_VALUE = 10000000;
 
     // The amount of transaction is allowed to be in the range or 1 <= x <= MAX_AMOUNT * MAX_TRANSACTION
