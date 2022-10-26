@@ -7,6 +7,13 @@ public class Module {
     private String grade;
     private int mcs;
 
+    /**
+     * Contructor to initialize the class variables of Module class
+     * @param course the course taken or module code
+     * @param semesterTaken the year and semester in which the course was taken
+     * @param grade the grade received in the module
+     * @param mcs the number of mcs of the module
+     */
     public Module(String course, String semesterTaken, String grade, int mcs) {
         this.course = course;
         this.semesterTaken = semesterTaken;
