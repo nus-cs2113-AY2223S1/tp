@@ -84,17 +84,17 @@ public class UI {
 
     public void printSubMenu(MainMenuState mainMenuState) {
         switch (mainMenuState) {
-            case PATIENT:
-                printPatientMenuMessage();
-                break;
-            case VISIT:
-                printVisitsMenuMessage();
-                break;
-            case PRESCRIPTION:
-                printPrescriptionMenuMessage();
-                break;
-            default:
-                break;
+        case PATIENT:
+            printPatientMenuMessage();
+            break;
+        case VISIT:
+            printVisitsMenuMessage();
+            break;
+        case PRESCRIPTION:
+            printPrescriptionMenuMessage();
+            break;
+        default:
+            break;
         }
     }
 
@@ -105,7 +105,7 @@ public class UI {
     public void printMessageAndObject(String object, String message, int index) {
         System.out.println(message);
         printLine();
-        System.out.println((index + 1) +")");
+        System.out.println((index + 1) + ")");
         System.out.println(object);
         printLine();
     }
@@ -162,8 +162,8 @@ public class UI {
     public static final String VISIT_VIEW_PATIENT = "\n* To list all visits of one patient: viewPatient i/[ID]";
     public static final String VISIT_VIEW = "\n* To view a patient's specific visit: viewVisit x/[index]";
     public static final String PATIENT_ADDED = "Ok! I've added a patient! The patient's details are as follows:";
-    public static final String PATIENT_EDITED = "Alright, I've modified the details of the patient! \nHere are the " +
-            "new details of the patient: ";
+    public static final String PATIENT_EDITED = "Alright, I've modified the details of the patient! \nHere are the "
+            + "new details of the patient: ";
     public static final String ADD_VISIT = "You have added a visit!";
     public static final String EDIT_VISIT_REASON = "You have edited reason for the visit. Here's the updated visit!";
     public static final String DELETE_VISIT_REASON = "You have edited reason for the visit. Here's the updated visit!";
@@ -194,7 +194,7 @@ public class UI {
     public static final String RETURN_TO_MAIN = "\n* To return to main menu: main";
 
     public static final String EXIT_PROGRAM = "\n* To quit OneDoc: bye";
-    
+
 
     public void printNoMatchingPrescriptionMessage() {
         System.out.println(NO_MATCHING_PRESCRIPTION_MESSAGE);
