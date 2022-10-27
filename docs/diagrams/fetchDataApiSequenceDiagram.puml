@@ -1,0 +1,27 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+show field
+show methods
+
+title Fetch Data from LTA (update command)
+
+box Api LOGIC_COLOR_T1
+participant ":Api" as Api LOGIC_COLOR
+end box
+
+box Storage LOGIC_COLOR_T1
+participant ":FileReader" as FileReader LOGIC_COLOR
+end box
+
+box System Files LOGIC_COLOR_T2
+end box
+
+[-> Api : syncFetchData()
+activate Api
+
+ref over Api : asyncExecuteRequest
+
+@enduml
