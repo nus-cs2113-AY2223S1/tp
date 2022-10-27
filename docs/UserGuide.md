@@ -20,17 +20,18 @@ Adds a new appointment given service, pet, and date involved.
 
 Format: `appointment add s/SERVICE p/PET d/DATE`
 
-Example of usage: 还没写
+Example of usage:
 
-`todo n/Write the rest of the User Guide d/next week`
+`appointment add s/bath p/Muse d/01/02/2022`
 
-`todo n/Refactor the User Guide to remove passive voice d/13/04/2020`
+`appointment add s/haircut p/Donald d/30/02/2022`
 
 #### Remove an appointment: `appointment remove`
 - remove a particular appointment by INDEX
 
-Format: `appointment remove i/INDEX`
-* The `INDEX` has to be an int within the range of 1 to number of appointments in the list.
+Format: `appointment remove i/APPOINTMENT_ID`
+* The `APPOINTMENT_ID` has to be an int within the range of 1 to number of appointments in the list.
+* The `APPOINTMENT_ID` can be found by `appointment view`
 
 Example of usage: 
 
@@ -47,9 +48,11 @@ Format: `appointment view`
 - add a task to the list of tasks for the clinic
 - link this task to a specific appointment
 - assign the employee who is going to complete this task
-- automatically generate a unique id of the task
 
 Format: `task add i/APPOINTMENT_ID e/EMPLOYEE_ID d/DESCRIPTION`
+* The `APPOINTMENT_ID` and `EMPLOYEE_ID` must be positive integers 1, 2, 3, …
+* The `APPOINTMENT_ID` can be found by `appointment view`
+* and The `EMPLOYEE_ID` can be found by `employee view`
 
 Example of usage:
 
@@ -60,6 +63,7 @@ Example of usage:
 
 Format: `task remove i/TASK_ID`
 * The `TASK_ID` must be a positive integer 1, 2, 3, …
+* The `TASK_ID` can be found by `task view`
 
 Example of usage:
 `task remove i/1`
@@ -70,10 +74,12 @@ View list of all tasks
 Format: `task view`
 
 #### Reassign task to employee: `task reassign`
-- assign a task to a employee
+- assign a task to an employee
 
 Format: `task reassign i/TASK_ID e/EMPLOYEE_ID`
-* The `TASK_ID` and `EMPLOYEE_ID` must be a positive integer 1, 2, 3, …
+* The `TASK_ID` and `EMPLOYEE_ID` must be positive integers 1, 2, 3, …
+* The `TASK_ID` can be found by `task view`
+* and The `EMPLOYEE_ID` can be found by `employee view`
 
 Example of usage:
 `task reassign i/1 e/1`
@@ -94,6 +100,7 @@ Example of usage:
 
 Format: `employee remove i/EMPLOYEE_ID`
 * The `EMPLOYEE_ID` must be a positive integer 1, 2, 3, …
+* The `EMPLOYEE_ID` can be found by `employee view`
 
 Example of usage:
 `employee remove i/1`
@@ -103,11 +110,12 @@ Example of usage:
 view all employees in the clinic
 Format: `employee view`
 
-#### Viewing employee’s task: `employee task`
+#### Viewing an employee’s task: `employee task`
 - view all tasks assigned to an employee
 
 Format: `employee task i/EMPLOYEE_ID`
 * The `EMPLOYEE_ID` must be a positive integer 1, 2, 3, …
+* The `EMPLOYEE_ID` can be found by `employee view`
 
 Example of usage:
 `employee task i/1`
@@ -121,27 +129,47 @@ Format: `pet add n/NAME s/SPECIES h/HEALTH`
 
 Example of usage:
 `pet add n/Eliza s/cat h/0`
+`pet add n/Tim s/dog h/1`
 
 #### Remove a pet: `pet remove`
 - remove a particular pet by PET_ID
 
 Format: `pet remove i/PET_ID`
 * The `PET_ID` must be a positive integer 1, 2, 3, …
+* The `PET_ID` can be found by `pet view`
 
 Example of usage:
 `pet remove i/1`
 
+#### Viewing pets: `pet view`
+view all pets registered
+
+Format: `pet view`
+
+
 ### Service Management
+
 #### Add a service: `service add`
 - add a service to the list of services provided in the clinic
 
-Format: `pet remove i/PET_ID`
-* The `PET_ID` must be a positive integer 1, 2, 3, …
+Format: `service add d/DESCRIPTION`
 
 Example of usage:
-`pet remove i/1`
+`service add d/haircut`
 
+#### Remove a service: `service remove`
+- add a service to the list of services provided in the clinic
 
+Format: `service remove i/SERVICE_ID`
+* The `SERVICE_ID` must be a positive integer 1, 2, 3, …
+* The `SERVICE_ID` can be found by `service view`
+
+Example of usage:
+`service remove i/1`
+
+#### Viewing services: `service view`
+view all services provided in the clinic
+Format: `service view`
 
 
 ## FAQ
