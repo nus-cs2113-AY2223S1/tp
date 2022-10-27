@@ -5,6 +5,8 @@ import seedu.duke.Storage;
 import seedu.duke.Ui;
 import seedu.duke.data.TransactionList;
 
+import static seedu.duke.common.HelpMessages.COMMAND_DESCRIPTION_BYE;
+import static seedu.duke.common.HelpMessages.COMMAND_USAGE_BYE;
 import static seedu.duke.common.InfoMessages.INFO_EXIT;
 import static seedu.duke.common.InfoMessages.LINE_SEPARATOR;
 
@@ -15,16 +17,11 @@ public class ByeCommand extends Command {
     //@@author paullowse
     // The command word used to trigger the execution of Moolah Manager's operations
     public static final String COMMAND_WORD = "BYE";
-    // The description for the usage of command
-    public static final String COMMAND_DESCRIPTION = "To exit the application.";
-    // The guiding information for the usage of command
-    public static final String COMMAND_USAGE = "Usage: bye";
     // The formatting information for the parameters used by the command
     public static final String COMMAND_PARAMETERS_INFO = "Parameters information: -NIL-";
-
     // Basic help description
     public static final String COMMAND_HELP = "Command Word: " + COMMAND_WORD + LINE_SEPARATOR
-            + COMMAND_DESCRIPTION + LINE_SEPARATOR + COMMAND_USAGE + LINE_SEPARATOR;
+            + COMMAND_DESCRIPTION_BYE + LINE_SEPARATOR + COMMAND_USAGE_BYE + LINE_SEPARATOR;
     // Detailed help description
     public static final String COMMAND_DETAILED_HELP = COMMAND_HELP + COMMAND_PARAMETERS_INFO
             + LINE_SEPARATOR;

@@ -19,7 +19,7 @@ public enum ErrorMessages {
     ERROR_GLOBAL_INVALID_NUMBER("Number for period stats given is invalid, please check your input!"),
     ERROR_GLOBAL_NUMBER_NOT_NUMERIC("Non-integer detected, please enter a numerical integer!"),
     ERROR_TRANSACTION_INVALID_AMOUNT("Invalid amount, "
-            + "please ensure your amount is in positive numerals ($10000000 or less) only!"),
+            + "please ensure your amount is in positive whole number ($10000000 or less) only!"),
     ERROR_TRANSACTION_INVALID_CATEGORY("Invalid category, please ensure your category is correct!"),
     ERROR_TRANSACTION_INVALID_DATE("Invalid date, please ensure your date format is correct!"),
     ERROR_TRANSACTION_INVALID_TYPE("Type of transaction given is invalid, please check your input!"),

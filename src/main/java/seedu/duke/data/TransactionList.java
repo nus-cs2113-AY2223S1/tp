@@ -44,6 +44,7 @@ public class TransactionList {
     private static final String POSTFIX_CATEGORY = "]";
     private static final String INCOME = "income";
     private static final String EXPENSE = "expense";
+    private static final int INITIAL_AMOUNT = 0;
     private static final int HUNDRED_PERCENT = 100;
     private static final int SEVENTY_FIVE_PERCENT = 75;
     private static final int FIFTY_PERCENT = 50;
@@ -247,28 +248,6 @@ public class TransactionList {
      * @param categoricalSavings A hashmap containing all category-amount pair for total savings.
      * @return A hashmap containing all category-amount pair for total savings.
      */
-    public HashMap<String, Integer> processCategoricalSavings(HashMap<String, Integer> categoricalSavings) {
-        for (Transaction transaction : transactions) {
-            String category = transaction.getCategory();
-            int amount = transaction.getAmount();
-            // Creates a new category with starter amount if category not exists in hashmap
-            if (!categoricalSavings.containsKey(category)) {
-                categoricalSavings.put(category, amount);
-                continue;
-            }
-            categoricalSavings.put(category, categoricalSavings.get(category) + amount);
-        }
-
-        return categoricalSavings;
-    }
-
-    //@@paullowse
-    /**
-     * Reads the transactions list and adds each amount to the categories in categorical savings hashmap.
-     *
-     * @param categoricalSavings A hashmap containing all category-amount pair for total savings.
-     * @return A hashmap containing all category-amount pair for total savings.
-     */
     public HashMap<String, Integer> processCategoricalSavings(ArrayList<Transaction> timeTransactions,
                                                               HashMap<String, Integer> categoricalSavings) {
         for (Transaction transaction : timeTransactions) {
@@ -285,27 +264,6 @@ public class TransactionList {
         return categoricalSavings;
     }
 
-    /**
-     * Formats the hashmap of categorical savings into a categorical savings list, using default transactions.
-     *
-     * @return A string that represents the formatted categorical savings list.
-     */
-    public String listCategoricalSavings() {
-        String categoricalSavingsList = "";
-        HashMap<String, Integer> categoricalSavings = new HashMap<>();
-        // Adds each amount from transactions list to the categories in categorical savings hashmap
-        categoricalSavings = processCategoricalSavings(categoricalSavings);
-
-        // Formats every entry in the hashmap into a categorical savings list
-        for (HashMap.Entry<String, Integer> entry : categoricalSavings.entrySet()) {
-            categoricalSavingsList += String.format("%s%s%s %s%s%s", PREFIX_CATEGORY, entry.getKey(),
-                    POSTFIX_CATEGORY, DOLLAR_SIGN, entry.getValue(), LINE_SEPARATOR);
-        }
-
-        return categoricalSavingsList;
-    }
-
-    //@@chydarren
     /**
      * Formats the hashmap of categorical savings into a categorical savings list, using timeTransactions.
      *
@@ -336,8 +294,8 @@ public class TransactionList {
     public HashMap<String, int[]> processMonthlyExpenditure(HashMap<String, int[]> monthlyExpenditure) {
         for (Transaction transaction : transactions) {
             String date = transaction.getDate().format(DateTimeFormatter.ofPattern(DATE_MONTH_PATTERN.toString()));
-            int income = MIN_AMOUNT_VALUE;
-            int expense = MIN_AMOUNT_VALUE;
+            int income = INITIAL_AMOUNT;
+            int expense = INITIAL_AMOUNT;
 
             // Checks whether transaction is Income or Expense and places in respective amount
             if (transaction instanceof Income) {
@@ -370,7 +328,7 @@ public class TransactionList {
      * @return A string containing the comment related to the spending habit for the month.
      */
     public String getSpendingHabitComment(int income, int savings) {
-        if (income > MIN_AMOUNT_VALUE) {
+        if (income >= MIN_AMOUNT_VALUE) {
             int savingsPercentage = HUNDRED_PERCENT * savings / income;
 
             if (savingsPercentage >= HUNDRED_PERCENT) {
@@ -459,8 +417,8 @@ public class TransactionList {
      * @return An amount arraylist of Expense and Income.
      */
     public ArrayList<String> processTimeSummaryStats(ArrayList<Transaction> timeTransactions) {
-        int timeExpense = MIN_AMOUNT_VALUE;
-        int timeIncome = MIN_AMOUNT_VALUE;
+        int timeExpense = INITIAL_AMOUNT;
+        int timeIncome = INITIAL_AMOUNT;
         for (Transaction entry : timeTransactions) {
             String category = entry.getType();
             if (category.equals(EXPENSE)) {
