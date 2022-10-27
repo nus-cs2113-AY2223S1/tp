@@ -45,7 +45,14 @@ SkyControl is a software which optimizes the use of the Command Line Interface (
 ````
 6. After which SkyControl have booted up successfully, enter a command below `SkyControl` welcome display
 and hit the <kbd>Enter</kbd> button to execute it. Reflected below is an example.  
+
+**Input Command**  
+
+`bye`  
   
+**Output**  
+  
+
 ````
 Welcome to
    _____ _             _____            _             _
