@@ -149,6 +149,35 @@ _Written by: Yong Chin Han_
 
 ### Editing a Transaction: `edit`
 
+Edit a transaction entry from the list of transactions.
+
+**Format:** `edit e/ENTRY [t/TYPE] [c/CATEGORY] [a/AMOUNT] [d/DATE] [i/DESCRIPTION]`
+
+| Field         | Description                                                                                                                                     |
+|---------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
+| `ENTRY`       | A list entry value for the transaction. It is a positive whole number ranging from 1 to 1000000.                                                |
+| `TYPE`        | The type of transaction. It should either be `expense` or `income`.                                                                             |
+| `CATEGORY`    | A category for the transaction. It is a one-word parameter flexibly defined by the user. No numeral, symbol or spacing is allowed.              |
+| `AMOUNT`      | The amount of the transaction. It is a positive integer, e.g. 10.                                                                               | 
+| `DATE`        | The date when the transaction took place on. It must be in ddMMyyyy format, e.g. 29102022.                                                      |                                                                                                 
+| `DESCRIPTION` | The description of the transaction falls on. It is a one-word parameter flexibly defined by the user. No numeral, symbol or spacing is allowed. | 
+
+
+**Example(s):**
+
+- `edit e/1 t/expense c/food`
+- `edit e/2 a/10 d/10202022 i/games`
+
+**Expected output:**
+
+```
+edit e/1 t/expense c/food
+____________________________________________________________
+I have edited the following Expense transaction:
+[-][food] $20 at Jan 30 2022 | Description: banana_pudding
+____________________________________________________________
+```
+
 _Written by: Brian Wong Yun Long_
 
 ### Listing the Transactions: `list`
@@ -222,9 +251,56 @@ _Written by: Chua Han Yong Darren_
 
 ### Deleting a Transaction: `delete`
 
+Deletes a transaction entry from the list of transactions.
+
+**Format:** `delete e/ENTRY`
+
+| Field   | Description                                                                                      |
+|---------|--------------------------------------------------------------------------------------------------|
+| `ENTRY` | A list entry value for the transaction. It is a positive whole number ranging from 1 to 1000000. |
+
+**Example(s):**
+
+- `delete e/1`
+- `delete e/2`
+
+**Expected output:**
+
+```
+delete e/1
+____________________________________________________________
+I have deleted the following transaction:
+[+][food] $20 at Jan 30 2022 | Description: banana_pudding
+____________________________________________________________
+```
+
 _Written by: Brian Wong Yun Long_
 
 ### Purging all Transactions: `purge`
+
+Deletes all transaction entries from the list of transactions.
+
+**Format:** `purge`
+
+**Example(s):**
+
+- `purge`
+
+**Expected output:**
+
+```
+purge
+____________________________________________________________
+Are you sure you want to proceed with this command? Please enter 'Y' to confirm.
+____________________________________________________________
+____________________________________________________________
+Y
+____________________________________________________________
+____________________________________________________________
+All your transactions have been purged.
+____________________________________________________________
+
+```
 
 _Written by: Brian Wong Yun Long_
 
@@ -267,6 +343,22 @@ _Written by: Chia Thin Hong_
 _Written by: Yong Chin Han_
 
 ### Exiting the Program: `exit`
+
+Exits the program.
+
+Format: `exit`
+
+Examples of usage:
+
+`exit`
+
+Expected output:
+```
+exit
+____________________________________________________________
+Goodbye and see you soon.
+____________________________________________________________
+```
 
 _Written by: Brian Wong Yun Long_
 
