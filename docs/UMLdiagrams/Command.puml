@@ -1,6 +1,6 @@
 @startuml
 'https://plantuml.com/sequence-diagram
-
+skinparam classAttributeIconSize 0
 abstract class Command {
     - input: String
     # DESCRIPTION_DELIMITER: String 
