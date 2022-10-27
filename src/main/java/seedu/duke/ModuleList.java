@@ -123,8 +123,12 @@ public class ModuleList {
      * @return true if mod contains the keyword specified in its field
      */
     public boolean findMatch(String keyword, Module mod) {
-        return mod.getCourse().equals(keyword) || mod.getGrade().equals(keyword) ||
-                mod.getSemesterTaken().equals(keyword) || (mod.getMcs() == Integer.parseInt(keyword));
+        try {
+            return mod.getCourse().equals(keyword) || mod.getGrade().equals(keyword) ||
+                    mod.getSemesterTaken().equals(keyword) || (mod.getMcs() == Integer.parseInt(keyword));
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
     /**
