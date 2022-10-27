@@ -1,0 +1,62 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+show field
+show methods
+
+title Execute HTTP request
+
+box Api LOGIC_COLOR_T1
+participant ":Api" as Api LOGIC_COLOR
+end box
+
+activate Api
+
+
+Api -> Api : asyncExecuteRequest(0,0)
+activate Api
+Api -> Api : generateHttpRequestCarpark(0)
+activate Api
+Api --> Api
+deactivate Api
+Api --> Api
+deactivate Api
+
+Api -> Api : asyncExecuteRequest(500,1)
+activate Api
+Api -> Api : generateHttpRequestCarpark(1)
+activate Api
+Api --> Api
+deactivate Api
+Api --> Api
+deactivate Api
+
+Api -> Api : asyncExecuteRequest(1000,2)
+activate Api
+Api -> Api : generateHttpRequestCarpark(2)
+activate Api
+Api --> Api
+deactivate Api
+Api --> Api
+deactivate Api
+
+Api -> Api : asyncExecuteRequest(1500,3)
+activate Api
+Api -> Api : generateHttpRequestCarpark(3)
+activate Api
+Api --> Api
+deactivate Api
+Api --> Api
+deactivate Api
+
+Api -> Api : asyncExecuteRequest(2000,4)
+activate Api
+Api -> Api : generateHttpRequestCarpark(4)
+activate Api
+Api --> Api
+deactivate Api
+Api --> Api
+deactivate Api
+@enduml

@@ -65,10 +65,18 @@ Parking lot data)
    - The method will concatenate the data together for data processing by other parts of the program.
    - The processed data will then be stored in a local data file.
    
+The following sequence diagram shows how data is fetched using the `update` command.
+![Update Data API](images/UpdateApiSequenceDiagram.png)
+
+
 The API component is also able to:
 - Loads in key from a local file storage (in txt format).
 - Authenticate user API key. If no user key inputted, default key will be loaded.
 - Get API authentication status.
+
+The following sequence diagram shows how the API key is loaded.
+![Api Loading Sequnce Diagram](images/LoadApiSequenceDiagram.png)
+
 
 #### Storage Component
 
