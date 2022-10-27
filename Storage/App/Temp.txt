@@ -1,13 +1,24 @@
 # TITLE 
+<<<<<<< HEAD
 This is an example
 
 # DESCRIPTION
 This is the description
+=======
+Example Title 
+
+# DESCRIPTION
+Example Description
+>>>>>>> ac3da47058a4067615ebc7c15ca45cff847a117f
 
 # INGREDIENTS <ingredient name> / <amount> / <unit> 
 1. Example ingredient / 1.2 / example unit 
 
 # STEPS 
+<<<<<<< HEAD
 1. Do this
 2. Do that
 
+=======
+1. Example step 
+>>>>>>> ac3da47058a4067615ebc7c15ca45cff847a117f

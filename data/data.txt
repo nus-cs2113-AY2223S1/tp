@@ -176,6 +176,7 @@ Example ingredient | 1.2 |  example unit
 Recipe Steps: 
 1) Example step
 ____________________________________________________________
+<<<<<<< HEAD
 Recipe Name: This is an example
 Recipe Description: 
 This is the description
@@ -185,3 +186,5 @@ Recipe Steps:
 1) Do this
 2) Do that
 ____________________________________________________________
+=======
+>>>>>>> ac3da47058a4067615ebc7c15ca45cff847a117f

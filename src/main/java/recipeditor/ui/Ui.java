@@ -64,20 +64,20 @@ public class Ui {
         showMessage(result.getMessage());
     }
 
+    /**
+     * Clear screen on all OS.
+     */
     public static void clear() {
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
-    }
-
-    public static void printFilePath(File file, String filePath) {
         try {
-            if (file.createNewFile()) {
-                System.out.printf("File has been created at %s\n", filePath);
+            final String os = System.getProperty("os.name");
+
+            if (os.contains("Windows")) {
+                Runtime.getRuntime().exec("cls");
             } else {
-                System.out.printf("File already exists at %s\n", filePath);
+                Runtime.getRuntime().exec("clear");
             }
-        } catch (IOException e) {
-            System.out.println("Error creating file: Could not create file at %s" + filePath);
+        } catch (final Exception e) {
+            //  Handle any exceptions.
         }
     }
 }

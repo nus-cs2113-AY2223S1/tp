@@ -8,9 +8,9 @@ import recipeditor.command.Command;
 import recipeditor.command.ExitCommand;
 import recipeditor.command.CommandResult;
 
-
 public class Recipeditor {
-
+    public static final String DATA_FILE_PATH = "./data/data.txt";
+    public static final String TEMPORARY_DATA_FILE_PATH = "./data/temporary_data.txt";
 
     public static void main(String[] args) {
         run(args);
@@ -28,9 +28,9 @@ public class Recipeditor {
      * @param args arguments
      */
     private static void start(String[] args) {
+        Storage.createDataFolder();
         Ui.showGreeting();
-        Storage.createDataFile();
-        Storage.loadRecipesFromDataFile();
+
     }
 
     /**
@@ -40,7 +40,6 @@ public class Recipeditor {
         Ui.showExit();
         System.exit(0);
     }
-
 
     /**
      * Main Command Loop Input -> Command -> Command Result -> Show & Save.
