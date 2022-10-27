@@ -1,5 +1,5 @@
 @startuml
-!include https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/Styles.puml
+!include https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/Styles.puml
 
 skinparam sequenceReferenceBackgroundColor #ffffff
 skinparam noteTextAlignment left
@@ -25,6 +25,10 @@ activate Data DATA_COLOR_1
 
 Data --[DATA_COLOR_1]> UserInterface
 deactivate Data
+
+ref over UserInterface, Data, Storage
+        Load Expenses from File
+    end ref
 
 UserInterface -[USER_INTERFACE_COLOR_1]> MoneyGoWhere
 deactivate UserInterface
@@ -60,7 +64,7 @@ loop Command not equals "Bye"
         deactivate Data
 
         ref over UserInterface
-            Print Expense
+            Printing an Expense
         end ref
 
         ref over UserInterface, Storage
