@@ -1,5 +1,36 @@
 # Developer Guide (Pre-Release)
 
+## Contents
+* [Introduction](#introduction)
+* [Acknowledgements](#acknowledgements)
+* [Getting Started](#getting-started)
+* [Design](#design)
+  * [Software Architecture](#software-architecture)
+  * [Core Components](#core-components)
+  * [Component Interactions](#component-interactions)
+  * [Common Component](#common-component)
+  * [Exceptions Component](#exceptions-component)
+  * [UserInterface Component](#userInterface-component)
+  * [Commands Component](#commands-component)
+* [Implementation](#implementation)
+  * [Printing an expense](#printing-an-expense)
+  * [Adding an expense: `Add-Expense`](#adding-an-expense-add-expense)
+  * [Viewing an expense: `View-Expense`](#viewing-an-expense-view-expense)
+  * [Deleting an expense: `Delete-Expense`](#deleting-an-expense-delete-expense)
+  * [Editing an expense: `Edit-Expense`](#editing-an-expense-edit-expense)
+  * [Adding a recurring payment: `Add-RecurringPayment`](#adding-a-recurring-payment-add-recurringpayment)
+  * [Viewing a recurring payment: `View-RecurringPayment`](#viewing-a-recurring-payment-view-recurringpayment)
+  * [Deleting a recurring payment: `Delete-RecurringPayment`](#deleting-a-recurring-payment-delete-recurringpayment)
+  * [Editing a recurring payment: `Edit-RecurringPayment`](#editing-a-recurring-payment-edit-recurringpayment)
+  * [Adding an expense from a recurring payment: `Pay-RecurringPayment`](#adding-an-expense-from-a-recurring-payment-pay-recurringpayment)
+* [Product Scope](#product-scope)
+  * [Target User Profile](#target-user-profile)
+  * [Value Proposition](#value-proposition)
+* [User Stories](#user-stories)
+* [Non-Functional Requirements](#non-functional-requirements)
+* [Glossary](#glossary)
+* [Manual Testing](#manual-testing)
+
 ## Introduction
 
 MoneyGoWhere is a financial tracker designed to help computing professionals manage their finances.
@@ -42,12 +73,12 @@ Your MoneyGoWhere? Let me help you track it.
 ```
 
 ## Design
-### Software Architecture:
+### Software Architecture
 The software architecture diagram below describes the program's design and the interaction between components.
 
 ![Software-Architecture](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/SoftwareArchitecture.puml)
 
-### Core Components:
+### Core Components
 
 | Component     | Function                                                                            |
 |---------------|-------------------------------------------------------------------------------------|
@@ -61,7 +92,7 @@ The software architecture diagram below describes the program's design and the i
 | Storage       | Defines functions to save and load data.                                            |
 | Logger        | Defines functions to log the user's actions and the program's behaviour.            |
 
-### Component Interactions:
+### Component Interactions
 The sequence diagram below describes the interaction between the various core components when a command is entered.
 In this example, 
 the user launches the program and enters the command `Add-Expense -n Expense -a 7.80` to add an expense with the name `Expense` and the amount `7.80`.
@@ -81,7 +112,7 @@ In the example above, `UserInterface#runCommandAddExpense()` calls `Data#addExpe
 * After the operations are performed, command handler functions calls `Storage` functions to save data.\
 In the example above, `UserInterface#runCommandAddExpense()` calls `Storage#saveToFile()` to save the newly added expense to a file.
 
-#### Component Interaction Reference Diagrams:
+#### Component Interaction Reference Diagrams
 
 ![Component-Interaction-SD-Save-Expense-To-File](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ComponentInteractionsSDLoadExpensesFromFile.puml)
 
@@ -188,12 +219,12 @@ Do refer to the [commands](https://github.com/AY2223S1-CS2113T-W11-1/tp/tree/mas
 
 ![Implementation-Edit-RecurringPayment](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationPayRecurringPayment.puml)
 
-## Product scope
-### Target user profile
+## Product Scope
+### Target User Profile
 
 {Describe the target user profile}
 
-### Value proposition
+### Value Proposition
 
 {Describe the value proposition: what problem does it solve?}
 
@@ -240,7 +271,7 @@ Do refer to the [commands](https://github.com/AY2223S1-CS2113T-W11-1/tp/tree/mas
 |-----------------------|------------------------|
 | Mainstream Desktop OS | Windows, Mac OS, Linux |
 
-## Instructions for manual testing
+## Manual Testing
 
 ### Launching MoneyGoWhere
 1. Set up the project according to the steps in [Getting Started](#getting-started)
