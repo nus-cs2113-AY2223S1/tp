@@ -22,6 +22,10 @@ public class TaskList {
         }
     }
 
+    public static ArrayList<Task> getTasks() {
+        return tasks;
+    }
+
     public static void addTask(Task task) throws DukeException {
 
         // appointment aggregate task
