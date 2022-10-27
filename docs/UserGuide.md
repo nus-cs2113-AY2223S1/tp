@@ -153,14 +153,14 @@ Edit a transaction entry from the list of transactions.
 
 **Format:** `edit e/ENTRY [t/TYPE] [c/CATEGORY] [a/AMOUNT] [d/DATE] [i/DESCRIPTION]`
 
-| Field         | Description                                                                                                                                     |
-|---------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
-| `ENTRY`       | A list entry value for the transaction. It is a positive whole number ranging from 1 to 1000000.                                                |
-| `TYPE`        | The type of transaction. It should either be `expense` or `income`.                                                                             |
-| `CATEGORY`    | A category for the transaction. It is a one-word parameter flexibly defined by the user. No numeral, symbol or spacing is allowed.              |
-| `AMOUNT`      | The amount of the transaction. It is a positive integer, e.g. 10.                                                                               | 
-| `DATE`        | The date when the transaction took place on. It must be in ddMMyyyy format, e.g. 29102022.                                                      |                                                                                                 
-| `DESCRIPTION` | The description of the transaction falls on. It is a one-word parameter flexibly defined by the user. No numeral, symbol or spacing is allowed. | 
+| Field         | Description                                                                                                                          |
+|---------------|--------------------------------------------------------------------------------------------------------------------------------------|
+| `ENTRY`       | A list entry value for the transaction. It is a positive whole number ranging from 1 to 1000000.                                     |
+| `TYPE`        | The type of transaction. It should either be `expense` or `income`.                                                                  |
+| `CATEGORY`    | A category for the transaction. It is a one-word parameter flexibly defined by the user. No numeral, symbol or spacing is allowed.   |
+| `AMOUNT`      | The amount of the transaction. It is a positive integer, e.g. 10.                                                                    | 
+| `DATE`        | The date when the transaction took place on. It must be in ddMMyyy y format, e.g. 29102022.                                          |                                                                                                 
+| `DESCRIPTION` | Provides more information about the transaction. It is a one-word parameter defined by the user without any spacing.                 | 
 
 
 **Example(s):**
@@ -279,6 +279,8 @@ _Written by: Brian Wong Yun Long_
 ### Purging all Transactions: `purge`
 
 Deletes all transaction entries from the list of transactions.
+The User would have to input 'Y' after the prompt to confirm the operation, otherwise
+the operation will be aborted.
 
 **Format:** `purge`
 
