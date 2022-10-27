@@ -33,6 +33,8 @@ public class Link {
 
     private static final String DELIMITER = "/";
 
+    private static final String DELIMITER_REGEX = "\\/";
+
     private static final String SEMESTER_DELIMITER = "sem-";
 
     private static final String SHARE_DELIMITER = "share?";
@@ -74,7 +76,7 @@ public class Link {
             throw new YamomException("No NUSMod Link given");
         }
         //Initial string :https://nusmods.com/timetable/sem-SEMESTER_NUMBER/share?MODULE_INFO&MODULE_INFO
-        String[] infoParam = link.split(DELIMITER);
+        String[] infoParam = link.split(DELIMITER_REGEX);
         /*
         infoParam[0] = "https:";
         infoParam[1] = "";
@@ -88,7 +90,7 @@ public class Link {
         try {
             String semesterParam = infoParam[SEMESTER_PARAM_INDEX];
             semester = getSemesterFromParam(semesterParam);
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch (NumberFormatException e) {
             throw new YamomException(LINK_PROCESS_ERROR_MESSAGE);
         }
 
@@ -100,17 +102,25 @@ public class Link {
         String modulesParam = infoParam[MODULES_PARAM_INDEX];
         String cleanModuleParam = modulesParam.replace(SHARE_DELIMITER, "");
         cleanModuleParam = cleanModuleParam.toUpperCase();
-        ArrayList<SelectedModule> selectedModules = new ArrayList<>();
+
+        if (cleanModuleParam.isEmpty()) {
+            return;
+        }
+
         String[] moduleAndLessonsArray = cleanModuleParam.split(moduleDelimiter);
+        List<SelectedModule> selectedModules = new ArrayList<>();
         for (String moduleAndLessons : moduleAndLessonsArray) {
-            String[] splitModuleAndLesson = moduleAndLessons.split(MODULE_CODE_DELIMITER);
-            String moduleCode = splitModuleAndLesson[0].toUpperCase();
+            String[] splitModuleAndLesson = moduleAndLessons.split(Pattern.quote(MODULE_CODE_DELIMITER));
+            if (splitModuleAndLesson.length == 0) {
+                return;
+            }
+            String moduleCode = splitModuleAndLesson[0];
             Module module = Module.get(moduleCode);
             if (module == null || module.getSemesterData(semester) == null) {
                 continue;
             }
             SelectedModule selectedModule = new SelectedModule(module, semester);
-            String[] lessonsInfo = splitModuleAndLesson[1].split(lessonDelimiter);
+            String[] lessonsInfo = (splitModuleAndLesson[1]).split(lessonDelimiter);
             addLessons(lessonsInfo, selectedModule, semester);
             selectedModules.add(selectedModule);
         }
@@ -139,7 +149,7 @@ public class Link {
         Pattern pattern = Pattern.compile(SUPPOSED_START_REGEX);
         Matcher matcher = pattern.matcher(link);
         boolean hasMatch = matcher.find();
-        boolean hasRequiredLength = link.length() >= SUPPOSED_PREFIX.length();
+        boolean hasRequiredLength = link.length() > SUPPOSED_PREFIX.length();
         return hasMatch && hasRequiredLength;
     }
 
@@ -156,7 +166,7 @@ public class Link {
             if (!isLessonInfo(lessonsInfo[i])) {
                 continue;
             }
-            String[] lessonInfo = lessonsInfo[i].split(LESSON_TYPE_DELIMITER);
+            String[] lessonInfo = (lessonsInfo[i]).split(LESSON_TYPE_DELIMITER);
             LessonType lessonType = getLessonType(lessonInfo[0]);
             String classNo = lessonInfo[1];
             addValidLesson(selectedModule, semester, lessonType, classNo);
