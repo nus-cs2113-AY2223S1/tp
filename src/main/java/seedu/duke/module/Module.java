@@ -287,26 +287,22 @@ public class Module {
      * Replace the current list of attending lessons.
      * This method is used in the set command.
      *
-     * @param timetableDict
-     * @param newLessons Array of lessons to be added
-     * @param indexForLesson
+     * @param timetableDict Object that handles allocate command
+     * @param newLessons    Array of lessons to be added
+     * @param lessonType    The type of the lesson to be added
      */
-    public void replaceAttending(TimetableDict timetableDict, ArrayList<Lesson> newLessons, String moduleType) {
-        ArrayList<Lesson> oldLesson = getOldLessons(moduleType);
+    public void replaceAttending(TimetableDict timetableDict, ArrayList<Lesson> newLessons, String lessonType) {
         String classNum = newLessons.get(0).getClassNumber();
-        allAttending.get(moduleType).clear();
-        allAttending.get(moduleType).put(classNum, newLessons);
+        allAttending.get(lessonType).clear();
+        allAttending.get(lessonType).put(classNum, newLessons);
         attending = getAllAvailableLessons();
+        ArrayList<Lesson> oldLesson = getOldLessons(lessonType);
         for (Lesson lesson : oldLesson) {
             timetableDict.deleteLesson(lesson);
         }
         for (Lesson lesson : newLessons) {
             timetableDict.addLesson(lesson, moduleCode);
         }
-//        Lesson oldLesson = attending.get(indexForLesson);
-//        timetableDict.deleteLesson(oldLesson);
-//        attending.set(indexForLesson, newLessons);
-//        timetableDict.addLesson(newLessons, moduleCode);
     }
 
     public void replaceAttending(Lesson newLesson, Integer indexForLesson) {
@@ -316,9 +312,6 @@ public class Module {
         Timetable.timetableDict.addLesson(newLesson, moduleCode);
     }
 
-    private ArrayList<Lesson> getOldLessons(String moduleCode) {
-            return allAttending.get(moduleCode).values().iterator().next();
-    }
 
     public void replaceAttending(Lesson newLesson) {
         int indexToSet = 0;
@@ -343,6 +336,9 @@ public class Module {
         Timetable.timetableDict.addLesson(newLesson, moduleCode);
     }
 
+    private ArrayList<Lesson> getOldLessons(String moduleCode) {
+        return allAttending.get(moduleCode).values().iterator().next();
+    }
 
 
     /**
@@ -357,9 +353,9 @@ public class Module {
             String lessonType = lesson.getLessonType();
             String classNum = lesson.getClassNumber();
             if (!data.containsKey(lessonType)) {
-               data.put(lessonType, new LinkedHashMap<String, ArrayList<Lesson>>());
-               data.get(lessonType).put(classNum, new ArrayList<Lesson>());
-               data.get(lessonType).get(classNum).add(lesson);
+                data.put(lessonType, new LinkedHashMap<String, ArrayList<Lesson>>());
+                data.get(lessonType).put(classNum, new ArrayList<Lesson>());
+                data.get(lessonType).get(classNum).add(lesson);
             } else {
                 if (!data.get(lessonType).containsKey(classNum)) {
                     data.get(lessonType).put(classNum, new ArrayList<Lesson>());

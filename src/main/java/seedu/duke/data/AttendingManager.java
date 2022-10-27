@@ -104,6 +104,7 @@ public class AttendingManager {
             }
         }
     }
+
     public static void loadNewAttendingOnStartUp() {
         int currModuleIndex = 0;
         List<Module> moduleList = Timetable.getListOfModules();
@@ -129,11 +130,13 @@ public class AttendingManager {
             }
             String currModuleCode = moduleList.get(currModuleIndex).getModuleCode();
             if (currModuleCode.equals(currLine[0])) { //if the current module is the same as the one in the list
-                addLessonsIntoMap(newLessons, new Lesson(lessonDay, lessonStart, lessonEnd, lessonType, classNumber, moduleCode));
+                addLessonsIntoMap(newLessons, new Lesson(lessonDay, lessonStart, lessonEnd,
+                        lessonType, classNumber, moduleCode));
             } else {
                 currModule.replaceNewAttending(newLessons); //update the attending for the current module
                 newLessons = new LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>>(); //clear the data
-                addLessonsIntoMap(newLessons, new Lesson(lessonDay, lessonStart, lessonEnd, lessonType, classNumber, moduleCode));
+                addLessonsIntoMap(newLessons, new Lesson(lessonDay, lessonStart, lessonEnd,
+                        lessonType, classNumber, moduleCode));
                 currModuleIndex++;
             }
         }
