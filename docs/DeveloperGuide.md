@@ -224,7 +224,9 @@ Do refer to the [commands](https://github.com/AY2223S1-CS2113T-W11-1/tp/tree/mas
 ## Product Scope
 ### Target User Profile
 
-{Describe the target user profile}
+MoneyGoWhere is targeted at users who
+* Prefer command line interfaces to graphical interfaces
+* Type fast
 
 ### Value Proposition
 
