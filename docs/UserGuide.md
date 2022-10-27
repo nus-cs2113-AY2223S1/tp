@@ -6,8 +6,29 @@ appointments, assign tasks, and manage data of pets/services/tasks/employees. Th
 Command Line Interface (CLI) and is able to display information quickly with minimal latency.
 
 ## Quick Start
+### software requirement
 1. Ensure that you have Java 11 or above installed.
 2. Download the latest version of `Pet Clinic Management System` from [here](https://github.com/AY2223S1-CS2113-F11-2/tp).
+
+### Sample workflow
+1. pet add n/Eliza s/cat h/0
+2. pet view
+3. service add d/haircut
+4. employee add n/chris
+5. appointment add s/haircut p/Eliza d/30/02/2022
+6. appointment view
+7. task add i/1 e/1 d/prepare hot water
+8. task add i/1 e/1 d/wash hair
+9. task view
+10. task finish i/1
+11. task finish i/2
+12. task view
+13. appointment view
+14. pet view
+15. appointment remove i/1
+16. pet remove i/1
+17. bye
+
 
 ## Features 
 Note:
@@ -32,7 +53,7 @@ Example of usage:
 `appointment add s/haircut p/Donald d/30/02/2022`
 
 #### Remove an appointment: `appointment remove`
-Remove a particular appointment by INDEX
+Remove a particular appointment by INDEX. All tasks belong to this appointment will also be deleted.
 
 Format: `appointment remove i/APPOINTMENT_ID`
 * The `APPOINTMENT_ID` must be a positive integer 1, 2, 3, …
@@ -95,7 +116,7 @@ Example of usage:
 #### Finish a task: `task finish`
 Finish a task in the task list
 
-After one of the tasks of an appointment is finished, the status of an appointment will
+After the first task is added to the appointment, the status of the appointment will
 automatically update to processing.
 
 After all tasks of an appointment are finished, the status of an appointment
