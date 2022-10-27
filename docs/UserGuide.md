@@ -150,24 +150,45 @@ _Written by: Chia Thin Hong_
 
 ### Adding a Transaction: `add`
 
-Adds a new item to the list of todo items.
+Adds a new transaction entry to the list of transactions.
 
-Format: `todo n/TODO_NAME d/DEADLINE`
+Format: `add t/TYPE c/CATEGORY a/AMOUNT d/DATE i/DESCRIPTION`
 
-* The `DEADLINE` can be in a natural language format.
-* The `TODO_NAME` cannot contain punctuation.
+| Field         | Description                                                                                                                          |
+|---------------|--------------------------------------------------------------------------------------------------------------------------------------|
+| `TYPE`        | The type of transaction. It should either be `expense` or `income`.                                                                  |
+| `CATEGORY`    | A category for the transaction. It is a one-word parameter flexibly defined by the user. No numeral, symbol or spacing is allowed.   |
+| `AMOUNT`      | The amount of the transaction. It is a positive integer, e.g. 10.                                                                    | 
+| `DATE`        | The date when the transaction took place on. It must be in ddMMyyy y format, e.g. 29102022.                                          |                                                                                                 
+| `DESCRIPTION` | Provides more information about the transaction. It is a one-word parameter defined by the user without any spacing.                 | 
+
+**Important Information:**
+- All tags must be present in this command.
+- All parameters must not be empty.
 
 Example(s):
 
-`todo n/Write the rest of the User Guide d/next week`
+`add t/expense c/transport a/1 d/02102022 i/bus_fare` <br> 
+`add t/income c/bonus a/10000000 d/03102022 i/thank_you_boss`
 
-`todo n/Refactor the User Guide to remove passive voice d/13/04/2020`
-
-Expected output: 
+Expected output for addition of expense transaction: 
 ```
-
+add t/expense c/transport a/1 d/02102022 i/bus_fare
+____________________________________________________________
+I have added the following Expense transaction:
+[-][transport] $1 at Oct 02 2022 | Description: bus_fare
+Budget remained for Oct 2022: $999. Keep it up!
+____________________________________________________________
 ```
-
+Expected output for addition of income transaction:
+```
+add t/income c/bonus a/10000000 d/03102022 i/thank_you_boss
+____________________________________________________________
+I have added the following Income transaction:
+[+][bonus] $10000000 at Oct 03 2022 | Description: thank_you_boss
+Budget remained for Oct 2022: $1000. Keep it up!
+____________________________________________________________
+```
 _Written by: Yong Chin Han_
 
 ### Editing a Transaction: `edit`
@@ -488,6 +509,13 @@ _Written by: Chia Thin Hong_
 
 ### Persistent Data
 
+Our program comes with a storage feature to ensure user data gets saved each time Moolah Manager is stopped and restarted.
+If you are accessing Moolah Manager via our JAR file release, the storage file, **duke.txt** would be newly created in a newly created **data** folder in your current directory.
+
+In duke.txt, the monthly budget value would be stored on the 1st line, with the different transaction entries on subsequent lines.
+We **DO NOT** recommend editing duke.txt unless you are familiar with the storage syntax of the program.  
+
+
 _Written by: Yong Chin Han_
 
 ### Exiting the Program: `exit`
@@ -518,6 +546,7 @@ _Written by: Brian Wong Yun Long_
 | help                                                                     | help                                                                         | help                                                                                                                                                               |
 | help (detailed)                                                          | help o/detailed                                                              | help o/detailed                                                                                                                                                    |
 | add                                                                      | add t/TYPE c/CATEGORY a/AMOUNT d/DATE i/DESCRIPTION                          | add t/expense c/transport a/1 d/02102022 i/bus_fare <br> add t/income c/bonus a/10000000 d/03102022 i/thank_you_boss                                               |
+| edit                                                                     | edit e/ENTRY [t/TYPE] [c/CATEGORY] [a/AMOUNT] [d/DATE] [i/DESCRIPTION]       | edit e/1 t/expense c/food <br/> edit e/2 a/10 d/10202022 i/games                                                                                                   |
 | list                                                                     | list                                                                         | list                                                                                                                                                               |
 | list ( with filters )                                                    | list [t/TYPE] [c/CATEGORY] [d/DATE] [m/MONTH] [y/YEAR] [p/PERIOD] [n/NUMBER] | list c/food d/13092022 <br> list t/income d/30092022  <br/>     list p/months n/1<br/>  list t/income d/30092022 y/2022<br/>   list t/income d/30092022 y/2022 m/9 |
 | statistics for categorical savings                                       | stats s/categorical_savings                                                  | stats s/categorical_savings                                                                                                                                        |
@@ -531,7 +560,7 @@ _Written by: Brian Wong Yun Long_
 | bye                                                                      | bye                                                                          | bye                                                                                                                                                                |
 
 Tags used ( **OPTIONAL** tags are enclosed with SQUARE BRACKETS "[" and "]" in the **command syntax in the table** above):
-* The `TYPE` is either `"expense"` or `"income"`.
+* The `TYPE` should either be `expense` or `income`.
 * The `CATEGORY` is a one-word parameter flexibly defined by the user. [ No numeral, symbol or spacing is allowed ]
 * The `AMOUNT` is a positive whole number that is from 1 to 10000000. [ No alphabet, symbol or spacing is allowed ]
 * The `DATE` MUST be in ddMMyyyy format. [ E.g. 29102022 ] 
