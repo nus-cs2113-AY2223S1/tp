@@ -127,4 +127,41 @@ public class Storage {
     }
 
 
+<<<<<<< Updated upstream
+=======
+    private static void templateFile() {
+        File file = new File(TEMPLATE_PATH);
+        if (file.exists()) {
+            logger.log(Level.INFO, "Template File exits");
+        } else {
+            generateTemplateFile();
+        }
+    }
+
+    private static void generateTemplateFile() {
+        FileWriter fileWrite = null;
+        try {
+            fileWrite = new FileWriter(TEMPLATE_PATH);
+            fileWrite.write(TEMPLATE_FILE);
+            fileWrite.close();
+        } catch (IOException e) {
+            logger.log(Level.WARNING, "Error creating template file");
+        } finally {
+            logger.log(Level.INFO, "Template file created");
+        }
+    }
+
+    public static String loadFileContent(String path) throws FileNotFoundException {
+        File file = new File(path);
+        StringBuilder getContent = new StringBuilder();
+
+        Scanner scan = new Scanner(file);
+        while (scan.hasNext()) {
+            getContent.append(scan.nextLine() + "\n");
+        }
+        return getContent.toString();
+    }
+
+
+>>>>>>> Stashed changes
 }

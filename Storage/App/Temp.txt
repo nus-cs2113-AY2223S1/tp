@@ -1,0 +1,13 @@
+# TITLE 
+This is an example
+
+# DESCRIPTION
+This is the description
+
+# INGREDIENTS <ingredient name> / <amount> / <unit> 
+1. Example ingredient / 1.2 / example unit 
+
+# STEPS 
+1. Do this
+2. Do that
+
