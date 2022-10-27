@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import seedu.duke.Exceptions;
+import seedu.duke.UI;
 import seedu.duke.module.lessons.Lesson;
 
 import java.io.IOException;
@@ -36,7 +37,8 @@ public class Nusmods {
                 new URL(baseUri + mod + ".json").toURI();
                 validUri = true;
             } catch (MalformedURLException | URISyntaxException e) {
-                System.out.println("Module not found, please try again.");;
+                System.out.println("Module not found, please try again.");
+                moduleCode = UI.getModuleCodeFromUser();
             }
         }
         assert mod != null : "URI creation failed, module code is invalid!";
@@ -58,6 +60,7 @@ public class Nusmods {
             HttpResponse<String> response = getResponse(moduleCode);
             if (response.statusCode() != 200) {
                 System.out.println("Module not found, please try again.");
+                moduleCode = UI.getModuleCodeFromUser();
             } else {
                 lgr.info("api call successful, module exists");
                 return retrieveBasicInfo(response.body());
