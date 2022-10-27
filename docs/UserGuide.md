@@ -21,6 +21,7 @@ Allow the user to view and go to main menu at any point of the program
 Format / Example: `main`
 
 Expected Output:
+
 ```
 Hello welcome to
 ıllıllı OneDoc ıllıllı
@@ -50,18 +51,195 @@ Add a new prescription to the list of prescriptions.
 
 Format: `add i/patientID n/medicine_name d/medicine_dosage t/time_interval`
 
+* The `patientID` should be the ID of a patient that is already in the patient list
+* The `patientID` is case-insensitive
 * The `medicine_name` should be either one or two words
 * The `medicine_dosage` should be formatted as a number followed by a unit
-* The `time_interval` can be in a natural language format
+* The `time_interval` can be in any alphabets, numbers and spaces but not other characters
 
 Example of usage:
 
-`add i/add i/S7093944G n/Problaxan d/10 mg t/take 15 minutes after every meal, 3x a day`
+`add i/T1 n/Problaxan d/10 mg t/take 15 minutes after every meal`
 
 Expected Output:
 
 ```
+You have added a prescription!
+    ____________________________________________________________
+Prescription #3
+    ID: T1
+    Medicine: Problaxan
+    Dosage: 10 mg
+    Time Interval: take 15 minutes after every meal
+    Status: Active
+    ____________________________________________________________
+```
 
+#### Modifying a patient’s prescription: `edit`
+Modifies one part of a prescription’s record
+
+Format: `edit x/index n/medicine_name` or `edit x/index d/medicine_dosage` or `edit x/index t/time_interval`
+
+* The `index` must be an integer within the range from 1 to the total number of prescriptions in the list
+* The `medicine_name` should be either one or two words
+* The `medicine_dosage` should be formatted as a number followed by a unit
+* The `time_interval` can be in any alphabets, numbers and spaces but not other characters
+
+Example of usage:
+
+`edit x/3 d/20 mg`
+
+Expected output:
+
+```
+You have edited the prescription!
+    ____________________________________________________________
+Prescription #3
+    ID: T1
+    Medicine: Problaxan
+    Dosage: 20 mg
+    Time Interval: take 15 minutes after every meal
+    Status: Active
+    ____________________________________________________________
+```
+
+#### Viewing List of All Existing Prescriptions: `viewAll`
+Display the list of all prescription records for all patients
+
+Format: `viewAll`
+
+Expected output: 
+
+* Assume there are currently 2 prescription records in the system. 
+
+```
+Here are all the prescriptions:
+    ____________________________________________________________
+Prescription #1
+    ID: T1
+    Medicine: cough syrup
+    Dosage: 10 mL
+    Time Interval: every 3 hours
+    Status: Inactive
+    ____________________________________________________________
+Prescription #2
+    ID: T2
+    Medicine: penicillin
+    Dosage: 1 tablet
+    Time Interval: every 3 days
+    Status: Active
+    ____________________________________________________________
+```
+
+#### Viewing all patient’s prescription: `viewPatientPres`
+Views all prescription records for a specific patient
+
+Format: `viewPatientPres i/pateintID`
+
+* The `patientID` should be the ID of a patient that is already in the patient list
+* The `patientID` is case-insensitive
+
+Example of usage:
+
+`viewPatientPres i/T1`
+
+Expected output:
+
+```
+Here are all the prescriptions:
+    ____________________________________________________________
+Prescription #1
+    ID: T1
+    Medicine: cough syrup
+    Dosage: 10 mL
+    Time Interval: every 3 hours
+    Status: Inactive
+    ____________________________________________________________
+```
+
+#### Viewing all patient’s active prescription: `viewActPatientPres`
+Views all active prescription records for a patient
+
+Format: `viewActPatientPres i/patientID`
+
+* The `patientID` should be the ID of a patient that is already in the patient list
+* The `patientID` is case-insensitive
+
+Example of usage:
+
+`viewActPatientPres i/T1`
+
+Expected output:
+
+* If the patient with ID `T1` has no active prescription and `viewActPatientPres i/T1` is executed.
+
+```
+There are currently no active prescriptions from this patient.
+```
+
+* If the patient with ID `T2` has active prescription and `viewActPatientPres i/T2` is executed, only his active
+prescriptions would be shown.
+
+```
+Here are all the prescriptions:
+    ____________________________________________________________
+Prescription #2
+    ID: T2
+    Medicine: penicillin
+    Dosage: 1 tablet
+    Time Interval: every 3 days
+    Status: Active
+    ____________________________________________________________
+```
+
+#### Changing prescription status to active: `activate`
+Changes a specific prescription record to be active
+
+Format: `activate x/index`
+
+* The `index` must be an integer within the range from 1 to the total number of prescriptions in the list
+
+Example of usage:
+
+`activate x/3`
+
+Expected output:
+
+```
+Ok, I've activated the prescription below:
+    ____________________________________________________________
+Prescription #3
+    ID: T1
+    Medicine: Problaxan
+    Dosage: 20 mg
+    Time Interval: take 15 minutes after every meal
+    Status: Active
+    ____________________________________________________________
+```
+
+#### Changing prescription status to inactive: `deactivate`
+Changes a specific prescription record to be inactive
+
+Format: `deactivate x/index`
+
+* The `index` must be an integer within the range from 1 to the total number of prescriptions in the list
+
+Example of usage:
+
+`deactivate x/3`
+
+Expected output:
+
+```
+Ok, I've deactivated the prescription below:
+    ____________________________________________________________
+Prescription #3
+    ID: T1
+    Medicine: Problaxan
+    Dosage: 20 mg
+    Time Interval: take 15 minutes after every meal
+    Status: Inactive
+    ____________________________________________________________
 ```
 
 ## FAQ
