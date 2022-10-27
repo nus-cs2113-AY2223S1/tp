@@ -5,9 +5,11 @@ import seedu.duke.TimetableDict;
 import seedu.duke.module.lessons.Lesson;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.Objects;
 
 
 public class Module {
@@ -90,13 +92,42 @@ public class Module {
 
     public String getModuleDetails() {
         StringBuilder details = new StringBuilder(this.getModuleCode() + ": " + this.getModuleName() + "\n");
-
+        HashMap<String, Integer> lessonDupe = new HashMap<>();
+        String counter;
         for (Lesson lesson : attending) {
-            details.append("     [").append(lesson.getLessonType()).append("] ").append(lesson.getDay()).append("   ")
+            counter = getCount(lessonDupe, lesson);
+            details.append("     [").append(lesson.getLessonType()).append(counter).append("] ")
+                    .append(lesson.getDay()).append("   ")
                     .append(convertTime(lesson.getStartTime())).append(" - ")
                     .append(convertTime(lesson.getEndTime())).append("\n");
         }
         return details.toString();
+    }
+
+    private String getCount(HashMap<String, Integer> lessonDupe, Lesson lesson) {
+        String type = lesson.getLessonType();
+        if(lessonDupe.containsKey(type)) {
+            Integer newCount = lessonDupe.get(type) + 1;
+            lessonDupe.remove(type);
+            lessonDupe.put(type, newCount);
+            return " " + newCount;
+        } else {
+            lessonDupe.put(type, 1);
+            return checkForMoreDupes(lesson);
+        }
+    }
+
+    private String checkForMoreDupes(Lesson lesson) {
+        int count = 0;
+        for (Lesson tempLesson : attending) {
+            if (Objects.equals(tempLesson.getLessonType(), lesson.getLessonType())) {
+                count += 1;
+            }
+        }
+        if (count > 1) {
+            return " 1";
+        }
+        return "";
     }
 
     private String convertTime(String time) {
@@ -111,8 +142,12 @@ public class Module {
     public String getLessonTypes() {
         StringBuilder list = new StringBuilder();
         int index = 1;
+        HashMap<String, Integer> lessonDupe = new HashMap<>();
+        String counter;
         for (Lesson lesson : attending) {
-            list.append(index).append(". ").append(lesson.getLessonType()).append("     ");
+            counter = getCount(lessonDupe, lesson);
+            list.append(index).append(". ").append(lesson.getLessonType())
+                    .append(counter).append("     ");
             index += 1;
         }
         return list.toString();

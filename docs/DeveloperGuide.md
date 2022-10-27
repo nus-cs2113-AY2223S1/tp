@@ -30,7 +30,7 @@ The ***Architecture Diagram*** given above presents the high-level design of the
 ##### Adding modules to current timetable
 <img src="images/addModule.png" width="580" />
 
-<p style='text-align: justify;'>The ***Sequence Diagram*** above is a simplified depiction of how new modules are added to the user current session timetable. The feature is rather complex due to the need to query, extract, and check the data before adding it to the timetable. Thus, a few design decisions were made:</p>
+The ***Sequence Diagram*** above is a simplified depiction of how new modules are added to the user current session timetable. The feature is rather complex due to the need to query, extract, and check the data before adding it to the timetable. Thus, a few design decisions were made:</p>
 
 * The class CommandAddModule manages the key actions (as explained above) from a higher level.
 * The class Nusmods manages all interactions with the NUSmods API and deals with JsonNode objects.
