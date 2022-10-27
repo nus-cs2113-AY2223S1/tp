@@ -7,6 +7,9 @@
   * [Add a passenger detail: `passenger add`](#Add-a-passenger-detail-passenger-add)
   * [Delete a passenger detail: `passenger delete`](#Delete-a-passenger-detail-passenger-delete)
   * [Display passenger detail logbook: `passenger list`](#Display-passenger-detail-logbook-passenger-list)
+  * [Add a flight detail: `flight add`](#add-a-flight-detail-flight-add)
+  * [Delay a flight: `delay`](#delay-a-flight-delay)
+  * [Display flight detail logbook: `flight list`](#display-flight-detail-logbook-flight-list)
   * [Command Summary](#Command-Summary)
 * [Frequently Asked Quesitions](#Frequently-Asked-Questions)
 
@@ -14,7 +17,7 @@
 
 ## Introduction
 
-{Give a product intro}  
+SkyControl is a software which optimizes the use of the Command Line Interface (CLI)to manage flights and passengers in an airport terminal. 
 
 ---
 
@@ -55,7 +58,7 @@ i.e. `Passenger add [PASSENGER DETAIL]` or `Passenger Add [PASSENGER DETAIL]` ar
 i.e. `flight add [PASSENGER DETAIL]`  
 
 ---
-### Add a passenger detail: `passenger add`
+## Add a passenger detail: `passenger add`
 **Explanation**:  
 **Function**:  
 **Usage**:
@@ -130,6 +133,69 @@ _If passenger details logbook is empty_.
 
 ---
 
+## Add a flight detail: `flight add`
+
+Format: `flight add fn/FLIGHT_NUMBER a/AIRLINE d/DESTINATION dt/DEPARTURE_TIME gn/GATE_NUMBER c/CHECKIN_ROW_DOOR`
+
+* The `FLIGHT_NUMBER` must consist of 2 alphabets followed by 1-4 digits.
+* The `DEAPRTURE_TIME` must be in 24HR time format e.g. 1600.
+* `GATE_NUMBER` must be a numerical number.
+
+Example of usage:
+```
+flight add fn/sq712 a/singapore airlines d/bangkok dt/1600 gn/05 c/03-03
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Flight added!
+
+flight add fn/KE644 a/KOREA AIR d/KOREA dt/0500 gn/22 c/10-04
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Flight added!
+```
+---
+
+## Delay a flight: `delay`
+
+Format: `delay FLIGHT_NUMBER dt/NEW_DEPARTURE_TIME`
+
+* `FLIGHT_NUMBER` must be an existing flight in the list.
+* `NEW_DEPARTURE_TIME` is in 24HR time format and must be on the same day but later than the existing flight departure time.
+
+Example of usage:
+```
+delay sq712 dt/1200
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Stop! Please enter a valid departure time for flight SQ712
+Time must be later than 1600.
+
+delay sq712 dt/1700
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Departure time of flight SQ712 is delayed from 1600 to 1700.
+
+```
+---
+
+## Display flight detail logbook: `flight list`
+
+Format: `flight list`
+
+Example of usage:
+```
+flight list
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
++----------------------------------------------------------------------------------------------------------------------------------+
+|                                                  FLIGHT DETAILS LOGBOOK FOR TERMINAL 1                                         |
++----------------------------------------------------------------------------------------------------------------------------------+
+| FLIGHT NUM | DEPARTURE DATE |        AIRLINE         |      DESTINATION      | DEPARTURE TIME | GATE NUM |  CHECK-IN ROW/DOOR  |
++----------------------------------------------------------------------------------------------------------------------------------+
+|      SQ712 |       23-10-22 |     SINGAPORE AIRLINES |               BANGKOK |           1600 |       05 |               03-03 |
++----------------------------------------------------------------------------------------------------------------------------------+
+|      KE644 |       23-10-22 |              KOREA AIR |                 KOREA |           0500 |       22 |               10-04 |
++----------------------------------------------------------------------------------------------------------------------------------+
+```
+
+---
+
 ## Command Summary
 
 | Command  | Format                                                                                                                                             | Example                                                                  |
@@ -140,8 +206,13 @@ _If passenger details logbook is empty_.
 
 ---
 
+<br>
+
 ## Frequently Asked Questions
 
 **Q**: How do I transfer my data to another computer?
 
 **A**: {your answer here}  
+
+<br>
+

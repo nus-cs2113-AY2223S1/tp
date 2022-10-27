@@ -5,6 +5,7 @@ import seedu.duke.command.Command;
 import seedu.duke.command.flightcommand.DeleteFlightCommand;
 import seedu.duke.command.flightcommand.ListFlightCommand;
 import seedu.duke.exceptions.SkyControlException;
+import seedu.duke.operationlist.FlightList;
 
 //@@author Franky4566
 public class FlightParser extends Parser {

@@ -3,6 +3,7 @@ package seedu.duke.operationlist;
 import seedu.duke.exceptions.SkyControlException;
 import seedu.duke.terminalinfo.PassengerInfo;
 import seedu.duke.ui.Ui;
+import seedu.duke.command.flightcommand.DelayFlightCommand;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -75,6 +76,11 @@ public class PassengerList extends OperationList {
     }
 
     @Override
+    public void delayFlightDeparture(String flightNum, String newDepartureTime) {
+        modifyPassengersDepartureTime(flightNum, newDepartureTime);
+    }
+
+    @Override
     public void modifyFlightNum(String flightNum, String newFlightNum) {
         modifyPassengersFlightNum(flightNum, newFlightNum);
     }
@@ -140,6 +146,16 @@ public class PassengerList extends OperationList {
             PassengerInfo passenger = passengers.get(i);
             if (passenger.getFlightNumber().equals(flightNum)) {
                 passenger.setGateNumber(newGateNum);
+            }
+        }
+    }
+
+    private void modifyPassengersDepartureTime(String flightNum, String newDepartureTime) {
+        getNumberOfPassengers();
+        for (int i = 0; i < numOfPassengers; i++) {
+            PassengerInfo passenger = passengers.get(i);
+            if (passenger.getFlightNumber().equals(flightNum)) {
+                passenger.setDepartureTime(newDepartureTime);
             }
         }
     }

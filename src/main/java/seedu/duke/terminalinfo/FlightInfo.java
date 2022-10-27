@@ -60,6 +60,10 @@ public class FlightInfo {
         return "";
     }
 
+    public void setDepartureTime(String newDepartureTime) {
+        this.departureTime = newDepartureTime;
+    }
+
     //@@author shengiv
     public void setFlightNum(String newFlightNum) {
         this.flightNum = newFlightNum;
