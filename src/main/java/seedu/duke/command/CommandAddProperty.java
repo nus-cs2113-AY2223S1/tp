@@ -1,3 +1,5 @@
+//@@author OVReader
+
 package seedu.duke.command;
 
 import seedu.duke.ClientList;
@@ -11,7 +13,6 @@ import java.util.logging.Logger;
 
 import java.util.ArrayList;
 
-//@@author OVReader
 /**
  * Adds a property to the property list.
  */

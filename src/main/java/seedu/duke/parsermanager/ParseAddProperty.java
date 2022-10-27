@@ -1,3 +1,5 @@
+//@@author OVReader
+
 package seedu.duke.parsermanager;
 
 import seedu.duke.Property;
@@ -8,12 +10,13 @@ import seedu.duke.command.Command;
 import seedu.duke.command.CommandAddProperty;
 
 import seedu.duke.exception.DuplicatePropertyException;
-import seedu.duke.exception.EmptyDetailException;
-import seedu.duke.exception.IncorrectFlagOrderException;
+import seedu.duke.exception.EmptyAddPropertyDetailException;
+import seedu.duke.exception.IncorrectAddPropertyFlagOrderException;
 import seedu.duke.exception.InvalidPriceFormatException;
 import seedu.duke.exception.InvalidSingaporeAddressException;
 import seedu.duke.exception.InvalidUnitTypeLabelException;
-import seedu.duke.exception.MissingFlagException;
+import seedu.duke.exception.MissingAddPropertyFlagException;
+import seedu.duke.exception.ParseAddPropertyException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -50,10 +53,6 @@ import static seedu.duke.CommandStructure.ACTUAL_UNIT_TYPE_THIRTEEN;
 import static seedu.duke.CommandStructure.ACTUAL_UNIT_TYPE_FOURTEEN;
 import static seedu.duke.CommandStructure.ACTUAL_UNIT_TYPE_FIFTEEN;
 
-import static seedu.duke.Messages.EXCEPTION;
-import static seedu.duke.Messages.MESSAGE_ADD_PROPERTY_WRONG_FORMAT;
-
-//@@author OVReader
 /**
  * Parses input for add property command.
  */
@@ -68,6 +67,9 @@ public class ParseAddProperty extends ParseAdd {
 
     private static final int FLAG_JUMPER_VALUE = 2;
     private static final int UNIT_VALUE = 1;
+
+    public static final String EXISTING_PROPERTY = "Existing Property:\n  ";
+
 
     // Add Property Regex for Validation
     // Singapore Address Related Regex
@@ -129,49 +131,48 @@ public class ParseAddProperty extends ParseAdd {
         UNIT_TYPE_HASHMAP = unitTypeHashMap;
     }
 
-    public Command parseCommand() throws  EmptyDetailException, MissingFlagException, IncorrectFlagOrderException,
-            InvalidSingaporeAddressException, InvalidPriceFormatException, InvalidUnitTypeLabelException,
-            DuplicatePropertyException {
-        try {
-            checkForEmptyDetails(commandDescription);
-            ArrayList<String> propertyDetails = processCommandAddPropertyDetails(commandDescription);
-            validatePropertyDetails(propertyDetails);
-            return new CommandAddProperty(propertyDetails);
-        } catch (EmptyDetailException e) {
-            throw new EmptyDetailException(MESSAGE_ADD_PROPERTY_WRONG_FORMAT);
-        } catch (MissingFlagException e) {
-            throw new MissingFlagException(MESSAGE_ADD_PROPERTY_WRONG_FORMAT);
-        } catch (IncorrectFlagOrderException e) {
-            throw new IncorrectFlagOrderException(MESSAGE_ADD_PROPERTY_WRONG_FORMAT);
+    public Command parseCommand() throws ParseAddPropertyException {
+        checkForEmptyAddPropertyDetails(commandDescription);
+        ArrayList<String> propertyDetails = processCommandAddPropertyDetails(commandDescription);
+        validatePropertyDetails(propertyDetails);
+        return new CommandAddProperty(propertyDetails);
+    }
+
+    private void checkForEmptyAddPropertyDetails(String commandDetail) throws EmptyAddPropertyDetailException {
+        boolean isEmptyDetail = isEmptyString(commandDetail);
+        if (isEmptyDetail) {
+            throw new EmptyAddPropertyDetailException();
         }
     }
 
     private ArrayList<String> processCommandAddPropertyDetails(String rawCommandDetail)
-            throws MissingFlagException, IncorrectFlagOrderException {
+            throws MissingAddPropertyFlagException, IncorrectAddPropertyFlagOrderException {
         int[] flagIndexPositions = getFlagIndexPositions(rawCommandDetail, ADD_PROPERTY_FLAGS);
         checkForMissingPropertyFlags(flagIndexPositions);
         checkPropertyFlagsOrder(flagIndexPositions);
         return extractPropertyDetails(rawCommandDetail, flagIndexPositions);
     }
 
-    private void checkForMissingPropertyFlags(int[] flagIndexPositions) throws MissingFlagException {
+    private void checkForMissingPropertyFlags(int[] flagIndexPositions) throws MissingAddPropertyFlagException {
         for (int flagIndex : flagIndexPositions) {
-            if (!checkForFlagPresence(flagIndex)) {
-                throw new MissingFlagException(EXCEPTION);
+            boolean hasPropertyFlag = checkForFlagPresence(flagIndex);
+            if (!hasPropertyFlag) {
+                throw new MissingAddPropertyFlagException();
             }
         }
     }
 
-    private void checkPropertyFlagsOrder(int[] flagIndexPositions) throws IncorrectFlagOrderException {
+    private void checkPropertyFlagsOrder(int[] flagIndexPositions) throws IncorrectAddPropertyFlagOrderException {
         for (int flagIndex = 0; flagIndex < PROPERTY_FLAG_SIZE - UNIT_VALUE; flagIndex++) {
             checkForCorrectFlagOrder(flagIndexPositions[flagIndex], flagIndexPositions[flagIndex + UNIT_VALUE]);
         }
     }
 
-    protected void checkForCorrectFlagOrder(int flagPosition, int nextFlagPosition) throws IncorrectFlagOrderException {
+    private void checkForCorrectFlagOrder(int flagPosition, int nextFlagPosition) throws
+            IncorrectAddPropertyFlagOrderException {
         boolean hasCorrectOrder = (flagPosition < nextFlagPosition);
         if (!hasCorrectOrder) {
-            throw new IncorrectFlagOrderException(EXCEPTION);
+            throw new IncorrectAddPropertyFlagOrderException();
         }
     }
 
@@ -191,12 +192,12 @@ public class ParseAddProperty extends ParseAdd {
         return extractedPropertyDetails;
     }
 
-    private void validatePropertyDetails(ArrayList<String> propertyDetails) throws EmptyDetailException,
+    private void validatePropertyDetails(ArrayList<String> propertyDetails) throws EmptyAddPropertyDetailException,
             InvalidSingaporeAddressException, InvalidPriceFormatException, InvalidUnitTypeLabelException,
             DuplicatePropertyException {
         // Checks for Missing Landlord Name, Property Address, Renting Price (SGD/month) and Unit-Type.
         for (String propertyDetail : propertyDetails) {
-            checkForEmptyDetails(propertyDetail);
+            checkForEmptyAddPropertyDetails(propertyDetail);
         }
 
         // Checks Format for Address (Singapore) and Renting Price.
@@ -275,6 +276,6 @@ public class ParseAddProperty extends ParseAdd {
 
     private static void showExistingDuplicateProperty(Property property) {
         Ui ui = new Ui();
-        ui.showToUser("Existing Property:\n  " + property.toString());
+        ui.showToUser(EXISTING_PROPERTY + property.toString());
     }
 }

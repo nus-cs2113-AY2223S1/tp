@@ -1,6 +1,7 @@
+//@@author OVReader
+
 package seedu.duke.command;
 
-//@@author OVReader
 /**
  * Represents an add-type command.
  */

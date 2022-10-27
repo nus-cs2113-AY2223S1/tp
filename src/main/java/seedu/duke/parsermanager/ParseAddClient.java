@@ -80,7 +80,8 @@ public class ParseAddClient extends ParseAdd {
         for (int flagIndex = 0; flagIndex < flagIndexPositions.length; flagIndex++) {
             boolean isEmailIndex = (flagIndex == CLIENT_EMAIL_INDEX);
             // Skips empty check for email as email is optional
-            if (!isEmailIndex && !checkForFlagPresence(flagIndex)) {
+            boolean hasClientFlag = checkForFlagPresence(flagIndex);
+            if (!isEmailIndex && !hasClientFlag) {
                 throw new MissingAddClientFlagException();
             }
         }

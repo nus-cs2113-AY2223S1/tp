@@ -1,14 +1,10 @@
-package seedu.duke.parsermanager;
+//@@author OVReader
 
-import seedu.duke.exception.EmptyDetailException;
-import seedu.duke.exception.IncorrectFlagOrderException;
+package seedu.duke.parsermanager;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static seedu.duke.Messages.EXCEPTION;
-
-//@@author OVReader
 /**
  * Parses input for add-type command.
  */
