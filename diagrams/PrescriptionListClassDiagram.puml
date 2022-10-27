@@ -11,6 +11,11 @@ class PrescriptionList {
 }
 
 class Prescription {
+- patientId: String
+- medicine : String
+- timeInterval : String
+- dosage : String
+- isActive : Boolean
 }
 
 class UI {}
