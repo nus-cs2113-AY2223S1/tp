@@ -1,7 +1,9 @@
 package appointment;
 
 import command.appointmentcommand.AddAppointmentCommand;
+import exception.DukeException;
 import org.junit.jupiter.api.Test;
+import seedu.duke.Duke;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -14,7 +16,7 @@ class AppointmentListTest {
     }
 
     @Test
-    void findAppointment() {
+    void findAppointment() throws DukeException {
         Appointment appointment = new Appointment("Bobby", "11-28", "Massage");
         AppointmentList.addAppointment(appointment);
         Appointment foundAppointment = AppointmentList.findAppointment(1);
@@ -31,7 +33,7 @@ class AppointmentListTest {
     }
 
     @Test
-    void removeAppointment() {
+    void removeAppointment() throws DukeException{
         Appointment appointment = new Appointment("Bobby", "11-28", "Massage");
         AppointmentList.addAppointment(appointment);
         int numOfAppointments = AppointmentList.appointments.size();
