@@ -16,6 +16,17 @@ Timetabler is an app that allows NUS students taking official NUS modules to vie
 
 ## Features
 
+
+* [Add module](#adding-a-module-add) `add`
+* [List all modules](#listing-modules-list) `list`
+* [Find info on a module](#finding-information-on-a-module-info) `info`
+* [Set lesson for a module](#setting-a-modules-lessons-set) `set`
+* [Delete a module](#deleting-a-module-add) `delete`
+* [Auto-allocate lessons](#auto-allocating-all-modules-allocate) `allocate`
+* [Print timetable](#printing-the-timetable-print) `print`
+* [Quit program](#quitting-the-program-quit) `quit`
+
+
 ### Adding a module: `add`
 Command used to initiate the process of adding a new module.
 
@@ -163,20 +174,26 @@ FRI |______|______|______|______|______|______|______|______|______|______|_____
  * Timings are approximated to 30 minutes block with valid assumption that NUS mods are typically designed in such blocks.
 ```
 ---
+### Quitting the program: `quit`
+
+Command used to exit the program and stop its execution.
+
+**Example of usage**
+input: `quit`
+
+``` 
+ _____            __   __             ___              _       _ 
+/  ___|           \ \ / /            / _ \            (_)     | |
+\ `--.  ___  ___   \ V /___  _   _  / /_\ \ __ _  __ _ _ _ __ | |
+ `--. \/ _ \/ _ \   \ /  _ \| | | | |  _  |/ _` |/ _` | | '_ \| |
+/\__/ /  __/  __/   | | (_) | |_| | | | | | (_| | (_| | | | | |_|
+\____/ \___|\___|   \_/\___/ \__,_| \_| |_/\__, |\__,_|_|_| |_(_)
+                                            __/ |                
+                                           |___/                 
+```
 
 ## FAQ
 
 **Q**: How do I transfer my data to another computer?
 
 **A**: Copy all data files `Sem1DataDirectory` or / and `Sem2DataDirectory` together with the jar file to the new computer, in the same directory.
-
-## Command Summary
-
-* Add module `add`
-* List all modules `list`
-* Find info on a module `info`
-* Set lesson for a module `set`
-* Delete a module `delete`
-* Auto-allocate lessons `allocate`
-* Print timetable `print`
-* Quit program `quit`
