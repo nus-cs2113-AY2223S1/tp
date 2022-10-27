@@ -274,9 +274,12 @@ MoneyGoWhere is a financial tracker designed specifically to help computing prof
 
 ## Glossary
 
-| Term                                | Definition             |
-|-------------------------------------|------------------------|
-| Mainstream Desktop Operating System | Windows, Mac OS, Linux |
+| Term                                     | Definition                                                  |
+|------------------------------------------|-------------------------------------------------------------|
+| Mainstream Desktop Operating System (OS) | Windows, Mac OS, Linux                                      |
+| Secure Shell (ssh)                       | Protocol that enables secure access to a remote system      |
+| Secure Copy (scp)                        | Protocol enables secure data transfer with a remote system  |
+| Remote Sync (rsync)                      | Tool that synchronises a file between a client and a server |
 
 ## Manual Testing
 
