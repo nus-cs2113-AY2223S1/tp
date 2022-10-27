@@ -230,7 +230,10 @@ MoneyGoWhere is targeted at users who
 
 ### Value Proposition
 
-{Describe the value proposition: what problem does it solve?}
+MoneyGoWhere is a financial tracker designed specifically to help computing professionals manage their finances. The program 
+* Runs on mainstream desktop operating system
+* Works over remote command shells such as `ssh`, allowing easy access over the internet
+* Stores data using the Extensible Markup Language, simplifying the transfer and backup of data using tools such as `scp` or `rsync`
 
 ## User Stories
 
@@ -271,9 +274,9 @@ MoneyGoWhere is targeted at users who
 
 ## Glossary
 
-| Term                  | Definition             |
-|-----------------------|------------------------|
-| Mainstream Desktop OS | Windows, Mac OS, Linux |
+| Term                                | Definition             |
+|-------------------------------------|------------------------|
+| Mainstream Desktop Operating System | Windows, Mac OS, Linux |
 
 ## Manual Testing
 
