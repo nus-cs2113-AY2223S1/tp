@@ -416,9 +416,9 @@ ____________________________________________________________
 Format: ```view-tx /t [TRANSACTION_ID]```
 
 Note:
-1. You can use ```list-tx``` to get the transaction ID you want to view
+1. You can use ```view-tx``` to get the transaction ID you want to view
 
-Example of usage: ```remove-tx /t 4f7f7fe8```
+Example of usage: ```view-tx /t 4f7f7fe8```
 
 Expected outcome:
 ```
@@ -428,7 +428,22 @@ Status: [Returned] TransactionID: 4f7f7fe8 ItemName: weight ItemID: 5b727b2e Bor
 ____________________________________________________________
 ```
 
-#### 3.4.5. ```update-tx``` - Updates properties of a transaction
+#### 3.4.5. ```find-tx``` - Find a transaction by status
+>Find all the transactions that have finished or is still ongoing
+
+Format: ```find-tx /s finished``` OR ```find-tx /s unfinished```
+
+Example of usage: ```find-tx /s finished```
+
+Expected outcome:
+```
+____________________________________________________________
+Here are the completed transactions: 
+Status: [Returned] TransactionID: 8da1d6be ItemName: scale ItemID: 4ede2dc2 BorrowerID: bui ReturnedDate: Sat, Oct 15 2022
+____________________________________________________________
+```
+
+#### 3.4.6. ```update-tx``` - Updates properties of a transaction
 >Currently, supports only updating the duration of a transaction
 
 Format: ```update-tx /t [TRANSACTION_ID] /d [NEW_DURATION]```
@@ -447,8 +462,6 @@ Status: [On loan] TransactionID: 2c833e49 ItemName: toy ItemID: ea608c61 Borrowe
 ____________________________________________________________
 
 ```
-
-**...To be updated(View Tx by status)**
 
 ### 3.5. Exit Program
 
