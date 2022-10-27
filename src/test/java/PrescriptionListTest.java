@@ -98,7 +98,7 @@ class PrescriptionListTest {
                 + "\t____________________________________________________________" + System.lineSeparator()
                 + "You have added a prescription!" + System.lineSeparator()
                 + "\t____________________________________________________________" + System.lineSeparator()
-                + "#2)"
+                + "#2)" + System.lineSeparator()
                 + "\tID: S987655G" + System.lineSeparator()
                 + "\tMedicine: Losartan Potassium" + System.lineSeparator()
                 + "\tDosage: 50 mg" + System.lineSeparator()
