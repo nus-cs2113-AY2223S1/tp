@@ -6,6 +6,7 @@ import seedu.duke.exception.DurationInvalidException;
 import seedu.duke.exception.InsufficientArgumentsException;
 import seedu.duke.exception.InvalidArgumentException;
 import seedu.duke.exception.TransactionNotFoundException;
+import seedu.duke.item.ItemList;
 import seedu.duke.ui.Ui;
 import seedu.duke.parser.CommandParser;
 import seedu.duke.transaction.Transaction;
@@ -25,6 +26,7 @@ import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_TX_NOT_FOUN
 public class UpdateTransactionCommand extends Command {
     private final String[] parts;
     private final TransactionList transactionList;
+    private final ItemList itemList;
 
     /**
      * Constructor for AddTransactionCommand.
@@ -33,10 +35,11 @@ public class UpdateTransactionCommand extends Command {
      * @param transactionList The list of transactions to work with
      * @throws InsufficientArgumentsException If the number of args is incorrect
      */
-    public UpdateTransactionCommand(String[] parts, TransactionList transactionList)
+    public UpdateTransactionCommand(String[] parts, TransactionList transactionList, ItemList itemList)
             throws InsufficientArgumentsException {
         this.parts = parts;
         this.transactionList = transactionList;
+        this.itemList = itemList;
         // For now only support updating duration, we can extend this in the future to support
         // updating all fields.
         if (parts.length != 2) {
@@ -119,7 +122,11 @@ public class UpdateTransactionCommand extends Command {
         if (areValidArgs(args)) {
             String txId = args[0];
             int duration = Integer.parseInt(args[1]);
+            int oldDuration = transactionList.getTransactionById(txId).getDuration();
+            double oldMoneyTransacted = transactionList.getTransactionById(txId).getMoneyTransacted();
+            double newMoneyTransacted = (double)duration / (double)oldDuration * oldMoneyTransacted;
             Transaction updatedTx = this.transactionList.updateTransactionDuration(txId, duration);
+            updatedTx = this.transactionList.updateTransactionMoneyTransacted(txId,newMoneyTransacted);
             Ui.updateTransactionMessage(updatedTx);
         }
         return false;

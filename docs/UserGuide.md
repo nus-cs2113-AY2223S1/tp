@@ -346,11 +346,10 @@ Example of usage: ```find-item /k book```
 Expected outcome: 
 ```
 ____________________________________________________________
-Here are items that match your keyword: 
-1. TEXTBOOK
-3. CHINESE BOOK
-7. MATH BOOK
-8. OLD BOOK
+Here are 3 item(s) in your list:
+   1. Status: [Available] ItemId: 18c90077 Item: book Category: SPORTS_EQUIPMENT Owner: jingwei PricePerDay: $99.0
+   2. Status: [Available] ItemId: 4e6f4b89 Item: books1 Category: SPORTS_EQUIPMENT Owner: jingwei PricePerDay: $99.0
+   3. Status: [Available] ItemId: 75d7d384 Item: tbookie Category: SPORTS_EQUIPMENT Owner: jingwei PricePerDay: $99.0
 ____________________________________________________________
 ```
 

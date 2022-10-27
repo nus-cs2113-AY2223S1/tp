@@ -6,7 +6,6 @@ import seedu.duke.parser.DateParser;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
-//@@author bdthanh
 
 /**
  * A representation of transaction.
@@ -19,6 +18,7 @@ public class Transaction {
     private final int duration;
     private final LocalDate createdAt;
     private final LocalDate returnedAt;
+    private final double moneyTransacted;
 
     /**
      * Constructor method for transaction.
@@ -30,7 +30,7 @@ public class Transaction {
      * @param createdAt  The day when transaction created.
      */
     public Transaction(String itemName, String itemId, String borrowerId, int duration,
-                       LocalDate createdAt) {
+                       LocalDate createdAt, double moneyTransacted) {
         this.transactionId = IdGenerator.generateId();
         this.itemName = itemName;
         this.borrower = borrowerId;
@@ -38,6 +38,7 @@ public class Transaction {
         this.createdAt = createdAt;
         this.returnedAt = createdAt.plusDays(duration);
         this.itemId = itemId;
+        this.moneyTransacted = moneyTransacted;
     }
 
     /**
@@ -51,7 +52,7 @@ public class Transaction {
      * @param createdAt     The day when transaction created.
      */
     public Transaction(String transactionId, String itemName, String itemId, String borrowerId,
-                       int duration, LocalDate createdAt) {
+                       int duration, LocalDate createdAt, double moneyTransacted) {
         this.transactionId = transactionId;
         this.itemName = itemName;
         this.borrower = borrowerId;
@@ -59,6 +60,7 @@ public class Transaction {
         this.createdAt = createdAt;
         this.returnedAt = createdAt.plusDays(duration);
         this.itemId = itemId;
+        this.moneyTransacted = moneyTransacted;
     }
 
     /**
@@ -105,6 +107,12 @@ public class Transaction {
     public int getDuration() {
         return duration;
     }
+    /**
+     * Gets the moneyTransacted.
+     *
+     * @return The Duration of transaction
+     */
+    public double getMoneyTransacted(){ return moneyTransacted; }
 
     /**
      * Checks if the transaction finished or not.
@@ -123,7 +131,7 @@ public class Transaction {
     public String convertTransactionToFileFormat() {
         String separator = " | ";
         return transactionId + separator + itemName + separator + itemId + separator + borrower
-                + separator + duration + separator + createdAt;
+                + separator + duration + separator + createdAt + separator + moneyTransacted;
     }
 
     /**
@@ -135,7 +143,11 @@ public class Transaction {
 
     public Transaction updateDuration(int newDuration) {
         return new Transaction(this.transactionId, this.itemName, this.itemId, this.borrower,
-                newDuration, this.createdAt);
+                newDuration, this.createdAt, this.moneyTransacted);
+    }
+    public Transaction updateMoneyTransacted(double newMoneyTransacted){
+        return new Transaction(this.transactionId, this.itemName, this.itemId, this.borrower,
+                this.duration, this.createdAt, newMoneyTransacted);
     }
 
     /**
@@ -150,6 +162,7 @@ public class Transaction {
         String transactionId = "TransactionID: " + this.transactionId + " ";
         String itemName = "ItemName: " + this.itemName + " ";
         String usersId = "BorrowerID: " + this.borrower + " ";
+        String moneyTransactedString = "Money Transacted: " + this.moneyTransacted + " ";
 
         if (!isFinished()) {
             String remainDays = " (" + ChronoUnit.DAYS.between(LocalDate.now(), getReturnDate())
@@ -159,6 +172,7 @@ public class Transaction {
             return transactionIcon + transactionId + itemName + itemId + usersId + returnDate;
         }
         String returnedDate = "ReturnedDate: " + DateParser.formatDateToString(returnedAt);
-        return transactionIcon + transactionId + itemName + itemId + usersId + returnedDate;
+
+        return transactionIcon + transactionId + itemName + itemId + usersId + returnedDate + moneyTransactedString;
     }
 }
