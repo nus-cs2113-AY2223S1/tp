@@ -122,6 +122,16 @@ public class Ui {
         showLine();
     }
 
+    public static void viewUserTransactionsMessage(ArrayList<Transaction> transactions) {
+        showLine();
+        System.out.print(transactions.size() == 0
+                ? "This user has no transactions\n" : "Here are this user's transactions: \n");
+        for (Transaction transaction : transactions) {
+            System.out.print(transaction + "\n");
+        }
+        showLine();
+    }
+
     public static void updateTransactionMessage(Transaction transaction) {
         showLine();
         System.out

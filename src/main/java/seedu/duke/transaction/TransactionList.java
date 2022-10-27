@@ -73,6 +73,19 @@ public class TransactionList {
         throw new TransactionNotFoundException(MESSAGE_TX_NOT_FOUND);
     }
 
+    public Transaction updateTransactionMoneyTransacted(String transactionId, double moneyTransacted)
+            throws TransactionNotFoundException {
+        for (int i = 0; i < this.transactionList.size(); ++i) {
+            Transaction tx = this.transactionList.get(i);
+            if (tx.getTxId().equals(transactionId)) {
+                Transaction updatedTx = tx.updateMoneyTransacted(moneyTransacted);
+                this.transactionList.set(i, updatedTx);
+                return updatedTx;
+            }
+        }
+        throw new TransactionNotFoundException(MESSAGE_TX_NOT_FOUND);
+    }
+
     /**
      * Deletes a transaction in the list given its ID.
      *
@@ -99,6 +112,24 @@ public class TransactionList {
             }
         }
         throw new TransactionNotFoundException(MESSAGE_TX_NOT_FOUND);
+    }
+
+    public TransactionList getBorrowTransactionsByUser(String userName) {
+        TransactionList returnList = new TransactionList();
+        for (Transaction transaction : this.transactionList) {
+            if (transaction.getBorrower().equals(userName)) {
+                returnList.addTransaction(transaction);
+            }
+        }
+        return returnList;
+    }
+
+    public double getTotalMoneyTransacted(){
+        int totalProfit = 0;
+        for (Transaction transaction : transactionList) {
+            totalProfit += transaction.getMoneyTransacted();
+        }
+        return totalProfit;
     }
 
     /**
