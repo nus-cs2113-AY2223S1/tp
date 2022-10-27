@@ -58,6 +58,7 @@ class PrescriptionListTest {
 
         String expectedOutput = "You have added a prescription!" + System.lineSeparator()
                 + "\t____________________________________________________________" + System.lineSeparator()
+                + "#1)" + System.lineSeparator()
                 + "\tID: S123456G" + System.lineSeparator()
                 + "\tMedicine: Ventolin" + System.lineSeparator()
                 + "\tDosage: 4 mg" + System.lineSeparator()
@@ -88,6 +89,7 @@ class PrescriptionListTest {
         String expectedOutput =
                 "You have added a prescription!" + System.lineSeparator()
                 + "\t____________________________________________________________" + System.lineSeparator()
+                + "#1)" + System.lineSeparator()
                 + "\tID: S123456G" + System.lineSeparator()
                 + "\tMedicine: Ventolin" + System.lineSeparator()
                 + "\tDosage: 4 mg" + System.lineSeparator()
@@ -96,6 +98,7 @@ class PrescriptionListTest {
                 + "\t____________________________________________________________" + System.lineSeparator()
                 + "You have added a prescription!" + System.lineSeparator()
                 + "\t____________________________________________________________" + System.lineSeparator()
+                + "#2)"
                 + "\tID: S987655G" + System.lineSeparator()
                 + "\tMedicine: Losartan Potassium" + System.lineSeparator()
                 + "\tDosage: 50 mg" + System.lineSeparator()
@@ -104,6 +107,7 @@ class PrescriptionListTest {
                 + "\t____________________________________________________________" + System.lineSeparator()
                 + "You have added a prescription!" + System.lineSeparator()
                 + "\t____________________________________________________________" + System.lineSeparator()
+                + "#3)" + System.lineSeparator()
                 + "\tID: K323232J" + System.lineSeparator()
                 + "\tMedicine: Hydrocodone-Acetaminophen" + System.lineSeparator()
                 + "\tDosage: 1 capsule" + System.lineSeparator()
@@ -147,6 +151,7 @@ class PrescriptionListTest {
         String expectedOutput =
                 "You have added a prescription!" + System.lineSeparator()
                 + "\t____________________________________________________________" + System.lineSeparator()
+                + "#1)" + System.lineSeparator()
                 + "\tID: S123456G" + System.lineSeparator()
                 + "\tMedicine: Ventolin" + System.lineSeparator()
                 + "\tDosage: 4 mg" + System.lineSeparator()
@@ -154,6 +159,7 @@ class PrescriptionListTest {
                 + "\tStatus: Active" + System.lineSeparator()
                 + "\t____________________________________________________________" + System.lineSeparator()
                 + "You have edited the prescription!" + System.lineSeparator()
+                + "#1)"
                 + "\t____________________________________________________________" + System.lineSeparator()
                 + "\tID: S123456G" + System.lineSeparator()
                 + "\tMedicine: Losartan Potassium" + System.lineSeparator()
@@ -174,6 +180,7 @@ class PrescriptionListTest {
         String expectedOutput =
                 "You have added a prescription!" + System.lineSeparator()
                 + "\t____________________________________________________________" + System.lineSeparator()
+                + "#1)"
                 + "\tID: S123456G" + System.lineSeparator()
                 + "\tMedicine: Ventolin" + System.lineSeparator()
                 + "\tDosage: 4 mg" + System.lineSeparator()
@@ -181,6 +188,7 @@ class PrescriptionListTest {
                 + "\tStatus: Active" + System.lineSeparator()
                 + "\t____________________________________________________________" + System.lineSeparator()
                 + "You have edited the prescription!" + System.lineSeparator()
+                + "#2)"
                 + "\t____________________________________________________________" + System.lineSeparator()
                 + "\tID: S123456G" + System.lineSeparator()
                 + "\tMedicine: Ventolin" + System.lineSeparator()
@@ -201,6 +209,7 @@ class PrescriptionListTest {
         String expectedOutput =
                 "You have added a prescription!" + System.lineSeparator()
                 + "\t____________________________________________________________" + System.lineSeparator()
+                + "#1)"
                 + "\tID: S123456G" + System.lineSeparator()
                 + "\tMedicine: Ventolin" + System.lineSeparator()
                 + "\tDosage: 4 mg" + System.lineSeparator()
