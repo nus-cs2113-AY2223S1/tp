@@ -73,6 +73,13 @@ _Written by: Chia Thin Hong_
 1. Ensure that you have Java 11 or above installed. If not, kindly install Java's [latest version](https://www.oracle.com/java/technologies/downloads/).
 2. Download the latest version of `Moolah Manager` from [here](https://github.com/AY2223S1-CS2113-W12-2/tp/releases).
    As shown in Figure 1 below, click on the `duke.jar` file from the latest version available.
+
+    <p align="center">
+    <img src="images/MoolahManagerDownload.png">
+    <br />
+    <i>Figure 1: How to Download Moolah Manager</i>
+    </p>
+
 3. Copy the file to the directory that you wish to use as a home directory for Moolah Manager. The data saved during the
    application will reside in the same directory.
 4. Launch a command prompt or terminal and run the command `java -jar duke.jar` to start the application.
