@@ -44,9 +44,22 @@ using the `toString()` function found in both the `Movie` and `TvShow` subclasse
 ![img.png](imgs/FindCommandSequence.png)
 
 #### List
+The list command outputs all inputted reviews per category:
+
+1. The list command sequence begins with a `Parser` object.
+2. The `Parser` object calls on `executeList` which is responsible for creating a `ListCommand` Object. It then calls on its `execute` method to execute the proper actions.
+3. In this `execute` function, it loops through all the stored reviews and separates each review based on category and formats using the proper `toString` method.
+4. Finally, an output string is returned and the `Parser` class calls on the `UI` object to print the output to the user.  
 ![img_2.png](imgs/ListCommandSequence.png)
 
 #### Sort
+The sort command sorts reviews based on a given input. 
+
+1. The sort command sequence begins with a `Parser` object.
+2. The `Parser` object calls on `executeSort` which is responsible for creating a `SortCommand` Object. Then it calls on `SortCommands`'s `execute` method to execute the proper actions.
+3. The `execute` function returns the sorted outputted string.
+4. Finally, the `Parser` class calls on the `UI` object to print out the output to the user.
+
 ![img.png](imgs/sortSequence.png)
 
 #### Remove
