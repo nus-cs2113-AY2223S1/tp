@@ -7,7 +7,7 @@
 ## Design & implementation
 
 Our program is structured as pictured in the following class diagram:
-![ClassDiagram.png](ClassDiagram.png)
+![ClassDiagram.png](diagrams/ClassDiagram.png)
 
 All the inheritors of Command are features that will be described below.
 
@@ -25,7 +25,7 @@ Step 3: The execute method in the Add class that is overrides will be called wit
 
 The sequence diagram below illustrates this add mechanism:
 
-![AddUML.png](AddUML.png)
+![AddUML.png](diagrams/AddUML.png)
 
 ### Deletion feature
 
@@ -41,7 +41,7 @@ Step 3: The execute method in the Delete class that is overrides will be called 
 
 The sequence diagram below illustrates this delete mechanism:
 
-![DeleteUML.png](DeleteUML.png)
+![DeleteUML.png](diagrams/DeleteUML.png)
 
 ### View feature
 
@@ -61,7 +61,7 @@ the moduleList. If the semester in which a particular module is taken matches th
 
 The sequence diagram below illustrates this view mechanism.
 
-![viewUML.png](viewUML.png)
+![viewUML.png](diagrams/viewUML.png)
 
 ### Mcs feature
 
@@ -82,7 +82,58 @@ will be increased by the number of Mcs of the module taken. In the end, mcsCount
 
 The sequence diagram below illustrates this mcs mechanism.
 
-![McsUML.png](McsUML.png)
+![McsUML.png](diagrams/McsUML.png)
+
+
+### Find feature
+
+The find mechanism is facilitated by 'Parser', 'Find', 'ModuleList', and 'UI', where the user enters
+a keyword and the modules containing the keyword in one of its fields will be displayed.
+
+Below is an example usage scenario and how the find mechanism behaves at each step.
+
+Step 1: Assume that the user has already added two modules to y2s1:
+The first module is CS2113, a 4 MC module which was added using the following command "add m/cs2113 s/y2s1 mc/4 g/a"
+The second module is CS2030, a 4 MC module which was added using the following command "add m/cs2030 s/y2s1 mc/4 g/b"
+
+Step 2: The user input of "find a" will be taken in for the parser and an object of class 'Find' will be returned.
+
+Step 3: The execute method of Find class that is overrides will be called with parameter of the keyword inputted and will iterate through
+the moduleList. If the keyword matches a field of a particular module, the module will be added to a separate array list 
+which will then be displayed to the user.
+
+The sequence diagram below illustrates this find mechanism.
+
+![FindUML.png](diagrams/FindUML.png)
+
+
+### Check feature
+
+The help mechanism is facilitated by 'Parser', 'Check' and 'UI', where the user enters the check command and the resulting 
+eligibility status will be displayed.
+
+The sequence diagram below illustrates this help mechanism.
+
+![CheckUML.png](diagrams/CheckUML.png)
+
+### Help feature
+
+The help mechanism is facilitated by 'Parser', 'Help' and 'UI', where the user enters the word 'help' and a help message with 
+the various commands summary will be displayed.
+
+The sequence diagram below illustrates this help mechanism.
+
+![HelpUML.png](diagrams/HelpUML.png)
+
+### Exit feature
+
+The exit mechanism is facilitated by 'Parser', 'Exit' and 'UI'. 
+This allows the program to exit smoothly with an exit message displayed when the user input is 'exit'.
+
+The sequence diagram below illustrates this exit mechanism.
+
+![ExitUML.png](diagrams/ExitUML.png)
+
 
 
 ## Product scope

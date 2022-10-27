@@ -7,6 +7,7 @@ Duke -> Parser: parse(input)
 activate Parser
 Parser -> Parser: specificCase(commandWord, content)
 activate Parser
+create View
 Parser -> View: new View(content)
 activate View
 return c: View
