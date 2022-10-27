@@ -52,7 +52,7 @@ public enum HelpMessages {
             + "ranging from 1 to 1000000."),
     COMMAND_PARAMETERS_KEYWORDS("- KEYWORDS: A string that represents a single or a group of words used to find "
             + "matching transactions. Spacing is allowed."),
-    COMMAND_PARAMETERS_BUDGET("- BUDGET: An estimate of income or expenditure for a set period of time. It is a "
+    COMMAND_PARAMETERS_BUDGET("- BUDGET: An estimate of expense for every month. . It is a "
             + "positive whole number that is from 1 to 10^13 (Ten Trillion). No alphabet, symbol or spacing is "
             + "allowed."),
     COMMAND_PARAMETERS_STATS_TYPE("- STATS_TYPE: The type of statistics. It can be \"categorical_savings\", "

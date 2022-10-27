@@ -110,9 +110,15 @@ Display basic or detailed help message explaining the command available in the a
 
 Format: `help [o/detailed]`
 
-* To view detailed help, the exact `o/detailed` must be added in the command.
+| Field      | Description                                    |
+|------------|------------------------------------------------|
+| `detailed` | To list the detailed version of help messages. |
 
-Examples of usage: 
+**Important Information:**
+
+- To view detailed help, the exact `o/detailed` must be added in the command.
+
+Example(s): 
 
  - `help`
 
@@ -151,7 +157,7 @@ Format: `todo n/TODO_NAME d/DEADLINE`
 * The `DEADLINE` can be in a natural language format.
 * The `TODO_NAME` cannot contain punctuation.
 
-Examples of usage:
+Example(s):
 
 `todo n/Write the rest of the User Guide d/next week`
 
@@ -452,10 +458,15 @@ To set the amount of monthly budget, with a value from 1 to 10<sup>13</sup>.
 
 Format: `budget b/BUDGET`
 
-* The `BUDGET` must be a whole number from 1 to 10<sup>13</sup>.
-* The monthly budget is set to $1000 by default if the user has never run this command.
+| Field      | Description                                                                                                   |
+|------------|---------------------------------------------------------------------------------------------------------------|
+| `BUDGET`   | An estimate of expense for every month. It is a positive whole number that is from 1 to 10^13 (Ten Trillion). |
 
-Examples of usage:
+**Important Information:**
+
+- The monthly budget is set to $1000 by default if the user has never run this command.
+
+Example(s):
 
 `budget b/1000`
 
@@ -485,7 +496,7 @@ Exits the program.
 
 Format: `exit`
 
-Examples of usage:
+Example(s):
 
 `exit`
 
