@@ -7,7 +7,7 @@ end box
 
 participant ":UI" as D
 
-[-> A : activate(ui, 1)
+-> A : activate(ui, 1)
 activate A
 
 A -> A : getIndex(ui, 1)
