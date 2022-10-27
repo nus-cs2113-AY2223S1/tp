@@ -8,6 +8,8 @@ import exception.DukeException;
 
 import java.util.ArrayList;
 
+import static appointment.AppointmentList.findAppointment;
+
 public class TaskList {
     static ArrayList<Task> tasks = new ArrayList<>();
 
@@ -23,7 +25,7 @@ public class TaskList {
     public static void addTask(Task task) throws DukeException {
 
         // appointment aggregate task
-        Appointment appointment = AppointmentList.findAppointment(task.getAppointmentId());
+        Appointment appointment = findAppointment(task.getAppointmentId());
         if (appointment == null) {
             throw new DukeException();
         }
@@ -42,8 +44,8 @@ public class TaskList {
 
         System.out.print("Got it. I've added this task: ");
         System.out.println(task.getTaskDescription());
-        System.out.println("Performed by: " + task.getEmployeeId());
-        System.out.println("Appointment: " + task.getAppointmentId());
+        System.out.println("Performed by: " + task.taskDescription);
+        System.out.println("Appointment: " + task.appointmentId);
         System.out.println("Now you have " + tasks.size() + " task in the list.");
     }
 
@@ -69,7 +71,7 @@ public class TaskList {
                 // remove from overall task list
                 tasks.remove(task);
                 // remove from appointment
-                AppointmentList.findAppointment(task.getAppointmentId()).removeTaskFromAppointment(taskId);
+                findAppointment(task.getAppointmentId()).removeTaskFromAppointment(taskId);
                 // remove from employee
                 EmployeeList.findEmployee(task.getEmployeeId()).removeTaskFromEmployee(taskId);
                 System.out.print("Got it. I've removed this task: ");
@@ -93,7 +95,7 @@ public class TaskList {
         findTask(taskId).setDone();
         System.out.print("Got it. I've finished this task: ");
         System.out.println(findTask(taskId).getTaskDescription());
-        Appointment appointment = AppointmentList.findAppointment(findTask(taskId).appointmentId);
+        Appointment appointment = findAppointment(findTask(taskId).appointmentId);
         if (appointment == null) {
             throw new DukeException();
         }
