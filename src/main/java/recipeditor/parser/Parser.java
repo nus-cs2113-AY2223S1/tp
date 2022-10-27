@@ -48,7 +48,7 @@ public class Parser {
         case FindCommand.COMMAND_TYPE:
             return parseFindCommand(parsed);
         default:
-            return new InvalidCommand();
+            return new InvalidCommand(InvalidCommand.INVALID_MESSAGE);
         }
     }
 
@@ -87,12 +87,10 @@ public class Parser {
                 }
                 return new DeleteCommand(index);
             } catch (Exception e) {
-                System.out.format("Exception: Wrong command Format%n"
-                        + "Try the command in correct format: view/delete <index of task>%n");
-                return new InvalidCommand();
+                return new InvalidCommand(ViewCommand.COMMAND_SYNTAX);
             }
         }
-        return new InvalidCommand();
+        return new InvalidCommand(ViewCommand.COMMAND_SYNTAX);
     }
 
     private static Command parseEditCommand(String[] parsed) {
@@ -107,12 +105,12 @@ public class Parser {
             edit.enterEditMode(index);
             return new EditCommand(edit.exitEditMode(), index, edit.getEditedRecipe());
         }
-        return new InvalidCommand();
+        return new InvalidCommand(EditCommand.COMMAND_SYNTAX);
     }
 
     private static Command parseFindCommand(String[] parsed) {
         if (parsed.length < 2) {
-            return new InvalidCommand();
+            return new InvalidCommand(FindCommand.COMMAND_SYNTAX);
         }
         String flagAndInputString = convertStringArrayToString(parsed);
         String[] flagAndInput = flagAndInputString.split(" ", 2);

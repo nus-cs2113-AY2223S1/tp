@@ -6,6 +6,8 @@ import java.util.ArrayList;
 
 public class FindCommand extends Command {
     public static final String COMMAND_TYPE = "/find";
+
+    public static final String COMMAND_SYNTAX = "Syntax for /find \n";
     public char flagType;
     public String findInput;
 

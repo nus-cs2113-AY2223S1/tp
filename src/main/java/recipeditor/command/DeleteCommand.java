@@ -8,6 +8,9 @@ import recipeditor.ui.Ui;
 
 public class DeleteCommand extends Command {
     public static final String COMMAND_TYPE = "/delete";
+
+    public static final String COMMAND_SYNTAX = "Syntax for /delete \n"
+            +"\t /delete <index>";
     private final int index;
 
     /**
