@@ -1,4 +1,4 @@
-package seedu.duke.command;
+package seedu.duke.command.pairunpair;
 
 
 import seedu.duke.Client;
@@ -8,6 +8,7 @@ import seedu.duke.Property;
 import seedu.duke.PropertyList;
 import seedu.duke.Storage;
 import seedu.duke.Ui;
+import seedu.duke.command.Command;
 
 import java.util.ArrayList;
 

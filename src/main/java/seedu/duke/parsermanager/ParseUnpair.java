@@ -1,17 +1,18 @@
 package seedu.duke.parsermanager;
 
+//@@author ngdeqi
 import seedu.duke.Client;
 import seedu.duke.ClientList;
 import seedu.duke.PairingList;
 import seedu.duke.Property;
 import seedu.duke.PropertyList;
 import seedu.duke.command.Command;
-import seedu.duke.command.CommandUnpair;
+import seedu.duke.command.pairunpair.CommandUnpair;
 import seedu.duke.exception.EmptyDescriptionException;
 import seedu.duke.exception.IncorrectFlagOrderException;
 import seedu.duke.exception.InvalidIndexException;
 import seedu.duke.exception.MissingFlagException;
-import seedu.duke.exception.NoExistingPairException;
+import seedu.duke.exception.pairunpair.unpair.NoExistingPairException;
 import seedu.duke.exception.NotIntegerException;
 
 import java.util.ArrayList;

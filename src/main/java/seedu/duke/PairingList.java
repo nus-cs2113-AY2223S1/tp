@@ -15,7 +15,6 @@ public class PairingList {
     private static final String LOG_ADD_PAIR = "The following pairing has been added to PairingList:";
     private static final String LOG_DELETE_PAIR = "The following pairing(s) has been deleted from PairingList: ";
     private static final String LOG_PAIRS_WITH = "Pairs with ";
-    private static final String LOG_COLON = " : ";
 
     private final HashMap<Client, Property> clientPropertyPairs = new HashMap<>();
     private static final Logger LOGGER = Logger.getLogger("PairingList");

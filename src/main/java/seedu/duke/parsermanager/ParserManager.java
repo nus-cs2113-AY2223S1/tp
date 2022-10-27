@@ -3,10 +3,10 @@ package seedu.duke.parsermanager;
 import seedu.duke.ClientList;
 import seedu.duke.PairingList;
 import seedu.duke.PropertyList;
-import seedu.duke.exception.ClientAlreadyPairedException;
+import seedu.duke.exception.pairunpair.pair.ClientAlreadyPairedException;
 import seedu.duke.exception.DukeParseException;
-import seedu.duke.exception.ExistingPairException;
-import seedu.duke.exception.NoExistingPairException;
+import seedu.duke.exception.pairunpair.pair.ExistingPairException;
+import seedu.duke.exception.pairunpair.unpair.NoExistingPairException;
 import seedu.duke.exception.UndefinedSubCommandTypeException;
 
 import java.util.ArrayList;

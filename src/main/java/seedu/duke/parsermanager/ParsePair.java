@@ -1,17 +1,18 @@
 package seedu.duke.parsermanager;
 
+//@@author ngdeqi
 import seedu.duke.Client;
 import seedu.duke.ClientList;
 import seedu.duke.PairingList;
 import seedu.duke.Property;
 import seedu.duke.PropertyList;
 import seedu.duke.command.Command;
-import seedu.duke.command.CommandPair;
+import seedu.duke.command.pairunpair.CommandPair;
 import seedu.duke.exception.BudgetExceededException;
-import seedu.duke.exception.ClientAlreadyPairedException;
+import seedu.duke.exception.pairunpair.pair.ClientAlreadyPairedException;
 import seedu.duke.exception.DukeException;
 import seedu.duke.exception.EmptyDescriptionException;
-import seedu.duke.exception.ExistingPairException;
+import seedu.duke.exception.pairunpair.pair.ExistingPairException;
 import seedu.duke.exception.IncorrectFlagOrderException;
 import seedu.duke.exception.InvalidIndexException;
 import seedu.duke.exception.MissingFlagException;
@@ -22,9 +23,7 @@ import java.util.ArrayList;
 import static seedu.duke.CommandStructure.PAIR_FLAGS;
 import static seedu.duke.Messages.EXCEPTION;
 import static seedu.duke.Messages.MESSAGE_BUDGET_EXCEEDED;
-import static seedu.duke.Messages.MESSAGE_CLIENT_ALREADY_PAIRED;
 import static seedu.duke.Messages.MESSAGE_EMPTY_DESCRIPTION;
-import static seedu.duke.Messages.MESSAGE_EXISTING_PAIR;
 import static seedu.duke.Messages.MESSAGE_INVALID_INDEX;
 import static seedu.duke.Messages.MESSAGE_NOT_INTEGER;
 import static seedu.duke.Messages.MESSAGE_PAIR_WRONG_FORMAT;
@@ -56,16 +55,12 @@ public class ParsePair extends Parser {
             return new CommandPair(pairDetailsInt);
         } catch (InvalidIndexException e) {
             throw new InvalidIndexException(MESSAGE_INVALID_INDEX);
-        } catch (ClientAlreadyPairedException e) {
-            throw new ClientAlreadyPairedException(MESSAGE_CLIENT_ALREADY_PAIRED);
         } catch (MissingFlagException e) {
             throw new MissingFlagException(MESSAGE_PAIR_WRONG_FORMAT);
         } catch (IncorrectFlagOrderException e) {
             throw new IncorrectFlagOrderException(MESSAGE_PAIR_WRONG_FORMAT);
         } catch (NotIntegerException e) {
             throw new NotIntegerException(MESSAGE_NOT_INTEGER);
-        } catch (ExistingPairException e) {
-            throw new ExistingPairException(MESSAGE_EXISTING_PAIR);
         } catch (BudgetExceededException e) {
             throw new BudgetExceededException(MESSAGE_BUDGET_EXCEEDED);
         }
@@ -104,11 +99,11 @@ public class ParsePair extends Parser {
         Property property = propertyList.getPropertyList().get(propertyIndex);
 
         if (pairingList.isAlreadyPaired(client, property)) {
-            throw new ExistingPairException(EXCEPTION);
+            throw new ExistingPairException();
         }
 
         if (pairingList.isClientPairedWithProperty(client)) {
-            throw new ClientAlreadyPairedException(EXCEPTION);
+            throw new ClientAlreadyPairedException();
         }
 
         if (pairingList.hasPriceExceededBudget(client, property)) {

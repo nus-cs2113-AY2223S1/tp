@@ -6,6 +6,7 @@ import seedu.duke.PairingList;
 import seedu.duke.PropertyList;
 import seedu.duke.Storage;
 import seedu.duke.Ui;
+import seedu.duke.exception.DukeException;
 
 /**
  * Represents an executable command.
@@ -20,5 +21,5 @@ public abstract class Command {
      * @param pairingList PairingList object that handles all interactions with the list clients paired with properties.
      */
     public abstract void execute(Ui ui, Storage storage, PropertyList propertyList, ClientList clientList,
-                                 PairingList pairingList);
+                                 PairingList pairingList) throws DukeException;
 }

@@ -38,7 +38,8 @@ public class Messages {
 
     /* General Error Messages */
 
-    public static final String MESSAGE_EMPTY_DESCRIPTION = "OOPS!!! The description for this command cannot be empty.";
+    public static final String MESSAGE_EMPTY_DESCRIPTION = "OOPS!!! The description for this command cannot be empty."
+            + "\n";
 
     public static final String MESSAGE_MISSING_SUB_COMMAND_TYPE = "OOPS!!! Please specify sub-command type.\n"
             + "For client: <command> -client\n"
@@ -48,6 +49,10 @@ public class Messages {
             + "property list or client list";
 
     public static final String MESSAGE_NOT_INTEGER = "OOPS!! Please enter a positive integer as index";
+
+    public static final String MESSAGE_WRONG_FLAG_ORDER = "OOPS!! Wrong flag order.\n";
+
+    public static final String MESSAGE_MISSING_FLAG = "OOPS!! You are missing the following flag(s):\n";
 
     //@@author OVReader
     // Add Property/Client Related Error Messages
@@ -139,14 +144,14 @@ public class Messages {
             + "delete -property ip/PROPERTY_INDEX";
 
 
+    //@@author ngdeqi
     /* Pair/Unpair Related Error Messages */
-
-    public static final String MESSAGE_PAIR_WRONG_FORMAT = "OOPS!!! To pair, please follow the following format:\n"
+    public static final String MESSAGE_PAIR_WRONG_FORMAT = "To pair, please follow the following format:\n"
             + "  pair ip/PROPERTY_INDEX ic/CLIENT_INDEX\n"
             + "Example:\n"
             + "  pair ip/1 ic/5\n";
 
-    public static final String MESSAGE_UNPAIR_WRONG_FORMAT = "OOPS!!! To unpair, please follow the following format:\n"
+    public static final String MESSAGE_UNPAIR_WRONG_FORMAT = "To unpair, please follow the following format:\n"
             + "  unpair ip/PROPERTY_INDEX ic/CLIENT_INDEX\n"
             + "Example:\n"
             + "  unpair ip/2 ic/1";
@@ -163,6 +168,7 @@ public class Messages {
 
     public static final String MESSAGE_NO_EXISTING_PAIR = "OOPS!! This property is not being rented by the tenant. "
             + "Unpair unsuccessful.";
+    //@@ author
 
 
 
