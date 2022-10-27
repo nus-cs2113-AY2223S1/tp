@@ -71,7 +71,7 @@ Command Word: BUDGET
 Set the amount for monthly budget, with a value from 1 to 10^13 (Ten Trillion).
 Usage: budget b/BUDGET
 Parameters information:
-- BUDGET: An estimate of income or expenditure for a set period of time. It is a positive whole number that is from 1 to 10^13 (Ten Trillion). No alphabet, symbol or spacing is allowed.
+- BUDGET: An estimate of expense for every month. . It is a positive whole number that is from 1 to 10^13 (Ten Trillion). No alphabet, symbol or spacing is allowed.
 
 Command Word: ADD
 Add a new transaction entry, which could be either an "expense" or "income" into the transactions list.
