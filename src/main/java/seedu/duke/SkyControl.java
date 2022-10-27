@@ -6,9 +6,11 @@ import seedu.duke.command.flightcommand.DeleteFlightCommand;
 import seedu.duke.command.flightcommand.ListFlightCommand;
 import seedu.duke.command.flightcommand.ModifyFlightNumCommand;
 import seedu.duke.command.flightcommand.ModifyGateNumCommand;
+import seedu.duke.command.flightcommand.DelayFlightCommand;
 import seedu.duke.command.passengercommand.AddPassengerCommand;
 import seedu.duke.command.passengercommand.DeletePassengerCommand;
 import seedu.duke.command.passengercommand.ListPassengerCommand;
+
 import seedu.duke.exceptions.SkyControlException;
 import seedu.duke.exceptions.SyncException;
 import seedu.duke.operationlist.FlightList;
@@ -25,6 +27,7 @@ public class SkyControl {
     private static boolean isFlight = false;
     private static boolean isModify = false;
     private static boolean isAdd = false;
+    private static boolean isDelay = false;
 
 
     /**
@@ -45,6 +48,9 @@ public class SkyControl {
             } else if (isFlight) {
                 command.execute(flights, lineInput);
             } else if (isModify) {
+                command.execute(flights, lineInput);
+                command.execute(passengers, lineInput);
+            } else if (isDelay) {
                 command.execute(flights, lineInput);
                 command.execute(passengers, lineInput);
             } else {
@@ -70,6 +76,7 @@ public class SkyControl {
         isPassenger = Parser.isPassengerEntity(lineInput);
         isFlight = Parser.isFlightEntity(lineInput);
         isModify = Parser.isModifyCommand(lineInput);
+        isDelay = Parser.isDelayCommand(lineInput);
         if (isPassenger) {
             isAdd = Parser.getAdd(lineInput);
         }
@@ -85,6 +92,7 @@ public class SkyControl {
         ListFlightCommand.setupLogger();
         ModifyFlightNumCommand.setupLogger();
         ModifyGateNumCommand.setupLogger();
+        DelayFlightCommand.setupLogger();
     }
 
     public void run() {

@@ -17,6 +17,7 @@ public class Parser {
     protected static Ui ui = new Ui();
     protected static final String EXIT_ENTITY = "bye";
     protected static final String MODIFY_COMMAND = "modify";
+    protected static final String DELAY_COMMAND = "delay";
     protected static final String PASSENGER_ENTITY = "passenger";
     protected static final String FLIGHT_ENTITY = "flight";
     protected static final int ENTITY_INDEX = 0;
@@ -27,6 +28,7 @@ public class Parser {
     protected static boolean isAdd = false;
     protected static boolean isDelete = false;
     protected static boolean isList = false;
+    protected static boolean isDelay = false;
     protected static boolean isExit = false;
     protected static boolean isModify = false;
     protected static boolean isBlankOperation = false;
@@ -63,10 +65,12 @@ public class Parser {
             command = PassengerParser.parse(inputWords);
         } else if (isFlightEntity) {
             command = FlightParser.parse(inputWords);
-        } else if (isExit) {
-            command = new ExitCommand();
         } else if (isModify) {
             command = ModificationParser.parse(inputWords);
+        } else if (isDelay) {
+            command = ModificationParser.parse(inputWords);
+        } else if (isExit) {
+            command = new ExitCommand();
         } else {
             throw new SkyControlException(ui.getErrorMessage());
         }
@@ -78,6 +82,7 @@ public class Parser {
         isFlightEntity = isFlightEntity(lineInput);
         isExit = isExitCommand(lineInput);
         isModify = isModifyCommand(lineInput);
+        isDelay = isDelayCommand(lineInput);
     }
 
     public static void checkOperation(String[] inputWords) {
@@ -93,6 +98,7 @@ public class Parser {
         return isPassengerEntity;
     }
 
+    //@@author shengiv
     public static boolean isFlightEntity(String lineInput) throws SkyControlException {
         getEntity(lineInput);
         isFlightEntity = entity.equalsIgnoreCase(FLIGHT_ENTITY);
@@ -105,6 +111,14 @@ public class Parser {
         return isModify;
     }
 
+    //@@author Franky4566
+    public static boolean isDelayCommand(String lineInput) throws SkyControlException {
+        getEntity(lineInput);
+        isDelay = entity.equalsIgnoreCase(DELAY_COMMAND);
+        return isDelay;
+    }
+
+    //@@author ivanthengwr
     public static boolean isExitCommand(String lineInput) {
         try {
             getEntity(lineInput);
