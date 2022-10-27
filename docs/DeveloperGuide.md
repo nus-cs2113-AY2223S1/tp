@@ -124,7 +124,16 @@ testers are expected to do more *exploratory* testing.
 
   2. Test case: `add`, then `exampleModuleCode`
        Expected: Module should not be double added. Use `list` command again to check.
+       
+#### Deleting a module
+1. Deleting a module when module already exists in Timetable
 
+   1. Prerequisites: List all persons using the `list` command. There should already exist the module that is to be deleted.
+   
+   2. Test case: `delete`, then `exampleModuleCode`
+       Expected: Module should be deleted. Use `list` command again to check.
+   
+   3. If there is no module in the list, user will be prompt that no module exists in the list.
 
 ### Saving data
 
