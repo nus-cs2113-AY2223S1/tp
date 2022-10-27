@@ -26,6 +26,10 @@ activate Data DATA_COLOR_1
 Data --[DATA_COLOR_1]> UserInterface
 deactivate Data
 
+ref over UserInterface, Data, Storage
+        Load Expenses from File
+    end ref
+
 UserInterface -[USER_INTERFACE_COLOR_1]> MoneyGoWhere
 deactivate UserInterface
 
