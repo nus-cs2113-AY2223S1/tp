@@ -166,7 +166,7 @@ Command class and are all in the command package.
 The <code>AddModuleCommand</code> class extends from the <code>Command</code> class and adds the user input module into
 their timetable.
 
-![AddModuleCommandClass](images/addModuleCommandClass.png)
+![AddModuleCommand Class](images/AddModuleCommandClass.png)
 
 ##### How the feature is implemented
 The `AddModuleCommand` class extends the `Command` class.
