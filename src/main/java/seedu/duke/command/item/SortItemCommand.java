@@ -1,10 +1,11 @@
 package seedu.duke.command.item;
 
 import seedu.duke.command.Command;
-import seedu.duke.exception.InvalidSortModeException;
 import seedu.duke.exception.InvalidArgumentException;
-import seedu.duke.exception.InvalidPriceException;
+import seedu.duke.exception.InvalidCategoryException;
 import seedu.duke.exception.InvalidPriceBoundariesException;
+import seedu.duke.exception.InvalidPriceException;
+import seedu.duke.exception.InvalidSortModeException;
 import seedu.duke.item.Category;
 import seedu.duke.item.Item;
 import seedu.duke.item.ItemList;
@@ -34,7 +35,7 @@ public class SortItemCommand extends Command {
     private static final String LOW_HIGH = "lh";
     private static final String HIGH_LOW = "hl";
     private static final String MIN_AMT = "0";
-    private static final String MAX_AMT = "999999999";
+    private static final String MAX_AMT = "10000";
     private static final String DEFAULT_SORT = "lh";
     private static final String NO_CATEGORY = "0";
 
@@ -205,7 +206,7 @@ public class SortItemCommand extends Command {
      * @throws InvalidPriceBoundariesException if minPrice > maxPrice
      */
     private List<Item> sortAndFilter() throws InvalidArgumentException, InvalidSortModeException,
-            InvalidPriceException, InvalidPriceBoundariesException {
+            InvalidPriceException, InvalidPriceBoundariesException, InvalidCategoryException {
         String[] args = getArgsSortItemsCmd();
         String[] mainArgs = removeOptionalArgs(args);
         List<Item> sortedItems = new ArrayList<>();
@@ -229,9 +230,9 @@ public class SortItemCommand extends Command {
                                 .collect(Collectors.toList());
             }
             if (!mainArgs[3].equals(NO_CATEGORY)) {
-                int cat = Integer.parseInt(mainArgs[3]);
+                Category.Categories cat = Category.mapCategory(Integer.parseInt(mainArgs[3]));
                 sortedItems = sortedItems.stream()
-                        .filter(item -> item.getCategory() == Category.mapCategory(cat))
+                        .filter(item -> item.getCategory() == cat)
                         .collect(Collectors.toList());
             }
         }
@@ -248,7 +249,7 @@ public class SortItemCommand extends Command {
      * @throws InvalidPriceBoundariesException if minPrice > maxPrice
      */
     public boolean executeCommand() throws InvalidArgumentException, InvalidSortModeException,
-            InvalidPriceException, InvalidPriceBoundariesException {
+            InvalidPriceException, InvalidPriceBoundariesException, InvalidCategoryException {
         StringBuilder listString = new StringBuilder();
         List<Item> itemsList = sortAndFilter();
         if (itemsList.size() == 0) {

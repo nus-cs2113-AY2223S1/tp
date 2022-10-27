@@ -1,8 +1,12 @@
 package seedu.duke.item;
 
+import seedu.duke.exception.InvalidCategoryException;
+
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_CATEGORY_INVALID;
+
 //@@author jingwei55
 public class Category {
-    enum Categories {
+    public enum Categories {
         SPORTS_EQUIPMENT,
         TEXTBOOKS_AND_NOTES,
         ELECTRICAL_APPLIANCES,
@@ -46,7 +50,7 @@ public class Category {
      * @param categoryNumber integer to be mapped
      * @return corresponding category enum
      */
-    public static Categories mapCategory(int categoryNumber) {
+    public static Categories mapCategory(int categoryNumber) throws InvalidCategoryException {
         switch (categoryNumber) {
         case 1:
             return Categories.SPORTS_EQUIPMENT;
@@ -62,8 +66,10 @@ public class Category {
             return Categories.VEHICLES;
         case 7:
             return Categories.CLOTHING;
-        default:
+        case 8:
             return Categories.OTHERS;
+        default:
+            throw new InvalidCategoryException(MESSAGE_CATEGORY_INVALID);
         }
     }
 

@@ -91,7 +91,7 @@ public class UpdateTransactionCommand extends Command {
      */
     private boolean isValidDuration(String duration) throws DurationInvalidException {
         try {
-            if (Integer.parseInt(duration) < 0) {
+            if (Integer.parseInt(duration) < 0 || Integer.parseInt(duration) > 1461) {
                 throw new DurationInvalidException(MESSAGE_DURATION_INVALID);
             }
             return true;
