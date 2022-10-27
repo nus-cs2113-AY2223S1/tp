@@ -65,7 +65,7 @@ The software architecture diagram below describes the program's design and the i
 The sequence diagram below describes the interaction between the various core components when a command is entered.
 In this example, 
 the user launches the program and enters the command `Add-Expense -n Expense -a 7.80` to add an expense with the name `Expense` and the amount `7.80`.
-The sequence diagrams referenced by the component interaction diagram can be seen [below](#component-interaction-sequence-diagrams).
+The sequence diagrams referenced by the component interaction diagram can be seen [below](#component-interaction-reference-diagrams).
 
 ![Component-Interaction-On-Command-Entered](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentInteractionsOnCommandEntered.puml)
 
@@ -81,25 +81,25 @@ In the example above, `UserInterface#runCommandAddExpense()` calls `Data#addExpe
 * After the operations are performed, command handler functions calls `Storage` functions to save data.\
 In the example above, `UserInterface#runCommandAddExpense()` calls `Storage#saveToFile()` to save the newly added expense to a file.
 
-#### Component Interaction Sequence Diagrams:
+#### Component Interaction Reference Diagrams:
 
-![Component-Interaction-Ref-Save-Expense-To-File](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentInteractionsRefLoadExpensesFromFile.puml)
+![Component-Interaction-SD-Save-Expense-To-File](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentInteractionsRefLoadExpensesFromFile.puml)
 
 * `UserInterface()` calls `Data#load()` to load any existing data stored in a file.
 * `Data#load()` calls `Storage#loadFromFile()` to load the data from a file.
 
-![Component-Interaction-Ref-Get-User-Command](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentInteractionsRefGetUserCommand.puml)
+![Component-Interaction-SD-Get-User-Command](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentInteractionsRefGetUserCommand.puml)
 
 * `UserInterface#getConsoleCommand()` calls `UserInterface#getConsoleInput()` to read the user's input as a string.
 * `UserInterface#getConsoleCommand()` then calls `Parser#parse()` to parse the input string into the corresponding console command object.
 
-![Component-Interaction-Ref-Print-Expense](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentInteractionsRefPrintingAnExpense.puml)
+![Component-Interaction-SD-Print-Expense](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentInteractionsRefPrintingAnExpense.puml)
 
 * `UserInterface#run()` will call the corresponding convert object function based on the data object's class.
 In the example above, `UserInterface#run()` calls `UserInterface#convertExpenseToConsoleString()` to convert the expense object into a formatted string.
 * `UserInterface#run()` will then call `UserInterface#printInformationalMessage()` to print the converted object.
 
-![Component-Interaction-Ref-Save-Expense-To-File](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentInteractionsRefSaveExpensesToFile.puml)
+![Component-Interaction-SD-Save-Expense-To-File](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentInteractionsRefSaveExpensesToFile.puml)
 
 * `UserInterface#run()` calls `Data#save()` to save the data managed by the data manager class.
 * `Data#save()` calls `Storage#saveToFile()` to write the data to a file.
@@ -138,10 +138,6 @@ For example, supplying the command string `Add-Expense -n Lunch -a 7.80` to `Con
 Do refer to the [repository](https://github.com/AY2223S1-CS2113T-W11-1/tp/tree/master/src/main/java/seedu/moneygowhere/commands) to view the full list of console command subclasses.
 
 ## Implementation
-### Reading and parsing the user's commands
-
-![Implementation-Add-Expense](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ImplementationRefGetConsoleCommand.puml)
-
 ### Printing an expense
 
 ![Implementation-SD-Print-Expense](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ImplementationRefPrintExpense.puml)
