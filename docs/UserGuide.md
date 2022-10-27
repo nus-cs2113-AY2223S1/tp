@@ -46,6 +46,29 @@ SkyControl is a software which optimizes the use of the Command Line Interface (
 6. After which SkyControl have booted up successfully, enter a command below `SkyControl` welcome display
 and hit the <kbd>Enter</kbd> button to execute it. Reflected below is an example.  
 
+**Input Command**  
+
+`bye`  
+  
+**Output**  
+  
+
+````
+Welcome to
+   _____ _             _____            _             _
+  / ____| |           / ____|          | |           | |
+ | (___ | | ___   _  | |     ___  _ __ | |_ _ __ ___ | |
+  \___ \| |/ / | | | | |    / _ \| '_ \| __| '__/ _ \| |
+  ____) |   <| |_| | | |___| (_) | | | | |_| | | (_) | |
+ |_____/|_|\_\\__, |  \_____\___/|_| |_|\__|_|  \___/|_|
+               __/ |
+              |___/
+
+bye
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Thank you, come again! :)
+````
+
 ---
 
 ## SkyControl's Features 
@@ -206,13 +229,29 @@ flight list
 
 ---
 
-<br>
-
 ## Frequently Asked Questions
 
-**Q**: How do I transfer my data to another computer?
+**Q**: What do I need to take note for each parameter in terms of their format when writing out a command within SkyControl?
 
-**A**: {your answer here}  
+**A**: Depicted below is a table of parameters that have
+specified formats to follow by in order for the command to be successful,
+an error may be generated if these standards are not adhered to.
 
-<br>
+A table of parameters is depicted below:  
+
+| Parameter            | Format to adhere by                                                                                                                                                                                       | Example                             |
+|:---------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:------------------------------------|
+| [PASSENGER NAME]     | Input name should be within 24 characters                                                                                                                                                                 | `Ivan Lim`                          |
+| [DEPARTURE TIME]     | Input departure time should be in 24 Hours format                                                                                                                                                         | `2100`                              |
+| [FLIGHT NUMBER]      | Input flight number should start with 2 letter character, followed either by <br/>Two numbers for intentional flights <br/>Three numbers for regional flights<br/> Four numbers for domestic flights <br> | `SQ12`</br>`SQ123`</br>`SQ1234`<br> |
+| [GATE NUMBER]        | Input gate number should be between number 00 to 99                                                                                                                                                       | `05`                                |
+| [BOARDING GROUP]     | Input boarding Group should not be more than 10 and should be in digit form                                                                                                                               | `01`                                |
+| [SEAT NUMBER]        | Input Seat number should range between 00A to 99Z                                                                                                                                                         | `B01`                               |
+| [BOARDING TIME]      | Input boarding time should be in 24 Hours format                                                                                                                                                          | `2015`                              |
+| [ADD PARAMETER HERE] | Add format parameter instruction here                                                                                                                                                                     | `Add parameter example here`        |
+
+**Q**: Why can't I input a passenger detail at the start of the program or during the run of the program?  
+
+**A**: A flight detail with a designated flight numbers has to be **recorded or exist** in the flight
+list before a passenger flying with an airline of the same flight number can be added into the passenger logbook.
 
