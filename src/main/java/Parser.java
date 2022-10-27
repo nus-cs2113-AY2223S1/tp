@@ -74,8 +74,12 @@ public class Parser {
             if (matchesView) {
                 patientList.listPatients(ui);
             } else if (matcherAdd.find()) {
+                String patientId = matcherAdd.group(4).toUpperCase();
+                if (!patientList.isUniqueId(patientId)) {
+                    throw new OneDocException("Please only use unique IDs to create patients! A patient with this ID already exists");
+                }
                 patientList.addPatient(ui, matcherAdd.group(1), matcherAdd.group(3),
-                        matcherAdd.group(2), matcherAdd.group(4).toUpperCase());
+                        matcherAdd.group(2), patientId);
                 storage.savePatientData(patientList);
             } else if (matcherRetrieve.find()) {
                 patientList.retrievePatient(ui, matcherRetrieve.group(1).toUpperCase());
