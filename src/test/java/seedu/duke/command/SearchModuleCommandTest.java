@@ -10,38 +10,35 @@ import seedu.duke.exceptions.YamomException;
 import seedu.duke.model.Module;
 
 public class SearchModuleCommandTest {
-    // @Test
-    // void searchModuleCommand_noFieldsEntered_exceptionThrown() {
-    //     String input = "search";
-    //
-    //     String expected = "Error! \tPlease input valid search fields to search for! You can search by module code, "
-    //             + "module title, level and semester.\n"
-    //             + "\n"
-    //             + "Type [help] for assistance!";
-    //
-    //     try {
-    //         SearchModuleCommand searchModuleCommand = new SearchModuleCommand(input);
-    //         fail();
-    //     } catch (YamomException e) {
-    //         assertEquals(expected, e.getMessage());
-    //     }
-    // }
-    //
-    // @Test
-    // void searchModuleCommand_missingTitleAndCodeField_exceptionThrown() {
-    //     String input = "search /level 2 /sem 1";
-    //
-    //     String expected = "Error! \tPlease input at least either the module code or title to search for!\n"
-    //             + "\n"
-    //             + "Type [help] for assistance!";
-    //
-    //     try {
-    //         SearchModuleCommand searchModuleCommand = new SearchModuleCommand(input);
-    //         fail();
-    //     } catch (YamomException e) {
-    //         assertEquals(expected, e.getMessage());
-    //     }
-    // }
+    @Test
+    void searchModuleCommand_noFieldsEntered_exceptionThrown() {
+        String input = "search";
+
+        String expected = "Error! \tWrong format given, should be \n"
+                + "\tsearch (/code [MODULE_CODE] | /title [KEYWORD]) </level [MODULE_LEVEL]> </sem [MODULE_SEMESTER]>";
+
+        try {
+            SearchModuleCommand searchModuleCommand = new SearchModuleCommand(input);
+            fail();
+        } catch (YamomException e) {
+            assertEquals(expected.replaceAll("\\s+", ""), e.getMessage().replaceAll("\\s+", ""));
+        }
+    }
+
+    @Test
+    void searchModuleCommand_missingTitleAndCodeField_exceptionThrown() {
+        String input = "search /level 2 /sem 1";
+
+        String expected = "Error! \tSearch require at least a code field or a title field, in the format of: \n"
+                + "\tsearch (/code [MODULE_CODE] | /title [KEYWORD]) </level [MODULE_LEVEL]> </sem [MODULE_SEMESTER]>";
+
+        try {
+            SearchModuleCommand searchModuleCommand = new SearchModuleCommand(input);
+            fail();
+        } catch (YamomException e) {
+            assertEquals(expected.replaceAll("\\s+", ""), e.getMessage().replaceAll("\\s+", ""));
+        }
+    }
 
     @Test
     void filterModuleSearch_fullValidInputFields_expectCorrectNumberOfFilteredModule() {

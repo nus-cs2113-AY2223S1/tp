@@ -39,6 +39,8 @@ public class SearchModuleCommand extends Command {
     public SearchModuleCommand(String input) throws YamomException {
         super(input.split("\\s+"));
         params = Parser.parseParams(input);
+
+        //validate params
         processParams();
     }
 
@@ -66,6 +68,11 @@ public class SearchModuleCommand extends Command {
         ui.displayUi();
     }
 
+    /**
+     * Process the parameters given by the user.
+     *
+     * @throws YamomException if the parameters given by the user is invalid or missing.
+     */
     private void processParams() throws YamomException {
 
         if (params.isEmpty()) {

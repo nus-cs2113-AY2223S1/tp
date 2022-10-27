@@ -44,7 +44,7 @@ Usage :
 	import [NUSMods_LINK]
 	search (/code [MODULE_CODE] | /title [KEYWORD]) </level [MODULE_LEVEL]> </sem [MODULE_SEMESTER]>
 	semester [SEMESTER_SELECTED]
-	select /module <MODULE_CODE> /type <LESSON_TYPE> /code <CLASS_NO>
+	select [ /module [EXACT_MODULE_CODE] /type [LESSON_TYPE] /code [CLASS_NO] ]
 	view < /fancy | /simple >
 
 Note: [ ] are required elements, < > are optional elements
