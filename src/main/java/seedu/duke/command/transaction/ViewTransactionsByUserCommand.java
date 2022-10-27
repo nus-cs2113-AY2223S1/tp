@@ -5,17 +5,14 @@ import seedu.duke.exception.InsufficientArgumentsException;
 import seedu.duke.exception.InvalidArgumentException;
 import seedu.duke.exception.UserNotFoundException;
 import seedu.duke.parser.CommandParser;
-import seedu.duke.transaction.Transaction;
 import seedu.duke.transaction.TransactionList;
 import seedu.duke.ui.Ui;
 import seedu.duke.user.UserList;
 
-import java.util.ArrayList;
-
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INSUFFICIENT_ARGUMENTS;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PARTS;
-import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_STATUS_INVALID;
 
+//@@author jorellesee
 public class ViewTransactionsByUserCommand extends Command {
 
     private final String[] parts;
@@ -52,13 +49,10 @@ public class ViewTransactionsByUserCommand extends Command {
         }
     }
 
-
-
     @Override
     public boolean executeCommand()
             throws InsufficientArgumentsException, UserNotFoundException, InvalidArgumentException {
         String arg = getArgs();
-        ArrayList<Transaction> transactions = transactionList.getTransactionList();
         if (isValidUser(arg)) {
             TransactionList returnList = transactionList.getBorrowTransactionsByUser(arg);
             Ui.printResponse(returnList.toString());

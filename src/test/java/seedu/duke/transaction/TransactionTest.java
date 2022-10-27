@@ -16,7 +16,7 @@ class TransactionTest {
     @BeforeEach
     void initializeTest() {
         transaction = new Transaction("pen", "28sd37h2", "bui", 5,
-                LocalDate.parse("2022-10-03"));
+                LocalDate.parse("2022-10-03"),3.2);
     }
 
     @Test
@@ -32,7 +32,7 @@ class TransactionTest {
     @Test
     void isFinished_notFinishedTx_expectFalse() {
         transaction = new Transaction("pen", "28sd37h2", "bui", 300,
-                LocalDate.parse("2022-10-03"));
+                LocalDate.parse("2022-10-03"), 192);
         assertFalse(transaction.isFinished());
     }
 
@@ -54,15 +54,15 @@ class TransactionTest {
     @Test
     void convertTransactionToFileFormatTest() {
         String transactionId = transaction.getTxId();
-        assertEquals(transactionId + " | pen | 28sd37h2 | bui | 5 | 2022-10-03",
+        assertEquals(transactionId + " | pen | 28sd37h2 | bui | 5 | 2022-10-03 | 3.2",
                 transaction.convertTransactionToFileFormat());
     }
 
     @Test
     void updateDurationTest() {
         Transaction newTransaction = new Transaction(transaction.getTxId(), "pen", "28sd37h2", "bui", 300,
-                LocalDate.parse("2022-10-03"));
+                LocalDate.parse("2022-10-03"), 192);
         assertEquals(newTransaction.toString(),
-                transaction.updateDuration(300).toString());
+                transaction.update(300, 192).toString());
     }
 }

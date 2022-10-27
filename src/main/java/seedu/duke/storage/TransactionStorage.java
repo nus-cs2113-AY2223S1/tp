@@ -97,6 +97,6 @@ public class TransactionStorage extends Storage {
         int duration = Integer.parseInt(splitTransactionLine[4]);
         LocalDate createdAt = LocalDate.parse(splitTransactionLine[5]);
         double moneyTransacted = Double.parseDouble(splitTransactionLine[6]);
-        return new Transaction(transactionId, itemName, itemId, borrowerId, duration, createdAt,moneyTransacted);
+        return new Transaction(transactionId, itemName, itemId, borrowerId, duration, createdAt, moneyTransacted);
     }
 }
