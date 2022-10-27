@@ -106,7 +106,7 @@ In the example above, `UserInterface#run()` calls `UserInterface#convertExpenseT
 
 ### Common Component
 
-The Common component consists of the class `Messages` and `Configurations`.
+The Common component consists of the classes `Messages` and `Configurations`.
 
 ![Component-Common](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentCommon.puml)
 
@@ -115,21 +115,27 @@ The `Configurations` class defines the configuration parameters used by the prog
 
 ### Exceptions Component
 
-The Exceptions components consists of various exception classes which inherits from `MoneyGoWhereException`.
+The Exceptions component consists of various exception classes which inherits from `MoneyGoWhereException`.
 
 ![Component-Exceptions](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentExceptions.puml)
 
 The exceptions are thrown and handled by the program depending on the conditions outlined in their Javadoc comments.
 For example, `ConsoleParserCommandAddExpenseInvalidException` is thrown when an error is encountered while parsing the command.
-Do refer to the [repository](https://github.com/AY2223S1-CS2113T-W11-1/tp/tree/master/src/main/java/seedu/moneygowhere/exceptions) to view the full list of exception subclasses. 
+Do refer to the [exceptions](https://github.com/AY2223S1-CS2113T-W11-1/tp/tree/master/src/main/java/seedu/moneygowhere/exceptions) package to view the full list of exceptions. 
 
 ### UserInterface Component
 
+The UserInterface component consists of the class `ConsoleInterface` which runs the command line interface that the user interacts with.
+
 ![Component-UserInterface](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentUserInterface.puml)
+
+The `ConsoleInterface` class defines various command handlers which are called based on the command entered by the user.
+For example, entering the command string `Add-Expense -n Lunch -a 7.80` will result in the execution of the `ConsoleInterface#runCommandAddExpense()` command handler to add an expense to the program.
+Do refer to the [ConsoleInterface.java](https://github.com/AY2223S1-CS2113T-W11-1/tp/blob/master/src/main/java/seedu/moneygowhere/userinterface/ConsoleInterface.java) class to view the full list of command handler functions.
 
 ### Commands Component
 
-The Commands components consists of various exception classes which inherits from the abstract class `ConsoleCommand`.
+The Commands component consists of various console command classes which inherits from the abstract class `ConsoleCommand`.
 
 ![Component-Commands](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentCommands.puml)
 
