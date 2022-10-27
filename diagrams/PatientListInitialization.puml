@@ -1,0 +1,78 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+participant "<<class>>\n:OneDoc" as B
+participant ":OneDoc" as A
+participant ":Storage" as D
+participant ":PatientList" as C
+
+participant ":ArrayList" as E
+participant ":File" as F
+
+[-> B : main(args)
+activate B
+
+B -> A : new()
+activate A
+
+A -> C: new()
+activate C
+
+C -> E: new()
+activate E
+return
+
+return
+
+A -> D: new()
+activate D
+D -> D: retrieveFilePath()
+activate D
+return filePath:String
+
+D -> F: new(filePath + PATIENT_FILE_NAME)
+activate F
+return
+
+
+return
+
+A -> D: loadData(patientsList:PatientList, visitsList:VisitList, prescriptionsList:PrescriptionList)
+activate D
+opt !patientFile.exists()
+
+D -> D: createDataFile(patientFile: File)
+activate D
+D -> F: createNewFile()
+activate F
+return
+return
+end
+
+D -> D: loadPatients(patientsList: PatientList)
+activate D
+loop fileScanner.hasNext()
+D -> C: loadPatient(inputs: String[])
+activate C
+C -> E: add(patient: Patient)
+activate E
+return
+return
+
+end
+
+return
+
+
+return
+
+return
+
+B -> B: run()
+activate B
+return
+
+return
+
+
+@enduml
