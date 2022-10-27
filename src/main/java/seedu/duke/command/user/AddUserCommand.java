@@ -12,7 +12,14 @@ import seedu.duke.user.User;
 import seedu.duke.user.UserList;
 import seedu.duke.ui.Ui;
 
-import static seedu.duke.exception.message.ExceptionMessages.*;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_CONTACT_FORMAT_INVALID;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_CONTACT_LENGTH_INVALID;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INSUFFICIENT_ARGUMENTS;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PARTS;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_NAME_LENGTH_INVALID;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_USERNAME_TAKEN;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_USER_AGE_INVALID;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_USER_AGE_OUT_OF_RANGE;
 
 //@@author bdthanh
 
