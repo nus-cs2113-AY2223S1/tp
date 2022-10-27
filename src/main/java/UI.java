@@ -166,7 +166,7 @@ public class UI {
             + "new details of the patient: ";
     public static final String ADD_VISIT = "You have added a visit!";
     public static final String EDIT_VISIT_REASON = "You have edited reason for the visit. Here's the updated visit!";
-    public static final String DELETE_VISIT_REASON = "You have edited reason for the visit. Here's the updated visit!";
+    public static final String DELETE_VISIT_REASON = "You have deleted the reason for the visit. Here's the updated visit!";
     public static final String ADD_PRESCRIPTION = "You have added a prescription!";
     public static final String EDIT_PRESCRIPTION = "You have edited the prescription!";
     public static final String DEACTIVATE_PRESCRIPTION = "Ok, I've deactivated the prescription below:";
