@@ -1,6 +1,9 @@
 package appointment;
 
+import employee.Employee;
 import exception.DukeException;
+import pet.Pet;
+import pet.PetList;
 import service.Service;
 import service.ServiceList;
 
@@ -34,6 +37,18 @@ public class AppointmentList {
 
     public static void addAppointment(Appointment appointment) throws DukeException {
 
+        // appointment should refer to one existing service
+        Service service = ServiceList.findService(appointment.service);
+        if (service == null) {
+            throw new DukeException();
+        }
+
+        // appointment could refer to a new pet
+        // in that case, add a new pet accordingly
+        Pet pet = PetList.findPet(appointment.petName);
+        if (pet == null) {
+
+        }
         appointments.add(appointment);
         System.out.print("Got it. I've added this appointment: ");
         System.out.println("Pet " + appointment.petName + " | " + "Service " + appointment.service);
