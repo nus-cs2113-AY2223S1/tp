@@ -1,17 +1,17 @@
-# User Guide
+# Pet Clinic Management System - User Guide
 
 ## Introduction
-
-{Give a product intro}
+Pet Clinic Management System (PCMS) is a desktop application that helps a clinic reception to record appointments, assign tasks, and manage data of pets/services/tasks/employees. This application uses Command Line Interface (CLI) and is able to display information quickly with minimal latency.
 
 ## Quick Start
-
-{Give steps to get started quickly}
-
 1. Ensure that you have Java 11 or above installed.
-1. Down the latest version of `Duke` from [here](http://link.to/duke).
+2. Download the latest version of `Pet Clinic Management System` from [here](https://github.com/AY2223S1-CS2113-F11-2/tp).
 
 ## Features 
+Note:
+
+* Parameters appear in the form of a/PARAMETER
+* Words in UPPER_CASE are parameters to be specified by the user.
 
 ### Appointment Management
 
@@ -42,6 +42,7 @@ View list of all appointments
 
 Format: `appointment view`
 
+---
 ### Task Management
 
 #### Add a task: `task add`
@@ -53,6 +54,7 @@ Format: `task add i/APPOINTMENT_ID e/EMPLOYEE_ID d/DESCRIPTION`
 * The `APPOINTMENT_ID` and `EMPLOYEE_ID` must be positive integers 1, 2, 3, …
 * The `APPOINTMENT_ID` can be found by `appointment view`
 * and The `EMPLOYEE_ID` can be found by `employee view`
+* The `Description` is the description of the task
 
 Example of usage:
 
@@ -84,13 +86,14 @@ Format: `task reassign i/TASK_ID e/EMPLOYEE_ID`
 Example of usage:
 `task reassign i/1 e/1`
 
-
+---
 ### Employee Management
 
 #### Add an employee: `employee add`
 - add an employee to the list of staff in the clinic
 
 Format: `employee add n/NAME`
+* The `Name` is the name of the employee
 
 Example of usage:
 `employee add n/chris`
@@ -120,11 +123,14 @@ Format: `employee task i/EMPLOYEE_ID`
 Example of usage:
 `employee task i/1`
 
+---
 ### Pet Management
 #### Add a pet: `pet add`
 - add a pet to the list of pets in the clinic
 
 Format: `pet add n/NAME s/SPECIES h/HEALTH`
+* The `NAME` is the name of the pet
+* The `SPECIES` is the species of the pet
 * The `HEALTH` must be either 0(unhealthy) or 1(healthy)
 
 Example of usage:
@@ -146,13 +152,14 @@ view all pets registered
 
 Format: `pet view`
 
-
+---
 ### Service Management
 
 #### Add a service: `service add`
 - add a service to the list of services provided in the clinic
 
 Format: `service add d/DESCRIPTION`
+* The `Description` is the description of the service
 
 Example of usage:
 `service add d/haircut`
@@ -171,13 +178,10 @@ Example of usage:
 view all services provided in the clinic
 Format: `service view`
 
+---
+### Exit: `bye`
 
-## FAQ
-
-**Q**: How do I transfer my data to another computer? 
-
-**A**: {your answer here}
-
+---
 ## command.command Summary
 
 * Add appointment `appointment add s/SERVICE p/PET d/DATE`
