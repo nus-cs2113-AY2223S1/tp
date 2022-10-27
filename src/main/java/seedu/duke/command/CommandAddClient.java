@@ -1,3 +1,5 @@
+//@@author OVReader
+
 package seedu.duke.command;
 
 import seedu.duke.ClientList;
@@ -10,7 +12,6 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-//@@author OVReader
 /**
  * Adds a client to the client list.
  */

@@ -15,26 +15,8 @@ import static seedu.duke.Messages.EXCEPTION;
 public abstract class ParseAdd extends Parser {
     protected static final int MISSING_FLAG_VALUE = -1;
 
-    protected void checkForEmptyDetails(String commandDetail) throws EmptyDetailException {
-        boolean isEmptyDetail = isEmptyString(commandDetail);
-        if (isEmptyDetail) {
-            throw new EmptyDetailException(EXCEPTION);
-        }
-    }
-
-    private boolean isEmptyString(String commandDetail) {
-        return commandDetail.trim().isEmpty();
-    }
-
     protected boolean checkForFlagPresence(int flagIndexPosition) {
         return (flagIndexPosition != MISSING_FLAG_VALUE);
-    }
-
-    protected void checkForCorrectFlagOrder(int flagPosition, int nextFlagPosition) throws IncorrectFlagOrderException {
-        boolean hasCorrectOrder = (flagPosition < nextFlagPosition);
-        if (!hasCorrectOrder) {
-            throw new IncorrectFlagOrderException(EXCEPTION);
-        }
     }
 
     protected boolean checkForDetailFormat(String regex, String detail) {

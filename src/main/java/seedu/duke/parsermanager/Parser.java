@@ -13,6 +13,12 @@ public abstract class Parser {
     protected static final int UNIT_VALUE = 1;
 
     public abstract Command parseCommand() throws DukeException;
+    /**
+     *  Will be removed after everyone has created local checkForEmptyDetails method
+     *  (e.g. checkForDeleteClientDetails, checkForPairDetails, etc)
+     *  Local method will call common method isEmptyString() (below) and throw local exceptions
+     *  (e.g. EmptyDeleteClientDetailException, EmptyPairDetailException, etc)
+     */
 
     protected void checkForEmptyDetails(String commandDetail) throws EmptyDetailException {
         boolean isEmptyDetail = isEmptyString(commandDetail);
@@ -21,7 +27,7 @@ public abstract class Parser {
         }
     }
 
-    private boolean isEmptyString(String commandDetail) {
+    public boolean isEmptyString(String commandDetail) {
         return commandDetail.trim().isEmpty();
     }
 

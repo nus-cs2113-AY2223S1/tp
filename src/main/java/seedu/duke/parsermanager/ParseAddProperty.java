@@ -168,6 +168,13 @@ public class ParseAddProperty extends ParseAdd {
         }
     }
 
+    protected void checkForCorrectFlagOrder(int flagPosition, int nextFlagPosition) throws IncorrectFlagOrderException {
+        boolean hasCorrectOrder = (flagPosition < nextFlagPosition);
+        if (!hasCorrectOrder) {
+            throw new IncorrectFlagOrderException(EXCEPTION);
+        }
+    }
+
     private ArrayList<String> extractPropertyDetails(String rawPropertyDetail, int[] addPropertyFlagIndexPositions) {
         ArrayList<String> extractedPropertyDetails = new ArrayList<>();
         for (int flagIndex = 0; flagIndex < PROPERTY_FLAG_SIZE; flagIndex++) {
