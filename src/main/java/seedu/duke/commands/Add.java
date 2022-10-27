@@ -120,6 +120,6 @@ public class Add extends Command {
 
     @Override
     public void execute(ModuleList modulelist) {
-        modulelist.add(this.mod);
+        modulelist.add(this.mod, false);
     }
 }
