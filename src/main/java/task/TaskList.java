@@ -27,18 +27,19 @@ public class TaskList {
         if (appointment == null) {
             throw new DukeException();
         }
-        appointment.addTaskToAppointment(task);
-        // update appointment status here
-        appointment.updateAppointmentStatus();
 
         // employee aggregate task
         Employee employee = EmployeeList.findEmployee(task.getEmployeeId());
         if (employee == null) {
             throw new DukeException();
         }
-        employee.addTaskToEmployee(task);
-        // added to overall task list
+
+        // only after passing the check, add this task
         tasks.add(task);
+        appointment.addTaskToAppointment(task);
+        appointment.updateAppointmentStatus();
+        employee.addTaskToEmployee(task);
+
         System.out.print("Got it. I've added this task: ");
         System.out.println(task.getTaskDescription());
         System.out.println("Performed by: " + task.getEmployeeId());

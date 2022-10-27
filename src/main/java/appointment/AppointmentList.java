@@ -1,6 +1,11 @@
 package appointment;
 
+import exception.DukeException;
+import service.Service;
+import service.ServiceList;
+
 import java.util.ArrayList;
+import java.util.zip.DataFormatException;
 
 public class AppointmentList {
     static ArrayList<Appointment> appointments = new ArrayList<>();
@@ -27,7 +32,8 @@ public class AppointmentList {
     }
 
 
-    public static void addAppointment(Appointment appointment) {
+    public static void addAppointment(Appointment appointment) throws DukeException {
+
         appointments.add(appointment);
         System.out.print("Got it. I've added this appointment: ");
         System.out.println("Pet " + appointment.petName + " | " + "Service " + appointment.service);
