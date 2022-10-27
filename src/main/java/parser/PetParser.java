@@ -50,7 +50,7 @@ public class PetParser {
             int startOfS = input.indexOf(" s/");
             int startOfH = input.indexOf(" h/");
 
-            if(!input.substring(0,startOfN).isEmpty()){
+            if (!input.substring(0,startOfN).isEmpty()) {
                 throw new DukeException();
             }
 
