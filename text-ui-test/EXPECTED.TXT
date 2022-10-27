@@ -51,7 +51,7 @@ Delete a transaction entry from the list of transactions.
 Usage: delete e/ENTRY
 
 Command Word: PURGE
-Delete all transaction entries from the list of transactions.
+Delete all transaction entries from the list of transactions. User must enter 'Y' to confirm the purge.
 Usage: purge
 
 Command Word: BYE
@@ -129,7 +129,7 @@ Parameters information:
 - ENTRY: A list entry value for the transaction. It is a positive whole number ranging from 1 to 1000000.
 
 Command Word: PURGE
-Delete all transaction entries from the list of transactions.
+Delete all transaction entries from the list of transactions. User must enter 'Y' to confirm the purge.
 Usage: purge
 Parameters information:  -NIL-
 
