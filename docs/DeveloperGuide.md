@@ -125,11 +125,13 @@ Do refer to the [repository](https://github.com/AY2223S1-CS2113T-W11-1/tp/tree/m
 
 ### UserInterface Component
 
-The UserInterface component consists of the class `ConsolerInterface` which runs the command line interface that the user interacts with.
+The UserInterface component consists of the class `ConsoleInterface` which runs the command line interface that the user interacts with.
 
 ![Component-UserInterface](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentUserInterface.puml)
 
-
+The `ConsoleInterface` class defines various command handlers which are called based on the command entered by the user.
+For example, entering the command string `Add-Expense -n Lunch -a 7.80` will result in the execution of the `ConsoleInterface#runCommandAddExpense()` command handler to add an expense to the program.
+Do refer to the [ConsoleInterface.java](https://github.com/AY2223S1-CS2113T-W11-1/tp/blob/master/src/main/java/seedu/moneygowhere/userinterface/ConsoleInterface.java) class to view the full list of command handler functions.
 
 ### Commands Component
 
