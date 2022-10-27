@@ -10,6 +10,7 @@
    * [Handling Your Data](#handling-your-data)
    * [Listing all available commands: `help`](#listing-all-available-commands-help)
    * [Exiting the application: `exit`](#exiting-the-application-exit)
+* [Sample Outputs](#sample-outputs)
 * [FAQ](#faq)
 * [Command Summary](#command-summary)
 
@@ -229,6 +230,53 @@ Syntax: `exit`
 Example of usage:
 * `exit`
 
+## Sample Outputs
+Input: `Add-Expense -n Subscription -a 13.37`
+
+Output:
+```
+Name            : Subscription 
+Date and Time   : 27 Oct 2022 16:40
+Amount          : 13.37
+Currency        : SGD
+
+
+The expense was added successfully.
+```
+
+<hr>
+
+Input: `View-RecurringPayment`
+
+Output:
+```
+---- RECURRING PAYMENT INDEX 0 ----
+Name            : Mobile Plan
+Interval (Days) : 30
+Description     : Monthly payment for my mobile plan
+Amount          : 20.00
+Category        : Telecom
+Currency        : SGD
+Mode of Payment : Card
+```
+
+<hr>
+
+
+Input: `Pay-RecurringPayment -r 0`
+
+Output:
+```
+Name            : Mobile Plan
+Date and Time   : 27 Oct 2022 16:49
+Description     : Monthly payment for my mobile plan
+Amount          : 10.00
+Category        : Telecom
+Currency        : SGD
+Mode of Payment : Card
+
+The recurring payment was added as an expense successfully.
+```
 ## FAQ
 
 **Q**: How do I transfer my data to another computer?
