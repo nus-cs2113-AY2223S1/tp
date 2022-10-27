@@ -90,6 +90,17 @@ CS2113 has been deleted from your plan
 ----------------------------------------
 ```
 
+Input: `delete m/cs1111`
+
+Output:
+```
+----------------------------------------
+The module CSS213 is not found in your plan!!
+Please add the module first before you want to delete.
+----------------------------------------
+```
+
+
 ### Feature #3 : View all modules in a semester - view
 
 This shows the user what modules they have added into the system for a particular semester.
@@ -106,6 +117,15 @@ These are your mods for Y2S1
 1. CS2112 Y2S1 - 4
 2. CS2111 Y2S1 B+ 4
 3. CS2115 Y2S1 S 4
+----------------------------------------
+```
+
+Input: `view s/y1s1`
+
+Output:
+```
+----------------------------------------
+There is no module allocated in Y1S1!!
 ----------------------------------------
 ```
 
@@ -139,6 +159,36 @@ Output:
 ----------------------------------------
 These are your matching modules:
 1. CS2112 Y2S1 - 4
+----------------------------------------
+```
+
+Input : `find a`
+
+Output:
+```
+----------------------------------------
+These are your matching modules:
+1. CS2113 Y2S1 A 4
+----------------------------------------
+```
+
+Input : `find 4`
+
+Output:
+```
+----------------------------------------
+These are your matching modules:
+1. CS2114 Y2S1 - 4
+----------------------------------------
+```
+
+Input : `find y2s2`
+
+Output:
+```
+----------------------------------------
+These are your matching modules:
+1. CS2002 Y2S2 B+ 4
 ----------------------------------------
 ```
 
