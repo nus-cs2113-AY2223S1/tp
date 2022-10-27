@@ -8,6 +8,7 @@ Duke -> Parser: parse(input)
 activate Parser
 Parser -> Parser: specificCase(commandWord, content)
 activate Parser
+create Delete
 Parser -> Delete: new Delete(content)
 activate Delete
 return c: Delete

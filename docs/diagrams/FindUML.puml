@@ -1,0 +1,30 @@
+
+'https://plantuml.com/sequence-diagram
+
+@startuml
+activate Duke
+[-> Duke: User input
+Duke -> Parser: parse(input)
+activate Parser
+Parser -> Parser: specificCase(commandWord, content)
+activate Parser
+create Find
+Parser -> Find: new Find(content)
+activate Find
+return c: Find
+return c: Find
+return c: Find
+deactivate Parser
+Duke -> Find: c.execute(moduleList)
+activate Find
+activate ModuleList
+Find -> ModuleList: find(content)
+deactivate Find
+ModuleList -> ModuleList: findMatch(content)
+activate ModuleList
+return match: boolean
+ModuleList -> UI: printFindMessage(mods)
+activate UI
+deactivate UI
+
+@enduml

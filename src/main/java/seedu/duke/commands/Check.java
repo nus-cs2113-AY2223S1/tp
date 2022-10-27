@@ -13,7 +13,7 @@ public class Check extends Command {
     public static int SEMESTER_MINIMUM_NOC = 4;
     public static double CAP_MINIMUM_SEP = 3.0;
     public static int SEMESTER_MINIMUM_SEP = 2;
-    private static ArrayList<Module> modules = ModuleList.modules;
+    private ArrayList<Module> modules = ModuleList.modules;
     private String type;
 
     /**
@@ -23,25 +23,31 @@ public class Check extends Command {
      */
     public Check(String input) throws InvalidInputContentException {
         this.type = input.toUpperCase();
-        switch (input) {
-            // obtained >70 MCs, completed four semesters of study
+        switch (type) {
         case "NOC":
+        case "SEP":
+            break;
+        default:
+            throw new InvalidInputContentException();
+        }
+    }
+
+    @Override
+    public void execute(ModuleList moduleList) {
+        if (type.equals("NOC")) {
+            //obtained >70 MCs, completed four semesters of study
             if (checkNOC()) {
                 UI.NOCEligibleMessage();
             } else {
                 UI.NOCIneligibleMessage();
             }
-            break;
-//            completed two semesters of study cap above 3.0
-        case "SEP":
+        } else if (type.equals("SEP")) {
+            //completed two semesters of study cap above 3.0
             if (checkSEP()) {
                 UI.SEPEligibleMessage();
             } else {
                 UI.SEPIneligibleMessage();
             }
-            break;
-        default:
-            throw new InvalidInputContentException();
         }
     }
 
@@ -49,13 +55,13 @@ public class Check extends Command {
      * Function to find the current semester the user is on depending on the grade of the modules.
      * @return the semesters which have modules completed.
      */
-    public static int findCurrentSemester() {
+    public int findCurrentSemester() {
         List<String> semesters = new ArrayList<>();
         for (Module mod: modules) {
             String semesterTaken = mod.getSemesterTaken();
             if (!mod.getGrade().matches("-") && !semesters.contains(semesterTaken)) {
                 semesters.add(mod.getSemesterTaken());
-            };
+            }
         }
         return semesters.size();
     }
@@ -64,30 +70,24 @@ public class Check extends Command {
      * Function to check if the user is eligible for NOC
      * @return true if eligible, false otherwise
      */
-    public static boolean checkNOC() {
-        if (checkNOCMc() && checkNOCSem()) {
-            return true;
-        }
-        return false;
+    public boolean checkNOC() {
+        return checkNOCMc() && checkNOCSem();
     }
 
     /**
      * Function to check if the user fulfills the semester requirements for NOC
      * @return true if fulfilled, false otherwise
      */
-    public static boolean checkNOCSem() {
+    public boolean checkNOCSem() {
         int currentSemester = findCurrentSemester();
-        if (currentSemester >= SEMESTER_MINIMUM_NOC) {
-            return true;
-        }
-        return false;
+        return currentSemester >= SEMESTER_MINIMUM_NOC;
     }
 
     /**
      * Function to check if the user fulfills the MC requirements for NOC
      * @return true if fulfilled, false otherwise
      */
-    public static boolean checkNOCMc() {
+    public boolean checkNOCMc() {
         int totalMCs = 0;
         for (Module mod: modules) {
             totalMCs += mod.getMcs();
@@ -102,18 +102,15 @@ public class Check extends Command {
      * Function to check if the user is eligible for SEP
      * @return true if eligible, false otherwise
      */
-    public static boolean checkSEP() {
-        if (checkSEPCAP() && checkSEPSem()) {
-            return true;
-        }
-        return false;
+    public boolean checkSEP() {
+        return checkSEPCAP() && checkSEPSem();
     }
 
     /**
      * Function to check if the user fulfills the CAP requirements for SEP
      * @return true if fulfilled, false otherwise
      */
-    public static boolean checkSEPCAP() {
+    public boolean checkSEPCAP() {
         double totalCAP = 0;
         int currentSemester = findCurrentSemester();
         for (Module mod: modules) {
@@ -123,22 +120,16 @@ public class Check extends Command {
                 totalCAP += CAP;
             }
         }
-        if (totalCAP >= CAP_MINIMUM_SEP) {
-            return true;
-        }
-        return false;
+        return totalCAP >= CAP_MINIMUM_SEP;
     }
 
     /**
      * Function to check if the user fulfills the semester requirements for SEP
      * @return true if fulfilled, false otherwise
      */
-    public static boolean checkSEPSem() {
+    public boolean checkSEPSem() {
         int currentSemester = findCurrentSemester();
-        if (currentSemester >= SEMESTER_MINIMUM_SEP) {
-            return true;
-        }
-        return false;
+        return currentSemester >= SEMESTER_MINIMUM_SEP;
     }
 
     /**
