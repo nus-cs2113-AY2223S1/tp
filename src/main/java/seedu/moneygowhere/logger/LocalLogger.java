@@ -39,14 +39,38 @@ public class LocalLogger {
     }
 
     public void logInformationalMessage(String message) {
-        logger.log(Level.FINE, message);
+        String informationalMessageHeader = "INFO - ";
+
+        logger.log(
+                Level.FINE,
+                informationalMessageHeader + message
+        );
     }
 
     public void logWarningMessage(String message) {
-        logger.log(Level.FINER, message);
+        String warningMessageHeader = "WARN - ";
+
+        logger.log(
+                Level.FINER,
+                warningMessageHeader + message
+        );
     }
 
     public void logErrorMessage(String message) {
-        logger.log(Level.FINEST, message);
+        String errorMessageHeader = "ERROR - ";
+
+        logger.log(
+                Level.FINEST,
+                errorMessageHeader + message
+        );
+    }
+
+    public void logCommand(String command) {
+        String commandHeader = "COMD - ";
+
+        logger.log(
+                Level.FINEST,
+                commandHeader + command
+        );
     }
 }

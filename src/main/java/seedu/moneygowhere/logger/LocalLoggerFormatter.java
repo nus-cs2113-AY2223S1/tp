@@ -9,7 +9,7 @@ public class LocalLoggerFormatter extends Formatter {
     public String format(LogRecord logRecord) {
         String formattedLog = "";
         formattedLog += logRecord.getMillis();
-        formattedLog += " - ";
+        formattedLog += " ";
         formattedLog += logRecord.getMessage();
         formattedLog += "\n";
 
