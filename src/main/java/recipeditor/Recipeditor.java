@@ -30,6 +30,7 @@ public class Recipeditor {
     private static void start(String[] args) {
         Storage.createDataFolder();
         Ui.showGreeting();
+
     }
 
     /**
@@ -44,6 +45,7 @@ public class Recipeditor {
      * Main Command Loop Input -> Command -> Command Result -> Show & Save.
      */
     private static void runCommandLoopUntilExitCommand() {
+
         Command command;
         do {
             String input = Ui.readInput();

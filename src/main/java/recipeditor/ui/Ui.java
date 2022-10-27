@@ -11,7 +11,7 @@ public class Ui {
 
     public static final String DIVIDER = "____________________________________________________________";
     private static final String START = "Program starting!";
-    public static final String COMMAND = "Parseable command at the moment: add, delete, list, view, exit";
+    public static final String COMMAND = "Available commands: /add, /list, /view, /edit, /find, /delete, /exit, /help";
     private static final String EXIT = "Program exiting";
     private static final String PROMPT = ">>> ";
 
