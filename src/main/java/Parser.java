@@ -76,8 +76,8 @@ public class Parser {
             } else if (matcherAdd.find()) {
                 String patientId = matcherAdd.group(4).toUpperCase();
                 if (!patientList.isUniqueId(patientId)) {
-                    throw new OneDocException("Please only use unique IDs to create patients!" +
-                            " A patient with this ID already exists");
+                    throw new OneDocException("Please only use unique IDs to create patients!"
+                            + " A patient with this ID already exists");
                 }
                 patientList.addPatient(ui, matcherAdd.group(1), matcherAdd.group(3),
                         matcherAdd.group(2), patientId);
