@@ -22,8 +22,8 @@ class EmployeeListTest {
     void findEmployee() {
         AddEmployeeCommand addEmployeeCommand = new AddEmployeeCommand("Jinwen");
         addEmployeeCommand.execute();
-        Employee employeeFound = EmployeeList.findEmployee(EmployeeList.employees.size());
-        assertEquals(employeeFound.getEmployeeId(), EmployeeList.employees.size());
+        Employee employeeFound = EmployeeList.findEmployee(Employee.id);
+        assertEquals(employeeFound.getEmployeeId(), Employee.id);
     }
 
 

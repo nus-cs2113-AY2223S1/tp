@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Appointment {
-    private static int id = 0;
+    public static int id = 0;
     public final int appointmentId;
     public String petName;
     public String service;
