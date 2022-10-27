@@ -50,7 +50,13 @@ public class TaskList {
     }
 
     // assign task to be done by another person
-    public static void reassignTask(int taskId, int employeeId) {
+    public static void reassignTask(int taskId, int employeeId) throws DukeException {
+        if (TaskList.findTask(taskId) == null) {
+            throw new DukeException();
+        }
+        if (EmployeeList.findEmployee(employeeId) == null) {
+            throw new DukeException();
+        }
         Task taskToReassign = TaskList.findTask(taskId);
         // Remove from original Employee's task list
         if (taskToReassign != null) {
