@@ -199,7 +199,7 @@ Format: ```add-item /n [ITEM_NAME] /c [CATEGORY_INDEX] /p [PRICE] /o [USERNAME]`
 Note:
 1. Owner cannot have duplicate items (items have the same name)
 2. To choose category, please use ```list-categories``` to list them out and use the index
-3. Price must be a float
+3. Price must be a float, and in range from 0 to 10000
 
 Example of usage: ```add-item /n weight /c 1 /p 0.5 /o bui```
 
@@ -273,7 +273,7 @@ Note:
 
 1. `itemId` must exist i.e. item has been created and was not deleted 
 2. A valid price must be given i.e. non-zero and non-negative
-3. Price is in price per day
+3. Price is in price per day, and in range from 0 to 10000
 4. You may or may not use floating point numbers for price
 
 Example of usage: ```update-item /i ea608c61 /p 4```
@@ -296,7 +296,7 @@ Note:
 1. Mode of sorting must either be ```lh``` (low to high) or ``` hl``` (high to low)
 2. Minimum price, maximum price and category filters are optional
 3. Minimum and Maximum price must be more than 0
-4. Minimum price must be less than maximum price
+4. Minimum price must be less than maximum price, and both are in range form 0 to 10000
 5. Category number must be an integer
 
 Example of usage: ```sort-items /mode lh /min 1 /max 5```

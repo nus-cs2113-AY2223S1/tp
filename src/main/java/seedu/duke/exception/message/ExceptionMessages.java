@@ -24,7 +24,7 @@ public class ExceptionMessages {
     public static final String MESSAGE_ITEM_NOT_FOUND = "This item cannot be found in the list";
     public static final String MESSAGE_SAME_OWNER = "User already has this item listed!";
     public static final String MESSAGE_PRICE_FORMAT_INVALID = "Price is a float, check your format";
-    public static final String MESSAGE_PRICE_LESS_THAN_ZERO = "Price must be greater than 0";
+    public static final String MESSAGE_PRICE_OUT_OF_RANGE = "Price must be greater than 0 AND less than 10000";
     public static final String MESSAGE_SORT_MODE_INVALID = "Mode of sorting is invalid";
     public static final String MESSAGE_PRICE_BOUNDARIES_INVALID =
             "Minimum price cannot be more than maximum price";

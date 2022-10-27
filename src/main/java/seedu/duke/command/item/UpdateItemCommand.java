@@ -16,7 +16,7 @@ import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INSUFFICIEN
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PARTS;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_ITEM_NOT_FOUND;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_PRICE_FORMAT_INVALID;
-import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_PRICE_LESS_THAN_ZERO;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_PRICE_OUT_OF_RANGE;
 
 //@@author winston-lim
 public class UpdateItemCommand extends Command {
@@ -63,8 +63,8 @@ public class UpdateItemCommand extends Command {
 
     private boolean isValidPrice(String price) throws InvalidPriceException {
         try {
-            if (Double.parseDouble(price) < 0) {
-                throw new InvalidPriceException(MESSAGE_PRICE_LESS_THAN_ZERO);
+            if (Double.parseDouble(price) < 0 || Double.parseDouble(price) > 10000) {
+                throw new InvalidPriceException(MESSAGE_PRICE_OUT_OF_RANGE);
             }
             return true;
         } catch (NumberFormatException e) {
