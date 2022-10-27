@@ -83,18 +83,23 @@ In the example above, `UserInterface#runCommandAddExpense()` calls `Storage#save
 
 #### Component Interaction Sequence Diagrams:
 
-![Component-Interaction-On-Command-Entered](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentInteractionsRefGetUserCommand.puml)
+![Component-Interaction-Ref-Save-Expense-To-File](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentInteractionsRefLoadExpenseFromFile.puml)
+
+* `UserInterface()` calls `Data#load()` to load any existing data stored in a file.
+* `Data#load()` calls `Storage#loadFromFile()` to load the data from a file.
+
+![Component-Interaction-Ref-Get-User-Command](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentInteractionsRefGetUserCommand.puml)
 
 * `UserInterface#getConsoleCommand()` calls `UserInterface#getConsoleInput()` to read the user's input as a string.
 * `UserInterface#getConsoleCommand()` then calls `Parser#parse()` to parse the input string into the corresponding console command object.
 
-![Component-Interaction-On-Command-Entered](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentInteractionsRefPrintExpense.puml)
+![Component-Interaction-Ref-Print-Expense](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentInteractionsRefPrintExpense.puml)
 
 * `UserInterface#run()` will call the corresponding convert object function based on the data object's class.
 In the example above, `UserInterface#run()` calls `UserInterface#convertExpenseToConsoleString()` to convert the expense object into a formatted string.
 * `UserInterface#run()` will then call `UserInterface#printInformationalMessage()` to print the converted object.
 
-![Component-Interaction-On-Command-Entered](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentInteractionsRefSaveExpensesToFile.puml)
+![Component-Interaction-Ref-Save-Expense-To-File](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentInteractionsRefSaveExpensesToFile.puml)
 
 * `UserInterface#run()` calls `Data#save()` to save the data managed by the data manager class.
 * `Data#save()` calls `Storage#saveToFile()` to write the data to a file.
