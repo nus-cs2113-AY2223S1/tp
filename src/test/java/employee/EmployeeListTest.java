@@ -26,15 +26,8 @@ class EmployeeListTest {
         assertEquals(employeeFound.getEmployeeId(), 1);
     }
 
-    @Test
-    void removeEmployee() {
-        Employee newEmployee = new Employee("yongjie");
-        EmployeeList.addEmployee(newEmployee);
-        int currNumOfEmployee = EmployeeList.employees.size();
-        EmployeeList.removeEmployee(1);
-        int numOfEmployeeAfterRemove = EmployeeList.employees.size();
-        assertEquals(numOfEmployeeAfterRemove - currNumOfEmployee, -1);
-    }
+
+
 
     @Test
     void listEmployee() {
