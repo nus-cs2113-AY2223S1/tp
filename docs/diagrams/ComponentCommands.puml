@@ -1,78 +1,44 @@
 @startuml
-!include https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/Styles.puml
+!include https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/Styles.puml
 
 package Commands {
     Class ConsoleCommand as "                ConsoleCommand                " <<abstract>>PARSER_COLOR_2
 
     Class ConsoleCommandAddExpense PARSER_COLOR_2
-    Class ConsoleCommandViewExpense PARSER_COLOR_2
-    Class ConsoleCommandDeleteExpense PARSER_COLOR_2
-    Class ConsoleCommandEditExpense PARSER_COLOR_2
 
     Class ConsoleCommandSortExpense PARSER_COLOR_2
 
-    Class ConsoleCommandAddIncome PARSER_COLOR_2
     Class ConsoleCommandViewIncome PARSER_COLOR_2
-    Class ConsoleCommandDeleteIncome PARSER_COLOR_2
-    Class ConsoleCommandEditIncome PARSER_COLOR_2
 
-    Class ConsoleCommandAddTarget PARSER_COLOR_2
-    Class ConsoleCommandViewTarget PARSER_COLOR_2
     Class ConsoleCommandDeleteTarget PARSER_COLOR_2
-    Class ConsoleCommandEditTarget PARSER_COLOR_2
 
-    Class ConsoleCommandAddRecurringPayment PARSER_COLOR_2
-    Class ConsoleCommandViewRecurringPayment PARSER_COLOR_2
-    Class ConsoleCommandDeleteRecurringPayment PARSER_COLOR_2
     Class ConsoleCommandEditRecurringPayment PARSER_COLOR_2
-    Class ConsoleCommandPayRecurringPayment PARSER_COLOR_2
 
     Class ConsoleCommandConvertCurrency PARSER_COLOR_2
 
     Class ConsoleCommandMergeFile PARSER_COLOR_2
 
     Class ConsoleCommandBye PARSER_COLOR_2
+
+    note as Note
+        Note that this diagram
+        is not exhaustive.
+    end note
 }
 
 ConsoleCommandAddExpense -up-|> ConsoleCommand
-ConsoleCommandAddExpense --[hidden]> ConsoleCommandViewExpense
-ConsoleCommandViewExpense -up-|> ConsoleCommand
-ConsoleCommandViewExpense --[hidden]> ConsoleCommandDeleteExpense
-ConsoleCommandDeleteExpense -up-|> ConsoleCommand
-ConsoleCommandDeleteExpense --[hidden]> ConsoleCommandEditExpense
-ConsoleCommandEditExpense -up-|> ConsoleCommand
-ConsoleCommandEditExpense --[hidden]> ConsoleCommandSortExpense
+
 ConsoleCommandSortExpense -up-|> ConsoleCommand
 
-ConsoleCommandAddIncome --up-|> ConsoleCommand
-ConsoleCommandAddIncome --[hidden]> ConsoleCommandViewIncome
-ConsoleCommandViewIncome --up-|> ConsoleCommand
-ConsoleCommandViewIncome --[hidden]> ConsoleCommandDeleteIncome
-ConsoleCommandDeleteIncome --up-|> ConsoleCommand
-ConsoleCommandDeleteIncome --[hidden]> ConsoleCommandEditIncome
-ConsoleCommandEditIncome --up-|> ConsoleCommand
+ConsoleCommandViewIncome -up-|> ConsoleCommand
 
-ConsoleCommandAddTarget ---up-|> ConsoleCommand
-ConsoleCommandAddTarget --[hidden]> ConsoleCommandViewTarget
-ConsoleCommandViewTarget ---up-|> ConsoleCommand
-ConsoleCommandViewTarget --[hidden]> ConsoleCommandDeleteTarget
-ConsoleCommandDeleteTarget ---up-|> ConsoleCommand
-ConsoleCommandDeleteTarget --[hidden]> ConsoleCommandEditTarget
-ConsoleCommandEditTarget ---up-|> ConsoleCommand
+ConsoleCommandDeleteTarget --up-|> ConsoleCommand
 
-ConsoleCommandAddRecurringPayment ----up-|> ConsoleCommand
-ConsoleCommandAddRecurringPayment --[hidden]> ConsoleCommandViewRecurringPayment
-ConsoleCommandViewRecurringPayment ----up-|> ConsoleCommand
-ConsoleCommandViewRecurringPayment --[hidden]> ConsoleCommandDeleteRecurringPayment
-ConsoleCommandDeleteRecurringPayment ----up-|> ConsoleCommand
-ConsoleCommandDeleteRecurringPayment --[hidden]> ConsoleCommandEditRecurringPayment
-ConsoleCommandEditRecurringPayment ----up-|> ConsoleCommand
-ConsoleCommandEditRecurringPayment --[hidden]> ConsoleCommandPayRecurringPayment
-ConsoleCommandPayRecurringPayment ----up-|> ConsoleCommand
+ConsoleCommandEditRecurringPayment --up-|> ConsoleCommand
 
-ConsoleCommandConvertCurrency -----up-|> ConsoleCommand
-ConsoleCommandConvertCurrency --[hidden]> ConsoleCommandMergeFile
-ConsoleCommandMergeFile -----up-|> ConsoleCommand
-ConsoleCommandMergeFile --[hidden]> ConsoleCommandBye
-ConsoleCommandBye -----up-|> ConsoleCommand
+ConsoleCommandConvertCurrency --up-|> ConsoleCommand
+
+ConsoleCommandMergeFile ---up-|> ConsoleCommand
+
+ConsoleCommandBye ---up-|> ConsoleCommand
 @enduml

@@ -2,6 +2,7 @@ package seedu.moneygowhere.data.income;
 
 import seedu.moneygowhere.common.Messages;
 import seedu.moneygowhere.exceptions.data.income.IncomeManagerIncomeNotFoundException;
+import seedu.moneygowhere.storage.LocalStorage;
 
 import java.util.ArrayList;
 
@@ -18,8 +19,9 @@ public class IncomeManager {
         incomes = new ArrayList<>();
     }
 
-    public void addIncome(Income income) {
+    public void addIncome(Income income, LocalStorage localStorage) {
         incomes.add(income);
+        localStorage.setSavedIncomes(incomes);
     }
 
     public Income getIncome(int incomeIndex) throws IncomeManagerIncomeNotFoundException {
@@ -34,17 +36,26 @@ public class IncomeManager {
         return new ArrayList<>(incomes);
     }
 
-    public void deleteIncome(int incomeIndex) throws IncomeManagerIncomeNotFoundException {
+    //@@author LokQiJun
+    public void setIncomes(ArrayList<Income> savedIncomes) {
+        this.incomes = new ArrayList<Income>(savedIncomes);
+    }
+
+    public void deleteIncome(int incomeIndex, LocalStorage localStorage)
+            throws IncomeManagerIncomeNotFoundException {
         try {
             incomes.remove(incomeIndex);
+            localStorage.setSavedIncomes(incomes);
         } catch (IndexOutOfBoundsException exception) {
             throw new IncomeManagerIncomeNotFoundException(Messages.INCOME_MANAGER_ERROR_INCOME_NOT_FOUND);
         }
     }
 
-    public void editIncome(int incomeIndex, Income income) throws IncomeManagerIncomeNotFoundException {
+    public void editIncome(int incomeIndex, Income income, LocalStorage localStorage)
+            throws IncomeManagerIncomeNotFoundException {
         try {
             incomes.set(incomeIndex, income);
+            localStorage.setSavedIncomes(incomes);
         } catch (IndexOutOfBoundsException exception) {
             throw new IncomeManagerIncomeNotFoundException(Messages.INCOME_MANAGER_ERROR_INCOME_NOT_FOUND);
         }
