@@ -18,28 +18,28 @@ public class UI {
     // Patient
     private static final String PATIENT_MAIN_MENU =
             "This is the Patient Main Menu!" + System.lineSeparator()
-            + "List of commands: "
-            + UI.PATIENT_ADD
-            + UI.PATIENT_VIEW_ALL
-            + UI.PATIENT_RETRIEVE
-            + UI.PATIENT_EDIT
-            + UI.RETURN_TO_MAIN
-            + UI.EXIT_PROGRAM;
+                    + "List of commands: "
+                    + UI.PATIENT_ADD
+                    + UI.PATIENT_VIEW_ALL
+                    + UI.PATIENT_RETRIEVE
+                    + UI.PATIENT_EDIT
+                    + UI.RETURN_TO_MAIN
+                    + UI.EXIT_PROGRAM;
 
     // Prescription
     private static final String NO_PRESCRIPTION_MESSAGE = "There are currently no prescriptions in the record.";
     private static final String PRESCRIPTION_MAIN_MENU =
             "This is the Prescription Main Menu!" + System.lineSeparator()
-            + "List of commands:"
-            + UI.PRESCRIPTION_ADD
-            + UI.PRESCRIPTION_EDIT
-            + UI.PRESCRIPTION_VIEW_ALL
-            + UI.PRESCRIPTION_VIEW_PATIENT
-            + UI.PRESCRIPTION_VIEW_ACTIVE
-            + UI.PRESCRIPTION_CHANGE_ACTIVE
-            + UI.PRESCRIPTION_CHANGE_INACTIVE
-            + UI.RETURN_TO_MAIN
-            + UI.EXIT_PROGRAM;
+                    + "List of commands:"
+                    + UI.PRESCRIPTION_ADD
+                    + UI.PRESCRIPTION_EDIT
+                    + UI.PRESCRIPTION_VIEW_ALL
+                    + UI.PRESCRIPTION_VIEW_PATIENT
+                    + UI.PRESCRIPTION_VIEW_ACTIVE
+                    + UI.PRESCRIPTION_CHANGE_ACTIVE
+                    + UI.PRESCRIPTION_CHANGE_INACTIVE
+                    + UI.RETURN_TO_MAIN
+                    + UI.EXIT_PROGRAM;
     private static final String NO_MATCHING_PRESCRIPTION_MESSAGE = "There are currently no prescriptions from this "
             + "patient.";
     private static final String NO_MATCHING_ACTIVE_PRESCRIPTION_MESSAGE = "There are currently no active prescriptions "
@@ -48,15 +48,15 @@ public class UI {
     // Visit
     private static final String VISIT_MAIN_MENU =
             "This is the Visits Main Menu!" + System.lineSeparator()
-            + "List of commands:"
-            + UI.VISIT_ADD
-            + UI.VISIT_EDIT
-            + UI.VISIT_DELETE_REASON
-            + UI.VISIT_VIEW_ALL
-            + UI.VISIT_VIEW_PATIENT
-            + UI.VISIT_VIEW
-            + UI.RETURN_TO_MAIN
-            + UI.EXIT_PROGRAM;
+                    + "List of commands:"
+                    + UI.VISIT_ADD
+                    + UI.VISIT_EDIT
+                    + UI.VISIT_DELETE_REASON
+                    + UI.VISIT_VIEW_ALL
+                    + UI.VISIT_VIEW_PATIENT
+                    + UI.VISIT_VIEW
+                    + UI.RETURN_TO_MAIN
+                    + UI.EXIT_PROGRAM;
 
     public UI() {
         scanner = new Scanner(System.in);
@@ -84,17 +84,17 @@ public class UI {
 
     public void printSubMenu(MainMenuState mainMenuState) {
         switch (mainMenuState) {
-        case PATIENT:
-            printPatientMenuMessage();
-            break;
-        case VISIT:
-            printVisitsMenuMessage();
-            break;
-        case PRESCRIPTION:
-            printPrescriptionMenuMessage();
-            break;
-        default:
-            break;
+            case PATIENT:
+                printPatientMenuMessage();
+                break;
+            case VISIT:
+                printVisitsMenuMessage();
+                break;
+            case PRESCRIPTION:
+                printPrescriptionMenuMessage();
+                break;
+            default:
+                break;
         }
     }
 
@@ -156,9 +156,11 @@ public class UI {
         System.out.println(PRESCRIPTION_MAIN_MENU);
     }
 
-    public void printAddPrescriptionMessage(String prescriptionString) {
+
+    public void printAddPrescriptionMessage(String prescriptionString, int prescriptionIndex) {
         System.out.println("You have added a prescription!");
         printLine();
+        System.out.println("(" + prescriptionIndex + ")\n");
         System.out.println(prescriptionString);
         printLine();
     }
@@ -215,7 +217,7 @@ public class UI {
             + "viewPatientPres i/[ID]";
 
     public static final String PRESCRIPTION_VIEW_ACTIVE = "\n* To list all active prescriptions of one "
-        + "patient: viewActPatientPres i/[ID]";
+            + "patient: viewActPatientPres i/[ID]";
 
     public static final String PRESCRIPTION_CHANGE_ACTIVE = "\n* To change a prescription record to be "
             + "active: activate x/[index]";
@@ -223,9 +225,9 @@ public class UI {
     public static final String PRESCRIPTION_CHANGE_INACTIVE = "\n* To change a prescription record to be "
             + "inactive: deactivate x/[index]";
 
-    public static final String RETURN_TO_MAIN =  "\n* To return to main menu: main";
+    public static final String RETURN_TO_MAIN = "\n* To return to main menu: main";
 
-    public static final String EXIT_PROGRAM =  "\n* To quit OneDoc: bye";
+    public static final String EXIT_PROGRAM = "\n* To quit OneDoc: bye";
 
     public void printActivatePrescriptionMessage(String prescription) {
         System.out.println("Ok, I've activated the prescription below:");

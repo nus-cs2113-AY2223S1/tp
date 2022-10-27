@@ -18,11 +18,16 @@ public class PatientList {
         patients.add(patient);
     }
 
+    public void printIndexOfPatient(Patient patient) {
+        System.out.print("(" + patients.indexOf(patient) + ")\n");
+    }
+
     public void retrievePatient(UI ui, String id) {
         for (Patient patient : patients) {
             if (patient.getId().equalsIgnoreCase(id)) {
                 System.out.println("The patient with the supplied ID was found! Here are the details of the patient: ");
                 ui.printLine();
+                printIndexOfPatient(patient);
                 System.out.println(patient);
                 ui.printLine();
                 return;

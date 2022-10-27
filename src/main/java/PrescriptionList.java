@@ -18,7 +18,7 @@ public class PrescriptionList {
         assert timeInterval != null : "time interval should not be null";
         Prescription prescription = new Prescription(patientId, medicine, dosage, timeInterval);
         prescriptionsList.add(prescription);
-        ui.printAddPrescriptionMessage(prescription.toString());
+        ui.printAddPrescriptionMessage(prescription.toString(),prescriptionsList.indexOf(prescription));
 
     }
 
@@ -29,7 +29,7 @@ public class PrescriptionList {
         assert timeInterval != null : "time interval should not be null";
         Prescription prescription = new Prescription(patientId, medicine, dosage, timeInterval, isActive);
         prescriptionsList.add(prescription);
-        ui.printAddPrescriptionMessage(prescription.toString());
+        ui.printAddPrescriptionMessage(prescription.toString(),prescriptionsList.indexOf(prescription));
     }
 
     public void loadPrescription(String patientID,
