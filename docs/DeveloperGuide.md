@@ -124,7 +124,12 @@ Do refer to the [repository](https://github.com/AY2223S1-CS2113T-W11-1/tp/tree/m
 
 ### Commands Component
 
+The Commands components consists of various exception classes which inherits from the abstract class `ConsoleCommand`.
+
 ![Component-Commands](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentCommands.puml)
+
+The corresponding console command subclass is returned by `ConsoleParser#parse()` depending on the command supplied in the function's parameter.
+For example, supplying the command string `Add-Expense -n Lunch -a 7.80` to `ConsoleParser#parse()` will return a `ConsoleCommandAddExpense` object.
 
 ## Implementation
 ### Reading and parsing the user's commands
