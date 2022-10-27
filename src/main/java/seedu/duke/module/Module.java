@@ -106,7 +106,7 @@ public class Module {
 
     private String getCount(HashMap<String, Integer> lessonDupe, Lesson lesson) {
         String type = lesson.getLessonType();
-        if(lessonDupe.containsKey(type)) {
+        if (lessonDupe.containsKey(type)) {
             Integer newCount = lessonDupe.get(type) + 1;
             lessonDupe.remove(type);
             lessonDupe.put(type, newCount);
