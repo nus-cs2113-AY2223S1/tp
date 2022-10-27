@@ -439,7 +439,7 @@ in Ui.
 The above is an example for CommandListClients. It reads from ClientList. Then, it displays each line
 using the displayOneClient function in Ui.  
 The sequence diagram of the operation is as follows - 
-![ListSequence](diagrams/ListSequence.png)
+![ListSequence](diagrams/ListSequenceUpdated.png)
 
 
 ---
