@@ -159,8 +159,8 @@ class PrescriptionListTest {
                 + "\tStatus: Active" + System.lineSeparator()
                 + "\t____________________________________________________________" + System.lineSeparator()
                 + "You have edited the prescription!" + System.lineSeparator()
-                + "#1)" + System.lineSeparator()
                 + "\t____________________________________________________________" + System.lineSeparator()
+                + "#1)" + System.lineSeparator()
                 + "\tID: S123456G" + System.lineSeparator()
                 + "\tMedicine: Losartan Potassium" + System.lineSeparator()
                 + "\tDosage: 50 mg" + System.lineSeparator()
@@ -180,7 +180,7 @@ class PrescriptionListTest {
         String expectedOutput =
                 "You have added a prescription!" + System.lineSeparator()
                 + "\t____________________________________________________________" + System.lineSeparator()
-                + "#1)"
+                + "#1)" + System.lineSeparator()
                 + "\tID: S123456G" + System.lineSeparator()
                 + "\tMedicine: Ventolin" + System.lineSeparator()
                 + "\tDosage: 4 mg" + System.lineSeparator()
@@ -188,7 +188,7 @@ class PrescriptionListTest {
                 + "\tStatus: Active" + System.lineSeparator()
                 + "\t____________________________________________________________" + System.lineSeparator()
                 + "You have edited the prescription!" + System.lineSeparator()
-                + "#2)"
+                + "#1)" + System.lineSeparator()
                 + "\t____________________________________________________________" + System.lineSeparator()
                 + "\tID: S123456G" + System.lineSeparator()
                 + "\tMedicine: Ventolin" + System.lineSeparator()
