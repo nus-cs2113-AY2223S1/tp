@@ -29,6 +29,27 @@ Example of usage:
 
 `todo n/Refactor the User Guide to remove passive voice d/13/04/2020`
 
+### 3. Prescription
+
+#### Adding New Prescription: `add`
+Add a new prescription to the list of prescriptions.
+
+Format: `add i/patientID n/medicine_name d/medicine_dosage t/time_interval`
+
+* The `medicine_name` should be either one or two words
+* The `medicine_dosage` should be formatted as a number followed by a unit
+* The `time_interval` can be in a natural language format
+
+Example of usage:
+
+`add i/add i/S7093944G n/Problaxan d/10 mg t/take 15 minutes after every meal, 3x a day`
+
+Expected Output:
+
+```
+
+```
+
 ## FAQ
 
 **Q**: How do I transfer my data to another computer? 
