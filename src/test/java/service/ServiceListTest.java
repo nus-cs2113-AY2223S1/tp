@@ -28,7 +28,7 @@ class ServiceListTest {
         AddServiceCommand addServiceCommand = new AddServiceCommand("Trim");
         addServiceCommand.execute();
         int numOfServices = ServiceList.services.size();
-        RemoveServiceCommand removeServiceCommand = new RemoveServiceCommand(ServiceList.services.size());
+        RemoveServiceCommand removeServiceCommand = new RemoveServiceCommand(Service.id);
         removeServiceCommand.execute();
         int numOfServicesAfterRemove = ServiceList.services.size();
         assertEquals(-1, numOfServicesAfterRemove - numOfServices);
