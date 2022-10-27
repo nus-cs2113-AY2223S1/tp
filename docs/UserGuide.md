@@ -28,7 +28,7 @@ This UserGuide introduces you a brief overview of our features with example of u
 >2. Parameters can be shuffled. For example, ```update-item /i [ITEM_ID] /p [PRICE]``` and ```update-item /p [PRICE] /i [ITEM_ID]``` are the same.
 >3. Phrases in ```[CAPITAL_WORDS]``` are the parameters for you to input.
 
-Let's hop into the sector [2. Quick Start](#2-quick-start) to start with us
+Let's hop into the section [2. Quick Start](#2-quick-start) to start using Upcycle quickly.
 
 ## 2. Quick Start
 
@@ -335,8 +335,21 @@ Here are available categories:
 8. OTHERS
 ____________________________________________________________
 ```
+#### 3.3.8. ```find-item``` - Find an item using keyword
+>List all items that are associated with a given keyword
 
-**...To be updated(Find item)**
+Example of usage: ```find-item /k book```
+
+Expected outcome: 
+```
+____________________________________________________________
+Here are items that match your keyword: 
+1. TEXTBOOK
+3. CHINESE BOOK
+7. MATH BOOK
+8. OLD BOOK
+____________________________________________________________
+```
 
 ### 3.4. Transaction-related features
 #### 3.4.1. ```add-tx``` - Add a new transaction
