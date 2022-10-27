@@ -26,6 +26,7 @@ public class EmployeeParser {
                     throw new DukeException();
                 }
             }
+
             String type = input.substring(0,input.indexOf(" "));
             String statement = input.substring(input.indexOf(" "));
             switch (type) {
@@ -45,9 +46,11 @@ public class EmployeeParser {
     public Command prepareAddEmployee(String input) {
         try {
             int startOfN = input.indexOf(" n/");
-            if (startOfN == -1) {
+
+            if (startOfN == -1 || !input.substring(0,startOfN).isEmpty()) {
                 throw new DukeException();
             }
+
             String name = input.substring(startOfN + lengthOfSignature);
             return new AddEmployeeCommand(name);
         } catch (DukeException e) {

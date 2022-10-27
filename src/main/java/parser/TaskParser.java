@@ -54,6 +54,10 @@ public class TaskParser {
             int startOfE = input.indexOf(" e/");
             int startOfD = input.indexOf(" d/");
 
+            if(!input.substring(0,startOfI).isEmpty()){
+                throw new DukeException();
+            }
+
             if (startOfI > startOfE || startOfE > startOfD || startOfI == -1) {
                 System.out.println("Invalid Input! format of parameters entered for adding a task is invalid");
                 throw new DukeException();
