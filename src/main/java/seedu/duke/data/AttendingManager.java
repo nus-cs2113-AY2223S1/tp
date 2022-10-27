@@ -80,7 +80,7 @@ public class AttendingManager {
     public static void saveAttendingIntoDataList() {
         attendingDataList.clear();
         for (Module module : Timetable.listOfModules) {
-            for (Lesson lesson : module.getAllAttending()) {
+            for (Lesson lesson : module.getAllAvailableLessons()) {
                 addAttending(lesson, module.getModuleCode());
             }
         }
@@ -114,6 +114,7 @@ public class AttendingManager {
                 = new LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>>();
         for (String line : attendingDataList) {
             String[] currLine = line.split("\\|");
+            String moduleCode = currLine[0];
             String lessonType = currLine[1];
             String lessonDay = currLine[2];
             String lessonStart = currLine[3];
@@ -128,11 +129,11 @@ public class AttendingManager {
             }
             String currModuleCode = moduleList.get(currModuleIndex).getModuleCode();
             if (currModuleCode.equals(currLine[0])) { //if the current module is the same as the one in the list
-                addLessonsIntoMap(newLessons, new Lesson(lessonDay, lessonStart, lessonEnd, lessonType, classNumber));
+                addLessonsIntoMap(newLessons, new Lesson(lessonDay, lessonStart, lessonEnd, lessonType, classNumber, moduleCode));
             } else {
                 currModule.replaceNewAttending(newLessons); //update the attending for the current module
                 newLessons = new LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>>(); //clear the data
-                addLessonsIntoMap(newLessons, new Lesson(lessonDay, lessonStart, lessonEnd, lessonType, classNumber));
+                addLessonsIntoMap(newLessons, new Lesson(lessonDay, lessonStart, lessonEnd, lessonType, classNumber, moduleCode));
                 currModuleIndex++;
             }
         }
@@ -174,7 +175,7 @@ public class AttendingManager {
                 }
                 currModule = moduleList.get(moduleIndex);
             }
-            Lesson newLesson = new Lesson(lessonDay, lessonStart, lessonEnd, lessonType, classNumber);
+            Lesson newLesson = new Lesson(lessonDay, lessonStart, lessonEnd, lessonType, classNumber, moduleCode);
             currModule.replaceAttending(newLesson, attendingIndex);
             attendingIndex++;
         }

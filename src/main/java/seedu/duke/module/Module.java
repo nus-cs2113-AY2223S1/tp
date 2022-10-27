@@ -4,11 +4,12 @@ import seedu.duke.Timetable;
 import seedu.duke.TimetableDict;
 import seedu.duke.module.lessons.Lesson;
 
-import java.util.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.Objects;
 
 
 public class Module {
@@ -34,9 +35,9 @@ public class Module {
         return attending;
     }
 
-    public List<Lesson> getAllAttending() {
+    public List<Lesson> getAllAvailableLessons() {
         List<Lesson> allAttending = new ArrayList<Lesson>();
-        for (HashMap<String, ArrayList<Lesson>> lessonTypes : this.allAttending.values()) {
+        for (LinkedHashMap<String, ArrayList<Lesson>> lessonTypes : this.allAttending.values()) {
             for (ArrayList<Lesson> allClasses : lessonTypes.values()) {
                 for (Lesson lesson : allClasses) {
                     allAttending.add(lesson);
@@ -58,7 +59,7 @@ public class Module {
         this.classifiedLessons = classifyLessons(lessons);
         this.allLessons = populateData(); //this is the new classifiedLessons
         this.allAttending = populateAttending(); //this is the new attending
-        this.attending = getAllAttending();
+        this.attending = getAllAvailableLessons();
     }
 
     private LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>> populateAttending() {
@@ -126,7 +127,7 @@ public class Module {
         String endTime = "Undetermined";
         String classNumber = "NA";
         for (int i = 0; i < size; i++) {
-            classes.add(new Lesson(day, startTime, endTime, lessonType, classNumber));
+            classes.add(new Lesson(day, startTime, endTime, lessonType, classNumber, moduleCode));
         }
         temp.put(classNumber, classes);
     }
@@ -136,28 +137,49 @@ public class Module {
         String startTime = "Undetermined";
         String endTime = "Undetermined";
         String classNumber = "NA";
-        Lesson tempLesson = new Lesson(day, startTime, endTime, lessonType, classNumber);
+        Lesson tempLesson = new Lesson(day, startTime, endTime, lessonType, classNumber, moduleCode);
         temp.add(tempLesson);
-    }
-
-    private boolean checkExist(List<Lesson> temp, Lesson lessonToCheck) {
-        for (Lesson lesson : temp) {
-            if (lesson.getLessonType().equals(lessonToCheck.getLessonType())) {
-                return true;
-            }
-        }
-        return false;
     }
 
     public String getModuleDetails() {
         StringBuilder details = new StringBuilder(this.getModuleCode() + ": " + this.getModuleName() + "\n");
 
-        for (Lesson lesson : getAllAttending()) {
-            details.append("     [").append(lesson.getLessonType()).append("] ").append(lesson.getDay()).append("   ")
+        HashMap<String, Integer> lessonDupe = new HashMap<>();
+        String counter;
+        for (Lesson lesson : attending) {
+            counter = getCount(lessonDupe, lesson);
+            details.append("     [").append(lesson.getLessonType()).append(counter).append("] ")
+                    .append(lesson.getDay()).append("   ")
                     .append(convertTime(lesson.getStartTime())).append(" - ")
                     .append(convertTime(lesson.getEndTime())).append("\n");
         }
         return details.toString();
+    }
+
+    private String getCount(HashMap<String, Integer> lessonDupe, Lesson lesson) {
+        String type = lesson.getLessonType();
+        if (lessonDupe.containsKey(type)) {
+            Integer newCount = lessonDupe.get(type) + 1;
+            lessonDupe.remove(type);
+            lessonDupe.put(type, newCount);
+            return " " + newCount;
+        } else {
+            lessonDupe.put(type, 1);
+            return checkForMoreDupes(lesson);
+        }
+    }
+
+    private String checkForMoreDupes(Lesson lesson) {
+        int count = 0;
+        for (Lesson tempLesson : attending) {
+            if (Objects.equals(tempLesson.getLessonType(), lesson.getLessonType())) {
+                count += 1;
+            }
+        }
+        if (count > 1) {
+            return " 1";
+        }
+        return "";
     }
 
     private String convertTime(String time) {
@@ -172,15 +194,29 @@ public class Module {
     public String getLessonTypes() {
         StringBuilder list = new StringBuilder();
         int index = 1;
-        for (Lesson lesson : getAllAttending()) {
-            list.append(index).append(". ").append(lesson.getLessonType()).append("     ");
-            index += 1;
+        for (String lessonType : allLessons.keySet()) {
+            if (allLessons.get(lessonType).size() != 1) {
+                list.append(index).append(". ").append(lessonType).append("\n");
+                index++;
+            }
         }
         return list.toString();
     }
 
+    /**
+     * Gets the number of lesson types whose lessons are adjustable.
+     *
+     * @return Number of lesson types
+     */
     public int getLessonTypeLength() {
-        return getAllAttending().size();
+        int length = 0;
+        for (LinkedHashMap<String, ArrayList<Lesson>> entry : allLessons.values()) {
+            if (entry.size() != 1) {
+                length++;
+            }
+        }
+        return length;
+        //return getAllAttending().size();
     }
 
     @Override
@@ -190,47 +226,47 @@ public class Module {
 
     public String getTypeOfLessonFromIndex(int index) {
         assert index >= 0 : "index should be within range";
-        assert index < getAllAttending().size() : "index should be within range";
-
-        return getAllAttending().get(index).getLessonType();
+        int indexInMap = 0;
+        for (String lessonType : allLessons.keySet()) {
+            if (allLessons.get(lessonType).size() != 1) {
+                if (indexInMap != index) {
+                    indexInMap++;
+                } else {
+                    return lessonType;
+                }
+            }
+        }
+        return null;
     }
 
     public String getListOfLessonReplacements(String targetType) {
         StringBuilder details = new StringBuilder();
         int index = 1;
-        for (Lesson lesson : lessons) {
-            if (lesson.getLessonType().equals(targetType)) {
-                details.append(index).append(". [").append(lesson.getLessonType()).append("] ")
-                        .append(lesson.getDay()).append("   ")
+        for (ArrayList<Lesson> oneClass : allLessons.get(targetType).values()) {
+            details.append(index).append(":\n");
+            for (Lesson lesson : oneClass) {
+                details.append(lesson.getDay()).append("   ")
                         .append(convertTime(lesson.getStartTime())).append(" - ")
                         .append(convertTime(lesson.getEndTime())).append("\n");
-                index += 1;
             }
+            index++;
         }
         return details.toString();
     }
 
     public int getNumberOfReplacements(String targetType) {
-        int counter = 0;
-        for (Lesson lesson : lessons) {
-            if (lesson.getLessonType().equals(targetType)) {
-                counter += 1;
-            }
-        }
-        return counter;
+        return allLessons.get(targetType).size();
     }
 
-    public Lesson getReplacement(String targetType, int index) {
+    public ArrayList<Lesson> getReplacement(String targetType, int index) {
         assert index >= 0 : "index should be within range";
         assert index < lessons.size() : "index should be within range";
 
         int counter = 0;
-        for (Lesson lesson : lessons) {
-            if (lesson.getLessonType().equals(targetType)) {
-                counter += 1;
-            }
+        for (ArrayList<Lesson> oneClass : allLessons.get(targetType).values()) {
+            counter++;
             if (counter == index) {
-                return lesson;
+                return oneClass;
             }
         }
 
@@ -242,15 +278,35 @@ public class Module {
 
     public void replaceNewAttending(LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>> loadedLessons) {
         this.allAttending = loadedLessons;
+        this.attending = getAllAvailableLessons();
+
     }
 
 
-
-    public void replaceAttending(TimetableDict timetableDict, Lesson newLesson, Integer indexForLesson) {
-        Lesson oldLesson = attending.get(indexForLesson);
-        timetableDict.deleteLesson(oldLesson);
-        attending.set(indexForLesson, newLesson);
-        timetableDict.addLesson(newLesson, moduleCode);
+    /**
+     * Replace the current list of attending lessons.
+     * This method is used in the set command.
+     *
+     * @param timetableDict
+     * @param newLessons Array of lessons to be added
+     * @param indexForLesson
+     */
+    public void replaceAttending(TimetableDict timetableDict, ArrayList<Lesson> newLessons, String moduleType) {
+        ArrayList<Lesson> oldLesson = getOldLessons(moduleType);
+        String classNum = newLessons.get(0).getClassNumber();
+        allAttending.get(moduleType).clear();
+        allAttending.get(moduleType).put(classNum, newLessons);
+        attending = getAllAvailableLessons();
+        for (Lesson lesson : oldLesson) {
+            timetableDict.deleteLesson(lesson);
+        }
+        for (Lesson lesson : newLessons) {
+            timetableDict.addLesson(lesson, moduleCode);
+        }
+//        Lesson oldLesson = attending.get(indexForLesson);
+//        timetableDict.deleteLesson(oldLesson);
+//        attending.set(indexForLesson, newLessons);
+//        timetableDict.addLesson(newLessons, moduleCode);
     }
 
     public void replaceAttending(Lesson newLesson, Integer indexForLesson) {
@@ -258,6 +314,10 @@ public class Module {
         Timetable.timetableDict.deleteLesson(oldLesson);
         attending.set(indexForLesson, newLesson);
         Timetable.timetableDict.addLesson(newLesson, moduleCode);
+    }
+
+    private ArrayList<Lesson> getOldLessons(String moduleCode) {
+            return allAttending.get(moduleCode).values().iterator().next();
     }
 
     public void replaceAttending(Lesson newLesson) {

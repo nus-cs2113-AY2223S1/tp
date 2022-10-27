@@ -16,6 +16,17 @@ Timetabler is an app that allows NUS students taking official NUS modules to vie
 
 ## Features
 
+
+* [Add module](#adding-a-module-add) `add`
+* [List all modules](#listing-modules-list) `list`
+* [Find info on a module](#finding-information-on-a-module-info) `info`
+* [Set lesson for a module](#setting-a-modules-lessons-set) `set`
+* [Delete a module](#deleting-a-module-add) `delete`
+* [Auto-allocate lessons](#auto-allocating-all-modules-allocate) `allocate`
+* [Print timetable](#printing-the-timetable-print) `print`
+* [Quit program](#quitting-the-program-quit) `quit`
+
+
 ### Adding a module: `add`
 Command used to initiate the process of adding a new module.
 
@@ -51,6 +62,25 @@ Here are your modules:
      [Lecture] Undetermined Day   Undetermined Time - Undetermined Time
      [Lecture] Undetermined Day   Undetermined Time - Undetermined Time
      [Laboratory] Undetermined Day   Undetermined Time - Undetermined Time
+```
+---
+### Finding information on a module: `info`
+Command used to see information on a module.
+
+* Only module name, module code and description will be shown.
+
+**Example of Usage:**
+input: `info`
+
+```
+Please enter module code
+```
+input: `cs1010`
+```
+Here are some information about the module:
+Module Code: CS1010
+Module Name: Programming Methodology
+Module Description: This module introduces the fundamental concepts of problem solving by computing and programming using an imperative programming language. It is the first and foremost introductory course to computing.  Topics covered include computational thinking and computational problem solving, designing and specifying an algorithm, basic problem formulation and problem solving approaches, program development, coding, testing and debugging, fundamental programming constructs (variables, types, expressions, assignments, functions, control structures, etc.), fundamental data structures (arrays, strings, composite data types), basic sorting, and recursion.
 ```
 ---
 ### Setting a module's lessons: `set`
@@ -106,6 +136,20 @@ input: `1`
 Successfully deleted module!
 ```
 ---
+### Auto-allocating all modules: `allocate`
+Command used to initiate the process of automatically allocating modules.
+
+* Modules are allocated in the order they were added / listed as per the command `list`.
+* In the case where it is impossible to have a permutation of lessons such that there is no clash, the user will be notified and the lessons will not be allocated.
+* Users can still choose to manually set the modules to clash with the command `set`.
+
+**Example of Usage:**
+input: `allocate`
+
+```
+All your mods have been successfully allocated!
+```
+---
 ### Printing the timetable: `print`
 Command used to initiate the process of deleting a new module.
 
@@ -129,17 +173,27 @@ FRI |______|______|______|______|______|______|______|______|______|______|_____
  * Modules, if any, that start or end beyond the 8am to 8pm timings are excluded.
  * Timings are approximated to 30 minutes block with valid assumption that NUS mods are typically designed in such blocks.
 ```
-
 ---
+### Quitting the program: `quit`
+
+Command used to exit the program and stop its execution.
+
+**Example of usage**
+input: `quit`
+
+``` 
+ _____            __   __             ___              _       _ 
+/  ___|           \ \ / /            / _ \            (_)     | |
+\ `--.  ___  ___   \ V /___  _   _  / /_\ \ __ _  __ _ _ _ __ | |
+ `--. \/ _ \/ _ \   \ /  _ \| | | | |  _  |/ _` |/ _` | | '_ \| |
+/\__/ /  __/  __/   | | (_) | |_| | | | | | (_| | (_| | | | | |_|
+\____/ \___|\___|   \_/\___/ \__,_| \_| |_/\__, |\__,_|_|_| |_(_)
+                                            __/ |                
+                                           |___/                 
+```
 
 ## FAQ
 
 **Q**: How do I transfer my data to another computer?
 
-**A**: {your answer here}
-
-## Command Summary
-
-{Give a 'cheat sheet' of commands here}
-
-* Add todo `todo n/TODO_NAME d/DEADLINE`
+**A**: Copy all data files `Sem1DataDirectory` or / and `Sem2DataDirectory` together with the jar file to the new computer, in the same directory.

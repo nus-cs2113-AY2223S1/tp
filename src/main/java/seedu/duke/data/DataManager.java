@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 import seedu.duke.Exceptions;
-import seedu.duke.module.Module;
 
 public class DataManager {
     protected static String currSemester;
