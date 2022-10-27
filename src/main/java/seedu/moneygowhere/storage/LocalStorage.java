@@ -115,8 +115,8 @@ public class LocalStorage {
 
     /**
      * Reads saved data and configurations from a load file in a fixed directory, parse it and convert them into objects
-     * and add them to the arraylist that stores the corresponding objects. Sort the current arraylist afterwards based on saved
-     * configuration.
+     * and add them to the arraylist that stores the corresponding objects.
+     * Sort the current arraylist afterwards based on saved configuration.
      *
      */
     public void loadFromFile() {

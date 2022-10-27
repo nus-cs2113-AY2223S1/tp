@@ -1,7 +1,6 @@
 package seedu.moneygowhere.data.target;
 
 import seedu.moneygowhere.common.Messages;
-import seedu.moneygowhere.data.expense.Expense;
 import seedu.moneygowhere.exceptions.data.target.TargetManagerTargetNotFoundException;
 import seedu.moneygowhere.storage.LocalStorage;
 
