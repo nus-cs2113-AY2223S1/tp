@@ -25,7 +25,7 @@ public class Appointment {
         this.service = service;
     }
 
-    public void printAppointmentDetails(){
+    public void printAppointmentDetails() {
         System.out.println("Appointment ID: " + appointmentId);
         System.out.println("Service: " + service);
         System.out.println("Date: " + appointmentDate);
@@ -78,8 +78,8 @@ public class Appointment {
     }
 
     public void removeTaskFromAppointment(int taskId) {
-        for(Task task: tasks){
-            if(task.getTaskId()==taskId){
+        for (Task task: tasks) {
+            if (task.getTaskId() == taskId) {
                 tasks.remove(task);
                 break;
             }
