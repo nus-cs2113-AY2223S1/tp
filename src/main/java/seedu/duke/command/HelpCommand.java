@@ -62,7 +62,7 @@ public class HelpCommand extends Command {
 
         commandDescriptions.add(AddModuleCommand.getCommandDescription());
         commandDescriptions.add(DeleteModuleCommand.getCommandDescription());
-        commandDescriptions.add(DisplaySelectedModuleListCommand.getCommandDescription());
+        commandDescriptions.add(ListCommand.getCommandDescription());
         commandDescriptions.add(ExitCommand.getCommandDescription());
         commandDescriptions.add(ExportCommand.getCommandDescription());
         commandDescriptions.add(GetModuleCommand.getCommandDescription());
@@ -81,7 +81,7 @@ public class HelpCommand extends Command {
 
         commandUsages.add(AddModuleCommand.getUsage());
         commandUsages.add(DeleteModuleCommand.getUsage());
-        commandUsages.add(DisplaySelectedModuleListCommand.getUsage());
+        commandUsages.add(ListCommand.getUsage());
         commandUsages.add(ExitCommand.getUsage());
         commandUsages.add(ExportCommand.getUsage());
         commandUsages.add(GetModuleCommand.getUsage());

@@ -2,7 +2,6 @@ package seedu.duke.utils;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.stream.Stream;
 
 import org.apache.commons.lang3.StringUtils;
 

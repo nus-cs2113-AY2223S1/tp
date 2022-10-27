@@ -3,7 +3,6 @@ package seedu.duke.utils;
 import seedu.duke.model.SelectedModule;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class State {
