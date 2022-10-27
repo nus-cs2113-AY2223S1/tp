@@ -106,7 +106,7 @@ In the example above, `UserInterface#run()` calls `UserInterface#convertExpenseT
 
 ### Common Component
 
-The Common component consists of the class `Messages` and `Configurations`.
+The Common component consists of the classes `Messages` and `Configurations`.
 
 ![Component-Common](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentCommon.puml)
 
@@ -115,7 +115,7 @@ The `Configurations` class defines the configuration parameters used by the prog
 
 ### Exceptions Component
 
-The Exceptions components consists of various exception classes which inherits from `MoneyGoWhereException`.
+The Exceptions component consists of various exception classes which inherits from `MoneyGoWhereException`.
 
 ![Component-Exceptions](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentExceptions.puml)
 
@@ -125,11 +125,15 @@ Do refer to the [repository](https://github.com/AY2223S1-CS2113T-W11-1/tp/tree/m
 
 ### UserInterface Component
 
+The UserInterface component consists of the class `ConsolerInterface` which runs the command line interface that the user interacts with.
+
 ![Component-UserInterface](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentUserInterface.puml)
+
+
 
 ### Commands Component
 
-The Commands components consists of various exception classes which inherits from the abstract class `ConsoleCommand`.
+The Commands component consists of various console command classes which inherits from the abstract class `ConsoleCommand`.
 
 ![Component-Commands](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentCommands.puml)
 
