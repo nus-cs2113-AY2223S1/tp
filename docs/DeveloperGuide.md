@@ -138,7 +138,6 @@ The <code>Command</code> component can:
 Below is a table of command subclasses and their respective command type. The different command types extends from the
 Command class and are all in the command package.
 
-[//]: # (if the table is not necessary, remove it)
 | Command Word | Command Subclass                   | Intended Outcome                                                   |
 |--------------|------------------------------------|--------------------------------------------------------------------|
 | `add`        | `AddModuleCommand`                 | Adds the user input module into their timetable.                   |
@@ -167,7 +166,7 @@ Command class and are all in the command package.
 The <code>AddModuleCommand</code> class extends from the <code>Command</code> class and adds the user input module into
 their timetable.
 
-![AddModuleCommand Class](..\docs\images\addModuleCommandClass.png)
+![AddModuleCommand Class](images/AddModuleCommandClass.png)
 
 ##### How the feature is implemented
 The `AddModuleCommand` class extends the `Command` class.
