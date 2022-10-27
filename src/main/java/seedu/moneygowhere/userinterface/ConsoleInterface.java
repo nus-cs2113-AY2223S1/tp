@@ -1030,6 +1030,8 @@ public class ConsoleInterface {
                 runCommandDeleteIncome((ConsoleCommandDeleteIncome) consoleCommand);
             } else if (consoleCommand instanceof ConsoleCommandEditIncome) {
                 runCommandEditIncome((ConsoleCommandEditIncome) consoleCommand);
+            } else if (consoleCommand instanceof ConsoleCommandAddTarget) {
+                runCommandAddTarget((ConsoleCommandAddTarget) consoleCommand);
             } else if (consoleCommand instanceof ConsoleCommandViewTarget) {
                 runCommandViewTarget((ConsoleCommandViewTarget) consoleCommand);
             } else if (consoleCommand instanceof ConsoleCommandDeleteTarget) {
