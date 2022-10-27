@@ -9,6 +9,7 @@
   * [Architecture](#architecture)
   * [Common Classes](#storage-component)
 * [Implementation](#implementation)
+* 
 ## Acknowledgements
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
@@ -31,8 +32,8 @@ The head nurse can now:
 
 |Version| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
-|v1.0|new user|add appointments|schedule a customer’s appointment|
-| v1.0    | new user | remove appointments                                          | cancel a customer’s appointment                           |
+|v1.0|Head Nurse|add appointments|schedule a customer’s appointment|
+|v1.0|Head Nurse|remove appointments|cancel a customer’s appointment|
 |v1.0|Head Nurse|view all the upcoming appointments|keep track of the clinic’s schedule|
 |v1.0|Head Nurse|set the appointment status||
 |v1.0|Head Nurse|add new employees||
@@ -45,9 +46,11 @@ The head nurse can now:
 |v1.0|Head Nurse|add to the list of services this clinic can provide|select corresponding service when entering an appointment|
 |v1.0|Head Nurse|remove a service from the list of services the clinic can provide||
 |v1.0|Head Nurse|view the list of services this clinic can provide||
-|v2.0|Head Nurse| add tasks                                                    ||
-|v2.0|Head Nurse|remove tasks||
-|v2.0|Head Nurse|view tasks||
+|v2.0|Head Nurse|add tasks|create tasks to be done for the clinic|
+|v2.0|Head Nurse|remove tasks|remove tasks to be done for the clinic|
+|v2.0|Head Nurse|set tasks as completed|mark tasks as done when they are fulfilled|
+|v2.0|Head Nurse|view tasks|view the list of tasks that needs to be done|
+|v2.0|Head Nurse|reassign tasks|reassign a task from an employee to another|
 
 ## Implementation
 
