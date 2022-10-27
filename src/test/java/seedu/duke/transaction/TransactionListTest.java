@@ -21,7 +21,7 @@ class TransactionListTest {
     void initializeTest() {
         transactionList = new TransactionList();
         transaction = new Transaction("pen", "28sd37h2", "bui", 5,
-                LocalDate.parse("2022-10-03"));
+                LocalDate.parse("2022-10-03"), 3.2);
     }
 
     @Test
@@ -62,7 +62,7 @@ class TransactionListTest {
     @Test
     void unmarkFinished_notFinishedTx_expectFalse() throws TransactionNotFoundException {
         Transaction unfinishedTransaction = new Transaction("pen", "28sd37h2", "bui", 300,
-                LocalDate.parse("2022-10-03"));
+                LocalDate.parse("2022-10-03"), 3.2);
         transactionList.addTransaction(unfinishedTransaction);
         assertFalse(transactionList.getTransactionById(unfinishedTransaction.getTxId()).isFinished());
     }
@@ -77,7 +77,7 @@ class TransactionListTest {
     @Test
     void updateTransactionDuration_txCanBeFound_durationIsUpdated() throws TransactionNotFoundException {
         transactionList.addTransaction(transaction);
-        transactionList.updateTransactionDuration(transaction.getTxId(), 300);
+        transactionList.updateTransaction(transaction.getTxId(), 300, 192);
         assertEquals(300, transactionList.getTransactionById(transaction.getTxId()).getDuration());
     }
 
@@ -85,13 +85,13 @@ class TransactionListTest {
     void updateTransactionDuration_txCannotBeFound_exceptionIsThrown() {
         transactionList.addTransaction(transaction);
         assertThrows(TransactionNotFoundException.class,
-            () -> transactionList.updateTransactionDuration("982h28hw", 300));
+            () -> transactionList.updateTransaction("982h28hw", 300, 192));
     }
 
     @Test
     void hasThisBorrower_hasBorrower_returnTrue() {
         Transaction unfinishedTransaction = new Transaction("pen", "28sd37h2", "bui", 300,
-                LocalDate.parse("2022-10-03"));
+                LocalDate.parse("2022-10-03"), 3.2);
         transactionList.addTransaction(unfinishedTransaction);
         assertTrue(transactionList.hasThisBorrower("bui"));
     }
@@ -105,7 +105,7 @@ class TransactionListTest {
     @Test
     void hasThisItemBeingBorrowed_hasItem_returnTrue() {
         Transaction unfinishedTransaction = new Transaction("pen", "28sd37h2", "bui", 300,
-            LocalDate.parse("2022-10-03"));
+            LocalDate.parse("2022-10-03"),3.2);
         transactionList.addTransaction(unfinishedTransaction);
         assertTrue(transactionList.hasThisItemBeingBorrowed("28sd37h2"));
     }
@@ -120,7 +120,7 @@ class TransactionListTest {
     void convertTransactionListToFileFormat() {
         String transactionId = transaction.getTxId();
         transactionList.addTransaction(transaction);
-        assertEquals(transactionId + " | pen | 28sd37h2 | bui | 5 | 2022-10-03\n",
+        assertEquals(transactionId + " | pen | 28sd37h2 | bui | 5 | 2022-10-03 | 3.2\n",
                 transactionList.convertTransactionListToFileFormat());
     }
 

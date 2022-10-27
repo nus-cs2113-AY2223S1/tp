@@ -188,7 +188,24 @@ Username: jingwei Age: 19 Contact: 22384729
 ____________________________________________________________
 ```
 
-**...To be updated(Find user)**
+#### 3.2.4. ```find-user``` - Find users using keyword
+>List all items that are associated with a given keyword
+
+Format: ```find-user \k [KEYWORD]```
+
+Note:
+1. This command is case-insensitive
+
+Example of usage: ```find-user /k ng```
+
+Expected outcome:
+```
+____________________________________________________________
+Here are 2 user(s) in your list:
+   1. Username: jingwei Age: 21 Contact: 22384729 
+   2. Username: yixiang Age: 21 Contact: 69324729 
+____________________________________________________________
+```
 
 ### 3.3. Item-related features
 #### 3.3.1. ```add-item``` - Add a new item
@@ -340,6 +357,9 @@ ____________________________________________________________
 >List all items that are associated with a given keyword
 
 Format: ```find-item \k [KEYWORD]```
+
+Note:
+1. This command is case-insensitive
 
 Example of usage: ```find-item /k book```
 

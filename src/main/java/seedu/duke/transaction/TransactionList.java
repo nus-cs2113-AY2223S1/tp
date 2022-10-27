@@ -60,12 +60,14 @@ public class TransactionList {
      * @param duration      The new duration
      * @throws TransactionNotFoundException If the transaction cannot be found in the list
      */
-    public Transaction updateTransactionDuration(String transactionId, int duration)
+
+    //@@author jorellesee
+    public Transaction updateTransaction(String transactionId, int duration, double moneyTransacted)
             throws TransactionNotFoundException {
         for (int i = 0; i < this.transactionList.size(); ++i) {
             Transaction tx = this.transactionList.get(i);
             if (tx.getTxId().equals(transactionId)) {
-                Transaction updatedTx = tx.updateDuration(duration);
+                Transaction updatedTx = tx.update(duration, moneyTransacted);
                 this.transactionList.set(i, updatedTx);
                 return updatedTx;
             }
@@ -73,18 +75,7 @@ public class TransactionList {
         throw new TransactionNotFoundException(MESSAGE_TX_NOT_FOUND);
     }
 
-    public Transaction updateTransactionMoneyTransacted(String transactionId, double moneyTransacted)
-            throws TransactionNotFoundException {
-        for (int i = 0; i < this.transactionList.size(); ++i) {
-            Transaction tx = this.transactionList.get(i);
-            if (tx.getTxId().equals(transactionId)) {
-                Transaction updatedTx = tx.updateMoneyTransacted(moneyTransacted);
-                this.transactionList.set(i, updatedTx);
-                return updatedTx;
-            }
-        }
-        throw new TransactionNotFoundException(MESSAGE_TX_NOT_FOUND);
-    }
+    //@@author bdthanh
 
     /**
      * Deletes a transaction in the list given its ID.
@@ -114,6 +105,7 @@ public class TransactionList {
         throw new TransactionNotFoundException(MESSAGE_TX_NOT_FOUND);
     }
 
+    //@@author jorellesee
     public TransactionList getBorrowTransactionsByUser(String userName) {
         TransactionList returnList = new TransactionList();
         for (Transaction transaction : this.transactionList) {
@@ -124,13 +116,15 @@ public class TransactionList {
         return returnList;
     }
 
-    public double getTotalMoneyTransacted(){
+    public double getTotalMoneyTransacted() {
         int totalProfit = 0;
         for (Transaction transaction : transactionList) {
             totalProfit += transaction.getMoneyTransacted();
         }
         return totalProfit;
     }
+
+    //@@author bdthanh
 
     /**
      * Checks if there is a specific borrower given his/her username among unfinished transactions.

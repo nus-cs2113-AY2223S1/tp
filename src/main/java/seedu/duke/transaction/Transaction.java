@@ -107,12 +107,15 @@ public class Transaction {
     public int getDuration() {
         return duration;
     }
+
     /**
      * Gets the moneyTransacted.
      *
      * @return The Duration of transaction
      */
-    public double getMoneyTransacted(){ return moneyTransacted; }
+    public double getMoneyTransacted() {
+        return moneyTransacted;
+    }
 
     /**
      * Checks if the transaction finished or not.
@@ -134,21 +137,20 @@ public class Transaction {
                 + separator + duration + separator + createdAt + separator + moneyTransacted;
     }
 
+    //@@author winston-lim
+
     /**
      * Updates the duration of the transaction.
      *
      * @param newDuration The new duration
      * @return The updated transaction
      */
+    public Transaction update(int newDuration, double newMoneyTransacted) {
+        return new Transaction(this.transactionId, this.itemName, this.itemId, this.borrower,
+                newDuration, this.createdAt, newMoneyTransacted);
+    }
 
-    public Transaction updateDuration(int newDuration) {
-        return new Transaction(this.transactionId, this.itemName, this.itemId, this.borrower,
-                newDuration, this.createdAt, this.moneyTransacted);
-    }
-    public Transaction updateMoneyTransacted(double newMoneyTransacted){
-        return new Transaction(this.transactionId, this.itemName, this.itemId, this.borrower,
-                this.duration, this.createdAt, newMoneyTransacted);
-    }
+    //@@author bdthanh
 
     /**
      * Overrides toString method of Object to get string representation of Transaction.
@@ -158,18 +160,18 @@ public class Transaction {
     @Override
     public String toString() {
         String itemId = "ItemID: " + this.itemId + " ";
-        String transactionIcon = "Status: [" + (isFinished() ? "Returned" : "On loan") + "] ";
-        String transactionId = "TransactionID: " + this.transactionId + " ";
+        String transactionIcon = "Status: " + (isFinished() ? "Finished " : "Unfinished ");
+        String transactionId = "TxID: " + this.transactionId + " ";
         String itemName = "ItemName: " + this.itemName + " ";
-        String usersId = "BorrowerID: " + this.borrower + " ";
-        String moneyTransactedString = "Money Transacted: " + this.moneyTransacted + " ";
+        String usersId = "Borrower: " + this.borrower + " ";
+        String moneyTransactedString = " MoneyTransacted: " + this.moneyTransacted + " ";
 
         if (!isFinished()) {
             String remainDays = " (" + ChronoUnit.DAYS.between(LocalDate.now(), getReturnDate())
-                    + " day(s) remaining)";
+                    + " day(s) left)";
             String returnDate =
                     "ReturnDate: " + DateParser.formatDateToString(returnedAt) + remainDays;
-            return transactionIcon + transactionId + itemName + itemId + usersId + returnDate;
+            return transactionIcon + transactionId + itemName + itemId + usersId + returnDate + moneyTransactedString;
         }
         String returnedDate = "ReturnedDate: " + DateParser.formatDateToString(returnedAt);
 

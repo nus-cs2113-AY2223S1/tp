@@ -11,11 +11,22 @@ import seedu.duke.command.item.RemoveItemCommand;
 import seedu.duke.command.item.SortItemCommand;
 import seedu.duke.command.item.UpdateItemCommand;
 import seedu.duke.command.item.ViewItemCommand;
-import seedu.duke.command.transaction.*;
-import seedu.duke.command.user.*;
+import seedu.duke.command.transaction.AddTransactionCommand;
+import seedu.duke.command.transaction.ListTransactionsCommand;
+import seedu.duke.command.transaction.RemoveTransactionCommand;
+import seedu.duke.command.transaction.UpdateTransactionCommand;
+import seedu.duke.command.transaction.ViewTransactionCommand;
+import seedu.duke.command.transaction.ViewTransactionsByStatusCommand;
+import seedu.duke.command.transaction.ViewTransactionsByUserCommand;
 import seedu.duke.command.Command;
 import seedu.duke.command.exit.ExitCommand;
 import seedu.duke.command.help.HelpCommand;
+import seedu.duke.command.user.AddUserCommand;
+import seedu.duke.command.user.FindUserCommand;
+import seedu.duke.command.user.ListUsersCommand;
+import seedu.duke.command.user.RemoveUserCommand;
+import seedu.duke.command.user.ViewUserCommand;
+import seedu.duke.command.user.ViewUserDebtCommand;
 import seedu.duke.exception.CommandNotFoundException;
 import seedu.duke.exception.InsufficientArgumentsException;
 import seedu.duke.exception.InvalidArgumentException;
@@ -59,8 +70,7 @@ public class CommandParser {
     private static final String COMMAND_REMOVE_TX = "remove-tx";
     private static final String COMMAND_FIND_TX = "find-tx";
     private static final String COMMAND_FIND_TX_BY_USER = "find-tx-by-user";
-    private static final String COMMAND_VIEW_USER_DEBT = "view-user-debt"; //idk yet
-
+    private static final String COMMAND_VIEW_USER_DEBT = "view-user-debt";
     private static final String COMMAND_SORT_ITEMS = "sort-items";
     private static final String COMMAND_LIST_CATEGORIES = "list-categories";
     private static final String COMMAND_UPDATE_ITEM = "update-item";
@@ -166,7 +176,7 @@ public class CommandParser {
         case COMMAND_REMOVE_USER:
             return new RemoveUserCommand(parts, userList, itemList, transactionList);
         case COMMAND_VIEW_USER_DEBT:
-            return new ViewUserDebtCommand(parts,userList,transactionList);
+            return new ViewUserDebtCommand(parts, userList, transactionList);
         case COMMAND_REMOVE_ITEM:
             return new RemoveItemCommand(parts, itemList, transactionList);
         case COMMAND_REMOVE_TX:
@@ -174,7 +184,7 @@ public class CommandParser {
         case COMMAND_FIND_TX:
             return new ViewTransactionsByStatusCommand(parts, transactionList);
         case COMMAND_FIND_TX_BY_USER:
-            return new ViewTransactionsByUserCommand(parts,transactionList,userList);
+            return new ViewTransactionsByUserCommand(parts, transactionList, userList);
         case COMMAND_SORT_ITEMS:
             return new SortItemCommand(parts, itemList, transactionList);
         case COMMAND_LIST_CATEGORIES:
@@ -186,7 +196,7 @@ public class CommandParser {
         case COMMAND_UPDATE_ITEM:
             return new UpdateItemCommand(parts, itemList, transactionList);
         case COMMAND_UPDATE_TRANSACTION:
-            return new UpdateTransactionCommand(parts, transactionList, itemList);
+            return new UpdateTransactionCommand(parts, transactionList);
 
         default:
             throw new CommandNotFoundException(MESSAGE_COMMAND_UNRECOGNIZABLE);

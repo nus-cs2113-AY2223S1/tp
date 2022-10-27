@@ -14,7 +14,7 @@ import seedu.duke.transaction.TransactionList;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INSUFFICIENT_ARGUMENTS;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PARTS;
 
-// @@author jingwei55
+// @@author jorellesee
 public class ViewUserDebtCommand extends Command {
     private final String[] parts;
     private final UserList userList;
@@ -55,7 +55,7 @@ public class ViewUserDebtCommand extends Command {
         String userName = getArgsViewUserDebtCmd();
         if (isValidUser(userName)) {
             double totalDebt = transactionList.getBorrowTransactionsByUser(userName).getTotalMoneyTransacted();
-            System.out.println(totalDebt);
+            Ui.printResponse("The debt of " + userName + " is: $" + totalDebt);
         }
         return false;
     }
