@@ -55,33 +55,9 @@ public class ParseCheckProperty extends Parser {
         return extractCommandDetails(rawCommandDetail, flags, flagIndexPositions);
     }
 
-    private ArrayList<Integer> convertProcessedCommandDetailsToInteger(ArrayList<String> processedCommandDetails)
-            throws NotIntegerException {
-        ArrayList<Integer> integerDetails = new ArrayList<>();
-        for (String detail : processedCommandDetails) {
-            int integer;
-            try {
-                integer = Integer.parseInt(detail);
-            } catch (NumberFormatException e) {
-                throw new NotIntegerException(EXCEPTION);
-            }
-            integerDetails.add(integer - 1); // Convert to 0-index
-        }
-        return integerDetails;
-    }
-
     private void validateCheckPropertyDetails(ArrayList<Integer> checkPropertyDetails) throws InvalidIndexException {
         int propertyIndex = checkPropertyDetails.get(0);
         checkForPropertyListIndexOutOfBounds(propertyIndex);
-    }
-
-    private int[] getFlagIndexPositions(String commandDetail, String[] flags) {
-        int[] flagIndexPositions = new int[flags.length];
-
-        for (int i = 0; i < flags.length; i++) {
-            flagIndexPositions[i] = commandDetail.indexOf(flags[i]);
-        }
-        return flagIndexPositions;
     }
 
     private void checkForMissingFlags(int[] flagIndexPositions) throws MissingFlagException {
@@ -96,27 +72,6 @@ public class ParseCheckProperty extends Parser {
         for (int i = 0; i < flagIndexPositions.length - 1; i++) {
             checkForCorrectFlagOrder(flagIndexPositions[i], flagIndexPositions[i + 1]);
         }
-    }
-
-    private ArrayList<String> extractCommandDetails(String rawCommandDetail, String[] flags,
-                                                    int[] flagIndexPositions) {
-        ArrayList<String> extractedCommandDetails = new ArrayList<>();
-        for (int i = 0; i < flags.length; i++) {
-            String extractedDetail;
-            if (i == flags.length - 1) {
-                /* The extracted detail for the last flag starts from the char after the flag, to the end of
-                   rawCommandDetails */
-                extractedDetail = extractDetail(rawCommandDetail, flagIndexPositions[i] + flags[i].length());
-            } else {
-                // The extracted detail for non-last starts from the char after the flag, to index before the next flag
-                extractedDetail = extractDetail(
-                        rawCommandDetail,
-                        flagIndexPositions[i] + flags[i].length(),
-                        flagIndexPositions[i + 1]);
-            }
-            extractedCommandDetails.add(extractedDetail.trim());
-        }
-        return extractedCommandDetails;
     }
 
     private void checkForPropertyListIndexOutOfBounds(int propertyIndex) throws InvalidIndexException {
@@ -135,14 +90,4 @@ public class ParseCheckProperty extends Parser {
             throw new IncorrectFlagOrderException(EXCEPTION);
         }
     }
-
-    private static String extractDetail(String rawDetail, int beginIndex) {
-        return rawDetail.substring(beginIndex).trim();
-    }
-
-    private static String extractDetail(String rawDetail, int beginIndex, int endIndex) {
-        return rawDetail.substring(beginIndex, endIndex).trim();
-    }
-
-
 }

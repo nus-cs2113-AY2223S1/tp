@@ -539,6 +539,9 @@ public class Storage {
                     Property pairingProperty = new Property(landLordName, propertyAddress, rentalPrice, unitType);
 
                     if ((clientParameters.length == 4) && (propertyParameters.length == 4)) {
+                        boolean isCorrectClient = false;
+                        boolean isCorrectProperty = false;
+
                         for (int i = 0; i < clientList.getCurrentListSize(); i += 1) {
                             String clientListName = clientList.getClientList().get(i).getClientName();
                             String clientListContactNumber = clientList.getClientList().get(i).getClientContactNumber();
@@ -549,7 +552,7 @@ public class Storage {
                             boolean isCorrectClientEmail = clientListEmail.equals(clientEmail);
                             boolean isCorrectClientBudget = clientListBudget.equals(clientBudget);
 
-                            boolean isCorrectClient = isCorrectClientName && isCorrectClientContact
+                            isCorrectClient = isCorrectClientName && isCorrectClientContact
                                     && isCorrectClientEmail && isCorrectClientBudget;
 
                             if (isCorrectClient) {
@@ -567,13 +570,17 @@ public class Storage {
                             boolean isCorrectRental = propertyListRentalPrice.equals(rentalPrice);
                             boolean isCorrectUnitType = propertyListUnitType.equals(unitType);
 
-                            boolean isCorrectProperty = isCorrectLandlordName && isCorrectAddress
+                            isCorrectProperty = isCorrectLandlordName && isCorrectAddress
                                     && isCorrectRental && isCorrectUnitType;
                             if (isCorrectProperty) {
                                 pairingProperty = propertyList.getPropertyList().get(i);
                             }
                         }
-                        pairingList.addPairing(pairingClient, pairingProperty);
+
+                        if (isCorrectProperty && isCorrectClient) {
+                            pairingList.addPairing(pairingClient, pairingProperty);
+                        }
+
                     }
                 }
             }
@@ -586,12 +593,4 @@ public class Storage {
         return unitTypeHashMap.get(unitTypeString);
     }
 
-    public String getUnitTypeString(String unitTypeLabel) {
-        for (String key : unitTypeHashMap.keySet()) {
-            if (unitTypeHashMap.get(key).equals(unitTypeLabel)) {
-                return key;
-            }
-        }
-        return null;
-    }
 }
