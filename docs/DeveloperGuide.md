@@ -54,7 +54,7 @@ The `VisitList` Component,
 ### PrescriptionList component
 **API**: `PrescriptionList.java`
 
-![](../diagrams/PrescriptionListClassDiagram.png)
+![](images/PrescriptionListClassDiagram.png)
 
 The `PrescriptionList` component,
 * stores the list of prescriptions
@@ -80,20 +80,33 @@ specified index
 * **`activatePrescription`** - This method allows user to set the prescription of specified index as active.
 * **`deactivatePrescription`** - This method allows user to set the prescription of specified index as inactive.
 
-### Prescription component
-The `Prescription` component,
-* stores the medicine name
-* the medicines timeInterval 
-* patient ID
-* dosage
-* if the Prescription is active or not 
+**Members in `Prescription` class**
 
-**Methods in `Prescription` class:**
-* 'add' - creates a new Prescription - needs to insert all the components except if active or not (if not included the default is active )
-* Getters and Setters for each of the components
-* Print format
-* method that checks if a patient has the Prescription
-* method that checks if a patient has the Prescription and if the Prescription is active
+* `medicine` - Stores the medicine name
+* `timeInterval` - The time Interval the medicine is taken between
+* `patientId` - The identification number of patient 
+* `dosage` 
+* `isActive` - Whether is the prescription currently active or not
+
+How adding a new prescription into the list works:
+
+1. When `PrescriptionList` is called to add a new prescription with the given details, it calls the constructor of the 
+`Prescription` class to create the `Prescription` instance.
+2. The new prescription is then added to the `ArrayList<Prescription>`
+3. Lastly, `UI` prints an acknowledge message of what the new prescription has.
+
+![](images/PrescriptionListAdd.png)
+
+How activating/deactivating an existing prescription in the list works:
+
+1. When `activate(ui, 1)` initiates an action in the `PrescriptionList`, it transfer the prescriptionNumber `1` into
+the index in the array.
+2. It gets the `prescriptionEdited` from the `ArrayList<>` with the resolved index.
+3. Then, the `prescriptionEdited` is set active.
+4. Lastly, `UI` prints an acknowledge message of the most updated details of the prescription.
+
+![](images/PrescriptionListActivate.png)
+
 ## Product scope
 ### Target user profile
 
