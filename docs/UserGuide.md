@@ -45,6 +45,23 @@ _Written by: Chua Han Yong Darren_
 ## About This Guide
 
 ### What is in Moolah Manager
+Moolah Manager is a comprehensive app for Financial bookkeeping using an intuitive CLI platform, with many features
+you can use!
+
+In our managing records features, you can add, delete, edit monetary transaction entries to keep their records 
+up-to-date. Moolah Manager also features the ability to edit dates of transactions and add categories to better 
+classify the expenses.
+
+As for statistics, Moolah Manager supports the viewing of summarised expenses in daily, weekly and monthly formats. 
+This enables you to better understand your expenses, and savings across various time periods. In addition, Moolah 
+Manager also shows which category of expenses users spend more on so that they can better manage spending. 
+
+Beyond just tracking expenses, Moolah Manager allows you to set your expense budgets to take charge of your spending 
+habits. You will be able to allocate budgets for different categories or for the week to better stick to your plans. 
+
+Lastly, our additional features will ensure that you will be able to seek help with the commands with a list of usable 
+commands and guides for using the application for first time users. Moolah Manager will also save the application 
+expenses everytime it is updated, so that you don’t have to!
 
 _Written by: Paul Low_
 
@@ -308,7 +325,125 @@ _Written by: Brian Wong Yun Long_
 
 ## Budgeting and Financial Insights
 
-### Viewing the Statistics: `stats`
+### Viewing Moolah Statistics: `stats`
+View the general statistics of monetary transactions, from 3 main views: Categorical Savings, Monthly Expenditure and
+Time Insights. Various statistics listed include total income, total expense, total savings, total expenses, sum of expenses
+ordered by category or time and more.
+
+
+#### Statistics for Categorical Savings
+View the total amount sum of all transactions in each category. 
+
+**Format:** `stats s/categorical_savings`
+
+**Example(s):**
+- `stats s/categorical_savings`
+
+**Expected output:**
+```
+stats s/categorical_savings
+____________________________________________________________
+Here are your requested statistics for the categorical_savings type:
+[bonus] $540
+[transport] $11
+[salary] $2000
+[food] $80
+
+____________________________________________________________
+```
+
+#### Statistics for Monthly Expenditure
+View the total income, expense and savings values of all transactions in each month.
+
+**Format:** `stats s/monthly_expenditure`
+
+**Example(s):**
+- `stats s/monthly_expenditure`
+
+**Expected output:**
+```
+stats s/monthly_expenditure
+____________________________________________________________
+Here are your requested statistics for the monthly_expenditure type:
+[Sep 2022]
+Income: $2000
+Expense: $81
+Savings: $1919
+Spending Habit: Excellent! You saved quite a lot this month.
+
+[Aug 2022]
+Income: $0
+Expense: $10
+Savings: $-10
+Spending Habit: Oops, you spent too much. Do manage your expenses within your constraints.
+
+[Oct 2022]
+Income: $540
+Expense: $0
+Savings: $540
+Spending Habit: Excellent! You saved quite a lot this month.
+
+____________________________________________________________
+```
+#### Statistics for Time Insights of specific time period
+View monthly expenditure, total income, expense and savings values of all transactions in the specified year or month.
+**Format:** `stats s/time_insights y/YEAR [m/MONTH]`
+
+**Example(s):**
+
+- `stats s/time_insights y/2022`
+- `stats s/time_insights y/2022 m/10`
+
+**Expected output:**
+```
+stats s/time_insights y/2022
+____________________________________________________________
+Here are the total savings and expenses for
+Year: 2022
+
+-----CATEGORIES-----
+[bonus] $540
+[transport] $11
+[salary] $2000
+[food] $80
+
+-----EXPENDITURE-----
+Income: $2540
+Expense: $91
+Savings: $2449
+____________________________________________________________
+```
+
+
+#### Statistics for Time Insights of past periods from current date
+View monthly expenditure, total income, expense and savings values of all transactions in the specified number of periods
+before current date.
+
+**Format:** `stats s/time_insights p/PERIOD n/NUMBER `
+
+**Example(s):**
+
+- `stats s/time_insights p/weeks n/3`
+- `stats s/time_insights p/months n/12`
+
+**Expected output:**
+```
+stats s/time_insights p/weeks n/3
+____________________________________________________________
+Here are the total savings and expenses for
+The past 3 weeks: 
+
+-----CATEGORIES-----
+[bonus] $540
+
+-----EXPENDITURE-----
+Income: $540
+Expense: $0
+Savings: $540
+____________________________________________________________
+```
+
+                                                
 
 _Written by: Paul Low_
 
@@ -405,8 +540,19 @@ _Written by: Yong Chin Han_
 
 ## FAQ
 
-**Q**: How do I transfer my data to another computer?
+**Q**: How do I view commands while the app is running? 
+* **A**: Type `help` command to view all the commands!
 
-**A**: {your answer here}
+**Q**: Can I directly input values into the duke.txt file? 
+* **A**: It is strongly advisable not to edit the duke.txt file as that could disrupt Moolah Manager's retrieval of the data.
+
+**Q**: What should I do if most of my transactions are incorrect?
+* **A**: You can consider using the edit or delete function to modify individual transactions at a time. However, if
+ there are too many transactions to change, you can consider using the purge function to delete all values. 
+ 
+**Q**: What is the purpose of using the different statistics commands?
+* **A**: They provide you with great flexibility in viewing the current transactions from different perspectives. To analyze 
+all of the stored transactions, use `stats s/categorical_savings` or `stats s/monthly_expenditure`. Otherwise, use stats s/time_insights
+to analyze transactions for a specified time period.  
 
 _Written by: Paul Low_
