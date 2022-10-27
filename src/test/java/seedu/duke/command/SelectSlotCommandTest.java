@@ -57,7 +57,7 @@ public class SelectSlotCommandTest {
 
         String expectedOutput = state.getSelectedModulesList().get(0).getSelectedSlots().toString();
 
-        // selected module list should have cs2113 with lecture 1, tutorial 3
+        // selected module list should have cs2141 with lecture 2, tutorial 01
         assertEquals("{LECTURE=2, TUTORIAL=01}", expectedOutput);
     }
 
