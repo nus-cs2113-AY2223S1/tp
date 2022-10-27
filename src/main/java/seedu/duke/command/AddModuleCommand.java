@@ -53,7 +53,7 @@ public class AddModuleCommand extends Command {
         SelectedModule selectedModule;
 
         boolean isModuleOffered = isModuleOfferedInCurrentSemester(module, state);
-        if (!isModuleOffered){
+        if (!isModuleOffered) {
             ui.addMessage(module.moduleCode + " is not being offered this semester!");
             ui.displayUi();
             return;

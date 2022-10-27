@@ -56,12 +56,6 @@ class AddModuleCommandTest {
     }
 
     @Test
-    void testExecute_InvalidModuleCodeInInput_CorrectErrorMessageShows() throws YamomException {
-        //String[] testInput = {"add","cs1010s"};
-        //AddModuleCommand addModuleCommand = new
-    }
-
-    @Test
     void testIsExit_false() throws YamomException {
         String[] testInput = {"add","cs2113"};
         assertFalse(new AddModuleCommand(testInput).isExit());
