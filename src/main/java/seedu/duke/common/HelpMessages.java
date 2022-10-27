@@ -19,7 +19,7 @@ public enum HelpMessages {
             + "transactions retrieved from the records must match all the filter tags that have been specified in "
             + "order to be recognized as a valid record. The m/MONTH and y/YEAR tags should not be used together "
             + "with p/PERIOD and n/NUMBER tags."),
-    COMMAND_DESCRIPTION_PURGE("Delete all transaction entries from the list of transactions."),
+    COMMAND_DESCRIPTION_PURGE("Delete all transaction entries from the list of transactions. User must enter 'Y' to confirm the purge."),
     COMMAND_DESCRIPTION_STATS("View financial insights such as categorical savings and periodic expenditure based on "
             + "the transaction entries in the application. The m/MONTH and y/YEAR tags should not be used together "
             + "with p/PERIOD and n/NUMBER tags."),
