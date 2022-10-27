@@ -2,7 +2,7 @@ package seedu.duke.parsermanager;
 
 import seedu.duke.ClientList;
 import seedu.duke.command.Command;
-import seedu.duke.command.CommandCheckClient;
+import seedu.duke.command.check.CommandCheckClient;
 import seedu.duke.exception.IncorrectFlagOrderException;
 import seedu.duke.exception.InvalidIndexException;
 import seedu.duke.exception.MissingFlagException;

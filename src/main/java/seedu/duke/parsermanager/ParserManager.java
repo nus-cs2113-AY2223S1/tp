@@ -98,7 +98,7 @@ public class ParserManager {
             if (isClient) {
                 return new ParseCheckClient(commandDetail, clientList);
             } else if (isProperty) {
-                return new ParseCheckProperty(commandDetail, propertyList);
+                return new ParseCheckProperty(commandDetail);
             } else {
                 throw new UndefinedSubCommandTypeException(MESSAGE_MISSING_SUB_COMMAND_TYPE);
             }

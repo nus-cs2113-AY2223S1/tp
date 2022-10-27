@@ -1,8 +1,8 @@
 package seedu.duke.exception.pairunpair.pair;
 
+//@@author ngdeqi
 import java.util.ArrayList;
 
-//@@author ngdeqi
 import static seedu.duke.Messages.MESSAGE_MISSING_FLAG;
 import static seedu.duke.Messages.MESSAGE_PAIR_WRONG_FORMAT;
 

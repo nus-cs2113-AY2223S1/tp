@@ -1,4 +1,6 @@
-package seedu.duke.command;
+package seedu.duke.command.check;
+
+import seedu.duke.command.Command;
 
 /**
  * Represents a check-type command.

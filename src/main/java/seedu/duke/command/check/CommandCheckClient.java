@@ -1,4 +1,4 @@
-package seedu.duke.command;
+package seedu.duke.command.check;
 
 import seedu.duke.Client;
 import seedu.duke.ClientList;
