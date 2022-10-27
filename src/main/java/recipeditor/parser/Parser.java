@@ -49,6 +49,7 @@ public class Parser {
         }
     }
 
+
     private static Command parseAddCommand() {
         boolean saveToTemp = new Editor().enterEditor(Storage.TEMPLATE_PATH);
         boolean exitLoop = (saveToTemp) ? false : true;

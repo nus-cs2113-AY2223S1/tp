@@ -25,13 +25,15 @@ Click to view the latest release of [RecipEditor]((https://github.com/AY2223S1-C
 
 ## Acknowledgements
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+### External Libraries
+- org.apache.commons:commons-lang3:3.0 [link](https://mvnrepository.com/artifact/org.apache.commons/commons-lang3/3.0)
+- org.apiguardian:apiguardian-api:1.1.0 [link](https://mvnrepository.com/artifact/org.apiguardian/apiguardian-api)
 
 ## Design
 ### Architecture
 
 <p align="center" width="100%">
-  <img width="80%" src="images/MainClassDiagram.png" alt="Storage Class Diagram"/>
+  <img width="80%" src="images/Architecture.png" alt="Storage Class Diagram"/>
 </p>
 
 `Recipeditor` calls to various class a perform all the tasks assigned by the user.
@@ -135,7 +137,8 @@ The recipe module encapsulates the array, recipe and ingredient objects.
 ## Product scope
 ### Target user profile
 
-{Describe the target user profile}
+Target user of the application is avid cook who wants to organize their recipe list for ease of reference and search 
+
 ### Value proposition
 
 {Describe the value proposition: what problem does it solve?}

@@ -1,0 +1,41 @@
+@startuml
+skinparam Style strictuml
+skinparam SequenceMessageAlignment center
+
+autoactivate on
+
+
+
+Parser -> Parser: parseCommand(input)
+alt AddCommand
+    create AddMode
+    Parser -> AddMode: <<create>>
+    ref over AddMode: AddMode logics
+    AddMode --> Parser: AddCommand
+else EditCommand
+    create EditMode
+    Parser -> EditMode: <<create>>
+    ref over EditMode: EditMode logic
+    EditMode --> Parser: EditCommand
+else ListCommand
+    participant ":ListCommand" as List
+    create List
+    Parser -> List:<<create>>
+    List --> Parser: ListCommand
+else ExitCommand
+    participant ":ExitCommand" as Exit
+    create Exit
+    Parser -> Exit:<<create>>
+    Exit --> Parser: ExitCommand
+else ViewCommand
+    participant ":ViewCommand" as View
+    create View
+    Parser -> View:<<create>>
+    View --> Parser: ViewCommand
+else Invalid Command
+    participant ":InvalidCommand" as Invalid
+    create Invalid
+    Parser -> Invalid:<<create>>
+    Invalid --> Parser: InvalidCommand
+end
+@enduml

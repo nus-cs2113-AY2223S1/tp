@@ -20,6 +20,7 @@ public class AddCommand extends Command {
 
     public CommandResult execute() {
         if (isValid) {
+
             assert addedRecipe != null;
             RecipeList.addRecipe(addedRecipe); //HERE SEEM TO THROW ERROR
             Storage.writeRecipeToFile(Recipeditor.DATA_FILE_PATH, addedRecipe);
