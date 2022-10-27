@@ -6,7 +6,6 @@
 ## Contents
 * [Introduction](#introduction)
 * [Quick Start](#quick-start)
-* [Legend](#legend)
 * [Features](#features)
    * [Managing Your Expenses](#managing-your-expenses)
    * [Managing Your Recurring Payments](#managing-your-recurring-payments)
@@ -27,11 +26,6 @@ MoneyGoWhere is a financial planner to help you manage your finances.
     2. Verify that the version of Java installed is ```Java 11```.
 2. Ensure that you have write permissions for the directory in which you are executing the program.
 
-## Legend
-> ⚠️ **Warnings**
-
-> 💡 **Tips**
-
 ## Features
 
 ## Managing your expenses
@@ -40,17 +34,12 @@ Adds a new expense to the list of expenses.
 
 Syntax: `Add-Expense -n NAME -a AMOUNT [-d DATE_TIME] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p MODE OF PAYMENT]`
 
-<details markdown = "1">
-<summary>⚠️️️️ Syntax Notes</summary>
-<ul>
-<li>`NAME`, `DESCRIPTION`, `CATEGORY`, `REMARKS` and `MODE OF PAYMENT` are text strings. You may use spaces within the text if you wrap the text with double quotes.</li>
-<li>`CURRENCY` is a text string. It must be a valid currency code.</li>
-<li> `AMOUNT` is a decimal value.</li>
-<li>`DATE_TIME` is a text string in the format `"dd/MM/yyyy HHmm"`.</li>
-</ul>
-</details>
+> ⚠️️️️ Syntax Notes
+> * `NAME`, `DESCRIPTION`, `CATEGORY`, `REMARKS` and `MODE OF PAYMENT` are text strings. You may use spaces within the text if you wrap the text with double quotes.</li>
+> * `CURRENCY` is a text string. It must be a valid currency code.
+> * `AMOUNT` is a decimal value.
+> * `DATE_TIME` is a text string in the format `"dd/MM/yyyy HHmm"`.
 
-<br>
 
 Examples of usage: 
 * `Add-Expense -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359" -t "Monthly payment" -c "Work expenses" -r "Remarks here" -x USD -p PayLah`
@@ -64,14 +53,9 @@ Displays past expenses you have added.
 
 Syntax: `View-Expense [-e EXPENSE_NUMBER]`
 
-<details>
-<summary>⚠️️️️ Syntax Notes</summary>
-
-`EXPENSE_NUMBER` is an integer value.
-If this argument is provided, MoneyGoWhere will only display the specified expense.
-</details>
-
-<br>
+> ⚠️️️️ Syntax Notes
+> * `EXPENSE_NUMBER` is an integer value.
+> * If this argument is provided, MoneyGoWhere will only display the specified expense.
 
 Example of usage:
 * `View-Expense`
@@ -84,13 +68,8 @@ Deletes an expense from the list of expenses.
 
 Syntax: `Delete-Expense -e EXPENSE_NUMBER`
 
-<details>
-<summary>⚠️️️️ Syntax Notes</summary>
-
-`EXPENSE_NUMBER` is an integer value.
-</details>
-
-<br>
+> ⚠️️️️ Syntax Notes
+> * `EXPENSE_NUMBER` is an integer value.
 
 Example of usage:
 * `Delete-Expense -e 1`
@@ -102,17 +81,12 @@ Edits an existing expense in the list of expenses.
 
 Syntax: `Edit-Expense -e EXPENSE_NUMBER [-n NAME] [-a AMOUNT] [-d DATE_TIME] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p MODE OF PAYMENT]`
 
-<details>
-<summary>⚠️️️️ Syntax Notes</summary>
-
-* `EXPENSE_NUMBER` is an integer value.
-* `NAME`, `DESCRIPTION`, `CATEGORY`, `REMARKS` and `MODE OF PAYMENT` are text strings. You may use spaces within the text if you wrap the text with double quotes.
-* `CURRENCY` is a text string. It must be a valid currency code.
-* `AMOUNT` is a decimal value.
-* `DATE_TIME` is a text string in the format `"dd/MM/yyyy HHmm"`.
-</details>
-
-<br>
+> ⚠️️️️ Syntax Notes
+> * `EXPENSE_NUMBER` is an integer value.
+> * `NAME`, `DESCRIPTION`, `CATEGORY`, `REMARKS` and `MODE OF PAYMENT` are text strings. You may use spaces within the text if you wrap the text with double quotes.
+> * `CURRENCY` is a text string. It must be a valid currency code.
+> * `AMOUNT` is a decimal value.
+> * `DATE_TIME` is a text string in the format `"dd/MM/yyyy HHmm"`.
 
 Example of usage:
 * `Edit-Expense -e 1 -n Subscription -a 13.37`
@@ -126,14 +100,9 @@ descending order.
 
 Syntax: `Sort-Expense -t TYPE -o ORDER`
 
-<details>
-<summary>⚠️️️️ Syntax Notes</summary>
-
-* `TYPE` is a text string. It can be either `alphabetical`, `amount`, `date` or `currency`.
-* `ORDER` is a text string. It can be either `ascending` or `descending`.
-</details>
-
-<br>
+> ⚠️️️️ Syntax Notes
+> * `TYPE` is a text string. It can be either `alphabetical`, `amount`, `date` or `currency`.
+> * `ORDER` is a text string. It can be either `ascending` or `descending`.
 
 Example of usage:
 * `Sort-Expense -t date -o ascending`
@@ -148,15 +117,10 @@ Converts the currency of an expense from the list of expenses.
 
 Syntax: `Convert-Currency -e EXPENSE_NUMBER -x CURRENCY [-r RATE]`
 
-<details>
-<summary>⚠️️️️ Syntax Notes</summary>
-
-* `EXPENSE_NUMBER` is an integer value.
-* `CURRENCY` is a text string. It must be a valid currency code.
-* `RATE` is a decimal value. This rate should be the rate to convert the expense amount from the old currency to the new currency.
-</details>
-
-<br>
+> ⚠️️️️ Syntax Notes
+> * `EXPENSE_NUMBER` is an integer value.
+> * `CURRENCY` is a text string. It must be a valid currency code.
+> * `RATE` is a decimal value. This rate should be the rate to convert the expense amount from the old currency to the new currency.
 
 Example of usage:
 * `Convert-Currency -e 1 -x USD -r 1.35`
@@ -167,16 +131,11 @@ Adds a recurring payment to the list of recurring payments
 
 Syntax: `Add-RecurringPayment -n NAME -i INTERVAL -a AMOUNT [-t DESCRIPTION] [-c CATEGORY] [-x CURRENCY] [-p MODE_OF_PAYMENT]`
 
-<details>
-<summary>⚠️️️️ Syntax Notes</summary>
-
-* `NAME` and `DESCRIPTION` are text strings. You may use spaces within the text if you wrap the text with double quotes.
-* `INTERVAL` is an integer value. Set this value to the estimated number of days between your recurring payments.
-* `AMOUNT` is a decimal value.
-* `MODE_OF_PAYMENT` is a text string.
-</details>
-
-<br>
+> ⚠️️️️ Syntax Notes
+> * `NAME` and `DESCRIPTION` are text strings. You may use spaces within the text if you wrap the text with double quotes.
+> * `INTERVAL` is an integer value. Set this value to the estimated number of days between your recurring payments.
+> * `AMOUNT` is a decimal value.
+> * `MODE_OF_PAYMENT` is a text string.
 
 Example of usage:
 * `Add-RecurringPayment -n "Mobile Plan" -i 30 -a 20.00`
@@ -189,13 +148,8 @@ Displays the past recurring payments you have added.
 
 Syntax: `View-RecurringPayment [-r RECURRING_PAYMENT_INDEX]`
 
-<details>
-<summary>⚠️️️️ Syntax Notes</summary>
-
-* `RECURRING_PAYMENT_INDEX` is an integer value. If this argument is provided, MoneyGoWhere will only display the specified recurring payment.
-</details>
-
-<br>
+> ⚠️️️️ Syntax Notes
+> * `RECURRING_PAYMENT_INDEX` is an integer value. If this argument is provided, MoneyGoWhere will only display the specified recurring payment.
 
 Example of usage:
 * `View-RecurringPayment`
@@ -208,13 +162,8 @@ Deletes a recurring payment from the list of recurring payments.
 
 Syntax: `Delete-RecurringPayment -r RECURRING_PAYMENT_INDEX`
 
-<details>
-<summary>⚠️️️️ Syntax Notes</summary>
-
-* `RECURRING_PAYMENT_INDEX` is an integer value.
-</details>
-
-<br>
+> ⚠️️️️ Syntax Notes
+> * `RECURRING_PAYMENT_INDEX` is an integer value.
 
 Example of usage:
 * `Delete-RecurringPayment -r 1`
@@ -226,16 +175,11 @@ Edits a recurring payment in the list of recurring payments
 
 Syntax: `Edit-RecurringPayment -r RECURRING_PAYMENT_INDEX [-n NAME] [-i INTERVAL] [-a AMOUNT] [-t DESCRIPTION]`
 
-<details>
-<summary>⚠️️️️ Syntax Notes</summary>
-
-* `RECURRING_PAYMENT_INDEX` is an integer value.
-* `NAME` and `DESCRIPTION` are text strings. You may use spaces within the text if you wrap the text with double quotes.
-* `INTERVAL` is an integer value. Set this value to the estimated number of days between your recurring payments.
-* `AMOUNT` is a decimal value.
-</details>
-
-<br>
+> ⚠️️️️ Syntax Notes
+> * `RECURRING_PAYMENT_INDEX` is an integer value.
+> * `NAME` and `DESCRIPTION` are text strings. You may use spaces within the text if you wrap the text with double quotes.
+> * `INTERVAL` is an integer value. Set this value to the estimated number of days between your recurring payments.
+> * `AMOUNT` is a decimal value.
 
 Example of usage:
 * `Edit-RecurringPayment -r 1 -a 20.00`
@@ -248,14 +192,9 @@ Pays a recurring payment from the list of recurring payments.
 
 Syntax: `Pay-RecurringPayment -r RECURRING_PAYMENT_INDEX [-d DATE_TIME]`
 
-<details>
-<summary>⚠️️️️ Syntax Notes</summary>
-
-* `RECURRING_PAYMENT_INDEX` is an integer value.
-* `DATE_TIME` is a text string in the format `"dd/MM/yyyy HHmm"`. If this value is not provided, MoneyGoWhere will save the current date and time for you.
-</details>
-
-<br>
+> ⚠️️️️ Syntax Notes
+> * `RECURRING_PAYMENT_INDEX` is an integer value.
+> * `DATE_TIME` is a text string in the format `"dd/MM/yyyy HHmm"`. If this value is not provided, MoneyGoWhere will save the current date and time for you.
 
 Example of usage:
 * `Pay-RecurringPayment -r 1`
@@ -266,13 +205,8 @@ Merges save file from an external source given path to the save file (.xml)
 
 Syntax: `Merge-File [-p PATH_STRING]`
 
-<details>
-<summary>⚠️️️️ Syntax Notes</summary>
-
-* `RECURRING_PAYMENT_INDEX` is an integer value. If this argument is provided, MoneyGoWhere will only display the specified recurring payment.
-</details>
-
-<br>
+> ⚠️️️️ Syntax Notes
+> * `RECURRING_PAYMENT_INDEX` is an integer value. If this argument is provided, MoneyGoWhere will only display the specified recurring payment.
 
 Example of usage:
 * `Merge-File -p "C:\Users\the_d\Downloads\expenses.xml"`
