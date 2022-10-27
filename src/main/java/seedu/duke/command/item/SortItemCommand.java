@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 
 import static java.util.Comparator.comparingDouble;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_PRICE_BOUNDARIES_INVALID;
-import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_PRICE_LESS_THAN_ZERO;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_PRICE_OUT_OF_RANGE;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_SORT_MODE_INVALID;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PARTS;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_PRICE_FORMAT_INVALID;
@@ -127,8 +127,8 @@ public class SortItemCommand extends Command {
      */
     private boolean isValidMin(String minPrice) throws InvalidPriceException {
         try {
-            if (Double.parseDouble(minPrice) < 0) {
-                throw new InvalidPriceException(MESSAGE_PRICE_LESS_THAN_ZERO);
+            if (Double.parseDouble(minPrice) < 0 || Double.parseDouble(minPrice) > 10000) {
+                throw new InvalidPriceException(MESSAGE_PRICE_OUT_OF_RANGE);
             }
             return true;
         } catch (NumberFormatException e) {
@@ -145,8 +145,8 @@ public class SortItemCommand extends Command {
      */
     private boolean isValidMax(String maxPrice) throws InvalidPriceException {
         try {
-            if (Double.parseDouble(maxPrice) < 0) {
-                throw new InvalidPriceException(MESSAGE_PRICE_LESS_THAN_ZERO);
+            if (Double.parseDouble(maxPrice) < 0 || Double.parseDouble(maxPrice) > 10000) {
+                throw new InvalidPriceException(MESSAGE_PRICE_OUT_OF_RANGE);
             }
             return true;
         } catch (NumberFormatException e) {

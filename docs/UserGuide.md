@@ -24,7 +24,7 @@ This UserGuide introduces you a brief overview of our features with example of u
 
 >**Note:**
 > 
->1. Upcycle commands are case-sensitive and space-insensitive. For example, ```upcycle``` and ```Upcycle``` are different words, ```Upcycle``` and ```Upcycle ``` are the same words.
+>1. Upcycle commands (except ```find-item``` and ```find-user```) are case-sensitive and space-insensitive. For example, ```upcycle``` and ```Upcycle``` are different words, ```Upcycle``` and ```Upcycle ``` are the same words.
 >2. Parameters can be shuffled. For example, ```update-item /i [ITEM_ID] /p [PRICE]``` and ```update-item /p [PRICE] /i [ITEM_ID]``` are the same.
 >3. Phrases in ```[CAPITAL_WORDS]``` are the parameters for you to input.
 
@@ -199,7 +199,7 @@ Format: ```add-item /n [ITEM_NAME] /c [CATEGORY_INDEX] /p [PRICE] /o [USERNAME]`
 Note:
 1. Owner cannot have duplicate items (items have the same name)
 2. To choose category, please use ```list-categories``` to list them out and use the index
-3. Price must be a float
+3. Price must be a float, and in range from 0 to 10000
 
 Example of usage: ```add-item /n weight /c 1 /p 0.5 /o bui```
 
@@ -273,7 +273,7 @@ Note:
 
 1. `itemId` must exist i.e. item has been created and was not deleted 
 2. A valid price must be given i.e. non-zero and non-negative
-3. Price is in price per day
+3. Price is in price per day, and in range from 0 to 10000
 4. You may or may not use floating point numbers for price
 
 Example of usage: ```update-item /i ea608c61 /p 4```
@@ -296,7 +296,7 @@ Note:
 1. Mode of sorting must either be ```lh``` (low to high) or ``` hl``` (high to low)
 2. Minimum price, maximum price and category filters are optional
 3. Minimum and Maximum price must be more than 0
-4. Minimum price must be less than maximum price
+4. Minimum price must be less than maximum price, and both are in range form 0 to 10000
 5. Category number must be an integer
 
 Example of usage: ```sort-items /mode lh /min 1 /max 5```
@@ -335,8 +335,10 @@ Here are available categories:
 8. OTHERS
 ____________________________________________________________
 ```
-#### 3.3.8. ```find-item``` - Find an item using keyword
+#### 3.3.8. ```find-item``` - Find items using keyword
 >List all items that are associated with a given keyword
+
+Format: ```find-item \k [KEYWORD]```
 
 Example of usage: ```find-item /k book```
 
@@ -475,6 +477,7 @@ ____________________________________________________________
 | Remove a user                      | remove-user /u [USERNAME]                                                                           |
 | View a user                        | view-user /u [USERNAME]                                                                             |
 | List all users                     | list-users                                                                                          |
+| Find users by keyword              | find-user /k [KEYWORD]                                                                              |
 | __*Item-related features*__        |                                                                                                     |
 | Add a new item                     | add-item /n [ITEM_NAME] /c [CATEGORY_INDEX] /p [PRICE] /o [USERNAME]                                |
 | Remove an item                     | remove-item /i [ITEM_ID]                                                                            |
@@ -483,6 +486,7 @@ ____________________________________________________________
 | List categories                    | list-categories                                                                                     |
 | Update an item                     | update-item /i [ITEM_ID] /p [NEW_PRICE]                                                             |
 | Sort and filter list of items      | sort-items /mode [MODE_OF_SORTING] /min [MINIMUM_PRICE] /max [MAXIMUM_PRICE] /cat [CATEGORY_NUMBER] |
+| Find items by keyword              | find-item /k [KEYWORD]                                                                              |
 | __*Transaction-related features*__ |                                                                                                     |
 | Add a new transaction              | add-tx /i [ITEM_ID] /b [BORROWER_NAME] /d [DURATION] /c [CREATED_DATE]                              |
 | List all users                     | list-tx                                                                                             |

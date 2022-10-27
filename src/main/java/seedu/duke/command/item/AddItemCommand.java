@@ -19,7 +19,7 @@ import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PAR
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_SAME_OWNER;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_NUMBER_FORMAT_INVALID;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_PRICE_FORMAT_INVALID;
-import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_PRICE_LESS_THAN_ZERO;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_PRICE_OUT_OF_RANGE;
 
 //@@author bdthanh
 
@@ -137,8 +137,8 @@ public class AddItemCommand extends Command {
      */
     private boolean isValidPrice(String price) throws InvalidPriceException {
         try {
-            if (Double.parseDouble(price) < 0) {
-                throw new InvalidPriceException(MESSAGE_PRICE_LESS_THAN_ZERO);
+            if (Double.parseDouble(price) < 0 || Double.parseDouble(price) > 10000) {
+                throw new InvalidPriceException(MESSAGE_PRICE_OUT_OF_RANGE);
             }
             return true;
         } catch (NumberFormatException e) {
