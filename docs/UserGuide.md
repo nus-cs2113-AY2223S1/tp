@@ -44,7 +44,7 @@ Format: `appointment view`
 
 ### Task Management
 
-#### Adding a task: `task add`
+#### Add a task: `task add`
 - add a task to the list of tasks for the clinic
 - link this task to a specific appointment
 - assign the employee who is going to complete this task
@@ -58,7 +58,7 @@ Example of usage:
 
 `task add i/1 e/2 d/prepare hot water`
 
-#### Removing a task: `task remove`
+#### Remove a task: `task remove`
 - remove a particular task by TASK_ID
 
 Format: `task remove i/TASK_ID`
@@ -87,7 +87,7 @@ Example of usage:
 
 ### Employee Management
 
-#### Adding an employee: `employee add`
+#### Add an employee: `employee add`
 - add an employee to the list of staff in the clinic
 
 Format: `employee add n/NAME`
@@ -106,11 +106,11 @@ Example of usage:
 `employee remove i/1`
 
 
-#### Viewing employee: `employee view`
+#### View all employee: `employee view`
 view all employees in the clinic
 Format: `employee view`
 
-#### Viewing an employee’s task: `employee task`
+#### View an employee's assigned tasks: `employee task`
 - view all tasks assigned to an employee
 
 Format: `employee task i/EMPLOYEE_ID`
@@ -141,7 +141,7 @@ Format: `pet remove i/PET_ID`
 Example of usage:
 `pet remove i/1`
 
-#### Viewing pets: `pet view`
+#### View all pets: `pet view`
 view all pets registered
 
 Format: `pet view`
@@ -167,7 +167,7 @@ Format: `service remove i/SERVICE_ID`
 Example of usage:
 `service remove i/1`
 
-#### Viewing services: `service view`
+#### View all services: `service view`
 view all services provided in the clinic
 Format: `service view`
 
