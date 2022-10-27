@@ -284,12 +284,13 @@ MoneyGoWhere is a financial tracker designed specifically to help computing prof
 ## Manual Testing
 
 ### Launching MoneyGoWhere
-1. Set up the project according to the steps in [Getting Started](#getting-started)
-2. Launch MoneyGoWhere by running `main()` in `MoneyGoWhere.java`
+1. Set up the project according to the steps in [Getting Started](#getting-started).
+2. Launch MoneyGoWhere by running `main()` in `MoneyGoWhere.java`.
 
 ### Running Commands
 1. Refer to the [User Guide](https://ay2223s1-cs2113t-w11-1.github.io/tp/UserGuide.html) for the list of commands and its corresponding arguments.
-It details the type of values accepted by each argument and which arguments are mandatory and optional. 
+It details the type of values accepted by each argument and which arguments are mandatory and optional.
+2. Enter a command into the program.
 
 ### Terminating MoneyGoWhere
-1. Enter `Bye` into the console
+1. Enter `Bye` into the console.
