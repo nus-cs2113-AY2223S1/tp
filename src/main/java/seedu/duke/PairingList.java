@@ -1,5 +1,6 @@
 package seedu.duke;
 
+//@@author ngdeqi
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
@@ -16,7 +17,9 @@ public class PairingList {
     private static final String LOG_DELETE_PAIR = "The following pairing(s) has been deleted from PairingList: ";
     private static final String LOG_PAIRS_WITH = "Pairs with ";
 
+    //@@author wilsonngja
     private final HashMap<Client, Property> clientPropertyPairs = new HashMap<>();
+    //@@author
     private static final Logger LOGGER = Logger.getLogger("PairingList");
 
     /**

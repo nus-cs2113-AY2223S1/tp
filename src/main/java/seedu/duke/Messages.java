@@ -48,11 +48,15 @@ public class Messages {
     public static final String MESSAGE_INVALID_INDEX = "OOPS!!! Please enter an index that appears within the "
             + "property list or client list";
 
-    public static final String MESSAGE_NOT_INTEGER = "OOPS!! Please enter a positive integer as index";
+    public static final String MESSAGE_NOT_INTEGER = "OOPS!! Please enter a positive integer as index\n";
+
+    public static final String MESSAGE_NOT_INTEGER_INSTANCES = "The following input(s) are not integers:\n";
 
     public static final String MESSAGE_WRONG_FLAG_ORDER = "OOPS!! Wrong flag order.\n";
 
     public static final String MESSAGE_MISSING_FLAG = "OOPS!! You are missing the following flag(s):\n";
+
+
 
     //@@author OVReader
     // Add Property/Client Related Error Messages
@@ -168,7 +172,7 @@ public class Messages {
 
     public static final String MESSAGE_NO_EXISTING_PAIR = "OOPS!! This property is not being rented by the tenant. "
             + "Unpair unsuccessful.";
-    //@@ author
+    //@@author
 
 
 

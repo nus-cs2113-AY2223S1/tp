@@ -85,9 +85,9 @@ public class ParserManager {
                 throw new UndefinedSubCommandTypeException(MESSAGE_MISSING_SUB_COMMAND_TYPE);
             }
         case COMMAND_PAIR:
-            return new ParsePair(commandDetail, clientList, propertyList, pairingList);
+            return new ParsePair(commandDetail);
         case COMMAND_UNPAIR:
-            return new ParseUnpair(commandDetail, clientList, propertyList, pairingList);
+            return new ParseUnpair(commandDetail);
         case COMMAND_CHECK:
             ArrayList<String> processedCheckCommandDetail = splitCommandAndCommandType(commandDetail);
             String subCheckCommandType = processedCheckCommandDetail.get(SUB_COMMAND_INDEX);

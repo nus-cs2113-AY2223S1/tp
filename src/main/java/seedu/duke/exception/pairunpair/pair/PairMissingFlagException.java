@@ -1,15 +1,18 @@
 package seedu.duke.exception.pairunpair.pair;
 
+import java.util.ArrayList;
+
+//@@author ngdeqi
 import static seedu.duke.Messages.MESSAGE_MISSING_FLAG;
 import static seedu.duke.Messages.MESSAGE_PAIR_WRONG_FORMAT;
 
 public class PairMissingFlagException extends ParsePairException {
 
     private final String WHITESPACE = " ";
-    private String[] missingFlags;
+    private ArrayList<String> missingFlags;
 
 
-    public PairMissingFlagException(String[] missingFlags) {
+    public PairMissingFlagException(ArrayList<String> missingFlags) {
         this.missingFlags = missingFlags;
     }
 

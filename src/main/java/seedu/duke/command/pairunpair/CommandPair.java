@@ -1,6 +1,6 @@
 package seedu.duke.command.pairunpair;
 
-
+//@@author ngdeqi
 import seedu.duke.Client;
 import seedu.duke.ClientList;
 import seedu.duke.PairingList;
@@ -8,14 +8,17 @@ import seedu.duke.Property;
 import seedu.duke.PropertyList;
 import seedu.duke.Storage;
 import seedu.duke.Ui;
-import seedu.duke.command.Command;
+import seedu.duke.exception.pairunpair.CommandPairUnpairException;
+import seedu.duke.exception.pairunpair.pair.BudgetExceededException;
+import seedu.duke.exception.pairunpair.pair.ClientAlreadyPairedException;
+import seedu.duke.exception.pairunpair.pair.ExistingPairException;
 
 import java.util.ArrayList;
 
 /**
  * Represents a pair-type command.
  */
-public class CommandPair extends Command {
+public class CommandPair extends CommandPairUnpair {
 
     private int clientIndex;
     private int propertyIndex;
@@ -35,15 +38,31 @@ public class CommandPair extends Command {
      */
     @Override
     public void execute(Ui ui, Storage storage, PropertyList propertyList, ClientList clientList,
-                        PairingList pairingList) {
+                        PairingList pairingList) throws CommandPairUnpairException {
+
+        super.checkForClientListIndexOutOfBounds(clientIndex, clientList);
+        super.checkForPropertyListIndexOutOfBounds(propertyIndex, propertyList);
+
         Client client = clientList.getClientList().get(clientIndex);
         Property property = propertyList.getPropertyList().get(propertyIndex);
 
-        String clientFormat = pairingList.convertToPairingData(client);
-        String propertyFormat = pairingList.convertToPairingData(property);
+
+        if (pairingList.isAlreadyPaired(client, property)) {
+            throw new ExistingPairException();
+        }
+
+        if (pairingList.isClientPairedWithProperty(client)) {
+            throw new ClientAlreadyPairedException();
+        }
+
+        if (pairingList.hasPriceExceededBudget(client, property)) {
+            throw new BudgetExceededException();
+        }
 
         pairingList.addPairing(client, property);
 
+        String clientFormat = pairingList.convertToPairingData(client);
+        String propertyFormat = pairingList.convertToPairingData(property);
         storage.addToPairFile(clientFormat, propertyFormat);
 
         ui.showPairedConfirmationMessage(client, property);
