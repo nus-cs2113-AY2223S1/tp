@@ -121,7 +121,7 @@ The Exceptions components consists of various exception classes which inherits f
 
 The exceptions are thrown and handled by the program depending on the conditions outlined in their Javadoc comments.
 For example, `ConsoleParserCommandAddExpenseInvalidException` is thrown when an error is encountered while parsing the command.
-Do refer to the [repository](https://github.com/AY2223S1-CS2113T-W11-1/tp/tree/master/src/main/java/seedu/moneygowhere/exceptions) to view the full list of exceptions. 
+Do refer to the [repository](https://github.com/AY2223S1-CS2113T-W11-1/tp/tree/master/src/main/java/seedu/moneygowhere/exceptions) to view the full list of exception subclasses. 
 
 ### UserInterface Component
 
@@ -135,6 +135,7 @@ The Commands components consists of various exception classes which inherits fro
 
 The corresponding console command subclass is returned by `ConsoleParser#parse()` depending on the command supplied in the function's parameter.
 For example, supplying the command string `Add-Expense -n Lunch -a 7.80` to `ConsoleParser#parse()` will return a `ConsoleCommandAddExpense` object.
+Do refer to the [repository](https://github.com/AY2223S1-CS2113T-W11-1/tp/tree/master/src/main/java/seedu/moneygowhere/commands) to view the full list of console command subclasses.
 
 ## Implementation
 ### Reading and parsing the user's commands
