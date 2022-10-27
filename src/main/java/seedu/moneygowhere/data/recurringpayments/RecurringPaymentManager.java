@@ -2,6 +2,7 @@ package seedu.moneygowhere.data.recurringpayments;
 
 import seedu.moneygowhere.common.Messages;
 import seedu.moneygowhere.exceptions.data.recurringpayment.RecurringPaymentManagerRecurringPaymentNotFoundException;
+import seedu.moneygowhere.storage.LocalStorage;
 
 import java.util.ArrayList;
 
@@ -18,8 +19,9 @@ public class RecurringPaymentManager {
         recurringPayments = new ArrayList<>();
     }
 
-    public void addRecurringPayment(RecurringPayment recurringPayment) {
+    public void addRecurringPayment(RecurringPayment recurringPayment, LocalStorage localStorage) {
         recurringPayments.add(recurringPayment);
+        localStorage.setSavedRecurringPayments(recurringPayments);
     }
 
     public RecurringPayment getRecurringPayment(int recurringPaymentIndex) throws
@@ -37,10 +39,17 @@ public class RecurringPaymentManager {
         return recurringPayments;
     }
 
-    public void deleteRecurringPayment(int recurringPaymentIndex) throws
+    //@@author LokQiJun
+    public void setRecurringPayments(ArrayList<RecurringPayment> savedRecurringPayments) {
+        this.recurringPayments = new ArrayList<RecurringPayment>(savedRecurringPayments);
+    }
+
+    public void deleteRecurringPayment(int recurringPaymentIndex,
+                                       LocalStorage localStorage) throws
             RecurringPaymentManagerRecurringPaymentNotFoundException {
         try {
             recurringPayments.remove(recurringPaymentIndex);
+            localStorage.setSavedRecurringPayments(recurringPayments);
         } catch (IndexOutOfBoundsException exception) {
             throw new RecurringPaymentManagerRecurringPaymentNotFoundException(
                     Messages.RECURRING_PAYMENT_MANAGER_ERROR_RECURRING_PAYMENT_NOT_FOUND
@@ -48,10 +57,12 @@ public class RecurringPaymentManager {
         }
     }
 
-    public void editRecurringPayment(int recurringPaymentIndex, RecurringPayment recurringPayment) throws
+    public void editRecurringPayment(int recurringPaymentIndex, RecurringPayment recurringPayment,
+                                     LocalStorage localStorage) throws
             RecurringPaymentManagerRecurringPaymentNotFoundException {
         try {
             recurringPayments.set(recurringPaymentIndex, recurringPayment);
+            localStorage.setSavedRecurringPayments(recurringPayments);
         } catch (IndexOutOfBoundsException exception) {
             throw new RecurringPaymentManagerRecurringPaymentNotFoundException(
                     Messages.RECURRING_PAYMENT_MANAGER_ERROR_RECURRING_PAYMENT_NOT_FOUND
