@@ -1,17 +1,17 @@
-# User Guide
+# Pet Clinic Management System - User Guide
 
 ## Introduction
-
-{Give a product intro}
+Pet Clinic Management System (PCMS) is a desktop application that helps a clinic reception to record appointments, assign tasks, and manage data of pets/services/tasks/employees. This application uses Command Line Interface (CLI) and is able to display information quickly with minimal latency.
 
 ## Quick Start
-
-{Give steps to get started quickly}
-
 1. Ensure that you have Java 11 or above installed.
-1. Down the latest version of `Duke` from [here](http://link.to/duke).
+2. Download the latest version of `Pet Clinic Management System` from [here](https://github.com/AY2223S1-CS2113-F11-2/tp).
 
 ## Features 
+Note:
+
+* Parameters appear in the form of a/PARAMETER
+* Words in UPPER_CASE are parameters to be specified by the user.
 
 ### Appointment Management
 
@@ -20,17 +20,18 @@ Adds a new appointment given service, pet, and date involved.
 
 Format: `appointment add s/SERVICE p/PET d/DATE`
 
-Example of usage: 还没写
+Example of usage:
 
-`todo n/Write the rest of the User Guide d/next week`
+`appointment add s/bath p/Muse d/01/02/2022`
 
-`todo n/Refactor the User Guide to remove passive voice d/13/04/2020`
+`appointment add s/haircut p/Donald d/30/02/2022`
 
 #### Remove an appointment: `appointment remove`
-- remove a particular appointment by INDEX
+Remove a particular appointment by INDEX
 
-Format: `appointment remove i/INDEX`
-* The `INDEX` has to be an int within the range of 1 to number of appointments in the list.
+Format: `appointment remove i/APPOINTMENT_ID`
+* The `APPOINTMENT_ID` must be a positive integer 1, 2, 3, …
+* The `APPOINTMENT_ID` can be found by `appointment view`
 
 Example of usage: 
 
@@ -41,25 +42,30 @@ View list of all appointments
 
 Format: `appointment view`
 
+---
 ### Task Management
 
-#### Adding a task: `task add`
+#### Add a task: `task add`
 - add a task to the list of tasks for the clinic
 - link this task to a specific appointment
 - assign the employee who is going to complete this task
-- automatically generate a unique id of the task
 
 Format: `task add i/APPOINTMENT_ID e/EMPLOYEE_ID d/DESCRIPTION`
+* The `APPOINTMENT_ID` and `EMPLOYEE_ID` must be positive integers 1, 2, 3, …
+* The `APPOINTMENT_ID` can be found by `appointment view`
+* and The `EMPLOYEE_ID` can be found by `employee view`
+* The `Description` is the description of the task
 
 Example of usage:
 
 `task add i/1 e/2 d/prepare hot water`
 
-#### Removing a task: `task remove`
-- remove a particular task by TASK_ID
+#### Remove a task: `task remove`
+Remove a particular task by TASK_ID
 
 Format: `task remove i/TASK_ID`
 * The `TASK_ID` must be a positive integer 1, 2, 3, …
+* The `TASK_ID` can be found by `task view`
 
 Example of usage:
 `task remove i/1`
@@ -70,88 +76,143 @@ View list of all tasks
 Format: `task view`
 
 #### Reassign task to employee: `task reassign`
-- assign a task to a employee
+- assign a task to an employee
 
 Format: `task reassign i/TASK_ID e/EMPLOYEE_ID`
-* The `TASK_ID` and `EMPLOYEE_ID` must be a positive integer 1, 2, 3, …
+* The `TASK_ID` and `EMPLOYEE_ID` must be positive integers 1, 2, 3, …
+* The `TASK_ID` can be found by `task view`
+* and The `EMPLOYEE_ID` can be found by `employee view`
 
 Example of usage:
 `task reassign i/1 e/1`
 
 
+#### Finish a task: `task finish`
+- Finish a task in the task list
+
+Format: `task finish i/TASK_ID`
+* The `TASK_ID` and `EMPLOYEE_ID` must be positive integers 1, 2, 3, …
+* The `TASK_ID` can be found by `task view`
+* When all the tasks of an appointment is marked as done, the status of an appointment is automatically marked as processed.
+
+Example of usage:
+`task finish i/1`
+
 ### Employee Management
 
-#### Adding an employee: `employee add`
-- add an employee to the list of staff in the clinic
+#### Add an employee: `employee add`
+Add an employee to the list of staff in the clinic
 
 Format: `employee add n/NAME`
+* The `Name` is the name of the employee
 
 Example of usage:
 `employee add n/chris`
 
 #### Remove an employee: `employee remove`
-- remove a particular employee by EMPLOYEE_ID
+Remove a particular employee by EMPLOYEE_ID
 
 Format: `employee remove i/EMPLOYEE_ID`
 * The `EMPLOYEE_ID` must be a positive integer 1, 2, 3, …
+* The `EMPLOYEE_ID` can be found by `employee view`
 
 Example of usage:
 `employee remove i/1`
 
 
-#### Viewing employee: `employee view`
-view all employees in the clinic
+#### View all employee: `employee view`
+View all employees in the clinic
 Format: `employee view`
 
-#### Viewing employee’s task: `employee task`
-- view all tasks assigned to an employee
+#### View an employee's assigned tasks: `employee task`
+View all tasks assigned to an employee
 
 Format: `employee task i/EMPLOYEE_ID`
 * The `EMPLOYEE_ID` must be a positive integer 1, 2, 3, …
+* The `EMPLOYEE_ID` can be found by `employee view`
 
 Example of usage:
 `employee task i/1`
 
+---
 ### Pet Management
 #### Add a pet: `pet add`
-- add a pet to the list of pets in the clinic
+Add a pet to the list of pets in the clinic
 
 Format: `pet add n/NAME s/SPECIES h/HEALTH`
+* The `NAME` is the name of the pet
+* The `SPECIES` is the species of the pet
 * The `HEALTH` must be either 0(unhealthy) or 1(healthy)
 
 Example of usage:
 `pet add n/Eliza s/cat h/0`
+`pet add n/Tim s/dog h/1`
 
 #### Remove a pet: `pet remove`
-- remove a particular pet by PET_ID
+Remove a particular pet by PET_ID
 
 Format: `pet remove i/PET_ID`
 * The `PET_ID` must be a positive integer 1, 2, 3, …
+* The `PET_ID` can be found by `pet view`
 
 Example of usage:
 `pet remove i/1`
 
+#### View all pets: `pet view`
+View all pets registered
+
+Format: `pet view`
+
+---
 ### Service Management
-#### Add a service: `service add`
-- add a service to the list of services provided in the clinic
 
-Format: `pet remove i/PET_ID`
-* The `PET_ID` must be a positive integer 1, 2, 3, …
+#### Add a service: `service add`
+Add a service to the list of services provided in the clinic
+
+Format: `service add d/DESCRIPTION`
+* The `Description` is the description of the service
 
 Example of usage:
-`pet remove i/1`
+`service add d/haircut`
 
+#### Remove a service: `service remove`
+Remove a specific service by SERVICE_ID
 
+Format: `service remove i/SERVICE_ID`
+* The `SERVICE_ID` must be a positive integer 1, 2, 3, …
+* The `SERVICE_ID` can be found by `service view`
 
+Example of usage:
+`service remove i/1`
 
-## FAQ
+#### View all services: `service view`
+View all services provided in the clinic
+Format: `service view`
 
-**Q**: How do I transfer my data to another computer? 
+---
+### Exit: `bye`
 
-**A**: {your answer here}
-
+---
 ## command.command Summary
 
-{Give a 'cheat sheet' of commands here}
+* Add appointment `appointment add s/SERVICE p/PET d/DATE`
+* Remove appointment `appointment remove i/APPOINTMENT_ID`
+* View appointments `appointment view`
 
-* Add todo `todo n/TODO_NAME d/DEADLINE`
+* Add task `task add i/APPOINTMENT_ID e/EMPLOYEE_ID d/DESCRIPTION`
+* Remove task `task remove i/TASK_ID`
+* View tasks `task view`
+* Reassign task `task reassign i/TASK_ID e/EMPLOYEE_ID`
+
+* Add employee `employee add n/NAME`
+* Remove employee `employee remove i/EMPLOYEE_ID`
+* View employees `employee view`
+* View employee's tasks `employee task i/EMPLOYEE_ID`
+
+* Add pet `pet add n/NAME s/SPECIES h/HEALTH`
+* Remove pet `pet remove i/PET_ID`
+* View pets `pet view`
+
+* Add service `service add d/DESCRIPTION`
+* Remove service `service remove i/SERVICE_ID`
+* View service `service view`

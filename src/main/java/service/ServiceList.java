@@ -33,4 +33,13 @@ public class ServiceList {
             }
         }
     }
+
+    public static Service findService(String serviceDescription) {
+        for (Service service : services) {
+            if (service.getServiceDescription() == serviceDescription) {
+                return service;
+            }
+        }
+        return null;
+    }
 }

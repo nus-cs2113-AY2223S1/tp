@@ -3,6 +3,7 @@ package command.appointmentcommand;
 import appointment.Appointment;
 import appointment.AppointmentList;
 import command.Command;
+import exception.DukeException;
 
 public class AddAppointmentCommand extends Command {
 
@@ -16,7 +17,11 @@ public class AddAppointmentCommand extends Command {
 
     @Override
     public void execute() {
-        AppointmentList.addAppointment(appointment);
+        try {
+            AppointmentList.addAppointment(appointment);
+        } catch (DukeException e) {
+            System.out.println("Sorry, no corresponding service/pet found to add the appointment.");
+        }
     }
 
     @Override
