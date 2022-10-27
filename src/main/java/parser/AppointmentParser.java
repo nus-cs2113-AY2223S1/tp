@@ -58,7 +58,7 @@ public class AppointmentParser {
             int p = input.indexOf(" p/");
             int d = input.indexOf(" d/");
 
-            if(!input.substring(0,s).isEmpty()){
+            if (!input.substring(0,s).isEmpty()) {
                 throw new DukeException();
             }
 

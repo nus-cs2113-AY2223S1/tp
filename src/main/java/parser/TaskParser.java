@@ -54,7 +54,7 @@ public class TaskParser {
             int startOfE = input.indexOf(" e/");
             int startOfD = input.indexOf(" d/");
 
-            if(!input.substring(0,startOfI).isEmpty()){
+            if (!input.substring(0, startOfI).isEmpty()) {
                 throw new DukeException();
             }
 
