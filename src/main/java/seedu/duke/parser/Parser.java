@@ -3,7 +3,7 @@ package seedu.duke.parser;
 import seedu.duke.command.AddModuleCommand;
 import seedu.duke.command.Command;
 import seedu.duke.command.DeleteModuleCommand;
-import seedu.duke.command.DisplaySelectedModuleListCommand;
+import seedu.duke.command.ListCommand;
 import seedu.duke.command.ExitCommand;
 import seedu.duke.command.GetModuleCommand;
 import seedu.duke.command.HelpCommand;
@@ -79,8 +79,8 @@ public class Parser {
         case (ImportCommand.COMMAND_WORD):
             toExecute = new ImportCommand(keywords);
             break;
-        case (DisplaySelectedModuleListCommand.COMMAND_WORD):
-            toExecute = new DisplaySelectedModuleListCommand(keywords);
+        case (ListCommand.COMMAND_WORD):
+            toExecute = new ListCommand(keywords);
             break;
         default:
             throw new YamomException("Cannot process the command");
