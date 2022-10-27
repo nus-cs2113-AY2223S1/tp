@@ -3,6 +3,8 @@ package seedu.moneygowhere.data.expense;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+//@@author xzynos
+
 /**
  * Stores data associated with an expense.
  */
@@ -13,13 +15,32 @@ public class Expense {
     private String description;
     private BigDecimal amount;
     private String category;
+    private String remarks;
+    private String currency;
+    private String modeOfPayment;
 
-    public Expense(String name, LocalDateTime dateTime, String description, BigDecimal amount, String category) {
+    public Expense(String name,
+                   LocalDateTime dateTime,
+                   String description,
+                   BigDecimal amount,
+                   String category,
+                   String remarks,
+                   String currency,
+                   String modeOfPayment) {
+        assert !(currency == null || currency.isEmpty() || currency.trim().isEmpty()) :
+                "There must be a currency";
+        assert !(name == null || name.isEmpty() || name.trim().isEmpty()) :
+                "There must be a name";
+        assert amount != null : "There must be an amount";
+        assert dateTime != null : "There must be a date and time";
         this.name = name;
         this.dateTime = dateTime;
         this.description = description;
         this.amount = amount;
         this.category = category;
+        this.remarks = remarks;
+        this.currency = currency;
+        this.modeOfPayment = modeOfPayment;
     }
 
     public String getName() {
@@ -60,5 +81,29 @@ public class Expense {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
+
+    public String getModeOfPayment() {
+        return modeOfPayment;
+    }
+
+    public void setModeOfPayment(String modeOfPayment) {
+        this.modeOfPayment = modeOfPayment;
     }
 }

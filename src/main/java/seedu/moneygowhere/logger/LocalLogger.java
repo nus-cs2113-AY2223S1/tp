@@ -11,6 +11,7 @@ import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+//@@author xzynos
 @SuppressWarnings("FieldMayBeFinal")
 public class LocalLogger {
     private Logger logger;

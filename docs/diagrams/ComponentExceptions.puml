@@ -1,0 +1,34 @@
+@startuml
+!include https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/Styles.puml
+
+skinparam rectangleTextAlignment<<left>> left
+
+package Exceptions {
+    Class MoneyGoWhereException EXCEPTIONS_COLOR_1
+
+    Class ExpenseManagerExpenseNotFoundException EXCEPTIONS_COLOR_1
+    Class IncomeManagerIncomeNotFoundException EXCEPTIONS_COLOR_1
+    Class TargetManagerTargetNotFoundException EXCEPTIONS_COLOR_1
+    Class RecurringPaymentManagerRecurringPaymentNotFoundException EXCEPTIONS_COLOR_1
+    Class CurrencyManagerCurrencyInvalidException EXCEPTIONS_COLOR_1
+
+    Class ConsoleParserCommandAddExpenseInvalidException EXCEPTIONS_COLOR_1
+
+    Class LocalStorageLoadDataException EXCEPTIONS_COLOR_1
+
+    note as Note
+        Note that this diagram
+        is not exhaustive.
+    end note
+}
+
+ExpenseManagerExpenseNotFoundException -up-|> MoneyGoWhereException
+IncomeManagerIncomeNotFoundException --up-|> MoneyGoWhereException
+TargetManagerTargetNotFoundException --up-|> MoneyGoWhereException
+RecurringPaymentManagerRecurringPaymentNotFoundException -up-|> MoneyGoWhereException
+CurrencyManagerCurrencyInvalidException --up-|> MoneyGoWhereException
+
+ConsoleParserCommandAddExpenseInvalidException ---up-|> MoneyGoWhereException
+
+LocalStorageLoadDataException ---up-|> MoneyGoWhereException
+@enduml

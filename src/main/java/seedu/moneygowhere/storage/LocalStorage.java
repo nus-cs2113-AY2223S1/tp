@@ -1,114 +1,677 @@
 package seedu.moneygowhere.storage;
 
+import org.w3c.dom.DOMException;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+import seedu.moneygowhere.commands.ConsoleCommandSortExpense;
 import seedu.moneygowhere.common.Messages;
 import seedu.moneygowhere.data.expense.Expense;
 import seedu.moneygowhere.data.expense.ExpenseManager;
-import seedu.moneygowhere.exceptions.LocalStorageLoadDataInputError;
+import seedu.moneygowhere.data.income.Income;
+import seedu.moneygowhere.data.income.IncomeManager;
+import seedu.moneygowhere.data.recurringpayments.RecurringPayment;
+import seedu.moneygowhere.data.recurringpayments.RecurringPaymentManager;
+import seedu.moneygowhere.data.target.Target;
+import seedu.moneygowhere.data.target.TargetManager;
+import seedu.moneygowhere.exceptions.storage.LocalStorageLoadDataException;
+import seedu.moneygowhere.parser.ConsoleParserConfigurations;
 
-import static seedu.moneygowhere.common.Configurations.DIRECTORY_PATH;
-import static seedu.moneygowhere.common.Configurations.FILE_PATH_EXPENSES;
-
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
+import static seedu.moneygowhere.common.Configurations.LOCAL_STORAGE_DATA_FILE_PATH;
+import static seedu.moneygowhere.common.Configurations.LOCAL_STORAGE_DIRECTORY;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.DEFAULT_CURRENCY;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_EXPENSE_AMOUNT_CURRENCY_ATTRIBUTE;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_EXPENSE_AMOUNT_ELEMENT;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_EXPENSE_CATEGORY_ELEMENT;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_EXPENSE_DATETIME_ELEMENT;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_EXPENSE_DESCRIPTION_ELEMENT;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_EXPENSE_ELEMENT;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_EXPENSE_ID_ATTRIBUTE;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_EXPENSE_MODE_OF_PAYMENT_ELEMENT;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_EXPENSE_NAME_ELEMENT;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_EXPENSE_REMARKS_ELEMENT;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_INCOME_AMOUNT_ELEMENT;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_INCOME_CURRENCY_ATTRIBUTE;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_INCOME_DATETIME_ELEMENT;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_INCOME_DESCRIPTION_ELEMENT;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_INCOME_ELEMENT;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_INCOME_ID_ATTRIBUTE;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_INCOME_NAME_ELEMENT;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_RECURRING_PAYMENT_AMOUNT_ELEMENT;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_RECURRING_PAYMENT_CATEGORY_ELEMENT;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_RECURRING_PAYMENT_CURRENCY_ATTRIBUTE;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_RECURRING_PAYMENT_DESCRIPTION_ELEMENT;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_RECURRING_PAYMENT_ELEMENT;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_RECURRING_PAYMENT_ID_ATTRIBUTE;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_RECURRING_PAYMENT_INTERVAL_ELEMENT;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_RECURRING_PAYMENT_MODE_OF_PAYMENT_ELEMENT;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_RECURRING_PAYMENT_NAME_ELEMENT;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_ROOT;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_SORTCONFIG_ELEMENT;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_SORTCONFIG_ORDER_ATTRIBUTE;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_SORTCONFIG_TYPE_ATTRIBUTE;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_TARGET_AMOUNT_ELEMENT;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_TARGET_CURRENCY_ATTRIBUTE;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_TARGET_CURRENT_AMOUNT_ELEMENT;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_TARGET_DATETIME_ELEMENT;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_TARGET_DESCRIPTION_ELEMENT;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_TARGET_ELEMENT;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_TARGET_ID_ATTRIBUTE;
+import static seedu.moneygowhere.storage.LocalStorageConfigurations.XML_TARGET_NAME_ELEMENT;
+
+//@@author LokQiJun
+
+/**
+ * Stores and load data to and from storage.
+ */
 public class LocalStorage {
-    private static final String DIVIDER = " // ";
+    private File saveFile;
+    private ArrayList<Expense> savedExpenses;
+    private ArrayList<RecurringPayment> savedRecurringPayments;
+    private ArrayList<Target> savedTargets;
+    private ArrayList<Income> savedIncomes;
+    private ConsoleCommandSortExpense sortCommandSetting;
 
-    public static File initialiseFile() {
-        File directory = new File(DIRECTORY_PATH);
-        directory.mkdir();
-        String newFilePath = new File(FILE_PATH_EXPENSES).getAbsolutePath();
-        return new File(newFilePath);
+    public LocalStorage() {
+        initialiseFile();
+        savedExpenses = new ArrayList<>();
+        savedRecurringPayments = new ArrayList<>();
+        savedTargets = new ArrayList<>();
+        savedIncomes = new ArrayList<>();
+        sortCommandSetting = new ConsoleCommandSortExpense(
+                ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE_VAL_ALPHABETICAL,
+                ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_ORDER_VAL_ASCENDING
+        );
     }
 
     /**
-     * This method loads all tasks in text file.
+     * Create data file and its directory.
      */
-    public static void loadFromFile(ExpenseManager expenseManager) {
+    private void initialiseFile() {
+        File directory = new File(LOCAL_STORAGE_DIRECTORY);
+        directory.mkdir();
+        String newFilePath = new File(LOCAL_STORAGE_DATA_FILE_PATH).getAbsolutePath();
+        this.saveFile = new File(newFilePath);
+    }
+
+    /**
+     * Reads saved data and configurations from a load file in a fixed directory, parse it and convert them into objects
+     * and add them to the arraylist that stores the corresponding objects.
+     * Sort the current arraylist afterwards based on saved configuration.
+     *
+     */
+    public void loadFromFile() {
         Expense loadExpense;
-        int fileIndex = 1;
+        RecurringPayment loadRecurringPayment;
+        Target loadTarget;
+        Income loadIncome;
+        boolean hasParsedSortconfig = false;
+        boolean hasParsedExpenses = false;
+        boolean hasParsedRecurringPayment = false;
+        boolean hasParsedTarget = false;
+        int itr = 0;
         try {
-            File f = initialiseFile();
-            Scanner s = new Scanner(f);
-            String textFromFile;
-            while (s.hasNext()) {
-                textFromFile = s.nextLine();
-                loadExpense = createExpense(textFromFile);
-                expenseManager.addExpense(loadExpense);
-                ++fileIndex;
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            DocumentBuilder db = dbf.newDocumentBuilder();
+            db.setErrorHandler(new LocalStorageNullErrorHandler());
+            Document doc = db.parse(saveFile);
+            doc.getDocumentElement().normalize();
+            NodeList sortConfig = doc.getElementsByTagName(XML_SORTCONFIG_ELEMENT);
+            ConsoleCommandSortExpense defaultSortCommandSetting = loadSortCommandSetting(sortConfig);
+            hasParsedSortconfig = true;
+            NodeList expenseList = doc.getElementsByTagName(XML_EXPENSE_ELEMENT);
+            if (expenseList.getLength() > 0) {
+                for (itr = 0; itr < expenseList.getLength(); itr++) {
+                    Node node = expenseList.item(itr);
+                    loadExpense = createExpense(node);
+                    this.savedExpenses.add(loadExpense);
+                }
             }
-            System.out.println(Messages.LOCAL_STORAGE_LOAD_SUCCESS);
+            //expenseManager.updateSortExpenses(defaultSortCommandSetting);
+            hasParsedExpenses = true;
+            NodeList recurringPaymentList = doc.getElementsByTagName(XML_RECURRING_PAYMENT_ELEMENT);
+            if (recurringPaymentList.getLength() > 0) {
+                for (itr = 0; itr < recurringPaymentList.getLength(); itr++) {
+                    Node node = recurringPaymentList.item(itr);
+                    loadRecurringPayment = createRecurringPayment(node);
+                    savedRecurringPayments.add(loadRecurringPayment);
+                }
+            }
+            hasParsedRecurringPayment = true;
+            NodeList targetList = doc.getElementsByTagName(XML_TARGET_ELEMENT);
+            if (recurringPaymentList.getLength() > 0) {
+                for (itr = 0; itr < targetList.getLength(); itr++) {
+                    Node node = targetList.item(itr);
+                    loadTarget = createTarget(node);
+                    savedTargets.add(loadTarget);
+                }
+            }
+            hasParsedTarget = true;
+            NodeList incomeList = doc.getElementsByTagName(XML_INCOME_ELEMENT);
+            if (recurringPaymentList.getLength() > 0) {
+                for (itr = 0; itr < incomeList.getLength(); itr++) {
+                    Node node = incomeList.item(itr);
+                    loadIncome = createIncome(node);
+                    savedIncomes.add(loadIncome);
+                }
+            }
+            System.out.println(Messages.LOCAL_STORAGE_MESSAGE_LOAD_SUCCESS);
+        } catch (FileNotFoundException e) {
+            initialiseFile();
+            System.out.println(Messages.LOCAL_STORAGE_ERROR_NO_LOAD_FILE);
+        } catch (SAXException | IOException | ParserConfigurationException e) {
+            System.out.println(Messages.LOCAL_STORAGE_ERROR_CORRUPTED_OR_EMPTY_LOAD_FILE);
+        } catch (LocalStorageLoadDataException | NumberFormatException
+                 | NullPointerException | DateTimeParseException e) {
+            if (!hasParsedSortconfig) {
+                System.out.println(Messages.LOCAL_STORAGE_SORTCONFIG_ERROR_IN_LOAD_FILE);
+            } else if (!hasParsedExpenses) {
+                System.out.println(Messages.LOCAL_STORAGE_EXPENSE_ERROR_IN_LOAD_FILE
+                        + (itr + 1));
+            } else if (!hasParsedRecurringPayment) {
+                System.out.println(Messages.LOCAL_STORAGE_RECURRING_PAYMENT_ERROR_IN_LOAD_FILE
+                        + (itr + 1));
+            } else if (!hasParsedTarget) {
+                System.out.println(Messages.LOCAL_STORAGE_TARGET_ERROR_IN_LOAD_FILE
+                        + (itr + 1));
+            } else {
+                System.out.println(Messages.LOCAL_STORAGE_INCOME_ERROR_IN_LOAD_FILE
+                        + (itr + 1));
+            }
+        }
+    }
+
+    /**
+     * Reads saved data from a load file in the given directory, parse it and convert them into objects and add it to
+     * the arraylist that stores the corresponding object.
+     *
+     * @param filePath path to save file to merge
+     */
+    public void loadFromExternalFile(String filePath) {
+        Expense loadExpense;
+        RecurringPayment loadRecurringPayment;
+        Target loadTarget;
+        Income loadIncome;
+        boolean hasParsedExpenses = false;
+        boolean hasParsedRecurringPayment = false;
+        boolean hasParsedTarget = false;
+        int itr = 0;
+        try {
+            File externalFile = new File(filePath);
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            DocumentBuilder db = dbf.newDocumentBuilder();
+            db.setErrorHandler(new LocalStorageNullErrorHandler());
+            Document doc = db.parse(externalFile);
+            doc.getDocumentElement().normalize();
+            NodeList expenseList = doc.getElementsByTagName(XML_EXPENSE_ELEMENT);
+            if (expenseList.getLength() > 0) {
+                for (itr = 0; itr < expenseList.getLength(); itr++) {
+                    Node node = expenseList.item(itr);
+                    loadExpense = createExpense(node);
+                    this.savedExpenses.add(loadExpense);
+                }
+            }
+            hasParsedExpenses = true;
+            NodeList recurringPaymentList = doc.getElementsByTagName(XML_RECURRING_PAYMENT_ELEMENT);
+            if (recurringPaymentList.getLength() > 0) {
+                for (itr = 0; itr < recurringPaymentList.getLength(); itr++) {
+                    Node node = recurringPaymentList.item(itr);
+                    loadRecurringPayment = createRecurringPayment(node);
+                    this.savedRecurringPayments.add(loadRecurringPayment);
+                }
+            }
+            hasParsedRecurringPayment = true;
+            NodeList targetList = doc.getElementsByTagName(XML_TARGET_ELEMENT);
+            if (recurringPaymentList.getLength() > 0) {
+                for (itr = 0; itr < targetList.getLength(); itr++) {
+                    Node node = targetList.item(itr);
+                    loadTarget = createTarget(node);
+                    this.savedTargets.add(loadTarget);
+                }
+            }
+            hasParsedTarget = true;
+            NodeList incomeList = doc.getElementsByTagName(XML_INCOME_ELEMENT);
+            if (recurringPaymentList.getLength() > 0) {
+                for (itr = 0; itr < incomeList.getLength(); itr++) {
+                    Node node = incomeList.item(itr);
+                    loadIncome = createIncome(node);
+                    this.savedIncomes.add(loadIncome);
+                }
+            }
+            System.out.println(Messages.LOCAL_STORAGE_MESSAGE_MERGE_FILE_SUCCESS);
+            saveToFile();
         } catch (FileNotFoundException e) {
             System.out.println(Messages.LOCAL_STORAGE_ERROR_NO_LOAD_FILE);
-        } catch (LocalStorageLoadDataInputError | NumberFormatException e) {
-            System.out.println(Messages.LOCAL_STORAGE_ERROR_IN_LOAD_FILE + fileIndex);
+        } catch (SAXException | IOException | ParserConfigurationException e) {
+            System.out.println(Messages.LOCAL_STORAGE_ERROR_CORRUPTED_OR_EMPTY_LOAD_FILE);
+        } catch (LocalStorageLoadDataException | NumberFormatException
+                 | NullPointerException | DateTimeParseException e) {
+            if (!hasParsedExpenses) {
+                System.out.println(Messages.LOCAL_STORAGE_EXPENSE_ERROR_IN_LOAD_FILE
+                        + (itr + 1));
+            } else if (!hasParsedRecurringPayment) {
+                System.out.println(Messages.LOCAL_STORAGE_RECURRING_PAYMENT_ERROR_IN_LOAD_FILE
+                        + (itr + 1));
+            } else if (!hasParsedTarget) {
+                System.out.println(Messages.LOCAL_STORAGE_TARGET_ERROR_IN_LOAD_FILE
+                        + (itr + 1));
+            } else {
+                System.out.println(Messages.LOCAL_STORAGE_INCOME_ERROR_IN_LOAD_FILE
+                        + (itr + 1));
+            }
         }
-    }
-
-    private static Expense createExpense(String textFromFile) throws LocalStorageLoadDataInputError {
-        String[] splitInputs = textFromFile.split(DIVIDER);
-        if (splitInputs.length != 5) {
-            throw new LocalStorageLoadDataInputError();
-        }
-        String name = splitInputs[0];
-        LocalDateTime dateTime = LocalDateTime.parse(splitInputs[1]);
-        String description = splitInputs[2];
-        BigDecimal amount = new BigDecimal(splitInputs[3]);
-        String category = splitInputs[4];
-        return new Expense(name, dateTime, description, amount, category);
     }
 
     /**
-     * This method saves all current expenses into a text file.
+     * Returns a command to sort expense based on saved configuration for sorting obtained from parsing node.
+     *
+     * @param sortConfig node containing sorting configuration
+     * @return command to sort expense
      */
-    public static void saveToFile(ArrayList<Expense> savedExpenses) {
+    private ConsoleCommandSortExpense loadSortCommandSetting(NodeList sortConfig) {
+        String type = sortConfig.item(0).getAttributes()
+                .getNamedItem(XML_SORTCONFIG_TYPE_ATTRIBUTE).getTextContent();
+        String order = sortConfig.item(0).getAttributes()
+                .getNamedItem(XML_SORTCONFIG_ORDER_ATTRIBUTE).getTextContent();
+        ConsoleCommandSortExpense defaultSortCommandSetting
+                = new ConsoleCommandSortExpense(type, order);
+        return defaultSortCommandSetting;
+    }
+
+    /**
+     * Returns an expense object based on information obtained from parsing an Expense node.
+     *
+     * @param node containing information about an expense
+     * @return an Expense object
+     * @throws LocalStorageLoadDataException if type of input node is incorrect
+     */
+    private Expense createExpense(Node node) throws LocalStorageLoadDataException {
+        if (node.getNodeType() != Node.ELEMENT_NODE) {
+            throw new LocalStorageLoadDataException();
+        }
+        Element element = (Element) node;
+
+        String description = element.getElementsByTagName(XML_EXPENSE_DESCRIPTION_ELEMENT)
+                .item(0).getTextContent();
+        if (description.isEmpty() || description.trim().isEmpty()) {
+            description = null;
+        }
+
+        String category = element.getElementsByTagName(XML_EXPENSE_CATEGORY_ELEMENT)
+                .item(0).getTextContent();
+        if (category.isEmpty() || category.trim().isEmpty()) {
+            category = null;
+        }
+
+        String remark = element.getElementsByTagName(XML_EXPENSE_REMARKS_ELEMENT)
+                .item(0).getTextContent();
+        if (remark.isEmpty() || remark.trim().isEmpty()) {
+            remark = null;
+        }
+
+        NodeList amountNodeList = element.getElementsByTagName(XML_EXPENSE_AMOUNT_ELEMENT);
+        String currency = amountNodeList.item(0).getAttributes()
+                .getNamedItem(XML_EXPENSE_AMOUNT_CURRENCY_ATTRIBUTE).getTextContent();
+        BigDecimal amount = new BigDecimal(amountNodeList.item(0).getTextContent());
+
+        LocalDateTime dateTime = LocalDateTime.parse(element
+                .getElementsByTagName(XML_EXPENSE_DATETIME_ELEMENT).item(0).getTextContent());
+
+        String name = element.getElementsByTagName(XML_EXPENSE_NAME_ELEMENT)
+                .item(0).getTextContent();
+
+        if (name.isEmpty() || name.trim().isEmpty() || currency.isEmpty() || currency.trim().isEmpty()) {
+            throw new LocalStorageLoadDataException();
+        }
+
+        String modeOfPayment = element.getElementsByTagName(XML_EXPENSE_MODE_OF_PAYMENT_ELEMENT)
+                .item(0).getTextContent();
+        if (modeOfPayment.isEmpty() || modeOfPayment.trim().isEmpty()) {
+            modeOfPayment = null;
+        }
+        return new Expense(name, dateTime, description, amount, category, remark, currency, modeOfPayment);
+    }
+
+    /**
+     * Returns a Target object based on information obtained from parsing a Target node.
+     *
+     * @param node containing information about a target
+     * @return a Target object
+     * @throws LocalStorageLoadDataException if type of input node is incorrect
+     */
+    private Target createTarget(Node node) throws LocalStorageLoadDataException {
+        if (node.getNodeType() != Node.ELEMENT_NODE) {
+            throw new LocalStorageLoadDataException();
+        }
+        Element element = (Element) node;
+        String name = element.getElementsByTagName(XML_TARGET_NAME_ELEMENT)
+                .item(0).getTextContent();
+
+        String description = element.getElementsByTagName(XML_TARGET_DESCRIPTION_ELEMENT)
+                .item(0).getTextContent();
+        if (description.isEmpty() || description.trim().isEmpty()) {
+            description = null;
+        }
+
+        NodeList amountNodeList = element.getElementsByTagName(XML_TARGET_AMOUNT_ELEMENT);
+        BigDecimal amount = new BigDecimal(amountNodeList.item(0).getTextContent());
+        String currencyAmount = amountNodeList.item(0).getAttributes()
+                .getNamedItem(XML_TARGET_CURRENCY_ATTRIBUTE).getTextContent();
+
+        NodeList currentAmountNodeList = element.getElementsByTagName(XML_TARGET_CURRENT_AMOUNT_ELEMENT);
+        BigDecimal currentAmount = new BigDecimal(currentAmountNodeList.item(0).getTextContent());
+        String currencyCurrentAmount = currentAmountNodeList.item(0).getAttributes()
+                .getNamedItem(XML_TARGET_CURRENCY_ATTRIBUTE).getTextContent();
+
+        LocalDateTime dateTime = LocalDateTime.parse(element
+                .getElementsByTagName(XML_TARGET_DATETIME_ELEMENT).item(0).getTextContent());
+
+        if (name.isEmpty() || name.trim().isEmpty()
+                || currencyCurrentAmount.isEmpty()
+                || currencyCurrentAmount.trim().isEmpty()
+                || currencyAmount.isEmpty()
+                || currencyAmount.trim().isEmpty()) {
+            throw new LocalStorageLoadDataException();
+        }
+
+        return new Target(name, dateTime, description, amount, currentAmount);
+    }
+
+    /**
+     * Returns a RecurringPayment object based on information obtained from parsing a RecurringPayment node.
+     *
+     * @param node containing information about a recurring payment
+     * @return a RecurringPayment object
+     * @throws LocalStorageLoadDataException if type of input node is incorrect
+     */
+    private RecurringPayment createRecurringPayment(Node node) throws LocalStorageLoadDataException {
+        if (node.getNodeType() != Node.ELEMENT_NODE) {
+            throw new LocalStorageLoadDataException();
+        }
+        Element element = (Element) node;
+        String name = element.getElementsByTagName(XML_RECURRING_PAYMENT_NAME_ELEMENT)
+                .item(0).getTextContent();
+
+        String description = element.getElementsByTagName(XML_RECURRING_PAYMENT_DESCRIPTION_ELEMENT)
+                .item(0).getTextContent();
+        if (description.isEmpty() || description.trim().isEmpty()) {
+            description = null;
+        }
+
+        String category = element.getElementsByTagName(XML_RECURRING_PAYMENT_CATEGORY_ELEMENT)
+                .item(0).getTextContent();
+        if (category.isEmpty() || category.trim().isEmpty()) {
+            category = null;
+        }
+
+        NodeList amountNodeList = element.getElementsByTagName(XML_RECURRING_PAYMENT_AMOUNT_ELEMENT);
+        BigDecimal amount = new BigDecimal(amountNodeList.item(0).getTextContent());
+        String currency = amountNodeList.item(0).getAttributes()
+                .getNamedItem(XML_RECURRING_PAYMENT_CURRENCY_ATTRIBUTE).getTextContent();
+
+        int interval = Integer.parseInt(element.getElementsByTagName(XML_RECURRING_PAYMENT_INTERVAL_ELEMENT)
+                .item(0).getTextContent());
+
+        if (name.isEmpty() || name.trim().isEmpty() || currency.isEmpty() || currency.trim().isEmpty()) {
+            throw new LocalStorageLoadDataException();
+        }
+
+        String modeOfPayment = element.getElementsByTagName(XML_RECURRING_PAYMENT_MODE_OF_PAYMENT_ELEMENT)
+                .item(0).getTextContent();
+        if (modeOfPayment.isEmpty() || modeOfPayment.trim().isEmpty()) {
+            modeOfPayment = null;
+        }
+
+        return new RecurringPayment(name, interval, description, amount, category, currency, modeOfPayment);
+    }
+
+    /**
+     * Returns an Income object based on information obtained from parsing a income node.
+     *
+     * @param node containing information about an income
+     * @return an Income object
+     * @throws LocalStorageLoadDataException if type of input node is incorrect
+     */
+    private Income createIncome(Node node) throws LocalStorageLoadDataException {
+        if (node.getNodeType() != Node.ELEMENT_NODE) {
+            throw new LocalStorageLoadDataException();
+        }
+        Element element = (Element) node;
+        String name = element.getElementsByTagName(XML_INCOME_NAME_ELEMENT)
+                .item(0).getTextContent();
+
+        LocalDateTime dateTime = LocalDateTime.parse(element
+                .getElementsByTagName(XML_INCOME_DATETIME_ELEMENT).item(0).getTextContent());
+
+        String description = element.getElementsByTagName(XML_INCOME_DESCRIPTION_ELEMENT)
+                .item(0).getTextContent();
+        if (description.isEmpty() || description.trim().isEmpty()) {
+            description = null;
+        }
+
+        NodeList amountNodeList = element.getElementsByTagName(XML_INCOME_AMOUNT_ELEMENT);
+        BigDecimal amount = new BigDecimal(amountNodeList.item(0).getTextContent());
+        String currency = amountNodeList.item(0).getAttributes()
+                .getNamedItem(XML_EXPENSE_AMOUNT_CURRENCY_ATTRIBUTE).getTextContent();
+
+        if (name.isEmpty() || name.trim().isEmpty() || currency.isEmpty() || currency.trim().isEmpty()) {
+            throw new LocalStorageLoadDataException();
+        }
+
+        return new Income(name, dateTime, description, amount);
+    }
+
+    /**
+     * Parse current expenses and configurations for sorting expenses and saves it to a xml file in storage.
+     *
+     */
+    public void saveToFile() {
         try {
-            initialiseFile();
-            ArrayList<String> compiledData = taskToStringArray(savedExpenses);
-            writeToFile(compiledData);
-        } catch (IOException e) {
-            System.out.println(Messages.LOCAL_STORAGE_ERROR_SAVE_DATA);
+            DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+            Document doc = docBuilder.newDocument();
+            Element rootElement = doc.createElement(XML_ROOT);
+            doc.appendChild(rootElement);
+            Element sortConfig = doc.createElement(XML_SORTCONFIG_ELEMENT);
+            sortConfig.setAttribute(XML_SORTCONFIG_TYPE_ATTRIBUTE, sortCommandSetting.getType());
+            sortConfig.setAttribute(XML_SORTCONFIG_ORDER_ATTRIBUTE, sortCommandSetting.getOrder());
+            rootElement.appendChild(sortConfig);
+            parseExpenseToXml(doc, rootElement, savedExpenses);
+            parseRecurringPaymentToXml(doc, rootElement, savedRecurringPayments);
+            parseTargetToXml(doc, rootElement, savedTargets);
+            parseIncomeToXml(doc, rootElement, savedIncomes);
+            writeXml(doc);
+        } catch (ParserConfigurationException | TransformerException e) {
+            System.out.println(Messages.LOCAL_STORAGE_ERROR_WRITING_DATA);
+        } catch (DOMException e) {
+            System.out.println(Messages.LOCAL_STORAGE_ERROR_INVALID_CHARACTER_IN_SAVE_DATA);
         }
     }
 
-    /**
-     * This method converts all current expenses stored in expenses manager into a string
-     * containing all information of each expense and store them into a collection.
-     *
-     * @return list of string containing information of all expenses
-     */
-    private static ArrayList<String> taskToStringArray(ArrayList<Expense> savedExpenses) {
-        ArrayList<String> textData = new ArrayList<>();
+    private void parseExpenseToXml(Document doc, Element rootElement, ArrayList<Expense> savedExpenses) {
+        int index = 1;
         for (Expense expense : savedExpenses) {
-            textData.add(
-                    expense.getName() + DIVIDER
-                            + expense.getDateTime().toString() + DIVIDER
-                            + expense.getDescription() + DIVIDER
-                            + expense.getAmount() + DIVIDER
-                            + expense.getCategory()
-            );
+            Element expenseElement = doc.createElement(XML_EXPENSE_ELEMENT);
+            expenseElement.setAttribute(XML_EXPENSE_ID_ATTRIBUTE, Integer.toString(index));
+            rootElement.appendChild(expenseElement);
+            Element name = doc.createElement(XML_EXPENSE_NAME_ELEMENT);
+            name.setTextContent(expense.getName());
+            expenseElement.appendChild(name);
+            Element dateTime = doc.createElement(XML_EXPENSE_DATETIME_ELEMENT);
+            dateTime.setTextContent(expense.getDateTime().toString());
+            expenseElement.appendChild(dateTime);
+            Element description = doc.createElement(XML_EXPENSE_DESCRIPTION_ELEMENT);
+            description.setTextContent(expense.getDescription());
+            expenseElement.appendChild(description);
+            Element amount = doc.createElement(XML_EXPENSE_AMOUNT_ELEMENT);
+            amount.setAttribute(XML_EXPENSE_AMOUNT_CURRENCY_ATTRIBUTE, expense.getCurrency());
+            amount.setTextContent(expense.getAmount().toString());
+            expenseElement.appendChild(amount);
+            Element category = doc.createElement(XML_EXPENSE_CATEGORY_ELEMENT);
+            category.setTextContent(expense.getCategory());
+            expenseElement.appendChild(category);
+            Element remark = doc.createElement(XML_EXPENSE_REMARKS_ELEMENT);
+            remark.setTextContent(expense.getRemarks());
+            expenseElement.appendChild(remark);
+            Element modeOfPayment = doc.createElement(XML_EXPENSE_MODE_OF_PAYMENT_ELEMENT);
+            modeOfPayment.setTextContent(expense.getModeOfPayment());
+            expenseElement.appendChild(modeOfPayment);
+            index++;
         }
-        return textData;
     }
 
-    /**
-     * This method saves information of all expense into a file in the form of string.
-     *
-     * @param textToWrite list of string containing information of all expenses.
-     * @throws IOException when trying to access a file through a wrong path or when file has issues
-     */
-    private static void writeToFile(ArrayList<String> textToWrite) throws IOException {
-        FileWriter fw = new FileWriter(new File(FILE_PATH_EXPENSES).getAbsolutePath(), false);
-        for (String task : textToWrite) {
-            fw.write(task + "\n");
+    private void parseTargetToXml(Document doc, Element rootElement, ArrayList<Target> savedTargets) {
+        int index = 1;
+        for (Target target : savedTargets) {
+            Element targetElement = doc.createElement(XML_TARGET_ELEMENT);
+            targetElement.setAttribute(XML_TARGET_ID_ATTRIBUTE, Integer.toString(index));
+            rootElement.appendChild(targetElement);
+            Element name = doc.createElement(XML_TARGET_NAME_ELEMENT);
+            name.setTextContent(target.getName());
+            targetElement.appendChild(name);
+            Element dateTime = doc.createElement(XML_TARGET_DATETIME_ELEMENT);
+            dateTime.setTextContent(target.getDateTime().toString());
+            targetElement.appendChild(dateTime);
+            Element description = doc.createElement(XML_TARGET_DESCRIPTION_ELEMENT);
+            description.setTextContent(target.getDescription());
+            targetElement.appendChild(description);
+            Element amount = doc.createElement(XML_TARGET_AMOUNT_ELEMENT);
+            amount.setAttribute(XML_TARGET_CURRENCY_ATTRIBUTE, DEFAULT_CURRENCY);
+            amount.setTextContent(target.getAmount().toString());
+            targetElement.appendChild(amount);
+            Element currentAmount = doc.createElement(XML_TARGET_CURRENT_AMOUNT_ELEMENT);
+            currentAmount.setAttribute(XML_TARGET_CURRENCY_ATTRIBUTE, DEFAULT_CURRENCY);
+            currentAmount.setTextContent(target.getCurrentAmount().toString());
+            targetElement.appendChild(currentAmount);
+            index++;
         }
-        fw.close();
+    }
+
+    private void parseRecurringPaymentToXml(Document doc, Element rootElement,
+                                            ArrayList<RecurringPayment> savedRecurringPayments) {
+        int index = 1;
+        for (RecurringPayment recurringPayment : savedRecurringPayments) {
+            Element recurringPaymentElement = doc.createElement(XML_RECURRING_PAYMENT_ELEMENT);
+            recurringPaymentElement.setAttribute(XML_RECURRING_PAYMENT_ID_ATTRIBUTE, Integer.toString(index));
+            rootElement.appendChild(recurringPaymentElement);
+            Element name = doc.createElement(XML_RECURRING_PAYMENT_NAME_ELEMENT);
+            name.setTextContent(recurringPayment.getName());
+            recurringPaymentElement.appendChild(name);
+            Element interval = doc.createElement(XML_RECURRING_PAYMENT_INTERVAL_ELEMENT);
+            interval.setTextContent("" + recurringPayment.getInterval());
+            recurringPaymentElement.appendChild(interval);
+            Element description = doc.createElement(XML_RECURRING_PAYMENT_DESCRIPTION_ELEMENT);
+            description.setTextContent(recurringPayment.getDescription());
+            recurringPaymentElement.appendChild(description);
+            Element amount = doc.createElement(XML_RECURRING_PAYMENT_AMOUNT_ELEMENT);
+            amount.setAttribute(XML_RECURRING_PAYMENT_CURRENCY_ATTRIBUTE, recurringPayment.getCurrency());
+            amount.setTextContent(recurringPayment.getAmount().toString());
+            recurringPaymentElement.appendChild(amount);
+            Element category = doc.createElement(XML_RECURRING_PAYMENT_CATEGORY_ELEMENT);
+            category.setTextContent(recurringPayment.getCategory());
+            recurringPaymentElement.appendChild(category);
+            Element modeOfPayment = doc.createElement(XML_RECURRING_PAYMENT_MODE_OF_PAYMENT_ELEMENT);
+            modeOfPayment.setTextContent(recurringPayment.getModeOfPayment());
+            recurringPaymentElement.appendChild(modeOfPayment);
+            index++;
+        }
+    }
+
+    private void parseIncomeToXml(Document doc, Element rootElement, ArrayList<Income> savedIncomes) {
+        int index = 1;
+        for (Income income : savedIncomes) {
+            Element incomeElement = doc.createElement(XML_INCOME_ELEMENT);
+            incomeElement.setAttribute(XML_INCOME_ID_ATTRIBUTE, Integer.toString(index));
+            rootElement.appendChild(incomeElement);
+            Element name = doc.createElement(XML_INCOME_NAME_ELEMENT);
+            name.setTextContent(income.getName());
+            incomeElement.appendChild(name);
+            Element dateTime = doc.createElement(XML_INCOME_DATETIME_ELEMENT);
+            dateTime.setTextContent(income.getDateTime().toString());
+            incomeElement.appendChild(dateTime);
+            Element description = doc.createElement(XML_INCOME_DESCRIPTION_ELEMENT);
+            description.setTextContent(income.getDescription());
+            incomeElement.appendChild(description);
+            Element amount = doc.createElement(XML_INCOME_AMOUNT_ELEMENT);
+            amount.setAttribute(XML_INCOME_CURRENCY_ATTRIBUTE, DEFAULT_CURRENCY);
+            amount.setTextContent(income.getAmount().toString());
+            incomeElement.appendChild(amount);
+            index++;
+        }
+    }
+
+    private void writeXml(Document doc)
+            throws TransformerException {
+        TransformerFactory transformerFactory = TransformerFactory.newInstance();
+        Transformer transformer = transformerFactory.newTransformer();
+        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+        DOMSource source = new DOMSource(doc);
+        StreamResult result = new StreamResult(saveFile);
+        transformer.transform(source, result);
+    }
+
+    public ArrayList<Expense> getSavedExpenses() {
+        return savedExpenses;
+    }
+
+    public void setSavedExpenses(ArrayList<Expense> savedExpenses) {
+        this.savedExpenses = savedExpenses;
+        saveToFile();
+    }
+
+    public ArrayList<RecurringPayment> getSavedRecurringPayments() {
+        return savedRecurringPayments;
+    }
+
+    public void setSavedRecurringPayments(ArrayList<RecurringPayment> savedRecurringPayments) {
+        this.savedRecurringPayments = savedRecurringPayments;
+        saveToFile();
+    }
+
+    public ArrayList<Target> getSavedTargets() {
+        return savedTargets;
+    }
+
+    public void setSavedTargets(ArrayList<Target> savedTargets) {
+        this.savedTargets = savedTargets;
+        saveToFile();
+    }
+
+    public ArrayList<Income> getSavedIncomes() {
+        return savedIncomes;
+    }
+
+    public void setSavedIncomes(ArrayList<Income> savedIncomes) {
+        this.savedIncomes = savedIncomes;
+        saveToFile();
+    }
+
+    public ConsoleCommandSortExpense getSortCommandSetting() {
+        return sortCommandSetting;
+    }
+
+    public void setSortCommandSetting(ConsoleCommandSortExpense sortCommandSetting) {
+        this.sortCommandSetting = sortCommandSetting;
+        saveToFile();
     }
 }
 

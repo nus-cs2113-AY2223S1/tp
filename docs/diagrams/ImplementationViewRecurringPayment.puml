@@ -1,0 +1,40 @@
+@startuml
+!include https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/Styles.puml
+
+skinparam sequenceReferenceBackgroundColor #ffffff
+
+Participant "consoleInterface:ConsoleInterface" as consoleInterface USER_INTERFACE_COLOR_1
+Participant "recurringPaymentManager:RecurringPaymentManager" as recurringPaymentManager DATA_COLOR_4
+
+activate consoleInterface USER_INTERFACE_COLOR_1
+
+opt consoleCommand instanceof ConsoleCommandViewRecurringPayment
+    consoleInterface -[USER_INTERFACE_COLOR_1]> consoleInterface : \lrunCommandViewRecurringPayment(\n\tconsoleCommand:ConsoleCommandViewRecurringPayment\n)
+    activate consoleInterface USER_INTERFACE_COLOR_1
+
+    alt recurringPaymentIndex >= 0
+        consoleInterface -[USER_INTERFACE_COLOR_1]> recurringPaymentManager : getRecurringPayment(recurringPaymentIndex:int)
+        activate recurringPaymentManager DATA_COLOR_4
+
+        recurringPaymentManager --[DATA_COLOR_4]> consoleInterface : recurringPayment:RecurringPayment
+        deactivate recurringPaymentManager
+
+        ref over consoleInterface: Print Recurring Payment
+    else else
+            consoleInterface -[USER_INTERFACE_COLOR_1]> recurringPaymentManager : getRecurringPayments()
+            activate recurringPaymentManager DATA_COLOR_4
+
+            recurringPaymentManager --[DATA_COLOR_4]> consoleInterface : recurringPayments:ArrayList<RecurringPayment>
+            deactivate recurringPaymentManager
+
+            loop through recurringPayments
+            ref over consoleInterface: Print Recurring Payment
+            end
+    end
+
+    consoleInterface --[USER_INTERFACE_COLOR_1]> consoleInterface
+    deactivate consoleInterface
+end
+
+deactivate consoleInterface
+@enduml
