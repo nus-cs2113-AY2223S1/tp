@@ -1,6 +1,6 @@
 package recipeditor.command;
 
-public class HelpCommand extends Command{
+public class HelpCommand extends Command {
 
     public static final String COMMAND_TYPE = "/help";
 

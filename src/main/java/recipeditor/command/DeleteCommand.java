@@ -9,8 +9,7 @@ import recipeditor.ui.Ui;
 public class DeleteCommand extends Command {
     public static final String COMMAND_TYPE = "/delete";
 
-    public static final String COMMAND_SYNTAX = "Syntax for /delete \n"
-            +"\t /delete <index>";
+    public static final String COMMAND_SYNTAX = "Syntax for /delete \n" + "\t /delete <index>";
     private final int index;
 
     /**
@@ -20,6 +19,10 @@ public class DeleteCommand extends Command {
      */
     public DeleteCommand(int index) {
         this.index = index;
+    }
+
+    public static String getCommandType() {
+        return COMMAND_TYPE;
     }
 
     /**
@@ -32,16 +35,11 @@ public class DeleteCommand extends Command {
             Recipe deletedRecipe = RecipeList.getRecipe(index);
             RecipeList.deleteRecipe(index);
             Storage.writeRecipeListToFile(Recipeditor.DATA_FILE_PATH);
-            return new CommandResult(String.format(
-                    deletedRecipe.getTitle() + " is deleted.%n"));
+            return new CommandResult(String.format(deletedRecipe.getTitle() + " is deleted.%n"));
         } catch (IndexOutOfBoundsException e) {
             Ui.showMessageInline("Current number of saved recipes:", Integer.toString(RecipeList.getSize()));
             return new CommandResult("Delete recipe index out of bound.");
         }
-    }
-
-    public static String getCommandType() {
-        return COMMAND_TYPE;
     }
 
 }

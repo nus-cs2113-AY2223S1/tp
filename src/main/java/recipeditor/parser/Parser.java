@@ -24,7 +24,7 @@ import java.io.FileNotFoundException;
 import java.util.logging.Logger;
 
 public class Parser {
-    private static Logger logger = Logger.getLogger("LOGS");
+    private static final Logger logger = Logger.getLogger("LOGS");
 
     public static Command parseCommand(String input) {
         String[] parsed = input.split(" ");
@@ -55,7 +55,7 @@ public class Parser {
 
     private static Command parseAddCommand() {
         boolean saveToTemp = new Editor().enterEditor(Storage.TEMPLATE_PATH);
-        boolean exitLoop = (saveToTemp) ? false : true;
+        boolean exitLoop = !saveToTemp;
         boolean valid = false;
         Recipe addRecipe = new Recipe();
         while (!exitLoop) {

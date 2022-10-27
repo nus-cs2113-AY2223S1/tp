@@ -5,11 +5,10 @@ import recipeditor.recipe.RecipeList;
 
 public class EditCommand extends Command {
     public static final String COMMAND_TYPE = "/edit";
-    public static final String COMMAND_SYNTAX = "Syntax for /edit \n"
-            +"\t /edit <index>";
-    private boolean editSuccess;
-    private int index;
-    private Recipe editedRecipe;
+    public static final String COMMAND_SYNTAX = "Syntax for /edit \n" + "\t /edit <index>";
+    private final boolean editSuccess;
+    private final int index;
+    private final Recipe editedRecipe;
 
     public EditCommand(boolean editSuccess, int recipeIndex, Recipe editedRecipe) {
         this.editSuccess = editSuccess;
