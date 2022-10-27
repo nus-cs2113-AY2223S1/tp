@@ -5,6 +5,24 @@
 OneDoc is a desktop application for doctors to manage patients’ profile, visit records, prescriptions records and
 medicine information via Command Line Interface.
 
+- [User Guide](#user-guide)
+    * [Introduction](#introduction)
+    * [Quick Start](#quick-start)
+    * [Features](#features)
+        + [Main Menu](#main-menu)
+            - [Going to main menu: `main`](#going-to-main-menu-main)
+            - [Choosing an option: `index`](#choosing-an-option-index)
+        + [3. Prescription](#3-prescription)
+            - [Adding New Prescription: `add`](#adding-new-prescription-add)
+            - [Modifying a patient’s prescription: `edit`](#modifying-a-patient-s-prescription-edit)
+            - [Viewing List of All Existing Prescriptions: `viewAll`](#viewing-list-of-all-existing-prescriptions-viewall)
+            - [Viewing all patient’s prescription: `viewPatientPres`](#viewing-all-patient-s-prescription-viewpatientpres)
+            - [Viewing all patient’s active prescription: `viewActPatientPres`](#viewing-all-patient-s-active-prescription-viewactpatientpres)
+            - [Changing prescription status to active: `activate`](#changing-prescription-status-to-active-activate)
+            - [Changing prescription status to inactive: `deactivate`](#changing-prescription-status-to-inactive-deactivate)
+    * [FAQ](#faq)
+    * [Command Summary](#command-summary)
+
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed.
