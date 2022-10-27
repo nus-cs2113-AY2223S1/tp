@@ -119,7 +119,7 @@ ____________________________________________________________
 Format: ```add-user /n [USERNAME] /a [AGE] /c [CONTACT_NUMBER]```
 
 Note:
-1. Username is unique
+1. Username is unique, length must be less than 20 chars
 2. Age must be an integer in range from 10 to 100
 3. Contact number must an integer of 8 digits
 
@@ -198,8 +198,9 @@ Format: ```add-item /n [ITEM_NAME] /c [CATEGORY_INDEX] /p [PRICE] /o [USERNAME]`
 
 Note:
 1. Owner cannot have duplicate items (items have the same name)
-2. To choose category, please use ```list-categories``` to list them out and use the index
-3. Price must be a float, and in range from 0 to 10000
+2. Item name length must be less than 20 chars
+3To choose category, please use ```list-categories``` to list them out and use the index
+4Price must be a float, and in range from 0 to 10000
 
 Example of usage: ```add-item /n weight /c 1 /p 0.5 /o bui```
 
@@ -293,11 +294,11 @@ Format: ```sort-items /mode [MODE_OF_SORTING] /min [MIN_PRICE] /max [MAX_PRICE] 
 
 Note:
 
-1. Mode of sorting must either be ```lh``` (low to high) or ``` hl``` (high to low)
-2. Minimum price, maximum price and category filters are optional
-3. Minimum and Maximum price must be more than 0
-4. Minimum price must be less than maximum price, and both are in range form 0 to 10000
-5. Category number must be an integer
+1. Mode of sorting must either be ```lh``` (low to high) or ``` hl``` (high to low) (default: ```lh```)
+2. Mode, minimum price, maximum price and category filters are optional
+3. Minimum and Maximum price must be more than 0 and less than 10000
+4. Minimum price must be less than maximum price
+5. Category number must be an integer, (default: 0, which means all categories)
 
 Example of usage: ```sort-items /mode lh /min 1 /max 5```
 
@@ -360,8 +361,9 @@ ____________________________________________________________
 Format: ```add-tx /i [ITEM_ID] /b [BORROWER_NAME] /d [DURATION] /c [CREATED_DATE]```
 
 Note:
-1. Duration must be an integer, greater than 0
-2. The format of create date is YYYY-MM-DD, and it must be before the input date
+1. The unit of duration is days
+2. Duration must be an integer, greater than 0 and less than 1461 (4 years)
+3. The format of create date is YYYY-MM-DD, and it must be before the input date
 
 Example of usage: ```add-tx /i 2cc4edf3 /b thanh /d 5 /c 2022-10-20```
 

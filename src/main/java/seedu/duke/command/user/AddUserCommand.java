@@ -12,13 +12,7 @@ import seedu.duke.user.User;
 import seedu.duke.user.UserList;
 import seedu.duke.ui.Ui;
 
-import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_CONTACT_FORMAT_INVALID;
-import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_CONTACT_LENGTH_INVALID;
-import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INSUFFICIENT_ARGUMENTS;
-import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PARTS;
-import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_USERNAME_TAKEN;
-import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_USER_AGE_INVALID;
-import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_USER_AGE_OUT_OF_RANGE;
+import static seedu.duke.exception.message.ExceptionMessages.*;
 
 //@@author bdthanh
 
@@ -75,7 +69,10 @@ public class AddUserCommand extends Command {
      * @return true If that name cannot be found in the current user list
      * @throws DuplicateException If that username is taken
      */
-    private boolean isValidName(String userName) throws DuplicateException {
+    private boolean isValidName(String userName) throws DuplicateException, InvalidUserException {
+        if (userName.length() > 20) {
+            throw new InvalidUserException(MESSAGE_NAME_LENGTH_INVALID);
+        }
         try {
             userList.getUserById(userName);
             throw new DuplicateException(MESSAGE_USERNAME_TAKEN);
@@ -115,7 +112,9 @@ public class AddUserCommand extends Command {
             throw new ContactNumberInvalidException(MESSAGE_CONTACT_LENGTH_INVALID);
         }
         try {
-            Integer.parseInt(contactNumber);
+            if (Integer.parseInt(contactNumber) < 0) {
+                throw new ContactNumberInvalidException(MESSAGE_CONTACT_FORMAT_INVALID);
+            }
             return true;
         } catch (NumberFormatException e) {
             throw new NumberFormatException(MESSAGE_CONTACT_FORMAT_INVALID);

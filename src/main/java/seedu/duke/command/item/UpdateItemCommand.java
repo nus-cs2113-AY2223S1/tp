@@ -4,6 +4,7 @@ package seedu.duke.command.item;
 import seedu.duke.command.Command;
 import seedu.duke.exception.InsufficientArgumentsException;
 import seedu.duke.exception.InvalidArgumentException;
+import seedu.duke.exception.InvalidCategoryException;
 import seedu.duke.exception.InvalidPriceException;
 import seedu.duke.exception.ItemNotFoundException;
 import seedu.duke.ui.Ui;
@@ -78,7 +79,7 @@ public class UpdateItemCommand extends Command {
     }
 
     public boolean executeCommand()
-            throws InvalidArgumentException, ItemNotFoundException, InvalidPriceException {
+            throws InvalidArgumentException, ItemNotFoundException, InvalidPriceException, InvalidCategoryException {
         String[] args = getArgsUpdateItemCmd();
         if (areValidArgs(args)) {
             String itemId = args[0];

@@ -128,7 +128,7 @@ public class AddTransactionCommand extends Command {
      */
     private boolean isValidDuration(String duration) throws DurationInvalidException {
         try {
-            if (Integer.parseInt(duration) < 0) {
+            if (Integer.parseInt(duration) < 0 || Integer.parseInt(duration) > 1461) {
                 throw new DurationInvalidException(MESSAGE_DURATION_INVALID);
             }
             return true;
@@ -145,8 +145,10 @@ public class AddTransactionCommand extends Command {
      * @throws DateFormatInvalidException If the date is in wrong format or after the current day
      */
     private boolean isValidCreatedDate(String createdAt) throws DateFormatInvalidException {
+        LocalDate validBeginningDate = LocalDate.parse("2016-01-01");
         try {
-            if (LocalDate.parse(createdAt).isAfter(LocalDate.now())) {
+            if (LocalDate.parse(createdAt).isAfter(LocalDate.now())
+                    || LocalDate.parse(createdAt).isBefore(validBeginningDate)) {
                 throw new DateFormatInvalidException(MESSAGE_CREATED_DATE_RANGE_INVALID);
             }
             return true;

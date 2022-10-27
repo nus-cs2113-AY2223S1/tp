@@ -1,5 +1,6 @@
 package seedu.duke.item;
 
+import seedu.duke.exception.InvalidCategoryException;
 import seedu.duke.exception.InvalidItemException;
 import seedu.duke.exception.ItemNotFoundException;
 import seedu.duke.transaction.TransactionList;
@@ -32,7 +33,7 @@ public class ItemList {
         assert itemList.size() != 0 : "item not added!";
     }
 
-    public Item updateItemPrice(String itemId, double price) throws ItemNotFoundException {
+    public Item updateItemPrice(String itemId, double price) throws ItemNotFoundException, InvalidCategoryException {
         for (int i = 0; i < this.itemList.size(); ++i) {
             Item item = this.itemList.get(i);
             if (item.getItemId().equals(itemId)) {

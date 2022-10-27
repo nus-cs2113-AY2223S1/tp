@@ -1,5 +1,6 @@
 package seedu.duke.storage;
 
+import seedu.duke.exception.InvalidCategoryException;
 import seedu.duke.exception.ItemFileNotFoundException;
 import seedu.duke.exception.StoreFailureException;
 import seedu.duke.item.Item;
@@ -88,7 +89,7 @@ public class ItemStorage extends Storage {
      * @param splitItemLine The raw item information.
      * @return An Item with full information.
      */
-    public static Item handleItemLine(String[] splitItemLine) {
+    public static Item handleItemLine(String[] splitItemLine) throws InvalidCategoryException {
         String itemId = splitItemLine[0];
         String itemName = splitItemLine[1];
         double price = Double.parseDouble(splitItemLine[2]);

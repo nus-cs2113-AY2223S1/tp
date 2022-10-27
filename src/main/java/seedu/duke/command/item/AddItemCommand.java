@@ -4,7 +4,9 @@ import seedu.duke.command.Command;
 import seedu.duke.exception.DuplicateException;
 import seedu.duke.exception.InsufficientArgumentsException;
 import seedu.duke.exception.InvalidArgumentException;
+import seedu.duke.exception.InvalidCategoryException;
 import seedu.duke.exception.InvalidPriceException;
+import seedu.duke.exception.InvalidUserException;
 import seedu.duke.exception.ItemNotFoundException;
 import seedu.duke.exception.UserNotFoundException;
 import seedu.duke.ui.Ui;
@@ -16,10 +18,11 @@ import seedu.duke.user.UserList;
 
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INSUFFICIENT_ARGUMENTS;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PARTS;
-import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_SAME_OWNER;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_NUMBER_FORMAT_INVALID;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_PRICE_FORMAT_INVALID;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_PRICE_OUT_OF_RANGE;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_SAME_OWNER;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_NAME_LENGTH_INVALID;
 
 //@@author bdthanh
 
@@ -85,7 +88,11 @@ public class AddItemCommand extends Command {
      * @return true If that user do not have any item with the same name
      * @throws DuplicateException If that user have item with the same name
      */
-    private boolean isValidName(String itemName, String owner) throws DuplicateException {
+    private boolean isValidName(String itemName, String owner)
+            throws DuplicateException, InvalidUserException {
+        if (itemName.length() > 20) {
+            throw new InvalidUserException(MESSAGE_NAME_LENGTH_INVALID);
+        }
         try {
             Item item = itemList.getItemByName(itemName);
             if (item.getOwnerId().equals(owner)) {
@@ -156,7 +163,7 @@ public class AddItemCommand extends Command {
      * @throws InvalidPriceException If price value is less than 0
      */
     private boolean areValidArgs(String[] args)
-            throws UserNotFoundException, DuplicateException, InvalidPriceException {
+            throws UserNotFoundException, DuplicateException, InvalidPriceException, InvalidUserException {
         assert args.length == 4 : "Args length is invalid";
         return isValidName(args[0], args[3]) && isValidCategoryNumber(args[1])
                 && isValidPrice(args[2]) && isValidOwner(args[3]);
@@ -172,7 +179,7 @@ public class AddItemCommand extends Command {
      * @throws InvalidPriceException    If price value is less than 0
      */
     public boolean executeCommand() throws InvalidArgumentException, UserNotFoundException,
-            DuplicateException, InvalidPriceException {
+            DuplicateException, InvalidPriceException, InvalidCategoryException, InvalidUserException {
         String[] args = getArgsAddItemCmd();
         assert args.length == 4 : "Args length is invalid";
         if (areValidArgs(args)) {
