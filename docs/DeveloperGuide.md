@@ -80,6 +80,8 @@ The following sequence diagram shows how the API key is loaded.
 
 #### Storage Component
 
+#### Implementation
+![Sequence Diagram](images/LoadFileSequenceDiagram.png)
 ##### FileWriter
 
 ##### FileLoader
@@ -196,6 +198,8 @@ printing.
 The following sequence diagrams shows how a favourite / unfavourite command works:
 
 ![Favourite Sequence Diagram](images/FavouriteSequenceDiagram.png)
+
+
 
 #### Design considerations
 
