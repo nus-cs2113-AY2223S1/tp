@@ -270,7 +270,9 @@ MoneyGoWhere is a financial tracker designed specifically to help computing prof
 
 ## Non-Functional Requirements
 
-1. Works on any mainstream desktop OS supported by `Java 11`
+1. The program should provide the same user experience regardless of the platform it is running on.
+2. The program should be able to run without an internet connection.
+3. The program should be responsive.
 
 ## Glossary
 
