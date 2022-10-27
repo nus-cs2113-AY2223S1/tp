@@ -105,7 +105,7 @@ public class UI {
     public void printMessageAndObject(String object, String message, int index) {
         System.out.println(message);
         printLine();
-        System.out.println((index + 1) + ")");
+        System.out.println("#" + (index + 1) + ")");
         System.out.println(object);
         printLine();
     }
