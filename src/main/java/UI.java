@@ -194,20 +194,7 @@ public class UI {
     public static final String RETURN_TO_MAIN = "\n* To return to main menu: main";
 
     public static final String EXIT_PROGRAM = "\n* To quit OneDoc: bye";
-
-    public void printActivatePrescriptionMessage(String prescription) {
-        System.out.println("Ok, I've activated the prescription below:");
-        printLine();
-        System.out.println(prescription);
-        printLine();
-    }
-
-    public void printDeactivatePrescriptionMessage(String prescription) {
-        System.out.println("Ok, I've deactivated the prescription below:");
-        printLine();
-        System.out.println(prescription);
-        printLine();
-    }
+    
 
     public void printNoMatchingPrescriptionMessage() {
         System.out.println(NO_MATCHING_PRESCRIPTION_MESSAGE);
