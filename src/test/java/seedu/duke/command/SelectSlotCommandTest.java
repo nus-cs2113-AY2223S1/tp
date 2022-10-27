@@ -20,6 +20,9 @@ public class SelectSlotCommandTest {
         Ui ui = new Ui();
         Storage storage = new Storage();
 
+        // set to semester 1
+        state.setSemester(1);
+
         // add cs2113 to timetable. cs2113 has tutorial defaults to tut 1
         String[] input1 = {"add", "cs2113"};
         AddModuleCommand addModuleCommand = new AddModuleCommand(input1);
@@ -30,30 +33,10 @@ public class SelectSlotCommandTest {
         SelectSlotCommand selectSlotCommand = new SelectSlotCommand(input);
         selectSlotCommand.execute(state, ui, storage);
 
-        // view timetable to check if the tutorial slot has been changed to T03
-        // capture the output of view timetable command as the actual output
-        String input2 = "view";
-        ViewTimetableCommand viewTimetableCommand = new ViewTimetableCommand(input2);
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-        viewTimetableCommand.execute(state, ui, storage);
+        String expectedOutput = state.getSelectedModulesList().get(0).getSelectedSlots().toString();
 
-        String expectedOutput =
-                "                                                                    \n"
-                        + "          : Mon      : Tues     : Wed      : Thur     : Fri         \n"
-                        + "====================================================================\n"
-                        + "   1600   :          :          :          :          +----------+  \n"
-                        + "   1630   :          :          :          :          |CS2113    |  \n"
-                        + "   1700   :          :          :          +----------+ LEC[1]   |  \n"
-                        + "   1730   :          :          :          |CS2113    |          |  \n"
-                        + "   1800   :          :          :          +-TUT[3]---+----------+  \n"
-                        + "   1830   :          :          :          :          :             \n"
-                        + "   1900   :          :          :          :          :             \n"
-                        + "                                                                    \n";
-
-        assertEquals(expectedOutput.replaceAll("\\s+", ""),
-                outContent.toString().replaceAll("\\s+", ""));
-
+        // selected module list should have cs2113 with lecture 1, tutorial 3
+        assertEquals("{LECTURE=1, TUTORIAL=3}", expectedOutput);
     }
 
     @Test
@@ -72,43 +55,10 @@ public class SelectSlotCommandTest {
         SelectSlotCommand selectSlotCommand = new SelectSlotCommand(input);
         selectSlotCommand.execute(state, ui, storage);
 
-        // view timetable to check if the tutorial slot has been changed to T03
-        // capture the output of the view timetable command as the actual output
-        String input2 = "view";
-        ViewTimetableCommand viewTimetableCommand = new ViewTimetableCommand(input2);
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-        viewTimetableCommand.execute(state, ui, storage);
+        String expectedOutput = state.getSelectedModulesList().get(0).getSelectedSlots().toString();
 
-        String expectedOutput =
-                "                                                                    \n"
-                        + "          : Mon      : Tues     : Wed      : Thur     : Fri         \n"
-                        + "====================================================================\n"
-                        + "   0900   :          +----------+          :          :             \n"
-                        + "   0930   :          |IE2141    |          :          :             \n"
-                        + "   1000   :          | TUT[01]  |          :          :             \n"
-                        + "   1030   :          |          |          :          :             \n"
-                        + "   1100   :          +----------+          :          :             \n"
-                        + "   1130   :          :          :          :          :             \n"
-                        + "   1200   :          :          :          :          :             \n"
-                        + "   1230   :          :          :          :          :             \n"
-                        + "   1300   :          :          :          :          :             \n"
-                        + "   1330   :          :          :          :          :             \n"
-                        + "   1400   :          :          :          :          :             \n"
-                        + "   1430   :          :          :          :          :             \n"
-                        + "   1500   :          :          :          :          :             \n"
-                        + "   1530   :          :          :          :          :             \n"
-                        + "   1600   +----------+          :          :          :             \n"
-                        + "   1630   |IE2141    |          :          :          :             \n"
-                        + "   1700   | LEC[2]   |          :          :          :             \n"
-                        + "   1730   |          |          :          :          :             \n"
-                        + "   1800   +----------+          :          :          :             \n"
-                        + "   1830   :          :          :          :          :             \n"
-                        + "   1900   :          :          :          :          :             \n"
-                        + "                                                                    \n";
-
-        assertEquals(expectedOutput.replaceAll("\\s+", ""),
-                outContent.toString().replaceAll("\\s+", ""));
+        // selected module list should have cs2113 with lecture 1, tutorial 3
+        assertEquals("{LECTURE=2, TUTORIAL=01}", expectedOutput);
     }
 
     @Test

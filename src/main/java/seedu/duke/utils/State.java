@@ -43,5 +43,4 @@ public class State {
     public void removeSelectedModule(SelectedModule selectedModule) {
         this.selectedModulesList.get(this.semester).remove(selectedModule);
     }
-
 }
