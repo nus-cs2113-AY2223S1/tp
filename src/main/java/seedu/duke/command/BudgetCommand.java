@@ -23,7 +23,7 @@ public class BudgetCommand extends Command {
     // The command word used to trigger the execution of Moolah Manager's operations
     public static final String COMMAND_WORD = "BUDGET";
     // The formatting information for the parameters used by the command
-    public static final String COMMAND_PARAMETERS_INFO = "Parameters information: " + LINE_SEPARATOR
+    public static final String COMMAND_PARAMETERS_INFO = "Parameters information:" + LINE_SEPARATOR
             + COMMAND_PARAMETERS_BUDGET;
     // Basic budget description
     public static final String COMMAND_HELP = "Command Word: " + COMMAND_WORD + LINE_SEPARATOR
