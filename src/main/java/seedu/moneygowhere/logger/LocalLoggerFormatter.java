@@ -9,8 +9,6 @@ public class LocalLoggerFormatter extends Formatter {
     public String format(LogRecord logRecord) {
         String formattedLog = "";
         formattedLog += logRecord.getMillis();
-        formattedLog += " ";
-        formattedLog += logRecord.getLevel();
         formattedLog += " - ";
         formattedLog += logRecord.getMessage();
         formattedLog += "\n";

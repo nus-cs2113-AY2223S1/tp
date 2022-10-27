@@ -102,7 +102,7 @@ public class ConsoleInterface {
         }
 
         if (localLogger != null) {
-            localLogger.logInfo("Initializing MoneyGoWhere");
+            localLogger.logInformationalMessage("Initializing MoneyGoWhere");
         }
 
         scanner = new Scanner(System.in);
@@ -170,8 +170,10 @@ public class ConsoleInterface {
      *
      * @param message Message to print.
      */
-    public static void printInformationalMessage(String message) {
+    public void printInformationalMessage(String message) {
         System.out.println(message);
+
+        localLogger.logInformationalMessage(message);
     }
 
     //@@author xzynos
@@ -181,8 +183,14 @@ public class ConsoleInterface {
      *
      * @param message Message to print.
      */
-    public static void printWarningMessage(String message) {
-        System.out.println("WARN: " + message);
+    public void printWarningMessage(String message) {
+        String warningMessage = ""
+                + "WARN: "
+                + message;
+
+        System.out.println(warningMessage);
+
+        localLogger.logWarningMessage(warningMessage);
     }
 
     //@@author xzynos
@@ -192,8 +200,14 @@ public class ConsoleInterface {
      *
      * @param message Message to print.
      */
-    public static void printErrorMessage(String message) {
-        System.out.println("ERROR: " + message);
+    public void printErrorMessage(String message) {
+        String errorMessage = ""
+                + "ERROR: "
+                + message;
+
+        System.out.println(errorMessage);
+
+        localLogger.logErrorMessage(errorMessage);
     }
 
     //@@author xzynos
@@ -320,7 +334,7 @@ public class ConsoleInterface {
     //@@author xzynos
     private void runCommandBye(ConsoleCommandBye consoleCommandBye) {
         if (localLogger != null) {
-            localLogger.logInfo("Terminating MoneyGoWhere");
+            localLogger.logInformationalMessage("Terminating MoneyGoWhere");
         }
     }
 

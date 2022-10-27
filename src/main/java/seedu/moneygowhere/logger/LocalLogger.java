@@ -33,11 +33,20 @@ public class LocalLogger {
         fileHandler.setFormatter(new LocalLoggerFormatter());
 
         logger = Logger.getLogger(MoneyGoWhere.class.getName());
+        logger.setLevel(Level.FINEST);
         logger.setUseParentHandlers(false);
         logger.addHandler(fileHandler);
     }
 
-    public void logInfo(String message) {
-        logger.log(Level.INFO, message);
+    public void logInformationalMessage(String message) {
+        logger.log(Level.FINE, message);
+    }
+
+    public void logWarningMessage(String message) {
+        logger.log(Level.FINER, message);
+    }
+
+    public void logErrorMessage(String message) {
+        logger.log(Level.FINEST, message);
     }
 }
