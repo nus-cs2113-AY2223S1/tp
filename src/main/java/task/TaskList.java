@@ -89,7 +89,9 @@ public class TaskList {
 
     public static void finishTask(int taskId) throws DukeException {
         findTask(taskId).setDone();
-        Appointment appointment = AppointmentList.findAppointment(taskId);
+        System.out.print("Got it. I've finished this task: ");
+        System.out.println(findTask(taskId).getTaskDescription());
+        Appointment appointment = AppointmentList.findAppointment(findTask(taskId).appointmentId);
         if (appointment == null) {
             throw new DukeException();
         }
