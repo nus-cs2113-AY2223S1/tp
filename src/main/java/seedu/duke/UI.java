@@ -80,6 +80,9 @@ public class UI {
         System.out.println("The module " + modCode + " is not found in your plan!!");
         System.out.println("Please add the module first before you want to delete.");
     }
+    public static void fileLoadingErrorMessage() {
+        System.out.println("Could not find any previous usage.");
+    }
 
     /**
      * Function to print a list of modules in a particular semester

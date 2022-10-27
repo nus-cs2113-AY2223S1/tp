@@ -1,24 +1,51 @@
 package seedu.duke;
 
+import seedu.duke.commands.Command;
+import seedu.duke.exceptions.InvalidInputContentException;
+import seedu.duke.exceptions.InvalidInputFormatException;
+
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class ModuleList {
     public static ArrayList<Module> modules = new ArrayList<>();
     public static int viewCount;
     public static int mcsCount;
 
+    public ModuleList() {
+
+    }
+
+    /**
+     * Constructor to load the moduleList with input from file
+     * @param fileReader Scanner input loaded from the file
+     * @throws InvalidInputFormatException exception thrown when input is invalid
+     * @throws InvalidInputContentException exception thrown when input content is empty
+     */
+    public ModuleList(Scanner fileReader) throws InvalidInputFormatException, InvalidInputContentException {
+        while (fileReader.hasNextLine()) {
+            String line = fileReader.nextLine();
+            Module module = Parser.parseFileInput(line);
+            add(module, true);
+        }
+    }
+
+
     /**
      * Function to add a module to the moduleList if it does not already exist
      * @param mod The module to be added to the list
+     * @param isFromFile to check if the add command came from a module previously loaded in file. This decides whether to display add message or not
      */
-    public void add(Module mod) {
+    public void add(Module mod, boolean isFromFile) {
         boolean isRepeat = checkRepetition(mod);
         if (isRepeat) {
             UI.repetitionMessage(mod.getCourse());
         } else {
             int before = modules.size();
             modules.add(mod);
-            UI.addMessage(mod.getCourse(), mod.getSemesterTaken(), mod.getGrade());
+            if (isFromFile == false) {
+                UI.addMessage(mod.getCourse(), mod.getSemesterTaken(), mod.getGrade());
+            }
             int after = modules.size();
 
             try {
