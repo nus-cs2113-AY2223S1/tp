@@ -121,7 +121,7 @@ The Exceptions component consists of various exception classes which inherits fr
 
 The exceptions are thrown and handled by the program depending on the conditions outlined in their Javadoc comments.
 For example, `ConsoleParserCommandAddExpenseInvalidException` is thrown when an error is encountered while parsing the command.
-Do refer to the [repository](https://github.com/AY2223S1-CS2113T-W11-1/tp/tree/master/src/main/java/seedu/moneygowhere/exceptions) to view the full list of exceptions. 
+Do refer to the [exceptions](https://github.com/AY2223S1-CS2113T-W11-1/tp/tree/master/src/main/java/seedu/moneygowhere/exceptions) package to view the full list of exceptions. 
 
 ### UserInterface Component
 
