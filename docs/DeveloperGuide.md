@@ -83,23 +83,23 @@ In the example above, `UserInterface#runCommandAddExpense()` calls `Storage#save
 
 #### Component Interaction Reference Diagrams:
 
-![Component-Interaction-SD-Save-Expense-To-File](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentInteractionsRefLoadExpensesFromFile.puml)
+![Component-Interaction-SD-Save-Expense-To-File](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentInteractionsSDLoadExpensesFromFile.puml)
 
 * `UserInterface()` calls `Data#load()` to load any existing data stored in a file.
 * `Data#load()` calls `Storage#loadFromFile()` to load the data from a file.
 
-![Component-Interaction-SD-Get-User-Command](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentInteractionsRefGetUserCommand.puml)
+![Component-Interaction-SD-Get-User-Command](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentInteractionsSDGetUserCommand.puml)
 
 * `UserInterface#getConsoleCommand()` calls `UserInterface#getConsoleInput()` to read the user's input as a string.
 * `UserInterface#getConsoleCommand()` then calls `Parser#parse()` to parse the input string into the corresponding console command object.
 
-![Component-Interaction-SD-Print-Expense](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentInteractionsRefPrintingAnExpense.puml)
+![Component-Interaction-SD-Print-Expense](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentInteractionsSDPrintingAnExpense.puml)
 
 * `UserInterface#run()` will call the corresponding convert object function based on the data object's class.
 In the example above, `UserInterface#run()` calls `UserInterface#convertExpenseToConsoleString()` to convert the expense object into a formatted string.
 * `UserInterface#run()` will then call `UserInterface#printInformationalMessage()` to print the converted object.
 
-![Component-Interaction-SD-Save-Expense-To-File](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentInteractionsRefSaveExpensesToFile.puml)
+![Component-Interaction-SD-Save-Expense-To-File](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentInteractionsSDSaveExpensesToFile.puml)
 
 * `UserInterface#run()` calls `Data#save()` to save the data managed by the data manager class.
 * `Data#save()` calls `Storage#saveToFile()` to write the data to a file.
@@ -140,7 +140,7 @@ Do refer to the [repository](https://github.com/AY2223S1-CS2113T-W11-1/tp/tree/m
 ## Implementation
 ### Printing an expense
 
-![Implementation-SD-Print-Expense](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ImplementationRefPrintExpense.puml)
+![Implementation-SD-Print-Expense](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ImplementationSDPrintExpense.puml)
 
 ### Adding an expense: `Add-Expense`
 
@@ -160,7 +160,7 @@ Do refer to the [repository](https://github.com/AY2223S1-CS2113T-W11-1/tp/tree/m
 
 ### Printing a recurring payment
 
-![Implementation-SD-Print-RecurringPayment](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ImplementationRefPrintRecurringPayment.puml)
+![Implementation-SD-Print-RecurringPayment](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ImplementationSDPrintRecurringPayment.puml)
 
 ### Adding a recurring payment: `Add-RecurringPayment`
 
