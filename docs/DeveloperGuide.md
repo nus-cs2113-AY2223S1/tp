@@ -183,17 +183,25 @@ Do refer to the [commands](https://github.com/AY2223S1-CS2113T-W11-1/tp/tree/mas
 
 ### Adding an expense: `Add-Expense`
 
+The `Add-Expense` command adds a new expense to the program.
+
 ![Implementation-Add-Expense](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationAddExpense.puml)
 
 ### Viewing an expense: `View-Expense`
+
+The `View-Expense` command displays existing expenses in the program.
 
 ![Implementation-View-Expense](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationViewExpense.puml)
 
 ### Deleting an expense: `Delete-Expense`
 
+The `Delete-Expense` command removes an existing expense from the program.
+
 ![Implementation-Delete-Expense](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationDeleteExpense.puml)
 
 ### Editing an expense: `Edit-Expense`
+
+The `Edit-Expense` command changes the attributes of an existing expense in the program.
 
 ![Implementation-Edit-Expense](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationEditExpense.puml)
 
@@ -203,21 +211,32 @@ Do refer to the [commands](https://github.com/AY2223S1-CS2113T-W11-1/tp/tree/mas
 
 ### Adding a recurring payment: `Add-RecurringPayment`
 
+The `Add-RecurringPayment` command adds a new recurring payment to the program.
+
 ![Implementation-Add-RecurringPayment](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationAddRecurringPayment.puml)
 
 ### Viewing a recurring payment: `View-RecurringPayment`
+
+The `View-RecurringPayment` command displays existing recurring payments in the program.
 
 ![Implementation-View-RecurringPayment](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationViewRecurringPayment.puml)
 
 ### Deleting a recurring payment: `Delete-RecurringPayment`
 
+The `Delete-RecurringPayment` command removes an existing recurring payment from the program.
+
 ![Implementation-Delete-RecurringPayment](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationDeleteRecurringPayment.puml)
 
 ### Editing a recurring payment: `Edit-RecurringPayment`
 
+The `Edit-RecurringPayment` command changes the attributes of an existing recurring payment in the program.
+
 ![Implementation-Edit-RecurringPayment](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationEditRecurringPayment.puml)
 
 ### Adding an expense from a recurring payment: `Pay-RecurringPayment`
+
+The `Pay-RecurringPayment` command adds a new expense based on an existing recurring payment.
+This command helps the user to track when recurring payments are paid.
 
 ![Implementation-Edit-RecurringPayment](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationPayRecurringPayment.puml)
 
