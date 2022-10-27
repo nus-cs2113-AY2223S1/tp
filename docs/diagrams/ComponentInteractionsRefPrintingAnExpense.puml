@@ -3,7 +3,7 @@
 
 skinparam noteTextAlignment left
 
-mainframe sd Print Expense
+mainframe sd Printing an Expense
 Participant ":UserInterface" as UserInterface USER_INTERFACE_COLOR_1
 
 activate UserInterface USER_INTERFACE_COLOR_1

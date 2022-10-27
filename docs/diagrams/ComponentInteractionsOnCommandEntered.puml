@@ -64,7 +64,7 @@ loop Command not equals "Bye"
         deactivate Data
 
         ref over UserInterface
-            Print Expense
+            Printing an Expense
         end ref
 
         ref over UserInterface, Storage
