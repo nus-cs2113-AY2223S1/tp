@@ -1,5 +1,6 @@
 package appointment;
 
+import pet.PetList;
 import task.Task;
 
 import java.time.LocalDateTime;
@@ -56,6 +57,7 @@ public class Appointment {
         }
         if (isDone) {
             appointmentStatus = AppointmentStatus.PROCESSED;
+            PetList.findPet(petName).changePetStatus();
         }
     }
 
