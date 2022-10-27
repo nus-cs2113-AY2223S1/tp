@@ -24,7 +24,7 @@ This UserGuide introduces you a brief overview of our features with example of u
 
 >**Note:**
 > 
->1. Upcycle commands are case-sensitive and space-insensitive. For example, ```upcycle``` and ```Upcycle``` are different words, ```Upcycle``` and ```Upcycle ``` are the same words.
+>1. Upcycle commands (except ```find-item``` and ```find-user```) are case-sensitive and space-insensitive. For example, ```upcycle``` and ```Upcycle``` are different words, ```Upcycle``` and ```Upcycle ``` are the same words.
 >2. Parameters can be shuffled. For example, ```update-item /i [ITEM_ID] /p [PRICE]``` and ```update-item /p [PRICE] /i [ITEM_ID]``` are the same.
 >3. Phrases in ```[CAPITAL_WORDS]``` are the parameters for you to input.
 
@@ -335,8 +335,10 @@ Here are available categories:
 8. OTHERS
 ____________________________________________________________
 ```
-#### 3.3.8. ```find-item``` - Find an item using keyword
+#### 3.3.8. ```find-item``` - Find items using keyword
 >List all items that are associated with a given keyword
+
+Format: ```find-item \k [KEYWORD]```
 
 Example of usage: ```find-item /k book```
 
@@ -475,6 +477,7 @@ ____________________________________________________________
 | Remove a user                      | remove-user /u [USERNAME]                                                                           |
 | View a user                        | view-user /u [USERNAME]                                                                             |
 | List all users                     | list-users                                                                                          |
+| Find users by keyword              | find-user /k [KEYWORD]                                                                              |
 | __*Item-related features*__        |                                                                                                     |
 | Add a new item                     | add-item /n [ITEM_NAME] /c [CATEGORY_INDEX] /p [PRICE] /o [USERNAME]                                |
 | Remove an item                     | remove-item /i [ITEM_ID]                                                                            |
@@ -483,6 +486,7 @@ ____________________________________________________________
 | List categories                    | list-categories                                                                                     |
 | Update an item                     | update-item /i [ITEM_ID] /p [NEW_PRICE]                                                             |
 | Sort and filter list of items      | sort-items /mode [MODE_OF_SORTING] /min [MINIMUM_PRICE] /max [MAXIMUM_PRICE] /cat [CATEGORY_NUMBER] |
+| Find items by keyword              | find-item /k [KEYWORD]                                                                              |
 | __*Transaction-related features*__ |                                                                                                     |
 | Add a new transaction              | add-tx /i [ITEM_ID] /b [BORROWER_NAME] /d [DURATION] /c [CREATED_DATE]                              |
 | List all users                     | list-tx                                                                                             |
