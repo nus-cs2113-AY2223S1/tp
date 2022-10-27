@@ -17,8 +17,11 @@ public class Module {
     private String moduleName;
     private String moduleCode;
     private List<Lesson> lessons;
+    private LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>> allLessons;
+    private LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>> allAttending;
     private List<Lesson> attending;
     private LinkedHashMap<String, ArrayList<Lesson>> classifiedLessons;
+
 
     public String getModuleName() {
         return moduleName;
@@ -32,16 +35,52 @@ public class Module {
         return attending;
     }
 
+    public List<Lesson> getAllAvailableLessons() {
+        List<Lesson> allAttending = new ArrayList<Lesson>();
+        for (LinkedHashMap<String, ArrayList<Lesson>> lessonTypes : this.allAttending.values()) {
+            for (ArrayList<Lesson> allClasses : lessonTypes.values()) {
+                for (Lesson lesson : allClasses) {
+                    allAttending.add(lesson);
+                }
+            }
+        }
+        return allAttending;
+    }
+
     public List<Lesson> getLessons() {
         return lessons;
     }
+
 
     public Module(String moduleCode, String moduleName, List<Lesson> lessons) {
         this.moduleCode = moduleCode;
         this.moduleName = moduleName;
         this.lessons = lessons;
         this.classifiedLessons = classifyLessons(lessons);
-        this.attending = matchLessonTypes(classifiedLessons);
+        this.allLessons = populateData(); //this is the new classifiedLessons
+        this.allAttending = populateAttending(); //this is the new attending
+        this.attending = getAllAvailableLessons();
+    }
+
+    private LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>> populateAttending() {
+        LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>> temp
+                = new LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>>();
+        for (String lessonType : allLessons.keySet()) { //initialises the types of lessons
+            if (!temp.containsKey(lessonType)) {
+                temp.put(lessonType, new LinkedHashMap<String, ArrayList<Lesson>>());
+            }
+            if (allLessons.get(lessonType).size() == 1) {
+                temp.replace(lessonType, allLessons.get(lessonType));
+            } else {
+                int numOfClasses = 0;
+                for (ArrayList<Lesson> numberedClass : allLessons.get(lessonType).values()) {
+                    numOfClasses = numberedClass.size();
+                    break;
+                }
+                addUnknownToAttendingList(temp.get(lessonType), lessonType, numOfClasses);
+            }
+        }
+        return temp;
     }
 
     private List<Lesson> matchLessonTypes(LinkedHashMap<String, ArrayList<Lesson>> classifiedLessons) {
@@ -81,6 +120,18 @@ public class Module {
         return highestCount;
     }
 
+    private void addUnknownToAttendingList(HashMap<String, ArrayList<Lesson>> temp, String lessonType, int size) {
+        ArrayList<Lesson> classes = new ArrayList<Lesson>();
+        String day = "Undetermined Day";
+        String startTime = "Undetermined";
+        String endTime = "Undetermined";
+        String classNumber = "NA";
+        for (int i = 0; i < size; i++) {
+            classes.add(new Lesson(day, startTime, endTime, lessonType, classNumber, moduleCode));
+        }
+        temp.put(classNumber, classes);
+    }
+
     private void addToAttendingList(List<Lesson> temp, String lessonType) {
         String day = "Undetermined Day";
         String startTime = "Undetermined";
@@ -92,6 +143,7 @@ public class Module {
 
     public String getModuleDetails() {
         StringBuilder details = new StringBuilder(this.getModuleCode() + ": " + this.getModuleName() + "\n");
+
         HashMap<String, Integer> lessonDupe = new HashMap<>();
         String counter;
         for (Lesson lesson : attending) {
@@ -142,19 +194,29 @@ public class Module {
     public String getLessonTypes() {
         StringBuilder list = new StringBuilder();
         int index = 1;
-        HashMap<String, Integer> lessonDupe = new HashMap<>();
-        String counter;
-        for (Lesson lesson : attending) {
-            counter = getCount(lessonDupe, lesson);
-            list.append(index).append(". ").append(lesson.getLessonType())
-                    .append(counter).append("     ");
-            index += 1;
+        for (String lessonType : allLessons.keySet()) {
+            if (allLessons.get(lessonType).size() != 1) {
+                list.append(index).append(". ").append(lessonType).append("\n");
+                index++;
+            }
         }
         return list.toString();
     }
 
+    /**
+     * Gets the number of lesson types whose lessons are adjustable.
+     *
+     * @return Number of lesson types
+     */
     public int getLessonTypeLength() {
-        return attending.size();
+        int length = 0;
+        for (LinkedHashMap<String, ArrayList<Lesson>> entry : allLessons.values()) {
+            if (entry.size() != 1) {
+                length++;
+            }
+        }
+        return length;
+        //return getAllAttending().size();
     }
 
     @Override
@@ -164,47 +226,47 @@ public class Module {
 
     public String getTypeOfLessonFromIndex(int index) {
         assert index >= 0 : "index should be within range";
-        assert index < attending.size() : "index should be within range";
-
-        return attending.get(index).getLessonType();
+        int indexInMap = 0;
+        for (String lessonType : allLessons.keySet()) {
+            if (allLessons.get(lessonType).size() != 1) {
+                if (indexInMap != index) {
+                    indexInMap++;
+                } else {
+                    return lessonType;
+                }
+            }
+        }
+        return null;
     }
 
     public String getListOfLessonReplacements(String targetType) {
         StringBuilder details = new StringBuilder();
         int index = 1;
-        for (Lesson lesson : lessons) {
-            if (lesson.getLessonType().equals(targetType)) {
-                details.append(index).append(". [").append(lesson.getLessonType()).append("] ")
-                        .append(lesson.getDay()).append("   ")
+        for (ArrayList<Lesson> oneClass : allLessons.get(targetType).values()) {
+            details.append(index).append(":\n");
+            for (Lesson lesson : oneClass) {
+                details.append(lesson.getDay()).append("   ")
                         .append(convertTime(lesson.getStartTime())).append(" - ")
                         .append(convertTime(lesson.getEndTime())).append("\n");
-                index += 1;
             }
+            index++;
         }
         return details.toString();
     }
 
     public int getNumberOfReplacements(String targetType) {
-        int counter = 0;
-        for (Lesson lesson : lessons) {
-            if (lesson.getLessonType().equals(targetType)) {
-                counter += 1;
-            }
-        }
-        return counter;
+        return allLessons.get(targetType).size();
     }
 
-    public Lesson getReplacement(String targetType, int index) {
+    public ArrayList<Lesson> getReplacement(String targetType, int index) {
         assert index >= 0 : "index should be within range";
         assert index < lessons.size() : "index should be within range";
 
         int counter = 0;
-        for (Lesson lesson : lessons) {
-            if (lesson.getLessonType().equals(targetType)) {
-                counter += 1;
-            }
+        for (ArrayList<Lesson> oneClass : allLessons.get(targetType).values()) {
+            counter++;
             if (counter == index) {
-                return lesson;
+                return oneClass;
             }
         }
 
@@ -213,11 +275,34 @@ public class Module {
         return null;
     }
 
-    public void replaceAttending(TimetableDict timetableDict, Lesson newLesson, Integer indexForLesson) {
-        Lesson oldLesson = attending.get(indexForLesson);
-        timetableDict.deleteLesson(oldLesson);
-        attending.set(indexForLesson, newLesson);
-        timetableDict.addLesson(newLesson, moduleCode);
+
+    public void replaceNewAttending(LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>> loadedLessons) {
+        this.allAttending = loadedLessons;
+        this.attending = getAllAvailableLessons();
+
+    }
+
+
+    /**
+     * Replace the current list of attending lessons.
+     * This method is used in the set command.
+     *
+     * @param timetableDict Object that handles allocate command
+     * @param newLessons    Array of lessons to be added
+     * @param lessonType    The type of the lesson to be added
+     */
+    public void replaceAttending(TimetableDict timetableDict, ArrayList<Lesson> newLessons, String lessonType) {
+        String classNum = newLessons.get(0).getClassNumber();
+        allAttending.get(lessonType).clear();
+        allAttending.get(lessonType).put(classNum, newLessons);
+        attending = getAllAvailableLessons();
+        ArrayList<Lesson> oldLesson = getOldLessons(lessonType);
+        for (Lesson lesson : oldLesson) {
+            timetableDict.deleteLesson(lesson);
+        }
+        for (Lesson lesson : newLessons) {
+            timetableDict.addLesson(lesson, moduleCode);
+        }
     }
 
     public void replaceAttending(Lesson newLesson, Integer indexForLesson) {
@@ -226,6 +311,7 @@ public class Module {
         attending.set(indexForLesson, newLesson);
         Timetable.timetableDict.addLesson(newLesson, moduleCode);
     }
+
 
     public void replaceAttending(Lesson newLesson) {
         int indexToSet = 0;
@@ -248,6 +334,38 @@ public class Module {
 
         //Adding to timetableDict
         Timetable.timetableDict.addLesson(newLesson, moduleCode);
+    }
+
+    private ArrayList<Lesson> getOldLessons(String moduleCode) {
+        return allAttending.get(moduleCode).values().iterator().next();
+    }
+
+
+    /**
+     * Stores all lessons of the module gathered from the NUSMods API.
+     *
+     * @return A "2-key" hashmap of arrays. Representing lessonType : classNo : {class1, class2}
+     */
+    private LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>> populateData() {
+        LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>> data
+                = new LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>>();
+        for (Lesson lesson : lessons) {
+            String lessonType = lesson.getLessonType();
+            String classNum = lesson.getClassNumber();
+            if (!data.containsKey(lessonType)) {
+                data.put(lessonType, new LinkedHashMap<String, ArrayList<Lesson>>());
+                data.get(lessonType).put(classNum, new ArrayList<Lesson>());
+                data.get(lessonType).get(classNum).add(lesson);
+            } else {
+                if (!data.get(lessonType).containsKey(classNum)) {
+                    data.get(lessonType).put(classNum, new ArrayList<Lesson>());
+                    data.get(lessonType).get(classNum).add(lesson);
+                } else {
+                    data.get(lessonType).get(classNum).add(lesson);
+                }
+            }
+        }
+        return data;
     }
 
     private LinkedHashMap<String, ArrayList<Lesson>> classifyLessons(List<Lesson> lessons) {

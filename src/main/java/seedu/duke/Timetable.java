@@ -28,6 +28,7 @@ public class Timetable {
         listOfModules.add(newModule);
     }
 
+
     public static List<Module> getListOfModules() {
         return listOfModules;
     }
@@ -79,6 +80,12 @@ public class Timetable {
         return list.toString();
     }
 
+    /**
+     * Gets the number of different lesson types whose lessons are adjustable.
+     *
+     * @param index The index of the target module
+     * @return Number of lessons types with adjustable lessons
+     */
     public static int getLessonTypeLength(int index) {
         return listOfModules.get(index).getLessonTypeLength();
     }
@@ -106,15 +113,15 @@ public class Timetable {
         return listOfModules.get(indexForModule).getNumberOfReplacements(targetLessonType);
     }
 
-    public static Lesson getLessonReplacement(int indexForModule, int indexForTarget, String targetType) {
+    public static ArrayList<Lesson> getLessonReplacement(int indexForModule, int indexForTarget, String targetType) {
         assert indexForModule >= 0 : "index should be within range";
 
         return listOfModules.get(indexForModule).getReplacement(targetType, indexForTarget);
     }
 
-    public static void replaceLesson(Lesson newLesson, int indexForModule, Integer indexForLesson) {
+    public static void replaceLesson(ArrayList<Lesson> newLessons, int indexForModule, String moduleType) {
         assert indexForModule >= 0 : "index should be within range";
 
-        listOfModules.get(indexForModule).replaceAttending(timetableDict, newLesson, indexForLesson);
+        listOfModules.get(indexForModule).replaceAttending(timetableDict, newLessons, moduleType);
     }
 }
