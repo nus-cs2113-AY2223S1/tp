@@ -43,12 +43,13 @@ public class AppointmentList {
             throw new DukeException();
         }
 
-        // appointment could refer to a new pet
+        // ? appointment could refer to a new pet
         // in that case, add a new pet accordingly
         Pet pet = PetList.findPet(appointment.petName);
         if (pet == null) {
-
+            throw new DukeException();
         }
+
         appointments.add(appointment);
         System.out.print("Got it. I've added this appointment: ");
         System.out.println("Pet " + appointment.petName + " | " + "Service " + appointment.service);
