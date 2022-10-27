@@ -92,7 +92,12 @@ public class TaskList {
     }
 
     public static void finishTask(int taskId) throws DukeException {
-        findTask(taskId).setDone();
+        if (findTask(taskId) == null) {
+            System.out.println("Sorry, no corresponding task found.");
+            throw new DukeException();
+        } else {
+            findTask(taskId).setDone();
+        }
         System.out.print("Got it. I've finished this task: ");
         System.out.println(findTask(taskId).getTaskDescription());
         Appointment appointment = findAppointment(findTask(taskId).appointmentId);
