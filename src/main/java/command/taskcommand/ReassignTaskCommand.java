@@ -1,6 +1,7 @@
 package command.taskcommand;
 
 import command.Command;
+import exception.DukeException;
 import task.TaskList;
 
 public class ReassignTaskCommand extends Command {
@@ -18,7 +19,11 @@ public class ReassignTaskCommand extends Command {
 
     @Override
     public void execute() {
-        TaskList.reassignTask(taskId, employeeId);
+        try {
+            TaskList.reassignTask(taskId, employeeId);
+        } catch (DukeException e) {
+            System.out.println("Sorry, no corresponding task/employee found.");
+        }
     }
 
     @Override

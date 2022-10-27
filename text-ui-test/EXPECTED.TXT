@@ -7,8 +7,7 @@ Hello from
 
 I am the nurse helper!
 ____________________________________________________________
-Got it. I've added this appointment: Pet alex | Service shower
-Now you have 1 appointments in the list.
+Pet has been registered: name: Eliza, species: cat
 ____________________________________________________________
 ____________________________________________________________
 Bye. Hope to see you again soon!

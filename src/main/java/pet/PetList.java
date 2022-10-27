@@ -1,6 +1,7 @@
 package pet;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class PetList {
     public static ArrayList<Pet> pets = new ArrayList<>();
@@ -8,7 +9,7 @@ public class PetList {
     // public static addPet
     public static Pet findPet(String name) {
         for (Pet pet : pets) {
-            if (pet.name == name) {
+            if (Objects.equals(pet.name, name)) {
                 return pet;
             }
         }

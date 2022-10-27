@@ -5,7 +5,7 @@ import task.Task;
 import java.util.ArrayList;
 
 public class Employee {
-    private static int id = 0;
+    public static int id = 0;
     private final int employeeId;
     private String employeeName;
 

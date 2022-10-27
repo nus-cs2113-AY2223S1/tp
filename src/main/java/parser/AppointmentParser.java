@@ -32,11 +32,6 @@ public class AppointmentParser {
                 return prepareAddAppointment(statement);
             case RemoveAppointmentCommand.COMMAND_WORD:
                 return prepareRemoveAppointment(statement);
-            /*
-            case AllocateAppointmentCommand.COMMAND_WORD:
-                return prepareAllocateAppointment(statement);
-            break;
-            */
             default:
                 throw new DukeException();
             }
@@ -63,6 +58,10 @@ public class AppointmentParser {
             int p = input.indexOf(" p/");
             int d = input.indexOf(" d/");
 
+            if (!input.substring(0,s).isEmpty()) {
+                throw new DukeException();
+            }
+
             if (s > p || p > d || s == -1 || p == -1 || d == -1) {
                 throw new DukeException();
             }
@@ -77,20 +76,4 @@ public class AppointmentParser {
         }
     }
 
-    /*
-    public Command prepareAllocateAppointment(String input){
-        int i = input.indexOf(" i/");
-        int n = input.indexOf(" n/");
-
-        if(i > n || i == -1 || n == -1){
-            System.out.println("invalid input");
-            return new EndCommand();
-        }
-
-        String index = input.substring(i + lengthOfSignature, n);
-        String name = input.substring(n + lengthOfSignature);
-
-        return new AllocateApointmentCommand(index, name);
-    }
-*/
 }

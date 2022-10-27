@@ -1,6 +1,7 @@
 package service;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class ServiceList {
     static ArrayList<Service> services = new ArrayList<>();
@@ -36,7 +37,7 @@ public class ServiceList {
 
     public static Service findService(String serviceDescription) {
         for (Service service : services) {
-            if (service.getServiceDescription() == serviceDescription) {
+            if (Objects.equals(service.getServiceDescription(), serviceDescription)) {
                 return service;
             }
         }

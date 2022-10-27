@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class Pet {
 
-    private static int id = 0;
+    public static int id = 0;
     public final int petId;
     public String name;
     public String species;
@@ -33,21 +33,19 @@ public class Pet {
     private void initPetStatus() {
         Random random = new Random();
         int randomNumber = random.nextInt(NUM_OF_STATUS) + 1;
+        this.wellness = randomNumber;
         if (this.isHealthy) {
-            setPetStatus(randomNumber + 5);
+            setPetStatus(this.wellness + 5);
         } else {
-            setPetStatus(randomNumber);
+            setPetStatus(this.wellness);
         }
     }
 
-    public void changePetStatus(Integer wellnessFloat) {
-        Integer wellnessInt = Math.round(wellnessFloat);
-        if (wellnessInt >= 10) {
-            wellnessInt = 10;
-        } else if (wellnessInt <= 1) {
-            wellnessInt = 1;
+    public void changePetStatus() {
+        this.wellness += 5;
+        if (this.wellness >= 10) {
+            this.wellness = 10;
         }
-        this.wellness = wellnessInt;
         setPetStatus(this.wellness);
     }
 

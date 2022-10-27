@@ -8,6 +8,8 @@ import exception.DukeException;
 
 import java.util.ArrayList;
 
+import static appointment.AppointmentList.findAppointment;
+
 public class TaskList {
     static ArrayList<Task> tasks = new ArrayList<>();
 
@@ -20,10 +22,14 @@ public class TaskList {
         }
     }
 
+    public static ArrayList<Task> getTasks() {
+        return tasks;
+    }
+
     public static void addTask(Task task) throws DukeException {
 
         // appointment aggregate task
-        Appointment appointment = AppointmentList.findAppointment(task.getAppointmentId());
+        Appointment appointment = findAppointment(task.getAppointmentId());
         if (appointment == null) {
             throw new DukeException();
         }
@@ -42,20 +48,28 @@ public class TaskList {
 
         System.out.print("Got it. I've added this task: ");
         System.out.println(task.getTaskDescription());
-        System.out.println("Performed by: " + task.getEmployeeId());
-        System.out.println("Appointment: " + task.getAppointmentId());
+        System.out.println("Performed by: " + task.taskDescription);
+        System.out.println("Appointment: " + task.appointmentId);
         System.out.println("Now you have " + tasks.size() + " task in the list.");
     }
 
     // assign task to be done by another person
-    public static void reassignTask(int taskId, int employeeId) {
+    public static void reassignTask(int taskId, int employeeId) throws DukeException {
+        if (TaskList.findTask(taskId) == null) {
+            throw new DukeException();
+        }
+        if (EmployeeList.findEmployee(employeeId) == null) {
+            throw new DukeException();
+        }
         Task taskToReassign = TaskList.findTask(taskId);
         // Remove from original Employee's task list
         if (taskToReassign != null) {
             EmployeeList.findEmployee(taskToReassign.getEmployeeId()).removeTaskFromEmployee(taskId);
             // Add to new Employee's task list
             EmployeeList.findEmployee(employeeId).addTaskToEmployee(taskToReassign);
-            System.out.println("Got it. Task " + taskId + " has been reassigned from " + EmployeeList.findEmployee(taskToReassign.getEmployeeId()).getEmployeeName() + " to " + EmployeeList.findEmployee(employeeId).getEmployeeName() + "!");
+            System.out.print("Got it. Task " + taskId + " has been reassigned from ");
+            System.out.print(EmployeeList.findEmployee(taskToReassign.getEmployeeId()).getEmployeeName());
+            System.out.println(" to " + EmployeeList.findEmployee(employeeId).getEmployeeName() + "!");
             // Change employeeId in taskToReassign
             taskToReassign.setEmployeeId(employeeId);
         }
@@ -67,7 +81,7 @@ public class TaskList {
                 // remove from overall task list
                 tasks.remove(task);
                 // remove from appointment
-                AppointmentList.findAppointment(task.getAppointmentId()).removeTaskFromAppointment(taskId);
+                findAppointment(task.getAppointmentId()).removeTaskFromAppointment(taskId);
                 // remove from employee
                 EmployeeList.findEmployee(task.getEmployeeId()).removeTaskFromEmployee(taskId);
                 System.out.print("Got it. I've removed this task: ");
@@ -88,10 +102,15 @@ public class TaskList {
     }
 
     public static void finishTask(int taskId) throws DukeException {
-        findTask(taskId).setDone();
+        if (findTask(taskId) == null) {
+            System.out.println("Sorry, no corresponding task found.");
+            throw new DukeException();
+        } else {
+            findTask(taskId).setDone();
+        }
         System.out.print("Got it. I've finished this task: ");
         System.out.println(findTask(taskId).getTaskDescription());
-        Appointment appointment = AppointmentList.findAppointment(findTask(taskId).appointmentId);
+        Appointment appointment = findAppointment(findTask(taskId).appointmentId);
         if (appointment == null) {
             throw new DukeException();
         }

@@ -1,2 +1,2 @@
-appointment add s/shower p/alex d/2022
+pet add n/Eliza s/cat h/0
 bye

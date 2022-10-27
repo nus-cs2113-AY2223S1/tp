@@ -1,11 +1,34 @@
 # Pet Clinic Management System - User Guide
 
 ## Introduction
-Pet Clinic Management System (PCMS) is a desktop application that helps a clinic reception to record appointments, assign tasks, and manage data of pets/services/tasks/employees. This application uses Command Line Interface (CLI) and is able to display information quickly with minimal latency.
+Pet Clinic Management System (PCMS) is a desktop application that helps a clinic reception to record 
+appointments, assign tasks, and manage data of pets/services/tasks/employees. This application uses 
+Command Line Interface (CLI) and is able to display information quickly with minimal latency.
 
 ## Quick Start
+### software requirement
 1. Ensure that you have Java 11 or above installed.
 2. Download the latest version of `Pet Clinic Management System` from [here](https://github.com/AY2223S1-CS2113-F11-2/tp).
+
+### Sample workflow
+1. pet add n/Eliza s/cat h/0
+2. pet view
+3. service add d/haircut
+4. employee add n/chris
+5. appointment add s/haircut p/Eliza d/30/02/2022
+6. appointment view
+7. task add i/1 e/1 d/prepare hot water
+8. task add i/1 e/1 d/wash hair
+9. task view
+10. task finish i/1
+11. task finish i/2
+12. task view
+13. appointment view
+14. pet view
+15. appointment remove i/1
+16. pet remove i/1
+17. bye
+
 
 ## Features 
 Note:
@@ -19,6 +42,9 @@ Note:
 Adds a new appointment given service, pet, and date involved.
 
 Format: `appointment add s/SERVICE p/PET d/DATE`
+* The `SERVICE` and `PET` must already exist in service list and pet list.
+* Service list can be found by `service view`
+* Pet list can be found by `pet view`
 
 Example of usage:
 
@@ -27,7 +53,7 @@ Example of usage:
 `appointment add s/haircut p/Donald d/30/02/2022`
 
 #### Remove an appointment: `appointment remove`
-Remove a particular appointment by INDEX
+Remove a particular appointment by INDEX. All tasks belong to this appointment will also be deleted.
 
 Format: `appointment remove i/APPOINTMENT_ID`
 * The `APPOINTMENT_ID` must be a positive integer 1, 2, 3, …
@@ -38,7 +64,7 @@ Example of usage:
 `appointment remove i/1`
 
 #### View all appointments: `appointment view`
-View list of all appointments
+View list of all appointments.
 
 Format: `appointment view`
 
@@ -88,12 +114,17 @@ Example of usage:
 
 
 #### Finish a task: `task finish`
-- Finish a task in the task list
+Finish a task in the task list
+
+After the first task is added to the appointment, the status of the appointment will
+automatically update to processing.
+
+After all tasks of an appointment are finished, the status of an appointment
+will automatically update to processed.
 
 Format: `task finish i/TASK_ID`
 * The `TASK_ID` and `EMPLOYEE_ID` must be positive integers 1, 2, 3, …
 * The `TASK_ID` can be found by `task view`
-* When all the tasks of an appointment is marked as done, the status of an appointment is automatically marked as processed.
 
 Example of usage:
 `task finish i/1`
@@ -101,7 +132,7 @@ Example of usage:
 ### Employee Management
 
 #### Add an employee: `employee add`
-Add an employee to the list of staff in the clinic
+Add an employee to the list of employee in the clinic
 
 Format: `employee add n/NAME`
 * The `Name` is the name of the employee
@@ -137,7 +168,11 @@ Example of usage:
 ---
 ### Pet Management
 #### Add a pet: `pet add`
-Add a pet to the list of pets in the clinic
+Add a pet to the list of pets in the clinic. 
+Base on the value of health, 1 out of 10 different status of pets will be generated and assigned to pet. 
+
+`HEALTH = 0`: happy / boring / sleepy / energetic / fantastic
+`HEALTH = 1`: exhausted / painful / injured / bleeding / dying
 
 Format: `pet add n/NAME s/SPECIES h/HEALTH`
 * The `NAME` is the name of the pet

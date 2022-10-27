@@ -44,7 +44,7 @@ public class ServiceParser {
     public Command prepareAddService(String input) {
         try {
             int startOfD = input.indexOf(" d/");
-            if (startOfD == -1) {
+            if (startOfD == -1 || !input.substring(0, startOfD).isEmpty()) {
                 throw new DukeException();
             }
             String description = input.substring(startOfD + lengthOfSignature);

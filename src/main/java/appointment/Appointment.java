@@ -1,5 +1,6 @@
 package appointment;
 
+import pet.PetList;
 import task.Task;
 
 import java.time.LocalDateTime;
@@ -7,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Appointment {
-    private static int id = 0;
+    public static int id = 0;
     public final int appointmentId;
     public String petName;
     public String service;
@@ -15,7 +16,7 @@ public class Appointment {
     private String appointmentDate;
     private AppointmentStatus appointmentStatus;
 
-    private ArrayList<Task> tasks = new ArrayList<>();
+    public ArrayList<Task> tasks = new ArrayList<>();
 
     public Appointment(String petName, String appointmentDate, String service) {
         this.appointmentId = ++id;
@@ -25,7 +26,7 @@ public class Appointment {
         this.service = service;
     }
 
-    public void printAppointmentDetails(){
+    public void printAppointmentDetails() {
         System.out.println("Appointment ID: " + appointmentId);
         System.out.println("Service: " + service);
         System.out.println("Date: " + appointmentDate);
@@ -56,6 +57,7 @@ public class Appointment {
         }
         if (isDone) {
             appointmentStatus = AppointmentStatus.PROCESSED;
+            PetList.findPet(petName).changePetStatus();
         }
     }
 
@@ -78,8 +80,8 @@ public class Appointment {
     }
 
     public void removeTaskFromAppointment(int taskId) {
-        for(Task task: tasks){
-            if(task.getTaskId()==taskId){
+        for (Task task: tasks) {
+            if (task.getTaskId() == taskId) {
                 tasks.remove(task);
                 break;
             }
