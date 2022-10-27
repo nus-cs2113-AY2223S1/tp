@@ -36,7 +36,7 @@ YAMOM is designed for users who are proficient in Command Line Interface (CLI).
 
 ## Quick Start
 
-1. Ensure that you have Java 11 (reccomended) or above installed the computer.
+1. Ensure that you have Java 11 (recommended) or above installed the computer.
 2. Download the latest version of `YAMOM` jar file from [here](https://github.com/AY2223S1-CS2113-F11-3/tp/releases).
 3. Copy the file to the folder you want to use as the *home folder* for the application. (for example: `C://YAMOM`)
 4. Open the command line in that folder and run the command `java -jar [filename].jar`.
@@ -64,7 +64,7 @@ Sem [1] >>
 
 ### Getting help: `help`
 
-Displays the list of funtionalities available by YAMOM.
+Displays the list of functionalities available by YAMOM.
 
 Format: `help`
 
@@ -139,7 +139,7 @@ Adds a module from available database into the user timetable
 
 Format: `add MODULE_CODE`
 
-* The `MODULE_CDOE` is not case-sensitive, but has to be an exact match
+* The `MODULE_CODE` is not case-sensitive, but has to be an exact match
 
 Example of usage:
 
@@ -186,7 +186,7 @@ Removes a module from the user timetable
 
 Format: `delete MODULE_CODE`
 
-* The `MODULE_CDOE` is not case-sensitive, but has to be an exact match
+* The `MODULE_CODE` is not case-sensitive, but has to be an exact match
 
 Example of usage:
 
@@ -513,7 +513,7 @@ The user data is stored in `duke.txt` under the data folder in the home director
 Copy the application file with the corresponding data file (remember to create the `data` folder under the home directory)
 
 ### Transfer to NUSMODs (for NUS students)
-(Reccomended)
+(Recommended)
 Enter the command `export` and the current timetable will be exported as a sharable NUSMod Link
 
 Alternatively:
