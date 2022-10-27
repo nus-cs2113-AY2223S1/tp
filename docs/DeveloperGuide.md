@@ -324,6 +324,8 @@ Each component to handle the presentation of information to the user
 
 #### 3.5.2 Link Component
 
+![Link Class](images/linkClass.png)
+
 The <code>Link</code> component can:
 - create a [NUSmod](https://nusmods.com/) link to be used in a browser
 - Parse a NUSmod link to import modules into YAMOM
