@@ -4,7 +4,7 @@
 
 `IMPORTANT:` In this pre-release version, the diagrams in this user guide are rendered on-the-fly as the webpage is loaded.
 **If your internet connection is unstable, the diagrams may appear as broken links.**
-Please refresh the webpage if the diagrams are not loaded in time.
+You may need to refresh the webpage if the diagrams are not loaded in time.
 
 ## Contents
 * [Introduction](#introduction)
