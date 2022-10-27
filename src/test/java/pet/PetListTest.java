@@ -26,7 +26,7 @@ class PetListTest {
         AddPetCommand addPetCommand = new AddPetCommand("Yuhuan", "cat", true);
         addPetCommand.execute();
         int currNumOfPet = PetList.pets.size();
-        RemovePetCommand removePetCommand = new RemovePetCommand(PetList.pets.size());
+        RemovePetCommand removePetCommand = new RemovePetCommand(Pet.id);
         removePetCommand.execute();
         int numOfPetAfterRemove = PetList.pets.size();
         assertEquals(numOfPetAfterRemove - currNumOfPet, -1);
