@@ -28,9 +28,15 @@ import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_DESCRIPTION;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_TYPE;
 
 import static seedu.duke.common.Constants.MAX_TRANSACTIONS_COUNT;
+import static seedu.duke.common.HelpMessages.COMMAND_PARAMETERS_TYPE;
+import static seedu.duke.common.HelpMessages.COMMAND_PARAMETERS_CATEGORY;
+import static seedu.duke.common.HelpMessages.COMMAND_PARAMETERS_AMOUNT;
+import static seedu.duke.common.HelpMessages.COMMAND_PARAMETERS_DESCRIPTION;
+import static seedu.duke.common.HelpMessages.COMMAND_DESCRIPTION_ADD;
+import static seedu.duke.common.HelpMessages.COMMAND_USAGE_ADD;
+import static seedu.duke.common.InfoMessages.LINE_SEPARATOR;
 import static seedu.duke.common.InfoMessages.INFO_ADD_EXPENSE;
 import static seedu.duke.common.InfoMessages.INFO_ADD_INCOME;
-import static seedu.duke.common.InfoMessages.LINE_SEPARATOR;
 
 /**
  * Represents an add command object that will execute the operations for Add command.
@@ -39,24 +45,13 @@ public class AddCommand extends Command {
     //@@author chinhan99
     // The command word used to trigger the execution of Moolah Manager's operations
     public static final String COMMAND_WORD = "ADD";
-
-    // The description for the usage of command
-    public static final String COMMAND_DESCRIPTION = "To add a new transaction entry, which could be "
-            + "either an \"income\" or an \"expense\" into the transaction list.";
-    // The guiding information for the usage of command
-    public static final String COMMAND_USAGE = "Usage: add t/TYPE c/CATEGORY a/AMOUNT d/DATE i/DESCRIPTION";
     // The formatting information for the parameters used by the command
-    public static final String COMMAND_PARAMETERS_INFO = "Parameters information:"
-            + LINE_SEPARATOR
-            + "TYPE: The type of transaction. Only \"income\" or \"expense\" is accepted." + LINE_SEPARATOR
-            + "CATEGORY: A category for the transaction. Only string containing alphabets is accepted."
-            + LINE_SEPARATOR
-            + "AMOUNT: Value of the transaction in numerical form. Only integer within 0 and 10000000 is accepted."
-            + LINE_SEPARATOR + "DATE: Date of the transaction. The format must be in \"yyyyMMdd\"." + LINE_SEPARATOR
-            + "DESCRIPTION: More information regarding the transaction, written without any space.";
+    public static final String COMMAND_PARAMETERS_INFO = "Parameters information:" + LINE_SEPARATOR
+            + COMMAND_PARAMETERS_TYPE + LINE_SEPARATOR + COMMAND_PARAMETERS_CATEGORY + LINE_SEPARATOR
+            + COMMAND_PARAMETERS_AMOUNT + LINE_SEPARATOR + COMMAND_PARAMETERS_DESCRIPTION;
     // Basic help description
     public static final String COMMAND_HELP = "Command Word: " + COMMAND_WORD + LINE_SEPARATOR
-            + COMMAND_DESCRIPTION + LINE_SEPARATOR + COMMAND_USAGE + LINE_SEPARATOR;
+            + COMMAND_DESCRIPTION_ADD + LINE_SEPARATOR + COMMAND_USAGE_ADD + LINE_SEPARATOR;
     // Detailed help description
     public static final String COMMAND_DETAILED_HELP = COMMAND_HELP + COMMAND_PARAMETERS_INFO + LINE_SEPARATOR;
 

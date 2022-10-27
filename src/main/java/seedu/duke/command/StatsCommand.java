@@ -20,6 +20,13 @@ import static seedu.duke.command.CommandTag.COMMAND_TAG_GLOBAL_NUMBER;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_GLOBAL_PERIOD;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_GLOBAL_YEAR;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_STATS_TYPE;
+import static seedu.duke.common.HelpMessages.COMMAND_PARAMETERS_STATS_TYPE;
+import static seedu.duke.common.HelpMessages.COMMAND_PARAMETERS_MONTH;
+import static seedu.duke.common.HelpMessages.COMMAND_PARAMETERS_YEAR;
+import static seedu.duke.common.HelpMessages.COMMAND_PARAMETERS_PERIOD;
+import static seedu.duke.common.HelpMessages.COMMAND_PARAMETERS_NUMBER;
+import static seedu.duke.common.HelpMessages.COMMAND_DESCRIPTION_STATS;
+import static seedu.duke.common.HelpMessages.COMMAND_USAGE_STATS;
 import static seedu.duke.common.InfoMessages.COLON_SPACE;
 import static seedu.duke.common.InfoMessages.DOLLAR_SIGN;
 import static seedu.duke.common.InfoMessages.INFO_EXPENSE;
@@ -38,35 +45,14 @@ public class StatsCommand extends ListAndStatsCommand {
     //@@author paullowse
     // The command word used to trigger the execution of Moolah Manager's operations
     public static final String COMMAND_WORD = "STATS";
-    // The description for the usage of command
-    public static final String COMMAND_DESCRIPTION = "To get statistics of the transactions such"
-            + " as the total savings for each category, summary of expenditure over a time period.";
-    // The guiding information for the usage of command
-    public static final String COMMAND_USAGE = "Usage: stats s/STATS_TYPE [m/MONTH] [y/YEAR] [p/PERIOD] [n/NUMBER]";
     // The formatting information for the parameters used by the command
-    public static final String COMMAND_PARAMETERS_INFO = "Parameters information:"
-            + LINE_SEPARATOR
-            + "STATISTICS_TYPE: The type of statistics to be generated. Only \"categorical_savings\", "
-            + "\"monthly_expenditure\" or \"time_insights\" is accepted."
-            + LINE_SEPARATOR
-            + "(Optional) MONTH: Month of the transaction. Only integers within 1 to 12 are accepted. Note that "
-            + "month must be accompanied by a year. This tag cannot be used together with [p/PERIOD] or [n/NUMBER] "
-            + "tags."
-            + LINE_SEPARATOR
-            + "(Optional) YEAR: Year of the transaction. Only integers from 1000 onwards are accepted."
-            + "This tag cannot be used together with [p/PERIOD] or [n/NUMBER] tags."
-            + LINE_SEPARATOR
-            + "(Optional) PERIOD: Period of the transaction. Only \"weeks\" or \"months\" is accepted. Note that "
-            + "period must be accompanied by a number to backdate from. This tag cannot be used together with "
-            + "[m/MONTH] or [y/YEAR] tags."
-            + LINE_SEPARATOR
-            + "(Optional) NUMBER: Last number of weeks or months. Only positive integers are accepted. Note that"
-            + "number must be accompanied by a period that represents weeks or months. This tag cannot be used "
-            + "together with [m/MONTH] or [y/YEAR] tags.";
-
+    public static final String COMMAND_PARAMETERS_INFO = "Parameters information:" + LINE_SEPARATOR
+            + COMMAND_PARAMETERS_STATS_TYPE + LINE_SEPARATOR + COMMAND_PARAMETERS_MONTH + LINE_SEPARATOR
+            + COMMAND_PARAMETERS_YEAR + LINE_SEPARATOR + COMMAND_PARAMETERS_PERIOD + LINE_SEPARATOR
+            + COMMAND_PARAMETERS_NUMBER;
     // Basic help description
     public static final String COMMAND_HELP = "Command Word: " + COMMAND_WORD + LINE_SEPARATOR
-            + COMMAND_DESCRIPTION + LINE_SEPARATOR + COMMAND_USAGE + LINE_SEPARATOR;
+            + COMMAND_DESCRIPTION_STATS + LINE_SEPARATOR + COMMAND_USAGE_STATS + LINE_SEPARATOR;
     // Detailed help description
     public static final String COMMAND_DETAILED_HELP = COMMAND_HELP + COMMAND_PARAMETERS_INFO
             + LINE_SEPARATOR;
@@ -178,7 +164,7 @@ public class StatsCommand extends ListAndStatsCommand {
 
         if (statsType.equals(CATEGORICAL_SAVINGS)) {
             // Replaces stats list with categorical savings if stats type is categorical_savings
-            genericStatsList = transactions.listCategoricalSavings();
+            genericStatsList = transactions.listCategoricalSavings(transactions.getTransactions());
         }
 
         if (genericStatsList.isEmpty()) {
