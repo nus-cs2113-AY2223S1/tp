@@ -1,5 +1,5 @@
 @startuml
-!include https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/Styles.puml
+!include https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/Styles.puml
 
 skinparam sequenceReferenceBackgroundColor #ffffff
 skinparam noteTextAlignment left
@@ -8,8 +8,6 @@ Participant "consoleInterface:ConsoleInterface" as consoleInterface USER_INTERFA
 Participant "expenseManager:ExpenseManager" as expenseManager DATA_COLOR_1
 
 activate consoleInterface USER_INTERFACE_COLOR_1
-
-ref over consoleInterface: getConsoleCommand()
 
 opt consoleCommand instanceof ConsoleCommandViewExpense
     consoleInterface -[USER_INTERFACE_COLOR_1]> consoleInterface : \lrunCommandViewExpense(\n\tconsoleCommand:ConsoleCommandViewExpense\n)

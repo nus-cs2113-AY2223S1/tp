@@ -1,9 +1,9 @@
 @startuml
-!include https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/Styles.puml
+!include https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/Styles.puml
 
 skinparam noteTextAlignment left
 
-mainframe sd Print Expense
+mainframe sd Printing an Expense
 Participant ":UserInterface" as UserInterface USER_INTERFACE_COLOR_1
 
 activate UserInterface USER_INTERFACE_COLOR_1

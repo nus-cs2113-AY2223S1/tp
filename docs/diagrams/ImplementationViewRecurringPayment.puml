@@ -1,5 +1,5 @@
 @startuml
-!include https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/Styles.puml
+!include https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/Styles.puml
 
 skinparam sequenceReferenceBackgroundColor #ffffff
 
@@ -7,8 +7,6 @@ Participant "consoleInterface:ConsoleInterface" as consoleInterface USER_INTERFA
 Participant "recurringPaymentManager:RecurringPaymentManager" as recurringPaymentManager DATA_COLOR_4
 
 activate consoleInterface USER_INTERFACE_COLOR_1
-
-ref over consoleInterface: Get Console Command
 
 opt consoleCommand instanceof ConsoleCommandViewRecurringPayment
     consoleInterface -[USER_INTERFACE_COLOR_1]> consoleInterface : \lrunCommandViewRecurringPayment(\n\tconsoleCommand:ConsoleCommandViewRecurringPayment\n)
