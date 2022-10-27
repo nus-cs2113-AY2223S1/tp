@@ -1,0 +1,67 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+hide footbox
+
+Participant ":Duke" as Duke
+Participant ":CommandParser" as CommandParser
+Participant ":ParameterParser" as ParameterParser
+Participant "command:ListCommand" as ListCommand
+Participant "transactions:TransactionList" as Transactions
+Participant "ui:Ui" as Ui
+
+-> Duke
+activate Duke
+
+Duke -> CommandParser:parse("list c/transport")
+activate CommandParser
+
+CommandParser -> CommandParser:splitInput("list c/transport")
+activate CommandParser
+return inputTokens: String[]
+
+CommandParser -> CommandParser:getCommand()
+activate CommandParser
+
+
+CommandParser -> ParameterParser:parse(parametersInput: String)
+activate ParameterParser
+
+ParameterParser ->ParameterParser:setParameter(tag: String)
+activate ParameterParser
+return setCommand(command: Command)
+return command
+
+create ListCommand
+CommandParser -> ListCommand
+activate ListCommand
+return
+
+return command: ListCommand
+
+return command: ListCommand
+deactivate CommandParser
+
+Duke -> ListCommand:execute(transactions: TransactionList, ui: Ui, storage: Storage)
+activate ListCommand
+
+
+
+ListCommand -> ListCommand:listTransactions()
+activate ListCommand
+
+ListCommand -> Transactions:getTransactions()
+activate Transactions
+
+return transactionsList: String
+
+alt transactionsList is empty
+    ListCommand -> Ui:showInfoMessage(message: String)
+    activate Ui
+else else
+    ListCommand -> Ui:showList(transactionsList: String)
+end
+
+return
+
+return
+@enduml
