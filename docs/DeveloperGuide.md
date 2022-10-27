@@ -204,7 +204,7 @@ The Parser component comprises of two main parsers: `CommandParser` and `Paramet
 parsers are used to generate a command object with its accurate parameters according to the input from the UI. 
 
 The structure of the data component in Moolah Manager is illustrated in the class diagram below:
-![Data Component Class Diagram](images/ParserClassDiagram.png)
+![Data Component Class Diagram](images/ParsersClassDiagram.png)
 
 After `run()` is called by `main()` in Duke, the `CommandParser` is first called to parse the command. The initial
  input is split into the commandWord and parameters using `splitInput()`. Next, the command word is parsed using 
@@ -391,15 +391,20 @@ The full command for list is `list [t/TYPE] [c/CATEGORY] [d/DATE]`
 For example, if 'list' is called, all transactions that are present in Moolah Manager will be listed out
 Adding tags such as type, category and date will list all transactions to that category
 
-In a command like `list c/food`
+The structure of the application focusing on the list command is illustrated in the class diagram below:
+![Data Component Class Diagram](images/ListCommandSequenceDiagram.png)
 
-1. The `main()` method in Duke calls `run()` in Duke. The `ui` reads the command and parses it
-   through `CommandParser.parse()`.
+In a command like `list c/transport`
+
+1. The `main()` method in Duke calls `run()` in Duke. The command is parsed through `CommandParser.parse()`.
 2. Within `CommandParser.parse()`, `getCommand()` is called to obtain the command, before `ParameterParser.parse()`
    is called
 3. Various checks are done through functions within `parameter.parse()`
 4. The list command is undergoing execution in `command.execute()` which will call `listTransactions()` in ListCommand
-5. `ui.showTransactionsList()` is then executed since parameters are present
+5. Next, `getCommand()` is called to obtain a String of transactionList.
+6. `ui.showTransactionsList()` is then executed since parameters are present, causing the matching transactions to be displayed.
+
+
 
 _Written by: Paul Low_
 
