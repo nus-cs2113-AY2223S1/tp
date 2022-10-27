@@ -1,6 +1,7 @@
 package command.taskcommand;
 
 import command.Command;
+import exception.DukeException;
 import task.TaskList;
 
 public class FinishTaskCommand extends Command {
@@ -14,7 +15,11 @@ public class FinishTaskCommand extends Command {
 
     @Override
     public void execute() {
-        TaskList.finishTask(taskId);
+        try {
+            TaskList.finishTask(taskId);
+        } catch (DukeException e) {
+            System.out.println("Sorry, no corresponding appointment found related to the task.");
+        }
     }
 
     @Override

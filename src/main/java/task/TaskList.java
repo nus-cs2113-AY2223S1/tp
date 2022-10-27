@@ -81,8 +81,13 @@ public class TaskList {
         return null;
     }
 
-    public static void finishTask(int taskId) {
+    public static void finishTask(int taskId) throws DukeException {
         findTask(taskId).setDone();
+        Appointment appointment = AppointmentList.findAppointment(taskId);
+        if (appointment == null) {
+            throw new DukeException();
+        }
+        appointment.updateAppointmentStatus();
     }
 
 }
