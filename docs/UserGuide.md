@@ -1,7 +1,9 @@
 # Pet Clinic Management System - User Guide
 
 ## Introduction
-Pet Clinic Management System (PCMS) is a desktop application that helps a clinic reception to record appointments, assign tasks, and manage data of pets/services/tasks/employees. This application uses Command Line Interface (CLI) and is able to display information quickly with minimal latency.
+Pet Clinic Management System (PCMS) is a desktop application that helps a clinic reception to record 
+appointments, assign tasks, and manage data of pets/services/tasks/employees. This application uses 
+Command Line Interface (CLI) and is able to display information quickly with minimal latency.
 
 ## Quick Start
 1. Ensure that you have Java 11 or above installed.
@@ -19,6 +21,9 @@ Note:
 Adds a new appointment given service, pet, and date involved.
 
 Format: `appointment add s/SERVICE p/PET d/DATE`
+* The `SERVICE` and `PET` must already exist in service list and pet list.
+* Service list can be found by `service view`
+* Pet list can be found by `pet view`
 
 Example of usage:
 
@@ -38,7 +43,7 @@ Example of usage:
 `appointment remove i/1`
 
 #### View all appointments: `appointment view`
-View list of all appointments
+View list of all appointments.
 
 Format: `appointment view`
 
@@ -88,12 +93,17 @@ Example of usage:
 
 
 #### Finish a task: `task finish`
-- Finish a task in the task list
+Finish a task in the task list
+
+After one of the tasks of an appointment is finished, the status of an appointment will
+automatically update to processing.
+
+After all tasks of an appointment are finished, the status of an appointment
+will automatically update to processed.
 
 Format: `task finish i/TASK_ID`
 * The `TASK_ID` and `EMPLOYEE_ID` must be positive integers 1, 2, 3, …
 * The `TASK_ID` can be found by `task view`
-* When all the tasks of an appointment is marked as done, the status of an appointment is automatically marked as processed.
 
 Example of usage:
 `task finish i/1`
@@ -101,7 +111,7 @@ Example of usage:
 ### Employee Management
 
 #### Add an employee: `employee add`
-Add an employee to the list of staff in the clinic
+Add an employee to the list of employee in the clinic
 
 Format: `employee add n/NAME`
 * The `Name` is the name of the employee
@@ -137,7 +147,11 @@ Example of usage:
 ---
 ### Pet Management
 #### Add a pet: `pet add`
-Add a pet to the list of pets in the clinic
+Add a pet to the list of pets in the clinic. 
+Base on the value of health, 1 out of 10 different status of pets will be generated and assigned to pet. 
+
+`HEALTH = 0`: happy / boring / sleepy / energetic / fantastic
+`HEALTH = 1`: exhausted / painful / injured / bleeding / dying
 
 Format: `pet add n/NAME s/SPECIES h/HEALTH`
 * The `NAME` is the name of the pet
