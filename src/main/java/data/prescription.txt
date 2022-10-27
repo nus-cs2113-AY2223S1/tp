@@ -1,3 +1,2 @@
 T1 | cough syrup | 10 mL | every 3 hours | F
 T2 | penicillin | 1 tablet | every 3 days | T
-T1 | cough syrup | 2 pills | once a dat | T

@@ -1,3 +1,2 @@
 John Doe | 09-09-1978 | M | T2
 Jane Doe | 09-09-1978 | F | T1
-Serena Van | 11-11-1111 | F | 123
