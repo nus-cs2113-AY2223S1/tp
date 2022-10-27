@@ -180,6 +180,24 @@ Format: `service view`
 
 ## command.command Summary
 
-{Give a 'cheat sheet' of commands here}
+* Add appointment `appointment add s/SERVICE p/PET d/DATE`
+* Remove appointment `appointment remove i/APPOINTMENT_ID`
+* View appointments `appointment view`
 
-* Add todo `todo n/TODO_NAME d/DEADLINE`
+* Add task `task add i/APPOINTMENT_ID e/EMPLOYEE_ID d/DESCRIPTION`
+* Remove task `task remove i/TASK_ID`
+* View tasks `task view`
+* Reassign task `task reassign i/TASK_ID e/EMPLOYEE_ID`
+
+* Add employee `employee add n/NAME`
+* Remove employee `employee remove i/EMPLOYEE_ID`
+* View employees `employee view`
+* View employee's tasks `employee task i/EMPLOYEE_ID`
+
+* Add pet `pet add n/NAME s/SPECIES h/HEALTH`
+* Remove pet `pet remove i/PET_ID`
+* View pets `pet view`
+
+* Add service `service add d/DESCRIPTION`
+* Remove service `service remove i/SERVICE_ID`
+* View service `service view`
