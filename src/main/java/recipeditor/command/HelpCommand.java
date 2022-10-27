@@ -6,7 +6,7 @@ public class HelpCommand {
 
     public static String HELP_MESSAGE = "Available commands: /add, /list, /view, /edit, /find, /delete, /exit, /help ";
 
-    public CommandResult execute(){
+    public CommandResult execute() {
         return new CommandResult(HELP_MESSAGE);
     }
 }

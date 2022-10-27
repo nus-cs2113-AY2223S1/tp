@@ -25,13 +25,15 @@ Click to view the latest release of [RecipEditor]((https://github.com/AY2223S1-C
 
 ## Acknowledgements
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+### External Libraries
+- org.apache.commons:commons-lang3:3.0 [link](https://mvnrepository.com/artifact/org.apache.commons/commons-lang3/3.0)
+- org.apiguardian:apiguardian-api:1.1.0 [link](https://mvnrepository.com/artifact/org.apiguardian/apiguardian-api)
 
 ## Design
 ### Architecture
 
 <p align="center" width="100%">
-  <img width="80%" src="images/MainClassDiagram.png" alt="Storage Class Diagram"/>
+  <img width="80%" src="images/Architecture.png" alt="Storage Class Diagram"/>
 </p>
 
 `Recipeditor` calls to various class a perform all the tasks assigned by the user.
@@ -56,24 +58,6 @@ is reflected to the user.
 Termination of software purges all temporary data, while saved changes
 can be loaded from saves upon next software launch.
 
-
-### Add functionality
-
-### Architecture
-
-### Interaction flow
-![Architecture](.\Architecture.png)
-`Ui`: interfacing with the user
-
-`Parser`: parsing the input to give the correct output
-
-`Command`: carry out the 
-
-`CommandResult`: Hold various output table attributes to be displayed by `Ui`
-
-
-
-### Parser functionality
 
 ### Ui Component
 The UI component is responsible for all user interfaces of the application.
@@ -153,12 +137,8 @@ The recipe module encapsulates the array, recipe and ingredient objects.
 ## Product scope
 ### Target user profile
 
-<<<<<<< HEAD
 Target user of the application is avid cook who wants to organize their recipe list for ease of reference and search 
 
-=======
-{Describe the target user profile}
->>>>>>> ac3da47058a4067615ebc7c15ca45cff847a117f
 ### Value proposition
 
 {Describe the value proposition: what problem does it solve?}
