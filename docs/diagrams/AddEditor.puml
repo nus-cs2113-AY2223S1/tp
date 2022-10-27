@@ -1,0 +1,22 @@
+@startuml
+skinparam Style strictuml
+
+actor user
+database FileDirectory
+
+create Parser
+create Editor
+Parser -> Editor: enterEditor()
+FileDirectory -> Editor: loadFile("Template.txt")
+user -> Editor: Make changes to the template
+Editor -> FileDirectory: save "Temporary.txt"
+Editor --> Parser:
+destroy Editor
+create TextFileParser 
+Parser -> TextFileParser: parseTextToRecipe
+FileDirectory -> TextFileParser: l
+
+
+
+
+@enduml

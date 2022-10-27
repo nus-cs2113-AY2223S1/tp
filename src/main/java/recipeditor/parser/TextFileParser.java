@@ -114,10 +114,6 @@ public class TextFileParser {
         return parsed[1].trim();
     }
 
-    private String removeIndex(String line) {
-        return "";
-    }
-
     private enum LineType {
         TITLE, DESCRIPTION, INGREDIENT, STEP, NORMAL
     }

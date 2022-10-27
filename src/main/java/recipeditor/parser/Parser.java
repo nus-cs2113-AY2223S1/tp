@@ -12,6 +12,7 @@ import recipeditor.exception.ParseFileException;
 import recipeditor.recipe.Recipe;
 import recipeditor.ui.Editor;
 import recipeditor.command.FindCommand;
+import recipeditor.command.HelpCommand;
 import recipeditor.command.InvalidCommand;
 import recipeditor.recipe.RecipeList;
 import recipeditor.storage.Storage;
@@ -38,6 +39,8 @@ public class Parser {
             return new ExitCommand();
         case DeleteCommand.COMMAND_TYPE:
             return null;
+        case HelpCommand.COMMAND_TYPE:
+            return new HelpCommand();
         case EditCommand.COMMAND_TYPE:
             return parseEditCommand(parsed);
         case ViewCommand.COMMAND_TYPE:

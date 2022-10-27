@@ -2,7 +2,7 @@
 skinparam Style strictuml
 skinparam SequenceMessageAlignment center
 'autonumber
-'autoactivate on
+autoactivate on
 
 
 actor User
