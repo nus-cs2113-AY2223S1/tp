@@ -2,6 +2,10 @@
 
 <p align="center"><img alt="icon" src="https://raw.githubusercontent.com/AY2223S1-CS2113T-W11-1/tp/master/docs/images/icon.png"></p>
 
+`IMPORTANT:` In this pre-release version, the diagrams in this user guide are rendered on-the-fly as the webpage is loaded.
+**If your internet connection is unstable, the diagrams may appear as broken links.**
+Please refresh the webpage if the diagrams are not loaded in time.
+
 ## Contents
 * [Introduction](#introduction)
 * [Acknowledgements](#acknowledgements)
@@ -37,10 +41,6 @@
 
 MoneyGoWhere is a financial tracker designed to help computing professionals manage their finances.
 This developer guide explains the design considerations and implementation details required for future developers to work on MoneyGoWhere.
-
-`IMPORTANT:` In this pre-release version, the diagrams in this user guide are rendered on-the-fly as the webpage is loaded. 
-**If your internet connection is unstable, the diagrams may appear as broken links.** 
-Please refresh the webpage if the diagrams are not loaded in time.
 
 ## Acknowledgements
 
