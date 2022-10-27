@@ -55,7 +55,9 @@ public class TaskList {
             EmployeeList.findEmployee(taskToReassign.getEmployeeId()).removeTaskFromEmployee(taskId);
             // Add to new Employee's task list
             EmployeeList.findEmployee(employeeId).addTaskToEmployee(taskToReassign);
-            System.out.println("Got it. Task " + taskId + " has been reassigned from " + EmployeeList.findEmployee(taskToReassign.getEmployeeId()).getEmployeeName() + " to " + EmployeeList.findEmployee(employeeId).getEmployeeName() + "!");
+            System.out.print("Got it. Task " + taskId + " has been reassigned from ");
+            System.out.print(EmployeeList.findEmployee(taskToReassign.getEmployeeId()).getEmployeeName());
+            System.out.println(" to " + EmployeeList.findEmployee(employeeId).getEmployeeName() + "!");
             // Change employeeId in taskToReassign
             taskToReassign.setEmployeeId(employeeId);
         }
