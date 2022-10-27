@@ -92,6 +92,7 @@ public class Module {
      * @return Module data for the module.
      */
     public static Module get(String moduleCode) {
+        moduleCode = moduleCode.toUpperCase();
         if (modulesByCode == null) {
             getAll();
         }

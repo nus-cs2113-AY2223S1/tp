@@ -4,6 +4,7 @@ import seedu.duke.exceptions.YamomException;
 import seedu.duke.model.LessonType;
 import seedu.duke.model.Module;
 import seedu.duke.model.SelectedModule;
+import seedu.duke.model.Timetable;
 import seedu.duke.parser.Parser;
 import seedu.duke.utils.State;
 import seedu.duke.utils.Storage;
@@ -13,18 +14,50 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class DisplaySelectedModuleListCommand extends Command {
-    private boolean successful;
+import org.apache.commons.lang3.StringUtils;
 
+public class ListCommand extends Command {
+    private boolean successful;
     public static final String COMMAND_WORD = "list";
     public static final String COMMAND_USAGE = "list";
     public static final String COMMAND_DESCRIPTION = "List out all the selected modules "
             + "and lesson slots.";
+    public static final int HEADING_LENGTH = 9;
+    public static final int DETAILS_INDENT = 10 + HEADING_LENGTH;
 
-    public DisplaySelectedModuleListCommand(String[] input) throws YamomException {
+    public ListCommand(String[] input) throws YamomException {
         super(input);
         successful = false;
         Parser.singleWordCommandError(input);
+    }
+
+    private String formatWeeks(List<Integer> weeks) {
+        if (weeks.size() == 0) {
+            return "Nil";
+        }
+        if (weeks.size() == 1) {
+            return Integer.toString(weeks.get(0));
+        }
+        boolean isConsecutive = true;
+        for (int i = 1; i < weeks.size(); i++) {
+            if (weeks.get(i) != weeks.get(i - 1) + 1) {
+                isConsecutive = false;
+            }
+        }
+        if (isConsecutive) {
+            return weeks.get(0) + " - " + weeks.get(weeks.size() - 1);
+        } else {
+            return weeks.stream().map(x -> Integer.toString(x)).collect(Collectors.joining(", "));
+        }
+    }
+
+    private String formatSingleSlot(Module module, LessonType type, String classNo, int semester) {
+        String classNoString = StringUtils.rightPad(Timetable.lessonTypeToShortString(type) + "[" + classNo + "]",
+                DETAILS_INDENT - HEADING_LENGTH);
+        return classNoString + module.getSemesterData(semester).getLessonsByTypeAndNo(type, classNo)
+                .stream()
+                .map(r -> r.venue + ", weeks: " + formatWeeks(r.weeks))
+                .collect(Collectors.joining("\n" + StringUtils.repeat(" ", DETAILS_INDENT)));
     }
 
     /**
@@ -32,47 +65,38 @@ public class DisplaySelectedModuleListCommand extends Command {
      * representing available lesson types of the module and the selected slot by the user.
      * @param map of selected modules and their chosen slots
      */
-    public String convertWithStream(Map<LessonType, String> map) {
+    public String formatSelectedSlots(Module module, Map<LessonType, String> map, int semester) {
         String mapAsString = map.keySet().stream()
-                .map(key -> key + "=" + map.get(key))
-                .collect(Collectors.joining(", ", "\t", "\n"));
+                .map(key -> formatSingleSlot(module, key, map.get(key), semester))
+                .collect(Collectors.joining(
+                        "\n" + StringUtils.repeat(" ", HEADING_LENGTH), 
+                        StringUtils.repeat(" ", HEADING_LENGTH), 
+                        "\n"));
         return mapAsString;
     }
 
     /**
      * Helper function to format each selected module in a list to an organised format to display to users.
      * @param module currently being processed
-     * @param selectedSlots of module being processed
+     * @param semester semester
      */
-    public String formatPrintSelectedSlots(Module module, Map<LessonType, String> selectedSlots) {
-        String formattedSelectedSlots;
-
-        String moduleCode = module.moduleCode;
-        String moduleTitle = module.title;
-        String selectedSlotsAsString = convertWithStream(selectedSlots);
-
-        formattedSelectedSlots = moduleCode
-                + "\t" + moduleTitle + "\n"
-                + selectedSlotsAsString
-        ;
-
-        return formattedSelectedSlots;
+    public String formatSelectedModule(SelectedModule module, int semester) {
+        String moduleCode = module.getModule().moduleCode;
+        String moduleTitle = module.getModule().title;
+        String selectedSlotsString = formatSelectedSlots(module.getModule(), module.getSelectedSlots(), semester);
+        return StringUtils.rightPad(moduleCode, HEADING_LENGTH) + moduleTitle + "\n" + selectedSlotsString;
     }
 
     /**
      * Helper function to format list of selected modules to an organised format to display to users.
      * @param currentSelectedModules the list of all selectedModules and their selected slots for lessons
      */
-    public String formatPrintSelectedSlotsList(List<SelectedModule> currentSelectedModules) {
-        String formattedSelectedSlotsList = "";
+    public String formatSelectedModuleList(List<SelectedModule> currentSelectedModules, int semester) {
+        String result = "";
         for (var selectedModule : currentSelectedModules) {
-            Module module = selectedModule.getModule();
-            Map<LessonType, String> selectedSlots = selectedModule.getSelectedSlots();
-
-            String formattedSelectedSlots = formatPrintSelectedSlots(module, selectedSlots);
-            formattedSelectedSlotsList += formattedSelectedSlots + System.lineSeparator();
+            result += formatSelectedModule(selectedModule, semester) + System.lineSeparator();
         }
-        return formattedSelectedSlotsList;
+        return result;
     }
 
     /** This overridden execute method validates that the current list of selected module is not empty
@@ -84,15 +108,13 @@ public class DisplaySelectedModuleListCommand extends Command {
     @Override
     public void execute(State state, Ui ui, Storage storage) {
         List<SelectedModule> currentSelectedModules = state.getSelectedModulesList();
-        String formattedSelectedSlotsList;
-
+        String formattedResult;
         if (!currentSelectedModules.isEmpty()) {
-            formattedSelectedSlotsList = formatPrintSelectedSlotsList(currentSelectedModules);
+            formattedResult = formatSelectedModuleList(currentSelectedModules, state.getSemester());
             successful = true;
-            ui.addMessage(formattedSelectedSlotsList);
-            ui.displayUi();
+            ui.addMessage(formattedResult);
+            // ui.displayUi();
         }
-
         ui.addMessage(getExecutionMessage());
         ui.displayUi();
     }

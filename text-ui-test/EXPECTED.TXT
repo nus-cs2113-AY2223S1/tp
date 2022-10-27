@@ -63,8 +63,9 @@ Sem [1] >> ---------------------------------------------------------------------
 CS2113 has been added
 --------------------------------------------------------------------------------
 Sem [1] >> --------------------------------------------------------------------------------
-CS2113	Software Engineering & Object-Oriented Programming
-	LECTURE=1, TUTORIAL=1
+CS2113   Software Engineering & Object-Oriented Programming
+         LEC[1]    LT19, weeks: 1 - 13
+         TUT[1]    COM1-0210, weeks: 3 - 13
 
 
 Here's a list of your current selected module(s)!
@@ -72,7 +73,10 @@ Here's a list of your current selected module(s)!
 Sem [1] >> --------------------------------------------------------------------------------
 Shutting down......
 --------------------------------------------------------------------------------
-This is your export link:
+These are your export links:
 https://nusmods.com/timetable/sem-1/share?CS2113=LEC:1,TUT:1
+https://nusmods.com/timetable/sem-2/share?
+https://nusmods.com/timetable/sem-3/share?
+https://nusmods.com/timetable/sem-4/share?
 Bye bye, See you again
 --------------------------------------------------------------------------------
