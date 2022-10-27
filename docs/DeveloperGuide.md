@@ -91,6 +91,7 @@ to set up IDEA’s coding style to match ours.
 
 ### 3.1 Architecture
 
+![Architecture](images/Architecture.png)
 **How the architecture components interact with each other**
 
 Core program flow is managed by the Duke class.

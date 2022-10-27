@@ -1,5 +1,7 @@
 @startuml
 allowmixing
+hide circle
+skinparam classAttributeIconSize 0
 
 Package " "<<Rectangle>>{
     Class UI
@@ -18,6 +20,8 @@ Main --> UI
 Main -> State
 Main ---> Storage
 Main -> Logic
+
+Logic -> State
 
 State ..> Model
 
