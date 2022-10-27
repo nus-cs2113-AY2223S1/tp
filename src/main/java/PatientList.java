@@ -10,7 +10,7 @@ public class PatientList {
     public void addPatient(UI ui, String name, String birthDate, String gender, String id) {
         Patient patient = new Patient(name, birthDate, gender, id);
         patients.add(patient);
-        ui.printMessageAndObject(patient.toString(),UI.PATIENT_ADDED);
+        ui.printMessageAndObject(patient.toString(),UI.PATIENT_ADDED,patients.indexOf(patient));
     }
 
     public void loadPatient(String name, String birthDate, String gender, String id) {
@@ -67,7 +67,8 @@ public class PatientList {
             patientToBeModified.setGender(gender);
         }
         System.out.println();
-        ui.printMessageAndObject(patientToBeModified.toString(),UI.PATIENT_EDITED);
+        ui.printMessageAndObject(patientToBeModified.toString(),UI.PATIENT_EDITED,
+                patients.indexOf(patientToBeModified));
     }
 
     public boolean isEmpty() {
