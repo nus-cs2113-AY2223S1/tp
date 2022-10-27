@@ -15,7 +15,7 @@ public class Appointment {
     private String appointmentDate;
     private AppointmentStatus appointmentStatus;
 
-    private ArrayList<Task> tasks = new ArrayList<>();
+    public ArrayList<Task> tasks = new ArrayList<>();
 
     public Appointment(String petName, String appointmentDate, String service) {
         this.appointmentId = ++id;
