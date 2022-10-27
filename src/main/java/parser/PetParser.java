@@ -50,6 +50,10 @@ public class PetParser {
             int startOfS = input.indexOf(" s/");
             int startOfH = input.indexOf(" h/");
 
+            if(!input.substring(0,startOfN).isEmpty()){
+                throw new DukeException();
+            }
+
             if (startOfN > startOfS || startOfS > startOfH || startOfN == -1) {
                 System.out.println("Invalid Input! format of parameters entered for adding a pet is invalid");
                 throw new DukeException();
