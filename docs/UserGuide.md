@@ -8,16 +8,25 @@
   * [Delete a passenger detail: `passenger delete`](#Delete-a-passenger-detail-passenger-delete)
   * [Display passenger detail logbook: `passenger list`](#Display-passenger-detail-logbook-passenger-list)
   * [Add a flight detail: `flight add`](#add-a-flight-detail-flight-add)
+  * [Delete a flight detail: `flight delete`](#delete-a-flight-detail-flight-delete)
   * [Delay a flight: `delay`](#delay-a-flight-delay)
   * [Display flight detail logbook: `flight list`](#display-flight-detail-logbook-flight-list)
   * [Command Summary](#Command-Summary)
-* [Frequently Asked Quesitions](#Frequently-Asked-Questions)
+* [Frequently Asked Questions](#Frequently-Asked-Questions)
 
 ---
 
 ## Introduction
 
-SkyControl is a software which optimizes the use of the Command Line Interface (CLI)to manage flights and passengers in an airport terminal. 
+SkyControl is a program which optimizes the use of the Command Line Interface (CLI) to manage flights and passengers in an airport terminal.
+
+SkyControl allows a Airport Operations Planning & Airside Manager to add, delete, update flight and passenger information, add delays to flights
+and list out both flight and passenger details by entering commands into the CLI.
+
+It aims to provide an ease of access to the manager, to access the relevant flight or passenger information
+through a CLI which is faster than a Graphical User Interface (GUI).
+
+
 
 ---
 
@@ -138,7 +147,7 @@ _If passenger details logbook is empty_.
 Format: `flight add fn/FLIGHT_NUMBER a/AIRLINE d/DESTINATION dt/DEPARTURE_TIME gn/GATE_NUMBER c/CHECKIN_ROW_DOOR`
 
 * The `FLIGHT_NUMBER` must consist of 2 alphabets followed by 1-4 digits.
-* The `DEAPRTURE_TIME` must be in 24HR time format e.g. 1600.
+* The `DEPARTURE_TIME` must be in 24HR time format e.g. 1600.
 * `GATE_NUMBER` must be a numerical number.
 
 Example of usage:
@@ -150,6 +159,27 @@ Flight added!
 flight add fn/KE644 a/KOREA AIR d/KOREA dt/0500 gn/22 c/10-04
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Flight added!
+```
+---
+
+## Delete a flight detail: `flight delete`
+
+This command allows the deletion of a flight detail from the flight list logbook, provided that
+the flight exists in the logbook.
+
+Format: `flight delete fn/FLIGHT_NUMBER`
+
+* The `FLIGHT_NUMBER` must consist of 2 alphabets followed by 1-4 digits. It is not case-sensitive.
+
+Example of usage:
+```
+flight delete fn/sq712
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+FLIGHT SQ712 HAS BEEN DELETED.
+
+flight delete fn/SQ712
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+FLIGHT SQ712 NOT FOUND.
 ```
 ---
 
