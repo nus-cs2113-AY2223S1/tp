@@ -86,7 +86,18 @@ Format: `task reassign i/TASK_ID e/EMPLOYEE_ID`
 Example of usage:
 `task reassign i/1 e/1`
 
----
+
+#### Finish a task: `task finish`
+- Finish a task in the task list
+
+Format: `task finish i/TASK_ID`
+* The `TASK_ID` and `EMPLOYEE_ID` must be positive integers 1, 2, 3, …
+* The `TASK_ID` can be found by `task view`
+* When all the tasks of an appointment is marked as done, the status of an appointment is automatically marked as processed.
+
+Example of usage:
+`task finish i/1`
+
 ### Employee Management
 
 #### Add an employee: `employee add`
