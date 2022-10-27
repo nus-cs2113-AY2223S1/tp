@@ -141,7 +141,7 @@ Format: ```remove-user /u [USERNAME]```
 
 Note:
 1. The user to be deleted should not borrow or lend any items at the moment
-2. All the items of this user will also be deleted
+2. All the items of this user will also be deleted, but not transactions.
 
 Example of usage: ```remove-user /u thanh```
 
@@ -216,8 +216,8 @@ Format: ```add-item /n [ITEM_NAME] /c [CATEGORY_INDEX] /p [PRICE] /o [USERNAME]`
 Note:
 1. Owner cannot have duplicate items (items have the same name)
 2. Item name length must be less than 20 chars
-3To choose category, please use ```list-categories``` to list them out and use the index
-4Price must be a float, and in range from 0 to 10000
+3. To choose category, please use ```list-categories``` to list them out and use the index
+4. Price must be a float, and in range from 0 to 10000
 
 Example of usage: ```add-item /n weight /c 1 /p 0.5 /o bui```
 
@@ -271,6 +271,7 @@ Format: ```view-item /i [ITEM_ID]```
 
 Note:
 1. The itemId must be available (Present in item list)
+2. To get item ID, use ```list-items```
 
 Example of usage: ```view-item /i 99995bb2```
 
@@ -384,13 +385,13 @@ Note:
 2. Duration must be an integer, greater than 0 and less than 1461 (4 years)
 3. The format of create date is YYYY-MM-DD, and it must be before the input date
 
-Example of usage: ```add-tx /i 2cc4edf3 /b thanh /d 5 /c 2022-10-20```
+Example of usage: ```add-tx /i 3ff10798 /b bui /d 5 /c 2022-10-20```
 
 Expected outcome:
 ```
 ____________________________________________________________
 OK! I will add the following transaction:
-Status: [On loan] TransactionID: 80902c3b ItemName: weight ItemID: 2cc4edf3 BorrowerID: thanh ReturnDate: Tue, Oct 25 2022 (4 day(s) remaining)
+[Finished] TxID: 7ddc865f ItemName: speaker ItemID: 3ff10798 Borrower: bui ReturnedDate: Tue, Oct 25 2022 MoneyTransacted: 10.0 
 Total transaction(s) in database: 3
 ____________________________________________________________
 ```
@@ -403,13 +404,13 @@ Format: ```remove-tx /t [TRANSACTION_ID]```
 Note:
 1. You can use ```list-tx``` to get the transaction ID you want to delete
 
-Example of usage: ```remove-tx /t 80902c3b```
+Example of usage: ```remove-tx /t 7ddc865f```
 
 Expected outcome:
 ```
 ____________________________________________________________
 OK! I will remove the following item:
-Status: [On loan] TransactionID: 80902c3b ItemName: weight ItemID: 2cc4edf3 BorrowerID: thanh ReturnDate: Tue, Oct 25 2022 (4 day(s) remaining)
+[Finished] TxID: 7ddc865f ItemName: speaker ItemID: 3ff10798 Borrower: bui ReturnedDate: Tue, Oct 25 2022 MoneyTransacted: 10.0 
 Total transactions(s) in database: 2
 ____________________________________________________________
 ```
@@ -424,8 +425,9 @@ Example of usage: ```list-tx```
 Expected outcome:
 ```
 ____________________________________________________________
-Here are 1 transaction(s) in your list:
-   1. Status: [On loan] TransactionID: 2c833e49 ItemName: toy ItemID: ea608c61 BorrowerID: test2 ReturnDate: Sat, Nov 05 2022 (11 day(s) remaining)
+Here are 2 transaction(s) in your list:
+   1. [Unfinished] TxID: 55e36921 ItemName: scale ItemID: f15dff20 Borrower: jorelle ReturnDate: Fri, Oct 28 2022 (0 day(s) left) MoneyTransacted: 5.0 
+   2. [Unfinished] TxID: 9e27c530 ItemName: laptop ItemID: bd4961ed Borrower: winston ReturnDate: Sat, Jan 21 2023 (85 day(s) left) MoneyTransacted: 900.0 
 ____________________________________________________________
 ```
 
@@ -437,13 +439,13 @@ Format: ```view-tx /t [TRANSACTION_ID]```
 Note:
 1. You can use ```view-tx``` to get the transaction ID you want to view
 
-Example of usage: ```view-tx /t 4f7f7fe8```
+Example of usage: ```view-tx /t 9e27c530```
 
 Expected outcome:
 ```
 ____________________________________________________________
 Here is the transaction you requested to view: 
-Status: [Returned] TransactionID: 4f7f7fe8 ItemName: weight ItemID: 5b727b2e BorrowerID: jingwei ReturnedDate: Sat, Oct 08 2022
+[Unfinished] TxID: 9e27c530 ItemName: laptop ItemID: bd4961ed Borrower: winston ReturnDate: Sat, Jan 21 2023 (85 day(s) left) MoneyTransacted: 900.0 
 ____________________________________________________________
 ```
 
@@ -452,13 +454,14 @@ ____________________________________________________________
 
 Format: ```find-tx /s finished``` OR ```find-tx /s unfinished```
 
-Example of usage: ```find-tx /s finished```
+Example of usage: ```find-tx /s unfinished```
 
 Expected outcome:
 ```
 ____________________________________________________________
-Here are the completed transactions: 
-Status: [Returned] TransactionID: 8da1d6be ItemName: scale ItemID: 4ede2dc2 BorrowerID: bui ReturnedDate: Sat, Oct 15 2022
+Here are the uncompleted transactions: 
+[Unfinished] TxID: 55e36921 ItemName: scale ItemID: f15dff20 Borrower: jorelle ReturnDate: Fri, Oct 28 2022 (0 day(s) left) MoneyTransacted: 5.0 
+[Unfinished] TxID: 9e27c530 ItemName: laptop ItemID: bd4961ed Borrower: winston ReturnDate: Sat, Jan 21 2023 (85 day(s) left) MoneyTransacted: 900.0 
 ____________________________________________________________
 ```
 
@@ -472,14 +475,13 @@ Note:
 2. Duration must be a valid duration i.e. non-zero and non-negative
 3. Duration is in days and therefore should be a whole number
 
-Example of usage: ```update-tx /t 2c833e49 /d 11```
+Example of usage: ```update-tx /t 55e36921 /d 10```
 
 ```
 ____________________________________________________________
 Done! Here is the updated transaction:
-Status: [On loan] TransactionID: 2c833e49 ItemName: toy ItemID: ea608c61 BorrowerID: test2 ReturnDate: Sat, Nov 05 2022 (11 day(s) remaining)
+[Unfinished] TxID: 55e36921 ItemName: scale ItemID: f15dff20 Borrower: jorelle ReturnDate: Wed, Nov 02 2022 (5 day(s) left) MoneyTransacted: 10.0 
 ____________________________________________________________
-
 ```
 
 ### 3.5. Exit Program
