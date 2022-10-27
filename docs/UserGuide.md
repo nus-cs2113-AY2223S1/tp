@@ -75,7 +75,7 @@ _Written by: Chia Thin Hong_
    As shown in Figure 1 below, click on the `duke.jar` file from the latest version available.
 
     <p align="center">
-    <img src="images/MoolahManagerDownload.png">
+    <img src="images/MoolahManagerDownload.png" width="600">
     <br />
     <i>Figure 1: How to Download Moolah Manager</i>
     </p>
