@@ -209,7 +209,7 @@ class PrescriptionListTest {
         String expectedOutput =
                 "You have added a prescription!" + System.lineSeparator()
                 + "\t____________________________________________________________" + System.lineSeparator()
-                + "#1)"
+                + "#1)" + System.lineSeparator()
                 + "\tID: S123456G" + System.lineSeparator()
                 + "\tMedicine: Ventolin" + System.lineSeparator()
                 + "\tDosage: 4 mg" + System.lineSeparator()

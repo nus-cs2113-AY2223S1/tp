@@ -153,7 +153,7 @@ public class VisitListTest {
                 "You have added a visit!" + System.lineSeparator()
                 + "\t____________________________________________________________"
                 + System.lineSeparator()
-                + "1#)"
+                + "#1)"
                 + System.lineSeparator()
                 + "\tID: S123" + System.lineSeparator()
                 + "\tDate: 23-05-2020" + System.lineSeparator()
