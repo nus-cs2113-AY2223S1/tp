@@ -139,11 +139,13 @@ The sequence diagram below illustrates this exit mechanism.
 ## Product scope
 ### Target user profile
 
-{Describe the target user profile}
+Our target user profile are NUS students who are still unsure of what module they will be taking and/or are targeting one of the exchange programs that NUS has to offer (NOC/SEP).
+Through our program students will be able to ensure that they are eligible for these programmes and ensure that they make the most out of their studies in NUS.
 
 ### Value proposition
 
-{Describe the value proposition: what problem does it solve?}
+It is often very confusing for students to plan out the full four years of their studies due to the sheer amount of modules they will be taking.
+Students might also have doubts of their eligibility for the exchange programs. Our program allows users to ensure that they will be eligible for these programs when the time comes.
 
 ## User Stories
 
@@ -158,7 +160,7 @@ The sequence diagram below illustrates this exit mechanism.
 
 ## Glossary
 
-* *glossary item* - Definition
+* *Module* - A class that a student takes for their current semester in NUS
 
 ## Instructions for manual testing
 

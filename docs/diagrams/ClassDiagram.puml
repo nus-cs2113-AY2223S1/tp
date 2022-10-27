@@ -91,13 +91,13 @@ Command <|-- Delete : execute
 Command <|-- Exit : execute
 Command <|-- Mcs : execute
 Command <|-- View : execute
-Duke - "1" ModuleList
-Duke - UI
-Duke - Parser
-Module -- Add
-ModuleList - UI
-UI -- Exit
-Command - ModuleList
+Duke -> "1" ModuleList
+Duke -> UI
+Duke -> Parser
+Module <-- Add
+ModuleList -> UI
+UI <-- Exit
+Command -> ModuleList
 ModuleList -> "0..*" Module : add
 
 
