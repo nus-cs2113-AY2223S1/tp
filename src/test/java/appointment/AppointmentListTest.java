@@ -1,8 +1,10 @@
 package appointment;
 
+import command.appointmentcommand.AddAppointmentCommand;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 class AppointmentListTest {
 
@@ -20,18 +22,22 @@ class AppointmentListTest {
     }
 
     @Test
-    void addAppointment() {
-        Appointment appointment = new Appointment("Bobby", "11-28", "Massage");
-        AppointmentList.addAppointment(appointment);
-        assertEquals(AppointmentList.appointments.get(0).appointmentId, 1);
+    void addAnAppointment() {
+        int numOfAppointment = AppointmentList.appointments.size();
+        AddAppointmentCommand addAppointmentCommand = new AddAppointmentCommand("Bobby", "11-28", "Massage");
+        addAppointmentCommand.execute();
+        int numOfAppointmentAfterAdd = AppointmentList.appointments.size();
+        assertEquals(numOfAppointmentAfterAdd - numOfAppointment, 1);
     }
 
     @Test
     void removeAppointment() {
         Appointment appointment = new Appointment("Bobby", "11-28", "Massage");
         AppointmentList.addAppointment(appointment);
+        int numOfAppointments = AppointmentList.appointments.size();
         AppointmentList.removeAppointment(1);
-        assertEquals(AppointmentList.appointments.size(), 0);
+        int numOfAppointmentsAfterRemove = AppointmentList.appointments.size();
+        assertEquals(numOfAppointmentsAfterRemove - numOfAppointments, -1);
     }
 
     @Test
