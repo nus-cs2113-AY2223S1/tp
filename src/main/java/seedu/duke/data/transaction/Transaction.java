@@ -14,7 +14,7 @@ public abstract class Transaction {
     private static final String PREFIX_CATEGORY = "[";
     private static final String POSTFIX_CATEGORY = "]";
     private static final String SYMBOL_PIPE = "|";
-    private static final String TEXT_AT = "at";
+    private static final String TEXT_ON = "on";
     private static final String TEXT_DESCRIPTION = "Description:";
 
     //@@author chinhan99
@@ -87,7 +87,7 @@ public abstract class Transaction {
     @Override
     public String toString() {
         return String.format("%s %s%d %s %s %s %s %s", printFormattedCategory(), DOLLAR_SIGN,
-                amount, TEXT_AT, printFormattedDate(), SYMBOL_PIPE, TEXT_DESCRIPTION, description);
+                amount, TEXT_ON, printFormattedDate(), SYMBOL_PIPE, TEXT_DESCRIPTION, description);
     }
 
     public void setType(String type) {

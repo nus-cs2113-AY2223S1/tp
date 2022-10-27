@@ -178,7 +178,7 @@ public class StatsCommand extends ListAndStatsCommand {
 
         if (statsType.equals(CATEGORICAL_SAVINGS)) {
             // Replaces stats list with categorical savings if stats type is categorical_savings
-            genericStatsList = transactions.listCategoricalSavings();
+            genericStatsList = transactions.listCategoricalSavings(transactions.getTransactions());
         }
 
         if (genericStatsList.isEmpty()) {
