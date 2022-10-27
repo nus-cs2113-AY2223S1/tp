@@ -12,7 +12,12 @@ medicine information via Command Line Interface.
         + [Main Menu](#main-menu)
             - [Going to main menu: `main`](#going-to-main-menu-main)
             - [Choosing an option: `index`](#choosing-an-option-index)
-        + [3. Prescription](#3-prescription)
+          - [1. Patient](#1-patient)
+              - [Adding a patient: `add`](#adding-a-new-patient-add)
+              - [Viewing list of patients: `viewAll`](#viewing-all-patients-viewall)
+              - [Retrieving a patient: `retrieve`](#retrieving-a-patients-records-retrieve)
+              - [Modifying a patient’s record: `edit`](#modifying-the-details-of-a-patient-edit)
+          + [3. Prescription](#3-prescription)
             - [Adding New Prescription: `add`](#adding-new-prescription-add)
             - [Modifying a patient’s prescription: `edit`](#modifying-a-patients-prescription-edit)
             - [Viewing List of All Existing Prescriptions: `viewAll`](#viewing-list-of-all-existing-prescriptions-viewall)
@@ -61,6 +66,117 @@ Example of usage:
 * `1`
 * `bye`
 
+### 1. Patient
+
+#### Adding a new Patient: `add`
+Add a new patient to the list of patients.
+
+Format: `add n/[name] g/[M/F] d/[DOB] i/[ID]`
+
+* `DOB` should be in "DD-MM-YYYY" format.
+* None of the fields should be empty
+* `ID` should be unique, if you attempt to add a patient with an `ID` that is 
+   already an `ID` of another patient, an error will be thrown.
+
+Example of usage:
+
+`add n/John g/M d/12-12-2001 i/T0707075F`
+
+Expected Output:
+
+```
+Ok! I've added a patient! The patient's details are as follows:
+	____________________________________________________________
+	Patient #1
+	Name: John
+	Gender: Male
+	Date of Birth: 12-12-2001
+	ID: T0707075F
+	____________________________________________________________
+```
+
+#### Viewing all patients: `viewAll`
+
+Lists all patients in the system.
+
+Format: `viewAll`
+
+Expected Output:
+
+```
+Here are the list of patients in the system
+	____________________________________________________________
+    Patient #1
+	Name: John Doe
+	Gender: Male
+	Date of Birth: 09-09-1978
+	ID: T2
+	____________________________________________________________
+    Patient #2
+	Name: Jane Doe
+	Gender: Female
+	Date of Birth: 09-09-1978
+	ID: T1
+	____________________________________________________________
+    Patient #3
+	Name: John
+	Gender: Male
+	Date of Birth: 12-12-2001
+	ID: T0707075F
+	____________________________________________________________
+```
+
+#### Retrieving a patient's records: `retrieve`
+
+Retrieves all information about the patient that matches the input `ID`
+
+Format: `retrieve i/ID`
+* `ID` is case-insensitive
+
+Example of usage:
+
+`retrieve i/T0707075f`
+
+Example Output:
+
+```
+The patient with the supplied ID was found! Here are the details of the patient: 
+	____________________________________________________________
+	Patient #3
+	Name: John
+	Gender: Male
+	Date of Birth: 12-12-2001
+	ID: T0707075F
+	____________________________________________________________
+```
+
+#### Modifying the details of a patient: `edit`
+
+Modifies a part of an existing patient's record, given updated information and patient `ID`
+
+* `DOB` must be in DD-MM-YYYY format
+
+Acceptable Formats:
+
+* `edit i/ID n/name`
+* `edit i/ID g/[M/F]`
+* `edit i/ID d/DOB`
+
+Example of usage:
+
+`edit i/t0707075F d/21-02-1992`
+
+Expected Output:
+```
+Alright, I've modified the details of the patient! Here are the new details of the patient:
+    ____________________________________________________________
+    Patient #3
+    Name: John
+    Gender: Male
+    Date of Birth: 21-02-1992
+    ID: T0707075F
+    ____________________________________________________________
+```
 
 ### 3. Prescription
 
@@ -152,7 +268,7 @@ Prescription #2
 #### Viewing all patient’s prescription: `viewPatientPres`
 Views all prescription records for a specific patient
 
-Format: `viewPatientPres i/pateintID`
+Format: `viewPatientPres i/patientID`
 
 * The `patientID` should be the ID of a patient that is already in the patient list
 * The `patientID` is case-insensitive
