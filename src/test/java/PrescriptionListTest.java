@@ -159,7 +159,7 @@ class PrescriptionListTest {
                 + "\tStatus: Active" + System.lineSeparator()
                 + "\t____________________________________________________________" + System.lineSeparator()
                 + "You have edited the prescription!" + System.lineSeparator()
-                + "#1)"
+                + "#1)" + System.lineSeparator()
                 + "\t____________________________________________________________" + System.lineSeparator()
                 + "\tID: S123456G" + System.lineSeparator()
                 + "\tMedicine: Losartan Potassium" + System.lineSeparator()
