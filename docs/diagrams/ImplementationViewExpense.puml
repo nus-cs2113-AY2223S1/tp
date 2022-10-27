@@ -9,8 +9,6 @@ Participant "expenseManager:ExpenseManager" as expenseManager DATA_COLOR_1
 
 activate consoleInterface USER_INTERFACE_COLOR_1
 
-ref over consoleInterface: getConsoleCommand()
-
 opt consoleCommand instanceof ConsoleCommandViewExpense
     consoleInterface -[USER_INTERFACE_COLOR_1]> consoleInterface : \lrunCommandViewExpense(\n\tconsoleCommand:ConsoleCommandViewExpense\n)
     activate consoleInterface USER_INTERFACE_COLOR_1

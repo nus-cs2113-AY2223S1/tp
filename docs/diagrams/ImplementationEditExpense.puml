@@ -9,8 +9,6 @@ Participant "<<class>>\nLocalStorage" as LocalStorage STORAGE_COLOR_1
 
 activate consoleInterface USER_INTERFACE_COLOR_1
 
-ref over consoleInterface: Get Console Command
-
 opt consoleCommand instanceof ConsoleCommandEditExpense
     consoleInterface -[USER_INTERFACE_COLOR_1]> consoleInterface : \lrunCommandEditExpense(\n\tconsoleCommand:ConsoleCommandEditExpense\n)
     activate consoleInterface USER_INTERFACE_COLOR_1
