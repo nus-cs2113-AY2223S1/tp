@@ -8,8 +8,6 @@ Participant "recurringPaymentManager:RecurringPaymentManager" as recurringPaymen
 
 activate consoleInterface USER_INTERFACE_COLOR_1
 
-ref over consoleInterface: Get Console Command
-
 opt consoleCommand instanceof ConsoleCommandViewRecurringPayment
     consoleInterface -[USER_INTERFACE_COLOR_1]> consoleInterface : \lrunCommandViewRecurringPayment(\n\tconsoleCommand:ConsoleCommandViewRecurringPayment\n)
     activate consoleInterface USER_INTERFACE_COLOR_1
