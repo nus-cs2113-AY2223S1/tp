@@ -65,7 +65,7 @@ The software architecture diagram below describes the program's design and the i
 The sequence diagram below describes the interaction between the various core components when a command is entered.
 In this example, 
 the user launches the program and enters the command `Add-Expense -n Expense -a 7.80` to add an expense with the name `Expense` and the amount `7.80`.
-The sequence diagrams referenced by the component interaction diagram can be seen [below](#component-interaction-sequence-diagrams)
+The sequence diagrams referenced by the component interaction diagram can be seen [below](#component-interaction-sequence-diagrams).
 
 ![Component-Interaction-On-Command-Entered](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentInteractionsOnCommandEntered.puml)
 
@@ -110,7 +110,13 @@ The `Configurations` class defines the configuration parameters used by the prog
 
 ### Exceptions Component
 
+The Exceptions components consists of various exception classes which inherits from `MoneyGoWhereException`.
+
 ![Component-Exceptions](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentExceptions.puml)
+
+The exceptions are thrown and handled by the program depending on the conditions outlined in their Javadoc comments.
+For example, `ConsoleParserCommandAddExpenseInvalidException` is thrown when an error is encountered while parsing the command.
+Do refer to the [repository](https://github.com/AY2223S1-CS2113T-W11-1/tp/tree/master/src/main/java/seedu/moneygowhere/exceptions) to view the full list of exceptions. 
 
 ### UserInterface Component
 
