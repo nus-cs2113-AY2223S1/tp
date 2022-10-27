@@ -18,13 +18,13 @@ public class UI {
     // Patient
     private static final String PATIENT_MAIN_MENU =
             "This is the Patient Main Menu!" + System.lineSeparator()
-                    + "List of commands: "
-                    + UI.PATIENT_ADD
-                    + UI.PATIENT_VIEW_ALL
-                    + UI.PATIENT_RETRIEVE
-                    + UI.PATIENT_EDIT
-                    + UI.RETURN_TO_MAIN
-                    + UI.EXIT_PROGRAM;
+            + "List of commands: "
+            + UI.PATIENT_ADD
+            + UI.PATIENT_VIEW_ALL
+            + UI.PATIENT_RETRIEVE
+            + UI.PATIENT_EDIT
+            + UI.RETURN_TO_MAIN
+            + UI.EXIT_PROGRAM;
 
     // Prescription
     private static final String NO_PRESCRIPTION_MESSAGE = "There are currently no prescriptions in the record.";
