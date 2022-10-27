@@ -1,5 +1,7 @@
 # Developer Guide (Pre-Release)
 
+<p align="center"><img alt="icon" src="https://raw.githubusercontent.com/AY2223S1-CS2113T-W11-1/tp/master/docs/images/icon.png"></p>
+
 ## Contents
 * [Introduction](#introduction)
 * [Acknowledgements](#acknowledgements)
