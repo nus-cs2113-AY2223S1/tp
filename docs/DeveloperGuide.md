@@ -83,7 +83,7 @@ In the example above, `UserInterface#runCommandAddExpense()` calls `Storage#save
 
 #### Component Interaction Sequence Diagrams:
 
-![Component-Interaction-Ref-Save-Expense-To-File](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentInteractionsRefLoadExpenseFromFile.puml)
+![Component-Interaction-Ref-Save-Expense-To-File](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/ComponentInteractionsRefLoadExpensesFromFile.puml)
 
 * `UserInterface()` calls `Data#load()` to load any existing data stored in a file.
 * `Data#load()` calls `Storage#loadFromFile()` to load the data from a file.
