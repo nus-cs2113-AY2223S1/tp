@@ -73,6 +73,7 @@ public class PassengerInfo {
                 + "|" + this.seatNumber + "|" + this.boardingTime + "\n");
         return passengerDetails;
     }
+
     public void setDepartureTime(String newDepartureTime) {
         this.departureTime = newDepartureTime;
     }
