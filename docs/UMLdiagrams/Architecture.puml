@@ -1,0 +1,27 @@
+@startuml
+allowmixing
+
+Package " "<<Rectangle>>{
+    Class UI
+    Class Logic
+    Class Storage
+    Class State
+    Class Main
+    Class Model
+    Class Commons
+}
+
+actor "User" as User
+file "file" as File
+
+Main --> UI
+Main -> State
+Main ---> Storage
+Main -> Logic
+
+State ..> Model
+
+Storage ..> State
+Storage .right.>File
+User --> UI
+@enduml
