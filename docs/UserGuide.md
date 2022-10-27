@@ -40,12 +40,12 @@ Adds a new expense to the list of expenses.
 
 Syntax: `Add-Expense -n NAME -a AMOUNT [-d DATE_TIME] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p MODE OF PAYMENT]`
 
-<details>
+<details markdown = "1">
 <summary>⚠️️️️ Syntax Notes</summary>
 <ul>
 <li>`NAME`, `DESCRIPTION`, `CATEGORY`, `REMARKS` and `MODE OF PAYMENT` are text strings. You may use spaces within the text if you wrap the text with double quotes.</li>
 <li>`CURRENCY` is a text string. It must be a valid currency code.</li>
-<li>`AMOUNT` is a decimal value.</li>
+<li> `AMOUNT` is a decimal value.</li>
 <li>`DATE_TIME` is a text string in the format `"dd/MM/yyyy HHmm"`.</li>
 </ul>
 </details>
