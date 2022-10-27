@@ -1,8 +1,6 @@
 # MoneyGoWhere
 <p align="center"><img alt="icon" src="https://raw.githubusercontent.com/penguin-s/tp/branch-User-Guide/docs/images/icon.png"></p>
 
-<hr>
-
 ## Contents
 * [Introduction](#introduction)
 * [Quick Start](#quick-start)
