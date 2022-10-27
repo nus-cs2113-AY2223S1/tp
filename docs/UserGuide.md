@@ -13,20 +13,23 @@ medicine information via Command Line Interface.
 ## Features 
 
 ### Main Menu
-The main menu will allow the user to choose between three options:
-<br> (1) Patient, (2) Visit, and (3) Prescription 
+The main menu will allow the user to choose between three options: (1) Patient, (2) Visit, and (3) Prescription 
+
 #### Going to main menu: `main`
 Allow the user to view and go to main menu at any point of the program
-<br>Format / Example: `main`
+
+Format / Example: `main`
 
 Expected Output:
-<br>Hello welcome to
-<br>ıllıllı OneDoc ıllıllı
-<br>Please choose one of the following options:
-<br>1 - Patients
-<br>2 - Visits
-<br>3 - Prescription
-<br>bye - Quit OneDoc
+```
+Hello welcome to
+ıllıllı OneDoc ıllıllı
+Please choose one of the following options:
+1 - Patients
+2 - Visits
+3 - Prescription
+bye - Quit OneDoc
+```
 
 #### Choosing an option: `index`
 Chooses an option for the user to continue with. The application will direct the user to 3 different pages accordingly.
@@ -35,10 +38,9 @@ Format: `index`
 
 * The `index` can be 1, 2, or 3 to indicate a sub-menu, or bye to exit the program
 
-
 Example of usage:
-<br>`1`
-<br>`bye`
+* `1`
+* `bye`
 
 
 ### 3. Prescription
