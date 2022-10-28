@@ -300,13 +300,13 @@ public class Timetable {
 
     public static String dayToShortString(Day day) {
         Map<Day, String> map = new HashMap<>();
-        map.put(Day.Monday, "Mon");
-        map.put(Day.Tuesday, "Tues");
-        map.put(Day.Wednesday, "Wed");
-        map.put(Day.Thursday, "Thur");
-        map.put(Day.Friday, "Fri");
-        map.put(Day.Saturday, "Sat");
-        map.put(Day.Sunday, "Sun");
+        map.put(Day.MONDAY, "Mon");
+        map.put(Day.TUESDAY, "Tues");
+        map.put(Day.WEDNESDAY, "Wed");
+        map.put(Day.THURSDAY, "Thur");
+        map.put(Day.FRIDAY, "Fri");
+        map.put(Day.SATURDAY, "Sat");
+        map.put(Day.SUNDAY, "Sun");
         return Optional.ofNullable(map.get(day)).orElse("<Invalid>");
     }
 
