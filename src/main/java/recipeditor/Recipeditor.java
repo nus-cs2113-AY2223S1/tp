@@ -30,6 +30,8 @@ public class Recipeditor {
     private static void start(String[] args) {
         Storage.createDataFolder();
         Storage.createFolder(Storage.RECIPES_FOLDER_PATH);
+        Storage.createFile(Storage.ALL_RECIPES_FILE_PATH);
+        Storage.loadRecipesFromAllRecipeFile();
         Ui.showGreeting();
     }
 

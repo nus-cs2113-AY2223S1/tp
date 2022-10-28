@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class RecipeList {
     private static ArrayList<Recipe> recipes = new ArrayList<>();
+    public static ArrayList<String> recipeTitles = new ArrayList<>();
 
     private RecipeList(ArrayList<Recipe> load) {
         recipes = new ArrayList<>();
