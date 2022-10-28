@@ -23,9 +23,12 @@ alt Has previous state
 
     Storage -> State ++ : previousState
     Storage -> UI ++ : Display success message
-
+    UI --> Storage
+    deactivate UI
 else No previous state
-    Storage -> UI : Display error message
+    Storage -> UI ++ : Display error message
+    UI --> Storage
+    deactivate UI
 end
 
 @enduml

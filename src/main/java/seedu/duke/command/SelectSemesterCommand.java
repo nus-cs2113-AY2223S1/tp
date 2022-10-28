@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 
 public class SelectSemesterCommand extends Command {
     public static final String COMMAND_WORD = "semester";
-    public static final String COMMAND_USAGE = "semester [SEMESTER_SELECTED]";
+    public static final String COMMAND_USAGE = "semester [ SEMESTER ]";
     public static final String COMMAND_DESCRIPTION = "Select another semester "
             + "to plan and organize timetable";
 

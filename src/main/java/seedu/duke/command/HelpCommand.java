@@ -18,8 +18,9 @@ public class HelpCommand extends Command {
             + "available in YAMOM!" + System.lineSeparator();
 
     private static final String MESSAGE_FORMAT_NOTE = System.lineSeparator() + "Note: "
-            + "[ ] are required elements, "
-            + "< > are optional elements";
+            + "[ ] are required elements,\n"
+            + "      < > are optional elements,\n"
+            + "       |  denotes either of the arguments can be used.";
 
     private static final String MESSAGE_USAGE = System.lineSeparator() + "Usage :";
     private static final String USER_GUIDE_LINK = "https://ay2223s1-cs2113-f11-3.github.io/tp/";
@@ -61,16 +62,16 @@ public class HelpCommand extends Command {
         ArrayList<String> commandDescriptions = new ArrayList<>();
 
         commandDescriptions.add(AddModuleCommand.getCommandDescription());
-        commandDescriptions.add(DeleteModuleCommand.getCommandDescription());
-        commandDescriptions.add(ListCommand.getCommandDescription());
         commandDescriptions.add(ExitCommand.getCommandDescription());
+        commandDescriptions.add(DeleteModuleCommand.getCommandDescription());
         commandDescriptions.add(ExportCommand.getCommandDescription());
         commandDescriptions.add(GetModuleCommand.getCommandDescription());
         commandDescriptions.add(HelpCommand.getCommandDescription());
         commandDescriptions.add(ImportCommand.getCommandDescription());
+        commandDescriptions.add(ListCommand.getCommandDescription());
         commandDescriptions.add(SearchModuleCommand.getCommandDescription());
-        commandDescriptions.add(SelectSemesterCommand.getCommandDescription());
         commandDescriptions.add(SelectSlotCommand.getCommandDescription());
+        commandDescriptions.add(SelectSemesterCommand.getCommandDescription());
         commandDescriptions.add(ViewTimetableCommand.getCommandDescription());
 
         return commandDescriptions;
@@ -80,16 +81,16 @@ public class HelpCommand extends Command {
         ArrayList<String> commandUsages = new ArrayList<>();
 
         commandUsages.add(AddModuleCommand.getUsage());
-        commandUsages.add(DeleteModuleCommand.getUsage());
-        commandUsages.add(ListCommand.getUsage());
         commandUsages.add(ExitCommand.getUsage());
+        commandUsages.add(DeleteModuleCommand.getUsage());
         commandUsages.add(ExportCommand.getUsage());
         commandUsages.add(GetModuleCommand.getUsage());
         commandUsages.add(HelpCommand.getUsage());
         commandUsages.add(ImportCommand.getUsage());
+        commandUsages.add(ListCommand.getUsage());
         commandUsages.add(SearchModuleCommand.getUsage());
-        commandUsages.add(SelectSemesterCommand.getUsage());
         commandUsages.add(SelectSlotCommand.getUsage());
+        commandUsages.add(SelectSemesterCommand.getUsage());
         commandUsages.add(ViewTimetableCommand.getUsage());
 
         return commandUsages;

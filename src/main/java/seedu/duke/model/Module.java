@@ -154,18 +154,20 @@ public class Module {
         return null;
     }
 
-    public int getModuleLevel(Module module) {
-        String moduleCode = module.moduleCode;
-        int moduleLevel = (Integer.parseInt(moduleCode.replaceAll("[^0-9]", ""))) / 1000;
-        return moduleLevel;
+    public int getLevel() {
+        int level = moduleCode.replaceAll("[^0-9]", "").charAt(0) - '0';
+        return level;
     }
 
-    // get the semesters that the module is offered in
     public List<Integer> getSemestersOffering() {
         List<Integer> semestersOffering = this.semesterData
                 .stream()
                 .map(semesterData -> semesterData.semester)
                 .collect(Collectors.toList());
         return semestersOffering;
+    }
+
+    public boolean isOfferedInSemester(int semester) {
+        return getSemestersOffering().contains(semester);
     }
 }

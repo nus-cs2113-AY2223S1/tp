@@ -14,11 +14,11 @@ public class SearchModuleCommandTest {
     void searchModuleCommand_noFieldsEntered_exceptionThrown() {
         String input = "search";
 
-        String expected = "Error! \tWrong format given, should be \n"
-                + "\tsearch (/code [MODULE_CODE] | /title [KEYWORD]) </level [MODULE_LEVEL]> </sem [MODULE_SEMESTER]>";
+        String expected = "Error! " + SearchModuleCommand.ERROR_WRONG_FORMAT;
 
         try {
             SearchModuleCommand searchModuleCommand = new SearchModuleCommand(input);
+            searchModuleCommand.execute(null, null, null);
             fail();
         } catch (YamomException e) {
             assertEquals(expected.replaceAll("\\s+", ""), e.getMessage().replaceAll("\\s+", ""));
@@ -29,11 +29,11 @@ public class SearchModuleCommandTest {
     void searchModuleCommand_missingTitleAndCodeField_exceptionThrown() {
         String input = "search /level 2 /sem 1";
 
-        String expected = "Error! \tSearch require at least a code field or a title field, in the format of: \n"
-                + "\tsearch (/code [MODULE_CODE] | /title [KEYWORD]) </level [MODULE_LEVEL]> </sem [MODULE_SEMESTER]>";
+        String expected = "Error! " + SearchModuleCommand.ERROR_MISSING_CODE_AND_TITLE;
 
         try {
             SearchModuleCommand searchModuleCommand = new SearchModuleCommand(input);
+            searchModuleCommand.execute(null, null, null);
             fail();
         } catch (YamomException e) {
             assertEquals(expected.replaceAll("\\s+", ""), e.getMessage().replaceAll("\\s+", ""));

@@ -24,7 +24,7 @@ import seedu.duke.model.Module;
 public class GetModuleCommand extends Command {
     Module module;
     public static final String COMMAND_WORD = "get";
-    public static final String COMMAND_USAGE = "get [EXACT_MODULE_CODE]";
+    public static final String COMMAND_USAGE = "get [ MODULE_CODE ]";
     public static final String COMMAND_DESCRIPTION = "Show all details of a module.";
     public static final String MISSING_MODULE_CODE = "Please enter a module code!";
     public static final String MODULE_NOT_FOUND = "Module not found! Please enter a valid module code! "
@@ -106,6 +106,7 @@ public class GetModuleCommand extends Command {
 
     //adapted from https://stackoverflow.com/questions/25853393
     private String splitLongDescription(String longDescription) {
+        longDescription = longDescription.replace("\n", " ");
         Pattern pattern = Pattern.compile("\\G\\s*(.{1," + DESCRIPTION_SIZE + "})(?=\\s|$)", Pattern.DOTALL);
         Matcher matcher = pattern.matcher(longDescription);
 

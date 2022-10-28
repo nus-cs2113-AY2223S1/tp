@@ -16,16 +16,16 @@ import java.util.logging.Logger;
 public class SearchModuleCommand extends Command {
     public static final String COMMAND_WORD = "search";
 
-    public static final String COMMAND_USAGE = "search (/code [MODULE_CODE] | /title [KEYWORD]) "
-            + "</level [MODULE_LEVEL]> </sem [MODULE_SEMESTER]>";
+    public static final String COMMAND_USAGE = "search [ /code PARTIAL_MODULE_CODE | /title KEYWORD ] "
+            + "< /level MODULE_LEVEL > < /sem SEMESTER >";
     public static final String COMMAND_DESCRIPTION = "List out all modules that contains a search term"
             + System.lineSeparator() + "\t * the search term can either be module code or a keyword in module title."
-            + System.lineSeparator() + "\t * MODULE_LEVEL and MODULE_SEMESTER should be a single digit number";
+            + System.lineSeparator() + "\t * MODULE_LEVEL and SEMESTER should be a single digit number";
 
-    private static final String ERROR_WRONG_FORMAT = "Wrong format given, should be "
+    public static final String ERROR_WRONG_FORMAT = "Wrong format given, should be "
             + System.lineSeparator() + "\t" + COMMAND_USAGE;
 
-    private static final String ERROR_MISSING_CODE_AND_TITLE = "Search require at least a code field "
+    public static final String ERROR_MISSING_CODE_AND_TITLE = "Search require at least a code field "
             + "or a title field, in the format of: " + System.lineSeparator() + "\t" + COMMAND_USAGE;
 
     public static final String SUBSYSTEM_NAME = "SearchModuleCommand";
@@ -98,7 +98,7 @@ public class SearchModuleCommand extends Command {
      */
     static boolean isSameModuleLevel(Module module, String level) {
         // get the first integer embedded in the module code
-        int moduleLevel = module.getModuleLevel(module);
+        int moduleLevel = module.getLevel();
         return level.equals(Integer.toString(moduleLevel));
     }
 

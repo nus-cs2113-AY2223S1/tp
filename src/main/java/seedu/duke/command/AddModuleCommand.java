@@ -16,55 +16,41 @@ import java.util.List;
 
 public class AddModuleCommand extends Command {
     private Module module;
-    private boolean successfullyAdded;
+    private boolean isSuccessfullyAdded;
 
     public static final String COMMAND_WORD = "add";
-    private static final String COMMAND_USAGE = "add [MODULE_CODE]";
-    private static final String COMMAND_DESCRIPTION = "add a module into YAMOM timetable.";
-
-    private static final String ERROR_WRONG_FORMAT = "Wrong format, should be: " + COMMAND_USAGE;
+    public static final String COMMAND_USAGE = "add [ MODULE_CODE ]";
+    public static final String COMMAND_DESCRIPTION = "Add a module into YAMOM timetable.";
+    public static final String ERROR_WRONG_FORMAT = "Wrong format, should be: " + COMMAND_USAGE;
     public static final String MODULE_NOT_FOUND = "Module not found! Please enter a valid module code!";
-
 
     public AddModuleCommand(String[] input) throws YamomException {
         super(input);
         Parser.moduleRelatedCommandError(input, ERROR_WRONG_FORMAT);
         String moduleCode = input[1].toUpperCase();
         this.module = Module.get(moduleCode);
-        this.successfullyAdded = false;
-        if (!isModuleExist(module)) {
+        this.isSuccessfullyAdded = false;
+        if (this.module == null) {
             throw new YamomException(MODULE_NOT_FOUND);
         }
-    }
-
-    public static boolean isModuleOfferedInCurrentSemester(Module module, State state) {
-        int sem = state.getSemester();
-        return module.getSemestersOffering().contains(sem);
-    }
-
-    public static boolean isModuleExist(Module module) {
-        List<Module> moduleList = Module.getAll();
-        return moduleList.contains(module);
     }
 
     @Override
     public void execute(State state, Ui ui, Storage storage) {
         int semester = state.getSemester();
-        SelectedModule selectedModule;
-
-        boolean isModuleOffered = isModuleOfferedInCurrentSemester(module, state);
+        boolean isModuleOffered = module.isOfferedInSemester(state.getSemester());
         if (!isModuleOffered) {
             ui.addMessage(module.moduleCode + " is not being offered this semester!");
             ui.displayUi();
             return;
         }
 
-        selectedModule = new SelectedModule(module, semester);
+        SelectedModule selectedModule = new SelectedModule(module, semester);
         List<SelectedModule> currentSelectedModules = state.getSelectedModulesList();
 
         if (!currentSelectedModules.contains(selectedModule)) {
             state.addSelectedModule(selectedModule);
-            successfullyAdded = true;
+            isSuccessfullyAdded = true;
         }
 
         ui.addMessage(getExecutionMessage());
@@ -80,7 +66,7 @@ public class AddModuleCommand extends Command {
     public String getExecutionMessage() {
         String outputMessage;
 
-        if (successfullyAdded) {
+        if (isSuccessfullyAdded) {
             outputMessage = module.moduleCode + " has been added";
         } else {
             outputMessage = module.moduleCode + " has already been added!";

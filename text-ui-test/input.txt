@@ -1,7 +1,14 @@
-list
-view
 help
 search /code 2113 /title software
 add cs2113
 list
+add 
+select /module cs2113 /type tut /code 4
+list
+export
+import https://nusmods.com/timetable/sem-1/share?CG1111A=LAB:01&CS1010=LAB:C03,TUT:10,SEC:1
+list 
+view /simple
+semester 2
+get cs2113
 bye
