@@ -1,5 +1,6 @@
 package seedu.duke.timetable;
 
+import seedu.duke.exceptions.InvalidUniversityException;
 import seedu.duke.exceptions.InvalidUserStorageFileException;
 import seedu.duke.exceptions.LessonNotFoundException;
 import seedu.duke.exceptions.TimetableNotFoundException;
@@ -69,8 +70,11 @@ public class TimetableManager {
      * @param newLesson The new lesson to be added to the timetable.
      * @param isLoadFromFile Boolean variable to indicate if lesson is being loaded from user's saved file.
      */
-    public void addLesson(Lesson newLesson, boolean isLoadFromFile) {
+    public void addLesson(Lesson newLesson, boolean isLoadFromFile) throws InvalidUniversityException {
         String universityName = newLesson.getUniversity().getName();
+        if (!timetableManager.containsKey(universityName)) {
+            throw new InvalidUniversityException("Error! " + universityName + " is not in your list");
+        }
         timetableManager.get(universityName).addLesson(newLesson, isLoadFromFile);
     }
 
