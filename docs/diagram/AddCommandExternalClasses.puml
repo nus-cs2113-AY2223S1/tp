@@ -1,0 +1,54 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+hide circle
+skinparam classAttributeIconSize 0
+
+class AddCommand {
+
+    +getMandatoryTags()
+    +{abstract}execute()
+}
+
+class "{abstract}\n Command"{
+
+
+    +getMandatoryTags()
+    +{abstract}execute()
+}
+
+class Ui{
+
++showTransactionAction()
+}
+
+class ParameterParser{
++checkUnsupportedTagsNotExist()
++checkMandatoryTagsExist()
+}
+
+class CommandParser{
++getCommand()
+}
+class Storage{
++writeToFile()
+}
+
+class TransactionList{
++addIncome()
++addExpense()
+}
+
+class Duke{
++run()
+}
+AddCommand <-- Ui
+AddCommand .right.> CommandParser
+AddCommand <-- ParameterParser
+AddCommand <-- Storage
+AddCommand <-- TransactionList
+AddCommand -left-> Duke
+
+
+AddCommand -up-|> "{abstract}\n Command"
+@enduml

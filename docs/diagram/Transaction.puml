@@ -1,0 +1,29 @@
+@startuml
+!include Style.puml
+
+class TransactionList {
+}
+
+class Transaction{
+    - category: String
+    - description: String
+    - amount: int
+    - date: LocalDate
+}
+
+class Income {
+    + TRANSACTION_NAME: String = "income"{static}
+    + ICON_INCOME: String = "[+]" {static}
+}
+
+class Expense {
+    + TRANSACTION_NAME: String = "income"{static}
+    + ICON_INCOME: String = "[+]" {static}
+}
+
+
+Income -up-|> Transaction
+Expense -up-|> Transaction
+
+TransactionList -> "*" Transaction : contains
+@enduml

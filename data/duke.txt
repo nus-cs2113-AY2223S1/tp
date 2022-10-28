@@ -1,0 +1,4 @@
+1000
+expense | food | 20 | 2022-09-13 | NIL
+income | salary | 2000 | 2022-09-30 | jan_salary
+expense | transport | 1 | 2022-10-02 | bus_farelist

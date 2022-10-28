@@ -1,0 +1,83 @@
+@startuml
+!include Style.puml
+
+class TransactionList {
+    + getEntry(int index):Transaction
+    + addExpense(description:String, amount:int,
+              category:String, date:LocalDate) : String
+    + addIncome(description:String, amount:int,
+              category:String, date:LocalDate) : String
+    + listTransactions(type: String, category:String,
+              date:LocalDate) : String
+    + getTransactionsByMonth(year: int, month:int) : String
+    + findTransaction(String) : String
+    + deleteTransaction(int) : String
+    + purgeTransactions()
+
+}
+
+abstract class "Transaction"{
+    - category: String
+    - description: String
+    - amount: int
+    - date: LocalDate
+    + Expense(description:String, amount:int,
+                  category:String, date:LocalDate)
+    + setDescription(String)
+    + setAmount(int)
+    + setCategory(String)
+    + setDate(LocalDate)
+}
+
+class Income {
+    + Income(description:String, amount:int,
+              category:String, date:LocalDate)
+}
+
+class Expense {
+    + Expense(description:String, amount:int,
+              category:String, date:LocalDate)
+}
+
+abstract class Command {
+    + execute()
+}
+
+abstract class Storage {
+    + initializeFile()
+    - storeFileValuesLocally()
+}
+
+
+class Budget{
+    - budget : long {static}
+    + getBudget() : long {static}
+    + setBudget(long) {static}
+}
+
+together {
+  class Command
+  class Income
+  class Expense
+}
+
+
+together {
+  class Storage
+  class TransactionList
+  class Budget
+}
+
+
+Income -up-|> "Transaction"
+Expense -up-|> "Transaction"
+
+TransactionList "1" *-right> "*" "Transaction" : contains
+Storage -[dashed]down-> "Budget" : initialize >
+Storage -[dashed]up-> "TransactionList" : initialize >
+Command -[dashed]down-> "Budget" : set >
+Command -[dashed]up-> "TransactionList" : add, edit, delete, purge, find, list, stats >
+
+
+
+@enduml
