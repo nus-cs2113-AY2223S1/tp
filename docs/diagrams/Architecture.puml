@@ -1,0 +1,38 @@
+@startuml
+skinparam Style strictuml
+skinparam SequenceMessageAlignment center
+'autonumber
+'autoactivate on
+
+
+actor User
+Main -> Main: start()
+
+Main -> Main: runCommandLoopUntilExitCommand()
+loop !Command.isExit()
+User -> Main: input
+Main -> Ui : readInput()
+Ui --> Main: input
+Main -> Parser: parseCommand(input)
+ref over Parser, Command: parse different commands
+'Parser -> Command: Command()
+'Command --> Parser: command
+Parser --> Main :command
+
+Main ->  Command: command.execute()
+Command -> CommandResult: CommandResult()
+CommandResult --> Command: result
+Command --> Main: result
+Main -> Ui: showResult(result)
+Ui --> User: display ui message
+
+Main -> Command: isExit()
+Command --> Main: boolean
+end
+
+
+Main -> Main: exit()
+destroy Main
+
+
+@enduml

@@ -4,6 +4,6 @@
 `   ``---'`---'`|---'`---'`---'``---'`---'`
                 |
 Program starting!
-Parseable command at the moment: add, delete, list, view, exit
+Available commands: /add, /list, /view, /edit, /find, /delete, /exit, /help
 >>> RecipEditor ends here...
 Program exiting

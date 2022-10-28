@@ -12,14 +12,6 @@ public class Recipeditor {
     public static final String DATA_FILE_PATH = "./data/data.txt";
     public static final String TEMPORARY_DATA_FILE_PATH = "./data/temporary_data.txt";
 
-    /**
-     * TODO: Do we want to make the important classes instance based or Class level based.
-     * Aka Do we want to call static Classes or Instance of the class
-     * For example do we want static methods of Storage, RecipeList
-     * (because we only manipulate 1 list at a time when the program runs?)
-     * Or do we want to have instances of them?
-     */
-
     public static void main(String[] args) {
         run(args);
     }
@@ -36,8 +28,9 @@ public class Recipeditor {
      * @param args arguments
      */
     private static void start(String[] args) {
+        Storage.createDataFolder();
         Ui.showGreeting();
-        //TODO: Load from storage
+
     }
 
     /**
@@ -48,17 +41,15 @@ public class Recipeditor {
         System.exit(0);
     }
 
-
     /**
      * Main Command Loop Input -> Command -> Command Result -> Show & Save.
      */
     private static void runCommandLoopUntilExitCommand() {
-        Storage.createFile(DATA_FILE_PATH);
-        Storage.loadRecipesFromFile(DATA_FILE_PATH);
+
         Command command;
         do {
             String input = Ui.readInput();
-            command = new Parser().parseCommand(input);
+            command = Parser.parseCommand(input);
             CommandResult result = executeCommand(command);
             Ui.showResult(result);
 
@@ -68,7 +59,6 @@ public class Recipeditor {
     private static CommandResult executeCommand(Command command) {
         try {
             CommandResult result = command.execute();
-            //TODO: Save the recipe?
             return result;
         } catch (Exception e) {
             Ui.showMessage(e.getMessage());

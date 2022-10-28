@@ -7,13 +7,19 @@ import recipeditor.command.ExitCommand;
 import recipeditor.command.ListCommand;
 import recipeditor.command.EditCommand;
 import recipeditor.command.ViewCommand;
+
+import recipeditor.exception.ParseFileException;
+import recipeditor.recipe.Recipe;
+import recipeditor.ui.Editor;
 import recipeditor.command.FindCommand;
 import recipeditor.command.InvalidCommand;
 import recipeditor.recipe.RecipeList;
-import recipeditor.ui.AddMode;
+import recipeditor.storage.Storage;
 import recipeditor.ui.EditMode;
+import recipeditor.ui.Ui;
+import recipeditor.parser.TextFileParser;
 
-import java.util.logging.Level;
+import java.io.FileNotFoundException;
 import java.util.logging.Logger;
 
 public class Parser {
@@ -31,6 +37,7 @@ public class Parser {
         case ExitCommand.COMMAND_TYPE:
             return new ExitCommand();
         case DeleteCommand.COMMAND_TYPE:
+            return null;
         case EditCommand.COMMAND_TYPE:
             return parseEditCommand(parsed);
         case ViewCommand.COMMAND_TYPE:
@@ -42,12 +49,30 @@ public class Parser {
         }
     }
 
+
     private static Command parseAddCommand() {
-        AddMode add = new AddMode(); // Switch to Add Mode in here
-        add.enterAddMode();
-        add.exitAddMode();
-        logger.log(Level.INFO, "Is the recipe valid? " + add.isValid);
-        return new AddCommand(add.isValid, add.addedRecipe); // Pass validty and potential recipe to AddCommand
+        boolean saveToTemp = new Editor().enterEditor(Storage.TEMPLATE_PATH);
+        boolean exitLoop = (saveToTemp) ? false : true;
+        boolean valid = false;
+        Recipe addRecipe = new Recipe();
+        while (!exitLoop) {
+            try {
+                String content = Storage.loadFileContent(Storage.TEMPORARY_PATH);
+                addRecipe = new TextFileParser().parseTextToRecipe(content);
+                valid = true;
+                exitLoop = true;
+            } catch (ParseFileException | FileNotFoundException e) {
+                Ui.showMessage(e.getMessage());
+                Ui.showMessage("Do you want to ABORT? (Y/N)");
+                String text = Ui.readInput();
+                if (text.equalsIgnoreCase("n")) {
+                    new Editor().enterEditor(Storage.TEMPORARY_PATH);
+                } else {
+                    exitLoop = true;
+                }
+            }
+        }
+        return new AddCommand(valid, addRecipe);
     }
 
     private static Command parseListAlterCommand(String[] parsed, String commandWord) {
@@ -68,10 +93,18 @@ public class Parser {
     }
 
     private static Command parseEditCommand(String[] parsed) {
-        EditMode edit = new EditMode();
-        edit.enterEditMode(parsed[1]);
-        edit.exitEditMode();
-        return new EditCommand(RecipeList.getRecipeIndexFromTitle(parsed[1]), edit.getEditedRecipe());
+        int index = -1;
+        if (parsed.length > 1) {
+            try {
+                index = Integer.parseInt(parsed[1]) - 1;
+            } catch (NumberFormatException n) {
+                index = RecipeList.getRecipeIndexFromTitle(parsed[1]);
+            }
+            EditMode edit = new EditMode();
+            edit.enterEditMode(index);
+            return new EditCommand(edit.exitEditMode(), index, edit.getEditedRecipe());
+        }
+        return new InvalidCommand();
     }
 
     private static Command parseFindCommand(String[] parsed) {
@@ -103,11 +136,4 @@ public class Parser {
         return output.toString();
     }
 
-    //    private void checkForExcessArgument(String[] args, int length)
-    //            throws ExcessArgumentException {
-    //        if (args.length > length) {
-    //            throw new ExcessArgumentException();
-    //        }
-    //    }
-    
 }

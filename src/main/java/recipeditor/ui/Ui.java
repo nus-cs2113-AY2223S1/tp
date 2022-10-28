@@ -11,7 +11,7 @@ public class Ui {
 
     public static final String DIVIDER = "____________________________________________________________";
     private static final String START = "Program starting!";
-    public static final String COMMAND = "Parseable command at the moment: add, delete, list, view, exit";
+    public static final String COMMAND = "Available commands: /add, /list, /view, /edit, /find, /delete, /exit, /help";
     private static final String EXIT = "Program exiting";
     private static final String PROMPT = ">>> ";
 
@@ -64,8 +64,20 @@ public class Ui {
         showMessage(result.getMessage());
     }
 
+    /**
+     * Clear screen on all OS.
+     */
     public static void clear() {
-        System.out.print("\033[H\033[2J"); // This will clear the terminal, I don't know why...
-        System.out.flush();
+        try {
+            final String os = System.getProperty("os.name");
+
+            if (os.contains("Windows")) {
+                Runtime.getRuntime().exec("cls");
+            } else {
+                Runtime.getRuntime().exec("clear");
+            }
+        } catch (final Exception e) {
+            //  Handle any exceptions.
+        }
     }
 }

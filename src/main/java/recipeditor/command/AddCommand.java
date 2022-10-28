@@ -19,14 +19,14 @@ public class AddCommand extends Command {
     }
 
     public CommandResult execute() {
-        // TODO: Execution of command
         if (isValid) {
+
             assert addedRecipe != null;
             RecipeList.addRecipe(addedRecipe); //HERE SEEM TO THROW ERROR
             Storage.writeRecipeToFile(Recipeditor.DATA_FILE_PATH, addedRecipe);
             return new CommandResult(addedRecipe.getTitle() + " added to the recipe.");
         } else {
-            return new CommandResult("invalid " + COMMAND_TYPE);
+            return new CommandResult("Add unsuccessful");
         }
     }
 }

@@ -1,0 +1,10 @@
+# Title:
+
+# Description:
+
+# Ingredients:
+- <Quantity> <Unit> of <Ingredients>
+
+
+# Steps:
+1. Step description
