@@ -1,0 +1,123 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+
+class State {
+- semester:int
+- selectedModulesList: List<List<SelectedModule>>
++ getSelectedModulesList() : List<SelectedModule>
++ setSelectedModulesList(list: List<SelectedModule>)
++ getSemester() : int
++ setSemester(semester:int)
++ addSelectedModule(module:SelectedModule)
++ removeSelectedModule(module:SelectedModule)
+}
+
+State *-- "*" SelectedModule
+
+class SelectedModule {
+- module:Module
+- semester:int
+- selectedSlots:Map<LessonType, String>
++ selectSlot(lessonType:LessonType, classNo:String)
++ getSelectedSlots() : Map<LessonType, String>
+}
+
+SelectedModule *-- "1" Module
+
+class ModuleLoader {
+~ loadModules() : List<Module>
+}
+
+ModuleLoader -- Module
+
+class Module {
++ acadYear : String
++ moduleCode : String
++ title : String
++ description: String
++ moduleCredit : int
++ department : String
++ faculty : String
++ workload : List<Integer>
++ semesterData : List<SemesterData>
++ prerequisite : String
++ corequisite : String
++ preclusion : String
+{static} - moduleList : List<Module>
+{static} - modulesByCode : Map<String, Module>
+{static} + getAll() : List<Module>
+{static} + get(moduleCode: String) : Module
++ getLevel() : int
++ getSemestersOffering() : List<Integer>
+}
+
+class SemesterData {
++ semester : int
++ timetable : List<RawLesson>
++ examDate : String
++ examDuration : int
++ lessonTypes : Set<LessonType>
++ getLessonTypes() : Set<LessonType>
++ getLessonsByTypeAndNo(type:LessonType, no: String) : List<RawLesson>
++ getClassNosByType(type:LessonType) : Set<String>
+}
+
+Module *-- "1..4" SemesterData : Offered in
+
+class RawLesson {
++ classNo : String
++ day : Day
++ endTime : String
++ startTime : String
++ lessonType : LessonType
++ venue : String
++ weeks : List<Integer>
++ size : int
+}
+
+SemesterData *-- "1..*" RawLesson
+
+enum LessonType {
+    DESIGN_LECTURE
+    LABORATORY
+    LECTURE
+    MINI_PROJECT
+    PACKAGED_LECTURE
+    PACKAGED_TUTORIAL
+    RECITATION
+    SECTIONAL_TEACHING
+    SEMINAR_STYLE_MODULE_CLASS
+    TUTORIAL
+    TUTORIAL_TYPE_2
+    WORKSHOP
+}
+
+enum Day {
+    MONDAY
+    TUESDAY
+    WEDNESDAY
+    THURSDAY
+    FRIDAY
+    SATURDAY
+    SUNDAY
+}
+
+class LessonTypeParser {
+{static} + parse(type: String): LessonType
+}
+
+class DayParser {
+{static} + parse(day: String):Day
+}
+
+ModuleLoader -- LessonTypeParser
+ModuleLoader -- DayParser
+LessonTypeParser -- LessonType
+DayParser -- Day
+
+SelectedModule -- LessonType
+SemesterData -- LessonType
+RawLesson -- LessonType
+RawLesson -- Day
+@enduml

@@ -12,15 +12,43 @@
     - [2.3. Configure the coding style](#23-configure-the-coding-style)
   - [3. Design](#3-design)
     - [3.1 Architecture](#31-architecture)
-    - [3.2 Model Component](#32-model-component)
+    - [3.2 Model package](#32-model-package)
     - [3.3 Parser Component](#33-parser-component)
     - [3.4 Command Component](#34-command-component)
+      - [3.4.1 AddModuleCommand](#341-addmodulecommand)
+        - [How the feature is implemented](#how-the-feature-is-implemented)
+        - [Why it is implemented this way.](#why-it-is-implemented-this-way)
+        - [Alternatives considered.](#alternatives-considered)
+      - [3.4.2 DeleteModuleCommand](#342-deletemodulecommand)
+        - [How the feature is implemented](#how-the-feature-is-implemented-1)
+        - [Why it is implemented this way.](#why-it-is-implemented-this-way-1)
+        - [Alternatives considered.](#alternatives-considered-1)
+      - [3.4.3 HelpCommand](#343-helpcommand)
+        - [How the feature is implemented](#how-the-feature-is-implemented-2)
+        - [Why it is implemented this way.](#why-it-is-implemented-this-way-2)
+        - [Alternatives considered.](#alternatives-considered-2)
+      - [3.4.4 SearchModuleCommand](#344-searchmodulecommand)
+        - [How the feature is implemented](#how-the-feature-is-implemented-3)
+        - [Why it is implemented this way.](#why-it-is-implemented-this-way-3)
+        - [Alternatives considered.](#alternatives-considered-3)
+      - [3.4.5 SelectCommand](#345-selectcommand)
+      - [3.4.6 SelectSemesterCommand](#346-selectsemestercommand)
+      - [3.4.7 GetCommand](#347-getcommand)
+        - [How the feature is implemented](#how-the-feature-is-implemented-4)
+        - [Why it is implemented this way.](#why-it-is-implemented-this-way-4)
+        - [Alternatives considered.](#alternatives-considered-4)
+      - [3.4.8 ViewCommand](#348-viewcommand)
+      - [3.4.9 ExitCommand](#349-exitcommand)
     - [3.5 Utils Component](#35-utils-component)
       - [3.5.1 UI Component](#351-ui-component)
+        - [Why it is implemented this way](#why-it-is-implemented-this-way-5)
+        - [Alternative Considered](#alternative-considered)
       - [3.5.2 Link Component](#352-link-component)
+        - [Why is it implemented this way](#why-is-it-implemented-this-way)
+        - [Alternative Considered](#alternative-considered-1)
       - [3.5.3 Storage Component](#353-storage-component)
-        - [Why it is implemented this way](#why-it-is-implemented-this-way)
-        - [Alternatives considered](#alternatives-considered)
+        - [Why it is implemented this way](#why-it-is-implemented-this-way-6)
+        - [Alternatives considered](#alternatives-considered-5)
   - [4. Implementation](#4-implementation)
     - [Storage feature](#storage-feature)
     - [Target user profile](#target-user-profile)
@@ -99,15 +127,19 @@ Core program flow is managed by the Duke class.
 
 The Duke class delegates work to the Ui class to handle user input.
 
-User input is passed to the Parser class to parse the input as a command.
+User input is passed to the Parser class to parse the input as a command. Each command subclass handles its own execution.
 
-Each command subclass handles its own execution.
+These are the three main subcomponents that duke and command subclasses delegate work to:
 
-<code>Storage</code>: Reads and writes data to the hard disk in a NUSMods export link format.
+- `Ui`: Handles user interactions such as receiving input and displaying output.
+- `State`: Stores and updates application state.
+- `Storage`: Reads and writes data to the hard disk in a NUSMods export link format.
 
-### 3.2 Model Component
+### 3.2 Model package
 
-The Model component is responsible for dealing with any module related data. It consists of the following classes:
+The Model package is responsible for business logic - in particular, for dealing with any module related data. The design of these classes is based off the original [NUSMods type classes](https://github.com/nusmodifications/nusmods/blob/master/scrapers/nus-v2/src/types/modules.ts).
+
+It consists of the following classes:
 
 - `Day`: Represents a day in the timetable.
 - `LessonType`: Represents the type of lesson.
@@ -118,6 +150,8 @@ The Model component is responsible for dealing with any module related data. It 
 - `SelectedModule`: Represents a module selected by the user that is to be added into his or her timetable.
 - `SemesterData`: Semester data contains all the module information pertaining to a single semester.
 - `Timetable`: Creates a timetable for the user with their selected modules and in their planning semester.
+
+![Model Classes](images/model.png)
 
 ### 3.3 Parser Component
 
