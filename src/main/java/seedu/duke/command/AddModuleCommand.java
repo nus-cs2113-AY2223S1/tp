@@ -73,13 +73,4 @@ public class AddModuleCommand extends Command {
         }
         return outputMessage;
     }
-
-    public static String getCommandDescription() {
-        return COMMAND_WORD + DESCRIPTION_DELIMITER + COMMAND_DESCRIPTION;
-    }
-
-    public static String getUsage() {
-        return COMMAND_USAGE;
-    }
-
 }

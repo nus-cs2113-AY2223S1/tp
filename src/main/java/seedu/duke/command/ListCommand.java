@@ -20,8 +20,8 @@ public class ListCommand extends Command {
     private boolean successful;
     public static final String COMMAND_WORD = "list";
     public static final String COMMAND_USAGE = "list";
-    public static final String COMMAND_DESCRIPTION = "List out all the selected modules "
-            + "and lesson slots.";
+    public static final String COMMAND_DESCRIPTION = 
+            "List out all the selected modules and lesson slots.";
     public static final int HEADING_LENGTH = 9;
     public static final int DETAILS_INDENT = 10 + HEADING_LENGTH;
 
@@ -138,13 +138,5 @@ public class ListCommand extends Command {
             outputMessage = "You currently have no selected module(s)!";
         }
         return outputMessage;
-    }
-
-    public static String getCommandDescription() {
-        return COMMAND_WORD + DESCRIPTION_DELIMITER + COMMAND_DESCRIPTION;
-    }
-
-    public static String getUsage() {
-        return COMMAND_USAGE;
     }
 }

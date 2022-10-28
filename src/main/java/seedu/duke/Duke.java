@@ -37,7 +37,7 @@ public class Duke {
                 ui.displayUserPrompt(state.getSemester());
                 String userFullCommand = ui.readNext();
                 ui.displayDivider();
-                ui.addMessage("Processing \"" + userFullCommand + "\" ...");
+                ui.addMessage("Processing \"" + userFullCommand + "\" ...\n");
                 Command command = Parser.parse(userFullCommand);
                 command.execute(state, ui, storage);
                 isExit = command.isExit();

@@ -15,12 +15,13 @@ import java.util.logging.Logger;
 
 public class SearchModuleCommand extends Command {
     public static final String COMMAND_WORD = "search";
-
     public static final String COMMAND_USAGE = "search [ /code PARTIAL_MODULE_CODE | /title KEYWORD ] "
-            + "< /level MODULE_LEVEL > < /sem SEMESTER >";
-    public static final String COMMAND_DESCRIPTION = "List out all modules that contains a search term"
-            + System.lineSeparator() + "\t * the search term can either be module code or a keyword in module title."
-            + System.lineSeparator() + "\t * MODULE_LEVEL and SEMESTER should be a single digit number";
+            + "< /level MODULE_LEVEL > < /sem SEMESTER >"
+            + System.lineSeparator() + Ui.INDENT + Ui.INDENT 
+            + " * the search term can either be module code or a keyword in module title."
+            + System.lineSeparator() + Ui.INDENT + Ui.INDENT
+            + " * MODULE_LEVEL and SEMESTER should be a single digit number.";
+    public static final String COMMAND_DESCRIPTION = "List out all modules that contains a search term.";
 
     public static final String ERROR_WRONG_FORMAT = "Wrong format given, should be "
             + System.lineSeparator() + "\t" + COMMAND_USAGE;
@@ -197,13 +198,4 @@ public class SearchModuleCommand extends Command {
     public String getExecutionMessage() {
         return null;
     }
-
-    public static String getCommandDescription() {
-        return COMMAND_WORD + DESCRIPTION_DELIMITER + COMMAND_DESCRIPTION;
-    }
-
-    public static String getUsage() {
-        return COMMAND_USAGE;
-    }
-
 }

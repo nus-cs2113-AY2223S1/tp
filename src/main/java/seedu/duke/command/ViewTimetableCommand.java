@@ -19,7 +19,7 @@ import java.util.Map;
 public class ViewTimetableCommand extends Command {
     public static final String COMMAND_WORD = "view";
     public static final String COMMAND_USAGE = "view < /fancy | /simple >";
-    public static final String COMMAND_DESCRIPTION = "Display current user timetable";
+    public static final String COMMAND_DESCRIPTION = "Display current timetable.";
 
     private static final String ERROR_MESSAGE_EMPTY_TIMETABLE = "Your timetable is empty."
             + System.lineSeparator() + "Please select your modules first before viewing.";
@@ -116,12 +116,5 @@ public class ViewTimetableCommand extends Command {
     public String getExecutionMessage() {
         return null;
     }
-
-    public static String getCommandDescription() {
-        return COMMAND_WORD + DESCRIPTION_DELIMITER + COMMAND_DESCRIPTION;
-    }
-
-    public static String getUsage() {
-        return COMMAND_USAGE;
-    }
+    
 }

@@ -15,12 +15,12 @@ import java.util.List;
  */
 
 public class DeleteModuleCommand extends Command {
-    Module module;
+    private Module module;
     private boolean successful;
 
     public static final String COMMAND_WORD = "delete";
     public static final String COMMAND_USAGE = "delete [ MODULE_CODE ]";
-    public static final String COMMAND_DESCRIPTION = "remove a module from YAMOM timetable.";
+    public static final String COMMAND_DESCRIPTION = "Remove a module from YAMOM timetable.";
 
     private static final String ERROR_WRONG_FORMAT = "Wrong format, should be: " + COMMAND_USAGE;
 
@@ -63,13 +63,5 @@ public class DeleteModuleCommand extends Command {
             outputMessage = module.moduleCode + " does not exist in current list of selected list modules!";
         }
         return outputMessage;
-    }
-
-    public static String getCommandDescription() {
-        return COMMAND_WORD + DESCRIPTION_DELIMITER + COMMAND_DESCRIPTION;
-    }
-
-    public static String getUsage() {
-        return COMMAND_USAGE;
     }
 }
