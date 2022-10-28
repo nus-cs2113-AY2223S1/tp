@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 public class SelectSlotCommandTest {
 
     @Test
-    void addModuleCommand_validInputsToChangeCS2113Tutorial_expectCorrectChangeInTutorial() throws YamomException {
+    void selectSlotCommand_validInputsToChangeCS2113Tutorial_expectSuccessfulChangeInTutorial() throws YamomException {
         State state = new State();
         Ui ui = new Ui();
         Storage storage = new Storage();
@@ -40,7 +40,7 @@ public class SelectSlotCommandTest {
     }
 
     @Test
-    void addModuleCommand_validInputsToChangeIE2141Lecture_expectCorrectChangeInLecture() throws YamomException {
+    void selectSlotCommand_validInputsToChangeIE2141Lecture_expectSuccessfulChangeInLecture() throws YamomException {
         State state = new State();
         Ui ui = new Ui();
         Storage storage = new Storage();
@@ -62,7 +62,7 @@ public class SelectSlotCommandTest {
     }
 
     @Test
-    void addModuleCommand_invalidInputsEmptyParams_exceptionThrown() {
+    void selectSlotCommand_invalidInputsEmptyParams_exceptionThrown() {
         State state = new State();
         Ui ui = new Ui();
         Storage storage = new Storage();
@@ -79,7 +79,7 @@ public class SelectSlotCommandTest {
     }
 
     @Test
-    void addModuleCommand_invalidInputsEmptyParamsValue_exceptionThrown() {
+    void selectSlotCommand_invalidInputsEmptyParamsValue_exceptionThrown() {
         State state = new State();
         Ui ui = new Ui();
         Storage storage = new Storage();
@@ -91,15 +91,15 @@ public class SelectSlotCommandTest {
             fail();
         } catch (YamomException e) {
             assertEquals("Error! \tWrong format given, should be " + s
-                            + "\tselect [ /module [EXACT_MODULE_CODE] /type [LESSON_TYPE] /code [CLASS_NO] ]" + s
-                            + s
+                            + "\tselect [ /module [EXACT_MODULE_CODE] /type [LESSON_TYPE] /code [CLASS_NO] ]\n"
+                            + "\n"
                             + "You might have missed out the Module Code, Lesson Type or Class No.",
                     e.getMessage());
         }
     }
 
     @Test
-    void addModuleCommand_invalidInputsIncompleteParams_exceptionThrown() {
+    void selectSlotCommand_invalidInputsIncompleteParams_exceptionThrown() {
         State state = new State();
         Ui ui = new Ui();
         Storage storage = new Storage();
@@ -115,4 +115,77 @@ public class SelectSlotCommandTest {
                     e.getMessage());
         }
     }
+
+    @Test
+    void selectSlotCommand_inputWrongClassNo_expectUnsuccessfulChangeInSlot() throws YamomException {
+        State state = new State();
+        Ui ui = new Ui();
+        Storage storage = new Storage();
+
+        // set to semester 1
+        state.setSemester(1);
+
+        // add cs1010s to timetable. cs1010s has tutorial defaults to tut 02A
+        String[] input1 = {"add", "cs1010s"};
+        AddModuleCommand addModuleCommand = new AddModuleCommand(input1);
+        addModuleCommand.execute(state, ui, storage);
+
+        // change tutorial slot to tut 2 should be unsuccessful, hence no change in module list
+        String input = "select /module cs1010s /type tut /code 2";
+        SelectSlotCommand selectSlotCommand = new SelectSlotCommand(input);
+        selectSlotCommand.execute(state, ui, storage);
+
+        String expectedOutput = state.getSelectedModulesList().get(0).getSelectedSlots().toString();
+
+        assertEquals("{LECTURE=1, RECITATION=01, TUTORIAL=02A}", expectedOutput);
+    }
+
+    @Test
+    void selectSlotCommand_inputNonExistingLessonType_expectUnsuccessfulChangeInSlot() throws YamomException {
+        State state = new State();
+        Ui ui = new Ui();
+        Storage storage = new Storage();
+
+        // set to semester 1
+        state.setSemester(1);
+
+        // add cs1010s to timetable. cs1010s only has tut, lec and rec lesson types
+        String[] input1 = {"add", "cs1010s"};
+        AddModuleCommand addModuleCommand = new AddModuleCommand(input1);
+        addModuleCommand.execute(state, ui, storage);
+
+        // input [/type lab] should be unsuccessful as there are no lab sessions, hence no change in module list
+        String input = "select /module cs1010s /type lab /code 02A";
+        SelectSlotCommand selectSlotCommand = new SelectSlotCommand(input);
+        selectSlotCommand.execute(state, ui, storage);
+
+        String expectedOutput = state.getSelectedModulesList().get(0).getSelectedSlots().toString();
+
+        assertEquals("{LECTURE=1, RECITATION=01, TUTORIAL=02A}", expectedOutput);
+    }
+
+    @Test
+    void selectSlotCommand_inputNonExistingLessonTypeAndClassNo_expectUnsuccessfulChangeInSlot() throws YamomException {
+        State state = new State();
+        Ui ui = new Ui();
+        Storage storage = new Storage();
+
+        // set to semester 1
+        state.setSemester(1);
+
+        // add cs1010s to timetable. cs1010s only has tut, lec and rec lesson types
+        String[] input1 = {"add", "cs1010s"};
+        AddModuleCommand addModuleCommand = new AddModuleCommand(input1);
+        addModuleCommand.execute(state, ui, storage);
+
+        // input [/type lab] should be unsuccessful as there are no lab sessions, hence no change in module list
+        String input = "select /module cs1010s /type lab /code 23784";
+        SelectSlotCommand selectSlotCommand = new SelectSlotCommand(input);
+        selectSlotCommand.execute(state, ui, storage);
+
+        String expectedOutput = state.getSelectedModulesList().get(0).getSelectedSlots().toString();
+
+        assertEquals("{LECTURE=1, RECITATION=01, TUTORIAL=02A}", expectedOutput);
+    }
+
 }

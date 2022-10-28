@@ -68,7 +68,7 @@ Error! 	Wrong format, should be: add [MODULE_CODE]
 Your command is incomplete.
 --------------------------------------------------------------------------------
 Sem [1] >> --------------------------------------------------------------------------------
-Slot selected successfully
+Slot selected successfully!
 --------------------------------------------------------------------------------
 Sem [1] >> --------------------------------------------------------------------------------
 CS2113   Software Engineering & Object-Oriented Programming
