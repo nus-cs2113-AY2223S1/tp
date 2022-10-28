@@ -9,13 +9,6 @@ __ __ _____ _____ _____ _____
 How can I help you today?
 Enter "help" to get started!
 Sem [1] >> --------------------------------------------------------------------------------
-You currently have no selected module(s)!
---------------------------------------------------------------------------------
-Sem [1] >> --------------------------------------------------------------------------------
-Error! 	Your timetable is empty.
-Please select your modules first before viewing.
---------------------------------------------------------------------------------
-Sem [1] >> --------------------------------------------------------------------------------
 Here are all the commands available in YAMOM!
 
 add	: add a module into YAMOM timetable.
@@ -71,10 +64,123 @@ CS2113   Software Engineering & Object-Oriented Programming
 Here's a list of your current selected module(s)!
 --------------------------------------------------------------------------------
 Sem [1] >> --------------------------------------------------------------------------------
+Error! 	Wrong format, should be: add [MODULE_CODE]
+Your command is incomplete.
+--------------------------------------------------------------------------------
+Sem [1] >> --------------------------------------------------------------------------------
+Slot selected successfully
+--------------------------------------------------------------------------------
+Sem [1] >> --------------------------------------------------------------------------------
+CS2113   Software Engineering & Object-Oriented Programming
+         LEC[1]    LT19, weeks: 1 - 13
+         TUT[4]    COM1-0210, weeks: 3 - 13
+
+
+Here's a list of your current selected module(s)!
+--------------------------------------------------------------------------------
+Sem [1] >> --------------------------------------------------------------------------------
+Here is your NUSMod Link:
+	https://nusmods.com/timetable/sem-1/share?CS2113=LEC:1,TUT:4
+--------------------------------------------------------------------------------
+Sem [1] >> --------------------------------------------------------------------------------
+Timetable imported to YAMOM!
+--------------------------------------------------------------------------------
+Sem [1] >> --------------------------------------------------------------------------------
+CG1111A  Engineering Principles and Practice I
+         LAB[01]   E4A-04-08, weeks: 1 - 13
+                   E4A-04-08, weeks: 1 - 13
+
+CS1010   Programming Methodology
+         LAB[C03]  COM1-B108, weeks: 3 - 13
+         SEC[1]    I3-AUD, weeks: 1 - 13
+         TUT[10]   COM1-0201, weeks: 3 - 13
+
+
+Here's a list of your current selected module(s)!
+--------------------------------------------------------------------------------
+Sem [1] >> --------------------------------------------------------------------------------
+                                                                    
+          : Mon      : Tues     : Wed      : Thur     : Fri         
+====================================================================
+   0900   +----------+          :          :          :             
+   0930   |CG1111A   |          :          :          :             
+   1000   | LAB[01]  |          :          :          :             
+   1030   |          |          :          :          :             
+   1100   |          |          :          :          :             
+   1130   |          |          :          :          :             
+   1200   +----------+          :          +----------+             
+   1230   |CS1010    |          :          |CS1010    |             
+   1300   | SEC[1]   |          :          | LAB[C03] |             
+   1330   |          |          :          |          |             
+   1400   +----------+          :          +----------+             
+   1430   :          :          :          :          :             
+   1500   :          :          :          :          :             
+   1530   :          :          :          :          :             
+   1600   :          :          :          :          :             
+   1630   :          :          :          :          :             
+   1700   :          :          +----------+          :             
+   1730   :          :          |CS1010    |          :             
+   1800   :          :          +-TUT[10]--+          :             
+   1830   :          :          :          :          :             
+   1900   :          :          :          :          :             
+                                                                    
+
+--------------------------------------------------------------------------------
+Sem [1] >> --------------------------------------------------------------------------------
+You are now planning for semester 2
+--------------------------------------------------------------------------------
+Sem [2] >> --------------------------------------------------------------------------------
+Code         : CS2113
+Name         : Software Engineering & Object-Oriented Programming
+Description  : This module introduces the necessary skills for systematic and
+               rigorous development of software systems. It covers requirements,
+               design, implementation, quality assurance, and project management
+               aspects of small-to-medium size multi-person software projects.
+               The module uses the Object Oriented Programming paradigm.
+               Students of this module will receive hands-on practice of tools
+               commonly used in the industry, such as test automation tools,
+               build automation tools, and code revisioning tools will be
+               covered.
+Credits      : 4
+Department   : Computer Science
+Faculty      : Computing
+Workload     : [2, 1, 0, 3, 4]
+Semesters    : [1, 2]
+Prerequisite : CS2040C or ((CS2030 or its equivalent) and CS2040/S)
+Preclusion   : CS2103, CS2103T, (CS2113T for CS2113), (CS2113 for CS2113T)
+Corequisite  : CS2101 Effective Communication for Computing Professionals is
+               co-requisite for CS2113T. Students exempted from CS2101 will take
+               CS2113 which does not have CS2101 as co-req. Otherwise, CS2113
+               and CS2113T are identical.
+Schedule     : 
+                                                                    
+          : Mon      : Tues     : Wed      : Thur     : Fri         
+====================================================================
+   1100   :          :          :          +----------+             
+   1130   :          :          :          |CS2113    |             
+   1200   :          :          :          +-TUT[1]---+             
+   1230   :          :          :          :          :             
+   1300   :          :          :          +----------+             
+   1330   :          :          :          |CS2113    |             
+   1400   :          :          :          +-TUT[2]---+             
+   1430   :          :          :          :          :             
+   1500   :          :          :          +----------+             
+   1530   :          :          :          |CS2113    |             
+   1600   :          :          :          +-TUT[3]---+----------+  
+   1630   :          :          :          :          |CS2113    |  
+   1700   :          :          :          :          | LEC[1]   |  
+   1730   :          :          :          :          |          |  
+   1800   :          :          :          :          +----------+  
+   1830   :          :          :          :          :             
+   1900   :          :          :          :          :             
+                                                                    
+
+--------------------------------------------------------------------------------
+Sem [2] >> --------------------------------------------------------------------------------
 Shutting down......
 --------------------------------------------------------------------------------
 These are your export links:
-https://nusmods.com/timetable/sem-1/share?CS2113=LEC:1,TUT:1
+https://nusmods.com/timetable/sem-1/share?CG1111A=LAB:01&CS1010=LAB:C03,SEC:1,TUT:10
 https://nusmods.com/timetable/sem-2/share?
 https://nusmods.com/timetable/sem-3/share?
 https://nusmods.com/timetable/sem-4/share?
