@@ -30,16 +30,16 @@ public class UI {
     private static final String NO_PRESCRIPTION_MESSAGE = "There are currently no prescriptions in the record.";
     private static final String PRESCRIPTION_MAIN_MENU =
             "This is the Prescription Main Menu!" + System.lineSeparator()
-            + "List of commands:"
-            + UI.PRESCRIPTION_ADD
-            + UI.PRESCRIPTION_EDIT
-            + UI.PRESCRIPTION_VIEW_ALL
-            + UI.PRESCRIPTION_VIEW_PATIENT
-            + UI.PRESCRIPTION_VIEW_ACTIVE
-            + UI.PRESCRIPTION_CHANGE_ACTIVE
-            + UI.PRESCRIPTION_CHANGE_INACTIVE
-            + UI.RETURN_TO_MAIN
-            + UI.EXIT_PROGRAM;
+                    + "List of commands:"
+                    + UI.PRESCRIPTION_ADD
+                    + UI.PRESCRIPTION_EDIT
+                    + UI.PRESCRIPTION_VIEW_ALL
+                    + UI.PRESCRIPTION_VIEW_PATIENT
+                    + UI.PRESCRIPTION_VIEW_ACTIVE
+                    + UI.PRESCRIPTION_CHANGE_ACTIVE
+                    + UI.PRESCRIPTION_CHANGE_INACTIVE
+                    + UI.RETURN_TO_MAIN
+                    + UI.EXIT_PROGRAM;
     private static final String NO_MATCHING_PRESCRIPTION_MESSAGE = "There are currently no prescriptions from this "
             + "patient.";
     private static final String NO_MATCHING_ACTIVE_PRESCRIPTION_MESSAGE = "There are currently no active prescriptions "
@@ -48,15 +48,15 @@ public class UI {
     // Visit
     private static final String VISIT_MAIN_MENU =
             "This is the Visits Main Menu!" + System.lineSeparator()
-            + "List of commands:"
-            + UI.VISIT_ADD
-            + UI.VISIT_EDIT
-            + UI.VISIT_DELETE_REASON
-            + UI.VISIT_VIEW_ALL
-            + UI.VISIT_VIEW_PATIENT
-            + UI.VISIT_VIEW
-            + UI.RETURN_TO_MAIN
-            + UI.EXIT_PROGRAM;
+                    + "List of commands:"
+                    + UI.VISIT_ADD
+                    + UI.VISIT_EDIT
+                    + UI.VISIT_DELETE_REASON
+                    + UI.VISIT_VIEW_ALL
+                    + UI.VISIT_VIEW_PATIENT
+                    + UI.VISIT_VIEW
+                    + UI.RETURN_TO_MAIN
+                    + UI.EXIT_PROGRAM;
 
     public UI() {
         scanner = new Scanner(System.in);
@@ -102,10 +102,11 @@ public class UI {
         System.out.println(PATIENT_MAIN_MENU);
     }
 
-    public void printPatientAddedMessage(Patient patient) {
-        System.out.println("Ok! I've added a patient! The patient's details are as follows:");
+    public void printMessageAndObject(String object, String message, int index) {
+        System.out.println(message);
         printLine();
-        System.out.println(patient);
+        System.out.println("#" + (index + 1) + ")");
+        System.out.println(object);
         printLine();
     }
 
@@ -115,37 +116,8 @@ public class UI {
         printLine();
     }
 
-    public void printPatientEditedMessage(Patient patient) {
-        System.out.print("Alright, I've modified the details of the patient! ");
-        System.out.println("Here are the new details of the patient: ");
-        printLine();
-        System.out.println(patient);
-        printLine();
-    }
-
     public void printVisitsMenuMessage() {
         System.out.println(VISIT_MAIN_MENU);
-    }
-
-    public void printAddVisitMessage(String visitString) {
-        System.out.println("You have added a visit!");
-        printLine();
-        System.out.println(visitString);
-        printLine();
-    }
-
-    public void printEditVisitReasonMessage(String visitString) {
-        System.out.println("You have edited reason for the visit. Here's the updated visit!");
-        printLine();
-        System.out.println(visitString);
-        printLine();
-    }
-
-    public void printDeleteVisitReasonMessage(String visitString) {
-        System.out.println("You have deleted the reason for the visit. Here's the updated visit!");
-        printLine();
-        System.out.println(visitString);
-        printLine();
     }
 
     public void printViewAllVisitsMessage() {
@@ -154,20 +126,6 @@ public class UI {
 
     public void printPrescriptionMenuMessage() {
         System.out.println(PRESCRIPTION_MAIN_MENU);
-    }
-
-    public void printAddPrescriptionMessage(String prescriptionString) {
-        System.out.println("You have added a prescription!");
-        printLine();
-        System.out.println(prescriptionString);
-        printLine();
-    }
-
-    public void printEditPrescriptionMessage(String prescriptionString) {
-        System.out.println("You have edited the prescription!");
-        printLine();
-        System.out.println(prescriptionString);
-        printLine();
     }
 
     public void printNoPrescriptionMessage() {
@@ -203,6 +161,17 @@ public class UI {
     public static final String VISIT_VIEW_ALL = "\n* To list all visits: viewall";
     public static final String VISIT_VIEW_PATIENT = "\n* To list all visits of one patient: viewPatient i/[ID]";
     public static final String VISIT_VIEW = "\n* To view a patient's specific visit: viewVisit x/[index]";
+    public static final String PATIENT_ADDED = "Ok! I've added a patient! The patient's details are as follows:";
+    public static final String PATIENT_EDITED = "Alright, I've modified the details of the patient! \nHere are the "
+            + "new details of the patient: ";
+    public static final String ADD_VISIT = "You have added a visit!";
+    public static final String EDIT_VISIT_REASON = "You have edited reason for the visit. Here's the updated visit!";
+    public static final String DELETE_VISIT_REASON = "You have deleted the reason for the visit. Here's the "
+            + "updated visit!";
+    public static final String ADD_PRESCRIPTION = "You have added a prescription!";
+    public static final String EDIT_PRESCRIPTION = "You have edited the prescription!";
+    public static final String DEACTIVATE_PRESCRIPTION = "Ok, I've deactivated the prescription below:";
+    public static final String ACTIVATE_PRESCRIPTION = "You have edited the prescription!";
 
     public static final String PRESCRIPTION_ADD = "\n* To add a prescription: add i/ID "
             + "n/[name] d/[dosage] t/[time interval]";
@@ -215,7 +184,7 @@ public class UI {
             + "viewPatientPres i/[ID]";
 
     public static final String PRESCRIPTION_VIEW_ACTIVE = "\n* To list all active prescriptions of one "
-        + "patient: viewActPatientPres i/[ID]";
+            + "patient: viewActPatientPres i/[ID]";
 
     public static final String PRESCRIPTION_CHANGE_ACTIVE = "\n* To change a prescription record to be "
             + "active: activate x/[index]";
@@ -223,23 +192,10 @@ public class UI {
     public static final String PRESCRIPTION_CHANGE_INACTIVE = "\n* To change a prescription record to be "
             + "inactive: deactivate x/[index]";
 
-    public static final String RETURN_TO_MAIN =  "\n* To return to main menu: main";
+    public static final String RETURN_TO_MAIN = "\n* To return to main menu: main";
 
-    public static final String EXIT_PROGRAM =  "\n* To quit OneDoc: bye";
+    public static final String EXIT_PROGRAM = "\n* To quit OneDoc: bye";
 
-    public void printActivatePrescriptionMessage(String prescription) {
-        System.out.println("Ok, I've activated the prescription below:");
-        printLine();
-        System.out.println(prescription);
-        printLine();
-    }
-
-    public void printDeactivatePrescriptionMessage(String prescription) {
-        System.out.println("Ok, I've deactivated the prescription below:");
-        printLine();
-        System.out.println(prescription);
-        printLine();
-    }
 
     public void printNoMatchingPrescriptionMessage() {
         System.out.println(NO_MATCHING_PRESCRIPTION_MESSAGE);

@@ -18,7 +18,8 @@ public class PrescriptionList {
         assert timeInterval != null : "time interval should not be null";
         Prescription prescription = new Prescription(patientId, medicine, dosage, timeInterval);
         prescriptionsList.add(prescription);
-        ui.printAddPrescriptionMessage(prescription.toString());
+        ui.printMessageAndObject(prescription.toString(),UI.ADD_PRESCRIPTION,
+                prescriptionsList.indexOf(prescription));
 
     }
 
@@ -29,7 +30,8 @@ public class PrescriptionList {
         assert timeInterval != null : "time interval should not be null";
         Prescription prescription = new Prescription(patientId, medicine, dosage, timeInterval, isActive);
         prescriptionsList.add(prescription);
-        ui.printAddPrescriptionMessage(prescription.toString());
+        ui.printMessageAndObject(prescription.toString(),UI.ADD_PRESCRIPTION,
+                prescriptionsList.indexOf(prescription));
     }
 
     public void loadPrescription(String patientID,
@@ -120,7 +122,7 @@ public class PrescriptionList {
             prescriptionEdited.setTimeInterval(timeInterval);
         }
 
-        ui.printEditPrescriptionMessage(prescriptionEdited.toString());
+        ui.printMessageAndObject(prescriptionEdited.toString(),UI.EDIT_PRESCRIPTION,index);
     }
 
     private boolean hasPatientPrescription(String patientId) {
@@ -152,7 +154,7 @@ public class PrescriptionList {
         Prescription prescriptionEdited = prescriptionsList.get(index);
         prescriptionEdited.setActive();
 
-        ui.printActivatePrescriptionMessage(prescriptionEdited.toString());
+        ui.printMessageAndObject(prescriptionEdited.toString(),UI.ACTIVATE_PRESCRIPTION,index);
     }
 
     public void deactivatePrescription(UI ui, String prescriptionNumber) {
@@ -163,8 +165,8 @@ public class PrescriptionList {
 
         Prescription prescriptionEdited = prescriptionsList.get(index);
         prescriptionEdited.setInactive();
-
-        ui.printDeactivatePrescriptionMessage(prescriptionEdited.toString());
+        ui.printMessageAndObject(prescriptionEdited.toString(),UI.DEACTIVATE_PRESCRIPTION,
+                prescriptionsList.indexOf(prescriptionEdited));
     }
 
     private Integer getIndex(UI ui, String prescriptionNumber) {
