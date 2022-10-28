@@ -68,13 +68,15 @@ public class Database {
      * Search for partner university module code in current list of module mappings.
      * 
      * @param moduleCode Partner university module code to find
+     * @param universityName Partner university name
      * @return Module mapping which contains partner university module code
-     * @throws ModuleNotFoundException If module code is not found inside of current
+     * @throws ModuleNotFoundException If module code is not found inside current
      *                                 list of module mappings
      */
-    public static ModuleMapping findPuMapping(String moduleCode) throws ModuleNotFoundException {
+    public static ModuleMapping findPuMapping(String moduleCode, String universityName) throws ModuleNotFoundException {
         for (ModuleMapping moduleMapping : moduleMappings) {
-            if (moduleMapping.getPartnerUniversityModule().getCode().equals(moduleCode)) {
+            if (moduleMapping.getPartnerUniversityModule().getCode().equals(moduleCode)
+                && moduleMapping.getPartnerUniversityModule().getUniversity().getName().equals(universityName)) {
                 return moduleMapping;
             }
         }
@@ -130,5 +132,16 @@ public class Database {
 
         return universityMappings;
     }
+
+    public static boolean hasUniversityInDatabase(String universityName) {
+        for (University university: universities) {
+            if (university.getName().equals(universityName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
 
 }

@@ -25,6 +25,7 @@ import seedu.duke.timetable.TimetableManager;
 import seedu.duke.ui.Ui;
 import seedu.duke.module.ModuleMapping;
 import seedu.duke.university.University;
+import seedu.duke.user.UserDeletedModules;
 import seedu.duke.user.UserModuleMapping;
 import seedu.duke.user.UserUniversityListManager;
 import seedu.duke.parser.UserStorageParser;
@@ -76,7 +77,8 @@ public class Duke {
                 default:
                     break;
                 }
-            } catch (InvalidUserCommandException | InvalidModuleException | ModuleNotFoundException e) {
+            } catch (InvalidUserCommandException | InvalidModuleException
+                     | ModuleNotFoundException | UniversityNotFoundException e) {
                 Ui.printExceptionMessage(e);
             }
         }
@@ -137,16 +139,23 @@ public class Duke {
      * Updates user storage.
      *
      * @param userUniversityListManager User university lists' manager
-     * @param timetableManager User timetables' manager
-     * @param createCommand The create command to be executed
+     * @param timetableManager          User timetables' manager
+     * @param createCommand             The create command to be executed
      */
     private static void executeCreateCommand(UserUniversityListManager userUniversityListManager,
-                                             TimetableManager timetableManager, CreateCommand createCommand) {
-        userUniversityListManager.createList(createCommand.getUniversityName());
-        timetableManager.createTimetable(createCommand.getUniversityName(), false);
-        UserStorageParser.storeCreatedLists(userUniversityListManager);
-        UserStorageParser.storeTimetable(timetableManager);
+                                             TimetableManager timetableManager, CreateCommand createCommand) throws
+            UniversityNotFoundException {
+        if (Database.hasUniversityInDatabase(createCommand.getUniversityName())) {
+            userUniversityListManager.createList(createCommand.getUniversityName());
+            timetableManager.createTimetable(createCommand.getUniversityName(), false);
+            UserStorageParser.storeCreatedLists(userUniversityListManager);
+            UserStorageParser.storeTimetable(timetableManager);
+        } else {
+            throw new UniversityNotFoundException("Error! " + createCommand.getUniversityName() + " does not exist "
+                    + "in database!");
+        }
     }
+
 
     /**
      * Processes the view command and calls Ui to display the appropriate user created item user wants to view.
@@ -161,8 +170,8 @@ public class Duke {
             String viewOption = viewCommand.getViewOption();
             if (viewOption.equals("LISTS")) {
                 userUniversityListManager.displayAll();
-            } else if (viewOption.equals("DELETE_HISTORY")) {
-                userUniversityListManager.getUserDeletedModules().displayAll();
+            } else if (viewOption.equals("DELETE HISTORY")) {
+                UserDeletedModules.displayAll();
             } else if (viewOption.equals("UNIVERSITY")) {
                 userUniversityListManager.displayUniversity(viewCommand.getUniversityName());
                 timetableManager.printTimetable(viewCommand.getUniversityName());
@@ -190,25 +199,35 @@ public class Duke {
             throws InvalidUserCommandException {
         try {
             Lesson lesson = addCommand.getLesson();
+            String universityName = addCommand.getUniversityName();
+            String moduleCode = addCommand.getModuleCode();
             if (lesson != null) {
+                if (!userUniversityListManager.getList(universityName).getMyModules().containModules(moduleCode)) {
+                    addModuleToList(userUniversityListManager,addCommand);
+                }
                 timetableManager.addLesson(lesson, false);
                 UserStorageParser.storeTimetable(timetableManager);
             } else {
-                String moduleCode = addCommand.getModuleCode();
-                String universityName = addCommand.getUniversityName();
-                ModuleMapping moduleMapping = Database.findPuMapping(moduleCode);
-                Module puModule = moduleMapping.getPartnerUniversityModule();
-                Module nusModule = moduleMapping.getNusModule();
-                UserModuleMapping userModuleToAdd = new UserModuleMapping(puModule.getCode(),
-                        puModule.getTitle(), nusModule.getCode(), nusModule.getTitle(),
-                        nusModule.getCredit(), puModule.getCredit(), puModule.getUniversity().getName(),
-                        puModule.getUniversity().getCountry());
-                userUniversityListManager.addModule(universityName, userModuleToAdd);
-                UserStorageParser.storeCreatedLists(userUniversityListManager);
+                addModuleToList(userUniversityListManager, addCommand);
             }
         } catch (ModuleNotFoundException | NoSuchElementException | InvalidUniversityException e) {
             Ui.printExceptionMessage(e);
         }
+    }
+
+    private static void addModuleToList(UserUniversityListManager userUniversityListManager, AddCommand addCommand)
+            throws ModuleNotFoundException, InvalidUserCommandException {
+        String moduleCode = addCommand.getModuleCode();
+        String universityName = addCommand.getUniversityName();
+        ModuleMapping moduleMapping = Database.findPuMapping(moduleCode, universityName);
+        Module puModule = moduleMapping.getPartnerUniversityModule();
+        Module nusModule = moduleMapping.getNusModule();
+        UserModuleMapping userModuleToAdd = new UserModuleMapping(puModule.getCode(),
+                puModule.getTitle(), nusModule.getCode(), nusModule.getTitle(),
+                nusModule.getCredit(), puModule.getCredit(), puModule.getUniversity().getName(),
+                puModule.getUniversity().getCountry());
+        userUniversityListManager.addModule(universityName, userModuleToAdd);
+        UserStorageParser.storeCreatedLists(userUniversityListManager);
     }
 
     /**

@@ -32,7 +32,7 @@ public class CommandParser {
     private static final String UNIVERSITIES_OPTION = "UNIVERSITIES";
     private static final String USER_LISTS_OPTION = "LISTS";
     private static final String MODULES_OPTION = "MODULES";
-    private static final String DELETE_HISTORY_OPTION = "DELETE_HISTORY";
+    private static final String DELETE_HISTORY_OPTION = "DELETE HISTORY";
     private static final String TIMETABLES_OPTION = "TIMETABLES";
     private static final int SIX_PARAMETERS_LENGTH = 6;
     private static final int THREE_PARAMETERS_LENGTH = 3;
@@ -145,11 +145,12 @@ public class CommandParser {
             return null;
         } else {
             String code = parameters[MODULE_INDEX].substring(2);
-            Module puModule = Database.findPuMapping(code).getPartnerUniversityModule();
+            String universityName = parameters[UNIVERSITY_INDEX].substring(2);
+            Module puModule = Database.findPuMapping(code, universityName).getPartnerUniversityModule();
             String day = parameters[DAY_INDEX].substring(2);
             String startTime = parameters[LESSON_START_TIME_INDEX].substring(3);
             String endTime = parameters[LESSON_END_TIME_INDEX].substring(3);
-            return new Lesson(puModule.getCode(),puModule.getTitle(),puModule.getCredit(), puModule.getUniversity(),
+            return new Lesson(puModule.getCode(), puModule.getTitle(), puModule.getCredit(), puModule.getUniversity(),
                     day, startTime, endTime);
         }
 
