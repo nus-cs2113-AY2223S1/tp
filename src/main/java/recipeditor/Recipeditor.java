@@ -1,5 +1,6 @@
 package recipeditor;
 
+import recipeditor.command.HelpCommand;
 import recipeditor.parser.Parser;
 import recipeditor.storage.Storage;
 import recipeditor.ui.Ui;
@@ -32,6 +33,7 @@ public class Recipeditor {
         Storage.createFolder(Storage.RECIPES_FOLDER_PATH);
         Storage.createFile(Storage.ALL_RECIPES_FILE_PATH);
         Storage.loadRecipesFromAllRecipeFile();
+        Ui.showMessage(HelpCommand.HELP_MESSAGE);
         Ui.showGreeting();
     }
 

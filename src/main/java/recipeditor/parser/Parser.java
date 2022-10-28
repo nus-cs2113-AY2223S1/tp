@@ -1,18 +1,10 @@
 package recipeditor.parser;
 
-import recipeditor.command.Command;
-import recipeditor.command.AddCommand;
-import recipeditor.command.DeleteCommand;
-import recipeditor.command.ExitCommand;
-import recipeditor.command.ListCommand;
-import recipeditor.command.EditCommand;
-import recipeditor.command.ViewCommand;
+import recipeditor.command.*;
 
 import recipeditor.exception.ParseFileException;
 import recipeditor.recipe.Recipe;
 import recipeditor.ui.Editor;
-import recipeditor.command.FindCommand;
-import recipeditor.command.InvalidCommand;
 import recipeditor.recipe.RecipeList;
 import recipeditor.storage.Storage;
 import recipeditor.ui.EditMode;
@@ -43,6 +35,8 @@ public class Parser {
             return parseListAlterCommand(parsed, commandWord);
         case FindCommand.COMMAND_TYPE:
             return parseFindCommand(parsed);
+        case HelpCommand.COMMAND_TYPE:
+            return new HelpCommand();
         default:
             return new InvalidCommand();
         }

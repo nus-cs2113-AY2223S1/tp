@@ -35,12 +35,6 @@ public class Storage {
             + "# STEPS \n"
             + "1. Example step \n";
 
-
-    private static final String RECIPE_NAME_FIELD_TYPE = "Recipe Name";
-    private static final String RECIPE_DESCRIPTION_FIELD_TYPE = "Recipe Description";
-    private static final String RECIPE_INGREDIENTS_FIELD_TYPE = "Recipe Ingredients";
-    private static final String RECIPE_STEPS_FIELD_TYPE = "Recipe Steps";
-
     private static final Logger logger = Logger.getLogger(Storage.class.getName());
 
     public static void createFolder(String folderPath) {
@@ -107,7 +101,6 @@ public class Storage {
             createFile(ALL_RECIPES_FILE_PATH);
         }
     }
-
 
     public static void writeRecipeListToFile(String filePath) {
         try {
