@@ -24,12 +24,20 @@ Adds a new movie review to your list.
 Usage: 
 `add /movie inception /rating 99 /date 10-01-2020 /genre thriller`
 
+Output:
+```
+Got it. I've added the following item to the list:
+        [Movie]  up  Rating:99.0 Genre: animated Date watched:10-01-2020
+
+        Now you have 5 reviews in the list.
+```
+
 ### Display reviews: `list`
 Displays all movies and television shows you have reviewed. Output is separated by media category. 
 
 **Format**: `list`
 
-Usage
+Output
 ```
 ---Here are the reviews in your list---
 
@@ -71,34 +79,46 @@ Usage:
 ### Find reviews: 'find'
 Allows the searching of a particular review.
 
-**Format**: ``
+**Format**: `find [string]`
 
-Usage:
+Example output:
 ```
+find inc
+---Here are the reviews that match the keyword---
+
+Movies:
+1. [Movie]  inception  Rating:99.0 Genre: thriller Date watched:10-01-2020
+
+TV Shows:
 ```
 
 ### Favourite reviews: 'favourite'
-Lets you star items you find particularly notable for easier reference.
+Lets you mark items you find particularly notable or wantt to watch again for easier reference.
 
-**Format**: ``
+**Format**: `favourite [list position]`
 
-Usage:
+Usage: favourite 1
 ```
+favourite 1
+The following task has been starred:
+[Movie]  inception  Rating:99.0 Genre: thriller Date watched:10-01-2020
 ```
 
 ### List favourite reviews: 'favourite list'
 Lets you list your favourited items.
 
-**Format**: ``
+**Format and usage**: `favourite list`
 
-Usage:
+Example Output:
 ```
+Your favourites are:
+[Movie]  inception  Rating:99.0 Genre: thriller Date watched:10-01-2020
+[Movie]  titanic  Rating:98.0 Genre: romance Date watched:01-02-2019
+[TV Show]  titanic  Rating:98.0 Genre: romance  Date watched:01-02-2019 Site:  netflix
+[Movie]  hey  Rating:50.0 Genre: action Date watched:29-01-2000
 ```
 
 [//]: # (## Command Summary)
 
 [//]: # ()
 [//]: # ({Give a 'cheat sheet' of commands here})
-
-[//]: # ()
-[//]: # (* Add todo `todo n/TODO_NAME d/DEADLINE`)

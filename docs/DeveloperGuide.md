@@ -10,6 +10,10 @@ The `Ui` class handles user input and basic output messages. It can
 ![img.png](imgs/UiClass.png)
 
 ### Storage Class
+The `Storage` class handles the storing and retrieval of users' information. When the program is first
+started, the program checks for whether there is a file from which to extract the saved information.
+If there is not, a new file and folder will be created. The saved information is then loaded in to the reviewList
+which the user can maniuplate. Upon exit, all the user's information and attributes are saved into local storage on the txt file.
 ![img.png](imgs/StorageClass.png)
 
 ### Media Classes
@@ -159,14 +163,17 @@ and are avid movie or TV show watchers. Therefore, this app is customised to the
 |v1.0|user| enter the date I watched the movie       | recall when I watched the movie.             |
 |v2.0|user| arrange my review list by worst or best ratings        | see the shows that I like or hate the most.  |
 |v2.0|user| star/favorite a movie        | mark shows that I would like to watch again. |
-|v2.0|user| display a list that displays starred movies and shows        | view which are my favorites.|
+|v2.0|user| star/favorite a tv show        | mark tv shows that I may want to watch again. |
+|v2.0|user| see a display of my favourited items       | I can quickly refer to the shows I have marked.|
 |v2.0|user| be able to save my information after I exit the program   | offload it from my mind. |
+|v2.0|user| be able to retrieve my last saved list   | I do not have to remember it myself. |
 |v2.0|user| list the movies I have watched                        | view what movies I have watched              |
 |v2.0|user| list the tv shows I have watched                      | view what tv shows I have watched            |
 |v2.0|user| search movies using a keyword                         | to find a specific movie I have watched      |
 |v2.0|user| search tv show using a keyword                        | to find a specific tv show I have watched    |
 |v2.0|user| clear movies that I have watched                      | to clear my watch history                    |
 |v2.0|user| clear tv shows that I have watched                    | to clear my watch history                    |
+
 
 
 ## Non-Functional Requirements
