@@ -15,6 +15,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 
+import seedu.duke.parser.DayParser;
 import seedu.duke.parser.LessonTypeParser;
 
 /**
@@ -73,7 +74,7 @@ class ModuleLoader {
      */
     private static RawLesson jsonNodeToRawLesson(JsonNode node) {
         return new RawLesson(node.get("classNo").asText(),
-                Day.valueOf(node.get("day").asText()),
+                DayParser.parse(node.get("day").asText()),
                 node.get("endTime").asText(),
                 node.get("startTime").asText(),
                 LessonTypeParser.parse(node.get("lessonType").asText()),

@@ -36,7 +36,7 @@ public class ModuleTest {
         List<RawLesson> lectures = timetable.stream().filter(s -> s.lessonType == LessonType.LECTURE)
                 .collect(Collectors.toList());
         assertEquals(2, lectures.size());
-        assertEquals(Day.Wednesday, lectures.get(0).day);
+        assertEquals(Day.WEDNESDAY, lectures.get(0).day);
         assertEquals("1000", lectures.get(0).startTime);
         assertEquals("1200", lectures.get(0).endTime);
         List<RawLesson> tutorials = timetable.stream().filter(s -> s.lessonType == LessonType.TUTORIAL)
