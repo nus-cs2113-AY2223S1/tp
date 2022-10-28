@@ -82,7 +82,7 @@ Your command is incomplete.
 Sem [1] >> --------------------------------------------------------------------------------
 Processing "select /module cs2113 /type tut /code 4" ...
 
-Slot selected successfully
+Slot selected successfully!
 --------------------------------------------------------------------------------
 Sem [1] >> --------------------------------------------------------------------------------
 Processing "list" ...

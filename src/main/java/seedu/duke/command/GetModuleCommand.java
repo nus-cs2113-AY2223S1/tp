@@ -30,7 +30,6 @@ public class GetModuleCommand extends Command {
     public static final String MISSING_MODULE_CODE = "Please enter a module code!";
     public static final String MODULE_NOT_FOUND = "Module not found! Please enter a valid module code! "
             + "Try searching if you do not remember the exact module code.";
-
     private static final int HEADING_LENGTH = 12;
     private static final int DESCRIPTION_SIZE = 65;
     private static final String DESCRIPTION_INDENTATION = System.lineSeparator()
