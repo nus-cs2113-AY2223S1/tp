@@ -106,6 +106,7 @@ public class GetModuleCommand extends Command {
 
     //adapted from https://stackoverflow.com/questions/25853393
     private String splitLongDescription(String longDescription) {
+        longDescription = longDescription.replace("\n", " ");
         Pattern pattern = Pattern.compile("\\G\\s*(.{1," + DESCRIPTION_SIZE + "})(?=\\s|$)", Pattern.DOTALL);
         Matcher matcher = pattern.matcher(longDescription);
 
