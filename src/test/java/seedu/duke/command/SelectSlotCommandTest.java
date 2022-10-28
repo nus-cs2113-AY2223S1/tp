@@ -2,12 +2,11 @@ package seedu.duke.command;
 
 import org.junit.jupiter.api.Test;
 import seedu.duke.exceptions.YamomException;
+import seedu.duke.model.LessonType;
 import seedu.duke.utils.State;
 import seedu.duke.utils.Storage;
 import seedu.duke.utils.Ui;
-
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
+import seedu.duke.model.Module;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -65,16 +64,7 @@ public class SelectSlotCommandTest {
         State state = new State();
         Ui ui = new Ui();
         Storage storage = new Storage();
-        String s = System.lineSeparator();
-        // try {
-        //     String input = "select";
-        //     SelectSlotCommand selectSlotCommand = new SelectSlotCommand(input);
-        //     selectSlotCommand.execute(state, ui, storage);
-        //     fail();
-        // } catch (YamomException e) {
-        //     assertEquals("Error! \tWrong format given, should be " + s
-        //             + "\tselect [ /module [EXACT_MODULE_CODE] /type [LESSON_TYPE] /code [CLASS_NO] ]", e.getMessage());
-        // }
+
         assertThrows(YamomException.class, () -> {
             String input = "select";
             SelectSlotCommand selectSlotCommand = new SelectSlotCommand(input);
@@ -87,19 +77,7 @@ public class SelectSlotCommandTest {
         State state = new State();
         Ui ui = new Ui();
         Storage storage = new Storage();
-        String s = System.lineSeparator();
-        // try {
-        //     String input = "select /module /type /code";
-        //     SelectSlotCommand selectSlotCommand = new SelectSlotCommand(input);
-        //     selectSlotCommand.execute(state, ui, storage);
-        //     fail();
-        // } catch (YamomException e) {
-        //     assertEquals("Error! \tWrong format given, should be " + s
-        //                     + "\tselect [ /module [EXACT_MODULE_CODE] /type [LESSON_TYPE] /code [CLASS_NO] ]\n"
-        //                     + "\n"
-        //                     + "You might have missed out the Module Code, Lesson Type or Class No.",
-        //             e.getMessage());
-        // }
+
         assertThrows(YamomException.class, () -> {
             String input = "select /module /type /code";
             SelectSlotCommand selectSlotCommand = new SelectSlotCommand(input);
@@ -112,17 +90,7 @@ public class SelectSlotCommandTest {
         State state = new State();
         Ui ui = new Ui();
         Storage storage = new Storage();
-        String s = System.lineSeparator();
-        // try {
-        //     String input = "select /module cs2113 /type";
-        //     SelectSlotCommand selectSlotCommand = new SelectSlotCommand(input);
-        //     selectSlotCommand.execute(state, ui, storage);
-        //     fail();
-        // } catch (YamomException e) {
-        //     assertEquals("Error! \tWrong format given, should be " + s
-        //                     + "\tselect [ /module [EXACT_MODULE_CODE] /type [LESSON_TYPE] /code [CLASS_NO] ]",
-        //             e.getMessage());
-        // }
+
         assertThrows(YamomException.class, () -> {
             String input = "select /module cs2113 /type";
             SelectSlotCommand selectSlotCommand = new SelectSlotCommand(input);
@@ -131,75 +99,75 @@ public class SelectSlotCommandTest {
     }
 
     @Test
-    void selectSlotCommand_inputWrongClassNo_expectUnsuccessfulChangeInSlot() throws YamomException {
+    void validateLessonTypeAndClassNo_enteredCorrectLessonTypeAndClassNumber_expectTrue() {
         State state = new State();
-        Ui ui = new Ui();
-        Storage storage = new Storage();
+
+        Module selectedModule = Module.get("cs1010s");
+
+        // CS1010S has no lab lesson type
+        LessonType lessonType = LessonType.TUTORIAL;
+
+        // classNo 24C is a valid classNo for CS1010S tutorial
+        String classNo = "24C";
 
         // set to semester 1
         state.setSemester(1);
 
-        // add cs1010s to timetable. cs1010s has tutorial defaults to tut 02A
-        String[] input1 = {"add", "cs1010s"};
-        AddModuleCommand addModuleCommand = new AddModuleCommand(input1);
-        addModuleCommand.execute(state, ui, storage);
-
-        // change tutorial slot to tut 2 should be unsuccessful, hence no change in module list
-        String input = "select /module cs1010s /type tut /code 2";
-        SelectSlotCommand selectSlotCommand = new SelectSlotCommand(input);
-        selectSlotCommand.execute(state, ui, storage);
-
-        String expectedOutput = state.getSelectedModulesList().get(0).getSelectedSlots().toString();
-
-        assertEquals("{LECTURE=1, RECITATION=01, TUTORIAL=02A}", expectedOutput);
+        assertTrue(SelectSlotCommand.validateLessonTypeAndClassNo(selectedModule, lessonType, classNo, state));
     }
 
     @Test
-    void selectSlotCommand_inputNonExistingLessonType_expectUnsuccessfulChangeInSlot() throws YamomException {
+    void validateLessonTypeAndClassNo_inputWrongClassNo_expectFalse() {
         State state = new State();
-        Ui ui = new Ui();
-        Storage storage = new Storage();
+
+        Module selectedModule = Module.get("cs1010s");
+
+        // CS1010S has tutorial lesson type
+        LessonType lessonType = LessonType.TUTORIAL;
+
+        // classNo 2 is an invalid classNo for CS1010S tutorial
+        String classNo = "2";
 
         // set to semester 1
         state.setSemester(1);
 
-        // add cs1010s to timetable. cs1010s only has tut, lec and rec lesson types
-        String[] input1 = {"add", "cs1010s"};
-        AddModuleCommand addModuleCommand = new AddModuleCommand(input1);
-        addModuleCommand.execute(state, ui, storage);
-
-        // input [/type lab] should be unsuccessful as there are no lab sessions, hence no change in module list
-        String input = "select /module cs1010s /type lab /code 02A";
-        SelectSlotCommand selectSlotCommand = new SelectSlotCommand(input);
-        selectSlotCommand.execute(state, ui, storage);
-
-        String expectedOutput = state.getSelectedModulesList().get(0).getSelectedSlots().toString();
-
-        assertEquals("{LECTURE=1, RECITATION=01, TUTORIAL=02A}", expectedOutput);
+        assertFalse(SelectSlotCommand.validateLessonTypeAndClassNo(selectedModule, lessonType, classNo, state));
     }
 
     @Test
-    void selectSlotCommand_inputNonExistingLessonTypeAndClassNo_expectUnsuccessfulChangeInSlot() throws YamomException {
+    void validateLessonTypeAndClassNo_inputNonExistingLessonType_expectFalse() {
         State state = new State();
-        Ui ui = new Ui();
-        Storage storage = new Storage();
+
+        Module selectedModule = Module.get("cs1010s");
+
+        // CS1010S has no lab lesson type
+        LessonType lessonType = LessonType.LABORATORY;
+
+        // classNo 02A is a valid classNo for CS1010S tutorial
+        String classNo = "02A";
 
         // set to semester 1
         state.setSemester(1);
 
-        // add cs1010s to timetable. cs1010s only has tut, lec and rec lesson types
-        String[] input1 = {"add", "cs1010s"};
-        AddModuleCommand addModuleCommand = new AddModuleCommand(input1);
-        addModuleCommand.execute(state, ui, storage);
+        assertFalse(SelectSlotCommand.validateLessonTypeAndClassNo(selectedModule, lessonType, classNo, state));
+    }
 
-        // input [/type lab] should be unsuccessful as there are no lab sessions, hence no change in module list
-        String input = "select /module cs1010s /type lab /code 23784";
-        SelectSlotCommand selectSlotCommand = new SelectSlotCommand(input);
-        selectSlotCommand.execute(state, ui, storage);
+    @Test
+    void validateLessonTypeAndClassNo_inputNonExistingLessonTypeAndClassNo_expectFalse() {
+        State state = new State();
 
-        String expectedOutput = state.getSelectedModulesList().get(0).getSelectedSlots().toString();
+        Module selectedModule = Module.get("cs1010s");
 
-        assertEquals("{LECTURE=1, RECITATION=01, TUTORIAL=02A}", expectedOutput);
+        // CS1010S has no lab lesson type
+        LessonType lessonType = LessonType.LABORATORY;
+
+        // classNo 02A is a valid classNo for CS1010S tutorial
+        String classNo = "17284";
+
+        // set to semester 1
+        state.setSemester(1);
+
+        assertFalse(SelectSlotCommand.validateLessonTypeAndClassNo(selectedModule, lessonType, classNo, state));
     }
 
 }

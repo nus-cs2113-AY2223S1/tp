@@ -73,8 +73,8 @@ public class SelectSlotCommand extends Command {
         ui.displayUi();
     }
 
-    private boolean validateLessonTypeAndClassNo(Module selectedModule, LessonType lessonType, String classNo,
-                                                 State state) {
+    public static boolean validateLessonTypeAndClassNo(Module selectedModule, LessonType lessonType, String classNo,
+                                                       State state) {
         if (selectedModule.getSemesterData(state.getSemester()).lessonTypes.contains(lessonType)
                 && selectedModule.getSemesterData(state.getSemester()).getClassNosByType(lessonType)
                 .contains(classNo)) {
