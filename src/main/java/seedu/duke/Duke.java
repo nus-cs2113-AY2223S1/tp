@@ -120,8 +120,10 @@ public class Duke {
                 } else {
                     userUniversityListManager.deleteModule(deleteCommand.getUniversityName(),
                             deleteCommand.getModuleCode());
-                    UserStorageParser.storeTimetable(timetableManager);
+                    timetableManager.getTimetableByUniversityName(deleteCommand.getUniversityName())
+                            .deleteLessonByCode(deleteCommand.getModuleCode());
                 }
+                UserStorageParser.storeTimetable(timetableManager);
                 UserStorageParser.storeCreatedLists(userUniversityListManager);
             }
         } catch (NoSuchElementException | TimetableNotFoundException e) {
