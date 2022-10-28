@@ -102,7 +102,8 @@ public class UserUniversityListManager {
         if (containsKey(inputSchool)) {
             getUserUniversityList(inputSchool).addModule(inputModule);
         } else {
-            throw new InvalidUserCommandException("No such university found");
+            throw new InvalidUserCommandException("No such university found in your university lists. "
+                    + "Please create a list for " + inputSchool + " first!");
         }
     }
 
