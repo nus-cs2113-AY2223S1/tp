@@ -498,6 +498,9 @@ public class ConsoleInterface {
 
             expense.setCurrency(currency);
         }
+        if (consoleCommandEditExpense.isModeOfPaymentSet()) {
+            expense.setModeOfPayment(consoleCommandEditExpense.getModeOfPayment());
+        }
 
         try {
             expenseManager.editExpense(expenseIndex, expense, localStorage);
