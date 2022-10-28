@@ -1,7 +1,5 @@
-
-RecipEditor is a hybrid CLI-GUI application that allows you to manage your recipes 
-
-
+# RecipEditor
+RecipEditor is a hybrid CLI-GUI application that allows you to manage your recipes
 
 - [Quick Start](#quick-start)
 - [Features](#features)
