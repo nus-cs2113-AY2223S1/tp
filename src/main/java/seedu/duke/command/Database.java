@@ -131,4 +131,15 @@ public class Database {
         return universityMappings;
     }
 
+    public static boolean hasUniversityInDatabase(String universityName) {
+        for (University university: universities) {
+            if (university.getName().equals(universityName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+
 }
