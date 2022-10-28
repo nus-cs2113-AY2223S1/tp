@@ -25,6 +25,7 @@ import seedu.duke.timetable.TimetableManager;
 import seedu.duke.ui.Ui;
 import seedu.duke.module.ModuleMapping;
 import seedu.duke.university.University;
+import seedu.duke.user.UserDeletedModules;
 import seedu.duke.user.UserModuleMapping;
 import seedu.duke.user.UserUniversityListManager;
 import seedu.duke.parser.UserStorageParser;
@@ -169,8 +170,8 @@ public class Duke {
             String viewOption = viewCommand.getViewOption();
             if (viewOption.equals("LISTS")) {
                 userUniversityListManager.displayAll();
-            } else if (viewOption.equals("DELETE_HISTORY")) {
-                userUniversityListManager.getUserDeletedModules().displayAll();
+            } else if (viewOption.equals("DELETE HISTORY")) {
+                UserDeletedModules.displayAll();
             } else if (viewOption.equals("UNIVERSITY")) {
                 userUniversityListManager.displayUniversity(viewCommand.getUniversityName());
                 timetableManager.printTimetable(viewCommand.getUniversityName());
