@@ -24,6 +24,7 @@ class Timetable {
     + hasTimetableClash(lesson: Lesson) : boolean
     + addLesson(newLesson: Lesson, isLoadFromFile: boolean) : void
     + deleteLesson(oldLesson: Lesson) : void
+    + deleteLessonByCode(moduleCode: String) : void
 }
 
 class Lesson {
