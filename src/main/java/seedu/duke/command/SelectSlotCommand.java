@@ -5,6 +5,7 @@ import java.util.Map;
 
 import seedu.duke.exceptions.YamomException;
 import seedu.duke.model.LessonType;
+import seedu.duke.model.Module;
 import seedu.duke.model.SelectedModule;
 import seedu.duke.parser.Parser;
 import seedu.duke.parser.LessonTypeParser;
@@ -22,6 +23,12 @@ public class SelectSlotCommand extends Command {
 
     public static final String MISSING_PARAMS_KEY_OR_VALUE = "You might have missed out the Module Code, Lesson Type or"
             + " Class No.";
+
+    public static final String SELECTION_DATA_VALIDATION_FAILED = "You might have entered the wrong Module, "
+            + "Lesson Type " + "or Class No.";
+
+    public static final String SUCCESSFUL_MESSAGE = "Slot selected successfully!";
+    public static final String UNSUCCESSFUL_MESSAGE = "Slot selection unsuccessful!";
     private Map<String, String> params;
     private String moduleCode;
     private LessonType lessonType;
@@ -33,7 +40,7 @@ public class SelectSlotCommand extends Command {
         params = Parser.parseParams(input);
         successful = false;
 
-        //validate params
+        // validate params
         processParams(params);
     }
 
@@ -45,18 +52,35 @@ public class SelectSlotCommand extends Command {
 
         List<SelectedModule> modules = state.getSelectedModulesList();
         for (int i = 0; i < modules.size(); i++) {
+            // if module exists
             if (modules.get(i).getModule().moduleCode.equals(moduleCode)) {
-                // TODO check if lesson type and class code exists in module
-                modules.get(i).selectSlot(lessonType, classNo);
-                successful = true;
+                // validate lessonType and classNo
+                boolean isSelectionValidated = validateLessonTypeAndClassNo(modules.get(i).getModule(), lessonType,
+                        classNo, state);
+
+                if (isSelectionValidated) {
+                    modules.get(i).selectSlot(lessonType, classNo);
+                    successful = true;
+                    break;
+                }
             }
         }
         if (successful) {
-            ui.addMessage("Slot selected successfully");
+            ui.addMessage(SUCCESSFUL_MESSAGE);
         } else {
-            ui.addMessage("Slot selection unsuccessful");
+            ui.addMessage(UNSUCCESSFUL_MESSAGE + System.lineSeparator() + SELECTION_DATA_VALIDATION_FAILED);
         }
         ui.displayUi();
+    }
+
+    public static boolean validateLessonTypeAndClassNo(Module selectedModule, LessonType lessonType, String classNo,
+                                                       State state) {
+        if (selectedModule.getSemesterData(state.getSemester()).lessonTypes.contains(lessonType)
+                && selectedModule.getSemesterData(state.getSemester()).getClassNosByType(lessonType)
+                .contains(classNo)) {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -71,7 +95,7 @@ public class SelectSlotCommand extends Command {
         }
 
         if (params.get("module").isEmpty() || params.get("type").isEmpty() || params.get("code").isEmpty()) {
-            throw new YamomException(ERROR_WRONG_FORMAT + System.lineSeparator() + System.lineSeparator()
+            throw new YamomException(ERROR_WRONG_FORMAT + "\n\n"
                     + MISSING_PARAMS_KEY_OR_VALUE);
         }
     }

@@ -420,6 +420,37 @@ Slot selected successfully
 --------------------------------------
 ```
 
+Possible Error:
+1. The module code is not in the list of selected modules (assuming that cs2040 is not in the list of selected modules)
+
+```
+select /module CS2040 /type lecture /code 2
+--------------------------------------------------------------------------------
+Slot selection unsuccessful!
+You might have entered the wrong Module, Lesson Type or Class No.
+--------------------------------------------------------------------------------
+```
+
+2. The module code is in the list of selected modules, but the lesson type and class no is not valid.
+
+```
+select /module CS2113 /type rec /code 2
+--------------------------------------------------------------------------------
+Slot selection unsuccessful!
+You might have entered the wrong Module, Lesson Type or Class No.
+--------------------------------------------------------------------------------
+```
+
+3. The search is not in the expected format
+
+```
+select /mod CS2040 /type lecture /number 2 
+--------------------------------------------------------------------------------
+Error! 	Wrong format given, should be 
+	select [ /module [EXACT_MODULE_CODE] /type [LESSON_TYPE] /code [CLASS_NO] ]
+--------------------------------------------------------------------------------
+```
+
 ### Creating an NUSMod Link: `export`
 
 Creates a sharable NUSMod Link
