@@ -1,7 +1,5 @@
-
-RecipEditor is a hybrid CLI-GUI application that allows you to manage your recipes 
-
-
+# RecipEditor
+RecipEditor is a hybrid CLI-GUI application that allows you to manage your recipes
 
 - [Quick Start](#quick-start)
 - [Features](#features)
@@ -31,6 +29,8 @@ RecipEditor is a hybrid CLI-GUI application that allows you to manage your recip
 - FORMAT: `/add`
 ### GUI Editor
 - A simple GUI text editor will open and loaded with a template file
+
+
 ```
 # TITLE 
 Example Title 
@@ -44,6 +44,7 @@ Example Description
 # STEPS 
 1. Example step 
 ```
+
 
 <p align="center" width="100%">
   <img width="80%" src="images/TextEditorWithTemplate.png"/>
