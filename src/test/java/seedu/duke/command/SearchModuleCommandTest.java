@@ -9,6 +9,8 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import seedu.duke.exceptions.YamomException;
 import seedu.duke.model.Module;
+import seedu.duke.utils.State;
+import seedu.duke.utils.Ui;
 
 public class SearchModuleCommandTest {
     @Test
@@ -142,6 +144,14 @@ public class SearchModuleCommandTest {
     @Test
     public void searchCommand_parsing_invalidSemester() {
         assertThrows(YamomException.class, () -> new SearchModuleCommand("search /title programming /sem 5"));
+        assertThrows(YamomException.class, () -> new SearchModuleCommand("search /title programming /sem one"));
+    }
+
+    @Test
+    public void searchCommand_parsing_invalidLevel() {
+        assertThrows(YamomException.class, () -> new SearchModuleCommand("search /title programming /level 0"));
+        assertThrows(YamomException.class, () -> new SearchModuleCommand("search /title programming /level 10"));
+        assertThrows(YamomException.class, () -> new SearchModuleCommand("search /title programming /level one"));
     }
 
     @Test
@@ -161,5 +171,12 @@ public class SearchModuleCommandTest {
         assertEquals(smc3.toSearchModuleTitle, null);
         assertEquals(smc3.toSearchModuleCode, "CS1");
         assertEquals(smc3.toSearchSemester, 3);
+    }
+
+    @Test
+    public void searchCommand_execution_noErrors() throws YamomException {
+        Ui ui = new Ui();
+        State state = new State();
+        new SearchModuleCommand("search /code CS1 /sem 3 /level 1").execute(state, ui, null);
     }
 }
