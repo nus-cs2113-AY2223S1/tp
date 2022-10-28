@@ -24,7 +24,7 @@ public class ExceptionMessages {
     public static final String MESSAGE_ITEM_NOT_FOUND = "This item cannot be found in the list";
     public static final String MESSAGE_SAME_OWNER = "User already has this item listed!";
     public static final String MESSAGE_PRICE_FORMAT_INVALID = "Price is a float, check your format";
-    public static final String MESSAGE_PRICE_OUT_OF_RANGE = "Price must be greater than 0 AND less than 10000";
+    public static final String MESSAGE_PRICE_OUT_OF_RANGE = "Price must be in range from 0 to 10000";
     public static final String MESSAGE_SORT_MODE_INVALID = "Mode of sorting is invalid";
     public static final String MESSAGE_PRICE_BOUNDARIES_INVALID =
             "Minimum price cannot be more than maximum price";
@@ -40,11 +40,15 @@ public class ExceptionMessages {
             "Duration cannot be less than 0 or more than 1461 days (4 years)";
     public static final String MESSAGE_STATUS_INVALID =
             "The status argument is invalid (only 2 status are accepted: finished or unfinished)";
+    public static final String MESSAGE_ITEM_TRANSACTION_OVERLAP =
+            "Your input transaction is unavailable during the input period";
 
     // Other messages
-    public static final String MESSAGE_INVALID_PARTS = "One of the parts is in incorrect format";
+    public static final String MESSAGE_INVALID_PARTS = "One or more of the parts is in incorrect format";
     public static final String MESSAGE_NUMBER_FORMAT_INVALID =
             "Number should only contain digit 0-9";
+    public static final String MESSAGE_CATEGORY_INDEX_FORMAT_INVALID =
+            "Category index should be a positive integer. Please use list-categories to get the index";
     public static final String MESSAGE_DATE_FORMAT_INVALID =
             "The date format is incorrect(YYYY-MM-DD)";
     public static final String MESSAGE_CREATED_DATE_RANGE_INVALID =

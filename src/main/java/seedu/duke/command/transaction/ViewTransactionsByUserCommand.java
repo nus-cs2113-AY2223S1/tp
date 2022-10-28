@@ -3,6 +3,7 @@ package seedu.duke.command.transaction;
 import seedu.duke.command.Command;
 import seedu.duke.exception.InsufficientArgumentsException;
 import seedu.duke.exception.InvalidArgumentException;
+import seedu.duke.exception.InvalidTransactionException;
 import seedu.duke.exception.UserNotFoundException;
 import seedu.duke.parser.CommandParser;
 import seedu.duke.transaction.TransactionList;
@@ -51,7 +52,8 @@ public class ViewTransactionsByUserCommand extends Command {
 
     @Override
     public boolean executeCommand()
-            throws InsufficientArgumentsException, UserNotFoundException, InvalidArgumentException {
+            throws InsufficientArgumentsException, UserNotFoundException,
+            InvalidArgumentException, InvalidTransactionException {
         String arg = getArgs();
         if (isValidUser(arg)) {
             TransactionList returnList = transactionList.getBorrowTransactionsByUser(arg);

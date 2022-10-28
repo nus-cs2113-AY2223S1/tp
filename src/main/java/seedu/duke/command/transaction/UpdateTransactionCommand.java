@@ -1,10 +1,10 @@
 package seedu.duke.command.transaction;
 
-
 import seedu.duke.command.Command;
 import seedu.duke.exception.DurationInvalidException;
 import seedu.duke.exception.InsufficientArgumentsException;
 import seedu.duke.exception.InvalidArgumentException;
+import seedu.duke.exception.InvalidTransactionException;
 import seedu.duke.exception.TransactionNotFoundException;
 import seedu.duke.ui.Ui;
 import seedu.duke.parser.CommandParser;
@@ -112,7 +112,7 @@ public class UpdateTransactionCommand extends Command {
      * @throws DurationInvalidException     If the number is less than 0
      */
     public boolean executeCommand() throws InvalidArgumentException, TransactionNotFoundException,
-            DurationInvalidException {
+            DurationInvalidException, InvalidTransactionException {
         String[] args = getArgsAddTxCmd();
         if (areValidArgs(args)) {
             String txId = args[0];
