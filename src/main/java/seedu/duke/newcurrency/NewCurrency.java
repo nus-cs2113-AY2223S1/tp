@@ -1,5 +1,6 @@
 package seedu.duke.newcurrency;
 
+import seedu.duke.Currency2D;
 import seedu.duke.CurrencyList;
 import seedu.duke.CurrencyStructure;
 import seedu.duke.exception.FinanceException;
@@ -12,7 +13,7 @@ import static seedu.duke.InputManager.receiveInputLine;
 
 public class NewCurrency {
 
-    public static void addNewCurrency() throws IOException {
+    public static void addNewCurrency() throws IOException, FinanceException {
 
         String newCurrency = "";
 
@@ -29,12 +30,13 @@ public class NewCurrency {
         NewCurrencyUi.showEnterCurrencyRatePrompt();
         Double rate = Double.valueOf(receiveInputLine());
 
-        //writing to the file
+        //getting the string line
         newCurrency = PersonalCurrencyList.getPersonalCurrencyFileLine(abbrName,fullName,symbol,rate);
+        int emptyIndex = Currency2D.getEmptyIndex();
 
+        Currency2D.addNewCurrency(emptyIndex,newCurrency);
 
-        NewCurrencyFileWorkings.writeToCurrencies(newCurrency);
-
+        abbrName = "!" + abbrName;
         //Adding to the list of currencies
         CurrencyStructure currency = new CurrencyStructure(abbrName, fullName, symbol, rate);
         currencyList.add(currency);
@@ -49,7 +51,7 @@ public class NewCurrency {
 
         //only if the currency we are trying to remove is personal, can we remove it
         if (currencyList.contains(currenctCurrency)) {
-            NewCurrencyFileWorkings.deleteFromCurrencies(currenctCurrency);
+            Currency2D.removeCurrency(currenctCurrency);
         } else {
             throw new FinanceException(FinanceException.ExceptionCollection.NOT_PERSONAL_CURRENCY);
         }

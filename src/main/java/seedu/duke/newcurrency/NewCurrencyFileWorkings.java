@@ -27,8 +27,10 @@ public class NewCurrencyFileWorkings {
     public static void deleteFromCurrencies(CurrencyStructure currency) throws FinanceException {
         String currencyLine;
         CurrencyStructure currencyListCurrency = CurrencyList.findCurrencyByAbbrName(currency.getAbbrName());
+        currencyList.indexOf(currencyListCurrency);
         currencyList.remove(currencyListCurrency);
         personalCurrencyList.remove(currency);
+
         Path path = Paths.get(FILE_PATH.toString(), "currencies.txt");
         File f = new File(path.toString());
         try {
