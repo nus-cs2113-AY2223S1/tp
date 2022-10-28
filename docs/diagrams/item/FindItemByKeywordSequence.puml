@@ -19,16 +19,18 @@ activate ":FindItemCommand"
 ":FindItemCommand" -> ":ItemList" : getItemsByKeyword()
 deactivate ":FindItemCommand"
 activate ":ItemList"
-":ItemList" -> ":returnList" : new ItemList()
-activate ":returnList"
-    loop for (Item item : this.itemList)
-        alt (item.getName()).toLowerCase().contains(keyword.toLowerCase())
-            ":ItemList" -> ":returnList" : Item
+":ItemList" -> ":ItemList" : new ItemList()
+activate ":ItemList"
+    loop until all items checked
+        opt (item.getName()).toLowerCase().contains(keyword.toLowerCase())
+            ":ItemList" -> ":ItemList" : addItem()
         end
     end
-":returnList" --> Ui
-deactivate ":returnList"
-Ui --> User: printResponse(returnList.toString());
+return
+return
+":FindItemCommand" -> "Ui": printResponse();
+deactivate ":FindItemCommand"
+Ui --> User:
 
 
 @enduml

@@ -22,7 +22,7 @@ class Transaction {
     + getReturnDate(): LocalDate
     + isFinished(): boolean
     + convertTransactionToFileFormat(): String
-    + updateDuration(int): Transaction
+    + update(int, double): Transaction
     + toString(): String
 }
 
@@ -32,7 +32,9 @@ class TransactionList {
     + getSize(): int
     + getTransactionList(): ArrayList<Transaction>
     + addTransaction(Transaction): void
-    updateTransactionDuration(String, int): Transaction
+    + updateTransaction(String, int, double): Transaction
+    + getBorrowTransactionsByUser(String): TransactionList
+    + getTotalMoneyTransacted(): double
     + deleteTransaction(String): void
     + getTransactionById(String): Transaction
     + hasThisBorrower(String): boolean

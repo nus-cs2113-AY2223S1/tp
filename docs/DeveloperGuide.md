@@ -144,7 +144,7 @@ This sector describe how features are implemented, where readers can get insight
 
 Given below is an example usage scenario and how the command mechanism behaves at each step.
 
-Step 1: The user types in the command in the command line. The CommandParser class checks if the command is valid through the createCommand() method, and either sends an exception, or send the input to the AddUserCommand class to be processed.
+Step 1: The user types in the command ```add-user /n [NAME] /a [AGE] /c [CONTACT]``` in the command line. The CommandParser class checks if the command is valid through the createCommand() method, and send the input to the ```AddUserCommand``` class to be processed.
 
 Step 2: The AddUserCommand command checks if the delimiters ('n', 'a', 'c') is present in the user input through the getArgsAddUserCmd() method. If not present, an exception will be thrown. The command also checks whether the input's final argument is valid through `isValidName()`, `isValidAge()`, `isValidContactNumber()` methods. An exception will also be thrown if the final argument does not satisfy the requirements (duplicate name, wrong range or format age, wrong contact length ,...).
 
@@ -161,9 +161,10 @@ The following sequence diagram shows how the add user operation works:
 
 Given below is an example usage scenario and how the command mechanism behaves at each step.
 
-Step 1: The user types in the command in the command line. The CommandParser class checks if the command is valid through the createCommand() method, and either sends an exception, or send the input to the RemoveUserCommand class to be processed.
+Step 1: The user types in the command ```remove-user \u [USERNAME]``` in the command line. The CommandParser class checks if the command is valid through the createCommand() method, and send the input to the ```RemoveUserCommand``` class to be processed.
 
-Step 2: The RemoveUserCommand command checks if the delimiters ('u') is present in the user input through the getArgsRemoveUserCmd() method. If not present, an exception will be thrown. The command also checks whether the input's final argument is valid (user can be deleted or not) by checking whether that user is currently borrowing or lending any item via `canDeleteUser()`, `isBorrowing()` and `isLending()` methods. An exception will also be thrown if the final argument does not satisfy the requirements (user not found, user is borrowing/lending).
+Step 2: The RemoveUserCommand command checks if the delimiters ('u') is present in the user input through the getArgsRemoveUserCmd() method. If not present, an exception will be thrown. The command also checks whether the input's final argument is valid 
+(user can be deleted or not) by checking whether that user is currently borrowing or lending any item via `canDeleteUser()`, `isBorrowing()` and `isLending()` methods. An exception will also be thrown if the final argument does not satisfy the requirements (user not found, user is borrowing/lending).
 
 Step 3: If all arguments are valid, then it finds and deletes the user in the userList by his/her name, which is unique. And all of his/her items stored in itemList are also deleted:
 
@@ -212,7 +213,7 @@ Step 4: After finding the user, a message will be displayed to the user via `Ui.
 The following sequence diagram shows how the view user operation works:
 ![viewUserSequence](images/ViewUserSequence.png)
 
-**...To be updated(Find user)**
+**...To be updated(Find user, View user debt)**
 
 ### 4.2. Item-related Features
 
@@ -222,9 +223,10 @@ The following sequence diagram shows how the view user operation works:
 
 Given below is an example usage scenario and how the command mechanism behaves at each step.
 
-Step 1: The user types in the command in the command line. The CommandParser class checks if the command is valid through the createCommand() method, and either sends an exception, or send the input to the AddItemCommand to be processed.
+Step 1: The user types in the command ```add-item /n [NAME] /c [CATEGORY] /p [PRICE] /o [OWNER]```. The CommandParser class checks if the command is valid through the createCommand() method, and send the input to the ```AddItemCommand``` to be processed.
 
-Step 2: The AddItemCommand command checks if the delimiters ('n', 'c', 'p', 'o') is present in the user input through the getArgsAddItemCmd() method. If not present, an exception will be thrown. The command also checks whether the input's final argument is valid through `isValidName()`, `isValidOwner()`, `isValidPrice()` and `isValidCatgoryNumber()` methods. An exception will also be thrown if the final argument does not satisfy the requirements (duplicate name of item of the same owner, owner not found, wrong range and format price,...).
+Step 2: The AddItemCommand command checks if the delimiters ('n', 'c', 'p', 'o') is present in the user input through the getArgsAddItemCmd() method. If not present, an exception will be thrown. The command also checks whether the input's final argument is valid through `isValidName()`, `isValidOwner()`, `isValidPrice()` and `isValidCatgoryNumber()` methods. 
+An exception will also be thrown if the final argument does not satisfy the requirements (duplicate name of item of the same owner, owner not found, wrong range and format price,...).
 
 Step 3: If all arguments are valid, then it creates a new `Item()` with `args[0]` is itemName, `args[2]` is categoryNumber, and `args[3]` is price and `args[4]` is owner's name
 
@@ -239,7 +241,7 @@ The following sequence diagram shows how the add item operation works:
 
 Given below is an example usage scenario and how the command mechanism behaves at each step.
 
-Step 1: The user types in the command in the command line. The CommandParser class checks if the command is valid through the createCommand() method, and either sends an exception, or send the input to the RemoveItemCommand to be processed.
+Step 1: The user types in the command ```remove-item /i [ITEMID]```. The CommandParser class checks if the command is valid through the createCommand() method, and send the input to the RemoveItemCommand to be processed.
 
 Step 2: The RemoveItemCommand command checks if the delimiters ('i') is present in the user input through the getArgsRemoveItemCmd() method. If not present, an exception will be thrown. The command also checks whether the input's final argument is valid (item can be deleted or not) by checking whether that item is available (not in any transaction). An exception will also be thrown if the final argument does not satisfy the requirements (item not found, item is unavailable).
 
@@ -343,8 +345,8 @@ Step 4: The ```executeCommand()``` of ExitCommand returns false, so Duke will re
 ### 4.2.8. Find Items by Keyword
 
 >This feature allow users to find items through the command ```find-item```.
-> 
-> Given below is an example usage scenario and how the command mechanism behaves at each step.
+
+Given below is an example usage scenario and how the command mechanism behaves at each step.
 
 Step 1: The user types in the command ```find-items /k [keyword]``` in the command line. The CommandParser class checks if the command is valid through the createCommand() method.
 
@@ -365,7 +367,7 @@ The following sequence diagram models the operation:
 
 Given below is an example usage scenario and how the command mechanism behaves at each step.
 
-Step 1: The user types in the command in the command line. The CommandParser class checks if the command is valid through the createCommand() method, and either sends an exception, or send the input to the AddTransactionCommand to be processed.
+Step 1: The user types in the command ```add-tx /i [ITEMID]/b [BORROWER] /d [DURATION] /c [createdDate]```. The CommandParser class checks if the command is valid through the createCommand() method, and send the input to the AddTransactionCommand to be processed.
 
 Step 2: The AddTransactionCommand command checks if the delimiters ('i', 'b', 'd', 'c') is present in the user input through the getArgsAddItemCmd() method. If not present, an exception will be thrown. The command also checks whether the input's final argument is valid through `isValidItem()`, `isValidBorrower()`, `isValidDuration()` and `isValidCreatedDate()` methods. An exception will also be thrown if the final argument does not satisfy the requirements (item not found, user not found, duration wrong format, createdDate wrong format...).
 
@@ -382,7 +384,7 @@ The following sequence diagram shows how the add transaction operation works:
 
 Given below is an example usage scenario and how the command mechanism behaves at each step.
 
-Step 1: The user types in the command in the command line. The CommandParser class checks if the command is valid through the createCommand() method, and either sends an exception, or send the input to the RemoveTransactionCommand to be processed.
+Step 1: The user types in the command ```remove-tx /t [TRANSACTIONID]```. The CommandParser class checks if the command is valid through the createCommand() method, and either sends an exception, or send the input to the RemoveTransactionCommand to be processed.
 
 Step 2: The RemoveTransactionCommand command checks if the delimiters ('t') is present in the user input through the getArgsRemoveTransactionCmd() method. If not present, an exception will be thrown. The command also checks whether the input's final argument is valid (transaction can be found). An exception will also be thrown if the final argument does not satisfy the requirements (transaction not found).
 
@@ -474,9 +476,11 @@ The following sequence diagram models the operation:
 ![updateTransactionSequence](images/UpdateTransactionSequence.png)
 
 
-**...To be updated(List, Update transaction)**
+**...To be updated(List transaction by User)**
 
 ### 4.4. Help Command
+
+**...To be updated**
 
 ### 4.5. Exit Command
 
