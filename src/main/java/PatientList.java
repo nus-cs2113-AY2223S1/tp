@@ -99,6 +99,10 @@ public class PatientList {
 
     }
 
+    public boolean isUniqueId(String patientID) {
+        return findPatient(patientID.toUpperCase()) == null;
+    }
+
     public ArrayList<Patient> getPatients() {
         return patients;
     }

@@ -8,6 +8,9 @@ Storage class and its functions are largely adapted from Dhanish's IP on Duke.
 
 ## Design & implementation
 
+
+### PatientList Component
+
 The Patient and PatientList classes are used in conjunction to manage patients, and the list of patients. Each patient has a name,
 a unique ID, a date of birth and gender. The PatientList class holds an ArrayList of Patients and manipulates them accordingly.
 
@@ -15,41 +18,59 @@ At the start of the program, a new PatientList object is instantiated. Through m
 relevant text files to create Patients that existed prior to the last closure of the program, and then adds these patients to the
 ArrayList in PatientList. This finishes the initial set-up.
 
-### Methods in PatientList class:
+![](images/PatientListInitialization.png)
 
-addPatient - this method takes in the aforementioned variables through UI class and parses them. If they are all valid, a new
-Patient is created and added to the ArrayList in PatientList.
+The above is a summary of the aforementioned process, omitting some commands in the code that has to do with Visits, Prescriptions and UI classes
+and related methods.
 
-findPatient - this method takes in an ID, iterates through the ArrayList of Patients and compares the ID with the ID of each of the
-existing Patients in the list. If there is a match, the corresponding Patient is returned. Else, returns null.
+The `PatientList` Component,
+ * stores the list of patients
+ * can add new patients to the list
+ * can modify the details of patients
+ * allows users to view all patients
+ * allows users to find a particular patient given ID
 
-retrievePatient - this method is very similar to findPatient, but instead of returning the Patient found, it prints out the details
-of the Patient using the toString method in the Patient class.
-
-listPatients - this method first checks if the ArrayList of Patients is non-empty. If not so, it prints a message that there are
+**Important methods in PatientList class:**
+* `addPatient` - this method takes in the aforementioned variables through UI class and parses them. If they are all valid, a new
+`Patient` is created and added to the list of `Patient`s in PatientList.
+* `findPatient` - this method takes in an `ID`, iterates through the list of Patients and compares the `ID` with the `ID` of each of the
+existing `Patient`s in the list. If there is a match, the corresponding `Patient` is returned. Else, returns null.
+* `retrievePatient` - this method is very similar to findPatient, but instead of returning the Patient found, it prints out the details
+of the `Patient` using the `toString` method in the `Patient` class.
+* `listPatients` - this method first checks if the list of `Patient`s is non-empty. If not so, it prints a message that there are
 no patients in the system currently and terminates.
-Else, it iterates through the ArrayList of Patients and uses the toString method in Patient to print out the details of each Patient.
-
-modifyPatientDetails - this method takes in name, birthDate, gender and ID. It tries to find the patient with a matching ID.
-If the patient is not found, returns. Else, if the name is not an empty String, replace the existing name with the input name.
-Repeat for birthDate and gender.
+Else, it iterates through the list of `Patient`s and uses the `toString` method in `Patient` to print out the details of each `Patient`.
+* `modifyPatientDetails` - this method takes in `name`, `birthDate`, `gender` and `ID`. It tries to find the patient with a matching `ID`.
+If the `Patient` is not found, returns. Else, if the name is not an empty `String`, replace the existing `name` with the input `name`.
+Repeat for `birthDate` and `gender`.
 
 ### VisitList Component
 The `VisitList` Component,
 * stores the list of visits
 * can add new visit to the list
 * can edit reason for an existing visit in the list
+* can delete reason for an existing visit with reason in the list
 * can view all visits in the list
 * can view all visits for a patient
 * can view a specific visit
 * depends on `UI` class (as the `VisitList` component interacts with user through the UI component, and makes use of its methods to print details)
 
-**Methods in `VisitList` class:**
-* `addVisit` - This method allows user to add a visit to the `VisitList` by specifying `id` of patient, `dateOfVisit`, and `timeOfVisit`.
-* `editReason` - This method allows user to edit reason for an existing visit, by specifying `id` of patient and `reason` for visit
+**Important Methods in `VisitList` class:**
+* `addVisit` - This method allows user to add a visit to the `VisitList` by specifying `id` of patient, `dateOfVisit`, `timeOfVisit` 
+and `reason`. `reason` is optional, and it can be left blank, and be modified later on via the `editReason` method.
+* `editReason` - This method allows user to edit reason for an existing visit, by specifying `index` of visit and `reason` for visit. `reason` must not be left blank here, 
+as it is equivalent to deleting a reason, for which a user should use the `deleteReason` method instead.
+* `deleteReason` - This method allows user to delete reason for an existing visit, by specifying `index` of the visit.
 * `viewAll` - This method iterates through the list of all visits, and prints each visit record
 * `viewPatient` - This method iterates through the list of all visits, and prints the visit records that match the specified `id` of patient
 * `viewVisit` - This method iterates through the list of all visits, and prints the visit record that matches the specified `index` of the visit
+
+**How Adding a new Visit into the VisitList Works**
+
+![](images/VisitListAdd.png)
+1. `VisitList` is first called to add a new visit with the required details. This calls the constructor class of `Visit` class to create an instance of `Visit`
+2. The new visit is then added to the `ArrayList<Visit>`
+3. Lastly, the 'UI' class is called, to print a confirmation message that the visit has been added, and prints out the details of this new visit.
 
 ### PrescriptionList component
 **API**: `PrescriptionList.java`
