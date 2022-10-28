@@ -17,6 +17,13 @@ medicine information via Command Line Interface.
               - [Viewing list of patients: `viewAll`](#viewing-all-patients-viewall)
               - [Retrieving a patient: `retrieve`](#retrieving-a-patients-records-retrieve)
               - [Modifying a patient’s record: `edit`](#modifying-the-details-of-a-patient-edit)
+          + [2.Visit](#2-visit)
+            - [Adding a visit: `add`](#adding-a-new-visit-add)
+            - [Adding/editing a reason for existing visit: `edit`](#edit-reason-for-visit-editReason)
+            - [Deleting a reason for existing visit: `deleteReason`](#delete-reason-for-visit-deleteReason)
+            - [Viewing all visits: `viewAll`](#viewing-all-visits-viewAll)
+            - [Viewing a patient's visits: `viewPatient`](#viewing-all-visits-of-patient-viewPatient)
+            - [Viewing a specific visit: `viewVisit`](#view-specific-visit-viewVisit)
           + [3. Prescription](#3-prescription)
             - [Adding New Prescription: `add`](#adding-new-prescription-add)
             - [Modifying a patient’s prescription: `edit`](#modifying-a-patients-prescription-edit)
@@ -177,7 +184,152 @@ Alright, I've modified the details of the patient! Here are the new details of t
     ID: T0707075F
     ____________________________________________________________
 ```
+### 2. Visit
+#### Adding a visit: `add`
+Adds a new visit to the list of visits.
 
+Acceptable Formats:
+
+1.`add i/[ID] d/[date] t/[time]`
+
+2.`add i/[ID] d/[date] t/[time] r/[reason]`
+
+* The `ID` should be the ID of a patient that is already present in the patient list
+* `date` must be in DD-MM-YYYY format
+* `time` must be in HH:MM format
+* The `reason` is optional, and can be in any alphabets, numbers and spaces.
+
+Example of usage:
+
+`add i/S123 d/30-02-2020 t/15:00 r/flu`
+
+Expected Output:
+```
+You have added a visit!
+	____________________________________________________________
+	ID: S123
+	Date: 30-02-2020
+	Time: 15:00
+	Reason: flu
+	____________________________________________________________
+```
+
+### Adding/editing a reason for existing visit: `edit`
+Add/edit reason for an existing visit in the list of visits
+
+Format: `edit x/[index] r/[reason]`
+* The `index` refers to the overall index of the visit (VisitIndex), in the list of visits
+* `reason` can be in any alphabets, numbers and spaces, but cannot be left blank.
+
+Example of usage: 
+
+`edit x/3 r/fever`
+
+Expected Output:
+```
+You have edited reason for the visit. Here's the updated visit!
+	____________________________________________________________
+	ID: S123
+	Date: 30-02-2020
+	Time: 15:00
+	Reason: fever
+	____________________________________________________________
+```
+### Deleting a reason for existing visit: `deleteReason`
+Add/edit reason for an existing visit in the list of visits
+
+Format: `deleteReason x/[index]`
+* The `index` refers to the overall index of the visit (VisitIndex), in the list of visits
+
+Example of usage:
+
+`deleteReason x/3`
+
+Expected Output:
+```
+You have deleted the reason for the visit. Here's the updated visit!
+	____________________________________________________________
+	ID: S123
+	Date: 30-02-2020
+	Time: 15:00
+	Reason: NIL
+	____________________________________________________________
+```
+### Viewing all visits: `viewall`
+View all the current visits in the list of visits.
+
+Format: `viewall`
+
+Example of usage:
+
+`viewall`
+
+Expected Output:
+```
+Here are the list of visits in the system:
+	____________________________________________________________
+VisitIndex #1)
+	ID: T1
+	Date: 08-11-2022
+	Time: 08:00
+	Reason: checkup
+	____________________________________________________________
+VisitIndex #2)
+	ID: T2
+	Date: 08-15-2022
+	Time: 09:00
+	Reason: new medication
+	____________________________________________________________
+VisitIndex #3)
+	ID: S123
+	Date: 30-02-2020
+	Time: 15:00
+	Reason: NIL
+	____________________________________________________________
+
+```
+
+### Viewing a patient's visits: `viewPatient`
+View all visits belonging to a specific patient.
+
+Format: `viewPatient i/[ID]`
+* The `ID` should be the ID of a patient that is already present in the patient list
+
+Example of usage:
+
+`viewPatient i/S123`
+
+Expected Output:
+```
+Here are the list of visits for Patient with ID: S123
+	____________________________________________________________
+VisitIndex #3)
+	ID: S123
+	Date: 30-02-2020
+	Time: 15:00
+	Reason: NIL
+	____________________________________________________________
+```
+### Viewing a specific visit: `viewVisit`
+Viewing a specific visit belonging to some patient.
+
+Format: `viewVisit x/[index]`
+* The `index` refers to the overall index of the visit (VisitIndex), in the list of visits
+
+Example of usage:
+
+`viewVisit x/3`
+
+Expected Output:
+```
+Here is the visit with VisitIndex 3:
+	____________________________________________________________
+	ID: S123
+	Date: 30-02-2020
+	Time: 15:00
+	Reason: NIL
+	____________________________________________________________
+```
 ### 3. Prescription
 
 #### Adding New Prescription: `add`
