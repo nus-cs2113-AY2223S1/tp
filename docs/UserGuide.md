@@ -312,17 +312,17 @@ Example of usage:
 ### Editing a target: `Edit-Target`
 Edits an existing target in the list of targets.
 
-Syntax: `Edit-Target -e INCOME_NUMBER [-n NAME] [-a AMOUNT] [-c CURRENT_AMOUNT] [-d DATE_TIME] [-t DESCRIPTION]`
+Syntax: `Edit-Target -e TARGET_NUMBER [-n NAME] [-a AMOUNT] [-c CURRENT_AMOUNT] [-d DATE_TIME] [-t DESCRIPTION]`
 
 > ⚠️️️️ Syntax Notes
-> * `INCOME_NUMBER` is an integer value.
+> * `TARGET_NUMBER` is an integer value.
 > * `NAME` and `DESCRIPTION` are text strings. You may use spaces within the text if you wrap the text with double quotes.
 > * `AMOUNT` and `CURRENT_AMOUNT` is a decimal value.
 > * `DATE_TIME` is a text string in the format `"dd/MM/yyyy HHmm"`.
 
 Example of usage:
 * `Edit-Target -e 1 -n "October Target" -a 100.00`
-* `Edit-Income -e 1 -n "Monthly Target" -a 3000 -c 1200 -d "01/01/2022 2359" -t "Monthly payment"`
+* `Edit-Target -e 1 -n "Monthly Target" -a 3000 -c 1200 -d "01/01/2022 2359" -t "Monthly payment"`
 
 <hr>
 
