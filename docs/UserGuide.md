@@ -19,16 +19,10 @@ A command line / GUI application that allows you to manage your recipes
 
 Adds a new recipe to the list.
 
-Format: `todo n/TODO_NAME d/DEADLINE`
+Format: `/add`
 
-* The `DEADLINE` can be in a natural language format.
-* The `TODO_NAME` cannot contain punctuation.
+This will bring you to the add mode of the recipEditor.
 
-Example of usage:
-
-`todo n/Write the rest of the User Guide d/next week`
-
-`todo n/Refactor the User Guide to remove passive voice d/13/04/2020`
 
 ### List all recipes: `/list`
 
@@ -75,14 +69,3 @@ Example of usage:
 ### Exit program: `/exit`
 
 
-## FAQ
-
-**Q**: How do I transfer my data to another computer? 
-
-**A**: {your answer here}
-
-## Command Summary
-
-{Give a 'cheat sheet' of commands here}
-
-* Add todo `todo n/TODO_NAME d/DEADLINE`
