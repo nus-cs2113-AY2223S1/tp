@@ -27,13 +27,13 @@ public class Storage {
             if (isFlight) {
                 String[] details = inputFromFile.split("\\|");
                 FlightInfo flight;
-                String flightNumber =details[0];
+                String flightNumber = details[0];
                 String airline = details[1];
                 String destination = details[2];
                 String departureTime = details[3];
                 String gateNumber = details[4];
-                String checkInRowDoor =  details[5];
-                flight = new FlightInfo(flightNumber,airline,destination,departureTime,gateNumber,checkInRowDoor);
+                String checkInRowDoor = details[5];
+                flight = new FlightInfo(flightNumber, airline, destination, departureTime, gateNumber, checkInRowDoor);
                 flights.add(flight);
             }
         }
@@ -57,8 +57,8 @@ public class Storage {
                 String boardingGroup = details[4];
                 String seatNumber = details[5];
                 String boardingTime = details[6];
-                passenger = new PassengerInfo(passengerName, departureTime,flightNumber,gateNumber,
-                        Integer.parseInt(boardingGroup), seatNumber,boardingTime);
+                passenger = new PassengerInfo(passengerName, departureTime, flightNumber, gateNumber,
+                        Integer.parseInt(boardingGroup), seatNumber, boardingTime);
                 passengers.add(passenger);
             }
             passengerList.insertPassengers(passengers);
