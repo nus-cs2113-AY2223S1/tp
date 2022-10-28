@@ -13,9 +13,10 @@ class Transaction {
     - duration: Integer
     - createdAt: LocalDate
     - returnedAt: LocalDate
+    - moneyTransacted: double
 
-    + Transaction(String, String, String, int, LocalDate)
-    + Transaction(String, String, String, String, int, LocalDate)
+    + Transaction(String, String, String, int, LocalDate, double)
+    + Transaction(String, String, String, String, int, LocalDate, double)
     + getTxId(): String
     + getItemId(): String
     + getBorrower(): String
