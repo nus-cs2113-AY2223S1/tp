@@ -1,4 +1,5 @@
 @startuml
+hide footbox
 box Main
 Participant ":Duke" as Duke
 end box
@@ -35,7 +36,8 @@ Parser --> Duke
 deactivate Parser
 Duke -> Command : execute()
 activate Command
-Command -> State : get/update state
+note over Command: Actual logic here is \ndelegated to command\nsubclasses
+Command -> State : get and/or update state
 activate State
 State --> Command
 deactivate State
@@ -51,4 +53,5 @@ Duke -> Storage : saveState()
 activate Storage
 Storage --> Duke
 deactivate Storage
+deactivate Duke
 @enduml
