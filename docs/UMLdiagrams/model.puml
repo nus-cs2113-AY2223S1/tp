@@ -13,7 +13,7 @@ class State {
 + removeSelectedModule(module:SelectedModule)
 }
 
-State *-- "*" SelectedModule
+State --> "*" SelectedModule
 
 class SelectedModule {
 - module:Module
@@ -23,13 +23,13 @@ class SelectedModule {
 + getSelectedSlots() : Map<LessonType, String>
 }
 
-SelectedModule *-- "1" Module
+SelectedModule --> "1" Module
 
 class ModuleLoader {
 ~ loadModules() : List<Module>
 }
 
-ModuleLoader -- Module
+ModuleLoader -- Module : loads >
 
 class Module {
 + acadYear : String
@@ -63,7 +63,7 @@ class SemesterData {
 + getClassNosByType(type:LessonType) : Set<String>
 }
 
-Module *-- "1..4" SemesterData : Offered in
+Module --> "1..4" SemesterData : Offered in
 
 class RawLesson {
 + classNo : String
@@ -76,7 +76,7 @@ class RawLesson {
 + size : int
 }
 
-SemesterData *-- "1..*" RawLesson
+SemesterData --> "1..*" RawLesson
 
 enum LessonType {
     DESIGN_LECTURE
@@ -111,13 +111,13 @@ class DayParser {
 {static} + parse(day: String):Day
 }
 
-ModuleLoader -- LessonTypeParser
-ModuleLoader -- DayParser
-LessonTypeParser -- LessonType
-DayParser -- Day
+ModuleLoader ..> LessonTypeParser
+ModuleLoader ..> DayParser
+LessonTypeParser ..> LessonType
+DayParser ..> Day
 
-SelectedModule -- LessonType
-SemesterData -- LessonType
-RawLesson -- LessonType
-RawLesson -- Day
+SelectedModule ..> LessonType
+SemesterData --> LessonType
+RawLesson --> LessonType
+RawLesson --> Day
 @enduml
