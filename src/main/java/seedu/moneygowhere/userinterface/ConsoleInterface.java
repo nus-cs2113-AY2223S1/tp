@@ -486,7 +486,7 @@ public class ConsoleInterface {
             expense.setRemarks(consoleCommandEditExpense.getRemarks());
         }
         if (consoleCommandEditExpense.isCurrencySet()) {
-            String currency = consoleCommandEditExpense.getCurrency();
+            String currency = consoleCommandEditExpense.getCurrency().toUpperCase();
 
             try {
                 currencyManager.hasCurrency(currency);
