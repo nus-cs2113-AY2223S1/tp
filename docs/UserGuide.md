@@ -9,11 +9,9 @@ A command line / GUI application that allows you to manage your recipes
 {Give steps to get started quickly}
 
 1. Ensure that you have Java 11 or above installed.
-1. Down the latest version of `RecipEditor` from [here](http://link.to/duke).
+1. Down the latest version of `RecipEditor` from [here]([https://github.com/AY2223S1-CS2113-T18-2/tp/releases]).
 
 ## Features 
-
-{Give detailed description of each feature}
 
 ### Adding recipe: `/add`
 
@@ -22,6 +20,10 @@ Adds a new recipe to the list.
 Format: `/add`
 
 This will bring you to the add mode of the recipEditor.
+
+You will encounter Recipe Title, Recipe Description, Recipe Ingredients and Recipe Steps sections.
+You will be prompted to fill in each section sequentially.
+For the sections on ingredients and steps, you can add in however many you would like, until your enter 'done' in the CLI, and that will bring you to either the next section or exit the add mode for you.
 
 
 ### List all recipes: `/list`
