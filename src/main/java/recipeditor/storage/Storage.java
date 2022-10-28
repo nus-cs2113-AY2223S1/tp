@@ -19,10 +19,10 @@ import recipeditor.ui.Ui;
 
 public class Storage {
 
-    public static final String TEMPLATE_PATH = "./Storage/App/Template.txt";
-    public static final String TEMPORARY_PATH = "./Storage/App/Temp.txt";
-    private static final String DATA_STORAGE_PATH = "./Storage/";
-    private static final String DATA_TEMPORARY_PATH = "./Storage/App";
+    public static final String TEMPLATE_PATH = "./RecipeData/App/Template.txt";
+    public static final String TEMPORARY_PATH = "./RecipeData/App/TemporaryFile.txt";
+    private static final String DATA_STORAGE_PATH = "./RecipeData/";
+    private static final String DATA_TEMPORARY_PATH = "./RecipeData/App";
     private static final String TEMPLATE_FILE = "# TITLE \n"
             + "Example Title \n\n"
             + "# DESCRIPTION\n"
@@ -39,6 +39,15 @@ public class Storage {
     private static final String RECIPE_STEPS_FIELD_TYPE = "Recipe Steps";
 
     private static final Logger logger = Logger.getLogger(Storage.class.getName());
+
+    public static void createFolder(String folderPath) {
+        try {
+            Files.createDirectories(Paths.get(folderPath));
+            logger.log(Level.INFO, folderPath + " Directory created");
+        } catch (IOException e) {
+            logger.log(Level.WARNING, "Error creating folder");
+        }
+    }
 
     public static void createFile(String filePath) {
         try {
@@ -63,15 +72,11 @@ public class Storage {
         try {
             Files.createDirectories(Paths.get(DATA_STORAGE_PATH));
             Files.createDirectories(Paths.get(DATA_TEMPORARY_PATH));
-            logger.log(Level.INFO, "Directory created");
+            logger.log(Level.INFO, DATA_STORAGE_PATH + " Directory created");
             templateFile();
         } catch (IOException e) {
             logger.log(Level.WARNING, "Error creating folder");
         }
-    }
-
-    public static void saveRecipe() {
-
     }
 
     public static void loadRecipeToFile(String filePath, Recipe recipe) {
@@ -184,7 +189,7 @@ public class Storage {
     private static void templateFile() {
         File file = new File(TEMPLATE_PATH);
         if (file.exists()) {
-            logger.log(Level.INFO, "Template File exits");
+            logger.log(Level.INFO, "Template File exists");
         } else {
             generateTemplateFile();
         }

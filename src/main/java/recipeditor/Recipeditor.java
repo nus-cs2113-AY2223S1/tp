@@ -10,7 +10,7 @@ import recipeditor.command.CommandResult;
 
 public class Recipeditor {
     public static final String DATA_FILE_PATH = "./data/data.txt";
-    public static final String TEMPORARY_DATA_FILE_PATH = "./data/temporary_data.txt";
+    public static final String RECIPES_FOLDER_PATH = "./RecipeData/Recipes";
 
     public static void main(String[] args) {
         run(args);
@@ -29,8 +29,8 @@ public class Recipeditor {
      */
     private static void start(String[] args) {
         Storage.createDataFolder();
+        Storage.createFolder(RECIPES_FOLDER_PATH);
         Ui.showGreeting();
-
     }
 
     /**

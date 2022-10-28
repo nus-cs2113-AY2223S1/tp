@@ -1,28 +1,16 @@
-Recipe Name: tomato rice
-Recipe Description: da
+Recipe Name: Example Title
+Recipe Description: 
+Example Description
 Recipe Ingredients: 
-fish  | 2.0 | da 
+Example ingredient | 1.2 |  example unit  
 Recipe Steps: 
-1) da
+1) Example step
 ____________________________________________________________
-Recipe Name: carbonara
-Recipe Description: dsa
+Recipe Name: HI
+Recipe Description: 
+Example Description
 Recipe Ingredients: 
-mushroom | 32.0 | fd 
+Example ingredient | 1.2 |  example unit  
 Recipe Steps: 
-1) adsa
-____________________________________________________________
-Recipe Name: fried rice
-Recipe Description: gdjfl
-Recipe Ingredients: 
-egg | 4.0 | e 
-Recipe Steps: 
-1) da
-____________________________________________________________
-Recipe Name: mango pudding
-Recipe Description: jgifd
-Recipe Ingredients: 
-mango | 1.0 | kg 
-Recipe Steps: 
-1) fdslkj
+1) Example step
 ____________________________________________________________
