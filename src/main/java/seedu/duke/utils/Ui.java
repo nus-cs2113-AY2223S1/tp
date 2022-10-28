@@ -1,9 +1,12 @@
 package seedu.duke.utils;
 
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import org.apache.commons.lang3.StringUtils;
+
+import seedu.duke.command.ExitCommand;
 
 //@author CheahHaoYi-reused
 //Reused from CheahHaoYi/ip Ui class with slight modification
@@ -41,8 +44,16 @@ public class Ui {
         scanner.close();
     }
 
+    private String sanitizeInput(String input) {
+        return input.replaceAll("[\\P{ASCII}]", "");
+    }
+
     public String readNext() {
-        return scanner.nextLine().trim();
+        try {
+            return sanitizeInput(scanner.nextLine().trim());
+        } catch (NoSuchElementException | IllegalStateException e) {
+            return ExitCommand.COMMAND_WORD;
+        }
     }
 
     /**
