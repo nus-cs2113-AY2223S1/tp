@@ -9,26 +9,22 @@ A command line / GUI application that allows you to manage your recipes
 {Give steps to get started quickly}
 
 1. Ensure that you have Java 11 or above installed.
-1. Down the latest version of `RecipEditor` from [here](http://link.to/duke).
+1. Down the latest version of `RecipEditor` from [here]([https://github.com/AY2223S1-CS2113-T18-2/tp/releases]).
 
 ## Features 
-
-{Give detailed description of each feature}
 
 ### Adding recipe: `/add`
 
 Adds a new recipe to the list.
 
-Format: `todo n/TODO_NAME d/DEADLINE`
+Format: `/add`
 
-* The `DEADLINE` can be in a natural language format.
-* The `TODO_NAME` cannot contain punctuation.
+This will bring you to the add mode of the recipEditor.
 
-Example of usage:
+You will encounter Recipe Title, Recipe Description, Recipe Ingredients and Recipe Steps sections.
+You will be prompted to fill in each section sequentially.
+For the sections on ingredients and steps, you can add in however many you would like, until your enter 'done' in the CLI, and that will bring you to either the next section or exit the add mode for you.
 
-`todo n/Write the rest of the User Guide d/next week`
-
-`todo n/Refactor the User Guide to remove passive voice d/13/04/2020`
 
 ### List all recipes: `/list`
 
@@ -75,14 +71,3 @@ Example of usage:
 ### Exit program: `/exit`
 
 
-## FAQ
-
-**Q**: How do I transfer my data to another computer? 
-
-**A**: {your answer here}
-
-## Command Summary
-
-{Give a 'cheat sheet' of commands here}
-
-* Add todo `todo n/TODO_NAME d/DEADLINE`
