@@ -1,6 +1,8 @@
 package seedu.duke.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.List;
@@ -45,6 +47,21 @@ public class ModuleTest {
         List<RawLesson> recitations = timetable.stream().filter(s -> s.lessonType == LessonType.RECITATION)
                 .collect(Collectors.toList());
         assertEquals(12, recitations.size());
+    }
+
+    @Test
+    public void module_offeredInSemester_isCorrect() {
+        Module module = Module.get("CS2113");
+        assertTrue(module.isOfferedInSemester(1));
+        assertTrue(module.isOfferedInSemester(2));
+        assertFalse(module.isOfferedInSemester(3));
+        assertFalse(module.isOfferedInSemester(4));
+    }
+
+    @Test
+    public void module_getLevel_computedCorrectly() {
+        assertEquals(Module.get("CS2113").getLevel(), 2);
+        assertEquals(Module.get("YSC3209").getLevel(), 3);
     }
 
 }

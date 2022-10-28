@@ -1,6 +1,5 @@
 package seedu.duke.command;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import seedu.duke.exceptions.YamomException;
 import seedu.duke.model.Module;
@@ -16,8 +15,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertNull;
-
 
 
 class AddModuleCommandTest {
@@ -56,37 +53,16 @@ class AddModuleCommandTest {
     }
 
     @Test
-    void testIsExit_false() throws YamomException {
-        String[] testInput = {"add","cs2113"};
+    void addCommand_testIsExit_correctOutput() throws YamomException {
+        String[] testInput = { "add", "cs2113" };
         assertFalse(new AddModuleCommand(testInput).isExit());
-    }
-
-
-    @Test
-    void testGetCommandDescription_CorrectCommandDescription() throws YamomException {
-        assertEquals("add\t: add a module into YAMOM timetable.", AddModuleCommand.getCommandDescription());
-    }
-
-    @Test
-    void testGetUsage_CorrectUsageDescription() {
-        assertEquals("add [MODULE_CODE]", AddModuleCommand.getUsage());
     }
 
     @Test
     void testIsModuleExistWithInvalidInput_ExpectFalse() {
         String invalidModuleCode = "cs1111";
-        Module module = Module.get(invalidModuleCode);
-        assertFalse(AddModuleCommand.isModuleExist(module));
+        assertThrows(YamomException.class,
+            () -> new AddModuleCommand(new String[]{ "add", invalidModuleCode }));
     }
 
-    @Test
-    void testIsModuleOfferedInCurrentSemesterWithInvalidStateSemester_ExpectFalse() {
-        State state = new State();
-        int semester = 4;
-        state.setSemester(semester);
-        String moduleCode = "cs2113";
-        Module module = Module.get(moduleCode);
-
-        assertFalse(AddModuleCommand.isModuleOfferedInCurrentSemester(module, state));
-    }
 }

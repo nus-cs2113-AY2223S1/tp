@@ -19,7 +19,7 @@ public class DeleteModuleCommand extends Command {
     private boolean successful;
 
     public static final String COMMAND_WORD = "delete";
-    public static final String COMMAND_USAGE = "delete [MODULE_CODE]";
+    public static final String COMMAND_USAGE = "delete [ MODULE_CODE ]";
     public static final String COMMAND_DESCRIPTION = "remove a module from YAMOM timetable.";
 
     private static final String ERROR_WRONG_FORMAT = "Wrong format, should be: " + COMMAND_USAGE;

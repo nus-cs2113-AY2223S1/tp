@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 
 public class ImportCommand extends Command {
     public static final String COMMAND_WORD = "import";
-    public static final String COMMAND_USAGE = "import [NUSMods_LINK]";
+    public static final String COMMAND_USAGE = "import [ NUSMODS_LINK ]";
     public static final String COMMAND_DESCRIPTION = "Imports a timetable "
             + " from an NUSMod timetable sharing link";
 
