@@ -190,25 +190,35 @@ public class Duke {
             throws InvalidUserCommandException {
         try {
             Lesson lesson = addCommand.getLesson();
+            String universityName = addCommand.getUniversityName();
+            String moduleCode = addCommand.getModuleCode();
             if (lesson != null) {
+                if (!userUniversityListManager.getList(universityName).getMyModules().containModules(moduleCode)) {
+                    addModuleToList(userUniversityListManager,addCommand);
+                }
                 timetableManager.addLesson(lesson, false);
                 UserStorageParser.storeTimetable(timetableManager);
             } else {
-                String moduleCode = addCommand.getModuleCode();
-                String universityName = addCommand.getUniversityName();
-                ModuleMapping moduleMapping = Database.findPuMapping(moduleCode);
-                Module puModule = moduleMapping.getPartnerUniversityModule();
-                Module nusModule = moduleMapping.getNusModule();
-                UserModuleMapping userModuleToAdd = new UserModuleMapping(puModule.getCode(),
-                        puModule.getTitle(), nusModule.getCode(), nusModule.getTitle(),
-                        nusModule.getCredit(), puModule.getCredit(), puModule.getUniversity().getName(),
-                        puModule.getUniversity().getCountry());
-                userUniversityListManager.addModule(universityName, userModuleToAdd);
-                UserStorageParser.storeCreatedLists(userUniversityListManager);
+                addModuleToList(userUniversityListManager, addCommand);
             }
         } catch (ModuleNotFoundException | NoSuchElementException | InvalidUniversityException e) {
             Ui.printExceptionMessage(e);
         }
+    }
+
+    private static void addModuleToList(UserUniversityListManager userUniversityListManager, AddCommand addCommand)
+            throws ModuleNotFoundException, InvalidUserCommandException {
+        String moduleCode = addCommand.getModuleCode();
+        String universityName = addCommand.getUniversityName();
+        ModuleMapping moduleMapping = Database.findPuMapping(moduleCode);
+        Module puModule = moduleMapping.getPartnerUniversityModule();
+        Module nusModule = moduleMapping.getNusModule();
+        UserModuleMapping userModuleToAdd = new UserModuleMapping(puModule.getCode(),
+                puModule.getTitle(), nusModule.getCode(), nusModule.getTitle(),
+                nusModule.getCredit(), puModule.getCredit(), puModule.getUniversity().getName(),
+                puModule.getUniversity().getCountry());
+        userUniversityListManager.addModule(universityName, userModuleToAdd);
+        UserStorageParser.storeCreatedLists(userUniversityListManager);
     }
 
     /**
