@@ -17,8 +17,8 @@ public class ImportCommandTest {
         State state = new State();
         Ui ui = new Ui();
         new ImportCommand(new String[]{ 
-                "import", 
-                "https://nusmods.com/timetable/sem-1/share?CS101010=LAB:B03,SEC:1,TUT:01" })
+            "import", 
+            "https://nusmods.com/timetable/sem-1/share?CS101010=LAB:B03,SEC:1,TUT:01" })
                 .execute(state, ui, null);
         assertEquals(0, state.getSelectedModulesList().size());
     }
