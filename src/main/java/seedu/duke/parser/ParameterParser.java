@@ -29,6 +29,7 @@ import seedu.duke.exception.StatsInvalidTypeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -452,7 +453,7 @@ public class ParameterParser {
     public static LocalDate parseDateTag(String parameter) throws InputTransactionInvalidDateException {
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_INPUT_PATTERN.toString());
-            LocalDate date = LocalDate.parse(parameter, formatter);
+            LocalDate date = LocalDate.parse(parameter, formatter.withResolverStyle(ResolverStyle.STRICT));
             return date;
         } catch (DateTimeParseException exception) {
             parserLogger.log(Level.WARNING, "An invalid date error "
