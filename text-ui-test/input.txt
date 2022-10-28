@@ -10,11 +10,8 @@ flight add fn/SQ832 a/Singapore Airlines d/Bangkok dt/1700 gn/14 c/03-03
 flight add fn/sq712 a/SINGAPORE Airlines d/bangkok dt/3000 gn/14 c/03-03
 flight delete SQ324
 passenger add
-passenger list
 flight add
-flight list
 Passenger delete n/Ivan Theng fn/sq832 sn/17d dt/2145
-passenger list
 passenger
 flight
 modify
@@ -26,6 +23,4 @@ modify sq832 fn/sq234
 modify sq234 gn/04
 modify sq234
 modify sq234 fn/sq712
-passenger list
-flight list
 bye
