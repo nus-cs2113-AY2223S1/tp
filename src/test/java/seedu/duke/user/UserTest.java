@@ -1,13 +1,30 @@
 package seedu.duke.user;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class UserTest {
+
+    User user;
+    @BeforeEach
+    void initializeTest() {
+        user = new User("yixiang", 22, "98126666");
+    }
+
     @Test
     void testStatus() {
-        User user = new User("John Doe", 45, "93746378");
-        assertEquals("Username: John Doe Age: 45 Contact: 93746378 ", user.toString());
+        assertEquals("Username: yixiang Age: 22 Contact: 98126666 ", user.toString());
+    }
+
+    @Test
+    void getNameTest() {
+        assertEquals("yixiang", user.getName());
+    }
+
+    @Test
+    void convertUserToFileFormatTest() {
+        assertEquals("yixiang | 22 | 98126666", user.convertItemToFileFormat());
     }
 }

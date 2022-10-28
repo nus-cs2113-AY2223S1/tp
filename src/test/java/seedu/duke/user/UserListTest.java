@@ -1,47 +1,68 @@
 package seedu.duke.user;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.duke.exception.UserNotFoundException;
-import seedu.duke.user.User;
-import seedu.duke.user.UserList;
+
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class UserListTest {
 
+    UserList userList;
+    User user;
+
+    @BeforeEach
+    void initializeTest() {
+        userList = new UserList();
+        user = new User("yixiang", 22, "98126666");
+    }
+
+    @Test
+    void constructorTest() {
+        ArrayList<User> userArrayList = new ArrayList<>();
+        userArrayList.add(user);
+        UserList userListNew = new UserList(userArrayList);
+        assertEquals(1, userListNew.getSize());
+    }
+
     @Test
     void add_addOneUser_expectSizeOne() {
-        UserList userList = new UserList();
-        User user = new User("John Doe", 45, "93746378");
         userList.addUser(user);
         assertEquals(1, userList.getSize());
     }
 
     @Test
     void getUser_getTheFirstUser_expectTheFirstUser() {
-        UserList userList = new UserList();
-        User user = new User("John Doe", 45, "93746378");
         userList.addUser(user);
         assertEquals(user, userList.getUser(1));
     }
 
     @Test
     void findUser_findUserUsingId_expectTheUserObject() throws UserNotFoundException {
-        UserList userList = new UserList();
-        User user = new User("John Doe", 45, "93746378");
         userList.addUser(user);
-        assertEquals(user, userList.getUserById("John Doe"));
+        assertEquals(user, userList.getUserById("yixiang"));
     }
 
     @Test
     void deleteUser_deleteUserUsingId_expectNoUser() throws UserNotFoundException {
-        UserList userList = new UserList();
-        User user = new User("John Doe", 45, "93746378");
-        User user2 = new User("Jane Doe", 40, "92744873");
         userList.addUser(user);
-        userList.addUser(user2);
-        userList.deleteUser("John Doe");
-        assertEquals(1, userList.getSize());
+        userList.deleteUser("yixiang");
+        assertEquals(0, userList.getSize());
     }
 
+    @Test
+    void getUsersByKeyword_expectUserList() throws UserNotFoundException {
+        userList.addUser(user);
+        User user2 = new User("John Doe", 22, "92343802");
+        userList.addUser(user2);
+        assertEquals(1, userList.getUsersByKeyword("John").getSize());
+    }
+
+    @Test
+    void convertUserListToFileFormat() {
+        userList.addUser(user);
+        assertEquals("yixiang | 22 | 98126666\n", userList.convertUserListToFileFormat());
+    }
 }
