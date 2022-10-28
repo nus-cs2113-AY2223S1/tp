@@ -27,7 +27,7 @@ public class Storage {
             + "Example Title \n\n"
             + "# DESCRIPTION\n"
             + "Example Description\n\n"
-            + "# INGREDIENTS <ingredient name> / <amount> / <unit> \n"
+            + "# INGREDIENTS ingredient_name / amount / unit \n"
             + "1. Example ingredient / 1.2 / example unit \n\n"
             + "# STEPS \n"
             + "1. Example step \n";
