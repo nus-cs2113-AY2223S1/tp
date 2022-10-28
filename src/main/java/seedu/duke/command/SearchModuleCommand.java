@@ -98,7 +98,7 @@ public class SearchModuleCommand extends Command {
      */
     static boolean isSameModuleLevel(Module module, String level) {
         // get the first integer embedded in the module code
-        int moduleLevel = module.getModuleLevel(module);
+        int moduleLevel = module.getLevel();
         return level.equals(Integer.toString(moduleLevel));
     }
 
