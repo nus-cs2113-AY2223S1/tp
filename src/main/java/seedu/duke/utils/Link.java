@@ -74,7 +74,6 @@ public class Link {
      * @param state Current state of the application to be saved to.
      */
     public static void parseLink(String link, State state) throws YamomException {
-        //Initial string :https://nusmods.com/timetable/sem-SEMESTER_NUMBER/share?MODULE_INFO&MODULE_INFO
         String[] infoParam = link.split(DELIMITER_REGEX);
         /*
         infoParam[0] = "https:";
