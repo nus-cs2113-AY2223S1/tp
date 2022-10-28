@@ -133,6 +133,7 @@ public class StatsCommand extends ListAndStatsCommand {
      * @throws MoolahException If the type of statistics is not recognised.
      */
     public void listStatsByStatsType(TransactionList transactions) throws MoolahException {
+        statsLogger.setLevel(Level.SEVERE);
         switch (statsType) {
         case MONTHLY_EXPENDITURE:
         case CATEGORICAL_SAVINGS:
