@@ -20,6 +20,26 @@
 
 MoneyGoWhere is a financial planner to help you manage your finances.
 
+## Understanding the command syntax
+
+Capitalised words represents the values included in the respective commands. 
+
+Arguments given without brackets are **mandatory** arguments. 
+
+Arguments given with brackets are **optional** arguments.
+
+### Example: `Add-Expense`
+
+Syntax: `Add-Expense -n NAME -a AMOUNT [-d DATE_TIME] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p MODE OF PAYMENT]`
+
+Examples of valid command syntax:
+* `Add-Expense -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359" -t "Monthly payment" -c "Work expenses" -r "Remarks here" -x USD -p PayLah`
+* `Add-Expense -n Subscription -a 13.37`
+
+Examples of invalid command syntax:
+* `Add-Expense -n Subscription`
+* `Add-Expense -a 13.37`
+
 ## Quick Start
 
 1. Ensure that ```Java 11``` is installed on your system.
