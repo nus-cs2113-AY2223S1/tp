@@ -18,18 +18,18 @@ import seedu.duke.command.ExitCommand;
  */
 public class Ui {
 
-    private static final String LOGO = "                      " + System.lineSeparator()
+    public static final String LOGO = "                      " + System.lineSeparator()
             + "__ __ _____ _____ _____ _____" + System.lineSeparator()
             + "|  |  |  _  |     |     |     |" + System.lineSeparator()
             + "|_   _|     | | | |  |  | | | |" + System.lineSeparator()
             + "  |_| |__|__|_|_|_|_____|_|_|_|" + System.lineSeparator();
 
-
-    private static final String MESSAGE_GREET = "Hello from" + System.lineSeparator()
+    public static final String MESSAGE_GREET = "Hello from" + System.lineSeparator()
             + LOGO + System.lineSeparator() + "How can I help you today?"
             + System.lineSeparator() + "Enter \"help\" to get started!";
-    private static final String MESSAGE_BYE = "Bye bye, See you again";
-    private static final String LINE_DIVIDER = StringUtils.repeat("-", 80);
+    public static final String MESSAGE_BYE = "Bye bye, See you again";
+    public static final String LINE_DIVIDER = StringUtils.repeat("-", 80);
+    public static final String INDENT = StringUtils.repeat(" ", 6);
 
     private ArrayList<String> uiBuffer;
     private Scanner scanner;
@@ -88,7 +88,7 @@ public class Ui {
      */
     public void addMessage(String message, boolean hasIndent) {
         if (hasIndent) {
-            uiBuffer.add("\t" + message);
+            uiBuffer.add(INDENT + message);
         } else {
             uiBuffer.add(message);
         }

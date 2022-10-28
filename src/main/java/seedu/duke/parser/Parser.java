@@ -187,7 +187,7 @@ public class Parser {
         if (semester.toString().matches("st1|st2|specialterm1|specialterm2")) {
             int correctSemester = Integer.parseInt(semester.substring(semester.length() - 1)) + 2;
             keywords[1] = String.valueOf(correctSemester);
-            return  true;
+            return true;
         }
         return false;
     }

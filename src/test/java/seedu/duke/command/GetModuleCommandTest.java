@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
-import static seedu.duke.command.GetModuleCommand.isModuleOfferedInCurrentSem;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -93,36 +92,6 @@ public class GetModuleCommandTest {
         } catch (YamomException e) {
             assertEquals("Error! \tPlease enter a module code!", e.getMessage());
         }
-    }
-
-    @Test
-    void isModuleOfferedInCurrentSem_moduleCS2113OfferedInCurrentSemester_expectsTrue() {
-        // check if module is offered in current semester
-        State state = new State();
-        String moduleCode = "CS2113";
-        Module testModule = Module.get(moduleCode);
-        // setting current semester to 1
-
-        state.setSemester(1);
-
-        // check if module is offered in current semester
-        boolean testResult = isModuleOfferedInCurrentSem(testModule, state);
-        assertTrue(testResult);
-    }
-
-    @Test
-    void isModuleOfferedInCurrentSem_moduleCS2113NotOfferedInCurrentSemester_expectsFalse() {
-        // check if module is offered in current semester
-        State state = new State();
-        String moduleCode = "CS2113";
-        Module testModule = Module.get(moduleCode);
-        // setting current semester to 4
-
-        state.setSemester(4);
-
-        // check if module is offered in current semester
-        boolean testResult = isModuleOfferedInCurrentSem(testModule, state);
-        assertFalse(testResult);
     }
 
     @Test

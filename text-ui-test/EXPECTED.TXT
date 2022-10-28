@@ -10,36 +10,37 @@ How can I help you today?
 Enter "help" to get started!
 Sem [1] >> --------------------------------------------------------------------------------
 Processing "help" ...
+
 Here are all the commands available in YAMOM!
 
-add	: Add a module into YAMOM timetable.
-bye	: Exit YAMOM!
-delete	: remove a module from YAMOM timetable.
-export	: Generates an NUSMod Link to be exported to the browser.
-get	: Show all details of a module.
-help	: List out all commands and  their respective usages in YAMOM
-import	: Imports a timetable  from an NUSMod timetable sharing link
-list	: List out all the selected modules and lesson slots.
-search	: List out all modules that contains a search term
-	 * the search term can either be module code or a keyword in module title.
-	 * MODULE_LEVEL and SEMESTER should be a single digit number
-select	: Select a module slot
-semester	: Select another semester to plan and organize timetable
-view	: Display current user timetable
+add      : Add a module into YAMOM timetable.
+bye      : Exit YAMOM.
+delete   : Remove a module from YAMOM timetable.
+export   : Generates an NUSMod Link to be exported to the browser.
+get      : Show all details of a module.
+help     : List out all commands and their respective usages in YAMOM.
+import   : Imports a timetable from an NUSMod timetable sharing link.
+list     : List out all the selected modules and lesson slots.
+search   : List out all modules that contains a search term.
+select   : Select a module lesson slot.
+semester : Select another semester to plan and organize timetable.
+view     : Display current timetable.
 
 Usage :
-	add [ MODULE_CODE ]
-	bye
-	delete [ MODULE_CODE ]
-	export
-	get [ MODULE_CODE ]
-	help
-	import [ NUSMODS_LINK ]
-	list
-	search [ /code PARTIAL_MODULE_CODE | /title KEYWORD ] < /level MODULE_LEVEL > < /sem SEMESTER >
-	select [ /module MODULE_CODE ] [ /type LESSON_TYPE ] [ /code CLASS_NO ]
-	semester [ SEMESTER ]
-	view < /fancy | /simple >
+      add [ MODULE_CODE ]
+      bye
+      delete [ MODULE_CODE ]
+      export
+      get [ MODULE_CODE ]
+      help
+      import [ NUSMODS_LINK ]
+      list
+      search [ /code PARTIAL_MODULE_CODE | /title KEYWORD ] < /level MODULE_LEVEL > < /sem SEMESTER >
+             * the search term can either be module code or a keyword in module title.
+             * MODULE_LEVEL and SEMESTER should be a single digit number.
+      select [ /module MODULE_CODE ] [ /type LESSON_TYPE ] [ /code CLASS_NO ]
+      semester [ SEMESTER ]
+      view < /fancy | /simple >
 
 Note: [ ] are required elements,
       < > are optional elements,
@@ -48,20 +49,23 @@ For more detailed guide, please visit https://ay2223s1-cs2113-f11-3.github.io/tp
 --------------------------------------------------------------------------------
 Sem [1] >> --------------------------------------------------------------------------------
 Processing "search /code 2113 /title software" ...
+
 Search Result:
 Total 2 module(s) found
 
-CS2113 Software Engineering & Object-Oriented Programming
-CS2113T Software Engineering & Object-Oriented Programming
+CS2113    Software Engineering & Object-Oriented Programming
+CS2113T   Software Engineering & Object-Oriented Programming
 
 To get full details of the module, type 'get <module code>'
 --------------------------------------------------------------------------------
 Sem [1] >> --------------------------------------------------------------------------------
 Processing "add cs2113" ...
+
 CS2113 has been added
 --------------------------------------------------------------------------------
 Sem [1] >> --------------------------------------------------------------------------------
 Processing "list" ...
+
 CS2113   Software Engineering & Object-Oriented Programming
          LEC[1]    LT19, weeks: 1 - 13
          TUT[1]    COM1-0210, weeks: 3 - 13
@@ -71,15 +75,18 @@ Here's a list of your current selected module(s)!
 --------------------------------------------------------------------------------
 Sem [1] >> --------------------------------------------------------------------------------
 Processing "add" ...
+
 Error! 	Wrong format, should be: add [ MODULE_CODE ]
 Your command is incomplete.
 --------------------------------------------------------------------------------
 Sem [1] >> --------------------------------------------------------------------------------
 Processing "select /module cs2113 /type tut /code 4" ...
+
 Slot selected successfully!
 --------------------------------------------------------------------------------
 Sem [1] >> --------------------------------------------------------------------------------
 Processing "list" ...
+
 CS2113   Software Engineering & Object-Oriented Programming
          LEC[1]    LT19, weeks: 1 - 13
          TUT[4]    COM1-0210, weeks: 3 - 13
@@ -89,15 +96,18 @@ Here's a list of your current selected module(s)!
 --------------------------------------------------------------------------------
 Sem [1] >> --------------------------------------------------------------------------------
 Processing "export" ...
+
 Here is your NUSMod Link:
-	https://nusmods.com/timetable/sem-1/share?CS2113=LEC:1,TUT:4
+      https://nusmods.com/timetable/sem-1/share?CS2113=LEC:1,TUT:4
 --------------------------------------------------------------------------------
 Sem [1] >> --------------------------------------------------------------------------------
 Processing "import https://nusmods.com/timetable/sem-1/share?CG1111A=LAB:01&CS1010=LAB:C03,TUT:10,SEC:1" ...
+
 Timetable imported to YAMOM!
 --------------------------------------------------------------------------------
 Sem [1] >> --------------------------------------------------------------------------------
 Processing "list" ...
+
 CG1111A  Engineering Principles and Practice I
          LAB[01]   E4A-04-08, weeks: 1 - 13
                    E4A-04-08, weeks: 1 - 13
@@ -112,16 +122,17 @@ Here's a list of your current selected module(s)!
 --------------------------------------------------------------------------------
 Sem [1] >> --------------------------------------------------------------------------------
 Processing "view /simple" ...
+
                                                                     
           : Mon      : Tues     : Wed      : Thur     : Fri         
 ====================================================================
-   0900   +----------+          :          :          :             
-   0930   |CG1111A   |          :          :          :             
-   1000   | LAB[01]  |          :          :          :             
-   1030   |          |          :          :          :             
-   1100   |          |          :          :          :             
-   1130   |          |          :          :          :             
-   1200   +----------+          :          +----------+             
+   0900   +----------+          +----------+          :             
+   0930   |CG1111A   |          |CG1111A   |          :             
+   1000   | LAB[01]  |          | LAB[01]  |          :             
+   1030   |          |          |          |          :             
+   1100   |          |          |          |          :             
+   1130   |          |          |          |          :             
+   1200   +----------+          +----------+----------+             
    1230   |CS1010    |          :          |CS1010    |             
    1300   | SEC[1]   |          :          | LAB[C03] |             
    1330   |          |          :          |          |             
@@ -141,9 +152,12 @@ Processing "view /simple" ...
 --------------------------------------------------------------------------------
 Sem [1] >> --------------------------------------------------------------------------------
 Processing "semester 2" ...
+
 You are now planning for semester 2
 --------------------------------------------------------------------------------
 Sem [2] >> --------------------------------------------------------------------------------
+Processing "get cs2113" ...
+
 Code         : CS2113
 Name         : Software Engineering & Object-Oriented Programming
 Description  : This module introduces the necessary skills for systematic and
@@ -167,7 +181,6 @@ Corequisite  : CS2101 Effective Communication for Computing Professionals is
                CS2113 which does not have CS2101 as co-req. Otherwise, CS2113
                and CS2113T are identical.
 Schedule     : 
-Processing "get cs2113" ...
                                                                     
           : Mon      : Tues     : Wed      : Thur     : Fri         
 ====================================================================
@@ -195,6 +208,7 @@ Sem [2] >> ---------------------------------------------------------------------
 Shutting down......
 --------------------------------------------------------------------------------
 Processing "bye" ...
+
 These are your export links:
 https://nusmods.com/timetable/sem-1/share?CG1111A=LAB:01&CS1010=LAB:C03,SEC:1,TUT:10
 https://nusmods.com/timetable/sem-2/share?

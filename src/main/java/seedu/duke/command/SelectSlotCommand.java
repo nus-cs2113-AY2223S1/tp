@@ -17,7 +17,7 @@ public class SelectSlotCommand extends Command {
     public static final String COMMAND_WORD = "select";
     public static final String COMMAND_USAGE = "select [ /module MODULE_CODE ] "
             + "[ /type LESSON_TYPE ] [ /code CLASS_NO ]";
-    public static final String COMMAND_DESCRIPTION = "Select a module slot";
+    public static final String COMMAND_DESCRIPTION = "Select a module lesson slot.";
     public static final String ERROR_WRONG_FORMAT = "Wrong format given, should be "
             + System.lineSeparator() + "\t" + COMMAND_USAGE;
 
@@ -108,13 +108,5 @@ public class SelectSlotCommand extends Command {
     @Override
     public String getExecutionMessage() {
         return null;
-    }
-
-    public static String getCommandDescription() {
-        return COMMAND_WORD + DESCRIPTION_DELIMITER + COMMAND_DESCRIPTION;
-    }
-
-    public static String getUsage() {
-        return COMMAND_USAGE;
     }
 }
