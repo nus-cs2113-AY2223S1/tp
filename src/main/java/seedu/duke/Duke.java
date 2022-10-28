@@ -11,6 +11,7 @@ import seedu.duke.command.FavouriteCommand;
 import seedu.duke.command.DatabaseStorage;
 import seedu.duke.command.ListCommand;
 import seedu.duke.command.ViewCommand;
+import seedu.duke.exceptions.InvalidUniversityException;
 import seedu.duke.timetable.Lesson;
 import seedu.duke.command.Database;
 import seedu.duke.exceptions.InvalidModuleException;
@@ -120,8 +121,10 @@ public class Duke {
                 } else {
                     userUniversityListManager.deleteModule(deleteCommand.getUniversityName(),
                             deleteCommand.getModuleCode());
-                    UserStorageParser.storeTimetable(timetableManager);
+                    timetableManager.getTimetableByUniversityName(deleteCommand.getUniversityName())
+                            .deleteLessonByCode(deleteCommand.getModuleCode());
                 }
+                UserStorageParser.storeTimetable(timetableManager);
                 UserStorageParser.storeCreatedLists(userUniversityListManager);
             }
         } catch (NoSuchElementException | TimetableNotFoundException e) {
@@ -203,7 +206,7 @@ public class Duke {
                 userUniversityListManager.addModule(universityName, userModuleToAdd);
                 UserStorageParser.storeCreatedLists(userUniversityListManager);
             }
-        } catch (ModuleNotFoundException | NoSuchElementException e) {
+        } catch (ModuleNotFoundException | NoSuchElementException | InvalidUniversityException e) {
             Ui.printExceptionMessage(e);
         }
     }

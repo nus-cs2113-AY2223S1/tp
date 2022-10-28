@@ -24,6 +24,7 @@ class Timetable {
     + hasTimetableClash(lesson: Lesson) : boolean
     + addLesson(newLesson: Lesson, isLoadFromFile: boolean) : void
     + deleteLesson(oldLesson: Lesson) : void
+    + deleteLessonByCode(moduleCode: String) : void
 }
 
 class Lesson {
@@ -37,6 +38,8 @@ class Lesson {
     + setStartTime(startTime: String) : void
     + getEndTime() : String
     + setEndTime(endTime: String) : void
+    + equals(objectToCompare: Object) : boolean
+    + hashCode() : int
 }
 
 class Module {
@@ -68,6 +71,9 @@ class ParseException {
 class InvalidLessonDayException {
 }
 
+class InvalidUniversityException {
+}
+
 TimetableManager "1" --> "*" Timetable :> Manages
 Timetable "1" --> "*" Lesson :> Contains
 Lesson --> InvalidModuleException : <<throws>>
@@ -77,6 +83,7 @@ Timetable --> ParseException : <<throws>>
 Timetable --> LessonNotFoundException : <<throws>>
 Timetable --> InvalidLessonDayException : <<throws>>
 TimetableManager --> TimetableNotFoundException : <<throws>>
+TimetableManager --> InvalidUniversityException : <<throws>>
 Module <|-- Lesson
 
 @enduml

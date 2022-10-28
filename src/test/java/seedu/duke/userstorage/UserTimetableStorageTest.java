@@ -65,7 +65,7 @@ public class UserTimetableStorageTest {
     }
 
     @Test
-    public void testSavingFile_OneTimetableWithOneLesson() throws IOException {
+    public void testSavingFile_OneTimetableWithOneLesson() throws IOException, InvalidUniversityException {
         clearStorageFile(filePath);
         testManager.createTimetable("Boston University", false);
         testManager.addLesson(testLesson1, false);
@@ -76,7 +76,7 @@ public class UserTimetableStorageTest {
     }
 
     @Test
-    public void testSavingFile_TwoTimetablesWithTwoLesson() throws IOException {
+    public void testSavingFile_TwoTimetablesWithTwoLesson() throws IOException, InvalidUniversityException {
         clearStorageFile(filePath);
         testManager.createTimetable("Boston University", false);
         testManager.addLesson(testLesson1, false);
