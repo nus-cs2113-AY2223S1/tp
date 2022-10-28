@@ -141,4 +141,13 @@ public class UserModuleMappingList {
         }
         return true;
     }
+
+    public boolean containModules(String moduleCode) {
+        for (UserModuleMapping module : modules) {
+            if (module.getPuCode().equals(moduleCode)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
