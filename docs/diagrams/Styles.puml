@@ -1,4 +1,4 @@
-!include https://raw.githubusercontent.com/xzynos/tp/branch-MoneyGoWhere-Webpage/docs/diagrams/Colors.puml
+!include https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/Colors.puml
 
 skinparam packageStyle Rectangle
 skinparam MinClassWidth 50
