@@ -52,8 +52,8 @@ public class Storage {
             ui.addMessage(NO_PREVIOUS_STATE_ERROR_MESSAGE);
             logger.log(Level.FINE, "No previous saved file");
         } catch (YamomException e) {
-            ui.addMessage(NO_PREVIOUS_SAVED_MODULE_ERROR_MESSAGE);
-            logger.log(Level.FINE, "No previous saved modules");
+            ui.addMessage(e.getMessage());
+            logger.log(Level.FINE, e.getMessage());
         }
         ui.displayUi();
     }
@@ -71,7 +71,7 @@ public class Storage {
         Scanner scanner = new Scanner(file);
         while (scanner.hasNext()) {
             String line = scanner.nextLine();
-            if (!line.isEmpty() && Link.isValidPreviousState(line)) {
+            if (Link.isValidLink(line)) {
                 links.add(line);
             }
         }
