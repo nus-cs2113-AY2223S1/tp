@@ -7,9 +7,9 @@ import seedu.duke.WalletFile;
 import seedu.duke.exception.FinanceException;
 
 public class DeleteCommand {
-    public static Boolean handleDelete(Wallet wallet) throws FinanceException {
+    public static boolean handleDelete(Wallet wallet) throws FinanceException {
         AccountUi.showDeletionConfirmPrompt(wallet.getUserName());
-        Boolean isDeleted = false;
+        boolean isDeleted = false;
         String confirm = InputManager.receiveInputLine().toLowerCase();
         if (confirm.equals("y") || confirm.equals("yes")) {
             WalletFile.deleteWallet(wallet);

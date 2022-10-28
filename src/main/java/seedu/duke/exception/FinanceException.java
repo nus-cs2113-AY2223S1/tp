@@ -3,6 +3,7 @@ package seedu.duke.exception;
 import seedu.duke.BasicUi;
 
 public class FinanceException extends Throwable {
+
     public enum ExceptionCollection {
         COMMAND_TYPE_EXCEPTION,
         USERNAME_FILE_NOT_FOUND_EXCEPTION,
@@ -19,9 +20,8 @@ public class FinanceException extends Throwable {
         AMOUNT_PARSE_EXCEPTION,
         AMOUNT_NEGATIVE_EXCEPTION,
         CURRENCY_NOT_FOUND,
-        NOT_PERSONAL_CURRENCY
-        //CURRENCY_INVALID_EXCEPTION
-        //UNKNOWN_EXCEPTION
+        NOT_PERSONAL_CURRENCY,
+        CURRENCY_ARRAY_FULL
     }
 
     private final ExceptionCollection exceptionType;
@@ -81,6 +81,9 @@ public class FinanceException extends Throwable {
             break;
         case NOT_PERSONAL_CURRENCY:
             errorMessage = "This is not your personal currency and cannot be removed";
+            break;
+        case CURRENCY_ARRAY_FULL:
+            errorMessage = "You have no more space to add new currencies";
             break;
         default:
             errorMessage = "Unknown exception happens.";

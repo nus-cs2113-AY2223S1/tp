@@ -16,26 +16,18 @@ import seedu.duke.exception.FinanceException.ExceptionCollection;
 
 public class Currency {
     public static List<CurrencyStructure> getListOfAllCurrencies() throws FinanceException {
-
         List<CurrencyStructure> currencies = new ArrayList<>();
-        Path path = Paths.get("src", "main", "data");
 
-        currencies = readInCurrencies(path);
+        currencies = readInCurrencies();
         return currencies;
     }
 
-    public static List<CurrencyStructure> readInCurrencies(Path path) throws FinanceException {
+    public static List<CurrencyStructure> readInCurrencies() throws FinanceException {
         List<CurrencyStructure> currencyList = new ArrayList<>();
-        Path filePath = Paths.get(path.toString(), "currencies.txt");
-        File file = new File(filePath.toString());
-        Scanner scanner;
-        try {
-            scanner = new Scanner(file,"UTF-8");
-        } catch (FileNotFoundException e) {
-            throw new FinanceException(ExceptionCollection.CURRENCY_FILE_NOT_FOUND_EXCEPTION);
-        } // create a Scanner using the File as the source
-        while (scanner.hasNext()) {
-            String line = scanner.nextLine();
+        String[] currenciesArray = Currency2D.getArray();
+
+        for (int i = 0; i < Currency2D.getEmptyIndex(); i++) {
+            String line = currenciesArray[i];
             String[] items = line.split(",");
             String abbrName = items[0];
             String fullName = items[1];
@@ -45,11 +37,10 @@ public class Currency {
             currencyList.add(currency);
         }
 
-        scanner.close();
         return currencyList;
     }
 
-    public static void exchangeCommands() throws FinanceException {
+    public static void exchangeCommands(CurrencyStructure defaultCurrency) throws FinanceException {
         BasicUi.showCurrencyEntry();
         List<CurrencyStructure> allCurrencies = getListOfAllCurrencies();
         boolean isCurrencyExit = false;
@@ -82,9 +73,9 @@ public class Currency {
                         boolean isErrorOne = true;
                         try {
                             CurrencyStructure currency = findCurrencyByAbbrName(splitInput[1], allCurrencies);
-                            double rate = currency.getRate();
+                            double rate = currency.getRate()/defaultCurrency.getRate();
                             System.out.println(
-                                    "Exchange rate from " + "USD" + " to " + splitInput[1] + " is " + rate);
+                                    "Exchange rate from " + defaultCurrency.getSymbol() + " to " + splitInput[1] + " is " + rate);
                         } catch (IndexOutOfBoundsException f) {
                             isErrorOne = false;
                             BasicUi.showIncorrectCurrencyConversion();
@@ -128,7 +119,7 @@ public class Currency {
         throw new FinanceException(ExceptionCollection.CURRENCY_NAME_NOT_FOUND_EXCEPTION);
     }
 
-    static int findIndexOfCurrency(String s, List<List<String>> allCurrencies) throws FinanceException {
+    public static int findIndexOfCurrency(String s, List<List<String>> allCurrencies) throws FinanceException {
         for(int i = 0; i < allCurrencies.size(); i++){
             if(allCurrencies.get(i).get(0).contains(s)){
                 return i;

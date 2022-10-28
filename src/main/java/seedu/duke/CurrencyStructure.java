@@ -30,34 +30,33 @@ public class CurrencyStructure {
     }
 
     public boolean isSameCurrency(CurrencyStructure currency){
-        boolean isSameCurrency = false;
-        if (this.abbrName.equals(currency.getAbbrName())) {
-            isSameCurrency = true;
-        }
-        return isSameCurrency;
+        return this.abbrName.equals(currency.getAbbrName());
     }
 
     public boolean isMatchedCurrencyByAbbrName(String abbrName) {
-        boolean isMatch = false;
-        if (this.abbrName.equals(abbrName)) {
-            isMatch = true;
-        }
-        return isMatch;
+        return this.abbrName.equals(abbrName);
     }
 
     public boolean isMatchedCurrencyByAnyPart(String anyPart) {
-        boolean isMatch = false;
-        if (this.abbrName.contains(anyPart) || this.fullName.contains(anyPart) || this.symbol.contains(anyPart)) {
-            isMatch = true;
-        }
-        return isMatch;
+        return this.abbrName.contains(anyPart) || this.fullName.contains(anyPart) || this.symbol.contains(anyPart);
     }
 
     public boolean isMatchedCurrencyByAnyExact(String anyExact) {
-        boolean isMatch = false;
-        if (this.abbrName.equals(anyExact) || this.fullName.equals(anyExact) || this.symbol.equals(anyExact)) {
-            isMatch = true;
+        return this.abbrName.equals(anyExact) || this.fullName.equals(anyExact) || this.symbol.equals(anyExact);
+    }
+
+    public int getTypeOfName(String type){
+        if(type.equals(abbrName)){
+            return 1;
         }
-        return isMatch;
+        else if(type.equals(fullName)){
+            return 2;
+        }
+        else if(type.equals(symbol)){
+            return 3;
+        }
+        else{
+            return 0;
+        }
     }
 }
