@@ -7,6 +7,8 @@
 * [Features](#features)
    * [Managing Your Expenses](#managing-your-expenses)
    * [Managing Your Recurring Payments](#managing-your-recurring-payments)
+   * [Managing Your Incomes](#managing-your-incomes)
+   * [Managing Your Targets](#managing-your-targets)
    * [Handling Your Data](#handling-your-data)
    * [Listing all available commands: `help`](#listing-all-available-commands-help)
    * [Exiting the application: `exit`](#exiting-the-application-exit)
@@ -198,14 +200,137 @@ Syntax: `Pay-RecurringPayment -r RECURRING_PAYMENT_INDEX [-d DATE_TIME]`
 Example of usage:
 * `Pay-RecurringPayment -r 1`
 
+## Managing your incomes
+### Adding an income: `Add-Income`
+Adds a new income to the list of incomes.
+
+Syntax: `Add-Income -n NAME -a AMOUNT [-d DATE_TIME] [-t DESCRIPTION]`
+
+> ⚠️️️️ Syntax Notes
+> * `NAME` and `DESCRIPTION` are text strings. You may use spaces within the text if you wrap the text with double quotes.</li>
+> * `AMOUNT` is a decimal value.
+> * `DATE_TIME` is a text string in the format `"dd/MM/yyyy HHmm"`.
+
+
+Examples of usage:
+* `Add-Income -n "Stocks" -a 500.00 -d "01/02/2022 2359" -t "Investment payouts"`
+* `Add-Income -n "Salary" -a 3000.00`
+
+<hr>
+
+### Viewing income(s): `View-Income`
+Displays past incomes you have added.
+
+Syntax: `View-Income [-e INCOME_NUMBER]`
+
+> ⚠️️️️ Syntax Notes
+> * `INCOME_NUMBER` is an integer value.
+> * If this argument is provided, MoneyGoWhere will only display the specified expense.
+
+Example of usage:
+* `View-Income`
+* `View-Income -e 1`
+
+<hr>
+
+### Deleting an income: `Delete-Income`
+Deletes an income from the list of incomes.
+
+Syntax: `Delete-Income -e INCOME_NUMBER`
+
+> ⚠️️️️ Syntax Notes
+> * `INCOME_NUMBER` is an integer value.
+
+Example of usage:
+* `Delete-Income -e 1`
+
+<hr>
+
+### Editing an income: `Edit-Income`
+Edits an existing income in the list of incomes.
+
+Syntax: `Edit-Income -e INCOME_NUMBER [-n NAME] [-a AMOUNT] [-d DATE_TIME] [-t DESCRIPTION]`
+
+> ⚠️️️️ Syntax Notes
+> * `INCOME_NUMBER` is an integer value.
+> * `NAME` and `DESCRIPTION` are text strings. You may use spaces within the text if you wrap the text with double quotes.
+> * `AMOUNT` is a decimal value.
+> * `DATE_TIME` is a text string in the format `"dd/MM/yyyy HHmm"`.
+
+Example of usage:
+* `Edit-Income -e 1 -n Payout -a 100.00`
+* `Edit-Income -e 1 -n "Monthly Salary" -a 3000 -d "01/01/2022 2359" -t "Monthly payment"`
+
+<hr>
+
+## Managing your targets
+### Adding a target: `Add-Target`
+Adds a new target to the list of targets.
+
+Syntax: `Add-Target -n NAME -a AMOUNT -c CURRENT_AMOUNT [-d DATE_TIME] [-t DESCRIPTION]`
+
+> ⚠️️️️ Syntax Notes
+> * `NAME` and `DESCRIPTION` are text strings. You may use spaces within the text if you wrap the text with double quotes.</li>
+> * `AMOUNT` and `CURRENT_AMOUNT` are decimal value.
+> * `DATE_TIME` is a text string in the format `"dd/MM/yyyy HHmm"`.
+
+
+Examples of usage:
+* `Add-Target -n "Food target" -a 1000.00 -c 1500.00 -d "01/02/2022 2359" -t "Money spent on food"`
+* `Add-Target -n "Salary" -a 3000.00 -c 1500.00`
+
+<hr>
+
+### Viewing target(s): `View-Target`
+Displays past targets you have added.
+
+Syntax: `View-Target [-e TARGET_NUMBER]`
+
+> ⚠️️️️ Syntax Notes
+> * `TARGET_NUMBER` is an integer value.
+> * If this argument is provided, MoneyGoWhere will only display the specified expense.
+
+Example of usage:
+* `View-Target`
+* `View-Target -e 1`
+
+<hr>
+
+### Deleting a target: `Delete-Target`
+Deletes a target from the list of targets.
+
+Syntax: `Delete-Target -e TARGET_NUMBER`
+
+> ⚠️️️️ Syntax Notes
+> * `TARGET_NUMBER` is an integer value.
+
+Example of usage:
+* `Delete-Target -e 1`
+
+<hr>
+
+### Editing a target: `Edit-Target`
+Edits an existing target in the list of targets.
+
+Syntax: `Edit-Target -e INCOME_NUMBER [-n NAME] [-a AMOUNT] [-c CURRENT_AMOUNT] [-d DATE_TIME] [-t DESCRIPTION]`
+
+> ⚠️️️️ Syntax Notes
+> * `INCOME_NUMBER` is an integer value.
+> * `NAME` and `DESCRIPTION` are text strings. You may use spaces within the text if you wrap the text with double quotes.
+> * `AMOUNT` and `CURRENT_AMOUNT` is a decimal value.
+> * `DATE_TIME` is a text string in the format `"dd/MM/yyyy HHmm"`.
+
+Example of usage:
+* `Edit-Target -e 1 -n "October Target" -a 100.00`
+* `Edit-Income -e 1 -n "Monthly Target" -a 3000 -c 1200 -d "01/01/2022 2359" -t "Monthly payment"`
+
+<hr>
+
 ## Handling your data
 ### Merging a data file: `Merge-File`
 Merges save file from an external source given path to the save file (.xml)
 
 Syntax: `Merge-File [-p PATH_STRING]`
-
-> ⚠️️️️ Syntax Notes
-> * `RECURRING_PAYMENT_INDEX` is an integer value. If this argument is provided, MoneyGoWhere will only display the specified recurring payment.
 
 Example of usage:
 * `Merge-File -p "C:\Users\the_d\Downloads\expenses.xml"`
