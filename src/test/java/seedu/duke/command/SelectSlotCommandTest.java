@@ -9,8 +9,7 @@ import seedu.duke.utils.Ui;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class SelectSlotCommandTest {
 
@@ -67,15 +66,20 @@ public class SelectSlotCommandTest {
         Ui ui = new Ui();
         Storage storage = new Storage();
         String s = System.lineSeparator();
-        try {
+        // try {
+        //     String input = "select";
+        //     SelectSlotCommand selectSlotCommand = new SelectSlotCommand(input);
+        //     selectSlotCommand.execute(state, ui, storage);
+        //     fail();
+        // } catch (YamomException e) {
+        //     assertEquals("Error! \tWrong format given, should be " + s
+        //             + "\tselect [ /module [EXACT_MODULE_CODE] /type [LESSON_TYPE] /code [CLASS_NO] ]", e.getMessage());
+        // }
+        assertThrows(YamomException.class, () -> {
             String input = "select";
             SelectSlotCommand selectSlotCommand = new SelectSlotCommand(input);
             selectSlotCommand.execute(state, ui, storage);
-            fail();
-        } catch (YamomException e) {
-            assertEquals("Error! \tWrong format given, should be " + s
-                    + "\tselect [ /module [EXACT_MODULE_CODE] /type [LESSON_TYPE] /code [CLASS_NO] ]", e.getMessage());
-        }
+        });
     }
 
     @Test
@@ -84,18 +88,23 @@ public class SelectSlotCommandTest {
         Ui ui = new Ui();
         Storage storage = new Storage();
         String s = System.lineSeparator();
-        try {
+        // try {
+        //     String input = "select /module /type /code";
+        //     SelectSlotCommand selectSlotCommand = new SelectSlotCommand(input);
+        //     selectSlotCommand.execute(state, ui, storage);
+        //     fail();
+        // } catch (YamomException e) {
+        //     assertEquals("Error! \tWrong format given, should be " + s
+        //                     + "\tselect [ /module [EXACT_MODULE_CODE] /type [LESSON_TYPE] /code [CLASS_NO] ]\n"
+        //                     + "\n"
+        //                     + "You might have missed out the Module Code, Lesson Type or Class No.",
+        //             e.getMessage());
+        // }
+        assertThrows(YamomException.class, () -> {
             String input = "select /module /type /code";
             SelectSlotCommand selectSlotCommand = new SelectSlotCommand(input);
             selectSlotCommand.execute(state, ui, storage);
-            fail();
-        } catch (YamomException e) {
-            assertEquals("Error! \tWrong format given, should be " + s
-                            + "\tselect [ /module [EXACT_MODULE_CODE] /type [LESSON_TYPE] /code [CLASS_NO] ]\n"
-                            + "\n"
-                            + "You might have missed out the Module Code, Lesson Type or Class No.",
-                    e.getMessage());
-        }
+        });
     }
 
     @Test
@@ -104,16 +113,21 @@ public class SelectSlotCommandTest {
         Ui ui = new Ui();
         Storage storage = new Storage();
         String s = System.lineSeparator();
-        try {
+        // try {
+        //     String input = "select /module cs2113 /type";
+        //     SelectSlotCommand selectSlotCommand = new SelectSlotCommand(input);
+        //     selectSlotCommand.execute(state, ui, storage);
+        //     fail();
+        // } catch (YamomException e) {
+        //     assertEquals("Error! \tWrong format given, should be " + s
+        //                     + "\tselect [ /module [EXACT_MODULE_CODE] /type [LESSON_TYPE] /code [CLASS_NO] ]",
+        //             e.getMessage());
+        // }
+        assertThrows(YamomException.class, () -> {
             String input = "select /module cs2113 /type";
             SelectSlotCommand selectSlotCommand = new SelectSlotCommand(input);
             selectSlotCommand.execute(state, ui, storage);
-            fail();
-        } catch (YamomException e) {
-            assertEquals("Error! \tWrong format given, should be " + s
-                            + "\tselect [ /module [EXACT_MODULE_CODE] /type [LESSON_TYPE] /code [CLASS_NO] ]",
-                    e.getMessage());
-        }
+        });
     }
 
     @Test
