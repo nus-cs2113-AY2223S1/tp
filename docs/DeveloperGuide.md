@@ -2,37 +2,47 @@
 
 ## Acknowledgements
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+Parser class and its functions are largely adapted from Ria's IP and help from regex101 (https://regex101.com/).
 
 Storage class and its functions are largely adapted from Dhanish's IP on Duke.
 
 ## Design & implementation
 
+
+### PatientList Component
+
 The Patient and PatientList classes are used in conjunction to manage patients, and the list of patients. Each patient has a name,
-an ID, a date of birth and gender. The PatientList class holds an ArrayList of Patients and manipulates them accordingly.
+a unique ID, a date of birth and gender. The PatientList class holds an ArrayList of Patients and manipulates them accordingly.
 
 At the start of the program, a new PatientList object is instantiated. Through methods in the Storage class, data is read from the
 relevant text files to create Patients that existed prior to the last closure of the program, and then adds these patients to the
 ArrayList in PatientList. This finishes the initial set-up.
 
-Methods in PatientList class:
+![](images/PatientListInitialization.png)
 
-addPatient - this method takes in the aforementioned variables through UI class and parses them. If they are all valid, a new
-Patient is created and added to the ArrayList in PatientList.
+The above is a summary of the aforementioned process, omitting some commands in the code that has to do with Visits, Prescriptions and UI classes
+and related methods.
 
-findPatient - this method takes in an ID, iterates through the ArrayList of Patients and compares the ID with the ID of each of the
-existing Patients in the list. If there is a match, the corresponding Patient is returned. Else, returns null.
+The `PatientList` Component,
+ * stores the list of patients
+ * can add new patients to the list
+ * can modify the details of patients
+ * allows users to view all patients
+ * allows users to find a particular patient given ID
 
-retrievePatient - this method is very similar to findPatient, but instead of returning the Patient found, it prints out the details
-of the Patient using the toString method in the Patient class.
-
-listPatients - this method first checks if the ArrayList of Patients is non-empty. If not so, it prints a message that there are
+**Important methods in PatientList class:**
+* `addPatient` - this method takes in the aforementioned variables through UI class and parses them. If they are all valid, a new
+`Patient` is created and added to the list of `Patient`s in PatientList.
+* `findPatient` - this method takes in an `ID`, iterates through the list of Patients and compares the `ID` with the `ID` of each of the
+existing `Patient`s in the list. If there is a match, the corresponding `Patient` is returned. Else, returns null.
+* `retrievePatient` - this method is very similar to findPatient, but instead of returning the Patient found, it prints out the details
+of the `Patient` using the `toString` method in the `Patient` class.
+* `listPatients` - this method first checks if the list of `Patient`s is non-empty. If not so, it prints a message that there are
 no patients in the system currently and terminates.
-Else, it iterates through the ArrayList of Patients and uses the toString method in Patient to print out the details of each Patient.
-
-modifyPatientDetails - this method takes in name, birthDate, gender and ID. It tries to find the patient with a matching ID.
-If the patient is not found, returns. Else, if the name is not an empty String, replace the existing name with the input name.
-Repeat for birthDate and gender.
+Else, it iterates through the list of `Patient`s and uses the `toString` method in `Patient` to print out the details of each `Patient`.
+* `modifyPatientDetails` - this method takes in `name`, `birthDate`, `gender` and `ID`. It tries to find the patient with a matching `ID`.
+If the `Patient` is not found, returns. Else, if the name is not an empty `String`, replace the existing `name` with the input `name`.
+Repeat for `birthDate` and `gender`.
 
 ### VisitList Component
 The `VisitList` Component,
@@ -54,7 +64,7 @@ The `VisitList` Component,
 ### PrescriptionList component
 **API**: `PrescriptionList.java`
 
-![](../diagrams/PrescriptionListClassDiagram.png)
+![](images/PrescriptionListClassDiagram.png)
 
 The `PrescriptionList` component,
 * stores the list of prescriptions
@@ -80,39 +90,78 @@ specified index
 * **`activatePrescription`** - This method allows user to set the prescription of specified index as active.
 * **`deactivatePrescription`** - This method allows user to set the prescription of specified index as inactive.
 
-### Prescription component
-The `Prescription` component,
-* stores the medicine name
-* the medicines timeInterval 
-* patient ID
-* dosage
-* if the Prescription is active or not 
+**Members in `Prescription` class**
 
-**Methods in `Prescription` class:**
-* 'add' - creates a new Prescription - needs to insert all the components except if active or not (if not included the default is active )
-* Getters and Setters for each of the components
-* Print format
-* method that checks if a patient has the Prescription
-* method that checks if a patient has the Prescription and if the Prescription is active
+* `medicine` - Stores the medicine name
+* `timeInterval` - The time Interval the medicine is taken between
+* `patientId` - The identification number of patient 
+* `dosage` 
+* `isActive` - Whether is the prescription currently active or not
+
+How adding a new prescription into the list works:
+
+1. When `PrescriptionList` is called to add a new prescription with the given details, it calls the constructor of the 
+`Prescription` class to create the `Prescription` instance.
+2. The new prescription is then added to the `ArrayList<Prescription>`
+3. Lastly, `UI` prints an acknowledge message of what the new prescription has.
+
+![](images/PrescriptionListAdd.png)
+
+How activating/deactivating an existing prescription in the list works:
+
+1. When `activate(ui, 1)` initiates an action in the `PrescriptionList`, it transfer the prescriptionNumber `1` into
+the index in the array.
+2. It gets the `prescriptionEdited` from the `ArrayList<>` with the resolved index.
+3. Then, the `prescriptionEdited` is set active.
+4. Lastly, `UI` prints an acknowledge message of the most updated details of the prescription.
+
+![](images/PrescriptionListActivate.png)
+
 ## Product scope
 ### Target user profile
 
-{Describe the target user profile}
+Our target user profile is a doctor in need of quick access to information about his/her patients, visits, and
+prescriptions. The doctor can quickly see all of the prescriptions that have been given, when a patient has visited, 
+what their reasons were, etc. through this interface. The doctor can also quickly update this before, during, or after
+each visit and prescription to ensure that it stays up to date and easy-to-use.
 
 ### Value proposition
 
-{Describe the value proposition: what problem does it solve?}
+Doctors tend to use sticky notes or quick pieces of paper to jot down notes such as prescriptions, reason for visit, etc.
+This platform allows a doctor to quickly reference basic information about a patient, find their previous prescriptions
+and visits, and look at the history to make a decision. A doctor can mark a prescription as active or inactive, allowing
+a consistent history. Moreover, the only part of these records that a doctor can delete is a reason, ensuring continuity
+of information.
 
 ## User Stories
 
-|Version| As a ... | I want to ... | So that I can ...|
-|--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
+| Version | As a ...    | I want to ...                                               | So that I can ...                                                                   |
+|---------|-------------|-------------------------------------------------------------|-------------------------------------------------------------------------------------|
+| v1.0    | user        | exit the program                                            | leave the program without damage                                                    |
+| v1.0    | doctor/user | add a new patient                                           | have the patient record saved to the list of patients                               |
+| v1.0    | doctor/user | see all patients                                            | see all the patients that are saved in the program i.e. are treated by me           |
+| v1.0    | doctor/user | see all the information about a patient                     | refer to them to see all the patients that are being treated by me                  |
+| v1.0    | doctor/user | edit a patients record                                      | change his record to reflect changes in the patient                                 |
+| v1.0    | doctor/user | add a patient visitation record                             | refer later on for future care for the patient                                      |
+| v1.0    | doctor/user | add a reason for visit to the existing record               | have on record the reason the patient came for treatment for future use             |
+| v1.0    | doctor/user | edit a patient visitation record                            | change the visit information in case error was entered                              |
+| v1.0    | doctor/user | add new prescription for a patient                          | add a new prescription for treatment for the patient                                |
+| v1.0    | doctor/user | edit a prescription                                         | changes a prescription in case of a change in treatment or error in the current one |
+| v1.0    | doctor/user | view list of existing prescriptions for a patient           | refer to them for future patient treatments                                         |
+| v2.0    | doctor/user | view information for patient specific visit                 | refer to the visit in case i want to reflect on the visit                           |
+| v2.0    | doctor/user | view all patients visit                                     | see the patient and where treated and are on record                                 |
+| v2.0    | doctor/user | view list of all existing prescriptions for all of patients | see which prescription the patient was ever prescribed                              |
+| v2.0    | doctor/user | view list of all active prescriptions for all of patients   | see which prescription the patient is currently taking                              |
+| v2.0    | doctor/user | change a prescription status to active                      | have on record that the patient is currently taking the prescription                |
+| v2.0    | doctor/user | change a prescription status to inactive                    | have on record that the patient is currently not taking the prescription            |
+
+
+
 |v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
 
 ## Non-Functional Requirements
 
-Parser:
+### Parser
 
 The parsing class utilizes regex for each of the commands for two main reasons: usability and error-catching.
 
@@ -124,10 +173,39 @@ or of a certain type (i.e. the ID is one word made up of letters and numbers).
 
 If there is an error, the regex also helps with identifying the exact error issue, and
 sending that back to the user.
+
+For example: the `add` command for `Patient`
+
+`To add a patient: add n/[name] g/[M/F] d/[DOB] i/[ID]`
+* n/ checks for one or two words to store as the name
+* g/ checks for one letter indicating male or female
+* d/ checks for date of birth formatted as (DD-MM-YYY)
+* i/ checks for a single ID containing numbers or letters
+
+### Index Reference
+
+We utilize both ID and index reference in this tP, which may look confusing at first.
+Indices for visit and prescription are unique when created, and can be found when adding, editing, or viewing
+a visit or prescription. If you want to find a visit, you can search for a patient's visits through viewPatient in the
+visit menu, and then use the given index of the visit you find to edit it. The same workflow applies for prescription.
+
 ## Glossary
 
-* *glossary item* - Definition
+* *patient* - A single individual with a unique ID
+* *visit* - A single visit of one existing patient on a specific date and time
+* *prescription* - A single prescription of one existing patient, either inactive if it has been updated
+* or active based on in the patient has been using it or if a new record has replaced it
 
 ## Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+To load sample data, please reference the following formats:
+
+`patient.txt`: Name | DOB | G | ID
+- Example: Jane Doe | 09-09-1978 | F | T1
+
+`visit.txt`: ID | Reason | Date | Time
+- Example: T1 | checkup | 08-11-2022 | 08:00
+
+`prescription.txt`: ID | Name | Dosage | Time Interval | Active Status (True or False)
+- Example: T2 | penicillin | 1 tablet | every 3 days | T
+

@@ -20,7 +20,7 @@ public class PatientList {
 
     public void retrievePatient(UI ui, String id) {
         for (Patient patient : patients) {
-            if (patient.getId().equals(id)) {
+            if (patient.getId().equalsIgnoreCase(id)) {
                 System.out.println("The patient with the supplied ID was found! Here are the details of the patient: ");
                 ui.printLine();
                 System.out.println(patient);
@@ -34,7 +34,7 @@ public class PatientList {
 
     public Patient findPatient(String id) {
         for (Patient patient : patients) {
-            if (patient.getId().equals(id)) {
+            if (patient.getId().equalsIgnoreCase(id)) {
                 return patient;
             }
         }
@@ -91,6 +91,10 @@ public class PatientList {
 
         ui.printLine();
 
+    }
+
+    public boolean isUniqueId(String patientID) {
+        return findPatient(patientID.toUpperCase()) == null;
     }
 
     public ArrayList<Patient> getPatients() {

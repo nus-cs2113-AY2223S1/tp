@@ -34,17 +34,23 @@ public class VisitList {
         visitList.add(visit);
     }
 
-    //TODO: in future version, should think about how to edit reason when we have 2 visit records of the same ID
-    public void editReason(UI ui, String id, String reason) {
-        assert id != null : "id should not be null";
-        int i = 0;
-        for (i = 0; i < visitList.size(); i++) {
-            if (visitList.get(i).getId().equals(id)) {
-                visitList.get(i).setReason(reason);
-                break;
-            }
+    public void editReason(UI ui, int index, String reason) {
+        assert reason != null : "reason should not be null, use deleteReason instead";
+        if (index < 1 || index > getTotalVisits()) {
+            System.out.println("There is no such visit in the system with index " + index + "!");
+        } else {
+            visitList.get(index - 1).setReason(reason);
+            ui.printEditVisitReasonMessage(visitList.get(index - 1).toString());
         }
-        ui.printEditVisitReasonMessage(visitList.get(i).toString());
+    }
+
+    public void deleteReason(UI ui, int index) {
+        if (index < 1 || index > getTotalVisits()) {
+            System.out.println("There is no such visit in the system with index " + index + "!");
+        } else {
+            visitList.get(index - 1).setReason("");
+            ui.printDeleteVisitReasonMessage(visitList.get(index - 1).toString());
+        }
     }
 
     public boolean isEmpty() {
@@ -76,7 +82,7 @@ public class VisitList {
         }
         int noOfPatientVisits = 0;
         for (int i = 0; i < getTotalVisits(); i++) {
-            if (visitList.get(i).getId().equals(id)) {
+            if (visitList.get(i).getId().equalsIgnoreCase(id)) {
                 if (noOfPatientVisits == 0) {
                     System.out.println("Here are the list of visits for Patient with ID: " + id);
                 }

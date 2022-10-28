@@ -74,13 +74,18 @@ public class Parser {
             if (matchesView) {
                 patientList.listPatients(ui);
             } else if (matcherAdd.find()) {
+                String patientId = matcherAdd.group(4).toUpperCase();
+                if (!patientList.isUniqueId(patientId)) {
+                    throw new OneDocException("Please only use unique IDs to create patients!"
+                            + " A patient with this ID already exists");
+                }
                 patientList.addPatient(ui, matcherAdd.group(1), matcherAdd.group(3),
-                        matcherAdd.group(2), matcherAdd.group(4));
+                        matcherAdd.group(2), patientId);
                 storage.savePatientData(patientList);
             } else if (matcherRetrieve.find()) {
-                patientList.retrievePatient(ui, matcherRetrieve.group(1));
+                patientList.retrievePatient(ui, matcherRetrieve.group(1).toUpperCase());
             } else if (matcherEdit.find()) {
-                parseEditPatient(matcherEdit.group(1), matcherEdit.group(2), matcherEdit.group(3));
+                parseEditPatient(matcherEdit.group(1).toUpperCase(), matcherEdit.group(2), matcherEdit.group(3));
             } else {
                 throw new OneDocException("Your input is incorrect! Please format it as such:"
                         + UI.PATIENT_ADD
@@ -115,18 +120,17 @@ public class Parser {
             boolean matchesView = input.equalsIgnoreCase(VIEW_ALL_COMMAND);
             Matcher matcherAdd = addVisitMatcher(input);
             Matcher matcherEdit = editVisitMatcher(input);
+            Matcher matcherDelete = deleteReasonMatcher(input);
             Matcher matcherViewPatient = viewVisitPatientMatcher(input);
             Matcher matcherViewVisit = viewOneVisitMatcher(input);
             if (matchesView) {
                 visitList.viewAll(ui);
             } else if (matcherAdd.find()) {
-                String patientId = matcherAdd.group(1);
+                String patientId = matcherAdd.group(1).toUpperCase();
                 checkPatientExists(patientId);
                 assert !patientId.contains(" ");
                 String reason = matcherAdd.group(4);
-                System.out.println(reason);
                 if (reason == null || reason.isEmpty()) {
-                    System.out.println("reached");
                     visitList.addVisit(ui, patientId, matcherAdd.group(2), matcherAdd.group(3));
                     storage.saveVisitData(visitList);
                 } else {
@@ -135,21 +139,21 @@ public class Parser {
                     storage.saveVisitData(visitList);
                 }
             } else if (matcherEdit.find()) {
-                String patientId = matcherEdit.group(1);
-                checkPatientExists(patientId);
-                assert !patientId.contains(" ");
-                visitList.editReason(ui, patientId, matcherEdit.group(2));
+                String reason = matcherEdit.group(2);
+                if (reason.isEmpty()) {
+                    throw new OneDocException("Please don't use edit to put in an empty reason! Use deleteReason");
+                }
+                visitList.editReason(ui, Integer.parseInt(matcherEdit.group(1)), reason);
                 storage.saveVisitData(visitList);
+            } else if (matcherDelete.find()) {
+                visitList.deleteReason(ui, Integer.parseInt(matcherDelete.group(1)));
             } else if (matcherViewPatient.find()) {
-                String patientId = matcherViewPatient.group(1);
+                String patientId = matcherViewPatient.group(1).toUpperCase();
                 checkPatientExists(patientId);
                 assert !patientId.contains(" ");
                 visitList.viewPatient(ui, patientId);
             } else if (matcherViewVisit.find()) {
-                String patientId = matcherViewVisit.group(1);
-                checkPatientExists(patientId);
-                assert !patientId.contains(" ");
-                //visitList.viewVisit(ui, patientId, matcherViewVisit.group(2));
+                visitList.viewVisit(ui, Integer.parseInt(matcherViewVisit.group(1)));
             } else {
                 throw new OneDocException("Your input is incorrect! Please format it as such:"
                         + UI.VISIT_ADD
@@ -157,11 +161,12 @@ public class Parser {
                         + "\nt - The time should be formatted as HH:MM"
                         + "\nr - The reason is optional, and can be any number of words"
                         + UI.VISIT_EDIT
+                        + "\nx - The index should be a displayed number next to the visit"
                         + "\nr - The reason can be added or edited with any number of words"
+                        + UI.VISIT_DELETE_REASON
                         + UI.VISIT_VIEW_ALL
                         + UI.VISIT_VIEW_PATIENT
-                        + UI.VISIT_VIEW
-                        + "\nINDEX - The index should be relative to all the visits of a patient");
+                        + UI.VISIT_VIEW);
             }
         } catch (OneDocException e) {
             System.out.println("Incorrect format: " + e.getMessage());
@@ -192,14 +197,14 @@ public class Parser {
             if (matchesView) {
                 prescriptionList.viewAll(ui);
             } else if (matcherAdd.find()) {
-                String patientId = matcherAdd.group(1);
+                String patientId = matcherAdd.group(1).toUpperCase();
                 checkPatientExists(patientId);
                 assert !patientId.contains(" ");
                 prescriptionList.add(ui, patientId, matcherAdd.group(2),
                         matcherAdd.group(3), matcherAdd.group(4));
                 storage.savePrescriptionData(prescriptionList);
             } else if (matcherEdit.find()) {
-                parseEditPrescription(Integer.valueOf(matcherEdit.group(1)),
+                parseEditPrescription(Integer.parseInt(matcherEdit.group(1)),
                         matcherEdit.group(2), matcherEdit.group(3));
             } else if (matcherViewPatient.find()) {
                 String patientId = matcherViewPatient.group(1);
@@ -212,11 +217,9 @@ public class Parser {
                 assert !patientId.contains(" ");
                 prescriptionList.viewActivePatientPrescription(ui, patientId);
             } else if (matcherChangeActive.find()) {
-                //index is matcherChangeActive.group(1),
                 prescriptionList.activatePrescription(ui, matcherChangeActive.group(1));
                 storage.savePrescriptionData(prescriptionList);
             } else if (matcherChangeInactive.find()) {
-                //index is matcherChangeInactive.group(1),
                 prescriptionList.deactivatePrescription(ui, matcherChangeInactive.group(1));
                 storage.savePrescriptionData(prescriptionList);
             } else {
@@ -232,7 +235,7 @@ public class Parser {
                         + UI.PRESCRIPTION_VIEW_ACTIVE
                         + UI.PRESCRIPTION_CHANGE_ACTIVE
                         + UI.PRESCRIPTION_CHANGE_INACTIVE
-                        + "\nINDEX - The index should be relative to all the visits of a patient");
+                        + "\nx - The index should be relative to all the visits of a patient");
             }
         } catch (OneDocException e) {
             System.out.println("Incorrect format: " + e.getMessage());
@@ -314,8 +317,14 @@ public class Parser {
 
     private static Matcher editVisitMatcher(String input) {
         Pattern editVisitPattern = Pattern.compile(
-                "^edit\\s*i/\\s*(\\w+)\\s*r/\\s*((?:\\w+\\s*)*\\w+)\\s*$", Pattern.CASE_INSENSITIVE);
+                "^edit\\s*x/\\s*(\\d+)\\s*r/\\s*((?:\\w+\\s*)*\\w+)\\s*$", Pattern.CASE_INSENSITIVE);
         return editVisitPattern.matcher(input);
+    }
+
+    private static Matcher deleteReasonMatcher(String input) {
+        Pattern deleteReasonPattern = Pattern.compile(
+                "^deleteReason\\s*x/\\s*(\\d+)\\s*$", Pattern.CASE_INSENSITIVE);
+        return deleteReasonPattern.matcher(input);
     }
 
     private static Matcher viewVisitPatientMatcher(String input) {
@@ -326,7 +335,7 @@ public class Parser {
 
     private static Matcher viewOneVisitMatcher(String input) {
         Pattern viewOneVisitPattern = Pattern.compile(
-                "^viewVisit\\s*i/\\s*(\\w+)\\s*(\\d+)\\s*$", Pattern.CASE_INSENSITIVE);
+                "^viewVisit\\s*x/\\s*(\\d+)\\s*$", Pattern.CASE_INSENSITIVE);
         return viewOneVisitPattern.matcher(input);
     }
 
@@ -340,7 +349,7 @@ public class Parser {
 
     private static Matcher editPrescriptionMatcher(String input) {
         Pattern editPrescriptionPattern = Pattern.compile(
-                "^edit\\s*i/\\s*(\\d+)\\s*(n|d|t)/\\s*([\\w-\\s]+)$",
+                "^edit\\s*x/\\s*(\\d+)\\s*(n|d|t)/\\s*([\\w-\\s]+)$",
                 Pattern.CASE_INSENSITIVE);
         return editPrescriptionPattern.matcher(input);
     }
@@ -359,13 +368,13 @@ public class Parser {
 
     private static Matcher changePrescriptionActiveMatcher(String input) {
         Pattern changePrescriptionActivePattern = Pattern.compile(
-                "^activate\\s*i/\\s*(\\d+)\\s*$", Pattern.CASE_INSENSITIVE);
+                "^activate\\s*x/\\s*(\\d+)\\s*$", Pattern.CASE_INSENSITIVE);
         return changePrescriptionActivePattern.matcher(input);
     }
 
     private static Matcher changePrescriptionInactiveMatcher(String input) {
         Pattern changePrescriptionInactivePattern = Pattern.compile(
-                "^deactivate\\s*i/\\s*(\\d+)\\s*$", Pattern.CASE_INSENSITIVE);
+                "^deactivate\\s*x/\\s*(\\d+)\\s*$", Pattern.CASE_INSENSITIVE);
         return changePrescriptionInactivePattern.matcher(input);
     }
 
