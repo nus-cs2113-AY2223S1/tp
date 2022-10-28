@@ -24,12 +24,20 @@ Adds a new movie review to your list.
 Usage: 
 `add /movie inception /rating 99 /date 10-01-2020 /genre thriller`
 
+Output:
+```
+Got it. I've added the following item to the list:
+        [Movie]  up  Rating:99.0 Genre: animated Date watched:10-01-2020
+
+        Now you have 5 reviews in the list.
+```
+
 ### Display reviews: `list`
 Displays all movies and television shows you have reviewed. Output is separated by media category. 
 
 **Format**: `list`
 
-Usage
+Output:
 ```
 ---Here are the reviews in your list---
 
@@ -57,54 +65,78 @@ Deletes all reviews in your list.
 
 **Format**: `clear`
 
-Usage: `clear`
-
 ### Sort reviews: 'sort'
-Sorts the review list by title, rating, date or genre. Output is separated by media category.
+Sorts reviews in your list. Sorting is possible by the following fields:
+rating, title, genre and date
 
-**Format**: `sort <category>`
+
+**Format**: `sort [field]`
 
 Usage:
+sort rating
+sort title
+sort genre
+sort date
 
-`sort title`
+Output:
+```
+Your list has been sorted by rating
+---Here are the reviews in your list---
 
-`sort rating`
+Movies:
+1. [Movie]  interstellar  Rating:50.0 Genre: action Date watched:29-01-2000
+2. [Movie]  titanic  Rating:98.0 Genre: romance Date watched:01-02-2019
+3. [Movie]  inception  Rating:99.0 Genre: thriller Date watched:10-01-2020
 
-`sort date`
-
-`sort genre`
+TV Shows:
+1. [TV Show]  friends  Rating:98.0 Genre: romance  Date watched:01-02-2019 Site:  netflix
+```
 
 ### Find reviews: 'find'
 Allows the searching of a particular review.
 
-**Format**: ``
+**Format**: `find [string]`
 
-Usage:
+Usage: find inc
+
+Output:
 ```
+---Here are the reviews that match the keyword---
+
+Movies:
+1. [Movie]  inception  Rating:99.0 Genre: thriller Date watched:10-01-2020
+
+TV Shows:
 ```
 
 ### Favourite reviews: 'favourite'
-Marks a review as favourite if it has not already been marked, or unmarks a review as favourite if it has already been
-marked.
+Lets you mark items you find particularly notable or want to watch again for easier reference.
 
-**Format**: `favourite <index>`
+**Format**: `favourite [list position]`
 
-Usage:
-`favourite 1`
-`favourite 2`
+Usage: favourite 1
+
+Output:
+```
+The following task has been starred:
+[Movie]  inception  Rating:99.0 Genre: thriller Date watched:10-01-2020
+```
 
 ### List favourite reviews: 'favourite list'
 Lets you list your favourited items.
 
-**Format**: `favourite list`
+**Format and usage**: `favourite list`
 
-Usage: `favourite list`
-
+Output:
+```
+Your favourites are:
+[Movie]  inception  Rating:99.0 Genre: thriller Date watched:10-01-2020
+[Movie]  titanic  Rating:98.0 Genre: romance Date watched:01-02-2019
+[TV Show]  titanic  Rating:98.0 Genre: romance  Date watched:01-02-2019 Site:  netflix
+[Movie]  hey  Rating:50.0 Genre: action Date watched:29-01-2000
+```
 
 [//]: # (## Command Summary)
 
 [//]: # ()
 [//]: # ({Give a 'cheat sheet' of commands here})
-
-[//]: # ()
-[//]: # (* Add todo `todo n/TODO_NAME d/DEADLINE`)
