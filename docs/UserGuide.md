@@ -37,7 +37,7 @@ Displays all movies and television shows you have reviewed. Output is separated 
 
 **Format**: `list`
 
-Output
+Output:
 ```
 ---Here are the reviews in your list---
 
@@ -65,15 +65,31 @@ Deletes all reviews in your list.
 
 **Format**: `clear`
 
-Usage:
-
 ### Sort reviews: 'sort'
-Sorts reviews in your list. Sorting is possible by rating and date.
+Sorts reviews in your list. Sorting is possible by the following fields:
+rating, title, genre and date
 
-**Format**: ``
+
+**Format**: `sort [field]`
 
 Usage:
+sort rating
+sort title
+sort genre
+sort date
+
+Output:
 ```
+Your list has been sorted by rating
+---Here are the reviews in your list---
+
+Movies:
+1. [Movie]  interstellar  Rating:50.0 Genre: action Date watched:29-01-2000
+2. [Movie]  titanic  Rating:98.0 Genre: romance Date watched:01-02-2019
+3. [Movie]  inception  Rating:99.0 Genre: thriller Date watched:10-01-2020
+
+TV Shows:
+1. [TV Show]  friends  Rating:98.0 Genre: romance  Date watched:01-02-2019 Site:  netflix
 ```
 
 ### Find reviews: 'find'
@@ -81,9 +97,10 @@ Allows the searching of a particular review.
 
 **Format**: `find [string]`
 
-Example output:
+Usage: find inc
+
+Output:
 ```
-find inc
 ---Here are the reviews that match the keyword---
 
 Movies:
@@ -98,8 +115,9 @@ Lets you mark items you find particularly notable or wantt to watch again for ea
 **Format**: `favourite [list position]`
 
 Usage: favourite 1
+
+Output:
 ```
-favourite 1
 The following task has been starred:
 [Movie]  inception  Rating:99.0 Genre: thriller Date watched:10-01-2020
 ```
@@ -109,7 +127,7 @@ Lets you list your favourited items.
 
 **Format and usage**: `favourite list`
 
-Example Output:
+Output:
 ```
 Your favourites are:
 [Movie]  inception  Rating:99.0 Genre: thriller Date watched:10-01-2020
