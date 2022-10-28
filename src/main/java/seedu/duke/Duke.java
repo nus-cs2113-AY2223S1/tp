@@ -219,7 +219,7 @@ public class Duke {
             throws ModuleNotFoundException, InvalidUserCommandException {
         String moduleCode = addCommand.getModuleCode();
         String universityName = addCommand.getUniversityName();
-        ModuleMapping moduleMapping = Database.findPuMapping(moduleCode);
+        ModuleMapping moduleMapping = Database.findPuMapping(moduleCode, universityName);
         Module puModule = moduleMapping.getPartnerUniversityModule();
         Module nusModule = moduleMapping.getNusModule();
         UserModuleMapping userModuleToAdd = new UserModuleMapping(puModule.getCode(),

@@ -145,7 +145,8 @@ public class CommandParser {
             return null;
         } else {
             String code = parameters[MODULE_INDEX].substring(2);
-            Module puModule = Database.findPuMapping(code).getPartnerUniversityModule();
+            String universityName = parameters[UNIVERSITY_INDEX].substring(2);
+            Module puModule = Database.findPuMapping(code, universityName).getPartnerUniversityModule();
             String day = parameters[DAY_INDEX].substring(2);
             String startTime = parameters[LESSON_START_TIME_INDEX].substring(3);
             String endTime = parameters[LESSON_END_TIME_INDEX].substring(3);

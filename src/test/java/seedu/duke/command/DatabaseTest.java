@@ -48,14 +48,14 @@ public class DatabaseTest {
         assertEquals(
                 "C3130 Information Security 5MCs in Aalto University | CS2107 Introduction to Information "
                         + "Se 4MCs in NUS",
-                Database.findPuMapping("C3130").toString());
+                Database.findPuMapping("C3130", "Aalto University").toString());
     }
 
     @Test
     void findPuMapping_invalidModule_throwsException() throws ModuleNotFoundException {
         DatabaseStorage.loadDatabase();
 
-        assertThrows(ModuleNotFoundException.class, () -> Database.findPuMapping("CS2113").toString());
+        assertThrows(ModuleNotFoundException.class, () -> Database.findPuMapping("CS2113", "ABCDEFG").toString());
     }
 
     @Test
