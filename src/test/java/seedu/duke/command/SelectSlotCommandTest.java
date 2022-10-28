@@ -8,7 +8,11 @@ import seedu.duke.utils.Storage;
 import seedu.duke.utils.Ui;
 import seedu.duke.model.Module;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 
 public class SelectSlotCommandTest {
 
