@@ -14,17 +14,17 @@ import java.util.List;
  * Delete module to state by module code, updates storage and displays execution through ui.
  */
 
-public class DeleteModuleCommand extends Command {
+public class RemoveModuleCommand extends Command {
     private Module module;
     private boolean successful;
 
-    public static final String COMMAND_WORD = "delete";
-    public static final String COMMAND_USAGE = "delete [ MODULE_CODE ]";
+    public static final String COMMAND_WORD = "remove";
+    public static final String COMMAND_USAGE = "remove [ MODULE_CODE ]";
     public static final String COMMAND_DESCRIPTION = "Remove a module from YAMOM timetable.";
 
     private static final String ERROR_WRONG_FORMAT = "Wrong format, should be: " + COMMAND_USAGE;
 
-    public DeleteModuleCommand(String[] input) throws YamomException {
+    public RemoveModuleCommand(String[] input) throws YamomException {
         super(input);
         Parser.moduleRelatedCommandError(input, ERROR_WRONG_FORMAT);
 

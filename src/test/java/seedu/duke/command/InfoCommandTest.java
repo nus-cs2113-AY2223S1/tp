@@ -19,7 +19,7 @@ import seedu.duke.model.Module;
 import seedu.duke.utils.Ui;
 
 
-public class GetModuleCommandTest {
+public class InfoCommandTest {
     @Test
     void getModuleCommand_validModuleCodeCS1010X_expectModuleDetailsOutput() throws YamomException, IOException {
         Ui ui = new Ui();
@@ -28,11 +28,11 @@ public class GetModuleCommandTest {
         state.setSemester(1);
 
         String[] input = {"get", "CS1010X"};
-        GetModuleCommand getModuleCommand = new GetModuleCommand(input);
+        InfoCommand getModuleCommand = new InfoCommand(input);
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
         getModuleCommand.execute(state, ui, null);
-        InputStream stream = GetModuleCommandTest.class.getClassLoader()
+        InputStream stream = InfoCommandTest.class.getClassLoader()
                 .getResourceAsStream("moduleDetailsCS1010X.txt");
         String expectedOutput = new String(stream.readAllBytes(), StandardCharsets.UTF_8);
         stream.close();
@@ -48,11 +48,11 @@ public class GetModuleCommandTest {
         state.setSemester(1);
         String[] input = {"get", "CS2113"};
 
-        GetModuleCommand getModuleCommand = new GetModuleCommand(input);
+        InfoCommand getModuleCommand = new InfoCommand(input);
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
         getModuleCommand.execute(state, ui, null);
-        InputStream stream = GetModuleCommandTest.class.getClassLoader().getResourceAsStream("moduleDetailsCS2113.txt");
+        InputStream stream = InfoCommandTest.class.getClassLoader().getResourceAsStream("moduleDetailsCS2113.txt");
         String expectedOutput = new String(stream.readAllBytes(), StandardCharsets.UTF_8);
         stream.close();
         assertEquals(expectedOutput.replaceAll("\\s+", ""),
@@ -68,7 +68,7 @@ public class GetModuleCommandTest {
 
         try {
             String[] input = {"get", "X1010SC"};
-            GetModuleCommand getModuleCommand = new GetModuleCommand(input);
+            InfoCommand getModuleCommand = new InfoCommand(input);
             getModuleCommand.execute(state, ui, null);
             fail();
         } catch (YamomException e) {
@@ -86,7 +86,7 @@ public class GetModuleCommandTest {
 
         try {
             String[] input = {"get"};
-            GetModuleCommand getModuleCommand = new GetModuleCommand(input);
+            InfoCommand getModuleCommand = new InfoCommand(input);
             getModuleCommand.execute(state, ui, null);
             fail();
         } catch (YamomException e) {

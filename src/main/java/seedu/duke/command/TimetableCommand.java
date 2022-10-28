@@ -16,9 +16,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class ViewTimetableCommand extends Command {
-    public static final String COMMAND_WORD = "view";
-    public static final String COMMAND_USAGE = "view < /fancy | /simple >";
+public class TimetableCommand extends Command {
+    public static final String COMMAND_WORD = "timetable";
+    public static final String COMMAND_USAGE = "timetable < /fancy | /simple >";
     public static final String COMMAND_DESCRIPTION = "Display current timetable.";
 
     private static final String ERROR_MESSAGE_EMPTY_TIMETABLE = "Your timetable is empty."
@@ -27,7 +27,7 @@ public class ViewTimetableCommand extends Command {
     private boolean showFancy;
     private boolean showSimple;
 
-    public ViewTimetableCommand(String input) throws YamomException {
+    public TimetableCommand(String input) throws YamomException {
         super(input.split("\\s+"));
         var params = Parser.parseParams(input);
         showFancy = params.containsKey("fancy");

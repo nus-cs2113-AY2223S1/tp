@@ -17,14 +17,21 @@ YAMOM is designed for users who are proficient in Command Line Interface (CLI).
     - [Getting help: `help`](#getting-help-help)
     - [Exiting YAMOM: `bye`](#exiting-yamom-bye)
     - [Add a module: `add`](#add-a-module-add)
-    - [Removing a module: `delete`](#removing-a-module-delete)
+    - [Removing a module: `remove`](#removing-a-module-remove)
     - [Search for Modules: `search`](#search-for-modules-search)
     - [Changing semester to plan: `semester`](#changing-semester-to-plan-semester)
-    - [Viewing user timetable: `view`](#viewing-user-timetable-view)
-    - [List out selected module: `list`](#listing-out-all-selected-modules-list)
+    - [Viewing user timetable: `timetable`](#viewing-user-timetable-timetable)
+    - [Listing out all selected modules: `list`](#listing-out-all-selected-modules-list)
     - [Select a timetable slot: `select`](#select-a-timetable-slot-select)
-    - [Export Timetable: `export`](#creating-an-nusmod-link-export)
-    - [Import Timetable: `import`](#importing-a-timetable-import)
+    - [Creating an NUSMod Link: `export`](#creating-an-nusmod-link-export)
+    - [Importing a timetable: `import`](#importing-a-timetable-import)
+  - [Application Data](#application-data)
+    - [Data Storage](#data-storage)
+    - [Transfer to another computer](#transfer-to-another-computer)
+    - [Transfer to NUSMODs (for NUS students)](#transfer-to-nusmods-for-nus-students)
+  - [FAQ](#faq)
+  - [Command summary](#command-summary)
+  - [Credits](#credits)
 <!--    - [Feature X: `COMMAND`](#feature-x-command) -->
   - [Application Data](#application-data)
     - [Data Storage](#data-storage)
@@ -78,7 +85,7 @@ help
 Here are all the commands available in YAMOM!
 
 add	: add a module into YAMOM timetable.
-delete	: remove a module from YAMOM timetable.
+remove	: remove a module from YAMOM timetable.
 list	: List out all the selected modules and lesson slots.
 bye	: Exit YAMOM!
 export	: Generates an NUSMod Link to be exported to the browser.
@@ -89,21 +96,21 @@ search	: List out all modules that contains a search term
 	 * the search term can either be module code or a keyword in module title.
 semester	: Select another semester to plan and organize timetable
 select	: Select a module slot
-view	: Display current user timetable
+timetable	: Display current user timetable
 
 Usage :
 	add [MODULE_CODE]
-	delete [MODULE_CODE]
+	remove [MODULE_CODE]
 	list
 	bye
 	export
-	get [MODULE_CODE]
+	info [MODULE_CODE]
 	help
 	import [NUSMods_LINK]
 	search (/code [MODULE_CODE] | /title [KEYWORD])
 	semester [SEMESTER_SELECTED]
 	select /module <MODULE_CODE> /type <LESSON_TYPE> /code <CLASS_NO>
-	view (fancy|simple)
+	timetable (fancy|simple)
 
 Note: [ ] are required elements, < > are optional elements
 For more detailed guide, please visit https://ay2223s1-cs2113-f11-3.github.io/tp/
@@ -180,23 +187,23 @@ Possible Error:
    --------------------------------------
    ```
 
-### Removing a module: `delete`
+### Removing a module: `remove`
 
 Removes a module from the user timetable
 
-Format: `delete MODULE_CODE`
+Format: `remove MODULE_CODE`
 
 * The `MODULE_CODE` is not case-sensitive, but has to be an exact match
 
 Example of usage:
 
-`delete CS2040`
+`remove CS2040`
 
-`delete cs3219`
+`remove cs3219`
 
 Sample Output:
 ```
-delete CS1010
+remove CS1010
 --------------------------------------
 CS1010 has been deleted
 --------------------------------------
@@ -204,7 +211,7 @@ CS1010 has been deleted
 
 Possible Error:
 
-* The error for delete is similar to the command `add`, see [add](#add-a-module-add)
+* The error for remove is similar to the command `add`, see [add](#add-a-module-add)
 
 ### Search for Modules: `search`
 
@@ -240,7 +247,7 @@ CG2028 Computer Organization
 CG2111A Engineering Principles and Practice II
 CG2271 Real-Time Operating Systems
 
-To get full details of the module, type 'get <module code>'
+To get full details of the module, type 'info <module code>'
 -------------------------------------------------------------------------------- 
 ```
 
@@ -296,20 +303,20 @@ Not a valid semester.
 --------------------------------------------------------------------------------
 ```
 
-### Viewing user timetable: `view`
+### Viewing user timetable: `timetable`
 
 Prints out the current user timetable.
 
-Format: `view /(simple|fancy)`  
-`view /simple` is equivalent to `view`  
+Format: `timetable /(simple|fancy)`  
+`timetable /simple` is equivalent to `timetable`  
 
 Example of usage:
 
-`view`
+`timetable`
 
 Sample Output:
 ```
-view
+timetable
 --------------------------------------
                                                                     
           : Mon      : Tues     : Wed      : Thur     : Fri         
@@ -334,7 +341,7 @@ Possible Error:
 
 - Empty timetable:
 ```
-view
+timetable
 --------------------------------------
 Error! 	Your timetable is empty.
 Please select your modules first before viewing.
@@ -342,21 +349,21 @@ Please select your modules first before viewing.
 ```
  - Random parameters:
 ```
-view timetable
+timetable timetable
 --------------------------------------
-Error! 	Unknown command. Maybe you meant "view".
+Error! 	Unknown command. Maybe you meant "timetable".
 --------------------------------------
 ```
  - Forgot backslash `/`:
 ```
-view fancy
+timetable fancy
 --------------------------------------
 Error! 	Unknown command. Maybe you forgot a "/".
 --------------------------------------
 ```
  - Contains both `/fancy` and `/simple`:
 ```
-view /simple /fancy
+timetable /simple /fancy
 --------------------------------------
 Error! 	Timetable cannot be both simple and fancy!
 --------------------------------------
@@ -562,15 +569,15 @@ Alternatively, you can export the timetable, copy the link generated, and import
 | Action                           | Format                                                                                         | Example                                                               |
 |----------------------------------|------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------|
 | Add a module                     | `add [MODULE_CODE]`                                                                            | `add CS2101`                                                          |
-| Delete a module                  | `delete [MODULE_CODE]`                                                                         | `delete CS2102`                                                       |
+| Remove a module                  | `remove [MODULE_CODE]`                                                                         | `remove CS2102`                                                       |
 | Exit application                 | `bye`                                                                                          | `bye`                                                                 |
-| Read more details about a module | `get [MODULE_CODE]`                                                                            | `get CS2103`                                                          |
+| Read more details about a module | `info [MODULE_CODE]`                                                                            | `info CS2103`                                                          |
 | Find module by keyword           | `search /code [MODULE_CODE] /title [KEYWORD] </level [MODULE_LEVEL]> </sem [MODULE_SEMESTER]>` | `search /code cs /level 2 /sem 1`                                     |
 | Seek help                        | `help`                                                                                         | `help`                                                                |
 | Import modules from NUSMods URL  | `import [URL]`                                                                                 | `import https://nusmods.com/timetable/sem-1/share?CS2113=LEC:1,TUT:4` |
 | Export modules to NUSMods URL    | `export`                                                                                       | `export`                                                              |
 | Change semester                  | `semester [SEMESTER]`                                                                          | `semester 2`                                                          |
-| View timetable                   | `view /fancy` OR `view /simple`                                                                | `view /fancy`                                                         |
+| View timetable                   | `timetable /fancy` OR `timetable /simple`                                                                | `timetable /fancy`                                                         |
 | List selected modules            | `list`                                                                                         | `list`                                                                |
 | Add module timetable slot        | `select /module <MODULE_CODE> /type <LESSON_TYPE> /code <CLASS_NO>`                            | `select /module CS1010 /type tutorial /code 1`                        |
 

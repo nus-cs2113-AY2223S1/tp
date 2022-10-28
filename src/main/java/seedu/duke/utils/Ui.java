@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 import org.apache.commons.lang3.StringUtils;
 
-import seedu.duke.command.ExitCommand;
+import seedu.duke.command.ByeCommand;
 
 //@author CheahHaoYi-reused
 //Reused from CheahHaoYi/ip Ui class with slight modification
@@ -52,7 +52,7 @@ public class Ui {
         try {
             return sanitizeInput(scanner.nextLine().trim());
         } catch (NoSuchElementException | IllegalStateException e) {
-            return ExitCommand.COMMAND_WORD;
+            return ByeCommand.COMMAND_WORD;
         }
     }
 

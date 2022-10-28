@@ -15,32 +15,32 @@ Here are all the commands available in YAMOM!
 
 add      : Add a module into YAMOM timetable.
 bye      : Exit YAMOM.
-delete   : Remove a module from YAMOM timetable.
 export   : Generates an NUSMod Link to be exported to the browser.
-get      : Show all details of a module.
 help     : List out all commands and their respective usages in YAMOM.
 import   : Imports a timetable from an NUSMod timetable sharing link.
+info     : Show all details of a module.
 list     : List out all the selected modules and lesson slots.
+remove   : Remove a module from YAMOM timetable.
 search   : List out all modules that contains a search term.
 select   : Select a module lesson slot.
 semester : Select another semester to plan and organize timetable.
-view     : Display current timetable.
+timetable : Display current timetable.
 
 Usage :
       add [ MODULE_CODE ]
       bye
-      delete [ MODULE_CODE ]
       export
-      get [ MODULE_CODE ]
       help
       import [ NUSMODS_LINK ]
+      info [ MODULE_CODE ]
       list
+      remove [ MODULE_CODE ]
       search [ /code PARTIAL_MODULE_CODE | /title KEYWORD ] < /level MODULE_LEVEL > < /sem SEMESTER >
              * the search term can either be module code or a keyword in module title.
              * MODULE_LEVEL and SEMESTER should be a single digit number.
       select [ /module MODULE_CODE ] [ /type LESSON_TYPE ] [ /code CLASS_NO ]
       semester [ SEMESTER ]
-      view < /fancy | /simple >
+      timetable < /fancy | /simple >
 
 Note: [ ] are required elements,
       < > are optional elements,
@@ -56,7 +56,7 @@ Total 2 module(s) found
 CS2113    Software Engineering & Object-Oriented Programming
 CS2113T   Software Engineering & Object-Oriented Programming
 
-To get full details of the module, type 'get <module code>'
+To get full details of the module, type 'info <module code>'
 --------------------------------------------------------------------------------
 Sem [1] >> --------------------------------------------------------------------------------
 Processing "add cs2113" ...
@@ -121,7 +121,7 @@ CS1010   Programming Methodology
 Here's a list of your current selected module(s)!
 --------------------------------------------------------------------------------
 Sem [1] >> --------------------------------------------------------------------------------
-Processing "view /simple" ...
+Processing "timetable /simple" ...
 
                                                                     
           : Mon      : Tues     : Wed      : Thur     : Fri         
@@ -156,7 +156,7 @@ Processing "semester 2" ...
 You are now planning for semester 2
 --------------------------------------------------------------------------------
 Sem [2] >> --------------------------------------------------------------------------------
-Processing "get cs2113" ...
+Processing "info cs2113" ...
 
 Code         : CS2113
 Name         : Software Engineering & Object-Oriented Programming
