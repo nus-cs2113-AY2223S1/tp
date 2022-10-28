@@ -23,10 +23,10 @@ Format: `add /movie <title> /review <rating> /date <dateWatched>`
 
 Example of usage: 
 
-`add /movie Harry Potter /review 5.0 /date 10 Oct 2022`
+`add /movie Harry Potter /review 5.0 /date 10-01-2022`
 
 ### Display reviews: `list`
-Displays all movies and television shows you have reviewed. Output is seperated by media category. 
+Displays all movies and television shows you have reviewed. Output is separated by media category. 
 
 Format: `list`
 
@@ -45,6 +45,36 @@ Example of usage:
 Deletes all reviews in your list.
 
 Format: `clear`
+
+### Sort the review list: `sort`
+Sorts the review list by title, rating, date or genre. Output is separated by media category.
+
+Format: `sort <category>`
+
+Example of usage:
+
+`sort title`
+
+`sort rating`
+
+`sort date`
+
+`sort genre`
+
+### Mark or unmark a review as favourite: `favourite`
+Marks a review as favourite if it has not already been marked, or unmarks a review as favourite if it has already been 
+marked.
+
+Format: `favourite <index>`
+
+Example of usage:
+
+`favourite 1`
+
+### Display all favourite reviews: `favourite list`
+Displays a review list containing only reviews marked as favourite.
+
+Format: 'favourite list'
 
 [//]: # (## Command Summary)
 
