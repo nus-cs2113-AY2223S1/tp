@@ -86,6 +86,13 @@ public class UserList {
         throw new UserNotFoundException(MESSAGE_USER_NOT_FOUND);
     }
 
+    /**
+     * Get users that contains the keyword in their name.
+     *
+     * @param keyword keyword to find users
+     * @return a list of users with name containing the keyword
+     * @throws UserNotFoundException if user is not found
+     */
     public UserList getUsersByKeyword(String keyword) throws UserNotFoundException {
         UserList returnList = new UserList();
         for (User user : userList) {
@@ -101,6 +108,11 @@ public class UserList {
         return returnList;
     }
 
+    /**
+     * Overrides toString method of Object to get string representation of UserList.
+     *
+     * @return A string representation of UserList
+     */
     @Override
     public String toString() {
         StringBuilder listString = new StringBuilder();
@@ -116,6 +128,11 @@ public class UserList {
         return String.valueOf(listString);
     }
 
+    /**
+     * Formats the userList to store in memory.
+     *
+     * @return A formatted string of user list information
+     */
     public String convertUserListToFileFormat() {
         StringBuilder formattedString = new StringBuilder();
         for (User user : userList) {
