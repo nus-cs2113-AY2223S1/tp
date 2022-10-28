@@ -40,8 +40,10 @@ for easier reference. As an added feature, users can also curate their timetable
 
 1. Ensure that you have Java 11 or above installed.
 2. Download the latest version of `easySEP` from [here](https://github.com/AY2223S1-CS2113-W13-2/tp/releases).
-3. Open your command prompt to the folder where you saved the .jar file
-4. Run java -jar easySEP.jar
+3. Create a folder named `data` in the folder where you saved the .jar file
+4. Download `data.csv` from [here](https://github.com/AY2223S1-CS2113-W13-2/tp/blob/v2.0/data/data.csv) into the `data` folder
+5. Open your command prompt to the folder where you saved the .jar file
+6. Run java -jar easySEP.jar
 
 Expected output: 
 ```
