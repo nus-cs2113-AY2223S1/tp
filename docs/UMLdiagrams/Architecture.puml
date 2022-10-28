@@ -1,0 +1,27 @@
+@startuml
+allowmixing
+hide circle
+skinparam classAttributeIconSize 0
+
+Package " "<<Rectangle>>{
+    Class UI
+    Class Storage
+    Class State
+    Class Main
+    Class Commons
+    Class Parser
+}
+
+actor "User" as User
+file "file" as File
+
+Main --> UI
+Main -> State
+Main ---> Storage
+
+Commons .down.> Parser
+
+Storage ..> State
+Storage .right.>File
+User --> UI
+@enduml
