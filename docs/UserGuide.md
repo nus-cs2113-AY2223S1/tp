@@ -175,6 +175,48 @@ Example of usage:
 `withdraw sgd 100`
 `withdraw 100`
 
+### Convert money: `convert`
+Convert some money in a certain currency to another one in your wallet
+
+Format: 
+  1. `convert <oldCurrency> <oldAmount> <newCurrency>`
+  
+#You need to be logged into your wallet
+
+Example of usage: 
+
+`convert sgd 100 usd`
+
+In the example above, the command means converting 10 units of SGD to USD
+
+### Convert all money: `convertAll`
+Convert all money in your wallet to a certain currency
+
+Format: 
+  1. `convertAll <currency>`
+  
+#You need to be logged into your wallet
+
+Example of usage: 
+
+`convertAll sgd`
+
+In the example above, the command means converting all the money in the wallet to SGD
+
+### Set default currency: `setDefault`
+Set default currency of your wallet
+
+Format: 
+  1. `setDefault <currency>`
+  
+#You need to be logged into your wallet
+
+Example of usage: 
+
+`setDefault sgd`
+
+In the example above, the command means setting default currency to SGD
+
 ### Listing currencies: `list`
 Lists a detailed view of all the currencies that are available
 
@@ -280,7 +322,11 @@ Example of usage:
   
 #withdraw <currency> <amount>
 #withdraw <amount>
-  
+
+#convert
+#convertAll
+#setDefault
+
 #list
   
 #transfer <recipient> <amount> <currency>
