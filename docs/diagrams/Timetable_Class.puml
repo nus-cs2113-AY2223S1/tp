@@ -69,6 +69,9 @@ class ParseException {
 class InvalidLessonDayException {
 }
 
+class InvalidUniversityException {
+}
+
 TimetableManager "1" --> "*" Timetable :> Manages
 Timetable "1" --> "*" Lesson :> Contains
 Lesson --> InvalidModuleException : <<throws>>
@@ -78,6 +81,7 @@ Timetable --> ParseException : <<throws>>
 Timetable --> LessonNotFoundException : <<throws>>
 Timetable --> InvalidLessonDayException : <<throws>>
 TimetableManager --> TimetableNotFoundException : <<throws>>
+TimetableManager --> InvalidUniversityException : <<throws>>
 Module <|-- Lesson
 
 @enduml
