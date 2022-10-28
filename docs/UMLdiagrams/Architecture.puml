@@ -5,12 +5,11 @@ skinparam classAttributeIconSize 0
 
 Package " "<<Rectangle>>{
     Class UI
-    Class Logic
     Class Storage
     Class State
     Class Main
-    Class Model
     Class Commons
+    Class Parser
 }
 
 actor "User" as User
@@ -19,11 +18,8 @@ file "file" as File
 Main --> UI
 Main -> State
 Main ---> Storage
-Main -> Logic
 
-Logic -> State
-
-State ..> Model
+Commons .down.> Parser
 
 Storage ..> State
 Storage .right.>File
