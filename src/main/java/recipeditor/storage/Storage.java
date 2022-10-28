@@ -12,6 +12,7 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import recipeditor.parser.TextFileParser;
 import recipeditor.recipe.Ingredient;
 import recipeditor.recipe.Recipe;
 import recipeditor.recipe.RecipeList;
@@ -23,6 +24,7 @@ public class Storage {
     public static final String TEMPORARY_PATH = "./RecipeData/App/TemporaryFile.txt";
     private static final String DATA_STORAGE_PATH = "./RecipeData/";
     private static final String DATA_TEMPORARY_PATH = "./RecipeData/App";
+    public static final String RECIPES_FOLDER_PATH = "./RecipeData/Recipes";
     private static final String TEMPLATE_FILE = "# TITLE \n"
             + "Example Title \n\n"
             + "# DESCRIPTION\n"
@@ -196,7 +198,7 @@ public class Storage {
     }
 
     private static void generateTemplateFile() {
-        FileWriter fileWrite = null;
+        FileWriter fileWrite;
         try {
             fileWrite = new FileWriter(TEMPLATE_PATH);
             fileWrite.write(TEMPLATE_FILE);
@@ -217,5 +219,19 @@ public class Storage {
             getContent.append(scan.nextLine() + "\n");
         }
         return getContent.toString();
+    }
+
+    public static void saveRecipeFile(String recipeFileSourcePath, String recipeFileDestinationPath) {
+        FileWriter fileWrite;
+        try {
+            fileWrite = new FileWriter(recipeFileDestinationPath);
+            String recipeContent = loadFileContent(recipeFileSourcePath);
+            fileWrite.write(recipeContent);
+            fileWrite.close();
+        } catch (IOException e) {
+            logger.log(Level.WARNING, "Error writing recipe file into the ./RecipeData/Recipes folder");
+        } finally {
+            logger.log(Level.INFO, "Recipe file created at " + recipeFileDestinationPath);
+        }
     }
 }

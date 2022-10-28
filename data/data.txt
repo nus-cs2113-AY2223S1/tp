@@ -14,3 +14,35 @@ Example ingredient | 1.2 |  example unit
 Recipe Steps: 
 1) Example step
 ____________________________________________________________
+Recipe Name: Example Title 
+Recipe Description: 
+Example Description
+Recipe Ingredients: 
+Example ingredient | 1.2 |  example unit  
+Recipe Steps: 
+1) Example step
+____________________________________________________________
+Recipe Name: Example Title 
+Recipe Description: 
+Example Description
+Recipe Ingredients: 
+Example ingredient | 1.2 |  example unit  
+Recipe Steps: 
+1) Example step
+____________________________________________________________
+Recipe Name: Title 
+Recipe Description: 
+Example Description
+Recipe Ingredients: 
+Example ingredient | 1.2 |  example unit  
+Recipe Steps: 
+1) Example step
+____________________________________________________________
+Recipe Name: Example Title 
+Recipe Description: 
+Example Description
+Recipe Ingredients: 
+Example ingredient | 1.2 |  example unit  
+Recipe Steps: 
+1) Example step
+____________________________________________________________
