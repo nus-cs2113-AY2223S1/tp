@@ -11,7 +11,10 @@ public class ListCommandTest {
     public void listCommand_execution_noErrors() throws YamomException {
         Ui ui = new Ui();
         State state = new State();
+        new ListCommand(new String[]{ "list" }).execute(state, ui, null);
         new AddModuleCommand(new String[]{ "add", "cs2113" }).execute(state, ui, null);
+        new AddModuleCommand(new String[]{ "add", "pc2020" }).execute(state, ui, null);
+        new AddModuleCommand(new String[]{ "add", "dtk1234" }).execute(state, ui, null);
         new ListCommand(new String[]{ "list" }).execute(state, ui, null);
     }
 }

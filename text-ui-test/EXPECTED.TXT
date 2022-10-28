@@ -53,8 +53,8 @@ Processing "search /code 2113 /title software" ...
 Search Result:
 Total 2 module(s) found
 
-CS2113 Software Engineering & Object-Oriented Programming
-CS2113T Software Engineering & Object-Oriented Programming
+CS2113    Software Engineering & Object-Oriented Programming
+CS2113T   Software Engineering & Object-Oriented Programming
 
 To get full details of the module, type 'get <module code>'
 --------------------------------------------------------------------------------
@@ -126,13 +126,13 @@ Processing "view /simple" ...
                                                                     
           : Mon      : Tues     : Wed      : Thur     : Fri         
 ====================================================================
-   0900   +----------+          :          :          :             
-   0930   |CG1111A   |          :          :          :             
-   1000   | LAB[01]  |          :          :          :             
-   1030   |          |          :          :          :             
-   1100   |          |          :          :          :             
-   1130   |          |          :          :          :             
-   1200   +----------+          :          +----------+             
+   0900   +----------+          +----------+          :             
+   0930   |CG1111A   |          |CG1111A   |          :             
+   1000   | LAB[01]  |          | LAB[01]  |          :             
+   1030   |          |          |          |          :             
+   1100   |          |          |          |          :             
+   1130   |          |          |          |          :             
+   1200   +----------+          +----------+----------+             
    1230   |CS1010    |          :          |CS1010    |             
    1300   | SEC[1]   |          :          | LAB[C03] |             
    1330   |          |          :          |          |             
