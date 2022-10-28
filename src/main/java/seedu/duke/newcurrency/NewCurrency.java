@@ -1,5 +1,6 @@
 package seedu.duke.newcurrency;
 
+import seedu.duke.Currency2D;
 import seedu.duke.CurrencyList;
 import seedu.duke.CurrencyStructure;
 import seedu.duke.exception.FinanceException;
@@ -12,9 +13,7 @@ import static seedu.duke.InputManager.receiveInputLine;
 
 public class NewCurrency {
 
-    //maybe add some extra thing in the end that shows that it is your own added currency so then everyone can have their own currencies with in the file
-
-    public static void addNewCurrency() throws IOException {
+    public static void addNewCurrency() throws IOException, FinanceException {
 
         String newCurrency = "";
 
@@ -31,34 +30,30 @@ public class NewCurrency {
         NewCurrencyUi.showEnterCurrencyRatePrompt();
         Double rate = Double.valueOf(receiveInputLine());
 
-        //writing to the file
+        //getting the string line
         newCurrency = PersonalCurrencyList.getPersonalCurrencyFileLine(abbrName,fullName,symbol,rate);
+        int emptyIndex = Currency2D.getEmptyIndex();
 
+        Currency2D.addNewCurrency(emptyIndex,newCurrency);
 
-        NewCurrencyFileWorkings.writeToCurrencies(newCurrency);
-
+        abbrName = "!" + abbrName;
         //Adding to the list of currencies
         CurrencyStructure currency = new CurrencyStructure(abbrName, fullName, symbol, rate);
         currencyList.add(currency);
+        personalCurrencyList.add(currency);
     }
-
-
 
     public static void removeCurrency() throws FinanceException {
         NewCurrencyUi.showCurrencyRemovePrompt();
         NewCurrencyUi.showCurrencyRemoveQueryPrompt();
         String abbrName = "!" + receiveInputLine();
-        CurrencyStructure currenctCurrency = PersonalCurrencyList.findCurrencyByAbbrName(abbrName);
+        CurrencyStructure currenctCurrency = CurrencyList.findCurrencyByAbbrName(abbrName);
 
         //only if the currency we are trying to remove is personal, can we remove it
-        if (personalCurrencyList.contains(currenctCurrency)) {
-            NewCurrencyFileWorkings.deleteFromCurrencies(currenctCurrency);
+        if (currencyList.contains(currenctCurrency)) {
+            Currency2D.removeCurrency(currenctCurrency);
         } else {
             throw new FinanceException(FinanceException.ExceptionCollection.NOT_PERSONAL_CURRENCY);
         }
-
-
-
-        //if the currencies first letter is ! then can remove otherwise not
     }
 }

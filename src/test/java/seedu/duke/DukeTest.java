@@ -126,7 +126,7 @@ class DukeTest {
     @Test
     public void testReadingInCurrencies (){
         try {
-            List<CurrencyStructure> retrievedUsernames = Currency.readInCurrencies(path);
+            List<CurrencyStructure> retrievedUsernames = Currency.readInCurrencies();
             assertEquals(currenciesList, retrievedUsernames);
         } catch (FinanceException e) {
             throw new RuntimeException(e);
