@@ -103,10 +103,21 @@ enum Day {
     SUNDAY
 }
 
+class LessonTypeParser {
+{static} + parse(type: String): LessonType
+}
+
+class DayParser {
+{static} + parse(day: String):Day
+}
+
+ModuleLoader -- LessonTypeParser
+ModuleLoader -- DayParser
+LessonTypeParser -- LessonType
+DayParser -- Day
+
 SelectedModule -- LessonType
 SemesterData -- LessonType
 RawLesson -- LessonType
 RawLesson -- Day
-
-
 @enduml
