@@ -330,8 +330,12 @@ The <code>Link</code> component can:
 - create a [NUSmod](https://nusmods.com/) link to be used in a browser
 - Parse a NUSmod link to import modules into YAMOM
 
+NUSMods export links are of the form:  
+https://nusmods.com/timetable/sem-SEMESTER_NUMBER/share?MODULE_INFO&MODULE_INFO  
+The two useful segments are the SEMESTER_NUMBER and the MODULE_INFO.  
+
 ##### Why is it implemented this way
-To separate out the handling of NUSmod compatibility
+To separate out the handling of NUSmod compatibility.
 
 ##### Alternative Considered
 To implement the handling of export in Storage class and import in Command class
