@@ -16,7 +16,6 @@ import java.util.logging.Logger;
 import org.apache.commons.lang3.StringUtils;
 
 public class SearchModuleCommand extends Command {
-    public static final String FOOTER = "\nTo get full details of the module, type 'get <module code>'";
     public static final String COMMAND_WORD = "search";
     public static final String COMMAND_USAGE = "search [ /code PARTIAL_MODULE_CODE | /title KEYWORD ] "
             + "< /level MODULE_LEVEL > < /sem SEMESTER >"
@@ -33,6 +32,8 @@ public class SearchModuleCommand extends Command {
 
     public static final String ERROR_MISSING_CODE_AND_TITLE = "Search require at least a code field "
             + "or a title field, in the format of: " + System.lineSeparator() + "\t" + COMMAND_USAGE;
+    
+    public static final String FOOTER = "\nTo get full details of the module, type 'info <module code>'";
 
     public static final String SUBSYSTEM_NAME = "SearchModuleCommand";
     public static final int HEADING_INDENT = 10;

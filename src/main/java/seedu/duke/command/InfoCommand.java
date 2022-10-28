@@ -21,11 +21,11 @@ import seedu.duke.model.Module;
 /**
  * Get all module details by module code. Display all tutorial and labs session in timetable format.
  */
-public class GetModuleCommand extends Command {
+public class InfoCommand extends Command {
     private Module module;
 
-    public static final String COMMAND_WORD = "get";
-    public static final String COMMAND_USAGE = "get [ MODULE_CODE ]";
+    public static final String COMMAND_WORD = "info";
+    public static final String COMMAND_USAGE = "info [ MODULE_CODE ]";
     public static final String COMMAND_DESCRIPTION = "Show all details of a module.";
     public static final String MISSING_MODULE_CODE = "Please enter a module code!";
     public static final String MODULE_NOT_FOUND = "Module not found! Please enter a valid module code! "
@@ -35,7 +35,7 @@ public class GetModuleCommand extends Command {
     private static final String DESCRIPTION_INDENTATION = System.lineSeparator()
             + StringUtils.repeat(" ", HEADING_LENGTH + " : ".length());
 
-    public GetModuleCommand(String[] input) throws YamomException {
+    public InfoCommand(String[] input) throws YamomException {
         super(input);
         if (input.length < 2) {
             throw new YamomException(MISSING_MODULE_CODE);

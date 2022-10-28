@@ -65,19 +65,19 @@ public class HelpCommand extends Command {
         list.add(formatCommandDescription(
                 AddModuleCommand.COMMAND_WORD, AddModuleCommand.COMMAND_DESCRIPTION));
         list.add(formatCommandDescription(
-                ExitCommand.COMMAND_WORD, ExitCommand.COMMAND_DESCRIPTION));
-        list.add(formatCommandDescription(
-                DeleteModuleCommand.COMMAND_WORD, DeleteModuleCommand.COMMAND_DESCRIPTION));
+                ByeCommand.COMMAND_WORD, ByeCommand.COMMAND_DESCRIPTION));
         list.add(formatCommandDescription(
                 ExportCommand.COMMAND_WORD, ExportCommand.COMMAND_DESCRIPTION));
-        list.add(formatCommandDescription(
-                GetModuleCommand.COMMAND_WORD, GetModuleCommand.COMMAND_DESCRIPTION));
         list.add(formatCommandDescription(
                 HelpCommand.COMMAND_WORD, HelpCommand.COMMAND_DESCRIPTION));
         list.add(formatCommandDescription(
                 ImportCommand.COMMAND_WORD, ImportCommand.COMMAND_DESCRIPTION));
         list.add(formatCommandDescription(
+                InfoCommand.COMMAND_WORD, InfoCommand.COMMAND_DESCRIPTION));
+        list.add(formatCommandDescription(
                 ListCommand.COMMAND_WORD, ListCommand.COMMAND_DESCRIPTION));
+        list.add(formatCommandDescription(
+                RemoveModuleCommand.COMMAND_WORD, RemoveModuleCommand.COMMAND_DESCRIPTION));
         list.add(formatCommandDescription(
                 SearchModuleCommand.COMMAND_WORD, SearchModuleCommand.COMMAND_DESCRIPTION));
         list.add(formatCommandDescription(
@@ -85,7 +85,7 @@ public class HelpCommand extends Command {
         list.add(formatCommandDescription(
                 SelectSemesterCommand.COMMAND_WORD, SelectSemesterCommand.COMMAND_DESCRIPTION));
         list.add(formatCommandDescription(
-                ViewTimetableCommand.COMMAND_WORD, ViewTimetableCommand.COMMAND_DESCRIPTION));
+                TimetableCommand.COMMAND_WORD, TimetableCommand.COMMAND_DESCRIPTION));
 
         return list;
     }
@@ -94,17 +94,17 @@ public class HelpCommand extends Command {
         ArrayList<String> commandUsages = new ArrayList<>();
 
         commandUsages.add(AddModuleCommand.COMMAND_USAGE);
-        commandUsages.add(ExitCommand.COMMAND_USAGE);
-        commandUsages.add(DeleteModuleCommand.COMMAND_USAGE);
+        commandUsages.add(ByeCommand.COMMAND_USAGE);
         commandUsages.add(ExportCommand.COMMAND_USAGE);
-        commandUsages.add(GetModuleCommand.COMMAND_USAGE);
         commandUsages.add(HelpCommand.COMMAND_USAGE);
         commandUsages.add(ImportCommand.COMMAND_USAGE);
+        commandUsages.add(InfoCommand.COMMAND_USAGE);
         commandUsages.add(ListCommand.COMMAND_USAGE);
+        commandUsages.add(RemoveModuleCommand.COMMAND_USAGE);
         commandUsages.add(SearchModuleCommand.COMMAND_USAGE);
         commandUsages.add(SelectSlotCommand.COMMAND_USAGE);
         commandUsages.add(SelectSemesterCommand.COMMAND_USAGE);
-        commandUsages.add(ViewTimetableCommand.COMMAND_USAGE);
+        commandUsages.add(TimetableCommand.COMMAND_USAGE);
 
         return commandUsages;
     }

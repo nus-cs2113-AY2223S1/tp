@@ -6,14 +6,14 @@ import seedu.duke.utils.State;
 import seedu.duke.utils.Storage;
 import seedu.duke.utils.Ui;
 
-public class ExitCommand extends Command {
+public class ByeCommand extends Command {
     public static final String COMMAND_WORD = "bye";
     public static final String COMMAND_USAGE = "bye";
     public static final String COMMAND_DESCRIPTION = "Exit YAMOM.";
 
     private static final String MESSAGE_EXIT = "Shutting down......";
 
-    public ExitCommand(String[] input) throws YamomException {
+    public ByeCommand(String[] input) throws YamomException {
         super(input);
         Parser.singleWordCommandError(input);
     }

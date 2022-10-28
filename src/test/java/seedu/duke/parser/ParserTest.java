@@ -2,11 +2,11 @@ package seedu.duke.parser;
 
 import org.junit.jupiter.api.Test;
 import seedu.duke.command.AddModuleCommand;
-import seedu.duke.command.DeleteModuleCommand;
-import seedu.duke.command.ExitCommand;
-import seedu.duke.command.GetModuleCommand;
+import seedu.duke.command.RemoveModuleCommand;
+import seedu.duke.command.ByeCommand;
+import seedu.duke.command.InfoCommand;
 import seedu.duke.command.HelpCommand;
-import seedu.duke.command.ViewTimetableCommand;
+import seedu.duke.command.TimetableCommand;
 import seedu.duke.command.SelectSlotCommand;
 import seedu.duke.command.SelectSemesterCommand;
 import seedu.duke.command.SearchModuleCommand;
@@ -31,7 +31,7 @@ public class ParserTest {
 
     @Test
     public void parse_getInput_returnNewGetCommand() throws YamomException {
-        assertTrue(Parser.parse("get cs2113") instanceof GetModuleCommand);
+        assertTrue(Parser.parse("info cs2113") instanceof InfoCommand);
     }
 
     @Test
@@ -41,14 +41,14 @@ public class ParserTest {
 
     @Test
     public void parse_deleteInput_returnNewDeleteCommand() throws YamomException {
-        assertTrue(Parser.parse("delete cs2113") instanceof DeleteModuleCommand);
+        assertTrue(Parser.parse("remove cs2113") instanceof RemoveModuleCommand);
     }
 
     @Test
-    public void parse_viewInput_returnNewViewCommand() throws Exception {
-        assertTrue(Parser.parse("view") instanceof ViewTimetableCommand);
-        assertTrue(Parser.parse("view /simple") instanceof ViewTimetableCommand);
-        assertTrue(Parser.parse("view /fancy") instanceof ViewTimetableCommand);
+    public void parse_viewInput_returnNewTimetableCommand() throws Exception {
+        assertTrue(Parser.parse("timetable") instanceof TimetableCommand);
+        assertTrue(Parser.parse("timetable /simple") instanceof TimetableCommand);
+        assertTrue(Parser.parse("timetable /fancy") instanceof TimetableCommand);
     }
 
     @Test
@@ -63,7 +63,7 @@ public class ParserTest {
 
     @Test
     public void parse_exitInput_returnNewExitCommand() throws YamomException {
-        assertTrue(Parser.parse("bye") instanceof ExitCommand);
+        assertTrue(Parser.parse("bye") instanceof ByeCommand);
     }
 
     @Test
