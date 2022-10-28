@@ -44,6 +44,9 @@ public class Storage {
             ArrayList<String> links = readPreviousState();
             for (String link: links) {
                 Link.parseLink(link, state);
+                if (Link.isEmptyLink(link)) {
+                    ui.addMessage(NO_PREVIOUS_SAVED_MODULE_ERROR_MESSAGE);
+                }
             }
             state.setSemester(1);
             ui.addMessage(LOADING_PREVIOUS_STATE_MESSAGE);
