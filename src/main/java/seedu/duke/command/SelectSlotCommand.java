@@ -15,8 +15,8 @@ import seedu.duke.utils.Ui;
 
 public class SelectSlotCommand extends Command {
     public static final String COMMAND_WORD = "select";
-    public static final String COMMAND_USAGE = "select [ /module [EXACT_MODULE_CODE] "
-            + "/type [LESSON_TYPE] /code [CLASS_NO] ]";
+    public static final String COMMAND_USAGE = "select [ /module MODULE_CODE ] "
+            + "[ /type LESSON_TYPE ] [ /code CLASS_NO ]";
     public static final String COMMAND_DESCRIPTION = "Select a module slot";
     public static final String ERROR_WRONG_FORMAT = "Wrong format given, should be "
             + System.lineSeparator() + "\t" + COMMAND_USAGE;

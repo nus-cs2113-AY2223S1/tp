@@ -13,7 +13,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-
 public class SelectSlotCommandTest {
 
     @Test
@@ -48,7 +47,7 @@ public class SelectSlotCommandTest {
         Storage storage = new Storage();
 
         // add ie2141 to timetable. ie2141 lecture slots default to lec 1
-        String[] input1 = {"add", "ie2141"};
+        String[] input1 = { "add", "ie2141" };
         AddModuleCommand addModuleCommand = new AddModuleCommand(input1);
         addModuleCommand.execute(state, ui, storage);
 
