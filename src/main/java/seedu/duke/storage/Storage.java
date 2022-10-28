@@ -14,6 +14,8 @@ import java.util.Scanner;
 public class Storage {
 
     protected static final String PATHNAME = "./data/SkyControl.txt";
+    private static final int FLIGHT_INPUT_LENGTH = 6;
+    private static final int PASSENGER_INPUT_LENGTH = 7;
 
     public void loadFlights(OperationList flightList) throws FileNotFoundException {
         ArrayList<FlightInfo> flights = new ArrayList<>();
@@ -25,7 +27,13 @@ public class Storage {
             if (isFlight) {
                 String[] details = inputFromFile.split("\\|");
                 FlightInfo flight;
-                flight = new FlightInfo(details[0], details[1], details[2], details[3], details[4], details[5]);
+                String flightNumber =details[0];
+                String airline = details[1];
+                String destination = details[2];
+                String departureTime = details[3];
+                String gateNumber = details[4];
+                String checkInRowDoor =  details[5];
+                flight = new FlightInfo(flightNumber,airline,destination,departureTime,gateNumber,checkInRowDoor);
                 flights.add(flight);
             }
         }
@@ -42,8 +50,15 @@ public class Storage {
             if (!isFlight) {
                 String[] details = inputFromFile.split("\\|");
                 PassengerInfo passenger;
-                passenger = new PassengerInfo(details[0], details[1], details[2], details[3],
-                        Integer.parseInt(details[4]), details[5], details[6]);
+                String passengerName = details[0];
+                String departureTime = details[1];
+                String flightNumber = details[2];
+                String gateNumber = details[3];
+                String boardingGroup = details[4];
+                String seatNumber = details[5];
+                String boardingTime = details[6];
+                passenger = new PassengerInfo(passengerName, departureTime,flightNumber,gateNumber,
+                        Integer.parseInt(boardingGroup), seatNumber,boardingTime);
                 passengers.add(passenger);
             }
             passengerList.insertPassengers(passengers);
@@ -97,10 +112,10 @@ public class Storage {
     private boolean filterData(String inputFromFile) {
         boolean isFlight = true;
         String[] details = inputFromFile.split("\\|");
-        if (details.length == 6) {
+        if (details.length == FLIGHT_INPUT_LENGTH) {
             isFlight = true;
         }
-        if (details.length == 7) {
+        if (details.length == PASSENGER_INPUT_LENGTH) {
             isFlight = false;
         }
         return isFlight;
