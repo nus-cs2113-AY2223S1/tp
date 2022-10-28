@@ -20,15 +20,7 @@ requires to deal with tons of data; therefore, noting down all information by no
 It is developed for rental business managers, who can type fast to efficiently keep track all of their customers, items, 
 and transactions via Command Line Interface with a single line of command. 
 
-This UserGuide introduces you a brief overview of our features with example of usage and expected outcome.
-
->**Note:**
-> 
->1. Upcycle commands (except ```find-item``` and ```find-user```) are case-sensitive and space-insensitive. For example, ```upcycle``` and ```Upcycle``` are different words, ```Upcycle``` and ```Upcycle ``` are the same words.
->2. Parameters can be shuffled. For example, ```update-item /i [ITEM_ID] /p [PRICE]``` and ```update-item /p [PRICE] /i [ITEM_ID]``` are the same.
->3. Phrases in ```[CAPITAL_WORDS]``` are the parameters for you to input.
-
-Let's hop into the section [2. Quick Start](#2-quick-start) to start using Upcycle quickly.
+This UserGuide introduces you a brief overview of our features with example of usage and expected outcome. Let's hop into the section [2. Quick Start](#2-quick-start) to start using Upcycle quickly.
 
 ## 2. Quick Start
 
@@ -58,7 +50,16 @@ ____________________________________________________________
 
 ## 3. Features 
 
-This section allows users to understand all the features we offered, including the format, the constraint. We also demonstrate some examples of usage and the expected outcome.
+This section allows users to understand all the features that we offer, including the format, and the constraint. We also demonstrate some examples of usage and the expected outcome.
+
+>**Note:**
+>
+>1. Upcycle commands (except ```find-item``` and ```find-user```) are case-sensitive and space-insensitive. For example, ```upcycle``` and ```Upcycle``` are different words, ```Upcycle``` and ```Upcycle ``` are the same words.
+>2. Parameters can be shuffled. For example, ```update-item /i [ITEM_ID] /p [PRICE]``` and ```update-item /p [PRICE] /i [ITEM_ID]``` are the same.
+>3. Phrases in ```[CAPITAL_WORDS]``` are the parameters for you to input. And, if those phrases are **bold**, then they are optional
+>4. Argument value cannot contain ```\``` or ```|```.
+>5. You must put a space between delimiter and value. For example, ```/nbuiducthanh``` is a error, but ```/n buiducthanh``` is correct
+
 
 ### 3.1. Getting help
 
@@ -99,7 +100,7 @@ View a transaction: view-tx /t <transactionId>
 UPDATE-RELATED-COMMANDS: 
 --------------------
 Update price of an item: update-item /i <itemId> /p <price>
-Update duration of a transaction: update-tx /t <transactionid> /d <duration>
+Update duration of a transaction: update-tx /t <transactionId> /d <duration>
 
 FIND-RELATED-COMMANDS: 
 --------------------
@@ -107,7 +108,7 @@ Find all finished transactions: find-tx /s finished
 Find all unfinished transactions: find-tx /s unfinished
 Find user by keywords: find-user /k <keyword>
 Find item by keywords: find-item /k <keyword>
-Sort all items in a range: sort-items /mo <mode: hl or  lh> /mi <min> /ma <max>
+Sort all items in a range: sort-items /mode <mode: hl or lh> /min <min> /max <max> /cat <categoryIndex>
 ____________________________________________________________
 ```
 
@@ -155,7 +156,7 @@ ____________________________________________________________
 ```
 
 #### 3.2.3. ```list-users``` - List all users
->View the details of all user in the list
+>View the details of all users in the list
 
 Format: ```list-users```
 
@@ -191,7 +192,7 @@ ____________________________________________________________
 #### 3.2.4. ```find-user``` - Find users using keyword
 >List all items that are associated with a given keyword
 
-Format: ```find-user \k [KEYWORD]```
+Format: ```find-user /k [KEYWORD]```
 
 Note:
 1. This command is case-insensitive
@@ -313,7 +314,7 @@ Format: ```sort-items /mode [MODE_OF_SORTING] /min [MIN_PRICE] /max [MAX_PRICE] 
 Note:
 
 1. Mode of sorting must either be ```lh``` (low to high) or ``` hl``` (high to low) (default: ```lh```)
-2. Mode, minimum price, maximum price and category filters are optional
+2. Mode, minimum price, maximum price and category filters are optional. If you do not use, please remove the whole part (for example: remove ```/min [MIN_PRICE]```)
 3. Minimum and Maximum price must be more than 0 and less than 10000
 4. Minimum price must be less than maximum price
 5. Category number must be an integer, (default: 0, which means all categories)
@@ -357,7 +358,7 @@ ____________________________________________________________
 #### 3.3.8. ```find-item``` - Find items using keyword
 >List all items that are associated with a given keyword
 
-Format: ```find-item \k [KEYWORD]```
+Format: ```find-item /k [KEYWORD]```
 
 Note:
 1. This command is case-insensitive
@@ -391,7 +392,7 @@ Expected outcome:
 ```
 ____________________________________________________________
 OK! I will add the following transaction:
-[Finished] TxID: 7ddc865f ItemName: speaker ItemID: 3ff10798 Borrower: bui ReturnedDate: Tue, Oct 25 2022 MoneyTransacted: 10.0 
+[Finished] TxID: 7ddc865f ItemName: speaker ItemID: 3ff10798 Borrower: bui Duration: 5 ReturnedDate: Tue, Oct 25 2022 MoneyTransacted: 10.0 
 Total transaction(s) in database: 3
 ____________________________________________________________
 ```
@@ -410,7 +411,7 @@ Expected outcome:
 ```
 ____________________________________________________________
 OK! I will remove the following item:
-[Finished] TxID: 7ddc865f ItemName: speaker ItemID: 3ff10798 Borrower: bui ReturnedDate: Tue, Oct 25 2022 MoneyTransacted: 10.0 
+[Finished] TxID: 7ddc865f ItemName: speaker ItemID: 3ff10798 Borrower: bui Duration: 5 ReturnedDate: Tue, Oct 25 2022 MoneyTransacted: 10.0 
 Total transactions(s) in database: 2
 ____________________________________________________________
 ```
@@ -426,8 +427,8 @@ Expected outcome:
 ```
 ____________________________________________________________
 Here are 2 transaction(s) in your list:
-   1. [Unfinished] TxID: 55e36921 ItemName: scale ItemID: f15dff20 Borrower: jorelle ReturnDate: Fri, Oct 28 2022 (0 day(s) left) MoneyTransacted: 5.0 
-   2. [Unfinished] TxID: 9e27c530 ItemName: laptop ItemID: bd4961ed Borrower: winston ReturnDate: Sat, Jan 21 2023 (85 day(s) left) MoneyTransacted: 900.0 
+   1. [Unfinished] TxID: 55e36921 ItemName: scale ItemID: f15dff20 Borrower: jorelle Duration: 5 ReturnDate: Fri, Oct 28 2022 (0 day(s) left) MoneyTransacted: 5.0 
+   2. [Unfinished] TxID: 9e27c530 ItemName: laptop ItemID: bd4961ed Borrower: winston Duration: 100 ReturnDate: Sat, Jan 21 2023 (85 day(s) left) MoneyTransacted: 900.0 
 ____________________________________________________________
 ```
 
@@ -445,12 +446,12 @@ Expected outcome:
 ```
 ____________________________________________________________
 Here is the transaction you requested to view: 
-[Unfinished] TxID: 9e27c530 ItemName: laptop ItemID: bd4961ed Borrower: winston ReturnDate: Sat, Jan 21 2023 (85 day(s) left) MoneyTransacted: 900.0 
+[Unfinished] TxID: 9e27c530 ItemName: laptop ItemID: bd4961ed Borrower: winston Duration: 100 ReturnDate: Sat, Jan 21 2023 (85 day(s) left) MoneyTransacted: 900.0 
 ____________________________________________________________
 ```
 
 #### 3.4.5. ```find-tx``` - Find a transaction by status
->Find all the transactions that have finished or is still ongoing
+>Find all the transactions that have finished or are still ongoing
 
 Format: ```find-tx /s finished``` OR ```find-tx /s unfinished```
 
@@ -460,8 +461,8 @@ Expected outcome:
 ```
 ____________________________________________________________
 Here are the uncompleted transactions: 
-[Unfinished] TxID: 55e36921 ItemName: scale ItemID: f15dff20 Borrower: jorelle ReturnDate: Fri, Oct 28 2022 (0 day(s) left) MoneyTransacted: 5.0 
-[Unfinished] TxID: 9e27c530 ItemName: laptop ItemID: bd4961ed Borrower: winston ReturnDate: Sat, Jan 21 2023 (85 day(s) left) MoneyTransacted: 900.0 
+[Unfinished] TxID: 55e36921 ItemName: scale ItemID: f15dff20 Borrower: jorelle Duration: 5 ReturnDate: Fri, Oct 28 2022 (0 day(s) left) MoneyTransacted: 5.0 
+[Unfinished] TxID: 9e27c530 ItemName: laptop ItemID: bd4961ed Borrower: winston Duration: 100 ReturnDate: Sat, Jan 21 2023 (85 day(s) left) MoneyTransacted: 900.0 
 ____________________________________________________________
 ```
 
@@ -480,7 +481,7 @@ Example of usage: ```update-tx /t 55e36921 /d 10```
 ```
 ____________________________________________________________
 Done! Here is the updated transaction:
-[Unfinished] TxID: 55e36921 ItemName: scale ItemID: f15dff20 Borrower: jorelle ReturnDate: Wed, Nov 02 2022 (5 day(s) left) MoneyTransacted: 10.0 
+[Unfinished] TxID: 55e36921 ItemName: scale ItemID: f15dff20 Borrower: jorelle Duration: 10 ReturnDate: Wed, Nov 02 2022 (5 day(s) left) MoneyTransacted: 10.0 
 ____________________________________________________________
 ```
 
@@ -537,6 +538,6 @@ ____________________________________________________________
 
 How do I transfer my data to another computer?
 
->On your other computer, download your ```Upcycle.jar``` file following the instructions in [Quick Start](#2-quick-start). Then, you just copy the \data\ folder and paste into your folder for Upcycle on your new computer. That's it, now you can run our app with your previous data on another computer.
+>On your other computer, download your ```Upcycle.jar``` file following the instructions in [Quick Start](#2-quick-start). Then, you copy the \data\ folder and paste into your folder for Upcycle on your new computer. That's it, now you can run our app with your previous data on another computer.
 
 

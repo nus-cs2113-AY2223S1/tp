@@ -92,15 +92,12 @@ public class Duke {
     /**
      * Writes data in 3 list to files.
      *
-     * @param isLastCommand A boolean true if the exit command is input
      * @throws StoreFailureException If something went wrong when storing the data
      */
-    private void writeDataToFile(boolean isLastCommand) throws StoreFailureException {
-        if (isLastCommand) {
-            userStorage.writeData(userList);
-            itemStorage.writeData(itemList);
-            transactionStorage.writeData(transactionList);
-        }
+    private void writeDataToFile() throws StoreFailureException {
+        userStorage.writeData(userList);
+        itemStorage.writeData(itemList);
+        transactionStorage.writeData(transactionList);
     }
 
     /**
@@ -114,7 +111,7 @@ public class Duke {
                 Command command =
                         CommandParser.createCommand(input, userList, itemList, transactionList);
                 isLastCommand = command.executeCommand();
-                writeDataToFile(isLastCommand);
+                writeDataToFile();
             } catch (Exception e) {
                 Ui.printErrorMessage(e.getMessage());
             }

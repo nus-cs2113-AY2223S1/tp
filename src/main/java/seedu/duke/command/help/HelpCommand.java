@@ -31,7 +31,7 @@ public class HelpCommand extends Command {
     private static final String COMMAND_FIND_FINISHED_TX = "find-tx /s finished";
     private static final String COMMAND_FIND_UNFINISHED_TX = "find-tx /s unfinished";
     private static final String COMMAND_SORT_ITEM =
-            "sort-items /mode <mode: hl or  lh> /min <min> /max <max> /cat <categoryIndex>";
+            "sort-items /mode <mode: hl or lh> /min <min> /max <max> /cat <categoryIndex>";
     private static final String COMMAND_LIST_CATEGORIES = "list-categories";
     private static final String COMMAND_FIND_USER = "find-user /k <keyword>";
     private static final String COMMAND_FIND_ITEM = "find-item /k <keyword>";

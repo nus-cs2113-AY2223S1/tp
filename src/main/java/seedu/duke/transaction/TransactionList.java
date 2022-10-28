@@ -1,9 +1,11 @@
 package seedu.duke.transaction;
 
+import seedu.duke.exception.InvalidTransactionException;
 import seedu.duke.exception.TransactionNotFoundException;
 
 import java.util.ArrayList;
 
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_ITEM_TRANSACTION_OVERLAP;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_TX_NOT_FOUND;
 
 //@@author bdthanh
@@ -59,15 +61,17 @@ public class TransactionList {
      * @param transactionId The id of the transaction to be deleted
      * @param duration      The new duration
      * @throws TransactionNotFoundException If the transaction cannot be found in the list
+     * @throws InvalidTransactionException If there is transaction overlapped
      */
 
     //@@author jorellesee
     public Transaction updateTransaction(String transactionId, int duration, double moneyTransacted)
-            throws TransactionNotFoundException {
+            throws TransactionNotFoundException, InvalidTransactionException {
         for (int i = 0; i < this.transactionList.size(); ++i) {
             Transaction tx = this.transactionList.get(i);
             if (tx.getTxId().equals(transactionId)) {
                 Transaction updatedTx = tx.update(duration, moneyTransacted);
+                checkIfListHasTransactionOfThisItemThatOverlapWithNewTransaction(updatedTx);
                 this.transactionList.set(i, updatedTx);
                 return updatedTx;
             }
@@ -136,6 +140,23 @@ public class TransactionList {
         int count = (int) transactionList.stream().filter(t -> !t.isFinished())
                 .filter(t -> t.getBorrower().equals(username)).count();
         return count > 0;
+    }
+
+    /**
+     * Checks if there is a transaction in the list overlap with the new transaction of a same item.
+     *
+     * @param transactionToCheck The new transaction to check
+     * @throws InvalidTransactionException If overlap
+     */
+    public void checkIfListHasTransactionOfThisItemThatOverlapWithNewTransaction(Transaction transactionToCheck)
+            throws InvalidTransactionException {
+        int count = (int) transactionList.stream()
+                .filter(t -> t.getItemId().equals(transactionToCheck.getItemId()))
+                .filter(t -> t.isOverlapWithTransaction(transactionToCheck))
+                .count();
+        if (count > 0) {
+            throw new InvalidTransactionException(MESSAGE_ITEM_TRANSACTION_OVERLAP);
+        }
     }
 
     /**

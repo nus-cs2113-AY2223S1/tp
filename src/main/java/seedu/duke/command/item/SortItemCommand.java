@@ -19,12 +19,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static java.util.Comparator.comparingDouble;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_CATEGORY_INDEX_FORMAT_INVALID;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PARTS;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_PRICE_BOUNDARIES_INVALID;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_PRICE_FORMAT_INVALID;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_PRICE_OUT_OF_RANGE;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_SORT_MODE_INVALID;
-import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PARTS;
-import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_PRICE_FORMAT_INVALID;
-import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_NUMBER_FORMAT_INVALID;
 
 //@@author chiewyx
 
@@ -186,7 +186,7 @@ public class SortItemCommand extends Command {
             Integer.parseInt(categoryNumber);
             return true;
         } catch (NumberFormatException e) {
-            throw new NumberFormatException(MESSAGE_NUMBER_FORMAT_INVALID);
+            throw new NumberFormatException(MESSAGE_CATEGORY_INDEX_FORMAT_INVALID);
         }
     }
 
