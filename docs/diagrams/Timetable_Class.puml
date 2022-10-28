@@ -38,6 +38,8 @@ class Lesson {
     + setStartTime(startTime: String) : void
     + getEndTime() : String
     + setEndTime(endTime: String) : void
+    + equals(objectToCompare: Object) : boolean
+    + hashCode() : int
 }
 
 class Module {
