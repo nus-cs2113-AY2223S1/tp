@@ -1,9 +1,11 @@
 package seedu.moneygowhere.commands;
 
+import seedu.moneygowhere.common.Configurations;
 import seedu.moneygowhere.data.currency.CurrencyManager;
 import seedu.moneygowhere.data.expense.Expense;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 //@@author jeyvia
 
@@ -30,8 +32,16 @@ public class ConsoleCommandConvertCurrency extends ConsoleCommand {
         return currency;
     }
 
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
+
     public BigDecimal getRate() {
         return rate;
+    }
+
+    public void setRate(BigDecimal rate) {
+        this.rate = rate;
     }
 
     public void changeCurrency(Expense expense, CurrencyManager currencyManager) {
@@ -39,9 +49,13 @@ public class ConsoleCommandConvertCurrency extends ConsoleCommand {
         if (rate == null) {
             newAmount = currencyManager.exchangeCurrency(expense, currency);
         } else {
-            newAmount = currencyManager.exchangeCurrencyWithRate(expense, rate);
+            newAmount = currencyManager.exchangeCurrencyWithRate(expense, rate, currency);
         }
-        expense.setAmount(newAmount);
+        BigDecimal newAmountRounded = newAmount.setScale(
+                Configurations.CURRENCY_MANAGER_CONVERSION_NUMBER_OF_DECIMAL_PLACES,
+                RoundingMode.HALF_UP
+        );
+        expense.setAmount(newAmountRounded);
         expense.setCurrency(currency);
     }
 }

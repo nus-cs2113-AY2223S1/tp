@@ -210,10 +210,6 @@ public class ConsoleParser {
                 );
             }
 
-            if (currency == null) {
-                currency = "SGD";
-            }
-
             return new ConsoleCommandAddExpense(
                     name,
                     dateTime,
@@ -234,6 +230,10 @@ public class ConsoleParser {
             ConsoleCommandAddExpense consoleCommandAddExpense
     ) {
         String currency = consoleCommandAddExpense.getCurrency();
+
+        if (currency == null) {
+            currency = "SGD";
+        }
 
         String currencyNormalized = currency.toUpperCase();
 
@@ -258,7 +258,6 @@ public class ConsoleParser {
             }
             consoleCommandAddExpense.setModeOfPayment(modeOfPaymentNormalized);
         }
-
 
         return consoleCommandAddExpense;
     }
@@ -680,6 +679,13 @@ public class ConsoleParser {
     private static ConsoleCommandEditExpense normalizeCommandEditExpenseValues(
             ConsoleCommandEditExpense consoleCommandEditExpense
     ) {
+        String currency = consoleCommandEditExpense.getCurrency();
+
+        if (currency != null) {
+            String currencyNormalized = currency.toUpperCase();
+
+            consoleCommandEditExpense.setCurrency(currencyNormalized);
+        }
 
         String modeOfPayment = consoleCommandEditExpense.getModeOfPayment();
 
@@ -899,7 +905,6 @@ public class ConsoleParser {
         );
 
         int expenseIndex = Integer.parseInt(expenseIndexStr);
-        currency = currency.toUpperCase();
         BigDecimal rate = null;
         if (rateStr != null) {
             rate = new BigDecimal(rateStr);
@@ -916,6 +921,12 @@ public class ConsoleParser {
     private static ConsoleCommandConvertCurrency normalizeCommandConvertCurrencyValues(
             ConsoleCommandConvertCurrency consoleCommandConvertCurrency
     ) {
+        String currency = consoleCommandConvertCurrency.getCurrency();
+
+        String currencyNormalized = currency.toUpperCase();
+
+        consoleCommandConvertCurrency.setCurrency(currencyNormalized);
+
         return consoleCommandConvertCurrency;
     }
 

@@ -119,6 +119,10 @@ Example of usage:
 Sorts the list of expenses according to an alphabetical, amount, date or currency order. It can be sorted in both ascending and
 descending order. 
 
+Note:
+1. By default, expenses are sorted in alphabetical order, from A to Z. Expenses are sorted **automatically** whenever a new expense is added, or if an existing expense is edited. 
+2. The nature of this feature could cause the indexes of the expenses to change while running MoneyGoWhere. Please use `View-Expense` to get the most updated indexes of the expenses.
+
 Syntax: `Sort-Expense -t TYPE -o ORDER`
 
 > ⚠️️️️ Syntax Notes

@@ -521,7 +521,12 @@ public class ConsoleInterface {
 
     //@@author xzynos
     private void runCommandSortExpense(ConsoleCommandSortExpense commandSortExpense) {
+        ArrayList<Expense> expenses = expenseManager.getExpenses();
         expenseManager.updateSortExpenses(commandSortExpense, localStorage);
+        if (expenses.isEmpty()) {
+            printInformationalMessage(Messages.COMMAND_SORT_EXPENSE_EMPTY_LIST);
+            return;
+        }
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_SORTED_EXPENSE_SUCCESS);
     }
 
