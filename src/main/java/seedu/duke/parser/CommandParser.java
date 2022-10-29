@@ -61,7 +61,7 @@ public class CommandParser {
         String[] userInputTokenized = parseUserCommand(userInput);
         if (isEmptyUserInput(userInputTokenized)) {
             throw new InvalidUserCommandException("Error! Missing command. "
-                    + "Please follow the command format provided!");
+                    + "Please follow the command format provided");
         }
         String userInputCommand = userInputTokenized[COMMAND_INDEX];
         switch (userInputCommand) {
@@ -127,7 +127,7 @@ public class CommandParser {
             return newFavouriteCommand;
         default:
             throw new InvalidUserCommandException("Error! Unidentified command. "
-                    + "Please follow the command format provided!");
+                    + "Please follow the command format provided");
         }
     }
 
