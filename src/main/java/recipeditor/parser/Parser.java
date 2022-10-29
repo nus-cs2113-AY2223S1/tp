@@ -158,22 +158,4 @@ public class Parser {
         }
         return new InvalidCommand();
     }
-
-//    private static String convertStringArrayToString(String[] stringArray) {
-//        StringBuilder output = new StringBuilder();
-//        // Finding the flag in the string array input
-//        if (stringArray[1].contains("-")) {
-//            String[] flagAndInput = stringArray[1].split("-");
-//            String flag = flagAndInput[1];
-//            output.append(flag + " ");
-//        }
-//        for (int i = 2; i < stringArray.length; i++) {
-//            if (i == stringArray.length - 1) {
-//                output.append(stringArray[i]);
-//            } else {
-//                output.append(stringArray[i] + " ");
-//            }
-//        }
-//        return output.toString();
-//    }
 }
