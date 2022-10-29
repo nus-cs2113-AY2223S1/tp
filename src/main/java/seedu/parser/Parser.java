@@ -150,6 +150,12 @@ public class Parser {
         return new FilterCommand(carparkList, searchQuery);
     }
 
+    /**
+     * To check that user does not input in any parameters for UpdateCommand.
+     *
+     * @param arguments arguments that may be given by the user after the command word
+     * @return Command to be carried out
+     */
     private Command prepareUpdate(String arguments) {
         try {
             if (arguments.trim().isEmpty()) {
