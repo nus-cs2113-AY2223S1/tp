@@ -15,6 +15,8 @@ public class ExceptionMessages {
             "Contact number length must have length of 8";
     public static final String MESSAGE_CONTACT_FORMAT_INVALID =
             "Contact number should only contain digit 0-9";
+    public static final String MESSAGE_CONTACT_DUPLICATE =
+            "Contact number already exists! Please use another phone number.";
     public static final String MESSAGE_USER_LENDING = "This user is currently lending something";
     public static final String MESSAGE_USER_BORROWING =
             "This user is currently borrowing something";

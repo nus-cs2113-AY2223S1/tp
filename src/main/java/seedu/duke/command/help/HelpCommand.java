@@ -35,9 +35,10 @@ public class HelpCommand extends Command {
     private static final String COMMAND_LIST_CATEGORIES = "list-categories";
     private static final String COMMAND_FIND_USER = "find-user /k <keyword>";
     private static final String COMMAND_FIND_ITEM = "find-item /k <keyword>";
-    private static final String ADD_SPACE_REMINDER = "Please take note to add a space after delimiters!\n";
-    private static final String CASE_SENSITIVE_REMINDER = "Please note that except for 'find-item' and 'find-user', "
-                                                            + "all other commands are case-sensitive!\n";
+    private static final String ADD_SPACE_REMINDER =
+            "Please take note to add a space before and after delimiters! e.g ' /c '\n";
+    private static final String CASE_SENSITIVE_REMINDER =
+            "Please note that except for 'find-item' and 'find-user', all other commands are case-sensitive!\n";
     private static final String INVALID_SYMBOLS_REMINDER = "Refrain from using '|' and '/' as arguments!";
     private static final String COMMAND_UPDATE_ITEM = "update-item /i <itemId> /p <price>";
     private static final String COMMAND_UPDATE_TX = "update-tx /t <transactionId> /d <duration>";
