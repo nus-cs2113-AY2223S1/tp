@@ -9,9 +9,13 @@ for timetable organization.
 
 YAMOM is designed for users who are proficient in Command Line Interface (CLI).
 
+Data will be automatically saved after each command and loaded in the next run of YAMOM.
+
+YAMOM will always start planning for semester 1 when the application is run.
+
 ## Table of Contents
 
-- [User Guide for Yet Another Module Organizer/Manager (YAMOM) v1.0](#user-guide-for-yet-another-module-organizermanager-yamom-v10)
+- [User Guide for Yet Another Module Organizer/Manager (YAMOM) v1.0](#user-guide-for-yet-another-module-organizermanager-yamom-v20)
     - [Introduction](#introduction)
     - [Table of Contents](#table-of-contents)
     - [Quick Start](#quick-start)
@@ -29,6 +33,7 @@ YAMOM is designed for users who are proficient in Command Line Interface (CLI).
         - [Import a NUSMod Link: `import`](#import-a-timetable-import)
     - [Application Data](#application-data)
         - [Data Storage](#data-storage)
+        - [Data Loading](#data-loading)
         - [Transfer to another computer](#transfer-to-another-computer)
         - [Transfer to NUSMODs (for NUS students)](#transfer-to-nusmods-for-nus-students)
     - [FAQ](#faq)
@@ -36,14 +41,6 @@ YAMOM is designed for users who are proficient in Command Line Interface (CLI).
     - [Credits](#credits)
 
 <!--    - [Feature X: `COMMAND`](#feature-x-command) -->
-
-- [Application Data](#application-data)
-    - [Data Storage](#data-storage)
-    - [Transfer to another computer](#transfer-to-another-computer)
-    - [Transfer to NUSMODs (for NUS students)](#transfer-to-nusmods-for-nus-students)
-- [FAQ](#faq)
-- [Command summary](#command-summary)
-- [Credits](#credits)
 
 ## Quick Start
 
@@ -570,12 +567,36 @@ Here is your NUSMod Link:
 
 ### Import a timetable: `import`
 
-Import a timetable into YAMOM through a shareable NUSMod Link.
+Import a timetable into YAMOM through a shareable NUSMod Link. The current semester will be 
+set to the semester indicated in the link provided (only for `import` command).
 
 Format: `import [NUSMOD_LINK]`
 
 * The `NUSMOD_LINK` need to be in the format
   of `https://nusmods.com/timetable/sem-SEMESTER_NUMBER/share?MODULE_INFO&MODULE_INFO`
+* `SEMESTER_NUMBER` ranges from 1 to 4 included.
+* Information about different modules (i.e. `MODULE_INFO`) are separated by `&`.
+* `MODULE_INFO` consists of `MODULE_CODE=LESSONS_INFO`.
+* `LESSONS_INFO` consists of `LESSON_TYPE_SHORT_FORM:LESSON_NUMBER` which are separated by `,`.
+* `LESSON_TYPE_SHORT_FORM` can be the following:
+  * `TUT`  representing TUTORIAL
+  * `TUT2` representing TUTORIAL_TYPE_2
+  * `LEC`  representing LECTURE
+  * `REC`  representing RECITATION
+  * `DLEC` representing DESIGN_LECTURE
+  * `PLEC` representing PACKAGED_LECTURE
+  * `PTUT` representing PACKAGED_TUTORIAL
+  * `SEC`  representing SECTIONAL_TEACHING
+  * `WKSH` representing WORKSHOP
+  * `LAB`  representing LABORATORY
+  * `PROJ` representing MINI_PROJECT
+  * `SEM`  representing SEMINAR_STYLE_MODULE_CLASS  
+  note: other lesson types are currently not supported.
+* `LESSON_NUMBER` can vary and is not of a certain form. Take note `01` is not the same as `1`. 
+* If `SEMESTER_NUMBER` is incorrect, the whole link will not be parsed.
+* If `MODULE_CODE` is incorrect, that module will not be added.
+* If `LESSONS_INFO` is incorrect, that lesson will not be added.
+* The other parts of the link that is valid will still be parsed and a success message will be displayed.
 
 Example of usage:
 
@@ -619,34 +640,43 @@ Possible error:
 ## Application Data
 
 > Warning:
-> Be careful when handling the data file, any unexpected changes in the file may lead to data loss and crash subsequent
-> runs of YAMOM.
+> Be careful when handling the data file, any unexpected changes in the file may lead to data loss, 
+> although it will not crash subsequent runs of YAMOM.
 
 ### Data Storage
 
-The user data is stored in `duke.txt` under the data folder in the home directory
+The user data is stored in `duke.txt` under the data folder in the home directory. The data is stored 
+as NUSMods links for each semester. The data will be overwritten each time so there will not be any 
+persistent corrupt data file.
+
+### Data Loading
+
+The data of the previous saved state in the form of links will be loaded every time the application starts.
+How the links in the `duke.txt` file is parsed is similar to command `import` just without having to use the 
+keyword `import`, see [import](#import-a-timetable-import).
 
 ### Transfer to another computer
 
-Copy the application file with the corresponding data file (remember to create the `data` folder under the home
-directory)
+Copy the application file with the corresponding `duke.txt` data file and `data` folder. A new file along with the 
+respective folder will be created if either is missing.
 
 ### Transfer to NUSMODs (for NUS students)
 
 (Recommended)
-Enter the command `export` and the current timetable will be exported as a sharable NUSMod Link
+Enter the command `export` and the current timetable will be exported as a sharable NUSMod Link. 
+Or you can close the program by inputting `bye` and the links for all semesters will be provided.
 
 Alternatively:
 The NUSMOD url is available in `duke.txt`, copy the content of the file and paste it in the browser to view the
-timetable on NUSMOD
+timetable on NUSMOD.
 
 ## FAQ
 
 **Q**: How do I transfer my data to another computer?
 
 **A**: YAMOM is designed with portability in mind. Simply copy the JAR file and the data folder over to your other
-computer and you are good to go.
-Alternatively, you can export the timetable, copy the link generated, and import on the other computer
+computer, and you are good to go.
+Alternatively, you can export the timetable, copy the link generated, and import on the other computer.
 
 ## Command summary
 
@@ -655,13 +685,13 @@ Alternatively, you can export the timetable, copy the link generated, and import
 | Add a module                     | `add [MODULE_CODE]`                                                                            | `add CS2101`                                                          |
 | Remove a module                  | `remove [MODULE_CODE]`                                                                         | `remove CS2102`                                                       |
 | Exit application                 | `bye`                                                                                          | `bye`                                                                 |
-| Read more details about a module | `info [MODULE_CODE]`                                                                            | `info CS2103`                                                          |
+| Read more details about a module | `info [MODULE_CODE]`                                                                           | `info CS2103`                                                         |
 | Find module by keyword           | `search /code [MODULE_CODE] /title [KEYWORD] </level [MODULE_LEVEL]> </sem [MODULE_SEMESTER]>` | `search /code cs /level 2 /sem 1`                                     |
 | Seek help                        | `help`                                                                                         | `help`                                                                |
 | Import modules from NUSMods URL  | `import [URL]`                                                                                 | `import https://nusmods.com/timetable/sem-1/share?CS2113=LEC:1,TUT:4` |
 | Export modules to NUSMods URL    | `export`                                                                                       | `export`                                                              |
 | Change semester                  | `semester [SEMESTER]`                                                                          | `semester 2`                                                          |
-| View timetable                   | `timetable /fancy` OR `timetable /simple`                                                                | `timetable /fancy`                                                         |
+| View timetable                   | `timetable /fancy` OR `timetable /simple`                                                      | `timetable /fancy`                                                    |
 | List selected modules            | `list`                                                                                         | `list`                                                                |
 | Add module timetable slot        | `select /module <MODULE_CODE> /type <LESSON_TYPE> /code <CLASS_NO>`                            | `select /module CS1010 /type tutorial /code 1`                        |
 
