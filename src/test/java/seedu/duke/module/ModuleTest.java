@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ModuleTest {
     List<Lesson> list = new ArrayList<>();
-    Module module = new Module("CS2113", "SE & OOP", "Sample Description", list);
+    Module module = new Module("CS2113", "SE & OOP", list);
 
     @Test
     void getModuleName_noInputs_correctName() {

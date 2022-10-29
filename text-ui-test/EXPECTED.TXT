@@ -45,35 +45,35 @@ Here are your modules:
 Here is a list of things I can do, enter the appropriate command to continue!
 1. add     2. list     3. info     4. set     5. delete     6. print     7. quit
 
+Which module you would like to delete? Please enter the index of that module. 
 Here are your modules:
 1. CS2113: Software Engineering & Object-Oriented Programming
      [Tutorial] Undetermined Day   Undetermined Time - Undetermined Time
      [Lecture] Undetermined Day   Undetermined Time - Undetermined Time
 
 
-Which module you would like to delete? Please enter the index of that module. 
-Please input a valid index!
+Please input an index in range!
 Here is a list of things I can do, enter the appropriate command to continue!
 1. add     2. list     3. info     4. set     5. delete     6. print     7. quit
 
+Which module you would like to delete? Please enter the index of that module. 
 Here are your modules:
 1. CS2113: Software Engineering & Object-Oriented Programming
      [Tutorial] Undetermined Day   Undetermined Time - Undetermined Time
      [Lecture] Undetermined Day   Undetermined Time - Undetermined Time
 
 
-Which module you would like to delete? Please enter the index of that module. 
 Please input an integer!
 Here is a list of things I can do, enter the appropriate command to continue!
 1. add     2. list     3. info     4. set     5. delete     6. print     7. quit
 
+Which module you would like to delete? Please enter the index of that module. 
 Here are your modules:
 1. CS2113: Software Engineering & Object-Oriented Programming
      [Tutorial] Undetermined Day   Undetermined Time - Undetermined Time
      [Lecture] Undetermined Day   Undetermined Time - Undetermined Time
 
 
-Which module you would like to delete? Please enter the index of that module. 
 Successfully deleted module!
 Here is a list of things I can do, enter the appropriate command to continue!
 1. add     2. list     3. info     4. set     5. delete     6. print     7. quit

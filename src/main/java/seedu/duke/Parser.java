@@ -15,6 +15,8 @@ public class Parser {
     private static final String COMMAND_INFO = "info";
     private static final String COMMAND_SET = "set";
     private static final String COMMAND_PRINT = "print";
+    //For now
+    private static final String COMMAND_ALLOCATE = "allocate";
 
 
     public static String parseCommand(String command, String currentSemester) {
@@ -33,6 +35,8 @@ public class Parser {
             return CommandSetLesson.setLesson();
         case COMMAND_PRINT:
             return CommandPrintTimetable.printTimetable();
+        case COMMAND_ALLOCATE:
+            return Timetable.allocateModules();
         default:
             return "Invalid Command!";
         }
