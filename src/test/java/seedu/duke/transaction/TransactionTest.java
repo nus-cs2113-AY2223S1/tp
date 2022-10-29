@@ -63,7 +63,7 @@ class TransactionTest {
     void updateDurationTest() {
         Transaction newTransaction = new Transaction(transaction.getTxId(), "pen", "28sd37h2", "bui", 300,
                 LocalDate.parse("2022-10-03"), 192);
-        assertEquals(newTransaction,
+        assertEquals(transaction,
                 transaction.update(300, 192));
     }
 }
