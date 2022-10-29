@@ -28,13 +28,13 @@ public class DatabaseStorage {
 
     private static final String FILE_DIRECTORY = "data";
 
-    private static final String FILE_PATH ="data/data.csv";
+    private static final String FILE_PATH = "data/data.csv";
 
     private static final String PARTNER_UNVIERSITY_COUNTRY = "nil";
 
 
     /**
-     * Helps user set up the database
+     * Helps user set up the database.
      */
     public static void createDatabase() throws IOException {
         File fileDir = new File(FILE_DIRECTORY);
@@ -49,7 +49,7 @@ public class DatabaseStorage {
             InputStream in = source.openStream();
             Files.copy(in, target, StandardCopyOption.REPLACE_EXISTING);
         }
-     }
+    }
 
     /**
      * Loads data from data.csv into database.
