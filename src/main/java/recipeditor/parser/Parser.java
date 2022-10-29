@@ -37,11 +37,11 @@ public class Parser {
         case ExitCommand.COMMAND_TYPE:
             return new ExitCommand();
         case DeleteCommand.COMMAND_TYPE:
-            return null;
+            return parseDeleteCommand(parsed);
         case EditCommand.COMMAND_TYPE:
             return parseEditCommand(parsed);
         case ViewCommand.COMMAND_TYPE:
-            return parseListAlterCommand(parsed, commandWord);
+            return parseViewCommand(parsed);
         case FindCommand.COMMAND_TYPE:
             return parseFindCommand(parsed);
         default:
@@ -75,22 +75,30 @@ public class Parser {
         return new AddCommand(valid, addRecipe);
     }
 
-    private static Command parseListAlterCommand(String[] parsed, String commandWord) {
+    private static Command parseViewCommand(String[] parsed) {
         if (parsed.length == 2) {
             try {
                 int index = Integer.parseInt(parsed[1]) - 1; // to account for 0-based indexing in recipelist
-                if (commandWord.equals(ViewCommand.COMMAND_TYPE)) {
-                    return new ViewCommand(index);
-                }
-                return new DeleteCommand(index);
+                return new ViewCommand(index);
             } catch (Exception e) {
-                System.out.format("Exception: Wrong command Format%n"
-                        + "Try the command in correct format: view/delete <index of task>%n");
                 return new InvalidCommand();
             }
         }
         return new InvalidCommand();
     }
+
+    private static Command parseDeleteCommand(String[] parsed) {
+        if (parsed.length == 2) {
+            try {
+                int index = Integer.parseInt(parsed[1]) - 1; // to account for 0-based indexing in recipelist
+                return new DeleteCommand(index);
+            } catch (Exception e) {
+                return new InvalidCommand();
+            }
+        }
+        return new InvalidCommand();
+    }
+
 
     private static Command parseEditCommand(String[] parsed) {
         int index = -1;
