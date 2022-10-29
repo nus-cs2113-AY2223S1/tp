@@ -39,11 +39,15 @@ else user is invalid
     destroy ":RemoveUserCommand"
     activate ":DukeException"
     ":DukeException" --> ":Duke"
-    destroy ":DukeException"
-    ":Duke" -> "<<class>>\nUi" : print error
-    activate "<<class>>\nUi"
-    "<<class>>\nUi" --> ":Duke" : error message
-    deactivate "<<class>>\nUi"
+     deactivate ":DukeException"
+     ":Duke" -> "<<class>>\nUi" : print error
+     activate "<<class>>\nUi"
+     "<<class>>\nUi" -> ":DukeException": getMessage()
+     activate ":DukeException"
+     return
+     destroy ":DukeException"
+     "<<class>>\nUi" --> ":Duke"
+     deactivate "<<class>>\nUi"
 end
 deactivate ":RemoveUserCommand"
 

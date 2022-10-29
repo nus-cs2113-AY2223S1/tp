@@ -4,6 +4,7 @@ package seedu.duke.command.item;
 import seedu.duke.command.Command;
 import seedu.duke.exception.InsufficientArgumentsException;
 import seedu.duke.exception.InvalidArgumentException;
+import seedu.duke.exception.InvalidCategoryException;
 import seedu.duke.exception.InvalidPriceException;
 import seedu.duke.exception.ItemNotFoundException;
 import seedu.duke.ui.Ui;
@@ -16,8 +17,9 @@ import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INSUFFICIEN
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PARTS;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_ITEM_NOT_FOUND;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_PRICE_FORMAT_INVALID;
-import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_PRICE_LESS_THAN_ZERO;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_PRICE_OUT_OF_RANGE;
 
+//@@author winston-lim
 public class UpdateItemCommand extends Command {
     private final String[] parts;
     private final ItemList itemList;
@@ -43,7 +45,7 @@ public class UpdateItemCommand extends Command {
             if (delimiter.equals("i")) {
                 args[0] = CommandParser.getArgValue(part);
             } else if (delimiter.equals("p")) {
-                args[2] = CommandParser.getArgValue(part);
+                args[1] = CommandParser.getArgValue(part);
             } else {
                 throw new InvalidArgumentException(MESSAGE_INVALID_PARTS);
             }
@@ -62,8 +64,8 @@ public class UpdateItemCommand extends Command {
 
     private boolean isValidPrice(String price) throws InvalidPriceException {
         try {
-            if (Double.parseDouble(price) < 0) {
-                throw new InvalidPriceException(MESSAGE_PRICE_LESS_THAN_ZERO);
+            if (Double.parseDouble(price) < 0 || Double.parseDouble(price) > 10000) {
+                throw new InvalidPriceException(MESSAGE_PRICE_OUT_OF_RANGE);
             }
             return true;
         } catch (NumberFormatException e) {
@@ -77,7 +79,7 @@ public class UpdateItemCommand extends Command {
     }
 
     public boolean executeCommand()
-            throws InvalidArgumentException, ItemNotFoundException, InvalidPriceException {
+            throws InvalidArgumentException, ItemNotFoundException, InvalidPriceException, InvalidCategoryException {
         String[] args = getArgsUpdateItemCmd();
         if (areValidArgs(args)) {
             String itemId = args[0];

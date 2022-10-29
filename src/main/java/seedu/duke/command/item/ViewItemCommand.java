@@ -13,12 +13,11 @@ import seedu.duke.transaction.TransactionList;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INSUFFICIENT_ARGUMENTS;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PARTS;
 
+//@@author jingwei55
 public class ViewItemCommand extends Command {
     private final String[] parts;
     private final ItemList itemList;
     private final TransactionList transactionList;
-
-
 
     public ViewItemCommand(String[] parts, ItemList itemList,
                            TransactionList transactionList) throws InsufficientArgumentsException {

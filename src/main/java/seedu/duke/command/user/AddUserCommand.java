@@ -16,9 +16,12 @@ import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_CONTACT_FOR
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_CONTACT_LENGTH_INVALID;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INSUFFICIENT_ARGUMENTS;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PARTS;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_NAME_LENGTH_INVALID;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_USERNAME_TAKEN;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_USER_AGE_INVALID;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_USER_AGE_OUT_OF_RANGE;
+
+//@@author bdthanh
 
 /**
  * A representation of a command to add a new user.
@@ -30,7 +33,7 @@ public class AddUserCommand extends Command {
     /**
      * Constructor for AddUserCommand.
      *
-     * @param parts The parts from user input
+     * @param parts    The parts from user input
      * @param userList The list of users to work with
      * @throws InsufficientArgumentsException If the number of args is incorrect
      */
@@ -45,7 +48,7 @@ public class AddUserCommand extends Command {
     /**
      * Gets arg values from the given part.
      *
-     * @return A array of arg values
+     * @return AN array of arg values
      * @throws InvalidArgumentException If there is a part that cannot be parsed
      */
     private String[] getArgsAddUserCmd() throws InvalidArgumentException {
@@ -73,7 +76,10 @@ public class AddUserCommand extends Command {
      * @return true If that name cannot be found in the current user list
      * @throws DuplicateException If that username is taken
      */
-    private boolean isValidName(String userName) throws DuplicateException {
+    private boolean isValidName(String userName) throws DuplicateException, InvalidUserException {
+        if (userName.length() > 20) {
+            throw new InvalidUserException(MESSAGE_NAME_LENGTH_INVALID);
+        }
         try {
             userList.getUserById(userName);
             throw new DuplicateException(MESSAGE_USERNAME_TAKEN);
@@ -107,12 +113,15 @@ public class AddUserCommand extends Command {
      * @return true If contact number is in the correct format and correct length
      * @throws ContactNumberInvalidException If contact number has the wrong length
      */
-    private boolean isValidContactNumber(String contactNumber) throws ContactNumberInvalidException {
+    private boolean isValidContactNumber(String contactNumber)
+            throws ContactNumberInvalidException {
         if (contactNumber.length() != 8) {
             throw new ContactNumberInvalidException(MESSAGE_CONTACT_LENGTH_INVALID);
         }
         try {
-            Integer.parseInt(contactNumber);
+            if (Integer.parseInt(contactNumber) < 0) {
+                throw new ContactNumberInvalidException(MESSAGE_CONTACT_FORMAT_INVALID);
+            }
             return true;
         } catch (NumberFormatException e) {
             throw new NumberFormatException(MESSAGE_CONTACT_FORMAT_INVALID);
@@ -125,11 +134,12 @@ public class AddUserCommand extends Command {
      * @param args The array of input args
      * @return true If they are all valid
      * @throws ContactNumberInvalidException If contact number has the wrong length
-     * @throws DuplicateException If that username is taken
-     * @throws InvalidUserException If age is out of range
+     * @throws DuplicateException            If that username is taken
+     * @throws InvalidUserException          If age is out of range
      */
     private boolean areValidArgs(String[] args)
             throws ContactNumberInvalidException, DuplicateException, InvalidUserException {
+        assert args.length == 3 : "Args length is invalid";
         return isValidName(args[0]) && isValidAge(args[1]) && isValidContactNumber(args[2]);
     }
 
@@ -138,15 +148,15 @@ public class AddUserCommand extends Command {
      *
      * @return false If it is not an exit command
      * @throws InsufficientArgumentsException If the number of args is incorrect
-     * @throws InvalidArgumentException If there is a part that cannot be parsed
-     * @throws ContactNumberInvalidException If contact number has the wrong length
-     * @throws DuplicateException If that username is taken
-     * @throws InvalidUserException If age is out of range
+     * @throws InvalidArgumentException       If there is a part that cannot be parsed
+     * @throws ContactNumberInvalidException  If contact number has the wrong length
+     * @throws DuplicateException             If that username is taken
+     * @throws InvalidUserException           If age is out of range
      */
-    public boolean executeCommand()
-            throws InsufficientArgumentsException, InvalidArgumentException,
+    public boolean executeCommand() throws InsufficientArgumentsException, InvalidArgumentException,
             ContactNumberInvalidException, DuplicateException, InvalidUserException {
         String[] args = getArgsAddUserCmd();
+        assert args.length == 3 : "Args length is invalid";
         if (areValidArgs(args)) {
             User user = new User(args[0], Integer.parseInt(args[1]), args[2]);
             this.userList.addUser(user);

@@ -1,10 +1,12 @@
 package seedu.duke.command.item;
 
 import seedu.duke.command.Command;
-import seedu.duke.exception.InvalidSortModeException;
 import seedu.duke.exception.InvalidArgumentException;
-import seedu.duke.exception.InvalidPriceException;
+import seedu.duke.exception.InvalidCategoryException;
 import seedu.duke.exception.InvalidPriceBoundariesException;
+import seedu.duke.exception.InvalidPriceException;
+import seedu.duke.exception.InvalidSortModeException;
+import seedu.duke.item.Category;
 import seedu.duke.item.Item;
 import seedu.duke.item.ItemList;
 import seedu.duke.parser.CommandParser;
@@ -17,21 +19,25 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static java.util.Comparator.comparingDouble;
-import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_PRICE_BOUNDARIES_INVALID;
-import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_PRICE_LESS_THAN_ZERO;
-import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_SORT_MODE_INVALID;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_CATEGORY_INDEX_FORMAT_INVALID;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PARTS;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_PRICE_BOUNDARIES_INVALID;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_PRICE_FORMAT_INVALID;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_PRICE_OUT_OF_RANGE;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_SORT_MODE_INVALID;
+
+//@@author chiewyx
 
 /**
  * A representation of a command to sort items based on its price.
  */
 public class SortItemCommand extends Command {
     private static final String LOW_HIGH = "lh";
-
     private static final String HIGH_LOW = "hl";
     private static final String MIN_AMT = "0";
-    private static final String MAX_AMT = "999999999";
+    private static final String MAX_AMT = "10000";
+    private static final String DEFAULT_SORT = "lh";
+    private static final String NO_CATEGORY = "0";
 
     private final String[] parts;
 
@@ -42,8 +48,8 @@ public class SortItemCommand extends Command {
     /**
      * Constructor for SortItemCommand.
      *
-     * @param parts The parts from user input
-     * @param itemList The list of items to work with
+     * @param parts           The parts from user input
+     * @param itemList        The list of items to work with
      * @param transactionList The list of transactions to work with
      */
     public SortItemCommand(String[] parts, ItemList itemList, TransactionList transactionList) {
@@ -59,15 +65,17 @@ public class SortItemCommand extends Command {
      * @throws InvalidArgumentException if there is a part that does not fit the command
      */
     private String[] getArgsSortItemsCmd() throws InvalidArgumentException {
-        String[] args = new String[3];
+        String[] args = new String[4];
         for (String part : parts) {
             String delimiter = CommandParser.getArgsDelimiter(part);
-            if (delimiter.equals("mo")) {
+            if (delimiter.equals("mode")) {
                 args[0] = CommandParser.getArgValue(part);
-            } else if (delimiter.equals("mi")) {
+            } else if (delimiter.equals("min")) {
                 args[1] = CommandParser.getArgValue(part);
-            } else if (delimiter.equals("ma")) {
+            } else if (delimiter.equals("max")) {
                 args[2] = CommandParser.getArgValue(part);
+            } else if (delimiter.equals("cat")) {
+                args[3] = CommandParser.getArgValue(part);
             } else {
                 throw new InvalidArgumentException(MESSAGE_INVALID_PARTS);
             }
@@ -82,11 +90,17 @@ public class SortItemCommand extends Command {
      * @return an array with optional arguments removed
      */
     private String[] removeOptionalArgs(String[] args) {
+        if (args[0] == null) {
+            args[0] = DEFAULT_SORT;
+        }
         if (args[1] == null) {
             args[1] = MIN_AMT;
         }
         if (args[2] == null) {
             args[2] = MAX_AMT;
+        }
+        if (args[3] == null) {
+            args[3] = NO_CATEGORY;
         }
         return args;
     }
@@ -114,8 +128,8 @@ public class SortItemCommand extends Command {
      */
     private boolean isValidMin(String minPrice) throws InvalidPriceException {
         try {
-            if (Double.parseDouble(minPrice) < 0) {
-                throw new InvalidPriceException(MESSAGE_PRICE_LESS_THAN_ZERO);
+            if (Double.parseDouble(minPrice) < 0 || Double.parseDouble(minPrice) > 10000) {
+                throw new InvalidPriceException(MESSAGE_PRICE_OUT_OF_RANGE);
             }
             return true;
         } catch (NumberFormatException e) {
@@ -132,8 +146,8 @@ public class SortItemCommand extends Command {
      */
     private boolean isValidMax(String maxPrice) throws InvalidPriceException {
         try {
-            if (Double.parseDouble(maxPrice) < 0) {
-                throw new InvalidPriceException(MESSAGE_PRICE_LESS_THAN_ZERO);
+            if (Double.parseDouble(maxPrice) < 0 || Double.parseDouble(maxPrice) > 10000) {
+                throw new InvalidPriceException(MESSAGE_PRICE_OUT_OF_RANGE);
             }
             return true;
         } catch (NumberFormatException e) {
@@ -161,23 +175,38 @@ public class SortItemCommand extends Command {
         }
     }
 
+    /**
+     * Checks if a categoryNumber is valid or not.
+     *
+     * @param categoryNumber the input category number
+     * @return true if that number can be parsed
+     */
+    private boolean isValidCategoryNumber(String categoryNumber) {
+        try {
+            Integer.parseInt(categoryNumber);
+            return true;
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException(MESSAGE_CATEGORY_INDEX_FORMAT_INVALID);
+        }
+    }
+
     private boolean areValidArgs(String[] args) throws InvalidSortModeException,
             InvalidPriceException, InvalidPriceBoundariesException {
         return isValidMode(args[0]) && isValidMin(args[1]) && isValidMax(args[2])
-                && isValidBoundaries(args[1], args[2]);
+                && isValidBoundaries(args[1], args[2]) && isValidCategoryNumber(args[3]);
     }
 
     /**
      * Sorts and filters the list of items.
      *
      * @return a list containing the sorted and filtered items
-     * @throws InvalidArgumentException if the arguments are invalid
-     * @throws InvalidSortModeException if the mode of sorting is invalid
-     * @throws InvalidPriceException if minPrice and maxPrice are invalid
+     * @throws InvalidArgumentException        if the arguments are invalid
+     * @throws InvalidSortModeException        if the mode of sorting is invalid
+     * @throws InvalidPriceException           if minPrice and maxPrice are invalid
      * @throws InvalidPriceBoundariesException if minPrice > maxPrice
      */
     private List<Item> sortAndFilter() throws InvalidArgumentException, InvalidSortModeException,
-            InvalidPriceException, InvalidPriceBoundariesException {
+            InvalidPriceException, InvalidPriceBoundariesException, InvalidCategoryException {
         String[] args = getArgsSortItemsCmd();
         String[] mainArgs = removeOptionalArgs(args);
         List<Item> sortedItems = new ArrayList<>();
@@ -200,6 +229,12 @@ public class SortItemCommand extends Command {
                                         && item.getPricePerDay() <= max)
                                 .collect(Collectors.toList());
             }
+            if (!mainArgs[3].equals(NO_CATEGORY)) {
+                Category.Categories cat = Category.mapCategory(Integer.parseInt(mainArgs[3]));
+                sortedItems = sortedItems.stream()
+                        .filter(item -> item.getCategory() == cat)
+                        .collect(Collectors.toList());
+            }
         }
         return sortedItems;
     }
@@ -208,13 +243,13 @@ public class SortItemCommand extends Command {
      * Executes SortItemsCommand.
      *
      * @return false
-     * @throws InvalidArgumentException if the arguments are invalid
-     * @throws InvalidSortModeException if the mode of sorting is invalid
-     * @throws InvalidPriceException if minPrice and maxPrice are invalid
+     * @throws InvalidArgumentException        if the arguments are invalid
+     * @throws InvalidSortModeException        if the mode of sorting is invalid
+     * @throws InvalidPriceException           if minPrice and maxPrice are invalid
      * @throws InvalidPriceBoundariesException if minPrice > maxPrice
      */
     public boolean executeCommand() throws InvalidArgumentException, InvalidSortModeException,
-            InvalidPriceException, InvalidPriceBoundariesException {
+            InvalidPriceException, InvalidPriceBoundariesException, InvalidCategoryException {
         StringBuilder listString = new StringBuilder();
         List<Item> itemsList = sortAndFilter();
         if (itemsList.size() == 0) {

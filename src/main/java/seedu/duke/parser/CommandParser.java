@@ -4,25 +4,29 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.duke.command.item.AddItemCommand;
+import seedu.duke.command.item.FindItemCommand;
 import seedu.duke.command.item.ListCategoriesCommand;
 import seedu.duke.command.item.ListItemsCommand;
 import seedu.duke.command.item.RemoveItemCommand;
 import seedu.duke.command.item.SortItemCommand;
+import seedu.duke.command.item.UpdateItemCommand;
 import seedu.duke.command.item.ViewItemCommand;
-import seedu.duke.command.item.FindItemCommand;
 import seedu.duke.command.transaction.AddTransactionCommand;
-import seedu.duke.command.transaction.ViewTransactionCommand;
 import seedu.duke.command.transaction.ListTransactionsCommand;
 import seedu.duke.command.transaction.RemoveTransactionCommand;
+import seedu.duke.command.transaction.UpdateTransactionCommand;
+import seedu.duke.command.transaction.ViewTransactionCommand;
 import seedu.duke.command.transaction.ViewTransactionsByStatusCommand;
-import seedu.duke.command.user.AddUserCommand;
-import seedu.duke.command.user.FindUserCommand;
+import seedu.duke.command.transaction.ViewTransactionsByUserCommand;
 import seedu.duke.command.Command;
 import seedu.duke.command.exit.ExitCommand;
 import seedu.duke.command.help.HelpCommand;
+import seedu.duke.command.user.AddUserCommand;
+import seedu.duke.command.user.FindUserCommand;
 import seedu.duke.command.user.ListUsersCommand;
 import seedu.duke.command.user.RemoveUserCommand;
 import seedu.duke.command.user.ViewUserCommand;
+import seedu.duke.command.user.ViewUserDebtCommand;
 import seedu.duke.exception.CommandNotFoundException;
 import seedu.duke.exception.InsufficientArgumentsException;
 import seedu.duke.exception.InvalidArgumentException;
@@ -32,6 +36,9 @@ import seedu.duke.user.UserList;
 
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_ARGUMENT_EMPTY;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_COMMAND_UNRECOGNIZABLE;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_CONTAIN_DATA_SEPARATOR;
+
+// @@author winston-lim
 
 /**
  * A class that parses and analyses the input string from the user.
@@ -62,8 +69,12 @@ public class CommandParser {
     private static final String COMMAND_REMOVE_ITEM = "remove-item";
     private static final String COMMAND_REMOVE_TX = "remove-tx";
     private static final String COMMAND_FIND_TX = "find-tx";
+    private static final String COMMAND_FIND_TX_BY_USER = "find-tx-by-user";
+    private static final String COMMAND_VIEW_USER_DEBT = "view-user-debt";
     private static final String COMMAND_SORT_ITEMS = "sort-items";
     private static final String COMMAND_LIST_CATEGORIES = "list-categories";
+    private static final String COMMAND_UPDATE_ITEM = "update-item";
+    private static final String COMMAND_UPDATE_TRANSACTION = "update-tx";
 
 
     /**
@@ -122,19 +133,22 @@ public class CommandParser {
     /**
      * Parses the command from user.
      *
-     * @param input The input from user
-     * @param userList The list of users
-     * @param itemList The list of items
+     * @param input           The input from user
+     * @param userList        The list of users
+     * @param itemList        The list of items
      * @param transactionList The list of transactions
      * @return Commands based on the command word
-     * @throws CommandNotFoundException If the command is unrecognizable
+     * @throws CommandNotFoundException       If the command is unrecognizable
      * @throws InsufficientArgumentsException If number of args in the commands is not enough.
      */
     public static Command createCommand(String input, UserList userList, ItemList itemList,
                                         TransactionList transactionList)
-            throws CommandNotFoundException, InsufficientArgumentsException {
+            throws CommandNotFoundException, InsufficientArgumentsException, InvalidArgumentException {
         String command = getCommand(input);
         String[] parts = getParts(input);
+        if (isContainingDataSeparator(input)) {
+            throw new InvalidArgumentException(MESSAGE_CONTAIN_DATA_SEPARATOR);
+        }
         // assert that command exists
         switch (command) {
         case COMMAND_EXIT:
@@ -161,22 +175,35 @@ public class CommandParser {
             return new AddTransactionCommand(parts, userList, itemList, transactionList);
         case COMMAND_REMOVE_USER:
             return new RemoveUserCommand(parts, userList, itemList, transactionList);
+        case COMMAND_VIEW_USER_DEBT:
+            return new ViewUserDebtCommand(parts, userList, transactionList);
         case COMMAND_REMOVE_ITEM:
             return new RemoveItemCommand(parts, itemList, transactionList);
         case COMMAND_REMOVE_TX:
             return new RemoveTransactionCommand(parts, transactionList);
         case COMMAND_FIND_TX:
             return new ViewTransactionsByStatusCommand(parts, transactionList);
+        case COMMAND_FIND_TX_BY_USER:
+            return new ViewTransactionsByUserCommand(parts, transactionList, userList);
         case COMMAND_SORT_ITEMS:
             return new SortItemCommand(parts, itemList, transactionList);
         case COMMAND_LIST_CATEGORIES:
             return new ListCategoriesCommand();
         case COMMAND_FIND_ITEM:
-            return new FindItemCommand(parts, itemList);
+            return new FindItemCommand(parts, itemList, transactionList);
         case COMMAND_FIND_USER:
-            return new FindUserCommand(parts,userList);
+            return new FindUserCommand(parts, userList);
+        case COMMAND_UPDATE_ITEM:
+            return new UpdateItemCommand(parts, itemList, transactionList);
+        case COMMAND_UPDATE_TRANSACTION:
+            return new UpdateTransactionCommand(parts, transactionList);
+
         default:
             throw new CommandNotFoundException(MESSAGE_COMMAND_UNRECOGNIZABLE);
         }
+    }
+
+    private static boolean isContainingDataSeparator(String input) {
+        return input.contains("|");
     }
 }

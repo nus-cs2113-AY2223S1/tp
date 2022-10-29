@@ -2,6 +2,8 @@ package seedu.duke.id;
 
 import java.util.UUID;
 
+//@@author jingwei55
+
 /**
  * A class of IdGenerator to generate unique id.
  */

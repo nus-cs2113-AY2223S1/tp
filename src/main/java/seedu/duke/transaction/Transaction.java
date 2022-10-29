@@ -6,6 +6,8 @@ import seedu.duke.parser.DateParser;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
+//@@author bdthanh
+
 /**
  * A representation of transaction.
  */
@@ -17,18 +19,19 @@ public class Transaction {
     private final int duration;
     private final LocalDate createdAt;
     private final LocalDate returnedAt;
+    private final double moneyTransacted;
 
     /**
      * Constructor method for transaction.
      *
-     * @param itemName The name of the item involved.
-     * @param itemId The id of the item involved.
+     * @param itemName   The name of the item involved.
+     * @param itemId     The id of the item involved.
      * @param borrowerId The id(name) of the user who borrows.
-     * @param duration The length of transaction(days).
-     * @param createdAt The day when transaction created.
+     * @param duration   The length of transaction(days).
+     * @param createdAt  The day when transaction created.
      */
     public Transaction(String itemName, String itemId, String borrowerId, int duration,
-            LocalDate createdAt) {
+                       LocalDate createdAt, double moneyTransacted) {
         this.transactionId = IdGenerator.generateId();
         this.itemName = itemName;
         this.borrower = borrowerId;
@@ -36,20 +39,21 @@ public class Transaction {
         this.createdAt = createdAt;
         this.returnedAt = createdAt.plusDays(duration);
         this.itemId = itemId;
+        this.moneyTransacted = moneyTransacted;
     }
 
     /**
      * Constructor method for transaction.
      *
      * @param transactionId The id of the transaction.
-     * @param itemName The name of the item involved.
-     * @param itemId The id of the item involved.
-     * @param borrowerId The id(name) of the user who borrows.
-     * @param duration The length of transaction(days).
-     * @param createdAt The day when transaction created.
+     * @param itemName      The name of the item involved.
+     * @param itemId        The id of the item involved.
+     * @param borrowerId    The id(name) of the user who borrows.
+     * @param duration      The length of transaction(days).
+     * @param createdAt     The day when transaction created.
      */
     public Transaction(String transactionId, String itemName, String itemId, String borrowerId,
-            int duration, LocalDate createdAt) {
+                       int duration, LocalDate createdAt, double moneyTransacted) {
         this.transactionId = transactionId;
         this.itemName = itemName;
         this.borrower = borrowerId;
@@ -57,6 +61,7 @@ public class Transaction {
         this.createdAt = createdAt;
         this.returnedAt = createdAt.plusDays(duration);
         this.itemId = itemId;
+        this.moneyTransacted = moneyTransacted;
     }
 
     /**
@@ -96,6 +101,24 @@ public class Transaction {
     }
 
     /**
+     * Gets the Duration.
+     *
+     * @return The Duration of transaction
+     */
+    public int getDuration() {
+        return duration;
+    }
+
+    /**
+     * Gets the moneyTransacted.
+     *
+     * @return The Duration of transaction
+     */
+    public double getMoneyTransacted() {
+        return moneyTransacted;
+    }
+
+    /**
      * Checks if the transaction finished or not.
      *
      * @return true If the return date is before today
@@ -112,19 +135,37 @@ public class Transaction {
     public String convertTransactionToFileFormat() {
         String separator = " | ";
         return transactionId + separator + itemName + separator + itemId + separator + borrower
-                + separator + duration + separator + createdAt;
+                + separator + duration + separator + createdAt + separator + moneyTransacted;
     }
+
+    //@@author winston-lim
 
     /**
      * Updates the duration of the transaction.
-     * 
+     *
      * @param newDuration The new duration
      * @return The updated transaction
      */
+    public Transaction update(int newDuration, double newMoneyTransacted) {
+        return new Transaction(this.transactionId, this.itemName, this.itemId, this.borrower,
+                newDuration, this.createdAt, newMoneyTransacted);
+    }
 
-    public Transaction updateDuration(int newDuration) {
-        return new Transaction(this.transactionId, this.itemName, this.itemId, this.borrower, newDuration,
-                this.createdAt);
+    //@@author bdthanh
+
+    /**
+     * Checks if the new transaction overlaps with any old transactions of the same item.
+     *
+     * @param transactionToCheck The new transaction
+     * @return true if they overlap
+     */
+    public boolean isOverlapWithTransaction(Transaction transactionToCheck) {
+        return ((transactionToCheck.createdAt.isAfter(this.createdAt)
+                && transactionToCheck.getReturnDate().isBefore(this.getReturnDate()))
+                || (transactionToCheck.getReturnDate().isAfter(this.createdAt)
+                && transactionToCheck.getReturnDate().isBefore(this.getReturnDate()))
+                || (transactionToCheck.createdAt.isBefore(this.createdAt)
+                && transactionToCheck.getReturnDate().isAfter(this.createdAt)));
     }
 
     /**
@@ -135,19 +176,22 @@ public class Transaction {
     @Override
     public String toString() {
         String itemId = "ItemID: " + this.itemId + " ";
-        String transactionIcon = "Status: [" + (isFinished() ? "Returned" : "On loan") + "] ";
-        String transactionId = "TransactionID: " + this.transactionId + " ";
+        String transactionIcon = "[" + (isFinished() ? "Finished" : "Unfinished") + "] ";
+        String transactionId = "TxID: " + this.transactionId + " ";
         String itemName = "ItemName: " + this.itemName + " ";
-        String usersId = "BorrowerID: " + this.borrower + " ";
-
+        String usersId = "Borrower: " + this.borrower + " ";
+        String duration = "Duration: " + this.duration + " ";
+        String moneyTransactedString = " MoneyTransacted: " + this.moneyTransacted + " ";
         if (!isFinished()) {
             String remainDays = " (" + ChronoUnit.DAYS.between(LocalDate.now(), getReturnDate())
-                    + " day(s) remaining)";
+                    + " day(s) left)";
             String returnDate =
                     "ReturnDate: " + DateParser.formatDateToString(returnedAt) + remainDays;
-            return transactionIcon + transactionId + itemName + itemId + usersId + returnDate;
+            return transactionIcon + transactionId + itemName + itemId + usersId
+                    + duration + returnDate + moneyTransactedString;
         }
         String returnedDate = "ReturnedDate: " + DateParser.formatDateToString(returnedAt);
-        return transactionIcon + transactionId + itemName + itemId + usersId + returnedDate;
+        return transactionIcon + transactionId + itemName + itemId + usersId
+                + duration + returnedDate + moneyTransactedString;
     }
 }

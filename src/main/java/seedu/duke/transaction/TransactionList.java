@@ -1,11 +1,14 @@
 package seedu.duke.transaction;
 
+import seedu.duke.exception.InvalidTransactionException;
 import seedu.duke.exception.TransactionNotFoundException;
 
 import java.util.ArrayList;
 
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_ITEM_TRANSACTION_OVERLAP;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_TX_NOT_FOUND;
 
+//@@author bdthanh
 public class TransactionList {
     private final ArrayList<Transaction> transactionList;
 
@@ -56,21 +59,27 @@ public class TransactionList {
      * Updates a transaction duration in the list given its ID.
      *
      * @param transactionId The id of the transaction to be deleted
-     * @param duration The new duration
+     * @param duration      The new duration
      * @throws TransactionNotFoundException If the transaction cannot be found in the list
+     * @throws InvalidTransactionException If there is transaction overlapped
      */
-    public Transaction updateTransactionDuration(String transactionId, int duration)
-            throws TransactionNotFoundException {
+
+    //@@author jorellesee
+    public Transaction updateTransaction(String transactionId, int duration, double moneyTransacted)
+            throws TransactionNotFoundException, InvalidTransactionException {
         for (int i = 0; i < this.transactionList.size(); ++i) {
             Transaction tx = this.transactionList.get(i);
             if (tx.getTxId().equals(transactionId)) {
-                Transaction updatedTx = tx.updateDuration(duration);
+                Transaction updatedTx = tx.update(duration, moneyTransacted);
+                checkIfListHasTransactionOfThisItemThatOverlapWithNewTransaction(updatedTx);
                 this.transactionList.set(i, updatedTx);
                 return updatedTx;
             }
         }
         throw new TransactionNotFoundException(MESSAGE_TX_NOT_FOUND);
     }
+
+    //@@author bdthanh
 
     /**
      * Deletes a transaction in the list given its ID.
@@ -100,6 +109,27 @@ public class TransactionList {
         throw new TransactionNotFoundException(MESSAGE_TX_NOT_FOUND);
     }
 
+    //@@author jorellesee
+    public TransactionList getBorrowTransactionsByUser(String userName) {
+        TransactionList returnList = new TransactionList();
+        for (Transaction transaction : this.transactionList) {
+            if (transaction.getBorrower().equals(userName)) {
+                returnList.addTransaction(transaction);
+            }
+        }
+        return returnList;
+    }
+
+    public double getTotalMoneyTransacted() {
+        int totalProfit = 0;
+        for (Transaction transaction : transactionList) {
+            totalProfit += transaction.getMoneyTransacted();
+        }
+        return totalProfit;
+    }
+
+    //@@author bdthanh
+
     /**
      * Checks if there is a specific borrower given his/her username among unfinished transactions.
      *
@@ -110,6 +140,23 @@ public class TransactionList {
         int count = (int) transactionList.stream().filter(t -> !t.isFinished())
                 .filter(t -> t.getBorrower().equals(username)).count();
         return count > 0;
+    }
+
+    /**
+     * Checks if there is a transaction in the list overlap with the new transaction of a same item.
+     *
+     * @param transactionToCheck The new transaction to check
+     * @throws InvalidTransactionException If overlap
+     */
+    public void checkIfListHasTransactionOfThisItemThatOverlapWithNewTransaction(Transaction transactionToCheck)
+            throws InvalidTransactionException {
+        int count = (int) transactionList.stream()
+                .filter(t -> t.getItemId().equals(transactionToCheck.getItemId()))
+                .filter(t -> t.isOverlapWithTransaction(transactionToCheck))
+                .count();
+        if (count > 0) {
+            throw new InvalidTransactionException(MESSAGE_ITEM_TRANSACTION_OVERLAP);
+        }
     }
 
     /**

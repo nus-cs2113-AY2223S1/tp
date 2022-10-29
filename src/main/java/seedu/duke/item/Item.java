@@ -1,8 +1,10 @@
 package seedu.duke.item;
 
+import seedu.duke.exception.InvalidCategoryException;
 import seedu.duke.id.IdGenerator;
 import seedu.duke.transaction.TransactionList;
 
+//@@author jingwei55
 public class Item {
     private final String itemId;
     private final String name;
@@ -10,7 +12,7 @@ public class Item {
     private final double pricePerDay;
     private final Category.Categories category;
 
-    public Item(String name, int categoryNumber, double price, String ownerId) {
+    public Item(String name, int categoryNumber, double price, String ownerId) throws InvalidCategoryException {
         this.itemId = IdGenerator.generateId();
         this.name = name;
         this.pricePerDay = price;
@@ -18,7 +20,8 @@ public class Item {
         this.category = Category.mapCategory(categoryNumber);
     }
 
-    public Item(String itemId, String name, int categoryNumber, double price, String ownerId) {
+    public Item(String itemId, String name, int categoryNumber, double price, String ownerId)
+            throws InvalidCategoryException {
         this.itemId = itemId;
         this.name = name;
         this.pricePerDay = price;
@@ -42,7 +45,11 @@ public class Item {
         return pricePerDay;
     }
 
-    public Item updatePrice(double newPricePerDay) {
+    public Category.Categories getCategory() {
+        return category;
+    }
+
+    public Item updatePrice(double newPricePerDay) throws InvalidCategoryException {
         return new Item(this.itemId, this.name, Category.setCategory(this.category), newPricePerDay,
                 this.ownerId);
     }

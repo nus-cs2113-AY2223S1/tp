@@ -6,6 +6,8 @@ import java.util.ArrayList;
 
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_USER_NOT_FOUND;
 
+// @@author chiewyx
+
 /**
  * A representation of a list of User.
  */
@@ -84,11 +86,19 @@ public class UserList {
         throw new UserNotFoundException(MESSAGE_USER_NOT_FOUND);
     }
 
+    /**
+     * Get users that contains the keyword in their name.
+     *
+     * @param keyword keyword to find users
+     * @return a list of users with name containing the keyword
+     * @throws UserNotFoundException if user is not found
+     */
     public UserList getUsersByKeyword(String keyword) throws UserNotFoundException {
         UserList returnList = new UserList();
         for (User user : userList) {
-            if (user.getName().contains(keyword)) {
-                assert user.getName().contains(keyword) : "equals function not working";
+            if (user.getName().toLowerCase().contains(keyword.toLowerCase())) {
+                assert user.getName().toLowerCase()
+                        .contains(keyword.toLowerCase()) : "equals function not working";
                 returnList.addUser(user);
             }
         }
@@ -98,15 +108,11 @@ public class UserList {
         return returnList;
     }
 
-    public String listUser() {
-        StringBuilder listOfUsers = new StringBuilder();
-        listOfUsers.append("Here are your list of users:").append(System.lineSeparator());
-        for (User user : userList) {
-            listOfUsers.append(user.toString()).append(System.lineSeparator());
-        }
-        return listOfUsers.toString();
-    }
-
+    /**
+     * Overrides toString method of Object to get string representation of UserList.
+     *
+     * @return A string representation of UserList
+     */
     @Override
     public String toString() {
         StringBuilder listString = new StringBuilder();
@@ -122,6 +128,11 @@ public class UserList {
         return String.valueOf(listString);
     }
 
+    /**
+     * Formats the userList to store in memory.
+     *
+     * @return A formatted string of user list information
+     */
     public String convertUserListToFileFormat() {
         StringBuilder formattedString = new StringBuilder();
         for (User user : userList) {

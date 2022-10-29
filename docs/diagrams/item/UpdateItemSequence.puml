@@ -1,0 +1,57 @@
+@startuml
+hide footbox
+Actor User
+"User" -> ":Duke": "update-item..."
+activate ":Duke"
+":Duke" -> ":CommandParser": createCommand()
+activate ":CommandParser"
+":CommandParser" -> ":UpdateItemCommand"**: new
+activate ":UpdateItemCommand"
+return
+":CommandParser" --> ":Duke"
+deactivate
+":Duke" -> ":UpdateItemCommand" : executeCommand()
+activate ":UpdateItemCommand"
+":UpdateItemCommand" -> ":UpdateItemCommand": getArgsUpdateItemCmd()
+activate ":UpdateItemCommand"
+return args
+alt args is valid
+":UpdateItemCommand" -> ":ItemList": updateItemPrice()
+    activate ":ItemList"
+    alt item exists
+        ":ItemList" -> ":Item": updateItemPrice()
+        activate ":Item"
+        return updatedItem
+        return updatedItem
+        ":UpdateItemCommand" -> "<<class>>\nUi": updateItemMessage()
+        activate "<<class>>\nUi"
+        return
+        deactivate ":ItemList"
+        deactivate "<<class>>\nUi"
+        deactivate ":Item"
+    else
+        ":ItemList" -> ":DukeException"** : new
+        destroy ":ItemList"
+        activate ":DukeException"
+        ":DukeException" --> ":Duke"
+        destroy ":DukeException"
+        ":Duke" -> "<<class>>\nUi" : print error
+        activate "<<class>>\nUi"
+        "<<class>>\nUi" --> ":Duke" : error message
+        deactivate "<<class>>\nUi"
+    end
+else args is invalid
+    ":UpdateItemCommand" -> ":DukeException"** : new
+    destroy ":UpdateItemCommand"
+    activate ":DukeException"
+    ":DukeException" --> ":Duke"
+    destroy ":DukeException"
+    ":Duke" -> "<<class>>\nUi" : print error
+    activate "<<class>>\nUi"
+    "<<class>>\nUi" --> ":Duke" : error message
+    deactivate "<<class>>\nUi"
+
+
+end
+
+@enduml

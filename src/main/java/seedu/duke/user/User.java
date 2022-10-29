@@ -1,5 +1,7 @@
 package seedu.duke.user;
 
+//@@author chiewyx
+
 /**
  * A representation of user.
  */
@@ -10,8 +12,9 @@ public class User {
 
     /**
      * Constructor method for user.
-     * @param name The name of the user
-     * @param age The age of the user
+     *
+     * @param name          The name of the user
+     * @param age           The age of the user
      * @param contactNumber The contact number of the user
      */
     public User(String name, int age, String contactNumber) {
@@ -41,6 +44,11 @@ public class User {
         return username + age + contactNumber;
     }
 
+    /**
+     * Formats the user information to store in memory.
+     *
+     * @return A formatted string of user information
+     */
     public String convertItemToFileFormat() {
         String separator = " | ";
         return name + separator + age + separator + contactNumber;

@@ -10,11 +10,11 @@ import seedu.duke.ui.Ui;
 
 import java.util.ArrayList;
 
-import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_COMMAND_UNRECOGNIZABLE;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INSUFFICIENT_ARGUMENTS;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PARTS;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_STATUS_INVALID;
 
-
+//@@author jingwei55
 public class ViewTransactionsByStatusCommand extends Command {
 
     private final String[] parts;
@@ -44,12 +44,13 @@ public class ViewTransactionsByStatusCommand extends Command {
         if (arg.equals("finished") || arg.equals("unfinished")) {
             return true;
         }
-        throw new InvalidArgumentException(MESSAGE_COMMAND_UNRECOGNIZABLE);
+        throw new InvalidArgumentException(MESSAGE_STATUS_INVALID);
     }
 
     /**
      * Displays the list of transactions based on user input.
-     * @param arg user input needed to return the appropriate list of transactions
+     *
+     * @param arg          user input needed to return the appropriate list of transactions
      * @param transactions Overall list of transactions
      */
     void getTransactionsByStatus(String arg, ArrayList<Transaction> transactions) {
@@ -66,6 +67,7 @@ public class ViewTransactionsByStatusCommand extends Command {
 
     /**
      * Search entire transaction list for transactions that are completed.
+     *
      * @param transactions list of transactions to search from
      * @return list of finished transactions
      */
@@ -81,6 +83,7 @@ public class ViewTransactionsByStatusCommand extends Command {
 
     /**
      * Search entire transaction list for transactions that are still ongoing.
+     *
      * @param transactions list of transactions to search from
      * @return list of unfinished transactions
      */

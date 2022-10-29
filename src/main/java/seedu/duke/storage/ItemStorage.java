@@ -1,5 +1,6 @@
 package seedu.duke.storage;
 
+import seedu.duke.exception.InvalidCategoryException;
 import seedu.duke.exception.ItemFileNotFoundException;
 import seedu.duke.exception.StoreFailureException;
 import seedu.duke.item.Item;
@@ -13,8 +14,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_FILE_NOT_FOUND;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_STORAGE_ILLEGALLY_MODIFIED;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_STORE_INVALID;
 
+//@@author bdthanh
 public class ItemStorage extends Storage {
     private static final String SEPARATOR = " \\| ";
     private final String itemFilePath;
@@ -32,7 +35,7 @@ public class ItemStorage extends Storage {
      * @return The list of items stored in the file.
      * @throws ItemFileNotFoundException If the file cannot be found.
      */
-    public ArrayList<Item> loadData() throws ItemFileNotFoundException {
+    public ArrayList<Item> loadData() throws ItemFileNotFoundException, StoreFailureException {
         try {
             File itemFile = new File(itemFilePath);
             ArrayList<Item> itemList = new ArrayList<>();
@@ -46,6 +49,8 @@ public class ItemStorage extends Storage {
             return itemList;
         } catch (FileNotFoundException e) {
             throw new ItemFileNotFoundException(MESSAGE_FILE_NOT_FOUND);
+        } catch (Exception e) {
+            throw new StoreFailureException(MESSAGE_STORAGE_ILLEGALLY_MODIFIED);
         }
     }
 
@@ -62,15 +67,19 @@ public class ItemStorage extends Storage {
             fileWriter.write(formattedItemList);
             fileWriter.close();
         } catch (IOException e) {
-            int startIndex = itemFilePath.lastIndexOf("/");
-            String fileDirectory =
-                    itemFilePath.replace(itemFilePath.substring(startIndex), "");
-            File file = new File(fileDirectory);
-            if (file.mkdir()) {
-                writeData(itemList);
-            } else {
-                throw new StoreFailureException(MESSAGE_STORE_INVALID);
-            }
+            makeItemDir(itemList);
+        }
+    }
+
+    private void makeItemDir(ItemList itemList) throws StoreFailureException {
+        int startIndex = itemFilePath.lastIndexOf("/");
+        String fileDirectory =
+                itemFilePath.replace(itemFilePath.substring(startIndex), "");
+        File file = new File(fileDirectory);
+        if (file.mkdir()) {
+            writeData(itemList);
+        } else {
+            throw new StoreFailureException(MESSAGE_STORE_INVALID);
         }
     }
 
@@ -80,7 +89,7 @@ public class ItemStorage extends Storage {
      * @param splitItemLine The raw item information.
      * @return An Item with full information.
      */
-    public Item handleItemLine(String[] splitItemLine) {
+    public static Item handleItemLine(String[] splitItemLine) throws InvalidCategoryException {
         String itemId = splitItemLine[0];
         String itemName = splitItemLine[1];
         double price = Double.parseDouble(splitItemLine[2]);

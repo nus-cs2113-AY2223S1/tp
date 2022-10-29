@@ -1,12 +1,11 @@
 package seedu.duke.command.transaction;
 
-
+import seedu.duke.command.Command;
 import seedu.duke.exception.DurationInvalidException;
 import seedu.duke.exception.InsufficientArgumentsException;
 import seedu.duke.exception.InvalidArgumentException;
-import seedu.duke.exception.ItemNotFoundException;
+import seedu.duke.exception.InvalidTransactionException;
 import seedu.duke.exception.TransactionNotFoundException;
-import seedu.duke.exception.UserNotFoundException;
 import seedu.duke.ui.Ui;
 import seedu.duke.parser.CommandParser;
 import seedu.duke.transaction.Transaction;
@@ -18,17 +17,19 @@ import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_NUMBER_FORM
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PARTS;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_TX_NOT_FOUND;
 
+// @@author winston-lim
+
 /**
  * A representation of a command to add a new transaction.
  */
-public class UpdateTransactionCommand {
+public class UpdateTransactionCommand extends Command {
     private final String[] parts;
     private final TransactionList transactionList;
 
     /**
      * Constructor for AddTransactionCommand.
      *
-     * @param parts The parts from user input
+     * @param parts           The parts from user input
      * @param transactionList The list of transactions to work with
      * @throws InsufficientArgumentsException If the number of args is incorrect
      */
@@ -36,8 +37,6 @@ public class UpdateTransactionCommand {
             throws InsufficientArgumentsException {
         this.parts = parts;
         this.transactionList = transactionList;
-        // For now only support updating duration, we can extend this in the future to support
-        // updating all fields.
         if (parts.length != 2) {
             throw new InsufficientArgumentsException(MESSAGE_INSUFFICIENT_ARGUMENTS);
         }
@@ -67,10 +66,10 @@ public class UpdateTransactionCommand {
 
     /**
      * Checks if the given transaction is valid or not.
-     * 
-     * @param duration The input duration
+     *
+     * @param id The input id
      * @return true If that id exists in TransactionList
-     * @throws DurationInvalidException thrown when Duration format is invalid
+     * @throws TransactionNotFoundException thrown when transaction cannot be found
      */
     private boolean isValidTxId(String id) throws TransactionNotFoundException {
         try {
@@ -90,7 +89,7 @@ public class UpdateTransactionCommand {
      */
     private boolean isValidDuration(String duration) throws DurationInvalidException {
         try {
-            if (Integer.parseInt(duration) < 0) {
+            if (Integer.parseInt(duration) < 0 || Integer.parseInt(duration) > 1461) {
                 throw new DurationInvalidException(MESSAGE_DURATION_INVALID);
             }
             return true;
@@ -108,18 +107,20 @@ public class UpdateTransactionCommand {
      * Executes UpdateTransactionCommand.
      *
      * @return false
-     * @throws InvalidArgumentException If there is a part that cannot be parsed
-     * @throws ItemNotFoundException If the item cannot be found in the list
-     * @throws UserNotFoundException If the user cannot be found
-     * @throws DurationInvalidException If the number is less than 0
+     * @throws InvalidArgumentException     If there is a part that cannot be parsed
+     * @throws TransactionNotFoundException If the user cannot be found
+     * @throws DurationInvalidException     If the number is less than 0
      */
     public boolean executeCommand() throws InvalidArgumentException, TransactionNotFoundException,
-            DurationInvalidException {
+            DurationInvalidException, InvalidTransactionException {
         String[] args = getArgsAddTxCmd();
         if (areValidArgs(args)) {
             String txId = args[0];
             int duration = Integer.parseInt(args[1]);
-            Transaction updatedTx = this.transactionList.updateTransactionDuration(txId, duration);
+            int oldDuration = transactionList.getTransactionById(txId).getDuration();
+            double oldMoneyTransacted = transactionList.getTransactionById(txId).getMoneyTransacted();
+            double newMoneyTransacted = (double) duration / (double) oldDuration * oldMoneyTransacted;
+            Transaction updatedTx = this.transactionList.updateTransaction(txId, duration, newMoneyTransacted);
             Ui.updateTransactionMessage(updatedTx);
         }
         return false;

@@ -12,6 +12,7 @@ import seedu.duke.transaction.TransactionList;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INSUFFICIENT_ARGUMENTS;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PARTS;
 
+//@@author jingwei55
 public class ViewTransactionCommand extends Command {
     private final String[] parts;
     private final TransactionList transactionList;

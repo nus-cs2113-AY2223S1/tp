@@ -3,13 +3,14 @@ title User Diagram
 
 skinparam classAttributeIconSize 0
 hide footbox
+hide circle
 
 class User {
     - name: String
     - age: String
     - contactNumber: String
 
-    + User(name: String, age: String, contactNumber: String)
+    + User(String, String, String)
     + getName(): String
     + convertUserToFileFormat(): String
     + toString(): String
@@ -17,13 +18,13 @@ class User {
 
 class UserList {
     + UserList()
-    + UserList(userList: ArrayList<User>)
+    + UserList(ArrayList<User>)
     + getSize(): int
     + getUser(): User
-    + addUser(user: User): void
-    + deleteUser(userName: String): void
-    + getUserById(userName: String): User
-    + getUsersByKeyword(keyword: String): UserList
+    + addUser(User): void
+    + deleteUser(String): void
+    + getUserById(String): User
+    + getUsersByKeyword(String): UserList
     + listUser(): String
     + convertUserListToFileFormat(): String
     + toString(): String
@@ -32,18 +33,17 @@ class UserList {
 class UserStorage {
     {static} - SEPARATOR: String
     - userFilePath: String
-    + UserStorage(userFilePath: String)
+    + UserStorage(String)
     + loadData(): ArrayList<User>
-    + writeData(userList: UserList): void
-    + handleUserLine(splitUserLine: String[]): User
+    + writeData(UserList): void
+    + handleUserLine(String[]): User
 }
 
-
-abstract class Storage {
+abstract class "{abstract}\nStorage" {
 }
 
 UserStorage .> UserList : > loads and writes
 UserList *--> "0..*" User: UserList
-Storage <|-- UserStorage
+"{abstract}\nStorage" <|-- UserStorage
 
 @enduml

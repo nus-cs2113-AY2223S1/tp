@@ -14,8 +14,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_FILE_NOT_FOUND;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_STORAGE_ILLEGALLY_MODIFIED;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_STORE_INVALID;
 
+//@@author bdthanh
 public class TransactionStorage extends Storage {
     private static final String SEPARATOR = " \\| ";
     private final String transactionFilePath;
@@ -33,7 +35,7 @@ public class TransactionStorage extends Storage {
      * @return The list of transactions stored in the file.
      * @throws TransactionFileNotFoundException If the file cannot be found.
      */
-    public ArrayList<Transaction> loadData() throws TransactionFileNotFoundException {
+    public ArrayList<Transaction> loadData() throws TransactionFileNotFoundException, StoreFailureException {
         try {
             File transactionFile = new File(transactionFilePath);
             ArrayList<Transaction> transactionList = new ArrayList<>();
@@ -47,6 +49,8 @@ public class TransactionStorage extends Storage {
             return transactionList;
         } catch (FileNotFoundException e) {
             throw new TransactionFileNotFoundException(MESSAGE_FILE_NOT_FOUND);
+        } catch (Exception e) {
+            throw new StoreFailureException(MESSAGE_STORAGE_ILLEGALLY_MODIFIED);
         }
     }
 
@@ -63,15 +67,19 @@ public class TransactionStorage extends Storage {
             fileWriter.write(formattedTransactionList);
             fileWriter.close();
         } catch (IOException e) {
-            int startIndex = transactionFilePath.lastIndexOf("/");
-            String fileDirectory =
-                    transactionFilePath.replace(transactionFilePath.substring(startIndex), "");
-            File file = new File(fileDirectory);
-            if (file.mkdir()) {
-                writeData(transactionList);
-            } else {
-                throw new StoreFailureException(MESSAGE_STORE_INVALID);
-            }
+            makeTransactionDir(transactionList);
+        }
+    }
+
+    private void makeTransactionDir(TransactionList transactionList) throws StoreFailureException {
+        int startIndex = transactionFilePath.lastIndexOf("/");
+        String fileDirectory =
+                transactionFilePath.replace(transactionFilePath.substring(startIndex), "");
+        File file = new File(fileDirectory);
+        if (file.mkdir()) {
+            writeData(transactionList);
+        } else {
+            throw new StoreFailureException(MESSAGE_STORE_INVALID);
         }
     }
 
@@ -81,13 +89,14 @@ public class TransactionStorage extends Storage {
      * @param splitTransactionLine The raw transaction information.
      * @return A Transaction with full information.
      */
-    public Transaction handleTransactionLine(String[] splitTransactionLine) {
+    public static Transaction handleTransactionLine(String[] splitTransactionLine) {
         String transactionId = splitTransactionLine[0];
         String itemName = splitTransactionLine[1];
         String itemId = splitTransactionLine[2];
         String borrowerId = splitTransactionLine[3];
         int duration = Integer.parseInt(splitTransactionLine[4]);
         LocalDate createdAt = LocalDate.parse(splitTransactionLine[5]);
-        return new Transaction(transactionId, itemName, itemId, borrowerId, duration, createdAt);
+        double moneyTransacted = Double.parseDouble(splitTransactionLine[6]);
+        return new Transaction(transactionId, itemName, itemId, borrowerId, duration, createdAt, moneyTransacted);
     }
 }

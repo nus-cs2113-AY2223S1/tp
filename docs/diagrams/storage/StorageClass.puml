@@ -1,0 +1,43 @@
+@startuml
+title Storage Diagram
+
+skinparam classAttributeIconSize 0
+hide footbox
+hide circle
+
+abstract class "{abstract}\nStorage"
+
+class UserStorage {
+    {static} - SEPARATOR: String
+    - userFilePath: String
+    + UserStorage(String)
+    + loadData(): ArrayList<User>
+    + writeData(UserList): void
+    - makeUserDir(UserList): void
+    + handleUserLine(String[]): User
+}
+
+class ItemStorage {
+    {static} - SEPARATOR: String
+    - itemFilePath: String
+    + ItemStorage(String)
+    + loadData(): ArrayList<Item>
+    + writeData(ItemList): void
+    - makeItemDir(ItemList): void
+    + handleItemLine(String[]): Item
+}
+
+class TransactionStorage {
+    {static} - SEPARATOR: String
+    - transactionFilePath: String
+    + TransactionStorage(String)
+    + loadData(): ArrayList<Transaction>
+    + writeData(TransactionList): void
+    - makeTransactionDir(TransactionList)): void
+    + handleTransactionLine(String[]): Transaction
+}
+
+"{abstract}\nStorage" <|-- UserStorage
+"{abstract}\nStorage" <|-- ItemStorage
+"{abstract}\nStorage" <|-- TransactionStorage
+@enduml

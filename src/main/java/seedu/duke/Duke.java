@@ -18,6 +18,8 @@ import static seedu.duke.storage.FilePath.ITEM_FILE_PATH;
 import static seedu.duke.storage.FilePath.TRANSACTION_FILE_PATH;
 import static seedu.duke.storage.FilePath.USER_FILE_PATH;
 
+//@@author bdthanh
+
 /**
  * A chatbot named Duke.
  */
@@ -33,11 +35,11 @@ public class Duke {
     /**
      * Constructor of Duke.
      *
-     * @param userFilePath The file path that Duke stores its users.
-     * @param itemFilePath The file path that Duke stores its items.
+     * @param userFilePath        The file path that Duke stores its users.
+     * @param itemFilePath        The file path that Duke stores its items.
      * @param transactionFilePath The file path that Duke stores its transactions.
      */
-    public Duke(String userFilePath, String itemFilePath, String transactionFilePath) {
+    private Duke(String userFilePath, String itemFilePath, String transactionFilePath) {
         userList = new UserList();
         userStorage = new UserStorage(userFilePath);
         itemStorage = new ItemStorage(itemFilePath);
@@ -55,6 +57,8 @@ public class Duke {
             this.transactionList = new TransactionList(transactionStorage.loadData());
         } catch (TransactionFileNotFoundException e) {
             this.transactionList = new TransactionList();
+        } catch (StoreFailureException e) {
+            resetAllListsDueToDataCorruption(e.getMessage());
         }
     }
 
@@ -63,6 +67,8 @@ public class Duke {
             this.itemList = new ItemList(itemStorage.loadData());
         } catch (ItemFileNotFoundException e) {
             this.itemList = new ItemList();
+        } catch (StoreFailureException e) {
+            resetAllListsDueToDataCorruption(e.getMessage());
         }
     }
 
@@ -71,21 +77,27 @@ public class Duke {
             this.userList = new UserList(userStorage.loadData());
         } catch (UserFileNotFoundException e) {
             this.userList = new UserList();
+        } catch (StoreFailureException e) {
+            resetAllListsDueToDataCorruption(e.getMessage());
         }
+    }
+
+    private void resetAllListsDueToDataCorruption(String errorMessage) {
+        userList = new UserList();
+        itemList = new ItemList();
+        transactionList = new TransactionList();
+        Ui.printErrorMessage(errorMessage);
     }
 
     /**
      * Writes data in 3 list to files.
      *
-     * @param isLastCommand A boolean true if the exit command is input
      * @throws StoreFailureException If something went wrong when storing the data
      */
-    private void writeDataToFile(boolean isLastCommand) throws StoreFailureException {
-        if (isLastCommand) {
-            userStorage.writeData(userList);
-            itemStorage.writeData(itemList);
-            transactionStorage.writeData(transactionList);
-        }
+    private void writeDataToFile() throws StoreFailureException {
+        userStorage.writeData(userList);
+        itemStorage.writeData(itemList);
+        transactionStorage.writeData(transactionList);
     }
 
     /**
@@ -99,7 +111,7 @@ public class Duke {
                 Command command =
                         CommandParser.createCommand(input, userList, itemList, transactionList);
                 isLastCommand = command.executeCommand();
-                writeDataToFile(isLastCommand);
+                writeDataToFile();
             } catch (Exception e) {
                 Ui.printErrorMessage(e.getMessage());
             }

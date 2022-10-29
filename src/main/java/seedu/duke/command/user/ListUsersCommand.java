@@ -4,6 +4,7 @@ import seedu.duke.command.Command;
 import seedu.duke.ui.Ui;
 import seedu.duke.user.UserList;
 
+//@@author winston-lim
 public class ListUsersCommand extends Command {
     private final UserList userList;
 
