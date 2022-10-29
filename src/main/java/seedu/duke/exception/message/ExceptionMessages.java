@@ -68,18 +68,19 @@ public class ExceptionMessages {
     public static final String MESSAGE_ARGUMENT_EMPTY = "The value cannot be empty";
     public static final String MESSAGE_CONTAIN_DATA_SEPARATOR =
             "Input cannot contain | character because it can cause errors when loading data";
-    public static final String MESSAGE_USER_STORAGE_ILLEGALLY_MODIFIED = "The USER files has been illegally edited\n"
-            + "Your previous data cannot be recovered\n"
-            + "We will create three brand-new lists for your users, items, and transaction\n"
-            + "Remember that all files in data folder must not be edited";
-    public static final String MESSAGE_ITEM_STORAGE_ILLEGALLY_MODIFIED = "The ITEM files has been illegally edited\n"
-            + "Your previous data cannot be recovered\n"
-            + "We will create three brand-new lists for your users, items, and transaction\n"
-            + "Remember that all files in data folder must not be edited";
+    public static final String MESSAGE_USER_STORAGE_ILLEGALLY_MODIFIED = "The USER files has been illegally edited\n";
+    public static final String MESSAGE_ITEM_STORAGE_ILLEGALLY_MODIFIED = "The ITEM files has been illegally edited\n";
     public static final String MESSAGE_TRANSACTION_STORAGE_ILLEGALLY_MODIFIED =
-            "The TRANSACTION files has been illegally edited\n"
-                    + "Your previous data cannot be recovered\n"
+            "The TRANSACTION files has been illegally edited\n";
+    public static final String MESSAGE_FILES_ILLEGALLY_DELETED = "One or more files has been illegally deleted\n";
+    public static final String MESSAGE_TO_FIX_FILES =
+            "Please try to fix your data in your files before running the app again\n"
+                    + "If you fix it correctly, you will see a greeting message in the next run\n"
+                    + "If you cannot fix it, you will see this message again. Please delete the entire data folder,\n"
+                    + "which also mean that all your data will be gone forever\n"
                     + "We will create three brand-new lists for your users, items, and transaction\n"
-                    + "Remember that all files in data folder must not be edited";
+                    + "REMEMBER that all files in data folder must not be edited\n"
+                    + "Exiting Duke...";
+
     public static final String MESSAGE_NAME_LENGTH_INVALID = "The length of username must be less than 20 characters";
 }

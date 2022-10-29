@@ -16,6 +16,7 @@ import java.util.Scanner;
 
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_FILE_NOT_FOUND;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_STORE_INVALID;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_TO_FIX_FILES;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_TRANSACTION_STORAGE_ILLEGALLY_MODIFIED;
 
 //@@author bdthanh
@@ -53,7 +54,7 @@ public class TransactionStorage extends Storage {
         } catch (FileNotFoundException e) {
             throw new TransactionFileNotFoundException(MESSAGE_FILE_NOT_FOUND);
         } catch (Exception e) {
-            throw new StoreFailureException(MESSAGE_TRANSACTION_STORAGE_ILLEGALLY_MODIFIED);
+            throw new StoreFailureException(MESSAGE_TRANSACTION_STORAGE_ILLEGALLY_MODIFIED + MESSAGE_TO_FIX_FILES);
         }
     }
 
@@ -86,6 +87,10 @@ public class TransactionStorage extends Storage {
         }
     }
 
+    public boolean hasTransactionFile() {
+        return new File(transactionFilePath).exists();
+    }
+
     /**
      * Analyses the information the transactions stored in the file.
      *
@@ -113,14 +118,14 @@ public class TransactionStorage extends Storage {
 
     private static void checkCheckSumLine(Transaction transaction, int checkSum) throws StoreFailureException {
         if (transaction.toString().length() != checkSum) {
-            throw new StoreFailureException(MESSAGE_TRANSACTION_STORAGE_ILLEGALLY_MODIFIED);
+            throw new StoreFailureException(MESSAGE_TRANSACTION_STORAGE_ILLEGALLY_MODIFIED + MESSAGE_TO_FIX_FILES);
         }
     }
 
     private static void checkCheckSumWhole(ArrayList<Transaction> transactionList, int checkSum)
             throws StoreFailureException {
         if (transactionList.size() != checkSum / 3) {
-            throw new StoreFailureException(MESSAGE_TRANSACTION_STORAGE_ILLEGALLY_MODIFIED);
+            throw new StoreFailureException(MESSAGE_TRANSACTION_STORAGE_ILLEGALLY_MODIFIED + MESSAGE_TO_FIX_FILES);
         }
     }
 }

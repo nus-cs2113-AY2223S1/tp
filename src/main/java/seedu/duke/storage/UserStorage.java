@@ -13,8 +13,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_FILE_NOT_FOUND;
-import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_USER_STORAGE_ILLEGALLY_MODIFIED;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_STORE_INVALID;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_TO_FIX_FILES;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_USER_STORAGE_ILLEGALLY_MODIFIED;
 
 //@@author bdthanh
 public class UserStorage extends Storage {
@@ -51,7 +52,7 @@ public class UserStorage extends Storage {
         } catch (FileNotFoundException e) {
             throw new UserFileNotFoundException(MESSAGE_FILE_NOT_FOUND);
         } catch (Exception e) {
-            throw new StoreFailureException(MESSAGE_USER_STORAGE_ILLEGALLY_MODIFIED);
+            throw new StoreFailureException(MESSAGE_USER_STORAGE_ILLEGALLY_MODIFIED + MESSAGE_TO_FIX_FILES);
         }
     }
 
@@ -84,6 +85,10 @@ public class UserStorage extends Storage {
         }
     }
 
+    public boolean hasUserFile() {
+        return new File(userFilePath).exists();
+    }
+
     /**
      * Analyses the information the users stored in the file.
      *
@@ -106,13 +111,13 @@ public class UserStorage extends Storage {
 
     private static void checkCheckSumLine(User user, int checkSum) throws StoreFailureException {
         if (user.toString().length() != checkSum) {
-            throw new StoreFailureException(MESSAGE_USER_STORAGE_ILLEGALLY_MODIFIED);
+            throw new StoreFailureException(MESSAGE_USER_STORAGE_ILLEGALLY_MODIFIED + MESSAGE_TO_FIX_FILES);
         }
     }
 
     private static void checkCheckSumWhole(ArrayList<User> userList, int checkSum) throws StoreFailureException {
         if (userList.size() != checkSum / 3) {
-            throw new StoreFailureException(MESSAGE_USER_STORAGE_ILLEGALLY_MODIFIED);
+            throw new StoreFailureException(MESSAGE_USER_STORAGE_ILLEGALLY_MODIFIED + MESSAGE_TO_FIX_FILES);
         }
     }
 }

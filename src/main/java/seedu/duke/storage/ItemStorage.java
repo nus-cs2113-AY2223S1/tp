@@ -17,6 +17,7 @@ import java.util.Scanner;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_FILE_NOT_FOUND;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_ITEM_STORAGE_ILLEGALLY_MODIFIED;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_STORE_INVALID;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_TO_FIX_FILES;
 
 //@@author bdthanh
 public class ItemStorage extends Storage {
@@ -53,7 +54,7 @@ public class ItemStorage extends Storage {
         } catch (FileNotFoundException e) {
             throw new ItemFileNotFoundException(MESSAGE_FILE_NOT_FOUND);
         } catch (Exception e) {
-            throw new StoreFailureException(MESSAGE_ITEM_STORAGE_ILLEGALLY_MODIFIED);
+            throw new StoreFailureException(MESSAGE_ITEM_STORAGE_ILLEGALLY_MODIFIED + MESSAGE_TO_FIX_FILES);
         }
     }
 
@@ -86,6 +87,10 @@ public class ItemStorage extends Storage {
         }
     }
 
+    public boolean hasItemFile() {
+        return new File(itemFilePath).exists();
+    }
+
     /**
      * Analyses the information the items stored in the file.
      *
@@ -110,13 +115,13 @@ public class ItemStorage extends Storage {
 
     private static void checkCheckSumLine(Item item, int checkSum) throws StoreFailureException {
         if (item.toString(new TransactionList()).length() != checkSum) {
-            throw new StoreFailureException(MESSAGE_ITEM_STORAGE_ILLEGALLY_MODIFIED);
+            throw new StoreFailureException(MESSAGE_ITEM_STORAGE_ILLEGALLY_MODIFIED + MESSAGE_TO_FIX_FILES);
         }
     }
 
     private static void checkCheckSumWhole(ArrayList<Item> itemList, int checkSum) throws StoreFailureException {
         if (itemList.size() != checkSum / 3) {
-            throw new StoreFailureException(MESSAGE_ITEM_STORAGE_ILLEGALLY_MODIFIED);
+            throw new StoreFailureException(MESSAGE_ITEM_STORAGE_ILLEGALLY_MODIFIED + MESSAGE_TO_FIX_FILES);
         }
     }
 }
