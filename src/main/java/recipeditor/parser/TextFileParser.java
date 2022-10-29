@@ -6,6 +6,9 @@ import recipeditor.recipe.Ingredient;
 import org.apache.commons.lang3.StringUtils;
 import recipeditor.ui.Editor;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 

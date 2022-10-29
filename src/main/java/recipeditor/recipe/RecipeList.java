@@ -1,9 +1,13 @@
 package recipeditor.recipe;
 
+import recipeditor.storage.Storage;
+
+
 import java.util.ArrayList;
 
 public class RecipeList {
     private static ArrayList<Recipe> recipes = new ArrayList<>();
+    public static ArrayList<String> recipeTitles = new ArrayList<>();
 
     private RecipeList(ArrayList<Recipe> load) {
         recipes = new ArrayList<>();
@@ -22,17 +26,22 @@ public class RecipeList {
         recipes.add(recipe);
     }
 
-    public static void deleteRecipe(int index) throws IndexOutOfBoundsException {
+    public static void deleteRecipeFromIndex(int index) throws IndexOutOfBoundsException {
         recipes.remove(index);
+    }
+
+    public static void deleteRecipeFromTitle(String recipeTitle) {
+        recipes.remove(getRecipeFromTitle(recipeTitle));
+        recipeTitles.removeIf(r -> r.equals(recipeTitle));
     }
 
     public static void editRecipe(int index, Recipe newRecipe) {
         recipes.set(index, newRecipe);
     }
 
-    public static Recipe getRecipeFromTitle(String recipleTitle) {
+    public static Recipe getRecipeFromTitle(String recipeTitle) {
         for (Recipe r : recipes) {
-            if (r.getTitle().equalsIgnoreCase(recipleTitle)) {
+            if (r.getTitle().equalsIgnoreCase(recipeTitle)) {
                 return r;
             }
         }
@@ -50,22 +59,18 @@ public class RecipeList {
         return -1;
     }
 
-    public static ArrayList<String> findRecipeTitles(char flag, String findInput) {
-        switch (flag) {
-        case 'r':
-            return findRecipeTitlesFromRecipeTitle(findInput);
-        case 'i':
-            return findRecipeTitlesFromIngredientName(findInput);
-        default:
-            return new ArrayList<String>();
-        }
+    public static ArrayList<String> findRecipeTitles(String findInput) {
+        ArrayList<String> output = findRecipeTitlesFromRecipeTitle(findInput);
+        ArrayList<String> foundRecipeTitlesFromIngredientName = findRecipeTitlesFromIngredientName(findInput);
+        output.addAll(foundRecipeTitlesFromIngredientName);
+        return output;
     }
 
     public static ArrayList<String> findRecipeTitlesFromRecipeTitle(String findInput) {
         ArrayList<String> foundRecipeTitlesList = new ArrayList<>();
-        for (Recipe r : recipes) {
-            if (r.getTitle().contains(findInput)) {
-                foundRecipeTitlesList.add(r.getTitle());
+        for (String r : recipeTitles) {
+            if (r.toLowerCase().contains(findInput.toLowerCase())) {
+                foundRecipeTitlesList.add(r);
             }
         }
         return foundRecipeTitlesList;
@@ -76,7 +81,7 @@ public class RecipeList {
         for (Recipe r : recipes) {
             ArrayList<Ingredient> recipeIngredients = r.getIngredients();
             for (Ingredient i : recipeIngredients) {
-                if (i.getName().contains(findInput)) {
+                if (i.getName().toLowerCase().contains(findInput.toLowerCase())) {
                     foundRecipeTitlesList.add(r.getTitle());
                 }
             }

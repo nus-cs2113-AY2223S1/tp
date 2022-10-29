@@ -1,7 +1,5 @@
 package recipeditor.command;
 
-import recipeditor.Recipeditor;
-import recipeditor.recipe.Recipe;
 import recipeditor.recipe.RecipeList;
 import recipeditor.storage.Storage;
 import recipeditor.ui.Ui;
@@ -9,16 +7,15 @@ import recipeditor.ui.Ui;
 public class DeleteCommand extends Command {
     public static final String COMMAND_TYPE = "/delete";
 
-    public static final String COMMAND_SYNTAX = "Syntax for /delete \n" + "\t /delete <index>";
-    private final int index;
+    public static final String CORRECT_FORMAT = "The input should be '/delete (recipeTitle).'";
+    private String recipeTitleToDelete;
 
     /**
      * Construct a delete command including task to delete.
      *
-     * @param index the index of task to delete
      */
-    public DeleteCommand(int index) {
-        this.index = index;
+    public DeleteCommand(String recipeTitleToDelete) {
+        this.recipeTitleToDelete = recipeTitleToDelete;
     }
 
     public static String getCommandType() {
@@ -32,10 +29,10 @@ public class DeleteCommand extends Command {
      */
     public CommandResult execute() {
         try {
-            Recipe deletedRecipe = RecipeList.getRecipe(index);
-            RecipeList.deleteRecipe(index);
-            Storage.writeRecipeListToFile(Recipeditor.DATA_FILE_PATH);
-            return new CommandResult(String.format(deletedRecipe.getTitle() + " is deleted.%n"));
+            RecipeList.deleteRecipeFromTitle(recipeTitleToDelete);
+            Storage.deleteRecipeFile(recipeTitleToDelete);
+            Storage.rewriteRecipeListToFile(Storage.ALL_RECIPES_FILE_PATH);
+            return new CommandResult(String.format(recipeTitleToDelete + " is deleted.%n"));
         } catch (IndexOutOfBoundsException e) {
             Ui.showMessageInline("Current number of saved recipes:", Integer.toString(RecipeList.getSize()));
             return new CommandResult("Delete recipe index out of bound.");
