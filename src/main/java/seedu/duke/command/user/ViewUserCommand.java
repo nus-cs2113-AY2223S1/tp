@@ -1,7 +1,6 @@
 package seedu.duke.command.user;
 
 import seedu.duke.command.Command;
-import seedu.duke.exception.InvalidTransactionException;
 import seedu.duke.item.ItemList;
 import seedu.duke.transaction.TransactionList;
 import seedu.duke.ui.Ui;
