@@ -22,6 +22,7 @@ import seedu.moneygowhere.commands.ConsoleCommandEditExpense;
 import seedu.moneygowhere.commands.ConsoleCommandEditIncome;
 import seedu.moneygowhere.commands.ConsoleCommandEditRecurringPayment;
 import seedu.moneygowhere.commands.ConsoleCommandEditTarget;
+import seedu.moneygowhere.commands.ConsoleCommandHelp;
 import seedu.moneygowhere.commands.ConsoleCommandMergeExternalFile;
 import seedu.moneygowhere.commands.ConsoleCommandPayRecurringPayment;
 import seedu.moneygowhere.commands.ConsoleCommandSortExpense;
@@ -104,6 +105,10 @@ public class ConsoleParser {
     //@@author xzynos
     private static ConsoleCommandBye parseCommandBye() {
         return new ConsoleCommandBye();
+    }
+
+    private static ConsoleCommandHelp parseCommandHelp() {
+        return new ConsoleCommandHelp();
     }
 
     //@@author xzynos
@@ -2652,6 +2657,8 @@ public class ConsoleParser {
 
         if (command.equalsIgnoreCase(ConsoleParserConfigurations.COMMAND_BYE)) {
             return parseCommandBye();
+        } else if (command.equalsIgnoreCase(ConsoleParserConfigurations.COMMAND_HELP)) {
+            return parseCommandHelp();
         } else if (command.equalsIgnoreCase(ConsoleParserConfigurations.COMMAND_ADD_EXPENSE)) {
             return parseCommandAddExpense(arguments);
         } else if (command.equalsIgnoreCase(ConsoleParserConfigurations.COMMAND_VIEW_EXPENSE)) {
