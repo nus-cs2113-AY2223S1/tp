@@ -1,0 +1,4 @@
+ACC1701|Tutorial|Undetermined Day|Undetermined|Undetermined
+ACC1701|Lecture|Tuesday|1000|1200
+CS1231|Others|Undetermined Day|Undetermined|Undetermined
+CS1231|Tutorial|Tuesday|1400|1600
