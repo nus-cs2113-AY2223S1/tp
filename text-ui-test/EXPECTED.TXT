@@ -103,6 +103,20 @@ Here is your NUSMod Link:
 Sem [1] >> --------------------------------------------------------------------------------
 Processing "import https://nusmods.com/timetable/sem-1/share?CG1111A=LAB:01&CS1010=LAB:C03,TUT:10,SEC:1" ...
 
+Semester 1 timetable imported.
+CG1111A added.
+The following lessons were added:
+LABORATORY:01
+
+CS1010 added.
+The following lessons were added:
+LABORATORY:C03
+TUTORIAL:10
+SECTIONAL_TEACHING:1
+
+Please check that the format of the link provided is correct if there are missing modules or lessons.
+Please visit https://ay2223s1-cs2113-f11-3.github.io/tp/UserGuide.html#import-a-timetable-import
+for more information.
 Timetable imported to YAMOM!
 --------------------------------------------------------------------------------
 Sem [1] >> --------------------------------------------------------------------------------

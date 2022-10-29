@@ -14,8 +14,9 @@ public class LinkTest {
     @Test
     public void link_parseLink_parsedCorrectly() throws YamomException {
         State state = new State();
+        Ui ui = new Ui();
         Link.parseLink("https://nusmods.com/timetable/sem-1/share?" 
-                + "CS1010=LAB:D04,TUT:06,SEC:1&CS2113=TUT:3,LEC:1", state);
+                + "CS1010=LAB:D04,TUT:06,SEC:1&CS2113=TUT:3,LEC:1", state, ui);
         assertEquals(state.getSelectedModulesList().size(), 2);
         SelectedModule mod = state
                 .getSelectedModulesList()
@@ -31,10 +32,11 @@ public class LinkTest {
     @Test
     public void link_parseLink_overwriteOldState() throws YamomException {
         State state = new State();
-        Link.parseLink("https://nusmods.com/timetable/sem-1/share?MA1511=LEC:1,TUT:10", state);
+        Ui ui = new Ui();
+        Link.parseLink("https://nusmods.com/timetable/sem-1/share?MA1511=LEC:1,TUT:10", state, ui);
         assertEquals(state.getSelectedModulesList().size(), 1);
         Link.parseLink("https://nusmods.com/timetable/sem-1/share?" 
-                + "CS1010=LAB:D04,TUT:06,SEC:1&CS2113=TUT:3,LEC:1", state);
+                + "CS1010=LAB:D04,TUT:06,SEC:1&CS2113=TUT:3,LEC:1", state, ui);
         assertEquals(state.getSelectedModulesList().size(), 2);
         assertEquals(state
                 .getSelectedModulesList()

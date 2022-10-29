@@ -73,7 +73,7 @@ public class Link {
      * @param link  For exporting to NUSMods.
      * @param state Current state of the application to be saved to.
      */
-    public static void parseLink(String link, State state) throws YamomException {
+    public static void parseLink(String link, State state, Ui ui) throws YamomException {
         String[] infoParam = link.split(DELIMITER_REGEX);
         /*
         infoParam[0] = "https:";
@@ -94,6 +94,7 @@ public class Link {
 
         if (Arrays.asList(1, 2, 3, 4).contains(semester)) {
             state.setSemester(semester);
+            ui.addMessage("Semester " + semester + " timetable imported.");
         } else {
             throw new YamomException(SEMESTER_PROCESS_ERROR_MESSAGE);
         }
@@ -117,15 +118,23 @@ public class Link {
             if (module == null || module.getSemesterData(semester) == null) {
                 continue;
             }
+            ui.addMessage(moduleCode + " added.");
+            ui.addMessage("The following lessons were added:");
             SelectedModule selectedModule = new SelectedModule(module, semester);
             lessonDelimiter = ",";
             //only parses the lessons between the first and second = sign (there is not supposed to be a second = sign)
             if (splitModuleAndLesson.length > 1) {
                 String[] lessonsInfo = (splitModuleAndLesson[1]).split(lessonDelimiter);
-                addLessons(lessonsInfo, selectedModule, semester);
+                addLessons(lessonsInfo, selectedModule, semester, ui);
             }
             selectedModules.add(selectedModule);
+            ui.addMessage("");
         }
+        ui.addMessage("Please check that the format of the link provided is correct if there are missing "
+                + "modules or lessons.");
+        ui.addMessage("Please visit https://ay2223s1-cs2113-f11-3.github.io/tp/UserGuide.html#import-a-"
+                + "timetable-import");
+        ui.addMessage("for more information.");
         state.setSelectedModulesList(selectedModules);
     }
 
@@ -173,7 +182,7 @@ public class Link {
      * @param selectedModule Current module to select lessons.
      * @param semester       Semester in which lessons are being selected for.
      */
-    private static void addLessons(String[] lessonsInfo, SelectedModule selectedModule, int semester) {
+    private static void addLessons(String[] lessonsInfo, SelectedModule selectedModule, int semester, Ui ui) {
         for (String s : lessonsInfo) {
             if (!isLessonInfo(s)) {
                 continue;
@@ -181,7 +190,7 @@ public class Link {
             String[] lessonInfo = s.split(LESSON_TYPE_DELIMITER);
             LessonType lessonType = getLessonType(lessonInfo[0]);
             String classNo = lessonInfo[1];
-            addValidLesson(selectedModule, semester, lessonType, classNo);
+            addValidLesson(selectedModule, semester, lessonType, classNo, ui);
         }
     }
 
@@ -194,11 +203,12 @@ public class Link {
      * @param classNo        Specified class number.
      */
     private static void addValidLesson(SelectedModule selectedModule, int semester,
-                                       LessonType lessonType, String classNo) {
+                                       LessonType lessonType, String classNo, Ui ui) {
         List<RawLesson> potentialLesson = selectedModule.getModule().getSemesterData(semester)
                 .getLessonsByTypeAndNo(lessonType, classNo);
         if (!potentialLesson.isEmpty()) {
             selectedModule.selectSlot(lessonType, classNo);
+            ui.addMessage(lessonType + ":" + classNo);
         }
     }
 
