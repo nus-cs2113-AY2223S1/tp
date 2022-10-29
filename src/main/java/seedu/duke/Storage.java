@@ -91,6 +91,20 @@ public class Storage {
     private static final String PROPERTY_TYPE_FLAG = " t/";
     private static final String NEXT_LINE = System.lineSeparator();
 
+    private static final int CORRECT_NUM_OF_CLIENT_ENTITIES = 4;
+    private static final int CORRECT_NUM_OF_PROPERTY_ENTITIES = 4;
+    private static final int CORRECT_NUM_OF_PAIRING_ENTITIES = 2;
+
+    private static final int CLIENT_NAME_INDEX = 0;
+    private static final int CLIENT_CONTACT_INDEX = 1;
+    private static final int CLIENT_EMAIL_INDEX = 2;
+    private static final int CLIENT_BUDGET_INDEX = 3;
+
+    private static final int LANDLORD_NAME_INDEX = 0;
+    private static final int PROPERTY_ADDRESS_INDEX = 1;
+    private static final int PROPERTY_RENTAL_PRICE_INDEX = 2;
+    private static final int PROPERTY_TYPE_INDEX = 3;
+
     private static final Logger LOGGER = Logger.getLogger("Storage");
 
     private ClientList clientList;
@@ -257,11 +271,11 @@ public class Storage {
 
             // Split into 4 separate entities to see if storage is in the right format
             String[] clientParameters = clientInput.split("\\s\\|\\s");
-            if (clientParameters.length == 4) {
-                String clientName = clientParameters[0];
-                String clientContact = clientParameters[1];
-                String clientEmail = clientParameters[2];
-                String clientBudget = clientParameters[3].trim();
+            if (clientParameters.length == CORRECT_NUM_OF_CLIENT_ENTITIES) {
+                String clientName = clientParameters[CLIENT_NAME_INDEX];
+                String clientContact = clientParameters[CLIENT_CONTACT_INDEX];
+                String clientEmail = clientParameters[CLIENT_EMAIL_INDEX];
+                String clientBudget = clientParameters[CLIENT_BUDGET_INDEX].trim();
 
                 String description = CLIENT_NAME_FLAG + clientName + CLIENT_CONTACT_FLAG + clientContact
                         + CLIENT_EMAIL_FLAG + clientEmail + CLIENT_BUDGET_FLAG + clientBudget;
@@ -288,11 +302,11 @@ public class Storage {
         Scanner scanner = new Scanner(propertyFile);
         while (scanner.hasNext()) {
             String[] propertyParameters = scanner.nextLine().split("\\s\\|\\s");
-            if (propertyParameters.length == 4) {
-                String landlordName = propertyParameters[0];
-                String address = propertyParameters[1];
-                String price = propertyParameters[2];
-                String unitTypeString = propertyParameters[3].trim();
+            if (propertyParameters.length == CORRECT_NUM_OF_PROPERTY_ENTITIES) {
+                String landlordName = propertyParameters[LANDLORD_NAME_INDEX];
+                String address = propertyParameters[PROPERTY_ADDRESS_INDEX];
+                String price = propertyParameters[PROPERTY_RENTAL_PRICE_INDEX];
+                String unitTypeString = propertyParameters[PROPERTY_TYPE_INDEX].trim();
 
                 String unitTypeLabel = getUnitTypeLabel(unitTypeString);
 
@@ -501,7 +515,7 @@ public class Storage {
         scanner = new Scanner(pairFile);
         while (scanner.hasNext()) {
             String[] pairingParameters = scanner.nextLine().split("\\s\\:\\s");
-            boolean hasSplitCorrectly = pairingParameters.length == 2;
+            boolean hasSplitCorrectly = pairingParameters.length == CORRECT_NUM_OF_PAIRING_ENTITIES;
             if (hasSplitCorrectly) {
                 String[] clientParameters = pairingParameters[0].split("\\s\\|\\s");
                 String[] propertyParameters = pairingParameters[1].split("\\s\\|\\s");
@@ -509,23 +523,8 @@ public class Storage {
                 boolean hasCorrectPropertyLength = clientParameters.length == 4;
                 boolean hasCorrectFormat = hasCorrectClientLength && hasCorrectPropertyLength;
 
-                if (hasCorrectFormat) {
-                    try {
-                        Client pairingClient = getPairingClient(clientParameters);
-                        Property pairingProperty = getPairingProperty(propertyParameters);
+                checkPairingFormat(hasCorrectFormat, clientParameters, propertyParameters);
 
-                        boolean isCorrectClient = pairingClient != null;
-                        boolean isCorrectProperty = pairingProperty != null;
-
-                        if (isCorrectProperty && isCorrectClient) {
-                            pairingList.addPairing(pairingClient, pairingProperty);
-                        }
-                    } catch (DukeException e) {
-                        UI.showExceptionMessage(e);
-                    }
-                } else {
-                    skipPairingEntries();
-                }
             } else {
                 skipPairingEntries();
             }
@@ -782,5 +781,40 @@ public class Storage {
         }
         return pairingProperty;
     }
+
+    /**
+     * Checks if the format of clientParameters and propertyParameter and find the client and property
+     * from the ClientList and PropertyList respectively if it's correct. Otherwise, generate an exception.
+     * @param hasCorrectFormat The boolean variable on whether the format for both clientParameters and
+     *                         propertyParameter is correct
+     * @param clientParameters The parameter containing client name, contact number, email and budget in array form.
+     * @param propertyParameters The parameter containing landlord name, property address, rental rate and unit type
+     *                           in array form.
+     */
+    public void checkPairingFormat(boolean hasCorrectFormat, String[] clientParameters, String[] propertyParameters) {
+        if (hasCorrectFormat) {
+            try {
+                getClientAndProperty(clientParameters, propertyParameters);
+            } catch (DukeException e) {
+                UI.showExceptionMessage(e);
+            }
+        } else {
+            skipPairingEntries();
+        }
+    }
+
+    /**
+     * Searches for the Client and Property from ClientList and PropertyList respectively and add into pairing list.
+     * @param clientParameters The parameter containing client name, contact number, email and budget in array form.
+     * @param propertyParameters The parameter containing landlord name, property address, rental rate and unit type
+     *      *                           in array form.
+     * @throws StorageException The exception that is thrown when client or property is not in the lists.
+     */
+    public void getClientAndProperty(String[] clientParameters, String[] propertyParameters) throws StorageException {
+        Client pairingClient = getPairingClient(clientParameters);
+        Property pairingProperty = getPairingProperty(propertyParameters);
+
+        pairingList.addPairing(pairingClient, pairingProperty);
+    }
 }
-    //@@author
+//@@author
