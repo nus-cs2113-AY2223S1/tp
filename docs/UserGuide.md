@@ -332,17 +332,17 @@ Example of usage:
 ### Editing a target: `Edit-Target`
 Edits an existing target in the list of targets.
 
-Syntax: `Edit-Target -e INCOME_NUMBER [-n NAME] [-a AMOUNT] [-c CURRENT_AMOUNT] [-d DATE_TIME] [-t DESCRIPTION]`
+Syntax: `Edit-Target -e TARGET_NUMBER [-n NAME] [-a AMOUNT] [-c CURRENT_AMOUNT] [-d DATE_TIME] [-t DESCRIPTION]`
 
 > ⚠️️️️ Syntax Notes
-> * `INCOME_NUMBER` is an integer value.
+> * `TARGET_NUMBER` is an integer value.
 > * `NAME` and `DESCRIPTION` are text strings. You may use spaces within the text if you wrap the text with double quotes.
 > * `AMOUNT` and `CURRENT_AMOUNT` is a decimal value.
 > * `DATE_TIME` is a text string in the format `"dd/MM/yyyy HHmm"`.
 
 Example of usage:
 * `Edit-Target -e 1 -n "October Target" -a 100.00`
-* `Edit-Income -e 1 -n "Monthly Target" -a 3000 -c 1200 -d "01/01/2022 2359" -t "Monthly payment"`
+* `Edit-Target -e 1 -n "Monthly Target" -a 3000 -c 1200 -d "01/01/2022 2359" -t "Monthly payment"`
 
 <hr>
 
@@ -445,6 +445,14 @@ A list of all valid commands.
 * Delete recurring payment: `Delete-RecurringPayment -r 1`
 * Edit recurring payment: `Edit-RecurringPayment -r 1 -n "Mobile Plan" -i 30 -a 20.00 -t "Monthly payment for my mobile plan" -c Telecom -x SGD -p Card`
 * Pay recurring payment: `Pay-RecurringPayment -r 1`
+* Add income: `Add-Income -n "Stocks" -a 500.00 -d "01/02/2022 2359" -t "Investment payouts"`
+* View income: `View-Income -e 1`
+* Delete income: `Delete-Income -e 1`
+* Edit income: `Edit-Income -e 1 -n "Monthly Salary" -a 3000 -d "01/01/2022 2359" -t "Monthly payment"`
+* Add target: `Add-Target -n "Food target" -a 1000.00 -c 1500.00 -d "01/02/2022 2359" -t "Money spent on food"`
+* View target: `View-Target -e 1`
+* Delete target: `Delete-Target -e 1`
+* Edit target: `Edit-Target -e 1 -n "October Target" -a 100.00`
 * Merge file: `Merge-File -p "C:\Users\the_d\Downloads\expenses.xml"`
 * Help: `help`
 * Exit: `exit`
