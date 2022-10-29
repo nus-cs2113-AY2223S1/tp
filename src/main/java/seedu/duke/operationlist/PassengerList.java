@@ -5,6 +5,7 @@ import seedu.duke.terminalinfo.PassengerInfo;
 import seedu.duke.ui.Ui;
 import seedu.duke.command.flightcommand.DelayFlightCommand;
 
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

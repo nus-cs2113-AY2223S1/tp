@@ -7,6 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class FlightList extends OperationList {
+    private static final int FLIGHT_NUMBER_LETTER_LENGTH = 2;
     public static int flightIndex = 0;
     private static final String FLIGHT_ADD_COMMAND = "flight add";
     private static final String FLIGHT_ADD_DELIMITER = "flight add ";
@@ -89,8 +90,13 @@ public class FlightList extends OperationList {
 
     private void checkValidFlightNumber(String substring) throws SkyControlException {
         String[] letters = substring.split("");
-        for (int i = 0; i < letters.length; i++) {
-            if (!Character.isLetterOrDigit(substring.charAt(i))) {
+        for (int i = 0; i < FLIGHT_NUMBER_LETTER_LENGTH; i++) {
+            if (!Character.isLetter(substring.charAt(i))) {
+                throw new SkyControlException(ui.getWrongFlightFormatErrorMessage());
+            }
+        }
+        for (int i = FLIGHT_NUMBER_LETTER_LENGTH; i < letters.length; i++) {
+            if (!Character.isDigit(substring.charAt(i))) {
                 throw new SkyControlException(ui.getWrongFlightFormatErrorMessage());
             }
         }
