@@ -36,18 +36,18 @@ Throughout this guide, we will be using some special formatting and symbols to b
 
 - [Quick Start](#quick-start)
 - [Features](#features)
-    - [Add Command](#add-command)
-    - [Edit Command](#edit-command)
-    - [Delete Command](#delete-command)
-    - [List Command](#list-command)
-    - [View Command](#view-command)
-    - [Find Command](#find-command)
-    - [Help Command](#help-command)
-    - [Exit Command](#exit-command)
+    - [Add Command](#add-command) `/add`
+    - [Edit Command](#edit-command) `/edit`
+    - [Delete Command](#delete-command) `/delete`
+    - [List Command](#list-command) `/list`
+    - [View Command](#view-command) `/view`
+    - [Find Command](#find-command) `/find`
+    - [Help Command](#help-command) `/help`
+    - [Exit Command](#exit-command) `/exit`
     - [Storage](#storage)
+        - [Saving The Data](#saving_the_data)
         - [Editing Data File](#editing-data-file)
         - [Parsing Data File](#parsing-data-file)
-- [FAQ](#faq)
 - [Command Summary](#command-summary)
 
 # Quick Start
@@ -220,43 +220,88 @@ Recipe Steps:
 [⏫ Back to content page](#content-page)
 
 ## Find Command
+Find the recipes with relevant recipe title or ingredient name as what the user inputs. Program will look through all the recipe titles
+and every ingredient names for all recipes, and list out the recipe title that contains what the user inputs.
 
-### Find Recipe with Title
+ℹ User can input _RECIPE_TITLE_ or _INGREDIENT_NAME_
 
-- Find the recipe with title that contains USER_INPUT_STRING
-- User can input recipe title or ingredient name (case insensitive).
-- Program will return relevant recipe title.
-- FORMAT: `/find USER_INPUT_STRING`
-- EXAMPLE: `/find cake`
+ℹ The _RECIPE_TITLE_ is not case-sensitive. Therefore, inputting _recipe_title_ and _RECIPE_TITLE_ yields the same result.
+
+Format: `/find USER_INPUT_STRING`
+
+Example: 
+```
+/find egg
+
+1. Carbonara
+2. Fried Rice
+3. Nasi Lemak
+```
+
+[⏫ Back to content page](#content-page)
 
 ## Help Command
 
-- Show the available commands
-- FORMAT: `/help`
+Shows the available commands in _RecipeEditor_.
+
+Format: `/help`
+
+Example:
+```
+/help
+
+Available commands: /add, /list, /view, /edit, /find, /delete, /exit, /help
+```
+
+[⏫ Back to content page](#content-page)
 
 ## Exit Command
 
-- Exit the program
-- FORMAT: `/exit`
+Exits the _RecipEditor_.
+
+Format: `/exit`
+
+```
+/help
+
+RecipEditor ends here...
+Program exiting
+```
+
+[⏫ Back to content page](#content-page)
+
+# Data Management
+<hr />
 
 ## Storage
 
-- There are 2 types of data files
-    - **Overall File (OF)**: keep track of the number and the title of the recipes
-    - **Individual Recipe File (IRF)**: each recipe is saved as an individual file
-- These files are important at the start of the program, when data is loaded
+The data files are stored at _"./RecipeData"_ directory.
+
+The template file and other miscellaneous files are stored at _"./RecipeData/App"_ directory.
+
+The recipe data files are stored at _"./RecipeData/Recipes"_ directory.
+
+There are 2 types of recipe data files to store recipes:
+- **Overall File (OF)**: Keeps track of the recipe titles. User can open this file to have a birds-eye-view
+at all the recipes that is currently in the recipe list.
+- **Individual Recipe File (IRF)**: The details of each recipe is saved as an individual file that is named
+after the recipe title. User can open the individual recipe file to look at the full details of the recipe.
+
+### Saving The Data
+There is no need to save manually. Any updates made to the data will be automatically 
+stored into the local drive and reloaded when _RecipEditor_ is restarted.
 
 ### Editing Data File
 
 - After `/add`
-    - New IRF is saved
+    - New IRF (whose file name is named after the Recipe Title) is saved
     - New Recipe Title is appended to OF
 - After `/edit INDEX`
     - Update existing IRF at INDEX
     - Update OF (change Title)
-- After `/delete INDEX`
-    - Delete existing IRF at INDEX
-    - Update OF (delete)
+- After `/delete RECIPE_TITLE`
+    - Delete existing IRF
+    - Update OF by removing the Recipe Title of the recipe being deleted
 
 ### Parsing Data File
 
@@ -268,17 +313,17 @@ Recipe Steps:
         - Delete IRF
 - New OF File is generated from the model contains the valid recipes loaded from IRFs
 
-# FAQ
+[⏫ Back to content page](#content-page)
 
 # Command Summary
 
-| Command | Action                      | Format                | Example         |
-|---------|-----------------------------|-----------------------|-----------------|
-| add     | Add new recipe              | `/add`                | `/add`          |
-| edit    | Edit recipe at INDEX        | `/edit INDEX`         | `/edit 1`       |
-| list    | List all recipes            | `/list`               | `/list`         |
-| view    | View recipe at INDEX        | `/view INDEX`         | `/view 1`       |
-| find    | Find recipe with Title      | `/find -t Title`      | `/find -t Cake` |
-| find    | Find recipe with Ingredient | `/find -i Ingredient` | `/find -t egg`  |
-| help    | Show available commands     | `/help`               | `/help`         |
-| exit    | Exit the program            | `/exit`               | `/exit`         |
+| Command | Action                                           | Format                                  | Example    |
+|---------|--------------------------------------------------|-----------------------------------------|------------|
+| add     | Add new recipe                                   | `/add`                                  | `/add`     |
+| edit    | Edit recipe at INDEX                             | `/edit INDEX`                           | `/edit 1`  |
+| delete  | Deletes recipe of given RECIPE_TITLE             | `/delete RECIPE_TITLE`                  | `/delete carbonara`     |
+| list    | List all recipes                                 | `/list`                                 | `/list`    |
+| view    | View recipe at INDEX                             | `/view INDEX`                           | `/view 1`  |
+| find    | Find recipe with RECIPE_TITLE or INGREDIENT_NAME | `/find RECIPE_TITLE_OR_INGREDIENT_NAME` | `/find egg` |
+| help    | Show available commands                          | `/help`                                 | `/help`    |
+| exit    | Exit the program                                 | `/exit`                                 | `/exit`    |
