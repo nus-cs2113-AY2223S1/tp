@@ -6,7 +6,6 @@ import recipeditor.ui.Ui;
 
 public class ViewCommand extends Command {
     public static final String COMMAND_TYPE = "/view";
-
     private final int index;
 
     /**
