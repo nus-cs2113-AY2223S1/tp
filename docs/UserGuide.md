@@ -70,7 +70,7 @@ _Written by: Paul Low_
 General illustrations about the text format used for the commands in this guide can be found below. 
 
 1. The **first word** in the command refers to the command word to be supplied by the user. The command words are case-insensitive. 
-   1. e.g. `exit`, `EXIT` and `eXiT` will all both interpreted as the same.
+   1. e.g. `bye`, `BYE` and `bYe` will all be interpreted as the same.
 
 2. Words in `UPPER CASE` refer to the parameters in each command. Each parameter must be prepended with a tag.
    1. e.g. in `delete e/ENTRY`, `delete` is the command word, while `ENTRY` is a parameter expected after the tag `e/`.
@@ -79,7 +79,7 @@ General illustrations about the text format used for the commands in this guide 
    1. e.g. `help [o/detailed]` can be used as `help o/detailed` or `help.
    2. Note that the parameter `detailed` is written in lower case here, which means, only the exact wording is accepted.
 
-4. Each parameter is separated by a space. Users are not allowed to use spaces in their parameter. 
+4. Each parameter is separated by a space. Users are not allowed to use spaces in their parameter, *except for `find` command*.
 
 _Written by: Chia Thin Hong_
 

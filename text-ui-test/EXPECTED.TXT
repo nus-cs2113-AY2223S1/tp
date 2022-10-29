@@ -181,6 +181,8 @@ ____________________________________________________________
 ____________________________________________________________
 You have successfully updated the budget.
 Monthly budget set as: $10000
+Budget remained for current month: $10000
+REMINDER: Continue to stay within your budget for this month! Good fortune!
 ____________________________________________________________
 ____________________________________________________________
 Mandatory tag(s) missing, please check your input!
@@ -252,6 +254,11 @@ ____________________________________________________________
 Duplicate tag(s) detected, please check your input!
 ____________________________________________________________
 ____________________________________________________________
+I have added the following Expense transaction:
+[-][transport] $10000 on Oct 03 2022 | Description: bus_fare
+Budget exceeded for Oct 2022: $1. Consider spending less!
+____________________________________________________________
+____________________________________________________________
 Not supported tag(s) detected, please check your input!
 ____________________________________________________________
 ____________________________________________________________
@@ -267,6 +274,7 @@ ____________________________________________________________
 Here are your transaction records:
 [-][food] $20 on Sep 13 2022 | Description: NIL
 [-][transport] $1 on Oct 02 2022 | Description: bus_fare
+[-][transport] $10000 on Oct 03 2022 | Description: bus_fare
 
 ____________________________________________________________
 ____________________________________________________________
@@ -292,7 +300,7 @@ Here are your transaction records:
 ____________________________________________________________
 ____________________________________________________________
 Here are your requested statistics for the categorical_savings type:
-[transport] $1
+[transport] $10001
 [salary] $2000
 [food] $20
 
@@ -307,8 +315,8 @@ Spending Habit: Excellent! You saved quite a lot this month.
 
 [Oct 2022]
 Income: $0
-Expense: $1
-Savings: $-1
+Expense: $10001
+Savings: $-10001
 Spending Habit: Oops, you spent too much. Do manage your expenses within your constraints.
 
 
@@ -318,26 +326,26 @@ Here are the total savings and expenses for
 Year: 2022
 
 -----CATEGORIES-----
-[transport] $1
+[transport] $10001
 [salary] $2000
 [food] $20
 
 -----EXPENDITURE-----
 Income: $2000
-Expense: $21
-Savings: $1979
+Expense: $10021
+Savings: $-8021
 ____________________________________________________________
 ____________________________________________________________
 Here are the total savings and expenses for
 Year: 2022, Month: 10
 
 -----CATEGORIES-----
-[transport] $1
+[transport] $10001
 
 -----EXPENDITURE-----
 Income: $0
-Expense: $1
-Savings: $-1
+Expense: $10001
+Savings: $-10001
 ____________________________________________________________
 ____________________________________________________________
 Month tag must be accompanied by a year tag, please check your input!
@@ -347,11 +355,12 @@ Here are the total savings and expenses for
 The past 3 weeks: 
 
 -----CATEGORIES-----
+[transport] $10000
 
 -----EXPENDITURE-----
 Income: $0
-Expense: $0
-Savings: $0
+Expense: $10000
+Savings: $-10000
 ____________________________________________________________
 ____________________________________________________________
 Here are the total savings and expenses for
@@ -381,6 +390,7 @@ ____________________________________________________________
 ____________________________________________________________
 Here are the transaction records that match your search expression:
 [-][transport] $1 on Oct 02 2022 | Description: bus_fare
+[-][transport] $10000 on Oct 03 2022 | Description: bus_fare
 
 ____________________________________________________________
 ____________________________________________________________
@@ -391,6 +401,7 @@ Here are your transaction records:
 [-][food] $20 on Sep 13 2022 | Description: NIL
 [+][salary] $2000 on Sep 30 2022 | Description: jan_salary
 [-][transport] $1 on Oct 02 2022 | Description: bus_fare
+[-][transport] $10000 on Oct 03 2022 | Description: bus_fare
 
 ____________________________________________________________
 ____________________________________________________________
@@ -399,7 +410,7 @@ ____________________________________________________________
 ____________________________________________________________
 I have added the following Income transaction:
 [+][bonus] $10000000 on Oct 03 2022 | Description: thank_you_boss
-Budget remained for Oct 2022: $9999. Keep it up!
+Budget exceeded for Oct 2022: $1. Consider spending less!
 ____________________________________________________________
 ____________________________________________________________
 Type of transaction given is invalid, please check your input!
@@ -430,8 +441,24 @@ Here are your transaction records:
 [-][food] $20 on Sep 13 2022 | Description: NIL
 [+][salary] $2000 on Sep 30 2022 | Description: jan_salary
 [-][transport] $1 on Oct 02 2022 | Description: bus_fare
+[-][transport] $10000 on Oct 03 2022 | Description: bus_fare
 [+][bonus] $10000000 on Oct 03 2022 | Description: thank_you_boss
 
+____________________________________________________________
+____________________________________________________________
+You have successfully updated the budget.
+Monthly budget set as: $100
+Budget exceeded for current month: $9901
+REMINDER: You have already exceeded the budget set for current month!
+____________________________________________________________
+____________________________________________________________
+You have successfully updated the budget.
+Monthly budget set as: $10000000000000
+Budget remained for current month: $9999999989999
+REMINDER: Continue to stay within your budget for this month! Good fortune!
+____________________________________________________________
+____________________________________________________________
+Invalid budget amount, please ensure your amount is in positive whole number of valid range only!
 ____________________________________________________________
 ____________________________________________________________
 Mandatory tag(s) missing, please check your input!
@@ -439,12 +466,13 @@ ____________________________________________________________
 ____________________________________________________________
 I have deleted the following transaction:
 [-][food] $20 on Sep 13 2022 | Description: NIL
-Budget remained for Sep 2022: $10000. Keep it up!
+Budget remained for Sep 2022: $10000000000000. Keep it up!
 ____________________________________________________________
 ____________________________________________________________
 Here are your transaction records:
 [+][salary] $2000 on Sep 30 2022 | Description: jan_salary
 [-][transport] $1 on Oct 02 2022 | Description: bus_fare
+[-][transport] $10000 on Oct 03 2022 | Description: bus_fare
 [+][bonus] $10000000 on Oct 03 2022 | Description: thank_you_boss
 
 ____________________________________________________________
@@ -455,12 +483,14 @@ ____________________________________________________________
 Invalid index, please ensure your index is correct!
 ____________________________________________________________
 ____________________________________________________________
-Invalid index, please ensure your index is correct!
+I have deleted the following transaction:
+[+][bonus] $10000000 on Oct 03 2022 | Description: thank_you_boss
+Budget remained for Oct 2022: $9999999989999. Keep it up!
 ____________________________________________________________
 ____________________________________________________________
 I have deleted the following transaction:
-[+][bonus] $10000000 on Oct 03 2022 | Description: thank_you_boss
-Budget remained for Oct 2022: $9999. Keep it up!
+[-][transport] $10000 on Oct 03 2022 | Description: bus_fare
+Budget remained for Oct 2022: $9999999999999. Keep it up!
 ____________________________________________________________
 ____________________________________________________________
 Here are your transaction records:
@@ -516,7 +546,7 @@ ____________________________________________________________
 ____________________________________________________________
 I have added the following Expense transaction:
 [-][transport] $1 on Oct 02 2022 | Description: i/i/i/i/
-Budget remained for Oct 2022: $9999. Keep it up!
+Budget remained for Oct 2022: $9999999999999. Keep it up!
 ____________________________________________________________
 ____________________________________________________________
 Not supported tag(s) detected, please check your input!

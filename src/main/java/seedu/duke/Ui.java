@@ -140,7 +140,8 @@ public class Ui {
      * @param currentBudget The string representation of the new budget set.
      */
     public static void showSetBudgetAcknowledgementMessage(String currentBudget) {
-        printMessages(INFO_BUDGET_SET_SUCCESSFUL.toString(), INFO_CURRENT_BUDGET + currentBudget);
+        printMessages(INFO_BUDGET_SET_SUCCESSFUL.toString(), INFO_CURRENT_BUDGET + currentBudget,
+                Budget.generateCurrentMonthBudgetRemainingMessage());
     }
 
 
