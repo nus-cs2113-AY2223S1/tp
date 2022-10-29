@@ -10,6 +10,11 @@ public class AddCommand extends Commands {
         this.media = media;
     }
 
+    //@@author matthewphua
+    /**
+     * Adds the media parameter to review list.
+     * @return Confirmation String.
+     */
     @Override
     public String execute() {
         this.reviewList.add(this.media);
