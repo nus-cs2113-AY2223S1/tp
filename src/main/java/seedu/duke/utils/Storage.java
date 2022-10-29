@@ -100,12 +100,14 @@ public class Storage {
         }
         ui.addMessage(EXPORT_MESSAGE);
         FileWriter fw = new FileWriter(file);
+        int currSem = state.getSemester();
         for (int i = 1; i <= 4; i++) {
             state.setSemester(i);
             String toSave = Link.getLink(state);
             ui.addMessage(toSave);
             fw.write(toSave + System.lineSeparator());
         }
+        state.setSemester(currSem);
         if (!isExit) {
             ui.clearUiBuffer();
         }
