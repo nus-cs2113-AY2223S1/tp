@@ -122,7 +122,7 @@ Displays the information of the specified property, along with the clients the p
 
 <u>Format</u>: `check -property ip/PROPERTY_INDEX`
 
-<u>Example</u>: `check ip/2`
+<u>Example</u>: `check -property ip/2`
 
 ---
 
