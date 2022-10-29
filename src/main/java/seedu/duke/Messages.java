@@ -220,7 +220,12 @@ public class Messages {
 
     //@@author wilsonngja
     /* Error message for Find Function */
-    public static final String MESSAGE_FIND_INVALID_FLAG = "OOPS!!! Please ensure you only have 'f/' flag.";
+    public static final String EMPTY_FIND_DESCRIPTION = "It seems like your description is empty.\n"
+            + "Please ensure you enter the description after the command."
+            + "\nIt's in the format of:\nfind -<CLIENT/PROPERTY> f/QUERY_TEXT\n";
+
+    public static final String INCORRECT_NUMBER_OF_FLAG = "Please ensure that you only have 1 flag and that "
+            + "should be 'f/'\nFor example: find -<CLIENT/PROPERTY> f/QUERY_TEXT\n";
 
     public static final String MESSAGE_NO_CLIENT_MATCHES = "There is no client that fits within your query.";
 
@@ -243,9 +248,6 @@ public class Messages {
 
     public static final String INVALID_PROPERTY_ENTRIES = "There are one or more invalid entries while adding to"
             + " Property List.\nThese entries will not be added to the property list.\n";
-
-    public static final String INVALID_PAIRING_ENTRIES = "There are one or more invalid entries while adding to"
-            + " Pairing List.\nThese entries will not be added to the pairing list.\n";
 
     public static final String MESSAGE_NO_PROPERTY_FILE = "Property file does not exist.";
 
