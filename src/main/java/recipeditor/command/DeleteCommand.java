@@ -1,13 +1,8 @@
 package recipeditor.command;
 
-import recipeditor.Recipeditor;
-import recipeditor.recipe.Recipe;
 import recipeditor.recipe.RecipeList;
 import recipeditor.storage.Storage;
 import recipeditor.ui.Ui;
-
-import java.io.FileNotFoundException;
-import java.util.logging.Level;
 
 public class DeleteCommand extends Command {
     public static final String COMMAND_TYPE = "/delete";

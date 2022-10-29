@@ -35,7 +35,7 @@ public class Parser {
         case EditCommand.COMMAND_TYPE:
             return parseEditCommand(parsed);
         case ViewCommand.COMMAND_TYPE:
-            return parseListAlterCommand(parsed, commandWord);
+            return parseViewCommand(parsed);
         case FindCommand.COMMAND_TYPE:
             return parseFindCommand(parsed);
         case HelpCommand.COMMAND_TYPE:
@@ -116,14 +116,12 @@ public class Parser {
         return actualRecipeTitle;
     }
 
-    private static Command parseListAlterCommand(String[] parsed, String commandWord) {
+    private static Command parseViewCommand(String[] parsed) {
         if (parsed.length == 2) {
             try {
                 int index = Integer.parseInt(parsed[1]) - 1; // to account for 0-based indexing in recipelist
-                if (commandWord.equals(ViewCommand.COMMAND_TYPE)) {
-                    return new ViewCommand(index);
-                }
-//                return new DeleteCommand(index);
+                return new ViewCommand(index);
+
             } catch (Exception e) {
                 System.out.format("Exception: Wrong command Format%n"
                         + "Try the command in correct format: view/delete <index of task>%n");
