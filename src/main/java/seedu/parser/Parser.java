@@ -18,8 +18,11 @@ import seedu.commands.UnfavouriteCommand;
 import seedu.commands.UpdateCommand;
 import seedu.common.CommonData;
 import seedu.data.CarparkList;
+import seedu.exception.UnneededArgumentsException;
 import seedu.files.Favourite;
 import seedu.parser.search.Sentence;
+
+import javax.swing.*;
 
 /**
  * Class to deal with parsing commands.
@@ -36,8 +39,8 @@ public class Parser {
     /**
      * Parses user input into command for execution.
      *
-     * @param input full user input string
-     * @param api api of the carpark data
+     * @param input       full user input string
+     * @param api         api of the carpark data
      * @param carparkList carpark List
      * @return the command based on user input
      */
@@ -79,7 +82,7 @@ public class Parser {
             }
             return prepareFilter(arguments);
         case UpdateCommand.COMMAND_WORD:
-            return new UpdateCommand(api, carparkList);
+            return prepareUpdate(arguments);
         case UnfavouriteCommand.COMMAND_WORD:
             if (arguments.trim().isEmpty()) {
                 return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.UNFAVOURITE_FORMAT);
@@ -145,6 +148,17 @@ public class Parser {
     private Command prepareFilter(String arguments) {
         Sentence searchQuery = new Sentence(arguments);
         return new FilterCommand(carparkList, searchQuery);
+    }
+
+    private Command prepareUpdate(String arguments) {
+        try {
+            if (arguments.trim().isEmpty()) {
+                return new UpdateCommand(api, carparkList);
+            }
+            throw new UnneededArgumentsException("Update");
+        } catch (UnneededArgumentsException e) {
+            return new InvalidCommand(e.getMessage());
+        }
     }
 
     /**
