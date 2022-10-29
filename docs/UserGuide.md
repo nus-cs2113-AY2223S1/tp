@@ -47,6 +47,8 @@ for easier reference. As an added feature, users can also curate their timetable
 5. Open your command prompt to the folder where you saved the .jar file
 6. Run java -jar easySEP.jar
 
+Note: The word `databases` in this guide refers to the static copy of module mappings contained in `data.csv`.
+
 Expected output: 
 ```
                         _____ ______ _____
