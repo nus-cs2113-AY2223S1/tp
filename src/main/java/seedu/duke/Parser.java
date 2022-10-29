@@ -156,6 +156,7 @@ public class Parser {
         String genre;
         Media toAdd;
         String[] dateFields;
+        
         try {
             title = fields[1].substring(spacingType);
             rating = Double.parseDouble(fields[2].substring(ratingSpacing));
