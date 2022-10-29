@@ -382,6 +382,7 @@ ____________________________________________________________
 ```
 
 ### 3.4. Transaction-related features
+Transactions have 2 statuses: ```finished``` or ```unfinished```. This is to indicate if the item is currently being loaned or is available for loan
 #### 3.4.1. ```add-tx``` - Add a new transaction
 >Add a new transaction to the list
 
