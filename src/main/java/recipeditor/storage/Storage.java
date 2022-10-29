@@ -76,7 +76,21 @@ public class Storage {
         }
     }
 
-    public static void loadRecipeToFile(String filePath, Recipe recipe) {
+    public static void deleteRecipeFile(String recipeTitleToDelete) {
+        String recipeFilePath = RECIPES_FOLDER_PATH + "/" + recipeTitleToDelete.stripTrailing();
+        try {
+            File file = new File(recipeFilePath);
+            if (file.delete()) {
+                logger.log(Level.INFO, recipeTitleToDelete + " is deleted");
+            } else {
+                Ui.showMessage("Unable to delete the file.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+        public static void loadRecipeToFile(String filePath, Recipe recipe) {
         try {
             logger.log(Level.INFO, "Loading Recipe to Data File");
             FileWriter fw = new FileWriter(filePath, true);
@@ -153,7 +167,6 @@ public class Storage {
     public static String loadFileContent(String path) throws FileNotFoundException {
         File file = new File(path);
         StringBuilder getContent = new StringBuilder();
-
         Scanner scan = new Scanner(file);
         while (scan.hasNext()) {
             getContent.append(scan.nextLine() + "\n");

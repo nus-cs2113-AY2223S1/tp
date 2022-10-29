@@ -6,17 +6,22 @@ import recipeditor.recipe.RecipeList;
 import recipeditor.storage.Storage;
 import recipeditor.ui.Ui;
 
+import java.io.FileNotFoundException;
+import java.util.logging.Level;
+
 public class DeleteCommand extends Command {
     public static final String COMMAND_TYPE = "/delete";
-    private final int index;
+    private int index;
+    private String recipeTitleToDelete;
 
     /**
      * Construct a delete command including task to delete.
      *
      * @param index the index of task to delete
      */
-    public DeleteCommand(int index) {
-        this.index = index;
+    public DeleteCommand(String recipeTitleToDelete) {
+//        this.index = index;
+        this.recipeTitleToDelete = recipeTitleToDelete;
     }
 
     /**
@@ -26,11 +31,12 @@ public class DeleteCommand extends Command {
      */
     public CommandResult execute() {
         try {
-            Recipe deletedRecipe = RecipeList.getRecipe(index);
-            RecipeList.deleteRecipe(index);
-            Storage.writeRecipeListToFile(Recipeditor.DATA_FILE_PATH);
+            Storage.deleteRecipeFile(recipeTitleToDelete);
+//            Recipe deletedRecipe = RecipeList.getRecipe(index);
+//            RecipeList.deleteRecipe(index);
+//            Storage.writeRecipeListToFile(Recipeditor.DATA_FILE_PATH);
             return new CommandResult(String.format(
-                    deletedRecipe.getTitle() + " is deleted.%n"));
+                    recipeTitleToDelete + " is deleted.%n"));
         } catch (IndexOutOfBoundsException e) {
             Ui.showMessageInline("Current number of saved recipes:", Integer.toString(RecipeList.getSize()));
             return new CommandResult("Delete recipe index out of bound.");
