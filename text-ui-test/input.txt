@@ -35,6 +35,7 @@ add t/expense c/transport a/ d/02102022 i/bus_fare
 add t/expense c/transport a/1 d/ i/bus_fare
 add t/expense c/transport a/1 d/02102022 i/
 add t/expense c/transport a/1 d/02102022 i/bus_fare i/mrt_fare
+add t/expense c/transport a/10000 d/03102022 i/bus_fare
 list /
 list t/
 list T/
@@ -70,6 +71,9 @@ add t/income c/bonus a/10000000 d/20220101 i/thank_you_boss
 add t/income c/bonus a/10000000 d/obviouslyFalseDate i/thank_you_boss
 add t/income c/bonus a/10000000
 list
+budget b/100
+budget b/10000000000000
+budget b/10000000000000000000000000000000000000000000
 delete 1
 delete e/1
 list
