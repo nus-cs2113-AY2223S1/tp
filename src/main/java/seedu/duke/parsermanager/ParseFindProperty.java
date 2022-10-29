@@ -10,7 +10,6 @@ import seedu.duke.exception.parsefindexception.FindIncorrectNumOfTagException;
 import java.util.ArrayList;
 
 import static seedu.duke.CommandStructure.FIND_FLAGS;
-import static seedu.duke.Messages.*;
 
 public class ParseFindProperty extends Parser {
 

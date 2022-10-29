@@ -4,7 +4,6 @@ package seedu.duke.parsermanager;
 import seedu.duke.command.Command;
 import seedu.duke.command.CommandFindClient;
 import seedu.duke.exception.DukeException;
-import seedu.duke.exception.EmptyDescriptionException;
 import seedu.duke.exception.parsefindexception.FindEmptyDescriptionException;
 import seedu.duke.exception.parsefindexception.FindIncorrectNumOfTagException;
 
