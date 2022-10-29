@@ -69,7 +69,7 @@ public class Item {
         String itemName = "Item_Name: " + name + " ";
         String itemCategory = "Category: " + category.toString() + " ";
         String itemOwner = "Owner: " + getOwnerId() + " ";
-        String itemPrice = "Price_Per_Day: $" + pricePerDay;
+        String itemPrice = "Price_Per_Day: $" + String.format("%.2f", pricePerDay);
         return itemIcon + itemId + itemName + itemCategory + itemOwner + itemPrice;
     }
 
