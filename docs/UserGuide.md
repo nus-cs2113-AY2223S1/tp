@@ -15,10 +15,10 @@
 
 ## 1. Introduction
 
-Welcome to Upcycle - a perfect desktop app dedicate for managing rental businesses. The nature of these businesses 
-requires to deal with tons of data; therefore, noting down all information by notes and pen is not ideal for managers. 
-It is developed for rental business managers, who can type fast to efficiently keep track all of their customers, items, 
-and transactions via Command Line Interface with a single line of command. 
+Welcome to Upcycle - a perfect desktop app dedicate to managing rental businesses. The nature of these businesses
+requires dealing with tons of data; therefore, noting down all information with notes and pen is not ideal for managers.
+It is developed for rental business managers, who can type fast to efficiently keep track of all of their customers, items,
+and transactions via a Command Line Interface.
 
 This UserGuide introduces you a brief overview of our features with example of usage and expected outcome. Let's hop into the section [2. Quick Start](#2-quick-start) to start using Upcycle quickly.
 
@@ -58,7 +58,7 @@ This section allows users to understand all the features that we offer, includin
 >2. Parameters can be shuffled. For example, ```update-item /i [ITEM_ID] /p [PRICE]``` and ```update-item /p [PRICE] /i [ITEM_ID]``` are the same.
 >3. Phrases in ```[CAPITAL_WORDS]``` are the parameters for you to input. And, if those phrases are **bold**, then they are optional
 >4. Argument value cannot contain ```\``` or ```|```.
->5. You must put a space between delimiter and value. For example, ```/nbuiducthanh``` is a error, but ```/n buiducthanh``` is correct
+>5. You must put a space between delimiter and value. For example, ```/nbuiducthanh``` is an error, but ```/n buiducthanh``` is correct
 
 
 ### 3.1. Getting help
@@ -173,8 +173,8 @@ Expected outcome:
 ```
 ____________________________________________________________
 Here are 2 user(s) in your list:
-   1. Username: WinstonLimCherHong Age: 22 Contact: 91824633 
-   2. Username: test2 Age: 21 Contact: 91234557 
+1. Username: WinstonLimCherHong Age: 22 Contact: 91824633 
+2. Username: test2 Age: 21 Contact: 91234557 
 ____________________________________________________________
 ```
 
@@ -231,8 +231,8 @@ Expected outcome:
 ```
 ____________________________________________________________
 Here are 2 user(s) in your list:
-   1. Username: jingwei Age: 21 Contact: 22384729 
-   2. Username: yixiang Age: 21 Contact: 69324729 
+1. Username: jingwei Age: 21 Contact: 22384729 
+2. Username: yixiang Age: 21 Contact: 69324729 
 ____________________________________________________________
 ```
 
@@ -254,7 +254,11 @@ Expected outcome:
 ```
 ____________________________________________________________
 Noted. Following item has been added: 
-Status: [Available] ItemId: 2cc4edf3 Item: weight Category: SPORTS_EQUIPMENT Owner: bui PricePerDay: $0.5
+Status: [Available] ItemId: 2cc4edf3 
+   Item: weight 
+   Category: SPORTS_EQUIPMENT 
+   Owner: bui 
+   PricePerDay: $0.5
 Total item(s) in database: 2
 ____________________________________________________________
 ```
@@ -273,7 +277,11 @@ Expected outcome:
 ```
 ____________________________________________________________
 OK! I will remove the following item:
-Status: [Available] ItemId: 2cc4edf3 Item: weight Category: SPORTS_EQUIPMENT Owner: bui PricePerDay: $0.5
+Status: [Available] ItemId: 2cc4edf3 
+   Item: weight 
+   Category: SPORTS_EQUIPMENT 
+   Owner: bui 
+   PricePerDay: $0.5
 Total item(s) in database: 1
 ____________________________________________________________
 ```
@@ -289,7 +297,11 @@ Expected outcome:
 ```
 ____________________________________________________________
 Here are 1 item(s) in your list:
-   1. Status: [On loan] ItemId: ea608c61 Item: toy Category: SPORTS_EQUIPMENT Owner: WinstonLimCherHong PricePerDay: $4.0
+1. Status: [On loan] ItemId: ea608c61 
+   Item: toy 
+   Category: SPORTS_EQUIPMENT 
+   Owner: WinstonLimCherHong 
+   PricePerDay: $4.0
 ____________________________________________________________
 ```
 
@@ -308,7 +320,11 @@ Expected outcome:
 ```
 ____________________________________________________________
 Here is the item you requested: 
-Status: [Available] ItemId: 99995bb2 Item: scale Category: SPORTS_EQUIPMENT Owner: jingwei PricePerDay: $1.0
+Status: [Available] ItemId: 99995bb2 
+   Item: scale 
+   Category: SPORTS_EQUIPMENT 
+   Owner: jingwei 
+   PricePerDay: $1.0
 ____________________________________________________________
 ```
 
@@ -330,7 +346,11 @@ Expected outcome:
 ```
 ____________________________________________________________
 Done! Here is the item you updated
-Status: [On loan] ItemId: ea608c61 Item: toy Category: SPORTS_EQUIPMENT Owner: WinstonLimCherHong PricePerDay: $4.0
+Status: [On loan] ItemId: ea608c61 
+   Item: toy 
+   Category: SPORTS_EQUIPMENT 
+   Owner: WinstonLimCherHong 
+   PricePerDay: $4.0
 ____________________________________________________________
 ```
 
@@ -353,8 +373,16 @@ Expected outcome:
 ```
 ____________________________________________________________
 Here are 2 item(s) in your filtered list:
-   1. Status: [Available] ItemId: e084cd0a Item: battery Category: ELECTRICAL_APPLIANCES Owner: jingwei PricePerDay: $1.5
-   2. Status: [Available] ItemId: 4621bcf6 Item: charger Category: ELECTRICAL_APPLIANCES Owner: winston PricePerDay: $2.0
+1. Status: [Available] ItemId: e084cd0a 
+   Item: battery 
+   Category: ELECTRICAL_APPLIANCES 
+   Owner: jingwei 
+   PricePerDay: $1.5
+2. Status: [Available] ItemId: 4621bcf6 
+   Item: charger 
+   Category: ELECTRICAL_APPLIANCES 
+   Owner: winston 
+   PricePerDay: $2.0
 ____________________________________________________________
 ```
 
@@ -397,9 +425,21 @@ Expected outcome:
 ```
 ____________________________________________________________
 Here are 3 item(s) in your list:
-   1. Status: [Available] ItemId: 18c90077 Item: book Category: SPORTS_EQUIPMENT Owner: jingwei PricePerDay: $99.0
-   2. Status: [Available] ItemId: 4e6f4b89 Item: books1 Category: SPORTS_EQUIPMENT Owner: jingwei PricePerDay: $99.0
-   3. Status: [Available] ItemId: 75d7d384 Item: tbookie Category: SPORTS_EQUIPMENT Owner: jingwei PricePerDay: $99.0
+1. Status: [Available] ItemId: 18c90077 
+   Item: book 
+   Category: SPORTS_EQUIPMENT 
+   Owner: jingwei 
+   PricePerDay: $99.0
+2. Status: [Available] ItemId: 4e6f4b89 
+   Item: books1 
+   Category: SPORTS_EQUIPMENT 
+   Owner: jingwei 
+   PricePerDay: $99.0
+3. Status: [Available] ItemId: 75d7d384 
+   Item: tbookie 
+   Category: SPORTS_EQUIPMENT 
+   Owner: jingwei 
+   PricePerDay: $99.0
 ____________________________________________________________
 ```
 
@@ -414,7 +454,12 @@ Note:
 1. The unit of duration is days
 2. Duration must be an integer, greater than 0 and less than 1461 (4 years)
 3. The format of create date is YYYY-MM-DD, and it must be before the input date
+<<<<<<< HEAD
+4. The item must be available during the period of new transaction.
+5. The moneyTransacted of transaction will only use the pricePerDay of the items at the moment of input. If the item's price is updated, it will not affect the moneyTransacted.
+=======
 4. First parameter of the transaction message shows the status of the transaction (Finished/Unfinished).
+>>>>>>> 3676a288d9a3857d86363b75a84c3d76cd4f5cab
 
 Example of usage: ```add-tx /i 3ff10798 /b bui /d 5 /c 2022-10-20```
 
@@ -422,7 +467,12 @@ Expected outcome:
 ```
 ____________________________________________________________
 OK! I will add the following transaction:
-[Finished] TxID: 7ddc865f ItemName: speaker ItemID: 3ff10798 Borrower: bui Duration: 5 ReturnedDate: Tue, Oct 25 2022 MoneyTransacted: 10.0 
+[Finished] TxID: 7ddc865f 
+   ItemName: speaker ItemID: 3ff10798 
+   Borrower: bui 
+   Duration: 5 
+   ReturnedDate: Tue, Oct 25 2022 
+   MoneyTransacted: 10.0 
 Total transaction(s) in database: 3
 ____________________________________________________________
 ```
@@ -441,7 +491,12 @@ Expected outcome:
 ```
 ____________________________________________________________
 OK! I will remove the following item:
-[Finished] TxID: 7ddc865f ItemName: speaker ItemID: 3ff10798 Borrower: bui Duration: 5 ReturnedDate: Tue, Oct 25 2022 MoneyTransacted: 10.0 
+[Finished] TxID: 7ddc865f 
+   ItemName: speaker ItemID: 3ff10798 
+   Borrower: bui 
+   Duration: 5 
+   ReturnedDate: Tue, Oct 25 2022 
+   MoneyTransacted: 10.0 
 Total transactions(s) in database: 2
 ____________________________________________________________
 ```
@@ -457,8 +512,18 @@ Expected outcome:
 ```
 ____________________________________________________________
 Here are 2 transaction(s) in your list:
-   1. [Unfinished] TxID: 55e36921 ItemName: scale ItemID: f15dff20 Borrower: jorelle Duration: 5 ReturnDate: Fri, Oct 28 2022 (0 day(s) left) MoneyTransacted: 5.0 
-   2. [Unfinished] TxID: 9e27c530 ItemName: laptop ItemID: bd4961ed Borrower: winston Duration: 100 ReturnDate: Sat, Jan 21 2023 (85 day(s) left) MoneyTransacted: 900.0 
+1. [Unfinished] TxID: 55e36921 
+   ItemName: scale ItemID: f15dff20 
+   Borrower: jorelle 
+   Duration: 5 
+   ReturnDate: Fri, Oct 28 2022 (0 day(s) left) 
+   MoneyTransacted: 5.0 
+2. [Unfinished] TxID: 9e27c530 
+   ItemName: laptop ItemID: bd4961ed 
+   Borrower: winston 
+   Duration: 100 
+   ReturnDate: Sat, Jan 21 2023 (85 day(s) left) 
+   MoneyTransacted: 900.0 
 ____________________________________________________________
 ```
 
@@ -476,7 +541,12 @@ Expected outcome:
 ```
 ____________________________________________________________
 Here is the transaction you requested to view: 
-[Unfinished] TxID: 9e27c530 ItemName: laptop ItemID: bd4961ed Borrower: winston Duration: 100 ReturnDate: Sat, Jan 21 2023 (85 day(s) left) MoneyTransacted: 900.0 
+[Unfinished] TxID: 9e27c530 
+   ItemName: laptop ItemID: bd4961ed 
+   Borrower: winston 
+   Duration: 100 
+   ReturnDate: Sat, Jan 21 2023 (85 day(s) left) 
+   MoneyTransacted: 900.0 
 ____________________________________________________________
 ```
 
@@ -491,8 +561,18 @@ Expected outcome:
 ```
 ____________________________________________________________
 Here are the uncompleted transactions: 
-[Unfinished] TxID: 55e36921 ItemName: scale ItemID: f15dff20 Borrower: jorelle Duration: 5 ReturnDate: Fri, Oct 28 2022 (0 day(s) left) MoneyTransacted: 5.0 
-[Unfinished] TxID: 9e27c530 ItemName: laptop ItemID: bd4961ed Borrower: winston Duration: 100 ReturnDate: Sat, Jan 21 2023 (85 day(s) left) MoneyTransacted: 900.0 
+[Unfinished] TxID: 55e36921 
+   ItemName: scale ItemID: f15dff20 
+   Borrower: jorelle 
+   Duration: 5 
+   ReturnDate: Fri, Oct 28 2022 (0 day(s) left) 
+   MoneyTransacted: 5.0 
+[Unfinished] TxID: 9e27c530 
+   ItemName: laptop ItemID: bd4961ed 
+   Borrower: winston 
+   Duration: 100 
+   ReturnDate: Sat, Jan 21 2023 (85 day(s) left) 
+   MoneyTransacted: 900.0 
 ____________________________________________________________
 ```
 
@@ -511,7 +591,12 @@ Example of usage: ```update-tx /t 55e36921 /d 10```
 ```
 ____________________________________________________________
 Done! Here is the updated transaction:
-[Unfinished] TxID: 55e36921 ItemName: scale ItemID: f15dff20 Borrower: jorelle Duration: 10 ReturnDate: Wed, Nov 02 2022 (5 day(s) left) MoneyTransacted: 10.0 
+[Unfinished] TxID: 55e36921 
+   ItemName: scale ItemID: f15dff20 
+   Borrower: jorelle 
+   Duration: 10 
+   ReturnDate: Wed, Nov 02 2022 (5 day(s) left) 
+   MoneyTransacted: 10.0 
 ____________________________________________________________
 ```
 
@@ -520,10 +605,6 @@ ____________________________________________________________
 >Exit the program
 
 Format: ```bye```
-
-Note:
-1. After running this command, your data in user list, item list and transaction list are stored in 3 file 
-```user.txt```, ```item.txt```, and ```transaction.txt``` in ```/data/``` folders, respectively
 
 Example of usage: ```bye```
 
@@ -570,4 +651,11 @@ How do I transfer my data to another computer?
 
 >On your other computer, download your ```Upcycle.jar``` file following the instructions in [Quick Start](#2-quick-start). Then, you copy the \data\ folder and paste into your folder for Upcycle on your new computer. That's it, now you can run our app with your previous data on another computer.
 
+If Duke crashes, is my data saved?
 
+>Yes, Duke will automatically save your data to files after each operation. Therefore, data will be saved no matter how you exit the program, even with ```Ctrl-C```.
+
+What will happen if I illegally modify data in the files?
+
+> Duke will detect if the data is modified or not. If yes, it would still be functional and create three new lists to replace those corrupted data. However, this also means that your previous data cannot be recovered.
+> Please do not edit your data files, otherwise, you have to input all over again.

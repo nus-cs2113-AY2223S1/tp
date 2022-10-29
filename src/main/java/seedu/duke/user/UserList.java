@@ -128,7 +128,7 @@ public class UserList {
         }
         int index = 1;
         for (User user : userList) {
-            listString.append('\n').append("   ").append(index++).append(". ").append(user);
+            listString.append('\n').append(index++).append(". ").append(user);
         }
         return String.valueOf(listString);
     }
@@ -140,6 +140,8 @@ public class UserList {
      */
     public String convertUserListToFileFormat() {
         StringBuilder formattedString = new StringBuilder();
+        int checkSum = userList.size() * 3;
+        formattedString.append(checkSum).append('\n');
         for (User user : userList) {
             formattedString.append(user.convertItemToFileFormat()).append('\n');
         }

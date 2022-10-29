@@ -1,4 +1,4 @@
-# John Doe - Project Portfolio Page
+# Bui Duc Thanh - Project Portfolio Page
 
 ## Overview
 

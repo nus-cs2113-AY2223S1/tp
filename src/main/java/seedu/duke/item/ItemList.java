@@ -117,7 +117,7 @@ public class ItemList {
         }
         int index = 1;
         for (Item item : itemList) {
-            listString.append('\n').append("   ").append(index++).append(". ")
+            listString.append('\n').append(index++).append(". ")
                     .append(item.toString(transactionList));
         }
         return String.valueOf(listString);
@@ -125,6 +125,8 @@ public class ItemList {
 
     public String convertItemListToFileFormat() {
         StringBuilder formattedString = new StringBuilder();
+        int checkSum = itemList.size() * 3;
+        formattedString.append(checkSum).append('\n');
         for (Item item : itemList) {
             formattedString.append(item.convertItemToFileFormat()).append('\n');
         }

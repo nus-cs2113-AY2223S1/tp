@@ -96,7 +96,7 @@ All user-related commands operate mainly on a list of users (userList:UserList).
 
 ### 3.5. Transaction component
 
-The Class diagram below show how Transaction-related classes interact with each other. `Transaction` object contains `transactionId`, `itemName`, `itemId`, `borrower`, `duration`, `createdAt`, `returnedAt` 
+The Class diagram below show how Transaction-related classes interact with each other. `Transaction` object contains `transactionId`, `itemName`, `itemId`, `borrower`, `duration`, `createdAt`, `returnedAt` and `moneyTransacted` 
 attributes. Among those, `transactionId` is created by `IdGenerator`'s static method and dates are parsed by `DateParser`, therefore, Transaction class depends on those two classes.
 Transactions are stored in `TransactionList`, which will be loaded and written on the file by `TransactionStorage` (inherits from `Storage`) whenever Upcycle runs or exits. All transaction-related 
 commands operate mainly on a list of transaction (transactionList:TransactionList)
@@ -115,6 +115,7 @@ The design of the UI component is to simply act as a helper class i.e. one consi
 This makes sense as the UI class should not to be instantiated and is not inherited by other classes.
 
 Below, we detail the design of the UI class with a class diagram
+
 ![UiDesign](images/UiDesign.png)
 
 
@@ -125,9 +126,11 @@ The following  diagrams show more details about Storage classes:
 
 ![StorageClassDiagram](images/StorageClassDiagram.png)
 
-Upcycle stores the user's data, including the user list, item list, transaction list in three files ```user.txt```, ```item.txt```, ```transaction.txt```, respectively.
-The data will be loaded when running the program, and ONLY be written to the files when exiting the program correctly, otherwise, the data during the execution will be gone.
-These find can be found in ```data``` folder in the same directory with the folder containing project root.
+Upcycle stores the user's data, including the user list, item list, and transaction list in three files ```user.txt```, ```item.txt```, and ```transaction.txt```, respectively.
+The data will be loaded when running the program and will be written to the files after each operation. We also implement a checksum system for our data, including 2 checksums: 
+one for each entry, and one for the whole data in one file. For each user/item/transaction, we use a function of the length of toString() as a checksum. And for the whole list, we use a function of the number of 
+entries as a checksum. Then when loading the data, Duke will check both and throw an exception if the data does not match the checksums.
+These files can be found in ```data``` folder in the same directory as the folder containing project root.
 
 ## 4. Implementation
 
@@ -144,13 +147,13 @@ This sector describe how features are implemented, where readers can get insight
 
 Given below is an example usage scenario and how the command mechanism behaves at each step.
 
-Step 1: The user types in the command ```add-user /n [NAME] /a [AGE] /c [CONTACT]``` in the command line. The CommandParser class checks if the command is valid through the createCommand() method, and send the input to the ```AddUserCommand``` class to be processed.
+Step 1: The user types in the command ```add-user /n [NAME] /a [AGE] /c [CONTACT]``` in the command line. The CommandParser class checks if the command is valid through the createCommand() method, and sends the input to the ```AddUserCommand``` class to be processed.
 
-Step 2: The AddUserCommand command checks if the delimiters ('n', 'a', 'c') is present in the user input through the getArgsAddUserCmd() method. If not present, an exception will be thrown. The command also checks whether the input's final argument is valid through `isValidName()`, `isValidAge()`, `isValidContactNumber()` methods. An exception will also be thrown if the final argument does not satisfy the requirements (duplicate name, wrong range or format age, wrong contact length ,...).
+Step 2: The AddUserCommand command checks if the delimiters ('n', 'a', 'c') are present in the user input through the getArgsAddUserCmd() method. If not present, an exception will be thrown. The command also checks whether the input's final argument is valid through `isValidName()`, `isValidAge()`, `isValidContactNumber()` methods. An exception will also be thrown if the final argument does not satisfy the requirements (duplicate name, wrong range or format age, wrong contact length,...).
 
 Step 3: If all arguments are valid, then it creates a new `User(arg[0], Integer.parseInt(args[1]), args[2])` with `args[0]` is username, `args[2]` is age, and `args[3]` is contact number
 
-Step 4: After adding the new user, a message will be displayed to the user via `Ui.addUserMessage()` method which show the new user's details and the size of userList.
+Step 4: After adding the new user, a message will be displayed to the user via `Ui.addUserMessage()` method which shows the new user's details and the size of userList.
 
 The following sequence diagram shows how the add user operation works:
 ![addUserSequence](images/AddUserSequence.png)
@@ -161,9 +164,9 @@ The following sequence diagram shows how the add user operation works:
 
 Given below is an example usage scenario and how the command mechanism behaves at each step.
 
-Step 1: The user types in the command ```remove-user \u [USERNAME]``` in the command line. The CommandParser class checks if the command is valid through the createCommand() method, and send the input to the ```RemoveUserCommand``` class to be processed.
+Step 1: The user types in the command ```remove-user \u [USERNAME]``` in the command line. The CommandParser class checks if the command is valid through the createCommand() method, and sends the input to the ```RemoveUserCommand``` class to be processed.
 
-Step 2: The RemoveUserCommand command checks if the delimiters ('u') is present in the user input through the getArgsRemoveUserCmd() method. If not present, an exception will be thrown. The command also checks whether the input's final argument is valid 
+Step 2: The RemoveUserCommand command checks if the delimiter ('u') is present in the user input through the getArgsRemoveUserCmd() method. If not present, an exception will be thrown. The command also checks whether the input's final argument is valid 
 (user can be deleted or not) by checking whether that user is currently borrowing or lending any item via `canDeleteUser()`, `isBorrowing()` and `isLending()` methods. An exception will also be thrown if the final argument does not satisfy the requirements (user not found, user is borrowing/lending).
 
 Step 3: If all arguments are valid, then it finds and deletes the user in the userList by his/her name, which is unique. And all of his/her items stored in itemList are also deleted:
@@ -172,7 +175,7 @@ Step 3: If all arguments are valid, then it finds and deletes the user in the us
 
 `itemList.deleteAllItemOfAnUser(username, transactionList)`
 
-Step 4: After deleting a user, a message will be displayed to the user via `Ui.deleteUserMessage()` method which show the deleted user's details and the size of userList.
+Step 4: After deleting a user, a message will be displayed to the user via `Ui.deleteUserMessage()` method which shows the deleted user's details and the size of userList.
 
 The following sequence diagram shows how the remove user operation works:
 ![removeUserSequence](images/RemoveUserSequence.png)
@@ -240,12 +243,12 @@ The following sequence diagram shows how the view-user-items operation works:
 
 Given below is an example usage scenario and how the command mechanism behaves at each step.
 
-Step 1: The user types in the command ```add-item /n [NAME] /c [CATEGORY] /p [PRICE] /o [OWNER]```. The CommandParser class checks if the command is valid through the createCommand() method, and send the input to the ```AddItemCommand``` to be processed.
+Step 1: The user types in the command ```add-item /n [NAME] /c [CATEGORY] /p [PRICE] /o [OWNER]```. The CommandParser class checks if the command is valid through the createCommand() method, and sends the input to the ```AddItemCommand``` to be processed.
 
-Step 2: The AddItemCommand command checks if the delimiters ('n', 'c', 'p', 'o') is present in the user input through the getArgsAddItemCmd() method. If not present, an exception will be thrown. The command also checks whether the input's final argument is valid through `isValidName()`, `isValidOwner()`, `isValidPrice()` and `isValidCatgoryNumber()` methods. 
+Step 2: The AddItemCommand command checks if the delimiters ('n', 'c', 'p', 'o') are present in the user input through the getArgsAddItemCmd() method. If not present, an exception will be thrown. The command also checks whether the input's final argument is valid through `isValidName()`, `isValidOwner()`, `isValidPrice()` and `isValidCatgoryNumber()` methods. 
 An exception will also be thrown if the final argument does not satisfy the requirements (duplicate name of item of the same owner, owner not found, wrong range and format price,...).
 
-Step 3: If all arguments are valid, then it creates a new `Item()` with `args[0]` is itemName, `args[2]` is categoryNumber, and `args[3]` is price and `args[4]` is owner's name
+Step 3: If all arguments are valid, then it creates a new `Item()` with `args[0]` as itemName, `args[2]` as categoryNumber, and `args[3]` as price and `args[4]` as owner's name
 
 Step 4: After adding the new item, a message will be displayed to the user via `Ui.addItemMessage()` method which show the new item's details and the size of itemList.
 
@@ -258,15 +261,15 @@ The following sequence diagram shows how the add item operation works:
 
 Given below is an example usage scenario and how the command mechanism behaves at each step.
 
-Step 1: The user types in the command ```remove-item /i [ITEMID]```. The CommandParser class checks if the command is valid through the createCommand() method, and send the input to the RemoveItemCommand to be processed.
+Step 1: The user types in the command ```remove-item /i [ITEMID]```. The CommandParser class checks if the command is valid through the createCommand() method, and sends the input to the RemoveItemCommand to be processed.
 
-Step 2: The RemoveItemCommand command checks if the delimiters ('i') is present in the user input through the getArgsRemoveItemCmd() method. If not present, an exception will be thrown. The command also checks whether the input's final argument is valid (item can be deleted or not) by checking whether that item is available (not in any transaction). An exception will also be thrown if the final argument does not satisfy the requirements (item not found, item is unavailable).
+Step 2: The RemoveItemCommand command checks if the delimiter ('i') is present in the user input through the getArgsRemoveItemCmd() method. If not present, an exception will be thrown. The command also checks whether the input's final argument is valid (item can be deleted or not) by checking whether that item is available (not in any transaction). An exception will also be thrown if the final argument does not satisfy the requirements (item not found, item is unavailable).
 
-Step 3: If all arguments are valid, then it finds and deletes the item in the itemList by its ID, which is unique. However, finished transaction related to that items will not be deleted since if in the future we implement "get profit" feature then it still counts those finished transaction
+Step 3: If all arguments are valid, then it finds and deletes the item in the itemList by its ID, which is unique. However, finished transactions related to that items will not be deleted since if in the future we implement "get profit" feature then it still counts those finished transactions.
 
 `itemList.deleteItem(itemId, transactionList);`
 
-Step 4: After deleting an item, a message will be displayed to the user via `Ui.deleteItemMessage()` method which show the deleted item's details and the size of itemList.
+Step 4: After deleting an item, a message will be displayed to the user via `Ui.deleteItemMessage()` method which shows the deleted item's details and the size of itemList.
 
 The following sequence diagram shows how the remove item operation works:
 ![removeItemSequence](images/RemoveItemSequence.png)
@@ -384,13 +387,13 @@ The following sequence diagram models the operation:
 
 Given below is an example usage scenario and how the command mechanism behaves at each step.
 
-Step 1: The user types in the command ```add-tx /i [ITEMID]/b [BORROWER] /d [DURATION] /c [createdDate]```. The CommandParser class checks if the command is valid through the createCommand() method, and send the input to the AddTransactionCommand to be processed.
+Step 1: The user types in the command ```add-tx /i [ITEMID]/b [BORROWER] /d [DURATION] /c [createdDate]```. The CommandParser class checks if the command is valid through the createCommand() method, and sends the input to the AddTransactionCommand to be processed.
 
-Step 2: The AddTransactionCommand command checks if the delimiters ('i', 'b', 'd', 'c') is present in the user input through the getArgsAddItemCmd() method. If not present, an exception will be thrown. The command also checks whether the input's final argument is valid through `isValidItem()`, `isValidBorrower()`, `isValidDuration()` and `isValidCreatedDate()` methods. An exception will also be thrown if the final argument does not satisfy the requirements (item not found, user not found, duration wrong format, createdDate wrong format...).
+Step 2: The AddTransactionCommand command checks if the delimiters ('i', 'b', 'd', 'c') are present in the user input through the getArgsAddItemCmd() method. If not present, an exception will be thrown. The command also checks whether the input's final argument is valid through `isValidItem()`, `isValidBorrower()`, `isValidDuration()` and `isValidCreatedDate()` methods. An exception will also be thrown if the final argument does not satisfy the requirements (item not found, user not found, duration wrong format, createdDate wrong format...).
 
-Step 3: If all arguments are valid, then it creates a new `transaction()` with `args[0]` is itemId, `args[2]` is borrowerId, and `args[3]` is duration and `args[4]` is createdDate
+Step 3: If all arguments are valid, then it creates a new `transaction()` with `args[0]` as itemId, `args[2]` as borrowerId, and `args[3]` as duration and `args[4]` as createdDate
 
-Step 4: After adding the new transaction, a message will be displayed to the user via `Ui.addTransactionMessage()` method which show the new transaction's details and the size of transactionList.
+Step 4: After adding the new transaction, a message will be displayed to the user via `Ui.addTransactionMessage()` method which shows the new transaction's details and the size of transactionList.
 
 The following sequence diagram shows how the add transaction operation works:
 ![addUserSequence](images/AddTransactionSequence.png)
@@ -401,15 +404,15 @@ The following sequence diagram shows how the add transaction operation works:
 
 Given below is an example usage scenario and how the command mechanism behaves at each step.
 
-Step 1: The user types in the command ```remove-tx /t [TRANSACTIONID]```. The CommandParser class checks if the command is valid through the createCommand() method, and either sends an exception, or send the input to the RemoveTransactionCommand to be processed.
+Step 1: The user types in the command ```remove-tx /t [TRANSACTIONID]```. The CommandParser class checks if the command is valid through the createCommand() method, and either sends an exception, or sends the input to the RemoveTransactionCommand to be processed.
 
-Step 2: The RemoveTransactionCommand command checks if the delimiters ('t') is present in the user input through the getArgsRemoveTransactionCmd() method. If not present, an exception will be thrown. The command also checks whether the input's final argument is valid (transaction can be found). An exception will also be thrown if the final argument does not satisfy the requirements (transaction not found).
+Step 2: The RemoveTransactionCommand command checks if the delimiter ('t') is present in the user input through the getArgsRemoveTransactionCmd() method. If not present, an exception will be thrown. The command also checks whether the input's final argument is valid (transaction can be found). An exception will also be thrown if the final argument does not satisfy the requirements (transaction not found).
 
 Step 3: If all arguments are valid, then it finds and deletes the transaction in the transactionList by its ID, which is unique.
 
 `transactionList.deleteTransaction(transactionId);`
 
-Step 4: After deleting a transaction, a message will be displayed to the user via `Ui.deleteTransactionMessage()` method which show the deleted transaction's details and the size of transactionList.
+Step 4: After deleting a transaction, a message will be displayed to the user via `Ui.deleteTransactionMessage()` method which shows the deleted transaction's details and the size of transactionList.
 
 The following sequence diagram shows how the remove transaction operation works:
 ![removeTransactionSequence](images/RemoveTransactionSequence.png)
@@ -535,8 +538,8 @@ staying in a particular community/hall to loan or borrow items they wish to shar
 | Version | As a ... | I want to ...               | So that I can ...                                             |
 |---------|----------|-----------------------------|---------------------------------------------------------------|
 | v1.0    | new user | see usage instructions      | refer to them when I forget how to use the application        |
-| v1.0    | manager  | add a user                  | he may borrow and loan items                                  |
-| v1.0    | manager  | view a specific user        | know what items he is borrowing and loaning                   |
+| v1.0    | manager  | add a user                  | he/she may borrow and loan items                              |
+| v1.0    | manager  | view a specific user        | know what items he/she is borrowing and loaning               |
 | v1.0    | manager  | view all users              | see who are available for loaning and borrowing               |
 | v1.0    | manager  | delete a user               | remove the user if he violates community guidelines           |
 | v1.0    | manager  | add an item                 | make the item available for loan                              |

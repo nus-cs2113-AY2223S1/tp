@@ -63,19 +63,19 @@ public class Item {
     }
 
     public String toString(TransactionList transactionList) {
-        String itemId = "Item_ID: " + this.itemId + " ";
-        String itemIcon =
-                "Status: [" + (isAvailable(transactionList) ? "Available" : "On loan") + "] ";
-        String itemName = "Item_Name: " + name + " ";
-        String itemCategory = "Category: " + category.toString() + " ";
-        String itemOwner = "Owner: " + getOwnerId() + " ";
-        String itemPrice = "Price_Per_Day: $" + String.format("%.2f", pricePerDay);
+        String itemId = "ItemId: " + this.itemId + "\n";
+        String itemIcon = "[" + (isAvailable(transactionList) ? "Available" : "On loan") + "] ";
+        String itemName = "   Item name: " + name + "\n";
+        String itemCategory = "   Category: " + category.toString() + "\n";
+        String itemOwner = "   Owner: " + getOwnerId() + "\n";
+        String itemPrice = "   PricePerDay: $" + String.format("%.2f", pricePerDay);
         return itemIcon + itemId + itemName + itemCategory + itemOwner + itemPrice;
     }
 
     public String convertItemToFileFormat() {
         String separator = " | ";
+        int checkSum = toString(new TransactionList()).length();
         return itemId + separator + name + separator + pricePerDay + separator + ownerId
-                + separator + Category.setCategory(category);
+                + separator + Category.setCategory(category) + separator + checkSum;
     }
 }

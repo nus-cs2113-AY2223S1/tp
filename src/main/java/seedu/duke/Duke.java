@@ -14,6 +14,8 @@ import seedu.duke.parser.CommandParser;
 import seedu.duke.ui.Ui;
 import seedu.duke.user.UserList;
 
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_FILES_ILLEGALLY_DELETED;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_TO_FIX_FILES;
 import static seedu.duke.storage.FilePath.ITEM_FILE_PATH;
 import static seedu.duke.storage.FilePath.TRANSACTION_FILE_PATH;
 import static seedu.duke.storage.FilePath.USER_FILE_PATH;
@@ -40,53 +42,52 @@ public class Duke {
      * @param transactionFilePath The file path that Duke stores its transactions.
      */
     private Duke(String userFilePath, String itemFilePath, String transactionFilePath) {
-        userList = new UserList();
         userStorage = new UserStorage(userFilePath);
         itemStorage = new ItemStorage(itemFilePath);
         transactionStorage = new TransactionStorage(transactionFilePath);
-        initializeUserList();
-        initializeTransactionList();
-        initializeItemList();
+        try {
+            checkIfThreeFilesSimultaneouslyExistOrNotExit();
+            initializeUserList();
+            initializeTransactionList();
+            initializeItemList();
+        } catch (StoreFailureException e) {
+            resetAllListsDueToDataCorruption(e.getMessage());
+        }
     }
 
     /**
      * Initialize transaction list.
      */
-    private void initializeTransactionList() {
+    private void initializeTransactionList() throws StoreFailureException {
         try {
             this.transactionList = new TransactionList(transactionStorage.loadData());
         } catch (TransactionFileNotFoundException e) {
             this.transactionList = new TransactionList();
-        } catch (StoreFailureException e) {
-            resetAllListsDueToDataCorruption(e.getMessage());
         }
     }
 
-    private void initializeItemList() {
+    private void initializeItemList() throws StoreFailureException {
         try {
             this.itemList = new ItemList(itemStorage.loadData());
         } catch (ItemFileNotFoundException e) {
             this.itemList = new ItemList();
-        } catch (StoreFailureException e) {
-            resetAllListsDueToDataCorruption(e.getMessage());
         }
     }
 
-    private void initializeUserList() {
+    private void initializeUserList() throws StoreFailureException {
         try {
             this.userList = new UserList(userStorage.loadData());
         } catch (UserFileNotFoundException e) {
             this.userList = new UserList();
-        } catch (StoreFailureException e) {
-            resetAllListsDueToDataCorruption(e.getMessage());
         }
     }
 
     private void resetAllListsDueToDataCorruption(String errorMessage) {
-        userList = new UserList();
-        itemList = new ItemList();
-        transactionList = new TransactionList();
+        this.userList = new UserList();
+        this.itemList = new ItemList();
+        this.transactionList = new TransactionList();
         Ui.printErrorMessage(errorMessage);
+        isLastCommand = true;
     }
 
     /**
@@ -100,11 +101,21 @@ public class Duke {
         transactionStorage.writeData(transactionList);
     }
 
+    private void checkIfThreeFilesSimultaneouslyExistOrNotExit() throws StoreFailureException {
+        boolean areSimultaneouslyExistOrNotExit = (userStorage.hasUserFile() == itemStorage.hasItemFile())
+                && (transactionStorage.hasTransactionFile() == itemStorage.hasItemFile());
+        if (!areSimultaneouslyExistOrNotExit) {
+            throw new StoreFailureException(MESSAGE_FILES_ILLEGALLY_DELETED + MESSAGE_TO_FIX_FILES);
+        }
+    }
+
     /**
      * Runs the program.
      */
     public void run() {
-        Ui.printGreeting();
+        if (!isLastCommand) {
+            Ui.printGreeting();
+        }
         while (!isLastCommand) {
             try {
                 String input = Ui.readInput();

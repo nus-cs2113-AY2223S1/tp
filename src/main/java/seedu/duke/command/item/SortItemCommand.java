@@ -260,7 +260,7 @@ public class SortItemCommand extends Command {
         }
         int index = 1;
         for (Item item : itemsList) {
-            listString.append('\n').append("   ").append(index++).append(". ")
+            listString.append('\n').append(index++).append(". ")
                     .append(item.toString(transactionList));
         }
         Ui.printResponse(listString.toString());

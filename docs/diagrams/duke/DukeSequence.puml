@@ -36,6 +36,9 @@ loop until isLastCommand
         ":Command" --> ":Duke"
         deactivate ":Command"
         destroy ":Command"
+        ":Duke" -> ":Storage" : writeData()
+        activate ":Storage"
+        return
 
     else command is invalid
         ":Duke" -> "<<class>>\nUi" : print error
@@ -44,10 +47,6 @@ loop until isLastCommand
         deactivate "<<class>>\nUi"
     end
 end
-
-":Duke" -> ":Storage" : writeData()
-activate ":Storage"
-return
 ":Duke" --> "User"
 deactivate ":Duke"
 

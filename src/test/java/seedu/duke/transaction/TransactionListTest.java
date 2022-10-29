@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import seedu.duke.exception.InvalidTransactionException;
 import seedu.duke.exception.TransactionNotFoundException;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -123,7 +122,7 @@ class TransactionListTest {
     void convertTransactionListToFileFormat() {
         String transactionId = transaction.getTxId();
         transactionList.addTransaction(transaction);
-        assertEquals(transactionId + " | pen | 28sd37h2 | bui | 5 | 2022-10-03 | 3.2\n",
+        assertEquals("3\n" + transactionId + " | pen | 28sd37h2 | bui | 5 | 2022-10-03 | 3.2 | 152\n",
                 transactionList.convertTransactionListToFileFormat());
     }
 
@@ -133,5 +132,26 @@ class TransactionListTest {
         transactionArrayList.add(transaction);
         transactionList.addTransaction(transaction);
         assertEquals(transactionArrayList, transactionList.getTransactionList());
+    }
+
+    @Test
+    void checkIfListHasTransactionOfThisItemThatOverlapWithNewTransaction() {
+        transactionList.addTransaction(transaction);
+        Transaction newTransaction = new Transaction("pen", "28sd37h2", "bui", 6,
+                LocalDate.parse("2022-10-03"), 3.2);
+        assertThrows(InvalidTransactionException.class,
+            () -> transactionList.checkIfListHasTransactionOfThisItemThatOverlapWithNewTransaction(newTransaction));
+    }
+
+    @Test
+    void checkIfListHasTransactionOfThisItemThatOverlapWithUpdatedTransaction() {
+        transactionList.addTransaction(transaction);
+        Transaction newTransaction = new Transaction("pen", "28sd37h2", "bui", 6,
+                LocalDate.parse("2022-10-09"), 3.2);
+        transactionList.addTransaction(newTransaction);
+        assertThrows(InvalidTransactionException.class,
+            () -> transactionList
+                    .checkIfListHasTransactionOfThisItemThatOverlapWithNewTransaction(
+                            transaction.update(10, 6.4)));
     }
 }
