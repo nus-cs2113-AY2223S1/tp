@@ -14,7 +14,7 @@ public class ModuleTest {
 
     @Test
     public void moduleLoading_loadModules_numberLoaded() {
-        assertEquals(7732, Module.getAll().size());
+        assertEquals(13967, Module.getAll().size());
     }
 
     @Test

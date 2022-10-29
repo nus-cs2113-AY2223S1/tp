@@ -46,6 +46,7 @@ public class Timetable {
     private List<Pair<Module, RawLesson>> sortedLessons;
     private ConsoleBorder consoleBorder;
     private Logger logger;
+    private String errorMessages;
 
     /**
      * Creates a timetable with default settings. Default for windows is simple style and no colour. Default
@@ -69,16 +70,32 @@ public class Timetable {
         this.withColor = withColor;
         this.consoleBorder = ConsoleBorder.getInstance(isStyleSimple);
         this.sortedLessons = sortLessons(lessons);
+        this.errorMessages = "";
+        for (var lessonPair : sortedLessons) {
+            RawLesson lesson = lessonPair.getRight();
+            if (!isLessonViewable(lesson)) {
+                errorMessages += lessonTypeToShortString(lesson.lessonType) 
+                        + "[" + lesson.classNo + "] is not viewable. This is not a bug.\n";
+            }
+        }
+        this.sortedLessons = this.sortedLessons.stream()
+                .filter(lesson -> isLessonViewable(lesson.getRight())).collect(Collectors.toList());
         // collect a sorted list of modules
-        this.modules = new ArrayList<>(lessons.stream().map(s -> s.getLeft()).collect(Collectors.toSet()));
+        this.modules = new ArrayList<>(sortedLessons.stream().map(s -> s.getLeft()).collect(Collectors.toSet()));
         this.modules.sort((a, b) -> a.moduleCode.compareTo(b.moduleCode));
         // find the earliest and latest time in the schedule
-        String earliest = lessons.stream().map(s -> s.getRight().startTime).min(String::compareTo).orElseThrow();
+        String earliest = sortedLessons.stream().map(s -> s.getRight().startTime).min(String::compareTo).orElse("0900");
         this.firstHour = Integer.parseInt(earliest.substring(0, 2)); // round down to the hour
-        String latest = lessons.stream().map(s -> s.getRight().endTime).max(String::compareTo).orElseThrow();
+        String latest = sortedLessons.stream().map(s -> s.getRight().endTime).max(String::compareTo).orElse("0900");
         this.lastHour = Integer.parseInt(latest.substring(0, 2)) + 1; // round up to next hour
         this.timeslots = (this.lastHour - this.firstHour) * 2 + 1; // every half an hour
-        this.days = List.of(Day.values()).subList(0, 5); // monday to friday
+        boolean hasWeekendClasses = sortedLessons
+                .stream()
+                .anyMatch(s -> List.of(Day.SUNDAY, Day.SATURDAY).contains(s.getRight().day));
+        this.days = List.of(Day.values());
+        if (!hasWeekendClasses) {
+            this.days = this.days.subList(0, 5);
+        }
         // check whether any classes need to be indented
         // classes need to be indented if their timeslots overlap
         Pair<List<Integer>, List<Integer>> res = computeIndentation(days, sortedLessons); 
@@ -224,7 +241,6 @@ public class Timetable {
 
     private void addSingleLesson(Module module, RawLesson lesson, int indent) {
         Day day = lesson.day;
-        // int dayIndex = days.indexOf(day);
         int startColumn = getColumnOfDay(day) - 1 + indent * (COLUMN_WIDTH + 1);
         int endColumn = startColumn + COLUMN_WIDTH + 1;
         int startRow = timeToIndex(lesson.startTime) * ROWS_PER_TIME + HEADER_ROWS;
@@ -271,6 +287,7 @@ public class Timetable {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
+        builder.append(errorMessages);
         for (int i = 0; i < height; i++) {
             builder.append(String.join("", buffer[i]));
             if (withColor) {
@@ -308,6 +325,16 @@ public class Timetable {
         map.put(Day.SATURDAY, "Sat");
         map.put(Day.SUNDAY, "Sun");
         return Optional.ofNullable(map.get(day)).orElse("<Invalid>");
+    }
+
+    private boolean isLessonViewable(RawLesson lesson) {
+        if (!lesson.startTime.endsWith("00") && !lesson.startTime.endsWith("30")) {
+            return false;
+        }
+        if (!lesson.endTime.endsWith("00") && !lesson.endTime.endsWith("30")) {
+            return false;
+        }
+        return true;
     }
 
 }
