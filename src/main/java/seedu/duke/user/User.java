@@ -29,7 +29,11 @@ public class User {
      * @return The name
      */
     public String getName() {
-        return name;
+        return this.name;
+    }
+
+    public String getContactNumber() {
+        return this.contactNumber;
     }
 
     /**

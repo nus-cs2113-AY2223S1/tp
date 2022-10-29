@@ -12,6 +12,8 @@ import seedu.duke.user.User;
 import seedu.duke.user.UserList;
 import seedu.duke.ui.Ui;
 
+import java.util.ArrayList;
+
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_CONTACT_FORMAT_INVALID;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_CONTACT_LENGTH_INVALID;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INSUFFICIENT_ARGUMENTS;
@@ -20,6 +22,7 @@ import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_NAME_LENGTH
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_USERNAME_TAKEN;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_USER_AGE_INVALID;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_USER_AGE_OUT_OF_RANGE;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_CONTACT_DUPLICATE;
 
 //@@author bdthanh
 
@@ -118,9 +121,15 @@ public class AddUserCommand extends Command {
         if (contactNumber.length() != 8) {
             throw new ContactNumberInvalidException(MESSAGE_CONTACT_LENGTH_INVALID);
         }
+        if (Integer.parseInt(contactNumber) < 0) {
+            throw new ContactNumberInvalidException(MESSAGE_CONTACT_FORMAT_INVALID);
+        }
         try {
-            if (Integer.parseInt(contactNumber) < 0) {
-                throw new ContactNumberInvalidException(MESSAGE_CONTACT_FORMAT_INVALID);
+            ArrayList<User> checkDuplicate = userList.getUserList();
+            for (User user : checkDuplicate) {
+                if (contactNumber.equals(user.getContactNumber())) {
+                    throw new ContactNumberInvalidException(MESSAGE_CONTACT_DUPLICATE);
+                }
             }
             return true;
         } catch (NumberFormatException e) {
