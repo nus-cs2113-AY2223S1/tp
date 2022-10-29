@@ -3,6 +3,7 @@ package seedu.duke.transaction;
 import seedu.duke.exception.InvalidTransactionException;
 import seedu.duke.exception.TransactionNotFoundException;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -68,7 +69,7 @@ public class TransactionList {
      */
 
     //@@author jorellesee
-    public Transaction updateTransaction(String transactionId, int duration, double moneyTransacted)
+    public Transaction updateTransaction(String transactionId, int duration, BigDecimal moneyTransacted)
             throws TransactionNotFoundException, InvalidTransactionException {
         for (int i = 0; i < this.transactionList.size(); ++i) {
             Transaction tx = this.transactionList.get(i);
@@ -126,7 +127,7 @@ public class TransactionList {
     public double getTotalMoneyTransacted() {
         int totalProfit = 0;
         for (Transaction transaction : transactionList) {
-            totalProfit += transaction.getMoneyTransacted();
+            totalProfit += transaction.getMoneyTransacted().doubleValue();
         }
         return totalProfit;
     }

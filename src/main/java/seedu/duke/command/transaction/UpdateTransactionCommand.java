@@ -11,6 +11,8 @@ import seedu.duke.parser.CommandParser;
 import seedu.duke.transaction.Transaction;
 import seedu.duke.transaction.TransactionList;
 
+import java.math.BigDecimal;
+
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_DURATION_INVALID;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INSUFFICIENT_ARGUMENTS;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_NUMBER_FORMAT_INVALID;
@@ -118,8 +120,9 @@ public class UpdateTransactionCommand extends Command {
             String txId = args[0];
             int duration = Integer.parseInt(args[1]);
             int oldDuration = transactionList.getTransactionById(txId).getDuration();
-            double oldMoneyTransacted = transactionList.getTransactionById(txId).getMoneyTransacted();
-            double newMoneyTransacted = (double) duration / (double) oldDuration * oldMoneyTransacted;
+            BigDecimal oldMoneyTransacted = transactionList.getTransactionById(txId).getMoneyTransacted();
+            double newMoney = (double) duration / (double) oldDuration * oldMoneyTransacted.doubleValue();
+            BigDecimal newMoneyTransacted = BigDecimal.valueOf(newMoney);
             Transaction updatedTx = this.transactionList.updateTransaction(txId, duration, newMoneyTransacted);
             Ui.updateTransactionMessage(updatedTx);
         }

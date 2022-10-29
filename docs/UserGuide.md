@@ -52,7 +52,7 @@ ____________________________________________________________
 
 This section allows users to understand all the features that we offer, including the format, and the constraint. We also demonstrate some examples of usage and the expected outcome.
 
->**Note:**
+**PLEASE TAKE NOTE:**
 >
 >1. Upcycle commands (except ```find-item``` and ```find-user```) are case-sensitive and space-insensitive. For example, ```upcycle``` and ```Upcycle``` are different words, ```Upcycle``` and ```Upcycle ``` are the same words.
 >2. Parameters can be shuffled. For example, ```update-item /i [ITEM_ID] /p [PRICE]``` and ```update-item /p [PRICE] /i [ITEM_ID]``` are the same.
@@ -109,6 +109,12 @@ Find all unfinished transactions: find-tx /s unfinished
 Find user by keywords: find-user /k <keyword>
 Find item by keywords: find-item /k <keyword>
 Sort all items in a range: sort-items /mode <mode: hl or lh> /min <min> /max <max> /cat <categoryIndex>
+
+ADDITIONAL-DETAILS: 
+--------------------
+Please take note to add a space after delimiters!
+Please note that except for 'find-item' and 'find-user', all other commands are case-sensitive!
+Refrain from using '|' and '/' as arguments!
 ____________________________________________________________
 ```
 
@@ -416,6 +422,7 @@ ____________________________________________________________
 ```
 
 ### 3.4. Transaction-related features
+Transactions have 2 statuses: ```finished``` or ```unfinished```. This is to indicate if the item is currently being loaned or is available for loan
 #### 3.4.1. ```add-tx``` - Add a new transaction
 >Add a new transaction to the list
 
@@ -425,8 +432,12 @@ Note:
 1. The unit of duration is days
 2. Duration must be an integer, greater than 0 and less than 1461 (4 years)
 3. The format of create date is YYYY-MM-DD, and it must be before the input date
+<<<<<<< HEAD
 4. The item must be available during the period of new transaction.
 5. The moneyTransacted of transaction will only use the pricePerDay of the items at the moment of input. If the item's price is updated, it will not affect the moneyTransacted.
+=======
+4. First parameter of the transaction message shows the status of the transaction (Finished/Unfinished).
+>>>>>>> 3676a288d9a3857d86363b75a84c3d76cd4f5cab
 
 Example of usage: ```add-tx /i 3ff10798 /b bui /d 5 /c 2022-10-20```
 

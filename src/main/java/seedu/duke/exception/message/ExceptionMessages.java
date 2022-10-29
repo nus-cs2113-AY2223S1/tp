@@ -16,6 +16,8 @@ public class ExceptionMessages {
             "Contact number length must have length of 8";
     public static final String MESSAGE_CONTACT_FORMAT_INVALID =
             "Contact number should only contain digit 0-9";
+    public static final String MESSAGE_CONTACT_DUPLICATE =
+            "Contact number already exists! Please use another phone number.";
     public static final String MESSAGE_USER_LENDING = "This user is currently lending something";
     public static final String MESSAGE_USER_BORROWING =
             "This user is currently borrowing something";
@@ -23,12 +25,11 @@ public class ExceptionMessages {
     // Item-related messages
     public static final String MESSAGE_ITEM_UNAVAILABLE = "This item is currently unavailable";
     public static final String MESSAGE_ITEM_NOT_FOUND = "This item cannot be found in the list";
-    public static final String MESSAGE_SAME_OWNER = "User already has this item listed!";
+    public static final String MESSAGE_SAME_ITEM_NAME_AND_PRICE = "Item with the same price has already been listed!";
     public static final String MESSAGE_PRICE_FORMAT_INVALID = "Price is a float, check your format";
     public static final String MESSAGE_PRICE_OUT_OF_RANGE = "Price must be in range from 0 to 10000";
     public static final String MESSAGE_SORT_MODE_INVALID = "Mode of sorting is invalid";
-    public static final String MESSAGE_PRICE_BOUNDARIES_INVALID =
-            "Minimum price cannot be more than maximum price";
+    public static final String MESSAGE_PRICE_BOUNDARIES_INVALID = "Minimum price cannot be more than maximum price";
     public static final String MESSAGE_CATEGORY_INVALID =
             "Category index is invalid\nPlease use list-categories to check the index of your chosen categories";
 
@@ -47,7 +48,8 @@ public class ExceptionMessages {
             "Your item was/is unavailable during the update period (overlap with transaction: ";
 
     // Other messages
-    public static final String MESSAGE_INVALID_PARTS = "One or more of the parts is in incorrect format";
+    public static final String MESSAGE_INVALID_PARTS = "One or more of the parts is in incorrect format. "
+                                                        + "Check the command format by using the 'help' command!";
     public static final String MESSAGE_NUMBER_FORMAT_INVALID =
             "Number should only contain digit 0-9";
     public static final String MESSAGE_CATEGORY_INDEX_FORMAT_INVALID =
@@ -59,7 +61,7 @@ public class ExceptionMessages {
     public static final String MESSAGE_INSUFFICIENT_ARGUMENTS =
             "The number of arguments for this command is incorrect";
     public static final String MESSAGE_COMMAND_UNRECOGNIZABLE =
-            "This command is unrecognizable!!!\n" + "Please use help command to check";
+            "This command is unrecognizable!!!\n" + "Please use the 'help' command to check";
     public static final String MESSAGE_FILE_NOT_FOUND = "OOPS!!! I cannot find your file";
     public static final String MESSAGE_STORE_INVALID =
             "Something went wrong when storing your tasks";

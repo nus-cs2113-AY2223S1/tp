@@ -3,6 +3,7 @@ package seedu.duke.transaction;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -17,9 +18,9 @@ class TransactionTest {
     @BeforeEach
     void initializeTest() {
         transaction = new Transaction("pen", "28sd37h2", "bui", 5,
-                LocalDate.parse("2022-10-03"),3.2);
+                LocalDate.parse("2022-10-03"), new BigDecimal("3.2"));
         transactionToCompare = new Transaction("pen", "28sd37h2", "bui", 5,
-                LocalDate.parse("2022-10-05"),3.2);
+                LocalDate.parse("2022-10-05"),new BigDecimal("3.2"));
     }
 
     @Test
@@ -35,7 +36,7 @@ class TransactionTest {
     @Test
     void isFinished_notFinishedTx_expectFalse() {
         transaction = new Transaction("pen", "28sd37h2", "bui", 300,
-                LocalDate.parse("2022-10-03"), 192);
+                LocalDate.parse("2022-10-03"), new BigDecimal("192"));
         assertFalse(transaction.isFinished());
     }
 
@@ -57,21 +58,21 @@ class TransactionTest {
     @Test
     void convertTransactionToFileFormatTest() {
         String transactionId = transaction.getTxId();
-        assertEquals(transactionId + " | pen | 28sd37h2 | bui | 5 | 2022-10-03 | 3.2 | 135",
+        assertEquals(transactionId + " | pen | 28sd37h2 | bui | 5 | 2022-10-03 | 3.2 | 148",
                 transaction.convertTransactionToFileFormat());
     }
 
     @Test
     void updateDurationTest() {
         Transaction newTransaction = new Transaction(transaction.getTxId(), "pen", "28sd37h2", "bui", 300,
-                LocalDate.parse("2022-10-03"), 192);
+                LocalDate.parse("2022-10-03"), new BigDecimal("192"));
         assertEquals(newTransaction.toString(),
-                transaction.update(300, 192).toString());
+                transaction.update(300, new BigDecimal("192")).toString());
     }
 
     @Test
     void getMoneyTransacted() {
-        assertEquals(3.2, transaction.getMoneyTransacted());
+        assertEquals(new BigDecimal("3.2"), transaction.getMoneyTransacted());
     }
 
     @Test
@@ -82,14 +83,14 @@ class TransactionTest {
     @Test
     void isOverlapWithTransactionWithEquality_notOverlap_returnFalse() {
         transactionToCompare = new Transaction("pen", "28sd37h2", "bui", 5,
-                LocalDate.parse("2022-10-10"),3.2);
+                LocalDate.parse("2022-10-10"), new BigDecimal("3.2"));
         assertFalse(transaction.isOverlapWithTransactionWithEquality(transactionToCompare));
     }
 
     @Test
     void isOverlapWithTransactionWithEquality_overlapWithEquality_returnTrue() {
         transactionToCompare = new Transaction("pen", "28sd37h2", "bui", 5,
-                LocalDate.parse("2022-10-03"),3.2);
+                LocalDate.parse("2022-10-03"), new BigDecimal("3.2"));
         assertTrue(transaction.isOverlapWithTransactionWithEquality(transactionToCompare));
     }
 

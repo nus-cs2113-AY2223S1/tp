@@ -14,7 +14,7 @@ class ItemStorageTest {
     @Test
     void handleItemLine_givenItemLine_returnItemObject() throws InvalidCategoryException, StoreFailureException {
         Item item = new Item("pen", 2, 0.1, "bui");
-        String itemLine = item.getItemId() + " | pen | 0.1 | bui | 2 | 105";
+        String itemLine = item.getItemId() + " | pen | 0.1 | bui | 2 | 114";
         String[] splitItemLine = itemLine.split(" \\| ");
         assertEquals(item.toString(new TransactionList()),
                 ItemStorage.handleItemLine(splitItemLine).toString(new TransactionList()));

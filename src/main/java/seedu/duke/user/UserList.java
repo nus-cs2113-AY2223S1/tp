@@ -1,6 +1,7 @@
 package seedu.duke.user;
 
 import seedu.duke.exception.UserNotFoundException;
+import seedu.duke.transaction.Transaction;
 
 import java.util.ArrayList;
 
@@ -57,6 +58,10 @@ public class UserList {
      */
     public int getSize() {
         return userList.size();
+    }
+
+    public ArrayList<User> getUserList() {
+        return this.userList;
     }
 
     /**
