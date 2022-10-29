@@ -10,6 +10,7 @@ import static seedu.duke.Messages.MESSAGE_NOT_INTEGER_INSTANCES;
 public class CheckNotIntegerException extends ParseCheckException {
 
     private String errorDetail;
+
     public CheckNotIntegerException(String errorDetail) {
         this.errorDetail = errorDetail;
     }
