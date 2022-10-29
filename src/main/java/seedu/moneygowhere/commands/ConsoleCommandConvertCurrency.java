@@ -30,8 +30,16 @@ public class ConsoleCommandConvertCurrency extends ConsoleCommand {
         return currency;
     }
 
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
+
     public BigDecimal getRate() {
         return rate;
+    }
+
+    public void setRate(BigDecimal rate) {
+        this.rate = rate;
     }
 
     public void changeCurrency(Expense expense, CurrencyManager currencyManager) {
