@@ -18,7 +18,8 @@ public class Swap extends EditModeCommand {
         int index1 = Integer.parseInt(parsedCommand[4]) - 1;
         int index2 = Integer.parseInt(parsedCommand[5]) - 1;
         Recipe oldRecipe = recipe;
-        Ui.showMessageInline("swap " + ingredientFlag.toString() + index1 + ", " + index2 + " from: \n" + recipe.getRecipeAttributesFormatted());
+        Ui.showMessageInline("swap " + ingredientFlag.toString() + index1 + ", "
+                + index2 + " from: \n" + recipe.getRecipeAttributesFormatted());
 
         switch (ingredientFlag) {
         case INGREDIENT:

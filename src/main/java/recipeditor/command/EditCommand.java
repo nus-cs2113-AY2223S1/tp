@@ -1,6 +1,10 @@
 package recipeditor.command;
 
-import recipeditor.edit.*;
+import recipeditor.edit.EditModeCommand;
+import recipeditor.edit.Swap;
+import recipeditor.edit.Add;
+import recipeditor.edit.Change;
+import recipeditor.edit.Delete;
 import recipeditor.parser.FlagType;
 import recipeditor.recipe.Recipe;
 import recipeditor.recipe.RecipeList;
@@ -35,20 +39,20 @@ public class EditCommand extends Command {
         } else {
             EditModeCommand cmd;
             switch (commandType) {
-                case ADD:
-                    cmd = new Add(parsed, editedRecipe);
-                    break;
-                case DELETE:
-                    cmd = new Delete(parsed, editedRecipe);
-                    break;
-                case SWAP:
-                    cmd = new Swap(parsed, editedRecipe);
-                    break;
-                case CHANGE:
-                    cmd = new Change(parsed, editedRecipe);
-                    break;
-                default:
-                    return new CommandResult("Edit failed");
+            case ADD:
+                cmd = new Add(parsed, editedRecipe);
+                break;
+            case DELETE:
+                cmd = new Delete(parsed, editedRecipe);
+                break;
+            case SWAP:
+                cmd = new Swap(parsed, editedRecipe);
+                break;
+            case CHANGE:
+                cmd = new Change(parsed, editedRecipe);
+                break;
+            default:
+                return new CommandResult("Edit failed");
             }
             try {
                 editedRecipe = cmd.execute();
