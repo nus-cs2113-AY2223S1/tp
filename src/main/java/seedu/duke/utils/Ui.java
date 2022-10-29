@@ -44,6 +44,9 @@ public class Ui {
         scanner.close();
     }
 
+    public void clearUiBuffer() {
+        uiBuffer.clear();
+    }
     private String sanitizeInput(String input) {
         return input.replaceAll("[\\P{ASCII}]", "");
     }
