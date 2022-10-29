@@ -3,10 +3,10 @@ package seedu.duke.command.user;
 import seedu.duke.command.Command;
 import seedu.duke.exception.InsufficientArgumentsException;
 import seedu.duke.exception.InvalidArgumentException;
+import seedu.duke.exception.InvalidTransactionException;
 import seedu.duke.exception.UserNotFoundException;
 import seedu.duke.parser.CommandParser;
 import seedu.duke.ui.Ui;
-import seedu.duke.user.User;
 import seedu.duke.user.UserList;
 import seedu.duke.transaction.TransactionList;
 
@@ -51,7 +51,8 @@ public class ViewUserDebtCommand extends Command {
         }
     }
 
-    public boolean executeCommand() throws UserNotFoundException, InvalidArgumentException {
+    public boolean executeCommand()
+            throws UserNotFoundException, InvalidArgumentException, InvalidTransactionException {
         String userName = getArgsViewUserDebtCmd();
         if (isValidUser(userName)) {
             double totalDebt = transactionList.getBorrowTransactionsByUser(userName).getTotalMoneyTransacted();

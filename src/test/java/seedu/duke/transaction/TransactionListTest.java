@@ -2,6 +2,7 @@ package seedu.duke.transaction;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import seedu.duke.exception.InvalidTransactionException;
 import seedu.duke.exception.TransactionNotFoundException;
 
 import java.time.LocalDate;
@@ -75,7 +76,8 @@ class TransactionListTest {
     }
 
     @Test
-    void updateTransactionDuration_txCanBeFound_durationIsUpdated() throws TransactionNotFoundException {
+    void updateTransactionDuration_txCanBeFound_durationIsUpdated()
+            throws TransactionNotFoundException, InvalidTransactionException {
         transactionList.addTransaction(transaction);
         transactionList.updateTransaction(transaction.getTxId(), 300, 192);
         assertEquals(300, transactionList.getTransactionById(transaction.getTxId()).getDuration());

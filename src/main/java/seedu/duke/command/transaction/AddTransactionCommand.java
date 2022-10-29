@@ -9,6 +9,7 @@ import seedu.duke.exception.DurationInvalidException;
 import seedu.duke.exception.InsufficientArgumentsException;
 import seedu.duke.exception.InvalidArgumentException;
 import seedu.duke.exception.InvalidItemException;
+import seedu.duke.exception.InvalidTransactionException;
 import seedu.duke.exception.InvalidUserException;
 import seedu.duke.exception.ItemNotFoundException;
 import seedu.duke.exception.UserNotFoundException;
@@ -24,7 +25,6 @@ import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_DATE_FORMAT
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_DURATION_INVALID;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INSUFFICIENT_ARGUMENTS;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PARTS;
-import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_ITEM_UNAVAILABLE;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_NUMBER_FORMAT_INVALID;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_SELF_BORROWER;
 
@@ -90,14 +90,15 @@ public class AddTransactionCommand extends Command {
      *
      * @param itemId The input item id
      * @return true If that item is available
-     * @throws InvalidItemException  If the item is not available
      * @throws ItemNotFoundException If the item cannot be found
      */
-    private boolean isValidItem(String itemId) throws InvalidItemException, ItemNotFoundException {
-        if (itemList.getItemById(itemId).isAvailable(transactionList)) {
+    private boolean isValidItem(String itemId) throws ItemNotFoundException {
+        try {
+            itemList.getItemById(itemId);
             return true;
+        } catch (ItemNotFoundException e) {
+            throw new ItemNotFoundException(e.getMessage());
         }
-        throw new InvalidItemException(MESSAGE_ITEM_UNAVAILABLE);
     }
 
     /**
@@ -158,7 +159,7 @@ public class AddTransactionCommand extends Command {
     }
 
     private boolean areValidArgs(String[] args)
-            throws InvalidItemException, InvalidUserException, DateFormatInvalidException,
+            throws InvalidUserException, DateFormatInvalidException,
             ItemNotFoundException, UserNotFoundException, DurationInvalidException {
         assert args.length == 4 : "Args length is invalid";
         return isValidItem(args[0]) && isValidBorrower(args[0], args[1]) && isValidDuration(args[2])
@@ -179,21 +180,26 @@ public class AddTransactionCommand extends Command {
      */
     public boolean executeCommand() throws InvalidArgumentException, DateFormatInvalidException,
             InvalidUserException, InvalidItemException, ItemNotFoundException,
-            UserNotFoundException, DurationInvalidException {
+            UserNotFoundException, DurationInvalidException, InvalidTransactionException {
         String[] args = getArgsAddTxCmd();
         assert args.length == 4 : "Args length is invalid";
         if (areValidArgs(args)) {
-            String itemId = args[0];
-            String itemName = itemList.getItemById(args[0]).getName();
-            String borrowId = args[1];
-            int duration = Integer.parseInt(args[2]);
-            LocalDate createdAt = LocalDate.parse(args[3]);
-            double moneyTransacted = itemList.getItemById(args[0]).getPricePerDay() * (double) duration;
-            Transaction transaction =
-                    new Transaction(itemName, itemId, borrowId, duration, createdAt, moneyTransacted);
+            Transaction transaction = getTransactionFromArgs(args);
+            transactionList.checkIfListHasTransactionOfThisItemThatOverlapWithNewTransaction(transaction);
             this.transactionList.addTransaction(transaction);
             Ui.addTransactionMessage(transaction, transactionList.getSize());
         }
         return false;
+    }
+
+    private Transaction getTransactionFromArgs(String[] args) throws ItemNotFoundException {
+        assert args.length == 4 : "Args length is invalid";
+        String itemId = args[0];
+        String itemName = itemList.getItemById(args[0]).getName();
+        String borrowId = args[1];
+        int duration = Integer.parseInt(args[2]);
+        LocalDate createdAt = LocalDate.parse(args[3]);
+        double moneyTransacted = itemList.getItemById(args[0]).getPricePerDay() * (double) duration;
+        return new Transaction(itemName, itemId, borrowId, duration, createdAt, moneyTransacted);
     }
 }

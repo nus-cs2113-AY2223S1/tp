@@ -6,6 +6,7 @@ import seedu.duke.parser.DateParser;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
+//@@author bdthanh
 
 /**
  * A representation of transaction.
@@ -153,6 +154,21 @@ public class Transaction {
     //@@author bdthanh
 
     /**
+     * Checks if the new transaction overlaps with any old transactions of the same item.
+     *
+     * @param transactionToCheck The new transaction
+     * @return true if they overlap
+     */
+    public boolean isOverlapWithTransaction(Transaction transactionToCheck) {
+        return ((transactionToCheck.createdAt.isAfter(this.createdAt)
+                && transactionToCheck.getReturnDate().isBefore(this.getReturnDate()))
+                || (transactionToCheck.getReturnDate().isAfter(this.createdAt)
+                && transactionToCheck.getReturnDate().isBefore(this.getReturnDate()))
+                || (transactionToCheck.createdAt.isBefore(this.createdAt)
+                && transactionToCheck.getReturnDate().isAfter(this.createdAt)));
+    }
+
+    /**
      * Overrides toString method of Object to get string representation of Transaction.
      *
      * @return A string representation of Transaction
@@ -164,17 +180,18 @@ public class Transaction {
         String transactionId = "TxID: " + this.transactionId + " ";
         String itemName = "ItemName: " + this.itemName + " ";
         String usersId = "Borrower: " + this.borrower + " ";
+        String duration = "Duration: " + this.duration + " ";
         String moneyTransactedString = " MoneyTransacted: " + this.moneyTransacted + " ";
-
         if (!isFinished()) {
             String remainDays = " (" + ChronoUnit.DAYS.between(LocalDate.now(), getReturnDate())
                     + " day(s) left)";
             String returnDate =
                     "ReturnDate: " + DateParser.formatDateToString(returnedAt) + remainDays;
-            return transactionIcon + transactionId + itemName + itemId + usersId + returnDate + moneyTransactedString;
+            return transactionIcon + transactionId + itemName + itemId + usersId
+                    + duration + returnDate + moneyTransactedString;
         }
         String returnedDate = "ReturnedDate: " + DateParser.formatDateToString(returnedAt);
-
-        return transactionIcon + transactionId + itemName + itemId + usersId + returnedDate + moneyTransactedString;
+        return transactionIcon + transactionId + itemName + itemId + usersId
+                + duration + returnedDate + moneyTransactedString;
     }
 }
