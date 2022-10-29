@@ -26,6 +26,7 @@ public class CommandPair extends CommandPairUnpair {
 
     /**
      * Constructs CommandPair object.
+     *
      * @param commandPairDetails Parsed client and property indexes from the user's input.
      */
     public CommandPair(ArrayList<Integer> commandPairDetails) {
@@ -56,7 +57,7 @@ public class CommandPair extends CommandPairUnpair {
         }
 
         if (pairingList.hasPriceExceededBudget(client, property)) {
-            throw new BudgetExceededException();
+            throw new BudgetExceededException(client, property);
         }
 
         pairingList.addPairing(client, property);

@@ -16,6 +16,7 @@ public class CommandCheckClient extends CommandCheck {
 
     /**
      * Constructs an instance of CommandCheckProperty.
+     *
      * @param commandCheckClientDetails Parsed property index from the user's input.
      */
     public CommandCheckClient(ArrayList<Integer> commandCheckClientDetails) {

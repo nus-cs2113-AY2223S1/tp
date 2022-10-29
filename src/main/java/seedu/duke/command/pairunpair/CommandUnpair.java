@@ -22,7 +22,8 @@ public class CommandUnpair extends CommandPairUnpair {
     private int propertyIndex;
 
     /**
-     * Constructs an instance of CommandCheckProperty.
+     * Constructs an instance of CommandCheckProperty
+     *
      * @param commandUnpairDetails Parsed client and property indexes from the user's input.
      */
     public CommandUnpair(ArrayList<Integer> commandUnpairDetails) {

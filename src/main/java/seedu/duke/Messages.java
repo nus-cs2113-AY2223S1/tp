@@ -45,7 +45,7 @@ public class Messages {
             + "For client: <command> -client\n"
             + "For property: <command> -property";
 
-    public static final String MESSAGE_INVALID_INDEX = "OOPS!!! Please enter an index that appears within the "
+    public static final String MESSAGE_INVALID_INDEX = "OOPS!!! Please enter index(es) that appears within the "
             + "property list or client list";
 
     public static final String MESSAGE_NOT_INTEGER = "OOPS!! Please enter a positive integer as index\n";
@@ -145,7 +145,7 @@ public class Messages {
 
     public static final String MESSAGE_DELETE_PROPERTY_WRONG_FORMAT = "OOPS!!! Please use this format to delete "
             + "property\n"
-            + "delete -property ip/PROPERTY_INDEX";
+            + "delete -property ip/PROPERTY_INDEX\n";
 
 
     //@@author ngdeqi
@@ -158,20 +158,24 @@ public class Messages {
     public static final String MESSAGE_UNPAIR_WRONG_FORMAT = "To unpair, please follow the following format:\n"
             + "  unpair ip/PROPERTY_INDEX ic/CLIENT_INDEX\n"
             + "Example:\n"
-            + "  unpair ip/2 ic/1";
+            + "  unpair ip/2 ic/1\n";
 
 
     public static final String MESSAGE_CLIENT_ALREADY_PAIRED = "OOPS!! This client is currently renting a property, "
-            + "try pairing with another client ";
+            + "try pairing with another client.\n";
 
     public static final String MESSAGE_EXISTING_PAIR = "OOPS!! This client and this property are already paired "
-            + "together. You don't need to pair them again.";
+            + "together. You don't need to pair them again.\n";
 
     public static final String MESSAGE_BUDGET_EXCEEDED = "OOPS!! The rental price exceeds the client's budget. "
-            + "Pair unsuccessful.";
+            + "Pair unsuccessful.\n";
+
+    public static final String MESSAGE_BUDGET_CLIENT = "The client's name and budget:\n";
+
+    public static final String MESSAGE_BUDGET_PROPERTY = "The property's name and price:\n";
 
     public static final String MESSAGE_NO_EXISTING_PAIR = "OOPS!! This property is not being rented by the tenant. "
-            + "Unpair unsuccessful.";
+            + "Unpair unsuccessful.\n";
     //@@author
 
 
@@ -186,7 +190,7 @@ public class Messages {
             + "following format:\n"
             + "  check -client ic/INDEX\n"
             + "Example:\n"
-            + "  check -client ic/5";
+            + "  check -client ic/5\n";
 
     public static final String MESSAGE_CHECK_PROPERTY = "Showing check results for this property:";
 

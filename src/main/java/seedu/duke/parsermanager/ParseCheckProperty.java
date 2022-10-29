@@ -11,6 +11,9 @@ import java.util.ArrayList;
 
 import static seedu.duke.CommandStructure.CHECK_PROPERTY_FLAGS;
 
+/**
+ * Parser for check property commands.
+ */
 public class ParseCheckProperty extends Parser {
     private final String commandDescription;
 
@@ -58,7 +61,7 @@ public class ParseCheckProperty extends Parser {
                 // Convert to 0-index
                 integerDetails.add(integer - UNIT_VALUE);
             } catch (NumberFormatException e) {
-                throw new CheckNotIntegerException();
+                throw new CheckNotIntegerException(detail);
             }
         }
 

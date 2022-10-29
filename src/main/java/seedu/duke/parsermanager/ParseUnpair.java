@@ -13,6 +13,9 @@ import java.util.ArrayList;
 
 import static seedu.duke.CommandStructure.UNPAIR_FLAGS;
 
+/**
+ * Parser for unpair commmands.
+ */
 public class ParseUnpair extends Parser {
     private final String commandDescription;
 

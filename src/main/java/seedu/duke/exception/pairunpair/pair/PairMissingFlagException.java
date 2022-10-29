@@ -6,9 +6,12 @@ import java.util.ArrayList;
 import static seedu.duke.Messages.MESSAGE_MISSING_FLAG;
 import static seedu.duke.Messages.MESSAGE_PAIR_WRONG_FORMAT;
 
+/**
+ * Represents exception where the user omits flags from the pair command.
+ */
 public class PairMissingFlagException extends ParsePairException {
 
-    private final String WHITESPACE = " ";
+    private static final String WHITESPACE = " ";
     private ArrayList<String> missingFlags;
 
 

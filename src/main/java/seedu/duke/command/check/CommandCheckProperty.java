@@ -22,6 +22,7 @@ public class CommandCheckProperty extends CommandCheck {
 
     /**
      * Constructs an instance of CommandCheckProperty.
+     *
      * @param commandCheckPropertyDetails Parsed property index from the user's input.
      */
     public CommandCheckProperty(ArrayList<Integer> commandCheckPropertyDetails) {
@@ -49,7 +50,6 @@ public class CommandCheckProperty extends CommandCheck {
      * @throws CheckPropertyInvalidIndexException If the provided property index does not correspond to the index of any
      *                                            property in the propertyList.
      */
-
     protected void checkForPropertyListIndexOutOfBounds(int propertyIndex, PropertyList propertyList) throws
             CheckPropertyInvalidIndexException {
         if (propertyIndex < 0 || propertyIndex > propertyList.getCurrentListSize() - 1) {

@@ -13,6 +13,9 @@ import java.util.ArrayList;
 
 import static seedu.duke.CommandStructure.PAIR_FLAGS;
 
+/**
+ * Parser for pair commands.
+ */
 public class ParsePair extends Parser {
     private final String commandDescription;
 

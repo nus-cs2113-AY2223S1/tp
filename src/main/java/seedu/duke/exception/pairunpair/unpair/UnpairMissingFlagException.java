@@ -6,9 +6,12 @@ import java.util.ArrayList;
 import static seedu.duke.Messages.MESSAGE_MISSING_FLAG;
 import static seedu.duke.Messages.MESSAGE_UNPAIR_WRONG_FORMAT;
 
+/**
+ * Represents exception where the user omits flags for the unpair command.
+ */
 public class UnpairMissingFlagException extends ParseUnpairException {
 
-    private final String WHITESPACE = " ";
+    private static final String WHITESPACE = " ";
     private ArrayList<String> missingFlags;
 
     public UnpairMissingFlagException(ArrayList<String> missingFlags) {
@@ -18,15 +21,15 @@ public class UnpairMissingFlagException extends ParseUnpairException {
     @Override
     public String toString() {
 
-            StringBuilder missingFlagStringBuilder = new StringBuilder();
-            for (String missingFlag : missingFlags) {
-                missingFlagStringBuilder.append(missingFlag).append(WHITESPACE);
-            }
+        StringBuilder missingFlagStringBuilder = new StringBuilder();
+        for (String missingFlag : missingFlags) {
+            missingFlagStringBuilder.append(missingFlag).append(WHITESPACE);
+        }
 
-            String missingFlagsAsString = missingFlagStringBuilder.toString();
+        String missingFlagsAsString = missingFlagStringBuilder.toString();
 
-            return MESSAGE_MISSING_FLAG
-                    + missingFlagsAsString + System.lineSeparator()
-                    + MESSAGE_UNPAIR_WRONG_FORMAT;
+        return MESSAGE_MISSING_FLAG
+                + missingFlagsAsString + System.lineSeparator()
+                + MESSAGE_UNPAIR_WRONG_FORMAT;
     }
 }

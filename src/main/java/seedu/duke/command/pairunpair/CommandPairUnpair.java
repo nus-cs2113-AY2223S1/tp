@@ -31,7 +31,6 @@ public abstract class CommandPairUnpair extends Command {
      * @throws PairUnpairInvalidIndexException If the provided property index does not correspond to the index of any
      *                                         property in the propertyList.
      */
-
     protected void checkForPropertyListIndexOutOfBounds(int propertyIndex, PropertyList propertyList) throws
             PairUnpairInvalidIndexException {
         if (propertyIndex < 0 || propertyIndex > propertyList.getCurrentListSize() - 1) {

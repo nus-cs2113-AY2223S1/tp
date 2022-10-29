@@ -22,6 +22,8 @@ import static seedu.duke.CommandStructure.COMMAND_UNPAIR;
 import static seedu.duke.CommandStructure.EVERYTHING_FLAG;
 import static seedu.duke.CommandStructure.PROPERTY_FLAG;
 import static seedu.duke.CommandStructure.CLIENT_FLAG;
+import static seedu.duke.Messages.MESSAGE_CHECK_CLIENT_WRONG_FORMAT;
+import static seedu.duke.Messages.MESSAGE_CHECK_PROPERTY_WRONG_FORMAT;
 import static seedu.duke.Messages.MESSAGE_INCORRECT_LIST_DETAILS;
 import static seedu.duke.Messages.MESSAGE_MISSING_SUB_COMMAND_TYPE;
 
@@ -100,7 +102,8 @@ public class ParserManager {
             } else if (isProperty) {
                 return new ParseCheckProperty(commandDetail);
             } else {
-                throw new UndefinedSubCommandTypeException(MESSAGE_MISSING_SUB_COMMAND_TYPE);
+                throw new UndefinedSubCommandTypeException(MESSAGE_CHECK_CLIENT_WRONG_FORMAT
+                        + MESSAGE_CHECK_PROPERTY_WRONG_FORMAT);
             }
         case COMMAND_LIST:
             ArrayList<String> listCommandTypeAndFlags = getListCommandType(commandDetail);
