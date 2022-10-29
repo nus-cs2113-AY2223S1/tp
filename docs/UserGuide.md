@@ -1,6 +1,39 @@
 # RecipEditor
 
-RecipEditor is a hybrid CLI-GUI application that allows you to manage your recipes
+## **Introducing _RecipEditor_**
+<hr />
+
+_RecipEditor_ is a hybrid CLI-GUI application that allows you to manage your recipes
+
+_RecipEditor_ can be used across all operating systems such as Windows, Mac OS X, Linux and Unix.
+It is optimised for use via a complement of Command-Line Interface (CLI) and Graphical user interface (GUI).
+Both the CLI and GUI are made to be as simple as possible so that it would be especially beneficial for
+fast typers who needs a platform to keep track of the countless recipes.
+
+If you type fast, and you need an easy and quick way to record your calories, _RecipEditor_ is the app for you! 💯
+
+## **About This User Guide**
+<hr />
+This guide explains how you can use all the features available on _RecipEditor_ and maximise your user experience.
+
+To preface, we do expect users to have a basic level of comfort with using computers,
+and it would be even better if you are familiar with CLI to be using _RecipEditor_.
+However, if you do not, do not worry as we have provided a comprehensive set of instructions to
+[get started](#2-quick-start)!
+
+Throughout this guide, we will be using some special formatting and symbols to bring your attention to certain aspects:
+
+| Formatting | Meaning                                                                                                                    |
+|------------|----------------------------------------------------------------------------------------------------------------------------|
+| _italics_  | Text that has been _italicised_ indicates that it is a term specific to _RecipEditor_.                                     |
+| **bold**   | Text that has been **bolded** indicates that it is important.                                                              |
+| `abc`      | Text with a `highlight` indicates that it is code that can be typed by you into the command line or displayed by _Fitbot_. |
+| ℹ️         | This symbol indicates important information.                                                                               |
+| ⏫          | This symbol indicates a shortcut to the content page. You may click it to quickly navigate back to the content page.       |
+
+
+## **Content Page**
+<hr />
 
 - [Quick Start](#quick-start)
 - [Features](#features)
@@ -34,7 +67,7 @@ RecipEditor is a hybrid CLI-GUI application that allows you to manage your recip
 
 ### GUI Editor
 
-- A simple GUI text editor will open and loaded with a template file
+- A simple GUI text editor will open and loaded with a template file as shown below:
 
 ```
 # TITLE 
@@ -51,21 +84,22 @@ Example Description
 ```
 
 <p align="center" width="100%">
-  <img width="80%" src="images/TextEditorWithTemplate.png"/>
+  <img width="70%" src="images/TextEditorWithTemplate.png"/>
 </p>
 
-- Edit the corresponding field according to the following convention
-    - `# TITLE`: Only the first line will be accepted
-    - `# DESCRIPTION`: Multiple lines are supported
-    - `# INGREDIENTS`
+- Edit the corresponding field according to the following convention:
+    - `# TITLE`: Only one line (the line below '_# TITLE_') will be accepted
+    - `# DESCRIPTION`: Multiple lines** are supported
+    - `# INGREDIENTS`:
         - FORMAT: `INDEX. INGREDIENT_NAME / AMOUNT / UNIT`
-        - EXAMPLE: `1. Egg / 2 / pieces`
-        - EXAMPLE: `2. Flour / 100 / gram`
+            - EXAMPLE:
+              <br /> `1. Egg / 2 / pieces`
+              <br /> `2. Flour / 100 / gram`
     - `# STEPS`
-        - FORMAT: `INDEX. STEP DESCRIPTION`
-        - EXAMPLE: `1. Crack the eggs and stir`
-
-- Template Recipe
+        - FORMAT: `INDEX. STEP_DESCRIPTION`
+            - EXAMPLE:
+              <br /> `1. Crack the eggs and stir`
+              <br /> `2. Crack the eggs and stir`
 
 ## Edit Command
 
@@ -76,18 +110,18 @@ Example Description
 
 ## Delete Command
 
-- Delete existing recipe with given INDEX
-- FORMAT: `/delete INDEX`
-- EXAMPLE: `/delete 1`
+- Delete existing recipe with given recipe title (case insensitive).
+- FORMAT: `/delete RECIPE_TITLE`
+- EXAMPLE: `/delete carbonara`
 
 ## List Command
 
-- List the existing recipes in the current running program
+- List the existing recipes previously added
 - FORMAT: `/list`
 
 ## View Command
 
-- View the recipe with the index as shown in the list
+- View the full details of the specified recipe according to the index shown in the list
 - FORMAT: `/view INDEX`
 - EXAMPLE: `/view 1`
 
@@ -96,14 +130,10 @@ Example Description
 ### Find Recipe with Title
 
 - Find the recipe with title that contains USER_INPUT_STRING
-- FORMAT: `/find -t USER_INPUT_STRING`
-- EXAMPLE: `/find -t Cake`
-
-### Find Recipe with Ingredient
-
-- Find the recipe with ingredient that contains USER_INPUT_STRING
-- FORMAT: `/find -i USER_INPUT_STRING`
-- EXAMPLE: `/find -i egg`
+- User can input recipe title or ingredient name (case insensitive).
+- Program will return relevant recipe title.
+- FORMAT: `/find USER_INPUT_STRING`
+- EXAMPLE: `/find cake`
 
 ## Help Command
 
