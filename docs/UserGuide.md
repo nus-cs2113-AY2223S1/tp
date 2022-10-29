@@ -1,88 +1,160 @@
-# User Guide
+# RecipEditor
 
-## Introduction
+RecipEditor is a hybrid CLI-GUI application that allows you to manage your recipes
 
-A command line / GUI application that allows you to manage your recipes 
+- [Quick Start](#quick-start)
+- [Features](#features)
+    - [Add Command](#add-command)
+    - [Edit Command](#edit-command)
+    - [Delete Command](#delete-command)
+    - [List Command](#list-command)
+    - [View Command](#view-command)
+    - [Find Command](#find-command)
+    - [Help Command](#help-command)
+    - [Exit Command](#exit-command)
+    - [Storage](#storage)
+        - [Editing Data File](#editing-data-file)
+        - [Parsing Data File](#parsing-data-file)
+- [FAQ](#faq)
+- [Command Summary](#command-summary)
 
-## Quick Start
-
-{Give steps to get started quickly}
+# Quick Start
 
 1. Ensure that you have Java 11 or above installed.
-1. Down the latest version of `RecipEditor` from [here](http://link.to/duke).
+2. Down the latest version of `RecipEditor` from [here]([https://github.com/AY2223S1-CS2113-T18-2/tp/releases]).
+3. Go to the directory of the `RecipEditor.jar`
+4. Use command line to start the program `java -jar RecipEditor.jar`
 
-## Features 
+# Features
 
-{Give detailed description of each feature}
+## Add Command
 
-### Adding recipe: `/add`
+- Add new recipe to the model
+- FORMAT: `/add`
 
-Adds a new recipe to the list.
+### GUI Editor
 
-Format: `todo n/TODO_NAME d/DEADLINE`
+- A simple GUI text editor will open and loaded with a template file
 
-* The `DEADLINE` can be in a natural language format.
-* The `TODO_NAME` cannot contain punctuation.
+```
+# TITLE 
+Example Title 
 
-Example of usage:
+# DESCRIPTION
+Example Description
 
-`todo n/Write the rest of the User Guide d/next week`
+# INGREDIENTS ingredient_name / amount / unit
+1. Example ingredient / 1.2 / example unit 
 
-`todo n/Refactor the User Guide to remove passive voice d/13/04/2020`
+# STEPS 
+1. Example step 
+```
 
-### List all recipes: `/list`
+<p align="center" width="100%">
+  <img width="80%" src="images/TextEditorWithTemplate.png"/>
+</p>
 
-Lists all recipe.
+- Edit the corresponding field according to the following convention
+    - `# TITLE`: Only the first line will be accepted
+    - `# DESCRIPTION`: Multiple lines are supported
+    - `# INGREDIENTS`
+        - FORMAT: `INDEX. INGREDIENT_NAME / AMOUNT / UNIT`
+        - EXAMPLE: `1. Egg / 2 / pieces`
+        - EXAMPLE: `2. Flour / 100 / gram`
+    - `# STEPS`
+        - FORMAT: `INDEX. STEP DESCRIPTION`
+        - EXAMPLE: `1. Crack the eggs and stir`
 
-Format: `/list`
+- Template Recipe
 
-### Delete recipes: `/delete`
+## Edit Command
 
-### Edit recipes: `/edit`
+- Edit existing recipe with given INDEX
+- FORMAT: `/edit INDEX`
+- EXAMPLE: `/edit 1`
+- The GUI Editor workflow is similar to [GUI Editor](#gui-editor)
 
-Edits an existing recipe from the list.
+## Delete Command
 
-Format: `/edit [RECIPE_NAME,RECIPE_INDEX]`
+- Delete existing recipe with given INDEX
+- FORMAT: `/delete INDEX`
+- EXAMPLE: `/delete 1`
 
-CLI Mode: `[/add,/del,/swap,/change,/view,/done] [-t,-d,-i,-s] [index1] ...`
+## List Command
 
-* `-t` flag changes the title
-* `-d` flag changes the description
-* `-i` flag changes the ingredients
-* `-s` flag changes the steps
+- List the existing recipes in the current running program
+- FORMAT: `/list`
 
-Example of usage:
+## View Command
 
-`/edit fried rice`
-`/change -i 1`
-`rice / 100 / g`
+- View the recipe with the index as shown in the list
+- FORMAT: `/view INDEX`
+- EXAMPLE: `/view 1`
 
-`/edit 5`
-`/swap -s 4 7`
+## Find Command
 
-### View recipes: `/view`
+### Find Recipe with Title
 
-Views a recipe.
+- Find the recipe with title that contains USER_INPUT_STRING
+- FORMAT: `/find -t USER_INPUT_STRING`
+- EXAMPLE: `/find -t Cake`
 
-Format: `/view [index]`
+### Find Recipe with Ingredient
 
-Example of usage:
+- Find the recipe with ingredient that contains USER_INPUT_STRING
+- FORMAT: `/find -i USER_INPUT_STRING`
+- EXAMPLE: `/find -i egg`
 
-`/view 1`
+## Help Command
 
-### Find recipes: `/find`
+- Show the available commands
+- FORMAT: `/help`
 
-### Exit program: `/exit`
+## Exit Command
 
+- Exit the program
+- FORMAT: `/exit`
 
-## FAQ
+## Storage
 
-**Q**: How do I transfer my data to another computer? 
+- There are 2 types of data files
+    - **Overall File (OF)**: keep track of the number and the title of the recipes
+    - **Individual Recipe File (IRF)**: each recipe is saved as an individual file
+- These files are important at the start of the program, when data is loaded
 
-**A**: {your answer here}
+### Editing Data File
 
-## Command Summary
+- After `/add`
+    - New IRF is saved
+    - New Recipe Title is appended to OF
+- After `/edit INDEX`
+    - Update existing IRF at INDEX
+    - Update OF (change Title)
+- After `/delete INDEX`
+    - Delete existing IRF at INDEX
+    - Update OF (delete)
 
-{Give a 'cheat sheet' of commands here}
+### Parsing Data File
 
-* Add todo `todo n/TODO_NAME d/DEADLINE`
+- If user tempered with the data files, these are the potential problems encountered when the program starts and reads
+  the data
+    - Mismatch between IRF Title and OF Title
+        - Delete IRF
+    - IRF content cannot be parsed
+        - Delete IRF
+- New OF File is generated from the model contains the valid recipes loaded from IRFs
+
+# FAQ
+
+# Command Summary
+
+| Command | Action                      | Format                | Example         |
+|---------|-----------------------------|-----------------------|-----------------|
+| add     | Add new recipe              | `/add`                | `/add`          |
+| edit    | Edit recipe at INDEX        | `/edit INDEX`         | `/edit 1`       |
+| list    | List all recipes            | `/list`               | `/list`         |
+| view    | View recipe at INDEX        | `/view INDEX`         | `/view 1`       |
+| find    | Find recipe with Title      | `/find -t Title`      | `/find -t Cake` |
+| find    | Find recipe with Ingredient | `/find -i Ingredient` | `/find -t egg`  |
+| help    | Show available commands     | `/help`               | `/help`         |
+| exit    | Exit the program            | `/exit`               | `/exit`         |
