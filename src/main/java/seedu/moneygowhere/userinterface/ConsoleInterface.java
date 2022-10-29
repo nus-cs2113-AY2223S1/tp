@@ -1,6 +1,7 @@
 package seedu.moneygowhere.userinterface;
 
 import seedu.moneygowhere.apis.CurrencyApi;
+import seedu.moneygowhere.apis.CurrencyApiManager;
 import seedu.moneygowhere.commands.ConsoleCommand;
 import seedu.moneygowhere.commands.ConsoleCommandAddExpense;
 import seedu.moneygowhere.commands.ConsoleCommandAddIncome;
@@ -88,6 +89,7 @@ public class ConsoleInterface {
     private CurrencyManager currencyManager;
 
     private LocalStorage localStorage;
+    private CurrencyApiManager currencyApiManager;
 
     //@@author xzynos
 
@@ -114,6 +116,7 @@ public class ConsoleInterface {
         currencyManager = new CurrencyManager();
 
         localStorage = new LocalStorage();
+        currencyApiManager = new CurrencyApiManager();
     }
 
 
@@ -1002,7 +1005,7 @@ public class ConsoleInterface {
         recurringPaymentManager.setRecurringPayments(localStorage.getSavedRecurringPayments());
         targetManager.setTargets(localStorage.getSavedTargets());
         incomeManager.setIncomes(localStorage.getSavedIncomes());
-        CurrencyApi.getCurrencyApi(currencyManager);
+        currencyApiManager.getCurrencyApi(currencyManager);
 
         printBlankLine();
 
