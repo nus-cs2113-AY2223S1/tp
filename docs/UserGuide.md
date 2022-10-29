@@ -79,7 +79,7 @@ General illustrations about the text format used for the commands in this guide 
    1. e.g. `help [o/detailed]` can be used as `help o/detailed` or `help.
    2. Note that the parameter `detailed` is written in lower case here, which means, only the exact wording is accepted.
 
-4. Each parameter is separated by a space. Users are not allowed to use spaces in their parameter. 
+4. Each parameter is separated by a space. Users are not allowed to use spaces in their parameter, *except for `find` command*.
 
 _Written by: Chia Thin Hong_
 
