@@ -140,7 +140,7 @@ public class UserList {
      */
     public String convertUserListToFileFormat() {
         StringBuilder formattedString = new StringBuilder();
-        int checkSum = userList.size() * 3;
+        int checkSum = userList.size();
         formattedString.append(checkSum).append('\n');
         for (User user : userList) {
             formattedString.append(user.convertItemToFileFormat()).append('\n');

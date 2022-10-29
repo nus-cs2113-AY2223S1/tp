@@ -56,7 +56,7 @@ This section allows users to understand all the features that we offer, includin
 >
 >1. Upcycle commands (except ```find-item``` and ```find-user```) are case-sensitive and space-insensitive. For example, ```upcycle``` and ```Upcycle``` are different words, ```Upcycle``` and ```Upcycle ``` are the same words.
 >2. Parameters can be shuffled. For example, ```update-item /i [ITEM_ID] /p [PRICE]``` and ```update-item /p [PRICE] /i [ITEM_ID]``` are the same.
->3. Phrases in ```[CAPITAL_WORDS]``` are the parameters for you to input. And, if those phrases are **bold**, then they are optional
+>3. Phrases in ```[CAPITAL_WORDS]``` are the parameters for you to input.
 >4. Argument value cannot contain ```\``` or ```|```.
 >5. You must put a space between delimiter and value. For example, ```/nbuiducthanh``` is an error, but ```/n buiducthanh``` is correct
 
@@ -615,38 +615,42 @@ ____________________________________________________________
 
 ## 4. Command Summary
 
-| **Features**                       | **Format**                                                                                          |
-|------------------------------------|-----------------------------------------------------------------------------------------------------|
-| __*User-related features*__        |                                                                                                     |
-| Add a new user                     | add-user /n [USERNAME] /a [AGE] /c [CONTACT_NUMBER]                                                 |
-| Remove a user                      | remove-user /u [USERNAME]                                                                           |
-| View a user                        | view-user /u [USERNAME]                                                                             |
-| List all users                     | list-users                                                                                          |
-| Find users by keyword              | find-user /k [KEYWORD]                                                                              |
-| __*Item-related features*__        |                                                                                                     |
-| Add a new item                     | add-item /n [ITEM_NAME] /c [CATEGORY_INDEX] /p [PRICE] /o [USERNAME]                                |
-| Remove an item                     | remove-item /i [ITEM_ID]                                                                            |
-| List all items                     | list-items                                                                                          |
-| View an item                       | view-item /i [ITEM_ID]                                                                              |
-| List categories                    | list-categories                                                                                     |
-| Update an item                     | update-item /i [ITEM_ID] /p [NEW_PRICE]                                                             |
-| Sort and filter list of items      | sort-items /mode [MODE_OF_SORTING] /min [MINIMUM_PRICE] /max [MAXIMUM_PRICE] /cat [CATEGORY_NUMBER] |
-| Find items by keyword              | find-item /k [KEYWORD]                                                                              |
-| __*Transaction-related features*__ |                                                                                                     |
-| Add a new transaction              | add-tx /i [ITEM_ID] /b [BORROWER_NAME] /d [DURATION] /c [CREATED_DATE]                              |
-| List all users                     | list-tx                                                                                             |
-| Remove a transaction               | remove-tx /t [TRANSACTION_ID]                                                                       |
-| View a transaction                 | view-tx /t [TRANSACTION_ID]                                                                         |
-| Update a transaction               | update-tx /t [TRANSACTION_ID] /d [NEW_DURATION]                                                     |
-| __*Others*__                       |                                                                                                     |
-| Get help                           | help                                                                                                |
-| Exit program                       | bye                                                                                                 |
+| **Features**                       | **Format**                                                                                                 |
+|------------------------------------|------------------------------------------------------------------------------------------------------------|
+| __*User-related features*__        |                                                                                                            |
+| Add a new user                     | add-user /n [USERNAME] /a [AGE] /c [CONTACT_NUMBER]                                                        |
+| Remove a user                      | remove-user /u [USERNAME]                                                                                  |
+| View a user                        | view-user /u [USERNAME]                                                                                    |
+| List all users                     | list-users                                                                                                 |
+| Find users by keyword              | find-user /k [KEYWORD]                                                                                     |
+| __*Item-related features*__        |                                                                                                            |
+| Add a new item                     | add-item /n [ITEM_NAME] /c [CATEGORY_INDEX] /p [PRICE] /o [USERNAME]                                       |
+| Remove an item                     | remove-item /i [ITEM_ID]                                                                                   |
+| List all items                     | list-items                                                                                                 |
+| View an item                       | view-item /i [ITEM_ID]                                                                                     |
+| List categories                    | list-categories                                                                                            |
+| Update an item                     | update-item /i [ITEM_ID] /p [NEW_PRICE]                                                                    |
+| Sort and filter list of items      | sort-items <u>/mode [MODE_OF_SORTING] /min [MINIMUM_PRICE] /max [MAXIMUM_PRICE] /cat [CATEGORY_NUMBER]</u> |
+| Find items by keyword              | find-item /k [KEYWORD]                                                                                     |
+| __*Transaction-related features*__ |                                                                                                            |
+| Add a new transaction              | add-tx /i [ITEM_ID] /b [BORROWER_NAME] /d [DURATION] /c [CREATED_DATE]                                     |
+| List all users                     | list-tx                                                                                                    |
+| Remove a transaction               | remove-tx /t [TRANSACTION_ID]                                                                              |
+| View a transaction                 | view-tx /t [TRANSACTION_ID]                                                                                |
+| Update a transaction               | update-tx /t [TRANSACTION_ID] /d [NEW_DURATION]                                                            |
+| __*Others*__                       |                                                                                                            |
+| Get help                           | help                                                                                                       |
+| Exit program                       | bye                                                                                                        |
+
+>**Note:**
+> 
+> 1. If phrases are <u>underlined</u>, they are optional arguments for that commands
 
 ## 5. Frequently Asked Questions
 
 How do I transfer my data to another computer?
 
->On your other computer, download your ```Upcycle.jar``` file following the instructions in [Quick Start](#2-quick-start). Then, you copy the \data\ folder and paste into your folder for Upcycle on your new computer. That's it, now you can run our app with your previous data on another computer.
+>On your other computer, download your ```Upcycle.jar``` file following the instructions in [Quick Start](#2-quick-start). Then, you copy the `data` folder and paste into your folder for Upcycle on your new computer. That's it, now you can run our app with your previous data on another computer.
 
 If Duke crashes, is my data saved?
 
@@ -655,7 +659,9 @@ If Duke crashes, is my data saved?
 What will happen if I illegally modify data in the files?
 
 > Duke will detect if the data is modified or not, we have two checksum to detect changes in each entry. If yes, it would give you a chance to try to fix the data in the files, but they would not able
-> to use the app until Duke detect your data is fixed. If you cannot fix it, then you have to delete entire ```data``` files .However, this also means that your previous data cannot be recovered.
+> to use the app until Duke detect your data is fixed. If you cannot fix it, then you have to delete entire ```data``` folder .However, this also means that your previous data cannot be recovered.
 > Please DO NOT EDIT your data files, otherwise, you might have to input all over again.
 > 
-> Note: Duke is designed not to be able to run with corrupted data file, not Duke crashes
+> Note: 
+> - Duke is designed not to be able to run with corrupted data file, not Duke crashes
+> - You are allowed to manipulate data by editing the files, but you do it at your own risk. It can potentially cause unexpected behaviours and loss of data.

@@ -123,7 +123,7 @@ public class TransactionStorage extends Storage {
 
     private static void checkCheckSumWhole(ArrayList<Transaction> transactionList, int checkSum)
             throws StoreFailureException {
-        if (transactionList.size() != checkSum / 3) {
+        if (transactionList.size() != checkSum) {
             throw new StoreFailureException(MESSAGE_TRANSACTION_STORAGE_ILLEGALLY_MODIFIED + MESSAGE_TO_FIX_FILES);
         }
     }

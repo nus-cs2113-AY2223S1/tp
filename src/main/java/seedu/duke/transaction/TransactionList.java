@@ -203,7 +203,7 @@ public class TransactionList {
      */
     public String convertTransactionListToFileFormat() {
         StringBuilder formattedString = new StringBuilder();
-        int checkSum = transactionList.size() * 3;
+        int checkSum = transactionList.size();
         formattedString.append(checkSum).append('\n');
         for (Transaction transaction : transactionList) {
             formattedString.append(transaction.convertTransactionToFileFormat()).append('\n');
