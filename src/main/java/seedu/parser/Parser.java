@@ -89,7 +89,7 @@ public class Parser {
             }
             return prepareUnfavourite(arguments);
         case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
+            return prepareHelp(arguments);
         default:
             return new InvalidCommand("Invalid Command");
         }
@@ -184,6 +184,17 @@ public class Parser {
                 return new UpdateCommand(api, carparkList);
             }
             throw new UnneededArgumentsException("update");
+        } catch (UnneededArgumentsException e) {
+            return new InvalidCommand(e.getMessage());
+        }
+    }
+
+    private Command prepareHelp(String arguments) {
+        try {
+            if (arguments.trim().isEmpty()) {
+                return new HelpCommand();
+            }
+            throw new UnneededArgumentsException("help");
         } catch (UnneededArgumentsException e) {
             return new InvalidCommand(e.getMessage());
         }
