@@ -59,11 +59,11 @@ class TransactionTest {
                 transaction.convertTransactionToFileFormat());
     }
 
-        //    @Test
-        //    void updateDurationTest() {
-        //        Transaction newTransaction = new Transaction(transaction.getTxId(), "pen", "28sd37h2", "bui", 300,
-        //                LocalDate.parse("2022-10-03"), 192);
-        //        assertEquals(newTransaction.toString(),
-        //                transaction.update(300, 192));
+    //    @Test
+    //    void updateDurationTest() {
+    //        Transaction newTransaction = new Transaction(transaction.getTxId(), "pen", "28sd37h2", "bui", 300,
+    //                LocalDate.parse("2022-10-03"), 192);
+    //        assertEquals(newTransaction.toString(),
+    //                transaction.update(300, 192));
     //      }
 }
