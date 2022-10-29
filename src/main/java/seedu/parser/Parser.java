@@ -28,6 +28,8 @@ import seedu.parser.search.Sentence;
 public class Parser {
     public static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
     private static final String EMPTY_RESPONSE_HEADER = "Empty argument. Valid command(s): \n";
+    private static final String INVALID_NUMBER_OF_ARGS_HEADER = "This command only takes exactly %s argument(s). Valid "
+        + "command(s): \n";
 
     private CarparkList carparkList;
     private Api api;
@@ -51,44 +53,53 @@ public class Parser {
         }
 
         final String commandWord = matcher.group("commandWord");
-        final String arguments = matcher.group("arguments");
+        final String arguments = matcher.group("arguments").trim();
 
         switch (commandWord) {
         case AuthCommand.COMMAND_WORD:
-            if (arguments.trim().isEmpty()) {
+            if (arguments.isEmpty()) {
                 return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.AUTH_FORMAT);
+            } else if (numberOfArguments(arguments) != AuthCommand.NUMBER_OF_ARGUMENTS) {
+                return new InvalidCommand(String.format(INVALID_NUMBER_OF_ARGS_HEADER,
+                    AuthCommand.NUMBER_OF_ARGUMENTS) + CommonData.FAVOURITE_FORMAT);
             }
             return prepareAuth(arguments);
         case ExitCommand.COMMAND_WORD:
             return prepareExit(arguments);
         case FavouriteCommand.COMMAND_WORD:
-            if (arguments.trim().isEmpty()) {
+            if (arguments.isEmpty()) {
                 return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.FAVOURITE_FORMAT);
+            } else if (numberOfArguments(arguments) != FavouriteCommand.NUMBER_OF_ARGUMENTS) {
+                return new InvalidCommand(String.format(INVALID_NUMBER_OF_ARGS_HEADER,
+                    FavouriteCommand.NUMBER_OF_ARGUMENTS) + CommonData.FAVOURITE_FORMAT);
             }
             return prepareFavourite(arguments);
         case FindCommand.COMMAND_WORD:
-            if (arguments.trim().isEmpty()) {
+            if (arguments.isEmpty()) {
                 return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.FIND_FORMAT);
+            } else if (numberOfArguments(arguments) != FindCommand.NUMBER_OF_ARGUMENTS) {
+                return new InvalidCommand(String.format(INVALID_NUMBER_OF_ARGS_HEADER,
+                    FindCommand.NUMBER_OF_ARGUMENTS) + CommonData.FIND_FORMAT);
             }
             return prepareFind(arguments);
         case ListCommand.COMMAND_WORD:
             return prepareList(arguments);
         case FilterCommand.COMMAND_WORD:
-            if (arguments.trim().isEmpty()) {
+            if (arguments.isEmpty()) {
                 return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.FILTER_FORMAT);
             }
             return prepareFilter(arguments);
         case UpdateCommand.COMMAND_WORD:
             return prepareUpdate(arguments);
         case UnfavouriteCommand.COMMAND_WORD:
-            if (arguments.trim().isEmpty()) {
+            if (arguments.isEmpty()) {
                 return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.UNFAVOURITE_FORMAT);
             }
             return prepareUnfavourite(arguments);
         case HelpCommand.COMMAND_WORD:
             return prepareHelp(arguments);
         default:
-            return new InvalidCommand("Invalid Command");
+            return new InvalidCommand("Invalid Command. ");
         }
     }
 
@@ -216,14 +227,14 @@ public class Parser {
     }
 
     /**
-     * Check number of words in string and see if there are arguments.
+     * Returns number of arguments separated by a space.
      *
      * @param input input string to check
-     * @return If arguments are present, return true. If not, return false
+     * @return return the number of space-separated words
      */
-    public boolean hasCommandArguments(String input) {
+    public int numberOfArguments(String input) {
         String[] words = input.trim().split("\\s+");
-        return words.length > 1;
+        return words.length;
     }
 
     public static String[] splitCommandArgument(String input) {
