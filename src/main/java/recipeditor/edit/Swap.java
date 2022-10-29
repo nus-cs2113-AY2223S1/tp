@@ -15,19 +15,20 @@ public class Swap extends EditModeCommand {
 
     @Override
     public Recipe execute() throws InvalidFlagException {
-        int index1 = Integer.parseInt(parsedCommand[2]) - 1;
-        int index2 = Integer.parseInt(parsedCommand[3]) - 1;
+        int index1 = Integer.parseInt(parsedCommand[4]) - 1;
+        int index2 = Integer.parseInt(parsedCommand[5]) - 1;
         Recipe oldRecipe = recipe;
+        Ui.showMessageInline("swap " + ingredientFlag.toString() + index1 + ", "
+                + index2 + " from: \n" + recipe.getRecipeAttributesFormatted());
 
-        switch (flag) {
+        switch (ingredientFlag) {
         case INGREDIENT:
             try {
                 recipe.swapIngredients(index1, index2);
                 message = showRecipeChanges(recipe, oldRecipe);
                 return recipe;
             } catch (Exception e) {
-                throw new IndexOutOfBoundsException(
-                        "Index out of bound of number of ingredients.");
+                throw new IndexOutOfBoundsException("Index out of bound of number of ingredients.");
             }
         case STEP:
             try {
@@ -35,8 +36,7 @@ public class Swap extends EditModeCommand {
                 message = showRecipeChanges(recipe, oldRecipe);
                 return recipe;
             } catch (Exception e) {
-                throw new IndexOutOfBoundsException(
-                        "Index out of bound of number of steps.");
+                throw new IndexOutOfBoundsException("Index out of bound of number of steps.");
             }
         default:
             throw new InvalidFlagException();

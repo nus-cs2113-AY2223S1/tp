@@ -143,11 +143,31 @@ public class Parser {
             try {
                 index = Integer.parseInt(parsed[1]) - 1;
             } catch (NumberFormatException n) {
-                index = RecipeList.getRecipeIndexFromTitle(parsed[1]);
+                return new InvalidCommand();
             }
-            EditMode edit = new EditMode();
-            edit.enterEditMode(index);
-            return new EditCommand(edit.exitEditMode(), index, edit.getEditedRecipe());
+            if (parsed.length == 2) {
+                /**
+                 * PLACE GUI HERE
+                 */
+                EditMode edit = new EditMode();
+                edit.enterEditMode(index);
+                return new EditCommand(edit.exitEditMode(), index, edit.getEditedRecipe());
+                /**
+                 * PLACE GUI HERE
+                 */
+            } else {
+                Recipe originalRecipe = RecipeList.getRecipe(index);
+                Recipe editedRecipe = new Recipe(originalRecipe.getTitle(), originalRecipe.getDescription());
+
+                editedRecipe.addIngredients(originalRecipe.getIngredients());
+                editedRecipe.addSteps(originalRecipe.getSteps());
+
+                FlagType[] flags = FlagParser.getFlags(parsed);
+                if (flags == null) {
+                    return new InvalidCommand();
+                }
+                return new EditCommand(flags[0], parsed, index, editedRecipe);
+            }
         }
         return new InvalidCommand();
     }
