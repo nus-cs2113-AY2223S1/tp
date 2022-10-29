@@ -150,13 +150,23 @@ public class Parser {
 
     //@@author redders7
     public void addMedia(String[] fields, Integer spacingType) {
-        String title = fields[1].substring(spacingType);
-        double rating = Double.parseDouble(fields[2].substring(ratingSpacing));
-        String date = fields[3].substring(dateSpacing);
-        String genre = fields[4].substring(genreSpacing);
+        String title;
+        double rating;
+        String date;
+        String genre;
         Media toAdd;
-
-        String[] dateFields = date.split("-");
+        String[] dateFields;
+        try {
+            title = fields[1].substring(spacingType);
+            rating = Double.parseDouble(fields[2].substring(ratingSpacing));
+            date = fields[3].substring(dateSpacing);
+            dateFields = date.split("-");
+            genre = fields[4].substring(genreSpacing);
+        } catch (IndexOutOfBoundsException | IllegalArgumentException e) {
+            logger.log(Level.WARNING, "\n\tAdd command failed");
+            Ui.print("Ensure that input format and number of arguments is correct.");
+            return;
+        }
         try {
             if (!isValidDate(dateFields)) {
                 throw new Exception();
@@ -173,7 +183,8 @@ public class Parser {
             Ui.print(output);
             logger.log(Level.INFO, "\n\tAdd command executed");
         } catch (Exception e) {
-            System.out.println("Invalid date format");
+            logger.log(Level.WARNING, "\n\tAdd command failed");
+            Ui.print("Invalid date format");
         }
     }
 
@@ -197,16 +208,24 @@ public class Parser {
     public void executeAdd(String userInput) {
         String[] reviewFields = userInput.split("/");
         try {
+            //checks the number of / instances to ensure that user does not add extra / which messes up parsing
+            int slashInstances = userInput.length() - userInput.replace("/", "").length();
             if (userInput.contains(movieKeyword)) {
+                if (slashInstances != 4) {
+                    throw new DukeException();
+                }
                 addMedia(reviewFields, movieSpacing);
             } else if (userInput.contains(tvKeyword)) {
+                if (slashInstances != 5) {
+                    throw new DukeException();
+                }
                 addMedia(reviewFields, tvSpacing);
             } else {
                 throw new DukeException();
             }
         } catch (DukeException e) {
             logger.log(Level.WARNING, "\n\tAdd command failed");
-            System.out.println("\n" + e.getMessage());
+            Ui.print("Ensure that input format and number of arguments is correct.");
         }
     }
 
