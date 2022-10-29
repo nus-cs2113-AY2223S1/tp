@@ -1,6 +1,6 @@
-//@@author wilsonngja
 package seedu.duke.parsermanager;
 
+//@@author wilsonngja
 import seedu.duke.command.Command;
 import seedu.duke.command.CommandFindClient;
 import seedu.duke.exception.DukeException;

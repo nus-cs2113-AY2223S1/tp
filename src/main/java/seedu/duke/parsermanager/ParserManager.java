@@ -1,6 +1,6 @@
-//@@author wilsonngja
 package seedu.duke.parsermanager;
 
+//@@author wilsonngja
 import seedu.duke.ClientList;
 import seedu.duke.PairingList;
 import seedu.duke.PropertyList;

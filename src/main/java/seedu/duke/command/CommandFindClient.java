@@ -1,6 +1,6 @@
-//@@author wilsonngja
 package seedu.duke.command;
 
+//@@author wilsonngja
 import seedu.duke.Client;
 import seedu.duke.ClientList;
 import seedu.duke.PairingList;
