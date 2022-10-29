@@ -293,7 +293,7 @@ ____________________________________________________________________________
 
 Example Input:
 ```
-/view TIMETABLESE
+/view TIMETABLES
 ```
 
 Expected Output:
