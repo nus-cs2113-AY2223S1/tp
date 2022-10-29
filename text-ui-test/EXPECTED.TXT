@@ -108,14 +108,9 @@ Timetable imported to YAMOM!
 Sem [1] >> --------------------------------------------------------------------------------
 Processing "list" ...
 
-CG1111A  Engineering Principles and Practice I
-         LAB[01]   E4A-04-08, weeks: 1 - 13
-                   E4A-04-08, weeks: 1 - 13
-
-CS1010   Programming Methodology
-         LAB[C03]  COM1-B108, weeks: 3 - 13
-         SEC[1]    I3-AUD, weeks: 1 - 13
-         TUT[10]   COM1-0201, weeks: 3 - 13
+CS2113   Software Engineering & Object-Oriented Programming
+         LEC[1]    LT19, weeks: 1 - 13
+         TUT[4]    COM1-0210, weeks: 3 - 13
 
 
 Here's a list of your current selected module(s)!
@@ -126,25 +121,21 @@ Processing "timetable /simple" ...
                                                                     
           : Mon      : Tues     : Wed      : Thur     : Fri         
 ====================================================================
-   0900   +----------+          +----------+          :             
-   0930   |CG1111A   |          |CG1111A   |          :             
-   1000   | LAB[01]  |          | LAB[01]  |          :             
-   1030   |          |          |          |          :             
-   1100   |          |          |          |          :             
-   1130   |          |          |          |          :             
-   1200   +----------+          +----------+----------+             
-   1230   |CS1010    |          :          |CS1010    |             
-   1300   | SEC[1]   |          :          | LAB[C03] |             
-   1330   |          |          :          |          |             
-   1400   +----------+          :          +----------+             
+   1100   :          :          :          :          +----------+  
+   1130   :          :          :          :          |CS2113    |  
+   1200   :          :          :          :          +-TUT[4]---+  
+   1230   :          :          :          :          :             
+   1300   :          :          :          :          :             
+   1330   :          :          :          :          :             
+   1400   :          :          :          :          :             
    1430   :          :          :          :          :             
    1500   :          :          :          :          :             
    1530   :          :          :          :          :             
-   1600   :          :          :          :          :             
-   1630   :          :          :          :          :             
-   1700   :          :          +----------+          :             
-   1730   :          :          |CS1010    |          :             
-   1800   :          :          +-TUT[10]--+          :             
+   1600   :          :          :          :          +----------+  
+   1630   :          :          :          :          |CS2113    |  
+   1700   :          :          :          :          | LEC[1]   |  
+   1730   :          :          :          :          |          |  
+   1800   :          :          :          :          +----------+  
    1830   :          :          :          :          :             
    1900   :          :          :          :          :             
                                                                     
@@ -206,13 +197,13 @@ Schedule     :
 --------------------------------------------------------------------------------
 Sem [2] >> --------------------------------------------------------------------------------
 Shutting down......
---------------------------------------------------------------------------------
 Processing "bye" ...
 
 These are your export links:
-https://nusmods.com/timetable/sem-1/share?CG1111A=LAB:01&CS1010=LAB:C03,SEC:1,TUT:10
+https://nusmods.com/timetable/sem-1/share?CS2113=LEC:1,TUT:4
 https://nusmods.com/timetable/sem-2/share?
 https://nusmods.com/timetable/sem-3/share?
 https://nusmods.com/timetable/sem-4/share?
+--------------------------------------------------------------------------------
 Bye bye, See you again
 --------------------------------------------------------------------------------
