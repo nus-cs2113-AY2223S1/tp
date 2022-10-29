@@ -68,8 +68,8 @@ public class Ui {
         String message = LINE
                 + SPACING + "COMMAND   " + "FORMAT                                                " + "PURPOSE\n"
                 + SPACING + "--------  " + "--------------------------------------                " + "-------\n"
-                + SPACING + "add       " + "/add u/{UNIVERSITY_NAME} m/{MODULE_CODE}              " +
-                "Adds input Partner University module code to input university list\n"
+                + SPACING + "add       " + "/add u/{UNIVERSITY_NAME} m/{MODULE_CODE}              "
+                + "Adds input Partner University module code to input university list\n"
                 + SPACING + "add       " + "/add u/{UNIVERSITY_NAME} m/{MODULE_CODE}              "
                 + "Adds a lesson for the input module code to the timetable for the input\n"
                 + SPACING + "          " + "d/{DAY_OF_THE_WEEK} st/{START_TIME} en/{END_TIME}\n"
