@@ -27,7 +27,7 @@
 #### 3.8  [View Command](#view-command-view)
 3.81 [View Command for University List](#1-view-command-for-all-user-university-lists-view-lists)\
 3.82 [View Command for input University](#2-view-command-for-users-input-university-view-uuniversity_name)\
-3.83 [View Command for Timetables](#3-view-command-for-all-timetables-created-by-user-view-timetables)
+3.83 [View Command for Timetables](#3-view-command-for-all-timetables-created-by-user-view-timetables)\
 3.84 [View Command for Delete History](#4-view-command-for-delete-history-view-delete_history)
 
 ### 4. [Command Summary](#command-summary)
