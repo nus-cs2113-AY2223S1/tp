@@ -75,7 +75,7 @@ public class Parser {
             }
             return prepareFind(arguments);
         case ListCommand.COMMAND_WORD:
-            return new ListCommand(carparkList);
+            return prepareList(arguments);
         case FilterCommand.COMMAND_WORD:
             if (arguments.trim().isEmpty()) {
                 return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.FILTER_FORMAT);
@@ -148,6 +148,17 @@ public class Parser {
     private Command prepareFind(String arguments) {
         final String carparkID = arguments.trim();
         return new FindCommand(carparkID, carparkList);
+    }
+
+    private Command prepareList(String arguments) {
+        try {
+            if (arguments.trim().isEmpty()) {
+                return new ListCommand(carparkList);
+            }
+            throw new UnneededArgumentsException("list");
+        } catch (UnneededArgumentsException e) {
+            return new InvalidCommand(e.getMessage());
+        }
     }
 
     /**
