@@ -104,13 +104,13 @@ public class Link {
         if (cleanModuleParam.isEmpty()) {
             return;
         }
-
+        moduleDelimiter = "&";
         String[] moduleAndLessonsArray = cleanModuleParam.split(moduleDelimiter);
         List<SelectedModule> selectedModules = new ArrayList<>();
         for (String moduleAndLessons : moduleAndLessonsArray) {
             String[] splitModuleAndLesson = moduleAndLessons.split(Pattern.quote(MODULE_CODE_DELIMITER));
             if (splitModuleAndLesson.length == 0) {
-                return;
+                continue;
             }
             String moduleCode = splitModuleAndLesson[0];
             Module module = Module.get(moduleCode);
@@ -118,7 +118,7 @@ public class Link {
                 continue;
             }
             SelectedModule selectedModule = new SelectedModule(module, semester);
-            //only parses the lessons between the first and second = sign
+            //only parses the lessons between the first and second = sign (there is not supposed to be a second = sign)
             if (splitModuleAndLesson.length > 1) {
                 String[] lessonsInfo = (splitModuleAndLesson[1]).split(lessonDelimiter);
                 addLessons(lessonsInfo, selectedModule, semester);
