@@ -70,7 +70,7 @@ _Written by: Paul Low_
 General illustrations about the text format used for the commands in this guide can be found below. 
 
 1. The **first word** in the command refers to the command word to be supplied by the user. The command words are case-insensitive. 
-   1. e.g. `exit`, `EXIT` and `eXiT` will all both interpreted as the same.
+   1. e.g. `bye`, `BYE` and `bYe` will all be interpreted as the same.
 
 2. Words in `UPPER CASE` refer to the parameters in each command. Each parameter must be prepended with a tag.
    1. e.g. in `delete e/ENTRY`, `delete` is the command word, while `ENTRY` is a parameter expected after the tag `e/`.
