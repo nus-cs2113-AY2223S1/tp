@@ -94,8 +94,9 @@ public class Parser {
     private static String convertStringArrayToString(String[] stringArray) {
         StringBuilder content = new StringBuilder();
         for (String string : stringArray) {
-            content.append(string);
+            content.append(string + " ");
         }
+        content.deleteCharAt(content.length() - 1);
         return content.toString();
     }
 

@@ -116,15 +116,12 @@ public class Storage {
         }
     }
 
-    public static void writeRecipeListToFile(String filePath) {
+    public static void rewriteRecipeListToFile(String filePath) {
         try {
-            FileWriter fw = new FileWriter(filePath, true);
-            StringBuilder formattedRecipeList = new StringBuilder();
-            for (int i = 0; i < RecipeList.getSize(); i++) {
-                formattedRecipeList.append(RecipeList.getRecipe(i).getRecipeAttributesFormatted());
-                formattedRecipeList.append(Ui.DIVIDER + "\n");
+            FileWriter fw = new FileWriter(filePath, false);
+            for (String recipeTitle : RecipeList.recipeTitles) {
+                fw.write(recipeTitle + "\n");
             }
-            fw.write(formattedRecipeList.toString());
             fw.close();
         } catch (IOException ioException) {
             Ui.showMessage("Error in loading recipes to data file");

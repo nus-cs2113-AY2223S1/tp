@@ -1,6 +1,10 @@
 package recipeditor.recipe;
 
+import recipeditor.storage.Storage;
+
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class RecipeList {
     private static ArrayList<Recipe> recipes = new ArrayList<>();
@@ -27,13 +31,21 @@ public class RecipeList {
         recipes.remove(index);
     }
 
+    public static void deleteRecipeFromTitle(String recipeTitle) {
+        recipes.remove(getRecipeFromTitle(recipeTitle));
+        recipeTitles.removeIf(r -> r.equals(recipeTitle));
+        for (String recipe : recipeTitles) {
+            System.out.println(recipe);
+        }
+    }
+
     public static void editRecipe(int index, Recipe newRecipe) {
         recipes.set(index, newRecipe);
     }
 
-    public static Recipe getRecipeFromTitle(String recipleTitle) {
+    public static Recipe getRecipeFromTitle(String recipeTitle) {
         for (Recipe r : recipes) {
-            if (r.getTitle().equalsIgnoreCase(recipleTitle)) {
+            if (r.getTitle().equalsIgnoreCase(recipeTitle)) {
                 return r;
             }
         }
