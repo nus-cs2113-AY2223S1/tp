@@ -487,7 +487,20 @@ Selects a timeslot to be added to the user timetable.
 Format: `select /module MODULE_CODE /type LESSON_TYPE /code CLASS_NO`
 
 * The `CLASS_NO` will be a number.
-* The `LESSON_TYPE` can be either *lecture*, *tutorial*.
+* The `LESSON_TYPE` can be any of the following:  
+  *  TUTORIAL                   represented by inputs starting with `TUT`
+  *  TUTORIAL_TYPE_2            represented by inputs starting with `TUT` and ending with `2`
+  *  LECTURE                    represented by inputs starting with `LEC`
+  *  RECITATION                 represented by inputs starting with `REC`
+  *  DESIGN_LECTURE             represented by inputs starting with `DES` or `DLEC`
+  *  PACKAGED_LECTURE           represented by inputs starting with `PAC` containing `LEC` or `PLEC`
+  *  PACKAGED_TUTORIAL          represented by inputs starting with `PAC` containing `TUT` or `PTUT`
+  *  SECTIONAL_TEACHING         represented by inputs starting with `SEC`
+  *  WORKSHOP                   represented by inputs starting with `W`
+  *  LABORATORY                 represented by inputs starting with `LAB`
+  *  MINI_PROJECT               represented by inputs starting with `PRO` or `MINI`
+  *  SEMINAR_STYLE_MODULE_CLASS represented by inputs starting with `SEM`
+* The `LESSON_TYPE` need not be an exact match or case-sensitive.
 * The `MODULE_CODE` need to be an exact match.
 
 Example of usage:
