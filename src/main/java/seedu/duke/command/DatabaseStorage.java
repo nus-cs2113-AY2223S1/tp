@@ -46,8 +46,9 @@ public class DatabaseStorage {
             file.createNewFile();
             Path target = Path.of(FILE_PATH);
             URL source = new URL("https://raw.githubusercontent.com/AY2223S1-CS2113-W13-2/tp/master/data/data.csv");
-            InputStream in = source.openStream();
-            Files.copy(in, target, StandardCopyOption.REPLACE_EXISTING);
+            try (InputStream in = source.openStream()) {
+                Files.copy(in, target, StandardCopyOption.REPLACE_EXISTING);
+            }
         }
     }
 
