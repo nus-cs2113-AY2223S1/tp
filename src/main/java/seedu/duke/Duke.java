@@ -1,13 +1,15 @@
 package seedu.duke;
 
-import seedu.duke.biometrics.Biometrics;
+import seedu.duke.records.RecordList;
+import seedu.duke.records.biometrics.Biometrics;
 import seedu.duke.command.Command;
 import seedu.duke.command.GreetCommand;
 import seedu.duke.command.LoadCommand;
 import seedu.duke.command.SaveCommand;
+import seedu.duke.exception.DukeException;
 import seedu.duke.exception.IllegalValueException;
-import seedu.duke.exercise.ExerciseList;
-import seedu.duke.food.FoodList;
+import seedu.duke.records.exercise.ExerciseList;
+import seedu.duke.records.food.FoodList;
 import seedu.duke.storage.Storage;
 
 import java.io.IOException;
@@ -25,6 +27,8 @@ public class Duke {
     private static ExerciseList exerciseList;
 
     private static FoodList foodList;
+
+    private static RecordList recordList;
     public static boolean isProgramFinished = false;
     private static final Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
@@ -34,6 +38,7 @@ public class Duke {
         biometrics = new Biometrics();
         exerciseList = new ExerciseList();
         foodList = new FoodList();
+        recordList = new RecordList();
     }
 
     private static void startDuke() {
@@ -48,7 +53,7 @@ public class Duke {
         try {
             TrackNFitLogger.setUp();
             Command loadCommand = new LoadCommand();
-            loadCommand.setData(ui, storage, biometrics, exerciseList, foodList);
+            loadCommand.setData(ui, storage, biometrics, exerciseList, foodList, recordList);
             loadCommand.execute();
         } catch (IllegalValueException | IOException e) {
             ui.output(e.getMessage());
@@ -59,7 +64,7 @@ public class Duke {
     private static void stopDuke() {
         try {
             Command saveCommand = new SaveCommand();
-            saveCommand.setData(ui, storage, biometrics, exerciseList, foodList);
+            saveCommand.setData(ui, storage, biometrics, exerciseList, foodList, recordList);
             saveCommand.execute();
         } catch (IllegalValueException e) {
             ui.output(e.getMessage());
@@ -78,9 +83,9 @@ public class Duke {
                 String input = ui.input();
                 ui.line();
                 Command command = Parser.parse(input);
-                command.setData(ui, storage, biometrics, exerciseList, foodList);
+                command.setData(ui, storage, biometrics, exerciseList, foodList, recordList);
                 command.execute();
-            } catch (IllegalValueException e) {
+            } catch (DukeException e) {
                 ui.output(e.getMessage());
             } finally {
                 ui.line();

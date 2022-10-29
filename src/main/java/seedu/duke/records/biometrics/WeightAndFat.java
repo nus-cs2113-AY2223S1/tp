@@ -1,21 +1,22 @@
-package seedu.duke.biometrics;
+package seedu.duke.records.biometrics;
 
+import seedu.duke.records.Record;
 import seedu.duke.exception.IllegalValueException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-public class WeightAndFat {
+public class WeightAndFat extends Record {
 
     private int weight;
     private int fat;
     private LocalDate date;
 
     public WeightAndFat(int weight, int fat, LocalDate date) throws IllegalValueException {
+        super(date);
         setWeight(weight);
         setFat(fat);
-        setDate(date);
     }
 
     public int getWeight() {
@@ -24,10 +25,6 @@ public class WeightAndFat {
 
     public int getFat() {
         return fat;
-    }
-
-    public String getDate() {
-        return date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
     }
 
     public void setWeight(int weight) throws IllegalValueException {

@@ -1,16 +1,16 @@
 package seedu.duke.command;
 
 
-import seedu.duke.biometrics.Biometrics;
+import seedu.duke.records.Record;
+import seedu.duke.records.RecordList;
+import seedu.duke.records.biometrics.Biometrics;
 import seedu.duke.exception.IllegalValueException;
 import seedu.duke.Parser;
 import seedu.duke.Ui;
-import seedu.duke.exercise.ExerciseList;
-import seedu.duke.food.FoodList;
+import seedu.duke.records.exercise.ExerciseList;
+import seedu.duke.records.food.FoodList;
 import seedu.duke.storage.Storage;
 
-import java.security.Key;
-import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -43,7 +43,7 @@ public class SetCommand extends Command {
 
     private void setBiometrics(String[] argumentList) throws IllegalValueException {
         try {
-            if (argumentList.length < 6) {
+            if (argumentList.length < 7) {
                 throw new IllegalValueException("Insufficient parameters");
             }
             int age = Integer.parseInt(argumentList[1]);
@@ -51,7 +51,8 @@ public class SetCommand extends Command {
             int height = Integer.parseInt(argumentList[3]);
             int weight = Integer.parseInt(argumentList[4]);
             int fat = Integer.parseInt(argumentList[5]);
-            biometrics.setBiometrics(age, gender, height, weight, fat);
+            int activitylevel = Integer.parseInt(argumentList[6]);
+            biometrics.setBiometrics(age, gender, height, weight, fat, activitylevel);
             logger.log(Level.FINE, "parameters: "
                     + String.format("%d %s %d %d %d", age, gender, height, weight, fat));
             if (toDisplay) {
@@ -63,7 +64,8 @@ public class SetCommand extends Command {
     }
 
     @Override
-    public void setData(Ui ui, Storage storage, Biometrics biometrics, ExerciseList exerciseList, FoodList foodList) {
+    public void setData(Ui ui, Storage storage, Biometrics biometrics, ExerciseList exerciseList, FoodList foodList,
+                        RecordList recordList) {
         this.ui = ui;
         this.biometrics = biometrics;
     }

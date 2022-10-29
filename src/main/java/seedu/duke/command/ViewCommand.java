@@ -1,19 +1,22 @@
 package seedu.duke.command;
 
+import seedu.duke.records.biometrics.Calculator;
 import seedu.duke.Parser;
 import seedu.duke.Ui;
-import seedu.duke.biometrics.Biometrics;
-import seedu.duke.biometrics.WeightAndFat;
+import seedu.duke.records.Record;
+import seedu.duke.records.RecordList;
+import seedu.duke.records.biometrics.Biometrics;
+import seedu.duke.records.biometrics.WeightAndFat;
 import seedu.duke.exception.IllegalValueException;
-import seedu.duke.exercise.CardioExercise;
-import seedu.duke.exercise.Exercise;
-import seedu.duke.exercise.ExerciseList;
-import seedu.duke.exercise.StrengthExercise;
-import seedu.duke.food.Food;
-import seedu.duke.food.FoodList;
+import seedu.duke.records.exercise.CardioExercise;
+import seedu.duke.records.exercise.Exercise;
+import seedu.duke.records.exercise.ExerciseList;
+import seedu.duke.records.exercise.StrengthExercise;
+import seedu.duke.records.food.Food;
+import seedu.duke.records.food.FoodList;
 import seedu.duke.storage.Storage;
-import seedu.duke.biometrics.Calculator;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
@@ -21,11 +24,12 @@ public class ViewCommand extends Command {
 
     private Ui ui;
     private Biometrics biometrics;
-    private Calculator calculator;
     private String arguments;
     private ExerciseList exerciseList;
 
     private FoodList foodList;
+
+    private RecordList recordList;
 
     public ViewCommand(String arguments) {
         this.arguments = arguments;
@@ -60,28 +64,42 @@ public class ViewCommand extends Command {
         case ("maintenance"):
             viewMaintenanceCalories();
             break;
+        case ("all"):
+            viewAll(argumentList);
+            break;
         default:
             handleInvalidViewType();
         }
     }
 
     private void viewMaintenanceCalories() {
-        ui.line();
+        Calculator calculator = new Calculator(biometrics.getGender(),biometrics.getWeight(),
+                biometrics.getHeight(),biometrics.getAge(),biometrics.getActivityLevel());
         ui.output(calculator.getActivityStatus());
         ui.output("Thus your maintenance calories is " + calculator.getIdealMaintenanceCalories());
-        ui.line();
     }
 
     private void viewBmi() {
-        ui.line();
+        Calculator calculator = new Calculator(biometrics.getGender(),biometrics.getWeight(),
+                biometrics.getHeight(),biometrics.getAge(),biometrics.getActivityLevel());
+        calculator.setBmi(biometrics.getWeight(),biometrics.getHeight());
         ui.output("Your current BMI is :" + calculator.getBmi());
         ui.output(calculator.getBmiStatus());
-        ui.line();
     }
 
 
     private void handleInvalidViewType() throws IllegalValueException {
         throw new IllegalValueException("Invalid view command");
+    }
+
+    private void viewAll(String[] argumentList) throws IllegalValueException {
+        handleInvalidViewAllCommand(argumentList);
+        ArrayList<WeightAndFat> weightAndFatList = biometrics.weightAndFatList.getWeightAndFatList();
+        ArrayList<Food> foodArrayList = foodList.getFoodList();
+        ArrayList<Exercise> exerciseArrayList = getExerciseArrayListByCommand(argumentList);
+        ArrayList<Record> recordArrayList = recordList.getRecordList(weightAndFatList,
+                foodArrayList, exerciseArrayList);
+        ui.outputAllRecords(recordArrayList, weightAndFatList, foodArrayList, exerciseArrayList);
     }
 
     private void viewBiometrics() {
@@ -102,7 +120,13 @@ public class ViewCommand extends Command {
 
     private static void handleInvalidViewFoodCommand(String[] argumentList) throws IllegalValueException {
         if (argumentList.length != 1) {
-            throw new IllegalValueException("Invalid view command");
+            throw new IllegalValueException("Invalid view food command");
+        }
+    }
+
+    private static void handleInvalidViewAllCommand(String[] argumentList) throws IllegalValueException {
+        if (argumentList.length != 1) {
+            throw new IllegalValueException("Invalid view all command");
         }
     }
 
@@ -162,10 +186,12 @@ public class ViewCommand extends Command {
     }
 
     @Override
-    public void setData(Ui ui, Storage storage, Biometrics biometrics, ExerciseList exerciseList, FoodList foodList) {
+    public void setData(Ui ui, Storage storage, Biometrics biometrics, ExerciseList exerciseList, FoodList foodList,
+                        RecordList recordList) {
         this.ui = ui;
         this.biometrics = biometrics;
         this.exerciseList = exerciseList;
         this.foodList = foodList;
+        this.recordList = recordList;
     }
 }

@@ -3,10 +3,12 @@ package seedu.duke.exercise;
 import org.junit.jupiter.api.Test;
 import seedu.duke.Parser;
 import seedu.duke.Ui;
-import seedu.duke.biometrics.Biometrics;
+import seedu.duke.records.RecordList;
+import seedu.duke.records.biometrics.Biometrics;
 import seedu.duke.command.Command;
 import seedu.duke.exception.IllegalValueException;
-import seedu.duke.food.FoodList;
+import seedu.duke.records.exercise.ExerciseList;
+import seedu.duke.records.food.FoodList;
 import seedu.duke.storage.Storage;
 
 import java.util.ArrayList;
@@ -20,6 +22,7 @@ class ExerciseListTest {
     private final Biometrics biometrics = new Biometrics();
 
     private FoodList foodList = new FoodList();
+    private RecordList recordList = new RecordList();
 
     @Test
     void getCompletedExercise_outOfBoundIndex_exceptionThrown() {
@@ -75,7 +78,7 @@ class ExerciseListTest {
 
         for (String input : commandList) {
             Command c = Parser.parse(input);
-            c.setData(ui, storage, biometrics, exerciseList, foodList);
+            c.setData(ui, storage, biometrics, exerciseList, foodList, recordList);
             c.execute();
         }
     }

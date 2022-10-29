@@ -1,10 +1,18 @@
-package seedu.duke.food;
+package seedu.duke.records.food;
 
-public class Food {
+import seedu.duke.records.Record;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+public class Food extends Record {
     private String foodDescription;
     private int calories;
 
-    public Food(String foodDescription, int calories) {
+    private LocalDate date;
+
+    public Food(String foodDescription, int calories, LocalDate date) {
+        super(date);
         this.foodDescription = foodDescription;
         this.calories = calories;
     }
@@ -20,7 +28,8 @@ public class Food {
     @Override
     public String toString() {
         return "Food Description: " + foodDescription + System.lineSeparator()
-                + "calories: " + calories;
+                + "calories: " + calories + System.lineSeparator()
+                +  "Recorded on: " + getDate();
     }
 
     public String saveFood() {

@@ -1,0 +1,26 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autoactivate on
+
+
+activate addCommand
+    addCommand -> addCommand: addFood(argumentList)
+    addCommand -> addCommand: extractFoodName(argumentList[1])
+    return foodDescription: String
+    addCommand -> addCommand: extractCalories(argumentList[2])
+    return calories: int
+    addCommand -> food **: new(foodDescription: String, calories: int)
+    addCommand -> FoodList: addFood(food: Food)
+    return
+    opt display
+        addCommand -> food: toString()
+        return foodString: String
+        addCommand -> ui: output(foodString: String)
+        return
+        addCommand -> ui: output(success message: String)
+        return
+    end
+return
+
+@enduml

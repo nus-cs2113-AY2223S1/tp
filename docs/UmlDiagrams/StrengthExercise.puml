@@ -21,10 +21,16 @@ class ExerciseList {
 +markUndone(index: int)): void
 }
 
+class record {
+-date: LocalDate
++getDate(): String
+}
+
 class Exercise {
 -exerciseName: String
 -repetition: int
 -caloriesBurnt: int
+-time: double
 -isDone: boolean
 +getExerciseName(): int
 +getRepetition(): int
@@ -39,11 +45,12 @@ class Exercise {
 }
 
 class StrengthExercise {
+-weight: int
 -set: int
 }
 
 class CardioExercise{
--time: int
+-distance: int
 }
 
 class AddCommand {
@@ -74,9 +81,14 @@ class RemoveCommand {
 }
 
 class MarkCommand {
--(argumentList: String[])
+-argumentList: String[]
 +execute(): void
 +markExercise((argumentList: String[])
+}
+
+class Calculator {
++calculateCalories(biometrics: Biometrics, time: double,
+metabolicEquivalent, double): int
 }
 
 Duke --> "1"ExerciseList
@@ -86,11 +98,14 @@ Command <|-- MarkCommand
 Command <|-- ViewCommand
 Command <|-- RemoveCommand
 Command <|-- FindCommand
+Record <|-- Exercise
 ExerciseList "1" o--> "*"Exercise : contains >
 Exercise <|-- StrengthExercise
 Exercise <|-- CardioExercise
 AddCommand "1"--> "1"ExerciseList
 MarkCommand "1"--> "1"ExerciseList
+MarkCommand ..> Calculator
+Calculator ..> Biometrics
 ViewCommand "1"--> "1"ExerciseList
 RemoveCommand "1"--> "1"ExerciseList
 FindCommand "1"--> "1"ExerciseList
