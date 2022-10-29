@@ -228,16 +228,6 @@ public class UserUniStorageTest {
         testManager.getMyManager().get("Boston University").setFavourite(true);
         UserStorageParser.storeCreatedLists(testManager);
         String fileContent = getFileContents(filePath);
-        assertEquals( "Boston University%\n" + "null%\n" + "T%\n", fileContent);
-    }
-
-    @Test
-    public void testLoadingFile_OneUniWithOneModule() throws IOException {
-        clearStorageFile(filePath);
-        String fileContent = "Boston University%" + "null%" + "F%"
-                +  "MET CS 248;Discrete Mathematics;3;CS1231;Discrete Structures;4;default%";
-        UserStorage.saveFile(fileContent, true);
-        UserUniversityListManager testManager = UserStorageParser.getSavedLists();
-        
+        assertEquals("Boston University%\n" + "null%\n" + "T%\n", fileContent);
     }
 }
