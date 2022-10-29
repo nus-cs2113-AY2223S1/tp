@@ -12,6 +12,6 @@ public class GlobalNonNumericIndexException extends MoolahException {
      */
     @Override
     public String getMessage() {
-        return ErrorMessages.ERROR_GLOBAL_NON_NUMERIC_INDEX.toString();
+        return ErrorMessages.ERROR_GLOBAL_INDEX_NOT_NUMERIC.toString();
     }
 }

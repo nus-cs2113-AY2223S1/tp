@@ -483,6 +483,9 @@ public class ParameterParser {
         if (containAlphabet(parameter)) { // Checks if parameter contains alphabets
             throw new GlobalNonNumericIndexException();
         } else if (startsWithMinusSign(parameter)) { // Checks if parameter is negative value
+            if (parameter.length() == 1) { //Means parameter == "-"
+                throw new GlobalNonNumericIndexException();
+            }
             throw new GlobalInvalidIndexException();
         } else if (containSymbol(parameter)) { // Checks if contains any other symbols
             throw new GlobalNonNumericIndexException();
