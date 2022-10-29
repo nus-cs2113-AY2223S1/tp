@@ -102,8 +102,8 @@ public class Duke {
     }
 
     private void checkIfThreeFilesSimultaneouslyExistOrNotExit() throws StoreFailureException {
-        boolean areSimultaneouslyExistOrNotExit =
-                userStorage.hasUserFile() == itemStorage.hasItemFile() == transactionStorage.hasTransactionFile();
+        boolean areSimultaneouslyExistOrNotExit = (userStorage.hasUserFile() == itemStorage.hasItemFile())
+                && (transactionStorage.hasTransactionFile() == itemStorage.hasItemFile());
         if (!areSimultaneouslyExistOrNotExit) {
             throw new StoreFailureException(MESSAGE_FILES_ILLEGALLY_DELETED + MESSAGE_TO_FIX_FILES);
         }
