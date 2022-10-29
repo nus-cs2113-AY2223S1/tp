@@ -1,28 +1,32 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 skinparam classAttributeIconSize 0
+hide circle
+
 class Ui {
-    - LOGO: String
-    - MESSAGE_GREET: String
-    - MESSAGE_BYE: String
-    - LINE_DIVIDER: String
-    - uiBuffer: ArrayList<String>
+    + INDENT: String
+    + LINE_DIVIDER: String
+    + LOGO: String
+    + MESSAGE_GREET: String
+    + MESSAGE_BYE: String
     - scanner: Scanner
+    - uiBuffer: ArrayList<String>
 
-    + close(): void
-    + readNext(): String
-    + displayUi(boolean): void
-    + displayUi(boolean): void
-    + addMessage(String, boolean): void
-    + addMessage(String): void
-    + addMessage(ArrayList<String>, boolean): void
     + addMessage(ArrayList<String>): void
-    + displayMessage(String): void
-    + displayDivider(): void
-    + startMessage(): void
-    + endMessage(): void
-    + displayUserPrompt(int): void
+    + addMessage(ArrayList<String>, boolean): void
+    + addMessage(String): void
+    + addMessage(String, boolean): void
+    + clearUiBuffer(): void
+    + close(): void
     - currentUserSemester(int): String
-
+    + displayDivider(): void
+    + displayMessage(String): void
+    + displayUi(): void
+    + displayUi(boolean): void
+    + displayUserPrompt(int): void
+    + endMessage(): void
+    + readNext(): String
+    - sanitizeInput(String): String
+    + startMessage(): void
 }
 @enduml

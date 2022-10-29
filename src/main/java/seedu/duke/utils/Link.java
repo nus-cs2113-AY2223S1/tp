@@ -48,7 +48,7 @@ public class Link {
     private static final String SUPPOSED_PREFIX = DOMAIN + SEMESTER_DELIMITER + POSSIBLE_SEMESTER_NUMBER
             + DELIMITER + SHARE_DELIMITER;
 
-    private static final String SUPPOSED_PREFIX_REGEX = DOMAIN + SEMESTER_DELIMITER + "\\d/share\\?";
+    private static final String SUPPOSED_PREFIX_REGEX = "^" + DOMAIN + SEMESTER_DELIMITER + "\\d/share\\?";
 
     private static String moduleDelimiter = "&";
 

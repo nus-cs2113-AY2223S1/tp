@@ -28,7 +28,7 @@ public class StorageTest {
         state.addSelectedModule(selectedModule2);
         Storage storage = new Storage();
         Ui ui = new Ui();
-        storage.saveState(state, ui);
+        storage.saveState(state, ui, true);
 
         //Read saved state from saved file
         File actualFile = new File("data/duke.txt");

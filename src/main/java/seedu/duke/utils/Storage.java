@@ -89,7 +89,7 @@ public class Storage {
      * @param ui    to output to the user
      * @throws IOException failed or interrupted I/O operations
      */
-    public void saveState(State state, Ui ui) throws IOException {
+    public void saveState(State state, Ui ui, boolean isExit) throws IOException {
         assert state != null : "State should not be null";
         logger = Logger.getLogger(SUBSYSTEM_NAME);
         logger.log(Level.FINE, "Saving current state with " + state.getSelectedModulesList().size()
@@ -100,11 +100,16 @@ public class Storage {
         }
         ui.addMessage(EXPORT_MESSAGE);
         FileWriter fw = new FileWriter(file);
+        int currSem = state.getSemester();
         for (int i = 1; i <= 4; i++) {
             state.setSemester(i);
             String toSave = Link.getLink(state);
             ui.addMessage(toSave);
             fw.write(toSave + System.lineSeparator());
+        }
+        state.setSemester(currSem);
+        if (!isExit) {
+            ui.clearUiBuffer();
         }
         ui.displayUi();
         fw.close();

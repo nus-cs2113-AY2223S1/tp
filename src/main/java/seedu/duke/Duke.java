@@ -41,6 +41,10 @@ public class Duke {
                 Command command = Parser.parse(userFullCommand);
                 command.execute(state, ui, storage);
                 isExit = command.isExit();
+                storage.saveState(state, ui, isExit);
+            } catch (IOException e) {
+                ui.addMessage(IO_ERROR_MESSAGE);
+                ui.displayUi();
             } catch (Exception e) {
                 // e.printStackTrace();
                 ui.addMessage(e.getMessage());
@@ -48,12 +52,6 @@ public class Duke {
             } finally {
                 ui.displayDivider();
             }
-        }
-        try {
-            storage.saveState(state, ui);
-        } catch (IOException e) {
-            ui.addMessage(IO_ERROR_MESSAGE);
-            ui.displayUi();
         }
         endSequence();
     }
