@@ -11,10 +11,6 @@ import java.util.List;
 import seedu.duke.Timetable;
 import seedu.duke.module.Module;
 import seedu.duke.module.lessons.Lesson;
-import seedu.duke.module.lessons.Lecture;
-import seedu.duke.module.lessons.Tutorial;
-import seedu.duke.module.lessons.Laboratory;
-import seedu.duke.module.lessons.Others;
 
 /*
  * ### Public Functions: ###
@@ -54,10 +50,10 @@ public class ModuleManager {
     * Adds a module into ModuleData.txt in the following format:
     * <code>|<name>|<description>\n
     */
-    public static void addModule(String code, String name, String description) {
+    public static void addModule(String code, String name) {
         try {
             FileWriter myWriter = new FileWriter(dataDirectoryPath + "/ModuleData.txt", true);
-            String line = code + "|" + name + "|" + description;
+            String line = code + "|" + name;
             myWriter.write(line + "\n");
             moduleDataList.add(line + "\n");
             myWriter.close();
@@ -133,18 +129,17 @@ public class ModuleManager {
             moduleFileReader = new FileReader(moduleDataFile);
             moduleBufferedReader = new BufferedReader(moduleFileReader);
             
-            List<Lesson> lessons = new ArrayList<Lesson>();
+            List<Lesson> lessons;
 
             //create and add module
             while ((currModuleLine = moduleBufferedReader.readLine()) != null) {
-                lessons.clear();
+                lessons = new ArrayList<>();
 
                 moduleDataList.add(currModuleLine + "\n");
                 moduleInfoList = currModuleLine.split("\\|");
 
                 String code = moduleInfoList[0];
                 String name = moduleInfoList[1];
-                String description = moduleInfoList[2];
 
                 //load lessonData for currModule into module object
                 for (String line : lessonDataList) {
@@ -155,25 +150,12 @@ public class ModuleManager {
                     String lessonDay = lessonInfoList[2];
                     String lessonStart = lessonInfoList[3];
                     String lessonEnd = lessonInfoList[4];
-
+                    String classNumber = lessonInfoList[5];
                     if (lessonModuleCode.equals(code)) {
-                        switch (lessonType) {
-                        case "Lecture":
-                            lessons.add(new Lecture(lessonDay, lessonStart, lessonEnd, lessonType));
-                            break;
-                        case "Tutorial":
-                            lessons.add(new Tutorial(lessonDay, lessonStart, lessonEnd, lessonType));
-                            break;
-                        case "Laboratory":
-                            lessons.add(new Laboratory(lessonDay, lessonStart, lessonEnd, lessonType));
-                            break;
-                        default:
-                            lessons.add(new Others(lessonDay, lessonStart, lessonEnd, lessonType));
-                            break;
-                        }
+                        lessons.add(new Lesson(lessonDay, lessonStart, lessonEnd, lessonType, classNumber));
                     }
                 }
-                Timetable.addNewModuleFromFile(code, name, description, lessons);
+                Timetable.addNewModuleFromFile(code, name, lessons);
             }
             moduleFileReader.close();
             moduleBufferedReader.close();

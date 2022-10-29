@@ -1,23 +1,22 @@
 package seedu.duke.module;
 
 import seedu.duke.module.lessons.Lesson;
-import seedu.duke.module.lessons.Lecture;
-import seedu.duke.module.lessons.Tutorial;
 import seedu.duke.data.AttendingManager;
-import seedu.duke.module.lessons.Laboratory;
-import seedu.duke.module.lessons.Others;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Logger;
+
 
 public class Module {
     private static final Logger lgr = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private String moduleName;
     private String moduleCode;
-    private String moduleDescription;
+    //private String moduleDescription;
     private List<Lesson> lessons;
     private List<Lesson> attending;
+    private HashMap<String, ArrayList<Lesson>> classifiedLessons;
 
     public String getModuleName() {
         return moduleName;
@@ -25,10 +24,6 @@ public class Module {
 
     public String getModuleCode() {
         return moduleCode;
-    }
-
-    public String getModuleDescription() {
-        return moduleDescription;
     }
 
     public List<Lesson> getAttending() {
@@ -39,57 +34,61 @@ public class Module {
         return lessons;
     }
 
-    public Module(String moduleCode, String moduleName, String moduleDescription, List<Lesson> lessons) {
+    public Module(String moduleCode, String moduleName, List<Lesson> lessons) {
         this.moduleCode = moduleCode;
         this.moduleName = moduleName;
-        this.moduleDescription = moduleDescription;
+        //this.moduleDescription = moduleDescription;
         this.lessons = lessons;
-        this.attending = matchLessonTypes(lessons);
+        this.classifiedLessons = classifyLessons(lessons);
+        this.attending = matchLessonTypes(classifiedLessons);
     }
 
-    private List<Lesson> matchLessonTypes(List<Lesson> lessons) {
+    private List<Lesson> matchLessonTypes(HashMap<String, ArrayList<Lesson>> classifiedLessons) {
         List<Lesson> temp = new ArrayList<>();
-        for (Lesson lesson : lessons) {
-            if (!checkExist(temp, lesson)) {
-                addToAttendingList(temp, lesson);
+        for (ArrayList<Lesson> list : classifiedLessons.values()) {
+            for (int i = 0; i < checkDuplicateLessonNumbers(list); i++) {
+                String tempLessonType = list.get(0).getLessonType();
+                addToAttendingList(temp, tempLessonType);
             }
         }
         return temp;
     }
 
-    private void addToAttendingList(List<Lesson> temp, Lesson lesson) {
+    private int checkDuplicateLessonNumbers(ArrayList<Lesson> list) {
+        HashMap<String, Integer> checker = new HashMap<>();
+
+        for (Lesson lesson : list) {
+            String classNum = lesson.getClassNumber();
+            if (!checker.containsKey(classNum)) {
+                checker.put(classNum, 1);
+            } else {
+                int newCount = checker.get(classNum) + 1;
+                checker.remove(classNum);
+                checker.put(classNum, newCount);
+            }
+        }
+        return getHighestCount(checker);
+    }
+
+    private int getHighestCount(HashMap<String, Integer> checker) {
+        int highestCount = 0;
+        for (Integer count : checker.values()) {
+            if (count > highestCount) {
+                highestCount = count;
+            }
+        }
+        return highestCount;
+    }
+
+    private void addToAttendingList(List<Lesson> temp, String lessonType) {
         String day = "Undetermined Day";
         String startTime = "Undetermined";
         String endTime = "Undetermined";
-        switch (lesson.getLessonType()) {
-        case "Lecture":
-            Lecture tempLecture = new Lecture(day, startTime, endTime, "Lecture");
-            temp.add(tempLecture);
-            if (!AttendingManager.attendingExists(tempLecture, moduleCode)) {
-                AttendingManager.addAttending(tempLecture, this);
-            }
-            break;
-        case "Tutorial":
-            Tutorial tempTutorial = new Tutorial(day, startTime, endTime, "Tutorial");
-            temp.add(tempTutorial);
-            if (!AttendingManager.attendingExists(tempTutorial, moduleCode)) {
-                AttendingManager.addAttending(tempTutorial, this);
-            }
-            break;
-        case "Laboratory":
-            Laboratory tempLaboratory = new Laboratory(day, startTime, endTime, "Laboratory");
-            temp.add(tempLaboratory);
-            if (!AttendingManager.attendingExists(tempLaboratory, moduleCode)) {
-                AttendingManager.addAttending(tempLaboratory, this);
-            }
-            break;
-        default:
-            Others tempOthers = new Others(day, startTime, endTime, "Others");
-            temp.add(tempOthers);
-            if (!AttendingManager.attendingExists(tempOthers, moduleCode)) {
-                AttendingManager.addAttending(tempOthers, this);
-            }
-            break;
+        String classNumber = "NA";
+        Lesson tempLesson = new Lesson(day, startTime, endTime, lessonType, classNumber);
+        temp.add(tempLesson);
+        if (!AttendingManager.attendingExists(tempLesson, moduleCode)) {
+            AttendingManager.addAttending(tempLesson, this);
         }
     }
 
@@ -192,18 +191,21 @@ public class Module {
         return null;
     }
 
-    public void replaceAttending(Lesson newLesson) {
-        int indexToSet = 0;
-        for (Lesson lesson : attending) {
-            if (lesson.getLessonType().equals(newLesson.getLessonType())) {
-                break;
-            }
-            indexToSet += 1;
-        }
-        if (indexToSet >= attending.size()) {
-            return;
-        }
-        attending.set(indexToSet, newLesson);
+    public void replaceAttending(Lesson newLesson, Integer indexForLesson) {
+        attending.set(indexForLesson, newLesson);
         AttendingManager.setAttending(newLesson, moduleCode);
+    }
+
+    private HashMap<String, ArrayList<Lesson>> classifyLessons(List<Lesson> lessons) {
+        HashMap<String, ArrayList<Lesson>> classifiedLessons = new HashMap<>();
+        for (Lesson lesson : lessons) {
+            if (!classifiedLessons.containsKey(lesson.getLessonType())) {
+                classifiedLessons.put(lesson.getLessonType(), new ArrayList<>());
+                classifiedLessons.get(lesson.getLessonType()).add(lesson);
+            } else {
+                classifiedLessons.get(lesson.getLessonType()).add(lesson);
+            }
+        }
+        return classifiedLessons;
     }
 }

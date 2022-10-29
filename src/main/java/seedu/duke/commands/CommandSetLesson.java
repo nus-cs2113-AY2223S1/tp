@@ -46,7 +46,7 @@ public class CommandSetLesson {
         try {
             Lesson newLesson = getPreferredLesson(indexForModule,
                     Integer.parseInt(indexForLesson) - 1, targetLessonType);
-            replaceAttendingLesson(newLesson, indexForModule);
+            replaceAttendingLesson(newLesson, indexForModule, Integer.parseInt(indexForLesson) - 1);
         } catch (Exceptions.InvalidTimeslotException e) {
             return "Invalid Timeslot Index!";
         }
@@ -54,8 +54,8 @@ public class CommandSetLesson {
         return "Successfully set your lesson!";
     }
 
-    private static void replaceAttendingLesson(Lesson newLesson, int indexForModule) {
-        Timetable.replaceLesson(newLesson, indexForModule);
+    private static void replaceAttendingLesson(Lesson newLesson, int indexForModule, Integer indexForLesson) {
+        Timetable.replaceLesson(newLesson, indexForModule, indexForLesson);
     }
 
     private static Lesson getPreferredLesson(int indexForModule, int i, String targetLessonType)

@@ -106,7 +106,8 @@ public class LessonManager {
             FileWriter myWriter = new FileWriter(dataDirectoryPath + "/LessonData.txt", true);
             for (Lesson lesson : lessons) {
                 String line = code + "|" + lesson.getLessonType() + "|" + lesson.getDay()
-                        + "|" + lesson.getStartTime() + "|" + lesson.getEndTime();
+                        + "|" + lesson.getStartTime() + "|" + lesson.getEndTime()
+                        + "|" + lesson.getClassNumber();
                 myWriter.write(line + "\n");
                 lessonDataList.add(line);
             }
