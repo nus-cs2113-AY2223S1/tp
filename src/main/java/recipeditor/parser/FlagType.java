@@ -1,5 +1,5 @@
 package recipeditor.parser;
 
 public enum FlagType {
-    INGREDIENT, TITLE, DESCRIPTION, STEP, NULL, INVALID
+    ADD, DELETE, SWAP, CHANGE, INGREDIENT, TITLE, DESCRIPTION, STEP, INVALID
 }

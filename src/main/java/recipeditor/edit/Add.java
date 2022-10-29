@@ -20,7 +20,7 @@ public class Add extends EditModeCommand {
             content.append(parsedCommand[i]).append(" ");
         }
 
-        switch (flag) {
+        switch (ingredientFlag) {
         case STEP:
             recipe.addStep(content.toString());
             message = String.format("Step: %s is added", content.toString());

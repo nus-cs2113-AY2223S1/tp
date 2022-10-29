@@ -6,8 +6,6 @@ import recipeditor.edit.EditModeCommand;
 import recipeditor.edit.Invalid;
 import recipeditor.edit.Swap;
 import recipeditor.edit.Change;
-import recipeditor.edit.View;
-import recipeditor.edit.Quit;
 import recipeditor.recipe.Recipe;
 import recipeditor.recipe.RecipeList;
 
@@ -48,7 +46,6 @@ public class EditMode {
                 Ui.showMessageInline(HELP_1);
                 Ui.showMessageInline(HELP_2);
                 input = Ui.readInput();
-                Ui.showMessageInline(parseEditInput(input));
             }
         } catch (IndexOutOfBoundsException i) {
             Ui.showMessageInline(INVALID_INDEX);
@@ -57,44 +54,6 @@ public class EditMode {
         } catch (Exception e) {
             Ui.showMessageInline(GENERIC_ERROR);
         }
-    }
-
-    private String parseEditInput(String input) {
-
-        EditModeCommand cmd;
-        String[] parsed = input.split(" ");
-        String commandWord = parsed[0].toLowerCase();
-
-        switch (commandWord) {
-        case "/add":
-            cmd = new Add(parsed, editedRecipe);
-            break;
-        case "/del":
-            cmd = new Delete(parsed, editedRecipe);
-            break;
-        case "/swap":
-            cmd = new Swap(parsed, editedRecipe);
-            break;
-        case "/change":
-            cmd = new Change(parsed, editedRecipe);
-            break;
-        case "/view":
-            cmd = new View(parsed, editedRecipe, originalRecipe);
-            break;
-        case "/done":
-            cmd = new Quit(editedRecipe);
-            break;
-        default:
-            cmd = new Invalid(editedRecipe);
-        }
-
-        try {
-            editedRecipe = cmd.execute();
-            return cmd.getMessage();
-        } catch (Exception e) {
-            return e.getMessage();
-        }
-
     }
 
     public boolean exitEditMode() {
