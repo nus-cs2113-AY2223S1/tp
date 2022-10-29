@@ -35,7 +35,7 @@ public class HelpCommand extends Command {
     private static final String COMMAND_LIST_CATEGORIES = "list-categories";
     private static final String COMMAND_FIND_USER = "find-user /k <keyword>";
     private static final String COMMAND_FIND_ITEM = "find-item /k <keyword>";
-    private static final String ADD_SPACE_REMINDER = "\nPlease take note to add a space after delimiters!\n";
+    private static final String ADD_SPACE_REMINDER = "Please take note to add a space after delimiters!\n";
     private static final String CASE_SENSITIVE_REMINDER = "Please note that except for 'find-item' and 'find-user', "
                                                             + "all other commands are case-sensitive!\n";
     private static final String INVALID_SYMBOLS_REMINDER = "Refrain from using '|' and '/' as arguments!";
@@ -73,6 +73,7 @@ public class HelpCommand extends Command {
         this.commandToDetailMap.put("Find user by keywords", COMMAND_FIND_USER);
         this.commandToDetailMap.put("Find item by keywords", COMMAND_FIND_ITEM);
         this.commandToDetailMap.put("Sort all items in a range", COMMAND_SORT_ITEM);
+        this.commandToDetailMap.put(System.lineSeparator() + "ADDITIONAL-DETAILS", UNDERLINE);
     }
 
     /**
