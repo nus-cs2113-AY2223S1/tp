@@ -18,16 +18,24 @@ The following features are supported by Duke.
 
 ### Adding a movie: `add`
 Adds a new movie review to your list.
+**Note:** title, genre, and site must not include "/" delimiter in input so that command can be correctly parsed.
 
-**Format**: `add /movie <title> /review <rating> /date <dateWatched>`
+**Format**: 
+
+`add /movie <title> /rating <rating> /date <dateWatched> /genre <genre>`
+
+`add /tv <title> /rating <rating>  /date <dateWatched> /genre <genre> /site <location>`
 
 Usage: 
-`add /movie inception /rating 99 /date 10-01-2020 /genre thriller`
+
+`add /movie inception /rating 10 /date 10-01-2020 /genre thriller`
+
+`add /tv game of thrones /rating 5  /date 02-02-2022 /genre fantasy /site matt's house`
 
 Output:
 ```
 Got it. I've added the following item to the list:
-        [Movie]  up  Rating:99.0 Genre: animated Date watched:10-01-2020
+        [Movie] inception Rating: 10.0 Genre: animated Date watched:10-01-2020
 
         Now you have 5 reviews in the list.
 ```

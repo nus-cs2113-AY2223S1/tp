@@ -10,6 +10,11 @@ public class ListCommand extends Commands {
         super(reviews);
     }
 
+    //@@author matthewphua
+    /**
+     * Outputs list containing all reviews seperated by categories.
+     * @return Output string with reviews.
+     */
     @Override
     public String execute() {
         String moviesList = "";

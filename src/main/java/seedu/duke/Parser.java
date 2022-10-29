@@ -97,15 +97,18 @@ public class Parser {
 
             default:
                 logger.log(Level.WARNING, "An unrecognised command was given by the user.");
-                System.out.println("Unrecognised command");
+                Ui.print("Unrecognised command");
                 break;
             }
         } catch (DukeException e) {
-            System.out.println("Illegal character entered!");
+            Ui.print("Illegal character entered!");
         }
     }
 
-    //@@author naz019
+    //@@author matthewphua
+    /**
+     * Executes the find action by creating a find object.
+     */
     public void executeFind(String[] words) {
         try {
             String keyWord = words[1];
@@ -114,10 +117,11 @@ public class Parser {
             Ui.print(output);
             logger.log(Level.INFO, "\n\tFind command executed");
         } catch (Exception e) {
-            System.out.println("\nIncomplete or wrongly formatted command, try again.\n");
+            Ui.print("\nIncomplete or wrongly formatted command, try again.\n");
         }
     }
 
+    //@@author naz019
     public void executeSort(String[] words) {
         try {
             executor = new SortCommand(mediaList, words);
@@ -125,7 +129,7 @@ public class Parser {
             Ui.print(output);
             logger.log(Level.INFO, "\n\tSort command executed");
         } catch (Exception e) {
-            System.out.println("\nIncomplete or wrongly formatted command, try again.\n");
+            Ui.print("\nIncomplete or wrongly formatted command, try again.\n");
         }
     }
 
@@ -136,7 +140,7 @@ public class Parser {
             Ui.print(output);
             logger.log(Level.INFO, "\n\tFavourites command executed");
         } catch (Exception e) {
-            System.out.println("\nIncomplete or wrongly formatted command, try again.\n");
+            Ui.print("\nIncomplete or wrongly formatted command, try again.\n");
         }
     }
 
@@ -231,6 +235,9 @@ public class Parser {
     }
 
     //@@author matthewphua
+    /**
+     * Executes the clear action by creating a clear object.
+     */
     public void executeClear() {
         executor = new ClearCommand(mediaList);
         String output = executor.execute();
@@ -239,6 +246,9 @@ public class Parser {
     }
 
     //@@author matthewphua
+    /**
+     * Executes the delete action by creating a delete object.
+     */
     public void executeDelete(String[] words) {
         try {
             if (words.length != 3) {
@@ -262,7 +272,7 @@ public class Parser {
             }
         } catch (DukeException e) {
             logger.log(Level.WARNING, "\n\tDelete command failed");
-            System.out.println("\n" + e.getMessage());
+            Ui.print("\n" + e.getMessage());
         }
 
     }
