@@ -29,7 +29,7 @@ information quickly with minimal latency.
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed. 
-2. Download the latest version of `Property Rental Manager` from [here](http://link.to/duke).
+2. Download the latest version of `Property Rental Manager` from [here](https://github.com/AY2223S1-CS2113-F11-1/tp/releases).
 
 ## Features 
 
