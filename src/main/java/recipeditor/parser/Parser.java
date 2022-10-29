@@ -150,7 +150,7 @@ public class Parser {
             edit.enterEditMode(index);
             return new EditCommand(edit.exitEditMode(), index, edit.getEditedRecipe());
         }
-        return new InvalidCommand(EditCommand.COMMAND_SYNTAX);
+        return new InvalidCommand(EditCommand.COMMAND_FORMAT);
     }
 
     private static Command parseFindCommand(String[] parsed) {

@@ -5,7 +5,7 @@ import recipeditor.recipe.RecipeList;
 
 public class EditCommand extends Command {
     public static final String COMMAND_TYPE = "/edit";
-    public static final String COMMAND_SYNTAX = "Syntax for /edit \n" + "\t /edit <index>";
+    public static final String COMMAND_FORMAT = "Syntax for /edit \n" + "\t /edit <index>";
     private final boolean editSuccess;
     private final int index;
     private final Recipe editedRecipe;
