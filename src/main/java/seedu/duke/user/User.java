@@ -44,6 +44,11 @@ public class User {
         return username + age + contactNumber;
     }
 
+    /**
+     * Formats the user information to store in memory.
+     *
+     * @return A formatted string of user information
+     */
     public String convertItemToFileFormat() {
         String separator = " | ";
         int checkSum = toString().length();
