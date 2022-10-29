@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class UserTest {
 
     User user;
+
     @BeforeEach
     void initializeTest() {
         user = new User("yixiang", 22, "98126666");
