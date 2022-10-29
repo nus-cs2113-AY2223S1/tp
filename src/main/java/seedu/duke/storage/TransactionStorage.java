@@ -111,8 +111,7 @@ public class TransactionStorage extends Storage {
         String borrowerId = splitTransactionLine[3];
         int duration = Integer.parseInt(splitTransactionLine[4]);
         LocalDate createdAt = LocalDate.parse(splitTransactionLine[5]);
-        double money = Double.parseDouble(splitTransactionLine[6]);
-        BigDecimal moneyTransacted = BigDecimal.valueOf(money);
+        double moneyTransacted = Double.parseDouble(splitTransactionLine[6]);
         return new Transaction(transactionId, itemName, itemId, borrowerId, duration, createdAt, moneyTransacted);
     }
 

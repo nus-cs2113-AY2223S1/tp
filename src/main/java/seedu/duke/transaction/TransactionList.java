@@ -69,7 +69,7 @@ public class TransactionList {
      */
 
     //@@author jorellesee
-    public Transaction updateTransaction(String transactionId, int duration, BigDecimal moneyTransacted)
+    public Transaction updateTransaction(String transactionId, int duration, double moneyTransacted)
             throws TransactionNotFoundException, InvalidTransactionException {
         for (int i = 0; i < this.transactionList.size(); ++i) {
             Transaction tx = this.transactionList.get(i);
@@ -127,7 +127,7 @@ public class TransactionList {
     public double getTotalMoneyTransacted() {
         int totalProfit = 0;
         for (Transaction transaction : transactionList) {
-            totalProfit += transaction.getMoneyTransacted().doubleValue();
+            totalProfit += transaction.getMoneyTransacted();
         }
         return totalProfit;
     }

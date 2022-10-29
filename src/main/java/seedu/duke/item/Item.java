@@ -64,12 +64,11 @@ public class Item {
 
     public String toString(TransactionList transactionList) {
         String itemId = "ItemId: " + this.itemId + "\n";
-        String itemIcon =
-                "[" + (isAvailable(transactionList) ? "Available" : "On loan") + "] ";
+        String itemIcon = "[" + (isAvailable(transactionList) ? "Available" : "On loan") + "] ";
         String itemName = "   Item name: " + name + "\n";
         String itemCategory = "   Category: " + category.toString() + "\n";
         String itemOwner = "   Owner: " + getOwnerId() + "\n";
-        String itemPrice = "   PricePerDay: $" + pricePerDay;
+        String itemPrice = "   PricePerDay: $" + String.format("%.2f", pricePerDay);
         return itemIcon + itemId + itemName + itemCategory + itemOwner + itemPrice;
     }
 

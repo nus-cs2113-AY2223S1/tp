@@ -21,12 +21,13 @@ import seedu.duke.command.transaction.ViewTransactionsByUserCommand;
 import seedu.duke.command.Command;
 import seedu.duke.command.exit.ExitCommand;
 import seedu.duke.command.help.HelpCommand;
-import seedu.duke.command.user.AddUserCommand;
-import seedu.duke.command.user.FindUserCommand;
-import seedu.duke.command.user.ListUsersCommand;
-import seedu.duke.command.user.RemoveUserCommand;
 import seedu.duke.command.user.ViewUserCommand;
 import seedu.duke.command.user.ViewUserDebtCommand;
+import seedu.duke.command.user.FindUserCommand;
+import seedu.duke.command.user.AddUserCommand;
+import seedu.duke.command.user.ListUsersCommand;
+import seedu.duke.command.user.RemoveUserCommand;
+import seedu.duke.command.user.ViewUserItemsCommand;
 import seedu.duke.exception.CommandNotFoundException;
 import seedu.duke.exception.InsufficientArgumentsException;
 import seedu.duke.exception.InvalidArgumentException;
@@ -71,6 +72,7 @@ public class CommandParser {
     private static final String COMMAND_FIND_TX = "find-tx";
     private static final String COMMAND_FIND_TX_BY_USER = "find-tx-by-user";
     private static final String COMMAND_VIEW_USER_DEBT = "view-user-debt";
+    private static final String COMMAND_VIEW_USER_ITEMS = "view-user-items";
     private static final String COMMAND_SORT_ITEMS = "sort-items";
     private static final String COMMAND_LIST_CATEGORIES = "list-categories";
     private static final String COMMAND_UPDATE_ITEM = "update-item";
@@ -162,7 +164,7 @@ public class CommandParser {
         case COMMAND_LIST_TX:
             return new ListTransactionsCommand(transactionList);
         case COMMAND_VIEW_USER:
-            return new ViewUserCommand(parts, userList);
+            return new ViewUserCommand(parts, userList, itemList, transactionList);
         case COMMAND_VIEW_ITEM:
             return new ViewItemCommand(parts, itemList, transactionList);
         case COMMAND_VIEW_TX:
@@ -177,6 +179,8 @@ public class CommandParser {
             return new RemoveUserCommand(parts, userList, itemList, transactionList);
         case COMMAND_VIEW_USER_DEBT:
             return new ViewUserDebtCommand(parts, userList, transactionList);
+        case COMMAND_VIEW_USER_ITEMS:
+            return new ViewUserItemsCommand(parts, userList, itemList, transactionList);
         case COMMAND_REMOVE_ITEM:
             return new RemoveItemCommand(parts, itemList, transactionList);
         case COMMAND_REMOVE_TX:

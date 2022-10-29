@@ -18,7 +18,7 @@ public class ItemTest {
     void convertItemToFileFormatTest() throws InvalidCategoryException {
         Item item = new Item("Cup", 1, 1.0, "jorelle");
         String itemId = item.getItemId();
-        assertEquals(itemId + " | Cup | 1.0 | jorelle | 1 | 115",
+        assertEquals(itemId + " | Cup | 1.0 | jorelle | 1 | 116",
                 item.convertItemToFileFormat());
     }
 }

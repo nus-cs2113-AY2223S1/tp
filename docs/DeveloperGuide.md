@@ -216,6 +216,23 @@ Step 4: After finding the user, a message will be displayed to the user via `Ui.
 The following sequence diagram shows how the view user operation works:
 ![viewUserSequence](images/ViewUserSequence.png)
 
+#### 4.1.5. View a user's items
+
+> This feature is an extension to view user feature. It allows the user to view a user's items and if the input is correct, a list of items will be sent from the Ui to user
+
+Given below is an example usage scenario and how the command mechanism behaves at each step.
+
+Step 1: The user types in the command in the command line. The CommandParser class checks ig the command is valid through the `createCommand()` method and either sends an exception or sent the input to ViewUserItemsCommand to be processed.
+
+Step 2: The ViewUserItemsCommand checks if the delimiters ('u') are present in the `getArgViewUserItemsCmd()`. The command checks whether the input's final argument is valid through `isValidUser()`. An exception will be thrown if the argument does not satisfy the requirements (user not found/does not exist).
+
+Step 3: If argument is valid, then `getUserItems()` will return a list of items whose owner's id equals to the argument.
+
+Step 4: The list of items wil then be displayed to the user via `Ui.printResponse()`.
+
+The following sequence diagram shows how the view-user-items operation works:
+![viewUserItemsSequence](images/ViewUserItemsSequence.png)
+
 **...To be updated(Find user, View user debt)**
 
 ### 4.2. Item-related Features

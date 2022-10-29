@@ -4,7 +4,7 @@ import seedu.duke.id.IdGenerator;
 import seedu.duke.parser.DateParser;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
@@ -21,7 +21,7 @@ public class Transaction {
     private final int duration;
     private final LocalDate createdAt;
     private final LocalDate returnedAt;
-    private final BigDecimal moneyTransacted;
+    private final double moneyTransacted;
 
     /**
      * Constructor method for transaction.
@@ -33,7 +33,7 @@ public class Transaction {
      * @param createdAt  The day when transaction created.
      */
     public Transaction(String itemName, String itemId, String borrowerId, int duration,
-                       LocalDate createdAt, BigDecimal moneyTransacted) {
+                       LocalDate createdAt, double moneyTransacted) {
         this.transactionId = IdGenerator.generateId();
         this.itemName = itemName;
         this.borrower = borrowerId;
@@ -55,7 +55,7 @@ public class Transaction {
      * @param createdAt     The day when transaction created.
      */
     public Transaction(String transactionId, String itemName, String itemId, String borrowerId,
-                       int duration, LocalDate createdAt, BigDecimal moneyTransacted) {
+                       int duration, LocalDate createdAt, double moneyTransacted) {
         this.transactionId = transactionId;
         this.itemName = itemName;
         this.borrower = borrowerId;
@@ -63,7 +63,7 @@ public class Transaction {
         this.createdAt = createdAt;
         this.returnedAt = createdAt.plusDays(duration);
         this.itemId = itemId;
-        this.moneyTransacted = moneyTransacted.round(new MathContext(2));
+        this.moneyTransacted = moneyTransacted;
     }
 
     /**
@@ -116,7 +116,7 @@ public class Transaction {
      *
      * @return The Duration of transaction
      */
-    public BigDecimal getMoneyTransacted() {
+    public double getMoneyTransacted() {
         return moneyTransacted;
     }
 
@@ -149,7 +149,7 @@ public class Transaction {
      * @param newDuration The new duration
      * @return The updated transaction
      */
-    public Transaction update(int newDuration, BigDecimal newMoneyTransacted) {
+    public Transaction update(int newDuration, double newMoneyTransacted) {
         return new Transaction(this.transactionId, this.itemName, this.itemId, this.borrower,
                 newDuration, this.createdAt, newMoneyTransacted);
     }
@@ -192,7 +192,8 @@ public class Transaction {
         String itemName = "   ItemName: " + this.itemName + " ";
         String usersId = "   Borrower: " + this.borrower + "\n";
         String duration = "   Duration: " + this.duration + "\n";
-        String moneyTransactedString = "   MoneyTransacted: " + this.moneyTransacted;
+        BigDecimal money = new BigDecimal(this.moneyTransacted);
+        String moneyTransactedString = "   Money_Transacted: $" + money.setScale(2, RoundingMode.HALF_EVEN) + " ";
         if (!isFinished()) {
             String remainDays = " (" + ChronoUnit.DAYS.between(LocalDate.now(), getReturnDate())
                     + " day(s) left)\n";
