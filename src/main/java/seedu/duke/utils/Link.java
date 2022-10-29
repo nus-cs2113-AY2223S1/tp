@@ -118,6 +118,7 @@ public class Link {
                 continue;
             }
             SelectedModule selectedModule = new SelectedModule(module, semester);
+            lessonDelimiter = ",";
             //only parses the lessons between the first and second = sign (there is not supposed to be a second = sign)
             if (splitModuleAndLesson.length > 1) {
                 String[] lessonsInfo = (splitModuleAndLesson[1]).split(lessonDelimiter);
