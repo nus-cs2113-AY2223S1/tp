@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_FILE_NOT_FOUND;
-import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_STORAGE_ILLEGALLY_MODIFIED;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_USER_STORAGE_ILLEGALLY_MODIFIED;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_STORE_INVALID;
 
 //@@author bdthanh
@@ -39,17 +39,19 @@ public class UserStorage extends Storage {
             File userFile = new File(userFilePath);
             ArrayList<User> userList = new ArrayList<>();
             Scanner scanner = new Scanner(userFile);
+            int checkSum = Integer.parseInt(scanner.nextLine());
             while (scanner.hasNext()) {
                 String userLine = scanner.nextLine();
                 String[] splitUserLine = userLine.split(SEPARATOR);
                 User user = handleUserLine(splitUserLine);
                 userList.add(user);
             }
+            checkCheckSumWhole(userList, checkSum);
             return userList;
         } catch (FileNotFoundException e) {
             throw new UserFileNotFoundException(MESSAGE_FILE_NOT_FOUND);
         } catch (Exception e) {
-            throw new StoreFailureException(MESSAGE_STORAGE_ILLEGALLY_MODIFIED);
+            throw new StoreFailureException(MESSAGE_USER_STORAGE_ILLEGALLY_MODIFIED);
         }
     }
 
@@ -88,10 +90,29 @@ public class UserStorage extends Storage {
      * @param splitUserLine The raw user information.
      * @return A User with full information.
      */
-    public static User handleUserLine(String[] splitUserLine) {
+    public static User handleUserLine(String[] splitUserLine) throws StoreFailureException {
+        User user = getUserFromUserLine(splitUserLine);
+        checkCheckSumLine(user, Integer.parseInt(splitUserLine[3]));
+        return user;
+    }
+
+    private static User getUserFromUserLine(String[] splitUserLine) {
+        assert splitUserLine.length == 4 : "Invalid User Line";
         String username = splitUserLine[0];
         int age = Integer.parseInt(splitUserLine[1]);
         String contactNumber = splitUserLine[2];
         return new User(username, age, contactNumber);
+    }
+
+    private static void checkCheckSumLine(User user, int checkSum) throws StoreFailureException {
+        if (user.toString().length() != checkSum) {
+            throw new StoreFailureException(MESSAGE_USER_STORAGE_ILLEGALLY_MODIFIED);
+        }
+    }
+
+    private static void checkCheckSumWhole(ArrayList<User> userList, int checkSum) throws StoreFailureException {
+        if (userList.size() != checkSum / 3) {
+            throw new StoreFailureException(MESSAGE_USER_STORAGE_ILLEGALLY_MODIFIED);
+        }
     }
 }

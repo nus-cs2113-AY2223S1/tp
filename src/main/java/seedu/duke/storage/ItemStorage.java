@@ -5,6 +5,7 @@ import seedu.duke.exception.ItemFileNotFoundException;
 import seedu.duke.exception.StoreFailureException;
 import seedu.duke.item.Item;
 import seedu.duke.item.ItemList;
+import seedu.duke.transaction.TransactionList;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_FILE_NOT_FOUND;
-import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_STORAGE_ILLEGALLY_MODIFIED;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_ITEM_STORAGE_ILLEGALLY_MODIFIED;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_STORE_INVALID;
 
 //@@author bdthanh
@@ -40,17 +41,19 @@ public class ItemStorage extends Storage {
             File itemFile = new File(itemFilePath);
             ArrayList<Item> itemList = new ArrayList<>();
             Scanner scanner = new Scanner(itemFile);
+            int checkSum = Integer.parseInt(scanner.nextLine());
             while (scanner.hasNext()) {
                 String itemLine = scanner.nextLine();
                 String[] splitItemLine = itemLine.split(SEPARATOR);
                 Item item = handleItemLine(splitItemLine);
                 itemList.add(item);
             }
+            checkCheckSumWhole(itemList, checkSum);
             return itemList;
         } catch (FileNotFoundException e) {
             throw new ItemFileNotFoundException(MESSAGE_FILE_NOT_FOUND);
         } catch (Exception e) {
-            throw new StoreFailureException(MESSAGE_STORAGE_ILLEGALLY_MODIFIED);
+            throw new StoreFailureException(MESSAGE_ITEM_STORAGE_ILLEGALLY_MODIFIED);
         }
     }
 
@@ -89,12 +92,31 @@ public class ItemStorage extends Storage {
      * @param splitItemLine The raw item information.
      * @return An Item with full information.
      */
-    public static Item handleItemLine(String[] splitItemLine) throws InvalidCategoryException {
+    public static Item handleItemLine(String[] splitItemLine) throws InvalidCategoryException, StoreFailureException {
+        assert splitItemLine.length == 6 : "Invalid Transaction Line";
+        Item item = getItemFromItemLine(splitItemLine);
+        checkCheckSumLine(item, Integer.parseInt(splitItemLine[5]));
+        return item;
+    }
+
+    private static Item getItemFromItemLine(String[] splitItemLine) throws InvalidCategoryException {
         String itemId = splitItemLine[0];
         String itemName = splitItemLine[1];
         double price = Double.parseDouble(splitItemLine[2]);
         String ownerId = splitItemLine[3];
         int categoryNumber = Integer.parseInt(splitItemLine[4]);
         return new Item(itemId, itemName, categoryNumber, price, ownerId);
+    }
+
+    private static void checkCheckSumLine(Item item, int checkSum) throws StoreFailureException {
+        if (item.toString(new TransactionList()).length() != checkSum) {
+            throw new StoreFailureException(MESSAGE_ITEM_STORAGE_ILLEGALLY_MODIFIED);
+        }
+    }
+
+    private static void checkCheckSumWhole(ArrayList<Item> itemList, int checkSum) throws StoreFailureException {
+        if (itemList.size() != checkSum / 3) {
+            throw new StoreFailureException(MESSAGE_ITEM_STORAGE_ILLEGALLY_MODIFIED);
+        }
     }
 }

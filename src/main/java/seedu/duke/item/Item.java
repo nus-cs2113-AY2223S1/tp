@@ -75,7 +75,8 @@ public class Item {
 
     public String convertItemToFileFormat() {
         String separator = " | ";
+        int checkSum = toString(new TransactionList()).length();
         return itemId + separator + name + separator + pricePerDay + separator + ownerId
-                + separator + Category.setCategory(category);
+                + separator + Category.setCategory(category) + separator + checkSum;
     }
 }

@@ -134,8 +134,9 @@ public class Transaction {
      */
     public String convertTransactionToFileFormat() {
         String separator = " | ";
+        int checkSum = toString().length();
         return transactionId + separator + itemName + separator + itemId + separator + borrower
-                + separator + duration + separator + createdAt + separator + moneyTransacted;
+                + separator + duration + separator + createdAt + separator + moneyTransacted + separator + checkSum;
     }
 
     //@@author winston-lim
@@ -159,13 +160,21 @@ public class Transaction {
      * @param transactionToCheck The new transaction
      * @return true if they overlap
      */
-    public boolean isOverlapWithTransaction(Transaction transactionToCheck) {
-        return ((transactionToCheck.createdAt.isAfter(this.createdAt)
+    public boolean isOverlapWithTransactionWithEquality(Transaction transactionToCheck) {
+        return isOverlapWithTransactionWithoutEquality(transactionToCheck)
+                || transactionToCheck.createdAt.isEqual(this.createdAt)
+                || transactionToCheck.getReturnDate().isEqual(this.getReturnDate());
+    }
+
+    public boolean isOverlapWithTransactionWithoutEquality(Transaction transactionToCheck) {
+        return (transactionToCheck.createdAt.isAfter(this.createdAt)
                 && transactionToCheck.getReturnDate().isBefore(this.getReturnDate()))
                 || (transactionToCheck.getReturnDate().isAfter(this.createdAt)
                 && transactionToCheck.getReturnDate().isBefore(this.getReturnDate()))
                 || (transactionToCheck.createdAt.isBefore(this.createdAt)
-                && transactionToCheck.getReturnDate().isAfter(this.createdAt)));
+                && transactionToCheck.getReturnDate().isAfter(this.getReturnDate()))
+                || (transactionToCheck.createdAt.isAfter(this.createdAt)
+                && transactionToCheck.createdAt.isBefore(this.getReturnDate()));
     }
 
     /**

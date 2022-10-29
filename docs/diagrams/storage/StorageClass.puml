@@ -15,6 +15,9 @@ class UserStorage {
     + writeData(UserList): void
     - makeUserDir(UserList): void
     + handleUserLine(String[]): User
+    - getUserFromUserLine(String[]): User
+    - checkCheckSumLine(User, int): void
+    - checkCheckSumWhole(ArrayList<User>, int): void
 }
 
 class ItemStorage {
@@ -25,6 +28,9 @@ class ItemStorage {
     + writeData(ItemList): void
     - makeItemDir(ItemList): void
     + handleItemLine(String[]): Item
+    - getItemFromItemLine(String[]): Item
+    - checkCheckSumLine(Item, int): void
+    - checkCheckSumWhole(ArrayList<Item>, int): void
 }
 
 class TransactionStorage {
@@ -35,6 +41,9 @@ class TransactionStorage {
     + writeData(TransactionList): void
     - makeTransactionDir(TransactionList)): void
     + handleTransactionLine(String[]): Transaction
+    - getTransactionFromTransactionLine(String[]): Transaction
+    - checkCheckSumLine(Transaction, int): void
+    - checkCheckSumWhole(ArrayList<Transaction>, int): void
 }
 
 "{abstract}\nStorage" <|-- UserStorage

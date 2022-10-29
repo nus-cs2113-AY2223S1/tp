@@ -15,10 +15,10 @@
 
 ## 1. Introduction
 
-Welcome to Upcycle - a perfect desktop app dedicate for managing rental businesses. The nature of these businesses 
-requires to deal with tons of data; therefore, noting down all information by notes and pen is not ideal for managers. 
-It is developed for rental business managers, who can type fast to efficiently keep track all of their customers, items, 
-and transactions via Command Line Interface with a single line of command. 
+Welcome to Upcycle - a perfect desktop app dedicate to managing rental businesses. The nature of these businesses
+requires dealing with tons of data; therefore, noting down all information with notes and pen is not ideal for managers.
+It is developed for rental business managers, who can type fast to efficiently keep track of all of their customers, items,
+and transactions via a Command Line Interface.
 
 This UserGuide introduces you a brief overview of our features with example of usage and expected outcome. Let's hop into the section [2. Quick Start](#2-quick-start) to start using Upcycle quickly.
 
@@ -58,7 +58,7 @@ This section allows users to understand all the features that we offer, includin
 >2. Parameters can be shuffled. For example, ```update-item /i [ITEM_ID] /p [PRICE]``` and ```update-item /p [PRICE] /i [ITEM_ID]``` are the same.
 >3. Phrases in ```[CAPITAL_WORDS]``` are the parameters for you to input. And, if those phrases are **bold**, then they are optional
 >4. Argument value cannot contain ```\``` or ```|```.
->5. You must put a space between delimiter and value. For example, ```/nbuiducthanh``` is a error, but ```/n buiducthanh``` is correct
+>5. You must put a space between delimiter and value. For example, ```/nbuiducthanh``` is an error, but ```/n buiducthanh``` is correct
 
 
 ### 3.1. Getting help
@@ -385,6 +385,8 @@ Note:
 1. The unit of duration is days
 2. Duration must be an integer, greater than 0 and less than 1461 (4 years)
 3. The format of create date is YYYY-MM-DD, and it must be before the input date
+4. The item must be available during the period of new transaction.
+5. The moneyTransacted of transaction will only use the pricePerDay of the items at the moment of input. If the item's price is updated, it will not affect the moneyTransacted.
 
 Example of usage: ```add-tx /i 3ff10798 /b bui /d 5 /c 2022-10-20```
 
@@ -491,10 +493,6 @@ ____________________________________________________________
 
 Format: ```bye```
 
-Note:
-1. After running this command, your data in user list, item list and transaction list are stored in 3 file 
-```user.txt```, ```item.txt```, and ```transaction.txt``` in ```/data/``` folders, respectively
-
 Example of usage: ```bye```
 
 Expected outcome:
@@ -540,4 +538,11 @@ How do I transfer my data to another computer?
 
 >On your other computer, download your ```Upcycle.jar``` file following the instructions in [Quick Start](#2-quick-start). Then, you copy the \data\ folder and paste into your folder for Upcycle on your new computer. That's it, now you can run our app with your previous data on another computer.
 
+If Duke crashes, is my data saved?
 
+>Yes, Duke will automatically save your data to files after each operation. Therefore, data will be saved no matter how you exit the program, even with ```Ctrl-C```.
+
+What will happen if I illegally modify data in the files?
+
+> Duke will detect if the data is modified or not. If yes, it would still be functional and create three new lists to replace those corrupted data. However, this also means that your previous data cannot be recovered.
+> Please do not edit your data files, otherwise, you have to input all over again.

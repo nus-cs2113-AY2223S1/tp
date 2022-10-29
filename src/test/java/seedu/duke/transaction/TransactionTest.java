@@ -12,11 +12,14 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 // @@author bdthanh
 class TransactionTest {
     Transaction transaction;
+    Transaction transactionToCompare;
 
     @BeforeEach
     void initializeTest() {
         transaction = new Transaction("pen", "28sd37h2", "bui", 5,
                 LocalDate.parse("2022-10-03"),3.2);
+        transactionToCompare = new Transaction("pen", "28sd37h2", "bui", 5,
+                LocalDate.parse("2022-10-05"),3.2);
     }
 
     @Test
@@ -54,7 +57,7 @@ class TransactionTest {
     @Test
     void convertTransactionToFileFormatTest() {
         String transactionId = transaction.getTxId();
-        assertEquals(transactionId + " | pen | 28sd37h2 | bui | 5 | 2022-10-03 | 3.2",
+        assertEquals(transactionId + " | pen | 28sd37h2 | bui | 5 | 2022-10-03 | 3.2 | 135",
                 transaction.convertTransactionToFileFormat());
     }
 
@@ -64,5 +67,39 @@ class TransactionTest {
                 LocalDate.parse("2022-10-03"), 192);
         assertEquals(newTransaction.toString(),
                 transaction.update(300, 192).toString());
+    }
+
+    @Test
+    void getMoneyTransacted() {
+        assertEquals(3.2, transaction.getMoneyTransacted());
+    }
+
+    @Test
+    void isOverlapWithTransactionWithEquality_overlap_returnTrue() {
+        assertTrue(transaction.isOverlapWithTransactionWithEquality(transactionToCompare));
+    }
+
+    @Test
+    void isOverlapWithTransactionWithEquality_notOverlap_returnFalse() {
+        transactionToCompare = new Transaction("pen", "28sd37h2", "bui", 5,
+                LocalDate.parse("2022-10-10"),3.2);
+        assertFalse(transaction.isOverlapWithTransactionWithEquality(transactionToCompare));
+    }
+
+    @Test
+    void isOverlapWithTransactionWithEquality_overlapWithEquality_returnTrue() {
+        transactionToCompare = new Transaction("pen", "28sd37h2", "bui", 5,
+                LocalDate.parse("2022-10-03"),3.2);
+        assertTrue(transaction.isOverlapWithTransactionWithEquality(transactionToCompare));
+    }
+
+    @Test
+    void isOverlapWithTransactionWithoutEquality_overlapWoEquality_returnTrue() {
+        assertTrue(transaction.isOverlapWithTransactionWithoutEquality(transactionToCompare));
+    }
+
+    @Test
+    void isOverlapWithTransactionWithoutEquality_overlapWithEquality_returnFalse() {
+        assertFalse(transaction.isOverlapWithTransactionWithoutEquality(transaction));
     }
 }
