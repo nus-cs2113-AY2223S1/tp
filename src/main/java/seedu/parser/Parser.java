@@ -63,7 +63,7 @@ public class Parser {
             }
             return prepareAuth(arguments);
         case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
+            return prepareExit(arguments);
         case FavouriteCommand.COMMAND_WORD:
             if (arguments.trim().isEmpty()) {
                 return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.FAVOURITE_FORMAT);
@@ -92,6 +92,17 @@ public class Parser {
             return new HelpCommand();
         default:
             return new InvalidCommand("Invalid Command");
+        }
+    }
+
+    private Command prepareExit(String arguments) {
+        try {
+            if (arguments.trim().isEmpty()) {
+                return new ExitCommand();
+            }
+            throw new UnneededArgumentsException("exit");
+        } catch (UnneededArgumentsException e) {
+            return new InvalidCommand(e.getMessage());
         }
     }
 
@@ -161,7 +172,7 @@ public class Parser {
             if (arguments.trim().isEmpty()) {
                 return new UpdateCommand(api, carparkList);
             }
-            throw new UnneededArgumentsException("Update");
+            throw new UnneededArgumentsException("update");
         } catch (UnneededArgumentsException e) {
             return new InvalidCommand(e.getMessage());
         }
