@@ -15,32 +15,30 @@ YAMOM will always start planning for semester 1 when the application is run.
 
 ## Table of Contents
 
-- [User Guide for Yet Another Module Organizer/Manager (YAMOM) v1.0](#user-guide-for-yet-another-module-organizermanager-yamom-v20)
-    - [Introduction](#introduction)
-    - [Table of Contents](#table-of-contents)
-    - [Quick Start](#quick-start)
-    - [Features](#features)
-        - [Get help: `help`](#get-help-help)
-        - [Exit YAMOM: `bye`](#exit-yamom-bye)
-        - [Add a module: `add`](#add-a-module-add)
-        - [Remove a module: `remove`](#remove-a-module-remove)
-        - [Search for Modules: `search`](#search-for-modules-search)
-        - [Change semester to plan: `semester`](#change-semester-to-plan-semester)
-        - [View user timetable: `timetable`](#view-user-timetable-timetable)
-        - [List out all selected modules: `list`](#list-out-all-selected-modules-list)
-        - [Select a timetable slot: `select`](#select-a-timetable-slot-select)
-        - [Export current timetable : `export`](#export-current-timetable-export)
-        - [Import a NUSMod Link: `import`](#import-a-timetable-import)
-    - [Application Data](#application-data)
-        - [Data Storage](#data-storage)
-        - [Data Loading](#data-loading)
-        - [Transfer to another computer](#transfer-to-another-computer)
-        - [Transfer to NUSMODs (for NUS students)](#transfer-to-nusmods-for-nus-students)
-    - [FAQ](#faq)
-    - [Command summary](#command-summary)
-    - [Credits](#credits)
-
-<!--    - [Feature X: `COMMAND`](#feature-x-command) -->
+- [User Guide for Yet Another Module Organizer/Manager (YAMOM) v2.0](#user-guide-for-yet-another-module-organizermanager-yamom-v20)
+  - [Introduction](#introduction)
+  - [Table of Contents](#table-of-contents)
+  - [Quick Start](#quick-start)
+  - [Features](#features)
+    - [Get help: `help`](#get-help-help)
+    - [Exit YAMOM: `bye`](#exit-yamom-bye)
+    - [Add a module: `add`](#add-a-module-add)
+    - [Remove a module: `remove`](#remove-a-module-remove)
+    - [Search for Modules: `search`](#search-for-modules-search)
+    - [Change semester to plan: `semester`](#change-semester-to-plan-semester)
+    - [View user timetable: `timetable`](#view-user-timetable-timetable)
+    - [List out all selected modules: `list`](#list-out-all-selected-modules-list)
+    - [Select a timetable slot: `select`](#select-a-timetable-slot-select)
+    - [Export current timetable: `export`](#export-current-timetable-export)
+    - [Import a timetable: `import`](#import-a-timetable-import)
+  - [Application Data](#application-data)
+    - [Data Storage](#data-storage)
+    - [Data Loading](#data-loading)
+    - [Transfer to another computer](#transfer-to-another-computer)
+    - [Transfer to NUSMODs (for NUS students)](#transfer-to-nusmods-for-nus-students)
+  - [FAQ](#faq)
+  - [Command summary](#command-summary)
+  - [Credits](#credits)
 
 ## Quick Start
 
@@ -242,14 +240,14 @@ Possible Error:
 
 List out all modules that matches the module code.
 
-Format: `search (/code [MODULE_CODE] | /title [KEYWORD]) </level [MODULE_LEVEL]> </sem [MODULE_SEMESTER]>`
+Format: `search [ /code PARTIAL_MODULE_CODE | /title KEYWORD ] < /level MODULE_LEVEL > < /sem SEMESTER >`
 
-* The `MODULE_CODE` will be the module code of interest, can be partial module code.
+* The `PARTIAL_MODULE_CODE` will be the module code of interest, can be partial module code.
 * The `KEYWORD` will be a keyword in the module title.
-* The `MODULE_LEVEL` will be the first digit of the module code (indicate level of module), a single digit number.
-* The `MODULE_SEMESTER` will be the semester of interest.
-* At least one of `/code [MODULE_CODE]` or `/title [KEYWORD]` must be present for search.
-* `/level [MODULE_LEVEL` and `/sem [MODULE_SEMESTER]` are optional search fields.
+* The `MODULE_LEVEL` will be the first digit of the module code (indicate level of module), an integer from 1 to 8.
+* The `MODULE_SEMESTER` will be the semester of interest, an integer from 1 to 4.
+* At least one of `/code PARTIAL_MODULE_CODE` or `/title KEYWORD` must be present for search.
+* `/level MODULE_LEVEL` and `/sem SEMESTER` are optional search fields.
 
 Example of usage:
 
@@ -314,11 +312,17 @@ Possible Error:
 
 Select semester to plan for and organise.
 
-Format: `semester SEMESTER_SELECTED`
+Format: `semester SEMESTER`
+
+* `SEMESTER` is an integer from 1 to 4, or `ST1`, or `ST2`.
 
 Example of usage:
 
-`semester 1`
+`semester 1` to change to semester 1.
+
+`semester ST1` to change to semester 3 (Special Term I).
+
+`semester 3` also to change to semester 3 (Special Term I).
 
 Sample Output:
 
@@ -349,8 +353,9 @@ Possible Error:
 
 Prints out the current user timetable.
 
-Format: `timetable /(simple|fancy)`  
-`timetable /simple` is equivalent to `timetable`
+Format: `timetable < /fancy | /simple >`
+
+Note: Some terminals (mainly Windows terminals) do not support fancy mode. If you run `timetable /fancy` on terminals that do not support it, the output may not be readable. If neither of the options `/fancy` or `/simple` are specified, then YAMOM will attempt to decide the best view for you.
 
 Example of usage:
 
@@ -397,9 +402,9 @@ Possible Error:
 1. Random parameters:
 
     ```
-    timetable timetable
+    timetable show
     --------------------------------------------------------------------------------
-    Processing "timetable timetable" ...
+    Processing "timetable show" ...
     
     Error! 	Unknown command. Maybe you meant "view".
     --------------------------------------------------------------------------------
@@ -484,7 +489,7 @@ Possible Error:
 
 Selects a timeslot to be added to the user timetable.
 
-Format: `select /module MODULE_CODE /type LESSON_TYPE /code CLASS_NO`
+Format: `select [ /module MODULE_CODE ] [ /type LESSON_TYPE ] [ /code CLASS_NO ]`
 
 * The `CLASS_NO` will be a number.
 * The `LESSON_TYPE` can be either *lecture*, *tutorial*.
@@ -570,7 +575,7 @@ Here is your NUSMod Link:
 Import a timetable into YAMOM through a shareable NUSMod Link. The current semester will be 
 set to the semester indicated in the link provided (only for `import` command).
 
-Format: `import [NUSMOD_LINK]`
+Format: `import [ NUSMOD_LINK ]`
 
 * The `NUSMOD_LINK` need to be in the format
   of `https://nusmods.com/timetable/sem-SEMESTER_NUMBER/share?MODULE_INFO&MODULE_INFO`
@@ -645,9 +650,7 @@ Possible error:
 
 ### Data Storage
 
-The user data is stored in `duke.txt` under the data folder in the home directory. The data is stored 
-as NUSMods links for each semester. The data will be overwritten each time so there will not be any 
-persistent corrupt data file.
+The user data is stored in `duke.txt` under the data folder in the directory where the jar file is being run from. The data is stored as NUSMods links for each semester. The data will be overwritten each time so there will not be any persistent corrupt data file.
 
 ### Data Loading
 
@@ -657,8 +660,7 @@ keyword `import`, see [import](#import-a-timetable-import).
 
 ### Transfer to another computer
 
-Copy the application file with the corresponding `duke.txt` data file and `data` folder. A new file along with the 
-respective folder will be created if either is missing.
+Copy the application file with the corresponding `duke.txt` data file and `data` folder. A new file along with the respective folder will be created if either is missing.
 
 ### Transfer to NUSMODs (for NUS students)
 
@@ -682,18 +684,18 @@ Alternatively, you can export the timetable, copy the link generated, and import
 
 | Action                           | Format                                                                                         | Example                                                               |
 |----------------------------------|------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------|
-| Add a module                     | `add [MODULE_CODE]`                                                                            | `add CS2101`                                                          |
-| Remove a module                  | `remove [MODULE_CODE]`                                                                         | `remove CS2102`                                                       |
+| Add a module                     | `add [ MODULE_CODE ]`                                                                            | `add CS2101`                                                          |
+| Remove a module                  | `remove [ MODULE_CODE ]`                                                                         | `remove CS2102`                                                       |
 | Exit application                 | `bye`                                                                                          | `bye`                                                                 |
-| Read more details about a module | `info [MODULE_CODE]`                                                                           | `info CS2103`                                                         |
-| Find module by keyword           | `search /code [MODULE_CODE] /title [KEYWORD] </level [MODULE_LEVEL]> </sem [MODULE_SEMESTER]>` | `search /code cs /level 2 /sem 1`                                     |
+| Read more details about a module | `info [ MODULE_CODE ]`                                                                           | `info CS2103`                                                         |
+| Find module by keyword           | `search [ /code PARTIAL_MODULE_CODE \| /title KEYWORD ] < /level MODULE_LEVEL > < /sem SEMESTER >` | `search /code cs /level 2 /sem 1`                                     |
 | Seek help                        | `help`                                                                                         | `help`                                                                |
-| Import modules from NUSMods URL  | `import [URL]`                                                                                 | `import https://nusmods.com/timetable/sem-1/share?CS2113=LEC:1,TUT:4` |
+| Import modules from NUSMods URL  | `import [ NUSMODS_LINK ]`                                                                                 | `import https://nusmods.com/timetable/sem-1/share?CS2113=LEC:1,TUT:4` |
 | Export modules to NUSMods URL    | `export`                                                                                       | `export`                                                              |
-| Change semester                  | `semester [SEMESTER]`                                                                          | `semester 2`                                                          |
-| View timetable                   | `timetable /fancy` OR `timetable /simple`                                                      | `timetable /fancy`                                                    |
+| Change semester                  | `semester [ SEMESTER ]`                                                                          | `semester 2`                                                          |
+| View timetable                   | `timetable < /fancy \| /simple >`                                                      | `timetable`                                                    |
 | List selected modules            | `list`                                                                                         | `list`                                                                |
-| Add module timetable slot        | `select /module <MODULE_CODE> /type <LESSON_TYPE> /code <CLASS_NO>`                            | `select /module CS1010 /type tutorial /code 1`                        |
+| Add module timetable slot        | `select [ /module MODULE_CODE ] [ /type LESSON_TYPE ] [ /code CLASS_NO ]`                            | `select /module CS1010 /type tutorial /code 1`                        |
 
 ## Credits
 
