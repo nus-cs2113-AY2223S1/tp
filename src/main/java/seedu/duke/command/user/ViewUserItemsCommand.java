@@ -31,7 +31,7 @@ public class ViewUserItemsCommand extends Command {
         }
     }
 
-    private String getArgFindUserItemsCmd() throws InvalidArgumentException {
+    private String getArgViewUserItemsCmd() throws InvalidArgumentException {
         String args;
         String delimiter = CommandParser.getArgsDelimiter(parts[0]);
         if (delimiter.equals("u")) {
@@ -52,7 +52,7 @@ public class ViewUserItemsCommand extends Command {
     }
 
     protected ItemList getUserItems() throws UserNotFoundException, InvalidArgumentException {
-        String args = getArgFindUserItemsCmd();
+        String args = getArgViewUserItemsCmd();
         ItemList userItems = new ItemList();
         if (isValidUser(args)) {
             for (Item item : itemList.getItemList()) {

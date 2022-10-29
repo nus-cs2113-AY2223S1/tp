@@ -1,0 +1,46 @@
+@startuml
+hide footbox
+
+Actor User
+"User" -> ":Duke": "view-user-items..."
+activate ":Duke"
+":Duke" -> ":CommandParser": createCommand()
+activate ":CommandParser"
+":CommandParser" -> ":ViewUserItemsCommand"**: new
+activate ":ViewUserItemsCommand"
+return
+":CommandParser" --> ":Duke"
+deactivate
+
+":Duke" -> ":ViewUserItemsCommand" : executeCommand()
+activate ":ViewUserItemsCommand"
+":ViewUserItemsCommand" -> ":ViewUserItemsCommand": getUserItems()
+activate ":ViewUserItemsCommand"
+":ViewUserItemsCommand" -> ":ViewUserItemsCommand": getArgViewUserItemsCmd()
+activate ":ViewUserItemsCommand"
+return args
+    ":ViewUserItemsCommand" -> ":UserList": getUserById()
+    activate ":UserList"
+alt user is valid
+    return user
+    ":ViewUserItemsCommand" --> ":ViewUserItemsCommand": userItems
+    deactivate ":ViewUserItemsCommand"
+    ":ViewUserItemsCommand" -> "<<class>>\nUi": printResponse()
+    activate "<<class>>\nUi"
+    return
+    deactivate "<<class>>\nUi"
+    deactivate ":UserList"
+else user is invalid
+    ":ViewUserItemsCommand" -> ":DukeException"** : new
+    destroy ":ViewUserItemsCommand"
+    activate ":DukeException"
+    ":DukeException" --> ":Duke"
+    destroy ":DukeException"
+    ":Duke" -> "<<class>>\nUi" : print error
+    activate "<<class>>\nUi"
+    "<<class>>\nUi" --> ":Duke" : error message
+    deactivate "<<class>>\nUi"
+end
+deactivate ":ViewUserItemsCommand"
+
+@enduml

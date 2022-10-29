@@ -94,6 +94,7 @@ List all transactions: list-tx
 VIEW-RELATED-COMMANDS: 
 --------------------
 View a user: view-user /u <userName>
+View a user's items: view-user-items /u <userName>
 View a item: view-item /i <itemId>
 View a transaction: view-tx /t <transactionId>
 
@@ -172,7 +173,7 @@ ____________________________________________________________
 ```
 
 #### 3.2.4. ```view-user``` - View a user
->View the details of a user in the list
+>View the details of a user in the list including the user's items and debt
 
 Format: ```view-user /u [USERNAME]```
 
@@ -186,10 +187,31 @@ Expected outcome:
 ____________________________________________________________
 Here is the user you have requested to view: 
 Username: jingwei Age: 19 Contact: 22384729 
+The user's debt is $0.0
+Here are 2 item(s) in your list:
+   1. Status: [Available] ItemId: 895c7dd6 Item: scale Category: SPORTS_EQUIPMENT Owner: jingwei PricePerDay: $1.0
+   2. Status: [Available] ItemId: e084cd0a Item: battery Category: ELECTRICAL_APPLIANCES Owner: jingwei PricePerDay: $1.5
 ____________________________________________________________
 ```
 
-#### 3.2.4. ```find-user``` - Find users using keyword
+#### 3.2.5. ```view-user-items``` - View user's items
+>An extension to view-user command which shows a user's items only
+
+Format: `view-user-items /u [USERNAME]`
+
+Note:
+1. Username must be present in the user list
+
+Example of usage: `view-user-items /u jingwei`
+
+Expected outcome:
+```
+Here are 2 item(s) in your list:
+   1. Status: [Available] ItemId: 895c7dd6 Item: scale Category: SPORTS_EQUIPMENT Owner: jingwei PricePerDay: $1.0
+   2. Status: [Available] ItemId: e084cd0a Item: battery Category: ELECTRICAL_APPLIANCES Owner: jingwei PricePerDay: $1.5
+```
+
+#### 3.2.6. ```find-user``` - Find users using keyword
 >List all items that are associated with a given keyword
 
 Format: ```find-user /k [KEYWORD]```
