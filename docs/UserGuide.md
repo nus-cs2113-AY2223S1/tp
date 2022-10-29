@@ -367,13 +367,13 @@ Example of usage:
 
 <hr>
 
-### Exiting the application: `exit`
+### Exiting the application: `bye`
 Exits MoneyGoWhere.
 
-Syntax: `exit`
+Syntax: `bye`
 
 Example of usage:
-* `exit`
+* `bye`
 
 ## Sample Outputs
 Input: `Add-Expense -n Subscription -a 13.37`
