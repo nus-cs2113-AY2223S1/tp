@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.duke.exceptions.YamomException;
 import seedu.duke.model.LessonType;
+import seedu.duke.model.Module;
 import seedu.duke.model.SelectedModule;
 
 public class LinkTest {
@@ -43,5 +44,26 @@ public class LinkTest {
                 .stream()
                 .filter(x -> x.getModule().moduleCode.equals("MA1511"))
                 .count(), 0);
+    }
+
+    @Test
+    public void getLink_noModuleState_noModuleLink() {
+        State state = new State();
+        String link = Link.getLink(state);
+
+        assertEquals("https://nusmods.com/timetable/sem-1/share?", link);
+    }
+
+    @Test
+    public void getLink_currentState_correctLink() {
+        State state = new State();
+        Module module = Module.get("CS2113");
+        SelectedModule selectedModule = new SelectedModule(module, 1);
+        selectedModule.selectSlot(LessonType.LECTURE,"1");
+        selectedModule.selectSlot(LessonType.TUTORIAL,"4");
+        state.addSelectedModule(selectedModule);
+        String link = Link.getLink(state);
+
+        assertEquals("https://nusmods.com/timetable/sem-1/share?CS2113=LEC:1,TUT:4", link);
     }
 }

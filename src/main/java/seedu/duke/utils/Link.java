@@ -50,9 +50,9 @@ public class Link {
 
     private static final String SUPPOSED_PREFIX_REGEX = "^" + DOMAIN + SEMESTER_DELIMITER + "\\d/share\\?";
 
-    private static String moduleDelimiter = "&";
+    private static final String MODULE_DELIMITER = "&";
 
-    private static String lessonDelimiter = ",";
+    private static final String LESSON_DELIMITER = ",";
 
     public static final int SEMESTER_PARAM_INDEX = 4;
 
@@ -105,8 +105,7 @@ public class Link {
         if (cleanModuleParam.isEmpty()) {
             return;
         }
-        moduleDelimiter = "&";
-        String[] moduleAndLessonsArray = cleanModuleParam.split(moduleDelimiter);
+        String[] moduleAndLessonsArray = cleanModuleParam.split(MODULE_DELIMITER);
         List<SelectedModule> selectedModules = new ArrayList<>();
         for (String moduleAndLessons : moduleAndLessonsArray) {
             String[] splitModuleAndLesson = moduleAndLessons.split(Pattern.quote(MODULE_CODE_DELIMITER));
@@ -121,10 +120,9 @@ public class Link {
             ui.addMessage(moduleCode + " added.");
             ui.addMessage("The following lessons were added:");
             SelectedModule selectedModule = new SelectedModule(module, semester);
-            lessonDelimiter = ",";
             //only parses the lessons between the first and second = sign (there is not supposed to be a second = sign)
             if (splitModuleAndLesson.length > 1) {
-                String[] lessonsInfo = (splitModuleAndLesson[1]).split(lessonDelimiter);
+                String[] lessonsInfo = (splitModuleAndLesson[1]).split(LESSON_DELIMITER);
                 addLessons(lessonsInfo, selectedModule, semester, ui);
             }
             selectedModules.add(selectedModule);
@@ -273,34 +271,31 @@ public class Link {
      * @param toSave          NUSMods formatted link.
      */
     private static void appendModules(List<SelectedModule> selectedModules, StringBuilder toSave) {
-        moduleDelimiter = "";
+        ArrayList<String> modules = new ArrayList<>();
         for (SelectedModule selectedModule: selectedModules) {
-            toSave.append(moduleDelimiter);
-            moduleDelimiter = "&";
             Module module = selectedModule.getModule();
-            toSave.append(module.moduleCode);
-            toSave.append(MODULE_CODE_DELIMITER);
+            String moduleInfo = module.moduleCode + MODULE_CODE_DELIMITER;
             Map<LessonType, String> selectedSlots = selectedModule.getSelectedSlots();
-            appendLessons(selectedSlots, toSave);
+            String lessonsInfo = joinLessons(selectedSlots);
+            modules.add(moduleInfo + lessonsInfo);
         }
+        toSave.append(String.join(MODULE_DELIMITER, modules));
     }
 
     /**
-     * Goes through all the selected lessons slots for the selected module and appends it in
+     * Goes through all the selected lessons slots for the selected module and joins it in
      * the correct format to be saved.
      *
      * @param selectedSlots The selected lessons slots.
-     * @param toSave        NUSMods formatted link.
+     * @return The String containing all the joint lessons.
      */
-    private static void appendLessons(Map<LessonType, String> selectedSlots, StringBuilder toSave) {
-        lessonDelimiter = "";
+    private static String joinLessons(Map<LessonType, String> selectedSlots) {
+        ArrayList<String> lessons = new ArrayList<>();
         for (Map.Entry<LessonType, String> slot: selectedSlots.entrySet()) {
-            toSave.append(lessonDelimiter);
-            lessonDelimiter = ",";
             String shortLessonType = Timetable.lessonTypeToShortString(slot.getKey());
-            toSave.append(shortLessonType);
-            toSave.append(LESSON_TYPE_DELIMITER);
-            toSave.append(slot.getValue());
+            String lesson = shortLessonType + LESSON_TYPE_DELIMITER + slot.getValue();
+            lessons.add(lesson);
         }
+        return String.join(LESSON_DELIMITER, lessons);
     }
 }
