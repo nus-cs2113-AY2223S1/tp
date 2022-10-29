@@ -16,17 +16,17 @@ YAMOM is designed for users who are proficient in Command Line Interface (CLI).
     - [Table of Contents](#table-of-contents)
     - [Quick Start](#quick-start)
     - [Features](#features)
-        - [Getting help: `help`](#getting-help-help)
-        - [Exiting YAMOM: `bye`](#exiting-yamom-bye)
+        - [Get help: `help`](#get-help-help)
+        - [Exit YAMOM: `bye`](#exit-yamom-bye)
         - [Add a module: `add`](#add-a-module-add)
-        - [Removing a module: `remove`](#removing-a-module-remove)
+        - [Remove a module: `remove`](#remove-a-module-remove)
         - [Search for Modules: `search`](#search-for-modules-search)
-        - [Changing semester to plan: `semester`](#changing-semester-to-plan-semester)
-        - [Viewing user timetable: `timetable`](#viewing-user-timetable-timetable)
-        - [Listing out all selected modules: `list`](#listing-out-all-selected-modules-list)
+        - [Change semester to plan: `semester`](#change-semester-to-plan-semester)
+        - [View user timetable: `timetable`](#view-user-timetable-timetable)
+        - [List out all selected modules: `list`](#list-out-all-selected-modules-list)
         - [Select a timetable slot: `select`](#select-a-timetable-slot-select)
-        - [Creating an NUSMod Link: `export`](#creating-an-nusmod-link-export)
-        - [Importing a timetable: `import`](#importing-a-timetable-import)
+        - [Export current timetable : `export`](#export-current-timetable-export)
+        - [Import a NUSMod Link: `import`](#import-a-timetable-import)
     - [Application Data](#application-data)
         - [Data Storage](#data-storage)
         - [Transfer to another computer](#transfer-to-another-computer)
@@ -72,8 +72,9 @@ Sem [1] >>
 > - Words in `UPPERCASE` information to be supplied by the user.
     e.g. in `select [MODULE]`, `[MODULE]` are expected input for the command in the form of `select CS1010`.
 > - Extraneous parameters will be rejected.
+> - The commands are case-insensitive. E.g. `help` is the same as `HELP`.
 
-### Getting help: `help`
+### Get help: `help`
 
 Displays the list of functionalities available by YAMOM.
 
@@ -127,9 +128,10 @@ For more detailed guide, please visit https://ay2223s1-cs2113-f11-3.github.io/tp
 --------------------------------------------------------------------------------
 ```
 
-### Exiting YAMOM: `bye`
+### Exit YAMOM: `bye`
 
-Ends the programme.
+Ends the programme.  
+The NUSMods export link of all semesters will be displayed.
 
 Format: `bye`
 
@@ -156,16 +158,16 @@ Bye bye, See you again
 ```
 
 > Note:
-> - The user data will be processed and stored locally on the computer
-> - The user data will be available when YAMOM is activated again
+> - The user data will be processed and stored locally on the computer.
+> - The user data will be available when YAMOM is activated again.
 
 ### Add a module: `add`
 
-Adds a module from available database into the user timetable
+Adds a module from available database into the user timetable.
 
 Format: `add MODULE_CODE`
 
-* The `MODULE_CODE` is not case-sensitive, but has to be an exact match
+* The `MODULE_CODE` is not case-sensitive, but has to be an exact match.
 
 Example of usage:
 
@@ -186,8 +188,8 @@ CS2040 has been added
 
 Possible Error:
 
-1. Wrong module format
-    - The module code must be an exact match (CS2030 instead of cs203) else nothing will be added
+1. Wrong module format:
+    - The module code must be an exact match (CS2030 instead of cs203) else nothing will be added.
    ```
    add cs203
    --------------------------------------
@@ -200,8 +202,8 @@ Possible Error:
    --------------------------------------
    ```
 
-2. More than one module
-    - Currently, YAMOM only support adding one module at a time
+2. More than one module:
+    - Currently, YAMOM only support adding one module at a time.
    ```
    add CS1231 CS2101
    --------------------------------------
@@ -210,13 +212,13 @@ Possible Error:
    --------------------------------------
    ```
 
-### Removing a module: `remove`
+### Remove a module: `remove`
 
-Removes a module from the user timetable
+Removes a module from the user timetable.
 
 Format: `remove MODULE_CODE`
 
-* The `MODULE_CODE` is not case-sensitive, but has to be an exact match
+* The `MODULE_CODE` is not case-sensitive, but has to be an exact match.
 
 Example of usage:
 
@@ -237,7 +239,7 @@ CS2040 has been deleted!
 
 Possible Error:
 
-* The error for remove is similar to the command `add`, see [add](#add-a-module-add)
+* The error for remove is similar to the command `add`, see [add](#add-a-module-add).
 
 ### Search for Modules: `search`
 
@@ -245,12 +247,12 @@ List out all modules that matches the module code.
 
 Format: `search (/code [MODULE_CODE] | /title [KEYWORD]) </level [MODULE_LEVEL]> </sem [MODULE_SEMESTER]>`
 
-* The `MODULE_CODE` will be the module code of interest, can be partial module code
-* The `KEYWORD` will be a keyword in the module title
-* The `MODULE_LEVEL` will be the first digit of the module code (indicate level of module), a single digit number
-* The `MODULE_SEMESTER` will be the semester of interest
-* At least one of `/code [MODULE_CODE]` or `/title [KEYWORD]` must be present for search
-* `/level [MODULE_LEVEL` and `/sem [MODULE_SEMESTER]` are optional search fields
+* The `MODULE_CODE` will be the module code of interest, can be partial module code.
+* The `KEYWORD` will be a keyword in the module title.
+* The `MODULE_LEVEL` will be the first digit of the module code (indicate level of module), a single digit number.
+* The `MODULE_SEMESTER` will be the semester of interest.
+* At least one of `/code [MODULE_CODE]` or `/title [KEYWORD]` must be present for search.
+* `/level [MODULE_LEVEL` and `/sem [MODULE_SEMESTER]` are optional search fields.
 
 Example of usage:
 
@@ -281,11 +283,11 @@ To get full details of the module, type 'info <module code>'
 ```
 
 > Note:
-> - The list of modules can get very long for a generic search
+> - The list of modules can get very long for a generic search.
 
 Possible Error:
 
-1. Module code does not have a match
+1. Module code does not have a match:
     * YAMOM will return an empty list of modules
    ```
     search /code XX
@@ -296,7 +298,7 @@ Possible Error:
     No module found
     --------------------------------------------------------------------------------
    ```
-2. The search is not in the expected format
+2. The search is not in the expected format:
     * YAMOM will prompt for the right search format
 
     ```   
@@ -311,7 +313,7 @@ Possible Error:
     --------------------------------------------------------------------------------
     ```
 
-### Changing semester to plan: `semester`
+### Change semester to plan: `semester`
 
 Select semester to plan for and organise.
 
@@ -334,19 +336,19 @@ You are now planning for special term I
 
 Possible Error:
 
-1. User did not input a valid semester
+1. User did not input a valid semester:
 
-```
-semester 0
---------------------------------------------------------------------------------
-Processing "semester 0" ...
+    ```
+    semester 0
+    --------------------------------------------------------------------------------
+    Processing "semester 0" ...
+    
+    Error! 	Wrong format, should be: semester [ SEMESTER ]
+    Not a valid semester.
+    --------------------------------------------------------------------------------
+    ```
 
-Error! 	Wrong format, should be: semester [ SEMESTER ]
-Not a valid semester.
---------------------------------------------------------------------------------
-```
-
-### Viewing user timetable: `timetable`
+### View user timetable: `timetable`
 
 Prints out the current user timetable.
 
@@ -397,38 +399,38 @@ Possible Error:
 
 1. Random parameters:
 
-```
-timetable timetable
---------------------------------------------------------------------------------
-Processing "timetable timetable" ...
-
-Error! 	Unknown command. Maybe you meant "view".
---------------------------------------------------------------------------------
-```
+    ```
+    timetable timetable
+    --------------------------------------------------------------------------------
+    Processing "timetable timetable" ...
+    
+    Error! 	Unknown command. Maybe you meant "view".
+    --------------------------------------------------------------------------------
+    ```
 
 2. Forgot backslash `/`:
 
-```
-timetable fancy
---------------------------------------------------------------------------------
-Processing "timetable fancy" ...
-
-Error! 	Unknown command. Maybe you forgot a "/".
---------------------------------------------------------------------------------
-```
+    ```
+    timetable fancy
+    --------------------------------------------------------------------------------
+    Processing "timetable fancy" ...
+    
+    Error! 	Unknown command. Maybe you forgot a "/".
+    --------------------------------------------------------------------------------
+    ```
 
 3. Contains both `/fancy` and `/simple`:
 
-```
-timetable /simple /fancy
---------------------------------------------------------------------------------
-Processing "timetable /simple /fancy" ...
+    ```
+    timetable /simple /fancy
+    --------------------------------------------------------------------------------
+    Processing "timetable /simple /fancy" ...
+    
+    Error! 	Timetable cannot be both simple and fancy!
+    --------------------------------------------------------------------------------
+    ```
 
-Error! 	Timetable cannot be both simple and fancy!
---------------------------------------------------------------------------------
-```
-
-### Listing out all selected modules: `list`
+### List out all selected modules: `list`
 
 Displays list of all selected modules and slots.
 
@@ -472,14 +474,14 @@ Possible Error:
 
 1. Additional parameters:
 
-```
-list modules
---------------------------------------------------------------------------------
-Processing "list modules" ...
-
-Error! 	0 arguments expected
---------------------------------------------------------------------------------
-```
+    ```
+    list modules
+    --------------------------------------------------------------------------------
+    Processing "list modules" ...
+    
+    Error! 	0 arguments expected
+    --------------------------------------------------------------------------------
+    ```
 
 ### Select a timetable slot: `select`
 
@@ -489,7 +491,7 @@ Format: `select /module MODULE_CODE /type LESSON_TYPE /code CLASS_NO`
 
 * The `CLASS_NO` will be a number.
 * The `LESSON_TYPE` can be either *lecture*, *tutorial*.
-* The `MODULE_CODE` need to be an exact match
+* The `MODULE_CODE` need to be an exact match.
 
 Example of usage:
 
@@ -508,45 +510,45 @@ Slot selected successfully!
 
 Possible Error:
 
-1. The module code is not in the list of selected modules (assuming that cs2040 is not in the list of selected modules)
+1. The module code is not in the list of selected modules (assuming that cs2040 is not in the list of selected modules):
 
-```
-select /module CS2040 /type lecture /code 2
---------------------------------------------------------------------------------
-Processing "select /module CS2040 /type lecture /code 2" ...
+    ```
+    select /module CS2040 /type lecture /code 2
+    --------------------------------------------------------------------------------
+    Processing "select /module CS2040 /type lecture /code 2" ...
+    
+    Slot selection unsuccessful!
+    You might have entered the wrong Module, Lesson Type or Class No.
+    --------------------------------------------------------------------------------
+    ```
 
-Slot selection unsuccessful!
-You might have entered the wrong Module, Lesson Type or Class No.
---------------------------------------------------------------------------------
-```
+2. The module code is in the list of selected modules, but the lesson type and class no is not valid:
 
-2. The module code is in the list of selected modules, but the lesson type and class no is not valid.
+    ```
+    select /module CS2113 /type rec /code 2
+    --------------------------------------------------------------------------------
+    Processing "select /module CS2113 /type rec /code 2" ...
+    
+    Slot selection unsuccessful!
+    You might have entered the wrong Module, Lesson Type or Class No.
+    --------------------------------------------------------------------------------
+    ```
 
-```
-select /module CS2113 /type rec /code 2
---------------------------------------------------------------------------------
-Processing "select /module CS2113 /type rec /code 2" ...
+3. The search is not in the expected format:
 
-Slot selection unsuccessful!
-You might have entered the wrong Module, Lesson Type or Class No.
---------------------------------------------------------------------------------
-```
+    ```
+    select /mod CS2040 /type lecture /number 2 
+    --------------------------------------------------------------------------------
+    Processing "select /mod CS2040 /type lecture /number 2" ...
+    
+    Error! 	Wrong format given, should be 
+        select [ /module MODULE_CODE ] [ /type LESSON_TYPE ] [ /code CLASS_NO ]
+    --------------------------------------------------------------------------------
+    ```
 
-3. The search is not in the expected format
+### Export current timetable: `export`
 
-```
-select /mod CS2040 /type lecture /number 2 
---------------------------------------------------------------------------------
-Processing "select /mod CS2040 /type lecture /number 2" ...
-
-Error! 	Wrong format given, should be 
-	select [ /module MODULE_CODE ] [ /type LESSON_TYPE ] [ /code CLASS_NO ]
---------------------------------------------------------------------------------
-```
-
-### Creating an NUSMod Link: `export`
-
-Creates a sharable NUSMod Link
+Creates a sharable NUSMod Link.
 
 Format: `export`
 
@@ -566,9 +568,9 @@ Here is your NUSMod Link:
 --------------------------------------------------------------------------------
 ```
 
-### Importing a timetable: `import`
+### Import a timetable: `import`
 
-Import a timetable into YAMOM through a shareable NUSmod Link.
+Import a timetable into YAMOM through a shareable NUSMod Link.
 
 Format: `import [NUSMOD_LINK]`
 
@@ -592,27 +594,27 @@ Timetable imported to YAMOM!
 
 Possible error:
 
-1. No link given
+1. No link given:
 
-```
-import 
---------------------------------------------------------------------------------
-Processing "import" ...
+    ```
+    import 
+    --------------------------------------------------------------------------------
+    Processing "import" ...
+    
+    Error! 	No NUSMod link given.
+    --------------------------------------------------------------------------------
+    ```
 
-Error! 	No NUSMod link given.
---------------------------------------------------------------------------------
-```
+2. Wrong link format:
 
-2. Wrong link format
-
-```
-import www.google.com
---------------------------------------------------------------------------------
-Processing "import www.google.com" ...
-
-Error! 	The link you supplied is not valid.
---------------------------------------------------------------------------------
-```
+    ```
+    import www.google.com
+    --------------------------------------------------------------------------------
+    Processing "import www.google.com" ...
+    
+    Error! 	The link you supplied is not valid.
+    --------------------------------------------------------------------------------
+    ```
 
 ## Application Data
 
