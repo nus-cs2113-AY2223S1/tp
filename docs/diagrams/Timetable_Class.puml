@@ -74,10 +74,14 @@ class InvalidLessonDayException {
 class InvalidUniversityException {
 }
 
+class InvalidTimingException {
+}
+
 TimetableManager "1" --> "*" Timetable :> Manages
 Timetable "1" --> "*" Lesson :> Contains
 Lesson --> InvalidModuleException : <<throws>>
 Timetable --> InvalidTimeFormatException : <<throws>>
+Timetable --> InvalidTimingException : <<throws>>
 Timetable --> TimetableClashException : <<throws>>
 Timetable --> ParseException : <<throws>>
 Timetable --> LessonNotFoundException : <<throws>>
