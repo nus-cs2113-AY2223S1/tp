@@ -6,17 +6,18 @@ import recipeditor.parser.FlagParser;
 import recipeditor.parser.FlagType;
 import recipeditor.recipe.Recipe;
 
+import java.util.ArrayList;
+
 public abstract class EditModeCommand {
 
     String[] parsedCommand;
     Recipe recipe;
     String message = "";
-    FlagType flag;
+    FlagType ingredientFlag;
 
     public EditModeCommand(String[] parsedCommand, Recipe recipe) {
         this.parsedCommand = parsedCommand;
         this.recipe = recipe;
-        this.flag = FlagParser.checkFlagType(parsedCommand);
     }
 
     public EditModeCommand(Recipe recipe) {
@@ -35,5 +36,4 @@ public abstract class EditModeCommand {
                 + "New:" + "\n"
                 + newRecipe.getRecipeAttributesFormatted();
     }
-
 }

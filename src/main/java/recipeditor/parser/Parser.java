@@ -39,7 +39,7 @@ public class Parser {
         case DeleteCommand.COMMAND_TYPE:
             return parseDeleteCommand(parsed);
         case EditCommand.COMMAND_TYPE:
-            return parseEditCommand(parsed);
+            return parseEditCommand(parsed, input);
         case ViewCommand.COMMAND_TYPE:
             return parseViewCommand(parsed);
         case FindCommand.COMMAND_TYPE:
@@ -100,17 +100,37 @@ public class Parser {
     }
 
 
-    private static Command parseEditCommand(String[] parsed) {
+    private static Command parseEditCommand(String[] parsed, String input) {
         int index = -1;
         if (parsed.length > 1) {
             try {
                 index = Integer.parseInt(parsed[1]) - 1;
             } catch (NumberFormatException n) {
-                index = RecipeList.getRecipeIndexFromTitle(parsed[1]);
+                return new InvalidCommand();
             }
-            EditMode edit = new EditMode();
-            edit.enterEditMode(index);
-            return new EditCommand(edit.exitEditMode(), index, edit.getEditedRecipe());
+            if (parsed.length == 2) {
+                /**
+                 * PLACE GUI HERE
+                 */
+                EditMode edit = new EditMode();
+                edit.enterEditMode(index);
+                return new EditCommand(edit.exitEditMode(), index, edit.getEditedRecipe());
+                /**
+                 * PLACE GUI HERE
+                 */
+            } else {
+                Recipe originalRecipe = RecipeList.getRecipe(index);
+                Recipe editedRecipe = new Recipe(originalRecipe.getTitle(), originalRecipe.getDescription());
+
+                editedRecipe.addIngredients(originalRecipe.getIngredients());
+                editedRecipe.addSteps(originalRecipe.getSteps());
+
+                FlagType[] flags = FlagParser.getFlags(parsed);
+                if (flags == null) {
+                    return new InvalidCommand();
+                }
+                return new EditCommand(flags[0], parsed, index, editedRecipe);
+            }
         }
         return new InvalidCommand();
     }
