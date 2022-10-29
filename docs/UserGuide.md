@@ -454,12 +454,9 @@ Note:
 1. The unit of duration is days
 2. Duration must be an integer, greater than 0 and less than 1461 (4 years)
 3. The format of create date is YYYY-MM-DD, and it must be before the input date
-<<<<<<< HEAD
 4. The item must be available during the period of new transaction.
 5. The moneyTransacted of transaction will only use the pricePerDay of the items at the moment of input. If the item's price is updated, it will not affect the moneyTransacted.
-=======
-4. First parameter of the transaction message shows the status of the transaction (Finished/Unfinished).
->>>>>>> 3676a288d9a3857d86363b75a84c3d76cd4f5cab
+6. First parameter of the transaction message shows the status of the transaction (Finished/Unfinished).
 
 Example of usage: ```add-tx /i 3ff10798 /b bui /d 5 /c 2022-10-20```
 
@@ -657,5 +654,8 @@ If Duke crashes, is my data saved?
 
 What will happen if I illegally modify data in the files?
 
-> Duke will detect if the data is modified or not. If yes, it would still be functional and create three new lists to replace those corrupted data. However, this also means that your previous data cannot be recovered.
-> Please do not edit your data files, otherwise, you have to input all over again.
+> Duke will detect if the data is modified or not, we have two checksum to detect changes in each entry. If yes, it would give you a chance to try to fix the data in the files, but they would not able
+> to use the app until Duke detect your data is fixed. If you cannot fix it, then you have to delete entire ```data``` files .However, this also means that your previous data cannot be recovered.
+> Please DO NOT EDIT your data files, otherwise, you might have to input all over again.
+> 
+> Note: Duke is designed not to be able to run with corrupted data file, not Duke crashes
