@@ -2,7 +2,8 @@ package recipeditor.recipe;
 
 import recipeditor.storage.Storage;
 
-import java.util.*;
+
+import java.util.ArrayList;
 
 public class RecipeList {
     private static ArrayList<Recipe> recipes = new ArrayList<>();

@@ -92,8 +92,8 @@ public class Storage {
     public static void loadRecipesToRecipeTitlesList() {
         try {
             String allRecipeFileContent = loadFileContent(ALL_RECIPES_FILE_PATH);
-            String recipeTitles[] = allRecipeFileContent.split("\\r?\\n");
-            for(String recipeTitle : recipeTitles) {
+            String[] recipeTitles = allRecipeFileContent.split("\\r?\\n");
+            for (String recipeTitle : recipeTitles) {
                 RecipeList.recipeTitles.add(recipeTitle);
             }
         } catch (FileNotFoundException e) {
@@ -115,7 +115,7 @@ public class Storage {
         } catch (FileNotFoundException e) {
             Ui.showMessage("File not found :<");
         } catch (ParseFileException e) {
-            Ui.showMessage("Error in parsing recipe file content." );
+            Ui.showMessage("Error in parsing recipe file content.");
         }
     }
 

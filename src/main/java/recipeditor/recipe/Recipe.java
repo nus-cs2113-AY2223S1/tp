@@ -117,7 +117,7 @@ public class Recipe {
         for (int i = 0; i < ingredients.size(); i++) {
             Ingredient ingredient = ingredients.get(i);
             String textShown = String.format("%s. %s / %s / %s %n",
-                    i+1, ingredient.getName(), ingredient.getAmount(), ingredient.getUnit().trim());
+                    i + 1, ingredient.getName(), ingredient.getAmount(), ingredient.getUnit().trim());
             recipeIngredientStringFormatted.append(textShown);
         }
         logger.log(Level.INFO, "Get ingredients in" + title);

@@ -7,16 +7,13 @@ import recipeditor.ui.Ui;
 public class DeleteCommand extends Command {
     public static final String COMMAND_TYPE = "/delete";
     public static final String CORRECT_FORMAT = "The input should be '/delete (recipeTitle).'";
-    private int index;
     private String recipeTitleToDelete;
 
     /**
      * Construct a delete command including task to delete.
      *
-     * @param index the index of task to delete
      */
     public DeleteCommand(String recipeTitleToDelete) {
-//        this.index = index;
         this.recipeTitleToDelete = recipeTitleToDelete;
     }
 
