@@ -76,6 +76,7 @@ public class Storage {
 
     public static void deleteRecipeFile(String recipeTitleToDelete) {
         String recipeFilePath = RECIPES_FOLDER_PATH + "/" + recipeTitleToDelete.stripTrailing();
+        System.out.println(recipeFilePath);
         try {
             File file = new File(recipeFilePath);
             if (file.delete()) {

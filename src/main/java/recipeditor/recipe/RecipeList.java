@@ -33,9 +33,6 @@ public class RecipeList {
     public static void deleteRecipeFromTitle(String recipeTitle) {
         recipes.remove(getRecipeFromTitle(recipeTitle));
         recipeTitles.removeIf(r -> r.equals(recipeTitle));
-        for (String recipe : recipeTitles) {
-            System.out.println(recipe);
-        }
     }
 
     public static void editRecipe(int index, Recipe newRecipe) {

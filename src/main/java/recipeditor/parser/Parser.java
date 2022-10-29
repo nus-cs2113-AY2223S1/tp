@@ -130,10 +130,7 @@ public class Parser {
             try {
                 int index = Integer.parseInt(parsed[1]) - 1; // to account for 0-based indexing in recipelist
                 return new ViewCommand(index);
-
             } catch (Exception e) {
-                System.out.format("Exception: Wrong command Format%n"
-                        + "Try the command in correct format: view/delete <index of task>%n");
                 return new InvalidCommand();
             }
         }
