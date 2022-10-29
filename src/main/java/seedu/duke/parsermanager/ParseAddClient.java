@@ -69,7 +69,7 @@ public class ParseAddClient extends ParseAdd {
     }
 
 
-    private ArrayList<String> processCommandAddClientDetails(String rawCommandDetail)
+    public ArrayList<String> processCommandAddClientDetails(String rawCommandDetail)
             throws MissingAddClientFlagException, IncorrectAddClientFlagOrderException {
         int[] flagIndexPositions = getFlagIndexPositions(rawCommandDetail, ADD_CLIENT_FLAGS);
         checkForMissingClientFlags(flagIndexPositions);
@@ -139,7 +139,7 @@ public class ParseAddClient extends ParseAdd {
     }
 
 
-    private void validateClientDetails(ArrayList<String> clientDetails) throws EmptyAddClientDetailException,
+    public void validateClientDetails(ArrayList<String> clientDetails) throws EmptyAddClientDetailException,
             InvalidContactNumberException, InvalidEmailException, InvalidBudgetFormatException,
             DuplicateClientException {
         // Checks for Missing Client Name, Contact Number, Budget Per Month (SGD)
