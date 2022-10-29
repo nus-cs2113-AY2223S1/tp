@@ -4,6 +4,7 @@ import seedu.duke.id.IdGenerator;
 import seedu.duke.parser.DateParser;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
@@ -62,7 +63,7 @@ public class Transaction {
         this.createdAt = createdAt;
         this.returnedAt = createdAt.plusDays(duration);
         this.itemId = itemId;
-        this.moneyTransacted = moneyTransacted;
+        this.moneyTransacted = moneyTransacted.round(new MathContext(2));
     }
 
     /**
@@ -176,22 +177,22 @@ public class Transaction {
      */
     @Override
     public String toString() {
-        String itemId = "ItemID: " + this.itemId + " ";
+        String itemId = "Item_ID: " + this.itemId + " ";
         String transactionIcon = "[" + (isFinished() ? "Finished" : "Unfinished") + "] ";
-        String transactionId = "TxID: " + this.transactionId + " ";
-        String itemName = "ItemName: " + this.itemName + " ";
+        String transactionId = "Tx_ID: " + this.transactionId + " ";
+        String itemName = "Item_Name: " + this.itemName + " ";
         String usersId = "Borrower: " + this.borrower + " ";
-        String duration = "Duration: " + this.duration + " ";
-        String moneyTransactedString = " MoneyTransacted: " + this.moneyTransacted + " ";
+        String duration = "Duration: " + this.duration + " days ";
+        String moneyTransactedString = " Money_Transacted: " + this.moneyTransacted + " ";
         if (!isFinished()) {
             String remainDays = " (" + ChronoUnit.DAYS.between(LocalDate.now(), getReturnDate())
                     + " day(s) left)";
             String returnDate =
-                    "ReturnDate: " + DateParser.formatDateToString(returnedAt) + remainDays;
+                    "Return_Date: " + DateParser.formatDateToString(returnedAt) + remainDays;
             return transactionIcon + transactionId + itemName + itemId + usersId
                     + duration + returnDate + moneyTransactedString;
         }
-        String returnedDate = "ReturnedDate: " + DateParser.formatDateToString(returnedAt);
+        String returnedDate = "Returned_Date: " + DateParser.formatDateToString(returnedAt);
         return transactionIcon + transactionId + itemName + itemId + usersId
                 + duration + returnedDate + moneyTransactedString;
     }
