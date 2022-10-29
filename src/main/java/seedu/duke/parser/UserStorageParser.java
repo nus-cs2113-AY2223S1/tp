@@ -199,6 +199,7 @@ public class UserStorageParser {
     private static boolean isValidUni(String puName) {
         return Database.hasUniversityInDatabase(puName);
     }
+
     private static boolean isValidUniFormat(String[] items) {
         return items.length >= 3 && (items[2].equals("T") || items[2].equals("F"));
     }
@@ -256,11 +257,12 @@ public class UserStorageParser {
     private static void isValidNusMapping(String nusCode) throws InvalidUserStorageFileException {
         try {
             ArrayList<ModuleMapping> moduleMappings = Database.findNusMapping(nusCode);
-        } catch (ModuleNotFoundException e){
+        } catch (ModuleNotFoundException e) {
             throw new InvalidUserStorageFileException("Invalid file format\n"
                     + nusCode + " in NUS not found in database");
         }
     }
+
     private static void isValidPuMapping(String puCode, String puName) throws InvalidUserStorageFileException {
         try {
             ModuleMapping moduleMapping = Database.findPuMapping(puCode, puName);
@@ -269,6 +271,7 @@ public class UserStorageParser {
                     + puCode + " in " + puName + " not found in database");
         }
     }
+
     /**.
      * Method to split module information, using regex ";"
      * @param moduleInfo string containing 6 fields of module information, separated by ";"
