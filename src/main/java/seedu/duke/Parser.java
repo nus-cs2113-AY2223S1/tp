@@ -35,62 +35,73 @@ public class Parser {
         return result;
     }
 
+    public void checkIllegalCharacter(String userInput) throws DukeException {
+        if (userInput.contains("|")) {
+            throw new DukeException();
+        }
+    }
+
     public void processUserInput(String userInput) {
-        //@@author indraneelrp
-        final String listCommand = "list";
-        final String addCommand = "add";
-        final String deleteCommand = "delete";
-        final String clearCommand = "clear";
-        final String endCommand = "bye";
-        final String favouriteCommand = "favourite";
-        final String sortCommand = "sort";
-        final String findCommand = "find";
-        final String NT = "";
-        
-        String[] parsedCommand = getCommandWord(userInput);
+        try {
+            checkIllegalCharacter(userInput);
+            //@@author indraneelrp
+            final String listCommand = "list";
+            final String addCommand = "add";
+            final String deleteCommand = "delete";
+            final String clearCommand = "clear";
+            final String endCommand = "bye";
+            final String favouriteCommand = "favourite";
+            final String sortCommand = "sort";
+            final String findCommand = "find";
+            final String NT = "";
 
-        //@@author naz019
-        assert parsedCommand[0] != null : "words[0] is supposed to contain user command";
+            String[] parsedCommand = getCommandWord(userInput);
 
-        //@@author indraneelrp
-        switch (parsedCommand[0]) {
-        case endCommand:
-            break;
-            
-        case listCommand:
-            executeList();
-            break;
-    
-        case addCommand:
-            executeAdd(userInput);
-            break;
-    
-        case deleteCommand:
-            executeDelete(parsedCommand);
-            break;
-        
-        case clearCommand:
-            executeClear();
-            break;
+            //@@author naz019
+            assert parsedCommand[0] != null : "words[0] is supposed to contain user command";
 
-        case favouriteCommand:
-            executeFavourite(parsedCommand);
-            break;
+            //@@author indraneelrp
+            switch (parsedCommand[0]) {
+            case endCommand:
+                break;
 
-        case findCommand:
-            executeFind(parsedCommand);
-            break;
+            case listCommand:
+                executeList();
+                break;
 
-        case sortCommand:
-            executeSort(parsedCommand);
-            break;
+            case addCommand:
+                executeAdd(userInput);
+                break;
 
-        case NT:
-        
-        default:
-            logger.log(Level.WARNING, "An unrecognised command was given by the user.");
-            System.out.println("Unrecognised command");
-            break;
+            case deleteCommand:
+                executeDelete(parsedCommand);
+                break;
+
+            case clearCommand:
+                executeClear();
+                break;
+
+            case favouriteCommand:
+                executeFavourite(parsedCommand);
+                break;
+
+            case findCommand:
+                executeFind(parsedCommand);
+                break;
+
+            case sortCommand:
+                executeSort(parsedCommand);
+                break;
+
+            case NT:
+
+            default:
+                logger.log(Level.WARNING, "An unrecognised command was given by the user.");
+                System.out.println("Unrecognised command");
+                break;
+            }
+        } catch (DukeException e) {
+            System.out.println("Illegal character entered!");
         }
     }
 
