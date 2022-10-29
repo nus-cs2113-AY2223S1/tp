@@ -6,6 +6,10 @@ public class UI {
     public static final Scanner sc = new Scanner(System.in);
     private static final String PRINTED_GAP = "     ";
 
+    public static final String DOTTED_CHAR = ":";
+    public static final String HORIZONTAL_BORDER = "─";
+
+
     public static void printResponse(String response) {
         System.out.println(response);
     }
