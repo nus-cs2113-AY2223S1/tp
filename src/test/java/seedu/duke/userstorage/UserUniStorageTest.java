@@ -1,6 +1,7 @@
 package seedu.duke.userstorage;
 
 import org.junit.jupiter.api.Test;
+import seedu.duke.command.Database;
 import seedu.duke.command.DatabaseStorage;
 import seedu.duke.exceptions.InvalidUserCommandException;
 import seedu.duke.exceptions.InvalidUserStorageFileException;
@@ -96,6 +97,7 @@ public class UserUniStorageTest {
         assertEquals(testUniversityList.getMyModules().getModules().get(0).getNusCredit(), "4");
         assertEquals(testUniversityList.getMyModules().getModules().get(0).getComment(), "default");
         assertFalse(testManager.getMyManager().get("Boston University").isFavourite());
+        Database.clearDatabase();
     }
 
     @Test
@@ -115,6 +117,7 @@ public class UserUniStorageTest {
         assertEquals(testUniversityList.getMyModules().getModules().get(0).getNusCredit(), "4");
         assertEquals(testUniversityList.getMyModules().getModules().get(0).getComment(), "default");
         assertTrue(testManager.getMyManager().get("Boston University").isFavourite());
+        Database.clearDatabase();
     }
 
     @Test
@@ -166,6 +169,7 @@ public class UserUniStorageTest {
                 "Design & Analysis of Algorithm");
         assertEquals(testUniversityListArizona.getMyModules().getModules().get(1).getNusCredit(), "4");
         assertEquals(testUniversityListArizona.getMyModules().getModules().get(1).getComment(), "default");
+        Database.clearDatabase();
     }
 
     @Test
@@ -182,6 +186,7 @@ public class UserUniStorageTest {
         assertTrue(testUniversityList2.getMyModules().getModules().size() == 0);
         assertTrue(testManager.getMyManager().get("Boston University").isFavourite());
         assertFalse(testManager.getMyManager().get("Arizona State University").isFavourite());
+        Database.clearDatabase();
     }
 
     @Test
