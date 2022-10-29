@@ -50,7 +50,7 @@ public class TimetableManager {
     }
 
     /**
-     * Deletes the timetable for a university
+     * Deletes the timetable for a university.
      *
      * @param universityName The name of the university for which the timetable is deleted.
      */
