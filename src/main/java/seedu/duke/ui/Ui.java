@@ -439,6 +439,8 @@ public class Ui {
         ArrayList<Lesson> wednesdayLessonList = timetable.get("wednesday");
         ArrayList<Lesson> thursdayLessonList = timetable.get("thursday");
         ArrayList<Lesson> fridayLessonList = timetable.get("friday");
+        ArrayList<Lesson> saturdayLessonList = timetable.get("saturday");
+        ArrayList<Lesson> sundayLessonList = timetable.get("sunday");
         System.out.println("Monday:");
         System.out.print(Ui.printLessonsByDayInTimetable(mondayLessonList));
         System.out.println("Tuesday:");
@@ -449,6 +451,10 @@ public class Ui {
         System.out.print(Ui.printLessonsByDayInTimetable(thursdayLessonList));
         System.out.println("Friday:");
         System.out.print(Ui.printLessonsByDayInTimetable(fridayLessonList));
+        System.out.println("Saturday:");
+        System.out.print(Ui.printLessonsByDayInTimetable(saturdayLessonList));
+        System.out.println("Sunday:");
+        System.out.print(Ui.printLessonsByDayInTimetable(sundayLessonList));
         System.out.print(LINE);
     }
 }

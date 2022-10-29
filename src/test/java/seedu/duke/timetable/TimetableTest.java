@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import seedu.duke.exceptions.InvalidLessonDayException;
 import seedu.duke.exceptions.InvalidModuleException;
 import seedu.duke.exceptions.InvalidTimeFormatException;
+import seedu.duke.exceptions.InvalidTimingException;
 import seedu.duke.exceptions.InvalidUniversityException;
 import seedu.duke.exceptions.TimetableClashException;
 import seedu.duke.exceptions.LessonNotFoundException;
@@ -14,13 +15,6 @@ import seedu.duke.university.University;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class TimetableTest {
-    @Test
-    void isValidDay_inputWeekend_expectException() throws InvalidUniversityException, InvalidModuleException {
-        University university = new University("Stanford University", "USA");
-        Lesson dummyLesson = new Lesson("CS229", "Machine Learning", "5", university,"Sunday", "11:00", "13:00");
-        assertThrows(InvalidLessonDayException.class, () -> Timetable.isValidDay(dummyLesson));
-    }
-
     @Test
     void isValidDay_inputInvalidDay_expectException() throws InvalidUniversityException, InvalidModuleException {
         University university = new University("Stanford University", "USA");
@@ -48,7 +42,7 @@ public class TimetableTest {
             InvalidModuleException {
         University university = new University("Stanford University", "USA");
         Lesson dummyLesson = new Lesson("CS229", "Machine Learning", "5", university,"Sunday", "11:00", "11:00");
-        assertThrows(InvalidTimeFormatException.class, () -> Timetable.isValidTiming(dummyLesson));
+        assertThrows(InvalidTimingException.class, () -> Timetable.isValidTiming(dummyLesson));
     }
 
     @Test
@@ -56,7 +50,7 @@ public class TimetableTest {
             InvalidModuleException {
         University university = new University("Stanford University", "USA");
         Lesson dummyLesson = new Lesson("CS229", "Machine Learning", "5", university,"Sunday", "11:00", "10:00");
-        assertThrows(InvalidTimeFormatException.class, () -> Timetable.isValidTiming(dummyLesson));
+        assertThrows(InvalidTimingException.class, () -> Timetable.isValidTiming(dummyLesson));
     }
 
     @Test

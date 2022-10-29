@@ -2,6 +2,7 @@ package seedu.duke.timetable;
 
 import seedu.duke.exceptions.InvalidLessonDayException;
 import seedu.duke.exceptions.InvalidTimeFormatException;
+import seedu.duke.exceptions.InvalidTimingException;
 import seedu.duke.exceptions.LessonNotFoundException;
 import seedu.duke.exceptions.TimetableClashException;
 import seedu.duke.ui.Ui;
@@ -31,6 +32,10 @@ public class Timetable {
         userTimetable.put("thursday", thursdayList);
         ArrayList<Lesson> fridayList = new ArrayList<Lesson>();
         userTimetable.put("friday", fridayList);
+        ArrayList<Lesson> saturdayList = new ArrayList<Lesson>();
+        userTimetable.put("saturday", saturdayList);
+        ArrayList<Lesson> sundayList = new ArrayList<Lesson>();
+        userTimetable.put("sunday", sundayList);
     }
 
     public HashMap<String, ArrayList<Lesson>> getTimetable() {
@@ -41,16 +46,16 @@ public class Timetable {
      * Checks if the day for a lesson is valid.
      *
      * @param lesson The lesson to be validated.
-     * @return True if the day for a lesson is one of five weekdays.
+     * @return True if the day for a lesson is a valid day of the week.
      * @throws InvalidLessonDayException if the input day for a lesson is invalid.
      */
     public static boolean isValidDay(Lesson lesson) throws InvalidLessonDayException {
         String day = lesson.getDay();
         if (day.equals("monday") || day.equals("tuesday") || day.equals("wednesday")
-                || day.equals("thursday") || day.equals("friday")) {
+                || day.equals("thursday") || day.equals("friday") || day.equals("saturday") || day.equals("sunday")) {
             return true;
         } else {
-            throw new InvalidLessonDayException("Please enter a day from Monday to Friday.");
+            throw new InvalidLessonDayException("Please enter a day from Monday to Sunday.");
         }
     }
 
@@ -98,16 +103,16 @@ public class Timetable {
      *
      * @param lesson The lesson to be validated.
      * @return True if the input time for a lesson is valid.
-     * @throws InvalidTimeFormatException if the input end time for a lesson is invalid.
+     * @throws InvalidTimingException if the input time for a lesson is invalid.
      */
-    public static boolean isValidTiming(Lesson lesson) throws InvalidTimeFormatException, ParseException {
+    public static boolean isValidTiming(Lesson lesson) throws InvalidTimingException, ParseException {
         SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
         Date startTime = parser.parse(lesson.getStartTime());
         Date endTime = parser.parse(lesson.getEndTime());
         if (startTime.before(endTime)) {
             return true;
         } else {
-            throw new InvalidTimeFormatException("Invalid time format entered!");
+            throw new InvalidTimingException("Invalid timing entered!");
         }
     }
 
@@ -160,7 +165,8 @@ public class Timetable {
                     }
                 });
             }
-        } catch (InvalidLessonDayException | InvalidTimeFormatException | TimetableClashException | ParseException e) {
+        } catch (InvalidLessonDayException | InvalidTimeFormatException | InvalidTimingException
+                 | TimetableClashException | ParseException e) {
             Ui.printExceptionMessage(e);
         }
     }
