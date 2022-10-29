@@ -76,13 +76,10 @@ public class Storage {
 
     public static void deleteRecipeFile(String recipeTitleToDelete) {
         String recipeFilePath = RECIPES_FOLDER_PATH + "/" + recipeTitleToDelete.stripTrailing();
-        System.out.println(recipeFilePath);
         try {
             File file = new File(recipeFilePath);
             if (file.delete()) {
-                logger.log(Level.INFO, recipeTitleToDelete + " is deleted");
-            } else {
-                Ui.showMessage("Unable to delete the file.");
+                logger.log(Level.INFO, recipeTitleToDelete + " is deleted from the recipe list.");
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -27,7 +27,8 @@ public class DeleteCommand extends Command {
             RecipeList.deleteRecipeFromTitle(recipeTitleToDelete);
             Storage.deleteRecipeFile(recipeTitleToDelete);
             Storage.rewriteRecipeListToFile(Storage.ALL_RECIPES_FILE_PATH);
-            return new CommandResult(String.format(recipeTitleToDelete + " is deleted.%n"));
+            return new CommandResult(String.format("\n" + recipeTitleToDelete
+                    + " is deleted from the recipe list. %n"));
         } catch (IndexOutOfBoundsException e) {
             Ui.showMessageInline("Current number of saved recipes:", Integer.toString(RecipeList.getSize()));
             return new CommandResult("Delete recipe index out of bound.");
