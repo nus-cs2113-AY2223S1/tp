@@ -287,6 +287,8 @@ public class Messages {
             + ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_ORDER_VAL_DESCENDING;
     public static final String CONSOLE_MESSAGE_COMMAND_SORTED_EXPENSE_SUCCESS = ""
             + "Your expenses have been sorted successfully.";
+    public static final String COMMAND_SORT_EXPENSE_EMPTY_LIST = ""
+            + "Your list of expenses is empty. ";
     public static final String CONSOLE_ERROR_COMMAND_SORT_EXPENSE_INVALID = ""
             + "The arguments entered are invalid. "
             + CONSOLE_COMMAND_SORT_EXPENSE_SYNTAX;
