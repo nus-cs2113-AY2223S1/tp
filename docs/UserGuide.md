@@ -52,7 +52,7 @@ ____________________________________________________________
 
 This section allows users to understand all the features that we offer, including the format, and the constraint. We also demonstrate some examples of usage and the expected outcome.
 
->**PLEASE TAKE NOTE:**
+**PLEASE TAKE NOTE:**
 >
 >1. Upcycle commands (except ```find-item``` and ```find-user```) are case-sensitive and space-insensitive. For example, ```upcycle``` and ```Upcycle``` are different words, ```Upcycle``` and ```Upcycle ``` are the same words.
 >2. Parameters can be shuffled. For example, ```update-item /i [ITEM_ID] /p [PRICE]``` and ```update-item /p [PRICE] /i [ITEM_ID]``` are the same.
