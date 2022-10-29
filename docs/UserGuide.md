@@ -132,12 +132,23 @@ finished with a shower of grated aged Pecorino Romano cheese plus freshly ground
 
 ℹ Otherwise, if you decide not to save the information you have inputted, you can click on the "_Exit Only_" button to exit the add mode.
 
+[⏫ Back to content page](#content-page)
+
 ## Edit Command
 
-- Edit existing recipe with given INDEX
-- FORMAT: `/edit INDEX`
-- EXAMPLE: `/edit 1`
-- The GUI Editor workflow is similar to [GUI Editor](#gui-editor)
+Edit existing recipe with the given _INDEX_ as shown in the recipe list. To see the index of the recipe, you can use the `/list` command to
+show all the recipe titles that is in your current recipe list. The _INDEX_ will be the number on the left of the recipe title.
+
+ℹ This feature will bring out the GUI editor and load the recipe information that was previously saved by the user.
+
+The GUI Editor workflow is similar to [GUI Editor](#gui-editor)
+
+Format: `/edit INDEX`
+
+Example: 
+```
+/edit 1
+```
 
 ## Delete Command
 
