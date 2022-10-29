@@ -3,6 +3,8 @@ package seedu.duke.transaction;
 import seedu.duke.id.IdGenerator;
 import seedu.duke.parser.DateParser;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
@@ -19,7 +21,7 @@ public class Transaction {
     private final int duration;
     private final LocalDate createdAt;
     private final LocalDate returnedAt;
-    private final double moneyTransacted;
+    private final BigDecimal moneyTransacted;
 
     /**
      * Constructor method for transaction.
@@ -31,7 +33,7 @@ public class Transaction {
      * @param createdAt  The day when transaction created.
      */
     public Transaction(String itemName, String itemId, String borrowerId, int duration,
-                       LocalDate createdAt, double moneyTransacted) {
+                       LocalDate createdAt, BigDecimal moneyTransacted) {
         this.transactionId = IdGenerator.generateId();
         this.itemName = itemName;
         this.borrower = borrowerId;
@@ -53,7 +55,7 @@ public class Transaction {
      * @param createdAt     The day when transaction created.
      */
     public Transaction(String transactionId, String itemName, String itemId, String borrowerId,
-                       int duration, LocalDate createdAt, double moneyTransacted) {
+                       int duration, LocalDate createdAt, BigDecimal moneyTransacted) {
         this.transactionId = transactionId;
         this.itemName = itemName;
         this.borrower = borrowerId;
@@ -61,7 +63,7 @@ public class Transaction {
         this.createdAt = createdAt;
         this.returnedAt = createdAt.plusDays(duration);
         this.itemId = itemId;
-        this.moneyTransacted = moneyTransacted;
+        this.moneyTransacted = moneyTransacted.round(new MathContext(2));
     }
 
     /**
@@ -114,7 +116,7 @@ public class Transaction {
      *
      * @return The Duration of transaction
      */
-    public double getMoneyTransacted() {
+    public BigDecimal getMoneyTransacted() {
         return moneyTransacted;
     }
 
@@ -146,7 +148,7 @@ public class Transaction {
      * @param newDuration The new duration
      * @return The updated transaction
      */
-    public Transaction update(int newDuration, double newMoneyTransacted) {
+    public Transaction update(int newDuration, BigDecimal newMoneyTransacted) {
         return new Transaction(this.transactionId, this.itemName, this.itemId, this.borrower,
                 newDuration, this.createdAt, newMoneyTransacted);
     }
@@ -175,22 +177,22 @@ public class Transaction {
      */
     @Override
     public String toString() {
-        String itemId = "ItemID: " + this.itemId + " ";
+        String itemId = "Item_ID: " + this.itemId + " ";
         String transactionIcon = "[" + (isFinished() ? "Finished" : "Unfinished") + "] ";
-        String transactionId = "TxID: " + this.transactionId + " ";
-        String itemName = "ItemName: " + this.itemName + " ";
+        String transactionId = "Tx_ID: " + this.transactionId + " ";
+        String itemName = "Item_Name: " + this.itemName + " ";
         String usersId = "Borrower: " + this.borrower + " ";
-        String duration = "Duration: " + this.duration + " ";
-        String moneyTransactedString = " MoneyTransacted: " + this.moneyTransacted + " ";
+        String duration = "Duration: " + this.duration + " days ";
+        String moneyTransactedString = " Money_Transacted: " + this.moneyTransacted + " ";
         if (!isFinished()) {
             String remainDays = " (" + ChronoUnit.DAYS.between(LocalDate.now(), getReturnDate())
                     + " day(s) left)";
             String returnDate =
-                    "ReturnDate: " + DateParser.formatDateToString(returnedAt) + remainDays;
+                    "Return_Date: " + DateParser.formatDateToString(returnedAt) + remainDays;
             return transactionIcon + transactionId + itemName + itemId + usersId
                     + duration + returnDate + moneyTransactedString;
         }
-        String returnedDate = "ReturnedDate: " + DateParser.formatDateToString(returnedAt);
+        String returnedDate = "Returned_Date: " + DateParser.formatDateToString(returnedAt);
         return transactionIcon + transactionId + itemName + itemId + usersId
                 + duration + returnedDate + moneyTransactedString;
     }

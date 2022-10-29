@@ -1,5 +1,6 @@
 package seedu.duke.command.transaction;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
@@ -199,7 +200,8 @@ public class AddTransactionCommand extends Command {
         String borrowId = args[1];
         int duration = Integer.parseInt(args[2]);
         LocalDate createdAt = LocalDate.parse(args[3]);
-        double moneyTransacted = itemList.getItemById(args[0]).getPricePerDay() * (double) duration;
+        double money = itemList.getItemById(args[0]).getPricePerDay() * (double) duration;
+        BigDecimal moneyTransacted = BigDecimal.valueOf(money);
         return new Transaction(itemName, itemId, borrowId, duration, createdAt, moneyTransacted);
     }
 }

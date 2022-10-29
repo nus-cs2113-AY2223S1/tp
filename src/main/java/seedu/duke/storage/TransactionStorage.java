@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -96,7 +97,8 @@ public class TransactionStorage extends Storage {
         String borrowerId = splitTransactionLine[3];
         int duration = Integer.parseInt(splitTransactionLine[4]);
         LocalDate createdAt = LocalDate.parse(splitTransactionLine[5]);
-        double moneyTransacted = Double.parseDouble(splitTransactionLine[6]);
+        double money = Double.parseDouble(splitTransactionLine[6]);
+        BigDecimal moneyTransacted = BigDecimal.valueOf(money);
         return new Transaction(transactionId, itemName, itemId, borrowerId, duration, createdAt, moneyTransacted);
     }
 }

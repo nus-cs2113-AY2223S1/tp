@@ -16,13 +16,15 @@ import seedu.duke.parser.CommandParser;
 import seedu.duke.transaction.TransactionList;
 import seedu.duke.user.UserList;
 
-import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_CATEGORY_INDEX_FORMAT_INVALID;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INSUFFICIENT_ARGUMENTS;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PARTS;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_NAME_LENGTH_INVALID;
-import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_PRICE_FORMAT_INVALID;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_SAME_ITEM_NAME_AND_PRICE;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_CATEGORY_INDEX_FORMAT_INVALID;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_PRICE_OUT_OF_RANGE;
-import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_SAME_OWNER;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_PRICE_FORMAT_INVALID;
+
+
 
 //@@author bdthanh
 
@@ -84,19 +86,19 @@ public class AddItemCommand extends Command {
      * Checks if an item name is valid or not.
      *
      * @param itemName The input item name
-     * @param owner    The input owner name
-     * @return true If that user do not have any item with the same name
-     * @throws DuplicateException If that user have item with the same name
+     * @param price    price of item already listed with the same name
+     * @return true If that user do not have any item with the same name and price
+     * @throws DuplicateException If that user have item with the same name and price
      */
-    private boolean isValidName(String itemName, String owner)
+    private boolean isValidName(String itemName, Double price)
             throws DuplicateException, InvalidUserException {
         if (itemName.length() > 20) {
             throw new InvalidUserException(MESSAGE_NAME_LENGTH_INVALID);
         }
         try {
             Item item = itemList.getItemByName(itemName);
-            if (item.getOwnerId().equals(owner)) {
-                throw new DuplicateException(MESSAGE_SAME_OWNER);
+            if (item.getPricePerDay() == price) {
+                throw new DuplicateException(MESSAGE_SAME_ITEM_NAME_AND_PRICE);
             }
             return true;
         } catch (ItemNotFoundException e) {
@@ -165,7 +167,7 @@ public class AddItemCommand extends Command {
     private boolean areValidArgs(String[] args)
             throws UserNotFoundException, DuplicateException, InvalidPriceException, InvalidUserException {
         assert args.length == 4 : "Args length is invalid";
-        return isValidName(args[0], args[3]) && isValidCategoryNumber(args[1])
+        return isValidName(args[0], Double.parseDouble(args[2])) && isValidCategoryNumber(args[1])
                 && isValidPrice(args[2]) && isValidOwner(args[3]);
     }
 
