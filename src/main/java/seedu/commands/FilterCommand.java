@@ -49,6 +49,7 @@ public class FilterCommand extends Command {
             carparkList.resetBoldForAllCarparks();
             return new CommandResult(result);
         } catch (NoCarparkFoundException e) {
+            carparkList.resetBoldForAllCarparks();
             return new CommandResult(e.getMessage());
         }
 

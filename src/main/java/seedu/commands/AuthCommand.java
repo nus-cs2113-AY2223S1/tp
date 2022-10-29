@@ -16,6 +16,7 @@ import seedu.exception.UnauthorisedAccessApiException;
  */
 public class AuthCommand extends Command {
     public static final String COMMAND_WORD = "auth";
+    public static final int NUMBER_OF_ARGUMENTS = 1;
 
     private final String apiKey;
     private final Api api;
