@@ -60,6 +60,7 @@ import static seedu.duke.common.Constants.MINIMUM_YEAR;
 import static seedu.duke.common.Constants.MAXIMUM_YEAR;
 import static seedu.duke.common.Constants.MAXIMUM_STATS_NUMBER;
 import static seedu.duke.common.Constants.MINIMUM_STATS_NUMBER;
+import static seedu.duke.common.Constants.MIN_PARAMETER_LENGTH;
 import static seedu.duke.common.DateFormats.DATE_INPUT_PATTERN;
 
 
@@ -77,6 +78,7 @@ public class ParameterParser {
     private static final int MINIMUM_TAG_LENGTH = 2;
     private static final int JANUARY = 1;
     private static final int DECEMBER = 12;
+    private static final int MAX_NUM_OF_MINUS_SIGNS = 1;
     private static final String CLASS_TYPE_EXPENSE = "seedu.duke.data.transaction.Expense";
     private static final String CLASS_TYPE_INCOME = "seedu.duke.data.transaction.Income";
     private static final String CATEGORICAL_SAVINGS = "categorical_savings";
@@ -84,6 +86,7 @@ public class ParameterParser {
     private static final String TIME_INSIGHTS = "time_insights";
     private static final String WEEKS = "weeks";
     private static final String MONTHS = "months";
+
 
     //@@author wcwy
     private static final Logger parserLogger = Logger.getLogger(ParameterParser.class.getName());
@@ -483,7 +486,7 @@ public class ParameterParser {
         if (containAlphabet(parameter)) { // Checks if parameter contains alphabets
             throw new GlobalNonNumericIndexException();
         } else if (startsWithMinusSign(parameter)) { // Checks if parameter is negative value
-            if (parameter.length() == 1) { //Means parameter == "-"
+            if (parameter.length() == MIN_PARAMETER_LENGTH) { //Means parameter == "-"
                 throw new GlobalNonNumericIndexException();
             }
             throw new GlobalInvalidIndexException();
@@ -735,7 +738,7 @@ public class ParameterParser {
         }
 
         // At this stage, parameter definitely starts with minus, and double check how many minus signs are in parameter
-        if (countOfMinusSymbol == 1) {
+        if (countOfMinusSymbol == MAX_NUM_OF_MINUS_SIGNS) { // Only 1 minus sign allowed
             return true;
         }
         return false;
