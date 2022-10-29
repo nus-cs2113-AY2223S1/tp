@@ -42,7 +42,7 @@ public class Parser {
         case DeleteCommand.COMMAND_TYPE:
             return parseDeleteCommand(parsed);
         case EditCommand.COMMAND_TYPE:
-            return parseEditCommand(parsed, input);
+            return parseEditCommand(parsed);
         case ViewCommand.COMMAND_TYPE:
             return parseViewCommand(parsed);
         case FindCommand.COMMAND_TYPE:
