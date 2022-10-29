@@ -22,8 +22,6 @@ import seedu.exception.UnneededArgumentsException;
 import seedu.files.Favourite;
 import seedu.parser.search.Sentence;
 
-import javax.swing.*;
-
 /**
  * Class to deal with parsing commands.
  */
@@ -34,7 +32,6 @@ public class Parser {
     private CarparkList carparkList;
     private Api api;
     private Favourite favourite;
-    private ArrayList<String> favouriteList;
 
     /**
      * Parses user input into command for execution.
@@ -63,7 +60,7 @@ public class Parser {
             }
             return prepareAuth(arguments);
         case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
+            return prepareExit(arguments);
         case FavouriteCommand.COMMAND_WORD:
             if (arguments.trim().isEmpty()) {
                 return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.FAVOURITE_FORMAT);
@@ -75,7 +72,7 @@ public class Parser {
             }
             return prepareFind(arguments);
         case ListCommand.COMMAND_WORD:
-            return new ListCommand(carparkList);
+            return prepareList(arguments);
         case FilterCommand.COMMAND_WORD:
             if (arguments.trim().isEmpty()) {
                 return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.FILTER_FORMAT);
@@ -89,9 +86,26 @@ public class Parser {
             }
             return prepareUnfavourite(arguments);
         case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
+            return prepareHelp(arguments);
         default:
             return new InvalidCommand("Invalid Command");
+        }
+    }
+
+    /**
+     * To check that user does not input in any parameters for ExitCommand.
+     *
+     * @param arguments arguments that may be given by the user after the command word
+     * @return Command to be carried out
+     */
+    private Command prepareExit(String arguments) {
+        try {
+            if (arguments.trim().isEmpty()) {
+                return new ExitCommand();
+            }
+            throw new UnneededArgumentsException("exit");
+        } catch (UnneededArgumentsException e) {
+            return new InvalidCommand(e.getMessage());
         }
     }
 
@@ -140,6 +154,23 @@ public class Parser {
     }
 
     /**
+     * To check that user does not input in any parameters for ListCommand.
+     *
+     * @param arguments arguments that may be given by the user after the command word
+     * @return Command to be carried out
+     */
+    private Command prepareList(String arguments) {
+        try {
+            if (arguments.trim().isEmpty()) {
+                return new ListCommand(carparkList);
+            }
+            throw new UnneededArgumentsException("list");
+        } catch (UnneededArgumentsException e) {
+            return new InvalidCommand(e.getMessage());
+        }
+    }
+
+    /**
      * To prepare the arguments to be taken in for Search Command.
      *
      * @param arguments arguments given by the user after the command word
@@ -161,7 +192,24 @@ public class Parser {
             if (arguments.trim().isEmpty()) {
                 return new UpdateCommand(api, carparkList);
             }
-            throw new UnneededArgumentsException("Update");
+            throw new UnneededArgumentsException("update");
+        } catch (UnneededArgumentsException e) {
+            return new InvalidCommand(e.getMessage());
+        }
+    }
+
+    /**
+     * To check that user does not input in any parameters for HelpCommand.
+     *
+     * @param arguments arguments that may be given by the user after the command word
+     * @return Command to be carried out
+     */
+    private Command prepareHelp(String arguments) {
+        try {
+            if (arguments.trim().isEmpty()) {
+                return new HelpCommand();
+            }
+            throw new UnneededArgumentsException("help");
         } catch (UnneededArgumentsException e) {
             return new InvalidCommand(e.getMessage());
         }
