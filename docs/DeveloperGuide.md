@@ -154,31 +154,35 @@ and are avid movie or TV show watchers. Therefore, this app is customised to the
 
 ## User Stories
 
-|Version| As a ... | I want to ...                    | So that I can ...                            |
-|--------|---------|----------------------------------|----------------------------------------------|
-|v1.0|user| add movies to a list             | keep track of which movies I have watched.   |
-|v1.0|user| add ratings out of 10 to a movie | remember how much I enjoyed the movie.       |
-|v1.0|user| remove movies from my list       | delete erroneous entries.                    |
-|v1.0|user| list the movies I have added       | view what movies I have watched              |
-|v1.0|user| enter the date I watched the movie       | recall when I watched the movie.             |
-|v2.0|user| arrange my review list by worst or best ratings        | see the shows that I like or hate the most.  |
-|v2.0|user| star/favorite a movie        | mark shows that I would like to watch again. |
-|v2.0|user| star/favorite a tv show        | mark tv shows that I may want to watch again. |
-|v2.0|user| see a display of my favourited items       | I can quickly refer to the shows I have marked.|
-|v2.0|user| be able to save my information after I exit the program   | offload it from my mind. |
-|v2.0|user| be able to retrieve my last saved list   | I do not have to remember it myself. |
-|v2.0|user| list the movies I have watched                        | view what movies I have watched              |
-|v2.0|user| list the tv shows I have watched                      | view what tv shows I have watched            |
-|v2.0|user| search movies using a keyword                         | to find a specific movie I have watched      |
-|v2.0|user| search tv show using a keyword                        | to find a specific tv show I have watched    |
-|v2.0|user| clear movies that I have watched                      | to clear my watch history                    |
-|v2.0|user| clear tv shows that I have watched                    | to clear my watch history                    |
+|Version| As a ... | I want to ...                                           | So that I can ...                                        |
+|--------|---------|---------------------------------------------------------|----------------------------------------------------------|
+|v1.0|user| add movies to a list                                    | keep track of which movies I have watched.               |
+|v1.0|user| add ratings out of 10 to a movie                        | remember how much I enjoyed the movie.                   |
+|v1.0|user| remove movies from my list                              | delete erroneous entries.                                |
+|v1.0|user| list the movies I have added                            | view what movies I have watched                          |
+|v1.0|user| enter the date I watched the movie                      | recall when I watched the movie.                         |
+|v2.0|user| arrange my review list by worst or best ratings         | see the shows that I like or hate the most.              |
+|v2.0|user| star/favorite a movie                                   | mark shows that I would like to watch again.             |
+|v2.0|user| star/favorite a tv show                                 | mark tv shows that I may want to watch again.            |
+|v2.0|user| see a display of my favourited items                    | I can quickly refer to the shows I have marked.          |
+|v2.0|user| be able to save my information after I exit the program | offload it from my mind.                                 |
+|v2.0|user| be able to retrieve my last saved list                  | I do not have to remember it myself.                     |
+|v2.0|user| list the movies I have watched                          | view what movies I have watched                          |
+|v2.0|user| list the tv shows I have watched                        | view what tv shows I have watched                        |
+|v2.0|user| search movies using a keyword                           | to find a specific movie I have watched                  |
+|v2.0|user| search tv show using a keyword                          | to find a specific tv show I have watched                |
+|v2.0|user| clear movies that I have watched                        | to clear my watch history                                |
+|v2.0|user| clear tv shows that I have watched                      | to clear my watch history                                |
+|v2.0|user| automatically save reviews                              | load my previously added reviews upon restarting program |
 
 
 
 ## Non-Functional Requirements
 
-{Give non-functional requirements}
+1) Performance: The program should respond within 2 seconds of user input.
+2) Quality: With guidance by the user guide, a new user should be able to navigate the program.
+3) Technical: The program should work with all environments that load the program with Java 11.
+4) Project Scope: The program is only required to handle reviews for movies and tv shows.
 
 ## Glossary
 

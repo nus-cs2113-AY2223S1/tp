@@ -15,7 +15,18 @@ Duke is a movie review allowing you to keep track of movies you have watched! Du
 ## Features 
 
 The following features are supported by Duke.
+1) User can add reviews on watched movies and tv shows
+2) User can save their ratings, date watched, genre, location watched (only for tv) to a particular tv show/movie
+3) User can delete unwanted reviews
+4) User can view all added reviews
+5) User can clear all reviews
+6) User can sort reviews by genre, title, date
+7) User can find reviews by keyword
+8) User can set specific reviews as a favourite
+9) User can list all favourite reviews
+10) User input is automatically saved and loaded every session
 
+## Command Summary
 ### Adding a movie: `add`
 Adds a new movie review to your list.
 **Note:** title, genre, and site must not include "/" delimiter in input so that command can be correctly parsed.
