@@ -22,8 +22,6 @@ import seedu.exception.UnneededArgumentsException;
 import seedu.files.Favourite;
 import seedu.parser.search.Sentence;
 
-import javax.swing.*;
-
 /**
  * Class to deal with parsing commands.
  */
@@ -34,7 +32,6 @@ public class Parser {
     private CarparkList carparkList;
     private Api api;
     private Favourite favourite;
-    private ArrayList<String> favouriteList;
 
     /**
      * Parses user input into command for execution.
@@ -95,6 +92,12 @@ public class Parser {
         }
     }
 
+    /**
+     * To check that user does not input in any parameters for ExitCommand.
+     *
+     * @param arguments arguments that may be given by the user after the command word
+     * @return Command to be carried out
+     */
     private Command prepareExit(String arguments) {
         try {
             if (arguments.trim().isEmpty()) {
@@ -150,6 +153,12 @@ public class Parser {
         return new FindCommand(carparkID, carparkList);
     }
 
+    /**
+     * To check that user does not input in any parameters for ListCommand.
+     *
+     * @param arguments arguments that may be given by the user after the command word
+     * @return Command to be carried out
+     */
     private Command prepareList(String arguments) {
         try {
             if (arguments.trim().isEmpty()) {
@@ -189,6 +198,12 @@ public class Parser {
         }
     }
 
+    /**
+     * To check that user does not input in any parameters for HelpCommand.
+     *
+     * @param arguments arguments that may be given by the user after the command word
+     * @return Command to be carried out
+     */
     private Command prepareHelp(String arguments) {
         try {
             if (arguments.trim().isEmpty()) {
