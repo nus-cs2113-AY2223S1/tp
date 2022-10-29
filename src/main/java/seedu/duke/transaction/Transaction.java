@@ -3,6 +3,7 @@ package seedu.duke.transaction;
 import seedu.duke.id.IdGenerator;
 import seedu.duke.parser.DateParser;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
@@ -19,7 +20,7 @@ public class Transaction {
     private final int duration;
     private final LocalDate createdAt;
     private final LocalDate returnedAt;
-    private final double moneyTransacted;
+    private final BigDecimal moneyTransacted;
 
     /**
      * Constructor method for transaction.
@@ -31,7 +32,7 @@ public class Transaction {
      * @param createdAt  The day when transaction created.
      */
     public Transaction(String itemName, String itemId, String borrowerId, int duration,
-                       LocalDate createdAt, double moneyTransacted) {
+                       LocalDate createdAt, BigDecimal moneyTransacted) {
         this.transactionId = IdGenerator.generateId();
         this.itemName = itemName;
         this.borrower = borrowerId;
@@ -53,7 +54,7 @@ public class Transaction {
      * @param createdAt     The day when transaction created.
      */
     public Transaction(String transactionId, String itemName, String itemId, String borrowerId,
-                       int duration, LocalDate createdAt, double moneyTransacted) {
+                       int duration, LocalDate createdAt, BigDecimal moneyTransacted) {
         this.transactionId = transactionId;
         this.itemName = itemName;
         this.borrower = borrowerId;
@@ -114,7 +115,7 @@ public class Transaction {
      *
      * @return The Duration of transaction
      */
-    public double getMoneyTransacted() {
+    public BigDecimal getMoneyTransacted() {
         return moneyTransacted;
     }
 
@@ -146,7 +147,7 @@ public class Transaction {
      * @param newDuration The new duration
      * @return The updated transaction
      */
-    public Transaction update(int newDuration, double newMoneyTransacted) {
+    public Transaction update(int newDuration, BigDecimal newMoneyTransacted) {
         return new Transaction(this.transactionId, this.itemName, this.itemId, this.borrower,
                 newDuration, this.createdAt, newMoneyTransacted);
     }
