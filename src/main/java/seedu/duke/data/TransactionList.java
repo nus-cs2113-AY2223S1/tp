@@ -235,7 +235,7 @@ public class TransactionList {
         // Loops each transaction from the transactions list
         for (Transaction transaction : transactions) {
             // Includes only transactions that contain the keywords used in the search expression
-            if (transaction.toString().contains(keywords)) {
+            if (transaction.getDescription().toLowerCase().contains(keywords.toLowerCase())) {
                 transactionsList += transaction + LINE_SEPARATOR.toString();
             }
         }
