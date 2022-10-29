@@ -110,7 +110,7 @@ TV Shows:
 ```
 
 ### Favourite reviews: 'favourite'
-Lets you mark items you find particularly notable or wantt to watch again for easier reference.
+Lets you mark items you find particularly notable or want to watch again for easier reference.
 
 **Format**: `favourite [list position]`
 
