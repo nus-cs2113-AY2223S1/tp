@@ -1,7 +1,14 @@
 package seedu.duke.command;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
+import java.nio.channels.Channels;
+import java.nio.channels.FileChannel;
+import java.nio.channels.ReadableByteChannel;
+import java.nio.file.ClosedFileSystemException;
+import java.nio.file.Files;
+import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,14 +27,41 @@ public class DatabaseStorage {
     private static Logger logger = Logger.getLogger("DatabaseStorage");
     private static final String DATABASE_FILE_PATH = "./data/data.csv";
 
+    private static final String FILE_DIRECTORY = "data";
+
+    private static final String FILE_PATH ="data/data.csv";
+
     private static final String PARTNER_UNVIERSITY_COUNTRY = "nil";
+
+
+    /**
+     * Helps user set up the database
+     */
+    public static void createDatabase() throws IOException {
+        File fileDir = new File(FILE_DIRECTORY);
+        if (!fileDir.exists()) {
+            fileDir.mkdir();
+        }
+        File file = new File(FILE_PATH);
+        if (!file.exists()) {
+            file.createNewFile();
+            Path target = Path.of(FILE_PATH);
+            URL source = new URL("https://raw.githubusercontent.com/AY2223S1-CS2113-W13-2/tp/master/data/data.csv");
+            InputStream in = source.openStream();
+            Files.copy(in, target, StandardCopyOption.REPLACE_EXISTING);
+        }
+     }
 
     /**
      * Loads data from data.csv into database.
      */
     public static void loadDatabase() {
         logger.log(Level.INFO, "Start loading database");
-
+        try {
+            createDatabase();
+        } catch (IOException e) {
+            Ui.printExceptionMessage(e);
+        }
         try {
             readFile(DATABASE_FILE_PATH);
         } catch (FileNotFoundException e) {
