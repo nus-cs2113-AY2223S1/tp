@@ -1,6 +1,8 @@
-# Duke project template
+# Yet Another Module Organiser / Manager [:link:](https://ay2223s1-cs2113-f11-3.github.io/tp/)
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+[User Guide](https://ay2223s1-cs2113-f11-3.github.io/tp/UserGuide.html) | [Developer Guide](https://ay2223s1-cs2113-f11-3.github.io/tp/DeveloperGuide.html)
+
+Yet Another Module Organiser / Manager offers the latest cutting edge features for NUS students favouring efficiency and productivity. Schedule your timetable without your fingers leaving your keyboard.
 
 ## Setting up in Intellij
 
@@ -52,14 +54,3 @@ Prerequisites: JDK 11 (use the exact version), update Intellij to the most recen
 
 The project uses [GitHub actions](https://github.com/features/actions) for CI. When you push a commit to this repo or PR against it, GitHub actions will run automatically to build and verify the code as updated by the commit/PR.
 
-## Documentation
-
-`/docs` folder contains a skeleton version of the project documentation.
-
-Steps for publishing documentation to the public: 
-1. If you are using this project template for an individual project, go your fork on GitHub.<br>
-   If you are using this project template for a team project, go to the team fork on GitHub.
-1. Click on the `settings` tab.
-1. Scroll down to the `GitHub Pages` section.
-1. Set the `source` as `master branch /docs folder`.
-1. Optionally, use the `choose a theme` button to choose a theme for your documentation.

@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
-import static seedu.duke.command.GetModuleCommand.isModuleOfferedInCurrentSem;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -20,18 +19,20 @@ import seedu.duke.model.Module;
 import seedu.duke.utils.Ui;
 
 
-public class GetModuleCommandTest {
+public class InfoCommandTest {
     @Test
     void getModuleCommand_validModuleCodeCS1010X_expectModuleDetailsOutput() throws YamomException, IOException {
         Ui ui = new Ui();
         State state = new State();
-        State.setSemester(1);
+
+        state.setSemester(1);
+
         String[] input = {"get", "CS1010X"};
-        GetModuleCommand getModuleCommand = new GetModuleCommand(input);
+        InfoCommand getModuleCommand = new InfoCommand(input);
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
         getModuleCommand.execute(state, ui, null);
-        InputStream stream = GetModuleCommandTest.class.getClassLoader()
+        InputStream stream = InfoCommandTest.class.getClassLoader()
                 .getResourceAsStream("moduleDetailsCS1010X.txt");
         String expectedOutput = new String(stream.readAllBytes(), StandardCharsets.UTF_8);
         stream.close();
@@ -43,13 +44,15 @@ public class GetModuleCommandTest {
     void getModuleCommand_validModuleCodeCS2113_expectCorrectModuleDetailsOutput() throws YamomException, IOException {
         Ui ui = new Ui();
         State state = new State();
-        State.setSemester(1);
+
+        state.setSemester(1);
         String[] input = {"get", "CS2113"};
-        GetModuleCommand getModuleCommand = new GetModuleCommand(input);
+
+        InfoCommand getModuleCommand = new InfoCommand(input);
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
         getModuleCommand.execute(state, ui, null);
-        InputStream stream = GetModuleCommandTest.class.getClassLoader().getResourceAsStream("moduleDetailsCS2113.txt");
+        InputStream stream = InfoCommandTest.class.getClassLoader().getResourceAsStream("moduleDetailsCS2113.txt");
         String expectedOutput = new String(stream.readAllBytes(), StandardCharsets.UTF_8);
         stream.close();
         assertEquals(expectedOutput.replaceAll("\\s+", ""),
@@ -60,10 +63,12 @@ public class GetModuleCommandTest {
     void getModuleCommand_invalidOrNotPresentModuleCodeX1010SC_exceptionThrown() {
         Ui ui = new Ui();
         State state = new State();
-        State.setSemester(1);
+
+        state.setSemester(1);
+
         try {
             String[] input = {"get", "X1010SC"};
-            GetModuleCommand getModuleCommand = new GetModuleCommand(input);
+            InfoCommand getModuleCommand = new InfoCommand(input);
             getModuleCommand.execute(state, ui, null);
             fail();
         } catch (YamomException e) {
@@ -76,41 +81,17 @@ public class GetModuleCommandTest {
     void getModuleCommand_emptyModuleCode_exceptionThrown() {
         Ui ui = new Ui();
         State state = new State();
-        State.setSemester(1);
+
+        state.setSemester(1);
+
         try {
             String[] input = {"get"};
-            GetModuleCommand getModuleCommand = new GetModuleCommand(input);
+            InfoCommand getModuleCommand = new InfoCommand(input);
             getModuleCommand.execute(state, ui, null);
             fail();
         } catch (YamomException e) {
             assertEquals("Error! \tPlease enter a module code!", e.getMessage());
         }
-    }
-
-    @Test
-    void isModuleOfferedInCurrentSem_moduleCS2113OfferedInCurrentSemester_expectsTrue() {
-        // check if module is offered in current semester
-        State state = new State();
-        String moduleCode = "CS2113";
-        Module testModule = Module.get(moduleCode);
-        // setting current semester to 1
-        State.setSemester(1);
-        // check if module is offered in current semester
-        boolean testResult = isModuleOfferedInCurrentSem(testModule, state);
-        assertTrue(testResult);
-    }
-
-    @Test
-    void isModuleOfferedInCurrentSem_moduleCS2113NotOfferedInCurrentSemester_expectsFalse() {
-        // check if module is offered in current semester
-        State state = new State();
-        String moduleCode = "CS2113";
-        Module testModule = Module.get(moduleCode);
-        // setting current semester to 4
-        State.setSemester(4);
-        // check if module is offered in current semester
-        boolean testResult = isModuleOfferedInCurrentSem(testModule, state);
-        assertFalse(testResult);
     }
 
     @Test

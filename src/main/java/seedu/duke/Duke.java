@@ -37,12 +37,14 @@ public class Duke {
                 ui.displayUserPrompt(state.getSemester());
                 String userFullCommand = ui.readNext();
                 ui.displayDivider();
+                ui.addMessage("Processing \"" + userFullCommand + "\" ...\n");
                 Command command = Parser.parse(userFullCommand);
                 command.execute(state, ui, storage);
                 isExit = command.isExit();
             } catch (Exception e) {
-                //e.printStackTrace();
-                ui.displayMessage(e.getMessage());
+                // e.printStackTrace();
+                ui.addMessage(e.getMessage());
+                ui.displayUi();
             } finally {
                 ui.displayDivider();
             }

@@ -29,6 +29,7 @@ jacocoTestReport {
 }
 
 test {
+    forkEvery(1)
     useJUnitPlatform()
 
     testLogging {

@@ -8,23 +8,26 @@ import seedu.duke.utils.Ui;
 
 import java.util.ArrayList;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class HelpCommand extends Command {
     public static final String COMMAND_WORD = "help";
     public static final String COMMAND_USAGE = "help";
-    public static final String COMMAND_DESCRIPTION = "List out all commands and "
-            + " their respective usages in YAMOM";
+    public static final String COMMAND_DESCRIPTION =
+            "List out all commands and their respective usages in YAMOM.";
+    public static final String MESSAGE_COMMAND = 
+            "Here are all the commands available in YAMOM!" + System.lineSeparator();
+    public static final String MESSAGE_FORMAT_NOTE = System.lineSeparator() + "Note: "
+            + "[ ] are required elements,\n"
+            + "      < > are optional elements,\n"
+            + "       |  denotes either of the arguments can be used.";
 
-    private static final String MESSAGE_COMMAND = "Here are all the commands "
-            + "available in YAMOM!" + System.lineSeparator();
+    public static final String MESSAGE_USAGE = System.lineSeparator() + "Usage :";
+    public static final String USER_GUIDE_LINK = "https://ay2223s1-cs2113-f11-3.github.io/tp/";
+    public static final String MESSAGE_USER_GUIDE_REFERENCE = 
+            "For more detailed guide, please visit " + USER_GUIDE_LINK;
 
-    private static final String MESSAGE_FORMAT_NOTE = System.lineSeparator() + "Note: "
-            + "[ ] are required elements, "
-            + "< > are optional elements";
-
-    private static final String MESSAGE_USAGE = System.lineSeparator() + "Usage :";
-    private static final String USER_GUIDE_LINK = "https://ay2223s1-cs2113-f11-3.github.io/tp/";
-    private static final String MESSAGE_USER_GUIDE_REFERENCE = "For more "
-            + "detailed guide, please visit " + USER_GUIDE_LINK;
+    public static final int HEADING_INDENT = 8;
 
     public HelpCommand(String[] input) throws YamomException {
         super(input);
@@ -34,16 +37,11 @@ public class HelpCommand extends Command {
     @Override
     public void execute(State state, Ui ui, Storage storage) {
         ui.addMessage(MESSAGE_COMMAND);
-        ArrayList<String> commandDescriptions = getAllCommandDescription();
-        ui.addMessage(commandDescriptions);
-
+        ui.addMessage(getAllCommandDescriptions());
         ui.addMessage(MESSAGE_USAGE);
-        ArrayList<String> commandUsages = getAllCommandUsage();
-        ui.addMessage(commandUsages, true);
-
+        ui.addMessage(getAllCommandUsage(), true);
         ui.addMessage(MESSAGE_FORMAT_NOTE);
         ui.addMessage(MESSAGE_USER_GUIDE_REFERENCE);
-
         ui.displayUi();
     }
 
@@ -57,49 +55,57 @@ public class HelpCommand extends Command {
         return null;
     }
 
-    private ArrayList<String> getAllCommandDescription() {
-        ArrayList<String> commandDescriptions = new ArrayList<>();
+    private String formatCommandDescription(String keyword, String description) {
+        return StringUtils.rightPad(keyword, HEADING_INDENT) + " : " + description;
+    }
 
-        commandDescriptions.add(AddModuleCommand.getCommandDescription());
-        commandDescriptions.add(DeleteModuleCommand.getCommandDescription());
-        commandDescriptions.add(DisplaySelectedModuleListCommand.getCommandDescription());
-        commandDescriptions.add(ExitCommand.getCommandDescription());
-        commandDescriptions.add(ExportCommand.getCommandDescription());
-        commandDescriptions.add(GetModuleCommand.getCommandDescription());
-        commandDescriptions.add(HelpCommand.getCommandDescription());
-        commandDescriptions.add(ImportCommand.getCommandDescription());
-        commandDescriptions.add(SearchModuleCommand.getCommandDescription());
-        commandDescriptions.add(SelectSemesterCommand.getCommandDescription());
-        commandDescriptions.add(SelectSlotCommand.getCommandDescription());
-        commandDescriptions.add(ViewTimetableCommand.getCommandDescription());
+    private ArrayList<String> getAllCommandDescriptions() {
+        ArrayList<String> list = new ArrayList<>();
 
-        return commandDescriptions;
+        list.add(formatCommandDescription(
+                AddModuleCommand.COMMAND_WORD, AddModuleCommand.COMMAND_DESCRIPTION));
+        list.add(formatCommandDescription(
+                ByeCommand.COMMAND_WORD, ByeCommand.COMMAND_DESCRIPTION));
+        list.add(formatCommandDescription(
+                ExportCommand.COMMAND_WORD, ExportCommand.COMMAND_DESCRIPTION));
+        list.add(formatCommandDescription(
+                HelpCommand.COMMAND_WORD, HelpCommand.COMMAND_DESCRIPTION));
+        list.add(formatCommandDescription(
+                ImportCommand.COMMAND_WORD, ImportCommand.COMMAND_DESCRIPTION));
+        list.add(formatCommandDescription(
+                InfoCommand.COMMAND_WORD, InfoCommand.COMMAND_DESCRIPTION));
+        list.add(formatCommandDescription(
+                ListCommand.COMMAND_WORD, ListCommand.COMMAND_DESCRIPTION));
+        list.add(formatCommandDescription(
+                RemoveModuleCommand.COMMAND_WORD, RemoveModuleCommand.COMMAND_DESCRIPTION));
+        list.add(formatCommandDescription(
+                SearchModuleCommand.COMMAND_WORD, SearchModuleCommand.COMMAND_DESCRIPTION));
+        list.add(formatCommandDescription(
+                SelectSlotCommand.COMMAND_WORD, SelectSlotCommand.COMMAND_DESCRIPTION));
+        list.add(formatCommandDescription(
+                SelectSemesterCommand.COMMAND_WORD, SelectSemesterCommand.COMMAND_DESCRIPTION));
+        list.add(formatCommandDescription(
+                TimetableCommand.COMMAND_WORD, TimetableCommand.COMMAND_DESCRIPTION));
+
+        return list;
     }
 
     private ArrayList<String> getAllCommandUsage() {
         ArrayList<String> commandUsages = new ArrayList<>();
 
-        commandUsages.add(AddModuleCommand.getUsage());
-        commandUsages.add(DeleteModuleCommand.getUsage());
-        commandUsages.add(DisplaySelectedModuleListCommand.getUsage());
-        commandUsages.add(ExitCommand.getUsage());
-        commandUsages.add(ExportCommand.getUsage());
-        commandUsages.add(GetModuleCommand.getUsage());
-        commandUsages.add(HelpCommand.getUsage());
-        commandUsages.add(ImportCommand.getUsage());
-        commandUsages.add(SearchModuleCommand.getUsage());
-        commandUsages.add(SelectSemesterCommand.getUsage());
-        commandUsages.add(SelectSlotCommand.getUsage());
-        commandUsages.add(ViewTimetableCommand.getUsage());
+        commandUsages.add(AddModuleCommand.COMMAND_USAGE);
+        commandUsages.add(ByeCommand.COMMAND_USAGE);
+        commandUsages.add(ExportCommand.COMMAND_USAGE);
+        commandUsages.add(HelpCommand.COMMAND_USAGE);
+        commandUsages.add(ImportCommand.COMMAND_USAGE);
+        commandUsages.add(InfoCommand.COMMAND_USAGE);
+        commandUsages.add(ListCommand.COMMAND_USAGE);
+        commandUsages.add(RemoveModuleCommand.COMMAND_USAGE);
+        commandUsages.add(SearchModuleCommand.COMMAND_USAGE);
+        commandUsages.add(SelectSlotCommand.COMMAND_USAGE);
+        commandUsages.add(SelectSemesterCommand.COMMAND_USAGE);
+        commandUsages.add(TimetableCommand.COMMAND_USAGE);
 
         return commandUsages;
-    }
-
-    public static String getCommandDescription() {
-        return COMMAND_WORD + DESCRIPTION_DELIMITER + COMMAND_DESCRIPTION;
-    }
-
-    public static String getUsage() {
-        return COMMAND_USAGE;
     }
 }

@@ -17,7 +17,6 @@ public class ConsoleBorder {
     private final char bottomLeft;
     private final char bottomRight;
     private final char bottomMid;
-    private final boolean isStyleSimple;
 
     private static ConsoleBorder singleton;
     private static ConsoleBorder styleSimpleSingleton;
@@ -87,7 +86,6 @@ public class ConsoleBorder {
     }
 
     private ConsoleBorder(boolean isStyleSimple) {
-        this.isStyleSimple = isStyleSimple;
         String borderFileName = (isStyleSimple || SystemUtils.IS_OS_WINDOWS) ? "borderWindows.txt" : "border.txt";
         InputStream stream = ConsoleBorder.class.getClassLoader()
                 .getResourceAsStream(borderFileName);

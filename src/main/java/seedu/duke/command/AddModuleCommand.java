@@ -16,33 +16,41 @@ import java.util.List;
 
 public class AddModuleCommand extends Command {
     private Module module;
-    private boolean successful;
+    private boolean isSuccessfullyAdded;
 
     public static final String COMMAND_WORD = "add";
-    private static final String COMMAND_USAGE = "add [MODULE_CODE]";
-    private static final String COMMAND_DESCRIPTION = "add a module into YAMOM timetable.";
-
-    private static final String ERROR_WRONG_FORMAT = "Wrong format, should be: " + COMMAND_USAGE;
+    public static final String COMMAND_USAGE = "add [ MODULE_CODE ]";
+    public static final String COMMAND_DESCRIPTION = "Add a module into YAMOM timetable.";
+    public static final String ERROR_WRONG_FORMAT = "Wrong format, should be: " + COMMAND_USAGE;
+    public static final String MODULE_NOT_FOUND = "Module not found! Please enter a valid module code!";
 
     public AddModuleCommand(String[] input) throws YamomException {
         super(input);
         Parser.moduleRelatedCommandError(input, ERROR_WRONG_FORMAT);
-
         String moduleCode = input[1].toUpperCase();
         this.module = Module.get(moduleCode);
-        successful = false;
+        this.isSuccessfullyAdded = false;
+        if (this.module == null) {
+            throw new YamomException(MODULE_NOT_FOUND);
+        }
     }
 
     @Override
     public void execute(State state, Ui ui, Storage storage) {
         int semester = state.getSemester();
-        SelectedModule selectedModule = new SelectedModule(module, semester);
+        boolean isModuleOffered = module.isOfferedInSemester(state.getSemester());
+        if (!isModuleOffered) {
+            ui.addMessage(module.moduleCode + " is not being offered this semester!");
+            ui.displayUi();
+            return;
+        }
 
+        SelectedModule selectedModule = new SelectedModule(module, semester);
         List<SelectedModule> currentSelectedModules = state.getSelectedModulesList();
 
         if (!currentSelectedModules.contains(selectedModule)) {
             state.addSelectedModule(selectedModule);
-            successful = true;
+            isSuccessfullyAdded = true;
         }
 
         ui.addMessage(getExecutionMessage());
@@ -57,21 +65,12 @@ public class AddModuleCommand extends Command {
     @Override
     public String getExecutionMessage() {
         String outputMessage;
-        if (successful) {
+
+        if (isSuccessfullyAdded) {
             outputMessage = module.moduleCode + " has been added";
         } else {
             outputMessage = module.moduleCode + " has already been added!";
         }
-
         return outputMessage;
     }
-
-    public static String getCommandDescription() {
-        return COMMAND_WORD + DESCRIPTION_DELIMITER + COMMAND_DESCRIPTION;
-    }
-
-    public static String getUsage() {
-        return COMMAND_USAGE;
-    }
-
 }

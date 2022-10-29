@@ -2,12 +2,12 @@ package seedu.duke.parser;
 
 import seedu.duke.command.AddModuleCommand;
 import seedu.duke.command.Command;
-import seedu.duke.command.DeleteModuleCommand;
-import seedu.duke.command.DisplaySelectedModuleListCommand;
-import seedu.duke.command.ExitCommand;
-import seedu.duke.command.GetModuleCommand;
+import seedu.duke.command.RemoveModuleCommand;
+import seedu.duke.command.ListCommand;
+import seedu.duke.command.ByeCommand;
+import seedu.duke.command.InfoCommand;
 import seedu.duke.command.HelpCommand;
-import seedu.duke.command.ViewTimetableCommand;
+import seedu.duke.command.TimetableCommand;
 import seedu.duke.command.SelectSlotCommand;
 import seedu.duke.command.SelectSemesterCommand;
 import seedu.duke.command.SearchModuleCommand;
@@ -49,17 +49,17 @@ public class Parser {
         case (SearchModuleCommand.COMMAND_WORD):
             toExecute = new SearchModuleCommand(userInput);
             break;
-        case (GetModuleCommand.COMMAND_WORD):
-            toExecute = new GetModuleCommand(keywords);
+        case (InfoCommand.COMMAND_WORD):
+            toExecute = new InfoCommand(keywords);
             break;
         case (AddModuleCommand.COMMAND_WORD):
             toExecute = new AddModuleCommand(keywords);
             break;
-        case (DeleteModuleCommand.COMMAND_WORD):
-            toExecute = new DeleteModuleCommand(keywords);
+        case (RemoveModuleCommand.COMMAND_WORD):
+            toExecute = new RemoveModuleCommand(keywords);
             break;
-        case (ViewTimetableCommand.COMMAND_WORD):
-            toExecute = new ViewTimetableCommand(userInput);
+        case (TimetableCommand.COMMAND_WORD):
+            toExecute = new TimetableCommand(userInput);
             break;
         case (HelpCommand.COMMAND_WORD):
             toExecute = new HelpCommand(keywords);
@@ -67,8 +67,8 @@ public class Parser {
         case (SelectSlotCommand.COMMAND_WORD):
             toExecute = new SelectSlotCommand(userInput);
             break;
-        case (ExitCommand.COMMAND_WORD):
-            toExecute = new ExitCommand(keywords);
+        case (ByeCommand.COMMAND_WORD):
+            toExecute = new ByeCommand(keywords);
             break;
         case (SelectSemesterCommand.COMMAND_WORD):
             toExecute = new SelectSemesterCommand(keywords);
@@ -79,8 +79,8 @@ public class Parser {
         case (ImportCommand.COMMAND_WORD):
             toExecute = new ImportCommand(keywords);
             break;
-        case (DisplaySelectedModuleListCommand.COMMAND_WORD):
-            toExecute = new DisplaySelectedModuleListCommand(keywords);
+        case (ListCommand.COMMAND_WORD):
+            toExecute = new ListCommand(keywords);
             break;
         default:
             throw new YamomException("Cannot process the command");
@@ -187,7 +187,7 @@ public class Parser {
         if (semester.toString().matches("st1|st2|specialterm1|specialterm2")) {
             int correctSemester = Integer.parseInt(semester.substring(semester.length() - 1)) + 2;
             keywords[1] = String.valueOf(correctSemester);
-            return  true;
+            return true;
         }
         return false;
     }
