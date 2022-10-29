@@ -96,7 +96,11 @@ public class Biometrics {
 
     public void setActivityLevel(int activityLevel) throws IllegalValueException {
         if (activityLevel < 1 || activityLevel > 5) {
-            throw new IllegalValueException("The activity level ranges from 1 to 5 only!");
+            throw new IllegalValueException(
+                    "You should only input a number between 1 to 5" + System.lineSeparator()
+                    + "Input your activity level based on your activity level" + System.lineSeparator()
+                    + "with 1 being the least active and 5 being the most active!"
+            );
         }
         this.activityLevel = activityLevel;
     }

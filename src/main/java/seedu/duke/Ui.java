@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import seedu.duke.records.Calories;
+import seedu.duke.records.CaloriesList;
 import seedu.duke.records.Record;
 import seedu.duke.records.biometrics.WeightAndFat;
 import seedu.duke.records.exercise.CardioExercise;
@@ -81,6 +83,14 @@ public class Ui {
         printEmptyLine();
     }
 
+    public void outputCalories(ArrayList<Calories> caloriesList) {
+        Integer[] columnSpacingArray = { 10, 17, 14, 12, 6};
+        getCaloriesColumnsSpacing(caloriesList, columnSpacingArray);
+        generateCaloriesTableHeader(columnSpacingArray);
+        printCaloriesList(caloriesList, columnSpacingArray);
+        printEmptyLine();
+    }
+
     public void outputAllRecords(ArrayList<Record> recordArrayList,
                                  ArrayList<WeightAndFat> weightAndFatArrayList,
                                  ArrayList<Food> foodArrayList,
@@ -125,6 +135,16 @@ public class Ui {
             columnSpacingArray[1] = Math.max(columnSpacingArray[1], food.getFoodDescription().length());
             columnSpacingArray[2] = Math.max(columnSpacingArray[2], String.valueOf(food.getCalories()).length());
             columnSpacingArray[3] = Math.max(columnSpacingArray[3], food.getDate().length());
+        }
+    }
+
+    private void getCaloriesColumnsSpacing(ArrayList<Calories> caloriesList, Integer[] columnSpacingArray) {
+        for (Calories c: caloriesList) {
+            columnSpacingArray[0] = Math.max(columnSpacingArray[0], c.getDate().length());
+            columnSpacingArray[1] = Math.max(columnSpacingArray[1], c.getCaloriesConsumed() % 10 + 1);
+            columnSpacingArray[2] = Math.max(columnSpacingArray[2], c.getCaloriesBurnt() % 10 + 1);
+            columnSpacingArray[3] = Math.max(columnSpacingArray[3], c.getNetCalories() % 10 + 1);
+            columnSpacingArray[3] = Math.max(columnSpacingArray[4], c.getMessage().length());
         }
     }
 
@@ -225,6 +245,20 @@ public class Ui {
         }
     }
 
+    private void printCaloriesList(ArrayList<Calories> caloriesList, Integer[] columnSpacingArray) {
+        for (int i = 0; i < caloriesList.size(); i++) {
+            String date = addRightPadding(caloriesList.get(i).getDate(), columnSpacingArray[0]) + " | ";
+            String caloriesConsumed = addRightPadding(Integer.toString(caloriesList.get(i).getCaloriesConsumed()),
+                    columnSpacingArray[1]) + " | ";
+            String caloriesBurnt = addRightPadding(Integer.toString(caloriesList.get(i).getCaloriesBurnt()),
+                    columnSpacingArray[2]) + " | ";
+            String netCalories = addRightPadding(Integer.toString(caloriesList.get(i).getNetCalories()),
+                    columnSpacingArray[3]) + " | ";
+            String message = addRightPadding(caloriesList.get(i).getMessage(),columnSpacingArray[4]) + " | ";
+            printInSameLine(date,caloriesConsumed,caloriesBurnt,netCalories,message);
+        }
+    }
+
     private void printAllRecords(ArrayList<Record> recordArrayList, Integer[] columnSpacingArray, String header) {
         for (int i = 0; i < recordArrayList.size(); i++) {
             if (recordArrayList.get(i) instanceof WeightAndFat) {
@@ -314,6 +348,17 @@ public class Ui {
         output(separatorLine, line, separatorLine);
     }
 
+    private void generateCaloriesTableHeader(Integer[] columnSpacingArray) {
+        String paddedDate = addRightPadding("Date", columnSpacingArray[0]) + " | ";
+        String paddedCaloriesConsumed = addRightPadding("Calories Consumed", columnSpacingArray[1]) + " | ";
+        String paddedCaloriesBurnt = addRightPadding("Calories Burnt", columnSpacingArray[2]) + " | ";
+        String paddedNetCalories = addRightPadding("Net Calories", columnSpacingArray[3]) + " | ";
+        String paddedStatus = addRightPadding("Status", columnSpacingArray[4]) + " | ";
+        String line = paddedDate + paddedCaloriesConsumed + paddedCaloriesBurnt + paddedNetCalories + paddedStatus;
+        String separatorLine = "-".repeat(line.length());
+        output(separatorLine, line, separatorLine);
+    }
+
     private void generateAllDataTableHeader(Integer[] columnSpacingArray) {
         String paddedBlank = addRightPadding("", columnSpacingArray[0]) + " | ";
         String paddedWeightFat = addRightPadding("Weight&Fat", columnSpacingArray[1]) + " | ";
@@ -353,4 +398,6 @@ public class Ui {
     private static String addLeftPadding(String string, int numberOfSpace) {
         return String.format("%" + numberOfSpace + "s", string);
     }
+
+
 }
