@@ -136,10 +136,10 @@ public class Recipe {
 
     public String getRecipeAttributesFormatted() {
         StringBuilder recipeAttributesStringFormatted = new StringBuilder();
-        recipeAttributesStringFormatted.append("Recipe Name: " + title + "\n");
-        recipeAttributesStringFormatted.append("Recipe Description: " + description.trim() + "\n");
-        recipeAttributesStringFormatted.append("Recipe Ingredients: " + "\n" + getIngredientAttributesFormatted());
-        recipeAttributesStringFormatted.append("Recipe Steps: " + getStepAttributesFormatted() + "\n");
+        recipeAttributesStringFormatted.append("Recipe Title: " + title + "\n\n");
+        recipeAttributesStringFormatted.append("Recipe Description: " + description.trim() + "\n\n");
+        recipeAttributesStringFormatted.append("Recipe Ingredients: " + "\n" + getIngredientAttributesFormatted() + "\n");
+        recipeAttributesStringFormatted.append("Recipe Steps: " + getStepAttributesFormatted() + "\n\n");
         logger.log(Level.INFO, "Get attributes of " + title);
         return recipeAttributesStringFormatted.toString();
     }

@@ -150,22 +150,74 @@ Example:
 /edit 1
 ```
 
+[⏫ Back to content page](#content-page)
+
 ## Delete Command
 
-- Delete existing recipe with given recipe title (case insensitive).
-- FORMAT: `/delete RECIPE_TITLE`
-- EXAMPLE: `/delete carbonara`
+Delete existing recipe with given recipe title from the list. This helps you to organise your recipe list such that those recipes that
+'outdated' or no longer used by you can be removed.
+
+Format: `/delete RECIPE_TITLE`
+
+ℹ The _RECIPE_TITLE_ is not case-sensitive. Therefore, inputting _recipe_title_ and _RECIPE_TITLE_ yields the same result.
+
+Example: 
+```
+/delete carbonara
+
+Carbonara is deleted from the recipe list.
+```
+
+[⏫ Back to content page](#content-page)
 
 ## List Command
 
-- List the existing recipes previously added
-- FORMAT: `/list`
+List the existing recipe titles previously added to the recipe list. This gives you a quick overview of the recipes that you have added previously.
+
+Format: `/list`
+
+Example:
+```
+/list
+
+1. Apple Crumble
+2. Gyoza
+3. Nasi Briyani
+```
+
+[⏫ Back to content page](#content-page)
 
 ## View Command
 
-- View the full details of the specified recipe according to the index shown in the list
-- FORMAT: `/view INDEX`
-- EXAMPLE: `/view 1`
+View the full details of the specified recipe according to the index shown in the list. The details shown include recipe title, recipe description,
+ingredients used and steps involved. To record the ingredients used, user can note down the ingredient name,
+amount and the respective units. As for the steps involved, user will specify the steps in the order of execution.
+
+Format: `/view INDEX`
+
+Example: 
+```
+Recipe Title: Carbonara
+
+Recipe Description: Carbonara is an Italian pasta dish from Rome made with eggs, hard cheese, cured pork
+and black pepper. Hot pasta tossed with a creamy sauce of raw beaten eggs, accentuated with crisp bits of
+guanciale, and finished with a shower of grated aged Pecorino Romano cheese plus freshly ground black pepper.
+
+Recipe Ingredients: 
+1. Extra virgin olive oil / 1 / table spoon
+2. Eggs / 3 / whole
+3. Parmesan cheese / 1 / cup
+4. Spaghetti / 0.9 / pound
+
+Recipe Steps:
+1. Heat the pasta water.
+2. Sauté the pancetta or bacon and garlic.
+3. In a small bowl, beat the eggs and mix in about half of the cheese.
+4. Once the water has reached a rolling boil, add the dry pasta, and cook, uncovered, at a rolling boil.
+5. Add the beaten egg mixture.
+6. Pour the mixture over the pasta.
+```
+[⏫ Back to content page](#content-page)
 
 ## Find Command
 
