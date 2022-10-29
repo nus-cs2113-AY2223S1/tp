@@ -8,6 +8,8 @@ import java.util.logging.Logger;
 import java.util.logging.LogManager;
 import java.util.logging.FileHandler;
 import java.util.logging.ConsoleHandler;
+
+import seedu.duke.commands.nusmodsapi.Nusmods;
 import seedu.duke.data.DataManager;
 
 public class Duke {
@@ -41,20 +43,22 @@ public class Duke {
         String input;
         String currentSemester = getSemester();
 
-        if (!loadData(currentSemester)) {
+        boolean isRunning = !Objects.equals(currentSemester, EXIT_FLAG);
+
+        if (isRunning && !loadData(currentSemester)) {
             System.exit(0);
         }
 
-        boolean isRunning = !Objects.equals(currentSemester, EXIT_FLAG);
         
         while (isRunning) {
             assert (currentSemester.equals("1") || currentSemester.equals("2"))  : "valid semester are only 1 or 2";
 
-            input = UI.getCommandFromUser();
+            input = UI.getCommandFromUser().trim();
             response = Parser.parseCommand(input, currentSemester);
 
             if (Objects.equals(response, EXIT_FLAG)) {
-                lgr.info("exit flag detected, attempting to exit");
+                lgr.info("exit flag detected, attempting to save and exit");
+                saveData();
                 break;
             }
 
@@ -63,8 +67,6 @@ public class Duke {
 
             assert isRunning : "this is never set to false, use break to exit loop";
         }
-
-        saveData();
 
         UI.printGoodbyeMessage();
         lgr.info("exiting Timetabler program...");
@@ -78,19 +80,20 @@ public class Duke {
         DataManager.initDataFile(currentSemester);
         try {
             DataManager.loadTimetableFromDataFile();
-        } catch (FileNotFoundException e) {
-            UI.printResponse("Error, file not found!");
-            return false;
-        } catch (Exceptions.FileLoadException e) {
-            UI.printResponse("API call failed, are you connected to the internet?\n"
-                    + "Program exiting expectedly...");
-            return false;
-        } catch (IndexOutOfBoundsException e) {
-            UI.printResponse("Corrupted file detected. Please delete all data files and relaunch the app.\n"
-                    + "Program exiting expectedly...");
-            return false;
+        } catch (FileNotFoundException | IndexOutOfBoundsException | Exceptions.FileLoadException e) {
+            return runDataProtocol();
         }
         return true;
+    }
+
+    private static boolean runDataProtocol() {
+        String response = UI.getDataProtocolResponse();
+        if (Objects.equals(response, "0")) {
+            DataManager.resetDataFiles();
+            return true;
+        } else {
+            return false;
+        }
     }
 
     private static String getSemester() {
