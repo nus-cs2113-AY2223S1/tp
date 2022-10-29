@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static seedu.duke.common.HelpMessages.COMMAND_DESCRIPTION_PURGE;
+import static seedu.duke.common.HelpMessages.COMMAND_USAGE_PURGE;
 import static seedu.duke.common.InfoMessages.INFO_PURGE;
 import static seedu.duke.common.InfoMessages.INFO_PURGE_ABORT;
 import static seedu.duke.common.InfoMessages.INFO_PURGE_EMPTY;
@@ -24,17 +26,11 @@ public class PurgeCommand extends Command {
     //@@author brian-vb
     // The command word used to trigger the execution of Moolah Manager's operations
     public static final String COMMAND_WORD = "PURGE";
-    // The description for the usage of command
-    public static final String COMMAND_DESCRIPTION = "To purge a all entries in the list of transactions.";
-    // The guiding information for the usage of command
-    public static final String COMMAND_USAGE = "Usage: purge";
     // The formatting information for the parameters used by the command
     public static final String COMMAND_PARAMETERS_INFO = "Parameters information:  -NIL-";
-
     // Basic help description
     public static final String COMMAND_HELP = "Command Word: " + COMMAND_WORD + LINE_SEPARATOR
-            + COMMAND_DESCRIPTION + LINE_SEPARATOR
-            + COMMAND_USAGE + LINE_SEPARATOR;
+            + COMMAND_DESCRIPTION_PURGE + LINE_SEPARATOR + COMMAND_USAGE_PURGE + LINE_SEPARATOR;
     // Detailed help description
     public static final String COMMAND_DETAILED_HELP = COMMAND_HELP + COMMAND_PARAMETERS_INFO
             + LINE_SEPARATOR;

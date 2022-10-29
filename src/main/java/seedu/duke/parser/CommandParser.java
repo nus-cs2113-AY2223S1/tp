@@ -93,8 +93,10 @@ public class CommandParser {
      * @throws GlobalInvalidCommandException If the command word is not supported by the application.
      */
     public static Command getCommand(String commandWordInput, String parameterInput) throws
+
             GlobalInvalidCommandException {
         // TODO: Remove parameter input once a solution is found for managing parameter that allows space
+        parserLogger.setLevel(Level.SEVERE);
         Command command = null;
         switch (commandWordInput.toUpperCase()) {
         case HelpCommand.COMMAND_WORD:

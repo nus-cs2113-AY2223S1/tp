@@ -21,6 +21,15 @@ import static seedu.duke.command.CommandTag.COMMAND_TAG_GLOBAL_YEAR;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_GLOBAL_NUMBER;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_GLOBAL_PERIOD;
 
+import static seedu.duke.common.HelpMessages.COMMAND_PARAMETERS_TYPE;
+import static seedu.duke.common.HelpMessages.COMMAND_PARAMETERS_CATEGORY;
+import static seedu.duke.common.HelpMessages.COMMAND_PARAMETERS_DATE;
+import static seedu.duke.common.HelpMessages.COMMAND_PARAMETERS_MONTH;
+import static seedu.duke.common.HelpMessages.COMMAND_PARAMETERS_YEAR;
+import static seedu.duke.common.HelpMessages.COMMAND_PARAMETERS_PERIOD;
+import static seedu.duke.common.HelpMessages.COMMAND_PARAMETERS_NUMBER;
+import static seedu.duke.common.HelpMessages.COMMAND_DESCRIPTION_LIST;
+import static seedu.duke.common.HelpMessages.COMMAND_USAGE_LIST;
 import static seedu.duke.common.InfoMessages.INFO_LIST;
 import static seedu.duke.common.InfoMessages.INFO_LIST_EMPTY;
 import static seedu.duke.common.InfoMessages.LINE_SEPARATOR;
@@ -32,39 +41,15 @@ public class ListCommand extends ListAndStatsCommand {
     //@@author chydarren
     // The command word used to trigger the execution of Moolah Manager's operations
     public static final String COMMAND_WORD = "LIST";
-    // The description for the usage of command
-    public static final String COMMAND_DESCRIPTION = "To list all or some transactions based on selection."
-            + " Tags will be joined in the filter based on the 'AND' operation.";
-    // The guiding information for the usage of command
-    public static final String COMMAND_USAGE = "Usage: list [t/TYPE] [c/CATEGORY] [d/DATE] [m/MONTH] [y/YEAR] "
-            + "[p/PERIOD] [n/NUMBER]";
     // The formatting information for the parameters used by the command
-    public static final String COMMAND_PARAMETERS_INFO = "Parameters information:"
-            + LINE_SEPARATOR
-            + "(Optional) TYPE - The type of transaction. Only \"income\" or \"expense\" is accepted."
-            + LINE_SEPARATOR
-            + "(Optional) CATEGORY: A category for the transaction. Only string containing alphabets is accepted."
-            + LINE_SEPARATOR
-            + "(Optional) DATE: Date of the transaction. The format must be in \"yyyyMMdd\"."
-            + LINE_SEPARATOR
-            + "(Optional) MONTH: Month of the transaction. Only integers within 1 to 12 are accepted. Note that "
-            + "month must be accompanied by a year. This tag cannot be used together with [p/PERIOD] or [n/NUMBER] "
-            + "tags."
-            + LINE_SEPARATOR
-            + "(Optional) YEAR: Year of the transaction. Only integers from 1000 onwards are accepted. "
-            + "This tag cannot be used together with [p/PERIOD] or [n/NUMBER] tags."
-            + LINE_SEPARATOR
-            + "(Optional) PERIOD: Period of the transaction. Only \"weeks\" or \"months\" is accepted. Note that "
-            + "period must be accompanied by a number to backdate from. This tag cannot be used together with "
-            + "[m/MONTH] or [y/YEAR] tags."
-            + LINE_SEPARATOR
-            + "(Optional) NUMBER: Last number of weeks or months. Only positive integers are accepted. Note that "
-            + "number must be accompanied by a period that represents weeks or months. This tag cannot be used "
-            + "together with [m/MONTH] or [y/YEAR] tags.";
-
+    public static final String COMMAND_PARAMETERS_INFO = "Parameters information:" + LINE_SEPARATOR
+            + COMMAND_PARAMETERS_TYPE + LINE_SEPARATOR + COMMAND_PARAMETERS_CATEGORY + LINE_SEPARATOR
+            + COMMAND_PARAMETERS_DATE + LINE_SEPARATOR + COMMAND_PARAMETERS_MONTH + LINE_SEPARATOR
+            + COMMAND_PARAMETERS_YEAR + LINE_SEPARATOR + COMMAND_PARAMETERS_PERIOD + LINE_SEPARATOR
+            + COMMAND_PARAMETERS_NUMBER;
     // Basic help description
     public static final String COMMAND_HELP = "Command Word: " + COMMAND_WORD + LINE_SEPARATOR
-            + COMMAND_DESCRIPTION + LINE_SEPARATOR + COMMAND_USAGE + LINE_SEPARATOR;
+            + COMMAND_DESCRIPTION_LIST + LINE_SEPARATOR + COMMAND_USAGE_LIST + LINE_SEPARATOR;
     // Detailed help description
     public static final String COMMAND_DETAILED_HELP = COMMAND_HELP + COMMAND_PARAMETERS_INFO + LINE_SEPARATOR;
 

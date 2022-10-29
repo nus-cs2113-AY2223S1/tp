@@ -1,4 +1,7 @@
 @startuml
+!include Style.puml
+skinparam monochrome true
+skinparam shadowing false
 'https://plantuml.com/sequence-diagram
 
 hide circle
@@ -14,9 +17,6 @@ class Duke {
 }
 
 class "CommandParser"{
-    - EMPTY_STRING: String
-    - DELIMITER: String
-    - SPLIT_POSITION: int
     - parserLogger: Logger
 
     +parse(): Command
@@ -25,10 +25,6 @@ class "CommandParser"{
 }
 
 class "ParameterParser"{
-    - EMPTY_STRING: String
-    - DELIMITER: String
-    - SPLIT_POSITION: int
-    - MINIMUM_TAG_LENGTH: int
     - parserLogger: Logger
 
     +parse()
@@ -48,8 +44,6 @@ class "ParameterParser"{
     +parseEntryTag(): int
     +parseHelpOptionTag(): boolean
     +parseStatsTypeTag(): String
-    +containNumeric(): boolean
-    +containAlphabet(): boolean
 }
 
 class "{abstract}\n Command"{
@@ -69,8 +63,8 @@ class "{abstract}\n Command"{
     +{abstract}execute()
 }
 
-Duke --> "CommandParser"
-"CommandParser" --> "ParameterParser"
-"CommandParser" --> "{abstract}\n Command"
+Duke "1" ..> "1" "CommandParser": calls
+"CommandParser" "1" ..> "1" "ParameterParser": calls
+"CommandParser" "1" ..> "1" "{abstract}\n Command" : creates
 
 @enduml

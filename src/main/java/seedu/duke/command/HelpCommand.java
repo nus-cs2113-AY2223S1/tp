@@ -6,6 +6,9 @@ import seedu.duke.Ui;
 import seedu.duke.data.TransactionList;
 
 import static seedu.duke.command.CommandTag.COMMAND_TAG_HELP_OPTION;
+import static seedu.duke.common.HelpMessages.COMMAND_PARAMETERS_DETAILED;
+import static seedu.duke.common.HelpMessages.COMMAND_DESCRIPTION_HELP;
+import static seedu.duke.common.HelpMessages.COMMAND_USAGE_HELP;
 import static seedu.duke.common.InfoMessages.LINE_SEPARATOR;
 
 
@@ -16,21 +19,12 @@ public class HelpCommand extends Command {
     //@@author wcwy
     // The command word used to trigger the execution of Moolah Manager's operations
     public static final String COMMAND_WORD = "HELP";
-    // The description for the usage of command
-    public static final String COMMAND_DESCRIPTION = "To display a list of available commands "
-            + "with their respective expected parameters."
-            + LINE_SEPARATOR
-            + "Type \"help o/detailed\" for a detailed version of all parameters used.";
-    // The guiding information for the usage of command
-    public static final String COMMAND_USAGE = "Usage: help [o/detailed]";
     // The formatting information for the parameters used by the command
-    public static final String COMMAND_PARAMETERS_INFO = "Parameters information:"
-            + LINE_SEPARATOR
-            + "(Optional) o/detailed - Detailed version of guide.";
-
+    public static final String COMMAND_PARAMETERS_INFO = "Parameters information:" + LINE_SEPARATOR
+            + COMMAND_PARAMETERS_DETAILED;
     // Basic help description
     public static final String COMMAND_HELP = "Command Word: " + COMMAND_WORD + LINE_SEPARATOR
-            + COMMAND_DESCRIPTION + LINE_SEPARATOR + COMMAND_USAGE + LINE_SEPARATOR;
+            + COMMAND_DESCRIPTION_HELP + LINE_SEPARATOR + COMMAND_USAGE_HELP + LINE_SEPARATOR;
     // Detailed help description
     public static final String COMMAND_DETAILED_HELP = COMMAND_HELP + COMMAND_PARAMETERS_INFO + LINE_SEPARATOR;
 

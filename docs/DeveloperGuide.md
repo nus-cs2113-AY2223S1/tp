@@ -23,6 +23,7 @@
     * [Stats Command](#stats-command)
     * [Delete Command](#delete-command)
     * [Purge Command](#purge-command)
+    * [Bye Command](#bye-command)
     * [Storage Operations](#storage-operations)
         + [Reading From a File](#reading-from-a-file)
         + [Writing To a File](#writing-to-a-file)
@@ -200,11 +201,11 @@ Methods from `Budget` and `TransactionList` would be used for the storage of `Bu
 _Written by: Yong Chin Han_
 
 ### Parser Component
-The Parser component comprises of two main parsers: `CommandParser` and `ParameterParser`. Together, both these 
+The Parser component consists of two main parsers: `CommandParser` and `ParameterParser`. Together, both these 
 parsers are used to generate a command object with its accurate parameters according to the input from the UI. 
 
 The structure of the data component in Moolah Manager is illustrated in the class diagram below:
-![Data Component Class Diagram](images/ParserClassDiagram.png)
+![Data Component Class Diagram](images/ParsersClassDiagram.png)
 
 After `run()` is called by `main()` in Duke, the `CommandParser` is first called to parse the command. The initial
  input is split into the commandWord and parameters using `splitInput()`. Next, the command word is parsed using 
@@ -310,7 +311,7 @@ The structure of the application focusing on the help command is illustrated in 
 For each command subclass, they will implement the getHelpMessage() and getDetailedHelpMessage() methods. These methods
 will contain their corresponding HelpMessage Enum that stores the help messages as strings inside the enum.
 
-In the help command, during the execute() call, it will call either generateBasicHelp() or generateDetailedHelp() method
+In the help command, when `execute()` is called, it will call either generateBasicHelp() or generateDetailedHelp() method
 based on the help option chosen by the user.
 
 ![Data Component Class Diagram](images/HelpSequenceDiagram.png)
@@ -331,7 +332,7 @@ public static int MIN_BUDGET_VALUE = 1;
 public static long MAX_BUDGET_VALUE = Long.valueOf(MAX_TRANSACTIONS_COUNT) * Long.valueOf(MAX_AMOUNT_VALUE);
 ```
 
-Under the default setting, the acceptable range of the monthly budget, is 0 < budget <= 10000000000000, which is 10^13 
+Under the default setting, the acceptable range of the monthly budget, is 0 < budget <= 10000000000000, which is 10^13, 
 and it ensures that no integer overflow will occur as the `long` data type is used. 
 
 To set a new budget, user can use the command `budget b/AMOUNT` where the `AMOUNT` tag is any whole number within the 
@@ -391,15 +392,20 @@ The full command for list is `list [t/TYPE] [c/CATEGORY] [d/DATE]`
 For example, if 'list' is called, all transactions that are present in Moolah Manager will be listed out
 Adding tags such as type, category and date will list all transactions to that category
 
-In a command like `list c/food`
+The structure of the application focusing on the list command is illustrated in the class diagram below:
+![Data Component Class Diagram](images/ListCommandSequenceDiagram.png)
 
-1. The `main()` method in Duke calls `run()` in Duke. The `ui` reads the command and parses it
-   through `CommandParser.parse()`.
+In a command like `list c/transport`
+
+1. The `main()` method in Duke calls `run()` in Duke. The command is parsed through `CommandParser.parse()`.
 2. Within `CommandParser.parse()`, `getCommand()` is called to obtain the command, before `ParameterParser.parse()`
    is called
 3. Various checks are done through functions within `parameter.parse()`
 4. The list command is undergoing execution in `command.execute()` which will call `listTransactions()` in ListCommand
-5. `ui.showTransactionsList()` is then executed since parameters are present
+5. Next, `getCommand()` is called to obtain a String of transactionList.
+6. `ui.showTransactionsList()` is then executed since parameters are present, causing the matching transactions to be displayed.
+
+
 
 _Written by: Paul Low_
 
@@ -445,6 +451,12 @@ _Written by: Chua Han Yong Darren_
 
 _Written by: Chua Han Yong Darren_
 
+### Bye Command
+
+{Describe the implementation for the Bye Command}
+
+_Written by: Brian Wong Yun Long_
+
 ### Delete Command
 
 The `DeleteCommand` inherits properties from the abstract `Command` class. The inheritance of `Command` from `DeleteCommand` is
@@ -460,7 +472,7 @@ The full command for `delete` is `delete [e/ENTRY]`.
 For example, if 'delete' is called, the specific entry inputted in the command is deleted from the list of transactions in
 Moolah Manager.
 
-In a command like `delete 2`:
+In a command like `delete e/2`:
 
 1. The `main()` method in Duke calls `run()` in Duke. The `ui` reads the command via `ui.readCommand()` and parses it
    through `CommandParser.parse()`.
@@ -497,6 +509,14 @@ In a command like `delete 2`:
    
 7. The display shows the successful deletion via `ui.showTransactionAction()` and writes it to file by `storage.writeToFile()`.
 
+The sequence diagram below shows the interactions of a successful execution of the `DeleteCommand`.
+
+<p align="center">
+    <img src="images/DeleteCommandSequenceDiagram.png">
+    <br />
+    <i>Figure 3.5: Sequence Diagram for Delete Command</i>
+</p>
+
 _Written by: Brian Wong Yun Long_
 
 ### Purge Command
@@ -507,7 +527,7 @@ shown below.
 <p align="center">
     <img src="images/PurgeCommandClassDiagram.png">
     <br />
-    <i>Figure 3.5: Class Diagram for PurgeCommand Showing Inheritance of Command</i>
+    <i>Figure 3.6: Class Diagram for PurgeCommand Showing Inheritance of Command</i>
 </p>
 
 The full command for `purge` is `purge`.
@@ -552,7 +572,7 @@ _Written by: Brian Wong Yun Long_
 ### Storage Operations
 The Storage class is a standalone class that contains methods used for the storage of Transaction entries and the Budget value.
 
-The class is first called by `Duke` during the initialising of the `TransactionList`. In this process, duke.txt's existance will be verified.
+The class is first called by `Duke` during the initialising of the `TransactionList`. In this process, the existence of duke.txt will be verified.
 1. If the file does not exist, an empty `Duke.txt` file would be created for the program to use. 
 2. If the file exists, it's values would be parsed to verify if they have been corrupted. If corrupted, the storage of values would halt and error messages would be shown to prompt user to correct file issues.
 Else, the values would update the program's `Budget` and the entries in `TransactionList`without any issues.

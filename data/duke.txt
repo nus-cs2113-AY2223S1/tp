@@ -1,0 +1,4 @@
+10000000000
+expense | a | 1 | 2022-01-01 | a
+income | bonus | 10000000 | 2022-10-03 | thank_you_boss
+expense | bonus | 10000000 | 2022-10-03 | thank_you_boss
