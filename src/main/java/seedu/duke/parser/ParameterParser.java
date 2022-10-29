@@ -9,10 +9,12 @@ import seedu.duke.data.transaction.Income;
 
 import seedu.duke.exception.GlobalDuplicateTagException;
 import seedu.duke.exception.GlobalEmptyParameterException;
+import seedu.duke.exception.GlobalInvalidIndexException;
 import seedu.duke.exception.GlobalInvalidMonthException;
 import seedu.duke.exception.GlobalInvalidPeriodException;
 import seedu.duke.exception.GlobalInvalidYearException;
 import seedu.duke.exception.GlobalMissingTagException;
+import seedu.duke.exception.GlobalNonNumericIndexException;
 import seedu.duke.exception.GlobalNumberNotNumericException;
 import seedu.duke.exception.GlobalUnsupportedTagException;
 import seedu.duke.exception.HelpUnknownOptionException;
@@ -59,6 +61,7 @@ import static seedu.duke.common.Constants.MAXIMUM_YEAR;
 import static seedu.duke.common.Constants.MAXIMUM_STATS_NUMBER;
 import static seedu.duke.common.Constants.MINIMUM_STATS_NUMBER;
 import static seedu.duke.common.DateFormats.DATE_INPUT_PATTERN;
+
 
 /**
  * Parses the parameter portion of the user input and set the parameters into the Command object.
@@ -420,9 +423,12 @@ public class ParameterParser {
      * @return The amount integer if no exceptions are thrown.
      * @throws InputTransactionInvalidAmountException If the transaction amount given is not a valid accepted integer.
      */
-    private static int parseAmountTag(String parameter) throws InputTransactionInvalidAmountException {
+    private static int parseAmountTag(String parameter) throws MoolahException {
         try {
+
+            //Checks if parameter is non-numerical or negative values.
             if (containAlphabet(parameter) || containSymbol(parameter)) {
+
                 parserLogger.log(Level.WARNING, "An invalid amount error is caught for the given parameter: "
                         + parameter);
                 throw new InputTransactionInvalidAmountException();
@@ -435,7 +441,7 @@ public class ParameterParser {
             }
             return amount;
 
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException e) { // error inclusive of int overflows
             parserLogger.log(Level.WARNING, "An invalid amount error is caught for the given parameter: " + parameter);
             throw new InputTransactionInvalidAmountException();
         }
@@ -473,16 +479,30 @@ public class ParameterParser {
      */
     public static int parseEntryTag(String parameter) throws MoolahException {
         int index;
+        //@@chinhan99
+        if (containAlphabet(parameter)) { // Checks if parameter contains alphabets
+            throw new GlobalNonNumericIndexException();
+        } else if (startsWithMinusSign(parameter)) { // Checks if parameter is negative value
+            if (parameter.length() == 1) { //Means parameter == "-"
+                throw new GlobalNonNumericIndexException();
+            }
+            throw new GlobalInvalidIndexException();
+        } else if (containSymbol(parameter)) { // Checks if contains any other symbols
+            throw new GlobalNonNumericIndexException();
+        }
+        //@@author brian-vb
         try {
+            // At this stage, the parameter is only positive numerical values
             index = Integer.parseInt(parameter);
-        } catch (NumberFormatException e) {
+            assert index >= 0; // Due to earlier parsers, there are no negative values
+        } catch (NumberFormatException e) { // If overflow from integer value , continue to throw as invalid index
             parserLogger.log(Level.WARNING, "An invalid entry number error is caught for the given parameter: "
                     + parameter);
-            throw new GlobalNumberNotNumericException();
+            throw new GlobalInvalidIndexException();
         }
-
         return index;
     }
+
 
     //@@author wcwy
 
@@ -684,5 +704,40 @@ public class ParameterParser {
         Matcher hasSpecialSymbols = specialSymbols.matcher(parameter);
 
         return hasSpecialSymbols.find();
+    }
+
+
+    /**
+     * Checks if the parameter starts with the minus sign.
+     * Typically called after an alphabetical check on the parameter.
+     *
+     * @param parameter The user input after the user tag.
+     * @return true if the parameter starts with a minus sign only.
+     */
+
+    public static boolean startsWithMinusSign(String parameter) {
+        Pattern rejectedSymbols = Pattern.compile("[!@#$%&*()_+=|<>?{}\\[\\]~]");
+        Pattern minusSymbol = Pattern.compile("-");
+        Matcher hasRejectedSymbols = rejectedSymbols.matcher(parameter);
+        Matcher hasMinusSymbol = minusSymbol.matcher(parameter);
+
+        if (hasRejectedSymbols.find()) {
+            return false;
+        }
+
+        int countOfMinusSymbol = 0;
+        if (parameter.startsWith(String.valueOf(minusSymbol))) {
+            while (hasMinusSymbol.find()) {
+                countOfMinusSymbol += 1;
+            }
+        } else { // immediately return false as parameter does not start with minus sign
+            return false;
+        }
+
+        // At this stage, parameter definitely starts with minus, and double check how many minus signs are in parameter
+        if (countOfMinusSymbol == 1) {
+            return true;
+        }
+        return false;
     }
 }
