@@ -1,8 +1,11 @@
 package seedu.duke.parser;
 
+import seedu.duke.command.Database;
 import seedu.duke.exceptions.InvalidModuleException;
 import seedu.duke.exceptions.InvalidUniversityException;
 import seedu.duke.exceptions.InvalidUserStorageFileException;
+import seedu.duke.exceptions.ModuleNotFoundException;
+import seedu.duke.module.ModuleMapping;
 import seedu.duke.timetable.Lesson;
 import seedu.duke.timetable.Timetable;
 import seedu.duke.timetable.TimetableManager;
@@ -179,15 +182,22 @@ public class UserStorageParser {
                 throw new InvalidUserStorageFileException("Invalid file format");
             }
             String puName = items[0];
+            if (!isValidUni(puName)) {
+                throw new InvalidUserStorageFileException("Invalid file format\n" + puName + " not found in database");
+            }
             String puCountry = items[1];
             String isFavourite = items[2];
             UserUniversityList newUni = new UserUniversityList(puName);
             UserModuleMappingList moduleList = new UserModuleMappingList();
-            getModuleInfoFromString(items, moduleList, puCountry);
+            getModuleInfoFromString(items, moduleList, puCountry, puName);
             newUni.setMyModules(moduleList);
             setFavourite(newUni, isFavourite);
             myManager.put(puName, newUni);
         }
+    }
+
+    private static boolean isValidUni(String puName) {
+        return Database.hasUniversityInDatabase(puName);
     }
 
     private static boolean isValidUniFormat(String[] items) {
@@ -225,20 +235,40 @@ public class UserStorageParser {
      * @param moduleList list of PU modules that the user is interested in
      * @throws InvalidUserStorageFileException when the String in data/uni_info.txt is in the wrong format
      */
-    private static void getModuleInfoFromString(String[] items, UserModuleMappingList moduleList, String puCountry)
-            throws InvalidUserStorageFileException {
+    private static void getModuleInfoFromString(String[] items, UserModuleMappingList moduleList, String puCountry,
+                                                String puName) throws InvalidUserStorageFileException {
         for (int i = 3; i < items.length; ++i) {
             assert items.length > 1 : "This university has at least one module saved";
             String[] details = splitModuleInformationInFileContent(items[i]);
             if (!isValidModulesFormat(details)) {
                 throw new InvalidUserStorageFileException("Invalid file format");
             }
+            isValidPuMapping(details[0], puName);
+            isValidNusMapping(details[3]);
             UserModuleMapping userModule = new UserModuleMapping(details[0], details[1],
                     details[3], details[4], details[5], details[2], items[0], puCountry);
             if (!details[6].equals("default")) {
                 userModule.setComment(details[6]);
             }
             moduleList.addModule(userModule, true);
+        }
+    }
+
+    private static void isValidNusMapping(String nusCode) throws InvalidUserStorageFileException {
+        try {
+            ArrayList<ModuleMapping> moduleMappings = Database.findNusMapping(nusCode);
+        } catch (ModuleNotFoundException e) {
+            throw new InvalidUserStorageFileException("Invalid file format\n"
+                    + nusCode + " in NUS not found in database");
+        }
+    }
+
+    private static void isValidPuMapping(String puCode, String puName) throws InvalidUserStorageFileException {
+        try {
+            ModuleMapping moduleMapping = Database.findPuMapping(puCode, puName);
+        } catch (ModuleNotFoundException e) {
+            throw new InvalidUserStorageFileException("Invalid file format\n"
+                    + puCode + " in " + puName + " not found in database");
         }
     }
 

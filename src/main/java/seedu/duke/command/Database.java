@@ -142,6 +142,8 @@ public class Database {
         return false;
     }
 
-
-
+    public static void clearDatabase() {
+        universities.clear();
+        moduleMappings.clear();
+    }
 }
