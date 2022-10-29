@@ -45,9 +45,11 @@ for easier reference. As an added feature, users can also curate their timetable
 3. Create a folder named `data` in the folder where you saved the .jar file
 4. Download `data.csv` from [here](https://github.com/AY2223S1-CS2113-W13-2/tp/blob/v2.0/data/data.csv) into the `data` folder
 5. Open your command prompt to the folder where you saved the .jar file
-6. Run java -jar easySEP.jar
+6. Maximise your command prompt window to full screen
+7. Run java -jar easySEP.jar
 
-Note: The word `databases` in this guide refers to the static copy of module mappings contained in `data.csv`.
+Note: The word `databases` in this guide refers to the static copy of module mappings contained in `data.csv`. 
+Where applicable, the abbreviation `PU` stands for Partner University.
 
 Expected output: 
 ```
@@ -61,36 +63,7 @@ Expected output:
                  |___/
 Hello! Welcome to easySEP, your personal companion for planning your student exchange :-)
 How may I help you today?
-____________________________________________________________________________
-____________________________________________________________________________
-     COMMAND   FORMAT                                                PURPOSE
-     --------  --------------------------------------                -------
-     add       /add u/{UNIVERSITY_NAME} m/{MODULE_CODE}              Adds input Partner University module code to input university list
-     add       /add u/{UNIVERSITY_NAME} m/{MODULE_CODE}              Adds a lesson for the input module code to the timetable for the input
-               d/{DAY_OF_THE_WEEK} st/{START_TIME} en/{END_TIME}
-     create    /create u/UNIVERSITY_NAME_IN_UNDERSCORES              Creates an empty module list for the input university
-     delete    /delete u/{UNIVERSITY_NAME}                           Deletes input university list
-     delete    /delete u/{UNIVERSITY_NAME} m/{MODULE_CODE}           Deletes input module from the university list
-     delete    /delete u/{UNIVERSITY_NAME} m/{MODULE_CODE}           Deletes input lesson from the university's timetable
-               d/{DAY_OF_THE_WEEK} st/{START_TIME} en/{END_TIME}
-     exit      /exit                                                 Terminates the program
-     favourite /favourite add/{UNIVERSITY_NAME}                      Adds a university list to the user's favourites
-     favourite /favourite del/{UNIVERSITY_NAME}                      Deletes a university list from the user's favourites
-     favourite /favourite VIEW                                       Displays the user's favourite university lists
-     help      /help                                                 Displays eligible user commands for the program
-     list      /list MODULES                                         Lists all existing university modules mappings that are approved in the format:
-                                                                     [Partner University Module Code] [Partner University Module Title] [Partner University Module Credits] | [NUS Module Code] [NUS Module Title] [NUS Module Credits] in NUS
-     list      /list UNIVERSITIES                                    Lists all universities with module mappings available in database
-     list      /list m/{MODULE_CODE}                                 Lists all module mappings for input NUS module code in database
-     list      /list u/{UNIVERSITY_NAME}                             Lists all module mappings offered by input university in database
-     view      /view LISTS                                           Displays all existing university lists that have been created by the user
-     view      /view u/{UNIVERSITY_NAME}                             Displays all the modules that have been added to the user's input university's list in the format:
-                                                                     [Home University Module Code] [Home University Module Title] | [Partner University Module Code] [Partner University Module Title] | [Equivalent NUS Credits]
-     view      /view TIMETABLES                                      Displays all timetables for list of universities created by user
-     view      /view DELETE_HISTORY                                  Displays up to 5 most recent modules that the user has deleted
-
-     Note: Words in curly brackets are parameters that you should input as a user
-     Note: There should not be spaces in parameters, replace with underscores instead
+Type /help if you need help with getting started for user commands
 ____________________________________________________________________________
 ```
 
@@ -309,27 +282,32 @@ Expected Output:
 ____________________________________________________________________________
      COMMAND   FORMAT                                                PURPOSE
      --------  --------------------------------------                -------
-     help      /help                                                 Displays eligible user commands for the program
+     add       /add u/{UNIVERSITY_NAME} m/{MODULE_CODE}              Adds input Partner University module code to input university list
+     add       /add u/{UNIVERSITY_NAME} m/{MODULE_CODE}              Adds a lesson for the input module code to the timetable for the input
+               d/{DAY_OF_THE_WEEK} st/{START_TIME} en/{END_TIME}
      create    /create u/UNIVERSITY_NAME_IN_UNDERSCORES              Creates an empty module list for the input university
-     favourite /favourite add/UNIVERSITY_NAME_IN_UNDERSCORES         Adds a university list to the user's favourites
-     favourite /favourite del/UNIVERSITY_NAME_IN_UNDERSCORES         Deletes a university list from the user's favourites
-     favourite /favourite VIEW                                       View the user's favourite university lists
-     exit      /exit                                                 Terminate the program
+     delete    /delete u/{UNIVERSITY_NAME}                           Deletes input university list
+     delete    /delete u/{UNIVERSITY_NAME} m/{MODULE_CODE}           Deletes input module from the university list
+     delete    /delete u/{UNIVERSITY_NAME} m/{MODULE_CODE}           Deletes input lesson from the university's timetable
+               d/{DAY_OF_THE_WEEK} st/{START_TIME} en/{END_TIME}
+     exit      /exit                                                 Terminates the program
+     favourite /favourite add/{UNIVERSITY_NAME}                      Adds a university list to the user's favourites
+     favourite /favourite del/{UNIVERSITY_NAME}                      Deletes a university list from the user's favourites
+     favourite /favourite VIEW                                       Displays the user's favourite university lists
+     help      /help                                                 Displays eligible user commands for the program
+     list      /list MODULES                                         Lists all existing university modules mappings that are approved in the format:
+                                                                     [PU Module Code] [PU Module Title] [PU Module Credits] | [NUS Module Code] [NUS Module Title] [NUS Module Credits] in NUS
+     list      /list UNIVERSITIES                                    Lists all universities with module mappings available in database
+     list      /list m/{MODULE_CODE}                                 Lists all module mappings for input NUS module code in database
+     list      /list u/{UNIVERSITY_NAME}                             Lists all module mappings offered by input university in database
      view      /view LISTS                                           Displays all existing university lists that have been created by the user
-     view      /view u/UNIVERSITY_NAME_IN_UNDERSCORES                Displays all the modules that have been added to the user's input university's list in the format:
-                                                                     [Home University Module Code] [Home University Module Title] | [Partner University Module Code] [Partner University Module Title] | [Equivalent NUS Credits]
+     view      /view u/{UNIVERSITY_NAME}                             Displays all the modules that have been added to the user's input university's list in the format:
+                                                                     [Home University Module Code] [Home University Module Title] | [PU Module Code] [PU Module Title] | [Equivalent NUS Credits]
+     view      /view TIMETABLES                                      Displays all timetables for list of universities created by user
      view      /view DELETE_HISTORY                                  Displays up to 5 most recent modules that the user has deleted
-     list      /list MODULES                                         Displays all existing university modules mappings that are approved in the format:
-                                                                     [Partner University Module Code] [Partner University Module Title] [Partner University Module Credits] | [NUS Module Code] [NUS Module Title] [NUS Module Credits] in NUS
-     list      /list UNIVERSITIES                                    Displays all universities with module mappings available in database
-     list      /list m/MODULECODE                                    List all module mappings for NUS MODULECODE in database
-     list      /list u/UNIVERSITY_NAME_IN_UNDERSCORES                List all module mappings offered by UNIVERSITY in database
-     add       /add u/UNIVERSITY_NAME_IN_UNDERSCORES m/MODULECODE    Add input Partner University module code to input university list
-     delete    /delete u/UNIVERSITY_NAME_IN_UNDERSCORES m/MODULECODE Remove input Partner University module code from input university list
-     delete    /delete u/UNIVERSITY_NAME_IN_UNDERSCORES              Delete input university list
 
-     Note: Words in UPPER_CASE are parameters that you should input as a user
-     Note: There should not be spaces in parameters, replace with underscore instead
+     Note: Words in curly brackets are parameters that you should input as a user
+     Note: There should not be spaces in parameters, replace with underscores instead
 ____________________________________________________________________________
 ```
 

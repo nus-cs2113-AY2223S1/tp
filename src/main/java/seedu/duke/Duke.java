@@ -40,7 +40,6 @@ public class Duke {
     public static void main(String[] args) {
         System.err.close();
         System.out.print(Ui.greetUser());
-        System.out.print(Ui.printCommands());
         DatabaseStorage.loadDatabase();
         UserUniversityListManager userUniversityListManager = UserStorageParser.getSavedLists();
         TimetableManager timetableManager = UserStorageParser.getSavedTimetables();

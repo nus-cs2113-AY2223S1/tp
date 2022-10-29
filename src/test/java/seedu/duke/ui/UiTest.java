@@ -21,6 +21,7 @@ public class UiTest {
                 + "                 |___/                      \n"
                 + "Hello! Welcome to easySEP, your personal companion for planning your student exchange :-)\n"
                 + "How may I help you today?\n"
+                + "Type /help if you need help with getting started for user commands\n"
                 + "____________________________________________________________________________\n";
         assertEquals(expectedGreeting, Ui.greetUser());
     }
@@ -73,8 +74,8 @@ public class UiTest {
                 + "     " + "list      " + "/list MODULES                                         "
                 + "Lists all existing university modules mappings that are approved in the format:\n"
                 + "                                                                     "
-                + "[Partner University Module Code] [Partner University Module Title] "
-                + "[Partner University Module Credits] | [NUS Module Code] [NUS Module Title] "
+                + "[PU Module Code] [PU Module Title] "
+                + "[PU Module Credits] | [NUS Module Code] [NUS Module Title] "
                 + "[NUS Module Credits] in NUS\n"
                 + "     " + "list      " + "/list UNIVERSITIES                                    "
                 + "Lists all universities with module mappings available in database\n"
@@ -88,13 +89,13 @@ public class UiTest {
                 + "Displays all the modules that have been added to the user's input university's list in the format:\n"
                 + "                                                                     "
                 + "[Home University Module Code] [Home University Module Title] | "
-                + "[Partner University Module Code] [Partner University Module Title] | [Equivalent NUS Credits]\n"
+                + "[PU Module Code] [PU Module Title] | [Equivalent NUS Credits]\n"
                 + "     " + "view      " + "/view TIMETABLES                                      "
                 + "Displays all timetables for list of universities created by user\n"
                 + "     " + "view      " + "/view DELETE_HISTORY                                  "
                 + "Displays up to 5 most recent modules that the user has deleted\n\n"
                 + "     " + "Note: Words in curly brackets are parameters that you should input as a user\n"
-                + "     " + "Note: There should not be spaces in parameters, replace with underscore instead\n"
+                + "     " + "Note: There should not be spaces in parameters, replace with underscores instead\n"
                 + "____________________________________________________________________________\n";
         assertEquals(expected, Ui.printCommands());
     }
