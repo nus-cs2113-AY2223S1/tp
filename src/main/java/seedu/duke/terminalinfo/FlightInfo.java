@@ -73,4 +73,9 @@ public class FlightInfo {
         this.gateNum = newGateNum;
     }
 
+    public String convertToFileFormat() {
+        String flightDetails = (this.flightNum + "|" + this.airline + "|" + this.destination
+                + "|" + this.departureTime + "|" + this.gateNum + "|" + this.checkLn + "\n");
+        return flightDetails;
+    }
 }
