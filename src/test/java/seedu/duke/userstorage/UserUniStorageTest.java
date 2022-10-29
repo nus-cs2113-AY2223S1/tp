@@ -1,6 +1,7 @@
 package seedu.duke.userstorage;
 
 import org.junit.jupiter.api.Test;
+import seedu.duke.command.DatabaseStorage;
 import seedu.duke.exceptions.InvalidUserCommandException;
 import seedu.duke.exceptions.InvalidUserStorageFileException;
 import seedu.duke.parser.UserStorageParser;
@@ -85,6 +86,7 @@ public class UserUniStorageTest {
                 +  "MET CS 248;Discrete Mathematics;3;CS1231;Discrete Structures;4;default%";
         UserStorage.saveFile(fileContent, true);
         testManager = UserStorageParser.getSavedLists();
+        DatabaseStorage.loadDatabase();
         UserUniversityList testUniversityList = testManager.getMyManager().get("Boston University");
         assertEquals(testUniversityList.getMyModules().getModules().get(0).getPuCode(), "MET CS 248");
         assertEquals(testUniversityList.getMyModules().getModules().get(0).getPuTitle(), "Discrete Mathematics");
@@ -102,6 +104,7 @@ public class UserUniStorageTest {
         String fileContent = "Boston University%" + "null%" + "T%"
                 +  "MET CS 248;Discrete Mathematics;3;CS1231;Discrete Structures;4;default%";
         UserStorage.saveFile(fileContent, true);
+        DatabaseStorage.loadDatabase();
         testManager = UserStorageParser.getSavedLists();
         UserUniversityList testUniversityList = testManager.getMyManager().get("Boston University");
         assertEquals(testUniversityList.getMyModules().getModules().get(0).getPuCode(), "MET CS 248");
@@ -124,6 +127,7 @@ public class UserUniStorageTest {
                 + "/Arizona State University%" + "null%" + "F%"
                 + "CSE412;Database Management;3;CS2102;Database Systems;4;default%"
                 + "CSE450;Design and Analysis of Algorithms;3;CS3230;Design & Analysis of Algorithm;4;default%";
+        DatabaseStorage.loadDatabase();
         UserStorage.saveFile(fileContent, true);
         testManager = UserStorageParser.getSavedLists();
         UserUniversityList testUniversityListBoston = testManager.getMyManager().get("Boston University");
@@ -170,6 +174,7 @@ public class UserUniStorageTest {
         String fileContent = "Boston University%" + "null%" + "T%"
                             + "/Arizona State University%" + "null%" + "F%";
         UserStorage.saveFile(fileContent, true);
+        DatabaseStorage.loadDatabase();
         testManager = UserStorageParser.getSavedLists();
         UserUniversityList testUniversityList1 = testManager.getMyManager().get("Boston University");
         UserUniversityList testUniversityList2 = testManager.getMyManager().get("Arizona State University");
