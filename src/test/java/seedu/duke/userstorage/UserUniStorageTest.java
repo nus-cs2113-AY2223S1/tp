@@ -86,8 +86,8 @@ public class UserUniStorageTest {
         String fileContent = "Boston University%" + "null%" + "F%"
                 +  "MET CS 248;Discrete Mathematics;3;CS1231;Discrete Structures;4;default%";
         UserStorage.saveFile(fileContent, true);
-        testManager = UserStorageParser.getSavedLists();
         DatabaseStorage.loadDatabase();
+        testManager = UserStorageParser.getSavedLists();
         UserUniversityList testUniversityList = testManager.getMyManager().get("Boston University");
         assertEquals(testUniversityList.getMyModules().getModules().get(0).getPuCode(), "MET CS 248");
         assertEquals(testUniversityList.getMyModules().getModules().get(0).getPuTitle(), "Discrete Mathematics");
