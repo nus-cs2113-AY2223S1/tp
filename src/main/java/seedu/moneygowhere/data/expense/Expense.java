@@ -18,6 +18,7 @@ public class Expense {
     private String remarks;
     private String currency;
     private String modeOfPayment;
+    private BigDecimal rate;
 
     public Expense(String name,
                    LocalDateTime dateTime,
@@ -105,5 +106,13 @@ public class Expense {
 
     public void setModeOfPayment(String modeOfPayment) {
         this.modeOfPayment = modeOfPayment;
+    }
+
+    public BigDecimal getRate() {
+        return rate;
+    }
+
+    public void setRate(BigDecimal rate) {
+        this.rate = rate;
     }
 }
