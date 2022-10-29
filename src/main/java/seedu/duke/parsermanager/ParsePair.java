@@ -78,11 +78,6 @@ public class ParsePair extends Parser {
         }
     }
 
-    private boolean isEmptyString(String commandDetail) {
-        return commandDetail.trim().isEmpty();
-    }
-
-
     private ArrayList<String> processCommandDetails(String rawCommandDetail)
             throws MissingFlagException, IncorrectFlagOrderException {
 
