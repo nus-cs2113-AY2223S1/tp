@@ -1,5 +1,4 @@
 # RecipEditor
-
 ## **Introducing _RecipEditor_**
 <hr />
 
@@ -58,8 +57,13 @@ Throughout this guide, we will be using some special formatting and symbols to b
 3. Go to the directory of the `RecipEditor.jar`
 4. Use command line to start the program `java -jar RecipEditor.jar`
 
-# Features
+If successfully loaded, you will see this screen:
 
+![Program Start Up Screen](./images/ProgramStartScreen.png)
+
+[⏫ Back to content page](#content-page)
+
+# Features
 ## Add Command
 
 - Add new recipe to the model
@@ -84,7 +88,7 @@ Example Description
 ```
 
 <p align="center" width="100%">
-  <img width="70%" src="images/TextEditorWithTemplate.png"/>
+  <img width="70%" src="Desktop/CS2113/tp/tp/docs/images/UserGuide/TextEditorWithTemplate.png"/>
 </p>
 
 - Edit the corresponding field according to the following convention:
