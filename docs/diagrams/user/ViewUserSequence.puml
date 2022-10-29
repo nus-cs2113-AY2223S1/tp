@@ -22,7 +22,17 @@ return args
 alt user is valid
     ":UserList" --> ":ViewUserCommand":
     deactivate ":UserList"
-
+    ":ViewUserCommand" -> ":ViewUserItemsCommand"**:new
+    activate ":ViewUserItemsCommand"
+    ":ViewUserCommand" -> ":ViewUserItemsCommand":getUserItems()
+    return userItems
+    destroy ":ViewUserItemsCommand"
+    ":ViewUserCommand" -> ":TransactionList": getBorrowTransactionsByUser()
+    activate ":TransactionList"
+    ":TransactionList" -> ":TransactionList": getTotalMoneyTransacted()
+    activate ":TransactionList"
+    return totalMoney
+    return debt
     ":ViewUserCommand" -> "<<class>>\nUi": viewUserMessage()
     activate "<<class>>\nUi"
     return
