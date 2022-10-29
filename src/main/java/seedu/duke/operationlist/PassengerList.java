@@ -201,10 +201,10 @@ public class PassengerList extends OperationList {
     private void validatePassenger(int index) {
         getNumberOfPassengers();
         assert index < numOfPassengers;
-        isNamePresent = passengers.get(index).getName().contains(name);
-        isFlightNumberPresent = passengers.get(index).getFlightNumber().contains(flightNumber);
-        isSeatNumberPresent = passengers.get(index).getSeatNumber().contains(seatNumber);
-        isDepartureTimePresent = passengers.get(index).getDepartureTime().contains(departureTime);
+        isNamePresent = passengers.get(index).getName().equals(name);
+        isFlightNumberPresent = passengers.get(index).getFlightNumber().equals(flightNumber);
+        isSeatNumberPresent = passengers.get(index).getSeatNumber().equals(seatNumber);
+        isDepartureTimePresent = passengers.get(index).getDepartureTime().equals(departureTime);
         isValidPassenger = isNamePresent && isFlightNumberPresent && isSeatNumberPresent && isDepartureTimePresent;
     }
 
