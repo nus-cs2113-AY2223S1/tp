@@ -11,6 +11,7 @@ import java.util.logging.Level;
 
 public class DeleteCommand extends Command {
     public static final String COMMAND_TYPE = "/delete";
+    public static final String CORRECT_FORMAT = "The input should be '/delete (recipeTitle).'";
     private int index;
     private String recipeTitleToDelete;
 

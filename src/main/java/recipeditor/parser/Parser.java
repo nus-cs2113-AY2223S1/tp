@@ -37,7 +37,7 @@ public class Parser {
         case ViewCommand.COMMAND_TYPE:
             return parseListAlterCommand(parsed, commandWord);
         case FindCommand.COMMAND_TYPE:
-//            return parseFindCommand(parsed);
+            return parseFindCommand(parsed);
         case HelpCommand.COMMAND_TYPE:
             return new HelpCommand();
         default:
@@ -83,6 +83,8 @@ public class Parser {
                 } else {
                     Ui.showMessage(recipeTitleToDelete + " is not present in the list");
                 }
+            } else {
+                Ui.showMessage(DeleteCommand.CORRECT_FORMAT);
             }
             return new InvalidCommand();
         } catch (FileNotFoundException e) {
@@ -133,7 +135,7 @@ public class Parser {
 
     private static Command parseEditCommand(String[] parsed) {
         int index = -1;
-        if (parsed.length > 1) {
+        if (parsed.length >= 2) {
             try {
                 index = Integer.parseInt(parsed[1]) - 1;
             } catch (NumberFormatException n) {
@@ -146,16 +148,16 @@ public class Parser {
         return new InvalidCommand();
     }
 
-//    private static Command parseFindCommand(String[] parsed) {
-//        if (parsed.length < 2) {
-//            return new InvalidCommand();
-//        }
-//        String flagAndInputString = convertStringArrayToString(parsed);
-//        String[] flagAndInput = flagAndInputString.split(" ", 2);
-//        char flag = flagAndInput[0].charAt(0);
-//        String input = flagAndInput[1];
-//        return new FindCommand(flag, input);
-//    }
+    private static Command parseFindCommand(String[] parsed) {
+        if (parsed.length >= 2) {
+            String[] inputArray = Arrays.copyOfRange(parsed, 1, parsed.length);
+            String input = convertStringArrayToString(inputArray);
+            return new FindCommand(input);
+        } else {
+            Ui.showMessage(FindCommand.CORRECT_FORMAT);
+        }
+        return new InvalidCommand();
+    }
 
 //    private static String convertStringArrayToString(String[] stringArray) {
 //        StringBuilder output = new StringBuilder();
