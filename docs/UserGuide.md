@@ -242,10 +242,14 @@ CarparkID HG80 at BLK 941A HOUGANG STREET 92
 ### Update data from API
 
 **Fetches the most updated availability data and stores it locally.**
+
 > Format: `update`
 
 - The command requires a valid API access token to function.
 - This overwrites any previous availability data for any carparks fetched by the API.
+- This command is useful for when the program is left opened for a very long time, and the data that has been fetched by
+the API at the start of the program becomes outdated. The user can then use this command to update the data fetched by
+the API without having to exit and terminate the program.
 
 Example of usage:
 
@@ -369,16 +373,18 @@ carpark data, you can do so as long as the format is maintained. These changes w
 when you restart the program.
 
 ## Command Summary
-| Command                  | Description                                                                                 |
-|--------------------------|---------------------------------------------------------------------------------------------| 
-| `auth API_KEY`           | [Authenticate API using user's API key](#authenticate-user-api)                             |
-| `auth default`           | [Authenticate API using default key](#authenticate-default)                                 |
-| `auth status`            | [Authentication status](#authentication-status)                                             |
-| `find CARPARK_ID`        | [Find number of lots available by carpark ID](#find-number-of-lots-available-by-carpark-id) | 
-| `filter QUERY`           | [Filter carparks based on address](#filter-carparks-based-on-address)                       | 
-| `list`                   | [Get a list of available carparks on the app](#get-a-list-of-available-carparks-on-the-app) |
-| `update`                 | [Update data from API](#update-data-from-api)                                               |
-| `favourite CARPARK_ID`   | [Favourite carparks by carpark ID](#favourite-carparks-by-carpark-id)                       |
-| `unfavourite CARPARK_ID` | [Unfavourite carparks by carpark ID](#unfavourite-carparks-by-carpark-id)                   |
-| `favourite list`         | [List all IDs of favourite carparks](#list-all-ids-of-favourite-carparks)                   |
-| `exit`                   | [Exiting the program](#exiting-the-program)                                                 |
+| Command                  | Description                                                                                |
+|--------------------------|--------------------------------------------------------------------------------------------| 
+| `auth API_KEY`           | [Authenticate API using user's API key](#authenticate-user-api)                            |
+| `auth default`           | [Authenticate API using default key](#authenticate-default)                                |
+| `auth status`            | [Authentication status](#authentication-status)                                            |
+| `find CARPARK_ID`        | [Find number of lots available by carpark ID](#find-number-of-lots-available-by-carpark-id)| 
+| `filter QUERY`           | [Filter carparks based on address](#filter-carparks-based-on-address)                      | 
+| `help`                   | [Lists all the features and their input formats](#viewing-help)                            |
+| `list`                   | [Get a list of available carparks on the app](#get-a-list-of-available-carparks-on-the-app)|
+| `update`                 | [Update data from API](#update-data-from-api)                                              |
+| `favourite CARPARK_ID`   | [Favourite carparks by carpark ID](#favourite-carparks-by-carpark-id)                      |
+| `unfavourite CARPARK_ID` | [Unfavourite carparks by carpark ID](#unfavourite-carparks-by-carpark-id)                  |
+| `favourite list`         | [List all IDs of favourite carparks](#list-all-ids-of-favourite-carparks)                  |
+| `exit`                   | [Exiting the program](#exiting-the-program)                                                |
+
