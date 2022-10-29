@@ -70,9 +70,11 @@ public class Parser {
             } catch (ParseFileException | FileNotFoundException e) {
                 Ui.showMessage(e.getMessage());
                 Ui.showMessage("Do you want to ABORT? (Y/N)");
+                //TODO: Only Take in Y/N
                 String text = Ui.readInput();
                 if (text.equalsIgnoreCase("n")) {
                     new Editor().enterEditor(Storage.TEMPORARY_FILE_PATH);
+                    //TODO: When exit, don't need to check
                 } else {
                     exitLoop = true;
                 }

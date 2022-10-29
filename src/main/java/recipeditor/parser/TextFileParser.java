@@ -1,11 +1,15 @@
 package recipeditor.parser;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.jetbrains.annotations.NotNull;
+import recipeditor.Recipeditor;
 import recipeditor.exception.ParseFileException;
 import recipeditor.recipe.Recipe;
 import recipeditor.recipe.Ingredient;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.Arrays;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 //TODO: Better Exception check
@@ -32,7 +36,7 @@ public class TextFileParser {
     private static final String STEP_ERROR_INDEX = "STEP index must be a positive integer!";
     private static final String STEP_ERROR_INDEX_INCREMENT = "STEP index increment is incorrect! Index starts "
             + "from 1";
-
+    private static final String HEADING_OCCURRENCE = "Incorrect number of HEADINGS! Please follow the template!";
     private static final String WRONG_HEADING = "Wrong # HEADING. Please follow the template and do not change the "
             + "headings!";
 
@@ -44,10 +48,11 @@ public class TextFileParser {
         String[] parsedLine = text.split("\n");
         LineType lineType;
         LineType stage = LineType.NORMAL;
+        int[] stageCounter = {0,0,0,0};
 
 
         String descriptionBlock = "";
-        boolean isDescriptionNotAdded = true;
+        int descriptionCounter = 0;
         int ingredientIndex = 1;
         int stepIndex = 1;
 
@@ -57,7 +62,7 @@ public class TextFileParser {
             if (line.isBlank()) {   //Ignore Blank lines
                 continue;
             }
-            lineType = checkLineType(line);
+            lineType = checkLineType(line,stageCounter);
             if (!lineType.equals(LineType.NORMAL)) {
                 stage = lineType;
             } else {
@@ -69,13 +74,10 @@ public class TextFileParser {
                 case TITLE_END:
                     break;
                 case DESCRIPTION:
-                    descriptionBlock = parsedDescription(descriptionBlock, line);
+                    recipe.setDescription(parsedDescription(line, recipe, descriptionCounter));
+                    descriptionCounter++;
                     break;
                 case INGREDIENT:
-                    if (isDescriptionNotAdded) {
-                        recipe.setDescription(descriptionBlock);
-                        isDescriptionNotAdded = false;
-                    }
                     recipe.addIngredient(parsedIngredient(line, ingredientIndex));
                     ingredientIndex++;
                     break;
@@ -86,20 +88,33 @@ public class TextFileParser {
                 }
             }
         }
+        checkAllStages(stageCounter);
         return recipe;
     }
 
-    private LineType checkLineType(@NotNull String line) throws ParseFileException {
+    private void checkAllStages(int[] stageCounter) throws ParseFileException{
+        for (int j : stageCounter){
+            if (j != 1){
+                throw new ParseFileException(HEADING_OCCURRENCE);
+            }
+        }
+    }
+
+    private LineType checkLineType(String line,int[] stageCounter) throws ParseFileException {
         String[] parsedWords = line.split(" ");
         if (parsedWords[0].equals("#")) {
             switch (parsedWords[1].toLowerCase()) {
             case "title":
+                incrementStageCounterAt(stageCounter, 0);
                 return LineType.TITLE;
             case "description":
+                incrementStageCounterAt(stageCounter, 1);
                 return LineType.DESCRIPTION;
             case "ingredients":
+                incrementStageCounterAt(stageCounter, 2);
                 return LineType.INGREDIENT;
             case "steps":
+                incrementStageCounterAt(stageCounter, 3);
                 return LineType.STEP;
             default:
                 throw new ParseFileException(WRONG_HEADING);
@@ -107,8 +122,15 @@ public class TextFileParser {
         } else {
             return LineType.NORMAL;
         }
+
     }
 
+    private void incrementStageCounterAt(int[] array, int j) throws ParseFileException{
+        array[j]++;
+        if (array[j] == 2){
+            throw new ParseFileException(HEADING_OCCURRENCE);
+        }
+    }
     private String parsedTitle(String line) throws ParseFileException {
         String trimmedLine = line.trim();
         String[] parsed = line.split(" ");
@@ -121,62 +143,63 @@ public class TextFileParser {
         return line.trim();
     }
 
-    private String parsedDescription(String descriptionBlock, String line) {
+    private String parsedDescription(String line, Recipe recipe, int counter) {
         String trimmedLine = line.trim();
-        descriptionBlock += trimmedLine + "\n";
-        return descriptionBlock;
+        if (counter ==0){
+            return trimmedLine;
+        } else{
+            return recipe.getDescription() + "\n" + trimmedLine;
+        }
     }
 
     private Ingredient parsedIngredient(String line, int index) throws ParseFileException {
-        try {
-            String[] parsedSlashed = line.split("/", 3);
-            String[] parsedDot = parsedSlashed[0].split("\\.", 2);
+
+        String[] parsedSlashed = line.split("/");
+        String[] parsedDot = parsedSlashed[0].split("\\.");
 
 
-            if (parsedSlashed.length != 3) {
-                throw new ParseFileException(INGREDIENT_ERROR_FORMAT);
-            }
-
-            int lineIndex = ingredientParsedIndex(parsedDot[0]);
-            if (isNotPositive(lineIndex)) {
-                throw new ParseFileException(INGREDIENT_ERROR_INDEX);
-            }
-            if (lineIndex != index) {
-                throw new ParseFileException(INGREDIENT_ERROR_INDEX_INCREMENT);
-            }
-
-            String name = parsedDot[1];
-            Double amount = ingredientParsedAmount(parsedSlashed[1]);
-            String unit = parsedSlashed[2];
-            return new Ingredient(name, amount, unit);
-        } catch (Exception e) {
+        if (parsedSlashed.length != 3) {
             throw new ParseFileException(INGREDIENT_ERROR_FORMAT);
         }
+
+        int lineIndex = ingredientParsedIndex(parsedDot[0]);
+        if (isNotPositive(lineIndex)) {
+            throw new ParseFileException(INGREDIENT_ERROR_INDEX);
+        }
+        if (lineIndex != index) {
+            throw new ParseFileException(INGREDIENT_ERROR_INDEX_INCREMENT);
+        }
+
+        String name = parsedDot[1];
+        Double amount = ingredientParsedAmount(parsedSlashed[1]);
+        String unit = parsedSlashed[2];
+        return new Ingredient(name, amount, unit);
     }
 
     private String parsedStep(String line, int index) throws ParseFileException {
-        try {
-            String[] parsed = line.split("\\.", 2);
-            if (parsed.length != 2) {
-                throw new ParseFileException(STEP_ERROR_FORMAT);
-            }
-            int lineIndex = stepParseIndex(parsed[0]);
-            if (isNotPositive(lineIndex)) {
-                throw new ParseFileException(STEP_ERROR_INDEX);
-            }
-            if (lineIndex != index) {
-                throw new ParseFileException(STEP_ERROR_INDEX_INCREMENT);
-            }
-            return parsed[1].trim();
-        } catch (Exception e) {
+        String[] parsed = line.split("\\.");
+        if (parsed.length != 2) {
             throw new ParseFileException(STEP_ERROR_FORMAT);
         }
+        int lineIndex = stepParseIndex(parsed[0]);
+
+        if (isNotPositive(lineIndex)) {
+            throw new ParseFileException(STEP_ERROR_INDEX);
+        }
+        if (lineIndex != index) {
+            throw new ParseFileException(STEP_ERROR_INDEX_INCREMENT);
+        }
+        return parsed[1].trim();
     }
 
 
     private boolean isNotPositive(int index) {
         return (index <= 0);
     }
+    private boolean isNotPositive(double number) {
+        return (number <= 0);
+    }
+    
 
     private boolean isTitleNotAlphanumeric(String[] parsed) {
         for (String word : parsed) {
@@ -202,7 +225,11 @@ public class TextFileParser {
 
     private Double ingredientParsedAmount(String parsed) throws ParseFileException {
         try {
-            return Double.parseDouble(parsed);
+            Double amount = Double.parseDouble(parsed);
+            if(isNotPositive(amount)){
+                throw new ParseFileException(INGREDIENT_ERROR_AMOUNT);
+            }
+            return amount;
         } catch (Exception e) {
             throw new ParseFileException(INGREDIENT_ERROR_AMOUNT);
         }
@@ -217,7 +244,7 @@ public class TextFileParser {
     }
 
     private enum LineType {
-        TITLE, TITLE_END, DESCRIPTION, DESCRIPTION_END, INGREDIENT, STEP, NORMAL
+        TITLE, TITLE_END, DESCRIPTION, INGREDIENT, STEP, NORMAL
     }
 
 
