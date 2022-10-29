@@ -32,7 +32,8 @@ public class Recipeditor {
         Storage.createDataFolder();
         Storage.createFolder(Storage.RECIPES_FOLDER_PATH);
         Storage.createFile(Storage.ALL_RECIPES_FILE_PATH);
-        Storage.loadRecipesFromAllRecipeFile();
+        Storage.loadRecipesToRecipeTitlesList();
+        Storage.loadRecipesToRecipeList();
         Ui.showMessage(HelpCommand.HELP_MESSAGE);
         Ui.showGreeting();
     }

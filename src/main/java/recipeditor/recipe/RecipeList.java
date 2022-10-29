@@ -65,9 +65,6 @@ public class RecipeList {
         ArrayList<String> output = findRecipeTitlesFromRecipeTitle(findInput);
         ArrayList<String> foundRecipeTitlesFromIngredientName = findRecipeTitlesFromIngredientName(findInput);
         output.addAll(foundRecipeTitlesFromIngredientName);
-        for (String title : output) {
-            System.out.println(title);
-        }
         return output;
     }
 
@@ -83,12 +80,9 @@ public class RecipeList {
 
     public static ArrayList<String> findRecipeTitlesFromIngredientName(String findInput) {
         ArrayList<String> foundRecipeTitlesList = new ArrayList<>();
-        System.out.println("IN");
         for (Recipe r : recipes) {
-            System.out.println("R: " + r);
             ArrayList<Ingredient> recipeIngredients = r.getIngredients();
             for (Ingredient i : recipeIngredients) {
-                System.out.println("ING: " + i);
                 if (i.getName().toLowerCase().contains(findInput.toLowerCase())) {
                     foundRecipeTitlesList.add(r.getTitle());
                 }

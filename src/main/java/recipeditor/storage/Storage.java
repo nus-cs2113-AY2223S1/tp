@@ -6,14 +6,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import recipeditor.Recipeditor;
-import recipeditor.recipe.Ingredient;
+import recipeditor.exception.ParseFileException;
+import recipeditor.parser.TextFileParser;
 import recipeditor.recipe.Recipe;
 import recipeditor.recipe.RecipeList;
 import recipeditor.ui.Ui;
@@ -90,20 +88,8 @@ public class Storage {
         }
     }
 
-        public static void loadRecipeToFile(String filePath, Recipe recipe) {
-        try {
-            logger.log(Level.INFO, "Loading Recipe to Data File");
-            FileWriter fw = new FileWriter(filePath, true);
-            fw.write(recipe.getRecipeAttributesFormatted());
-            fw.write(Ui.DIVIDER + "\n");
-            fw.close();
-        } catch (IOException ioException) {
-            Ui.showMessage("Error in loading recipes to data file");
-        }
-    }
-
     // Loading the recipe titles into RecipeList recipeTitle array from AllRecipeFile
-    public static void loadRecipesFromAllRecipeFile() {
+    public static void loadRecipesToRecipeTitlesList() {
         try {
             String allRecipeFileContent = loadFileContent(ALL_RECIPES_FILE_PATH);
             String recipeTitles[] = allRecipeFileContent.split("\\r?\\n");
@@ -113,6 +99,23 @@ public class Storage {
         } catch (FileNotFoundException e) {
             Ui.showMessage("File not found :< Creating your data file for all recipes now...");
             createFile(ALL_RECIPES_FILE_PATH);
+        }
+    }
+
+    // Loading the recipe into RecipeList recipe array from individual recipe file
+    public static void loadRecipesToRecipeList() {
+        try {
+            for (String recipeTitle : RecipeList.recipeTitles) {
+                String recipeFilePath = RECIPES_FOLDER_PATH + "/" + recipeTitle;
+                String content = Storage.loadFileContent(recipeFilePath);
+                Recipe addedRecipe  = new TextFileParser().parseTextToRecipe(content);
+                RecipeList.addRecipe(addedRecipe);
+                logger.log(Level.INFO, recipeTitle + " is added to recipeList");
+            }
+        } catch (FileNotFoundException e) {
+            Ui.showMessage("File not found :<");
+        } catch (ParseFileException e) {
+            Ui.showMessage("Error in parsing recipe file content." );
         }
     }
 
@@ -128,7 +131,7 @@ public class Storage {
         }
     }
 
-    public static void writeRecipeToAllRecipeFile(Recipe addedRecipe) {
+    public static void appendRecipeToAllRecipeFile(Recipe addedRecipe) {
         try {
             FileWriter fw = new FileWriter(Storage.ALL_RECIPES_FILE_PATH, true);
             fw.write(addedRecipe.getTitle() + "\n");
