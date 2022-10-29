@@ -28,6 +28,11 @@ public class HelpCommand extends Command {
     private static final String COMMAND_LIST_CATEGORIES = "list-categories";
     private static final String COMMAND_FIND_USER = "find-user /k <keyword>";
     private static final String COMMAND_FIND_ITEM = "find-item /k <keyword>";
+    private static final String ADD_SPACE_REMINDER = "\nPlease take note to add a space after delimiters!\n";
+    private static final String CASE_SENSITIVE_REMINDER = "Please note that except for 'find-item' and 'find-user', "
+                                                            + "all other commands are case-sensitive!\n";
+    private static final String INVALID_SYMBOLS_REMINDER = "Refrain from using '|' and '/' as arguments!";
+
     private static final Map<String, String> commandToDetailMap = Map.ofEntries(
             Map.entry("List all commands", COMMAND_HELP),
             Map.entry("List all users", COMMAND_LIST_USERS),
@@ -60,6 +65,7 @@ public class HelpCommand extends Command {
         for (Map.Entry<String, String> entry : commandToDetailMap.entrySet()) {
             System.out.println(entry.getKey() + ": " + entry.getValue());
         }
+        System.out.println(ADD_SPACE_REMINDER + CASE_SENSITIVE_REMINDER + INVALID_SYMBOLS_REMINDER);
         Ui.showLine();
         return false;
     }
