@@ -1,6 +1,7 @@
 package seedu.duke.ui;
 
 import seedu.duke.item.Item;
+import seedu.duke.item.ItemList;
 import seedu.duke.transaction.Transaction;
 import seedu.duke.transaction.TransactionList;
 import seedu.duke.user.User;
@@ -147,9 +148,11 @@ public class Ui {
         showLine();
     }
 
-    public static void viewUserMessage(User user) {
+    public static void viewUserMessage(User user, ItemList userItems, TransactionList transactionList, Double debt) {
         showLine();
         System.out.print("Here is the user you have requested to view: " + '\n' + user + "\n");
+        System.out.print("The user's debt is $" + debt + '\n');
+        System.out.print(userItems.toString(transactionList) + '\n');
         showLine();
     }
 

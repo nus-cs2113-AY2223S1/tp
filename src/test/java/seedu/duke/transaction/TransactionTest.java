@@ -17,10 +17,8 @@ class TransactionTest {
 
     @BeforeEach
     void initializeTest() {
-        transaction = new Transaction("pen", "28sd37h2", "bui", 5,
-                LocalDate.parse("2022-10-03"), new BigDecimal("3.2"));
-        transactionToCompare = new Transaction("pen", "28sd37h2", "bui", 5,
-                LocalDate.parse("2022-10-05"),new BigDecimal("3.2"));
+        transaction = new Transaction("pen", "28sd37h2", "bui", 5, LocalDate.parse("2022-10-03"), 3.2);
+        transactionToCompare = new Transaction("pen", "28sd37h2", "bui", 5, LocalDate.parse("2022-10-05"), 3.2);
     }
 
     @Test
@@ -36,7 +34,7 @@ class TransactionTest {
     @Test
     void isFinished_notFinishedTx_expectFalse() {
         transaction = new Transaction("pen", "28sd37h2", "bui", 300,
-                LocalDate.parse("2022-10-03"), new BigDecimal("192"));
+                LocalDate.parse("2022-10-03"), 192);
         assertFalse(transaction.isFinished());
     }
 
@@ -103,4 +101,12 @@ class TransactionTest {
     void isOverlapWithTransactionWithoutEquality_overlapWithEquality_returnFalse() {
         assertFalse(transaction.isOverlapWithTransactionWithoutEquality(transaction));
     }
+
+    //    @Test
+    //    void updateDurationTest() {
+    //        Transaction newTransaction = new Transaction(transaction.getTxId(), "pen", "28sd37h2", "bui", 300,
+    //                LocalDate.parse("2022-10-03"), 192);
+    //        assertEquals(newTransaction.toString(),
+    //                transaction.update(300, 192));
+    //      }
 }

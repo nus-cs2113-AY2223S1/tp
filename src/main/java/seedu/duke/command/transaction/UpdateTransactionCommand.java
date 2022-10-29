@@ -120,9 +120,8 @@ public class UpdateTransactionCommand extends Command {
             String txId = args[0];
             int duration = Integer.parseInt(args[1]);
             int oldDuration = transactionList.getTransactionById(txId).getDuration();
-            BigDecimal oldMoneyTransacted = transactionList.getTransactionById(txId).getMoneyTransacted();
-            double newMoney = (double) duration / (double) oldDuration * oldMoneyTransacted.doubleValue();
-            BigDecimal newMoneyTransacted = BigDecimal.valueOf(newMoney);
+            double oldMoneyTransacted = transactionList.getTransactionById(txId).getMoneyTransacted();
+            double newMoneyTransacted = (double) duration / (double) oldDuration * oldMoneyTransacted;
             Transaction updatedTx = this.transactionList.updateTransaction(txId, duration, newMoneyTransacted);
             Ui.updateTransactionMessage(updatedTx);
         }

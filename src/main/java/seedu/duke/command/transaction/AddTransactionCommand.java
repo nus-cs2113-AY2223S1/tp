@@ -200,8 +200,7 @@ public class AddTransactionCommand extends Command {
         String borrowId = args[1];
         int duration = Integer.parseInt(args[2]);
         LocalDate createdAt = LocalDate.parse(args[3]);
-        double money = itemList.getItemById(args[0]).getPricePerDay() * (double) duration;
-        BigDecimal moneyTransacted = BigDecimal.valueOf(money);
+        double moneyTransacted = itemList.getItemById(args[0]).getPricePerDay() * (double) duration;
         return new Transaction(itemName, itemId, borrowId, duration, createdAt, moneyTransacted);
     }
 }
