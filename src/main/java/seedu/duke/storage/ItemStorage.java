@@ -120,7 +120,7 @@ public class ItemStorage extends Storage {
     }
 
     private static void checkCheckSumWhole(ArrayList<Item> itemList, int checkSum) throws StoreFailureException {
-        if (itemList.size() != checkSum / 3) {
+        if (itemList.size() != checkSum) {
             throw new StoreFailureException(MESSAGE_ITEM_STORAGE_ILLEGALLY_MODIFIED + MESSAGE_TO_FIX_FILES);
         }
     }

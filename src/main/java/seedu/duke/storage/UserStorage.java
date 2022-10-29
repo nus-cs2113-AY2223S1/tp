@@ -116,7 +116,7 @@ public class UserStorage extends Storage {
     }
 
     private static void checkCheckSumWhole(ArrayList<User> userList, int checkSum) throws StoreFailureException {
-        if (userList.size() != checkSum / 3) {
+        if (userList.size() != checkSum) {
             throw new StoreFailureException(MESSAGE_USER_STORAGE_ILLEGALLY_MODIFIED + MESSAGE_TO_FIX_FILES);
         }
     }

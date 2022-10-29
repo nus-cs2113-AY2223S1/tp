@@ -125,7 +125,7 @@ public class ItemList {
 
     public String convertItemListToFileFormat() {
         StringBuilder formattedString = new StringBuilder();
-        int checkSum = itemList.size() * 3;
+        int checkSum = itemList.size();
         formattedString.append(checkSum).append('\n');
         for (Item item : itemList) {
             formattedString.append(item.convertItemToFileFormat()).append('\n');

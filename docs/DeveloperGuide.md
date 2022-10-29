@@ -504,17 +504,17 @@ The following sequence diagram models the operation:
 
 ### 4.5. Exit Command
 
->This feature allow users to exit the program, and they will receive goodbye message after executing the command ```help```.
+>This feature allow users to exit the program, and they will receive goodbye message after executing the command ```bye```.
 
 Given below is an example usage scenario and how the command mechanism behaves at each step.
 
-Step 1: The user types in the command ```help``` in the command line. The CommandParser class checks if the command is valid through the createCommand() method.
+Step 1: The user types in the command ```bye``` in the command line. The CommandParser class checks if the command is valid through the createCommand() method.
 
 Step 2: Duke will receive the ExitCommand and execute it.
 
 Step 3: Since there is no parameter to check for exit command, it will execute directly by calling ```Ui.printExitMessage()```
 
-Step 4: The ```executeCommand()``` of ExitCommand returns false, so Duke will recognize this command is ```isLastCommand``` and exit the ```while``` loop and stop the program.
+Step 4: The ```executeCommand()``` of ExitCommand returns true, so Duke will recognize this command is ```isLastCommand``` and exit the ```while``` loop and stop the program.
 
 
 ## 5. Product scope
@@ -589,7 +589,7 @@ The user enters the following command: “find-item /k Book”. In this case, th
 
 ## 8. Glossary
 
-...To be updated
+|||
 
 ## 9. Instructions for manual testing
 
