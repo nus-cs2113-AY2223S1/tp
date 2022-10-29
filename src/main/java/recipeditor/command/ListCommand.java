@@ -1,6 +1,5 @@
 package recipeditor.command;
 
-import recipeditor.recipe.Recipe;
 import recipeditor.recipe.RecipeList;
 
 public class ListCommand extends Command {
@@ -13,11 +12,10 @@ public class ListCommand extends Command {
      * @return a compiled list of all recipes
      */
     public CommandResult execute() {
-        StringBuilder result = new StringBuilder();
-        for (int i = 0; i < RecipeList.getSize(); i++) {
-            result.append(String.format("%n%d. %s", i + 1, RecipeList.getRecipe(i).getTitle()));
+        StringBuilder recipeTitlesList = new StringBuilder();
+        for (int i = 0; i < RecipeList.recipeTitles.size(); i++) {
+            recipeTitlesList.append(String.format("%n%d. %s", i + 1, RecipeList.recipeTitles.get(i)));
         }
-        return new CommandResult(result.toString());
+        return new CommandResult(recipeTitlesList.toString());
     }
 }
-
