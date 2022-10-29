@@ -467,7 +467,6 @@ Western University
 ____________________________________________________________________________
 1. NUS: CS4243 Comp Vision & Pattern Recogntn | Partner University: Western University CS4487 Algorithms for Image Analysis | Equivalent NUS Credits: 4 MCs
 2. NUS: CS2102 Database Systems | Partner University: Western University CS3319 Databases I | Equivalent NUS Credits: 4 MCs
-3. NUS: CS4218 Software Testing | Partner University: Western University CS4472 Software Specification Testing and Quality Assurance | Equivalent NUS Credits: 4 MCs
 ____________________________________________________________________________
 Timetable for Western University:
 ____________________________________________________________________________
@@ -478,6 +477,8 @@ Thursday:
 1. 18:00hrs-20:00hrs: CS3319 Databases I
 Friday:
 1. 19:00hrs-21:00hrs: CS4487 Algorithms for Image Analysis
+Saturday:
+Sunday:
 ____________________________________________________________________________
 ```
 #### 3. View Command for all timetables created by user: `/view TIMETABLES`
@@ -501,6 +502,8 @@ Thursday:
 1. 18:00hrs-20:00hrs: CS3319 Databases I
 Friday:
 1. 19:00hrs-21:00hrs: CS4487 Algorithms for Image Analysis
+Saturday:
+Sunday:
 ____________________________________________________________________________
 Timetable for NUS:
 ____________________________________________________________________________
@@ -509,6 +512,8 @@ Tuesday:
 Wednesday:
 Thursday:
 Friday:
+Saturday:
+Sunday:
 ____________________________________________________________________________
 ```
 
@@ -558,5 +563,5 @@ ____________________________________________________________________________
 | view      | `/view TIMETABLES`                                                                              | Displays all timetables for list of universities created by user                                                                                                                                                                                            |
 | view      | `/view DELETE_HISTORY`                                                                          | Displays up to 5 modules that user recently deleted, ordered from most recently deleted to least recently deleted                                                                                                                                           |
 
-Note: Words in curly brackets are parameters that you should input as a user
+Note: Words in curly brackets are parameters that you should input as a user\
 Note: There should not be spaces in parameters, replace with underscore instead
