@@ -166,8 +166,8 @@ Expected outcome:
 ```
 ____________________________________________________________
 Here are 2 user(s) in your list:
-   1. Username: WinstonLimCherHong Age: 22 Contact: 91824633 
-   2. Username: test2 Age: 21 Contact: 91234557 
+1. Username: WinstonLimCherHong Age: 22 Contact: 91824633 
+2. Username: test2 Age: 21 Contact: 91234557 
 ____________________________________________________________
 ```
 
@@ -203,8 +203,8 @@ Expected outcome:
 ```
 ____________________________________________________________
 Here are 2 user(s) in your list:
-   1. Username: jingwei Age: 21 Contact: 22384729 
-   2. Username: yixiang Age: 21 Contact: 69324729 
+1. Username: jingwei Age: 21 Contact: 22384729 
+2. Username: yixiang Age: 21 Contact: 69324729 
 ____________________________________________________________
 ```
 
@@ -226,7 +226,11 @@ Expected outcome:
 ```
 ____________________________________________________________
 Noted. Following item has been added: 
-Status: [Available] ItemId: 2cc4edf3 Item: weight Category: SPORTS_EQUIPMENT Owner: bui PricePerDay: $0.5
+Status: [Available] ItemId: 2cc4edf3 
+   Item: weight 
+   Category: SPORTS_EQUIPMENT 
+   Owner: bui 
+   PricePerDay: $0.5
 Total item(s) in database: 2
 ____________________________________________________________
 ```
@@ -245,7 +249,11 @@ Expected outcome:
 ```
 ____________________________________________________________
 OK! I will remove the following item:
-Status: [Available] ItemId: 2cc4edf3 Item: weight Category: SPORTS_EQUIPMENT Owner: bui PricePerDay: $0.5
+Status: [Available] ItemId: 2cc4edf3 
+   Item: weight 
+   Category: SPORTS_EQUIPMENT 
+   Owner: bui 
+   PricePerDay: $0.5
 Total item(s) in database: 1
 ____________________________________________________________
 ```
@@ -261,7 +269,11 @@ Expected outcome:
 ```
 ____________________________________________________________
 Here are 1 item(s) in your list:
-   1. Status: [On loan] ItemId: ea608c61 Item: toy Category: SPORTS_EQUIPMENT Owner: WinstonLimCherHong PricePerDay: $4.0
+1. Status: [On loan] ItemId: ea608c61 
+   Item: toy 
+   Category: SPORTS_EQUIPMENT 
+   Owner: WinstonLimCherHong 
+   PricePerDay: $4.0
 ____________________________________________________________
 ```
 
@@ -280,7 +292,11 @@ Expected outcome:
 ```
 ____________________________________________________________
 Here is the item you requested: 
-Status: [Available] ItemId: 99995bb2 Item: scale Category: SPORTS_EQUIPMENT Owner: jingwei PricePerDay: $1.0
+Status: [Available] ItemId: 99995bb2 
+   Item: scale 
+   Category: SPORTS_EQUIPMENT 
+   Owner: jingwei 
+   PricePerDay: $1.0
 ____________________________________________________________
 ```
 
@@ -302,7 +318,11 @@ Expected outcome:
 ```
 ____________________________________________________________
 Done! Here is the item you updated
-Status: [On loan] ItemId: ea608c61 Item: toy Category: SPORTS_EQUIPMENT Owner: WinstonLimCherHong PricePerDay: $4.0
+Status: [On loan] ItemId: ea608c61 
+   Item: toy 
+   Category: SPORTS_EQUIPMENT 
+   Owner: WinstonLimCherHong 
+   PricePerDay: $4.0
 ____________________________________________________________
 ```
 
@@ -325,8 +345,16 @@ Expected outcome:
 ```
 ____________________________________________________________
 Here are 2 item(s) in your filtered list:
-   1. Status: [Available] ItemId: e084cd0a Item: battery Category: ELECTRICAL_APPLIANCES Owner: jingwei PricePerDay: $1.5
-   2. Status: [Available] ItemId: 4621bcf6 Item: charger Category: ELECTRICAL_APPLIANCES Owner: winston PricePerDay: $2.0
+1. Status: [Available] ItemId: e084cd0a 
+   Item: battery 
+   Category: ELECTRICAL_APPLIANCES 
+   Owner: jingwei 
+   PricePerDay: $1.5
+2. Status: [Available] ItemId: 4621bcf6 
+   Item: charger 
+   Category: ELECTRICAL_APPLIANCES 
+   Owner: winston 
+   PricePerDay: $2.0
 ____________________________________________________________
 ```
 
@@ -369,9 +397,21 @@ Expected outcome:
 ```
 ____________________________________________________________
 Here are 3 item(s) in your list:
-   1. Status: [Available] ItemId: 18c90077 Item: book Category: SPORTS_EQUIPMENT Owner: jingwei PricePerDay: $99.0
-   2. Status: [Available] ItemId: 4e6f4b89 Item: books1 Category: SPORTS_EQUIPMENT Owner: jingwei PricePerDay: $99.0
-   3. Status: [Available] ItemId: 75d7d384 Item: tbookie Category: SPORTS_EQUIPMENT Owner: jingwei PricePerDay: $99.0
+1. Status: [Available] ItemId: 18c90077 
+   Item: book 
+   Category: SPORTS_EQUIPMENT 
+   Owner: jingwei 
+   PricePerDay: $99.0
+2. Status: [Available] ItemId: 4e6f4b89 
+   Item: books1 
+   Category: SPORTS_EQUIPMENT 
+   Owner: jingwei 
+   PricePerDay: $99.0
+3. Status: [Available] ItemId: 75d7d384 
+   Item: tbookie 
+   Category: SPORTS_EQUIPMENT 
+   Owner: jingwei 
+   PricePerDay: $99.0
 ____________________________________________________________
 ```
 
@@ -394,7 +434,12 @@ Expected outcome:
 ```
 ____________________________________________________________
 OK! I will add the following transaction:
-[Finished] TxID: 7ddc865f ItemName: speaker ItemID: 3ff10798 Borrower: bui Duration: 5 ReturnedDate: Tue, Oct 25 2022 MoneyTransacted: 10.0 
+[Finished] TxID: 7ddc865f 
+   ItemName: speaker ItemID: 3ff10798 
+   Borrower: bui 
+   Duration: 5 
+   ReturnedDate: Tue, Oct 25 2022 
+   MoneyTransacted: 10.0 
 Total transaction(s) in database: 3
 ____________________________________________________________
 ```
@@ -413,7 +458,12 @@ Expected outcome:
 ```
 ____________________________________________________________
 OK! I will remove the following item:
-[Finished] TxID: 7ddc865f ItemName: speaker ItemID: 3ff10798 Borrower: bui Duration: 5 ReturnedDate: Tue, Oct 25 2022 MoneyTransacted: 10.0 
+[Finished] TxID: 7ddc865f 
+   ItemName: speaker ItemID: 3ff10798 
+   Borrower: bui 
+   Duration: 5 
+   ReturnedDate: Tue, Oct 25 2022 
+   MoneyTransacted: 10.0 
 Total transactions(s) in database: 2
 ____________________________________________________________
 ```
@@ -429,8 +479,18 @@ Expected outcome:
 ```
 ____________________________________________________________
 Here are 2 transaction(s) in your list:
-   1. [Unfinished] TxID: 55e36921 ItemName: scale ItemID: f15dff20 Borrower: jorelle Duration: 5 ReturnDate: Fri, Oct 28 2022 (0 day(s) left) MoneyTransacted: 5.0 
-   2. [Unfinished] TxID: 9e27c530 ItemName: laptop ItemID: bd4961ed Borrower: winston Duration: 100 ReturnDate: Sat, Jan 21 2023 (85 day(s) left) MoneyTransacted: 900.0 
+1. [Unfinished] TxID: 55e36921 
+   ItemName: scale ItemID: f15dff20 
+   Borrower: jorelle 
+   Duration: 5 
+   ReturnDate: Fri, Oct 28 2022 (0 day(s) left) 
+   MoneyTransacted: 5.0 
+2. [Unfinished] TxID: 9e27c530 
+   ItemName: laptop ItemID: bd4961ed 
+   Borrower: winston 
+   Duration: 100 
+   ReturnDate: Sat, Jan 21 2023 (85 day(s) left) 
+   MoneyTransacted: 900.0 
 ____________________________________________________________
 ```
 
@@ -448,7 +508,12 @@ Expected outcome:
 ```
 ____________________________________________________________
 Here is the transaction you requested to view: 
-[Unfinished] TxID: 9e27c530 ItemName: laptop ItemID: bd4961ed Borrower: winston Duration: 100 ReturnDate: Sat, Jan 21 2023 (85 day(s) left) MoneyTransacted: 900.0 
+[Unfinished] TxID: 9e27c530 
+   ItemName: laptop ItemID: bd4961ed 
+   Borrower: winston 
+   Duration: 100 
+   ReturnDate: Sat, Jan 21 2023 (85 day(s) left) 
+   MoneyTransacted: 900.0 
 ____________________________________________________________
 ```
 
@@ -463,8 +528,18 @@ Expected outcome:
 ```
 ____________________________________________________________
 Here are the uncompleted transactions: 
-[Unfinished] TxID: 55e36921 ItemName: scale ItemID: f15dff20 Borrower: jorelle Duration: 5 ReturnDate: Fri, Oct 28 2022 (0 day(s) left) MoneyTransacted: 5.0 
-[Unfinished] TxID: 9e27c530 ItemName: laptop ItemID: bd4961ed Borrower: winston Duration: 100 ReturnDate: Sat, Jan 21 2023 (85 day(s) left) MoneyTransacted: 900.0 
+[Unfinished] TxID: 55e36921 
+   ItemName: scale ItemID: f15dff20 
+   Borrower: jorelle 
+   Duration: 5 
+   ReturnDate: Fri, Oct 28 2022 (0 day(s) left) 
+   MoneyTransacted: 5.0 
+[Unfinished] TxID: 9e27c530 
+   ItemName: laptop ItemID: bd4961ed 
+   Borrower: winston 
+   Duration: 100 
+   ReturnDate: Sat, Jan 21 2023 (85 day(s) left) 
+   MoneyTransacted: 900.0 
 ____________________________________________________________
 ```
 
@@ -483,7 +558,12 @@ Example of usage: ```update-tx /t 55e36921 /d 10```
 ```
 ____________________________________________________________
 Done! Here is the updated transaction:
-[Unfinished] TxID: 55e36921 ItemName: scale ItemID: f15dff20 Borrower: jorelle Duration: 10 ReturnDate: Wed, Nov 02 2022 (5 day(s) left) MoneyTransacted: 10.0 
+[Unfinished] TxID: 55e36921 
+   ItemName: scale ItemID: f15dff20 
+   Borrower: jorelle 
+   Duration: 10 
+   ReturnDate: Wed, Nov 02 2022 (5 day(s) left) 
+   MoneyTransacted: 10.0 
 ____________________________________________________________
 ```
 

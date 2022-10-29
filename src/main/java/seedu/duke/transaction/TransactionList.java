@@ -226,7 +226,7 @@ public class TransactionList {
         }
         int index = 1;
         for (Transaction transaction : transactionList) {
-            listString.append('\n').append("   ").append(index++).append(". ").append(transaction);
+            listString.append('\n').append(index++).append(". ").append(transaction);
         }
         return String.valueOf(listString);
     }

@@ -40,21 +40,24 @@ public class Duke {
      * @param transactionFilePath The file path that Duke stores its transactions.
      */
     private Duke(String userFilePath, String itemFilePath, String transactionFilePath) {
-        userList = new UserList();
         userStorage = new UserStorage(userFilePath);
         itemStorage = new ItemStorage(itemFilePath);
         transactionStorage = new TransactionStorage(transactionFilePath);
-        initializeUserList();
-        initializeTransactionList();
-        initializeItemList();
+        initializeThreeLists();
     }
 
     /**
      * Initialize transaction list.
      */
-    private void initializeTransactionList() {
+    private void initializeThreeLists() {
         try {
             this.transactionList = new TransactionList(transactionStorage.loadData());
+            this.itemList = new ItemList(itemStorage.loadData());
+            this.userList = new UserList(userStorage.loadData());
+        } catch (UserFileNotFoundException e) {
+            this.itemList = new ItemList();
+        } catch (ItemFileNotFoundException e) {
+            this.userList = new UserList();
         } catch (TransactionFileNotFoundException e) {
             this.transactionList = new TransactionList();
         } catch (StoreFailureException e) {
@@ -62,30 +65,10 @@ public class Duke {
         }
     }
 
-    private void initializeItemList() {
-        try {
-            this.itemList = new ItemList(itemStorage.loadData());
-        } catch (ItemFileNotFoundException e) {
-            this.itemList = new ItemList();
-        } catch (StoreFailureException e) {
-            resetAllListsDueToDataCorruption(e.getMessage());
-        }
-    }
-
-    private void initializeUserList() {
-        try {
-            this.userList = new UserList(userStorage.loadData());
-        } catch (UserFileNotFoundException e) {
-            this.userList = new UserList();
-        } catch (StoreFailureException e) {
-            resetAllListsDueToDataCorruption(e.getMessage());
-        }
-    }
-
     private void resetAllListsDueToDataCorruption(String errorMessage) {
-        userList = new UserList();
-        itemList = new ItemList();
-        transactionList = new TransactionList();
+        this.userList = new UserList();
+        this.itemList = new ItemList();
+        this.transactionList = new TransactionList();
         Ui.printErrorMessage(errorMessage);
     }
 

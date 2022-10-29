@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+//@@author chiewyx
 public class UserListTest {
 
     UserList userList;
@@ -63,6 +64,6 @@ public class UserListTest {
     @Test
     void convertUserListToFileFormat() {
         userList.addUser(user);
-        assertEquals("yixiang | 22 | 98126666\n", userList.convertUserListToFileFormat());
+        assertEquals("3\nyixiang | 22 | 98126666 | 44\n", userList.convertUserListToFileFormat());
     }
 }

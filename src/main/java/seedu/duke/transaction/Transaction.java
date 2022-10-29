@@ -184,22 +184,22 @@ public class Transaction {
      */
     @Override
     public String toString() {
-        String itemId = "ItemID: " + this.itemId + " ";
+        String itemId = "ItemID: " + this.itemId + "\n";
         String transactionIcon = "[" + (isFinished() ? "Finished" : "Unfinished") + "] ";
-        String transactionId = "TxID: " + this.transactionId + " ";
-        String itemName = "ItemName: " + this.itemName + " ";
-        String usersId = "Borrower: " + this.borrower + " ";
-        String duration = "Duration: " + this.duration + " ";
-        String moneyTransactedString = " MoneyTransacted: " + this.moneyTransacted + " ";
+        String transactionId = "TxID: " + this.transactionId + "\n";
+        String itemName = "   ItemName: " + this.itemName + " ";
+        String usersId = "   Borrower: " + this.borrower + "\n";
+        String duration = "   Duration: " + this.duration + "\n";
+        String moneyTransactedString = "   MoneyTransacted: " + this.moneyTransacted;
         if (!isFinished()) {
             String remainDays = " (" + ChronoUnit.DAYS.between(LocalDate.now(), getReturnDate())
-                    + " day(s) left)";
+                    + " day(s) left)\n";
             String returnDate =
-                    "ReturnDate: " + DateParser.formatDateToString(returnedAt) + remainDays;
+                    "   ReturnDate: " + DateParser.formatDateToString(returnedAt) + remainDays;
             return transactionIcon + transactionId + itemName + itemId + usersId
                     + duration + returnDate + moneyTransactedString;
         }
-        String returnedDate = "ReturnedDate: " + DateParser.formatDateToString(returnedAt);
+        String returnedDate = "   ReturnedDate: " + DateParser.formatDateToString(returnedAt);
         return transactionIcon + transactionId + itemName + itemId + usersId
                 + duration + returnedDate + moneyTransactedString;
     }

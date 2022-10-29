@@ -117,7 +117,7 @@ public class ItemList {
         }
         int index = 1;
         for (Item item : itemList) {
-            listString.append('\n').append("   ").append(index++).append(". ")
+            listString.append('\n').append(index++).append(". ")
                     .append(item.toString(transactionList));
         }
         return String.valueOf(listString);

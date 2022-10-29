@@ -123,7 +123,7 @@ public class UserList {
         }
         int index = 1;
         for (User user : userList) {
-            listString.append('\n').append("   ").append(index++).append(". ").append(user);
+            listString.append('\n').append(index++).append(". ").append(user);
         }
         return String.valueOf(listString);
     }

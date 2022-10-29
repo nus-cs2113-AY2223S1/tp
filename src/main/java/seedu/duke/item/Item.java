@@ -63,13 +63,13 @@ public class Item {
     }
 
     public String toString(TransactionList transactionList) {
-        String itemId = "ItemId: " + this.itemId + " ";
+        String itemId = "ItemId: " + this.itemId + "\n";
         String itemIcon =
-                "Status: [" + (isAvailable(transactionList) ? "Available" : "On loan") + "] ";
-        String itemName = "Item: " + name + " ";
-        String itemCategory = "Category: " + category.toString() + " ";
-        String itemOwner = "Owner: " + getOwnerId() + " ";
-        String itemPrice = "PricePerDay: $" + pricePerDay;
+                "[" + (isAvailable(transactionList) ? "Available" : "On loan") + "] ";
+        String itemName = "   Item name: " + name + "\n";
+        String itemCategory = "   Category: " + category.toString() + "\n";
+        String itemOwner = "   Owner: " + getOwnerId() + "\n";
+        String itemPrice = "   PricePerDay: $" + pricePerDay;
         return itemIcon + itemId + itemName + itemCategory + itemOwner + itemPrice;
     }
 
