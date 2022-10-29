@@ -49,6 +49,48 @@ Examples of invalid command syntax:
 
 ## Features
 
+### Listing all available commands: `help`
+Lists all valid commands for MoneyGoWhere.
+
+Syntax: `help`
+
+Example of usage:
+* `help`
+
+Expected output: 
+```
+EXPENSE-RELATED-COMMANDS:
+___________________________________________
+Add an expense: Add-Expense -n NAME -a AMOUNT [-d dd/MM/yyyy HHmm] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p PayLah/PayNow/Cash/Card]
+View your expenses: View-Expense [-e EXPENSE-INDEX] [-c EXPENSE-CATEGORY] [-n EXPENSE-NAME]
+Delete an expense: Delete-Expense -e EXPENSE-INDEX
+Edit an expense: Edit-Expense -e EXPENSE-INDEX [-n NAME] [-d dd/MM/yyyy HHmm] [-t DESCRIPTION] [-a AMOUNT] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p PayLah/PayNow/Cash/Card]
+Sort your expenses: Sort-Expense -t Alphabetical/Amount/Date/Currency -o Ascending/Descending
+Convert currency of an expense: Convert-Currency -e EXPENSE-INDEX -x CURRENCY [-r RATE]
+
+RECURRING-PAYMENT-RELATED-COMMANDS:
+___________________________________________
+Add a recurring payment: Add-RecurringPayment -n NAME -i INTERVAL -a AMOUNT [-t DESCRIPTION] [-c CATEGORY] [-x CURRENCY]
+View your recurring payments: View-RecurringPayment [-r RECURRINGPAYMENT-INDEX]
+Delete a recurring payment: Delete-RecurringPayment -r RECURRINGPAYMENT-INDEX
+Edit a recurring payment: Edit-RecurringPayment -r RECURRINGPAYMENT-INDEX [-n NAME] [-i INTERVAL] [-a AMOUNT] [-t DESCRIPTION] [-c CATEGORY] [-x CURRENCY]
+Pay a recurring payment: Pay-RecurringPayment -r RECURRINGPAYMENT-INDEX
+
+INCOME-RELATED-COMMANDS:
+___________________________________________
+Add an income: Add-Income -n NAME -a AMOUNT [-d dd/MM/yyyy HHmm] [-t DESCRIPTION]
+View your incomes: View-Income [-e INCOME-INDEX]
+Delete an income: Delete-Income -e INCOME-INDEX
+Edit an income: Edit-Income -e INCOME-INDEX [-n NAME] [-d dd/MM/yyyy HHmm] [-t DESCRIPTION] [-a AMOUNT]
+
+TARGET-RELATED-COMMANDS:
+___________________________________________
+Add an target: Add-Target -n NAME -a AMOUNT -c CURRENT-AMOUNT [-d dd/MM/yyyy HHmm] [-t DESCRIPTION]
+View your targets: View-Target [-e TARGET-INDEX]
+Delete a target: Delete-Target -e TARGET-INDEX
+Edit a target: Edit-Target -e TARGET-INDEX [-n NAME] [-d dd/MM/yyyy HHmm] [-t DESCRIPTION] [-a AMOUNT] [-c CURRENT-AMOUNT]
+```
+
 ## Managing your expenses
 ### Adding an expense: `Add-Expense`
 Adds a new expense to the list of expenses.
@@ -354,16 +396,6 @@ Syntax: `Merge-File [-p PATH_STRING]`
 
 Example of usage:
 * `Merge-File -p "C:\Users\the_d\Downloads\expenses.xml"`
-
-<hr>
-
-### Listing all available commands: `help`
-Lists all valid commands for MoneyGoWhere.
-
-Syntax: `help`
-
-Example of usage:
-* `help`
 
 <hr>
 

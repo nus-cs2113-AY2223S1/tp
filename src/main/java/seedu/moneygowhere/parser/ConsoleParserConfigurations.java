@@ -14,6 +14,10 @@ public class ConsoleParserConfigurations {
     public static final String COMMAND_BYE = "bye";
     //endregion
 
+    //region Defines parameters for console command help
+    public static final String COMMAND_HELP = "help";
+    //endregion
+
     //@@author xzynos
     //region Defines parameters for console command Add-Expense
     public static final String COMMAND_ADD_EXPENSE = "Add-Expense";
