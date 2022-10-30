@@ -247,6 +247,13 @@ public class Messages {
 
     public static final String MESSAGE_NO_PROPERTY_MATCHES = "There is no property that fits within your query.";
 
+    public static final String MESSAGE_NO_FIND_CLIENT_TAG = "Seems like your tag is missing.\nPlease ensure you"
+            + " entered 'f/' after the subcommand."
+            + "\nFor example:\nfind -client f/Bobby";
+
+    public static final String MESSAGE_NO_FIND_PROPERTY_TAG = "Seems like your tag is missing.\nPlease ensure you"
+            + " enter 'f/' after the subcommand."
+            + "\nFor example:\nfind -property f/Bobby";
 
 
     /* Message on Storage */
