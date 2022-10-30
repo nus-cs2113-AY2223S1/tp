@@ -14,7 +14,7 @@ public class Duke {
     private static Storage storage;
     private static Ui ui;
     private static State state;
-    private static String filePath  = ""; //place holder for now, wait till implementation of storage
+    private static String filePath = ""; // place holder for now, wait till implementation of storage
 
     private static final String IO_ERROR_MESSAGE = "File not found sorry.";
 

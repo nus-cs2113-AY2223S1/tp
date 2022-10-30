@@ -124,7 +124,7 @@ public class InfoCommandTest {
     void infoCommand_weekendClass_noErrors() throws YamomException {
         Ui ui = new Ui();
         State state = new State();
-        new InfoCommand(new String[]{ "info", "bpm1701" }).execute(state, ui, null);
-        new InfoCommand(new String[]{ "info", "eg3301r" }).execute(state, ui, null);
+        new InfoCommand(new String[]{"info", "bpm1701"}).execute(state, ui, null);
+        new InfoCommand(new String[]{"info", "eg3301r"}).execute(state, ui, null);
     }
 }

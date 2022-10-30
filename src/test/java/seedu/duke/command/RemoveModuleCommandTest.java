@@ -16,7 +16,7 @@ class RemoveModuleCommandTest {
 
     @Test
     public void testDeleteCommand_withoutModuleCode_throwsException() {
-        assertThrows(YamomException.class, () -> new RemoveModuleCommand(new String[]{ "delete" }));
+        assertThrows(YamomException.class, () -> new RemoveModuleCommand(new String[]{"delete"}));
     }
 
     @Test
@@ -31,12 +31,12 @@ class RemoveModuleCommandTest {
         SelectedModule selectedModule = new SelectedModule(module, semester);
         assertFalse(state.getSelectedModulesList().contains(selectedModule));
 
-        String[] testInputToAdd = { "add", "cs1010s" };
+        String[] testInputToAdd = {"add", "cs1010s"};
         AddModuleCommand addModuleCommand = new AddModuleCommand(testInputToAdd);
         addModuleCommand.execute(state, ui, storage);
         assertTrue(state.getSelectedModulesList().contains(selectedModule));
 
-        String[] testInputToDelete = { "delete", "cs1010s" };
+        String[] testInputToDelete = {"delete", "cs1010s"};
         RemoveModuleCommand deleteModuleCommand = new RemoveModuleCommand(testInputToDelete);
         deleteModuleCommand.execute(state, ui, storage);
         assertFalse(state.getSelectedModulesList().contains(selectedModule));
@@ -44,7 +44,7 @@ class RemoveModuleCommandTest {
 
     @Test
     void testIsExit_false() throws YamomException {
-        String[] testInput = { "remove", "cs2113" };
+        String[] testInput = {"remove", "cs2113"};
         assertFalse(new RemoveModuleCommand(testInput).isExit());
     }
 

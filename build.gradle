@@ -56,7 +56,15 @@ checkstyle {
     toolVersion = '8.23'
 }
 
-run{
+checkstyleMain {
+    source = 'src/main/java'
+}
+
+checkstyleTest {
+    source ='src/test/java'
+}
+
+run {
     standardInput = System.in
     enableAssertions = true
 }

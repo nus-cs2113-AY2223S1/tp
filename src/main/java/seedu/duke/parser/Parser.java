@@ -152,12 +152,6 @@ public class Parser {
         }
     }
 
-    public static void selectSemesterCommandError(String[] keywords, String initialErrorMessage) throws YamomException {
-        if (!isValidSpecialTerm(keywords) && (!isValidSemester(keywords))) {
-            throw new YamomException(initialErrorMessage + System.lineSeparator() + "Not a valid semester.");
-        }
-    }
-
     public static boolean isValidSemester(String[] keywords) {
         try {
             int semesterInput = Integer.parseInt(keywords[1]);
@@ -192,6 +186,12 @@ public class Parser {
         return false;
     }
 
+    /**
+     * Parses a command of format " COMMAND_KEYWORD ( /PARAM_KEY PARAM_VALUE )* "
+     * into a map from parameter keys to parameter values.
+     * @param description User input
+     * @return A map from parameter keys to parameter values
+     */
     public static Map<String, String> parseParams(String description) {
         Map<String, String> paramsMap = new TreeMap<>();
         int firstSlash = description.indexOf('/');

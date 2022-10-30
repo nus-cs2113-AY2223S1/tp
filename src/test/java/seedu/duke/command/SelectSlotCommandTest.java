@@ -47,7 +47,7 @@ public class SelectSlotCommandTest {
         Storage storage = new Storage();
 
         // add ie2141 to timetable. ie2141 lecture slots default to lec 1
-        String[] input1 = { "add", "ie2141" };
+        String[] input1 = {"add", "ie2141"};
         AddModuleCommand addModuleCommand = new AddModuleCommand(input1);
         addModuleCommand.execute(state, ui, storage);
 
@@ -102,75 +102,44 @@ public class SelectSlotCommandTest {
     }
 
     @Test
-    void validateLessonTypeAndClassNo_enteredCorrectLessonTypeAndClassNumber_expectTrue() {
+    void selectSlotCommand_enteredCorrectLessonTypeAndClassNumber_noErrors() throws YamomException {
         State state = new State();
-
-        Module selectedModule = Module.get("cs1010s");
-
-        // CS1010S has no lab lesson type
-        LessonType lessonType = LessonType.TUTORIAL;
-
-        // classNo 24C is a valid classNo for CS1010S tutorial
-        String classNo = "24C";
-
-        // set to semester 1
         state.setSemester(1);
-
-        assertTrue(SelectSlotCommand.validateLessonTypeAndClassNo(selectedModule, lessonType, classNo, state));
+        Ui ui = new Ui();
+        new AddModuleCommand("add cs1010s".split(" ")).execute(state, ui, null);
+        new SelectSlotCommand("select /module cs1010s /type tut /code 24c")
+                .execute(state, ui, null);
     }
 
     @Test
-    void validateLessonTypeAndClassNo_inputWrongClassNo_expectFalse() {
+    void selectSlotCommand_moduleNotInState_throwsException() {
         State state = new State();
-
-        Module selectedModule = Module.get("cs1010s");
-
-        // CS1010S has tutorial lesson type
-        LessonType lessonType = LessonType.TUTORIAL;
-
-        // classNo 2 is an invalid classNo for CS1010S tutorial
-        String classNo = "2";
-
-        // set to semester 1
         state.setSemester(1);
-
-        assertFalse(SelectSlotCommand.validateLessonTypeAndClassNo(selectedModule, lessonType, classNo, state));
+        Ui ui = new Ui();
+        assertThrows(YamomException.class, () -> new SelectSlotCommand("select /module cs1010s /type tut /code 24c")
+            .execute(state, ui, null));
     }
 
     @Test
-    void validateLessonTypeAndClassNo_inputNonExistingLessonType_expectFalse() {
+    void selectSlotCommand_inputWrongClassNo_throwsException() throws YamomException {
         State state = new State();
-
-        Module selectedModule = Module.get("cs1010s");
-
-        // CS1010S has no lab lesson type
-        LessonType lessonType = LessonType.LABORATORY;
-
-        // classNo 02A is a valid classNo for CS1010S tutorial
-        String classNo = "02A";
-
-        // set to semester 1
         state.setSemester(1);
-
-        assertFalse(SelectSlotCommand.validateLessonTypeAndClassNo(selectedModule, lessonType, classNo, state));
+        Ui ui = new Ui();
+        new AddModuleCommand("add cs1010s".split(" ")).execute(state, ui, null);
+        assertThrows(YamomException.class, () -> 
+                new SelectSlotCommand("select /module cs1010s /type tut /code 2").execute(state, ui, null));
     }
 
     @Test
-    void validateLessonTypeAndClassNo_inputNonExistingLessonTypeAndClassNo_expectFalse() {
+    void selectSlotCommand_inputNonExistingLesson_throwsException() throws YamomException {
         State state = new State();
-
-        Module selectedModule = Module.get("cs1010s");
-
-        // CS1010S has no lab lesson type
-        LessonType lessonType = LessonType.LABORATORY;
-
-        // classNo 02A is a valid classNo for CS1010S tutorial
-        String classNo = "17284";
-
-        // set to semester 1
         state.setSemester(1);
-
-        assertFalse(SelectSlotCommand.validateLessonTypeAndClassNo(selectedModule, lessonType, classNo, state));
+        Ui ui = new Ui();
+        new AddModuleCommand("add cs1010s".split(" ")).execute(state, ui, null);
+        assertThrows(YamomException.class, () -> 
+                new SelectSlotCommand("select /module cs1010s /type lab /code 02A").execute(state, ui, null));
+        assertThrows(YamomException.class, () -> 
+                new SelectSlotCommand("select /module cs1010s /type tut /code 17284").execute(state, ui, null));
     }
 
 }
