@@ -267,7 +267,7 @@ public class ParseAddProperty extends ParseAdd {
 
     private boolean checkForDuplicateAddress(PropertyList propertyList, String propertyAddress) {
         for (Property property: propertyList.getPropertyList()) {
-            boolean isDuplicateAddress = property.getPropertyAddress().equals(propertyAddress);
+            boolean isDuplicateAddress = property.getPropertyAddress().equalsIgnoreCase(propertyAddress);
             if (isDuplicateAddress) {
                 showExistingDuplicateProperty(property);
                 return true;
