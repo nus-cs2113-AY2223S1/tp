@@ -99,11 +99,11 @@ public class SearchModuleCommand extends Command {
         // validate semester
         toSearchSemester = processSemester(semester);
 
-        if (Objects.equals(toSearchModuleCode, "") && toSearchModuleTitle == null) {
+        if ("".equals(toSearchModuleCode)) {
             throw new YamomException(ERROR_MISSING_CODE);
         }
 
-        if (toSearchModuleCode == null && Objects.equals(toSearchModuleTitle, "")) {
+        if ("".equals(toSearchModuleTitle)) {
             throw new YamomException(ERROR_MISSING_TITLE);
         }
 
