@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class Appointment {
 
-    private static int id = 3000;
+    public static int id = 3000;
     public static SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
     public final int appointmentId;
     public int petId;
@@ -36,7 +36,7 @@ public class Appointment {
     }
 
     // check appointment date format
-    public static Date checkFormattedDate(String appointmentDateStr){
+    public static Date checkFormattedDate(String appointmentDateStr) {
         Date formattedDate = null;
         try {
             formattedDate = formatter.parse(appointmentDateStr);
