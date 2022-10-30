@@ -6,6 +6,7 @@ import seedu.duke.model.Module;
 import seedu.duke.model.RawLesson;
 import seedu.duke.model.SelectedModule;
 import seedu.duke.model.Timetable;
+import seedu.duke.parser.LessonTypeParser;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -192,7 +193,7 @@ public class Link {
                 continue;
             }
             String[] lessonInfo = s.split(LESSON_TYPE_DELIMITER);
-            LessonType lessonType = getLessonType(lessonInfo[0]);
+            LessonType lessonType = getLessonType(lessonInfo[0], ui);
             String classNo = lessonInfo[1];
             addValidLesson(selectedModule, semester, lessonType, classNo, ui);
         }
@@ -218,7 +219,7 @@ public class Link {
 
     /**
      * Checks if the lesson information is of a valid form. It should begin with 3 to 4 alphanumeric
-     * capital alphabets defined in the {@link #getLessonType(String)} function.
+     * capital alphabets defined in the {@link LessonTypeParser#parse(String)} function.
      *
      * @param lessonInfo Single lesson information of a module.
      * @return <code>true</code> if the lesson information is of a valid form.
@@ -234,23 +235,15 @@ public class Link {
      * Translates the short string to its respective <code>LessonType</code>.
      *
      * @param shortString Unique identifier for <code>LessonType</code>.
-     * @return Corresponding <code>LessonType</code>.
+     * @return Corresponding <code>LessonType</code>. <code>null</code> if the shortString could not be parsed.
      */
-    private static LessonType getLessonType(String shortString) {
-        Map<String, LessonType> map = new HashMap<>();
-        map.put("TUT", LessonType.TUTORIAL);
-        map.put("TUT2", LessonType.TUTORIAL_TYPE_2);
-        map.put("LEC", LessonType.LECTURE);
-        map.put("REC", LessonType.RECITATION);
-        map.put("DLEC", LessonType.DESIGN_LECTURE);
-        map.put("PLEC", LessonType.PACKAGED_LECTURE);
-        map.put("PTUT", LessonType.PACKAGED_TUTORIAL);
-        map.put("SEC", LessonType.SECTIONAL_TEACHING);
-        map.put("WKSH", LessonType.WORKSHOP);
-        map.put("LAB", LessonType.LABORATORY);
-        map.put("PROJ", LessonType.MINI_PROJECT);
-        map.put("SEM", LessonType.SEMINAR_STYLE_MODULE_CLASS);
-        return map.get(shortString);
+    private static LessonType getLessonType(String shortString, Ui ui) {
+        try {
+            return LessonTypeParser.parse(shortString);
+        } catch (IllegalArgumentException e) {
+            ui.addMessage(e.getMessage());
+        }
+        return null;
     }
 
     /**

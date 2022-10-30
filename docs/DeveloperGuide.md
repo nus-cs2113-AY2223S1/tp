@@ -16,41 +16,44 @@
       - [3.2.1 Module Loader](#321-module-loader)
       - [3.2.2 Timetable](#322-timetable)
     - [3.3 Parser Component](#33-parser-component)
+      - [How the feature is implemented](#331-how-the-feature-is-implemented)
+      - [Why it is implemented this way.](#332-why-it-is-implemented-this-way)
+      - [Alternatives considered.](#333-alternatives-considered)
     - [3.4 Command Component](#34-command-component)
       - [3.4.1 AddModuleCommand](#341-addmodulecommand)
-        - [How the feature is implemented](#how-the-feature-is-implemented)
-        - [Why it is implemented this way.](#why-it-is-implemented-this-way)
-        - [Alternatives considered.](#alternatives-considered)
-      - [3.4.2 DeleteModuleCommand](#342-deletemodulecommand)
-        - [How the feature is implemented](#how-the-feature-is-implemented-1)
-        - [Why it is implemented this way.](#why-it-is-implemented-this-way-1)
+        - [How the feature is implemented](#3411-how-the-feature-is-implemented)
+        - [Why it is implemented this way.](#3412-why-it-is-implemented-this-way)
         - [Alternatives considered.](#alternatives-considered-1)
-      - [3.4.3 HelpCommand](#343-helpcommand)
+      - [3.4.2 DeleteModuleCommand](#342-deletemodulecommand)
         - [How the feature is implemented](#how-the-feature-is-implemented-2)
         - [Why it is implemented this way.](#why-it-is-implemented-this-way-2)
         - [Alternatives considered.](#alternatives-considered-2)
-      - [3.4.4 SearchModuleCommand](#344-searchmodulecommand)
+      - [3.4.3 HelpCommand](#343-helpcommand)
         - [How the feature is implemented](#how-the-feature-is-implemented-3)
         - [Why it is implemented this way.](#why-it-is-implemented-this-way-3)
         - [Alternatives considered.](#alternatives-considered-3)
-      - [3.4.5 SelectCommand](#345-selectcommand)
-      - [3.4.6 SelectSemesterCommand](#346-selectsemestercommand)
-      - [3.4.7 InfoCommand](#347-infocommand)
+      - [3.4.4 SearchModuleCommand](#344-searchmodulecommand)
         - [How the feature is implemented](#how-the-feature-is-implemented-4)
         - [Why it is implemented this way.](#why-it-is-implemented-this-way-4)
         - [Alternatives considered.](#alternatives-considered-4)
+      - [3.4.5 SelectCommand](#345-selectcommand)
+      - [3.4.6 SelectSemesterCommand](#346-selectsemestercommand)
+      - [3.4.7 InfoCommand](#347-infocommand)
+        - [How the feature is implemented](#how-the-feature-is-implemented-5)
+        - [Why it is implemented this way.](#why-it-is-implemented-this-way-5)
+        - [Alternatives considered.](#alternatives-considered-5)
       - [3.4.8 TimetableCommand](#348-timetablecommand)
       - [3.4.9 ByeCommand](#349-byecommand)
     - [3.5 Utils Component](#35-utils-component)
       - [3.5.1 UI Component](#351-ui-component)
-        - [Why it is implemented this way](#why-it-is-implemented-this-way-5)
-        - [Alternative Considered](#alternative-considered)
-      - [3.5.2 Link Component](#352-link-component)
-        - [Why is it implemented this way](#why-is-it-implemented-this-way)
-        - [Alternative Considered](#alternative-considered-1)
-      - [3.5.3 Storage Component](#353-storage-component)
         - [Why it is implemented this way](#why-it-is-implemented-this-way-6)
-        - [Alternatives considered](#alternatives-considered-5)
+        - [Alternative Considered](#alternative-considered-6)
+      - [3.5.2 Link Component](#352-link-component)
+        - [Why is it implemented this way](#why-is-it-implemented-this-way-7)
+        - [Alternative Considered](#alternative-considered-7)
+      - [3.5.3 Storage Component](#353-storage-component)
+        - [Why it is implemented this way](#why-it-is-implemented-this-way-8)
+        - [Alternatives considered](#alternatives-considered-8)
   - [4. Implementation](#4-implementation)
     - [Storage feature](#storage-feature)
     - [Target user profile](#target-user-profile)
@@ -100,7 +103,7 @@ This section describes the development tools used in the creation of YAMOM.
 1. **Fork** this repo, and **clone** the fork into your computer.
 2. Open IntelliJ (if you are not in the welcome screen, click **`File`** > **`Close Project`** to close the existing project dialog first).
 3. Set up the correct JDK version for Gradle  
-   a.To set up the correct project structure **`Configure`** > **`Project Defaults`** > **`Project Structure`**  
+   a. To set up the correct project structure **`Configure`** > **`Project Defaults`** > **`Project Structure`**  
    b. Under **`New...`** find the directory of the appropriate JDK version.
 4. Click **`Import Project`**.
 5. Find the **`build.gradle`** file and select it. Click **`OK`**.
@@ -121,10 +124,12 @@ to set up IDEA’s coding style to match ours.
 
 ### 3.1 Architecture
 
-![Architecture](images/Architecture.png)
+![Architecture](images/Architecture.png)  
 **How the architecture components interact with each other**
 
-Core program flow is managed by the Duke class.
+Core program flow (`Main`) is managed by the Duke class.
+
+`Commons` represents a collection of commonly used classes.
 
 ![Main Program Flow](images/mainProgramFlow.png)
 
@@ -181,12 +186,34 @@ The <code>Parser</code> component can:
 
 - return the correct command type based on user input.
 
+This component also consists of `DayParser` and `LessonTypeParser` to help parse their respective
+day and lesson info into programme-understood values.
+
+#### 3.3.1 How the feature is implemented
+
+The main function of the `Parser` component is `parse` which returns the correct command type
+based on the first word of the user input. It also consists of various helper functions for the different
+`Commmand` classes to validate if the user input is correct.
+
+#### 3.3.2 Why it is implemented this way
+
+The `Parser` component should not know what is a valid command for the specific command type but instead
+can assist in parsing the user input to do data validation. It only carries out basic data validation to 
+check if the user input does not belong to any command type. This also makes it easier to add new commands 
+in the future as the developer only needs to create a new command class and the parser checks for the new keyword.
+
+#### 3.3.3 Alternatives considered
+All invalid inputs handled by the `Parser` and only returns valid `Command` classes.
+However, this will make the `Parser` class will be very long as it has to check for all invalid inputs for all commands.
+Additionally, it will be difficult to implement as different commands have different parameters that they require.
+Finally, it will also lead to tight coupling and decreased cohesion.
+
 ### 3.4 Command Component
 
 ![Command Abstract Class](images/commandClass.png)
 
 The <code>Command</code> component can:
-- execute and return the command type based on the first word of the user input.
+- execute based on the command type.
 
 Below is a table of command subclasses and their respective command type. The different command types extends from the
 Command class and are all in the command package.
@@ -213,7 +240,7 @@ their timetable.
 
 ![AddModuleCommand Class](images/AddModuleCommandClass.png)
 
-##### How the feature is implemented
+##### 3.4.1.1 How the feature is implemented
 The `AddModuleCommand` class extends the `Command` class.
 The constructor `AddModuleCommand()` parses the user `input` module code `.toUpperCase()` as the format to fetch an
 instance of `module` from its class. Boolean `successful` field is used to flag successfully added modules in comparison
@@ -222,7 +249,7 @@ It overrides the `execute()` method from the `Command` class, and updates `succe
 passed on to the overridden `getExecutionMessage()` which displays the result of data validation that new `selectedModule`
 added are unique.
 
-##### Why it is implemented this way.
+##### 3.4.1.2 Why it is implemented this way
 In order to be able to be able to compare the new instance of `selectedModule` created of the module code the user wants to delete,
 in the constructor against an instance of the module the user has previously added into the `selectedModuleList`, the `equals()`
 method extended from super class `Object` has been overridden to return `true` for instances where `semester` and `module`
@@ -232,7 +259,7 @@ The following sequence diagram shows how the undo operation works:
 
 ![AddModuleCommandSequenceDiagram](images/AddModuleCommandSequenceDiagram.png)
 
-##### Alternatives considered.
+##### 3.4.1.3 Alternatives considered
 Initially, data validation was being handled by the `Parser` class, however in the principles of avoiding tight coupling
 and improving cohesion, it was moved back under the `AddModuleCommand` class.
 

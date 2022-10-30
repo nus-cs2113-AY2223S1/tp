@@ -26,7 +26,7 @@ class Link {
     <u>- addValidLesson(SelectedModule, int, LessonType, String, Ui): void
     <u>- appendModules(List<SelectedModule>, StringBuilder): void
     <u>- appendSemester(State, StringBuilder): void
-    <u>+ getLessonType(String): LessonType
+    <u>+ getLessonType(String, Ui): LessonType
     <u>+ getLink(State): String
     <u>- getSemesterFromParam(String): int
     <u>- isEmptyLink(String): boolean
