@@ -6,6 +6,7 @@ import command.appointmentcommand.AddAppointmentCommand;
 import command.appointmentcommand.RemoveAppointmentCommand;
 import command.appointmentcommand.ViewAppointmentCommand;
 import exception.DukeException;
+import pet.Pet;
 
 public class AppointmentParser {
     private int lengthOfSignature;
@@ -70,7 +71,7 @@ public class AppointmentParser {
             String petIdStr = input.substring(p + lengthOfSignature, d);
             String appointmentDate = input.substring(d + lengthOfSignature);
             // TODO: Extract petId from input
-            int petId = -1;
+            int petId = Pet.id;
             return new AddAppointmentCommand(petId, appointmentDate, service);
         } catch (DukeException e) {
             System.out.println("Sorry, format of parameters entered for adding an appointment is invalid");

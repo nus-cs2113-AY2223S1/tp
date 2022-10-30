@@ -46,7 +46,7 @@ public class AppointmentList {
         // appointment should refer to one existing service
         Service service = ServiceList.findService(appointment.service);
         if (service == null) {
-            System.out.println("");
+            System.out.println("Sorry, no corresponding service found to add the appointment.");
             throw new DukeException();
         }
 
