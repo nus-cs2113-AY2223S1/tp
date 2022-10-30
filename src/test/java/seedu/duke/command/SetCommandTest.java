@@ -91,7 +91,7 @@ class SetCommandTest {
             c.execute();
             fail();
         } catch (IllegalValueException e) {
-            assertEquals("Hi, I only recognise other, female and male genders", e.getMessage());
+            assertEquals("Hi, I only recognise others, female and male genders", e.getMessage());
         }
     }
 }

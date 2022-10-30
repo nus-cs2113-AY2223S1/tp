@@ -110,11 +110,14 @@ public class AddCommand extends Command {
         LocalDate localDate;
         try {
             localDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+            LocalDate oldestinputDate =  LocalDate.parse("31-12-2023", DateTimeFormatter.ofPattern("dd-MM-yyyy"));
             if (toDisplay && today.isAfter(localDate)) {
                 throw new IllegalValueException("Date cannot be before today");
+            } else if (localDate.compareTo(oldestinputDate) > 0) {
+                throw new IllegalValueException("Date input cannot be after 2023");
             }
         } catch (DateTimeException e) {
-            throw new IllegalValueException("Date is in the wrong format");
+            throw new IllegalValueException("Date is in the wrong format. Please follow the dd-MM-yyyy format");
         }
         return localDate;
     }
@@ -147,12 +150,12 @@ public class AddCommand extends Command {
             LOGGER.warning("Invalid arguments for loading cardio exercise");
             throw new IllegalValueException("Unable to load cardio exercise");
         } else if (toDisplay && (argumentList.length < 4 || argumentList.length > 5)) {
-            LOGGER.warning("Invalid arguments length for add strength exercise");
-            throw new IllegalValueException("Invalid add strength exercise command");
+            LOGGER.warning("Invalid arguments length for add cardio exercise");
+            throw new IllegalValueException("Invalid add cardio exercise command");
         }
         String description = getDescriptionWithValidation(argumentList[1]);
         try {
-            double distance = Double.parseDouble(argumentList[2]);
+            double distance = getDistanceWithValidation(Double.parseDouble(argumentList[2]));
             int repetition = getRepetitionWithValidation(argumentList);
             LocalDate date;
             if (argumentList.length == 4) {
@@ -174,13 +177,22 @@ public class AddCommand extends Command {
                 ui.output(" This cardio exercise is added to the exercise list successfully");
             }
         } catch (NumberFormatException e) {
-            throw new IllegalValueException("Distance and repetition must be integers");
+            throw new IllegalValueException("Distance and repetition must be numbers");
         }
     }
 
+    private static double getDistanceWithValidation(double distance) throws IllegalValueException {
+        if (distance > 100) {
+            throw new IllegalValueException("Distance should not be more than 100km!");
+        } else if (distance < 0) {
+            throw new IllegalValueException("Distance cannot be negative!");
+        }
+        return distance;
+    }
+
     private static int getRepetitionWithValidation(String[] argumentList) throws IllegalValueException {
-        int repetition = Integer.parseInt(argumentList[3]);
-        if (repetition <= 0 || repetition > 500) {
+        int repetition = Integer.parseInt(argumentList[4]);
+        if (repetition <= 0 || repetition > 50) {
             throw new IllegalValueException("Invalid value for repetitions");
         }
         return repetition;
