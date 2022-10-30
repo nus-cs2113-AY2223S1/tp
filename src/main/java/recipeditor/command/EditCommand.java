@@ -22,6 +22,7 @@ public class EditCommand extends Command {
     private String[] parsed;
 
 
+
     public EditCommand(FlagType commandType, String[] parsed, int recipeIndex, Recipe editedRecipe) {
         this.commandType = commandType;
         this.parsed = parsed;
@@ -67,4 +68,5 @@ public class EditCommand extends Command {
             }
         }
     }
+
 }

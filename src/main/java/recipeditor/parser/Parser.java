@@ -11,9 +11,7 @@ import recipeditor.command.FindCommand;
 import recipeditor.command.HelpCommand;
 import recipeditor.command.InvalidCommand;
 
-import recipeditor.exception.ParseFileException;
 import recipeditor.recipe.Recipe;
-import recipeditor.ui.Editor;
 import recipeditor.recipe.RecipeList;
 import recipeditor.storage.Storage;
 import recipeditor.ui.EditMode;
@@ -25,8 +23,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Parser {
-    private static Logger logger = Logger.getLogger("LOGS");
-    private static String recipeTitle = null;
+    private static final Logger logger = Logger.getLogger("LOGS");
+    private static final String recipeTitle = null;
 
     public static Command parseCommand(String input) {
         String[] parsed = input.split(" ");
@@ -56,31 +54,8 @@ public class Parser {
 
 
     private static Command parseAddCommand() {
-
-        boolean saveToTemp = new Editor().enterEditor(Storage.TEMPLATE_FILE_PATH);
-        boolean exitLoop = (saveToTemp) ? false : true;
-        boolean valid = false;
-        Recipe addRecipe = new Recipe();
-        while (!exitLoop) {
-            try {
-                String content = Storage.loadFileContent(Storage.TEMPORARY_FILE_PATH);
-                addRecipe = new TextFileParser().parseTextToRecipe(content);
-                valid = true;
-                exitLoop = true;
-            } catch (ParseFileException | FileNotFoundException e) {
-                Ui.showMessage(e.getMessage());
-                Ui.showMessage("Do you want to ABORT? (Y/N)");
-                //TODO: Only Take in Y/N
-                String text = Ui.readInput();
-                if (text.equalsIgnoreCase("n")) {
-                    new Editor().enterEditor(Storage.TEMPORARY_FILE_PATH);
-                    //TODO: When exit, don't need to check
-                } else {
-                    exitLoop = true;
-                }
-            }
-        }
-        return new AddCommand(valid, addRecipe);
+        GUIWorkFlow returnValues = new GUIWorkFlow(Storage.TEMPLATE_FILE_PATH);
+        return new AddCommand(returnValues.getValidity(), returnValues.getRecipe());
     }
 
     private static Command parseDeleteCommand(String[] parsed) {
@@ -104,6 +79,21 @@ public class Parser {
             return new InvalidCommand(DeleteCommand.CORRECT_FORMAT);
         }
     }
+
+        private static Command parseEditCommandGUI(String[] parsed){
+        if (parsed.length == 2) {
+            try {
+                int index = Integer.parseInt(parsed[1]) - 1; // to account for 0-based indexing in recipelist
+                String name = RecipeList.getTitleFromIndex(index);
+                String path = Storage.RECIPES_FOLDER_PATH + "/" +name;
+                GUIWorkFlow returnValues = new GUIWorkFlow(path);
+                return new EditCommand(returnValues.getValidity(), index , returnValues.getRecipe());
+            } catch (Exception e) {
+                return new InvalidCommand("Edit GUI Error");
+            }
+        }
+        return new InvalidCommand("Edit GUI Error");
+        }
 
     private static String convertStringArrayToString(String[] stringArray) {
         StringBuilder content = new StringBuilder();
@@ -155,6 +145,7 @@ public class Parser {
                 EditMode edit = new EditMode();
                 edit.enterEditMode(index);
                 return new EditCommand(edit.exitEditMode(), index, edit.getEditedRecipe());
+
                 /**
                  * PLACE GUI HERE
                  */
@@ -186,4 +177,6 @@ public class Parser {
         }
         return new InvalidCommand(FindCommand.CORRECT_FORMAT);
     }
+
+
 }

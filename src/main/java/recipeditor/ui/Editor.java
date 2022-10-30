@@ -22,18 +22,13 @@ import java.util.logging.Logger;
 
 public class Editor extends JFrame implements ActionListener {
 
-    private enum EditorState {
-        USING, SAVE, EXIT
-    }
-
-    private static Logger logger = Logger.getLogger(Editor.class.getName());
-
-    private EditorState state = EditorState.USING;
+    private static final Logger logger = Logger.getLogger(Editor.class.getName());
     private static JTextArea textArea;
     private static JFrame frame;
-    private JButton buttonSave;
-    private JButton buttonExit;
-    private JMenuBar menu;
+    private final JButton buttonSave;
+    private final JButton buttonExit;
+    private final JMenuBar menu;
+    private EditorState state = EditorState.USING;
 
     public Editor() {
         frame = new JFrame("Editor");
@@ -70,8 +65,7 @@ public class Editor extends JFrame implements ActionListener {
         frame.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent e) {
-                if (JOptionPane.showConfirmDialog(frame, "Do you want to save?", "Closing", JOptionPane.YES_NO_OPTION,
-                        JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+                if (JOptionPane.showConfirmDialog(frame, "Do you want to save?", "Closing", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
                     state = EditorState.SAVE;
                 } else {
                     state = EditorState.EXIT;
@@ -81,7 +75,6 @@ public class Editor extends JFrame implements ActionListener {
         frame.setVisible(true);
 
     }
-
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -104,7 +97,7 @@ public class Editor extends JFrame implements ActionListener {
         }
     }
 
-    public boolean enterEditor(String path) {
+    public boolean enterEditor(String path) throws FileNotFoundException {
         Ui.showMessage("Please edit in the GUI editor!");
         loadFile(path);
         // Wait until the editor is done
@@ -116,28 +109,26 @@ public class Editor extends JFrame implements ActionListener {
             }
         }
         logger.log(Level.INFO, "Editor State: " + this.state);
-        return (state.equals(EditorState.SAVE)) ? true : false;
+        return state.equals(EditorState.SAVE);
     }
 
     /**
      * Load file from the path to the editor.
      */
-    private void loadFile(String path) {
+    private void loadFile(String path) throws FileNotFoundException {
         File textFile = new File(path);
         Scanner scan = null;
-        try {
-            scan = new Scanner(textFile);
-            while (scan.hasNext()) {
-                String line = scan.nextLine() + "\n";
-                textArea.append(line);
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } finally {
-            scan.close();
+        scan = new Scanner(textFile);
+        while (scan.hasNext()) {
+            String line = scan.nextLine() + "\n";
+            textArea.append(line);
         }
+        scan.close();
     }
 
-
+    private enum EditorState {
+        USING, SAVE, EXIT
+    }
 }
+
 

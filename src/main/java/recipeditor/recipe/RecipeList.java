@@ -47,6 +47,9 @@ public class RecipeList {
         }
         return null;
     }
+    public static String getTitleFromIndex(int index){
+        return getRecipe(index).getTitle();
+    }
 
     public static int getRecipeIndexFromTitle(String recipeTitle) {
         int i = 0;
