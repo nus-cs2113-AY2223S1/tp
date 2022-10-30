@@ -2,14 +2,10 @@ package seedu.duke.command;
 
 import org.junit.jupiter.api.Test;
 import seedu.duke.exceptions.YamomException;
-import seedu.duke.model.LessonType;
 import seedu.duke.utils.State;
 import seedu.duke.utils.Storage;
 import seedu.duke.utils.Ui;
-import seedu.duke.model.Module;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
