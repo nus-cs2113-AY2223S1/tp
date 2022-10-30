@@ -1,26 +1,29 @@
 # User Guide
 
 ## Table of Contents
-* [Introduction](#Introduction)
+
+* [Introduction](#introduction)
 * [Getting Started](#getting-started)
-* [SkyControl's Features](#SkyControl's-Features)
-  * [Add a passenger detail: `passenger add`](#Add-a-passenger-detail-passenger-add)
-  * [Delete a passenger detail: `passenger delete`](#Delete-a-passenger-detail-passenger-delete)
-  * [Display passenger detail logbook: `passenger list`](#Display-passenger-detail-logbook-passenger-list)
-  * [Add a flight detail: `flight add`](#add-a-flight-detail-flight-add)
-  * [Delete a flight detail: `flight delete`](#delete-a-flight-detail-flight-delete)
-  * [Delay a flight: `delay`](#delay-a-flight-delay)
-  * [Display flight detail logbook: `flight list`](#display-flight-detail-logbook-flight-list)
-  * [Command Summary](#Command-Summary)
-* [Frequently Asked Questions](#Frequently-Asked-Questions)
+* [SkyControl's Features](#skycontrols-features)
+    * [Add a passenger detail: `passenger add`](#add-a-passenger-detail-passenger-add)
+    * [Delete a passenger detail: `passenger delete`](#delete-a-passenger-detail-passenger-delete)
+    * [Display passenger detail logbook: `passenger list`](#display-passenger-detail-logbook-passenger-list)
+    * [Add a flight detail: `flight add`](#add-a-flight-detail-flight-add)
+    * [Delete a flight detail: `flight delete`](#delete-a-flight-detail-flight-delete)
+    * [Delay a flight: `delay`](#delay-a-flight-delay)
+    * [Display flight detail logbook: `flight list`](#display-flight-detail-logbook-flight-list)
+    * [Command Summary](#command-summary)
+* [Frequently Asked Questions](#frequently-asked-questions)
 
 ---
 
 ## Introduction
 
-SkyControl is a program which optimizes the use of the Command Line Interface (CLI) to manage flights and passengers in an airport terminal.
+SkyControl is a program which optimizes the use of the Command Line Interface (CLI) to manage flights and passengers in
+an airport terminal.
 
-SkyControl allows a Airport Operations Planning & Airside Manager to add, delete, update flight and passenger information, add delays to flights
+SkyControl allows an Airport Operations Planning & Airside Manager to add, delete, update flight and passenger
+information, add delays to flights
 and list out both flight and passenger details by entering commands into the CLI.
 
 It aims to provide an ease of access to the manager, to access the relevant flight or passenger information
@@ -32,7 +35,7 @@ through a CLI which is faster than a Graphical User Interface (GUI).
 
 1. Please ensure that you have **Java 11 or above** present in your computer
 2. Proceed to download the latest version of `SkyControl.jar` from
-[here](https://github.com/AY2223S1-CS2113-T17-1/tp/releases).
+   [here](https://github.com/AY2223S1-CS2113-T17-1/tp/releases).
 3. Move the file to your desired folder that you have designated as the **main folder** for SkyControl.
 4. Open a terminal and type java -jar SkyControl.jar (include the entire filepath for the jar file)
 5. Once the program has been successfully initialised, you should see SkyControl greetings as seen below.
@@ -48,15 +51,15 @@ through a CLI which is faster than a Graphical User Interface (GUI).
                __/ |
               |___/
 ````
+
 6. After SkyControl has been booted up successfully, enter a command below the welcome display
-and hit the <kbd>Enter</kbd> button to execute it. Reflected below is an example.  
+   and hit the <kbd>Enter</kbd> button to execute it. Reflected below is an example.
 
-**Input Command**  
+**Input Command**
 
-`bye`  
-  
-**Output**  
-  
+`bye`
+
+**Output**
 
 ````
 Welcome to
@@ -76,34 +79,37 @@ Thank you, come again! :)
 
 ---
 
-## SkyControl's Features 
+## SkyControl's Features
 
 **Take Note:**
 
 + All commands entered into the terminal are **not case-sensitive.**  
-i.e. `Passenger add PASSENGER_DETAIL` or `Passenger Add PASSENGER_DETAIL` are acceptable commands
-+ Words in `UPPER_CASE` represent a single or multiple parameters for the command. 
-i.e. `flight add FLIGHT_DETAIL`  
+  i.e. `Passenger add PASSENGER_DETAIL` or `Passenger Add PASSENGER_DETAIL` are acceptable commands
++ Words in `UPPER_CASE` represent a single or multiple parameters for the command.
+  i.e. `flight add FLIGHT_DETAIL`
 
-**NOTE:** The exact format to be followed for each parameter can be found in the 
-[FAQ](##Frequently-Asked-Questions) section.
+**NOTE:** The exact format to be followed for each parameter can be found in the
+[FAQ](#frequently-asked-questions) section.
 
 ---
+
 ## Add a passenger detail: `passenger add`
-**Function**: Adds the passenger to the passenger list, given that the flight number of the 
+
+**Function**: Adds the passenger to the passenger list, given that the flight number of the
 passenger already exists in the flight list and the seat number is not already occupied by another
 passenger in the passenger list.
- 
-**Format**: `passenger add n/PASSENGER_NAME dt/DEPARTURE_TIME fn/FLIGHT_NUMBER gn/GATE_NUMBER 
+
+**Format**: `passenger add n/PASSENGER_NAME dt/DEPARTURE_TIME fn/FLIGHT_NUMBER gn/GATE_NUMBER
 bg/BOARDING_GROUP sn/SEAT_NUMBER bt/BOARDING_TIME`
 
-Example:  
+Example:
 
 **Input**
 
 `passenger add n/Ivan Theng dt/2145 fn/sq832 gn/05 bg/01 sn/17d bt/2100`
 
 **Output**
+
 ````
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Passenger IVAN THENG of SQ832 17D has been added.
@@ -112,9 +118,9 @@ Passenger IVAN THENG of SQ832 17D has been added.
 ---
 
 ## Delete a passenger detail: `passenger delete`
-**Explanation**: As the name of the feature suggests, executing this command should
-delete the detail of a single passenger. It is used to remove a passenger from the passenger list.  
 
+**Explanation**: As the name of the feature suggests, executing this command should
+delete the detail of a single passenger. It is used to remove a passenger from the passenger list.
 
 **Function**: Deletes a passenger from the current passenger list.
 
@@ -127,32 +133,46 @@ Example:
 `passenger delete n/Ivan Theng fn/sq832 sn/17d dt/2145`
 
 **Output**
+
+_If passenger exists in the current passenger logbook_.
+
 ````
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Passenger IVAN THENG from SQ832 of seat number 17D have been
 deleted from the passenger list.
 0 passenger(s) left on the passenger list.
 ````  
+
+_If passenger **does not** exist in the current passenger logbook_.
+
+```
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+The system is unable to delete the specified passenger 
+as he/she is not found in the passenger list or his/her 
+detail have been input incorrectly.
+```
+
 ---
 
 ## Display passenger detail logbook: `passenger list`
+
 **Explanation**: As the name of the feature suggests, execute this command should
 list the current passenger(s) that is/are present in the logbook.
 
+**Function**: Displays a list in table form of all the current passengers that are the logbook.
 
-**Function**: Displays a list in table form of all the current passengers that are listed in the logbook.
 **Usage**: `passenger list`
 
-Example:  
-  
+Example:
 
-**Input**  
-  
-`passenger list`  
-  
-**Output**  
-  
+**Input**
+
+`passenger list`
+
+**Output**
+
 _If passenger details logbook has/have existing passenger(s)_.
+
 ````
 +------------------------------------------------------------------------------------------------------------------------------+
 |                                                  PASSENGER DETAILS LOGBOOK                                                   |
@@ -164,6 +184,7 @@ _If passenger details logbook has/have existing passenger(s)_.
 ````
 
 _If passenger details logbook is empty_.
+
 ````
 +------------------------------------------------------------------------------------------------------------------------------+
 |                                                  PASSENGER DETAILS LOGBOOK                                                   |
@@ -178,74 +199,90 @@ _If passenger details logbook is empty_.
 
 ## Add a flight detail: `flight add`
 
-Format: `flight add fn/FLIGHT_NUMBER a/AIRLINE d/DESTINATION dt/DEPARTURE_TIME gn/GATE_NUMBER c/CHECKIN_ROW_DOOR`
+**Function**: Adds a flight to the flight list
 
-* The `FLIGHT_NUMBER` must consist of 2 alphabets followed by 1-4 digits.
-* The `DEPARTURE_TIME` must be in 24HR time format e.g. 1600.
-* `GATE_NUMBER` must be a numerical number.
+**Usage**: `flight add fn/FLIGHT_NUMBER a/AIRLINE d/DESTINATION dt/DEPARTURE_TIME gn/GATE_NUMBER c/CHECKIN_ROW_DOOR`
 
-Example of usage:
+Example:
+
+**Input**
+
+`flight add fn/sq832 a/Singapore Airlines d/bangkok dt/1600 gn/05 c/03-03`
+
+**Output**
+
 ```
-flight add fn/sq712 a/singapore airlines d/bangkok dt/1600 gn/05 c/03-03
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Flight added!
-
-flight add fn/KE644 a/KOREA AIR d/KOREA dt/0500 gn/22 c/10-04
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-Flight added!
 ```
+
 ---
 
 ## Delete a flight detail: `flight delete`
 
-This command allows the deletion of a flight detail from the flight list logbook, provided that
+**Function**: This command allows the deletion of a flight detail from the flight list logbook, provided that
 the flight exists in the logbook.
 
-Format: `flight delete fn/FLIGHT_NUMBER`
+**Usage**: `flight delete fn/FLIGHT_NUMBER`
 
-* The `FLIGHT_NUMBER` must consist of 2 alphabets followed by 1-4 digits. It is not case-sensitive.
+Example:
 
-Example of usage:
+**Input**:
+
+`flight delete fn/sq832`
+
+**Output**:
+
+_If flight exists in the current flight logbook_.
+
 ```
-flight delete fn/sq712
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-FLIGHT SQ712 HAS BEEN DELETED.
-
-flight delete fn/SQ712
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-FLIGHT SQ712 NOT FOUND.
+FLIGHT SQ832 HAS BEEN DELETED.
 ```
+
+_If flight **does not** exist in the current flight logbook_.
+
+```
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+FLIGHT SQ832 NOT FOUND.
+```
+
 ---
 
 ## Delay a flight: `delay`
 
-Format: `delay FLIGHT_NUMBER dt/NEW_DEPARTURE_TIME`
+**Function**: In the event a flight is suddenly delayed on the same day,
+this delay function allows the user to indicate a new departure time for the flight while making sure
+the gate number is still available at the new departure time.
 
-* `FLIGHT_NUMBER` must be an existing flight in the list.
-* `NEW_DEPARTURE_TIME` is in 24HR time format and must be on the same day but later than the existing flight departure time.
+**NOTE**: New Departure time should be later than the existing departure time.
 
-Example of usage:
+**Usage**: `delay FLIGHT_NUMBER dt/NEW_DEPARTURE_TIME`
+
+Example:
+
+**Input**:
+
+`delay sq832 dt/1700`
+
+**Output**:
+
 ```
-delay sq712 dt/1200
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-Stop! Please enter a valid departure time for flight SQ712
-Time must be later than 1600.
-
-delay sq712 dt/1700
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-Departure time of flight SQ712 is delayed from 1600 to 1700.
-
+Departure time of flight SQ832 is delayed from 1600 to 1700.
 ```
+
 ---
 
 ## Modify flight attributes: `modify`
-**Function**: The Airside Operations Manager is able to modify **only** the flight number and boarding gate of 
-a specified flight in the flight list. The changes in the flight list are also 
+
+**Function**: The Airside Operations Manager is able to modify **only** the flight number and boarding gate of
+a specified flight in the flight list. The changes in the flight list are also
 propagated to the passenger list as well.
 
 **NOTE:** The flight detail cannot be modified if the new flight number/gate number already exists in the flight list.
 
-**Format** : 
+**Usage** :
 
 For flight number modification: `modify FLIGHT_NUMBER fn/NEW_FLIGHT_NUMBER`
 
@@ -260,6 +297,7 @@ Example:
 `modify SQ654 gn/08`
 
 **Output**
+
 ````
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Flight number of flight SQ832 is updated to SQ654.
@@ -268,25 +306,44 @@ Flight number of flight SQ832 is updated to SQ654.
 Gate number of flight SQ654 is updated to 08.
 
 ````
+
 ---
 
 ## Display flight detail logbook: `flight list`
 
-Format: `flight list`
+**Function**: Displays a list in table form of all the current flights that are in the logbook.
 
-Example of usage:
+**Usage**: `flight list`
+
+Example:
+
+**Input**:
+
+`flight list`
+
+**Output**:
+
+_If flight details logbook has/have existing flight(s)_.
+
 ```
-flight list
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
 +----------------------------------------------------------------------------------------------------------------------------------+
 |                                                  FLIGHT DETAILS LOGBOOK FOR TERMINAL 1                                         |
 +----------------------------------------------------------------------------------------------------------------------------------+
 | FLIGHT NUM | DEPARTURE DATE |        AIRLINE         |      DESTINATION      | DEPARTURE TIME | GATE NUM |  CHECK-IN ROW/DOOR  |
 +----------------------------------------------------------------------------------------------------------------------------------+
-|      SQ712 |       23-10-22 |     SINGAPORE AIRLINES |               BANGKOK |           1600 |       05 |               03-03 |
+|      SQ832 |       23-10-22 |     SINGAPORE AIRLINES |               BANGKOK |           1600 |       05 |               03-03 |
 +----------------------------------------------------------------------------------------------------------------------------------+
-|      KE644 |       23-10-22 |              KOREA AIR |                 KOREA |           0500 |       22 |               10-04 |
+```
+
+_If flight details logbook is empty_.
+
+```
++----------------------------------------------------------------------------------------------------------------------------------+
+|                                                  FLIGHT DETAILS LOGBOOK FOR TERMINAL 1                                         |
++----------------------------------------------------------------------------------------------------------------------------------+
+| FLIGHT NUM | DEPARTURE DATE |        AIRLINE         |      DESTINATION      | DEPARTURE TIME | GATE NUM |  CHECK-IN ROW/DOOR  |
++----------------------------------------------------------------------------------------------------------------------------------+
+|                                             The flight details logbook is empty.                                               |
 +----------------------------------------------------------------------------------------------------------------------------------+
 ```
 
@@ -294,13 +351,16 @@ flight list
 
 ## Command Summary
 
-| Command                | Format                                                                                                                               | Example                                                                  |
-|:-----------------------|:-------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------------------------------------------|
-| `add`                  | `passenger add n/PASSENGER_NAME dt/DEPARTURE_TIME fn/FLIGHT_NUMBER gn/GATE_NUMBER bg/BOARDING_GATE sn/SEAT_NUMBER bt/BOARDING_TIME ` | `passenger add n/Ivan Theng dt/2145 fn/sq832 gn/05 bg/01 sn/17d bt/2100` |
-| `delete`               | `passenger delete n/PASSENGER_NAME fn/FLIGHT_NUMBER sn/SEAT_NUMBER dt/DEPARTURE_TIME`                                                | `passenger delete n/Ivan Theng fn/sq832 sn/17d dt/2145`                  |
-| `list`                 | `passenger list`                                                                                                                     | `passenger list`                                                         |
-| `modify flight number` | `modify FLIGHT_NUMBER fn/NEW_FLIGHT_NUMBER`                                                                                          | `modify SQ832 fn/SQ654`                                                  |
-| `modify gate number`   | `modify FLIGHT_NUMBER gn/NEW_GATE_NUMBER`                                                                                            | `modify SQ654 gn/08`                                                     |
+| Command                | Format                                                                                                                                  | Example                                                                  |
+|:-----------------------|:----------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------------------------------------------|
+| `passenger add`        | `passenger add n/PASSENGER_NAME dt/DEPARTURE_TIME fn/FLIGHT_NUMBER gn/GATE_NUMBER bg/BOARDING_GATE sn/SEAT_NUMBER bt/BOARDING_TIME `    | `passenger add n/Ivan Theng dt/2145 fn/sq832 gn/05 bg/01 sn/17d bt/2100` |
+| `flight add`           | `flight add fn/FLIGHT_NUMBER a/AIRLINE d/DESTINATION dt/DEPARTURE_TIME gn/GATE_NUMBER c/CHECKIN_ROW_DOOR`                               | `flight add fn/KE632 a/Korea Airlines d/Korea dt/1200 gn/32 c/12-03`     |
+| `passenger delete`     | `passenger delete n/PASSENGER_NAME fn/FLIGHT_NUMBER sn/SEAT_NUMBER dt/DEPARTURE_TIME`                                                   | `passenger delete n/Ivan Theng fn/sq832 sn/17d dt/2145`                  |
+| `flight delete`        | `flight delete fn/FLIGHT_NUMBER`                                                                                                        | `flight delete ke632`                                                    |
+| `passenger list`       | `passenger list`                                                                                                                        | `passenger list`                                                         |
+| `flight list`          | `flight list`                                                                                                                           | `flight list`                                                            |
+| `modify flight number` | `modify FLIGHT_NUMBER fn/NEW_FLIGHT_NUMBER`                                                                                             | `modify SQ832 fn/SQ654`                                                  |
+| `modify gate number`   | `modify FLIGHT_NUMBER gn/NEW_GATE_NUMBER`                                                                                               | `modify SQ654 gn/08`                                                     |
 
 ---
 
@@ -312,24 +372,41 @@ flight list
 specified formats to follow in order for the command to be successful,
 an error may be generated if these standards are not adhered to.
 
-A table of parameters is depicted below:  
+**Table of parameters:**
 
 | Parameter          | Format to adhere by                                                                                                                                                                                         | Example                             |
 |:-------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:------------------------------------|
 | PASSENGER_NAME     | Input name should be no more than 24 characters                                                                                                                                                             | `Ivan Lim`                          |
 | DEPARTURE_TIME     | Input departure time should be in 24 Hours format                                                                                                                                                           | `2100`                              |
+| NEW_DEPARTURE_TIME | Input departure time should be in 24 Hours format and later than the existing departure time                                                                                                                | `2200`                              |
 | FLIGHT_NUMBER      | Input flight number should start with 2 letter character, followed either by <br/>Two numbers for international flights <br/>Three numbers for regional flights<br/> Four numbers for domestic flights <br> | `SQ12`</br>`SQ123`</br>`SQ1234`<br> |
-| GATE_NUMBER        | Input gate number should be between number 00 to 99                                                                                                                                                         | `05`                                |
+| NEW_FLIGHT_NUMBER  | Input flight number should follow FLIGHT_NUMBER constraints but must not be the same flight code                                                                                                            | `KE356`                             |
+| GATE_NUMBER        | Input gate number should be 2 digits and between ranges 00 and 99                                                                                                                                           | `05`                                |
+| NEW_GATE_NUMBER    | Input gate number should follow GATE_NUMBER constraints but must not be the same value                                                                                                                      | `22`                                |
 | BOARDING_GROUP     | Input boarding Group should not be more than 10 and should be in digit form                                                                                                                                 | `01`                                |
 | SEAT_NUMBER        | Input Seat number should range between 00A to 99Z                                                                                                                                                           | `B01`                               |
 | BOARDING_TIME      | Input boarding time should be in 24 Hours format                                                                                                                                                            | `2015`                              |
-| ADD_PARAMETER_HERE | Add format parameter instruction here                                                                                                                                                                       | `Add parameter example here`        |
 
-**Q**: Why can't I input a passenger detail at the start of the program or during the run of the program?  
+<br>
+
+**Q**: Why can't I input a passenger detail at the start of the program or during the run of the program?
 
 **A**: A flight detail with a designated flight numbers has to be **recorded or exist** in the flight
 list before a passenger flying with an airline of the same flight number can be added into the passenger logbook.
 
+<br>
+
 **Q**: Can I enter 2 flights with the same flight number in the input list?
 
 **A**: No. SkyControl lists are only valid for 1 day and hence we prohibit duplicate flight numbers.
+
+<br>
+
+**Q**: Can I use SkyControl to save a flight/ passenger registered in a different airport terminal or on a different
+day?
+
+**A**: No SkyControl is currently limited to a single airport terminal and can only log flights/passengers within the
+same day.
+However, this can be a future implementation outside the CS2113 curriculum.
+
+<br>
