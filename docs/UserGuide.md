@@ -316,6 +316,9 @@ Select semester to plan for and organise.
 
 Format: `semester SEMESTER_SELECTED`
 
+note: semester 3 and 4 are used to represent special term I and II.
+
+
 Example of usage:
 
 `semester 1`
@@ -487,19 +490,19 @@ Selects a timeslot to be added to the user timetable.
 Format: `select /module MODULE_CODE /type LESSON_TYPE /code CLASS_NO`
 
 * The `CLASS_NO` will be a number.
-* The `LESSON_TYPE` can be any of the following:  
-  *  TUTORIAL                   represented by inputs starting with `TUT`
-  *  TUTORIAL_TYPE_2            represented by inputs starting with `TUT` and ending with `2`
-  *  LECTURE                    represented by inputs starting with `LEC`
-  *  RECITATION                 represented by inputs starting with `REC`
-  *  DESIGN_LECTURE             represented by inputs starting with `DES` or `DLEC`
-  *  PACKAGED_LECTURE           represented by inputs starting with `PAC` containing `LEC` or `PLEC`
-  *  PACKAGED_TUTORIAL          represented by inputs starting with `PAC` containing `TUT` or `PTUT`
-  *  SECTIONAL_TEACHING         represented by inputs starting with `SEC`
-  *  WORKSHOP                   represented by inputs starting with `W`
-  *  LABORATORY                 represented by inputs starting with `LAB`
-  *  MINI_PROJECT               represented by inputs starting with `PRO` or `MINI`
-  *  SEMINAR_STYLE_MODULE_CLASS represented by inputs starting with `SEM`
+* The `LESSON_TYPE` can be any of the following spelt out or in short form (not case-sensitive). Here are some non-exhaustive examples:  
+  *  TUTORIAL                   e.g. *tut, Tutorial*
+  *  TUTORIAL_TYPE_2            e.g. *tut2, Tutorial2*
+  *  LECTURE                    e.g. *lecture, lec*
+  *  RECITATION                 e.g. *rec, recitation*
+  *  DESIGN_LECTURE             e.g. *des, dlec*
+  *  PACKAGED_LECTURE           e.g. *pac, plec*
+  *  PACKAGED_TUTORIAL          e.g. *ptut, packaged_tutorial*
+  *  SECTIONAL_TEACHING         e.g. *sec, Sectional*
+  *  WORKSHOP                   e.g. *workshop, work*
+  *  LABORATORY                 e.g. *lab, laboratory*
+  *  MINI_PROJECT               e.g. *mini, minproj, mini_project*
+  *  SEMINAR_STYLE_MODULE_CLASS e.g. *sem, seminar_style_module*
 * The `LESSON_TYPE` need not be an exact match or case-sensitive.
 * The `MODULE_CODE` need to be an exact match.
 
