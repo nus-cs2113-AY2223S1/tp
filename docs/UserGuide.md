@@ -29,7 +29,17 @@ information quickly with minimal latency.
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed. 
-2. Download the latest version of `Property Rental Manager` from [here](http://link.to/duke).
+2. Download the latest version of `PropertyRentalManager.jar` from [here](https://github.com/AY2223S1-CS2113-F11-1/tp/releases).
+3. Put the JAR file into an empty folder.
+4. Open a command window and change the current working directory to the directory that the JAR file is located in using
+   following command:
+```
+cd [PATH_TO_JAR_DIRECTORY]
+```
+5. Run Property Rental Manager
+```
+java -jar PropertyRentalManager.jar
+```
 
 ## Features 
 
