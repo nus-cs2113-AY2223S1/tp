@@ -12,7 +12,6 @@ import recipeditor.command.CommandResult;
 public class Recipeditor {
     public static final String DATA_FILE_PATH = "./data/data.txt";
 
-
     public static void main(String[] args) {
         run(args);
     }

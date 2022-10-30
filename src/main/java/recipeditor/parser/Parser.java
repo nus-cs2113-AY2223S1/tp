@@ -134,24 +134,20 @@ public class Parser {
 
     private static Command parseEditCommand(String[] parsed) {
         int index = -1;
-        if (parsed.length >= 2) {
+        if (parsed.length == 2) {
+            try {
+                index = Integer.parseInt(parsed[1]) - 1; // to account for 0-based indexing in recipelist
+                String name = RecipeList.getTitleFromIndex(index);
+                String path = Storage.RECIPES_FOLDER_PATH + "/" + name;
+                GuiWorkFlow returnValues = new GuiWorkFlow(path);
+                return new EditCommand(returnValues.getValidity(), index, returnValues.getRecipe());
+            } catch (Exception e) {
+                logger.log(Level.INFO, e.getMessage());
+                return new InvalidCommand("Edit GUI Error");
+            }
+        } else if (parsed.length > 2) {
             try {
                 index = Integer.parseInt(parsed[1]) - 1;
-            } catch (NumberFormatException n) {
-                return new InvalidCommand();
-            }
-            if (parsed.length == 2) {
-                /**
-                 * PLACE GUI HERE
-                 */
-                EditMode edit = new EditMode();
-                edit.enterEditMode(index);
-                return new EditCommand(edit.exitEditMode(), index, edit.getEditedRecipe());
-
-                /**
-                 * PLACE GUI HERE
-                 */
-            } else {
                 Recipe originalRecipe = RecipeList.getRecipe(index);
                 Recipe editedRecipe = new Recipe(originalRecipe.getTitle(), originalRecipe.getDescription());
 
@@ -162,7 +158,11 @@ public class Parser {
                 if (flags == null) {
                     return new InvalidCommand();
                 }
-                return new EditCommand(flags[0], parsed, index, editedRecipe);
+                return new EditCommand(flags, parsed, index, editedRecipe);
+            } catch (NumberFormatException n) {
+                return new InvalidCommand();
+            } catch (Exception e) {
+                return new InvalidCommand(e.getMessage());
             }
         }
         return new InvalidCommand(EditCommand.COMMAND_FORMAT);
