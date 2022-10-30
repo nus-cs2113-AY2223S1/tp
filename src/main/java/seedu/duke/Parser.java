@@ -6,6 +6,8 @@ import seedu.duke.commands.*;
 import seedu.duke.exceptions.InvalidCommandWordException;
 import seedu.duke.exceptions.InvalidInputContentException;
 import seedu.duke.exceptions.InvalidInputFormatException;
+import seedu.duke.exceptions.InvalidMcException;
+
 
 public class Parser {
 
@@ -31,6 +33,8 @@ public class Parser {
             UI.invalidFormatMessage();
         } catch (InvalidInputContentException e) {
             UI.invalidContentMessage();
+        } catch (InvalidMcException e) {
+            UI.invalidMcMessage();
         }
 
         return c;
@@ -55,7 +59,7 @@ public class Parser {
      * @throws InvalidInputContentException Exception thrown when the input content is invalid.
      */
     public static Command specificCase(String commandWord, String input) throws InvalidCommandWordException,
-            InvalidInputFormatException, InvalidInputContentException {
+            InvalidInputFormatException, InvalidInputContentException, InvalidMcException {
         switch (commandWord) {
         case "add":
             return new Add(input);
