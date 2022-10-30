@@ -143,4 +143,8 @@ public class Recipe {
         logger.log(Level.INFO, "Get attributes of " + title);
         return recipeAttributesStringFormatted.toString();
     }
+
+    public boolean isNotRecipeValid(){
+        return (this.getTitle().isBlank() || this.getDescription().isBlank() || this.getIngredients().isEmpty() || this.getSteps().isEmpty());
+    }
 }

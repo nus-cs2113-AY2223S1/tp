@@ -1,15 +1,10 @@
 package recipeditor.parser;
 
-import org.apache.commons.lang3.ArrayUtils;
-import org.jetbrains.annotations.NotNull;
-import recipeditor.Recipeditor;
 import recipeditor.exception.ParseFileException;
 import recipeditor.recipe.Recipe;
 import recipeditor.recipe.Ingredient;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.Arrays;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 //TODO: Better Exception check
@@ -39,6 +34,7 @@ public class TextFileParser {
     private static final String HEADING_OCCURRENCE = "Incorrect number of HEADINGS! Please follow the template!";
     private static final String WRONG_HEADING = "Wrong # HEADING. Please follow the template and do not change the "
             + "headings!";
+    private static final String EMPTY = "There is an empty field. The recipe is not valid";
 
     /**
      * Parse the text file into a correct recipe.
@@ -89,6 +85,9 @@ public class TextFileParser {
             }
         }
         checkAllStages(stageCounter);
+        if(recipe.isNotRecipeValid()){
+            throw new ParseFileException(EMPTY);
+        }
         return recipe;
     }
 
