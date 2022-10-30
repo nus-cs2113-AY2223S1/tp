@@ -9,9 +9,11 @@ public class EmployeeList {
 
     public static void listEmployee() {
         System.out.println("Here are the employees in your employee list:");
+        int index = 1;
         for (Employee employee : employees) {
-            System.out.print(employee.getEmployeeId() + ". ");
-            System.out.println(employee.getEmployeeName());
+            System.out.print(index + ". " + "ID: " + employee.getEmployeeId());
+            System.out.println(" " + "name: " + employee.getEmployeeName());
+            index += 1;
         }
     }
 
