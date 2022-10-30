@@ -37,6 +37,8 @@ public class RecipeList {
 
     public static void editRecipe(int index, Recipe newRecipe) {
         recipes.set(index, newRecipe);
+        String recipeFileSourcePath = Storage.RECIPES_FOLDER_PATH + "/" + newRecipe.getTitle();
+        Storage.saveRecipe(newRecipe, recipeFileSourcePath);
     }
 
     public static Recipe getRecipeFromTitle(String recipeTitle) {

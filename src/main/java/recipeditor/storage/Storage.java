@@ -140,8 +140,15 @@ public class Storage {
         }
     }
 
-    public static void saveRecipe(Recipe recipe, String filePath) {
-
+    public static void saveRecipe(Recipe recipe, String recipeFileDestinationPath) {
+        try {
+            FileWriter fw = new FileWriter(recipeFileDestinationPath);
+            fw.write(recipe.getRecipeSaveableFormatted() + "\n");
+            fw.close();
+            logger.log(Level.INFO, recipe.getTitle() + " saved to the file.");
+        } catch (IOException ioException) {
+            Ui.showMessage("Error in saving recipe to data file");
+        }
     }
 
     private static void templateFile() {
