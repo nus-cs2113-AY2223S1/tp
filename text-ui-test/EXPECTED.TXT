@@ -140,43 +140,43 @@ Parameters information: -NIL-
 
 ____________________________________________________________
 ____________________________________________________________
-Not supported tag(s) detected, please check your input!
+Not supported tag(s) detected, please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
-Not supported tag(s) detected, please check your input!
+Not supported tag(s) detected, please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
-Not supported tag(s) detected, please check your input!
+Not supported tag(s) detected, please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
-Parameter behind tag(s) is found to be empty, please check your input!
+Parameter behind tag(s) is found to be empty, please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
-Duplicate tag(s) detected, please check your input!
+Duplicate tag(s) detected, please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
-Mandatory tag(s) missing, please check your input!
+Mandatory tag(s) missing, please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
-Mandatory tag(s) missing, please check your input!
+Mandatory tag(s) missing, please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
-Parameter behind tag(s) is found to be empty, please check your input!
+Parameter behind tag(s) is found to be empty, please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
-Mandatory tag(s) missing, please check your input!
+Mandatory tag(s) missing, please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
-Invalid budget amount, please ensure your amount is in positive whole number of valid range only!
+Invalid budget amount! (Note: Budget must be a positive integer of valid range) Please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
-Invalid budget amount, please ensure your amount is in positive whole number of valid range only!
+Invalid budget amount! (Note: Budget must be a positive integer of valid range) Please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
-Invalid budget amount, please ensure your amount is in positive whole number of valid range only!
+Invalid budget amount! (Note: Budget must be a positive integer of valid range) Please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
-Invalid budget amount, please ensure your amount is in positive whole number of valid range only!
+Invalid budget amount! (Note: Budget must be a positive integer of valid range) Please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
 You have successfully updated the budget.
@@ -185,25 +185,25 @@ Budget remained for current month: $10000
 REMINDER: Continue to stay within your budget for this month! Good fortune!
 ____________________________________________________________
 ____________________________________________________________
-Mandatory tag(s) missing, please check your input!
+Mandatory tag(s) missing, please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
-Mandatory tag(s) missing, please check your input!
+Mandatory tag(s) missing, please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
-Mandatory tag(s) missing, please check your input!
+Mandatory tag(s) missing, please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
-Parameter behind tag(s) is found to be empty, please check your input!
+Parameter behind tag(s) is found to be empty, please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
-Type of statistics given is invalid, please check your input!
+Type of statistics given is invalid, please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
-Not supported tag(s) detected, please check your input!
+Not supported tag(s) detected, please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
-Duplicate tag(s) detected, please check your input!
+Duplicate tag(s) detected, please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
 There are no statistics available yet for the given statistics type.
@@ -217,13 +217,13 @@ I have added the following Expense transaction:
 Budget remained for Sep 2022: $9980. Keep it up!
 ____________________________________________________________
 ____________________________________________________________
-Invalid amount, please ensure your amount is in positive whole number ($10000000 or less) only!
+Invalid amount! (Note: Amount must be positive integer, $10000000 or less only) Please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
-Invalid amount, please ensure your amount is in positive whole number ($10000000 or less) only!
+Invalid amount! (Note: Amount must be positive integer, $10000000 or less only) Please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
-Invalid amount, please ensure your amount is in positive whole number ($10000000 or less) only!
+Invalid amount! (Note: Amount must be positive integer, $10000000 or less only) Please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
 I have added the following Income transaction:
@@ -236,22 +236,22 @@ I have added the following Expense transaction:
 Budget remained for Oct 2022: $9999. Keep it up!
 ____________________________________________________________
 ____________________________________________________________
-Parameter behind tag(s) is found to be empty, please check your input!
+Parameter behind tag(s) is found to be empty, please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
-Parameter behind tag(s) is found to be empty, please check your input!
+Parameter behind tag(s) is found to be empty, please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
-Parameter behind tag(s) is found to be empty, please check your input!
+Parameter behind tag(s) is found to be empty, please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
-Parameter behind tag(s) is found to be empty, please check your input!
+Parameter behind tag(s) is found to be empty, please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
-Parameter behind tag(s) is found to be empty, please check your input!
+Parameter behind tag(s) is found to be empty, please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
-Duplicate tag(s) detected, please check your input!
+Duplicate tag(s) detected, please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
 I have added the following Expense transaction:
@@ -259,16 +259,16 @@ I have added the following Expense transaction:
 Budget exceeded for Oct 2022: $1. Consider spending less!
 ____________________________________________________________
 ____________________________________________________________
-Not supported tag(s) detected, please check your input!
+Not supported tag(s) detected, please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
-Parameter behind tag(s) is found to be empty, please check your input!
+Parameter behind tag(s) is found to be empty, please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
-Not supported tag(s) detected, please check your input!
+Not supported tag(s) detected, please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
-Type of transaction given is invalid, please check your input!
+Type of transaction given is invalid, please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
 Here are your transaction records:
@@ -291,7 +291,7 @@ Here are your transaction records:
 
 ____________________________________________________________
 ____________________________________________________________
-Parameter behind tag(s) is found to be empty, please check your input!
+Parameter behind tag(s) is found to be empty, please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
 Here are your transaction records:
@@ -348,7 +348,7 @@ Expense: $10001
 Savings: $-10001
 ____________________________________________________________
 ____________________________________________________________
-Month tag must be accompanied by a year tag, please check your input!
+Month tag must be accompanied by a year tag, please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
 Here are the categorical savings and monthly time insights for
@@ -376,16 +376,16 @@ Expense: $20
 Savings: $1980
 ____________________________________________________________
 ____________________________________________________________
-Type of period given is invalid, please check your input!
+Type of period given is invalid, please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
-Period and number tags must be provided together, please check your input!
+Period and number tags must be provided together, please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
-Period and number tags must be provided together, please check your input!
+Period and number tags must be provided together, please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
-Keyword(s) for your search expression missing, please check your input!
+Keyword(s) for your search expression missing, please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
 Here are the transaction records that match your search expression:
@@ -405,7 +405,7 @@ Here are your transaction records:
 
 ____________________________________________________________
 ____________________________________________________________
-Mandatory tag(s) missing, please check your input!
+Mandatory tag(s) missing, please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
 I have added the following Income transaction:
@@ -413,28 +413,28 @@ I have added the following Income transaction:
 Budget exceeded for Oct 2022: $1. Consider spending less!
 ____________________________________________________________
 ____________________________________________________________
-Type of transaction given is invalid, please check your input!
+Type of transaction given is invalid, please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
-Invalid category, please ensure your category is correct!
+Invalid category, please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
-Invalid amount, please ensure your amount is in positive whole number ($10000000 or less) only!
+Invalid amount! (Note: Amount must be positive integer, $10000000 or less only) Please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
-Invalid amount, please ensure your amount is in positive whole number ($10000000 or less) only!
+Invalid amount! (Note: Amount must be positive integer, $10000000 or less only) Please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
-Invalid amount, please ensure your amount is in positive whole number ($10000000 or less) only!
+Invalid amount! (Note: Amount must be positive integer, $10000000 or less only) Please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
-Invalid date, please ensure your date format is correct!
+Invalid date, please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
-Invalid date, please ensure your date format is correct!
+Invalid date, please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
-Mandatory tag(s) missing, please check your input!
+Mandatory tag(s) missing, please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
 Here are your transaction records:
@@ -458,10 +458,10 @@ Budget remained for current month: $9999999989999
 REMINDER: Continue to stay within your budget for this month! Good fortune!
 ____________________________________________________________
 ____________________________________________________________
-Invalid budget amount, please ensure your amount is in positive whole number of valid range only!
+Invalid budget amount! (Note: Budget must be a positive integer of valid range) Please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
-Mandatory tag(s) missing, please check your input!
+Mandatory tag(s) missing, please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
 I have deleted the following transaction:
@@ -477,10 +477,10 @@ Here are your transaction records:
 
 ____________________________________________________________
 ____________________________________________________________
-Invalid index, please ensure your index is correct!
+Invalid index, please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
-Invalid index, please ensure your index is correct!
+Invalid index, please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
 I have deleted the following transaction:
@@ -499,13 +499,13 @@ Here are your transaction records:
 
 ____________________________________________________________
 ____________________________________________________________
-Not supported tag(s) detected, please check your input!
+Not supported tag(s) detected, please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
-Not supported tag(s) detected, please check your input!
+Not supported tag(s) detected, please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
-Not supported tag(s) detected, please check your input!
+Not supported tag(s) detected, please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
 Are you sure you want to proceed with this command? Please enter 'Y' to confirm.
@@ -549,10 +549,10 @@ I have added the following Expense transaction:
 Budget remained for Oct 2022: $9999999999999. Keep it up!
 ____________________________________________________________
 ____________________________________________________________
-Not supported tag(s) detected, please check your input!
+Not supported tag(s) detected, please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
-Not supported tag(s) detected, please check your input!
+Not supported tag(s) detected, please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
 Goodbye and see you soon.
