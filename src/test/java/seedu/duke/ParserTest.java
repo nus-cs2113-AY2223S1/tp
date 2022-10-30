@@ -26,44 +26,44 @@ class ParserTest {
         assertArrayEquals(expected, ps.getCommandWord(testCommand));
     }
 
-    @Test
-    void executeFindTestPositive() {
-        addTestMovie();
+    // @Test
+    // void executeFindTestPositive() {
+    //     addTestMovie();
         
-        // sets outContent to capture any would-be console output
-        // Only AFTER test Movie has been added to test list.
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
+    //     // sets outContent to capture any would-be console output
+    //     // Only AFTER test Movie has been added to test list.
+    //     ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    //     System.setOut(new PrintStream(outContent));
         
-        String[] findArray = new String[]{"find","inc"};
-        ps.executeFind(findArray);
+    //     String[] findArray = new String[]{"find","inc"};
+    //     ps.executeFind(findArray);
         
-        String expected = "---Here are the reviews that match the keyword---" 
-            + "\n\nMovies:"
-            + "\n1. [Movie]  inception2  Rating:10.0 Genre: thriller Date watched:10-01-2020" 
-            + "\n\nTV Shows:\n"
-            .replaceAll("\\n", System.getProperty("line.separator"));
+    //     String expected = "---Here are the reviews that match the keyword---" 
+    //         + "\n\nMovies:"
+    //         + "\n1. [Movie]  inception2  Rating:10.0 Genre: thriller Date watched:10-01-2020" 
+    //         + "\n\nTV Shows:\n"
+    //         .replaceAll("\\n", System.getProperty("line.separator"));
 
-        assertEquals(expected, outContent.toString());
-    }
+    //     assertEquals(expected, outContent.toString());
+    // }
 
-    @Test
-    void executeFindTestNegative() {
-        addTestMovie();
+    // @Test
+    // void executeFindTestNegative() {
+    //     addTestMovie();
         
-        // sets outContent to capture any would-be console output
-        // Only AFTER test Movie has been added to test list.
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
+    //     // sets outContent to capture any would-be console output
+    //     // Only AFTER test Movie has been added to test list.
+    //     ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    //     System.setOut(new PrintStream(outContent));
         
-        String[] findArray = new String[]{"find","in2"};
-        ps.executeFind(findArray);
+    //     String[] findArray = new String[]{"find","in2"};
+    //     ps.executeFind(findArray);
         
-        String expected = "---Here are the reviews that match the keyword---" 
-            + "\n\nMovies:"
-            + "\n\nTV Shows:\n"
-            .replaceAll("\\n", System.getProperty("line.separator"));
+    //     String expected = "---Here are the reviews that match the keyword---" 
+    //         + "\n\nMovies:"
+    //         + "\n\nTV Shows:\n"
+    //         .replaceAll("\\n", System.getProperty("line.separator"));
 
-        assertEquals(expected, outContent.toString());
-    }
+    //     assertEquals(expected, outContent.toString());
+    // }
 }
