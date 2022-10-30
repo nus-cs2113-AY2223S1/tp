@@ -26,7 +26,7 @@ public class TextFileParser {
             + "Please indicate fraction in number as well.\nExample: 12, 0.1, 0.5 (for half)";
 
     private static final String INGREDIENT_ERROR_INDEX_INCREMENT = "INGREDIENT index increment is incorrect! "
-            + "Index starts from 1";
+        + "Index starts from 1";
     private static final String STEP_ERROR_FORMAT = "STEP format is incorrect!\nFORMAT: index. step_description";
     private static final String STEP_ERROR_INDEX = "STEP index must be a positive integer!";
     private static final String STEP_ERROR_INDEX_INCREMENT = "STEP index increment is incorrect! Index starts "
@@ -44,7 +44,7 @@ public class TextFileParser {
         String[] parsedLine = text.split("\n");
         LineType lineType;
         LineType stage = LineType.NORMAL;
-        int[] stageCounter = {0,0,0,0};
+        int[] stageCounter = {0, 0, 0, 0};
 
 
         String descriptionBlock = "";
@@ -58,7 +58,7 @@ public class TextFileParser {
             if (line.isBlank()) {   //Ignore Blank lines
                 continue;
             }
-            lineType = checkLineType(line,stageCounter);
+            lineType = checkLineType(line, stageCounter);
             if (!lineType.equals(LineType.NORMAL)) {
                 stage = lineType;
             } else {
@@ -85,21 +85,21 @@ public class TextFileParser {
             }
         }
         checkAllStages(stageCounter);
-        if(recipe.isNotRecipeValid()){
+        if (recipe.isNotRecipeValid()) {
             throw new ParseFileException(EMPTY);
         }
         return recipe;
     }
 
-    private void checkAllStages(int[] stageCounter) throws ParseFileException{
-        for (int j : stageCounter){
-            if (j != 1){
+    private void checkAllStages(int[] stageCounter) throws ParseFileException {
+        for (int j : stageCounter) {
+            if (j != 1) {
                 throw new ParseFileException(HEADING_OCCURRENCE);
             }
         }
     }
 
-    private LineType checkLineType(String line,int[] stageCounter) throws ParseFileException {
+    private LineType checkLineType(String line, int[] stageCounter) throws ParseFileException {
         String[] parsedWords = line.split(" ");
         if (parsedWords[0].equals("#")) {
             switch (parsedWords[1].toLowerCase()) {
@@ -124,12 +124,13 @@ public class TextFileParser {
 
     }
 
-    private void incrementStageCounterAt(int[] array, int j) throws ParseFileException{
+    private void incrementStageCounterAt(int[] array, int j) throws ParseFileException {
         array[j]++;
-        if (array[j] == 2){
+        if (array[j] == 2) {
             throw new ParseFileException(HEADING_OCCURRENCE);
         }
     }
+
     private String parsedTitle(String line) throws ParseFileException {
         String trimmedLine = line.trim();
         String[] parsed = line.split(" ");
@@ -144,9 +145,9 @@ public class TextFileParser {
 
     private String parsedDescription(String line, Recipe recipe, int counter) {
         String trimmedLine = line.trim();
-        if (counter ==0){
+        if (counter == 0) {
             return trimmedLine;
-        } else{
+        } else {
             return recipe.getDescription() + "\n" + trimmedLine;
         }
     }
@@ -195,10 +196,11 @@ public class TextFileParser {
     private boolean isNotPositive(int index) {
         return (index <= 0);
     }
+
     private boolean isNotPositive(double number) {
         return (number <= 0);
     }
-    
+
 
     private boolean isTitleNotAlphanumeric(String[] parsed) {
         for (String word : parsed) {
@@ -225,7 +227,7 @@ public class TextFileParser {
     private Double ingredientParsedAmount(String parsed) throws ParseFileException {
         try {
             Double amount = Double.parseDouble(parsed);
-            if(isNotPositive(amount)){
+            if (isNotPositive(amount)) {
                 throw new ParseFileException(INGREDIENT_ERROR_AMOUNT);
             }
             return amount;

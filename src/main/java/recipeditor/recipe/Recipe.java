@@ -6,11 +6,11 @@ import java.util.logging.Logger;
 import java.util.logging.Level;
 
 public class Recipe {
+    private final ArrayList<Ingredient> ingredients;
+    private final ArrayList<String> steps;
+    private final Logger logger = Logger.getLogger("LOGS");
     private String title = "";
     private String description = "";
-    private ArrayList<Ingredient> ingredients;
-    private ArrayList<String> steps;
-    private Logger logger = Logger.getLogger("LOGS");
 
     public Recipe(String title, String description) {
         this.title = title;
@@ -116,8 +116,8 @@ public class Recipe {
         StringBuilder recipeIngredientStringFormatted = new StringBuilder();
         for (int i = 0; i < ingredients.size(); i++) {
             Ingredient ingredient = ingredients.get(i);
-            String textShown = String.format("%s. %s / %s / %s %n",
-                    i + 1, ingredient.getName(), ingredient.getAmount(), ingredient.getUnit().trim());
+            String textShown = String.format("%s. %s / %s / %s %n", i
+                    + 1, ingredient.getName(), ingredient.getAmount(), ingredient.getUnit().trim());
             recipeIngredientStringFormatted.append(textShown);
         }
         logger.log(Level.INFO, "Get ingredients in" + title);
@@ -135,17 +135,17 @@ public class Recipe {
     }
 
     public String getRecipeAttributesFormatted() {
-        StringBuilder recipeAttributesStringFormatted = new StringBuilder();
-        recipeAttributesStringFormatted.append("Recipe Title: " + title + "\n\n");
-        recipeAttributesStringFormatted.append("Recipe Description: " + description.trim() + "\n\n");
-        recipeAttributesStringFormatted.append("Recipe Ingredients: " + "\n"
-                + getIngredientAttributesFormatted() + "\n");
-        recipeAttributesStringFormatted.append("Recipe Steps: " + getStepAttributesFormatted() + "\n\n");
+        String recipeAttributesStringFormatted = "Recipe Title: "
+                + title + "\n\n" + "Recipe Description: "
+                + description.trim() + "\n\n" + "Recipe Ingredients: "
+                + "\n" + getIngredientAttributesFormatted() + "\n" + "Recipe Steps: "
+                + getStepAttributesFormatted() + "\n\n";
         logger.log(Level.INFO, "Get attributes of " + title);
-        return recipeAttributesStringFormatted.toString();
+        return recipeAttributesStringFormatted;
     }
 
-    public boolean isNotRecipeValid(){
-        return (this.getTitle().isBlank() || this.getDescription().isBlank() || this.getIngredients().isEmpty() || this.getSteps().isEmpty());
+    public boolean isNotRecipeValid() {
+        return (this.getTitle().isBlank() || this.getDescription().isBlank() || this.getIngredients().isEmpty()
+                || this.getSteps().isEmpty());
     }
 }

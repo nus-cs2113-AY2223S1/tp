@@ -8,7 +8,10 @@ public class InvalidCommand extends Command {
 
     public InvalidCommand(String message) {
         this.message = message;
+    }
 
+    public InvalidCommand() {
+        this.message = INVALID_MESSAGE;
     }
 
     public CommandResult execute() {
