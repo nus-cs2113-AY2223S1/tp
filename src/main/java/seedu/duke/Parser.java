@@ -24,7 +24,7 @@ public class Parser {
     private ReviewList mediaList;
 
     //@@author naz019
-    private static Logger logger = Logger.getLogger("ParserClass");
+    private static Logger logger = Logger.getLogger("DukeLogger");
 
     public Parser(ReviewList reviewList) {
         this.mediaList = reviewList;

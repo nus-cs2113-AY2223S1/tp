@@ -9,7 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Media {
-    private final Logger logger = Logger.getLogger("mediaLog");
+    private final Logger logger = Logger.getLogger("DukeLogger");
     public String title;
     public double rating;
     public String genre;
