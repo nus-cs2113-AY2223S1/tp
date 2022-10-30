@@ -29,7 +29,17 @@ information quickly with minimal latency.
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed. 
-2. Download the latest version of `Property Rental Manager` from [here](http://link.to/duke).
+2. Download the latest version of `PropertyRentalManager.jar` from [here](https://github.com/AY2223S1-CS2113-F11-1/tp/releases).
+3. Put the JAR file into an empty folder.
+4. Open a command window and change the current working directory to the directory that the JAR file is located in using
+   following command:
+```
+cd [PATH_TO_JAR_DIRECTORY]
+```
+5. Run Property Rental Manager
+```
+java -jar PropertyRentalManager.jar
+```
 
 ## Features 
 
@@ -104,7 +114,11 @@ Lastly, for valid `PRICE`, a positive number excluding any letters/symbols/space
 ---
 
 ### Delete Property: `delete -property`
+Deletes the specified property from the property list and subsequently deletes any pairings involving that property.
 
+<u>Format:</u> `delete -property ip/PROPERTY_INDEX`
+
+<u>Example:</u> `delete -property ip/2`
 
 ### List Properties: `list -property`
 Lists all properties present in the list
@@ -120,9 +134,9 @@ Lists only selected details of all the properties, depending on the TAG. The com
 ### Check Property: `check -property`
 Displays the information of the specified property, along with the clients the property is being rented by, if any.
 
-<u>Format</u>: `check ip/PROPERTY_INDEX`
+<u>Format</u>: `check -property ip/PROPERTY_INDEX`
 
-<u>Example</u>: `check ip/2`
+<u>Example</u>: `check -property ip/2`
 
 ---
 
@@ -153,6 +167,11 @@ For valid `BUDGET_MONTH`, a positive number excluding any letters/symbols/spaces
 ---
 
 ### Delete Client: `delete -client`
+Deletes the specified client from the client list and subsequently deletes any pairings involving that client.
+
+<u>Format:</u> `delete -client ic/CLIENT_INDEX`
+
+<u>Example:</u> `delete -client ic/3`
 
 ### List Clients: `list -client`
 Lists all the clients present in the list
@@ -167,9 +186,9 @@ List only selected details of all the clients, depending on TAG. The commands fo
 ### Check Client: `check -client`
 Displays the information of the specified client, along with the property the client is renting, if any.
 
-<u>Format</u>: `check ic/CLIENT_INDEX`
+<u>Format</u>: `check -client ic/CLIENT_INDEX`
 
-<u>Example</u>: `check ic/5`
+<u>Example</u>: `check -client ic/5`
 
 ### Pair Client and Property: `pair`
 Pairs the client to the specified property, to record that the client is renting the property.

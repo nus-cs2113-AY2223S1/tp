@@ -1,4 +1,4 @@
-package seedu.duke.command;
+package seedu.duke.command.check;
 
 import seedu.duke.Client;
 import seedu.duke.ClientList;
@@ -16,6 +16,7 @@ public class CommandCheckClient extends CommandCheck {
 
     /**
      * Constructs an instance of CommandCheckProperty.
+     *
      * @param commandCheckClientDetails Parsed property index from the user's input.
      */
     public CommandCheckClient(ArrayList<Integer> commandCheckClientDetails) {
@@ -30,7 +31,16 @@ public class CommandCheckClient extends CommandCheck {
                         PairingList pairingList) {
         Client client = clientList.getClientList().get(clientIndex);
         HashMap<Client, Property> clientPropertyPairs = pairingList.getClientPropertyPairs();
-        Property rentedProperty = clientPropertyPairs.get(client);
-        ui.showCheckClient(client, rentedProperty);
+        boolean isPaired = checkForPairedProperties(clientPropertyPairs, client);
+        if (isPaired) {
+            Property rentedProperty = clientPropertyPairs.get(client);
+            ui.showCheckClient(client, rentedProperty);
+        } else {
+            ui.showCheckClientNoPair(client);
+        }
+    }
+
+    protected boolean checkForPairedProperties(HashMap<Client, Property> clientPropertyPairs, Client client) {
+        return clientPropertyPairs.containsKey(client);
     }
 }

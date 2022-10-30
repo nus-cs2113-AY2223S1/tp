@@ -4,10 +4,10 @@ package seedu.duke.parsermanager;
 import seedu.duke.ClientList;
 import seedu.duke.PairingList;
 import seedu.duke.PropertyList;
-import seedu.duke.exception.ClientAlreadyPairedException;
+import seedu.duke.exception.pairunpair.pair.ClientAlreadyPairedException;
 import seedu.duke.exception.DukeParseException;
-import seedu.duke.exception.ExistingPairException;
-import seedu.duke.exception.NoExistingPairException;
+import seedu.duke.exception.pairunpair.pair.ExistingPairException;
+import seedu.duke.exception.pairunpair.unpair.NoExistingPairException;
 import seedu.duke.exception.UndefinedSubCommandTypeException;
 
 import java.util.ArrayList;
@@ -23,6 +23,8 @@ import static seedu.duke.CommandStructure.COMMAND_UNPAIR;
 import static seedu.duke.CommandStructure.EVERYTHING_FLAG;
 import static seedu.duke.CommandStructure.PROPERTY_FLAG;
 import static seedu.duke.CommandStructure.CLIENT_FLAG;
+import static seedu.duke.Messages.MESSAGE_CHECK_CLIENT_WRONG_FORMAT;
+import static seedu.duke.Messages.MESSAGE_CHECK_PROPERTY_WRONG_FORMAT;
 import static seedu.duke.Messages.MESSAGE_INCORRECT_LIST_DETAILS;
 import static seedu.duke.Messages.MESSAGE_MISSING_SUB_COMMAND_TYPE;
 
@@ -86,9 +88,9 @@ public class ParserManager {
                 throw new UndefinedSubCommandTypeException(MESSAGE_MISSING_SUB_COMMAND_TYPE);
             }
         case COMMAND_PAIR:
-            return new ParsePair(commandDetail, clientList, propertyList, pairingList);
+            return new ParsePair(commandDetail);
         case COMMAND_UNPAIR:
-            return new ParseUnpair(commandDetail, clientList, propertyList, pairingList);
+            return new ParseUnpair(commandDetail);
         case COMMAND_CHECK:
             ArrayList<String> processedCheckCommandDetail = splitCommandAndCommandType(commandDetail);
             String subCheckCommandType = processedCheckCommandDetail.get(SUB_COMMAND_INDEX);
@@ -99,9 +101,10 @@ public class ParserManager {
             if (isClient) {
                 return new ParseCheckClient(commandDetail, clientList);
             } else if (isProperty) {
-                return new ParseCheckProperty(commandDetail, propertyList);
+                return new ParseCheckProperty(commandDetail);
             } else {
-                throw new UndefinedSubCommandTypeException(MESSAGE_MISSING_SUB_COMMAND_TYPE);
+                throw new UndefinedSubCommandTypeException(MESSAGE_CHECK_CLIENT_WRONG_FORMAT
+                        + MESSAGE_CHECK_PROPERTY_WRONG_FORMAT);
             }
         case COMMAND_LIST:
             ArrayList<String> listCommandTypeAndFlags = getListCommandType(commandDetail);
