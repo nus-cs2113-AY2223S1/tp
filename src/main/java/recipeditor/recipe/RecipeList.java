@@ -6,8 +6,8 @@ import recipeditor.storage.Storage;
 import java.util.ArrayList;
 
 public class RecipeList {
-    private static ArrayList<Recipe> recipes = new ArrayList<>();
     public static ArrayList<String> recipeTitles = new ArrayList<>();
+    private static ArrayList<Recipe> recipes = new ArrayList<>();
 
     private RecipeList(ArrayList<Recipe> load) {
         recipes = new ArrayList<>();
@@ -46,6 +46,10 @@ public class RecipeList {
             }
         }
         return null;
+    }
+
+    public static String getTitleFromIndex(int index) {
+        return getRecipe(index).getTitle();
     }
 
     public static int getRecipeIndexFromTitle(String recipeTitle) {
