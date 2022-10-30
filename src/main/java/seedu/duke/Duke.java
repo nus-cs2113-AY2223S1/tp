@@ -43,7 +43,6 @@ public class Duke {
     }
 
     private static void setupLogger() {
-
         LogManager.getLogManager().reset();
         lg.setLevel(Level.ALL);
 

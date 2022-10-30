@@ -12,6 +12,7 @@ class UiTest {
 
     @Test
     void greetUserTest() {
+        // sets outContent to capture any would-be console output
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
         
