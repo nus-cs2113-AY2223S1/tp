@@ -174,4 +174,8 @@ public class UI {
         System.out.println("The number of MCs is invalid (0 < mcs <= 20). Please try again!");
     }
 
+    public static void invalidGradeMessage() {
+        System.out.println("Invalid grade. Please try again!");
+    }
+
 }
