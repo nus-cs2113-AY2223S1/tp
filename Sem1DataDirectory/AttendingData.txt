@@ -1,9 +1,0 @@
-ACC1701X|Tutorial|Tuesday|1200|1300|"X03"
-ACC1701X|Lecture|Undetermined Day|Undetermined|Undetermined|NA
-ES2631|Sectional Teaching|Friday|0800|1000|"G21"
-CS2113|Tutorial|Thursday|1700|1800|"5"
-CS2113|Lecture|Undetermined Day|Undetermined|Undetermined|NA
-GES1005|Tutorial|Thursday|1400|1600|"D5"
-GES1005|Lecture|Undetermined Day|Undetermined|Undetermined|NA
-EE2012|Tutorial|Tuesday|1200|1300|"01"
-EE2012|Lecture|Undetermined Day|Undetermined|Undetermined|NA
