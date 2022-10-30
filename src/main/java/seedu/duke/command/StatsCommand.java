@@ -32,9 +32,10 @@ import static seedu.duke.common.InfoMessages.DOLLAR_SIGN;
 import static seedu.duke.common.InfoMessages.INFO_EXPENSE;
 import static seedu.duke.common.InfoMessages.INFO_INCOME;
 import static seedu.duke.common.InfoMessages.INFO_SAVINGS;
+import static seedu.duke.common.InfoMessages.INFO_STATS_CATEGORY;
 import static seedu.duke.common.InfoMessages.INFO_STATS_EMPTY;
 import static seedu.duke.common.InfoMessages.INFO_STATS_EXPENDITURE_HEADER;
-import static seedu.duke.common.InfoMessages.INFO_STATS_GENERIC;
+import static seedu.duke.common.InfoMessages.INFO_STATS_MONTHLY;
 import static seedu.duke.common.InfoMessages.INFO_STATS_TIME_INSIGHTS;
 import static seedu.duke.common.InfoMessages.LINE_SEPARATOR;
 
@@ -177,7 +178,12 @@ public class StatsCommand extends ListAndStatsCommand {
         assert !genericStatsList.isEmpty();
         statsLogger.log(Level.INFO, "Generic stats list has info available for categorical savings or "
                 + "monthly expenditure.");
-        Ui.showList(genericStatsList, String.format(INFO_STATS_GENERIC.toString(), statsType));
+
+        if (statsType.equals(CATEGORICAL_SAVINGS)) {
+            Ui.showList(genericStatsList, String.format(INFO_STATS_CATEGORY.toString()));
+        } else {
+            Ui.showList(genericStatsList, String.format(INFO_STATS_MONTHLY.toString()));
+        }
     }
 
     //@@author paullowse
