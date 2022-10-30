@@ -120,9 +120,9 @@ Lists only selected details of all the properties, depending on the TAG. The com
 ### Check Property: `check -property`
 Displays the information of the specified property, along with the clients the property is being rented by, if any.
 
-<u>Format</u>: `check ip/PROPERTY_INDEX`
+<u>Format</u>: `check -property ip/PROPERTY_INDEX`
 
-<u>Example</u>: `check ip/2`
+<u>Example</u>: `check -property ip/2`
 
 ---
 
@@ -167,9 +167,9 @@ List only selected details of all the clients, depending on TAG. The commands fo
 ### Check Client: `check -client`
 Displays the information of the specified client, along with the property the client is renting, if any.
 
-<u>Format</u>: `check ic/CLIENT_INDEX`
+<u>Format</u>: `check -client ic/CLIENT_INDEX`
 
-<u>Example</u>: `check ic/5`
+<u>Example</u>: `check -client ic/5`
 
 ### Pair Client and Property: `pair`
 Pairs the client to the specified property, to record that the client is renting the property.
