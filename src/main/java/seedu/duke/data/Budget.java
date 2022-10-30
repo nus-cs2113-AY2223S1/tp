@@ -16,6 +16,11 @@ import static seedu.duke.common.InfoMessages.DOLLAR_SIGN;
 import static seedu.duke.common.InfoMessages.COLON_SPACE;
 import static seedu.duke.common.InfoMessages.FULL_STOP_SPACE;
 import static seedu.duke.common.InfoMessages.LINE_SEPARATOR;
+import static seedu.duke.common.InfoMessages.INFO_SAVING_TIPS_AND_BUDGET_ADVICE_SEPARATOR;
+import static seedu.duke.common.InfoMessages.INFO_BUDGET_EXCEEDED_ADVICE_HIGH;
+import static seedu.duke.common.InfoMessages.INFO_BUDGET_EXCEEDED_ADVICE_LOW;
+import static seedu.duke.common.InfoMessages.INFO_BUDGET_NOT_EXCEEDED_ADVICE_HIGH;
+import static seedu.duke.common.InfoMessages.INFO_BUDGET_NOT_EXCEEDED_LOW;
 
 //@@author wcwy
 
@@ -96,7 +101,7 @@ public class Budget {
      * @param totalMonthlyExpense The long value representing the total sum of a monthly expense.
      * @return A long value representing the amount of budget left.
      */
-    private static long calculateBudgetLeft(long totalMonthlyExpense) {
+    public static long calculateBudgetLeft(long totalMonthlyExpense) {
         /*
             Since the maximum number of transaction is 1000000, maximum amount of expense is 10000000,
             and minimum is 1, the lowest possible budget left value is
@@ -123,7 +128,7 @@ public class Budget {
      * @param budgetLeft A long value indicating the difference of total monthly expense and monthly budget.
      * @return A boolean value indicating whether the budget has been exceeded for the month.
      */
-    private static boolean hasExceededBudget(long budgetLeft) {
+    public static boolean hasExceededBudget(long budgetLeft) {
         return budgetLeft < 0;
     }
 
@@ -150,6 +155,8 @@ public class Budget {
     /**
      * Retrieves a money managing tips based on whether budget has been exceeded.
      *
+     * <p>This method is used to provide a spending tips to the user on transaction list modification.
+     *
      * @param hasExceededBudget A boolean value indicating whether the budget has been exceeded for the month.
      * @return A string containing a money managing tips to the user.
      */
@@ -161,6 +168,14 @@ public class Budget {
         }
     }
 
+    /**
+     * Retrieves a money managing reminder based on whether budget has been exceeded.
+     *
+     * <p>This method is used to provide a reminder to the user on application starts.
+     *
+     * @param hasExceededBudget A boolean value indicating whether the budget has been exceeded for the month.
+     * @return A string containing a money managing reminder to the user.
+     */
     private static String generateBudgetReminder(boolean hasExceededBudget) {
         if (hasExceededBudget) {
             return INFO_BUDGET_EXCEEDED_REMINDER.toString();
@@ -168,6 +183,51 @@ public class Budget {
             return INFO_BUDGET_NOT_EXCEEDED_REMINDER.toString();
         }
 
+    }
+
+    /**
+     * Retrieves a money managing advices based on whether budget has been exceeded, and the proportion of the
+     * exceeding or remaining budget.
+     *
+     * <p>This method is used to provide advice to the user when viewing monthly statistics.
+     *
+     * @param budgetLeft        A long value indicating the difference of total monthly expense and monthly budget.
+     * @param hasExceededBudget A boolean value indicating whether the budget has been exceeded for the month.
+     * @return A string containing a money managing tips to the user.
+     */
+    public static String generateBudgetAdvice(long budgetLeft, boolean hasExceededBudget) {
+        // A string to separate the budget advice from saving tips for better logical flow
+        String message = INFO_SAVING_TIPS_AND_BUDGET_ADVICE_SEPARATOR.toString();
+
+        // Only used if budget has exceeded
+        boolean hasExceededBudgetMoreThanTwice = abs(budgetLeft) > budget * 2;
+
+        // Only used if budget has not exceeded
+        boolean hasLeftLessThanHalfOfBudget = budgetLeft * 2 < budget;
+
+        /*
+           A budget is said to have highly exceeded when the budget is exceeded more than twice of itself.
+           Otherwise, a budget is not highly exceeded.
+
+           A budget is said to have highly spent but within budget when the budget left is less than half of budget.
+           Otherwise, a budget is lowly spent and within budget.
+         */
+        if (hasExceededBudget && hasExceededBudgetMoreThanTwice) {
+            message += INFO_BUDGET_EXCEEDED_ADVICE_HIGH;
+        }
+
+        if (hasExceededBudget && !hasExceededBudgetMoreThanTwice) {
+            message += INFO_BUDGET_EXCEEDED_ADVICE_LOW;
+        }
+
+        if (!hasExceededBudget && hasLeftLessThanHalfOfBudget) {
+            message += INFO_BUDGET_NOT_EXCEEDED_ADVICE_HIGH;
+        }
+
+        if (!hasExceededBudget && !hasLeftLessThanHalfOfBudget) {
+            message += INFO_BUDGET_NOT_EXCEEDED_LOW;
+        }
+        return message;
     }
 
 

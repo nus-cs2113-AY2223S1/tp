@@ -19,9 +19,9 @@ import java.util.logging.Logger;
 public abstract class ListAndStatsCommand extends Command {
     //@@author chydarren
     private static final int UNDEFINED_PARAMETER = -1;
-    private static final int CONTAIN_BOTH = 1;
-    private static final int CONTAIN_EITHER = 2;
-    private static final int CONTAIN_EITHER_INVALID = 3;
+    public static final int CONTAIN_BOTH = 1;
+    public static final int CONTAIN_EITHER = 2;
+    public static final int CONTAIN_EITHER_INVALID = 3;
     private static final int FALSE = 0;
     private static final String WEEKS = "weeks";
     private static final String MONTHS = "months";

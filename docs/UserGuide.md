@@ -370,11 +370,11 @@ View the total amount sum of all transactions in each category.
 ```
 stats s/categorical_savings
 ____________________________________________________________
-Here are your requested statistics for the categorical_savings type:
+Here are your net categorical savings:
 [bonus] $540
-[transport] $11
+[transport] $-10
 [salary] $2000
-[food] $80
+[food] $-80
 
 ____________________________________________________________
 ```
@@ -391,18 +391,18 @@ View the total income, expense and savings values of all transactions in each mo
 ```
 stats s/monthly_expenditure
 ____________________________________________________________
-Here are your requested statistics for the monthly_expenditure type:
-[Sep 2022]
-Income: $2000
-Expense: $81
-Savings: $1919
-Spending Habit: Excellent! You saved quite a lot this month.
-
+Here are your requested monthly statistics:
 [Aug 2022]
 Income: $0
 Expense: $10
 Savings: $-10
 Spending Habit: Oops, you spent too much. Do manage your expenses within your constraints.
+
+[Sep 2022]
+Income: $2000
+Expense: $80
+Savings: $1920
+Spending Habit: Excellent! You saved quite a lot this month.
 
 [Oct 2022]
 Income: $540
@@ -425,19 +425,19 @@ View monthly expenditure, total income, expense and savings values of all transa
 ```
 stats s/time_insights y/2022
 ____________________________________________________________
-Here are the total savings and expenses for
+Here are the categorical savings and monthly time insights for
 Year: 2022
 
 -----CATEGORIES-----
 [bonus] $540
-[transport] $11
+[transport] $-10
 [salary] $2000
-[food] $80
+[food] $-80
 
 -----EXPENDITURE-----
 Income: $2540
-Expense: $91
-Savings: $2449
+Expense: $90
+Savings: $2450
 ____________________________________________________________
 ```
 
