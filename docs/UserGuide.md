@@ -5,9 +5,7 @@
 ## Introduction
 
 YAMOM is a lightweight, simplified Module Organizer and Manager application that provides simple and intuitive interface
-for timetable organization.
-
-YAMOM is designed for users who are proficient in Command Line Interface (CLI).
+for timetable organization. YAMOM is designed for users who are proficient in Command Line Interface (CLI). Module data in YAMOM is correct as of 1 Oct 2022. 
 
 ## Table of Contents
 
@@ -687,12 +685,12 @@ Alternatively, you can export the timetable, copy the link generated, and import
 | Remove a module                  | `remove [ MODULE_CODE ]`                                                                         | `remove CS2102`                                                       |
 | Exit application                 | `bye`                                                                                          | `bye`                                                                 |
 | Read more details about a module | `info [ MODULE_CODE ]`                                                                           | `info CS2103`                                                         |
-| Find module by keyword           | `search [ /code PARTIAL_MODULE_CODE \| /title KEYWORD ] < /level MODULE_LEVEL > < /sem SEMESTER >` | `search /code cs /level 2 /sem 1`                                     |
+| Find module by keyword           | `search [ /code PARTIAL_MODULE_CODE | /title KEYWORD ] < /level MODULE_LEVEL > < /sem SEMESTER >` | `search /code cs /level 2 /sem 1`                                     |
 | Seek help                        | `help`                                                                                         | `help`                                                                |
 | Import modules from NUSMods URL  | `import [ NUSMODS_LINK ]`                                                                                 | `import https://nusmods.com/timetable/sem-1/share?CS2113=LEC:1,TUT:4` |
 | Export modules to NUSMods URL    | `export`                                                                                       | `export`                                                              |
 | Change semester                  | `semester [ SEMESTER ]`                                                                          | `semester 2`                                                          |
-| View timetable                   | `timetable < /fancy \| /simple >`                                                      | `timetable`                                                    |
+| View timetable                   | `timetable < /fancy | /simple >`                                                      | `timetable`                                                    |
 | List selected modules            | `list`                                                                                         | `list`                                                                |
 | Add module timetable slot        | `select [ /module MODULE_CODE ] [ /type LESSON_TYPE ] [ /code CLASS_NO ]`                            | `select /module CS1010 /type tutorial /code 1`                        |
 
