@@ -17,18 +17,7 @@ import static seedu.duke.common.Constants.MAX_AMOUNT_VALUE;
 import static seedu.duke.common.Constants.MIN_AMOUNT_VALUE;
 import static seedu.duke.common.Constants.MAX_TRANSACTIONS_COUNT;
 import static seedu.duke.common.DateFormats.DATE_MONTH_PATTERN;
-import static seedu.duke.common.InfoMessages.LINE_SEPARATOR;
-import static seedu.duke.common.InfoMessages.DOLLAR_SIGN;
-import static seedu.duke.common.InfoMessages.COLON_SPACE;
-import static seedu.duke.common.InfoMessages.INFO_INCOME;
-import static seedu.duke.common.InfoMessages.INFO_EXPENSE;
-import static seedu.duke.common.InfoMessages.INFO_SAVINGS;
-import static seedu.duke.common.InfoMessages.INFO_STATS_CATEGORIES_HEADER;
-import static seedu.duke.common.InfoMessages.INFO_STATS_HABIT_VERY_LOW_SAVINGS;
-import static seedu.duke.common.InfoMessages.INFO_STATS_HABIT_LOW_SAVINGS;
-import static seedu.duke.common.InfoMessages.INFO_STATS_HABIT_MEDIUM_SAVINGS;
-import static seedu.duke.common.InfoMessages.INFO_STATS_HABIT_HIGH_SAVINGS;
-import static seedu.duke.common.InfoMessages.INFO_STATS_HABIT_VERY_HIGH_SAVINGS;
+import static seedu.duke.common.InfoMessages.*;
 
 
 //@@author chydarren
@@ -371,8 +360,15 @@ public class TransactionList {
                     entry.getValue()[1], LINE_SEPARATOR);
             monthlyExpenditureList += String.format("%s%s%s%s%s", INFO_SAVINGS, COLON_SPACE, DOLLAR_SIGN,
                     entry.getValue()[2], LINE_SEPARATOR);
-            monthlyExpenditureList += String.format("%s%s%s%s", "Spending Habit: ",
-                    getSpendingHabitComment(entry.getValue()[2], entry.getValue()[0]), LINE_SEPARATOR, LINE_SEPARATOR);
+            monthlyExpenditureList += String.format("%s%s%s%s%s", INFO_BUDGET, COLON_SPACE, DOLLAR_SIGN,
+                    Budget.getBudget(), LINE_SEPARATOR);
+            monthlyExpenditureList += String.format("%s%s%s", "Spending Habit: ",
+                    getSpendingHabitComment(entry.getValue()[2], entry.getValue()[0]), LINE_SEPARATOR);
+
+            // Information on budget is only displayed when displaying a specific month's time insights
+            long budgetLeft = Budget.calculateBudgetLeft(entry.getValue()[1]);
+            String budgetAdvice = Budget.generateBudgetAdvice(budgetLeft, Budget.hasExceededBudget(budgetLeft));
+            monthlyExpenditureList += String.format("%s%s%s", budgetAdvice, LINE_SEPARATOR, LINE_SEPARATOR);
         }
 
         return monthlyExpenditureList;
