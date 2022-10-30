@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
-import seedu.duke.Duke;
 import seedu.duke.Exceptions;
 import seedu.duke.UI;
 import seedu.duke.module.lessons.Lesson;
@@ -29,39 +28,39 @@ public class Nusmods {
     private final int moduleDescription = 2;
     private static final Logger lgr = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
-    private String setUri() {
+    private String setUri(String moduleCode) {
         boolean validUri = false;
         String mod = null;
         while (!validUri) {
             try {
-                if (UI.sc.hasNextLine()) {
-                    mod = UI.sc.nextLine().toUpperCase().trim();
-                }
+                mod = moduleCode.toUpperCase().trim();
                 new URL(baseUri + mod + ".json").toURI();
                 validUri = true;
             } catch (MalformedURLException | URISyntaxException e) {
-                System.out.println("Module not found, please try again.");;
+                System.out.println("Module not found, please try again.");
+                moduleCode = UI.getModuleCodeFromUser();
             }
         }
         assert mod != null : "URI creation failed, module code is invalid!";
         return baseUri + mod + ".json";
     }
 
-    private HttpResponse<String> getResponse() throws IOException, InterruptedException {
+    private HttpResponse<String> getResponse(String moduleCode) throws IOException, InterruptedException {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
                 .header("accept", "application/json")
-                .uri(URI.create(setUri()))
+                .uri(URI.create(setUri(moduleCode)))
                 .build();
         return client.send(request, HttpResponse.BodyHandlers.ofString());
     }
 
-    public String[] getModuleInfo() throws IOException, InterruptedException {
+    public String[] getModuleInfo(String moduleCode) throws IOException, InterruptedException {
         while (true) {
-            HttpResponse<String> response = getResponse();
+            HttpResponse<String> response = getResponse(moduleCode);
             if (response.statusCode() != 200) {
                 System.out.println("Module not found, please try again.");
+                moduleCode = UI.getModuleCodeFromUser();
             } else {
                 lgr.info("api call successful, module exists");
                 return retrieveBasicInfo(response.body());
@@ -79,12 +78,13 @@ public class Nusmods {
         return info;
     }
 
-    public List<Lesson> addModuleInfo(String currentSemester, String[] info)
-            throws IOException, InterruptedException, Exceptions.InvalidSemException, Exceptions.InvalidModuleCode {
+    public List<Lesson> addModuleInfo(String currentSemester, String[] info, String moduleCode)
+            throws IOException, InterruptedException, Exceptions.InvalidSemException,
+            Exceptions.InvalidModuleCodeException {
         while (true) {
-            HttpResponse<String> response = getResponse();
+            HttpResponse<String> response = getResponse(moduleCode);
             if (response.statusCode() != 200) {
-                throw new Exceptions.InvalidModuleCode();
+                throw new Exceptions.InvalidModuleCodeException();
             } else {
                 lgr.info("api call successful, module exists");
                 return addModuleComponents(response.body(), currentSemester, info);
@@ -104,7 +104,7 @@ public class Nusmods {
 
         JsonNode semData = node.get("semesterData");
         List<Lesson> lessons;
-        lessons = checkAllLessons(currentSemester, (ArrayNode) semData);
+        lessons = checkAllLessons(currentSemester, (ArrayNode) semData, info[moduleCode]);
 
         assert info[0] != null : "Module code must be filled and cannot be null";
         assert info[1] != null : "Module name must be filled and cannot be null";
@@ -113,7 +113,7 @@ public class Nusmods {
         return lessons;
     }
 
-    private static List<Lesson> checkAllLessons(String currentSemester, ArrayNode semData)
+    private static List<Lesson> checkAllLessons(String currentSemester, ArrayNode semData, String moduleCode)
             throws Exceptions.InvalidSemException {
         lgr.fine("attempting to add lessons data to module object");
 
@@ -125,7 +125,7 @@ public class Nusmods {
             isValidSemester = semData.get(arrayIndex).get("semester").toString().equals(currentSemester);
             if (isValidSemester) {
                 lgr.fine("module exists in selected semester");
-                lessons = findIndividualLessons(semData.get(arrayIndex).get("timetable"));
+                lessons = findIndividualLessons(semData.get(arrayIndex).get("timetable"), moduleCode);
                 break;
             }
             arrayIndex += 1;
@@ -136,7 +136,7 @@ public class Nusmods {
         return lessons;
     }
 
-    private static List<Lesson> findIndividualLessons(JsonNode currentNode) {
+    private static List<Lesson> findIndividualLessons(JsonNode currentNode, String moduleCode) {
         int arrayIndex = 0;
         List<Lesson> lessons = new ArrayList<>();
         while (currentNode.get(arrayIndex) != null) {
@@ -147,7 +147,7 @@ public class Nusmods {
             String lessonType = removeQuotes(lessonNode.get("lessonType").toString());
             String classNumber = lessonNode.get("classNo").toString();
 
-            lessons.add(new Lesson(day, startTime, endTime, lessonType, classNumber));
+            lessons.add(new Lesson(day, startTime, endTime, lessonType, classNumber, moduleCode));
             arrayIndex += 1;
         }
         lgr.fine("lessons are added, returning list of lesson data");

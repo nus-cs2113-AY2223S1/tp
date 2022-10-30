@@ -9,7 +9,9 @@ public class Exceptions {
     public static class InvalidTimeslotException extends Exception {
     }
 
-    public static class InvalidModuleCode extends Exception {
+    public static class InvalidModuleCodeException extends Exception {
     }
 
+    public static class FileLoadException extends Exception {
+    }
 }
