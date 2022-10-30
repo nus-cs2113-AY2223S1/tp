@@ -16,7 +16,8 @@ class UiTest {
         System.setOut(new PrintStream(outContent));
         
         ui.greetUser();
-        String greeting = "Welcome to your Movie Reviews bot,\n";
+        String greeting = "Welcome to your Movie Reviews bot,\n"
+            .replaceAll("\\n", System.getProperty("line.separator"));
 
         assertEquals(greeting, outContent.toString());
     }
