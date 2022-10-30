@@ -46,12 +46,13 @@ public class EmployeeParser {
     public Command prepareAddEmployee(String input) {
         try {
             int startOfN = input.indexOf(" n/");
-
             if (startOfN == -1 || !input.substring(0,startOfN).isEmpty()) {
                 throw new DukeException();
             }
-
             String name = input.substring(startOfN + lengthOfSignature);
+            if (name.equals("")) {
+                throw new DukeException();
+            }
             return new AddEmployeeCommand(name);
         } catch (DukeException e) {
             System.out.println("Sorry, format of parameters entered for adding an employee is invalid");
