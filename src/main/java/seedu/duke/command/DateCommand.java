@@ -2,6 +2,7 @@ package seedu.duke.command;
 
 import seedu.duke.Parser;
 import seedu.duke.Ui;
+import seedu.duke.records.Calories;
 import seedu.duke.records.Record;
 import seedu.duke.records.RecordList;
 import seedu.duke.records.biometrics.Biometrics;
@@ -51,6 +52,23 @@ public class DateCommand extends Command {
              * @return sorted array list by date.
              */
             public int compare(Exercise e1, Exercise e2) {
+                LocalDate o1Date = LocalDate.parse(Parser.getDateNoDateTracker(e1.getDate()),
+                        DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+                LocalDate o2Date = LocalDate.parse(Parser.getDateNoDateTracker(e2.getDate()),
+                        DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+                return o2Date.compareTo(o1Date);
+            }
+        });
+    }
+
+    public static void sortDateForCalories(ArrayList<Calories> list) {
+        Collections.sort(list, new Comparator<Calories>() {
+            /**
+             * This method compares two date strings.
+             *
+             * @return sorted array list by date.
+             */
+            public int compare(Calories e1, Calories e2) {
                 LocalDate o1Date = LocalDate.parse(Parser.getDateNoDateTracker(e1.getDate()),
                         DateTimeFormatter.ofPattern("dd-MM-yyyy"));
                 LocalDate o2Date = LocalDate.parse(Parser.getDateNoDateTracker(e2.getDate()),
