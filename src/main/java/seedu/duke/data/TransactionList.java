@@ -23,6 +23,7 @@ import static seedu.duke.common.InfoMessages.COLON_SPACE;
 import static seedu.duke.common.InfoMessages.INFO_INCOME;
 import static seedu.duke.common.InfoMessages.INFO_EXPENSE;
 import static seedu.duke.common.InfoMessages.INFO_SAVINGS;
+import static seedu.duke.common.InfoMessages.INFO_BUDGET;
 import static seedu.duke.common.InfoMessages.INFO_STATS_CATEGORIES_HEADER;
 import static seedu.duke.common.InfoMessages.INFO_STATS_HABIT_VERY_LOW_SAVINGS;
 import static seedu.duke.common.InfoMessages.INFO_STATS_HABIT_LOW_SAVINGS;
@@ -371,8 +372,15 @@ public class TransactionList {
                     entry.getValue()[1], LINE_SEPARATOR);
             monthlyExpenditureList += String.format("%s%s%s%s%s", INFO_SAVINGS, COLON_SPACE, DOLLAR_SIGN,
                     entry.getValue()[2], LINE_SEPARATOR);
-            monthlyExpenditureList += String.format("%s%s%s%s", "Spending Habit: ",
-                    getSpendingHabitComment(entry.getValue()[2], entry.getValue()[0]), LINE_SEPARATOR, LINE_SEPARATOR);
+            monthlyExpenditureList += String.format("%s%s%s%s%s", INFO_BUDGET, COLON_SPACE, DOLLAR_SIGN,
+                    Budget.getBudget(), LINE_SEPARATOR);
+            monthlyExpenditureList += String.format("%s%s%s", "Spending Habit: ",
+                    getSpendingHabitComment(entry.getValue()[2], entry.getValue()[0]), LINE_SEPARATOR);
+
+            // Information on budget is only displayed when displaying a specific month's time insights
+            long budgetLeft = Budget.calculateBudgetLeft(entry.getValue()[1]);
+            String budgetAdvice = Budget.generateBudgetAdvice(budgetLeft, Budget.hasExceededBudget(budgetLeft));
+            monthlyExpenditureList += String.format("%s%s%s", budgetAdvice, LINE_SEPARATOR, LINE_SEPARATOR);
         }
 
         return monthlyExpenditureList;

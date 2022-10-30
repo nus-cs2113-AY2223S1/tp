@@ -44,7 +44,7 @@ public enum ErrorMessages {
     ERROR_MAXIMUM_TRANSACTION_COUNT_REACHED("Unable to add transaction. "
             + "The maximum allowed transaction size (1000000) has been reached."),
 
-    ERROR_INVALID_BUDGET("Invalid budget amount! (Note: Budget must be a positive integer of valid range)"
+    ERROR_INVALID_BUDGET("Invalid budget amount! (Note: Budget must be a positive whole number of valid range)"
             + " Please enter <help> for the command guide."),
     ERROR_DUPLICATE_BUDGET("Provided budget is the same as the originally set value.");
 

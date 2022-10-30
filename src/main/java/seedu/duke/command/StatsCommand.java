@@ -4,6 +4,7 @@ package seedu.duke.command;
 
 import seedu.duke.Storage;
 import seedu.duke.Ui;
+import seedu.duke.data.Budget;
 import seedu.duke.data.TransactionList;
 import seedu.duke.data.transaction.Transaction;
 import seedu.duke.exception.GlobalMissingTagException;
@@ -32,6 +33,7 @@ import static seedu.duke.common.InfoMessages.DOLLAR_SIGN;
 import static seedu.duke.common.InfoMessages.INFO_EXPENSE;
 import static seedu.duke.common.InfoMessages.INFO_INCOME;
 import static seedu.duke.common.InfoMessages.INFO_SAVINGS;
+import static seedu.duke.common.InfoMessages.INFO_BUDGET;
 import static seedu.duke.common.InfoMessages.INFO_STATS_CATEGORY;
 import static seedu.duke.common.InfoMessages.INFO_STATS_EMPTY;
 import static seedu.duke.common.InfoMessages.INFO_STATS_EXPENDITURE_HEADER;
@@ -91,7 +93,7 @@ public class StatsCommand extends ListAndStatsCommand {
             COMMAND_TAG_GLOBAL_YEAR,
             COMMAND_TAG_GLOBAL_NUMBER,
             COMMAND_TAG_GLOBAL_PERIOD,
-        };
+            };
         return optionalTags;
     }
 
@@ -130,7 +132,7 @@ public class StatsCommand extends ListAndStatsCommand {
     /**
      * Lists the statistics depending on the type of statistics requested.
      *
-     * @param transactions  An instance of the TransactionList class.
+     * @param transactions An instance of the TransactionList class.
      * @throws MoolahException If the type of statistics is not recognised.
      */
     public void listStatsByStatsType(TransactionList transactions) throws MoolahException {
@@ -213,10 +215,39 @@ public class StatsCommand extends ListAndStatsCommand {
         String expensesMessage = String.format("%s%s%s", INFO_EXPENSE, COLON_SPACE, DOLLAR_SIGN) + amounts.get(1);
         String savingsMessage = String.format("%s%s%s", INFO_SAVINGS, COLON_SPACE, DOLLAR_SIGN) + amounts.get(2);
 
+        printTimeInsightsStatistics(timeInsightsList, amounts, incomeMessage, expensesMessage, savingsMessage);
+
         assert !timeInsightsList.isEmpty();
         statsLogger.log(Level.INFO, "Time insights list has info available for the specified time period.");
-        Ui.showTimeInsightsList(timeInsightsList, INFO_STATS_TIME_INSIGHTS.toString(), incomeMessage, expensesMessage,
-                savingsMessage);
+
+    }
+
+    /**
+     * Prints the statistics for time insights based on the parameters chosen.
+     *
+     * @param timeInsightsList A string message containing the categorical list statistics for the time chosen.
+     * @param amounts          An arraylist holding the statistics of the transaction for the time chosen.
+     * @param incomeMessage    A string containing the formatted income.
+     * @param expensesMessage  A string containing the formatted expense.
+     * @param savingsMessage   A string containing the formatted savings.
+     */
+    private static void printTimeInsightsStatistics(String timeInsightsList, ArrayList<String> amounts,
+            String incomeMessage, String expensesMessage, String savingsMessage) {
+
+        if (containMonthYear() == CONTAIN_BOTH) {
+            // Information on budget is only displayed when displaying a specific month's time insights
+            String budgetMessage = String.format("%s%s%s", INFO_BUDGET, COLON_SPACE, DOLLAR_SIGN) + Budget.getBudget();
+
+            long budgetLeft = Budget.calculateBudgetLeft(Long.parseLong(amounts.get(1)));
+            String budgetAdvice = Budget.generateBudgetAdvice(budgetLeft, Budget.hasExceededBudget(budgetLeft));
+
+            Ui.showTimeInsightsList(timeInsightsList, INFO_STATS_TIME_INSIGHTS.toString(), incomeMessage,
+                    expensesMessage, savingsMessage, budgetMessage, budgetAdvice);
+        } else {
+            //@@author paullowse
+            Ui.showTimeInsightsList(timeInsightsList, INFO_STATS_TIME_INSIGHTS.toString(), incomeMessage,
+                    expensesMessage, savingsMessage);
+        }
     }
 
     /**
