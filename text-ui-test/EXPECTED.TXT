@@ -17,14 +17,13 @@ Available commands:
 help - to display the help message
 exit - to exit the program
 set biometrics /{age} /{gender} /height /{weight} /{fat percentage} /{activity level}
-mark {done/undone} /{exercise index}
 view {biometrics/food/weight/bmi/maintenance/calories/all} {exercise/strength/cardio /{done}}
 add strength /{description} /{weight} /{sets} /{repetitions} [/{date}]
 add cardio /{description} /{distance} /{repetitions} [/{date}]
 add food /{description} /{calories} /{date}
 add weight /{weight} /{fat percentage}
 remove {food/exercise} /{food index/current exerciseList index}
-mark {done/undone} /{exercise index} / {time}, {metabolic equivalent}
+mark {done/undone} /{exercise index} / {time} / {metabolic equivalent}
 find {strength/cardio/food/date_e/date_f} /{description}
 find calories /{date}
 --------------------------------------------------------------------------------
