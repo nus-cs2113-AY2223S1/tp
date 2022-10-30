@@ -9,8 +9,8 @@ import recipeditor.ui.Ui;
 
 public class Swap extends EditModeCommand {
 
-    public Swap(String[] parsedCommand, Recipe recipe) {
-        super(parsedCommand, recipe);
+    public Swap(FlagType ingredientFlag, String[] parsedCommand, Recipe recipe) {
+        super(ingredientFlag, parsedCommand, recipe);
     }
 
     @Override
@@ -20,8 +20,8 @@ public class Swap extends EditModeCommand {
         switch (ingredientFlag) {
         case INGREDIENT:
             try {
-                Ui.showMessage("Swap " + recipe.getIngredient(index1).getName()
-                        + " and " + recipe.getIngredient(index2).getName());
+                Ui.showMessage("Swap \"" + recipe.getIngredient(index1).getName()
+                        + "\" and \"" + recipe.getIngredient(index2).getName() + "\"");
                 recipe.swapIngredients(index1, index2);
                 return recipe;
             } catch (Exception e) {
@@ -29,8 +29,8 @@ public class Swap extends EditModeCommand {
             }
         case STEP:
             try {
-                Ui.showMessage("Swap " + recipe.getStep(index1)
-                        + " and " + recipe.getStep(index2));
+                Ui.showMessage("Swap \"" + recipe.getStep(index1)
+                        + "\" and \"" + recipe.getStep(index2) + "\"");
                 recipe.swapSteps(index1, index2);
                 return recipe;
             } catch (Exception e) {

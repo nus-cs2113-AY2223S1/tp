@@ -15,7 +15,8 @@ public abstract class EditModeCommand {
     String message = "";
     FlagType ingredientFlag;
 
-    public EditModeCommand(String[] parsedCommand, Recipe recipe) {
+    public EditModeCommand(FlagType ingredientFlag, String[] parsedCommand, Recipe recipe) {
+        this.ingredientFlag = ingredientFlag;
         this.parsedCommand = parsedCommand;
         this.recipe = recipe;
     }

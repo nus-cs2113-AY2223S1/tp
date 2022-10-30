@@ -151,6 +151,70 @@ Example:
 /edit 1
 ```
 
+The CLI Editor updates the recipe without bringing out the GUI. Users have to input the appropriate flags and take note of the
+format before entering the command.
+
+Format: `/edit INDEX FLAGS PARAMETERS`
+
+There are two types of flags:
+
+- **Command flags: Specify the type of function to be used**
+    - `-add`: *Adds a new ingredient or step*
+      - Parameter: `INGREDIENT or STEP`
+      - Example:
+      ```
+      /edit 2 -add 
+      ```
+    - `-del`: *Deletes an ingredient or step*
+      - Parameter: `INDEX`
+        - Exactly one integer must be provided.
+      - Example:
+      ```
+      /edit 2 -del -i 2 
+      
+      Delete "Lettuce"
+      Caesar salad: ingredient edited.
+      ```
+    - `-swp`: *Swaps two ingredients or steps*
+      - Parameter: `INDEX_1 INDEX_2`
+        - Exactly two integers must be provided.
+      - Example:
+      ```
+      /edit 1 -swp -s 2 3
+      
+      Swap "Heat oil in a frying pan" and "Pour sauce into the pan"
+      Fried rice: step edited.
+      ```
+    - `-chg`: *Changes the ingredient, step, title or description*
+      - Parameter: `INDEX [INGREDIENT or STEP]` or `[TITLE or DESCRIPTION]`
+        - For ingredient and step, exactly one index must be provided before the changes.
+          - Ingredient format: `INGREDIENT_NAME / AMOUNT / UNIT`
+          - Step format: `STEP`
+        - For title and description, type the changes right after the flags.
+      - Examples: 
+      ```
+      /edit 3 -chg -i 2 Oyster sauce / 1.0 / tbsp
+      
+      Change "Soy sauce / 2.0 / tsp" to "Oyster sauce / 1.0 / tbsp"
+      Stir fry: ingredient edited.
+      ```
+      ```
+      /edit 2 -chg -d Lettuce salad with croutons and dressing
+      
+      Change "Green salad" to "Lettuce salad with croutons and dressing"
+      Caesar salad: description edited.
+      ```
+- **Recipe flags: Specify the part of recipe that will be changed**
+  - `-i`: *Ingredient*
+  - `-s`: *Step*
+  - `-t`: *Title*
+  - `-d`: *Description*
+
+ℹ The flag order does not matter, but exactly 1 (one) command flag and 1 (one) recipe flag are allowed in 
+an edit command.
+
+ℹ Not including the index, adding the wrong flags or using inappropriate parameters will throw an error.
+
 [⏫ Back to content page](#content-page)
 
 ## Delete Command

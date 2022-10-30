@@ -9,8 +9,8 @@ import recipeditor.recipe.Recipe;
 
 public class Add extends EditModeCommand {
 
-    public Add(String[] parsedCommand, Recipe recipe) {
-        super(parsedCommand, recipe);
+    public Add(FlagType ingredientFlag, String[] parsedCommand, Recipe recipe) {
+        super(ingredientFlag, parsedCommand, recipe);
     }
 
     @Override

@@ -8,8 +8,8 @@ import recipeditor.ui.Ui;
 
 public class Delete extends EditModeCommand {
 
-    public Delete(String[] parsedCommand, Recipe recipe) {
-        super(parsedCommand, recipe);
+    public Delete(FlagType ingredientFlag, String[] parsedCommand, Recipe recipe) {
+        super(ingredientFlag, parsedCommand, recipe);
     }
 
     @Override
@@ -18,11 +18,11 @@ public class Delete extends EditModeCommand {
         int index = Integer.parseInt(parsedCommand[4]) - 1;
         switch (ingredientFlag) {
         case INGREDIENT:
-            Ui.showMessage("Delete " + recipe.getIngredient(index).getName());
+            Ui.showMessage("Delete \"" + recipe.getIngredient(index).getName() + "\"");
             recipe.deleteIngredient(index);
             return recipe;
         case STEP:
-            Ui.showMessage("Delete " + recipe.getStep(index));
+            Ui.showMessage("Delete \"" + recipe.getStep(index) + "\"");
             recipe.deleteStep(index);
             return recipe;
         default:
