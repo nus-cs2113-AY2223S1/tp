@@ -325,6 +325,7 @@ public class StorageTest {
         PairingList pairingList = new PairingList();
 
         Storage storage = new Storage(clientList, propertyList, pairingList);
+
         File loadFile = new File(DELETE_PROPERTY_FILE);
         try {
             storage.loadClient(loadFile);
@@ -345,7 +346,7 @@ public class StorageTest {
         storage.updateProperty();
 
         File checkFile = new File(DELETE_PROPERTY_FILE);
-        boolean hasProperty = true;
+        boolean hasProperty = false;
 
         try {
             Scanner scan = new Scanner(checkFile);
@@ -360,6 +361,10 @@ public class StorageTest {
                     boolean hasUnitType = textEntities[PROPERTY_UNIT_TYPE_INDEX].equals(unitType);
 
                     hasProperty = hasLandlordName && hasAddress && hasRentalRate && hasUnitType;
+                }
+
+                if (hasProperty == true) {
+                    break;
                 }
             }
 
