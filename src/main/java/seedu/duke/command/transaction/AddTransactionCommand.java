@@ -1,6 +1,5 @@
 package seedu.duke.command.transaction;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
@@ -39,6 +38,15 @@ public class AddTransactionCommand extends Command {
     private final TransactionList transactionList;
     private final ItemList itemList;
     private final UserList userList;
+    private static final String ITEM_ID_DELIMITER = "i";
+    private static final String BORROWER_DELIMITER = "b";
+    private static final String DURATION_DELIMITER = "d";
+    private static final String CREATED_DATE_DELIMITER = "c";
+    private static final int NUMBER_OF_ARGS = 4;
+    private static final int ITEM_ID_INDEX = 0;
+    private static final int BORROWER_INDEX = 1;
+    private static final int DURATION_INDEX = 2;
+    private static final int CREATED_DATE_INDEX = 3;
 
     /**
      * Constructor for AddTransactionCommand.
@@ -55,7 +63,7 @@ public class AddTransactionCommand extends Command {
         this.transactionList = transactionList;
         this.itemList = itemList;
         this.userList = userList;
-        if (parts.length != 4) {
+        if (parts.length != NUMBER_OF_ARGS) {
             throw new InsufficientArgumentsException(MESSAGE_INSUFFICIENT_ARGUMENTS);
         }
     }
@@ -67,17 +75,17 @@ public class AddTransactionCommand extends Command {
      * @throws InvalidArgumentException If there is a part that cannot be parsed
      */
     private String[] getArgsAddTxCmd() throws InvalidArgumentException {
-        String[] args = new String[4];
+        String[] args = new String[NUMBER_OF_ARGS];
         for (String part : parts) {
             String delimiter = CommandParser.getArgsDelimiter(part);
-            if (delimiter.equals("i")) {
-                args[0] = CommandParser.getArgValue(part);
-            } else if (delimiter.equals("b")) {
-                args[1] = CommandParser.getArgValue(part);
-            } else if (delimiter.equals("d")) {
-                args[2] = CommandParser.getArgValue(part);
-            } else if (delimiter.equals("c")) {
-                args[3] = CommandParser.getArgValue(part);
+            if (delimiter.equals(ITEM_ID_DELIMITER)) {
+                args[ITEM_ID_INDEX] = CommandParser.getArgValue(part);
+            } else if (delimiter.equals(BORROWER_DELIMITER)) {
+                args[BORROWER_INDEX] = CommandParser.getArgValue(part);
+            } else if (delimiter.equals(DURATION_DELIMITER)) {
+                args[DURATION_INDEX] = CommandParser.getArgValue(part);
+            } else if (delimiter.equals(CREATED_DATE_DELIMITER)) {
+                args[CREATED_DATE_INDEX] = CommandParser.getArgValue(part);
             } else {
                 throw new InvalidArgumentException(MESSAGE_INVALID_PARTS);
             }
@@ -162,9 +170,9 @@ public class AddTransactionCommand extends Command {
     private boolean areValidArgs(String[] args)
             throws InvalidUserException, DateFormatInvalidException,
             ItemNotFoundException, UserNotFoundException, DurationInvalidException {
-        assert args.length == 4 : "Args length is invalid";
-        return isValidItem(args[0]) && isValidBorrower(args[0], args[1]) && isValidDuration(args[2])
-                && isValidCreatedDate(args[3]);
+        assert args.length == NUMBER_OF_ARGS : "Args length is invalid";
+        return isValidItem(args[ITEM_ID_INDEX]) && isValidBorrower(args[ITEM_ID_INDEX], args[BORROWER_INDEX])
+                && isValidDuration(args[DURATION_INDEX]) && isValidCreatedDate(args[CREATED_DATE_INDEX]);
     }
 
     /**
@@ -183,10 +191,10 @@ public class AddTransactionCommand extends Command {
             InvalidUserException, InvalidItemException, ItemNotFoundException,
             UserNotFoundException, DurationInvalidException, InvalidTransactionException {
         String[] args = getArgsAddTxCmd();
-        assert args.length == 4 : "Args length is invalid";
+        assert args.length == NUMBER_OF_ARGS : "Args length is invalid";
         if (areValidArgs(args)) {
             Transaction transaction = getTransactionFromArgs(args);
-            transactionList.checkIfListHasTransactionOfThisItemThatOverlapWithNewTransaction(transaction);
+            transactionList.checkOldTransactionsOverlapWithNew(transaction);
             this.transactionList.addTransaction(transaction);
             Ui.addTransactionMessage(transaction, transactionList.getSize());
         }
@@ -194,13 +202,13 @@ public class AddTransactionCommand extends Command {
     }
 
     private Transaction getTransactionFromArgs(String[] args) throws ItemNotFoundException {
-        assert args.length == 4 : "Args length is invalid";
+        assert args.length == NUMBER_OF_ARGS : "Args length is invalid";
         String itemId = args[0];
-        String itemName = itemList.getItemById(args[0]).getName();
-        String borrowId = args[1];
-        int duration = Integer.parseInt(args[2]);
-        LocalDate createdAt = LocalDate.parse(args[3]);
-        double moneyTransacted = itemList.getItemById(args[0]).getPricePerDay() * (double) duration;
+        String itemName = itemList.getItemById(args[ITEM_ID_INDEX]).getName();
+        String borrowId = args[BORROWER_INDEX];
+        int duration = Integer.parseInt(args[DURATION_INDEX]);
+        LocalDate createdAt = LocalDate.parse(args[CREATED_DATE_INDEX]);
+        double moneyTransacted = itemList.getItemById(args[ITEM_ID_INDEX]).getPricePerDay() * (double) duration;
         return new Transaction(itemName, itemId, borrowId, duration, createdAt, moneyTransacted);
     }
 }
