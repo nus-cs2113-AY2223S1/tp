@@ -24,7 +24,7 @@ public class Change extends EditModeCommand {
         Ui.showMessageInline(CHANGE_2);
         String newInput = Ui.readInput();
 
-        switch (flag) {
+        switch (ingredientFlag) {
         case INGREDIENT:
             int indexToChange = Integer.parseInt(parsedCommand[2]) - 1;
             Ingredient newIngredient = Ingredient.parsedIngredients(newInput);

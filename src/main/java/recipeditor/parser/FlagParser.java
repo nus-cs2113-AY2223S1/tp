@@ -2,31 +2,57 @@ package recipeditor.parser;
 
 import recipeditor.recipe.Recipe;
 
+import java.util.ArrayList;
+
 public interface FlagParser {
 
-    static FlagType checkFlagType(String[] parsedCommand) {
-        int flagCount = 0;
+    static FlagType[] getFlags(String[] parsedCommand) {
+        FlagType[] flags = new FlagType[2];
+        int commandFlagCount = 0;
+        int recipeFlagCount = 0;
         for (String s: parsedCommand) {
             if (s.contains("-")) {
-                flagCount += 1;
                 switch (s) {
+                case "-add":
+                    flags[0] = FlagType.ADD;
+                    commandFlagCount += 1;
+                    break;
+                case "-del":
+                    flags[0] = FlagType.DELETE;
+                    commandFlagCount += 1;
+                    break;
+                case "-swp":
+                    flags[0] = FlagType.SWAP;
+                    commandFlagCount += 1;
+                    break;
+                case "-chg":
+                    flags[0] = FlagType.CHANGE;
+                    commandFlagCount += 1;
+                    break;
                 case "-i":
-                    return FlagType.INGREDIENT;
+                    flags[1] = FlagType.INGREDIENT;
+                    recipeFlagCount += 1;
+                    break;
                 case "-s":
-                    return FlagType.STEP;
+                    flags[1] = FlagType.STEP;
+                    recipeFlagCount += 1;
+                    break;
                 case "-t":
-                    return FlagType.TITLE;
+                    flags[1] = FlagType.TITLE;
+                    recipeFlagCount += 1;
+                    break;
                 case "-d":
-                    return FlagType.DESCRIPTION;
+                    flags[1] = FlagType.DESCRIPTION;
+                    recipeFlagCount += 1;
+                    break;
                 default:
-                    return FlagType.INVALID;
+                    break;
                 }
             }
         }
-        if (flagCount > 1) {
-            return FlagType.INVALID;
+        if (commandFlagCount == 1 && recipeFlagCount == 1) {
+            return flags;
         }
-        return FlagType.NULL;
+        return null;
     }
-
 }
