@@ -30,11 +30,14 @@ and transactions via a Command Line Interface.
     + Wrote guide for view-related and find-related commands (`view-user`, `view-item`, `view-tx`, `find-tx`)
     + Contributed to help command
 + **Developer Guide contributions:**
+    + Wrote `Introduction`, `Duke` and `help` sections
+    + Wrote the item component section `3.4. Item component`
     + Contributed to the Implementation subsection:
       + Wrote view a user (4.1.4)
       + Wrote view a item (4.2.4)
       + Wrote view a transaction (4.3.4)
       + Wrote find transactions by status (4.3.5)
+    + Made Class diagrams in section 3.4
     + Made Sequence diagrams in section 4.1.4, 4.2.4, 4.3.4, 4.3.5
 + **Team tasks contributions:**
     + Filtered bugs/flaws from PED to keep the 
