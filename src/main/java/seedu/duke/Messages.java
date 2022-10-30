@@ -90,8 +90,8 @@ public class Messages {
             + "\nNote: Format is <space> sensitive; [Detail] must be provided; {Detail} is optional\n"
             + "Any deviation from format will lead to invalid address.";
 
-    public static final String MESSAGE_INVALID_PRICE_FORMAT = "OOPS!!! Please enter positive number "
-            + "(No letter/symbols, etc) for renting price per month for property";
+    public static final String MESSAGE_INVALID_PRICE_FORMAT = "OOPS!!! Please only enter positive integer "
+            + "for renting price per month of property";
 
     public static final String MESSAGE_INVALID_UNIT_TYPE_LABEL = "OOPS!!! Please enter one of the following "
             + "valid unit type labels as shown below (Case-Sensitive & Space-Sensitive):\n"
@@ -127,8 +127,8 @@ public class Messages {
 
     public static final String MESSAGE_INVALID_EMAIL = "OOPS!!! Please enter a valid Email Address";
 
-    public static final String MESSAGE_INVALID_BUDGET_FORMAT = "OOPS!!! Please enter positive number "
-            + "(No letter/symbols, etc) for budget";
+    public static final String MESSAGE_INVALID_BUDGET_FORMAT = "OOPS!!! Please only enter positive integer "
+            + "for budget";
 
     public static final String MESSAGE_DUPLICATE_PROPERTY = "OOPS!!! There is already an existing property with the"
             + " same address.";
