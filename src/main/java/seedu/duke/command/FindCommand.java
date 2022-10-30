@@ -3,6 +3,8 @@ package seedu.duke.command;
 import seedu.duke.Parser;
 import seedu.duke.Ui;
 import seedu.duke.exception.IllegalValueException;
+import seedu.duke.records.Calories;
+import seedu.duke.records.CaloriesList;
 import seedu.duke.records.RecordList;
 import seedu.duke.records.biometrics.Biometrics;
 import seedu.duke.records.exercise.CardioExercise;
@@ -12,16 +14,19 @@ import seedu.duke.records.exercise.StrengthExercise;
 import seedu.duke.records.food.Food;
 import seedu.duke.records.food.FoodList;
 import seedu.duke.storage.Storage;
+import seedu.duke.records.biometrics.Calculator;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 public class FindCommand extends Command {
     private String arguments;
     private ExerciseList exerciseList;
-
     private FoodList foodList;
     private Ui ui;
+    private Biometrics biometrics;
 
     public FindCommand(String arguments) {
         this.arguments = arguments;
@@ -47,9 +52,56 @@ public class FindCommand extends Command {
         case "date_f":
             findDateFood(argumentList);
             break;
+        case "calories":
+            findCalories(argumentList);
+            break;
         default:
             handleInvalidFindType();
         }
+    }
+
+    private void findCalories(String[] argumentList) throws IllegalValueException {
+        handleInvalidFindDateCommand(argumentList);
+        String filterDate = argumentList[1];
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        try {
+            LocalDate.parse(filterDate, formatter);
+        } catch (Exception e) {
+            ui.output("Invalid date has been entered.");
+            ui.output("Please enter date in dd-MM-yyyy format!");
+            return;
+        }
+        int caloriesConsumedEntry = getFilteredCaloriesConsumedList(argumentList);
+        int caloriesBurntEntry = getFilteredCaloriesBurntList(argumentList);
+        if (caloriesConsumedEntry == 0 && caloriesBurntEntry == 0) {
+            throw new IllegalValueException("Input date does not have entries yet!");
+        }
+        int netCaloriesEntry = caloriesConsumedEntry - caloriesBurntEntry;
+        String message;
+        Calculator calculator = new Calculator(biometrics.getGender(),biometrics.getWeight(),
+                biometrics.getHeight(),biometrics.getAge(),biometrics.getActivityLevel());
+        calculator.setHealthyCalorieDeficit();
+        calculator.setHealthyCalorieSurplus();
+        if (netCaloriesEntry < 0) {
+            if (netCaloriesEntry < calculator.getHealthyCalorieDeficit()) {
+                message = "Your calorie deficit is too high! ";
+            } else {
+                message = "Your calorie deficit is acceptable! ";
+            }
+        } else {
+            if (netCaloriesEntry > calculator.getHealthyCalorieSurplus()) {
+                message = "Your calorie surplus is too much! ";
+            } else {
+                message = "Your calorie deficit is acceptable! ";
+            }
+        }
+        LocalDate localdate = LocalDate.parse(filterDate, formatter);
+        Calories caloriesinput = new Calories(caloriesConsumedEntry,
+                caloriesBurntEntry, netCaloriesEntry, localdate, message);
+        CaloriesList caloriesList = new CaloriesList();
+        caloriesList.addCalories(caloriesinput);
+        ArrayList<Calories> clist = caloriesList.getCaloriesList();
+        ui.outputCalories(clist);
     }
 
     private void findDateExercise(String[] argumentList) throws IllegalValueException {
@@ -143,6 +195,27 @@ public class FindCommand extends Command {
         return filteredExerciseList;
     }
 
+    private int getFilteredCaloriesConsumedList(String[] argumentList) {
+        int totalCaloriesConsumed = 0;
+        String filteredDate;
+        Calculator calculator = new Calculator(biometrics.getGender(),biometrics.getWeight(),
+                biometrics.getHeight(),biometrics.getAge(),biometrics.getActivityLevel());
+        filteredDate = argumentList[1];
+        totalCaloriesConsumed = calculator.calculateTotalCaloriesConsumed(foodList.getFoodList(),filteredDate);
+        return totalCaloriesConsumed;
+    }
+
+    private int getFilteredCaloriesBurntList(String[] argumentList) {
+        int totalCaloriesBurnt = 0;
+        String filteredDate;
+        Calculator calculator = new Calculator(biometrics.getGender(),biometrics.getWeight(),
+                biometrics.getHeight(),biometrics.getAge(),biometrics.getActivityLevel());
+        filteredDate = argumentList[1];
+        totalCaloriesBurnt = calculator.calculateTotalCaloriesBurnt(
+                exerciseList.getCompletedExerciseList(),filteredDate);
+        return totalCaloriesBurnt;
+    }
+
     private ArrayList<Exercise> getFilteredExerciseList(String[] argumentList) {
         ArrayList<Exercise> filteredExerciseList = (ArrayList<Exercise>) exerciseList.getCompletedExerciseList()
                 .stream().filter(StrengthExercise.class::isInstance)
@@ -176,6 +249,7 @@ public class FindCommand extends Command {
     public void setData(Ui ui, Storage storage, Biometrics biometrics, ExerciseList exerciseList, FoodList foodList,
                         RecordList recordList) {
         this.ui = ui;
+        this.biometrics = biometrics;
         this.exerciseList = exerciseList;
         this.foodList = foodList;
     }

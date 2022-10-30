@@ -32,7 +32,6 @@ public class ViewCommand extends Command {
     private ExerciseList exerciseList;
 
     private FoodList foodList;
-
     private RecordList recordList;
 
 

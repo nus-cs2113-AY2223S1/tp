@@ -84,11 +84,10 @@ public class Ui {
     }
 
     public void outputCalories(ArrayList<Calories> caloriesList) {
-        Integer[] columnSpacingArray = { 10, 17, 14, 12, 6};
+        Integer[] columnSpacingArray = { 10, 17, 14, 12, 36};
         getCaloriesColumnsSpacing(caloriesList, columnSpacingArray);
         generateCaloriesTableHeader(columnSpacingArray);
         printCaloriesList(caloriesList, columnSpacingArray);
-        printEmptyLine();
     }
 
     public void outputAllRecords(ArrayList<Record> recordArrayList,
