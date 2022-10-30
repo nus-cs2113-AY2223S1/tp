@@ -11,6 +11,8 @@ public class Calculator {
     private int height;
     private int weight;
     private int maintenanceCalories;
+    private int healthyCalorieSurplus;
+    private int healthyCalorieDeficit;
     private int age;
     private String gender;
     private int activityLevel;
@@ -110,6 +112,69 @@ public class Calculator {
         return maintenanceCalories;
     }
 
+    public void setHealthyCalorieSurplus() {
+        switch (this.activityLevel) {
+        case (1):
+            multiplier = 1.2;
+            break;
+        case (2):
+            multiplier = 1.375;
+            break;
+        case (3):
+            multiplier = 1.55;
+            break;
+        case (4):
+            multiplier = 1.725;
+            break;
+        case (5):
+            multiplier = 1.9;
+            break;
+        default:
+            multiplier = 0;
+        }
+        if (gender.equals("male")) {
+            healthyCalorieSurplus = (int) ((66 + (13.8 * weight) + (5.00 * height) - (6.8 * age)) * multiplier * 0.1);
+        } else if (gender.equals("female")) {
+            healthyCalorieSurplus = (int) ((655 + (9.56 * weight) + (1.85 * height) - (4.7 * age)) * multiplier * 0.1);
+        }
+    }
+
+    public int getHealthyCalorieSurplus() {
+        return healthyCalorieSurplus;
+    }
+
+    public int getHealthyCalorieDeficit() {
+        return healthyCalorieDeficit;
+    }
+
+
+    public void setHealthyCalorieDeficit() {
+        switch (this.activityLevel) {
+        case (1):
+            multiplier = 1.2;
+            break;
+        case (2):
+            multiplier = 1.375;
+            break;
+        case (3):
+            multiplier = 1.55;
+            break;
+        case (4):
+            multiplier = 1.725;
+            break;
+        case (5):
+            multiplier = 1.9;
+            break;
+        default:
+            multiplier = 0;
+        }
+        if (gender.equals("male")) {
+            healthyCalorieDeficit = -(int) ((66 + (13.8 * weight) + (5.00 * height) - (6.8 * age)) * multiplier * 0.2);
+        } else if (gender.equals("female")) {
+            healthyCalorieDeficit = -(int) ((655 + (9.56 * weight) + (1.85 * height) - (4.7 * age)) * multiplier * 0.2);
+        }
+    }
+
 
     public int calculateTotalCaloriesConsumed(ArrayList<Food> foodArrayList, String date) {
         int totalCaloriesConsumed = 0;
@@ -143,7 +208,7 @@ public class Calculator {
         return totalCaloriesBurnt;
     }
 
-    public int calculateTotalCaloriesSurplusDeficit(ArrayList<Exercise> completedExerciseArrayList,
+    public int calculateNetCalories(ArrayList<Exercise> completedExerciseArrayList,
                                                     ArrayList<Food> foodArrayList, String date) {
         return calculateTotalCaloriesConsumed(foodArrayList, date)
                 - calculateTotalCaloriesBurnt(completedExerciseArrayList, date);

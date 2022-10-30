@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 public class Biometrics {
 
-    private final String[] genderOptions = new String[]{"male", "female", "other"};
+    private final String[] genderOptions = new String[]{"male", "female", "others"};
 
     private int age;
     private String gender;
@@ -72,7 +72,7 @@ public class Biometrics {
 
     public void setGender(String gender) throws IllegalValueException {
         if (!Arrays.asList(genderOptions).contains(gender)) {
-            throw new IllegalValueException("Hi, I only recognise other, female and male genders");
+            throw new IllegalValueException("Hi, I only recognise others, female and male genders");
         }
         this.gender = gender;
     }
@@ -96,7 +96,11 @@ public class Biometrics {
 
     public void setActivityLevel(int activityLevel) throws IllegalValueException {
         if (activityLevel < 1 || activityLevel > 5) {
-            throw new IllegalValueException("The activity level ranges from 1 to 5 only!");
+            throw new IllegalValueException(
+                    "You should only input a number between 1 to 5" + System.lineSeparator()
+                    + "Input your activity level based on your activity level" + System.lineSeparator()
+                    + "with 1 being the least active and 5 being the most active!"
+            );
         }
         this.activityLevel = activityLevel;
     }

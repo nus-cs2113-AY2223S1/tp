@@ -40,7 +40,7 @@ public class SaveCommand extends Command {
     public void execute() throws IllegalValueException {
         try {
             storage.saveData(ui, biometrics, exerciseList, foodList);
-            ui.output("Slaving data......");
+            ui.output("Saving data......");
         } catch (IOException e) {
             throw new IllegalValueException("unable to open save file");
         }
