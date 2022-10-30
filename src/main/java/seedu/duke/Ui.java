@@ -18,7 +18,7 @@ public class Ui {
 
 
     public void line() {
-        System.out.println("-------------------------------------------------------------------------------");
+        System.out.println("--------------------------------------------------------------------------------");
     }
 
 
@@ -84,7 +84,7 @@ public class Ui {
     }
 
     public void outputCalories(ArrayList<Calories> caloriesList) {
-        Integer[] columnSpacingArray = { 10, 17, 14, 12, 36};
+        Integer[] columnSpacingArray = { 4, 17, 14, 12, 6};
         getCaloriesColumnsSpacing(caloriesList, columnSpacingArray);
         generateCaloriesTableHeader(columnSpacingArray);
         printCaloriesList(caloriesList, columnSpacingArray);
@@ -118,7 +118,7 @@ public class Ui {
                 columnSpacingArray[2] = Math.max(columnSpacingArray[2], String.valueOf(exercise.getSet()).length());
             } else if (exercise instanceof CardioExercise) {
                 columnSpacingArray[5] = Math.max(columnSpacingArray[5],
-                        String.valueOf((int) exercise.getDistance()).length());
+                        String.valueOf(exercise.getDistance()).length());
             }
             columnSpacingArray[1] = Math.max(columnSpacingArray[1], exercise.getExerciseName().length());
             columnSpacingArray[4] = Math.max(columnSpacingArray[4],
@@ -140,10 +140,10 @@ public class Ui {
     private void getCaloriesColumnsSpacing(ArrayList<Calories> caloriesList, Integer[] columnSpacingArray) {
         for (Calories c: caloriesList) {
             columnSpacingArray[0] = Math.max(columnSpacingArray[0], c.getDate().length());
-            columnSpacingArray[1] = Math.max(columnSpacingArray[1], c.getCaloriesConsumed() % 10 + 1);
-            columnSpacingArray[2] = Math.max(columnSpacingArray[2], c.getCaloriesBurnt() % 10 + 1);
-            columnSpacingArray[3] = Math.max(columnSpacingArray[3], c.getNetCalories() % 10 + 1);
-            columnSpacingArray[3] = Math.max(columnSpacingArray[4], c.getMessage().length());
+            columnSpacingArray[1] = Math.max(columnSpacingArray[1], 5);
+            columnSpacingArray[2] = Math.max(columnSpacingArray[2], 5);
+            columnSpacingArray[3] = Math.max(columnSpacingArray[3], 5);
+            columnSpacingArray[4] = Math.max(columnSpacingArray[4], c.getMessage().length());
         }
     }
 

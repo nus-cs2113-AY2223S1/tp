@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 public class Biometrics {
 
-    private final String[] genderOptions = new String[]{"male", "female", "other"};
+    private final String[] genderOptions = new String[]{"male", "female", "others"};
 
     private int age;
     private String gender;
@@ -72,7 +72,7 @@ public class Biometrics {
 
     public void setGender(String gender) throws IllegalValueException {
         if (!Arrays.asList(genderOptions).contains(gender)) {
-            throw new IllegalValueException("Hi, I only recognise other, female and male genders");
+            throw new IllegalValueException("Hi, I only recognise others, female and male genders");
         }
         this.gender = gender;
     }

@@ -171,7 +171,7 @@ public class ViewCommand extends Command {
         Calculator calculator = new Calculator(biometrics.getGender(),biometrics.getWeight(),
                 biometrics.getHeight(),biometrics.getAge(),biometrics.getActivityLevel());
         calculator.setBmi(biometrics.getWeight(),biometrics.getHeight());
-        ui.output("Your current BMI is :" + calculator.getBmi());
+        ui.output("Your current BMI is : " + calculator.getBmi());
         ui.output(calculator.getBmiStatus());
     }
 
