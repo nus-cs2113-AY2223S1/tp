@@ -342,6 +342,7 @@ during the next run of the program. This is done so to **prevent overcrowding** 
 
 
 ## Common Error Messages
+
 | Error Message                | Reason               | Remedy                |
 |------------------------------|----------------------|-----------------------|
 | *INSERT ERROR MESSAGE HERE*  | *INSERT REASON HERE* | *INSERT REMEDY HERE*  |
