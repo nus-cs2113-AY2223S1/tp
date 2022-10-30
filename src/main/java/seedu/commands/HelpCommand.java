@@ -15,6 +15,7 @@ import static seedu.common.CommonData.UPDATE_FORMAT;
  */
 public class HelpCommand extends Command {
     public static final String COMMAND_WORD = "help";
+    public static final String COMMAND_WORD_SHORT = "h";
 
     @Override
     public CommandResult execute() {

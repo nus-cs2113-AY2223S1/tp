@@ -11,6 +11,7 @@ import seedu.exception.NoCarparkFoundException;
  */
 public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
+    public static final String COMMAND_WORD_SHORT = "fin";
     public static final int NUMBER_OF_ARGUMENTS = 1;
     private final String carparkID;
 

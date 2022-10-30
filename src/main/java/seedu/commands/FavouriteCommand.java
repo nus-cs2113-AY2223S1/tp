@@ -12,6 +12,7 @@ import seedu.files.Favourite;
  */
 public class FavouriteCommand extends Command {
     public static final String COMMAND_WORD = "favourite";
+    public static final String COMMAND_WORD_SHORT = "fav";
     public static final int NUMBER_OF_ARGUMENTS = 1;
     private static final String SEPARATOR_STRING = "===========================================";
     private final String argument;

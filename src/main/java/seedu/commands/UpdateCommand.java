@@ -11,6 +11,7 @@ import seedu.files.FileStorage;
  */
 public class UpdateCommand extends Command {
     public static final String COMMAND_WORD = "update";
+    public static final String COMMAND_WORD_SHORT = "u";
     private final Api api;
 
     /**
