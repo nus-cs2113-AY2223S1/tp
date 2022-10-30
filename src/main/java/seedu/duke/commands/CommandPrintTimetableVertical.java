@@ -5,7 +5,12 @@ import seedu.duke.module.Module;
 import seedu.duke.module.lessons.Lesson;
 import seedu.duke.UI;
 
-import java.util.*; //////
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Stack;
 
 
 public class CommandPrintTimetableVertical {
@@ -19,7 +24,6 @@ public class CommandPrintTimetableVertical {
     private static final Integer DAY_PER_WEEK = 5; // only considering Mon to Fri
 
     private static final Integer timetableWidth = 78;
-    private static final int[] dailyWidthArray = {1,1,1,1,1};
     private static String[][] timetableVertical;
     private static ArrayList<ArrayList<Object[]>> rawTimetable = new ArrayList<>(5);
 
@@ -114,7 +118,7 @@ public class CommandPrintTimetableVertical {
     }
 
 
-    private static ArrayList<ArrayList<Object[]>> sortTimetable(ArrayList<ArrayList<Object[]>> rawTimetable) {
+    private static void sortTimetable(ArrayList<ArrayList<Object[]>> rawTimetable) {
         // sort modules to see conflict
         ArrayList<int[]> todayLessonSpan = new ArrayList<>();
         for (int i = 0; i < DAY_PER_WEEK; i++){
@@ -133,9 +137,6 @@ public class CommandPrintTimetableVertical {
                 }
             }
         }
-
-        return rawTimetable;
-
     }
 
 
@@ -149,7 +150,7 @@ public class CommandPrintTimetableVertical {
         });
     }
 
-    private static void sortRawTimetable(Integer day, ArrayList<ArrayList<Object[]>> rawTimeTable) {
+    private static void sortRawTimetable(Integer day) {
         Collections.sort(emptySlotRegister[day],new Comparator<Integer[]>(){
             public int compare(Integer[] i1,Integer[] i2)
             {
@@ -219,7 +220,7 @@ public class CommandPrintTimetableVertical {
     private static void writeTable() {
         for (int i = 0; i < rawTimetable.size(); i++) {
             if (!rawTimetable.get(i).isEmpty()) {
-                sortRawTimetable(i,rawTimetable);
+                sortRawTimetable(i);
                 ArrayList<Object[]> dayIterator = rawTimetable.get(i);
                 // proceed with non-empty days to process
 
