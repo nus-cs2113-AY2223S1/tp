@@ -116,7 +116,7 @@ public class Recipe {
         StringBuilder recipeIngredientStringFormatted = new StringBuilder();
         for (int i = 0; i < ingredients.size(); i++) {
             Ingredient ingredient = ingredients.get(i);
-            String textShown = String.format("%s. %s / %s / %s %n", i
+            String textShown = String.format("%s.%s/ %s /%s%n", i
                     + 1, ingredient.getName(), ingredient.getAmount(), ingredient.getUnit().trim());
             recipeIngredientStringFormatted.append(textShown);
         }
@@ -127,11 +127,21 @@ public class Recipe {
     public String getStepAttributesFormatted() {
         StringBuilder recipeStepStringFormatted = new StringBuilder();
         for (int i = 0; i < steps.size(); i++) {
-            String textShown = String.format("%n%d) %s", i + 1, getStep(i));
+            String textShown = String.format("%d. %s%n", i + 1, getStep(i));
             recipeStepStringFormatted.append(textShown);
         }
         logger.log(Level.INFO, "Get steps");
         return recipeStepStringFormatted.toString();
+    }
+
+    public String getRecipeSaveableFormatted() {
+        String recipeAttributesStringFormatted = "# TITLE \n"
+                + title + "\n\n" + "# DESCRIPTION \n"
+                + description.trim() + "\n\n" + "# INGREDIENTS <ingredient name> / <amount> / <unit> \n"
+                + getIngredientAttributesFormatted() + "\n" + "# STEPS \n"
+                + getStepAttributesFormatted() + "\n\n";
+        logger.log(Level.INFO, "Get attributes of " + title);
+        return recipeAttributesStringFormatted;
     }
 
     public String getRecipeAttributesFormatted() {
@@ -139,7 +149,7 @@ public class Recipe {
                 + title + "\n\n" + "Recipe Description: "
                 + description.trim() + "\n\n" + "Recipe Ingredients: "
                 + "\n" + getIngredientAttributesFormatted() + "\n" + "Recipe Steps: "
-                + getStepAttributesFormatted() + "\n\n";
+                + "\n" + getStepAttributesFormatted() + "\n\n";
         logger.log(Level.INFO, "Get attributes of " + title);
         return recipeAttributesStringFormatted;
     }

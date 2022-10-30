@@ -13,18 +13,18 @@ import recipeditor.ui.Ui;
 public class EditCommand extends Command {
     public static final String COMMAND_TYPE = "/edit";
 
-    public static final String COMMAND_FORMAT = "Syntax for /edit GUI: \n" +
-            "\t /edit <index> \n\n" +
-            "Syntax for /edit CLI: \n" +
-            "\t /edit <index> (flags) (parameters) \n" +
-            "Command flags: \n" +
-            "\t -add (recipe flag) (input) \n" +
-            "\t -del (recipe flag) (index) \n" +
-            "\t -swp (recipe flag) (index 1) (index 2) \n" +
-            "\t -chg (recipe flag) (index) (input) \n" +
-            "Recipe flags: \n" +
-            "\t -i: ingredient, -s: step, -t: title, -d: description \n" +
-            "Flag order does not matter, but you can only add one command flag and one recipe flag.";
+    public static final String COMMAND_FORMAT = "Syntax for /edit GUI: \n"
+            + "\t /edit <index> \n\n"
+            + "Syntax for /edit CLI: \n"
+            + "\t /edit <index> (flags) (parameters) \n"
+            + "Command flags: \n"
+            + "\t -add (recipe flag) (input) \n"
+            + "\t -del (recipe flag) (index) \n"
+            + "\t -swp (recipe flag) (index 1) (index 2) \n"
+            + "\t -chg (recipe flag) (index) (input) \n"
+            + "Recipe flags: \n"
+            + "\t -i: ingredient, -s: step, -t: title, -d: description \n"
+            + "Flag order does not matter, but you can only add one command flag and one recipe flag.";
 
     private final int index;
     private Recipe editedRecipe;

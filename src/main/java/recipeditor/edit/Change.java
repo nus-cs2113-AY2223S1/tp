@@ -2,15 +2,15 @@ package recipeditor.edit;
 
 import recipeditor.exception.InvalidFlagException;
 import recipeditor.exception.ParseException;
-import recipeditor.parser.FlagParser;
 import recipeditor.recipe.Ingredient;
 import recipeditor.recipe.Recipe;
-import recipeditor.ui.Ui;
 
 public class Change extends EditModeCommand {
     private static final String CHANGE_1 = "Enter your changes: ";
     private static final String CHANGE_2 = "Ingredient format: <ingredient name> / <amount_in_float> / <unit>. "
             + "Step format: <step> ";
+    private static final int INDEX_LOCATION = 4;
+    private static final int START_LOCATION = 5;
 
     public Change(String[] parsedCommand, Recipe recipe) {
         super(parsedCommand, recipe);
@@ -22,36 +22,34 @@ public class Change extends EditModeCommand {
 
         switch (ingredientFlag) {
         case INGREDIENT:
-            for (int i = 4; i < parsedCommand.length; i++) {
-                newInput.append(parsedCommand[i]);
+            for (int i = START_LOCATION; i < parsedCommand.length; i++) {
+                newInput.append(parsedCommand[i]).append(" ");
             }
-            int indexToChange = Integer.parseInt(parsedCommand[1]) - 1;
-            Ingredient newIngredient = Ingredient.parsedIngredients(newInput.toString());
+            int indexToChange = Integer.parseInt(parsedCommand[INDEX_LOCATION]) - 1;
+            Ingredient newIngredient = Ingredient.parsedIngredients(newInput.toString().trim());
             recipe.setIngredient(indexToChange, newIngredient);
             return recipe;
         case STEP:
-            for (int i = 4; i < parsedCommand.length; i++) {
-                newInput.append(parsedCommand[i]);
+            for (int i = START_LOCATION; i < parsedCommand.length; i++) {
+                newInput.append(parsedCommand[i]).append(" ");
             }
-            indexToChange = Integer.parseInt(parsedCommand[1]) - 1;
-            recipe.setStep(indexToChange, newInput.toString());
+            indexToChange = Integer.parseInt(parsedCommand[INDEX_LOCATION]) - 1;
+            recipe.setStep(indexToChange, newInput.toString().trim());
             return recipe;
         case TITLE:
-            for (int i = 4; i < parsedCommand.length; i++) {
-                newInput.append(parsedCommand[i]);
+            for (int i = START_LOCATION; i < parsedCommand.length; i++) {
+                newInput.append(parsedCommand[i]).append(" ");
             }
-            recipe.setTitle(newInput.toString());
+            recipe.setTitle(newInput.toString().trim());
             return recipe;
         case DESCRIPTION:
-            for (int i = 4; i < parsedCommand.length; i++) {
-                newInput.append(parsedCommand[i]);
+            for (int i = START_LOCATION; i < parsedCommand.length; i++) {
+                newInput.append(parsedCommand[i]).append(" ");
             }
-            recipe.setDescription(newInput.toString());
+            recipe.setDescription(newInput.toString().trim());
             return recipe;
         default:
             throw new InvalidFlagException();
         }
-
     }
-
 }

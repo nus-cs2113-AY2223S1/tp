@@ -1,15 +1,16 @@
 # TITLE 
 Example Title 2
 
-# DESCRIPTION
+# DESCRIPTION 
 Example Description 2
 
 # INGREDIENTS <ingredient name> / <amount> / <unit> 
-1. Example ingredient / 1.2 / example unit 
-2. sdsdfds/ 9.0 /asfdv
+1. Ingredient 1 / 1.0 / unit
+2. Example ingredient / 1.2 / example unit
 
 # STEPS 
-1. Example step 
-2.fsffbsdb
-3.ssdbsbsdb
-4.sbsdbsdb
+1. Example step
+2. Step 2
+3. ssdbsbsdb
+4. sbsdbsdb
+5. hrehergerg
