@@ -1,7 +1,7 @@
 package service;
 
 public class Service {
-    public static int id = 0;
+    public static int id = 5000;
     private final int serviceId;
     private String serviceDescription;
 

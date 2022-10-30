@@ -15,11 +15,7 @@ public class FinishTaskCommand extends Command {
 
     @Override
     public void execute() {
-        try {
-            TaskList.finishTask(taskId);
-        } catch (DukeException e) {
-            System.out.println("Sorry, no corresponding appointment found related to the task.");
-        }
+        TaskList.finishTask(taskId);
     }
 
     @Override

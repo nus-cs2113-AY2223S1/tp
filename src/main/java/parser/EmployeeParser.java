@@ -5,6 +5,7 @@ import command.EmptyCommand;
 import command.employeecommand.AddEmployeeCommand;
 import command.employeecommand.RemoveEmployeeCommand;
 import command.employeecommand.ViewEmployeeCommand;
+import command.employeecommand.ViewEmployeeTaskCommand;
 import exception.DukeException;
 
 public class EmployeeParser {
@@ -34,6 +35,8 @@ public class EmployeeParser {
                 return prepareAddEmployee(statement);
             case RemoveEmployeeCommand.COMMAND_WORD:
                 return prepareRemoveEmployee(statement);
+            case ViewEmployeeTaskCommand.COMMAND_WORD:
+                return prepareViewTaskEmployee(statement);
             default:
                 throw new DukeException();
             }
@@ -65,6 +68,16 @@ public class EmployeeParser {
             return new RemoveEmployeeCommand(index);
         } catch (DukeException e) {
             System.out.println("Sorry, index entered invalid for removing an employee ");
+            return new EmptyCommand();
+        }
+    }
+
+    public Command prepareViewTaskEmployee(String input) {
+        try {
+            int index = parser.indexOfInput(input);
+            return new ViewEmployeeTaskCommand(index);
+        } catch (DukeException e) {
+            System.out.println("Sorry, index entered invalid for removing task");
             return new EmptyCommand();
         }
     }
