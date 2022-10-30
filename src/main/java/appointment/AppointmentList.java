@@ -38,15 +38,22 @@ public class AppointmentList {
 
     public static void addAppointment(Appointment appointment) throws DukeException {
 
+        // appointment should have a valid date
+        if (appointment.getAppointmentDate() == null) {
+            throw new DukeException();
+        }
+
         // appointment should refer to one existing service
         Service service = ServiceList.findService(appointment.service);
         if (service == null) {
+            System.out.println("");
             throw new DukeException();
         }
 
         // appointment should refer to one existing pet
         Pet pet = PetList.findPetById(appointment.petId);
         if (pet == null) {
+            System.out.println("Sorry, no corresponding pet found to add the appointment.");
             throw new DukeException();
         }
 

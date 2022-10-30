@@ -4,6 +4,7 @@ import appointment.Appointment;
 import appointment.AppointmentList;
 import command.Command;
 import exception.DukeException;
+import java.util.Date;
 
 public class AddAppointmentCommand extends Command {
 
@@ -12,9 +13,7 @@ public class AddAppointmentCommand extends Command {
     private final Appointment appointment;
 
     public AddAppointmentCommand(int petId, String appointmentDateStr, String service) {
-        if (Appointment.checkIsFormattedDate(appointmentDateStr)){
-
-        }
+        Date appointmentDate = Appointment.checkFormattedDate(appointmentDateStr);
         appointment = new Appointment(petId, appointmentDate, service);
     }
 
@@ -23,7 +22,7 @@ public class AddAppointmentCommand extends Command {
         try {
             AppointmentList.addAppointment(appointment);
         } catch (DukeException e) {
-            System.out.println("Sorry, no corresponding service/pet found to add the appointment.");
+            System.out.println("Add appointment failed.");
         }
     }
 

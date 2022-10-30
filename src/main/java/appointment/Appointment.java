@@ -28,14 +28,15 @@ public class Appointment {
     }
 
     // check appointment date format
-    public static boolean checkIsFormattedDate(String appointmentDateStr) {
+    public static Date checkFormattedDate(String appointmentDateStr) {
+        Date formattedDate = null;
         try {
-            Date appointmentDate = formatter.parse(appointmentDateStr);
+            formattedDate = formatter.parse(appointmentDateStr);
         } catch (ParseException e) {
             System.out.println("Invalid appointment date format! Pls follow yyyy-MM-dd!");
-            return false;
+            return null;
         }
-        return true;
+        return formattedDate;
     }
 
     // view tasks for a find appointment
@@ -83,5 +84,9 @@ public class Appointment {
     public String getAppointmentDateStr() {
         String dateStr = formatter.format(appointmentDate);
         return dateStr;
+    }
+
+    public Date getAppointmentDate() {
+        return appointmentDate;
     }
 }
