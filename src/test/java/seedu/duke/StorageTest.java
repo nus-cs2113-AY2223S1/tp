@@ -296,7 +296,7 @@ public class StorageTest {
 
         File checkFile = new File(DELETE_CLIENT_FILE);
 
-        boolean hasClient = true;
+        boolean hasClient = false;
         try {
             Scanner scan = new Scanner(checkFile);
             while (scan.hasNext()) {
@@ -310,6 +310,10 @@ public class StorageTest {
                     boolean hasClientBudget = textEntities[CLIENT_BUDGET_ARRAY_INDEX].equals(budget);
 
                     hasClient = hasClientName && hasClientContact && hasClientEmail && hasClientBudget;
+                }
+
+                if (hasClient == true) {
+                    break;
                 }
             }
         } catch (FileNotFoundException e) {
