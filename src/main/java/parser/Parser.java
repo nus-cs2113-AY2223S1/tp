@@ -77,7 +77,7 @@ public class Parser {
     }
 
     public boolean isInt(String input) throws DukeException {
-    Boolean strResult = input.matches("\\d+");
+        Boolean strResult = input.matches("\\d+");
         if (strResult) {
             return true;
         }
