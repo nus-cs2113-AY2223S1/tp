@@ -147,7 +147,7 @@ public class FindFunctionTest {
     public void queryProperty_incorrectNumberOfTag_expectThrow() {
         ParseFindProperty parseFindProperty = new ParseFindProperty(INCORRECT_TAG);
         assertThrows(FindIncorrectNumOfTagException.class,
-                () -> parseFindProperty.checkCommandValidity(INCORRECT_TAG));
+            () -> parseFindProperty.checkCommandValidity(INCORRECT_TAG));
     }
 
     @Test
