@@ -34,4 +34,13 @@ class UiTest {
         assertEquals("hello\n", out.toString());
         System.setOut(reset);
     }
+
+    @Test
+    void testExit() {
+        Ui ui = new Ui();
+        ui.printExitGreeting();
+        assertEquals("\n---------------\nSee you again!", out.toString());
+        System.setOut(reset);
+    }
+
 }
