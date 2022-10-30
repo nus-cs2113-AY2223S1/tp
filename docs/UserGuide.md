@@ -9,10 +9,6 @@ for timetable organization.
 
 YAMOM is designed for users who are proficient in Command Line Interface (CLI).
 
-Data will be automatically saved after each command and loaded in the next run of YAMOM.
-
-YAMOM will always start planning for semester 1 when the application is run.
-
 ## Table of Contents
 
 - [User Guide for Yet Another Module Organizer/Manager (YAMOM) v2.0](#user-guide-for-yet-another-module-organizermanager-yamom-v20)
@@ -47,6 +43,9 @@ YAMOM will always start planning for semester 1 when the application is run.
 3. Copy the file to the folder you want to use as the *home folder* for the application. (for example: `C://YAMOM`)
 4. Open the command line in that folder and run the command `java -jar [filename].jar`.
 5. You will receive a greeting if the application runs successfully.
+6. YAMOM will always start planning for semester 1 when the application is run.
+7. Data will be automatically saved after each command and persisted between runs of YAMOM.
+
 
 ```
 Hello from
