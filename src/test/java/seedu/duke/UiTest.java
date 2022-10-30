@@ -39,7 +39,7 @@ class UiTest {
     void testExit() {
         Ui ui = new Ui();
         ui.printExitGreeting();
-        assertEquals("\n---------------\nSee you again!", out.toString());
+        assertEquals("\n---------------\nSee you again!\n", out.toString());
         System.setOut(reset);
     }
 
