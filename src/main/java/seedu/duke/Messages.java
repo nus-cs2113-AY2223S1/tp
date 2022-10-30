@@ -8,6 +8,11 @@ public class Messages {
     public static final String EXCEPTION = "EXCEPTION";
     public static final String LINE_BREAK = "----------------------------------------------------------------------"
             + "----------";
+    public static final String CLIENT = "Client:";
+    public static final String PROPERTY = "Property:";
+    public static final String CLIENTS = "Clients:";
+    public static final String PROPERTIES = "Properties:";
+    public static final String PAIRS = "Pairs:";
 
     /* Confirmation Messages */
 
@@ -210,7 +215,7 @@ public class Messages {
     /* List related Error Messages */
 
     public static final String MESSAGE_INCORRECT_LIST_DETAILS = "OOPS!!! Please enter -client"
-            + " to list clients, -property to list properties, and -everything to list"
+            + " to list clients, -property to list properties, -pair to list pairs and -everything to list"
             + " everything";
 
     public static final String MESSAGE_BYE_PARAMETERS_PRESENT = "Please type bye without any parameters"
@@ -231,6 +236,10 @@ public class Messages {
             + "\ne/ for client email"
             + "\nb/ for client budget"
             + "\n-short to display name and budget";
+
+    public static final String MESSAGE_INCORRECT_PAIR_LIST_FLAG = "Please type - "
+            + "\nlist -pair to list all pairs with all their information"
+            + "\nlist -pair -short to list all pairs with shortened information";
     public static final String MESSAGE_BYE = "Goodbye :). See you soon!";
 
 
