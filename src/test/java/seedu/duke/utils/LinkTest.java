@@ -1,7 +1,5 @@
 package seedu.duke.utils;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
@@ -10,6 +8,10 @@ import seedu.duke.exceptions.YamomException;
 import seedu.duke.model.LessonType;
 import seedu.duke.model.Module;
 import seedu.duke.model.SelectedModule;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class LinkTest {
     @Test
@@ -65,5 +67,23 @@ public class LinkTest {
         String link = Link.getLink(state);
 
         assertEquals("https://nusmods.com/timetable/sem-1/share?CS2113=LEC:1,TUT:4", link);
+    }
+
+    @Test
+    public void isValidLink_validLink_true() {
+        assertTrue(Link.isValidLink("https://nusmods.com/timetable/sem-1/share?CS2113="));
+        assertTrue(Link.isValidLink("https://nusmods.com/timetable/st-i/share?CS2113="));
+        assertTrue(Link.isValidLink("https://nusmods.com/timetable/st-ii/share?CS2113="));
+    }
+
+    @Test
+    public void isValidLink_notValidLink_false() {
+        assertFalse(Link.isValidLink("https://nusmods.com/timetable/sem-a/share?CS2113="));
+        assertFalse(Link.isValidLink("https://nusmods.com/timetable/st-iii/share?CS2113="));
+    }
+
+    @Test
+    public void isEmptyLink_emptyLink_true() {
+        assertTrue(Link.isEmptyLink("https://nusmods.com/timetable/st-ii/share?"));
     }
 }

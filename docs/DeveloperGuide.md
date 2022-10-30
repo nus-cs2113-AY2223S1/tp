@@ -395,22 +395,24 @@ To implement the handling of export in Storage class and import in Command class
 
 The <code>Storage</code> component can:
 
-- read from the hard disk a single line which is supposed to be a NUSMods export link
+- read from the hard disk NUSMods export links
 - save to the hard disk
 
 Different checks have been implemented to ensure that even
 if the data file is modified in any way, it would not crash the programme.
+Data for the saved state will be overwritten each run of the application to prevent
+persistent data corruption and not require the user to manually edit the data file.
 
 ##### Why it is implemented this way
 
-To facilitate easy transfer of information from NUSMods to YAMOM.
+To facilitate easy transfer of information from NUSMods to YAMOM. NUSMods is currently 
+the most popular website used by NUS students to keep track of their timetable. This encourages
+users to swap to using YAYMOM.
 
 ##### Alternatives considered
 
 Storing as <code>.json</code> file
 
-- would not be readable by the user
-<!-- json is easily readable by the user though -->
 - would have to implement another function for export/import function
 
 ## 4. Implementation
@@ -440,6 +442,9 @@ written in [GitHub-Flavoured Markdown](https://github.github.com/gfm/).
 
 The following section describes the testing methodologies followed in this project to ensure high-quality, bug-free
 code as far as possible.
+
+The more critical classes each has a test class which tests the various 
+functions implemented in those respective classes. 
 
 ### 6.1. Running tests
 

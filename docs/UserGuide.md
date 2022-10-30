@@ -577,8 +577,9 @@ set to the semester indicated in the link provided (only for `import` command).
 Format: `import [ NUSMOD_LINK ]`
 
 * The `NUSMOD_LINK` need to be in the format
-  of `https://nusmods.com/timetable/sem-SEMESTER_NUMBER/share?MODULE_INFO&MODULE_INFO`
-* `SEMESTER_NUMBER` ranges from 1 to 4 included.
+  of `https://nusmods.com/timetable/[sem|st]-SEMESTER_NUMBER/share?MODULE_INFO&MODULE_INFO`
+* For normal semesters, `sem`, `SEMESTER_NUMBER` ranges from 1 to 2 included.
+* For special terms, `st`, `SEMESTER_NUMBER` is either `i` or `ii` to represent special term 1 and 2 respectively.
 * Information about different modules (i.e. `MODULE_INFO`) are separated by `&`.
 * `MODULE_INFO` consists of `MODULE_CODE=LESSONS_INFO`.
 * `LESSONS_INFO` consists of `LESSON_TYPE_SHORT_FORM:LESSON_NUMBER` which are separated by `,`.

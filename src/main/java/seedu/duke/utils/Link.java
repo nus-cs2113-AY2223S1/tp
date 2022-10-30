@@ -37,18 +37,18 @@ public class Link {
 
     private static final String SEMESTER_DELIMITER = "sem-";
 
+    private static final String SPECIAL_TERM_1_SEMESTER_DELIMITER = "st-i";
+
+    private static final String SPECIAL_TERM_2_SEMESTER_DELIMITER = "st-ii";
+
     private static final String SHARE_DELIMITER = "share?";
 
     private static final String LESSON_TYPE_DELIMITER = ":";
 
     private static final String MODULE_CODE_DELIMITER = "=";
 
-    private static final String POSSIBLE_SEMESTER_NUMBER = "1";
-
-    private static final String SUPPOSED_PREFIX = DOMAIN + SEMESTER_DELIMITER + POSSIBLE_SEMESTER_NUMBER
-            + DELIMITER + SHARE_DELIMITER;
-
-    private static final String SUPPOSED_PREFIX_REGEX = "^" + DOMAIN + SEMESTER_DELIMITER + "\\d/share\\?";
+    private static final String SUPPOSED_PREFIX_REGEX = "^" + DOMAIN + "(" + SPECIAL_TERM_1_SEMESTER_DELIMITER + "|"
+            + SPECIAL_TERM_2_SEMESTER_DELIMITER + "|" + SEMESTER_DELIMITER + "\\d" + ")/share\\?.";
 
     private static final String MODULE_DELIMITER = "&";
 
@@ -58,14 +58,16 @@ public class Link {
 
     public static final int MODULES_PARAM_INDEX = 5;
 
-    private static final String LINK_EXAMPLE = "https://nusmods.com/timetable/sem-SEMESTER_NUMBER"
+    private static final String LINK_EXAMPLE = "https://nusmods.com/timetable/[sem|st]-SEMESTER_NUMBER"
             + "/share?MODULE_INFO&MODULE_INFO";
 
     private static final String LINK_PROCESS_ERROR_MESSAGE = "Kindly ensure that the link is in the format of "
             + System.lineSeparator() + LINK_EXAMPLE;
 
     private static final String SEMESTER_PROCESS_ERROR_MESSAGE = "The semester in the link provided is incorrect."
-            + "The SEMESTER_NUMBER should be from 1 to 4" + LINK_PROCESS_ERROR_MESSAGE;
+            + System.lineSeparator() + "The semester parameter should be:" + System.lineSeparator()
+            + "For normal semesters - \"sem-[1|2]\"" + System.lineSeparator() + "For special terms - \"st-[i|ii]\""
+            + System.lineSeparator() + LINK_PROCESS_ERROR_MESSAGE;
 
     /**
      * Parses the NUSMods export link into module code and lessons information.
@@ -144,6 +146,12 @@ public class Link {
      * @throws NumberFormatException The semester parameter has been modified incorrectly to include other characters.
      */
     private static int getSemesterFromParam(String semesterParam) throws NumberFormatException {
+        if (semesterParam.equals(SPECIAL_TERM_1_SEMESTER_DELIMITER)) {
+            return 3;
+        }
+        if (semesterParam.equals(SPECIAL_TERM_2_SEMESTER_DELIMITER)) {
+            return 4;
+        }
         return Integer.parseInt(semesterParam.replace(SEMESTER_DELIMITER, ""));
     }
 
@@ -156,9 +164,7 @@ public class Link {
     public static boolean isValidLink(String link) {
         Pattern pattern = Pattern.compile(SUPPOSED_PREFIX_REGEX);
         Matcher matcher = pattern.matcher(link);
-        boolean hasMatch = matcher.find();
-        boolean hasRequiredLength = (link.length() > SUPPOSED_PREFIX.length());
-        return hasMatch && hasRequiredLength;
+        return matcher.find();
     }
 
     /**
@@ -169,7 +175,7 @@ public class Link {
      * @return <code>true</code> if the link only contains the supposed prefix.
      */
     public static boolean isEmptyLink(String link) {
-        return link.length() == SUPPOSED_PREFIX.length();
+        return link.endsWith("share?");
     }
 
     /**
@@ -255,8 +261,7 @@ public class Link {
     public static String getLink(State state) {
         StringBuilder toSave = new StringBuilder();
         toSave.append(DOMAIN);
-        toSave.append(SEMESTER_DELIMITER);
-        toSave.append(state.getSemester());
+        appendSemester(state, toSave);
         toSave.append(DELIMITER);
         toSave.append(SHARE_DELIMITER);
         List<SelectedModule> selectedModules = state.getSelectedModulesList();
@@ -265,10 +270,31 @@ public class Link {
     }
 
     /**
+     * Appends the correct semester form to the String according to the current semester.
+     *
+     * @param state  Current state of the application to be saved.
+     * @param toSave Partial NUSMods formatted link.
+     */
+    private static void appendSemester(State state, StringBuilder toSave) {
+        int semester = state.getSemester();
+        switch (semester) {
+        case 3:
+            toSave.append(SPECIAL_TERM_1_SEMESTER_DELIMITER);
+            break;
+        case 4:
+            toSave.append(SPECIAL_TERM_2_SEMESTER_DELIMITER);
+            break;
+        default:
+            toSave.append(SEMESTER_DELIMITER);
+            toSave.append(semester);
+        }
+    }
+
+    /**
      * Goes through the selected modules from the state and appends it in the correct format to be saved.
      *
      * @param selectedModules List of selected modules from the state.
-     * @param toSave          NUSMods formatted link.
+     * @param toSave          Partial NUSMods formatted link.
      */
     private static void appendModules(List<SelectedModule> selectedModules, StringBuilder toSave) {
         ArrayList<String> modules = new ArrayList<>();
