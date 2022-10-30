@@ -607,6 +607,7 @@ The user enters the following command: “find-item /k Book”. In this case, th
 |--------------|--------------------------------|
 |      tx      |           Transaction          |
 |      /c      |         Contact Number         |
+
 ...TO BE UPDATED
 
 
