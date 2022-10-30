@@ -156,7 +156,7 @@ public class AddCommand extends Command {
         String description = getDescriptionWithValidation(argumentList[1]);
         try {
             double distance = getDistanceWithValidation(Double.parseDouble(argumentList[2]));
-            int repetition = getRepetitionWithValidation(argumentList);
+            int repetition = getRepsWithValidation(argumentList);
             LocalDate date;
             if (argumentList.length == 4) {
                 date = LocalDate.now();
@@ -179,6 +179,14 @@ public class AddCommand extends Command {
         } catch (NumberFormatException e) {
             throw new IllegalValueException("Distance and repetition must be numbers");
         }
+    }
+
+    private int getRepsWithValidation(String[] argumentList) throws IllegalValueException {
+        int repetition = Integer.parseInt(argumentList[3]);
+        if (repetition <= 0 || repetition > 50) {
+            throw new IllegalValueException("Invalid value for repetitions");
+        }
+        return repetition;
     }
 
     private static double getDistanceWithValidation(double distance) throws IllegalValueException {
