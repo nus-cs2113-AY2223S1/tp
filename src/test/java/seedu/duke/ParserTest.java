@@ -17,4 +17,9 @@ class ParserTest {
 
         assertArrayEquals(expected, ps.getCommandWord(testCommand));
     }
+
+    // @Test
+    // void executeAddTest() {
+    //     String testCommand = "Test command";
+    // }
 }
