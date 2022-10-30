@@ -21,7 +21,7 @@ class AddModuleCommandTest {
 
     @Test
     public void testAddCommand_withoutModuleCode_throwsException() {
-        assertThrows(YamomException.class, () -> new AddModuleCommand(new String[]{ "add" }));
+        assertThrows(YamomException.class, () -> new AddModuleCommand(new String[]{"add"}));
     }
 
     @Test
@@ -43,18 +43,18 @@ class AddModuleCommandTest {
         int semester = 1;
         state.setSemester(semester);
 
-        SelectedModule selectedModule = new SelectedModule(module,semester);
+        SelectedModule selectedModule = new SelectedModule(module, semester);
         assertFalse(state.getSelectedModulesList().contains(selectedModule));
 
-        String[] testInput = {"add","cs1010s"};
+        String[] testInput = {"add", "cs1010s"};
         AddModuleCommand addModuleCommand = new AddModuleCommand(testInput);
-        addModuleCommand.execute(state,ui,storage);
+        addModuleCommand.execute(state, ui, storage);
         assertTrue(state.getSelectedModulesList().contains(selectedModule));
     }
 
     @Test
     void addCommand_testIsExit_correctOutput() throws YamomException {
-        String[] testInput = { "add", "cs2113" };
+        String[] testInput = {"add", "cs2113"};
         assertFalse(new AddModuleCommand(testInput).isExit());
     }
 
@@ -62,7 +62,7 @@ class AddModuleCommandTest {
     void testIsModuleExistWithInvalidInput_ExpectFalse() {
         String invalidModuleCode = "cs1111";
         assertThrows(YamomException.class,
-            () -> new AddModuleCommand(new String[]{ "add", invalidModuleCode }));
+            () -> new AddModuleCommand(new String[]{"add", invalidModuleCode}));
     }
 
 }

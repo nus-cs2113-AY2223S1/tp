@@ -19,14 +19,14 @@ import seedu.duke.command.ByeCommand;
 public class Ui {
 
     public static final String LOGO = "                      " + System.lineSeparator()
-            + "__ __ _____ _____ _____ _____" + System.lineSeparator()
-            + "|  |  |  _  |     |     |     |" + System.lineSeparator()
-            + "|_   _|     | | | |  |  | | | |" + System.lineSeparator()
-            + "  |_| |__|__|_|_|_|_____|_|_|_|" + System.lineSeparator();
+        + "__ __ _____ _____ _____ _____" + System.lineSeparator()
+        + "|  |  |  _  |     |     |     |" + System.lineSeparator()
+        + "|_   _|     | | | |  |  | | | |" + System.lineSeparator()
+        + "  |_| |__|__|_|_|_|_____|_|_|_|" + System.lineSeparator();
 
     public static final String MESSAGE_GREET = "Hello from" + System.lineSeparator()
-            + LOGO + System.lineSeparator() + "How can I help you today?"
-            + System.lineSeparator() + "Enter \"help\" to get started!";
+        + LOGO + System.lineSeparator() + "How can I help you today?"
+        + System.lineSeparator() + "Enter \"help\" to get started!";
     public static final String MESSAGE_BYE = "Bye bye, See you again";
     public static final String LINE_DIVIDER = StringUtils.repeat("-", 80);
     public static final String INDENT = StringUtils.repeat(" ", 6);
@@ -144,7 +144,7 @@ public class Ui {
      */
     public void displayUserPrompt(int semester) {
         String promptFormat = "Sem " + "[" + currentUserSemester(semester)
-                + "]" + " >> ";
+            + "]" + " >> ";
         System.out.print(promptFormat);
     }
 

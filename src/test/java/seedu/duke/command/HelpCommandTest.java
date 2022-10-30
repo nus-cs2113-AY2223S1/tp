@@ -9,6 +9,6 @@ public class HelpCommandTest {
     @Test
     public void helpCommand_execution_noErrors() throws YamomException {
         Ui ui = new Ui();
-        new HelpCommand(new String[]{ "help" }).execute(null, ui, null);
+        new HelpCommand(new String[]{"help"}).execute(null, ui, null);
     }
 }

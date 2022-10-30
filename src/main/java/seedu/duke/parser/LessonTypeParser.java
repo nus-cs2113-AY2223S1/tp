@@ -1,6 +1,7 @@
 package seedu.duke.parser;
 
 import java.lang.IllegalArgumentException;
+
 import seedu.duke.model.LessonType;
 
 public class LessonTypeParser {

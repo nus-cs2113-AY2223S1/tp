@@ -18,6 +18,7 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ParserTest {
@@ -139,27 +140,31 @@ public class ParserTest {
     }
 
     @Test
-    public void selectSemesterCommandError_incorrectSelectSemesterInput_throwYamomException() {
-        String expectedErrorMessage = "Error! \tWrong format, should be: semester [SEMESTER_SELECTED]"
-                + System.lineSeparator() + "Not a valid semester.";
-        YamomException exception = assertThrows(YamomException.class,
-            () -> Parser.selectSemesterCommandError("semester 5".split("\\s+"),
-            "Wrong format, should be: semester [SEMESTER_SELECTED]"));
-        assertEquals(expectedErrorMessage, exception.getMessage());
+    public void semesterParser_incorrectSelectSemesterInput_correctReturnValue() {
+        assertFalse(Parser.isValidSemester(new String[]{"semester", "5"}));
+        assertFalse(Parser.isValidSpecialTerm(new String[]{"semester", "5"}));
+        assertFalse(Parser.isValidSemester("semester special term 3".split(" ")));
+        assertFalse(Parser.isValidSpecialTerm("semester special term 3".split(" ")));
+    }
 
-        exception = assertThrows(YamomException.class,
-            () -> Parser.selectSemesterCommandError("semester special term 3".split("\\s+"),
-            "Wrong format, should be: semester [SEMESTER_SELECTED]"));
-        assertEquals(expectedErrorMessage, exception.getMessage());
+    @Test
+    public void semesterParser_correctSelectSemesterInput_correctReturnValue() {
+        assertTrue(Parser.isValidSemester(new String[]{"semester", "1"}));
+        assertTrue(Parser.isValidSemester(new String[]{"semester", "2"}));
+        assertTrue(Parser.isValidSemester(new String[]{"semester", "3"}));
+        assertTrue(Parser.isValidSpecialTerm("semester special term 1".split(" ")));
+        assertTrue(Parser.isValidSpecialTerm("semester st1".split(" ")));
+        assertTrue(Parser.isValidSpecialTerm("semester st2".split(" ")));
     }
 
     @Test
     public void parseParams_inputContainingBackslash_returnMap() {
         Map<String, String> actualMap = Parser.parseParams("test /key1 value1 /key2 value2");
+        assertEquals(2, actualMap.size());
         assertTrue(actualMap.containsKey("key1"));
-        assertTrue(actualMap.containsValue("value1"));
+        assertTrue(actualMap.get("key1").equals("value1"));
         assertTrue(actualMap.containsKey("key2"));
-        assertTrue(actualMap.containsValue("value2"));
+        assertTrue(actualMap.get("key2").equals("value2"));
     }
 
     @Test

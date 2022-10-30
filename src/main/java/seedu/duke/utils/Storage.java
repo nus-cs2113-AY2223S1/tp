@@ -93,7 +93,7 @@ public class Storage {
         assert state != null : "State should not be null";
         logger = Logger.getLogger(SUBSYSTEM_NAME);
         logger.log(Level.FINE, "Saving current state with " + state.getSelectedModulesList().size()
-                + " modules into a file. The format will be NUSMods export link.");
+            + " modules into a file. The format will be NUSMods export link.");
         File file = new File(FILE_PATH);
         if (file.getParentFile().mkdirs()) {
             file.createNewFile();
