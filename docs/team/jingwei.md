@@ -31,6 +31,7 @@ and transactions via a Command Line Interface.
     + Contributed to help command
 + **Developer Guide contributions:**
     + Wrote `Introduction`, `Duke` and `help` sections
+    + Contributed to `User Stories` and `Glossary` 
     + Wrote the item component section `3.4. Item component`
     + Contributed to the Implementation subsection:
       + Wrote view a user (4.1.4)
