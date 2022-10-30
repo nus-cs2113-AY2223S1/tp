@@ -12,7 +12,7 @@ ____________________________________________________________
 ____________________________________________________________
 ____________________________________________________________
 Hello! I'm Moo and I will help you to manage your finances.
-Budget remained for current month: $1000
+Remaining budget for current month: $1000
 REMINDER: Continue to stay within your budget for this month! Good fortune!
 Enter <help> if you need the list of commands.
 ____________________________________________________________
@@ -167,21 +167,21 @@ ____________________________________________________________
 Mandatory tag(s) missing, please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
-Invalid budget amount! (Note: Budget must be a positive integer of valid range) Please enter <help> for the command guide.
+Invalid budget amount! (Note: Budget must be a positive whole number of valid range) Please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
-Invalid budget amount! (Note: Budget must be a positive integer of valid range) Please enter <help> for the command guide.
+Invalid budget amount! (Note: Budget must be a positive whole number of valid range) Please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
-Invalid budget amount! (Note: Budget must be a positive integer of valid range) Please enter <help> for the command guide.
+Invalid budget amount! (Note: Budget must be a positive whole number of valid range) Please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
-Invalid budget amount! (Note: Budget must be a positive integer of valid range) Please enter <help> for the command guide.
+Invalid budget amount! (Note: Budget must be a positive whole number of valid range) Please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
 You have successfully updated the budget.
 Monthly budget set as: $10000
-Budget remained for current month: $10000
+Remaining budget for current month: $10000
 REMINDER: Continue to stay within your budget for this month! Good fortune!
 ____________________________________________________________
 ____________________________________________________________
@@ -214,7 +214,7 @@ ____________________________________________________________
 ____________________________________________________________
 I have added the following Expense transaction:
 [-][food] $20 on Sep 13 2022 | Description: NIL
-Budget remained for Sep 2022: $9980. Keep it up!
+Remaining budget for Sep 2022: $9980. Keep it up!
 ____________________________________________________________
 ____________________________________________________________
 Invalid amount! (Note: Amount must be positive integer, $10000000 or less only) Please enter <help> for the command guide.
@@ -228,12 +228,12 @@ ____________________________________________________________
 ____________________________________________________________
 I have added the following Income transaction:
 [+][salary] $2000 on Sep 30 2022 | Description: jan_salary
-Budget remained for Sep 2022: $9980. Keep it up!
+Remaining budget for Sep 2022: $9980. Keep it up!
 ____________________________________________________________
 ____________________________________________________________
 I have added the following Expense transaction:
 [-][transport] $1 on Oct 02 2022 | Description: bus_fare
-Budget remained for Oct 2022: $9999. Keep it up!
+Remaining budget for Oct 2022: $9999. Keep it up!
 ____________________________________________________________
 ____________________________________________________________
 Parameter behind tag(s) is found to be empty, please enter <help> for the command guide.
@@ -454,11 +454,11 @@ ____________________________________________________________
 ____________________________________________________________
 You have successfully updated the budget.
 Monthly budget set as: $10000000000000
-Budget remained for current month: $9999999989999
+Remaining budget for current month: $9999999989999
 REMINDER: Continue to stay within your budget for this month! Good fortune!
 ____________________________________________________________
 ____________________________________________________________
-Invalid budget amount! (Note: Budget must be a positive integer of valid range) Please enter <help> for the command guide.
+Invalid budget amount! (Note: Budget must be a positive whole number of valid range) Please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
 Mandatory tag(s) missing, please enter <help> for the command guide.
@@ -466,7 +466,7 @@ ____________________________________________________________
 ____________________________________________________________
 I have deleted the following transaction:
 [-][food] $20 on Sep 13 2022 | Description: NIL
-Budget remained for Sep 2022: $10000000000000. Keep it up!
+Remaining budget for Sep 2022: $10000000000000. Keep it up!
 ____________________________________________________________
 ____________________________________________________________
 Here are your transaction records:
@@ -485,12 +485,12 @@ ____________________________________________________________
 ____________________________________________________________
 I have deleted the following transaction:
 [+][bonus] $10000000 on Oct 03 2022 | Description: thank_you_boss
-Budget remained for Oct 2022: $9999999989999. Keep it up!
+Remaining budget for Oct 2022: $9999999989999. Keep it up!
 ____________________________________________________________
 ____________________________________________________________
 I have deleted the following transaction:
 [-][transport] $10000 on Oct 03 2022 | Description: bus_fare
-Budget remained for Oct 2022: $9999999999999. Keep it up!
+Remaining budget for Oct 2022: $9999999999999. Keep it up!
 ____________________________________________________________
 ____________________________________________________________
 Here are your transaction records:
@@ -546,7 +546,7 @@ ____________________________________________________________
 ____________________________________________________________
 I have added the following Expense transaction:
 [-][transport] $1 on Oct 02 2022 | Description: i/i/i/i/
-Budget remained for Oct 2022: $9999999999999. Keep it up!
+Remaining budget for Oct 2022: $9999999999999. Keep it up!
 ____________________________________________________________
 ____________________________________________________________
 Not supported tag(s) detected, please enter <help> for the command guide.
