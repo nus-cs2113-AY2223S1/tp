@@ -8,13 +8,13 @@ import recipeditor.ui.Ui;
 
 import java.io.FileNotFoundException;
 
-public class GUIWorkFlow {
+public class GuiWorkFlow {
     private static final String ABORT_QUESTION = "Do you want to ABORT? (Y/N)";
 
     private boolean validity;
     private Recipe recipe;
 
-    public GUIWorkFlow(String path) {
+    public GuiWorkFlow(String path) {
         try {
             boolean saveToTemp = new Editor().enterEditor(path);
             boolean exitLoop = !saveToTemp;
@@ -37,7 +37,7 @@ public class GUIWorkFlow {
                     }
                 }
             }
-        } catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             Ui.showMessage(e.getMessage());
             validity = false;
         }

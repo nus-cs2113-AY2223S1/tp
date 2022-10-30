@@ -8,4 +8,4 @@ Example Description
 1. Example ingredient / 1.2 / example unit 
 
 # STEPS 
-2. Example step 
+1. Example step 

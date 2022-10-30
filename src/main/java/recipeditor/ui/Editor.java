@@ -65,7 +65,8 @@ public class Editor extends JFrame implements ActionListener {
         frame.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent e) {
-                if (JOptionPane.showConfirmDialog(frame, "Do you want to save?", "Closing", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+                if (JOptionPane.showConfirmDialog(frame, "Do you want to save?", "Closing",
+                        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
                     state = EditorState.SAVE;
                 } else {
                     state = EditorState.EXIT;
