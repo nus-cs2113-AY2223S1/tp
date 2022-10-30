@@ -6,11 +6,11 @@ skinparam classAttributeIconSize 0
 class Link {
     <u>- DELIMITER: String
     <u>- DOMAIN: String
-    <u>- lessonDelimiter: String
+    <u>- LESSON_DELIMITER: String
     <u>- LESSON_TYPE_DELIMITER: String
     <u>- LINK_EXAMPLE: String
     <u>- LINK_PROCESS_ERROR_MESSAGE: String
-    <u>- moduleDelimiter: String
+    <u>- MODULE_DELIMITER: String
     <u>- MODULE_CODE_DELIMITER: String
     <u>- MODULES_PARAM_INDEX: int
     <u>- SEMESTER_DELIMITER: String
@@ -23,7 +23,6 @@ class Link {
 
     <u>- addLessons(String[], SelectedModule, int): void
     <u>- addValidLesson(SelectedModule, int, LessonType, String): void
-    <u>- appendLessons(Map<LessonType, String>, StringBuilder): void
     <u>- appendModules(List<SelectedModule>, StringBuilder): void
     <u>+ getLessonType(String): LessonType
     <u>+ getLink(State): String
@@ -31,6 +30,7 @@ class Link {
     <u>- isEmptyLink(String): boolean
     <u>- isLessonInfo(String): boolean
     <u>- isValidPreviousState(String): boolean
+    <u>- joinLessons(Map<LessonType, String>): String
     <u>+ parseLink(String, State): void
 }
 @enduml

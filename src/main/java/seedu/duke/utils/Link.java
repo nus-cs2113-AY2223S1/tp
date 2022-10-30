@@ -50,9 +50,9 @@ public class Link {
 
     private static final String SUPPOSED_PREFIX_REGEX = "^" + DOMAIN + SEMESTER_DELIMITER + "\\d/share\\?";
 
-    private static String moduleDelimiter = "&";
+    private static final String MODULE_DELIMITER = "&";
 
-    private static String lessonDelimiter = ",";
+    private static final String LESSON_DELIMITER = ",";
 
     public static final int SEMESTER_PARAM_INDEX = 4;
 
@@ -73,7 +73,7 @@ public class Link {
      * @param link  For exporting to NUSMods.
      * @param state Current state of the application to be saved to.
      */
-    public static void parseLink(String link, State state) throws YamomException {
+    public static void parseLink(String link, State state, Ui ui) throws YamomException {
         String[] infoParam = link.split(DELIMITER_REGEX);
         /*
         infoParam[0] = "https:";
@@ -94,6 +94,7 @@ public class Link {
 
         if (Arrays.asList(1, 2, 3, 4).contains(semester)) {
             state.setSemester(semester);
+            ui.addMessage("Semester " + semester + " timetable imported.");
         } else {
             throw new YamomException(SEMESTER_PROCESS_ERROR_MESSAGE);
         }
@@ -104,27 +105,34 @@ public class Link {
         if (cleanModuleParam.isEmpty()) {
             return;
         }
-
-        String[] moduleAndLessonsArray = cleanModuleParam.split(moduleDelimiter);
+        String[] moduleAndLessonsArray = cleanModuleParam.split(MODULE_DELIMITER);
         List<SelectedModule> selectedModules = new ArrayList<>();
         for (String moduleAndLessons : moduleAndLessonsArray) {
             String[] splitModuleAndLesson = moduleAndLessons.split(Pattern.quote(MODULE_CODE_DELIMITER));
             if (splitModuleAndLesson.length == 0) {
-                return;
+                continue;
             }
             String moduleCode = splitModuleAndLesson[0];
             Module module = Module.get(moduleCode);
             if (module == null || module.getSemesterData(semester) == null) {
                 continue;
             }
+            ui.addMessage(moduleCode + " added.");
+            ui.addMessage("The following lessons were added:");
             SelectedModule selectedModule = new SelectedModule(module, semester);
-            //only parses the lessons between the first and second = sign
+            //only parses the lessons between the first and second = sign (there is not supposed to be a second = sign)
             if (splitModuleAndLesson.length > 1) {
-                String[] lessonsInfo = (splitModuleAndLesson[1]).split(lessonDelimiter);
-                addLessons(lessonsInfo, selectedModule, semester);
+                String[] lessonsInfo = (splitModuleAndLesson[1]).split(LESSON_DELIMITER);
+                addLessons(lessonsInfo, selectedModule, semester, ui);
             }
             selectedModules.add(selectedModule);
+            ui.addMessage("");
         }
+        ui.addMessage("Please check that the format of the link provided is correct if there are missing "
+                + "modules or lessons.");
+        ui.addMessage("Please visit https://ay2223s1-cs2113-f11-3.github.io/tp/UserGuide.html#import-a-"
+                + "timetable-import");
+        ui.addMessage("for more information.");
         state.setSelectedModulesList(selectedModules);
     }
 
@@ -172,7 +180,7 @@ public class Link {
      * @param selectedModule Current module to select lessons.
      * @param semester       Semester in which lessons are being selected for.
      */
-    private static void addLessons(String[] lessonsInfo, SelectedModule selectedModule, int semester) {
+    private static void addLessons(String[] lessonsInfo, SelectedModule selectedModule, int semester, Ui ui) {
         for (String s : lessonsInfo) {
             if (!isLessonInfo(s)) {
                 continue;
@@ -180,7 +188,7 @@ public class Link {
             String[] lessonInfo = s.split(LESSON_TYPE_DELIMITER);
             LessonType lessonType = getLessonType(lessonInfo[0]);
             String classNo = lessonInfo[1];
-            addValidLesson(selectedModule, semester, lessonType, classNo);
+            addValidLesson(selectedModule, semester, lessonType, classNo, ui);
         }
     }
 
@@ -193,11 +201,12 @@ public class Link {
      * @param classNo        Specified class number.
      */
     private static void addValidLesson(SelectedModule selectedModule, int semester,
-                                       LessonType lessonType, String classNo) {
+                                       LessonType lessonType, String classNo, Ui ui) {
         List<RawLesson> potentialLesson = selectedModule.getModule().getSemesterData(semester)
                 .getLessonsByTypeAndNo(lessonType, classNo);
         if (!potentialLesson.isEmpty()) {
             selectedModule.selectSlot(lessonType, classNo);
+            ui.addMessage(lessonType + ":" + classNo);
         }
     }
 
@@ -262,34 +271,31 @@ public class Link {
      * @param toSave          NUSMods formatted link.
      */
     private static void appendModules(List<SelectedModule> selectedModules, StringBuilder toSave) {
-        moduleDelimiter = "";
+        ArrayList<String> modules = new ArrayList<>();
         for (SelectedModule selectedModule: selectedModules) {
-            toSave.append(moduleDelimiter);
-            moduleDelimiter = "&";
             Module module = selectedModule.getModule();
-            toSave.append(module.moduleCode);
-            toSave.append(MODULE_CODE_DELIMITER);
+            String moduleInfo = module.moduleCode + MODULE_CODE_DELIMITER;
             Map<LessonType, String> selectedSlots = selectedModule.getSelectedSlots();
-            appendLessons(selectedSlots, toSave);
+            String lessonsInfo = joinLessons(selectedSlots);
+            modules.add(moduleInfo + lessonsInfo);
         }
+        toSave.append(String.join(MODULE_DELIMITER, modules));
     }
 
     /**
-     * Goes through all the selected lessons slots for the selected module and appends it in
+     * Goes through all the selected lessons slots for the selected module and joins it in
      * the correct format to be saved.
      *
      * @param selectedSlots The selected lessons slots.
-     * @param toSave        NUSMods formatted link.
+     * @return The String containing all the joint lessons.
      */
-    private static void appendLessons(Map<LessonType, String> selectedSlots, StringBuilder toSave) {
-        lessonDelimiter = "";
+    private static String joinLessons(Map<LessonType, String> selectedSlots) {
+        ArrayList<String> lessons = new ArrayList<>();
         for (Map.Entry<LessonType, String> slot: selectedSlots.entrySet()) {
-            toSave.append(lessonDelimiter);
-            lessonDelimiter = ",";
             String shortLessonType = Timetable.lessonTypeToShortString(slot.getKey());
-            toSave.append(shortLessonType);
-            toSave.append(LESSON_TYPE_DELIMITER);
-            toSave.append(slot.getValue());
+            String lesson = shortLessonType + LESSON_TYPE_DELIMITER + slot.getValue();
+            lessons.add(lesson);
         }
+        return String.join(LESSON_DELIMITER, lessons);
     }
 }
