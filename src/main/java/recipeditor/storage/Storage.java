@@ -140,14 +140,28 @@ public class Storage {
         }
     }
 
-    public static void saveRecipe(Recipe recipe, String recipeFileDestinationPath) {
+    public static void saveRecipe(Recipe recipe, String oldFile, String recipeFileDestinationPath) {
         try {
+            deleteFile(oldFile);
+            rewriteRecipeListToFile(Storage.ALL_RECIPES_FILE_PATH);
             FileWriter fw = new FileWriter(recipeFileDestinationPath);
             fw.write(recipe.getRecipeSaveableFormatted() + "\n");
             fw.close();
             logger.log(Level.INFO, recipe.getTitle() + " saved to the file.");
         } catch (IOException ioException) {
             Ui.showMessage("Error in saving recipe to data file");
+        }
+    }
+
+    public static boolean checkIfFileExists(String filePath) {
+        File f = new File(filePath);
+        return f.exists();
+    }
+
+    public static void deleteFile(String filePath) {
+        if (checkIfFileExists(filePath)) {
+            File f = new File(filePath);
+            f.delete();
         }
     }
 

@@ -63,7 +63,7 @@ can be loaded from saves upon next software launch.
 The UI component is responsible for all user interfaces of the application.
 
 <p align="center" width="100%">
-  <img width="80%" src="Desktop/CS2113/tp/tp/docs/images/ClassDiagrams/UiClassDiagram.png" alt="Ui Class Diagram"/>
+  <img width="80%" src="images/ClassDiagrams/UiClassDiagram.png" alt="Ui Class Diagram"/>
 </p>
 
 **API:** `Ui.java`
@@ -75,7 +75,7 @@ The UI component is responsible for all user interfaces of the application.
 The storage component allows data to be read from and saved to a storage file.
 
 <p align="center" width="100%">
-  <img width="80%" src="Desktop/CS2113/tp/tp/docs/images/ClassDiagrams/StorageClassDiagram.png" alt="Storage Class Diagram"/>
+  <img width="80%" src="images/ClassDiagrams/StorageClassDiagram.png" alt="Storage Class Diagram"/>
 </p>
 
 **API:** `Storage.java`
@@ -96,7 +96,7 @@ A `CommandResult` is returned from `execute()` method call of each `Command`.
 The `CommandResult` consists of a single error message in `String`.
 
 <p align="center" width="100%">
-  <img width="80%" src="Desktop/CS2113/tp/tp/docs/images/ClassDiagrams/CommandClassDiagram.png" alt="Storage Class Diagram"/>
+  <img width="80%" src="images/ClassDiagrams/CommandClassDiagram.png" alt="Storage Class Diagram"/>
 </p>
 
 Each subclass of `Command` has their own attributes and `CommandResult`
@@ -123,16 +123,27 @@ otherwise show error message on `index out of bound`
 The recipe module encapsulates the array, recipe and ingredient objects.
 
 <p align="center" width="100%">
-  <img width="80%" src="images/RecipeModuleDiagram.png" alt="Recipe Module Diagram"/>
+  <img width="80%" src="images/ClassDiagrams/RecipeClassDiagram.png" alt="Recipe Module Diagram"/>
 </p>
 
 **API:** `RecipeList.java`
-1. `RecipeList` calls `Recipe` to add new recipe to the list
-2. `RecipeList` calls `Recipe` to edit existing recipes
-3. `RecipeList` calls `Recipe` to delete a recipe
+1. `RecipeList` calls `Recipe` to add, edit or delete recipes
 
 **API:** `Recipe.java`
 1. `Recipe` calls `Ingredient` to add, edit or delete ingredients
+
+### Edit Component
+
+
+<p align="center" width="100%">
+  <img width="80%" src="images/ClassDiagrams/EditClassDiagram.png" alt="Recipe Module Diagram"/>
+</p>
+
+The edit component consists of three parts:
+- Parser
+  - Parses the
+- EditModeCommand
+- EditCommand
 
 
 ### Add GUI

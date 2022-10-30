@@ -167,7 +167,7 @@ There are two types of flags:
       ```
     - `-del`: *Deletes an ingredient or step*
       - Parameter: `INDEX`
-        - Exactly one integer must be provided.
+        - Exactly **1 (one)** integer must be provided.
       - Example:
       ```
       /edit 2 -del -i 2 
@@ -177,7 +177,7 @@ There are two types of flags:
       ```
     - `-swp`: *Swaps two ingredients or steps*
       - Parameter: `INDEX_1 INDEX_2`
-        - Exactly two integers must be provided.
+        - Exactly **2 (two)** integers must be provided.
       - Example:
       ```
       /edit 1 -swp -s 2 3
@@ -187,7 +187,7 @@ There are two types of flags:
       ```
     - `-chg`: *Changes the ingredient, step, title or description*
       - Parameter: `INDEX [INGREDIENT or STEP]` or `[TITLE or DESCRIPTION]`
-        - For ingredient and step, exactly one index must be provided before the changes.
+        - For ingredient and step, exactly **1 (one) index** must be provided before the changes.
           - Ingredient format: `INGREDIENT_NAME / AMOUNT / UNIT`
           - Step format: `STEP`
         - For title and description, type the changes right after the flags.

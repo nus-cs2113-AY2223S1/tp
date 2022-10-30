@@ -1,0 +1,23 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+hide class fields
+hide class methods
+
+package Recipe {
+    class RecipeList
+    class Recipe
+    class Ingredient
+}
+
+class RecipeList {
+}
+class Recipe {
+}
+class Ingredient{
+}
+
+
+RecipeList *-right- Recipe
+Recipe *-right- Ingredient
+@enduml

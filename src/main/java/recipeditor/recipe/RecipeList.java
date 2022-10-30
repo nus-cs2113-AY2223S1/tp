@@ -27,6 +27,7 @@ public class RecipeList {
     }
 
     public static void deleteRecipeFromIndex(int index) throws IndexOutOfBoundsException {
+        recipeTitles.remove(index);
         recipes.remove(index);
     }
 
@@ -35,10 +36,12 @@ public class RecipeList {
         recipeTitles.removeIf(r -> r.equals(recipeTitle));
     }
 
-    public static void editRecipe(int index, Recipe newRecipe) {
+    public static void editRecipe(int index, Recipe newRecipe, String oldTitle) {
         recipes.set(index, newRecipe);
+        recipeTitles.set(index, newRecipe.getTitle());
+        String oldFile = Storage.RECIPES_FOLDER_PATH + "/" + oldTitle;
         String recipeFileSourcePath = Storage.RECIPES_FOLDER_PATH + "/" + newRecipe.getTitle();
-        Storage.saveRecipe(newRecipe, recipeFileSourcePath);
+        Storage.saveRecipe(newRecipe, oldFile, recipeFileSourcePath);
     }
 
     public static Recipe getRecipeFromTitle(String recipeTitle) {
