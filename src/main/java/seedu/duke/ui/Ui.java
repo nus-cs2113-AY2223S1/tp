@@ -135,8 +135,7 @@ public class Ui {
 
     public static void updateTransactionMessage(Transaction transaction) {
         showLine();
-        System.out
-                .print("Done! Here is the updated transaction:\n" + transaction.toString() + "\n");
+        System.out.print("Done! Here is the updated transaction:\n" + transaction.toString() + "\n");
         showLine();
     }
 

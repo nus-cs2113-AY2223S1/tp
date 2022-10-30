@@ -487,7 +487,7 @@ OK! I will add the following transaction:
    Borrower: bui 
    Duration: 5 
    ReturnedDate: Tue, Oct 25 2022 
-   MoneyTransacted: 10.0 
+   MoneyTransacted: $10.0 
 Total transaction(s) in database: 3
 ____________________________________________________________
 ```
@@ -511,7 +511,7 @@ OK! I will remove the following item:
    Borrower: bui 
    Duration: 5 
    ReturnedDate: Tue, Oct 25 2022 
-   MoneyTransacted: 10.0 
+   MoneyTransacted: $10.0 
 Total transactions(s) in database: 2
 ____________________________________________________________
 ```
@@ -532,13 +532,13 @@ Here are 2 transaction(s) in your list:
    Borrower: jorelle 
    Duration: 5 
    ReturnDate: Fri, Oct 28 2022 (0 day(s) left) 
-   MoneyTransacted: 5.0 
+   MoneyTransacted: $5.0 
 2. [Unfinished] TxID: 9e27c530 
    ItemName: laptop ItemID: bd4961ed 
    Borrower: winston 
    Duration: 100 
    ReturnDate: Sat, Jan 21 2023 (85 day(s) left) 
-   MoneyTransacted: 900.0 
+   MoneyTransacted: $900.0 
 ____________________________________________________________
 ```
 
@@ -561,7 +561,7 @@ Here is the transaction you requested to view:
    Borrower: winston 
    Duration: 100 
    ReturnDate: Sat, Jan 21 2023 (85 day(s) left) 
-   MoneyTransacted: 900.0 
+   MoneyTransacted: $900.0 
 ____________________________________________________________
 ```
 
@@ -581,13 +581,13 @@ Here are the uncompleted transactions:
    Borrower: jorelle 
    Duration: 5 
    ReturnDate: Fri, Oct 28 2022 (0 day(s) left) 
-   MoneyTransacted: 5.0 
+   MoneyTransacted: $5.0 
 [Unfinished] TxID: 9e27c530 
    ItemName: laptop ItemID: bd4961ed 
    Borrower: winston 
    Duration: 100 
    ReturnDate: Sat, Jan 21 2023 (85 day(s) left) 
-   MoneyTransacted: 900.0 
+   MoneyTransacted: $900.0 
 ____________________________________________________________
 ```
 
@@ -611,7 +611,7 @@ Done! Here is the updated transaction:
    Borrower: jorelle 
    Duration: 10 
    ReturnDate: Wed, Nov 02 2022 (5 day(s) left) 
-   MoneyTransacted: 10.0 
+   MoneyTransacted: $10.0 
 ____________________________________________________________
 ```
 

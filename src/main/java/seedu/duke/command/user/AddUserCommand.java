@@ -32,6 +32,17 @@ import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_CONTACT_DUP
 public class AddUserCommand extends Command {
     private final String[] parts;
     private final UserList userList;
+    private static final String NAME_DELIMITER = "n";
+    private static final String AGE_DELIMITER = "a";
+    private static final String CONTACT_DELIMITER = "c";
+    private static final int NUMBER_OF_ARGS = 3;
+    private static final int NAME_INDEX = 0;
+    private static final int AGE_INDEX = 1;
+    private static final int CONTACT_INDEX = 2;
+    private static final int CONTACT_LENGTH = 8;
+    private static final int AGE_LOWER_LIMIT = 10;
+    private static final int AGE_UPPER_LIMIT = 100;
+    private static final int NAME_LIMIT = 20;
 
     /**
      * Constructor for AddUserCommand.
@@ -55,15 +66,15 @@ public class AddUserCommand extends Command {
      * @throws InvalidArgumentException If there is a part that cannot be parsed
      */
     private String[] getArgsAddUserCmd() throws InvalidArgumentException {
-        String[] args = new String[3];
+        String[] args = new String[NUMBER_OF_ARGS];
         for (String part : parts) {
             String delimiter = CommandParser.getArgsDelimiter(part);
-            if (delimiter.equals("n")) {
-                args[0] = CommandParser.getArgValue(part);
-            } else if (delimiter.equals("a")) {
-                args[1] = CommandParser.getArgValue(part);
-            } else if (delimiter.equals("c")) {
-                args[2] = CommandParser.getArgValue(part);
+            if (delimiter.equals(NAME_DELIMITER)) {
+                args[NAME_INDEX] = CommandParser.getArgValue(part);
+            } else if (delimiter.equals(AGE_DELIMITER)) {
+                args[AGE_INDEX] = CommandParser.getArgValue(part);
+            } else if (delimiter.equals(CONTACT_DELIMITER)) {
+                args[CONTACT_INDEX] = CommandParser.getArgValue(part);
             } else {
                 throw new InvalidArgumentException(MESSAGE_INVALID_PARTS);
             }
@@ -80,7 +91,7 @@ public class AddUserCommand extends Command {
      * @throws DuplicateException If that username is taken
      */
     private boolean isValidName(String userName) throws DuplicateException, InvalidUserException {
-        if (userName.length() > 20) {
+        if (userName.length() > NAME_LIMIT) {
             throw new InvalidUserException(MESSAGE_NAME_LENGTH_INVALID);
         }
         try {
@@ -100,7 +111,7 @@ public class AddUserCommand extends Command {
      */
     private boolean isValidAge(String age) throws InvalidUserException {
         try {
-            if (Integer.parseInt(age) < 10 || Integer.parseInt(age) > 100) {
+            if (Integer.parseInt(age) < AGE_LOWER_LIMIT || Integer.parseInt(age) > AGE_UPPER_LIMIT) {
                 throw new InvalidUserException(MESSAGE_USER_AGE_OUT_OF_RANGE);
             }
             return true;
@@ -118,7 +129,7 @@ public class AddUserCommand extends Command {
      */
     private boolean isValidContactNumber(String contactNumber)
             throws ContactNumberInvalidException {
-        if (contactNumber.length() != 8) {
+        if (contactNumber.length() != CONTACT_LENGTH) {
             throw new ContactNumberInvalidException(MESSAGE_CONTACT_LENGTH_INVALID);
         }
         if (Integer.parseInt(contactNumber) < 0) {
@@ -148,8 +159,9 @@ public class AddUserCommand extends Command {
      */
     private boolean areValidArgs(String[] args)
             throws ContactNumberInvalidException, DuplicateException, InvalidUserException {
-        assert args.length == 3 : "Args length is invalid";
-        return isValidName(args[0]) && isValidAge(args[1]) && isValidContactNumber(args[2]);
+        assert args.length == NUMBER_OF_ARGS : "Args length is invalid";
+        return isValidName(args[NAME_INDEX]) && isValidAge(args[AGE_INDEX])
+                && isValidContactNumber(args[CONTACT_INDEX]);
     }
 
     /**
@@ -165,7 +177,7 @@ public class AddUserCommand extends Command {
     public boolean executeCommand() throws InsufficientArgumentsException, InvalidArgumentException,
             ContactNumberInvalidException, DuplicateException, InvalidUserException {
         String[] args = getArgsAddUserCmd();
-        assert args.length == 3 : "Args length is invalid";
+        assert args.length == NUMBER_OF_ARGS : "Args length is invalid";
         if (areValidArgs(args)) {
             User user = new User(args[0], Integer.parseInt(args[1]), args[2]);
             this.userList.addUser(user);

@@ -122,7 +122,7 @@ class TransactionListTest {
     void convertTransactionListToFileFormat() {
         String transactionId = transaction.getTxId();
         transactionList.addTransaction(transaction);
-        assertEquals("1\n" + transactionId + " | pen | 28sd37h2 | bui | 5 | 2022-10-03 | 3.2 | 152\n",
+        assertEquals("1\n" + transactionId + " | pen | 28sd37h2 | bui | 5 | 2022-10-03 | 3.2 | 153\n",
                 transactionList.convertTransactionListToFileFormat());
     }
 
@@ -140,7 +140,7 @@ class TransactionListTest {
         Transaction newTransaction = new Transaction("pen", "28sd37h2", "bui", 6,
                 LocalDate.parse("2022-10-03"), 3.2);
         assertThrows(InvalidTransactionException.class,
-            () -> transactionList.checkIfListHasTransactionOfThisItemThatOverlapWithNewTransaction(newTransaction));
+            () -> transactionList.checkOldTransactionsOverlapWithNew(newTransaction));
     }
 
     @Test
@@ -151,7 +151,7 @@ class TransactionListTest {
         transactionList.addTransaction(newTransaction);
         assertThrows(InvalidTransactionException.class,
             () -> transactionList
-                    .checkIfListHasTransactionOfThisItemThatOverlapWithNewTransaction(
+                    .checkOldTransactionsOverlapWithNew(
                             transaction.update(10, 6.4)));
     }
 }

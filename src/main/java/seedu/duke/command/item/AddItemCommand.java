@@ -36,6 +36,15 @@ public class AddItemCommand extends Command {
     private final ItemList itemList;
     private final UserList userList;
     private final TransactionList transactionList;
+    private static final String NAME_DELIMITER = "n";
+    private static final String CATEGORY_DELIMITER = "c";
+    private static final String PRICE_DELIMITER = "p";
+    private static final String OWNER_DELIMITER = "o";
+    private static final int NUMBER_OF_ARGS = 4;
+    private static final int NAME_INDEX = 0;
+    private static final int CATEGORY_INDEX = 1;
+    private static final int PRICE_INDEX = 2;
+    private static final int OWNER_INDEX = 3;
 
     /**
      * Constructor for AddItemCommand.
@@ -52,7 +61,7 @@ public class AddItemCommand extends Command {
         this.itemList = itemList;
         this.userList = userList;
         this.transactionList = transactionList;
-        if (parts.length != 4) {
+        if (parts.length != NUMBER_OF_ARGS) {
             throw new InsufficientArgumentsException(MESSAGE_INSUFFICIENT_ARGUMENTS);
         }
     }
@@ -64,17 +73,17 @@ public class AddItemCommand extends Command {
      * @throws InvalidArgumentException If there is a part that cannot be parsed
      */
     private String[] getArgsAddItemCmd() throws InvalidArgumentException {
-        String[] args = new String[4];
+        String[] args = new String[NUMBER_OF_ARGS];
         for (String part : parts) {
             String delimiter = CommandParser.getArgsDelimiter(part);
-            if (delimiter.equals("n")) {
-                args[0] = CommandParser.getArgValue(part);
-            } else if (delimiter.equals("c")) {
-                args[1] = CommandParser.getArgValue(part);
-            } else if (delimiter.equals("p")) {
-                args[2] = CommandParser.getArgValue(part);
-            } else if (delimiter.equals("o")) {
-                args[3] = CommandParser.getArgValue(part);
+            if (delimiter.equals(NAME_DELIMITER)) {
+                args[NAME_INDEX] = CommandParser.getArgValue(part);
+            } else if (delimiter.equals(CATEGORY_DELIMITER)) {
+                args[CATEGORY_INDEX] = CommandParser.getArgValue(part);
+            } else if (delimiter.equals(PRICE_DELIMITER)) {
+                args[PRICE_INDEX] = CommandParser.getArgValue(part);
+            } else if (delimiter.equals(OWNER_DELIMITER)) {
+                args[OWNER_INDEX] = CommandParser.getArgValue(part);
             } else {
                 throw new InvalidArgumentException(MESSAGE_INVALID_PARTS);
             }
@@ -166,9 +175,10 @@ public class AddItemCommand extends Command {
      */
     private boolean areValidArgs(String[] args)
             throws UserNotFoundException, DuplicateException, InvalidPriceException, InvalidUserException {
-        assert args.length == 4 : "Args length is invalid";
-        return isValidName(args[0], Double.parseDouble(args[2])) && isValidCategoryNumber(args[1])
-                && isValidPrice(args[2]) && isValidOwner(args[3]);
+        assert args.length == NUMBER_OF_ARGS : "Args length is invalid";
+        return isValidName(args[NAME_INDEX], Double.parseDouble(args[PRICE_INDEX]))
+                && isValidCategoryNumber(args[CATEGORY_INDEX]) && isValidPrice(args[PRICE_INDEX])
+                && isValidOwner(args[OWNER_INDEX]);
     }
 
     /**
@@ -183,12 +193,12 @@ public class AddItemCommand extends Command {
     public boolean executeCommand() throws InvalidArgumentException, UserNotFoundException,
             DuplicateException, InvalidPriceException, InvalidCategoryException, InvalidUserException {
         String[] args = getArgsAddItemCmd();
-        assert args.length == 4 : "Args length is invalid";
+        assert args.length == NUMBER_OF_ARGS : "Args length is invalid";
         if (areValidArgs(args)) {
-            String name = args[0];
-            int categoryNumber = Integer.parseInt(args[1]);
-            double price = Double.parseDouble(args[2]);
-            String ownerId = args[3];
+            String name = args[NAME_INDEX];
+            int categoryNumber = Integer.parseInt(args[CATEGORY_INDEX]);
+            double price = Double.parseDouble(args[PRICE_INDEX]);
+            String ownerId = args[OWNER_INDEX];
             Item item = new Item(name, categoryNumber, price, ownerId);
             this.itemList.addItem(item);
             Ui.addItemMessage(item, itemList.getListSize(), transactionList);

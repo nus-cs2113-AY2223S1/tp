@@ -162,13 +162,15 @@ public class Transaction {
      * @param transactionToCheck The new transaction
      * @return true if they overlap
      */
-    public boolean isOverlapWithTransactionWithEquality(Transaction transactionToCheck) {
-        return isOverlapWithTransactionWithoutEquality(transactionToCheck)
-                || transactionToCheck.createdAt.isEqual(this.createdAt)
-                || transactionToCheck.getReturnDate().isEqual(this.getReturnDate());
+    public boolean checkOverlapToAddTx(Transaction transactionToCheck) {
+        return checkOverlapToUpdateTx(transactionToCheck)
+                || transactionToCheck.createdAt.isEqual(this.createdAt);
     }
 
-    public boolean isOverlapWithTransactionWithoutEquality(Transaction transactionToCheck) {
+    public boolean checkOverlapToUpdateTx(Transaction transactionToCheck) {
+        if (transactionToCheck.getTxId().equals(this.transactionId)) {
+            return false;
+        }
         return (transactionToCheck.createdAt.isAfter(this.createdAt)
                 && transactionToCheck.getReturnDate().isBefore(this.getReturnDate()))
                 || (transactionToCheck.getReturnDate().isAfter(this.createdAt)
@@ -176,7 +178,8 @@ public class Transaction {
                 || (transactionToCheck.createdAt.isBefore(this.createdAt)
                 && transactionToCheck.getReturnDate().isAfter(this.getReturnDate()))
                 || (transactionToCheck.createdAt.isAfter(this.createdAt)
-                && transactionToCheck.createdAt.isBefore(this.getReturnDate()));
+                && transactionToCheck.createdAt.isBefore(this.getReturnDate())
+                || transactionToCheck.getReturnDate().isEqual(this.getReturnDate()));
     }
 
     /**
@@ -197,11 +200,11 @@ public class Transaction {
         if (!isFinished()) {
             String remainDays = " (" + ChronoUnit.DAYS.between(LocalDate.now(), getReturnDate())
                     + " day(s) left)\n";
-            String returnDate = "   ReturnDate: " + DateParser.formatDateToString(returnedAt) + remainDays;
+            String returnDate = "   ReturnDate: " + DateParser.formatDateToString(returnedAt) + remainDays + "\n";
             return transactionIcon + transactionId + itemName + itemId + usersId
                     + duration + returnDate + moneyTransactedString;
         }
-        String returnedDate = "   ReturnedDate: " + DateParser.formatDateToString(returnedAt);
+        String returnedDate = "   ReturnedDate: " + DateParser.formatDateToString(returnedAt) + "\n";
         return transactionIcon + transactionId + itemName + itemId + usersId
                 + duration + returnedDate + moneyTransactedString;
     }

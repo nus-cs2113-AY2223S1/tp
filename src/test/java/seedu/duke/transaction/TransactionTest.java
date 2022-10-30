@@ -55,7 +55,7 @@ class TransactionTest {
     @Test
     void convertTransactionToFileFormatTest() {
         String transactionId = transaction.getTxId();
-        assertEquals(transactionId + " | pen | 28sd37h2 | bui | 5 | 2022-10-03 | 3.2 | 152",
+        assertEquals(transactionId + " | pen | 28sd37h2 | bui | 5 | 2022-10-03 | 3.2 | 153",
                 transaction.convertTransactionToFileFormat());
     }
 
@@ -74,30 +74,30 @@ class TransactionTest {
 
     @Test
     void isOverlapWithTransactionWithEquality_overlap_returnTrue() {
-        assertTrue(transaction.isOverlapWithTransactionWithEquality(transactionToCompare));
+        assertTrue(transaction.checkOverlapToAddTx(transactionToCompare));
     }
 
     @Test
     void isOverlapWithTransactionWithEquality_notOverlap_returnFalse() {
         transactionToCompare = new Transaction("pen", "28sd37h2", "bui", 5,
                 LocalDate.parse("2022-10-10"), 3.2);
-        assertFalse(transaction.isOverlapWithTransactionWithEquality(transactionToCompare));
+        assertFalse(transaction.checkOverlapToAddTx(transactionToCompare));
     }
 
     @Test
     void isOverlapWithTransactionWithEquality_overlapWithEquality_returnTrue() {
         transactionToCompare = new Transaction("pen", "28sd37h2", "bui", 5,
                 LocalDate.parse("2022-10-03"), 3.2);
-        assertTrue(transaction.isOverlapWithTransactionWithEquality(transactionToCompare));
+        assertTrue(transaction.checkOverlapToAddTx(transactionToCompare));
     }
 
     @Test
     void isOverlapWithTransactionWithoutEquality_overlapWoEquality_returnTrue() {
-        assertTrue(transaction.isOverlapWithTransactionWithoutEquality(transactionToCompare));
+        assertTrue(transaction.checkOverlapToUpdateTx(transactionToCompare));
     }
 
     @Test
     void isOverlapWithTransactionWithoutEquality_overlapWithEquality_returnFalse() {
-        assertFalse(transaction.isOverlapWithTransactionWithoutEquality(transaction));
+        assertFalse(transaction.checkOverlapToUpdateTx(transaction));
     }
 }
