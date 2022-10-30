@@ -63,7 +63,7 @@ public class Messages {
     public static final String MESSAGE_ADD_PROPERTY_WRONG_FORMAT = "OOPS!!! To add a property, it requires "
             + "the following format and details:\n"
             + "Format: add -property n/NAME a/ADDRESS p/PRICE t/TYPE\n"
-            + "Example: add -property n/Bob Tan Bee Bee a/25 Lower Kent Ridge Rd, Singapore 119081 "
+            + "Example: add -property n/Bob Tan Bee Bee a/25 Lower Kent Ridge Rd, S119081 "
             + "p/1000 t/HDB 3";
 
     public static final String MESSAGE_ADD_CLIENT_WRONG_FORMAT = "OOPS!!! To add a client, it requires "
@@ -79,13 +79,13 @@ public class Messages {
             + LINE_BREAK
             + "\nLANDED PROPERTY:\n  Format:  "
             + "[Unit Number]<space>[Street Name],<space>Singapore<space>[Postal Code]\n"
-            + "  Example: 60 Aria Street, Singapore 602580\n"
+            + "  Example: 60 Aria Street, S602580\n"
             + LINE_BREAK
             + "\nBUILDINGS (e.g. HDBs, apartments, condominiums):\n"
             + "  Format (Without Building Name):\n  [Block Number]<space>[Street Name]<space>"
             + "#[Unit Level]-[Unit Number]{<space>[Building Name]},<space>Singapore<space>[Postal Code]\n"
-            + "  Example: 101 Marlow Street #12-05, Singapore 059020\n"
-            + "  Example (With Building Name): 101 Marlow Street #12-05 Clife Parkview, Singapore 059020\n"
+            + "  Example: 101 Marlow Street #12-05, S059020\n"
+            + "  Example (With Building Name): 101 Marlow Street #12-05 Clife Parkview, S059020\n"
             + LINE_BREAK
             + "\nNote: Format is <space> sensitive; [Detail] must be provided; {Detail} is optional\n"
             + "Any deviation from format will lead to invalid address.";
