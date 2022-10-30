@@ -59,8 +59,9 @@ Throughout this guide, we will be using some special formatting and symbols to b
 
 If successfully loaded, you will see this screen:
 
-![Program Start Up Screen](./images/ProgramStartScreen.png)
-
+<p align="center" width="100%">
+  <img width="70%" src="./images/UserGuide/ProgramStartScreen.png"/>
+</p>
 [⏫ Back to content page](#content-page)
 
 # Features 
@@ -86,7 +87,7 @@ Format: `/add`
 A simple GUI text editor will open and loaded with a template file as shown below:
 
 <p align="center" width="100%">
-  <img width="70%" src="Desktop/CS2113/tp/tp/docs/images/UserGuide/TextEditorWithTemplate.png"/>
+  <img width="70%" src="./images/UserGuide/TextEditorWithTemplate.png"/>
 </p>
 
 Edit the corresponding field according to the following convention:
