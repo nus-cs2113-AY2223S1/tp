@@ -563,10 +563,11 @@ staying in a particular community/hall to loan or borrow items they wish to shar
 | v2.0    | manager  | find a item by keyword      | locate an item without going through the list                 |
 | v2.0    | manager  | find a user by keyword      | locate a user without going through the list                  |
 | v2.0    | manager  | view transactions by status | view the transactions that are finished or not finished       |
-| v2.0    | manager  | sort items                  | view items based on its price                                 |
+| v2.0    | manager  | sort items                  | view items based on its price and categories                  |
 | v2.0    | manager  | update price                | change the price a user decides to loan his item for          |
 | v2.0    | manager  | update transaction          | change the number of days a user decides to loan his item for |
 | v2.0    | manager  | store my database           | maintain the database without losing my data                  |
+| v2.0    | manager  | view a user's items         | view the items that belong to a specific user                 |
 
 
 Feature: Find Item/ User by keyword.
