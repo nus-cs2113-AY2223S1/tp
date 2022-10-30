@@ -13,7 +13,6 @@ public class Parser {
     private static final String COMMAND_PRINT = "print";
     //For now
     private static final String COMMAND_ALLOCATE = "allocate";
-
     private static final String COMMAND_PRINT_VERT = "view";
 
 
@@ -33,13 +32,10 @@ public class Parser {
             return CommandSetLesson.setLesson();
         case COMMAND_PRINT:
             return CommandPrintTimetable.printTimetable();
-<<<<<<< HEAD
         case COMMAND_PRINT_VERT:
             return CommandPrintTimetableVertical.viewTimetable();
-=======
         case COMMAND_ALLOCATE:
             return Timetable.allocateModules();
->>>>>>> v2.0-PRs
         default:
             return "Invalid Command!";
         }
