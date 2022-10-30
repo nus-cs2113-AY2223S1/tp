@@ -11,8 +11,11 @@ public class AddAppointmentCommand extends Command {
 
     private final Appointment appointment;
 
-    public AddAppointmentCommand(String petName, String appointmentDate, String service) {
-        appointment = new Appointment(petName, appointmentDate, service);
+    public AddAppointmentCommand(int petId, String appointmentDateStr, String service) {
+        if (Appointment.checkIsFormattedDate(appointmentDateStr)){
+
+        }
+        appointment = new Appointment(petId, appointmentDate, service);
     }
 
     @Override
@@ -28,4 +31,6 @@ public class AddAppointmentCommand extends Command {
     public boolean isExit() {
         return false;
     }
+
+
 }

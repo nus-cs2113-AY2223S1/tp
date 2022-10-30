@@ -2,27 +2,40 @@ package appointment;
 
 import task.Task;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.text.ParseException;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class Appointment {
-    private static int id = 0;
+    private static int id = 3000;
+    public static SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
     public final int appointmentId;
-    public String petName;
+    public int petId;
     public String service;
 
-    private String appointmentDate;
+    private Date appointmentDate;
     private AppointmentStatus appointmentStatus;
 
     private ArrayList<Task> tasks = new ArrayList<>();
 
-    public Appointment(String petName, String appointmentDate, String service) {
+    public Appointment(int petId, Date appointmentDate, String service) {
         this.appointmentId = ++id;
-        this.petName = petName;
+        this.petId = petId;
         this.appointmentStatus = AppointmentStatus.PENDING;
         this.appointmentDate = appointmentDate;
         this.service = service;
+    }
+
+    // check appointment date format
+    public static boolean checkIsFormattedDate(String appointmentDateStr) {
+        try {
+            Date appointmentDate = formatter.parse(appointmentDateStr);
+        } catch (ParseException e) {
+            System.out.println("Invalid appointment date format! Pls follow yyyy-MM-dd!");
+            return false;
+        }
+        return true;
     }
 
     // view tasks for a find appointment
@@ -67,7 +80,8 @@ public class Appointment {
         return "";
     }
 
-    public String getAppointmentDate() {
-        return appointmentDate;
+    public String getAppointmentDateStr() {
+        String dateStr = formatter.format(appointmentDate);
+        return dateStr;
     }
 }

@@ -17,9 +17,10 @@ public class AppointmentList {
         System.out.println("Here are the appointments in your employee list:");
         for (Appointment appointment : appointments) {
             System.out.print(appointment.appointmentId + " ");
-            System.out.print(appointment.petName + " ");
+            System.out.print(appointment.petId + " ");
+            System.out.print(PetList.findPetById(appointment.petId) + " ");
             System.out.print(appointment.service + " ");
-            System.out.print(appointment.getAppointmentDate() + " ");
+            System.out.print(appointment.getAppointmentDateStr() + " ");
             System.out.println(appointment.getAppointmentStatus());
         }
     }
@@ -43,16 +44,15 @@ public class AppointmentList {
             throw new DukeException();
         }
 
-        // ? appointment could refer to a new pet
-        // in that case, add a new pet accordingly
-        Pet pet = PetList.findPet(appointment.petName);
+        // appointment should refer to one existing pet
+        Pet pet = PetList.findPetById(appointment.petId);
         if (pet == null) {
             throw new DukeException();
         }
 
         appointments.add(appointment);
         System.out.print("Got it. I've added this appointment: ");
-        System.out.println("Pet " + appointment.petName + " | " + "Service " + appointment.service);
+        System.out.println("Pet " + appointment.petId + " | " + "Service " + appointment.service);
         System.out.println("Now you have " + appointments.size() + " appointments in the list.");
 
     }
@@ -63,7 +63,7 @@ public class AppointmentList {
             if (appointment.appointmentId == appointmentId) {
                 appointments.remove(appointment);
                 System.out.print("Noted. I've removed this appointment: ");
-                System.out.println("Pet " + appointment.petName + " | " + "Service " + appointment.service);
+                System.out.println("Pet " + appointment.petId + " | " + "Service " + appointment.service);
                 System.out.println("Now you have " + (appointments.size()) + " appointments in the list.");
                 removeFlag = true;
                 break;
@@ -94,7 +94,7 @@ public class AppointmentList {
 
                 appointment.updateAppointmentStatus();
                 System.out.print("Noted. I've set this service: ");
-                System.out.print("Pet " + appointment.petName + " | " + "Service " + appointment.service);
+                System.out.print("Pet " + appointment.petId + " | " + "Service " + appointment.service);
                 System.out.println(" as " + appointment.getAppointmentStatus());
                 setFlag = true;
             }
