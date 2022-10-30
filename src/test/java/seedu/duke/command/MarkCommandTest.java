@@ -190,9 +190,9 @@ class MarkCommandTest {
 
     private void addExercise(ExerciseList exerciseList) throws IllegalValueException {
         ArrayList<String> commandList = new ArrayList<>();
-        commandList.add("add strength /bench /30 /10 /180");
-        commandList.add("add strength /press /40 /8 /58");
-        commandList.add("add strength /deadlift /20 /6 /120");
+        commandList.add("add strength /bench /30 /10 /40");
+        commandList.add("add strength /press /40 /8 /28");
+        commandList.add("add strength /deadlift /20 /6 /30");
         biometrics.setBiometrics(20, "male", 166, 76, 20,2);
 
         for (String input : commandList) {

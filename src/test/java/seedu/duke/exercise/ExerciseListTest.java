@@ -72,9 +72,9 @@ class ExerciseListTest {
 
     private void addExercise(ExerciseList exerciseList) throws IllegalValueException {
         ArrayList<String> commandList = new ArrayList<>();
-        commandList.add("add strength /bench /3 /10 /180");
-        commandList.add("add strength /press /4 /8 /58");
-        commandList.add("add strength /deadlift /2 /6 /120");
+        commandList.add("add strength /bench /3 /10 /18");
+        commandList.add("add strength /press /4 /8 /38");
+        commandList.add("add strength /deadlift /2 /6 /20");
 
         for (String input : commandList) {
             Command c = Parser.parse(input);

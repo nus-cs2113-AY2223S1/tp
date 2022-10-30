@@ -29,7 +29,8 @@ public class HelpCommand extends Command {
                 + "add weight /{weight} /{fat percentage}\n"
                 + "remove {food/exercise} /{food index/current exerciseList index}\n"
                 + "mark {done/undone} /{exercise index} / {time}, {metabolic equivalent}\n"
-                + "find {strength/cardio/food/date_e/date_f} /{description}");
+                + "find {strength/cardio/food/date_e/date_f} /{description}\n"
+                + "find calories /{date}");
     }
 
     @Override

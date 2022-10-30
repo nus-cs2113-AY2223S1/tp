@@ -113,7 +113,7 @@ public class AddCommand extends Command {
             LocalDate oldestinputDate =  LocalDate.parse("31-12-2023", DateTimeFormatter.ofPattern("dd-MM-yyyy"));
             if (toDisplay && today.isAfter(localDate)) {
                 throw new IllegalValueException("Date cannot be before today");
-            } else if (localDate.compareTo(oldestinputDate) > 0 ) {
+            } else if (localDate.compareTo(oldestinputDate) > 0) {
                 throw new IllegalValueException("Date input cannot be after 2023");
             }
         } catch (DateTimeException e) {
@@ -184,8 +184,7 @@ public class AddCommand extends Command {
     private static double getDistanceWithValidation(double distance) throws IllegalValueException {
         if (distance > 100) {
             throw new IllegalValueException("Distance should not be more than 100km!");
-        }
-        else if (distance < 0){
+        } else if (distance < 0) {
             throw new IllegalValueException("Distance cannot be negative!");
         }
         return distance;
