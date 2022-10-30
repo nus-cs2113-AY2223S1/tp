@@ -234,7 +234,7 @@ public class Parser {
         }
     }
 
-    //@@author matthewphua
+    //@@author indraneelrp
     /**
      * Executes the clear action by creating a clear object.
      */
