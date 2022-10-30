@@ -42,7 +42,7 @@ public class Duke {
         System.out.print(Ui.greetUser());
         DatabaseStorage.loadDatabase();
         UserUniversityListManager userUniversityListManager = UserStorageParser.getSavedLists();
-        TimetableManager timetableManager = UserStorageParser.getSavedTimetables();
+        TimetableManager timetableManager = userUniversityListManager.getTimetableManager();
 
         while (!shouldExit) {
             try {
@@ -146,9 +146,9 @@ public class Duke {
             UniversityNotFoundException {
         if (Database.hasUniversityInDatabase(createCommand.getUniversityName())) {
             userUniversityListManager.createList(createCommand.getUniversityName());
-            timetableManager.createTimetable(createCommand.getUniversityName(), false);
-            UserStorageParser.storeCreatedLists(userUniversityListManager);
-            UserStorageParser.storeTimetable(timetableManager);
+            //timetableManager.createTimetable(createCommand.getUniversityName(), false);
+            //UserStorageParser.storeCreatedLists(userUniversityListManager);
+            //UserStorageParser.storeTimetable(timetableManager);
         } else {
             throw new UniversityNotFoundException("Error! " + createCommand.getUniversityName() + " does not exist "
                     + "in database!");

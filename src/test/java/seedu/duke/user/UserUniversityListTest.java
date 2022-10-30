@@ -2,6 +2,7 @@ package seedu.duke.user;
 
 import org.junit.jupiter.api.Test;
 import seedu.duke.exceptions.InvalidUserCommandException;
+import seedu.duke.exceptions.TimetableNotFoundException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -70,7 +71,7 @@ public class UserUniversityListTest {
     }
 
     @Test
-    void deleteList_Ucla_correctDetails() throws InvalidUserCommandException {
+    void deleteList_Ucla_correctDetails() throws InvalidUserCommandException, TimetableNotFoundException {
         testManager.createList("UCLA");
         assertEquals(1, testManager.getMyManager().size());
         testManager.deleteList("UCLA");
@@ -188,7 +189,7 @@ public class UserUniversityListTest {
     }
 
     @Test
-    void deleteList_Ucla_correctUpdatesOnFavourites() throws InvalidUserCommandException {
+    void deleteList_Ucla_correctUpdatesOnFavourites() throws InvalidUserCommandException, TimetableNotFoundException {
         testManager.createList("UCLA");
         testManager.addFavourite("UCLA");
         testManager.deleteList("UCLA");
