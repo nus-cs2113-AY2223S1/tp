@@ -7,6 +7,7 @@ import seedu.data.CarparkList;
  */
 public class ListCommand extends Command {
     public static final String COMMAND_WORD = "list";
+    public static final String COMMAND_WORD_SHORT = "l";
 
     private final CarparkList carparkList;
 

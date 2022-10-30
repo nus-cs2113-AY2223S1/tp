@@ -13,6 +13,7 @@ import seedu.files.Favourite;
  */
 public class UnfavouriteCommand extends Command {
     public static final String COMMAND_WORD = "unfavourite";
+    public static final String COMMAND_WORD_SHORT = "ufav";
     private final String argument;
     private final Favourite favourite;
 

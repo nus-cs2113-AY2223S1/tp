@@ -12,6 +12,7 @@ import seedu.parser.search.Sentence;
 public class FilterCommand extends Command {
 
     public static final String COMMAND_WORD = "filter";
+    public static final String COMMAND_WORD_SHORT = "fil";
     private final CarparkList carparkList;
 
     private final Sentence searchQuery;
