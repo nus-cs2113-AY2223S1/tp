@@ -102,18 +102,18 @@ public class CommandPrintTimetableVertical {
 
     private static int determineDay(String day) {
         switch (day) {
-            case "Monday":
-                return 0;
-            case "Tuesday":
-                return 1;
-            case "Wednesday":
-                return 2;
-            case "Thursday":
-                return 3;
-            case "Friday":
-                return 4;
-            default:
-                return -1;
+        case "Monday":
+            return 0;
+        case "Tuesday":
+            return 1;
+        case "Wednesday":
+            return 2;
+        case "Thursday":
+            return 3;
+        case "Friday":
+            return 4;
+        default:
+            return -1;
         }
     }
 
@@ -121,9 +121,9 @@ public class CommandPrintTimetableVertical {
     private static void sortTimetable(ArrayList<ArrayList<Object[]>> rawTimetable) {
         // sort modules to see conflict
         ArrayList<int[]> todayLessonSpan = new ArrayList<>();
-        for (int i = 0; i < DAY_PER_WEEK; i++){
+        for (int i = 0; i < DAY_PER_WEEK; i++) {
 
-            for (int j = 0; j < rawTimetable.get(i).size(); j++){ // loop through all lessons in that day
+            for (int j = 0; j < rawTimetable.get(i).size(); j++) { // loop through all lessons in that day
                 if (!rawTimetable.get(i).isEmpty()) {
 
                     int startSlot = (Integer) rawTimetable.get(i).get(j)[0];
@@ -142,19 +142,17 @@ public class CommandPrintTimetableVertical {
 
     private static void sortDailySlots(Integer day, ArrayList<Integer[]>[] emptySlotRegister) {
 
-        Collections.sort(emptySlotRegister[day],new Comparator<Integer[]>(){
-            public int compare(Integer[] i1,Integer[] i2)
-            {
-                return i1[0]-i2[0];
+        Collections.sort(emptySlotRegister[day],new Comparator<Integer[]>() {
+            public int compare(Integer[] i1,Integer[] i2) {
+                return i1[0] - i2[0];
             }
         });
     }
 
     private static void sortRawTimetable(Integer day) {
-        Collections.sort(emptySlotRegister[day],new Comparator<Integer[]>(){
-            public int compare(Integer[] i1,Integer[] i2)
-            {
-                return i1[0]-i2[0];
+        Collections.sort(emptySlotRegister[day],new Comparator<Integer[]>() {
+            public int compare(Integer[] i1,Integer[] i2) {
+                return i1[0] - i2[0];
             }
         });
     }
@@ -204,7 +202,7 @@ public class CommandPrintTimetableVertical {
 
     private static String indexToTime(int index) {
         boolean isHalf = index % 2 == 0; // even index in timetable is half hours
-        int hours = (index - 3) / 2 + FIRST_HOUR ; //index - 3 gives original slots, 0800 index is 3 but slot is 0
+        int hours = (index - 3) / 2 + FIRST_HOUR; //index - 3 gives original slots, 0800 index is 3 but slot is 0
         return String.format("%02d", hours) + (isHalf ? "30" : "00");
     }
 
@@ -240,16 +238,17 @@ public class CommandPrintTimetableVertical {
 
                 for (int j = 0; j < dayIterator.size(); j++) {
                     Object[] rawModule = dayIterator.get(j);
-                    int currentModstartSlot = (Integer) rawModule[0];
-                    int currentModendSlot = (Integer) rawModule[1];
+                    int modStartSlot = (Integer) rawModule[0];
+                    int modEndSlot = (Integer) rawModule[1];
                     String currentModCode = (String) rawModule[2];
                     String currentModType = (String) rawModule[3];
                     StringBuilder upperBoarder = new StringBuilder();
                     StringBuilder lowerBoarder = new StringBuilder();
 
-                    if (currentModendSlot - currentModstartSlot < 3) { // lower boarder joins lesson type
+                    if (modEndSlot - modStartSlot < 3) { // lower boarder joins lesson type
                         lowerBoarder.append(UI.HORIZONTAL_BORDER);
-                        lowerBoarder.append(currentModType.substring(0,3).toUpperCase());
+                        String lessonType = currentModType.substring(0,3).toUpperCase();
+                        lowerBoarder.append(lessonType);
                         int currentLength = lowerBoarder.length();
                         lowerBoarder.append(UI.HORIZONTAL_BORDER.repeat(COLUMN_WIDTH - 1 - currentLength));
 
@@ -259,20 +258,21 @@ public class CommandPrintTimetableVertical {
                     }
                     upperBoarder.append(UI.HORIZONTAL_BORDER.repeat(Math.max(0, COLUMN_WIDTH) - 1));
 
-                    Integer columnWriteIndex = getDayColumnIndex(i) + 2;
+                    Integer columnIndex = getDayColumnIndex(i) + 2;
 
 
-                    if (!checkTimetableSlotWritten(currentModstartSlot + 3,columnWriteIndex,"X")
-                    && !checkTimetableSlotWritten(currentModstartSlot + 4,columnWriteIndex,"X")) {
-                        // if no clash is indicated in timetable, write the timetable
+                        if (!checkTimetableSlotWritten(modStartSlot + 3,columnIndex,"X")
+                        && !checkTimetableSlotWritten(modStartSlot + 4,columnIndex,"X")) {
+                            // if no clash is indicated in timetable, write the timetable
 
-                        write(currentModCode, currentModstartSlot + 4, columnWriteIndex);
-                        write(currentModType.substring(0,3).toUpperCase(), currentModstartSlot + 5, columnWriteIndex + 1);
-                        write(lowerBoarder.toString(), currentModendSlot + 3, columnWriteIndex);
-                        if (!timetableVertical[currentModstartSlot + 3][columnWriteIndex + 1].equals(UI.HORIZONTAL_BORDER) ) {
-                            write(upperBoarder.toString(), currentModstartSlot + 3, columnWriteIndex);
+                            write(currentModCode, modStartSlot + 4, columnIndex);
+                            String lessonType = currentModType.substring(0,3).toUpperCase();
+                            write(lessonType, modStartSlot + 5, columnIndex + 1);
+                            write(lowerBoarder.toString(), modEndSlot + 3, columnIndex);
+                            if (!timetableVertical[modStartSlot + 3][columnIndex + 1].equals(UI.HORIZONTAL_BORDER)) {
+                                write(upperBoarder.toString(), modStartSlot + 3, columnIndex);
+                            }
                         }
-                    }
                 }
             }
         }
@@ -283,7 +283,7 @@ public class CommandPrintTimetableVertical {
     private static String printTimetable(String[][] timetableVertical) {
         StringBuilder output = new StringBuilder();
         for (int i = 0; i < TIMETABLE_HEIGHT; i++) {
-            for (int j = 0; j < timetableWidth ; j++) {
+            for (int j = 0; j < timetableWidth; j++) {
                 output.append(timetableVertical[i][j]);
             }
             output.append(System.lineSeparator());
@@ -297,9 +297,10 @@ public class CommandPrintTimetableVertical {
             sortDailySlots(day, emptySlotRegister);
         }
 
-        for(int i = 1; i < emptySlotRegister[day].size(); i++) { //[1] is pair.second, [0] is pair.first
-            if ( (emptySlotRegister[day].get(i - 1)[1]) > emptySlotRegister[day].get(i)[0])
+        for (int i = 1; i < emptySlotRegister[day].size(); i++) { //[1] is pair.second, [0] is pair.first
+            if ((emptySlotRegister[day].get(i - 1)[1]) > emptySlotRegister[day].get(i)[0]) {
                 return true; // slot end + 1 is the real ending
+            }
         }
         return false;
 
@@ -309,14 +310,14 @@ public class CommandPrintTimetableVertical {
         if (emptySlotRegister.length > 0) {
             sortDailySlots(day, emptySlotRegister);
         }
-        Stack<Integer[]> stack=new Stack<>();
+        Stack<Integer[]> stack = new Stack<>();
         stack.push(emptySlotRegister[day].get(0));
 
 
-        for (int i = 1; i < emptySlotRegister[day].size(); i++){
+        for (int i = 1; i < emptySlotRegister[day].size(); i++) {
             Integer[] top = stack.peek();
 
-            if (top[1] <= emptySlotRegister[day].get(i)[0]) {//[1] is pair.second, [0] is pair.first
+            if (top[1] <= emptySlotRegister[day].get(i)[0]) { //[1] is pair.second, [0] is pair.first
                 stack.pop();
                 stack.push(emptySlotRegister[day].get(i));
             } else if (top[1] < emptySlotRegister[day].get(i)[1]) {
@@ -328,8 +329,8 @@ public class CommandPrintTimetableVertical {
 
         ArrayList<Integer[]> clashSlotList = new ArrayList(stack);
 
-        for (Integer[] oSlot : clashSlotList) {
-            for (Integer a : oSlot) {
+        for (Integer[] slot : clashSlotList) {
+            for (Integer a : slot) {
                 System.out.println(a);
             }
         }

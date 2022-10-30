@@ -1,7 +1,11 @@
 package seedu.duke;
 
-import seedu.duke.commands.*;
-
+import seedu.duke.commands.CommandPrintTimetable;
+import seedu.duke.commands.CommandPrintTimetableVertical;
+import seedu.duke.commands.CommandDeleteModule;
+import seedu.duke.commands.CommandInfoModule;
+import seedu.duke.commands.CommandAddModule;
+import seedu.duke.commands.CommandSetLesson;
 
 public class Parser {
     private static final String COMMAND_ADD = "add";
