@@ -282,7 +282,7 @@ public class Ui {
     }
 
     public String getWrongDelayTimeError(String flightNum, String oldDepartureTime) {
-        return (String.format(FLIGHT_WRONG_DELAY_MSG,flightNum,oldDepartureTime));
+        return (String.format(FLIGHT_WRONG_DELAY_MSG, flightNum, oldDepartureTime));
     }
 
     //@@author ivanthengwr
