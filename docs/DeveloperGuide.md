@@ -604,6 +604,7 @@ The user enters the following command: “find-item /k Book”. In this case, th
 ## 8. Glossary
 
 |     Term     |           Definition           |
+|--------------|--------------------------------|
 |      tx      |           Transaction          |
 |      /c      |         Contact Number         |
 ...TO BE UPDATED
