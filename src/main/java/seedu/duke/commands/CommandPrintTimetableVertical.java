@@ -261,9 +261,9 @@ public class CommandPrintTimetableVertical {
                     Integer columnIndex = getDayColumnIndex(i) + 2;
 
 
-                        if (!checkTimetableSlotWritten(modStartSlot + 3,columnIndex,"X")
+                    if (!checkTimetableSlotWritten(modStartSlot + 3,columnIndex,"X")
                             && !checkTimetableSlotWritten(modStartSlot + 4,columnIndex,"X")) {
-                            // if no clash is indicated in timetable, write the timetable
+                        // if no clash is indicated in timetable, write the timetable
 
                         write(currentModCode, modStartSlot + 4, columnIndex);
                         String lessonType = currentModType.substring(0,3).toUpperCase();
