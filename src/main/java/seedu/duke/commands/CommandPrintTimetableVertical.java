@@ -262,17 +262,17 @@ public class CommandPrintTimetableVertical {
 
 
                         if (!checkTimetableSlotWritten(modStartSlot + 3,columnIndex,"X")
-                        && !checkTimetableSlotWritten(modStartSlot + 4,columnIndex,"X")) {
+                            && !checkTimetableSlotWritten(modStartSlot + 4,columnIndex,"X")) {
                             // if no clash is indicated in timetable, write the timetable
 
-                            write(currentModCode, modStartSlot + 4, columnIndex);
-                            String lessonType = currentModType.substring(0,3).toUpperCase();
-                            write(lessonType, modStartSlot + 5, columnIndex + 1);
-                            write(lowerBoarder.toString(), modEndSlot + 3, columnIndex);
-                            if (!timetableVertical[modStartSlot + 3][columnIndex + 1].equals(UI.HORIZONTAL_BORDER)) {
-                                write(upperBoarder.toString(), modStartSlot + 3, columnIndex);
-                            }
+                        write(currentModCode, modStartSlot + 4, columnIndex);
+                        String lessonType = currentModType.substring(0,3).toUpperCase();
+                        write(lessonType, modStartSlot + 5, columnIndex + 1);
+                        write(lowerBoarder.toString(), modEndSlot + 3, columnIndex);
+                        if (!timetableVertical[modStartSlot + 3][columnIndex + 1].equals(UI.HORIZONTAL_BORDER)) {
+                            write(upperBoarder.toString(), modStartSlot + 3, columnIndex);
                         }
+                    }
                 }
             }
         }
