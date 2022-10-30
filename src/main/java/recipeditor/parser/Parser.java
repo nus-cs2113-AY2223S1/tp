@@ -11,9 +11,7 @@ import recipeditor.command.FindCommand;
 import recipeditor.command.HelpCommand;
 import recipeditor.command.InvalidCommand;
 
-import recipeditor.exception.ParseFileException;
 import recipeditor.recipe.Recipe;
-import recipeditor.ui.Editor;
 import recipeditor.recipe.RecipeList;
 import recipeditor.storage.Storage;
 import recipeditor.ui.EditMode;
@@ -25,8 +23,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Parser {
-    private static Logger logger = Logger.getLogger("LOGS");
-    private static String recipeTitle = null;
+    private static final Logger logger = Logger.getLogger("LOGS");
+    private static final String recipeTitle = null;
 
     public static Command parseCommand(String input) {
         String[] parsed = input.split(" ");
@@ -43,6 +41,7 @@ public class Parser {
             return parseDeleteCommand(parsed);
         case EditCommand.COMMAND_TYPE:
             return parseEditCommand(parsed);
+            //return parseEditCommandGUI(parsed);
         case ViewCommand.COMMAND_TYPE:
             return parseViewCommand(parsed);
         case FindCommand.COMMAND_TYPE:
@@ -50,34 +49,14 @@ public class Parser {
         case HelpCommand.COMMAND_TYPE:
             return new HelpCommand();
         default:
-            return new InvalidCommand();
+            return new InvalidCommand(InvalidCommand.INVALID_MESSAGE);
         }
     }
 
 
     private static Command parseAddCommand() {
-        boolean saveToTemp = new Editor().enterEditor(Storage.TEMPLATE_FILE_PATH);
-        boolean exitLoop = (saveToTemp) ? false : true;
-        boolean valid = false;
-        Recipe addRecipe = new Recipe();
-        while (!exitLoop) {
-            try {
-                String content = Storage.loadFileContent(Storage.TEMPORARY_FILE_PATH);
-                addRecipe = new TextFileParser().parseTextToRecipe(content);
-                valid = true;
-                exitLoop = true;
-            } catch (ParseFileException | FileNotFoundException e) {
-                Ui.showMessage(e.getMessage());
-                Ui.showMessage("Do you want to ABORT? (Y/N)");
-                String text = Ui.readInput();
-                if (text.equalsIgnoreCase("n")) {
-                    new Editor().enterEditor(Storage.TEMPORARY_FILE_PATH);
-                } else {
-                    exitLoop = true;
-                }
-            }
-        }
-        return new AddCommand(valid, addRecipe);
+        GuiWorkFlow returnValues = new GuiWorkFlow(Storage.TEMPLATE_FILE_PATH);
+        return new AddCommand(returnValues.getValidity(), returnValues.getRecipe());
     }
 
     private static Command parseDeleteCommand(String[] parsed) {
@@ -95,11 +74,27 @@ public class Parser {
             } else {
                 Ui.showMessage(DeleteCommand.CORRECT_FORMAT);
             }
-            return new InvalidCommand();
+            return new InvalidCommand(DeleteCommand.CORRECT_FORMAT);
         } catch (FileNotFoundException e) {
             logger.log(Level.WARNING, "File not found when deleting the recipe file");
-            return new InvalidCommand();
+            return new InvalidCommand(DeleteCommand.CORRECT_FORMAT);
         }
+    }
+
+    private static Command parseEditCommandGui(String[] parsed) {
+        if (parsed.length == 2) {
+            try {
+                int index = Integer.parseInt(parsed[1]) - 1; // to account for 0-based indexing in recipelist
+                String name = RecipeList.getTitleFromIndex(index);
+                String path = Storage.RECIPES_FOLDER_PATH + "/" + name;
+                GuiWorkFlow returnValues = new GuiWorkFlow(path);
+                return new EditCommand(returnValues.getValidity(), index, returnValues.getRecipe());
+            } catch (Exception e) {
+                logger.log(Level.INFO, e.getMessage());
+                return new InvalidCommand("Edit GUI Error");
+            }
+        }
+        return new InvalidCommand("Edit GUI Error");
     }
 
     private static String convertStringArrayToString(String[] stringArray) {
@@ -131,10 +126,10 @@ public class Parser {
                 int index = Integer.parseInt(parsed[1]) - 1; // to account for 0-based indexing in recipelist
                 return new ViewCommand(index);
             } catch (Exception e) {
-                return new InvalidCommand();
+                return new InvalidCommand(ViewCommand.COMMAND_SYNTAX);
             }
         }
-        return new InvalidCommand();
+        return new InvalidCommand(ViewCommand.COMMAND_SYNTAX);
     }
 
     private static Command parseEditCommand(String[] parsed) {
@@ -152,6 +147,7 @@ public class Parser {
                 EditMode edit = new EditMode();
                 edit.enterEditMode(index);
                 return new EditCommand(edit.exitEditMode(), index, edit.getEditedRecipe());
+
                 /**
                  * PLACE GUI HERE
                  */
@@ -169,10 +165,11 @@ public class Parser {
                 return new EditCommand(flags[0], parsed, index, editedRecipe);
             }
         }
-        return new InvalidCommand();
+        return new InvalidCommand(EditCommand.COMMAND_FORMAT);
     }
 
     private static Command parseFindCommand(String[] parsed) {
+
         if (parsed.length >= 2) {
             String[] inputArray = Arrays.copyOfRange(parsed, 1, parsed.length);
             String input = convertStringArrayToString(inputArray);
@@ -180,6 +177,8 @@ public class Parser {
         } else {
             Ui.showMessage(FindCommand.CORRECT_FORMAT);
         }
-        return new InvalidCommand();
+        return new InvalidCommand(FindCommand.CORRECT_FORMAT);
     }
+
+
 }

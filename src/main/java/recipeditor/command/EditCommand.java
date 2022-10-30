@@ -12,11 +12,16 @@ import recipeditor.ui.Ui;
 
 public class EditCommand extends Command {
     public static final String COMMAND_TYPE = "/edit";
+
+    public static final String COMMAND_FORMAT = "Syntax for /edit \n" + "\t /edit <index>";
+    private final int index;
+    private Recipe editedRecipe;
+
     private FlagType commandType;
     private boolean editSuccess = false;
-    private int index;
     private String[] parsed;
-    private Recipe editedRecipe;
+
+
 
     public EditCommand(FlagType commandType, String[] parsed, int recipeIndex, Recipe editedRecipe) {
         this.commandType = commandType;
@@ -55,7 +60,7 @@ public class EditCommand extends Command {
                 return new CommandResult("Edit failed");
             }
             try {
-                editedRecipe = cmd.execute();
+                this.editedRecipe = cmd.execute();
                 RecipeList.editRecipe(index, editedRecipe);
                 return new CommandResult(cmd.getMessage() + '\n' + editedRecipe.getTitle() + " edited.");
             } catch (Exception e) {
@@ -63,4 +68,5 @@ public class EditCommand extends Command {
             }
         }
     }
+
 }

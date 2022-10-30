@@ -44,7 +44,7 @@ Click to view the latest release of [RecipEditor]((https://github.com/AY2223S1-C
 - `CommandResult`: explains the outcome of each command performed
 - `Parser`: interprets the user input into different commands
 
-Software running flow:
+#### Software running flow:
 
 Upon start, Recipeditor will check load or create saves.
 
@@ -133,6 +133,10 @@ The recipe module encapsulates the array, recipe and ingredient objects.
 
 **API:** `Recipe.java`
 1. `Recipe` calls `Ingredient` to add, edit or delete ingredients
+
+
+### Add GUI
+When the user type 
 
 ## Product scope
 ### Target user profile
