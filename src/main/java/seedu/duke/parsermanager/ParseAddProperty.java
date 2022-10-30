@@ -145,7 +145,8 @@ public class ParseAddProperty extends ParseAdd {
         }
     }
 
-    private ArrayList<String> processCommandAddPropertyDetails(String rawCommandDetail)
+
+    public ArrayList<String> processCommandAddPropertyDetails(String rawCommandDetail)
             throws MissingAddPropertyFlagException, IncorrectAddPropertyFlagOrderException {
         int[] flagIndexPositions = getFlagIndexPositions(rawCommandDetail, ADD_PROPERTY_FLAGS);
         checkForMissingPropertyFlags(flagIndexPositions);
@@ -192,7 +193,8 @@ public class ParseAddProperty extends ParseAdd {
         return extractedPropertyDetails;
     }
 
-    private void validatePropertyDetails(ArrayList<String> propertyDetails) throws EmptyAddPropertyDetailException,
+
+    public void validatePropertyDetails(ArrayList<String> propertyDetails) throws EmptyAddPropertyDetailException,
             InvalidSingaporeAddressException, InvalidPriceFormatException, InvalidUnitTypeLabelException,
             DuplicatePropertyException {
         // Checks for Missing Landlord Name, Property Address, Renting Price (SGD/month) and Unit-Type.
