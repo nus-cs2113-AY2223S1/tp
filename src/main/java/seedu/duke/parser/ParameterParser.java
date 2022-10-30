@@ -649,7 +649,7 @@ public class ParameterParser {
         } catch (NumberFormatException e) {
             parserLogger.log(Level.WARNING, "An invalid number error is caught for the given parameter: "
                     + parameter);
-            throw new GlobalNumberNotNumericException();
+            throw new StatsInvalidNumberException();
         }
         if (statsNumber < MINIMUM_STATS_NUMBER || statsNumber > MAXIMUM_STATS_NUMBER) {
             parserLogger.log(Level.WARNING, "An invalid number error is caught for the given parameter: "
