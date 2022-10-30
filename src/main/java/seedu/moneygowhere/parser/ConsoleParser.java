@@ -180,7 +180,7 @@ public class ConsoleParser {
             }
         } catch (NumberFormatException exception) {
             throw new ConsoleParserCommandAddExpenseInvalidException(
-                    Messages.CONSOLE_PARSER_INVALID_AMOUNT_EXCEPTION
+                    Messages.CONSOLE_ERROR_COMMAND_ADD_EXPENSE_INVALID
             );
         }
 
@@ -255,7 +255,9 @@ public class ConsoleParser {
                     modeOfPayment
             );
         } catch (DateTimeParseException | NumberFormatException exception) {
-            throw new ConsoleParserCommandAddExpenseInvalidException(exception);
+            throw new ConsoleParserCommandAddExpenseInvalidException(
+                    Messages.CONSOLE_ERROR_COMMAND_ADD_EXPENSE_INVALID
+            );
         }
     }
 
@@ -563,7 +565,9 @@ public class ConsoleParser {
 
             return commandline;
         } catch (ParseException exception) {
-            throw new ConsoleParserCommandEditExpenseInvalidException(exception);
+            throw new ConsoleParserCommandEditExpenseInvalidException(
+                    Messages.CONSOLE_ERROR_COMMAND_EDIT_EXPENSE_INVALID
+            );
         }
     }
 
@@ -594,7 +598,7 @@ public class ConsoleParser {
                 }
             } catch (NumberFormatException exception) {
                 throw new ConsoleParserCommandEditExpenseInvalidException(
-                        Messages.CONSOLE_PARSER_INVALID_AMOUNT_EXCEPTION
+                        Messages.CONSOLE_ERROR_COMMAND_EDIT_EXPENSE_INVALID
                 );
             }
         }
@@ -609,7 +613,9 @@ public class ConsoleParser {
             try {
                 expenseIndex = Integer.parseInt(expenseIndexStr);
             } catch (NumberFormatException exception) {
-                throw new ConsoleParserCommandEditExpenseInvalidException(exception);
+                throw new ConsoleParserCommandEditExpenseInvalidException(
+                        Messages.CONSOLE_ERROR_COMMAND_EDIT_EXPENSE_INVALID
+                );
             }
 
             if (expenseIndex < 0) {
@@ -737,7 +743,9 @@ public class ConsoleParser {
 
             return consoleCommandEditExpense;
         } catch (DateTimeParseException | NumberFormatException exception) {
-            throw new ConsoleParserCommandEditExpenseInvalidException(exception);
+            throw new ConsoleParserCommandEditExpenseInvalidException(
+                    Messages.CONSOLE_ERROR_COMMAND_EDIT_EXPENSE_INVALID
+            );
         }
     }
 
@@ -1165,7 +1173,9 @@ public class ConsoleParser {
                     currentAmount
             );
         } catch (DateTimeParseException | NumberFormatException exception) {
-            throw new ConsoleParserCommandAddTargetInvalidException(exception);
+            throw new ConsoleParserCommandAddTargetInvalidException(
+                    Messages.CONSOLE_ERROR_COMMAND_ADD_TARGET_INVALID
+            );
         }
     }
 
@@ -1482,7 +1492,9 @@ public class ConsoleParser {
             try {
                 targetIndex = Integer.parseInt(targetIndexStr);
             } catch (NumberFormatException exception) {
-                throw new ConsoleParserCommandEditTargetInvalidException(exception);
+                throw new ConsoleParserCommandEditTargetInvalidException(
+                        Messages.CONSOLE_ERROR_COMMAND_EDIT_TARGET_INVALID
+                );
             }
 
             if (targetIndex < 0) {
@@ -1547,7 +1559,9 @@ public class ConsoleParser {
                     currentAmount
             );
         } catch (DateTimeParseException | NumberFormatException exception) {
-            throw new ConsoleParserCommandEditTargetInvalidException(exception);
+            throw new ConsoleParserCommandEditTargetInvalidException(
+                    Messages.CONSOLE_ERROR_COMMAND_EDIT_TARGET_INVALID
+            );
         }
     }
 
@@ -1702,7 +1716,9 @@ public class ConsoleParser {
                     amount
             );
         } catch (DateTimeParseException | NumberFormatException exception) {
-            throw new ConsoleParserCommandAddIncomeInvalidException(exception);
+            throw new ConsoleParserCommandAddIncomeInvalidException(
+                    Messages.CONSOLE_ERROR_COMMAND_ADD_INCOME_INVALID
+            );
         }
     }
 
@@ -1975,7 +1991,9 @@ public class ConsoleParser {
             try {
                 incomeIndex = Integer.parseInt(incomeIndexStr);
             } catch (NumberFormatException exception) {
-                throw new ConsoleParserCommandEditIncomeInvalidException(exception);
+                throw new ConsoleParserCommandEditIncomeInvalidException(
+                        Messages.CONSOLE_ERROR_COMMAND_EDIT_INCOME_INVALID
+                );
             }
 
             if (incomeIndex < 0) {
@@ -2048,7 +2066,9 @@ public class ConsoleParser {
                     amount
             );
         } catch (DateTimeParseException | NumberFormatException exception) {
-            throw new ConsoleParserCommandEditIncomeInvalidException(exception);
+            throw new ConsoleParserCommandEditIncomeInvalidException(
+                    Messages.CONSOLE_ERROR_COMMAND_EDIT_INCOME_INVALID
+            );
         }
     }
 
@@ -2162,7 +2182,7 @@ public class ConsoleParser {
             }
         } catch (NumberFormatException exception) {
             throw new ConsoleParserCommandAddRecurringPaymentInvalidException(
-                    Messages.CONSOLE_PARSER_INVALID_AMOUNT_EXCEPTION
+                    Messages.CONSOLE_ERROR_COMMAND_ADD_RECURRING_PAYMENT_INVALID
             );
         }
     }
@@ -2212,7 +2232,9 @@ public class ConsoleParser {
                     modeOfPayment
             );
         } catch (DateTimeParseException | NumberFormatException exception) {
-            throw new ConsoleParserCommandAddRecurringPaymentInvalidException(exception);
+            throw new ConsoleParserCommandAddRecurringPaymentInvalidException(
+                    Messages.CONSOLE_ERROR_COMMAND_ADD_RECURRING_PAYMENT_INVALID
+            );
         }
     }
 
@@ -2612,7 +2634,9 @@ public class ConsoleParser {
 
             return consoleCommandEditRecurringPayment;
         } catch (DateTimeParseException | NumberFormatException exception) {
-            throw new ConsoleParserCommandEditRecurringPaymentInvalidException(exception);
+            throw new ConsoleParserCommandEditRecurringPaymentInvalidException(
+                    Messages.CONSOLE_ERROR_COMMAND_EDIT_RECURRING_PAYMENT_INVALID
+            );
         }
     }
 
