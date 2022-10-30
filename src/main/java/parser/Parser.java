@@ -55,6 +55,7 @@ public class Parser {
         try {
             return numberInInput(input, " i/");
         } catch (DukeException e) {
+            System.out.println("Please enter a valid index");
             throw new DukeException();
         }
     }
@@ -77,7 +78,7 @@ public class Parser {
 
 
     public boolean isInt(String input) throws DukeException {
-        Boolean strResult = input.matches("\\d?");
+        Boolean strResult = input.matches("\\d+?");
         if (strResult) {
             return true;
         }

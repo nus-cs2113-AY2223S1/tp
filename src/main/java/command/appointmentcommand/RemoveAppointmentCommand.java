@@ -18,6 +18,7 @@ public class RemoveAppointmentCommand extends Command {
     }
 
     @Override
+    
     public void execute() {
 
         while (AppointmentList.findAppointment(appointmentId).tasks.size() != 0) {
