@@ -1,5 +1,7 @@
 package pet;
 
+import exception.DukeException;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -15,4 +17,24 @@ public class PetList {
         }
         return null;
     }
+
+    public static String getPetNameById(int id) {
+
+        for (Pet pet : PetList.pets) {
+            if (pet.petId == id) {
+                return pet.name;
+            }
+        }
+        return "Invalid Id";
+    }
+
+    public static Pet findPetById(int petId) {
+        for (Pet pet : pets) {
+            if (pet.petId == petId) {
+                return pet;
+            }
+        }
+        return null;
+    }
+
 }
