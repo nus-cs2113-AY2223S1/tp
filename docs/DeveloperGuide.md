@@ -453,7 +453,7 @@ Step 4: After finding the transaction, a message will be displayed to the user v
 The following sequence diagram shows how the view transaction operation works:
 ![viewTransactionSequence](images/ViewTransactionSequence.png)
 
-#### 4.3.5. View Transactions By Status
+#### 4.3.5. Find Transactions By Status
 
 > The viewTransactionsByStatus feature is facilitated by the TransactionList class. It extends the command class to add a command for users to view the history of finished or ongoing transactions for recording purposes. The feature implements the following commands:
 
