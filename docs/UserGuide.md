@@ -192,11 +192,19 @@ Expected outcome:
 ```
 ____________________________________________________________
 Here is the user you have requested to view: 
-Username: jingwei Age: 19 Contact: 22384729 
+Username: bui Age: 20 Contact: 12345678 
 The user's debt is $0.0
 Here are 2 item(s) in your list:
-   1. Status: [Available] ItemId: 895c7dd6 Item: scale Category: SPORTS_EQUIPMENT Owner: jingwei PricePerDay: $1.0
-   2. Status: [Available] ItemId: e084cd0a Item: battery Category: ELECTRICAL_APPLIANCES Owner: jingwei PricePerDay: $1.5
+1. [Available] ItemId: 69b69ff2
+   Item name: charger
+   Category: ELECTRICAL_APPLIANCES
+   Owner: bui
+   PricePerDay: $1.00
+2. [Available] ItemId: 63583a01
+   Item name: battery
+   Category: ELECTRICAL_APPLIANCES
+   Owner: bui
+   PricePerDay: $20.00
 ____________________________________________________________
 ```
 
@@ -208,13 +216,23 @@ Format: `view-user-items /u [USERNAME]`
 Note:
 1. Username must be present in the user list
 
-Example of usage: `view-user-items /u jingwei`
+Example of usage: `view-user-items /u bui`
 
 Expected outcome:
 ```
+____________________________________________________________
 Here are 2 item(s) in your list:
-   1. Status: [Available] ItemId: 895c7dd6 Item: scale Category: SPORTS_EQUIPMENT Owner: jingwei PricePerDay: $1.0
-   2. Status: [Available] ItemId: e084cd0a Item: battery Category: ELECTRICAL_APPLIANCES Owner: jingwei PricePerDay: $1.5
+1. [Available] ItemId: 69b69ff2
+   Item name: charger
+   Category: ELECTRICAL_APPLIANCES
+   Owner: bui
+   PricePerDay: $1.00
+2. [Available] ItemId: 63583a01
+   Item name: battery
+   Category: ELECTRICAL_APPLIANCES
+   Owner: bui
+   PricePerDay: $20.00
+____________________________________________________________
 ```
 
 #### 3.2.6. ```find-user``` - Find users using keyword
@@ -362,7 +380,7 @@ Format: ```sort-items /mode [MODE_OF_SORTING] /min [MIN_PRICE] /max [MAX_PRICE] 
 Note:
 
 1. Mode of sorting must either be ```lh``` (low to high) or ``` hl``` (high to low) (default: ```lh```)
-2. Mode, minimum price, maximum price and category filters are optional. If you do not use, please remove the whole part (for example: remove ```/min [MIN_PRICE]```)
+2. Mode, minimum price, maximum price and category filters are **optional**. If you do not use, please remove the whole part (for example: remove ```/min [MIN_PRICE]```)
 3. Minimum and Maximum price must be more than 0 and less than 10000
 4. Minimum price must be less than maximum price
 5. Category number must be an integer, (default: 0, which means all categories)
@@ -621,6 +639,7 @@ ____________________________________________________________
 | Add a new user                     | add-user /n [USERNAME] /a [AGE] /c [CONTACT_NUMBER]                                                        |
 | Remove a user                      | remove-user /u [USERNAME]                                                                                  |
 | View a user                        | view-user /u [USERNAME]                                                                                    |
+| View a user's items                | view-user-items /u [USERNAME]                                                                              |
 | List all users                     | list-users                                                                                                 |
 | Find users by keyword              | find-user /k [KEYWORD]                                                                                     |
 | __*Item-related features*__        |                                                                                                            |
