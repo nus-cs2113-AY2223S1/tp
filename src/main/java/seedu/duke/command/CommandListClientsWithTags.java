@@ -30,6 +30,9 @@ public class CommandListClientsWithTags extends Command {
         case CommandStructure.BUDGET_FLAG:
             displayClientBudget(clientList, ui);
             break;
+        case CommandStructure.SHORT_FLAG:
+            displayClientShort(clientList, ui);
+            break;
         default:
             break;
         }
@@ -39,32 +42,35 @@ public class CommandListClientsWithTags extends Command {
         for (int i = 0; i < clientList.getCurrentListSize(); i++) {
             ui.displayOneClientContact(clientList.getClientList().get(i), i + 1);
         }
-        System.out.println("There are " + clientList.getCurrentListSize()
-                + " clients in this list");
+        ui.displayNoOfClients(clientList.getCurrentListSize());
+    }
+
+    public void displayClientShort(ClientList clientList, Ui ui) {
+        for (int i = 0; i < clientList.getCurrentListSize(); i++) {
+            ui.displayOneClientShort(clientList.getClientList().get(i), i + 1);
+        }
+        ui.displayNoOfClients(clientList.getCurrentListSize());
     }
 
     private void displayClientNames(ClientList clientList, Ui ui) {
         for (int i = 0; i < clientList.getCurrentListSize(); i++) {
             ui.displayOneClientName(clientList.getClientList().get(i), i + 1);
         }
-        System.out.println("There are " + clientList.getCurrentListSize()
-                + " clients in this list");
+        ui.displayNoOfClients(clientList.getCurrentListSize());
     }
 
     private void displayClientEmails(ClientList clientList, Ui ui) {
         for (int i = 0; i < clientList.getCurrentListSize(); i++) {
             ui.displayOneClientEmail(clientList.getClientList().get(i), i + 1);
         }
-        System.out.println("There are " + clientList.getCurrentListSize()
-                + " clients in this list");
+        ui.displayNoOfClients(clientList.getCurrentListSize());
     }
 
     private void displayClientBudget(ClientList clientList, Ui ui) {
         for (int i = 0; i < clientList.getCurrentListSize(); i++) {
             ui.displayOneClientBudget(clientList.getClientList().get(i), i + 1);
         }
-        System.out.println("There are " + clientList.getCurrentListSize()
-                + " clients in this list");
+        ui.displayNoOfClients(clientList.getCurrentListSize());
     }
 }
 

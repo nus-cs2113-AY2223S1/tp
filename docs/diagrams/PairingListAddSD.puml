@@ -1,0 +1,117 @@
+@startuml
+!include style.puml
+
+Actor User #black
+
+Participant ":Duke" as Duke DUKE_COLOR
+Participant "parser:ParserPair" as Parser PARSER_COLOR
+Participant ":CommandPair" as CommandPair COMMAND_COLOR
+Participant "clientList:ClientList" as ClientList CLIENT_LIST_COLOR
+Participant "propertyList:PropertyList" as PropertyList PROPERTY_LIST_COLOR
+Participant "pairingList:PairingList" as PairingList PAIRING_LIST_COLOR
+Participant ":Storage" as Storage STORAGE_COLOR
+Participant "ui:UI" as Ui #lightgrey
+
+
+User -[USER_COLOR]> Duke : userCommand:String
+activate Duke DUKE_COLOR
+
+create Parser
+Duke -[DUKE_COLOR]> Parser
+activate Parser PARSER_COLOR
+Parser --> Duke : :ParserPair
+deactivate Parser
+
+Duke -[DUKE_COLOR]> Parser : parseCommand()
+activate Parser PARSER_COLOR
+
+Parser -[PARSER_COLOR_T1]> Parser : convertProcessedCommandDetailsToInt(commandDescription:String)
+activate Parser PARSER_COLOR_T1
+Parser --> Parser :
+deactivate Parser
+
+Parser -[PARSER_COLOR_T1]> Parser : validatePairDetails(pairDetailsString:ArrayList<String>)
+activate Parser PARSER_COLOR_T4
+
+Parser -[PARSER_COLOR_T1]> Parser : checkForClientListIndexOutOfBounds(clientIndex:int)
+activate Parser PARSER_COLOR_T1
+Parser --> Parser :
+deactivate Parser
+
+Parser -[PARSER_COLOR_T1]> Parser : checkForPropertyListIndexOutOfBounds(propertyIndex:int)
+activate Parser PARSER_COLOR_T1
+Parser --> Parser :
+deactivate Parser
+
+Parser -[CLIENT_LIST_COLOR]> ClientList : getClientList().get(clientIndex:int)
+activate ClientList CLIENT_LIST_COLOR
+ClientList --> Parser : :Client
+deactivate ClientList
+
+Parser -[PROPERTY_LIST_COLOR]> PropertyList : getPropertyList().get(propertyIndex:int)
+activate PropertyList PROPERTY_LIST_COLOR
+PropertyList --> Parser : :Property
+deactivate PropertyList
+
+Parser -[PAIRING_LIST_COLOR]> PairingList : isAlreadyPaired(client:Client, property:Property)
+activate PairingList PAIRING_LIST_COLOR
+PairingList --> Parser : :boolean
+deactivate PairingList
+
+Parser -[PAIRING_LIST_COLOR]> PairingList : isClientPairedWithProperty(client:Client)
+activate PairingList PAIRING_LIST_COLOR
+PairingList --> Parser : :boolean
+deactivate PairingList
+
+
+Parser -[PAIRING_LIST_COLOR]> PairingList : hasPriceExceededBudget(client:Client, property:Property)
+activate PairingList PAIRING_LIST_COLOR
+PairingList --> Parser : :boolean
+deactivate PairingList
+
+Parser --> Parser :
+deactivate Parser
+
+create CommandPair
+Parser -[COMMAND_COLOR]> CommandPair
+activate CommandPair COMMAND_COLOR
+CommandPair --> Parser : :CommandPair
+deactivate CommandPair
+Parser --> Duke : :CommandPair
+deactivate Parser
+
+
+Duke -[COMMAND_COLOR]> CommandPair : execute(ui:UI, storage:Storage, propertyList:PropertyList,\nclientList:ClientList,paringList:PairingList)
+activate CommandPair COMMAND_COLOR
+
+CommandPair -[CLIENT_LIST_COLOR]> ClientList : getClientList().get(clientIndex:int)
+activate ClientList CLIENT_LIST_COLOR
+ClientList --> CommandPair : :Client
+deactivate ClientList
+
+CommandPair -[PROPERTY_LIST_COLOR]> PropertyList : getPropertyList().get(propertyIndex:int)
+activate PropertyList PROPERTY_LIST_COLOR
+PropertyList --> CommandPair : :Property
+deactivate PropertyList
+
+CommandPair -[PAIRING_LIST_COLOR]> PairingList : addPairing(client:Client, property:Property)
+activate PairingList PAIRING_LIST_COLOR
+PairingList --> CommandPair
+deactivate PairingList
+
+CommandPair -[STORAGE_COLOR]> Storage : addToPairFile(clientFormat:String, propertyFormat:String)
+activate Storage STORAGE_COLOR
+Storage --> CommandPair
+deactivate Storage
+
+CommandPair -[UI_COLOR]> Ui : showPairedConfirmationMessage(client:Client, property:Property)
+activate Ui UI_COLOR
+Ui --> CommandPair
+deactivate Ui
+
+CommandPair --> Duke
+deactivate CommandPair
+Duke --> User
+deactivate Duke
+
+@enduml

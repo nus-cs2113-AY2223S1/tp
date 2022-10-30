@@ -1,188 +1,75 @@
 package seedu.duke.parsermanager;
 
-import seedu.duke.Client;
-import seedu.duke.ClientList;
-import seedu.duke.PairingList;
-import seedu.duke.Property;
-import seedu.duke.PropertyList;
+//@@author ngdeqi
 import seedu.duke.command.Command;
-import seedu.duke.command.CommandPair;
-import seedu.duke.exception.BudgetExceededException;
-import seedu.duke.exception.ClientAlreadyPairedException;
-import seedu.duke.exception.DukeException;
-import seedu.duke.exception.EmptyDescriptionException;
-import seedu.duke.exception.ExistingPairException;
-import seedu.duke.exception.IncorrectFlagOrderException;
-import seedu.duke.exception.InvalidIndexException;
-import seedu.duke.exception.MissingFlagException;
-import seedu.duke.exception.NotIntegerException;
+import seedu.duke.command.pairunpair.CommandPair;
+import seedu.duke.exception.pairunpair.PairUnpairNotIntegerException;
+import seedu.duke.exception.pairunpair.ParsePairUnpairException;
+import seedu.duke.exception.pairunpair.pair.PairIncorrectFlagOrderException;
+import seedu.duke.exception.pairunpair.pair.PairMissingDescriptionException;
+import seedu.duke.exception.pairunpair.pair.PairMissingFlagException;
 
 import java.util.ArrayList;
 
 import static seedu.duke.CommandStructure.PAIR_FLAGS;
-import static seedu.duke.Messages.EXCEPTION;
-import static seedu.duke.Messages.MESSAGE_BUDGET_EXCEEDED;
-import static seedu.duke.Messages.MESSAGE_CLIENT_ALREADY_PAIRED;
-import static seedu.duke.Messages.MESSAGE_EMPTY_DESCRIPTION;
-import static seedu.duke.Messages.MESSAGE_EXISTING_PAIR;
-import static seedu.duke.Messages.MESSAGE_INVALID_INDEX;
-import static seedu.duke.Messages.MESSAGE_NOT_INTEGER;
-import static seedu.duke.Messages.MESSAGE_PAIR_WRONG_FORMAT;
 
+/**
+ * Parser for pair commands.
+ */
 public class ParsePair extends Parser {
     private final String commandDescription;
-    private static ClientList clientList;
-    private static PropertyList propertyList;
-    private static PairingList pairingList;
 
-    public ParsePair(String pairCommandDescription, ClientList clientL,
-                     PropertyList propertyL, PairingList pairingL) {
+    public ParsePair(String pairCommandDescription) {
         commandDescription = pairCommandDescription;
-        clientList = clientL;
-        propertyList = propertyL;
-        pairingList = pairingL;
+
     }
 
     @Override
-    public Command parseCommand() throws DukeException {
-        try {
+    public Command parseCommand() throws ParsePairUnpairException {
 
-            checkForEmptyDescription(commandDescription);
-            ArrayList<String> pairDetailsString = processCommandDetails(commandDescription);
-            ArrayList<Integer> pairDetailsInt = convertProcessedCommandDetailsToInteger(pairDetailsString);
+        checkForEmptyDescription(commandDescription);
+        ArrayList<String> pairDetailsString = processCommandDetails(commandDescription);
+        ArrayList<Integer> pairDetailsInt = convertPairCommandDetailsToInteger(pairDetailsString);
 
-            validatePairDetails(pairDetailsInt);
-            return new CommandPair(pairDetailsInt);
-        } catch (InvalidIndexException e) {
-            throw new InvalidIndexException(MESSAGE_INVALID_INDEX);
-        } catch (ClientAlreadyPairedException e) {
-            throw new ClientAlreadyPairedException(MESSAGE_CLIENT_ALREADY_PAIRED);
-        } catch (MissingFlagException e) {
-            throw new MissingFlagException(MESSAGE_PAIR_WRONG_FORMAT);
-        } catch (IncorrectFlagOrderException e) {
-            throw new IncorrectFlagOrderException(MESSAGE_PAIR_WRONG_FORMAT);
-        } catch (NotIntegerException e) {
-            throw new NotIntegerException(MESSAGE_NOT_INTEGER);
-        } catch (ExistingPairException e) {
-            throw new ExistingPairException(MESSAGE_EXISTING_PAIR);
-        } catch (BudgetExceededException e) {
-            throw new BudgetExceededException(MESSAGE_BUDGET_EXCEEDED);
-        }
+        return new CommandPair(pairDetailsInt);
     }
 
-    private void checkForEmptyDescription(String commandDetail) throws EmptyDescriptionException {
+
+    private void checkForEmptyDescription(String commandDetail) throws PairMissingDescriptionException {
         boolean isEmptyDescription = isEmptyString(commandDetail);
         if (isEmptyDescription) {
-            throw new EmptyDescriptionException(MESSAGE_EMPTY_DESCRIPTION);
+            throw new PairMissingDescriptionException();
         }
     }
 
-    private boolean isEmptyString(String commandDetail) {
-        return commandDetail.trim().isEmpty();
-    }
-
-
     private ArrayList<String> processCommandDetails(String rawCommandDetail)
-            throws MissingFlagException, IncorrectFlagOrderException {
+            throws PairMissingFlagException, PairIncorrectFlagOrderException {
 
         String[] flags = PAIR_FLAGS;
         int[] flagIndexPositions = getFlagIndexPositions(rawCommandDetail, flags);
-        checkForMissingFlags(flagIndexPositions);
+        checkForMissingFlags(flagIndexPositions, flags);
         checkFlagsOrder(flagIndexPositions);
         return extractCommandDetails(rawCommandDetail, flags, flagIndexPositions);
     }
 
-    private ArrayList<Integer> convertProcessedCommandDetailsToInteger(ArrayList<String> processedCommandDetails)
-            throws NotIntegerException {
-        ArrayList<Integer> integerDetails = new ArrayList<>();
-        for (String detail : processedCommandDetails) {
-            int integer;
-            try {
-                integer = Integer.parseInt(detail);
-            } catch (NumberFormatException e) {
-                throw new NotIntegerException(EXCEPTION);
-            }
-            integerDetails.add(integer - 1); // Convert to 0-index
-        }
-        return integerDetails;
-    }
+    private void checkForMissingFlags(int[] flagIndexPositions, String[] flags) throws PairMissingFlagException {
+        ArrayList<String> missingFlags = new ArrayList<>();
 
-    private void validatePairDetails(ArrayList<Integer> pairDetails) throws InvalidIndexException,
-            ClientAlreadyPairedException, ExistingPairException, BudgetExceededException {
-        int propertyIndex = pairDetails.get(0);
-        int clientIndex = pairDetails.get(1);
-        checkForClientListIndexOutOfBounds(clientIndex);
-        checkForPropertyListIndexOutOfBounds(propertyIndex);
-
-        Client client = clientList.getClientList().get(clientIndex);
-        Property property = propertyList.getPropertyList().get(propertyIndex);
-
-        if (pairingList.isAlreadyPaired(client, property)) {
-            throw new ExistingPairException(EXCEPTION);
-        }
-
-        if (pairingList.isClientPairedWithProperty(client)) {
-            throw new ClientAlreadyPairedException(EXCEPTION);
-        }
-
-        if (pairingList.hasPriceExceededBudget(client, property)) {
-            throw new BudgetExceededException(EXCEPTION);
-        }
-    }
-
-    private int[] getFlagIndexPositions(String commandDetail, String[] flags) {
-        int[] flagIndexPositions = new int[flags.length];
-
-        for (int i = 0; i < flags.length; i++) {
-            flagIndexPositions[i] = commandDetail.indexOf(flags[i]);
-        }
-        return flagIndexPositions;
-    }
-
-    private void checkForMissingFlags(int[] flagIndexPositions) throws MissingFlagException {
-        for (int flagIndex : flagIndexPositions) {
-            if (!isFlagPresent(flagIndex)) {
-                throw  new MissingFlagException(EXCEPTION);
+        for (int flagCounter = 0; flagCounter < flags.length; flagCounter++) {
+            int indexOfCurrentFlag = flagIndexPositions[flagCounter];
+            if (!isFlagPresent(indexOfCurrentFlag)) {
+                missingFlags.add(flags[flagCounter]);
             }
         }
+
+        if (!missingFlags.isEmpty()) {
+            throw new PairMissingFlagException(missingFlags);
+        }
     }
 
-    private void checkFlagsOrder(int[] flagIndexPositions) throws IncorrectFlagOrderException {
+    private void checkFlagsOrder(int[] flagIndexPositions) throws PairIncorrectFlagOrderException {
         for (int i = 0; i < flagIndexPositions.length - 1; i++) {
             checkForCorrectFlagOrder(flagIndexPositions[i], flagIndexPositions[i + 1]);
-        }
-    }
-
-    private ArrayList<String> extractCommandDetails(String rawCommandDetail, String[] flags,
-                                                    int[] flagIndexPositions) {
-        ArrayList<String> extractedCommandDetails = new ArrayList<>();
-        for (int i = 0; i < flags.length; i++) {
-            String extractedDetail;
-            if (i == flags.length - 1) {
-                /* The extracted detail for the last flag starts from the char after the flag, to the end of
-                   rawCommandDetails */
-                extractedDetail = extractDetail(rawCommandDetail, flagIndexPositions[i] + flags[i].length());
-            } else {
-                // The extracted detail for non-last starts from the char after the flag, to index before the next flag
-                extractedDetail = extractDetail(
-                        rawCommandDetail,
-                        flagIndexPositions[i] + flags[i].length(),
-                        flagIndexPositions[i + 1]);
-            }
-            extractedCommandDetails.add(extractedDetail.trim());
-        }
-        return extractedCommandDetails;
-    }
-
-    private void checkForClientListIndexOutOfBounds(int clientIndex) throws InvalidIndexException {
-        if (clientIndex < 0 || clientIndex > clientList.getCurrentListSize() - 1) {
-            throw new InvalidIndexException(EXCEPTION);
-        }
-    }
-
-    private void checkForPropertyListIndexOutOfBounds(int propertyIndex) throws InvalidIndexException {
-        if (propertyIndex < 0 || propertyIndex > propertyList.getCurrentListSize() - 1) {
-            throw new InvalidIndexException(EXCEPTION);
         }
     }
 
@@ -190,23 +77,34 @@ public class ParsePair extends Parser {
         return (flagIndexPosition != -1);
     }
 
-    private void checkForCorrectFlagOrder(int flagPosition, int nextFlagPosition) throws IncorrectFlagOrderException {
+    private void checkForCorrectFlagOrder(int flagPosition, int nextFlagPosition)
+            throws PairIncorrectFlagOrderException {
         boolean hasCorrectOrder = (flagPosition < nextFlagPosition);
         if (!hasCorrectOrder) {
-            throw new IncorrectFlagOrderException(EXCEPTION);
+            throw new PairIncorrectFlagOrderException();
         }
     }
 
-    private static String extractDetail(String rawDetail, int beginIndex) {
-        return rawDetail.substring(beginIndex).trim();
+    private ArrayList<Integer> convertPairCommandDetailsToInteger(ArrayList<String> pairDetailsString)
+        throws PairUnpairNotIntegerException {
+
+        ArrayList<Integer> integerDetails = new ArrayList<>();
+        ArrayList<String> nonIntegerDetails = new ArrayList<>();
+        for (String detail : pairDetailsString) {
+            int integer;
+            try {
+                integer = Integer.parseInt(detail);
+                // Convert to 0-index
+                integerDetails.add(integer - UNIT_VALUE);
+            } catch (NumberFormatException e) {
+                nonIntegerDetails.add(detail);
+            }
+        }
+
+        if (!nonIntegerDetails.isEmpty()) {
+            throw new PairUnpairNotIntegerException(nonIntegerDetails);
+        }
+        return integerDetails;
     }
-
-    private static String extractDetail(String rawDetail, int beginIndex, int endIndex) {
-        return rawDetail.substring(beginIndex, endIndex).trim();
-    }
-
-
-
-
 
 }

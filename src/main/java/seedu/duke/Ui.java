@@ -10,6 +10,7 @@ import java.util.Scanner;
 import static seedu.duke.Messages.LINE_BREAK;
 import static seedu.duke.Messages.MESSAGE_CHECK_CLIENT;
 import static seedu.duke.Messages.MESSAGE_CHECK_CLIENT_RESULT;
+import static seedu.duke.Messages.MESSAGE_CHECK_PROPERTY;
 import static seedu.duke.Messages.MESSAGE_CHECK_PROPERTY_RESULT;
 import static seedu.duke.Messages.MESSAGE_CLIENT_ADDED;
 import static seedu.duke.Messages.MESSAGE_CLIENT_DELETED;
@@ -42,23 +43,29 @@ public class Ui {
 
     private static final String SPACE = "\t";
 
-
-    private static boolean inputIsEmpty(String rawInput) {
+    //@@author wilsonngja
+    private static boolean isInputEmpty(String rawInput) {
         return rawInput.trim().isEmpty();
     }
 
-    public static String readCommand() {
+    /**
+     * Accepts the input from the user and ignore empty input.
+     *
+     * @return the input string that user entered.
+     */
+    public String readCommand() {
         Scanner input = new Scanner(System.in);
 
         String rawInput = input.nextLine();
-        boolean isEmpty = inputIsEmpty(rawInput);
+        boolean isEmpty = isInputEmpty(rawInput);
         while (isEmpty) {
             rawInput = input.nextLine();
-            isEmpty = inputIsEmpty(rawInput);
+            isEmpty = isInputEmpty(rawInput);
         }
 
         return rawInput;
     }
+    //@@author
 
     public void showToUser(String message) {
         System.out.println(message);
@@ -167,29 +174,37 @@ public class Ui {
     }
 
     public void displayOneClientName(Client client, int i) {
-        System.out.println(i + ".");
+        System.out.print(i + FULL_STOP);
         System.out.println(client.getClientName());
         System.out.println(LINE_BREAK);
     }
 
     public void displayOneClientContact(Client client, int i) {
-        System.out.println(i + ".");
-        System.out.println(client.getClientContactNumber());
+        System.out.print(i + FULL_STOP);
+        System.out.println(SPACE + client.getClientContactNumber());
         System.out.println(LINE_BREAK);
     }
 
     public void displayOneClientEmail(Client client, int i) {
-        System.out.println(i + ".");
-        System.out.println(client.getClientEmailForList());
+        System.out.print(i + FULL_STOP);
+        System.out.println(SPACE + client.getClientEmailForList());
         System.out.println(LINE_BREAK);
     }
 
     public void displayOneClientBudget(Client client, int i) {
-        System.out.println(i + ".");
-        System.out.println(client.getClientBudgetPerMonth());
+        System.out.print(i + FULL_STOP);
+        System.out.println(SPACE + client.getClientBudgetPerMonth());
         System.out.println(LINE_BREAK);
     }
 
+    public void displayOneClientShort(Client client, int i) {
+        System.out.print(i + FULL_STOP);
+        System.out.println(SPACE + CLIENT_NAME_LABEL + client.getClientName());
+        System.out.println(SPACE + CLIENT_BUDGET_LABEL + client.getClientBudgetPerMonth());
+        System.out.println(SPACE + LINE_BREAK);
+    }
+
+    //@@author wilsonngja
     public void displayOneProperty(Property property, int i) {
         // Prints out the index and landlord name
         String index = i + FULL_STOP;
@@ -210,29 +225,55 @@ public class Ui {
 
         System.out.println(LINE_BREAK);
     }
+    //@@author
 
     public void displayOnePropertyAddress(Property property, int i) {
-        System.out.println(i + ".");
-        System.out.println(property.getPropertyAddress());
+        System.out.print(i + FULL_STOP);
+        System.out.println(SPACE + property.getPropertyAddress());
         System.out.println(LINE_BREAK);
     }
 
+
     public void displayOnePropertyLandlordName(Property property, int i) {
-        System.out.println(i + ".");
-        System.out.println(property.getLandlordName());
+        System.out.print(i + FULL_STOP);
+        System.out.println(SPACE + property.getLandlordName());
         System.out.println(LINE_BREAK);
     }
 
     public void displayOnePropertyRentingPrice(Property property, int i) {
-        System.out.println(i + ".");
-        System.out.println(property.getRentingPrice());
+        System.out.print(i + FULL_STOP);
+        System.out.println(SPACE + property.getRentingPrice());
         System.out.println(LINE_BREAK);
     }
 
     public void displayOnePropertyUnitType(Property property, int i) {
-        System.out.println(i + ".");
-        System.out.println(property.getUnitType());
+        System.out.print(i + FULL_STOP);
+        System.out.println(SPACE + property.getUnitType());
         System.out.println(LINE_BREAK);
+    }
+
+    public void displayOnePropertyShort(Property property, int i) {
+        System.out.print(i + FULL_STOP);
+        System.out.println(SPACE + PROPERTY_ADDRESS_LABEL + property.getPropertyAddress());
+        System.out.println(SPACE + PROPERTY_UNIT_TYPE_LABEL + property.getUnitType());
+        System.out.println(SPACE + PROPERTY_RENTAL_LABEL + property.getRentingPrice());
+        System.out.println(SPACE + LINE_BREAK);
+    }
+
+    public void displayNoOfProperties(int i) {
+        if (i == 1) {
+            System.out.println("There is " + i + " property in the list");
+        } else {
+            System.out.println("There are " + i + " properties in this list");
+        }
+    }
+
+    public void displayNoOfClients(int i) {
+        if (i == 1) {
+            System.out.println("There is " + i + " client in the list");
+        } else {
+            System.out.println("There are " + i + " clients in this list");
+        }
     }
 
     public void showCheckClient(Client client, Property property) {
@@ -242,12 +283,13 @@ public class Ui {
         showToUser("  " + property.toString());
     }
 
-    public void showCheckProperty(ArrayList<Client> tenants) {
+    public void showCheckProperty(Property property, ArrayList<Client> tenants) {
+        showToUser(MESSAGE_CHECK_PROPERTY);
+        showToUser("  " + property.toString() + "\n");
         showToUser(MESSAGE_CHECK_PROPERTY_RESULT);
         int count = 0;
         for (Client tenant : tenants) {
             String tenantInfo = tenant.toString();
-
             showToUser(String.format("  %d. %s", ++count, tenantInfo));
         }
         showToUser(MESSAGE_NUMBER_OF_LIST_RESULTS + count);

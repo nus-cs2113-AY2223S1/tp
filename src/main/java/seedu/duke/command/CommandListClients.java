@@ -12,8 +12,7 @@ public class CommandListClients extends Command {
         for (int i = 0; i < clientList.getCurrentListSize(); i++) {
             ui.displayOneClient(clientList.getClientList().get(i), i + 1);
         }
-        System.out.println("There are " + clientList.getCurrentListSize()
-                + " clients in this list");
+        ui.displayNoOfClients(clientList.getCurrentListSize());
     }
 }
 

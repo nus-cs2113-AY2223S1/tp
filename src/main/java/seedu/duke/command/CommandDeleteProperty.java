@@ -27,8 +27,8 @@ public class CommandDeleteProperty extends CommandDelete {
         pairingList.deletePairing(deletedProperty);
 
         //Update Storage
-        storage.updateProperty(propertyList);
-        storage.updatePair(pairingList);
+        storage.updateProperty();
+        storage.updatePair();
 
     }
 }
