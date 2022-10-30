@@ -37,9 +37,9 @@ public enum ErrorMessages {
     ERROR_UNKNOWN_HELP_OPTION("The parameter used for help option is unknown, "
             + "please enter <help> for the command guide."),
     ERROR_STORAGE_TRANSACTION_CORRUPTED("Transaction values corrupted."
-            + " To PREVENT OVERWRITE, please STOP the program and EDIT your duke.txt file correctly."),
+            + " To PREVENT DATA OVERWRITE, please STOP the program and EDIT your duke.txt file correctly."),
     ERROR_STORAGE_BUDGET_CORRUPTED("Budget parameter is invalid or missing."
-            + " To PREVENT OVERWRITE, please STOP the program and EDIT your duke.txt file correctly."),
+            + " To PREVENT DATA OVERWRITE, please STOP the program and EDIT your duke.txt file correctly."),
     ERROR_STORAGE_WRITE("Unable to write to Duke.txt. Please save your current Duke.txt file and restart Moolah"),
     ERROR_MAXIMUM_TRANSACTION_COUNT_REACHED("Unable to add transaction. "
             + "The maximum allowed transaction size (1000000) has been reached."),
