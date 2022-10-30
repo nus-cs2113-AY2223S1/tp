@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
  * Module properties are all "public final" as they are not meant to be freely accessed but not modified.
  * Based off https://github.com/nusmodifications/nusmods/blob/master/scrapers/nus-v2/src/types/modules.ts
  */
-public class Module {
+public class Module implements Comparable<Module> {
     /**
      * Academic year e.g. "2022/2023".
      */
@@ -138,6 +138,23 @@ public class Module {
         this.prerequisite = prerequisite;
         this.corequisite = corequisite;
         this.preclusion = preclusion;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (other instanceof Module) {
+            Module module = (Module) other;
+            return this.moduleCode.equals(module.moduleCode);
+        }
+        return false;
+    }
+
+    @Override
+    public int compareTo(Module other) {
+        return moduleCode.compareTo(other.moduleCode);
     }
 
     /**

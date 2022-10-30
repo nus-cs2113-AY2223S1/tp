@@ -3,8 +3,9 @@ package seedu.duke.utils;
 import java.io.InputStream;
 import java.util.Scanner;
 
-import org.apache.commons.lang3.SystemUtils;
-
+/**
+ * Handles the characters for drawing border boxes in the terminal.
+ */
 public class ConsoleBorder {
     private final char topLeft;
     private final char topMid;
@@ -23,10 +24,12 @@ public class ConsoleBorder {
 
     public static final char DOTTED_CHAR = ':';
 
-    public static ConsoleBorder getInstance() {
-        return getInstance(false);
-    }
-
+    /**
+     * Gets the singleton instance of the ConsoleBorder class.
+     * @param isSimple If true, then only ASCII characters will be used, 
+     *                 otherwise fancier unicode characters will be used.
+     * @return The ConsoleBorder instance.
+     */
     public static ConsoleBorder getInstance(boolean isSimple) {
         if (isSimple) {
             if (styleSimpleSingleton == null) {
@@ -48,6 +51,12 @@ public class ConsoleBorder {
         return across;
     }
 
+    /**
+     * Gets the character by position in a border.
+     * @param top 1 for top, 0 for vertically in the center and -1 for bottom.
+     * @param left 1 for left, 0 for horizontally in the center and -1 for right.
+     * @return The character for the given position.
+     */
     public char get(int top, int left) {
         if (top == 1) {
             if (left == 1) {
@@ -85,8 +94,13 @@ public class ConsoleBorder {
         return side;
     }
 
+    /**
+     * Initializes the ConsoleBorder by reading the characters from a text file.
+     * @param isStyleSimple If true, then only ASCII characters will be used, 
+     *                      otherwise fancier unicode characters will be used.
+     */
     private ConsoleBorder(boolean isStyleSimple) {
-        String borderFileName = (isStyleSimple || SystemUtils.IS_OS_WINDOWS) ? "borderWindows.txt" : "border.txt";
+        String borderFileName = isStyleSimple ? "borderWindows.txt" : "border.txt";
         InputStream stream = ConsoleBorder.class.getClassLoader()
                 .getResourceAsStream(borderFileName);
         Scanner scanner = new Scanner(stream);
@@ -122,11 +136,20 @@ public class ConsoleBorder {
         return (c == bottomLeft || c == bottomMid || c == bottomRight);
     }
 
+    /**
+     * Given two characters, return the character that results from their overlap.
+     * e.g. | overlapped with + should be +. 
+     * This method only handles overlaps between a border character and a side border character,
+     * since in a timetable, only sides will overlap.
+     * 
+     * @param current The current border character.
+     * @param next The other character to overlap, should only be characters along the sides.
+     * @return The new overlapped character.
+     */
     public char mergeBorder(char current, char next) {
         assert next == topLeft || next == topRight || next == bottomLeft 
                 || next == bottomRight || next == side :
                 "mergeBorder called with invalid arguments";
-        // next is always TOP/BOTTOM_LEFT/RIGHT
         if (current == DOTTED_CHAR) {
             return next;
         }
