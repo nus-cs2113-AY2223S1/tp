@@ -37,8 +37,8 @@ public class StateTest {
         List<SelectedModule> list = new ArrayList<>();
         int semester = 1;
 
-        SelectedModule selectedModule1 = new SelectedModule(module1,semester);
-        SelectedModule selectedModule2 = new SelectedModule(module1,semester);
+        SelectedModule selectedModule1 = new SelectedModule(module1, semester);
+        SelectedModule selectedModule2 = new SelectedModule(module1, semester);
         assertNotNull(selectedModule1.getModule());
         assertNotNull(selectedModule2.getModule());
 
@@ -52,7 +52,7 @@ public class StateTest {
         List<SelectedModule> listReturned = state.getSelectedModulesList();
         assertNotNull(listReturned);
 
-        assertEquals(listReturned,list);
+        assertEquals(listReturned, list);
     }
 
     @Test
@@ -60,7 +60,7 @@ public class StateTest {
         State state = new State();
 
         int initialisedSemester = state.getSemester();
-        assertEquals(initialisedSemester,1);
+        assertEquals(initialisedSemester, 1);
 
         int newSemester = 2;
         state.setSemester(newSemester);
@@ -97,8 +97,8 @@ public class StateTest {
         List<SelectedModule> list = new ArrayList<>();
         int semester = 1;
 
-        SelectedModule selectedModule1 = new SelectedModule(module1,semester);
-        SelectedModule selectedModule2 = new SelectedModule(module1,semester);
+        SelectedModule selectedModule1 = new SelectedModule(module1, semester);
+        SelectedModule selectedModule2 = new SelectedModule(module1, semester);
         assertNotNull(selectedModule1.getModule());
         assertNotNull(selectedModule2.getModule());
 
@@ -142,8 +142,8 @@ public class StateTest {
         List<SelectedModule> list = new ArrayList<>();
         int semester = 1;
 
-        SelectedModule selectedModule1 = new SelectedModule(module1,semester);
-        SelectedModule selectedModule2 = new SelectedModule(module1,semester);
+        SelectedModule selectedModule1 = new SelectedModule(module1, semester);
+        SelectedModule selectedModule2 = new SelectedModule(module1, semester);
         assertNotNull(selectedModule1.getModule());
         assertNotNull(selectedModule2.getModule());
 

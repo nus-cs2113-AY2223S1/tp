@@ -2,6 +2,7 @@ package seedu.duke.command;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import seedu.duke.exceptions.YamomException;
 import seedu.duke.model.LessonType;
@@ -24,63 +25,68 @@ public class SelectSlotCommand extends Command {
     public static final String MISSING_PARAMS_KEY_OR_VALUE = "You might have missed out the Module Code, Lesson Type or"
             + " Class No.";
 
-    public static final String SELECTION_DATA_VALIDATION_FAILED = "You might have entered the wrong Module, "
-            + "Lesson Type " + "or Class No.";
+    public static final String SELECTION_DATA_VALIDATION_FAILED = "You might have entered the wrong module, "
+            + "lesson type or class no.";
+    public static final String ERROR_MODULE_DOES_NOT_EXIST = "Module does not exist!";
+    public static final String ERROR_MODULE_NOT_SELECTED = 
+            "You need to add the module to your timetable first. Use the add command.";
 
     public static final String SUCCESSFUL_MESSAGE = "Slot selected successfully!";
-    public static final String UNSUCCESSFUL_MESSAGE = "Slot selection unsuccessful!";
     private Map<String, String> params;
     private String moduleCode;
     private LessonType lessonType;
     private String classNo;
-    private boolean successful;
 
     public SelectSlotCommand(String input) throws YamomException {
         super(input.split("\\s+"));
         params = Parser.parseParams(input);
-        successful = false;
-
         // validate params
         processParams(params);
+        moduleCode = params.get("module").toUpperCase();
+        if (Module.get(moduleCode) == null) {
+            throw new YamomException(moduleCode + " " + ERROR_MODULE_DOES_NOT_EXIST);
+        }
+        try {
+            lessonType = LessonTypeParser.parse(params.get("type"));
+        } catch (IllegalArgumentException e) {
+            throw new YamomException(e.getMessage());
+        }
+        classNo = params.get("code").toUpperCase();
     }
 
     @Override
-    public void execute(State state, Ui ui, Storage storage) {
-        moduleCode = params.get("module").toUpperCase();
-        lessonType = LessonTypeParser.parse(params.get("type"));
-        classNo = params.get("code").toUpperCase();
-
+    public void execute(State state, Ui ui, Storage storage) throws YamomException {
         List<SelectedModule> modules = state.getSelectedModulesList();
-        for (int i = 0; i < modules.size(); i++) {
-            // if module exists
-            if (modules.get(i).getModule().moduleCode.equals(moduleCode)) {
-                // validate lessonType and classNo
-                boolean isSelectionValidated = validateLessonTypeAndClassNo(modules.get(i).getModule(), lessonType,
-                        classNo, state);
-
-                if (isSelectionValidated) {
-                    modules.get(i).selectSlot(lessonType, classNo);
-                    successful = true;
-                    break;
-                }
+        // check if module is not selected
+        boolean moduleInSelectedList = false;
+        for (SelectedModule selectedModule : modules) {
+            if (selectedModule.getModule().moduleCode.equals(moduleCode)) {
+                moduleInSelectedList = true;
             }
         }
-        if (successful) {
-            ui.addMessage(SUCCESSFUL_MESSAGE);
-        } else {
-            ui.addMessage(UNSUCCESSFUL_MESSAGE + System.lineSeparator() + SELECTION_DATA_VALIDATION_FAILED);
+        if (!moduleInSelectedList) {
+            throw new YamomException(ERROR_MODULE_NOT_SELECTED + "\n\te.g. add " + moduleCode);
         }
+        // check if lesson type and code are valid
+        Module module = Module.get(moduleCode);
+        if (!module.getSemesterData(state.getSemester()).getLessonTypes().contains(lessonType)) {
+            throw new YamomException("Module " + moduleCode + " does not have a "
+                    + lessonType + " component in semester " + state.getSemester());
+        }
+        if (module.getSemesterData(state.getSemester()).getLessonsByTypeAndNo(lessonType, classNo).isEmpty()) {
+            throw new YamomException("Class code " + classNo + " does not exist for "
+                    + lessonType + " for " + moduleCode + " in semester " + state.getSemester());
+        }
+        // find module in State
+        SelectedModule selectedModule = modules
+                .stream()
+                .filter(m -> m.getModule().moduleCode.equals(moduleCode))
+                .collect(Collectors.toList())
+                .get(0);
+        assert selectedModule != null : ERROR_MODULE_NOT_SELECTED;
+        selectedModule.selectSlot(lessonType, classNo);
+        ui.addMessage(getExecutionMessage());
         ui.displayUi();
-    }
-
-    public static boolean validateLessonTypeAndClassNo(Module selectedModule, LessonType lessonType, String classNo,
-                                                       State state) {
-        if (selectedModule.getSemesterData(state.getSemester()).lessonTypes.contains(lessonType)
-                && selectedModule.getSemesterData(state.getSemester()).getClassNosByType(lessonType)
-                .contains(classNo)) {
-            return true;
-        }
-        return false;
     }
 
     /**
@@ -90,13 +96,14 @@ public class SelectSlotCommand extends Command {
      * @throws YamomException if the parameters are invalid or missing.
      */
     private void processParams(Map<String, String> params) throws YamomException {
-        if (!params.containsKey("module") || !params.containsKey("type") || !params.containsKey("code")) {
-            throw new YamomException(ERROR_WRONG_FORMAT);
-        }
-
-        if (params.get("module").isEmpty() || params.get("type").isEmpty() || params.get("code").isEmpty()) {
-            throw new YamomException(ERROR_WRONG_FORMAT + "\n\n"
-                    + MISSING_PARAMS_KEY_OR_VALUE);
+        if (!params.containsKey("module") || params.get("module").isEmpty()) {
+            throw new YamomException(ERROR_WRONG_FORMAT + "\n\tMissing parameter /module");
+        } 
+        if (!params.containsKey("type") || params.get("type").isEmpty()) {
+            throw new YamomException(ERROR_WRONG_FORMAT + "\n\tMissing parameter /type");
+        } 
+        if (!params.containsKey("code") || params.get("code").isEmpty()) {
+            throw new YamomException(ERROR_WRONG_FORMAT + "\n\tMissing parameter /code");
         }
     }
 
@@ -107,6 +114,6 @@ public class SelectSlotCommand extends Command {
 
     @Override
     public String getExecutionMessage() {
-        return null;
+        return SUCCESSFUL_MESSAGE;
     }
 }

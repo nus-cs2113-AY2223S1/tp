@@ -209,7 +209,7 @@ public class Link {
     private static void addValidLesson(SelectedModule selectedModule, int semester,
                                        LessonType lessonType, String classNo, Ui ui) {
         List<RawLesson> potentialLesson = selectedModule.getModule().getSemesterData(semester)
-                .getLessonsByTypeAndNo(lessonType, classNo);
+            .getLessonsByTypeAndNo(lessonType, classNo);
         if (!potentialLesson.isEmpty()) {
             selectedModule.selectSlot(lessonType, classNo);
             ui.addMessage(lessonType + ":" + classNo);

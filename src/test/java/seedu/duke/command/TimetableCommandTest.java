@@ -26,7 +26,7 @@ public class TimetableCommandTest {
         State state = new State();
         Ui ui = new Ui();
         new TimetableCommand("view").execute(state, ui, null);
-        new AddModuleCommand(new String[]{ "add", "cs2113" }).execute(state, ui, null);
+        new AddModuleCommand(new String[]{"add", "cs2113"}).execute(state, ui, null);
         new TimetableCommand("view").execute(state, ui, null);
         new TimetableCommand("view /simple").execute(state, ui, null);
         assertFalse(new TimetableCommand("view").isExit());

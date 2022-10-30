@@ -61,8 +61,8 @@ public class LinkTest {
         State state = new State();
         Module module = Module.get("CS2113");
         SelectedModule selectedModule = new SelectedModule(module, 1);
-        selectedModule.selectSlot(LessonType.LECTURE,"1");
-        selectedModule.selectSlot(LessonType.TUTORIAL,"4");
+        selectedModule.selectSlot(LessonType.LECTURE, "1");
+        selectedModule.selectSlot(LessonType.TUTORIAL, "4");
         state.addSelectedModule(selectedModule);
         String link = Link.getLink(state);
 

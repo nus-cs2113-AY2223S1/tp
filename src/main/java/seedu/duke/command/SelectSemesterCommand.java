@@ -25,8 +25,9 @@ public class SelectSemesterCommand extends Command {
 
     public SelectSemesterCommand(String[] input) throws YamomException {
         super(input);
-        Parser.selectSemesterCommandError(input, ERROR_WRONG_FORMAT);
-
+        if (!Parser.isValidSpecialTerm(input) && !Parser.isValidSemester(input)) {
+            throw new YamomException(ERROR_WRONG_FORMAT + System.lineSeparator() + "Not a valid semester.");
+        }
         this.updatedSemester = Integer.parseInt(input[1]);
     }
 

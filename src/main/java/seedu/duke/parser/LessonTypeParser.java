@@ -1,6 +1,7 @@
 package seedu.duke.parser;
 
 import java.lang.IllegalArgumentException;
+
 import seedu.duke.model.LessonType;
 
 public class LessonTypeParser {
@@ -22,7 +23,7 @@ public class LessonTypeParser {
         if (input.equals("plec") || (input.startsWith("pac") && input.contains("lec"))) {
             return LessonType.PACKAGED_LECTURE;
         }
-        if (input.equals("plec") || (input.startsWith("pac") && input.contains("tut"))) {
+        if (input.equals("ptut") || (input.startsWith("pac") && input.contains("tut"))) {
             return LessonType.PACKAGED_TUTORIAL;
         }
         if (input.startsWith("rec")) {

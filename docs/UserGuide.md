@@ -5,9 +5,7 @@
 ## Introduction
 
 YAMOM is a lightweight, simplified Module Organizer and Manager application that provides simple and intuitive interface
-for timetable organization.
-
-YAMOM is designed for users who are proficient in Command Line Interface (CLI).
+for timetable organization. YAMOM is designed for users who are proficient in Command Line Interface (CLI). Module data in YAMOM is correct as of 1 Oct 2022. 
 
 ## Table of Contents
 
@@ -315,6 +313,9 @@ Format: `semester SEMESTER`
 
 * `SEMESTER` is an integer from 1 to 4, or `ST1`, or `ST2`.
 
+note: semester 3 and 4 are used to represent special term I and II.
+
+
 Example of usage:
 
 `semester 1` to change to semester 1.
@@ -491,7 +492,20 @@ Selects a timeslot to be added to the user timetable.
 Format: `select [ /module MODULE_CODE ] [ /type LESSON_TYPE ] [ /code CLASS_NO ]`
 
 * The `CLASS_NO` will be a number.
-* The `LESSON_TYPE` can be either *lecture*, *tutorial*.
+* The `LESSON_TYPE` can be any of the following spelt out or in short form (not case-sensitive). Here are some non-exhaustive examples:  
+  *  TUTORIAL                   e.g. *tut, Tutorial*
+  *  TUTORIAL_TYPE_2            e.g. *tut2, Tutorial2*
+  *  LECTURE                    e.g. *lecture, lec*
+  *  RECITATION                 e.g. *rec, recitation*
+  *  DESIGN_LECTURE             e.g. *des, dlec*
+  *  PACKAGED_LECTURE           e.g. *pac, plec*
+  *  PACKAGED_TUTORIAL          e.g. *ptut, packaged_tutorial*
+  *  SECTIONAL_TEACHING         e.g. *sec, Sectional*
+  *  WORKSHOP                   e.g. *workshop, work*
+  *  LABORATORY                 e.g. *lab, laboratory*
+  *  MINI_PROJECT               e.g. *mini, minproj, mini_project*
+  *  SEMINAR_STYLE_MODULE_CLASS e.g. *sem, seminar_style_module*
+* The `LESSON_TYPE` need not be an exact match or case-sensitive.
 * The `MODULE_CODE` need to be an exact match.
 
 Example of usage:
@@ -688,12 +702,12 @@ Alternatively, you can export the timetable, copy the link generated, and import
 | Remove a module                  | `remove [ MODULE_CODE ]`                                                                         | `remove CS2102`                                                       |
 | Exit application                 | `bye`                                                                                          | `bye`                                                                 |
 | Read more details about a module | `info [ MODULE_CODE ]`                                                                           | `info CS2103`                                                         |
-| Find module by keyword           | `search [ /code PARTIAL_MODULE_CODE \| /title KEYWORD ] < /level MODULE_LEVEL > < /sem SEMESTER >` | `search /code cs /level 2 /sem 1`                                     |
+| Find module by keyword           | `search [ /code PARTIAL_MODULE_CODE | /title KEYWORD ] < /level MODULE_LEVEL > < /sem SEMESTER >` | `search /code cs /level 2 /sem 1`                                     |
 | Seek help                        | `help`                                                                                         | `help`                                                                |
 | Import modules from NUSMods URL  | `import [ NUSMODS_LINK ]`                                                                                 | `import https://nusmods.com/timetable/sem-1/share?CS2113=LEC:1,TUT:4` |
 | Export modules to NUSMods URL    | `export`                                                                                       | `export`                                                              |
 | Change semester                  | `semester [ SEMESTER ]`                                                                          | `semester 2`                                                          |
-| View timetable                   | `timetable < /fancy \| /simple >`                                                      | `timetable`                                                    |
+| View timetable                   | `timetable < /fancy | /simple >`                                                      | `timetable`                                                    |
 | List selected modules            | `list`                                                                                         | `list`                                                                |
 | Add module timetable slot        | `select [ /module MODULE_CODE ] [ /type LESSON_TYPE ] [ /code CLASS_NO ]`                            | `select /module CS1010 /type tutorial /code 1`                        |
 
