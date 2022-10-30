@@ -44,7 +44,7 @@ public enum InfoMessages {
     INFO_PURGE_WARNING("Are you sure you want to proceed with this command? Please enter 'Y' to confirm."),
     INFO_BUDGET_SET_SUCCESSFUL("You have successfully updated the budget."),
     INFO_CURRENT_BUDGET("Monthly budget set as: $"),
-    INFO_REMAINING_BUDGET("Budget remained for "),
+    INFO_REMAINING_BUDGET("Remaining budget for "),
     INFO_EXCEEDING_BUDGET("Budget exceeded for "),
     INFO_BUDGET_EXCEEDED_TIPS("Consider spending less!"),
     INFO_BUDGET_NOT_EXCEEDED_TIPS("Keep it up!"),
