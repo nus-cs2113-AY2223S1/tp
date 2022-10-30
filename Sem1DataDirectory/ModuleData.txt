@@ -1,0 +1,5 @@
+ACC1701X|Accounting for Decision Makers
+ES2631|Critique and Communication of Thinking and Design
+CS2113|Software Engineering & Object-Oriented Programming
+GES1005|Everyday Life of Chinese Singaporeans: Past & Present (taught in English)
+EE2012|Analytical Methods in Electrical and Computer Engineering

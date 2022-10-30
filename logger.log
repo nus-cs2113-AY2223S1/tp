@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2022-10-27T08:55:05.333276Z</date>
+  <millis>1666860905333</millis>
+  <nanos>276000</nanos>
+  <sequence>0</sequence>
+  <logger>global</logger>
+  <level>INFO</level>
+  <class>seedu.duke.Duke</class>
+  <method>main</method>
+  <thread>1</thread>
+  <message>starting Timetabler program...</message>
+</record>
+<record>
+  <date>2022-10-27T08:56:19.646929Z</date>
+  <millis>1666860979646</millis>
+  <nanos>929000</nanos>
+  <sequence>1</sequence>
+  <logger>global</logger>
+  <level>INFO</level>
+  <class>seedu.duke.commands.nusmodsapi.Nusmods</class>
+  <method>addModuleInfo</method>
+  <thread>1</thread>
+  <message>api call successful, module exists</message>
+</record>
+<record>
+  <date>2022-10-27T08:56:19.936289Z</date>
+  <millis>1666860979936</millis>
+  <nanos>289000</nanos>
+  <sequence>2</sequence>
+  <logger>global</logger>
+  <level>FINE</level>
+  <class>seedu.duke.commands.nusmodsapi.Nusmods</class>
+  <method>checkAllLessons</method>
+  <thread>1</thread>
+  <message>attempting to add lessons data to module object</message>
+</record>
+<record>
+  <date>2022-10-27T08:56:19.961228Z</date>
+  <millis>1666860979961</millis>
+  <nanos>228000</nanos>
+  <sequence>3</sequence>
+  <logger>global</logger>
+  <level>FINE</level>
+  <class>seedu.duke.commands.nusmodsapi.Nusmods</class>
+  <method>checkAllLessons</method>
+  <thread>1</thread>
+  <message>module exists in selected semester</message>
+</record>
+<record>
+  <date>2022-10-27T08:56:19.962122Z</date>
+  <millis>1666860979962</millis>
+  <nanos>122000</nanos>
+  <sequence>4</sequence>
+  <logger>global</logger>
+  <level>WARNING</level>
+  <class>seedu.duke.commands.nusmodsapi.Nusmods</class>
+  <method>allocateLessonType</method>
+  <thread>1</thread>
+  <message>lesson does not fall in existing categories</message>
+</record>
+<record>
+  <date>2022-10-27T08:56:19.962555Z</date>
+  <millis>1666860979962</millis>
+  <nanos>555000</nanos>
+  <sequence>5</sequence>
+  <logger>global</logger>
+  <level>WARNING</level>
+  <class>seedu.duke.commands.nusmodsapi.Nusmods</class>
+  <method>allocateLessonType</method>
+  <thread>1</thread>
+  <message>lesson does not fall in existing categories</message>
+</record>
+<record>
+  <date>2022-10-27T08:56:19.963434Z</date>
+  <millis>1666860979963</millis>
+  <nanos>434000</nanos>
+  <sequence>6</sequence>
+  <logger>global</logger>
+  <level>FINE</level>
+  <class>seedu.duke.commands.nusmodsapi.Nusmods</class>
+  <method>findIndividualLessons</method>
+  <thread>1</thread>
+  <message>lessons are added, returning list of lesson data</message>
+</record>
+<record>
+  <date>2022-10-27T08:56:19.963896Z</date>
+  <millis>1666860979963</millis>
+  <nanos>896000</nanos>
+  <sequence>7</sequence>
+  <logger>global</logger>
+  <level>INFO</level>
+  <class>seedu.duke.commands.CommandAddModule</class>
+  <method>addModule</method>
+  <thread>1</thread>
+  <message>api call successful, attempting to add module to timetable</message>
+</record>
+<record>
+  <date>2022-10-27T08:56:24.090735Z</date>
+  <millis>1666860984090</millis>
+  <nanos>735000</nanos>
+  <sequence>8</sequence>
+  <logger>global</logger>
+  <level>FINE</level>
+  <class>seedu.duke.commands.CommandSetLesson</class>
+  <method>setLesson</method>
+  <thread>1</thread>
+  <message>module index accepted</message>
+</record>
+<record>
+  <date>2022-10-27T08:56:27.574948Z</date>
+  <millis>1666860987574</millis>
+  <nanos>948000</nanos>
+  <sequence>9</sequence>
+  <logger>global</logger>
+  <level>FINE</level>
+  <class>seedu.duke.commands.CommandSetLesson</class>
+  <method>runSetProcedure</method>
+  <thread>1</thread>
+  <message>lesson type index accepted</message>
+</record>
+<record>
+  <date>2022-10-27T08:56:39.657275Z</date>
+  <millis>1666860999657</millis>
+  <nanos>275000</nanos>
+  <sequence>10</sequence>
+  <logger>global</logger>
+  <level>FINE</level>
+  <class>seedu.duke.commands.CommandSetLesson</class>
+  <method>getPreferredLesson</method>
+  <thread>1</thread>
+  <message>preferred lesson index accepted</message>
+</record>
+</log>

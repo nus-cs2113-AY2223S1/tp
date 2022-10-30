@@ -6,6 +6,10 @@ public class UI {
     public static final Scanner sc = new Scanner(System.in);
     private static final String PRINTED_GAP = "     ";
 
+    public static final String DOTTED_CHAR = ":";
+    public static final String HORIZONTAL_BORDER = "─";
+
+
     public static void printResponse(String response) {
         System.out.println(response);
     }
@@ -36,7 +40,8 @@ public class UI {
     public static String getCommandFromUser() {
         System.out.println("Here is a list of things I can do, enter the appropriate command to continue!\n"
                 + "1. add" + PRINTED_GAP + "2. list" + PRINTED_GAP + "3. info" + PRINTED_GAP
-                + "4. set" + PRINTED_GAP + "5. delete" + PRINTED_GAP + "6. print" + PRINTED_GAP + "7. quit\n");
+                + "4. set" + PRINTED_GAP + "5. delete" + PRINTED_GAP + "6. print" + PRINTED_GAP
+                + "7. view" + PRINTED_GAP + "8. quit\n");
         return sc.nextLine();
     }
 
