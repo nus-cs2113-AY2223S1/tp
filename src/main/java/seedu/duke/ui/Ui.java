@@ -48,7 +48,8 @@ public class Ui {
 
     //@author Franky4566
     protected static final String FLIGHT_DELAY_MSG = "Departure time of flight %s is delayed from %s to %s.";
-    protected static final String FLIGHT_WRONG_DELAY_MSG = "Stop! Please enter a valid departure time for flight %s. \nTime must be later than %s.";
+    protected static final String FLIGHT_WRONG_DELAY_MSG = "Stop! Please enter a valid departure time for flight %s. " +
+            "\nTime must be later than %s.";
 
     //@@author shengiv
     public void showWelcomeMessage() {
