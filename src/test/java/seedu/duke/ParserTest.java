@@ -38,10 +38,10 @@ class ParserTest {
         String[] findArray = new String[]{"find","inc"};
         ps.executeFind(findArray);
         
-        String expected = "---Here are the reviews that match the keyword---" 
-            + "\n\nMovies:"
-            + "\n1. [Movie]  inception2  Rating:10.0 Genre: thriller Date watched:10-01-2020" 
-            + "\n\nTV Shows:\n"
+        String expected = "---Here are the reviews that match the keyword---\n" 
+            + "\nMovies:"
+            + "\n1. [Movie]  inception2  Rating:10.0 Genre: thriller Date watched:10-01-2020\n" 
+            + "\nTV Shows:\n"
             .replaceAll("\\n", System.getProperty("line.separator"));
 
         assertEquals(expected, outContent.toString());
