@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import seedu.duke.command.Command;
+import seedu.duke.exceptions.YamomException;
 import seedu.duke.parser.Parser;
 import seedu.duke.utils.State;
 import seedu.duke.utils.Storage;
@@ -45,10 +46,11 @@ public class Duke {
             } catch (IOException e) {
                 ui.addMessage(IO_ERROR_MESSAGE);
                 ui.displayUi();
-            } catch (Exception e) {
-                // e.printStackTrace();
+            } catch (YamomException e) {
                 ui.addMessage(e.getMessage());
                 ui.displayUi();
+            } catch (Exception e) {
+                e.printStackTrace();
             } finally {
                 ui.displayDivider();
             }

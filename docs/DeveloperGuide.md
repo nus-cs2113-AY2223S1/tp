@@ -13,6 +13,8 @@
   - [3. Design](#3-design)
     - [3.1 Architecture](#31-architecture)
     - [3.2 Model package](#32-model-package)
+      - [3.2.1 Module Loader](#321-module-loader)
+      - [3.2.2 Timetable](#322-timetable)
     - [3.3 Parser Component](#33-parser-component)
     - [3.4 Command Component](#34-command-component)
       - [3.4.1 AddModuleCommand](#341-addmodulecommand)
@@ -33,12 +35,12 @@
         - [Alternatives considered.](#alternatives-considered-3)
       - [3.4.5 SelectCommand](#345-selectcommand)
       - [3.4.6 SelectSemesterCommand](#346-selectsemestercommand)
-      - [3.4.7 GetCommand](#347-getcommand)
+      - [3.4.7 InfoCommand](#347-infocommand)
         - [How the feature is implemented](#how-the-feature-is-implemented-4)
         - [Why it is implemented this way.](#why-it-is-implemented-this-way-4)
         - [Alternatives considered.](#alternatives-considered-4)
-      - [3.4.8 ViewCommand](#348-viewcommand)
-      - [3.4.9 ExitCommand](#349-exitcommand)
+      - [3.4.8 TimetableCommand](#348-timetablecommand)
+      - [3.4.9 ByeCommand](#349-byecommand)
     - [3.5 Utils Component](#35-utils-component)
       - [3.5.1 UI Component](#351-ui-component)
         - [Why it is implemented this way](#why-it-is-implemented-this-way-5)
@@ -55,8 +57,8 @@
     - [Value proposition](#value-proposition)
   - [5. Documentation](#5-documentation)
   - [6. Testing](#6-testing)
-  - [6.1. Running tests](#61-running-tests)
-  - [6.2 Instructions for manual testing](#62-instructions-for-manual-testing)
+    - [6.1. Running tests](#61-running-tests)
+    - [6.2 Instructions for manual testing](#62-instructions-for-manual-testing)
   - [Appendix A: Product scope](#appendix-a-product-scope)
   - [Appendix B: User Stories](#appendix-b-user-stories)
   - [Appendix C: Non-Functional Requirements](#appendix-c-non-functional-requirements)
@@ -154,6 +156,22 @@ It consists of the following classes:
 
 ![Model Classes](images/model.png)
 
+#### 3.2.1 Module Loader
+
+Module loading is handled by the `ModuleLoader` class. This class contains logic to parse the data file stored at `src/main/resources/moduleFull.zip`. The data file is a ZIP file containing a JSON file. Zipping is used to minimize the application size. In exchange, the data file needs to be unzipped to read the module data, but this only happens once at the start of the application. JSON parsing in the `ModuleLoader` class is done using the Jackson Databind library.
+
+#### 3.2.2 Timetable
+
+The `Timetable` class handles the logic of formatting a timetable, given a set of lessons to be shown. To cater to a CLI environment, the timetable is always shown with time running vertically. One of the challenges in timetable formatting is that lessons may overlap, and the width of the timetable needs to be adjusted in such cases.
+
+The sequence of steps to generate a timetable can be summarised as follows:
+
+1. Calculate the earliest and latest class. This will determine the height of the timetable.
+2. Check if any classes have overlapping timeslots. If so, generate a list of identation levels for the classes.
+3. Create a buffer, a 2D array of Strings, to store our output.
+4. Write the day labels and time labels to the buffer.
+5. For each class, draw the bounding box into the buffer and write the class codes into the buffer.
+
 ### 3.3 Parser Component
 
 ![Parser Class](images/parserClass.png)  
@@ -176,25 +194,17 @@ Command class and are all in the command package.
 | Command Word | Command Subclass                   | Intended Outcome                                                   |
 |--------------|------------------------------------|--------------------------------------------------------------------|
 | `add`        | `AddModuleCommand`                 | Adds the user input module into their timetable.                   |
-| `delete`     | `DeleteModuleCommand`              | Deletes the user input module from their timetable.                |
-| `list`       | `DisplaySelectedModuleListCommand` | Display all the module and slot selected by user                   |
-| `bye`        | `ExitCommand`                      | Exits the program.                                                 |
+| `remove`     | `RemoveModuleCommand`              | Removes the user input module from their timetable.                |
+| `list`       | `ListCommand` | Display all the module and slot selected by user                   |
+| `bye`        | `ByeCommand`                      | Exits the program.                                                 |
 | `export`     | `ExportCommand`                    | Creates a portable NUSMod link to create their timetable on NUSMod |
-| `get`        | `GetCommand`                       | Display all details about a module.                                |
+| `info`        | `InfoCommand`                       | Display all details about a module.                                |
 | `help`       | `HelpCommand`                      | Display all possible command words and their usage to user.        |
 | `import`     | `ImportCommand`                    | Import user's timetable from a NUSMod share timetable link.        |
 | `search`     | `SearchModuleCommand`              | Searches similar modules based on code, title, semester or level.  |
 | `semester`   | `SelectSemesterCommand`            | Selects the semester that the user want.                           |
 | `select`     | `SelectSlotCommand`                | Selects the time slot for the different lesson types.              |
-| `view`       | `ViewCommand`                      | Views the user timetable with user's selected modules.             |
-
-<!--
-##### How the feature is implemented
-
-##### Why it is implemented this way.
-
-##### Alternatives considered.
--->
+| `timetable`       | `TimetableCommand`                      | Views the user timetable with user's selected modules.             |
 
 #### 3.4.1 AddModuleCommand
 
@@ -301,15 +311,17 @@ The <code>SelectSemesterCommand</code> class extends from the <code>Command</cod
 user wish to plan for.
 
 
-#### 3.4.7 GetCommand
+#### 3.4.7 InfoCommand
 
-The <code>GetCommand</code> class extends from the <code>Command</code> class and gets all the details of the module 
+The <code>InfoCommand</code> class extends from the <code>Command</code> class and gets all the details of the module 
 that the user wants.
 
 ![GetModuleCommand](images/GetModuleCommand.png)
 
+<!-- TODO: update diagram -->
+
 ##### How the feature is implemented
-The <code>GetCommand</code> class extends the <code>Command</code> class.
+The <code>InfoCommand</code> class extends the <code>Command</code> class.
 It overrides the <code>execute()</code> method from the <code>Command</code> class.
 The <code>execute()</code> method will get all the module details from the user input module code.
 
@@ -327,13 +339,13 @@ too tedious for the user to search for the **exact module code** first before ge
 not know the exact module code, which is not very user-friendly and takes up a lot of time just to get the module
 details for 1 module.
 
-#### 3.4.8 ViewCommand
+#### 3.4.8 TimetableCommand
 
-The <code>ViewCommand</code> class extends from the <code>Command</code> class and displays the timetable of the current state's semester
+The <code>TimetableCommand</code> class extends from the <code>Command</code> class and displays the timetable of the current state's semester
 selected modules.
 
-#### 3.4.9 ExitCommand
-The <code>ExitCommand</code> class extends from the <code>Command</code> class and exits the program.
+#### 3.4.9 ByeCommand
+The <code>ByeCommand</code> class extends from the <code>Command</code> class and exits the program.
 
 ### 3.5 Utils Component
 
@@ -398,6 +410,7 @@ To facilitate easy transfer of information from NUSMods to YAMOM.
 Storing as <code>.json</code> file
 
 - would not be readable by the user
+<!-- json is easily readable by the user though -->
 - would have to implement another function for export/import function
 
 ## 4. Implementation
@@ -428,9 +441,11 @@ written in [GitHub-Flavoured Markdown](https://github.github.com/gfm/).
 The following section describes the testing methodologies followed in this project to ensure high-quality, bug-free
 code as far as possible.
 
-## 6.1. Running tests
+### 6.1. Running tests
 
-## 6.2 Instructions for manual testing
+
+
+### 6.2 Instructions for manual testing
 
 <!-- {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing} -->
 
@@ -453,11 +468,13 @@ code as far as possible.
 
 ## Appendix C: Non-Functional Requirements
 
-- YAMOM should display a colorful timetable to enhance readability
+- YAMOM should display a colorful timetable to enhance readability.
+- YAMOM should have a neat and friendly interface so that stressed out students will feel more relaxed after planning out their schedule.
 
 ## Appendix D: Glossary
 
-- _glossary item_ - Definition
+<!-- - _glossary item_ - Definition -->
+- _NUSMods_ - [NUSMods](https://nusmods.com/) is the most widely used module manager / organiser tool among NUS students. 
 
 ## Appendix E: Acknowledgements
 
