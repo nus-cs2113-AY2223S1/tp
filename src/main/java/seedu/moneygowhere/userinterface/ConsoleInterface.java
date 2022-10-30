@@ -35,7 +35,6 @@ import seedu.moneygowhere.data.recurringpayments.RecurringPayment;
 import seedu.moneygowhere.data.recurringpayments.RecurringPaymentManager;
 import seedu.moneygowhere.data.target.Target;
 import seedu.moneygowhere.data.target.TargetManager;
-import seedu.moneygowhere.exceptions.parser.ConsoleParserInvalidAmountException;
 import seedu.moneygowhere.exceptions.data.currency.CurrencyInvalidException;
 import seedu.moneygowhere.exceptions.data.currency.CurrencyRatesNotFoundException;
 import seedu.moneygowhere.exceptions.data.expense.ExpenseManagerExpenseNotFoundException;
@@ -1062,8 +1061,7 @@ public class ConsoleInterface {
                  | ConsoleParserCommandDeleteRecurringPaymentInvalidException
                  | ConsoleParserCommandEditRecurringPaymentInvalidException
                  | ConsoleParserCommandPayRecurringPaymentInvalidException
-                 | ConsoleParserCommandMergeExternalFileInvalidException
-                 | ConsoleParserInvalidAmountException exception) {
+                 | ConsoleParserCommandMergeExternalFileInvalidException exception) {
             printErrorMessage(exception.getMessage());
         }
 
