@@ -1,2 +1,5 @@
 10000000000
-expense | food | 20 | 2022-09-13 | NIL
+income | salary | 2000 | 2022-09-03 | thank_you_boss
+expense | food | 80 | 2022-09-13 | NIL
+expense | transport | 10 | 2022-08-13 | NIL
+income | bonus | 540 | 2022-10-13 | NIL
