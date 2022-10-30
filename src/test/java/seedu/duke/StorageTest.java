@@ -9,7 +9,10 @@ import java.io.IOException;
 import java.util.Scanner;
 
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 public class StorageTest {
@@ -206,8 +209,8 @@ public class StorageTest {
         String clientPairText = OPEN_BRACKET + name + SEPARATOR + contact + SEPARATOR
                 + email + SEPARATOR + budget + CLOSE_BRACKET;
 
-        String propertyPairText = OPEN_BRACKET + landlordName + SEPARATOR +
-                address + SEPARATOR + rentalPrice + SEPARATOR + unitType + CLOSE_BRACKET;
+        String propertyPairText = OPEN_BRACKET + landlordName + SEPARATOR
+                + address + SEPARATOR + rentalPrice + SEPARATOR + unitType + CLOSE_BRACKET;
 
         String pairingText = clientPairText + COLON + propertyPairText;
 
@@ -469,7 +472,7 @@ public class StorageTest {
         boolean hasClientName = clientName.equals(name);
         boolean hasClientContact = clientContact.equals(contact);
         boolean hasClientEmail = clientEmail.equals(email);
-        boolean hasClientBudget=  clientBudget.equals(budget);
+        boolean hasClientBudget = clientBudget.equals(budget);
         boolean hasClient = hasClientName && hasClientContact && hasClientEmail && hasClientBudget;
 
         return hasClient;
