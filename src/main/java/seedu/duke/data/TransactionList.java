@@ -17,7 +17,19 @@ import static seedu.duke.common.Constants.MAX_AMOUNT_VALUE;
 import static seedu.duke.common.Constants.MIN_AMOUNT_VALUE;
 import static seedu.duke.common.Constants.MAX_TRANSACTIONS_COUNT;
 import static seedu.duke.common.DateFormats.DATE_MONTH_PATTERN;
-import static seedu.duke.common.InfoMessages.*;
+import static seedu.duke.common.InfoMessages.LINE_SEPARATOR;
+import static seedu.duke.common.InfoMessages.DOLLAR_SIGN;
+import static seedu.duke.common.InfoMessages.COLON_SPACE;
+import static seedu.duke.common.InfoMessages.INFO_INCOME;
+import static seedu.duke.common.InfoMessages.INFO_EXPENSE;
+import static seedu.duke.common.InfoMessages.INFO_SAVINGS;
+import static seedu.duke.common.InfoMessages.INFO_BUDGET;
+import static seedu.duke.common.InfoMessages.INFO_STATS_CATEGORIES_HEADER;
+import static seedu.duke.common.InfoMessages.INFO_STATS_HABIT_VERY_LOW_SAVINGS;
+import static seedu.duke.common.InfoMessages.INFO_STATS_HABIT_LOW_SAVINGS;
+import static seedu.duke.common.InfoMessages.INFO_STATS_HABIT_MEDIUM_SAVINGS;
+import static seedu.duke.common.InfoMessages.INFO_STATS_HABIT_HIGH_SAVINGS;
+import static seedu.duke.common.InfoMessages.INFO_STATS_HABIT_VERY_HIGH_SAVINGS;
 
 
 //@@author chydarren

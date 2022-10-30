@@ -89,11 +89,11 @@ public class StatsCommand extends ListAndStatsCommand {
     @Override
     public String[] getOptionalTags() {
         String[] optionalTags = new String[]{
-                COMMAND_TAG_GLOBAL_MONTH,
-                COMMAND_TAG_GLOBAL_YEAR,
-                COMMAND_TAG_GLOBAL_NUMBER,
-                COMMAND_TAG_GLOBAL_PERIOD,
-                };
+            COMMAND_TAG_GLOBAL_MONTH,
+            COMMAND_TAG_GLOBAL_YEAR,
+            COMMAND_TAG_GLOBAL_NUMBER,
+            COMMAND_TAG_GLOBAL_PERIOD,
+            };
         return optionalTags;
     }
 

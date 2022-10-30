@@ -311,66 +311,72 @@ Here are your requested monthly statistics:
 Income: $2000
 Expense: $20
 Savings: $1980
+Budget: $10000
 Spending Habit: Excellent! You saved quite a lot this month.
+In terms of monthly budget, you have kept yourself well within the budget!
 
 [Oct 2022]
 Income: $0
 Expense: $10001
 Savings: $-10001
-Spending Habit: Oops, you spent too much. Do manage your expenses within your constraints.
+Budget: $10000
+Spending Habit: You spent way more than what you have earned for the current month. Please spend wisely based on your income
+In terms of monthly budget, you have spent more than your budget planned!
 
 
 ____________________________________________________________
 ____________________________________________________________
-Here are the categorical savings and monthly time insights for
+Here are the categorical savings and expenditure summary for
 Year: 2022
 
------CATEGORIES-----
+-----Categorical Savings-----
 [transport] $-10001
 [salary] $2000
 [food] $-20
 
------EXPENDITURE-----
+-----Expenditure Summary-----
 Income: $2000
 Expense: $10021
 Savings: $-8021
 ____________________________________________________________
 ____________________________________________________________
-Here are the categorical savings and monthly time insights for
+Here are the categorical savings and expenditure summary for
 Year: 2022, Month: 10
 
------CATEGORIES-----
+-----Categorical Savings-----
 [transport] $-10001
 
------EXPENDITURE-----
+-----Expenditure Summary-----
 Income: $0
 Expense: $10001
 Savings: $-10001
+Budget: $10000
+In terms of monthly budget, you have spent more than your budget planned!
 ____________________________________________________________
 ____________________________________________________________
 Month tag must be accompanied by a year tag, please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
-Here are the categorical savings and monthly time insights for
+Here are the categorical savings and expenditure summary for
 The past 3 weeks: 
 
------CATEGORIES-----
+-----Categorical Savings-----
 [transport] $-10000
 
------EXPENDITURE-----
+-----Expenditure Summary-----
 Income: $0
 Expense: $10000
 Savings: $-10000
 ____________________________________________________________
 ____________________________________________________________
-Here are the categorical savings and monthly time insights for
+Here are the categorical savings and expenditure summary for
 The past 4 months: 
 
------CATEGORIES-----
+-----Categorical Savings-----
 [salary] $2000
 [food] $-20
 
------EXPENDITURE-----
+-----Expenditure Summary-----
 Income: $2000
 Expense: $20
 Savings: $1980
