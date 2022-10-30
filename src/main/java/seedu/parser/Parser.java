@@ -54,50 +54,59 @@ public class Parser {
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments").trim();
 
-        switch (commandWord) {
-        case AuthCommand.COMMAND_WORD:
+
+        if (commandWord.equalsIgnoreCase(AuthCommand.COMMAND_WORD)
+                || commandWord.equalsIgnoreCase(AuthCommand.COMMAND_WORD_SHORT)) {
             if (arguments.isEmpty()) {
                 return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.AUTH_FORMAT);
             } else if (numberOfArguments(arguments) != AuthCommand.NUMBER_OF_ARGUMENTS) {
                 return new InvalidCommand(String.format(INVALID_NUMBER_OF_ARGS_HEADER,
-                    AuthCommand.NUMBER_OF_ARGUMENTS) + CommonData.FAVOURITE_FORMAT);
+                        AuthCommand.NUMBER_OF_ARGUMENTS) + CommonData.FAVOURITE_FORMAT);
             }
             return prepareAuth(arguments);
-        case ExitCommand.COMMAND_WORD:
+        } else if (commandWord.equalsIgnoreCase(ExitCommand.COMMAND_WORD)
+                || commandWord.equalsIgnoreCase(ExitCommand.COMMAND_WORD_SHORT)) {
             return prepareExit(arguments);
-        case FavouriteCommand.COMMAND_WORD:
+        } else if (commandWord.equalsIgnoreCase(FavouriteCommand.COMMAND_WORD)
+                || commandWord.equalsIgnoreCase(FavouriteCommand.COMMAND_WORD_SHORT)) {
             if (arguments.isEmpty()) {
                 return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.FAVOURITE_FORMAT);
             } else if (numberOfArguments(arguments) != FavouriteCommand.NUMBER_OF_ARGUMENTS) {
                 return new InvalidCommand(String.format(INVALID_NUMBER_OF_ARGS_HEADER,
-                    FavouriteCommand.NUMBER_OF_ARGUMENTS) + CommonData.FAVOURITE_FORMAT);
+                        FavouriteCommand.NUMBER_OF_ARGUMENTS) + CommonData.FAVOURITE_FORMAT);
             }
             return prepareFavourite(arguments);
-        case FindCommand.COMMAND_WORD:
+        } else if (commandWord.equalsIgnoreCase(FindCommand.COMMAND_WORD)
+                || commandWord.equalsIgnoreCase(FindCommand.COMMAND_WORD_SHORT)) {
             if (arguments.isEmpty()) {
                 return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.FIND_FORMAT);
             } else if (numberOfArguments(arguments) != FindCommand.NUMBER_OF_ARGUMENTS) {
                 return new InvalidCommand(String.format(INVALID_NUMBER_OF_ARGS_HEADER,
-                    FindCommand.NUMBER_OF_ARGUMENTS) + CommonData.FIND_FORMAT);
+                        FindCommand.NUMBER_OF_ARGUMENTS) + CommonData.FIND_FORMAT);
             }
             return prepareFind(arguments);
-        case ListCommand.COMMAND_WORD:
+        } else if (commandWord.equalsIgnoreCase(ListCommand.COMMAND_WORD)
+                || commandWord.equalsIgnoreCase(ListCommand.COMMAND_WORD_SHORT)) {
             return prepareList(arguments);
-        case FilterCommand.COMMAND_WORD:
+        } else if (commandWord.equalsIgnoreCase(FilterCommand.COMMAND_WORD)
+                || commandWord.equalsIgnoreCase(FilterCommand.COMMAND_WORD_SHORT)) {
             if (arguments.isEmpty()) {
                 return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.FILTER_FORMAT);
             }
             return prepareFilter(arguments);
-        case UpdateCommand.COMMAND_WORD:
+        } else if (commandWord.equalsIgnoreCase(UpdateCommand.COMMAND_WORD)
+                || commandWord.equalsIgnoreCase(UpdateCommand.COMMAND_WORD_SHORT)) {
             return prepareUpdate(arguments);
-        case UnfavouriteCommand.COMMAND_WORD:
+        } else if (commandWord.equalsIgnoreCase(UnfavouriteCommand.COMMAND_WORD)
+                || commandWord.equalsIgnoreCase(UnfavouriteCommand.COMMAND_WORD_SHORT)) {
             if (arguments.isEmpty()) {
                 return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.UNFAVOURITE_FORMAT);
             }
             return prepareUnfavourite(arguments);
-        case HelpCommand.COMMAND_WORD:
+        } else if (commandWord.equalsIgnoreCase(HelpCommand.COMMAND_WORD)
+                || commandWord.equalsIgnoreCase(HelpCommand.COMMAND_WORD_SHORT)) {
             return prepareHelp(arguments);
-        default:
+        } else {
             return new InvalidCommand("Invalid Command. ");
         }
     }
