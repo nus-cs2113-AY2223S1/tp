@@ -1,1 +1,2 @@
-1000
+10001
+expense | transport | 1 | 2022-10-02 | i/i/i/i/
