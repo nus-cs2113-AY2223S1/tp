@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -91,9 +92,7 @@ public class Storage {
         try {
             String allRecipeFileContent = loadFileContent(ALL_RECIPES_FILE_PATH);
             String[] recipeTitles = allRecipeFileContent.split("\\r?\\n");
-            for (String recipeTitle : recipeTitles) {
-                RecipeList.recipeTitles.add(recipeTitle);
-            }
+            RecipeList.recipeTitles.addAll(Arrays.asList(recipeTitles));
         } catch (FileNotFoundException e) {
             Ui.showMessage("File not found :< Creating your data file for all recipes now...");
             createFile(ALL_RECIPES_FILE_PATH);
@@ -104,6 +103,7 @@ public class Storage {
     public static void loadRecipesToRecipeList() {
         try {
             for (String recipeTitle : RecipeList.recipeTitles) {
+                logger.log(Level.INFO, recipeTitle);
                 String recipeFilePath = RECIPES_FOLDER_PATH + "/" + recipeTitle;
                 String content = Storage.loadFileContent(recipeFilePath);
                 Recipe addedRecipe  = new TextFileParser().parseTextToRecipe(content);
@@ -138,6 +138,10 @@ public class Storage {
         } catch (IOException ioException) {
             Ui.showMessage("Error in loading recipes to data file");
         }
+    }
+
+    public static void saveRecipe(Recipe recipe, String filePath) {
+
     }
 
     private static void templateFile() {

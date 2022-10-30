@@ -14,21 +14,19 @@ public class Delete extends EditModeCommand {
 
     @Override
     public Recipe execute() throws InvalidFlagException {
-        Ui.showMessage(recipe.getRecipeAttributesFormatted());
         Recipe oldRecipe = recipe;
         int index = Integer.parseInt(parsedCommand[4]) - 1;
         switch (ingredientFlag) {
         case INGREDIENT:
+            Ui.showMessage("Delete " + recipe.getIngredient(index).getName());
             recipe.deleteIngredient(index);
-            message = showRecipeChanges(recipe, oldRecipe);
             return recipe;
         case STEP:
+            Ui.showMessage("Delete " + recipe.getStep(index));
             recipe.deleteStep(index);
-            message = showRecipeChanges(recipe, oldRecipe);
             return recipe;
         default:
             throw new InvalidFlagException();
         }
     }
-
 }

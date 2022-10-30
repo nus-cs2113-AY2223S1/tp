@@ -28,12 +28,9 @@ public abstract class EditModeCommand {
         return message;
     }
 
-    public abstract Recipe execute() throws InvalidFlagException, ParseException;
-
-    String showRecipeChanges(Recipe newRecipe, Recipe oldRecipe) {
-        return "Old:" + "\n"
-                + oldRecipe.getRecipeAttributesFormatted() + "\n"
-                + "New:" + "\n"
-                + newRecipe.getRecipeAttributesFormatted();
+    public void setIngredientFlag(FlagType ingredientFlag) {
+        this.ingredientFlag = ingredientFlag;
     }
+
+    public abstract Recipe execute() throws InvalidFlagException, ParseException;
 }

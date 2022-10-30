@@ -18,31 +18,35 @@ public class Change extends EditModeCommand {
 
     @Override
     public Recipe execute() throws InvalidFlagException, ParseException {
-
-        Recipe oldRecipe = recipe;
-        Ui.showMessageInline(CHANGE_1);
-        Ui.showMessageInline(CHANGE_2);
-        String newInput = Ui.readInput();
+        StringBuilder newInput = new StringBuilder();
 
         switch (ingredientFlag) {
         case INGREDIENT:
-            int indexToChange = Integer.parseInt(parsedCommand[2]) - 1;
-            Ingredient newIngredient = Ingredient.parsedIngredients(newInput);
+            for (int i = 4; i < parsedCommand.length; i++) {
+                newInput.append(parsedCommand[i]);
+            }
+            int indexToChange = Integer.parseInt(parsedCommand[1]) - 1;
+            Ingredient newIngredient = Ingredient.parsedIngredients(newInput.toString());
             recipe.setIngredient(indexToChange, newIngredient);
-            message = showRecipeChanges(recipe, oldRecipe);
             return recipe;
         case STEP:
-            indexToChange = Integer.parseInt(parsedCommand[2]) - 1;
-            recipe.setStep(indexToChange, newInput);
-            message = showRecipeChanges(recipe, oldRecipe);
+            for (int i = 4; i < parsedCommand.length; i++) {
+                newInput.append(parsedCommand[i]);
+            }
+            indexToChange = Integer.parseInt(parsedCommand[1]) - 1;
+            recipe.setStep(indexToChange, newInput.toString());
             return recipe;
         case TITLE:
-            recipe.setTitle(newInput);
-            message = showRecipeChanges(recipe, oldRecipe);
+            for (int i = 4; i < parsedCommand.length; i++) {
+                newInput.append(parsedCommand[i]);
+            }
+            recipe.setTitle(newInput.toString());
             return recipe;
         case DESCRIPTION:
-            recipe.setDescription(newInput);
-            message = showRecipeChanges(recipe, oldRecipe);
+            for (int i = 4; i < parsedCommand.length; i++) {
+                newInput.append(parsedCommand[i]);
+            }
+            recipe.setDescription(newInput.toString());
             return recipe;
         default:
             throw new InvalidFlagException();
