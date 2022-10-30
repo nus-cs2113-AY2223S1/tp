@@ -71,6 +71,10 @@ public class Ui {
         System.out.println(message);
     }
 
+    public void printNewline() {
+        System.out.print(System.lineSeparator());
+    }
+
     public void showWelcomeMessage() {
         showToUser(MESSAGE_WELCOME);
     }
@@ -86,12 +90,14 @@ public class Ui {
         int currentListSize = propertyList.getCurrentListSize();
         showToUser(MESSAGE_PROPERTY_ADDED);
         showToUser("  " + propertyList.getPropertyList().get(currentListSize - 1));
+        printNewline();
     }
 
     public void showClientAddedConfirmationMessage(ClientList clientList) {
         int currentListSize = clientList.getCurrentListSize();
         showToUser(MESSAGE_CLIENT_ADDED);
         showToUser("  " + clientList.getClientList().get(currentListSize - 1));
+        printNewline();
     }
 
 

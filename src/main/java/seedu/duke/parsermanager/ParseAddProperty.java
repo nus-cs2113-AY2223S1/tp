@@ -278,6 +278,7 @@ public class ParseAddProperty extends ParseAdd {
 
     private static void showExistingDuplicateProperty(Property property) {
         Ui ui = new Ui();
+        ui.printNewline();
         ui.showToUser(EXISTING_PROPERTY + property.toString());
     }
 }
