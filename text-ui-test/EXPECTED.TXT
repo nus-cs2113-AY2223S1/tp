@@ -299,14 +299,14 @@ Here are your transaction records:
 
 ____________________________________________________________
 ____________________________________________________________
-Here are your requested statistics for the categorical_savings type:
-[transport] $10001
+Here are your net categorical savings:
+[transport] $-10001
 [salary] $2000
-[food] $20
+[food] $-20
 
 ____________________________________________________________
 ____________________________________________________________
-Here are your requested statistics for the monthly_expenditure type:
+Here are your requested monthly statistics:
 [Sep 2022]
 Income: $2000
 Expense: $20
@@ -322,13 +322,13 @@ Spending Habit: Oops, you spent too much. Do manage your expenses within your co
 
 ____________________________________________________________
 ____________________________________________________________
-Here are the total savings and expenses for
+Here are the categorical savings and monthly time insights for
 Year: 2022
 
 -----CATEGORIES-----
-[transport] $10001
+[transport] $-10001
 [salary] $2000
-[food] $20
+[food] $-20
 
 -----EXPENDITURE-----
 Income: $2000
@@ -336,11 +336,11 @@ Expense: $10021
 Savings: $-8021
 ____________________________________________________________
 ____________________________________________________________
-Here are the total savings and expenses for
+Here are the categorical savings and monthly time insights for
 Year: 2022, Month: 10
 
 -----CATEGORIES-----
-[transport] $10001
+[transport] $-10001
 
 -----EXPENDITURE-----
 Income: $0
@@ -351,11 +351,11 @@ ____________________________________________________________
 Month tag must be accompanied by a year tag, please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
-Here are the total savings and expenses for
+Here are the categorical savings and monthly time insights for
 The past 3 weeks: 
 
 -----CATEGORIES-----
-[transport] $10000
+[transport] $-10000
 
 -----EXPENDITURE-----
 Income: $0
@@ -363,12 +363,12 @@ Expense: $10000
 Savings: $-10000
 ____________________________________________________________
 ____________________________________________________________
-Here are the total savings and expenses for
+Here are the categorical savings and monthly time insights for
 The past 4 months: 
 
 -----CATEGORIES-----
 [salary] $2000
-[food] $20
+[food] $-20
 
 -----EXPENDITURE-----
 Income: $2000

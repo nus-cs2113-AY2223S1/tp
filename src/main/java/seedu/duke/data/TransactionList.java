@@ -253,12 +253,18 @@ public class TransactionList {
         for (Transaction transaction : timeTransactions) {
             String category = transaction.getCategory();
             int amount = transaction.getAmount();
+            String type = transaction.getType();
+
             // Creates a new category with starter amount if category not exists in hashmap
-            if (!categoricalSavings.containsKey(category)) {
+            if (!categoricalSavings.containsKey(category) && type == EXPENSE) {
+                categoricalSavings.put(category, amount * -1);
+            } else if (!categoricalSavings.containsKey(category) && type == INCOME) {
                 categoricalSavings.put(category, amount);
-                continue;
+            } else if (type == EXPENSE) {
+                categoricalSavings.put(category, categoricalSavings.get(category) - amount);
+            } else {
+                categoricalSavings.put(category, categoricalSavings.get(category) + amount);
             }
-            categoricalSavings.put(category, categoricalSavings.get(category) + amount);
         }
 
         return categoricalSavings;
