@@ -282,9 +282,9 @@ public class StorageTest {
             System.out.println("File not found");
         }
 
-        String name = "Pikachu Pi ";
-        String contact = "91235679 ";
-        String email = "abcd1234@example.com ";
+        String name = "Pikachu Pi";
+        String contact = "91235679";
+        String email = "abcd1234@example.com";
         String budget = "1500";
 
         clientList.addClient(name, contact, email, budget);
