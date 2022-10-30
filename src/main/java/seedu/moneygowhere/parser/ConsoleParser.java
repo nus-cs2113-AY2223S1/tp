@@ -32,6 +32,7 @@ import seedu.moneygowhere.commands.ConsoleCommandViewRecurringPayment;
 import seedu.moneygowhere.commands.ConsoleCommandViewTarget;
 import seedu.moneygowhere.common.Configurations;
 import seedu.moneygowhere.common.Messages;
+import seedu.moneygowhere.exceptions.parser.ConsoleParserInvalidAmountException;
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandAddExpenseInvalidException;
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandAddIncomeInvalidException;
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandAddRecurringPaymentInvalidException;
@@ -148,12 +149,29 @@ public class ConsoleParser {
 
     //@@author xzynos
     private static void validateCommandAddExpenseValues(CommandLine commandLine) throws
-            ConsoleParserCommandAddExpenseInvalidException {
+            ConsoleParserCommandAddExpenseInvalidException, ConsoleParserInvalidAmountException {
         String name = commandLine.getOptionValue(
                 ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_NAME_LONG
         );
 
         if (name.isBlank()) {
+            throw new ConsoleParserCommandAddExpenseInvalidException();
+        }
+
+        String amountStr = commandLine.getOptionValue(
+                ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_AMOUNT_LONG
+        );
+
+        if (amountStr == null) {
+            throw new ConsoleParserCommandAddExpenseInvalidException();
+        }
+
+        try {
+            BigDecimal amount = new BigDecimal(amountStr);
+            if (amount.compareTo(BigDecimal.ZERO) != 1) {
+                throw new ConsoleParserInvalidAmountException();
+            }
+        } catch (NumberFormatException exception) {
             throw new ConsoleParserCommandAddExpenseInvalidException();
         }
 
@@ -234,6 +252,12 @@ public class ConsoleParser {
     private static ConsoleCommandAddExpense normalizeCommandAddExpenseValues(
             ConsoleCommandAddExpense consoleCommandAddExpense
     ) {
+        BigDecimal amount = consoleCommandAddExpense.getAmount();
+
+        BigDecimal truncatedAmount = amount.stripTrailingZeros();
+
+        consoleCommandAddExpense.setAmount(truncatedAmount);
+
         String currency = consoleCommandAddExpense.getCurrency();
 
         if (currency == null) {
@@ -269,7 +293,7 @@ public class ConsoleParser {
 
     //@@author xzynos
     private static ConsoleCommandAddExpense parseCommandAddExpense(String arguments) throws
-            ConsoleParserCommandAddExpenseInvalidException {
+            ConsoleParserCommandAddExpenseInvalidException, ConsoleParserInvalidAmountException {
         try {
             Options options = ConsoleParserConfigurations.getCommandAddExpenseOptions();
 
@@ -289,6 +313,11 @@ public class ConsoleParser {
         } catch (ConsoleParserCommandAddExpenseInvalidException exception) {
             throw new ConsoleParserCommandAddExpenseInvalidException(
                     Messages.CONSOLE_ERROR_COMMAND_ADD_EXPENSE_INVALID,
+                    exception
+            );
+        } catch (ConsoleParserInvalidAmountException exception) {
+            throw new ConsoleParserInvalidAmountException(
+                    Messages.CONSOLE_PARSER_INVALID_AMOUNT_EXCEPTION,
                     exception
             );
         }
@@ -535,20 +564,33 @@ public class ConsoleParser {
 
     //@@author xzynos
     private static void validateCommandEditExpenseValues(CommandLine commandLine) throws
-            ConsoleParserCommandEditExpenseInvalidException {
+            ConsoleParserCommandEditExpenseInvalidException, ConsoleParserInvalidAmountException {
         String name = commandLine.getOptionValue(
                 ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_NAME_LONG
-        );
-        String expenseIndexStr = commandLine.getOptionValue(
-                ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_EXPENSE_INDEX_LONG
-        );
-        String modeOfPayment = commandLine.getOptionValue(
-                ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_LONG
         );
 
         if (name != null && name.isBlank()) {
             throw new ConsoleParserCommandEditExpenseInvalidException();
         }
+
+        String amountStr = commandLine.getOptionValue(
+                ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_AMOUNT_LONG
+        );
+
+        if (amountStr != null) {
+            try {
+                BigDecimal amount = new BigDecimal(amountStr);
+                if (amount.compareTo(BigDecimal.ZERO) != 1) {
+                    throw new ConsoleParserInvalidAmountException();
+                }
+            } catch (NumberFormatException exception) {
+                throw new ConsoleParserCommandEditExpenseInvalidException();
+            }
+        }
+
+        String expenseIndexStr = commandLine.getOptionValue(
+                ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_EXPENSE_INDEX_LONG
+        );
 
         if (expenseIndexStr != null) {
             int expenseIndex;
@@ -563,6 +605,10 @@ public class ConsoleParser {
                 throw new ConsoleParserCommandEditExpenseInvalidException();
             }
         }
+
+        String modeOfPayment = commandLine.getOptionValue(
+                ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_LONG
+        );
 
         if (modeOfPayment != null
                 && !(modeOfPayment.equalsIgnoreCase(
@@ -684,6 +730,14 @@ public class ConsoleParser {
     private static ConsoleCommandEditExpense normalizeCommandEditExpenseValues(
             ConsoleCommandEditExpense consoleCommandEditExpense
     ) {
+        BigDecimal amount = consoleCommandEditExpense.getAmount();
+
+        if (amount != null) {
+            BigDecimal truncatedAmount = amount.stripTrailingZeros();
+
+            consoleCommandEditExpense.setAmount(truncatedAmount);
+        }
+
         String currency = consoleCommandEditExpense.getCurrency();
 
         if (currency != null) {
@@ -716,7 +770,7 @@ public class ConsoleParser {
 
     //@@author xzynos
     private static ConsoleCommandEditExpense parseCommandEditExpense(String arguments) throws
-            ConsoleParserCommandEditExpenseInvalidException {
+            ConsoleParserCommandEditExpenseInvalidException, ConsoleParserInvalidAmountException {
         try {
             Options options = ConsoleParserConfigurations.getCommandEditExpenseOptions();
 
@@ -736,6 +790,11 @@ public class ConsoleParser {
         } catch (ConsoleParserCommandEditExpenseInvalidException exception) {
             throw new ConsoleParserCommandEditExpenseInvalidException(
                     Messages.CONSOLE_ERROR_COMMAND_EDIT_EXPENSE_INVALID,
+                    exception
+            );
+        } catch (ConsoleParserInvalidAmountException exception) {
+            throw new ConsoleParserInvalidAmountException(
+                    Messages.CONSOLE_PARSER_INVALID_AMOUNT_EXCEPTION,
                     exception
             );
         }
@@ -977,14 +1036,13 @@ public class ConsoleParser {
                 && options.hasLongOption(
                 ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_DESCRIPTION_LONG);
 
-
         assert hasAllCliOptions :
                 ConsoleParserConfigurations.COMMAND_ADD_TARGET_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS;
     }
 
     //@@author penguin-s
     private static CommandLine parseCommandAddTargetArguments(Options options, String arguments) throws
-            ConsoleParserCommandAddTargetInvalidException {
+            ConsoleParserCommandAddTargetInvalidException, ParseException {
         try {
             CommandLine commandline = parseCommandArguments(options, arguments);
 
@@ -996,12 +1054,46 @@ public class ConsoleParser {
 
     //@@author penguin-s
     private static void validateCommandAddTargetValues(CommandLine commandLine) throws
-            ConsoleParserCommandAddTargetInvalidException {
+            ConsoleParserCommandAddTargetInvalidException, ConsoleParserInvalidAmountException {
         String name = commandLine.getOptionValue(
                 ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_NAME_LONG
         );
 
         if (name.isBlank()) {
+            throw new ConsoleParserCommandAddTargetInvalidException();
+        }
+
+        String amountStr = commandLine.getOptionValue(
+                ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_AMOUNT_LONG
+        );
+
+        if (amountStr == null) {
+            throw new ConsoleParserCommandAddTargetInvalidException();
+        }
+
+        try {
+            BigDecimal amount = new BigDecimal(amountStr);
+            if (amount.compareTo(BigDecimal.ZERO) != 1) {
+                throw new ConsoleParserInvalidAmountException();
+            }
+        } catch (NumberFormatException exception) {
+            throw new ConsoleParserCommandAddTargetInvalidException();
+        }
+
+        String currentAmountStr = commandLine.getOptionValue(
+                ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_CURRENT_AMOUNT_LONG
+        );
+
+        if (currentAmountStr == null) {
+            throw new ConsoleParserCommandAddTargetInvalidException();
+        }
+
+        try {
+            BigDecimal currentAmount = new BigDecimal(currentAmountStr);
+            if (currentAmount.compareTo(BigDecimal.ZERO) != 1) {
+                throw new ConsoleParserInvalidAmountException();
+            }
+        } catch (NumberFormatException exception) {
             throw new ConsoleParserCommandAddTargetInvalidException();
         }
     }
@@ -1051,70 +1143,55 @@ public class ConsoleParser {
         }
     }
 
+    //@@author jeyvia
+    private static ConsoleCommandAddTarget normalizeCommandAddTargetValues(
+            ConsoleCommandAddTarget consoleCommandAddTarget
+    ) {
+        BigDecimal amount = consoleCommandAddTarget.getAmount();
+
+        BigDecimal truncatedAmount = amount.stripTrailingZeros();
+
+        consoleCommandAddTarget.setAmount(truncatedAmount);
+
+        BigDecimal currentAmount = consoleCommandAddTarget.getCurrentAmount();
+
+        BigDecimal truncatedCurrentAmount = currentAmount.stripTrailingZeros();
+
+        consoleCommandAddTarget.setCurrentAmount(truncatedCurrentAmount);
+
+        return consoleCommandAddTarget;
+    }
+
     //@@author penguin-s
     private static ConsoleCommandAddTarget parseCommandAddTarget(String arguments) throws
-            ConsoleParserCommandAddTargetInvalidException {
+            ConsoleParserCommandAddTargetInvalidException, ConsoleParserInvalidAmountException {
         try {
-            String[] argumentsArr = tokenizeCommandArguments(arguments);
+            Options options = ConsoleParserConfigurations.getCommandAddTargetOptions();
 
-            Options cliOptions = ConsoleParserConfigurations.getCommandAddTargetOptions();
-            CommandLineParser cliParser = new DefaultParser();
-            CommandLine cli = cliParser.parse(cliOptions, argumentsArr);
+            validateCommandAddTargetOptions(options);
 
-            String name = cli.getOptionValue(
-                    ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_NAME_LONG
-            );
-            String amountStr = cli.getOptionValue(
-                    ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_AMOUNT_LONG
-            );
-            String currentAmountStr = cli.getOptionValue(
-                    ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_CURRENT_AMOUNT_LONG
-            );
+            CommandLine commandLine = parseCommandAddTargetArguments(options, arguments);
 
-            /* Checks if mandatory arguments are provided */
+            validateCommandAddTargetValues(commandLine);
 
-            if (name == null || amountStr == null || currentAmountStr == null) {
-                throw new ConsoleParserCommandAddTargetInvalidException();
-            }
+            ConsoleCommandAddTarget consoleCommandAddTarget
+                    = parseCommandAddTargetValues(commandLine);
 
-            String dateTimeStr = cli.getOptionValue(
-                    ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_DATE_TIME_LONG
-            );
-            String description = cli.getOptionValue(
-                    ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_DESCRIPTION_LONG
-            );
+            ConsoleCommandAddTarget consoleCommandAddTargetNormalized
+                    = normalizeCommandAddTargetValues(consoleCommandAddTarget);
 
-            /* Parses and normalizes arguments */
-
-            BigDecimal amount = new BigDecimal(amountStr);
-
-            BigDecimal currentAmount = new BigDecimal(currentAmountStr);
-
-            LocalDateTime dateTime;
-            if (dateTimeStr == null) {
-                dateTime = LocalDateTime.now();
-            } else {
-                dateTime = LocalDateTime.parse(
-                        dateTimeStr,
-                        DateTimeFormatter.ofPattern(Configurations.CONSOLE_INTERFACE_DATE_TIME_INPUT_FORMAT)
-                );
-            }
-
-            /* Returns parsed arguments */
-
-            return new ConsoleCommandAddTarget(
-                    name,
-                    dateTime,
-                    description,
-                    amount,
-                    currentAmount
-            );
+            return consoleCommandAddTargetNormalized;
         } catch (ParseException
                  | DateTimeParseException
                  | NumberFormatException
                  | ConsoleParserCommandAddTargetInvalidException exception) {
             throw new ConsoleParserCommandAddTargetInvalidException(
                     Messages.CONSOLE_ERROR_COMMAND_ADD_TARGET_INVALID,
+                    exception
+            );
+        } catch (ConsoleParserInvalidAmountException exception) {
+            throw new ConsoleParserInvalidAmountException(
+                    Messages.CONSOLE_PARSER_INVALID_AMOUNT_EXCEPTION,
                     exception
             );
         }
@@ -1323,17 +1400,48 @@ public class ConsoleParser {
 
     //@@author penguin-s
     private static void validateCommandEditTargetValues(CommandLine commandLine) throws
-            ConsoleParserCommandEditTargetInvalidException {
+            ConsoleParserCommandEditTargetInvalidException, ConsoleParserInvalidAmountException {
         String name = commandLine.getOptionValue(
                 ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_NAME_LONG
-        );
-        String targetIndexStr = commandLine.getOptionValue(
-                ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_TARGET_INDEX_LONG
         );
 
         if (name != null && name.isBlank()) {
             throw new ConsoleParserCommandEditTargetInvalidException();
         }
+
+        String amountStr = commandLine.getOptionValue(
+                ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_AMOUNT_LONG
+        );
+
+        if (amountStr != null) {
+            try {
+                BigDecimal amount = new BigDecimal(amountStr);
+                if (amount.compareTo(BigDecimal.ZERO) != 1) {
+                    throw new ConsoleParserInvalidAmountException();
+                }
+            } catch (NumberFormatException exception) {
+                throw new ConsoleParserCommandEditTargetInvalidException();
+            }
+        }
+
+        String currentAmountStr = commandLine.getOptionValue(
+                ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_CURRENT_AMOUNT_LONG
+        );
+
+        if (currentAmountStr != null) {
+            try {
+                BigDecimal currentAmount = new BigDecimal(currentAmountStr);
+                if (currentAmount.compareTo(BigDecimal.ZERO) != 1) {
+                    throw new ConsoleParserInvalidAmountException();
+                }
+            } catch (NumberFormatException exception) {
+                throw new ConsoleParserCommandEditTargetInvalidException();
+            }
+        }
+
+        String targetIndexStr = commandLine.getOptionValue(
+                ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_TARGET_INDEX_LONG
+        );
 
         if (targetIndexStr != null) {
             int targetIndex;
@@ -1408,6 +1516,29 @@ public class ConsoleParser {
         }
     }
 
+    //@@author jeyvia
+    private static ConsoleCommandEditTarget normalizedConsoleCommandEditTarget(
+            ConsoleCommandEditTarget consoleCommandEditTarget
+    ) {
+        BigDecimal amount = consoleCommandEditTarget.getAmount();
+
+        if (amount != null) {
+            BigDecimal truncatedAmount = amount.stripTrailingZeros();
+
+            consoleCommandEditTarget.setAmount(truncatedAmount);
+        }
+
+        BigDecimal currentAmount = consoleCommandEditTarget.getCurrentAmount();
+
+        if (currentAmount != null) {
+            BigDecimal truncatedCurrentAmount = currentAmount.stripTrailingZeros();
+
+            consoleCommandEditTarget.setCurrentAmount(truncatedCurrentAmount);
+        }
+
+        return consoleCommandEditTarget;
+    }
+
     //@@author penguin-s
     private static ConsoleCommandEditTarget parseCommandEditTarget(String arguments) throws
             ConsoleParserCommandEditTargetInvalidException {
@@ -1423,10 +1554,18 @@ public class ConsoleParser {
             ConsoleCommandEditTarget consoleCommandEditTarget
                     = parseCommandEditTargetValues(commandLine);
 
-            return consoleCommandEditTarget;
+            ConsoleCommandEditTarget normalizedConsoleCommandEditTarget
+                    = normalizedConsoleCommandEditTarget(consoleCommandEditTarget);
+
+            return normalizedConsoleCommandEditTarget;
         } catch (ConsoleParserCommandEditTargetInvalidException exception) {
             throw new ConsoleParserCommandEditTargetInvalidException(
                     Messages.CONSOLE_ERROR_COMMAND_EDIT_TARGET_INVALID,
+                    exception
+            );
+        } catch (ConsoleParserInvalidAmountException exception) {
+            throw new ConsoleParserCommandEditTargetInvalidException(
+                    Messages.CONSOLE_PARSER_INVALID_AMOUNT_EXCEPTION,
                     exception
             );
         }
@@ -1449,7 +1588,7 @@ public class ConsoleParser {
 
     //@@author penguin-s
     private static CommandLine parseCommandAddIncomeArguments(Options options, String arguments) throws
-            ConsoleParserCommandAddIncomeInvalidException {
+            ConsoleParserCommandAddIncomeInvalidException, ParseException {
         try {
             CommandLine commandline = parseCommandArguments(options, arguments);
 
@@ -1461,15 +1600,30 @@ public class ConsoleParser {
 
     //@@author penguin-s
     private static void validateCommandAddIncomeValues(CommandLine commandLine) throws
-            ConsoleParserCommandAddIncomeInvalidException {
+            ConsoleParserCommandAddIncomeInvalidException, ConsoleParserInvalidAmountException {
         String name = commandLine.getOptionValue(
                 ConsoleParserConfigurations.COMMAND_ADD_INCOME_ARG_NAME_LONG
+        );
+        String amountStr = commandLine.getOptionValue(
+                ConsoleParserConfigurations.COMMAND_ADD_INCOME_ARG_AMOUNT_LONG
         );
 
         if (name.isBlank()) {
             throw new ConsoleParserCommandAddIncomeInvalidException();
         }
 
+        if (amountStr == null) {
+            throw new ConsoleParserCommandAddIncomeInvalidException();
+        }
+
+        try {
+            BigDecimal amount = new BigDecimal(amountStr);
+            if (amount.compareTo(BigDecimal.ZERO) != 1) {
+                throw new ConsoleParserInvalidAmountException();
+            }
+        } catch (NumberFormatException exception) {
+            throw new ConsoleParserCommandAddIncomeInvalidException();
+        }
     }
 
     //@@author penguin-s
@@ -1512,66 +1666,50 @@ public class ConsoleParser {
         }
     }
 
+    //@@author jeyvia
+    private static ConsoleCommandAddIncome normalizedConsoleCommandAddIncome(
+            ConsoleCommandAddIncome consoleCommandAddIncome
+    ) {
+        BigDecimal amount = consoleCommandAddIncome.getAmount();
+
+        BigDecimal truncatedAmount = amount.stripTrailingZeros();
+
+        consoleCommandAddIncome.setAmount(truncatedAmount);
+
+        return consoleCommandAddIncome;
+    }
+
+
     //@@author penguin-s
     private static ConsoleCommandAddIncome parseCommandAddIncome(String arguments) throws
-            ConsoleParserCommandAddIncomeInvalidException {
+            ConsoleParserCommandAddIncomeInvalidException, ConsoleParserInvalidAmountException {
         try {
-            String[] argumentsArr = tokenizeCommandArguments(arguments);
+            Options options = ConsoleParserConfigurations.getCommandAddIncomeOptions();
 
-            Options cliOptions = ConsoleParserConfigurations.getCommandAddIncomeOptions();
-            CommandLineParser cliParser = new DefaultParser();
-            CommandLine cli = cliParser.parse(cliOptions, argumentsArr);
+            validateCommandAddIncomeOptions(options);
 
-            String name = cli.getOptionValue(
-                    ConsoleParserConfigurations.COMMAND_ADD_INCOME_ARG_NAME_LONG
-            );
-            String amountStr = cli.getOptionValue(
-                    ConsoleParserConfigurations.COMMAND_ADD_INCOME_ARG_AMOUNT_LONG
-            );
+            CommandLine commandLine = parseCommandAddIncomeArguments(options, arguments);
 
-            /* Checks if mandatory arguments are provided */
+            validateCommandAddIncomeValues(commandLine);
 
-            if (name == null || amountStr == null) {
-                throw new ConsoleParserCommandAddIncomeInvalidException(
-                        Messages.CONSOLE_ERROR_COMMAND_ADD_INCOME_INVALID
-                );
-            }
+            ConsoleCommandAddIncome consoleCommandAddIncome
+                    = parseCommandAddIncomeValues(commandLine);
 
-            String dateTimeStr = cli.getOptionValue(
-                    ConsoleParserConfigurations.COMMAND_ADD_INCOME_ARG_DATE_TIME_LONG
-            );
-            String description = cli.getOptionValue(
-                    ConsoleParserConfigurations.COMMAND_ADD_INCOME_ARG_DESCRIPTION_LONG
-            );
+            ConsoleCommandAddIncome normalizedConsoleCommandAddIncome
+                    = normalizedConsoleCommandAddIncome(consoleCommandAddIncome);
 
-            /* Parses and normalizes arguments */
-
-            BigDecimal amount = new BigDecimal(amountStr);
-
-            LocalDateTime dateTime;
-            if (dateTimeStr == null) {
-                dateTime = LocalDateTime.now();
-            } else {
-                dateTime = LocalDateTime.parse(
-                        dateTimeStr,
-                        DateTimeFormatter.ofPattern(Configurations.CONSOLE_INTERFACE_DATE_TIME_INPUT_FORMAT)
-                );
-            }
-
-            /* Returns parsed arguments */
-
-            return new ConsoleCommandAddIncome(
-                    name,
-                    dateTime,
-                    description,
-                    amount
-            );
+            return normalizedConsoleCommandAddIncome;
         } catch (ParseException
                  | DateTimeParseException
                  | NumberFormatException
                  | ConsoleParserCommandAddIncomeInvalidException exception) {
             throw new ConsoleParserCommandAddIncomeInvalidException(
                     Messages.CONSOLE_ERROR_COMMAND_ADD_INCOME_INVALID,
+                    exception
+            );
+        } catch (ConsoleParserInvalidAmountException exception) {
+            throw new ConsoleParserInvalidAmountException(
+                    Messages.CONSOLE_PARSER_INVALID_AMOUNT_EXCEPTION,
                     exception
             );
         }
@@ -1778,12 +1916,15 @@ public class ConsoleParser {
 
     //@@author penguin-s
     private static void validateCommandEditIncomeValues(CommandLine commandLine) throws
-            ConsoleParserCommandEditIncomeInvalidException {
+            ConsoleParserCommandEditIncomeInvalidException, ConsoleParserInvalidAmountException {
         String name = commandLine.getOptionValue(
                 ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_NAME_LONG
         );
         String incomeIndexStr = commandLine.getOptionValue(
                 ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_INCOME_INDEX_LONG
+        );
+        String amountStr = commandLine.getOptionValue(
+                ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_AMOUNT_LONG
         );
 
         if (name != null && name.isBlank()) {
@@ -1800,6 +1941,17 @@ public class ConsoleParser {
             }
 
             if (incomeIndex < 0) {
+                throw new ConsoleParserCommandEditIncomeInvalidException();
+            }
+        }
+
+        if (amountStr != null) {
+            try {
+                BigDecimal amount = new BigDecimal(amountStr);
+                if (amount.compareTo(BigDecimal.ZERO) != 1) {
+                    throw new ConsoleParserInvalidAmountException();
+                }
+            } catch (NumberFormatException exception) {
                 throw new ConsoleParserCommandEditIncomeInvalidException();
             }
         }
@@ -1856,9 +2008,25 @@ public class ConsoleParser {
         }
     }
 
+    //@@author jeyvia
+    private static ConsoleCommandEditIncome normalizedConsoleCommandEditIncome(
+            ConsoleCommandEditIncome consoleCommandEditIncome
+    ) {
+        BigDecimal amount = consoleCommandEditIncome.getAmount();
+
+        if (amount != null) {
+            BigDecimal truncatedAmount = amount.stripTrailingZeros();
+
+            consoleCommandEditIncome.setAmount(truncatedAmount);
+        }
+
+        return consoleCommandEditIncome;
+    }
+
+
     //@@author penguin-s
     private static ConsoleCommandEditIncome parseCommandEditIncome(String arguments) throws
-            ConsoleParserCommandEditIncomeInvalidException {
+            ConsoleParserCommandEditIncomeInvalidException, ConsoleParserInvalidAmountException {
         try {
             Options options = ConsoleParserConfigurations.getCommandEditIncomeOptions();
 
@@ -1871,10 +2039,18 @@ public class ConsoleParser {
             ConsoleCommandEditIncome consoleCommandEditIncome
                     = parseCommandEditIncomeValues(commandLine);
 
-            return consoleCommandEditIncome;
+            ConsoleCommandEditIncome normalizedConsoleCommandEditIncome
+                    = normalizedConsoleCommandEditIncome(consoleCommandEditIncome);
+
+            return normalizedConsoleCommandEditIncome;
         } catch (ConsoleParserCommandEditIncomeInvalidException exception) {
             throw new ConsoleParserCommandEditIncomeInvalidException(
                     Messages.CONSOLE_ERROR_COMMAND_EDIT_INCOME_INVALID,
+                    exception
+            );
+        } catch (ConsoleParserInvalidAmountException exception) {
+            throw new ConsoleParserInvalidAmountException(
+                    Messages.CONSOLE_PARSER_INVALID_AMOUNT_EXCEPTION,
                     exception
             );
         }
@@ -1915,12 +2091,29 @@ public class ConsoleParser {
 
     //@@author xzynos
     private static void validateCommandAddRecurringPaymentValues(CommandLine commandLine) throws
-            ConsoleParserCommandAddRecurringPaymentInvalidException {
+            ConsoleParserCommandAddRecurringPaymentInvalidException, ConsoleParserInvalidAmountException {
         String name = commandLine.getOptionValue(
                 ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_NAME_LONG
         );
+        String amountStr = commandLine.getOptionValue(
+                ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_AMOUNT_LONG
+        );
 
         if (name.isBlank()) {
+            throw new ConsoleParserCommandAddRecurringPaymentInvalidException();
+        }
+
+        if (amountStr == null) {
+            throw new ConsoleParserCommandAddRecurringPaymentInvalidException();
+        }
+
+        try {
+            BigDecimal amount = new BigDecimal(amountStr);
+
+            if (amount.compareTo(BigDecimal.ZERO) != 1) {
+                throw new ConsoleParserInvalidAmountException();
+            }
+        } catch (NumberFormatException exception) {
             throw new ConsoleParserCommandAddRecurringPaymentInvalidException();
         }
     }
@@ -1978,12 +2171,18 @@ public class ConsoleParser {
     private static ConsoleCommandAddRecurringPayment normalizeCommandAddRecurringPaymentValues(
             ConsoleCommandAddRecurringPayment consoleCommandAddRecurringPayment
     ) {
+        BigDecimal amount = consoleCommandAddRecurringPayment.getAmount();
+
+        BigDecimal truncatedAmount = amount.stripTrailingZeros();
+
+        consoleCommandAddRecurringPayment.setAmount(truncatedAmount);
+
         return consoleCommandAddRecurringPayment;
     }
 
     //@@author xzynos
     private static ConsoleCommandAddRecurringPayment parseCommandAddRecurringPayment(String arguments) throws
-            ConsoleParserCommandAddRecurringPaymentInvalidException {
+            ConsoleParserCommandAddRecurringPaymentInvalidException, ConsoleParserInvalidAmountException {
         try {
             Options options = ConsoleParserConfigurations.getCommandAddRecurringPaymentOptions();
 
@@ -2003,6 +2202,11 @@ public class ConsoleParser {
         } catch (ConsoleParserCommandAddRecurringPaymentInvalidException exception) {
             throw new ConsoleParserCommandAddRecurringPaymentInvalidException(
                     Messages.CONSOLE_ERROR_COMMAND_ADD_RECURRING_PAYMENT_INVALID,
+                    exception
+            );
+        } catch (ConsoleParserInvalidAmountException exception) {
+            throw new ConsoleParserInvalidAmountException(
+                    Messages.CONSOLE_PARSER_INVALID_AMOUNT_EXCEPTION,
                     exception
             );
         }
@@ -2243,13 +2447,27 @@ public class ConsoleParser {
 
     //@@author xzynos
     private static void validateCommandEditRecurringPaymentValues(CommandLine commandLine) throws
-            ConsoleParserCommandEditRecurringPaymentInvalidException {
+            ConsoleParserCommandEditRecurringPaymentInvalidException, ConsoleParserInvalidAmountException {
         String name = commandLine.getOptionValue(
                 ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_NAME_LONG
+        );
+        String amountStr = commandLine.getOptionValue(
+                ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_AMOUNT_LONG
         );
 
         if (name != null && name.isBlank()) {
             throw new ConsoleParserCommandEditRecurringPaymentInvalidException();
+        }
+
+        if (amountStr != null) {
+            try {
+                BigDecimal amount = new BigDecimal(amountStr);
+                if (amount.compareTo(BigDecimal.ZERO) != 1) {
+                    throw new ConsoleParserInvalidAmountException();
+                }
+            } catch (NumberFormatException exception) {
+                throw new ConsoleParserCommandEditRecurringPaymentInvalidException();
+            }
         }
     }
 
@@ -2350,12 +2568,18 @@ public class ConsoleParser {
     private static ConsoleCommandEditRecurringPayment normalizeCommandEditRecurringPaymentValues(
             ConsoleCommandEditRecurringPayment consoleCommandEditRecurringPayment
     ) {
+        BigDecimal amount = consoleCommandEditRecurringPayment.getAmount();
+
+        BigDecimal truncatedAmount = amount.stripTrailingZeros();
+
+        consoleCommandEditRecurringPayment.setAmount(truncatedAmount);
+
         return consoleCommandEditRecurringPayment;
     }
 
     //@@author xzynos
     private static ConsoleCommandEditRecurringPayment parseCommandEditRecurringPayment(String arguments) throws
-            ConsoleParserCommandEditRecurringPaymentInvalidException {
+            ConsoleParserCommandEditRecurringPaymentInvalidException, ConsoleParserInvalidAmountException {
         try {
             Options options = ConsoleParserConfigurations.getCommandEditRecurringPaymentOptions();
 
@@ -2375,6 +2599,11 @@ public class ConsoleParser {
         } catch (ConsoleParserCommandEditRecurringPaymentInvalidException exception) {
             throw new ConsoleParserCommandEditRecurringPaymentInvalidException(
                     Messages.CONSOLE_ERROR_COMMAND_EDIT_RECURRING_PAYMENT_INVALID,
+                    exception
+            );
+        } catch (ConsoleParserInvalidAmountException exception) {
+            throw new ConsoleParserInvalidAmountException(
+                    Messages.CONSOLE_PARSER_INVALID_AMOUNT_EXCEPTION,
                     exception
             );
         }
@@ -2651,7 +2880,8 @@ public class ConsoleParser {
             ConsoleParserCommandDeleteRecurringPaymentInvalidException,
             ConsoleParserCommandEditRecurringPaymentInvalidException,
             ConsoleParserCommandPayRecurringPaymentInvalidException,
-            ConsoleParserCommandMergeExternalFileInvalidException {
+            ConsoleParserCommandMergeExternalFileInvalidException,
+            ConsoleParserInvalidAmountException {
         String command = getConsoleCommand(consoleInput);
         String arguments = getConsoleCommandArguments(consoleInput);
 

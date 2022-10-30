@@ -126,6 +126,13 @@ public class Messages {
     //endregion
 
     //@@author jeyvia
+    //region Defines messages for InvalidAmountException
+    public static final String CONSOLE_PARSER_INVALID_AMOUNT_EXCEPTION = ""
+            + "Amount entered is invalid. Please enter an amount greater than 0.";
+
+    //endregion
+
+    //@@author jeyvia
     //region Defines messages for console command Help
     public static final String CONSOLE_COMMAND_HELP_ADD_EXPENSE = "Add an expense: ";
     public static final String CONSOLE_COMMAND_HELP_VIEW_EXPENSE = "View your expenses: ";
