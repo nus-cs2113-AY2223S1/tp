@@ -175,6 +175,7 @@ public class AddCommand extends Command {
      * @throws MaximumTransactionCountException If the transaction list capacity has been reached.
      */
     public static void checkTransactionCapacity(TransactionList transactions) throws MaximumTransactionCountException {
+        addLogger.setLevel(Level.SEVERE);
         assert transactions != null;
         // The expected maximum number of transactions allowed to store is only one million
         if (transactions.size() == MAX_TRANSACTIONS_COUNT) {
@@ -194,6 +195,7 @@ public class AddCommand extends Command {
      * @throws InputTransactionInvalidTypeException If the type of the transactions
      */
     private String addTransaction(TransactionList transactions) throws InputTransactionInvalidTypeException {
+        addLogger.setLevel(Level.SEVERE);
         assert (transactions != null);
         String messageBanner = "";
         Transaction transaction;

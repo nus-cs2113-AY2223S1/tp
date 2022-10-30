@@ -9,10 +9,10 @@ import java.time.format.DateTimeFormatter;
  * Provides enum variables for the approved date formats for input and output.
  */
 public enum DateFormats {
-    DATE_INPUT_PATTERN("ddMMyyyy"),
-    DATE_OUTPUT_PATTERN("MMM dd yyyy"),
-    DATE_MONTH_PATTERN("MMM yyyy"),
-    DATE_STORAGE_OUTPUT_PATTERN("yyyy-MM-dd");
+    DATE_INPUT_PATTERN("ddMMuuuu"),
+    DATE_OUTPUT_PATTERN("MMM dd uuuu"),
+    DATE_MONTH_PATTERN("MMM uuuu"),
+    DATE_STORAGE_OUTPUT_PATTERN("uuuu-MM-dd");
 
     public final String message;
 
