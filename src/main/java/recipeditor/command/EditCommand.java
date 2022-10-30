@@ -61,25 +61,25 @@ public class EditCommand extends Command {
             EditModeCommand cmd;
             switch (flags[0]) {
             case ADD:
-                cmd = new Add(parsed, editedRecipe);
+                cmd = new Add(flags[1], parsed, editedRecipe);
                 break;
             case DELETE:
-                cmd = new Delete(parsed, editedRecipe);
+                cmd = new Delete(flags[1], parsed, editedRecipe);
                 break;
             case SWAP:
-                cmd = new Swap(parsed, editedRecipe);
+                cmd = new Swap(flags[1], parsed, editedRecipe);
                 break;
             case CHANGE:
-                cmd = new Change(parsed, editedRecipe);
+                cmd = new Change(flags[1], parsed, editedRecipe);
                 break;
             default:
                 return new CommandResult("Edit failed");
             }
             try {
-                cmd.setIngredientFlag(flags[1]);
                 this.editedRecipe = cmd.execute();
                 RecipeList.editRecipe(index, editedRecipe);
-                return new CommandResult(cmd.getMessage() + '\n' + editedRecipe.getTitle() + " edited.");
+                return new CommandResult(cmd.getMessage() + '\n' + editedRecipe.getTitle() + ": "
+                        + flags[1].toString().toLowerCase() + " edited.");
             } catch (Exception e) {
                 return new CommandResult(e.getMessage());
             }

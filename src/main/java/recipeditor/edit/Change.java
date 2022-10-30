@@ -2,6 +2,7 @@ package recipeditor.edit;
 
 import recipeditor.exception.InvalidFlagException;
 import recipeditor.exception.ParseException;
+import recipeditor.parser.FlagType;
 import recipeditor.recipe.Ingredient;
 import recipeditor.recipe.Recipe;
 
@@ -12,8 +13,8 @@ public class Change extends EditModeCommand {
     private static final int INDEX_LOCATION = 4;
     private static final int START_LOCATION = 5;
 
-    public Change(String[] parsedCommand, Recipe recipe) {
-        super(parsedCommand, recipe);
+    public Change(FlagType ingredientFlag, String[] parsedCommand, Recipe recipe) {
+        super(ingredientFlag, parsedCommand, recipe);
     }
 
     @Override
@@ -37,13 +38,13 @@ public class Change extends EditModeCommand {
             recipe.setStep(indexToChange, newInput.toString().trim());
             return recipe;
         case TITLE:
-            for (int i = START_LOCATION; i < parsedCommand.length; i++) {
+            for (int i = INDEX_LOCATION; i < parsedCommand.length; i++) {
                 newInput.append(parsedCommand[i]).append(" ");
             }
             recipe.setTitle(newInput.toString().trim());
             return recipe;
         case DESCRIPTION:
-            for (int i = START_LOCATION; i < parsedCommand.length; i++) {
+            for (int i = INDEX_LOCATION; i < parsedCommand.length; i++) {
                 newInput.append(parsedCommand[i]).append(" ");
             }
             recipe.setDescription(newInput.toString().trim());
