@@ -186,6 +186,8 @@ public class Messages {
 
     public static final String MESSAGE_CHECK_CLIENT_RESULT = "Here is the property this client is renting:";
 
+    public static final String MESSAGE_CHECK_CLIENT_NO_PAIR = "There are no pairings involving this client.";
+
     public static final String MESSAGE_CHECK_CLIENT_WRONG_FORMAT = "OOPS!! To check client, please use the "
             + "following format:\n"
             + "  check -client ic/INDEX\n"
