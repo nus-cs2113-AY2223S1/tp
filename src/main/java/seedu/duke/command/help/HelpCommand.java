@@ -42,6 +42,8 @@ public class HelpCommand extends Command {
     private static final String INVALID_SYMBOLS_REMINDER = "Refrain from using '|' and '/' as arguments!";
     private static final String COMMAND_UPDATE_ITEM = "update-item /i <itemId> /p <price>";
     private static final String COMMAND_UPDATE_TX = "update-tx /t <transactionId> /d <duration>";
+
+    private static final String COMMAND_VIEW_USER_ITEMS = "view-user-items /u <userName>";
     private static final String UNDERLINE = System.lineSeparator() + "--------------------";
     private final LinkedHashMap<String, String> commandToDetailMap;
 
@@ -63,6 +65,7 @@ public class HelpCommand extends Command {
         this.commandToDetailMap.put("List all transactions", COMMAND_LIST_TX);
         this.commandToDetailMap.put(System.lineSeparator() + "VIEW-RELATED-COMMANDS", UNDERLINE);
         this.commandToDetailMap.put("View a user", COMMAND_VIEW_USER);
+        this.commandToDetailMap.put("View a user's items", COMMAND_VIEW_USER_ITEMS);
         this.commandToDetailMap.put("View a item", COMMAND_VIEW_ITEM);
         this.commandToDetailMap.put("View a transaction", COMMAND_VIEW_TX);
         this.commandToDetailMap.put(System.lineSeparator() + "UPDATE-RELATED-COMMANDS", UNDERLINE);
