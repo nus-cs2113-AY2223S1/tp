@@ -4,7 +4,7 @@ package seedu.duke.common;
  * Provides enum variables for storing custom program error messages.
  */
 public enum ErrorMessages {
-    ERROR_GLOBAL_INVALID_COMMAND("Invalid command, please enter <help> if you need the list of commands."),
+    ERROR_GLOBAL_INVALID_COMMAND("Invalid command, please enter <help> for the command guide."),
     ERROR_GLOBAL_DUPLICATE_TAG("Duplicate tag(s) detected, please enter <help> for the command guide."),
     ERROR_GLOBAL_MISSING_TAG("Mandatory tag(s) missing, please enter <help> for the command guide."),
     ERROR_GLOBAL_MISSING_TAG_YEAR("Month tag must be accompanied by a year tag, please enter <help> for the "
