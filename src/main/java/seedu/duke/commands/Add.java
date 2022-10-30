@@ -34,6 +34,7 @@ public class Add extends Command {
         String course = extractingContent(input, indexes[0], indexes[1]);
         String semester = extractingContent(input, indexes[2], indexes[3]);
         String mcString = extractingContent(input, indexes[4], indexes[5]);
+        checkMcString(mcString);
         int mc = Integer.parseInt(mcString);
         checkMc(mc);
         String grade = extractingContent(input, indexes[6], indexes[7]);
@@ -101,6 +102,12 @@ public class Add extends Command {
     public void checkContentException(boolean isSame) throws InvalidInputContentException {
         if (isSame) {
             throw new InvalidInputContentException();
+        }
+    }
+
+    public void checkMcString(String mcString) throws InvalidMcException {
+        if (mcString.matches("[0-9]+") == false) {
+            throw new InvalidMcException();
         }
     }
 
