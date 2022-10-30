@@ -1,16 +1,15 @@
 # TITLE 
-Example Title 2
+Fillet fish
 
-# DESCRIPTION 
-Example Description 2
+# DESCRIPTION
+Fish fried in oil
 
 # INGREDIENTS <ingredient name> / <amount> / <unit> 
-1. Ingredient 1 / 1.0 / unit
-2. Example ingredient / 1.2 / example unit
+1. Example ingredient / 1.2 / example unit 
+2. Ingredient 2  /124124/dvdssdv
 
 # STEPS 
-1. Example step
-2. Step 2
-3. ssdbsbsdb
-4. sbsdbsdb
-5. hrehergerg
+1. Example step 
+2. sdvsdbdsgdsgd
+3. step 3
+4. step 4

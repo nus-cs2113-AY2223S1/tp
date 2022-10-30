@@ -27,31 +27,34 @@ public class EditCommand extends Command {
             + "Flag order does not matter, but you can only add one command flag and one recipe flag.";
 
     private final int index;
+    private String oldTitle;
     private Recipe editedRecipe;
     private FlagType[] flags;
     private boolean editSuccess = false;
     private String[] parsed;
 
     // CLI
-    public EditCommand(FlagType[] flags, String[] parsed, int recipeIndex, Recipe editedRecipe) {
+    public EditCommand(FlagType[] flags, String[] parsed, int recipeIndex, Recipe editedRecipe, String oldTitle) {
         this.flags = flags;
         this.parsed = parsed;
         this.index = recipeIndex;
         this.editedRecipe = editedRecipe;
+        this.oldTitle = oldTitle;
     }
 
     // GUI
-    public EditCommand(boolean editSuccess, int recipeIndex, Recipe editedRecipe) {
+    public EditCommand(boolean editSuccess, int recipeIndex, Recipe editedRecipe, String oldTitle) {
         this.editSuccess = editSuccess;
         this.index = recipeIndex;
         this.editedRecipe = editedRecipe;
+        this.oldTitle = oldTitle;
     }
 
     @Override
     public CommandResult execute() {
         if (editSuccess) {
             // GUI Successful
-            RecipeList.editRecipe(index, editedRecipe);
+            RecipeList.editRecipe(index, editedRecipe, oldTitle);
             return new CommandResult(editedRecipe.getTitle() + " edited.");
         } else if (flags == null) {
             // GUI Unsuccessful
@@ -77,7 +80,7 @@ public class EditCommand extends Command {
             }
             try {
                 this.editedRecipe = cmd.execute();
-                RecipeList.editRecipe(index, editedRecipe);
+                RecipeList.editRecipe(index, editedRecipe, oldTitle);
                 return new CommandResult(cmd.getMessage() + '\n' + editedRecipe.getTitle() + ": "
                         + flags[1].toString().toLowerCase() + " edited.");
             } catch (Exception e) {

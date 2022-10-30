@@ -1,0 +1,44 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+hide fields
+hide methods
+
+package edit {
+abstract class EditModeCommand
+class Add
+class Change
+class Delete
+class Swap
+class Invalid
+}
+
+package parser {
+interface FlagParser
+enum FlagType
+class Parser
+class GuiWorkFlow
+}
+
+class EditCommand
+class Storage
+
+Add -right-^ EditModeCommand
+Change -up-^ EditModeCommand
+Delete -up-^ EditModeCommand
+Swap -up-^ EditModeCommand
+Invalid -left-^ EditModeCommand
+
+EditModeCommand -up-* EditCommand
+GuiWorkFlow -up-* EditCommand
+
+Storage .down. EditCommand
+
+FlagType -up-* FlagParser
+FlagType -up-* EditCommand
+FlagType -right-* Parser
+
+FlagParser -left-* EditCommand
+
+EditCommand -down-* Parser
+@enduml

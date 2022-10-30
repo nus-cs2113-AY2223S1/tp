@@ -14,7 +14,6 @@ import recipeditor.command.InvalidCommand;
 import recipeditor.recipe.Recipe;
 import recipeditor.recipe.RecipeList;
 import recipeditor.storage.Storage;
-import recipeditor.ui.EditMode;
 import recipeditor.ui.Ui;
 
 import java.io.FileNotFoundException;
@@ -81,22 +80,6 @@ public class Parser {
         }
     }
 
-    private static Command parseEditCommandGui(String[] parsed) {
-        if (parsed.length == 2) {
-            try {
-                int index = Integer.parseInt(parsed[1]) - 1; // to account for 0-based indexing in recipelist
-                String name = RecipeList.getTitleFromIndex(index);
-                String path = Storage.RECIPES_FOLDER_PATH + "/" + name;
-                GuiWorkFlow returnValues = new GuiWorkFlow(path);
-                return new EditCommand(returnValues.getValidity(), index, returnValues.getRecipe());
-            } catch (Exception e) {
-                logger.log(Level.INFO, e.getMessage());
-                return new InvalidCommand("Edit GUI Error");
-            }
-        }
-        return new InvalidCommand("Edit GUI Error");
-    }
-
     private static String convertStringArrayToString(String[] stringArray) {
         StringBuilder content = new StringBuilder();
         for (String string : stringArray) {
@@ -140,7 +123,7 @@ public class Parser {
                 String name = RecipeList.getTitleFromIndex(index);
                 String path = Storage.RECIPES_FOLDER_PATH + "/" + name;
                 GuiWorkFlow returnValues = new GuiWorkFlow(path);
-                return new EditCommand(returnValues.getValidity(), index, returnValues.getRecipe());
+                return new EditCommand(returnValues.getValidity(), index, returnValues.getRecipe(), name);
             } catch (Exception e) {
                 logger.log(Level.INFO, e.getMessage());
                 return new InvalidCommand("Edit GUI Error");
@@ -158,7 +141,7 @@ public class Parser {
                 if (flags == null) {
                     return new InvalidCommand();
                 }
-                return new EditCommand(flags, parsed, index, editedRecipe);
+                return new EditCommand(flags, parsed, index, editedRecipe, originalRecipe.getTitle());
             } catch (NumberFormatException n) {
                 return new InvalidCommand();
             } catch (Exception e) {
