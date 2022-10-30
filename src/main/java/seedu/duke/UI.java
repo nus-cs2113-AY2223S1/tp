@@ -170,4 +170,8 @@ public class UI {
         System.out.println("NO COMMAND WORD SPECIFIED!! PLEASE KEY IN THE CORRECT INPUT!!");
     }
 
+    public static void invalidMcMessage() {
+        System.out.println("The number of MCs is invalid (0 < mcs <= 20). Please try again!");
+    }
+
 }

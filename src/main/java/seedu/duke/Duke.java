@@ -11,7 +11,6 @@ public class Duke {
     static ModuleList modulelist;
 
     static String filePath = "data.txt";
-
     public static void main(String[] args) {
         run();
     }
