@@ -114,7 +114,11 @@ Lastly, for valid `PRICE`, a positive number excluding any letters/symbols/space
 ---
 
 ### Delete Property: `delete -property`
+Deletes the specified property from the property list and subsequently deletes any pairings involving that property.
 
+<u>Format:</u> `delete -property ip/PROPERTY_INDEX`
+
+<u>Example:</u> `delete -property ip/2`
 
 ### List Properties: `list -property`
 Lists all properties present in the list
@@ -163,6 +167,11 @@ For valid `BUDGET_MONTH`, a positive number excluding any letters/symbols/spaces
 ---
 
 ### Delete Client: `delete -client`
+Deletes the specified client from the client list and subsequently deletes any pairings involving that client.
+
+<u>Format:</u> `delete -client ic/CLIENT_INDEX`
+
+<u>Example:</u> `delete -client ic/3`
 
 ### List Clients: `list -client`
 Lists all the clients present in the list
