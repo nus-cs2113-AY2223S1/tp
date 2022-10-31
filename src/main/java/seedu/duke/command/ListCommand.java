@@ -33,7 +33,7 @@ public class ListCommand extends Command {
 
     private String formatWeeks(List<Integer> weeks) {
         if (weeks.size() == 0) {
-            return "Nil";
+            return "No info";
         }
         if (weeks.size() == 1) {
             return Integer.toString(weeks.get(0));
@@ -56,8 +56,17 @@ public class ListCommand extends Command {
                 DETAILS_INDENT - HEADING_LENGTH);
         return classNoString + module.getSemesterData(semester).getLessonsByTypeAndNo(type, classNo)
                 .stream()
-                .map(r -> Timetable.dayToShortString(r.day) + " " + r.startTime + "-" + r.endTime + ", "
-                    + r.venue + ", weeks: " + formatWeeks(r.weeks))
+                .map(r -> {
+                    String result = Timetable.dayToShortString(r.day);
+                    result += " " + r.startTime + "-" + r.endTime;
+                    if (!r.venue.isEmpty()) {
+                        result += ", " + r.venue;
+                    }
+                    if (!r.weeks.isEmpty()) {
+                        result += ", weeks: " + formatWeeks(r.weeks);
+                    }
+                    return result;
+                })
                 .collect(Collectors.joining("\n" + StringUtils.repeat(" ", DETAILS_INDENT)));
     }
 

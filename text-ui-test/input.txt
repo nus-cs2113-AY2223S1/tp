@@ -30,7 +30,6 @@ select /module eg1311 /type lab /code 24
 select /module eg1311 /type lec /code 24
 list
 import https://nusmods.com/timetable/st-i/share?EE4302=PLEC:01,PTUT:01&EE4305E=LEC:1,TUT:1
-# to fix
 list
 timetable /simple
 bye
