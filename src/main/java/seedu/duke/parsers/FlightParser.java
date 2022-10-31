@@ -5,20 +5,24 @@ import seedu.duke.command.Command;
 import seedu.duke.command.flightcommand.DeleteFlightCommand;
 import seedu.duke.command.flightcommand.ListFlightCommand;
 import seedu.duke.exceptions.SkyControlException;
-import seedu.duke.operationlist.FlightList;
 
 //@@author Franky4566
 public class FlightParser extends Parser {
+
+    private static final String ADD_COMMAND = "add";
+    private static final String LIST_COMMAND = "list";
+    private static final String DELETE_COMMAND = "delete";
+
     public static Command parse(String[] inputWords) throws SkyControlException {
         checkOperation(inputWords);
         switch (operation) {
-        case "add":
+        case ADD_COMMAND:
             command = new AddFlightCommand();
             break;
-        case "list":
+        case LIST_COMMAND:
             command = new ListFlightCommand();
             break;
-        case "delete":
+        case DELETE_COMMAND:
             command = new DeleteFlightCommand();
             break;
         default:

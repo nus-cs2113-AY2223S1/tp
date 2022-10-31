@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 public class PassengerList extends OperationList {
     protected static final String REGEX_LETTER = "[a-zA-Z ]*";
     protected static final String REGEX_NUMBER = "[0-9]*";
-    protected static final String REGEX_TIME = "([01]?[0-9]|2[0-3])[0-5][0-9]";
+    protected static final String REGEX_TIME = "([01]\\d|2[0-3])[0-5]\\d";
     protected static final String NAME_DELIMITER = "n/";
     protected static final String DEPARTURE_TIME_DELIMITER = " dt/";
     protected static final String FLIGHT_NUMBER_DELIMITER = " fn/";

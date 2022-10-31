@@ -3,6 +3,7 @@ package seedu.duke.ui;
 import seedu.duke.terminalinfo.FlightInfo;
 import seedu.duke.terminalinfo.PassengerInfo;
 
+import javax.sound.midi.Soundbank;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -44,6 +45,11 @@ public class Ui {
     public void showLineSeparator() {
         System.out.println(lineSeparator);
     }
+
+    //@author Franky4566
+    protected static final String FLIGHT_DELAY_MSG = "Departure time of flight %s is delayed from %s to %s.";
+    protected static final String FLIGHT_WRONG_DELAY_MSG = "Stop! Please enter a valid departure time for flight %s. "
+            + "\nTime must be later than %s.";
 
     //@@author shengiv
     public void showWelcomeMessage() {
@@ -206,7 +212,7 @@ public class Ui {
         System.out.printf("| %80s %-45s |\n"
                         + "+--------------------------------------------------------------------"
                         + "--------------------------------------------------------------+\n",
-                "The Flight schedule is empty.", " ");
+                "The flight details logbook is empty.", " ");
     }
 
     public String getFlightNotFoundMessage(String flightNum) {
@@ -221,7 +227,6 @@ public class Ui {
         System.out.println("Flight added!");
     }
 
-    //@@author JordanKwua
     //@@author JordanKwua
     public void showFlightRemovedMessage(String flightNum) {
         System.out.println("FLIGHT " + flightNum + " HAS BEEN DELETED.");
@@ -273,13 +278,12 @@ public class Ui {
 
     //@@author Franky4566
     public void showUpdatedDepartureTime(String flightNum, String oldDepartureTime, String newDepartureTime) {
-        System.out.println("Departure time of flight " + flightNum + " is delayed from "
-                + oldDepartureTime + " to " + newDepartureTime + ".");
+        String outputMsg = String.format(FLIGHT_DELAY_MSG, flightNum, oldDepartureTime, newDepartureTime);
+        System.out.println(outputMsg);
     }
 
     public String getWrongDelayTimeError(String flightNum, String oldDepartureTime) {
-        return "Stop! Please enter a valid departure time for flight " + flightNum
-                + "\nTime must be later than " + oldDepartureTime + ".";
+        return (String.format(FLIGHT_WRONG_DELAY_MSG, flightNum, oldDepartureTime));
     }
 
     //@@author ivanthengwr
@@ -335,7 +339,7 @@ public class Ui {
 
     public String getGateNumberError() {
         return "Stop! The gate number input format is wrong.\n"
-                + "Gate number should be a digit between 0 and 99, please try again.";
+                + "Gate number should have 2 digits ranging between 00 and 99, please try again.";
     }
 
     public String getBoardingGroupError() {
