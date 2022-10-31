@@ -61,6 +61,24 @@ public class UserModuleMappingList {
         }
     }
 
+    public void deleteComment(String moduleCode) {
+        boolean isFound = false;
+        for (UserModuleMapping module : modules) {
+            if (module.getPuCode().equals(moduleCode)) {
+                isFound = true;
+                if (module.getComment().equals("")) {
+                    System.out.println("Error: No comment to delete");
+                } else {
+                    module.setDefaultComment();
+                    System.out.println("Successfully deleted comment");
+                }
+            }
+        }
+        if (!isFound) {
+            System.out.println("Error: No such modules to delete");
+        }
+    }
+
     public void addModule(UserModuleMapping input) {
         if (findModuleByCode(input)) {
             System.out.println("Error module already added");

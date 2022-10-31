@@ -61,6 +61,14 @@ public class UserUniversityListManager {
         }
     }
 
+    public void deleteComment(String universityName, String moduleCode) throws InvalidUserCommandException {
+        if (!containsKey(universityName)) {
+            System.out.println("Error: No list containing such university");
+        } else {
+            getList(universityName).deleteComment(moduleCode);
+        }
+    }
+
     /**
      * Method to create a new list for PU.
      * @param input PU name from user input

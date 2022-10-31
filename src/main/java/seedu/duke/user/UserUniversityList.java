@@ -29,6 +29,10 @@ public class UserUniversityList {
         myModules.updateComment(moduleCode, comment);
     }
 
+    public void deleteComment(String moduleCode) {
+        myModules.deleteComment(moduleCode);
+    }
+
     public UserUniversityList(String universityName) {
         this.universityName = universityName;
         this.myModules = new UserModuleMappingList();

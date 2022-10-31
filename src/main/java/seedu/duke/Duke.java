@@ -112,7 +112,10 @@ public class Duke {
                                              TimetableManager timetableManager, DeleteCommand deleteCommand)
             throws InvalidUserCommandException {
         try {
-            if (deleteCommand.getLesson() != null) {
+            if (deleteCommand.hasDeleteComment()) {
+                executeDeleteComment(userUniversityListManager, deleteCommand);
+            }
+            else if (deleteCommand.getLesson() != null) {
                 timetableManager.deleteLesson(deleteCommand.getLesson());
                 UserStorageParser.storeTimetable(timetableManager);
             } else {
@@ -127,6 +130,18 @@ public class Duke {
             }
         } catch (NoSuchElementException | TimetableNotFoundException e) {
             Ui.printExceptionMessage(e);
+        }
+    }
+
+    private static void executeDeleteComment(UserUniversityListManager userUniversityListManager,
+                                             DeleteCommand deleteCommand) throws InvalidUserCommandException {
+        if (deleteCommand.getChecker().equals("")) {
+            String universityName = deleteCommand.getUniversityName();
+            String moduleCode = deleteCommand.getModuleCode();
+            System.out.println(moduleCode);
+            userUniversityListManager.deleteComment(universityName, moduleCode);
+        } else {
+            System.out.println("Error: Please do not enter extra characters after note/");
         }
     }
 

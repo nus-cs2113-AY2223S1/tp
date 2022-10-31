@@ -109,7 +109,8 @@ public class CommandParser {
                 throw new InvalidUserCommandException("Error! Invalid delete command. "
                         + "Please follow the command format provided");
             }
-            boolean isDeleteModule = userInputTokenized.length == THREE_PARAMETERS_LENGTH;
+            boolean isDeleteModule = (userInputTokenized.length == THREE_PARAMETERS_LENGTH
+                                    || userInputTokenized.length == FOUR_PARAMETERS_LENGTH);
             Lesson lessonToDelete = parseLesson(userInputTokenized);
             DeleteCommand newDeleteCommand = new DeleteCommand(userInputTokenized, CommandType.DELETE,
                     isDeleteModule, lessonToDelete);
@@ -229,7 +230,7 @@ public class CommandParser {
      */
     private static boolean isValidDeleteCommand(String[] parameters) {
         return isValidCommandOnUniversity(parameters) || isValidCommandOnModules(parameters)
-                || isValidCommandOnTimetable(parameters);
+                || isValidCommandOnTimetable(parameters) || isValidDeleteCommandOnModules(parameters);
     }
 
 
@@ -326,6 +327,13 @@ public class CommandParser {
     }
 
     private static boolean isValidAddCommentOnModules(String [] parameters) {
+        return parameters.length == FOUR_PARAMETERS_LENGTH
+                && parameters[UNIVERSITY_INDEX].startsWith(UNIVERSITY_PREFIX)
+                && parameters[MODULE_INDEX].startsWith(MODULE_PREFIX)
+                && parameters[COMMENT_INDEX].startsWith(COMMENT_PREFIX);
+    }
+
+    private static boolean isValidDeleteCommandOnModules(String [] parameters) {
         return parameters.length == FOUR_PARAMETERS_LENGTH
                 && parameters[UNIVERSITY_INDEX].startsWith(UNIVERSITY_PREFIX)
                 && parameters[MODULE_INDEX].startsWith(MODULE_PREFIX)
