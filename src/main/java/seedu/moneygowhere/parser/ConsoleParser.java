@@ -58,6 +58,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 //@@author xzynos
@@ -236,7 +237,7 @@ public class ConsoleParser {
 
             LocalDateTime dateTime;
             if (dateTimeStr == null) {
-                dateTime = LocalDateTime.now();
+                dateTime = LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES);
             } else {
                 dateTime = LocalDateTime.parse(
                         dateTimeStr,
@@ -2762,7 +2763,7 @@ public class ConsoleParser {
     ) {
         LocalDateTime dateTime = consoleCommandPayRecurringPayment.getDateTime();
         if (dateTime == null) {
-            LocalDateTime dateTimeNow = LocalDateTime.now();
+            LocalDateTime dateTimeNow = LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES);
             consoleCommandPayRecurringPayment.setDateTime(dateTimeNow);
         }
 
