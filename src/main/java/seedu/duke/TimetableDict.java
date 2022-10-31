@@ -264,7 +264,6 @@ public class TimetableDict {
                 }
             }
         }
-
         return allPermutations;
     }
 
@@ -293,7 +292,7 @@ public class TimetableDict {
         int numOfPermutations = getTotalNumberOfPermutations(permutationsByMod);
         List<List<List<Lesson>>> allPermutations = getAllPermutations(listOfModules, numOfPermutations, permutationsByMod);
 
-        if (numOfPermutations == 0) {
+        if (listOfModules.size() == 0) {
             return "Sorry you have no modules to allocate!";
         }
 
