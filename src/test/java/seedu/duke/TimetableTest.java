@@ -3,6 +3,7 @@ package seedu.duke;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import seedu.duke.module.lessons.Lesson;
+import seedu.duke.timetable.Timetable;
 
 import java.util.ArrayList;
 import java.util.List;

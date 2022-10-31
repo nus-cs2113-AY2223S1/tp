@@ -5,6 +5,7 @@ import seedu.duke.commands.CommandDeleteModule;
 import seedu.duke.commands.CommandInfoModule;
 import seedu.duke.commands.CommandAddModule;
 import seedu.duke.commands.CommandSetLesson;
+import seedu.duke.timetable.Timetable;
 
 public class Parser {
     private static final String COMMAND_ADD = "add";

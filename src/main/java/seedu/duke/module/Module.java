@@ -1,9 +1,9 @@
 package seedu.duke.module;
 
-import seedu.duke.Timetable;
-import seedu.duke.TimetableDict;
 import seedu.duke.UI;
 import seedu.duke.module.lessons.Lesson;
+import seedu.duke.timetable.Timetable;
+import seedu.duke.timetable.TimetableDict;
 
 import java.util.ArrayList;
 import java.util.HashMap;

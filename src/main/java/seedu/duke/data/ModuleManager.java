@@ -1,9 +1,9 @@
 package seedu.duke.data;
 
 import seedu.duke.Exceptions;
-import seedu.duke.Timetable;
 import seedu.duke.commands.CommandAddModule;
 import seedu.duke.module.Module;
+import seedu.duke.timetable.Timetable;
 
 import java.io.File;
 import java.io.FileNotFoundException;
