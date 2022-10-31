@@ -17,12 +17,14 @@ import seedu.duke.command.transaction.RemoveTransactionCommand;
 import seedu.duke.command.transaction.UpdateTransactionCommand;
 import seedu.duke.command.transaction.ViewTransactionCommand;
 import seedu.duke.command.transaction.ViewTransactionsByStatusCommand;
-import seedu.duke.command.transaction.ViewTransactionsByUserCommand;
+import seedu.duke.command.transaction.ViewBorrowTransactionsByUserCommand;
+import seedu.duke.command.transaction.ViewLendTransactionsByUserCommand;
 import seedu.duke.command.Command;
 import seedu.duke.command.exit.ExitCommand;
 import seedu.duke.command.help.HelpCommand;
 import seedu.duke.command.user.ViewUserCommand;
 import seedu.duke.command.user.ViewUserDebtCommand;
+import seedu.duke.command.user.ViewUserProfitCommand;
 import seedu.duke.command.user.FindUserCommand;
 import seedu.duke.command.user.AddUserCommand;
 import seedu.duke.command.user.ListUsersCommand;
@@ -70,8 +72,12 @@ public class CommandParser {
     private static final String COMMAND_REMOVE_ITEM = "remove-item";
     private static final String COMMAND_REMOVE_TX = "remove-tx";
     private static final String COMMAND_FIND_TX = "find-tx";
-    private static final String COMMAND_FIND_TX_BY_USER = "find-tx-by-user";
+    private static final String COMMAND_VIEW_BORROW_TX_BY_USER = "view-borrow-tx-by-user";
+    private static final String COMMAND_VIEW_LEND_TX_BY_USER = "view-lend-tx-by-user";
+
     private static final String COMMAND_VIEW_USER_DEBT = "view-user-debt";
+    private static final String COMMAND_VIEW_USER_PROFIT = "view-user-profit";
+
     private static final String COMMAND_VIEW_USER_ITEMS = "view-user-items";
     private static final String COMMAND_SORT_ITEMS = "sort-items";
     private static final String COMMAND_LIST_CATEGORIES = "list-categories";
@@ -179,6 +185,8 @@ public class CommandParser {
             return new RemoveUserCommand(parts, userList, itemList, transactionList);
         case COMMAND_VIEW_USER_DEBT:
             return new ViewUserDebtCommand(parts, userList, transactionList);
+        case COMMAND_VIEW_USER_PROFIT:
+            return new ViewUserProfitCommand(parts, userList, transactionList);
         case COMMAND_VIEW_USER_ITEMS:
             return new ViewUserItemsCommand(parts, userList, itemList, transactionList);
         case COMMAND_REMOVE_ITEM:
@@ -187,8 +195,10 @@ public class CommandParser {
             return new RemoveTransactionCommand(parts, transactionList);
         case COMMAND_FIND_TX:
             return new ViewTransactionsByStatusCommand(parts, transactionList);
-        case COMMAND_FIND_TX_BY_USER:
-            return new ViewTransactionsByUserCommand(parts, transactionList, userList);
+        case COMMAND_VIEW_BORROW_TX_BY_USER:
+            return new ViewBorrowTransactionsByUserCommand(parts, transactionList, userList);
+        case COMMAND_VIEW_LEND_TX_BY_USER:
+            return new ViewLendTransactionsByUserCommand(parts, transactionList, userList);
         case COMMAND_SORT_ITEMS:
             return new SortItemCommand(parts, itemList, transactionList);
         case COMMAND_LIST_CATEGORIES:

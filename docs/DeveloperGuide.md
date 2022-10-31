@@ -242,6 +242,44 @@ The following sequence diagram shows how the view-user-items operation works:
 
 **...To be updated(Find user, View user debt)**
 
+### 4.1.6. Find Users by Keyword
+
+>This feature allows users to find items through the command ```find-user```.
+
+Given below is an example usage scenario and how the command mechanism behaves at each step.
+
+Step 1: The user types in the command ```find-user /u [keyword]``` in the command line. The CommandParser class checks if the command is valid through the createCommand() method.
+
+Step 2: Duke will receive the ```FindUserCommand``` and execute it.
+
+Step 3: FindUserCommand will check for the delimiter "/k". If it is not present, an exception is thrown. Else the command is executed.
+
+Step 4: The UserList is iterated through to check for Users that match the provided keyword. Matched users are appended to a List which is returned and then printed by Ui.printResponse.
+
+The following sequence diagram models the operation: PENDING DIAGRAM
+
+### 4.1.7. View User Debt
+
+>This feature allows users to find user debt by summing all moneyTransacted in all the Transactions in which the User is a Borrower through the command ```view-user-debt```.
+
+Given below is an example usage scenario and how the command mechanism behaves at each step.
+
+Step 1: The user types in the command ```view-user-debt /u [username]``` in the command line. The CommandParser class checks if the command is valid through the createCommand() method.
+
+Step 2: Duke will receive the ```ViewUserDebtCommand``` and execute it.
+
+Step 3: ViewUserDebtCommand will check for the delimiter "/u". If it is not present, an exception is thrown. Else the command is executed.
+
+Step 4: The UserList is iterated through to find the User with the given [username]. If none exist, a UserNotFoundException is thrown.
+
+Step 5: `getBorrowTransactionsByUser(username)` is run. The TransactionList is iterated through to find Transactions in which said User is the Borrower. If User is Borrower, the Transaction is added to a new TransactionList, which is then returned.
+
+Step 6: `getTotalMoneyTransacted()` is run on the new TransactionList. The moneyTransacted in each of the Transactions in the new TransactionList is summed together to give a return value.
+
+Step 7: The total User debt is printed by `Ui.printResponse()`.
+
+The following sequence diagram models the operation: PENDING DIAGRAM
+
 ### 4.2. Item-related Features
 
 #### 4.2.1. Add an item
@@ -357,7 +395,7 @@ The following sequence diagram shows how the sort items operation works:
 
 ### 4.2.7. List categories
 
->This feature allow users to view categories that can be assigned to items and their index after executing the command ```list-categories```.
+>This feature allows users to view categories that can be assigned to items and their index after executing the command ```list-categories```.
 
 Given below is an example usage scenario and how the command mechanism behaves at each step.
 
@@ -371,7 +409,7 @@ Step 4: The ```executeCommand()``` of ExitCommand returns false, so Duke will re
 
 ### 4.2.8. Find Items by Keyword
 
->This feature allow users to find items through the command ```find-item```.
+>This feature allows users to find items through the command ```find-item```.
 
 Given below is an example usage scenario and how the command mechanism behaves at each step.
 
@@ -390,7 +428,7 @@ The following sequence diagram models the operation:
 
 #### 4.3.1. Add a Transaction
 
-> This feature allows user to add a new transaction to their list and upon successful adding, a confirmation response about the new transaction will be sent from Ui to user
+> This feature allows users to add a new transaction to their list and upon successful adding, a confirmation response about the new transaction will be sent from Ui to user
 
 Given below is an example usage scenario and how the command mechanism behaves at each step.
 
@@ -503,7 +541,24 @@ The following sequence diagram models the operation:
 ![updateTransactionSequence](images/UpdateTransactionSequence.png)
 
 
-**...To be updated(List transaction by User)**
+#### 4.3.7. List Transaction By User
+
+> This feature allows the user to list all the Transactions in which a given User is a Borrower. 
+> - `view-tx-by-user /u [username]`: Lists down all the transactions that have been completed.
+
+Given below is an example usage scenario and how the command mechanism behaves at each step.
+
+Step 1: The user types in the command in the command line. The CommandParser class checks if the command is valid through the createCommand() method, and either throws an exception, or forwards the input to `ViewTransactionsByUserCommand` class to be processed.
+
+Step 2: `ViewTransactionsByUserCommand::executeCommand` checks if the delimiters ('u') are present in the user input with the `getArgs()` method. If argument not present, an exception will be thrown.
+
+Step 3: If argument is present, it then checks if the User specified exists/ is valid with `ViewTransactionsByUserCommand::isValidUser` . A UserNotFoundException is thrown otherwise.
+
+Step 4: If User is found, it then delegates to `TransactionList::getBorrowTransactionsByUser` which finds the transactions in which a given User is Borrower and returns a TransactionList containing all of them.
+
+Step 5: The returned TransactionList printed to the User via `Ui.printResponse()`
+
+The following sequence diagram models the operation:
 
 ### 4.4. Help Command
 
@@ -567,33 +622,10 @@ staying in a particular community/hall to loan or borrow items they wish to shar
 | v2.0    | manager  | update price                | change the price a user decides to loan his item for          |
 | v2.0    | manager  | update transaction          | change the number of days a user decides to loan his item for |
 | v2.0    | manager  | store my database           | maintain the database without losing my data                  |
-| v2.0    | manager  | view a user's items         | view the items that belong to a specific user                 |
+| v2.1    | manager  | view a user's transactions  | view the transactions in which a user is a borrower           |
+| v2.1    | manager  | view a user's debt          | see how much a user has to pay for the items he has borrowed  |
+| v2.1    | manager  | view a user's profit        | see how much a user has earned for items he has lent          |
 
-
-Feature: Find Item/ User by keyword.
-
-The FindByKeyword feature is mainly facilitated by the classes ItemList and UserList. With this feature, users can search for and easily view all Users/Items that match the keyword they enter. The exact commands to be entered by the user are as follows:
-
-find-item /k [keyword] - prints a list of items which match or contain the given keyword
-find-user /k [keyword] - prints a list of users which match or contain the given keyword
-
-The operations and functions implemented are as follows:
-
-FindItemCommand(parts, itemList)
-
-FindUserCommand(parts, userList)
-
-ItemList.getItemsByKeyword(keyword, itemList)
-
-UserList.getUsersByKeyword(keyword,userList)
-
-Given below is an example usage scenario and how the FindItem mechanism works at each step. There are 5 Items in the ItemList, as shown in the object diagram below.
-
-![Figure: ItemList Object Diagram](https://raw.githubusercontent.com/AY2223S1-CS2113-W12-1/tp/master/docs/diagrams/ItemList.png)
-
-The user enters the following command: “find-item /k Book”. In this case, the keyword is book. The entire ItemList is iterated through, and an ItemList containing all the Items which contain the keyword is returned. 3 Items contain the keyword “Book”, hence these 3 items are returned by the function ItemList.getItemsByKeyword. This ItemList is then converted to a String via the method ItemList.toString, and printed by Ui.printResponse so that the user is able to see all the matching Items. The sequence diagram is shown below.
-
-![Figure: FindItem Sequence Diagram](https://raw.githubusercontent.com/AY2223S1-CS2113-W12-1/tp/master/docs/diagrams/FindItemSequence.png)
 
 ## 7. Non-Functional Requirements
 

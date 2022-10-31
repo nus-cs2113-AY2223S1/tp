@@ -3,6 +3,7 @@ package seedu.duke.transaction;
 import seedu.duke.exception.InvalidTransactionException;
 import seedu.duke.exception.TransactionNotFoundException;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -123,8 +124,18 @@ public class TransactionList {
         return returnList;
     }
 
+    public TransactionList getLendTransactionsByUser(String userName) {
+        TransactionList returnList = new TransactionList();
+        for (Transaction transaction : this.transactionList) {
+            if (transaction.getLender().equals(userName)) {
+                returnList.addTransaction(transaction);
+            }
+        }
+        return returnList;
+    }
+
     public double getTotalMoneyTransacted() {
-        int totalProfit = 0;
+        double totalProfit = 0;
         for (Transaction transaction : transactionList) {
             totalProfit += transaction.getMoneyTransacted();
         }
