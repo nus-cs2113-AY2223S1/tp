@@ -1,6 +1,5 @@
 package seedu.duke.user;
 
-import seedu.duke.exceptions.InvalidUniversityException;
 import seedu.duke.exceptions.InvalidUserCommandException;
 import seedu.duke.exceptions.TimetableNotFoundException;
 import seedu.duke.ui.Ui;
@@ -25,7 +24,7 @@ public class UserUniversityListManager {
     // we store the key as the PU name
     private HashMap<String, UserUniversityList> myManager;
 
-    public TimetableManager timetableManager;
+    public TimetableManager ttManager;
 
     private UserDeletedModules deletedModulesList = new UserDeletedModules();
 
@@ -33,13 +32,13 @@ public class UserUniversityListManager {
 
     public UserUniversityListManager() {
         this.myManager = new HashMap<String, UserUniversityList>();
-        this.timetableManager = UserStorageParser.getSavedTimetables();
+        this.ttManager = UserStorageParser.getSavedTimetables();
     }
 
     public UserUniversityListManager(String fileContent) throws IOException {
         try {
             myManager = UserStorageParser.convertFileContentIntoUniversityList(fileContent);
-            this.timetableManager = UserStorageParser.getSavedTimetables();
+            this.ttManager = UserStorageParser.getSavedTimetables();
         } catch (InvalidUserStorageFileException e) {
             Ui.printExceptionMessage(e);
             System.out.println("Creating new University List Manager");
@@ -59,7 +58,7 @@ public class UserUniversityListManager {
         } else {
             UserUniversityList newList = new UserUniversityList(input);
             myManager.put(input, newList);
-            timetableManager.createTimetable(input,false);
+            ttManager.createTimetable(input, false);
             logger.log(Level.FINER, "create new list for " + input);
             System.out.print(Ui.printPuListCreatedAcknowledgement(input));
         }
@@ -77,6 +76,7 @@ public class UserUniversityListManager {
             myManager.remove(inputSchool);
             logger.log(Level.FINER, "delete list for " + inputSchool);
             System.out.print(Ui.printPuListDeletedAcknowledgement(inputSchool));
+            ttManager.deleteTimetable(inputSchool);
         }
     }
 
@@ -102,8 +102,10 @@ public class UserUniversityListManager {
                     getUserUniversityList(inputSchool).getMyModules().getModuleByPuCode(puCode);
             deletedModulesList.addToDeletedModules(deletedModule);
             getUserUniversityList(inputSchool).deleteModuleByPuCode(puCode);
+            ttManager.getTimetableByUniversityName(inputSchool).deleteLessonByCode(puCode);
         } else {
-            throw new InvalidUserCommandException("No such university found");
+            throw new InvalidUserCommandException("No such university found in your university lists. "
+                    + "Please create a list for " + inputSchool + " first!");
         }
     }
 
@@ -207,11 +209,11 @@ public class UserUniversityListManager {
         return myManager.get(input);
     }
 
-    public TimetableManager getTimetableManager() {
-        return timetableManager;
+    public TimetableManager getTtManager() {
+        return ttManager;
     }
 
-    public void setTimetableManager(TimetableManager timetableManager) {
-        this.timetableManager = timetableManager;
+    public void setTtManager(TimetableManager ttManager) {
+        this.ttManager = ttManager;
     }
 }
