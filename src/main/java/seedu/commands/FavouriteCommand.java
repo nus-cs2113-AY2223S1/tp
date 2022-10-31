@@ -1,5 +1,7 @@
 package seedu.commands;
 
+import java.util.ArrayList;
+
 import seedu.data.Carpark;
 import seedu.data.CarparkList;
 import seedu.exception.DuplicateCarparkException;
@@ -51,14 +53,45 @@ public class FavouriteCommand extends Command {
                 }
                 return new CommandResult(content.trim());
             } else {
-                favourite.updateFavouriteList(carparkList);
-                favourite.writeFavouriteList();
-                Carpark result = carparkList.findCarpark(argument);
-                setFavourite(result.getCarparkId());
-                result.setFavourite(true);
-                return new CommandResult("Added Carpark " + argument + " to favourites!");
+                StringBuilder content = new StringBuilder();
+                ArrayList<String> validIDs = new ArrayList<>();
+                String[] words = argument.trim().split("\\s+");
+                boolean isValid = true;
+                boolean hasDuplicate = false;
+                for (String word : words) {
+                    if (carparkList.isCarparkValid(word)) {
+                        if (Favourite.getFavouriteList().stream().noneMatch(word::equalsIgnoreCase)
+                                && validIDs.stream().noneMatch(word::equalsIgnoreCase)) {
+                            Carpark result = carparkList.findCarpark(word);
+                            String carparkId = result.getCarparkId();
+                            validIDs.add(carparkId);
+                            content.append(carparkId).append(" ");
+                            result.setFavourite(true);
+                        } else {
+                            hasDuplicate = true;
+                        }
+                    } else {
+                        isValid = false;
+                    }
+                }
+                if (hasDuplicate) {
+                    Ui.printError(new DuplicateCarparkException());
+                }
+                if (!isValid) {
+                    Ui.print("Some values were invalid. Invalid values were skipped.\n");
+                }
+                try {
+                    setFavourite(validIDs);
+                } catch (DuplicateCarparkException e) {
+                    Ui.printError(e);
+                }
+                if (!validIDs.isEmpty()) {
+                    return new CommandResult("Added Carpark " + content + "to favourites!");
+                } else {
+                    return new CommandResult("Nothing to add to favourites!");
+                }
             }
-        } catch (NoCarparkFoundException | DuplicateCarparkException | NoFileFoundException e) {
+        } catch (NoCarparkFoundException | NoFileFoundException e) {
             return new CommandResult(e.getMessage());
         } catch (FileWriteException fileWriteException) {
             return new CommandResult("Error in setting " + argument + " as favourite.");
@@ -66,18 +99,24 @@ public class FavouriteCommand extends Command {
     }
 
     /**
-     * Inserts a carpark into the favourite list and writes it into the favouriteList.txt
+     * Inserts carparks into the favourite list and writes it into the favouriteList.txt
      *
-     * @param carparkId Carpark ID to favourite.
+     * @param carparkId Carpark IDs to favourite.
      * @throws FileWriteException        If unable to write to favourite.txt file.
      * @throws DuplicateCarparkException If carpark ID is already in favourites.
      */
-    public void setFavourite(String carparkId) throws FileWriteException, DuplicateCarparkException {
-        boolean containsSearchStr = Favourite.getFavouriteList().stream().anyMatch(carparkId::equalsIgnoreCase);
-        if (containsSearchStr) {
+    public void setFavourite(ArrayList<String> carparkId) throws FileWriteException, DuplicateCarparkException {
+        boolean hasDuplicate = false;
+        for (String id : carparkId) {
+            boolean containsSearchStr = Favourite.getFavouriteList().stream().anyMatch(id::equalsIgnoreCase);
+            if (containsSearchStr) {
+                hasDuplicate = true;
+            }
+            Favourite.getFavouriteList().add(id);
+        }
+        favourite.writeFavouriteList();
+        if (hasDuplicate) {
             throw new DuplicateCarparkException();
         }
-        Favourite.getFavouriteList().add(carparkId);
-        favourite.writeFavouriteList();
     }
 }
