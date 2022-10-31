@@ -79,22 +79,29 @@ public class Parser {
                 || commandWord.equalsIgnoreCase(ListCommand.COMMAND_WORD_SHORT)) {
             return prepareList(arguments);
         } else if (commandWord.equalsIgnoreCase(FilterCommand.COMMAND_WORD)
-                || commandWord.equalsIgnoreCase(FilterCommand.COMMAND_WORD_SHORT) {
+                || commandWord.equalsIgnoreCase(FilterCommand.COMMAND_WORD_SHORT)) {
+            if (arguments.contains("-")) {
+                String args = arguments.split("-", 0)[1];
+                String[] actualArgs = args.split(" ", 0);
+                String dashedCommand = actualArgs[0];
+                String actualArgument = actualArgs[1];
+                if (dashedCommand.equalsIgnoreCase("id")) {
+                    if (actualArgument.isEmpty()) {
+                        return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.FILTER_FORMAT);
+                    }
+                    return prepareFilterCarparkId(actualArgument);
+                } else if (dashedCommand.equalsIgnoreCase("add")
+                        || dashedCommand.equalsIgnoreCase("address")) {
+                    if (actualArgument.isEmpty()) {
+                        return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.FILTER_FORMAT);
+                    }
+                    return prepareFilterAddress(actualArgument);
+                }
+            }
             if (arguments.isEmpty()) {
                 return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.FILTER_FORMAT);
             }
-        } else if (commandWord.equalsIgnoreCase(FilterAddressCommand.COMMAND_WORD)
-                || commandWord.equalsIgnoreCase(FilterAddressCommand.COMMAND_WORD_SHORT)) {
-            if (arguments.isEmpty()) {
-                return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.FILTER_FORMAT);
-            }
-            return prepareFilterAddress(arguments);
-        } else if (commandWord.equalsIgnoreCase(FilterCarparkIdCommand.COMMAND_WORD)
-                || commandWord.equalsIgnoreCase(FilterCarparkIdCommand.COMMAND_WORD_SHORT)) {
-            if (arguments.isEmpty()) {
-                return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.FILTER_FORMAT);
-            }
-            return prepareFilterCarparkId(arguments);
+            return prepareFilter(arguments);
         } else if (commandWord.equalsIgnoreCase(UpdateCommand.COMMAND_WORD.trim())
                 || commandWord.equalsIgnoreCase(UpdateCommand.COMMAND_WORD_SHORT.trim())) {
             return prepareUpdate(arguments);
@@ -188,6 +195,11 @@ public class Parser {
         } catch (UnneededArgumentsException e) {
             return new InvalidCommand(e.getMessage());
         }
+    }
+
+    private Command prepareFilter(String arguments) {
+        Sentence searchQuery = new Sentence(arguments);
+        return new FilterCommand(carparkList, searchQuery);
     }
 
     /**
