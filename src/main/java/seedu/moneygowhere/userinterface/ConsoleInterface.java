@@ -1032,6 +1032,13 @@ public class ConsoleInterface {
                 recurringPayment.getCurrency(),
                 recurringPayment.getModeOfPayment()
         );
+
+        if (expenseManager.hasExpense(expense)) {
+            printErrorMessage(Messages.CONSOLE_ERROR_COMMAND_PAY_RECURRING_PAYMENT_DUPLICATE_EXPENSE);
+
+            return;
+        }
+
         expenseManager.addExpense(expense, localStorage);
 
         printInformationalMessage(convertExpenseToConsoleString(expense));
