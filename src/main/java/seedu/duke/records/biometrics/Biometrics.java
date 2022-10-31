@@ -6,9 +6,9 @@ import java.util.Arrays;
 
 public class Biometrics {
 
-    private final String[] GENDER_OPTIONS = new String[]{"male", "female", "others"};
-    private final int MAX_AGE = 120;
-    private final int MAX_HEIGHT = 300;
+    private static final String[] GENDER_OPTIONS = new String[]{"male", "female", "others"};
+    private static final int MAX_AGE = 120;
+    private static final int MAX_HEIGHT = 300;
 
     private int age;
     private String gender;

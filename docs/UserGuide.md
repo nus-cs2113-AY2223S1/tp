@@ -60,7 +60,7 @@ Format: `set biometrics /{age} /{gender} /{height} /{weight} /{fat percentage} /
 * gender can only be female, male or others
 * height should be in units of cm and cannot exceed 300cm
 * weight should be in units of kg and cannot exceed 400kg
-* fat percentage should be between 0% and 100%
+* fat percentage should be between 1% and 99%
 * activity level should be between 1 and 5
 
 Example of usage:

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class WeightAndFat extends Record {
 
     private static final int MAX_WEIGHT = 400;
-    private static final int MAX_FAT = 100;
+    private static final int MAX_FAT = 99;
     private int weight;
     private int fat;
     private LocalDate date;
@@ -50,7 +50,7 @@ public class WeightAndFat extends Record {
     }
 
     static void checkFat(int fat) throws IllegalValueException {
-        if (fat <= 0 || fat >= MAX_FAT) {
+        if (fat <= 0 || fat > MAX_FAT) {
             throw new IllegalValueException("Invalid fat percentage");
         }
     }
