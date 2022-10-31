@@ -121,7 +121,7 @@ public class Api {
                 result = asyncGetResponse(index).trim();
             } catch (ServerNotReadyApiException | UnknownResponseApiException e) {
                 e.setTryNumber(fetchTries);
-                ui.printError(e);
+                Ui.printError(e);
             } finally {
                 fetchTries--;
             }
@@ -166,7 +166,7 @@ public class Api {
 
         result += API_RESPONSE_TAIL;
 
-        ui.println(totalDataCount + " Parking Lot data received from LTA!");
+        Ui.println(totalDataCount + " Parking Lot data received from LTA!");
 
         storage.writeDataToFile(result);
     }
@@ -278,7 +278,7 @@ public class Api {
         } catch (NoFileFoundException e) {
             throw new NoFileFoundException("API key file is missing! Please check " + file + ".");
         } catch (EmptySecretFileException | FileWriteException e) {
-            ui.printError(e);
+            Ui.printError(e);
         }
     }
 

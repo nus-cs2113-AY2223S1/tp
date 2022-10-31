@@ -19,6 +19,7 @@ import seedu.exception.FileWriteException;
 import seedu.exception.NoFileFoundException;
 import seedu.exception.ParkingException;
 import seedu.files.parsing.LtaJsonWrapper;
+import seedu.ui.Ui;
 
 /**
  * Deals with reading from files
@@ -34,7 +35,14 @@ public class FileReader {
     public static List<Carpark> loadLtaJson(Path filepath, Path filepathBackup)
             throws NoFileFoundException, FileWriteException {
         try {
-            return getCarparks(filepath);
+            List<Carpark> carparks = getCarparks(filepath);
+            if (filepath == CommonFiles.LTA_BACKUP_FILE_PATH && filepathBackup == CommonFiles.LTA_BACKUP_FILE_PATH) {
+                // Backup file timestamp
+                for (Carpark carpark : carparks) {
+                    carpark.setLastUpdated("24-10-2022 16:06:09");
+                }
+            }
+            return carparks;
         } catch (IOException e) {
             System.out.println("No file was found, or invalid format at " + filepath + ". Trying the backup:");
             try {
@@ -119,7 +127,8 @@ public class FileReader {
             throws FileWriteException, NoFileFoundException {
         try {
             return new CarparkList(readStringFromTxt(filePath, directoryPath, true));
-        } catch (ParkingException | ArrayIndexOutOfBoundsException e) {
+        } catch (ParkingException e) {
+            Ui.printError(e);
             return new CarparkList(CommonFiles.LTA_BACKUP_FILE_PATH, CommonFiles.LTA_BACKUP_FILE_PATH);
         }
     }
