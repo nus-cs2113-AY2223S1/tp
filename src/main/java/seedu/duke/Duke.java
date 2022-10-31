@@ -17,6 +17,9 @@ import seedu.duke.user.UserList;
 
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_FILES_ILLEGALLY_DELETED;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_TO_FIX_FILES;
+import static seedu.duke.logger.LoggerMessages.LOG_EXECUTE_SUCCESSFULLY;
+import static seedu.duke.logger.LoggerMessages.LOG_EXIT_DUKE;
+import static seedu.duke.logger.LoggerMessages.LOG_RUN_DUKE;
 import static seedu.duke.storage.FilePath.ITEM_FILE_PATH;
 import static seedu.duke.storage.FilePath.TRANSACTION_FILE_PATH;
 import static seedu.duke.storage.FilePath.USER_FILE_PATH;
@@ -115,6 +118,7 @@ public class Duke {
     public void run() {
         if (!isLastCommand) {
             Ui.printGreeting();
+            dukeLogger.info(LOG_RUN_DUKE);
         }
         while (!isLastCommand) {
             try {
@@ -123,13 +127,13 @@ public class Duke {
                         CommandParser.createCommand(input, userList, itemList, transactionList);
                 isLastCommand = command.executeCommand();
                 writeDataToFile();
-                dukeLogger.info("Command executes successfully");
+                dukeLogger.info(LOG_EXECUTE_SUCCESSFULLY);
             } catch (Exception e) {
                 Ui.printErrorMessage(e.getMessage());
                 dukeLogger.warning(e.getMessage());
             }
         }
-        dukeLogger.info("Exit Duke");
+        dukeLogger.info(LOG_EXIT_DUKE);
     }
 
     /**
