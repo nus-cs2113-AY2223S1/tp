@@ -1,13 +1,11 @@
 package seedu.duke.commands;
 
-import seedu.duke.Timetable;
 import seedu.duke.UI;
 import seedu.duke.commands.nusmodsapi.Nusmods;
-import seedu.duke.module.Module;
+
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
+
 
 public class CommandInfoModule {
 

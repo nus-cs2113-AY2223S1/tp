@@ -9,7 +9,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ModuleManager {
@@ -53,6 +52,8 @@ public class ModuleManager {
             String response = CommandAddModule.runAddModuleProcedure(currSemester, moduleCode);
             checkForErrors(response);
         }
+
+        scanner.close();
     }
 
     private static void checkForErrors(String response) throws Exceptions.FileLoadException {

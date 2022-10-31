@@ -9,7 +9,6 @@ import java.util.logging.LogManager;
 import java.util.logging.FileHandler;
 import java.util.logging.ConsoleHandler;
 
-import seedu.duke.commands.nusmodsapi.Nusmods;
 import seedu.duke.data.DataManager;
 
 public class Duke {

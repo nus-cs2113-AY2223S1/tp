@@ -83,43 +83,6 @@ public class Module {
         return temp;
     }
 
-    private List<Lesson> matchLessonTypes(LinkedHashMap<String, ArrayList<Lesson>> classifiedLessons) {
-        List<Lesson> temp = new ArrayList<>();
-        for (ArrayList<Lesson> list : classifiedLessons.values()) {
-            for (int i = 0; i < checkDuplicateLessonNumbers(list); i++) {
-                String tempLessonType = list.get(0).getLessonType();
-                addToAttendingList(temp, tempLessonType);
-            }
-        }
-        return temp;
-    }
-
-    private int checkDuplicateLessonNumbers(ArrayList<Lesson> list) {
-        LinkedHashMap<String, Integer> checker = new LinkedHashMap<>();
-
-        for (Lesson lesson : list) {
-            String classNum = lesson.getClassNumber();
-            if (!checker.containsKey(classNum)) {
-                checker.put(classNum, 1);
-            } else {
-                int newCount = checker.get(classNum) + 1;
-                checker.remove(classNum);
-                checker.put(classNum, newCount);
-            }
-        }
-        return getHighestCount(checker);
-    }
-
-    private int getHighestCount(LinkedHashMap<String, Integer> checker) {
-        int highestCount = 0;
-        for (Integer count : checker.values()) {
-            if (count > highestCount) {
-                highestCount = count;
-            }
-        }
-        return highestCount;
-    }
-
     private void addUnknownToAttendingList(HashMap<String, ArrayList<Lesson>> temp, String lessonType, int size) {
         ArrayList<Lesson> classes = new ArrayList<Lesson>();
         String day = "Undetermined Day";
@@ -130,15 +93,6 @@ public class Module {
             classes.add(new Lesson(day, startTime, endTime, lessonType, classNumber, moduleCode));
         }
         temp.put(classNumber, classes);
-    }
-
-    private void addToAttendingList(List<Lesson> temp, String lessonType) {
-        String day = "Undetermined Day";
-        String startTime = "Undetermined";
-        String endTime = "Undetermined";
-        String classNumber = "NA";
-        Lesson tempLesson = new Lesson(day, startTime, endTime, lessonType, classNumber, moduleCode);
-        temp.add(tempLesson);
     }
 
     public String getModuleDetails() {
@@ -305,14 +259,6 @@ public class Module {
         }
     }
 
-    public void replaceAttending(Lesson newLesson, Integer indexForLesson) {
-        Lesson oldLesson = attending.get(indexForLesson);
-        Timetable.timetableDict.deleteLesson(oldLesson);
-        attending.set(indexForLesson, newLesson);
-        Timetable.timetableDict.addLesson(newLesson);
-    }
-
-
     public void replaceAttending(Lesson newLesson) {
         int indexToSet = 0;
         List<String> newLessonInfo = newLesson.getInfo(); 
@@ -412,7 +358,6 @@ public class Module {
         List<String> attendingLessonTypes = new ArrayList<String>();
         for (Lesson lesson : attending) {
             attendingLessonTypes.add(lesson.getLessonType());
-            // System.out.println(lesson.getLessonType());
         }
         return attendingLessonTypes;
     }

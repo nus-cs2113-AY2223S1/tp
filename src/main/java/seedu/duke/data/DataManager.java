@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 
 import seedu.duke.Exceptions;
 import seedu.duke.Timetable;
-import seedu.duke.module.Module;
 
 public class DataManager {
     protected static String currSemester;
