@@ -292,7 +292,7 @@ public class CommandPrintTimetableVertical {
             write(lowLine.toString(), endRowIndex, col);
             writeTopBoarder(start, upLine, col);
         } catch (ArrayIndexOutOfBoundsException e) {
-        UI.printResponse("index out of bounds when writing boarder");
+            UI.printResponse("index out of bounds when writing boarder");
         }
 
     }
@@ -410,7 +410,7 @@ public class CommandPrintTimetableVertical {
 
     private static ArrayList<Integer[]> createClashList(Stack<Integer[]> stack) {
         ArrayList<Integer[]> clashSlotList = new ArrayList<>();
-        while(!stack.isEmpty()) {
+        while (!stack.isEmpty()) {
             clashSlotList.add(stack.pop());
         }
         return clashSlotList;
