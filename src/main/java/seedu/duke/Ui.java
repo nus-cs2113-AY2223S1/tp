@@ -5,7 +5,7 @@ import java.util.logging.Logger;
 import java.util.logging.Level;
 
 public class Ui {
-    private final Logger logger = Logger.getLogger("UILog");
+    private static Logger logger = Logger.getLogger("DukeLogger");
     final String exitTrigger = "bye";
     protected boolean isExit;
     

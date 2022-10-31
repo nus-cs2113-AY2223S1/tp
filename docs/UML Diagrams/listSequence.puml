@@ -17,6 +17,7 @@ activate "executor:\nListCommand"
 deactivate "executor:\nListCommand"
 
 Parser -> "executor:\nListCommand" : execute()
+activate "executor:\nListCommand"
 
     loop For each review
         alt Review is a Movie
@@ -33,6 +34,7 @@ Parser -> "executor:\nListCommand" : execute()
         end
     end
 "executor:\nListCommand" --> Parser: output : String
+deactivate "executor:\nListCommand"
 
 Parser -> Ui : print(output)
 activate Ui

@@ -4,7 +4,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class TvShow extends Media {
-    private static Logger logger = Logger.getLogger("tvLogger");
+    private static Logger logger = Logger.getLogger("DukeLogger");
     public String site;
     public String dateWatched;
 

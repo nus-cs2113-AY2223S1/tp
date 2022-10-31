@@ -24,7 +24,7 @@ public class Parser {
     private ReviewList mediaList;
 
     //@@author naz019
-    private static Logger logger = Logger.getLogger("ParserClass");
+    private static Logger logger = Logger.getLogger("DukeLogger");
 
     public Parser(ReviewList reviewList) {
         this.mediaList = reviewList;
@@ -35,66 +35,80 @@ public class Parser {
         return result;
     }
 
-    public void processUserInput(String userInput) {
-        //@@author indraneelrp
-        final String listCommand = "list";
-        final String addCommand = "add";
-        final String deleteCommand = "delete";
-        final String clearCommand = "clear";
-        final String endCommand = "bye";
-        final String favouriteCommand = "favourite";
-        final String sortCommand = "sort";
-        final String findCommand = "find";
-        final String NT = "";
-        
-        String[] parsedCommand = getCommandWord(userInput);
-
-        //@@author naz019
-        assert parsedCommand[0] != null : "words[0] is supposed to contain user command";
-
-        //@@author indraneelrp
-        switch (parsedCommand[0]) {
-        case endCommand:
-            break;
-            
-        case listCommand:
-            executeList();
-            break;
-    
-        case addCommand:
-            executeAdd(userInput);
-            break;
-    
-        case deleteCommand:
-            executeDelete(parsedCommand);
-            break;
-        
-        case clearCommand:
-            executeClear();
-            break;
-
-        case favouriteCommand:
-            executeFavourite(parsedCommand);
-            break;
-
-        case findCommand:
-            executeFind(parsedCommand);
-            break;
-
-        case sortCommand:
-            executeSort(parsedCommand);
-            break;
-
-        case NT:
-        
-        default:
-            logger.log(Level.WARNING, "An unrecognised command was given by the user.");
-            System.out.println("Unrecognised command");
-            break;
+    public void checkIllegalCharacter(String userInput) throws DukeException {
+        if (userInput.contains("|")) {
+            throw new DukeException();
         }
     }
 
-    //@@author naz019
+    public void processUserInput(String userInput) {
+        try {
+            checkIllegalCharacter(userInput);
+            //@@author indraneelrp
+            final String listCommand = "list";
+            final String addCommand = "add";
+            final String deleteCommand = "delete";
+            final String clearCommand = "clear";
+            final String endCommand = "bye";
+            final String favouriteCommand = "favourite";
+            final String sortCommand = "sort";
+            final String findCommand = "find";
+            final String NT = "";
+
+            String[] parsedCommand = getCommandWord(userInput);
+
+            //@@author naz019
+            assert parsedCommand[0] != null : "words[0] is supposed to contain user command";
+
+            //@@author indraneelrp
+            switch (parsedCommand[0]) {
+            case endCommand:
+                break;
+
+            case listCommand:
+                executeList();
+                break;
+
+            case addCommand:
+                executeAdd(userInput);
+                break;
+
+            case deleteCommand:
+                executeDelete(parsedCommand);
+                break;
+
+            case clearCommand:
+                executeClear();
+                break;
+
+            case favouriteCommand:
+                executeFavourite(parsedCommand);
+                break;
+
+            case findCommand:
+                executeFind(parsedCommand);
+                break;
+
+            case sortCommand:
+                executeSort(parsedCommand);
+                break;
+
+            case NT:
+
+            default:
+                logger.log(Level.WARNING, "An unrecognised command was given by the user.");
+                Ui.print("Unrecognised command");
+                break;
+            }
+        } catch (DukeException e) {
+            Ui.print("Illegal character entered!");
+        }
+    }
+
+    //@@author matthewphua
+    /**
+     * Executes the find action by creating a find object.
+     */
     public void executeFind(String[] words) {
         try {
             String keyWord = words[1];
@@ -103,10 +117,11 @@ public class Parser {
             Ui.print(output);
             logger.log(Level.INFO, "\n\tFind command executed");
         } catch (Exception e) {
-            System.out.println("\nIncomplete or wrongly formatted command, try again.\n");
+            Ui.print("\nIncomplete or wrongly formatted command, try again.\n");
         }
     }
 
+    //@@author naz019
     public void executeSort(String[] words) {
         try {
             executor = new SortCommand(mediaList, words);
@@ -114,7 +129,7 @@ public class Parser {
             Ui.print(output);
             logger.log(Level.INFO, "\n\tSort command executed");
         } catch (Exception e) {
-            System.out.println("\nIncomplete or wrongly formatted command, try again.\n");
+            Ui.print("\nIncomplete or wrongly formatted command, try again.\n");
         }
     }
 
@@ -125,7 +140,7 @@ public class Parser {
             Ui.print(output);
             logger.log(Level.INFO, "\n\tFavourites command executed");
         } catch (Exception e) {
-            System.out.println("\nIncomplete or wrongly formatted command, try again.\n");
+            Ui.print("\nIncomplete or wrongly formatted command, try again.\n");
         }
     }
 
@@ -139,13 +154,24 @@ public class Parser {
 
     //@@author redders7
     public void addMedia(String[] fields, Integer spacingType) {
-        String title = fields[1].substring(spacingType);
-        double rating = Double.parseDouble(fields[2].substring(ratingSpacing));
-        String date = fields[3].substring(dateSpacing);
-        String genre = fields[4].substring(genreSpacing);
+        String title;
+        double rating;
+        String date;
+        String genre;
         Media toAdd;
-
-        String[] dateFields = date.split("-");
+        String[] dateFields;
+        
+        try {
+            title = fields[1].substring(spacingType);
+            rating = Double.parseDouble(fields[2].substring(ratingSpacing));
+            date = fields[3].substring(dateSpacing);
+            dateFields = date.split("-");
+            genre = fields[4].substring(genreSpacing);
+        } catch (IndexOutOfBoundsException | IllegalArgumentException e) {
+            logger.log(Level.WARNING, "\n\tAdd command failed");
+            Ui.print("Ensure that input format and number of arguments is correct.");
+            return;
+        }
         try {
             if (!isValidDate(dateFields)) {
                 throw new Exception();
@@ -162,7 +188,8 @@ public class Parser {
             Ui.print(output);
             logger.log(Level.INFO, "\n\tAdd command executed");
         } catch (Exception e) {
-            System.out.println("Invalid date format");
+            logger.log(Level.WARNING, "\n\tAdd command failed");
+            Ui.print("Invalid date format");
         }
     }
 
@@ -186,20 +213,31 @@ public class Parser {
     public void executeAdd(String userInput) {
         String[] reviewFields = userInput.split("/");
         try {
+            //checks the number of / instances to ensure that user does not add extra / which messes up parsing
+            int slashInstances = userInput.length() - userInput.replace("/", "").length();
             if (userInput.contains(movieKeyword)) {
+                if (slashInstances != 4) {
+                    throw new DukeException();
+                }
                 addMedia(reviewFields, movieSpacing);
             } else if (userInput.contains(tvKeyword)) {
+                if (slashInstances != 5) {
+                    throw new DukeException();
+                }
                 addMedia(reviewFields, tvSpacing);
             } else {
                 throw new DukeException();
             }
         } catch (DukeException e) {
             logger.log(Level.WARNING, "\n\tAdd command failed");
-            System.out.println("\n" + e.getMessage());
+            Ui.print("Ensure that input format and number of arguments is correct.");
         }
     }
 
-    //@@author matthewphua
+    //@@author indraneelrp
+    /**
+     * Executes the clear action by creating a clear object.
+     */
     public void executeClear() {
         executor = new ClearCommand(mediaList);
         String output = executor.execute();
@@ -208,6 +246,9 @@ public class Parser {
     }
 
     //@@author matthewphua
+    /**
+     * Executes the delete action by creating a delete object.
+     */
     public void executeDelete(String[] words) {
         try {
             if (words.length != 3) {
@@ -231,7 +272,7 @@ public class Parser {
             }
         } catch (DukeException e) {
             logger.log(Level.WARNING, "\n\tDelete command failed");
-            System.out.println("\n" + e.getMessage());
+            Ui.print("\n" + e.getMessage());
         }
 
     }

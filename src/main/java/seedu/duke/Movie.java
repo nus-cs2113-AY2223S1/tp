@@ -9,7 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Movie extends Media {
-    private static Logger logger = Logger.getLogger("MovieLogger");
+    private static Logger logger = Logger.getLogger("DukeLogger");
 
     /**.
      * Creates a new movie review
