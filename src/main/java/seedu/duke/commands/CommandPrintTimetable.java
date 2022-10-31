@@ -9,8 +9,8 @@ import java.util.Objects;
 
 public class CommandPrintTimetable {
 
-    public static final String blankTimeSlot = "______|";
-    public static final String clashedTimeSlot = "XXXXXX|";
+    public static final String blankTimeSlot = "_______|";
+    public static final String clashedTimeSlot = "XXXXXXX|";
 
     public static final String[] daysInWeek = {"MON |", "TUE |", "WED |", "THU |", "FRI |"};
 
@@ -40,7 +40,7 @@ public class CommandPrintTimetable {
                 timeline[info[0]][i] = clashedTimeSlot;
                 continue;
             }
-            timeline[info[0]][i] = name.substring(0, Math.min(name.length(), 6)) + "|";
+            timeline[info[0]][i] = name.substring(0, Math.min(name.length(), 7)) + "|";
         }
     }
 

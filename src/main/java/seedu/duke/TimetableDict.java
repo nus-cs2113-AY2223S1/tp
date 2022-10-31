@@ -53,6 +53,32 @@ public class TimetableDict {
         }
     }
 
+    public void addClass(List<Lesson> newClass) {
+        for (Lesson lesson : newClass) {
+            String startTime = lesson.getStartTime();
+            String endTime = lesson.getEndTime();
+            String day = lesson.getDay();
+            boolean isLessonTime = false;
+
+            if (day.equals("Undetermined Day")) {
+                return;
+            }
+
+            LinkedHashMap<String, Lesson> dayMap = timetable.get(day);
+            for (String hour : dayMap.keySet()) {
+                if (!isLessonTime && startTime.equals(hour)) {
+                    isLessonTime = true;
+                }
+                if (isLessonTime && endTime.equals(hour)) {
+                    break;
+                }
+                if (isLessonTime) {
+                    dayMap.replace(hour, lesson);
+                }
+            }
+        }
+    }
+
     /*
      * deletes given lesson from timetable
      */
@@ -203,28 +229,27 @@ public class TimetableDict {
      * HELPER FUNCTIONS FOR OUTER ALLOCATION ALGORITHM
      */
 
-    //
-    private List<List<List<Lesson>>> getPermutationsByMod(List<Module> listOfModules) {
-        List<List<List<Lesson>>> permutationsByMod = new ArrayList<>();
+    private List<List<List<List<Lesson>>>> getPermutationsByMod(List<Module> listOfModules) {
+        List<List<List<List<Lesson>>>> permutationsByMod = new ArrayList<>();
         for (Module module : listOfModules) {
-            List<List<Lesson>> possiblePermutations = getPossibleLessonPermutations(module);
+            List<List<List<Lesson>>> possiblePermutations = getPossibleClassPermutations(module);
             permutationsByMod.add(possiblePermutations);
         }
         return permutationsByMod;
     }
 
     //get number of permutations
-    private int getTotalNumberOfPermutations(List<List<List<Lesson>>> permutationsByMod) {
+    private int getTotalNumberOfPermutations(List<List<List<List<Lesson>>>> permutationsByMod) {
         int numOfPermutations = 1;
-        for (List<List<Lesson>> permutationsForCurrMod : permutationsByMod) {
+        for (List<List<List<Lesson>>> permutationsForCurrMod : permutationsByMod) {
             numOfPermutations *= permutationsForCurrMod.size();
         }
         return numOfPermutations;
     }
 
     //generate all permutations
-    private List<List<Lesson>> getAllPermutations(List<Module> listOfModules, int numOfPermutations, List<List<List<Lesson>>> permutationsByMod) {
-        List<List<Lesson>> allPermutations = new ArrayList<>();
+    private List<List<List<Lesson>>> getAllPermutations(List<Module> listOfModules, int numOfPermutations, List<List<List<List<Lesson>>>> permutationsByMod) {
+        List<List<List<Lesson>>> allPermutations = new ArrayList<>();
         for (int permutationIndex = 0; permutationIndex < numOfPermutations; permutationIndex++) {
             allPermutations.add(new ArrayList<>());
         }
@@ -232,7 +257,7 @@ public class TimetableDict {
         for (int moduleIndex = 0; moduleIndex < listOfModules.size(); moduleIndex++) {
             int permutationIndexForCurrMod = 0;
             for (int i = 0; i < numOfPermutations; i++) {
-                List<Lesson> currPermutation = allPermutations.get(i);
+                List<List<Lesson>> currPermutation = allPermutations.get(i);
                 currPermutation.addAll(permutationsByMod.get(moduleIndex).get(permutationIndexForCurrMod));
                 if ((i + 1) % (numOfPermutations / permutationsByMod.get(moduleIndex).size()) == 0) { 
                     permutationIndexForCurrMod++;
@@ -244,37 +269,41 @@ public class TimetableDict {
     }
 
     //check for number of clashes in permutation
-    private int getNumOfClashes(List<Lesson> lessons) {
+    private int getNumOfClashes(List<List<Lesson>> classes) {
         TimetableDict tempTimetable = new TimetableDict();
         int numOfClashes = 0;
-        for (Lesson lesson : lessons) {
-            if (checkClash(tempTimetable, lesson) == 1) {
-                numOfClashes++;
-                continue;
+        for (List<Lesson> currClass : classes) {
+            for (Lesson lesson : currClass) {
+                if (checkClash(tempTimetable, lesson) == 1) {
+                    numOfClashes++;
+                    continue;
+                }
             }
-            tempTimetable.addLesson(lesson);
+            tempTimetable.addClass(currClass);
         }
         return numOfClashes;
     }
 
+    //Main allocation algorithm
     public String allocateModules() {
         String resultString = "Sorry we were unable to allocate timings for these modules due to timetable clashes:\n";
 
         List<Module> listOfModules = Timetable.getListOfModules();
-        List<List<List<Lesson>>> permutationsByMod = getPermutationsByMod(listOfModules);
+        List<List<List<List<Lesson>>>> permutationsByMod = getPermutationsByMod(listOfModules);
         int numOfPermutations = getTotalNumberOfPermutations(permutationsByMod);
-        List<List<Lesson>> allPermutations = getAllPermutations(listOfModules, numOfPermutations, permutationsByMod);
+        List<List<List<Lesson>>> allPermutations = getAllPermutations(listOfModules, numOfPermutations, permutationsByMod);
 
-        /*
-         * go thru all permutations, check num of clashes for every permutation
-         * add permutation to ordered hashmap where:
-         * key = num of clashes
-         * entry = permutation
-         */
-        TreeMap<Integer, List<Lesson>> permutationsByClashes = new TreeMap<Integer, List<Lesson>>();
-        for (List<Lesson> permutation : allPermutations) {
+        if (numOfPermutations == 0) {
+            return "Sorry you have no modules to allocate!";
+        }
+
+        int lowestNumOfClashes = 999;
+        List<List<Lesson>> permutationWithLeastClashes = new ArrayList<>();
+        for (List<List<Lesson>> permutation : allPermutations) {
             int numOfClashes = getNumOfClashes(permutation);
-            permutationsByClashes.put(numOfClashes, permutation);
+            if (numOfClashes < lowestNumOfClashes) {
+                permutationWithLeastClashes = permutation;
+            }
             if (numOfClashes == 0) {
                 break;
             }
@@ -282,14 +311,15 @@ public class TimetableDict {
 
         //Adds all lessons in permutation with least clashes
         System.out.println("------ FINAL PERMUTATION -------");
-        List<Lesson> permutationWithLeastClashes = permutationsByClashes.get(permutationsByClashes.firstKey()); 
         int unallocated = 0;
-        for (Lesson lesson : permutationWithLeastClashes) {
-            System.out.println(lesson.getModuleCode() + "|" + lesson.getLessonType() + "|" + lesson.getDay() + "|" + lesson.getStartTime() + "-" + lesson.getEndTime());
-            Module module = Timetable.getModuleByCode(lesson.getModuleCode());
-            if (checkClash(Timetable.timetableDict, lesson) == 0) {
-                module.replaceAttending(lesson);
-            } 
+        for (List<Lesson> currClass : permutationWithLeastClashes) {
+            for (Lesson lesson : currClass) {
+                System.out.println(lesson.getModuleCode() + "|" + lesson.getLessonType() + "|" + lesson.getDay() + "|" + lesson.getStartTime() + "-" + lesson.getEndTime());
+                Module module = Timetable.getModuleByCode(lesson.getModuleCode());
+                if (checkClash(Timetable.timetableDict, lesson) == 0) {
+                    module.replaceAttending(lesson);
+                } 
+            }
         }
 
         //Prints what has not been allocated
@@ -302,6 +332,7 @@ public class TimetableDict {
             }
         }
 
+        //End of function
         if (unallocated != 0) {
             resultString += "Please rearrange some of your modules and try again!\n";
             return resultString;
@@ -310,55 +341,54 @@ public class TimetableDict {
         }
     } 
 
-    private int getNumberOfLessonPermutations (List<Integer> numOfLessonsPerType) {
+    /*
+     * Helper functions for lesson permutation generation
+     */
+    private int getNumberOfClassPermutations (List<Integer> numOfClassesPerType) {
         int numOfPermutations = 1;
-        for (int numOfLessons : numOfLessonsPerType) {
+        for (int numOfLessons : numOfClassesPerType) {
             numOfPermutations *= numOfLessons;
         }
         return numOfPermutations;
     }
 
-    private List<List<Lesson>> generateLessonPermutations(List<Integer> numOfLessonsPerType, List<String> lessonTypes, int numOfPermutations, Module module) {
-        LinkedHashMap<String, ArrayList<Lesson>> classifiedLessons = module.getClassifiedLessons();
-        List<List<Lesson>> result = new ArrayList<>();
+    private List<List<List<Lesson>>> generateLessonPermutations(List<Integer> numOfClassesPerType, List<String> lessonTypes, int numOfPermutations, Module module) {
+        LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>> lessonMap = module.getLessonMap();
+        List<List<List<Lesson>>> result = new ArrayList<>();
+        int numOfLessonTypes = lessonTypes.size();
 
         //setting all empty lists
         for (int permutationIndex = 0; permutationIndex < numOfPermutations; permutationIndex++) {
-            result.add(new ArrayList<Lesson>());
+            result.add(new ArrayList<>());
         }
 
-        for (int lessonTypeIndex = 0; lessonTypeIndex < numOfLessonsPerType.size(); lessonTypeIndex++) {
-            int lessonIndex = 0;
+        for (int lessonTypeIndex = 0; lessonTypeIndex < numOfLessonTypes; lessonTypeIndex++) {
+            int classNumberIndex = 0;
             String currLessonType = lessonTypes.get(lessonTypeIndex);
-            List<Lesson> currLessonTypeLessons = classifiedLessons.get(currLessonType);
-            Lesson lesson = currLessonTypeLessons.get(lessonIndex);
-            int numOfLessons = numOfLessonsPerType.get(lessonTypeIndex);
+            LinkedHashMap<String, ArrayList<Lesson>> currLessonTypeClasses = lessonMap.get(currLessonType);
+            List<String> classNumbers = new ArrayList<String>(lessonMap.get(currLessonType).keySet());
+            int numOfClasses = numOfClassesPerType.get(lessonTypeIndex);
 
             //if lessonType is already attended
             if (module.checkLessonTypeAttended(currLessonType)) { 
-                for (Lesson attendingLesson : module.getAttendingList()) {
-                    lesson = attendingLesson;
-                    if (attendingLesson.getLessonType().equals(currLessonType)) {
-                        //if got 2 of the same kind of lesson, skips to the one which hasnt been set
-                        if (result.get(0).contains(attendingLesson)) {
-                            continue;
-                        }
-                        //assign to all permutations
-                        for (int permutationIndex = 0; permutationIndex < numOfPermutations; permutationIndex++) {
-                            List<Lesson> currPermutation = result.get(permutationIndex);
-                            currPermutation.add(attendingLesson);
-                        }
-                        break;
-                    }
+                List<Lesson> attendingClass = module.getClassFromAttendingMap(currLessonType);
+                //assign to all permutations
+                // System.out.println("attending class added (" + currLessonType + "|" + attendingClass.get(0).getClassNumber() + ")");
+                for (int permutationIndex = 0; permutationIndex < numOfPermutations; permutationIndex++) {
+                    List<List<Lesson>> currPermutation = result.get(permutationIndex);
+                    currPermutation.add(attendingClass);
                 }
             //not yet attended
             } else { 
                 //assign lessons to all permutations equally
                 for (int permutationIndex = 0; permutationIndex < numOfPermutations; permutationIndex++) {
-                    List<Lesson> currPermutation = result.get(permutationIndex);
-                    currPermutation.add(lesson);
-                    if ((permutationIndex + 1) % (numOfPermutations / numOfLessons) == 0) {
-                        lessonIndex++;
+                    List<List<Lesson>> currPermutation = result.get(permutationIndex);
+                    String currClassNumber = classNumbers.get(classNumberIndex);
+                    List<Lesson> currClass = currLessonTypeClasses.get(currClassNumber);
+                    // System.out.println(classNumberIndex + "[" + classNumbers.get(classNumberIndex) + "]: " + "new class added (" + currLessonType + "|" + currClassNumber + ")");
+                    currPermutation.add(currClass);
+                    if ((permutationIndex + 1) % (numOfPermutations / numOfClasses) == 0) {
+                        classNumberIndex++;
                     }
                 }
             }
@@ -366,11 +396,13 @@ public class TimetableDict {
         //debug
         int permutationCounter = 1;
         System.out.println("------ " + module.getModuleCode() + " ------");
-        for (List<Lesson> permutation : result) {
+        for (List<List<Lesson>> permutation : result) {
             System.out.println("--- Permutation" + permutationCounter + " ---");
-            for (Lesson lesson : permutation) {
-                System.out.println(lesson.getLessonType() + "|" + lesson.getDay()
-                     + "|" + lesson.getStartTime() + "-" + lesson.getEndTime());
+            for (List<Lesson> currClass : permutation) {
+                for (Lesson lesson : currClass) {
+                    System.out.println(lesson.getLessonType() + "|" + lesson.getDay()
+                        + "|" + lesson.getStartTime() + "-" + lesson.getEndTime());
+                }
             }
             permutationCounter++;
         }
@@ -378,33 +410,27 @@ public class TimetableDict {
         return result;
     }
 
-    private List<Integer> getNumberOfLessonsPerType(Module module, 
-                    LinkedHashMap<String, ArrayList<Lesson>> classifiedLessons) {
-            List<Integer> numOfLessonsPerType = new ArrayList<Integer>();
-            String prevLessonType = "";
-            for (String lessonType : module.getAttendingLessonTypes()) {
-                boolean isAlreadyAttended = module.checkLessonTypeAttended(lessonType);
-                if (isAlreadyAttended) {
-                    numOfLessonsPerType.add(1);
-                } else {
-                    if (prevLessonType.equals(lessonType)) { //if got 2 slots for same lesson type
-                        numOfLessonsPerType.add(classifiedLessons.get(lessonType).size() - 1);
-                    } else {
-                        numOfLessonsPerType.add(classifiedLessons.get(lessonType).size());
-                    }
-                }
-                prevLessonType = lessonType;
+    private List<Integer> getNumberOfClassesPerType(Module module, 
+            LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>> lessonMap) {
+        List<Integer> numOfClassesPerType = new ArrayList<Integer>();
+        for (String lessonType : module.getAttendingLessonTypes()) {
+            boolean isAlreadyAttended = module.checkLessonTypeAttended(lessonType);
+            if (isAlreadyAttended) {
+                numOfClassesPerType.add(1);
+            } else {
+                numOfClassesPerType.add(lessonMap.get(lessonType).size());
             }
-            return numOfLessonsPerType;
+        }
+        return numOfClassesPerType;
     }
 
-    private List<List<Lesson>> getPossibleLessonPermutations(Module module) {
-        LinkedHashMap<String, ArrayList<Lesson>> classifiedLessons = module.getClassifiedLessons();
-        List<Integer> numOfLessonsPerType = getNumberOfLessonsPerType(module, classifiedLessons);
-        int numOfPermutations = getNumberOfLessonPermutations(numOfLessonsPerType);
+    private List<List<List<Lesson>>> getPossibleClassPermutations(Module module) {
+        LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>> lessonMap = module.getLessonMap();
+        List<Integer> numOfClassesPerType = getNumberOfClassesPerType(module, lessonMap);
+        int numOfPermutations = getNumberOfClassPermutations(numOfClassesPerType);
         List<String> lessonTypes = module.getAttendingLessonTypes();
 
-        List<List<Lesson>> result = generateLessonPermutations(numOfLessonsPerType, lessonTypes, numOfPermutations, module);
+        List<List<List<Lesson>>> result = generateLessonPermutations(numOfClassesPerType, lessonTypes, numOfPermutations, module);
         return result;
     }
 }

@@ -36,6 +36,23 @@ public class Module {
         return attendingList;
     }
 
+    public LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>> getLessonMap() {
+        return lessonMap;
+    }
+
+    public LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>> getAttendingMap() {
+        return attendingMap;
+    }
+
+    public List<Lesson> getClassFromLessonMap(String lessonType, String classNumber) {
+        return lessonMap.get(lessonType).get(classNumber);
+    }
+
+    public List<Lesson> getClassFromAttendingMap(String lessonType) {
+        String classNumber = attendingMap.get(lessonType).keySet().iterator().next();
+        return attendingMap.get(lessonType).get(classNumber);
+    }
+
     public List<Lesson> getAttendingInListForm() {
         List<Lesson> allAttending = new ArrayList<Lesson>();
         for (LinkedHashMap<String, ArrayList<Lesson>> lessonTypes : this.attendingMap.values()) {
@@ -368,8 +385,8 @@ public class Module {
 
     public List<String> getAttendingLessonTypes() {
         List<String> attendingLessonTypes = new ArrayList<String>();
-        for (Lesson lesson : attendingList) {
-            attendingLessonTypes.add(lesson.getLessonType());
+        for (String lessonType : attendingMap.keySet()) {
+            attendingLessonTypes.add(lessonType);
         }
         return attendingLessonTypes;
     }
