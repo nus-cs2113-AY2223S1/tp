@@ -1,16 +1,42 @@
 # User Guide
 
+- [Introduction](#introduction)
+- [Quick Start](#quick-start)
+- [Features](#features)
+- [Commands](#commands)
+  - [Adding a movie or TV show: `add`](#adding-a-movie-or-tv-show-add)
+  - [Displaying reviews: `list`](#displaying-reviews-list)
+  - [Deleting a review: `delete`](#deleting-a-review-delete)
+  - [Clearing all reviews" `clear`](#clearing-all-reviews-clear)
+  - [Sorting reviews: `sort`](#sorting-reviews-sort)
+  - [Finding reviews: `find`](#finding-reviews-find)
+  - [Favouriting reviews: `favourite`](#favouriting-reviews-favourite)
+  - [Listing favourite reviews: `favourite list`](#listing-favourite-reviews-favourite-list)
+  - [Exiting the program: `bye`](#exiting-the-program-bye)
+- [Command Summary](#command-summary)
+
 ## Introduction
 
-Duke is a movie review allowing you to keep track of movies you have watched! Duke has several commands and also saves your information for future retrieval.
+Duke is a movie review application allowing you to keep track of movies you have watched. With various commands at your 
+disposal and the ability to store your review list, it has never been easier to keep track of all the movies you have 
+watched!
+
+The main features of Duke include:
+- Tracking watched movies and TV shows with ratings attached
+- Gain insight into your movie preferences by sorting according to rating, category and more!
+- Mark the movies and TV shows that you consider your favourites!
+
+Duke is optimized for use via a Command Line Interface (CLI). If you can type fast, look no further for your perfect, 
+one-stop movie review companion.
 
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed.
-2. Down the latest version of `Duke` from [here](https://github.com/AY2223S1-CS2113-T18-1/tp/releases/tag/v1.0).
+2. Download the latest version of `Duke` from [here](https://github.com/AY2223S1-CS2113-T18-1b/tp/releases).
 3. Copy the jar file into the folder you want to store your reviews.
-4. Open terminal application and change directory to the above folder
+4. Open terminal application and change directory to the above folder.
 5. Run the jar file by entering java -jar tp.jar into the terminal.
+6. Duke will display a greeting message. Enter a command and press Enter to execute it.
 
 ## Features 
 
@@ -20,15 +46,16 @@ The following features are supported by Duke.
 3) User can delete unwanted reviews
 4) User can view all added reviews
 5) User can clear all reviews
-6) User can sort reviews by genre, title, date
+6) User can sort reviews by genre, title, date and rating
 7) User can find reviews by keyword
 8) User can set specific reviews as a favourite
 9) User can list all favourite reviews
 10) User input is automatically saved and loaded every session
 
-## Command Summary
-### Adding a movie: `add`
-Adds a new movie review to your list.
+## Commands
+### Adding a movie or TV show: `add`
+Adds a new movie or TV show review to your list.
+
 **Note:** title, genre, and site must not include "/" delimiter in input so that command can be correctly parsed.
 
 **Format**: 
@@ -37,32 +64,36 @@ Adds a new movie review to your list.
 
 `add /tv <title> /rating <rating>  /date <dateWatched> /genre <genre> /site <location>`
 
+- `<title>`, `<genre>` and `<location>` must be strings.
+- `<rating>` must be an integer value from 0 to 100.
+- `<dateWatched>` must have passed and be given in the following format: dd-MM-YYYY.
+
 Usage: 
 
-`add /movie inception /rating 10 /date 10-01-2020 /genre thriller`
+`add /movie inception /rating 90 /date 10-01-2020 /genre thriller`
 
-`add /tv game of thrones /rating 5  /date 02-02-2022 /genre fantasy /site matt's house`
+`add /tv game of thrones /rating 5 /date 02-02-2022 /genre fantasy /site hbo`
 
 Output:
 ```
 Got it. I've added the following item to the list:
-        [Movie] inception Rating: 10.0 Genre: animated Date watched:10-01-2020
+        [Movie] inception Rating: 90.0 Genre: thriller Date watched:10-01-2020
 
         Now you have 5 reviews in the list.
 ```
 
-### Display reviews: `list`
+### Displaying reviews: `list`
 Displays all movies and television shows you have reviewed. Output is separated by media category. 
 
-**Format**: `list`
+**Format and usage**: `list`
 
 Output:
 ```
 ---Here are the reviews in your list---
 
 Movies:
-1. [Movie]  inception  Rating:99.0 Genre: thriller Date watched:10-01-2020
-2. [Movie]  titanic  Rating:98.0 Genre: romance Date watched:01-02-2019
+1. [Movie]  inception  Rating:90.0 Genre: thriller Date watched:10-01-2020
+2. [Movie]  the notebook  Rating:98.0 Genre: romance Date watched:01-02-2019
 3. [Movie]  hey  Rating:50.0 Genre: action Date watched:29-01-2000
 
 TV Shows:
@@ -70,32 +101,42 @@ TV Shows:
 
 ```
 
-### Delete a review: `delete`
+### Deleting a review: `delete`
 Removes a movie or television review from your list. References the output from the list command to determine which index to delete.
 
 **Format**: `delete <type> <index>`
 
-Usage:
-`delete movie 1`
-`delete tv 1`
+- `<type>` must be either 'movie' or 'tv', for movies and tv shows respectively in the review list.
+- `<index>` refers to the index number shown by category in the displayed review list.
+- `<index>` must be a positive integer within the range of indices in the review list.
 
-### Clear all reviews: 'clear'
+Usage:
+
+`delete movie 1`
+
+`delete tv 2`
+
+### Clearing all reviews: 'clear'
 Deletes all reviews in your list.
 
-**Format**: `clear`
+**Format and usage**: `clear`
 
-### Sort reviews: 'sort'
-Sorts reviews in your list. Sorting is possible by the following fields:
-rating, title, genre and date
+### Sorting reviews: 'sort'
+Sorts your review list according to a given field.
 
+**Format**: `sort <field>`
 
-**Format**: `sort [field]`
+- `<field>` must be one of the following strings: 'rating', 'title', 'date' or 'genre'
 
 Usage:
-sort rating
-sort title
-sort genre
-sort date
+
+`sort rating`
+
+`sort title`
+
+`sort genre`
+
+`sort date`
 
 Output:
 ```
@@ -111,12 +152,15 @@ TV Shows:
 1. [TV Show]  friends  Rating:98.0 Genre: romance  Date watched:01-02-2019 Site:  netflix
 ```
 
-### Find reviews: 'find'
-Allows the searching of a particular review.
+### Finding reviews: 'find'
+Searches your review list to find movies whose titles contain the given keyword.
 
-**Format**: `find [string]`
+**Format**: `find <keyword>`
 
-Usage: find inc
+- `<keyword>` must be a string.
+- The search is case-sensitive e.g. `Inception` will not match `inception`
+
+Usage: `find inc`
 
 Output:
 ```
@@ -128,21 +172,29 @@ Movies:
 TV Shows:
 ```
 
-### Favourite reviews: 'favourite'
+### Favouriting reviews: 'favourite'
 Lets you mark items you find particularly notable or want to watch again for easier reference.
 
-**Format**: `favourite [list position]`
+**Format**: `favourite <type> <index>`
 
-Usage: favourite 1
+- `<type>` must be either 'movie' or 'tv', for movies and tv shows respectively in the review list.
+- `<index>` refers to the index number shown by category in the displayed review list.
+- `<index>` must be a positive integer within the range of indices in the review list.
+
+Usage: 
+
+`favourite movie 1`
+
+`favourite tv 3`
 
 Output:
 ```
-The following task has been starred:
+The following review has been starred:
 [Movie]  inception  Rating:99.0 Genre: thriller Date watched:10-01-2020
 ```
 
-### List favourite reviews: 'favourite list'
-Lets you list your favourited items.
+### Listing favourite reviews: 'favourite list'
+Displays the items in your review list that have been marked as favourite.
 
 **Format and usage**: `favourite list`
 
@@ -155,7 +207,23 @@ Your favourites are:
 [Movie]  hey  Rating:50.0 Genre: action Date watched:29-01-2000
 ```
 
-[//]: # (## Command Summary)
+### Exiting the program: 'bye'
+Saves your review list to an external file and exits the program.
 
-[//]: # ()
-[//]: # ({Give a 'cheat sheet' of commands here})
+**Format and usage**: `bye`
+
+## Command Summary
+
+| Command        | Format                                                                                  | Example                                                                       |
+|----------------|-----------------------------------------------------------------------------------------|-------------------------------------------------------------------------------|
+| add (movie)    | `add /movie <title> /rating <rating> /date <dateWatched> /genre <genre>`                | `add /movie inception /rating 90 /date 10-01-2020 /genre thriller`            |
+| add (TV show)  | `add /tv <title> /rating <rating>  /date <dateWatched> /genre <genre> /site <location>` | `add /tv game of thrones /rating 5 /date 02-02-2022 /genre fantasy /site hbo` |
+| list           | `list`                                                                                  | `list`                                                                        |
+| delete         | `delete <type> <index>`                                                                 | `delete movie 1` `delete tv 2`                                                |
+| clear          | `clear`                                                                                 | `clear`                                                                       |
+| find           | `find <keyword>`                                                                        | `find inc` `find avengers`                                                    |
+| favourite      | `favourite <type> <index>`                                                              | `favourite movie 1` `favourite tv 3`                                          |
+| favourite list | `favourite list`                                                                        | `favourite list`                                                              |
+| sort           | `sort <field>`                                                                          | `sort rating` `sort title` `sort genre` `sort date`                           |
+| bye            | `bye`                                                                                   | `bye`                                                                         |
+
