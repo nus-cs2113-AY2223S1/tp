@@ -60,25 +60,25 @@ Read in more detail at the [Features Section](#features) section below.
 > Notes about the command format:
 >  - Words in `UPPER_CASE` are the parameters supplied by the user.
 
-| Command                  | Description                                                                                   |
-|--------------------------|-----------------------------------------------------------------------------------------------| 
-| `auth API_KEY`           | [Authenticate API using user's API key](#authenticate-user-api)                               |
-| `auth default`           | [Authenticate API using default key](#authenticate-default)                                   |
-| `auth status`            | [Authentication status](#authentication-status)                                               |
-| `find CARPARK_ID`        | [Find number of lots available by carpark ID](#find-number-of-lots-by-carpark-id)             | 
-| `filter QUERY`           | [Filter carparks based on address](#filter-carparks-based-on-address)                         | 
-| `list`                   | [Get a list of available carparks on the app](#get-a-list-of-carparks-on-the-app)             |
-| `update`                 | [Update data from API](#update-data-from-api)                                                 |
-| `favourite CARPARK_ID`   | [Favourite carparks by carpark ID](#favourite-carparks-by-carpark-id)                         |
-| `unfavourite CARPARK_ID` | [Unfavourite carparks by carpark ID](#unfavourite-carparks-by-carpark-id)                     |
-| `favourite list`         | [List lot availability of favourite carparks](#list-lot-availability-of-favourite-carparks)   |
-| `help`                   | [Lists all possible commands](#help)                                                          |   
-| `exit`                   | [Exiting the program](#exiting-the-program)                                                   |
+| Command                  | Shortcuts         | Description                                                                                 |
+|--------------------------|-------------------|---------------------------------------------------------------------------------------------| 
+| `auth API_KEY`           | `a API_KEY`       | [Authenticate API using user's API key](#authenticate-user-api)                             |
+| `auth default`           | `a default`       | [Authenticate API using default key](#authenticate-default)                                 |
+| `auth status`            | `a status`        | [Authentication status](#authentication-status)                                             |
+| `find CARPARK_ID`        | `fin CARPARK_ID`  | [Find number of lots available by carpark ID](#find-number-of-lots-by-carpark-id)           | 
+| `filter QUERY`           | `fil QUERY`       | [Filter carparks based on address](#filter-carparks-based-on-address)                       | 
+| `list`                   | `l`               | [Get a list of available carparks on the app](#get-a-list-of-carparks-on-the-app)           |
+| `update`                 | `u`               | [Update data from API](#update-data-from-api)                                               |
+| `favourite CARPARK_ID`   | `fav CARPARK_ID`  | [Favourite carparks by carpark ID](#favourite-carparks-by-carpark-id)                       |
+| `unfavourite CARPARK_ID` | `ufav CARPARK_ID` | [Unfavourite carparks by carpark ID](#unfavourite-carparks-by-carpark-id)                   |
+| `favourite list`         | `fav list`        | [List lot availability of favourite carparks](#list-lot-availability-of-favourite-carparks) |
+| `help`                   | `h`               | [Lists all possible commands](#help)                                                        |   
+| `exit`                   | `e`               | [Exiting the program](#exiting-the-program)                                                 |
 
 ### Authenticate user API
 
 **Authenticate and subscribe to the API Service (LTA Data Mall) using the user’s API key.**
-> Format : `auth API_KEY`
+> Format : `auth API_KEY` or `a API_KEY`
 
 - LTA Data Mall API information (click [here](https://datamall.lta.gov.sg/content/datamall/en/dynamic-data.html)).
 - API Registration (click [here](https://datamall.lta.gov.sg/content/datamall/en/request-for-api.html)).
@@ -105,7 +105,7 @@ Authenticated successfully.
 ### Authenticate default
 
 **Authenticate using the default API key.**
-> Format: `auth default`
+> Format: `auth default` or `a default`
 
 - For user with no API key, they can use the provided api key to access the services.
 - User will not be able to see the api key.
@@ -127,7 +127,7 @@ Authenticated successfully using default API Key.
 ### Authentication status
 
 **Get the status of the api key authentication status.**
-> Format: `auth status`
+> Format: `auth status` or `a status`
 
 - It will inform the user whether the user api key is entered and valid or whether the default API key is used.
 - If user has entered and validated their personal key before, they will be able to view their own API key.
@@ -155,7 +155,7 @@ You have not authenticated your personal API key. Currently you have access to t
 ### Find number of lots by carpark ID
 
 **Returns detailed information about the carpark that the user has chosen to find.**
-> Format: `find CARPARK_ID`
+> Format: `find CARPARK_ID` or `fin CARPARK_ID`
 
 - Using data from the API, after the user has inputted the ID of a certain carpark,
   the function will return detailed information regarding the aforementioned carpark (this includes the number 
@@ -187,7 +187,7 @@ Number of available lots (total): 132
 ### Filter carparks based on address
 
 **Shows a summarised list of carparks that match a given query.**
-> Format: `filter QUERY`
+> Format: `filter QUERY` or `fil QUERY`
 
 - The filter command allows the user to search a carpark based on the name of the carpark. For example,
   a carpark may have the name of `BLK 208 CLEMENTI AVE 6` - a query of `clementi` or `208` will return this
@@ -222,7 +222,7 @@ CarparkID C7 at BLK 349-355 `CLEMENTI` `AVE` `2`
 ### Get a list of carparks on the app
 
 **Returns a list of the available carparks from the JSON file.**
-> Format: `list`
+> Format: `list` or `l`
 
 - Using data from the API, after the user has inputted the command, the function will return a list of carparks from the API.
 
@@ -249,7 +249,7 @@ CarparkID HG80 at BLK 941A HOUGANG STREET 92
 
 **Fetches the most updated availability data and stores it locally.**
 
-> Format: `update`
+> Format: `update` or `u`
 
 - The command requires a valid API access token to function.
 - This overwrites any previous availability data for any carparks fetched by the API.
@@ -273,7 +273,7 @@ Update Successful.
 ### Favourite carparks by carpark ID
 
 **Saves the carpark to a list of favourited carparks for easy subsequent access.**
-> Format: `favourite CARPARK_ID`
+> Format: `favourite CARPARK_ID` or `fav`
 
 - The command requires user to input a valid and existing carpark ID that is not already favourited.
 
@@ -312,7 +312,7 @@ No carpark was found.
 ### Unfavourite carparks by carpark ID
 
 **Removes the carpark from a list of favourited carparks.**
-> Format: `unfavourite CARPARK_ID`
+> Format: `unfavourite CARPARK_ID` or `ufav CARPARK_ID`
 
 - The command requires user to input a valid and existing carpark ID that is already favourited.
 
@@ -341,7 +341,7 @@ Carpark not found in favourite list!
 ### List lot availability of favourite carparks
 
 **Displays the name, ID and total lot availability of all favourite carparks.**
-> Format: `favourite list`
+> Format: `favourite list` or `fav list`
 
 Example of usage:
 
@@ -365,7 +365,7 @@ CarparkID J8 at BLK 232/240 JURONG EAST ST 21: 318 lots available
 ### Help
 
 **Returns a list of all the available command of the program.**
-> Format : `help`
+> Format : `help` or `h`
 
 - This function will return a list of all the available commands to use and a description of their purpose.
 
@@ -397,7 +397,7 @@ Refer to the user guide at https://ay2223s1-cs2113-t17-4.github.io/tp/UserGuide.
 
 **Terminates the program.**
 
-> Format: `exit`
+> Format: `exit` or `e`
 
 ## FAQ
 
@@ -411,18 +411,18 @@ when you restart the program.
 
 ## Command Summary
 
-| Command                  | Description                                                                                   |
-|--------------------------|-----------------------------------------------------------------------------------------------| 
-| `auth API_KEY`           | [Authenticate API using user's API key](#authenticate-user-api)                               |
-| `auth default`           | [Authenticate API using default key](#authenticate-default)                                   |
-| `auth status`            | [Authentication status](#authentication-status)                                               |
-| `find CARPARK_ID`        | [Find number of lots available by carpark ID](#find-number-of-lots-by-carpark-id)             | 
-| `filter QUERY`           | [Filter carparks based on address](#filter-carparks-based-on-address)                         | 
-| `list`                   | [Get a list of available carparks on the app](#get-a-list-of-carparks-on-the-app)             |
-| `update`                 | [Update data from API](#update-data-from-api)                                                 |
-| `favourite CARPARK_ID`   | [Favourite carparks by carpark ID](#favourite-carparks-by-carpark-id)                         |
-| `unfavourite CARPARK_ID` | [Unfavourite carparks by carpark ID](#unfavourite-carparks-by-carpark-id)                     |
-| `favourite list`         | [List lot availability of favourite carparks](#list-lot-availability-of-favourite-carparks)   |
-| `help`                   | [Lists all possible commands](#help)                                                          |   
-| `exit`                   | [Exiting the program](#exiting-the-program)                                                   |
+| Command                  | Shortcuts         | Description                                                                                 |
+|--------------------------|-------------------|---------------------------------------------------------------------------------------------| 
+| `auth API_KEY`           | `a API_KEY`       | [Authenticate API using user's API key](#authenticate-user-api)                             |
+| `auth default`           | `a default`       | [Authenticate API using default key](#authenticate-default)                                 |
+| `auth status`            | `a status`        | [Authentication status](#authentication-status)                                             |
+| `find CARPARK_ID`        | `fin CARPARK_ID`  | [Find number of lots available by carpark ID](#find-number-of-lots-by-carpark-id)           | 
+| `filter QUERY`           | `fil QUERY`       | [Filter carparks based on address](#filter-carparks-based-on-address)                       | 
+| `list`                   | `l`               | [Get a list of available carparks on the app](#get-a-list-of-carparks-on-the-app)           |
+| `update`                 | `u`               | [Update data from API](#update-data-from-api)                                               |
+| `favourite CARPARK_ID`   | `fav CARPARK_ID`  | [Favourite carparks by carpark ID](#favourite-carparks-by-carpark-id)                       |
+| `unfavourite CARPARK_ID` | `ufav CARPARK_ID` | [Unfavourite carparks by carpark ID](#unfavourite-carparks-by-carpark-id)                   |
+| `favourite list`         | `fav list`        | [List lot availability of favourite carparks](#list-lot-availability-of-favourite-carparks) |
+| `help`                   | `h`               | [Lists all possible commands](#help)                                                        |   
+| `exit`                   | `e`               | [Exiting the program](#exiting-the-program)                                                 |
 
