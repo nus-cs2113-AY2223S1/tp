@@ -198,7 +198,7 @@ and are avid movie or TV show watchers. Therefore, this app is customised to the
 - List movies and tv shows 
   - Command: list
 - Remove a movie or tv show
-  - Command: remove (index #)
+  - Command: delete <type> <index #>
 - Clear history
   - Command: clear
 
