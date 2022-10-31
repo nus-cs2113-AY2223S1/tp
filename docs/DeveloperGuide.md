@@ -260,10 +260,10 @@ NUS SoC undergraduates intending to embark on a Student Exchange Programme
 - Users can create timetables, add class timings and plan out their schedules at desired partner universities.
 - Users can save their current university lists after exiting the app and load it again next time.
 - Users can favorite their top university picks.
-- 
+
 ### 2.3 Problem Addressed
 
-The module mapping support provided by the EduRec website is not helpful, allowing students to only search for past mappings by 1. Faculty or 2. University. This makes the module mapping process very time-consuming, with the slow response of the EduRec website adding fuel to the fire. Moreover, the website does not allow for the searching of modules to map to begin with, much less so for searching multiple modules at one go (which is exactly what most users would be looking for). EduRec does not give students the option of saving shortlisted modules either.
+The module mapping support provided by the EduRec website is not helpful, allowing students to only search for past mappings either by Faculty or by University. This makes the module mapping process very time-consuming, with the slow response of the EduRec website adding fuel to the fire. Moreover, the website does not allow for the searching of modules to map to begin with, much less so for searching multiple modules at one go (which is exactly what most users would be looking for). EduRec does not give students the option of saving shortlisted modules either.
 
 ## User Stories
 
