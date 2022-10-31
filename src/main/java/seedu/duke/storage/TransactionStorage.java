@@ -109,10 +109,11 @@ public class TransactionStorage extends Storage {
         String itemName = splitTransactionLine[1];
         String itemId = splitTransactionLine[2];
         String borrowerId = splitTransactionLine[3];
-        int duration = Integer.parseInt(splitTransactionLine[4]);
-        LocalDate createdAt = LocalDate.parse(splitTransactionLine[5]);
-        double moneyTransacted = Double.parseDouble(splitTransactionLine[6]);
-        return new Transaction(transactionId, itemName, itemId, borrowerId, duration, createdAt, moneyTransacted);
+        String lenderId = splitTransactionLine[4];
+        int duration = Integer.parseInt(splitTransactionLine[5]);
+        LocalDate createdAt = LocalDate.parse(splitTransactionLine[6]);
+        double moneyTransacted = Double.parseDouble(splitTransactionLine[7]);
+        return new Transaction(transactionId, itemName, itemId, borrowerId, lenderId, duration, createdAt, moneyTransacted);
     }
 
     private static void checkCheckSumLine(Transaction transaction, int checkSum) throws StoreFailureException {

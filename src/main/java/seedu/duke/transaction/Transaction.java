@@ -18,6 +18,7 @@ public class Transaction {
     private final String itemName;
     private final String itemId;
     private final String borrower;
+    private final String lender;
     private final int duration;
     private final LocalDate createdAt;
     private final LocalDate returnedAt;
@@ -32,11 +33,12 @@ public class Transaction {
      * @param duration   The length of transaction(days).
      * @param createdAt  The day when transaction created.
      */
-    public Transaction(String itemName, String itemId, String borrowerId, int duration,
+    public Transaction(String itemName, String itemId, String borrowerId, String lenderId, int duration,
                        LocalDate createdAt, double moneyTransacted) {
         this.transactionId = IdGenerator.generateId();
         this.itemName = itemName;
         this.borrower = borrowerId;
+        this.lender = lenderId;
         this.duration = duration;
         this.createdAt = createdAt;
         this.returnedAt = createdAt.plusDays(duration);
@@ -54,11 +56,12 @@ public class Transaction {
      * @param duration      The length of transaction(days).
      * @param createdAt     The day when transaction created.
      */
-    public Transaction(String transactionId, String itemName, String itemId, String borrowerId,
+    public Transaction(String transactionId, String itemName, String itemId, String borrowerId, String lenderId,
                        int duration, LocalDate createdAt, double moneyTransacted) {
         this.transactionId = transactionId;
         this.itemName = itemName;
         this.borrower = borrowerId;
+        this.lender = lenderId;
         this.duration = duration;
         this.createdAt = createdAt;
         this.returnedAt = createdAt.plusDays(duration);
@@ -91,6 +94,9 @@ public class Transaction {
      */
     public String getBorrower() {
         return borrower;
+    }
+    public String getLender() {
+        return lender;
     }
 
     /**
@@ -193,7 +199,8 @@ public class Transaction {
         String transactionIcon = "[" + (isFinished() ? "Finished" : "Unfinished") + "] ";
         String transactionId = "TxID: " + this.transactionId + "\n";
         String itemName = "   ItemName: " + this.itemName + " ";
-        String usersId = "   Borrower: " + this.borrower + "\n";
+        String borrowerId = "   Borrower: " + this.borrower + "\n";
+        String lenderId = "   Lender: " + this.lender + "\n";
         String duration = "   Duration: " + this.duration + "\n";
         BigDecimal money = new BigDecimal(this.moneyTransacted);
         String moneyTransactedString = "   Money_Transacted: $" + money.setScale(2, RoundingMode.HALF_EVEN) + " ";
@@ -201,11 +208,11 @@ public class Transaction {
             String remainDays = " (" + ChronoUnit.DAYS.between(LocalDate.now(), getReturnDate())
                     + " day(s) left)\n";
             String returnDate = "   ReturnDate: " + DateParser.formatDateToString(returnedAt) + remainDays + "\n";
-            return transactionIcon + transactionId + itemName + itemId + usersId
+            return transactionIcon + transactionId + itemName + itemId + borrowerId + lenderId
                     + duration + returnDate + moneyTransactedString;
         }
         String returnedDate = "   ReturnedDate: " + DateParser.formatDateToString(returnedAt) + "\n";
-        return transactionIcon + transactionId + itemName + itemId + usersId
+        return transactionIcon + transactionId + itemName + itemId + borrowerId + lenderId
                 + duration + returnedDate + moneyTransactedString;
     }
 }

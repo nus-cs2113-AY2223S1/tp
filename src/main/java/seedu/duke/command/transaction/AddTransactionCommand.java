@@ -206,9 +206,10 @@ public class AddTransactionCommand extends Command {
         String itemId = args[0];
         String itemName = itemList.getItemById(args[ITEM_ID_INDEX]).getName();
         String borrowId = args[BORROWER_INDEX];
+        String lenderId = itemList.getItemById(itemId).getOwnerId();
         int duration = Integer.parseInt(args[DURATION_INDEX]);
         LocalDate createdAt = LocalDate.parse(args[CREATED_DATE_INDEX]);
         double moneyTransacted = itemList.getItemById(args[ITEM_ID_INDEX]).getPricePerDay() * (double) duration;
-        return new Transaction(itemName, itemId, borrowId, duration, createdAt, moneyTransacted);
+        return new Transaction(itemName, itemId, borrowId, lenderId, duration, createdAt, moneyTransacted);
     }
 }
