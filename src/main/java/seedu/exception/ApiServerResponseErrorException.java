@@ -25,6 +25,6 @@ public class ApiServerResponseErrorException extends ParkingException {
     }
 
     public int getTryNumber() {
-        return tryNumber--;
+        return tryNumber;
     }
 }
