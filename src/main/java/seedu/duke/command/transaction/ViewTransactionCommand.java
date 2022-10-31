@@ -17,6 +17,8 @@ public class ViewTransactionCommand extends Command {
     private final String[] parts;
     private final TransactionList transactionList;
 
+    private static final String TX_ID_DELIM = "t";
+
     public ViewTransactionCommand(String[] parts, TransactionList transactionList)
             throws InsufficientArgumentsException {
         this.parts = parts;
@@ -29,7 +31,7 @@ public class ViewTransactionCommand extends Command {
     private String getArgsViewTransactionCmd() throws InvalidArgumentException {
         String arg;
         String delimiter = CommandParser.getArgsDelimiter(parts[0]);
-        if (delimiter.equals("t")) {
+        if (delimiter.equals(TX_ID_DELIM)) {
             arg = CommandParser.getArgValue(parts[0]);
         } else {
             throw new InvalidArgumentException(MESSAGE_INVALID_PARTS);

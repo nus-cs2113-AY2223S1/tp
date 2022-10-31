@@ -20,6 +20,8 @@ public class ViewTransactionsByStatusCommand extends Command {
     private final String[] parts;
     private final TransactionList transactionList;
 
+    private static final String STATUS_DELIM = "s";
+
     public ViewTransactionsByStatusCommand(String[] parts, TransactionList transactionList)
             throws InsufficientArgumentsException {
         this.parts = parts;
@@ -32,7 +34,7 @@ public class ViewTransactionsByStatusCommand extends Command {
     private String getArgs() throws InvalidArgumentException {
         String args;
         String delimiter = CommandParser.getArgsDelimiter(parts[0]);
-        if (delimiter.equals("s")) {
+        if (delimiter.equals(STATUS_DELIM)) {
             args = CommandParser.getArgValue(parts[0]);
         } else {
             throw new InvalidArgumentException(MESSAGE_INVALID_PARTS);

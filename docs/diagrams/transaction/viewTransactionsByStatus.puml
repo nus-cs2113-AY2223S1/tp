@@ -1,23 +1,53 @@
 @startuml
-'https://plantuml.com/sequence-diagram
+hide footbox
 
-autonumber
+Actor User
+"User" -> ":Duke": "find-tx..."
+activate ":Duke"
+":Duke" -> ":CommandParser": createCommand()
+activate ":CommandParser"
+":CommandParser" -> ":ViewTransactionByStatusCommand"**: new
+activate ":ViewTransactionByStatusCommand"
+return
+":CommandParser" --> ":Duke"
+deactivate
 
-CommandParser -> Command: createCommand()
-Command -> Command: getArgs()
-Command -> Command: isValidArgument(arg)
+":Duke" -> ":ViewTransactionByStatusCommand" : executeCommand()
+activate ":ViewTransactionByStatusCommand"
+":ViewTransactionByStatusCommand" -> ":ViewTransactionByStatusCommand": getArgs()
+activate ":ViewTransactionByStatusCommand"
+return args
+    ":ViewTransactionByStatusCommand" -> ":TransactionList": getTransactionsByStatus()
+    activate ":TransactionList"
+alt Argument is valid (finished/unfinished)
+    alt finished
+        ":TransactionList" -> ":TransactionList": getFinishedTransactions()
+        activate ":TransactionList"
+        return transactionsToView
+    else unfinished
+        ":TransactionList" -> ":TransactionList": getUnfinishedTransactions()
+        activate ":TransactionList"
+        return transactionsToView
+    end
+    ":TransactionList" --> ":ViewTransactionByStatusCommand":
+    deactivate ":TransactionList"
 
-Command -> transactionList: getTransactions()
-loop n times
-transactionList -> transactionList: iterate through list
-note right
-Check isFinished() status
-end note
+    ":ViewTransactionByStatusCommand" -> "<<class>>\nUi": viewTransactionMessage()
+    activate "<<class>>\nUi"
+    return
+    deactivate "<<class>>\nUi"
+    deactivate ":TransactionList"
+else Argument is invalid
+    ":ViewTransactionByStatusCommand" -> ":DukeException"** : new
+    destroy ":ViewTransactionByStatusCommand"
+    activate ":DukeException"
+    ":DukeException" --> ":Duke"
+    destroy ":DukeException"
+    ":Duke" -> "<<class>>\nUi" : print error
+    activate "<<class>>\nUi"
+    "<<class>>\nUi" --> ":Duke" : error message
+    deactivate "<<class>>\nUi"
 end
-transactionList -> Command: getTransactions(),
-note right
-Return array of transactions
-end note
+deactivate ":ViewTransactionByStatusCommand"
 
-Command -> Ui: viewCompletedTransactionsMessage()
 @enduml

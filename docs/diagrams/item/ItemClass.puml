@@ -12,22 +12,16 @@ class item {
     - pricePerDay: double
     - category: Category
 
-    + item(String, int, double, String)
-    + item(String, String, int, double, String)
     + getOwnerId(): String
     + getName(): String
     + getPricePerDay(): Double
     + getCategory(): Category
     + updatePrice(double): Item
     + isAvailable(TransactionList): boolean
-    + getStatus(TransactionList): String
-    + convertItemToFileFormat(): String
-    + toString(): String
+
 }
 
 class itemList {
-    + itemList()
-    + itemList(ArrayList<item>)
     + addItem(item): void
     + updateItemPrice(String, double): Item
     + deleteItem(String, TransactionList) : void
@@ -35,24 +29,13 @@ class itemList {
     + getItemByName(String): Item
     + getItemsByKeyword(String): ItemList
     + getListSize(): int
-    + getItemList(): ArrayList<Item>
-    + hasThisLender(String, TransactionList): boolean
-    + deleteAllItemOfAnUser(String, TransactionList): void
-    + toString(TransactionList): String
 }
 
 class itemStorage {
-    {static} - SEPARATOR: String
-    - itemFilePath: String
-    + itemStorage(String)
     + loadData(): ArrayList<item>
     + writeData(itemList): void
     + makeItemDir(ItemList): void
     + hasItemFile(): boolean
-    + handleItemLine(String[]): Item
-    - getItemFromItemLine(String[]): Item
-    - checkCheckSumLine(Item, int): void
-    - checkCheckSumWhole(ArrayList<Item>, int): void
 }
 
 class IdGenerator {

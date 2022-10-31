@@ -15,7 +15,6 @@ public class ItemList {
     private final ArrayList<Item> itemList;
 
     public ItemList() { // store files from data.txt
-        // this.itemList = fileItems;
         this.itemList = new ArrayList<>();
     }
 
