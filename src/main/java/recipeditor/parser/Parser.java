@@ -89,7 +89,7 @@ public class Parser {
     // To account for case insensitivity of user
     private static String actualRecipeTitle(String recipeTitleToBeFound) throws FileNotFoundException {
         String actualRecipeTitle = null;
-        String recipeTitles = Storage.loadFileContent(Storage.ALL_RECIPES_FILE_PATH);
+        String recipeTitles = Storage.loadFileContent(Storage.ALL_RECIPES_FILE_PATH);//TODO: Load from model is better!
         String[] recipeTitlesArray = recipeTitles.split("\\r?\\n");
         for (String recipeTitle : recipeTitlesArray) {
             if (recipeTitle.trim().equalsIgnoreCase(recipeTitleToBeFound)) {

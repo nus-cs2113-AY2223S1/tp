@@ -1,7 +1,9 @@
 package recipeditor.parser;
 
+import recipeditor.exception.DuplicateRecipeTitleException;
 import recipeditor.exception.ParseFileException;
 import recipeditor.recipe.Recipe;
+import recipeditor.recipe.RecipeList;
 import recipeditor.storage.Storage;
 import recipeditor.ui.Editor;
 import recipeditor.ui.Ui;
@@ -9,7 +11,7 @@ import recipeditor.ui.Ui;
 import java.io.FileNotFoundException;
 
 public class GuiWorkFlow {
-    private static final String ABORT_QUESTION = "Do you want to ABORT? (Y/N)";
+    private static final String ABORT_QUESTION = "Do you want to FIX the recipe? (Y/N)";
 
     private boolean validity;
     private Recipe recipe;
@@ -24,12 +26,15 @@ public class GuiWorkFlow {
                 try {
                     String content = Storage.loadFileContent(Storage.TEMPORARY_FILE_PATH);
                     recipe = new TextFileParser().parseTextToRecipe(content);
+                    if(RecipeList.containsRecipe(recipe)){
+                        throw new DuplicateRecipeTitleException(DuplicateRecipeTitleException.DUPLICATE_IN_MODEL);
+                    }
                     validity = true;
                     exitLoop = true;
-                } catch (ParseFileException | FileNotFoundException e) {
+                } catch (ParseFileException | FileNotFoundException | DuplicateRecipeTitleException e) {
                     Ui.showMessage(e.getMessage());
                     YesNoLoopAnswer ans = yesNoLoop(ABORT_QUESTION);
-                    if (ans.equals(YesNoLoopAnswer.NO)) {
+                    if (ans.equals(YesNoLoopAnswer.YES)) {
                         boolean saveToTempAgain = new Editor().enterEditor(Storage.TEMPORARY_FILE_PATH);
                         exitLoop = !saveToTempAgain;
                     } else {

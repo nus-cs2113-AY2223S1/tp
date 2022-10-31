@@ -1,18 +1,8 @@
 # TITLE 
-Example Title 
+Example asdasdf 
 
 # DESCRIPTION
 Example Description
-
- 
- 
- 
- 
- 
-
-    
-   
-asdf
 
 # INGREDIENTS <ingredient name> / <amount> / <unit> 
 1. Example ingredient / 1.2 / example unit 

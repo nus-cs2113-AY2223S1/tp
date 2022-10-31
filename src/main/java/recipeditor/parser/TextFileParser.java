@@ -173,7 +173,7 @@ public class TextFileParser {
         String[] parsedDot = parsedSlashed[0].split("\\.");
 
 
-        if (parsedSlashed.length != 3) {
+        if (parsedSlashed.length != 3 || parsedDot.length != 2) {
             throw new ParseFileException(INGREDIENT_ERROR_FORMAT);
         }
 

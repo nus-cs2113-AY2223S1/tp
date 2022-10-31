@@ -64,7 +64,7 @@ public class Storage {
     /**
      * Create storage folder for recipes and Template files.
      */
-    public static void createDataFolder() {
+    public static void createAppFolder() {
         try {
             Files.createDirectories(Paths.get(DATA_STORAGE_FOLDER_PATH));
             Files.createDirectories(Paths.get(DATA_TEMPORARY_FOLDER_PATH));
@@ -93,6 +93,7 @@ public class Storage {
             String allRecipeFileContent = loadFileContent(ALL_RECIPES_FILE_PATH);
             String[] recipeTitles = allRecipeFileContent.split("\\r?\\n");
             RecipeList.recipeTitles.addAll(Arrays.asList(recipeTitles));
+//TODO: Check duplicate?
         } catch (FileNotFoundException e) {
             Ui.showMessage("File not found :< Creating your data file for all recipes now...");
             createFile(ALL_RECIPES_FILE_PATH);

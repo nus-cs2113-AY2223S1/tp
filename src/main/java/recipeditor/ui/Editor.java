@@ -2,13 +2,9 @@ package recipeditor.ui;
 
 import recipeditor.storage.Storage;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JTextArea;
-import javax.swing.UIManager;
-import javax.swing.JOptionPane;
-import javax.swing.JMenuBar;
+import javax.swing.*;
 
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -25,6 +21,7 @@ public class Editor extends JFrame implements ActionListener {
     private static final Logger logger = Logger.getLogger(Editor.class.getName());
     private static JTextArea textArea;
     private static JFrame frame;
+    private final JScrollPane scrollPane;
     private final JButton buttonSave;
     private final JButton buttonExit;
     private final JMenuBar menu;
@@ -38,18 +35,22 @@ public class Editor extends JFrame implements ActionListener {
             Logger.getLogger(Editor.class.getName()).log(Level.SEVERE, e.getMessage());
         }
 
-        textArea = new JTextArea();
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setLocationRelativeTo(null);
-        frame.setSize(600, 600);
         frame.toFront();
 
-        this.buttonSave = new JButton("Save and Exit");
-        this.buttonExit = new JButton("Exit Only");
-        this.menu = new JMenuBar();
-
-        frame.add(textArea);
+        textArea = new JTextArea();
+        textArea.setSize(new Dimension(400,400));
+        textArea.setFont(new Font("Arial", Font.PLAIN,15));
+        scrollPane = new JScrollPane(textArea,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+                ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        buttonSave = new JButton("Save and Exit");
+        buttonExit = new JButton("Exit Only");
+        menu = new JMenuBar();
+        frame.add(scrollPane);
+        frame.setSize(600,600);
         frame.setJMenuBar(menu);
+        frame.setResizable(true);
         frame.setVisible(true);
 
         frame.add(buttonSave);

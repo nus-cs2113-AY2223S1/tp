@@ -21,6 +21,9 @@ public class RecipeList {
     public static Recipe getRecipe(int index) throws IndexOutOfBoundsException {
         return recipes.get(index);
     }
+    public static ArrayList<Recipe> getRecipes(){
+        return recipes;
+    }
 
     public static void addRecipe(Recipe recipe) {
         recipes.add(recipe);
@@ -100,5 +103,14 @@ public class RecipeList {
 
     public static int getSize() {
         return recipes.size();
+    }
+
+    public static boolean containsRecipe(Recipe incomingRecipe){
+        for (Recipe r : recipes){
+            if (r.getTitle().equals(incomingRecipe.getTitle())){
+                return true;
+            }
+        }
+        return false;
     }
 }

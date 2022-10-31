@@ -16,7 +16,7 @@ public class AddCommand extends Command {
 
     public CommandResult execute() {
         if (isValid) {
-            RecipeList.addRecipe(addedRecipe); //HERE SEEM TO THROW ERROR
+            RecipeList.addRecipe(addedRecipe);
             RecipeList.recipeTitles.add(addedRecipe.getTitle());
             Storage.appendRecipeToAllRecipeFile(addedRecipe);
             String recipeFileSourcePath = Storage.RECIPES_FOLDER_PATH + "/" + addedRecipe.getTitle();
