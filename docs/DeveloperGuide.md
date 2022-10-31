@@ -188,9 +188,9 @@ The Api component consists of the classes `CurrencyApiManager` and `CurrencyApi`
 
 The `CurrencyApiManager` class calls methods in `CurrencyApi`. The `CurrencyApi` class contains methods that would fetch data from the Api and transfer that data into a hashmap of exchange rates.
 
-* `CurrencyApiManager#getCurrencyApi()` calls `CurrencyApi#getJson` to fetch data from the Api URL in the form of a JSON file. The data fetched contains the currency code its corresponding exchange rate with respect to the Singapore Dollar.
-* `CurrencyApi#getJson` calls `CurrencyApi#writeToFile`, which writes the data into a text file. 
-* `CurrencyApiManager#getCurrencyApi()` calls `CurrencyApi#loadFromFile` which writes the data from the text file into a hashmap of exchange rates, where the key is the currency code in a `String`, and the value is the exchange rate in a `Integer`.
+* `CurrencyApiManager` calls `CurrencyApi` to fetch data from the Api URL in the form of a JSON file. 
+* The data fetched contains the currency code and its corresponding exchange rate with respect to the Singapore Dollar. The data is written into a text file called `exchangeRates.txt`. 
+* `CurrencyApiManager` calls `CurrencyApi` to write the data from `exchangeRates.txt` into a hashmap of exchange rates.
 
 ## Implementation
 ### Printing an expense
@@ -225,11 +225,13 @@ The `Edit-Expense` command changes the attributes of an existing expense in the 
 
 The `Sort-Expense` command sorts the existing expenses in the program.
 
+![Implementation-Sort-Expense]()
 
 ### Converting currencies: `Convert-Currency`
 
 The `Convert-Currency` command converts the currency of an existing expense in the program.
 
+![Implementation-Convert-Currency]()
 
 ### Printing a recurring payment
 
