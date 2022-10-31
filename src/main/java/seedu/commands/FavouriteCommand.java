@@ -93,8 +93,7 @@ public class FavouriteCommand extends Command {
                     return new CommandResult("Nothing to add to favourites!");
                 }
             }
-        } catch (NoCarparkFoundException | IOException | NoFileFoundException
-                 | InvalidFormatException e) {
+        } catch (NoCarparkFoundException | NoFileFoundException | InvalidFormatException | IOException e) {
             return new CommandResult(e.getMessage());
         } catch (FileWriteException fileWriteException) {
             return new CommandResult("Error in setting " + argument + " as favourite.");
