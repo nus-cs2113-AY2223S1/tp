@@ -1,5 +1,8 @@
 # User Guide
 
+## Table of Contents
+
+
 ## Introduction
 
 parKING is a desktop app that helps drivers choose the best place to park via the Command Line Interface (CLI).
