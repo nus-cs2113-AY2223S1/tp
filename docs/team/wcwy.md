@@ -1,4 +1,6 @@
-### Project: Moolah Manager
+# Chia Thin Hong's Project Portfolio Page
+
+## Project: Moolah Manager
 
 Moolah Manager is a financial bookkeeping epplications used for management of the monetary transactions. 
 The user is encouraged to take ownership of managing their finances via a time-saving and efficient command-line interface. 
