@@ -28,7 +28,7 @@ public class AddCommand extends Command {
     private String arguments;
     private boolean toDisplay;
     private Food food;
-    public static final String INVALID_FOOD_INPUT = "Invalid food input";
+    public static final String INVALID_FOOD_INPUT = "Invalid add food command";
     final String[] invalidFoodNames = {"", " ", "[]\\[;]"};
 
     private ExerciseList exerciseList;
@@ -233,7 +233,7 @@ public class AddCommand extends Command {
 
     private void addWeightAndFat(String[] argumentList) throws IllegalValueException {
         if (argumentList.length < 3 || argumentList.length > 4) {
-            throw new IllegalValueException("INVALID_WEIGHT_INPUT");
+            throw new IllegalValueException("Invalid add weight command");
         }
         try {
             int weight = Integer.parseInt(argumentList[1]);
