@@ -615,11 +615,11 @@ public class ConsoleInterface {
     //@@author xzynos
     private void runCommandSortExpense(ConsoleCommandSortExpense commandSortExpense) {
         ArrayList<Expense> expenses = expenseManager.getExpenses();
-        expenseManager.updateSortExpenses(commandSortExpense, localStorage);
         if (expenses.isEmpty()) {
             printErrorMessage(Messages.COMMAND_SORT_EXPENSE_EMPTY_LIST);
             return;
         }
+        expenseManager.updateSortExpenses(commandSortExpense, localStorage);
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_SORTED_EXPENSE_SUCCESS);
     }
 
@@ -636,9 +636,10 @@ public class ConsoleInterface {
         }
 
         BigDecimal rate = consoleCommandConvertCurrency.getRate();
+        String currency = consoleCommandConvertCurrency.getCurrency();
         if (rate == null) {
             try {
-                currencyManager.hasCurrency(consoleCommandConvertCurrency.getCurrency());
+                currencyManager.hasCurrency(currency);
             } catch (CurrencyInvalidException
                      | CurrencyRatesNotFoundException exception) {
                 printErrorMessage(exception.getMessage());
@@ -646,9 +647,9 @@ public class ConsoleInterface {
             }
         }
 
-        consoleCommandConvertCurrency.changeCurrency(expense, currencyManager);
-        localStorage.saveToFile();
+        currencyManager.changeCurrency(expense, currency, rate);
         expenseManager.sortExpenses();
+        localStorage.saveToFile();
 
         printInformationalMessage(convertExpenseToConsoleString(expense));
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_CONVERT_CURRENCY_SUCCESS);

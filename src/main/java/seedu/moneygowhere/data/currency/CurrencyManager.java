@@ -58,12 +58,7 @@ public class CurrencyManager {
         ));
     }
 
-    private BigDecimal convertToNewCurrency(BigDecimal amountInSgd, String newCurrency) {
-        BigDecimal rate = getRate(newCurrency);
-        return (amountInSgd.multiply(rate));
-    }
-
-    public BigDecimal exchangeCurrency(Expense expense, String newCurrency) {
+    public BigDecimal exchangeCurrency(Expense expense, String currency, BigDecimal rate) {
         String oldCurrency = expense.getCurrency();
         BigDecimal amount = expense.getAmount();
         BigDecimal amountInSgd;
@@ -72,18 +67,28 @@ public class CurrencyManager {
         } else {
             amountInSgd = amount;
         }
-        if (newCurrency.equalsIgnoreCase(Configurations.CURRENCY_MANAGER_CURRENCY_CODE_SINGAPORE_DOLLARS)) {
+        if (currency.equalsIgnoreCase(Configurations.CURRENCY_MANAGER_CURRENCY_CODE_SINGAPORE_DOLLARS)) {
             return amountInSgd;
         }
-        BigDecimal amountInNewCurrency = convertToNewCurrency(amountInSgd, newCurrency);
+        BigDecimal amountInNewCurrency;
+        if (rate == null) {
+            BigDecimal newRate = getRate(currency);
+            amountInNewCurrency = amount.multiply(newRate);
+        } else {
+            amountInNewCurrency = amount.multiply(rate);
+            exchangeRates.put(currency, rate);
+            expense.setRate(rate);
+        }
         return amountInNewCurrency;
     }
 
-    public BigDecimal exchangeCurrencyWithRate(Expense expense, BigDecimal rate, String currency) {
-        BigDecimal amount = expense.getAmount();
-        BigDecimal amountInNewCurrency = amount.multiply(rate);
-        exchangeRates.put(currency, rate);
-        expense.setRate(rate);
-        return amountInNewCurrency;
+    public void changeCurrency(Expense expense, String currency, BigDecimal rate) {
+        BigDecimal newAmount = exchangeCurrency(expense, currency, rate);
+        BigDecimal newAmountRounded = newAmount.setScale(
+                Configurations.CURRENCY_MANAGER_CONVERSION_NUMBER_OF_DECIMAL_PLACES,
+                RoundingMode.HALF_UP
+        );
+        expense.setAmount(newAmountRounded);
+        expense.setCurrency(currency);
     }
 }
