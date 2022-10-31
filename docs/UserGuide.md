@@ -34,6 +34,7 @@ MoneyGoWhere is a financial planner to help you manage your finances.
 * Arguments given with square brackets denote **optional** arguments.
 * Argument values with spaces should be enclosed with double quotes.
 * Argument values with a double quote can be escaped by prepending an additional double quote.
+* Argument values cannot start with a hyphen.
 
 ### Example: `Add-Expense`
 
