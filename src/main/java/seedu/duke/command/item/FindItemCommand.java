@@ -9,7 +9,7 @@ import seedu.duke.transaction.TransactionList;
 import seedu.duke.ui.Ui;
 import seedu.duke.item.ItemList;
 
-import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INSUFFICIENT_ARGUMENTS;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_NUMBER_OF_ARGS;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PARTS;
 
 // @@author jorellesee
@@ -24,7 +24,7 @@ public class FindItemCommand extends Command {
         this.itemList = itemList;
         this.transactionList = transactionList;
         if (parts.length != 1) {
-            throw new InsufficientArgumentsException(MESSAGE_INSUFFICIENT_ARGUMENTS);
+            throw new InsufficientArgumentsException(MESSAGE_INVALID_NUMBER_OF_ARGS);
         }
     }
 

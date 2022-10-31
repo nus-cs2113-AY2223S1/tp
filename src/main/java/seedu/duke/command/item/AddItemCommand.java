@@ -16,7 +16,7 @@ import seedu.duke.parser.CommandParser;
 import seedu.duke.transaction.TransactionList;
 import seedu.duke.user.UserList;
 
-import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INSUFFICIENT_ARGUMENTS;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_NUMBER_OF_ARGS;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PARTS;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_NAME_LENGTH_INVALID;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_SAME_ITEM_NAME_AND_PRICE;
@@ -62,7 +62,7 @@ public class AddItemCommand extends Command {
         this.userList = userList;
         this.transactionList = transactionList;
         if (parts.length != NUMBER_OF_ARGS) {
-            throw new InsufficientArgumentsException(MESSAGE_INSUFFICIENT_ARGUMENTS);
+            throw new InsufficientArgumentsException(MESSAGE_INVALID_NUMBER_OF_ARGS);
         }
     }
 

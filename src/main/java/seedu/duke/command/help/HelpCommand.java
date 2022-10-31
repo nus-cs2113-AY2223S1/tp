@@ -12,7 +12,7 @@ import java.util.Map;
  * A representation of a command to print all commands.
  */
 public class HelpCommand extends Command {
-    private static final int NUMBER_OF_COMMANDS = 22;
+    private static final int NUMBER_OF_COMMANDS = 26;
     private static final int NUMBER_OF_HEADERS = 7;
     private static final String COMMAND_TO_DETAIL_SEPARATOR_TOKEN = ": ";
 
@@ -23,7 +23,7 @@ public class HelpCommand extends Command {
     private static final String VIEW_COMMAND_HEADER = "VIEW-RELATED-COMMANDS";
     private static final String UPDATE_COMMAND_HEADER = "UPDATE-RELATED-COMMANDS";
     private static final String FIND_COMMAND_HEADER = "FIND-RELATED-COMMANDS";
-    private static final String ADDITONAL_DETAILS_HEADER = "ADDITIONAL-DETAILS";
+    private static final String ADDITIONAL_DETAILS_HEADER = "ADDITIONAL-DETAILS";
 
     // Command constants
     private static final String COMMAND_ADD_USER =
@@ -71,6 +71,18 @@ public class HelpCommand extends Command {
 
     private static final String COMMAND_VIEW_ITEM = "view-item /i <itemId>";
     private static final String COMMAND_VIEW_ITEM_DESCRIPTION = "View a item";
+
+    private static final String COMMAND_VIEW_USER_LOSS = "view-user-loss /u <userName>";
+    private static final String COMMAND_VIEW_USER_LOSS_DESCRIPTION = "View the amount of money loss of a user";
+
+    private static final String COMMAND_VIEW_USER_GAIN = "view-user-gain /u <userName>";
+    private static final String COMMAND_VIEW_USER_GAIN_DESCRIPTION = "View the amount of money gain of a user";
+
+    private static final String COMMAND_VIEW_BORROW_TX_BY_USER = "view-borrow-tx-by-user /u <userName>";
+    private static final String COMMAND_VIEW_BORROW_TX_BY_USER_DESCRIPTION = "View list of user's borrow transaction";
+
+    private static final String COMMAND_VIEW_LEND_TX_BY_USER = "view-lend-tx-by-user /u <userName>";
+    private static final String COMMAND_VIEW_LEND_TX_BY_USER_DESCRIPTION = "View list of user's lend transaction";
 
     private static final String COMMAND_VIEW_TX = "view-tx /t <transactionId>";
     private static final String COMMAND_VIEW_TX_DESCRIPTION = "View a transaction";
@@ -131,6 +143,10 @@ public class HelpCommand extends Command {
         this.commandToDetailMap.put(COMMAND_VIEW_USER_ITEMS_DESCRIPTION, COMMAND_VIEW_USER_ITEMS);
         this.commandToDetailMap.put(COMMAND_VIEW_ITEM_DESCRIPTION, COMMAND_VIEW_ITEM);
         this.commandToDetailMap.put(COMMAND_VIEW_TX_DESCRIPTION, COMMAND_VIEW_TX);
+        this.commandToDetailMap.put(COMMAND_VIEW_BORROW_TX_BY_USER_DESCRIPTION, COMMAND_VIEW_BORROW_TX_BY_USER);
+        this.commandToDetailMap.put(COMMAND_VIEW_LEND_TX_BY_USER_DESCRIPTION, COMMAND_VIEW_LEND_TX_BY_USER);
+        this.commandToDetailMap.put(COMMAND_VIEW_USER_LOSS_DESCRIPTION, COMMAND_VIEW_USER_LOSS);
+        this.commandToDetailMap.put(COMMAND_VIEW_USER_GAIN_DESCRIPTION, COMMAND_VIEW_USER_GAIN);
         this.commandToDetailMap.put(System.lineSeparator() + UPDATE_COMMAND_HEADER, UNDERLINE);
         this.commandToDetailMap.put(COMMAND_UPDATE_ITEM_DESCRIPTION, COMMAND_UPDATE_ITEM);
         this.commandToDetailMap.put(COMMAND_UPDATE_TX_DESCRIPTION, COMMAND_UPDATE_TX);
@@ -141,7 +157,7 @@ public class HelpCommand extends Command {
         this.commandToDetailMap.put(COMMAND_FIND_USER_DESCRIPTION, COMMAND_FIND_USER);
         this.commandToDetailMap.put(COMMAND_FIND_ITEM_DESCRIPTION, COMMAND_FIND_ITEM);
         this.commandToDetailMap.put(COMMAND_SORT_ITEM_DESCRIPTION, COMMAND_SORT_ITEM);
-        this.commandToDetailMap.put(System.lineSeparator() + ADDITONAL_DETAILS_HEADER, UNDERLINE);
+        this.commandToDetailMap.put(System.lineSeparator() + ADDITIONAL_DETAILS_HEADER, UNDERLINE);
         assert this.commandToDetailMap.size() == NUMBER_OF_COMMANDS
                 + NUMBER_OF_HEADERS : "Missing command";
     }
@@ -152,20 +168,18 @@ public class HelpCommand extends Command {
      * @return false
      */
     public boolean executeCommand() {
-        Ui.showLine();
         Ui.printResponse(this.toString());
-        System.out.println(ADD_SPACE_REMINDER + CASE_SENSITIVE_REMINDER + INVALID_SYMBOLS_REMINDER);
-        Ui.showLine();
         return false;
     }
 
     @Override
     public String toString() {
-        String output = "";
+        StringBuilder output = new StringBuilder();
         for (Map.Entry<String, String> entry : commandToDetailMap.entrySet()) {
-            output += entry.getKey() + COMMAND_TO_DETAIL_SEPARATOR_TOKEN + entry.getValue()
-                    + System.lineSeparator();
+            output.append(entry.getKey()).append(COMMAND_TO_DETAIL_SEPARATOR_TOKEN)
+                    .append(entry.getValue()).append(System.lineSeparator());
         }
-        return output;
+        output.append(ADD_SPACE_REMINDER + CASE_SENSITIVE_REMINDER + INVALID_SYMBOLS_REMINDER);
+        return output.toString();
     }
 }
