@@ -189,7 +189,7 @@ public class Messages {
             + "] [-"
             + ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT
             + " "
-            + ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_DESC
+            + ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_LONG.toUpperCase()
             + "]";
     public static final String CONSOLE_COMMAND_ADD_EXPENSE_SYNTAX = ""
             + "SYNTAX: "
@@ -312,7 +312,7 @@ public class Messages {
             + "] [-"
             + ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT
             + " "
-            + ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_DESC
+            + ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_LONG.toUpperCase()
             + "]";
     public static final String CONSOLE_COMMAND_EDIT_EXPENSE_SYNTAX = ""
             + "SYNTAX: "
