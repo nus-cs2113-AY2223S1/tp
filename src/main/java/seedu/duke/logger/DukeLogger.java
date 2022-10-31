@@ -14,10 +14,14 @@ public class DukeLogger {
 
     private void createLogFile() throws IOException {
         File file = new File(LOGS_FILE_PATH);
-        file.getParentFile().mkdir();
-        file.createNewFile();
+        if (file.getParentFile().mkdir()) {
+            file.createNewFile();
+        }
     }
 
+    /**
+     * Constructor of DukeLogger.
+     */
     public DukeLogger() {
         try {
             createLogFile();
@@ -31,10 +35,20 @@ public class DukeLogger {
         }
     }
 
+    /**
+     * Logs information.
+     *
+     * @param message Message of Logger
+     */
     public void info(String message) {
         logger.info(message);
     }
 
+    /**
+     * Logs warning.
+     *
+     * @param message Message of Logger
+     */
     public void warning(String message) {
         logger.warning(message);
     }
