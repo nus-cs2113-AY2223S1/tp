@@ -40,7 +40,6 @@ public class Parser {
             return parseDeleteCommand(parsed);
         case EditCommand.COMMAND_TYPE:
             return parseEditCommand(parsed);
-            //return parseEditCommandGUI(parsed);
         case ViewCommand.COMMAND_TYPE:
             return parseViewCommand(parsed);
         case FindCommand.COMMAND_TYPE:
@@ -70,8 +69,6 @@ public class Parser {
                 } else {
                     Ui.showMessage(recipeTitleToDelete + " is not present in the list");
                 }
-            } else {
-                Ui.showMessage(DeleteCommand.CORRECT_FORMAT);
             }
             return new InvalidCommand(DeleteCommand.CORRECT_FORMAT);
         } catch (FileNotFoundException e) {

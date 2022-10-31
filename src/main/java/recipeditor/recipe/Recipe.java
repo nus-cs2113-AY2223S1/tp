@@ -137,7 +137,7 @@ public class Recipe {
     public String getRecipeSaveableFormatted() {
         String recipeAttributesStringFormatted = "# TITLE \n"
                 + title + "\n\n" + "# DESCRIPTION \n"
-                + description.trim() + "\n\n" + "# INGREDIENTS <ingredient name> / <amount> / <unit> \n"
+                + description.trim() + "\n\n" + "# INGREDIENTS <ingredient name> / <amount> / <unit> \n"  //Remove trim
                 + getIngredientAttributesFormatted() + "\n" + "# STEPS \n"
                 + getStepAttributesFormatted() + "\n\n";
         logger.log(Level.INFO, "Get attributes of " + title);
