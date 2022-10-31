@@ -462,9 +462,9 @@ The recurring payment was added as an expense successfully.
 
 **Q**: How do I transfer my data to another computer?
 
-**A**: There will be a 'Memory' folder created in the same directory as your .jar file. 
-To transfer your data, simply copy the whole folder over to the same directory as the .jar 
-file in your other devices. Data will be saved automatically.
+**A**:
+As you enter data into MoneyGoWhere, it creates a **Memory** folder in the same directory as the *.jar* file.
+You may use any of your preferred tool to transfer the **Memory/MoneyGoWhereData.xml** data file to another computer and run the [`Merge-File`](#merging-a-data-file-merge-file) command to merge the copied file.
 
 ## Command Summary
 
