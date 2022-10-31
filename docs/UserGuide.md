@@ -12,7 +12,7 @@
    * [Managing Your Targets](#managing-your-targets)
    * [Handling Your Data](#handling-your-data)
    * [Listing all available commands: `help`](#listing-all-available-commands-help)
-   * [Exiting the application: `exit`](#exiting-the-application-bye)
+   * [Exiting the application: `bye`](#exiting-the-application-bye)
 * [Sample Outputs](#sample-outputs)
 * [FAQ](#faq)
 * [Command Summary](#command-summary)
