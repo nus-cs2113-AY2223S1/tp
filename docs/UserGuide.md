@@ -4,6 +4,7 @@
 ## Contents
 * [Introduction](#introduction)
 * [Quick Start](#quick-start)
+* [Understanding the Command Syntax](#understanding-the-command-syntax)
 * [Features](#features)
    * [Managing Your Expenses](#managing-your-expenses)
    * [Managing Your Recurring Payments](#managing-your-recurring-payments)
@@ -11,7 +12,7 @@
    * [Managing Your Targets](#managing-your-targets)
    * [Handling Your Data](#handling-your-data)
    * [Listing all available commands: `help`](#listing-all-available-commands-help)
-   * [Exiting the application: `exit`](#exiting-the-application-exit)
+   * [Exiting the application: `bye`](#exiting-the-application-bye)
 * [Sample Outputs](#sample-outputs)
 * [FAQ](#faq)
 * [Command Summary](#command-summary)
@@ -20,13 +21,20 @@
 
 MoneyGoWhere is a financial planner to help you manage your finances.
 
-## Understanding the command syntax
+## Quick Start
 
-Capitalised words represents the values included in the respective commands. 
+1. Ensure that ```Java 11``` is installed on your system.
+    1. Execute the command ```java --version``` in your terminal window.
+    2. Verify that the version of Java installed is ```Java 11```.
+2. Ensure that you have write permissions for the directory in which you are executing the program.
 
-Arguments given without brackets are **mandatory** arguments. 
+## Understanding the Command Syntax
 
-Arguments given with brackets are **optional** arguments.
+* Arguments given without square brackets denote **mandatory** arguments.
+* Arguments given with square brackets denote **optional** arguments.
+* Argument values with spaces should be enclosed with double quotes.
+* Argument values with a double quote can be escaped by prepending an additional double quote.
+* Argument values cannot start with a hyphen.
 
 ### Example: `Add-Expense`
 
@@ -39,13 +47,6 @@ Examples of valid command syntax:
 Examples of invalid command syntax:
 * `Add-Expense -n Subscription`
 * `Add-Expense -a 13.37`
-
-## Quick Start
-
-1. Ensure that ```Java 11``` is installed on your system.
-    1. Execute the command ```java --version``` in your terminal window.
-    2. Verify that the version of Java installed is ```Java 11```.
-2. Ensure that you have write permissions for the directory in which you are executing the program.
 
 ## Features
 
@@ -98,7 +99,7 @@ Adds a new expense to the list of expenses.
 Syntax: `Add-Expense -n NAME -a AMOUNT [-d DATE_TIME] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p MODE OF PAYMENT]`
 
 > ⚠️️️️ Syntax Notes
-> * `NAME`, `DESCRIPTION`, `CATEGORY`, `REMARKS` and `MODE OF PAYMENT` are text strings. You may use spaces within the text if you wrap the text with double quotes.</li>
+> * `NAME`, `DESCRIPTION`, `CATEGORY`, `REMARKS` and `MODE OF PAYMENT` are text strings. You may use spaces within the text if you wrap the text with double quotes.
 > * `CURRENCY` is a text string. It must be a valid currency code.
 > * `AMOUNT` is a decimal value. The value should be greater than 0.
 > * `DATE_TIME` is a text string in the format `"dd/MM/yyyy HHmm"`.
@@ -116,7 +117,7 @@ Displays past expenses you have added.
 Syntax: `View-Expense [-e EXPENSE_NUMBER]`
 
 > ⚠️️️️ Syntax Notes
-> * `EXPENSE_NUMBER` is an integer value.
+> * `EXPENSE_NUMBER` is an integer value. This value should be equal to or greater than 0.
 > * If this argument is provided, MoneyGoWhere will only display the specified expense.
 
 Example of usage:
@@ -131,7 +132,7 @@ Deletes an expense from the list of expenses.
 Syntax: `Delete-Expense -e EXPENSE_NUMBER`
 
 > ⚠️️️️ Syntax Notes
-> * `EXPENSE_NUMBER` is an integer value.
+> * `EXPENSE_NUMBER` is an integer value. This value should be equal to or greater than 0.
 
 Example of usage:
 * `Delete-Expense -e 1`
@@ -144,7 +145,7 @@ Edits an existing expense in the list of expenses.
 Syntax: `Edit-Expense -e EXPENSE_NUMBER [-n NAME] [-a AMOUNT] [-d DATE_TIME] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p MODE OF PAYMENT]`
 
 > ⚠️️️️ Syntax Notes
-> * `EXPENSE_NUMBER` is an integer value.
+> * `EXPENSE_NUMBER` is an integer value. This value should be equal to or greater than 0.
 > * `NAME`, `DESCRIPTION`, `CATEGORY`, `REMARKS` and `MODE OF PAYMENT` are text strings. You may use spaces within the text if you wrap the text with double quotes.
 > * `CURRENCY` is a text string. It must be a valid currency code.
 > * `AMOUNT` is a decimal value. The value should be greater than 0.
@@ -184,7 +185,7 @@ Converts the currency of an expense from the list of expenses.
 Syntax: `Convert-Currency -e EXPENSE_NUMBER -x CURRENCY [-r RATE]`
 
 > ⚠️️️️ Syntax Notes
-> * `EXPENSE_NUMBER` is an integer value.
+> * `EXPENSE_NUMBER` is an integer value. This value should be equal to or greater than 0.
 > * `CURRENCY` is a text string. It must be a valid currency code.
 > * `RATE` is a decimal value. This rate should be the rate to convert the expense amount from the old currency to the new currency.
 
@@ -395,7 +396,7 @@ Example of usage:
 ### Merging a data file: `Merge-File`
 Merges save file from an external source given path to the save file (.xml)
 
-Syntax: `Merge-File [-p PATH_STRING]`
+Syntax: `Merge-File -p PATH_STRING`
 
 Example of usage:
 * `Merge-File -p "C:\Users\the_d\Downloads\expenses.xml"`
@@ -461,9 +462,9 @@ The recurring payment was added as an expense successfully.
 
 **Q**: How do I transfer my data to another computer?
 
-**A**: There will be a 'Memory' folder created in the same directory as your .jar file. 
-To transfer your data, simply copy the whole folder over to the same directory as the .jar 
-file in your other devices. Data will be saved automatically.
+**A**:
+As you enter data into MoneyGoWhere, it creates a **Memory** folder in the same directory as the *.jar* file.
+You may use any of your preferred tool to transfer the **Memory/MoneyGoWhereData.xml** data file to another computer and run the [`Merge-File`](#merging-a-data-file-merge-file) command to merge the copied file.
 
 ## Command Summary
 
@@ -490,5 +491,5 @@ A list of all valid commands.
 * Edit target: `Edit-Target -e 1 -n "October Target" -a 100.00`
 * Merge file: `Merge-File -p "C:\Users\the_d\Downloads\expenses.xml"`
 * Help: `help`
-* Exit: `exit`
+* Exit: `bye`
 
