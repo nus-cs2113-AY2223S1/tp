@@ -54,7 +54,7 @@ class ConsoleParserTest {
                 == null;
         boolean isAmountEqual = consoleCommandAddExpense
                 .getAmount()
-                .equals(amount);
+                .equals(amount.stripTrailingZeros());
         boolean isCategoryEqual = consoleCommandAddExpense
                 .getCategory()
                 == null;
@@ -107,7 +107,7 @@ class ConsoleParserTest {
                 == null;
         boolean isAmountEqual = consoleCommandAddExpense
                 .getAmount()
-                .equals(amount);
+                .equals(amount.stripTrailingZeros());
         boolean isCategoryEqual = consoleCommandAddExpense
                 .getCategory()
                 == null;
@@ -169,7 +169,7 @@ class ConsoleParserTest {
                 .equals(description);
         boolean isAmountEqual = consoleCommandAddExpense
                 .getAmount()
-                .equals(amount);
+                .equals(amount.stripTrailingZeros());
         boolean isCategoryEqual = consoleCommandAddExpense
                 .getCategory()
                 == null;
@@ -232,7 +232,7 @@ class ConsoleParserTest {
                 .equals(description);
         boolean isAmountEqual = consoleCommandAddExpense
                 .getAmount()
-                .equals(amount);
+                .equals(amount.stripTrailingZeros());
         boolean isCategoryEqual = consoleCommandAddExpense
                 .getCategory()
                 .equals(category);
@@ -502,7 +502,7 @@ class ConsoleParserTest {
                 == null;
         boolean isAmountEqual = consoleCommandEditExpense
                 .getAmount()
-                .equals(amount);
+                .equals(amount.stripTrailingZeros());
         boolean isCategoryEqual = consoleCommandEditExpense
                 .getCategory()
                 == null;
@@ -562,7 +562,7 @@ class ConsoleParserTest {
                 == null;
         boolean isAmountEqual = consoleCommandEditExpense
                 .getAmount()
-                .equals(amount);
+                .equals(amount.stripTrailingZeros());
         boolean isCategoryEqual = consoleCommandEditExpense
                 .getCategory()
                 == null;
@@ -627,7 +627,7 @@ class ConsoleParserTest {
                 .equals(description);
         boolean isAmountEqual = consoleCommandEditExpense
                 .getAmount()
-                .equals(amount);
+                .equals(amount.stripTrailingZeros());
         boolean isCategoryEqual = consoleCommandEditExpense
                 .getCategory()
                 == null;
@@ -698,7 +698,7 @@ class ConsoleParserTest {
                 .equals(description);
         boolean isAmountEqual = consoleCommandEditExpense
                 .getAmount()
-                .equals(amount);
+                .equals(amount.stripTrailingZeros());
         boolean isCategoryEqual = consoleCommandEditExpense
                 .getCategory()
                 .equals(category);
@@ -822,7 +822,7 @@ class ConsoleParserTest {
                 == interval;
         boolean isAmountEqual = consoleCommandAddRecurringPayment
                 .getAmount()
-                .equals(amount);
+                .equals(amount.stripTrailingZeros());
 
         assertTrue(
                 isNameEqual
@@ -870,7 +870,7 @@ class ConsoleParserTest {
                 == interval;
         boolean isAmountEqual = consoleCommandAddRecurringPayment
                 .getAmount()
-                .equals(amount);
+                .equals(amount.stripTrailingZeros());
         boolean isDescriptionEqual = consoleCommandAddRecurringPayment
                 .getDescription()
                 .equals(description);

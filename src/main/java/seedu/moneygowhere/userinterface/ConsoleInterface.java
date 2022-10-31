@@ -1,6 +1,5 @@
 package seedu.moneygowhere.userinterface;
 
-import seedu.moneygowhere.apis.CurrencyApi;
 import seedu.moneygowhere.apis.CurrencyApiManager;
 import seedu.moneygowhere.commands.ConsoleCommand;
 import seedu.moneygowhere.commands.ConsoleCommandAddExpense;
@@ -65,10 +64,8 @@ import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandViewRecurringPay
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandViewTargetInvalidException;
 import seedu.moneygowhere.logger.LocalLogger;
 import seedu.moneygowhere.parser.ConsoleParser;
-import seedu.moneygowhere.parser.ConsoleParserConfigurations;
 import seedu.moneygowhere.storage.LocalStorage;
 
-import java.io.Console;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

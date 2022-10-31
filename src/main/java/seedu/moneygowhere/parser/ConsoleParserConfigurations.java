@@ -14,6 +14,7 @@ public class ConsoleParserConfigurations {
     public static final String COMMAND_BYE = "bye";
     //endregion
 
+    //@@author jevyia
     //region Defines parameters for console command help
     public static final String COMMAND_HELP = "help";
     //endregion
