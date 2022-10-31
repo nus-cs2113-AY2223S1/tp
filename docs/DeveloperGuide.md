@@ -178,8 +178,6 @@ under each command section below.
 
 - The monthly budget can be updated by `budget` command.
 
-<!-- TODO: Describe how category and categoryList work here -->
-
 _Written by: Chia Thin Hong_
 
 ### Storage Component
