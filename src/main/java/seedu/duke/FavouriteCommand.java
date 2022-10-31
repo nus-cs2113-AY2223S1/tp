@@ -23,10 +23,10 @@ public class FavouriteCommand extends Commands {
 
             if (media.isFavourite() == false) {
                 media.setFavourite(true);
-                output = "The following task has been starred:\n" + media.toString();
+                output = "The following review has been starred:\n" + media.toString();
             } else {
                 media.setFavourite(false);
-                output = "The following task has been unstarred:\n" + media.toString();
+                output = "The following review has been unstarred:\n" + media.toString();
             }
         } else {
             output = "Your favourites are:\n";
