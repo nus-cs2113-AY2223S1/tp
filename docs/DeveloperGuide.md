@@ -225,13 +225,13 @@ The `Edit-Expense` command changes the attributes of an existing expense in the 
 
 The `Sort-Expense` command sorts the existing expenses in the program.
 
-![Implementation-Sort-Expense]()
+![Implementation-Sort-Expense](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/jeyvia/tp/javierOng-dgUpdates/docs/diagrams/ImplementationSortExpense.puml)
 
 ### Converting currencies: `Convert-Currency`
 
 The `Convert-Currency` command converts the currency of an existing expense in the program.
 
-![Implementation-Convert-Currency]()
+![Implementation-Convert-Currency](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/jeyvia/tp/javierOng-dgUpdates/docs/diagrams/ImplementationConvertCurrency.puml)
 
 ### Printing a recurring payment
 
