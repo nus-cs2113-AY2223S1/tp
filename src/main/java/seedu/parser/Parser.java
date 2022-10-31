@@ -4,10 +4,22 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.api.Api;
-import seedu.commands.*;
+import seedu.commands.AuthCommand;
+import seedu.commands.Command;
+import seedu.commands.ExitCommand;
+import seedu.commands.FavouriteCommand;
+import seedu.commands.FilterAddressCommand;
+import seedu.commands.FilterCarparkIdCommand;
+import seedu.commands.FilterCommand;
+import seedu.commands.FindCommand;
+import seedu.commands.HelpCommand;
+import seedu.commands.InvalidCommand;
+import seedu.commands.ListCommand;
+import seedu.commands.UnfavouriteCommand;
+import seedu.commands.UpdateCommand;
 import seedu.common.CommonData;
 import seedu.data.CarparkList;
-import seedu.exception.DashedExceptionNotInFrontException;
+import seedu.exception.DashedArgumentsNotInFrontException;
 import seedu.exception.UnneededArgumentsException;
 import seedu.files.Favourite;
 import seedu.parser.search.Arguments;
@@ -51,7 +63,7 @@ public class Parser {
         try {
             argsList = new Arguments(matcher.group("arguments").trim());
             arguments = argsList.getArguments().toString();
-        } catch (DashedExceptionNotInFrontException e) {
+        } catch (DashedArgumentsNotInFrontException e) {
             return new InvalidCommand(e.getMessage());
         }
 

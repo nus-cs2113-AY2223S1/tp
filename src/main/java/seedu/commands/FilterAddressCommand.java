@@ -1,6 +1,5 @@
 package seedu.commands;
 
-import seedu.data.CarparkFilteredList;
 import seedu.data.CarparkList;
 import seedu.exception.NoCarparkFoundException;
 import seedu.parser.search.Sentence;
@@ -27,18 +26,6 @@ public class FilterAddressCommand extends Command {
         this.searchQuery = searchQuery;
         this.carparkList = carparkList;
     }
-
-//    /**
-//     * Runs a search in the {@link CarparkList} class.
-//     *
-//     * @param carparkList {@link CarparkList} to run the search on.
-//     * @param searchQuery The search query to search with as a {@link Sentence} object.
-//     * @return {@link CarparkList} that is filtered down to {@link seedu.data.Carpark Carpark} items containing all
-//     *      words in the searchQuery.
-//     */
-//    public static CarparkFilteredList runFilter(CarparkList carparkList, Sentence searchQuery) {
-//        return carparkList.filterByAddress(searchQuery);
-//    }
 
     @Override
     public CommandResult execute() {

@@ -159,7 +159,7 @@ public class CarparkList {
         return new CarparkFilteredList(new ArrayList<>(carparkListBuffer));
     }
 
-    public HashSet<Carpark> filterBySubstring(HashSet<Carpark> carparkList, String wordString) {
+    private HashSet<Carpark> filterBySubstring(HashSet<Carpark> carparkList, String wordString) {
         HashSet<Carpark> bufferList = new HashSet<>();
         for (Carpark carpark : carparkList) {
             for (Word word : carpark.getDevelopmentSentence().getWords()) {

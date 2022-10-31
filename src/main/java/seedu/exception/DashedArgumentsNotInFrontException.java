@@ -3,11 +3,11 @@ package seedu.exception;
 /**
  * For if the command format is invalid.
  */
-public class DashedExceptionNotInFrontException extends ParkingException {
+public class DashedArgumentsNotInFrontException extends ParkingException {
     /**
      * Constructor for the exception.
      */
-    public DashedExceptionNotInFrontException() {
+    public DashedArgumentsNotInFrontException() {
         super();
     }
 
