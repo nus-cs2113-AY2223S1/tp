@@ -621,6 +621,8 @@ public class Messages {
 
     //@@author xzynos
     //region Defines messages for console command View-RecurringPayment
+    public static final String COMMAND_VIEW_RECURRING_PAYMENT_EMPTY_LIST = ""
+            + "Your list of recurring payments is empty.";
     public static final String CONSOLE_COMMAND_VIEW_RECURRING_PAYMENT_FORMAT = ""
             + ConsoleParserConfigurations.COMMAND_VIEW_RECURRING_PAYMENT
             + " [-"
